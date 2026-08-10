@@ -1,0 +1,622 @@
+.ppar-affiliate-slot {
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid currentColor;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ppar-affiliate-disclosure {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    margin-bottom: 0.75rem;
+    opacity: 0.82;
+}
+
+.ppar-affiliate-label {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.ppar-banner-link {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    text-decoration: none;
+}
+
+.ppar-banner-image-wrap {
+    flex: 0 0 auto;
+    max-width: 220px;
+}
+
+.ppar-banner-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.ppar-banner-text {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.ppar-banner-title {
+    display: block;
+    font-size: 1.05rem;
+}
+
+.ppar-banner-description {
+    display: block;
+    line-height: 1.45;
+}
+
+.ppar-banner-button {
+    display: inline-block;
+    margin-top: 0.35rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .ppar-banner-link {
+        display: block;
+    }
+
+    .ppar-banner-image-wrap {
+        display: block;
+        max-width: 100%;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Portal-Template-Router: Auswahl + vollständige Übersicht */
+.ppar-template-router {
+    margin: 2.5rem 0;
+}
+
+.ppar-template-selected,
+.ppar-template-hint,
+.ppar-template-full {
+    margin: 2rem 0;
+}
+
+.ppar-template-heading,
+.ppar-template-hint-heading {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.ppar-template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.ppar-template-card {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1rem;
+    border: 1px solid currentColor;
+    border-radius: 14px;
+    text-decoration: none;
+    min-height: 100%;
+}
+
+.ppar-template-card-title {
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.ppar-template-card-description {
+    font-size: 0.92rem;
+    line-height: 1.45;
+    opacity: 0.82;
+}
+
+.ppar-template-hint {
+    padding: 1.15rem;
+    border: 1px solid currentColor;
+    border-radius: 16px;
+}
+
+.ppar-template-hint p {
+    margin-top: 0;
+}
+
+.ppar-template-button {
+    display: inline-block;
+    margin-top: 0.3rem;
+    padding: 0.65rem 0.95rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.ppar-template-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.7rem 1rem;
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.ppar-template-list-entry {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid currentColor;
+}
+
+.ppar-template-list-entry span {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+
+/* v0.3.0: bildunabhängiges Grunddesign */
+.ppar-template-router,
+.ppar-affiliate-slot {
+    --ppar-radius: 14px;
+    --ppar-gap: 1rem;
+}
+
+.ppar-template-card,
+.ppar-template-hint,
+.ppar-affiliate-slot {
+    background: color-mix(in srgb, currentColor 3%, transparent);
+}
+
+.ppar-template-card:focus,
+.ppar-template-card:hover,
+.ppar-template-button:focus,
+.ppar-template-button:hover,
+.ppar-banner-link:focus,
+.ppar-banner-link:hover {
+    text-decoration: underline;
+}
+
+.ppar-template-list-entry a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ppar-template-list-entry a:hover,
+.ppar-template-list-entry a:focus {
+    text-decoration: underline;
+}
+
+.ppar-affiliate-slot:empty,
+.ppar-template-router:empty {
+    display: none;
+}
+
+/* V2.2.0: zentral verwaltete Werbeplatz-Platzhalter aus der Mediathek. */
+.ppar-placeholder-slot {
+    background: #fff;
+    border-color: #dcdcde;
+}
+
+.ppar-placeholder-slot .ppar-banner-link,
+.ppar-placeholder-slot .ppar-banner-link-static {
+    display: block;
+}
+
+.ppar-placeholder-slot .ppar-banner-image-wrap {
+    display: block;
+    width: 100%;
+    max-width: none;
+}
+
+.ppar-placeholder-slot .ppar-banner-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.ppar-placeholder-slot .ppar-banner-text {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.85rem;
+}
+
+.ppar-placeholder-slot .ppar-banner-link-static {
+    cursor: default;
+}
+
+
+/* V2.2.17: Startseite als dezente Partner-Vorschau statt riesigem Einzelbanner. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics {
+    margin: 2rem 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
+}
+.ppar-start-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+.ppar-start-partner-grid.ppar-start-partner-count-1 {
+    grid-template-columns: minmax(0, calc(50% - 8px));
+    justify-content: center;
+}
+.ppar-start-partner-card {
+    position: relative;
+    display: block;
+    min-height: 176px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #d7d7d7;
+    border-top: 5px solid #a7a7a7;
+    border-radius: 22px;
+    background: #fff;
+}
+.ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-start-partner-card .ppar-banner-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: inherit;
+}
+.ppar-start-partner-card .ppar-banner-image { object-fit: cover; }
+@media (max-width: 767px) {
+    .ppar-start-partner-grid,
+    .ppar-start-partner-grid.ppar-start-partner-count-1 { grid-template-columns: 1fr; }
+    .ppar-start-partner-card { min-height: 150px; }
+}
+
+/* V2.2.19: zwei gleich breite Startseiten-Partnerkacheln; Bild randlos bis an den Kartenrahmen. */
+.ppar-start-partner-grid,
+.ppar-start-partner-grid.ppar-start-partner-count-1,
+.ppar-start-partner-grid.ppar-start-partner-count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+}
+.ppar-start-partner-card {
+    display: block;
+    width: 100%;
+    min-height: 176px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #d7d7d7;
+    border-top: 5px solid #a7a7a7;
+    border-radius: 22px;
+    background: #fff;
+    line-height: 0;
+}
+.ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-start-partner-card .ppar-banner-image {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    max-width: none !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+.ppar-start-partner-card .ppar-banner-image {
+    object-fit: cover !important;
+    object-position: center !important;
+}
+@media (max-width: 767px) {
+    .ppar-start-partner-grid,
+    .ppar-start-partner-grid.ppar-start-partner-count-1,
+    .ppar-start-partner-grid.ppar-start-partner-count-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* V2.2.20: Partner-Vorschaubilder fuellen die Karten bis zum Rahmen. */
+.ppar-start-partner-card {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+.ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-start-partner-card .ppar-banner-image {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    max-width: none !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+.ppar-start-partner-card .ppar-banner-image {
+    object-fit: cover !important;
+    object-position: center !important;
+    opacity: 0 !important;
+}
+
+
+/* V2.2.23: Startseiten-Vorschaukacheln behalten den verbindlichen Kartenrahmen.
+   Das Bild liegt ohne Innenabstand direkt an der inneren Rahmenkante. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card {
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    border: 1px solid #d7d7d7 !important;
+    border-top: 5px solid #a7a7a7 !important;
+    border-radius: 22px !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card .ppar-banner-image-wrap,
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card .ppar-banner-image {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* V2.2.24: Startseiten-Partnerkarten nutzen exakt den sichtbaren
+   Rahmenvertrag der Portal-Kacheln. Der Rahmen sitzt an der Karte,
+   das Bild bleibt ohne Innenabstand, der obere Akzent ist ein eigenes
+   Overlay und kann nicht vom Bild verdeckt werden. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-card {
+    box-sizing: border-box !important;
+    position: relative !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid #e7ebe7 !important;
+    border-top: 0 !important;
+    border-radius: 22px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-frame-accent {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    height: 5px !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 22px 22px 55% 55% !important;
+    background: #a7a7a7 !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+}
+
+
+/* V2.2.25: Startseite mit drei Werbevorschaukacheln.
+   Desktop: 3 Spalten. Tablet: 2 oben, 1 darunter zentriert.
+   Mobil: untereinander. Die Bildzentrierung bleibt auf allen Breiten erhalten. */
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    width: 100% !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card,
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-banner-image-wrap,
+.ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-banner-image {
+    background-position: center center !important;
+    object-position: center center !important;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card:nth-child(3) {
+        grid-column: 1 / -1 !important;
+        max-width: calc(50% - 8px) !important;
+        justify-self: center !important;
+    }
+}
+@media (max-width: 767px) {
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 {
+        grid-template-columns: 1fr !important;
+    }
+    .ppar-placeholder-slot.ppar-slot-start_after_topics .ppar-start-partner-grid.ppar-start-partner-count-3 .ppar-start-partner-card:nth-child(3) {
+        grid-column: auto !important;
+        max-width: none !important;
+        justify-self: stretch !important;
+    }
+}
+
+
+/* V2.4.0: optionale Produktmetadaten. */
+.ppar-banner-meta { display:flex; flex-wrap:wrap; align-items:baseline; gap:.45rem .75rem; }
+.ppar-banner-price { font-size:1.05rem; }
+.ppar-banner-availability { font-size:.86rem; opacity:.78; }
+
+/* V2.5.3: zurückhaltende Einzelbeitrags-Affiliateausgabe ohne Sidebar. */
+.ppar-article-inline-banner {
+    clear: both;
+    margin: 2.25rem 0;
+}
+
+.ppar-article-product-block {
+    clear: both;
+    margin: 2.75rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e1e5df;
+}
+
+.ppar-article-section-label {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: #9A6A00;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.ppar-article-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.ppar-article-product-count-1 {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 420px;
+}
+
+.ppar-article-product-count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ppar-article-product-card {
+    min-width: 0;
+    min-height: 100%;
+    padding: 1rem;
+    border: 1px solid #e1e5df;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.ppar-article-product-card .ppar-banner-link {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-content: start;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.ppar-article-product-card .ppar-banner-image-wrap {
+    width: 100%;
+    max-width: none;
+}
+
+.ppar-article-product-card .ppar-banner-image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+}
+
+.ppar-article-product-card .ppar-banner-text {
+    align-content: start;
+}
+
+.ppar-article-product-card .ppar-banner-description,
+.ppar-article-product-card .ppar-banner-availability {
+    color: #687066;
+}
+
+.ppar-article-product-card .ppar-banner-button {
+    background: #35422A;
+    border-color: #35422A;
+    color: #fff;
+    text-align: center;
+}
+
+.ppar-article-product-card .ppar-banner-link:hover .ppar-banner-button,
+.ppar-article-product-card .ppar-banner-link:focus .ppar-banner-button {
+    background: #C89214;
+    border-color: #C89214;
+    color: #fff;
+}
+
+@media (max-width: 760px) {
+    .ppar-article-product-grid,
+    .ppar-article-product-count-2,
+    .ppar-article-product-count-3 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ppar-article-product-count-1 {
+        max-width: none;
+    }
+}
+
+/* Automatische Ermittlung des realen Banner-Seitenverhältnisses im Browser. */
+.ppar-banner-format-square .ppar-banner-image-wrap,
+.ppar-banner-format-portrait .ppar-banner-image-wrap {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ppar-banner-size-badge {
+    display: block;
+    margin-top: 0.65rem;
+    color: #687066;
+    font-size: 0.75rem;
+    line-height: 1.3;
+}
+
+/* V2.5.7: Administrator-Testflächen ohne Bild, Hinweis oder Zusatztext. */
+.ppar-article-banner-test-wrap {
+    clear: both;
+    margin: 2.25rem 0;
+}
+
+.ppar-article-banner-test-surface {
+    position: relative;
+    width: 100%;
+    max-width: min(100%, var(--ppar-test-banner-width, 100%));
+    aspect-ratio: var(--ppar-test-banner-ratio, 8 / 1);
+    min-height: 48px;
+    margin-inline: auto;
+    overflow: hidden;
+    border: 1px dashed #C89214;
+    background: rgba(200, 146, 20, 0.06);
+}
+
+
+.ppar-article-product-test-surface {
+    min-height: 220px;
+    border-style: dashed;
+    border-color: #C89214;
+    background: rgba(200, 146, 20, 0.04);
+}
+
+/* V6.12: eBay-PRIVATE images stay remote; preserve HivePress card geometry. */
+.ppar-ebay-remote-image img,
+.ppar-ebay-remote-images img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    background: #fff;
+}
+
+.ppar-ebay-remote-image img {
+    height: 100%;
+}
+
+.ppar-ebay-remote-images img {
+    height: auto;
+    margin: 0 auto;
+}
