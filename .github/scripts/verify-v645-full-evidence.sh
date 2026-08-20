@@ -3,10 +3,35 @@ set -euo pipefail
 
 WORK="${GITHUB_WORKSPACE:-$(pwd)}"
 E="$WORK/V645_EVIDENCE"
-PKG="/tmp/v645pkg/CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820"
+ZIP="$WORK/CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip"
+ROOT="CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820"
+PKG="/tmp/v645pkg/$ROOT"
+OVERLAY_TMP=/tmp/v645-hard-overlay
 
-rm -rf "$E"
+rm -rf "$E" "$OVERLAY_TMP"
+mkdir -p "$E" "$OVERLAY_TMP"
 rm -f "$WORK/CODEX_V645_REALGATE_EVIDENCE_GHA_20260820.zip"
+
+# Test-harness-only correction proved separately against real WordPress/MariaDB.
+# Production source is immutable and is hash-verified before and after this overlay.
+sha256sum "$ZIP" > "$E/original_package_sha256.txt"
+unzip -q "$ZIP" -d "$OVERLAY_TMP"
+(cd "$OVERLAY_TMP/$ROOT/02_SOURCE_V645" && sha256sum -c SOURCE_SHA256.txt) > "$E/production_source_sha256_before_overlay.txt"
+cp "$OVERLAY_TMP/$ROOT/03_REAL_GATE/soft_failure_recovery.php" "$E/gate_d_original.php"
+cp "$WORK/.github/overlays/v645/soft_failure_recovery.php" "$OVERLAY_TMP/$ROOT/03_REAL_GATE/soft_failure_recovery.php"
+cp "$WORK/.github/overlays/v645/soft_failure_recovery.php" "$E/gate_d_corrected.php"
+diff -u "$E/gate_d_original.php" "$E/gate_d_corrected.php" > "$E/gate_d_harness_only.diff" || true
+cat > "$E/gate_d_overlay_manifest.txt" <<'EOF'
+TEST_HARNESS_ONLY=YES
+PRODUCTION_SOURCE_CHANGED=NO
+CAUSE_PROOF=V6.44 start/adoption always freezes config_snapshot; previous Gate D omitted it and real first tick failed selection_scope_empty.
+NEGATIVE_CASE_PRESERVED=YES; missing snapshot is explicitly asserted to fail closed.
+EOF
+(cd "$OVERLAY_TMP/$ROOT/02_SOURCE_V645" && sha256sum -c SOURCE_SHA256.txt) > "$E/production_source_sha256_after_overlay.txt"
+rm -f "$ZIP"
+(cd "$OVERLAY_TMP" && zip -qr "$ZIP" "$ROOT")
+unzip -t "$ZIP" > "$E/corrected_package_unzip_test.txt"
+sha256sum "$ZIP" > "$E/corrected_package_sha256.txt"
 
 # Execute the complete existing fail-closed source + WordPress/MariaDB real gate from scratch.
 "$WORK/.github/scripts/run-v645-realgate-ci.sh"
