@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Synchronization commit: workflow file is already present on the PR head before this event.
 
 WORK="${GITHUB_WORKSPACE:-$(pwd)}"
 ART="$WORK/V645_FINAL_ARTIFACT"
