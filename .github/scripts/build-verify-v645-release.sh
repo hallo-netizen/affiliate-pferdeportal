@@ -25,11 +25,11 @@ grep -Fxq 'SOURCE_GATES=PASS' "$SOURCE_E/HARD_VERIFICATION.txt"
 grep -Fxq 'REAL_GATES_A_H=PASS' "$SOURCE_E/HARD_VERIFICATION.txt"
 grep -Fxq 'PRODUCTION_SOURCE_UNCHANGED=PASS' "$SOURCE_E/HARD_VERIFICATION.txt"
 
-cat > "$E/PRE_BUILD_DECISION.txt" <<'EOF'
+cat > "$E/PRE_BUILD_DECISION.txt" <<'EOT'
 DECISION=A_PASS
 REASON=All mandatory source, historical, regression, counterproof, real WordPress/MariaDB A-H, and immutable-source checks passed before build.
 BUILD_ALLOWED=YES
-EOF
+EOT
 
 # Build only now, from the exact hash-verified production source.
 (cd "$PKG/02_SOURCE_V645" && sha256sum -c SOURCE_SHA256.txt) > "$E/source_sha256_immediately_prebuild.txt"
@@ -74,13 +74,13 @@ grep -Fxq 'COUNT=11 FAIL=0 ASSERTIONS=363' "$E/FINAL_ZIP_SOURCE_EVIDENCE/05_v643
 grep -Fxq 'COUNT=4 FAIL=0 ASSERTIONS=70' "$E/FINAL_ZIP_SOURCE_EVIDENCE/06_v644_functional.log"
 grep -Fxq 'COUNT=54 FAIL=0 ASSERTIONS=3097' "$E/FINAL_ZIP_SOURCE_EVIDENCE/08_historical_r5.log"
 
-# Create a second, fresh real MariaDB database for the FINAL ZIP test.
-php -r '$m=new mysqli("127.0.0.1","root","rootpass","",3306); if($m->connect_errno){fwrite(STDERR,$m->connect_error."\n"); exit(1);} $m->query("DROP DATABASE IF EXISTS v645zipgate") or die($m->error); $m->query("CREATE DATABASE v645zipgate CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci") or die($m->error); $m->query("GRANT ALL PRIVILEGES ON v645zipgate.* TO \'wp\'@\'%\'") or die($m->error); echo "ZIP_DB_READY\n";' > "$E/final_zip_db_setup.log"
+# Reset the already-proved real database to an empty WordPress schema for a second, fresh FINAL-ZIP install.
+wp db reset --yes --path=/tmp/wordpress-v645 --allow-root > "$E/final_zip_db_reset.log" 2>&1
 
 # Fresh WordPress 7.0.1; install and activate FROM THE FINAL INSTALL ZIP, not copied source.
 mkdir -p "$WP2"
 wp core download --version=7.0.1 --path="$WP2" --force --allow-root > "$E/final_zip_wp_setup.log" 2>&1
-wp config create --path="$WP2" --dbname=v645zipgate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root >> "$E/final_zip_wp_setup.log" 2>&1
+wp config create --path="$WP2" --dbname=v645gate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root >> "$E/final_zip_wp_setup.log" 2>&1
 wp core install --path="$WP2" --url=http://v645zip.test --title='V645 Final ZIP Gate' --admin_user=gateadmin --admin_password='GateOnly-20260820!' --admin_email=gate@example.invalid --skip-email --allow-root >> "$E/final_zip_wp_setup.log" 2>&1
 wp plugin install "$INSTALL" --activate --path="$WP2" --allow-root >> "$E/final_zip_wp_setup.log" 2>&1
 wp plugin status affiliate-portal-router --path="$WP2" --allow-root > "$E/final_zip_plugin_status_before.log"
@@ -116,7 +116,7 @@ unzip -q "$INSTALL" -d "$FRESH/final_reunpack"
 diff -u "$E/source_tree_sha256.txt" "$E/final_reunpack_tree_sha256.txt" > "$E/source_vs_final_reunpack.diff"
 test ! -s "$E/source_vs_final_reunpack.diff"
 
-cat > "$E/REAL_GATE_FINAL_MATRIX.txt" <<'EOF'
+cat > "$E/REAL_GATE_FINAL_MATRIX.txt" <<'EOT'
 Realer kritischer Pfad getestet: JA
 Echte Worker-Implementierung: JA
 Persistierter Zwischenzustand: JA
@@ -128,10 +128,10 @@ Recovery: PASS
 Gesamtworkflow-Regression: PASS
 Finale Installations-ZIP erneut geprüft: PASS
 Finale Installations-ZIP real A-H getestet: PASS
-EOF
+EOT
 
 # Release report required by MASTER. Mock/stub disclosure is explicit.
-cat > "$E/RELEASE_REPORT.md" <<'EOF'
+cat > "$E/RELEASE_REPORT.md" <<'EOT'
 # V6.45.0 RELEASE REPORT
 
 ## Ursache
@@ -154,7 +154,7 @@ Die endgültige Installations-ZIP wurde nach dem Build frisch entpackt, byteweis
 
 ## Ergebnis
 PASS – INSTALLATION FREIGEGEBEN
-EOF
+EOT
 
 # Build MASTER only after the final installer itself passed every required re-test.
 mkdir -p "$MASTER_DIR/00_READ_ME_FIRST" "$MASTER_DIR/01_MASTER_BINDING" "$MASTER_DIR/02_INSTALL" "$MASTER_DIR/03_SOURCE" "$MASTER_DIR/04_PREBUILD_REAL_GATE_EVIDENCE" "$MASTER_DIR/05_FINAL_INSTALLER_EVIDENCE" "$MASTER_DIR/06_DIFF_AND_HASHES" "$MASTER_DIR/07_REPORT"
@@ -175,8 +175,8 @@ test "$(sha256sum "$INSTALL" | awk '{print $1}')" = "$(sha256sum "$embedded" | a
 (
   cd "$MASTER_DIR"
   find . -type f ! -name 'MASTER_SHA256.txt' -print0 | sort -z | xargs -0 sha256sum > MASTER_SHA256.txt
-  sha256sum -c MASTER_SHA256.txt > MASTER_MANIFEST_VERIFIED.txt
 )
+(cd "$MASTER_DIR" && sha256sum -c MASTER_SHA256.txt) > "$E/master_manifest_prepack_verified.txt"
 (cd "$(dirname "$MASTER_DIR")" && zip -qr "$MASTER" "$(basename "$MASTER_DIR")")
 unzip -t "$MASTER" > "$E/master_zip_integrity.txt"
 sha256sum "$MASTER" > "$E/master_zip_sha256.txt"
@@ -187,10 +187,17 @@ rm -rf "$MASTER_FRESH" && mkdir -p "$MASTER_FRESH"
 unzip -q "$MASTER" -d "$MASTER_FRESH"
 MF="$MASTER_FRESH/$(basename "$MASTER_DIR")"
 (cd "$MF" && sha256sum -c MASTER_SHA256.txt) > "$E/master_fresh_manifest_verified.txt"
+(
+  cd "$MF"
+  find . -type f ! -name 'MASTER_SHA256.txt' -printf '%p\n' | sort
+) > "$E/master_fresh_files_actual.txt"
+awk '{sub(/^[0-9a-fA-F]+  /,""); print}' "$MF/MASTER_SHA256.txt" | sort > "$E/master_fresh_files_manifested.txt"
+diff -u "$E/master_fresh_files_manifested.txt" "$E/master_fresh_files_actual.txt" > "$E/master_file_set.diff"
+test ! -s "$E/master_file_set.diff"
 test "$(sha256sum "$INSTALL" | awk '{print $1}')" = "$(sha256sum "$MF/02_INSTALL/$(basename "$INSTALL")" | awk '{print $1}')"
 unzip -t "$MF/02_INSTALL/$(basename "$INSTALL")" > "$E/master_embedded_installer_integrity.txt"
 
-cat > "$E/FINAL_RELEASE_DECISION.txt" <<EOF
+cat > "$E/FINAL_RELEASE_DECISION.txt" <<EOT
 DECISION=PASS
 INSTALLER=$(basename "$INSTALL")
 MASTER=$(basename "$MASTER")
@@ -201,6 +208,6 @@ REAL_A_H_ON_FINAL_ZIP=PASS
 MASTER_MANIFEST=PASS
 MASTER_EMBEDDED_INSTALLER_IDENTICAL=PASS
 RESULT=PASS – INSTALLATION FREIGEGEBEN
-EOF
+EOT
 
 echo 'V645_FINAL_RELEASE_VERIFIED_OK'
