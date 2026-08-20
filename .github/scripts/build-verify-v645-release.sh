@@ -56,7 +56,7 @@ echo "FRESH_UNPACK_FILE_COUNT=$fresh_count" >> "$E/file_counts.txt"
 
 # Fresh-unpack syntax/JSON/version checks.
 find "$FRESH/affiliate-portal-router" -type f -name '*.php' -print0 | sort -z | while IFS= read -r -d '' f; do php -l "$f"; done > "$E/fresh_unpack_php_lint.log"
-php -r '$files=$argv; foreach($files as $f){json_decode(file_get_contents($f),true); if(json_last_error()!==JSON_ERROR_NONE){fwrite(STDERR,"JSON_FAIL $f ".json_last_error_msg()."\n"); exit(1);} echo "JSON_OK $f\n";}' \
+php -r '$files=array_slice($argv,1); foreach($files as $f){json_decode(file_get_contents($f),true); if(json_last_error()!==JSON_ERROR_NONE){fwrite(STDERR,"JSON_FAIL $f ".json_last_error_msg()."\n"); exit(1);} echo "JSON_OK $f\n";}' \
   "$FRESH/affiliate-portal-router/assets/ebay-portal-catalog-v2.json" \
   "$FRESH/affiliate-portal-router/assets/portal-structure-v279.json" > "$E/fresh_unpack_json.log"
 grep -Fq 'Version: 6.45.0' "$FRESH/affiliate-portal-router/pferdeportal-affiliate-router.php"
