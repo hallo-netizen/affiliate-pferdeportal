@@ -1,0 +1,51 @@
+{
+  "contract": "STARTMASTER0054_GROSSARTEFAKTREGEL_FINAL_PREBUILD_V1",
+  "status": "PASS_PREBUILD_NO_RUNTIME_CONTENT_DESIGN_DELTA",
+  "binding_master": "STARTMASTER0054_PSERC0282",
+  "scope": "GOVERNANCE_AND_RELEASE_EVIDENCE_ONLY",
+  "protected_scope": "UNCHANGED",
+  "protected_runtime_deltas": 0,
+  "text_machine_delta": 0,
+  "content_rule_delta": 0,
+  "design_delta": 0,
+  "workflow_delta": 0,
+  "installer": {
+    "name": "portal-seo-editorial-plan-compiler_0.28.2_PLAN_CAPABILITY_SNAPSHOT_INVALIDATION_CORE_RELEASE_ISOLATION_ROOTFIX_FINAL.zip",
+    "sha256": "8539d684cbbe01f0cc555ec598e055288f5696ffe0b2bdde6d16740b68c9cfd7",
+    "source_fresh_parity": "112/112 BYTEIDENTICAL",
+    "php_syntax_source": "40/40 PASS",
+    "php_syntax_fresh": "40/40 PASS",
+    "json_source": "16/16 PASS",
+    "json_fresh": "16/16 PASS"
+  },
+  "workflow_regression": {
+    "core_rootcause": "69/69 PASS",
+    "terminal_published": "58/58 PASS",
+    "normal_full_workflow": "41/41 PASS",
+    "package_tamper": "9/9 PASS",
+    "request_identity": "22/22 PASS",
+    "ppm": "137/137 PASS",
+    "link_policy": "19/19 PASS",
+    "pste_real_topics": "562/562 PASS",
+    "pste_exact_five": "562/562 PASS",
+    "safe_migration": "584 PASS",
+    "paused_539": "237 PASS",
+    "article_type_plus1": "PASS",
+    "rule1_delta_scope": "PASS",
+    "adversarial_source": "PASS",
+    "adversarial_fresh": "PASS",
+    "upgrade_reload": "0 READY stale before -> 0.28.2 invalidates plan snapshot -> 562 topics -> 12 eligible -> 5 READY core; no publish"
+  },
+  "github": {
+    "repository": "hallo-netizen/affiliate-pferdeportal",
+    "branch": "rootfix/pserc0282-core-release-snapshot-20260821",
+    "base_main": "49de5fb240191f69dbb9b44aefa110fd051a3104",
+    "exact_v2_cleanup_head_before_this_report": "127141d4cf7a447f87d507beebf6248c433b3dd5",
+    "exact_governance_path": "governance/startmaster0054/exact-v2",
+    "exact_governance_chunk_git_blob_sha_match": "PASS",
+    "superseded_nonexact_mirrors_removed_from_branch": true,
+    "main_modified": false
+  },
+  "live_wordpress_e2e": "PENDING",
+  "publish_allowed": false
+}
