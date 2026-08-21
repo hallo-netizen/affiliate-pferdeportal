@@ -1,0 +1,107 @@
+--- a/includes/trait-ppar-ebay-run.php
++++ b/includes/trait-ppar-ebay-run.php
+@@ -651,54 +651,81 @@
+     }
+ 
+     /**
+-     * V6.50 state-only recovery for a V6.49 terminal safe-supply-gap result.
++     * V6.50.1 state-only recovery for the stale-proof upgrade path.
+      *
+-     * V6.49 had already completed the canonical targeted BUSINESS gap-fill but
+-     * still converted any remaining family without a public safe winner into the
+-     * global terminal error insufficient_safe_sources. V6.50 may reopen only when
+-     * the persisted V6.49 gap-fill selection itself proves that every still
+-     * missing family had no safely selectable winner. Same UUID, no rediscovery,
+-     * no reselection and no quality-rule mutation.
++     * V6.50 incorrectly reused a terminal V6.49 gap-fill proof and jumped
++     * directly to public_verify. Public coverage can change between the old
++     * failure and the upgrade, so the old missing/selection proof is derived
++     * stale state. Reopen only the exact affected upgrade signatures, preserve
++     * the same run UUID and upstream refresh/source evidence, discard only the
++     * stale derived discovery/selection/coverage/gap-fill state, and re-enter
++     * the existing coverage_verify -> one canonical targeted gap-fill path.
+      */
+     public function maybe_migrate_ebay_safe_supply_gap_v6500() {
+         $run=$this->ebay_run_load();
+         if((string)($run['schema']??'')!=='1.0'){return;}
+         $loaded_run=$run;
+-        if(sanitize_key((string)($run['status']??''))!=='failed'
+-            || sanitize_key((string)($run['error_code']??''))!=='insufficient_safe_sources'){return;}
+-        $failure=$this->ebay_run_last_failure_entry($run,'insufficient_safe_sources');
++        if(sanitize_key((string)($run['status']??''))!=='failed'){return;}
++
++        $error_code=sanitize_key((string)($run['error_code']??''));
++        $failure=$this->ebay_run_last_failure_entry($run,$error_code);
+         $details=is_array($failure['details']??null)?$failure['details']:array();
+-        if(sanitize_key((string)($details['phase']??''))!=='coverage_verify'){return;}
++        $failure_phase=sanitize_key((string)($details['phase']??''));
+         $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
+-        if(strpos($failure_build,'6.49.0-')!==0){return;}
++
++        $from_v649=$error_code==='insufficient_safe_sources'
++            && $failure_phase==='coverage_verify'
++            && strpos($failure_build,'6.49.0-')===0;
++
++        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
++        $has_v650_stale_recovery=false;
++        foreach($history as $entry){
++            if(is_array($entry)
++                && sanitize_key((string)($entry['reason']??''))==='safe_supply_gap_contract_recovery'
++                && sanitize_key((string)($entry['error_code']??''))==='insufficient_safe_sources'){
++                $has_v650_stale_recovery=true;break;
++            }
++        }
++        $from_v650_stale_failure=$error_code==='business_safe_gap_new_missing_family'
++            && $failure_phase==='public_verify'
++            && strpos($failure_build,'6.50.0-')===0
++            && sanitize_key((string)($run['resume_reason']??''))==='safe_supply_gap_contract_recovery'
++            && $has_v650_stale_recovery;
++
++        if(!$from_v649 && !$from_v650_stale_failure){return;}
+ 
+         $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
+         if(empty($routes['business'])){return;}
+         $coverage=is_array($run['coverage']??null)?$run['coverage']:array();
+         if(!empty($coverage['error_code']) || empty($coverage['missing']) || absint($run['gapfill']['attempts']??0)<1){return;}
++
++        // The old terminal proof is used only to prove that this is the exact
++        // safe-supply-gap upgrade path. It is never reused as current truth.
+         $result=$this->ebay_run_business_safe_supply_gap_contract($run,$coverage);
+         if(($result['status']??'')!=='pass'){return;}
+ 
+         $uuid=sanitize_text_field((string)($run['run_uuid']??''));
+         if($uuid===''){return;}
+         $failure_at=absint($failure['at']??$run['finished_at']??0);
+-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|safe_supply_gap_contract|6.50.0');
+-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
++        $marker=hash('sha256',$uuid.'|'.$failure_at.'|safe_supply_gap_stale_proof_recovery|6.50.1');
+         foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
+         $history[]=array(
+-            'at'=>time(),'reason'=>'safe_supply_gap_contract_recovery',
+-            'error_code'=>'insufficient_safe_sources','migration_key'=>$marker,
+-            'open_gap_count'=>count((array)($result['coverage']['open_gaps']??array())),
+-            'preserved_components'=>1,
++            'at'=>time(),'reason'=>'safe_supply_gap_stale_proof_recovery',
++            'error_code'=>$error_code,'migration_key'=>$marker,
++            'preserved_components'=>1,'discarded_derived_gap_proof'=>1,
+         );
+         if(count($history)>8){$history=array_slice($history,-8);}
+ 
+         $run['recovery_history']=$history;
+-        $run['coverage']=(array)$result['coverage'];
+-        $run['status']='running';$run['phase']='public_verify';$run['finished_at']=0;
++        $run['status']='running';$run['phase']='coverage_verify';$run['finished_at']=0;
+         $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
+-        $run['resume_reason']='safe_supply_gap_contract_recovery';$run['no_progress_count']=0;
++        $run['resume_reason']='safe_supply_gap_stale_proof_recovery';$run['no_progress_count']=0;
+         $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
++        if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
++        // Preserve upstream refresh/source evidence. Discovery and selection are
++        // derived from the old missing set and must be recomputed for current gaps.
++        $run['phase_state']['discovery']=array();
++        $run['phase_state']['selection']=array();
++        $run['coverage']=array();
++        $run['gapfill']=array('attempts'=>0,'missing'=>array());
+         $run['end_manifest']=array();
+         $this->ebay_run_compare_and_swap($loaded_run,$run);
+     }
