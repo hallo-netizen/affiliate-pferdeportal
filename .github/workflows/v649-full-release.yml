@@ -72,14 +72,41 @@ jobs:
           unzip -q /tmp/v648.zip -d /tmp/v648-harness
 
           printf '%s\n' \
-            '70132d0d950c93baaf25a2926dca236d51a31d80b69e9a3d703b3939a239d602  .github/v649/V649_GATE_BUNDLE.zip.part.00' \
-            'c73b991fc9a12d21773033a76c75388222d54700685a2a3944d5b80f1e4f113b  .github/v649/V649_GATE_BUNDLE.zip.part.01' \
-            '64cc268a83954144518d629a119b4036f08920135d5d7373e898a4e3d6c3ccfe  .github/v649/V649_GATE_BUNDLE.zip.part.02' \
-            'ec950f99b5d783c47ed932a1e119b5aa82b92ce065cfb770e7cd917d1b88c57c  .github/v649/V649_GATE_BUNDLE.zip.part.03' \
-            '41e1bfaa6d7ab12126364e9838215acd17933b9a1154bcf492b8344ae356fd74  .github/v649/V649_GATE_BUNDLE.zip.part.04' \
-            '0bbd6597c00f2f24973ac31a26230430b477b58ed4d0765f074e6c0da773f638  .github/v649/V649_GATE_BUNDLE.zip.part.05' \
-            '4173bc13541163997d05e7f115acf276aa9bb76bdfac10330ce70892a170043c  .github/v649/V649_GATE_BUNDLE.zip.part.06' | sha256sum -c -
-          cat .github/v649/V649_GATE_BUNDLE.zip.part.0{0,1,2,3,4,5,6} >/tmp/v649.zip
+            'b73650771d20c5dca0756cd4fac5632e6abd4e503a82c12aaedf4b6f817b1c26  .github/v649/V649_GATE_BUNDLE.zip.part.00' \
+            '327059ae9ad6f3f6e90637ff8158c98683fa7048c104a7c8af03eb740ea58e17  .github/v649/V649_GATE_BUNDLE.zip.part.01' \
+            '3bbaaa8a015d407c35a4381e5adb472938267a7f780497db8fc23bc99cc7e35a  .github/v649/V649_GATE_BUNDLE.zip.part.02' \
+            'e8f938df3a600b57a376980f403fe34c64f2ae0b626f5816345cbb2cae1c0f14  .github/v649/V649_GATE_BUNDLE.zip.part.03' \
+            '84230796a1b9ce7b62e4112cdd020683b929213be01f4886189265a7c8f3f9a5  .github/v649/V649_GATE_BUNDLE.zip.part.04' \
+            '205151ce07e8e00a20a5396f815828995e28ff0ca97de30d6f4a17b3f85b5440  .github/v649/V649_GATE_BUNDLE.zip.part.05' \
+            '8604f373de91c5fb7ffca729d9fd0f51482ce89c97615fa6c6e50d7725fea8ac  .github/v649/V649_GATE_BUNDLE.zip.part.06' \
+            '36ff7a0b07b91ac5e8bdf8d84fcda537e72ebb3bd77d105ecd75e566e62562d0  .github/v649/V649_GATE_BUNDLE.b64.tail.00' \
+            '014ddf0057c9d7eac3f410fa6c0bb2d3baafa1bf546a47fd64997cd2b164ae22  .github/v649/V649_GATE_BUNDLE.b64.tail.01' \
+            '0a691658bf4a73a14ef4860002cb1ac56b5c3e5a4c2e94bfc29d543b72dce919  .github/v649/V649_GATE_BUNDLE.b64.tail.02' \
+            '8c28848291ed606c70411c62caaec11b329d15567354505ca375f7036423914a  .github/v649/V649_GATE_BUNDLE.b64.tail.03' \
+            '50a19e31fbdb6f682634030ca3ba198c2a8f8a2f0574eb5f3bdcb1e456d002f6  .github/v649/V649_GATE_BUNDLE.b64.tail.04' \
+            'd9d57dcc57fea98fa5fd9f4e1c82ad67f2cbf9c62041e40f904c92ee404921ca  .github/v649/V649_GATE_BUNDLE.b64.tail.05' \
+            '1039b3f870c6f2f384366f02f13547c79a453a4fd0391fb715ec0c771cc30c93  .github/v649/V649_GATE_BUNDLE.b64.tail.06a' \
+            '8bff69427350dab1e8124f5b8366847108712f3fe19ccc868f28e46d8893a4ea  .github/v649/V649_GATE_BUNDLE.b64.tail.06b' \
+            '39d59acb71333226c4f2867fa5628e5f96dfc326c89f0858399348f0e3fae6df  .github/v649/V649_GATE_BUNDLE.b64.tail.07a' \
+            'ccefb9e66b4b19ce44cd8fff7efc7c6a3cfffe462f92cfe1142ee8468efc86cd  .github/v649/V649_GATE_BUNDLE.b64.tail.07b' \
+            'c13ff852ddd02f998576b32cfd286a063dc0bbdb9bbc27f39f4d76281bb9cebc  .github/v649/V649_GATE_BUNDLE.b64.tail.08a' \
+            'c191932e3fe71205ed4914f704d224c1266d2c76e16d6d798b44de5ebe7f0d86  .github/v649/V649_GATE_BUNDLE.b64.tail.08b0' \
+            '98c87da8125d3c6830b02defc808ee06ef902210854ebe51850a65caee3e49f1  .github/v649/V649_GATE_BUNDLE.b64.tail.08b1' \
+            '01a8aaf83c4701d0e9ab3191ae6931ab6b7ac5e9420000d0b45725189e370c10  .github/v649/V649_GATE_BUNDLE.b64.tail.09a0' \
+            'b8a74066c8051861bc346e1faa76fda910c664ed85d8a88757eed7648869ec89  .github/v649/V649_GATE_BUNDLE.b64.tail.09a1' \
+            'c7cba7c8894e3e1bbe44676c33f784de7de6799cb723035f76518d797cfa9800  .github/v649/V649_GATE_BUNDLE.b64.tail.09b0' \
+            '5aff1af7d8f4b0ba0a5bbe754e91d9f853d9ce3ce001e8c48cee57042de6f17f  .github/v649/V649_GATE_BUNDLE.b64.tail.09b1' | sha256sum -c -
+          cat \
+            .github/v649/V649_GATE_BUNDLE.zip.part.0{0,1,2,3,4,5,6} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.0{0,1,2,3,4,5} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.06{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.07{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08a \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08b{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09a{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09b{0,1} > /tmp/v649.b64
+          test "$(wc -c < /tmp/v649.b64 | tr -d ' ')" = '47872'
+          base64 -d /tmp/v649.b64 > /tmp/v649.zip
           echo 'c17e47d04f71b3c4ab2a72d11e4ff271f77074329b8ecca384b5daf12907b357  /tmp/v649.zip' | sha256sum -c -
           unzip -t /tmp/v649.zip >/dev/null
           unzip -qo /tmp/v649.zip -d "$GITHUB_WORKSPACE"
