@@ -1,4 +1,4 @@
-name: V6.50 materialize exact V6.49 harness
+name: V6.50 materialize exact predecessor harnesses
 
 on:
   pull_request:
@@ -14,10 +14,22 @@ jobs:
       - name: Checkout V6.50 branch
         uses: actions/checkout@v4
 
-      - name: Materialize exact audited V6.49 gate bundle
+      - name: Materialize exact audited V6.47/V6.48/V6.49 gate bundles
         shell: bash
         run: |
           set -euo pipefail
+          cat .github/v647/V647_GATE_BUNDLE.zip.b64.0{0,1,2,3,4,5} >/tmp/v647.b64
+          base64 -d /tmp/v647.b64 >/tmp/v647.zip
+          echo '4c8d7efbf244132a2fbf83e078f9975baa32347fee248f8732590aa0c6143133  /tmp/v647.zip' | sha256sum -c -
+          rm -rf /tmp/v647-harness && mkdir -p /tmp/v647-harness
+          unzip -q /tmp/v647.zip -d /tmp/v647-harness
+
+          cat .github/v648/V648_GATE_BUNDLE.zip.b64.0{0,1,2,3,4,5,6} >/tmp/v648.b64
+          base64 -d /tmp/v648.b64 >/tmp/v648.zip
+          echo '51f32a5016ee2cd0ffb5144cf41f724ec3d552d1ed2e2c4fc0620b1682916481  /tmp/v648.zip' | sha256sum -c -
+          rm -rf /tmp/v648-harness && mkdir -p /tmp/v648-harness
+          unzip -q /tmp/v648.zip -d /tmp/v648-harness
+
           cat \
             .github/v649/V649_GATE_BUNDLE.zip.part.0{0,1,2,3,4,5,6} \
             .github/v649/V649_GATE_BUNDLE.b64.tail.0{0,1,2,3,4,5} \
@@ -32,17 +44,25 @@ jobs:
           echo 'c17e47d04f71b3c4ab2a72d11e4ff271f77074329b8ecca384b5daf12907b357  /tmp/v649.zip' | sha256sum -c -
           rm -rf /tmp/v649-harness && mkdir -p /tmp/v649-harness
           unzip -q /tmp/v649.zip -d /tmp/v649-harness
-          find /tmp/v649-harness/.github -type f -print | sort > /tmp/v649-harness/HARNESS_FILELIST.txt
-          sha256sum /tmp/v649-harness/HARNESS_FILELIST.txt > /tmp/v649-harness/HARNESS_FILELIST.sha256
 
-      - name: Upload exact harness
+          find /tmp/v647-harness/.github /tmp/v648-harness/.github /tmp/v649-harness/.github -type f -print | sort > /tmp/HARNESS_FILELIST.txt
+          sha256sum /tmp/HARNESS_FILELIST.txt > /tmp/HARNESS_FILELIST.sha256
+          test -f CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+          echo '6695085486f38680a203c31e0b5408aee378c907a31ce65204f88ab38b9fbbf4  CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip' | sha256sum -c -
+
+      - name: Upload exact predecessor harnesses and immutable test package
         uses: actions/upload-artifact@v4
         with:
-          name: V649_EXACT_GATE_HARNESS_FOR_V650
+          name: V647_V648_V649_EXACT_HARNESSES_FOR_V650
           path: |
+            /tmp/v647-harness/.github/
+            /tmp/v648-harness/.github/
             /tmp/v649-harness/.github/
-            /tmp/v649-harness/HARNESS_FILELIST.txt
-            /tmp/v649-harness/HARNESS_FILELIST.sha256
+            /tmp/HARNESS_FILELIST.txt
+            /tmp/HARNESS_FILELIST.sha256
+            CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+            .github/v646/
+            .github/overlays/v645/
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
