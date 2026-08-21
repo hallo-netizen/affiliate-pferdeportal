@@ -1,0 +1,341 @@
+--- /mnt/data/audit_current/pferde_inner/affiliate-portal-template-kit/pferde-template-kit.php	2026-08-12 17:05:39.000000000 +0000
++++ /mnt/data/audit_current/v94_pferde/affiliate-portal-template-kit/pferde-template-kit.php	2026-08-21 07:22:14.000000000 +0000
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate Portal Template Kit (Pferde-kompatibel)
+  * Description: Allgemeines Template-/Design-Plugin für Affiliateportale. Pferde-Shortcodes bleiben als Kompatibilitätsalias erhalten.
+- * Version: 1.50.458
++ * Version: 1.50.459
+  * Author: OpenAI
+  * License: GPL-2.0-or-later
+  */
+@@ -10,7 +10,7 @@
+ if (!defined('ABSPATH')) { exit; }
+ 
+ final class Pferde_Template_Kit {
+-    const VERSION = '1.50.458';
++    const VERSION = '1.50.459';
+     const AFFILIATE_CONTRACT = '1.0';
+     const DESIGN_PROFILE = 'pferde_atelier';
+     const DESIGN_PROFILE_CONTRACT = '1.0';
+@@ -165,6 +165,10 @@
+         add_action('wp_head', [__CLASS__, 'print_portal_body_width_v150355'], 100061);
+         // V1.50.368: Journal-Hauptseite in das gemeinsame Portaldesign und Werbesystem ueberfuehren.
+         add_action('wp_head', [__CLASS__, 'print_journal_system_css_v150368'], 100062);
++        // V1.50.459 / Contract V94: ausschließlich registrierte Journal-Kategoriearchive
++        // erhalten dieselbe Beitragskarten-Designsprache wie der Journal-Root.
++        // Fremde Kategorien bleiben durch den exakten Journal-Registerabgleich unangetastet.
++        add_action('wp_head', [__CLASS__, 'print_journal_category_cards_css_v150459'], 100062);
+         // V1.50.405: Nur im HivePress-Unterbaum "Private Anzeigen" und dessen
+         // Unterkategorien erhalten die Bildboxen einen dunkeloliven Rahmen,
+         // weissen Hintergrund und keinen Schatten. Andere Anzeigen bleiben tabu.
+@@ -3451,9 +3455,13 @@
+         if (is_category() || is_tax()) {
+             $term = get_queried_object();
+             if (self::private_listing_archive_scope_v150397($term)) { $classes[] = 'pftk-private-listing-scope-v150397'; }
++            $is_journal_category_v150459 = is_category() && self::journal_category_image_gap_scope_v150420($term);
++            if ($is_journal_category_v150459) {
++                $classes[] = 'pftk-journal-category-v150459';
++            }
+             if (self::term_archive_image_data_v150385($term)) {
+                 $classes[] = 'pftk-has-leading-term-image-v150385';
+-                if (is_category() && self::journal_category_image_gap_scope_v150420($term)) {
++                if ($is_journal_category_v150459) {
+                     $classes[] = 'pftk-journal-category-image-gap-v150420';
+                 }
+             }
+@@ -3944,6 +3952,33 @@
+   font-size:20px!important;
+   line-height:1.2!important;
+ }
++/* V1.50.459 / V94: nur Journal-Root-Beitragsvorschauen.
++   Textachse, Typografie und CTA werden an die übrige Journal-Kartensprache angeglichen. */
++.pftk-journal-v150368 .pftk-journal-post-copy-v150280{
++  align-items:center!important;
++  text-align:center!important;
++}
++.pftk-journal-v150368 .pftk-journal-post-meta-v150280,
++.pftk-journal-v150368 .pftk-journal-post-copy-v150280 h3,
++.pftk-journal-v150368 .pftk-journal-post-copy-v150280 p{
++  width:100%!important;
++  text-align:center!important;
++}
++.pftk-journal-v150368 .pftk-journal-post-copy-v150280 h3{
++  font-size:22px!important;
++  line-height:1.25!important;
++}
++.pftk-journal-v150368 .pftk-journal-post-copy-v150280 p{
++  font-size:15px!important;
++  line-height:1.62!important;
++}
++.pftk-journal-v150368 .pftk-journal-button-v150280{
++  width:auto!important;
++  min-width:150px!important;
++  align-self:center!important;
++  padding:10px 22px!important;
++  text-align:center!important;
++}
+ .pftk-journal-v150368 .pftk-journal-partner-section-v150368,
+ .pftk-journal-v150368 .pftk-journal-products-section-v150368{
+   margin-top:46px!important;
+@@ -4016,6 +4051,193 @@
+ }
+ </style>
+         <?php
++    }
++
++    /**
++     * V1.50.459 / Contract V94 – registrierte Journal-Kategoriearchive.
++     *
++     * Ursache des bisherigen Darstellungsbruchs: Diese Archive fielen bewusst auf
++     * das native Theme-Archiv zurück. Dadurch galten Theme-Farben, Theme-Buttons und
++     * Theme-Bildmaße anstelle der freigegebenen Journal-Kartensprache. Die Korrektur
++     * greift ausschließlich nach exakter Auflösung über das Journal-Kategorieregister.
++     */
++    public static function print_journal_category_cards_css_v150459() {
++        if (is_admin() || !is_category()) { return; }
++        $term = get_queried_object();
++        if (!self::journal_category_image_gap_scope_v150420($term)) { return; }
++        ?>
++<style id="pftk-journal-category-cards-v150459">
++body.pftk-journal-category-v150459 main.site-main .ast-row,
++body.pftk-journal-category-v150459 #main.site-main .ast-row{
++  display:grid!important;
++  grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))!important;
++  gap:22px!important;
++  margin:0!important;
++  align-items:stretch!important;
++}
++body.pftk-journal-category-v150459 main.site-main .ast-row>article.post,
++body.pftk-journal-category-v150459 #main.site-main .ast-row>article.post,
++body.pftk-journal-category-v150459 article.ast-article-post.post{
++  box-sizing:border-box!important;
++  width:100%!important;
++  max-width:none!important;
++  height:100%!important;
++  margin:0!important;
++  padding:0!important;
++  overflow:hidden!important;
++  border:1px solid rgba(53,66,42,.22)!important;
++  border-radius:var(--pftk-global-card-radius,12px)!important;
++  background:#fff!important;
++  box-shadow:none!important;
++}
++body.pftk-journal-category-v150459 main.site-main .ast-row>article.post:hover,
++body.pftk-journal-category-v150459 main.site-main .ast-row>article.post:focus-within,
++body.pftk-journal-category-v150459 article.ast-article-post.post:hover,
++body.pftk-journal-category-v150459 article.ast-article-post.post:focus-within{
++  border-color:#C89214!important;
++  box-shadow:none!important;
++}
++body.pftk-journal-category-v150459 article.post .post-content{
++  box-sizing:border-box!important;
++  display:flex!important;
++  width:100%!important;
++  min-height:100%!important;
++  margin:0!important;
++  padding:0!important;
++  flex-direction:column!important;
++}
++body.pftk-journal-category-v150459 article.post .post-thumb,
++body.pftk-journal-category-v150459 article.post .ast-blog-featured-section,
++body.pftk-journal-category-v150459 article.post .post-thumb-img-content{
++  box-sizing:border-box!important;
++  width:100%!important;
++  max-width:none!important;
++  margin:0!important;
++  padding:0!important;
++  overflow:hidden!important;
++  aspect-ratio:16/9!important;
++  float:none!important;
++  border:0!important;
++  border-radius:0!important;
++  background:#FAF7F0!important;
++  box-shadow:none!important;
++}
++body.pftk-journal-category-v150459 article.post .post-thumb>a,
++body.pftk-journal-category-v150459 article.post .ast-blog-featured-section>a,
++body.pftk-journal-category-v150459 article.post .post-thumb-img-content>a{
++  display:block!important;
++  width:100%!important;
++  aspect-ratio:16/9!important;
++  overflow:hidden!important;
++}
++body.pftk-journal-category-v150459 article.post .post-thumb img,
++body.pftk-journal-category-v150459 article.post .ast-blog-featured-section img,
++body.pftk-journal-category-v150459 article.post .post-thumb-img-content img{
++  display:block!important;
++  width:100%!important;
++  max-width:none!important;
++  height:100%!important;
++  aspect-ratio:16/9!important;
++  margin:0!important;
++  object-fit:cover!important;
++  object-position:center!important;
++}
++body.pftk-journal-category-v150459 article.post .entry-header{
++  box-sizing:border-box!important;
++  margin:0!important;
++  padding:22px 22px 0!important;
++  text-align:center!important;
++}
++body.pftk-journal-category-v150459 article.post .entry-title,
++body.pftk-journal-category-v150459 article.post .entry-title a{
++  margin:0!important;
++  color:#35422A!important;
++  font-family:Georgia,"Times New Roman",serif!important;
++  font-size:22px!important;
++  font-weight:500!important;
++  line-height:1.25!important;
++  text-align:center!important;
++  text-decoration:none!important;
++}
++body.pftk-journal-category-v150459 article.post .entry-title a:hover,
++body.pftk-journal-category-v150459 article.post .entry-title a:focus-visible{
++  color:#C89214!important;
++}
++body.pftk-journal-category-v150459 article.post .entry-meta{
++  margin-top:8px!important;
++  color:#C89214!important;
++  font-size:11px!important;
++  font-weight:700!important;
++  letter-spacing:.08em!important;
++  text-align:center!important;
++  text-transform:uppercase!important;
++}
++body.pftk-journal-category-v150459 article.post .entry-content{
++  box-sizing:border-box!important;
++  display:flex!important;
++  flex:1 1 auto!important;
++  flex-direction:column!important;
++  margin:0!important;
++  padding:13px 22px 22px!important;
++  color:#555B55!important;
++  font-size:15px!important;
++  line-height:1.62!important;
++  text-align:center!important;
++}
++body.pftk-journal-category-v150459 article.post .entry-content>p:not(.read-more){
++  margin:0 0 17px!important;
++  text-align:center!important;
++}
++body.pftk-journal-category-v150459 article.post .read-more{
++  margin:auto 0 0!important;
++  padding-top:18px!important;
++  text-align:center!important;
++}
++body.pftk-journal-category-v150459 article.post .read-more a,
++body.pftk-journal-category-v150459 article.post a.ast-button,
++body.pftk-journal-category-v150459 article.post .ast-button{
++  display:inline-flex!important;
++  min-height:42px!important;
++  align-items:center!important;
++  justify-content:center!important;
++  margin:0 auto!important;
++  padding:10px 22px!important;
++  border:1px solid #35422A!important;
++  border-radius:0!important;
++  background:#35422A!important;
++  color:#fff!important;
++  box-shadow:none!important;
++  font-family:Arial,Helvetica,sans-serif!important;
++  font-size:14px!important;
++  font-weight:700!important;
++  letter-spacing:0!important;
++  line-height:1.2!important;
++  text-align:center!important;
++  text-decoration:none!important;
++  text-transform:none!important;
++}
++body.pftk-journal-category-v150459 article.post .read-more a:hover,
++body.pftk-journal-category-v150459 article.post .read-more a:focus-visible,
++body.pftk-journal-category-v150459 article.post a.ast-button:hover,
++body.pftk-journal-category-v150459 article.post a.ast-button:focus-visible,
++body.pftk-journal-category-v150459 article.post .ast-button:hover,
++body.pftk-journal-category-v150459 article.post .ast-button:focus-visible{
++  border-color:#C89214!important;
++  background:#C89214!important;
++  color:#fff!important;
++  outline:none!important;
++}
++@media(max-width:760px){
++  body.pftk-journal-category-v150459 main.site-main .ast-row,
++  body.pftk-journal-category-v150459 #main.site-main .ast-row{
++    grid-template-columns:minmax(0,1fr)!important;
++    gap:18px!important;
++  }
++  body.pftk-journal-category-v150459 article.post .entry-header{padding:20px 18px 0!important}
++  body.pftk-journal-category-v150459 article.post .entry-content{padding:12px 18px 20px!important}
++}
++</style>
++        <?php
+     }
+ 
+     private static function journal_post_cards_v150280($query, $categories, $class = 'pftk-journal-post-grid-v150280') {
+--- /mnt/data/audit_current/pferde_inner/affiliate-portal-template-kit/assets/single-post-locked-v15083.css	2026-08-12 08:40:40.000000000 +0000
++++ /mnt/data/audit_current/v94_pferde/affiliate-portal-template-kit/assets/single-post-locked-v15083.css	2026-08-21 07:10:44.000000000 +0000
+@@ -310,6 +310,64 @@
+   background: transparent !important;
+   box-shadow: none !important;
+ }
++/* V1.50.459 / Contract V94: Tabellen-Grunddesign darf nicht von einer
++   Produktionsmaschinen-Sonderklasse abhängen. Standard-WordPress-Tabellen und
++   kompatible direkte Tabellen erhalten deshalb dieselbe ruhige Primärlinienlogik.
++   Die bestehende spezielle Vier-Spalten-Mobilregel für system-129 bleibt separat. */
++html body.single-post article .entry-content > table,
++html body.single-post article .entry-content figure.wp-block-table > table,
++html body.single-post article .entry-content .wp-block-table > table,
++html body.single-post article .entry-content .comparison-table-wrap > table {
++  box-sizing: border-box !important;
++  width: 100% !important;
++  max-width: 100% !important;
++  margin: 0 !important;
++  border: 0 !important;
++  border-collapse: collapse !important;
++  background: transparent !important;
++  box-shadow: none !important;
++}
++html body.single-post article .entry-content > table th,
++html body.single-post article .entry-content > table td,
++html body.single-post article .entry-content figure.wp-block-table > table th,
++html body.single-post article .entry-content figure.wp-block-table > table td,
++html body.single-post article .entry-content .wp-block-table > table th,
++html body.single-post article .entry-content .wp-block-table > table td,
++html body.single-post article .entry-content .comparison-table-wrap > table th,
++html body.single-post article .entry-content .comparison-table-wrap > table td {
++  box-sizing: border-box !important;
++  padding: 10px 12px !important;
++  vertical-align: top !important;
++  border: 0 !important;
++  border-right: 1px solid var(--pa-single-heading) !important;
++  border-bottom: 1px solid var(--pa-single-heading) !important;
++  background: transparent !important;
++}
++html body.single-post article .entry-content > table th,
++html body.single-post article .entry-content figure.wp-block-table > table th,
++html body.single-post article .entry-content .wp-block-table > table th,
++html body.single-post article .entry-content .comparison-table-wrap > table th {
++  color: var(--pa-single-heading) !important;
++  font-family: var(--pa-single-heading-font) !important;
++  font-weight: 600 !important;
++  border-bottom: 2px solid var(--pa-single-heading) !important;
++}
++html body.single-post article .entry-content > table th:last-child,
++html body.single-post article .entry-content > table td:last-child,
++html body.single-post article .entry-content figure.wp-block-table > table th:last-child,
++html body.single-post article .entry-content figure.wp-block-table > table td:last-child,
++html body.single-post article .entry-content .wp-block-table > table th:last-child,
++html body.single-post article .entry-content .wp-block-table > table td:last-child,
++html body.single-post article .entry-content .comparison-table-wrap > table th:last-child,
++html body.single-post article .entry-content .comparison-table-wrap > table td:last-child {
++  border-right: 0 !important;
++}
++html body.single-post article .entry-content > table tr:last-child td,
++html body.single-post article .entry-content figure.wp-block-table > table tr:last-child td,
++html body.single-post article .entry-content .wp-block-table > table tr:last-child td,
++html body.single-post article .entry-content .comparison-table-wrap > table tr:last-child td {
++  border-bottom: 0 !important;
++}
+ html body.single-post article .entry-content .system-129-table.comparison-table {
+   box-sizing: border-box !important;
+   width: 100% !important;
