@@ -1,0 +1,43 @@
+V99 HARD LOCAL QA
+
+PFERDE SCOPE HARNESS
+PASS registered Journal: class + controlled meta + CTA + CSS
+PASS foreign category: no class, no meta, no CTA, no CSS
+PASS exact root tokens: 20px meta inset, 2.55em title reserve, 10/20/20 content
+
+BROWSER ROOT VS ARCHIVE
+Root/Target size: 360 x 488 / 360 x 488
+Image height delta: 0
+Image width delta: 0
+Image -> visible meta text: 20 / 20 px
+Meta text -> title: 7 / 7 px
+Title -> excerpt: 10 / 10 px
+Button -> card bottom: 21 / 21 px including border
+Text left inset: 21 / 21 px including border
+Card height delta: 0
+Full card pixel diff: 0 / 175680 pixels
+PIXEL_IDENTITY_PASS
+
+REGRESSION
+Journal-root style pftk-journal-system-v150369: byteidentical V98 -> V99
+Journal-root inline style pftk-journal-inline-system-v150371: byteidentical V98 -> V99
+single-post-locked-v15083.css: byteidentical V98 -> V99
+
+SOURCE QA
+Pferde PHP: 4/4 lint PASS
+Pferde JSON: 15/15 parse PASS
+Universal PHP: 11/11 lint PASS
+Universal journal card harness: PASS meta on journal card, PASS no meta on generic card
+
+FRESH UNPACK
+Pferde source vs fresh installer: 492/492 byteidentical
+Universal source vs fresh installer: 15/15 byteidentical
+
+MASTER
+Pferde master fresh-unpack: 727/727 byteidentical; manifest 726/726 PASS
+Universal master fresh-unpack: 245/245 byteidentical; manifest 244/244 PASS
+Embedded installer equals standalone: PASS both
+CURRENT_PLUGIN_SOURCE equals embedded installer: PASS both
+ZIP test: PASS all four outputs
+
+LIVE WORDPRESS ACCEPTANCE: PENDING until user installs V99 and supplies live screenshot.
