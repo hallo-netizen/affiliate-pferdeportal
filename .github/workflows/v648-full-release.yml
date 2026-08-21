@@ -1,0 +1,314 @@
+name: V6.48 full release verification
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  v648-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v648-canonical-refresh-authority-rootcause-20260821'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v648gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - name: Checkout PR merge
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+
+      - name: Reconstruct exact V6.47 binding source and V6.48 candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          E="$GITHUB_WORKSPACE/V648_RELEASE_EVIDENCE"
+          PKGROOT=/tmp/v648pkg
+          PKG="$PKGROOT/CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820"
+          SRC="$PKG/02_SOURCE_V645/affiliate-portal-router"
+          BASE="$PKG/05_BASELINE_V644/affiliate-portal-router"
+          V647=/tmp/v647-harness/.github/v647
+          V647BASE=/tmp/v647-approved-source
+          rm -rf "$E" "$PKGROOT" /tmp/v647-harness "$V647BASE"
+          mkdir -p "$E" "$PKGROOT" /tmp/v647-harness
+
+          echo '2686b0712fe7d100d52e183bae31a1da682e356f8bab7cfed93dc47e6a977e7d  .github/v647/V647_GATE_BUNDLE.zip.b64.00' | sha256sum -c -
+          echo '6e081fded84b0b7afa71f1cf72140d73d24608af3391703a490906ce59495c71  .github/v647/V647_GATE_BUNDLE.zip.b64.01' | sha256sum -c -
+          echo '882920a1b75680de11db95f7b78203e26ece3c57d17eb700a0fc9330aed64ba7  .github/v647/V647_GATE_BUNDLE.zip.b64.02' | sha256sum -c -
+          echo 'da4e70b804c7cb64e815234088f71f4f947e69ee144134575cb62bb085920bd1  .github/v647/V647_GATE_BUNDLE.zip.b64.03' | sha256sum -c -
+          echo '59d8d205624982f3cce9d2edbc0fba0e60741a2a69fac99f2baca7a507eb9d24  .github/v647/V647_GATE_BUNDLE.zip.b64.04' | sha256sum -c -
+          echo '1d4577320aee0d93f6abf67081d365dbedadcd9c0623c8ebb0baef2aff5e2a6c  .github/v647/V647_GATE_BUNDLE.zip.b64.05' | sha256sum -c -
+          cat .github/v647/V647_GATE_BUNDLE.zip.b64.0{0,1,2,3,4,5} > /tmp/v647.b64
+          base64 -d /tmp/v647.b64 > /tmp/v647.zip
+          echo '4c8d7efbf244132a2fbf83e078f9975baa32347fee248f8732590aa0c6143133  /tmp/v647.zip' | sha256sum -c -
+          unzip -q /tmp/v647.zip -d /tmp/v647-harness
+
+          echo '6695085486f38680a203c31e0b5408aee378c907a31ce65204f88ab38b9fbbf4  CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip' | sha256sum -c -
+          unzip -t CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip >/dev/null
+          unzip -q CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip -d "$PKGROOT"
+          (cd "$PKG/02_SOURCE_V645" && patch -p0 --forward --batch < "$GITHUB_WORKSPACE/.github/v646/v646_relative.patch")
+          (cd "$PKG/02_SOURCE_V645" && sha256sum -c "$GITHUB_WORKSPACE/.github/v646/SOURCE_SHA256.txt")
+          for p in 01_resolver.patch 02_recovery.patch 03_version_hook_readme.patch; do
+            (cd "$PKG/02_SOURCE_V645" && patch -p0 --forward --batch < "$V647/patches/$p")
+          done
+          (cd "$PKG/02_SOURCE_V645" && sha256sum -c "$V647/manifests/SOURCE_SHA256.txt")
+          cp -a "$SRC" "$V647BASE"
+
+          cat > /tmp/v648_authority.patch <<'PATCH'
+          --- includes/trait-ppar-ebay-run.php
+          +++ includes/trait-ppar-ebay-run.php
+          @@ -490,16 +490,21 @@
+               }
+           
+               /**
+          -     * V6.47 state-only recovery for the proven V6.46 dynamic BUSINESS rule-context loss.
+          +     * V6.48 canonical-state recovery for the proven V6.46 dynamic BUSINESS rule-context loss.
+                *
+          -     * V6.46 could complete its real remote refresh while persisted BUSINESS rows
+          -     * carrying dynamic catalog concept ids as rule_id were reclassified with an
+          -     * empty static rule. Recovery is therefore deliberately downstream of that
+          -     * completed refresh: preserve the same canonical run UUID and completed refresh
+          -     * evidence, invalidate only discovery/selection derived after it, then execute
+          -     * the existing one bounded BUSINESS gap-fill tail for the exact 311 missing
+          -     * catalog concepts. Any ambiguous provenance, disabled BUSINESS route, incomplete
+          -     * refresh or non-exact manifest remains terminal/fail-closed.
+          +     * Root cause of the V6.47 live miss: schema-1.0 component state is owned by the
+          +     * canonical run's phase_state. ebay_refresh_job_save() therefore writes the
+          +     * completed refresh into phase_state.refresh and intentionally does NOT mirror
+          +     * it into the legacy OPTION_EBAY_REFRESH_JOB. V6.47 nevertheless required both
+          +     * stores to contain the same completed refresh, so a valid canonical production
+          +     * state could never pass that extra legacy gate. The V6.47 real gate hid this by
+          +     * manually seeding the non-authoritative legacy option.
+          +     *
+          +     * This recovery now uses exactly one authority for schema-1.0: the canonical
+          +     * phase_state.refresh with the same run UUID. Legacy standalone component options
+          +     * are neither proof nor veto. All other provenance/coverage/selection/gap-fill
+          +     * guards remain unchanged and fail-closed. The method name is retained for
+          +     * compatibility with the existing init hook and historical test harnesses.
+                */
+               public function maybe_migrate_ebay_dynamic_business_rule_context_v6470() {
+                   $run=$this->ebay_run_load();
+          @@ -531,15 +536,15 @@
+           
+                   $uuid=sanitize_text_field((string)($run['run_uuid']??''));
+                   if($uuid===''){return;}
+          +        // Schema-1.0 has one authoritative component-state store: canonical
+          +        // phase_state. The legacy standalone refresh option is deliberately ignored
+          +        // here because production saves no longer mirror canonical refresh state to it.
+                   $refresh=is_array($run['phase_state']['refresh']??null)?$run['phase_state']['refresh']:array();
+          -        $durable_refresh=is_array(get_option(self::OPTION_EBAY_REFRESH_JOB,array()))?get_option(self::OPTION_EBAY_REFRESH_JOB,array()):array();
+                   if(sanitize_key((string)($refresh['status']??''))!=='completed'
+          -            || sanitize_key((string)($durable_refresh['status']??''))!=='completed'
+          -            || !hash_equals($uuid,sanitize_text_field((string)($refresh['run_uuid']??'')))
+          -            || !hash_equals($uuid,sanitize_text_field((string)($durable_refresh['run_uuid']??'')))){return;}
+          +            || !hash_equals($uuid,sanitize_text_field((string)($refresh['run_uuid']??'')))){return;}
+           
+                   $failure_at=absint($failure['at']??$run['finished_at']??0);
+          -        $marker=hash('sha256',$uuid.'|'.$failure_at.'|dynamic_business_rule_context|6.47.0');
+          +        $marker=hash('sha256',$uuid.'|'.$failure_at.'|dynamic_business_rule_context|canonical-state-v648');
+                   $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
+                   foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
+                   $history[]=array(
+          @@ -562,8 +567,9 @@
+                   $run['gapfill']=array('attempts'=>1,'missing'=>$missing);
+                   $run['end_manifest']=array();
+           
+          -        // Secondary durable tail-state is cleared only after the canonical CAS.
+          -        // The completed refresh option is intentionally NOT changed.
+          +        // Legacy discovery/selection residue is cleared only after the canonical CAS.
+          +        // The legacy refresh option is intentionally neither read nor changed: under
+          +        // schema-1.0 it is non-authoritative historical residue.
+                   if($this->ebay_run_compare_and_swap($loaded_run,$run)!==false){
+                       update_option(self::OPTION_EBAY_SYNC_JOB,array(),false);
+                       update_option(self::OPTION_EBAY_SELECTION_STATE,array(),false);
+          PATCH
+          sed -i 's/^          //' /tmp/v648_authority.patch
+          (cd "$SRC" && patch -p0 --forward --batch < /tmp/v648_authority.patch)
+          echo 'c4080e74a9214bd836fc14956143377d91a2dd2399a1583e961adf5a8b0029b6  includes/trait-ppar-ebay-run.php' | (cd "$SRC" && sha256sum -c -)
+          mapfile -t c1 < <(diff -qr "$V647BASE" "$SRC" | sed -E 's#^Files .*/v647-approved-source/([^ ]+) and .* differ$#\1#' | sort)
+          test "$(printf '%s\n' "${c1[@]}")" = 'includes/trait-ppar-ebay-run.php'
+
+          cat > /tmp/v648_version.patch <<'PATCH'
+          diff --git a/pferdeportal-affiliate-router.php b/pferdeportal-affiliate-router.php
+          index 41d62ac..fc18402 100644
+          --- a/pferdeportal-affiliate-router.php
+          +++ b/pferdeportal-affiliate-router.php
+          @@ -2,7 +2,7 @@
+           /**
+            * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+            * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+          - * Version: 6.47.0
+          + * Version: 6.48.0
+            * Author: OpenAI
+            * Requires at least: 6.0
+            * Requires PHP: 7.4
+          @@ -39,8 +39,8 @@ final class Pferdeportal_Affiliate_Router {
+               use PPAR_Ebay_Run_Trait;
+               use PPAR_Ebay_Account_Deletion_Trait;
+               use PPAR_Awin_Programme_Gate_Trait;
+          -    const VERSION = '6.47.0';
+          -    const EBAY_RUNTIME_BUILD = '6.47.0-dynamic-business-rule-context-rootfix-20260821';
+          +    const VERSION = '6.48.0';
+          +    const EBAY_RUNTIME_BUILD = '6.48.0-canonical-refresh-authority-rootfix-20260821';
+               const CONTRACT_VERSION = '1.0';
+               const PROVIDER_CONTRACT_VERSION = '2.0';
+               const CAMPAIGN_POST_TYPE = 'ap_campaign';
+          diff --git a/readme.txt b/readme.txt
+          index 47b588e..2bc9aaf 100644
+          --- a/readme.txt
+          +++ b/readme.txt
+          @@ -1,5 +1,15 @@
+          +Affiliate-Zentrale 6.48.0 – CANONICAL REFRESH AUTHORITY ROOTFIX
+          +Stable tag: 6.48.0
+          +
+          +Korrektur 6.48.0
+          +- Ursache des V6.47-Live-Misses beseitigt: Unter kanonischem Run-Schema 1.0 ist ausschließlich `phase_state.refresh` der autoritative Refresh-Zustand. Der alte Standalone-Optionswert `OPTION_EBAY_REFRESH_JOB` ist Legacy-Zustand und wird von produktiven schema-1.0-Saves bewusst nicht gespiegelt.
+          +- V6.47 verlangte fälschlich trotzdem gleichzeitig einen abgeschlossenen kanonischen UND einen abgeschlossenen Legacy-Refresh. Dadurch konnte der reale V6.46-Fehlerzustand trotz korrektem kanonischem Refresh nicht wieder aufgenommen werden.
+          +- Der V6.47-Realtest hatte diesen Architekturfehler verdeckt, weil er die nicht-authoritative Legacy-Option künstlich mit demselben completed-Refresh befüllte. V6.48 testet deshalb ausdrücklich den echten canonical-only Persistenzvertrag sowie leere und widersprüchliche Legacy-Zustände.
+          +- Same-UUID-Recovery bleibt unverändert eng: nur V6.46-Provenienz, `insufficient_safe_sources` aus `coverage_verify`, exakt 0/311, exakt 311 fehlende aktuelle BUSINESS-Familien, 0 materialisiert/aktiv, Gap-Fill bereits versucht und kanonischer completed Refresh mit derselben UUID.
+          +- Legacy-Refresh kann die Recovery weder erlauben noch blockieren. Ein unvollständiger oder UUID-fremder kanonischer Refresh bleibt terminal/fail-closed.
+          +- Keine Änderung an BUSINESS-/PRIVATE-Klassifikator, Qualitätsregeln, Katalogqueries, Produktfamilien, Artikel-, Titel-, Prompt-, SEO-, Design-, Kategorien- oder Materialisierungsfachlogik.
+          +
+           Affiliate-Zentrale 6.47.0 – DYNAMIC BUSINESS RULE CONTEXT ROOTFIX
+          -Stable tag: 6.47.0
+           
+           Korrektur 6.47.0
+           - Persistierte BUSINESS-`rule_id`s der 311 dynamischen Katalogkonzepte werden beim späteren Remote-Refresh wieder exakt aus demselben unveränderten autoritativen Katalog rekonstruiert. Statische Regeln behalten Vorrang.
+          PATCH
+          sed -i 's/^          //' /tmp/v648_version.patch
+          (cd "$SRC" && patch -p1 --forward --batch < /tmp/v648_version.patch)
+          printf '%s\n' \
+            'c4080e74a9214bd836fc14956143377d91a2dd2399a1583e961adf5a8b0029b6  includes/trait-ppar-ebay-run.php' \
+            'd2a2832e8f8e2ab2bb20cac41e47c4be3fa842e12ac956ee5b1b422a421831a2  pferdeportal-affiliate-router.php' \
+            'cee9d7e5354c63d403af2415c699e903d8cc4258236e5462e698fc4aa5f8a9c0  readme.txt' | (cd "$SRC" && sha256sum -c -)
+          mapfile -t c2 < <(diff -qr "$V647BASE" "$SRC" | sed -E 's#^Files .*/v647-approved-source/([^ ]+) and .* differ$#\1#' | sort)
+          expected=$'includes/trait-ppar-ebay-run.php\npferdeportal-affiliate-router.php\nreadme.txt'
+          test "$(printf '%s\n' "${c2[@]}")" = "$expected"
+          cmp -s "$V647BASE/includes/trait-ppar-ebay.php" "$SRC/includes/trait-ppar-ebay.php"
+
+          cat > /tmp/run_source_regression.sh <<'REG'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          SRC="$1"; OUT="$2"; PKG="$3"; BASE="$4"; V647="$5"
+          mkdir -p "$OUT"
+          run_files(){ local o="$1"; shift; : > "$o"; local n=0 f=0 a=0; for t in "$@"; do n=$((n+1)); echo "===== $(basename "$t") =====" >> "$o"; set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$SRC" PPAR_BASELINE_PLUGIN_DIR="$BASE" PPAR_TEST_MASTER_ROOT="$PKG" timeout 120 php "$t" >> "$o" 2>&1; rc=$?; set -e; echo "__TEST_EXIT__ $rc $(basename "$t")" >> "$o"; [ $rc -eq 0 ] || f=$((f+1)); done; a=$(grep -oE 'ASSERTIONS=[0-9]+' "$o"|cut -d= -f2|awk '{s+=$1}END{print s+0}'); echo "COUNT=$n FAIL=$f ASSERTIONS=$a" | tee -a "$o"; [ $f -eq 0 ]; }
+          mapfile -d '' v646 < <(find "$PKG/04_TESTS/V646_ROOTCAUSE" -maxdepth 1 -type f -name '*.php' ! -name 'test_architecture_v646.php' -print0|sort -z); run_files "$OUT/v646.log" "${v646[@]}"; grep -Fxq 'COUNT=3 FAIL=0 ASSERTIONS=14' "$OUT/v646.log"
+          mapfile -d '' v645 < <(find "$PKG/04_TESTS/V645_ROOTCAUSE" -maxdepth 1 -type f -name '*.php' ! -name 'test_architecture_v645.php' -print0|sort -z); run_files "$OUT/v645.log" "${v645[@]}"; grep -Fxq 'COUNT=9 FAIL=0 ASSERTIONS=67' "$OUT/v645.log"
+          mapfile -d '' v643 < <(find "$PKG/04_TESTS/V643_REGRESSION" -maxdepth 1 -type f -name '*.php' -print0|sort -z); run_files "$OUT/v643.log" "${v643[@]}"; grep -Fxq 'COUNT=11 FAIL=0 ASSERTIONS=363' "$OUT/v643.log"
+          mapfile -d '' v644 < <(find "$PKG/04_TESTS/V644_ROOTCAUSE" -maxdepth 1 -type f -name '*.php' ! -name 'test_architecture_v644.php' -print0|sort -z); run_files "$OUT/v644.log" "${v644[@]}"; grep -Fxq 'COUNT=4 FAIL=0 ASSERTIONS=70' "$OUT/v644.log"
+          run_files "$OUT/v647_valid.log" "$V647/tests/test_dynamic_rule_resolver_v647.php" "$V647/tests/test_dynamic_rule_recovery_v647.php"; grep -Fxq 'COUNT=2 FAIL=0 ASSERTIONS=22' "$OUT/v647_valid.log"
+          mapfile -d '' hist < <(find "$PKG/04_TESTS/HISTORICAL_R5_54" -maxdepth 1 -type f -name '*.php' -print0|sort -z); run_files "$OUT/historical.log" "${hist[@]}"; grep -Fxq 'COUNT=54 FAIL=0 ASSERTIONS=3097' "$OUT/historical.log"
+          set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$SRC" PPAR_BASELINE_PLUGIN_DIR="$BASE" PPAR_TEST_MASTER_ROOT="$PKG" php "$PKG/04_TESTS/V644_POSTMORTEM/test_v644_release_gate_gaps.php" > "$OUT/postmortem.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ]; [ "$(grep -c '^FAIL ' "$OUT/postmortem.log")" -eq 2 ]; grep -Fq 'FAIL release workflow test must not replace production selection_request/process_tick' "$OUT/postmortem.log"; grep -Fq 'FAIL release workflow test must execute the real 311-concept manifest, not a 3-concept substitute' "$OUT/postmortem.log"
+          find "$SRC" -type f -name '*.php' -print0|sort -z|xargs -0 -n1 php -l > "$OUT/php_lint.log"
+          php -r 'foreach(array_slice($argv,1) as $f){json_decode(file_get_contents($f),true);if(json_last_error()!==JSON_ERROR_NONE)exit(1);echo "JSON_OK $f\n";}' "$SRC/assets/ebay-portal-catalog-v2.json" "$SRC/assets/portal-structure-v279.json" > "$OUT/json.log"
+          echo SOURCE_REGRESSION=PASS > "$OUT/RESULT.txt"
+          REG
+          chmod +x /tmp/run_source_regression.sh
+          /tmp/run_source_regression.sh "$SRC" "$E/STEP1_AUTHORITY_FULL_WORKFLOW" "$PKG" "$BASE" "$V647"
+          /tmp/run_source_regression.sh "$SRC" "$E/FINAL_SOURCE_FULL_WORKFLOW" "$PKG" "$BASE" "$V647"
+          printf 'PKG=%s\nSRC=%s\nBASE=%s\nV647=%s\nV647BASE=%s\n' "$PKG" "$SRC" "$BASE" "$V647" "$V647BASE" > /tmp/v648_paths.env
+
+      - name: Real pre-build gate, build exact ZIP, fresh-unpack regression, exact-ZIP real gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v648_paths.env
+          E="$GITHUB_WORKSPACE/V648_RELEASE_EVIDENCE"
+          INSTALL="$GITHUB_WORKSPACE/affiliate-zentrale_v6.48.0_CANONICAL_REFRESH_AUTHORITY_ROOTFIX_REALGATE.zip"
+          WP1=/tmp/wp-v648-source
+          WP2=/tmp/wp-v648-final
+          FRESH=/tmp/v648-fresh
+          rm -rf "$WP1" "$WP2" "$FRESH"
+
+          cp "$GITHUB_WORKSPACE/.github/v646/real/public_freshness_contract_v646.php" "$PKG/03_REAL_GATE/public_freshness_contract_v646.php"
+          cp "$V647/real/dynamic_rule_recovery_v647.php" "$PKG/03_REAL_GATE/dynamic_rule_recovery_v647.php"
+          cat > "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php" <<'PHP'
+          <?php
+          require __DIR__.'/lib.php'; rg_settings_business_only(); $p=rg_plugin();
+          function c($o,$n,...$a){$m=new ReflectionMethod($o,$n);$m->setAccessible(true);return $m->invokeArgs($o,$a);} function fr($uuid,$req,$ref,$legacy){$n=time();$r=rg_base_run($uuid,888,10);$r['build']='6.46.0-public-freshness-selection-contract-rootfix-realgate-20260820';$r['status']='failed';$r['phase']='failed';$r['finished_at']=$n;$r['error_code']='insufficient_safe_sources';$r['config_snapshot']['seller_routes']['business']=1;$r['phase_state']['refresh']=$ref;$r['phase_state']['selection']=['status'=>'complete','stats'=>['business'=>['materialized'=>0,'active'=>0]]];$r['coverage']=['required'=>311,'covered'=>0,'missing'=>$req];$r['gapfill']=['attempts'=>1,'missing'=>$req];$r['errors']=[['code'=>'insufficient_safe_sources','at'=>$n,'details'=>['phase'=>'coverage_verify','build'=>$r['build']]]];$r['recovery_history']=[];rg_reset_run($r);update_option(Pferdeportal_Affiliate_Router::OPTION_EBAY_REFRESH_JOB,$legacy,false);update_option(Pferdeportal_Affiliate_Router::OPTION_EBAY_SYNC_JOB,['legacy'=>1],false);update_option(Pferdeportal_Affiliate_Router::OPTION_EBAY_SELECTION_STATE,['legacy'=>1],false);return $r;}
+          $req=c($p,'ebay_business_required_product_concept_ids'); rg_assert(count($req)===311,'exact 311 manifest');
+          $u='save-contract';$r=rg_base_run($u,777,10);$r['status']='running';$r['phase']='refresh_remote';$r['phase_state']=[];rg_reset_run($r);$legacy=['status'=>'running','run_uuid'=>'wrong','sentinel'=>1];update_option(Pferdeportal_Affiliate_Router::OPTION_EBAY_REFRESH_JOB,$legacy,false);$done=['status'=>'completed','run_uuid'=>$u,'summary'=>['checked'=>3013]];c($p,'ebay_refresh_job_save',$done);$s=rg_run();rg_assert(($s['phase_state']['refresh']['status']??'')==='completed','production saver writes canonical refresh');rg_assert(get_option(Pferdeportal_Affiliate_Router::OPTION_EBAY_REFRESH_JOB,[])===$legacy,'production saver does not mirror legacy refresh');
+          $u='empty-legacy';$ref=['status'=>'completed','run_uuid'=>$u,'summary'=>['checked'=>3013]];fr($u,$req,$ref,[]);$p->maybe_migrate_ebay_dynamic_business_rule_context_v6470();$a=rg_run();rg_assert(($a['status']??'')==='running'&&($a['phase']??'')==='gapfill_discovery','empty legacy recovers');rg_assert(($a['run_uuid']??'')===$u,'same UUID');rg_assert(($a['phase_state']['refresh']??null)===$ref,'canonical refresh preserved');rg_assert(get_option(Pferdeportal_Affiliate_Router::OPTION_EBAY_REFRESH_JOB,['x'=>1])===[],'empty legacy untouched');
+          $u='stale-legacy';$ref=['status'=>'completed','run_uuid'=>$u];$st=['status'=>'running','run_uuid'=>'other'];fr($u,$req,$ref,$st);$p->maybe_migrate_ebay_dynamic_business_rule_context_v6470();$a=rg_run();rg_assert(($a['status']??'')==='running','stale legacy cannot veto');rg_assert(get_option(Pferdeportal_Affiliate_Router::OPTION_EBAY_REFRESH_JOB,[])===$st,'stale legacy untouched');
+          $u='bad-canonical';fr($u,$req,['status'=>'running','run_uuid'=>$u],['status'=>'completed','run_uuid'=>$u]);$p->maybe_migrate_ebay_dynamic_business_rule_context_v6470();rg_assert((rg_run()['status']??'')==='failed','legacy cannot rescue incomplete canonical');
+          $u='bad-uuid';fr($u,$req,['status'=>'completed','run_uuid'=>'other'],['status'=>'completed','run_uuid'=>$u]);$p->maybe_migrate_ebay_dynamic_business_rule_context_v6470();rg_assert((rg_run()['status']??'')==='failed','legacy cannot rescue canonical UUID mismatch'); echo "CANONICAL_REFRESH_AUTHORITY_V648_OK\n";
+          PHP
+          sed -i 's/^          //' "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php"
+          php -l "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php"
+          sed -i 's/6\.45\.0/6.48.0/g; s/6\.46\.0/6.48.0/g; s/6\.47\.0/6.48.0/g' "$PKG/03_REAL_GATE/verify_environment.php"
+
+          setup_wp(){ local w="$1"; rm -rf "$w"; mkdir -p "$w"; wp core download --version=7.0.1 --path="$w" --force --allow-root >/dev/null; wp config create --path="$w" --dbname=v648gate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root >/dev/null; wp core install --path="$w" --url=http://v648.test --title='V648 Gate' --admin_user=gateadmin --admin_password='GateOnly-20260821!' --admin_email=gate@example.invalid --skip-email --allow-root >/dev/null; }
+          real_gate(){ local w="$1" pfx="$2"; mkdir -p "$E/$pfx"; wp eval 'global $wpdb; echo "WP=".get_bloginfo("version")." PHP=".PHP_VERSION." DB=".$wpdb->get_var("SELECT VERSION()")."\n";' --path="$w" --allow-root > "$E/$pfx/environment.log"; grep -Fq 'WP=7.0.1 PHP=8.4.' "$E/$pfx/environment.log"; grep -Fq 'DB=11.4.' "$E/$pfx/environment.log"; rm -rf "$PKG/CODEX_EVIDENCE_REAL_GATE"; (cd "$PKG" && WP_ROOT="$w" WP="$(command -v wp)" 07_RUNNERS/run_real_gate_from_existing_wordpress.sh) > "$E/$pfx/A_H.log" 2>&1; cp -a "$PKG/CODEX_EVIDENCE_REAL_GATE" "$E/$pfx/A_H"; wp eval-file "$PKG/03_REAL_GATE/public_freshness_contract_v646.php" --path="$w" --allow-root > "$E/$pfx/v646.log"; grep -Fxq PUBLIC_FRESHNESS_V646_OK "$E/$pfx/v646.log"; wp eval-file "$PKG/03_REAL_GATE/dynamic_rule_recovery_v647.php" --path="$w" --allow-root > "$E/$pfx/v647.log"; grep -Fxq DYNAMIC_RULE_RECOVERY_V647_OK "$E/$pfx/v647.log"; wp eval-file "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php" --path="$w" --allow-root > "$E/$pfx/v648.log"; grep -Fxq CANONICAL_REFRESH_AUTHORITY_V648_OK "$E/$pfx/v648.log"; echo REAL_GATE=PASS > "$E/$pfx/RESULT.txt"; }
+
+          setup_wp "$WP1"; rm -rf "$WP1/wp-content/plugins/affiliate-portal-router"; cp -a "$SRC" "$WP1/wp-content/plugins/affiliate-portal-router"; wp plugin activate affiliate-portal-router --path="$WP1" --allow-root >/dev/null; real_gate "$WP1" PREBUILD_REAL
+          printf '%s\n' 'c4080e74a9214bd836fc14956143377d91a2dd2399a1583e961adf5a8b0029b6  includes/trait-ppar-ebay-run.php' 'd2a2832e8f8e2ab2bb20cac41e47c4be3fa842e12ac956ee5b1b422a421831a2  pferdeportal-affiliate-router.php' 'cee9d7e5354c63d403af2415c699e903d8cc4258236e5462e698fc4aa5f8a9c0  readme.txt' | (cd "$SRC" && sha256sum -c -)
+
+          (cd "$PKG/02_SOURCE_V645" && zip -qr "$INSTALL" affiliate-portal-router)
+          unzip -t "$INSTALL" > "$E/install_integrity_before.log"; sha256sum "$INSTALL" > "$E/install_sha256_before.txt"; mkdir -p "$FRESH"; unzip -q "$INSTALL" -d "$FRESH"; (cd "$SRC" && find . -type f -print0|sort -z|xargs -0 sha256sum) > "$E/source_tree.sha"; (cd "$FRESH/affiliate-portal-router" && find . -type f -print0|sort -z|xargs -0 sha256sum) > "$E/fresh_tree.sha"; diff -u "$E/source_tree.sha" "$E/fresh_tree.sha" > "$E/source_vs_fresh.diff"; test ! -s "$E/source_vs_fresh.diff"
+          /tmp/run_source_regression.sh "$FRESH/affiliate-portal-router" "$E/FINAL_ZIP_SOURCE_FULL_WORKFLOW" "$PKG" "$BASE" "$V647"
+
+          wp db reset --yes --path="$WP1" --allow-root >/dev/null; setup_wp "$WP2"; wp plugin install "$INSTALL" --activate --path="$WP2" --allow-root >/dev/null; wp plugin status affiliate-portal-router --path="$WP2" --allow-root > "$E/final_plugin_status.log"; grep -Fq 'Status: Active' "$E/final_plugin_status.log"; grep -Fq 'Version: 6.48.0' "$E/final_plugin_status.log"; real_gate "$WP2" FINAL_ZIP_REAL
+          wp db reset --yes --path="$WP2" --allow-root >/dev/null; wp core install --path="$WP2" --url=http://v648.test --title='V648 Counterproof' --admin_user=gateadmin --admin_password='GateOnly-20260821!' --admin_email=gate@example.invalid --skip-email --allow-root >/dev/null; wp plugin activate affiliate-portal-router --path="$WP2" --allow-root >/dev/null; wp eval-file "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php" --path="$WP2" --allow-root > "$E/postgreen_v648.log"; grep -Fxq CANONICAL_REFRESH_AUTHORITY_V648_OK "$E/postgreen_v648.log"
+          unzip -t "$INSTALL" > "$E/install_integrity_after.log"; sha256sum "$INSTALL" > "$E/install_sha256_after.txt"; diff -u "$E/install_sha256_before.txt" "$E/install_sha256_after.txt" > "$E/install_hash_stability.diff"; test ! -s "$E/install_hash_stability.diff"
+          cat > "$E/FINAL_MATRIX.txt" <<'EOF'
+          V6.47 exact binding reconstruction: PASS
+          V6.48 authority step full historical workflow: PASS
+          V6.48 final source full historical workflow: PASS
+          Pre-build WordPress 7.0.1 / PHP 8.4 / MariaDB 11.4 A-H: PASS
+          Actual schema-1.0 production refresh saver: PASS
+          Empty legacy refresh Same-UUID recovery: PASS
+          Stale contradictory legacy refresh ignored: PASS
+          Incomplete canonical refresh fail-closed: PASS
+          Wrong canonical UUID fail-closed: PASS
+          Build after pre-build real gate only: PASS
+          Exact ZIP fresh-unpack parity: PASS
+          Exact ZIP full historical workflow: PASS
+          Exact ZIP fresh WordPress/MariaDB real gate: PASS
+          Post-green independent DB counterproof: PASS
+          Installer hash stability: PASS
+          Production scope V6.47 -> V6.48 exactly 3 files: PASS
+          EOF
+          sed -i 's/^          //' "$E/FINAL_MATRIX.txt"
+          echo FINAL_DECISION=PASS > "$E/FINAL_DECISION.txt"
+
+      - name: Upload verified V6.48 installer and evidence
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V648_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.48.0_CANONICAL_REFRESH_AUTHORITY_ROOTFIX_REALGATE.zip
+            V648_RELEASE_EVIDENCE/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload blocked V6.48 evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V648_BLOCKED_EVIDENCE
+          path: V648_RELEASE_EVIDENCE/
+          if-no-files-found: warn
+          retention-days: 7
