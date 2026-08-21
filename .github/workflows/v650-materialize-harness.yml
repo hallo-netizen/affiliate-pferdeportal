@@ -1,0 +1,47 @@
+name: V6.50 materialize exact V6.49 harness
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    if: github.head_ref == 'v650-coverage-gap-contract-rootcause-20260821'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout V6.50 branch
+        uses: actions/checkout@v4
+
+      - name: Materialize exact audited V6.49 gate bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat \
+            .github/v649/V649_GATE_BUNDLE.zip.part.0{0,1,2,3,4,5,6} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.0{0,1,2,3,4,5} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.06{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.07{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08a \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08b{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09a{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09b{0,1} > /tmp/v649.b64
+          test "$(wc -c < /tmp/v649.b64 | tr -d ' ')" = '47872'
+          base64 -d /tmp/v649.b64 > /tmp/v649.zip
+          echo 'c17e47d04f71b3c4ab2a72d11e4ff271f77074329b8ecca384b5daf12907b357  /tmp/v649.zip' | sha256sum -c -
+          rm -rf /tmp/v649-harness && mkdir -p /tmp/v649-harness
+          unzip -q /tmp/v649.zip -d /tmp/v649-harness
+          find /tmp/v649-harness/.github -type f -print | sort > /tmp/v649-harness/HARNESS_FILELIST.txt
+          sha256sum /tmp/v649-harness/HARNESS_FILELIST.txt > /tmp/v649-harness/HARNESS_FILELIST.sha256
+
+      - name: Upload exact harness
+        uses: actions/upload-artifact@v4
+        with:
+          name: V649_EXACT_GATE_HARNESS_FOR_V650
+          path: |
+            /tmp/v649-harness/.github/
+            /tmp/v649-harness/HARNESS_FILELIST.txt
+            /tmp/v649-harness/HARNESS_FILELIST.sha256
+          if-no-files-found: error
+          retention-days: 14
