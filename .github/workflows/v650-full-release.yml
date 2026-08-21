@@ -93,21 +93,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf '%s\n' \
-            '463f93cf90ab5f2b18e9481df4014cdcc436ec34fb7bc9a0af2ebe1d71a600ed  .github/v650/V650_GATE_BUNDLE.zip.b64.00' \
-            '6706427395da4149d4132cb53453459410476068e642d2da69ab557efdde2766  .github/v650/V650_GATE_BUNDLE.zip.b64.01' \
-            'd7c92e0771ed7c1bedc7b850155d300d6851a6fc393545de3a847b4864e9d409  .github/v650/V650_GATE_BUNDLE.zip.b64.02' \
-            '05c786be7109cab9c669d25bf888dc0bd625d05a5e2dca21b3db50bffef44ee3  .github/v650/V650_GATE_BUNDLE.zip.b64.03' \
-            '828416b11941decb937c3cc07d77ca421c706274e3ee7e1d8abd74069d9b47a2  .github/v650/V650_GATE_BUNDLE.zip.b64.04' \
-            '7de9d7e48485e0d40381d3642e5de251576d952775735c5bac0e8c11e013c402  .github/v650/V650_GATE_BUNDLE.zip.b64.05' \
-            '2343c837bde55eda60939b6765322c9a69863cfc460521e6c989c358f8a74791  .github/v650/V650_GATE_BUNDLE.zip.b64.06' \
-            'd104c9d2b73a1f9fc02495dc8b7b56ff9157d1f48fe69cd69e2b7ede4211c03d  .github/v650/V650_GATE_BUNDLE.zip.b64.07' \
-            'ed09b50f28dd022221da4297103bb34f33cef7d3d4790b102d150f5ad30b8ca3  .github/v650/V650_GATE_BUNDLE.zip.b64.08' \
-            'd87c9dbba72630f57199408c910239754eeb0fc754a82f8b405f58c845a172b9  .github/v650/V650_GATE_BUNDLE.zip.b64.09' \
-            '936bc5324c5ba6b2bfae8517a2751e0109ec79790c8993d29096e3aaf90cfd2c  .github/v650/V650_GATE_BUNDLE.zip.b64.10' | sha256sum -c -
-          cat .github/v650/V650_GATE_BUNDLE.zip.b64.{00,01,02,03,04,05,06,07,08,09,10} > /tmp/v650-gate.b64
-          test "$(wc -c < /tmp/v650-gate.b64 | tr -d ' ')" = '72792'
-          echo '0a66b9dc33acfa3e9e4c7455cc1e73d0fa6b02cf41a54e349b9144d2bde80159  /tmp/v650-gate.b64' | sha256sum -c -
+          # The encoded split files are transport only. Their whitespace/text
+          # representation is not release authority. Reconstruct the binary gate
+          # artifact, then verify the exact authoritative ZIP digest fail-closed.
+          cat .github/v650/V650_GATE_BUNDLE.zip.b64.{00,01,02,03,04,05,06,07,08,09,10} > /tmp/v650-gate.transport.b64
+          tr -d '\r\n\t ' < /tmp/v650-gate.transport.b64 > /tmp/v650-gate.b64
           base64 -d /tmp/v650-gate.b64 > /tmp/v650-gate.zip
           echo '733826b1e45b689dc8fb0bf9880724c18ab849c5b863aa8f80443a149a5c4311  /tmp/v650-gate.zip' | sha256sum -c -
           unzip -t /tmp/v650-gate.zip >/dev/null
