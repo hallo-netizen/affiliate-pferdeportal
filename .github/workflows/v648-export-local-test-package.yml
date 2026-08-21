@@ -23,6 +23,7 @@ jobs:
           unzip -t CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip >/dev/null
           test -f .github/v646/v646_relative.patch
           test -f .github/v646/SOURCE_SHA256.txt
+          test -d .github/v646/tests
           test -f .github/v646/real/public_freshness_contract_v646.php
           sha256sum CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip .github/v646/v646_relative.patch .github/v646/SOURCE_SHA256.txt .github/v646/real/public_freshness_contract_v646.php > V648_LOCAL_TEST_PACKAGE_SHA256.txt
       - name: Upload exact local regression prerequisites
@@ -31,9 +32,8 @@ jobs:
           name: V648_LOCAL_TEST_PACKAGE
           path: |
             CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
-            .github/v646/v646_relative.patch
-            .github/v646/SOURCE_SHA256.txt
-            .github/v646/real/public_freshness_contract_v646.php
+            .github/v646/
+            .github/overlays/v645/soft_failure_recovery.php
             V648_LOCAL_TEST_PACKAGE_SHA256.txt
           if-no-files-found: error
           retention-days: 90
