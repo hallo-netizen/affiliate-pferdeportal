@@ -19,17 +19,21 @@ jobs:
         run: |
           set -euo pipefail
           test -f CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
-          test -f .github/scripts/run-v646-full-release.sh
-          test -d .github/v646
-          sha256sum CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip | tee V648_LOCAL_TEST_PACKAGE_SHA256.txt
+          echo '6695085486f38680a203c31e0b5408aee378c907a31ce65204f88ab38b9fbbf4  CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip' | sha256sum -c -
           unzip -t CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip >/dev/null
-      - name: Upload complete local regression harness
+          test -f .github/v646/v646_relative.patch
+          test -f .github/v646/SOURCE_SHA256.txt
+          test -f .github/v646/real/public_freshness_contract_v646.php
+          sha256sum CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip .github/v646/v646_relative.patch .github/v646/SOURCE_SHA256.txt .github/v646/real/public_freshness_contract_v646.php > V648_LOCAL_TEST_PACKAGE_SHA256.txt
+      - name: Upload exact local regression prerequisites
         uses: actions/upload-artifact@v4
         with:
           name: V648_LOCAL_TEST_PACKAGE
           path: |
             CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+            .github/v646/v646_relative.patch
+            .github/v646/SOURCE_SHA256.txt
+            .github/v646/real/public_freshness_contract_v646.php
             V648_LOCAL_TEST_PACKAGE_SHA256.txt
-            .github/scripts/run-v646-full-release.sh
-            .github/v646
           if-no-files-found: error
+          retention-days: 90
