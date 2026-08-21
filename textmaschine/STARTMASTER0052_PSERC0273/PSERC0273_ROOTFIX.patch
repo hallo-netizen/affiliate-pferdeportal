@@ -1,0 +1,17 @@
+--- includes/class-pserc-workflow-supervisor.php (0.27.2)
++++ includes/class-pserc-workflow-supervisor.php (0.27.3)
+@@ terminal published fingerprint reconstruction
+-        $baseMeta=[];foreach($m as $k=>$v)$baseMeta[$k]=(string)PPM679_WP::scalar_meta($m,(string)$k);unset($baseMeta['_ppm679_planned_write_fingerprint']);
++        // Reconstruct the exact meta payload that PPM 6.7.9 hashed before the original draft write.
++        // Later WordPress/plugin meta was never part of the original planned-write fingerprint.
++        $plannedMetaFields=['_ppm679_normal_draft','_ppm679_canonical_article_id','_ppm679_request_id','_ppm679_run_id','_ppm679_server_instance_id','_ppm679_user_id','_ppm679_build_manifest_sha256','_ppm679_plan_hash','_ppm679_content_hash','_ppm679_article_type','_ppm679_publish_blocked','_ppm679_category_slug','_ppm679_quality_binding_sha256','_ppm679_source_snapshot_id'];
++        $baseMeta=[];foreach($plannedMetaFields as $key)$baseMeta[$key]=$scalar($key);
+
+Plugin version: 0.27.2 -> 0.27.3
+Build: 0.27.3-terminal-published-original-write-fingerprint-rootfix-ppm679
+Contract signed-terminal-published-projection-v1.json: 1.0.0 -> 1.0.1
+Rules added:
+- planned_write_fingerprint_reconstructed_from_original_ppm_write_meta_only = true
+- unrelated_post_publish_wordpress_meta_must_not_change_original_write_fingerprint = true
+
+No content, HTML, design, prompt, title, article-type, category, quality or publish decision changed.
