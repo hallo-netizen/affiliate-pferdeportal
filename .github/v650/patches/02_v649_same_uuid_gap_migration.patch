@@ -61,7 +61,8 @@ diff -ruN /mnt/data/work_v650/steps/step1/affiliate-portal-router/includes/trait
      /** Backward-compatible entry point retained for older test harnesses. */
      public function maybe_recover_ebay_false_no_progress_v6420() {
          return $this->maybe_migrate_ebay_progress_contract_v6421();
- diff -ruN /mnt/data/work_v650/steps/step1/affiliate-portal-router/pferdeportal-affiliate-router.php /mnt/data/work_v650/steps/step2/affiliate-portal-router/pferdeportal-affiliate-router.php
+     }
+diff -ruN /mnt/data/work_v650/steps/step1/affiliate-portal-router/pferdeportal-affiliate-router.php /mnt/data/work_v650/steps/step2/affiliate-portal-router/pferdeportal-affiliate-router.php
 --- a/pferdeportal-affiliate-router.php	2026-08-21 12:02:57.000000000 +0000
 +++ b/pferdeportal-affiliate-router.php	2026-08-21 14:06:35.622383059 +0000
 @@ -199,6 +199,7 @@
