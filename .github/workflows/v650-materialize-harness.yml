@@ -43,5 +43,6 @@ jobs:
             /tmp/v649-harness/.github/
             /tmp/v649-harness/HARNESS_FILELIST.txt
             /tmp/v649-harness/HARNESS_FILELIST.sha256
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
