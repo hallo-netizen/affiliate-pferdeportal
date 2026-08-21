@@ -1,0 +1,43 @@
+V100 HARD LOCAL QA — 2026-08-21
+
+LIVE INPUT
+- V99 live screenshot: FAIL. Native blue term label + native left-aligned excerpt remained visible.
+- Accepted reference: Journal-root card from user screenshot 2026-08-21 10:26.
+
+ROOT-CAUSE TEST
+- V100 no longer partially styles Astra archive internals.
+- Controlled visible card is emitted at astra_entry_top.
+- Hostile/native direct children after the controlled card are deliberately present in the browser harness.
+- Journal scope native child display: none (expected none) PASS
+- Foreign-category native child display: block (expected block) PASS
+
+ROOT VS V100 TARGET
+- Geometry equal: True PASS
+- Pixel diff: 0 pixels; max channel diff 0 PASS
+- image -> label: 20 px
+- label -> title: 7 px
+- title -> excerpt: 10 px
+- button -> card bottom incl. 1px border: 21 px
+- target label color: rgb(200, 146, 20)
+- target label alignment: center / uppercase
+- excerpt alignment: center
+
+RESPONSIVE
+- 1200px: 3 columns, scroll=1200, viewport=1200, hostile-native-hidden=True PASS
+- 900px: 2 columns, scroll=900, viewport=900, hostile-native-hidden=True PASS
+- 390px: 1 columns, scroll=390, viewport=390, hostile-native-hidden=True PASS
+
+PROTECTED REGRESSION
+- Journal-root function byteidentical V99 -> V100: True
+- Table CSS byteidentical V99 -> V100: True
+
+PACKAGE
+- Horse source/fresh: 492/492 byteidentical=True
+- Universal source/fresh: 15/15 byteidentical=True
+- Horse master manifest: 743/743 PASS
+- Universal master manifest: 250/250 PASS
+- Horse PHP 4/4 PASS, JSON 15/15 PASS
+- Universal PHP 11/11 PASS
+
+LIVE ACCEPTANCE
+- PENDING. No live PASS claim before user screenshot after V100 install.
