@@ -1,0 +1,131 @@
+name: V6.50 full coverage-gap root-cause release verification
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  v650-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v650-coverage-gap-contract-rootcause-20260821'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v650gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - name: Checkout V6.50 branch
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+
+      - name: Materialize exact audited predecessor harnesses
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' \
+            '2686b0712fe7d100d52e183bae31a1da682e356f8bab7cfed93dc47e6a977e7d  .github/v647/V647_GATE_BUNDLE.zip.b64.00' \
+            '6e081fded84b0b7afa71f1cf72140d73d24608af3391703a490906ce59495c71  .github/v647/V647_GATE_BUNDLE.zip.b64.01' \
+            '882920a1b75680de11db95f7b78203e26ece3c57d17eb700a0fc9330aed64ba7  .github/v647/V647_GATE_BUNDLE.zip.b64.02' \
+            'da4e70b804c7cb64e815234088f71f4f947e69ee144134575cb62bb085920bd1  .github/v647/V647_GATE_BUNDLE.zip.b64.03' \
+            '59d8d205624982f3cce9d2edbc0fba0e60741a2a69fac99f2baca7a507eb9d24  .github/v647/V647_GATE_BUNDLE.zip.b64.04' \
+            '1d4577320aee0d93f6abf67081d365dbedadcd9c0623c8ebb0baef2aff5e2a6c  .github/v647/V647_GATE_BUNDLE.zip.b64.05' | sha256sum -c -
+          cat .github/v647/V647_GATE_BUNDLE.zip.b64.0{0,1,2,3,4,5} >/tmp/v647.b64
+          base64 -d /tmp/v647.b64 >/tmp/v647.zip
+          echo '4c8d7efbf244132a2fbf83e078f9975baa32347fee248f8732590aa0c6143133  /tmp/v647.zip' | sha256sum -c -
+          rm -rf /tmp/v647-harness && mkdir -p /tmp/v647-harness
+          unzip -q /tmp/v647.zip -d /tmp/v647-harness
+
+          printf '%s\n' \
+            '78b43f70af7ebfffa847dbbe974f02d373455ae3d98b1502f30bf88e3cfd4676  .github/v648/V648_GATE_BUNDLE.zip.b64.00' \
+            'efdede60317af3aa4347e77aee1db9a0c57ea76765590f49d69fe2a43e4fee81  .github/v648/V648_GATE_BUNDLE.zip.b64.01' \
+            'b4534a015de06be91dead4a7ef886a92aa6bdf62d7f321e670a69a32503e6a83  .github/v648/V648_GATE_BUNDLE.zip.b64.02' \
+            '1532bc903cb09a24b55ab7c6f1066bbe792166721fbe990ea5e1c879e490bb45  .github/v648/V648_GATE_BUNDLE.zip.b64.03' \
+            '13f9f6b6ca41d297ec8c82c7bf6f7ef72fa76b683033a2248131c534bd914d15  .github/v648/V648_GATE_BUNDLE.zip.b64.04' \
+            'a6d02785b2a4413a30247844026c2239c140e90358740da23a5520654f5c1289  .github/v648/V648_GATE_BUNDLE.zip.b64.05' \
+            '726f3fb3d3a73f7d443774d2ee16f8a0fee17a03ff7e60056595d4060f238539  .github/v648/V648_GATE_BUNDLE.zip.b64.06' | sha256sum -c -
+          cat .github/v648/V648_GATE_BUNDLE.zip.b64.0{0,1,2,3,4,5,6} >/tmp/v648.b64
+          base64 -d /tmp/v648.b64 >/tmp/v648.zip
+          echo '51f32a5016ee2cd0ffb5144cf41f724ec3d552d1ed2e2c4fc0620b1682916481  /tmp/v648.zip' | sha256sum -c -
+          rm -rf /tmp/v648-harness && mkdir -p /tmp/v648-harness
+          unzip -q /tmp/v648.zip -d /tmp/v648-harness
+
+          cat \
+            .github/v649/V649_GATE_BUNDLE.zip.part.0{0,1,2,3,4,5,6} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.0{0,1,2,3,4,5} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.06{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.07{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08a \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08b{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09a{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09b{0,1} > /tmp/v649.b64
+          test "$(wc -c < /tmp/v649.b64 | tr -d ' ')" = '47872'
+          base64 -d /tmp/v649.b64 >/tmp/v649.zip
+          echo 'c17e47d04f71b3c4ab2a72d11e4ff271f77074329b8ecca384b5daf12907b357  /tmp/v649.zip' | sha256sum -c -
+          rm -rf /tmp/v649-harness && mkdir -p /tmp/v649-harness
+          unzip -q /tmp/v649.zip -d /tmp/v649-harness
+
+          test -f CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+          echo '6695085486f38680a203c31e0b5408aee378c907a31ce65204f88ab38b9fbbf4  CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip' | sha256sum -c -
+
+      - name: Materialize exact V6.50 gate bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '0a66b9dc33acfa3e9e4c7455cc1e73d0fa6b02cf41a54e349b9144d2bde80159  .github/v650/V650_GATE_BUNDLE.zip.b64' | sha256sum -c -
+          base64 -d .github/v650/V650_GATE_BUNDLE.zip.b64 > /tmp/v650-gate.zip
+          echo '733826b1e45b689dc8fb0bf9880724c18ab849c5b863aa8f80443a149a5c4311  /tmp/v650-gate.zip' | sha256sum -c -
+          unzip -t /tmp/v650-gate.zip >/dev/null
+          unzip -qo /tmp/v650-gate.zip -d "$GITHUB_WORKSPACE"
+
+      - name: Execute every-step complete source and real workflow
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          chmod +x .github/v650/scripts/run-v650-full-release.sh
+          .github/v650/scripts/run-v650-full-release.sh
+
+      - name: Upload final verified V6.50 release
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V650_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.50.0_COVERAGE_GAP_CONTRACT_ROOTFIX_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_50_0_COVERAGE_GAP_CONTRACT_ROOTFIX_REALGATE_20260821.zip
+            V650_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload blocked V6.50 evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V650_BLOCKED_EVIDENCE
+          path: V650_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
