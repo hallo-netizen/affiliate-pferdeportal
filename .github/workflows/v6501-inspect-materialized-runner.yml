@@ -21,9 +21,17 @@ jobs:
           base64 -d /tmp/v650-gate.b64 > /tmp/v650-gate.zip
           echo '733826b1e45b689dc8fb0bf9880724c18ab849c5b863aa8f80443a149a5c4311  /tmp/v650-gate.zip' | sha256sum -c -
           unzip -qo /tmp/v650-gate.zip -d "$GITHUB_WORKSPACE"
-      - name: Print exact existing hard-gate runner
-        shell: bash
-        run: |
-          echo '===RUNNER_BEGIN==='
-          cat .github/v650/scripts/run-v650-full-release.sh
-          echo '===RUNNER_END==='
+      - name: Export exact existing runner and V6.50 tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: V650_MATERIALIZED_GATE_SOURCES
+          path: |
+            .github/v650/scripts/run-v650-full-release.sh
+            .github/v650/tests/test_coverage_gap_contract_v650.php
+            .github/v650/tests/test_architecture_v650.php
+            .github/v650/real/coverage_gap_contract_v650.php
+            .github/v650/fixtures/live_v648_311_coverage_fixture.json
+            .github/v650/manifests/step3_TREE_SHA256.txt
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
