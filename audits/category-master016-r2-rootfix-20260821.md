@@ -12,9 +12,10 @@ Status: `LOCAL FULL ARTIFACT HARD PASS / V1.6.2 PAID LEAF RUN NICHT BEHAUPTET`
 - Workflow: exakt 14 Hauptstufen; kontrollierter Blatt-Fallback bleibt Unterstufe von Stufe 10.
 - aktive Regeln: 126/126 `ACTIVE`
 - Master ZIP: `ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_R2_WORKFLOW_HARDLOCK.zip`
-- Master SHA-256: `954f83208e2e80d5b68470de05bb46211f19fb55ad54234cea54e84eb142c12e`
+- Master SHA-256: `dfeb2853a11dc2ad96a13478d7ac90a6899ef12c319c142207f47908a6861c35`
 - Installer SHA-256: `eac5ad15aa9f7688b32c99518faa0387f2459300452d4a827d9e98a7c2723992`
 - Source ZIP SHA-256: `fd9399332b2a4f44ed70a323374586e4a0abef5c2cca3863718f416d67d6fb71`
+- komprimiertes reales Folge-Research-Paket SHA-256: `b9f4d1b50f7093434c914ce6175747228925e64e3054b935cd2223ba1f2e5cd7`
 
 ## Reale Root Causes
 Der reale Gaumen-Atelier-Detailresearch erzeugte ein 69.553.705-Byte-Research-Paket. Im bereits bezahlten Clusterresearch hatten 93 von 107 aktiven Content-Leaves weniger als 3 node-gebundene Longtail-Kandidaten. Ein kombinierter `keyword_ideas/live`-Cluster-Call garantiert also trotz Leaf-Seeds keine node-spezifische Negativ-/Positivabdeckung. Zusätzlich konnte V1.6.1 das eigene 69,55-MB-Folgepaket wegen des Uploadlimits nicht wieder einlesen.
