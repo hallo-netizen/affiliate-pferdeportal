@@ -1,0 +1,3 @@
+# PSERC 0.28.0 QA summary
+
+Source full workflow: terminal/published 58/58; normal workflow 41/41; package authenticity 9/9; request identity 22/22; PPM 137/137; PPLPG 19/19; PSTE real 562/562; PSTE Exact Five 562/562; Safe Migration 584/584; Paused-539 237/237; one-click handler positive; rendered-snapshot drift negative; READY-batch drift negative; +1 additive article-type isolation; Rule-1 delta scope. Fresh-unpacked installer repeats the same full matrix. Source↔installer fresh: 110/110 byteidentical. LIVE-E2E remains PENDING until real WordPress readback. No publish is allowed by this release.
