@@ -14,16 +14,18 @@ jobs:
     steps:
       - name: Checkout PR merge
         uses: actions/checkout@v4
-      - name: Verify immutable package
+      - name: Verify exact branch baseline package
         shell: bash
         run: |
           set -euo pipefail
           test -f CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
-          echo '07d7fe3a35723d060cdc064463354cbc329456d7a7efb7ab86c784c9bb96006b  CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip' | sha256sum -c -
+          sha256sum CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip | tee V648_LOCAL_TEST_PACKAGE_SHA256.txt
           unzip -t CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip >/dev/null
-      - name: Upload immutable local test package
+      - name: Upload exact branch baseline package
         uses: actions/upload-artifact@v4
         with:
           name: V648_LOCAL_TEST_PACKAGE
-          path: CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+          path: |
+            CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+            V648_LOCAL_TEST_PACKAGE_SHA256.txt
           if-no-files-found: error
