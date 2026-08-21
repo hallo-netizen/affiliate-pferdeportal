@@ -1,0 +1,15 @@
+{
+  "version": "0.28.2",
+  "branch": "rootfix/pserc0282-core-release-snapshot-20260821",
+  "files": {
+    "includes/class-pserc-production-reader.php": "9e92f64e9756cac607896bb3bc79be53227f49ad26ba288db5b51cabdb111cf9",
+    "includes/class-pserc-plan-dependency-fingerprint.php": "a02bb0166c899bb41d918c60db8ad324024b6174bd14800df6b17b103962e450",
+    "portal-seo-editorial-plan-compiler.php": "657d5f0d02360fa4ee801934a6f9805d73d61629273f00be37ee66c4f1e0cba7",
+    "contracts/compiler-package-binding-v1.json": "313ad2f3fa03c715b211c457e8081e299879e320f38ec6aa9cf1c949bf998215",
+    "README.md": "23fc020401557a9a8cedbc28de29124d4d71fdfcc102d47b2c1163c4f3d0afc7",
+    "CHANGELOG_0.28.1.md": "5fe9a042cc0eb99daab538e717e50d77589ad01327ad59ca79bae8ab5b25504b",
+    "CHANGELOG_0.28.2.md": "aa54d8a870a226eb3e5eec86b53c0700822dd3a6fc4aaf43fc37aa2b2612fa80"
+  },
+  "source_manifest_sha256": "d74d31ab75ffd2c3940663ea1f591f66e46f76a697d07f55ea44b420276ece6b",
+  "installer_sha256": "8539d684cbbe01f0cc555ec598e055288f5696ffe0b2bdde6d16740b68c9cfd7"
+}
