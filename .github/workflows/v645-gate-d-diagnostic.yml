@@ -1,0 +1,63 @@
+name: V6.45 Gate D root-cause diagnostic
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/v645-gate-d-diagnostic.yml'
+      - '.github/diagnostics/gate-d-soft-recovery-diag.php'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v645gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s --health-timeout=5s --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+      - name: Establish exact source gates and fresh real environment
+        id: main_gate
+        continue-on-error: true
+        shell: bash
+        run: |
+          chmod +x .github/scripts/run-v645-realgate-ci.sh
+          .github/scripts/run-v645-realgate-ci.sh
+      - name: Prove Gate D cause from real persisted state
+        if: always()
+        shell: bash
+        run: |
+          test -d /tmp/wordpress-v645
+          mkdir -p V645_EVIDENCE
+          wp eval-file .github/diagnostics/gate-d-soft-recovery-diag.php --path=/tmp/wordpress-v645 --allow-root > V645_EVIDENCE/gate_d_rootcause_diagnostic.log 2>&1
+          cat V645_EVIDENCE/gate_d_rootcause_diagnostic.log
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V645_GATE_D_ROOTCAUSE_DIAGNOSTIC
+          path: V645_EVIDENCE/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Keep release fail-closed
+        if: always()
+        shell: bash
+        run: exit 1
