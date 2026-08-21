@@ -1,0 +1,27 @@
+# 2026-08-21 authoritative design baseline
+# Master archives
+b47bdc8bf6b060ef009da72529a00d1e4083a718deb43183fcd7a5d4574a8d78  MASTER_PFERDE_ATELIER_V1_50_458_CONTRACT_V93_20260818.zip
+50a8cc6e22b4fd30167d52efe7aaefe76eca96635517395c40a6713642fcfa0d  MASTER_ALLGEMEINGUELTIG_DESIGN_V2_2_29_CONTRACT_V93_20260818.zip
+# Search installers
+5879bb257026ec72fa83fc817994a4764009a7c1fde75a13fcec129eae45d0c3  PFERDE_ATELIER_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip
+2764696cc9de7090f482546f209246beff71d6e9ec477082dbe40c06a0167914  UNIVERSAL_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip
+# Current V94 candidate installers
+132cc5207f57727def1e6bb8f0197b59d54e726bc626f2716b4da6f3620ae4ec  PFERDE_ATELIER_DESIGN_V1.50.459_CONTRACT_V94_TABELLEN_JOURNAL_KARTEN_INSTALLIEREN.zip
+aff750403724734d356db47811fc3897a45d555942b6478f0a83fdfba7e10bb4  UNIVERSAL_PORTAL_DESIGN_SUITE_V2.2.30_CONTRACT_V94_TABELLEN_JOURNAL_KARTEN_INSTALLIEREN.zip
+# Authoritative V93 source files from embedded installers
+0c2a0752d24c798efd77fe4f0da0bd7b7d49259253631af81434addf0776ba1e  pferde_v93/pferde-template-kit.php
+7cd432ae644b6c47baf0a0bb5a71437f0b4eef554151a791b36a72adc186854e  pferde_v93/assets/single-post-locked-v15083.css
+5701c6bbe26df0e8c09bc8e5b862cda0afe14e072afbef46d8d3b79089ea714d  universal_v93/universal-portal-design-suite.php
+5ba8b0aa8e794cc1459aab5a3435b9ba0c10be9d1fba0d9243b1eeab931bc6ed  universal_v93/includes/class-upds-renderer.php
+ae9dac370df7a662f2114eeb2c95402d2c92e89f7e1a4b58ec965ca64295dc06  universal_v93/assets/upds.css
+# V94 changed source files
+34f208b699b1478472569e4ea3fdf98b67430f0b20de0976160a4e4a1ef70920  pferde_v94/pferde-template-kit.php
+46bb121bb1afec79ef2251dba680334bcfb0476d33e2ecf4425d4116794871e9  pferde_v94/assets/single-post-locked-v15083.css
+8666e3e22d076df189e3da31652266211aabdd06b100f9e64cf598d28ed90ae2  universal_v94/universal-portal-design-suite.php
+6516e93dc53ddb879349b21c33dd68a306173869f8fb079b31eb95ff9a5fc747  universal_v94/includes/class-upds-renderer.php
+060fb98a8f8096678fb9fae982877da6e6224299ac0388fdf6200321d5dc8ac1  universal_v94/assets/upds.css
+# Structural counts
+# Pferde V93 authoritative installer tree: 492 files
+# Pferde V94 candidate tree: 492 files; 488 unchanged; only main PHP + table CSS changed plus contract V89->V94 filename/content replacement
+# Universal V93 authoritative installer tree: 15 files
+# Universal V94 candidate tree: 15 files; 10 unchanged; changes restricted to main PHP, renderer, CSS, readme and contract V89->V94
