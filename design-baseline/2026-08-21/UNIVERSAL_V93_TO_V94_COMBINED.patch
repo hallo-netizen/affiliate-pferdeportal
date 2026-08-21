@@ -1,0 +1,106 @@
+--- /mnt/data/audit_current/universal_inner/universal-portal-design-suite/universal-portal-design-suite.php	2026-08-12 17:05:40.000000000 +0000
++++ /mnt/data/audit_current/v94_universal/universal-portal-design-suite/universal-portal-design-suite.php	2026-08-21 07:10:55.000000000 +0000
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Universal Portal Design Suite
+  * Description: Vollständiges, themen- und themeunabhängiges Portaldesign für WordPress mit Startseite, Hierarchieebenen, Magazin, HivePress-Anzeigenmarkt, Affiliatezonen, Breadcrumbs und Kategoriearchiven.
+- * Version: 2.2.29
++ * Version: 2.2.30
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+  * Author: OpenAI
+@@ -11,7 +11,7 @@
+  */
+ namespace UPDS;
+ if (!defined('ABSPATH')) { exit; }
+-define('UPDS_VERSION', '2.2.29');
++define('UPDS_VERSION', '2.2.30');
+ define('UPDS_FILE', __FILE__);
+ define('UPDS_DIR', plugin_dir_path(__FILE__));
+ define('UPDS_URL', plugin_dir_url(__FILE__));
+--- /mnt/data/audit_current/universal_inner/universal-portal-design-suite/includes/class-upds-renderer.php	2026-08-12 16:41:53.000000000 +0000
++++ /mnt/data/audit_current/v94_universal/universal-portal-design-suite/includes/class-upds-renderer.php	2026-08-21 07:21:50.000000000 +0000
+@@ -15,9 +15,9 @@
+         if($type==='hub1') $out.=self::hub1_bottom_editorial($id,$title);
+         return self::wrap($type,$out);
+     }
+-    public static function journal_shortcode(){ $image=self::page_image(get_queried_object_id()); $cats=self::term_cards(0,9); $posts=self::post_cards([],6); $banner=Integrations::affiliate('journal_banner',['type'=>'journal']); $products=[]; for($i=1;$i<=3;$i++){ $h=Integrations::affiliate('journal_product_'.$i,['type'=>'journal']); if($h!=='') $products[]='<div class="upds-product-slot">'.$h.'</div>'; } $out=$image.self::intro(__('Magazin & Ratgeber','universal-portal-design-suite'),__('Aktuelle Beiträge, verständliche Einordnungen und praktische Orientierung.','universal-portal-design-suite'),'journal'); if($cats) $out.=self::section(__('Themen im Magazin','universal-portal-design-suite'),$cats,'upds-grid-3'); if($banner!=='') $out.=self::affiliate_section(__('Ausgewählter Partner','universal-portal-design-suite'),__('Partner im Magazin','universal-portal-design-suite'),$banner); if($posts) $out.=self::section(__('Neue und beliebte Beiträge','universal-portal-design-suite'),$posts,'upds-grid-3'); if($products) $out.=self::section(__('Produktvorschläge','universal-portal-design-suite'),$products,'upds-grid-3'); $out.=self::direct_ad(); $out.=self::journal_root_bottom_editorial(); return self::wrap('journal',$out); }
++    public static function journal_shortcode(){ $image=self::page_image(get_queried_object_id()); $cats=self::term_cards(0,9); $posts=self::post_cards([],6); $banner=Integrations::affiliate('journal_banner',['type'=>'journal']); $products=[]; for($i=1;$i<=3;$i++){ $h=Integrations::affiliate('journal_product_'.$i,['type'=>'journal']); if($h!=='') $products[]='<div class="upds-product-slot">'.$h.'</div>'; } $out=$image.self::intro(__('Magazin & Ratgeber','universal-portal-design-suite'),__('Aktuelle Beiträge, verständliche Einordnungen und praktische Orientierung.','universal-portal-design-suite'),'journal'); if($cats) $out.=self::section(__('Themen im Magazin','universal-portal-design-suite'),$cats,'upds-grid-3'); if($banner!=='') $out.=self::affiliate_section(__('Ausgewählter Partner','universal-portal-design-suite'),__('Partner im Magazin','universal-portal-design-suite'),$banner); if($posts) $out.=self::section(__('Neue und beliebte Beiträge','universal-portal-design-suite'),$posts,'upds-grid-3 upds-journal-post-grid'); if($products) $out.=self::section(__('Produktvorschläge','universal-portal-design-suite'),$products,'upds-grid-3'); $out.=self::direct_ad(); $out.=self::journal_root_bottom_editorial(); return self::wrap('journal',$out); }
+     public static function market_shortcode(){ $image=self::page_image(get_queried_object_id()); $market=Integrations::market(); $out=$image.self::intro(Plugin::settings()['market_label'],__('Anbieter, Dienstleistungen und Angebote übersichtlich entdecken.','universal-portal-design-suite'),'market'); if($market!=='') $out.='<section class="upds-market-content">'.$market.'</section>'; else $out.='<section class="upds-empty">'.esc_html__('Der Anzeigenmarkt ist bereit. Nach Aktivierung oder Konfiguration von HivePress erscheinen die Einträge hier automatisch.','universal-portal-design-suite').'</section>'; $out.=self::direct_ad(); return self::wrap('market',$out); }
+-    public static function term_archive(){ $term=get_queried_object(); if(!is_object($term)) return ''; $img=self::term_image($term); $title=(string)$term->name; $intro=trim(wp_strip_all_tags((string)($term->description??''))); $children=self::term_cards(absint($term->term_id),12); $posts=self::post_cards(['term'=>$term],30); $banner=Integrations::affiliate('term_banner',['term_id'=>$term->term_id,'taxonomy'=>$term->taxonomy]); $products=[]; for($i=1;$i<=3;$i++){ $h=Integrations::affiliate('term_product_'.$i,['term_id'=>$term->term_id]); if($h!=='') $products[]='<div class="upds-product-slot">'.$h.'</div>'; } $intro_find=absint($term->parent)>0?self::term_intro_find($term,$title):''; $out=Breadcrumbs::render().$img.self::intro($title,$intro,'term',$intro_find,absint($term->parent)>0); if($children) $out.=self::section(__('Unterbereiche','universal-portal-design-suite'),$children,'upds-grid-auto'); if($banner!=='') $out.=self::affiliate_section(__('Ausgewählter Partner','universal-portal-design-suite'),__('Partner im Themenumfeld','universal-portal-design-suite'),$banner); if($posts) $out.=self::section(__('Beiträge zu diesem Thema','universal-portal-design-suite'),$posts,'upds-grid-3'); if($products) $out.=self::section(__('Produktvorschläge','universal-portal-design-suite'),$products,'upds-grid-3'); $out.=self::direct_ad(); $out.=self::content_term_bottom_editorial($term); $out.=self::listing_term_bottom_editorial($term); return self::wrap('term',$out,false); }
++    public static function term_archive(){ $term=get_queried_object(); if(!is_object($term)) return ''; $journal_term=(bool)apply_filters('upds_is_journal_term',false,$term); $img=self::term_image($term); $title=(string)$term->name; $intro=trim(wp_strip_all_tags((string)($term->description??''))); $children=self::term_cards(absint($term->term_id),12); $posts=self::post_cards(['term'=>$term],30); $banner=Integrations::affiliate('term_banner',['term_id'=>$term->term_id,'taxonomy'=>$term->taxonomy]); $products=[]; for($i=1;$i<=3;$i++){ $h=Integrations::affiliate('term_product_'.$i,['term_id'=>$term->term_id]); if($h!=='') $products[]='<div class="upds-product-slot">'.$h.'</div>'; } $intro_find=absint($term->parent)>0?self::term_intro_find($term,$title):''; $out=Breadcrumbs::render().$img.self::intro($title,$intro,'term',$intro_find,absint($term->parent)>0); if($children) $out.=self::section(__('Unterbereiche','universal-portal-design-suite'),$children,'upds-grid-auto'); if($banner!=='') $out.=self::affiliate_section(__('Ausgewählter Partner','universal-portal-design-suite'),__('Partner im Themenumfeld','universal-portal-design-suite'),$banner); if($posts) $out.=self::section(__('Beiträge zu diesem Thema','universal-portal-design-suite'),$posts,$journal_term?'upds-grid-3 upds-journal-term-post-grid':'upds-grid-3'); if($products) $out.=self::section(__('Produktvorschläge','universal-portal-design-suite'),$products,'upds-grid-3'); $out.=self::direct_ad(); $out.=self::content_term_bottom_editorial($term); $out.=self::listing_term_bottom_editorial($term); return self::wrap($journal_term?'journal-term':'term',$out,false); }
+     private static function hub1_bottom_editorial($id,$page_title){
+         $data=apply_filters('upds_hub1_bottom_editorial_data',[],absint($id),(string)$page_title);
+         if(!is_array($data)||empty($data)) return '';
+--- /mnt/data/audit_current/universal_inner/universal-portal-design-suite/assets/upds.css	2026-08-12 16:41:53.000000000 +0000
++++ /mnt/data/audit_current/v94_universal/universal-portal-design-suite/assets/upds.css	2026-08-21 07:21:50.000000000 +0000
+@@ -108,3 +108,69 @@
+ /* V2.2.27 / Contract V87: journal-root paired editorial cells use neutral DIV containers instead of ARTICLE elements, isolating them from late theme article-flow rules. */
+ 
+ /* V2.2.28 / Contract V88: journal hub may expose up to nine equal topic cards; existing upds-grid-3 renders them as a 3-column desktop grid. */
++
++/* V2.2.30 / Contract V94: single-post table normalization + isolated Journal card language. */
++body.single-post article .entry-content>table,
++body.single-post article .entry-content>figure.wp-block-table>table,
++body.single-post article .entry-content>.wp-block-table>table,
++body.single-post article .entry-content>.comparison-table-wrap>table{
++  box-sizing:border-box!important;width:100%!important;max-width:100%!important;margin:0!important;
++  border:0!important;border-collapse:collapse!important;background:transparent!important;box-shadow:none!important
++}
++body.single-post article .entry-content>table th,
++body.single-post article .entry-content>table td,
++body.single-post article .entry-content>figure.wp-block-table>table th,
++body.single-post article .entry-content>figure.wp-block-table>table td,
++body.single-post article .entry-content>.wp-block-table>table th,
++body.single-post article .entry-content>.wp-block-table>table td,
++body.single-post article .entry-content>.comparison-table-wrap>table th,
++body.single-post article .entry-content>.comparison-table-wrap>table td{
++  box-sizing:border-box!important;padding:10px 12px!important;vertical-align:top!important;border:0!important;
++  border-right:1px solid var(--upds-primary,#35422A)!important;border-bottom:1px solid var(--upds-primary,#35422A)!important;
++  background:transparent!important
++}
++body.single-post article .entry-content>table th,
++body.single-post article .entry-content>figure.wp-block-table>table th,
++body.single-post article .entry-content>.wp-block-table>table th,
++body.single-post article .entry-content>.comparison-table-wrap>table th{
++  color:var(--upds-primary,#35422A)!important;font-family:Georgia,serif!important;font-weight:600!important;
++  border-bottom:2px solid var(--upds-primary,#35422A)!important
++}
++body.single-post article .entry-content>table th:last-child,
++body.single-post article .entry-content>table td:last-child,
++body.single-post article .entry-content>figure.wp-block-table>table th:last-child,
++body.single-post article .entry-content>figure.wp-block-table>table td:last-child,
++body.single-post article .entry-content>.wp-block-table>table th:last-child,
++body.single-post article .entry-content>.wp-block-table>table td:last-child,
++body.single-post article .entry-content>.comparison-table-wrap>table th:last-child,
++body.single-post article .entry-content>.comparison-table-wrap>table td:last-child{border-right:0!important}
++body.single-post article .entry-content>table tr:last-child td,
++body.single-post article .entry-content>figure.wp-block-table>table tr:last-child td,
++body.single-post article .entry-content>.wp-block-table>table tr:last-child td,
++body.single-post article .entry-content>.comparison-table-wrap>table tr:last-child td{border-bottom:0!important}
++
++/* Nur die Beitragsvorschauen auf dem Journal-/Magazin-Root. Andere Portalraster bleiben unverändert. */
++.upds-journal .upds-journal-post-grid .upds-card-copy{align-items:center!important;text-align:center!important}
++.upds-journal .upds-journal-post-grid .upds-card-copy h3{width:100%!important;font-size:23px!important;line-height:1.24!important;text-align:center!important}
++.upds-journal .upds-journal-post-grid .upds-card-copy p{width:100%!important;font-size:15.5px!important;line-height:1.62!important;text-align:center!important}
++.upds-journal .upds-journal-post-grid .upds-card-copy b{align-self:center!important}
++@media(max-width:1100px){
++  .upds-journal .upds-journal-post-grid .upds-card-copy{align-items:center!important;text-align:center!important}
++  .upds-journal .upds-journal-post-grid .upds-card-copy b{align-self:center!important}
++}
++
++/* Journal-Kategoriearchive sind opt-in über upds_is_journal_term. */
++.upds-journal-term .upds-journal-term-post-grid .upds-card{border-color:color-mix(in srgb,var(--upds-primary,#35422A) 22%,transparent)!important;background:#fff!important;box-shadow:none!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card:hover,.upds-journal-term .upds-journal-term-post-grid .upds-card:focus-within{border-color:var(--upds-accent,#C89214)!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card-media{min-height:0!important;aspect-ratio:16/9!important;overflow:hidden!important;background:var(--upds-soft,#FAF7F0)!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card-image-wrap{display:block!important;width:100%!important;height:100%!important;margin:0!important;overflow:hidden!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card-image{display:block!important;width:100%!important;max-width:none!important;height:100%!important;aspect-ratio:16/9!important;object-fit:cover!important;object-position:center!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card-copy{align-items:center!important;text-align:center!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card-copy h3{width:100%!important;color:var(--upds-primary,#35422A)!important;font-size:22px!important;line-height:1.25!important;text-align:center!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card-copy p{width:100%!important;font-size:15px!important;line-height:1.62!important;text-align:center!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card-copy b{align-self:center!important;border-radius:0!important;background:var(--upds-primary,#35422A)!important;color:#fff!important;text-transform:none!important}
++.upds-journal-term .upds-journal-term-post-grid .upds-card:hover .upds-card-copy b,.upds-journal-term .upds-journal-term-post-grid .upds-card:focus-within .upds-card-copy b{border-color:var(--upds-accent,#C89214)!important;background:var(--upds-accent,#C89214)!important}
++@media(max-width:1100px){
++  .upds-journal-term .upds-journal-term-post-grid .upds-card-copy{align-items:center!important;text-align:center!important}
++  .upds-journal-term .upds-journal-term-post-grid .upds-card-copy b{align-self:center!important}
++}
