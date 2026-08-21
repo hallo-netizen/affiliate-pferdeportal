@@ -1,0 +1,68 @@
+{
+  "contract": "STARTMASTER0054_GROSSARTEFAKTREGEL_FINAL_HANDOFF_V1",
+  "status": "PASS_HANDOFF_COMPLETE_LIVE_E2E_PENDING",
+  "repository": "hallo-netizen/affiliate-pferdeportal",
+  "branch": "rootfix/pserc0282-core-release-snapshot-20260821",
+  "base_main": "49de5fb240191f69dbb9b44aefa110fd051a3104",
+  "main_modified": false,
+  "master": {
+    "name": "NULLPUNKT_TEXTMASCHINE_STARTMASTER0054_GITHUB_GROSSARTEFAKTREGEL_FINAL_20260821.zip",
+    "bytes": 184820135,
+    "sha256": "9d1d312b0e1e76066ecac33c1a56fe4549531c9ed507a4be468b68e554c1b9af",
+    "zip_test": "PASS",
+    "fresh_unpack_manifest": "5659/5659 PASS",
+    "manifest_sha256": "bc35c59705344c65b1af1198ba40ab62ddadc0855b11da2b28e00146e14162a7",
+    "fresh_total_files": 5662,
+    "binary_stored_on_github": false,
+    "binary_github_exception": "Allowed by binding large-artifact rule because GitHub size/artifact limits prevent storing the complete MASTER binary; exact metadata, source/docs evidence, hashes and actual user handoff are recorded."
+  },
+  "installer": {
+    "name": "portal-seo-editorial-plan-compiler_0.28.2_PLAN_CAPABILITY_SNAPSHOT_INVALIDATION_CORE_RELEASE_ISOLATION_ROOTFIX_FINAL.zip",
+    "bytes": 241647,
+    "sha256": "8539d684cbbe01f0cc555ec598e055288f5696ffe0b2bdde6d16740b68c9cfd7",
+    "source_installer_parity": "112/112 BYTEIDENTICAL",
+    "php": "40/40 source + 40/40 installer PASS",
+    "json": "16/16 source + 16/16 installer PASS"
+  },
+  "workflow": {
+    "core_rootcause": "69/69 PASS",
+    "terminal_published": "58/58 PASS",
+    "normal_full_workflow": "41/41 PASS",
+    "package_tamper": "9/9 PASS",
+    "request_identity": "22/22 PASS",
+    "ppm": "137/137 PASS",
+    "link_policy": "19/19 PASS",
+    "pste_real_topics": "562/562 PASS",
+    "pste_exact_five": "562/562 PASS",
+    "safe_migration": "584 PASS",
+    "paused_539": "237 PASS",
+    "article_type_plus1": "PASS source/fresh/master",
+    "rule1": "PASS",
+    "adversarial_source": "PASS",
+    "adversarial_fresh": "PASS",
+    "upgrade_reload": "stale 0 READY -> 0.28.2 invalidates plan snapshot -> 562 topics -> 12 eligible -> 5 READY core; no publish"
+  },
+  "delta": {
+    "protected_runtime_deltas": 0,
+    "text_machine_delta": 0,
+    "content_delta": 0,
+    "design_delta": 0,
+    "workflow_delta": 0,
+    "final_delta_scope": "governance, worklog, QA evidence and manifests only"
+  },
+  "github_recovery": {
+    "exact_governance_path": "governance/startmaster0054/exact-v2",
+    "exact_governance_blob_sha_verification": "PASS",
+    "prebuild_evidence_commit": "aa1535d433c943a8144ab6fdf4be2bbfb830e429",
+    "superseded_nonexact_mirrors_removed": true
+  },
+  "user_handoff": {
+    "completed": true,
+    "method": "ChatGPT conversation sandbox file handoff",
+    "master_handed_off": true,
+    "installer_handed_off": true,
+    "sha_evidence_handed_off": true
+  },
+  "live_wordpress_e2e": "PENDING",
+  "publish_allowed": false
+}
