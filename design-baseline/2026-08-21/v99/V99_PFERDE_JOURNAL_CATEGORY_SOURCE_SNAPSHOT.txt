@@ -1,1 +1,169 @@
-PLACEHOLDER
+        add_shortcode('affiliate_portal_journal', [__CLASS__, 'journal_shortcode']);
+        add_shortcode('pferde_journal_pilot', [__CLASS__, 'journal_category_pilot_shortcode']);
+        add_shortcode('pferde_atelier_footer_logo', [__CLASS__, 'footer_brand_lockup_shortcode_v150137']);
+        add_shortcode('pferde_atelier_anzeigenmarkt_intro', [__CLASS__, 'anzeigenmarkt_intro_shortcode_v150279']);
+        add_shortcode('pferde_atelier_anzeigenmarkt_werbeplatz', [__CLASS__, 'anzeigenmarkt_werbeplatz_shortcode_v150279']);
+        add_filter('body_class', [__CLASS__, 'journal_body_class_v150280']);
+        // V1.50.464 / V99: Astra-eigene Bildpadding-Klasse nur im registrierten Journal-Unterkategorie-Hauptloop.
+        add_filter('post_class', [__CLASS__, 'journal_category_post_class_v150464'], 100, 3);
+        add_filter('widget_custom_html_content', 'do_shortcode', 11);
+        add_filter('widget_text', 'do_shortcode', 11);
+        add_filter('widget_block_content', 'do_shortcode', 11);
+        add_filter('widget_custom_html_content', [__CLASS__, 'footer_pb_one_link_v150137'], 20);
+        add_filter('widget_text', [__CLASS__, 'footer_pb_one_link_v150137'], 20);
+        add_filter('widget_block_content', [__CLASS__, 'footer_pb_one_link_v150137'], 20);
+        add_filter('astra_footer_copyright', [__CLASS__, 'footer_pb_one_link_v150137'], 20);
+
+        // V1.50.13: Der Safe-Importer hat Portal-Seiten mit einem technischen
+        // H2-/Absatz-Geruest angelegt. Dieses reine Importgeruest wird vor allen
+        // Portalrenderern entfernt, damit der Kategorietext auf jeder Ebene direkt
+        // unter dem echten Seitentitel beginnt. Manuelle Inhalte bleiben erhalten.
+        add_filter('the_content', [__CLASS__, 'strip_importer_placeholder_content'], 8);
+        // V1.50.273: Letzte Portalebene sind echte WordPress-Kategoriearchive, keine Seiten.
+        // Nur diese Archive erhalten das neue Beitragsfokus-Template.
+        add_filter('template_include', [__CLASS__, 'portal_leaf_category_template_v150273'], 99);
+        // V1.50.334: Auf der untersten Kategorieebene besitzt das Designplugin
+        // die alleinige Positionshoheit fuer Partner- und Produktmodule. Die
+        // Affiliate-Zentrale darf dort keine zweite Ausgabe am Loop-Ende anhaengen.
+        add_filter('pftk_leaf_category_design_owns_affiliate_slots', [__CLASS__, 'owns_leaf_category_affiliate_slots_v150334'], 10, 2);
+
+        // V1.50.57: Breadcrumbs werden einmal unsichtbar im Footer erzeugt und
+        // anschliessend in einen identischen Mount direkt am Anfang von #primary
+        // verschoben. Damit sind Seite, Kategorie und Beitrag weder von
+        // unterschiedlichen Astra-Hooks noch von deren Innenabstaenden abhaengig.
+        add_action('wp_footer', [__CLASS__, 'render_universal_breadcrumb_payload'], 20);
+        // V1.50.297: datenschutzarme, gecachte Seiten beruecksichtigende Aufrufzaehlung fuer
+        // meistgelesene Beitragskarten. Redakteure, Vorschauen und bekannte Bots werden ausgeschlossen.
+        add_action('wp_footer', [__CLASS__, 'render_post_view_beacon_v150297'], 44);
+        add_action('wp_ajax_nopriv_pftk_record_post_view', [__CLASS__, 'ajax_record_post_view_v150297']);
+        add_action('wp_ajax_pftk_record_post_view', [__CLASS__, 'ajax_record_post_view_v150297']);
+        add_action('wp_head', [__CLASS__, 'print_locked_fixes_v150238'], 999);
+        add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_single_post_locked_style'], 9999);
+        add_action('wp_head', [__CLASS__, 'print_universal_content_axis_css'], 100);
+        add_action('wp_head', [__CLASS__, 'print_global_page_title_css_v150134'], 99999);
+        add_action('wp_head', [__CLASS__, 'print_startpage_css_v150176'], 100050);
+        // V1.50.355: Gemeinsame breite Modulachse fuer alle Portal-Kategorieebenen.
+        // Ausschliesslich Containerbreiten; Inhalte und Komponenten bleiben unveraendert.
+        add_action('wp_head', [__CLASS__, 'print_portal_body_width_v150355'], 100061);
+        // V1.50.368: Journal-Hauptseite in das gemeinsame Portaldesign und Werbesystem ueberfuehren.
+        add_action('wp_head', [__CLASS__, 'print_journal_system_css_v150368'], 100062);
+        // V1.50.464 / Contract V99: ausschließlich registrierte Journal-Kategoriearchive
+        // übernehmen die bewährte Beitragskarten-Sprache des Journal-Roots.
+        // Fremde Kategorien bleiben durch den exakten Journal-Registerabgleich unangetastet.
+        add_action('wp_head', [__CLASS__, 'print_journal_category_cards_css_v150464'], 100062);
+        // Astra rendert bei der aktuellen Archivstruktur keinen zuverlässigen Read-more-Link.
+        // Der CTA wird daher innerhalb des offiziellen Astra-Entry-Content-Hooks ergänzt,
+        // aber nur im exakt registrierten Journal-Kategorie-Scope.
+        add_action('astra_entry_header_before', [__CLASS__, 'render_journal_category_meta_v150464'], 5);
+        add_action('astra_entry_content_after', [__CLASS__, 'render_journal_category_read_more_v150464'], 30);
+        // V1.50.405: Nur im HivePress-Unterbaum "Private Anzeigen" und dessen
+        // Unterkategorien erhalten die Bildboxen einen dunkeloliven Rahmen,
+        // weissen Hintergrund und keinen Schatten. Andere Anzeigen bleiben tabu.
+        add_action('wp_head', [__CLASS__, 'print_private_listing_image_css_v150397'], 100063);
+
+---
+
+    public static function journal_category_post_class_v150464($classes, $class = '', $post_id = 0) {
+        if (!is_array($classes)) { $classes = []; }
+        if (is_admin() || !is_category() || !is_main_query() || (function_exists('in_the_loop') && !in_the_loop())) { return $classes; }
+        $term = get_queried_object();
+        if (!self::journal_category_image_gap_scope_v150420($term)) { return $classes; }
+        if ($post_id && get_post_type(absint($post_id)) !== 'post') { return $classes; }
+        $classes[] = 'remove-featured-img-padding';
+        $classes[] = 'pftk-journal-card-v150464';
+        return array_values(array_unique($classes));
+    }
+
+    public static function print_journal_category_cards_css_v150464() {
+        if (is_admin() || !is_category()) { return; }
+        $term = get_queried_object();
+        if (!self::journal_category_image_gap_scope_v150420($term)) { return; }
+        ?>
+<style id="pftk-journal-category-cards-v150464">
+/* V99: Journal-Unterkategorie intern exakt auf die bestätigte Journal-Root-Karte normalisiert. */
+body.pftk-journal-category-v150464 main.site-main .ast-row,
+body.pftk-journal-category-v150464 #main.site-main .ast-row{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important;max-width:1180px!important;margin:0!important;align-items:stretch!important;
+}
+body.pftk-journal-category-v150464 main.site-main .ast-row>article.post,
+body.pftk-journal-category-v150464 #main.site-main .ast-row>article.post,
+body.pftk-journal-category-v150464 article.ast-article-post.post{
+  box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:none!important;height:100%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:1px solid rgba(53,66,42,.19)!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;transform:none!important;
+}
+body.pftk-journal-category-v150464 article.post.pftk-journal-card-v150464>.ast-post-format-,
+body.pftk-journal-category-v150464 article.post.pftk-journal-card-v150464>.ast-post-format-:first-child{
+  box-sizing:border-box!important;width:100%!important;margin:0!important;padding:0!important;
+}
+body.pftk-journal-category-v150464 article.post .post-content{
+  box-sizing:border-box!important;display:flex!important;width:100%!important;min-height:100%!important;margin:0!important;padding:0!important;flex-direction:column!important;
+}
+body.pftk-journal-category-v150464 article.post .post-thumb,
+body.pftk-journal-category-v150464 article.post .ast-blog-featured-section,
+body.pftk-journal-category-v150464 article.post .post-thumb-img-content{
+  display:block!important;box-sizing:border-box!important;width:100%!important;max-width:none!important;height:205px!important;min-height:205px!important;margin:0!important;padding:0!important;overflow:hidden!important;float:none!important;border:0!important;border-radius:0!important;background:rgba(242,232,214,.3)!important;box-shadow:none!important;
+}
+body.pftk-journal-category-v150464 article.post .post-thumb>a,
+body.pftk-journal-category-v150464 article.post .ast-blog-featured-section>a,
+body.pftk-journal-category-v150464 article.post .post-thumb-img-content>a{display:block!important;width:100%!important;height:100%!important;overflow:hidden!important}
+body.pftk-journal-category-v150464 article.post .post-thumb img,
+body.pftk-journal-category-v150464 article.post .ast-blog-featured-section img,
+body.pftk-journal-category-v150464 article.post .post-thumb-img-content img{display:block!important;width:100%!important;max-width:none!important;height:100%!important;margin:0!important;object-fit:cover!important;object-position:center!important}
+/* Native Astra-Meta wird ersetzt, damit Bild->Label-Abstand nicht von Theme-Markup abhängt. */
+body.pftk-journal-category-v150464 article.post .entry-meta,
+body.pftk-journal-category-v150464 article.post .ast-blog-meta-container{display:none!important}
+body.pftk-journal-category-v150464 article.post .pftk-journal-category-meta-v150464{
+  display:block!important;box-sizing:border-box!important;width:100%!important;margin:0!important;padding:20px 20px 0!important;color:#C89214!important;font-size:11px!important;font-weight:700!important;letter-spacing:.10em!important;text-align:center!important;text-decoration:none!important;text-transform:uppercase!important;
+}
+body.pftk-journal-category-v150464 article.post .entry-header{box-sizing:border-box!important;margin:0!important;padding:7px 20px 0!important;text-align:center!important}
+body.pftk-journal-category-v150464 article.post .entry-title,
+body.pftk-journal-category-v150464 article.post .entry-title a{margin:0!important;color:#35422A!important;font-family:Georgia,"Times New Roman",serif!important;min-height:2.55em!important;font-size:22px!important;font-weight:500!important;line-height:1.25!important;text-align:center!important;text-decoration:none!important}
+body.pftk-journal-category-v150464 article.post .entry-title a:hover,
+body.pftk-journal-category-v150464 article.post .entry-title a:focus-visible{color:#C89214!important}
+body.pftk-journal-category-v150464 article.post .entry-content{
+  box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;margin:0!important;padding:10px 20px 20px!important;color:#555B55!important;font-size:15px!important;line-height:1.62!important;text-align:center!important;
+}
+body.pftk-journal-category-v150464 article.post .entry-content>p:not(.read-more),
+body.pftk-journal-category-v150464 article.post .entry-content .entry-summary,
+body.pftk-journal-category-v150464 article.post .entry-content .entry-summary p{margin:0 0 17px!important;text-align:center!important}
+body.pftk-journal-category-v150464 article.post .entry-content>p.read-more:not(.pftk-journal-category-read-more-v150464){display:none!important}
+body.pftk-journal-category-v150464 article.post .pftk-journal-category-read-more-v150464{display:flex!important;width:100%!important;margin:auto 0 0!important;padding:0!important;justify-content:center!important;text-align:center!important}
+body.pftk-journal-category-v150464 article.post .pftk-journal-category-read-more-v150464>a{display:inline-flex!important;min-width:150px!important;min-height:42px!important;align-items:center!important;justify-content:center!important;margin:0 auto!important;padding:10px 22px!important;border:1px solid #35422A!important;border-radius:0!important;background:#35422A!important;color:#fff!important;box-shadow:none!important;font-family:Arial,Helvetica,sans-serif!important;font-size:14px!important;font-weight:700!important;letter-spacing:0!important;line-height:1.2!important;text-align:center!important;text-decoration:none!important;text-transform:none!important}
+body.pftk-journal-category-v150464 article.post .pftk-journal-category-read-more-v150464>a:hover,
+body.pftk-journal-category-v150464 article.post .pftk-journal-category-read-more-v150464>a:focus-visible{border-color:#C89214!important;background:#C89214!important;color:#fff!important;outline:none!important}
+@media(max-width:980px){body.pftk-journal-category-v150464 main.site-main .ast-row,body.pftk-journal-category-v150464 #main.site-main .ast-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:620px){
+ body.pftk-journal-category-v150464 main.site-main .ast-row,body.pftk-journal-category-v150464 #main.site-main .ast-row{grid-template-columns:minmax(0,1fr)!important;gap:18px!important}
+ body.pftk-journal-category-v150464 article.post .pftk-journal-category-meta-v150464{padding:18px 18px 0!important}
+ body.pftk-journal-category-v150464 article.post .entry-header{padding:7px 18px 0!important}
+ body.pftk-journal-category-v150464 article.post .entry-content{padding:10px 18px 18px!important}
+}
+</style>
+        <?php
+    }
+
+    /**
+     * V1.50.464: genau ein Weiterlesen-CTA in registrierten Journal-Kategoriearchiven.
+     * Der offizielle Astra-Hook liegt innerhalb von .entry-content direkt nach dem Auszug.
+     */
+    public static function render_journal_category_meta_v150464() {
+        if (is_admin() || !is_category() || !is_main_query()) { return; }
+        if (function_exists('in_the_loop') && !in_the_loop()) { return; }
+        $term = get_queried_object();
+        if (!self::journal_category_image_gap_scope_v150420($term)) { return; }
+        $post_id = absint(get_the_ID());
+        if ($post_id <= 0 || get_post_type($post_id) !== 'post') { return; }
+        $label = trim((string)($term->name ?? ''));
+        if ($label === '') { return; }
+        echo '<div class="pftk-journal-category-meta-v150464">' . esc_html($label) . '</div>';
+    }
+
+    public static function render_journal_category_read_more_v150464() {
+        if (is_admin() || !is_category() || !is_main_query()) { return; }
+        $term = get_queried_object();
+        if (!self::journal_category_image_gap_scope_v150420($term)) { return; }
+        $post_id = absint(get_the_ID());
+        if ($post_id <= 0 || get_post_type($post_id) !== 'post') { return; }
+        $url = get_permalink($post_id);
+        if (!$url) { return; }
+        echo '<p class="read-more pftk-journal-category-read-more-v150464"><a href="' . esc_url($url) . '">Weiterlesen</a></p>';
+    }
