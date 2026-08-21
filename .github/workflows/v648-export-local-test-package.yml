@@ -19,13 +19,17 @@ jobs:
         run: |
           set -euo pipefail
           test -f CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+          test -f .github/scripts/run-v646-full-release.sh
+          test -d .github/v646
           sha256sum CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip | tee V648_LOCAL_TEST_PACKAGE_SHA256.txt
           unzip -t CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip >/dev/null
-      - name: Upload exact branch baseline package
+      - name: Upload complete local regression harness
         uses: actions/upload-artifact@v4
         with:
           name: V648_LOCAL_TEST_PACKAGE
           path: |
             CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
             V648_LOCAL_TEST_PACKAGE_SHA256.txt
+            .github/scripts/run-v646-full-release.sh
+            .github/v646
           if-no-files-found: error
