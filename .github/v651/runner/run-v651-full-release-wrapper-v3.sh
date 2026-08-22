@@ -21,4 +21,25 @@ Path('/tmp/run-v651-full-release-wrapper-v3-expanded.sh').write_text(out)
 PY
 bash -n "$TMP"
 chmod +x "$TMP"
-exec "$TMP"
+set +e
+"$TMP"
+rc=$?
+set -e
+if [ "$rc" -ne 0 ]; then
+  D=V651_RELEASE_EVIDENCE/BLOCKED_DIAGNOSTIC
+  R5=/tmp/v651pkg/CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820/04_TESTS/HISTORICAL_R5_54
+  mkdir -p "$D"
+  if [ -d /tmp/v651-source/affiliate-portal-router ] && [ -d "$R5" ]; then
+    cp -a /tmp/v651-source/affiliate-portal-router "$D/affiliate-portal-router"
+    cp -a "$R5" "$D/HISTORICAL_R5_54"
+    if [ -f .github/v651_gate/01_checkpoint_restart.patch ]; then cp .github/v651_gate/01_checkpoint_restart.patch "$D/01_checkpoint_restart.patch"; fi
+    if [ -f .github/v651_gate/run-v651-full-release.sh ]; then cp .github/v651_gate/run-v651-full-release.sh "$D/run-v651-full-release.final.sh"; fi
+    (
+      cd "$D"
+      find affiliate-portal-router HISTORICAL_R5_54 -type f -print0 | sort -z | xargs -0 sha256sum
+      [ ! -f 01_checkpoint_restart.patch ] || sha256sum 01_checkpoint_restart.patch
+      [ ! -f run-v651-full-release.final.sh ] || sha256sum run-v651-full-release.final.sh
+    ) > "$D/SHA256.txt"
+  fi
+fi
+exit "$rc"
