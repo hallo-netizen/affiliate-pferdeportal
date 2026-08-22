@@ -1,0 +1,40 @@
+<?php
+require __DIR__.'/public_coverage_target_bridge_v649.php';
+$stage=getenv('PPAR_V6501_STAGE')?:'step1';
+$settings=array('business_enabled'=>1,'private_enabled'=>0);
+$keepA=array_slice($required,0,91);$mapA=array_fill_keys($keepA,true);$missingA=array_values(array_diff($required,$keepA));sort($missingA,SORT_STRING);
+foreach($required as $concept){$wpdb->update($output_table,array('status'=>isset($mapA[$concept])?'published':'draft'),array('id'=>$object_ids_by_concept[$concept]));}
+v649_clear_campaign_cache($p);$coverageA=v649_call($p,'ebay_run_public_business_coverage');
+rg_assert(absint($coverageA['covered']??0)===91&&count((array)($coverageA['missing']??array()))===220,'V6.50.1 old proof starts at real 91/311 shape A');
+$uuid='v6501-drift-'.$stage;
+$selectionA=array('version'=>'2.0','status'=>'complete','phase'=>'complete','reason'=>'canonical_gapfill','owner'=>'run:'.$uuid,'selection_scope'=>'business','business_target_mode'=>'gapfill','business_target_concepts'=>$missingA,'business_active'=>array(),'stats'=>array('business'=>array('scanned'=>0,'active'=>0,'reserve'=>0,'candidate'=>0,'deactivated'=>0,'materialized'=>0,'errors'=>array())));
+$run=rg_base_run($uuid,3100,3100);$run['build']='6.49.0-public-coverage-target-bridge-rootfix-20260821';$run['status']='failed';$run['phase']='failed';$run['finished_at']=3101;$run['error_code']='insufficient_safe_sources';$run['error_message']='old terminal';
+$run['config_snapshot']['seller_routes']=array('private'=>0,'business'=>1);$run['config_snapshot']['settings']['business_enabled']=1;$run['phase_state']=array('refresh'=>array('status'=>'completed','sentinel'=>'KEEP_REFRESH'),'discovery'=>array('status'=>'completed','sentinel'=>'STALE_DISCOVERY'),'selection'=>$selectionA,'unrelated'=>array('sentinel'=>'KEEP_UNRELATED'));
+$run['coverage']=$coverageA;$run['gapfill']=array('attempts'=>1,'missing'=>$missingA);$run['errors']=array(array('code'=>'insufficient_safe_sources','at'=>3101,'details'=>array('phase'=>'coverage_verify','build'=>$run['build'])));$run['end_manifest']=array('old'=>1);
+rg_reset_run($run);
+$keepB=$keepA;$dropped=array_pop($keepB);$added=$missingA[0];$keepB[]=$added;$mapB=array_fill_keys($keepB,true);
+foreach($required as $concept){$wpdb->update($output_table,array('status'=>isset($mapB[$concept])?'published':'draft'),array('id'=>$object_ids_by_concept[$concept]));}
+v649_clear_campaign_cache($p);$coverageB=v649_call($p,'ebay_run_public_business_coverage');$missingB=(array)($coverageB['missing']??array());sort($missingB,SORT_STRING);
+rg_assert(absint($coverageB['covered']??0)===91&&count($missingB)===220&&$missingB!==$missingA,'real coverage drift changes family set while keeping 91/311 count');
+$p->maybe_migrate_ebay_safe_supply_gap_v6500();$mig=rg_run();
+rg_assert(($mig['run_uuid']??'')===$uuid&&($mig['status']??'')==='running'&&($mig['phase']??'')==='coverage_verify','recovery keeps UUID and re-enters current coverage_verify');
+rg_assert(($mig['phase_state']['refresh']['sentinel']??'')==='KEEP_REFRESH'&&($mig['phase_state']['unrelated']['sentinel']??'')==='KEEP_UNRELATED','upstream and unrelated state is preserved');
+rg_assert(($mig['phase_state']['discovery']??null)===array()&&($mig['phase_state']['selection']??null)===array(),'stale discovery and selection proof is discarded');
+rg_assert(($mig['coverage']??null)===array()&&($mig['gapfill']??null)===array('attempts'=>0,'missing'=>array()),'stale coverage and gapfill proof is discarded');
+v649_clear_campaign_cache($p);v649_call($p,'ebay_run_tick_coverage',rg_run(),$settings);$current=rg_run();$target=(array)($current['gapfill']['missing']??array());sort($target,SORT_STRING);
+rg_assert(($current['phase']??'')==='gapfill_discovery'&&absint($current['gapfill']['attempts']??0)===1,'current coverage enters the existing single canonical gapfill');
+rg_assert($target===$missingB&&$target!==$missingA,'canonical gapfill targets current drifted missing families, not stale proof');
+$current['phase']='coverage_verify';$current['coverage']=$coverageB;$current['gapfill']=array('attempts'=>1,'missing'=>$missingB);$current['phase_state']['selection']=array('version'=>'2.0','status'=>'complete','phase'=>'complete','reason'=>'canonical_gapfill','owner'=>'run:'.$uuid,'selection_scope'=>'business','business_target_mode'=>'gapfill','business_target_concepts'=>$missingB,'business_active'=>array(),'stats'=>array('business'=>array('scanned'=>0,'active'=>0,'reserve'=>0,'candidate'=>0,'deactivated'=>0,'materialized'=>0,'errors'=>array())));
+rg_reset_run($current);v649_clear_campaign_cache($p);v649_call($p,'ebay_run_tick_coverage',rg_run(),$settings);$verified=rg_run();
+rg_assert(($verified['status']??'')==='running'&&($verified['phase']??'')==='public_verify'&&absint($verified['coverage']['open_gap_count']??0)===220,'drifted safe gaps pass only after fresh canonical proof');
+v649_call($p,'ebay_run_tick_public_verify',rg_run(),$settings);$done=rg_run();
+rg_assert(($done['status']??'')==='completed'&&($done['run_uuid']??'')===$uuid&&absint($done['end_manifest']['business']['open_gap_count']??0)===220,'same recovered UUID completes with current non-public gaps');
+$live=$run;$live['build']='6.50.0-coverage-gap-contract-rootfix-20260821';$live['status']='failed';$live['phase']='failed';$live['finished_at']=3201;$live['error_code']='business_safe_gap_new_missing_family';$live['error_message']='live stale proof';$live['resume_reason']='safe_supply_gap_contract_recovery';$live['recovery_history']=array(array('reason'=>'safe_supply_gap_contract_recovery','error_code'=>'insufficient_safe_sources'));
+$live['errors']=array(array('code'=>'business_safe_gap_new_missing_family','at'=>3201,'details'=>array('phase'=>'public_verify','build'=>$live['build'])));$live['coverage']=$coverageA;$live['gapfill']=array('attempts'=>1,'missing'=>$missingA);$live['phase_state']['selection']=$selectionA;
+rg_reset_run($live);$p->maybe_migrate_ebay_safe_supply_gap_v6500();$live_after=rg_run();
+rg_assert(($live_after['status']??'')==='running'&&($live_after['phase']??'')==='coverage_verify'&&($live_after['run_uuid']??'')===$uuid,'exact installed V6.50 stale-proof failure reopens on same UUID');
+$p->maybe_migrate_ebay_safe_supply_gap_v6500();rg_assert(rg_run()===$live_after,'V6.50.1 stale-proof recovery is idempotent');
+$other=$live;$other['run_uuid']='v6501-other-'.$stage;$other['error_code']='transport_failed';$other['errors']=array(array('code'=>'transport_failed','at'=>3301,'details'=>array('phase'=>'public_verify','build'=>$other['build'])));rg_reset_run($other);$before=rg_run();$p->maybe_migrate_ebay_safe_supply_gap_v6500();rg_assert(rg_run()===$before,'unrelated technical failure remains failed');
+$bad=$current;$bad['run_uuid']='v6501-invariant-'.$stage;$bad['phase_state']['selection']['owner']='run:'.$bad['run_uuid'];$bad['phase_state']['selection']['business_active']=array('winner'=>array('concept'=>$missingB[0]));rg_reset_run($bad);v649_clear_campaign_cache($p);v649_call($p,'ebay_run_tick_coverage',rg_run(),$settings);$failed=rg_run();
+rg_assert(($failed['status']??'')==='failed'&&($failed['error_code']??'')==='business_gapfill_public_invariant_failed','selected-but-not-public winner remains hard invariant failure');
+echo "COVERAGE_GAP_RECOVERY_DRIFT_V6501_OK stage={$stage}\n";
