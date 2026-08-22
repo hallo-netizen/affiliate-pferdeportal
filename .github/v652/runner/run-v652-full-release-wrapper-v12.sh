@@ -47,8 +47,14 @@ echo '61706d7d596ab61de03f18e331d7d922ea48c50958fb083893cf92dfed14bf74  .github/
 [ "$(git hash-object .github/v651/runner/13_real_db_reset_isolation_runner.patch)" = "cbf75091f866054e0757b8559972e21cc01c73e4" ] || { echo 'BLOCKED: real DB reset isolation patch blob mismatch'; exit 1; }
 patch -p0 --forward --batch < .github/v651/runner/13_real_db_reset_isolation_runner.patch
 echo '391ef9fe9cfff8c907dc2d4964775665adc3c7b48d5240521812f56e24b273b8  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -
-cat .github/v652/runner/14_v652_gate_runner.patch.b64.* > /tmp/v652-gate-runner.patch.b64
-echo '24493d0e3a28f21dd2ade2896b58f33b8e21090b47d54a783146ded128fff9ad  /tmp/v652-gate-runner.patch.b64' | sha256sum -c -
+[ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.00)" = "ec2ba24e08af1ea4782640596dd9b6aca5027630" ] || { echo 'BLOCKED: V6.52 gate chunk 00 mismatch'; exit 1; }
+[ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.01)" = "d4671b49dbf1d59dc25ae9267288e23aeab93f80" ] || { echo 'BLOCKED: V6.52 gate chunk 01 mismatch'; exit 1; }
+[ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.02)" = "4fd66c7eaa6c8d341106ff28e5ed6e8037c2467c" ] || { echo 'BLOCKED: V6.52 gate chunk 02 mismatch'; exit 1; }
+[ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.03)" = "10e3f6101e6fa6815bcc779ef64d3591fe96dc6e" ] || { echo 'BLOCKED: V6.52 gate chunk 03 mismatch'; exit 1; }
+[ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.04)" = "73713ed58ea262f7d6946486a06e09ebb070b16b" ] || { echo 'BLOCKED: V6.52 gate chunk 04 mismatch'; exit 1; }
+[ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.05)" = "67e5014d510ef1aa103b0129d65ba82ab9ca2472" ] || { echo 'BLOCKED: V6.52 gate chunk 05 mismatch'; exit 1; }
+[ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.06)" = "e1936201343a68ae6573c3242fd250e36394b787" ] || { echo 'BLOCKED: V6.52 gate chunk 06 mismatch'; exit 1; }
+cat .github/v652/runner/14_v652_gate_runner.patch.b64.0{0,1,2,3,4,5,6} > /tmp/v652-gate-runner.patch.b64
 base64 -d /tmp/v652-gate-runner.patch.b64 > /tmp/v652-gate-runner.patch
 echo '196ac087f7b9bb07892b74f204f1c0c42016dd4fbd6e0b6ca5b339965f36d87e  /tmp/v652-gate-runner.patch' | sha256sum -c -
 patch -p0 --forward --batch < /tmp/v652-gate-runner.patch
