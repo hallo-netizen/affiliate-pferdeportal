@@ -2,7 +2,7 @@
 set -euo pipefail
 BASE=.github/v652/runner/run-v652-full-release-wrapper-v19.sh
 [ "$(git hash-object "$BASE")" = "66e92f190d65cc46ac0d0bd175506b3a9b8a2e3a" ] || { echo 'BLOCKED: V6.52 v19 wrapper blob mismatch'; exit 1; }
-[ "$(git hash-object .github/v652/runner/patch_v652_lock_failclosed_release_gate.py)" = "2ea683a8cc354121b8aba1600911122bee0978ed" ] || { echo 'BLOCKED: V6.52 lock failclosed release-gate patcher blob mismatch'; exit 1; }
+[ "$(git hash-object .github/v652/runner/patch_v652_lock_failclosed_release_gate.py)" = "b0a9c13c2042f8483cb0e09ea32670118e5c6d8e" ] || { echo 'BLOCKED: V6.52 lock failclosed release-gate patcher blob mismatch'; exit 1; }
 TMP=/tmp/run-v652-full-release-wrapper-v20-generated.sh
 python3 - "$BASE" "$TMP" <<'PY'
 from pathlib import Path
