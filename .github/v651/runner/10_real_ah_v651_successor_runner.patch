@@ -1,0 +1,27 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -365,7 +365,23 @@
+ p=sys.argv[1];v=sys.argv[2];s=open(p,encoding="utf-8").read();s=re.sub(r"Pferdeportal_Affiliate_Router::VERSION==='[0-9.]+'",f"Pferdeportal_Affiliate_Router::VERSION==='{v}'",s);s=re.sub(r"tested plugin version is [0-9.]+",f"tested plugin version is {v}",s);open(p,"w",encoding="utf-8").write(s)
+ PYVER
+  wp eval 'global $wpdb; echo "WP=".get_bloginfo("version")." PHP=".PHP_VERSION." DB=".$wpdb->get_var("SELECT VERSION()")." VERSION=".Pferdeportal_Affiliate_Router::VERSION."\n";' --path="$WP" --allow-root > "$E/$p/00_environment.log"; grep -Fq 'WP=7.0.1 PHP=8.4.' "$E/$p/00_environment.log" && grep -Fq 'DB=11.4.' "$E/$p/00_environment.log" && grep -Fq "VERSION=$expected_version" "$E/$p/00_environment.log" || return 1
+- rm -rf "$PKG/CODEX_EVIDENCE_REAL_GATE"; (cd "$PKG" && WP_ROOT="$WP" WP="$(command -v wp)" 07_RUNNERS/run_real_gate_from_existing_wordpress.sh) > "$E/$p/01_A_H.log" 2>&1 || return 1; cp -a "$PKG/CODEX_EVIDENCE_REAL_GATE" "$E/$p/A_H"
++ # The immutable V6.45 real gate is retained as RED counterproof because its
++ # shared rg_tick() deliberately executes the now-superseded browser/Admin-AJAX
++ # transport. V6.51 keeps every A-H assertion, but its versioned successor drives
++ # the exact same state machine through the canonical background worker.
++ rm -rf "$PKG/CODEX_EVIDENCE_REAL_GATE"; set +e; (cd "$PKG" && WP_ROOT="$WP" WP="$(command -v wp)" 07_RUNNERS/run_real_gate_from_existing_wordpress.sh) > "$E/$p/01_A_H_OLD_BROWSER_RED.log" 2>&1; local old_ah_rc=$?; set -e
++ [ "$old_ah_rc" -ne 0 ] && grep -Fxq 'FAIL V6.44-style package-800 run needs exactly 39 real BUSINESS prepare packages' "$E/$p/01_A_H_OLD_BROWSER_RED.log" || return 1
++ setup_wp; rm -rf "$WP/wp-content/plugins/affiliate-portal-router"; cp -a "$src" "$WP/wp-content/plugins/affiliate-portal-router"; wp plugin activate affiliate-portal-router --path="$WP" --allow-root >/dev/null
++ local ahroot="$E/$p/V651_REAL_AH_ROOT"; rm -rf "$ahroot"; mkdir -p "$ahroot"; cp -a "$PKG/03_REAL_GATE" "$ahroot/03_REAL_GATE"; cp -a "$PKG/07_RUNNERS" "$ahroot/07_RUNNERS"
++ python3 - "$ahroot/03_REAL_GATE/lib.php" <<'PYAH'
++import sys
++p=sys.argv[1];s=open(p,encoding='utf-8').read();needle='function rg_tick() { return rg_plugin()->run_ebay_admin_ajax_tick(); }';repl='function rg_tick() { return rg_plugin()->run_ebay_canonical_worker(); }'
++if s.count(needle)!=1: raise SystemExit('V6.51 real A-H transport anchor mismatch')
++open(p,'w',encoding='utf-8').write(s.replace(needle,repl,1))
++PYAH
++ (cd "$ahroot" && find 03_REAL_GATE 07_RUNNERS -type f -print0 | sort -z | xargs -0 sha256sum) > "$E/$p/V651_REAL_AH_SUCCESSOR_SHA256.txt"
++ rm -rf "$ahroot/CODEX_EVIDENCE_REAL_GATE"; (cd "$ahroot" && WP_ROOT="$WP" WP="$(command -v wp)" 07_RUNNERS/run_real_gate_from_existing_wordpress.sh) > "$E/$p/01_A_H.log" 2>&1 || return 1; cp -a "$ahroot/CODEX_EVIDENCE_REAL_GATE" "$E/$p/A_H"
++ printf 'V645_REAL_AH_BROWSER_TRANSPORT=EXPECTED_RED\nV651_REAL_AH_BACKGROUND_SUCCESSOR=PASS\n' > "$E/$p/V651_REAL_AH_CONTRACT.txt"
+  wp eval-file "$PKG/03_REAL_GATE/public_freshness_contract_v646.php" --path="$WP" --allow-root > "$E/$p/02_v646.log" 2>&1 || return 1; grep -Fxq 'PUBLIC_FRESHNESS_V646_OK' "$E/$p/02_v646.log" || return 1
+  wp eval-file "$PKG/03_REAL_GATE/dynamic_rule_recovery_v647.php" --path="$WP" --allow-root > "$E/$p/03_v647.log" 2>&1 || return 1; grep -Fxq 'DYNAMIC_RULE_RECOVERY_V647_OK' "$E/$p/03_v647.log" || return 1
+  wp eval-file "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php" --path="$WP" --allow-root > "$E/$p/04_v648.log" 2>&1 || return 1; grep -Fxq 'CANONICAL_REFRESH_AUTHORITY_V648_OK' "$E/$p/04_v648.log" || return 1

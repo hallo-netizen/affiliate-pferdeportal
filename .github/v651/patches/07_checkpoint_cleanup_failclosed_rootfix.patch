@@ -1,0 +1,41 @@
+--- a/includes/trait-ppar-ebay-run.php
++++ b/includes/trait-ppar-ebay-run.php
+@@ -1810,6 +1810,22 @@
+         $this->ebay_run_save($current);
+     }
+ 
++    /** Fail closed on any cleanup-engine failure after the new public checkpoint
++     * was committed. Cleanup is technical housekeeping only: the verified public
++     * checkpoint remains authoritative, while the run terminates with a precise
++     * route-specific error instead of drifting into the generic no-progress guard. */
++    private function ebay_run_checkpoint_cleanup_fail_if_needed($plan,$route) {
++        $plan=is_array($plan)?$plan:array();$route=sanitize_key((string)$route);
++        $status=sanitize_key((string)($plan['status']??''));$phase=sanitize_key((string)($plan['phase']??''));
++        if($status!=='failed' && $phase!=='failed'){return false;}
++        $reason=sanitize_key((string)($plan['failure_reason']??''));
++        if($reason===''){$reason=sanitize_key((string)($plan['error']??''));}
++        $code=$route==='private'?'checkpoint_private_cleanup_failed':'checkpoint_business_cleanup_failed';
++        $message=$route==='private'?'PRIVATE-Checkpoint-Bereinigung ist fehlgeschlagen.':'BUSINESS-Checkpoint-Bereinigung ist fehlgeschlagen.';
++        $this->ebay_run_fail($code,$message,array('route'=>$route,'cleanup_status'=>$status,'cleanup_phase'=>$phase,'cleanup_reason'=>$reason));
++        return true;
++    }
++
+     private function ebay_run_tick_checkpoint_cleanup($run,$settings,$route) {
+         $route=sanitize_key((string)$route);
+         $plan=is_array($run['checkpoint_cleanup_selection']??null)?$run['checkpoint_cleanup_selection']:array();
+@@ -1822,6 +1838,7 @@
+             if(!method_exists($this,'ebay_selection_prune_business_batch')){$this->ebay_run_fail('checkpoint_business_cleanup_missing','BUSINESS-Checkpoint-Bereinigung fehlt.');return;}
+             $this->ebay_selection_prune_business_batch($settings,$plan,50,true,false);
+             $current=$this->ebay_run_load();$current['checkpoint_cleanup_selection']=$plan;$this->ebay_run_save($current);
++            if($this->ebay_run_checkpoint_cleanup_fail_if_needed($plan,'business')){return;}
+             if(!empty($plan['checkpoint_business_cleanup_done'])){
+                 $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
+                 if(!empty($routes['private'])){$this->ebay_run_set_phase('checkpoint_cleanup_private','checkpoint_committed');}
+@@ -1834,6 +1851,7 @@
+             if(!method_exists($this,'ebay_selection_apply_private_post_batch')){$this->ebay_run_fail('checkpoint_private_cleanup_missing','PRIVATE-Checkpoint-Bereinigung fehlt.');return;}
+             $this->ebay_selection_apply_private_post_batch($settings,$plan,50,true,false);
+             $current=$this->ebay_run_load();$current['checkpoint_cleanup_selection']=$plan;$this->ebay_run_save($current);
++            if($this->ebay_run_checkpoint_cleanup_fail_if_needed($plan,'private')){return;}
+             if(!empty($plan['checkpoint_private_cleanup_done'])){$this->ebay_run_complete((array)($current['checkpoint_verified_manifest']??array()));}
+             return;
+         }
