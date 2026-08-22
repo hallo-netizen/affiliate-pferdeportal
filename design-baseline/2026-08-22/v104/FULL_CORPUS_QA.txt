@@ -1,0 +1,22 @@
+V104 FULL REAL PRODUCTION-PLAN CORPUS: PASS
+Unique table-bearing articles: 20
+PASS | Kann ich eine Regendecke mit Fleece auf ein nasses Pferd legen? | comparison-table | spacer=28px | gap=45
+PASS | Welche Regendecke mit Abschwitzfunktion ist die beste? | comparison-table | spacer=28px | gap=45
+PASS | Wie kann man Regendecken imprägnieren? | comparison-table | spacer=28px | gap=45
+PASS | Was sollte man über Übergangsdecken grundsätzlich wissen? | system-129-table comparison-table | gap=45
+PASS | Stallbeleuchtung auswählen – die wichtigsten Entscheidungskriterien | system-129-table comparison-table | gap=45
+PASS | Weidezaungeräte im Vergleich – wichtige Bauarten und Unterschiede | system-129-table comparison-table | gap=45
+PASS | Mineralbar im Stall richtig reinigen und pflegen | system-129-table comparison-table | gap=45
+PASS | Übergangsdecken auswählen – die wichtigsten Entscheidungskriterien | system-129-table comparison-table | gap=45
+PASS | Was sollte man über Stallbeleuchtung grundsätzlich wissen? | system-129-table comparison-table | gap=45
+PASS | Weidepflegegeräte im Vergleich – wichtige Bauarten und Unterschiede | system-129-table comparison-table | gap=45
+PASS | Seniorenfutter richtig reinigen und pflegen | system-129-table comparison-table | gap=45
+PASS | Welche Fehler treten bei Winterdecken häufig auf? | system-129-table comparison-table | gap=45
+PASS | Winterdecken für Einsteiger sinnvoll auswählen | system-129-table comparison-table | gap=45
+PASS | Winterdecken nach Material und Ausstattung vergleichen | system-129-table comparison-table | gap=45
+PASS | Winterdecken richtig trocknen und aufbewahren | system-129-table comparison-table | gap=45
+PASS | Übergangsdecken füttern und dosieren – wichtige Bauarten und Unterschiede | system-129-table comparison-table | gap=45
+PASS | Wann ist Winterdecken sinnvoll und wann eher nicht? | system-129-table comparison-table | gap=45
+PASS | Welche Variante von Winterdecken passt zu welchem Bedarf? | system-129-table comparison-table | gap=45
+PASS | Günstige oder hochwertige Winterdecken – was unterscheidet sie? | system-129-table comparison-table | gap=45
+PASS | Winterdecken kontrollieren – Verschleiß und Schäden erkennen | system-129-table comparison-table | gap=45
