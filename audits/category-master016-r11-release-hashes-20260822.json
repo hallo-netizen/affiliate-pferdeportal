@@ -1,0 +1,17 @@
+{
+  "master_revision": "016-R11",
+  "plugin_version": "1.8.0",
+  "plugin_production_code_changed": false,
+  "r10_invalid_live_input_sha256": "3bb0bfeb1b125b965a40301670d50616afe1a32475edbaabc4e03bd86d1784bd",
+  "r11_exact_live_input_sha256": "e77f0d0c5f56952cffa932a696139ea160df92576f38f8a7856135fe7b0d5152",
+  "research_gzip_sha256": "094f9c12f26b7e4c3cfb519fae430c7a70d94cc7b97b6fe1073bb3954cb39b80",
+  "installer_sha256": "4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845",
+  "source_zip_sha256": "1d17566f309f460e48255b78357912cf5e18b1eba2eed7654516e79c8f9fa7fd",
+  "master_zip_sha256": "e8b187416300c26c783cdc0cd5d6288701f101deaca6965490252b91f1e63578",
+  "visible_scope_sha256": "a1a2f530e43df4f54e0f723e3cd4c8719b4673876ae864156538f2a1395ab07a",
+  "technical_scope_sha256": "18c58234aec850988ac0957b4853a7bc82436ab2919fb50eb5110cb5f18e1dc2",
+  "master_manifest": "819/819 PASS",
+  "source_tests": "216/216 PASS",
+  "fresh_installer_tests": "216/216 PASS",
+  "live_wordpress_4a": "PENDING"
+}
