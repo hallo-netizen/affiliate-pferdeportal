@@ -1,0 +1,53 @@
+{
+  "contract": "STARTMASTER0058_CURRENT_POINTER_V1",
+  "created_at_utc": "2026-08-22T17:05:00Z",
+  "master": "STARTMASTER0058_NULLPUNKT_WORKFLOW_OPTIMIERUNG_20260822",
+  "master_sha256": "PENDING_AFTER_BUILD",
+  "priority": "MASTER > current evidenced source > documented GitHub history > real live evidence > chat > memory > guess",
+  "installed": {
+    "PSTE": "0.56.4",
+    "PSERC": "0.28.3",
+    "PPM": "6.7.9",
+    "LINK_POLICY_GATE": "1.0.1"
+  },
+  "last_production": {
+    "batch": "exact-five Beratung",
+    "item_count": 5,
+    "draft_readback_status": "PASS",
+    "result_sha256": "9c3c3adbeae7de4a7bc510cc355690c24cb173427f97566fff2ad9fbc8dd3c76",
+    "user_confirmed_published_count": 5,
+    "automatic_publish_in_ppm": false
+  },
+  "current_redplan": {
+    "observed_from": "live screenshot 2026-08-22 19:02:40 Europe/Berlin",
+    "metadata_handoff_ready": 0,
+    "compatible_metadata_positions": 0,
+    "controlled_production_start": "BLOCKED_NO_CURRENT_READY_METADATA_BLOCK"
+  },
+  "protected_state": {
+    "published_five_do_not_modify": true,
+    "textmachine_modified": false,
+    "design_modified": false,
+    "content_rewrite_authorized": false
+  },
+  "next_allowed_work": [
+    "workflow optimization by hash evidence caching / removal of redundant repetitions",
+    "separate upstream title-quality enforcement block before next new title batch"
+  ],
+  "next_production_precondition": "general upstream title phrase-family hardlock must be technically proven before new title batch",
+  "forbidden": [
+    "reproduce the five published items",
+    "manual READY override",
+    "manual supervisor PASS",
+    "direct wp_insert_post bypass",
+    "publish by automation",
+    "change textmachine/design/content in governance block",
+    "work on main"
+  ],
+  "github": {
+    "repository": "hallo-netizen/affiliate-pferdeportal",
+    "branch": "governance/startmaster0058-nullpunkt-workflow-optimization-20260822",
+    "base": "rootfix/workflow-supervisor-keyring-recovery-20260822",
+    "main_modified": false
+  }
+}
