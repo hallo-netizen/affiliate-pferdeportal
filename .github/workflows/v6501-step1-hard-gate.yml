@@ -109,14 +109,15 @@ jobs:
           php -l .github/v6501/tests/test_architecture_v6501.php
           php -l .github/v6501/real/coverage_gap_recovery_drift_v6501.php
           bash -n .github/v6501/scripts/run-v6501-full-release.sh
+          bash -n .github/v6501/scripts/run-v6501-full-release-v2.sh
 
       - name: Execute complete V6.50.1 release gate
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          chmod +x .github/v6501/scripts/run-v6501-full-release.sh
-          .github/v6501/scripts/run-v6501-full-release.sh
+          chmod +x .github/v6501/scripts/run-v6501-full-release-v2.sh
+          .github/v6501/scripts/run-v6501-full-release-v2.sh
 
       - name: Upload final verified V6.50.1 release
         if: success()
