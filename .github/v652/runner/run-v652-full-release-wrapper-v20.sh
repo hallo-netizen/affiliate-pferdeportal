@@ -8,10 +8,10 @@ python3 - "$BASE" "$TMP" <<'PY'
 from pathlib import Path
 import sys
 s=Path(sys.argv[1]).read_text()
-old="new=\"python3 .github/v652/runner/patch_v652_real_selfpump_seed_http.py .github/v651_gate/run-v651-full-release.sh\\\\npython3 .github/v652/runner/patch_v652_selfpump_harness_clean.py .github/v651_gate/run-v651-full-release.sh\\\\npython3 .github/v652/runner/patch_v652_final_arch_legacy_red.py .github/v651_gate/run-v651-full-release.sh\\\\necho 'b75ea0cf44dc80ba26433dd9c444368ea0cc6c4b8da5d92da0ec1a2cdfb85d6e  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -\""
-new="new=\"python3 .github/v652/runner/patch_v652_real_selfpump_seed_http.py .github/v651_gate/run-v651-full-release.sh\\\\npython3 .github/v652/runner/patch_v652_selfpump_harness_clean.py .github/v651_gate/run-v651-full-release.sh\\\\npython3 .github/v652/runner/patch_v652_final_arch_legacy_red.py .github/v651_gate/run-v651-full-release.sh\\\\npython3 .github/v652/runner/patch_v652_lock_failclosed_release_gate.py .github/v651_gate/run-v651-full-release.sh\\\\necho 'f89bb521fe2fa0e05cfdda51ee8eb90d39d4ec8d5aebf8f6470015b4e15cb763  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -\""
+old="python3 .github/v652/runner/patch_v652_final_arch_legacy_red.py .github/v651_gate/run-v651-full-release.sh\\\\necho 'b75ea0cf44dc80ba26433dd9c444368ea0cc6c4b8da5d92da0ec1a2cdfb85d6e  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -"
+new="python3 .github/v652/runner/patch_v652_final_arch_legacy_red.py .github/v651_gate/run-v651-full-release.sh\\\\npython3 .github/v652/runner/patch_v652_lock_failclosed_release_gate.py .github/v651_gate/run-v651-full-release.sh\\\\necho 'f89bb521fe2fa0e05cfdda51ee8eb90d39d4ec8d5aebf8f6470015b4e15cb763  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -"
 if s.count(old)!=1:
-    raise SystemExit('BLOCKED: V6.52 v19 final-gate injection anchor not found exactly once')
+    raise SystemExit('BLOCKED: V6.52 v19 final-gate payload anchor not found exactly once')
 Path(sys.argv[2]).write_text(s.replace(old,new,1))
 PY
 bash -n "$TMP"
