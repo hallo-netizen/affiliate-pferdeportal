@@ -29,7 +29,7 @@ a(strpos($run,'$this->ebay_run_wait_for_cron_lock_resolution($lock, 5)')!==false
 if(getenv('PPAR_V652_STAGE')==='final'){
     $read=file_get_contents($root.'/readme.txt');
     a(strpos($main,' * Version: 6.52.0')!==false && strpos($main,"const VERSION = '6.52.0';")!==false,'final version is 6.52.0');
-    a(strpos($main,"6.52.0-core-cron-handoff-rootfix-20260822")!==false,'final runtime build exact');
-    a(strpos($read,'CORE-CRON HANDOFF ROOTFIX')!==false,'README documents live-rootcause transport correction');
+    a(strpos($main,"6.52.0-core-cron-selfpump-rootfix-20260822")!==false,'final runtime build exact');
+    a(strpos($read,'CORE-CRON SELFPUMP ROOTFIX')!==false,'README documents live-rootcause transport correction');
 }
 echo "ASSERTIONS=$n FAIL=$f\n";exit($f?1:0);
