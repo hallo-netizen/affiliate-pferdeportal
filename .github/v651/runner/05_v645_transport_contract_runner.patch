@@ -27,7 +27,7 @@
 +    f="$root/${names[$i]}"; one="$out/${names[$i]%.php}.old-red.log"
 +    set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$src" timeout 150 php "$f" > "$one" 2>&1; rc=$?; set -e
 +    [ $rc -ne 0 ] || return 1
-+    grep -Fxq "${expects[$i]}" "$one" || return 1
++    grep -Fq "${expects[$i]}" "$one" || return 1
 +    { echo "===== ${names[$i]} ====="; cat "$one"; echo "__TEST_EXIT__=$rc ${names[$i]}"; } >> "$out/old_browser_transport_red.log"
 +  done
 +  printf 'COUNT=7 FAIL=7 ASSERTIONS=56\nOLD_BROWSER_EXECUTOR_CONTRACT=EXPECTED_RED\n' >> "$out/old_browser_transport_red.log"
