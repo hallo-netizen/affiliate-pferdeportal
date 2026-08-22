@@ -1,0 +1,154 @@
+--- a/includes/trait-ppar-ebay-run.php
++++ b/includes/trait-ppar-ebay-run.php
+@@ -424,32 +424,124 @@
+         if (!$this->ebay_run_is_active($run)) { return false; }
+         if (!function_exists('wp_schedule_single_event')) { return false; }
+         $status = sanitize_key((string)($run['status'] ?? ''));
+-        $when = time() + max(1, absint($delay));
++
++        // A running canonical block must become due in this request so a closed
++        // browser can never be the missing trigger. A real budget pause uses the
++        // persisted resume boundary; V6.52 keeps that yield deliberately short
++        // and hands the already-persisted core Cron event to the next request.
++        $when = time();
+         if ($status === 'paused') {
+             $resume_at = absint($run['resume_at'] ?? 0);
+-            $when = max($when, $resume_at > 0 ? $resume_at : time() + 120);
++            $when = max(time(), $resume_at > 0 ? $resume_at : time() + 1);
+         }
+         if (function_exists('wp_next_scheduled')) {
+             $next = wp_next_scheduled(self::EBAY_WORKER_HOOK);
+-            if ($next !== false && absint($next) <= $when) { return true; }
++            if ($next !== false && absint($next) <= $when) {
++                $this->ebay_run_register_background_dispatch(absint($next));
++                return true;
++            }
+             if ($next !== false && function_exists('wp_unschedule_event')) { wp_unschedule_event($next, self::EBAY_WORKER_HOOK); }
+         }
+-        return wp_schedule_single_event($when, self::EBAY_WORKER_HOOK) !== false;
++        $scheduled = wp_schedule_single_event($when, self::EBAY_WORKER_HOOK) !== false;
++        if ($scheduled) { $this->ebay_run_register_background_dispatch($when); }
++        return $scheduled;
++    }
++
++    /**
++     * Register exactly one transport handoff for this PHP request. The handoff
++     * never executes fach logic itself; it can only dispatch WordPress' already
++     * persisted EBAY_WORKER_HOOK. Lease/CAS and the durable run remain the sole
++     * single-worker authority.
++     */
++    private function ebay_run_register_background_dispatch($when) {
++        $when = absint($when);
++        if ($when <= 0 || !function_exists('add_action')) { return false; }
++        if (empty($this->ebay_worker_dispatch_at) || $when < absint($this->ebay_worker_dispatch_at)) {
++            $this->ebay_worker_dispatch_at = $when;
++        }
++        if (empty($this->ebay_worker_dispatch_registered)) {
++            $this->ebay_worker_dispatch_registered = true;
++            add_action('shutdown', array($this, 'run_ebay_worker_background_dispatch'), PHP_INT_MAX);
++        }
++        return true;
++    }
++
++    /**
++     * WordPress core intentionally refuses spawn_cron() from inside wp-cron.php.
++     * A long canonical run therefore needs one controlled handoff after a Cron
++     * request finishes. This helper reproduces only core's non-blocking request
++     * envelope to wp-cron.php; it is not a browser/admin worker and it never
++     * invokes the canonical worker directly.
++     */
++    private function ebay_run_spawn_core_cron_handoff() {
++        if (!function_exists('wp_remote_post') || !function_exists('site_url') || !function_exists('add_query_arg') || !function_exists('set_transient')) { return false; }
++        if (!function_exists('wp_get_ready_cron_jobs')) { return false; }
++        $gmt_time = microtime(true);
++        $crons = wp_get_ready_cron_jobs();
++        if (empty($crons)) { return false; }
++        $keys = array_keys($crons);
++        if (isset($keys[0]) && (float)$keys[0] > $gmt_time) { return false; }
++
++        $doing_wp_cron = sprintf('%.22F', $gmt_time);
++        set_transient('doing_cron', $doing_wp_cron);
++        $cron_url = add_query_arg('doing_wp_cron', $doing_wp_cron, site_url('wp-cron.php'));
++        $cron_request = apply_filters('cron_request', array(
++            'url' => $cron_url,
++            'key' => $doing_wp_cron,
++            'args' => array(
++                'timeout' => 0.01,
++                'blocking' => false,
++                'sslverify' => apply_filters('https_local_ssl_verify', false, $cron_url),
++            ),
++        ), $doing_wp_cron);
++        $result = wp_remote_post($cron_request['url'], $cron_request['args']);
++        if (is_wp_error($result)) {
++            if ((string)get_transient('doing_cron') === $doing_wp_cron) { delete_transient('doing_cron'); }
++            return false;
++        }
++        return true;
++    }
++
++    /** Dispatch the persisted worker after the response/current Cron ends. */
++    public function run_ebay_worker_background_dispatch() {
++        $this->ebay_worker_dispatch_registered = false;
++        $run = $this->ebay_run_load();
++        if (!$this->ebay_run_is_active($run)) { return false; }
++        if (!function_exists('wp_next_scheduled')) { return false; }
++        $next = wp_next_scheduled(self::EBAY_WORKER_HOOK);
++        if ($next === false) { return false; }
++        $next = absint($next);
++        $wait = max(0, $next - time());
++        if ($wait > 0 && $wait <= 2) { usleep(($wait * 1000000) + 100000); }
++        if ($next > time()) { return false; }
++        $this->ebay_worker_dispatch_at = 0;
++
++        // Outside wp-cron.php, use WordPress core unchanged. Inside wp-cron.php
++        // spawn_cron() is hard-blocked by DOING_CRON, so use the narrow core-Cron
++        // handoff above after the current lock has already been released.
++        if (!(defined('DOING_CRON') && DOING_CRON) && function_exists('spawn_cron')) {
++            $spawned = spawn_cron(microtime(true));
++            if ($spawned !== false) { return true; }
++            $lock = function_exists('get_transient') ? get_transient('doing_cron') : false;
++            if (!empty($lock)) { return true; }
++        }
++        return $this->ebay_run_spawn_core_cron_handoff();
+     }
+ 
+     private function ebay_run_pause_for_budget($run, $reason = 'work_block_budget') {
+         $run = is_array($run) ? $run : $this->ebay_run_load();
+         if (!$this->ebay_run_is_open($run)) { return $run; }
+-        $pause_seconds = defined(static::class . '::EBAY_WORK_BLOCK_PAUSE_SECONDS') ? absint(constant(static::class . '::EBAY_WORK_BLOCK_PAUSE_SECONDS')) : 120;
++        $pause_seconds = defined(static::class . '::EBAY_WORK_BLOCK_PAUSE_SECONDS') ? absint(constant(static::class . '::EBAY_WORK_BLOCK_PAUSE_SECONDS')) : 1;
++        $pause_seconds = max(1, $pause_seconds);
+         $run['status'] = 'paused';
+         $run['resume_reason'] = sanitize_key((string)$reason);
+-        $run['resume_at'] = time() + max(30, $pause_seconds);
++        $run['resume_at'] = time() + $pause_seconds;
+         $run['owner'] = '';
+         $run['lease_expires_at'] = 0;
+         $run['work_block_started_at'] = 0;
+         $run['work_block_tick_count'] = 0;
+         $saved = $this->ebay_run_save($run);
+-        $this->ebay_run_schedule_worker(max(30, $pause_seconds));
++        $this->ebay_run_schedule_worker($pause_seconds);
+         return $saved;
+     }
+ 
+--- a/pferdeportal-affiliate-router.php
++++ b/pferdeportal-affiliate-router.php
+@@ -143,7 +143,7 @@
+     const EBAY_PROGRESS_CONTRACT_VERSION = '3.0';
+     const EBAY_WORK_BLOCK_TICK_LIMIT = 60;
+     const EBAY_WORK_BLOCK_SECONDS = 600;
+-    const EBAY_WORK_BLOCK_PAUSE_SECONDS = 120;
++    const EBAY_WORK_BLOCK_PAUSE_SECONDS = 1;
+     const EBAY_REFRESH_CRON_HOOK = 'ppar_ebay_inventory_refresh';
+     const EBAY_REFRESH_WORKER_HOOK = 'ppar_ebay_inventory_refresh_worker';
+     const EBAY_DELETION_REST_NAMESPACE = 'affiliate-zentrale/v1';
+@@ -153,6 +153,8 @@
+     private $disclosure_printed = array();
+     private $campaigns_request_cache = null;
+     private $ebay_canonical_worker_active = false;
++    private $ebay_worker_dispatch_registered = false;
++    private $ebay_worker_dispatch_at = 0;
+     private $ebay_run_settings_override = null;
+ 
+     public static function instance() {
