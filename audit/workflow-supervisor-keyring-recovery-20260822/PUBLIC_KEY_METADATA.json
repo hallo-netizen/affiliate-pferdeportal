@@ -1,0 +1,8 @@
+{
+  "key_id": "workflow-ed25519-b15660ee915a5826",
+  "public_key_sha256": "b15660ee915a5826e3b658c99043b448ba212596f44ad6a09add09cfbd2d48f3",
+  "scope": "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED_ONLY",
+  "private_key_in_repository": false,
+  "private_key_in_master": false,
+  "external_encrypted_backup_required": true
+}
