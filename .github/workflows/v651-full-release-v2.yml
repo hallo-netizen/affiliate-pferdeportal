@@ -2,6 +2,7 @@ name: V6.51 full safe checkpoint clean restart release gate v2
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
