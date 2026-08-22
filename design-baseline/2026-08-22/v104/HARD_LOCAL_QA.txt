@@ -1,0 +1,19 @@
+V104 HARD LOCAL BROWSER QA: PASS
+Wrapped source: Übergangsdecken auswählen – die wichtigsten Entscheidungskriterien
+exact_direct_live_article_source: PASS spacer=1 height=28px block_mb=0px block->p=45
+exact_wrapped_current_source: PASS spacer=1 height=28px block_mb=0px block->p=45
+flat_sections_direct_source: PASS spacer=1 height=28px block_mb=0px block->p=45
+article_without_data_block: PASS spacer=1 height=28px block_mb=0px block->p=45
+flattened_table_section: PASS spacer=1 height=28px block_mb=0px block->p=45
+legacy_gutenberg_table: PASS spacer=0
+comparison_table_stripped_all_other_markers: PASS spacer=1 height=28px block_mb=0px block->p=45
+generated_table_followed_by_heading: PASS spacer=0
+1440 direct: PASS block->p=45 spacer=28px
+1440 wrapped: PASS block->p=45 spacer=28px
+1200 direct: PASS block->p=45 spacer=28px
+1200 wrapped: PASS block->p=45 spacer=28px
+900 direct: PASS block->p=45 spacer=28px
+900 wrapped: PASS block->p=45 spacer=28px
+390 direct: PASS block->p=45 spacer=28px
+390 wrapped: PASS block->p=45 spacer=28px
+Fresh-Unpack same harness: PASS
