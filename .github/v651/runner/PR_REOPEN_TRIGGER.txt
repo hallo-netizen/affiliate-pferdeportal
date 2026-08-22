@@ -1,1 +1,1 @@
-Reopen PR #8 after runner-only V6.49 binding-baseline correction. No production code change.
+Re-run PR #8 after gate-only V6.49 baseline correction and portable V6.51 production-diff transport correction. No production code change.
