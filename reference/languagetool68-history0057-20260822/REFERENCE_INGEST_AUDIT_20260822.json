@@ -1,0 +1,69 @@
+{
+  "contract": "REFERENCE_ARCHIVE_INGEST_AUDIT_V1",
+  "status": "PASS_REFERENCE_ONLY_NO_PRODUCTION_CHANGE",
+  "binding_master": {
+    "filename": "NULLPUNKT_TEXTMASCHINE_STARTMASTER0054_GITHUB_GROSSARTEFAKTREGEL_FINAL_20260821.zip",
+    "sha256": "9d1d312b0e1e76066ecac33c1a56fe4549531c9ed507a4be468b68e554c1b9af",
+    "authority": "UNCHANGED_BINDING_MASTER"
+  },
+  "languagetool": {
+    "outer_archive": "ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip",
+    "outer_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+    "outer_size": 258053061,
+    "inner_dependency": "LanguageTool-6.8.zip",
+    "inner_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "inner_size": 258510816,
+    "inner_zip_integrity": "PASS",
+    "inner_zip_entries": 2051,
+    "version_proof": "META-INF/maven/org.languagetool/language-all/pom.properties => version=6.8",
+    "usefulness": "HIGH_CURRENT_REFERENCE",
+    "reason": "The binding current PPM 6.7.9 evidence explicitly references LanguageTool 6.8 / Bestand 43 while the large dependency binary itself is not embedded in the current MASTER.",
+    "binary_policy": "Large original dependency is not committed as a normal Git blob; exact filename, size, SHA-256 and version proof are retained."
+  },
+  "history_archive": {
+    "outer_archive": "ARBEITSMASTER_0057_NEU_TEIL_A_UNVERAENDERLICHES_HISTORIENARCHIV.zip",
+    "outer_sha256": "25c8a9fa71ff6f1f57137c2afb1e2c03ed8a6e3477f2902fdf003590ea785423",
+    "outer_size": 59700573,
+    "payload": "TEIL_A_UNVERAENDERLICHES_HISTORIENARCHIV.tar.zst",
+    "payload_sha256": "c169e0293644dfd597a23e90e7b8bdabd88ce78a9d84ef93203249c28bb415ae",
+    "payload_size": 59474848,
+    "declared_file_count": 4955,
+    "full_manifest_verification": "4955/4955 PASS",
+    "declared_uncompressed_size": 462977585,
+    "usefulness": "CURATED_HISTORICAL_REFERENCE_ONLY",
+    "useful_material": [
+      "SOURCE_VERIFIED_FACT_PACK_BUILDER_VERTRAG_V1",
+      "AUTOMATED_SOURCE_FACT_PACK_PIPELINE_V1",
+      "SOURCE_VERIFIED_FACT_PACK_V1",
+      "SOURCE_VERIFIED_FACT_PACK_V2.schema",
+      "FULL_ARTICLE_CONTENT_QUALITY_V1",
+      "ARBEITSANWEISUNG_ARTIKELPRODUKTION_V1.5",
+      "LOCAL_ARTICLE_PRODUCTION_V1_6",
+      "ARTICLE_PRODUCTION_V1_6_TESTS (66 positive/negative cases)"
+    ],
+    "historical_ppm_vs_current_ppm": {
+      "historical_files": 39,
+      "current_files": 359,
+      "same_path_intersection": 39,
+      "byte_identical": 22,
+      "divergent": 17,
+      "rule": "The 22 byte-identical files are provenance/regression anchors. The 17 divergent files are historical only and never current authority."
+    }
+  },
+  "github": {
+    "repository": "hallo-netizen/affiliate-pferdeportal",
+    "reference_branch": "reference/languagetool68-history0057-20260822",
+    "base_production_audit_commit": "c8b4dff111ba61f9d6c55b5f11a4c10e939edf83",
+    "scope": "REFERENCE_FOLDER_ONLY",
+    "merge_to_main": false
+  },
+  "no_effect": {
+    "master_modified": false,
+    "current_rootfix_branch_modified": false,
+    "production_source_modified": false,
+    "workflow_modified": false,
+    "text_machine_modified": false,
+    "content_rules_modified": false,
+    "design_modified": false
+  }
+}
