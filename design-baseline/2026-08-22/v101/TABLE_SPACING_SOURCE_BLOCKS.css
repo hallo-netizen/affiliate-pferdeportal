@@ -1,0 +1,21 @@
+/* Pferde Atelier V1.50.466 / Contract V101 */
+html body.single-post article .entry-content > figure.wp-block-table,
+html body.single-post article .entry-content > .wp-block-table,
+html body.single-post article .entry-content > .comparison-table-wrap,
+html body.single-post article .entry-content > table {
+  margin-bottom: 28px !important;
+}
+html body.single-post article .entry-content > figure.wp-block-table > table,
+html body.single-post article .entry-content > .wp-block-table > table,
+html body.single-post article .entry-content > .comparison-table-wrap > table {
+  margin-bottom: 0 !important;
+}
+
+/* Universal Portal Design Suite V2.2.37 / Contract V101 */
+body.single-post article .entry-content > figure.wp-block-table,
+body.single-post article .entry-content > .wp-block-table,
+body.single-post article .entry-content > .comparison-table-wrap,
+body.single-post article .entry-content > table {margin-bottom:28px!important}
+body.single-post article .entry-content > figure.wp-block-table > table,
+body.single-post article .entry-content > .wp-block-table > table,
+body.single-post article .entry-content > .comparison-table-wrap > table {margin-bottom:0!important}
