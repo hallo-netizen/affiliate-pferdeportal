@@ -1,0 +1,94 @@
+diff -ruN v651_step1/includes/trait-ppar-ebay-run.php v652_step1/includes/trait-ppar-ebay-run.php
+--- v651_step1/includes/trait-ppar-ebay-run.php	2026-08-22 12:53:08.000000000 +0000
++++ v652_step1/includes/trait-ppar-ebay-run.php	2026-08-22 13:55:23.533241858 +0000
+@@ -424,17 +424,65 @@
+         if (!$this->ebay_run_is_active($run)) { return false; }
+         if (!function_exists('wp_schedule_single_event')) { return false; }
+         $status = sanitize_key((string)($run['status'] ?? ''));
+-        $when = time() + max(1, absint($delay));
++
++        // An open run must not wait for unrelated site traffic before its next
++        // bounded package. Running work is therefore due immediately. A real
++        // budget pause keeps its persisted resume timestamp and is kicked only
++        // when that timestamp is due.
++        $when = time();
+         if ($status === 'paused') {
+             $resume_at = absint($run['resume_at'] ?? 0);
+-            $when = max($when, $resume_at > 0 ? $resume_at : time() + 120);
++            $when = max(time(), $resume_at > 0 ? $resume_at : time() + 1);
+         }
+         if (function_exists('wp_next_scheduled')) {
+             $next = wp_next_scheduled(self::EBAY_WORKER_HOOK);
+-            if ($next !== false && absint($next) <= $when) { return true; }
++            if ($next !== false && absint($next) <= $when) {
++                $this->ebay_run_register_background_kick(absint($next));
++                return true;
++            }
+             if ($next !== false && function_exists('wp_unschedule_event')) { wp_unschedule_event($next, self::EBAY_WORKER_HOOK); }
+         }
+-        return wp_schedule_single_event($when, self::EBAY_WORKER_HOOK) !== false;
++        $scheduled = wp_schedule_single_event($when, self::EBAY_WORKER_HOOK) !== false;
++        if ($scheduled) { $this->ebay_run_register_background_kick($when); }
++        return $scheduled;
++    }
++
++    /**
++     * Register exactly one WordPress-core Cron kick for the current PHP request.
++     * This is not a second worker and not the retired plugin-owned HTTP loopback:
++     * it merely asks core spawn_cron() to dispatch the already persisted
++     * EBAY_WORKER_HOOK. Correctness and concurrency remain owned by the durable
++     * run state plus the existing MariaDB lease/CAS contract.
++     */
++    private function ebay_run_register_background_kick($when) {
++        $when = absint($when);
++        if ($when <= 0 || !function_exists('add_action')) { return false; }
++        if (empty($this->ebay_worker_kick_at) || $when < absint($this->ebay_worker_kick_at)) {
++            $this->ebay_worker_kick_at = $when;
++        }
++        if (empty($this->ebay_worker_kick_registered)) {
++            $this->ebay_worker_kick_registered = true;
++            add_action('shutdown', array($this, 'run_ebay_worker_background_kick'), PHP_INT_MAX);
++        }
++        return true;
++    }
++
++    /** Core-Cron dispatcher used only after the current request has finished. */
++    public function run_ebay_worker_background_kick() {
++        $this->ebay_worker_kick_registered = false;
++        $run = $this->ebay_run_load();
++        if (!$this->ebay_run_is_active($run)) { return false; }
++        if (!function_exists('spawn_cron') || !function_exists('wp_next_scheduled')) { return false; }
++        $next = wp_next_scheduled(self::EBAY_WORKER_HOOK);
++        if ($next === false) { return false; }
++        $next = absint($next);
++        $wait = max(0, $next - time());
++        // Budget pauses are deliberately short. Waiting here happens after the
++        // response has finished, so the browser is never held open as a worker.
++        if ($wait > 0 && $wait <= 2) { usleep(($wait * 1000000) + 100000); }
++        if ($next > time()) { return false; }
++        $this->ebay_worker_kick_at = 0;
++        return spawn_cron(time()) !== false;
+     }
+ 
+     private function ebay_run_pause_for_budget($run, $reason = 'work_block_budget') {
+diff -ruN v651_step1/pferdeportal-affiliate-router.php v652_step1/pferdeportal-affiliate-router.php
+--- v651_step1/pferdeportal-affiliate-router.php	2026-08-22 13:56:58.788330840 +0000
++++ v652_step1/pferdeportal-affiliate-router.php	2026-08-22 13:56:46.299262217 +0000
+@@ -143,7 +143,7 @@
+     const EBAY_PROGRESS_CONTRACT_VERSION = '3.0';
+     const EBAY_WORK_BLOCK_TICK_LIMIT = 60;
+     const EBAY_WORK_BLOCK_SECONDS = 600;
+-    const EBAY_WORK_BLOCK_PAUSE_SECONDS = 120;
++    const EBAY_WORK_BLOCK_PAUSE_SECONDS = 1;
+     const EBAY_REFRESH_CRON_HOOK = 'ppar_ebay_inventory_refresh';
+     const EBAY_REFRESH_WORKER_HOOK = 'ppar_ebay_inventory_refresh_worker';
+     const EBAY_DELETION_REST_NAMESPACE = 'affiliate-zentrale/v1';
+@@ -153,6 +153,8 @@
+     private $disclosure_printed = array();
+     private $campaigns_request_cache = null;
+     private $ebay_canonical_worker_active = false;
++    private $ebay_worker_kick_registered = false;
++    private $ebay_worker_kick_at = 0;
+     private $ebay_run_settings_override = null;
+ 
+     public static function instance() {
