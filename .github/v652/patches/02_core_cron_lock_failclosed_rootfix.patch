@@ -32,18 +32,18 @@
 +        $run = $this->ebay_run_load();
 +        $next = function_exists('wp_next_scheduled') ? wp_next_scheduled(self::EBAY_WORKER_HOOK) : false;
 +        if (!$this->ebay_run_is_active($run) || $next === false || absint($next) > time()) { return true; }
-+        $this->ebay_run_fail(
++        return $this->ebay_run_fail_background_dispatch(
 +            'background_transport_lock_timeout',
-+            'Der Hintergrund-Worker konnte wegen einer blockierten WordPress-Cron-Sperre nicht sicher gestartet werden.',
 +            array('transport'=>'wp_cron','next_event'=>absint($next),'lock'=>(string)(function_exists('get_transient') ? get_transient('doing_cron') : ''))
 +        );
-+        return false;
 +    }
 +
 +    /** Fail closed if a due background event cannot be handed to core Cron. */
 +    private function ebay_run_fail_background_dispatch($code, $details = array()) {
 +        $run = $this->ebay_run_load();
 +        if (!$this->ebay_run_is_active($run)) { return false; }
++        if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::EBAY_WORKER_HOOK); }
++        $this->ebay_worker_dispatch_at = 0;
 +        $this->ebay_run_fail(
 +            $code,
 +            'Der Hintergrund-Worker konnte nicht sicher gestartet werden. Der letzte sichere Stand bleibt aktiv; ein sauberer Neustart ist möglich.',
