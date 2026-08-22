@@ -20,6 +20,12 @@ a(strpos($main,'private $ebay_worker_dispatch_at = 0;')!==false,'dispatch due ti
 a(strpos($run,'public function run_ebay_admin_ajax_tick()')!==false && strpos($run,"'transport'=>'wp_cron'")!==false,'admin/browser path remains scheduler/status compatibility only');
 a(strpos($main,"add_action(self::EBAY_WORKER_HOOK, array(\$this, 'run_ebay_canonical_worker'));")!==false,'canonical worker remains sole fach worker hook');
 a(strpos($run,'register_rest_route')===false && strpos($run,'wp_ajax_')===false,'no new direct HTTP fach-worker endpoint exists');
+a(strpos($run,'private function ebay_run_wait_for_cron_lock_resolution')!==false,'cron lock contention has bounded liveness resolver');
+a(strpos($run,'private function ebay_run_fail_background_dispatch')!==false,'background dispatch has explicit fail-closed helper');
+a(strpos($run,"'background_transport_lock_timeout'")!==false,'orphan cron lock has explicit terminal error');
+a(strpos($run,"'background_transport_dispatch_failed'")!==false,'failed core handoff has explicit terminal error');
+a(strpos($run,"if (!empty(\$lock)) { return true; }")===false,'fresh cron lock is never treated as successful dispatch');
+a(strpos($run,'$this->ebay_run_wait_for_cron_lock_resolution($lock, 5)')!==false,'cron lock wait is bounded to five seconds');
 if(getenv('PPAR_V652_STAGE')==='final'){
     $read=file_get_contents($root.'/readme.txt');
     a(strpos($main,' * Version: 6.52.0')!==false && strpos($main,"const VERSION = '6.52.0';")!==false,'final version is 6.52.0');
