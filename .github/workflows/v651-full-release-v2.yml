@@ -47,8 +47,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          chmod +x .github/v651/runner/run-v651-full-release-wrapper.sh
-          .github/v651/runner/run-v651-full-release-wrapper.sh
+          chmod +x .github/v651/runner/run-v651-full-release-wrapper-v3.sh
+          .github/v651/runner/run-v651-full-release-wrapper-v3.sh
 
       - name: Upload final verified V6.51 release
         if: success()
