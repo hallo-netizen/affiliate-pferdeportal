@@ -10,7 +10,11 @@ SRC=$(find "$ART" -type d -path '*/BLOCKED_DIAGNOSTIC_V12/affiliate-portal-route
 [ -n "$SRC" ] || { echo 'BLOCKED: source missing'; exit 1; }
 
 run_case(){
-  local ver="$1" port="$2" tag="${ver//./_}" WP="$ROOT/wp-$tag" OUT="$ROOT/out-$tag"
+  local ver="$1"
+  local port="$2"
+  local tag="${ver//./_}"
+  local WP="$ROOT/wp-$tag"
+  local OUT="$ROOT/out-$tag"
   rm -rf "$WP" "$OUT"; mkdir -p "$WP" "$OUT"
   wp core download --version="$ver" --path="$WP" --force --allow-root >/dev/null
   wp config create --path="$WP" --dbname=v651gate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root >/dev/null
