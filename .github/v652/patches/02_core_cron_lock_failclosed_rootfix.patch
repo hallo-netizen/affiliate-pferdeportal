@@ -1,0 +1,85 @@
+--- a/includes/trait-ppar-ebay-run.php
++++ b/includes/trait-ppar-ebay-run.php
+@@ -502,14 +502,66 @@
+         return true;
+     }
+ 
++    /**
++     * If core Cron is already locked, give the existing owner a short bounded
++     * chance to consume our due event or release the lock. A fresh/orphan lock
++     * must never be mistaken for successful dispatch: unresolved contention is
++     * converted into a clean failed run, preserving the safe public checkpoint.
++     */
++    private function ebay_run_wait_for_cron_lock_resolution($initial_lock, $max_wait_seconds = 5) {
++        $deadline = microtime(true) + max(1, absint($max_wait_seconds));
++        $seen_lock = (string)$initial_lock;
++        do {
++            $run = $this->ebay_run_load();
++            if (!$this->ebay_run_is_active($run)) { return true; }
++            $next = function_exists('wp_next_scheduled') ? wp_next_scheduled(self::EBAY_WORKER_HOOK) : false;
++            if ($next === false || absint($next) > time()) { return true; }
++            $lock = function_exists('get_transient') ? get_transient('doing_cron') : false;
++            if (empty($lock) || (string)$lock !== $seen_lock) {
++                if (function_exists('spawn_cron')) {
++                    $spawned = spawn_cron(microtime(true));
++                    if ($spawned !== false) { return true; }
++                }
++                $seen_lock = (string)$lock;
++            }
++            usleep(250000);
++        } while (microtime(true) < $deadline);
++
++        $run = $this->ebay_run_load();
++        $next = function_exists('wp_next_scheduled') ? wp_next_scheduled(self::EBAY_WORKER_HOOK) : false;
++        if (!$this->ebay_run_is_active($run) || $next === false || absint($next) > time()) { return true; }
++        $this->ebay_run_fail(
++            'background_transport_lock_timeout',
++            'Der Hintergrund-Worker konnte wegen einer blockierten WordPress-Cron-Sperre nicht sicher gestartet werden.',
++            array('transport'=>'wp_cron','next_event'=>absint($next),'lock'=>(string)(function_exists('get_transient') ? get_transient('doing_cron') : ''))
++        );
++        return false;
++    }
++
++    /** Fail closed if a due background event cannot be handed to core Cron. */
++    private function ebay_run_fail_background_dispatch($code, $details = array()) {
++        $run = $this->ebay_run_load();
++        if (!$this->ebay_run_is_active($run)) { return false; }
++        $this->ebay_run_fail(
++            $code,
++            'Der Hintergrund-Worker konnte nicht sicher gestartet werden. Der letzte sichere Stand bleibt aktiv; ein sauberer Neustart ist möglich.',
++            is_array($details) ? $details : array()
++        );
++        return false;
++    }
++
+     /** Dispatch the persisted worker after the response/current Cron ends. */
+     public function run_ebay_worker_background_dispatch() {
+         $this->ebay_worker_dispatch_registered = false;
+         $run = $this->ebay_run_load();
+         if (!$this->ebay_run_is_active($run)) { return false; }
+-        if (!function_exists('wp_next_scheduled')) { return false; }
++        if (!function_exists('wp_next_scheduled')) {
++            return $this->ebay_run_fail_background_dispatch('background_transport_unavailable', array('transport'=>'wp_cron','missing'=>'wp_next_scheduled'));
++        }
+         $next = wp_next_scheduled(self::EBAY_WORKER_HOOK);
+-        if ($next === false) { return false; }
++        if ($next === false) {
++            return $this->ebay_run_fail_background_dispatch('background_transport_event_missing', array('transport'=>'wp_cron'));
++        }
+         $next = absint($next);
+         $wait = max(0, $next - time());
+         if ($wait > 0 && $wait <= 2) { usleep(($wait * 1000000) + 100000); }
+@@ -523,9 +575,11 @@
+             $spawned = spawn_cron(microtime(true));
+             if ($spawned !== false) { return true; }
+             $lock = function_exists('get_transient') ? get_transient('doing_cron') : false;
+-            if (!empty($lock)) { return true; }
++            if (!empty($lock)) { return $this->ebay_run_wait_for_cron_lock_resolution($lock, 5); }
+         }
+-        return $this->ebay_run_spawn_core_cron_handoff();
++        $handoff = $this->ebay_run_spawn_core_cron_handoff();
++        if ($handoff) { return true; }
++        return $this->ebay_run_fail_background_dispatch('background_transport_dispatch_failed', array('transport'=>'wp_cron'));
+     }
+ 
+     private function ebay_run_pause_for_budget($run, $reason = 'work_block_budget') {
