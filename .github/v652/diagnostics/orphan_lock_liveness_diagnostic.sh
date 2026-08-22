@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Immutable counterproof against the pre-fix V6.52 patch01 artifact.
 ARTIFACT_ID=9480472444
 ROOT=/tmp/v652-orphan-lock-liveness
 ART=$ROOT/artifact
@@ -63,11 +64,11 @@ PY
   echo "WP=$ver COUNT=$count CRON_HITS=$cron_hits"
   echo "$status" > "$OUT/run-serialized.txt"
   kill "$SP" 2>/dev/null || true; pkill -P "$SP" 2>/dev/null || true; wait "$SP" 2>/dev/null || true
-  if [ "$count" = 0 ]; then echo "ORPHAN_LOCK_LIVENESS_WP_${tag}=FAIL_STALLED"; return 2; fi
-  echo "ORPHAN_LOCK_LIVENESS_WP_${tag}=PASS"
+  [ "$count" = 0 ] || { echo "COUNTERPROOF_UNEXPECTED_TICK_WP_${tag}"; return 1; }
+  [ "$cron_hits" = 0 ] || { echo "COUNTERPROOF_UNEXPECTED_CRON_WP_${tag}"; return 1; }
+  echo "PRE_FIX_ORPHAN_LOCK_STALL_WP_${tag}=EXPECTED_RED_CONFIRMED"
 }
 
-rc=0
-run_case 6.8.3 8141 || rc=$?
-run_case 7.0.1 8142 || rc=$?
-exit "$rc"
+run_case 6.8.3 8141
+run_case 7.0.1 8142
+echo 'PRE_FIX_ORPHAN_LOCK_COUNTERPROOF=PASS'
