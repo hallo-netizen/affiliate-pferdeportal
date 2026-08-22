@@ -10,7 +10,14 @@ from pathlib import Path
 import sys
 s=Path(sys.argv[1]).read_text()
 old="echo '9b977cf8e83823a9d873536d6e2ab5ae9dcbbdcc233d20d5e7a45047cd8405b9  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -"
-new="python3 .github/v652/runner/patch_v652_final_arch_legacy_red.py .github/v651_gate/run-v651-full-release.sh\\\\npython3 .github/v652/runner/patch_v652_lock_failclosed_release_gate.py .github/v651_gate/run-v651-full-release.sh\\\\necho 'f89bb521fe2fa0e05cfdda51ee8eb90d39d4ec8d5aebf8f6470015b4e15cb763  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -"
+sep=chr(92)*4+'n'
+new=(
+    "python3 .github/v652/runner/patch_v652_final_arch_legacy_red.py .github/v651_gate/run-v651-full-release.sh"
+    + sep +
+    "python3 .github/v652/runner/patch_v652_lock_failclosed_release_gate.py .github/v651_gate/run-v651-full-release.sh"
+    + sep +
+    "echo 'f89bb521fe2fa0e05cfdda51ee8eb90d39d4ec8d5aebf8f6470015b4e15cb763  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -"
+)
 if s.count(old)!=1:
     raise SystemExit('BLOCKED: V6.52 v18 final-gate checksum anchor not found exactly once')
 Path(sys.argv[2]).write_text(s.replace(old,new,1))
