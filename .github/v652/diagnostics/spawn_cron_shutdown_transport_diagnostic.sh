@@ -7,6 +7,8 @@ wp core download --version=7.0.1 --path="$WP" --force --allow-root >/dev/null
 wp config create --path="$WP" --dbname=v651gate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root >/dev/null
 wp db reset --yes --path="$WP" --allow-root >/dev/null
 wp core install --path="$WP" --url=http://127.0.0.1:8131 --title='V652 Spawn Shutdown Diagnostic' --admin_user=a --admin_password='GateOnly-20260822!' --admin_email=a@example.invalid --skip-email --allow-root >/dev/null
+# Prevent WP-CLI setup commands from creating an unreachable pre-server cron lock.
+wp config set DISABLE_WP_CRON true --raw --path="$WP" --allow-root >/dev/null
 mkdir -p "$WP/wp-content/mu-plugins"
 cat > "$WP/wp-content/mu-plugins/v652-spawn-shutdown.php" <<'PHP'
 <?php
@@ -29,30 +31,36 @@ add_action('init', function(){
     }, 999, 2);
     wp_schedule_single_event(time(), 'v652_spawn_probe');
     if ($case === 'init') {
+        $before=(string)get_transient('doing_cron');
         $r = spawn_cron(microtime(true));
-        echo 'CASE_INIT RETURN=' . var_export($r, true) . ' LOCK=' . (string)get_transient('doing_cron') . "\n";
+        echo 'CASE_INIT BEFORE=' . $before . ' RETURN=' . var_export($r, true) . ' LOCK=' . (string)get_transient('doing_cron') . "\n";
         exit;
     }
     if ($case === 'shutdown') {
-        add_action('shutdown', function(){
+        $before=(string)get_transient('doing_cron');
+        add_action('shutdown', function() use ($before){
             $r = spawn_cron(microtime(true));
-            file_put_contents('/tmp/v652-shutdown-return.log', 'RETURN=' . var_export($r, true) . ' LOCK=' . (string)get_transient('doing_cron') . "\n");
+            file_put_contents('/tmp/v652-shutdown-return.log', 'BEFORE=' . $before . ' RETURN=' . var_export($r, true) . ' LOCK=' . (string)get_transient('doing_cron') . "\n");
         }, PHP_INT_MAX);
-        echo "CASE_SHUTDOWN_REGISTERED\n";
+        echo "CASE_SHUTDOWN_REGISTERED BEFORE=$before\n";
         exit;
     }
 }, PHP_INT_MAX);
 PHP
+# Remove DISABLE_WP_CRON without loading WordPress after it becomes false.
+python3 - "$WP/wp-config.php" <<'PY'
+from pathlib import Path
+import sys
+p=Path(sys.argv[1]); s=p.read_text()
+lines=[ln for ln in s.splitlines() if "define( 'DISABLE_WP_CRON'" not in ln and 'define(\'DISABLE_WP_CRON\'' not in ln and 'define("DISABLE_WP_CRON"' not in ln]
+p.write_text('\n'.join(lines)+'\n')
+PY
 rm -f /tmp/v652-spawn-probe.log /tmp/v652-shutdown-return.log
 PHP_CLI_SERVER_WORKERS=4 php -S 127.0.0.1:8131 -t "$WP" > "$ROOT/server.log" 2>&1 & SP=$!
 trap 'kill "$SP" 2>/dev/null || true; pkill -P "$SP" 2>/dev/null || true' EXIT
 sleep 1
 run_case(){
   local c=$1
-  wp transient delete doing_cron --path="$WP" --allow-root >/dev/null 2>&1 || true
-  wp option update v652_spawn_probe_count 0 --path="$WP" --allow-root >/dev/null
-  wp cron event delete v652_spawn_probe --path="$WP" --allow-root >/dev/null 2>&1 || true
-  : > "$ROOT/server-before-$c.txt"; cp "$ROOT/server.log" "$ROOT/server-before-$c.txt"
   curl --fail --silent --show-error "http://127.0.0.1:8131/?v652_case=$c" > "$ROOT/$c-response.txt"
   local count=0
   for i in $(seq 1 80); do
