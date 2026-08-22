@@ -1,0 +1,44 @@
+{
+  "contract": "STARTMASTER0055_PRODUKTIONS_CHECKPOINT_OPTIMIERUNG_FINAL_V1",
+  "status": "PASS_GOVERNANCE_ONLY",
+  "repository": "hallo-netizen/affiliate-pferdeportal",
+  "branch": "workflow/production-checkpoint-optimization-20260822",
+  "base_head": "c8b4dff111ba61f9d6c55b5f11a4c10e939edf83",
+  "main_modified": false,
+  "master": {
+    "name": "NULLPUNKT_TEXTMASCHINE_STARTMASTER0055_PRODUKTIONS_CHECKPOINT_OPTIMIERUNG_20260822.zip",
+    "bytes": 185768492,
+    "sha256": "a02084342aaecb6e8ed9c43d943e1b0d4337d10db5b25d321aa8392c09b68b26",
+    "zip_test": "PASS",
+    "fresh_unpack_manifest": "5667/5667 PASS",
+    "fresh_total_files": 5670,
+    "manifest_sha256": "fd315ed9782f2373916b919068e35aa0a7df027956813e72b29ad7c55fd7d493"
+  },
+  "governance_exact_archive": {
+    "name": "STARTMASTER0055_PRODUKTIONSOPTIMIERUNG_GOVERNANCE_EXACT_20260822.zip",
+    "sha256": "a8da6bb9d15daa09ad0436c3ddf99182bde1a73e000f1a9448c42b9b08c297fe",
+    "github_blob_sha": "5272b2de16c91a0513fa73112bbd35e3bb704011"
+  },
+  "pserc_installer": {
+    "sha256": "8539d684cbbe01f0cc555ec598e055288f5696ffe0b2bdde6d16740b68c9cfd7",
+    "master_copies": 2,
+    "copies_byteidentical": true
+  },
+  "delta": {
+    "protected_runtime_deltas": 0,
+    "plugin_source_delta": 0,
+    "text_machine_delta": 0,
+    "content_delta": 0,
+    "design_delta": 0,
+    "scope": "governance/worklog/checkpoint/resume/execution optimization only"
+  },
+  "optimization": {
+    "hash_bound_static_reuse": true,
+    "fresh_dynamic_checks_preserved": true,
+    "resume_checkpoint_required": true,
+    "voluntary_intermediate_reports_forbidden": true,
+    "language_tool_6_8_minimal_correction_loop": true,
+    "all_existing_gates_preserved": true
+  },
+  "publish_allowed": false
+}
