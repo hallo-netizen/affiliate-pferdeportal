@@ -3,7 +3,7 @@ set -euo pipefail
 BASE=.github/v651/runner/run-v651-full-release-wrapper-v4.sh
 [ "$(git hash-object "$BASE")" = "2dc891cab679dc352ab6308f771ea39b15cb6234" ] || { echo 'BLOCKED: V6.51 v4 wrapper blob mismatch'; exit 1; }
 set +e
-"$BASE"
+bash "$BASE"
 rc=$?
 set -e
 if [ "$rc" -ne 0 ]; then
