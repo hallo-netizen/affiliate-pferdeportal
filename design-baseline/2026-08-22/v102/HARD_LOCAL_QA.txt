@@ -1,0 +1,20 @@
+V102 HARD LOCAL QA
+REAL PRODUCTION PLAN ARTICLES: 17
+ARTICLE TYPES: {"Beratung": 4, "FAQ": 4, "Pflege": 4, "Vergleich": 5}
+STRUCTURE: PASS
+V101 late direct-child selector matched new PPM wrappers: 0/17
+V102 structural selector matched new PPM wrappers + following p: 17/17
+BROWSER GEOMETRY + ADVERSARIAL + NEGATIVE: 57/57 PASS
+Viewports: 1200 / 900 / 390
+Horse static single-post CSS unchanged vs V101: PASS
+Universal static CSS unchanged vs V101: PASS
+
+FRESH INSTALLER V102 – exact emitted CSS
+Cases: 51/51 PASS
+Viewports: 1200/900/390
+Source: CSS extracted from freshly unpacked Pferde installer
+Hook priority: 200500 PASS
+
+V100 -> V101 exact new-PPM geometry comparison
+Same geometry: 51/51
+Reason: V101 appended only direct-child .entry-content selectors; real PPM wrapper is nested.
