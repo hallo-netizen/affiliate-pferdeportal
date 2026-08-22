@@ -1,0 +1,28 @@
+V101 HARD LOCAL TABLE SPACING QA
+================================
+ROOT CAUSE PROTOCOL PROOF: PASS
+- V83 contract: 28 px after single-post tables.
+- V94 contract: existing 28 px must remain during table normalization.
+- V100 code reproduction: Pferde comparison wrapper=0 px, Pferde direct table=0 px, Universal direct table=0 px.
+
+V101 positive checks:
+- WordPress wrapper outer margin-bottom = 28 px: PASS
+- comparison-table-wrap outer margin-bottom = 28 px: PASS
+- direct table margin-bottom = 28 px: PASS
+- wrapped inner table margin-bottom = 0 px: PASS (no double spacing)
+
+V101 negative/regression checks:
+- non-single-post direct table remains 0 px: PASS
+- Pferde PHP normalized against V100: byte-identical except version tokens: PASS
+- Pferde CSS before V101 append block: identical to V100: PASS
+- Universal PHP normalized against V100: byte-identical except version tokens: PASS
+- Universal CSS before V101 append block: identical to V100: PASS
+- Pferde PHP lint: 4/4 PASS
+- Universal PHP lint: 11/11 PASS
+- Pferde JSON parse: 15/15 PASS
+- CSS parse errors: Pferde 0 / Universal 0
+- Pferde Source <-> Fresh installer: 492/492 byte-identical PASS
+- Universal Source <-> Fresh installer: 15/15 byte-identical PASS
+- Pferde Master manifest: 754/754 PASS
+- Universal Master manifest: 260/260 PASS
+- all four ZIP integrity tests: PASS
