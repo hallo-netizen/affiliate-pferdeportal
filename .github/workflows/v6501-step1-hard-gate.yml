@@ -104,12 +104,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # The binary ZIP is transport only. The production rootfix text file is
-          # the authority and is verified before and after extraction.
-          echo 'b9431e34ed85c6605ed2ec8d2918145e118142daaffea7377a5a1d29ce673c04  .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch' | sha256sum -c -
+          test "$(git hash-object .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch)" = 'd98465c6e87d8b362fc90014999f3020d042e3c8'
           unzip -t .github/v6501/V6501_STEP1_GATE_BUNDLE.zip >/dev/null
           unzip -qo .github/v6501/V6501_STEP1_GATE_BUNDLE.zip -d "$GITHUB_WORKSPACE"
-          echo 'b9431e34ed85c6605ed2ec8d2918145e118142daaffea7377a5a1d29ce673c04  .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch' | sha256sum -c -
+          test "$(git hash-object .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch)" = 'd98465c6e87d8b362fc90014999f3020d042e3c8'
           find .github/v6501 -type f \( -name '*.php' -o -name '*.sh' -o -name '*.patch' \) -print0 | sort -z | xargs -0 sha256sum > /tmp/v6501_gate_files.sha
           cat /tmp/v6501_gate_files.sha
 
