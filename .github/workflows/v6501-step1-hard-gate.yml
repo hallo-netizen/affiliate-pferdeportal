@@ -104,7 +104,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git hash-object .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch)" = 'd98465c6e87d8b362fc90014999f3020d042e3c8'
+          test "$(git hash-object .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch)" = '26ecb28f253c28ef91d0a013935accb6e8e2c286'
           php -l .github/v6501/tests/test_coverage_gap_contract_v6501.php
           php -l .github/v6501/tests/test_architecture_v6501.php
           php -l .github/v6501/real/coverage_gap_recovery_drift_v6501.php
