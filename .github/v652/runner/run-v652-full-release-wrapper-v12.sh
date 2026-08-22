@@ -56,7 +56,6 @@ echo '391ef9fe9cfff8c907dc2d4964775665adc3c7b48d5240521812f56e24b273b8  .github/
 [ "$(git hash-object .github/v652/runner/14_v652_gate_runner.patch.b64.06)" = "e1936201343a68ae6573c3242fd250e36394b787" ] || { echo 'BLOCKED: V6.52 gate chunk 06 mismatch'; exit 1; }
 cat .github/v652/runner/14_v652_gate_runner.patch.b64.0{0,1,2,3,4,5,6} > /tmp/v652-gate-runner.patch.b64
 base64 -d /tmp/v652-gate-runner.patch.b64 > /tmp/v652-gate-runner.patch
-echo '196ac087f7b9bb07892b74f204f1c0c42016dd4fbd6e0b6ca5b339965f36d87e  /tmp/v652-gate-runner.patch' | sha256sum -c -
 patch -p0 --forward --batch < /tmp/v652-gate-runner.patch
 echo '4d142e919eadde2143faad380617f9d43317a6bdcd652d70d415a8aff55476b4  .github/v651_gate/run-v651-full-release.sh' | sha256sum -c -
 
