@@ -1,0 +1,15 @@
+V103 HARD LOCAL QA: PASS
+Direct real source: Welche Regendecke mit Abschwitzfunktion ist die beste?
+Wrapped real source: Übergangsdecken auswählen – die wichtigsten Entscheidungskriterien
+1440px legacy=54.44 direct V102=17.00 -> V103=54.44; wrapped V102=28.00 -> V103=54.44; negative unchanged; PASS
+1200px legacy=47.52 direct V102=17.00 -> V103=47.52; wrapped V102=28.00 -> V103=47.52; negative unchanged; PASS
+900px legacy=44.55 direct V102=17.00 -> V103=44.55; wrapped V102=28.00 -> V103=44.55; negative unchanged; PASS
+390px legacy=44.55 direct V102=17.00 -> V103=44.55; wrapped V102=28.00 -> V103=44.55; negative unchanged; PASS
+
+Packaged/fresh installer browser rerun: direct and wrapped V103 equal legacy reference at all four viewports.
+Pferde PHP source: 4/4 PASS; fresh: 4/4 PASS.
+Universal PHP source: 11/11 PASS; fresh: 11/11 PASS.
+Pferde Source/Fresh-Unpack: 492/492 byte-identical.
+Universal Source/Fresh-Unpack: 15/15 byte-identical.
+Pferde Master manifest/fresh: 778/778 PASS.
+Universal Master manifest/fresh: 284/284 PASS.
