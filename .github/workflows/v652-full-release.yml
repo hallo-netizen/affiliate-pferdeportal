@@ -1,0 +1,74 @@
+name: V6.52 core-cron self-pump full release gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  v652-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v652-core-cron-selfpump-rootfix-20260822'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v651gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - name: Checkout V6.52 branch
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+
+      - name: Execute complete V6.52 release gate from zero
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          chmod +x .github/v652/runner/run-v652-full-release-wrapper-v10.sh
+          .github/v652/runner/run-v652-full-release-wrapper-v10.sh
+
+      - name: Upload final verified V6.52 release
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V652_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.52.0_CORE_CRON_SELFPUMP_ROOTFIX_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_52_0_CORE_CRON_SELFPUMP_ROOTFIX_REALGATE_20260822.zip
+            V652_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload blocked V6.52 evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V652_BLOCKED_EVIDENCE
+          path: V652_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
