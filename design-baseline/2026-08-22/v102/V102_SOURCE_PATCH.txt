@@ -1,0 +1,38 @@
+--- PFERDE 1.50.466 -> 1.50.467 ---
+- Version: 1.50.466
++ Version: 1.50.467
+- const VERSION = '1.50.466';
++ const VERSION = '1.50.467';
+
++ add_action('wp_head', [__CLASS__, 'print_ppm_table_follow_gap_v150467'], 200500);
+
++ public static function print_ppm_table_follow_gap_v150467() {
++     if (is_admin() || !is_singular('post')) { return; }
++     ?>
++ <style id="pftk-ppm-table-follow-gap-v150467">
++ html body.single-post article .entry-content article.ppm-generated section[data-block="table"] > .pm-table-wrap.wp-block-table {
++   margin-bottom: 0 !important;
++ }
++ html body.single-post article .entry-content article.ppm-generated section[data-block="table"] > .pm-table-wrap.wp-block-table + p {
++   margin-top: 28px !important;
++ }
++ </style>
++     <?php
++ }
+
+--- UNIVERSAL 2.2.37 -> 2.2.38 ---
+- Version: 2.2.37
++ Version: 2.2.38
+- define('UPDS_VERSION', '2.2.37');
++ define('UPDS_VERSION', '2.2.38');
+
++ add_action('wp_head', [__CLASS__, 'print_structured_table_follow_gap'], 200500);
++ public static function print_structured_table_follow_gap() {
++     if (is_admin() || !is_singular('post')) { return; }
++     echo '<style id="upds-structured-table-follow-gap-v2238">'
++         . 'html body.single-post article .entry-content article.ppm-generated section[data-block="table"]>.pm-table-wrap.wp-block-table{margin-bottom:0!important}'
++         . 'html body.single-post article .entry-content article.ppm-generated section[data-block="table"]>.pm-table-wrap.wp-block-table+p{margin-top:28px!important}'
++         . '</style>';
++ }
+
+Static single-post CSS files remain byte-identical to V101; no legacy selector was altered.
