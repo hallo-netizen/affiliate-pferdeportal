@@ -14,12 +14,18 @@ No PASS, installer or MASTER release may be emitted unless the automated release
 
 - Full release run `32584518233`: BLOCKED in the real WordPress/MariaDB workflow after the V6.52 background-dispatch production step. Final release artifact correctly skipped; only blocked evidence emitted.
 - Full release run `32586758988`: BLOCKED at the same real autonomous background gate after replacing CLI-only seeding with one real HTTP seed request. Final release artifact correctly skipped.
-- Direct WordPress nonblocking HTTP diagnostic `32587605700`: PASS, proving `wp_remote_post(..., blocking=false)` can reach a local HTTP target in the isolated CI environment.
-- Core-Cron multiworker diagnostic `32587822739`: FAIL with `COUNT=0`; no `POST /wp-cron.php` reached the server after the single seed request. This proves the remaining defect is transport/dispatch, not canonical fach-worker logic.
-- Earlier lock/dual-server diagnostics also remained RED and were not treated as release evidence.
+- Direct WordPress nonblocking HTTP diagnostic `32587605700`: PASS; three nonblocking `wp_remote_post()` calls reached a local HTTP target.
+- Earlier lock/dual-server/multiworker diagnostics were RED. They were not release evidence.
+- Corrected isolated transport diagnostic `32590451309`: PASS. With WP-CLI cron spawning disabled during setup, no pre-server lock, automatic `_wp_cron` interference removed, and four PHP workers, `spawn_cron()` produced a real `POST /wp-cron.php` both during a normal request and at shutdown. Both scheduled probes executed exactly once.
 
-## Current root-cause step
+## Proven harness root cause for the previous V6.52 real-gate RED
 
-Commit `67ce4434bb461ee4d05afed98d38bc5da64254c3` adds an isolated diagnostic that compares `spawn_cron()` when invoked during a normal request versus at request shutdown, with automatic core `_wp_cron` removed, a clean cron lock, a local multiworker HTTP server, and no browser/app request after the seed. Its purpose is to prove the exact dispatch boundary before any further production change.
+The earlier autonomous self-pump harness bootstrapped WordPress repeatedly through WP-CLI before its local HTTP server existed. Those WP-CLI requests could create a fresh `doing_cron` lock while their nonblocking loopback target was unreachable. The resulting fresh orphan lock made the later seed request look like a concurrent Cron owner and suppressed the first autonomous dispatch. That contaminated the supposed clean no-browser proof.
 
-No production change follows until this diagnostic has identified the transport failure. After any production correction the complete release workflow must restart from zero.
+This is a test-harness defect, not evidence that clean WordPress `spawn_cron()` itself is broken. It does **not** erase the live V6.51 defect and it does **not** prove V6.52 releasable.
+
+## Current complete-gate step
+
+Commits `9eaf22a2d2295424e2f3b947945fc52521ef7ec8`, `bdae9e23a7fd1c279625e9230bdcd5e7de74ff86`, and `1b532588a07c9d4bce9bdc09e3edd4e45a3699e0` harden only the V6.52 real-gate harness: WP-Cron is disabled while WP-CLI prepares the site, `doing_cron` is cleared under that guard, the guard is removed without bootstrapping WordPress, and the actual browser-closed proof runs against a four-worker HTTP server. Production code is unchanged by this harness correction.
+
+The complete V6.52 release pipeline is restarted from zero via wrapper v17. Even if the clean chain succeeds, a fresh/orphan Cron-lock collision remains a mandatory negative liveness case before final release because a single failed handoff must never leave a run indefinitely at tick 0.
