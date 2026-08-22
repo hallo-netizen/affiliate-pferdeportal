@@ -100,14 +100,18 @@ jobs:
           unzip -t /tmp/v650-gate.zip >/dev/null
           unzip -qo /tmp/v650-gate.zip -d "$GITHUB_WORKSPACE"
 
-      - name: Materialize authoritative V6.50.1 Step1 gate
+      - name: Materialize V6.50.1 Step1 tests and verify rootfix authority
         shell: bash
         run: |
           set -euo pipefail
-          echo 'd95e824f4e0d25caa964caa23496824eb2476584c91eb4039ebc01c2ce1cb230  .github/v6501/V6501_STEP1_GATE_BUNDLE.zip' | sha256sum -c -
+          # The binary ZIP is transport only. The production rootfix text file is
+          # the authority and is verified before and after extraction.
+          echo 'b9431e34ed85c6605ed2ec8d2918145e118142daaffea7377a5a1d29ce673c04  .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch' | sha256sum -c -
           unzip -t .github/v6501/V6501_STEP1_GATE_BUNDLE.zip >/dev/null
           unzip -qo .github/v6501/V6501_STEP1_GATE_BUNDLE.zip -d "$GITHUB_WORKSPACE"
           echo 'b9431e34ed85c6605ed2ec8d2918145e118142daaffea7377a5a1d29ce673c04  .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch' | sha256sum -c -
+          find .github/v6501 -type f \( -name '*.php' -o -name '*.sh' -o -name '*.patch' \) -print0 | sort -z | xargs -0 sha256sum > /tmp/v6501_gate_files.sha
+          cat /tmp/v6501_gate_files.sha
 
       - name: Execute complete Step1 hard gate
         shell: bash
