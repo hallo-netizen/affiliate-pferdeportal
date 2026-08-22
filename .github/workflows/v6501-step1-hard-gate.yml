@@ -1,4 +1,4 @@
-name: V6.50.1 step1 stale-proof rootfix hard gate
+name: V6.50.1 full stale-proof rootfix release gate
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ permissions:
   actions: read
 
 jobs:
-  v6501-step1:
+  v6501-release:
     if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v6501-safe-gap-stale-proof-rootcause-20260821'
     runs-on: ubuntu-24.04
     timeout-minutes: 120
@@ -100,41 +100,43 @@ jobs:
           unzip -t /tmp/v650-gate.zip >/dev/null
           unzip -qo /tmp/v650-gate.zip -d "$GITHUB_WORKSPACE"
 
-      - name: Materialize V6.50.1 Step1 tests and verify rootfix authority
+      - name: Verify V6.50.1 gate inputs
         shell: bash
         run: |
           set -euo pipefail
           test "$(git hash-object .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch)" = 'd98465c6e87d8b362fc90014999f3020d042e3c8'
-          unzip -t .github/v6501/V6501_STEP1_GATE_BUNDLE.zip >/dev/null
-          unzip -qo .github/v6501/V6501_STEP1_GATE_BUNDLE.zip -d "$GITHUB_WORKSPACE"
-          test "$(git hash-object .github/v6501/patches/01_safe_gap_stale_proof_rootfix.patch)" = 'd98465c6e87d8b362fc90014999f3020d042e3c8'
-          find .github/v6501 -type f \( -name '*.php' -o -name '*.sh' -o -name '*.patch' \) -print0 | sort -z | xargs -0 sha256sum > /tmp/v6501_gate_files.sha
-          cat /tmp/v6501_gate_files.sha
+          php -l .github/v6501/tests/test_coverage_gap_contract_v6501.php
+          php -l .github/v6501/tests/test_architecture_v6501.php
+          php -l .github/v6501/real/coverage_gap_recovery_drift_v6501.php
+          bash -n .github/v6501/scripts/run-v6501-full-release.sh
 
-      - name: Execute complete Step1 hard gate
+      - name: Execute complete V6.50.1 release gate
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          chmod +x .github/v6501/scripts/run-source-matrix-v6501.sh .github/v6501/scripts/run-v6501-step1-hard-gate.sh
-          .github/v6501/scripts/run-v6501-step1-hard-gate.sh
+          chmod +x .github/v6501/scripts/run-v6501-full-release.sh
+          .github/v6501/scripts/run-v6501-full-release.sh
 
-      - name: Upload Step1 PASS evidence
+      - name: Upload final verified V6.50.1 release
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: V6501_STEP1_COMPLETE_WORKFLOW_PASS
-          path: V6501_STEP1_EVIDENCE/
+          name: V6501_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.50.1_SAFE_GAP_STALE_PROOF_ROOTFIX_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_50_1_SAFE_GAP_STALE_PROOF_ROOTFIX_REALGATE_20260822.zip
+            V6501_RELEASE_EVIDENCE/
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
 
-      - name: Upload Step1 BLOCKED evidence
+      - name: Upload blocked V6.50.1 evidence
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: V6501_STEP1_BLOCKED_EVIDENCE
-          path: V6501_STEP1_EVIDENCE/
+          name: V6501_BLOCKED_EVIDENCE
+          path: V6501_RELEASE_EVIDENCE/
           include-hidden-files: true
           if-no-files-found: warn
           retention-days: 14
