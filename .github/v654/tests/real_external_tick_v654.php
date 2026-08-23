@@ -1,7 +1,7 @@
 <?php
 if(!defined('ABSPATH')){fwrite(STDERR,"WordPress required\n");exit(2);}
-$tests=0;$fails=0;
-function t($cond,$name){global $tests,$fails;$tests++;if(!$cond){$fails++;echo "FAIL $name\n";}else echo "PASS $name\n";}
+$GLOBALS['v654_tests']=0;$GLOBALS['v654_fails']=0;
+function t($cond,$name){$GLOBALS['v654_tests']++;if(!$cond){$GLOBALS['v654_fails']++;echo "FAIL $name\n";}else echo "PASS $name\n";}
 function priv($obj,$name,...$args){$r=new ReflectionMethod($obj,$name);$r->setAccessible(true);return $r->invokeArgs($obj,$args);}
 function data_of($response){return $response instanceof WP_REST_Response?$response->get_data():$response;}
 
@@ -85,5 +85,8 @@ t(absint($after2['transport_tick_count']??0)===1,'failed_run_second_tick_does_no
 t(($r2['status']??'')==='failed'&&absint($r2['restart_required']??0)===1,'failed_run_not_auto_restarted_by_scheduler');
 
 delete_option($runKey);delete_option($checkpointKey);
-echo "REAL_EXTERNAL_TICK_V654_ASSERTIONS=$tests FAIL=$fails\n";
-exit($fails?1:0);
+// Restore an explicitly fresh enabled fixture for the subsequent real HTTP process.
+update_option(Pferdeportal_Affiliate_Router::OPTION_NETWORK_EBAY,$settings,false);
+t(!empty((array)get_option(Pferdeportal_Affiliate_Router::OPTION_NETWORK_EBAY,array())),'http_fixture_persisted');
+echo "REAL_EXTERNAL_TICK_V654_ASSERTIONS={$GLOBALS['v654_tests']} FAIL={$GLOBALS['v654_fails']}\n";
+exit($GLOBALS['v654_fails']?1:0);
