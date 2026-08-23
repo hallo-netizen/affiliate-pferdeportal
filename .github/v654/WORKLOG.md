@@ -55,3 +55,11 @@ Der vollständige Lauf erreichte erneut 31/31 Architektur, 55/55 Kernworkflow-Pa
 Die gespeicherte Testoption wurde beim frischen WordPress-/Plugin-Bootstrap zulässigerweise auf den realen providerfähigen Zustand normalisiert und ohne Credentials wieder deaktiviert. Das ist kein Produktionsfehler. Die Due-/Autostart-Logik ist bereits im selben echten WordPress mit deterministischem Zustand geprüft; der separate HTTP-Prozess soll ausschließlich beweisen, dass der reale REST-Endpunkt erreichbar ist, einen falschen Schlüssel mit HTTP 403 ablehnt und den korrekten Schlüssel mit HTTP 200 sowie gültigem JSON-Status akzeptiert.
 
 Korrektur ausschließlich in der Prüfinfrastruktur: keine künstliche `enabled=true`-Persistenzannahme über Prozessgrenzen mehr; HTTP-Server-Readiness wird explizit geprüft; falscher Schlüssel muss 403 liefern; korrekter Schlüssel muss 200 und gültiges JSON mit `status` liefern. Produktionspatch bleibt bytegleich. Danach wird der komplette Releaseworkflow erneut von null ausgeführt.
+
+## Gesamtworkflow-Nachprüfung nach erstem FINAL-PASS – widersprüchliche Alt-Dokumentation
+
+Nach dem ersten automatisch grünen V6.54-Endlauf wurde das erzeugte Release-Artefakt zusätzlich als Ganzes gegen den aktuellen Betriebsvertrag gelesen. Dabei blieb im `readme.txt` ein historischer Abschnitt aus einem älteren Browser-/Admin-AJAX-Betriebsmodus erhalten, der ausdrücklich behauptete, Browser-Unabhängigkeit sei nicht erfüllt. Das widerspricht der V6.54-Zielarchitektur und dürfte in einer bindenden MASTER nicht stehen bleiben, obwohl Runtime, Tests und neuer 6.54-Abschnitt korrekt waren.
+
+Die Releasefreigabe wurde deshalb nicht an den Nutzer ausgegeben. Innerhalb des bereits vorhandenen 4-Dateien-Produktionsscopes wird ausschließlich dieser veraltete `readme.txt`-Abschnitt durch den aktuellen externen REST-Taktgeber-Vertrag ersetzt. Zusätzlich prüft die Releasepipeline Source und Fresh-Unpack negativ auf den alten Browser-Text und positiv auf den aktuellen Vertrag; die Korrektur wird als eigener Patch in der MASTER protokolliert und `README_CURRENT_TRANSPORT=PASS` wird Bestandteil der finalen Entscheidung.
+
+Runtime-/Worker-/Providerlogik bleibt hierbei bytegleich. Anschließend läuft der vollständige V6.54-Releaseworkflow erneut von null; erst dessen automatisches `FINAL_RELEASE_GATE=PASS` ist freigabefähig.
