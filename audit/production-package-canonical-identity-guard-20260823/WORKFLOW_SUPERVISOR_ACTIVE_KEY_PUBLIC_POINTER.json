@@ -1,0 +1,12 @@
+{
+  "key_id": "workflow-ed25519-8f521756284cb375",
+  "public_key_sha256": "8f521756284cb375c907f508dac333f51b71b515419ee271ca68fa149db66f87",
+  "public_key_b64": "6FCxYycU2bJysJFvtH5xZ0ia+k59ZLyK6Av8d9/ujm0=",
+  "algorithm": "ED25519",
+  "private_key_backup_format": "ENCRYPTED_PKCS8_IN_ZIP",
+  "private_key_in_wordpress_plugin": false,
+  "private_key_in_master": false,
+  "external_backup_required": true,
+  "backup_filename": "WORKFLOW_SUPERVISOR_ED25519_SIGNING_KEY_BACKUP_workflow-ed25519-8f521756284cb375_ENCRYPTED.zip",
+  "passphrase_filename": "WORKFLOW_SUPERVISOR_ED25519_SIGNING_KEY_PASSPHRASE_workflow-ed25519-8f521756284cb375.txt"
+}
