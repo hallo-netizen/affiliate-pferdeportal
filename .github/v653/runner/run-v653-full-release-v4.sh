@@ -6,7 +6,7 @@ TMP=/tmp/run-v653-full-release-v4-generated.sh
 python3 - "$BASE" "$TMP" <<'PY'
 from pathlib import Path
 import sys
-p=Path(sys.argv[1]); s=p.read_text()
+src=Path(sys.argv[1]); dst=Path(sys.argv[2]); s=src.read_text()
 start_marker="stage '1 BINDING + COMPLETE V6.52 PREDECESSOR RELEASE WORKFLOW FROM ZERO'"
 end_marker="stage '2 EXACT PRE-FIX RED COUNTERPROOF'"
 if s.count(start_marker)!=1 or s.count(end_marker)!=1:
@@ -50,8 +50,9 @@ s=s[:i]+replacement+s[j:]
 if s.count('v653gate') < 3:
     raise SystemExit('BLOCKED: expected V6.53 test DB anchors missing')
 s=s.replace('v653gate','v651gate')
-p.write_text(s)
+dst.write_text(s)
 PY
+test -f "$TMP" || { echo 'BLOCKED: generated V6.53 runner missing'; exit 1; }
 bash -n "$TMP"
 chmod +x "$TMP"
 "$TMP"
