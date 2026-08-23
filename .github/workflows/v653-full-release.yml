@@ -21,7 +21,7 @@ jobs:
           - 3306:3306
         env:
           MARIADB_ROOT_PASSWORD: rootpass
-          MARIADB_DATABASE: v653gate
+          MARIADB_DATABASE: v651gate
           MARIADB_USER: wp
           MARIADB_PASSWORD: wppass
         options: >-
@@ -48,8 +48,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          chmod +x .github/v653/runner/run-v653-full-release-v2.sh
-          .github/v653/runner/run-v653-full-release-v2.sh
+          chmod +x .github/v653/runner/run-v653-full-release-v3.sh
+          .github/v653/runner/run-v653-full-release-v3.sh
 
       - name: Upload final verified V6.53 release
         if: success()
