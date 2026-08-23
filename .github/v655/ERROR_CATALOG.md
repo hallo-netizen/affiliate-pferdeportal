@@ -27,3 +27,13 @@
 **Korrektur:** identischer Real-Produkt-Test für V6.55 mit unveränderten Markup-Assertions und aktualisierten Versions-/Build-Assertions. Keine Änderung am Produktionspatch.
 
 **Schutz:** Versionsgebundene Vorgängertests dürfen nicht durch Entfernen der Versionsprüfung grün gemacht werden; sie werden für die neue Releaseversion explizit fortgeschrieben und im vollständigen Workflow erneut ausgeführt.
+
+## E-655-005 – Pretty-REST-Pfad war im PHP-Built-in-CI-Server nicht geroutet
+
+**Symptom:** Nach vollständig grünen Source-/Real-WordPress-Prüfungen stoppte der nachgelagerte HTTP-Test beim GET auf `/wp-json/affiliate-zentrale/v1/ebay/tick`, bevor die POST-/Throttle-Prüfung beginnen konnte.
+
+**Ursache:** Der für die CI verwendete PHP-Built-in-Server besitzt keine Webserver-Rewrite-Regeln für WordPress-Pretty-Permalinks. Der Testpfad prüfte dadurch den Testserver-Router statt den registrierten REST-Endpunkt.
+
+**Korrektur:** ausschließlich Prüfinfrastruktur. Im lokalen HTTP-Fixture wird derselbe REST-Endpunkt über WordPress' rewrite-unabhängige Query-Form `?rest_route=/affiliate-zentrale/v1/ebay/tick` angesprochen. Der reale GitHub-Scheduler für Pferde Atelier bleibt auf der normalen `/wp-json/...`-URL.
+
+**Schutz:** Ein Real-HTTP-CI-Test darf nicht Webserver-Rewrite-Funktionalität voraussetzen, wenn sein Prüfgegenstand REST-Methode, Antwort und Throttle des Plugins sind. Produktionspatch unverändert.
