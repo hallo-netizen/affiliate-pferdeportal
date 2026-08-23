@@ -1,0 +1,38 @@
+# STARTMASTER0075 – External Production Control Plane V1
+
+## Scope
+Governance-only control layer outside the existing editorial/production workflow. No Fachplugin, editorial plan, READY state, article content, research/fact pack, quality gate, workflow order or publish behavior is modified.
+
+## Release identities
+- STARTMASTER: `STARTMASTER0075_EXTERNAL_PRODUCTION_CONTROL_PLANE_V1_20260823.zip`
+- STARTMASTER SHA-256: `b42945ea27ef9623b593076ade3a943f4200c460d77b832821603b0a18fa06f8`
+- Current handoff: `CHAT_HANDOFF_CURRENT_STARTMASTER0075_20260823.zip`
+- Handoff SHA-256: `c2ad29cfdbe62660a599d0aa1403e4f12debc71665747bcb27d73ac17fc1106a`
+- Delivery manifest: `DELIVERY_CURRENT_STARTMASTER0075.json`
+- Delivery manifest SHA-256: `8620f851ed5501fcc310be755598b8afd221f463881cc4899f54c99a0d51bdfb`
+- Exact current next input: `PRODUCTION_PACKAGE_Boxenmatten_Beratung_PRELIVE_PASS_SANITIZATION_ROOTFIX.json`
+- Next-input SHA-256: `31694dd2b5a662bf315b20a818e2b9b03f283a8279c569ef827e584c5668a679`
+- Current state ID: `8fec4d82f8f55a971c2389edaed2e2015f6eacf54e00294a7f1020bd90775058`
+
+## QA
+- Fresh STARTMASTER0075 manifest: `8230/8230 PASS`
+- ZIP integrity: `PASS`
+- Inherited STARTMASTER0074 files: `8210/8210 byte-identical PASS`
+- Control-plane QA: `18/18 PASS`
+- Non-interference proof: `PASS`
+- Guard SHA-256: `e223e5d00580a486bae2bccbe644fc037a0fbae4b952ba2e8788e93a8b56f1f9`
+- Policy SHA-256: `15af53796e19022f9789e146d1df30b0ec2970e99d63b912a25bc344ede769ea`
+- Design review SHA-256: `c34dc0dd7f22d35379fb953dfee6ac713027315a62902710914691240bb9b437`
+- Non-interference proof SHA-256: `8abdf074d81cb16854a8aa54b858c0a9b0ecb3cb1c80d9719a4ba2e4798ebf0e`
+
+## Current execution state
+- checkpoint: `BOXENMATTEN_PRELIVE_PASS_SANITIZATION_ROOTFIX`
+- next allowed step: `PSERC_LIVE_REPLAY_WITH_EXACT_PRELIVE_PACKAGE`
+- execution source: `CURRENT_STATE_JSON_ONLY`
+- local FINAL: forbidden
+- publish: forbidden
+
+## Operational rule
+Every new chat starts from the current handoff/state, never from memory or historical reconstruction. Every machine checkpoint produces a fresh handoff. Every chat close is checked by the delivery gate against the binding MASTER, current state and exact next input.
+
+`main` is intentionally untouched.
