@@ -1,0 +1,30 @@
+{
+  "contract": "STARTMASTER0072_CANONICAL_IDENTITY_ROOTCAUSE_QA_V1",
+  "status": "PASS",
+  "server_failure_reproduced_reason": "SUPERVISOR_RELEASE_OR_PLAN_ITEM_MISSING_FOR_SLOT",
+  "old_invalid_canonical_article_id": "article:c9a5a66b28671525c53358ce",
+  "old_derived_slot": "ccc4924597e2f831bb20167b69df1261b48651e9ec6ce1cce100d4a7c3eec43b",
+  "correct_canonical_article_id": "article:2d2f4c0ece3dc16e52a378c5",
+  "correct_plan_slot": "a574700d0b94f6e31fe6a87743497009210e04816a7d7c8236a6b40ac04b8a7f",
+  "tests": {
+    "old_invalid_identity_guard": "BLOCKED_EXPECTED",
+    "fixed_identity_guard": "PASS",
+    "wrong_category_guard": "BLOCKED_EXPECTED",
+    "pserc_0_28_5_package_envelope": "PASS",
+    "pserc_0_28_5_release_authenticity": "PASS",
+    "pserc_0_28_5_full_supervisor_positive_harness": "PASS",
+    "tampered_signed_release": "BLOCKED_EXPECTED"
+  },
+  "immutability": {
+    "editorial_plan_changed": false,
+    "ready_state_changed": false,
+    "article_content_changed": false,
+    "fact_pack_changed": false,
+    "quality_binding_changed": false,
+    "pserc_plugin_changed": false,
+    "ppm_plugin_changed": false
+  },
+  "article_html_sha256": "4c204eb699720d21fccb301b0db144e51cccc7d42120fd4b844e31083d2a116e",
+  "fixed_package_sha256": "b1c4ec7860702e0c27c0f40ed614774de20aa71cea31ec2eeb2b8701bc6415b2",
+  "guard_script_sha256": "2b280552db280041bf542ca5525b3c524bdbf62c7ee13c773c189b23c87d2b6a"
+}
