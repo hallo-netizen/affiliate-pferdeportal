@@ -1,0 +1,20 @@
+{
+  "status": "FINAL_RELEASE_GATE_PASS",
+  "article": "Boxenmatten für Pferde – worauf es bei der Auswahl ankommt",
+  "category": "boxenmatten-beratung",
+  "article_type": "Beratung",
+  "plan_slot": "a574700d0b94f6e31fe6a87743497009210e04816a7d7c8236a6b40ac04b8a7f",
+  "canonical_article_id": "article:2d2f4c0ece3dc16e52a378c5",
+  "delivery_file": "PRODUCTION_PACKAGE_Boxenmatten_Beratung_FINAL_VERIFIED.json",
+  "delivery_sha256": "41d1e5274705f5e107daa82a77e9c73656eed7fc84c5815efdfe3812d1e493e3",
+  "ppm_registry_fact_pack_hash": "86bb9795a1f266c8f886aa13cd988d629ced9333fd2ae48d2abf815eef907d49",
+  "research_content_fact_pack_hash": "f6eee7aa9f80d17508cb7f908e7d017958fedaf9e6e749bfb6dead355ab52f25",
+  "pserc_version": "0.28.5",
+  "ppm_version": "6.7.9",
+  "required_final_status": "NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH",
+  "editorial_plan_changed": false,
+  "visible_article_content_changed": false,
+  "plugin_changes": false,
+  "publish_allowed": false,
+  "private_key_in_repository": false
+}
