@@ -21,3 +21,13 @@
 ## Schutzregel
 
 „Fehler überspringen“ bedeutet ausschließlich kandidatbezogene Einzelfehler. Es ist kein allgemeines Abschalten von Safety-/Quality-/Checkpoint-Gates. Der letzte sichere öffentliche Checkpoint darf durch V6.54 nicht geschwächt werden.
+
+## E-654-003 – Reale HTTP-Prüfung erbte adversarialen In-Process-Testzustand
+
+**Symptom:** Der erste vollständige V6.54-Run bestand alle Produktcode- und Real-WordPress-In-Process-Prüfungen, der nachgelagerte echte HTTP-Aufruf antwortete jedoch `status=disabled` statt `idle`.
+
+**Ursache:** Zwei getrennte Testfälle teilten versehentlich denselben persistierten Optionszustand. Der HTTP-Test hatte damit keinen deterministischen eigenen Enabled-Fixture. Zusätzlich lagen die Assertion-Zähler des `wp eval-file`-Skripts wegen Include-Scope nicht im selben globalen Scope wie die Hilfsfunktion.
+
+**Korrektur:** ausschließlich Testinfrastruktur: `$GLOBALS`-basierte Zähler; expliziter frischer Enabled-Fixture am Ende des Realtests; separater Fixture-Reset und Readback direkt vor dem realen HTTP-Prozess. Produktionspatch bleibt bytegleich.
+
+**Schutz:** Reale HTTP-Tests dürfen niemals implizit vom Endzustand eines vorherigen adversarialen Tests abhängen.
