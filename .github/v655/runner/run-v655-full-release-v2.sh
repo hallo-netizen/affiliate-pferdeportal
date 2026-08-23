@@ -14,6 +14,13 @@ src=src.replace(old,new,1)
 old_marker="REAL_ARTICLE_PRODUCT_V654=PASS"
 if src.count(old_marker)!=3: raise SystemExit('BLOCKED: V6.54 product marker count drift')
 src=src.replace(old_marker,"REAL_ARTICLE_PRODUCT_V655=PASS")
+# The PHP built-in server used by the real-WP CI fixture has no WordPress rewrite
+# rules. Exercise the same REST route through WordPress' canonical rest_route
+# query form; the production scheduler keeps the normal /wp-json/ URL.
+pretty='http://127.0.0.1:8091/wp-json/affiliate-zentrale/v1/ebay/tick'
+query='http://127.0.0.1:8091/?rest_route=/affiliate-zentrale/v1/ebay/tick'
+if src.count(pretty)!=3: raise SystemExit('BLOCKED: local HTTP route anchor drift')
+src=src.replace(pretty,query)
 Path(sys.argv[2]).write_text(src)
 PY
 test -f "$TMP"
