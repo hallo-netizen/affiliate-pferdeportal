@@ -44,6 +44,14 @@ Der echte produktive eBay-Provider-Endlauf auf Pferde Atelier bleibt bis nach In
 
 ## CI-Lauf 1 – HTTP-Testfixture getrennt
 
-Der erste V6.54-Gesamtlauf erreichte erfolgreich den atomaren Produktionsscope, 31/31 Architekturprüfungen, 55/55 Kernworkflow-Parität, die vollständigen V6.53-Produktregressionen und sämtliche in-process Real-WordPress-Prüfungen. Der anschließende zweite PHP-Prozess des echten HTTP-REST-Tests sah jedoch eine deaktivierte Testkonfiguration (`status=disabled`). Das ist kein Produktivcode-Fail und wurde nicht als PASS übergangen. Ursache der Prüfinfrastruktur: Der adversariale in-process Test hinterließ seinen Datenbankzustand als Eingabe für einen logisch getrennten HTTP-Prozess. Zusätzlich waren dessen Assertions wegen PHP-Eval-Scope zwar sichtbar, aber der Abschlusszähler blieb bei 0.
+Der erste V6.54-Gesamtlauf erreichte erfolgreich den atomaren Produktionsscope, 31/31 Architekturprüfungen, 55/55 Kernworkflow-Parität, die vollständigen V6.53-Produktregressionen und sämtliche in-process Real-WordPress-Prüfungen. Der anschließende zweite PHP-Prozess des echten HTTP-REST-Tests sah jedoch eine deaktivierte Testkonfiguration (`status=disabled`). Das wurde nicht als PASS übergangen.
 
-Korrektur ausschließlich in der Prüfinfrastruktur: eindeutige `$GLOBALS`-Zähler; am Testende expliziter frischer Enabled-Fixture; unmittelbar vor dem separaten HTTP-Prozess erneute deterministische Fixture-Setzung plus Datenbank-Readback. Danach muss der echte HTTP-Aufruf weiterhin 403 für falschen Schlüssel und `idle` für den korrekten Schlüssel liefern. Produktionspatch unverändert.
+Die erste Testkorrektur trennte die Assertion-Zähler sauber über `$GLOBALS` und setzte vor dem separaten HTTP-Prozess einen eigenen Fixture-Zustand. Produktionspatch unverändert.
+
+## CI-Lauf 6 – HTTP-Bootstrap-Normalisierung korrekt erkannt
+
+Der vollständige Lauf erreichte erneut 31/31 Architektur, 55/55 Kernworkflow-Parität, alle Produktregressionen und 37/37 Real-WordPress-Assertions. Er stoppte danach noch vor dem HTTP-Aufruf, weil die Testinfrastruktur verlangte, dass ein künstlich auf `enabled=true` gesetzter eBay-Zustand auch nach einem frischen HTTP-Bootstrap bytegleich `enabled=true` bleibt.
+
+Die gespeicherte Testoption wurde beim frischen WordPress-/Plugin-Bootstrap zulässigerweise auf den realen providerfähigen Zustand normalisiert und ohne Credentials wieder deaktiviert. Das ist kein Produktionsfehler. Die Due-/Autostart-Logik ist bereits im selben echten WordPress mit deterministischem Zustand geprüft; der separate HTTP-Prozess soll ausschließlich beweisen, dass der reale REST-Endpunkt erreichbar ist, einen falschen Schlüssel mit HTTP 403 ablehnt und den korrekten Schlüssel mit HTTP 200 sowie gültigem JSON-Status akzeptiert.
+
+Korrektur ausschließlich in der Prüfinfrastruktur: keine künstliche `enabled=true`-Persistenzannahme über Prozessgrenzen mehr; HTTP-Server-Readiness wird explizit geprüft; falscher Schlüssel muss 403 liefern; korrekter Schlüssel muss 200 und gültiges JSON mit `status` liefern. Produktionspatch bleibt bytegleich. Danach wird der komplette Releaseworkflow erneut von null ausgeführt.
