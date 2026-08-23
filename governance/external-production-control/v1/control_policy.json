@@ -1,0 +1,60 @@
+{
+  "contract": "PFERDE_ATELIER_EXTERNAL_PRODUCTION_CONTROL_POLICY_V1",
+  "version": "1.0.0",
+  "mode": "GOVERNANCE_ONLY_OUTSIDE_PRODUCTION_WORKFLOW",
+  "workflow_authority": "BINDING_MASTER_ONLY",
+  "source_of_truth_priority": [
+    "CURRENT_STATE_JSON",
+    "BINDING_MASTER_AND_HASHED_CURRENT_ARTIFACTS",
+    "CURRENT_LIVE_RESULT",
+    "CURRENT_GITHUB_BRANCH_EVIDENCE",
+    "CHAT_CONTEXT",
+    "MEMORY_NEVER_AS_EXECUTION_SOURCE"
+  ],
+  "non_interference": {
+    "may_modify_plugins": false,
+    "may_modify_editorial_plan": false,
+    "may_modify_ready_state": false,
+    "may_modify_article_content": false,
+    "may_modify_research_or_fact_pack": false,
+    "may_modify_quality_gates": false,
+    "may_change_workflow_order": false,
+    "may_publish": false
+  },
+  "hardlocks": {
+    "requested_action_must_equal_next_allowed_step": true,
+    "already_passed_steps_recheck_without_delta": false,
+    "history_is_navigation_source": false,
+    "guess_missing_state": false,
+    "future_missing_artifact_may_block_current_step": false,
+    "handoff_required_after_every_checkpoint": true,
+    "handoff_must_have_exactly_one_next_input_when_input_required": true,
+    "artifact_hash_mismatch": "BLOCK",
+    "duplicate_current_role": "BLOCK",
+    "duplicate_current_plan_slot": "BLOCK",
+    "duplicate_current_canonical_article_id": "BLOCK",
+    "unknown_state": "BLOCK",
+    "final_without_matching_live_result": "BLOCK"
+  },
+  "cache_policy": {
+    "reuse_only_if": [
+      "input_hash_identical",
+      "contract_hash_identical",
+      "tool_version_identical",
+      "output_hash_identical",
+      "pass_evidence_present"
+    ],
+    "dynamic_evidence_never_replaced_by_cache": true
+  },
+  "handoff_contract": {
+    "required_files": [
+      "START_HERE.txt",
+      "CURRENT_STATE.json",
+      "STATE_SUMMARY.md",
+      "ARTIFACT_MANIFEST.json",
+      "MASTER_RELEASE.json"
+    ],
+    "next_input_directory": "NEXT_INPUT",
+    "superseded_files_allowed_in_next_input": false
+  }
+}
