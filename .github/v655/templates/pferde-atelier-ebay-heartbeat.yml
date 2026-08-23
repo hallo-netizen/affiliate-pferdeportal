@@ -1,0 +1,26 @@
+name: Pferde Atelier eBay heartbeat
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pferde-atelier-ebay-heartbeat
+  cancel-in-progress: false
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Five bounded heartbeat ticks
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
+          for n in 1 2 3 4 5; do
+            code=$(curl --silent --show-error --output "heartbeat-$n.json" --write-out '%{http_code}' --request POST --max-time 45 "$URL")
+            test "$code" = 200
+            php -r '$d=json_decode(file_get_contents($argv[1]),true); if(!is_array($d)||!isset($d["status"])){fwrite(STDERR,"invalid heartbeat response\n");exit(1);} echo "heartbeat status=".$d["status"]."\n";' "heartbeat-$n.json"
+            if [ "$n" -lt 5 ]; then sleep 60; fi
+          done
