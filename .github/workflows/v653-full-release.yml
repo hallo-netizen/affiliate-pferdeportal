@@ -42,14 +42,14 @@ jobs:
           tools: wp-cli
           coverage: none
 
-      - name: Execute complete V6.53 release gate from zero
+      - name: Execute complete V6.53 release gate from immutable V6.52 MASTER
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          chmod +x .github/v653/runner/run-v653-full-release-v3.sh
-          .github/v653/runner/run-v653-full-release-v3.sh
+          chmod +x .github/v653/runner/run-v653-full-release-v4.sh
+          .github/v653/runner/run-v653-full-release-v4.sh
 
       - name: Upload final verified V6.53 release
         if: success()
