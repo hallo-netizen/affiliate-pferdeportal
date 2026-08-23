@@ -1,0 +1,28 @@
+{
+  "contract": "PFERDE_ATELIER_EXTERNAL_PRODUCTION_CONTROL_QA_V1",
+  "status": "PASS",
+  "summary": "18/18 positive and negative control-plane tests PASS",
+  "tests": [
+    {"name":"baseline_verify","pass":true},
+    {"name":"authorize_exact_action_and_file","pass":true},
+    {"name":"wrong_action_blocked","pass":true,"expected":"WORKFLOW_VIOLATION_ACTION_REJECTED"},
+    {"name":"tampered_next_input_blocked","pass":true,"expected":"CONTROL_NEXT_INPUT_HASH_MISMATCH"},
+    {"name":"duplicate_active_role_blocked","pass":true,"expected":"CONTROL_DUPLICATE_CURRENT_ROLE"},
+    {"name":"duplicate_plan_slot_blocked","pass":true,"expected":"CONTROL_DUPLICATE_CURRENT_PLAN_SLOT"},
+    {"name":"duplicate_canonical_article_id_blocked","pass":true,"expected":"CONTROL_DUPLICATE_CURRENT_CANONICAL_ARTICLE_ID"},
+    {"name":"local_final_blocked","pass":true,"expected":"CONTROL_FINAL_WITHOUT_MATCHING_LIVE_RESULT"},
+    {"name":"missing_future_artifact_does_not_block","pass":true},
+    {"name":"real_live_failure_scoped_current_step_only","pass":true,"expected":"CURRENT_STEP_BLOCKED/CURRENT_STEP_ONLY"},
+    {"name":"exact_matching_live_pass_advances_only_to_user_review","pass":true,"expected":"USER_CONTENT_REVIEW"},
+    {"name":"wrong_live_package_id_blocked","pass":true},
+    {"name":"advance_pass_generates_fresh_handoff","pass":true},
+    {"name":"advance_pass_next_step_user_review","pass":true},
+    {"name":"close_chat_exact_delivery_verified","pass":true},
+    {"name":"advance_blocked_generates_current_step_only_handoff","pass":true},
+    {"name":"handoff_exactly_one_next_input","pass":true},
+    {"name":"handoff_deterministic","pass":true}
+  ],
+  "state_id_under_test": "8fec4d82f8f55a971c2389edaed2e2015f6eacf54e00294a7f1020bd90775058",
+  "guard_sha256": "e223e5d00580a486bae2bccbe644fc037a0fbae4b952ba2e8788e93a8b56f1f9",
+  "policy_sha256": "15af53796e19022f9789e146d1df30b0ec2970e99d63b912a25bc344ede769ea"
+}
