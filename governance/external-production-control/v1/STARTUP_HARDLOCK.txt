@@ -1,0 +1,18 @@
+EXTERNAL PRODUCTION CONTROL – MANDATORY CHAT START
+
+THIS CONTROL PLANE IS OUTSIDE THE EDITORIAL/PRODUCTION WORKFLOW.
+IT MAY NOT CHANGE CONTENT, REDAKTIONSPLAN, READY, PLUGINS, GATES OR WORKFLOW ORDER.
+
+EVERY CHAT MUST:
+1. Read CURRENT_STATE.json first.
+2. Run production_control_guard.py resume.
+3. Never navigate from memory, old chat text, old CURRENT pointers or historical files.
+4. Execute only NEXT_ALLOWED_STEP.
+5. If an input is required, use only the single hash-bound NEXT_INPUT file.
+6. Never recheck a locked PASS step without a documented delta.
+7. A missing artifact for a FUTURE step must never block the CURRENT step.
+8. After every checkpoint, generate a fresh state + handoff. Old handoffs are stale by definition.
+9. Before ending a chat, run close-chat and hand over exactly the files in DELIVERY_CURRENT.json.
+10. Never call a local/mock result FINAL. FINAL requires matching live result evidence.
+
+If CURRENT_STATE.json is missing, invalid or hash-inconsistent: BLOCKED_UNKNOWN_CURRENT_STATE. DO NOT GUESS.
