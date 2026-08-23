@@ -33,3 +33,8 @@ Designplugin: 0 Änderungen. V6.54-Produktkarten und unberührte Fachlogik werde
 Bindung an finales V6.54-Actions-Artefakt `9492368681` samt SHA-/Installer-/MASTER-Belegen. Danach Pre-Fix-RED, atomarer Patch, 4-Dateien-Scope, PHP/JSON, 23 Architekturprüfungen, 55 unberührte Kernworkflow-Paritäten, V6.54-Produktregressionen, Scheduler-Vertrag, Real WordPress 7.0.1/PHP 8.4/MariaDB 11.4, realer GET/POST/Throttle-HTTP-Test, Fresh-Unpack und Wiederholung, Real WordPress aus finalem ZIP, WordPress 6.8.3, MASTER-Manifest und Source↔Fresh↔MASTER↔MASTER-Installer-Parität. Erst dann darf `FINAL_RELEASE_GATE=PASS` entstehen.
 
 Der echte Pferde-Atelier-eBay-Provider-Endlauf bleibt bis Installation und aktivem GitHub-Scheduler `EXTERNAL_EBAY_PROVIDER_LIVE_E2E=OPEN_NOT_CLAIMED`.
+
+## CI-Lauf 1 – V6.54-Produktrealtest war versionsgebunden
+Der erste vollständige V6.55-Lauf bestand die V6.54-Bindung, den exakten Pre-Fix-RED-Gegenbeweis 23/16, den 4-Dateien-Produktionsscope, 23/23 V6.55-Architekturprüfungen, 55/55 Kernworkflow-Parität, 11/11 + 14/14 Produktregressionen, 7/7 Scheduler-Vertrag und 18/18 Real-WordPress-Heartbeat-Prüfungen. Er stoppte danach ausschließlich deshalb, weil der wiederverwendete V6.54-Real-Produkt-Test die Pluginversion hart auf `6.54.0` festlegte. Sämtliche Produkt-Markup-Prüfungen selbst waren PASS.
+
+Korrektur ausschließlich in der Prüfinfrastruktur: identischer Real-Produkt-Regressionsumfang als V6.55-Test, aber mit den korrekten Assertions auf `6.55.0` und `6.55.0-kiss-public-heartbeat-github-scheduler-20260823`. Der Produktionspatch bleibt bytegleich bei SHA-256 `afaca48f14f94087c2fbe8b8a846a7e85ce2b489558223e3b185276106b0d865`. Danach wird der komplette Releaseworkflow von null wiederholt.
