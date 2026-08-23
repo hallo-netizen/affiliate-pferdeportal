@@ -1,0 +1,90 @@
+name: V6.47 full release verification
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  v647-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v647-live-zero-active-rootcause-20260820'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v646gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - name: Checkout PR merge with immutable V6.45/V6.46 gate base
+        uses: actions/checkout@v4
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+      - name: Verify and materialize byte-identical V6.47 gate harness
+        run: |
+          set -euo pipefail
+          echo '2686b0712fe7d100d52e183bae31a1da682e356f8bab7cfed93dc47e6a977e7d  .github/v647/V647_GATE_BUNDLE.zip.b64.00' | sha256sum -c -
+          echo '6e081fded84b0b7afa71f1cf72140d73d24608af3391703a490906ce59495c71  .github/v647/V647_GATE_BUNDLE.zip.b64.01' | sha256sum -c -
+          echo '882920a1b75680de11db95f7b78203e26ece3c57d17eb700a0fc9330aed64ba7  .github/v647/V647_GATE_BUNDLE.zip.b64.02' | sha256sum -c -
+          echo 'da4e70b804c7cb64e815234088f71f4f947e69ee144134575cb62bb085920bd1  .github/v647/V647_GATE_BUNDLE.zip.b64.03' | sha256sum -c -
+          echo '59d8d205624982f3cce9d2edbc0fba0e60741a2a69fac99f2baca7a507eb9d24  .github/v647/V647_GATE_BUNDLE.zip.b64.04' | sha256sum -c -
+          echo '1d4577320aee0d93f6abf67081d365dbedadcd9c0623c8ebb0baef2aff5e2a6c  .github/v647/V647_GATE_BUNDLE.zip.b64.05' | sha256sum -c -
+          cat .github/v647/V647_GATE_BUNDLE.zip.b64.00 \
+              .github/v647/V647_GATE_BUNDLE.zip.b64.01 \
+              .github/v647/V647_GATE_BUNDLE.zip.b64.02 \
+              .github/v647/V647_GATE_BUNDLE.zip.b64.03 \
+              .github/v647/V647_GATE_BUNDLE.zip.b64.04 \
+              .github/v647/V647_GATE_BUNDLE.zip.b64.05 > /tmp/V647_GATE_BUNDLE.b64
+          base64 -d /tmp/V647_GATE_BUNDLE.b64 > .github/v647/V647_GATE_BUNDLE.zip
+          echo '4c8d7efbf244132a2fbf83e078f9975baa32347fee248f8732590aa0c6143133  .github/v647/V647_GATE_BUNDLE.zip' | sha256sum -c -
+          unzip -t .github/v647/V647_GATE_BUNDLE.zip
+          rm -rf /tmp/v647-gate-materialized
+          mkdir -p /tmp/v647-gate-materialized
+          unzip -q .github/v647/V647_GATE_BUNDLE.zip -d /tmp/v647-gate-materialized
+          cp -a /tmp/v647-gate-materialized/.github/. .github/
+          test "$(sha256sum .github/scripts/run-v647-full-release.sh | awk '{print $1}')" = "$(sha256sum /tmp/v647-gate-materialized/.github/scripts/run-v647-full-release.sh | awk '{print $1}')"
+          diff -qr /tmp/v647-gate-materialized/.github/v647 .github/v647 \
+            --exclude=V647_GATE_BUNDLE.zip \
+            --exclude=V647_GATE_BUNDLE_SHA256.txt \
+            --exclude='V647_GATE_BUNDLE.zip.b64.*'
+      - name: Execute complete fail-closed V6.47 workflow
+        run: |
+          chmod +x .github/scripts/run-v647-full-release.sh
+          .github/scripts/run-v647-full-release.sh
+      - name: Upload final verified V6.47 release
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V647_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.47.0_DYNAMIC_BUSINESS_RULE_CONTEXT_ROOTFIX_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_47_0_DYNAMIC_BUSINESS_RULE_CONTEXT_ROOTFIX_REALGATE_20260821.zip
+            V647_RELEASE_EVIDENCE/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Upload blocked evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V647_BLOCKED_EVIDENCE
+          path: V647_RELEASE_EVIDENCE/
+          if-no-files-found: warn
+          retention-days: 7
