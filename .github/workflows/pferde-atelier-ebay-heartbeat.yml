@@ -33,15 +33,17 @@ jobs:
           test "$changed" = "$FILE"
           python3 - "$FILE" <<'PY'
           from pathlib import Path
-          import sys
+          import re,sys
           s=Path(sys.argv[1]).read_text()
+          endpoint=re.search(r"^\s*URL='([^']+)'$",s,re.M)
+          endpoint_ok=bool(endpoint and endpoint.group(1)=='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick')
           checks={
               'safety_schedule_15m': "cron: '*/15 * * * *'" in s,
               'long_active_window': 'MAX_TICKS=55' in s and 'timeout-minutes: 60' in s,
               'minute_ticks': 'sleep 60' in s,
               'post_only': '--request POST' in s,
               'bounded_http': '--max-time 45' in s,
-              'no_endpoint_secret': '?key=' not in s and 'secrets.' not in s,
+              'fixed_keyless_endpoint': endpoint_ok,
               'skip_single_transport_error': 'MAX_CONSECUTIVE_FAILURES=5' in s,
               'terminal_idle_failed': 'idle|failed)' in s,
               'self_dispatch': '/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches' in s,
