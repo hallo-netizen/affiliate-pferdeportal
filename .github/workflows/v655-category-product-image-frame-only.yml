@@ -1,4 +1,4 @@
-name: V6.55 category product image frame ONLY full gate
+name: V6.55 category product visible image size ONLY full gate
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -34,22 +34,22 @@ jobs:
           extensions: mysqli
           tools: wp-cli
           coverage: none
-      - name: Execute image-frame-only full release gate
+      - name: Execute visible-image-size-only full release gate
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           chmod +x .github/v655-image-frame/runner/run-image-frame-full-release.sh
           .github/v655-image-frame/runner/run-image-frame-full-release.sh
-      - name: Upload final verified image-frame-only release
+      - name: Upload final verified visible-image-size-only release
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: V655_CATEGORY_PRODUCT_IMAGE_FRAME_ONLY_FINAL
+          name: V655_CATEGORY_PRODUCT_VISIBLE_IMAGE_SIZE_ONLY_FINAL
           path: |
-            affiliate-zentrale_v6.55.0_CATEGORY_PRODUCT_IMAGE_FRAME_ONLY_REALGATE.zip
-            MASTER_AFFILIATE_ZENTRALE_V6_55_0_CATEGORY_PRODUCT_IMAGE_FRAME_ONLY_REALGATE_20260823.zip
-            V655_IMAGE_FRAME_RELEASE_EVIDENCE/
+            affiliate-zentrale_v6.55.0_CATEGORY_PRODUCT_VISIBLE_IMAGE_SIZE_ONLY_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_55_0_CATEGORY_PRODUCT_VISIBLE_IMAGE_SIZE_ONLY_REALGATE_20260823.zip
+            V655_VISIBLE_IMAGE_SIZE_RELEASE_EVIDENCE/
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
@@ -57,8 +57,8 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: V655_CATEGORY_PRODUCT_IMAGE_FRAME_ONLY_BLOCKED
-          path: V655_IMAGE_FRAME_RELEASE_EVIDENCE/
+          name: V655_CATEGORY_PRODUCT_VISIBLE_IMAGE_SIZE_ONLY_BLOCKED
+          path: V655_VISIBLE_IMAGE_SIZE_RELEASE_EVIDENCE/
           include-hidden-files: true
           if-no-files-found: warn
           retention-days: 14
