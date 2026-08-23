@@ -1,26 +1,150 @@
 name: Pferde Atelier eBay heartbeat
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/pferde-atelier-ebay-heartbeat.yml'
+
 permissions:
   contents: read
+  actions: write
+
 concurrency:
   group: pferde-atelier-ebay-heartbeat
   cancel-in-progress: false
+
 jobs:
-  heartbeat:
+  contract:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 7
     steps:
-      - name: Five bounded heartbeat ticks
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify scheduler-only KISS contract
         shell: bash
         run: |
           set -euo pipefail
+          FILE='.github/workflows/pferde-atelier-ebay-heartbeat.yml'
+          git fetch origin "${GITHUB_BASE_REF}" --depth=1
+          changed="$(git diff --name-only "origin/${GITHUB_BASE_REF}"...HEAD)"
+          test "$changed" = "$FILE"
+          python3 - "$FILE" <<'PY'
+          from pathlib import Path
+          import re,sys
+          s=Path(sys.argv[1]).read_text()
+          endpoint=re.search(r"^\s*URL='([^']+)'$",s,re.M)
+          endpoint_ok=bool(endpoint and endpoint.group(1)=='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick')
+          checks={
+              'safety_schedule_15m': "cron: '*/15 * * * *'" in s,
+              'long_active_window': 'MAX_TICKS=55' in s and 'timeout-minutes: 60' in s,
+              'minute_ticks': 'sleep 60' in s,
+              'post_only': '--request POST' in s,
+              'bounded_http': '--max-time 45' in s,
+              'fixed_keyless_endpoint': endpoint_ok,
+              'skip_single_transport_error': 'MAX_CONSECUTIVE_FAILURES=5' in s,
+              'terminal_idle_failed': 'idle|failed)' in s,
+              'self_dispatch': '/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches' in s,
+              'self_dispatch_ref_main': '\"ref\":\"main\"' in s,
+              'no_overlap': 'cancel-in-progress: false' in s,
+              'heartbeat_not_on_pr': "if: github.event_name != 'pull_request'" in s,
+          }
+          for k,v in checks.items(): print(('PASS ' if v else 'FAIL ')+k)
+          if not all(checks.values()): raise SystemExit(1)
+          print(f'SCHEDULER_KISS_ASSERTIONS={len(checks)} FAIL=0')
+          PY
+
+  heartbeat:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Keep the active canonical eBay run moving
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -u
           URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
-          for n in 1 2 3 4 5; do
-            code=$(curl --silent --show-error --output "heartbeat-$n.json" --write-out '%{http_code}' --request POST --max-time 45 "$URL")
-            test "$code" = 200
-            php -r '$d=json_decode(file_get_contents($argv[1]),true); if(!is_array($d)||!isset($d["status"])){fwrite(STDERR,"invalid heartbeat response\n");exit(1);} echo "heartbeat status=".$d["status"]."\n";' "heartbeat-$n.json"
-            if [ "$n" -lt 5 ]; then sleep 60; fi
+          MAX_TICKS=55
+          MAX_CONSECUTIVE_FAILURES=5
+          consecutive_failures=0
+          active_seen=0
+
+          for n in $(seq 1 "$MAX_TICKS"); do
+            body="heartbeat-$n.json"
+            err="heartbeat-$n.err"
+            code=$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST --max-time 45 "$URL" 2>"$err" || true)
+
+            if [ "$code" != '200' ]; then
+              consecutive_failures=$((consecutive_failures + 1))
+              echo "heartbeat $n transport failure http=${code:-none} consecutive=$consecutive_failures"
+              cat "$err" || true
+              if [ "$consecutive_failures" -ge "$MAX_CONSECUTIVE_FAILURES" ]; then
+                echo 'five consecutive heartbeat transport failures; stop this runner and let the safety schedule retry later'
+                exit 1
+              fi
+            else
+              status=$(python3 - "$body" <<'PY' || true
+          import json,sys
+          try:
+              d=json.load(open(sys.argv[1]))
+              s=d.get('status') if isinstance(d,dict) else None
+              if not isinstance(s,str) or not s:
+                  raise ValueError('missing status')
+              print(s)
+          except Exception:
+              pass
+          PY
+              )
+
+              if [ -z "$status" ]; then
+                consecutive_failures=$((consecutive_failures + 1))
+                echo "heartbeat $n invalid response consecutive=$consecutive_failures"
+                if [ "$consecutive_failures" -ge "$MAX_CONSECUTIVE_FAILURES" ]; then
+                  echo 'five consecutive invalid heartbeat responses; stop this runner and let the safety schedule retry later'
+                  exit 1
+                fi
+              else
+                consecutive_failures=0
+                echo "heartbeat $n status=$status"
+                case "$status" in
+                  idle|failed)
+                    echo "terminal heartbeat status=$status; no successor runner required"
+                    exit 0
+                    ;;
+                  throttled)
+                    ;;
+                  *)
+                    active_seen=1
+                    ;;
+                esac
+              fi
+            fi
+
+            if [ "$n" -lt "$MAX_TICKS" ]; then
+              sleep 60
+            fi
           done
+
+          if [ "$active_seen" -eq 1 ]; then
+            dispatch_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches"
+            for attempt in 1 2 3; do
+              dispatch_code=$(curl --silent --show-error --output "dispatch-$attempt.json" --write-out '%{http_code}' --request POST --max-time 30 \
+                --header 'Accept: application/vnd.github+json' \
+                --header "Authorization: Bearer ${GH_TOKEN}" \
+                --header 'X-GitHub-Api-Version: 2022-11-28' \
+                --data '{"ref":"main"}' \
+                "$dispatch_url" || true)
+              if [ "$dispatch_code" = '204' ]; then
+                echo 'successor heartbeat runner dispatched'
+                exit 0
+              fi
+              echo "successor dispatch attempt $attempt failed http=${dispatch_code:-none}"
+              sleep 10
+            done
+            echo 'successor dispatch failed after three attempts; safety schedule remains available'
+            exit 1
+          fi
