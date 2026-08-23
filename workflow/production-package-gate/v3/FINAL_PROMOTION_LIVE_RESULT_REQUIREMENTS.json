@@ -1,0 +1,17 @@
+{
+  "contract": "FINAL_PROMOTION_LIVE_RESULT_REQUIREMENTS_V1",
+  "rule": "FINAL is forbidden until a matching real PSERC live result satisfies every check",
+  "required_checks": {
+    "production_package_id": "must equal PRELIVE package_id",
+    "production_package_source": "must equal PRELIVE package source",
+    "ok": true,
+    "status": "PSERC_APPROVED_PRODUCTION_TRIGGER_EXECUTED",
+    "workflow_supervisor_status": "PSERC_WORKFLOW_SUPERVISOR_PASS",
+    "bridge_status": "PSERC_PPM_INTAKE_BRIDGE_EXECUTED",
+    "ppm_status": "NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH",
+    "publish_allowed": false,
+    "signed_terminal_published_projection": false,
+    "terminal_published_item_count": 0
+  },
+  "on_any_mismatch": "FINAL_PROMOTION_BLOCKED"
+}
