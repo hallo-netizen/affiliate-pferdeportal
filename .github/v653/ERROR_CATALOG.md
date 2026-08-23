@@ -25,3 +25,13 @@
 **Produktionsscope:** 0 zusätzliche Produktionsdateien. Die Korrektur betrifft ausschließlich CI/Release-Prüfinfrastruktur und Dokumentation.
 
 **Schutzregel:** Ein historisch freigegebener MASTER-Ausgangspunkt wird künftig über sein unveränderliches Release-Artefakt und seine dokumentierten Hashes gebunden. Ein neu gebauter Container darf diesen Beleg nicht ersetzen.
+
+## E-653-003 – Generierter Release-Runner wurde auf falschen Pfad geschrieben
+
+**Symptom:** Lauf 9 stoppte sofort mit `bash: /tmp/run-v653-full-release-v4-generated.sh: No such file or directory` und erzeugte kein Release-Artefakt.
+
+**Ursache:** Der Python-Generator des v4-Prüfrunners las den Basisscript-Pfad korrekt ein, schrieb die transformierte Fassung aber versehentlich wieder auf den Quellpfad statt auf den übergebenen temporären Zielpfad.
+
+**Rootfix der Prüfinfrastruktur:** Quell- und Zielpfad sind jetzt explizit getrennt (`src`/`dst`). Zusätzlich prüft `test -f` fail-closed, dass der generierte Runner existiert, bevor Syntaxprüfung oder Ausführung beginnen.
+
+**Produktionsscope:** 0 Produktionsdateien. Kein Installer, keine MASTER und kein Plugin-Code wurden durch diesen Infrastrukturfehler verändert.
