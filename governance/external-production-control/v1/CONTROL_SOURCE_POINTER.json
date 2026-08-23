@@ -1,0 +1,9 @@
+{
+  "contract": "PFERDE_ATELIER_EXTERNAL_CONTROL_SOURCE_POINTER_V1",
+  "authoritative_release": "STARTMASTER0075_EXTERNAL_PRODUCTION_CONTROL_PLANE_V1_20260823.zip",
+  "authoritative_path_in_master": "49_STARTMASTER0075_EXTERNAL_PRODUCTION_CONTROL_PLANE_V1_20260823/production_control_guard.py",
+  "guard_sha256": "e223e5d00580a486bae2bccbe644fc037a0fbae4b952ba2e8788e93a8b56f1f9",
+  "policy_path": "governance/external-production-control/v1/control_policy.json",
+  "policy_sha256": "15af53796e19022f9789e146d1df30b0ec2970e99d63b912a25bc344ede769ea",
+  "note": "Executable authority is the hash-bound source inside STARTMASTER0075. GitHub is audit/provenance; dynamic CURRENT_STATE is intentionally not stored here to avoid stale navigation."
+}
