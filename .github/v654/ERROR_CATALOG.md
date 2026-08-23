@@ -31,3 +31,13 @@
 **Korrektur:** ausschließlich Prüfinfrastruktur. Die Due-/Autostart-Semantik bleibt im deterministischen echten WordPress-Prozess geprüft. Der separate HTTP-Prozess prüft nur seine eigene Aufgabe: Server erreichbar, falscher Schlüssel = HTTP 403, korrekter Schlüssel = HTTP 200 und gültige JSON-Antwort mit Status. Eine künstliche `enabled=true`-Persistenz über Prozessgrenzen ist kein Releasekriterium mehr.
 
 **Schutz:** Reale HTTP-Transporttests dürfen nicht von fachfremden Provider-Fixture-Annahmen abhängen. Produktionspatch bleibt unverändert.
+
+## E-654-004 – Bindende README enthielt widersprüchlichen historischen Transportvertrag
+
+**Symptom:** Das erste vollständig grüne V6.54-Release enthielt im `readme.txt` neben dem korrekten neuen 6.54-Vertrag noch einen historischen Absatz, der den alten browsergebundenen Admin-AJAX-Betrieb als weiterhin gültig bezeichnete und Browser-Unabhängigkeit ausdrücklich verneinte.
+
+**Ursache:** Der Runtime-Rootfix ersetzte den tatsächlichen Transport, aber ein älterer dokumentarischer Betriebsabweichungsabschnitt blieb im bereits zum Produktionsscope gehörenden `readme.txt` erhalten. Damit wären Runtime und bindende MASTER-Dokumentation widersprüchlich gewesen.
+
+**Korrektur:** Der historische Absatz wird innerhalb desselben bestehenden 4-Dateien-Scopes ausdrücklich als durch 6.54.0 abgelöst markiert und durch den aktuellen externen REST-Taktgeber-Vertrag ersetzt. Source und Fresh-Unpack werden negativ auf den alten Satz und positiv auf den aktuellen Satz geprüft; der Korrekturpatch wird in der MASTER abgelegt.
+
+**Schutz:** Ein automatisches Runtime-PASS genügt nicht, wenn die bindende Release-Dokumentation einen gegenteiligen aktuellen Betriebsvertrag enthält. Die gesamte erzeugte MASTER wird deshalb vor Freigabe auf solche Widersprüche geprüft. Runtime-/Worker-/Providerlogik wird durch diesen Dokumentationsrootfix nicht verändert.
