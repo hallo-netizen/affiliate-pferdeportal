@@ -54,6 +54,10 @@ Korrektur der Prüfinfrastruktur: V6.53 bindet ab Runner v4 direkt an das unver�
 
 Damit wird die bindende MASTER tatsächlich bytegenau als Ausgangspunkt verwendet. Danach läuft der vollständige V6.53-Successor-/Real-WordPress-/Fresh-Unpack-/Paritätsworkflow gegen den geänderten Source-Stand und erneut gegen den finalen Installer.
 
+### Lauf 9 – Generatorziel der Prüfinfrastruktur
+
+Der erste v4-Lauf wurde sofort und korrekt BLOCKED, bevor ein Produktions- oder Release-Schritt lief: der Python-Generator schrieb die transformierte Prüfroutine versehentlich auf den gelesenen Basispfad statt auf den temporären Zielpfad. Dadurch fehlte `/tmp/run-v653-full-release-v4-generated.sh`. Der Fehler war ausschließlich in der CI-Prüfinfrastruktur und hat weder Produktionscode noch MASTER noch Installer verändert. Korrektur: explizite getrennte `src`-/`dst`-Pfade und zusätzlicher `test -f`-Fail-Closed vor Ausführung des generierten Runners.
+
 ## Prüfstrategie
 
 1. Bindende V6.52-Freigabe als unveränderliches verifiziertes GitHub-Artefakt inklusive Artifact-, Installer-, MASTER-Hash und originalem `FINAL_RELEASE_GATE=PASS` prüfen.
