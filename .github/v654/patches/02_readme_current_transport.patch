@@ -1,0 +1,13 @@
+--- a/affiliate-portal-router/readme.txt
++++ b/affiliate-portal-router/readme.txt
+@@ -101,8 +101,8 @@
+ Bewusst unverändert
+ Acceptance, BUSINESS-/PRIVATE-Klassifikation, HivePress-Materialisierung, Kampagnen-/Outputlogik, Medien, Portalstruktur, Design/CSS/JS und Nachbar-Traits wurden nicht neu gebaut. Im Katalog wurde ausschließlich die belegte zentrale Souvenir-Policy ergänzt; sonstige Katalogfelder bleiben unverändert.
+ 
+-Transport – explizite Betriebsabweichung
+-Der Nutzer hat keinen Serverzugriff. Deshalb arbeitet der reale Hosting-Modus weiterhin über genau einen authentifizierten, sequenziellen Admin-AJAX-Taktgeber. Beim Schließen der Providerseite pausiert der persistente Run und setzt beim Wiederöffnen mit derselben UUID und denselben Cursorn fort. Kein Plugin-Self-HTTP und kein konkurrierender eBay-Worker. Damit ist die Browser-Unabhängigkeit aus Zielvertrag §3 ausdrücklich NICHT erfüllt und wird nicht als PASS bezeichnet.
++Transport – durch 6.54.0 abgelöst
++Die frühere browsergebundene Admin-AJAX-Betriebsabweichung gilt ab 6.54.0 nicht mehr. Der kanonische eBay-Lauf wird ausschließlich über den authentifizierten externen REST-Taktgeber fortgesetzt; pro HTTP-Aufruf höchstens ein Paket. Browser, WP-Cron und plugin-eigener Self-HTTP sind keine Laufvoraussetzung.
+ 
+ Freigabe
+ Lokale/packaged Tests können nur den Code-/State-/Harness-Vertrag belegen. Produktionsfreigabe setzt zusätzlich einen realen WordPress/HivePress/eBay-Lauf voraus. Die fachliche 311er-Sollmenge wird aus dem verbindlichen vorhandenen Manifest übernommen; ihre externe semantische Einstufung als physische Produktfamilien wird durch diesen Build nicht neu behauptet.

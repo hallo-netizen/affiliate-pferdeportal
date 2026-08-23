@@ -1,0 +1,75 @@
+name: V6.54 KISS external tick + skip full release gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  v654-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v654-kiss-external-tick-skip-20260823'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v654gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
+    steps:
+      - name: Checkout V6.54 branch
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+
+      - name: Execute complete V6.54 release gate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          chmod +x .github/v654/runner/run-v654-full-release-v2.sh
+          .github/v654/runner/run-v654-full-release-v2.sh
+
+      - name: Upload final verified V6.54 release
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V654_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.54.0_KISS_EXTERNAL_TICK_SKIP_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_54_0_KISS_EXTERNAL_TICK_SKIP_REALGATE_20260823.zip
+            V654_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload blocked V6.54 evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V654_BLOCKED_EVIDENCE
+          path: V654_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
