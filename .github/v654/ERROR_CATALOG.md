@@ -22,12 +22,12 @@
 
 „Fehler überspringen“ bedeutet ausschließlich kandidatbezogene Einzelfehler. Es ist kein allgemeines Abschalten von Safety-/Quality-/Checkpoint-Gates. Der letzte sichere öffentliche Checkpoint darf durch V6.54 nicht geschwächt werden.
 
-## E-654-003 – Reale HTTP-Prüfung erbte adversarialen In-Process-Testzustand
+## E-654-003 – Reale HTTP-Prüfung vermischte Prozesszustände
 
-**Symptom:** Der erste vollständige V6.54-Run bestand alle Produktcode- und Real-WordPress-In-Process-Prüfungen, der nachgelagerte echte HTTP-Aufruf antwortete jedoch `status=disabled` statt `idle`.
+**Symptom:** Die V6.54-Gesamtläufe bestanden Produktcode, Architektur, Kernworkflow-Parität und Real-WordPress-In-Process-Prüfungen, stoppten aber im nachgelagerten separaten HTTP-Test.
 
-**Ursache:** Zwei getrennte Testfälle teilten versehentlich denselben persistierten Optionszustand. Der HTTP-Test hatte damit keinen deterministischen eigenen Enabled-Fixture. Zusätzlich lagen die Assertion-Zähler des `wp eval-file`-Skripts wegen Include-Scope nicht im selben globalen Scope wie die Hilfsfunktion.
+**Ursache:** Die Testinfrastruktur setzte voraus, dass ein in einem WP-CLI-Prozess künstlich auf `enabled=true` gesetzter eBay-Zustand nach einem frischen HTTP-/Plugin-Bootstrap unverändert aktiviert bleibt. Der reale Bootstrap normalisiert die Providerkonfiguration jedoch zulässigerweise und deaktiviert eBay ohne erforderliche Provider-Credentials. Das ist kein Fehler des externen Tick-Transports.
 
-**Korrektur:** ausschließlich Testinfrastruktur: `$GLOBALS`-basierte Zähler; expliziter frischer Enabled-Fixture am Ende des Realtests; separater Fixture-Reset und Readback direkt vor dem realen HTTP-Prozess. Produktionspatch bleibt bytegleich.
+**Korrektur:** ausschließlich Prüfinfrastruktur. Die Due-/Autostart-Semantik bleibt im deterministischen echten WordPress-Prozess geprüft. Der separate HTTP-Prozess prüft nur seine eigene Aufgabe: Server erreichbar, falscher Schlüssel = HTTP 403, korrekter Schlüssel = HTTP 200 und gültige JSON-Antwort mit Status. Eine künstliche `enabled=true`-Persistenz über Prozessgrenzen ist kein Releasekriterium mehr.
 
-**Schutz:** Reale HTTP-Tests dürfen niemals implizit vom Endzustand eines vorherigen adversarialen Tests abhängen.
+**Schutz:** Reale HTTP-Transporttests dürfen nicht von fachfremden Provider-Fixture-Annahmen abhängen. Produktionspatch bleibt unverändert.
