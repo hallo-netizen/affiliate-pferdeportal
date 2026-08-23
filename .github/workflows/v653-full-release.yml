@@ -48,8 +48,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          chmod +x .github/v653/runner/run-v653-full-release.sh
-          .github/v653/runner/run-v653-full-release.sh
+          chmod +x .github/v653/runner/run-v653-full-release-v2.sh
+          .github/v653/runner/run-v653-full-release-v2.sh
 
       - name: Upload final verified V6.53 release
         if: success()
