@@ -1,0 +1,64 @@
+name: V6.55 category product CONTAIN ROOTFIX full gate
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  contain-rootfix-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v655-category-product-contain-rootfix-20260824'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v655contain
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+      - name: Execute contain rootfix full release gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          chmod +x .github/v655-contain-rootfix/runner/run-contain-rootfix-full-release.sh
+          .github/v655-contain-rootfix/runner/run-contain-rootfix-full-release.sh
+      - name: Upload final verified contain rootfix release
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V655_CATEGORY_PRODUCT_CONTAIN_ROOTFIX_FINAL
+          path: |
+            affiliate-zentrale_v6.55.0_CATEGORY_PRODUCT_CONTAIN_ROOTFIX_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_55_0_CATEGORY_PRODUCT_CONTAIN_ROOTFIX_REALGATE_20260824.zip
+            V655_CONTAIN_ROOTFIX_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Upload blocked evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V655_CATEGORY_PRODUCT_CONTAIN_ROOTFIX_BLOCKED
+          path: V655_CONTAIN_ROOTFIX_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
