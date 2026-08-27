@@ -1,0 +1,23 @@
+V6.61.4 SOURCE SCOPE
+====================
+
+Changed versus V6.61.3 (exactly 4/19):
+- pferdeportal-affiliate-router.php
+- includes/trait-ppar-idealo.php
+- assets/frontend.css
+- readme.txt
+
+Protected / byte-identical (15/19), including:
+- includes/trait-ppar-ebay.php
+- includes/trait-ppar-ebay-run.php
+- includes/trait-ppar-network-sync.php
+- includes/trait-ppar-output-objects.php
+- includes/trait-ppar-control-contract.php
+- includes/trait-ppar-article-plans.php
+- includes/trait-ppar-creative-library.php
+- catalog files
+- assets/frontend.js
+
+Designplugin: not changed, not versioned, not included.
+V6.61.3 remains LIVE FAIL.
+V6.61.4 is LOCAL/FRESH-UNPACK PASS; live WordPress visual acceptance remains open.
