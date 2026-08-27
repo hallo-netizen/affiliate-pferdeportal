@@ -39,8 +39,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          chmod +x .github/v656/runner/run-v656-full-release.sh
-          .github/v656/runner/run-v656-full-release.sh
+          chmod +x .github/v656/runner/run-v656-full-release-v2.sh
+          .github/v656/runner/run-v656-full-release-v2.sh
       - name: Upload final verified V6.56 release
         if: success()
         uses: actions/upload-artifact@v4
