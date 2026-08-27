@@ -1,0 +1,89 @@
+AFFILIATE-ZENTRALE V6.61.4 – TEST GATES
+=======================================
+
+LIVE-FAIL V6.61.3
+- V6.61.3 bleibt FAIL und ist nicht freigegeben.
+- Ursache eBay: historische Kampagnen-Bildbindung war als öffentliches Gate ungeeignet.
+- Ursache idealo: iPN-Trackingwrapper wurde als Browser-Bildquelle behandelt.
+- Ursache Geometrie: reale Wrapper-/Disclosure-Kette war nicht vollständig gegen responsive Layout geprüft.
+
+DREI GEFÜLLTE POSITIONEN / FALLBACK
+- category_product_1 -> Kandidat 1: PASS
+- category_product_2 -> Kandidat 2: PASS
+- category_product_3 -> Kandidat 3: PASS
+- exakter Source-Methodentest aus finalem Code: 4/4 PASS
+- defekter eBay-Kandidat wird verworfen; aktueller gültiger Kandidat kann nachrücken: PASS
+- keine künstliche leere Produktkarte: PASS
+
+EBAY BILDVERTRAG
+- V6.18 pending intern nicht als Alt-Blocker wieder eingeführt: PASS
+- aktueller output_creative_row ist kanonische Bildquelle: PASS
+- stale Kampagnen-CDN-URL darf durch aktuellen Quellstand ersetzt werden: PASS
+- aktuelles Remote-Bild HTTP + Bilddekodierung: PASS
+- lokaler Cache wird wiederverwendet: PASS
+- nicht dekodierbare Antwort wird blockiert: PASS
+- gezielter Bildvertragstest: 4/4 PASS
+
+IDEALO BILDVERTRAG
+- direkter cdn.idealo.com-Link: PASS
+- iPN -> gfx.productsup.io -> cdn.idealo.com: PASS
+- iPN -> direktes cdn.idealo.com-Ziel: PASS
+- fremder Host / HTTP / fehlendes trg: BLOCKED PASS
+- Bildcache: 3/3 PASS
+- Bildwrapper-Test: 6/6 PASS
+
+REALFEED 2901 BILDAUDIT
+- Datenzeilen: 2,041,826
+- auflösbare idealo-Bildwrapper: 2,041,796
+- ohne reales Bildziel verworfen: 30
+- Reitstiefel: 159 Feedzeilen / 0 ohne Bildziel
+- Reithelme: 30 / 0 ohne Bildziel
+- Pferdegerten: 14 / 0 ohne Bildziel
+- Reithandschuh-Titeltreffer: 44 / 0 ohne Bildziel
+
+GEOMETRIE / RESPONSIVE
+- lokaler Chromium-Test mit gegnerischem realistischem Design-CSS: PASS
+- Breiten: 1280, 1101, 1100, 901, 900, 768, 621, 620, 390, 320 px: PASS
+- drei Kartenkörper pro Breite: exakt 360 / 360 / 360 px: PASS
+- drei vollständige Wrapper pro Breite: gleiche Höhe: PASS
+- Bildflächen: 150 x 150 px / `contain`: PASS
+- 2-Spalten- und 1-Spalten-Disclosure ohne horizontalen Overflow: PASS
+
+MULTIPROVIDER / ZIELVERTRAG
+- automatic / hybrid: PASS
+- separate / combined: PASS
+- gemeinsame Karte nur exakte GTIN: PASS
+- fehlender Provider -> kein leerer Button: PASS
+- Hybrid: idealo-Familienvergleich eigenständig, konkrete idealo-Produkte nur als GTIN-Zusatzbutton: PASS
+- 311er-Portalvertrag / Negativmatcher-Regression: PASS
+
+EBAY REGRESSION
+- 1,000 randomisierte ebay_only Candidate-Selections = V6.58: PASS
+- 1,000 randomisierte ebay_only Provider-Cohort-Checks = V6.58: PASS
+- eBay Providertrait: byteidentisch zu V6.61.3
+- eBay Run/Safe-Gap/Heartbeat: byteidentisch zu V6.61.3
+- Network-Sync / Output-Objects / Article-Plans / Control / Creative Library: byteidentisch
+
+IDEALO ASYNC / GATEWAY ROOTFIX
+- direkter non-blocking Worker: PASS
+- WP-Cron nur Fallback: PASS
+- queued self-heal / stale-running recovery: PASS
+- Doppelworker-Lock / Token-Replay-Sperre: PASS
+
+SOURCE / PACKAGE
+- beabsichtigt geänderte Dateien: exakt 4/19: PASS
+- geschützte Dateien: 15/19 byteidentisch: PASS
+- PHP-Lint Quelle: 14/14 PASS
+- Installer ZIP-Integrität: PASS
+- Fresh-Unpack Dateien: 19/19
+- Fresh-Unpack Byteidentität: 19/19 PASS
+- PHP-Lint Fresh-Unpack: 14/14 PASS
+- vollständige Runtime-/Multi-Provider-/Bild-/Geometry-Suite aus Fresh-Unpack: PASS
+
+DESIGNPLUGIN
+- nicht verändert
+- nicht neu versioniert
+- nicht im Installer enthalten
+
+LIVE WORDPRESS SICHTPRÜFUNG
+- OFFEN. Erst nach Installation V6.61.4 Reitstiefel + Reithandschuhe real prüfen.
