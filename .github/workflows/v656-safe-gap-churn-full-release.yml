@@ -1,0 +1,64 @@
+name: V6.56 BUSINESS safe-gap churn full release gate
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  v656-full-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v656-business-safe-gap-churn-revalidation-rootfix-20260827'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v656
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+      - name: Execute complete V6.56 release gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          chmod +x .github/v656/runner/run-v656-full-release-v3.sh
+          .github/v656/runner/run-v656-full-release-v3.sh
+      - name: Upload final verified V6.56 release
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V656_SAFE_GAP_CHURN_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.56.0_SAFE_GAP_CHURN_REVALIDATION_ROOTFIX_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_56_0_SAFE_GAP_CHURN_REVALIDATION_ROOTFIX_REALGATE_20260827.zip
+            V656_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Upload blocked V6.56 evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V656_SAFE_GAP_CHURN_BLOCKED
+          path: V656_RELEASE_EVIDENCE/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
