@@ -1,0 +1,45 @@
+AFFILIATE-ZENTRALE V6.61.3 – TEST GATES
+
+ROOTCAUSE / PUBLIC IMAGE
+- Artikel-Produktgate Titel+Bild: PASS
+- eBay verified/pending/stale/hash-mismatch: PASS
+- eBay lokaler Bildcache / Hashidentität / Retry-Drosselung: PASS
+- Ranked fallback auf nächsten gültigen Kandidaten: PASS
+
+MULTIPROVIDER / IDEALO
+- automatic / hybrid: PASS
+- exact GTIN combined buttons: PASS
+- kein leerer Providerbutton: PASS
+- idealo Familienbild aus gleichem Konzept, ohne Produktpreis-/GTIN-Übernahme: PASS
+- idealo Bild-Timestamp runtime: PASS
+- negative Matcherfälle: PASS
+- 311 Produktkonzepte gebunden: PASS
+
+EBAY REGRESSION
+- 1.000 randomized ebay_only candidate selections = V6.58: PASS
+- 1.000 randomized ebay_only provider cohort = V6.58: PASS
+- eBay Providerkern / eBay Run / Network Sync / Output Objects / Creative Library: byteidentisch zu V6.61.2
+
+ASYNC
+- direkter non-blocking idealo worker: PASS
+- WP-Cron nur Fallback: PASS
+- queued self-heal / stale-running recovery: PASS
+- duplicate worker lock / token replay block: PASS
+
+GEOMETRIE
+- lokaler Chromium Positiv/Negativ-Test: PASS
+- 3 Karten: 326 / 326 / 326 px
+- Bildflächen: 150 x 150 px
+- object-fit: contain / contain / contain
+
+REALFEED
+- geprüfter V6.61-Matcher (Matcher in V6.61.3 byteidentisch): 2.041.826 rows / 1.633 safe / 83 concepts / 27 hubs / 3 ambiguous
+- aktueller kompletter Struktur-/URL-Scan: 2.041.826 rows / 0 core malformed / 2.041.826 HTTPS images / timestamp in allen image+click URLs
+- 2747 subset proof: 515.554 / 515.554 in 2901, 0 missing
+
+PACKAGE
+- PHP lint: 14/14 PASS
+- Fresh unpack: 19/19 byteidentisch PASS
+- ZIP integrity: PASS
+
+LIVE WORDPRESS SICHTPRUEFUNG: OFFEN
