@@ -1,0 +1,15 @@
+V6.60 FINAL GATE SUMMARY
+
+PASS real feed contract: 515554 rows, 0 malformed, 655 stage scope, 187 exact public-map rows all with GTIN.
+PASS idealo/multiprovider trait positive+negative.
+PASS eBay-only parity: 1000 randomized selections + 1000 provider cohort cases identical to V6.58.
+PASS article mode/dedupe contracts.
+PASS single-provider article/category markup byte-identical to V6.58.
+PASS multi-button markup: exact available providers, no nested anchor, no empty Amazon button.
+PASS static whole-workflow contract.
+PASS PHP lint 14/14 source and fresh installer.
+PASS fresh installer parity 19/19 and installable ZIP root.
+PASS protected eBay workflow components unchanged.
+PASS designplugin untouched.
+
+External configuration only: autonomous full-feed download still needs the concrete iPN-generated feed download URL. No URL is guessed.
