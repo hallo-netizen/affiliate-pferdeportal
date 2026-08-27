@@ -1,0 +1,26 @@
+V6.57 IDEALO ISOLATED ADAPTER PHASE 1
+Stand: 27.08.2026
+
+Source SHA-256
+14c6e707bb2911d2bf8f9d5320477bc60b9c4cc38ca3b36118ad6dd17c71a7f8  includes/trait-ppar-idealo.php
+253a22b3360d0f759f2481fb6620bb6e2b62c67dfdba0d3290b56cfab0c0d53c  includes/trait-ppar-provider-registry.php
+f945e0b61a83a2686e730f5a68c9a8d6591166c7965b62354a2feccb3ff29f86  pferdeportal-affiliate-router.php
+a41d600e02dedc76236c6bd092621f1ec52af3338b9dab30f6d01150f8983c2a  readme.txt
+
+Installer
+2fc86665ac0af1e901035c4eaa4f54ed0f2038d950117331c919729d66c5214c  affiliate-zentrale_v6.57.0_IDEALO_ISOLATED_ADAPTER_PHASE1_HARD_VERIFIED.zip
+
+MASTER
+1016c9a4fd41b1249f88ab0876f80010ceba651bb65cf49128adae5bedaef300  MASTER_AFFILIATE_ZENTRALE_V6_57_0_IDEALO_ISOLATED_ADAPTER_PHASE1_20260827.zip
+
+Geschützte Parität zu V6.56.0: PASS
+- assets/frontend.css
+- assets/frontend.js
+- assets/ebay-portal-catalog-v2.json
+- assets/portal-structure-v279.json
+- includes/trait-ppar-ebay.php
+- includes/trait-ppar-ebay-run.php
+- includes/trait-ppar-ebay-account-deletion.php
+- includes/trait-ppar-output-objects.php
+- includes/trait-ppar-control-contract.php
+- includes/trait-ppar-creative-library.php
