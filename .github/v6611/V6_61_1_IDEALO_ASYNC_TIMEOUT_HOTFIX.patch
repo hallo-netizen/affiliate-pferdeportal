@@ -1,0 +1,97 @@
+--- a/includes/trait-ppar-idealo.php
++++ b/includes/trait-ppar-idealo.php
+@@ -13,6 +13,8 @@
+ trait PPAR_Idealo_Trait {
+     const IDEALO_REFRESH_HOOK = 'ppar_idealo_refresh_v1';
++    const IDEALO_MANUAL_REFRESH_HOOK = 'ppar_idealo_manual_refresh_v1';
++    const IDEALO_REFRESH_LOCK = 'ppar_idealo_refresh_lock_v1';
+     const IDEALO_SCHEMA_OPTION = 'ppar_idealo_adapter_schema_v4';
+@@ -28,6 +30,7 @@
+         add_action('init', array($this, 'idealo_maybe_upgrade_materialization'), 12);
+         add_action('init', array($this, 'idealo_ensure_refresh_schedule'), 25);
+         add_action(self::IDEALO_REFRESH_HOOK, array($this, 'idealo_run_scheduled_refresh'));
++        add_action(self::IDEALO_MANUAL_REFRESH_HOOK, array($this, 'idealo_run_manual_refresh'));
+@@ -45,6 +48,11 @@
+             'feed_last_modified' => '',
+             'last_download_at' => 0,
+             'last_remote_file_hash' => '',
++            'refresh_state' => 'idle',
++            'refresh_requested_at' => 0,
++            'refresh_started_at' => 0,
++            'refresh_finished_at' => 0,
++            'refresh_last_message' => '',
+@@ -773,9 +781,71 @@
++    private function idealo_refresh_lock_acquire() {
++        if (get_transient(self::IDEALO_REFRESH_LOCK)) { return false; }
++        set_transient(self::IDEALO_REFRESH_LOCK, (string)time(), 30 * MINUTE_IN_SECONDS);
++        return true;
++    }
++
++    private function idealo_refresh_lock_release() {
++        delete_transient(self::IDEALO_REFRESH_LOCK);
++    }
++
++    private function idealo_set_refresh_state($state, $message = '') {
++        $s=$this->idealo_settings();
++        $s['refresh_state']=sanitize_key((string)$state);
++        $s['refresh_last_message']=sanitize_text_field((string)$message);
++        if ($state==='queued') { $s['refresh_requested_at']=time(); }
++        if ($state==='running') { $s['refresh_started_at']=time(); }
++        if (in_array($state,array('success','unchanged','failed'),true)) { $s['refresh_finished_at']=time(); }
++        update_option(self::OPTION_NETWORK_IDEALO,$s,false);
++    }
++
++    private function idealo_execute_background_refresh($origin='scheduled') {
++        if (!$this->idealo_refresh_lock_acquire()) {
++            return array('status'=>'queued','message'=>'idealo-Aktualisierung läuft bereits; kein paralleler Vollfeed-Lauf gestartet.');
++        }
++        $this->idealo_set_refresh_state('running', $origin==='manual' ? 'Manuelle idealo-Aktualisierung läuft im Hintergrund.' : 'Automatische idealo-Aktualisierung läuft im Hintergrund.');
++        try {
++            $result=$this->idealo_refresh_remote_feed(true);
++            if (is_wp_error($result)) {
++                $message='idealo-Aktualisierung fehlgeschlagen; Last-Good bleibt erhalten: '.$result->get_error_message();
++                $this->idealo_set_refresh_state('failed',$message);
++                $this->provider_set_access_state('idealo','degraded',$message);
++                return $result;
++            }
++            $status=sanitize_key((string)($result['status']??'success'));
++            if ($status==='unchanged') {
++                $this->idealo_set_refresh_state('unchanged',(string)($result['message']??'Feed unverändert.'));
++            } else {
++                $this->idealo_set_refresh_state('success','idealo-Vollfeed wurde im Hintergrund erfolgreich aktualisiert.');
++            }
++            return $result;
++        } finally {
++            $this->idealo_refresh_lock_release();
++        }
++    }
++
+     public function idealo_run_scheduled_refresh() {
+-        $result=$this->idealo_refresh_remote_feed(true);
+-        if (is_wp_error($result)) { $this->provider_set_access_state('idealo','degraded','idealo-Aktualisierung fehlgeschlagen; Last-Good bleibt erhalten: '.$result->get_error_message()); }
++        $this->idealo_execute_background_refresh('scheduled');
++    }
++
++    public function idealo_run_manual_refresh() {
++        $this->idealo_execute_background_refresh('manual');
++    }
++
++    private function idealo_queue_manual_refresh() {
++        $s=$this->idealo_settings();
++        if (trim((string)($s['feed_url']??''))==='') { return new WP_Error('idealo_feed_url_missing','Es ist noch keine vom iPN erzeugte Feed-URL gespeichert.'); }
++        if (get_transient(self::IDEALO_REFRESH_LOCK)) {
++            return array('status'=>'success','message'=>'idealo-Aktualisierung läuft bereits im Hintergrund. Es wurde kein zweiter Vollfeed-Lauf gestartet.','counts'=>array(),'details'=>array('queued'=>true));
++        }
++        if (!wp_next_scheduled(self::IDEALO_MANUAL_REFRESH_HOOK)) {
++            wp_schedule_single_event(time(), self::IDEALO_MANUAL_REFRESH_HOOK);
++        }
++        $this->idealo_set_refresh_state('queued','idealo-Vollfeed wurde zur Hintergrundaktualisierung eingereiht. Die Admin-Seite kann geschlossen werden.');
++        if (function_exists('spawn_cron')) { @spawn_cron(time()); }
++        return array('status'=>'success','message'=>'idealo-Vollfeed wurde im Hintergrund eingereiht. Die Admin-Seite wartet nicht mehr auf Download und Verarbeitung.','counts'=>array(),'details'=>array('queued'=>true));
+     }
+@@ -797,7 +867,7 @@
+         if ($network!=='idealo') { return $handled; }
+         if ($operation==='connection') { $test=$this->idealo_provider_access_test(null,'idealo',$contract_version); if (is_wp_error($test)) { return $test; } return array('status'=>'success','message'=>(string)($test['message']??'idealo-Zugang geprüft.'),'counts'=>array(),'details'=>array('public_activation'=>$this->idealo_campaigns_should_be_active())); }
+         if ($operation!=='products') { return new WP_Error('idealo_sync_operation_unknown','Unbekannte idealo-Synchronisationsaktion.'); }
+-        return $this->idealo_refresh_remote_feed(true);
++        return $this->idealo_queue_manual_refresh();
