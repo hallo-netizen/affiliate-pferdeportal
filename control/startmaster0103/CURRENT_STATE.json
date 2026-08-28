@@ -1,8 +1,8 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V2",
   "startmaster": "STARTMASTER0103",
-  "generated_at_utc": "2026-08-28T21:45:00Z",
-  "status": "SIX_ARTICLE_NORMAL_DRAFT_END_TO_END_PASS_AI_TOOL_FIREWALL_ENFORCED",
+  "generated_at_utc": "2026-08-28T22:11:49Z",
+  "status": "SIX_ARTICLE_TEST_PUBLISHED_USER_CONFIRMED_FIREWALL_API_ACTIVATION_PENDING",
   "previous_binding": "STARTMASTER0102",
   "workflow_changed": true,
   "workflow_change_scope": "EXTERNAL_EXECUTION_ENFORCEMENT_AND_PACKAGE_PREFLIGHT_ONLY_NO_FACH_QUALITY_DESIGN_CHANGE",
@@ -22,7 +22,9 @@
     "SIX_ARTICLE_DRAFT_READBACK_PASS",
     "REPEATED_CATEGORY_IDENTITY_ROOTCAUSE_FIXED",
     "STARTMASTER0103_PACKAGE_PREFLIGHT_GUARD_BOUND",
-    "AI_TOOL_FIREWALL_CONTROLLER_V1_BOUND"
+    "AI_TOOL_FIREWALL_CONTROLLER_V1_BOUND",
+    "AI_TOOL_FIREWALL_GITHUB_HARDLOCK_PREFLIGHT_PASS",
+    "USER_CONFIRMED_SIX_ARTICLES_PUBLISHED"
   ],
   "open_failures": [
     "PSTE_LIVE_WAVE_UI_40_40_EXECUTION_20_FAMILIES_2_PASS_MAX_FAMILIES_REACHED"
@@ -31,7 +33,8 @@
     "SAFE_SANDBOX_AUTO_REENTRY_BEFORE_SAVED_BACKLOG_BEFORE_PROVIDER",
     "BERATUNG_TITLE_SURFACE_WEIDETORE_TOO_GENERAL"
   ],
-  "next_allowed_step": "USER_CONTENT_REVIEW_6_DRAFTS_17123_17128_NO_PUBLISH",
+  "next_allowed_step": "ACTIVATE_OPENAI_API_SECRET_AND_VERIFY_ENFORCED_FIREWALL_MODEL_PATH_BEFORE_NEXT_PRODUCTION_BLOCK",
+  "queued_after_firewall_activation": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED_THEN_SAFE_SANDBOX_AUTO_REENTRY_THEN_RETAINED_BACKLOG_THEN_PROVIDER",
   "publish_allowed": false,
   "current_installers": {
     "pste": "02_CURRENT_INSTALLERS/portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip",
@@ -43,6 +46,15 @@
   "live_ready_count": 6,
   "article_test_target": 6,
   "article_test_current_completed": 6,
+  "published_article_ids": [
+    17123,
+    17124,
+    17125,
+    17126,
+    17127,
+    17128
+  ],
+  "publication_evidence": "USER_CONFIRMED_IN_CHAT_2026-08-29_EUROPE_BERLIN",
   "production_prompt_already_received": true,
   "prompt_reask_forbidden": true,
   "intermediate_chat_stops_for_internal_pass_forbidden": true,
@@ -57,11 +69,11 @@
     "cannibalization_threshold_modified": false,
     "publish_logic_modified": false
   },
-  "live_status": "NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH",
+  "live_status": "SIX_ARTICLE_TEST_PUBLISHED_USER_CONFIRMED_POST_PUBLICATION_COMPLETE",
   "execution_firewall": {
     "contract": "PFERDE_ATELIER_EXECUTION_FIREWALL_ENVELOPE_V1",
     "enforced": true,
-    "step": "USER_CONTENT_REVIEW_6_DRAFTS_17123_17128_NO_PUBLISH",
+    "step": "ACTIVATE_OPENAI_API_SECRET_AND_VERIFY_ENFORCED_FIREWALL_MODEL_PATH_BEFORE_NEXT_PRODUCTION_BLOCK",
     "allowed_tools": [],
     "state_write_authority": "CONTROLLER_ONLY",
     "unknown_step_policy": "DENY",
