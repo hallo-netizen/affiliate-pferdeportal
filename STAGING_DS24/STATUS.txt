@@ -1,0 +1,43 @@
+DIGISTORE24 REBUILD STAGING — NOT RELEASED / DO NOT INSTALL
+Date: 2026-08-28
+Branch: ds24-rebuild-20260828
+Baseline: Affiliate-Zentrale V6.62.0 KISS eBay Orchestrator
+Baseline installer SHA-256: 1b154321f9731787243bb4068a7ad1df73f16837005e655e5b165a09b47ba200
+
+Exact plugin diff scope vs baseline: 3 paths only
+- NEW includes/trait-ppar-digistore24.php
+  SHA-256 c295c54e9fcc62b4817b7f29d33a2de2d340ade4e5909ebb1ae1aed8b6b1edf5
+- CHANGED includes/trait-ppar-output-objects.php
+  SHA-256 f9f7675e6a9e3672c763f0d88b5570d8816964080b4b877600b7a39986d1d92a
+- CHANGED pferdeportal-affiliate-router.php
+  SHA-256 266d27da7fe6beb83d733d4d335a430f5218930485bad99b6328eb7e1fc5321d
+
+Candidate manifest SHA-256: ca930cba57f46b63ead6385b89d3092bb7003ecb79dfa9ac29d907fa6a2d508f
+Internal DO-NOT-INSTALL archive SHA-256: 99b22ffe755e9b46bee7265d9166999c3d129a88fc598cc096c4d247b99a37a9
+
+Local gates:
+- exact source-tree full test gate: 260/260 PASS
+- source PHP lint: 15/15 PASS
+- archive source/fresh-unpack byte roundtrip: 20/20 PASS
+- fresh-unpack PHP lint: 15/15 PASS
+- exact fresh-unpacked archive full test gate: 260/260 PASS
+
+Additional negative findings caught in this rebuild and fixed:
+F1 generic/manual/legacy Digistore product-campaign bypass
+F2 foreign URL / HTML-mode Digistore banner bypass
+F3 wrong affiliate identity accepted in checkout-ds24 tracking path
+F4 HTTP banner image / implicit support-page redirect not fully fail-closed
+Each finding has an old/bad-state NEGATIVE reproduction and fixed-state POSITIVE test, followed by whole-workflow regression.
+
+Protected workflow remains byte-identical outside the exact 3-path diff, including eBay canonical run/provider/account deletion, idealo, central automation, creative library, provider registry, network sync/intake, frontend, catalogs and readme.
+
+LIVE STATE / RELEASE BLOCKERS:
+- Canonical eBay run 74b8372b-f48 is still non-terminal. No live plugin installation/change was performed by this rebuild.
+- After eBay terminal: create new coverage export/nullpoint comparison.
+- Then real read-only Digistore API/payload gate with the operator's tested key.
+- Then one real approved vendor support-page/banner import E2E.
+- Any live-driven fix must repeat NEGATIVE + POSITIVE + complete local workflow/regression + fresh-unpack gate.
+- Only after every gate PASS may a final release installer/master be produced.
+
+STATUS=LOCAL_HARD_PASS_PENDING_EBAY_TERMINAL_LIVE_API_VENDOR_E2E
+RELEASE_AUTHORIZED=NO
