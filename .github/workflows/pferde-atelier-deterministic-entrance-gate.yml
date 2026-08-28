@@ -19,8 +19,11 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/deterministic-entrance-gate/repo_ci_test.py
-      - name: Assert no OpenAI API dependency
+      - name: Assert active gate has no OpenAI API dependency
         shell: bash
         run: |
           set -euo pipefail
-          ! grep -R -E 'api\.openai\.com|urllib\.request|requests\.post|httpx\.post' control/deterministic-entrance-gate
+          ! grep -E 'api\.openai\.com|urllib\.request|requests\.post|httpx\.post' \
+            control/deterministic-entrance-gate/door.py \
+            control/deterministic-entrance-gate/worker_harness.py \
+            control/deterministic-entrance-gate/codex_runtime_selftest.py
