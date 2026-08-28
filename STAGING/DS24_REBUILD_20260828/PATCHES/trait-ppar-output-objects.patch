@@ -1,0 +1,14 @@
+--- V6.62.0/includes/trait-ppar-output-objects.php
++++ DS24_REBUILD/includes/trait-ppar-output-objects.php
+@@ -1426,6 +1426,11 @@
+             if ($creative_type === 'product') { $output_types = array_values(array_intersect($output_types, array('product_campaign'))); }
+             elseif ($creative_type === 'banner') { $output_types = array_values(array_intersect($output_types, array('portal_banner','hivepress_listing','portal_listing'))); }
+             else { $result['review']++; $result['errors']['output_type_unsupported']='Creative-Typ besitzt noch keinen bestätigten Ausgabeweg.'; continue; }
++            // Digistore24 is contractually banner-only. This provider-specific
++            // hardlock must not alter any output path for other providers.
++            if (sanitize_key((string) ($row['provider'] ?? '')) === 'digistore24') {
++                $output_types = array_values(array_intersect($output_types, array('portal_banner')));
++            }
+             foreach ($output_types as $output_type) {
+                 $classification = $this->output_classify_for_portal($row, $portal, $output_type);
+                 if (is_wp_error($classification)) { $result['blocked']++; $result['errors'][$classification->get_error_code()]=$classification->get_error_message(); continue; }
