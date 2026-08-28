@@ -1,0 +1,26 @@
+name: Pferde Atelier Deterministic Entrance Gate
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'control/deterministic-entrance-gate/**'
+      - 'control/startmaster0104/**'
+      - 'control/CURRENT_STARTMASTER.json'
+      - '.github/workflows/pferde-atelier-deterministic-entrance-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hardlock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deterministic entrance gate positive-negative CI
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python control/deterministic-entrance-gate/repo_ci_test.py
+      - name: Assert no OpenAI API dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -R -E 'api\.openai\.com|urllib\.request|requests\.post|httpx\.post' control/deterministic-entrance-gate
