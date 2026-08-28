@@ -1,0 +1,43 @@
+--- /mnt/data/v663inspect/affiliate-portal-router/includes/trait-ppar-digistore24.php	2026-08-28 16:55:28.000000000 +0000
++++ /mnt/data/v6631_fresh/affiliate-portal-router/includes/trait-ppar-digistore24.php	2026-08-28 18:09:40.000000000 +0000
+@@ -297,10 +297,12 @@
+                 return new WP_Error('digistore24_entry_id_missing', 'Marketplace-Entry-ID fehlt.');
+             }
+             $safe_params['entryId'] = $entry_id;
+-        } elseif ($method === 'listMarketplaceEntries' && isset($params['sortBy'])) {
+-            $sort = sanitize_key((string) $params['sortBy']);
++        } elseif ($method === 'listMarketplaceEntries' && (isset($params['sortBy']) || isset($params['sort_by']))) {
++            // Digistore24/OpenAPI uses the canonical query key `sort_by`.
++            // Accept the old internal camelCase alias but never send it upstream.
++            $sort = sanitize_key((string) ($params['sort_by'] ?? $params['sortBy'] ?? ''));
+             if ($sort !== '') {
+-                $safe_params['sortBy'] = $sort;
++                $safe_params['sort_by'] = $sort;
+             }
+         }
+         $url = 'https://www.digistore24.com/api/call/' . rawurlencode($method);
+@@ -457,7 +459,23 @@
+             return new WP_Error('digistore24_identity_changed_during_request', 'Digistore24-Zugang wurde während des Marketplace-Abrufs geändert; Antwort wird verworfen.');
+         }
+         $data = is_array($response['data'] ?? null) ? $response['data'] : array();
+-        $entries = isset($data['entries']) && is_array($data['entries']) ? $data['entries'] : array();
++        // Live fail-closed schema gate. `listMarketplaceEntries` is documented to
++        // return data.entries. V6.63.0 silently converted a missing/malformed or
++        // empty entries payload into a misleading successful 0/0 marketplace
++        // refresh. That makes a transport/API success indistinguishable from a
++        // usable marketplace result and can hide a schema/permission problem.
++        if (!array_key_exists('entries', $data)) {
++            $keys = array_slice(array_values(array_filter(array_map('sanitize_key', array_keys($data)))), 0, 12);
++            $suffix = $keys ? ' Vorhandene data-Schlüssel: ' . implode(', ', $keys) . '.' : ' data ist leer.';
++            return new WP_Error('digistore24_marketplace_schema_missing_entries', 'Digistore24-Marktplatzantwort enthält kein data.entries-Feld.' . $suffix);
++        }
++        if (!is_array($data['entries'])) {
++            return new WP_Error('digistore24_marketplace_schema_invalid_entries', 'Digistore24-Marktplatzantwort enthält data.entries nicht als Liste. Antwort wird nicht als erfolgreicher Abruf gewertet.');
++        }
++        $entries = $data['entries'];
++        if (!$entries) {
++            return new WP_Error('digistore24_marketplace_empty_unverified', 'Digistore24 lieferte data.entries als leere Liste. 0/0 wird fail-closed nicht als Marketplace-PASS gewertet; bestehender Cache und öffentliche Ausgabe bleiben unverändert.');
++        }
+         $items = array();
+         $blocked = 0;
+         foreach ($entries as $entry) {
