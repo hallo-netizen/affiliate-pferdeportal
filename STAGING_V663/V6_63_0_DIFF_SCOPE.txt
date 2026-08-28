@@ -1,0 +1,25 @@
+ADDED 1
+ + includes/trait-ppar-digistore24.php
+CHANGED 4
+ * includes/trait-ppar-ebay-run.php
+ * includes/trait-ppar-output-objects.php
+ * pferdeportal-affiliate-router.php
+ * readme.txt
+REMOVED 0
+BYTE_IDENTICAL_PROTECTED 15
+ = assets/ebay-portal-catalog-v2.json
+ = assets/frontend.css
+ = assets/frontend.js
+ = assets/portal-structure-v279.json
+ = includes/trait-ppar-article-plans.php
+ = includes/trait-ppar-automation-suite.php
+ = includes/trait-ppar-awin-programme-gate.php
+ = includes/trait-ppar-control-contract.php
+ = includes/trait-ppar-creative-library.php
+ = includes/trait-ppar-ebay-account-deletion.php
+ = includes/trait-ppar-ebay.php
+ = includes/trait-ppar-idealo.php
+ = includes/trait-ppar-network-sync.php
+ = includes/trait-ppar-provider-intake.php
+ = includes/trait-ppar-provider-registry.php
+DIFF_SCOPE_TOTAL 5
