@@ -1,0 +1,9 @@
+{
+  "contract": "PFERDE_ATELIER_CURRENT_STARTMASTER_POINTER_V1",
+  "startmaster": "STARTMASTER0104",
+  "root_ref": "control/startmaster0104/PFERDE_ATELIER_START_HERE.json",
+  "state_ref": "control/startmaster0104/CURRENT_STATE.json",
+  "gate_ref": "control/deterministic-entrance-gate/door.py",
+  "free_chat_execution_authority": false,
+  "api_required": false
+}
