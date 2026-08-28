@@ -1,0 +1,94 @@
+Affiliate-Zentrale V6.63.2 — eBay recovery bootstrap + Digistore24 live guard HARD PROOF
+Date: 2026-08-28
+Status: LOCAL_HARD_PASS / NOT RELEASED
+
+BINDING RELEASE CONTRACT
+- No release from a single happy-path test.
+- Every fix: NEGATIVE reproduction -> minimal fix -> POSITIVE -> affected full workflow regression -> fresh-unpack exact installer.
+- Any open live gate means NOT RELEASED.
+
+LIVE ROOT CAUSE — eBay recovery transport gap
+1. V6.62.0 production run 74b8372b-f48 failed at final PRIVATE public gate.
+2. V6.63.0 correctly reopened the SAME run state-only to selection_prepare/private_public_gate_recovery.
+3. The external GitHub heartbeat that had observed the earlier terminal failure had already exited:
+   heartbeat 1 status=failed server_time=1787938499
+   terminal heartbeat status=failed; no successor runner required
+4. Therefore the reopened run had no active external worker. The 20:13 live screenshot still showed the same selection_prepare recovery state.
+5. Re-running the EXISTING heartbeat job, without starting a new eBay run, resumed the SAME run. The 20:27 screenshot shows run 74b8372b-f48 in private_select/private_prune with candidate pool 545/1000 and winners processed 20/250.
+6. This proves the missing element was transport bootstrap after terminal->running state-only recovery, not a need to reset the canonical run.
+
+NEGATIVE REPRODUCTION — exact V6.63.1
+- Old failed V6.62-shaped run reopens to running: PASS.
+- Same run UUID/business candidates/coverage preserved: PASS.
+- No external tick bootstrap is emitted after recovery: PASS (defect reproduced).
+
+ROOTFIX — V6.63.2
+- After the narrow, CAS-protected state-only recovery AND successful PRIVATE selector queueing, exactly ONE non-blocking same-origin HTTPS POST is sent to the existing external_tick_v2 REST endpoint.
+- No WP-Cron, no recurring loopback, no second run, no provider logic in admin_init.
+- Ongoing scheduling remains the existing external GitHub heartbeat; its safety schedule remains fallback if loopback transport is unavailable.
+- Bootstrap is bound to the exact recovered run UUID via recovery_run.
+- The endpoint rejects delayed/stale bootstrap requests before generic due-operation logic, so a delayed request can NEVER start a successor/new run after the recovered run has completed/failed or been replaced.
+- Off-origin or HTTP rest_url filters are fail-closed; no request is sent.
+- No state is written after non-blocking dispatch, preventing an admin request from overwriting a faster worker update.
+
+TARGETED NEG/POS — recovery bootstrap suite
+21/21 PASS:
+- V6.63.1 defect reproduced: state reopened but zero bootstrap calls.
+- V6.63.2: same UUID preserved, exactly one canonical bootstrap POST.
+- blocking=false, timeout=1, redirects=0, Cache-Control no-store.
+- history records bootstrap contract.
+- second admin request dispatches no second bootstrap.
+- off-origin and HTTP targets blocked.
+- missing HTTP transport leaves recovered run open for external safety schedule.
+- wrong historical build remains terminal and emits no bootstrap.
+- delayed wrong UUID returns stale_recovery_bootstrap and cannot replace/start a run.
+- delayed completed-run bootstrap returns terminal completed and cannot start successor.
+- matching UUID with wrong resume reason is blocked.
+
+DIGISTORE24 V6.63.1 LIVE-GUARD RETAINED
+- Real V6.63.0 Marketplace live UI showed ambiguous 0/0.
+- V6.63.1 rootfix remains byte-identical in V6.63.2: missing/nonarray/empty data.entries fail closed and do not overwrite the identity-bound cache; canonical sort_by is used.
+- Digistore remains banner-only, identity-gated, provider-local on API errors, and has no own cron.
+
+SCOPE
+Against V6.63.1: changed exactly 3 plugin files:
+- includes/trait-ppar-ebay-run.php
+- pferdeportal-affiliate-router.php (version/build only in addition to existing hooks)
+- readme.txt
+All 17 other plugin files are byte-identical to V6.63.1.
+
+Against released V6.62.0: total release delta remains exactly 5 paths:
+- NEW includes/trait-ppar-digistore24.php
+- CHANGED includes/trait-ppar-ebay-run.php
+- CHANGED includes/trait-ppar-output-objects.php
+- CHANGED pferdeportal-affiliate-router.php
+- CHANGED readme.txt
+All other 15 V6.62.0 files byte-identical.
+
+FULL SOURCE GATE
+- suites: 35
+- assertions: 547/547 PASS
+- fail: 0
+- PHP lint: 15/15 PASS
+
+EXACT INSTALLER
+- affiliate-zentrale_v6.63.2_EBAY_RECOVERY_BOOTSTRAP_DS24_LIVE_GUARD_PRE_RELEASE.zip
+- SHA-256: 0b1320a7de8df65f57c0bb1116ce50cd6421da2e41b7a660f7b3c87b2a24daa5
+- source -> ZIP -> fresh-unpack: 20/20 files byte-identical PASS
+
+FULL FRESH-UNPACK GATE AGAINST EXACT INSTALLER
+- suites: 35
+- assertions: 547/547 PASS
+- fail: 0
+- PHP lint: 15/15 PASS
+
+LIVE RELEASE HARDLOCK
+NOT RELEASED.
+Still required:
+1. current live eBay recovery run 74b8372b-f48 must reach terminal PASS without restart/data loss.
+2. new coverage export after terminal eBay and compare to prior null point.
+3. only after eBay terminal install exact V6.63.2 candidate (do not interrupt active run).
+4. retry real Digistore Marketplace read-only: must produce non-empty validated entries OR explicit fail-closed diagnosis, never silent 0/0 success.
+5. real getMarketplaceEntry payload + approved vendor support/banner E2E.
+6. final combined live regression + exact final installer/master hash confirmation.
+Any new live defect => NEGATIVE -> fix -> POSITIVE -> full workflow -> fresh-unpack before release.
