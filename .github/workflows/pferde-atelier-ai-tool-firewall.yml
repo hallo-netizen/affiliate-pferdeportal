@@ -1,6 +1,12 @@
 name: Pferde Atelier AI Tool Firewall
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'control/ai-tool-firewall/**'
+      - 'control/startmaster*/**'
+      - '.github/workflows/pferde-atelier-ai-tool-firewall.yml'
   workflow_dispatch:
     inputs:
       invoke_model:
@@ -28,10 +34,10 @@ jobs:
           cp control/startmaster0103/CURRENT_STATE.json .firewall-runtime/00_CONTROL/CONTROL_RUNNER_V2/runtime/
           cp control/ai-tool-firewall/STEP_TOOL_POLICY_V1.json .firewall-runtime/00_CONTROL/AI_TOOL_FIREWALL_CONTROLLER_V1/
       - name: Hardlock preflight
-        if: ${{ inputs.invoke_model == false }}
+        if: ${{ github.event_name == 'push' || inputs.invoke_model == false }}
         run: python control/ai-tool-firewall/controller.py --master .firewall-runtime --dry-run
       - name: Enforced model invocation
-        if: ${{ inputs.invoke_model == true }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.invoke_model == true }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python control/ai-tool-firewall/controller.py --master .firewall-runtime
