@@ -1,0 +1,37 @@
+name: Pferde Atelier AI Tool Firewall
+
+on:
+  workflow_dispatch:
+    inputs:
+      invoke_model:
+        description: 'OpenAI API wirklich aufrufen (sonst nur Hardlock-Preflight)'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  firewall:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble controller runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .firewall-runtime
+          mkdir -p .firewall-runtime/00_CONTROL/CONTROL_RUNNER_V2/runtime
+          mkdir -p .firewall-runtime/00_CONTROL/AI_TOOL_FIREWALL_CONTROLLER_V1
+          cp control/startmaster0103/PFERDE_ATELIER_START_HERE.json .firewall-runtime/
+          cp control/startmaster0103/CURRENT_STATE.json .firewall-runtime/00_CONTROL/CONTROL_RUNNER_V2/runtime/
+          cp control/ai-tool-firewall/STEP_TOOL_POLICY_V1.json .firewall-runtime/00_CONTROL/AI_TOOL_FIREWALL_CONTROLLER_V1/
+      - name: Hardlock preflight
+        if: ${{ inputs.invoke_model == false }}
+        run: python control/ai-tool-firewall/controller.py --master .firewall-runtime --dry-run
+      - name: Enforced model invocation
+        if: ${{ inputs.invoke_model == true }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python control/ai-tool-firewall/controller.py --master .firewall-runtime
