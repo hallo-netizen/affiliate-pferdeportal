@@ -73,7 +73,7 @@ def post_openai(payload):
     except urllib.error.HTTPError as e: raise FirewallBlocked('OPENAI_API_HTTP_'+str(e.code))
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument('--master',required=True); ap.add_argument('--context-file'); ap.add_argument('--model',default=os.getenv('PFERDE_ATELIER_MODEL','gpt-5.4')); ap.add_argument('--dry-run',action='store_true'); args=ap.parse_args()
+    ap=argparse.ArgumentParser(); ap.add_argument('--master',required=True); ap.add_argument('--context-file'); ap.add_argument('--model',default=os.getenv('PFERDE_ATELIER_MODEL','gpt-5.6-sol')); ap.add_argument('--dry-run',action='store_true'); args=ap.parse_args()
     try:
         master=Path(args.master); _,state,_=load_authority(master); step_policy=resolve_step_policy(load_policy(master),state['next_allowed_step']); validate_execution_envelope(state,step_policy)
         context=Path(args.context_file).read_text(encoding='utf-8') if args.context_file else ''
