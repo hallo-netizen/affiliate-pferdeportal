@@ -1,0 +1,87 @@
+--- /mnt/data/v6634dev/previous_v6633/includes/trait-ppar-ebay-run.php	2026-08-28 18:52:41.246346074 +0000
++++ /mnt/data/v6634dev/candidate/includes/trait-ppar-ebay-run.php	2026-08-28 19:05:31.565027544 +0000
+@@ -1958,7 +1958,24 @@
+      * Discovery, refresh, run UUID, public checkpoint and existing materialized
+      * candidates remain untouched. A fresh PRIVATE tail is required afterwards.
+      */
+-    public function maybe_recover_ebay_business_gap_proof_v6633() {
++    /**
++     * V6.63.4 state-only recovery for the exact live V6.63.0 proof-loss state.
++     *
++     * V6.63.3 was too strict: it required hidden/private tail bookkeeping fields
++     * (`private_public_revalidation.status`, selection_scope and owner) that are
++     * not part of the terminal invariant and can legitimately be absent after
++     * the completed PRIVATE tail has been persisted/merged. That made a proven
++     * live terminal state fail to reopen even though the admin read-only state
++     * already proved: PRIVATE tail finished, run is at coverage_verify, the
++     * recovery history is the V6.63 PRIVATE-tail recovery and the safe-gap proof
++     * is the only failing invariant.
++     *
++     * This repair gates only on durable/observable terminal invariants, keeps the
++     * same run UUID, preserves discovery and candidate checkpoints, and reopens
++     * only gapfill_select so canonical BUSINESS selection can regenerate the
++     * missing proof. A fresh PRIVATE tail is required after that rerun.
++     */
++    public function maybe_recover_ebay_business_gap_proof_v6634() {
+         if(function_exists('current_user_can') && !current_user_can('manage_options')){return;}
+         $run=$this->ebay_run_load();
+         if((string)($run['schema']??'')!=='1.0' || sanitize_key((string)($run['status']??''))!=='failed'){return;}
+@@ -1974,19 +1991,21 @@
+         $uuid=sanitize_text_field((string)($run['run_uuid']??''));if($uuid===''){return;}
+         $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
+         if(empty($routes['business']) || empty($routes['private'])){return;}
++        if(sanitize_key((string)($run['resume_reason']??''))!=='private_public_revalidated'){return;}
++
++        // Use the same durable fields that the live admin read-only diagnostic
++        // exposes. Hidden bookkeeping is intentionally not required here.
++        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
++        if(sanitize_key((string)($selection['status']??''))!=='complete'
++            || sanitize_key((string)($selection['phase']??''))!=='complete'
++            || absint($selection['prepare_private_scanned']??0)<1){return;}
++
+         $gap_missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($run['gapfill']['missing']??array())))));
+         $failed_missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($gap_contract['missing']??array())))));
+         sort($gap_missing,SORT_STRING);sort($failed_missing,SORT_STRING);
+         if(absint($run['gapfill']['attempts']??0)<1 || !$gap_missing || !$failed_missing){return;}
+         foreach($failed_missing as $id){if(!in_array($id,$gap_missing,true)){return;}}
+ 
+-        $private_state=is_array($run['private_public_revalidation']??null)?$run['private_public_revalidation']:array();
+-        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
+-        if(sanitize_key((string)($private_state['status']??''))!=='complete'
+-            || sanitize_key((string)($selection['status']??''))!=='complete'
+-            || sanitize_key((string)($selection['selection_scope']??''))!=='private'
+-            || sanitize_text_field((string)($selection['owner']??''))!=='run:'.$uuid){return;}
+-
+         $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
+         $has_private_tail_recovery=false;
+         foreach($history as $entry){
+@@ -1998,7 +2017,7 @@
+         if(!$has_private_tail_recovery){return;}
+ 
+         $failure_at=absint($failure['at']??$run['finished_at']??0);
+-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|business_gap_proof_regeneration|6.63.3');
++        $marker=hash('sha256',$uuid.'|'.$failure_at.'|business_gap_proof_regeneration|6.63.4');
+         foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
+         $history[]=array(
+             'at'=>time(),'reason'=>'business_gap_proof_regeneration','error_code'=>$code,
+@@ -2006,7 +2025,7 @@
+             'preserved_business_candidates'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),
+             'preserved_private_candidates'=>count((array)($run['checkpoint_candidate']['private_listing_ids']??array())),
+             'target_count'=>count($gap_missing),'discovery_restarted'=>0,'full_run_restarted'=>0,
+-            'external_tick_bootstrap_requested'=>1,
++            'live_observed_terminal_gate'=>1,'external_tick_bootstrap_requested'=>1,
+         );
+         if(count($history)>8){$history=array_slice($history,-8);}
+ 
+@@ -2020,9 +2039,8 @@
+         if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
+         $run['phase_state']['selection']=array();
+         unset($run['gapfill']['selection_proof']);
+-        // BUSINESS is rerun after the just-completed PRIVATE tail. Require one
+-        // fresh PRIVATE tail again before publication; this is bounded to PRIVATE
+-        // and does not reset either route's already materialized candidates.
++        // BUSINESS rerun after the completed PRIVATE tail invalidates that tail
++        // for final publication. Force exactly one fresh PRIVATE tail afterwards.
+         $run['private_public_revalidation']=array();
+         $saved=$this->ebay_run_compare_and_swap($loaded,$run);if($saved===false){return;}
+         $this->ebay_run_bootstrap_recovered_external_tick_v6632($uuid);
