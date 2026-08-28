@@ -10,7 +10,7 @@
   "production_package_preflight_guard": "00_CONTROL/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py",
   "workflow_rules_changed": true,
   "workflow_change_scope": "EXTERNAL_EXECUTION_ENFORCEMENT_AND_PACKAGE_PREFLIGHT_ONLY_NO_FACH_QUALITY_DESIGN_CHANGE",
-  "current_state_sha256": "0e0ed22ab731d3ef3ed51541df0e5a04d1ba41f80ac9cfc999bb1ed4a76ffee5",
-  "next_allowed_step": "USER_CONTENT_REVIEW_6_DRAFTS_17123_17128_NO_PUBLISH",
+  "current_state_sha256": "f991db3f86ccf58cd7bde96a3d2cf0823137016590fad529cf3bc3329ef581e8",
+  "next_allowed_step": "ACTIVATE_OPENAI_API_SECRET_AND_VERIFY_ENFORCED_FIREWALL_MODEL_PATH_BEFORE_NEXT_PRODUCTION_BLOCK",
   "publish_allowed": false
 }
