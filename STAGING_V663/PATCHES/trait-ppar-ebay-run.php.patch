@@ -1,0 +1,193 @@
+--- V6.62.0/includes/trait-ppar-ebay-run.php
++++ V6.63.0/includes/trait-ppar-ebay-run.php
+@@ -281,7 +281,27 @@
+         $run['checkpoint_candidate'] = $candidate;
+ 
+         if ($mode !== 'gapfill') {
+-            $run['checkpoint_cleanup_selection'] = $selection;
++            if ($scope === 'private') {
++                // PRIVATE tail revalidation runs after an already-completed BUSINESS
++                // selection/gap-fill. Replacing the cleanup plan here would erase the
++                // BUSINESS active/reserve proof and could make final checkpoint cleanup
++                // treat every BUSINESS row as unselected. Merge only PRIVATE-owned state.
++                $base = is_array($run['checkpoint_cleanup_selection'] ?? null) ? $run['checkpoint_cleanup_selection'] : array();
++                foreach ($selection as $key=>$value) {
++                    $key = (string)$key;
++                    if (strpos($key, 'private') === 0 || strpos($key, 'prepare_private') === 0) {
++                        $base[$key] = $value;
++                    }
++                }
++                $base_stats = is_array($base['stats'] ?? null) ? $base['stats'] : array();
++                $sel_stats = is_array($selection['stats'] ?? null) ? $selection['stats'] : array();
++                if (isset($sel_stats['private'])) { $base_stats['private'] = $sel_stats['private']; }
++                $base['stats'] = $base_stats;
++                unset($base['checkpoint_private_cleanup_initialized'], $base['checkpoint_private_cleanup_done']);
++                $run['checkpoint_cleanup_selection'] = $base;
++            } else {
++                $run['checkpoint_cleanup_selection'] = $selection;
++            }
+         } else {
+             $base = is_array($run['checkpoint_cleanup_selection'] ?? null) ? $run['checkpoint_cleanup_selection'] : array();
+             $targets = array_values(array_unique(array_filter(array_map('sanitize_key', (array)($selection['business_target_concepts'] ?? array())))));
+@@ -1554,7 +1574,8 @@
+         }
+         if(sanitize_key((string)($selection['status']??''))==='complete'){
+             $this->ebay_run_checkpoint_capture_selection($selection,'full');
+-            $this->ebay_run_set_phase('coverage_verify','');return;
++            $revalidated=$this->ebay_run_mark_private_public_revalidation_complete($selection);
++            $this->ebay_run_set_phase('coverage_verify',$revalidated?'private_public_revalidated':'');return;
+         }
+@@ -1583,7 +1604,8 @@
+         $run=$this->ebay_run_load();if($this->ebay_run_is_open($run)){$run['phase']=$mapped;$this->ebay_run_save($run);}
+         if(sanitize_key((string)($selection['status']??''))==='complete'){
+             $this->ebay_run_checkpoint_capture_selection($selection,'full');
+-            $this->ebay_run_set_phase('coverage_verify','');
++            $revalidated=$this->ebay_run_mark_private_public_revalidation_complete($selection);
++            $this->ebay_run_set_phase('coverage_verify',$revalidated?'private_public_revalidated':'');
+         }
+     }
+ 
+@@ -1713,6 +1735,123 @@
+     }
+ 
+     /**
++     * V6.63 PRIVATE tail revalidation contract.
++     *
++     * Root cause proven on the V6.62 live run: after a full ALL selection, a
++     * long BUSINESS gap-fill replaces phase_state.selection with a BUSINESS-only
++     * selector while checkpoint_candidate.private_listing_ids intentionally keep
++     * the earlier PRIVATE candidate set. Hours later public_verify validates those
++     * earlier PRIVATE rows against current source freshness/end/policy state and can
++     * terminal-fail even though all BUSINESS work is complete. The correct fix is
++     * not a whole-run restart: rerun exactly the existing bounded PRIVATE selector,
++     * preserve BUSINESS candidates/gap proof and then re-enter coverage/public gates.
++     */
++    private function ebay_run_private_public_revalidation_required($run, $settings) {
++        $run=is_array($run)?$run:array();$settings=is_array($settings)?$settings:array();
++        if(empty($settings['private_enabled'])){return false;}
++        if(absint($run['gapfill']['attempts']??0)<1){return false;}
++        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
++        if(sanitize_key((string)($selection['selection_scope']??''))!=='business'){return false;}
++        if(sanitize_key((string)($selection['status']??''))!=='complete'){return false;}
++        $state=is_array($run['private_public_revalidation']??null)?$run['private_public_revalidation']:array();
++        return sanitize_key((string)($state['status']??''))!=='complete';
++    }
++
++    private function ebay_run_begin_private_public_revalidation($run, $reason='post_business_gapfill', $failure=array()) {
++        $run=is_array($run)?$run:$this->ebay_run_load();
++        if(!$this->ebay_run_is_open($run)){return false;}
++        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
++        if(empty($routes['private'])){return false;}
++        $state=is_array($run['private_public_revalidation']??null)?$run['private_public_revalidation']:array();
++        $status=sanitize_key((string)($state['status']??''));
++        if(in_array($status,array('pending','running'),true)){
++            $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
++            return sanitize_key((string)($selection['selection_scope']??''))==='private' && $this->ebay_selection_state_is_open($selection);
++        }
++        if($status==='complete' || absint($state['attempts']??0)>=1){return false;}
++
++        $uuid=sanitize_text_field((string)($run['run_uuid']??''));if($uuid===''){return false;}
++        $failure=is_array($failure)?$failure:array();
++        $invalid=is_array($failure['invalid']??null)?$failure['invalid']:array();
++        $reason_counts=array();foreach($invalid as $value){$k=sanitize_key((string)$value);if($k===''){$k='unknown';}$reason_counts[$k]=absint($reason_counts[$k]??0)+1;}
++        $run['private_public_revalidation']=array(
++            'status'=>'pending','attempts'=>1,'started_at'=>time(),
++            'reason'=>sanitize_key((string)$reason),'failure_reason_counts'=>$reason_counts,
++            'business_campaign_count'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),
++            'private_candidate_count_before'=>count((array)($run['checkpoint_candidate']['private_listing_ids']??array())),
++        );
++        $run['phase']='selection_prepare';$run['resume_reason']='private_public_revalidation';
++        $run['progress_seq']=absint($run['progress_seq']??0)+1;$run['last_progress_at']=time();$run['no_progress_count']=0;
++        $this->ebay_run_save($run);
++        $selection=$this->ebay_selection_request('private_public_revalidation','run:'.$uuid,true,'private');
++        if(sanitize_key((string)($selection['status']??''))==='failed'){
++            $this->ebay_run_fail('private_public_revalidation_start_failed','PRIVATE-Endrevalidierung konnte nicht sicher gestartet werden.',array('selection'=>$selection));
++            return false;
++        }
++        $current=$this->ebay_run_load();
++        if($this->ebay_run_is_open($current)){
++            $marker=is_array($current['private_public_revalidation']??null)?$current['private_public_revalidation']:array();
++            $marker['status']='running';$marker['selection_owner']=sanitize_text_field((string)($selection['owner']??''));
++            $current['private_public_revalidation']=$marker;$this->ebay_run_save($current);
++        }
++        return true;
++    }
++
++    private function ebay_run_mark_private_public_revalidation_complete($selection) {
++        $selection=is_array($selection)?$selection:array();
++        if(sanitize_key((string)($selection['selection_scope']??''))!=='private' || sanitize_key((string)($selection['status']??''))!=='complete'){return false;}
++        $run=$this->ebay_run_load();if(!$this->ebay_run_is_open($run)){return false;}
++        $state=is_array($run['private_public_revalidation']??null)?$run['private_public_revalidation']:array();
++        if(!in_array(sanitize_key((string)($state['status']??'')),array('pending','running'),true)){return false;}
++        $state['status']='complete';$state['completed_at']=time();
++        $state['private_candidate_count_after']=count((array)($run['checkpoint_candidate']['private_listing_ids']??array()));
++        $run['private_public_revalidation']=$state;$this->ebay_run_save($run);return true;
++    }
++
++    /**
++     * V6.63 one-time state-only recovery for the exact V6.62 production failure.
++     * It preserves run UUID, source/refresh evidence, BUSINESS candidates, gap-fill
++     * proof and the current public checkpoint. No listing/campaign/source mutation
++     * happens on admin_init. The next external heartbeat performs the ordinary
++     * bounded PRIVATE selector. New-build failures are never auto-reopened.
++     */
++    public function maybe_recover_ebay_private_public_gate_v6630() {
++        if(function_exists('current_user_can') && !current_user_can('manage_options')){return;}
++        $run=$this->ebay_run_load();
++        if((string)($run['schema']??'')!=='1.0' || sanitize_key((string)($run['status']??''))!=='failed'){return;}
++        $loaded=$run;$code=sanitize_key((string)($run['error_code']??''));
++        if(!in_array($code,array('private_public_gate_failed','private_public_cap_exceeded'),true)){return;}
++        $failure=$this->ebay_run_last_failure_entry($run,$code);$details=is_array($failure['details']??null)?$failure['details']:array();
++        if(sanitize_key((string)($details['phase']??''))!=='public_verify'){return;}
++        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
++        if($failure_build!=='6.56.0-safe-gap-churn-revalidation-rootfix-20260827'){return;}
++        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
++        if(empty($routes['private']) || absint($run['gapfill']['attempts']??0)<1){return;}
++        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
++        if(sanitize_key((string)($selection['status']??''))!=='complete' || sanitize_key((string)($selection['selection_scope']??''))!=='business'){return;}
++        $uuid=sanitize_text_field((string)($run['run_uuid']??''));if($uuid===''){return;}
++        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
++        $failure_at=absint($failure['at']??$run['finished_at']??0);
++        $marker=hash('sha256',$uuid.'|'.$failure_at.'|private_public_tail_revalidation|6.63.0');
++        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
++        $invalid=is_array($details['invalid']??null)?$details['invalid']:array();$reason_counts=array();
++        foreach($invalid as $value){$k=sanitize_key((string)$value);if($k===''){$k='unknown';}$reason_counts[$k]=absint($reason_counts[$k]??0)+1;}
++        $history[]=array('at'=>time(),'reason'=>'private_public_tail_revalidation','error_code'=>$code,'migration_key'=>$marker,'preserved_run_uuid'=>1,'preserved_business_candidates'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),'failure_reason_counts'=>$reason_counts);
++        if(count($history)>8){$history=array_slice($history,-8);}
++        $run['recovery_history']=$history;$run['status']='running';$run['phase']='selection_prepare';$run['finished_at']=0;
++        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='external_tick';$run['resume_reason']='private_public_gate_recovery';$run['no_progress_count']=0;
++        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();$run['progress_seq']=absint($run['progress_seq']??0)+1;
++        $run['progress_contract_version']=$this->ebay_run_progress_contract_version();
++        $run['private_public_revalidation']=array('status'=>'pending','attempts'=>1,'started_at'=>time(),'reason'=>'failed_public_gate_recovery','failure_reason_counts'=>$reason_counts,'private_candidate_count_before'=>count((array)($run['checkpoint_candidate']['private_listing_ids']??array())),'business_campaign_count'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())));
++        $saved=$this->ebay_run_compare_and_swap($loaded,$run);if($saved===false){return;}
++        $selection=$this->ebay_selection_request('private_public_gate_recovery','run:'.$uuid,true,'private');
++        if(sanitize_key((string)($selection['status']??''))==='failed'){
++            $this->ebay_run_fail('private_public_revalidation_start_failed','PRIVATE-Endrevalidierung konnte nach dem alten Public-Gate-Fehler nicht sicher gestartet werden.',array('selection'=>$selection));return;
++        }
++        $current=$this->ebay_run_load();if($this->ebay_run_is_open($current)){$state=is_array($current['private_public_revalidation']??null)?$current['private_public_revalidation']:array();$state['status']='running';$state['selection_owner']=sanitize_text_field((string)($selection['owner']??''));$current['private_public_revalidation']=$state;$this->ebay_run_save($current);}
++    }
++
++    /**
+      * V6.50 coverage-gap contract.
+@@ -1857,6 +1996,10 @@
+         if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
+         $run['phase_state']['discovery']=array();
+         $run['phase_state']['selection']=array();
++        // More BUSINESS work means the previously current PRIVATE tail can age
++        // again before final publication. Force one fresh PRIVATE tail after this
++        // new BUSINESS proof scope completes.
++        $run['private_public_revalidation']=array();
+         $run['coverage']=$coverage;
+         $run['phase']='gapfill_discovery';
+         $run['resume_reason']='business_safe_gap_dynamic_revalidation';
+@@ -1964,6 +2107,11 @@
+         }elseif(!empty($settings['business_enabled'])){
+             $business['contract_status']='complete';$business['open_gap_count']=0;$business['open_gaps']=array();
+         }
++        $current=$this->ebay_run_load();
++        if($this->ebay_run_private_public_revalidation_required($current,$settings)){
++            if($this->ebay_run_begin_private_public_revalidation($current,'post_business_gapfill')){return;}
++            $this->ebay_run_fail('private_public_revalidation_start_failed','PRIVATE-Endrevalidierung nach BUSINESS-Gap-Fill konnte nicht sicher gestartet werden.');return;
++        }
+         $private=$this->ebay_run_verify_private_public($settings,(array)($candidate['private_listing_ids']??array()));
+         if(($private['status']??'')==='failed'){$this->ebay_run_fail((string)($private['error_code']??'private_public_gate_failed'),'PRIVATE-Public-Gate ist fehlgeschlagen.',array('invalid'=>$private['invalid']??array(),'public'=>$private['public']??0));return;}
