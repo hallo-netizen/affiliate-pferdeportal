@@ -8,7 +8,13 @@
       "allowed_tools": [],
       "tool_definitions": {},
       "expected_outcome": "USER_ACTION_REQUIRED",
-      "notes": "No model-side workflow action. User reviews already-created WordPress drafts. No publish."
+      "notes": "Historical STARTMASTER0103 step; completed by user publication confirmation. No longer current."
+    },
+    "ACTIVATE_OPENAI_API_SECRET_AND_VERIFY_ENFORCED_FIREWALL_MODEL_PATH_BEFORE_NEXT_PRODUCTION_BLOCK": {
+      "allowed_tools": [],
+      "tool_definitions": {},
+      "expected_outcome": "USER_ACTION_REQUIRED",
+      "notes": "External setup gate only: configure OPENAI_API_KEY in GitHub repository secrets and execute the enforced firewall workflow once. No production, content, design, PSTE, PSERC, PPM or publish action is permitted in this step. After verified API-path PASS, the queued next block is the already-bound Live-40/40 MAX_FAMILIES_REACHED rootfix."
     }
   },
   "prefix_rules": []
