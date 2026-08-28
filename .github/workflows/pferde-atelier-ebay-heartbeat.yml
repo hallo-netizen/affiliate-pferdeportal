@@ -46,6 +46,8 @@ jobs:
               'fixed_keyless_endpoint': endpoint_ok,
               'skip_single_transport_error': 'MAX_CONSECUTIVE_FAILURES=5' in s,
               'terminal_explicit_states': 'idle|completed|failed|disabled)' in s,
+              'cache_buster_and_no_store': '?heartbeat=${GITHUB_RUN_ID}' in s and "--header 'Cache-Control: no-store'" in s,
+              'stale_response_guard': 'last_server_time' in s and 'stale heartbeat response' in s,
               'self_dispatch': '/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches' in s,
               'self_dispatch_ref_main': '\"ref\":\"main\"' in s,
               'no_overlap': 'cancel-in-progress: false' in s,
@@ -74,11 +76,13 @@ jobs:
           MAX_CONSECUTIVE_FAILURES=5
           consecutive_failures=0
           active_seen=0
+          last_server_time=0
 
           for n in $(seq 1 "$MAX_TICKS"); do
             body="heartbeat-$n.json"
             err="heartbeat-$n.err"
-            code=$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST --max-time 45 "$URL" 2>"$err" || true)
+            tick_url="$URL?heartbeat=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${n}-$(date +%s)"
+            code=$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST --max-time 45 --header 'Cache-Control: no-store' "$tick_url" 2>"$err" || true)
 
             if [ "$code" != '200' ]; then
               consecutive_failures=$((consecutive_failures + 1))
@@ -89,29 +93,42 @@ jobs:
                 exit 1
               fi
             else
-              status=$(python3 - "$body" <<'PY' || true
+              parsed=$(python3 - "$body" <<'PY' || true
           import json,sys
           try:
               d=json.load(open(sys.argv[1]))
               s=d.get('status') if isinstance(d,dict) else None
-              if not isinstance(s,str) or not s:
-                  raise ValueError('missing status')
-              print(s)
+              t=d.get('server_time') if isinstance(d,dict) else None
+              if not isinstance(s,str) or not s or not isinstance(t,int) or t <= 0:
+                  raise ValueError('missing status/server_time')
+              print(f"{s} {t}")
           except Exception:
               pass
           PY
               )
 
-              if [ -z "$status" ]; then
+              status=${parsed%% *}
+              server_time=${parsed##* }
+              if [ -z "$parsed" ] || [ "$status" = "$server_time" ]; then
                 consecutive_failures=$((consecutive_failures + 1))
                 echo "heartbeat $n invalid response consecutive=$consecutive_failures"
                 if [ "$consecutive_failures" -ge "$MAX_CONSECUTIVE_FAILURES" ]; then
                   echo 'five consecutive invalid heartbeat responses; stop this runner and let the safety schedule retry later'
                   exit 1
                 fi
+              elif [ "$status" != 'throttled' ] && [ "$server_time" -le "$last_server_time" ]; then
+                consecutive_failures=$((consecutive_failures + 1))
+                echo "heartbeat $n stale heartbeat response server_time=$server_time previous=$last_server_time consecutive=$consecutive_failures"
+                if [ "$consecutive_failures" -ge "$MAX_CONSECUTIVE_FAILURES" ]; then
+                  echo 'five consecutive stale heartbeat responses; stop this runner and let the safety schedule retry later'
+                  exit 1
+                fi
               else
+                if [ "$status" != 'throttled' ]; then
+                  last_server_time=$server_time
+                fi
                 consecutive_failures=0
-                echo "heartbeat $n status=$status"
+                echo "heartbeat $n status=$status server_time=$server_time"
                 case "$status" in
                   idle|completed|failed|disabled)
                     echo "terminal heartbeat status=$status; no successor runner required"
