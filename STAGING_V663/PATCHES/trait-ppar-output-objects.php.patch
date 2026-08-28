@@ -1,0 +1,37 @@
+--- V6.62.0/includes/trait-ppar-output-objects.php
++++ V6.63.0/includes/trait-ppar-output-objects.php
+@@ -1413,6 +1413,22 @@
+         $this->maybe_install_output_objects_schema();
+         $portals = $this->output_portal_registry();
+         $result = array('created'=>0,'drafts'=>0,'active'=>0,'blocked'=>0,'review'=>0,'errors'=>array());
++        // Digistore24 tracking is credential-bound. Reject a stale, foreign or
++        // otherwise invalid vendor link before classification/upsert/materialization
++        // so a bad refresh cannot overwrite a Last-Known-Good banner draft/campaign.
++        // Other providers do not enter this provider-specific gate.
++        if (sanitize_key((string) ($row['provider'] ?? '')) === 'digistore24') {
++            if (!method_exists($this, 'digistore24_tracking_url_allowed') || !$this->digistore24_tracking_url_allowed((string) ($row['tracking_url'] ?? ''))) {
++                $result['blocked'] = 1;
++                $result['errors']['output_digistore24_tracking_invalid'] = 'Digistore24-Ausgabe besitzt keinen aktuell geprüften, provisionssicheren Trackinglink.';
++                return $result;
++            }
++            if (!method_exists($this, 'digistore24_is_https_url') || !$this->digistore24_is_https_url((string) ($row['image_url'] ?? ''))) {
++                $result['blocked'] = 1;
++                $result['errors']['output_digistore24_image_invalid'] = 'Digistore24-Banner besitzt keine verifizierbare HTTPS-Bildquelle.';
++                return $result;
++            }
++        }
+         foreach ($portals as $portal) {
+             if (empty($portal['enabled'])) { continue; }
+             if (method_exists($this, 'control_partner_gate')) {
+@@ -1426,6 +1442,11 @@
+             if ($creative_type === 'product') { $output_types = array_values(array_intersect($output_types, array('product_campaign'))); }
+             elseif ($creative_type === 'banner') { $output_types = array_values(array_intersect($output_types, array('portal_banner','hivepress_listing','portal_listing'))); }
+             else { $result['review']++; $result['errors']['output_type_unsupported']='Creative-Typ besitzt noch keinen bestätigten Ausgabeweg.'; continue; }
++            // Digistore24 is contractually banner-only. This provider-specific
++            // hardlock must not alter any output path for other providers.
++            if (sanitize_key((string) ($row['provider'] ?? '')) === 'digistore24') {
++                $output_types = array_values(array_intersect($output_types, array('portal_banner')));
++            }
+             foreach ($output_types as $output_type) {
+                 $classification = $this->output_classify_for_portal($row, $portal, $output_type);
+                 if (is_wp_error($classification)) { $result['blocked']++; $result['errors'][$classification->get_error_code()]=$classification->get_error_message(); continue; }
