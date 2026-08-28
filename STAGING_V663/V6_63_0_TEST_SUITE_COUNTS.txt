@@ -1,0 +1,39 @@
+test_ds24_core.php: 72/72 PASS
+test_ds24_support_import.php: 53/53 PASS
+test_ds24_output_contract.php: 27/27 PASS
+test_ds24_output_early_tracking_gate.php: 10/10 PASS
+test_ds24_output_https_image_gate.php: 6/6 PASS
+test_ds24_semantic_classifier.php: 8/8 PASS
+test_central_cursor_integration.php: 8/8 PASS
+test_candidate_bootstrap.php: 8/8 PASS
+test_ds24_campaign_runtime_hardlock.py: 24/24 PASS
+test_ds24_https_image_runtime_gate.py: 9/9 PASS
+test_ds24_tracking_identity_hardlock.php: 8/8 PASS
+test_ds24_tracking_position_hardlock.php: 11/11 PASS
+test_ds24_tracking_shape_hardlock.php: 9/9 PASS
+test_ds24_tracking_port_hardlock.php: 4/4 PASS
+test_ds24_tracking_query_aff_hardlock.php: 5/5 PASS
+test_ds24_support_security_regression.php: 7/7 PASS
+test_ds24_credential_identity_scope.php: 19/19 PASS
+test_ds24_partnership_marketplace_gate.php: 12/12 PASS
+test_ds24_entry_id_response_binding.php: 6/6 PASS
+test_ds24_marketplace_id_canonical_gate.php: 6/6 PASS
+test_ds24_api_identity_race.php: 19/19 PASS
+test_ds24_affiliate_identity_ready_gate.php: 9/9 PASS
+test_ds24_affiliate_id_canonical_gate.php: 10/10 PASS
+test_ebay_private_tail_negative_baseline.php: 5/5 PASS
+test_ebay_private_tail_recovery.php: 22/22 PASS
+test_ebay_private_tail_runtime_gate.php: 15/15 PASS
+test_ebay_private_tail_merge.php: 13/13 PASS
+test_ebay_private_tail_tick_completion.php: 6/6 PASS
+test_ebay_private_tail_admin_hook.php: 4/4 PASS
+test_ebay_private_tail_admin_dispatch.php: 10/10 PASS
+test_ebay_private_tail_recovery_guards.php: 7/7 PASS
+test_ebay_worker_kiss_regression.py: 15/15 PASS
+test_v663_full_workflow_meta.py: 67/67 PASS
+
+TOTAL: 33 suites / 514 PASS / 0 FAIL
+FRESH-UNPACK: same 33 suites / 514 PASS / 0 FAIL
+PHP-LINT source: 15/15 PASS
+PHP-LINT fresh-unpack: 15/15 PASS
+ZIP file-list + byte identity: 21/21 PASS
