@@ -34,7 +34,7 @@ Der Controller:
 7. setzt `state_write_authority=CONTROLLER_ONLY`;
 8. verwirft jede zusätzliche/falsche Aktion ohne State-Fortschreibung.
 
-Ab STARTMASTER0103 ist freier Chat keine Produktions-Ausführungsautorität. Produktionsarbeit ist nur über den Controller freigegeben. Neue Chats starten dadurch aus GitHub/MASTER-State, nicht aus Erinnerung oder Modellnavigation.
+Ab STARTMASTER0103 ist freier Chat keine Produktions-Ausführungsautorität. Produktionsarbeit ist nur über den Controller freigegeben. Neue Chats starten dadurch aus GitHub/MASTER-State, nicht aus Erinnerung oder Modellnavigation. Der Controller ist auf das aktuelle API-Modell `gpt-5.6-sol` voreingestellt; ein Modellwechsel ist nur explizit über `PFERDE_ATELIER_MODEL`/`--model` möglich.
 
 ## Optimierung / Verschlankung ohne Qualitätsverlust
 Sicher aktiviert bzw. bestätigt:
@@ -63,7 +63,7 @@ PASS:
 - PSTE/PSERC Installer-Hashes unverändert;
 - ZIP-Re-Extract vollständig byte-identisch.
 
-MASTER-ZIP SHA-256: `8a0093e09efbea84db63859fed4ae02e8ba40b6cf131f9c769c9f12bd9212b30`.
+MASTER-ZIP SHA-256: `d9e132a9786f6413741ff7e9969413b518c4d992f64e7ca79f9d69681e0fe7fd`.
 
 ## Aktueller NEXT_ALLOWED_STEP
 `USER_CONTENT_REVIEW_6_DRAFTS_17123_17128_NO_PUBLISH`.
