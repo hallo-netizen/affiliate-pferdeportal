@@ -45,7 +45,7 @@ jobs:
               'bounded_http': '--max-time 45' in s,
               'fixed_keyless_endpoint': endpoint_ok,
               'skip_single_transport_error': 'MAX_CONSECUTIVE_FAILURES=5' in s,
-              'terminal_idle_failed': 'idle|failed)' in s,
+              'terminal_explicit_states': 'idle|completed|failed|disabled)' in s,
               'self_dispatch': '/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches' in s,
               'self_dispatch_ref_main': '\"ref\":\"main\"' in s,
               'no_overlap': 'cancel-in-progress: false' in s,
@@ -113,14 +113,18 @@ jobs:
                 consecutive_failures=0
                 echo "heartbeat $n status=$status"
                 case "$status" in
-                  idle|failed)
+                  idle|completed|failed|disabled)
                     echo "terminal heartbeat status=$status; no successor runner required"
                     exit 0
                     ;;
                   throttled)
                     ;;
-                  *)
+                  advanced|busy|retryable_error|paused|running)
                     active_seen=1
+                    ;;
+                  *)
+                    echo "unknown heartbeat status=$status; stop and let safety schedule retry"
+                    exit 1
                     ;;
                 esac
               fi
