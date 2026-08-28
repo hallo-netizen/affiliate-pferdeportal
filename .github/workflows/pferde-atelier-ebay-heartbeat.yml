@@ -39,7 +39,7 @@ jobs:
           endpoint_ok=bool(endpoint and endpoint.group(1)=='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick')
           checks={
               'safety_schedule_15m': "cron: '*/15 * * * *'" in s,
-              'long_active_window': 'MAX_TICKS=55' in s and 'timeout-minutes: 60' in s,
+              'timeout_safe_window': 'MAX_TICKS=30' in s and 'timeout-minutes: 60' in s,
               'minute_ticks': 'sleep 60' in s,
               'post_only': '--request POST' in s,
               'bounded_http': '--max-time 45' in s,
@@ -68,7 +68,9 @@ jobs:
         run: |
           set -u
           URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
-          MAX_TICKS=55
+          # Hard timeout budget: 30*45s HTTP + 29*60s sleeps + 3*(30s dispatch + 10s retry sleep) = 3210s.
+          # This leaves 390s headroom inside the 60-minute GitHub runner limit, so self-dispatch is reachable.
+          MAX_TICKS=30
           MAX_CONSECUTIVE_FAILURES=5
           consecutive_failures=0
           active_seen=0
