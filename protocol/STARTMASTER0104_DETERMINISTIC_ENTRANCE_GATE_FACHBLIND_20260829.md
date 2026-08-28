@@ -27,8 +27,10 @@ Neue Beitragsarten sowie spätere Titel-, Keyword-, Such- oder Inhaltsänderunge
 ## Schutz des bestehenden Ergebnisses
 0103→0104 Protected-Byte-Audit: Alle geerbten Fach-/Inhalts-/Qualitäts-/Design-Dateien byte-identisch. Verändert wurden im geerbten Bestand ausschließlich ROOT und CURRENT_STATE für die technische Navigation. PSTE 0.56.25 und PSERC 0.28.14 bleiben exakt unverändert.
 
-## Lokaler Prüfstand
-30/30 Positiv-/Negativtests der Eingangstür PASS, inklusive Side-jump/Backtrack/Repeat, falschem Ticket/Step/State/Bundle, Worker-State-Write, Worker-Workflowänderung, Input-Tamper, Path-Escape, unbekanntem Step sowie bestehenden Package-Guard-Regressionen.
+## Prüfstand
+30/30 lokale Positiv-/Negativtests der Eingangstür PASS, inklusive Side-jump/Backtrack/Repeat, falschem Ticket/Step/State/Bundle, Worker-State-Write, Worker-Workflowänderung, Input-Tamper, Path-Escape, unbekanntem Step sowie bestehenden Package-Guard-Regressionen.
+
+GitHub Actions `Pferde Atelier Deterministic Entrance Gate`, Run `33218700870`, Commit `2dbb8543454f631d509bbd9f0d4ebf9de695eeed`: PASS. Sowohl `Deterministic entrance gate positive-negative CI` als auch `Assert active gate has no OpenAI API dependency` sind erfolgreich.
 
 ## Fail-closed Aktivierung
 Der reale Codex-Hard-Worker kann erst auf dem Benutzerrechner mit dessen ChatGPT-Anmeldung bewiesen werden. Deshalb bleibt `hard_worker_runtime_verified=false` und `NEXT_ALLOWED_STEP=ACTIVATE_LOCAL_CODEX_CAPSULE_WORKER_SELFTEST_NO_API`. Vor dessen PASS darf kein weiterer Produktionsblock über die neue Hard-Worker-Schicht freigegeben werden.
