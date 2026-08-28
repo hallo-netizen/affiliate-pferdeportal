@@ -1,0 +1,64 @@
+--- /mnt/data/v6631dev/candidate/includes/trait-ppar-ebay-run.php	2026-08-28 17:23:20.000000000 +0000
++++ /mnt/data/v6632dev/candidate/includes/trait-ppar-ebay-run.php	2026-08-28 18:40:08.728755237 +0000
+@@ -518,6 +518,26 @@
+         }
+ 
+         $run = $this->ebay_run_load();
++        $recovery_run = '';
++        if (is_object($request) && method_exists($request, 'get_param')) {
++            $recovery_run = sanitize_text_field((string)$request->get_param('recovery_run'));
++        } elseif (is_array($request)) {
++            $recovery_run = sanitize_text_field((string)($request['recovery_run'] ?? ''));
++        }
++        // A one-shot recovery bootstrap is bound to the exact reopened run UUID.
++        // If it arrives late, it must never turn into the generic due-operation
++        // path and accidentally start a successor run. Ordinary heartbeat calls
++        // carry no recovery_run and retain the existing KISS behaviour.
++        if ($recovery_run !== '') {
++            $current_uuid = sanitize_text_field((string)($run['run_uuid'] ?? ''));
++            $current_status = sanitize_key((string)($run['status'] ?? ''));
++            $resume_reason = sanitize_key((string)($run['resume_reason'] ?? ''));
++            if ($current_uuid === '' || !hash_equals($current_uuid, $recovery_run) || !$this->ebay_run_is_active($run) || $resume_reason !== 'private_public_gate_recovery') {
++                $status = $current_status === 'completed' ? 'completed' : ($current_status === 'failed' ? 'failed' : 'idle');
++                $out=array('status'=>$status,'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2','run_uuid'=>$current_uuid,'reason'=>'stale_recovery_bootstrap');
++                return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
++            }
++        }
+         $stored_status = sanitize_key((string)($run['status'] ?? ''));
+@@ -1815,6 +1835,41 @@
++    /**
++     * V6.63.2 one-shot bootstrap for a recovered terminal run. The canonical
++     * worker remains external_tick-only: this performs exactly one non-blocking
++     * same-origin POST after the state-only recovery has been persisted and the
++     * PRIVATE selector has been queued. It schedules no cron, creates no second
++     * run and writes no state after dispatch, so a fast worker cannot be
++     * overwritten by the originating admin request. The 15-minute GitHub safety
++     * schedule remains the fallback if the loopback transport is unavailable.
++     */
++    private function ebay_run_bootstrap_recovered_external_tick_v6632($run_uuid) {
++        if (!function_exists('wp_safe_remote_post')) { return false; }
++        $url = $this->ebay_external_tick_url();
++        $home = function_exists('home_url') ? home_url('/') : '';
++        if ($url === '' || $home === '' || !function_exists('wp_parse_url')) { return false; }
++        $u = wp_parse_url($url); $h = wp_parse_url($home);
++        if (!is_array($u) || !is_array($h)) { return false; }
++        $scheme = strtolower((string)($u['scheme'] ?? ''));
++        $host = strtolower((string)($u['host'] ?? ''));
++        $home_scheme = strtolower((string)($h['scheme'] ?? ''));
++        $home_host = strtolower((string)($h['host'] ?? ''));
++        $port = absint($u['port'] ?? ($scheme === 'https' ? 443 : 80));
++        $home_port = absint($h['port'] ?? ($home_scheme === 'https' ? 443 : 80));
++        if ($scheme !== 'https' || $home_scheme !== 'https' || $host === '' || !hash_equals($home_host, $host) || $port !== $home_port) { return false; }
++        $uuid = sanitize_text_field((string)$run_uuid);
++        $nonce = substr(hash('sha256', $uuid . '|' . microtime(true) . '|v6632-recovery-bootstrap'), 0, 16);
++        if (function_exists('add_query_arg')) { $url = add_query_arg(array('recovery_bootstrap'=>$nonce,'recovery_run'=>$uuid), $url); }
++        wp_safe_remote_post($url, array('blocking'=>false,'timeout'=>1,'redirection'=>0,'headers'=>array('Cache-Control'=>'no-store','X-PPAR-Recovery-Bootstrap'=>'v6632')));
++        return true;
++    }
+@@ -1836,7 +1891,7 @@
+-        $history[]=array('at'=>time(),'reason'=>'private_public_tail_revalidation','error_code'=>$code,'migration_key'=>$marker,'preserved_run_uuid'=>1,'preserved_business_candidates'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),'failure_reason_counts'=>$reason_counts);
++        $history[]=array('at'=>time(),'reason'=>'private_public_tail_revalidation','error_code'=>$code,'migration_key'=>$marker,'preserved_run_uuid'=>1,'preserved_business_candidates'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),'failure_reason_counts'=>$reason_counts,'external_tick_bootstrap_requested'=>1);
+@@ -1849,6 +1904,7 @@
+         $current=$this->ebay_run_load();if($this->ebay_run_is_open($current)){$state=is_array($current['private_public_revalidation']??null)?$current['private_public_revalidation']:array();$state['status']='running';$state['selection_owner']=sanitize_text_field((string)($selection['owner']??''));$current['private_public_revalidation']=$state;$this->ebay_run_save($current);}
++        $this->ebay_run_bootstrap_recovered_external_tick_v6632($uuid);
+     }
