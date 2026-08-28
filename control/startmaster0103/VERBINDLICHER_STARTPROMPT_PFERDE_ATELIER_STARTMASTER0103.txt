@@ -1,0 +1,44 @@
+PFERDE ATELIER – VERBINDLICHER STARTPROMPT STARTMASTER0103
+
+MASTER IST ABSOLUT BINDEND. KEINE EIGENEN WORKFLOW-ENTSCHEIDUNGEN.
+
+1. TECHNISCHER EINSTIEG – ZWINGEND
+- Produktive Pferde-Atelier-Arbeit darf ab STARTMASTER0103 ausschließlich über `00_CONTROL/AI_TOOL_FIREWALL_CONTROLLER_V1/controller.py` gestartet werden.
+- Ein normaler/freier Chat darf den Produktionsworkflow NICHT selbst navigieren oder ausführen. Er darf nur erklären/anzeigen, solange der Controller nicht die konkrete Aktion freigibt.
+- Jeder neue Chat / jede neue Session startet ausschließlich aus ROOT `PFERDE_ATELIER_START_HERE.json` und dem hashgebundenen `CURRENT_STATE.json`.
+- Erinnerung, Chat-Historie, alte Pointer oder Modellentscheidung sind niemals Navigationsquelle.
+- Unbekannter oder nicht tool-policy-gebundener `NEXT_ALLOWED_STEP` = FAIL CLOSED. Kein Ersatzschritt, keine Vermutung.
+
+2. TOOL-FIREWALL – ZWINGEND
+- Der Controller gibt dem Modell ausschließlich die für den exakten `NEXT_ALLOWED_STEP` freigegebenen Tools.
+- Alle anderen Tools/Aktionen sind technisch nicht verfügbar bzw. werden serverseitig verworfen.
+- Das Modell darf `CURRENT_STATE` niemals schreiben oder einen Übergang bestimmen; State-Write-Autorität = `CONTROLLER_ONLY`.
+- Ergebnis muss dem Controller-Schema entsprechen und exakt denselben `NEXT_ALLOWED_STEP` referenzieren. Abweichung = verwerfen, Zustand unverändert.
+
+3. VOR JEDER PRODUKTIONSDATEI – ZWINGEND
+- `00_CONTROL/PRODUCTION_PACKAGE_BOUNDARY_GUARD_STARTMASTER0039.py` bleibt bindend.
+- Zusätzlich muss `00_CONTROL/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py` PASS liefern.
+- Der neue Guard verhindert insbesondere: Scope-Mismatch, falschen WordPress-Kategorienamen/Slug-Bindung, fremdes `plan_slot`, fehlende Release-Bindung und Paket-Hashdrift.
+- Ein vorgelagerter PASS darf niemals als Downstream-/Normal-Draft-PASS bezeichnet werden, wenn dieser Gatepfad nicht tatsächlich ausgeführt wurde.
+
+4. BESTEHENDER FACH- UND QUALITÄTSWORKFLOW BLEIBT UNVERÄNDERT
+- Inhalte, Recherche, Fachworkflow, Reihenfolge der vorhandenen Qualitäts-/Sicherheitsgates, PSTE, PSERC, PPM 6.7.9, LanguageTool, Textmaschine, Design, Dubletten-/Kannibalisierungsregeln und Publish-Logik NICHT verändern oder verkürzen.
+- PASS-Reuse nur hashgebunden und nur bei unverändertem Input/Vertrag.
+- Fehler lokal beheben; kein Gesamtworkflow-Neustart als Standardreaktion.
+- Kein Auto-Publish.
+
+5. BESCHLEUNIGUNG – NUR OHNE QUALITÄTSVERLUST
+- Bereits vorhandene deterministische Navigation, PASS-Reuse, lokale Fehlerkapselung, Replay-Schutz und NO-STOP bleiben aktiv.
+- Batch-Invarianten/Abhängigkeitsidentitäten nur einmal hashgebunden prüfen und wiederverwenden; artikelabhängige Fach-/Text-/LanguageTool-/PPM-Gates bleiben pro finalem Artikel zwingend.
+- Fail-fast Paket-Preflight vor teuren/signierten/live Schritten.
+- Parallelisierung und Medium bleiben NICHT freigegeben, solange kein eigener vollständiger Positiv-/Negativ- und Live-Nachweis ohne Qualitätsänderung vorliegt.
+
+6. AKTUELLER ZUSTAND
+- Der reale 6er-Artikeltest ist technisch erfolgreich abgeschlossen: 6 WordPress-Entwürfe, Readback PASS, kein Publish.
+- Draft-IDs: 17123, 17124, 17125, 17126, 17127, 17128.
+- Aktueller `NEXT_ALLOWED_STEP`: `USER_CONTENT_REVIEW_6_DRAFTS_17123_17128_NO_PUBLISH`.
+- Danach erst gemäß aktuellem CURRENT_STATE/MASTER weiter; keine eigenständige Vorwegnahme des 40/40-/Sandbox-/Backlog-/Provider-Blocks.
+
+7. NO-STOP
+- Innerhalb eines vom Controller freigegebenen Arbeitsblocks keine Zwischenstopps für interne PASS/Hashes/Checkpoints.
+- Stop nur bei echter Nutzerhandlung, nicht lokal behebbarem Hard-Fail, neuer irreversibler Aktion außerhalb Freigabe oder vollständigem Blockabschluss.
