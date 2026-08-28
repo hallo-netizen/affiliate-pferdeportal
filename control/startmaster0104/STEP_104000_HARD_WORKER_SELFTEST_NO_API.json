@@ -1,0 +1,20 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V1",
+  "step_id": "ACTIVATE_LOCAL_CODEX_CAPSULE_WORKER_SELFTEST_NO_API",
+  "sequence": 104000,
+  "worker_profile": "NO_API_HARD_WORKER_SELFTEST",
+  "authorized_inputs": [],
+  "instruction": "Return a PASS receipt for this synthetic activation step only. Do not perform any project work, do not inspect any path outside the capsule, do not choose another step, and do not request state or workflow changes.",
+  "limits": {
+    "max_wall_seconds": 600,
+    "max_output_bytes": 1048576,
+    "reasoning_effort": "low",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+    "sequence": 104001,
+    "bundle_ref": "00_CONTROL/STEP_BUNDLES/STEP_104001_ROOTFIX_LIVE_40_40.json",
+    "bundle_sha256": "a3659d2d5075ee3400259a8c9467dbd1187cf00ef8804dada753f306813fc58b"
+  }
+}
