@@ -1,0 +1,45 @@
+PFERDE ATELIER – VERBINDLICHER TEXTERSTELLUNGS-PROMPT STARTMASTER0107
+
+ABSOLUT BINDEND. KEINE EIGENEN WORKFLOW-ENTSCHEIDUNGEN.
+
+ZIEL:
+Den vom MASTER freigegebenen Beitragsblock so schnell und vollständig wie möglich produzieren, ohne irgendeine bestehende Fach-, Inhalts-, SEO-, Qualitäts-, Design-, Dubletten-/Kannibalisierungs-, LanguageTool-, PPM-, PSERC-, PSTE- oder Publish-Regel zu verändern, zu verkürzen oder zu umgehen.
+
+1. ZWINGENDER EINSTIEG
+- Zuerst aktuelle GitHub-Autorität lesen: control/CURRENT_STARTMASTER.json -> aktuelles ROOT/CURRENT_STATE.
+- Nur NEXT_ALLOWED_STEP ausführen. Kein Rücksprung, Seitensprung, vorsorglicher Zusatztest oder Wiederholen eines bereits hashgebundenen PASS.
+- Wenn ein produktiver Textbatch bereits läuft: zuerst dessen BATCH_CHECKPOINT lesen und exakt beim ersten nicht abgeschlossenen Item fortsetzen. Keine erneute Vollanalyse bereits abgeschlossener Items.
+
+2. NO-STOP – HART
+- Nach Start eines freigegebenen Textbatches KEINE Zwischenmeldung an den Nutzer.
+- Interne PASS, Hashes, LanguageTool-Ergebnisse, Fact-Packs, Artikelabschlüsse und Checkpoints werden gespeichert/protokolliert, aber nicht als Chat-Stopp ausgegeben.
+- Weiterarbeiten bis ALLE im Batch gebundenen Beiträge den vollständigen bestehenden Workflow bis zum vorgesehenen Endzustand durchlaufen haben.
+- Stop nur bei: (a) zwingend notwendiger Nutzerhandlung, die technisch nicht selbst ausführbar ist; (b) echtem fail-closed Hard-Fail ohne lokal zulässige Lösung; (c) irreversibler Aktion außerhalb vorhandener Freigabe; (d) vollständigem Batch-Ende.
+- Token-/Chatgrenze ist KEIN Workflow-Neustart: vor Ende automatisch aktuellen BATCH_CHECKPOINT sichern; neuer Chat setzt dort fort.
+
+3. INHALT/QUALITÄT UNVERÄNDERT
+- MASTER und bestehender Fachworkflow bleiben vollständig bindend.
+- Keine eigene Umformulierung oder Vereinfachung von Regeln.
+- Keine Absenkung irgendeines Gates zugunsten von Geschwindigkeit.
+- PASS-Reuse nur bei identischem, hashgebundenem Input/Vertrag.
+- Artikelabhängige Recherche-, Qualitäts-, LanguageTool-, PPM-, Dubletten-/Kannibalisierungs- und sonstige Fachgates bleiben pro Artikel erhalten.
+- Kein Auto-Publish.
+
+4. GESCHWINDIGKEIT
+- Reasoning standardmäßig MITTEL, soweit der jeweilige Schritt keinen bereits bindend höheren Modus verlangt und sämtliche bestehenden Gates unverändert bestanden werden.
+- Höhere Stufe nur bei konkret notwendigem, bereits vorgesehenem Fach-/Rootcause-Schritt oder wenn MITTEL denselben unveränderten Gate-Eingang nicht sicher abschließen kann.
+- Infrastruktur-/Hash-PASS nicht neu prüfen, wenn unverändert und wiederverwendbar.
+- Batcharbeit und unabhängige Artikel soweit sicher parallelisieren; keine Parallelisierung über Abhängigkeitsgrenzen.
+- Keine langen Erklärungen während der Produktion.
+
+5. NEUER CHAT MITTEN IM BATCH
+- Niemals aus Erinnerung rekonstruieren.
+- Zuerst die verbindliche Notfall-Übergabe und den aktuellen BATCH_CHECKPOINT lesen.
+- completed_items bleiben abgeschlossen; nicht erneut erzeugen oder prüfen, solange ihre gebundenen Inputs/Hashes unverändert sind.
+- exakt mit next_item / next_gate fortfahren.
+- Keine neue Promptfrage; dieser Prompt bleibt für den gesamten Batch bindend.
+
+6. ABSCHLUSS
+- Erst wenn alle gebundenen Beiträge ihren vorgesehenen finalen Workflowzustand erreicht haben, eine einzige Abschlussmeldung geben.
+- Abschlussmeldung kurz: Anzahl vollständig abgeschlossen, PASS/BLOCKED, notwendige Nutzeraktion falls vorhanden, relevante Dateien/IDs.
+- Bei einem Hard-Fail keine Ersatzroute erfinden; exakt den blockierenden Gate-Grund melden.

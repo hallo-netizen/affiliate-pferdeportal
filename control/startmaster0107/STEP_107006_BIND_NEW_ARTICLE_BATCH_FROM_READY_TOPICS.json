@@ -1,0 +1,19 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS",
+  "sequence": 107006,
+  "worker_profile": "CLOUD_BATCH_BINDING",
+  "authorized_inputs": [],
+  "instruction": "Binde ausschließlich die vom bestehenden Workflow aktuell freigegebenen neuen Artikel für den Testbatch. Keine eigenen Themen, Titel, Keywords oder Fachentscheidungen. Batchgröße so groß wie vom unveränderten Workflow sicher freigegeben. Erzeuge den content-blinden BATCH_CHECKPOINT und die Hashbindungen. Keine Texterstellung in diesem Schritt.",
+  "limits": {
+    "reasoning_effort": "medium",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+    "sequence": 107007,
+    "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
+    "bundle_sha256": "93400fda51f8928207cac4172681e20b811a7687beee4e0776d7eb7b47d6084a"
+  }
+}

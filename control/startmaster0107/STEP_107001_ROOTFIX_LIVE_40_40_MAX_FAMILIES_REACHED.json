@@ -1,0 +1,26 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "sequence": 107001,
+  "worker_profile": "CLOUD_MAINTENANCE_STEP",
+  "authorized_inputs": [
+    {
+      "ref": "control/startmaster0106/rootfix_input/ROOTFIX_40_40_EVIDENCE_SOURCE_V1.txt",
+      "sha256": "d87db13e4cf4820449c4795840991e05e365665f409d37ab43dba41b936915b3"
+    }
+  ],
+  "instruction": "Arbeite ausschließlich am gebundenen Schritt ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED. Nutze nur die materialisierte Capsule. Ermittele die technische Ursache aus dem hashgebundenen Evidence-/Source-Paket und liefere ausschließlich einen minimalen Rootfix-Vorschlag plus Positiv-/Negativtests und Regression gegen den unveränderten Gesamtworkflow. Keine Rücksprünge, Seitensprünge oder Wiederholung unveränderter PASS-Stufen. Keine Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, PPM-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regel verändern.",
+  "limits": {
+    "max_wall_seconds": 1800,
+    "max_output_bytes": 5242880,
+    "reasoning_effort": "high",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
+    "sequence": 107002,
+    "bundle_ref": "control/startmaster0107/STEP_107002_SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX.json",
+    "bundle_sha256": "ed7408977d779d945789e3b5a8e35034970356219534fcf4994e54a3e5f68160"
+  }
+}

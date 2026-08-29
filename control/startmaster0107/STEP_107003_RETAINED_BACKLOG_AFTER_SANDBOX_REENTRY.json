@@ -1,0 +1,19 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY",
+  "sequence": 107003,
+  "worker_profile": "CLOUD_BOUND_BACKLOG_STEP",
+  "authorized_inputs": [],
+  "instruction": "Führe ausschließlich den vorgebundenen retained-backlog-Schritt nach erfolgreichem Sandbox-AUTO_REENTRY aus. Keine Workflow-Navigation, keine Fachregeländerung, keine Wiederholung unveränderter PASS-Stufen.",
+  "limits": {
+    "reasoning_effort": "medium",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "PROVIDER_AFTER_RETAINED_BACKLOG",
+    "sequence": 107004,
+    "bundle_ref": "control/startmaster0107/STEP_107004_PROVIDER_AFTER_RETAINED_BACKLOG.json",
+    "bundle_sha256": "b167b5a48fe42d548ddb430d6ee9283f65fb12a36c554419eb04ef877a64f2e7"
+  }
+}
