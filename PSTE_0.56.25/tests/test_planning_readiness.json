@@ -1,0 +1,162 @@
+{
+    "contract": "PSTE_0.56.25_SHARED_PLANNING_READINESS_ROOTCAUSE_V1",
+    "status": "PASS",
+    "positive_distinct_longtail": {
+        "contract": "PSTE_PLANNING_READINESS_GATE_V1_PRETITLE_PARITY",
+        "status": "PASS",
+        "ok": true,
+        "decision": "PASS",
+        "pre_title_duplicate_gate": {
+            "contract": "PSTE_PRE_TITLE_DUPLICATE_GATE_V2_KEYWORD_OWNERSHIP",
+            "ok": true,
+            "reason_codes": [],
+            "matches": [],
+            "title_surface_longtail_authority": false,
+            "write_attempted": false
+        },
+        "cannibalization": {
+            "decision": "PASS",
+            "reason_codes": ["PORTAL_INTERNAL_FAMILY_CONTEXT_CHECKED"],
+            "matches": [{
+                "post_id": 3,
+                "title": "Bahnplaner für Reithallen auswählen",
+                "category_name": "Beratung Bahnplaner",
+                "matched_field": "TITLE",
+                "matched_text": "Bahnplaner für Reithallen auswählen",
+                "intent_similarity": 0.25,
+                "answer_equivalence": false,
+                "same_topic_family": true,
+                "context_only": true,
+                "source": "WORDPRESS_READ_ONLY"
+            }]
+        },
+        "reason_codes": ["PORTAL_INTERNAL_FAMILY_CONTEXT_CHECKED"],
+        "matches": [{
+            "post_id": 3,
+            "title": "Bahnplaner für Reithallen auswählen",
+            "category_name": "Beratung Bahnplaner",
+            "matched_field": "TITLE",
+            "matched_text": "Bahnplaner für Reithallen auswählen",
+            "intent_similarity": 0.25,
+            "answer_equivalence": false,
+            "same_topic_family": true,
+            "context_only": true,
+            "source": "WORDPRESS_READ_ONLY"
+        }],
+        "semantic_identity_source": "SEO_SOURCE_QUERY_NOT_TITLE",
+        "title_surface_authority": false,
+        "provider_calls": 0,
+        "write_attempted": false,
+        "content_or_design_touched": false
+    },
+    "negative_exact_keyword_duplicate": {
+        "contract": "PSTE_PLANNING_READINESS_GATE_V1_PRETITLE_PARITY",
+        "status": "BLOCKED",
+        "ok": false,
+        "decision": "BLOCKED",
+        "pre_title_duplicate_gate": {
+            "contract": "PSTE_PRE_TITLE_DUPLICATE_GATE_V2_KEYWORD_OWNERSHIP",
+            "ok": false,
+            "reason_codes": ["PRE_TITLE_EXACT_SEO_KEYWORD_DUPLICATE"],
+            "matches": [{
+                "post_id": 1,
+                "title": "Striegel für Pferde nach wichtigen Kriterien auswählen",
+                "source": "WORDPRESS_READ_ONLY",
+                "keyword_ownership_authority": "SEO_TOOL_EXPLICIT",
+                "keyword_ownership": []
+            }],
+            "title_surface_longtail_authority": false,
+            "write_attempted": false
+        },
+        "cannibalization": {
+            "decision": "NOT_RUN_PRE_TITLE_BLOCKED",
+            "reason_codes": [],
+            "matches": []
+        },
+        "reason_codes": ["PRE_TITLE_EXACT_SEO_KEYWORD_DUPLICATE"],
+        "matches": [{
+            "post_id": 1,
+            "title": "Striegel für Pferde nach wichtigen Kriterien auswählen",
+            "source": "WORDPRESS_READ_ONLY",
+            "keyword_ownership_authority": "SEO_TOOL_EXPLICIT",
+            "keyword_ownership": []
+        }],
+        "semantic_identity_source": "SEO_SOURCE_QUERY_NOT_TITLE",
+        "title_surface_authority": false,
+        "provider_calls": 0,
+        "write_attempted": false,
+        "content_or_design_touched": false
+    },
+    "negative_legacy_answer_equivalent": {
+        "contract": "PSTE_PLANNING_READINESS_GATE_V1_PRETITLE_PARITY",
+        "status": "BLOCKED",
+        "ok": false,
+        "decision": "BLOCKED",
+        "pre_title_duplicate_gate": {
+            "contract": "PSTE_PRE_TITLE_DUPLICATE_GATE_V2_KEYWORD_OWNERSHIP",
+            "ok": false,
+            "reason_codes": ["BROAD_SCOPE_EXISTING_SEO_KEYWORD_UNKNOWN_FAIL_CLOSED"],
+            "matches": [{
+                "post_id": 2,
+                "title": "Striegel für Pferde nach wichtigen Kriterien auswählen",
+                "source": "WORDPRESS_READ_ONLY",
+                "keyword_ownership_authority": "UNKNOWN_LEGACY_NO_SEO_KEYWORD",
+                "keyword_ownership": {
+                    "contract": "PSTE_KEYWORD_OWNERSHIP_LONGTAIL_V2_SEO_TOOL_ONLY",
+                    "decision": "BLOCKED_DUPLICATE",
+                    "reason_codes": ["BROAD_SCOPE_EXISTING_SEO_KEYWORD_UNKNOWN_FAIL_CLOSED"],
+                    "same_family": true,
+                    "same_article_type": true,
+                    "candidate_longtail_tokens": [],
+                    "existing_longtail_tokens": [],
+                    "intersection": [],
+                    "existing_keyword_authority": "UNKNOWN_LEGACY_NO_SEO_KEYWORD",
+                    "title_surface_has_longtail_authority": false,
+                    "existing_post_id": 2,
+                    "existing_title": "Striegel für Pferde nach wichtigen Kriterien auswählen",
+                    "write_attempted": false
+                }
+            }],
+            "title_surface_longtail_authority": false,
+            "write_attempted": false
+        },
+        "cannibalization": {
+            "decision": "NOT_RUN_PRE_TITLE_BLOCKED",
+            "reason_codes": [],
+            "matches": []
+        },
+        "reason_codes": ["BROAD_SCOPE_EXISTING_SEO_KEYWORD_UNKNOWN_FAIL_CLOSED"],
+        "matches": [{
+            "post_id": 2,
+            "title": "Striegel für Pferde nach wichtigen Kriterien auswählen",
+            "source": "WORDPRESS_READ_ONLY",
+            "keyword_ownership_authority": "UNKNOWN_LEGACY_NO_SEO_KEYWORD",
+            "keyword_ownership": {
+                "contract": "PSTE_KEYWORD_OWNERSHIP_LONGTAIL_V2_SEO_TOOL_ONLY",
+                "decision": "BLOCKED_DUPLICATE",
+                "reason_codes": ["BROAD_SCOPE_EXISTING_SEO_KEYWORD_UNKNOWN_FAIL_CLOSED"],
+                "same_family": true,
+                "same_article_type": true,
+                "candidate_longtail_tokens": [],
+                "existing_longtail_tokens": [],
+                "intersection": [],
+                "existing_keyword_authority": "UNKNOWN_LEGACY_NO_SEO_KEYWORD",
+                "title_surface_has_longtail_authority": false,
+                "existing_post_id": 2,
+                "existing_title": "Striegel für Pferde nach wichtigen Kriterien auswählen",
+                "write_attempted": false
+            }
+        }],
+        "semantic_identity_source": "SEO_SOURCE_QUERY_NOT_TITLE",
+        "title_surface_authority": false,
+        "provider_calls": 0,
+        "write_attempted": false,
+        "content_or_design_touched": false
+    },
+    "apply_binding_drift": [],
+    "fresh_and_retained_share_same_gate_source_contract": true,
+    "current_planning_demote_not_delete": true,
+    "provider_calls_for_retained_reanalysis": 0,
+    "content_touched": false,
+    "design_touched": false
+}
