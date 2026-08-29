@@ -1,0 +1,16 @@
+{
+  "contract": "PFERDE_ATELIER_START_HERE_V4",
+  "startmaster": "STARTMASTER0107",
+  "navigation_authority": "control/startmaster0107/CURRENT_STATE.json",
+  "execution_entrance_gate": "control/cloud-entry-gate/cloud_entry.py",
+  "immutable_base_hardlock": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
+  "production_continuity_guard": "control/production-continuity/production_continuity_guard.py",
+  "current_state_sha256": "839cec1c454f140171cf25a1447c00fcec0b3968db8caa4117a8dae8171bd135",
+  "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "publish_allowed": false,
+  "openai_api_required": false,
+  "local_codex_required": false,
+  "domain_logic_changed": false,
+  "content_quality_design_changed": false,
+  "base_hardlock_ruleset_binding_required": true
+}
