@@ -5,7 +5,7 @@
   "execution_entrance_gate": "control/cloud-entry-gate/cloud_entry.py",
   "immutable_base_hardlock": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
   "production_continuity_guard": "control/production-continuity/production_continuity_guard.py",
-  "current_state_sha256": "25bae9117d57030d8c7d415d9388c7d4e4a8ee9ead501fcec50eb922321b88db",
+  "current_state_sha256": "5d400f14a871c82bd30586fb642eedabd3cca191470fcac35f8f6ad12d385f8c",
   "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
   "publish_allowed": false,
   "openai_api_required": false,
@@ -18,7 +18,7 @@
     "hardlock",
     "hardlock-base"
   ],
-  "runtime_execution_controller": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3.py",
-  "runtime_execution_controller_sha256": "a3976dcb0deedcfb560ff591652087d74b16daedf2391b2e2ba90f8589872ca6",
+  "runtime_execution_controller": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3_compat.py",
+  "runtime_execution_controller_sha256": "217935fa111b338058482fcfc24ae671b61d24e3351418ff85558af8f24a4c9e",
   "dynamic_handoff_required": true
 }
