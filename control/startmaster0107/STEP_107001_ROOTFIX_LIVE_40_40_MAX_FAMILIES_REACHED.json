@@ -1,53 +1,15 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V4_DYNAMIC_HANDOFF_TEST_EVIDENCE",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
   "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
   "sequence": 107001,
   "worker_profile": "CLOUD_MAINTENANCE_STEP",
   "authorized_inputs": [
     {
-      "ref": "32_LIVE_QA_ARTICLE_TEST_CHECKPOINT/LIVE_40_WAVE_RESULT_20260828.json",
-      "sha256": "bde7758dce108951093fef6f84c3fec2eebfd18e0946da10240fc15a655a7c56"
-    },
-    {
-      "ref": "32_LIVE_QA_ARTICLE_TEST_CHECKPOINT/NEXT_ARTICLE_TEST_AND_LATER_ROOTFIX_ORDER.json",
-      "sha256": "cd90b48451f74989ac856fd5056c659c64c6f6d6753d3aebb445910bbf17d0c9"
-    },
-    {
-      "ref": "30_PSTE_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX/STEP_C_BROAD_40_WAVE_FULL_WORKFLOW.json",
-      "sha256": "5f77cda70a749226e795c73a7b7d631d600404024181ed9720c55a86d8568657"
-    },
-    {
-      "ref": "30_PSTE_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX/test_breadth_queue_contract.json",
-      "sha256": "03f1d395713192b40d47df835aa1258a48379246e6f23312ad4ed3dea3e73765"
-    },
-    {
-      "ref": "30_PSTE_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX/SOURCE_FINAL_FULL_WORKFLOW.json",
-      "sha256": "b11927fe5b16c2aa1e0d1a190d9d49dae062652954c93787926d87a4460d93e8"
-    },
-    {
-      "ref": "00_CONTROL/BREADTH_WAVE_COMPILER_READY_QUOTA_V1.json",
-      "sha256": "50170db0aec82ddd3787aa500cd4b08ca0bd4629c6f083530cf0ca4812a3b890"
-    },
-    {
-      "ref": "control/startmaster0107/rootfix_input/ROOTFIX_40_40_CODEX_CONTEXT_V1.txt",
-      "sha256": "631a384c59313ef527da8fa00b8942aea52569742d7af57bbd8f635cb2d9792e"
-    },
-    {
-      "ref": "control/startmaster0107/rootfix_input/ROOTFIX_40_40_EXACT_QUEUE_EXTENSION_METHODS_V1.txt",
-      "sha256": "81102359d31712257fbb5fbe6a64ff44b55b215a35c8595363c4f294fbdfe83b"
+      "ref": "control/startmaster0106/rootfix_input/ROOTFIX_40_40_EVIDENCE_SOURCE_V1.txt",
+      "sha256": "d87db13e4cf4820449c4795840991e05e365665f409d37ab43dba41b936915b3"
     }
   ],
-  "required_runtime_input_roles": [],
-  "required_result_roles": [
-    "NEXT_INPUT",
-    "POSITIVE_TEST_EVIDENCE",
-    "NEGATIVE_TEST_EVIDENCE",
-    "FULL_WORKFLOW_REGRESSION_EVIDENCE"
-  ],
-  "handoff_result_roles": [
-    "NEXT_INPUT"
-  ],
-  "instruction": "Arbeite ausschließlich am gebundenen Schritt ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED. Nutze ausschließlich die materialisierten, hashgebundenen Eingaben. Beseitige nur die nachgewiesene technische Ursache des 40/40-MAX_FAMILIES_REACHED-Fehlers. Führe den konkreten Rootfix vollständig aus. Vor PASS sind ein harter Positivtest, ein harter Negativtest und die Regression gegen den unveränderten Gesamtworkflow Pflicht. Keine Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, PPM-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regel verändern. Erzeuge bei PASS ein vollständiges hashgebundenes NEXT_INPUT für den bereits vorgebundenen nächsten Schritt sowie getrennte Positiv-, Negativ- und Gesamtworkflow-Evidenzen. Keine Workflow-Navigation oder State-Änderung durch den Worker.",
+  "instruction": "Arbeite ausschließlich am gebundenen Schritt ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED. Nutze nur die materialisierte Capsule. Ermittele die technische Ursache aus dem hashgebundenen Evidence-/Source-Paket und liefere ausschließlich einen minimalen Rootfix-Vorschlag plus Positiv-/Negativtests und Regression gegen den unveränderten Gesamtworkflow. Keine Rücksprünge, Seitensprünge oder Wiederholung unveränderter PASS-Stufen. Keine Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, PPM-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regel verändern.",
   "limits": {
     "max_wall_seconds": 1800,
     "max_output_bytes": 5242880,
@@ -59,10 +21,6 @@
     "step_id": "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
     "sequence": 107002,
     "bundle_ref": "control/startmaster0107/STEP_107002_SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX.json",
-    "bundle_sha256": "5ba42e19ac344d83f52ad7872b1f69933f0f0b39e90b84064280a6c846d9e072"
-  },
-  "regression_baseline": {
-    "ref": "control/startmaster0107/FULL_WORKFLOW_REGRESSION_BASELINE_V1.json",
-    "sha256": "2c216a6f4491aa2a5e8165d6fafc86faa9fa4696c08f7981f627d4aab5cf71cd"
+    "bundle_sha256": "ed7408977d779d945789e3b5a8e35034970356219534fcf4994e54a3e5f68160"
   }
 }

@@ -1,25 +1,11 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V4_DYNAMIC_HANDOFF_TEST_EVIDENCE",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
   "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "sequence": 107007,
   "worker_profile": "CLOUD_ARTICLE_BATCH_NO_STOP",
   "authorized_inputs": [],
-  "required_runtime_input_roles": [
-    "NEXT_INPUT"
-  ],
-  "required_result_roles": [
-    "NEXT_INPUT",
-    "POSITIVE_TEST_EVIDENCE",
-    "NEGATIVE_TEST_EVIDENCE",
-    "FULL_WORKFLOW_REGRESSION_EVIDENCE"
-  ],
-  "handoff_result_roles": [
-    "NEXT_INPUT"
-  ],
-  "instruction": "Führe ausschließlich RUN_NEW_ARTICLE_BATCH_NO_STOP aus. NEXT_INPUT muss den gebundenen BATCH_CHECKPOINT und alle notwendigen Produktionsartefakte enthalten. Keine Zwischenmeldung bis Batch-Ende; Checkpoint+Resume statt Neustart. Alle bestehenden Fach-, Inhalts-, Qualitäts-, SEO-, Dubletten-/Kannibalisierungs-, LanguageTool-, PPM-, PSERC-, PSTE-, Design- und Publish-Gates bleiben unverändert. Vor PASS sind harter Positivtest, harter Negativtest und Regression gegen den gesamten unveränderten Workflow Pflicht. Erzeuge bei PASS das vollständige NEXT_INPUT für den finalen Review und getrennte Testevidenzen.",
+  "instruction": "Führe ausschließlich den bereits gebundenen neuen Artikelbatch ohne Zwischenmeldung bis zum vollständigen vorgesehenen Endzustand jedes gebundenen Items aus. Bestehende Fach-, Inhalts-, Qualitäts-, SEO-, Dubletten-/Kannibalisierungs-, LanguageTool-, PPM-, PSERC-, PSTE-, Design- und Publish-Gates bleiben unverändert. Reasoning standardmäßig medium, nur bereits bindend höher eingestufte Schritte höher. Chatgrenze bedeutet Checkpoint und Resume, niemals Neustart oder Rücksprung.",
   "limits": {
-    "max_wall_seconds": 1800,
-    "max_output_bytes": 5242880,
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
   },
@@ -28,10 +14,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "e619cb2c16a933af9525fb778eb51b3eddd19aa5e99aa49c91576cc5b52b11bd"
-  },
-  "regression_baseline": {
-    "ref": "control/startmaster0107/FULL_WORKFLOW_REGRESSION_BASELINE_V1.json",
-    "sha256": "2c216a6f4491aa2a5e8165d6fafc86faa9fa4696c08f7981f627d4aab5cf71cd"
+    "bundle_sha256": "1c13c74906ac56dbc9c9d48b19286d7559090e06050b6661971f9b2608ee4929"
   }
 }
