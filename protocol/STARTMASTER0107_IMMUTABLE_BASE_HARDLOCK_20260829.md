@@ -45,3 +45,14 @@ Die technische Produktionsautorität kann den geschützten Gate-/Workflowpfad ni
 
 ## Aktivierung
 Nach Merge dieses Stands muss im bestehenden Ruleset `Pferde Atelier Main Hardlock` zusätzlich der Required Status Check `hardlock-base` gesetzt werden. Erst danach ist STARTMASTER0107 vollständig aktiviert.
+
+## Ausführungsledger 107001 – 29.08.2026
+- Step: `107001 ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED`
+- Vorheriger identischer Codex-Durchlauf: `BLOCKED`, weil PSTE-0.56.25-Implementierungsquelle im Repository-Arbeitsbaum fehlte.
+- Diese fehlende Arbeitsgrundlage ist jetzt auf dem bestehenden Branch `restore-107001-complete-inputs-20260829` materialisiert.
+- Kanonischer Arbeitsbaum-Pfad: `portal-seo-topic-engine/includes/class-pste-breadth-research-queue.php`.
+- Quelle stammt aus dem bereits gebundenen PSTE-0.56.25-Bestand; dokumentierter SHA-256: `b1db3df556ef0eafd5af4095a827bd5e91c52424b479d9470f69eb429f8285e8`.
+- Bestehende 0.56.25-Regressionsergebnisse und 40/40-Kontext liegen zusätzlich unter `portal-seo-topic-engine/107001_BASELINES/` und `107001_INPUT/`.
+- Status dieser Aktion: `ERLEDIGT`.
+- NICHT WIEDERHOLEN: erneute Suche nach PSTE 0.56.25, erneute MASTER-/Library-Suche, erneuter identischer Evidence-only-Codex-Lauf.
+- Nächster noch offener Punkt innerhalb 107001: Codex Cloud muss auf genau diesem materialisierten Arbeitsbaum den bereits gebundenen minimalen Fachrootfix implementieren und die dafür erforderlichen Positiv-/Negativ-/Regressionstests ausführen.
