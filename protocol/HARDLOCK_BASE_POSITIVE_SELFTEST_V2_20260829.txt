@@ -1,0 +1,3 @@
+PFERDE_ATELIER_HARDLOCK_BASE_POSITIVE_SELFTEST_V2
+Expected: both required-style checks PASS for a harmless non-security protocol-only change.
+No domain/content/quality/design logic is changed.
