@@ -1,0 +1,19 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "PROVIDER_AFTER_RETAINED_BACKLOG",
+  "sequence": 107004,
+  "worker_profile": "CLOUD_BOUND_PROVIDER_STEP",
+  "authorized_inputs": [],
+  "instruction": "Führe ausschließlich den bereits vorgesehenen Provider-Schritt nach retained backlog aus. Keine Änderung an Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- oder Publish-Logik. Keine Rücksprünge oder Zusatzprüfungen.",
+  "limits": {
+    "reasoning_effort": "medium",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
+    "sequence": 107005,
+    "bundle_ref": "control/startmaster0107/STEP_107005_PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER.json",
+    "bundle_sha256": "e6fa9f4d351b94fbc516fdf68697b5169d779597b57a0b3e839bc13a4b1444ed"
+  }
+}
