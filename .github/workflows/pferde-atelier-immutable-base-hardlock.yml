@@ -1,0 +1,101 @@
+name: Pferde Atelier Immutable Base Hardlock
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  hardlock-base:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted base
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Fetch candidate commit read-only
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: git fetch --no-tags --depth=1 origin "$HEAD_SHA"
+      - name: Block changes to immutable entrance security layer
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/changed.txt
+          cat /tmp/changed.txt
+          if grep -Eq '^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/)' /tmp/changed.txt; then
+            echo 'IMMUTABLE_ENTRANCE_SECURITY_PATH_CHANGE_BLOCKED'
+            exit 1
+          fi
+      - name: Enforce monotonic prebound workflow transition
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base-tree /tmp/candidate-tree
+          mkdir -p /tmp/base-tree /tmp/candidate-tree
+          git archive "$BASE_SHA" | tar -x -C /tmp/base-tree
+          git archive "$HEAD_SHA" | tar -x -C /tmp/candidate-tree
+          python3 - <<'PY'
+          import json, hashlib, pathlib, re
+          B=pathlib.Path('/tmp/base-tree'); H=pathlib.Path('/tmp/candidate-tree')
+          def load(p): return json.loads(p.read_text(encoding='utf-8'))
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          def refs(root):
+              ptr=load(root/'control/CURRENT_STARTMASTER.json')
+              r=load(root/ptr['root_ref']); s=load(root/ptr['state_ref'])
+              g=s['execution_gate']; b=load(root/g['bundle_ref'])
+              return ptr,r,s,g,b
+          bp,br,bs,bg,bb=refs(B); hp,hr,hs,hg,hb=refs(H)
+          def smnum(v):
+              m=re.fullmatch(r'STARTMASTER(\d+)',str(v));
+              if not m: raise SystemExit('STARTMASTER_ID_INVALID')
+              return int(m.group(1))
+          if smnum(hp['startmaster']) < smnum(bp['startmaster']): raise SystemExit('STARTMASTER_ROLLBACK_BLOCKED')
+          if int(hg['sequence']) < int(bg['sequence']): raise SystemExit('SEQUENCE_ROLLBACK_BLOCKED')
+          changed=(hp['startmaster']!=bp['startmaster'] or hs['next_allowed_step']!=bs['next_allowed_step'] or int(hg['sequence'])!=int(bg['sequence']))
+          if changed:
+              nb=bb.get('next_binding')
+              if not isinstance(nb,dict): raise SystemExit('UNPREBOUND_TRANSITION_BLOCKED')
+              expected_sm=nb.get('startmaster',bp['startmaster'])
+              checks=[
+                (hp['startmaster']==expected_sm,'NEXT_STARTMASTER_MISMATCH'),
+                (hs['next_allowed_step']==nb.get('step_id'),'NEXT_STEP_MISMATCH'),
+                (int(hg['sequence'])==int(nb.get('sequence',-1)),'NEXT_SEQUENCE_MISMATCH'),
+                (hg['bundle_ref']==nb.get('bundle_ref'),'NEXT_BUNDLE_REF_MISMATCH')]
+              for ok,msg in checks:
+                  if not ok: raise SystemExit(msg)
+              p=H/hg['bundle_ref']
+              if not p.is_file() or sha(p)!=nb.get('bundle_sha256'): raise SystemExit('NEXT_BUNDLE_HASH_MISMATCH')
+          print('MONOTONIC_PREBOUND_TRANSITION_PASS')
+          PY
+      - name: Run trusted entrance and continuity tests on candidate state
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/candidate
+          mkdir -p /tmp/candidate
+          git archive "$HEAD_SHA" | tar -x -C /tmp/candidate
+          rm -rf /tmp/candidate/control/cloud-entry-gate /tmp/candidate/control/deterministic-entrance-gate /tmp/candidate/control/production-continuity
+          cp -a control/cloud-entry-gate /tmp/candidate/control/
+          cp -a control/deterministic-entrance-gate /tmp/candidate/control/
+          cp -a control/production-continuity /tmp/candidate/control/
+          cp AGENTS.md /tmp/candidate/AGENTS.md
+          cd /tmp/candidate
+          PYTHONDONTWRITEBYTECODE=1 python3 control/cloud-entry-gate/cloud_repo_ci_test.py
+          PYTHONDONTWRITEBYTECODE=1 python3 control/production-continuity/production_continuity_ci_test.py
+      - name: Assert immutable base hardlock itself is API-free and domain-blind
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -E 'api\.openai\.com|OPENAI_API_KEY|requests\.post|httpx\.post|urllib\.request' control/cloud-entry-gate/cloud_entry.py control/deterministic-entrance-gate/door.py
+          ! grep -E -i 'beratung|pflege|artikeltyp|keywordregel|titelregel|designregel' control/cloud-entry-gate/cloud_entry.py control/production-continuity/production_continuity_guard.py
