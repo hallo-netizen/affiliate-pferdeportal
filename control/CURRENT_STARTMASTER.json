@@ -1,11 +1,10 @@
 {
   "contract": "PFERDE_ATELIER_CURRENT_STARTMASTER_POINTER_V1",
-  "startmaster": "STARTMASTER0105",
-  "root_ref": "control/startmaster0105/PFERDE_ATELIER_START_HERE.json",
-  "state_ref": "control/startmaster0105/CURRENT_STATE.json",
+  "startmaster": "STARTMASTER0106",
+  "root_ref": "control/startmaster0106/PFERDE_ATELIER_START_HERE.json",
+  "state_ref": "control/startmaster0106/CURRENT_STATE.json",
   "gate_ref": "control/cloud-entry-gate/cloud_entry.py",
+  "continuity_guard_ref": "control/production-continuity/production_continuity_guard.py",
   "free_chat_execution_authority": false,
-  "api_required": false,
-  "local_codex_required": false,
-  "hard_worker": "CODEX_CLOUD"
+  "api_required": false
 }

@@ -1,4 +1,5 @@
 name: Pferde Atelier Deterministic Entrance Gate
+
 on:
   push:
     branches: [main]
@@ -6,13 +7,30 @@ on:
       - 'AGENTS.md'
       - 'control/deterministic-entrance-gate/**'
       - 'control/cloud-entry-gate/**'
+      - 'control/production-continuity/**'
       - 'control/startmaster0104/**'
       - 'control/startmaster0105/**'
+      - 'control/startmaster0106/**'
       - 'control/CURRENT_STARTMASTER.json'
       - '.github/workflows/pferde-atelier-deterministic-entrance-gate.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'AGENTS.md'
+      - 'control/deterministic-entrance-gate/**'
+      - 'control/cloud-entry-gate/**'
+      - 'control/production-continuity/**'
+      - 'control/startmaster0104/**'
+      - 'control/startmaster0105/**'
+      - 'control/startmaster0106/**'
+      - 'control/CURRENT_STARTMASTER.json'
+      - 'protocol/**'
+      - '.github/workflows/pferde-atelier-deterministic-entrance-gate.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   hardlock:
     runs-on: ubuntu-latest
@@ -26,15 +44,22 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/cloud-entry-gate/cloud_repo_ci_test.py
+      - name: Production continuity no-stop positive-negative CI
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python control/production-continuity/test_production_continuity_guard.py
       - name: Assert active gate has no OpenAI API dependency
         shell: bash
         run: |
           set -euo pipefail
           ! grep -E 'api\.openai\.com|OPENAI_API_KEY|requests\.post|httpx\.post|urllib\.request' \
             control/cloud-entry-gate/cloud_entry.py \
-            control/deterministic-entrance-gate/door.py
+            control/deterministic-entrance-gate/door.py \
+            control/production-continuity/production_continuity_guard.py
       - name: Assert active gate stays domain blind
         shell: bash
         run: |
           set -euo pipefail
-          ! grep -E -i 'pste|pserc|ppm|languagetool|wordpress|beratung|pflege|cannibal' control/cloud-entry-gate/cloud_entry.py
+          ! grep -E -i 'pste|pserc|ppm|languagetool|wordpress|beratung|pflege|cannibal|title_rule|keyword_rule|design_rule' \
+            control/cloud-entry-gate/cloud_entry.py \
+            control/production-continuity/production_continuity_guard.py

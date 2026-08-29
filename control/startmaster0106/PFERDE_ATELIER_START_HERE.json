@@ -1,0 +1,14 @@
+{
+  "contract": "PFERDE_ATELIER_START_HERE_V3",
+  "startmaster": "STARTMASTER0106",
+  "navigation_authority": "control/startmaster0106/CURRENT_STATE.json",
+  "execution_entrance_gate": "control/cloud-entry-gate/cloud_entry.py",
+  "production_continuity_guard": "control/production-continuity/production_continuity_guard.py",
+  "current_state_sha256": "ceadb149398a058efa9e9414dbde79d34ae5ec0339009ecdd299b96e60f9f31b",
+  "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "publish_allowed": false,
+  "openai_api_required": false,
+  "local_codex_required": false,
+  "domain_logic_changed": false,
+  "content_quality_design_changed": false
+}
