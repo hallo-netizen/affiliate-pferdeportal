@@ -3,7 +3,12 @@
   "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
   "sequence": 107005,
   "worker_profile": "CLOUD_BATCH_PREPARATION",
-  "authorized_inputs": [],
+  "authorized_inputs": [
+    {
+      "ref": "control/startmaster0107/USER_ACTION_107005_READY_APPROVAL.json",
+      "sha256": "b3d67af43852f2d1fa3ce2e8a3ccf08797c64e3821111e6c23f083e0c0b9bd76"
+    }
+  ],
   "instruction": "Bereite ausschließlich den neuen Artikeltest nach Abschluss der vorgebundenen technischen Vorstufen vor. Verwende ausschließlich READY/Freigaben des bestehenden Fachworkflows. Keine eigenen Titel-/Keyword-/Qualitätsentscheidungen und keine Wiederholung unveränderter PASS-Stufen.",
   "limits": {
     "reasoning_effort": "medium",
