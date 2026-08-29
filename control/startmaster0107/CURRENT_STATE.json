@@ -1,0 +1,66 @@
+{
+  "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
+  "startmaster": "STARTMASTER0107",
+  "status": "IMMUTABLE_BASE_HARDLOCK_PENDING_RULESET_BINDING_ROOTFIX_NEXT",
+  "previous_binding": "STARTMASTER0106",
+  "workflow_change_scope": "OUTER_IMMUTABLE_BASE_HARDLOCK_AND_PREBOUND_ROUTING_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
+  "content_or_design_contract_changed": false,
+  "completed_checkpoints": [
+    "SIX_ARTICLE_TEST_PUBLISHED",
+    "CODEX_CLOUD_GATE_VERIFY_PASS",
+    "GITHUB_MAIN_RULESET_ACTIVE_NO_BYPASS",
+    "GITHUB_MAIN_DIRECT_WRITE_NEGATIVE_BLOCKED_409",
+    "STARTMASTER0106_NO_STOP_CONTINUITY_PASS",
+    "STARTMASTER0106_POST_MERGE_CI_PASS",
+    "IMMUTABLE_PULL_REQUEST_TARGET_BASE_HARDLOCK_PREPARED"
+  ],
+  "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "queued_after_current_step": [
+    "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
+    "RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY",
+    "PROVIDER_AFTER_RETAINED_BACKLOG",
+    "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
+    "BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS",
+    "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+    "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH"
+  ],
+  "publish_allowed": false,
+  "execution_gate": {
+    "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V2",
+    "enforced": true,
+    "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+    "sequence": 107001,
+    "bundle_ref": "control/startmaster0107/STEP_107001_ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED.json",
+    "bundle_sha256": "f8910a54a264ae905e0822df6b8baeefba01b704e00121e784c0ba9d19a4adeb",
+    "state_write_authority": "ENTRANCE_GATE_ONLY",
+    "unknown_step_policy": "DENY",
+    "free_chat_direct_execution_valid": false,
+    "domain_logic_authority": "NONE",
+    "content_quality_design_authority": "NONE",
+    "worker_context_policy": "CAPSULE_ONLY",
+    "repeat_or_backtrack_policy": "DENY_UNLESS_PREBOUND_NEXT_BINDING",
+    "api_dependency": "NONE",
+    "hard_worker_target": "CODEX_CLOUD",
+    "hard_worker_runtime_verified": true,
+    "base_hardlock_required_status_check": "hardlock-base"
+  },
+  "text_production_contracts": {
+    "prompt_ref": "control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt",
+    "continuity_ref": "control/startmaster0106/TEXTPRODUKTION_NO_STOP_CONTINUITY_HARDLOCK_V1.json",
+    "handoff_ref": "control/startmaster0107/NOTFALL_UEBERGABE_NEUER_CHAT_TEXTERSTELLUNG_STARTMASTER0107.md",
+    "medium_target_ref": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json"
+  },
+  "immutable_security_layer": {
+    "workflow_ref": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
+    "required_check": "hardlock-base",
+    "protected_paths": [
+      ".github/workflows/**",
+      "AGENTS.md",
+      "control/cloud-entry-gate/**",
+      "control/deterministic-entrance-gate/**",
+      "control/production-continuity/**"
+    ],
+    "transition_policy": "MONOTONIC_AND_EXACTLY_PREBOUND_NEXT_BINDING",
+    "manual_ruleset_binding_pending": true
+  }
+}
