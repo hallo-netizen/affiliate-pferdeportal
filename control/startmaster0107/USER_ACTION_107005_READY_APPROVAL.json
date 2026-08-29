@@ -1,0 +1,11 @@
+{
+  "contract": "PFERDE_ATELIER_USER_ACTION_V1",
+  "startmaster": "STARTMASTER0107",
+  "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
+  "sequence": 107005,
+  "action": "READY_APPROVAL",
+  "scope": "EXISTING_FACHWORKFLOW_READY_ONLY",
+  "approval_text": "Die Nutzerfreigabe für 107005 ist erteilt. Verwende ausschließlich den bestehenden Fachworkflow und dessen bereits gebundene Regeln. Keine neuen Themen, Titel, Keywords, Qualitäts- oder Inhaltsentscheidungen außerhalb bereits bestehender READY/Freigaben. Kein Auto-Publish.",
+  "protected_rules_changed": false,
+  "publish_allowed": false
+}
