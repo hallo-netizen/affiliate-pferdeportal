@@ -1,9 +1,19 @@
 {
-  "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V3",
-  "generation": 3,
+  "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
+  "generation": 4,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
-  "single_source_artifact": "release/affiliate-zentrale/current/CURRENT_WORKING_SOURCE.b64/",
+  "source_authority": {
+    "type": "DIRECT_COMMITTED_TREE",
+    "container_root": "release/affiliate-zentrale/current",
+    "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
+    "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+    "manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1",
+    "source_file_count": 21,
+    "reconstruction": "FORBIDDEN",
+    "generator_role": "NONE",
+    "guard_role": "VERIFY_ONLY"
+  },
   "released_baseline": {
     "version": "6.62.0",
     "immutable": true,
@@ -12,9 +22,7 @@
     "source_manifest_ref": "release/affiliate-zentrale/archive/BASELINE_V6620_SOURCE_SHA256.txt",
     "source_manifest_sha256": "3f007fe58d08cfbd6769deedc7d8e3d86616ac7b451369d7dfcb752cb8640ed3",
     "source_file_count": 19,
-    "source_of_truth": "ARCHIVED_VERIFIED_ARTIFACT_BYTES_BASE64_ENCODED",
-    "artifact_chunks_ref": "release/affiliate-zentrale/archive/artifacts/v6620.b64/",
-    "artifact_encoding": "BASE64_CHUNKS_V1"
+    "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "negative_baseline": {
     "version": "6.63.4",
@@ -24,23 +32,41 @@
     "source_manifest_ref": "release/affiliate-zentrale/archive/NEGATIVE_V6634_SOURCE_SHA256.txt",
     "source_manifest_sha256": "97e5878ef2bffd3433add1159543d161ba8d2820f77756a54b0eeb99986629ec",
     "source_file_count": 20,
-    "artifact_chunks_ref": "release/affiliate-zentrale/archive/artifacts/v6634.b64/",
-    "artifact_encoding": "BASE64_CHUNKS_V1"
+    "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
     "version": "6.63.8",
     "status": "WORKING_UNRELEASED",
     "release_allowed": false,
-    "working_source_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
+    "source_container_root": "release/affiliate-zentrale/current",
+    "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1",
     "source_file_count": 21,
+    "candidate_reference_artifact_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
     "final_artifact_ref": null,
-    "final_artifact_sha256": null,
-    "working_source_chunks_ref": "release/affiliate-zentrale/current/CURRENT_WORKING_SOURCE.b64/",
-    "working_source_encoding": "BASE64_CHUNKS_V1",
-    "starting_snapshot_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
-    "starting_snapshot_manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1"
+    "final_artifact_sha256": null
+  },
+  "execution_state": {
+    "state": "WAITING_FOR_CANONICAL_SOURCE_BYTES",
+    "authorized_next_action": "COMMIT_EXACT_V6638_21_FILE_SOURCE_TO_CANONICAL_ROOT",
+    "completion_condition": "DIRECT_SOURCE_21_OF_21_HASH_PASS",
+    "after_completion_action": "RUN_BOUND_RELEASE_GATES",
+    "no_optional_detours": true,
+    "sequence": 1,
+    "authorized_change_prefixes": [
+      "release/affiliate-zentrale/current/",
+      "control/release-governance/CURRENT_RELEASE.json"
+    ],
+    "next_state_binding": {
+      "sequence": 2,
+      "state": "RUNNING_BOUND_RELEASE_GATES",
+      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+      "authorized_change_prefixes": [
+        "release/affiliate-zentrale/evidence/",
+        "control/release-governance/CURRENT_RELEASE.json"
+      ]
+    }
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -69,50 +95,67 @@
     ],
     "forbidden_prefixes": [
       ".github/workflows/",
+      "affiliate-portal-router/",
       "control/cloud-entry-gate/",
       "control/deterministic-entrance-gate/",
       "control/production-continuity/",
       "control/startmaster",
       "release/affiliate-zentrale/archive/",
+      "release/affiliate-zentrale/bootstrap-parts/",
       "release/affiliate-zentrale/tests/",
       "release/affiliate-zentrale/AGENTS.md",
       "control/release-governance/release_guard.py",
       "control/release-governance/test_release_guard.py"
     ],
-    "historical_source_policy": "READ_ONLY_NOT_RELEASE_AUTHORITY",
+    "historical_source_policy": "READ_ONLY_EVIDENCE_NOT_RELEASE_AUTHORITY",
     "reconstruction_policy": "DENY",
     "new_parallel_ci_staging_policy": "DENY"
   },
   "required_release_gates": {
-    "old_state_reproduction_negative": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "same_state_rootfix_positive": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "counterstates_fail_closed": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "complete_selection_materialization_public_gate": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "relevant_historical_regressions": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "real_wordpress_mariadb_persistence_same_uuid": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "recovery_retry_failure_paths": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "mutation_sabotage": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "fresh_unpack_exact_installer": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "source_zip_byte_identity": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
-    "final_sha256": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null}
+    "old_state_reproduction_negative": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "same_state_rootfix_positive": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "counterstates_fail_closed": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "complete_selection_materialization_public_gate": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "relevant_historical_regressions": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "real_wordpress_mariadb_persistence_same_uuid": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "recovery_retry_failure_paths": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "mutation_sabotage": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "fresh_unpack_exact_installer": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "source_zip_byte_identity": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "final_sha256": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null}
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
   "no_guessing": true,
   "no_reconstruction": true,
   "no_side_refactor": true,
+  "direct_committed_source_only": true,
+  "guard_is_verify_only": true,
   "no_release_zip_regeneration_before_final_gate": true,
-  "immutable_test_refs": ["release/affiliate-zentrale/tests/real_db_gate_v6638.php"],
+  "immutable_test_refs": [
+    "release/affiliate-zentrale/tests/real_db_gate_v6638.php"
+  ],
   "immutable_governance_refs": [
     "release/affiliate-zentrale/AGENTS.md",
     "control/release-governance/release_guard.py",
     "control/release-governance/test_release_guard.py"
   ],
-  "definition_of_authority": "ONLY_BASE64_CHUNKED_CURRENT_WORKING_SOURCE_AND_ITS_HASHED_MANIFEST_ARE_WORKING_SOURCE; CHUNKS_DECODE_DIRECTLY_TO_EXACT_ZIP_BYTES; NO_PATCH_OR_HISTORY_RECONSTRUCTION; ARCHIVED_BASELINES_IMMUTABLE",
+  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_21_FILE_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE_EVIDENCE_ONLY",
   "immutable_snapshot_binding": {
     "version": "6.63.8",
-    "sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
+    "candidate_reference_artifact_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
     "manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1",
-    "immutable": true,
-    "note": "STARTING_BYTES_EQUAL_INITIAL_CURRENT_SOURCE; historical snapshot is hash-bound, current bytes evolve only on active branch with matching manifest/policy."
+    "source_file_count": 21,
+    "immutable": true
+  },
+  "objective_control": {
+    "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
+    "current_milestone": "BIND_DIRECT_CANONICAL_V6638_SOURCE_AND_ACTIVATE_EXTERNAL_RELEASE_CONTROL",
+    "max_parallel_workstreams": 1,
+    "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
+    "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
+    "investigation_policy": "ONLY_CURRENT_BOUND_GATE_OR_EXPLICIT_USER_SCOPE",
+    "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
+    "goal_drift_policy": "FAIL_CLOSED",
+    "optional_detours": "FORBIDDEN"
   }
 }
