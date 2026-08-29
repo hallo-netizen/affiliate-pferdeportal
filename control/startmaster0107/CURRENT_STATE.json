@@ -46,14 +46,14 @@
     "free_chat_direct_execution_valid": false,
     "domain_logic_authority": "NONE",
     "content_quality_design_authority": "NONE",
-    "worker_context_policy": "CAPSULE_ONLY",
+    "worker_context_policy": "CAPSULE_NAVIGATION_REPO_BOUND_STEP",
     "repeat_or_backtrack_policy": "DENY_UNLESS_PREBOUND_NEXT_BINDING",
     "api_dependency": "NONE",
     "hard_worker_target": "CODEX_CLOUD",
     "hard_worker_runtime_verified": true,
     "base_hardlock_required_status_check": "hardlock-base",
-    "runtime_controller_ref": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3.py",
-    "runtime_controller_sha256": "a3976dcb0deedcfb560ff591652087d74b16daedf2391b2e2ba90f8589872ca6",
+    "runtime_controller_ref": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3_compat.py",
+    "runtime_controller_sha256": "217935fa111b338058482fcfc24ae671b61d24e3351418ff85558af8f24a4c9e",
     "runtime_controller_policy": "HASH_BOUND_DYNAMIC_HANDOFF_PASS_EVIDENCE_ONLY",
     "runtime_controller_worker_authority": false,
     "legacy_hardlocked_entrance_validation_required": true
@@ -81,8 +81,8 @@
       "hardlock",
       "hardlock-base"
     ],
-    "runtime_controller_ref": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3.py",
-    "runtime_controller_sha256": "a3976dcb0deedcfb560ff591652087d74b16daedf2391b2e2ba90f8589872ca6",
+    "runtime_controller_ref": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3_compat.py",
+    "runtime_controller_sha256": "217935fa111b338058482fcfc24ae671b61d24e3351418ff85558af8f24a4c9e",
     "dynamic_handoff_policy": "EXACT_NEXT_BINDING_PLUS_HASHED_NEXT_INPUT_PLUS_TEST_EVIDENCE",
     "per_step_release_rule": "POSITIVE_NEGATIVE_FULL_WORKFLOW_REGRESSION_REQUIRED"
   },
