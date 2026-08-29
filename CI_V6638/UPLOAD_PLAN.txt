@@ -1,0 +1,1 @@
+Exact V6.63.8 installer transfer staging. CI-only, no plugin/source change.
