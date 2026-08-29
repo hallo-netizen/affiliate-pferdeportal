@@ -21,7 +21,7 @@
     "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
     "sequence": 106001,
     "bundle_ref": "control/startmaster0106/STEP_106001_ROOTFIX_LIVE_40_40.json",
-    "bundle_sha256": "72f1c010f8eca2888d76117ba6226db93bc69f76c5d06a2b0d6773fa07d60712",
+    "bundle_sha256": "aa3f237da1c0e91dd414c36d615fb1091e6c04ac09920c947a52bb93274a4f55",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
