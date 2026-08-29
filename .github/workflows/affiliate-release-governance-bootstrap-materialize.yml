@@ -46,6 +46,25 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq mariadb-client
           mariadb -h127.0.0.1 -uroot -proot -Nse 'SELECT VERSION();'
+      - name: Verify bootstrap payload integrity individually
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, gzip, hashlib
+          root=Path('release/affiliate-zentrale/bootstrap-parts')
+          for name in ('v6620','v6634','ds24'):
+              parts=sorted((root/name).glob('part*'))
+              text=''.join(''.join(p.read_text(encoding='ascii').split()) for p in parts)
+              packed=base64.b64decode(text, validate=True)
+              try:
+                  raw=gzip.decompress(packed)
+              except Exception as e:
+                  print(f'BOOTSTRAP_PAYLOAD_{name.upper()}_FAIL:{type(e).__name__}:{e}')
+                  raise
+              print(f'BOOTSTRAP_PAYLOAD_{name.upper()}_PASS packed_sha256={hashlib.sha256(packed).hexdigest()} raw_sha256={hashlib.sha256(raw).hexdigest()} raw_bytes={len(raw)}')
+          PY
       - name: Verify and run pinned one-time materializer
         shell: bash
         run: |
@@ -62,4 +81,4 @@ jobs:
           PY
           chmod +x /tmp/bootstrap_materialize_and_gate.sh
           bash -n /tmp/bootstrap_materialize_and_gate.sh
-          bash -x /tmp/bootstrap_materialize_and_gate.sh
+          /tmp/bootstrap_materialize_and_gate.sh
