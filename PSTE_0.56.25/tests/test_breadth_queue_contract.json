@@ -1,0 +1,12 @@
+{
+    "contract": "PSTE_0.56.25_BROAD_40_QUEUE_ROOTCAUSE_V1",
+    "status": "PASS",
+    "zero_open_family_local_backlog_start_positive": true,
+    "zero_open_family_error": "",
+    "max_40_negative_guard": true,
+    "ui_and_backend_defaults_40_40": true,
+    "counts_only_strict_yes": true,
+    "retained_backlog_before_provider": true,
+    "provider_replay_added": false,
+    "article_production_batch_policy_changed": false
+}
