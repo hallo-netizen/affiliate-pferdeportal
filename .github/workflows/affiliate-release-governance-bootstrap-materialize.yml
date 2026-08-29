@@ -1,4 +1,4 @@
-name: Affiliate Release Governance Bootstrap Materialize
+name: Affiliate Release Governance V4 One-Time Validation
 
 on:
   push:
@@ -8,77 +8,42 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  materialize-and-real-db-gate:
-    if: github.actor != 'github-actions[bot]'
+  validate-v4-external-controller:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-    services:
-      mariadb:
-        image: mariadb:11.4
-        env:
-          MARIADB_ROOT_PASSWORD: root
-          MARIADB_DATABASE: wordpress
-          MARIADB_USER: wp
-          MARIADB_PASSWORD: wp
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="healthcheck.sh --connect --innodb_initialized"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=12
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout clean permanent governance branch
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          extensions: mysqli, mbstring, curl, zip
-          coverage: none
-      - name: Install database client
+          ref: affiliate-release-current
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Assert obsolete bootstrap architecture is absent
         shell: bash
         run: |
           set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq mariadb-client
-          mariadb -h127.0.0.1 -uroot -proot -Nse 'SELECT VERSION();'
-      - name: Verify bootstrap payload integrity individually
+          test ! -e release/affiliate-zentrale/bootstrap-parts
+          test ! -e .github/workflows/affiliate-release-governance-bootstrap-materialize.yml
+          echo CLEAN_V4_BRANCH_PASS
+      - name: Run V4 positive and negative anti-drift suite
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          import base64, gzip, hashlib
-          root=Path('release/affiliate-zentrale/bootstrap-parts')
-          for name in ('v6620','v6634','ds24'):
-              parts=sorted((root/name).glob('part*'))
-              text=''.join(''.join(p.read_text(encoding='ascii').split()) for p in parts)
-              packed=base64.b64decode(text, validate=True)
-              try:
-                  raw=gzip.decompress(packed)
-              except Exception as e:
-                  print(f'BOOTSTRAP_PAYLOAD_{name.upper()}_FAIL:{type(e).__name__}:{e}')
-                  raise
-              print(f'BOOTSTRAP_PAYLOAD_{name.upper()}_PASS packed_sha256={hashlib.sha256(packed).hexdigest()} raw_sha256={hashlib.sha256(raw).hexdigest()} raw_bytes={len(raw)}')
-          PY
-      - name: Verify and run pinned one-time materializer
+          PYTHONDONTWRITEBYTECODE=1 python3 control/release-governance/test_release_guard.py
+      - name: Verify governance contract itself
         shell: bash
         run: |
           set -euo pipefail
-          cat release/affiliate-zentrale/bootstrap-parts/script/part* > /tmp/bootstrap-script.gz.b64
-          python3 - <<'PY'
-          from pathlib import Path
-          import base64,gzip,hashlib
-          raw=gzip.decompress(base64.b64decode(''.join(Path('/tmp/bootstrap-script.gz.b64').read_text().split()),validate=True))
-          got=hashlib.sha256(raw).hexdigest()
-          want='df24364f8ce7c8ab38a24e46db426c1df59879f7216b36ba364b5417847f592d'
-          if got!=want: raise SystemExit('BOOTSTRAP_SCRIPT_HASH_MISMATCH:'+got)
-          Path('/tmp/bootstrap_materialize_and_gate.sh').write_bytes(raw)
-          PY
-          chmod +x /tmp/bootstrap_materialize_and_gate.sh
-          bash -n /tmp/bootstrap_materialize_and_gate.sh
-          /tmp/bootstrap_materialize_and_gate.sh
+          PYTHONDONTWRITEBYTECODE=1 python3 control/release-governance/release_guard.py governance-check
+      - name: Prove missing canonical source fails closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if PYTHONDONTWRITEBYTECODE=1 python3 control/release-governance/release_guard.py source-check; then
+            echo SOURCE_CHECK_UNEXPECTEDLY_PASSED
+            exit 1
+          fi
+          echo MISSING_CANONICAL_SOURCE_FAIL_CLOSED_PASS
