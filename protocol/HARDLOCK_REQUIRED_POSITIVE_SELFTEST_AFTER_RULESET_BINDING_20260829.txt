@@ -1,0 +1,3 @@
+PFERDE ATELIER – REQUIRED CHECKS POSITIVE SELFTEST
+Purpose: verify post-binding Ruleset executes both required checks on a harmless protocol-only change.
+Expected: hardlock PASS and hardlock-base PASS. Test-only; do not merge.
