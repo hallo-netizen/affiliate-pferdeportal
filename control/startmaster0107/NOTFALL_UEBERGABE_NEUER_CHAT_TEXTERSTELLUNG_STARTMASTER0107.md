@@ -1,34 +1,114 @@
-# NOTFALL-ÜBERGABE – NEUER CHAT MITTEN IN DER TEXTERSTELLUNG – STARTMASTER0107
+# STARTMASTER0107 — NOTFALL-EINLASS / SOFORTIGER HARDLOCK-RESET
 
-## Zweck
-Diese Übergabe ist ausschließlich für den Fall gedacht, dass ein Chat während eines aktiven Beitragsbatches voll wird, abbricht oder gewechselt werden muss. Sie verhindert, dass ein neuer Chat den Workflow neu interpretiert, alte Prüfungen wiederholt oder zu früheren Schritten zurückspringt.
+STOPP JEDE EIGENE ENTSCHEIDUNG.
 
-## Im neuen Chat exakt so starten
-1. GitHub-Repository `hallo-netizen/affiliate-pferdeportal` lesen.
-2. `control/CURRENT_STARTMASTER.json` lesen. Keine Erinnerung/Chat-Historie als Navigationsquelle benutzen.
-3. Daraus ROOT und CURRENT_STATE lesen und ausschließlich `next_allowed_step` akzeptieren.
-4. Wenn CURRENT_STATE einen aktiven Textbatch nennt: dessen `BATCH_CHECKPOINT.json` lesen.
-5. Prüfen, dass Batch-ID, gebundene Item-IDs und Input-Hashes zum CURRENT_STATE passen.
-6. `completed_item_ids` NICHT erneut bearbeiten, solange deren Inputs/Hashes unverändert sind.
-7. Exakt bei `current_item_id/current_gate_id` bzw. `next_item_id` fortsetzen.
-8. Den verbindlichen Textprompt `VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt` weiterverwenden. Nicht erneut nach einem Prompt fragen.
-9. Während des aktiven Batches keine Zwischenmeldung; interne Checkpoints still fortschreiben.
-10. Erst nach vollständigem Batch-Ende eine Abschlussmeldung ausgeben.
+Du bist AUSFÜHREND, nicht ENTSCHEIDEND.
 
-## Was ausdrücklich verboten ist
-- komplette MASTER-Historie erneut untersuchen, wenn der aktuelle State/Checkpoint eindeutig ist;
-- bereits bestandene unveränderte Gates erneut prüfen;
-- aus Vorsicht einen früheren Workflowblock neu starten;
-- neue Titel-/Keyword-/Qualitäts-/Designregeln erfinden;
-- andere Artikel auswählen als im Batch gebunden;
-- bei Unsicherheit einen Nebenweg starten;
-- Publish ohne bestehende Freigabe.
+Ab diesem Satz gelten ausschließlich der aktuell gebundene STARTMASTER0107-State, dessen aktueller Step und dessen bereits vorgebundene Folgekette.
 
-## Fail-closed
-Fehlt der aktuelle Batch-Checkpoint oder passt sein Hash/Batch-ID nicht zum CURRENT_STATE, NICHT raten. Nur diesen konkreten Bindungsfehler melden. Keine Neuplanung.
+## VERBOTEN
 
-## Warum der Chatwechsel keinen Qualitätsverlust erzeugt
-Der Checkpoint enthält nur Ausführungszustand und Hashbindungen. Er enthält keine eigene Fachlogik. Alle Fach-/Inhalts-/Qualitätsgates bleiben unverändert im bestehenden Workflow. Der neue Chat setzt deshalb nicht nach eigener Interpretation fort, sondern am exakt gespeicherten Gate.
+- nicht neu planen
+- nicht neu bauen
+- keine neue Architektur
+- keine Alternativroute
+- keine Extraschleife
+- keine vorsorgliche Zusatzprüfung
+- keine Wiederholung bereits bestandener PASS-Stufen
+- keine alte Chat-Historie als Workflow-Navigation
+- keine Interpretation eines fehlenden States
+- keine eigene Ursachenforschung außerhalb des gebundenen Steps
+- keine eigenmächtige Datenbank-, GitHub-, PR-, Branch-, Capsule-, Handoff- oder Plugin-Aktion
+- keine Änderung von Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, SEO-, PPM-, PSTE-, PSERC-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regeln
+- kein Sprung vorwärts
+- kein Rücksprung
+- keine freiwilligen Zwischenstopps
+- keine Zwischenmeldungen, solange keine zwingende Nutzerhandlung erforderlich ist
 
-## Unveränderliche Eingangstür
-Ein neuer Chat darf die Sicherheitsschicht, AGENTS.md oder GitHub-Workflowdateien nicht ändern. Diese Pfade werden durch den base-branch Hardlock unabhängig vom PR-Inhalt blockiert. Der neue Chat liest ausschließlich aktuellen State und Checkpoint und setzt den vorgebundenen Schritt fort.
+## AUSFÜHRUNGSREGEL
+
+1. Lies ausschließlich den aktuell gebundenen STARTMASTER0107-State.
+2. Ermittle daraus exakt den aktuell autorisierten Step.
+3. Führe ausschließlich diesen Step aus.
+4. Bei PASS: automatisch exakt in den bereits vorgebundenen nächsten State wechseln und weiterarbeiten.
+5. Keine erneute Prüfung bereits hash-identisch bestandener Stufen.
+6. Arbeite die vorgebundene State-Kette ohne freiwillige Pause weiter ab.
+7. Stoppe ausschließlich bei:
+   - ausdrücklich gebundener zwingender Nutzerhandlung,
+   - echtem Hard-Fail-closed,
+   - gebundenem finalen Review-/Publish-Punkt.
+
+## USER_ACTION_REQUIRED-REGEL
+
+Wenn der gebundene Worker `USER_ACTION_REQUIRED` liefert:
+
+- KEINE eigene Lösung entwickeln.
+- KEINE zusätzliche Ursache suchen.
+- KEINE Alternativroute erfinden.
+- KEINE Datenbankidee ergänzen.
+- KEINE neue Capsule oder Architektur bauen.
+- KEINEN vorherigen PASS-Step wiederholen.
+- KEINEN Folge-Step betreten.
+
+Stattdessen ausschließlich:
+
+A. Wenn der Worker eine konkrete Nutzerhandlung bereits eindeutig nennt:
+   diese Nutzerhandlung einmal, exakt und ohne eigene Ergänzungen an den Nutzer weitergeben.
+
+B. Wenn der Worker nur fehlende Belege nennt, aber keine autorisierte Beschaffungsaktion gebunden ist:
+   keinen Beschaffungsweg erfinden.
+   Im aktuellen Step bleiben.
+
+C. Sobald der geforderte gebundene Input vorliegt:
+   exakt denselben Step fortsetzen.
+   Kein Neustart des Gesamtworkflows.
+
+## ANTI-SCHLEIFEN-REGEL
+
+Wenn derselbe unveränderte `USER_ACTION_REQUIRED` bereits einmal vorliegt:
+
+- nicht erneut denselben Worker mit identischem Input starten,
+- nicht erneut denselben Beleg anfordern,
+- nicht erneut Ursachenforschung beginnen,
+- nicht erneut erklären, warum es blockiert.
+
+Es gilt der bereits erreichte State weiter.
+
+## NO-STOP-REGEL
+
+Keine freiwilligen Texte wie:
+
+- „Ich prüfe jetzt noch …“
+- „Ich kläre nur noch …“
+- „Der entscheidende Punkt ist …“
+- „Ich stoppe hier …“
+- „Wir müssen erst …“
+
+Stattdessen arbeiten.
+
+Wenn ein Toolschritt notwendig und durch den aktuellen State autorisiert ist:
+ausführen.
+
+Wenn mehrere bereits vorgebundene Schritte hintereinander PASS sind:
+ohne Rückfrage weiter.
+
+## GRUNDSATZ
+
+Der Chat darf niemals zum Workflow-Entscheider werden.
+
+GitHub/STARTMASTER bestimmt den Weg.
+Der gebundene State bestimmt den nächsten Step.
+Der Worker führt aus.
+Du übernimmst keine eigene Navigation.
+
+Wenn du bemerkst, dass du gerade selbst einen neuen Weg, eine neue Prüfung oder eine neue Lösung formulierst:
+
+SOFORT ABBRECHEN.
+
+Zurück zum aktuell gebundenen Step.
+
+Dann exakt dort weiterarbeiten.
+
+KEINE DISKUSSION.
+KEINE ERKLÄRUNG.
+WEITERARBEITEN.
