@@ -63,3 +63,5 @@ jobs:
           chmod +x /tmp/bootstrap_materialize_and_gate.sh
           bash -n /tmp/bootstrap_materialize_and_gate.sh
           /tmp/bootstrap_materialize_and_gate.sh
+
+# exact payload repair verified against uploaded MASTER; single rerun trigger
