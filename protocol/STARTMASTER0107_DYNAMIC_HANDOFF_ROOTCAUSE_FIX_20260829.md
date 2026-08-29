@@ -25,5 +25,12 @@ Die sechs bereits vorgesehenen Rootfix-Beweis-/Workflowartefakte sind byte-ident
 - Continuity-Positiv/Negativtest: PASS.
 - geschützte Legacy-Eingangstür byte-identisch.
 
-## Freigaberegel
-Noch keine Freigabe vor GitHub-PR mit beiden Pflichtchecks `hardlock` und `hardlock-base` PASS. Danach Merge und Post-Merge-Verifikation. Der 40/40-Fachrootfix selbst bleibt bis zur Codex-Ausführung `LIVE_FAIL_NOT_FIXED`.
+## GitHub-Gate
+- PR #28: `hardlock` PASS.
+- PR #28: `hardlock-base` PASS.
+- Merge: `d29fd6a1866e7d93e74d28eb03cde56dab82cd8d`.
+- Post-Merge-Workflow Run `33248864456`: `hardlock` PASS.
+- geschützte Entrance-/Hardlock-Pfade blieben unverändert.
+
+## Freigabestatus
+Der Dynamic-Handoff-Ursachenfix ist vollständig PASS und auf `main` verifiziert. Der aktuelle gebundene Schritt bleibt unverändert `107001 ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED`. Der 40/40-Fachrootfix selbst bleibt bis zur gebundenen Codex-Cloud-Ausführung `LIVE_FAIL_NOT_FIXED`; es ist kein erneuter Infrastruktur-/Hardlock-Test vor diesem Codex-Lauf erforderlich.
