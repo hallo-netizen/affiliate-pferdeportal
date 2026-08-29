@@ -1,0 +1,13 @@
+STARTMASTER0107 / STEP 107001 – EXISTING SOURCE BINDING
+
+PURPOSE
+Make the already existing exact PSTE 0.56.25 Fach source and existing PASS baselines available in the repository worktree for the bound 107001 execution. This is not a new workflow, gate, state, architecture or domain-rule change.
+
+SOURCE
+PSTE installer SHA-256: 8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95
+Exact queue source SHA-256: b1db3df556ef0eafd5af4095a827bd5e91c52424b479d9470f69eb429f8285e8
+Exact queue source path in this workspace: 107001_INPUT/PSTE_0.56.25/includes/class-pste-breadth-research-queue.php
+PSERC baseline installer SHA-256: a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988
+
+EXECUTION
+Only the currently bound 107001 step may be executed. Do not repeat already completed infrastructure/security work and do not create a replacement route. Use the existing source plus existing baselines to implement the bound minimal Fach rootfix and only its required positive/negative/regression evidence. Do not change CURRENT_STATE, step bundles, gate/hardlock, content, quality, title, keyword, design, PPM, LanguageTool, duplicate/cannibalization or publish rules.
