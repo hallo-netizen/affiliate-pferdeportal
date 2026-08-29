@@ -4,15 +4,8 @@
   "sequence": 106001,
   "worker_profile": "CLOUD_MAINTENANCE_STEP",
   "authorized_inputs": [
-    {"ref":"32_LIVE_QA_ARTICLE_TEST_CHECKPOINT/LIVE_40_WAVE_RESULT_20260828.json","sha256":"bde7758dce108951093fef6f84c3fec2eebfd18e0946da10240fc15a655a7c56"},
-    {"ref":"32_LIVE_QA_ARTICLE_TEST_CHECKPOINT/NEXT_ARTICLE_TEST_AND_LATER_ROOTFIX_ORDER.json","sha256":"cd90b48451f74989ac856fd5056c659c64c6f6d6753d3aebb445910bbf17d0c9"},
-    {"ref":"30_PSTE_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX/STEP_C_BROAD_40_WAVE_FULL_WORKFLOW.json","sha256":"5f77cda70a749226e795c73a7b7d631d600404024181ed9720c55a86d8568657"},
-    {"ref":"30_PSTE_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX/test_breadth_queue_contract.json","sha256":"03f1d395713192b40d47df835aa1258a48379246e6f23312ad4ed3dea3e73765"},
-    {"ref":"30_PSTE_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX/SOURCE_FINAL_FULL_WORKFLOW.json","sha256":"b11927fe5b16c2aa1e0d1a190d9d49dae062652954c93787926d87a4460d93e8"},
-    {"ref":"00_CONTROL/BREADTH_WAVE_COMPILER_READY_QUOTA_V1.json","sha256":"50170db0aec82ddd3787aa500cd4b08ca0bd4629c6f083530cf0ca4812a3b890"},
-    {"ref":"02_CURRENT_INSTALLERS/portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip","sha256":"8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95"},
-    {"ref":"02_CURRENT_INSTALLERS/portal-seo-editorial-plan-compiler_0.28.14_GENERATION_RETENTION_ROOTFIX_VERIFIED.zip","sha256":"a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988"}
+    {"ref":"control/startmaster0106/rootfix_input/ROOTFIX_40_40_EVIDENCE_SOURCE_V1.txt","sha256":"d87db13e4cf4820449c4795840991e05e365665f409d37ab43dba41b936915b3"}
   ],
-  "instruction": "Arbeite ausschließlich am gebundenen Schritt ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED. Keine Rücksprünge, Seitensprünge oder Wiederholung unveränderter PASS-Stufen. Keine Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, PPM-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regel verändern. Konkreten Rootfix positiv/negativ und gegen den unveränderten Gesamtworkflow prüfen. Keine Entscheidung über den nächsten Workflow-Schritt.",
+  "instruction": "Arbeite ausschließlich am gebundenen Schritt ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED. Nutze nur die materialisierte Capsule. Ermittele die technische Ursache aus dem hashgebundenen Evidence-/Source-Paket und liefere ausschließlich einen minimalen Rootfix-Vorschlag plus Positiv-/Negativtests und Regressionserwartung gegen den unveränderten Gesamtworkflow. Keine Rücksprünge, Seitensprünge oder Wiederholung unveränderter PASS-Stufen. Keine Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, PPM-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regel verändern. Keine Entscheidung über den nächsten Workflow-Schritt.",
   "limits": {"max_wall_seconds":1800,"max_output_bytes":5242880,"reasoning_effort":"high","parallel_workers":1}
 }
