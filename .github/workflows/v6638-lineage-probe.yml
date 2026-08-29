@@ -1,0 +1,30 @@
+name: V6638 Exact Lineage Probe
+
+on:
+  push:
+    branches:
+      - v6638-exact-artifact-staging-20260829
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact V6.61.11 source package and staged lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v6611pkg && mkdir -p /tmp/v6611pkg
+          unzip -q CODEX_QUELLTEXT_V6611_LIVE_FAIL_EQUAL_CARDS_20260827.zip -d /tmp/v6611pkg
+          echo '=== TOP ==='
+          find /tmp/v6611pkg -maxdepth 3 -type f -printf '%P\n' | sort | head -300
+          echo '=== PLUGIN ROOT CANDIDATES ==='
+          find /tmp/v6611pkg -type f -name 'pferdeportal-affiliate-router.php' -printf '%h\n' | sort -u
+          echo '=== ZIP CANDIDATES ==='
+          find /tmp/v6611pkg -type f -name '*.zip' -printf '%P\n' | sort
+          echo '=== PATCH CHUNKS ==='
+          ls -l CI_V6638/v6611_to_v6634_patch_b64/
+          cat CI_V6638/v6611_to_v6634_patch_b64/chunk* | tr -d '\r\n\t ' | base64 -d > /tmp/v6611_to_v6634.patch
+          echo "patch_sha=$(sha256sum /tmp/v6611_to_v6634.patch | cut -d' ' -f1)"
+          head -40 /tmp/v6611_to_v6634.patch
