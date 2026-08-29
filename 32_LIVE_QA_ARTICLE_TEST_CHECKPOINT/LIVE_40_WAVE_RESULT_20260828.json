@@ -1,0 +1,18 @@
+{
+  "contract": "PSTE_LIVE_PRODUCTION_WAVE_OBSERVATION_V1",
+  "observed_at_local": "2026-08-28T18:29:00+02:00",
+  "source": "USER_SCREENSHOT_LIVE_WORDPRESS",
+  "installed_pste_version": "0.56.25",
+  "configured_ui": {
+    "target_new_unique_pste_pass_topics": 40,
+    "max_topic_families": 40
+  },
+  "observed_result": {
+    "new_unique_pass_topics": 2,
+    "processed_topic_families": 20,
+    "completion": "MAX_FAMILIES_REACHED"
+  },
+  "status": "LIVE_FAIL_NOT_FIXED",
+  "interpretation": "Live execution did not honor the verified 40/40 expectation. Root cause remains OPEN. Do not mask by repeated runs before the agreed article-production test.",
+  "plugin_change_now": false
+}
