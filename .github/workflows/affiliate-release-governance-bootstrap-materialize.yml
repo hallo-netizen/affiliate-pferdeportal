@@ -62,4 +62,4 @@ jobs:
           PY
           chmod +x /tmp/bootstrap_materialize_and_gate.sh
           bash -n /tmp/bootstrap_materialize_and_gate.sh
-          /tmp/bootstrap_materialize_and_gate.sh
+          bash -x /tmp/bootstrap_materialize_and_gate.sh
