@@ -1,0 +1,20 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V1",
+  "step_id": "VERIFY_CODEX_CLOUD_ENTRANCE_GATE_SELFTEST_NO_API",
+  "sequence": 105000,
+  "worker_profile": "CODEX_CLOUD_GATE_SELFTEST",
+  "authorized_inputs": [],
+  "instruction": "Führe ausschließlich den technischen Cloud-Gate-Selbsttest aus. Keine Projektarbeit, keine Fachprüfung, keine Navigation, keine State- oder Workflowänderung. Gib nach erfolgreichem Test ausschließlich den verlangten PASS-Receipt bzw. die PASS-Kennung zurück.",
+  "limits": {
+    "max_wall_seconds": 300,
+    "max_output_bytes": 262144,
+    "reasoning_effort": "low",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+    "sequence": 105001,
+    "bundle_ref": "control/startmaster0105/STEP_105001_ROOTFIX_LIVE_40_40.json",
+    "bundle_sha256": "8b1ca370d8499ace7489f7c311c1109dadc017344acfbde5bb3ca97797d908d3"
+  }
+}
