@@ -1,0 +1,68 @@
+{
+  "contract": "PFERDE_ATELIER_FULL_WORKFLOW_REGRESSION_BASELINE_V1",
+  "startmaster": "STARTMASTER0107",
+  "master_release": "MASTER_PFERDE_ATELIER_STARTMASTER0107_HARDLOCK_BASE_ACTIVE_ROOTFIX_READY_VERIFIED_20260829.zip",
+  "master_sha256": "85fd25f3a3bc4d02f628f0cae34b8dcb61ca6b33e6133e1e571554f5d7998246",
+  "github_base_commit": "928b5d3be41fcaf956656b2a66b63c44ec59430f",
+  "ruleset_id": 21788951,
+  "required_status_checks": [
+    "hardlock",
+    "hardlock-base"
+  ],
+  "immutable_or_bound_artifacts": [
+    {
+      "role": "PSTE_INSTALLER",
+      "sha256": "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95"
+    },
+    {
+      "role": "PSERC_INSTALLER",
+      "sha256": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988"
+    },
+    {
+      "role": "LIVE_40_WAVE_RESULT",
+      "sha256": "bde7758dce108951093fef6f84c3fec2eebfd18e0946da10240fc15a655a7c56"
+    },
+    {
+      "role": "STEP_C_BROAD_40_WAVE_FULL_WORKFLOW",
+      "sha256": "5f77cda70a749226e795c73a7b7d631d600404024181ed9720c55a86d8568657"
+    },
+    {
+      "role": "BREADTH_QUEUE_CONTRACT_TEST",
+      "sha256": "03f1d395713192b40d47df835aa1258a48379246e6f23312ad4ed3dea3e73765"
+    },
+    {
+      "role": "SOURCE_FINAL_FULL_WORKFLOW",
+      "sha256": "b11927fe5b16c2aa1e0d1a190d9d49dae062652954c93787926d87a4460d93e8"
+    },
+    {
+      "role": "BREADTH_QUOTA_CONTRACT",
+      "sha256": "50170db0aec82ddd3787aa500cd4b08ca0bd4629c6f083530cf0ca4812a3b890"
+    },
+    {
+      "role": "NO_STOP_CONTINUITY",
+      "sha256": "ab67384b724654170a2a7ab25928377147016ea0ba592929c88b26c1762391f0"
+    },
+    {
+      "role": "ROOTFIX_STARTPROMPT_HANDOFF",
+      "sha256": "dcd985734f312e83771b47511fa97c161e2f364c600b5d6012d0c6953da90d48"
+    }
+  ],
+  "must_remain_unchanged": [
+    "fachlogik_ausser_nachgewiesene_technische_ursache",
+    "titelregeln",
+    "keywordregeln",
+    "textqualitaet",
+    "design",
+    "ppm",
+    "languagetool",
+    "dubletten_und_kannibalisierung",
+    "publish_logik",
+    "auto_publish_false",
+    "retained_backlog_before_provider",
+    "provider_calls_in_readiness_zero",
+    "defaults_40_40",
+    "fixed_family_count_behavior"
+  ],
+  "pass_reuse_policy": "UNCHANGED_HASHBOUND_PASS_STAGES_ARE_REUSED_NOT_RERUN",
+  "per_step_delta_rule": "EACH_CHANGED_STEP_REQUIRES_POSITIVE_NEGATIVE_AND_FULL_WORKFLOW_REGRESSION_EVIDENCE"
+}
