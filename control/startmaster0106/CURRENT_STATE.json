@@ -1,0 +1,55 @@
+{
+  "contract": "PFERDE_ATELIER_CONTROL_STATE_V3",
+  "startmaster": "STARTMASTER0106",
+  "status": "HARDLOCK_VERIFIED_CLOUD_GATE_PASS_ROOTFIX_NEXT",
+  "previous_binding": "STARTMASTER0105",
+  "workflow_change_scope": "OUTER_ROUTING_CONTINUITY_SPEED_CONTROL_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
+  "content_or_design_contract_changed": false,
+  "completed_checkpoints": [
+    "SIX_ARTICLE_TEST_PUBLISHED",
+    "CODEX_CLOUD_GATE_VERIFY_PASS",
+    "GITHUB_MAIN_RULESET_ACTIVE",
+    "GITHUB_MAIN_DIRECT_WRITE_NEGATIVE_BLOCKED_409",
+    "PRODUCTION_CONTINUITY_NO_STOP_GUARD_BOUND"
+  ],
+  "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "queued_after_current_step": "SAFE_SANDBOX_AUTO_REENTRY_THEN_RETAINED_BACKLOG_THEN_PROVIDER_THEN_NEW_ARTICLE_BATCH",
+  "publish_allowed": false,
+  "execution_gate": {
+    "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V1",
+    "enforced": true,
+    "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+    "sequence": 106001,
+    "bundle_ref": "control/startmaster0106/STEP_106001_ROOTFIX_LIVE_40_40.json",
+    "bundle_sha256": "72f1c010f8eca2888d76117ba6226db93bc69f76c5d06a2b0d6773fa07d60712",
+    "state_write_authority": "ENTRANCE_GATE_ONLY",
+    "unknown_step_policy": "DENY",
+    "free_chat_direct_execution_valid": false,
+    "domain_logic_authority": "NONE",
+    "content_quality_design_authority": "NONE",
+    "worker_context_policy": "CAPSULE_ONLY",
+    "repeat_or_backtrack_policy": "DENY_UNLESS_NEW_BOUND_STATE",
+    "api_dependency": "NONE",
+    "hard_worker_target": "CODEX_CLOUD",
+    "hard_worker_runtime_verified": true
+  },
+  "text_production_contracts": {
+    "prompt_ref": "control/startmaster0106/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0106.txt",
+    "continuity_ref": "control/startmaster0106/TEXTPRODUKTION_NO_STOP_CONTINUITY_HARDLOCK_V1.json",
+    "handoff_ref": "control/startmaster0106/NOTFALL_UEBERGABE_NEUER_CHAT_TEXTERSTELLUNG_STARTMASTER0106.md",
+    "medium_target_ref": "control/startmaster0106/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0106.json"
+  },
+  "github_hardlock": {
+    "ruleset_id": 21788951,
+    "enforcement": "active",
+    "target": "main",
+    "required_status_check": "hardlock",
+    "strict_up_to_date": true,
+    "pull_request_required": true,
+    "deletion_blocked": true,
+    "force_push_blocked": true,
+    "bypass_actors": [],
+    "current_user_can_bypass": "never",
+    "direct_main_write_test": "BLOCKED_409"
+  }
+}
