@@ -1,0 +1,3 @@
+START.
+
+Folge zwingend der repositoryweiten AGENTS.md. Führe zuerst exakt `python3 control/cloud-entry-gate/cloud_entry.py start` aus und danach ausschließlich den dadurch gebundenen aktuellen Step. Keine eigene Workflow-Navigation, keine Rücksprünge, Seitensprünge oder Wiederholungen bereits gebundener PASS-Stufen. Vor Abschluss `python3 control/cloud-entry-gate/cloud_entry.py verify` ausführen.
