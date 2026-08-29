@@ -1,0 +1,41 @@
+{
+  "contract": "PFERDE_ATELIER_REASONING_ECONOMY_TARGET_V1",
+  "startmaster": "STARTMASTER0107",
+  "goal": "MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE",
+  "default_reasoning": "medium",
+  "applies_to": [
+    "text_generation",
+    "routine_bound_transformations",
+    "deterministic_workflow_navigation",
+    "routine_metadata_work"
+  ],
+  "escalate_above_medium_only_if": [
+    "existing_bound_step_explicitly_requires_higher_reasoning",
+    "rootcause_or_semantic_case_cannot_be_safely_completed_at_medium_on_same_unchanged_input",
+    "existing workflow explicitly marks step high-risk"
+  ],
+  "never_trade_for_medium": [
+    "research_completeness",
+    "fact_binding",
+    "title_keyword_rules",
+    "duplicate_cannibalization",
+    "LanguageTool",
+    "PPM",
+    "PSERC",
+    "PSTE",
+    "design",
+    "publish_safety",
+    "package_preflight"
+  ],
+  "downgrade_for_cost_or_speed_without_gate_parity": "FORBIDDEN",
+  "measurement": [
+    "articles_per_batch",
+    "wall_clock_per_article",
+    "repeated_gate_count",
+    "backtrack_count",
+    "quality_gate_pass_rate"
+  ],
+  "success": "MEDIUM_USED_WHERE_POSSIBLE_AND_OUTPUT_PASSES_IDENTICAL_EXISTING_GATES_WITH_ZERO_RULE_CHANGES",
+  "hard_execution_principle": "MEDIUM_IS_EXECUTION_DEFAULT_ONLY; ALL EXISTING DOMAIN_GATES_UNCHANGED",
+  "immutable_entrance_layer": "GITHUB_PULL_REQUEST_TARGET_BASE_HARDLOCK"
+}
