@@ -162,7 +162,10 @@ final class PSTE_Breadth_Research_Queue {
     private static function completeOrExtend(array $queue): array {
         if((string)($queue['mode']??'FIXED_FAMILY_COUNT')!=='TARGET_USABLE_CANDIDATES')return self::complete($queue,'FIXED_FAMILY_COUNT_COMPLETE');
         if(self::targetReached($queue))return self::complete($queue,'TARGET_REACHED');
-        if((int)($queue['item_count']??0)>=(int)($queue['max_items']??self::DEFAULT_MAX_ITEMS))return self::complete($queue,'MAX_FAMILIES_REACHED');
+        // Older/live queues can contain more than one row for the same category. The
+        // configured ceiling is a family ceiling, not a queue-row ceiling: counting
+        // rows here can therefore stop a 40-family run after fewer than 40 families.
+        if(self::queuedFamilyCount($queue)>=(int)($queue['max_items']??self::DEFAULT_MAX_ITEMS))return self::complete($queue,'MAX_FAMILIES_REACHED');
 
         $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
         if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')return self::pause($queue,'PSTE_SITE_BASELINE_REQUIRED');
@@ -176,6 +179,17 @@ final class PSTE_Breadth_Research_Queue {
         if(!$next)return self::complete($queue,'NO_OPEN_FAMILIES');
         $queue['items'][]=self::queueItem((array)$next[0]);$queue['item_count']=count($queue['items']);$queue['updated_at_utc']=gmdate('c');self::save($queue);
         return self::summary($queue,null);
+    }
+
+    /** Count distinct queued topic families; queue rows are not quota authority. */
+    private static function queuedFamilyCount(array $queue): int {
+        $families=[];
+        foreach((array)($queue['items']??[]) as $item){
+            if(!is_array($item))continue;
+            $categoryId=(int)($item['category_id']??0);
+            if($categoryId>0)$families[$categoryId]=true;
+        }
+        return count($families);
     }
 
     public static function requestCancel(string $queueUuid): array {
@@ -312,7 +326,9 @@ final class PSTE_Breadth_Research_Queue {
     private static function assertQueue(array $q): void {
         if(($q['contract']??'')!==self::CONTRACT||!in_array((string)($q['version']??''),self::COMPATIBLE_VERSIONS,true))throw new RuntimeException('PSTE_BREADTH_QUEUE_CONTRACT_INVALID');
         $decl=(string)($q['sha256']??'');$copy=$q;unset($copy['sha256']);if(!preg_match('/^[a-f0-9]{64}$/',$decl)||!hash_equals(hash('sha256',self::canonicalJson($copy)),$decl))throw new RuntimeException('PSTE_BREADTH_QUEUE_HASH_MISMATCH');
-        $itemCount=(int)($q['item_count']??0);$allowZero=in_array((string)($q['version']??''),['1.4.0','1.5.0'],true)&&(string)($q['mode']??'')==='TARGET_USABLE_CANDIDATES';if($itemCount<($allowZero?0:1)||$itemCount>self::MAX_ITEMS)throw new RuntimeException('PSTE_BREADTH_QUEUE_SIZE_INVALID');
+        $itemCount=(int)($q['item_count']??0);$targetMode=(string)($q['mode']??'')==='TARGET_USABLE_CANDIDATES';$allowZero=in_array((string)($q['version']??''),['1.4.0','1.5.0'],true)&&$targetMode;
+        $overFamilyLimit=$targetMode?self::queuedFamilyCount($q)>(int)($q['max_items']??self::DEFAULT_MAX_ITEMS):$itemCount>self::MAX_ITEMS;
+        if($itemCount<($allowZero?0:1)||$overFamilyLimit)throw new RuntimeException('PSTE_BREADTH_QUEUE_SIZE_INVALID');
         if(!in_array((string)($q['status']??''),['RUNNING','PAUSED_ERROR','OUTCOME_UNKNOWN','COMPLETE','CANCELLED'],true))throw new RuntimeException('PSTE_BREADTH_QUEUE_STATUS_INVALID');
         if(in_array((string)($q['version']??''),['1.3.0','1.4.0','1.5.0'],true)&&(string)($q['mode']??'')==='TARGET_USABLE_CANDIDATES'){
             if((int)($q['target_usable']??0)<1||(int)($q['max_items']??0)<1||(int)$q['max_items']>self::MAX_ITEMS)throw new RuntimeException('PSTE_BREADTH_TARGET_CONFIG_INVALID');
