@@ -1,0 +1,20 @@
+{
+  "contract": "PFERDE_ATELIER_TEXT_PRODUCTION_NO_STOP_CONTINUITY_V1",
+  "startmaster": "STARTMASTER0106",
+  "scope": "OUTER_EXECUTION_CONTROL_ONLY",
+  "domain_blind": true,
+  "batch_state_fields": ["batch_id", "bound_item_ids", "completed_item_ids", "current_item_id", "current_gate_id", "next_item_id", "input_hashes", "receipt_hashes", "status"],
+  "final_receipt_allowed_only_if": "set(completed_item_ids)==set(bound_item_ids) AND status==BATCH_COMPLETE",
+  "intermediate_user_message_policy": "FORBIDDEN_DURING_ACTIVE_BATCH_EXCEPT_USER_ACTION_REQUIRED_OR_UNRECOVERABLE_HARD_FAIL",
+  "checkpoint_policy": "SAVE_AFTER_EACH_COMPLETED_ITEM_AND_BEFORE_CONTEXT_OR_CHAT_BOUNDARY_WITHOUT_USER_MESSAGE",
+  "resume_policy": "READ_CURRENT_STARTMASTER_THEN_BATCH_CHECKPOINT_THEN_CONTINUE_FIRST_UNFINISHED_ITEM; NO_REPLAY_OF_UNCHANGED_COMPLETED_ITEMS",
+  "backtrack_policy": "DENY_UNLESS_CURRENT_GATE_EXPLICITLY_RETURNS_REWORK_TO_BOUND_PREDECESSOR",
+  "sidejump_policy": "DENY",
+  "unknown_step_policy": "DENY",
+  "quality_authority": "NONE",
+  "content_authority": "NONE",
+  "design_authority": "NONE",
+  "title_keyword_authority": "NONE",
+  "workflow_rule_change_authority": "NONE",
+  "publish_authority": "NONE"
+}
