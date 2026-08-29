@@ -1,0 +1,19 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
+  "sequence": 107002,
+  "worker_profile": "CLOUD_BOUND_SANDBOX_REENTRY",
+  "authorized_inputs": [],
+  "instruction": "Führe ausschließlich den bereits vorgesehenen sicheren Sandbox-AUTO_REENTRY nach PASS des 40/40-Rootfixes aus. Keine eigenen Workflowentscheidungen, keine Fachregeländerung, keine Wiederholung unveränderter PASS-Stufen.",
+  "limits": {
+    "reasoning_effort": "medium",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY",
+    "sequence": 107003,
+    "bundle_ref": "control/startmaster0107/STEP_107003_RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY.json",
+    "bundle_sha256": "6d018382dbad7758f4a1849273a9a72b67038f2dc1cc17f708b30bf8f71dd8ca"
+  }
+}
