@@ -1,0 +1,118 @@
+{
+  "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V3",
+  "generation": 3,
+  "mode": "ENFORCED",
+  "workstream": "AFFILIATE_ZENTRALE",
+  "single_source_artifact": "release/affiliate-zentrale/current/CURRENT_WORKING_SOURCE.b64/",
+  "released_baseline": {
+    "version": "6.62.0",
+    "immutable": true,
+    "installer_sha256": "1b154321f9731787243bb4068a7ad1df73f16837005e655e5b165a09b47ba200",
+    "master_sha256": "f0621743380cf180c2ebb35852f1c5c7e6472a06f4c788bd21827442188b11d8",
+    "source_manifest_ref": "release/affiliate-zentrale/archive/BASELINE_V6620_SOURCE_SHA256.txt",
+    "source_manifest_sha256": "3f007fe58d08cfbd6769deedc7d8e3d86616ac7b451369d7dfcb752cb8640ed3",
+    "source_file_count": 19,
+    "source_of_truth": "ARCHIVED_VERIFIED_ARTIFACT_BYTES_BASE64_ENCODED",
+    "artifact_chunks_ref": "release/affiliate-zentrale/archive/artifacts/v6620.b64/",
+    "artifact_encoding": "BASE64_CHUNKS_V1"
+  },
+  "negative_baseline": {
+    "version": "6.63.4",
+    "immutable": true,
+    "purpose": "EXACT_OLD_FAILURE_REPRODUCTION",
+    "sha256": "f2e3689714d70fffb08c7e953c899d4a84f78ca06d28c6d4b989f2ca27d1fe1f",
+    "source_manifest_ref": "release/affiliate-zentrale/archive/NEGATIVE_V6634_SOURCE_SHA256.txt",
+    "source_manifest_sha256": "97e5878ef2bffd3433add1159543d161ba8d2820f77756a54b0eeb99986629ec",
+    "source_file_count": 20,
+    "artifact_chunks_ref": "release/affiliate-zentrale/archive/artifacts/v6634.b64/",
+    "artifact_encoding": "BASE64_CHUNKS_V1"
+  },
+  "active_candidate": {
+    "version": "6.63.8",
+    "status": "WORKING_UNRELEASED",
+    "release_allowed": false,
+    "working_source_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
+    "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+    "current_source_manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1",
+    "source_file_count": 21,
+    "final_artifact_ref": null,
+    "final_artifact_sha256": null,
+    "working_source_chunks_ref": "release/affiliate-zentrale/current/CURRENT_WORKING_SOURCE.b64/",
+    "working_source_encoding": "BASE64_CHUNKS_V1",
+    "starting_snapshot_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
+    "starting_snapshot_manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1"
+  },
+  "branch_policy": {
+    "active_work_branch": "affiliate-release-current",
+    "side_branch_policy": "DENY_FOR_RELEASE_SCOPED_CHANGES",
+    "version_branch_policy": "DENY",
+    "bootstrap": {
+      "branch": "affiliate-release-governance-bootstrap-20260829",
+      "base_sha": "995fdb9557cc31aee2abfa19164b20217439a86a",
+      "one_time_only": true
+    }
+  },
+  "scope_policy": {
+    "release_scoped_prefixes": [
+      "release/affiliate-zentrale/",
+      "affiliate-portal-router/",
+      "CI_V663",
+      "STAGING_V663"
+    ],
+    "allowed_active_branch_prefixes": [
+      "release/affiliate-zentrale/current/",
+      "release/affiliate-zentrale/evidence/",
+      "release/affiliate-zentrale/artifacts/final/",
+      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+      "control/release-governance/CURRENT_RELEASE.json",
+      "protocol/AFFILIATE_RELEASE_"
+    ],
+    "forbidden_prefixes": [
+      ".github/workflows/",
+      "control/cloud-entry-gate/",
+      "control/deterministic-entrance-gate/",
+      "control/production-continuity/",
+      "control/startmaster",
+      "release/affiliate-zentrale/archive/",
+      "release/affiliate-zentrale/tests/",
+      "release/affiliate-zentrale/AGENTS.md",
+      "control/release-governance/release_guard.py",
+      "control/release-governance/test_release_guard.py"
+    ],
+    "historical_source_policy": "READ_ONLY_NOT_RELEASE_AUTHORITY",
+    "reconstruction_policy": "DENY",
+    "new_parallel_ci_staging_policy": "DENY"
+  },
+  "required_release_gates": {
+    "old_state_reproduction_negative": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "same_state_rootfix_positive": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "counterstates_fail_closed": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "complete_selection_materialization_public_gate": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "relevant_historical_regressions": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "real_wordpress_mariadb_persistence_same_uuid": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "recovery_retry_failure_paths": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "mutation_sabotage": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "fresh_unpack_exact_installer": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "source_zip_byte_identity": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null},
+    "final_sha256": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null}
+  },
+  "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
+  "no_guessing": true,
+  "no_reconstruction": true,
+  "no_side_refactor": true,
+  "no_release_zip_regeneration_before_final_gate": true,
+  "immutable_test_refs": ["release/affiliate-zentrale/tests/real_db_gate_v6638.php"],
+  "immutable_governance_refs": [
+    "release/affiliate-zentrale/AGENTS.md",
+    "control/release-governance/release_guard.py",
+    "control/release-governance/test_release_guard.py"
+  ],
+  "definition_of_authority": "ONLY_BASE64_CHUNKED_CURRENT_WORKING_SOURCE_AND_ITS_HASHED_MANIFEST_ARE_WORKING_SOURCE; CHUNKS_DECODE_DIRECTLY_TO_EXACT_ZIP_BYTES; NO_PATCH_OR_HISTORY_RECONSTRUCTION; ARCHIVED_BASELINES_IMMUTABLE",
+  "immutable_snapshot_binding": {
+    "version": "6.63.8",
+    "sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
+    "manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1",
+    "immutable": true,
+    "note": "STARTING_BYTES_EQUAL_INITIAL_CURRENT_SOURCE; historical snapshot is hash-bound, current bytes evolve only on active branch with matching manifest/policy."
+  }
+}
