@@ -34,6 +34,7 @@ jobs:
 
           test "$(git branch --show-current)" = 'affiliate-release-governance-bootstrap-20260829'
           printf '%s  %s\n' "$MANIFEST_SHA" "$MANIFEST" | sha256sum -c -
+          test "$(git hash-object "$PATCH_PARTS/part00")" = '6be15d04c250ad5bc2eeed2c646a4587bffb98ac'
 
           git fetch --no-tags origin "$BASE_COMMIT"
           : > /tmp/v6636.b64
@@ -63,11 +64,7 @@ jobs:
           right="$(printf '%s\n' "$first" | awk '{print $4}')"
           left="${left#a/}"
           right="${right#b/}"
-          if [ "${left%%/*}" = "${right%%/*}" ]; then
-            strip=1
-          else
-            strip=2
-          fi
+          if [ "${left%%/*}" = "${right%%/*}" ]; then strip=1; else strip=2; fi
 
           cd /tmp/v6636-work
           git init -q
@@ -86,19 +83,15 @@ jobs:
           expected = {}
           for line in manifest.read_text().splitlines():
               line=line.strip()
-              if not line:
-                  continue
+              if not line: continue
               sha, rel = line.split(None, 1)
               expected[rel.strip()] = sha
           actual = sorted(str(p.relative_to(root)) for p in (root/'affiliate-portal-router').rglob('*') if p.is_file())
-          if actual != sorted(expected):
-              raise SystemExit(f'EXACT_FILESET_MISMATCH expected={len(expected)} actual={len(actual)}')
+          if actual != sorted(expected): raise SystemExit(f'EXACT_FILESET_MISMATCH expected={len(expected)} actual={len(actual)}')
           for rel, want in expected.items():
               got = hashlib.sha256((root/rel).read_bytes()).hexdigest()
-              if got != want:
-                  raise SystemExit(f'HASH_MISMATCH {rel} {got} != {want}')
-          if len(expected) != 21:
-              raise SystemExit(f'MANIFEST_COUNT_MISMATCH {len(expected)}')
+              if got != want: raise SystemExit(f'HASH_MISMATCH {rel} {got} != {want}')
+          if len(expected) != 21: raise SystemExit(f'MANIFEST_COUNT_MISMATCH {len(expected)}')
           print('DIRECT_SOURCE_21_OF_21_HASH_PASS')
           PY
 
@@ -116,3 +109,5 @@ jobs:
             git commit -m 'bootstrap: materialize exact V6638 canonical 21-file source'
             git push origin HEAD:affiliate-release-governance-bootstrap-20260829
           fi
+
+# trigger: exact MASTER-bound source materialization 2026-08-29T19:46+02:00
