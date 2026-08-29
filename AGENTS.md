@@ -32,3 +32,5 @@ Die Eingangstür und Continuity-Schicht sind rein technisch. Fach-, Inhalts-, Qu
 
 ## Definition of Done
 Vor Abschluss jeder Codex-Aufgabe muss `python3 control/cloud-entry-gate/cloud_entry.py verify` PASS melden. Ein Ergebnis ohne diesen PASS ist nicht workflowgültig.
+
+<!-- NEGATIVE SELFTEST ONLY: immutable path mutation must be blocked; never merge -->
