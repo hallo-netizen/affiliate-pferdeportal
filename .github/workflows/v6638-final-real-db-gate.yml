@@ -1,0 +1,176 @@
+name: V6638 Final Real WordPress MariaDB Gate
+
+on:
+  push:
+    branches:
+      - v6638-workflow-root-cleanup-speed-ui-20260829
+  workflow_dispatch:
+
+jobs:
+  real-db-final:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP 8.4 and DB client
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli, mbstring, curl, zip
+          coverage: none
+
+      - name: Install MariaDB client
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq mariadb-client
+
+      - name: Reconstruct exact V6.63.6 base and exact V6.63.8 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat CI_V6636/installer_b64/chunk* | base64 -d > /tmp/v6636.zip
+          echo 'f2d8d10fe59216b50bd481a486542727fc3d0d9f4cc86c8a30c602222c442f7e  /tmp/v6636.zip' | sha256sum -c -
+          rm -rf /tmp/build6638 && mkdir -p /tmp/build6638
+          unzip -q /tmp/v6636.zip -d /tmp/build6638
+          cat CI_V6638/patch_b64/chunk* | base64 -d > /tmp/v6638.patch
+          echo '26ff415717afe5b9739ddc3cd24e4c02cb3ee5db130bf9a3f9e8f83405dfc08a  /tmp/v6638.patch' | sha256sum -c -
+          (cd /tmp/build6638 && git apply --check /tmp/v6638.patch && git apply /tmp/v6638.patch)
+          cp CI_V6638/trait-ppar-housekeeping.php /tmp/build6638/affiliate-portal-router/includes/trait-ppar-housekeeping.php
+          cd /tmp/build6638/affiliate-portal-router
+          sha256sum -c "$GITHUB_WORKSPACE/CI_V6638/V6638_FINAL_PAYLOAD_SHA256.txt"
+          test "$(find . -type f | wc -l)" -eq 21
+          find . -name '*.php' -print0 | sort -z | xargs -0 -n1 php -l
+
+      - name: Build deterministic exact V6.63.8 installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
+          src=Path('/tmp/build6638/affiliate-portal-router')
+          out=Path('/tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip')
+          fixed=(2026,8,29,12,0,0)
+          with ZipFile(out,'w',compression=ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(x for x in src.rglob('*') if x.is_file()):
+                  zi=ZipInfo('affiliate-portal-router/'+p.relative_to(src).as_posix(),date_time=fixed)
+                  zi.compress_type=ZIP_DEFLATED; zi.create_system=3; zi.external_attr=(0o100644 & 0xFFFF)<<16; zi.flag_bits |= 0x800
+                  z.writestr(zi,p.read_bytes(),compress_type=ZIP_DEFLATED,compresslevel=9)
+          PY
+          echo 'ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2  /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip' | sha256sum -c -
+          unzip -t /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip
+          rm -rf /tmp/fresh-unpack && mkdir /tmp/fresh-unpack
+          unzip -q /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip -d /tmp/fresh-unpack
+          cd /tmp/fresh-unpack/affiliate-portal-router
+          sha256sum -c "$GITHUB_WORKSPACE/CI_V6638/V6638_FINAL_PAYLOAD_SHA256.txt"
+          echo EXACT_V6638_INSTALLER_FRESH_UNPACK_PASS
+
+      - name: Derive and verify exact V6.63.4 negative baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/build6634 && mkdir -p /tmp/build6634
+          unzip -q /tmp/v6636.zip -d /tmp/build6634
+          echo '57ef49d53033d7e36f9997e3c2d72e9990bf1466dd99a7a643df8d932788697f  CI_V6636/V6635_TO_V6636.patch' | sha256sum -c -
+          (cd /tmp/build6634 && git apply --check -R "$GITHUB_WORKSPACE/CI_V6636/V6635_TO_V6636.patch" && git apply -R "$GITHUB_WORKSPACE/CI_V6636/V6635_TO_V6636.patch")
+          : > /tmp/v6635.patch.b64
+          for f in CI_V6635/patchchunks/chunk_00.b64 CI_V6635/patchchunks/chunk_01.b64 CI_V6635/patchchunks/chunk_02.b64 CI_V6635/patchchunks/chunk_03.b64 CI_V6635/patchchunks/chunk_04.b64 CI_V6635/patchchunks/chunk_05_0.b64 CI_V6635/patchchunks/chunk_05_1.b64 CI_V6635/patchchunks/chunk_05_2.b64 CI_V6635/patchchunks/chunk_06_0.b64 CI_V6635/patchchunks/chunk_06_1.b64 CI_V6635/patchchunks/chunk_06_2.b64; do cat "$f" >> /tmp/v6635.patch.b64; done
+          base64 -d /tmp/v6635.patch.b64 > /tmp/v6635.patch
+          echo '8bae81f1715a5ac235b5a8bb8e9c085dff2d699ef41bd1921704879f15cd6c41  /tmp/v6635.patch' | sha256sum -c -
+          (cd /tmp/build6634 && git apply --check -R /tmp/v6635.patch && git apply -R /tmp/v6635.patch)
+          cd /tmp/build6634/affiliate-portal-router
+          sha256sum -c "$GITHUB_WORKSPACE/CI_V6638/V6634_PAYLOAD_SHA256.txt"
+          grep -F 'Version: 6.63.4' pferdeportal-affiliate-router.php
+          grep -F "6.63.4-live-observed-gap-proof-recovery-rootfix-20260828" pferdeportal-affiliate-router.php
+          cd /tmp/build6634
+          zip -qr /tmp/v6634-old.zip affiliate-portal-router
+          echo EXACT_V6634_NEGATIVE_BASELINE_PASS
+
+      - name: Install WP-CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          chmod +x /tmp/wp
+          /tmp/wp --info
+
+      - name: Fresh WordPress 7.0.1 and capture transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wp-old
+          /tmp/wp core download --path=/tmp/wp-old --version=7.0.1 --force
+          /tmp/wp config create --path=/tmp/wp-old --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-old --url=https://example.test --title=Gate --admin_user=admin --admin_password='GatePass-6638!' --admin_email=admin@example.test --skip-email
+          mkdir -p /tmp/wp-old/wp-content/mu-plugins
+          cat > /tmp/wp-old/wp-content/mu-plugins/v6638-gate-capture.php <<'PHP'
+          <?php
+          add_filter('pre_http_request',function($pre,$args,$url){
+              $body=is_array($args['body']??null)?$args['body']:array();
+              if (($body['action']??'')==='ppar_ebay_canonical_self_drive') {
+                  $calls=get_option('v6638_gate_http_calls',array()); if(!is_array($calls))$calls=array();
+                  $calls[]=array('url'=>$url,'body'=>$body); update_option('v6638_gate_http_calls',$calls,false);
+                  return array('headers'=>array(),'body'=>'','response'=>array('code'=>202,'message'=>'Accepted'),'cookies'=>array(),'filename'=>null);
+              }
+              return $pre;
+          },1,3);
+          PHP
+          mariadb -h127.0.0.1 -uroot -proot -Nse 'SELECT VERSION();'
+
+      - name: NEGATIVE V6.63.4 real MariaDB zero-tick stall
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp plugin install /tmp/v6634-old.zip --path=/tmp/wp-old --activate
+          GATE_MODE=negative_seed /tmp/wp eval-file "$GITHUB_WORKSPACE/CI_V6638/real_db_gate_v6638.php" --path=/tmp/wp-old
+          for n in 1 2 3; do GATE_MODE=negative_probe /tmp/wp eval-file "$GITHUB_WORKSPACE/CI_V6638/real_db_gate_v6638.php" --path=/tmp/wp-old; done
+
+      - name: POSITIVE same database same UUID upgrade with exact V6.63.8 ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp plugin install /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip --path=/tmp/wp-old --force
+          GATE_MODE=positive_upgrade /tmp/wp eval-file "$GITHUB_WORKSPACE/CI_V6638/real_db_gate_v6638.php" --path=/tmp/wp-old
+          echo REAL_UPGRADE_SAME_DB_SAME_UUID_PASS
+
+      - name: Fresh WordPress fresh MariaDB exact V6.63.8 installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          mariadb -h127.0.0.1 -uroot -proot -e 'CREATE DATABASE wordpress_fresh CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; GRANT ALL PRIVILEGES ON wordpress_fresh.* TO "wp"@"%"; FLUSH PRIVILEGES;'
+          mkdir -p /tmp/wp-fresh
+          /tmp/wp core download --path=/tmp/wp-fresh --version=7.0.1 --force
+          /tmp/wp config create --path=/tmp/wp-fresh --dbname=wordpress_fresh --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-fresh --url=https://fresh.example.test --title=FreshGate --admin_user=admin --admin_password='GatePass-6638!' --admin_email=admin@example.test --skip-email
+          mkdir -p /tmp/wp-fresh/wp-content/mu-plugins
+          cp /tmp/wp-old/wp-content/mu-plugins/v6638-gate-capture.php /tmp/wp-fresh/wp-content/mu-plugins/
+          /tmp/wp plugin install /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip --path=/tmp/wp-fresh --activate
+          GATE_MODE=fresh /tmp/wp eval-file "$GITHUB_WORKSPACE/CI_V6638/real_db_gate_v6638.php" --path=/tmp/wp-fresh
+          echo 'ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2  /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip' | sha256sum -c -
+          echo REAL_WORDPRESS_MARIADB_FINAL_GATE_V6638_PASS
+
+      - name: Upload exact tested installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-zentrale-v6.63.8-final-tested-installer
+          path: /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip
+          if-no-files-found: error
+          compression-level: 0
