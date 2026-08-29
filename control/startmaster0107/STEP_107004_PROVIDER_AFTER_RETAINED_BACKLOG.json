@@ -1,11 +1,25 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V4_DYNAMIC_HANDOFF_TEST_EVIDENCE",
   "step_id": "PROVIDER_AFTER_RETAINED_BACKLOG",
   "sequence": 107004,
   "worker_profile": "CLOUD_BOUND_PROVIDER_STEP",
   "authorized_inputs": [],
-  "instruction": "Führe ausschließlich den bereits vorgesehenen Provider-Schritt nach retained backlog aus. Keine Änderung an Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- oder Publish-Logik. Keine Rücksprünge oder Zusatzprüfungen.",
+  "required_runtime_input_roles": [
+    "NEXT_INPUT"
+  ],
+  "required_result_roles": [
+    "NEXT_INPUT",
+    "POSITIVE_TEST_EVIDENCE",
+    "NEGATIVE_TEST_EVIDENCE",
+    "FULL_WORKFLOW_REGRESSION_EVIDENCE"
+  ],
+  "handoff_result_roles": [
+    "NEXT_INPUT"
+  ],
+  "instruction": "Führe ausschließlich PROVIDER_AFTER_RETAINED_BACKLOG aus. Verwende nur das hashgebundene NEXT_INPUT. Keine Änderung an Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- oder Publish-Logik. Vor PASS sind harter Positivtest, harter Negativtest und Regression gegen den unveränderten Gesamtworkflow Pflicht. Erzeuge bei PASS das vollständige NEXT_INPUT für Batch-Vorbereitung und getrennte Testevidenzen.",
   "limits": {
+    "max_wall_seconds": 1800,
+    "max_output_bytes": 5242880,
     "reasoning_effort": "medium",
     "parallel_workers": 1
   },
@@ -14,6 +28,10 @@
     "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
     "sequence": 107005,
     "bundle_ref": "control/startmaster0107/STEP_107005_PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER.json",
-    "bundle_sha256": "e6fa9f4d351b94fbc516fdf68697b5169d779597b57a0b3e839bc13a4b1444ed"
+    "bundle_sha256": "45075e19103e34c3980eec2760f3aa44956f18b28cabcf4291821fa445c82811"
+  },
+  "regression_baseline": {
+    "ref": "control/startmaster0107/FULL_WORKFLOW_REGRESSION_BASELINE_V1.json",
+    "sha256": "2c216a6f4491aa2a5e8165d6fafc86faa9fa4696c08f7981f627d4aab5cf71cd"
   }
 }

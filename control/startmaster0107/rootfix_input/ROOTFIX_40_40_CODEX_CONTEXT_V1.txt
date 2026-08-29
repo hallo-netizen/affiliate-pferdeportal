@@ -1,0 +1,54 @@
+PFERDE ATELIER ROOTFIX 40/40 CODEX CONTEXT V1
+PSTE_INSTALLER_SHA256=8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95
+PSERC_INSTALLER_SHA256=a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988
+SOURCE=portal-seo-topic-engine/includes/class-pste-breadth-research-queue.php
+QUEUE_CONTRACT=PSTE_BREADTH_RESEARCH_QUEUE_V1
+QUEUE_VERSION=1.5.0
+
+LIVE_FAIL: target_new_unique_pste_pass_topics=40, max_topic_families=40, observed new_unique_pass_topics=2, processed_topic_families=20, completion=MAX_FAMILIES_REACHED. Do not mask by rerun.
+
+CURRENT START:
+MAX_ITEMS=40; LEGACY_MAX_ITEMS=4; DEFAULT_TARGET_USABLE=40; DEFAULT_MAX_ITEMS=40.
+startUntil(target,max,settings) clamps target to 1..200 and max to 1..40, then starts TARGET_USABLE_CANDIDATES with initialItems=1.
+TARGET queue stores baseline_usable_topic_keys=PSTE_Repository::usablePlanningTopicKeys(), usable_topic_keys, usable_candidate_count, local backlog state, item_count/current_index/completed_count.
+
+CURRENT CHILD COMPLETE PATH:
+After PSTE_Research_Job status COMPLETE, TARGET mode calls countNewUniqueUsableTopics(), replaces usable_topic_keys and usable_candidate_count, increments current_index/completed_count, then TARGET_REACHED if target reached, otherwise completeOrExtend when current_index>=item_count.
+Research_Job COMPLETE occurs only after FINALIZE has verified candidate count, persisted sandbox, run bounded SANDBOX_BATCH, then bounded CONTEXT_BATCH via PSTE_Runner::researchFinalizeContextBatch(), then completeResearchFinalizeJob().
+
+CURRENT STRICT COUNT:
+countNewUniqueUsableTopics(queue,runUuid='') builds a set from queue.baseline_usable_topic_keys, reads current=PSTE_Repository::usablePlanningTopicKeys(), returns all current keys not in baseline, sorted. runUuid is unused. added=max(0,count(out)-count(previous queue.usable_topic_keys)).
+PSTE_Repository::usablePlanningTopicKeys() SQL-projects only pool_key rows where planning_suitability='YES' AND context_state IN ('CURRENT','NOT_REQUIRED').
+
+CURRENT RETAINED BACKLOG:
+advanceLocalBacklog() calls PSTE_Repository::reanalyzeRetainedBacklogBatch(cursor,40,baseline,context_binding), requires provider_calls===0, updates local counters, recounts through countNewUniqueUsableTopics(), completes on TARGET_REACHED_FROM_RETAINED_BACKLOG, otherwise when backlog complete and item_count==0 opens exactly one family.
+reanalyzeRetainedBacklogBatch() is local-only, reruns normal metadata plus PSTE_Planning_Readiness_Gate, may fail-closed demote stale planning rows, promotes only normal/readiness PASS, context-syncs promoted rows, and returns provider_calls=0.
+
+CURRENT EXTENSION:
+completeOrExtend() returns FIXED_FAMILY_COUNT_COMPLETE outside target mode; returns TARGET_REACHED when target reached; returns MAX_FAMILIES_REACHED when item_count>=max_items; otherwise rebases baseline, removes already queued category_ids from openFamilies(), spreads one next family, appends one queue item and saves.
+openFamilies() uses PSTE_Category_Context::familyAnchors() + PSTE_Repository::categoryProgress() and returns only NOT_ANALYZED families. spread() distributes by root and processed count.
+
+SHARED READINESS HARDLOCK:
+PSTE_Planning_Readiness_Gate first applies pre-title duplicate ownership to SEO-source query, then PSTE_Cannibalization on stable pre-title surface. PASS only on cannibalization PASS. provider_calls=0; write_attempted=false; content_or_design_touched=false. apply() asserts target keyword/family/article type/category/canonical query/plan_slot/canonical_article_id/title binding snapshot does not drift.
+
+BINDING QUOTA CONTRACT:
+- target_true_usable_topics_default=40
+- max_families_default=40
+- count only strict planning_suitability YES after shared duplicate/cannibalization/readiness
+- retained backlog before provider
+- provider calls inside readiness gate=0
+- PSERC duplicate thresholds unchanged
+- article production batch policy unchanged
+- no title/keyword/content/design/PPM/LanguageTool/publish rule change
+
+ROOTFIX MUST NOT: raise max_families to hide the failure; count raw candidates; weaken readiness; synthesize success; repeat already-completed PASS work; change workflow/domain rules.
+
+REQUIRED TESTS BEFORE PASS:
+POSITIVE A: 40 new unique strict readiness-YES keys within <=40 families => TARGET_REACHED and exactly 40 unique keys.
+POSITIVE B: multiple suitable topics from one family are fully persisted/aggregated and each strict unique key counts once.
+NEGATIVE A: raw, duplicate, cannibalization-NO/BLOCKED, non-current-context and baseline-existing keys do not increment target.
+NEGATIVE B: 40 families exhausted with <40 strict new unique keys remains MAX_FAMILIES_REACHED fail-closed.
+NEGATIVE C: retained backlog is exhausted before provider; readiness itself performs zero provider calls.
+REGRESSION: FIXED_FAMILY_COUNT unchanged; defaults 40/40; PSERC thresholds unchanged; title/keyword/content/design/PPM/LanguageTool/publish unchanged; existing PSTE 0.56.25 + PSERC 0.28.14 full workflow remains PASS.
+
+OUTPUT: concrete minimal source patch for exact queue/repository path(s) required by the proven cause, executable positive/negative tests, regression result. Not an abstract proposal. No next-step choice or state/workflow change.
