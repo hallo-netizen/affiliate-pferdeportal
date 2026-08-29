@@ -46,11 +46,21 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat CI_V6636/installer_b64/chunk* | base64 -d > /tmp/v6636.zip
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,re
+          def decode_parts(paths,out):
+              text=''.join(Path(x).read_text(encoding='utf-8-sig') for x in paths)
+              text=''.join(text.split())
+              if not re.fullmatch(r'[A-Za-z0-9+/]*={0,2}',text):
+                  raise SystemExit('invalid base64 characters')
+              Path(out).write_bytes(base64.b64decode(text,validate=True))
+          decode_parts([str(x) for x in sorted(Path('CI_V6636/installer_b64').glob('chunk*'))],'/tmp/v6636.zip')
+          decode_parts([str(x) for x in sorted(Path('CI_V6638/patch_b64').glob('chunk*'))],'/tmp/v6638.patch')
+          PY
           echo 'f2d8d10fe59216b50bd481a486542727fc3d0d9f4cc86c8a30c602222c442f7e  /tmp/v6636.zip' | sha256sum -c -
           rm -rf /tmp/build6638 && mkdir -p /tmp/build6638
           unzip -q /tmp/v6636.zip -d /tmp/build6638
-          cat CI_V6638/patch_b64/chunk* | base64 -d > /tmp/v6638.patch
           echo '26ff415717afe5b9739ddc3cd24e4c02cb3ee5db130bf9a3f9e8f83405dfc08a  /tmp/v6638.patch' | sha256sum -c -
           (cd /tmp/build6638 && git apply --check /tmp/v6638.patch && git apply /tmp/v6638.patch)
           cp CI_V6638/trait-ppar-housekeeping.php /tmp/build6638/affiliate-portal-router/includes/trait-ppar-housekeeping.php
@@ -91,9 +101,16 @@ jobs:
           unzip -q /tmp/v6636.zip -d /tmp/build6634
           echo '57ef49d53033d7e36f9997e3c2d72e9990bf1466dd99a7a643df8d932788697f  CI_V6636/V6635_TO_V6636.patch' | sha256sum -c -
           (cd /tmp/build6634 && git apply --check -R "$GITHUB_WORKSPACE/CI_V6636/V6635_TO_V6636.patch" && git apply -R "$GITHUB_WORKSPACE/CI_V6636/V6635_TO_V6636.patch")
-          : > /tmp/v6635.patch.b64
-          for f in CI_V6635/patchchunks/chunk_00.b64 CI_V6635/patchchunks/chunk_01.b64 CI_V6635/patchchunks/chunk_02.b64 CI_V6635/patchchunks/chunk_03.b64 CI_V6635/patchchunks/chunk_04.b64 CI_V6635/patchchunks/chunk_05_0.b64 CI_V6635/patchchunks/chunk_05_1.b64 CI_V6635/patchchunks/chunk_05_2.b64 CI_V6635/patchchunks/chunk_06_0.b64 CI_V6635/patchchunks/chunk_06_1.b64 CI_V6635/patchchunks/chunk_06_2.b64; do cat "$f" >> /tmp/v6635.patch.b64; done
-          base64 -d /tmp/v6635.patch.b64 > /tmp/v6635.patch
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,re
+          names='''CI_V6635/patchchunks/chunk_00.b64 CI_V6635/patchchunks/chunk_01.b64 CI_V6635/patchchunks/chunk_02.b64 CI_V6635/patchchunks/chunk_03.b64 CI_V6635/patchchunks/chunk_04.b64 CI_V6635/patchchunks/chunk_05_0.b64 CI_V6635/patchchunks/chunk_05_1.b64 CI_V6635/patchchunks/chunk_05_2.b64 CI_V6635/patchchunks/chunk_06_0.b64 CI_V6635/patchchunks/chunk_06_1.b64 CI_V6635/patchchunks/chunk_06_2.b64'''.split()
+          text=''.join(Path(x).read_text(encoding='utf-8-sig') for x in names)
+          text=''.join(text.split())
+          if not re.fullmatch(r'[A-Za-z0-9+/]*={0,2}',text):
+              raise SystemExit('invalid V6635 base64 characters')
+          Path('/tmp/v6635.patch').write_bytes(base64.b64decode(text,validate=True))
+          PY
           echo '8bae81f1715a5ac235b5a8bb8e9c085dff2d699ef41bd1921704879f15cd6c41  /tmp/v6635.patch' | sha256sum -c -
           (cd /tmp/build6634 && git apply --check -R /tmp/v6635.patch && git apply -R /tmp/v6635.patch)
           cd /tmp/build6634/affiliate-portal-router
