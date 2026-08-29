@@ -1,0 +1,3 @@
+PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_BOOTSTRAP_20260829
+Base main: 995fdb9557cc31aee2abfa19164b20217439a86a
+Status: materialization in progress; not mergeable until full governance tree is present and hard gates pass.
