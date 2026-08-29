@@ -1,0 +1,82 @@
+PFERDE ATELIER – ROOTFIX 40/40 – HASHBOUND EVIDENCE/SOURCE EXCERPT V1
+
+LIVE OBSERVATION (PSTE 0.56.25):
+configured target_new_unique_pste_pass_topics=40; max_topic_families=40.
+observed new_unique_pass_topics=2; processed_topic_families=20; completion=MAX_FAMILIES_REACHED.
+Status: LIVE_FAIL_NOT_FIXED. Do not mask by repeated runs.
+
+BINDING QUOTA CONTRACT:
+target_true_usable_topics_default=40; max_families_default=40; quota counts only PLANNING_SUITABILITY_YES_AFTER_SHARED_DUPLICATE_CANNIBALIZATION_READINESS; retained backlog before provider; provider calls inside readiness gate=0; PSERC duplicate thresholds unchanged; article production batch policy unchanged.
+
+PSTE 0.56.25 SOURCE: includes/class-pste-breadth-research-queue.php
+Constants / start:
+private const MAX_ITEMS=40;
+private const LEGACY_MAX_ITEMS=4;
+private const DEFAULT_TARGET_USABLE=40;
+private const DEFAULT_MAX_ITEMS=40;
+public static function start(int $requestedCount,array $settings): array {
+    return self::startQueue('FIXED_FAMILY_COUNT',0,max(1,min(self::LEGACY_MAX_ITEMS,$requestedCount)),max(1,min(self::LEGACY_MAX_ITEMS,$requestedCount)),$settings);
+}
+public static function startUntil(int $targetUsable,int $maxItems,array $settings): array {
+    $targetUsable=max(1,min(200,$targetUsable>0?$targetUsable:self::DEFAULT_TARGET_USABLE));
+    $maxItems=max(1,min(self::MAX_ITEMS,$maxItems>0?$maxItems:self::DEFAULT_MAX_ITEMS));
+    return self::startQueue('TARGET_USABLE_CANDIDATES',$targetUsable,$maxItems,1,$settings);
+}
+
+Queue state creation excerpt:
+'contract'=>self::CONTRACT,'version'=>self::VERSION,'queue_uuid'=>$uuid,'status'=>'RUNNING',
+'mode'=>$mode,'requested_count'=>$mode==='FIXED_FAMILY_COUNT'?count($items):$targetUsable,
+'target_usable'=>$targetUsable,'max_items'=>$maxItems,'usable_candidate_count'=>0,'raw_usable_candidate_count'=>0,'usable_topic_keys'=>[],'baseline_usable_topic_keys'=>$baselineUsable,'completion_reason'=>'',
+'local_backlog_complete'=>$mode!=='TARGET_USABLE_CANDIDATES','local_backlog_cursor'=>0,'local_backlog_processed'=>0,'local_backlog_promoted'=>0,'local_backlog_provider_calls'=>0,'context_binding'=>$contextBinding,
+'item_count'=>count($items),'current_index'=>0,'completed_count'=>0,'items'=>$items,
+
+Advance excerpt:
+if((string)($queue['mode']??'')==='TARGET_USABLE_CANDIDATES'&&empty($queue['local_backlog_complete']))return self::advanceLocalBacklog($queue);
+$idx=(int)$queue['current_index'];
+if($idx>=(int)$queue['item_count'])return self::completeOrExtend($queue);
+...
+if($childStatus==='COMPLETE'){
+    ...
+    if((string)($queue['mode']??'FIXED_FAMILY_COUNT')==='TARGET_USABLE_CANDIDATES'){
+        $counted=self::countNewUniqueUsableTopics($queue,(string)($child['job_uuid']??$queue['items'][$idx]['child_job_uuid']??''));
+        $queue['usable_topic_keys']=$counted['keys'];$queue['usable_candidate_count']=count($counted['keys']);
+        $queue['items'][$idx]['usable_candidate_count']=(int)$counted['added'];$queue['items'][$idx]['count_status']=(string)$counted['status'];
+    }
+    $queue['current_index']=$idx+1;$queue['completed_count']=(int)$queue['completed_count']+1;
+    if(self::targetReached($queue))return self::complete($queue,'TARGET_REACHED');
+    if((int)$queue['current_index']>=(int)$queue['item_count'])return self::completeOrExtend($queue);
+}
+
+Target / completion excerpt:
+private static function targetReached(array $queue): bool {
+    return (string)($queue['mode']??'FIXED_FAMILY_COUNT')==='TARGET_USABLE_CANDIDATES'
+        && (int)($queue['target_usable']??0)>0
+        && (int)($queue['usable_candidate_count']??0)>=(int)$queue['target_usable'];
+}
+private static function completeOrExtend(array $queue): array {
+    if((string)($queue['mode']??'FIXED_FAMILY_COUNT')!=='TARGET_USABLE_CANDIDATES')return self::complete($queue,'FIXED_FAMILY_COUNT_COMPLETE');
+    if(self::targetReached($queue))return self::complete($queue,'TARGET_REACHED');
+    if((int)($queue['item_count']??0)>=(int)($queue['max_items']??self::DEFAULT_MAX_ITEMS))return self::complete($queue,'MAX_FAMILIES_REACHED');
+    $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
+    if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')return self::pause($queue,'PSTE_SITE_BASELINE_REQUIRED');
+    $rebase=PSTE_Snapshot::rebaseResearchBaselineIfSafe($baseline);
+    if(empty($rebase['ok']))return self::pause($queue,(string)($rebase['error_code']??'PSTE_SITE_BASELINE_STALE'));
+    $baseline=(array)$rebase['baseline'];
+    $already=[];foreach((array)($queue['items']??[]) as $item)$already[(int)($item['category_id']??0)]=true;
+    $open=array_values(array_filter(self::openFamilies($baseline),static fn(array $row): bool=>empty($already[(int)($row['category_id']??0)])));
+    if(!$open)return self::complete($queue,'NO_OPEN_FAMILIES');
+    $next=self::spread($open,1);
+    if(!$next)return self::complete($queue,'NO_OPEN_FAMILIES');
+    $queue['items'][]=self::queueItem((array)$next[0]);$queue['item_count']=count($queue['items']);$queue['updated_at_utc']=gmdate('c');self::save($queue);
+    return self::summary($queue,null);
+}
+
+EXISTING LOCAL CONTRACT TEST BEFORE LIVE FAIL:
+status=PASS; zero_open_family_local_backlog_start_positive=true; max_40_negative_guard=true; ui_and_backend_defaults_40_40=true; counts_only_strict_yes=true; retained_backlog_before_provider=true; provider_replay_added=false; article_production_batch_policy_changed=false.
+
+CURRENT INSTALLER HASHES (must remain baseline until a tested rootfix candidate is produced):
+PSTE 0.56.25 = 8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95
+PSERC 0.28.14 = a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988
+
+ROOTFIX SCOPE:
+Find and fix only the proven technical cause of the 40/40 live mismatch. Do not change domain/content/title/keyword/quality/design/PPM/LanguageTool/duplicate/cannibalization/publish rules. Preserve retained-backlog-before-provider order. Positive and negative tests plus full unchanged workflow regression required before release.
