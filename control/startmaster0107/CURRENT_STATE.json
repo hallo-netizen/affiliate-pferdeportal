@@ -17,7 +17,7 @@
     "IMMUTABLE_BASE_HARDLOCK_POST_BIND_POSITIVE_LIVE_PASS_PR25",
     "IMMUTABLE_BASE_HARDLOCK_POST_BIND_NEGATIVE_LIVE_PASS_PR26"
   ],
-  "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "next_allowed_step": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
   "queued_after_current_step": [
     "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
     "RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY",
@@ -31,10 +31,10 @@
   "execution_gate": {
     "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V2",
     "enforced": true,
-    "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
-    "sequence": 107001,
-    "bundle_ref": "control/startmaster0107/STEP_107001_ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED.json",
-    "bundle_sha256": "53d81a94c415e32c26c5a2cae90fc9b71b5d354919032045e5c0fa57b39c2eac",
+    "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
+    "sequence": 107005,
+    "bundle_ref": "control/startmaster0107/STEP_107005_PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER.json",
+    "bundle_sha256": "e6fa9f4d351b94fbc516fdf68697b5169d779597b57a0b3e839bc13a4b1444ed",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -69,6 +69,55 @@
     "required_status_checks": [
       "hardlock",
       "hardlock-base"
+    ]
+  },
+  "execution_gate_receipts": [
+    {
+      "completed_step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+      "sequence": 107001,
+      "ticket_id": "61af91fb00afe746e2055d97296a34148bee9e3ed36a2183d6e8257174651629",
+      "receipt_sha256": "6891f851492723ba49b981e661c5cba47f8014f8cd1230555faf02980e82a22a",
+      "status": "PASS"
+    },
+    {
+      "completed_step_id": "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
+      "sequence": 107002,
+      "ticket_id": "5167cb4f701a7242cb80eea46e1a4d533d2726e5312af89765bc5e355df310ba",
+      "receipt_sha256": "f52caa53c8399ec5c8ca5cac2f4eb3f9c522c716e97000f80d53eda8d7de5a34",
+      "status": "PASS"
+    },
+    {
+      "completed_step_id": "RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY",
+      "sequence": 107003,
+      "ticket_id": "48f09a02902b74f081a7bb4ecf2e1b120b2ad3ed20e3985ae8f0ffe6e92b5fef",
+      "receipt_sha256": "bab81d3a8a03308ed3d901305871891f160fc065bd2793da4a60f0dd9dbcc80b",
+      "status": "PASS"
+    },
+    {
+      "completed_step_id": "PROVIDER_AFTER_RETAINED_BACKLOG",
+      "sequence": 107004,
+      "ticket_id": "f50fe5b7a4a25fd461eca9d6cb6b7e9709fa149455d92391a6884478aeefcd15",
+      "receipt_sha256": "4bc42d2c9bee23bb99f29d467986b9b900de9bacb4575baea5661a2ea72cad15",
+      "status": "PASS"
+    },
+    {
+      "completed_step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
+      "sequence": 107005,
+      "ticket_id": "0a636b9159e4771b8b965d450e9628cf70155bb0a9fef67ff8dd395b361949d3",
+      "receipt_sha256": "0cd48ff77d420b1501e9fcff98ba5779c7adfc66dbe80988749c782099576c90",
+      "status": "USER_ACTION_REQUIRED"
+    }
+  ],
+  "execution_gate_terminal": {
+    "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
+    "sequence": 107005,
+    "ticket_id": "0a636b9159e4771b8b965d450e9628cf70155bb0a9fef67ff8dd395b361949d3",
+    "bundle_sha256": "e6fa9f4d351b94fbc516fdf68697b5169d779597b57a0b3e839bc13a4b1444ed",
+    "status": "USER_ACTION_REQUIRED",
+    "receipt_sha256": "0cd48ff77d420b1501e9fcff98ba5779c7adfc66dbe80988749c782099576c90",
+    "evidence": [
+      "CAPSULE_MANIFEST inputs is empty for PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
+      ".pferde-capsule/inputs contains no READY approval or article-batch material"
     ]
   }
 }
