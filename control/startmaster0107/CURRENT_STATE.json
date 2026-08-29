@@ -1,9 +1,9 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "IMMUTABLE_BASE_HARDLOCK_ACTIVE_DYNAMIC_HANDOFF_VERIFIED_ROOTFIX_NEXT",
+  "status": "IMMUTABLE_BASE_HARDLOCK_ACTIVE_ROOTFIX_NEXT",
   "previous_binding": "STARTMASTER0106",
-  "workflow_change_scope": "OUTER_EXECUTION_HANDOFF_ROOTCAUSE_FIX_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
+  "workflow_change_scope": "OUTER_IMMUTABLE_BASE_HARDLOCK_AND_PREBOUND_ROUTING_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
   "completed_checkpoints": [
     "SIX_ARTICLE_TEST_PUBLISHED",
@@ -15,13 +15,7 @@
     "IMMUTABLE_PULL_REQUEST_TARGET_BASE_HARDLOCK_PREPARED",
     "IMMUTABLE_BASE_HARDLOCK_REQUIRED_STATUS_CHECK_BOUND_RULESET_21788951",
     "IMMUTABLE_BASE_HARDLOCK_POST_BIND_POSITIVE_LIVE_PASS_PR25",
-    "IMMUTABLE_BASE_HARDLOCK_POST_BIND_NEGATIVE_LIVE_PASS_PR26",
-    "STARTMASTER0107_DYNAMIC_HANDOFF_LOCAL_RUNTIME_GATE_238_238_PASS",
-    "STARTMASTER0107_DYNAMIC_HANDOFF_LOCAL_RELEASE_AUDIT_70_70_PASS",
-    "STARTMASTER0107_DYNAMIC_HANDOFF_PR28_HARDLOCK_PASS",
-    "STARTMASTER0107_DYNAMIC_HANDOFF_PR28_HARDLOCK_BASE_PASS",
-    "STARTMASTER0107_DYNAMIC_HANDOFF_PR28_MERGED_D29FD6A1866E7D93E74D28EB03CDE56DAB82CD8D",
-    "STARTMASTER0107_DYNAMIC_HANDOFF_POST_MERGE_CI_PASS_RUN_33248864456"
+    "IMMUTABLE_BASE_HARDLOCK_POST_BIND_NEGATIVE_LIVE_PASS_PR26"
   ],
   "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
   "queued_after_current_step": [
@@ -40,7 +34,7 @@
     "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
     "sequence": 107001,
     "bundle_ref": "control/startmaster0107/STEP_107001_ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED.json",
-    "bundle_sha256": "ba4776225d9268f993f62823b143bc5d9ee8272f8279320b4fcdf4b0228a81b7",
+    "bundle_sha256": "f8910a54a264ae905e0822df6b8baeefba01b704e00121e784c0ba9d19a4adeb",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -51,12 +45,7 @@
     "api_dependency": "NONE",
     "hard_worker_target": "CODEX_CLOUD",
     "hard_worker_runtime_verified": true,
-    "base_hardlock_required_status_check": "hardlock-base",
-    "runtime_controller_ref": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3.py",
-    "runtime_controller_sha256": "a3976dcb0deedcfb560ff591652087d74b16daedf2391b2e2ba90f8589872ca6",
-    "runtime_controller_policy": "HASH_BOUND_DYNAMIC_HANDOFF_PASS_EVIDENCE_ONLY",
-    "runtime_controller_worker_authority": false,
-    "legacy_hardlocked_entrance_validation_required": true
+    "base_hardlock_required_status_check": "hardlock-base"
   },
   "text_production_contracts": {
     "prompt_ref": "control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt",
@@ -80,12 +69,6 @@
     "required_status_checks": [
       "hardlock",
       "hardlock-base"
-    ],
-    "runtime_controller_ref": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3.py",
-    "runtime_controller_sha256": "a3976dcb0deedcfb560ff591652087d74b16daedf2391b2e2ba90f8589872ca6",
-    "dynamic_handoff_policy": "EXACT_NEXT_BINDING_PLUS_HASHED_NEXT_INPUT_PLUS_TEST_EVIDENCE",
-    "per_step_release_rule": "POSITIVE_NEGATIVE_FULL_WORKFLOW_REGRESSION_REQUIRED"
-  },
-  "runtime_inputs": [],
-  "execution_gate_receipts": []
+    ]
+  }
 }
