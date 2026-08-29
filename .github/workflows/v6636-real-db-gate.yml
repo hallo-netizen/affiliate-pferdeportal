@@ -1,0 +1,103 @@
+name: V6636 Real WordPress MariaDB Gate
+
+on:
+  push:
+    branches:
+      - v6636-build-change-same-uuid-20260829
+  workflow_dispatch:
+
+jobs:
+  real-db-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP 8.4 with mysqli
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli, mbstring, curl, zip
+          coverage: none
+      - name: Assemble V6.63.5 base patch and V6.63.6 delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          : > /tmp/v6635.patch
+          for f in CI_V6635/patchchunks/chunk_00.b64 CI_V6635/patchchunks/chunk_01.b64 CI_V6635/patchchunks/chunk_02.b64 CI_V6635/patchchunks/chunk_03.b64 CI_V6635/patchchunks/chunk_04.b64 CI_V6635/patchchunks/chunk_05_0.b64 CI_V6635/patchchunks/chunk_05_1.b64 CI_V6635/patchchunks/chunk_05_2.b64 CI_V6635/patchchunks/chunk_06_0.b64 CI_V6635/patchchunks/chunk_06_1.b64 CI_V6635/patchchunks/chunk_06_2.b64; do base64 -d "$f" >> /tmp/v6635.patch; done
+          echo '8bae81f1715a5ac235b5a8bb8e9c085dff2d699ef41bd1921704879f15cd6c41  /tmp/v6635.patch' | sha256sum -c -
+          git apply --check /tmp/v6635.patch
+          git apply /tmp/v6635.patch
+          echo '57ef49d53033d7e36f9997e3c2d72e9990bf1466dd99a7a643df8d932788697f  CI_V6636/V6635_TO_V6636.patch' | sha256sum -c -
+          git apply --check CI_V6636/V6635_TO_V6636.patch
+      - name: Install WP-CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          chmod +x /tmp/wp
+          /tmp/wp --info
+      - name: Fresh WordPress 7.0.1 on MariaDB 11.4
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wp-old
+          /tmp/wp core download --path=/tmp/wp-old --version=7.0.1 --force
+          /tmp/wp config create --path=/tmp/wp-old --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-old --url=http://example.test --title=Gate --admin_user=admin --admin_password='GatePass-6636!' --admin_email=admin@example.test --skip-email
+          mysql -h127.0.0.1 -uroot -proot -Nse 'SELECT VERSION(); SELECT ENGINE FROM information_schema.ENGINES WHERE ENGINE="InnoDB" AND SUPPORT IN ("YES","DEFAULT");'
+      - name: NEGATIVE exact current live state on V6.63.4
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wp-old/wp-content/plugins/affiliate-portal-router
+          cp -a affiliate-portal-router /tmp/wp-old/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-old
+          GATE_MODE=build_negative /tmp/wp eval-file "$GITHUB_WORKSPACE/CI_V6636/real_db_gate.php" --path=/tmp/wp-old
+          /tmp/wp plugin deactivate affiliate-portal-router --path=/tmp/wp-old
+      - name: Apply V6.63.6 rootfix and verify exact payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          git apply CI_V6636/V6635_TO_V6636.patch
+          git diff --check
+          cd affiliate-portal-router
+          sha256sum -c ../CI_V6636/V6636_PAYLOAD_SHA256.txt
+          test "$(find . -type f | wc -l)" -eq 20
+          cd ..
+          zip -qr /tmp/affiliate-zentrale_v6.63.6.zip affiliate-portal-router
+          rm -rf /tmp/v6636-unpack && mkdir /tmp/v6636-unpack
+          unzip -q /tmp/affiliate-zentrale_v6.63.6.zip -d /tmp/v6636-unpack
+          cd /tmp/v6636-unpack/affiliate-portal-router
+          sha256sum -c "$GITHUB_WORKSPACE/CI_V6636/V6636_PAYLOAD_SHA256.txt"
+      - name: POSITIVE same UUID recovery on real MariaDB
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp plugin install /tmp/affiliate-zentrale_v6.63.6.zip --path=/tmp/wp-old --force --activate
+          GATE_MODE=build_positive /tmp/wp eval-file "$GITHUB_WORKSPACE/CI_V6636/real_db_gate.php" --path=/tmp/wp-old
+      - name: Fresh WP + fresh database + actual V6.63.6 installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          mysql -h127.0.0.1 -uroot -proot -e 'CREATE DATABASE wordpress_fresh CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; GRANT ALL PRIVILEGES ON wordpress_fresh.* TO "wp"@"%"; FLUSH PRIVILEGES;'
+          mkdir -p /tmp/wp-fresh
+          /tmp/wp core download --path=/tmp/wp-fresh --version=7.0.1 --force
+          /tmp/wp config create --path=/tmp/wp-fresh --dbname=wordpress_fresh --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-fresh --url=http://fresh.example.test --title=FreshGate --admin_user=admin --admin_password='GatePass-6636!' --admin_email=admin@example.test --skip-email
+          /tmp/wp plugin install /tmp/affiliate-zentrale_v6.63.6.zip --path=/tmp/wp-fresh --activate
+          GATE_MODE=build_positive /tmp/wp eval-file "$GITHUB_WORKSPACE/CI_V6636/real_db_gate.php" --path=/tmp/wp-fresh
+          /tmp/wp option get ppar_ebay_run_state_v1 --format=json --path=/tmp/wp-fresh | grep -F '74b8372b-f481-493b-8485-1e98188ef02c'
+          echo REAL_WORDPRESS_MARIADB_FRESH_INSTALL_V6636_PASS
