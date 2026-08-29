@@ -1,0 +1,83 @@
+name: V6638 Exact Lineage Build
+
+on:
+  push:
+    branches:
+      - v6638-exact-artifact-staging-20260829
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reconstruct exact source lineage V6.61.11 -> V6.63.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pkg /tmp/build && mkdir -p /tmp/pkg /tmp/build
+          unzip -q CODEX_QUELLTEXT_V6611_LIVE_FAIL_EQUAL_CARDS_20260827.zip -d /tmp/pkg
+          cp -a /tmp/pkg/CODEX_V6611_LIVEFAIL_SOURCE/affiliate-portal-router /tmp/build/affiliate-portal-router
+
+          cat CI_V6638/v6611_to_v6634_patch_b64/chunk* | tr -d '\r\n\t ' | base64 -d > /tmp/v6611_to_v6634.patch
+          echo '16298f90894d7148503113eb7970e53214245e7b132e766b48dd62a0e42a7982  /tmp/v6611_to_v6634.patch' | sha256sum -c -
+          (cd /tmp/build && git apply --check /tmp/v6611_to_v6634.patch && git apply /tmp/v6611_to_v6634.patch)
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          files=[Path('CI_V6635/patchchunks/chunk_00.b64'),Path('CI_V6635/patchchunks/chunk_01.b64'),Path('CI_V6635/patchchunks/chunk_02.b64'),Path('CI_V6635/patchchunks/chunk_03.b64'),Path('CI_V6635/patchchunks/chunk_04.b64'),Path('CI_V6635/patchchunks/chunk_05_0.b64'),Path('CI_V6635/patchchunks/chunk_05_1.b64'),Path('CI_V6635/patchchunks/chunk_05_2.b64'),Path('CI_V6635/patchchunks/chunk_06_0.b64'),Path('CI_V6635/patchchunks/chunk_06_1.b64'),Path('CI_V6635/patchchunks/chunk_06_2.b64')]
+          s=''.join(''.join(p.read_text(encoding='utf-8-sig').split()) for p in files)
+          Path('/tmp/v6635.patch').write_bytes(base64.b64decode(s,validate=True))
+          PY
+          echo '8bae81f1715a5ac235b5a8bb8e9c085dff2d699ef41bd1921704879f15cd6c41  /tmp/v6635.patch' | sha256sum -c -
+          (cd /tmp/build && git apply --check /tmp/v6635.patch && git apply /tmp/v6635.patch)
+
+          echo '57ef49d53033d7e36f9997e3c2d72e9990bf1466dd99a7a643df8d932788697f  CI_V6636/V6635_TO_V6636.patch' | sha256sum -c -
+          (cd /tmp/build && git apply --check "$GITHUB_WORKSPACE/CI_V6636/V6635_TO_V6636.patch" && git apply "$GITHUB_WORKSPACE/CI_V6636/V6635_TO_V6636.patch")
+
+          cat CI_V6638/patch_b64/chunk* | tr -d '\r\n\t ' | base64 -d > /tmp/v6638.patch
+          echo '26ff415717afe5b9739ddc3cd24e4c02cb3ee5db130bf9a3f9e8f83405dfc08a  /tmp/v6638.patch' | sha256sum -c -
+          (cd /tmp/build && git apply --check /tmp/v6638.patch && git apply /tmp/v6638.patch)
+          cp CI_V6638/trait-ppar-housekeeping.php /tmp/build/affiliate-portal-router/includes/trait-ppar-housekeeping.php
+
+          cd /tmp/build/affiliate-portal-router
+          sha256sum -c "$GITHUB_WORKSPACE/CI_V6638/V6638_FINAL_PAYLOAD_SHA256.txt"
+          test "$(find . -type f | wc -l)" -eq 21
+          find . -name '*.php' -print0 | sort -z | xargs -0 -n1 php -l
+          grep -F 'Version: 6.63.8' pferdeportal-affiliate-router.php
+          grep -F '6.63.8' readme.txt
+          echo EXACT_SOURCE_LINEAGE_V6638_PASS
+
+      - name: Build deterministic exact V6.63.8 installer and verify SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
+          src=Path('/tmp/build/affiliate-portal-router')
+          out=Path('/tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip')
+          fixed=(2026,8,29,12,0,0)
+          with ZipFile(out,'w',compression=ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(x for x in src.rglob('*') if x.is_file()):
+                  zi=ZipInfo('affiliate-portal-router/'+p.relative_to(src).as_posix(),date_time=fixed)
+                  zi.compress_type=ZIP_DEFLATED; zi.create_system=3; zi.external_attr=(0o100644 & 0xFFFF)<<16; zi.flag_bits |= 0x800
+                  z.writestr(zi,p.read_bytes(),compress_type=ZIP_DEFLATED,compresslevel=9)
+          PY
+          sha256sum /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip
+          echo 'ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2  /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip' | sha256sum -c -
+          rm -rf /tmp/fresh && mkdir /tmp/fresh
+          unzip -q /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip -d /tmp/fresh
+          cd /tmp/fresh/affiliate-portal-router
+          sha256sum -c "$GITHUB_WORKSPACE/CI_V6638/V6638_FINAL_PAYLOAD_SHA256.txt"
+          echo EXACT_V6638_ZIP_FRESH_UNPACK_PASS
+
+      - name: Upload exact reconstructed installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: exact-v6638-lineage-installer
+          path: /tmp/affiliate-zentrale_v6.63.8_SELF_DRIVEN_HOUSEKEEPING_SPEED_CARD_ROOTFIX_FULL_LINEAGE_RELEASE.zip
+          compression-level: 0
+          if-no-files-found: error
