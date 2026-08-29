@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_DYNAMIC_HANDOFF_ROOTCAUSE_FIX_V1",
-  "status": "LOCAL_HARD_PASS_AWAIT_GITHUB_REQUIRED_CHECKS",
+  "status": "PASS_GITHUB_REQUIRED_CHECKS_AND_POST_MERGE_VERIFIED_ROOTFIX_NEXT",
   "cause": "STATIC_CAPSULE_CHAIN_COULD_NOT_CARRY_HASHBOUND_DYNAMIC_PREDECESSOR_RESULTS_TO_PREBOUND_NEXT_STEPS",
   "fix": "KEEP_IMMUTABLE_LEGACY_ENTRANCE;ADD_HASHBOUND_ENTRANCE_CONTROLLER_FOR_DYNAMIC_NEXT_INPUT_AND_REQUIRED_PER_STEP_TEST_EVIDENCE",
   "legacy_protected_paths_changed": false,
@@ -34,6 +34,15 @@
       "fail": 0,
       "sha256": "1453f0623bea62968e791d75236bed0fa8aa16a9dc9413898acf6f1512fa9b7c"
     }
+  },
+  "github_verification": {
+    "pull_request": 28,
+    "pull_request_head_sha": "bf2cbeb2c5ddbef9117aa0627ee229f9d7f598c0",
+    "hardlock": "PASS",
+    "hardlock_base": "PASS",
+    "merge_sha": "d29fd6a1866e7d93e74d28eb03cde56dab82cd8d",
+    "post_merge_workflow_run_id": 33248864456,
+    "post_merge_hardlock": "PASS"
   },
   "rootfix_input_transport": {
     "codex_context_ref": "control/startmaster0107/rootfix_input/ROOTFIX_40_40_CODEX_CONTEXT_V1.txt",
