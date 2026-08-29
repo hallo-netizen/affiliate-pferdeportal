@@ -20,21 +20,21 @@
     "107002_SAFE_SANDBOX_AUTO_REENTRY_PASS",
     "107003_RETAINED_BACKLOG_PASS",
     "107004_PROVIDER_PASS",
-    "107005_PREPARE_NEW_ARTICLE_BATCH_COMPLETE"
+    "107005_PREPARE_NEW_ARTICLE_BATCH_COMPLETE",
+    "107006_BIND_NEW_ARTICLE_BATCH_COMPLETE"
   ],
-  "next_allowed_step": "BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS",
+  "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
-    "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH"
   ],
   "publish_allowed": false,
   "execution_gate": {
     "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V2",
     "enforced": true,
-    "step_id": "BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS",
-    "sequence": 107006,
-    "bundle_ref": "control/startmaster0107/STEP_107006_BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS.json",
-    "bundle_sha256": "819e61c25f304dac544efff81ea8304b3183f1288180a483b9e7f38835640027",
+    "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+    "sequence": 107007,
+    "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
+    "bundle_sha256": "93400fda51f8928207cac4172681e20b811a7687beee4e0776d7eb7b47d6084a",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
