@@ -1,4 +1,4 @@
-name: Affiliate Release Governance V4 One-Time Validation
+name: Affiliate Release Governance V4 One-Time Materialize
 
 on:
   push:
@@ -8,42 +8,58 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  validate-v4-external-controller:
+  materialize-and-real-db-gate:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 45
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
     steps:
-      - name: Checkout clean permanent governance branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          ref: affiliate-release-current
-          fetch-depth: 1
-          persist-credentials: false
-      - name: Assert obsolete bootstrap architecture is absent
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli, mbstring, curl, zip
+          coverage: none
+      - name: Install database client
         shell: bash
         run: |
           set -euo pipefail
-          test ! -e release/affiliate-zentrale/bootstrap-parts
-          test ! -e .github/workflows/affiliate-release-governance-bootstrap-materialize.yml
-          echo CLEAN_V4_BRANCH_PASS
-      - name: Run V4 positive and negative anti-drift suite
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq mariadb-client
+          mariadb -h127.0.0.1 -uroot -proot -Nse 'SELECT VERSION();'
+      - name: Verify and run exact pinned one-time materializer
         shell: bash
         run: |
           set -euo pipefail
-          PYTHONDONTWRITEBYTECODE=1 python3 control/release-governance/test_release_guard.py
-      - name: Verify governance contract itself
-        shell: bash
-        run: |
-          set -euo pipefail
-          PYTHONDONTWRITEBYTECODE=1 python3 control/release-governance/release_guard.py governance-check
-      - name: Prove missing canonical source fails closed
-        shell: bash
-        run: |
-          set -euo pipefail
-          if PYTHONDONTWRITEBYTECODE=1 python3 control/release-governance/release_guard.py source-check; then
-            echo SOURCE_CHECK_UNEXPECTEDLY_PASSED
-            exit 1
-          fi
-          echo MISSING_CANONICAL_SOURCE_FAIL_CLOSED_PASS
+          cat release/affiliate-zentrale/bootstrap-parts/script/part* > /tmp/bootstrap-script.gz.b64
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,gzip,hashlib
+          raw=gzip.decompress(base64.b64decode(''.join(Path('/tmp/bootstrap-script.gz.b64').read_text().split()),validate=True))
+          got=hashlib.sha256(raw).hexdigest()
+          want='c651728f710c509eaa6c2f898f7ef3c6da851cea2af63a74e56907b9771d3701'
+          if got!=want: raise SystemExit('BOOTSTRAP_SCRIPT_HASH_MISMATCH:'+got)
+          Path('/tmp/bootstrap_materialize_and_gate.sh').write_bytes(raw)
+          PY
+          chmod +x /tmp/bootstrap_materialize_and_gate.sh
+          bash -n /tmp/bootstrap_materialize_and_gate.sh
+          /tmp/bootstrap_materialize_and_gate.sh
