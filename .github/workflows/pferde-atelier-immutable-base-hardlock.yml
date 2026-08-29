@@ -92,7 +92,7 @@ jobs:
           cp AGENTS.md /tmp/candidate/AGENTS.md
           cd /tmp/candidate
           PYTHONDONTWRITEBYTECODE=1 python3 control/cloud-entry-gate/cloud_repo_ci_test.py
-          PYTHONDONTWRITEBYTECODE=1 python3 control/production-continuity/production_continuity_ci_test.py
+          PYTHONDONTWRITEBYTECODE=1 python3 control/production-continuity/test_production_continuity_guard.py
       - name: Assert immutable base hardlock itself is API-free and domain-blind
         shell: bash
         run: |

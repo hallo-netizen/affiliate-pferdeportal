@@ -11,8 +11,9 @@ on:
       - 'control/startmaster0104/**'
       - 'control/startmaster0105/**'
       - 'control/startmaster0106/**'
+      - 'control/startmaster0107/**'
       - 'control/CURRENT_STARTMASTER.json'
-      - '.github/workflows/pferde-atelier-deterministic-entrance-gate.yml'
+      - '.github/workflows/**'
   pull_request:
     branches: [main]
     paths:
@@ -23,9 +24,10 @@ on:
       - 'control/startmaster0104/**'
       - 'control/startmaster0105/**'
       - 'control/startmaster0106/**'
+      - 'control/startmaster0107/**'
       - 'control/CURRENT_STARTMASTER.json'
       - 'protocol/**'
-      - '.github/workflows/pferde-atelier-deterministic-entrance-gate.yml'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
