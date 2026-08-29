@@ -1,0 +1,65 @@
+name: Affiliate Release Governance Bootstrap Materialize
+
+on:
+  push:
+    branches: [affiliate-release-governance-bootstrap-20260829]
+    paths:
+      - '.github/workflows/affiliate-release-governance-bootstrap-materialize.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize-and-real-db-gate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli, mbstring, curl, zip
+          coverage: none
+      - name: Install database client
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq mariadb-client
+          mariadb -h127.0.0.1 -uroot -proot -Nse 'SELECT VERSION();'
+      - name: Verify and run pinned one-time materializer
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat release/affiliate-zentrale/bootstrap-parts/script/part* > /tmp/bootstrap-script.gz.b64
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,gzip,hashlib
+          raw=gzip.decompress(base64.b64decode(''.join(Path('/tmp/bootstrap-script.gz.b64').read_text().split()),validate=True))
+          got=hashlib.sha256(raw).hexdigest()
+          want='df24364f8ce7c8ab38a24e46db426c1df59879f7216b36ba364b5417847f592d'
+          if got!=want: raise SystemExit('BOOTSTRAP_SCRIPT_HASH_MISMATCH:'+got)
+          Path('/tmp/bootstrap_materialize_and_gate.sh').write_bytes(raw)
+          PY
+          chmod +x /tmp/bootstrap_materialize_and_gate.sh
+          bash -n /tmp/bootstrap_materialize_and_gate.sh
+          /tmp/bootstrap_materialize_and_gate.sh
