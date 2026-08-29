@@ -37,11 +37,10 @@ jobs:
           test "$(git hash-object "$PATCH_PARTS/part00")" = '6be15d04c250ad5bc2eeed2c646a4587bffb98ac'
 
           git fetch --no-tags origin "$BASE_COMMIT"
-          : > /tmp/v6636.b64
+          : > /tmp/v6636.zip
           for n in 00 01 02 03 04; do
-            git show "$BASE_COMMIT:CI_V6636/installer_b64/chunk$n" >> /tmp/v6636.b64
+            git show "$BASE_COMMIT:CI_V6636/installer_b64/chunk$n" | tr -d '\r\n' | base64 -d >> /tmp/v6636.zip
           done
-          tr -d '\r\n' < /tmp/v6636.b64 | base64 -d > /tmp/v6636.zip
           printf '%s  %s\n' "$BASE_ZIP_SHA" /tmp/v6636.zip | sha256sum -c -
 
           rm -rf /tmp/v6636-work
@@ -110,4 +109,4 @@ jobs:
             git push origin HEAD:affiliate-release-governance-bootstrap-20260829
           fi
 
-# trigger: corrected exact V6.63.6 base commit 2026-08-29T19:48+02:00
+# trigger: decode V6636 chunks independently before binary concatenation 2026-08-29T19:50+02:00
