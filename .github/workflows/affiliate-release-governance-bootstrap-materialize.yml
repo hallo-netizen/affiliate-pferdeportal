@@ -64,4 +64,4 @@ jobs:
           bash -n /tmp/bootstrap_materialize_and_gate.sh
           /tmp/bootstrap_materialize_and_gate.sh
 
-# exact payload repair verified against uploaded MASTER; single rerun trigger
+# current-head trigger after verified V6620+DS24 payload repair
