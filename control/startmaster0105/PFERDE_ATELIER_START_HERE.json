@@ -1,0 +1,16 @@
+{
+  "contract": "PFERDE_ATELIER_START_HERE_V2",
+  "startmaster": "STARTMASTER0105",
+  "navigation_authority": "control/startmaster0105/CURRENT_STATE.json",
+  "execution_entrance_gate": "control/cloud-entry-gate/cloud_entry.py",
+  "legacy_generic_gate": "control/deterministic-entrance-gate/door.py",
+  "production_package_preflight_guard": "control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py",
+  "workflow_rules_changed": true,
+  "workflow_change_scope": "OUTER_CODEX_CLOUD_ENTRANCE_GATE_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
+  "current_state_sha256": "0fcb131327d99e6f532f0cc5b2e326302634c3b43547e63cea75fcbd1ac1c766",
+  "next_allowed_step": "VERIFY_CODEX_CLOUD_ENTRANCE_GATE_SELFTEST_NO_API",
+  "publish_allowed": false,
+  "openai_api_required": false,
+  "local_codex_required": false,
+  "codex_cloud_required_for_hard_worker": true
+}
