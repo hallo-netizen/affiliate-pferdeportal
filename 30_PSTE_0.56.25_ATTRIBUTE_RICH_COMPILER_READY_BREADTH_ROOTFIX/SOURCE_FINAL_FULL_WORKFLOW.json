@@ -1,0 +1,137 @@
+{
+  "contract": "PSTE_0.56.25_PSERC_0.28.14_COMPLETE_WORKFLOW_POSITIVE_NEGATIVE_V1",
+  "run_label": "SOURCE_FINAL_FULL_WORKFLOW",
+  "status": "PASS",
+  "tests": {
+    "test_title_naturalness.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_0.56.25_TITLE_NATURALNESS_ROOTCAUSE_V1",
+      "stderr": ""
+    },
+    "test_attribute_seo_independence.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_PSERC_ATTRIBUTE_TITLE_ZERO_SEO_AUTHORITY_V1",
+      "stderr": ""
+    },
+    "test_planning_readiness.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_0.56.25_SHARED_PLANNING_READINESS_ROOTCAUSE_V1",
+      "stderr": ""
+    },
+    "test_live24_quota_replay.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_0.56.25_LIVE_24_QUOTA_ROOTCAUSE_REPLAY_V1",
+      "stderr": ""
+    },
+    "test_breadth_queue_contract.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_0.56.25_BROAD_40_QUEUE_ROOTCAUSE_V1",
+      "stderr": ""
+    },
+    "test_pste_diversity_boundary.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_0.56.25_SCALE_AND_BOUNDARY_POSITIVE_NEGATIVE_V2",
+      "stderr": ""
+    },
+    "test_pste_rootcause.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_0.56.24_RELATION_PROVENANCE_AND_TITLE_QUALITY_ROOTCAUSE_V1",
+      "stderr": ""
+    },
+    "test_pste_pserc_title_batch_parity.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_0.56.25_PSERC_0.28.14_TITLE_BATCH_PARITY_V1",
+      "stderr": ""
+    },
+    "test_pserc_regression.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSERC_0.28.14_FULL_POSITIVE_NEGATIVE_REGRESSION_V2",
+      "stderr": ""
+    },
+    "test_generation_retention.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSERC_0.28.14_GENERATION_RETENTION_POSITIVE_NEGATIVE_V1",
+      "stderr": ""
+    },
+    "test_generation_retention_workflow.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSERC_0.28.14_RETENTION_FULL_WORKFLOW_POSITIVE_NEGATIVE_V2",
+      "stderr": ""
+    },
+    "test_combined_capability.php": {
+      "ok": true,
+      "returncode": 0,
+      "status": "PASS",
+      "contract": "PSTE_PSERC_COMBINED_CAPABILITY_COMPATIBILITY_V1",
+      "stderr": ""
+    }
+  },
+  "php_lint": {
+    "pste": {
+      "file_count": 74,
+      "bad": [],
+      "ok": true
+    },
+    "pserc": {
+      "file_count": 42,
+      "bad": [],
+      "ok": true
+    }
+  },
+  "pste_version_ok": true,
+  "pste_changed_files": [
+    "CHANGELOG_0.56.25.md",
+    "includes/class-pste-admin.php",
+    "includes/class-pste-breadth-research-queue.php",
+    "includes/class-pste-cannibalization.php",
+    "includes/class-pste-planning-readiness-gate.php",
+    "includes/class-pste-repository.php",
+    "includes/class-pste-runner.php",
+    "includes/class-pste-semantic-backfill.php",
+    "includes/class-pste-title-composer.php",
+    "includes/class-pste-title-diversity.php",
+    "includes/class-pste-topic-policy.php",
+    "portal-seo-topic-engine.php"
+  ],
+  "pste_unexpected_changed_files": [],
+  "pste_expected_but_unchanged": [],
+  "forbidden_added_code_hits": [],
+  "pserc_0_28_14_byte_drift": [],
+  "protected_claims": {
+    "article_content_modified": false,
+    "design_modified": false,
+    "ppm_modified": false,
+    "languagetool_modified": false,
+    "production_machine_modified": false,
+    "pserc_thresholds_relaxed": false,
+    "seo_duplicate_authority_relaxed": false,
+    "article_production_batch_policy_changed": false
+  },
+  "source_tree_sha256": {
+    "pste": "fc5bede4ca9f5f41917b29fbbfab6fe04c6ca4610d7e3e908ea6dda9864d1cf1",
+    "pserc": "e0c34aa851c198af9f9c180777e5cf828aca72061a394127660305ca6c30978e"
+  },
+  "generated_at_utc": "2026-08-28T15:23:50Z"
+}

@@ -1,12 +1,27 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V4_DYNAMIC_HANDOFF_TEST_EVIDENCE",
   "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
   "sequence": 107008,
   "worker_profile": "CLOUD_ARTICLE_BATCH_FINAL_REVIEW",
   "authorized_inputs": [],
-  "instruction": "Arbeite ausschließlich am gebundenen finalen Review-Schritt des neuen Artikeltests. Keine Workflow-Navigation oder Regeländerung. Prüfe nur die bereits im unveränderten Fachworkflow erzeugten Batch-Ergebnisse bis zum vorgesehenen Review-Endzustand. Kein Auto-Publish. Gib nur den gebundenen Abschluss-/Review-Status zurück.",
+  "required_runtime_input_roles": [
+    "NEXT_INPUT"
+  ],
+  "required_result_roles": [
+    "POSITIVE_TEST_EVIDENCE",
+    "NEGATIVE_TEST_EVIDENCE",
+    "FULL_WORKFLOW_REGRESSION_EVIDENCE"
+  ],
+  "handoff_result_roles": [],
+  "instruction": "Führe ausschließlich FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH aus. Prüfe nur die im hashgebundenen NEXT_INPUT enthaltenen Ergebnisse gegen den unveränderten Gesamtworkflow. Kein Auto-Publish. Vor PASS sind harter Positivtest, harter Negativtest und Regression gegen den unveränderten Gesamtworkflow Pflicht. Liefere PASS nur zusammen mit getrennten Testevidenzen; keine Workflow-Navigation.",
   "limits": {
+    "max_wall_seconds": 1800,
+    "max_output_bytes": 5242880,
     "reasoning_effort": "medium",
     "parallel_workers": 1
+  },
+  "regression_baseline": {
+    "ref": "control/startmaster0107/FULL_WORKFLOW_REGRESSION_BASELINE_V1.json",
+    "sha256": "2c216a6f4491aa2a5e8165d6fafc86faa9fa4696c08f7981f627d4aab5cf71cd"
   }
 }

@@ -1,0 +1,46 @@
+{
+  "contract": "PFERDE_ATELIER_DYNAMIC_HANDOFF_ROOTCAUSE_FIX_V1",
+  "status": "LOCAL_HARD_PASS_AWAIT_GITHUB_REQUIRED_CHECKS",
+  "cause": "STATIC_CAPSULE_CHAIN_COULD_NOT_CARRY_HASHBOUND_DYNAMIC_PREDECESSOR_RESULTS_TO_PREBOUND_NEXT_STEPS",
+  "fix": "KEEP_IMMUTABLE_LEGACY_ENTRANCE;ADD_HASHBOUND_ENTRANCE_CONTROLLER_FOR_DYNAMIC_NEXT_INPUT_AND_REQUIRED_PER_STEP_TEST_EVIDENCE",
+  "legacy_protected_paths_changed": false,
+  "runtime_controller_ref": "control/startmaster0107/runtime-gate-v3/runtime_gate_v3.py",
+  "runtime_controller_sha256": "a3976dcb0deedcfb560ff591652087d74b16daedf2391b2e2ba90f8589872ca6",
+  "regression_baseline_ref": "control/startmaster0107/FULL_WORKFLOW_REGRESSION_BASELINE_V1.json",
+  "regression_baseline_sha256": "2c216a6f4491aa2a5e8165d6fafc86faa9fa4696c08f7981f627d4aab5cf71cd",
+  "current_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "sequence": 107001,
+  "prebound_chain": [
+    107001,
+    107002,
+    107003,
+    107004,
+    107005,
+    107006,
+    107007,
+    107008
+  ],
+  "release_rule": "NO_PASS_BEFORE_HARD_LOCAL_POSITIVE_NEGATIVE_FULL_WORKFLOW_REGRESSION_AND_GITHUB_HARDLOCK_PLUS_HARDLOCK_BASE_PASS",
+  "local_hard_tests": {
+    "runtime_gate": {
+      "tests": 238,
+      "pass": 238,
+      "fail": 0,
+      "sha256": "6f67a34af4cf6dd4b7dea1ba136ae3b2907ba20415c3ee49d6477631a7092cd1"
+    },
+    "release_audit": {
+      "tests": 70,
+      "pass": 70,
+      "fail": 0,
+      "sha256": "1453f0623bea62968e791d75236bed0fa8aa16a9dc9413898acf6f1512fa9b7c"
+    }
+  },
+  "rootfix_input_transport": {
+    "codex_context_ref": "control/startmaster0107/rootfix_input/ROOTFIX_40_40_CODEX_CONTEXT_V1.txt",
+    "codex_context_sha256": "631a384c59313ef527da8fa00b8942aea52569742d7af57bbd8f635cb2d9792e",
+    "exact_queue_methods_ref": "control/startmaster0107/rootfix_input/ROOTFIX_40_40_EXACT_QUEUE_EXTENSION_METHODS_V1.txt",
+    "exact_queue_methods_sha256": "81102359d31712257fbb5fbe6a64ff44b55b215a35c8595363c4f294fbdfe83b",
+    "binary_installer_identity_bound_in_regression_baseline": true,
+    "binary_installers_required_inside_capsule": false
+  }
+}
