@@ -1,0 +1,3 @@
+PFERDE_ATELIER_HARDLOCK_BASE_POSITIVE_SELFTEST
+Expected: hardlock-base PASS because only a non-security protocol file changes.
+No domain/content/quality/design logic is changed.
