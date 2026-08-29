@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "IMMUTABLE_BASE_HARDLOCK_PENDING_RULESET_BINDING_ROOTFIX_NEXT",
+  "status": "IMMUTABLE_BASE_HARDLOCK_ACTIVE_ROOTFIX_NEXT",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_IMMUTABLE_BASE_HARDLOCK_AND_PREBOUND_ROUTING_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -12,7 +12,10 @@
     "GITHUB_MAIN_DIRECT_WRITE_NEGATIVE_BLOCKED_409",
     "STARTMASTER0106_NO_STOP_CONTINUITY_PASS",
     "STARTMASTER0106_POST_MERGE_CI_PASS",
-    "IMMUTABLE_PULL_REQUEST_TARGET_BASE_HARDLOCK_PREPARED"
+    "IMMUTABLE_PULL_REQUEST_TARGET_BASE_HARDLOCK_PREPARED",
+    "IMMUTABLE_BASE_HARDLOCK_REQUIRED_STATUS_CHECK_BOUND_RULESET_21788951",
+    "IMMUTABLE_BASE_HARDLOCK_POST_BIND_POSITIVE_LIVE_PASS_PR25",
+    "IMMUTABLE_BASE_HARDLOCK_POST_BIND_NEGATIVE_LIVE_PASS_PR26"
   ],
   "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
   "queued_after_current_step": [
@@ -61,6 +64,11 @@
       "control/production-continuity/**"
     ],
     "transition_policy": "MONOTONIC_AND_EXACTLY_PREBOUND_NEXT_BINDING",
-    "manual_ruleset_binding_pending": true
+    "manual_ruleset_binding_pending": false,
+    "ruleset_id": 21788951,
+    "required_status_checks": [
+      "hardlock",
+      "hardlock-base"
+    ]
   }
 }
