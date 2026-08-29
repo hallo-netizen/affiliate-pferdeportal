@@ -9,7 +9,7 @@
       "sha256": "d87db13e4cf4820449c4795840991e05e365665f409d37ab43dba41b936915b3"
     }
   ],
-  "instruction": "Arbeite ausschließlich am gebundenen Schritt ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED. Nutze nur die materialisierte Capsule. Ermittele die technische Ursache aus dem hashgebundenen Evidence-/Source-Paket und liefere ausschließlich einen minimalen Rootfix-Vorschlag plus Positiv-/Negativtests und Regression gegen den unveränderten Gesamtworkflow. Keine Rücksprünge, Seitensprünge oder Wiederholung unveränderter PASS-Stufen. Keine Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, PPM-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regel verändern.",
+  "instruction": "Arbeite ausschließlich am gebundenen Schritt ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED und bringe genau diesen Schritt vollständig bis zum terminalen Ergebnis. Nutze die materialisierte Evidence als bindende fachliche/technische Vorgabe und den Repository-Arbeitsbaum ausschließlich zur Ausführung dieses gebundenen Schritts. Implementiere den bereits belegten minimalen Rootfix für den 40/40-Mismatch, führe die gebundenen Positivtests, Negativtests und die Regression gegen den unveränderten Gesamtworkflow tatsächlich aus und melde PASS nur, wenn Implementierung und alle erforderlichen Prüfungen wirklich erfolgreich abgeschlossen sind. Keine Rücksprünge, Seitensprünge, Wiederholung unveränderter PASS-Stufen oder Alternativlösung. Keine Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, PPM-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regel verändern. Bei echtem nicht lokal lösbarem Hindernis ausschließlich BLOCKED oder USER_ACTION_REQUIRED liefern.",
   "limits": {
     "max_wall_seconds": 1800,
     "max_output_bytes": 5242880,
