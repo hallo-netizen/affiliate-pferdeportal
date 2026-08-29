@@ -1,0 +1,256 @@
+diff --git a/affiliate-portal-router/assets/frontend.css b/affiliate-portal-router/assets/frontend.css
+index c173a98..ed4a39d 100644
+--- a/affiliate-portal-router/assets/frontend.css
++++ b/affiliate-portal-router/assets/frontend.css
+@@ -608,10 +608,10 @@
+ .ppar-article-product-cta {
+     display: block;
+     width: 100%;
+-    margin-top: 0.15rem;
++    margin-top: auto;
+     padding: 0.7rem 1rem;
+     border: 1px solid #35422A;
+-    border-radius: 999px;
++    border-radius: 0;
+     background: #35422A;
+     color: #fff;
+     font-size: 0.92rem;
+@@ -754,7 +754,7 @@
+     display: grid;
+     gap: 0.5rem;
+     width: 100%;
+-    margin-top: 0.15rem;
++    margin-top: auto;
+ }
+ 
+ .ppar-article-product-offer-button {
+@@ -762,7 +762,7 @@
+     width: 100%;
+     padding: 0.7rem 1rem;
+     border: 1px solid #35422A;
+-    border-radius: 999px;
++    border-radius: 0;
+     background: #35422A;
+     color: #fff !important;
+     font-size: 0.92rem;
+@@ -792,7 +792,7 @@
+     display: inline-block;
+     padding: 0.55rem 0.85rem;
+     border: 1px solid #35422A;
+-    border-radius: 999px;
++    border-radius: 0;
+     background: #35422A;
+     color: #fff !important;
+     font-weight: 600;
+diff --git a/affiliate-portal-router/includes/trait-ppar-ebay-run.php b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+index 5b1afd1..d251f42 100644
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -165,6 +165,48 @@ trait PPAR_Ebay_Run_Trait {
+         $this->ebay_run_bootstrap_recovered_external_tick_v6632($uuid);
+     }
+ 
++    /**
++     * V6.63.8 exact live-state adoption.
++     *
++     * The observed production run can be left at reconcile_local with zero
++     * transport ticks because V6.63.4 persists the run but delegates every
++     * package to an external GitHub heartbeat. If that scheduler is delayed,
++     * nothing in WordPress advances the already-authorized run.
++     *
++     * Only the exact zero-work state is safe to adopt across the build change:
++     * no package, cursor or phase work has run yet. Preserve the UUID, checkpoint
++     * and complete immutable run snapshot, change only the build/driver contract
++     * and immediately start the private self-drive chain. Any state with actual
++     * work remains subject to the generic fail-closed build-change rule below.
++     */
++    public function maybe_adopt_stalled_zero_tick_ebay_run_v6638() {
++        $run = $this->ebay_run_load();
++        if ((string)($run['schema'] ?? '') !== '1.0' || !$this->ebay_run_is_active($run)) { return; }
++        if (!hash_equals('6.63.4-live-observed-gap-proof-recovery-rootfix-20260828', sanitize_text_field((string)($run['build'] ?? '')))) { return; }
++        if (sanitize_key((string)($run['status'] ?? '')) !== 'running'
++            || sanitize_key((string)($run['phase'] ?? '')) !== 'reconcile_local'
++            || absint($run['progress_seq'] ?? 0) !== 0
++            || absint($run['transport_tick_count'] ?? 0) !== 0
++            || absint($run['phase_tick_count'] ?? 0) !== 0
++            || sanitize_text_field((string)($run['owner'] ?? '')) !== ''
++            || absint($run['lease_expires_at'] ?? 0) !== 0
++            || absint($run['no_progress_count'] ?? 0) !== 0
++            || sanitize_key((string)($run['error_code'] ?? '')) !== '') { return; }
++        $phase_state = is_array($run['phase_state'] ?? null) ? $run['phase_state'] : array();
++        if ($phase_state) { return; }
++
++        $before = $run;
++        $run['build'] = self::EBAY_RUNTIME_BUILD;
++        $run['worker_transport'] = 'self_drive';
++        $run['orchestrator_contract'] = 'self_drive_v1';
++        $run['resume_reason'] = 'zero_tick_self_drive_adoption';
++        $run['last_progress_at'] = time();
++        $run['self_drive_adopted_at'] = time();
++        $saved = $this->ebay_run_compare_and_swap($before, $run);
++        if ($saved === false) { return; }
++        $this->ebay_run_dispatch_self_drive((string)($run['run_uuid'] ?? ''), 'zero_tick_upgrade');
++    }
++
+     /** Generic future-proof upgrade rule: never revive a run from another build. */
+     public function maybe_close_incompatible_ebay_run_for_checkpoint_restart() {
+         $run = $this->ebay_run_load();
+@@ -525,28 +567,168 @@ trait PPAR_Ebay_Run_Trait {
+         return defined($constant) ? (string)constant($constant) : 'ppar_ebay_worker_transport_migration_v6412';
+     }
+ 
+-    /** V6.54 KISS: scheduling is deliberately external. Legacy callers may ask
+-     * for a continuation, but this method only records the transport contract.
+-     * It never schedules WP-Cron, never performs loopback HTTP and never runs
+-     * fach logic itself. */
++    /** V6.63.8 canonical driver.
++     *
++     * The fach worker remains single-owner and bounded. Continuation no longer
++     * depends on a delayed external scheduler: exactly one signed same-origin
++     * loopback request is queued for the already-authorized run. The public
++     * external heartbeat remains a watchdog/kick path only.
++     */
+     private function ebay_run_schedule_worker($delay = 10) {
+         $run = $this->ebay_run_load();
+         if (!$this->ebay_run_is_active($run)) { return false; }
+-        if (sanitize_key((string)($run['worker_transport'] ?? '')) !== 'external_tick') {
+-            $run['worker_transport'] = 'external_tick';
+-            $this->ebay_run_save($run);
+-        }
+-        return true;
++        return $this->ebay_run_dispatch_self_drive((string)($run['run_uuid'] ?? ''), 'schedule');
+     }
+ 
+     /** Compatibility no-ops retained so older state/tests cannot accidentally
+-     * revive the retired self-pump transport. */
++     * revive the retired WP-Cron/background-dispatch transports. */
+     private function ebay_run_register_background_dispatch($when) { return false; }
+     private function ebay_run_spawn_core_cron_handoff() { return false; }
+     private function ebay_run_wait_for_cron_lock_resolution($initial_lock, $max_wait_seconds = 5) { return false; }
+     private function ebay_run_fail_background_dispatch($code, $details = array()) { return false; }
+     public function run_ebay_worker_background_dispatch() { return false; }
+ 
++    /** Stateless signed continuation contract.
++     *
++     * No per-package transient/option is written. The signature is bound to the
++     * exact run UUID plus the current progress/tick counters. A replay therefore
++     * becomes stale as soon as one canonical package starts, while the existing
++     * lease remains the final concurrency guard for a simultaneous duplicate.
++     */
++    private function ebay_run_self_drive_secret() {
++        if (!function_exists('wp_salt')) { return ''; }
++        $secret = (string)wp_salt('auth');
++        return strlen($secret) >= 32 ? $secret : '';
++    }
++
++    private function ebay_run_self_drive_signature($run_uuid, $progress_seq, $transport_tick_count, $expires_at, $nonce) {
++        $secret = $this->ebay_run_self_drive_secret();
++        $uuid = sanitize_text_field((string)$run_uuid);
++        $nonce = sanitize_text_field((string)$nonce);
++        if ($secret === '' || $uuid === '' || $nonce === '') { return ''; }
++        $message = implode('|', array(
++            $uuid,
++            (string)absint($progress_seq),
++            (string)absint($transport_tick_count),
++            (string)absint($expires_at),
++            $nonce,
++            'self_drive_v1',
++        ));
++        return hash_hmac('sha256', $message, $secret);
++    }
++
++    private function ebay_run_validate_self_drive_request($signature, $run_uuid, $expected_progress, $expected_tick, $expires_at, $nonce) {
++        $signature = strtolower(trim((string)$signature));
++        $uuid = sanitize_text_field((string)$run_uuid);
++        $nonce = sanitize_text_field((string)$nonce);
++        $expires_at = absint($expires_at);
++        $now = time();
++        $ttl = max(60, absint(self::EBAY_SELF_DRIVE_TOKEN_TTL));
++        if ($uuid === '' || !preg_match('/^[a-f0-9]{64}$/', $signature) || !preg_match('/^[a-f0-9]{32,96}$/', $nonce)) { return false; }
++        if ($expires_at < $now || $expires_at > ($now + $ttl + 5)) { return false; }
++        $expected = $this->ebay_run_self_drive_signature($uuid, $expected_progress, $expected_tick, $expires_at, $nonce);
++        if ($expected === '' || !hash_equals($expected, $signature)) { return false; }
++
++        $run = $this->ebay_run_load();
++        if (!$this->ebay_run_is_active($run)
++            || !hash_equals($uuid, sanitize_text_field((string)($run['run_uuid'] ?? '')))
++            || absint($run['progress_seq'] ?? 0) !== absint($expected_progress)
++            || absint($run['transport_tick_count'] ?? 0) !== absint($expected_tick)) { return false; }
++        return true;
++    }
++
++    private function ebay_run_dispatch_self_drive($run_uuid, $reason = 'continuation') {
++        $uuid = sanitize_text_field((string)$run_uuid);
++        if ($uuid === '' || !function_exists('wp_safe_remote_post') || !function_exists('admin_url')
++            || !function_exists('home_url') || !function_exists('wp_parse_url')) { return false; }
++
++        $run = $this->ebay_run_load();
++        if (!$this->ebay_run_is_active($run) || !hash_equals($uuid, sanitize_text_field((string)($run['run_uuid'] ?? '')))) { return false; }
++        $secret = $this->ebay_run_self_drive_secret();
++        if ($secret === '') { return false; }
++        try { $nonce = bin2hex(random_bytes(24)); } catch (Throwable $e) { return false; }
++        $expires_at = time() + max(60, absint(self::EBAY_SELF_DRIVE_TOKEN_TTL));
++        $expected_progress = absint($run['progress_seq'] ?? 0);
++        $expected_tick = absint($run['transport_tick_count'] ?? 0);
++        $signature = $this->ebay_run_self_drive_signature($uuid, $expected_progress, $expected_tick, $expires_at, $nonce);
++        if ($signature === '') { return false; }
++
++        $endpoint = admin_url('admin-post.php');
++        $home = home_url('/');
++        $endpoint_host = strtolower((string)wp_parse_url($endpoint, PHP_URL_HOST));
++        $home_host = strtolower((string)wp_parse_url($home, PHP_URL_HOST));
++        $endpoint_scheme = strtolower((string)wp_parse_url($endpoint, PHP_URL_SCHEME));
++        if ($endpoint_scheme !== 'https' || $endpoint_host === '' || $home_host === '' || !hash_equals($home_host, $endpoint_host)) { return false; }
++
++        $payload = array(
++            'action' => self::EBAY_SELF_DRIVE_ACTION,
++            'run_uuid' => $uuid,
++            'progress_seq' => $expected_progress,
++            'transport_tick_count' => $expected_tick,
++            'expires_at' => $expires_at,
++            'nonce' => $nonce,
++            'signature' => $signature,
++            'reason' => sanitize_key((string)$reason),
++        );
++        $response = wp_safe_remote_post($endpoint, array(
++            'timeout' => 1,
++            'redirection' => 0,
++            'blocking' => false,
++            'sslverify' => true,
++            'headers' => array('Cache-Control' => 'no-store'),
++            'body' => $payload,
++        ));
++        return !is_wp_error($response);
++    }
++
++    private function ebay_run_handle_self_drive_request($signature, $run_uuid, $expected_progress, $expected_tick, $expires_at, $nonce) {
++        if (!$this->ebay_run_validate_self_drive_request($signature, $run_uuid, $expected_progress, $expected_tick, $expires_at, $nonce)) {
++            return array('status' => 'invalid');
++        }
++        $result = $this->ebay_run_execute_one_canonical_package('self_drive');
++        $status = sanitize_key((string)($result['status'] ?? 'failed'));
++        if (in_array($status, array('advanced','retryable_error'), true)) {
++            $run = $this->ebay_run_load();
++            if ($this->ebay_run_is_active($run)) {
++                $this->ebay_run_dispatch_self_drive((string)($run['run_uuid'] ?? ''), 'chain');
++            }
++        }
++        return $result;
++    }
++
++    public function handle_ebay_self_drive_worker() {
++        $signature = sanitize_text_field((string)($_POST['signature'] ?? ''));
++        $uuid = sanitize_text_field((string)($_POST['run_uuid'] ?? ''));
++        $expected_progress = absint($_POST['progress_seq'] ?? 0);
++        $expected_tick = absint($_POST['transport_tick_count'] ?? 0);
++        $expires_at = absint($_POST['expires_at'] ?? 0);
++        $nonce = sanitize_text_field((string)($_POST['nonce'] ?? ''));
++        $result = $this->ebay_run_handle_self_drive_request($signature, $uuid, $expected_progress, $expected_tick, $expires_at, $nonce);
++        if (!headers_sent()) { status_header(200); header('Content-Type: application/json; charset=utf-8'); header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0'); }
++        echo wp_json_encode($result);
++        exit;
++    }
++
+     /**
+      * One canonical bounded worker package. This is the single fach-work path
+      * shared by Admin-AJAX and the public external tick transport.
