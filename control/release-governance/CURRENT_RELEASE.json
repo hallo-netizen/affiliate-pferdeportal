@@ -8,8 +8,8 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f",
-    "source_file_count": 21,
+    "manifest_sha256": "9ec2d4030498d904b3508f666acfc4b9e8145364e2c4a48f7e4a8942cd0665ed",
+    "source_file_count": 23,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
     "guard_role": "VERIFY_ONLY"
@@ -41,8 +41,8 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f",
-    "source_file_count": 21,
+    "current_source_manifest_sha256": "9ec2d4030498d904b3508f666acfc4b9e8145364e2c4a48f7e4a8942cd0665ed",
+    "source_file_count": 23,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
     "final_artifact_sha256": null
@@ -120,7 +120,7 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+      "source_manifest_sha256": "9ec2d4030498d904b3508f666acfc4b9e8145364e2c4a48f7e4a8942cd0665ed"
     },
     "old_state_reproduction_negative": {
       "status": "PASS",
