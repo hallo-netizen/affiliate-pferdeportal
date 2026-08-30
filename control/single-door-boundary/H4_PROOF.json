@@ -1,0 +1,31 @@
+{
+  "contract": "SINGLE_DOOR_H4_MECHANICAL_PROOF_V1",
+  "status": "PASS",
+  "checks_passed": 12,
+  "checks_total": 12,
+  "batch_sizes": [1, 2, 7, 40],
+  "h0s_boundary_blob_sha": "13d72055313e70540d872236182df1df07dd0095",
+  "h1_route_blob_sha": "abab6c01f5be81372e294d079043cdd8596773c5",
+  "h2_route_blob_sha": "175a8556191d65b89934b296f91a39ee1971ba1f",
+  "h3_binding_blob_sha": "45efa7ce1a1a00458a5d7f5d0e96706d4b6a5bde",
+  "h4_test_blob_sha": "084732e99d1f4f00cb13535506db5db8148dccd3",
+  "checks": [
+    "EACH_ROOM_EXACTLY_ONCE",
+    "EXACTLY_ONE_EXECUTOR_BINDING_PER_ROOM",
+    "EXACTLY_ONE_INPUT_HANDLE_PER_ROOM",
+    "EXACTLY_ONE_RECEIPT_TOKEN_PER_ROOM",
+    "EXACTLY_ONE_BOUND_NEXT_ROOM_PER_ROOM",
+    "EVERY_NEXT_ROOM_EXISTS",
+    "SECOND_CAPABILITY_REJECTED",
+    "BACKTRACK_AND_SIDEJUMP_REJECTED",
+    "WRONG_RECEIPT_REJECTED",
+    "VARIABLE_CHAIN_UNIQUE_FOR_MULTIPLE_BATCH_SIZES",
+    "VALID_RECEIPT_OPENS_ONLY_BOUND_NEXT_ROOM",
+    "UNKNOWN_OR_DUPLICATE_ROOM_REJECTED"
+  ],
+  "result": "H4_BOUND_ROUTE_EXACTLY_ONE_DOOR_PER_ROOM_PROVEN",
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "design_authority": "NONE",
+  "workflow_replanning_authority": "NONE"
+}
