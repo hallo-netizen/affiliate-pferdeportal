@@ -36,39 +36,35 @@
   },
   "active_candidate": {
     "version": "6.63.8",
-    "status": "WORKING_UNRELEASED",
-    "release_allowed": false,
+    "status": "RELEASED",
+    "release_allowed": true,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f",
     "source_file_count": 21,
     "candidate_reference_artifact_sha256": null,
-    "final_artifact_ref": null,
-    "final_artifact_sha256": null
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/affiliate-zentrale_v6.63.8_FINAL_VERIFIED.zip",
+    "final_artifact_sha256": "5d1d9c91421245becfc01f62bb3b2951904083441dbcbbc42c4e6c9a09fab7f4"
   },
   "execution_state": {
-    "state": "RUNNING_BOUND_RELEASE_GATES",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "completion_condition": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_FIRST_FAILED_GATE_PROVEN",
-    "after_completion_action": "RUN_BOUND_RELEASE_GATES",
-    "gate_execution_mode": "SINGLE_SUITE_FIRST_FAILURE",
-    "failure_policy": "ON_FIRST_PROVEN_FAIL_FIX_ONLY_DIRECTLY_AFFECTED_CANONICAL_SOURCE_THEN_RERUN_SINGLE_SUITE",
+    "state": "FINALIZING_RELEASE",
+    "authorized_next_action": "FINALIZE_RELEASE",
+    "completion_condition": "ALL_REQUIRED_RELEASE_GATES_PASS",
+    "after_completion_action": "RELEASE_COMPLETE",
     "no_optional_detours": true,
-    "sequence": 2,
+    "sequence": 3,
     "authorized_change_prefixes": [
-      "release/affiliate-zentrale/current/",
-      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+      "release/affiliate-zentrale/artifacts/final/",
       "release/affiliate-zentrale/evidence/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
     "next_state_binding": {
-      "sequence": 2,
-      "state": "RUNNING_BOUND_RELEASE_GATES",
-      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+      "sequence": 3,
+      "state": "FINALIZING_RELEASE",
+      "authorized_next_action": "FINALIZE_RELEASE",
       "authorized_change_prefixes": [
-        "release/affiliate-zentrale/current/",
-        "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+        "release/affiliate-zentrale/artifacts/final/",
         "release/affiliate-zentrale/evidence/",
         "control/release-governance/CURRENT_RELEASE.json"
       ]
@@ -118,17 +114,72 @@
     "new_parallel_ci_staging_policy": "DENY"
   },
   "required_release_gates": {
-    "old_state_reproduction_negative": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/old_state_reproduction_negative_v6634_bound.txt", "evidence_sha256": "0ac0d71635aa6e372e2d30c9a3705e5b85568e747d5d2ad34d19ed3e6bfe7237", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
-    "same_state_rootfix_positive": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/same_state_rootfix_positive_v6638_fix1.txt", "evidence_sha256": "1cd0a69ac7bd5957e93f55ac16314a7eb30ed4eb2f46fee6278c7771076ea517", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
-    "counterstates_fail_closed": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/counterstates_fail_closed_v6638_fix1.txt", "evidence_sha256": "28cef308ee6439cfb2b0cdafb4772f61ac91d4443bc7d1e4f5e335142d8ea587", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
-    "complete_selection_materialization_public_gate": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/complete_selection_materialization_public_gate_v6638_fix1.txt", "evidence_sha256": "28a4e3fa1817f9285bb12a22207580cd121e7b60e6535ed9a3ecd6510598c51b", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
-    "relevant_historical_regressions": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/relevant_historical_regressions_v6638_fix1.txt", "evidence_sha256": "7f89f1a9454bab03d1abe0d15005cb58437cd8d9c82399aefe9cf0f10eeffed4", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
-    "real_wordpress_mariadb_persistence_same_uuid": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
-    "recovery_retry_failure_paths": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/recovery_retry_failure_paths_v6638_fix1.txt", "evidence_sha256": "febc1ca6712daf385b753cae6c30d42d21f7c0660d2a64fdd1e84b23980c0971", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
-    "mutation_sabotage": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/mutation_sabotage_v6638_fix1.txt", "evidence_sha256": "5fbeda16929ebde2fdffdc2890672146046c732c42bc25c9056bdb60bd406589", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
-    "fresh_unpack_exact_installer": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
-    "source_zip_byte_identity": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
-    "final_sha256": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null}
+    "old_state_reproduction_negative": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/old_state_reproduction_negative_v6634_bound.txt",
+      "evidence_sha256": "0ac0d71635aa6e372e2d30c9a3705e5b85568e747d5d2ad34d19ed3e6bfe7237",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "same_state_rootfix_positive": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/same_state_rootfix_positive_v6638_fix1.txt",
+      "evidence_sha256": "1cd0a69ac7bd5957e93f55ac16314a7eb30ed4eb2f46fee6278c7771076ea517",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "counterstates_fail_closed": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/counterstates_fail_closed_v6638_fix1.txt",
+      "evidence_sha256": "28cef308ee6439cfb2b0cdafb4772f61ac91d4443bc7d1e4f5e335142d8ea587",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "complete_selection_materialization_public_gate": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/complete_selection_materialization_public_gate_v6638_fix1.txt",
+      "evidence_sha256": "28a4e3fa1817f9285bb12a22207580cd121e7b60e6535ed9a3ecd6510598c51b",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "relevant_historical_regressions": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/relevant_historical_regressions_v6638_fix1.txt",
+      "evidence_sha256": "7f89f1a9454bab03d1abe0d15005cb58437cd8d9c82399aefe9cf0f10eeffed4",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "real_wordpress_mariadb_persistence_same_uuid": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/real_wordpress_mariadb_persistence_same_uuid_v6638_fix1.txt",
+      "evidence_sha256": "c97b67d0ade85065c6ac3dfd976bac2a1dc06693d359cb9958aa46ccd9080b39",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "recovery_retry_failure_paths": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/recovery_retry_failure_paths_v6638_fix1.txt",
+      "evidence_sha256": "febc1ca6712daf385b753cae6c30d42d21f7c0660d2a64fdd1e84b23980c0971",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "mutation_sabotage": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/mutation_sabotage_v6638_fix1.txt",
+      "evidence_sha256": "5fbeda16929ebde2fdffdc2890672146046c732c42bc25c9056bdb60bd406589",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "fresh_unpack_exact_installer": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/fresh_unpack_exact_installer_v6638_final.txt",
+      "evidence_sha256": "786b25dddf119651cdf1c84a1e40829bbf757c951f856eca41a4a0a51b9e9e87",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "source_zip_byte_identity": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/source_zip_byte_identity_v6638_final.txt",
+      "evidence_sha256": "fcb4f883977a1ad7e04dd552225d53dfeab28481201eb591be9170ead8305ce5",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
+    "final_sha256": {
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/final_sha256_v6638_final.txt",
+      "evidence_sha256": "82ba2192d263e02e0e3740a1ab4398ac46d6ab7d13596ce6a1a10d5afb243096",
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
   "no_guessing": true,
@@ -155,7 +206,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "RUN_SINGLE_AFFILIATE_RELEASE_CYCLE_TO_FIRST_FAIL_OR_RELEASE",
+    "current_milestone": "FINAL_RELEASE_VERIFIED",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
