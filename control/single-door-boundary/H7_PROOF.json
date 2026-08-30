@@ -1,0 +1,31 @@
+{
+  "contract": "PFERDE_ATELIER_H7_PROJECT_EXECUTION_BOUNDARY_PROOF_V1",
+  "date": "2026-08-30",
+  "base_main": "6337d96cbd3649fe66d28b12c05978dea794283a",
+  "h6r_boundary_git_blob": "4921624e0b6d24ce35549bec28e6d43035b2f098",
+  "h1_git_blob_unchanged": "abab6c01f5be81372e294d079043cdd8596773c5",
+  "h2_git_blob_unchanged": "175a8556191d65b89934b296f91a39ee1971ba1f",
+  "local_tests": {
+    "project_execution_boundary": {"status": "PASS", "cases": 16},
+    "project_entry_selector": {"status": "PASS", "cases": 4},
+    "pserc_upload_visibility": {"status": "PASS", "cases": 7},
+    "total_cases": 27
+  },
+  "assertions": {
+    "free_worker_input_removed_remains_true": true,
+    "preproduction_waiting_package_has_exactly_one_single_door_room": true,
+    "preproduction_next_room_is_existing_R_001": true,
+    "production_plan_alone_is_rejected_as_handoff": true,
+    "markdown_is_rejected_as_handoff": true,
+    "zip_is_rejected_as_handoff": true,
+    "only_signed_approved_production_package_is_accepted": true,
+    "ed25519_release_signature_is_verified_before_attach": true,
+    "attach_uses_existing_runtime_lifecycle": true,
+    "runtime_must_reach_execution_ready": true,
+    "project_handoff_requires_bound_single_door_pass_receipt": true,
+    "out_of_band_free_chat_result_is_non_authoritative": true,
+    "host_tool_revocation_claimed": false,
+    "content_quality_seo_design_rules_changed": false,
+    "publish_allowed": false
+  }
+}
