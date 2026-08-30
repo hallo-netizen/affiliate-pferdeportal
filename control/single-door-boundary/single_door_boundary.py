@@ -14,6 +14,22 @@ from typing import Any, Callable, Dict, Iterable, Mapping, Optional
 BOUNDARY_CONTRACT = "PFERDE_ATELIER_SINGLE_DOOR_EXECUTION_BOUNDARY_V1"
 FUNCTION_NAME = "execute_bound_action"
 TOKEN_RE = re.compile(r"^[A-Za-z0-9_.:-]{1,128}$")
+ROOM_TOKEN_RE = re.compile(r"^R_[A-Za-z0-9_.:-]{1,126}$")
+REQUEST_FIELDS = {
+    "model",
+    "input",
+    "tools",
+    "tool_choice",
+    "parallel_tool_calls",
+    "metadata",
+}
+TOOL_FIELDS = {"type", "name", "description", "parameters", "strict"}
+EMPTY_PARAMETERS = {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": False,
+}
 
 
 class BoundaryError(RuntimeError):
@@ -49,6 +65,13 @@ class DoorBinding:
                 raise BoundaryError(f"BINDING_TOKEN_INVALID:{name}")
             return value
 
+        room_token = token("room_token")
+        next_room_token = token("next_room_token")
+        if not ROOM_TOKEN_RE.fullmatch(room_token):
+            raise BoundaryError("BINDING_ROOM_TOKEN_INVALID")
+        if not ROOM_TOKEN_RE.fullmatch(next_room_token):
+            raise BoundaryError("BINDING_NEXT_ROOM_TOKEN_INVALID")
+
         handles = raw.get("input_handles")
         if not isinstance(handles, list) or not handles:
             raise BoundaryError("INPUT_HANDLES_INVALID")
@@ -61,37 +84,31 @@ class DoorBinding:
             raise BoundaryError("INPUT_HANDLES_DUPLICATE")
 
         return cls(
-            room_token=token("room_token"),
+            room_token=room_token,
             action_token=token("action_token"),
             receipt_token=token("receipt_token"),
-            next_room_token=token("next_room_token"),
+            next_room_token=next_room_token,
             input_handles=tuple(parsed_handles),
         )
 
 
-def build_worker_request(*, binding: DoorBinding, model: str, worker_input: str) -> Dict[str, Any]:
+def build_worker_request(*, binding: DoorBinding, model: str) -> Dict[str, Any]:
     if not isinstance(model, str) or not model.strip():
         raise BoundaryError("MODEL_INVALID")
-    if not isinstance(worker_input, str):
-        raise BoundaryError("WORKER_INPUT_INVALID")
 
-    # The model gets exactly one executable capability. The action identity,
-    # input handles, receipt token and next room stay server-side and are not
-    # selectable by the model.
+    # The model receives no free prompt or semantic worker input. Its complete
+    # executable view is the current opaque room token plus exactly one forced
+    # no-argument capability. Action identity, input handles, receipt token,
+    # executor identity and next room remain server-side.
     request = {
         "model": model.strip(),
-        "input": worker_input,
+        "input": binding.room_token,
         "tools": [
             {
                 "type": "function",
                 "name": FUNCTION_NAME,
                 "description": "Execute the one opaque action bound to the current room.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {},
-                    "required": [],
-                    "additionalProperties": False,
-                },
+                "parameters": dict(EMPTY_PARAMETERS),
                 "strict": True,
             }
         ],
@@ -107,14 +124,35 @@ def build_worker_request(*, binding: DoorBinding, model: str, worker_input: str)
 
 
 def assert_single_door_request(request: Mapping[str, Any]) -> None:
+    if set(request) != REQUEST_FIELDS:
+        raise BoundaryError("REQUEST_FIELDS_INVALID")
+
+    room_input = request.get("input")
+    if not isinstance(room_input, str) or not ROOM_TOKEN_RE.fullmatch(room_input):
+        raise BoundaryError("OPAQUE_ROOM_INPUT_REQUIRED")
+
+    metadata = request.get("metadata")
+    if not isinstance(metadata, Mapping):
+        raise BoundaryError("REQUEST_METADATA_INVALID")
+    if set(metadata) != {"single_door_contract", "room_token"}:
+        raise BoundaryError("REQUEST_METADATA_FIELDS_INVALID")
+    if metadata.get("single_door_contract") != BOUNDARY_CONTRACT:
+        raise BoundaryError("REQUEST_METADATA_CONTRACT_INVALID")
+    if metadata.get("room_token") != room_input:
+        raise BoundaryError("REQUEST_ROOM_TOKEN_MISMATCH")
+
     tools = request.get("tools")
     if not isinstance(tools, list) or len(tools) != 1:
         raise BoundaryError("EXACTLY_ONE_TOOL_REQUIRED")
     tool = tools[0]
     if not isinstance(tool, Mapping):
         raise BoundaryError("TOOL_INVALID")
+    if set(tool) != TOOL_FIELDS:
+        raise BoundaryError("TOOL_FIELDS_INVALID")
     if tool.get("type") != "function" or tool.get("name") != FUNCTION_NAME:
         raise BoundaryError("BOUND_TOOL_INVALID")
+    if tool.get("parameters") != EMPTY_PARAMETERS or tool.get("strict") is not True:
+        raise BoundaryError("BOUND_TOOL_SCHEMA_INVALID")
     if request.get("tool_choice") != {"type": "function", "name": FUNCTION_NAME}:
         raise BoundaryError("BOUND_TOOL_NOT_FORCED")
     if request.get("parallel_tool_calls") is not False:
@@ -127,15 +165,10 @@ def _function_calls(response: Mapping[str, Any]) -> list[Mapping[str, Any]]:
         raise BoundaryError("RESPONSE_OUTPUT_INVALID")
     calls: list[Mapping[str, Any]] = []
     for item in output:
-        if isinstance(item, Mapping) and item.get("type") in {
-            "function_call",
-            "custom_tool_call",
-            "mcp_call",
-            "computer_call",
-            "shell_call",
-            "file_search_call",
-            "web_search_call",
-        }:
+        if not isinstance(item, Mapping):
+            continue
+        item_type = item.get("type")
+        if isinstance(item_type, str) and (item_type == "function_call" or item_type.endswith("_call")):
             calls.append(item)
     return calls
 
@@ -197,11 +230,10 @@ def run_single_door(
     *,
     binding: DoorBinding,
     model: str,
-    worker_input: str,
     transport: Callable[[Mapping[str, Any]], Mapping[str, Any]],
     bound_action: Callable[[DoorBinding], Mapping[str, Any]],
 ) -> Dict[str, Any]:
-    request = build_worker_request(binding=binding, model=model, worker_input=worker_input)
+    request = build_worker_request(binding=binding, model=model)
     response = transport(request)
     if not isinstance(response, Mapping):
         raise BoundaryError("TRANSPORT_RESPONSE_INVALID")
@@ -264,12 +296,14 @@ def selfcheck() -> Dict[str, Any]:
             "input_handles": ["I_TEST"],
         }
     )
-    request = build_worker_request(binding=binding, model="gpt-5.6-sol", worker_input="opaque-test")
+    request = build_worker_request(binding=binding, model="gpt-5.6-sol")
     assert_single_door_request(request)
     return {
         "ok": True,
-        "status": "H0S_SINGLE_DOOR_BOUNDARY_IMPLEMENTED",
+        "status": "H6R_WORKER_INPUT_ISOLATION_IMPLEMENTED",
         "contract": BOUNDARY_CONTRACT,
+        "worker_input": "REMOVED",
+        "model_input": request["input"],
         "tool_count": len(request["tools"]),
         "forced_tool": request["tool_choice"],
         "parallel_tool_calls": request["parallel_tool_calls"],
