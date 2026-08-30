@@ -1,0 +1,24 @@
+{
+  "contract": "PFERDE_ATELIER_RUNTIME_BATCH_SLOT_SETUP_EVIDENCE_V1",
+  "status": "LOCAL_HARD_PASS_AWAIT_GITHUB_MERGE",
+  "runtime_slot_contract_sha256": "a1cad246b523a9e3b592acdd266ead58c0d3d2b4349deedbe6c4258c59c26bb9",
+  "runtime_guard_sha256": "7c2f3e8d529908f76dc95e6badae7f3dc09df7e83ebb942535e615e349d79312",
+  "idle_state_sha256": "8bfd3f4bfa921d49135f15d084f8dd9c1cdb999fddee1374e970e2acc79581c0",
+  "tests": {
+    "idle_no_batch": "PASS_READY_IDLE_NO_RECEIPT",
+    "ready_batch_package_pending": "PASS_READY_WAITING_PACKAGE_NO_RECEIPT",
+    "historical_valid_ready_snapshot_plus_signed_package_fixture": "PASS_RUNTIME_INPUTS_BOUND",
+    "wrong_production_package_file_hash": "NEGATIVE_BLOCKED",
+    "metadata_item_with_hidden_sixth_field": "NEGATIVE_BLOCKED"
+  },
+  "historical_fixture_only": {
+    "source_snapshot_sha256": "1d5cd1cf6ba449a8e40a701583979e18e84469be81ef90f3411a48fb798474a4",
+    "production_package_file_sha256": "d13636218275d94426359566994b75b0cf0288e3d6af51f89ece06876631d9a7",
+    "used_as_active_runtime_batch": false
+  },
+  "current_live_snapshot_ready_count": 0,
+  "new_research_started": false,
+  "old_six_article_batch_reactivated": false,
+  "runtime_gate_v3_restored": false,
+  "publish_allowed": false
+}
