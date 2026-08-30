@@ -1,0 +1,4 @@
+STARTMASTER0107 FINAL HARDLOCK LIVE PROBE
+Test-only file. No workflow, domain, content, quality, design, SEO, PPM, PSERC, PSTE or publish rule change.
+Base: 7ea1d6daf02b55bbb8333cae0273009d2525eb08
+Expected: required checks hardlock + hardlock-base PASS. PR will be closed without merge.
