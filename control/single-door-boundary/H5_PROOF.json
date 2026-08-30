@@ -1,0 +1,39 @@
+{
+  "contract": "SINGLE_DOOR_H5_TECHNICAL_REGRESSION_PROOF_V1",
+  "status": "HARD_FAIL",
+  "result": "H5_REQUIRED_HARDLOCK_CHECK_NOT_TRIGGERED_FOR_SINGLE_DOOR_PATH",
+  "base_commit": "5dd5736e1d95e22365101ad4249b47bfcfa7779e",
+  "tested_head_commit": "b32c0baaa4bc0e0bfb4494f3fe9463c6d6f40b45",
+  "proof_pr": 47,
+  "diff_proof": {
+    "changed_file_count": 8,
+    "all_changes_under": "control/single-door-boundary/",
+    "existing_domain_content_quality_design_files_modified": false,
+    "existing_production_control_files_modified": false
+  },
+  "hardlock_base": {
+    "workflow_run_id": 33315559051,
+    "job_id": 99268238064,
+    "status": "PASS",
+    "trusted_entrance_and_continuity_tests": "PASS",
+    "monotonic_prebound_transition": "PASS",
+    "immutable_security_path_check": "PASS",
+    "domain_blindness_check": "PASS"
+  },
+  "required_ruleset": {
+    "ruleset_id": 21788951,
+    "required_checks": ["hardlock", "hardlock-base"],
+    "bypass": "NONE"
+  },
+  "actual_head_checks": ["hardlock-base"],
+  "missing_required_check": "hardlock",
+  "root_cause": "THE_EXISTING_HARDLOCK_PULL_REQUEST_PATH_FILTER_DOES_NOT_INCLUDE_control/single-door-boundary/**",
+  "h5_pass_allowed": false,
+  "h6_authorized": false,
+  "repair_performed": false,
+  "alternative_route_used": false,
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "design_authority": "NONE",
+  "workflow_replanning_authority": "NONE"
+}
