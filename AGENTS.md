@@ -1,9 +1,22 @@
 # Pferde Atelier – verbindliche Codex-Cloud-Eingangstür
 
-Diese Datei gilt repositoryweit für Codex Cloud.
+## Workstream-Router – ZUERST anwenden
 
-## Zwingender Start
-Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
+Vor jeder Aktion muss der Arbeitsstrang bestimmt werden.
+
+### AFFILIATE_ZENTRALE / eBay
+Wenn der Auftrag Affiliate-Zentrale, eBay, Awin, ADCELL, idealo, Digistore24 oder Pfade unter `release/affiliate-zentrale/` bzw. `control/release-governance/` betrifft:
+
+- **NICHT** `control/cloud-entry-gate/cloud_entry.py` starten.
+- **NICHT** STARTMASTER, `control/CURRENT_STARTMASTER.json` oder `.pferde-capsule/` zur Navigation verwenden.
+- Ausschließlich `release/affiliate-zentrale/AGENTS.md` und `control/release-governance/CURRENT_RELEASE.json` als Steuerung verwenden.
+- Genau einen Affiliate-Arbeitsstrang bearbeiten.
+
+### STARTMASTER / übrige Portalproduktion
+Nur wenn der Auftrag **nicht** zum Affiliate-Workstream gehört, gilt die nachfolgende STARTMASTER-Eingangstür.
+
+## Zwingender STARTMASTER-Start
+Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im STARTMASTER-Arbeitsstrang MUSS zuerst exakt dieser Befehl ausgeführt werden:
 
 `python3 control/cloud-entry-gate/cloud_entry.py start`
 
@@ -19,14 +32,14 @@ Wenn PASS gemeldet wird:
 - keine State- oder Workflowänderung eigenständig vornehmen;
 - bereits bestandene unveränderte PASS-Stufen nicht erneut prüfen.
 
-## Verbindlicher Step-Abschluss
+## Verbindlicher STARTMASTER-Step-Abschluss
 Nach Ausführung des aktuellen Steps MUSS `.pferde-capsule/RECEIPT.json` exakt gemäß `.pferde-capsule/RECEIPT_SCHEMA.json` geschrieben werden.
 
 Danach MUSS exakt ausgeführt werden:
 
 `python3 control/cloud-entry-gate/cloud_entry.py complete .pferde-capsule/RECEIPT.json`
 
-Nur die Eingangstür darf daraufhin den State verändern.
+Nur die Eingangstür darf daraufhin den STARTMASTER-State verändern.
 
 - Bei `STATE_ADVANCED_NEXT_STEP_READY`: ohne Zwischenmeldung sofort die neu materialisierte `.pferde-capsule/INSTRUCTION.txt` abarbeiten und denselben Abschlusszyklus fortsetzen.
 - Bei `STEP_TERMINAL_NONPASS`: sofort mit dem dort gebundenen `BLOCKED` oder `USER_ACTION_REQUIRED` stoppen. Keine Alternativroute und keine eigene Lösung.
@@ -34,7 +47,7 @@ Nur die Eingangstür darf daraufhin den State verändern.
 - Ein Chat-/Task-Neustart beginnt wieder ausschließlich mit `cloud_entry.py start`; bei unverändertem State wird dasselbe deterministische Ticket erzeugt und kein PASS-Step neu gebunden.
 
 ## Aktiver Textbatch / Chatwechsel
-Wenn der aktuell gebundene Step einen Textbatch ausführt, gilt zusätzlich der bestehende Production-Continuity-Vertrag:
+Wenn der aktuell gebundene STARTMASTER-Step einen Textbatch ausführt, gilt zusätzlich der bestehende Production-Continuity-Vertrag:
 - vorhandenen gebundenen BATCH_CHECKPOINT zuerst verwenden;
 - abgeschlossene unveränderte Items nicht erneut bearbeiten;
 - exakt am ersten offenen Item/Gate fortsetzen;
@@ -46,4 +59,4 @@ Wenn der aktuell gebundene Step einen Textbatch ausführt, gilt zusätzlich der 
 Die Eingangstür und Continuity-Schicht sind rein technisch. Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- und sonstige Portalregeln liegen ausschließlich im nachgelagerten Workflow und dürfen hier weder ersetzt noch dupliziert werden.
 
 ## Definition of Done
-Vor einem terminalen Abschluss muss `python3 control/cloud-entry-gate/cloud_entry.py verify` PASS melden. Ein Ergebnis ohne gültigen Receipt-Abschluss ist nicht workflowgültig.
+Für STARTMASTER muss vor einem terminalen Abschluss `python3 control/cloud-entry-gate/cloud_entry.py verify` PASS melden. Für Affiliate gilt stattdessen ausschließlich der Affiliate-Release-Guard gemäß `release/affiliate-zentrale/AGENTS.md`.
