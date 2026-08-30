@@ -1,0 +1,10 @@
+AFFILIATE V6.63.8 PHP FATAL FIX EVIDENCE
+SOURCE_MANIFEST_SHA256=4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f
+ROOTCAUSE=automation_extend_topic_with_hivepress called creative_library_text() and creative_library_tokens(), but neither method existed in the composed class.
+FIX=Added two compatibility bridge methods delegating to the already canonical output_text() and output_tokens() normalization implementations.
+BEHAVIOR_CHANGE=NONE_OUTSIDE_MISSING_METHOD_RESOLUTION
+PHP_LINT=16/16 PASS
+SOURCE_MANIFEST=21/21 PASS
+STATIC_THIS_METHOD_RESOLUTION=0 undefined literal $this->method() calls
+HOUSEKEEPING_FILE_SHA256=0a757412cc4a7d83f5174a17552b3418324fb45130f45c48665ded5562ec03dc
+RESULT=PASS
