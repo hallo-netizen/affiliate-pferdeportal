@@ -7,9 +7,9 @@
   "h2_git_blob_unchanged": "175a8556191d65b89934b296f91a39ee1971ba1f",
   "local_tests": {
     "project_execution_boundary": {"status": "PASS", "cases": 16},
-    "project_entry_selector": {"status": "PASS", "cases": 4},
+    "project_entry_selector": {"status": "PASS", "cases": 5},
     "pserc_upload_visibility": {"status": "PASS", "cases": 7},
-    "total_cases": 27
+    "total_cases": 28
   },
   "assertions": {
     "free_worker_input_removed_remains_true": true,
@@ -24,6 +24,7 @@
     "runtime_must_reach_execution_ready": true,
     "project_handoff_requires_bound_single_door_pass_receipt": true,
     "out_of_band_free_chat_result_is_non_authoritative": true,
+    "legacy_cloud_entry_pointer_rejected_by_project_entry": true,
     "host_tool_revocation_claimed": false,
     "content_quality_seo_design_rules_changed": false,
     "publish_allowed": false
