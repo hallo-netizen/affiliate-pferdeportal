@@ -7,6 +7,20 @@ if (!defined('ABSPATH')) { exit; }
  * canonical run state or current source facts.
  */
 trait PPAR_Housekeeping_Trait {
+    /**
+     * Compatibility bridge for the automation suite. V6.63.8 calls these two
+     * creative-library helpers, while the canonical implementations live in the
+     * output-object trait as output_text()/output_tokens(). Keep one normalization
+     * implementation and delegate instead of duplicating the algorithm.
+     */
+    private function creative_library_text($value) {
+        return $this->output_text($value);
+    }
+
+    private function creative_library_tokens($value) {
+        return $this->output_tokens($value);
+    }
+
     private function housekeeping_state_defaults() {
         return array(
             'contract'=>'1.0','status'=>'never','started_at'=>0,'finished_at'=>0,
