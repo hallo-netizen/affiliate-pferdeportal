@@ -1,0 +1,36 @@
+{
+  "contract": "PFERDE_ATELIER_SINGLE_DOOR_H0V_PROOF_V1",
+  "status": "H0V_SINGLE_DOOR_MECHANICAL_PROOF_PASS",
+  "boundary_ref": "control/single-door-boundary/single_door_boundary.py",
+  "boundary_git_blob_sha1": "13d72055313e70540d872236182df1df07dd0095",
+  "test_ref": "control/single-door-boundary/test_single_door_boundary.py",
+  "checks": 12,
+  "results": {
+    "allowed_action": "PASS",
+    "exactly_one_tool": "PASS",
+    "forced_bound_tool": "PASS",
+    "parallel_tool_calls_disabled": "PASS",
+    "second_action": "BLOCKED",
+    "repo_shell_capability": "NOT_PROVISIONED_AND_FORGED_CALL_BLOCKED",
+    "free_web_search_capability": "NOT_PROVISIONED_AND_FORGED_CALL_BLOCKED",
+    "free_file_search_capability": "NOT_PROVISIONED_AND_FORGED_CALL_BLOCKED",
+    "backtrack": "BLOCKED",
+    "sidejump": "BLOCKED",
+    "wrong_receipt": "BLOCKED",
+    "valid_receipt": "EXACT_PREBOUND_NEXT_ROOM"
+  },
+  "local_exact_blob_execution": {
+    "git_blob_sha1_calculated": "13d72055313e70540d872236182df1df07dd0095",
+    "exact_blob_match": true,
+    "all_checks_pass": true,
+    "evidence_sha256": "ee09407368ef1ce8b4acfb48c8053e0842010f47b44ebf5c49668df69595d5e1"
+  },
+  "live_openai_transport_exercised": false,
+  "live_transport_reason": "NO_OPENAI_API_KEY_AVAILABLE_IN_EXECUTION_ENVIRONMENT",
+  "h0v_scope_note": "H0V proves the boundary contract mechanically. Production-route binding remains outside H0V and is not performed here.",
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "design_authority": "NONE",
+  "next_step_on_pass": "H1",
+  "all_other_actions": "DENY"
+}

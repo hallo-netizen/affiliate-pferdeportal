@@ -1,0 +1,183 @@
+{
+  "contract": "PFERDE_ATELIER_TECHNICAL_PRODUCTION_STREET_MAP_V1",
+  "startmaster": "STARTMASTER0107",
+  "scope": "OUTER_TECHNICAL_HANDOFFS_ONLY",
+  "domain_blind": true,
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "design_authority": "NONE",
+  "workflow_replanning_authority": "NONE",
+  "source_base_commit": "5dd5736e1d95e22365101ad4249b47bfcfa7779e",
+  "productive_entry_condition": {
+    "outer_step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+    "outer_sequence": 107007,
+    "runtime_guard_required_status": "RUNTIME_INPUTS_BOUND",
+    "preproduction_staging_statuses": [
+      "READY_IDLE",
+      "READY_WAITING_PACKAGE"
+    ],
+    "rule": "PRODUCTIVE_STREET_BEGINS_ONLY_AFTER_RUNTIME_INPUTS_BOUND; NO_ROUTE_IS_INVENTED_FOR_PREPRODUCTION_STAGING"
+  },
+  "route": [
+    {
+      "order": 1,
+      "technical_transition": "MATERIALIZE_CURRENT_BOUND_107007",
+      "executor_ref": "control/cloud-entry-gate/cloud_entry.py",
+      "operation": "start",
+      "expected_result": "CODEX_CLOUD_ENTRANCE_PASS",
+      "next_order": 2
+    },
+    {
+      "order": 2,
+      "technical_transition": "VALIDATE_RUNTIME_BINDING",
+      "executor_ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py",
+      "operation": "validate-current-runtime-state",
+      "expected_result": "RUNTIME_INPUTS_BOUND",
+      "next_order": 3
+    },
+    {
+      "order": 3,
+      "technical_transition": "PREFLIGHT_BOUND_PACKAGE",
+      "executor_ref": "control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py",
+      "operation": "validate-bound-production-package",
+      "expected_result": "PASS",
+      "next_order": 4
+    },
+    {
+      "order": 4,
+      "technical_transition": "INSTANTIATE_BOUND_ITEM_CHAIN",
+      "executor_ref": "control/startmaster0106/TEXTPRODUKTION_NO_STOP_CONTINUITY_HARDLOCK_V1.json",
+      "operation": "instantiate-one-room-per-bound-item-in-bound-order",
+      "expected_result": "LINEAR_BOUND_ITEM_CHAIN",
+      "next_order": 5
+    },
+    {
+      "order": 5,
+      "technical_transition": "EXECUTE_BOUND_ITEM_CHAIN",
+      "executor_ref": "EXISTING_BOUND_ITEM_EXECUTOR_OPAQUE",
+      "operation": "for-each-bound-item: execute-current-item -> persist-checkpoint -> validate-checkpoint -> advance-only-to-next-unfinished-item",
+      "checkpoint_guard_ref": "control/production-continuity/production_continuity_guard.py",
+      "checkpoint_contract": "PFERDE_ATELIER_BATCH_CHECKPOINT_V1",
+      "expected_intermediate_result": "BATCH_CHECKPOINT_VALID",
+      "expected_final_checkpoint_status": "BATCH_COMPLETE",
+      "next_order": 6
+    },
+    {
+      "order": 6,
+      "technical_transition": "FINALIZE_BATCH_CONTINUITY",
+      "executor_ref": "control/production-continuity/production_continuity_guard.py",
+      "operation": "finalize",
+      "expected_result": "BATCH_FINAL_RECEIPT_ALLOWED",
+      "next_order": 7
+    },
+    {
+      "order": 7,
+      "technical_transition": "WRITE_BOUND_107007_RECEIPT",
+      "executor_ref": "control/cloud-entry-gate/cloud_entry.py",
+      "operation": "create-receipt-conforming-to-materialized-receipt-schema",
+      "expected_receipt_contract": "PFERDE_ATELIER_STEP_RECEIPT_V2",
+      "expected_status": "PASS",
+      "next_order": 8
+    },
+    {
+      "order": 8,
+      "technical_transition": "COMPLETE_107007_AND_ADVANCE_107008",
+      "executor_ref": "control/cloud-entry-gate/cloud_entry.py",
+      "operation": "complete",
+      "expected_result": "STATE_ADVANCED_NEXT_STEP_READY",
+      "expected_next_step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
+      "expected_next_sequence": 107008,
+      "next_order": 9
+    },
+    {
+      "order": 9,
+      "technical_transition": "EXECUTE_BOUND_FINAL_REVIEW",
+      "executor_ref": "STEP_107008_BOUND_REVIEW_EXECUTOR_OPAQUE",
+      "operation": "execute-only-bound-final-review",
+      "expected_result": "REVIEW_PASS_BEFORE_RUNTIME_CLEAR",
+      "next_order": 10
+    },
+    {
+      "order": 10,
+      "technical_transition": "VERIFY_RUNTIME_LIFECYCLE_CONTROLLER_BINDING",
+      "executor_ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
+      "operation": "verify-byte-hash-before-clear",
+      "expected_sha256": "3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837",
+      "next_order": 11
+    },
+    {
+      "order": 11,
+      "technical_transition": "CLEAR_RUNTIME_AFTER_REVIEW",
+      "executor_ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
+      "operation": "clear-after-review",
+      "expected_results": [
+        "RUNTIME_SLOT_CLEARED_AND_IDLE",
+        "RUNTIME_SLOT_ALREADY_IDLE"
+      ],
+      "next_order": 12
+    },
+    {
+      "order": 12,
+      "technical_transition": "WRITE_BOUND_107008_RECEIPT",
+      "executor_ref": "control/cloud-entry-gate/cloud_entry.py",
+      "operation": "create-receipt-conforming-to-materialized-receipt-schema",
+      "expected_receipt_contract": "PFERDE_ATELIER_STEP_RECEIPT_V2",
+      "expected_status": "PASS",
+      "next_order": 13
+    },
+    {
+      "order": 13,
+      "technical_transition": "COMPLETE_107008_AND_REARM_107007",
+      "executor_ref": "control/cloud-entry-gate/cloud_entry.py",
+      "operation": "complete-final-rearm",
+      "required_runtime_precondition": {
+        "status": "NO_ACTIVE_BATCH",
+        "publish_allowed": false
+      },
+      "expected_result": "FINAL_STEP_PASS_REARMED",
+      "expected_rearmed_step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+      "expected_rearmed_sequence": 107007,
+      "next_order": null
+    }
+  ],
+  "bound_item_chain_rule": {
+    "source": "batch_checkpoint.bound_item_ids",
+    "room_generation": "ONE_EXECUTION_ROOM_PLUS_ONE_CHECKPOINT_VALIDATION_HANDOFF_PER_BOUND_ITEM",
+    "advance_rule": "NEXT_ITEM_MUST_EQUAL_FIRST_REMAINING_BOUND_ITEM",
+    "replay_rule": "COMPLETED_ITEMS_NOT_REEXECUTED_WHILE_BOUND_INPUTS_UNCHANGED",
+    "completion_rule": "FINAL_RECEIPT_ONLY_WHEN_ALL_BOUND_ITEMS_COMPLETED_AND_STATUS_BATCH_COMPLETE"
+  },
+  "outer_next_binding": {
+    "from_step": 107007,
+    "to_step": 107008,
+    "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json"
+  },
+  "final_rearm": {
+    "from_step": 107008,
+    "to_step": 107007,
+    "mode": "STATE_PREBOUND_REARM_TARGET",
+    "auto_publish": false
+  },
+  "source_refs": [
+    "control/CURRENT_STARTMASTER.json",
+    "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
+    "control/startmaster0107/CURRENT_STATE.json",
+    "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
+    "control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json",
+    "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py",
+    "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
+    "control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py",
+    "control/startmaster0106/TEXTPRODUKTION_NO_STOP_CONTINUITY_HARDLOCK_V1.json",
+    "control/production-continuity/production_continuity_guard.py",
+    "control/cloud-entry-gate/cloud_entry.py",
+    "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json"
+  ],
+  "pass_assertions": {
+    "all_current_outer_handoffs_mapped": true,
+    "existing_order_preserved": true,
+    "fach_semantics_copied_into_guard_map": false,
+    "content_quality_design_logic_changed": false,
+    "new_route_invented": false,
+    "terminal_review_or_rearm_has_no_unbound_successor": true
+  }
+}

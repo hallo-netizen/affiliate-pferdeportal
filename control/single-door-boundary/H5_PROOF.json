@@ -1,0 +1,47 @@
+{
+  "contract": "SINGLE_DOOR_H5_TECHNICAL_REGRESSION_PROOF_V2",
+  "status": "PASS",
+  "result": "H5_TECHNICAL_REGRESSION_AND_ZERO_DOMAIN_CHANGE_PASS",
+  "current_main": "4ef6addee7c0c9c2b3b4e56bad9ac6f9fe093e5b",
+  "tested_head_commit": "db40634818069133f73d035174939da384f36751",
+  "proof_pr": 47,
+  "diff_proof": {
+    "changed_file_count": 10,
+    "all_changes_under": "control/single-door-boundary/",
+    "existing_domain_content_quality_design_files_modified": false,
+    "existing_production_control_files_modified": false
+  },
+  "ruleset": {
+    "ruleset_id": 21788951,
+    "required_checks": ["hardlock", "hardlock-base"],
+    "bypass": "NONE"
+  },
+  "hardlock": {
+    "workflow_run_id": 33316693348,
+    "job_id": 99271333499,
+    "status": "PASS",
+    "legacy_gate_regression": "PASS",
+    "cloud_entrance_positive_negative": "PASS",
+    "production_continuity_positive_negative": "PASS",
+    "api_dependency_check": "PASS",
+    "domain_blindness_check": "PASS"
+  },
+  "hardlock_base": {
+    "workflow_run_id": 33316692244,
+    "job_id": 99271330497,
+    "status": "PASS",
+    "immutable_security_path_check": "PASS",
+    "monotonic_prebound_transition": "PASS",
+    "trusted_entrance_and_continuity_tests": "PASS",
+    "api_free_domain_blind_check": "PASS"
+  },
+  "existing_overall_technical_workflow_blackbox": "PASS",
+  "h5_pass_allowed": true,
+  "h6_authorized": true,
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "design_authority": "NONE",
+  "workflow_replanning_authority": "NONE",
+  "repair_performed_in_h5_reverify": false,
+  "alternative_route_used": false
+}

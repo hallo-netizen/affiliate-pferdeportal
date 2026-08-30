@@ -1,0 +1,10 @@
+{
+  "contract": "SINGLE_DOOR_H5_REVERIFY_TRIGGER_V1",
+  "purpose": "Trigger both required existing hardlock checks after H5R path-filter repair",
+  "base_main": "4ef6addee7c0c9c2b3b4e56bad9ac6f9fe093e5b",
+  "scope": "TECHNICAL_REGRESSION_ONLY",
+  "domain_change": false,
+  "content_change": false,
+  "quality_change": false,
+  "design_change": false
+}
