@@ -83,10 +83,17 @@ def run():
         for route in routes.values():
             for row in route["rooms"]:
                 token = row["worker_view"]["room_token"]
-                req = route_binding.worker_request_for(route, token, model="gpt-5.6-sol", worker_input="opaque")
+                req = route_binding.worker_request_for(route, token, model="gpt-5.6-sol")
+                assert req["input"] == token
                 assert len(req["tools"]) == 1
                 bad = copy.deepcopy(req)
-                bad["tools"].append({"type": "function", "name": "second"})
+                bad["tools"].append({
+                    "type": "function",
+                    "name": "second",
+                    "description": "second",
+                    "parameters": dict(boundary.EMPTY_PARAMETERS),
+                    "strict": True,
+                })
                 must_raise(boundary.BoundaryError, lambda b=bad: boundary.assert_single_door_request(b), "EXACTLY_ONE_TOOL_REQUIRED")
     ok("SECOND_CAPABILITY_REJECTED", c07)
 
