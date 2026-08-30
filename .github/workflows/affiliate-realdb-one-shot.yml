@@ -1,0 +1,126 @@
+name: Affiliate V6638 one-shot real DB gate
+
+on:
+  push:
+    branches:
+      - affiliate-realdb-one-shot-20260830
+
+jobs:
+  real-db:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
+    steps:
+      - name: Checkout exact Affiliate source branch
+        uses: actions/checkout@v4
+        with:
+          ref: affiliate-release-current
+
+      - name: PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli, mbstring, curl, zip
+          coverage: none
+
+      - name: Install WP-CLI and MariaDB client
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq mariadb-client
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          chmod +x /tmp/wp
+          /tmp/wp --info
+          mariadb -h127.0.0.1 -uroot -proot -Nse 'SELECT VERSION();'
+
+      - name: Verify exact current source
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find release/affiliate-zentrale/current/affiliate-portal-router -type f | wc -l)" -eq 21
+          (cd release/affiliate-zentrale/current && sha256sum -c ../CURRENT_SOURCE_SHA256.txt)
+          find release/affiliate-zentrale/current/affiliate-portal-router -name '*.php' -print0 | sort -z | xargs -0 -n1 php -l
+
+      - name: Install WordPress 7.0.1 and seed exact old zero-tick state
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wp-old
+          /tmp/wp core download --path=/tmp/wp-old --version=7.0.1 --force
+          /tmp/wp config create --path=/tmp/wp-old --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-old --url=https://example.test --title=Gate --admin_user=admin --admin_password='GatePass-6638!' --admin_email=admin@example.test --skip-email
+          mkdir -p /tmp/wp-old/wp-content/plugins/affiliate-portal-router /tmp/wp-old/wp-content/mu-plugins
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router/. /tmp/wp-old/wp-content/plugins/affiliate-portal-router/
+          cat > /tmp/wp-old/wp-content/mu-plugins/v6638-gate-capture.php <<'PHP'
+          <?php
+          add_filter('pre_http_request', function($pre,$args,$url){
+              $body=is_array($args['body']??null)?$args['body']:array();
+              if (($body['action']??'')==='ppar_ebay_canonical_self_drive') {
+                  $calls=get_option('v6638_gate_http_calls',array());
+                  if(!is_array($calls)) $calls=array();
+                  $calls[]=array('url'=>$url,'body'=>$body);
+                  update_option('v6638_gate_http_calls',$calls,false);
+                  return array('headers'=>array(),'body'=>'','response'=>array('code'=>202,'message'=>'Accepted'),'cookies'=>array(),'filename'=>null);
+              }
+              return $pre;
+          },1,3);
+          PHP
+          cat > /tmp/seed-v6634-zero.php <<'PHP'
+          <?php
+          $uuid='7ff7434e-f12a-493b-8485-1e98188ef02c';
+          $run=array(
+            'schema'=>'1.0','build'=>'6.63.4-live-observed-gap-proof-recovery-rootfix-20260828','run_uuid'=>$uuid,
+            'status'=>'running','phase'=>'reconcile_local','started_at'=>time()-60,'finished_at'=>0,
+            'owner'=>'','lease_expires_at'=>0,'worker_transport'=>'external_tick','orchestrator_contract'=>'external_tick_v2',
+            'progress_seq'=>0,'transport_tick_count'=>0,'phase_tick_count'=>0,'no_progress_count'=>0,'last_progress_at'=>time()-60,
+            'progress_contract_version'=>'3.1','phase_state'=>array(),'error_code'=>'','error_message'=>'',
+            'config_snapshot'=>array('seller_routes'=>array('private'=>1,'business'=>1),'settings'=>array()),
+            'coverage'=>array('required'=>311,'covered'=>0,'missing'=>array()),
+            'checkpoint_id'=>'ZERO-TICK-SAFE','checkpoint_base_id'=>'ZERO-TICK-SAFE',
+            'checkpoint_candidate'=>array('business_campaign_ids'=>array(501,502),'private_listing_ids'=>array(101,102))
+          );
+          update_option('ppar_ebay_run_state_v1',$run,false);
+          update_option('v6638_gate_http_calls',array(),false);
+          echo "SEED_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/seed-v6634-zero.php --path=/tmp/wp-old
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-old
+
+      - name: Positive same database same UUID V6.63.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          GATE_MODE=positive_upgrade /tmp/wp eval-file "$GITHUB_WORKSPACE/release/affiliate-zentrale/tests/real_db_gate_v6638.php" --path=/tmp/wp-old
+          echo REAL_WORDPRESS_MARIADB_SAME_UUID_PASS
+
+      - name: Fresh WordPress fresh MariaDB V6.63.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mariadb -h127.0.0.1 -uroot -proot -e 'CREATE DATABASE wordpress_fresh CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; GRANT ALL PRIVILEGES ON wordpress_fresh.* TO "wp"@"%"; FLUSH PRIVILEGES;'
+          mkdir -p /tmp/wp-fresh
+          /tmp/wp core download --path=/tmp/wp-fresh --version=7.0.1 --force
+          /tmp/wp config create --path=/tmp/wp-fresh --dbname=wordpress_fresh --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-fresh --url=https://fresh.example.test --title=FreshGate --admin_user=admin --admin_password='GatePass-6638!' --admin_email=admin@example.test --skip-email
+          mkdir -p /tmp/wp-fresh/wp-content/plugins/affiliate-portal-router /tmp/wp-fresh/wp-content/mu-plugins
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router/. /tmp/wp-fresh/wp-content/plugins/affiliate-portal-router/
+          cp /tmp/wp-old/wp-content/mu-plugins/v6638-gate-capture.php /tmp/wp-fresh/wp-content/mu-plugins/
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-fresh
+          GATE_MODE=fresh /tmp/wp eval-file "$GITHUB_WORKSPACE/release/affiliate-zentrale/tests/real_db_gate_v6638.php" --path=/tmp/wp-fresh
+          echo REAL_WORDPRESS_MARIADB_FRESH_PASS
