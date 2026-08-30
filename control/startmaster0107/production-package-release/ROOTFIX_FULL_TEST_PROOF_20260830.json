@@ -1,0 +1,58 @@
+{
+  "contract": "PFERDE_ATELIER_PRODUCTION_PACKAGE_RELEASE_ROOTFIX_FULL_TEST_V1",
+  "status": "PASS",
+  "scope": {
+    "h7_single_door_concept_changed": false,
+    "existing_wachter_files_changed": false,
+    "content_quality_seo_research_design_rules_changed": false,
+    "publish_behavior_changed": false,
+    "new_workflow_stage_added": false,
+    "technical_release_boundary_only": true
+  },
+  "new_release_gate": {
+    "contract": "PFERDE_ATELIER_PRODUCTION_PACKAGE_RELEASE_ROOTFIX_TEST_V1",
+    "status": "PASS",
+    "checks_passed": 12,
+    "checks_total": 12,
+    "checks": [
+      {"name": "POSITIVE_FULL_PACKAGE_CURRENT_GENERATION", "status": "PASS"},
+      {"name": "RELEASE_COPY_BYTE_IDENTICAL", "status": "PASS"},
+      {"name": "NEGATIVE_PRODUCTION_PLAN_BLOCKED", "status": "PASS"},
+      {"name": "NEGATIVE_TAMPER_BLOCKED", "status": "PASS"},
+      {"name": "NEGATIVE_INVALID_SIGNATURE_BLOCKED", "status": "PASS"},
+      {"name": "NEGATIVE_CURRENT_BATCH_DRIFT_BLOCKED", "status": "PASS"},
+      {"name": "POSITIVE_EXISTING_7_TEXTS_RECOVERY_LOCK", "status": "PASS"},
+      {"name": "POSITIVE_RECOVERY_LOCK_REVERIFY", "status": "PASS"},
+      {"name": "NEGATIVE_ARTICLE_MUTATION_BLOCKED", "status": "PASS"},
+      {"name": "NEGATIVE_METADATA_DRIFT_BLOCKED", "status": "PASS"},
+      {"name": "NEGATIVE_UNKNOWN_CONTRACT_BLOCKED", "status": "PASS"},
+      {"name": "SCOPE_NO_CONTENT_NO_PUBLISH", "status": "PASS"}
+    ]
+  },
+  "unchanged_wachter_regression": {
+    "status": "PASS",
+    "checks_passed": 61,
+    "checks_total": 61,
+    "runs": [
+      {"test": "test_single_door_boundary.py", "checks": 12, "status": "PASS"},
+      {"test": "test_h4_bound_route_single_door.py", "checks": 12, "status": "PASS"},
+      {"test": "test_h6r_worker_input_isolation.py", "checks": 16, "status": "PASS"},
+      {"test": "test_h7_entry_selector.py", "checks": 5, "status": "PASS"},
+      {"test": "test_h7_project_execution_boundary.py", "checks": 16, "status": "PASS"}
+    ]
+  },
+  "combined_local_assertions": {"passed": 73, "total": 73},
+  "current_generation1_recovery": {
+    "status": "PASS",
+    "generation": 1,
+    "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+    "production_plan_sha256": "0535129cb98fd78e1167007870eb628bee16e34e844d2fc91588a987c3465334",
+    "item_count": 7,
+    "manifest_sha256": "356656fa5e665f8d655f95c9e34f17ce00deec36c4913a4126da047b55e879da",
+    "content_mutation_allowed": false,
+    "metadata_reselection_allowed": false,
+    "new_topic_research_allowed": false,
+    "publish_allowed": false
+  },
+  "note": "The recovery lock preserves the existing seven texts and metadata. It does not forge or bypass missing fact-pack/language-quality/signed-supervisor bindings; those remain mandatory existing gates."
+}
