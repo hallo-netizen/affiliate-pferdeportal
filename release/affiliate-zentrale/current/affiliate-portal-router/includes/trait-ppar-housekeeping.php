@@ -1,6 +1,9 @@
 <?php
 if (!defined('ABSPATH')) { exit; }
 
+require_once __DIR__ . '/class-ppar-partner-analytics.php';
+require_once __DIR__ . '/class-ppar-deal-radar.php';
+
 /**
  * Bounded housekeeping for derived/cache/history data only.
  * Never removes current publication, manual veto/approval, active provider data,
@@ -196,3 +199,6 @@ trait PPAR_Housekeeping_Trait {
         return $state;
     }
 }
+
+PPAR_Partner_Analytics_Admin::bootstrap();
+PPAR_Deal_Radar::bootstrap();
