@@ -48,14 +48,14 @@
     "final_artifact_sha256": null
   },
   "execution_state": {
-    "state": "WAITING_FOR_CANONICAL_SOURCE_BYTES",
-    "authorized_next_action": "COMMIT_EXACT_V6638_21_FILE_SOURCE_TO_CANONICAL_ROOT",
+    "state": "RUNNING_BOUND_RELEASE_GATES",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
     "completion_condition": "DIRECT_SOURCE_21_OF_21_HASH_PASS",
     "after_completion_action": "RUN_BOUND_RELEASE_GATES",
     "no_optional_detours": true,
-    "sequence": 1,
+    "sequence": 2,
     "authorized_change_prefixes": [
-      "release/affiliate-zentrale/current/",
+      "release/affiliate-zentrale/evidence/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
     "next_state_binding": {
