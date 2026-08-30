@@ -118,7 +118,7 @@
     "new_parallel_ci_staging_policy": "DENY"
   },
   "required_release_gates": {
-    "old_state_reproduction_negative": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "old_state_reproduction_negative": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/old_state_reproduction_negative_v6634_bound.txt", "evidence_sha256": "0ac0d71635aa6e372e2d30c9a3705e5b85568e747d5d2ad34d19ed3e6bfe7237", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
     "same_state_rootfix_positive": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
     "counterstates_fail_closed": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/counterstates_fail_closed_v6638_fix1.txt", "evidence_sha256": "28cef308ee6439cfb2b0cdafb4772f61ac91d4443bc7d1e4f5e335142d8ea587", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
     "complete_selection_materialization_public_gate": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
