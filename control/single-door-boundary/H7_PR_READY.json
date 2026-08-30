@@ -1,6 +1,0 @@
-{
-  "contract": "PFERDE_ATELIER_H7_PR_READY_V1",
-  "status": "READY",
-  "required_checks": ["hardlock", "hardlock-base"],
-  "publish_allowed": false
-}
