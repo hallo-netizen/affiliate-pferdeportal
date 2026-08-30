@@ -1,0 +1,30 @@
+{
+  "contract": "PFERDE_ATELIER_RUNTIME_BATCH_SLOT_CONTRACT_V1",
+  "version": "1.0.0",
+  "state_ref": "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json",
+  "allowed_states": [
+    "NO_ACTIVE_BATCH",
+    "BATCH_READY_PACKAGE_PENDING",
+    "EXECUTION_READY"
+  ],
+  "batch_contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "ready_status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "production_package_contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
+  "workflow_release_contract": "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED",
+  "required_metadata_fields": [
+    "title",
+    "target_keyword",
+    "category",
+    "article_type",
+    "plan_slot"
+  ],
+  "publish_allowed": false,
+  "runtime_batch_is_ephemeral": true,
+  "permanent_article_binding_forbidden": true,
+  "idle_is_valid": true,
+  "idle_is_terminal": false,
+  "idle_receipt_forbidden": true,
+  "package_pending_is_terminal": false,
+  "package_pending_receipt_forbidden": true,
+  "batch_lifecycle": "REPLACE_PER_PRODUCTION_RUN_CLEAR_AFTER_FINAL_REVIEW"
+}
