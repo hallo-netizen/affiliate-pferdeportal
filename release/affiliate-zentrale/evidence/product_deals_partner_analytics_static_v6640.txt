@@ -1,0 +1,51 @@
+AFFILIATE_ZENTRALE V6.64.0 – PRODUCT DEALS / PARTNER ANALYTICS STATIC EVIDENCE
+Date: 2026-08-30
+Source manifest SHA-256: 9ec2d4030498d904b3508f666acfc4b9e8145364e2c4a48f7e4a8942cd0665ed
+Source files: 23
+
+BOUND USER SCOPE
+- central Partner & Einnahmen cockpit
+- OTTO shown separately although technical source may be Awin
+- Amazon / OTTO / Kelkoo / idealo / eBay product-source view
+- first public Kracher test restricted to Reithelme
+- no eBay runtime/recovery change
+
+SOURCE DELTA AGAINST PRE-SCOPE COMMIT 2bb2e950baf80254c55d43386f95e6366efb30a7
+- ADD includes/class-ppar-partner-analytics.php
+- ADD includes/class-ppar-deal-radar.php
+- MODIFY includes/trait-ppar-housekeeping.php: bootstrap only (+6 / -0)
+- eBay source files: UNCHANGED
+- main router source: UNCHANGED
+- EBAY_RUNTIME_BUILD: UNCHANGED
+
+LOCAL STATIC TESTS
+PHP lint:
+- class-ppar-partner-analytics.php: PASS
+- class-ppar-deal-radar.php: PASS
+- trait-ppar-housekeeping.php: PASS
+
+Deal-radar focused positive/negative tests: 7/7 PASS
+- real Reithelm title accepted
+- Reithelm-Tasche rejected
+- German decimal price parsed correctly
+- German thousands price parsed correctly
+- GTIN extraction from EAN/GTIN fields PASS
+- strong cross-provider market discount accepted
+- weak price advantage rejected
+
+FAIL-CLOSED RULES IMPLEMENTED
+- only singular Reithelm/Reithelme page scope
+- no qualified deal => no public block
+- stale product data excluded
+- non-EUR product rows excluded
+- Awin product rows excluded unless clearly OTTO
+- accessories such as helmet bags/covers/holders/liners rejected
+- market comparison uses exact GTIN; otherwise own price history is required
+- one-provider comparison requires stricter 25% / EUR 20 minimum
+- click redirect revalidates the current best deal before leaving the portal
+- expired/replaced deal => HTTP 410 instead of stale redirect
+- sales/revenue/commission are never estimated
+
+STATUS
+STATIC_SCOPE_PASS.
+This is NOT a final release PASS. Real WordPress/MariaDB install/runtime verification and final artifact gates remain pending.
