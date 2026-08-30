@@ -1,0 +1,9 @@
+GATE=mutation_sabotage
+RESULT=PASS
+SOURCE_MANIFEST_SHA256=4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f
+MANIFEST_FILE_SHA256=4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f
+PASS=current_exact_source_manifest_21_of_21
+SABOTAGE=append bytes to affiliate-portal-router/readme.txt in isolated copy
+PASS=bound_sha256_manifest_rejected_mutated_readme
+RUNTIME_SABOTAGE_COVERAGE=same-state and recovery negative mutation cases already fail-closed under current exact eBay run trait
+RESULT_FINAL=MUTATION_SABOTAGE_PASS
