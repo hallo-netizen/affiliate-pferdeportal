@@ -14,7 +14,7 @@ H2_PATH = HERE / "H2_OPAQUE_ROUTE.json"
 ROUTE_CONTRACT = "SINGLE_DOOR_BOUND_ROUTE_V1"
 H1_BLOB_SHA = "abab6c01f5be81372e294d079043cdd8596773c5"
 H2_BLOB_SHA = "175a8556191d65b89934b296f91a39ee1971ba1f"
-BOUNDARY_BLOB_SHA = "13d72055313e70540d872236182df1df07dd0095"
+BOUNDARY_BLOB_SHA = "4921624e0b6d24ce35549bec28e6d43035b2f098"
 
 
 class RouteBindingError(RuntimeError):
@@ -244,7 +244,7 @@ def resolve_room(route: Mapping[str, Any], room_token: str) -> Mapping[str, Any]
     return hits[0]
 
 
-def worker_request_for(route: Mapping[str, Any], room_token: str, *, model: str, worker_input: str) -> Dict[str, Any]:
+def worker_request_for(route: Mapping[str, Any], room_token: str, *, model: str) -> Dict[str, Any]:
     row = resolve_room(route, room_token)
     view = row["worker_view"]
     binding = boundary.DoorBinding.from_mapping(
@@ -257,7 +257,7 @@ def worker_request_for(route: Mapping[str, Any], room_token: str, *, model: str,
             "input_handles": view["input_handles"],
         }
     )
-    return boundary.build_worker_request(binding=binding, model=model, worker_input=worker_input)
+    return boundary.build_worker_request(binding=binding, model=model)
 
 
 def main(argv: Iterable[str]) -> int:
