@@ -50,11 +50,15 @@
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "completion_condition": "DIRECT_SOURCE_21_OF_21_HASH_PASS",
+    "completion_condition": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_FIRST_FAILED_GATE_PROVEN",
     "after_completion_action": "RUN_BOUND_RELEASE_GATES",
+    "gate_execution_mode": "SINGLE_SUITE_FIRST_FAILURE",
+    "failure_policy": "ON_FIRST_PROVEN_FAIL_FIX_ONLY_DIRECTLY_AFFECTED_CANONICAL_SOURCE_THEN_RERUN_SINGLE_SUITE",
     "no_optional_detours": true,
     "sequence": 2,
     "authorized_change_prefixes": [
+      "release/affiliate-zentrale/current/",
+      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
       "release/affiliate-zentrale/evidence/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
@@ -63,6 +67,8 @@
       "state": "RUNNING_BOUND_RELEASE_GATES",
       "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
       "authorized_change_prefixes": [
+        "release/affiliate-zentrale/current/",
+        "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
         "release/affiliate-zentrale/evidence/",
         "control/release-governance/CURRENT_RELEASE.json"
       ]
@@ -149,7 +155,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "BIND_DIRECT_CANONICAL_V6638_SOURCE_AND_ACTIVATE_EXTERNAL_RELEASE_CONTROL",
+    "current_milestone": "RUN_SINGLE_AFFILIATE_RELEASE_CYCLE_TO_FIRST_FAIL_OR_RELEASE",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
