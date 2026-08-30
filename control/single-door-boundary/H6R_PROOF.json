@@ -1,0 +1,59 @@
+{
+  "contract": "STARTMASTER0107_H6R_WORKER_INPUT_ISOLATION_PROOF_V1",
+  "status": "PASS",
+  "scope": "control/single-door-boundary/**",
+  "local_positive_negative": {
+    "status": "PASS",
+    "checks_passed": 16,
+    "checks_total": 16,
+    "boundary_exact_git_blob_sha1": "4921624e0b6d24ce35549bec28e6d43035b2f098",
+    "boundary_sha256": "5cbd3f05d96220f39a2810c68caac10bbe7192586ed7b126aa7ac2ec7c191dfd",
+    "test_runner_sha256": "24579d1748ed88dc59eed77c0062e5d3623394e11b630b289b61b31f246fb733",
+    "results": {
+      "opaque_room_token": "PASS",
+      "free_worker_input_parameter": "ABSENT",
+      "article_text_as_worker_input": "BLOCKED_TYPEERROR",
+      "fachbegriff_as_model_input": "BLOCKED_OPAQUE_ROOM_INPUT_REQUIRED",
+      "second_capability": "BLOCKED_EXACTLY_ONE_TOOL_REQUIRED",
+      "additional_web_capability": "BLOCKED",
+      "additional_file_capability": "BLOCKED",
+      "additional_github_capability": "BLOCKED",
+      "additional_shell_capability": "BLOCKED",
+      "forged_web_call": "BLOCKED",
+      "forged_file_call": "BLOCKED",
+      "forged_github_call": "BLOCKED",
+      "forged_shell_call": "BLOCKED",
+      "wrong_next_room": "BLOCKED",
+      "bound_next_room": "PASS",
+      "full_single_door_execution": "PASS"
+    }
+  },
+  "bindings": {
+    "boundary_git_blob_sha1": "4921624e0b6d24ce35549bec28e6d43035b2f098",
+    "route_binding_git_blob_sha1": "f01f0608b86dca8b7540a7512040c475735f0e54",
+    "h1_git_blob_sha1_unchanged": "abab6c01f5be81372e294d079043cdd8596773c5",
+    "h2_git_blob_sha1_unchanged": "175a8556191d65b89934b296f91a39ee1971ba1f",
+    "current_state_git_blob_sha1_unchanged": "322db4eab590fbe9a0fbef5ba54fe6187dfcaabb",
+    "runtime_state_git_blob_sha1_unchanged": "30cdb842a276c01513de57e35326fd1552ddcdf6"
+  },
+  "worker_contract_after_h6r": {
+    "model_input": "OPAQUE_ROOM_TOKEN_ONLY",
+    "capability_count": 1,
+    "free_prompt_or_semantic_worker_input": false,
+    "parallel_tool_calls": false,
+    "server_side_only": [
+      "action_identity",
+      "input_handles",
+      "receipt_token",
+      "executor_identity",
+      "next_room"
+    ]
+  },
+  "production_changed": false,
+  "content_changed": false,
+  "quality_changed": false,
+  "design_changed": false,
+  "seo_changed": false,
+  "new_route_invented": false,
+  "current_step_after_h6r": 107007
+}

@@ -30,7 +30,8 @@ def main():
         "input_handles": ["I_TEST"],
     })
 
-    request = m.build_worker_request(binding=binding, model="gpt-5.6-sol", worker_input="opaque-test")
+    request = m.build_worker_request(binding=binding, model="gpt-5.6-sol")
+    assert request["input"] == "R_TEST"
     assert len(request["tools"]) == 1
     assert request["tools"][0]["type"] == "function"
     assert request["tools"][0]["name"] == m.FUNCTION_NAME
@@ -38,7 +39,13 @@ def main():
     assert request["parallel_tool_calls"] is False
 
     two = copy.deepcopy(request)
-    two["tools"].append({"type": "function", "name": "second_action", "parameters": {"type": "object"}})
+    two["tools"].append({
+        "type": "function",
+        "name": "second_action",
+        "description": "second",
+        "parameters": dict(m.EMPTY_PARAMETERS),
+        "strict": True,
+    })
     expect_block(lambda: m.assert_single_door_request(two), "EXACTLY_ONE_TOOL_REQUIRED")
 
     assert all(t.get("type") not in {"shell", "computer", "mcp"} for t in request["tools"])
@@ -84,6 +91,7 @@ def main():
     def transport(req):
         counts["transport"] += 1
         m.assert_single_door_request(req)
+        assert req["input"] == "R_TEST"
         return {"output": [{"type": "function_call", "name": m.FUNCTION_NAME, "arguments": "{}"}]}
 
     def bound_action(_binding):
@@ -93,7 +101,6 @@ def main():
     result = m.run_single_door(
         binding=binding,
         model="gpt-5.6-sol",
-        worker_input="opaque-test",
         transport=transport,
         bound_action=bound_action,
     )

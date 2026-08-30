@@ -1,0 +1,11 @@
+{
+  "contract": "STARTMASTER0107_H6R_SCOPE_V1",
+  "authorized_task": "WORKER_INPUT_ISOLATION_ONLY",
+  "allowed_path": "control/single-door-boundary/**",
+  "changed_domain_content_quality_design": false,
+  "h1_changed": false,
+  "h2_changed": false,
+  "production_state_changed": false,
+  "runtime_state_changed": false,
+  "next_step": "PR_REQUIRED_CHECKS"
+}
