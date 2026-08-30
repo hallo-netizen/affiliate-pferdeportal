@@ -1,0 +1,24 @@
+{
+  "contract": "PFERDE_ATELIER_H7_LOCAL_FULL_TEST_PROOF_V1",
+  "date": "2026-08-30",
+  "branch": "h7-project-single-door-preproduction-20260830",
+  "status": "PASS",
+  "tests": {
+    "h7_project_execution_boundary": {"passed": 16, "total": 16},
+    "h7_project_entry_selector": {"passed": 5, "total": 5},
+    "h6r_worker_input_isolation": {"passed": 16, "total": 16},
+    "single_door_boundary_mechanical": {"passed": 12, "total": 12},
+    "single_door_bound_route": {"passed": 12, "total": 12},
+    "seo_compiler_02816_upload_visibility": {"passed": 7, "total": 7}
+  },
+  "total_passed": 68,
+  "total": 68,
+  "assertions": {
+    "current_state_107007_unchanged": true,
+    "runtime_generation1_unchanged": true,
+    "production_package_not_attached": true,
+    "article_production_performed": false,
+    "content_quality_seo_design_rules_changed_by_h7": false,
+    "publish_allowed": false
+  }
+}

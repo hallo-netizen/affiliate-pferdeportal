@@ -1,0 +1,58 @@
+{
+  "contract": "PFERDE_ATELIER_PROJECT_EXECUTION_BOUNDARY_V1",
+  "version": "1.0.0",
+  "scope": "PREPRODUCTION_HANDOFF_AND_PROJECT_AUTHORITY",
+  "domain_blind": true,
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "free_chat_execution_authority": false,
+  "authoritative_execution_origin": "SINGLE_DOOR_EXECUTOR_ONLY",
+  "preproduction_state": "READY_WAITING_PACKAGE",
+  "room": {
+    "room_token": "R_PRE_001",
+    "action_token": "A_PRE_001",
+    "input_handle": "I_PRE_PACKAGE_001",
+    "receipt_token": "P_PRE_001",
+    "next_room_token": "R_001"
+  },
+  "worker_view": {
+    "model_input": "ROOM_TOKEN_ONLY",
+    "capability_count": 1,
+    "capability_name": "execute_bound_action",
+    "free_semantic_input": false,
+    "parallel_tool_calls": false
+  },
+  "server_side_handoff": {
+    "accepted_artifact_contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
+    "required_release_contract": "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED",
+    "required_signature_algorithm": "ED25519",
+    "cryptographic_release_verification": true,
+    "executor_ref": "control/single-door-boundary/single_door_preproduction_handoff.py",
+    "existing_lifecycle_ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
+    "existing_lifecycle_operation": "attach-package",
+    "required_result": "RUNTIME_BATCH_EXECUTION_READY",
+    "next_existing_route_room": "R_001"
+  },
+  "artifact_handoff_policy": {
+    "production_plan_without_signed_package": "DENY",
+    "markdown_article_file": "DENY",
+    "zip_article_bundle": "DENY",
+    "unsigned_package": "DENY",
+    "signed_approved_production_package": "ALLOW_ONLY_THROUGH_BOUND_ACTION"
+  },
+  "project_authority_rule": "NO_PROJECT_HANDOFF_OR_STATE_ADVANCE_IS_AUTHORITATIVE_WITHOUT_A_VALID_BOUND_SINGLE_DOOR_PASS_RECEIPT",
+  "host_capability_note": "Repository code cannot revoke tools exposed by the ChatGPT host. Such out-of-band actions remain non-authoritative for this project unless accepted by the bound Single-Door path.",
+  "publish_allowed": false,
+  "project_entry": {
+    "ref": "control/single-door-boundary/project_single_door_entry.py",
+    "runtime_routes": {
+      "READY_IDLE": "NO_ACTIVE_WORKER_ROOM",
+      "READY_WAITING_PACKAGE": "R_PRE_001",
+      "RUNTIME_INPUTS_BOUND": "R_001"
+    },
+    "pointer_authority_required": true
+  },
+  "existing_productive_route_unchanged": true,
+  "h1_git_blob": "abab6c01f5be81372e294d079043cdd8596773c5",
+  "h2_git_blob": "175a8556191d65b89934b296f91a39ee1971ba1f"
+}

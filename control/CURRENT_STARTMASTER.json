@@ -3,7 +3,7 @@
   "startmaster": "STARTMASTER0107",
   "root_ref": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
   "state_ref": "control/startmaster0107/CURRENT_STATE.json",
-  "gate_ref": "control/cloud-entry-gate/cloud_entry.py",
+  "gate_ref": "control/single-door-boundary/project_single_door_entry.py",
   "immutable_base_hardlock_ref": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
   "free_chat_execution_authority": false,
   "api_required": false,
