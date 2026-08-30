@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 4,
+  "generation": 5,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,40 +35,40 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.63.8",
-    "status": "RELEASED",
-    "release_allowed": true,
+    "version": "6.64.0",
+    "status": "WORKING",
+    "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f",
     "source_file_count": 21,
     "candidate_reference_artifact_sha256": null,
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/affiliate-zentrale_v6.63.8_FINAL_VERIFIED.zip",
-    "final_artifact_sha256": "5d1d9c91421245becfc01f62bb3b2951904083441dbcbbc42c4e6c9a09fab7f4"
+    "final_artifact_ref": null,
+    "final_artifact_sha256": null
   },
   "execution_state": {
-    "state": "FINALIZING_RELEASE",
-    "authorized_next_action": "FINALIZE_RELEASE",
-    "completion_condition": "ALL_REQUIRED_RELEASE_GATES_PASS",
-    "after_completion_action": "RELEASE_COMPLETE",
+    "state": "RUNNING_BOUND_RELEASE_GATES",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "completion_condition": "EXPLICIT_USER_SCOPE_IMPLEMENTED_AND_ALL_REQUIRED_RELEASE_GATES_PASS",
+    "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
-    "sequence": 3,
+    "sequence": 4,
     "authorized_change_prefixes": [
-      "release/affiliate-zentrale/artifacts/final/",
+      "release/affiliate-zentrale/current/",
+      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
       "release/affiliate-zentrale/evidence/",
-      "control/release-governance/CURRENT_RELEASE.json"
+      "control/release-governance/CURRENT_RELEASE.json",
+      "protocol/AFFILIATE_RELEASE_"
     ],
     "next_state_binding": {
-      "sequence": 4,
-      "state": "RUNNING_BOUND_RELEASE_GATES",
-      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+      "sequence": 5,
+      "state": "FINALIZING_RELEASE",
+      "authorized_next_action": "FINALIZE_RELEASE",
       "authorized_change_prefixes": [
-        "release/affiliate-zentrale/current/",
-        "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+        "release/affiliate-zentrale/artifacts/final/",
         "release/affiliate-zentrale/evidence/",
-        "control/release-governance/CURRENT_RELEASE.json",
-        "protocol/AFFILIATE_RELEASE_"
+        "control/release-governance/CURRENT_RELEASE.json"
       ]
     }
   },
@@ -116,6 +116,12 @@
     "new_parallel_ci_staging_policy": "DENY"
   },
   "required_release_gates": {
+    "explicit_scope_product_deals_partner_analytics": {
+      "status": "PENDING",
+      "evidence_ref": null,
+      "evidence_sha256": null,
+      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+    },
     "old_state_reproduction_negative": {
       "status": "PASS",
       "evidence_ref": "release/affiliate-zentrale/evidence/old_state_reproduction_negative_v6634_bound.txt",
@@ -198,7 +204,7 @@
     "control/release-governance/release_guard.py",
     "control/release-governance/test_release_guard.py"
   ],
-  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_21_FILE_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE_EVIDENCE_ONLY",
+  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE_EVIDENCE_ONLY",
   "immutable_snapshot_binding": {
     "version": "6.63.8",
     "candidate_reference_artifact_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
@@ -208,7 +214,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "FINAL_RELEASE_VERIFIED",
+    "current_milestone": "PRODUCT_DEALS_PARTNER_ANALYTICS_REITHELME_TEST",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
