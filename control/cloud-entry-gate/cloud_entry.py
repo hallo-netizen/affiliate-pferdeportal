@@ -179,7 +179,7 @@ def materialize():
             shutil.rmtree(CAPSULE)
         return {
             'ok': True,
-            'status': 'FINAL_STEP_ALREADY_PASS' if terminal['status'] == 'PASS' and not isinstance(bundle.get('next_binding'), dict) else 'STEP_ALREADY_TERMINAL_NONPASS',
+            'status': 'FINAL_STEP_ALREADY_PASS' if terminal['status'] == 'PASS' and not isinstance(bundle.get('next_binding'), dict) and not isinstance(bundle.get('final_rearm'), dict) else 'STEP_ALREADY_TERMINAL_NONPASS',
             'step_id': state['next_allowed_step'],
             'sequence': gate['sequence'],
             'ticket_id': ticket['ticket_id'],
@@ -261,6 +261,83 @@ def validate_receipt(receipt_path: Path):
         raise Blocked('RECEIPT_EVIDENCE_INVALID')
     return ticket, receipt, hashlib.sha256(receipt_path.read_bytes()).hexdigest()
 
+def _load_binding_target(state, binding, *, allow_rearm=False):
+    if not isinstance(binding, dict):
+        raise Blocked('BINDING_INVALID')
+    next_step = str(binding.get('step_id') or '').strip()
+    next_seq = int(binding.get('sequence', -1))
+    next_rel = rel(binding.get('bundle_ref'))
+    nextp = REPO / next_rel
+    if not nextp.is_file():
+        raise Blocked('NEXT_BUNDLE_MISSING')
+    next_hash = sha(nextp)
+    if next_hash != binding.get('bundle_sha256'):
+        raise Blocked('NEXT_BUNDLE_HASH_MISMATCH')
+    next_bundle = load(nextp)
+    if next_bundle.get('step_id') != next_step or int(next_bundle.get('sequence', -2)) != next_seq:
+        raise Blocked('NEXT_BINDING_IDENTITY_MISMATCH')
+    if binding.get('startmaster', state['startmaster']) != state['startmaster']:
+        raise Blocked('NEXT_STARTMASTER_UNSUPPORTED')
+    if not allow_rearm and next_seq <= int(state['execution_gate'].get('sequence', -1)):
+        raise Blocked('NON_MONOTONIC_SEQUENCE_REJECTED')
+    return next_step, next_seq, next_rel, next_hash
+
+def _verify_final_rearm_preconditions(final_rearm):
+    rows = final_rearm.get('preconditions')
+    if not isinstance(rows, list) or not rows:
+        raise Blocked('FINAL_REARM_PRECONDITIONS_MISSING')
+    for i, row in enumerate(rows):
+        if not isinstance(row, dict) or set(row) != {'ref', 'json_equals'}:
+            raise Blocked(f'FINAL_REARM_PRECONDITION_INVALID:{i}')
+        p = REPO / rel(row.get('ref'))
+        if not p.is_file():
+            raise Blocked(f'FINAL_REARM_PRECONDITION_FILE_MISSING:{i}')
+        obj = load(p)
+        equals = row.get('json_equals')
+        if not isinstance(equals, dict) or not equals:
+            raise Blocked(f'FINAL_REARM_PRECONDITION_EQUALS_INVALID:{i}')
+        for key, expected in equals.items():
+            if not isinstance(key, str) or not key or '.' in key:
+                raise Blocked(f'FINAL_REARM_PRECONDITION_KEY_INVALID:{i}')
+            if obj.get(key) != expected:
+                raise Blocked(f'FINAL_REARM_PRECONDITION_MISMATCH:{i}:{key}')
+
+def _rearm_after_final_pass(state, root, statep, rootp, ticket, receipt, receipt_hash, final_rearm):
+    if final_rearm.get('mode') != 'STATE_PREBOUND_REARM_TARGET':
+        raise Blocked('FINAL_REARM_MODE_INVALID')
+    _verify_final_rearm_preconditions(final_rearm)
+    binding = state.get('execution_gate_rearm_target')
+    if not isinstance(binding, dict):
+        raise Blocked('FINAL_REARM_TARGET_MISSING')
+    next_step, next_seq, next_rel, next_hash = _load_binding_target(state, binding, allow_rearm=True)
+    if next_seq >= int(state['execution_gate'].get('sequence', -1)):
+        raise Blocked('FINAL_REARM_TARGET_NOT_PRIOR')
+    hist = state.setdefault('execution_gate_receipts', [])
+    hist.append(receipt_record(ticket, receipt_hash, 'PASS'))
+    state['next_allowed_step'] = next_step
+    gate = state['execution_gate']
+    gate['step_id'] = next_step
+    gate['sequence'] = next_seq
+    gate['bundle_ref'] = next_rel.as_posix()
+    gate['bundle_sha256'] = next_hash
+    state.pop('execution_gate_terminal', None)
+    dump_atomic(statep, state)
+    root['current_state_sha256'] = sha(statep)
+    root['next_allowed_step'] = next_step
+    dump_atomic(rootp, root)
+    if CAPSULE.exists():
+        shutil.rmtree(CAPSULE)
+    return {
+        'ok': True,
+        'status': 'FINAL_STEP_PASS_REARMED',
+        'completed_step_id': ticket['step_id'],
+        'completed_sequence': ticket['sequence'],
+        'rearmed_step_id': next_step,
+        'rearmed_sequence': next_seq,
+        'state_advanced': True,
+        'next_action': 'STOP_AT_FINAL_REVIEW_REARMED_FOR_NEXT_RUNTIME_BATCH',
+    }
+
 def complete(receipt_path: Path):
     ticket, receipt, receipt_hash = validate_receipt(receipt_path)
     ptr, root, state, gate, bundle, bp, rootp, statep, state_hash, bundle_hash = authority()
@@ -278,57 +355,45 @@ def complete(receipt_path: Path):
             'evidence': receipt['evidence'],
         }
     nb = bundle.get('next_binding')
-    if not isinstance(nb, dict):
-        persist_terminal(state, root, statep, rootp, ticket, receipt, receipt_hash)
-        if CAPSULE.exists():
-            shutil.rmtree(CAPSULE)
+    if isinstance(nb, dict):
+        next_step, next_seq, next_rel, next_hash = _load_binding_target(state, nb, allow_rearm=False)
+        state['next_allowed_step'] = next_step
+        gate['step_id'] = next_step
+        gate['sequence'] = next_seq
+        gate['bundle_ref'] = next_rel.as_posix()
+        gate['bundle_sha256'] = next_hash
+        state.pop('execution_gate_terminal', None)
+        hist = state.setdefault('execution_gate_receipts', [])
+        hist.append(receipt_record(ticket, receipt_hash, 'PASS'))
+        dump_atomic(statep, state)
+        root['current_state_sha256'] = sha(statep)
+        root['next_allowed_step'] = next_step
+        dump_atomic(rootp, root)
+        result = materialize()
         return {
             'ok': True,
-            'status': 'FINAL_STEP_PASS',
-            'step_id': ticket['step_id'],
-            'sequence': ticket['sequence'],
-            'state_advanced': False,
-            'evidence': receipt['evidence'],
+            'status': 'STATE_ADVANCED_NEXT_STEP_READY',
+            'completed_step_id': ticket['step_id'],
+            'completed_sequence': ticket['sequence'],
+            'next_step_id': result['step_id'],
+            'next_sequence': result['sequence'],
+            'next_ticket_id': result['ticket_id'],
+            'state_advanced': True,
+            'next_action': 'CONTINUE_IMMEDIATELY_WITH_NEW_CAPSULE_INSTRUCTION',
         }
-    next_step = str(nb.get('step_id') or '').strip()
-    next_seq = int(nb.get('sequence', -1))
-    next_rel = rel(nb.get('bundle_ref'))
-    nextp = REPO / next_rel
-    if not nextp.is_file():
-        raise Blocked('NEXT_BUNDLE_MISSING')
-    next_hash = sha(nextp)
-    if next_hash != nb.get('bundle_sha256'):
-        raise Blocked('NEXT_BUNDLE_HASH_MISMATCH')
-    next_bundle = load(nextp)
-    if next_bundle.get('step_id') != next_step or int(next_bundle.get('sequence', -2)) != next_seq:
-        raise Blocked('NEXT_BINDING_IDENTITY_MISMATCH')
-    if nb.get('startmaster', state['startmaster']) != state['startmaster']:
-        raise Blocked('NEXT_STARTMASTER_UNSUPPORTED')
-    if next_seq <= int(gate.get('sequence', -1)):
-        raise Blocked('NON_MONOTONIC_SEQUENCE_REJECTED')
-    state['next_allowed_step'] = next_step
-    gate['step_id'] = next_step
-    gate['sequence'] = next_seq
-    gate['bundle_ref'] = next_rel.as_posix()
-    gate['bundle_sha256'] = next_hash
-    state.pop('execution_gate_terminal', None)
-    hist = state.setdefault('execution_gate_receipts', [])
-    hist.append(receipt_record(ticket, receipt_hash, 'PASS'))
-    dump_atomic(statep, state)
-    root['current_state_sha256'] = sha(statep)
-    root['next_allowed_step'] = next_step
-    dump_atomic(rootp, root)
-    result = materialize()
+    final_rearm = bundle.get('final_rearm')
+    if isinstance(final_rearm, dict):
+        return _rearm_after_final_pass(state, root, statep, rootp, ticket, receipt, receipt_hash, final_rearm)
+    persist_terminal(state, root, statep, rootp, ticket, receipt, receipt_hash)
+    if CAPSULE.exists():
+        shutil.rmtree(CAPSULE)
     return {
         'ok': True,
-        'status': 'STATE_ADVANCED_NEXT_STEP_READY',
-        'completed_step_id': ticket['step_id'],
-        'completed_sequence': ticket['sequence'],
-        'next_step_id': result['step_id'],
-        'next_sequence': result['sequence'],
-        'next_ticket_id': result['ticket_id'],
-        'state_advanced': True,
-        'next_action': 'CONTINUE_IMMEDIATELY_WITH_NEW_CAPSULE_INSTRUCTION',
+        'status': 'FINAL_STEP_PASS',
+        'step_id': ticket['step_id'],
+        'sequence': ticket['sequence'],
+        'state_advanced': False,
+        'evidence': receipt['evidence'],
     }
 
 def verify():
