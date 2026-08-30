@@ -1,15 +1,19 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V3_RUNTIME_SLOT",
   "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "sequence": 107007,
   "worker_profile": "CLOUD_ARTICLE_BATCH_NO_STOP",
   "authorized_inputs": [
     {
-      "ref": "control/startmaster0107/runtime_inputs/107007/BATCH_CHECKPOINT.json",
-      "sha256": "1f8b251c408ecd778f12fd91df0ef19445b2d4905802d6ebecf2be062015a113"
+      "ref": "control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json",
+      "sha256": "a1cad246b523a9e3b592acdd266ead58c0d3d2b4349deedbe6c4258c59c26bb9"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py",
+      "sha256": "7c2f3e8d529908f76dc95e6badae7f3dc09df7e83ebb942535e615e349d79312"
     }
   ],
-  "instruction": "Führe ausschließlich den bereits gebundenen neuen Artikelbatch ohne Zwischenmeldung bis zum vollständigen vorgesehenen Endzustand jedes gebundenen Items aus. Verwende ausschließlich den hashgebundenen BATCH_CHECKPOINT aus den autorisierten Capsule-Inputs; er enthält die sechs bereits im MASTER freigegebenen READY-Items samt Quell- und Batch-Hashes. Keine eigenen Themen-, Titel-, Keyword- oder Batchentscheidungen. Bestehende Fach-, Inhalts-, Qualitäts-, SEO-, Dubletten-/Kannibalisierungs-, LanguageTool-, PPM-, PSERC-, PSTE-, Design- und Publish-Gates bleiben unverändert. Reasoning standardmäßig medium, nur bereits bindend höher eingestufte Schritte höher. Chatgrenze bedeutet Checkpoint und Resume, niemals Neustart oder Rücksprung.",
+  "instruction": "107007 ist dauerhaft als Lauf-Slot gebunden, nicht an konkrete Artikel. Vor jeder Arbeit exakt den hashgebundenen Runtime-Slot-Guard aus der Capsule gegen control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json ausführen:\n\npython3 .pferde-capsule/inputs/002_runtime_batch_slot_guard.py control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json --contract .pferde-capsule/inputs/001_RUNTIME_BATCH_SLOT_CONTRACT_V1.json --repo .\n\nWenn der Guard READY_IDLE liefert: keine Artikel erzeugen, keinen BLOCKED-/USER_ACTION_REQUIRED-/PASS-Receipt schreiben, cloud_entry.py complete NICHT aufrufen. Nur '107007_ARMED_NO_ACTIVE_BATCH' zurückgeben. Der Step bleibt unverändert einsatzbereit.\n\nWenn der Guard READY_WAITING_PACKAGE liefert: keine Ersatz-Fact-Packs, kein Ersatz-Produktionspaket und keine Ersatz-Freigabe erzeugen; keinen Terminal-Receipt schreiben und complete NICHT aufrufen. Nur '107007_ARMED_WAITING_RUNTIME_PACKAGE' zurückgeben. Der Step bleibt unverändert einsatzbereit.\n\nNur wenn der Guard RUNTIME_INPUTS_BOUND liefert, ausschließlich den dort gebundenen aktuellen PSERC-READY-Subset und das gebundene Produktionspaket verwenden. Vor Produktionsarbeit den bestehenden control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py gegen das gebundene Produktionspaket ausführen. Danach ausschließlich den bestehenden unveränderten Recherche-/Fact-Pack-/Text-/LanguageTool-/PPM-/PSERC-/Qualitäts-/Dubletten-/Kannibalisierungs-/Design- und Publish-Workflow für die gebundenen Items ausführen. Keine eigenen Themen-, Titel-, Keyword- oder Batchentscheidungen. Keine Ersatzpakete. Die ED25519-Authentizität bleibt zwingend beim bestehenden PSERC Workflow Supervisor. Kein Auto-Publish.\n\nEin konkreter Batch ist immer Laufzeitmaterial: pro Produktionslauf neu binden, nach finalem Review aus dem Runtime-Slot entfernen. Die permanente 107007-Infrastruktur selbst darf dafür nicht geändert werden. Chatgrenze bedeutet Checkpoint/Resume, niemals Neustart oder Rücksprung.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
