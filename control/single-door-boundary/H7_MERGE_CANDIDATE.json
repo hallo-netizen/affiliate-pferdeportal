@@ -1,9 +1,0 @@
-{
-  "contract": "PFERDE_ATELIER_H7_MERGE_CANDIDATE_V1",
-  "status": "READY_FOR_PR",
-  "branch": "h7-project-single-door-preproduction-20260830",
-  "local_positive_negative": "68/68_PASS",
-  "required_checks": ["hardlock", "hardlock-base"],
-  "article_production": false,
-  "publish_allowed": false
-}
