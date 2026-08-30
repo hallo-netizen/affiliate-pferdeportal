@@ -33,7 +33,7 @@ def _pointer_authority(repo:Path)->None:
     if obj.get('free_chat_execution_authority') is not False: raise ProjectEntryBlocked('FREE_CHAT_AUTHORITY_MUST_BE_FALSE')
     expected='control/single-door-boundary/project_single_door_entry.py'
     gate=str(obj.get('gate_ref') or '')
-    if gate not in {expected,'control/cloud-entry-gate/cloud_entry.py'}: raise ProjectEntryBlocked('PROJECT_GATE_REF_INVALID')
+    if gate != expected: raise ProjectEntryBlocked('PROJECT_GATE_REF_INVALID')
 
 def current_runtime(repo:Path)->Mapping[str,Any]:
     guard=_module(repo/'control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py','runtime_guard_h7_entry')
