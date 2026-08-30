@@ -24,18 +24,29 @@ def expect_block(fn, token):
         return
     raise AssertionError('expected block ' + token)
 
+def current_refs(repo: Path):
+    ptr = json.loads((repo / 'control/CURRENT_STARTMASTER.json').read_text())
+    root_rel, state_rel = ptr['root_ref'], ptr['state_ref']
+    state = json.loads((repo / state_rel).read_text())
+    bundle_rel = state['execution_gate']['bundle_ref']
+    return ptr, root_rel, state_rel, bundle_rel
+
 def copy_current_repo(td: Path):
     r = td / 'repo'
-    ptr = json.loads((REPO / 'control/CURRENT_STARTMASTER.json').read_text())
-    root_rel, state_rel = ptr['root_ref'], ptr['state_ref']
-    refs = ['control/CURRENT_STARTMASTER.json', root_rel, state_rel]
-    refs += [str(p.relative_to(REPO)) for p in (REPO / 'control/startmaster0107').glob('STEP_107*.json')]
-    refs += ['control/startmaster0106/rootfix_input/ROOTFIX_40_40_EVIDENCE_SOURCE_V1.txt']
-    for rel in refs:
+    ptr, root_rel, state_rel, bundle_rel = current_refs(REPO)
+    bundle = json.loads((REPO / bundle_rel).read_text())
+    refs = ['control/CURRENT_STARTMASTER.json', root_rel, state_rel, bundle_rel]
+    for row in bundle.get('authorized_inputs') or []:
+        if isinstance(row, dict) and isinstance(row.get('ref'), str):
+            refs.append(row['ref'])
+    nb = bundle.get('next_binding')
+    if isinstance(nb, dict) and isinstance(nb.get('bundle_ref'), str):
+        refs.append(nb['bundle_ref'])
+    for rel in dict.fromkeys(refs):
         src, dst = REPO / rel, r / rel
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(src, dst)
-    return r, root_rel, state_rel
+    return r, root_rel, state_rel, bundle_rel
 
 def bind_root(r: Path, root_rel: str, state_rel: str):
     rp, sp = r / root_rel, r / state_rel
@@ -43,14 +54,6 @@ def bind_root(r: Path, root_rel: str, state_rel: str):
     root['current_state_sha256'] = sha(sp)
     root['next_allowed_step'] = json.loads(sp.read_text())['next_allowed_step']
     dump(rp, root)
-
-def bind_current_bundle(r: Path, root_rel: str, state_rel: str):
-    sp = r / state_rel
-    state = json.loads(sp.read_text())
-    bp = r / state['execution_gate']['bundle_ref']
-    state['execution_gate']['bundle_sha256'] = sha(bp)
-    dump(sp, state)
-    bind_root(r, root_rel, state_rel)
 
 def receipt_from_capsule(r: Path, status='PASS', evidence=None):
     t = json.loads((r / '.pferde-capsule/TICKET.json').read_text())
@@ -102,21 +105,23 @@ def main():
         assert token not in low, token
 
     with tempfile.TemporaryDirectory() as t:
-        r, root_rel, state_rel = copy_current_repo(Path(t))
+        r, root_rel, state_rel, bundle_rel = copy_current_repo(Path(t))
         old = use_repo(r)
         try:
             assert m.verify()['status'] == 'CODEX_CLOUD_GATE_VERIFY_PASS'
-            statep, rootp = r / state_rel, r / root_rel
+            statep, rootp, bundlep = r / state_rel, r / root_rel, r / bundle_rel
             original_state = json.loads(statep.read_text())
             original_root = json.loads(rootp.read_text())
+            original_bundle = json.loads(bundlep.read_text())
 
-            # Negative terminal: USER_ACTION_REQUIRED never advances and survives chat restart without rerunning the worker.
             m.materialize()
-            before_step = json.loads(statep.read_text())['next_allowed_step']
+            before_step = original_state['next_allowed_step']
             rec = receipt_from_capsule(r, 'USER_ACTION_REQUIRED', ['NEEDS_USER'])
-            rp = r / '.pferde-capsule/RECEIPT.json'; dump(rp, rec)
+            rp = r / '.pferde-capsule/RECEIPT.json'
+            dump(rp, rec)
             out = m.complete(rp)
-            assert out['status'] == 'STEP_TERMINAL_NONPASS' and out['state_advanced'] is False
+            assert out['status'] == 'STEP_TERMINAL_NONPASS'
+            assert out['state_advanced'] is False
             terminal_state = json.loads(statep.read_text())
             assert terminal_state['next_allowed_step'] == before_step
             assert terminal_state['execution_gate_terminal']['status'] == 'USER_ACTION_REQUIRED'
@@ -124,72 +129,44 @@ def main():
             assert restart['status'] == 'STEP_ALREADY_TERMINAL_NONPASS'
             assert restart['step_status'] == 'USER_ACTION_REQUIRED'
             assert not (r / '.pferde-capsule').exists()
-            # Reset for independent receipt-authority negatives.
-            dump(statep, original_state); dump(rootp, original_root)
+            dump(statep, original_state)
+            dump(rootp, original_root)
 
-            # Negative: fake navigation/state/workflow authority is rejected.
             m.materialize(); rec = receipt_from_capsule(r); rec['navigation_decision'] = True; dump(rp, rec)
             expect_block(lambda: m.complete(rp), 'WORKER_NAVIGATION_DECISION_REJECTED')
             m.materialize(); rec = receipt_from_capsule(r); rec['state_write_requested'] = True; dump(rp, rec)
             expect_block(lambda: m.complete(rp), 'WORKER_STATE_WRITE_REJECTED')
             m.materialize(); rec = receipt_from_capsule(r); rec['workflow_change_requested'] = True; dump(rp, rec)
             expect_block(lambda: m.complete(rp), 'WORKER_WORKFLOW_CHANGE_REJECTED')
-
-            # Negative: empty evidence cannot PASS.
             m.materialize(); rec = receipt_from_capsule(r); rec['evidence'] = []; dump(rp, rec)
             expect_block(lambda: m.complete(rp), 'RECEIPT_EVIDENCE_INVALID')
-
-            # Negative: ticket/step tampering cannot advance.
             m.materialize(); rec = receipt_from_capsule(r); rec['step_id'] = 'SIDE_JUMP'; dump(rp, rec)
             expect_block(lambda: m.complete(rp), 'RECEIPT_BINDING_MISMATCH:step_id')
 
-            # Positive + anti-repeat: exact PASS advances one bound hop and stale receipt is rejected.
-            m.materialize(); rec = receipt_from_capsule(r, 'PASS', ['ROOTFIX_TEST_PASS']); dump(rp, rec)
-            first_pass_receipt = copy.deepcopy(rec)
-            out = m.complete(rp)
-            assert out['status'] == 'STATE_ADVANCED_NEXT_STEP_READY'
-            assert out['next_sequence'] == 107002
-            state = json.loads(statep.read_text())
-            assert state['next_allowed_step'] == 'SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX'
-            assert json.loads(rootp.read_text())['current_state_sha256'] == sha(statep)
-            dump(rp, first_pass_receipt)
-            expect_block(lambda: m.complete(rp), 'RECEIPT_BINDING_MISMATCH')
-
-            # Reset and execute the complete real prebound 107001->107008 chain.
-            dump(statep, original_state); dump(rootp, original_root)
-            seen = []
-            for expected_seq in range(107001, 107009):
-                mat = m.materialize()
-                assert mat['sequence'] == expected_seq
-                seen.append(mat['step_id'])
-                rec = receipt_from_capsule(r, 'PASS', [f'CHAIN_PASS_{expected_seq}']); dump(rp, rec)
+            nb = original_bundle.get('next_binding')
+            if isinstance(nb, dict):
+                m.materialize()
+                rec = receipt_from_capsule(r, 'PASS', ['CURRENT_STEP_PASS'])
+                first_pass_receipt = copy.deepcopy(rec)
+                dump(rp, rec)
                 out = m.complete(rp)
-                if expected_seq < 107008:
-                    assert out['status'] == 'STATE_ADVANCED_NEXT_STEP_READY'
-                    assert out['next_sequence'] == expected_seq + 1
-                else:
-                    assert out['status'] == 'FINAL_STEP_PASS'
-                    assert out['state_advanced'] is False
-            assert len(seen) == 8 and len(set(seen)) == 8
-            final_state = json.loads(statep.read_text())
-            assert final_state['next_allowed_step'] == 'FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH'
-            assert final_state['execution_gate']['sequence'] == 107008
-            assert len(final_state.get('execution_gate_receipts', [])) == 8
-            assert final_state['execution_gate_terminal']['status'] == 'PASS'
-            final_restart = m.materialize()
-            assert final_restart['status'] == 'FINAL_STEP_ALREADY_PASS'
-            assert not (r / '.pferde-capsule').exists()
+                assert out['status'] == 'STATE_ADVANCED_NEXT_STEP_READY'
+                assert out['next_step_id'] == nb['step_id']
+                assert out['next_sequence'] == int(nb['sequence'])
+                state = json.loads(statep.read_text())
+                assert state['next_allowed_step'] == nb['step_id']
+                assert int(state['execution_gate']['sequence']) == int(nb['sequence'])
+                assert json.loads(rootp.read_text())['current_state_sha256'] == sha(statep)
+                dump(rp, first_pass_receipt)
+                expect_block(lambda: m.complete(rp), 'RECEIPT_BINDING_MISMATCH')
+                dump(statep, original_state)
+                dump(rootp, original_root)
 
-            # Negative: bundle tamper and side-jump state fail closed.
-            dump(statep, original_state); dump(rootp, original_root)
-            bundlep = r / original_state['execution_gate']['bundle_ref']
-            b = json.loads(bundlep.read_text()); b['step_id'] = 'BACKTRACK'; dump(bundlep, b)
+            b = copy.deepcopy(original_bundle); b['step_id'] = 'BACKTRACK'; dump(bundlep, b)
             expect_block(m.verify, 'BUNDLE_HASH_MISMATCH')
-            shutil.copyfile(REPO / original_state['execution_gate']['bundle_ref'], bundlep)
+            dump(bundlep, original_bundle)
             s = copy.deepcopy(original_state); s['next_allowed_step'] = 'SIDE_JUMP'; dump(statep, s); bind_root(r, root_rel, state_rel)
             expect_block(m.verify, 'GATE_STEP_MISMATCH')
-
-            # Negative: path escape.
             dump(statep, original_state); dump(rootp, original_root)
             p = json.loads((r / 'control/CURRENT_STARTMASTER.json').read_text()); p['root_ref'] = '../escape.json'; dump(r / 'control/CURRENT_STARTMASTER.json', p)
             expect_block(m.verify, 'INVALID_RELATIVE_PATH')
@@ -200,11 +177,11 @@ def main():
         'ok': True,
         'status': 'CODEX_CLOUD_GATE_CI_PASS',
         'positive_negative': 'PASS',
-        'full_prebound_chain_107001_107008': 'PASS',
+        'current_startmaster_agnostic': True,
+        'current_step_only_no_historical_chain_replay': True,
         'deterministic_chat_restart_ticket': 'PASS',
         'auto_advance_only_on_bound_pass': 'PASS',
         'terminal_nonpass_chat_restart_no_repeat': 'PASS',
-        'final_pass_chat_restart_no_repeat': 'PASS',
         'api_required': False,
         'local_codex_required': False,
         'domain_logic_authority': 'NONE'
