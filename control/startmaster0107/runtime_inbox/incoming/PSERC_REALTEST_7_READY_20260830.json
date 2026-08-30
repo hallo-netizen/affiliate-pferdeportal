@@ -1,0 +1,67 @@
+{
+  "contract": "PFERDE_ATELIER_RUNTIME_SNAPSHOT_PROJECTION_V1",
+  "source_snapshot_filename": "seo-redaktionsplan-metadaten-snapshot-e2fc3c9a3fa68bfde50f36e462b731a21da8ffd0199f813f497f342ae8f19763.json",
+  "source_snapshot_sha256": "a564a81b3969accd84175fdd99f0894ca4cb72422e9f1e565e595ca5f7e44be5",
+  "manifest_sha256": "8cb8d86b96bb67f28ec71844cf45df14473c11a4a41c310d7a0691452a50febb",
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 7,
+    "maximum_articles": 0,
+    "maximum_articles_per_type": 0,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "article_type": "Beratung",
+        "category": "hindernisstangen-beratung",
+        "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+        "target_keyword": "Hindernisstangen für Pferde",
+        "title": "Das Wichtigste über Hindernisstangen für Pferde"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "reitplatzbeleuchtung-beratung",
+        "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19",
+        "target_keyword": "Reitplatzbeleuchtung ohne Mast",
+        "title": "Eine richtige Reitplatzbeleuchtung ohne Mast finden"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "mistcontainer-beratung",
+        "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87",
+        "target_keyword": "Mistcontainer mit Deckel",
+        "title": "Mistcontainer mit Deckel wählen"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "pferdehaftpflicht-beratung",
+        "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+        "target_keyword": "Pferdehaftpflicht mit Fremdreiter",
+        "title": "Pferdehaftpflicht mit Fremdreiter auswählen"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "huffett-beratung",
+        "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da",
+        "target_keyword": "Huffett für Pferde",
+        "title": "So findest du Huffett für Pferde"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "fliegenmasken-beratung",
+        "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648",
+        "target_keyword": "Fliegenmasken für Pferde",
+        "title": "So wählst du geeignete Fliegenmasken für Pferde"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "pellets-beratung",
+        "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5",
+        "target_keyword": "Pellets für Pferde",
+        "title": "Wissenswertes über Pellets für Pferde"
+      }
+    ],
+    "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a"
+  }
+}
