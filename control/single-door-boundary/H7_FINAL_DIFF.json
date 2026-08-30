@@ -1,0 +1,19 @@
+{
+  "contract": "PFERDE_ATELIER_H7_FINAL_DIFF_V1",
+  "status": "CLEAN",
+  "changed_files": 8,
+  "paths": [
+    "control/CURRENT_STARTMASTER.json",
+    "control/single-door-boundary/H7_LOCAL_FULL_TEST_PROOF.json",
+    "control/single-door-boundary/H7_PROJECT_EXECUTION_BOUNDARY.json",
+    "control/single-door-boundary/H7_PROOF.json",
+    "control/single-door-boundary/project_single_door_entry.py",
+    "control/single-door-boundary/single_door_preproduction_handoff.py",
+    "control/single-door-boundary/test_h7_entry_selector.py",
+    "control/single-door-boundary/test_h7_project_execution_boundary.py"
+  ],
+  "content_quality_seo_design_changes": false,
+  "runtime_state_changed": false,
+  "article_production": false,
+  "publish_allowed": false
+}
