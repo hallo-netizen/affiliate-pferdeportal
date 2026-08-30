@@ -114,8 +114,8 @@
   "required_release_gates": {
     "old_state_reproduction_negative": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
     "same_state_rootfix_positive": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
-    "counterstates_fail_closed": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
-    "complete_selection_materialization_public_gate": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "counterstates_fail_closed": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/counterstates_fail_closed_v6638.txt", "evidence_sha256": "947a61d07da70fcd4f3001f193af34f2b81f15ccb734e8f6b9afb22534c61a71", "source_manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1"},
+    "complete_selection_materialization_public_gate": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/complete_selection_materialization_public_gate_v6638.txt", "evidence_sha256": "8abeede9ae79e3043c39857d00e2f300ffb6a84d50bf6f0f791786716b26ebcf", "source_manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1"},
     "relevant_historical_regressions": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/relevant_historical_regressions_v6638.txt", "evidence_sha256": "767062af9ed4b78ea0fac66482021f29db9c14456bd070dc28255214c489f4c1", "source_manifest_sha256": "40972031c4e6ca2937bc3571de1b537950b8311e607c86d304b25c74ad3047d1"},
     "real_wordpress_mariadb_persistence_same_uuid": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
     "recovery_retry_failure_paths": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
