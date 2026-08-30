@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_RUNTIME_BATCH_SLOT_CONTRACT_V1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "state_ref": "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json",
   "allowed_states": [
     "NO_ACTIVE_BATCH",
@@ -26,5 +26,14 @@
   "idle_receipt_forbidden": true,
   "package_pending_is_terminal": false,
   "package_pending_receipt_forbidden": true,
-  "batch_lifecycle": "REPLACE_PER_PRODUCTION_RUN_CLEAR_AFTER_FINAL_REVIEW"
+  "batch_lifecycle": "REPLACE_PER_PRODUCTION_RUN_CLEAR_AFTER_FINAL_REVIEW",
+  "lifecycle_controller_ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
+  "lifecycle_controller_sha256": "3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837",
+  "runtime_binding_commands": [
+    "bind-snapshot",
+    "attach-package",
+    "bind-ready"
+  ],
+  "final_review_clear_command": "clear-after-review",
+  "final_review_rearm_required": true
 }

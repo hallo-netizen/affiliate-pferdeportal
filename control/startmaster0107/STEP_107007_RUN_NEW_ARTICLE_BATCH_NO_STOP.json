@@ -6,7 +6,7 @@
   "authorized_inputs": [
     {
       "ref": "control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json",
-      "sha256": "a1cad246b523a9e3b592acdd266ead58c0d3d2b4349deedbe6c4258c59c26bb9"
+      "sha256": "e3e2e40b022f3976289b4ccd9fbe1b447c6e8ce39e6cbf151a6ccaeb40a9696a"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py",
@@ -23,6 +23,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "1c13c74906ac56dbc9c9d48b19286d7559090e06050b6661971f9b2608ee4929"
+    "bundle_sha256": "cf14a65af9057da6439799aa2666a8ae9e472919711396b56a5f4710324bd68e"
   }
 }

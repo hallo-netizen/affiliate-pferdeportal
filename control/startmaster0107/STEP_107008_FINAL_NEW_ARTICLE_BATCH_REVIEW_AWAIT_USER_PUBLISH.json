@@ -1,12 +1,24 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V3_RUNTIME_REARM",
   "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
   "sequence": 107008,
   "worker_profile": "CLOUD_ARTICLE_BATCH_FINAL_REVIEW",
   "authorized_inputs": [],
-  "instruction": "Arbeite ausschließlich am gebundenen finalen Review-Schritt des neuen Artikeltests. Keine Workflow-Navigation oder Regeländerung. Prüfe nur die bereits im unveränderten Fachworkflow erzeugten Batch-Ergebnisse bis zum vorgesehenen Review-Endzustand. Kein Auto-Publish. Gib nur den gebundenen Abschluss-/Review-Status zurück.",
+  "instruction": "Arbeite ausschließlich am gebundenen finalen Review-Schritt des gerade erzeugten Artikelbatches. Keine Workflow-Navigation, keine Regeländerung und kein Auto-Publish. Prüfe nur die bereits im unveränderten Fachworkflow erzeugten Batch-Ergebnisse bis zum vorgesehenen Review-Endzustand. Nur wenn der Review PASS ist, zuerst die feste Lifecycle-Datei im gebundenen Worktree bytegenau prüfen. Erlaubter SHA-256 für control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py: 3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837. Nur bei exakt diesem Hash ausführen:\n\npython3 control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py clear-after-review --repo . --contract control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json\n\nNur bei RUNTIME_SLOT_CLEARED_AND_IDLE oder RUNTIME_SLOT_ALREADY_IDLE den PASS-Receipt schreiben und danach cloud_entry.py complete ausführen. Der Entrance-Gate-Controller rearmt danach ausschließlich den bereits im State vorgebundenen permanenten 107007-Slot. Bei Hashabweichung oder jedem anderen Lifecycle-Ergebnis fail-closed und keinen PASS-Receipt schreiben.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": 1
+  },
+  "final_rearm": {
+    "mode": "STATE_PREBOUND_REARM_TARGET",
+    "preconditions": [
+      {
+        "ref": "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json",
+        "json_equals": {
+          "status": "NO_ACTIVE_BATCH",
+          "publish_allowed": false
+        }
+      }
+    ]
   }
 }

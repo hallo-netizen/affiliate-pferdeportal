@@ -34,7 +34,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "33448b56bc841168a9bd853a7c969a9e2e65842b5b2a51d63b5addf42ee449e0",
+    "bundle_sha256": "ff4fc9387023277bb41e42fb57c08a3f2d222b74299df252d40faa243e02f2e8",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -100,5 +100,12 @@
       "hardlock",
       "hardlock-base"
     ]
+  },
+  "execution_gate_rearm_target": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+    "sequence": 107007,
+    "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
+    "bundle_sha256": "ff4fc9387023277bb41e42fb57c08a3f2d222b74299df252d40faa243e02f2e8"
   }
 }
