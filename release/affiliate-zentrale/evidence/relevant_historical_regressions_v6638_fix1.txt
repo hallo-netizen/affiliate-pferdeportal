@@ -1,0 +1,9 @@
+AFFILIATE V6.63.8 RELEVANT HISTORICAL REGRESSION EVIDENCE
+SOURCE_MANIFEST_SHA256=4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f
+FULL_LOCAL_TEST_DISCOVERY=41 tests
+CURRENT_COMPATIBLE_PASS=33
+LEGACY_INCOMPATIBLE=8
+LEGACY_INCOMPATIBLE_REASON=Tests explicitly assert V6.63.4/version-diff or external_tick bootstrap semantics replaced by the V6.63.8 self_drive contract; they are not current regressions.
+PHP_LINT=16/16 PASS
+STATIC_THIS_METHOD_RESOLUTION=0 undefined literal $this->method() calls
+RESULT=PASS
