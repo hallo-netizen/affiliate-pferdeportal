@@ -124,8 +124,8 @@
     "complete_selection_materialization_public_gate": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/complete_selection_materialization_public_gate_v6638_fix1.txt", "evidence_sha256": "28a4e3fa1817f9285bb12a22207580cd121e7b60e6535ed9a3ecd6510598c51b", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
     "relevant_historical_regressions": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/relevant_historical_regressions_v6638_fix1.txt", "evidence_sha256": "7f89f1a9454bab03d1abe0d15005cb58437cd8d9c82399aefe9cf0f10eeffed4", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
     "real_wordpress_mariadb_persistence_same_uuid": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
-    "recovery_retry_failure_paths": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
-    "mutation_sabotage": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
+    "recovery_retry_failure_paths": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/recovery_retry_failure_paths_v6638_fix1.txt", "evidence_sha256": "febc1ca6712daf385b753cae6c30d42d21f7c0660d2a64fdd1e84b23980c0971", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
+    "mutation_sabotage": {"status": "PASS", "evidence_ref": "release/affiliate-zentrale/evidence/mutation_sabotage_v6638_fix1.txt", "evidence_sha256": "5fbeda16929ebde2fdffdc2890672146046c732c42bc25c9056bdb60bd406589", "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"},
     "fresh_unpack_exact_installer": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
     "source_zip_byte_identity": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null},
     "final_sha256": {"status": "OPEN", "evidence_ref": null, "evidence_sha256": null, "source_manifest_sha256": null}
