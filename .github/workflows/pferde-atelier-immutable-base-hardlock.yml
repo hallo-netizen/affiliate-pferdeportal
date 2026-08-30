@@ -27,7 +27,7 @@ jobs:
           set -euo pipefail
           git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/changed.txt
           cat /tmp/changed.txt
-          if grep -Eq '^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/)' /tmp/changed.txt; then
+          if grep -Eq '^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/single-door-boundary/)' /tmp/changed.txt; then
             echo 'IMMUTABLE_ENTRANCE_SECURITY_PATH_CHANGE_BLOCKED'
             exit 1
           fi
