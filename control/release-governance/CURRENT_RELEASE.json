@@ -60,13 +60,15 @@
       "control/release-governance/CURRENT_RELEASE.json"
     ],
     "next_state_binding": {
-      "sequence": 3,
-      "state": "FINALIZING_RELEASE",
-      "authorized_next_action": "FINALIZE_RELEASE",
+      "sequence": 4,
+      "state": "RUNNING_BOUND_RELEASE_GATES",
+      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
       "authorized_change_prefixes": [
-        "release/affiliate-zentrale/artifacts/final/",
+        "release/affiliate-zentrale/current/",
+        "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
         "release/affiliate-zentrale/evidence/",
-        "control/release-governance/CURRENT_RELEASE.json"
+        "control/release-governance/CURRENT_RELEASE.json",
+        "protocol/AFFILIATE_RELEASE_"
       ]
     }
   },
