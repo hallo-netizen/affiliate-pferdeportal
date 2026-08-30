@@ -1,0 +1,148 @@
+{
+  "contract": "SINGLE_DOOR_OPAQUE_ROUTE_V1",
+  "version": "1.0.0",
+  "source_sha": "abab6c01f5be81372e294d079043cdd8596773c5",
+  "source_count": 13,
+  "entry_token": "E_001",
+  "state_tokens": [
+    "S_000",
+    "S_001",
+    "S_002"
+  ],
+  "active_state_token": "S_001",
+  "first_room_token": "R_001",
+  "route": [
+    {
+      "ordinal": 1,
+      "room_token": "R_001",
+      "action_token": "A_001",
+      "input_handle": "I_001",
+      "receipt_token": "P_001",
+      "next_room_token": "R_002"
+    },
+    {
+      "ordinal": 2,
+      "room_token": "R_002",
+      "action_token": "A_002",
+      "input_handle": "I_002",
+      "receipt_token": "P_002",
+      "next_room_token": "R_003"
+    },
+    {
+      "ordinal": 3,
+      "room_token": "R_003",
+      "action_token": "A_003",
+      "input_handle": "I_003",
+      "receipt_token": "P_003",
+      "next_room_token": "R_004"
+    },
+    {
+      "ordinal": 4,
+      "room_token": "R_004",
+      "action_token": "A_004",
+      "input_handle": "I_004",
+      "receipt_token": "P_004",
+      "next_room_token": "R_005"
+    },
+    {
+      "ordinal": 5,
+      "room_token": "R_005",
+      "action_token": "A_005",
+      "input_handle": "I_005",
+      "receipt_token": "P_005",
+      "next_room_token": "R_006"
+    },
+    {
+      "ordinal": 6,
+      "room_token": "R_006",
+      "action_token": "A_006",
+      "input_handle": "I_006",
+      "receipt_token": "P_006",
+      "next_room_token": "R_007"
+    },
+    {
+      "ordinal": 7,
+      "room_token": "R_007",
+      "action_token": "A_007",
+      "input_handle": "I_007",
+      "receipt_token": "P_007",
+      "next_room_token": "R_008"
+    },
+    {
+      "ordinal": 8,
+      "room_token": "R_008",
+      "action_token": "A_008",
+      "input_handle": "I_008",
+      "receipt_token": "P_008",
+      "next_room_token": "R_009"
+    },
+    {
+      "ordinal": 9,
+      "room_token": "R_009",
+      "action_token": "A_009",
+      "input_handle": "I_009",
+      "receipt_token": "P_009",
+      "next_room_token": "R_010"
+    },
+    {
+      "ordinal": 10,
+      "room_token": "R_010",
+      "action_token": "A_010",
+      "input_handle": "I_010",
+      "receipt_token": "P_010",
+      "next_room_token": "R_011"
+    },
+    {
+      "ordinal": 11,
+      "room_token": "R_011",
+      "action_token": "A_011",
+      "input_handle": "I_011",
+      "receipt_token": "P_011",
+      "next_room_token": "R_012"
+    },
+    {
+      "ordinal": 12,
+      "room_token": "R_012",
+      "action_token": "A_012",
+      "input_handle": "I_012",
+      "receipt_token": "P_012",
+      "next_room_token": "R_013"
+    },
+    {
+      "ordinal": 13,
+      "room_token": "R_013",
+      "action_token": "A_013",
+      "input_handle": "I_013",
+      "receipt_token": "P_013",
+      "next_room_token": null
+    }
+  ],
+  "segment": {
+    "anchor_room_token": "R_005",
+    "count_handle": "N_001",
+    "template": [
+      {
+        "slot": 1,
+        "room_token_pattern": "R_D_{n}_01",
+        "action_token_pattern": "A_D_{n}_01",
+        "input_handle_pattern": "I_D_{n}_01",
+        "receipt_token_pattern": "P_D_{n}_01",
+        "next_room_token_pattern": "R_D_{n}_02"
+      },
+      {
+        "slot": 2,
+        "room_token_pattern": "R_D_{n}_02",
+        "action_token_pattern": "A_D_{n}_02",
+        "input_handle_pattern": "I_D_{n}_02",
+        "receipt_token_pattern": "P_D_{n}_02",
+        "next_binding_token_pattern": "B_D_{n}_02"
+      }
+    ],
+    "binding_rule": {
+      "materialize_all_before_activation": true,
+      "each_binding_token_resolves_to_exactly_one_room_token": true,
+      "nonfinal_binding_target_pattern": "R_D_{n+1}_01",
+      "final_binding_target": "R_006"
+    }
+  }
+}
