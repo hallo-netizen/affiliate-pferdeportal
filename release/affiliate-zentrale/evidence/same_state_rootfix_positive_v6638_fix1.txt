@@ -1,0 +1,28 @@
+AFFILIATE V6.63.8 SAME STATE ROOTFIX POSITIVE EVIDENCE
+SOURCE_MANIFEST_SHA256=4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f
+TEST_SCOPE=Current exact trait-ppar-ebay-run.php logic from canonical source; no database claim.
+CURRENT_EBAY_RUN_TRAIT_SHA256=8bfd27713da7864788222448e65593d4ea0ed05b6cd55ca2f4cd6603a31ca0a3
+FIXTURE=V6.63.4 zero-work running reconcile_local state
+POSITIVE_ASSERTIONS:
+PASS same_uuid
+PASS checkpoint_preserved
+PASS build_adopted
+PASS self_drive_transport
+PASS self_drive_contract
+PASS resume_reason_zero_tick_self_drive_adoption
+PASS exactly_one_dispatch
+PASS dispatch_uuid_action_bound
+PASS adoption_idempotent
+NEGATIVE_ASSERTIONS:
+PASS progress_seq_nonzero_failclosed
+PASS transport_tick_nonzero_failclosed
+PASS phase_tick_nonzero_failclosed
+PASS owner_nonempty_failclosed
+PASS lease_nonzero_failclosed
+PASS no_progress_nonzero_failclosed
+PASS error_nonempty_failclosed
+PASS phase_state_nonempty_failclosed
+PASS wrong_phase_failclosed
+PASS wrong_build_failclosed
+RESULT=SAME_STATE_ROOTFIX_POSITIVE_PASS
+NOTE=Real WordPress/MariaDB persistence is intentionally NOT claimed here; it remains a separate required release gate.
