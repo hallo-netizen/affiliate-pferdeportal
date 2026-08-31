@@ -1,0 +1,66 @@
+{
+  "contract": "PFERDE_ATELIER_H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY_V1",
+  "status": "H8_PROTOTYPE_BOUNDARY_ACTIVE",
+  "purpose": "Close the pre-production gap before the signed production-package handoff without inspecting or judging domain content.",
+  "domain_blind": true,
+  "quality_authority": "NONE",
+  "content_semantics_authority": "NONE",
+  "workflow_navigation_authority": "BOUND_ROOMS_ONLY",
+  "free_chat_execution_authority": false,
+  "bootstrap_room_token": "R_BOOT_001",
+  "bootstrap_next_room_token": "R_PRE_001",
+  "productive_first_room_token": "R_001",
+  "required_signed_binding_contract": "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1",
+  "required_authoritative_origin": "SINGLE_DOOR_BOOTSTRAP_ONLY",
+  "old_unprovenanced_packages_allowed": false,
+  "publish_allowed": false,
+  "file_bindings": [
+    {
+      "ref": "control/single-door-boundary/project_single_door_entry_v2.py",
+      "git_blob_sha1": "c0e76247fc8d6416c11ffc55d111542c4f18fda4"
+    },
+    {
+      "ref": "control/single-door-boundary/single_door_bootstrap.py",
+      "git_blob_sha1": "5c5239bc3c91ed1145755362e08dd5ef815da02c"
+    },
+    {
+      "ref": "control/single-door-boundary/preproduction_provenance_guard.py",
+      "git_blob_sha1": "728d5b4dcb7e413d1e82758ba08039643f4d38e6"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard_h8.py",
+      "git_blob_sha1": "9803ad144914efcc00c20d235a410146e1c026cd"
+    },
+    {
+      "ref": "control/single-door-boundary/single_door_boundary.py",
+      "git_blob_sha1": "4921624e0b6d24ce35549bec28e6d43035b2f098"
+    },
+    {
+      "ref": "control/single-door-boundary/single_door_preproduction_handoff.py",
+      "git_blob_sha1": "c301fab2b8e8de2650f976fdbd0604104a0a6cd1"
+    },
+    {
+      "ref": "control/single-door-boundary/single_door_route_binding.py",
+      "git_blob_sha1": "f01f0608b86dca8b7540a7512040c475735f0e54"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py",
+      "git_blob_sha1": "4304659a219f621769d8a8cbc63d1a84fa70e141"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json",
+      "git_blob_sha1": "ee6d5d05ad5e7366ed81045c732e0dc990286889"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
+      "git_blob_sha1": "8850ee3048c55b778467df6b81b3d64969266b03"
+    }
+  ],
+  "external_bootstrap_producer_requirement": {
+    "required": true,
+    "must_run_only_as_bound_R_BOOT_001_capability": true,
+    "must_emit_workflow_release_with_signed_h8_bootstrap_binding": true,
+    "private_signing_material_must_remain_outside_repository": true,
+    "fallback_to_chat_generation": false
+  }
+}

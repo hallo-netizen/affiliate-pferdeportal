@@ -5,7 +5,7 @@
   "execution_entrance_gate": "control/cloud-entry-gate/cloud_entry.py",
   "immutable_base_hardlock": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
   "production_continuity_guard": "control/production-continuity/production_continuity_guard.py",
-  "current_state_sha256": "27aae78f328b5f1378da76e50c8f00ab4c2a49c1b481985d5420d35e639f8004",
+  "current_state_sha256": "bf07488793113c8d0fd8bef74e508d23426449090485e59d8419e9b9c46e8a2b",
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "publish_allowed": false,
   "openai_api_required": false,
