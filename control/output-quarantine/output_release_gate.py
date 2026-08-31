@@ -4,10 +4,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import shutil
 import subprocess
-import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -48,16 +46,14 @@ def git(*args: str) -> str:
     return cp.stdout.strip()
 
 
-def require_fresh_main() -> str:
+def require_head_is_current_main() -> str:
     head = git("rev-parse", "HEAD")
-    dirty = git("status", "--porcelain")
-    if dirty:
-        raise Blocked("WORKTREE_NOT_CLEAN_AT_RELEASE")
-    try:
-        remote = git("ls-remote", "origin", "refs/heads/main").split()[0]
-    except Exception as exc:
-        raise Blocked("REMOTE_MAIN_UNVERIFIABLE") from exc
-    if not remote or head != remote:
+    remote_line = git("ls-remote", "origin", "refs/heads/main")
+    parts = remote_line.split()
+    if not parts:
+        raise Blocked("REMOTE_MAIN_UNVERIFIABLE")
+    remote = parts[0]
+    if head != remote:
         raise Blocked(f"STALE_WORKER_HEAD:HEAD={head}:MAIN={remote}")
     return head
 
@@ -126,10 +122,21 @@ def validate_release_manifest(manifest_path: Path, receipt_path: Path):
     batch = str(manifest.get("batch_sha256") or "")
     if len(batch) != 64:
         raise Blocked("BATCH_SHA_INVALID")
+    payload = receipt.get("payload") or {}
+    if payload.get("batch_sha256") != batch:
+        raise Blocked("RECEIPT_BATCH_MISMATCH")
+    if payload.get("workflow_pass") is not True:
+        raise Blocked("RECEIPT_FULL_WORKFLOW_PASS_REQUIRED")
+    receipt_outputs = payload.get("outputs")
+    if not isinstance(receipt_outputs, list) or not receipt_outputs:
+        raise Blocked("RECEIPT_OUTPUT_BINDING_MISSING")
 
     outputs = manifest.get("outputs")
     if not isinstance(outputs, list) or not outputs:
         raise Blocked("NO_RELEASE_OUTPUTS")
+    if outputs != receipt_outputs:
+        raise Blocked("MANIFEST_RECEIPT_OUTPUT_BINDING_MISMATCH")
+
     seen = set()
     verified = []
     for i, row in enumerate(outputs):
@@ -150,7 +157,7 @@ def validate_release_manifest(manifest_path: Path, receipt_path: Path):
 
 
 def release(manifest_path: Path, receipt_path: Path, destination: Path):
-    main_head = require_fresh_main()
+    main_head = require_head_is_current_main()
     manifest, verified = validate_release_manifest(manifest_path, receipt_path)
     destination.mkdir(parents=True, exist_ok=True)
     released = []
@@ -184,14 +191,12 @@ def main(argv=None):
     p.add_argument("destination")
     args = parser.parse_args(argv)
     try:
-        if args.cmd == "release":
-            result = release(Path(args.manifest), Path(args.receipt), Path(args.destination))
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
+        result = release(Path(args.manifest), Path(args.receipt), Path(args.destination))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
     except Blocked as exc:
         print(json.dumps({"ok": False, "status": "BLOCKED", "reason": str(exc)}, ensure_ascii=False, indent=2))
         return 2
-    return 2
 
 
 if __name__ == "__main__":
