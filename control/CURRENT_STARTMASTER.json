@@ -5,7 +5,7 @@
   "state_ref": "control/startmaster0107/CURRENT_STATE.json",
   "gate_ref": "control/single-door-boundary/project_single_door_entry_v3.py",
   "h81_boundary_ref": "control/single-door-boundary/H81_PREPRODUCTION_AUTHORING_BOUNDARY.json",
-  "h81_boundary_git_blob_sha1": "07a4630d7289bf0fa74993f68c7ca4e68aa93794",
+  "h81_boundary_git_blob_sha1": "be8928a9e3a7aa142b168e03596630e1923f94ac",
   "immutable_base_hardlock_ref": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
   "free_chat_execution_authority": false,
   "api_required": false,
