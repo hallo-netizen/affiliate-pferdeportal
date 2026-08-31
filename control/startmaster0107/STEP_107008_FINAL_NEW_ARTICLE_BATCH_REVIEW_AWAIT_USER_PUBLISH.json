@@ -10,7 +10,7 @@
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
-      "sha256": "6e8489222cdaadba3d7917fb72a6b05bfeffb3dda8948fa022b670aba77017dc"
+      "sha256": "e9e9aed9174f075bc46cb7c353d63c5ddba2d62fbc99eb9c8706eba1357f864d"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
@@ -22,7 +22,7 @@
     },
     {
       "ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
-      "sha256": "1f361acf83c635c03289062c1755b2f3713f73ef5881119c41cba1217b535cb2"
+      "sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",

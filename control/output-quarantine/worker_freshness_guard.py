@@ -44,23 +44,22 @@ def git(*args: str) -> str:
     return cp.stdout.strip()
 
 
-def current_main_head() -> tuple[str, str]:
+def local_checkout_identity() -> tuple[str, str]:
     head = git("rev-parse", "HEAD")
-    raw = git("ls-remote", "origin", "refs/heads/main")
-    parts = raw.split()
-    if not parts:
-        raise Blocked("REMOTE_MAIN_UNVERIFIABLE")
-    main = parts[0]
-    if head != main:
-        raise Blocked("STALE_WORKER_HEAD")
-    return head, main
+    branch = git("branch", "--show-current")
+    dirty = git("status", "--porcelain", "--untracked-files=no")
+    if dirty:
+        raise Blocked("TRACKED_WORKTREE_NOT_CLEAN")
+    return head, branch
 
 
 def validate() -> dict:
-    head, main = current_main_head()
+    head, branch = local_checkout_identity()
     if not POINTER.is_file():
         raise Blocked("STARTMASTER_POINTER_MISSING")
     ptr = load(POINTER)
+    if ptr.get("contract") != "PFERDE_ATELIER_CURRENT_STARTMASTER_POINTER_V2":
+        raise Blocked("STARTMASTER_POINTER_CONTRACT_INVALID")
     if ptr.get("free_chat_execution_authority") is not False:
         raise Blocked("FREE_CHAT_EXECUTION_MUST_BE_FALSE")
     if ptr.get("hard_worker") != "CODEX_CLOUD":
@@ -97,6 +96,10 @@ def validate() -> dict:
         raise Blocked("FRESHNESS_GUARD_MUST_BE_DOMAIN_BLIND")
     if policy.get("visible_project_result_authority") != "RELEASE_RECEIPT_ONLY":
         raise Blocked("POLICY_VISIBLE_RESULT_AUTHORITY_INVALID")
+    if policy.get("require_current_bound_checkout_before_start") is not True:
+        raise Blocked("BOUND_CHECKOUT_REQUIREMENT_MISSING")
+    if policy.get("codex_cloud_offline_freshness") is not True:
+        raise Blocked("OFFLINE_FRESHNESS_POLICY_MISSING")
 
     gate = state.get("execution_gate") or {}
     if gate.get("step_id") != state.get("next_allowed_step"):
@@ -122,8 +125,9 @@ def validate() -> dict:
     return {
         "ok": True,
         "status": "WORKER_FRESHNESS_PASS",
+        "verification_mode": "OFFLINE_HASH_BOUND_STARTMASTER_AUTHORITY",
         "head": head,
-        "main": main,
+        "local_branch": branch,
         "startmaster": state["startmaster"],
         "step_id": state["next_allowed_step"],
         "sequence": int(gate["sequence"]),
@@ -131,6 +135,7 @@ def validate() -> dict:
         "bundle_sha256": sha256(bundlep),
         "chat_execution_authority": "NONE",
         "chat_output_authority": "NONE",
+        "network_required": False,
         "publish_allowed": False,
     }
 
