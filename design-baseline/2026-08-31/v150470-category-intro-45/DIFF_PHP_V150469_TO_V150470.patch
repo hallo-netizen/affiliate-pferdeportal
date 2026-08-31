@@ -1,0 +1,74 @@
+--- V1.50.469/pferde-template-kit.php
++++ V1.50.470/pferde-template-kit.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate Portal Template Kit (Pferde-kompatibel)
+  * Description: Allgemeines Template-/Design-Plugin für Affiliateportale. Pferde-Shortcodes bleiben als Kompatibilitätsalias erhalten.
+- * Version: 1.50.469
++ * Version: 1.50.470
+  * Author: OpenAI
+  * License: GPL-2.0-or-later
+  */
+@@ -849,30 +849,30 @@
+      * Liefert ausschließlich Ersatztext für den bereits vorhandenen oberen
+      * Einleitungsabsatz. Kein Markup, kein CSS, keine weiteren Seitenbereiche.
+      */
+-    /** V1.50.427 – Kategorie-Rename-Introblock: 309 Seiten-/Zwischenebenen + 1052 Leaftexte = 1361; Leafbestand unverändert. */
+-    private static function category_intro_editorial_batch1361_v150427() {
++    /** V1.50.470 – Gezielt ergänzt: 45 auditgebundene FAIL-/Leerstellen; 309 bestehende Seiten + 1052 Leaftexte wertidentisch. */
++    private static function category_intro_editorial_batch1406_v150470() {
+         static $catalog = null;
+         if (is_array($catalog)) { return $catalog; }
+         $catalog = ['pages'=>[], 'leaf'=>[]];
+-        $path = plugin_dir_path(__FILE__) . 'assets/category-intro-editorial-v150427-batch1361.json';
++        $path = plugin_dir_path(__FILE__) . 'assets/category-intro-editorial-v150470-batch1406.json';
+         if (!is_readable($path)) { return $catalog; }
+         $decoded = json_decode((string)file_get_contents($path), true);
+-        if (!is_array($decoded) || (string)($decoded['contract'] ?? '') !== 'PFERDE_ATELIER_CATEGORY_INTRO_EDITORIAL_V150427_BATCH1361') { return $catalog; }
++        if (!is_array($decoded) || (string)($decoded['contract'] ?? '') !== 'PFERDE_ATELIER_CATEGORY_INTRO_EDITORIAL_V150470_BATCH1406') { return $catalog; }
+         if (isset($decoded['pages']) && is_array($decoded['pages'])) { $catalog['pages']=$decoded['pages']; }
+         if (isset($decoded['leaf']) && is_array($decoded['leaf'])) { $catalog['leaf']=$decoded['leaf']; }
+         return $catalog;
+     }
+-    private static function category_intro_editorial_page_batch1361_v150427($page_id) {
++    private static function category_intro_editorial_page_batch1406_v150470($page_id) {
+         $post = get_post(absint($page_id));
+         if (!$post instanceof WP_Post) { return ''; }
+         $slug = sanitize_title((string)$post->post_name);
+-        $catalog = self::category_intro_editorial_batch1361_v150427();
++        $catalog = self::category_intro_editorial_batch1406_v150470();
+         return isset($catalog['pages'][$slug]) ? trim((string)$catalog['pages'][$slug]) : '';
+     }
+-    private static function category_intro_editorial_leaf_batch1361_v150427($term) {
++    private static function category_intro_editorial_leaf_batch1406_v150470($term) {
+         if (!is_object($term)) { return ''; }
+         $slug = sanitize_title((string)($term->slug ?? ''));
+-        $catalog = self::category_intro_editorial_batch1361_v150427();
++        $catalog = self::category_intro_editorial_batch1406_v150470();
+         return isset($catalog['leaf'][$slug]) ? trim((string)$catalog['leaf'][$slug]) : '';
+     }
+@@ -1492,7 +1492,7 @@
+         if (in_array($type, ['hub2','category'], true)) {
+             $pilot = self::deck_intro_only_v150389('main/' . self::normalize_match_key($title), '');
+             if ($pilot !== '') { return $pilot; }
+-            $editorial = self::category_intro_editorial_page_batch1361_v150427($page_id);
++            $editorial = self::category_intro_editorial_page_batch1406_v150470($page_id);
+             if ($editorial !== '') { return $editorial; }
+@@ -9039,7 +9039,7 @@
+         $key = self::normalize_match_key($page_title);
+         $pilot = self::deck_intro_only_v150389('main/' . $key, '');
+         if ($pilot !== '') { return $pilot; }
+-        $editorial = self::category_intro_editorial_page_batch1361_v150427($page_id);
++        $editorial = self::category_intro_editorial_page_batch1406_v150470($page_id);
+@@ -9452,7 +9452,7 @@
+         $parent = trim((string)($parents[0] ?? ''));
+         $children = self::category_text_terms_for_page($page_id, 'category');
+         $intro = self::deck_intro_only_v150389('main/' . $key, '');
+-        if ($intro === '') { $intro = self::category_intro_editorial_page_batch1361_v150427($page_id); }
++        if ($intro === '') { $intro = self::category_intro_editorial_page_batch1406_v150470($page_id); }
+@@ -15256,7 +15256,7 @@
+         $criteria = array_values(array_filter(array_map('trim', (array)($profile['criteria'] ?? []))));
+         while (count($criteria) < 4) { $criteria[] = 'Praxisnutzen'; }
+         $hub_context = self::leaf_category_hub_context_v150396($term);
+-        $intro = self::category_intro_editorial_leaf_batch1361_v150427($term);
++        $intro = self::category_intro_editorial_leaf_batch1406_v150470($term);
