@@ -1,0 +1,22 @@
+PFERDE ATELIER – V1.50.472 FINAL CATEGORY INTRO LOCK
+
+Branch: fix/category-intro-targeted-79-v150472-20260831
+Base: fix/category-intro-targeted-70-v150471-20260831
+Design contract: V104 unchanged
+
+Scope:
+- final 9 old auto texts added
+- total identified audit scope completed: 79/79
+- 379 V1.50.471 page texts preserved value-identically
+- 1052 leaf texts preserved value-identically
+- no non-audit page added
+- no CSS/JS/Journal/table/Affiliate/image/card/search/breadcrumb/publish change
+
+Hashes:
+- installer ZIP SHA256: ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9
+- evidence ZIP SHA256: dd0a562daa25b7eb7a1d3fc1b9da9b93b04fa075cabfa1af6f01124a10fc0d6f
+- final editorial asset SHA256: 52a6dde9efa6f882a44e564f92d03fd15823b7aee5254303f30640555f84e464
+- final PHP SHA256: 21620a6735a26f85de71c5c052eff056b668dfaf39a9327a322c49512d185d24
+- final 79 hash-manifest SHA256: 58dbd629aa0643d8994cc2761690500f5a16f6e797adc9520478600f1c3e7ce6
+
+LIVE PASS is intentionally not recorded until explicit user confirmation after installation.
