@@ -1,0 +1,46 @@
+PFERDE ATELIER – V1.50.472 TARGETED 9
+
+anhaengerschloesser
+URL https://pferde-atelier.de/transport/transport-zugfahrzeug/anhaengerschloesser/
+ALT source=auto words=37 sha256=2d3b17e703689770a51e6064a13a01fc22bbe60f9f1e3d36bb9661ea6d5506fc
+NEU words=160 sha256=b3662a0d76610ae976663124091428a213b2504066d7fc74cbb5beb209a4583d
+
+hufglocken
+URL https://pferde-atelier.de/gesundheit/gesundheit-hufe/hufglocken/
+ALT source=auto words=37 sha256=4a96fe6c77abda7fbadc1a50e7350ef9b1d0c962a03444a673b4ab72a589bf5c
+NEU words=174 sha256=d9a0f3467ecf73e2ac51838f92d7e1e1f78ca49089ce7266f2e447c617827b50
+
+impfpass-uebersicht
+URL https://pferde-atelier.de/wissen/wissen-vorlagen-und-planung/impfpass-uebersicht/
+ALT source=auto words=38 sha256=5ac96e687ac5426a6ac32231b4fdd05bfcc7e896e79a9add5ca1ce5e725561e6
+NEU words=165 sha256=e823da946435e67d22f3063430073fe54485d8636425e855ebb443316095d26c
+
+notfallkontakte-vorlage
+URL https://pferde-atelier.de/wissen/wissen-vorlagen-und-planung/notfallkontakte-vorlage/
+ALT source=auto words=39 sha256=5379938ebe59d3d01145b3a64f3ac7c20dfb523cca934e70e127906e807ca4d9
+NEU words=158 sha256=094c7e0884c2f7f8bb29ef377dfbce7896fe8c4ed08bad411a7e7104b184fe62
+
+pferdepass-mappen
+URL https://pferde-atelier.de/transport/transport-anhaengerpflege/pferdepass-mappen/
+ALT source=auto words=38 sha256=f92d0fb1c5d10d2c11188b219a826ddc65fbf059c12591125da2c843de564ef7
+NEU words=168 sha256=cd45e1c25a6f08e6cca4c6efcf4e6863eef5dae7e000fad73f30594b410432e4
+
+reifendruckpruefer
+URL https://pferde-atelier.de/transport/transport-zugfahrzeug/reifendruckpruefer/
+ALT source=auto words=37 sha256=a1a1d7740c95a1e7aa9278dd7907888bb4097b8b208752301768b2f0821a68e2
+NEU words=164 sha256=e12f45e249395042e30fd2978fdced17f027f89e79ee414bb1666d2d5ab4adb7
+
+stalltafel-vorlagen
+URL https://pferde-atelier.de/wissen/wissen-vorlagen-und-planung/stalltafel-vorlagen/
+ALT source=auto words=35 sha256=51926a0c6cee6a4c2d6364509b5eb6451545d45fc2cbbb0a41bb365de091bbce
+NEU words=175 sha256=d032a96d34ab901a756666f18c11ef49c846f3380e4880bb5341bb82855f7948
+
+wasserkanister-fuers-turnier
+URL https://pferde-atelier.de/transport/transport-turnier-und-reisen/wasserkanister-fuers-turnier/
+ALT source=auto words=41 sha256=1b4e9f511282f388fc2bac10ef6fa92b3e4912eb29af1eb6d629d683037a62ef
+NEU words=168 sha256=301346536aaf2a9eb1d8fbc664a492bba005abaccfd4869b4918b5f94cebb537
+
+wundauflagen
+URL https://pferde-atelier.de/gesundheit/gesundheit-erste-hilfe/wundauflagen/
+ALT source=auto words=42 sha256=07bf6da43848073a8b50a13ea8e2a5495999cbbaa9dbee4d49eb372b82d75610
+NEU words=164 sha256=828b16cd4711624220355079a8e1fa1290fe91ee5255764b4d98cb679c55fc70
