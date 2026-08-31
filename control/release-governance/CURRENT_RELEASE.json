@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "fa7a335daaeeb118187064d6ee7fa8f1e7ef5623d60272d80623ae0f38cbcf95",
+    "manifest_sha256": "c86841eb829ee2c541d8b5cb57e347f116d909e27c1bad8ce6a938430c0b8da7",
     "source_file_count": 25,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "fa7a335daaeeb118187064d6ee7fa8f1e7ef5623d60272d80623ae0f38cbcf95",
+    "current_source_manifest_sha256": "c86841eb829ee2c541d8b5cb57e347f116d909e27c1bad8ce6a938430c0b8da7",
     "source_file_count": 25,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -120,7 +120,7 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "fa7a335daaeeb118187064d6ee7fa8f1e7ef5623d60272d80623ae0f38cbcf95"
+      "source_manifest_sha256": "c86841eb829ee2c541d8b5cb57e347f116d909e27c1bad8ce6a938430c0b8da7"
     },
     "old_state_reproduction_negative": {
       "status": "PASS",
