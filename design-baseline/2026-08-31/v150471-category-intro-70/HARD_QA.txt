@@ -1,0 +1,39 @@
+PFERDE ATELIER KATEGORIETEXTE V1.50.471 – HARD QA
+RESULT: PASS
+
+Scope: exactly 25 audit-confirmed old-auto/empty category pages added.
+Existing V1.50.470 editorial pages preserved: 354/354 value-identical PASS
+Existing leaf texts preserved: 1052/1052 value-identical PASS
+Target additions: 25/25 PASS
+New text word range: 150–161 words PASS
+PHP syntax: PASS
+All pre-existing files except pferde-template-kit.php byte-identical: PASS
+Design contracts V104 byte-identical: PASS
+No CSS/JS/Journal/table/affiliate/search/breadcrumb/publish file changed: PASS
+
+Targets:
+whiteboards-fuer-stallplanung
+putzboxhalter
+schlauchhalter-am-putzplatz
+hofabsperrungen
+hofbeleuchtung
+rampen-am-hof
+hufschlagraeumer
+minerallecksteinhalter-weide
+unkrautstecher
+weidetimer
+weidezaun-sensoren
+zaunpruefer
+bandverbinder-und-spanner
+torgriffe-mit-feder
+warnschilder-und-sicherheitszubehoer
+weidezaeune-isolatoren
+weidezaeune-torgriffe
+zaunschalter
+zaunverbinder
+futteretiketten
+futterschaufeln
+futterwagen
+kuehlpacks
+notfalltafeln
+thermometer
