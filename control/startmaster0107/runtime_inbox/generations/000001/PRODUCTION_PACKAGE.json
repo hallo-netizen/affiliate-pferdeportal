@@ -1,0 +1,74 @@
+{
+  "contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
+  "fact_pack_bundle_sha256": "63b170685223b742120a04a346c9639b955b93be10528b39986dd6e301110f2e",
+  "production_plan_sha256": "8f92a3da7bfcf190656a5464a70fc79034f42538b0c12c397348a2236c301c1b",
+  "workflow_release_sha256": "410020d00e773ac5fefb6587d251288baa324371a38e44e49b69ad3274516aad",
+  "package_id": "45edacdceae432117c3fd5d984bb42aa896aecc4979fad8a626107a9424414fc",
+  "source": "STARTMASTER0107_H8_R_BOOT_001_GENERATION_1",
+  "fact_pack_bundle": {
+    "contract": "canonical_fact_pack_import_v1",
+    "fact_packs": []
+  },
+  "production_plan": {
+    "contract": "production_plan_v4",
+    "items": []
+  },
+  "workflow_release": {
+    "contract": "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED",
+    "status": "PASS",
+    "exact_five_batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+    "exact_five_item_count": 7,
+    "items": [
+      {
+        "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+        "canonical_article_id": "article:a8282e69ecd43b615de17eb1"
+      },
+      {
+        "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19",
+        "canonical_article_id": "article:3331a47e0fcf0d058bd95bf0"
+      },
+      {
+        "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87",
+        "canonical_article_id": "article:8e5984c077672ffe2ca0e8f0"
+      },
+      {
+        "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+        "canonical_article_id": "article:8d251cec328197fb3ce0cfa6"
+      },
+      {
+        "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da",
+        "canonical_article_id": "article:460049b5e304b366f8dd8f7e"
+      },
+      {
+        "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648",
+        "canonical_article_id": "article:b36f44eb5c0977433f530e23"
+      },
+      {
+        "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5",
+        "canonical_article_id": "article:e9f937e5fa638731ee8c0465"
+      }
+    ],
+    "production_plan_sha256": "8f92a3da7bfcf190656a5464a70fc79034f42538b0c12c397348a2236c301c1b",
+    "fact_pack_bundle_sha256": "63b170685223b742120a04a346c9639b955b93be10528b39986dd6e301110f2e",
+    "content_generation_performed_by_supervisor": false,
+    "wordpress_write_performed": false,
+    "signature_algorithm": "ED25519",
+    "signing_key_id": "workflow-ed25519-8f521756284cb375",
+    "signing_public_key_sha256": "8f521756284cb375c907f508dac333f51b71b515419ee271ca68fa149db66f87",
+    "h8_bootstrap_binding": {
+      "contract": "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1",
+      "room_token": "R_BOOT_001",
+      "receipt_token": "P_BOOT_001",
+      "generation": 1,
+      "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+      "source_snapshot_sha256": "be73a986124fc80429c0c0d85fba94636a0ff5a506d23a6cff68f291e3645027",
+      "source_manifest_sha256": "8cb8d86b96bb67f28ec71844cf45df14473c11a4a41c310d7a0691452a50febb",
+      "authoritative_origin": "SINGLE_DOOR_BOOTSTRAP_ONLY",
+      "binding_sha256": "e78ea45acc9a11f28f6f44e1c525de6667ca72c771ecef81b42a24822424f744"
+    },
+    "release_payload_sha256": "2a7aa7028a00c48f88d6e09ee73a23e06dd803eedccdddd36811fac514b3f6e0",
+    "signature_b64": "HAqffBSB3k5iPBaWSdFZmJqZS+sLe6Q6dYv+gK22vNAPpVPv8QmrIui4uES/crzxvCmNGrrVl90ITP6Zuo+gBw==",
+    "release_sha256": "ef0bda8fb365dbe56000a517d53f5d765e8d95807608ecea226c7a26c1112ab9"
+  },
+  "package_payload_sha256": "f691fd7b43cc7e2559e15ccd276c8fe99714b14c2a2adf7d7472c7bef18a7ba9"
+}

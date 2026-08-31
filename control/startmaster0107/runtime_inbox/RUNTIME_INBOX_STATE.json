@@ -1,12 +1,12 @@
 {
   "contract": "PFERDE_ATELIER_RUNTIME_BATCH_SLOT_STATE_V1",
-  "status": "BATCH_READY_PACKAGE_PENDING",
+  "status": "EXECUTION_READY",
   "generation": 1,
   "source_snapshot_ref": "control/startmaster0107/runtime_inbox/generations/000001/SOURCE_SNAPSHOT.json",
   "source_snapshot_sha256": "be73a986124fc80429c0c0d85fba94636a0ff5a506d23a6cff68f291e3645027",
   "source_manifest_sha256": "8cb8d86b96bb67f28ec71844cf45df14473c11a4a41c310d7a0691452a50febb",
   "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
-  "production_package_ref": "",
-  "production_package_sha256": "",
+  "production_package_ref": "control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json",
+  "production_package_sha256": "6e8bd5b150377d5451397eb59ceeff30d0b631bb38d859d8e73b2659c90cb896",
   "publish_allowed": false
 }
