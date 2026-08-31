@@ -21,7 +21,7 @@ Ein Paket ohne signiertes `h8_bootstrap_binding` oder mit falscher Generation/Ba
 
 H8 prüft ausschließlich technische Herkunft, Bindung, Hash/Signatur und Türfolge. `quality_authority = NONE`; `content_semantics_inspected = false`.
 
-## GitHub-CI-Beweis
+## GitHub-CI-Beweis vor Merge
 Temporärer PR #57 war ausschließlich ein nicht zu mergender Testträger.
 
 Run 102 / Job `hardlock`: SUCCESS.
@@ -32,8 +32,19 @@ Run 102 / Job `hardlock`: SUCCESS.
 - realer aktueller Raum: `R_BOOT_001`
 - aktive Eingangsschicht bleibt API-frei und fachblind
 
+## Produktiver Stand
+PR #58 wurde nach PASS von `hardlock` und `hardlock-base` per Squash auf `main` gemergt.
+
+Merge-Commit: `298711faf3a17ff3faeed53de8276f812523c96d`.
+
+Post-Merge-Push-Run 104: SUCCESS.
+
+`main/control/CURRENT_STARTMASTER.json` bindet `project_single_door_entry_v2.py`; `free_chat_execution_authority=false` bleibt aktiv.
+
 ## Externe Restbindung
-Der private Workflow-Signer bleibt ausserhalb des Repositorys. Die serverseitig an `R_BOOT_001` gebundene Producer-/Signer-Capability muss die H8-Bindung im signierten Workflow-Release erzeugen. Bis diese Capability gebunden/verfügbar ist, bleibt `R_BOOT_001` fail-closed. Kein Chat-Fallback.
+Der private Workflow-Signer bleibt ausserhalb des Repositorys. Die serverseitig an `R_BOOT_001` gebundene Producer-/Signer-Capability muss die H8-Bindung im signierten Workflow-Release erzeugen. Bis diese Capability in der Laufzeit verfügbar/gebunden ist, bleibt `R_BOOT_001` fail-closed. Kein Chat-Fallback.
+
+Das Repository enthält absichtlich keinen privaten Signierschlüssel und darf keine Ersatzsignatur oder Ersatzproduktion erzeugen.
 
 ## Unverändert
 Keine Fach-, Inhalts-, Qualitäts-, SEO-, Titel-, Keyword-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel wurde geändert.
