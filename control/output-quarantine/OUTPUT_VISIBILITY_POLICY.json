@@ -1,0 +1,23 @@
+{
+  "contract": "PFERDE_ATELIER_OUTPUT_VISIBILITY_POLICY_V1",
+  "scope": "TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_ONLY",
+  "chat_output_authority": "NONE",
+  "bound_worker_origin": "BOUND_WORKER",
+  "worker_quarantine_root": ".pferde-quarantine",
+  "visible_release_root": ".pferde-release",
+  "release_receipt_name": "RELEASE_RECEIPT.json",
+  "required_step_receipt_contract": "PFERDE_ATELIER_STEP_RECEIPT_V2",
+  "require_current_main_head": true,
+  "require_current_state_binding": true,
+  "require_current_batch_binding": true,
+  "require_full_workflow_pass": true,
+  "require_output_sha256_binding": true,
+  "unbound_output_policy": "QUARANTINE_INVALID_NEVER_SURFACE_AS_PROJECT_RESULT",
+  "release_before_state_advance": true,
+  "publish_allowed": false,
+  "domain_logic_authority": "NONE",
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "design_authority": "NONE",
+  "seo_authority": "NONE"
+}
