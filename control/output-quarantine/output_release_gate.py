@@ -99,8 +99,11 @@ def authority():
     bundle = load(bundlep)
     bindings = {str(row.get("ref") or ""): str(row.get("sha256") or "") for row in (bundle.get("authorized_inputs") or []) if isinstance(row, dict)}
     self_ref = "control/output-quarantine/output_release_gate.py"
-    if bindings.get(self_ref) != sha256(Path(__file__).resolve()):
+    self_sha = sha256(Path(__file__).resolve())
+    if bindings.get(self_ref) != self_sha:
         raise Blocked("OUTPUT_GATE_NOT_BUNDLE_BOUND")
+    if ptr.get("output_release_gate_ref") != self_ref or ptr.get("output_release_gate_sha256") != self_sha:
+        raise Blocked("OUTPUT_GATE_POINTER_BINDING_MISMATCH")
     policy_ref = str(ptr.get("visible_output_policy_ref") or "")
     if bindings.get(policy_ref) != sha256(policyp):
         raise Blocked("OUTPUT_POLICY_NOT_BUNDLE_BOUND")
