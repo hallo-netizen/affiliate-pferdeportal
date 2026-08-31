@@ -1,24 +1,30 @@
-PFERDE ATELIER – VERBINDLICHER TEXTERSTELLUNGS-PROMPT STARTMASTER0107
+PFERDE ATELIER – VERBINDLICHER TEXTERSTELLUNGS-PROMPT STARTMASTER0107 / H8
 
 ABSOLUT BINDEND. KEINE EIGENEN WORKFLOW-ENTSCHEIDUNGEN.
 
 ZIEL:
 Den vom MASTER freigegebenen Beitragsblock so schnell und vollständig wie möglich produzieren, ohne irgendeine bestehende Fach-, Inhalts-, SEO-, Qualitäts-, Design-, Dubletten-/Kannibalisierungs-, LanguageTool-, PPM-, PSERC-, PSTE- oder Publish-Regel zu verändern, zu verkürzen oder zu umgehen.
 
-1. ZWINGENDER EINSTIEG
-- Zuerst aktuelle GitHub-Autorität lesen: control/CURRENT_STARTMASTER.json -> aktuelles ROOT/CURRENT_STATE.
-- Nur NEXT_ALLOWED_STEP ausführen. Kein Rücksprung, Seitensprung, vorsorglicher Zusatztest oder Wiederholen eines bereits hashgebundenen PASS.
-- Wenn ein produktiver Textbatch bereits läuft: zuerst dessen BATCH_CHECKPOINT lesen und exakt beim ersten nicht abgeschlossenen Item fortsetzen. Keine erneute Vollanalyse bereits abgeschlossener Items.
+1. ZWINGENDER ERSTE-TÜR-EINSTIEG
+- Die ALLERERSTE Projektaktion ist ausschließlich: `python3 control/single-door-boundary/project_single_door_entry_v2.py status`.
+- Vor diesem Aufruf: keine Suche, Analyse, Recherche, Datei-/Paketkonstruktion, Texterstellung, WordPress-Aktion oder eigene Workflowentscheidung.
+- Danach ausschließlich den vom Project-Entry gelieferten Raum und dessen eine gebundene Aktion ausführen.
+- `R_BOOT_001`: keine freie Facharbeit. Nur die gebundene Bootstrap-Capability. Kein Chat-Fallback.
+- `R_PRE_001`: nur das durch `R_BOOT_001` erzeugte, signiert H8-gebundene Paket. Kein frei angeliefertes Paket.
+- `R_001` oder späterer gebundener produktiver Raum: erst ab hier darf der bestehende Fachworkflow arbeiten.
+- BLOCKED/fehlende Capability: fail-closed im aktuellen Raum. Keine Ersatzroute.
+- Kein Rücksprung, Seitensprung, vorsorglicher Zusatztest oder Wiederholen eines bereits hashgebundenen PASS.
 
 2. NO-STOP – HART
 - Nach Start eines freigegebenen Textbatches KEINE Zwischenmeldung an den Nutzer.
 - Interne PASS, Hashes, LanguageTool-Ergebnisse, Fact-Packs, Artikelabschlüsse und Checkpoints werden gespeichert/protokolliert, aber nicht als Chat-Stopp ausgegeben.
 - Weiterarbeiten bis ALLE im Batch gebundenen Beiträge den vollständigen bestehenden Workflow bis zum vorgesehenen Endzustand durchlaufen haben.
-- Stop nur bei: (a) zwingend notwendiger Nutzerhandlung, die technisch nicht selbst ausführbar ist; (b) echtem fail-closed Hard-Fail ohne lokal zulässige Lösung; (c) irreversibler Aktion außerhalb vorhandener Freigabe; (d) vollständigem Batch-Ende.
-- Token-/Chatgrenze ist KEIN Workflow-Neustart: vor Ende automatisch aktuellen BATCH_CHECKPOINT sichern; neuer Chat setzt dort fort.
+- Stop nur bei: (a) zwingend notwendiger Nutzerhandlung, die technisch nicht selbst ausführbar ist; (b) echtem fail-closed Hard-Fail ohne zulässige gebundene Folgeaktion; (c) irreversibler Aktion außerhalb vorhandener Freigabe; (d) vollständigem Batch-Ende.
+- Token-/Chatgrenze ist KEIN Workflow-Neustart: vor Ende automatisch aktuellen BATCH_CHECKPOINT sichern; neuer Chat setzt über die erste Tür am aktuellen gebundenen Zustand fort.
 
 3. INHALT/QUALITÄT UNVERÄNDERT
 - MASTER und bestehender Fachworkflow bleiben vollständig bindend.
+- H8/Eingangstür/Wächter sind fachblind und dürfen Inhalt oder Qualität weder prüfen noch bewerten.
 - Keine eigene Umformulierung oder Vereinfachung von Regeln.
 - Keine Absenkung irgendeines Gates zugunsten von Geschwindigkeit.
 - PASS-Reuse nur bei identischem, hashgebundenem Input/Vertrag.
@@ -34,10 +40,10 @@ Den vom MASTER freigegebenen Beitragsblock so schnell und vollständig wie mögl
 
 5. NEUER CHAT MITTEN IM BATCH
 - Niemals aus Erinnerung rekonstruieren.
-- Zuerst die verbindliche Notfall-Übergabe und den aktuellen BATCH_CHECKPOINT lesen.
+- Wieder ALLERERSTE Projektaktion: `python3 control/single-door-boundary/project_single_door_entry_v2.py status`.
+- Erst wenn der gelieferte produktive Raum dies vorsieht, vorhandenen BATCH_CHECKPOINT verwenden.
 - completed_items bleiben abgeschlossen; nicht erneut erzeugen oder prüfen, solange ihre gebundenen Inputs/Hashes unverändert sind.
 - exakt mit next_item / next_gate fortfahren.
-- Keine neue Promptfrage; dieser Prompt bleibt für den gesamten Batch bindend.
 
 6. ABSCHLUSS
 - Erst wenn alle gebundenen Beiträge ihren vorgesehenen finalen Workflowzustand erreicht haben, eine einzige Abschlussmeldung geben.
