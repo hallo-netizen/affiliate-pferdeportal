@@ -1,0 +1,45 @@
+PFERDE ATELIER – KATEGORIETEXT PATCH V1.50.470 – HARD QA
+Stand: 2026-08-31
+
+AUSGANGSBASIS
+- Installer: PFERDE_ATELIER_DESIGN_V1.50.469_CONTRACT_V104_TABELLENABSTAND_HARD_RUNTIME_INSTALLIEREN.zip
+- GitHub-V104-Basiscommit: fe1e805aeb6bd25aba7d3d8f194db86b65a4acf0
+- Designvertrag bleibt V104.
+
+SCOPE HARDLOCK
+- Ausschließlich 45 zuvor im Audit identifizierte schlechte Auto-Texte/Leerstellen.
+- Batch 01: 20. Batch 02: 25.
+- Keine anderen Kategorietexte.
+- Keine Änderung an den bestehenden 309 redaktionellen page-Intros.
+- Keine Änderung an den bestehenden 1052 Leaftexten.
+- Keine Design-, CSS-, JS-, Journal-, Tabellen-, Affiliate-, Such-, Breadcrumb-, Bild-, Karten- oder Publish-Änderung.
+
+TECHNIK
+- Neues read-only Editorial-Superset: assets/category-intro-editorial-v150470-batch1406.json
+- Loader ausschließlich von V150427/BATCH1361 auf V150470/BATCH1406 umgebunden.
+- Alter V150427/BATCH1361-Bestand bleibt als Datei byteidentisch im Plugin.
+- Sichtbare WordPress-Pluginversion: 1.50.470.
+- Interne const VERSION wurde absichtlich nicht verändert, damit außerhalb des Textloaders kein Cache-/Runtime-Nebeneffekt entsteht.
+
+QA
+- PHP lint: PASS.
+- Originaldateien: 492. Neuer Build: 494.
+- Geändert gegenüber V104: nur pferde-template-kit.php.
+- Neu: KATEGORIETEXTE_PATCH_V1.50.470.txt und category-intro-editorial-v150470-batch1406.json.
+- Entfernt: 0.
+- Bestehende 309 page-Texte: 309/309 wertidentisch.
+- Bestehende 1052 Leaftexte: 1052/1052 wertidentisch.
+- Zielmenge: exakt 45 neue Slugs, exakt Union Batch01+Batch02.
+- Neue Textlängen: 151–173 Wörter; 45/45 im Zielbereich 150–200.
+- Source↔fresh installer parity: 494/494 PASS.
+- ZIP integrity: PASS.
+- V104 single-post CSS byteidentisch: cf2c92dc6d9efda4c53b7491d2291c280675adbc27003d2dc3404ec515f2292d
+- V104 alter Editorial-Bestand byteidentisch: 2dc62dfc3c82927114737513f0ba27e2217f97a2b39fc44c17bcb7b9bab07d92
+
+SHA-256
+- Neuer Installer: 2684c87146e09594e0b506c1d6dc38d0cac9b6db45d77ec8903b71117d439160
+- Neuer Editorial-Superset: 756d0e426c17eccaa6ab8bdb1caf8c91b6230befe1bcf9cce8acdf8553db432c
+- Neue PHP-Hauptdatei: fa650a8fffaa27ed89fed086a9dd3c610343f6af4df83d7838e25630f41299b5
+
+LIVE-STATUS
+- Noch KEIN LIVE PASS. Erst nach Nutzerinstallation und Sichtprüfung.
