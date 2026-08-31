@@ -1496,7 +1496,7 @@ trait PPAR_Output_Objects_Trait {
                     // Only now may an older object for another target/slot be
                     // retired. This is the commit point of the atomic swap.
                     $materialized_object = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->output_objects_table()} WHERE id=%d", absint($object_id)), ARRAY_A);
-                    if (is_array($materialized_object)) {
+                    if (is_array($materialized_object) && sanitize_key((string) ($materialized_object['provider'] ?? '')) !== 'digistore24') {
                         $this->output_supersede_conflicting_objects($materialized_object, (string)($materialized_object['object_key'] ?? ''));
                     }
                 }
@@ -1660,6 +1660,19 @@ trait PPAR_Output_Objects_Trait {
         }
         $row = $this->output_creative_row((string) ($object['creative_identity_hash'] ?? ''));
         if (!is_array($row)) { return new WP_Error('output_creative_missing','Verknüpftes Creative fehlt.'); }
+        if (sanitize_key((string) ($object['provider'] ?? '')) === 'digistore24') {
+            if (sanitize_key((string) ($row['provider'] ?? '')) !== 'digistore24'
+                || sanitize_key((string) ($row['creative_type'] ?? '')) !== 'banner'
+                || sanitize_key((string) ($row['source_kind'] ?? '')) !== 'digistore24_vendor_banner'
+                || sanitize_key((string) ($object['output_type'] ?? '')) !== 'portal_banner') {
+                return new WP_Error('output_digistore24_source_invalid', 'Digistore24-Ausgabe ist nicht vollständig an ein echtes Vendor-Banner gebunden.');
+            }
+            $entry_id = preg_replace('/[^0-9]/', '', preg_replace('/^entry-/', '', (string) ($row['partner_external_id'] ?? '')));
+            $entry = method_exists($this, 'digistore24_marketplace_item') ? $this->digistore24_marketplace_item($entry_id) : array();
+            $proof = method_exists($this, 'digistore24_affiliation_gate') ? $this->digistore24_affiliation_gate((string) ($entry['main_product_id'] ?? ''), false) : new WP_Error('output_digistore24_gate_missing', 'Digistore24-Schlussprüfung fehlt.');
+            if (is_wp_error($proof)) { return $proof; }
+            if (!method_exists($this, 'digistore24_tracking_url_allowed') || !$this->digistore24_tracking_url_allowed((string) ($row['tracking_url'] ?? ''))) { return new WP_Error('output_digistore24_tracking_invalid', 'Digistore24-Trackinglink ist nicht mehr provisionssicher.'); }
+        }
         if (method_exists($this, 'control_emergency_stop_active') && $this->control_emergency_stop_active()) {
             return new WP_Error('control_emergency_stop_active', 'Globale Affiliate-Notabschaltung ist aktiv.');
         }
@@ -1698,6 +1711,34 @@ trait PPAR_Output_Objects_Trait {
         $fingerprint=$this->output_source_fingerprint($row,$portal,(string) ($object['output_type'] ?? ''),$target,$slot_id);
         if ((string) ($object['source_fingerprint'] ?? '') === '' || !hash_equals((string) ($object['source_fingerprint'] ?? ''),$fingerprint)) { return new WP_Error('output_source_fingerprint_changed','Quelldaten, Portalprofil, Ziel oder Adapterstand haben sich seit der Vorbereitung geändert.'); }
         return $row;
+    }
+
+    private function output_finalize_digistore24_object($object) {
+        if (!is_array($object) || sanitize_key((string) ($object['provider'] ?? '')) !== 'digistore24') { return new WP_Error('output_digistore24_object_invalid', 'Digistore24-Ausgabeobjekt fehlt.'); }
+        $row = $this->output_object_revalidate($object);
+        if (is_wp_error($row)) { $this->output_deactivate_materialized_object($object, $row->get_error_message()); return $row; }
+        $portal = $this->output_portal_by_key((string) ($object['portal_key'] ?? ''));
+        if (is_wp_error($portal) || !in_array(sanitize_key((string) ($portal['adapter'] ?? '')), array('wordpress_local','wordpress_multisite'), true)) {
+            return is_wp_error($portal) ? $portal : new WP_Error('output_digistore24_local_required', 'Automatische Digistore24-Veröffentlichung erfordert den gebundenen WordPress-Adapter.');
+        }
+        $campaign_id = absint($object['campaign_post_id'] ?? 0);
+        $campaign = $this->output_campaign_by_post_id($campaign_id);
+        if (!is_array($campaign)) { return new WP_Error('banner_campaign_missing', 'Digistore24-Bannerkampagne fehlt.'); }
+        $campaign['active'] = true;
+        if (!$this->save_campaign_record($campaign, $campaign_id)) { $this->output_deactivate_materialized_object($object, 'Digistore24-Aktivierung konnte nicht persistiert werden.'); return new WP_Error('banner_activation_failed', 'Digistore24-Bannerkampagne konnte nicht aktiviert werden.'); }
+        global $wpdb; $table = $this->output_objects_table();
+        $saved = $wpdb->update($table, array('status'=>'published','updated_at'=>time(),'last_verified'=>time(),'decision_reason'=>'Digistore24-Partnerschaft und vollständige Ausgabeprüfung erfolgreich.'), array('id'=>absint($object['id'] ?? 0)));
+        if ($saved === false) {
+            $campaign['active'] = false; $this->save_campaign_record($campaign, $campaign_id);
+            return new WP_Error('output_digistore24_persistence_failed', 'Ausgabestatus konnte nicht persistiert werden; Last-Known-Good bleibt erhalten.');
+        }
+        $published = $this->output_object_by_id(absint($object['id'] ?? 0));
+        if (!is_array($published) || (string) ($published['status'] ?? '') !== 'published') {
+            $campaign['active'] = false; $this->save_campaign_record($campaign, $campaign_id);
+            return new WP_Error('output_digistore24_persistence_unconfirmed', 'Persistierter Veröffentlichungsstatus konnte nicht bestätigt werden.');
+        }
+        $this->output_supersede_conflicting_objects($published, (string) ($published['object_key'] ?? ''));
+        return true;
     }
     /**
      * eBay-Produktinhalte dürfen in einer öffentlichen Produktzone nicht mit
