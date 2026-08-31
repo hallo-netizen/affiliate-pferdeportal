@@ -1,0 +1,49 @@
+--- V1.50.470/pferde-template-kit.php
++++ V1.50.471/pferde-template-kit.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate Portal Template Kit (Pferde-kompatibel)
+  * Description: Allgemeines Template-/Design-Plugin für Affiliateportale. Pferde-Shortcodes bleiben als Kompatibilitätsalias erhalten.
+- * Version: 1.50.470
++ * Version: 1.50.471
+  * Author: OpenAI
+  * License: GPL-2.0-or-later
+  */
+@@ -849,30 +849,30 @@
+-    /** V1.50.470 – Gezielt ergänzt: 45 auditgebundene FAIL-/Leerstellen; 309 bestehende Seiten + 1052 Leaftexte wertidentisch. */
+-    private static function category_intro_editorial_batch1406_v150470() {
++    /** V1.50.471 – Zusätzlich gezielt ergänzt: 25 auditgebundene FAIL-/Leerstellen; alle 354 V1.50.470-Seitentexte + 1052 Leaftexte wertidentisch. */
++    private static function category_intro_editorial_batch1431_v150471() {
+         static $catalog = null;
+         if (is_array($catalog)) { return $catalog; }
+         $catalog = ['pages'=>[], 'leaf'=>[]];
+-        $path = plugin_dir_path(__FILE__) . 'assets/category-intro-editorial-v150470-batch1406.json';
++        $path = plugin_dir_path(__FILE__) . 'assets/category-intro-editorial-v150471-batch1431.json';
+         if (!is_readable($path)) { return $catalog; }
+         $decoded = json_decode((string)file_get_contents($path), true);
+-        if (!is_array($decoded) || (string)($decoded['contract'] ?? '') !== 'PFERDE_ATELIER_CATEGORY_INTRO_EDITORIAL_V150470_BATCH1406') { return $catalog; }
++        if (!is_array($decoded) || (string)($decoded['contract'] ?? '') !== 'PFERDE_ATELIER_CATEGORY_INTRO_EDITORIAL_V150471_BATCH1431') { return $catalog; }
+@@
+-    private static function category_intro_editorial_page_batch1406_v150470($page_id) {
++    private static function category_intro_editorial_page_batch1431_v150471($page_id) {
+@@
+-        $catalog = self::category_intro_editorial_batch1406_v150470();
++        $catalog = self::category_intro_editorial_batch1431_v150471();
+@@
+-    private static function category_intro_editorial_leaf_batch1406_v150470($term) {
++    private static function category_intro_editorial_leaf_batch1431_v150471($term) {
+@@
+-        $catalog = self::category_intro_editorial_batch1406_v150470();
++        $catalog = self::category_intro_editorial_batch1431_v150471();
+@@
+-            $editorial = self::category_intro_editorial_page_batch1406_v150470($page_id);
++            $editorial = self::category_intro_editorial_page_batch1431_v150471($page_id);
+@@
+-        $editorial = self::category_intro_editorial_page_batch1406_v150470($page_id);
++        $editorial = self::category_intro_editorial_page_batch1431_v150471($page_id);
+@@
+-        if ($intro === '') { $intro = self::category_intro_editorial_page_batch1406_v150470($page_id); }
++        if ($intro === '') { $intro = self::category_intro_editorial_page_batch1431_v150471($page_id); }
+@@
+-        $intro = self::category_intro_editorial_leaf_batch1406_v150470($term);
++        $intro = self::category_intro_editorial_leaf_batch1431_v150471($term);
