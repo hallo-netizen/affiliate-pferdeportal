@@ -33,16 +33,32 @@ Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/
 9. Erst nach erfolgreicher Revalidierung und persistierter `published`-Markierung wird ein Konfliktobjekt abgelöst. Bei Persistenzfehler wird die Kampagne zurückgerollt.
 10. Ein früherer generischer Banner-Aktivator kann den Digistore-Sicherheitsvertrag nicht umgehen: die spätere provider-spezifische Schlussprüfung rollt nicht freigegebene Kandidaten vor Request-Ende wieder auf inactive/draft zurück.
 
-## Testnachweis dieses Blocks
+## Testnachweis des lokalen Kandidaten
 
 Evidence: `release/affiliate-zentrale/evidence/digistore24_automatic_partner_banner_gate_v6640_static.txt`
 
-Lokal PASS: PHP-Lint beider geänderter Traits; exakter GET-Request; fremde Affiliate-ID blockiert; >50 Produkt-IDs blockiert; approved positiv; pending negativ; stale negativ; atomare Aktivierung positiv; DB-Commit-Rollback negativ; Two-Phase-Supersede positiv; früher generisch aktivierter unapproved Kandidat wird zurückgerollt.
+Lokal PASS: PHP-Lint beider Kandidaten-Traits; exakter GET-Request; fremde Affiliate-ID blockiert; >50 Produkt-IDs blockiert; approved positiv; pending negativ; stale negativ; atomare Aktivierung positiv; DB-Commit-Rollback negativ; Two-Phase-Supersede positiv; früher generisch aktivierter unapproved Kandidat wird zurückgerollt.
+
+Wichtig: Dieser Nachweis beschreibt den lokal getesteten Zielvertrag. Die beiden geänderten PHP-Dateien sind noch **nicht** Bestandteil der autoritativen GitHub-Source. Deshalb darf aus den Kandidaten-Hashes noch kein Release- oder Live-PASS abgeleitet werden.
+
+## Korrigierter Codex-/GitHub-Übergabeweg
+
+Der frühere Attachment-/Riesenprompt-Weg ist verworfen und im Repository ausdrücklich als `DEPRECATED` markiert.
+
+Verbindlicher repository-nativer Auftrag:
+
+`protocol/AFFILIATE_RELEASE_CODEX_DS24_IMPLEMENT_FROM_REPO_20260831.md`
+
+Codex benötigt dafür keine lokale Datei, kein ZIP und keinen eingefügten Quelltext. Es arbeitet aus dem verbundenen Repository, liest Governance, Master, Evidence und die aktuellen Source-Dateien und implementiert den gebundenen Digistore-Zielvertrag direkt im aktuellen Baum.
 
 ## Noch offen vor Release
 
-Der Digistore-Block besitzt noch keinen echten Live-Nachweis mit dem realen Digistore24-Konto und der realen WordPress/MariaDB-Installation. Deshalb bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_scope_product_deals_partner_analytics` PENDING. Keine finale Release-ZIP vor dem finalen Gate.
+- Repository-native Implementierung der Digistore24-Automatisierung in der kanonischen Source.
+- Neu berechnetes 25-Dateien-Source-Manifest und passende Governance-Bindung.
+- Danach echter Live-Nachweis mit dem realen Digistore24-Konto und der realen WordPress/MariaDB-Installation.
+
+Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_scope_product_deals_partner_analytics` PENDING. Keine finale Release-ZIP vor dem finalen Gate.
 
 ## Aktuell autorisierter nächster Schritt
 
-Den so gebundenen Source-Stand live gegen das reale Digistore24-Konto prüfen: read-only Verbindung, Marketplace-Daten, `getAffiliateCommission`, mindestens ein realer approved/active Partner bzw. korrektes Fail-closed bei keinem approved Partner, reale Werbemittel-URL/Banner, Bildprüfung, automatische Ziel-/Slot-Zuordnung und veröffentlichter/rollbackfähiger Endzustand. Danach nur den bereits gebundenen Release-Gate weiterführen.
+Repository-nativen Auftrag `protocol/AFFILIATE_RELEASE_CODEX_DS24_IMPLEMENT_FROM_REPO_20260831.md` gegen die aktuelle kanonische Source ausführen. Nach Source-/Manifest-/Governance-PASS unmittelbar den realen Digistore24-Livegate durchführen: read-only Verbindung, Marketplace-Daten, `getAffiliateCommission`, mindestens ein realer approved/active Partner bzw. korrektes Fail-closed bei keinem approved Partner, reale Werbemittel-URL/Banner, Bildprüfung, automatische Ziel-/Slot-Zuordnung und veröffentlichter/rollbackfähiger Endzustand. Danach nur den bereits gebundenen Release-Gate weiterführen.
