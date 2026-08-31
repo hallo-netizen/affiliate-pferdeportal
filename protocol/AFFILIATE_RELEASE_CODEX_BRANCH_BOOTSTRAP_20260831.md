@@ -1,65 +1,64 @@
-# AFFILIATE_ZENTRALE — Codex branch bootstrap
+# AFFILIATE_ZENTRALE — Codex Cloud base/bootstrap
 
 Stand: 2026-08-31
 Repository: `hallo-netizen/affiliate-pferdeportal`
 Verified clone URL: `https://github.com/hallo-netizen/affiliate-pferdeportal.git`
-Required remote branch: `affiliate-release-current`
+Required GitHub base branch: `affiliate-release-current`
 Workstream: `AFFILIATE_ZENTRALE`
 
 ## Purpose
 
-This file only resolves the Codex Cloud checkout case where the repository opens on a local branch such as `work`, the already-existing remote branch `affiliate-release-current` has not been fetched locally yet, and/or the isolated checkout contains no Git remote named `origin`.
+Codex Cloud may expose its isolated writable checkout under a synthetic local branch name such as `work`. That local name is **not** the GitHub base-branch authority.
 
-The clone URL above is not inferred from chat context. It is the repository clone URL returned by GitHub for `hallo-netizen/affiliate-pferdeportal`. The repository is public and the required remote branch already exists on GitHub.
+For this Affiliate task, the checkout is valid only when its untouched HEAD is byte-identical to the current GitHub head of `affiliate-release-current`.
 
-Adding this exact repository as the local `origin`, fetching the already-existing remote branch, and creating a **local tracking branch with the exact same name** is authorized bootstrap. It does **not** create a new remote workstream/release branch and does not relax governance.
+Do not switch to STARTMASTER. Do not run `control/cloud-entry-gate/cloud_entry.py`. Do not create another branch.
 
-## Execute exactly
+## Execute exactly before implementation
 
 ```bash
 set -euo pipefail
 
-# No implementation changes may exist before changing to the bound branch.
 test -z "$(git status --porcelain)"
 
-EXPECTED_REMOTE='https://github.com/hallo-netizen/affiliate-pferdeportal.git'
+EXPECTED_REMOTE_A='https://github.com/hallo-netizen/affiliate-pferdeportal.git'
+EXPECTED_REMOTE_B='https://github.com/hallo-netizen/affiliate-pferdeportal'
+BOUND_BRANCH='affiliate-release-current'
 
-# Codex isolated checkouts may contain no remote at all. In that exact case,
-# bind `origin` to the verified GitHub repository. Never invent another URL.
 if ! git remote get-url origin >/dev/null 2>&1; then
-  git remote add origin "$EXPECTED_REMOTE"
+  git remote add origin "$EXPECTED_REMOTE_A"
 else
-  test "$(git remote get-url origin)" = "$EXPECTED_REMOTE"
+  CURRENT_REMOTE="$(git remote get-url origin)"
+  test "$CURRENT_REMOTE" = "$EXPECTED_REMOTE_A" -o "$CURRENT_REMOTE" = "$EXPECTED_REMOTE_B"
 fi
 
-# The required branch must already exist on that exact origin. Never invent a substitute.
-git ls-remote --exit-code --heads origin refs/heads/affiliate-release-current >/dev/null
-
-# Fetch only the already-existing bound remote branch.
+git ls-remote --exit-code --heads origin "refs/heads/$BOUND_BRANCH" >/dev/null
 git fetch --no-tags origin \
-  refs/heads/affiliate-release-current:refs/remotes/origin/affiliate-release-current
+  "refs/heads/$BOUND_BRANCH:refs/remotes/origin/$BOUND_BRANCH"
 
-# Reuse an existing local branch if present; otherwise create only the local
-# tracking branch for the already-existing remote branch of the same name.
-if git show-ref --verify --quiet refs/heads/affiliate-release-current; then
-  git switch affiliate-release-current
-else
-  git switch --create affiliate-release-current --track origin/affiliate-release-current
-fi
+LOCAL_BRANCH="$(git branch --show-current)"
+case "$LOCAL_BRANCH" in
+  "$BOUND_BRANCH"|work) ;;
+  *) echo "AFFILIATE_CODEX_LOCAL_BRANCH_UNEXPECTED:$LOCAL_BRANCH" >&2; exit 2 ;;
+esac
 
-# No merge/rebase divergence is allowed.
-git merge --ff-only origin/affiliate-release-current
+HEAD_SHA="$(git rev-parse HEAD)"
+BOUND_SHA="$(git rev-parse "origin/$BOUND_BRANCH")"
+test "$HEAD_SHA" = "$BOUND_SHA"
 
-test "$(git branch --show-current)" = "affiliate-release-current"
-test "$(git rev-parse HEAD)" = "$(git rev-parse origin/affiliate-release-current)"
-
+# Do not switch branches. `work` is permitted only as Codex's synthetic local
+# worktree name after the exact HEAD/base identity check above.
 python3 control/release-governance/release_guard.py governance-check
+python3 control/release-governance/release_guard.py source-check
+python3 control/release-governance/release_guard.py start --branch "$BOUND_BRANCH"
 ```
 
-If any command fails, fail closed and report the exact command/error. Do not create any differently named branch and do not open a PR.
+If any command fails, fail closed and report the exact command/error. Do not invoke STARTMASTER/H8, do not create another branch, and do not open a PR.
 
-After PASS, immediately execute the repository-native task:
+After PASS, immediately execute:
 
 `protocol/AFFILIATE_RELEASE_CODEX_DS24_IMPLEMENT_FROM_REPO_20260831.md`
 
-Do not stop merely because the initial Codex checkout branch was `work` or because the isolated checkout initially had no `origin`; the branch check applies after this bootstrap has bound the verified repository remote and checked out the already-existing bound remote branch.
+## Completion handling
+
+Keep all implementation changes in the existing Codex worktree. Do not create a side branch. The GitHub base for the task remains `affiliate-release-current` even if Codex internally names the writable worktree `work`.
