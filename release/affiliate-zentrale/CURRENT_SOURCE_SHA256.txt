@@ -4,6 +4,8 @@
 b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0  affiliate-portal-router/assets/portal-structure-v279.json
 65e1979b6df19a4c5c4eee0f19a1f4f468f7be75c5cf964f427a3dcb08b8daa4  affiliate-portal-router/includes/class-ppar-partner-analytics.php
 0a8900e84695acbf4584064724926720e93def0d0f7cefa5794d6708974571bb  affiliate-portal-router/includes/class-ppar-deal-radar.php
+51ca06044c0ee03af231ffda324854306eca0de7d2ee89969f8b843ae355a96c  affiliate-portal-router/includes/class-ppar-product-source-plan.php
+121ba8af39e5c3944ef545f89fab0bc45a91824c814409109dc1da7c971b61a5  affiliate-portal-router/includes/class-ppar-admin-kiss.php
 f4c7675cf005dca85eeb0c62abc780c5bb331cfc94bff1734e42854087b769fa  affiliate-portal-router/includes/trait-ppar-article-plans.php
 c531d35be4bf7fed06efcd530e7c34007dc0393986ce6324c16323b8b066b2cc  affiliate-portal-router/includes/trait-ppar-automation-suite.php
 399a28ae0c3f6d934ef3393d54ad421c4ed97e9ef0de32733aba83e77eca2255  affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php
@@ -13,7 +15,7 @@ c531d35be4bf7fed06efcd530e7c34007dc0393986ce6324c16323b8b066b2cc  affiliate-port
 059e086a69020d97e7f4be1044aa2dc1c45deff580f8f0002cd090293f03924b  affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php
 8bfd27713da7864788222448e65593d4ea0ed05b6cd55ca2f4cd6603a31ca0a3  affiliate-portal-router/includes/trait-ppar-ebay-run.php
 595a064fc8f89570355dd82d5901c4b6025c5eb56da6b723bfb90ea13811e467  affiliate-portal-router/includes/trait-ppar-ebay.php
-61455e766d172a72a2106879969028dc7eec5359ec94051db7d667daa06deb66  affiliate-portal-router/includes/trait-ppar-housekeeping.php
+9343a37f2dbe737f6e4ac4f923eccb6906500d8fc135324dc0d6eab736410ca0  affiliate-portal-router/includes/trait-ppar-housekeeping.php
 e16c9ff51df5d715f312c2c0a40e1cf3b872493e73d6972e854b0b671b699836  affiliate-portal-router/includes/trait-ppar-idealo.php
 b22b442c7d2087d012668d090ba8d1e4f6cc9969c6a1f5d4115b310c518e9f85  affiliate-portal-router/includes/trait-ppar-network-sync.php
 77c12755b2ee77904574291d2f8143e5a389226c9a2ea53e387f923757978b7c  affiliate-portal-router/includes/trait-ppar-output-objects.php

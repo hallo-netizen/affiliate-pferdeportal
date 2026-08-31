@@ -8,8 +8,8 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "9ec2d4030498d904b3508f666acfc4b9e8145364e2c4a48f7e4a8942cd0665ed",
-    "source_file_count": 23,
+    "manifest_sha256": "fa7a335daaeeb118187064d6ee7fa8f1e7ef5623d60272d80623ae0f38cbcf95",
+    "source_file_count": 25,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
     "guard_role": "VERIFY_ONLY"
@@ -41,8 +41,8 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "9ec2d4030498d904b3508f666acfc4b9e8145364e2c4a48f7e4a8942cd0665ed",
-    "source_file_count": 23,
+    "current_source_manifest_sha256": "fa7a335daaeeb118187064d6ee7fa8f1e7ef5623d60272d80623ae0f38cbcf95",
+    "source_file_count": 25,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
     "final_artifact_sha256": null
@@ -120,7 +120,7 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "9ec2d4030498d904b3508f666acfc4b9e8145364e2c4a48f7e4a8942cd0665ed"
+      "source_manifest_sha256": "fa7a335daaeeb118187064d6ee7fa8f1e7ef5623d60272d80623ae0f38cbcf95"
     },
     "old_state_reproduction_negative": {
       "status": "PASS",
@@ -214,7 +214,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "PRODUCT_DEALS_PARTNER_ANALYTICS_REITHELME_TEST",
+    "current_milestone": "PRODUCT_DEALS_PARTNERS_BACKEND_KISS_DIGISTORE_TEST",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
