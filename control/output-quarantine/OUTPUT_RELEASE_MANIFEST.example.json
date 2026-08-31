@@ -1,0 +1,18 @@
+{
+  "contract": "PFERDE_ATELIER_OUTPUT_RELEASE_MANIFEST_V1",
+  "startmaster": "STARTMASTER0107",
+  "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+  "sequence": 107007,
+  "batch_sha256": "REPLACE_WITH_BOUND_BATCH_SHA256",
+  "receipt_sha256": "REPLACE_WITH_STEP_RECEIPT_SHA256",
+  "workflow_pass": true,
+  "outputs": [
+    {
+      "ref": "REPLACE_WITH_BOUND_OUTPUT_REF",
+      "sha256": "REPLACE_WITH_BOUND_OUTPUT_SHA256"
+    }
+  ],
+  "publish_allowed": false,
+  "created_by": "BOUND_WORKER",
+  "content_quality_decision_authority": "NONE"
+}
