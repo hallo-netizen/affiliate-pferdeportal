@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
  * - read-only API access only;
  * - banner-only provider, never product/listing output;
  * - no provider-specific cron; use the central automation cursor only;
- * - manual partnership confirmation before vendor-banner import;
+ * - API affiliation proof for automation; manual confirmation only for manual import;
  * - provider-local failures never starve other automation providers.
  */
 trait PPAR_Digistore24_Trait {
@@ -26,6 +26,7 @@ trait PPAR_Digistore24_Trait {
         add_action('admin_post_ppar_digistore24_marketplace_refresh', array($this, 'digistore24_handle_marketplace_refresh'));
         add_action('admin_post_ppar_digistore24_partnership', array($this, 'digistore24_handle_partnership'));
         add_action('admin_post_ppar_digistore24_import_banners', array($this, 'digistore24_handle_import_banners'));
+        add_action('shutdown', array($this, 'digistore24_final_publication_guard'), 999);
     }
 
     public function digistore24_provider_registry($registry, $contract_version = '') {
@@ -276,7 +277,7 @@ trait PPAR_Digistore24_Trait {
     }
 
     private function digistore24_api_allowed_methods() {
-        return array('listMarketplaceEntries','getMarketplaceEntry','getUserInfo');
+        return array('listMarketplaceEntries','getMarketplaceEntry','getUserInfo','getAffiliateCommission');
     }
 
     private function digistore24_api_call($method, $params = array()) {
@@ -291,7 +292,30 @@ trait PPAR_Digistore24_Trait {
         }
         $params = is_array($params) ? $params : array();
         $safe_params = array();
-        if ($method === 'getMarketplaceEntry') {
+        if ($method === 'getAffiliateCommission') {
+            $identity = $this->digistore24_current_tested_identity($settings);
+            $affiliate_id = $this->digistore24_normalize_affiliate_id($params['affiliate_id'] ?? '');
+            if ($affiliate_id === '' || (string) ($identity['affiliate_id'] ?? '') === '' || !hash_equals((string) $identity['affiliate_id'], $affiliate_id)) {
+                return new WP_Error('digistore24_affiliate_identity_mismatch', 'Provisionsabfrage für eine fremde oder ungeprüfte Affiliate-ID wurde vor dem Netzwerkzugriff blockiert.');
+            }
+            $product_ids = is_array($params['product_ids'] ?? null) ? $params['product_ids'] : explode(',', (string) ($params['product_ids'] ?? ''));
+            if (count($product_ids) < 1 || count($product_ids) > 50) {
+                return new WP_Error('digistore24_product_ids_count_invalid', 'Provisionsabfrage erfordert 1 bis 50 explizite Produkt-IDs.');
+            }
+            $canonical = array();
+            foreach ($product_ids as $product_id) {
+                $product_id = trim((string) $product_id);
+                if ($product_id === '' || !ctype_digit($product_id) || (string) absint($product_id) !== $product_id) {
+                    return new WP_Error('digistore24_product_id_invalid', 'Provisionsabfrage enthält eine nicht kanonische numerische Produkt-ID.');
+                }
+                $canonical[$product_id] = $product_id;
+            }
+            if (!$canonical || count($canonical) !== count($product_ids)) {
+                return new WP_Error('digistore24_product_ids_invalid', 'Provisionsabfrage enthält leere oder doppelte Produkt-IDs.');
+            }
+            $safe_params['affiliate_id'] = $affiliate_id;
+            $safe_params['product_ids'] = implode(',', $canonical);
+        } elseif ($method === 'getMarketplaceEntry') {
             $entry_id = preg_replace('/[^0-9]/', '', (string) ($params['entryId'] ?? $params['entry_id'] ?? ''));
             if ($entry_id === '') {
                 return new WP_Error('digistore24_entry_id_missing', 'Marketplace-Entry-ID fehlt.');
@@ -397,6 +421,86 @@ trait PPAR_Digistore24_Trait {
         );
     }
 
+    private function digistore24_affiliation_store() {
+        $stored = get_option('ppar_digistore24_affiliations_v1', array());
+        return is_array($stored) ? $stored : array();
+    }
+
+    private function digistore24_store_affiliation_response($product_ids, $response, $identity) {
+        $data = is_array($response['data'] ?? null) ? $response['data'] : array();
+        if (!array_key_exists('commissions', $data) || !is_array($data['commissions'])) {
+            return new WP_Error('digistore24_commissions_schema_invalid', 'Digistore24-Provisionsantwort enthält keine gültige data.commissions-Liste.');
+        }
+        $requested = array_fill_keys(array_map('strval', $product_ids), true);
+        $rows = array();
+        foreach ($data['commissions'] as $raw) {
+            $raw = is_array($raw) ? $raw : array();
+            $product_id = trim((string) ($raw['product_id'] ?? ''));
+            if ($product_id === '' || !ctype_digit($product_id) || !isset($requested[$product_id]) || isset($rows[$product_id])) { continue; }
+            $rows[$product_id] = array(
+                'product_id'=>$product_id,
+                'product_is_active'=>filter_var($raw['product_is_active'] ?? false, FILTER_VALIDATE_BOOLEAN),
+                'approval_status'=>sanitize_key((string) ($raw['approval_status'] ?? '')),
+                'commission_rate'=>isset($raw['commission_rate']) && is_numeric($raw['commission_rate']) ? (float) $raw['commission_rate'] : null,
+                'checked_at'=>time(),
+                'key_fingerprint'=>(string) ($identity['key_fingerprint'] ?? ''),
+                'affiliate_id'=>(string) ($identity['affiliate_id'] ?? ''),
+            );
+        }
+        $store = $this->digistore24_affiliation_store();
+        foreach (array_keys($requested) as $product_id) {
+            // A missing row is persisted as a negative proof, so an older
+            // approval can never survive a successful refresh that omitted it.
+            $store[$product_id] = $rows[$product_id] ?? array(
+                'product_id'=>$product_id,'product_is_active'=>false,'approval_status'=>'missing','commission_rate'=>null,
+                'checked_at'=>time(),'key_fingerprint'=>(string) ($identity['key_fingerprint'] ?? ''),'affiliate_id'=>(string) ($identity['affiliate_id'] ?? ''),
+            );
+        }
+        update_option('ppar_digistore24_affiliations_v1', $store, false);
+        return $rows;
+    }
+
+    private function digistore24_refresh_affiliations($product_ids) {
+        $identity = $this->digistore24_current_tested_identity();
+        if ((string) ($identity['affiliate_id'] ?? '') === '' || (string) ($identity['key_fingerprint'] ?? '') === '') {
+            return new WP_Error('digistore24_identity_not_tested', 'Provisionsprüfung erfordert den aktuell getesteten Digistore24-Zugang.');
+        }
+        $response = $this->digistore24_api_call('getAffiliateCommission', array('affiliate_id'=>$identity['affiliate_id'],'product_ids'=>$product_ids));
+        if (is_wp_error($response)) { return $response; }
+        $after = $this->digistore24_current_tested_identity();
+        $response_fp = (string) ($response['key_fingerprint'] ?? '');
+        if ($response_fp === '' || !hash_equals((string) $identity['key_fingerprint'], $response_fp)
+            || !hash_equals((string) ($after['key_fingerprint'] ?? ''), $response_fp)
+            || !hash_equals((string) $identity['affiliate_id'], (string) ($after['affiliate_id'] ?? ''))) {
+            return new WP_Error('digistore24_identity_changed_during_request', 'Digistore24-Zugang änderte sich während der Provisionsprüfung; Antwort wird verworfen.');
+        }
+        return $this->digistore24_store_affiliation_response($product_ids, $response, $identity);
+    }
+
+    private function digistore24_affiliation_gate($product_id, $refresh_stale = false) {
+        $product_id = trim((string) $product_id);
+        if ($product_id === '' || !ctype_digit($product_id)) { return new WP_Error('digistore24_affiliation_product_missing', 'Kanonische Produkt-ID für den Partnerschaftsnachweis fehlt.'); }
+        $identity = $this->digistore24_current_tested_identity();
+        $store = $this->digistore24_affiliation_store();
+        $proof = is_array($store[$product_id] ?? null) ? $store[$product_id] : array();
+        $fresh = absint($proof['checked_at'] ?? 0) >= time() - (2 * DAY_IN_SECONDS);
+        if ($refresh_stale && (!$proof || !$fresh)) {
+            $refreshed = $this->digistore24_refresh_affiliations(array($product_id));
+            if (is_wp_error($refreshed)) { return $refreshed; }
+            $store = $this->digistore24_affiliation_store(); $proof = is_array($store[$product_id] ?? null) ? $store[$product_id] : array();
+            $fresh = absint($proof['checked_at'] ?? 0) >= time() - (2 * DAY_IN_SECONDS);
+        }
+        if (!$proof) { return new WP_Error('digistore24_affiliation_missing', 'Aktueller Digistore24-Partnerschaftsnachweis fehlt.'); }
+        if (!$fresh) { return new WP_Error('digistore24_affiliation_stale', 'Digistore24-Partnerschaftsnachweis ist älter als zwei Tage.'); }
+        if ((string) ($identity['key_fingerprint'] ?? '') === '' || !hash_equals((string) $identity['key_fingerprint'], (string) ($proof['key_fingerprint'] ?? ''))
+            || (string) ($identity['affiliate_id'] ?? '') === '' || !hash_equals((string) $identity['affiliate_id'], (string) ($proof['affiliate_id'] ?? ''))) {
+            return new WP_Error('digistore24_affiliation_identity_mismatch', 'Partnerschaftsnachweis gehört nicht zum aktuell getesteten Zugang.');
+        }
+        if ((string) ($proof['approval_status'] ?? '') !== 'approved') { return new WP_Error('digistore24_affiliation_not_approved', 'Digistore24-Partnerschaft ist nicht approved.'); }
+        if (empty($proof['product_is_active'])) { return new WP_Error('digistore24_affiliation_product_inactive', 'Digistore24-Produkt ist nicht aktiv.'); }
+        return $proof;
+    }
+
     private function digistore24_marketplace_store() {
         $stored = get_option('ppar_digistore24_marketplace_v1', array());
         $stored = is_array($stored) ? $stored : array();
@@ -476,6 +580,13 @@ trait PPAR_Digistore24_Trait {
         if (!$entries) {
             return new WP_Error('digistore24_marketplace_empty_unverified', 'Digistore24 lieferte data.entries als leere Liste. 0/0 wird fail-closed nicht als Marketplace-PASS gewertet; bestehender Cache und öffentliche Ausgabe bleiben unverändert.');
         }
+        $previous_store = $this->digistore24_marketplace_store();
+        $previous_urls = array();
+        foreach ((array) ($previous_store['items'] ?? array()) as $previous_item) {
+            if (is_array($previous_item) && $this->digistore24_is_https_url((string) ($previous_item['support_url'] ?? ''))) {
+                $previous_urls[(string) ($previous_item['id'] ?? '')] = (string) $previous_item['support_url'];
+            }
+        }
         $items = array();
         $blocked = 0;
         foreach ($entries as $entry) {
@@ -484,6 +595,7 @@ trait PPAR_Digistore24_Trait {
                 $blocked++;
                 continue;
             }
+            if (isset($previous_urls[(string) $normalized['id']])) { $normalized['support_url'] = $previous_urls[(string) $normalized['id']]; }
             $items[] = $normalized;
         }
         usort($items, static function ($a, $b) {
@@ -538,6 +650,8 @@ trait PPAR_Digistore24_Trait {
             return new WP_Error('digistore24_entry_id_mismatch', 'Digistore24-Detailantwort gehört nicht zur angeforderten Marketplace-Entry-ID und wird verworfen.');
         }
         $store = $this->digistore24_marketplace_store();
+        $previous = $this->digistore24_marketplace_item($requested_entry_id);
+        if ($this->digistore24_is_https_url((string) ($previous['support_url'] ?? ''))) { $normalized['support_url'] = (string) $previous['support_url']; }
         $items = array();
         $replaced = false;
         foreach ((array) ($store['items'] ?? array()) as $item) {
@@ -597,6 +711,23 @@ trait PPAR_Digistore24_Trait {
                 'summary'=>array('status'=>'partial','message'=>$result->get_error_message()),
             );
         }
+        $processed = 0; $imported = 0; $needs_url = 0; $blocked = 0;
+        foreach (array_slice((array) ($result['items'] ?? array()), 0, 5) as $entry) {
+            $product_id = (string) ($entry['main_product_id'] ?? '');
+            if ($product_id === '') { $blocked++; continue; }
+            $proof = $this->digistore24_affiliation_gate($product_id, true);
+            if (is_wp_error($proof)) { $blocked++; continue; }
+            $processed++;
+            $support_url = (string) ($entry['support_url'] ?? '');
+            if (!$this->digistore24_is_https_url($support_url)) { $needs_url++; continue; }
+            $banner_result = $this->digistore24_import_vendor_banners((string) ($entry['id'] ?? ''), $support_url, true);
+            if (is_wp_error($banner_result)) { $blocked++; continue; }
+            $imported += absint($banner_result['imported'] ?? 0);
+        }
+        $result['automation_processed'] = $processed;
+        $result['automation_imported'] = $imported;
+        $result['requires_support_url'] = $needs_url;
+        $result['automation_blocked'] = $blocked;
         return array('immediate'=>true,'provider'=>'digistore24','summary'=>$result);
     }
 
@@ -819,14 +950,30 @@ trait PPAR_Digistore24_Trait {
         return $banners;
     }
 
-    private function digistore24_import_vendor_banners($entry_id, $support_url) {
+    private function digistore24_store_support_url($entry_id, $support_url) {
+        if (!$this->digistore24_is_https_url($support_url)) { return new WP_Error('digistore24_support_url_invalid', 'Vendor-Supportseite muss eine gültige HTTPS-URL sein.'); }
+        $store = $this->digistore24_marketplace_store(); $found = false;
+        foreach ((array) ($store['items'] ?? array()) as &$item) {
+            if (is_array($item) && (string) ($item['id'] ?? '') === (string) $entry_id) { $item['support_url'] = esc_url_raw($support_url); $found = true; break; }
+        }
+        unset($item);
+        if (!$found) { return new WP_Error('digistore24_marketplace_entry_required', 'Vendor-URL gehört zu keinem aktuellen Marketplace-Eintrag.'); }
+        update_option('ppar_digistore24_marketplace_v1', $store, false); return true;
+    }
+
+    private function digistore24_import_vendor_banners($entry_id, $support_url, $automatic = false) {
         $entry_id = preg_replace('/[^0-9]/', '', (string) $entry_id);
-        if (!$this->digistore24_partnership_confirmed($entry_id)) {
+        $cached_entry = $this->digistore24_marketplace_item($entry_id);
+        $automatic_proof = $automatic ? $this->digistore24_affiliation_gate((string) ($cached_entry['main_product_id'] ?? ''), false) : false;
+        if ($automatic && is_wp_error($automatic_proof)) { return $automatic_proof; }
+        if (!$automatic && !$this->digistore24_partnership_confirmed($entry_id)) {
             return new WP_Error('digistore24_partnership_required', 'Vendor-Bannerimport bleibt bis zur manuellen Partnerschaftsbestätigung gesperrt.');
         }
         if (!$this->digistore24_is_https_url($support_url)) {
             return new WP_Error('digistore24_support_url_invalid', 'Vendor-Supportseite muss eine gültige HTTPS-URL sein.');
         }
+        $stored_url = $this->digistore24_store_support_url($entry_id, $support_url);
+        if (is_wp_error($stored_url)) { return $stored_url; }
         $entry = $this->digistore24_refresh_marketplace_entry($entry_id);
         if (is_wp_error($entry)) {
             return $entry;
@@ -888,6 +1035,7 @@ trait PPAR_Digistore24_Trait {
                 continue;
             }
             $imported++;
+            if (method_exists($this, 'output_plan_creative')) { $this->output_plan_creative($normalized, true); }
         }
         if ($imported > 0) {
             $this->creative_library_schedule_asset_verification(10);
@@ -906,7 +1054,7 @@ trait PPAR_Digistore24_Trait {
             <p><label><input type="checkbox" name="ppar_provider[digistore24][enabled]" value="1" <?php checked(!empty($settings['enabled']) && $this->digistore24_fingerprint_matches($settings)); ?>> Verbindung verwenden</label></p>
             <p><label>Read-only API-Schlüssel <span class="ppar-saved"><?php echo esc_html($has_constant ? 'über wp-config.php' : (trim((string)($settings['api_key'] ?? '')) !== '' ? 'gespeichert' : 'nicht gespeichert')); ?></span><br><input type="password" autocomplete="new-password" name="ppar_provider[digistore24][api_key]" value="" placeholder="<?php echo esc_attr($has_constant ? 'über wp-config.php gesetzt' : 'leer lassen zum Beibehalten'); ?>"></label></p>
             <?php if (!$has_constant) : ?><details><summary>Zugangsdaten entfernen</summary><p><label><input type="checkbox" name="ppar_provider[digistore24][remove_api_key]" value="1"> API-Schlüssel entfernen</label></p></details><?php endif; ?>
-            <p class="description">Nur read-only GET: listMarketplaceEntries, getMarketplaceEntry und getUserInfo. Aktivierung erfolgt erst nach erfolgreichem Test desselben Schlüssels.</p>
+            <p class="description">Nur read-only GET: listMarketplaceEntries, getMarketplaceEntry, getAffiliateCommission und getUserInfo. Aktivierung erfolgt erst nach erfolgreichem Test desselben Schlüssels.</p>
             <div class="ppar-v240-actions"><button class="button button-primary" name="ppar_provider_action" value="save">Speichern</button><button class="button" name="ppar_provider_action" value="save_test">Speichern &amp; API prüfen</button></div>
         </form>
         <?php
@@ -929,7 +1077,7 @@ trait PPAR_Digistore24_Trait {
             <h3><?php echo esc_html((string)($entry['headline'] ?? ('Marketplace ' . $entry_id))); ?></h3>
             <p><?php echo esc_html((string)($entry['product_category'] ?? '')); ?><?php if ((string)($entry['description'] ?? '') !== '') : ?><br><?php echo esc_html((string)$entry['description']); ?><?php endif; ?></p>
             <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-bottom:12px"><input type="hidden" name="action" value="ppar_digistore24_partnership"><input type="hidden" name="entry_id" value="<?php echo esc_attr($entry_id); ?>"><?php wp_nonce_field('ppar_digistore24_partnership_' . $entry_id,'ppar_digistore24_nonce'); ?><label><input type="checkbox" name="confirmed" value="1" <?php checked($confirmed); ?>> Partnerschaft/Freigabe manuell bestätigt</label> <button class="button button-small" type="submit">Bestätigung speichern</button></form>
-            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_digistore24_import_banners"><input type="hidden" name="entry_id" value="<?php echo esc_attr($entry_id); ?>"><?php wp_nonce_field('ppar_digistore24_import_banners_' . $entry_id,'ppar_digistore24_nonce'); ?><label>Vendor-Support-/Werbemittelseite (HTTPS)<br><input class="large-text" type="url" name="support_url" value="" placeholder="https://..."></label><p><button class="button" type="submit" <?php disabled(!$confirmed); ?>>Vendor-Banner prüfen &amp; importieren</button></p><p class="description">Importiert nur Banner mit zulässigem Digistore24-Trackinglink. Keine automatische öffentliche Aktivierung.</p></form>
+            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_digistore24_import_banners"><input type="hidden" name="entry_id" value="<?php echo esc_attr($entry_id); ?>"><?php wp_nonce_field('ppar_digistore24_import_banners_' . $entry_id,'ppar_digistore24_nonce'); ?><label>Vendor-Support-/Werbemittelseite (HTTPS)<br><input class="large-text" type="url" name="support_url" value="<?php echo esc_attr((string)($entry['support_url'] ?? '')); ?>" placeholder="https://..."></label><p><button class="button" type="submit" <?php disabled(!$confirmed); ?>>Vendor-Banner prüfen &amp; importieren</button></p><p class="description">Importiert nur Banner mit zulässigem Digistore24-Trackinglink. Keine automatische öffentliche Aktivierung.</p></form>
         </section>
         <?php endforeach;
     }
@@ -966,5 +1114,22 @@ trait PPAR_Digistore24_Trait {
         $result = $this->digistore24_import_vendor_banners($entry_id, $support_url);
         $message = is_wp_error($result) ? $result->get_error_message() : absint($result['imported'] ?? 0) . ' Vendor-Banner importiert; ' . absint($result['blocked'] ?? 0) . ' blockiert.';
         $this->digistore24_redirect_specialist($message, is_wp_error($result));
+    }
+
+    public function digistore24_final_publication_guard() {
+        if (!method_exists($this, 'output_objects_table') || !method_exists($this, 'output_finalize_digistore24_object')) { return; }
+        global $wpdb;
+        if (!is_object($wpdb)) { return; }
+        $table = $this->output_objects_table();
+        $objects = $wpdb->get_results("SELECT * FROM {$table} WHERE provider='digistore24' AND status IN ('draft','published') ORDER BY updated_at ASC LIMIT 20", ARRAY_A);
+        foreach ((array) $objects as $object) {
+            $result = $this->output_finalize_digistore24_object($object);
+            if (is_wp_error($result)) {
+                // The final provider gate always wins over an earlier generic
+                // activator. Deactivation is idempotent and preserves conflicts.
+                $this->output_deactivate_materialized_object($object, $result->get_error_message());
+                $wpdb->update($table, array('status'=>'draft','decision_reason'=>$result->get_error_message(),'updated_at'=>time()), array('id'=>absint($object['id'] ?? 0)));
+            }
+        }
     }
 }
