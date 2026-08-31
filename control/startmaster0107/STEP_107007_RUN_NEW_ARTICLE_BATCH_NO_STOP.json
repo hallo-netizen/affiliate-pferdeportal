@@ -10,7 +10,7 @@
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "a0e595c0b25d4ce74e4ad70fa618d85cb33d852fb05842fc777038e42d28026e"
+      "sha256": "7d8baae9e02b642eb583776e36feea171d19e5e546e31f07ab5effc148c55a65"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
