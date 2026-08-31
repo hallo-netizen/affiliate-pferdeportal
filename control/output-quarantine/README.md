@@ -1,7 +1,12 @@
-# Output Quarantine
+# Output-Quarantäne / sichtbare Projektergebnisse
 
-Rein technische, fachblinde Ausgangssperre für STARTMASTER0107.
+Diese Schicht ist ausschließlich technisch und fachblind.
 
-Sie entscheidet ausschließlich über Herkunft, aktuellen State, Batch-Bindung und Hash-Identität. Sie bewertet oder verändert niemals Inhalt, Qualität, Recherche, SEO, Design oder Publish-Regeln.
+Sie darf niemals Artikelinhalt, Qualität, Recherche, LanguageTool, PPM, PSERC, PSTE, SEO, Design oder Publish-Regeln bewerten oder verändern.
 
-Ein Projektergebnis ist nur sichtbar/autorisiert, wenn es im gültigen `PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V1` des aktuellen Batches steht. Alles andere besitzt keine Projektresultat-Autorität.
+Regel:
+- Produktionskandidaten entstehen nur in `.pferde-quarantine/`.
+- Nach 107007-PASS werden sie nur unsichtbar in `.pferde-release-staging/` vorbereitet.
+- Sichtbare Projektresultate entstehen erst nach 107008-PASS und erfolgreichem Re-Arm.
+- Nur Dateien im finalen `PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V2` besitzen Projektresultat-Autorität.
+- Alles andere ist `QUARANTINE_INVALID_NEVER_SURFACE_AS_PROJECT_RESULT`.
