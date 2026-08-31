@@ -2,8 +2,16 @@
 
 Stand: 2026-08-31
 Repository: `hallo-netizen/affiliate-pferdeportal`
-Branch: `affiliate-release-current`
+GitHub base branch: `affiliate-release-current`
 Workstream: `AFFILIATE_ZENTRALE`
+
+## Codex Cloud branch interpretation
+
+This task must be entered through `protocol/AFFILIATE_RELEASE_CODEX_BRANCH_BOOTSTRAP_20260831.md` first.
+
+Codex Cloud may call its isolated writable local worktree branch `work`. After the bootstrap has proved `HEAD == origin/affiliate-release-current`, that synthetic local name is valid and must **not** be treated as a branch-policy mismatch. The governance authority remains `branch_policy.active_work_branch=affiliate-release-current`.
+
+Do not run STARTMASTER/H8 or `control/cloud-entry-gate/cloud_entry.py` for this task.
 
 ## Why this task exists
 
@@ -29,9 +37,11 @@ Proceed only while governance still says:
 - `active_candidate.release_allowed=false`
 - `execution_state.state=RUNNING_BOUND_RELEASE_GATES`
 - `execution_state.authorized_next_action=RUN_BOUND_RELEASE_GATES`
-- active work branch is `affiliate-release-current`.
+- `branch_policy.active_work_branch=affiliate-release-current`.
 
-If any of those changed, fail closed and report the exact mismatch. Do not create a new branch.
+The last item is the logical GitHub release-branch authority, not a requirement that Codex rename its already-verified synthetic local `work` branch.
+
+If any governance value changed, or if the bootstrap HEAD/base identity check did not pass, fail closed and report the exact mismatch. Do not create a new branch.
 
 ## Single implementation goal
 
@@ -206,7 +216,7 @@ After code/tests pass:
 6. Do not alter historical PASS evidence or pretend it is bound to the changed source.
 7. `git diff --check` must pass.
 
-Commit the source + manifest + governance binding in one commit if the environment permits. If Codex's cloud handoff requires its normal task commit/PR mechanism, keep the diff limited to the authorized files and report the resulting commit/diff for review.
+Keep the implementation in the existing verified Codex worktree. Do not create a side branch. Commit locally if the environment permits and report the commit/diff for handoff. Do not open a PR from a newly invented release branch.
 
 ## Completion output
 
