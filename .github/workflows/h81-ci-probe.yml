@@ -1,0 +1,18 @@
+name: H81 Temporary CI Probe
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact hashes
+        run: |
+          sha256sum control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
+          sha256sum control/startmaster0107/CURRENT_STATE.json
+          sha256sum control/single-door-boundary/H81_PREPRODUCTION_AUTHORING_BOUNDARY.json
+      - name: H81 positive-negative
+        run: python3 control/single-door-boundary/test_h81_preproduction_authoring.py
