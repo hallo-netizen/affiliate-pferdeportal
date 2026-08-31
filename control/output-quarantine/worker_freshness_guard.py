@@ -86,8 +86,16 @@ def validate() -> dict:
     bundle = load(bundlep)
     bindings = {str(row.get("ref") or ""): str(row.get("sha256") or "") for row in (bundle.get("authorized_inputs") or []) if isinstance(row, dict)}
     self_ref = "control/output-quarantine/worker_freshness_guard.py"
-    if bindings.get(self_ref) != sha256(Path(__file__).resolve()):
+    self_sha = sha256(Path(__file__).resolve())
+    if bindings.get(self_ref) != self_sha:
         raise Blocked("FRESHNESS_GUARD_NOT_BUNDLE_BOUND")
+    if ptr.get("worker_freshness_guard_ref") != self_ref or ptr.get("worker_freshness_guard_sha256") != self_sha:
+        raise Blocked("FRESHNESS_GUARD_POINTER_BINDING_MISMATCH")
+    release_ref = str(ptr.get("output_release_gate_ref") or "")
+    release_sha = str(ptr.get("output_release_gate_sha256") or "")
+    releasep = REPO / rel(release_ref)
+    if not releasep.is_file() or sha256(releasep) != release_sha or bindings.get(release_ref) != release_sha:
+        raise Blocked("OUTPUT_RELEASE_GATE_BINDING_MISMATCH")
     policy_ref = str(ptr.get("visible_output_policy_ref") or "")
     policy_sha = str(ptr.get("visible_output_policy_sha256") or "")
     policyp = REPO / rel(policy_ref)
