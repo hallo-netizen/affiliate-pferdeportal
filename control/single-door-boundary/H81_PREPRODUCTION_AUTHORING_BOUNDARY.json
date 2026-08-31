@@ -21,8 +21,8 @@
     {"ref": "control/single-door-boundary/project_single_door_entry_v3.py", "git_blob_sha1": "7d95805c15dada4db57157e90d065392228181ab"},
     {"ref": "control/single-door-boundary/single_door_authoring_entry.py", "git_blob_sha1": "896ba630c48c218d1d1265003204034157e5c964"},
     {"ref": "control/single-door-boundary/preproduction_provenance_guard_v2.py", "git_blob_sha1": "1a68d9b690bfb07c547a0b0ca45b74d97dfec55b"},
+    {"ref": "control/single-door-boundary/single_door_preproduction_handoff_v2.py", "git_blob_sha1": "a60c84bf37e21d24aa12a3007e1386dbf7d1dc82"},
     {"ref": "control/single-door-boundary/single_door_boundary.py", "git_blob_sha1": "4921624e0b6d24ce35549bec28e6d43035b2f098"},
-    {"ref": "control/single-door-boundary/single_door_preproduction_handoff.py", "git_blob_sha1": "c301fab2b8e8de2650f976fdbd0604104a0a6cd1"},
     {"ref": "control/single-door-boundary/single_door_route_binding.py", "git_blob_sha1": "f01f0608b86dca8b7540a7512040c475735f0e54"},
     {"ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py", "git_blob_sha1": "4304659a219f621769d8a8cbc63d1a84fa70e141"},
     {"ref": "control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json", "git_blob_sha1": "ee6d5d05ad5e7366ed81045c732e0dc990286889"},
@@ -34,7 +34,7 @@
     "R_AUTHOR_001: existing authorized 0039 research/text process for the already-bound current batch",
     "existing independent research/origin/language/quality gates remain unchanged",
     "existing Workflow Supervisor signs only after its existing required evidence is complete",
-    "R_PRE_001: signed current-generation production package handoff",
+    "R_PRE_001: provenance is checked before the signed current-generation package may be attached",
     "R_001+: existing productive single-door chain"
   ],
   "anti_bypass": {
@@ -43,6 +43,7 @@
     "signed_release_must_name_existing_authorized_authoring_process": true,
     "signed_release_required_gate_statuses_must_be_pass": true,
     "signed_release_must_be_created_after_first_door_entry_receipt": true,
+    "provenance_must_pass_before_runtime_attach": true,
     "free_chat_package_or_wordpress_artifact_has_no_workflow_authority": true
   }
 }
