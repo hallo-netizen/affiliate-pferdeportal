@@ -1,9 +1,9 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "IMMUTABLE_BASE_HARDLOCK_ACTIVE_H8_PREPRODUCTION_PROTOTYPE",
+  "status": "IMMUTABLE_BASE_HARDLOCK_ACTIVE_H81_PREPRODUCTION_AUTHORING_PROTOTYPE",
   "previous_binding": "STARTMASTER0106",
-  "workflow_change_scope": "OUTER_IMMUTABLE_BASE_HARDLOCK_AND_H8_PREPRODUCTION_ROUTING_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
+  "workflow_change_scope": "OUTER_IMMUTABLE_BASE_HARDLOCK_AND_H81_PREPRODUCTION_ROUTING_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
   "completed_checkpoints": [
     "SIX_ARTICLE_TEST_PUBLISHED",
@@ -22,7 +22,7 @@
     "107004_PROVIDER_PASS",
     "107005_PREPARE_NEW_ARTICLE_BATCH_COMPLETE",
     "107006_BIND_NEW_ARTICLE_BATCH_COMPLETE",
-    "H8_PREPRODUCTION_BOOTSTRAP_PROTOTYPE_BOUND"
+    "H81_PREPRODUCTION_AUTHORING_PROTOTYPE_BOUND"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -35,7 +35,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "70ba0fff9e8c20bc6dc39937a3f7654c40b5b89cc17b78c133210810f62c83b1",
+    "bundle_sha256": "4f6f6b9f3e409e9a56d3e01c99b1c82c757644c07b6181af4b35d13baccb9b7f",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -107,6 +107,6 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "70ba0fff9e8c20bc6dc39937a3f7654c40b5b89cc17b78c133210810f62c83b1"
+    "bundle_sha256": "4f6f6b9f3e409e9a56d3e01c99b1c82c757644c07b6181af4b35d13baccb9b7f"
   }
 }
