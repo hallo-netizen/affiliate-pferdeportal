@@ -3,6 +3,8 @@ if (!defined('ABSPATH')) { exit; }
 
 require_once __DIR__ . '/class-ppar-partner-analytics.php';
 require_once __DIR__ . '/class-ppar-deal-radar.php';
+require_once __DIR__ . '/class-ppar-product-source-plan.php';
+require_once __DIR__ . '/class-ppar-admin-kiss.php';
 
 /**
  * Bounded housekeeping for derived/cache/history data only.
@@ -66,13 +68,8 @@ trait PPAR_Housekeeping_Trait {
         $audit_cutoff = $now - 365 * DAY_IN_SECONDS;
         $deleted = 0; $compacted = 0;
 
-        // Histories are terminal-only and bounded. Open/retry/running rows survive.
         if (method_exists($this, 'network_sync_table')) {
             $runs = $this->network_sync_table('runs');
-            // Sync history is terminal by construction once finished_at is set. Keep
-            // product/source rows intact: idealo/Awin/ADCELL may still need those
-            // normalized facts for deterministic rematerialization, ranking or audit.
-            // Housekeeping must never shrink the available result set.
             $deleted += $this->housekeeping_delete_query($wpdb->prepare(
                 "DELETE FROM {$runs} WHERE status IN ('success','failed') AND finished_at>0 AND finished_at<%d ORDER BY id ASC LIMIT 500", $history_cutoff
             ));
@@ -96,8 +93,6 @@ trait PPAR_Housekeeping_Trait {
             ));
         }
 
-        // Old ended eBay facts remain as identity/tombstone rows, but their large
-        // raw payload is compacted. Public/listing-linked rows are never touched.
         if (method_exists($this, 'ebay_items_table')) {
             $table = $this->ebay_items_table();
             $marker = wp_json_encode(array('_housekeeping'=>'ended_source_compacted_v1'));
@@ -108,9 +103,6 @@ trait PPAR_Housekeeping_Trait {
             if ($changed !== false) { $compacted += max(0, (int)$changed); }
         }
 
-        // Stale, unselected, unreviewed creatives may keep their identity row but
-        // not an indefinitely large provider payload. Referenced outputs and manual
-        // approvals/vetos are hard exclusions.
         if (method_exists($this, 'creative_library_table') && method_exists($this, 'output_objects_table')) {
             $creative = $this->creative_library_table();
             $output = $this->output_objects_table();
@@ -202,3 +194,5 @@ trait PPAR_Housekeeping_Trait {
 
 PPAR_Partner_Analytics_Admin::bootstrap();
 PPAR_Deal_Radar::bootstrap();
+PPAR_Affiliate_Source_Plan::bootstrap();
+PPAR_Affiliate_Admin_KISS::bootstrap();
