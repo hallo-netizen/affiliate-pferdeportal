@@ -1,0 +1,54 @@
+AFFILIATE_ZENTRALE V6.64.0 — DIGISTORE24 AUTOMATIC PARTNER/BANNER STATIC GATE
+Date: 2026-08-31
+Scope: explicit user scope, Digistore24 continuation; no eBay regression rerun.
+
+SOURCE AUTHORITY BEFORE CHANGE
+- branch: affiliate-release-current
+- HEAD: a5404639297f7d9ee287d75009cf0137412e99e2
+- current Digistore24 source SHA-256 before change: 2fdea0cc1a0aab57603f9eaa4ca267a89f96e363a6a0f5b5a42f5694ca77ce97
+- current Output Objects source SHA-256 before change: 77c12755b2ee77904574291d2f8143e5a389226c9a2ea53e387f923757978b7c
+- both local baselines were accepted only after byte hash equality with the current GitHub manifest.
+
+IMPLEMENTED
+- getAffiliateCommission added to the read-only Digistore24 allow-list.
+- Requests are restricted to the currently tested own affiliate_id and 1..50 canonical numeric product_ids.
+- Affiliation records are credential-identity-bound and fail closed unless approval_status=approved and product_is_active=true.
+- Affiliation proof expires after 2 days and must be refreshed.
+- A bounded automatic marketplace cycle checks only portal-relevant entries and never invents missing approvals or data.
+- Vendor support/creative URL is stored per marketplace entry after explicit HTTPS validation; subsequent refreshes can reuse it.
+- Existing manual partnership confirmation remains a manual-import fallback only. Automatic publication requires fresh API affiliation proof.
+- Imported Digistore24 creatives remain banner-only and preserve the existing DS24 tracking-link gate.
+- Automatic publication reuses output_object_revalidate() and re-checks provider, creative type, source kind, tracking, portal target and design slot.
+- Output publication is two-phase: a Digistore24 draft does not supersede Last-Known-Good during materialization. Supersede happens only after provider-specific full revalidation and successful published-state persistence.
+- If output-object persistence fails, campaign activation is rolled back.
+- Existing generic banner activation at an earlier shutdown priority cannot leave an unapproved Digistore24 banner public: the provider-specific final shutdown gate revalidates draft/published candidates and rolls failed candidates back to inactive/draft before request end.
+
+LOCAL POSITIVE / NEGATIVE TESTS
+PHP lint:
+- trait-ppar-digistore24.php: PASS
+- trait-ppar-output-objects.php: PASS
+
+Harness (E_ALL):
+- negative_foreign_affiliate: PASS
+- negative_too_many_products: PASS
+- positive_exact_get_request: PASS
+- positive_affiliation_approved: PASS
+- positive_fresh_gate: PASS
+- negative_pending_fail_closed: PASS
+- negative_stale_affiliation: PASS
+- positive_atomic_activation: PASS
+- negative_db_commit_rollback: PASS
+- positive_two_phase_supersede_gate: PASS
+- negative_earlier_generic_activation_rolled_back: PASS
+- terminal marker: ALL_DIGISTORE_HARD_TESTS_PASS
+
+NEW SOURCE SHA-256
+- trait-ppar-digistore24.php: 94115598adb6200c4d07bb43130ec31bcb0e5f5bc0a214bc54c2ec4054dcf2f3
+- trait-ppar-output-objects.php: 6e3adf23735d7f326df96b4e66df2bc47bb3f75c390fad50416ce850676a185b
+- CURRENT_SOURCE_SHA256.txt: e5dfbaac4673f1e2c448691c6708a0173acdd8581ae1dab9aeac70eed25b227a
+
+NOT CLAIMED / STILL OPEN
+- No real Digistore24 credential was used in this local harness.
+- No live WordPress/MariaDB end-to-end proof for these new Digistore changes is claimed.
+- No final release is permitted from this static gate alone.
+- The existing explicit_scope_product_deals_partner_analytics release gate remains PENDING until live proof and the remaining bound scope are complete.
