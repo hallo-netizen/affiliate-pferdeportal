@@ -29,7 +29,7 @@ Der Wächter prüft dabei nur mechanisch Tür, Bindung, Hash/Signatur und Herkun
 ## Alte Umgehungsroute
 Ein altes oder frei erzeugtes Produktionspaket ohne signiertes `h8_bootstrap_binding` erreicht `R_001` nicht mehr. Selbst wenn der alte Runtime-Lifecycle technisch aufgerufen würde, blockiert der autoritative H8-Runtime-Guard vor produktiver Weiterleitung.
 
-## Tests
+## Tests vor Merge
 Temporärer, ausdrücklich nicht gemergter CI-Prüf-PR #57 wurde nur verwendet, um den neuen H8-Test auf GitHub Actions auszuführen.
 
 Deterministic Entrance Gate Run 102: PASS.
@@ -43,10 +43,21 @@ Deterministic Entrance Gate Run 102: PASS.
 - `content_semantics_inspected`: `false`
 - API-Abhängigkeit der aktiven Eingangsschicht: keine
 
+## Produktiver Merge und Post-Merge-Prüfung
+- PR #58 `H8: Preproduction-Zwangsjacke vor der Pakettür`: MERGED.
+- Squash-Merge auf `main`: `298711faf3a17ff3faeed53de8276f812523c96d`.
+- Beide vorgeschriebenen PR-Checks `hardlock` und `hardlock-base`: PASS.
+- Post-Merge-Push-Run 104 (`Pferde Atelier Deterministic Entrance Gate`): SUCCESS.
+- `main/control/CURRENT_STARTMASTER.json` zeigt nach Merge weiterhin auf `control/single-door-boundary/project_single_door_entry_v2.py` und enthält `free_chat_execution_authority=false`.
+
+Damit ist H8 repositoryseitig produktiv gebunden; es ist kein bloßer Testbranch mehr.
+
 ## Wichtige externe Restbindung
 Die private Workflow-Signatur bleibt absichtlich ausserhalb des Repositorys. Deshalb darf das Repository selbst kein Ersatzpaket signieren.
 
-Die serverseitig an `R_BOOT_001` gebundene Producer-/Signer-Capability MUSS die H8-Bindung im signierten Workflow-Release erzeugen. Solange diese externe Capability nicht verfügbar/gebunden ist, bleibt `R_BOOT_001` fail-closed. Es gibt ausdrücklich keinen Chat-Fallback.
+Die serverseitig an `R_BOOT_001` gebundene Producer-/Signer-Capability MUSS die H8-Bindung im signierten Workflow-Release erzeugen. `single_door_bootstrap.py` verlangt dafür ausdrücklich einen gebundenen Producer-Aufruf; im Repository selbst liegt kein privater Signierschlüssel und kein zulässiger Chat-Fallback.
+
+Solange diese externe Capability in der Laufzeit nicht verfügbar/gebunden ist, bleibt `R_BOOT_001` fail-closed. Das ist Absicht: fehlende externe Autorität darf niemals durch freie Chat-Arbeit ersetzt werden.
 
 Diese Restbindung ist keine Fach- oder Qualitätsänderung, sondern die letzte technische Anbindung der neuen ersten Tür an den bereits vorhandenen externen Producer/Signer.
 
@@ -59,4 +70,4 @@ Diese Restbindung ist keine Fach- oder Qualitätsänderung, sondern die letzte t
 - kein Auto-Publish
 
 ## Prototyp-Bewertung
-Repository-seitig ist die Lücke vor `R_PRE_001` geschlossen und negativ abgesichert. Für einen vollständigen echten Produktions-PASS fehlt nur die serverseitige Bindung des vorhandenen Producers/Signers an `R_BOOT_001`; bis dahin blockiert das System statt frei weiterzuarbeiten.
+Repository-seitig ist die Lücke vor `R_PRE_001` geschlossen, negativ abgesichert, auf `main` gemergt und nach dem Merge erneut mit PASS geprüft. Für einen vollständigen echten Produktions-PASS ist jetzt ausschließlich zu verifizieren, dass die vorhandene externe Producer-/Signer-Laufzeit als gebundene `R_BOOT_001`-Capability verfügbar ist. Ist sie nicht verfügbar, muss H8 blockieren; es gibt keinen Ersatzweg.
