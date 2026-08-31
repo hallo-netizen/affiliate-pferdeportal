@@ -1,0 +1,20 @@
+{
+  "contract": "STARTMASTER0107_START_OPTIMIZATION_POLICY_V1",
+  "scope": "TECHNICAL_EXECUTION_ONLY_NO_DOMAIN_CONTENT_QUALITY_CHANGE",
+  "reuse_hash_identical_pass_evidence": true,
+  "rediscover_known_bound_components": false,
+  "rerun_unchanged_infrastructure_checks": false,
+  "rerun_batch_specific_checks": true,
+  "rerun_article_specific_checks": true,
+  "worker_freshness_required_before_start": true,
+  "parallel_execution_policy_changed": false,
+  "domain_logic_changed": false,
+  "content_quality_rules_changed": false,
+  "language_tool_rules_changed": false,
+  "ppm_rules_changed": false,
+  "pserc_rules_changed": false,
+  "pste_rules_changed": false,
+  "seo_rules_changed": false,
+  "design_rules_changed": false,
+  "publish_rules_changed": false
+}
