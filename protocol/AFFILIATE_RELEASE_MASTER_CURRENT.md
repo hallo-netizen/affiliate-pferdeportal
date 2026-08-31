@@ -10,6 +10,22 @@ Candidate: `6.64.0` / `WORKING` / `release_allowed=false`
 
 Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` ist aktuelle Release-Quelle. Historische ZIPs, alte Chatstände und Archive sind keine Navigations- oder Rekonstruktionsquelle. Bereits hash-identisch bestandene eBay-Gates werden nicht erneut ausgeführt.
 
+## WORKSTREAM-/THEMEN-HARDLOCK — VERBINDLICH
+
+Dieser Master gilt ausschließlich für `AFFILIATE_ZENTRALE`. Der aktive Chat bleibt auf diesem Workstream verriegelt, bis der Nutzer **ausdrücklich** einen Themen-/Workstream-Wechsel anordnet.
+
+1. **Ein einzelner fremder Fehlercode, Dateiname, Screenshot, Logtext oder Token ist KEIN Themenwechsel.** Beispiele wie `107007_*`, `STARTMASTER0107`, H8/H7, Textproduktion, Bildzentrale oder andere Projekt-Subsysteme dürfen in diesem Chat nicht automatisch die Navigation übernehmen.
+2. **Vor jeder Tool-Navigation muss geprüft werden:** Gehört die Nutzerfrage zum aktuell gebundenen Workstream `AFFILIATE_ZENTRALE`? Wenn nein oder zweifelhaft, darf nicht in fremde Master, States, Branches oder Workflows gesprungen werden.
+3. **Fremde Tokens innerhalb dieses Chats werden zunächst nur als übermittelter Text behandelt.** Sie dürfen nur dann als ausführbare Workflow-Navigation interpretiert werden, wenn der Nutzer ausdrücklich sagt, dass jetzt in diesen anderen Workstream gewechselt werden soll.
+4. **Keine automatische Suche in `STARTMASTER*`, Textproduktion, Bildzentrale oder anderen Workstreams**, nur weil ein dort typischer Code im Chat auftaucht.
+5. **Bei widersprüchlichem Kontext gewinnt der aktuelle Master/Workstream**, nicht das zuletzt genannte technische Schlagwort.
+6. **Vor jedem GitHub-/Codex-/Workflow-Schritt ist der Zielpfad gegen den Workstream zu prüfen.** Für diesen Master sind nur Affiliate-Zentrale-relevante Pfade/Tasks zulässig, soweit Governance sie erlaubt.
+7. **Ein Chatwechsel hebt den Workstream-Hardlock nicht auf.** Ein neuer Chat muss zuerst aktuellen Master + Governance lesen und daraus den Workstream bestimmen, bevor andere Repository-Bereiche navigiert werden.
+8. **Expliziter Themenwechsel erforderlich.** Zulässige Form ist sinngemäß: `Wechsle jetzt zu STARTMASTER0107/Textproduktion` oder `Neuer Workstream: ...`. Ohne eine solche klare Anweisung bleibt `AFFILIATE_ZENTRALE` aktiv.
+9. **Fehlerregel:** Wenn versehentlich in einen fremden Workstream navigiert wurde, keine weitere Aktion dort ausführen. Sofort zurück zu `AFFILIATE_ZENTRALE`, aktuellen Master/Governance neu lesen und nur den dort gebundenen nächsten Schritt fortsetzen.
+
+Kurzregel: **WORKSTREAM VOR TOKEN. MASTER VOR SCHLAGWORT. KEIN THEMENWECHSEL OHNE EXPLIZITE NUTZERANWEISUNG.**
+
 ## Grundsätzlicher Arbeitsablauf für ChatGPT / GitHub / Codex — VERBINDLICH
 
 Dieser Abschnitt ist für alle folgenden Arbeiten im Workstream verbindlich und soll in neuen Chats zuerst beachtet werden.
