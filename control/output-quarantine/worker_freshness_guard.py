@@ -4,7 +4,6 @@ from __future__ import annotations
 import hashlib
 import json
 import subprocess
-import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -63,49 +62,63 @@ def validate() -> dict:
         raise Blocked("STARTMASTER_POINTER_MISSING")
     ptr = load(POINTER)
     if ptr.get("free_chat_execution_authority") is not False:
-        raise Blocked("FREE_CHAT_AUTHORITY_MUST_BE_FALSE")
+        raise Blocked("FREE_CHAT_EXECUTION_MUST_BE_FALSE")
     if ptr.get("hard_worker") != "CODEX_CLOUD":
         raise Blocked("HARD_WORKER_MUST_BE_CODEX_CLOUD")
+    if ptr.get("visible_output_authority") != "RELEASE_RECEIPT_ONLY":
+        raise Blocked("VISIBLE_OUTPUT_AUTHORITY_INVALID")
+
     statep = REPO / rel(ptr.get("state_ref"))
     rootp = REPO / rel(ptr.get("root_ref"))
-    if not statep.is_file() or not rootp.is_file():
-        raise Blocked("ROOT_OR_STATE_MISSING")
+    policyp = REPO / rel(ptr.get("visible_output_policy_ref"))
+    runtime_entryp = REPO / rel(ptr.get("execution_entrance_gate_ref"))
+    if not all(p.is_file() for p in (statep, rootp, policyp, runtime_entryp)):
+        raise Blocked("AUTHORITY_FILE_MISSING")
+
     state = load(statep)
     root = load(rootp)
+    policy = load(policyp)
     if ptr.get("startmaster") != state.get("startmaster") or state.get("startmaster") != root.get("startmaster"):
         raise Blocked("STARTMASTER_IDENTITY_MISMATCH")
     if sha256(statep) != root.get("current_state_sha256"):
         raise Blocked("STATE_HASH_MISMATCH")
-    if state.get("next_allowed_step") != (state.get("execution_gate") or {}).get("step_id"):
-        raise Blocked("STEP_GATE_MISMATCH")
-    bundle_ref = str((state.get("execution_gate") or {}).get("bundle_ref") or "")
-    bundle_sha = str((state.get("execution_gate") or {}).get("bundle_sha256") or "")
-    bundlep = REPO / rel(bundle_ref)
-    if not bundlep.is_file() or sha256(bundlep) != bundle_sha:
-        raise Blocked("BUNDLE_HASH_MISMATCH")
-    bundle = load(bundlep)
-    bindings = {str(row.get("ref") or ""): str(row.get("sha256") or "") for row in (bundle.get("authorized_inputs") or []) if isinstance(row, dict)}
-    self_ref = "control/output-quarantine/worker_freshness_guard.py"
-    self_sha = sha256(Path(__file__).resolve())
-    if bindings.get(self_ref) != self_sha:
-        raise Blocked("FRESHNESS_GUARD_NOT_BUNDLE_BOUND")
-    if ptr.get("worker_freshness_guard_ref") != self_ref or ptr.get("worker_freshness_guard_sha256") != self_sha:
-        raise Blocked("FRESHNESS_GUARD_POINTER_BINDING_MISMATCH")
-    release_ref = str(ptr.get("output_release_gate_ref") or "")
-    release_sha = str(ptr.get("output_release_gate_sha256") or "")
-    releasep = REPO / rel(release_ref)
-    if not releasep.is_file() or sha256(releasep) != release_sha or bindings.get(release_ref) != release_sha:
-        raise Blocked("OUTPUT_RELEASE_GATE_BINDING_MISMATCH")
-    policy_ref = str(ptr.get("visible_output_policy_ref") or "")
-    policy_sha = str(ptr.get("visible_output_policy_sha256") or "")
-    policyp = REPO / rel(policy_ref)
-    if not policyp.is_file() or sha256(policyp) != policy_sha:
+    if root.get("next_allowed_step") != state.get("next_allowed_step"):
+        raise Blocked("ROOT_STATE_STEP_MISMATCH")
+    if root.get("execution_entrance_gate") != ptr.get("execution_entrance_gate_ref"):
+        raise Blocked("OFFICIAL_RUNTIME_ENTRY_MISMATCH")
+    if sha256(policyp) != ptr.get("visible_output_policy_sha256"):
         raise Blocked("OUTPUT_POLICY_HASH_MISMATCH")
-    policy = load(policyp)
-    if policy.get("chat_output_authority") != "NONE":
-        raise Blocked("CHAT_OUTPUT_AUTHORITY_MUST_BE_NONE")
+    if sha256(runtime_entryp) != ptr.get("execution_entrance_gate_sha256"):
+        raise Blocked("RUNTIME_ENTRY_HASH_MISMATCH")
+
+    if policy.get("chat_execution_authority") != "NONE" or policy.get("chat_output_authority") != "NONE":
+        raise Blocked("CHAT_AUTHORITY_MUST_BE_NONE")
     if policy.get("domain_logic_authority") != "NONE" or policy.get("quality_authority") != "NONE":
         raise Blocked("FRESHNESS_GUARD_MUST_BE_DOMAIN_BLIND")
+    if policy.get("visible_project_result_authority") != "RELEASE_RECEIPT_ONLY":
+        raise Blocked("POLICY_VISIBLE_RESULT_AUTHORITY_INVALID")
+
+    gate = state.get("execution_gate") or {}
+    if gate.get("step_id") != state.get("next_allowed_step"):
+        raise Blocked("STEP_GATE_MISMATCH")
+    bundlep = REPO / rel(gate.get("bundle_ref"))
+    if not bundlep.is_file() or sha256(bundlep) != gate.get("bundle_sha256"):
+        raise Blocked("BUNDLE_HASH_MISMATCH")
+    bundle = load(bundlep)
+    bindings = {
+        str(row.get("ref") or ""): str(row.get("sha256") or "")
+        for row in (bundle.get("authorized_inputs") or [])
+        if isinstance(row, dict)
+    }
+    required = {
+        "control/output-quarantine/worker_freshness_guard.py": sha256(Path(__file__).resolve()),
+        "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json": sha256(policyp),
+        ptr.get("execution_entrance_gate_ref"): sha256(runtime_entryp),
+    }
+    for ref, digest in required.items():
+        if bindings.get(ref) != digest:
+            raise Blocked("REQUIRED_SECURITY_INPUT_NOT_BUNDLE_BOUND:" + str(ref))
+
     return {
         "ok": True,
         "status": "WORKER_FRESHNESS_PASS",
@@ -113,7 +126,10 @@ def validate() -> dict:
         "main": main,
         "startmaster": state["startmaster"],
         "step_id": state["next_allowed_step"],
-        "sequence": int((state.get("execution_gate") or {})["sequence"]),
+        "sequence": int(gate["sequence"]),
+        "state_sha256": sha256(statep),
+        "bundle_sha256": sha256(bundlep),
+        "chat_execution_authority": "NONE",
         "chat_output_authority": "NONE",
         "publish_allowed": False,
     }
