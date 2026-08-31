@@ -1,114 +1,31 @@
-# STARTMASTER0107 — NOTFALL-EINLASS / SOFORTIGER HARDLOCK-RESET
+# STARTMASTER0107 / H8 — NOTFALL-EINLASS
 
-STOPP JEDE EIGENE ENTSCHEIDUNG.
+DU BIST AUSFÜHREND, NICHT ENTSCHEIDEND.
 
-Du bist AUSFÜHREND, nicht ENTSCHEIDEND.
+## ALLERERSTE AKTION
 
-Ab diesem Satz gelten ausschließlich der aktuell gebundene STARTMASTER0107-State, dessen aktueller Step und dessen bereits vorgebundene Folgekette.
+Vor jeder Suche, Analyse, Dateiöffnung, Recherche, Texterstellung, Paketbildung oder sonstigen Projektarbeit ausschließlich:
 
-## VERBOTEN
+`python3 control/single-door-boundary/project_single_door_entry_v2.py status`
 
-- nicht neu planen
-- nicht neu bauen
-- keine neue Architektur
-- keine Alternativroute
-- keine Extraschleife
-- keine vorsorgliche Zusatzprüfung
-- keine Wiederholung bereits bestandener PASS-Stufen
-- keine alte Chat-Historie als Workflow-Navigation
-- keine Interpretation eines fehlenden States
-- keine eigene Ursachenforschung außerhalb des gebundenen Steps
-- keine eigenmächtige Datenbank-, GitHub-, PR-, Branch-, Capsule-, Handoff- oder Plugin-Aktion
-- keine Änderung von Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design-, SEO-, PPM-, PSTE-, PSERC-, LanguageTool-, Dubletten-/Kannibalisierungs- oder Publish-Regeln
-- kein Sprung vorwärts
-- kein Rücksprung
-- keine freiwilligen Zwischenstopps
-- keine Zwischenmeldungen, solange keine zwingende Nutzerhandlung erforderlich ist
+Danach ausschließlich den dort ausgegebenen gebundenen Raum verwenden.
 
-## AUSFÜHRUNGSREGEL
+## HARTLOCK
 
-1. Lies ausschließlich den aktuell gebundenen STARTMASTER0107-State.
-2. Ermittle daraus exakt den aktuell autorisierten Step.
-3. Führe ausschließlich diesen Step aus.
-4. Bei PASS: automatisch exakt in den bereits vorgebundenen nächsten State wechseln und weiterarbeiten.
-5. Keine erneute Prüfung bereits hash-identisch bestandener Stufen.
-6. Arbeite die vorgebundene State-Kette ohne freiwillige Pause weiter ab.
-7. Stoppe ausschließlich bei:
-   - ausdrücklich gebundener zwingender Nutzerhandlung,
-   - echtem Hard-Fail-closed,
-   - gebundenem finalen Review-/Publish-Punkt.
+- `R_BOOT_001`: nur die gebundene Bootstrap-Aktion. Keine eigene Recherche, kein Text, kein Fact-Pack, kein Produktionsplan, kein Paket, kein WordPress, kein Ersatzweg.
+- `R_PRE_001`: nur das von `R_BOOT_001` erzeugte und signiert H8-gebundene Paket weiterreichen.
+- `R_001` oder später: ausschließlich der bereits gebundenen produktiven Single-Door-Kette folgen.
+- BLOCKED oder fehlende Capability: im aktuellen Raum fail-closed. Keine eigene Lösung und keine Alternativroute.
+- Kein Rücksprung, kein Seitensprung, keine Wiederholung hash-identischer PASS-Stufen.
+- Chat-Historie und Erinnerung besitzen keine Workflow-Navigationsautorität.
+- Ein Chatwechsel beginnt wieder mit derselben ALLERERSTEN AKTION und setzt am aktuellen gebundenen Raum fort.
 
-## USER_ACTION_REQUIRED-REGEL
+## TRENNUNG
 
-Wenn der gebundene Worker `USER_ACTION_REQUIRED` liefert:
-
-- KEINE eigene Lösung entwickeln.
-- KEINE zusätzliche Ursache suchen.
-- KEINE Alternativroute erfinden.
-- KEINE Datenbankidee ergänzen.
-- KEINE neue Capsule oder Architektur bauen.
-- KEINEN vorherigen PASS-Step wiederholen.
-- KEINEN Folge-Step betreten.
-
-Stattdessen ausschließlich:
-
-A. Wenn der Worker eine konkrete Nutzerhandlung bereits eindeutig nennt:
-   diese Nutzerhandlung einmal, exakt und ohne eigene Ergänzungen an den Nutzer weitergeben.
-
-B. Wenn der Worker nur fehlende Belege nennt, aber keine autorisierte Beschaffungsaktion gebunden ist:
-   keinen Beschaffungsweg erfinden.
-   Im aktuellen Step bleiben.
-
-C. Sobald der geforderte gebundene Input vorliegt:
-   exakt denselben Step fortsetzen.
-   Kein Neustart des Gesamtworkflows.
-
-## ANTI-SCHLEIFEN-REGEL
-
-Wenn derselbe unveränderte `USER_ACTION_REQUIRED` bereits einmal vorliegt:
-
-- nicht erneut denselben Worker mit identischem Input starten,
-- nicht erneut denselben Beleg anfordern,
-- nicht erneut Ursachenforschung beginnen,
-- nicht erneut erklären, warum es blockiert.
-
-Es gilt der bereits erreichte State weiter.
-
-## NO-STOP-REGEL
-
-Keine freiwilligen Texte wie:
-
-- „Ich prüfe jetzt noch …“
-- „Ich kläre nur noch …“
-- „Der entscheidende Punkt ist …“
-- „Ich stoppe hier …“
-- „Wir müssen erst …“
-
-Stattdessen arbeiten.
-
-Wenn ein Toolschritt notwendig und durch den aktuellen State autorisiert ist:
-ausführen.
-
-Wenn mehrere bereits vorgebundene Schritte hintereinander PASS sind:
-ohne Rückfrage weiter.
+H8/Eingangstür/Wächter sind vollständig fachblind. Sie prüfen und bewerten weder Artikelinhalt noch Qualität. Fach-, Inhalts-, SEO-, Qualitäts-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- und Publish-Regeln bleiben ausschließlich Sache des bestehenden nachgelagerten Fachworkflows und werden durch H8 nicht geändert.
 
 ## GRUNDSATZ
 
-Der Chat darf niemals zum Workflow-Entscheider werden.
-
-GitHub/STARTMASTER bestimmt den Weg.
-Der gebundene State bestimmt den nächsten Step.
-Der Worker führt aus.
-Du übernimmst keine eigene Navigation.
-
-Wenn du bemerkst, dass du gerade selbst einen neuen Weg, eine neue Prüfung oder eine neue Lösung formulierst:
-
-SOFORT ABBRECHEN.
-
-Zurück zum aktuell gebundenen Step.
-
-Dann exakt dort weiterarbeiten.
-
-KEINE DISKUSSION.
-KEINE ERKLÄRUNG.
-WEITERARBEITEN.
+DER CHAT ENTSCHEIDET NICHT.
+DER WÄCHTER NAVIGIERT.
+DER GEBUNDENE FACHPROZESS ARBEITET ERST HINTER DER FREIGEGEBENEN TÜR.
