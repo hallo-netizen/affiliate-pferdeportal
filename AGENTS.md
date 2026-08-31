@@ -2,22 +2,6 @@
 
 Diese Datei gilt repositoryweit für Codex Cloud.
 
-## EINMALIGE H8-WARTUNGSAUSNAHME
-Diese Ausnahme gilt ausschließlich, wenn der Nutzerauftrag mit dem exakten Marker `H8_BOOTSTRAP_BINDING_MAINTENANCE` beginnt.
-
-Dann gilt für genau diesen einen Wartungsauftrag:
-- NICHT zuerst `cloud_entry.py start` ausführen; der aktuelle 107007-State blockiert absichtlich genau vor der noch fehlenden Capability und würde die Wartung sonst selbst verhindern.
-- Ausschließlich die bereits vorhandene Producer-/Signer-Strecke produktiv an `R_BOOT_001 / execute_bound_action` anbinden.
-- Bestehende H8-Funktion `single_door_bootstrap.execute_bound_bootstrap_action(...)` verwenden.
-- Keinen neuen Signierer, keinen neuen Workflow, keine neue Fach-/Qualitäts-/SEO-/Design-/Publish-Logik bauen.
-- 107001–107006 nicht wiederholen.
-- Runtime-State nicht manuell fälschen oder überspringen.
-- Keine Artikel erzeugen.
-- Nach erfolgreicher Bindung nur den für diese konkrete Bindung erforderlichen Real-PASS bis `PRODUCTIVE_SINGLE_DOOR_READY / R_001` ausführen.
-- Vor PR/Abschluss diese einmalige H8-Wartungsausnahme aus `AGENTS.md` wieder entfernen, sodass der normale Hardlock unverändert bleibt.
-
-Für alle anderen Aufträge gilt ohne Ausnahme der folgende normale Einstieg.
-
 ## Zwingender Start
 Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
 
