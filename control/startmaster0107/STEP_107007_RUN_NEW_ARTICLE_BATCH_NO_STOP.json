@@ -1,5 +1,5 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V3_RUNTIME_SLOT",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V4_RUNTIME_SLOT_OUTPUT_LOCKED",
   "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "sequence": 107007,
   "worker_profile": "CLOUD_ARTICLE_BATCH_NO_STOP",
@@ -7,9 +7,37 @@
     {
       "ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
       "sha256": "0826b766cb38447535c9107b5f66f66990768cffe97c570477c0f2a14cc687fe"
+    },
+    {
+      "ref": "control/output-quarantine/runtime_entry_gate.py",
+      "sha256": "7d8baae9e02b642eb583776e36feea171d19e5e546e31f07ab5effc148c55a65"
+    },
+    {
+      "ref": "control/output-quarantine/worker_freshness_guard.py",
+      "sha256": "6e8489222cdaadba3d7917fb72a6b05bfeffb3dda8948fa022b670aba77017dc"
+    },
+    {
+      "ref": "control/output-quarantine/output_release_gate.py",
+      "sha256": "e557ad4f4a20fe94f726d6ca4da60648593441c2b3047c9a685e684ea3bdbeec"
+    },
+    {
+      "ref": "control/output-quarantine/final_review_visibility_guard.py",
+      "sha256": "c5f7284dc5d6a3bd69464162d18abed66e164ce8fd3bea05181f57fec2095913"
+    },
+    {
+      "ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
+      "sha256": "1f361acf83c635c03289062c1755b2f3713f73ef5881119c41cba1217b535cb2"
+    },
+    {
+      "ref": "control/startmaster0107/START_OPTIMIZATION_POLICY_20260831.json",
+      "sha256": "ff9b2b3d1ccd91ccaab6b536c072ae766ba56274515d774f1f377c3938fe54e0"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
+      "sha256": "3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837"
     }
   ],
-  "instruction": "107007 bleibt der dauerhafte Lauf-Slot. Vor JEDER anderen Projekt- oder Fachaktion zuerst die hashgebundene H8-Grenze aus der Capsule gegen das Repository vergleichen:\n\ncmp .pferde-capsule/inputs/001_H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json\n\nNur bei Byte-Identität weiter. Danach exakt ausführen:\n\npython3 control/single-door-boundary/project_single_door_entry_v2.py status\n\nAb jetzt ausschließlich den vom Project-Entry gelieferten Raum benutzen. Keine eigene Workflowentscheidung.\n\nWenn PROJECT_ARMED_NO_ACTIVE_BATCH: keine Artikel erzeugen, keinen Receipt schreiben und complete NICHT aufrufen. Nur '107007_ARMED_NO_ACTIVE_BATCH' zurückgeben.\n\nWenn PREPRODUCTION_BOOTSTRAP_SINGLE_DOOR_REQUIRED / R_BOOT_001: VOR dieser Tür keinerlei Recherche, Fact-Pack-, Text-, Produktionsplan-, Paket- oder WordPress-Arbeit ausführen. Ausschließlich die serverseitig an R_BOOT_001 gebundene parameterlose Capability execute_bound_action ausführen. Kein Chat-Fallback, keine Ersatzdatei, keine Rekonstruktion. Ist diese Capability nicht verfügbar, fail-closed mit '107007_H8_BOOTSTRAP_CAPABILITY_REQUIRED'; keinen Terminal-Receipt schreiben und complete NICHT aufrufen.\n\nWenn PREPRODUCTION_SIGNED_PACKAGE_SINGLE_DOOR_REQUIRED / R_PRE_001: ausschließlich die serverseitig an R_PRE_001 gebundene Capability für das von R_BOOT_001 erzeugte und H8-signiert gebundene Paket ausführen. Kein frei angeliefertes Paket akzeptieren.\n\nNur wenn PRODUCTIVE_SINGLE_DOOR_READY / R_001 geliefert wird, ist Fachproduktion erlaubt. Dann ausschließlich den dort gebundenen aktuellen PSERC-READY-Subset und das gebundene Produktionspaket verwenden. Vor Produktionsarbeit den bestehenden control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py gegen das gebundene Produktionspaket ausführen. Danach ausschließlich den bestehenden unveränderten Recherche-/Fact-Pack-/Text-/LanguageTool-/PPM-/PSERC-/Qualitäts-/Dubletten-/Kannibalisierungs-/Design- und Publish-Workflow für die gebundenen Items ausführen. Keine eigenen Themen-, Titel-, Keyword- oder Batchentscheidungen. Keine Ersatzpakete. Kein Auto-Publish.\n\nH8, Eingangstür und Continuity bleiben rein technisch und fachblind. Sie prüfen oder bewerten niemals Inhalt oder Qualität. Ein konkreter Batch bleibt Laufzeitmaterial. Chatwechsel bedeutet Checkpoint/Resume, niemals Neustart, Rücksprung oder freie Fortsetzung.",
+  "instruction": "107007 bleibt der dauerhafte Lauf-Slot. Ab Sekunde 1 besitzt der Chat keinerlei freie Navigations-, Produktions-, Projektresultat- oder Ausgabeautorität. Der offizielle Einstieg erfolgt ausschließlich über control/output-quarantine/runtime_entry_gate.py; dessen bereits erzeugte .pferde-capsule/FRESHNESS_PROOF.json muss WORKER_FRESHNESS_PASS belegen. Fehlt diese Bindung oder weicht irgendein hashgebundener Capsule-Input vom Repository ab: fail-closed vor jeder Facharbeit, kein Ersatzweg.\n\nSTART-OPTIMIERUNG: Die hashgebundene START_OPTIMIZATION_POLICY_20260831.json gilt rein technisch. Hash-identische bereits bestandene Infrastrukturbelege werden wiederverwendet; bekannte gebundene Komponenten werden direkt verwendet; unveränderte Infrastruktur wird nicht erneut vollständig geprüft oder frei rediscovered. Insbesondere keine erneute Suche nach bereits gebundenem LanguageTool. Nur batch- und artikelabhängige Prüfungen neu ausführen. Die bereits bestehende Parallelverarbeitung bleibt unverändert. Keine Fach-, Inhalts-, Qualitäts-, Recherche-, LanguageTool-, PPM-, PSERC-, PSTE-, SEO-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel ändern, abschwächen, ersetzen oder neu interpretieren.\n\nDanach exakt ausführen:\npython3 control/single-door-boundary/project_single_door_entry_v2.py status\n\nAb jetzt ausschließlich den vom Project-Entry gelieferten Raum benutzen. Keine eigene Workflowentscheidung.\n\nWenn PROJECT_ARMED_NO_ACTIVE_BATCH: keine Artikel erzeugen, keinen Receipt schreiben und complete NICHT aufrufen. Nur 107007_ARMED_NO_ACTIVE_BATCH zurückgeben.\n\nWenn PREPRODUCTION_BOOTSTRAP_SINGLE_DOOR_REQUIRED / R_BOOT_001: vor dieser Tür keinerlei Recherche, Fact-Pack-, Text-, Produktionsplan-, Paket- oder WordPress-Arbeit. Ausschließlich die serverseitig an R_BOOT_001 gebundene parameterlose Capability execute_bound_action ausführen. Kein Chat-Fallback, keine Ersatzdatei, keine Rekonstruktion. Ist die Capability nicht verfügbar: fail-closed 107007_H8_BOOTSTRAP_CAPABILITY_REQUIRED; keinen Terminal-Receipt schreiben und complete NICHT aufrufen.\n\nWenn PREPRODUCTION_SIGNED_PACKAGE_SINGLE_DOOR_REQUIRED / R_PRE_001: ausschließlich die serverseitig gebundene Capability für das von R_BOOT_001 erzeugte und H8-signierte Paket ausführen. Kein frei angeliefertes Paket akzeptieren.\n\nNur wenn PRODUCTIVE_SINGLE_DOOR_READY / R_001 geliefert wird, ist Fachproduktion erlaubt. Dann ausschließlich den dort gebundenen aktuellen PSERC-READY-Subset und das gebundene Produktionspaket verwenden. Vor Produktionsarbeit den bestehenden control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py gegen das gebundene Produktionspaket ausführen. Danach ausschließlich den bestehenden unveränderten Recherche-/Fact-Pack-/Text-/LanguageTool-/PPM-/PSERC-/Qualitäts-/Dubletten-/Kannibalisierungs-/Design- und Publish-Workflow für die gebundenen Items ausführen. Keine eigenen Themen-, Titel-, Keyword- oder Batchentscheidungen. Kein Auto-Publish.\n\nQUARANTÄNE-ZWANG: Alle Kandidaten, die später Projektergebnis werden könnten, dürfen während 107007 ausschließlich unter .pferde-quarantine/ entstehen. Alles außerhalb der gebundenen Straße oder außerhalb .pferde-quarantine/ ist QUARANTINE_INVALID_NEVER_SURFACE_AS_PROJECT_RESULT und darf weder übernommen, neu verpackt, als PASS behauptet noch dem Nutzer als Projektergebnis gezeigt werden.\n\nErst nach vollständigem PASS des bestehenden unveränderten Fachworkflows darf der 107007-Step-Receipt status=PASS erhalten. Sein payload muss zusätzlich mechanisch enthalten: execution_origin=BOUND_WORKER, workflow_pass=true, batch_sha256 exakt aus RUNTIME_INBOX_STATE.json, outputs als nichtleere Liste ausschließlich {ref, sha256}, jeder ref unter .pferde-quarantine/ und jeder Hash exakt passend.\n\nDanach ausschließlich ausführen:\npython3 control/output-quarantine/runtime_entry_gate.py complete .pferde-capsule/RECEIPT.json\n\nDer offizielle Runtime-Entry validiert und verschiebt die 107007-Ergebnisse zunächst nur in unsichtbares .pferde-release-staging/, wechselt gebunden zu 107008 und bindet dort exakt diese staged Dateien. Noch existiert kein sichtbares Projektergebnis. Kein direkter cloud_entry-complete, kein Chat-ZIP, kein Ersatzartikel, keine nachträgliche Neuverpackung.\n\nH8, Freshness-Guard, Runtime-Entry, Output-Gate und Visibility-Guard bleiben rein technisch und fachblind. Sie prüfen oder bewerten niemals Inhalt oder Qualität.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
@@ -19,6 +47,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "cf14a65af9057da6439799aa2666a8ae9e472919711396b56a5f4710324bd68e"
+    "bundle_sha256": "e2ed4b3a08c90274822655f471a905dffd07a2af05373a7be437b2bf98cccfc1"
   }
 }
