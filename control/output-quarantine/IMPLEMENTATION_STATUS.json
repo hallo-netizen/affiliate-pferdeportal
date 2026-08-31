@@ -1,0 +1,11 @@
+{
+  "status": "IN_PROGRESS",
+  "branch": "startmaster0107-rootfix-output-quarantine-20260831",
+  "domain_content_quality_rules_changed": false,
+  "output_quarantine_gate_added": true,
+  "start_optimization_policy_added": true,
+  "worker_freshness_integration_pending": true,
+  "step_output_manifest_binding_pending": true,
+  "tests_pending": true,
+  "pr_pending": true
+}
