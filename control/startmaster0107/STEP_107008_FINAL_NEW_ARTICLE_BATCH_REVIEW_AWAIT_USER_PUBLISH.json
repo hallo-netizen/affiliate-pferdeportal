@@ -10,7 +10,11 @@
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
-      "sha256": "e9e9aed9174f075bc46cb7c353d63c5ddba2d62fbc99eb9c8706eba1357f864d"
+      "sha256": "122d0927e56761dd0afa668adb847b44453a42a2102020b1d6c6b940945b9998"
+    },
+    {
+      "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
+      "sha256": "edee15b46314c320ba92e8767acbdc3cb99e00e31ad0f0c0488a3aa2daf2fdbb"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
