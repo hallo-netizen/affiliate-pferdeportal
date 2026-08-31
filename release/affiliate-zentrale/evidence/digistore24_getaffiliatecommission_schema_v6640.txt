@@ -1,0 +1,39 @@
+AFFILIATE_ZENTRALE V6.64.0 — DIGISTORE24 getAffiliateCommission PUBLIC SCHEMA PROOF
+Date: 2026-08-31
+Purpose: hard-check the exact read-only request/response contract before binding the Digistore24 automation source. No guessed field names.
+
+PRIMARY / CURRENT PUBLIC DIGISTORE24 API
+- Official Swagger UI: https://www.digistore24.com/api/docs/index.html
+- Operation: GET /getAffiliateCommission — "Get affiliate commission"
+- Official related updateAffiliateCommission documentation confirms the same argument names `affiliate_id` and `product_ids`; `product_ids` is a comma-separated product-ID list (or `all`) and approval states are new / approved / rejected / pending.
+
+CURRENT OPEN-SOURCE CLIENT CROSS-CHECK
+Repository: GoSuccessHQ/digistore24-api, main
+- docs/api/getAffiliateCommission.md documents GET https://www.digistore24.com/api/call/getAffiliateCommission.
+- src/Request/Affiliate/GetAffiliateCommissionRequest.php serializes the request exactly as:
+  affiliate_id => affiliateId
+  product_ids => productIds
+- src/Response/Affiliate/GetAffiliateCommissionResponse.php explicitly states that the OpenAPI spec response uses `commissions` and reads `data.commissions`; it also reads `affiliate_id` and `affiliate_name`.
+- src/DTO/AffiliationData.php maps each raw commission row with the exact keys:
+  commission_rate
+  commission_currency
+  default_commission_rate
+  default_commission_fix
+  default_commission_currency
+  commission_fix
+  is_on_first_pmnt_only
+  product_id
+  product_is_active
+  approval_status
+  approval_status_msg
+
+CONCLUSION
+The local V6.64.0 candidate is schema-compatible on the fields it uses:
+- request: affiliate_id + product_ids
+- response list: data.commissions
+- row identity/state: product_id + product_is_active + approval_status + approval_status_msg
+- commission data: commission_rate + commission_fix + commission_currency
+
+The candidate deliberately refuses `all` and limits automatic status checks to 1..50 explicit canonical product IDs. This is a local safety restriction, not an invented Digistore24 API requirement.
+
+No live credential/API response is claimed by this schema proof. The live WordPress/Digistore24 gate remains required before release.
