@@ -1,0 +1,37 @@
+PFERDE ATELIER – HARD QA V1.50.472 / KATEGORIETEXTE FINAL 79
+
+AUSGANG
+- Basis-Installer: PFERDE_ATELIER_DESIGN_V1.50.471_CONTRACT_V104_KATEGORIETEXTE_70_NUR_FAILS_INSTALLIEREN.zip
+- Basis-Pluginheader: 1.50.471
+- Neuer Pluginheader: 1.50.472
+- Designvertrag: V104 UNVERÄNDERT
+
+SCOPE
+- Neuer Batch: exakt 9 letzte Audit-FAILs
+- Gesamter Audit-Scope danach: 79/79 redaktionell gebunden
+- Bereits redaktionell gebundene Seiten aus V1.50.471: 379/379 wertidentisch
+- Leaftexte: 1052/1052 wertidentisch
+- Nicht betroffene Altdateien: alle byteidentisch; einzig bestehende Datei mit Änderung ist pferde-template-kit.php (Loader/Pluginheader)
+- Neu hinzugefügt: category-intro-editorial-v150472-batch1440.json und KATEGORIETEXTE_PATCH_V1.50.472.txt
+
+NEGATIVPRÜFUNG
+- Kein bestehender guter Seitentext verändert: PASS
+- Kein Leaftext verändert: PASS
+- Keine nicht im 79er Audit-Scope liegende Seite neu gebunden: PASS
+- Keine Änderung an CSS/JS/Journal/Tabellen/Affiliate/Bildern/Karten/Suche/Breadcrumbs/Publish: PASS
+- Designverträge byteidentisch: PASS
+- V1.50.471-Asset bleibt byteidentisch vorhanden: PASS
+
+POSITIVPRÜFUNG
+- 9/9 neue Texte: 150–200 Wörter
+- 9/9 Auditstatus: alter Auto-Text, kein custom portal_category_text_meta
+- Alte Generator-Phrasen in neuen 9: 0
+- Exakte Duplikate im finalen pages-Bestand: 0
+- Finaler pages-Bestand: 388
+- Finaler Leaf-Bestand: 1052
+- Gesamt: 1440
+- PHP-Lint: PASS
+- Pluginheader/Loader V1.50.472/BATCH1440: PASS
+
+LIVE
+- Noch KEIN LIVE-PASS behauptet. Live-PASS erst nach Nutzerprüfung.
