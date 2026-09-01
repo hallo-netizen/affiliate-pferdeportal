@@ -1,0 +1,7 @@
+{
+  "contract": "PFERDE_ATELIER_BEWEISREGISTER_POINTER_V1",
+  "state": "ACTIVE",
+  "register_git_blob_sha1": "dcb75d3cb3e7546447c89cd4bfc595635e7b3782",
+  "current_startmaster_ref": "control/startmaster0107/beweisregister_steps/BR001_INITIAL_REGISTER_HARD_VERIFY.json",
+  "current_startmaster_git_blob_sha1": "462a9e5afd2423c0fb1e83578b6152e9e8502c23"
+}
