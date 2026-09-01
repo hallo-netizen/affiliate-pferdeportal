@@ -107,6 +107,107 @@ def write_capsule_json(name: str, obj: dict) -> Path:
     return path
 
 
+def _capsule_input_path(value: str) -> Path:
+    p = CAPSULE / rel(value)
+    full = p.resolve()
+    root = CAPSULE.resolve()
+    if full != root and root not in full.parents:
+        raise Blocked("CAPSULE_INPUT_PATH_ESCAPE")
+    return full
+
+
+def enforce_capsule_execution_boundary() -> dict:
+    """Convert copied capsule inputs into manifest-only evidence.
+
+    The immutable cloud delegate verifies every authorized input hash before
+    materialization.  The production worker must execute canonical repository
+    paths, never renamed copies under .pferde-capsule/inputs/.  Removing those
+    copies eliminates location-dependent execution and keeps the manifest as
+    the hash-bound source_ref -> sha256 authority.
+    """
+    manifestp = CAPSULE / "CAPSULE_MANIFEST.json"
+    if not manifestp.is_file():
+        raise Blocked("CAPSULE_MANIFEST_MISSING")
+    manifest = load(manifestp)
+    rows = manifest.get("inputs")
+    if not isinstance(rows, list):
+        raise Blocked("CAPSULE_INPUT_MANIFEST_INVALID")
+
+    removed = 0
+    for i, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise Blocked("CAPSULE_INPUT_ROW_INVALID:" + str(i))
+        source_ref = str(row.get("source_ref") or "")
+        capsule_path = str(row.get("capsule_path") or "")
+        digest = str(row.get("sha256") or "")
+        canonical = REPO / rel(source_ref)
+        copied = _capsule_input_path(capsule_path)
+        if not canonical.is_file() or sha256(canonical) != digest:
+            raise Blocked("CANONICAL_INPUT_HASH_MISMATCH:" + source_ref)
+        if not copied.is_file() or sha256(copied) != digest:
+            raise Blocked("CAPSULE_INPUT_HASH_MISMATCH:" + capsule_path)
+        copied.unlink()
+        removed += 1
+        row["capsule_path"] = None
+        row["materialization_mode"] = "HASH_VERIFIED_CANONICAL_REPO_ONLY"
+
+    inputs_dir = CAPSULE / "inputs"
+    if inputs_dir.exists():
+        leftovers = list(inputs_dir.iterdir())
+        if leftovers:
+            raise Blocked("CAPSULE_INPUT_UNEXPECTED_LEFTOVER:" + leftovers[0].name)
+        inputs_dir.rmdir()
+
+    manifest["input_materialization_mode"] = "HASH_VERIFIED_CANONICAL_REPO_ONLY"
+    manifest["capsule_input_execution_allowed"] = False
+    manifest["canonical_repo_execution_required"] = True
+    manifest["canonical_execution_precondition"] = "SOURCE_REF_SHA256_EQUALS_BOUND_MANIFEST_SHA256"
+    manifestp.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    manifestp.chmod(0o444)
+    return {
+        "status": "CAPSULE_CANONICAL_EXECUTION_BOUNDARY_PASS",
+        "removed_copied_inputs": removed,
+        "capsule_input_execution_allowed": False,
+        "canonical_repo_execution_required": True,
+    }
+
+
+def verify_capsule_execution_boundary() -> dict:
+    manifestp = CAPSULE / "CAPSULE_MANIFEST.json"
+    if not manifestp.is_file():
+        raise Blocked("CAPSULE_MANIFEST_MISSING")
+    manifest = load(manifestp)
+    if manifest.get("input_materialization_mode") != "HASH_VERIFIED_CANONICAL_REPO_ONLY":
+        raise Blocked("CAPSULE_EXECUTION_BOUNDARY_MODE_INVALID")
+    if manifest.get("capsule_input_execution_allowed") is not False:
+        raise Blocked("CAPSULE_INPUT_EXECUTION_MUST_BE_FALSE")
+    if manifest.get("canonical_repo_execution_required") is not True:
+        raise Blocked("CANONICAL_REPO_EXECUTION_REQUIRED")
+    if (CAPSULE / "inputs").exists():
+        raise Blocked("CAPSULE_INPUT_COPY_DIRECTORY_FORBIDDEN")
+
+    rows = manifest.get("inputs")
+    if not isinstance(rows, list):
+        raise Blocked("CAPSULE_INPUT_MANIFEST_INVALID")
+    for i, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise Blocked("CAPSULE_INPUT_ROW_INVALID:" + str(i))
+        if row.get("capsule_path") is not None:
+            raise Blocked("CAPSULE_INPUT_COPY_REF_FORBIDDEN:" + str(i))
+        if row.get("materialization_mode") != "HASH_VERIFIED_CANONICAL_REPO_ONLY":
+            raise Blocked("CAPSULE_INPUT_ROW_MODE_INVALID:" + str(i))
+        source_ref = str(row.get("source_ref") or "")
+        digest = str(row.get("sha256") or "")
+        canonical = REPO / rel(source_ref)
+        if not canonical.is_file() or sha256(canonical) != digest:
+            raise Blocked("CANONICAL_INPUT_HASH_MISMATCH:" + source_ref)
+    return {
+        "status": "CAPSULE_CANONICAL_EXECUTION_BOUNDARY_PASS",
+        "capsule_input_execution_allowed": False,
+        "canonical_repo_execution_required": True,
+    }
+
+
 def freshness() -> dict:
     guard = module(REPO / "control/output-quarantine/worker_freshness_guard.py", "output_worker_freshness")
     result = guard.validate()
@@ -125,6 +226,7 @@ def start() -> dict:
     result = cloud().materialize()
     if not result.get("ok"):
         raise Blocked("IMMUTABLE_CLOUD_ENTRY_START_NOT_OK")
+    boundary = enforce_capsule_execution_boundary()
     write_capsule_json("FRESHNESS_PROOF.json", proof)
     return {
         "ok": True,
@@ -134,6 +236,9 @@ def start() -> dict:
         "sequence": result.get("sequence"),
         "ticket_id": result.get("ticket_id"),
         "capsule": result.get("capsule"),
+        "capsule_execution_boundary_status": boundary["status"],
+        "capsule_input_execution_allowed": False,
+        "canonical_repo_execution_required": True,
         "chat_execution_authority": "NONE",
         "chat_output_authority": "NONE",
         "publish_allowed": False,
@@ -163,6 +268,7 @@ def validate_107008_receipt(receipt_path: Path, binding: dict) -> None:
 
 def complete(receipt_path: Path) -> dict:
     _, state, gate, _ = authority()
+    verify_capsule_execution_boundary()
     seq = int(gate.get("sequence", -1))
     step = str(state.get("next_allowed_step") or "")
     c = cloud()
@@ -179,6 +285,7 @@ def complete(receipt_path: Path) -> dict:
         advanced = c.complete(receipt_path)
         if advanced.get("status") != "STATE_ADVANCED_NEXT_STEP_READY":
             raise Blocked("107007_COMPLETE_DID_NOT_ADVANCE")
+        boundary = enforce_capsule_execution_boundary()
 
         post_proof = freshness()
         binding = {
@@ -197,6 +304,9 @@ def complete(receipt_path: Path) -> dict:
             "batch_sha256": prepared["batch_sha256"],
             "next_step_id": advanced.get("next_step_id"),
             "next_sequence": advanced.get("next_sequence"),
+            "capsule_execution_boundary_status": boundary["status"],
+            "capsule_input_execution_allowed": False,
+            "canonical_repo_execution_required": True,
             "chat_output_authority": "NONE",
             "visible_project_result": False,
             "publish_allowed": False,
