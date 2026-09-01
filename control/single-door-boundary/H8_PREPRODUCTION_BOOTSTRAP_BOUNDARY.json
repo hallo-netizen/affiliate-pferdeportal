@@ -14,10 +14,25 @@
   "required_authoritative_origin": "SINGLE_DOOR_BOOTSTRAP_ONLY",
   "old_unprovenanced_packages_allowed": false,
   "publish_allowed": false,
+  "codex_cloud_productive_bridge": {
+    "contract": "PFERDE_ATELIER_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_V1",
+    "ref": "control/single-door-boundary/CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_V1.json",
+    "scope": "PRODUCTIVE_R_001_HOST_ADAPTER_ONLY",
+    "authority_mode": "CURRENT_HASH_BOUND_CODEX_CAPSULE_IS_BOUND_ACTION",
+    "custom_function_capability_required": false,
+    "workflow_navigation_authority": "NONE",
+    "content_semantics_authority": "NONE",
+    "quality_authority": "NONE",
+    "publish_allowed": false
+  },
   "file_bindings": [
     {
       "ref": "control/single-door-boundary/project_single_door_entry_v2.py",
-      "git_blob_sha1": "c0e76247fc8d6416c11ffc55d111542c4f18fda4"
+      "git_blob_sha1": "1077cb7b4dc3e2fae1f0746a1f29c6ac866aded4"
+    },
+    {
+      "ref": "control/single-door-boundary/CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_V1.json",
+      "git_blob_sha1": "92122946fc04947db1febb8981dc23ea019eec13"
     },
     {
       "ref": "control/single-door-boundary/single_door_bootstrap.py",
