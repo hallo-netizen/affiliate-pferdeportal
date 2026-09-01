@@ -1,6 +1,6 @@
 {
   "contract": "STARTMASTER0107_PASSIVES_BEWEISREGISTER_V1",
-  "purpose": "Reiner Karteikasten. Keine Laufzeitfunktion, kein Gate, kein Pointer, kein STARTMASTER-Hook, keine Workflow-Verknüpfung.",
+  "purpose": "Reiner Karteikasten. Keine Laufzeitfunktion, kein Gate, kein Pointer, kein STARTMASTER-Hook, keine Workflow-Verknuepfung.",
   "workflow_authority": "NONE",
   "execution_authority": "NONE",
   "state_write_authority": "NONE",
@@ -49,7 +49,7 @@
     {"id":"F037","topic":"Dynamic-Handoff-V3 separat wiederherstellen","status":"UEBERHOLT","evidence":["PR#37","PR#28","PR#39"]},
     {"id":"F040","topic":"Historischen 6er-Batch in 107007 fest verdrahten","status":"UEBERHOLT","evidence":["PR#40","PR#41"]},
     {"id":"F052","topic":"Doppelter Production-Package-Release-Rootfix","status":"UEBERHOLT","evidence":["PR#52","PR#53"]},
-    {"id":"F057","topic":"Temporären H8-CI-Probe als Loesung verwenden","status":"TEST_ONLY_NICHT_LOESUNG","evidence":["PR#57","PR#58"]},
+    {"id":"F057","topic":"Temporaeren H8-CI-Probe als Loesung verwenden","status":"TEST_ONLY_NICHT_LOESUNG","evidence":["PR#57","PR#58"]},
     {"id":"F061","topic":"Rollback H8 auf alten H7-Weg","status":"GESCHEITERT_VERWORFEN","evidence":["PR#61"]},
     {"id":"F062","topic":"H7 nach H8 als Produktionsweg wiederherstellen","status":"WIDERLEGT","evidence":["PR#62","PR#58"]},
     {"id":"F065","topic":"WIP Output-Quarantaene-Branch als Loesung","status":"UEBERHOLT","evidence":["PR#65","PR#66"]},
@@ -61,13 +61,15 @@
     {"id":"F_PASS_004","topic":"Prepared-Release / Staging-Hashes allein als 107008-Fachreview-PASS-Beweis","status":"UNZUREICHEND","evidence":["PR#66","PR#73"]},
     {"id":"F_PASS_005","topic":"ED25519 / Supervisor-Signatur des Vorproduktionspakets als Nachweis des spaeteren Fachworkflow-PASS","status":"UNZUREICHEND","evidence":["PR#53","PR#54"]},
     {"id":"F_EXEC_001","topic":"Neuen Executor hinter R_D_1_01 bauen","status":"WIDERLEGT","evidence":["PR#77","PR#78"]},
-    {"id":"F_META_001","topic":"Ein zweites Kontrollsystem neben STARTMASTER0107 bauen","status":"GESCHEITERT","evidence":["branch:startmaster0107-beweisregister@initial-coupled-attempt"],"note":"Vom bestehenden Eingang folgerichtig nicht autorisiert; gekoppelte Dateien danach wieder entfernt."}
+    {"id":"F_META_001","topic":"Ein zweites Kontrollsystem neben STARTMASTER0107 bauen","status":"GESCHEITERT","evidence":["branch:startmaster0107-beweisregister@initial-coupled-attempt"],"note":"Vom bestehenden Eingang folgerichtig nicht autorisiert; gekoppelte Dateien danach wieder entfernt."},
+    {"id":"F_META_002","topic":"Codex zum blossen Lesen oder Pflegen des passiven Beweisregisters im Repository starten","status":"GESCHEITERT","evidence":["2026-09-01 Codex-Lauf: OFFICIAL_RUNTIME_ENTRY_BLOCKED / CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING / STEP_TERMINAL_NONPASS"],"note":"Der Repository-Eingang beansprucht den Codex-Lauf vor dem passiven Register. Dieser Weg ist fuer die Registerpflege ungeeignet und wird nicht wiederholt."}
   ],
   "current_open_questions": [
     {"id":"O001","topic":"Tatsaechlich unabhaengig belegbarer Fachworkflow-PASS nach Ausfuehrung","status":"OFFEN"},
     {"id":"O002","topic":"STAGING_DESTINATION_COLLISION:article.md aus letztem gebundenen Lauf","status":"BEWIESENER_AKTUELLER_FEHLER"}
   ],
   "usage_for_chatgpt_only": {
+    "maintenance": "ChatGPT pflegt dieses passive Register direkt ueber GitHub. Fuer die Registerpflege wird Codex nicht gestartet.",
     "before_any_new_solution": [
       "Dieses Register lesen.",
       "Betroffenen neuen Weg gegen completed_do_not_recheck_while_unchanged pruefen.",
