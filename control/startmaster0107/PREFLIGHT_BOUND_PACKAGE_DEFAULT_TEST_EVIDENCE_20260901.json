@@ -1,0 +1,20 @@
+{
+  "contract": "PFERDE_ATELIER_PREFLIGHT_BOUND_PACKAGE_DEFAULT_TEST_EVIDENCE_V1",
+  "status": "PASS",
+  "scope": "TECHNICAL_CLI_PACKAGE_PATH_RESOLUTION_ONLY",
+  "root_cause": "PRODUCTION_PACKAGE_PREFLIGHT_REQUIRED_ONE_CLI_ARGUMENT_BUT_107007_INVOCATION_OMITTED_PACKAGE_PATH",
+  "observed_error": "usage: guard.py production-package.json",
+  "guard_ref": "control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py",
+  "guard_sha256_after_fix": "2200cf434af61c324426ef647a0dc7ce7811844dca82095b9b7fa8a1babbfe98",
+  "bound_runtime_state_ref": "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json",
+  "bound_production_package_ref": "control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json",
+  "positive_zero_argument_bound_runtime_package": "PASS_EXIT_0",
+  "positive_explicit_package_path": "PASS_EXIT_0",
+  "negative_multiple_arguments": "FAIL_CLOSED_EXIT_64",
+  "current_package_component_hashes_verified": true,
+  "validate_function_changed": false,
+  "production_package_changed": false,
+  "runtime_state_changed": false,
+  "content_quality_research_rules_changed": false,
+  "publish_allowed": false
+}
