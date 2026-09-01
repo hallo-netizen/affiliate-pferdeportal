@@ -1,0 +1,34 @@
+{
+  "contract": "PFERDE_ATELIER_BEWEISREGISTER_STARTMASTER_V1",
+  "step_id": "BR001_INITIAL_REGISTER_HARD_VERIFY",
+  "step_type": "REGISTER_AUDIT",
+  "goal": "Verify only that the initial evidence register contains the declared completed/failed STARTMASTER history, locks completed unchanged work against rechecking, and locks failed/refuted paths against repetition.",
+  "allowed_files": [
+    "control/startmaster0107/BEWEISREGISTER.json",
+    "control/startmaster0107/BEWEISREGISTER_CURRENT_STARTMASTER.json",
+    "control/startmaster0107/beweisregister_steps/BR001_INITIAL_REGISTER_HARD_VERIFY.json",
+    "control/startmaster0107/beweisregister_workflow.py",
+    ".beweisregister/BR001_RECEIPT.json"
+  ],
+  "forbidden_scope": "ALL production/content/quality/workflow fixes; no current root-error fix; no PR; no productive Codex run.",
+  "register_git_blob_sha1": "dcb75d3cb3e7546447c89cd4bfc595635e7b3782",
+  "allowed_commands": [
+    "python3 control/startmaster0107/beweisregister_workflow.py verify-register --receipt .beweisregister/BR001_RECEIPT.json"
+  ],
+  "pass_criteria": [
+    "all declared STARTMASTER PR evidence refs present",
+    "all completed unchanged paths recheck-locked",
+    "all failed/refuted/superseded paths repeat-locked",
+    "exactly one active task and exactly one command",
+    "O001 current root problem registered as OFFEN"
+  ],
+  "fail_criteria": [
+    "missing history evidence",
+    "duplicate/missing register ID",
+    "unlocked failed path",
+    "unlocked completed unchanged path",
+    "register/pointer/startmaster hash mismatch",
+    "more than one allowed command"
+  ],
+  "next_startmaster_ref": null
+}
