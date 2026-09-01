@@ -22,7 +22,7 @@
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "e557ad4f4a20fe94f726d6ca4da60648593441c2b3047c9a685e684ea3bdbeec"
+      "sha256": "1ea59593678f43ae5ee30aafc93ba5f48822bb726435a6e7074aa4efdb1ade27"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
@@ -51,6 +51,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "2dded05b0449387ab1b2ecab9cc35d84e720cefeedd444a8d07e55fde3caec20"
+    "bundle_sha256": "23f103f006546a9b24a2f86dc04d5882e880e17aa52d1b063f1c162646e8b47f"
   }
 }
