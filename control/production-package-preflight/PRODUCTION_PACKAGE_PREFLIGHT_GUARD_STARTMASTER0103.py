@@ -47,8 +47,36 @@ def validate(env):
         if env['package_payload_sha256'] != actual: errors.append({'code':'PACKAGE_PAYLOAD_HASH_MISMATCH','expected':env['package_payload_sha256'],'actual':actual})
     return {'ok':not errors,'status':'PASS' if not errors else 'BLOCKED','guard':'STARTMASTER0103_PRODUCTION_PACKAGE_PREFLIGHT_V1','errors':errors}
 
+def bound_runtime_package_path():
+    repo=Path(__file__).resolve().parents[2]
+    state_path=repo/'control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
+    try:
+        state=json.loads(state_path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError('BOUND_RUNTIME_STATE_UNAVAILABLE') from exc
+    ref=state.get('production_package_ref')
+    if not isinstance(ref,str) or not ref.strip():
+        raise RuntimeError('BOUND_PRODUCTION_PACKAGE_REF_MISSING')
+    candidate=(repo/ref).resolve()
+    try:
+        candidate.relative_to(repo)
+    except ValueError as exc:
+        raise RuntimeError('BOUND_PRODUCTION_PACKAGE_REF_OUTSIDE_REPO') from exc
+    if not candidate.is_file():
+        raise RuntimeError(f'BOUND_PRODUCTION_PACKAGE_NOT_FOUND:{ref}')
+    return candidate
+
 def main(path):
     result=validate(json.loads(Path(path).read_text(encoding='utf-8'))); print(json.dumps(result,ensure_ascii=False,indent=2)); return 0 if result['ok'] else 2
+
 if __name__=='__main__':
-    if len(sys.argv)!=2: print('usage: guard.py production-package.json',file=sys.stderr); sys.exit(64)
-    sys.exit(main(sys.argv[1]))
+    if len(sys.argv)==1:
+        try:
+            path=bound_runtime_package_path()
+        except RuntimeError as exc:
+            print(str(exc),file=sys.stderr); sys.exit(2)
+    elif len(sys.argv)==2:
+        path=sys.argv[1]
+    else:
+        print('usage: guard.py [production-package.json]',file=sys.stderr); sys.exit(64)
+    sys.exit(main(path))
