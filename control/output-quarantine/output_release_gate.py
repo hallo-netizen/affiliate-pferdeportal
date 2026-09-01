@@ -10,6 +10,9 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 POINTER = REPO / "control/CURRENT_STARTMASTER.json"
 RUNTIME_STATE = REPO / "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json"
+ENV_PROOF = REPO / ".pferde-environment/CODEX_PRODUCTION_PREFLIGHT.json"
+PREFLIGHT_CONTRACT = "PFERDE_ATELIER_CODEX_PRODUCTION_ENVIRONMENT_PREFLIGHT_V1"
+EXPECTED_REPOSITORY = "hallo-netizen/affiliate-pferdeportal"
 
 
 class Blocked(RuntimeError):
@@ -56,13 +59,31 @@ def git(*args: str) -> str:
 
 
 def require_current_main() -> str:
+    # NETWORKLESS_AGENT_RUNTIME: no network call during the agent phase.
+    # Freshness is proven exclusively via the local checkout (rev-parse HEAD,
+    # no remote contact) plus the environment proof that the Codex
+    # setup/maintenance script already produced *before* the agent phase
+    # started (control/startmaster0107/codex-production-runtime/
+    # codex_environment_preflight.py). This is the same proof artifact and
+    # the same field contract that worker_freshness_guard.py already relies
+    # on for the identical guarantee; no new architecture is introduced here.
     head = git("rev-parse", "HEAD")
-    raw = git("ls-remote", "origin", "refs/heads/main")
-    parts = raw.split()
-    if not parts:
-        raise Blocked("REMOTE_MAIN_UNVERIFIABLE")
-    if head != parts[0]:
-        raise Blocked("STALE_WORKER_HEAD")
+    if not ENV_PROOF.is_file():
+        raise Blocked("CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING")
+    proof = load(ENV_PROOF)
+    if proof.get("contract") != PREFLIGHT_CONTRACT:
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_INVALID")
+    if proof.get("status") != "CODEX_PRODUCTION_PREFLIGHT_PASS":
+        raise Blocked("CODEX_ENVIRONMENT_PREFLIGHT_NOT_PASS")
+    if proof.get("repository") != EXPECTED_REPOSITORY:
+        raise Blocked("CODEX_ENVIRONMENT_REPOSITORY_INVALID")
+    if proof.get("main_authority_source") not in {
+        "GITHUB_PUBLIC_BRANCH_API",
+        "CODEX_CHECKOUT_REMOTE_TRACKING_MAIN",
+    }:
+        raise Blocked("CODEX_MAIN_AUTHORITY_SOURCE_INVALID")
+    if proof.get("expected_main_sha") != head or proof.get("local_head_sha") != head:
+        raise Blocked("CODEX_CHECKOUT_NOT_PROVEN_CURRENT_MAIN")
     return head
 
 
