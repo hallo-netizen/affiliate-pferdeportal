@@ -1,6 +1,6 @@
 # AFFILIATE-ZENTRALE — CURRENT MASTER / HANDOFF
 
-Stand: 2026-08-31
+Stand: 2026-09-01
 Branch: `affiliate-release-current`
 Workstream: `AFFILIATE_ZENTRALE`
 Governance: `PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4`
@@ -9,6 +9,19 @@ Candidate: `6.64.0` / `WORKING` / `release_allowed=false`
 ## Autoritative Quelle
 
 Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` ist aktuelle Release-Quelle. Historische ZIPs, alte Chatstände und Archive sind keine Navigations- oder Rekonstruktionsquelle. Bereits hash-identisch bestandene eBay-Gates werden nicht erneut ausgeführt.
+
+## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
+
+Vor **jedem** Analyse-, Code-, GitHub-, Codex-, Test-, Build-, Installations-, Live- oder Release-Schritt ist zuerst `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md` zu lesen und gegen den geplanten Schritt zu prüfen.
+
+Harte Regeln:
+
+1. Kein technischer Arbeitsschritt ohne `ERROR-REGISTER PRECHECK`.
+2. Kein Fix, bevor ein neu gefundener Fehler mit Root Cause, gescheitertem Weg, Nicht-Wiederholungsregel sowie POSITIV-/NEGATIV-/Gesamtworkflow-Test im Register dokumentiert ist.
+3. Ein bereits dokumentierter falscher Lösungsweg darf nicht erneut ausgeführt werden. Treffer auf bekannte Fehler-ID = Plan zuerst korrigieren, sonst `FAIL_CLOSED`.
+4. Kein `PASS`, keine Abnahme und kein Release ohne `ERROR-REGISTER POSTCHECK` und Evidence, dass relevante bekannte Fehler nicht wiederholt wurden.
+5. Das Register gilt chatübergreifend und ist Bestandteil jeder neuen Übergabe.
+6. Für Bannerautomation ist insbesondere `AFF-ERR-009` bindend: Bannerformat und Bannerposition dürfen nicht hart im Provideradapter verdrahtet werden; Größen/Positionen müssen über eine flexible Slotdefinition austauschbar bleiben.
 
 ## WORKSTREAM-/THEMEN-HARDLOCK — VERBINDLICH
 
@@ -47,6 +60,7 @@ Dieser Abschnitt ist für alle folgenden Arbeiten im Workstream verbindlich und 
 15. **Wenn ein GitHub-Connector die Änderung selbst sauber und vollständig ausführen kann**, darf die Änderung direkt über GitHub erfolgen; danach sind Source, Manifest, Governance und Master konsistent zu aktualisieren und erneut zu prüfen.
 16. **Der Nutzer soll nur dann eingreifen müssen, wenn eine echte externe Nutzerhandlung erforderlich ist** (z. B. Login/Freigabe/Live-Zugang, den die Werkzeuge nicht besitzen). Keine vermeidbaren Datei-Transfers oder manuellen Zwischenschritte.
 17. **Jede Übergabe dokumentiert:** Was geändert wurde, was nicht geändert wurde, welche Tests PASS/FAIL sind, welche Hashes/Commits gelten, was live noch offen ist und exakt welcher nächste gebundene Schritt folgt.
+18. **Vor jedem Schritt Fehlerregister prüfen.** `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md` ist verpflichtende Preflight-Quelle und darf nicht übersprungen werden.
 
 ### Standard-Codex-Startprompt
 
@@ -57,11 +71,13 @@ Arbeite im Repository hallo-netizen/affiliate-pferdeportal
 auf dem gebundenen Branch.
 
 Lies zuerst control/release-governance/CURRENT_RELEASE.json.
+Lies danach protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md und führe den ERROR-REGISTER PRECHECK aus.
 Führe danach vollständig und ohne Scope-Erweiterung aus:
 <EXAKTER_TASK_REF_IM_REPOSITORY>
 
 Implementieren, lokal positiv/negativ testen, erforderliche Source-/Manifest-/Governance-Bindung durchführen und committen.
 Keine bereits hash-identisch bestandenen Gates wiederholen.
+Keinen bekannten Fehlerweg aus dem Fehlerregister wiederholen.
 ```
 
 Abweichungen von diesem Ablauf müssen technisch begründet und im Master dokumentiert werden. Bequemlichkeit oder Chatwechsel sind kein Grund für eine neue Übergaberoute.
@@ -105,7 +121,7 @@ Verbindlicher repository-nativer Auftrag:
 
 `protocol/AFFILIATE_RELEASE_CODEX_DS24_IMPLEMENT_FROM_REPO_20260831.md`
 
-Codex benötigt dafür keine lokale Datei, kein ZIP und keinen eingefügten Quelltext. Es arbeitet aus dem verbundenen Repository, liest Governance, Master, Evidence und die aktuellen Source-Dateien und implementiert den gebundenen Digistore-Zielvertrag direkt im aktuellen Baum.
+Codex benötigt dafür keine lokale Datei, kein ZIP und keinen eingefügten Quelltext. Es arbeitet aus dem verbundenen Repository, liest Governance, Master, Evidence, Fehlerregister und die aktuellen Source-Dateien und implementiert den gebundenen Digistore-Zielvertrag direkt im aktuellen Baum.
 
 ## Noch offen vor Release
 
@@ -117,4 +133,4 @@ Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_
 
 ## Aktuell autorisierter nächster Schritt
 
-Repository-nativen Auftrag `protocol/AFFILIATE_RELEASE_CODEX_DS24_IMPLEMENT_FROM_REPO_20260831.md` gegen die aktuelle kanonische Source ausführen. Nach Source-/Manifest-/Governance-PASS unmittelbar den realen Digistore24-Livegate durchführen: read-only Verbindung, Marketplace-Daten, `getAffiliateCommission`, mindestens ein realer approved/active Partner bzw. korrektes Fail-closed bei keinem approved Partner, reale Werbemittel-URL/Banner, Bildprüfung, automatische Ziel-/Slot-Zuordnung und veröffentlichter/rollbackfähiger Endzustand. Danach nur den bereits gebundenen Release-Gate weiterführen.
+Vor dem nächsten Implementierungsblock zuerst `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md` lesen. Danach den gebündelten Banner-Automations-Zielvertrag umsetzen: Bulk-Synchronisation bestätigter Partner als Hauptworkflow, automatische Bannererfassung, flexible und providerunabhängige Slot-/Formatdefinition, automatische Zuordnung auf passende Seiten/Kategorien/Beiträge mit Mehrfachnutzung und Pferde-Fallback, regelmäßige Neubewertung bei organischem Wachstum sowie vollständiger POSITIV-/NEGATIV-/Gesamtworkflow-/Regressionstest. Keine Abnahme aus Einzeltests und keine neue Plugin-Version für einen bloßen Folgefehler derselben Ursache.
