@@ -10,7 +10,7 @@
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "ff54c9ca5fc05623a8231905aee0bee97439682415a59a5188db04a7ed60fa25"
+      "sha256": "2a270886e3084969180ff9ac21558cd3f21a55b9313dafd2ef3e61b43cdf3848"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -42,14 +42,18 @@
     },
     {
       "ref": "control/single-door-boundary/codex_current_room_bridge.py",
-      "sha256": "b096312b07bfcfd9047333e0c8d2fbe85cc9d629c4273c6a6fa65d96423cad14"
+      "sha256": "2f618ba9172c4f50712b1e21e4b2a598a58ad4b437e750335520cae9c4bfc384"
     },
     {
       "ref": "control/single-door-boundary/codex_current_action.py",
       "sha256": "fd9d391d625c2d6aa3b6f670318e7adf9e22d79e1b49121f190f7223f206f909"
+    },
+    {
+      "ref": "control/single-door-boundary/single_door_preproduction_handoff.py",
+      "sha256": "b47d479b1bdeb59a3b0d634df3d33af908c65eddeaf877fa7f0d36f333c8481d"
     }
   ],
-  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt schon vor Tür 1 keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung, keine Rekonstruktion eines fehlenden Schritts.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ist vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf direkt oder indirekt verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ist ausschließlich der gebundene produktive Eingang zulässig. Danach ausschließlich:\n\npython3 control/single-door-boundary/codex_current_action.py current\n\nDiese Ausgabe ist der einzige Worker-Etagenanzeiger.\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- Das ist ein POSITIVER freigegebener Zustand, kein Fehler.\n- instruction=EXECUTE_CURRENT_BOUND_ITEM_NOW bedeutet: ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten.\n- Keine Suche nach einem Executor, keiner Capability und keinem anderen Raum.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- item_receipt_schema exakt erfüllen und nach item_receipt_ref schreiben.\n- Danach ausschließlich submission_command ausführen.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam, wird dem Worker aber absichtlich nicht als Arbeitsaktion ausgegeben. Sie bedeutet ausschließlich: außer dem aktuell ausgegebenen Einzelauftrag ist nichts erlaubt.\n\nJede neue Ausgabe des submission_command ersetzt die vorherige vollständig. Niemals den nächsten Raum, das nächste Item oder eine Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED: stehenbleiben, keine eigene Lösung oder Alternativroute. Beim finalen 107008-Zustand: stehenbleiben und Nutzerreview abwarten.\n\nAlle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish. Alles außerhalb der aktuell ausgegebenen Einzelaktion ist DENY.",
+  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt schon vor Tür 1 keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung, keine Rekonstruktion eines fehlenden Schritts.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ist vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf direkt oder indirekt verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ist ausschließlich der gebundene produktive Eingang zulässig. Danach ausschließlich:\n\npython3 control/single-door-boundary/codex_current_action.py current\n\nDiese Ausgabe ist der einzige Worker-Etagenanzeiger.\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- Das ist ein POSITIVER freigegebener Zustand, kein Fehler.\n- instruction=EXECUTE_CURRENT_BOUND_ITEM_NOW bedeutet: ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten.\n- Keine Suche nach einem Executor, keiner Capability und keinem anderen Raum.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- item_receipt_schema exakt erfüllen und nach item_receipt_ref schreiben.\n- Danach ausschließlich submission_command ausführen.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam, wird dem Worker aber absichtlich nicht als Arbeitsaktion ausgegeben. Sie bedeutet ausschließlich: außer dem aktuell ausgegebenen Einzelauftrag ist nichts erlaubt.\n\nJede neue Ausgabe des submission_command ersetzt die vorherige vollständig. Niemals den nächsten Raum, das nächste Item oder eine Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED: stehenbleiben, keine eigene Lösung oder Alternativroute. Beim finalen 107008-Zustand: stehenbleiben und Nutzerreview abwarten.\n\nAlle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish. Alles außerhalb der aktuell ausgegebenen Einzelaktion ist DENY.\n\nTECHNISCHER TERMINAL-NACHWEIS — KEINE FACHENTSCHEIDUNG: Ein Item-PASS darf nicht mehr allein aus workflow_pass=true, freien Evidence-Strings oder Output-Hashes entstehen. Nach und nur nach dem bereits bestehenden unveränderten terminalen Fachworkflow-PASS des exakt aktuellen Items muss die bereits vorhandene Workflow-Supervisor-Signierinstanz den im current-action-Schema exakt vorgegebenen frischen WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED-Terminalnachweis erzeugen. Der Wächter prüft ausschließlich Signatur und technische Bindung an Ticket/State/Bundle/Batch/Room/Item/Outputs; keinerlei Inhalt oder Qualität.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
@@ -59,6 +63,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "a7a0f1b09c859a10637bc2693561f0d4caf3c2037e3652531af3c4cdb6010496"
+    "bundle_sha256": "15f952d345656e7e33e439af2bab6070371893a05da3fd592c20b6a54fba4a07"
   }
 }

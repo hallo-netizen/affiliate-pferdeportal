@@ -91,6 +91,7 @@ def authority() -> tuple[dict, dict, dict, dict]:
         str(ptr.get("visible_output_policy_ref") or ""): sha256(policyp),
         "control/output-quarantine/worker_freshness_guard.py": sha256(REPO / "control/output-quarantine/worker_freshness_guard.py"),
         "control/output-quarantine/output_release_gate.py": sha256(REPO / "control/output-quarantine/output_release_gate.py"),
+        "control/single-door-boundary/single_door_preproduction_handoff.py": sha256(REPO / "control/single-door-boundary/single_door_preproduction_handoff.py"),
     }
     for ref, digest in required.items():
         if bindings.get(ref) != digest:
@@ -246,7 +247,37 @@ def start() -> dict:
     }
 
 
-def validate_107008_receipt(receipt_path: Path, binding: dict) -> None:
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+def validate_final_terminal_completion(proof: dict, binding: dict, ticket: dict, *, trusted_keys=None) -> dict:
+    if not isinstance(proof, dict):
+        raise Blocked("FINAL_REVIEW_TERMINAL_COMPLETION_INVALID")
+    validator = module(REPO / "control/single-door-boundary/single_door_preproduction_handoff.py", "final_terminal_signature")
+    try:
+        validator._verify_release_signature(proof, trusted_keys or validator.TRUSTED_SIGNING_KEYS)
+    except Exception as exc:
+        raise Blocked("FINAL_REVIEW_TERMINAL_COMPLETION_SIGNATURE_INVALID:" + str(exc)) from exc
+    required = {
+        "terminal_completion_contract": "PFERDE_ATELIER_FACHWORKFLOW_TERMINAL_COMPLETION_V1",
+        "terminal_phase": "107008_FINAL_REVIEW",
+        "terminal_gate_id": "EXISTING_UNCHANGED_FINAL_FACHREVIEW_TERMINAL_PASS",
+        "ticket_id": ticket.get("ticket_id"),
+        "state_sha256": ticket.get("state_sha256"),
+        "bundle_sha256": ticket.get("bundle_sha256"),
+        "prepared_release_ref": binding["prepared_ref"],
+        "prepared_release_sha256": binding["prepared_sha256"],
+        "prepared_batch_sha256": binding["batch_sha256"],
+        "reviewed_prepared_release_only": True,
+        "content_or_quality_rules_changed": False,
+        "publish_allowed": False,
+    }
+    for key, expected in required.items():
+        if proof.get(key) != expected:
+            raise Blocked("FINAL_REVIEW_TERMINAL_COMPLETION_BINDING_MISMATCH:" + key)
+    return {"status": "SIGNED_TERMINAL_FINAL_REVIEW_COMPLETION_PASS", "proof_sha256": sha256_bytes(json.dumps(proof, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8"))}
+
+def validate_107008_receipt(receipt_path: Path, binding: dict, *, trusted_keys=None) -> None:
     if not receipt_path.is_file():
         raise Blocked("RECEIPT_MISSING")
     receipt = load(receipt_path)
@@ -260,11 +291,23 @@ def validate_107008_receipt(receipt_path: Path, binding: dict) -> None:
         "prepared_release_ref": binding["prepared_ref"],
         "prepared_release_sha256": binding["prepared_sha256"],
         "prepared_batch_sha256": binding["batch_sha256"],
+        "terminal_completion_ref": ".pferde-capsule/FINAL_REVIEW_TERMINAL_COMPLETION.json",
     }
     for key, expected in required.items():
         if payload.get(key) != expected:
             raise Blocked("FINAL_REVIEW_PREPARED_BINDING_MISMATCH:" + key)
-
+    terminal_sha = payload.get("terminal_completion_sha256")
+    if not isinstance(terminal_sha, str) or len(terminal_sha) != 64:
+        raise Blocked("FINAL_REVIEW_TERMINAL_COMPLETION_SHA_INVALID")
+    terminal_path = REPO / rel(payload["terminal_completion_ref"])
+    if not terminal_path.is_file():
+        raise Blocked("FINAL_REVIEW_TERMINAL_COMPLETION_MISSING")
+    if sha256(terminal_path) != terminal_sha:
+        raise Blocked("FINAL_REVIEW_TERMINAL_COMPLETION_HASH_MISMATCH")
+    ticket_path = CAPSULE / "TICKET.json"
+    if not ticket_path.is_file():
+        raise Blocked("CAPSULE_TICKET_MISSING")
+    validate_final_terminal_completion(load(terminal_path), binding, load(ticket_path), trusted_keys=trusted_keys)
 
 def complete(receipt_path: Path) -> dict:
     _, state, gate, _ = authority()
