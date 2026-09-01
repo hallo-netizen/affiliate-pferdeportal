@@ -199,12 +199,30 @@ Verbindlich:
 
 **Status:** OPEN — Bestandteil des aktuellen Zielvertrags.
 
+## AFF-ERR-011 — Partner-&-Einnahmen-Übersicht blendet aktive Produktquellen aus
+
+**Symptom:** `idealo` und `eBay` sind technisch aktiv und in der zentralen Einnahmen-/Klickauswertung vorhanden, erscheinen aber nicht auf der sichtbaren KISS-Einstiegsseite `Partner & Einnahmen`.
+
+**Root Cause:** Die KISS-Seite baut ihre sichtbaren Karten ausschließlich aus `banner_networks()` auf. Aktive monetarisierende Produkt-/Preisvergleichsquellen aus `product_sources()` werden dadurch fälschlich ausgeblendet, obwohl die bestehende Partner-Analytics sie bereits vollständig führt.
+
+**Gescheiterter Weg:** Die sichtbare Partnerseite als reine Bannernetzwerk-Liste behandeln und Nutzer für Klickdaten zusätzlich auf eine zweite Unterseite schicken.
+
+**Nicht wiederholen:** `Partner & Einnahmen` ist die zentrale monetarisierende Übersicht und muss die vorhandene providerübergreifende Partner-Analytics direkt verwenden. Keine künstliche Trennung nach Banner-/Produktquelle in der sichtbaren Einnahmenansicht.
+
+**POSITIV:** `WordPress-Dashboard → Affiliate-Zentrale → Partner & Einnahmen` zeigt mindestens eBay, idealo, Awin, ADCELL, Digistore24 und Direktpartner sowie die vorhandenen lokalen Klicks; Provider-Klicks/Einnahmen erscheinen nur bei real gelieferten Daten.
+
+**NEGATIV:** Fehlende Provider-Reports werden weiterhin als `nicht verfügbar`/`noch kein Report` angezeigt und niemals geschätzt; vorbereitete Quellen werden nicht als aktive Einnahmen erfunden.
+
+**Regression:** Provideradapter, eBay-/idealo-Ausspielung, DS24-Bannerlogik und bestehendes Klicktracking bleiben unverändert; es wird ausschließlich die bereits vorhandene zentrale Auswertung sichtbar gemacht.
+
+**Status:** OPEN — gemeinsamer UI-Ursachenfix im aktuellen Abschlussblock.
+
 ---
 
 # Aktueller PRECHECK für den nächsten Banner-Automationsblock
 
-Relevante Fehler-IDs zwingend: `AFF-ERR-001`, `002`, `003`, `004`, `005`, `006`, `008`, `009`, `010`.
+Relevante Fehler-IDs zwingend: `AFF-ERR-001`, `002`, `003`, `004`, `005`, `006`, `008`, `009`, `010`, `011`.
 
-Der nächste Implementierungsblock darf erst als lokal PASS gelten, wenn **Bulk-Partnerschaften + Bannerimport + flexible Slotdefinition + Seiten/Kategorien/Beiträge + Mehrfachnutzung + Pferde-Fallback + regelmäßige Neubewertung + Größen-/Responsive-Matching + LKG/Persistenz + Provider-Regression** gemeinsam positiv und negativ getestet sind.
+Der nächste Implementierungsblock darf erst als lokal PASS gelten, wenn **Bulk-Partnerschaften + Bannerimport + flexible Slotdefinition + Seiten/Kategorien/Beiträge + Mehrfachnutzung + Pferde-Fallback + regelmäßige Neubewertung + Größen-/Responsive-Matching + LKG/Persistenz + Provider-Regression + vollständige Partner-/Klicksicht** gemeinsam positiv und negativ getestet sind.
 
 Keine Abnahme aus Einzeltests.
