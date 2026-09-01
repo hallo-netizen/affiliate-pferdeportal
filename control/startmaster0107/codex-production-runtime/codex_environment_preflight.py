@@ -9,14 +9,13 @@ from pathlib import Path
 from typing import Callable
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[3]
-POINTER = REPO / "control/CURRENT_STARTMASTER.json"
-RUNTIME_STATE = REPO / "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json"
+REPO = HERE.parents[2] if len(HERE.parents) > 2 else HERE
 PROOF_DIR = REPO / ".pferde-environment"
 PROOF_PATH = PROOF_DIR / "CODEX_PRODUCTION_PREFLIGHT.json"
 CONTRACT = "PFERDE_ATELIER_CODEX_PRODUCTION_ENVIRONMENT_PREFLIGHT_V1"
 REPO_FULL_NAME = "hallo-netizen/affiliate-pferdeportal"
 MAIN_API = f"https://api.github.com/repos/{REPO_FULL_NAME}/branches/main"
+MAIN_TRACKING_REF = "refs/remotes/origin/main"
 ALLOWED_STEPS = {
     ("RUN_NEW_ARTICLE_BATCH_NO_STOP", 107007),
     ("FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH", 107008),
@@ -61,7 +60,18 @@ def git(repo: Path, *args: str) -> str:
     return cp.stdout.strip()
 
 
-def live_main_sha() -> tuple[str, str]:
+def authoritative_main_sha(repo: Path = REPO) -> tuple[str, str]:
+    # The Codex setup/maintenance script refreshes this exact ref from GitHub
+    # before every agent phase. Agent internet access is therefore unnecessary.
+    try:
+        value = git(repo, "rev-parse", "--verify", MAIN_TRACKING_REF)
+        if len(value) == 40:
+            return value, "CODEX_SETUP_MAINTENANCE_TRACKING_MAIN"
+    except Exception:
+        pass
+
+    # Fallback for a fresh environment if the tracking ref was not materialized
+    # but setup still has public internet. This is fail-closed on any error.
     try:
         req = urllib.request.Request(
             MAIN_API,
@@ -75,16 +85,6 @@ def live_main_sha() -> tuple[str, str]:
         value = str(((raw.get("commit") or {}).get("sha")) or "")
         if len(value) == 40:
             return value, "GITHUB_PUBLIC_BRANCH_API"
-    except Exception:
-        pass
-
-    # Cached Codex containers may run maintenance without public internet.
-    # Codex itself checks out the selected branch before maintenance; in that
-    # case the remote-tracking main ref is the only accepted local fallback.
-    try:
-        value = git(REPO, "rev-parse", "--verify", "refs/remotes/origin/main")
-        if len(value) == 40:
-            return value, "CODEX_CHECKOUT_REMOTE_TRACKING_MAIN"
     except Exception:
         pass
     raise PreflightBlocked("AUTHORITATIVE_MAIN_SHA_UNAVAILABLE")
@@ -106,13 +106,12 @@ def validate(
 ) -> dict:
     repo = Path(repo).resolve()
     head = git(repo, "rev-parse", "HEAD")
-    expected_main, authority_source = (main_sha_provider or live_main_sha)()
+    expected_main, authority_source = (
+        main_sha_provider() if main_sha_provider is not None else authoritative_main_sha(repo)
+    )
     if head != expected_main:
         raise PreflightBlocked(
-            "CODEX_CHECKOUT_NOT_CURRENT_MAIN:"
-            + head
-            + ":EXPECTED:"
-            + expected_main
+            "CODEX_CHECKOUT_NOT_CURRENT_MAIN:" + head + ":EXPECTED:" + expected_main
         )
 
     pointer_path = repo / "control/CURRENT_STARTMASTER.json"
