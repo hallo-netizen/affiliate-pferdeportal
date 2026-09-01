@@ -1,0 +1,20 @@
+{
+  "contract": "PFERDE_ATELIER_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_V1",
+  "scope": "PRODUCTIVE_R_001_HOST_ADAPTER_ONLY",
+  "hard_worker": "CODEX_CLOUD",
+  "domain_blind": true,
+  "content_semantics_authority": "NONE",
+  "quality_authority": "NONE",
+  "design_authority": "NONE",
+  "workflow_navigation_authority": "NONE",
+  "publish_authority": "NONE",
+  "required_outer_step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+  "required_outer_sequence": 107007,
+  "required_room_token": "R_001",
+  "required_runtime_status": "RUNTIME_INPUTS_BOUND",
+  "authority_mode": "CURRENT_HASH_BOUND_CODEX_CAPSULE_IS_BOUND_ACTION",
+  "forbidden_host_capability": "execute_bound_action",
+  "rule": "For CODEX_CLOUD only, the already materialized and hash-bound 107007 capsule is the productive R_001 bound action. No synthetic custom function tool is requested or exposed. The worker receives no workflow navigation authority; state advance remains entrance-gate-only.",
+  "content_quality_rules_changed": false,
+  "publish_allowed": false
+}
