@@ -66,7 +66,7 @@ def authoritative_main_sha(repo: Path = REPO) -> tuple[str, str]:
     try:
         value = git(repo, "rev-parse", "--verify", MAIN_TRACKING_REF)
         if len(value) == 40:
-            return value, "CODEX_SETUP_MAINTENANCE_TRACKING_MAIN"
+            return value, "CODEX_CHECKOUT_REMOTE_TRACKING_MAIN"
     except Exception:
         pass
 
