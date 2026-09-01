@@ -10,38 +10,43 @@ cd "$ROOT"
 rm -rf .pferde-environment
 mkdir -p .pferde-environment
 
-# This environment is also used for non-production branch work. Only a task
-# explicitly checked out on main is synchronized to the current GitHub main.
+# Resolve current GitHub main independently of the local Codex branch name.
+# Codex Cloud may expose the selected UI branch as a synthetic local branch
+# (for example "work"), so production proof must not depend on the literal
+# output of `git branch --show-current`.
 CURRENT_BRANCH="$(git branch --show-current || true)"
-if [[ "$CURRENT_BRANCH" == "main" ]]; then
-  # Setup/Maintenance runs before the agent phase and has internet access.
-  # Use the full repository URL; never depend on an 'origin' remote existing.
-  MAIN_SHA="$(git ls-remote "$REPO_URL" refs/heads/main | awk 'NR==1 {print $1}')"
-  if [[ ! "$MAIN_SHA" =~ ^[0-9a-f]{40}$ ]]; then
-    echo "CODEX_MAIN_AUTHORITY_UNAVAILABLE"
-    exit 2
-  fi
+MAIN_SHA="$(git ls-remote "$REPO_URL" refs/heads/main | awk 'NR==1 {print $1}')"
+if [[ ! "$MAIN_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "CODEX_MAIN_AUTHORITY_UNAVAILABLE"
+  exit 2
+fi
 
-  # Materialize the exact current main commit locally and force the worktree to it.
-  # This removes stale cached-main checkouts before any project-owned code runs.
-  git fetch --no-tags "$REPO_URL" "+${MAIN_SHA}:refs/pferde-authority/current-main"
+# Materialize the verified current main identity for the offline agent phase.
+git fetch --no-tags "$REPO_URL" "+${MAIN_SHA}:refs/pferde-authority/current-main"
+git update-ref refs/remotes/origin/main "$MAIN_SHA"
+
+LOCAL_SHA="$(git rev-parse HEAD)"
+SYNC_MODE="IDENTITY_ONLY_CURRENT_MAIN"
+
+# Only a literal local main branch may be rewritten. This preserves the
+# existing non-main no-rewrite contract. Synthetic/detached Codex checkouts
+# are never rewritten merely because of their local branch name.
+if [[ "$CURRENT_BRANCH" == "main" && "$LOCAL_SHA" != "$MAIN_SHA" ]]; then
   git reset --hard "$MAIN_SHA"
-
   LOCAL_SHA="$(git rev-parse HEAD)"
-  if [[ "$LOCAL_SHA" != "$MAIN_SHA" ]]; then
-    echo "CODEX_MAIN_SYNC_FAILED:${LOCAL_SHA}:EXPECTED:${MAIN_SHA}"
-    exit 2
-  fi
+  SYNC_MODE="HARD_SYNC_CURRENT_MAIN"
+fi
 
-  # Persist only the already-verified identity for the offline agent phase.
-  git update-ref refs/remotes/origin/main "$MAIN_SHA"
-
+# Production proof is identity-based, not local-branch-name-based. This covers
+# Codex Cloud's synthetic `work`/detached checkout when it points exactly at
+# the selected current main, while leaving real non-main commits untouched.
+if [[ "$LOCAL_SHA" == "$MAIN_SHA" ]]; then
   cat > .pferde-environment/MAIN_SYNC.json <<JSON
 {
   "contract": "PFERDE_ATELIER_CODEX_MAIN_SYNC_V1",
   "status": "PASS",
   "repository": "${REPO_FULL_NAME}",
-  "sync_mode": "SETUP_MAINTENANCE_HARD_SYNC_CURRENT_MAIN",
+  "sync_mode": "${SYNC_MODE}",
   "main_sha": "${MAIN_SHA}",
   "local_head_sha": "${LOCAL_SHA}",
   "origin_remote_required": false,
@@ -63,7 +68,8 @@ then
   python3 -m pip install --disable-pip-version-check --no-input "cryptography==50.0.1"
 fi
 
-# The production preflight is relevant only for production tasks on main.
-if [[ "$CURRENT_BRANCH" == "main" ]]; then
+# Run the production preflight whenever this checkout is proven to be the
+# current GitHub main commit, regardless of Codex's synthetic local branch name.
+if [[ "$LOCAL_SHA" == "$MAIN_SHA" ]]; then
   python3 control/startmaster0107/codex-production-runtime/codex_environment_preflight.py
 fi
