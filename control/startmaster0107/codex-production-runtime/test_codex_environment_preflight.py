@@ -93,25 +93,25 @@ def blocked(fn, token: str):
 def main():
     with tempfile.TemporaryDirectory() as td:
         repo, head = make_repo(Path(td))
-        proof = m.validate(repo, main_sha_provider=lambda:(head,'CODEX_SETUP_MAINTENANCE_TRACKING_MAIN'), ed25519_provider=lambda:True)
+        proof = m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True)
         assert proof['status']=='CODEX_PRODUCTION_PREFLIGHT_PASS'
         assert proof['content_semantics_inspected'] is False
         assert proof['quality_authority']=='NONE'
         assert proof['workflow_navigation_decision'] is False
         assert proof['publish_allowed'] is False
         detected, source = m.authoritative_main_sha(repo)
-        assert detected == head and source == 'CODEX_SETUP_MAINTENANCE_TRACKING_MAIN'
+        assert detected == head and source == 'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'
 
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:('0'*40,'CODEX_SETUP_MAINTENANCE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'CODEX_CHECKOUT_NOT_CURRENT_MAIN')
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_SETUP_MAINTENANCE_TRACKING_MAIN'), ed25519_provider=lambda:False), 'ED25519_RUNTIME_UNAVAILABLE')
+        blocked(lambda:m.validate(repo, main_sha_provider=lambda:('0'*40,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'CODEX_CHECKOUT_NOT_CURRENT_MAIN')
+        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:False), 'ED25519_RUNTIME_UNAVAILABLE')
 
         runtimep=repo/'control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
         runtime=json.loads(runtimep.read_text()); runtime['status']='BATCH_READY_PACKAGE_PENDING'; dump(runtimep,runtime)
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_SETUP_MAINTENANCE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'RUNTIME_NOT_EXECUTION_READY')
+        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'RUNTIME_NOT_EXECUTION_READY')
         runtime['status']='EXECUTION_READY'; dump(runtimep,runtime)
 
         ptrp=repo/'control/CURRENT_STARTMASTER.json'; ptr=json.loads(ptrp.read_text()); ptr['free_chat_execution_authority']=True; dump(ptrp,ptr)
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_SETUP_MAINTENANCE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'FREE_CHAT_EXECUTION_MUST_BE_FALSE')
+        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'FREE_CHAT_EXECUTION_MUST_BE_FALSE')
 
     print(json.dumps({'ok':True,'status':'CODEX_ENVIRONMENT_PREFLIGHT_POSITIVE_NEGATIVE_PASS','positive':1,'negative':4,'content_semantics_inspected':False,'quality_authority':'NONE','publish_allowed':False}, indent=2))
 
