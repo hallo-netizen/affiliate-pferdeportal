@@ -1,0 +1,46 @@
+name: TEMP STARTMASTER0107 Final Context Release Fix
+on:
+  push:
+    branches: [startmaster0107-dual-rootfix-fachpass-clean-20260902]
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch permanent repair script only
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py')
+          s=p.read_text()
+          old="if p.name=='FACHWORKFLOW_PASS.json' or p.name.endswith('_FACHWORKFLOW_PASS.json'):passes.append(load(p))"
+          new="if p.name=='FACHWORKFLOW_PASS.json' or p.name.startswith('FACHWORKFLOW_PASS_') or p.name.endswith('_FACHWORKFLOW_PASS.json'):passes.append(load(p))"
+          if old in s: s=s.replace(old,new,1)
+          elif new not in s: raise SystemExit('TARGET_MISSING')
+          p.write_text(s)
+          PY
+      - name: Full repair selftest twice
+        run: |
+          python3 control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py apply-and-test
+          python3 control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py apply-and-test
+      - name: Positive negative collector test
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py').read_text()
+          assert "p.name.startswith('FACHWORKFLOW_PASS_')" in s
+          assert "if not passes:raise Blocked('FINAL_FACHWORKFLOW_CONTEXT_NOT_RELEASED')" in s
+          print('POSITIVE_NEGATIVE_COLLECTOR_PASS')
+          PY
+      - name: Remove temporary workflow and commit persistent fix
+        run: |
+          rm -f .github/workflows/startmaster0107-final-context-release-fix.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'STARTMASTER0107: release item-specific Fachworkflow context to PSERC finalizer'
+          git push origin HEAD:startmaster0107-dual-rootfix-fachpass-clean-20260902
