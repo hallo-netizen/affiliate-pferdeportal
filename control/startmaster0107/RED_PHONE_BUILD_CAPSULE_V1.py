@@ -7,13 +7,19 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
+BATCH_SHA256 = "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a"
+FINAL_FILENAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
 
 CAPSULE = {
     "contract": "PFERDE_ATELIER_RED_PHONE_BUILD_CAPSULE_V1",
     "purpose": "Build exactly one sustainable direct signer call after 107008 PASS without changing article/content/quality/workflow architecture.",
     "authority": "EXECUTE_ONLY_THIS_CAPSULE_NO_FREE_NAVIGATION",
+    "bound_branch": "red-phone-build-capsule-20260902",
+    "bound_batch_sha256": BATCH_SHA256,
     "target": {
-        "flow": "107008_PASS -> SIGN(hash) -> verify returned signature with existing production public key -> existing finalizer -> GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+        "flow": "107008_PASS -> SIGN(hash) -> verify returned signature with existing production public key -> existing finalizer -> " + FINAL_FILENAME,
+        "final_filename": FINAL_FILENAME,
+        "package_contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
         "signing_key_policy": "KEEP_EXISTING_PRODUCTION_KEY_ID_AND_PUBLIC_KEY",
         "publish_allowed": False,
         "plugin_change_allowed": False,
@@ -28,6 +34,7 @@ CAPSULE = {
         "existing_core_files_modified_max": 1,
         "fallback_routes_allowed": 0,
         "signer_discovery_scans_allowed": 0,
+        "repo_search_loops_allowed": 0,
         "queues_allowed": False,
         "mailboxes_allowed": False,
         "database_allowed": False,
@@ -36,6 +43,7 @@ CAPSULE = {
         "key_rotation_allowed": False,
         "plugin_rebuild_allowed": False,
         "repeat_passed_gate_allowed": False,
+        "external_design_review_required": False,
     },
     "preferred_files": {
         "runtime": "control/startmaster0107/PSERC_RED_PHONE.py",
@@ -74,9 +82,10 @@ CAPSULE = {
         {
             "id": 3,
             "name": "END_TO_END",
-            "instruction": "Run the real finalization path from the existing 107008-approved batch through the direct line to the exact FINAL.json. Then verify repository diff and publish=false.",
+            "instruction": "Run the real finalization path for the bound batch through the direct line to the exact FINAL.json. Then verify repository diff and publish=false.",
             "pass": [
-                "exact target filename exists",
+                "bound batch is exactly " + BATCH_SHA256,
+                "exact target filename is " + FINAL_FILENAME,
                 "package contract is PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
                 "signature validates with existing production public key",
                 "7 existing articles are preserved byte-identically",
