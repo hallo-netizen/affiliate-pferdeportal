@@ -212,11 +212,27 @@ def context_from_release(repo:Path,receipt_ref:str)->dict:
     bundle={'contract':'canonical_fact_pack_import_v1','created_at':meta['created_at_utc'],'fact_packs':[x['fact_pack'] for x in passes]}
     return {'source':'STARTMASTER0107_107008_RELEASE_FINALIZER','fact_pack_bundle':bundle,'production_plan':plan,'workflow_release_metadata':meta,'workflow_release_items':[x['workflow_release_item'] for x in passes]}
 
+def resolve_signer_cmd()->str:
+    direct=os.environ.get('PSERC_SIGNER_CMD','').strip()
+    if direct:return direct
+    found=[]
+    for k,v in os.environ.items():
+        value=str(v or '').strip()
+        if k!='PSERC_SIGNER_CMD' and k.endswith('_SIGNER_CMD') and value:
+            found.append(value)
+    unique=[]
+    for value in found:
+        if value not in unique:unique.append(value)
+    if len(unique)==1:
+        os.environ['PSERC_SIGNER_CMD']=unique[0]
+        return unique[0]
+    if len(unique)>1:raise Blocked('HOST_SIDE_WORKFLOW_SUPERVISOR_SIGNER_ACCESS_AMBIGUOUS')
+    raise Blocked('HOST_SIDE_WORKFLOW_SUPERVISOR_SIGNER_ACCESS_MISSING')
+
 def finalize_after_107008(repo:Path,receipt_ref:str)->dict:
     repo=Path(repo).resolve();r=load(safe(repo,receipt_ref));batch=str(r.get('batch_sha256') or '');outdir=repo/'.pferde-release'/batch;outdir.mkdir(parents=True,exist_ok=True);status=outdir/'PSERC_FINALIZATION_STATUS.json'
     try:
-        ctx=context_from_release(repo,receipt_ref);cmd=os.environ.get('PSERC_SIGNER_CMD','').strip()
-        if not cmd:raise Blocked('HOST_SIDE_WORKFLOW_SUPERVISOR_SIGNER_ACCESS_MISSING')
+        ctx=context_from_release(repo,receipt_ref);cmd=resolve_signer_cmd()
         pkg=build_package(ctx,lambda h:call_signer(h,cmd,PROD_KEY_ID,PROD_KEY_SHA),PROD_KEY_ID,PROD_KEY_SHA,PROD_PUBLIC_B64,True)
         out=outdir/'GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json';dump(out,pkg);verify_package(repo,out)
         gate=module(repo/'control/startmaster0107/production-package-release/production_package_release_gate.py','dual_release_gate');gate.validate_package(out,repo,True)
@@ -337,7 +353,7 @@ def main(a:list[str])->int:
         if a==['apply']:o=apply(REPO)
         elif a==['selftest']:o=selftest(REPO)
         elif a==['apply-and-test']:apply(REPO);o=selftest(REPO)
-        elif a==['finalize'] and len(a)==2:o=finalize_after_107008(REPO,a[1])
+        elif len(a)==2 and a[0]=='finalize':o=finalize_after_107008(REPO,a[1])
         else:raise Blocked('USAGE: apply | selftest | apply-and-test | finalize RECEIPT_REF')
         print(json.dumps(o,ensure_ascii=False,indent=2));return 0 if o.get('ok',True) else 2
     except Exception as e:print(json.dumps({'ok':False,'status':'DUAL_ROOTFIX_BLOCKED','reason':str(e),'publish_allowed':False},ensure_ascii=False,indent=2));return 2
