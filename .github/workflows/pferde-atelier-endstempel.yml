@@ -146,18 +146,15 @@ jobs:
         shell: bash
         env:
           FINAL_REF: ${{ steps.stamp.outputs.final_ref }}
-          KEY_ID: ${{ env.ENDSTEMPEL_TRUSTED_KEY_ID }}
-          PUBLIC_SHA: ${{ env.ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256 }}
-          PUBLIC_B64: ${{ env.ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64 }}
         run: |
           set -euo pipefail
           cat > /tmp/wp-preimport.php <<'PHP'
           <?php
           require $argv[1];
           $trusted = [
-              getenv('KEY_ID') => [
-                  'sha256' => getenv('PUBLIC_SHA'),
-                  'public_key_b64' => getenv('PUBLIC_B64'),
+              getenv('ENDSTEMPEL_TRUSTED_KEY_ID') => [
+                  'sha256' => getenv('ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256'),
+                  'public_key_b64' => getenv('ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64'),
               ],
           ];
           $r = pferde_endstempel_verify_before_write($argv[2], $trusted, fn($batch) => false);
