@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 7,
+  "generation": 8,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -56,7 +56,7 @@
     "current_ds24_expected_vendors": 10,
     "automatic_ds24_discovery": "OUT_OF_SCOPE_AND_NON_BLOCKING",
     "current_local_evidence_ref": "release/affiliate-zentrale/evidence/manual_single_upload_multi_provider_import_20260902.txt",
-    "current_local_evidence_sha256": "15a797c26dd01897d55992cfc825d0310b58559ff1e52260170d9be79d1fa5ff",
+    "current_local_evidence_sha256": "d6b056cef897e607b16e7858e4c2a4ce73722486406ed6d3dff31a68f8fe7341",
     "forbidden_reasks": [
       "PARTNER_LIST",
       "SAME_DS24_CSV",
@@ -72,7 +72,9 @@
       "AFF_ERR_015_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT",
       "AFF_ERR_016_WHERE_IT_BLOCKS_CANONICAL_DIRECT_TREE_WORK"
     ],
-    "change_requires": "NEW_EXPLICIT_USER_DECISION"
+    "change_requires": "NEW_EXPLICIT_USER_DECISION",
+    "error_register_current_scope_amendment_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER_CURRENT_SCOPE_AMENDMENT_20260902.md",
+    "error_register_current_scope_amendment_sha256": "9da02fb33cb043dfa120bd04562d52d50f794e7af06951620e7c86e62b491536"
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
@@ -147,7 +149,7 @@
     "manual_single_upload_multi_provider_import": {
       "status": "LOCAL_PASS_LIVE_PENDING",
       "evidence_ref": "release/affiliate-zentrale/evidence/manual_single_upload_multi_provider_import_20260902.txt",
-      "evidence_sha256": "15a797c26dd01897d55992cfc825d0310b58559ff1e52260170d9be79d1fa5ff",
+      "evidence_sha256": "d6b056cef897e607b16e7858e4c2a4ce73722486406ed6d3dff31a68f8fe7341",
       "source_manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5"
     },
     "explicit_scope_product_deals_partner_analytics": {
