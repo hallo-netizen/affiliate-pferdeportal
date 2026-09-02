@@ -1,0 +1,3 @@
+TEMPORARY READ-ONLY CODEX PR TRIGGER TEST
+No production or workflow authority.
+Do not merge.
