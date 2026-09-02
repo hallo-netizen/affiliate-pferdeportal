@@ -100,12 +100,12 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 **Symptom/Root Cause:** jede DS24-Quelle müsste einzeln mit Produkt-ID/Promolink/Werbemittelseite gepflegt werden.
 
-**Nicht wiederholen:** Bulk-Synchronisation/-Import bestätigter Partnerschaften; Einzelpflege höchstens Fallback.
+**Nicht wiederholen:** Ziel bleibt eine automatische Bulk-Synchronisation der real genehmigten Partnerschaften. Einzelpflege ist höchstens Notfall-Fallback. Ein CSV-/Dateiimport darf nicht als Runtime-Autorität an die Stelle der automatischen Partnerschafts-Discovery treten.
 
-**POSITIV:** mehrere bestätigte Partner in einem Lauf.
-**NEGATIV:** nicht genehmigte/fremde/ungültige Datensätze werden nicht freigegeben.
+**POSITIV:** mehrere bestätigte Partner werden automatisch in einem Lauf aus einer unterstützten read-only Affiliate-seitigen Quelle gewonnen.
+**NEGATIV:** nicht genehmigte/fremde/ungültige Datensätze werden nicht freigegeben; Testoracle-Dateien erzeugen keine Runtime-Autorität.
 
-**Status:** FIXED_LOCAL für den ausdrücklich autorisierten manuellen Ein-Feld-Bulkimport; automatische Discovery bleibt separat durch AFF-ERR-012 offen.
+**Status:** OPEN — automatische Bulk-Discovery weiterhin ungelöst; frühere manuelle Runtime-Lösung durch AFF-ERR-015 ausdrücklich verworfen.
 
 ## AFF-ERR-009 — Bannerformat oder Position hart im Providercode verdrahtet
 
@@ -140,7 +140,7 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** fehlende Providerdaten bleiben `nicht verfügbar`, niemals geschätzt.
 **Regression:** Provideradapter, Ausspielung, Tracking unverändert.
 
-**Evidence:** `release/affiliate-zentrale/evidence/current_scope_manual_import_partner_visibility_20260902.txt`.
+**Evidence:** `release/affiliate-zentrale/evidence/current_scope_manual_import_partner_visibility_20260902.txt` — ausschließlich der darin enthaltene Analytics-/KISS-Nachweis bleibt verwendbar; der manuelle Runtime-Importteil ist durch AFF-ERR-015 verworfen.
 
 **Status:** FIXED_LOCAL / WordPress-Liveprüfung noch offen.
 
@@ -150,34 +150,29 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 **Root Cause:** `listMarketplaceEntries` ist keine eigene Affiliate-Partnerschaftsinventur; `getAffiliateCommission(all)` wurde fälschlich als fremde Vendor-Inventur interpretiert; `validateAffiliate` kann nur bereits bekannte Produkt-IDs verifizieren.
 
-**Gescheiterte Wege:** Marketplace als Vollinventur; synthetisches `getAffiliateCommission(all)`-Fixture; 53213 als Remote-Discovery-Erfolg.
+**Gescheiterte Wege:** Marketplace als Vollinventur; synthetisches `getAffiliateCommission(all)`-Fixture; 53213 als Remote-Discovery-Erfolg; CSV-/Dateiimport als Ersatz für die automatische Discovery.
 
-**Nicht wiederholen:** diese drei Wege nicht als autoritative automatische Discovery verwenden. Der vom Nutzer ausdrücklich autorisierte manuelle CSV-Bulkimport ist ein separater Betriebsweg und darf niemals als Remote-Discovery-PASS ausgegeben werden.
+**Nicht wiederholen:** `listMarketplaceEntries`, `getAffiliateCommission(all)` und `validateAffiliate` nicht ohne neuen realen Gegenbeweis als autoritative automatische Discovery verwenden. CSV/Kontrollliste bleibt ausschließlich Testoracle und darf niemals Runtime-Autorität oder Runtime-Partnerschaftsbestand erzeugen.
 
 **POSITIV automatische Discovery:** unterstützter read-only Affiliate-seitiger Kanal liefert ohne CSV/ID-Vorfütterung alle 18.
-**POSITIV manueller Weg:** aktueller DS24-Partnerschaftsexport übernimmt vollständig, identitätsgebunden und reproduzierbar alle genehmigten Datensätze.
-**NEGATIV:** 17/18 als Auto-Discovery, 53213-only, Marketplace-only, transaktions-only, falsche Identität, malformed/duplicate oder synthetische Antwort => fail closed; Importfehler => keine Publikationsmutation, LKG bleibt.
-**Gesamtworkflow:** gültiger Eingang → Metadaten → Creative/Banner → Bild/Tracking → Targets/Slots → Draft → Revalidation → Persistenz → LKG → Readback → Reassignment; Partnerfehler isolieren; eBay/idealo/Awin regressionsprüfen.
+**NEGATIV:** 17/18 als Auto-Discovery, 53213-only, Marketplace-only, transaktions-only, falsche Identität, malformed/duplicate, synthetische Antwort oder testoracle-basierter Runtimebestand => fail closed.
+**Gesamtworkflow:** gültiger automatischer Eingang → Metadaten → Creative/Banner → Bild/Tracking → Targets/Slots → Draft → Revalidation → Persistenz → LKG → Readback → Reassignment; Partnerfehler isolieren; eBay/idealo/Awin regressionsprüfen.
 
-**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md`; `protocol/AFFILIATE_RELEASE_MANUAL_IMPORT_CONTRACT_20260902.md`; `release/affiliate-zentrale/evidence/manual_import_authority_hardening_20260902.txt`.
+**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md` sowie reale 18er-Kontrollliste ausschließlich als Oracle.
 
-**Status:** OPEN für automatische Discovery; manueller Bulkimport ausdrücklich zulässig.
+**Status:** OPEN — automatische Discovery ist weiterhin der eigentliche Root-Blocker.
 
-## AFF-ERR-013 — Manueller Bestandsimport akzeptiert unvollständige oder widersprüchliche Autorität
+## AFF-ERR-013 — Manueller Bestandsimport akzeptierte unvollständige oder widersprüchliche Autorität
 
 **Symptom:** doppelte Produkt-ID konnte still überschrieben werden; GZIP >32 MiB konnte abgeschnitten als scheinbar vollständig behandelt werden.
 
 **Root Cause:** Last-Write-Wins bei Produkt-ID und Sample-Reader als Vollreader ohne Overflow-Nachweis.
 
-**Nicht wiederholen:** autoritative Bestandsdatei vor Mutation auf eindeutige Produkt-IDs und vollständigen GZIP-Inhalt prüfen; Parserfehler => null Mutation.
+**Nicht wiederholen:** Falls künftig ausdrücklich ein nicht-autoritativer Diagnose-/Testimport genutzt wird, muss er fail-closed bleiben. Er darf jedoch unabhängig von seiner technischen Härte niemals Runtime-Autorität für DS24-Partnerschaften erhalten.
 
-**POSITIV:** reale Kontrollstruktur 18 Partnerschaften / 10 Werbemittelquellen / 10 Vendoren; CSV/GZIP innerhalb Limit vollständig.
-**NEGATIV:** doppelte Produkt-ID, >32-MiB-GZIP, pending/rejected/ungültige IDs fail closed.
-**Regression:** Ein-Feld-Erkennung DS24/idealo/Awin/ADCELL/eBay, Identitätsbindung, Reimport, Preserve-Guard, LKG und Provider-/Outputgrenze.
+**Evidence:** `release/affiliate-zentrale/evidence/manual_import_authority_hardening_20260902.txt` — technische Tests historisch vorhanden, aber keine Runtime-Autorisierung.
 
-**Evidence:** `release/affiliate-zentrale/evidence/manual_import_authority_hardening_20260902.txt` — 35/35 fokussierte Checks, 3/3 PHP-Lints, 7/7 reale Multipart-HTTP-Routen.
-
-**Status:** FIXED_LOCAL / WordPress-Liveimport noch offen.
+**Status:** SUPERSEDED_BY_AFF-ERR-015 — kein Runtime-Betriebsweg.
 
 ## AFF-ERR-014 — KISS-Navigation wiederholt bereits live gescheiterten `remove_submenu_page()`-Weg
 
@@ -189,25 +184,63 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 **Gescheiterter Weg:** funktionale Zielseiten mit `remove_submenu_page()` aus der Menüstruktur entfernen und sie anschließend weiterhin über KISS-Buttons direkt ansteuern.
 
-**Betroffene Bereiche:** ausschließlich KISS-Navigation/Backend-Erreichbarkeit. Providerlogik, Importer, Analytics, DS24, eBay, idealo, Awin, Output/LKG bleiben unverändert.
+**Betroffene Bereiche:** ausschließlich KISS-Navigation/Backend-Erreichbarkeit. Providerlogik, Analytics, DS24, eBay, idealo, Awin, Output/LKG bleiben unverändert.
 
 **Nicht wiederholen:** Legacy-/Providerseiten vollständig registriert und erreichbar lassen. Optische Reduktion ausschließlich über Darstellung/CSS; niemals funktionale Registrierung/Berechtigungsroute entfernen.
 
 **POSITIV:** fünf KISS-Einstiege werden registriert; alle KISS-Button-Zielslugs bleiben durch ihre ursprünglichen Registrierungen erreichbar.
 **NEGATIV:** kein `remove_submenu_page()` im KISS-Code; keine Page-Hook-Lücke.
-**Regression:** Ein-Feld-Upload und direkte Partner-Analytics bleiben; Provider-/Outputbytes unverändert.
+**Regression:** direkte Partner-Analytics bleibt; Provider-/Outputbytes unverändert.
 
 **Evidence:** historisches Liveprotokoll `AFFILIATE_ZENTRALE_GESAMTPROTOKOLL_ZIELVERTRAG_FEHLER_STATUS_2026-09-01.md`, Abschnitte 6.64.0/6.64.1; aktueller lokaler Gegenbeweis `release/affiliate-zentrale/evidence/current_scope_manual_import_partner_visibility_20260902.txt`.
 
 **Status:** FIXED_LOCAL / WordPress-Liveprüfung der Navigation noch offen.
 
+## AFF-ERR-015 — Testoracle wurde fälschlich zum manuellen Runtime-Betriebsweg gemacht
+
+**Datum / Arbeitsschritt:** 02.09.2026 / Wiederabgleich mit verbindlicher Übergabe und Zielvertrag.
+
+**Symptom:** Nach dem Discovery-Fail wurde ein universeller Ein-Feld-Importer samt DS24-Bestandsimport und Preserve-Guard in den kanonischen Source aufgenommen und im Fehlerregister zeitweise als zulässiger manueller Betriebsweg bezeichnet.
+
+**Belegte Root Cause:** Die reale DS24-CSV/Kontrollliste wurde semantisch von ihrer einzigen erlaubten Rolle als Testoracle in eine Runtime-Autorität umgedeutet. Damit wurde der eigentliche Auftrag — automatische Partnerschafts-Discovery — umgangen statt gelöst.
+
+**Gescheiterter Weg:** `export.csv` oder vergleichbare DS24-Partnerschaftsdatei zum Aufbau/Persistieren des Runtime-Partnerschaftsbestands verwenden; universellen Upload als Ersatz für die fehlende Remote-Discovery anbieten.
+
+**Betroffene Bereiche:** `class-ppar-universal-import.php`, `class-ppar-manual-import-guard.php`, deren KISS-Einbindung sowie alle Protokoll-/Evidence-Aussagen, die den manuellen DS24-Dateiimport als Runtime-Betriebsweg autorisieren. Analytics-/KISS-Navigation selbst ist davon unabhängig.
+
+**Nicht wiederholen:** DS24-Kontrollliste/CSV ausschließlich lesen, vergleichen und testen. Sie darf weder Partnerbestand noch Marketplace-Cache noch Creative-/Output-Pipeline autorisieren oder persistieren. Keine Ersatzarchitektur für eine fehlende automatische Discovery.
+
+**POSITIV:** Source besitzt keinen DS24-Dateiweg, der Runtime-Partnerschaftsautorität aus der Kontrollliste erzeugt; automatische Discovery bleibt fail-closed offen, bis ein realer unterstützter Kanal belegt ist.
+**NEGATIV:** Hochladen/Einlesen einer Kontroll-CSV kann keinen DS24-Runtimebestand erzeugen; fehlende automatische Discovery bleibt sichtbar FAIL und wird nicht durch Dateiimport kaschiert.
+**Regression:** KISS-Navigation, Partner-&-Einnahmen, eBay, idealo, Awin, bestehende DS24-Validation-/Banner-/Output-/LKG-Kette bleiben unverändert.
+
+**Status:** OPEN — zuerst den unautorisierten Runtime-Dateiweg aus dem kanonischen Source entfernen und danach Source-/Manifest-/Regression erneut prüfen.
+
+## AFF-ERR-016 — Kanonischer Repository-Source ist nicht der belegte Live-6.71-Source
+
+**Datum / Arbeitsschritt:** 02.09.2026 / Livekandidaten-Vorprüfung.
+
+**Symptom:** Der belegte aktuelle WordPress-Livekandidat ist `6.71.0` mit SHA-256 `f6e74cc06be8f5c450f4f7647aef8f419257e483d0be473bb2879cd81c5e71a9`. Das aktuelle Repository-Governanceobjekt führt dagegen weiterhin Kandidat `6.64.0`, während der kanonische Haupt-PHP-Header sogar noch `6.63.8` trägt. Die tatsächliche 6.71-ZIP ist weder im kanonischen GitHub-Source noch aktuell als zugreifbare Uploaddatei verfügbar.
+
+**Root Cause:** Live-Weiterentwicklung 6.65–6.71 wurde nicht bytegenau zurück in die einzige Release-Autorität `release/affiliate-zentrale/current/affiliate-portal-router` gebunden. Dadurch kann der Repository-Source derzeit nicht als sichere Basis für ein Plugin dienen, das die live installierte 6.71 ersetzt.
+
+**Gescheiterter Weg:** aus dem älteren kanonischen 6.64/6.63.8-Source einen neuen Installer bauen oder ihn als Fortsetzung von 6.71 behandeln. Das wäre ein nicht belegter Rückbau/Rekonstruktionspfad und verstößt gegen `no_reconstruction`.
+
+**Nicht wiederholen:** Kein Pluginbuild, keine Versionsanhebung, kein Installationskandidat und kein Live-Replace, bevor die exakte 6.71-Quellbasis bytegenau verfügbar und in die Governance als direkte Source-Autorität gebunden ist. Keine Rekonstruktion aus Protokollen, Diffs oder älteren ZIPs.
+
+**POSITIV:** exakte 6.71-ZIP/Source mit erwartetem SHA-256 wird direkt eingelesen; daraus gewonnener Source wird byteidentisch gebunden, bevor irgendein neuer Code darauf aufsetzt.
+**NEGATIV:** fehlende/falsche ZIP, anderer SHA, rekonstruiertes 6.71 oder älterer Source => Build/Live-Replace fail closed.
+**Regression:** Nach Source-Bind erst vollständiger Positiv-/Negativ-/Gesamtworkflowtest; kein Provider-/LKG-/KISS-/Analytics-Rückbau.
+
+**Status:** OPEN / HARD BLOCK für jeden neuen Installer oder Live-Replace.
+
 ---
 
 # Aktueller PRECHECK
 
-Kein aktuell belegter offener **lokaler** Fehler im expliziten Ein-Feld-Import-/KISS-Abschlussblock. `AFF-ERR-012` bleibt ausschließlich für automatische DS24-Discovery offen und blockiert den ausdrücklich autorisierten manuellen CSV-Bulkimport nicht.
+Aktueller erster korrigierbarer Repository-Fehler: `AFF-ERR-015`.
 
-Gebundener nächster Schritt:
-`CURRENT SOURCE LIVE-CANDIDATE → WordPress-Dashboard → Affiliate-Zentrale → Anbieter & APIs → eine Datei hochladen → DS24 18/10/10 Readback + KISS-Zielseiten-Erreichbarkeit + Partner-&-Einnahmen-Sicht prüfen`.
+Gebundener nächster Zyklus:
+`AFF-ERR-015 → unautorisierten DS24-Datei-Runtimeweg aus kanonischem Source entfernen → Source/Manifest/Regression prüfen → automatische Discovery ausschließlich read-only weiter untersuchen`.
 
-Erst echte WordPress-Evidence darf LIVE_PASS auslösen. Kein weiterer Sourcefix ohne neuen belegten Fehler.
+`AFF-ERR-016` bleibt danach HARD BLOCK für jeden neuen Installer oder Live-Replace, bis die exakte Live-6.71-Quellbasis vorliegt. Die 18er-CSV bleibt ausschließlich Testoracle. Keine Release-/Live-Abnahme aus lokalen Einzeltests.
