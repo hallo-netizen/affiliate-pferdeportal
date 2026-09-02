@@ -1,0 +1,118 @@
+AFFILIATE-ZENTRALE — CSV ORACLE-ONLY ROOTFIX + DS24 PUBLIC API EXHAUSTION
+Date: 2026-09-02
+Branch: affiliate-release-current
+Status: AFF-ERR-015 FIXED_LOCAL / AFF-ERR-012 OPEN / AFF-ERR-016 HARD BLOCK
+
+ERROR-REGISTER PRECHECK
+Relevant: AFF-ERR-001, 004, 006, 008, 011, 012, 013, 014, 015, 016. Downstream LKG/slot/re-entrant rules AFF-ERR-002, 003, 005, 009, 010 remain unchanged.
+Known forbidden routes: CSV as runtime authority; Marketplace as partnership inventory; synthetic getAffiliateCommission(all) success; validateAffiliate as discovery; build from older canonical source as if it were live 6.71.
+
+AFF-ERR-015 ROOTFIX — CURRENT REPOSITORY FACTS
+Base before correction: 66bfd0752705f77ecd261be0c5322fdfd5aa1b73
+Corrected branch head after source/governance/protocol correction: 14a9eb542e21237addc89ddb926bd24a85650292
+
+Git compare base..head contains exactly these seven paths:
+- control/release-governance/CURRENT_RELEASE.json
+- protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md
+- protocol/AFFILIATE_RELEASE_MANUAL_IMPORT_CONTRACT_20260902.md
+- release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt
+- release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-admin-kiss.php
+- release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-manual-import-guard.php (removed)
+- release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-universal-import.php (removed)
+No provider trait, output/LKG core, analytics implementation, eBay, idealo or Awin source changed in this rootfix.
+
+Current source checks:
+- class-ppar-universal-import.php: NOT PRESENT (GitHub contents 404)
+- class-ppar-manual-import-guard.php: NOT PRESENT (GitHub contents 404)
+- class-ppar-admin-kiss.php: no require/bootstrap/render call for either manual importer; provider screen no upload form.
+- KISS keeps five visible add_submenu_page entries.
+- KISS keeps legacy functional pages registered and hides them visually via admin CSS; no destructive remove_submenu_page path.
+- Partner & Einnahmen still delegates directly to PPAR_Partner_Analytics_Admin::render_page().
+- Exact KISS content was PHP-linted before commit: PASS.
+
+Current source manifest:
+- 25 rows
+- no manual-import files
+- admin KISS SHA-256 c5a3a4b73fec0732b23504e8b6bdfdf66bd946f4567aaf99158224476b563ab1
+- manifest SHA-256 866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7
+
+Current governance:
+- source authority DIRECT_COMMITTED_TREE
+- reconstruction FORBIDDEN
+- source file count 25
+- source/current manifest SHA-256 866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7
+- active candidate remains WORKING / release_allowed=false
+- current milestone DS24_AUTOMATIC_PARTNERSHIP_DISCOVERY_AND_EXACT_LIVE_SOURCE_BIND
+
+POSITIV AFF-ERR-015
+PASS: current canonical source has no DS24 file path capable of turning the control CSV into runtime partnership authority.
+PASS: automatic discovery remains visibly unresolved instead of being masked by file import.
+
+NEGATIV AFF-ERR-015
+PASS: the two runtime file-authority classes are physically absent from current source and absent from the manifest.
+PASS: KISS provider page no longer exposes the runtime upload field.
+
+REGRESSION AFF-ERR-015
+PASS by exact Git compare boundary: no provider trait or output/LKG/analytics implementation was modified by the removal. KISS non-destructive navigation and direct Partner Analytics delegation remain in current source.
+No live/release PASS claimed.
+
+PUBLIC DIGISTORE24 SUPPORTED-API EXHAUSTION — 2026-09-02
+Official current Digistore24 OpenAPI/Swagger reference: https://www.digistore24.com/api/docs/index.html
+The public Affiliates section exposes these relationship operations:
+- getAffiliateCommission
+- getCustomerToAffiliateBuyerDetails
+- getReferringAffiliate
+- getAffiliateForEmail
+- setAffiliateForEmail
+- setReferringAffiliate
+- updateAffiliateCommission
+- validateAffiliate
+There is no listAffiliations/listAffiliatePartnerships/current-affiliate-partnership-inventory endpoint in the current public reference.
+
+Cross-check against the current 122-endpoint typed client GoSuccessHQ/digistore24-api also reports complete Affiliate Management coverage with only the same affiliate-management family plus statsAffiliateToplist; no partnership-inventory list endpoint.
+
+Endpoint semantics checked:
+1) getAffiliateCommission
+   - requires an affiliate ID; productIds is optional and may be comma-separated IDs or "all".
+   - response contains affiliation rows per product with productId and approvalStatus.
+   - This is commission/affiliation management for a specified affiliate against products in the API account context. Historical live evidence already showed that treating "all" as the user's affiliate-side foreign-vendor inventory did not yield the required inventory. Therefore it remains non-authoritative for discovery without new REAL counter-evidence.
+
+2) validateAffiliate
+   - requires affiliateName AND productIds.
+   - It can verify known products, but cannot discover unknown partnership product IDs.
+
+3) listMarketplaceEntries
+   - returns marketplace entries, not the account's accepted-affiliation inventory.
+   - Digistore24 Help Center explicitly describes marketplace entries as products vendors chose to publish on the marketplace and a place where affiliates request partnerships. Existing partnerships can exist independently of current marketplace publication. Therefore marketplace cannot be authoritative current partnership inventory.
+
+4) listProducts
+   - documentation says "Lists all products in your Digistore24 account".
+   - It is account/vendor product inventory, not affiliate-side products of foreign vendors.
+
+5) IPN on_affiliation
+   - official IPN documentation describes the event when an affiliate wants to promote YOUR product and the affiliation is accepted.
+   - It is a vendor-side future event stream, not a proven read-only backfill of the user's current affiliate-side vendor partnerships.
+
+REAL UI FACT
+Digistore24 Help Center states that Affiliate view -> Verkäufe & Partner -> Partnerschaften mit Vendoren shows the unfiltered list of all partnerships, including vendor, product/language, status, commission and advertising-media link. The real account screenshot established 18 results. The unauthenticated route https://www.digistore24-app.com/affiliate/account/affiliations redirects to Digistore24 login. No supported public API equivalent for that table was found in the current public API reference.
+
+DISCOVERY CONCLUSION
+SUPPORTED_PUBLIC_API_DISCOVERY_GATE = FAIL_CLOSED.
+The current public API surface does not expose a documented read-only endpoint that can enumerate the affiliate-side current partnership inventory without prefeeding product IDs. Do not implement another guessed API route.
+
+NEXT ROOT EVIDENCE NEEDED
+The only remaining evidence path for the web-app table is to identify the authenticated request that supplies the real 18-row Partner-with-Vendors page (or its CSV-export request) and classify it:
+- if it is a documented/supported API-key-accessible endpoint: candidate for real automatic discovery, then test against the 18-row oracle;
+- if it is only session-cookie/private backoffice transport: not acceptable as a WordPress server runtime source without explicit Digistore24 support/stability authorization.
+No cookies, session tokens or credentials are required as evidence; only request URL/path, method and response shape with secrets redacted.
+
+AFF-ERR-016 remains independent HARD BLOCK:
+No installer/live replacement may be built from current canonical 6.64/6.63.8 source as if it were live 6.71. Exact live 6.71 source/ZIP expected SHA-256 f6e74cc06be8f5c450f4f7647aef8f419257e483d0be473bb2879cd81c5e71a9 must be directly available and byte-bound before any new live code can be based on it.
+
+ERROR-REGISTER POSTCHECK
+New error: no new error beyond registered AFF-ERR-015/AFF-ERR-016.
+Known forbidden route repeated: no.
+AFF-ERR-015: FIXED_LOCAL.
+AFF-ERR-012: OPEN / supported public API exhausted.
+AFF-ERR-016: OPEN / HARD BLOCK for build/live replace.
+Release/live PASS: no.
