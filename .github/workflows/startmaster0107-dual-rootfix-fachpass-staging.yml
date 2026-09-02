@@ -22,11 +22,19 @@ jobs:
           from pathlib import Path
           p = Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py')
           s = p.read_text(encoding='utf-8')
+
           old = "b=binding_descriptor(repo);root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS.json'"
           new = "b=binding_descriptor(repo);root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'"
           if s.count(old) != 1:
               raise SystemExit('FACH_PASS_REPAIR_SCRIPT_TARGET_NOT_EXACTLY_ONCE')
           s = s.replace(old, new, 1)
+
+          old2 = "        return {','ENTRY_FINALIZER')"
+          new2 = "        finalizer.clear_prepared_binding(REPO, binding[\"batch_sha256\"])\\\n        return {','ENTRY_FINALIZER')"
+          if s.count(old2) != 1:
+              raise SystemExit('ENTRY_FINALIZER_IDEMPOTENCY_TARGET_NOT_EXACTLY_ONCE')
+          s = s.replace(old2, new2, 1)
+
           p.write_text(s, encoding='utf-8')
           PY
 
