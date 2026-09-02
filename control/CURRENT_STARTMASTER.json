@@ -5,7 +5,7 @@
   "state_ref": "control/startmaster0107/CURRENT_STATE.json",
   "gate_ref": "control/single-door-boundary/project_single_door_entry_v2.py",
   "execution_entrance_gate_ref": "control/output-quarantine/runtime_entry_gate.py",
-  "execution_entrance_gate_sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894",
+  "execution_entrance_gate_sha256": "4f76ce26396e3edd2a6397d247b00c0b35907e6a4f7a132fb68a6f8118a68da6",
   "visible_output_policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
   "visible_output_policy_sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f",
   "visible_output_authority": "RELEASE_RECEIPT_ONLY",

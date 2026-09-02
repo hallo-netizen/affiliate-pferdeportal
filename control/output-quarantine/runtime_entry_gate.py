@@ -300,6 +300,10 @@ def complete(receipt_path: Path) -> dict:
         }
         dual = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_prepared_persist")
         dual.persist_prepared_binding(REPO, binding)
+        dual = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_prepared_persist")
+        dual.persist_prepared_binding(REPO, binding)
+        dual = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_prepared_persist")
+        dual.persist_prepared_binding(REPO, binding)
         write_capsule_json("FRESHNESS_PROOF.json", post_proof)
         write_capsule_json("BOUND_PREPARED_RELEASE_REF.json", binding)
         return {
