@@ -183,31 +183,31 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 **Datum / Arbeitsschritt:** 02.09.2026 / Gesamtregression vor Livekandidat.
 
-**Symptom:** aktueller `class-ppar-admin-kiss.php` ruft für die funktionalen Legacy-/Providerseiten wieder `remove_submenu_page()` auf. Der dokumentierte 6.64.0-Livefehler war genau: KISS entfernte alte Unterseiten und verlinkte danach weiter auf diese Slugs; Nutzer erhielt `Du bist leider nicht berechtigt, auf diese Seite zuzugreifen.` Der 6.64.1-Rootfix verlangte ausdrücklich: funktionale Seiten registriert lassen, nur optisch ausblenden, **kein `remove_submenu_page()` im KISS-Teil**.
+**Symptom:** KISS-Source hatte für funktionale Legacy-/Providerseiten wieder `remove_submenu_page()` verwendet. Der dokumentierte 6.64.0-Livefehler war genau: KISS entfernte alte Unterseiten und verlinkte danach weiter auf diese Slugs; WordPress zeigte `Du bist leider nicht berechtigt, auf diese Seite zuzugreifen.` Der 6.64.1-Rootfix verlangte: funktionale Seiten registriert lassen, nur optisch ausblenden, kein `remove_submenu_page()` im KISS-Teil.
 
-**Root Cause:** ein bereits live widerlegter Navigationsweg wurde beim späteren KISS-Source erneut eingeführt und bei den jüngsten Importtests nicht als historische Regression gegengeprüft.
+**Root Cause:** ein bereits live widerlegter Navigationsweg wurde beim späteren KISS-Source erneut eingeführt und bei den Importtests zunächst nicht gegen die historische Regression geprüft.
 
-**Gescheiterter Weg:** funktionale Zielseiten mit `remove_submenu_page()` aus der WordPress-Menüstruktur entfernen und sie anschließend weiterhin über KISS-Buttons direkt ansteuern.
+**Gescheiterter Weg:** funktionale Zielseiten mit `remove_submenu_page()` aus der Menüstruktur entfernen und sie anschließend weiterhin über KISS-Buttons direkt ansteuern.
 
-**Betroffene Bereiche:** ausschließlich KISS-Navigation/Backend-Erreichbarkeit. Providerlogik, Importer, Analytics, DS24, eBay, idealo, Awin, Output/LKG dürfen nicht geändert werden.
+**Betroffene Bereiche:** ausschließlich KISS-Navigation/Backend-Erreichbarkeit. Providerlogik, Importer, Analytics, DS24, eBay, idealo, Awin, Output/LKG bleiben unverändert.
 
-**Nicht wiederholen:** Legacy-/Providerseiten bleiben vollständig registriert und erreichbar. Falls sie in der linken Navigation optisch reduziert werden sollen, ausschließlich Darstellung/CSS auf bereits registrierten Menüpunkten ändern; niemals die funktionale Registrierung/WordPress-Berechtigungsroute entfernen.
+**Nicht wiederholen:** Legacy-/Providerseiten vollständig registriert und erreichbar lassen. Optische Reduktion ausschließlich über Darstellung/CSS; niemals funktionale Registrierung/Berechtigungsroute entfernen.
 
-**POSITIV:** jeder KISS-Button-Zielslug bleibt nach KISS-Menüaufbau registriert/erreichbar; insbesondere Netzwerke, Sync, Awin, ADCELL, eBay, idealo, Digistore24, Outputs, Assignments, Preview, Control, Automation, Health und Deals.
-**NEGATIV:** kein `remove_submenu_page()` für funktionale Zielseiten im KISS-Code; keine Berechtigungs-/Page-Hook-Lücke.
-**Regression:** sichtbare fünf KISS-Einstiege bleiben; Ein-Feld-Upload und direkte Partner-Analytics bleiben; Provider-/Outputbytes unverändert.
+**POSITIV:** fünf KISS-Einstiege werden registriert; alle KISS-Button-Zielslugs bleiben durch ihre ursprünglichen Registrierungen erreichbar.
+**NEGATIV:** kein `remove_submenu_page()` im KISS-Code; keine Page-Hook-Lücke.
+**Regression:** Ein-Feld-Upload und direkte Partner-Analytics bleiben; Provider-/Outputbytes unverändert.
 
-**Evidence vor Fix:** historisches Liveprotokoll `AFFILIATE_ZENTRALE_GESAMTPROTOKOLL_ZIELVERTRAG_FEHLER_STATUS_2026-09-01.md`, Abschnitt 6.64.0/6.64.1; aktueller Source enthält den widerlegten Aufruf erneut.
+**Evidence:** historisches Liveprotokoll `AFFILIATE_ZENTRALE_GESAMTPROTOKOLL_ZIELVERTRAG_FEHLER_STATUS_2026-09-01.md`, Abschnitte 6.64.0/6.64.1; aktueller lokaler Gegenbeweis `release/affiliate-zentrale/evidence/current_scope_manual_import_partner_visibility_20260902.txt`.
 
-**Status:** OPEN — aktueller erster belegter Fehler; vor weiterem Live-/Buildschritt schließen.
+**Status:** FIXED_LOCAL / WordPress-Liveprüfung der Navigation noch offen.
 
 ---
 
 # Aktueller PRECHECK
 
-Aktueller erster Fehler: `AFF-ERR-014`.
+Kein aktuell belegter offener **lokaler** Fehler im expliziten Ein-Feld-Import-/KISS-Abschlussblock. `AFF-ERR-012` bleibt ausschließlich für automatische DS24-Discovery offen und blockiert den ausdrücklich autorisierten manuellen CSV-Bulkimport nicht.
 
-Gebundener nächster Zyklus:
-`GESAMTTEST → AFF-ERR-014 Rootfix ausschließlich KISS-Navigation → GESAMTTEST`.
+Gebundener nächster Schritt:
+`CURRENT SOURCE LIVE-CANDIDATE → WordPress-Dashboard → Affiliate-Zentrale → Anbieter & APIs → eine Datei hochladen → DS24 18/10/10 Readback + KISS-Zielseiten-Erreichbarkeit + Partner-&-Einnahmen-Sicht prüfen`.
 
-Dabei bleiben `AFF-ERR-011` und `AFF-ERR-013` lokal geschlossen; `AFF-ERR-012` automatische Discovery bleibt offen, blockiert aber den ausdrücklich autorisierten manuellen Bulkimport nicht. Keine Release-/Live-Abnahme aus lokalen Einzeltests.
+Erst echte WordPress-Evidence darf LIVE_PASS auslösen. Kein weiterer Sourcefix ohne neuen belegten Fehler.
