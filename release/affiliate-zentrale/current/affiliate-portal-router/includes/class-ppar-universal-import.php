@@ -77,7 +77,19 @@ final class PPAR_Affiliate_Universal_Import {
             $size=@filesize($path); if($size!==false&&$size>self::MAX_DS24_DECOMPRESSED_BYTES) return new WP_Error('universal_import_too_large','Digistore24-Partnerschaftsdatei überschreitet 32 MiB.');
             $body=(string)@file_get_contents($path); return $body===''?new WP_Error('universal_import_empty','Datei ist leer.'):self::encoding($body);
         }
-        return self::read_text($path,$name,self::MAX_DS24_DECOMPRESSED_BYTES);
+        if(!function_exists('gzopen')) return new WP_Error('universal_import_gzip_missing','GZIP-Unterstützung fehlt auf dem Server.');
+        $h=@gzopen($path,'rb'); if(!$h) return new WP_Error('universal_import_gzip_open','GZIP-Datei konnte nicht geöffnet werden.');
+        $body=''; $hard=self::MAX_DS24_DECOMPRESSED_BYTES;
+        while(!gzeof($h)&&strlen($body)<=$hard){
+            $remaining=($hard+1)-strlen($body);
+            $chunk=gzread($h,min(262144,$remaining));
+            if($chunk===false){gzclose($h);return new WP_Error('universal_import_gzip_read','GZIP-Datei konnte nicht gelesen werden.');}
+            $body.=$chunk;
+        }
+        gzclose($h);
+        if(strlen($body)>$hard) return new WP_Error('universal_import_too_large','Digistore24-Partnerschaftsdatei überschreitet dekomprimiert 32 MiB.');
+        if($body==='') return new WP_Error('universal_import_empty','Datei ist leer.');
+        return self::encoding($body);
     }
 
     private static function encoding($body) {
@@ -115,7 +127,7 @@ final class PPAR_Affiliate_Universal_Import {
         $body=self::encoding($body);$first=preg_split('/\r\n|\r|\n/',$body,2);$d=self::delimiter($first[0]??'');$fh=fopen('php://temp','r+');if(!$fh)return new WP_Error('ds24_csv_stream','CSV konnte nicht verarbeitet werden.');fwrite($fh,$body);rewind($fh);
         $headers=fgetcsv($fh,0,$d,'"','\\');if(!is_array($headers)){fclose($fh);return new WP_Error('ds24_csv_headers','CSV-Kopfzeile fehlt.');}$cols=self::columns($headers);foreach(array('vendor','product_id','product','entry_id','status','commission') as $r)if(!array_key_exists($r,$cols)){fclose($fh);return new WP_Error('ds24_csv_schema','Digistore24-CSV hat nicht die erwarteten Partnerschaftsspalten.');}
         $rows=array();$blocked=0;$seen=0;
-        while(($v=fgetcsv($fh,0,$d,'"','\\'))!==false){if(++$seen>5000){fclose($fh);return new WP_Error('ds24_csv_row_limit','Mehr als 5.000 Partnerschaftszeilen werden nicht in einem Lauf verarbeitet.');}if(!array_filter($v,static function($x){return trim((string)$x)!=='';}))continue;$get=static function($f)use($cols,$v){return array_key_exists($f,$cols)?trim((string)($v[$cols[$f]]??'')):'';};$status=self::key($get('status'));if(!in_array($status,array('genehmigt','approved'),true)){$blocked++;continue;}$vendor=$get('vendor');$pid=preg_replace('/\s+/','',$get('product_id'));$product=$get('product');$eid=preg_replace('/\s+/','',$get('entry_id'));if($vendor===''||$product===''||!ctype_digit($pid)||!ctype_digit($eid)){$blocked++;continue;}$support=$get('support_url');$promo=$get('promolink');if($support!==''&&(!filter_var($support,FILTER_VALIDATE_URL)||stripos($support,'https://')!==0))$support='';if($promo!==''&&(!filter_var($promo,FILTER_VALIDATE_URL)||stripos($promo,'https://')!==0))$promo='';$rows[$pid]=array('vendor'=>$vendor,'product_id'=>$pid,'product'=>$product,'entry_id'=>$eid,'status'=>'approved','commission'=>$get('commission'),'support_url'=>$support,'promolink'=>$promo);}
+        while(($v=fgetcsv($fh,0,$d,'"','\\'))!==false){if(++$seen>5000){fclose($fh);return new WP_Error('ds24_csv_row_limit','Mehr als 5.000 Partnerschaftszeilen werden nicht in einem Lauf verarbeitet.');}if(!array_filter($v,static function($x){return trim((string)$x)!=='';}))continue;$get=static function($f)use($cols,$v){return array_key_exists($f,$cols)?trim((string)($v[$cols[$f]]??'')):'';};$status=self::key($get('status'));if(!in_array($status,array('genehmigt','approved'),true)){$blocked++;continue;}$vendor=sanitize_text_field($get('vendor'));$pid=preg_replace('/\s+/','',$get('product_id'));$product=sanitize_text_field($get('product'));$eid=preg_replace('/\s+/','',$get('entry_id'));if($vendor===''||$product===''||!ctype_digit($pid)||!ctype_digit($eid)){$blocked++;continue;}if(isset($rows[$pid])){fclose($fh);return new WP_Error('ds24_csv_product_id_duplicate','Dieselbe Digistore24-Produkt-ID kommt mehrfach in der Bestandsdatei vor. Import wird vollständig abgebrochen.');}$support=$get('support_url');$promo=$get('promolink');if($support!==''&&(!filter_var($support,FILTER_VALIDATE_URL)||stripos($support,'https://')!==0))$support='';if($promo!==''&&(!filter_var($promo,FILTER_VALIDATE_URL)||stripos($promo,'https://')!==0))$promo='';$rows[$pid]=array('vendor'=>$vendor,'product_id'=>$pid,'product'=>$product,'entry_id'=>$eid,'status'=>'approved','commission'=>sanitize_text_field($get('commission')),'support_url'=>$support,'promolink'=>$promo);}
         fclose($fh);if(!$rows)return new WP_Error('ds24_csv_no_approved','Keine genehmigte Digistore24-Partnerschaft erkannt.');return array('rows'=>$rows,'blocked'=>$blocked);
     }
 
