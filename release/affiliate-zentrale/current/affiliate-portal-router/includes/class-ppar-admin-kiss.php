@@ -1,6 +1,8 @@
 <?php
 if (!defined('ABSPATH')) { exit; }
 
+require_once __DIR__ . '/class-ppar-universal-import.php';
+
 /**
  * KISS navigation layer: fewer visible WordPress submenu entries while every
  * existing page, control, diagnostic and specialist screen remains registered
@@ -12,6 +14,7 @@ final class PPAR_Affiliate_Admin_KISS {
     public static function bootstrap() {
         if (self::$booted) { return; }
         self::$booted = true;
+        PPAR_Affiliate_Universal_Import::bootstrap();
         add_action('admin_menu', array(__CLASS__, 'rebuild_visible_navigation'), 10050);
     }
 
@@ -105,7 +108,8 @@ final class PPAR_Affiliate_Admin_KISS {
     }
 
     public static function render_providers() {
-        self::header('Anbieter & APIs','Zugänge und technische Provider bleiben getrennt von der fachlichen Produkt-/Banner-Ausspielung.');
+        self::header('Anbieter & APIs','Zugänge, technische Provider und ein einheitlicher manueller Dateiimport.');
+        PPAR_Affiliate_Universal_Import::render_form();
         echo '<p style="display:flex;gap:8px;flex-wrap:wrap">';
         echo self::button('Netzwerke & API','affiliate-portal-networks',true);
         echo self::button('Synchronisierung','affiliate-portal-sync');
