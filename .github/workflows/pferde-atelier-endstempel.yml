@@ -141,15 +141,16 @@ jobs:
           p=pathlib.Path(x['final_ref'])
           if not p.is_file(): raise SystemExit('ENDSTEMPEL_FINAL_FILE_MISSING')
           h=hashlib.sha256(p.read_bytes()).hexdigest()
+          if h != x.get('final_sha256'): raise SystemExit('ENDSTEMPEL_FINAL_HASH_MISMATCH')
           print('final_ref='+x['final_ref'])
           print('final_filename='+p.name)
           print('final_sha256='+h)
           print('batch_sha256='+x['batch_sha256'])
           print('article_count='+str(x['article_count']))
-          print('key_id='+x['endstamp']['signing_key_id'])
-          print('public_sha256='+x['endstamp']['signing_public_key_sha256'])
-          print('public_b64='+x['endstamp']['public_key_b64'])
           PY
+          echo "key_id=$ENDSTEMPEL_TRUSTED_KEY_ID" >> "$GITHUB_OUTPUT"
+          echo "public_sha256=$ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256" >> "$GITHUB_OUTPUT"
+          echo "public_b64=$ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64" >> "$GITHUB_OUTPUT"
 
       - name: WordPress verifier must accept before any write
         shell: bash
