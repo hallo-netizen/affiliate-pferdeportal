@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 8,
+  "generation": 9,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,8 +8,8 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5",
-    "source_file_count": 25,
+    "manifest_sha256": "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77",
+    "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
     "guard_role": "VERIFY_ONLY"
@@ -41,8 +41,8 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5",
-    "source_file_count": 25,
+    "current_source_manifest_sha256": "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77",
+    "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
     "final_artifact_sha256": null
@@ -56,7 +56,7 @@
     "current_ds24_expected_vendors": 10,
     "automatic_ds24_discovery": "OUT_OF_SCOPE_AND_NON_BLOCKING",
     "current_local_evidence_ref": "release/affiliate-zentrale/evidence/manual_single_upload_multi_provider_import_20260902.txt",
-    "current_local_evidence_sha256": "d6b056cef897e607b16e7858e4c2a4ce73722486406ed6d3dff31a68f8fe7341",
+    "current_local_evidence_sha256": "560b2531eec63fa0169ed79b5824317c05e934e62b6cf38f7989529d815c8e60",
     "forbidden_reasks": [
       "PARTNER_LIST",
       "SAME_DS24_CSV",
@@ -149,14 +149,14 @@
     "manual_single_upload_multi_provider_import": {
       "status": "LOCAL_PASS_LIVE_PENDING",
       "evidence_ref": "release/affiliate-zentrale/evidence/manual_single_upload_multi_provider_import_20260902.txt",
-      "evidence_sha256": "d6b056cef897e607b16e7858e4c2a4ce73722486406ed6d3dff31a68f8fe7341",
-      "source_manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5"
+      "evidence_sha256": "560b2531eec63fa0169ed79b5824317c05e934e62b6cf38f7989529d815c8e60",
+      "source_manifest_sha256": "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77"
     },
     "explicit_scope_product_deals_partner_analytics": {
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5"
+      "source_manifest_sha256": "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77"
     },
     "old_state_reproduction_negative": {
       "status": "PASS",
@@ -207,22 +207,22 @@
       "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
     },
     "fresh_unpack_exact_installer": {
-      "status": "PASS",
-      "evidence_ref": "release/affiliate-zentrale/evidence/fresh_unpack_exact_installer_v6638_final.txt",
-      "evidence_sha256": "786b25dddf119651cdf1c84a1e40829bbf757c951f856eca41a4a0a51b9e9e87",
-      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+      "status": "PENDING",
+      "evidence_ref": null,
+      "evidence_sha256": null,
+      "source_manifest_sha256": "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77"
     },
     "source_zip_byte_identity": {
-      "status": "PASS",
-      "evidence_ref": "release/affiliate-zentrale/evidence/source_zip_byte_identity_v6638_final.txt",
-      "evidence_sha256": "fcb4f883977a1ad7e04dd552225d53dfeab28481201eb591be9170ead8305ce5",
-      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+      "status": "PENDING",
+      "evidence_ref": null,
+      "evidence_sha256": null,
+      "source_manifest_sha256": "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77"
     },
     "final_sha256": {
-      "status": "PASS",
-      "evidence_ref": "release/affiliate-zentrale/evidence/final_sha256_v6638_final.txt",
-      "evidence_sha256": "82ba2192d263e02e0e3740a1ab4398ac46d6ab7d13596ce6a1a10d5afb243096",
-      "source_manifest_sha256": "4b6c806cd9d1565ee2f695611e46658eac7010ba17d4882d856d0f953c838b0f"
+      "status": "PENDING",
+      "evidence_ref": null,
+      "evidence_sha256": null,
+      "source_manifest_sha256": "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
