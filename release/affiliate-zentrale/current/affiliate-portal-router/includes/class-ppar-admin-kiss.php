@@ -2,6 +2,7 @@
 if (!defined('ABSPATH')) { exit; }
 
 require_once __DIR__ . '/class-ppar-universal-import.php';
+require_once __DIR__ . '/class-ppar-manual-import-guard.php';
 
 /**
  * KISS navigation layer: fewer visible WordPress submenu entries while every
@@ -15,6 +16,7 @@ final class PPAR_Affiliate_Admin_KISS {
         if (self::$booted) { return; }
         self::$booted = true;
         PPAR_Affiliate_Universal_Import::bootstrap();
+        PPAR_Affiliate_Manual_Import_Guard::bootstrap();
         add_action('admin_menu', array(__CLASS__, 'rebuild_visible_navigation'), 10050);
     }
 
