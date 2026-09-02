@@ -2,10 +2,8 @@ AFFILIATE-ZENTRALE — MANUAL SINGLE-UPLOAD MULTI-PROVIDER IMPORT — LOCAL EVID
 Date: 2026-09-02
 Branch: affiliate-release-current
 Scope authority: protocol/AFFILIATE_RELEASE_CURRENT_USER_SCOPE_LOCK_20260902.md
-Source manifest SHA-256: af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5
-Changed canonical source file: affiliate-portal-router/includes/class-ppar-admin-kiss.php
-Changed source file SHA-256: 1140e4a894a5a45afcd0601d9f14c5531ae9cd707165bff2385e6afdb752021b
-Changed source Git blob: 6a922293c9a77f7e6a05818bb8e38b2a178b9853
+Source manifest SHA-256: 109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77
+Source file count: 26
 
 AUTHORIZED CURRENT SCOPE
 - Exactly one upload field under WordPress-Dashboard -> Affiliate-Zentrale -> Anbieter & APIs -> Datei importieren.
@@ -13,15 +11,38 @@ AUTHORIZED CURRENT SCOPE
 - Digistore24 current partnership CSV is an authorized manual runtime inventory source for this scope.
 - Automatic Digistore24 partnership discovery is out of scope and non-blocking.
 - No hard-coded 18-product runtime list in product code.
-- Existing eBay/idealo/Awin/ADCELL provider implementation files are unchanged by this source delta.
+- Existing Digistore24 banner/parser/output path is reused instead of duplicated.
+
+BOUND SOURCE DELTA FOR THIS SCOPE
+- affiliate-portal-router/includes/class-ppar-admin-kiss.php
+  SHA-256: 1140e4a894a5a45afcd0601d9f14c5531ae9cd707165bff2385e6afdb752021b
+  Git blob: 6a922293c9a77f7e6a05818bb8e38b2a178b9853
+- affiliate-portal-router/includes/class-ppar-ds24-manual-downstream.php
+  SHA-256: 365a232843b8abf5ac476c520581ed25d8cbff577d6ee6d39329d534cfa22634
+  Git blob: 2bcc4ec741ff64d5e21c799077edddb34f83a607
+- affiliate-portal-router/includes/trait-ppar-housekeeping.php
+  SHA-256: 15547ca5511fd8e3a0203075ad8794dd9b07afa7ba34b35a1d200dabce8f9f24
+  Git blob: 4d3abb76fbdc67a5aa223a6b1da3789cfbfb783b
+  Delta versus pre-bridge state: exactly one require_once and one bootstrap call.
+
+REGRESSION SCOPE PROOF
+Git compare from 2adfbe42b922fa1e337538ccfc29454c1dc9026a to the bridge source before evidence/governance changes shows product-code delta only in:
+1. class-ppar-ds24-manual-downstream.php (new)
+2. trait-ppar-housekeeping.php (+2 loader/bootstrap lines)
+plus CURRENT_SOURCE_SHA256.txt.
+Existing Digistore24 provider trait, eBay, idealo, Awin, creative library, output objects, slot logic, analytics and LKG implementation are unchanged by this bridge delta.
 
 LOCAL FIXTURE LIMITATION
-The active runtime did not contain the original CSV bytes. The local DS24 fixture therefore reproduces the 18 product IDs, vendors, product names, commissions and the exact 10 Werbemittel-IDs documented from the user-provided export in the project handoff. It does NOT claim byte-identity with the original CSV file or a WordPress live upload.
+The active runtime did not contain the original CSV bytes. The local DS24 fixture reproduces the 18 product IDs, vendors, product names, commissions and the exact 10 Werbemittel-IDs documented from the user-provided export in the project handoff. It adds synthetic HTTPS support URLs solely to exercise the already-existing downstream call path. It does NOT claim byte-identity with the original CSV, real vendor HTTP content, or WordPress-live execution.
 
 LOCAL PHP LINT
-PASS — No syntax errors detected in class-ppar-admin-kiss.php
+PASS — class-ppar-admin-kiss.php
+PASS — class-ppar-ds24-manual-downstream.php
+PASS — trait-ppar-housekeeping.php
+Git blob of locally linted housekeeping source equals repository blob 4d3abb76fbdc67a5aa223a6b1da3789cfbfb783b.
+Git blob of locally linted downstream source equals repository blob 2bcc4ec741ff64d5e21c799077edddb34f83a607.
 
-LOCAL POSITIVE/NEGATIVE CONTRACT TESTS
+REUSED HASH-IDENTICAL IMPORT CONTRACT TESTS
 PASS 01 DS24 exact header detection
 PASS 02 DS24 18 approved parsed
 PASS 03 DS24 10 sources grouped
@@ -48,19 +69,47 @@ PASS 23 Wrong DS24 fingerprint blocked
 PASS 24 GZIP decompressed >32 MiB blocked
 PASS 25 No remove_submenu_page navigation regression
 PASS 26 Exactly one upload field
-RESULT: 26 PASS / 0 FAIL
+
+NEW INTEGRATED CSV -> DS24 DOWNSTREAM CONTRACT TESTS
+PASS 27 Manual CSV import succeeds
+PASS 28 Exactly 18 product partnerships persisted
+PASS 29 Exactly 10 Werbemittel sources persisted
+PASS 30 Exactly 10 vendors persisted
+PASS 31 Exactly 10 manual partnership records persisted
+PASS 32 Exactly 18 manual approved/active affiliation records persisted
+PASS 33 All exact 10 Werbemittel source IDs reach the downstream bridge
+PASS 34 Downstream is invoked with automatic=false for every source; automatic discovery is not entered
+PASS 35 Downstream status reports all 10 sources
+PASS 36 All 10 sources with usable support URLs are attempted
+PASS 37 Synthetic failure of one source is isolated; remaining 9 continue
+PASS 38 Creative counters remain source-local and aggregate correctly
+PASS 39 Manual marketplace facts are restored after simulated provider-detail cache replacement
+PASS 40 Missing main_product_id after simulated detail refresh is restored from imported inventory
+PASS 41 Wrong/non-manual affiliation source does not trigger the manual bridge
+PASS 42 No synthetic LKG option is mutated by inventory/bridge layer
+PASS 43 Missing support URL does not fail the CSV import
+PASS 44 Exactly the source without support URL stays open
+PASS 45 Remaining 9 sources continue when one support URL is genuinely absent
+RESULT: 45 PASS / 0 FAIL
 
 RUNTIME CONTRACT PROVED LOCALLY
-- DS24 partnership CSV only accepts approved/Genehmigt rows.
+- CSV import is the authority for the current manually supplied DS24 partnership inventory.
+- Only Genehmigt/approved rows enter the active manual inventory.
 - Product ID is unique; duplicates abort the entire import.
 - Same Werbemittel-ID across different vendors aborts the entire import.
 - Current tested DS24 API-key fingerprint + affiliate identity bind imported account data.
 - Reimport synchronizes manual inventory instead of duplicating it.
-- The importer materializes DS24 marketplace, partnership and affiliation stores in the shapes consumed by the existing DS24 gates.
-- Existing published LKG outputs are not mutated by the import.
+- The importer materializes marketplace, partnership and affiliation stores in the shapes consumed by the existing DS24 gates.
+- After the final affiliation write, every imported Werbemittel source with a usable support URL is handed directly to the existing digistore24_import_vendor_banners() path.
+- The bridge explicitly uses the manual partnership gate (automatic=false) and never re-enters the failed automatic partnership discovery route.
+- Existing provider banner parsing, image/tracking validation, creative upsert and output_plan_creative path are reused unchanged.
+- One source failure does not starve the remaining sources.
+- Missing support URL leaves only that source open; the remaining sources continue.
+- Existing published LKG outputs are not replaced by the inventory/bridge layer.
 - Unknown or contradictory provider files produce no mutation.
 
 NOT CLAIMED
-- No WordPress-live PASS.
-- No byte-identical original Digistore24 CSV test in this runtime.
-- No final installer/release PASS.
+- No WordPress-live PASS yet.
+- No byte-identical original Digistore24 CSV execution in this runtime.
+- No real vendor support-page HTTP/banner fetch in this local harness; that remains part of the live gate.
+- No final installer/release PASS yet.
