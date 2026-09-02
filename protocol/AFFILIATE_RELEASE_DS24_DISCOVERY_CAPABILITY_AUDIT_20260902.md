@@ -9,6 +9,22 @@ Scope: ausschließlich automatische Ermittlung der bereits genehmigten Affiliate
 Relevante Hardlocks: AFF-ERR-001, 002, 003, 004, 006, 008, 009, 010, 011.
 Zusätzlich neu erkannt: die Discovery-Routen `listMarketplaceEntries` und `getAffiliateCommission(product_ids=all)` wurden in früheren lokalen Builds erneut als autoritativ angenommen, obwohl reale Live-Evidence diese Annahmen bereits widerlegt hatte.
 
+## AFF-ERR-012 — DS24 Affiliate-Partnerschaftsinventur mit falscher API-Autorität
+
+**Symptom:** wiederholte lokale PASS-Stände, live aber 0/0 bzw. 1/1 statt der realen 18 genehmigten Partnerschaften.
+
+**Belegte Root Cause:** `listMarketplaceEntries` ist keine verlässliche Inventur der eigenen Affiliate-Partnerschaften; `getAffiliateCommission(product_ids=all)` wurde trotz dokumentierter Parameterfähigkeit fälschlich als Affiliate-seitige Fremdvendor-Inventur interpretiert, obwohl der reale 53213-Fall dafür bereits gescheitert war. `validateAffiliate` benötigt bekannte Produkt-IDs und kann daher nicht entdecken.
+
+**Nicht wiederholen:** Keiner dieser drei Wege darf ohne neuen realen Gegenbeweis als autoritative Partnerschafts-Discovery implementiert werden. Ein lokales Fixture darf die gewünschte Remote-Antwort nicht erfinden.
+
+**POSITIV:** ein unterstützter read-only Remote-Kanal liefert ohne CSV-/ID-Vorfütterung alle 18 Kontroll-IDs.
+
+**NEGATIV:** 17/18, 53213-only, Marketplace-only, Transaktions-only, fremde Identität oder synthetische Fixture-Antwort bleiben FAIL.
+
+**GESAMTWORKFLOW:** erst nach Discovery-PASS `validateAffiliate -> Werbemittel -> Bild/Tracking -> Ziel/Slot -> Draft -> Revalidation -> Persistenz -> LKG -> Readback -> Reassignment`; Providerregression eBay/idealo/Awin.
+
+**Status:** OPEN / Produktcode-Fix gesperrt bis Discovery-Capability real nachgewiesen.
+
 ## Reale Bindung
 
 Kontrolloracle: 18 genehmigte Partnerschaften / 10 Vendoren. Die 18 Produkt-IDs dienen ausschließlich als Sollvergleich, nicht als Runtime-Discovery-Quelle.
