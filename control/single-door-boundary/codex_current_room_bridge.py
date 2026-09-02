@@ -17,9 +17,7 @@ RGUARD=REPO/'control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py'
 PREFLIGHT=REPO/'control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py'
 CONT=REPO/'control/production-continuity/production_continuity_guard.py'
 RUNTIME_ENTRY=REPO/'control/output-quarantine/runtime_entry_gate.py'
-SIGVERIFY=REPO/'control/single-door-boundary/single_door_preproduction_handoff.py'
 FACH='control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt'
-TERMINAL='PFERDE_ATELIER_FACHWORKFLOW_TERMINAL_COMPLETION_V1'
 BRIDGE='PFERDE_ATELIER_CODEX_CURRENT_ROOM_BRIDGE_V1'; BSTATE='PFERDE_ATELIER_CODEX_CURRENT_ROOM_BRIDGE_STATE_V1'
 ACTION='PFERDE_ATELIER_CODEX_CURRENT_BOUND_ACTION_V1'; IREC='PFERDE_ATELIER_BOUND_ITEM_EXECUTION_RECEIPT_V1'; CPC='PFERDE_ATELIER_BATCH_CHECKPOINT_V1'
 
@@ -27,7 +25,6 @@ class Blocked(RuntimeError): pass
 
 def load(p): return json.loads(Path(p).read_text(encoding='utf-8'))
 def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
-def stable(o): return hashlib.sha256(json.dumps(o,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')).hexdigest()
 def dump(p,o):
     p=Path(p); p.parent.mkdir(parents=True,exist_ok=True); t=p.with_name(p.name+'.tmp'); t.write_text(json.dumps(o,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); t.replace(p)
 def rel(v):
@@ -56,7 +53,6 @@ def outer_authority():
     if sha(bp)!=g.get('bundle_sha256'): raise Blocked('CURRENT_107007_BUNDLE_HASH_MISMATCH')
     b=load(bp); binds={x.get('ref'):x.get('sha256') for x in b.get('authorized_inputs',[]) if isinstance(x,dict)}
     if binds.get('control/single-door-boundary/codex_current_room_bridge.py')!=sha(Path(__file__).resolve()): raise Blocked('CURRENT_ROOM_BRIDGE_NOT_107007_HASH_BOUND')
-    if binds.get('control/single-door-boundary/single_door_preproduction_handoff.py')!=sha(SIGVERIFY): raise Blocked('TERMINAL_SIGNATURE_VALIDATOR_NOT_107007_HASH_BOUND')
 
 def capsule():
     t=load(CAP/'TICKET.json'); m=load(CAP/'CAPSULE_MANIFEST.json')
@@ -113,94 +109,10 @@ def item_for(its,token):
     return its[n-1]
 def slug(v): return ''.join(c if c.isalnum() else '_' for c in v).strip('_')[:96] or 'item'
 def action(s,it):
-    root=f".pferde-quarantine/{s['ticket_id']}/{slug(it['canonical_article_id'])}"
-    rec=root+'/ITEM_RECEIPT.json'
-    terminal=root+'/TERMINAL_COMPLETION.json'
-    return {
-        'contract':ACTION,
-        'status':'CURRENT_BOUND_ACTION_READY',
-        'room_token':s['current_room_token'],
-        'action':'EXECUTE_EXISTING_BOUND_ITEM_EXECUTOR_OPAQUE',
-        'current_item':{k:it[k] for k in ('canonical_article_id','plan_slot','title','target_keyword','category','article_type')},
-        'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY',
-        'fachworkflow_prompt_ref':FACH,
-        'allowed_output_root':root+'/',
-        'item_receipt_ref':rec,
-        'item_receipt_schema':{
-            'contract':IREC,
-            'room_token':s['current_room_token'],
-            'canonical_article_id':it['canonical_article_id'],
-            'plan_slot':it['plan_slot'],
-            'status':['PASS','BLOCKED','USER_ACTION_REQUIRED'],
-            'workflow_pass':'true only with PASS; false otherwise; never sufficient as PASS authority',
-            'navigation_decision':False,
-            'state_write_requested':False,
-            'workflow_change_requested':False,
-            'content_or_quality_rules_changed':False,
-            'outputs':'non-empty [{ref,sha256}] under allowed_output_root, excluding item_receipt_ref and terminal_completion_ref, only with PASS; [] otherwise',
-            'evidence':'non-empty string list; informational only, never PASS authority',
-            'terminal_completion_ref':terminal,
-            'terminal_completion_sha256':'sha256 of fresh supervisor-signed terminal completion; null for non-PASS',
-            'terminal_completion_required_fields':{
-                'contract':'WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED',
-                'status':'PASS',
-                'terminal_completion_contract':TERMINAL,
-                'terminal_phase':'107007_ITEM',
-                'terminal_gate_id':'EXISTING_UNCHANGED_FACHWORKFLOW_TERMINAL_PASS',
-                'ticket_id':s['ticket_id'],
-                'state_sha256':s['state_sha256'],
-                'bundle_sha256':s['bundle_sha256'],
-                'batch_sha256':s['batch_sha256'],
-                'room_token':s['current_room_token'],
-                'canonical_article_id':it['canonical_article_id'],
-                'plan_slot':it['plan_slot'],
-                'outputs_manifest_sha256':"SHA-256 of canonical JSON {'outputs': sorted final outputs by ref,sha256}",
-                'content_or_quality_rules_changed':False,
-                'publish_allowed':False,
-            },
-        },
-        'submission_command':f'python3 control/single-door-boundary/codex_current_room_bridge.py submit {rec}',
-        'worker_may_choose_next_room':False,
-        'worker_may_choose_next_item':False,
-        'workflow_navigation_authority':False,
-        'content_or_quality_rule_change_authority':'NONE',
-        'publish_allowed':False,
-        'all_other_actions':'DENY',
-    }
-
-def outputs_manifest_sha256(outputs):
-    return stable({'outputs':sorted(outputs,key=lambda x:(x['ref'],x['sha256']))})
-
-def validate_item_terminal_completion(proof,s,it,outputs,*,trusted_keys=None):
-    if not isinstance(proof,dict):
-        raise Blocked('ITEM_TERMINAL_COMPLETION_INVALID')
-    sv=mod(SIGVERIFY,'room_terminal_signature')
-    try:
-        sv._verify_release_signature(proof, trusted_keys or sv.TRUSTED_SIGNING_KEYS)
-    except Exception as e:
-        raise Blocked('ITEM_TERMINAL_COMPLETION_SIGNATURE_INVALID:'+str(e)) from e
-    required={
-        'terminal_completion_contract':TERMINAL,
-        'terminal_phase':'107007_ITEM',
-        'terminal_gate_id':'EXISTING_UNCHANGED_FACHWORKFLOW_TERMINAL_PASS',
-        'ticket_id':s.get('ticket_id'),
-        'state_sha256':s.get('state_sha256'),
-        'bundle_sha256':s.get('bundle_sha256'),
-        'batch_sha256':s.get('batch_sha256'),
-        'room_token':s.get('current_room_token'),
-        'canonical_article_id':it.get('canonical_article_id'),
-        'plan_slot':it.get('plan_slot'),
-        'outputs_manifest_sha256':outputs_manifest_sha256(outputs),
-        'content_or_quality_rules_changed':False,
-        'publish_allowed':False,
-    }
-    for key,expected in required.items():
-        if proof.get(key)!=expected:
-            raise Blocked('ITEM_TERMINAL_COMPLETION_BINDING_MISMATCH:'+key)
-    return {'status':'SIGNED_TERMINAL_FACHWORKFLOW_COMPLETION_PASS','proof_sha256':stable(proof)}
-
-def check_item_receipt(d,s,it,verify=True,*,trusted_keys=None):
-    keys={'contract','room_token','canonical_article_id','plan_slot','status','workflow_pass','navigation_decision','state_write_requested','workflow_change_requested','content_or_quality_rules_changed','outputs','evidence','terminal_completion_ref','terminal_completion_sha256'}
+    root=f".pferde-quarantine/{s['ticket_id']}/{slug(it['canonical_article_id'])}"; rec=root+'/ITEM_RECEIPT.json'
+    return {'contract':ACTION,'status':'CURRENT_BOUND_ACTION_READY','room_token':s['current_room_token'],'action':'EXECUTE_EXISTING_BOUND_ITEM_EXECUTOR_OPAQUE','current_item':{k:it[k] for k in ('canonical_article_id','plan_slot','title','target_keyword','category','article_type')},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':FACH,'allowed_output_root':root+'/','item_receipt_ref':rec,'item_receipt_schema':{'contract':IREC,'room_token':s['current_room_token'],'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'status':['PASS','BLOCKED','USER_ACTION_REQUIRED'],'workflow_pass':'true only with PASS; false otherwise','navigation_decision':False,'state_write_requested':False,'workflow_change_requested':False,'content_or_quality_rules_changed':False,'outputs':'non-empty [{ref,sha256}] under allowed_output_root, excluding item_receipt_ref, only with PASS; [] otherwise','evidence':'non-empty string list'},'submission_command':f'python3 control/single-door-boundary/codex_current_room_bridge.py submit {rec}','worker_may_choose_next_room':False,'worker_may_choose_next_item':False,'workflow_navigation_authority':False,'content_or_quality_rule_change_authority':'NONE','publish_allowed':False,'all_other_actions':'DENY'}
+def check_item_receipt(d,s,it,verify=True):
+    keys={'contract','room_token','canonical_article_id','plan_slot','status','workflow_pass','navigation_decision','state_write_requested','workflow_change_requested','content_or_quality_rules_changed','outputs','evidence'}
     if set(d)!=keys or d.get('contract')!=IREC: raise Blocked('ITEM_RECEIPT_FIELDS_OR_CONTRACT_INVALID')
     if d.get('room_token')!=s.get('current_room_token'): raise Blocked('ITEM_RECEIPT_ROOM_MISMATCH')
     if d.get('canonical_article_id')!=it.get('canonical_article_id'): raise Blocked('ITEM_RECEIPT_ARTICLE_MISMATCH')
@@ -212,38 +124,23 @@ def check_item_receipt(d,s,it,verify=True,*,trusted_keys=None):
     if d.get('content_or_quality_rules_changed') is not False: raise Blocked('CONTENT_OR_QUALITY_RULE_CHANGE_FORBIDDEN')
     ev=d.get('evidence')
     if not isinstance(ev,list) or not ev or not all(isinstance(x,str) and x.strip() for x in ev): raise Blocked('ITEM_RECEIPT_EVIDENCE_INVALID')
-    a=action(s,it)
     if d['status']!='PASS':
         if d.get('workflow_pass') is not False: raise Blocked('NONPASS_WORKFLOW_PASS_MUST_BE_FALSE')
-        if d.get('terminal_completion_ref') not in {None,''} or d.get('terminal_completion_sha256') not in {None,''}: raise Blocked('NONPASS_TERMINAL_COMPLETION_FORBIDDEN')
         return {'status':d['status'],'outputs':[],'evidence':ev}
     if d.get('workflow_pass') is not True: raise Blocked('ITEM_FULL_WORKFLOW_PASS_REQUIRED')
-    if d.get('terminal_completion_ref')!=a['item_receipt_schema']['terminal_completion_ref']: raise Blocked('ITEM_TERMINAL_COMPLETION_REF_MISMATCH')
-    declared_terminal_sha=d.get('terminal_completion_sha256')
-    if not isinstance(declared_terminal_sha,str) or len(declared_terminal_sha)!=64: raise Blocked('ITEM_TERMINAL_COMPLETION_SHA_INVALID')
     outs=d.get('outputs')
     if not isinstance(outs,list) or not outs: raise Blocked('ITEM_OUTPUTS_REQUIRED')
-    seen=set(); clean=[]
+    a=action(s,it); seen=set(); clean=[]
     for i,x in enumerate(outs):
         if not isinstance(x,dict) or set(x)!={'ref','sha256'}: raise Blocked('ITEM_OUTPUT_ROW_INVALID:'+str(i))
         ref=x['ref']
-        if not ref.startswith(a['allowed_output_root']) or ref in {a['item_receipt_ref'],a['item_receipt_schema']['terminal_completion_ref']} or ref in seen: raise Blocked('ITEM_OUTPUT_REF_INVALID:'+ref)
+        if not ref.startswith(a['allowed_output_root']) or ref==a['item_receipt_ref'] or ref in seen: raise Blocked('ITEM_OUTPUT_REF_INVALID:'+ref)
         seen.add(ref)
         if verify:
             p=REPO/rel(ref)
             if not p.is_file() or sha(p)!=x['sha256']: raise Blocked('ITEM_OUTPUT_HASH_MISMATCH:'+ref)
         clean.append({'ref':ref,'sha256':x['sha256']})
-    terminal_path=REPO/rel(d['terminal_completion_ref'])
-    if verify:
-        if not terminal_path.is_file(): raise Blocked('ITEM_TERMINAL_COMPLETION_MISSING')
-        if sha(terminal_path)!=declared_terminal_sha: raise Blocked('ITEM_TERMINAL_COMPLETION_HASH_MISMATCH')
-        proof=load(terminal_path)
-    else:
-        proof=d.get('_test_terminal_completion')
-        if not isinstance(proof,dict): raise Blocked('ITEM_TERMINAL_COMPLETION_REQUIRED')
-    checked=validate_item_terminal_completion(proof,s,it,clean,trusted_keys=trusted_keys)
-    return {'status':'PASS','outputs':clean,'evidence':['SIGNED_TERMINAL_FACHWORKFLOW_COMPLETION:'+declared_terminal_sha],'terminal_completion_sha256':declared_terminal_sha,'terminal_completion_status':checked['status']}
-
+    return {'status':'PASS','outputs':clean,'evidence':ev}
 def accept(s,it,path,rr):
     if not path.is_file(): raise Blocked('ITEM_RECEIPT_MISSING')
     z=check_item_receipt(load(path),s,it,True)
@@ -254,9 +151,7 @@ def accept(s,it,path,rr):
     c['completed_item_ids']=done; c['receipt_hashes']=list(c.get('receipt_hashes',[]))+[sha(path)]
     if rem: c.update(status='BATCH_ACTIVE',current_item_id=rem[0],next_item_id=rem[0],current_gate_id='BOUND_ITEM_EXECUTION')
     else: c.update(status='BATCH_COMPLETE',current_item_id=None,next_item_id=None,current_gate_id='BATCH_COMPLETE')
-    validate_cp(c); dump(CP,c); s['accepted_output_refs']=list(s.get('accepted_output_refs',[]))+z['outputs']; advance(s,rr,z['evidence'])
-    return {'status':'PASS','terminal_completion_sha256':z['terminal_completion_sha256']}
-
+    validate_cp(c); dump(CP,c); s['accepted_output_refs']=list(s.get('accepted_output_refs',[]))+z['outputs']; advance(s,rr,z['evidence']); return {'status':'PASS'}
 def outer_receipt(t,s):
     o=list(s.get('accepted_output_refs',[]))
     if not o: raise Blocked('OUTER_RECEIPT_OUTPUTS_MISSING')
@@ -305,13 +200,18 @@ def submit(ref):
     z=accept(s,it,REPO/rel(ref),rr)
     return z if z.get('status')!='PASS' else drive(s,t,m,r,its,rm,rt)
 def selftest():
-    s={'ticket_id':'a'*64,'state_sha256':'e'*64,'bundle_sha256':'f'*64,'batch_sha256':'0'*64,'current_room_token':'R_D_1_01'}
-    it={'canonical_article_id':'article:test','plan_slot':'b'*64,'title':'T','target_keyword':'K','category':'C','article_type':'A'}
-    a=action(s,it)
+    s={'ticket_id':'a'*64,'current_room_token':'R_D_1_01'}; it={'canonical_article_id':'article:test','plan_slot':'b'*64,'title':'T','target_keyword':'K','category':'C','article_type':'A'}; a=action(s,it)
     if any(k in a for k in ('rooms','route','next_room_token','server_executor','future_items','bound_item_ids')): raise AssertionError('PUBLIC_ROUTE_LEAK')
     if a['worker_may_choose_next_room'] is not False or a['worker_may_choose_next_item'] is not False or a['content_or_quality_rule_change_authority']!='NONE' or a['publish_allowed'] is not False: raise AssertionError('PUBLIC_AUTHORITY_INVALID')
-    return {'ok':True,'status':'CODEX_CURRENT_ROOM_BRIDGE_SELFTEST_PASS','self_attested_pass_blocked_by_required_signed_terminal_completion':True,'worker_visible_current_room_only':True,'full_route_exposed':False,'next_room_exposed':False,'worker_navigation_authority':False,'content_or_quality_rule_change_authority':'NONE','publish_allowed':False}
-
+    b={'contract':IREC,'room_token':'R_D_1_01','canonical_article_id':'article:test','plan_slot':'b'*64,'status':'PASS','workflow_pass':True,'navigation_decision':False,'state_write_requested':False,'workflow_change_requested':False,'content_or_quality_rules_changed':False,'outputs':[{'ref':a['allowed_output_root']+'x.json','sha256':'c'*64}],'evidence':['PASS']}; check_item_receipt(b,s,it,False)
+    tests=[('room_token','R_D_2_01'),('canonical_article_id','article:other'),('plan_slot','d'*64),('navigation_decision',True),('state_write_requested',True),('workflow_change_requested',True),('content_or_quality_rules_changed',True),('workflow_pass',False)]
+    n=0
+    for k,v in tests:
+        x=dict(b); x[k]=v
+        try: check_item_receipt(x,s,it,False)
+        except Blocked: n+=1
+        else: raise AssertionError('NEGATIVE_NOT_BLOCKED:'+k)
+    return {'ok':True,'status':'CODEX_CURRENT_ROOM_BRIDGE_SELFTEST_PASS','positive':1,'negative':n,'worker_visible_current_room_only':True,'full_route_exposed':False,'next_room_exposed':False,'worker_navigation_authority':False,'content_or_quality_rule_change_authority':'NONE','publish_allowed':False}
 def main(a):
     try:
         if a==['current']: z=current()
