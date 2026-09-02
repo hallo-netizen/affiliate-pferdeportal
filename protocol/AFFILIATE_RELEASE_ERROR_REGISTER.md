@@ -158,9 +158,11 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** 17/18 als Auto-Discovery, 53213-only, Marketplace-only, transaktions-only, falsche Identität, malformed/duplicate, synthetische Antwort oder testoracle-basierter Runtimebestand => fail closed.
 **Gesamtworkflow:** gültiger automatischer Eingang → Metadaten → Creative/Banner → Bild/Tracking → Targets/Slots → Draft → Revalidation → Persistenz → LKG → Readback → Reassignment; Partnerfehler isolieren; eBay/idealo/Awin regressionsprüfen.
 
-**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md` sowie reale 18er-Kontrollliste ausschließlich als Oracle.
+**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md`; `release/affiliate-zentrale/evidence/csv_oracle_only_and_ds24_public_api_exhaustion_20260902.txt`; reale 18er-Kontrollliste ausschließlich als Oracle.
 
-**Status:** OPEN — automatische Discovery ist weiterhin der eigentliche Root-Blocker.
+**Zusätzlicher 02.09.-Nachweis:** Die aktuelle offizielle Digistore24-OpenAPI-Referenz führt im Affiliate-Bereich `getAffiliateCommission`, `getCustomerToAffiliateBuyerDetails`, `getReferringAffiliate`, `getAffiliateForEmail`, `setAffiliateForEmail`, `setReferringAffiliate`, `updateAffiliateCommission`, `validateAffiliate`; kein `listAffiliations`/Partnerschaftsinventar. `validateAffiliate` verlangt Produkt-IDs. `listProducts` listet Produkte des eigenen Digistore24-Kontos. `listMarketplaceEntries` listet Marketplace-Einträge. `on_affiliation` ist ein Vendor-seitiges Neupartnerschaftsereignis, kein Affiliate-Bestandsbackfill.
+
+**Status:** OPEN — dokumentierte öffentliche API vollständig geprüft; kein unterstützter Affiliate-seitiger Bestandsendpoint gefunden. Nächste reale Evidence ist ausschließlich der authentifizierte Request hinter der 18er-Backoffice-Tabelle bzw. ihrem Export, danach Klassifikation supported API vs. private Session-Transport.
 
 ## AFF-ERR-013 — Manueller Bestandsimport akzeptierte unvollständige oder widersprüchliche Autorität
 
@@ -214,7 +216,9 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** Hochladen/Einlesen einer Kontroll-CSV kann keinen DS24-Runtimebestand erzeugen; fehlende automatische Discovery bleibt sichtbar FAIL und wird nicht durch Dateiimport kaschiert.
 **Regression:** KISS-Navigation, Partner-&-Einnahmen, eBay, idealo, Awin, bestehende DS24-Validation-/Banner-/Output-/LKG-Kette bleiben unverändert.
 
-**Status:** OPEN — zuerst den unautorisierten Runtime-Dateiweg aus dem kanonischen Source entfernen und danach Source-/Manifest-/Regression erneut prüfen.
+**Evidence:** `release/affiliate-zentrale/evidence/csv_oracle_only_and_ds24_public_api_exhaustion_20260902.txt`. Git-Vergleich gegen den Stand vor Rootfix ändert nur Governance/Protokoll/Manifest/KISS und entfernt genau die beiden Runtime-Dateiimportklassen; keine Provider-/Output-/Analytics-Implementation geändert. Beide Dateiimportklassen sind im aktuellen Source 404/nicht vorhanden; KISS enthält keinen Uploadweg und behält nicht-destruktive Navigation sowie direkte Analytics-Delegation.
+
+**Status:** FIXED_LOCAL — kein Runtime-Dateiimport mehr im kanonischen Source; CSV wieder ausschließlich Testoracle.
 
 ## AFF-ERR-016 — Kanonischer Repository-Source ist nicht der belegte Live-6.71-Source
 
@@ -238,9 +242,8 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 # Aktueller PRECHECK
 
-Aktueller erster korrigierbarer Repository-Fehler: `AFF-ERR-015`.
+`AFF-ERR-015` ist lokal geschlossen. Der aktuelle fachliche Root-Blocker ist wieder ausschließlich `AFF-ERR-012` automatische DS24-Partnerschafts-Discovery.
 
-Gebundener nächster Zyklus:
-`AFF-ERR-015 → unautorisierten DS24-Datei-Runtimeweg aus kanonischem Source entfernen → Source/Manifest/Regression prüfen → automatische Discovery ausschließlich read-only weiter untersuchen`.
+Öffentliche dokumentierte API-Wege sind erschöpft und als nicht ausreichend belegt. Nächster zulässiger Discovery-Schritt ist nur reale Read-only-Evidence des Requests hinter `Verkäufe & Partner → Partnerschaften mit Vendoren` bzw. dessen Export; keine Zugangsdaten/Cookies/Tokens übernehmen und keinen privaten Session-Endpunkt als supported Runtime-API ausgeben.
 
-`AFF-ERR-016` bleibt danach HARD BLOCK für jeden neuen Installer oder Live-Replace, bis die exakte Live-6.71-Quellbasis vorliegt. Die 18er-CSV bleibt ausschließlich Testoracle. Keine Release-/Live-Abnahme aus lokalen Einzeltests.
+Parallel bleibt `AFF-ERR-016` HARD BLOCK für jeden Installer/Live-Replace, bis die exakte Live-6.71-Quellbasis vorliegt. Die 18er-CSV bleibt ausschließlich Testoracle. Keine Release-/Live-Abnahme aus lokalen Einzeltests.
