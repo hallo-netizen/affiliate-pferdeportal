@@ -202,7 +202,7 @@ def context_from_release(repo:Path,receipt_ref:str)->dict:
         if not isinstance(x,dict):raise Blocked('RELEASE_OUTPUT_ROW_INVALID')
         ref=str(x.get('released_ref') or '');p=safe(repo,ref)
         if not p.is_file() or fsha(p)!=x.get('sha256'):raise Blocked('RELEASE_OUTPUT_HASH_MISMATCH')
-        if p.name=='FACHWORKFLOW_PASS.json' or p.name.endswith('_FACHWORKFLOW_PASS.json'):passes.append(load(p))
+        if p.name=='FACHWORKFLOW_PASS.json' or p.name.startswith('FACHWORKFLOW_PASS_') or p.name.endswith('_FACHWORKFLOW_PASS.json'):passes.append(load(p))
     if not passes:raise Blocked('FINAL_FACHWORKFLOW_CONTEXT_NOT_RELEASED')
     headers=[x['production_plan_header'] for x in passes];metas=[x['workflow_release_metadata'] for x in passes]
     if any(x!=headers[0] for x in headers[1:]) or any(x!=metas[0] for x in metas[1:]):raise Blocked('FINAL_CONTEXT_HEADER_DRIFT')
