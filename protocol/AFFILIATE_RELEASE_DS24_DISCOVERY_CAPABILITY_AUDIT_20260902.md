@@ -32,7 +32,7 @@ Alte lokale Quelle 53213 darf nicht als Erfolg der Remote-Discovery gezählt wer
 
 Reale UI-Evidence vom 02.09.2026:
 - `Affiliate-Ansicht -> Verkäufe & Partner -> Partnerschaften mit Vendoren` zeigt 18 Ergebnisse und einen sichtbaren `CSV-Export`.
-- `Affiliate-Ansicht -> Verkäufe & Partner -> Contentlinks` zeigt im realen Konto keine Produktliste. Die vorherige Annahme, dort lasse sich über `Promolink anzeigen` eine vollständige Produkt-/Partnerschaftsauswahl gewinnen, ist damit für dieses Konto widerlegt und darf nicht als Discovery-Evidence verwendet werden.
+- `Affiliate-Ansicht -> Verkäufe & Partner -> Contentlinks` zeigt im realen Konto auf der Übersichtsseite keine Produktliste. Die vorherige Annahme, diese Übersicht liefere unmittelbar eine vollständige Produkt-/Partnerschaftsauswahl, ist damit für diesen realen Ablauf widerlegt und darf nicht als Discovery-Evidence verwendet werden.
 
 ## Capability-Ergebnis
 
@@ -42,20 +42,25 @@ Historische Live-Evidence: API lieferte `data.entries=[]`, obwohl in der Affilia
 ### 2. getAffiliateCommission(product_ids=all) — FAIL als autoritative Discovery
 Die öffentliche Signatur erlaubt zwar `product_ids=all`. Das beweist jedoch nur den Parametervertrag. Historische reale Live-Evidence am bekannten fremden Vendor-Produkt 53213 ergab keine verwertbare `data.commissions`-Zeile für den angenommenen Affiliate-seitigen Zweck. Der spätere lokale 6.70-Test simulierte dagegen genau die gewünschte Antwortstruktur und konnte deshalb den realen Capability-Mismatch nicht widerlegen.
 
+Der abschließende Dokumentationsabgleich erklärt diesen Mismatch zusätzlich fachlich: Das verwandte offizielle `updateAffiliateCommission(affiliate_id, product_ids, data)` ändert Provisionen eines Affiliates für Produkte des API-Key-Kontos und kann für konkret genannte Produkte sogar neue Affiliations anlegen; dafür ist Full Access erforderlich. `getAffiliateCommission` ist die lesende Schwesterfunktion derselben Provisionsverwaltung. `product_ids=all` bedeutet deshalb nicht automatisch „alle Fremdvendor-Produkte, mit denen dieses Konto als Affiliate verbunden ist“. Die frühere 6.70-Annahme war eine Perspektivverwechslung zwischen Vendor-Provisionsverwaltung und Affiliate-seitiger Partnerschaftsinventur.
+
 ### 3. validateAffiliate — KEINE Discovery
-Der Endpoint benötigt Produkt-IDs als Eingabe. Er kann bekannte IDs verifizieren, aber unbekannte Partnerschafts-IDs nicht inventarisieren.
+Der Endpoint verlangt `affiliate_name` plus eine oder mehrere bereits bekannte `product_ids`. Seine Antwort beschreibt die Affiliate-Identität/Validität, nicht eine inventarisierte Produktliste. Er kann bekannte Produktbezüge prüfen, aber unbekannte Partnerschafts-Produkt-IDs nicht selbst liefern.
 
 ### 4. listCommissions — KEINE vollständige Partnerschaftsinventur
 Transaktions-/Provisionsdaten können nur tatsächlich entstandene Provisionen abbilden. Genehmigte Partnerschaften ohne Verkauf würden fehlen.
 
 ### 5. IPN/Zapier New Affiliate Approved — falsche Richtung
-Dokumentiert als Vendor-seitiges Ereignis für neue Affiliates zu eigenen Produkten. Es liefert nicht die vollständige Affiliate-seitige Liste der Vendor-Partnerschaften dieses Kontos.
+Das offizielle `on_affiliation`-Ereignis wird ausgelöst, wenn ein Affiliate ein Produkt des empfangenden Vendors bewerben möchte und die Affiliation akzeptiert wird. Es ist damit ein Vendor-seitiges Ereignis und liefert nicht die vollständige Affiliate-seitige Liste fremder Vendor-Partnerschaften dieses Kontos.
 
 ### 6. Affiliate-UI `Verkäufe & Partner → Partnerschaften mit Vendoren` — fachlich vollständig, aber keine nachgewiesene öffentliche Read-only API
-Die Oberfläche zeigt Vendor, Produkt, Status, Provision, Werbemittelseite und Promolink. Die reale Seite zeigt außerdem einen CSV-Export. In der aktuell veröffentlichten API-Referenz ist jedoch kein äquivalenter List-Endpunkt für diese Affiliate-seitige Partnerschaftstabelle nachgewiesen.
+Digistore24 beschreibt genau diese ungefilterte Liste als statusübergreifende Anzeige aller Affiliate-Partnerschaften. Sie zeigt Vendor, Produkt/Produktsprache, Status, Affiliate-Provision und Werbemittelseite; im Bearbeiten-Dialog zusätzlich den Promolink. Die reale Seite zeigt außerdem einen CSV-Export. In der aktuell veröffentlichten API-Referenz ist jedoch kein äquivalenter List-/Inventory-Endpunkt für diese Affiliate-seitige Partnerschaftstabelle vorhanden.
 
-### 7. Contentlinks — für dieses Konto KEINE Discovery
-Der reale Kontoscreenshot zeigt auf `Verkäufe & Partner -> Contentlinks` keine Produkte. Eine Dokumentationsannahme über eine dortige Produkt-Auswahl darf deshalb nicht als Ersatz für die echte 18er-Partnerschaftsliste verwendet werden.
+### 7. Contentlinks — kein nachgewiesener Runtime-Enumerator
+Die Dokumentation bindet die Produktauswahl an bereits bestehende Affiliations. Das ist für die UI plausibel, liefert aber keinen dokumentierten serverseitigen List-Endpunkt für WordPress. Die reale Übersichtsseite des Kontos zeigte zudem keine Produkte. Deshalb ist Contentlinks kein freigegebener Discovery-Transport.
+
+### 8. listProducts / Marketplace / Statistik — keine Ersatzinventur
+`listProducts` wird von Digistore24 für die eigenen Produkte des API-Key-Kontos verwendet. Marketplace enthält bewerbbare Angebote und ist nicht identisch mit bestehenden Partnerschaften. Statistik-/Provisionsberichte sind transaktionsabhängig. Keiner dieser Wege kann deshalb die ungefilterte Affiliate-Partnerschaftsliste vollständig ersetzen.
 
 ## Lokale Tests
 
@@ -69,7 +74,7 @@ Der reale Kontoscreenshot zeigt auf `Verkäufe & Partner -> Contentlinks` keine 
 
 2. Discovery-Capability-/Gesamtworkflow-Vertrag: 24/24 PASS.
    - alle aktuell untersuchten ungeeigneten Discovery-Quellen werden als autoritative Discovery abgelehnt
-   - nur ein hypothetischer supported + affiliate-side + real-complete + machine-readable + read-only Enumerator erfüllt den Vertrag
+   - nur ein supported + affiliate-side + real-complete + machine-readable + read-only Enumerator erfüllt den Vertrag
    - bei Discovery-FAIL: 0 Downstream-Aufrufe, LKG bleibt erhalten
    - bei hypothetischem 18/18-Discovery-PASS: alle 18 gehen an validateAffiliate und durch die vorhandene Kette
    - einzelner Validate-/Support-URL-/Creative-/Slot-/Persistenzfehler stoppt nicht die übrigen Partner
@@ -80,9 +85,9 @@ Der reale Kontoscreenshot zeigt auf `Verkäufe & Partner -> Contentlinks` keine 
    - aktuelle Swagger-Affiliate-Operationen vollständig inventarisiert
    - alle read-only Kandidaten gegen den benötigten Affiliate-seitigen Inventurvertrag geprüft
    - `validateAffiliate` wegen benötigter Produkt-IDs als Discovery ausgeschlossen
-   - `getAffiliateCommission` nicht als dokumentierte Affiliate-seitige Vendor-Partnerschaftsliste autorisiert
-   - `updateAffiliateCommission` als mutierender/full-access Weg ausgeschlossen
-   - `listProducts` als Produkt-/Vendorinventar, nicht als fremde genehmigte Affiliate-Partnerschaften klassifiziert
+   - `getAffiliateCommission` nicht als Affiliate-seitige Vendor-Partnerschaftsliste autorisiert
+   - `updateAffiliateCommission` als mutierender Vendor-Provisionsverwaltungsweg ausgeschlossen
+   - `listProducts` als eigenes Produkt-/Vendorinventar, nicht als fremde genehmigte Affiliate-Partnerschaften klassifiziert
    - `listCommissions` als transaktionsabhängig und damit prinzipiell unvollständig klassifiziert
    - private/undokumentierte UI-Routen bleiben als Release-Authority gesperrt
 
@@ -91,47 +96,58 @@ Der reale Kontoscreenshot zeigt auf `Verkäufe & Partner -> Contentlinks` keine 
 Die aktuell veröffentlichte Digistore24-Swagger-Referenz wurde erneut gegen den benötigten Affiliate-seitigen Inventurvertrag geprüft. Im Bereich `Affiliates` sind acht Operationen veröffentlicht: `getAffiliateCommission`, `getCustomerToAffiliateBuyerDetails`, `getReferringAffiliate`, `getAffiliateForEmail`, `setAffiliateForEmail`, `setReferringAffiliate`, `updateAffiliateCommission`, `validateAffiliate`. Keine davon ist als List-/Inventory-Endpunkt für `Affiliate view -> Sales & partners -> Vendor partnerships` dokumentiert.
 
 Zusätzlich geprüft:
-- `listProducts`: listet Produkte des eigenen Produkt-/Vendor-Kontexts; kein Nachweis für fremde Produkte, zu denen das Konto nur Affiliate-Partnerschaften besitzt.
+- `getAffiliateCommission`: kann Produkt-IDs bzw. `all` entgegennehmen, ist aber nach realer Evidence und der Semantik der Schwesterfunktion keine belegte Affiliate-seitige Fremdvendor-Inventur.
+- `updateAffiliateCommission`: Vendor-Provisionsverwaltung; kann Affiliations für Produkte des API-Key-Kontos erzeugen/ändern und benötigt Full Access.
+- `validateAffiliate`: benötigt bekannte Produkt-IDs; kein Enumerator.
+- `listProducts`: eigene Produkte des API-Key-Kontos; keine fremden Affiliate-Partnerschaftsprodukte.
 - `listCommissions`: transaktions-/provisionsbasiert und deshalb prinzipiell unvollständig für genehmigte Partnerschaften ohne Verkauf.
-- `statsAffiliateToplist`: ist eine Vendor-seitige Rangliste von Affiliates nach Umsatz und keine Affiliate-seitige Vendor-/Partnerschaftsinventur.
-- `IPN on_affiliation`: wird ausgelöst, wenn ein Affiliate eine Partnerschaft für ein Produkt des empfangenden Vendors eingeht; falsche Richtung für die Liste fremder Vendor-Partnerschaften des Affiliate-Kontos.
-- Affiliate-UI `Sales & partners -> Vendor partnerships`: liefert fachlich genau Vendor, Produkt, Status, Provision, Werbemittelseite und Promolink und zeigt real einen CSV-Export, ist aber kein dokumentierter öffentlicher API-Endpunkt.
-- Affiliate-UI `Sales & partners -> Content links`: im realen Konto keine Produktliste; damit keine belastbare Discovery-Quelle.
+- `statsAffiliateToplist`: Vendor-seitige Rangliste von Affiliates nach Umsatz und keine Affiliate-seitige Vendor-/Partnerschaftsinventur.
+- `IPN on_affiliation`: Vendor-seitiges Ereignis für einen neu akzeptierten Affiliate zu einem Produkt des Vendors; falsche Richtung.
+- Affiliate-UI `Sales & partners -> Vendor partnerships`: fachlich vollständige Partnerschaftsliste und realer CSV-Export, aber kein veröffentlichter API-Endpunkt/Export-Token für serverseitigen Abruf.
+- Affiliate-UI `Sales & partners -> Content links`: kein dokumentierter List-Endpunkt und daher keine Runtime-Authority.
 
-Der 15/15-Test ist bewusst ein Dokumentations-/Capability-Vertrag und kein Live-Credential-Test. Er beweist nicht, dass Digistore24 intern keinen solchen Kanal besitzt; er verhindert nur, dass erneut ein nicht belegter Endpoint als Release-Authority erfunden wird.
+Der Dokumentations-/Capability-Test beweist nicht, dass Digistore24 intern keinen privaten UI-Endpunkt besitzt. Er beweist aber den für den Release entscheidenden Punkt: Unter den aktuell öffentlich unterstützten API-Verträgen ist kein serverseitiger read-only Enumerator nachgewiesen, der die reale Affiliate-seitige Vendor-Partnerschaftsliste vollständig liefert.
 
-## Ergebnis / technische Konsequenz
+## Abschließendes technisches Ergebnis
 
-Der aktuelle Block ist kein weiterer Parser-/Pluginfehler, sondern ein fehlender nachgewiesener Discovery-Kanal für die Affiliate-seitige Partnerschaftsinventur.
+Der aktuelle Fehler ist vollständig eingegrenzt. Er liegt nicht im Bannerparser, nicht im Target-/Slot-System, nicht in LKG/Persistenz und nicht bei eBay/idealo/Awin. Er liegt ausschließlich an der fehlenden zulässigen Discovery-Quelle für die Affiliate-seitige DS24-Partnerschaftsinventur.
+
+Unter dem derzeit verbindlichen Zielvertrag ist daher **kein weiterer Code-/Pluginfix technisch zulässig**, solange Digistore24 keinen offiziell unterstützten read-only API- oder authentifizierbaren Exportkanal für genau diese Liste bereitstellt. Ein weiterer ZIP-Build würde entweder denselben bekannten falschen API-Weg wiederholen oder den Zielvertrag unbemerkt auf CSV-/Browser-Scraping ändern.
 
 Darum gilt fail-closed:
-- kein weiterer Pluginbuild auf Basis von Marketplace oder getAffiliateCommission(all)
+- kein weiterer Pluginbuild auf Basis von Marketplace, `getAffiliateCommission(all)`, `validateAffiliate`, Provisionen oder Statistik
 - keine 18er-Kontroll-CSV als Runtime-Importquelle
-- kein synthetisches lokales 18/18 als API-Beweis
-- validateAffiliate erst nach einer echten Discovery bekannter Produkt-IDs
+- kein Bruteforce über Produkt-IDs
+- kein undokumentiertes Session-/Browser-Scraping als stiller Ersatz für eine API
+- kein synthetisches lokales 18/18 als Remote-Beweis
 - bestehender Banner-/Target-/Slot-/LKG-Pfad bleibt unangetastet
+- eBay/idealo/Awin bleiben unverändert, solange kein Regressionstest scheitert
 
-Mit den aktuell öffentlich dokumentierten Digistore24-Schnittstellen ist kein unterstützter serverseitiger read-only Enumerator nachgewiesen, der dieselbe vollständige Affiliate-Partnerschaftsliste wie `Verkäufe & Partner -> Partnerschaften mit Vendoren` liefert. Der reale CSV-Export beweist, dass Digistore24 die Daten maschinenlesbar aus der eingeloggten Oberfläche exportieren kann; ohne dokumentierte API-/Export-Authentisierung ist dieser UI-Export aber noch keine sichere serverseitige Runtime-Schnittstelle für das WordPress-System.
+Der reale CSV-Export der Affiliate-Oberfläche beweist lediglich, dass Digistore24 die vollständigen Daten intern maschinenlesbar besitzt. Ohne dokumentierte API-/Export-Authentisierung ist dieser UI-Export noch keine stabile serverseitige Runtime-Schnittstelle für das WordPress-System.
 
-Nächster technisch zulässiger Produktcode-Schritt bleibt gesperrt, bis entweder (a) Digistore24 einen offiziell unterstützten read-only Export/API-Kanal für diese Affiliate-Liste bestätigt oder (b) der Zielvertrag ausdrücklich auf einen anderen autorisierten Transport geändert wird. Keine dieser beiden Entscheidungen darf durch einen weiteren Parser-Fix ersetzt werden.
+Damit verbleiben genau zwei fachlich ehrliche Endzustände:
 
-### Exakter Provider-Nachweis, falls Digistore24 einen nicht öffentlich dokumentierten unterstützten Kanal besitzt
+1. Digistore24 bestätigt/bereitstellt einen offiziell unterstützten read-only API-/Exportkanal für `Verkäufe & Partner -> Partnerschaften mit Vendoren`. Dann wird genau dieser eine Kanal gegen 18/18 real geprüft und erst danach in den bereits funktionierenden Downstream eingespeist.
+2. Digistore24 bietet keinen solchen Kanal. Dann ist die bisher geforderte vollautomatische Affiliate-seitige DS24-Discovery mit der unterstützten öffentlichen Schnittstelle nicht implementierbar. Eine CSV-/Browser-/sonstige Transportlösung wäre eine bewusste Änderung des Zielvertrags und darf nicht als bloßer Pluginfix ausgegeben werden.
+
+### Exakter Provider-Nachweis
 
 Die einzige verbleibende fachliche Frage an Digistore24 lautet:
 
-> Gibt es für ein Affiliate-Konto einen offiziell unterstützten read-only API-Endpunkt oder einen anderen stabilen maschinenlesbaren Export-Endpunkt, der dieselben Datensätze wie `Affiliate view -> Sales & partners -> Vendor partnerships` liefert, insbesondere Produkt-ID, Vendor, Partnership Status, Affiliate Commission, Affiliate-Support/Werbemittelseite und Promolink, und zwar vollständig auch für genehmigte Partnerschaften ohne bisherigen Verkauf? Wir benötigen ausschließlich lesenden Zugriff; `getAffiliateCommission`, `validateAffiliate`, Marketplace- und transaktionsbasierte Wege sind für diesen Affiliate-seitigen Inventurfall nicht ausreichend.
+> Gibt es für ein Affiliate-Konto einen offiziell unterstützten read-only API-Endpunkt oder einen anderen stabilen authentifizierbaren maschinenlesbaren Export-Endpunkt, der dieselben Datensätze wie `Affiliate view -> Sales & partners -> Vendor partnerships` liefert, insbesondere Produkt-ID, Vendor, Partnership Status, Affiliate Commission, Affiliate-Support/Werbemittelseite und Promolink, und zwar vollständig auch für genehmigte Partnerschaften ohne bisherigen Verkauf? Wir benötigen ausschließlich lesenden Zugriff. `getAffiliateCommission`, `validateAffiliate`, Marketplace- und transaktionsbasierte Wege liefern für diesen Affiliate-seitigen Inventurfall keine nachgewiesene vollständige Liste.
 
 Nur eine konkrete, von Digistore24 bestätigte Schnittstelle darf danach als neue Discovery-Authority geprüft werden.
 
 ## ERROR-REGISTER POSTCHECK
 
-Neue Fehlerklasse erkannt: JA — wiederholte Verwechslung von API-Parameterfähigkeit mit realer Affiliate-seitiger Discovery-Fähigkeit.
+Neue Fehlerklasse erkannt: NEIN — AFF-ERR-012 deckt die Root Cause vollständig ab.
 Bekannten Fehlerweg wiederholt: historisch JA (6.70/6.71), in diesem Schritt NEIN.
-Falsche Contentlinks-Annahme korrigiert: JA — reale UI zeigt keine Produkte.
+Falsche Contentlinks-Annahme korrigiert: JA.
+Public-API-Perspektive von `getAffiliateCommission(all)` gegen Vendor-Provisionsverwaltung gegengeprüft: JA.
 Produktcode geändert: NEIN.
 Plugin gebaut: NEIN.
 Release/Governance geändert: NEIN.
-Gate: TECHNISCHE DISCOVERY-CAPABILITY OFFEN / PRODUKTCODE-ÄNDERUNG GESPERRT.
+Gate: PROVIDER-CAPABILITY BLOCKED / PRODUKTCODE-ÄNDERUNG GESPERRT / KEIN RELEASE.
 
 ## Lokale Evidence-Hashes
 
