@@ -10,7 +10,7 @@
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
+      "sha256": "4f76ce26396e3edd2a6397d247b00c0b35907e6a4f7a132fb68a6f8118a68da6"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -50,7 +50,7 @@
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
-      "sha256": "f7077e39b422bab97d1aa30aa209d522f10e64cdc1e1dd29c28a9491321f9544"
+      "sha256": "df9b6817ed840cc9382fef8b2267050d1b2f6eccedb97284e140096be4f48f06"
     }
   ],
   "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt schon vor Tür 1 keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung, keine Rekonstruktion eines fehlenden Schritts.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ist vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf direkt oder indirekt verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ist ausschließlich der gebundene produktive Eingang zulässig. Danach ausschließlich:\n\npython3 control/single-door-boundary/codex_current_action.py current\n\nDiese Ausgabe ist der einzige Worker-Etagenanzeiger.\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- Das ist ein POSITIVER freigegebener Zustand, kein Fehler.\n- instruction=EXECUTE_CURRENT_BOUND_ITEM_NOW bedeutet: ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten.\n- Keine Suche nach einem Executor, keiner Capability und keinem anderen Raum.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- item_receipt_schema exakt erfüllen und nach item_receipt_ref schreiben.\n- Danach ausschließlich submission_command ausführen.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam, wird dem Worker aber absichtlich nicht als Arbeitsaktion ausgegeben. Sie bedeutet ausschließlich: außer dem aktuell ausgegebenen Einzelauftrag ist nichts erlaubt.\n\nJede neue Ausgabe des submission_command ersetzt die vorherige vollständig. Niemals den nächsten Raum, das nächste Item oder eine Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED: stehenbleiben, keine eigene Lösung oder Alternativroute. Beim finalen 107008-Zustand: stehenbleiben und Nutzerreview abwarten.\n\nAlle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish. Alles außerhalb der aktuell ausgegebenen Einzelaktion ist DENY.",
@@ -63,6 +63,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "4ce0490cbfda4ea21a198e6240ec6cf4b9fc522204b5dea1468b8425f14ee703"
+    "bundle_sha256": "0faa4a37648ade68d4a20c45ea5e20c6e95361cacf768dc7e87311d31f323bc8"
   }
 }
