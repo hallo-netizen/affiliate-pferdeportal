@@ -1,0 +1,83 @@
+AFFILIATE-ZENTRALE — MANUAL IMPORT AUTHORITY HARDENING EVIDENCE
+Date: 2026-09-02
+Workstream: AFFILIATE_ZENTRALE
+Branch: affiliate-release-current
+Status: LOCAL_SCOPE_PASS / LIVE_PENDING / NOT_RELEASED
+
+ERROR-REGISTER PRECHECK
+Relevant: AFF-ERR-001, 002, 003, 004, 006, 007, 008, 011, 012, 013; downstream-only 005,009,010 remain unchanged.
+User-authorized operating change: explicit manual CSV bulk import is allowed as a separate operating route. It is never reported as automatic DS24 discovery.
+First newly proven failure before fix: AFF-ERR-013.
+
+PRE-FIX NEGATIVE PROOF
+1. Duplicate approved Digistore24 product_id in contradictory rows was silently accepted because product_id was used as an array key with last-write-wins.
+2. Full Digistore24 GZIP import reused a limited sample reader and could return a truncated decompressed body at the 32 MiB ceiling without proving EOF.
+Both cases concern the same authority invariant: a manual inventory snapshot must be unique and complete before any persistence.
+
+ROOT FIX
+Only canonical file changed:
+release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-universal-import.php
+
+- Full DS24 GZIP read now reads at most MAX+1 and fails closed with universal_import_too_large if decompressed content exceeds 32 MiB.
+- A repeated accepted product_id aborts the entire DS24 import with ds24_csv_product_id_duplicate before persistence.
+- Vendor/product/commission fields are sanitized before storage.
+- Provider/output/slot/LKG/eBay/idealo/Awin/DS24 adapter core remains unchanged.
+
+EXACT SOURCE BINDING
+class-ppar-universal-import.php SHA-256:
+1cf2a487c4c8e6038114116d6ad0437dce08b19106bc7b85ddb073c85bf55877
+
+Current source manifest: 27 files
+CURRENT_SOURCE_SHA256.txt SHA-256:
+e61e27f20fbb0bced8b8a010420917906a3a69a1b76c04ed7db27652886a4084
+
+Governance source_authority and active_candidate are bound to the same manifest SHA and source_file_count=27. release_allowed remains false.
+
+LOCAL POSITIVE / NEGATIVE / REGRESSION
+PHP lint: 3/3 PASS
+Focused canonical unit checks: 35/35 PASS
+- provider detection: DS24 / idealo / Awin / ADCELL / eBay
+- unknown and ambiguous provider fail closed
+- real DS24 control structure: 18/18 product partnerships -> 10 creative/vendor sources -> 10 vendors
+- Linnon 3 products retained; Faszienloesen 5 retained
+- pending/rejected/invalid IDs blocked
+- cross-vendor creative-source conflict blocked
+- wrong DS24 identity blocks with zero mutation
+- import/reimport idempotent; no duplicate source IDs
+- nonmanual/LKG source preserved
+- obsolete prior manual source removed only from manual inventory
+- existing support URL retained; no synthetic promolink
+- manual inventory identity binding and same-identity marketplace preservation PASS
+- removed manual source is not resurrected
+- duplicate product_id fail closed PASS
+- decompressed GZIP >32 MiB fail closed PASS
+
+REAL MULTIPART HTTP ONE-FIELD INTEGRATION: 7/7 PASS
+1. DS24 partnership CSV -> 18 products / 10 sources / 10 vendors; success readback route.
+2. DS24 creative file -> early guard -> existing Creative Library provider=digistore24.
+3. Awin creative file -> existing Creative Library provider=awin.
+4. ADCELL creative file -> existing Creative Library provider=adcell.
+5. idealo standard feed -> existing idealo importer.
+6. eBay file -> detected but deliberately rejected from wrong file-import route because current eBay product path is API-based.
+7. DS24+Awin conflict -> fail closed, no provider guessing.
+All multipart checks used real PHP uploaded-file semantics; is_uploaded_file() was true on delegated files.
+
+REGRESSION SCOPE PROOF
+Compare base 118bf2e72d3780750caa086e46718a2035aef1ea to hardened source-binding state before this evidence: only
+- protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md
+- release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-universal-import.php
+- release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt
+- control/release-governance/CURRENT_RELEASE.json
+changed.
+No eBay, idealo, Awin, DS24 adapter trait, output-object, slot, LKG, analytics or automation core file changed in this hardening cycle. Hash-identical previously valid regression evidence is therefore reused where governance permits.
+
+ERROR-REGISTER POSTCHECK
+New error registered before fix: AFF-ERR-013 = yes.
+Known wrong discovery paths repeated: no.
+Duplicate product authority weakness repeated after fix: no.
+Truncated full GZIP accepted after fix: no.
+Automatic discovery falsely claimed: no.
+Live/release PASS claimed: no.
+
+BOUND LIMIT
+This evidence proves the canonical manual one-field import scope locally, including real multipart upload routing. It does NOT prove a WordPress-live installation, does NOT prove automatic DS24 partner discovery, and does NOT authorize a release ZIP.
