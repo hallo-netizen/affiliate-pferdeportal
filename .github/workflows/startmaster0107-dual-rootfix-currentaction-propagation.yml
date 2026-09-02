@@ -72,9 +72,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 control/cloud-entry-gate/cloud_entry.py start >/tmp/cloud.json
-          python3 control/output-quarantine/runtime_entry_gate.py start >/tmp/runtime.json
-          python3 control/single-door-boundary/codex_current_action.py current >/tmp/current.json
+          if ! python3 control/cloud-entry-gate/cloud_entry.py start >/tmp/cloud.json; then cat /tmp/cloud.json; exit 1; fi
+          cat /tmp/cloud.json
+          if ! python3 control/output-quarantine/runtime_entry_gate.py start >/tmp/runtime.json; then cat /tmp/runtime.json; exit 1; fi
+          cat /tmp/runtime.json
+          if ! python3 control/single-door-boundary/codex_current_action.py current >/tmp/current.json; then cat /tmp/current.json; exit 1; fi
+          cat /tmp/current.json
           python3 - <<'PY'
           import hashlib,json
           from pathlib import Path
