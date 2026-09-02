@@ -72,7 +72,8 @@
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
-    "authorized_next_action": "IMPLEMENT_AND_TEST_MANUAL_SINGLE_UPLOAD_MULTI_PROVIDER_IMPORT",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "IMPLEMENT_AND_TEST_MANUAL_SINGLE_UPLOAD_MULTI_PROVIDER_IMPORT",
     "completion_condition": "EXPLICIT_USER_SCOPE_IMPLEMENTED_AND_ALL_REQUIRED_RELEASE_GATES_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
@@ -227,7 +228,7 @@
     "control/release-governance/release_guard.py",
     "control/release-governance/test_release_guard.py"
   ],
-  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE EVIDENCE_ONLY",
+  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE_EVIDENCE_ONLY",
   "immutable_snapshot_binding": {
     "version": "6.63.8",
     "candidate_reference_artifact_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
@@ -243,7 +244,7 @@
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
     "investigation_policy": "ONLY_CURRENT_BOUND_GATE_OR_EXPLICIT_USER_SCOPE",
     "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
-    "goal_drift_policy": "FAIL_CLOSED_TO_USER_SCOPE_LOCK",
+    "goal_drift_policy": "FAIL_CLOSED",
     "optional_detours": "FORBIDDEN"
   }
 }
