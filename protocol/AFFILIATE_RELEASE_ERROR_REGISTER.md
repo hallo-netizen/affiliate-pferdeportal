@@ -229,24 +229,50 @@ Verbindlich:
 
 **Betroffene Systembereiche:** ausschließlich DS24-Discovery-Eingang und dessen Reporting. Bestehende Bannerparser, Ziel-/Slotlogik, LKG, eBay, idealo, Awin und zentrale Analytics dürfen ohne Regression nicht neu gebaut werden.
 
-**Nicht wiederholen:** Keiner der drei Wege `listMarketplaceEntries`, `getAffiliateCommission(all)`, `validateAffiliate` darf ohne neuen realen Gegenbeweis als autoritative Affiliate-Partnerschafts-Discovery implementiert werden. CSV/Kontrollliste bleibt Testoracle und keine Runtime-Quelle. Kein Fixture darf die gewünschte Remote-Antwort vorwegnehmen.
+**Nicht wiederholen:** Keiner der drei Wege `listMarketplaceEntries`, `getAffiliateCommission(all)`, `validateAffiliate` darf ohne neuen realen Gegenbeweis als autoritative **automatische** Affiliate-Partnerschafts-Discovery implementiert werden. Der vom Nutzer am 02.09.2026 ausdrücklich autorisierte, manuell gestartete CSV-Bulkimport ist davon ausgenommen: Er ist ein eigener Betriebsweg und darf niemals als Remote-Discovery-PASS ausgegeben werden. Kein Fixture darf eine gewünschte Remote-Antwort vorwegnehmen.
 
-**POSITIV:** Ein von Digistore24 unterstützter, read-only, maschinenlesbarer Affiliate-seitiger Discovery-Kanal liefert ohne CSV-/Produkt-ID-Vorfütterung alle 18 Kontroll-IDs. Erst danach werden alle 18 an `validateAffiliate` und die bestehende Verarbeitungskette weitergegeben.
+**POSITIV automatische Discovery:** Ein von Digistore24 unterstützter, read-only, maschinenlesbarer Affiliate-seitiger Discovery-Kanal liefert ohne CSV-/Produkt-ID-Vorfütterung alle 18 Kontroll-IDs.
 
-**NEGATIV:** 17/18, 53213-only, Marketplace-only, Transaktions-only, fremde Affiliate-Identität, malformed/duplicate Schema oder synthetisch angenommene API-Antwort bleiben FAIL_CLOSED. Discovery-FAIL führt zu null Downstream-Mutationen und lässt LKG unverändert.
+**POSITIV manueller Betriebsweg:** Ein explizit hochgeladener aktueller Digistore24-Partnerschaftsexport übernimmt alle genehmigten Partnerschaften vollständig, identitätsgebunden und reproduzierbar; Reporting bezeichnet die Herkunft klar als manuellen Dateiimport.
 
-**Gesamtworkflow / Regression:** Nach Discovery-PASS vollständig `validateAffiliate → Vendor-/Produktmetadaten → Werbemittelseite → Banner → Bild/Tracking → Seiten/Kategorien/Beiträge → flexible Slots → Draft → Revalidation → Persistenz → LKG → Backend-Readback → Reassignment`; einzelne Partner-/Creative-/Persistenzfehler dürfen andere Partner nicht stoppen; eBay/idealo/Awin/Partner-&-Einnahmen/Klicktracking/Zeitraumfilter regressionsprüfen.
+**NEGATIV:** 17/18 als behauptete automatische Discovery, 53213-only, Marketplace-only, Transaktions-only, fremde Affiliate-Identität, malformed/duplicate Schema oder synthetisch angenommene API-Antwort bleiben für automatische Discovery FAIL_CLOSED. Ein manueller Importfehler führt zu null nachgelagerten Veröffentlichungsmutationen und lässt LKG unverändert.
 
-**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md`; lokaler Discovery-Capability-/Gesamtworkflow-Vertrag 24/24 PASS; Real-Inventory-Acceptance-Gate 12/12 PASS.
+**Gesamtworkflow / Regression:** Nach gültigem Partnerschaftseingang bestehende Verarbeitungskette unverändert weiterverwenden: Vendor-/Produktmetadaten → Werbemittelseite/Creative → Banner → Bild/Tracking → Seiten/Kategorien/Beiträge → flexible Slots → Draft → Revalidation → Persistenz → LKG → Backend-Readback → Reassignment; einzelne Partner-/Creative-/Persistenzfehler dürfen andere Partner nicht stoppen; eBay/idealo/Awin/Partner-&-Einnahmen/Klicktracking/Zeitraumfilter regressionsprüfen.
 
-**Status:** OPEN — Produktcode-Fix gesperrt, bis ein real geeigneter Discovery-Kanal nachgewiesen ist.
+**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md`; `protocol/AFFILIATE_RELEASE_MANUAL_IMPORT_CONTRACT_20260902.md`.
+
+**Status:** OPEN für automatische Discovery; der ausdrücklich autorisierte manuelle Bulkimport ist als separater Betriebsweg zulässig.
+
+## AFF-ERR-013 — Manueller Bestandsimport akzeptiert unvollständige oder widersprüchliche Autorität
+
+**Datum / Arbeitsschritt:** 02.09.2026 / lokaler Negativtest des neuen Ein-Feld-Dateiimports.
+
+**Symptom:** Zwei unabhängige Negativfälle wurden vom kanonischen Importer angenommen: dieselbe Produkt-ID konnte in zwei widersprüchlichen DS24-Zeilen vorkommen und die spätere Zeile überschrieb die frühere still; eine GZIP-Datei oberhalb des 32-MiB-Dekompressionslimits wurde beim Limit abgeschnitten und als scheinbar vollständiger Inhalt zurückgegeben.
+
+**Belegte Root Cause:** Der neue autoritative manuelle Bestandsweg prüfte zwar Schema, Status, IDs und Vendor-/Werbemittel-Konflikte, aber noch nicht die Eindeutigkeit der Produkt-ID über die gesamte Datei und nicht die Vollständigkeit eines limitierten GZIP-Vollimports.
+
+**Gescheiterter Weg:** Produkt-ID als Array-Key mit stillem Last-Write-Wins; Wiederverwendung des absichtlich begrenzten Sample-Readers als vollständiger GZIP-Reader ohne Overflow-Nachweis.
+
+**Betroffene Systembereiche:** ausschließlich `class-ppar-universal-import.php` und dessen DS24-Dateieingang. Provideradapter, eBay, idealo, Awin, Output-/Slotlogik, LKG und Analytics bleiben unangetastet.
+
+**Nicht wiederholen:** Autoritative Bestandsdateien dürfen vor jeder Mutation weder widersprüchliche doppelte Produkt-IDs noch abgeschnittene Vollinhalte akzeptieren. Vollimport-GZIP muss Überlauf explizit erkennen und fail-closed abbrechen. Parserfehler = null Importmutation.
+
+**POSITIV:** reale 18er-Kontrollstruktur bleibt 18 Produktpartnerschaften / 10 Werbemittelquellen / 10 Vendoren; normale CSV und GZIP innerhalb des Limits werden vollständig gelesen.
+
+**NEGATIV:** doppelte Produkt-ID, auch bei anderer Vendor-/Werbemittelzuordnung, wird vor Persistenz blockiert; GZIP >32 MiB dekomprimiert wird vor Parsing/Persistenz blockiert; pending/rejected/ungültige IDs bleiben blockiert.
+
+**Gesamtworkflow / Regression:** Ein-Feld-Erkennung DS24/idealo/Awin/ADCELL/eBay, DS24-Identitätsbindung, Reimport/Idempotenz, Marketplace-Preserve-Guard, LKG-Erhalt und hash-identische Provider-/Outputpfade erneut prüfen.
+
+**Evidence vor Fix:** lokaler Negativlauf 02.09.2026: beide neuen Gegenfälle FAIL.
+
+**Status:** OPEN — nächster gebundener Ursachenfix.
 
 ---
 
-# Aktueller PRECHECK für den nächsten Banner-Automationsblock
+# Aktueller PRECHECK für den manuellen Ein-Feld-Import
 
-Relevante Fehler-IDs zwingend: `AFF-ERR-001`, `002`, `003`, `004`, `005`, `006`, `008`, `009`, `010`, `011`, `012`.
+Relevante Fehler-IDs zwingend: `AFF-ERR-001`, `002`, `003`, `004`, `006`, `007`, `008`, `011`, `012`, `013`; für nachgelagerte Banner-/Ausspielungslogik zusätzlich `005`, `009`, `010`.
 
-Der nächste Implementierungsblock darf erst als lokal PASS gelten, wenn **Bulk-Partnerschaften + Bannerimport + flexible Slotdefinition + Seiten/Kategorien/Beiträge + Mehrfachnutzung + Pferde-Fallback + regelmäßige Neubewertung + Größen-/Responsive-Matching + LKG/Persistenz + Provider-Regression + vollständige Partner-/Klicksicht** gemeinsam positiv und negativ getestet sind. Zusätzlich muss vor jeder DS24-Codeänderung AFF-ERR-012 bestanden sein: echte, unterstützte Affiliate-seitige 18er-Discovery ohne CSV-/ID-Vorfütterung.
+Der manuell gestartete CSV-Bulkimport ist aufgrund der ausdrücklichen Nutzerentscheidung zulässig und benötigt **keinen** vorherigen erfolgreichen automatischen 18er-Discovery-Nachweis. Er darf aber niemals als automatische Discovery bezeichnet werden. Der aktuelle erste belegte Fehler ist AFF-ERR-013; zuerst dessen Autoritäts-/Vollständigkeitsprüfung schließen, danach den vollständigen lokalen Positiv-/Negativ-/Regressionstest des Ein-Feld-Imports wiederholen.
 
 Keine Abnahme aus Einzeltests.
