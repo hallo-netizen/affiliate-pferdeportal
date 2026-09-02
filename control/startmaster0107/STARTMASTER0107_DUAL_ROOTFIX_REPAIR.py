@@ -51,6 +51,9 @@ def module(p:Path,n:str):
     m=importlib.util.module_from_spec(s);sys.modules[n]=m;s.loader.exec_module(m);return m
 def repl(text:str,old:str,new:str,label:str)->str:
     n=text.count(old)
+    if label=='ENTRY_FINALIZER' and 'pserc_finalization = finalizer.finalize_after_107008' in text:return text
+    if label=='PREPARED_107007_PERSIST' and 'dual.persist_prepared_binding(REPO, binding)' in text:return text
+    if label=='PREPARED_107008_CLEAR' and 'finalizer.clear_prepared_binding(REPO, binding["batch_sha256"])' in text:return text
     if n==0 and new in text:return text
     if n!=1:raise Blocked(label+':MATCHES='+str(n))
     return text.replace(old,new,1)
@@ -119,7 +122,7 @@ def validate_existing_article_source_binding(repo:Path,a:Mapping[str,Any],it:Map
     if src.get('optional_for_new_article_generation') is not True or src.get('content_or_quality_rules_changed') is not False or src.get('publish_allowed') is not False:raise Blocked('EXISTING_ARTICLE_SOURCE_POLICY_INVALID')
 
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
-    b=binding_descriptor(repo);root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS.json'
+    b=binding_descriptor(repo);root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
     s=dict(a.get('item_receipt_schema') or {})
     s.update({'fachworkflow_contract_binding':b,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact FACHWORKFLOW_PASS.json; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'contract_binding_ref':SELF_REL,'contract_binding_sha256':b['binding_sha256'],'required_stage_proofs':'exactly one {stage,ref,sha256} for each required_pass_stages entry; refs under allowed_output_root','fact_pack':'existing Fachworkflow fact-pack object','production_plan_item':'existing production_plan_v4 item','production_plan_header':'existing production_plan_v4 top-level fields except items','workflow_release_item':'existing current supervisor-release item','workflow_release_metadata':'exact current PSERC release metadata excluding dynamic hashes/signature/items','content_or_quality_rules_changed':False,'publish_allowed':False}})
     a['item_receipt_schema']=s
