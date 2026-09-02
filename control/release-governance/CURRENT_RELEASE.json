@@ -8,8 +8,8 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "e61e27f20fbb0bced8b8a010420917906a3a69a1b76c04ed7db27652886a4084",
-    "source_file_count": 27,
+    "manifest_sha256": "866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7",
+    "source_file_count": 25,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
     "guard_role": "VERIFY_ONLY"
@@ -41,8 +41,8 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "e61e27f20fbb0bced8b8a010420917906a3a69a1b76c04ed7db27652886a4084",
-    "source_file_count": 27,
+    "current_source_manifest_sha256": "866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7",
+    "source_file_count": 25,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
     "final_artifact_sha256": null
@@ -120,7 +120,7 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "e61e27f20fbb0bced8b8a010420917906a3a69a1b76c04ed7db27652886a4084"
+      "source_manifest_sha256": "866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7"
     },
     "old_state_reproduction_negative": {
       "status": "PASS",
@@ -214,7 +214,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "PRODUCT_DEALS_PARTNERS_BACKEND_KISS_DIGISTORE_TEST",
+    "current_milestone": "DS24_AUTOMATIC_PARTNERSHIP_DISCOVERY_AND_EXACT_LIVE_SOURCE_BIND",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
