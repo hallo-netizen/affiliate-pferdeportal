@@ -23,31 +23,26 @@ jobs:
           from pathlib import Path
           p=Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py')
           t=p.read_text(encoding='utf-8')
-
           old="BRIDGE_REL='control/single-door-boundary/codex_current_room_bridge.py'\n"
           new=old+"CURRENT_ACTION_REL='control/single-door-boundary/codex_current_action.py'\n"
           if 'CURRENT_ACTION_REL=' not in t:
               assert t.count(old)==1
               t=t.replace(old,new,1)
-
           marker='def patch_bridge(repo:Path):\n'
           helper='''def patch_current_action(repo:Path):\n    p=repo/CURRENT_ACTION_REL;t=p.read_text(encoding='utf-8')\n    t=repl(t,'            "item_receipt_schema": data["item_receipt_schema"],\\n            "submission_command":','            "item_receipt_schema": data["item_receipt_schema"],\\n            "existing_article_source_binding": data.get("existing_article_source_binding"),\\n            "submission_command":','CURRENT_ACTION_SOURCE_PROPAGATION')\n    t=repl(t,'        "item_receipt_schema": {"contract": "X"},\\n        "submission_command":','        "item_receipt_schema": {"contract": "X"},\\n        "existing_article_source_binding": {"contract": "PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1", "ref": "control/startmaster0107/recovery_sources/test/ARTICLE_test.md", "sha256": "a" * 64},\\n        "submission_command":','CURRENT_ACTION_SELFTEST_SAMPLE')\n    t=repl(t,'    if view.get("publish_allowed") is not False:\\n        raise AssertionError("PUBLISH_NOT_BLOCKED")\\n    return {','    if view.get("publish_allowed") is not False:\\n        raise AssertionError("PUBLISH_NOT_BLOCKED")\\n    if view.get("existing_article_source_binding") != sample["existing_article_source_binding"]:\\n        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_PROPAGATED")\\n    sample_without = dict(sample); sample_without.pop("existing_article_source_binding")\\n    view_without = _current_only(sample_without)\\n    if view_without.get("existing_article_source_binding") is not None:\\n        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_OPTIONAL")\\n    return {','CURRENT_ACTION_SELFTEST_ASSERT')\n    p.write_text(t,encoding='utf-8')\n\n'''
           if 'def patch_current_action(repo:Path):' not in t:
               assert t.count(marker)==1
               t=t.replace(marker,helper+marker,1)
-
           old="    upsert(b7,BRIDGE_REL,fsha(repo/BRIDGE_REL));dump(repo/STEP8_REL,b8)\n"
           new="    upsert(b7,BRIDGE_REL,fsha(repo/BRIDGE_REL));upsert(b7,CURRENT_ACTION_REL,fsha(repo/CURRENT_ACTION_REL));dump(repo/STEP8_REL,b8)\n"
           if old in t:
               assert t.count(old)==1
               t=t.replace(old,new,1)
-
           old="def apply(repo:Path)->dict:\n    patch_bridge(repo);patch_entry(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}\n"
           new="def apply(repo:Path)->dict:\n    patch_current_action(repo);patch_bridge(repo);patch_entry(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}\n"
           if old in t:
               assert t.count(old)==1
               t=t.replace(old,new,1)
-
           p.write_text(t,encoding='utf-8')
           PY
 
@@ -86,9 +81,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 control/cloud-entry-gate/cloud_entry.py start >/tmp/cloud.json
-          python3 control/output-quarantine/runtime_entry_gate.py start >/tmp/runtime.json
-          python3 control/single-door-boundary/codex_current_action.py current >/tmp/current.json
+          if ! python3 control/cloud-entry-gate/cloud_entry.py start >/tmp/cloud.json; then cat /tmp/cloud.json; exit 1; fi
+          cat /tmp/cloud.json
+          if ! python3 control/output-quarantine/runtime_entry_gate.py start >/tmp/runtime.json; then cat /tmp/runtime.json; exit 1; fi
+          cat /tmp/runtime.json
+          if ! python3 control/single-door-boundary/codex_current_action.py current >/tmp/current.json; then cat /tmp/current.json; exit 1; fi
           cat /tmp/current.json
           python3 - <<'PY'
           import hashlib,json
