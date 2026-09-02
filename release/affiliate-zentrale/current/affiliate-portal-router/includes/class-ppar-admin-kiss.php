@@ -17,15 +17,14 @@ final class PPAR_Affiliate_Admin_KISS {
         self::$booted = true;
         PPAR_Affiliate_Universal_Import::bootstrap();
         PPAR_Affiliate_Manual_Import_Guard::bootstrap();
-        add_action('admin_menu', array(__CLASS__, 'rebuild_visible_navigation'), 10050);
+        add_action('admin_menu', array(__CLASS__, 'register_visible_navigation'), 10050);
+        add_action('admin_head', array(__CLASS__, 'hide_legacy_navigation_css'), 10050);
     }
 
     private static function parent_slug() { return 'affiliate-portal-zentrale'; }
 
-    public static function rebuild_visible_navigation() {
-        if (!function_exists('remove_submenu_page') || !function_exists('add_submenu_page')) { return; }
-        $parent = self::parent_slug();
-        foreach (array(
+    private static function hidden_legacy_slugs() {
+        return array(
             'affiliate-portal-creative-library','affiliate-portal-outputs','affiliate-portal-control',
             'affiliate-portal-creatives','affiliate-portal-assignments','affiliate-portal-preview',
             'affiliate-portal-ebay-business','affiliate-portal-coverage','affiliate-portal-article-hybrid',
@@ -33,15 +32,33 @@ final class PPAR_Affiliate_Admin_KISS {
             'affiliate-portal-ebay','affiliate-portal-provider-idealo','affiliate-portal-provider-digistore24',
             'affiliate-portal-partners','affiliate-portal-sync','affiliate-portal-automation',
             'affiliate-portal-stats','affiliate-portal-health','affiliate-portal-deals'
-        ) as $slug) {
-            remove_submenu_page($parent, $slug);
-        }
+        );
+    }
 
+    public static function register_visible_navigation() {
+        if (!function_exists('add_submenu_page')) { return; }
+        $parent = self::parent_slug();
         add_submenu_page($parent,'Produkte & Deals','Produkte & Deals','manage_options','affiliate-portal-kiss-products',array(__CLASS__,'render_products'));
         add_submenu_page($parent,'Partner & Einnahmen','Partner & Einnahmen','manage_options','affiliate-portal-kiss-partners',array(__CLASS__,'render_partners'));
         add_submenu_page($parent,'Ausspielung','Ausspielung','manage_options','affiliate-portal-kiss-delivery',array(__CLASS__,'render_delivery'));
         add_submenu_page($parent,'Anbieter & APIs','Anbieter & APIs','manage_options','affiliate-portal-kiss-providers',array(__CLASS__,'render_providers'));
         add_submenu_page($parent,'Steuerung & System','Steuerung & System','manage_options','affiliate-portal-kiss-system',array(__CLASS__,'render_system'));
+    }
+
+    /**
+     * Hide legacy submenu links visually only. Never remove their WordPress
+     * registration: the KISS buttons intentionally keep linking to these pages.
+     * This preserves the 6.64.1 live navigation rootfix.
+     */
+    public static function hide_legacy_navigation_css() {
+        if (!current_user_can('manage_options')) { return; }
+        $selectors = array();
+        foreach (self::hidden_legacy_slugs() as $slug) {
+            $selectors[] = '#toplevel_page_' . self::parent_slug() . ' .wp-submenu a[href="admin.php?page=' . $slug . '"]';
+            $selectors[] = '#toplevel_page_' . self::parent_slug() . ' .wp-submenu a[href$="page=' . $slug . '"]';
+        }
+        if (!$selectors) { return; }
+        echo '<style id="ppar-kiss-legacy-nav-hide">' . implode(',', $selectors) . '{display:none!important}</style>';
     }
 
     private static function button($label, $slug, $primary = false) {
