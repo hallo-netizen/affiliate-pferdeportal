@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 6,
+  "generation": 7,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7",
+    "manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5",
     "source_file_count": 25,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7",
+    "current_source_manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5",
     "source_file_count": 25,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -55,18 +55,22 @@
     "current_ds24_expected_approved_partnerships": 18,
     "current_ds24_expected_vendors": 10,
     "automatic_ds24_discovery": "OUT_OF_SCOPE_AND_NON_BLOCKING",
+    "current_local_evidence_ref": "release/affiliate-zentrale/evidence/manual_single_upload_multi_provider_import_20260902.txt",
+    "current_local_evidence_sha256": "15a797c26dd01897d55992cfc825d0310b58559ff1e52260170d9be79d1fa5ff",
     "forbidden_reasks": [
       "PARTNER_LIST",
       "SAME_DS24_CSV",
       "DS24_BROWSER_NETWORK_SCREENSHOTS",
-      "AUTOMATIC_DISCOVERY_AS_PREREQUISITE"
+      "AUTOMATIC_DISCOVERY_AS_PREREQUISITE",
+      "EXACT_LIVE_671_ZIP_AS_PREREQUISITE"
     ],
     "supersedes_for_current_scope": [
       "CSV_TESTORACLE_ONLY_RULE",
       "AUTOMATIC_DISCOVERY_FIRST_RULE",
       "AFF_ERR_008_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT",
       "AFF_ERR_012_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT",
-      "AFF_ERR_015_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT"
+      "AFF_ERR_015_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT",
+      "AFF_ERR_016_WHERE_IT_BLOCKS_CANONICAL_DIRECT_TREE_WORK"
     ],
     "change_requires": "NEW_EXPLICIT_USER_DECISION"
   },
@@ -140,11 +144,17 @@
     "new_parallel_ci_staging_policy": "DENY"
   },
   "required_release_gates": {
+    "manual_single_upload_multi_provider_import": {
+      "status": "LOCAL_PASS_LIVE_PENDING",
+      "evidence_ref": "release/affiliate-zentrale/evidence/manual_single_upload_multi_provider_import_20260902.txt",
+      "evidence_sha256": "15a797c26dd01897d55992cfc825d0310b58559ff1e52260170d9be79d1fa5ff",
+      "source_manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5"
+    },
     "explicit_scope_product_deals_partner_analytics": {
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "866af00f7ed70b8c93414229241e635cf017ae7be1a627ca9265021afe2c86c7"
+      "source_manifest_sha256": "af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5"
     },
     "old_state_reproduction_negative": {
       "status": "PASS",
