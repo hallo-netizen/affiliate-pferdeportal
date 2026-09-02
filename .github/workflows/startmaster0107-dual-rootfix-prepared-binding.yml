@@ -1,0 +1,81 @@
+name: TEMP STARTMASTER0107 Dual Rootfix Prepared Binding
+
+on:
+  push:
+    branches: [startmaster0107-dual-rootfix-prepared-binding-20260902]
+
+permissions:
+  contents: write
+
+jobs:
+  prepared-binding-rootfix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: startmaster0107-dual-rootfix-prepared-binding-20260902
+
+      - name: Patch only the existing permanent repair script
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py')
+          t=p.read_text(encoding='utf-8')
+
+          marker='def existing_article_source_binding(repo:Path,it:Mapping[str,Any])->dict|None:\n'
+          helper='''def prepared_binding_sidecar(repo:Path,batch:str)->Path:\n    if not re.fullmatch(r'[0-9a-f]{64}',str(batch or '')):raise Blocked('PREPARED_BINDING_BATCH_INVALID')\n    return repo/'.pferde-release-staging'/batch/'BOUND_PREPARED_RELEASE_REF.json'\n\ndef validate_prepared_binding_payload(repo:Path,b:Mapping[str,Any])->dict:\n    required={'contract','prepared_ref','prepared_sha256','batch_sha256'}\n    if not isinstance(b,Mapping) or set(b)!=required:raise Blocked('PREPARED_BINDING_FIELDS_INVALID')\n    if b.get('contract')!='PFERDE_ATELIER_BOUND_PREPARED_RELEASE_FOR_FINAL_REVIEW_V1':raise Blocked('PREPARED_BINDING_CONTRACT_INVALID')\n    batch=str(b.get('batch_sha256') or '');ref=str(b.get('prepared_ref') or '');h=str(b.get('prepared_sha256') or '')\n    if not re.fullmatch(r'[0-9a-f]{64}',batch) or not re.fullmatch(r'[0-9a-f]{64}',h):raise Blocked('PREPARED_BINDING_HASH_INVALID')\n    if not ref.startswith(f'.pferde-release-staging/{batch}/'):raise Blocked('PREPARED_BINDING_REF_OUTSIDE_BATCH')\n    pp=safe(repo,ref)\n    if not pp.is_file() or fsha(pp)!=h:raise Blocked('PREPARED_BINDING_PREPARED_HASH_MISMATCH')\n    q=load(pp)\n    if q.get('contract')!='PFERDE_ATELIER_PREPARED_OUTPUT_RELEASE_V1' or q.get('status')!='PREPARED_NOT_VISIBLE' or q.get('batch_sha256')!=batch or q.get('publish_allowed') is not False:raise Blocked('PREPARED_BINDING_PREPARED_INVALID')\n    return dict(b)\n\ndef persist_prepared_binding(repo:Path,b:Mapping[str,Any])->dict:\n    z=validate_prepared_binding_payload(repo,b);p=prepared_binding_sidecar(repo,z['batch_sha256']);dump(p,z)\n    return {'ok':True,'status':'PREPARED_BINDING_PERSISTED','ref':str(p.relative_to(repo)),'sha256':fsha(p),'publish_allowed':False}\n\ndef restore_prepared_binding(repo:Path)->dict:\n    rs=repo/RUNTIME_STATE_REL\n    if not rs.is_file():raise Blocked('RUNTIME_STATE_MISSING_FOR_PREPARED_BINDING')\n    batch=str(load(rs).get('batch_sha256') or '');p=prepared_binding_sidecar(repo,batch)\n    if not p.is_file():raise Blocked('DURABLE_PREPARED_BINDING_MISSING')\n    z=validate_prepared_binding_payload(repo,load(p));cap=repo/'.pferde-capsule'\n    if not cap.is_dir():raise Blocked('CAPSULE_MISSING_FOR_PREPARED_BINDING_RESTORE')\n    dst=cap/'BOUND_PREPARED_RELEASE_REF.json';dump(dst,z);dst.chmod(0o444)\n    return {'ok':True,'status':'PREPARED_BINDING_RESTORED','ref':str(dst.relative_to(repo)),'sha256':fsha(dst),'batch_sha256':batch,'publish_allowed':False}\n\ndef clear_prepared_binding(repo:Path,batch:str)->dict:\n    p=prepared_binding_sidecar(repo,batch)\n    if p.exists():p.unlink()\n    return {'ok':True,'status':'PREPARED_BINDING_CLEARED','batch_sha256':batch,'publish_allowed':False}\n\n'''
+          if 'def prepared_binding_sidecar(' not in t:
+              assert t.count(marker)==1
+              t=t.replace(marker,helper+marker,1)
+
+          marker2='def patch_entry(repo:Path):\n'
+          patcher='''def patch_prepared_binding(repo:Path):\n    p=repo/ENTRY_REL;t=p.read_text(encoding='utf-8')\n    t=repl(t,'def start() -> dict:\\n    authority()\\n    proof = freshness()\\n    result = cloud().materialize()','def start() -> dict:\\n    _, state, gate, _ = authority()\\n    proof = freshness()\\n    result = cloud().materialize()','PREPARED_START_AUTHORITY')\n    t=repl(t,'    boundary = enforce_capsule_execution_boundary()\\n    write_capsule_json("FRESHNESS_PROOF.json", proof)','    boundary = enforce_capsule_execution_boundary()\\n    restored_prepared_binding = None\\n    if int(gate.get("sequence", -1)) == 107008 and state.get("next_allowed_step") == "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH":\\n        dual = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_prepared_restore")\\n        restored_prepared_binding = dual.restore_prepared_binding(REPO)\\n    write_capsule_json("FRESHNESS_PROOF.json", proof)','PREPARED_START_RESTORE')\n    t=repl(t,'        write_capsule_json("FRESHNESS_PROOF.json", post_proof)\\n        write_capsule_json("BOUND_PREPARED_RELEASE_REF.json", binding)','        dual = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_prepared_persist")\\n        dual.persist_prepared_binding(REPO, binding)\\n        write_capsule_json("FRESHNESS_PROOF.json", post_proof)\\n        write_capsule_json("BOUND_PREPARED_RELEASE_REF.json", binding)','PREPARED_107007_PERSIST')\n    t=repl(t,'        pserc_finalization = finalizer.finalize_after_107008(REPO, committed["release_receipt_ref"])\\n        return {','        pserc_finalization = finalizer.finalize_after_107008(REPO, committed["release_receipt_ref"])\\n        finalizer.clear_prepared_binding(REPO, binding["batch_sha256"])\\n        return {','PREPARED_107008_CLEAR')\n    p.write_text(t,encoding='utf-8')\n\n'''
+          if 'def patch_prepared_binding(repo:Path):' not in t:
+              assert t.count(marker2)==1
+              t=t.replace(marker2,patcher+marker2,1)
+
+          old="def apply(repo:Path)->dict:\n    patch_current_action(repo);patch_bridge(repo);patch_entry(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}\n"
+          new="def apply(repo:Path)->dict:\n    patch_current_action(repo);patch_bridge(repo);patch_entry(repo);patch_prepared_binding(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}\n"
+          if old in t:
+              assert t.count(old)==1
+              t=t.replace(old,new,1)
+
+          selfmarker="def selftest(repo:Path)->dict:\n    b=binding_descriptor(repo);assert set(b['contract_hashes'])==set(CONTRACT_HASHES)\n"
+          selfnew=selfmarker+"    assert 'dual_rootfix_prepared_restore' in (repo/ENTRY_REL).read_text() and 'dual_rootfix_prepared_persist' in (repo/ENTRY_REL).read_text()\n    with tempfile.TemporaryDirectory() as td:\n        tr=Path(td);batch='c'*64;prep=tr/'.pferde-release-staging'/batch/'ticket'/'PREPARED_RELEASE.json';prep.parent.mkdir(parents=True,exist_ok=True);dump(prep,{'contract':'PFERDE_ATELIER_PREPARED_OUTPUT_RELEASE_V1','status':'PREPARED_NOT_VISIBLE','batch_sha256':batch,'publish_allowed':False})\n        binding={'contract':'PFERDE_ATELIER_BOUND_PREPARED_RELEASE_FOR_FINAL_REVIEW_V1','prepared_ref':str(prep.relative_to(tr)),'prepared_sha256':fsha(prep),'batch_sha256':batch};persist_prepared_binding(tr,binding)\n        (tr/Path(RUNTIME_STATE_REL).parent).mkdir(parents=True,exist_ok=True);dump(tr/RUNTIME_STATE_REL,{'batch_sha256':batch});(tr/'.pferde-capsule').mkdir();z=restore_prepared_binding(tr);assert z['status']=='PREPARED_BINDING_RESTORED';assert load(tr/'.pferde-capsule/BOUND_PREPARED_RELEASE_REF.json')==binding\n        prep.write_text('{}',encoding='utf-8')\n        try:restore_prepared_binding(tr);raise AssertionError('NEG_PREPARED_BINDING_TAMPER')\n        except Blocked:pass\n        clear_prepared_binding(tr,batch);assert not prepared_binding_sidecar(tr,batch).exists()\n"
+          if 'NEG_PREPARED_BINDING_TAMPER' not in t:
+              assert t.count(selfmarker)==1
+              t=t.replace(selfmarker,selfnew,1)
+
+          p.write_text(t,encoding='utf-8')
+          PY
+
+      - name: Execute permanent repair script and full positive-negative test
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python3 control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py apply-and-test
+
+      - name: Existing entrance and continuity regressions
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/deterministic-entrance-gate/repo_ci_test.py
+          python3 control/cloud-entry-gate/cloud_repo_ci_test.py
+          python3 control/production-continuity/test_production_continuity_guard.py
+
+      - name: Commit permanent rootfix only and remove temporary runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/startmaster0107-dual-rootfix-prepared-binding.yml
+          find control -type d -name __pycache__ -prune -exec rm -rf {} + || true
+          rm -rf .pferde-capsule .pferde-quarantine .pferde-release-staging || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/startmaster0107-dual-rootfix-prepared-binding.yml control/CURRENT_STARTMASTER.json control/output-quarantine/runtime_entry_gate.py control/single-door-boundary/codex_current_action.py control/single-door-boundary/codex_current_room_bridge.py control/startmaster0107/CURRENT_STATE.json control/startmaster0107/PFERDE_ATELIER_START_HERE.json control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
+          git diff --cached --quiet && exit 1 || true
+          git commit -m 'STARTMASTER0107: persist prepared binding across 107008 rematerialization'
+          git push origin HEAD:startmaster0107-dual-rootfix-prepared-binding-20260902
