@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout trusted base
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           fetch-depth: 1
@@ -18,7 +18,7 @@ jobs:
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: git fetch --no-tags --depth=1 origin "$HEAD_SHA"
-      - name: Block changes to immutable entrance security layer
+      - name: Block changes to immutable entrance and ENDSTEMPEL security layer
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
@@ -27,8 +27,8 @@ jobs:
           set -euo pipefail
           git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/changed.txt
           cat /tmp/changed.txt
-          if grep -Eq '^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/)' /tmp/changed.txt; then
-            echo 'IMMUTABLE_ENTRANCE_SECURITY_PATH_CHANGE_BLOCKED'
+          if grep -Eq '^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/startmaster0107/ENDSTEMPEL_)' /tmp/changed.txt; then
+            echo 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
             exit 1
           fi
       - name: Enforce monotonic prebound workflow transition
