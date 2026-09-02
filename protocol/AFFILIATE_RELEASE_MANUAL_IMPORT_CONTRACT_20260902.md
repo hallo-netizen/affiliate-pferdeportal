@@ -21,6 +21,7 @@ Der Nutzer wählt **keinen Provider**. Der Importer erkennt den Provider ausschl
 ## Unterstützte Wege im aktuellen Arbeitsstand
 
 - Digistore24: Export `Partnerschaften mit Vendoren`; nur `Genehmigt/approved`; Produktpartnerschaften bleiben einzeln erhalten und werden zusätzlich nach Werbemittel-ID/Vendor als Quelle gruppiert.
+- Digistore24-Werbemitteldateien: nur bei eindeutiger Digistore24-/checkout-ds24-Signatur plus Banner-/Trackingstruktur; Delegation an die vorhandene Creative-Library.
 - idealo: nur Standardfeed mit exakt dem bereits bestehenden idealo-Headervertrag und passendem `productdata_<id>.csv[.gz]`-Dateinamen; danach Delegation an den vorhandenen idealo-Importer.
 - Awin: nur bei eindeutiger Awin-Trackingdomain im Dateiinhalt; Delegation an die vorhandene Creative-Library.
 - ADCELL: nur bei eindeutiger ADCELL-Trackingdomain im Dateiinhalt; Delegation an die vorhandene Creative-Library.
@@ -38,12 +39,17 @@ Der Import:
 - blockiert Werbemittel-ID/Vendor-Konflikte vollständig,
 - erhält bestehende nichtmanuelle Quellen und Last-Known-Good-Ausgaben,
 - entfernt bei einem späteren vollständigen CSV-Abgleich nur veraltete **manuell importierte Inventurquellen**, nicht veröffentlichte LKG-Ausgaben,
+- erhält die aktuelle manuelle DS24-Inventur auch dann, wenn der bestehende Marketplace-Abruf später seinen Cache aktualisiert,
+- mischt manuelle DS24-Inventur niemals in einen anderen API-Key-/Affiliate-Identitätsstand,
+- lässt eine im neuen manuellen Vollabgleich entfernte Quelle nicht durch einen späteren Marketplace-Refresh wieder auferstehen,
 - erzeugt keinen synthetischen Promolink,
 - veröffentlicht beim Upload nichts ungeprüft.
 
 Die reale Kontrollmenge 02.09.2026 ergibt: 18 genehmigte Produktpartnerschaften, 10 Werbemittelquellen, 10 Vendoren.
 
 ## Lokaler Positiv-/Negativ-/Regressionstest
+
+Der bestehende universelle Importer ist byte-identisch zum bereits geprüften Stand und wird nicht unnötig erneut verändert. Der neue Hardening-Block wurde separat positiv/negativ geprüft; PHP-Lint für alle drei beteiligten Dateien ist PASS.
 
 POSITIV:
 - reale 18er-Struktur -> 18 Produktpartnerschaften / 10 Quellen / 10 Vendoren,
@@ -52,8 +58,10 @@ POSITIV:
 - wiederholter Import ist idempotent,
 - bestehende nichtmanuelle DS24-Quelle bleibt erhalten,
 - vorhandene gültige Support-URL bleibt beim Reimport erhalten,
+- manuelle DS24-Inventur überlebt einen späteren Marketplace-Cache-Refresh derselben getesteten Identität,
+- entfernte manuelle Quellen werden nicht wiederhergestellt,
 - idealo wird nur mit Dateiname + vollständigem realen Headervertrag erkannt,
-- Awin/ADCELL werden nur mit eindeutiger Trackingdomain erkannt.
+- Awin/ADCELL sowie Digistore24-Werbemittel werden nur mit eindeutigen Providersignaturen erkannt.
 
 NEGATIV:
 - unknown -> keine Mutation,
@@ -63,12 +71,13 @@ NEGATIV:
 - ungültige Produkt-ID -> nicht übernommen,
 - gleiche Werbemittel-ID bei verschiedenen Vendoren -> gesamter DS24-Import fail-closed,
 - falscher/ungeprüfter DS24-Account-Fingerprint -> keine Mutation,
+- manuelle DS24-Inventur wird nicht in eine andere getestete Identität übernommen,
 - eBay-Datei -> keine falsche Weiterleitung in einen Creative-/Feedpfad.
 
 REGRESSION:
-- Gegen Basis `a79590f5ff8ed8f3390757edd08267a6303f28af` wurden ausschließlich `class-ppar-admin-kiss.php` geändert und `class-ppar-universal-import.php` ergänzt.
-- eBay-, idealo-, Awin-, DS24-Providertraits, Output-/Slotlogik, LKG, Partner-Analytics und Automationslogik sind byte-unverändert.
+- Die Providertraits für eBay, idealo, Awin und Digistore24, Output-/Slotlogik, LKG, Partner-Analytics und Automationslogik bleiben unverändert.
 - Der bestehende idealo- und Creative-Library-Importer wird delegiert statt dupliziert.
+- Die zusätzliche Persistenzsicherung liegt ausschließlich im Manual-Import-Guard und greift nur auf die Option des DS24-Marketplace-Caches ein, wenn eine identitätsgebundene manuelle Inventur vorhanden ist.
 
 ## Abnahmegrenze
 
