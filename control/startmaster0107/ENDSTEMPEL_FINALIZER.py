@@ -21,6 +21,9 @@ RECEIPT_STATUS = "OUTPUT_RELEASE_PASS_FINAL_REVIEW_AND_REARM_CONFIRMED"
 FINAL_FILENAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
 ARTICLE_NAME_RE = re.compile(r"^ARTICLE_[0-9a-f]{64}\.md$")
 HSM_COMMAND_ENV = "ENDSTEMPEL_HSM_CMD"
+TRUSTED_KEY_ID_ENV = "ENDSTEMPEL_TRUSTED_KEY_ID"
+TRUSTED_KEY_SHA_ENV = "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256"
+TRUSTED_PUBLIC_B64_ENV = "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64"
 TIMEOUT_SECONDS = 20
 
 
@@ -156,6 +159,25 @@ def decode_public_key(public_key_b64: str) -> bytes:
     return raw
 
 
+def trusted_identity(explicit: Mapping[str, str] | None = None) -> dict[str, str]:
+    if explicit is not None:
+        data = {k: str(v) for k, v in explicit.items()}
+    else:
+        data = {
+            "signing_key_id": os.environ.get(TRUSTED_KEY_ID_ENV, "").strip(),
+            "signing_public_key_sha256": os.environ.get(TRUSTED_KEY_SHA_ENV, "").strip(),
+            "public_key_b64": os.environ.get(TRUSTED_PUBLIC_B64_ENV, "").strip(),
+        }
+    if set(data) != {"signing_key_id", "signing_public_key_sha256", "public_key_b64"}:
+        raise Blocked("ENDSTEMPEL_TRUSTED_KEY_FIELDS_INVALID")
+    if not data["signing_key_id"] or not re.fullmatch(r"[0-9a-f]{64}", data["signing_public_key_sha256"]):
+        raise Blocked("ENDSTEMPEL_TRUSTED_KEY_NOT_BOUND")
+    raw = decode_public_key(data["public_key_b64"])
+    if hashlib.sha256(raw).hexdigest() != data["signing_public_key_sha256"]:
+        raise Blocked("ENDSTEMPEL_TRUSTED_KEY_SHA_MISMATCH")
+    return data
+
+
 def verify_signature(manifest_sha256: str, signature_b64: str, public_key_b64: str) -> None:
     if not re.fullmatch(r"[0-9a-f]{64}", manifest_sha256):
         raise Blocked("MANIFEST_HASH_INVALID")
@@ -239,15 +261,24 @@ def build_final_envelope(manifest: Mapping[str, Any], signature: Mapping[str, st
     return envelope
 
 
-def finalize(repo: Path, receipt_ref: str, signer: Callable[[str, str, str, int], Mapping[str, str]] | None = None) -> dict[str, Any]:
+def finalize(
+    repo: Path,
+    receipt_ref: str,
+    signer: Callable[[str, str, str, int], Mapping[str, str]] | None = None,
+    trusted: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
     repo = Path(repo).resolve()
     manifest, before = build_manifest(repo, receipt_ref)
     mhash = stable_hash(manifest)
+    trust = trusted_identity(trusted)
     signer_fn = signer or (lambda h, b, r, n: call_hsm(h, b, r, n))
     signed = dict(signer_fn(mhash, str(manifest["batch_sha256"]), str(manifest["source_107008_receipt_sha256"]), int(manifest["article_count"])))
     required = {"signing_key_id", "signing_public_key_sha256", "public_key_b64", "signature_b64"}
     if set(signed) != required:
         raise Blocked("ENDSTEMPEL_SIGNER_RESPONSE_FIELDS_INVALID")
+    for field in ("signing_key_id", "signing_public_key_sha256", "public_key_b64"):
+        if str(signed[field]) != trust[field]:
+            raise Blocked("ENDSTEMPEL_SIGNER_IDENTITY_MISMATCH:" + field)
     public_raw = decode_public_key(str(signed["public_key_b64"]))
     if hashlib.sha256(public_raw).hexdigest() != signed["signing_public_key_sha256"]:
         raise Blocked("ENDSTEMPEL_PUBLIC_KEY_IDENTITY_MISMATCH")
