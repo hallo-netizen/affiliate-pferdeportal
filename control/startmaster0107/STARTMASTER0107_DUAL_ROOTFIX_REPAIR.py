@@ -8,6 +8,7 @@ from typing import Any, Callable, Mapping
 REPO=Path(__file__).resolve().parents[2]
 SELF_REL='control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py'
 BRIDGE_REL='control/single-door-boundary/codex_current_room_bridge.py'
+CURRENT_ACTION_REL='control/single-door-boundary/codex_current_action.py'
 ENTRY_REL='control/output-quarantine/runtime_entry_gate.py'
 STEP7_REL='control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json'
 STEP8_REL='control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json'
@@ -184,6 +185,13 @@ def finalize_after_107008(repo:Path,receipt_ref:str)->dict:
     except Exception as e:z={'ok':False,'status':'PSERC_FINAL_PACKAGE_BLOCKED','reason':str(e),'publish_allowed':False}
     dump(status,z);return z
 
+def patch_current_action(repo:Path):
+    p=repo/CURRENT_ACTION_REL;t=p.read_text(encoding='utf-8')
+    t=repl(t,'            "item_receipt_schema": data["item_receipt_schema"],\n            "submission_command":','            "item_receipt_schema": data["item_receipt_schema"],\n            "existing_article_source_binding": data.get("existing_article_source_binding"),\n            "submission_command":','CURRENT_ACTION_SOURCE_PROPAGATION')
+    t=repl(t,'        "item_receipt_schema": {"contract": "X"},\n        "submission_command":','        "item_receipt_schema": {"contract": "X"},\n        "existing_article_source_binding": {"contract": "PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1", "ref": "control/startmaster0107/recovery_sources/test/ARTICLE_test.md", "sha256": "a" * 64},\n        "submission_command":','CURRENT_ACTION_SELFTEST_SAMPLE')
+    t=repl(t,'    if view.get("publish_allowed") is not False:\n        raise AssertionError("PUBLISH_NOT_BLOCKED")\n    return {','    if view.get("publish_allowed") is not False:\n        raise AssertionError("PUBLISH_NOT_BLOCKED")\n    if view.get("existing_article_source_binding") != sample["existing_article_source_binding"]:\n        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_PROPAGATED")\n    sample_without = dict(sample); sample_without.pop("existing_article_source_binding")\n    view_without = _current_only(sample_without)\n    if view_without.get("existing_article_source_binding") is not None:\n        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_OPTIONAL")\n    return {','CURRENT_ACTION_SELFTEST_ASSERT')
+    p.write_text(t,encoding='utf-8')
+
 def patch_bridge(repo:Path):
     p=repo/BRIDGE_REL;t=p.read_text(encoding='utf-8')
     t=repl(t,"RUNTIME_ENTRY=REPO/'control/output-quarantine/runtime_entry_gate.py'\nFACH=","RUNTIME_ENTRY=REPO/'control/output-quarantine/runtime_entry_gate.py'\nDUAL=REPO/'control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py'\nFACH=",'BRIDGE_DUAL_CONST')
@@ -215,14 +223,14 @@ def upsert(bundle:dict,ref:str,h:str):
 def refresh(repo:Path):
     b7=load(repo/STEP7_REL);b8=load(repo/STEP8_REL)
     for b in (b7,b8):upsert(b,SELF_REL,fsha(repo/SELF_REL));upsert(b,ENTRY_REL,fsha(repo/ENTRY_REL))
-    upsert(b7,BRIDGE_REL,fsha(repo/BRIDGE_REL));dump(repo/STEP8_REL,b8)
+    upsert(b7,BRIDGE_REL,fsha(repo/BRIDGE_REL));upsert(b7,CURRENT_ACTION_REL,fsha(repo/CURRENT_ACTION_REL));dump(repo/STEP8_REL,b8)
     if not isinstance(b7.get('next_binding'),dict) or b7['next_binding'].get('bundle_ref')!=STEP8_REL:raise Blocked('NEXT_BINDING_INVALID')
     b7['next_binding']['bundle_sha256']=fsha(repo/STEP8_REL);dump(repo/STEP7_REL,b7);h7=fsha(repo/STEP7_REL)
     st=load(repo/STATE_REL);st['execution_gate']['bundle_sha256']=h7;st['execution_gate_rearm_target']['bundle_sha256']=h7;st['visible_output_security']['official_runtime_entry_sha256']=fsha(repo/ENTRY_REL);dump(repo/STATE_REL,st)
     root=load(repo/ROOT_REL);root['current_state_sha256']=fsha(repo/STATE_REL);dump(repo/ROOT_REL,root)
     ptr=load(repo/PTR_REL);ptr['execution_entrance_gate_sha256']=fsha(repo/ENTRY_REL);dump(repo/PTR_REL,ptr)
 def apply(repo:Path)->dict:
-    patch_bridge(repo);patch_entry(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}
+    patch_current_action(repo);patch_bridge(repo);patch_entry(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}
 
 def selftest(repo:Path)->dict:
     b=binding_descriptor(repo);assert set(b['contract_hashes'])==set(CONTRACT_HASHES)
