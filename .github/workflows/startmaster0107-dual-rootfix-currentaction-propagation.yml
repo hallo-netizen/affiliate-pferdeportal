@@ -1,0 +1,106 @@
+name: TEMP STARTMASTER0107 Dual Rootfix Current Action Propagation
+
+on:
+  push:
+    branches: [startmaster0107-dual-rootfix-currentaction-propagation-20260902]
+
+permissions:
+  contents: write
+
+jobs:
+  current-action-rootfix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: startmaster0107-dual-rootfix-currentaction-propagation-20260902
+
+      - name: Patch only the existing permanent repair script
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py')
+          t=p.read_text(encoding='utf-8')
+
+          old="BRIDGE_REL='control/single-door-boundary/codex_current_room_bridge.py'\n"
+          new=old+"CURRENT_ACTION_REL='control/single-door-boundary/codex_current_action.py'\n"
+          if 'CURRENT_ACTION_REL=' not in t:
+              assert t.count(old)==1
+              t=t.replace(old,new,1)
+
+          marker='def patch_bridge(repo:Path):\n'
+          helper='''def patch_current_action(repo:Path):\n    p=repo/CURRENT_ACTION_REL;t=p.read_text(encoding='utf-8')\n    t=repl(t,'            "item_receipt_schema": data["item_receipt_schema"],\\n            "submission_command":','            "item_receipt_schema": data["item_receipt_schema"],\\n            "existing_article_source_binding": data.get("existing_article_source_binding"),\\n            "submission_command":','CURRENT_ACTION_SOURCE_PROPAGATION')\n    t=repl(t,'        "item_receipt_schema": {"contract": "X"},\\n        "submission_command":','        "item_receipt_schema": {"contract": "X"},\\n        "existing_article_source_binding": {"contract": "PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1", "ref": "control/startmaster0107/recovery_sources/test/ARTICLE_test.md", "sha256": "a" * 64},\\n        "submission_command":','CURRENT_ACTION_SELFTEST_SAMPLE')\n    t=repl(t,'    if view.get("publish_allowed") is not False:\\n        raise AssertionError("PUBLISH_NOT_BLOCKED")\\n    return {','    if view.get("publish_allowed") is not False:\\n        raise AssertionError("PUBLISH_NOT_BLOCKED")\\n    if view.get("existing_article_source_binding") != sample["existing_article_source_binding"]:\\n        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_PROPAGATED")\\n    sample_without = dict(sample); sample_without.pop("existing_article_source_binding")\\n    view_without = _current_only(sample_without)\\n    if view_without.get("existing_article_source_binding") is not None:\\n        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_OPTIONAL")\\n    return {','CURRENT_ACTION_SELFTEST_ASSERT')\n    p.write_text(t,encoding='utf-8')\n\n'''
+          if 'def patch_current_action(repo:Path):' not in t:
+              assert t.count(marker)==1
+              t=t.replace(marker,helper+marker,1)
+
+          old="    upsert(b7,BRIDGE_REL,fsha(repo/BRIDGE_REL));dump(repo/STEP8_REL,b8)\n"
+          new="    upsert(b7,BRIDGE_REL,fsha(repo/BRIDGE_REL));upsert(b7,CURRENT_ACTION_REL,fsha(repo/CURRENT_ACTION_REL));dump(repo/STEP8_REL,b8)\n"
+          if old in t:
+              assert t.count(old)==1
+              t=t.replace(old,new,1)
+
+          old="def apply(repo:Path)->dict:\n    patch_bridge(repo);patch_entry(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}\n"
+          new="def apply(repo:Path)->dict:\n    patch_current_action(repo);patch_bridge(repo);patch_entry(repo);refresh(repo);return {'ok':True,'status':'DUAL_ROOTFIX_APPLIED','publish_allowed':False}\n"
+          if old in t:
+              assert t.count(old)==1
+              t=t.replace(old,new,1)
+
+          p.write_text(t,encoding='utf-8')
+          PY
+
+      - name: Execute permanent repair script and full positive-negative test
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python3 control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py apply-and-test
+
+      - name: Existing entrance and continuity regressions
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/deterministic-entrance-gate/repo_ci_test.py
+          python3 control/cloud-entry-gate/cloud_repo_ci_test.py
+          python3 control/production-continuity/test_production_continuity_guard.py
+
+      - name: Positive proof on actual current action
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/cloud-entry-gate/cloud_entry.py start >/tmp/cloud.json
+          python3 control/output-quarantine/runtime_entry_gate.py start >/tmp/runtime.json
+          python3 control/single-door-boundary/codex_current_action.py current >/tmp/current.json
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/current.json').read_text())
+          assert d['status']=='CURRENT_BOUND_ACTION_READY',d
+          src=d.get('existing_article_source_binding')
+          assert isinstance(src,dict),d
+          assert src['contract']=='PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1'
+          assert src['ref'].startswith('control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_')
+          p=Path(src['ref']); assert p.is_file()
+          assert hashlib.sha256(p.read_bytes()).hexdigest()==src['sha256']
+          assert src['publish_allowed'] is False
+          print(json.dumps({'ok':True,'status':'ACTUAL_CURRENT_ACTION_SOURCE_BINDING_PASS','ref':src['ref'],'sha256':src['sha256'],'publish_allowed':False},indent=2))
+          PY
+          test -z "$(git diff --name-only -- .pferde-release/)"
+
+      - name: Remove temporary runner and commit permanent rootfix only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/startmaster0107-dual-rootfix-currentaction-propagation.yml
+          find control -type d -name __pycache__ -prune -exec rm -rf {} + || true
+          rm -rf .pferde-capsule .pferde-quarantine || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add control/CURRENT_STARTMASTER.json control/output-quarantine/runtime_entry_gate.py control/single-door-boundary/codex_current_action.py control/single-door-boundary/codex_current_room_bridge.py control/startmaster0107/CURRENT_STATE.json control/startmaster0107/PFERDE_ATELIER_START_HERE.json control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
+          git diff --cached --quiet && exit 1 || true
+          git commit -m 'STARTMASTER0107: propagate bound recovery source to current action'
+          git push origin HEAD:startmaster0107-dual-rootfix-currentaction-propagation-20260902
