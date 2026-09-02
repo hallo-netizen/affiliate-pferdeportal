@@ -1,0 +1,65 @@
+AFFILIATE-ZENTRALE — MANUAL SINGLE-UPLOAD MULTI-PROVIDER IMPORT — LOCAL EVIDENCE
+Date: 2026-09-02
+Branch: affiliate-release-current
+Scope authority: protocol/AFFILIATE_RELEASE_CURRENT_USER_SCOPE_LOCK_20260902.md
+Source manifest SHA-256: af8cf12ee63e8627f33d90046da916f9275079b39e94870f6c93be5ab2c065f5
+Changed canonical source file: affiliate-portal-router/includes/class-ppar-admin-kiss.php
+Changed source file SHA-256: 1140e4a894a5a45afcd0601d9f14c5531ae9cd707165bff2385e6afdb752021b
+Changed source Git blob: 6a922293c9a77f7e6a05818bb8e38b2a178b9853
+
+AUTHORIZED CURRENT SCOPE
+- Exactly one upload field under WordPress-Dashboard -> Affiliate-Zentrale -> Anbieter & APIs -> Datei importieren.
+- Provider is detected from file/content signatures; no provider dropdown.
+- Digistore24 current partnership CSV is an authorized manual runtime inventory source for this scope.
+- Automatic Digistore24 partnership discovery is out of scope and non-blocking.
+- No hard-coded 18-product runtime list in product code.
+- Existing eBay/idealo/Awin/ADCELL provider implementation files are unchanged by this source delta.
+
+LOCAL FIXTURE LIMITATION
+The active runtime did not contain the original CSV bytes. The local DS24 fixture therefore reproduces the known current 18 approved product IDs/vendors and the required 18 partnerships / 10 vendor-source grouping, but does NOT claim byte-identity with the user's export or a WordPress live upload.
+
+LOCAL PHP LINT
+PASS — No syntax errors detected in class-ppar-admin-kiss.php
+
+LOCAL POSITIVE/NEGATIVE CONTRACT TESTS
+PASS 01 DS24 exact header detection
+PASS 02 DS24 18 approved parsed
+PASS 03 DS24 10 sources grouped
+PASS 04 DS24 10 vendors
+PASS 05 DS24 import success
+PASS 06 Marketplace has 10 manual sources
+PASS 07 Partnership store has 10 sources
+PASS 08 Affiliation store has 18 approved/active products
+PASS 09 Reimport idempotent counts
+PASS 10 Pending-only rejected
+PASS 11 Duplicate product ID fail closed
+PASS 12 Entry/vendor conflict fail closed
+PASS 13 Awin detection
+PASS 14 ADCELL detection
+PASS 15 DS24 creative detection
+PASS 16 eBay detection only; no wrong file import
+PASS 17 idealo strong detection
+PASS 18 Ambiguous provider fail closed
+PASS 19 Unknown provider fail closed
+PASS 20 Same tested DS24 identity preserves 10 manual sources
+PASS 21 Different DS24 identity preserves nothing
+PASS 22 Wrong DS24 fingerprint blocked
+PASS 23 GZIP decompressed >32 MiB blocked
+PASS 24 No remove_submenu_page navigation regression
+PASS 25 Exactly one upload field
+RESULT: 25 PASS / 0 FAIL
+
+RUNTIME CONTRACT PROVED LOCALLY
+- DS24 partnership CSV only accepts approved/Genehmigt rows.
+- Product ID is unique; duplicates abort the entire import.
+- Same Werbemittel-ID across different vendors aborts the entire import.
+- Current tested DS24 API-key fingerprint + affiliate identity bind imported account data.
+- Reimport synchronizes manual inventory instead of duplicating it.
+- The importer materializes DS24 marketplace, partnership and affiliation stores in the shapes consumed by the existing DS24 gates.
+- Existing published LKG outputs are not mutated by the import.
+- Unknown or contradictory provider files produce no mutation.
+
+NOT CLAIMED
+- No WordPress-live PASS.
+- No byte-identical original Digistore24 CSV test in this runtime.
+- No final installer/release PASS.
