@@ -87,8 +87,17 @@ final class PPAR_Affiliate_Admin_KISS {
     }
 
     public static function render_partners() {
-        self::header('Partner & Einnahmen','Banner-/Partnernetzwerke, Werbemittel und echte Einnahmendaten an einer Stelle. Fehlende Werte werden nicht geschätzt.');
-        if (class_exists('PPAR_Affiliate_Source_Plan')) { self::source_cards(PPAR_Affiliate_Source_Plan::banner_networks()); }
+        if (class_exists('PPAR_Partner_Analytics_Admin')) {
+            PPAR_Partner_Analytics_Admin::render_page();
+            return;
+        }
+        self::header('Partner & Einnahmen','Banner-/Partnernetzwerke, Produktquellen und echte Einnahmendaten an einer Stelle. Fehlende Werte werden nicht geschätzt.');
+        if (class_exists('PPAR_Affiliate_Source_Plan')) {
+            self::source_cards(array_merge(
+                (array) PPAR_Affiliate_Source_Plan::product_sources(),
+                (array) PPAR_Affiliate_Source_Plan::banner_networks()
+            ));
+        }
         echo '<p style="display:flex;gap:8px;flex-wrap:wrap">';
         echo self::button('Partner & Einnahmen','affiliate-portal-stats',true);
         echo self::button('Partner','affiliate-portal-partners');
