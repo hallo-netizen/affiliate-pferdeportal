@@ -1,0 +1,26 @@
+name: TEMP STARTMASTER0107 Final Context Clean
+on:
+  push:
+    branches: [startmaster0107-dual-rootfix-fachpass-clean-20260902]
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          python3 control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py apply-and-test
+          python3 control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py apply-and-test
+          grep -q "p.name.startswith('FACHWORKFLOW_PASS_')" control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py
+      - run: |
+          rm -f .github/workflows/startmaster0107-final-context-clean.yml
+          rm -f control/single-door-boundary/__pycache__/single_door_preproduction_handoff.cpython-312.pyc
+          rmdir control/single-door-boundary/__pycache__ 2>/dev/null || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'STARTMASTER0107: clean transient files after finalizer fix test'
+          git push origin HEAD:startmaster0107-dual-rootfix-fachpass-clean-20260902
