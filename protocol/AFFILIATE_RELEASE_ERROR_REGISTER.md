@@ -5,274 +5,209 @@ Workstream: `AFFILIATE_ZENTRALE`
 Branch: `affiliate-release-current`
 Status: `MANDATORY_PRESTEP_GATE`
 
-## Zweck
-
-Dieses Register ist für **jeden Arbeitsschritt** der Affiliate-Zentrale verbindlich. Sein Zweck ist nicht nur Dokumentation, sondern die technische Pflicht, bekannte Fehler **nicht zu wiederholen**.
-
 ## Harte Ausführungsregel
 
-Vor **jedem** Analyse-, Code-, GitHub-, Codex-, Test-, Build-, Installations-, Live- oder Release-Schritt muss dieses Register gelesen und gegen den geplanten Schritt geprüft werden.
+Vor jedem Analyse-, Code-, GitHub-, Test-, Build-, Installations-, Live- oder Release-Schritt:
 
-Ein Schritt darf nur beginnen, wenn:
+1. aktuellen Scope bestimmen,
+2. passende Fehler-IDs dieses Registers prüfen,
+3. Positiv-/Negativ-/Gesamtworkflowtests daraus binden,
+4. bekannte Fehlwege nicht wiederholen,
+5. keinen PASS ohne geforderte Evidence behaupten.
 
-1. der aktuelle Scope genannt ist,
-2. alle dazu passenden Fehler-IDs aus diesem Register berücksichtigt wurden,
-3. für jede passende Fehler-ID die dort hinterlegte Gegenmaßnahme/Testpflicht eingeplant ist,
-4. kein bereits als falsch dokumentierter Lösungsweg wiederholt wird,
-5. kein PASS behauptet wird, solange die dafür geforderte Evidence fehlt.
+Bekannter Fehlweg im geplanten Schritt => `FAIL_CLOSED`, Plan zuerst korrigieren.
 
-Wenn ein geplanter Schritt einen bekannten Fehlerweg wiederholt, gilt **FAIL_CLOSED**: Schritt nicht ausführen, zuerst Ursache/Plan korrigieren.
-
-## Pflicht bei jedem neuen Fehler
-
-Jeder neue Fehler wird **vor dem nächsten Fix** hier eingetragen mit:
-
-- Fehler-ID
-- Datum / Arbeitsschritt
-- sichtbares Symptom
-- belegte Root Cause
-- falscher/gescheiterter Lösungsweg
-- betroffene Systembereiche
-- verbindliche Nicht-Wiederholungsregel
-- erforderlicher POSITIV-Test
-- erforderlicher NEGATIV-Test
-- erforderlicher Gesamtworkflow-/Regressionstest
-- Evidence/Commit/Hash soweit vorhanden
-- Status: OPEN / FIXED_LOCAL / LIVE_PASS / CLOSED
-
-**Kein Fix ohne vorherigen Registereintrag. Keine Abnahme ohne Registerabgleich.**
-
-## Pflicht je Arbeitsschritt
-
-Jeder technische Arbeitsauftrag muss einen Abschnitt `ERROR-REGISTER PRECHECK` enthalten:
-
-- geprüfte Fehler-IDs,
-- warum sie relevant oder nicht relevant sind,
-- welche Positiv-/Negativ-/Regressionstests daraus folgen.
-
-Nach Abschluss muss ein `ERROR-REGISTER POSTCHECK` dokumentieren:
-
-- neue Fehler: ja/nein,
-- bekannte Fehler wiederholt: ja/nein,
-- falls ja: Gate = FAIL,
-- Evidence des Gegenbeweises.
+Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause, gescheitertem Weg, Nicht-Wiederholungsregel, Positiv-/Negativ-/Regressionstest und Status. Nach dem Fix folgt der Register-Postcheck. Kein Fix ohne Registereintrag; keine Abnahme ohne Registerabgleich.
 
 ---
 
-# Bekannte Fehler und verbindliche Gegenregeln
-
 ## AFF-ERR-001 — Vorzeitige Abnahme / PASS ohne vollständigen Nachweis
 
-**Symptom:** Lokaler Teiltest wurde als praktisch fertig dargestellt, obwohl Live-/End-to-End-Nachweis fehlte.
+**Symptom/Root Cause:** Teiltest oder lokale Evidence wurde als Gesamtworkflow-/Release-PASS dargestellt.
 
-**Root Cause:** Teil-Evidence wurde mit Gesamtworkflow-Abnahme verwechselt.
+**Nicht wiederholen:** `PASS`, `fertig`, `Release` oder `Abnahme` nur mit allen explizit gebundenen lokalen Positiv-/Negativ-/Gesamtworkflowtests und erforderlichen Live-Gates.
 
-**Nicht wiederholen:** `PASS`, `fertig`, `Release` oder `Abnahme` nur, wenn die explizit gebundenen lokalen POSITIV-/NEGATIV-/Gesamtworkflow-Tests und erforderlichen Live-Gates tatsächlich belegt sind.
+**Tests:** lokaler Gesamtworkflow + Gegenfälle + Regression; Live nur mit echter Live-Evidence.
 
-**Pflichttests:** lokaler Gesamtworkflow + Gegenfälle + Regression; Live nur wenn Live-Gate gebunden.
-
-**Status:** CLOSED / dauerhaftes Hardlock.
+**Status:** CLOSED / permanenter Hardlock.
 
 ## AFF-ERR-002 — Last-Known-Good vor Schlussprüfung verdrängt
 
-**Symptom:** Neuer DS24-Kandidat konnte eine bereits veröffentlichte Last-Known-Good-Ausgabe vor vollständiger Schlussprüfung überschreiben/deaktivieren.
+**Symptom/Root Cause:** neuer DS24-Kandidat konnte publiziertes LKG vor vollständiger Revalidation/Persistenz überschreiben oder deaktivieren.
 
-**Root Cause:** Aktivierung/Supersede war nicht strikt zweiphasig.
+**Nicht wiederholen:** Draft vollständig materialisieren und revalidieren; LKG erst nach persistiertem neuen `published` ersetzen. Fehler => LKG unverändert.
 
-**Nicht wiederholen:** Draft zuerst vollständig materialisieren und revalidieren; bestehende LKG erst **nach** persistiertem neuen `published`-Zustand ablösen. Fehler = Rollback auf LKG.
+**POSITIV:** valider Kandidat publiziert und ersetzt danach LKG.
+**NEGATIV:** invalid/stale/Persistenzfehler lässt LKG live.
+**Regression:** eBay/idealo/Awin unverändert.
 
-**POSITIV:** neuer valider Kandidat wird veröffentlicht und ersetzt danach LKG.
-**NEGATIV:** invalid/stale/Persistenzfehler lässt LKG unverändert live.
-**Regression:** eBay/idealo/Awin-Ausgaben bleiben unverändert.
-
-**Status:** LIVE_PASS im 6.68.0-Livepfad; Regel bleibt dauerhaft bindend.
+**Status:** LIVE_PASS im 6.68.0-Livepfad; Regel dauerhaft bindend.
 
 ## AFF-ERR-003 — Aktion lief, Backend zeigte altes/kein Ergebnis
 
-**Symptom:** DS24-Aktion wurde ausgeführt, Backend-Readback zeigte aber den alten Status bzw. verschluckte das Ergebnis.
+**Symptom/Root Cause:** ausgeführter DS24-Lauf war im Backend nicht eindeutig als neuer persistierter Endzustand ablesbar.
 
-**Root Cause:** End-to-End-Readback war nicht Bestandteil des gleichen Abschlussvertrags.
+**Nicht wiederholen:** jeder Lauf zeigt auf derselben Fachseite Laufzeit, Zahlen und Schlussprüfung; kein Erfolg ohne Readback.
 
-**Nicht wiederholen:** Jeder manuell oder automatisch gestartete Lauf muss seinen persistierten Endzustand auf derselben Fachseite eindeutig anzeigen; keine Erfolgsmeldung ohne Readback.
-
-**POSITIV:** neuer Laufzeitstempel + Run-Zahlen + Schlussprüfung sichtbar.
+**POSITIV:** neuer Zeitstempel + Run-Zahlen + Schlussprüfung sichtbar.
 **NEGATIV:** fehlender/staler Readback verhindert PASS.
 
-**Status:** LIVE_PASS im 6.68.0-Livepfad; Regel bleibt dauerhaft bindend.
+**Status:** LIVE_PASS im 6.68.0-Livepfad; Regel dauerhaft bindend.
 
 ## AFF-ERR-004 — Unrealistische Testdaten erzeugen falschen lokalen PASS
 
-**Symptom:** Lokaler Zieltest nutzte bereits den fachlich idealisierten Begriff `Pferdetraining`, während Live `MKA Horsemanship Academy` vorlag; lokal PASS, live Review.
+**Symptom/Root Cause:** idealisierte Fixtures enthielten bereits die gewünschte Fachklassifikation statt echter Rohdaten, z. B. `Pferdetraining` statt realem `MKA Horsemanship Academy`.
 
-**Root Cause:** Testfixture enthielt die gewünschte Lösung statt den echten Live-Eingang.
+**Nicht wiederholen:** problematische Live-Rohdaten realitätsnah reproduzieren; erwartetes Ergebnis nie in die Eingabe hineinschreiben.
 
-**Nicht wiederholen:** Problemfälle werden mit echten/realitätsnahen Rohdaten reproduziert. Kein Test darf ein erwartetes Klassifikationsergebnis bereits in die Eingabedaten schreiben.
+**POSITIV:** echter Rohname führt zum richtigen Ergebnis.
+**NEGATIV:** generische/mehrdeutige Namen erzeugen keinen erfundenen engen Treffer.
+**Regression:** kompletter realer Portalbaum.
 
-**POSITIV:** echter Rohname/echte Zielstruktur führt zum richtigen Ergebnis.
-**NEGATIV:** generische/mehrdeutige Namen führen nicht zu erfundenen engen Treffern.
-**Regression:** vollständiger realer Portalbaum wird mitgetestet.
-
-**Status:** CLOSED / dauerhaftes Hardlock.
+**Status:** CLOSED / permanenter Hardlock.
 
 ## AFF-ERR-005 — Zielklassifizierer bevorzugt generische Wörter/tiefe Unterpfade
 
-**Symptom:** 3 DS24-Ausgaben geplant, aber 0 Entwürfe / Review statt sinnvoller automatischer Verteilung.
+**Symptom/Root Cause:** allgemeine Signale wie `Pferd`/`Training` und Pfadtiefe verzerrten die Zielwahl; 3 DS24-Ausgaben geplant, aber 0 Entwürfe/Review.
 
-**Root Cause:** Allgemeine Signale wie `Pferd`/`Training` und tiefe Pfade wurden zu stark gewichtet; reale semantische Nähe wurde verzerrt.
+**Nicht wiederholen:** spezifische Fachsignale vor generischen Portalwörtern; Tiefe allein kein Qualitätsmerkmal; vollständige reale Zielmenge; fachlich breiter Pferde-Fallback nur bei tatsächlich breiter Pferderelevanz.
 
-**Nicht wiederholen:** Spezifische Fachsignale vor generischen Portalwörtern; Tiefe allein ist kein Qualitätsmerkmal; komplette reale Zielmenge prüfen; bei breiter Pferde-Relevanz darf ein fachlich breiter Pferde-Fallback genutzt werden.
+**POSITIV:** spezifischer echter Match gewinnt.
+**NEGATIV:** tiefer Pfad gewinnt nicht allein wegen Tiefe/generischem Wort.
+**Gesamtworkflow:** Seiten + Kategorien + Beiträge.
 
-**POSITIV:** spezifisches Ziel gewinnt bei echtem spezifischem Match.
-**NEGATIV:** beliebige tiefe Kategorie gewinnt nicht nur wegen Pfadlänge/generischem Pferdewort.
-**Gesamtworkflow:** Seiten + Kategorien + Beiträge + reales Zielinventar.
-
-**Status:** LIVE_PASS 6.68.0; Regel bleibt dauerhaft bindend.
+**Status:** LIVE_PASS 6.68.0; Regel dauerhaft bindend.
 
 ## AFF-ERR-006 — Mini-Fix-/Versionskaskade statt Root-Cause-Fix
 
-**Symptom:** Mehrere aufeinanderfolgende Pluginstände behandelten jeweils nur das nächste sichtbare Symptom.
+**Symptom/Root Cause:** viele Pluginstände behandelten jeweils nur das nächste sichtbare Symptom.
 
-**Root Cause:** Zu enger Testscope und Fix vor vollständiger Ursachen-/Gesamtworkflowanalyse.
+**Nicht wiederholen:** ein Fehler => Root Cause => gebündelter Fix => kompletter Positiv-/Negativ-/Gesamtworkflowtest. Keine neue Version für kosmetische/nachgelagerte Einzelerscheinungen derselben offenen Ursache.
 
-**Nicht wiederholen:** Ein Fehler → Root Cause → gebündelter Fix → kompletter POSITIV/NEGATIV/Gesamtworkflow-Test. Keine neue Version für bloße kosmetische oder nachgelagerte Einzelerscheinung, wenn dieselbe Ursache offen ist.
-
-**Pflicht:** Vor neuem Pluginbuild belegen, warum eine Codeänderung notwendig ist und welche gemeinsame Ursache damit geschlossen wird.
+**Pflicht:** vor Pluginbuild belegen, warum Codeänderung notwendig ist und welche gemeinsame Ursache sie schließt.
 
 **Status:** OPEN als permanente Prozesssperre.
 
 ## AFF-ERR-007 — Unvollständige Backend-Pfade
 
-**Symptom:** Nutzer musste nachfragen, wo eine Aktion im WordPress-Backend zu finden ist.
+**Symptom:** Nutzer musste nachfragen, wo eine Aktion im WordPress-Backend liegt.
 
-**Root Cause:** UI-Anweisung nannte nur Zielseite/Button statt vollständiger Navigation.
-
-**Nicht wiederholen:** Jede Nutzerhandlung im Backend mit vollständigem Pfad ab `WordPress-Dashboard` nennen.
+**Nicht wiederholen:** jede Nutzerhandlung mit vollständigem Pfad ab `WordPress-Dashboard`.
 
 **Status:** CLOSED / permanente Kommunikationsregel.
 
 ## AFF-ERR-008 — DS24-Einzelpflege als Dauerlösung
 
-**Symptom:** Jede freigegebene Digistore24-Bannerquelle müsste einzeln mit Produkt-ID/Promolink/Werbemittelseite eingetragen werden.
+**Symptom/Root Cause:** jede DS24-Quelle müsste einzeln mit Produkt-ID/Promolink/Werbemittelseite gepflegt werden.
 
-**Root Cause:** Technischer Einzelimport wurde als Betriebsmodell stehen gelassen.
+**Nicht wiederholen:** Bulk-Synchronisation/-Import bestätigter Partnerschaften; Einzelpflege höchstens Fallback.
 
-**Nicht wiederholen:** Ziel ist Bulk-Synchronisation der bereits passenden/bestätigten Partnerschaften und danach automatische Bannererfassung/-pflege. Einzelpflege bleibt höchstens Fallback, nicht Hauptworkflow.
+**POSITIV:** mehrere bestätigte Partner in einem Lauf.
+**NEGATIV:** nicht genehmigte/fremde/ungültige Datensätze werden nicht freigegeben.
 
-**POSITIV:** mehrere bestätigte Partner in einem Lauf importier-/synchronisierbar.
-**NEGATIV:** unbestätigte/fremde/nicht-pferderelevante Partner werden nicht automatisch freigegeben.
-
-**Status:** OPEN — Bestandteil des aktuellen Zielvertrags.
+**Status:** FIXED_LOCAL für den ausdrücklich autorisierten manuellen Ein-Feld-Bulkimport; automatische Discovery bleibt separat durch AFF-ERR-012 offen.
 
 ## AFF-ERR-009 — Bannerformat oder Position hart im Providercode verdrahtet
 
-**Risiko/Symptom:** Neue Bannerformate oder spätere Designänderungen würden einen Umbau der Provider-/Zuordnungslogik erzwingen.
+**Risiko:** neue Formate/Designpositionen würden Providerumbau erzwingen.
 
-**Root Cause, die verboten ist:** feste Pixelmaße, feste Seitentyp-Positionen oder DS24-spezifische Slotregeln direkt im Provideradapter.
+**Nicht wiederholen:** Quelle, Format und Slot sind getrennte Verträge. Banner speichert echte Maße/Ratio; zentrale Slotdefinition liefert Fähigkeiten; Provider kennt keine feste Position/Pflichtgröße; Runtime-Matching Banner↔Slot; responsive ohne Verzerrung; unpassendes Format bleibt verfügbar und kann später neu bewertet werden.
 
-**Nicht wiederholen / Architektur-Hardlock:** Bannerquelle, Bannerformat und Ausgabeslot müssen getrennte Verträge sein.
+**POSITIV:** neue Slotgröße nur über Slotdefinition, ohne Providercode.
+**NEGATIV:** kein erzwungenes Verzerren/Abschneiden.
+**Regression:** bestehende Slots/Banner unverändert.
 
-Verbindlich:
-
-- Banner speichert reale Breite, Höhe, Seitenverhältnis und technische Eigenschaften als Metadaten.
-- Design-/Slotdefinitionen liefern verfügbare Slottypen und deren aktuelle Fähigkeiten/Positionen über eine zentrale konfigurierbare Schnittstelle.
-- Providerlogik kennt **keine** fest verdrahtete Position und **keine** einzelne Pflichtgröße.
-- Matching entscheidet zur Laufzeit Banner ↔ Slot.
-- Ein Slot darf mehrere zulässige Formatklassen akzeptieren.
-- Größenänderung/Positionsänderung im Design darf nur Slotdefinition/Konfiguration ändern, nicht Provideradapter oder gesamte Zuordnungsarchitektur.
-- Responsive Skalierung verzerrt nie das Seitenverhältnis.
-- Wenn ein neues Format nicht passt, bleibt es verfügbar und wird bei später passenden Slots automatisch neu bewertet.
-
-**POSITIV:** neue Slotgröße/Position wird durch geänderte Slotdefinition übernommen, ohne DS24/Awin/Providercode zu ändern.
-**NEGATIV:** unpassendes Seitenverhältnis wird nicht verzerrt/abgeschnitten erzwungen.
-**Regression:** bestehende Slots/Banner funktionieren unverändert.
-
-**Status:** OPEN — zwingender Bestandteil des aktuellen Banner-Automations-Zielvertrags.
+**Status:** OPEN / permanenter Architektur-Hardlock.
 
 ## AFF-ERR-010 — Organisch wachsendes Portal nur einmalig zugeordnet
 
-**Risiko/Symptom:** Neue Kategorien/Seiten/Beiträge würden keine bestehenden Banner erhalten; bessere spätere Zieltreffer würden nicht genutzt.
+**Risiko:** neue/geänderte Kategorien, Seiten, Beiträge oder Banner würden nicht neu bewertet.
 
-**Nicht wiederholen:** Zuordnung ist kontinuierlich/re-entrant. Neue oder geänderte Ziele und Banner lösen eine erneute Bewertung aus; zusätzlich periodischer zentraler Recheck. Keine Provider-eigenen Cron-Inseln.
+**Nicht wiederholen:** Zuordnung re-entrant; neue/geänderte Ziele/Banner lösen Recheck aus; zusätzlich zentraler periodischer Recheck; keine Provider-Cron-Inseln.
 
-**POSITIV:** neu hinzugefügter passender Beitrag erhält beim nächsten zentralen Lauf eine passende Bannerchance.
-**NEGATIV:** fremder Themenbereich außerhalb des Pferde-Portals erhält keine automatische Bannerzuordnung.
+**POSITIV:** neuer passender Beitrag erhält Bannerchance.
+**NEGATIV:** fremder Themenbereich erhält keine automatische Pferdeportal-Zuordnung.
 
-**Status:** OPEN — Bestandteil des aktuellen Zielvertrags.
+**Status:** OPEN / permanenter Workflow-Hardlock.
 
 ## AFF-ERR-011 — Partner-&-Einnahmen-Übersicht blendet aktive Produktquellen aus
 
-**Symptom:** `idealo` und `eBay` sind technisch aktiv und in der zentralen Einnahmen-/Klickauswertung vorhanden, erscheinen aber nicht auf der sichtbaren KISS-Einstiegsseite `Partner & Einnahmen`.
+**Symptom/Root Cause:** sichtbare KISS-Seite nutzte nur `banner_networks()`, obwohl zentrale Analytics eBay/idealo und weitere Produktquellen bereits providerübergreifend kannte.
 
-**Root Cause:** Die KISS-Seite baut ihre sichtbaren Karten ausschließlich aus `banner_networks()` auf. Aktive monetarisierende Produkt-/Preisvergleichsquellen aus `product_sources()` werden dadurch fälschlich ausgeblendet, obwohl die bestehende Partner-Analytics sie bereits vollständig führt.
+**Nicht wiederholen:** `Partner & Einnahmen` muss direkt die zentrale providerübergreifende Analytics verwenden. Keine zweite Statistik-Wahrheit und keine künstliche Banner-/Produktquellentrennung in der Einnahmenansicht.
 
-**Gescheiterter Weg:** Die sichtbare Partnerseite als reine Bannernetzwerk-Liste behandeln und Nutzer für Klickdaten zusätzlich auf eine zweite Unterseite schicken.
+**POSITIV:** sichtbarer Pfad `WordPress-Dashboard → Affiliate-Zentrale → Partner & Einnahmen` delegiert direkt an `PPAR_Partner_Analytics_Admin::render_page()` und enthält mindestens eBay, idealo, Awin, ADCELL, Digistore24, Direktpartner sowie lokale Klicks.
+**NEGATIV:** fehlende Providerdaten bleiben `nicht verfügbar`, niemals geschätzt.
+**Regression:** Provideradapter, Ausspielung, Tracking unverändert.
 
-**Nicht wiederholen:** `Partner & Einnahmen` ist die zentrale monetarisierende Übersicht und muss die vorhandene providerübergreifende Partner-Analytics direkt verwenden. Keine künstliche Trennung nach Banner-/Produktquelle in der sichtbaren Einnahmenansicht.
+**Evidence:** `release/affiliate-zentrale/evidence/current_scope_manual_import_partner_visibility_20260902.txt`.
 
-**POSITIV:** `WordPress-Dashboard → Affiliate-Zentrale → Partner & Einnahmen` zeigt mindestens eBay, idealo, Awin, ADCELL, Digistore24 und Direktpartner sowie die vorhandenen lokalen Klicks; Provider-Klicks/Einnahmen erscheinen nur bei real gelieferten Daten.
-
-**NEGATIV:** Fehlende Provider-Reports werden weiterhin als `nicht verfügbar`/`noch kein Report` angezeigt und niemals geschätzt; vorbereitete Quellen werden nicht als aktive Einnahmen erfunden.
-
-**Regression:** Provideradapter, eBay-/idealo-Ausspielung, DS24-Bannerlogik und bestehendes Klicktracking bleiben unverändert; es wird ausschließlich die bereits vorhandene zentrale Auswertung sichtbar gemacht.
-
-**Status:** OPEN — gemeinsamer UI-Ursachenfix im aktuellen Abschlussblock.
+**Status:** FIXED_LOCAL / WordPress-Liveprüfung noch offen.
 
 ## AFF-ERR-012 — DS24 Affiliate-Partnerschaftsinventur mit falscher API-Autorität
 
-**Datum / Arbeitsschritt:** 02.09.2026 / automatische Digistore24-Partnerschafts-Discovery.
+**Symptom:** reale Menge 18 genehmigte Partnerschaften; 6.70 live 0/0, 6.71 live 1/1 mit alter lokaler Quelle 53213.
 
-**Symptom:** Reale Kontrollmenge = 18 genehmigte Affiliate-Partnerschaften. 6.70 live = 0/0; 6.71 live = 1/1, wobei die einzige Quelle die alte lokale 53213 und nicht eine der 18 Kontrollpartnerschaften war.
+**Root Cause:** `listMarketplaceEntries` ist keine eigene Affiliate-Partnerschaftsinventur; `getAffiliateCommission(all)` wurde fälschlich als fremde Vendor-Inventur interpretiert; `validateAffiliate` kann nur bereits bekannte Produkt-IDs verifizieren.
 
-**Belegte Root Cause:** Die Discovery-Quelle wurde semantisch falsch gewählt. `listMarketplaceEntries` ist keine verlässliche Inventur der eigenen genehmigten Affiliate-Partnerschaften. `getAffiliateCommission(product_ids=all)` erlaubt zwar den Parameter `all`, wurde aber fälschlich als Affiliate-seitige Fremdvendor-Inventur interpretiert; der reale bekannte Fremdvendor-Fall 53213 hatte bereits keine verwertbare `data.commissions`-Antwort für diesen Zweck geliefert. `validateAffiliate` benötigt bekannte Produkt-IDs und kann daher nur verifizieren, nicht inventarisieren.
+**Gescheiterte Wege:** Marketplace als Vollinventur; synthetisches `getAffiliateCommission(all)`-Fixture; 53213 als Remote-Discovery-Erfolg.
 
-**Gescheiterte Wege:** Marketplace als vollständige Partnerschaftsinventur; `getAffiliateCommission(all)` aufgrund synthetischer lokaler Fixtures als autoritative Discovery; bestehende lokale Quelle 53213 als Remote-Discovery-Erfolg mitzählen.
+**Nicht wiederholen:** diese drei Wege nicht als autoritative automatische Discovery verwenden. Der vom Nutzer ausdrücklich autorisierte manuelle CSV-Bulkimport ist ein separater Betriebsweg und darf niemals als Remote-Discovery-PASS ausgegeben werden.
 
-**Betroffene Systembereiche:** ausschließlich DS24-Discovery-Eingang und dessen Reporting. Bestehende Bannerparser, Ziel-/Slotlogik, LKG, eBay, idealo, Awin und zentrale Analytics dürfen ohne Regression nicht neu gebaut werden.
+**POSITIV automatische Discovery:** unterstützter read-only Affiliate-seitiger Kanal liefert ohne CSV/ID-Vorfütterung alle 18.
+**POSITIV manueller Weg:** aktueller DS24-Partnerschaftsexport übernimmt vollständig, identitätsgebunden und reproduzierbar alle genehmigten Datensätze.
+**NEGATIV:** 17/18 als Auto-Discovery, 53213-only, Marketplace-only, transaktions-only, falsche Identität, malformed/duplicate oder synthetische Antwort => fail closed; Importfehler => keine Publikationsmutation, LKG bleibt.
+**Gesamtworkflow:** gültiger Eingang → Metadaten → Creative/Banner → Bild/Tracking → Targets/Slots → Draft → Revalidation → Persistenz → LKG → Readback → Reassignment; Partnerfehler isolieren; eBay/idealo/Awin regressionsprüfen.
 
-**Nicht wiederholen:** Keiner der drei Wege `listMarketplaceEntries`, `getAffiliateCommission(all)`, `validateAffiliate` darf ohne neuen realen Gegenbeweis als autoritative **automatische** Affiliate-Partnerschafts-Discovery implementiert werden. Der vom Nutzer am 02.09.2026 ausdrücklich autorisierte, manuell gestartete CSV-Bulkimport ist davon ausgenommen: Er ist ein eigener Betriebsweg und darf niemals als Remote-Discovery-PASS ausgegeben werden. Kein Fixture darf eine gewünschte Remote-Antwort vorwegnehmen.
+**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md`; `protocol/AFFILIATE_RELEASE_MANUAL_IMPORT_CONTRACT_20260902.md`; `release/affiliate-zentrale/evidence/manual_import_authority_hardening_20260902.txt`.
 
-**POSITIV automatische Discovery:** Ein von Digistore24 unterstützter, read-only, maschinenlesbarer Affiliate-seitiger Discovery-Kanal liefert ohne CSV-/Produkt-ID-Vorfütterung alle 18 Kontroll-IDs.
-
-**POSITIV manueller Betriebsweg:** Ein explizit hochgeladener aktueller Digistore24-Partnerschaftsexport übernimmt alle genehmigten Partnerschaften vollständig, identitätsgebunden und reproduzierbar; Reporting bezeichnet die Herkunft klar als manuellen Dateiimport.
-
-**NEGATIV:** 17/18 als behauptete automatische Discovery, 53213-only, Marketplace-only, Transaktions-only, fremde Affiliate-Identität, malformed/duplicate Schema oder synthetisch angenommene API-Antwort bleiben für automatische Discovery FAIL_CLOSED. Ein manueller Importfehler führt zu null nachgelagerten Veröffentlichungsmutationen und lässt LKG unverändert.
-
-**Gesamtworkflow / Regression:** Nach gültigem Partnerschaftseingang bestehende Verarbeitungskette unverändert weiterverwenden: Vendor-/Produktmetadaten → Werbemittelseite/Creative → Banner → Bild/Tracking → Seiten/Kategorien/Beiträge → flexible Slots → Draft → Revalidation → Persistenz → LKG → Backend-Readback → Reassignment; einzelne Partner-/Creative-/Persistenzfehler dürfen andere Partner nicht stoppen; eBay/idealo/Awin/Partner-&-Einnahmen/Klicktracking/Zeitraumfilter regressionsprüfen.
-
-**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md`; `protocol/AFFILIATE_RELEASE_MANUAL_IMPORT_CONTRACT_20260902.md`.
-
-**Status:** OPEN für automatische Discovery; der ausdrücklich autorisierte manuelle Bulkimport ist als separater Betriebsweg zulässig.
+**Status:** OPEN für automatische Discovery; manueller Bulkimport ausdrücklich zulässig.
 
 ## AFF-ERR-013 — Manueller Bestandsimport akzeptiert unvollständige oder widersprüchliche Autorität
 
-**Datum / Arbeitsschritt:** 02.09.2026 / lokaler Negativtest des neuen Ein-Feld-Dateiimports.
+**Symptom:** doppelte Produkt-ID konnte still überschrieben werden; GZIP >32 MiB konnte abgeschnitten als scheinbar vollständig behandelt werden.
 
-**Symptom:** Zwei unabhängige Negativfälle wurden vom kanonischen Importer angenommen: dieselbe Produkt-ID konnte in zwei widersprüchlichen DS24-Zeilen vorkommen und die spätere Zeile überschrieb die frühere still; eine GZIP-Datei oberhalb des 32-MiB-Dekompressionslimits wurde beim Limit abgeschnitten und als scheinbar vollständiger Inhalt zurückgegeben.
+**Root Cause:** Last-Write-Wins bei Produkt-ID und Sample-Reader als Vollreader ohne Overflow-Nachweis.
 
-**Belegte Root Cause:** Der neue autoritative manuelle Bestandsweg prüfte zwar Schema, Status, IDs und Vendor-/Werbemittel-Konflikte, aber noch nicht die Eindeutigkeit der Produkt-ID über die gesamte Datei und nicht die Vollständigkeit eines limitierten GZIP-Vollimports.
+**Nicht wiederholen:** autoritative Bestandsdatei vor Mutation auf eindeutige Produkt-IDs und vollständigen GZIP-Inhalt prüfen; Parserfehler => null Mutation.
 
-**Gescheiterter Weg:** Produkt-ID als Array-Key mit stillem Last-Write-Wins; Wiederverwendung des absichtlich begrenzten Sample-Readers als vollständiger GZIP-Reader ohne Overflow-Nachweis.
+**POSITIV:** reale Kontrollstruktur 18 Partnerschaften / 10 Werbemittelquellen / 10 Vendoren; CSV/GZIP innerhalb Limit vollständig.
+**NEGATIV:** doppelte Produkt-ID, >32-MiB-GZIP, pending/rejected/ungültige IDs fail closed.
+**Regression:** Ein-Feld-Erkennung DS24/idealo/Awin/ADCELL/eBay, Identitätsbindung, Reimport, Preserve-Guard, LKG und Provider-/Outputgrenze.
 
-**Betroffene Systembereiche:** ausschließlich `class-ppar-universal-import.php` und dessen DS24-Dateieingang. Provideradapter, eBay, idealo, Awin, Output-/Slotlogik, LKG und Analytics bleiben unangetastet.
+**Evidence:** `release/affiliate-zentrale/evidence/manual_import_authority_hardening_20260902.txt` — 35/35 fokussierte Checks, 3/3 PHP-Lints, 7/7 reale Multipart-HTTP-Routen.
 
-**Nicht wiederholen:** Autoritative Bestandsdateien dürfen vor jeder Mutation weder widersprüchliche doppelte Produkt-IDs noch abgeschnittene Vollinhalte akzeptieren. Vollimport-GZIP muss Überlauf explizit erkennen und fail-closed abbrechen. Parserfehler = null Importmutation.
+**Status:** FIXED_LOCAL / WordPress-Liveimport noch offen.
 
-**POSITIV:** reale 18er-Kontrollstruktur bleibt 18 Produktpartnerschaften / 10 Werbemittelquellen / 10 Vendoren; normale CSV und GZIP innerhalb des Limits werden vollständig gelesen.
+## AFF-ERR-014 — KISS-Navigation wiederholt bereits live gescheiterten `remove_submenu_page()`-Weg
 
-**NEGATIV:** doppelte Produkt-ID, auch bei anderer Vendor-/Werbemittelzuordnung, wird vor Persistenz blockiert; GZIP >32 MiB dekomprimiert wird vor Parsing/Persistenz blockiert; pending/rejected/ungültige IDs bleiben blockiert.
+**Datum / Arbeitsschritt:** 02.09.2026 / Gesamtregression vor Livekandidat.
 
-**Gesamtworkflow / Regression:** Ein-Feld-Erkennung DS24/idealo/Awin/ADCELL/eBay, DS24-Identitätsbindung, Reimport/Idempotenz, Marketplace-Preserve-Guard, LKG-Erhalt und hash-identische Provider-/Outputpfade erneut prüfen.
+**Symptom:** aktueller `class-ppar-admin-kiss.php` ruft für die funktionalen Legacy-/Providerseiten wieder `remove_submenu_page()` auf. Der dokumentierte 6.64.0-Livefehler war genau: KISS entfernte alte Unterseiten und verlinkte danach weiter auf diese Slugs; Nutzer erhielt `Du bist leider nicht berechtigt, auf diese Seite zuzugreifen.` Der 6.64.1-Rootfix verlangte ausdrücklich: funktionale Seiten registriert lassen, nur optisch ausblenden, **kein `remove_submenu_page()` im KISS-Teil**.
 
-**Evidence vor Fix:** lokaler Negativlauf 02.09.2026: beide neuen Gegenfälle FAIL.
+**Root Cause:** ein bereits live widerlegter Navigationsweg wurde beim späteren KISS-Source erneut eingeführt und bei den jüngsten Importtests nicht als historische Regression gegengeprüft.
 
-**Status:** OPEN — nächster gebundener Ursachenfix.
+**Gescheiterter Weg:** funktionale Zielseiten mit `remove_submenu_page()` aus der WordPress-Menüstruktur entfernen und sie anschließend weiterhin über KISS-Buttons direkt ansteuern.
+
+**Betroffene Bereiche:** ausschließlich KISS-Navigation/Backend-Erreichbarkeit. Providerlogik, Importer, Analytics, DS24, eBay, idealo, Awin, Output/LKG dürfen nicht geändert werden.
+
+**Nicht wiederholen:** Legacy-/Providerseiten bleiben vollständig registriert und erreichbar. Falls sie in der linken Navigation optisch reduziert werden sollen, ausschließlich Darstellung/CSS auf bereits registrierten Menüpunkten ändern; niemals die funktionale Registrierung/WordPress-Berechtigungsroute entfernen.
+
+**POSITIV:** jeder KISS-Button-Zielslug bleibt nach KISS-Menüaufbau registriert/erreichbar; insbesondere Netzwerke, Sync, Awin, ADCELL, eBay, idealo, Digistore24, Outputs, Assignments, Preview, Control, Automation, Health und Deals.
+**NEGATIV:** kein `remove_submenu_page()` für funktionale Zielseiten im KISS-Code; keine Berechtigungs-/Page-Hook-Lücke.
+**Regression:** sichtbare fünf KISS-Einstiege bleiben; Ein-Feld-Upload und direkte Partner-Analytics bleiben; Provider-/Outputbytes unverändert.
+
+**Evidence vor Fix:** historisches Liveprotokoll `AFFILIATE_ZENTRALE_GESAMTPROTOKOLL_ZIELVERTRAG_FEHLER_STATUS_2026-09-01.md`, Abschnitt 6.64.0/6.64.1; aktueller Source enthält den widerlegten Aufruf erneut.
+
+**Status:** OPEN — aktueller erster belegter Fehler; vor weiterem Live-/Buildschritt schließen.
 
 ---
 
-# Aktueller PRECHECK für den manuellen Ein-Feld-Import
+# Aktueller PRECHECK
 
-Relevante Fehler-IDs zwingend: `AFF-ERR-001`, `002`, `003`, `004`, `006`, `007`, `008`, `011`, `012`, `013`; für nachgelagerte Banner-/Ausspielungslogik zusätzlich `005`, `009`, `010`.
+Aktueller erster Fehler: `AFF-ERR-014`.
 
-Der manuell gestartete CSV-Bulkimport ist aufgrund der ausdrücklichen Nutzerentscheidung zulässig und benötigt **keinen** vorherigen erfolgreichen automatischen 18er-Discovery-Nachweis. Er darf aber niemals als automatische Discovery bezeichnet werden. Der aktuelle erste belegte Fehler ist AFF-ERR-013; zuerst dessen Autoritäts-/Vollständigkeitsprüfung schließen, danach den vollständigen lokalen Positiv-/Negativ-/Regressionstest des Ein-Feld-Imports wiederholen.
+Gebundener nächster Zyklus:
+`GESAMTTEST → AFF-ERR-014 Rootfix ausschließlich KISS-Navigation → GESAMTTEST`.
 
-Keine Abnahme aus Einzeltests.
+Dabei bleiben `AFF-ERR-011` und `AFF-ERR-013` lokal geschlossen; `AFF-ERR-012` automatische Discovery bleibt offen, blockiert aber den ausdrücklich autorisierten manuellen Bulkimport nicht. Keine Release-/Live-Abnahme aus lokalen Einzeltests.
