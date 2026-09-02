@@ -1,6 +1,6 @@
 # AFFILIATE-ZENTRALE — VERBINDLICHES FEHLERREGISTER
 
-Stand: 2026-09-01
+Stand: 2026-09-02
 Workstream: `AFFILIATE_ZENTRALE`
 Branch: `affiliate-release-current`
 Status: `MANDATORY_PRESTEP_GATE`
@@ -217,12 +217,36 @@ Verbindlich:
 
 **Status:** OPEN — gemeinsamer UI-Ursachenfix im aktuellen Abschlussblock.
 
+## AFF-ERR-012 — DS24 Affiliate-Partnerschaftsinventur mit falscher API-Autorität
+
+**Datum / Arbeitsschritt:** 02.09.2026 / automatische Digistore24-Partnerschafts-Discovery.
+
+**Symptom:** Reale Kontrollmenge = 18 genehmigte Affiliate-Partnerschaften. 6.70 live = 0/0; 6.71 live = 1/1, wobei die einzige Quelle die alte lokale 53213 und nicht eine der 18 Kontrollpartnerschaften war.
+
+**Belegte Root Cause:** Die Discovery-Quelle wurde semantisch falsch gewählt. `listMarketplaceEntries` ist keine verlässliche Inventur der eigenen genehmigten Affiliate-Partnerschaften. `getAffiliateCommission(product_ids=all)` erlaubt zwar den Parameter `all`, wurde aber fälschlich als Affiliate-seitige Fremdvendor-Inventur interpretiert; der reale bekannte Fremdvendor-Fall 53213 hatte bereits keine verwertbare `data.commissions`-Antwort für diesen Zweck geliefert. `validateAffiliate` benötigt bekannte Produkt-IDs und kann daher nur verifizieren, nicht inventarisieren.
+
+**Gescheiterte Wege:** Marketplace als vollständige Partnerschaftsinventur; `getAffiliateCommission(all)` aufgrund synthetischer lokaler Fixtures als autoritative Discovery; bestehende lokale Quelle 53213 als Remote-Discovery-Erfolg mitzählen.
+
+**Betroffene Systembereiche:** ausschließlich DS24-Discovery-Eingang und dessen Reporting. Bestehende Bannerparser, Ziel-/Slotlogik, LKG, eBay, idealo, Awin und zentrale Analytics dürfen ohne Regression nicht neu gebaut werden.
+
+**Nicht wiederholen:** Keiner der drei Wege `listMarketplaceEntries`, `getAffiliateCommission(all)`, `validateAffiliate` darf ohne neuen realen Gegenbeweis als autoritative Affiliate-Partnerschafts-Discovery implementiert werden. CSV/Kontrollliste bleibt Testoracle und keine Runtime-Quelle. Kein Fixture darf die gewünschte Remote-Antwort vorwegnehmen.
+
+**POSITIV:** Ein von Digistore24 unterstützter, read-only, maschinenlesbarer Affiliate-seitiger Discovery-Kanal liefert ohne CSV-/Produkt-ID-Vorfütterung alle 18 Kontroll-IDs. Erst danach werden alle 18 an `validateAffiliate` und die bestehende Verarbeitungskette weitergegeben.
+
+**NEGATIV:** 17/18, 53213-only, Marketplace-only, Transaktions-only, fremde Affiliate-Identität, malformed/duplicate Schema oder synthetisch angenommene API-Antwort bleiben FAIL_CLOSED. Discovery-FAIL führt zu null Downstream-Mutationen und lässt LKG unverändert.
+
+**Gesamtworkflow / Regression:** Nach Discovery-PASS vollständig `validateAffiliate → Vendor-/Produktmetadaten → Werbemittelseite → Banner → Bild/Tracking → Seiten/Kategorien/Beiträge → flexible Slots → Draft → Revalidation → Persistenz → LKG → Backend-Readback → Reassignment`; einzelne Partner-/Creative-/Persistenzfehler dürfen andere Partner nicht stoppen; eBay/idealo/Awin/Partner-&-Einnahmen/Klicktracking/Zeitraumfilter regressionsprüfen.
+
+**Evidence:** `protocol/AFFILIATE_RELEASE_DS24_DISCOVERY_CAPABILITY_AUDIT_20260902.md`; lokaler Discovery-Capability-/Gesamtworkflow-Vertrag 24/24 PASS; Real-Inventory-Acceptance-Gate 12/12 PASS.
+
+**Status:** OPEN — Produktcode-Fix gesperrt, bis ein real geeigneter Discovery-Kanal nachgewiesen ist.
+
 ---
 
 # Aktueller PRECHECK für den nächsten Banner-Automationsblock
 
-Relevante Fehler-IDs zwingend: `AFF-ERR-001`, `002`, `003`, `004`, `005`, `006`, `008`, `009`, `010`, `011`.
+Relevante Fehler-IDs zwingend: `AFF-ERR-001`, `002`, `003`, `004`, `005`, `006`, `008`, `009`, `010`, `011`, `012`.
 
-Der nächste Implementierungsblock darf erst als lokal PASS gelten, wenn **Bulk-Partnerschaften + Bannerimport + flexible Slotdefinition + Seiten/Kategorien/Beiträge + Mehrfachnutzung + Pferde-Fallback + regelmäßige Neubewertung + Größen-/Responsive-Matching + LKG/Persistenz + Provider-Regression + vollständige Partner-/Klicksicht** gemeinsam positiv und negativ getestet sind.
+Der nächste Implementierungsblock darf erst als lokal PASS gelten, wenn **Bulk-Partnerschaften + Bannerimport + flexible Slotdefinition + Seiten/Kategorien/Beiträge + Mehrfachnutzung + Pferde-Fallback + regelmäßige Neubewertung + Größen-/Responsive-Matching + LKG/Persistenz + Provider-Regression + vollständige Partner-/Klicksicht** gemeinsam positiv und negativ getestet sind. Zusätzlich muss vor jeder DS24-Codeänderung AFF-ERR-012 bestanden sein: echte, unterstützte Affiliate-seitige 18er-Discovery ohne CSV-/ID-Vorfütterung.
 
 Keine Abnahme aus Einzeltests.
