@@ -5,6 +5,7 @@ require_once __DIR__ . '/class-ppar-partner-analytics.php';
 require_once __DIR__ . '/class-ppar-deal-radar.php';
 require_once __DIR__ . '/class-ppar-product-source-plan.php';
 require_once __DIR__ . '/class-ppar-admin-kiss.php';
+require_once __DIR__ . '/class-ppar-ds24-manual-downstream.php';
 
 /**
  * Bounded housekeeping for derived/cache/history data only.
@@ -206,3 +207,4 @@ PPAR_Partner_Analytics_Admin::bootstrap();
 PPAR_Deal_Radar::bootstrap();
 PPAR_Affiliate_Source_Plan::bootstrap();
 PPAR_Affiliate_Admin_KISS::bootstrap();
+PPAR_DS24_Manual_Downstream::bootstrap();
