@@ -1,0 +1,140 @@
+name: V6.49 full root-cause release verification
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  v649-release:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'v649-public-coverage-target-bridge-rootcause-20260821'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    services:
+      mariadb:
+        image: mariadb:11.4
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v649gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - name: Checkout PR merge
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+
+      - name: Materialize audited predecessor and V6.49 harnesses
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' \
+            '2686b0712fe7d100d52e183bae31a1da682e356f8bab7cfed93dc47e6a977e7d  .github/v647/V647_GATE_BUNDLE.zip.b64.00' \
+            '6e081fded84b0b7afa71f1cf72140d73d24608af3391703a490906ce59495c71  .github/v647/V647_GATE_BUNDLE.zip.b64.01' \
+            '882920a1b75680de11db95f7b78203e26ece3c57d17eb700a0fc9330aed64ba7  .github/v647/V647_GATE_BUNDLE.zip.b64.02' \
+            'da4e70b804c7cb64e815234088f71f4f947e69ee144134575cb62bb085920bd1  .github/v647/V647_GATE_BUNDLE.zip.b64.03' \
+            '59d8d205624982f3cce9d2edbc0fba0e60741a2a69fac99f2baca7a507eb9d24  .github/v647/V647_GATE_BUNDLE.zip.b64.04' \
+            '1d4577320aee0d93f6abf67081d365dbedadcd9c0623c8ebb0baef2aff5e2a6c  .github/v647/V647_GATE_BUNDLE.zip.b64.05' | sha256sum -c -
+          cat .github/v647/V647_GATE_BUNDLE.zip.b64.0{0,1,2,3,4,5} >/tmp/v647.b64
+          base64 -d /tmp/v647.b64 >/tmp/v647.zip
+          echo '4c8d7efbf244132a2fbf83e078f9975baa32347fee248f8732590aa0c6143133  /tmp/v647.zip' | sha256sum -c -
+          rm -rf /tmp/v647-harness && mkdir -p /tmp/v647-harness
+          unzip -q /tmp/v647.zip -d /tmp/v647-harness
+
+          printf '%s\n' \
+            '78b43f70af7ebfffa847dbbe974f02d373455ae3d98b1502f30bf88e3cfd4676  .github/v648/V648_GATE_BUNDLE.zip.b64.00' \
+            'efdede60317af3aa4347e77aee1db9a0c57ea76765590f49d69fe2a43e4fee81  .github/v648/V648_GATE_BUNDLE.zip.b64.01' \
+            'b4534a015de06be91dead4a7ef886a92aa6bdf62d7f321e670a69a32503e6a83  .github/v648/V648_GATE_BUNDLE.zip.b64.02' \
+            '1532bc903cb09a24b55ab7c6f1066bbe792166721fbe990ea5e1c879e490bb45  .github/v648/V648_GATE_BUNDLE.zip.b64.03' \
+            '13f9f6b6ca41d297ec8c82c7bf6f7ef72fa76b683033a2248131c534bd914d15  .github/v648/V648_GATE_BUNDLE.zip.b64.04' \
+            'a6d02785b2a4413a30247844026c2239c140e90358740da23a5520654f5c1289  .github/v648/V648_GATE_BUNDLE.zip.b64.05' \
+            '726f3fb3d3a73f7d443774d2ee16f8a0fee17a03ff7e60056595d4060f238539  .github/v648/V648_GATE_BUNDLE.zip.b64.06' | sha256sum -c -
+          cat .github/v648/V648_GATE_BUNDLE.zip.b64.0{0,1,2,3,4,5,6} >/tmp/v648.b64
+          base64 -d /tmp/v648.b64 >/tmp/v648.zip
+          echo '51f32a5016ee2cd0ffb5144cf41f724ec3d552d1ed2e2c4fc0620b1682916481  /tmp/v648.zip' | sha256sum -c -
+          rm -rf /tmp/v648-harness && mkdir -p /tmp/v648-harness
+          unzip -q /tmp/v648.zip -d /tmp/v648-harness
+
+          printf '%s\n' \
+            'b73650771d20c5dca0756cd4fac5632e6abd4e503a82c12aaedf4b6f817b1c26  .github/v649/V649_GATE_BUNDLE.zip.part.00' \
+            '327059ae9ad6f3f6e90637ff8158c98683fa7048c104a7c8af03eb740ea58e17  .github/v649/V649_GATE_BUNDLE.zip.part.01' \
+            '3bbaaa8a015d407c35a4381e5adb472938267a7f780497db8fc23bc99cc7e35a  .github/v649/V649_GATE_BUNDLE.zip.part.02' \
+            'e8f938df3a600b57a376980f403fe34c64f2ae0b626f5816345cbb2cae1c0f14  .github/v649/V649_GATE_BUNDLE.zip.part.03' \
+            '84230796a1b9ce7b62e4112cdd020683b929213be01f4886189265a7c8f3f9a5  .github/v649/V649_GATE_BUNDLE.zip.part.04' \
+            '205151ce07e8e00a20a5396f815828995e28ff0ca97de30d6f4a17b3f85b5440  .github/v649/V649_GATE_BUNDLE.zip.part.05' \
+            '8604f373de91c5fb7ffca729d9fd0f51482ce89c97615fa6c6e50d7725fea8ac  .github/v649/V649_GATE_BUNDLE.zip.part.06' \
+            '36ff7a0b07b91ac5e8bdf8d84fcda537e72ebb3bd77d105ecd75e566e62562d0  .github/v649/V649_GATE_BUNDLE.b64.tail.00' \
+            '014ddf0057c9d7eac3f410fa6c0bb2d3baafa1bf546a47fd64997cd2b164ae22  .github/v649/V649_GATE_BUNDLE.b64.tail.01' \
+            '0a691658bf4a73a14ef4860002cb1ac56b5c3e5a4c2e94bfc29d543b72dce919  .github/v649/V649_GATE_BUNDLE.b64.tail.02' \
+            '8c28848291ed606c70411c62caaec11b329d15567354505ca375f7036423914a  .github/v649/V649_GATE_BUNDLE.b64.tail.03' \
+            '50a19e31fbdb6f682634030ca3ba198c2a8f8a2f0574eb5f3bdcb1e456d002f6  .github/v649/V649_GATE_BUNDLE.b64.tail.04' \
+            'd9d57dcc57fea98fa5fd9f4e1c82ad67f2cbf9c62041e40f904c92ee404921ca  .github/v649/V649_GATE_BUNDLE.b64.tail.05' \
+            '1039b3f870c6f2f384366f02f13547c79a453a4fd0391fb715ec0c771cc30c93  .github/v649/V649_GATE_BUNDLE.b64.tail.06a' \
+            '8bff69427350dab1e8124f5b8366847108712f3fe19ccc868f28e46d8893a4ea  .github/v649/V649_GATE_BUNDLE.b64.tail.06b' \
+            '39d59acb71333226c4f2867fa5628e5f96dfc326c89f0858399348f0e3fae6df  .github/v649/V649_GATE_BUNDLE.b64.tail.07a' \
+            'ccefb9e66b4b19ce44cd8fff7efc7c6a3cfffe462f92cfe1142ee8468efc86cd  .github/v649/V649_GATE_BUNDLE.b64.tail.07b' \
+            'c13ff852ddd02f998576b32cfd286a063dc0bbdb9bbc27f39f4d76281bb9cebc  .github/v649/V649_GATE_BUNDLE.b64.tail.08a' \
+            'c191932e3fe71205ed4914f704d224c1266d2c76e16d6d798b44de5ebe7f0d86  .github/v649/V649_GATE_BUNDLE.b64.tail.08b0' \
+            '98c87da8125d3c6830b02defc808ee06ef902210854ebe51850a65caee3e49f1  .github/v649/V649_GATE_BUNDLE.b64.tail.08b1' \
+            '01a8aaf83c4701d0e9ab3191ae6931ab6b7ac5e9420000d0b45725189e370c10  .github/v649/V649_GATE_BUNDLE.b64.tail.09a0' \
+            'b8a74066c8051861bc346e1faa76fda910c664ed85d8a88757eed7648869ec89  .github/v649/V649_GATE_BUNDLE.b64.tail.09a1' \
+            'c7cba7c8894e3e1bbe44676c33f784de7de6799cb723035f76518d797cfa9800  .github/v649/V649_GATE_BUNDLE.b64.tail.09b0' \
+            '5aff1af7d8f4b0ba0a5bbe754e91d9f853d9ce3ce001e8c48cee57042de6f17f  .github/v649/V649_GATE_BUNDLE.b64.tail.09b1' | sha256sum -c -
+          cat \
+            .github/v649/V649_GATE_BUNDLE.zip.part.0{0,1,2,3,4,5,6} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.0{0,1,2,3,4,5} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.06{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.07{a,b} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08a \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.08b{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09a{0,1} \
+            .github/v649/V649_GATE_BUNDLE.b64.tail.09b{0,1} > /tmp/v649.b64
+          test "$(wc -c < /tmp/v649.b64 | tr -d ' ')" = '47872'
+          base64 -d /tmp/v649.b64 > /tmp/v649.zip
+          echo 'c17e47d04f71b3c4ab2a72d11e4ff271f77074329b8ecca384b5daf12907b357  /tmp/v649.zip' | sha256sum -c -
+          unzip -t /tmp/v649.zip >/dev/null
+          unzip -qo /tmp/v649.zip -d "$GITHUB_WORKSPACE"
+          chmod +x .github/scripts/run-v649-full-release.sh
+
+      - name: Execute complete fail-closed V6.49 release workflow
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: .github/scripts/run-v649-full-release.sh
+
+      - name: Upload final verified V6.49 release
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V649_FINAL_VERIFIED_RELEASE
+          path: |
+            affiliate-zentrale_v6.49.0_PUBLIC_COVERAGE_TARGET_BRIDGE_ROOTFIX_REALGATE.zip
+            MASTER_AFFILIATE_ZENTRALE_V6_49_0_PUBLIC_COVERAGE_TARGET_BRIDGE_ROOTFIX_REALGATE_20260821.zip
+            V649_RELEASE_EVIDENCE/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload blocked V6.49 evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V649_BLOCKED_EVIDENCE
+          path: V649_RELEASE_EVIDENCE/
+          if-no-files-found: warn
+          retention-days: 14
