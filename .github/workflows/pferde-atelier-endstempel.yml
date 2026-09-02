@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
-      ENDSTEMPEL_PRIVATE_KEY_PEM: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY_PEM }}
+      ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
     steps:
       - name: Checkout exact main commit read-only
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -n "${ENDSTEMPEL_PRIVATE_KEY_PEM:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
+          test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
           python3 - <<'PY'
           from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
           print('ED25519_RUNTIME_PASS')
@@ -76,11 +76,14 @@ jobs:
           from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
           CONTRACT='PFERDE_ATELIER_ENDSTEMPEL_SIGN_REQUEST_V1'
-          pem=os.environ.get('ENDSTEMPEL_PRIVATE_KEY_PEM','').encode('utf-8')
-          if not pem:
+          private_data=os.environ.get('ENDSTEMPEL_PRIVATE_KEY','').encode('utf-8')
+          if not private_data:
               raise SystemExit('ENDSTEMPEL_SECRET_MISSING')
           try:
-              key=serialization.load_pem_private_key(pem,password=None)
+              if b'OPENSSH PRIVATE KEY' in private_data:
+                  key=serialization.load_ssh_private_key(private_data,password=None)
+              else:
+                  key=serialization.load_pem_private_key(private_data,password=None)
           except Exception:
               raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_INVALID')
           if not isinstance(key,Ed25519PrivateKey):
