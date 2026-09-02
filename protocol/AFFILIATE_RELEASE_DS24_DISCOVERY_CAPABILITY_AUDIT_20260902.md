@@ -30,6 +30,10 @@ Zusätzlich neu erkannt: die Discovery-Routen `listMarketplaceEntries` und `getA
 Kontrolloracle: 18 genehmigte Partnerschaften / 10 Vendoren. Die 18 Produkt-IDs dienen ausschließlich als Sollvergleich, nicht als Runtime-Discovery-Quelle.
 Alte lokale Quelle 53213 darf nicht als Erfolg der Remote-Discovery gezählt werden.
 
+Reale UI-Evidence vom 02.09.2026:
+- `Affiliate-Ansicht -> Verkäufe & Partner -> Partnerschaften mit Vendoren` zeigt 18 Ergebnisse und einen sichtbaren `CSV-Export`.
+- `Affiliate-Ansicht -> Verkäufe & Partner -> Contentlinks` zeigt im realen Konto keine Produktliste. Die vorherige Annahme, dort lasse sich über `Promolink anzeigen` eine vollständige Produkt-/Partnerschaftsauswahl gewinnen, ist damit für dieses Konto widerlegt und darf nicht als Discovery-Evidence verwendet werden.
+
 ## Capability-Ergebnis
 
 ### 1. listMarketplaceEntries — FAIL als autoritative Discovery
@@ -48,7 +52,10 @@ Transaktions-/Provisionsdaten können nur tatsächlich entstandene Provisionen a
 Dokumentiert als Vendor-seitiges Ereignis für neue Affiliates zu eigenen Produkten. Es liefert nicht die vollständige Affiliate-seitige Liste der Vendor-Partnerschaften dieses Kontos.
 
 ### 6. Affiliate-UI `Verkäufe & Partner → Partnerschaften mit Vendoren` — fachlich vollständig, aber keine nachgewiesene öffentliche Read-only API
-Die Oberfläche zeigt Vendor, Produkt, Status, Provision, Werbemittelseite und Promolink. In der aktuell veröffentlichten API-Referenz ist jedoch kein äquivalenter List-Endpunkt für diese Affiliate-seitige Partnerschaftstabelle nachgewiesen.
+Die Oberfläche zeigt Vendor, Produkt, Status, Provision, Werbemittelseite und Promolink. Die reale Seite zeigt außerdem einen CSV-Export. In der aktuell veröffentlichten API-Referenz ist jedoch kein äquivalenter List-Endpunkt für diese Affiliate-seitige Partnerschaftstabelle nachgewiesen.
+
+### 7. Contentlinks — für dieses Konto KEINE Discovery
+Der reale Kontoscreenshot zeigt auf `Verkäufe & Partner -> Contentlinks` keine Produkte. Eine Dokumentationsannahme über eine dortige Produkt-Auswahl darf deshalb nicht als Ersatz für die echte 18er-Partnerschaftsliste verwendet werden.
 
 ## Lokale Tests
 
@@ -86,8 +93,10 @@ Die aktuell veröffentlichte Digistore24-Swagger-Referenz wurde erneut gegen den
 Zusätzlich geprüft:
 - `listProducts`: listet Produkte des eigenen Produkt-/Vendor-Kontexts; kein Nachweis für fremde Produkte, zu denen das Konto nur Affiliate-Partnerschaften besitzt.
 - `listCommissions`: transaktions-/provisionsbasiert und deshalb prinzipiell unvollständig für genehmigte Partnerschaften ohne Verkauf.
-- Affiliate-UI `Sales & partners -> Vendor partnerships`: liefert fachlich genau Vendor, Produkt, Status, Provision, Werbemittelseite und Promolink, ist aber kein dokumentierter öffentlicher API-Endpunkt.
-- Affiliate-UI `Sales & partners -> Content links -> Show promolink`: Produkt-Auswahl enthält bereits eingegangene Affiliate-Partnerschaften, ebenfalls ohne dokumentierten öffentlichen List-Endpunkt.
+- `statsAffiliateToplist`: ist eine Vendor-seitige Rangliste von Affiliates nach Umsatz und keine Affiliate-seitige Vendor-/Partnerschaftsinventur.
+- `IPN on_affiliation`: wird ausgelöst, wenn ein Affiliate eine Partnerschaft für ein Produkt des empfangenden Vendors eingeht; falsche Richtung für die Liste fremder Vendor-Partnerschaften des Affiliate-Kontos.
+- Affiliate-UI `Sales & partners -> Vendor partnerships`: liefert fachlich genau Vendor, Produkt, Status, Provision, Werbemittelseite und Promolink und zeigt real einen CSV-Export, ist aber kein dokumentierter öffentlicher API-Endpunkt.
+- Affiliate-UI `Sales & partners -> Content links`: im realen Konto keine Produktliste; damit keine belastbare Discovery-Quelle.
 
 Der 15/15-Test ist bewusst ein Dokumentations-/Capability-Vertrag und kein Live-Credential-Test. Er beweist nicht, dass Digistore24 intern keinen solchen Kanal besitzt; er verhindert nur, dass erneut ein nicht belegter Endpoint als Release-Authority erfunden wird.
 
@@ -97,12 +106,14 @@ Der aktuelle Block ist kein weiterer Parser-/Pluginfehler, sondern ein fehlender
 
 Darum gilt fail-closed:
 - kein weiterer Pluginbuild auf Basis von Marketplace oder getAffiliateCommission(all)
-- keine 18er-CSV als Runtime-Importquelle
+- keine 18er-Kontroll-CSV als Runtime-Importquelle
 - kein synthetisches lokales 18/18 als API-Beweis
 - validateAffiliate erst nach einer echten Discovery bekannter Produkt-IDs
 - bestehender Banner-/Target-/Slot-/LKG-Pfad bleibt unangetastet
 
-Nächster technisch zulässiger Schritt ist ausschließlich der Nachweis eines von Digistore24 unterstützten, read-only, maschinenlesbaren Affiliate-seitigen Partnerschaftsinventars, das die 18 Kontroll-IDs ohne lokale Vorfütterung liefert. Solange ein solcher Kanal nicht existiert/nachgewiesen ist, darf kein Plugin-PASS behauptet werden.
+Mit den aktuell öffentlich dokumentierten Digistore24-Schnittstellen ist kein unterstützter serverseitiger read-only Enumerator nachgewiesen, der dieselbe vollständige Affiliate-Partnerschaftsliste wie `Verkäufe & Partner -> Partnerschaften mit Vendoren` liefert. Der reale CSV-Export beweist, dass Digistore24 die Daten maschinenlesbar aus der eingeloggten Oberfläche exportieren kann; ohne dokumentierte API-/Export-Authentisierung ist dieser UI-Export aber noch keine sichere serverseitige Runtime-Schnittstelle für das WordPress-System.
+
+Nächster technisch zulässiger Produktcode-Schritt bleibt gesperrt, bis entweder (a) Digistore24 einen offiziell unterstützten read-only Export/API-Kanal für diese Affiliate-Liste bestätigt oder (b) der Zielvertrag ausdrücklich auf einen anderen autorisierten Transport geändert wird. Keine dieser beiden Entscheidungen darf durch einen weiteren Parser-Fix ersetzt werden.
 
 ### Exakter Provider-Nachweis, falls Digistore24 einen nicht öffentlich dokumentierten unterstützten Kanal besitzt
 
@@ -116,6 +127,7 @@ Nur eine konkrete, von Digistore24 bestätigte Schnittstelle darf danach als neu
 
 Neue Fehlerklasse erkannt: JA — wiederholte Verwechslung von API-Parameterfähigkeit mit realer Affiliate-seitiger Discovery-Fähigkeit.
 Bekannten Fehlerweg wiederholt: historisch JA (6.70/6.71), in diesem Schritt NEIN.
+Falsche Contentlinks-Annahme korrigiert: JA — reale UI zeigt keine Produkte.
 Produktcode geändert: NEIN.
 Plugin gebaut: NEIN.
 Release/Governance geändert: NEIN.
