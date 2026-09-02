@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 5,
+  "generation": 6,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -47,9 +47,32 @@
     "final_artifact_ref": null,
     "final_artifact_sha256": null
   },
+  "user_scope_lock": {
+    "status": "ACTIVE",
+    "decision": "MANUAL_SINGLE_UPLOAD_MULTI_PROVIDER_IMPORT",
+    "scope_ref": "protocol/AFFILIATE_RELEASE_CURRENT_USER_SCOPE_LOCK_20260902.md",
+    "ds24_runtime_inventory_source": "USER_PROVIDED_CURRENT_DIGISTORE24_CSV_EXPORT",
+    "current_ds24_expected_approved_partnerships": 18,
+    "current_ds24_expected_vendors": 10,
+    "automatic_ds24_discovery": "OUT_OF_SCOPE_AND_NON_BLOCKING",
+    "forbidden_reasks": [
+      "PARTNER_LIST",
+      "SAME_DS24_CSV",
+      "DS24_BROWSER_NETWORK_SCREENSHOTS",
+      "AUTOMATIC_DISCOVERY_AS_PREREQUISITE"
+    ],
+    "supersedes_for_current_scope": [
+      "CSV_TESTORACLE_ONLY_RULE",
+      "AUTOMATIC_DISCOVERY_FIRST_RULE",
+      "AFF_ERR_008_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT",
+      "AFF_ERR_012_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT",
+      "AFF_ERR_015_WHERE_IT_BLOCKS_MANUAL_BULK_IMPORT"
+    ],
+    "change_requires": "NEW_EXPLICIT_USER_DECISION"
+  },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "authorized_next_action": "IMPLEMENT_AND_TEST_MANUAL_SINGLE_UPLOAD_MULTI_PROVIDER_IMPORT",
     "completion_condition": "EXPLICIT_USER_SCOPE_IMPLEMENTED_AND_ALL_REQUIRED_RELEASE_GATES_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
@@ -204,7 +227,7 @@
     "control/release-governance/release_guard.py",
     "control/release-governance/test_release_guard.py"
   ],
-  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE_EVIDENCE_ONLY",
+  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE EVIDENCE_ONLY",
   "immutable_snapshot_binding": {
     "version": "6.63.8",
     "candidate_reference_artifact_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
@@ -214,13 +237,13 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "DS24_AUTOMATIC_PARTNERSHIP_DISCOVERY_AND_EXACT_LIVE_SOURCE_BIND",
+    "current_milestone": "MANUAL_SINGLE_UPLOAD_MULTI_PROVIDER_IMPORT_WITH_DS24_18_PARTNERSHIP_RUNTIME_SYNC",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
     "investigation_policy": "ONLY_CURRENT_BOUND_GATE_OR_EXPLICIT_USER_SCOPE",
     "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
-    "goal_drift_policy": "FAIL_CLOSED",
+    "goal_drift_policy": "FAIL_CLOSED_TO_USER_SCOPE_LOCK",
     "optional_detours": "FORBIDDEN"
   }
 }
