@@ -15,6 +15,7 @@ STATE_REL='control/startmaster0107/CURRENT_STATE.json'
 ROOT_REL='control/startmaster0107/PFERDE_ATELIER_START_HERE.json'
 PTR_REL='control/CURRENT_STARTMASTER.json'
 PROMPT_REL='control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt'
+RUNTIME_STATE_REL='control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
 PASS_CONTRACT='PFERDE_ATELIER_FACHWORKFLOW_PASS_V1'
 PACKAGE_CONTRACT='PSERC_APPROVED_PRODUCTION_PACKAGE_V1'
 RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
@@ -59,13 +60,38 @@ def binding_descriptor(repo:Path)->dict:
     if not p.is_file():raise Blocked('FACH_PROMPT_MISSING')
     return {'contract':'PFERDE_ATELIER_FACHWORKFLOW_CONTRACT_BINDING_V1','authority':'EXISTING_UNCHANGED_FACHWORKFLOW_ONLY','binding_ref':SELF_REL,'binding_sha256':binding_sha(repo),'prompt_ref':PROMPT_REL,'prompt_sha256':fsha(p),'contract_hashes':CONTRACT_HASHES,'required_pass_stages':STAGES,'rule_semantics_redefined':False,'technical_guard_semantics_authority':'NONE','content_or_quality_rules_changed':False,'publish_allowed':False}
 
+def existing_article_source_binding(repo:Path,it:Mapping[str,Any])->dict|None:
+    sp=repo/RUNTIME_STATE_REL
+    if not sp.is_file():return None
+    st=load(sp);batch=str(st.get('batch_sha256') or '');slot=str(it.get('plan_slot') or '')
+    if not re.fullmatch(r'[0-9a-f]{64}',batch) or not re.fullmatch(r'[0-9a-f]{64}',slot):return None
+    refs=[f'.pferde-release/{batch}/ARTICLE_{slot}.md',f'control/startmaster0107/recovery_sources/{batch}/ARTICLE_{slot}.md']
+    for ref in refs:
+        p=safe(repo,ref)
+        if p.is_file():
+            return {'contract':'PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1','ref':ref,'sha256':fsha(p),'canonical_article_id':str(it.get('canonical_article_id') or ''),'plan_slot':slot,'usage':'PRESERVE_EXISTING_PROSE_CORRECT_ONLY_BOUND_FACHWORKFLOW_GAPS','optional_for_new_article_generation':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
+    return None
+
+def validate_existing_article_source_binding(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any])->None:
+    src=a.get('existing_article_source_binding')
+    if src is None:return
+    if not isinstance(src,dict) or src.get('contract')!='PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1':raise Blocked('EXISTING_ARTICLE_SOURCE_BINDING_INVALID')
+    if src.get('canonical_article_id')!=it.get('canonical_article_id') or src.get('plan_slot')!=it.get('plan_slot'):raise Blocked('EXISTING_ARTICLE_SOURCE_IDENTITY_MISMATCH')
+    ref=str(src.get('ref') or '');h=str(src.get('sha256') or '');p=safe(repo,ref)
+    if not p.is_file() or len(h)!=64 or fsha(p)!=h:raise Blocked('EXISTING_ARTICLE_SOURCE_HASH_MISMATCH')
+    if src.get('optional_for_new_article_generation') is not True or src.get('content_or_quality_rules_changed') is not False or src.get('publish_allowed') is not False:raise Blocked('EXISTING_ARTICLE_SOURCE_POLICY_INVALID')
+
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     b=binding_descriptor(repo);root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS.json'
     s=dict(a.get('item_receipt_schema') or {})
     s.update({'fachworkflow_contract_binding':b,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact FACHWORKFLOW_PASS.json; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'contract_binding_ref':SELF_REL,'contract_binding_sha256':b['binding_sha256'],'required_stage_proofs':'exactly one {stage,ref,sha256} for each required_pass_stages entry; refs under allowed_output_root','fact_pack':'existing Fachworkflow fact-pack object','production_plan_item':'existing production_plan_v4 item','production_plan_header':'existing production_plan_v4 top-level fields except items','workflow_release_item':'existing current supervisor-release item','workflow_release_metadata':'exact current PSERC release metadata excluding dynamic hashes/signature/items','content_or_quality_rules_changed':False,'publish_allowed':False}})
-    a['item_receipt_schema']=s;return a
+    a['item_receipt_schema']=s
+    src=existing_article_source_binding(repo,it)
+    if src is not None:a['existing_article_source_binding']=src
+    return a
 
 def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],d:Mapping[str,Any])->dict:
+    validate_existing_article_source_binding(repo,a,it)
     b=binding_descriptor(repo);schema=a.get('item_receipt_schema') or {};expected=schema.get('fachworkflow_pass_ref')
     ref=d.get('fachworkflow_pass_ref');digest=d.get('fachworkflow_pass_sha256')
     if ref!=expected or not isinstance(digest,str) or len(digest)!=64:raise Blocked('FACH_PASS_BINDING_MISSING')
@@ -203,11 +229,18 @@ def selftest(repo:Path)->dict:
     assert 'dual_rootfix_pass' in (repo/BRIDGE_REL).read_text() and 'pserc_finalization' in (repo/ENTRY_REL).read_text()
     with tempfile.TemporaryDirectory() as td:
         tr=Path(td);(tr/'q').mkdir();(tr/Path(PROMPT_REL).parent).mkdir(parents=True);shutil.copy(repo/PROMPT_REL,tr/PROMPT_REL);(tr/Path(SELF_REL).parent).mkdir(parents=True,exist_ok=True);shutil.copy(repo/SELF_REL,tr/SELF_REL)
-        a={'allowed_output_root':'q/','item_receipt_schema':{}};it={'canonical_article_id':'article:test','plan_slot':'a'*64};a=augment_current_action(tr,a,it);rows=[]
+        a={'allowed_output_root':'q/','item_receipt_schema':{}};it={'canonical_article_id':'article:test','plan_slot':'a'*64}
+        (tr/Path(RUNTIME_STATE_REL).parent).mkdir(parents=True,exist_ok=True);dump(tr/RUNTIME_STATE_REL,{'batch_sha256':'c'*64})
+        srcp=tr/f".pferde-release/{'c'*64}/ARTICLE_{it['plan_slot']}.md";srcp.parent.mkdir(parents=True,exist_ok=True);srcp.write_text('existing',encoding='utf-8')
+        a=augment_current_action(tr,a,it);assert a['existing_article_source_binding']['sha256']==fsha(srcp);rows=[]
         for s in STAGES:
             ref='q/'+s+'.json';(tr/ref).write_text(json.dumps({'stage':s,'status':'PASS'}));rows.append({'stage':s,'ref':ref,'sha256':fsha(tr/ref)})
         meta={'article_origin_policy':'POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE','authoring_prompt_sha256':'b'*64,'authoring_role':'CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS','content_generation_performed_by_supervisor':False,'contract':RELEASE_CONTRACT,'created_at_utc':'2026-09-02T00:00:00+00:00','exact_five_batch_sha256':'c'*64,'exact_five_item_count':1,'frozen_workflow_sha256':'d'*64,'nullpunkt':{},'nullpunkt_sha256':'e'*64,'ppm_baseline_sha256':'f'*64,'ppm_version':'6.7.9','research_evidence_policy':'BOUND_EXISTING_FACHWORKFLOW_ONLY','sequence':107008,'status':'PASS','wordpress_write_performed':False}
         q={'contract':PASS_CONTRACT,'status':'PASS','canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'contract_binding_ref':SELF_REL,'contract_binding_sha256':binding_sha(tr),'required_stage_proofs':rows,'fact_pack':{'contract':'canonical_fact_pack_v1','fact_pack_id':'fp'},'production_plan_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'production_plan_header':{'contract':'production_plan_v4','plan_contract_version':'4.0.0','required_plugin_version':'6.7.9','contract_hashes':CONTRACT_HASHES},'workflow_release_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'workflow_release_metadata':meta,'content_or_quality_rules_changed':False,'publish_allowed':False};pref=a['item_receipt_schema']['fachworkflow_pass_ref'];dump(tr/pref,q);h=fsha(tr/pref);d={'outputs':[{'ref':pref,'sha256':h}],'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':h};validate_fachworkflow_pass(tr,a,it,d)
+        srcp.write_text('tampered-existing',encoding='utf-8')
+        try:validate_fachworkflow_pass(tr,a,it,d);raise AssertionError('NEG_EXISTING_SOURCE_HASH')
+        except Blocked:pass
+        srcp.write_text('existing',encoding='utf-8')
         bad=deepcopy(d);bad['fachworkflow_pass_sha256']='0'*64
         try:validate_fachworkflow_pass(tr,a,it,bad);raise AssertionError('NEG_FACH_HASH')
         except Blocked:pass
