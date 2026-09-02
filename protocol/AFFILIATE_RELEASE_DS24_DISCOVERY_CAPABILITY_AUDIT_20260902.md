@@ -6,7 +6,7 @@ Scope: ausschließlich automatische Ermittlung der bereits genehmigten Affiliate
 
 ## ERROR-REGISTER PRECHECK
 
-Relevante Hardlocks: AFF-ERR-001, 002, 003, 004, 006, 008, 009, 010, 011.
+Relevante Hardlocks: AFF-ERR-001, 002, 003, 004, 006, 008, 009, 010, 011, 012.
 Zusätzlich neu erkannt: die Discovery-Routen `listMarketplaceEntries` und `getAffiliateCommission(product_ids=all)` wurden in früheren lokalen Builds erneut als autoritativ angenommen, obwohl reale Live-Evidence diese Annahmen bereits widerlegt hatte.
 
 ## AFF-ERR-012 — DS24 Affiliate-Partnerschaftsinventur mit falscher API-Autorität
@@ -69,6 +69,28 @@ Die Oberfläche zeigt Vendor, Produkt, Status, Provision, Werbemittelseite und P
    - Persistenzfehler lässt LKG stehen
    - eBay/idealo/Awin bleiben außerhalb des Änderungsscopes; Baseline-Blobs wurden festgehalten
 
+3. Public-API-Exhaustionscheck: 15/15 PASS.
+   - aktuelle Swagger-Affiliate-Operationen vollständig inventarisiert
+   - alle read-only Kandidaten gegen den benötigten Affiliate-seitigen Inventurvertrag geprüft
+   - `validateAffiliate` wegen benötigter Produkt-IDs als Discovery ausgeschlossen
+   - `getAffiliateCommission` nicht als dokumentierte Affiliate-seitige Vendor-Partnerschaftsliste autorisiert
+   - `updateAffiliateCommission` als mutierender/full-access Weg ausgeschlossen
+   - `listProducts` als Produkt-/Vendorinventar, nicht als fremde genehmigte Affiliate-Partnerschaften klassifiziert
+   - `listCommissions` als transaktionsabhängig und damit prinzipiell unvollständig klassifiziert
+   - private/undokumentierte UI-Routen bleiben als Release-Authority gesperrt
+
+## Aktueller Public-API-Exhaustionscheck 02.09.2026
+
+Die aktuell veröffentlichte Digistore24-Swagger-Referenz wurde erneut gegen den benötigten Affiliate-seitigen Inventurvertrag geprüft. Im Bereich `Affiliates` sind acht Operationen veröffentlicht: `getAffiliateCommission`, `getCustomerToAffiliateBuyerDetails`, `getReferringAffiliate`, `getAffiliateForEmail`, `setAffiliateForEmail`, `setReferringAffiliate`, `updateAffiliateCommission`, `validateAffiliate`. Keine davon ist als List-/Inventory-Endpunkt für `Affiliate view -> Sales & partners -> Vendor partnerships` dokumentiert.
+
+Zusätzlich geprüft:
+- `listProducts`: listet Produkte des eigenen Produkt-/Vendor-Kontexts; kein Nachweis für fremde Produkte, zu denen das Konto nur Affiliate-Partnerschaften besitzt.
+- `listCommissions`: transaktions-/provisionsbasiert und deshalb prinzipiell unvollständig für genehmigte Partnerschaften ohne Verkauf.
+- Affiliate-UI `Sales & partners -> Vendor partnerships`: liefert fachlich genau Vendor, Produkt, Status, Provision, Werbemittelseite und Promolink, ist aber kein dokumentierter öffentlicher API-Endpunkt.
+- Affiliate-UI `Sales & partners -> Content links -> Show promolink`: Produkt-Auswahl enthält bereits eingegangene Affiliate-Partnerschaften, ebenfalls ohne dokumentierten öffentlichen List-Endpunkt.
+
+Der 15/15-Test ist bewusst ein Dokumentations-/Capability-Vertrag und kein Live-Credential-Test. Er beweist nicht, dass Digistore24 intern keinen solchen Kanal besitzt; er verhindert nur, dass erneut ein nicht belegter Endpoint als Release-Authority erfunden wird.
+
 ## Ergebnis / technische Konsequenz
 
 Der aktuelle Block ist kein weiterer Parser-/Pluginfehler, sondern ein fehlender nachgewiesener Discovery-Kanal für die Affiliate-seitige Partnerschaftsinventur.
@@ -81,6 +103,14 @@ Darum gilt fail-closed:
 - bestehender Banner-/Target-/Slot-/LKG-Pfad bleibt unangetastet
 
 Nächster technisch zulässiger Schritt ist ausschließlich der Nachweis eines von Digistore24 unterstützten, read-only, maschinenlesbaren Affiliate-seitigen Partnerschaftsinventars, das die 18 Kontroll-IDs ohne lokale Vorfütterung liefert. Solange ein solcher Kanal nicht existiert/nachgewiesen ist, darf kein Plugin-PASS behauptet werden.
+
+### Exakter Provider-Nachweis, falls Digistore24 einen nicht öffentlich dokumentierten unterstützten Kanal besitzt
+
+Die einzige verbleibende fachliche Frage an Digistore24 lautet:
+
+> Gibt es für ein Affiliate-Konto einen offiziell unterstützten read-only API-Endpunkt oder einen anderen stabilen maschinenlesbaren Export-Endpunkt, der dieselben Datensätze wie `Affiliate view -> Sales & partners -> Vendor partnerships` liefert, insbesondere Produkt-ID, Vendor, Partnership Status, Affiliate Commission, Affiliate-Support/Werbemittelseite und Promolink, und zwar vollständig auch für genehmigte Partnerschaften ohne bisherigen Verkauf? Wir benötigen ausschließlich lesenden Zugriff; `getAffiliateCommission`, `validateAffiliate`, Marketplace- und transaktionsbasierte Wege sind für diesen Affiliate-seitigen Inventurfall nicht ausreichend.
+
+Nur eine konkrete, von Digistore24 bestätigte Schnittstelle darf danach als neue Discovery-Authority geprüft werden.
 
 ## ERROR-REGISTER POSTCHECK
 
@@ -98,3 +128,5 @@ Gate: TECHNISCHE DISCOVERY-CAPABILITY OFFEN / PRODUKTCODE-ÄNDERUNG GESPERRT.
 - Real-Inventory-Acceptance-Gate: `fac561010a86d5a4f415c018e1862e51c1d7fbe0baea9e433cf5202466563ad0`
 - Acceptance-Gate-Test: `986299af18226f2fc71540a25e90fe5f03b9461e5b4ee5645545db6e8809eb0b`
 - Acceptance-Gate-Report: `2e18cf11253bf70bdf44a583f34237d2f0363f599aba4210a79083fb565a6967`
+- Public-API-Exhaustion-Test: `03b6c7384f9b29e1276fd03aebb6a41137c5915da82da3ccd2460f3cc832a728`
+- Public-API-Exhaustion-Report: `513f4c4d27e5ab507b9c984b698e4ac08b9bf027e0a9470522aadadb71d87e07`
