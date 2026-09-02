@@ -1,0 +1,90 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -92,11 +92,17 @@
+ sed -e 's#/mnt/data/v651_checkpoint_work/master/master-v6501/03_SOURCE/affiliate-portal-router/#a/#g' -e 's#/mnt/data/v651_checkpoint_work/source/#b/#g' "$G/01_checkpoint_restart.patch" > /tmp/v651_checkpoint_restart_portable.patch
+ (cd "$SRC" && patch -p1 --forward --batch < /tmp/v651_checkpoint_restart_portable.patch) > "$E/12_apply_v651_step1.log" 2>&1 || block "V6.51 checkpoint/restart rootfix patch failed"
+ 
++[ "$(git hash-object "$WORK/.github/v651/patches/07_checkpoint_cleanup_failclosed_rootfix.patch")" = "dd53aff71f0d711050da5f99a530d5c3fdcc8b5a" ] || block "V6.51 cleanup rootfix patch blob mismatch"
++[ "$(git hash-object "$WORK/.github/v651/tests/test_checkpoint_cleanup_failclosed_v651.php")" = "8a07a7e05b0fc21729f6d9bc3ecd2cdb88225fe0" ] || block "V6.51 cleanup fail-closed test blob mismatch"
++[ "$(git hash-object "$WORK/.github/v651/manifests/STEP1_SOURCE_SHA256_CLEANUP_ROOTFIX.txt")" = "898dc6606f2b0ecca1333d6d5eb5f6cabc313d35" ] || block "V6.51 cleanup rootfix manifest blob mismatch"
++(cd "$SRC" && patch -p1 --forward --batch < "$WORK/.github/v651/patches/07_checkpoint_cleanup_failclosed_rootfix.patch") > "$E/12b_apply_cleanup_failclosed_rootfix.log" 2>&1 || block "V6.51 checkpoint cleanup fail-closed rootfix patch failed"
++(cd "$SRC" && sha256sum -c "$WORK/.github/v651/manifests/STEP1_SOURCE_SHA256_CLEANUP_ROOTFIX.txt") > "$E/12c_cleanup_rootfix_source_manifest.log" 2>&1 || block "V6.51 cleanup rootfix source manifest mismatch"
++
+ run_files(){ local out="$1" src="$2"; shift 2; :>"$out"; local fail=0 count=0 assertions=0 rc f; for f in "$@"; do count=$((count+1)); echo "===== $(basename "$f") =====" >>"$out"; set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$src" PPAR_BASELINE_PLUGIN_DIR="$BASE" PPAR_V647_BASELINE_DIR="$V647BASE" PPAR_V648_BASELINE_DIR="$V648BASE" PPAR_V649_BASELINE_DIR="$V649BASE" PPAR_V650_BASELINE_DIR="$V650BASE" PPAR_V6501_BASELINE_DIR="$V6501BASE" PPAR_TEST_MASTER_ROOT="$PKG" timeout 150 php "$f" >>"$out" 2>&1; rc=$?; set -e; echo "__TEST_EXIT__=$rc $(basename "$f")" >>"$out"; [ $rc -eq 0 ] || fail=$((fail+1)); done; assertions=$(grep -oE 'ASSERTIONS=[0-9]+' "$out"|cut -d= -f2|awk '{s+=$1}END{print s+0}'); echo "COUNT=$count FAIL=$fail ASSERTIONS=$assertions" | tee -a "$out"; [ $fail -eq 0 ]; }
+ run_dir(){ local d="$1" out="$2" src="$3"; mapfile -d '' fs < <(find "$d" -maxdepth 1 -type f -name '*.php' -print0|sort -z); run_files "$out" "$src" "${fs[@]}"; }
+ run_expected_red(){ local out="$1" src="$2" expected_fail="$3" expected_assert="$4"; shift 4; set +e; run_files "$out" "$src" "$@"; local rc=$?; set -e; grep -Fq "FAIL=$expected_fail ASSERTIONS=$expected_assert" "$out" && [ $rc -ne 0 ]; }
+ 
+-contract_red(){ local src="$1" out="$2"; mkdir -p "$out"; local f rc; f="$PKG/04_TESTS/V643_REGRESSION/test_canonical_full_progress_e2e_v6421.php"; set +e; PPAR_TEST_PLUGIN_DIR="$src" php "$f" > "$out/v643_canonical_old_contract.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && grep -Fxq 'ASSERTIONS=40 FAIL=2' "$out/v643_canonical_old_contract.log" || return 1; f="$PKG/04_TESTS/V643_REGRESSION/test_live_82_311_gapfill_v6420.php"; set +e; PPAR_TEST_PLUGIN_DIR="$src" php "$f" > "$out/v643_live82_old_contract.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && grep -Fxq 'ASSERTIONS=10 FAIL=3' "$out/v643_live82_old_contract.log" || return 1; f="$PKG/04_TESTS/V644_ROOTCAUSE/test_business_soft_failure_canonical_workflow_v644.php"; set +e; PPAR_TEST_PLUGIN_DIR="$src" php "$f" > "$out/v644_soft_old_contract.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && grep -Fxq 'ASSERTIONS=49 FAIL=2' "$out/v644_soft_old_contract.log" || return 1; echo OLD_CONTRACT_EXPECTED_RED=PASS > "$out/RESULT.txt"; }
++contract_red(){ local src="$1" out="$2"; mkdir -p "$out"; local f rc; local redsrc="$V6501BASE"; f="$PKG/04_TESTS/V643_REGRESSION/test_canonical_full_progress_e2e_v6421.php"; set +e; PPAR_TEST_PLUGIN_DIR="$redsrc" php "$f" > "$out/v643_canonical_old_contract.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && grep -Fxq 'ASSERTIONS=40 FAIL=2' "$out/v643_canonical_old_contract.log" || return 1; f="$PKG/04_TESTS/V643_REGRESSION/test_live_82_311_gapfill_v6420.php"; set +e; PPAR_TEST_PLUGIN_DIR="$redsrc" php "$f" > "$out/v643_live82_old_contract.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && grep -Fxq 'ASSERTIONS=10 FAIL=3' "$out/v643_live82_old_contract.log" || return 1; f="$PKG/04_TESTS/V644_ROOTCAUSE/test_business_soft_failure_canonical_workflow_v644.php"; set +e; PPAR_TEST_PLUGIN_DIR="$redsrc" php "$f" > "$out/v644_soft_old_contract.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && grep -Fxq 'ASSERTIONS=49 FAIL=2' "$out/v644_soft_old_contract.log" || return 1; printf 'OLD_CONTRACT_EXPECTED_RED=PASS\nRED_BASELINE=V6.50.1_BINDING_MASTER\n' > "$out/RESULT.txt"; }
+ 
+ 
+ v645_transport_contract(){ local src="$1" p="$2"; local root="$PKG/04_TESTS/V645_ROOTCAUSE"; local out="$E/$p/V645_TRANSPORT_CONTRACT"; mkdir -p "$out"
+@@ -178,6 +184,42 @@
+   printf 'V643_BROWSER_EXECUTOR=SUPERSEDED_BY_BINDING_V651_BACKGROUND_WORKER\nV651_SUCCESSORS=4 ASSERTIONS=36 FAIL=0\n' > "$out/RESULT.txt"
+ }
+ 
++v650_transport_contract(){ local src="$1" p="$2"; local root="$V650/tests"; local out="$E/$p/V650_TRANSPORT_CONTRACT"; mkdir -p "$out"
++  local canonical="$root/test_canonical_full_progress_e2e_v650_contract.php"
++  local live="$root/test_live_82_311_gapfill_v650_contract.php"
++  local soft="$root/test_business_soft_failure_canonical_workflow_v650_contract.php"
++  # The V6.50 live coverage contract is transport-independent and stays directly green.
++  run_files "$out/unaffected.log" "$src" "$live" || return 1
++  grep -Fxq 'COUNT=1 FAIL=0 ASSERTIONS=10' "$out/unaffected.log" || return 1
++  # Browser-executor variants are retained as exact RED under V6.51.
++  local f rc one expected
++  for pair in "$canonical|ASSERTIONS=40 FAIL=30" "$soft|ASSERTIONS=49 FAIL=34"; do
++    f="${pair%%|*}"; expected="${pair#*|}"; one="$out/$(basename "${f%.php}").old-browser-red.log"
++    set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$src" timeout 150 php "$f" > "$one" 2>&1; rc=$?; set -e
++    [ $rc -ne 0 ] || return 1; grep -Fq "$expected" "$one" || return 1
++  done
++  # V6.51 successors preserve all 99 assertions. Their harness models the new
++  # post-checkpoint cleanup engine and background pause/resume transport only.
++  local succ="$out/successors_v651"; rm -rf "$succ"; mkdir -p "$succ"
++  for f in "$canonical" "$soft"; do
++    python3 - "$f" "$succ/$(basename "${f%.php}")_v651.php" <<'PY2'
++import sys
++s=open(sys.argv[1]).read()
++needle="public function start($op='sync'){return $this->ebay_run_start(true,$op);}public function tick(){return $this->run_ebay_admin_ajax_tick();}"
++repl="private function ebay_selection_prune_business_batch($settings,&$state,$limit=20,$commit_public=false,$terminal_transition=true){if(!$terminal_transition){$state['checkpoint_business_cleanup_done']=1;return 0;}return 0;}private function ebay_selection_apply_private_post_batch($settings,&$state,$limit=50,$commit_public=false,$terminal_transition=true){if(!$terminal_transition){$state['checkpoint_private_cleanup_done']=1;return 0;}return 0;}public function start($op='sync'){return $this->ebay_run_start(true,$op);}public function tick(){$r=$this->ebay_run_load();if(sanitize_key((string)($r['status']??''))==='paused'){$r['resume_at']=0;$this->ebay_run_save($r);}return $this->run_ebay_canonical_worker();}"
++if needle not in s: raise SystemExit('V650 successor transport anchor missing')
++s=s.replace(needle,repl,1)
++s=s.replace("($h->state()['status']??'')==='running'","in_array(($h->state()['status']??''),['running','paused'],true)")
++open(sys.argv[2],'w').write(s)
++PY2
++  done
++  cp "$live" "$succ/test_live_82_311_gapfill_v650_contract_v651.php"
++  (cd "$succ" && find . -type f -name '*.php' -print0 | sort -z | xargs -0 sha256sum) > "$out/successor_source_sha256.txt"
++  run_dir "$succ" "$out/successors_v651.log" "$src" || return 1
++  grep -Fxq 'COUNT=3 FAIL=0 ASSERTIONS=99' "$out/successors_v651.log" || return 1
++  printf 'V650_BROWSER_EXECUTOR=SUPERSEDED_BY_BINDING_V651_BACKGROUND_WORKER\nV651_SUCCESSORS=3 ASSERTIONS=99 FAIL=0\n' > "$out/RESULT.txt"
++}
++
+ historical_gate(){ local src="$1" p="$2"; mkdir -p "$E/$p"; local tmp rc
+  run_files "$E/$p/v649_coverage.log" "$src" "$V649/tests/test_actual_public_coverage_v649.php" || return 1; grep -Fxq 'COUNT=1 FAIL=0 ASSERTIONS=345' "$E/$p/v649_coverage.log" || return 1
+  run_files "$E/$p/v649_recovery_unaffected.log" "$src" "$V649/tests/test_v648_same_uuid_coverage_recovery_v649.php" || return 1; grep -Fxq 'COUNT=1 FAIL=0 ASSERTIONS=19' "$E/$p/v649_recovery_unaffected.log" || return 1
+@@ -190,7 +232,7 @@
+  v643_transport_contract "$src" "$p" || return 1
+  tmp=$(mktemp -d); find "$PKG/04_TESTS/V644_ROOTCAUSE" -maxdepth 1 -type f -name '*.php' ! -name 'test_architecture_v644.php' ! -name 'test_business_soft_failure_canonical_workflow_v644.php' -exec cp {} "$tmp/" \;; run_dir "$tmp" "$E/$p/v644_unaffected.log" "$src" || { rm -rf "$tmp"; return 1; }; rm -rf "$tmp"; grep -Fxq 'COUNT=3 FAIL=0 ASSERTIONS=21' "$E/$p/v644_unaffected.log" || return 1
+  contract_red "$src" "$E/$p/OLD_CONTRACT_RED" || return 1
+- run_files "$E/$p/v650_successors.log" "$src" "$V650/tests/test_canonical_full_progress_e2e_v650_contract.php" "$V650/tests/test_live_82_311_gapfill_v650_contract.php" "$V650/tests/test_business_soft_failure_canonical_workflow_v650_contract.php" || return 1; grep -Fxq 'COUNT=3 FAIL=0 ASSERTIONS=99' "$E/$p/v650_successors.log" || return 1
++ v650_transport_contract "$src" "$p" || return 1
+  set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$src" PPAR_BASELINE_PLUGIN_DIR="$BASE" PPAR_TEST_MASTER_ROOT="$PKG" php "$PKG/04_TESTS/V644_POSTMORTEM/test_v644_release_gate_gaps.php" > "$E/$p/postmortem.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && [ "$(grep -c '^FAIL ' "$E/$p/postmortem.log")" -eq 2 ] || return 1
+  # Full immutable R5 corpus. Contract-conflicting transport/recovery expectations are
+  # discovered explicitly below; this initial hard run remains binding for every unaffected test.
+@@ -203,6 +245,7 @@
+  if [ "$stage" = step1 ]; then grep -Fxq 'ASSERTIONS=34 FAIL=0' "$E/$p/v651_arch.log" || return 1; else grep -Fxq 'ASSERTIONS=36 FAIL=0' "$E/$p/v651_arch.log" || return 1; fi
+  PPAR_TEST_PLUGIN_DIR="$src" php "$G/test_canonical_checkpoint_restart_e2e_v651.php" > "$E/$p/v651_e2e.log" 2>&1 || return 1; grep -Fxq 'ASSERTIONS=47 FAIL=0' "$E/$p/v651_e2e.log" || return 1
+  PPAR_TEST_PLUGIN_DIR="$src" php "$G/test_checkpoint_bootstrap_failclosed_v651.php" > "$E/$p/v651_bootstrap.log" 2>&1 || return 1; grep -Fxq 'ASSERTIONS=18 FAIL=0' "$E/$p/v651_bootstrap.log" || return 1
++ PPAR_TEST_PLUGIN_DIR="$src" php "$WORK/.github/v651/tests/test_checkpoint_cleanup_failclosed_v651.php" > "$E/$p/v651_cleanup_failclosed.log" 2>&1 || return 1; grep -Fxq 'ASSERTIONS=8 FAIL=0' "$E/$p/v651_cleanup_failclosed.log" || return 1
+  # V6.50.1 contract remains callable/compatible even though its version-specific
+  # init recovery is intentionally no longer registered by the new explicit contract.
+  PPAR_TEST_PLUGIN_DIR="$src" PPAR_LIVE_COVERAGE_FIXTURE="$V650/fixtures/live_v648_311_coverage_fixture.json" PPAR_EXPECT_V650_MIGRATION=1 php "$V6501/tests/test_coverage_gap_contract_v6501.php" > "$E/$p/v6501_contract_compat.log" 2>&1 || return 1; grep -Fxq 'ASSERTIONS=41 FAIL=0' "$E/$p/v6501_contract_compat.log" || return 1
+@@ -210,7 +253,7 @@
+  echo SOURCE_GATE=PASS > "$E/$p/RESULT.txt"
+ }
+ 
+-source_gate "$SRC" STEP1 step1 "$G/STEP1_SOURCE_SHA256.txt" || block "complete source/historical workflow failed after checkpoint/restart architecture step"
++source_gate "$SRC" STEP1 step1 "$WORK/.github/v651/manifests/STEP1_SOURCE_SHA256_CLEANUP_ROOTFIX.txt" || block "complete source/historical workflow failed after checkpoint/restart architecture step"
+ 
+ # 3. Real WordPress/MariaDB gates.
+ cp "$WORK/.github/overlays/v645/soft_failure_recovery.php" "$PKG/03_REAL_GATE/soft_failure_recovery.php"

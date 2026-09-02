@@ -1,0 +1,58 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -138,6 +138,46 @@
+   printf 'V645_BROWSER_EXECUTOR=SUPERSEDED_BY_BINDING_V651_BACKGROUND_WORKER\nV651_SUCCESSORS=7 ASSERTIONS=56 FAIL=0\n' > "$out/RESULT.txt"
+ }
+ 
++v643_transport_contract(){ local src="$1" p="$2"; local root="$PKG/04_TESTS/V643_REGRESSION"; local out="$E/$p/V643_TRANSPORT_CONTRACT"; mkdir -p "$out"
++  # Five unaffected V6.43 contracts remain ordinary green requirements.
++  run_files "$out/unaffected.log" "$src" \
++    "$root/test_business_commit_readback_v6420.php" \
++    "$root/test_failed_run_recovery_v6421.php" \
++    "$root/test_progress_contract_v6420.php" \
++    "$root/test_quality_corpus_v6420.php" \
++    "$root/test_upgrade_continuity_all_phases_v6421.php" || return 1
++  grep -Fxq 'COUNT=5 FAIL=0 ASSERTIONS=277' "$out/unaffected.log" || return 1
++
++  # Four browser-executor contracts are retained as exact RED counterproof.
++  local names=(
++    test_admin_ajax_pause_resume_v6420.php
++    test_canonical_partial_resume_rootfix_v643.php
++    test_lease_expiry_v6420.php
++    test_true_no_progress_guard_v6420.php
++  )
++  local expects=( 'ASSERTIONS=5 FAIL=1' 'ASSERTIONS=22 FAIL=7' 'ASSERTIONS=7 FAIL=3' 'ASSERTIONS=2 FAIL=2' )
++  : > "$out/old_browser_transport_red.log"
++  local i f rc one
++  for i in "${!names[@]}"; do
++    f="$root/${names[$i]}"; one="$out/${names[$i]%.php}.old-red.log"
++    set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$src" timeout 150 php "$f" > "$one" 2>&1; rc=$?; set -e
++    [ $rc -ne 0 ] || return 1
++    grep -Fq "${expects[$i]}" "$one" || return 1
++    { echo "===== ${names[$i]} ====="; cat "$one"; echo "__TEST_EXIT__=$rc ${names[$i]}"; } >> "$out/old_browser_transport_red.log"
++  done
++  printf 'COUNT=4 FAIL=4 ASSERTIONS=36\nOLD_BROWSER_EXECUTOR_CONTRACT=EXPECTED_RED\n' >> "$out/old_browser_transport_red.log"
++
++  # V6.51 successors keep all 36 still-valid assertions and change only executor transport/labels.
++  local succ="$out/successors_v651"; rm -rf "$succ"; mkdir -p "$succ"
++  for f in "${names[@]}"; do
++    sed 's/run_ebay_admin_ajax_tick()/run_ebay_canonical_worker()/g; s/competing AJAX worker/competing canonical background worker/g; s/reopened page executes exactly one next sequential transport package/canonical background worker executes exactly one next sequential transport package/g; s/reopened page resumes identical persistent run_uuid/canonical background resume keeps identical persistent run_uuid/g; s/reopened page/canonical worker/g' "$root/$f" > "$succ/${f%.php}_v651.php"
++  done
++  (cd "$succ" && find . -type f -name '*.php' -print0 | sort -z | xargs -0 sha256sum) > "$out/successor_source_sha256.txt"
++  run_dir "$succ" "$out/successors_v651.log" "$src" || return 1
++  grep -Fxq 'COUNT=4 FAIL=0 ASSERTIONS=36' "$out/successors_v651.log" || return 1
++  printf 'V643_BROWSER_EXECUTOR=SUPERSEDED_BY_BINDING_V651_BACKGROUND_WORKER\nV651_SUCCESSORS=4 ASSERTIONS=36 FAIL=0\n' > "$out/RESULT.txt"
++}
++
+ historical_gate(){ local src="$1" p="$2"; mkdir -p "$E/$p"; local tmp rc
+  run_files "$E/$p/v649_coverage.log" "$src" "$V649/tests/test_actual_public_coverage_v649.php" || return 1; grep -Fxq 'COUNT=1 FAIL=0 ASSERTIONS=345' "$E/$p/v649_coverage.log" || return 1
+  run_files "$E/$p/v649_recovery_unaffected.log" "$src" "$V649/tests/test_v648_same_uuid_coverage_recovery_v649.php" || return 1; grep -Fxq 'COUNT=1 FAIL=0 ASSERTIONS=19' "$E/$p/v649_recovery_unaffected.log" || return 1
+@@ -147,7 +187,7 @@
+  run_files "$E/$p/v647.log" "$src" "$V647/tests/test_dynamic_rule_resolver_v647.php" "$V647/tests/test_dynamic_rule_recovery_v647.php" || return 1; grep -Fxq 'COUNT=2 FAIL=0 ASSERTIONS=22' "$E/$p/v647.log" || return 1
+  tmp=$(mktemp -d); find "$PKG/04_TESTS/V646_ROOTCAUSE" -maxdepth 1 -type f -name '*.php' ! -name 'test_architecture_v646.php' -exec cp {} "$tmp/" \;; run_dir "$tmp" "$E/$p/v646.log" "$src" || { rm -rf "$tmp"; return 1; }; rm -rf "$tmp"; grep -Fxq 'COUNT=3 FAIL=0 ASSERTIONS=14' "$E/$p/v646.log" || return 1
+  v645_transport_contract "$src" "$p" || return 1
+- tmp=$(mktemp -d); find "$PKG/04_TESTS/V643_REGRESSION" -maxdepth 1 -type f -name '*.php' ! -name 'test_canonical_full_progress_e2e_v6421.php' ! -name 'test_live_82_311_gapfill_v6420.php' -exec cp {} "$tmp/" \;; run_dir "$tmp" "$E/$p/v643_unaffected.log" "$src" || { rm -rf "$tmp"; return 1; }; rm -rf "$tmp"; grep -Fxq 'COUNT=9 FAIL=0 ASSERTIONS=313' "$E/$p/v643_unaffected.log" || return 1
++ v643_transport_contract "$src" "$p" || return 1
+  tmp=$(mktemp -d); find "$PKG/04_TESTS/V644_ROOTCAUSE" -maxdepth 1 -type f -name '*.php' ! -name 'test_architecture_v644.php' ! -name 'test_business_soft_failure_canonical_workflow_v644.php' -exec cp {} "$tmp/" \;; run_dir "$tmp" "$E/$p/v644_unaffected.log" "$src" || { rm -rf "$tmp"; return 1; }; rm -rf "$tmp"; grep -Fxq 'COUNT=3 FAIL=0 ASSERTIONS=21' "$E/$p/v644_unaffected.log" || return 1
+  contract_red "$src" "$E/$p/OLD_CONTRACT_RED" || return 1
+  run_files "$E/$p/v650_successors.log" "$src" "$V650/tests/test_canonical_full_progress_e2e_v650_contract.php" "$V650/tests/test_live_82_311_gapfill_v650_contract.php" "$V650/tests/test_business_soft_failure_canonical_workflow_v650_contract.php" || return 1; grep -Fxq 'COUNT=3 FAIL=0 ASSERTIONS=99' "$E/$p/v650_successors.log" || return 1
