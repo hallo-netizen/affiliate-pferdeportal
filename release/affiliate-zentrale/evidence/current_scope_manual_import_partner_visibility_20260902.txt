@@ -4,12 +4,12 @@ Branch: affiliate-release-current
 Status: LOCAL_SCOPE_PASS / WORDPRESS-LIVE-PENDING / NOT_RELEASED
 
 ERROR-REGISTER PRECHECK
-Relevant: AFF-ERR-001, 002, 003, 004, 006, 007, 008, 011, 012, 013. Downstream rules 005, 009, 010 remain unchanged and must still hold in live/end-to-end use.
+Relevant: AFF-ERR-001, 002, 003, 004, 006, 007, 008, 011, 012, 013, 014. Downstream rules 005, 009, 010 remain unchanged and must still hold in live/end-to-end use.
 
 CURRENT SOURCE BINDING
-Source manifest SHA-256: 5aed979dc640d5d1a427e1edabdc9d2f18181c85bcadd5a1859424f51742154f
+Source manifest SHA-256: dc142d5dff517c4d6ed4ac3b4a8469e145bf0d39b4d560fde1589528507ccf5f
 Source files: 27
-Changed visible KISS file SHA-256: be1733b4c8bbb109b5b9549ba8a74293c3450365bfa4844380cbdf9f3d40dff0
+Current KISS file SHA-256: d039234087746313d79b538be01af3b1591ab352e56e44ddf0b1465e45815158
 Manual importer SHA-256: 1cf2a487c4c8e6038114116d6ad0437dce08b19106bc7b85ddb073c85bf55877
 Manual import guard SHA-256: 535e35a742e69f000a5abdf7aac73e04abf2779530b0c293a514b35f913ebc3c
 
@@ -34,33 +34,49 @@ Proven there:
 AFF-ERR-011 ROOT FIX — VISIBLE PARTNER & EINNAHMEN PAGE
 Before fix, the visible KISS entry rendered only banner_networks() cards and forced a second click to the already existing central analytics page. That hid active product sources such as eBay and idealo on the visible entry page.
 
-Current fix is deliberately navigation-only:
-- WordPress-Dashboard -> Affiliate-Zentrale -> Partner & Einnahmen now delegates directly to PPAR_Partner_Analytics_Admin::render_page() whenever the central analytics class is available.
-- The class is loaded and bootstrapped by the existing housekeeping bootstrap.
-- Existing central analytics already contains provider defaults for Amazon, OTTO, Kelkoo, idealo, eBay, Awin, ADCELL, Digistore24 and direct partners.
-- Existing central analytics keeps local clicks provider-wide, supports today/7/30/all and never estimates missing provider revenue/commission data.
-- Fallback rendering, if analytics is unavailable, merges product_sources() and banner_networks() instead of hiding product sources.
+Current fix:
+- WordPress-Dashboard -> Affiliate-Zentrale -> Partner & Einnahmen delegates directly to PPAR_Partner_Analytics_Admin::render_page() whenever the central analytics class is available.
+- The class is loaded/bootstrapped by the existing housekeeping bootstrap.
+- Existing central analytics contains provider defaults for Amazon, OTTO, Kelkoo, idealo, eBay, Awin, ADCELL, Digistore24 and direct partners.
+- Existing analytics keeps local clicks provider-wide, supports today/7/30/all and never estimates missing provider revenue/commission data.
+- Fallback rendering merges product_sources() and banner_networks().
 
-LOCAL CHECKS FOR THIS FIX
+AFF-ERR-014 ROOT FIX — NON-DESTRUCTIVE KISS NAVIGATION
+Historical live evidence showed that removing functional submenu targets and then linking KISS buttons back to them produced WordPress access failures. The current KISS source had reintroduced remove_submenu_page().
+
+Current root fix:
+- no remove_submenu_page() remains in class-ppar-admin-kiss.php;
+- all existing Legacy-/Provider pages remain registered by their original owners;
+- KISS adds only the five visible aggregation pages;
+- legacy submenu links are hidden only with admin_head CSS selectors; no page hook/capability registration is deleted;
+- KISS buttons still point to the registered legacy/provider slugs.
+
+LOCAL CHECKS FOR AFF-ERR-011 / AFF-ERR-014
 PASS PHP lint of exact current class-ppar-admin-kiss.php.
-PASS exact source hash equals manifest line be1733b4c8bbb109b5b9549ba8a74293c3450365bfa4844380cbdf9f3d40dff0.
-PASS isolated runtime delegation test: render_partners() called central analytics exactly once and returned its rendered output without the old intermediate KISS cards.
-PASS no provider adapter, eBay, idealo, Awin, DS24 trait, output/slot, LKG, analytics algorithm or automation core change was required for this visibility fix.
+PASS exact KISS source hash d039234087746313d79b538be01af3b1591ab352e56e44ddf0b1465e45815158.
+PASS exact source manifest SHA-256 dc142d5dff517c4d6ed4ac3b4a8469e145bf0d39b4d560fde1589528507ccf5f.
+PASS runtime harness: exactly five KISS submenu pages registered.
+PASS runtime harness: legacy-hide CSS contains registered provider target such as affiliate-portal-provider-digistore24.
+PASS static negative: remove_submenu_page does not occur in current KISS source.
+PASS runtime delegation: render_partners() called central analytics exactly once and returned its output directly.
+PASS provider adapters, importer core, analytics algorithm, output/slot/LKG and automation core were not changed for AFF-ERR-014.
 
-PRODUCT / DEAL / ANALYTICS CORE — REUSED HASH-IDENTICAL EVIDENCE
+PRODUCT / DEAL / ANALYTICS CORE — REUSED EVIDENCE WHERE HASH-IDENTICAL
 Evidence: release/affiliate-zentrale/evidence/product_deals_partner_analytics_static_v6640.txt
-The already implemented analytics/deal-radar behavior remains unchanged by the manual-import and KISS visibility fixes. Existing static evidence covers the central partner/einnahmen cockpit, OTTO separation, product-source breadth, Reithelm-only first deal scope, no-estimation rules and deal-radar positive/negative cases. This evidence is reused only for hash-identical core behavior; it is not promoted to WordPress-live proof.
+Existing analytics/deal-radar behavior remains outside the KISS navigation rootfix. The evidence covers the central partner/einnahmen cockpit, OTTO separation, product-source breadth, Reithelm-only first deal scope, no-estimation rules and deal-radar positive/negative cases. It is reused only for unchanged core behavior and is not promoted to WordPress-live proof.
 
 REGRESSION BOUNDARY
-The current closing change for AFF-ERR-011 is limited to class-ppar-admin-kiss.php plus source/evidence/governance bindings. The manual-import hardening previously changed only class-ppar-universal-import.php and its binding/evidence. Provider-specific traits and output/LKG core remain outside this fix scope.
+AFF-ERR-014 changed only class-ppar-admin-kiss.php plus manifest/evidence/protocol bindings. Manual-import hardening remains hash-identical. Provider-specific traits, eBay/idealo/Awin, DS24 provider logic, output/LKG and central analytics algorithms are not modified by this rootfix.
 
 ERROR-REGISTER POSTCHECK
-AFF-ERR-011: root cause closed locally; WordPress-live visibility still pending.
-AFF-ERR-013: root cause closed locally by current-hash manual import evidence.
-AFF-ERR-012: automatic DS24 discovery remains OPEN; manual CSV bulk import remains an explicitly separate authorized operating route.
+AFF-ERR-011: FIXED_LOCAL; WordPress-live visibility pending.
+AFF-ERR-013: FIXED_LOCAL by current-hash manual import evidence.
+AFF-ERR-014: FIXED_LOCAL; historical destructive navigation path removed and local registration/delegation harness PASS.
+AFF-ERR-012: automatic DS24 discovery remains OPEN; manual CSV bulk import remains explicitly separate and authorized.
 Known wrong discovery path repeated: no.
-New error discovered in this gate: no.
+Known destructive KISS navigation path repeated after fix: no.
+New error discovered after AFF-ERR-014 rerun: no.
 Release/live PASS claimed: no.
 
 NEXT BOUND GATE
-A live/end-to-end claim still requires WordPress runtime evidence. Until that evidence exists, this file authorizes LOCAL_SCOPE_PASS only and no release claim.
+The source-level/manual-import/KISS gate is locally closed. A live/end-to-end claim still requires WordPress runtime evidence. Until that evidence exists, this file authorizes LOCAL_SCOPE_PASS only and no release claim.
