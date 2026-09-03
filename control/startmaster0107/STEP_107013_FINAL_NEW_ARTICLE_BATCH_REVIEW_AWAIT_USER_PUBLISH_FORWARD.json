@@ -1,0 +1,12 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH_FORWARD",
+  "sequence": 107013,
+  "worker_profile": "CLOUD_ARTICLE_BATCH_FINAL_REVIEW",
+  "authorized_inputs": [],
+  "instruction": "Arbeite ausschließlich am gebundenen finalen Review-Schritt des neuen Artikeltests. Keine Workflow-Navigation oder Regeländerung. Prüfe nur die bereits im unveränderten Fachworkflow erzeugten Batch-Ergebnisse bis zum vorgesehenen Review-Endzustand. Kein Auto-Publish. Gib nur den gebundenen Abschluss-/Review-Status zurück.",
+  "limits": {
+    "reasoning_effort": "medium",
+    "parallel_workers": 1
+  }
+}
