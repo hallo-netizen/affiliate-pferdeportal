@@ -6,7 +6,7 @@
   "authorized_inputs": [
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "ff54c9ca5fc05623a8231905aee0bee97439682415a59a5188db04a7ed60fa25"
+      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -18,7 +18,7 @@
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "1ea59593678f43ae5ee30aafc93ba5f48822bb726435a6e7074aa4efdb1ade27"
+      "sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
@@ -31,6 +31,10 @@
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
       "sha256": "3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837"
+    },
+    {
+      "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
+      "sha256": "abab9664eca2949d22d8e6c53619d821493160167ad78b4a6ed84bcbaa2c1225"
     }
   ],
   "instruction": "107008 ist ausschließlich der gebundene finale Review-Schritt des gerade vollständig durch 107007 gelaufenen Batches. Keine Workflow-Navigation, keine Regeländerung, kein Auto-Publish und keinerlei freie Chat-Ausgabeautorität.\n\nSICHTBARKEITS-ZWANG: Noch ist kein Projektergebnis sichtbar freigegeben. Der 107007-Output liegt ausschließlich technisch vorbereitet unter .pferde-release-staging/ und ist durch .pferde-capsule/BOUND_PREPARED_RELEASE_REF.json gebunden. Review darf ausschließlich auf diesen exakt gebundenen staged Dateien erfolgen. Quarantäne-Dateien, Chat-Dateien, Ersatz-ZIPs, neu verpackte Dateien oder andere Outputs sind keine Projektresultate und dürfen nicht geprüft, übernommen oder ausgegeben werden.\n\nCAPSULE-AUSFÜHRUNGSGRENZE: Die unter authorized_inputs gebundenen Dateien werden vor der Agent-Arbeit durch den offiziellen Runtime-Entry hashgeprüft. Danach werden die duplizierten Dateien unter .pferde-capsule/inputs/ absichtlich entfernt. Im CAPSULE_MANIFEST.json bleiben ausschließlich source_ref und sha256 als gebundener Nachweis; capsule_path ist null und input_materialization_mode=HASH_VERIFIED_CANONICAL_REPO_ONLY. Niemals eine Datei unter .pferde-capsule/inputs/ ausführen, importieren, mit --help testen, rekonstruieren oder erneut anlegen. Für technische Ausführung ausschließlich den kanonischen source_ref im Repository verwenden. Der offizielle Runtime-Entry prüft beim complete erneut, dass keine Capsule-Input-Kopien existieren und dass jeder kanonische source_ref noch exakt den gebundenen SHA-256 besitzt. Jede Abweichung ist fail-closed.\n\nZuerst zwingend ausführen:\npython3 control/output-quarantine/final_review_visibility_guard.py verify .pferde-capsule/BOUND_PREPARED_RELEASE_REF.json\n\nNur FINAL_REVIEW_PREPARED_VISIBILITY_PASS erlaubt den bestehenden unveränderten finalen Fachreview. Der Guard ist rein technisch/fachblind und bewertet oder verändert niemals Inhalt, Qualität, Recherche, LanguageTool, PPM, PSERC, PSTE, SEO, Design oder Publish-Regeln.\n\nFühre danach ausschließlich den bereits bestehenden unveränderten finalen Review der exakt gebundenen staged Dateien aus. Keine Korrektur, Ergänzung, Kürzung, Neuformulierung oder Neuverpackung außerhalb der bestehenden gebundenen Fachstraße.\n\nNur wenn der bestehende Review vollständig PASS ist, ausschließlich die im CAPSULE_MANIFEST.json durch source_ref und sha256 gebundene kanonische Datei control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py im Repository verwenden. Keine Capsule-Kopie dieser Datei suchen, prüfen oder ausführen. Dann exakt ausführen:\npython3 control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py clear-after-review --repo . --contract control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json\n\nNur bei RUNTIME_SLOT_CLEARED_AND_IDLE oder RUNTIME_SLOT_ALREADY_IDLE einen PASS-Receipt schreiben. Sein payload muss zusätzlich exakt enthalten: reviewed_prepared_release_only=true, prepared_release_ref, prepared_release_sha256 und prepared_batch_sha256 aus .pferde-capsule/BOUND_PREPARED_RELEASE_REF.json.\n\nDanach ausschließlich ausführen:\npython3 control/output-quarantine/runtime_entry_gate.py complete .pferde-capsule/RECEIPT.json\n\nDer offizielle Runtime-Entry autorisiert die sichtbare Freigabe erst nach gültigem 107008-PASS und erfolgreichem Re-Arm auf 107007. Nur der danach erzeugte PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V2 und exakt dessen gelistete Dateien besitzen Projektresultat-/Sichtbarkeitsautorität. Fehlt dieser Receipt, existiert kein sichtbares Projektergebnis. Kein Chat-Ersatzweg.",

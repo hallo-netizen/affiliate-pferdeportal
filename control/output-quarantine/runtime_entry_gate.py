@@ -221,12 +221,16 @@ def cloud():
 
 
 def start() -> dict:
-    authority()
+    _, state, gate, _ = authority()
     proof = freshness()
     result = cloud().materialize()
     if not result.get("ok"):
         raise Blocked("IMMUTABLE_CLOUD_ENTRY_START_NOT_OK")
     boundary = enforce_capsule_execution_boundary()
+    restored_prepared_binding = None
+    if int(gate.get("sequence", -1)) == 107008 and state.get("next_allowed_step") == "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH":
+        dual = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_prepared_restore")
+        restored_prepared_binding = dual.restore_prepared_binding(REPO)
     write_capsule_json("FRESHNESS_PROOF.json", proof)
     return {
         "ok": True,
@@ -294,6 +298,8 @@ def complete(receipt_path: Path) -> dict:
             "prepared_sha256": prepared["prepared_sha256"],
             "batch_sha256": prepared["batch_sha256"],
         }
+        dual = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_prepared_persist")
+        dual.persist_prepared_binding(REPO, binding)
         write_capsule_json("FRESHNESS_PROOF.json", post_proof)
         write_capsule_json("BOUND_PREPARED_RELEASE_REF.json", binding)
         return {
@@ -350,6 +356,9 @@ def complete(receipt_path: Path) -> dict:
             ) from exc
         if committed.get("status") != "OUTPUT_RELEASE_PASS_FINAL":
             raise Blocked("FINAL_VISIBLE_RELEASE_NOT_PASS")
+        finalizer = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_107008_finalizer")
+        pserc_finalization = finalizer.finalize_after_107008(REPO, committed["release_receipt_ref"])
+        finalizer.clear_prepared_binding(REPO, binding["batch_sha256"])
         return {
             "ok": True,
             "status": "107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED",
@@ -357,6 +366,7 @@ def complete(receipt_path: Path) -> dict:
             "release_receipt_sha256": committed["release_receipt_sha256"],
             "batch_sha256": committed["batch_sha256"],
             "released_count": committed["released_count"],
+            "pserc_finalization": pserc_finalization,
             "rearmed_step_id": finished.get("rearmed_step_id"),
             "rearmed_sequence": finished.get("rearmed_sequence"),
             "chat_output_authority": "NONE",

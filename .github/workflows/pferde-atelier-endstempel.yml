@@ -1,0 +1,238 @@
+name: Pferde Atelier Endstempel
+
+on:
+  workflow_dispatch:
+    inputs:
+      receipt_ref:
+        description: Exact .pferde-release/<batch>/RELEASE_RECEIPT.json path
+        required: true
+        type: string
+  push:
+    branches: [main]
+    paths:
+      - '.pferde-release/**/RELEASE_RECEIPT.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pferde-atelier-endstempel-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  endstempel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      final_filename: ${{ steps.stamp.outputs.final_filename }}
+      final_sha256: ${{ steps.stamp.outputs.final_sha256 }}
+      batch_sha256: ${{ steps.stamp.outputs.batch_sha256 }}
+      article_count: ${{ steps.stamp.outputs.article_count }}
+    steps:
+      - name: Checkout exact main commit read-only
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Fail closed unless crypto runtimes exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+          print('ED25519_RUNTIME_PASS')
+          PY
+          php -r 'if (!function_exists("sodium_crypto_sign_verify_detached")) { fwrite(STDERR,"SODIUM_MISSING\n"); exit(2); } echo "SODIUM_PASS\n";'
+
+      - name: Resolve exactly one bound 107008 receipt
+        id: receipt
+        shell: bash
+        env:
+          INPUT_RECEIPT_REF: ${{ inputs.receipt_ref }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            ref="$INPUT_RECEIPT_REF"
+          else
+            mapfile -t refs < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep -E '^\.pferde-release/[0-9a-f]{64}/RELEASE_RECEIPT\.json$' || true)
+            [ "${#refs[@]}" -eq 1 ] || { echo "ENDSTEMPEL_EXACTLY_ONE_RECEIPT_REQUIRED:${#refs[@]}"; exit 2; }
+            ref="${refs[0]}"
+          fi
+          [[ "$ref" =~ ^\.pferde-release/[0-9a-f]{64}/RELEASE_RECEIPT\.json$ ]] || { echo 'ENDSTEMPEL_RECEIPT_REF_INVALID'; exit 2; }
+          test -f "$ref" || { echo 'ENDSTEMPEL_RECEIPT_MISSING'; exit 2; }
+          echo "receipt_ref=$ref" >> "$GITHUB_OUTPUT"
+
+      - name: End-stamp exact released article bytes
+        id: stamp
+        shell: bash
+        env:
+          RECEIPT_REF: ${{ steps.receipt.outputs.receipt_ref }}
+          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
+          umask 077
+          trap 'rm -f /tmp/pferde_endstempel_signer.py /tmp/endstempel-result.json' EXIT
+          cat > /tmp/pferde_endstempel_signer.py <<'PY'
+          #!/usr/bin/env python3
+          import base64, hashlib, json, os, re, sys
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+
+          CONTRACT='PFERDE_ATELIER_ENDSTEMPEL_SIGN_REQUEST_V1'
+          private_data=os.environ.get('ENDSTEMPEL_PRIVATE_KEY','').encode('utf-8')
+          if not private_data:
+              raise SystemExit('ENDSTEMPEL_SECRET_MISSING')
+          try:
+              if b'OPENSSH PRIVATE KEY' in private_data:
+                  key=serialization.load_ssh_private_key(private_data,password=None)
+              else:
+                  key=serialization.load_pem_private_key(private_data,password=None)
+          except Exception:
+              raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_INVALID')
+          if not isinstance(key,Ed25519PrivateKey):
+              raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_NOT_ED25519')
+          pub=key.public_key().public_bytes(encoding=serialization.Encoding.Raw,format=serialization.PublicFormat.Raw)
+          pub_b64=base64.b64encode(pub).decode('ascii')
+          pub_sha=hashlib.sha256(pub).hexdigest()
+          key_id='github-secret-ed25519-'+pub_sha[:16]
+          identity={'signing_key_id':key_id,'signing_public_key_sha256':pub_sha,'public_key_b64':pub_b64}
+          if len(sys.argv)==2 and sys.argv[1]=='--identity':
+              print(json.dumps(identity,separators=(',',':')))
+              raise SystemExit(0)
+          try:
+              req=json.loads(sys.stdin.read())
+          except Exception:
+              raise SystemExit('ENDSTEMPEL_REQUEST_INVALID')
+          required={'contract','manifest_sha256','batch_sha256','source_107008_receipt_sha256','article_count','algorithm'}
+          if not isinstance(req,dict) or set(req)!=required:
+              raise SystemExit('ENDSTEMPEL_REQUEST_FIELDS_INVALID')
+          if req.get('contract')!=CONTRACT or req.get('algorithm')!='ED25519':
+              raise SystemExit('ENDSTEMPEL_REQUEST_CONTRACT_INVALID')
+          digest=str(req.get('manifest_sha256') or '')
+          batch=str(req.get('batch_sha256') or '')
+          receipt=str(req.get('source_107008_receipt_sha256') or '')
+          if not re.fullmatch(r'[0-9a-f]{64}',digest) or not re.fullmatch(r'[0-9a-f]{64}',batch) or not re.fullmatch(r'[0-9a-f]{64}',receipt):
+              raise SystemExit('ENDSTEMPEL_REQUEST_HASH_INVALID')
+          if not isinstance(req.get('article_count'),int) or req['article_count'] < 1:
+              raise SystemExit('ENDSTEMPEL_REQUEST_COUNT_INVALID')
+          sig=base64.b64encode(key.sign(digest.encode('ascii'))).decode('ascii')
+          out=dict(identity);out['signature_b64']=sig
+          print(json.dumps(out,separators=(',',':')))
+          PY
+          chmod 700 /tmp/pferde_endstempel_signer.py
+          identity="$(/tmp/pferde_endstempel_signer.py --identity)"
+          export ENDSTEMPEL_HSM_CMD=/tmp/pferde_endstempel_signer.py
+          export ENDSTEMPEL_TRUSTED_KEY_ID="$(python3 -c 'import json,sys; print(json.loads(sys.argv[1])["signing_key_id"])' "$identity")"
+          export ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256="$(python3 -c 'import json,sys; print(json.loads(sys.argv[1])["signing_public_key_sha256"])' "$identity")"
+          export ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64="$(python3 -c 'import json,sys; print(json.loads(sys.argv[1])["public_key_b64"])' "$identity")"
+
+          python3 control/startmaster0107/ENDSTEMPEL_FINALIZER.py finalize "$RECEIPT_REF" | tee /tmp/endstempel-result.json
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import hashlib,json,pathlib
+          x=json.load(open('/tmp/endstempel-result.json',encoding='utf-8'))
+          if x.get('ok') is not True or x.get('status')!='ENDSTEMPEL_FINAL_PASS' or x.get('publish_allowed') is not False or x.get('content_mutation_performed') is not False:
+              raise SystemExit('ENDSTEMPEL_FINAL_NOT_PASS')
+          p=pathlib.Path(x['final_ref'])
+          if not p.is_file(): raise SystemExit('ENDSTEMPEL_FINAL_FILE_MISSING')
+          h=hashlib.sha256(p.read_bytes()).hexdigest()
+          if h != x.get('final_sha256'): raise SystemExit('ENDSTEMPEL_FINAL_HASH_MISMATCH')
+          print('final_ref='+x['final_ref'])
+          print('final_filename='+p.name)
+          print('final_sha256='+h)
+          print('batch_sha256='+x['batch_sha256'])
+          print('article_count='+str(x['article_count']))
+          PY
+          echo "key_id=$ENDSTEMPEL_TRUSTED_KEY_ID" >> "$GITHUB_OUTPUT"
+          echo "public_sha256=$ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256" >> "$GITHUB_OUTPUT"
+          echo "public_b64=$ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64" >> "$GITHUB_OUTPUT"
+
+      - name: WordPress verifier must accept before any write
+        shell: bash
+        env:
+          FINAL_REF: ${{ steps.stamp.outputs.final_ref }}
+          KEY_ID: ${{ steps.stamp.outputs.key_id }}
+          PUBLIC_SHA: ${{ steps.stamp.outputs.public_sha256 }}
+          PUBLIC_B64: ${{ steps.stamp.outputs.public_b64 }}
+        run: |
+          set -euo pipefail
+          cat > /tmp/wp-preimport.php <<'PHP'
+          <?php
+          require $argv[1];
+          $trusted = [
+              getenv('KEY_ID') => [
+                  'sha256' => getenv('PUBLIC_SHA'),
+                  'public_key_b64' => getenv('PUBLIC_B64'),
+              ],
+          ];
+          $r = pferde_endstempel_verify_before_write($argv[2], $trusted, fn($batch) => false);
+          if (($r['status'] ?? '') !== 'ENDSTEMPEL_WORDPRESS_PREIMPORT_PASS' || ($r['verified_before_first_write'] ?? false) !== true || ($r['publish_allowed'] ?? null) !== false) {
+              throw new RuntimeException('WORDPRESS_PREIMPORT_NOT_PASS');
+          }
+          echo "ENDSTEMPEL_WORDPRESS_PREIMPORT_PASS\n";
+          PHP
+          php /tmp/wp-preimport.php control/startmaster0107/ENDSTEMPEL_WORDPRESS_VERIFY.php "$FINAL_REF"
+          rm -f /tmp/wp-preimport.php
+
+      - name: Transfer signed JSON to isolated release job
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: endstempel-${{ steps.stamp.outputs.batch_sha256 }}
+          path: ${{ steps.stamp.outputs.final_ref }}
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
+
+  publish-release:
+    needs: endstempel
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Receive signed JSON without private key
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: endstempel-${{ needs.endstempel.outputs.batch_sha256 }}
+          path: endstempel-package
+
+      - name: Verify transported JSON hash
+        shell: bash
+        env:
+          FINAL_FILENAME: ${{ needs.endstempel.outputs.final_filename }}
+          FINAL_SHA256: ${{ needs.endstempel.outputs.final_sha256 }}
+        run: |
+          set -euo pipefail
+          p="endstempel-package/$FINAL_FILENAME"
+          test -f "$p" || { echo 'ENDSTEMPEL_TRANSPORT_FILE_MISSING'; exit 2; }
+          actual="$(sha256sum "$p" | awk '{print $1}')"
+          [ "$actual" = "$FINAL_SHA256" ] || { echo 'ENDSTEMPEL_TRANSPORT_HASH_MISMATCH'; exit 2; }
+          echo 'ENDSTEMPEL_TRANSPORT_PASS'
+
+      - name: Publish exactly one durable JSON release asset
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BATCH_SHA256: ${{ needs.endstempel.outputs.batch_sha256 }}
+          FINAL_FILENAME: ${{ needs.endstempel.outputs.final_filename }}
+          FINAL_SHA256: ${{ needs.endstempel.outputs.final_sha256 }}
+        run: |
+          set -euo pipefail
+          tag="endstempel-$BATCH_SHA256"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'ENDSTEMPEL_RELEASE_REPLAY_BLOCKED'
+            exit 2
+          fi
+          p="endstempel-package/$FINAL_FILENAME"
+          gh release create "$tag" "$p#$FINAL_FILENAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Pferde Atelier Endstempel $BATCH_SHA256" \
+            --notes "107008-bound ENDSTEMPEL release. SHA-256: $FINAL_SHA256. publish_allowed=false."
+          gh release view "$tag" --repo "$GITHUB_REPOSITORY" --json url,tagName,assets
+          echo 'ENDSTEMPEL_DURABLE_JSON_RELEASE_PASS'

@@ -1,0 +1,45 @@
+{
+  "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1",
+  "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "source_commit": "f4df3847ab4d807a71e82104fd5e1151eff98f2e",
+  "item_count": 7,
+  "items": [
+    {
+      "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56.md",
+      "sha256": "1eebc6d5afc538be2c594a7f313a48c2c0c6c7acf15962e67d25265474e10e21"
+    },
+    {
+      "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19",
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19.md",
+      "sha256": "07c409860e30b5dc8a657123530ecb27a3f16b524754e4fbbc918b7daa45ba8d"
+    },
+    {
+      "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87",
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87.md",
+      "sha256": "2fdbc79b064435d2a618fa6fefb43827d6f0628fbff842fe2f53c76c12225209"
+    },
+    {
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288.md",
+      "sha256": "d6aa46ffdc9fb558f8e97b0413a0cefeecf8b40cac3df37aefb72af34b5a517c"
+    },
+    {
+      "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da",
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da.md",
+      "sha256": "02e88eba33ff213836f0dbb55aa8af6f0060224bcbe143bc2ee8ad8df9442b66"
+    },
+    {
+      "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648",
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648.md",
+      "sha256": "bf2cc48e67dfb6c3c762acd05c1c3772ee6491f8d17849c1fd58c481117fe8ff"
+    },
+    {
+      "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5",
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/ARTICLE_906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5.md",
+      "sha256": "ec6a8c3656360a5569aa764b4b16762d565d17383b7c68f6837ac7c0ca1eeba3"
+    }
+  ],
+  "content_mutation_performed": false,
+  "publish_allowed": false
+}

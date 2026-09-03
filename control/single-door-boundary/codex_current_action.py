@@ -64,6 +64,7 @@ def _current_only(data: dict) -> dict:
             "allowed_output_root": data["allowed_output_root"],
             "item_receipt_ref": data["item_receipt_ref"],
             "item_receipt_schema": data["item_receipt_schema"],
+            "existing_article_source_binding": data.get("existing_article_source_binding"),
             "submission_command": "python3 control/single-door-boundary/codex_current_action.py submit " + receipt_ref,
             "publish_allowed": False,
         }
@@ -97,6 +98,7 @@ def selftest() -> dict:
         "allowed_output_root": ".pferde-quarantine/test/",
         "item_receipt_ref": ".pferde-quarantine/test/ITEM_RECEIPT.json",
         "item_receipt_schema": {"contract": "X"},
+        "existing_article_source_binding": {"contract": "PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1", "ref": "control/startmaster0107/recovery_sources/test/ARTICLE_test.md", "sha256": "a" * 64},
         "submission_command": "python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json",
         "all_other_actions": "DENY",
         "next_room_token": "SECRET",
@@ -110,6 +112,12 @@ def selftest() -> dict:
         raise AssertionError("CURRENT_ACTION_NOT_EXPLICIT")
     if view.get("publish_allowed") is not False:
         raise AssertionError("PUBLISH_NOT_BLOCKED")
+    if view.get("existing_article_source_binding") != sample["existing_article_source_binding"]:
+        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_PROPAGATED")
+    sample_without = dict(sample); sample_without.pop("existing_article_source_binding")
+    view_without = _current_only(sample_without)
+    if view_without.get("existing_article_source_binding") is not None:
+        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_OPTIONAL")
     return {
         "ok": True,
         "status": "CODEX_CURRENT_ACTION_VIEW_SELFTEST_PASS",
