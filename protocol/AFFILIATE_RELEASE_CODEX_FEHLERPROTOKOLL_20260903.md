@@ -72,17 +72,17 @@ Dieses Protokoll hält die in der aktuellen Affiliate-/Codex-Arbeit tatsächlich
 
 ---
 
-## CDEX-AFF-005 — Branchprüfung umgangen, aber stale Checkout weiter als aktuelle Autorität behandelt
+## CDEX-AFF-005 — Branchprüfung umgangen, danach echter Manifestfehler sichtbar
 
 **Symptom:** Nach dem lokalen Override der Branchprüfung stoppte `release_guard.py start --branch affiliate-release-current` mit `CURRENT_MANIFEST_FORMAT`.
 
-**Root Cause:** Der Codex-`work`-Checkout enthält einen vom aktuellen GitHub-Affiliate-Stand abweichenden/stalen Manifestzustand. Der echte aktuelle Affiliate-Branch enthält dagegen ein korrektes Manifest mit exakt 26 normalen SHA-256-Zeilen.
+**Root Cause:** Nicht der Branch war danach das Problem, sondern eine tatsächlich defekte Zeile im kanonischen Manifest. Der erwartete SHA für `class-ppar-partner-analytics.php` war nur 63 Zeichen lang.
 
-**Gescheiterter Weg:** Nur den Branchnamen-Check ausschalten und danach blind den lokalen Release-Guard/Manifestzustand als aktuell behandeln.
+**Gescheiterter Weg:** Den `CURRENT_MANIFEST_FORMAT`-Fehler vorschnell als bloß stale Codex-Checkout erklären, ohne die kanonische Manifestzeile selbst bytegenau zu prüfen.
 
-**Nicht wiederholen:** Bei nachgewiesen stale lokalem Manifest keine weiteren Branch-/Fetch-/Guard-Varianten ausprobieren. Erst die tatsächliche Datei-/Hash-Autorität bestimmen. Der aktuelle kanonische GitHub-Stand ist `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` mit 26 Dateien und gebundenem Manifest-SHA-256 `109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77`.
+**Nicht wiederholen:** Bei `*_MANIFEST_FORMAT` zuerst die betroffene Manifestzeile selbst prüfen: 64 Hexzeichen, Dateipfad, tatsächlicher Datei-SHA und historische belegte Bindung. Keine Branch-/Remote-Interpretation ohne diesen Beweis.
 
-**Status:** OPEN als Umgebungsabweichung; kein Affiliate-Fachfehler.
+**Status:** CLOSED durch CDEX-AFF-007.
 
 ---
 
@@ -109,9 +109,31 @@ Keine zusätzliche Branch-, Remote-, STARTMASTER-, Discovery-, Rekonstruktions- 
 
 ---
 
+## CDEX-AFF-007 — Kanonisches Manifest enthielt 63-stelligen SHA-256-Wert
+
+**Symptom:** `class-ppar-partner-analytics.php` stand im aktuellen Manifest mit dem ungültigen 63-stelligen Wert `65e1979b6df19a4f415c018e1862e51c1d7fbe0baea9e433cf5202466563ad0`.
+
+**Belegter tatsächlicher/korrekter SHA-256:** `65e1979b6df19a4c5c4eee0f19a1f4f468f7be75c5cf964f427a3dcb08b8daa4`.
+
+**Beweis:** Derselbe 64-stellige Hash war bereits im früheren kanonischen Manifest gebunden; die Datei selbst wurde seit ihrem Commit `6007cfc18e28780d356edac858e161e36bc543be` nicht mehr verändert.
+
+**Root Cause:** Beim späteren Neubinden des 26-Dateien-Manifests wurde genau diese Manifestzeile beschädigt. Sourcecode selbst war nicht betroffen.
+
+**Fix:**
+- `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` korrigiert,
+- neuer Manifest-SHA-256: `67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9`,
+- `control/release-governance/CURRENT_RELEASE.json` auf den neuen Manifest-SHA gebunden,
+- `protocol/AFFILIATE_RELEASE_WORK_BELL.py` auf denselben Manifest-SHA gebunden.
+
+**Nicht wiederholen:** Vor jeder neuen Manifestbindung zwingend alle Manifestzeilen auf `^[0-9a-f]{64}$` prüfen und anschließend alle 26 tatsächlichen Datei-SHAs gegen die Liste laufen lassen. Erst danach den Manifest-SHA in Governance/Glocke übernehmen.
+
+**Status:** FIXED / permanenter Precheck.
+
+---
+
 # Verbindlicher Precheck für weitere Codex-Schritte
 
-Vor jedem neuen Codex-Befehl im Affiliate-Workstream muss gegen CDEX-AFF-001 bis CDEX-AFF-006 geprüft werden.
+Vor jedem neuen Codex-Befehl im Affiliate-Workstream muss gegen CDEX-AFF-001 bis CDEX-AFF-007 geprüft werden.
 
 Wenn ein vorgeschlagener Schritt einen bereits gescheiterten Weg wiederholt: **NICHT AUSFÜHREN**.
 
