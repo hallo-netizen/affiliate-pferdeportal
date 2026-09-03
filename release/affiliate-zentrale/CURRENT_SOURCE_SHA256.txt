@@ -2,7 +2,7 @@
 42691968063eff325203753cb77e3d3395195d085028fdabb3d450f81eb200fa  affiliate-portal-router/assets/frontend.css
 6d7a9bf87f6ae3f671499a2479382db6b3268a69d7aabbca4b7e80905e5ed509  affiliate-portal-router/assets/frontend.js
 b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0  affiliate-portal-router/assets/portal-structure-v279.json
-65e1979b6df19a4f415c018e1862e51c1d7fbe0baea9e433cf5202466563ad0  affiliate-portal-router/includes/class-ppar-partner-analytics.php
+65e1979b6df19a4c5c4eee0f19a1f4f468f7be75c5cf964f427a3dcb08b8daa4  affiliate-portal-router/includes/class-ppar-partner-analytics.php
 0a8900e84695acbf4584064724926720e93def0d0f7cefa5794d6708974571bb  affiliate-portal-router/includes/class-ppar-deal-radar.php
 9f7d6ef61560df2be59c6b23cf5a682fe9b12a5f30e0529f315fd3c391ec1230  affiliate-portal-router/includes/class-ppar-product-source-plan.php
 1140e4a894a5a45afcd0601d9f14c5531ae9cd707165bff2385e6afdb752021b  affiliate-portal-router/includes/class-ppar-admin-kiss.php
