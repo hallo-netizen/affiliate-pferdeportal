@@ -1,0 +1,141 @@
+diff -ruN /mnt/data/v649_plugin/affiliate-portal-router/includes/trait-ppar-ebay-run.php /mnt/data/work_v650/steps/step1/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+--- a/includes/trait-ppar-ebay-run.php	2026-08-21 11:58:58.000000000 +0000
++++ b/includes/trait-ppar-ebay-run.php	2026-08-21 14:06:35.614452372 +0000
+@@ -1141,6 +1141,98 @@
+         return array('status'=>'pass','public'=>$public,'invalid'=>array());
+     }
+ 
++    /**
++     * V6.50 coverage-gap contract.
++     *
++     * A missing public BUSINESS family is not automatically a technical failure
++     * after the one bounded canonical gap-fill. It may become an open safe supply
++     * gap only when the terminal canonical gap-fill selection proves that no
++     * safely selectable candidate remained for that exact family.
++     *
++     * This guard deliberately reuses the already completed production selection
++     * state instead of weakening/re-running acceptance or quality rules. If a
++     * safely selected candidate exists but public coverage is still missing, the
++     * state is an invariant/materialization failure and remains fail-closed.
++     */
++    private function ebay_run_business_safe_supply_gap_contract($run, $coverage) {
++        $run=is_array($run)?$run:array();$coverage=is_array($coverage)?$coverage:array();
++        $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
++        sort($missing,SORT_STRING);
++        if(!$missing){$coverage['contract_status']='complete';$coverage['open_gap_count']=0;$coverage['open_gaps']=array();return array('status'=>'pass','coverage'=>$coverage);}
++
++        $required_count=absint($coverage['required']??0);
++        if($required_count<1 || absint($coverage['covered']??0)!==$required_count-count($missing)){
++            return array('status'=>'failed','error_code'=>'business_coverage_state_inconsistent','missing'=>$missing);
++        }
++        // Production has the authoritative required-family manifest on the eBay
++        // trait. Keep this run-trait guard self-contained for old isolated test
++        // harnesses, but when the manifest method exists it remains mandatory and
++        // authoritative. This is a compatibility guard, not a weakened runtime
++        // contract: the production class always supplies this method.
++        if(method_exists($this,'ebay_business_required_product_concept_ids')){
++            $required=array_values(array_unique(array_filter(array_map('sanitize_key',(array)$this->ebay_business_required_product_concept_ids()))));
++            sort($required,SORT_STRING);$required_map=array_fill_keys($required,true);
++            if(!$required || $required_count!==count($required)){
++                return array('status'=>'failed','error_code'=>'business_coverage_state_inconsistent','missing'=>$missing);
++            }
++            foreach($missing as $id){if(!isset($required_map[$id])){return array('status'=>'failed','error_code'=>'business_coverage_unknown_family','missing'=>$missing);}}
++        }
++        if(absint($run['gapfill']['attempts']??0)<1){
++            return array('status'=>'failed','error_code'=>'business_safe_gap_without_gapfill','missing'=>$missing);
++        }
++
++        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
++        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
++        if($uuid==='' || sanitize_key((string)($selection['status']??''))!=='complete'
++            || sanitize_key((string)($selection['reason']??''))!=='canonical_gapfill'
++            || sanitize_key((string)($selection['selection_scope']??''))!=='business'
++            || sanitize_text_field((string)($selection['owner']??''))!=='run:'.$uuid
++            || sanitize_key((string)($selection['business_target_mode']??''))!=='gapfill'){
++            return array('status'=>'failed','error_code'=>'business_safe_gap_proof_missing','missing'=>$missing);
++        }
++
++        $original=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($run['gapfill']['missing']??array())))));
++        $targets=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($selection['business_target_concepts']??array())))));
++        sort($original,SORT_STRING);sort($targets,SORT_STRING);
++        if(!$original || $targets!==$original){
++            return array('status'=>'failed','error_code'=>'business_safe_gap_scope_mismatch','missing'=>$missing,'targeted'=>$targets);
++        }
++        $target_map=array_fill_keys($targets,true);
++        foreach($missing as $id){if(!isset($target_map[$id])){return array('status'=>'failed','error_code'=>'business_safe_gap_new_missing_family','missing'=>$missing,'targeted'=>$targets);}}
++
++        $selected_concepts=array();
++        foreach((array)($selection['business_active']??array()) as $entry){
++            if(!is_array($entry)){continue;}$id=sanitize_key((string)($entry['concept']??''));if($id!==''){$selected_concepts[$id]=1;}
++        }
++        $unexpected=array_values(array_intersect($missing,array_keys($selected_concepts)));sort($unexpected,SORT_STRING);
++        if($unexpected){
++            return array(
++                'status'=>'failed','error_code'=>'business_gapfill_public_invariant_failed',
++                'missing'=>$missing,'selected_but_not_public'=>$unexpected,
++            );
++        }
++
++        $exceptions=array();
++        foreach($missing as $id){
++            $exceptions[$id]=array(
++                'code'=>'safe_supply_gap_open','approved'=>0,'public'=>0,
++                'retry'=>'next_scheduled_canonical_run',
++            );
++        }
++        $coverage['contract_status']='complete_with_safe_supply_gaps';
++        $coverage['open_gap_count']=count($missing);
++        $coverage['open_gaps']=$missing;
++        $coverage['exceptions']=$exceptions;
++        $coverage['gapfill_attempts']=absint($run['gapfill']['attempts']??0);
++        $coverage['retry_contract']='next_scheduled_canonical_run';
++        $coverage['gap_proof']=array(
++            'selection_owner'=>'run:'.$uuid,
++            'target_count'=>count($targets),
++            'selected_concepts'=>count($selected_concepts),
++        );
++        return array('status'=>'pass','coverage'=>$coverage);
++    }
++
+     private function ebay_run_tick_coverage($run, $settings) {
+         $coverage=empty($settings['business_enabled'])?array('required'=>0,'covered'=>0,'missing'=>array(),'counts'=>array()):$this->ebay_run_public_business_coverage();
+         if(!empty($coverage['error_code'])){$this->ebay_run_fail((string)$coverage['error_code'],'BUSINESS-Coverage-Gate ist technisch oder fachlich fehlgeschlagen.',array('coverage'=>$coverage));return;}
+@@ -1148,9 +1240,12 @@
+         if(!empty($settings['business_enabled']) && !empty($coverage['missing'])){
+             $attempts=absint($run['gapfill']['attempts']??0);
+             if($attempts<1){$run['gapfill']['attempts']=$attempts+1;$run['gapfill']['missing']=$coverage['missing'];$run['phase']='gapfill_discovery';$run['resume_reason']='business_coverage_missing';$this->ebay_run_save($run);return;}
+-            $exceptions=array();foreach($coverage['missing'] as $id){$exceptions[$id]=array('code'=>'insufficient_safe_sources','approved'=>0);}
+-            $run['coverage']['exceptions']=$exceptions;$this->ebay_run_save($run);
+-            $this->ebay_run_fail('insufficient_safe_sources','Nach gezieltem Gap-Fill fehlen weiterhin '.count($coverage['missing']).' BUSINESS-Produktfamilien.',array('missing'=>$coverage['missing']));return;
++            $result=$this->ebay_run_business_safe_supply_gap_contract($run,$coverage);
++            if(($result['status']??'')!=='pass'){
++                $code=sanitize_key((string)($result['error_code']??'business_safe_gap_contract_failed'));
++                $this->ebay_run_fail($code,'BUSINESS-Versorgungslücke konnte nicht als sichere externe Angebotslücke bewiesen werden.',array('gap_contract'=>$result,'coverage'=>$coverage));return;
++            }
++            $run=$this->ebay_run_load();$run['coverage']=(array)$result['coverage'];$run['resume_reason']='business_safe_supply_gaps_open';$this->ebay_run_save($run);
+         }
+         $this->ebay_run_set_phase('public_verify','');
+     }
+@@ -1214,7 +1309,21 @@
+     private function ebay_run_tick_public_verify($run, $settings) {
+         $business=empty($settings['business_enabled'])?array('required'=>0,'covered'=>0,'missing'=>array(),'counts'=>array()):$this->ebay_run_public_business_coverage();
+         if(!empty($business['error_code'])){$this->ebay_run_fail((string)$business['error_code'],'BUSINESS-Public-Gate ist technisch oder fachlich fehlgeschlagen.',array('business'=>$business));return;}
+-        if(!empty($settings['business_enabled']) && !empty($business['missing'])){$this->ebay_run_fail('public_business_coverage_failed','Public-Gate findet '.count($business['missing']).' unversorgte BUSINESS-Produktfamilien.',array('missing'=>$business['missing']));return;}
++        if(!empty($settings['business_enabled']) && !empty($business['missing'])){
++            // Missing coverage is allowed here only with the exact terminal proof
++            // produced by the one canonical targeted gap-fill. A new missing
++            // family or an allegedly materialized winner remains a hard failure.
++            $current=$this->ebay_run_load();
++            $result=$this->ebay_run_business_safe_supply_gap_contract($current,$business);
++            if(($result['status']??'')!=='pass'){
++                $code=sanitize_key((string)($result['error_code']??'public_business_coverage_failed'));
++                $this->ebay_run_fail($code,'BUSINESS-Public-Gate konnte fehlende Familien nicht als sichere Versorgungslücken bestätigen.',array('gap_contract'=>$result,'business'=>$business));return;
++            }
++            $business=(array)$result['coverage'];
++            $current=$this->ebay_run_load();$current['coverage']=$business;$this->ebay_run_save($current);
++        }elseif(!empty($settings['business_enabled'])){
++            $business['contract_status']='complete';$business['open_gap_count']=0;$business['open_gaps']=array();
++        }
+         $private=$this->ebay_run_verify_private_public($settings);if(($private['status']??'')==='failed'){$this->ebay_run_fail((string)($private['error_code']??'private_public_gate_failed'),'PRIVATE-Public-Gate ist fehlgeschlagen.',array('invalid'=>$private['invalid']??array(),'public'=>$private['public']??0));return;}
+         $manifest=array('business'=>$business,'private'=>$private,'verified_at'=>time(),'run_uuid'=>(string)$run['run_uuid']);$this->ebay_run_complete($manifest);
+     }

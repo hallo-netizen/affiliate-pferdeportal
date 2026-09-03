@@ -1,0 +1,391 @@
+diff --git a/affiliate-portal-router/assets/frontend.css b/affiliate-portal-router/assets/frontend.css
+index 065be82..59a050c 100644
+--- a/affiliate-portal-router/assets/frontend.css
++++ b/affiliate-portal-router/assets/frontend.css
+@@ -467,30 +467,33 @@
+ 
+ .ppar-article-product-block {
+     clear: both;
+-    margin: 2.75rem 0 0;
+-    padding-top: 1.5rem;
+-    border-top: 1px solid #e1e5df;
++    margin: 3rem 0 0;
++    padding-top: 1.75rem;
++    border-top: 1px solid #e7ebe7;
+ }
+ 
+ .ppar-article-section-label {
+     display: block;
+-    margin-bottom: 0.65rem;
+-    color: #9A6A00;
+-    font-size: 0.75rem;
++    margin: 0 0 1.15rem;
++    padding-left: 0.8rem;
++    border-left: 3px solid #C89214;
++    color: #35422A;
++    font-size: clamp(1.35rem, 2vw, 1.7rem);
+     font-weight: 700;
+-    letter-spacing: 0.06em;
+-    text-transform: uppercase;
++    line-height: 1.25;
++    letter-spacing: 0;
++    text-transform: none;
+ }
+ 
+ .ppar-article-product-grid {
+     display: grid;
+     grid-template-columns: repeat(3, minmax(0, 1fr));
+-    gap: 1rem;
++    gap: 1.1rem;
++    align-items: stretch;
+ }
+ 
+ .ppar-article-product-count-1 {
+-    grid-template-columns: minmax(0, 1fr);
+-    max-width: 420px;
++    grid-template-columns: minmax(0, 370px);
+ }
+ 
+ .ppar-article-product-count-2 {
+@@ -500,64 +503,159 @@
+ .ppar-article-product-card {
+     min-width: 0;
+     min-height: 100%;
+-    padding: 1rem;
+-    border: 1px solid #e1e5df;
+-    border-radius: 14px;
++    padding: 0;
++    overflow: hidden;
++    border: 1px solid #e7ebe7;
++    border-radius: 18px;
+     background: #fff;
++    box-shadow: none;
++    transition: border-color .18s ease, transform .18s ease;
+ }
+ 
+-.ppar-article-product-card .ppar-banner-link {
+-    display: grid;
+-    grid-template-rows: auto 1fr;
+-    align-content: start;
++.ppar-article-product-card:hover,
++.ppar-article-product-card:focus-within {
++    border-color: #C89214;
++}
++
++.ppar-article-product-link {
++    display: flex;
++    flex-direction: column;
+     height: 100%;
+-    color: inherit;
+-    text-decoration: none;
++    color: #35422A !important;
++    text-decoration: none !important;
++}
++
++.ppar-article-product-link:hover,
++.ppar-article-product-link:focus,
++.ppar-article-product-link:active,
++.ppar-article-product-link * {
++    text-decoration: none !important;
+ }
+ 
+-.ppar-article-product-card .ppar-banner-image-wrap {
++.ppar-article-product-media {
++    display: flex;
++    align-items: center;
++    justify-content: center;
+     width: 100%;
+-    max-width: none;
++    height: 190px;
++    padding: 0.9rem;
++    overflow: hidden;
++    background: #f8f8f5;
++    border-bottom: 1px solid #eef0ec;
+ }
+ 
+-.ppar-article-product-card .ppar-banner-image {
++.ppar-article-product-image {
++    display: block;
+     width: 100%;
+-    max-height: 220px;
++    height: 100%;
++    max-width: 100%;
++    max-height: 100%;
++    margin: 0;
+     object-fit: contain;
++    object-position: center;
++    border: 0;
++    border-radius: 0;
+ }
+ 
+-.ppar-article-product-card .ppar-banner-text {
+-    align-content: start;
++.ppar-article-product-body {
++    display: flex;
++    flex: 1 1 auto;
++    flex-direction: column;
++    gap: 0.65rem;
++    padding: 1rem;
+ }
+ 
+-.ppar-article-product-card .ppar-banner-description,
+-.ppar-article-product-card .ppar-banner-availability {
++.ppar-article-product-title {
++    display: -webkit-box;
++    overflow: hidden;
++    color: #C89214;
++    font-size: 1.05rem;
++    font-weight: 700;
++    line-height: 1.35;
++    -webkit-box-orient: vertical;
++    -webkit-line-clamp: 3;
++}
++
++.ppar-article-product-description {
++    display: -webkit-box;
++    overflow: hidden;
++    color: #5f675d;
++    font-size: 0.94rem;
++    line-height: 1.5;
++    -webkit-box-orient: vertical;
++    -webkit-line-clamp: 4;
++}
++
++.ppar-article-product-meta {
++    display: flex;
++    flex-wrap: wrap;
++    align-items: baseline;
++    gap: 0.35rem 0.7rem;
++    margin-top: auto;
++    color: #35422A;
++}
++
++.ppar-article-product-price {
++    font-size: 1rem;
++    font-weight: 700;
++}
++
++.ppar-article-product-availability {
+     color: #687066;
++    font-size: 0.82rem;
+ }
+ 
+-.ppar-article-product-card .ppar-banner-button {
++.ppar-article-product-cta {
++    display: block;
++    width: 100%;
++    margin-top: 0.15rem;
++    padding: 0.7rem 1rem;
++    border: 1px solid #35422A;
++    border-radius: 999px;
+     background: #35422A;
+-    border-color: #35422A;
+     color: #fff;
++    font-size: 0.92rem;
++    font-weight: 700;
++    line-height: 1.2;
+     text-align: center;
++    transition: background-color .18s ease, border-color .18s ease;
+ }
+ 
+-.ppar-article-product-card .ppar-banner-link:hover .ppar-banner-button,
+-.ppar-article-product-card .ppar-banner-link:focus .ppar-banner-button {
+-    background: #C89214;
++.ppar-article-product-link:hover .ppar-article-product-cta,
++.ppar-article-product-link:focus .ppar-article-product-cta {
+     border-color: #C89214;
++    background: #C89214;
+     color: #fff;
+ }
+ 
++@media (min-width: 761px) and (max-width: 1023px) {
++    .ppar-article-product-grid,
++    .ppar-article-product-count-2,
++    .ppar-article-product-count-3 {
++        grid-template-columns: repeat(2, minmax(0, 1fr));
++    }
++
++    .ppar-article-product-count-1 {
++        grid-template-columns: minmax(0, 370px);
++    }
++
++    .ppar-article-product-count-3 .ppar-article-product-card:nth-child(3) {
++        grid-column: 1 / -1;
++        width: min(370px, 100%);
++        justify-self: center;
++    }
++}
++
+ @media (max-width: 760px) {
+     .ppar-article-product-grid,
++    .ppar-article-product-count-1,
+     .ppar-article-product-count-2,
+     .ppar-article-product-count-3 {
+         grid-template-columns: minmax(0, 1fr);
+     }
+ 
+-    .ppar-article-product-count-1 {
+-        max-width: none;
++    .ppar-article-product-media {
++        height: 175px;
+     }
+ }
+ 
+diff --git a/affiliate-portal-router/includes/trait-ppar-article-plans.php b/affiliate-portal-router/includes/trait-ppar-article-plans.php
+index 785cde0..0bcff4b 100644
+--- a/affiliate-portal-router/includes/trait-ppar-article-plans.php
++++ b/affiliate-portal-router/includes/trait-ppar-article-plans.php
+@@ -608,6 +608,92 @@ trait PPAR_Article_Plans_Trait {
+             . '<div class="ppar-affiliate-content">' . $html . '</div></div>';
+     }
+ 
++    /**
++     * Render one compact product card for article-bottom recommendations.
++     * This deliberately does NOT reuse the generic banner renderer: article
++     * product cards have their own markup contract so global banner CSS can
++     * never turn them back into oversized ad blocks or underlined link text.
++     */
++    private function article_plan_render_product_card_markup($banner, $post_id, $context, $group, $slot_type = 'post_bottom_products') {
++        if (!is_array($banner) || !is_array($context) || !is_array($group)) {
++            return '';
++        }
++        $mode = isset($banner['mode']) ? sanitize_key((string) $banner['mode']) : 'image_link';
++        if ($mode === 'html') {
++            return '';
++        }
++
++        $subid = $this->build_subid($post_id, $context, $group, $slot_type);
++        $replacements = array(
++            '{post_id}' => (string) $post_id,
++            '{category_slug}' => (string) ($context['primary_slug'] ?? ''),
++            '{category_name}' => (string) ($context['primary_name'] ?? ''),
++            '{group_id}' => (string) ($group['id'] ?? ''),
++            '{slot}' => (string) $slot_type,
++            '{subid}' => (string) $subid,
++        );
++
++        $url = isset($banner['url']) ? strtr((string) $banner['url'], $replacements) : '';
++        $url = $this->apply_subid_to_url($url, $subid, $banner['subid_param'] ?? '');
++        if ($url === '') {
++            return '';
++        }
++
++        $image_url = isset($banner['image_url']) ? trim(strtr((string) $banner['image_url'], $replacements)) : '';
++        $title = isset($banner['title']) ? trim(strtr((string) $banner['title'], $replacements)) : '';
++        $description = isset($banner['description']) ? trim(strtr((string) $banner['description'], $replacements)) : '';
++        $price = isset($banner['price']) ? trim(strtr((string) $banner['price'], $replacements)) : '';
++        $currency = isset($banner['currency']) ? strtoupper(substr(sanitize_text_field((string) $banner['currency']), 0, 3)) : 'EUR';
++        $availability = isset($banner['availability']) ? trim(strtr((string) $banner['availability'], $replacements)) : '';
++        $button = isset($banner['button_text']) ? trim(strtr((string) $banner['button_text'], $replacements)) : '';
++        if ($button === '') {
++            $button = 'Mehr erfahren';
++        }
++
++        $availability_key = sanitize_key(str_replace(' ', '_', $availability));
++        $availability_labels = array(
++            'available' => 'Verfügbar',
++            'in_stock' => 'Verfügbar',
++            'instock' => 'Verfügbar',
++            'out_of_stock' => 'Nicht verfügbar',
++            'outofstock' => 'Nicht verfügbar',
++            'unavailable' => 'Nicht verfügbar',
++        );
++        if (isset($availability_labels[$availability_key])) {
++            $availability = $availability_labels[$availability_key];
++        }
++
++        $target = (($banner['target'] ?? '_blank') === '_self') ? '_self' : '_blank';
++        $rel = $target === '_blank' ? 'sponsored nofollow noopener noreferrer' : 'sponsored nofollow';
++
++        $out = '<a class="ppar-article-product-link" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">';
++        $out .= '<span class="ppar-article-product-media">';
++        if ($image_url !== '') {
++            $out .= '<img class="ppar-article-product-image" src="' . esc_url($image_url) . '" alt="' . esc_attr($title !== '' ? $title : $button) . '" loading="lazy">';
++        }
++        $out .= '</span>';
++        $out .= '<span class="ppar-article-product-body">';
++        if ($title !== '') {
++            $out .= '<strong class="ppar-article-product-title">' . esc_html($title) . '</strong>';
++        }
++        if ($description !== '') {
++            $out .= '<span class="ppar-article-product-description">' . esc_html($description) . '</span>';
++        }
++        if ($price !== '' || $availability !== '') {
++            $out .= '<span class="ppar-article-product-meta">';
++            if ($price !== '') {
++                $out .= '<strong class="ppar-article-product-price">' . esc_html($price . ($currency !== '' ? ' ' . $currency : '')) . '</strong>';
++            }
++            if ($availability !== '') {
++                $out .= '<span class="ppar-article-product-availability">' . esc_html($availability) . '</span>';
++            }
++            $out .= '</span>';
++        }
++        $out .= '<span class="ppar-article-product-cta">' . esc_html($button) . '</span>';
++        $out .= '</span></a>';
++        return $out;
++    }
++
+     private function article_plan_render_products($post_id, $campaign_post_ids, $admin_test = false, $preview_count = 0) {
+         $campaign_post_ids = array_slice(array_values(array_unique(array_filter(array_map('absint', (array) $campaign_post_ids)))), 0, 3);
+         $desired_count = count($campaign_post_ids);
+@@ -675,7 +761,7 @@ trait PPAR_Article_Plans_Trait {
+             }
+             $resolved_campaign_post_id = absint($campaign['post_id'] ?? 0);
+             $banner['url'] = $this->build_click_tracking_url($resolved_campaign_post_id, $post_id, 'post_bottom_products');
+-            $html = $this->render_banner($banner, $post_id, $this->get_content_context($post_id), $group, 'post_bottom_products');
++            $html = $this->article_plan_render_product_card_markup($banner, $post_id, $this->get_content_context($post_id), $group, 'post_bottom_products');
+             if (trim((string) $html) !== '') {
+                 $cards[] = '<div class="ppar-article-product-card">' . $html . '</div>';
+             }
+diff --git a/affiliate-portal-router/pferdeportal-affiliate-router.php b/affiliate-portal-router/pferdeportal-affiliate-router.php
+index e895aba..16b8281 100644
+--- a/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ b/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.52.0
++ * Version: 6.53.0
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -39,7 +39,7 @@ final class Pferdeportal_Affiliate_Router {
+     use PPAR_Ebay_Run_Trait;
+     use PPAR_Ebay_Account_Deletion_Trait;
+     use PPAR_Awin_Programme_Gate_Trait;
+-    const VERSION = '6.52.0';
++    const VERSION = '6.53.0';
+     const EBAY_RUNTIME_BUILD = '6.52.0-core-cron-selfpump-rootfix-20260822';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+@@ -1424,7 +1424,7 @@ final class Pferdeportal_Affiliate_Router {
+             if ($campaign_post_id > 0) {
+                 $banner['url'] = $this->build_click_tracking_url($campaign_post_id, (int) $post_id, 'post_bottom_products');
+             }
+-            $html = $this->render_banner($banner, $post_id, $context, $group, 'post_bottom_products');
++            $html = $this->article_plan_render_product_card_markup($banner, $post_id, $context, $group, 'post_bottom_products');
+             if ($html !== '') {
+                 $cards[] = '<div class="ppar-article-product-card">' . $html . '</div>';
+             }
+diff --git a/affiliate-portal-router/readme.txt b/affiliate-portal-router/readme.txt
+index b26e4b4..02a9624 100644
+--- a/affiliate-portal-router/readme.txt
++++ b/affiliate-portal-router/readme.txt
+@@ -1,5 +1,7 @@
+-Affiliate-Zentrale 6.52.0 – CORE-CRON SELFPUMP ROOTFIX
+-Stable tag: 6.52.0
++Affiliate-Zentrale 6.53.0 – ARTICLE PRODUCT PORTAL STANDARD
++Stable tag: 6.53.0
++
++V6.53.0 ändert ausschließlich die Darstellung der Produktvorschläge unter Einzelbeiträgen im Affiliate-Plugin. Das generische Banner-Markup wird dort nicht mehr verwendet. Produktkarten besitzen eigenes .ppar-article-product-*-Markup und ein portalstandardkonformes, responsives Kartenlayout. Designplugin und fachliche Auswahl-/Providerlogik bleiben unverändert.
+ 
+ CORE-CRON SELFPUMP ROOTFIX
+ - Der bereits persistierte kanonische WP-Cron-Worker wird nach Request-Ende über WordPress-Core spawn_cron() angestoßen; kein Browser und kein weiterer Seitenaufruf ist als Worker erforderlich.
+@@ -107,4 +109,4 @@ Korrektur 6.42.1
+ - Persistente No-Progress-Recovery ist nicht mehr an einen globalen Einmal-Schalter gebunden.
+ - Nachweislich vom alten PRIVATE-Fingerprint betroffene 6.41.2/6.41.3-Runs werden pro Run/Fehlerereignis idempotent migriert.
+ - Bei Policy-/Katalogwechsel bleibt dieselbe Run-ID erhalten; nur abgeleitete Selection/Coverage-Zustaende werden neu aufgebaut.
+-- Neue Fehler speichern Build, Progress-Contract und fehlgeschlagene Phase direkt im Error-Eintrag.
++- Neue Fehler speichern Build, Progress-Contract und fehlgeschlagene Phase direkt im Error-Eintrag.
+\ No newline at end of file
