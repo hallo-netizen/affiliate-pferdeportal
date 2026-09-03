@@ -47,7 +47,7 @@ Aktuell gebundener Source-Stand:
 
 - Source-Root: `release/affiliate-zentrale/current/affiliate-portal-router/`
 - Manifest: `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`
-- Manifest-SHA-256: `109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77`
+- Manifest-SHA-256: `67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9`
 - Source-Dateien: exakt `26`
 - Kandidat: `6.64.0`
 
@@ -93,7 +93,7 @@ Die Glocke führt gebunden aus:
 
 1. `release_guard.py governance-check`
 2. `release_guard.py start --branch affiliate-release-current`
-3. Manifest-SHA exakt gegen `109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77`
+3. Manifest-SHA exakt gegen `67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9`
 4. exakt 26 Manifestdateien und jeden Datei-SHA gegen den direkt committed Source-Tree
 5. deterministischen temporären Livekandidaten `affiliate-zentrale_v6.64.0_LIVE_CANDIDATE_26FILE.zip`
 6. Fresh-Unpack und erneute exakte 26-Dateien-/SHA-Prüfung
