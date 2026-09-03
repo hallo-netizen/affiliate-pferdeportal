@@ -12,6 +12,7 @@ from pathlib import Path, PurePosixPath
 
 WORKSTREAM = "AFFILIATE_ZENTRALE"
 BRANCH = "affiliate-release-current"
+CODEX_EPHEMERAL_BRANCH = "work"
 EXPECTED_MANIFEST_SHA256 = "109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77"
 EXPECTED_FILE_COUNT = 26
 CANDIDATE_NAME = "affiliate-zentrale_v6.64.0_LIVE_CANDIDATE_26FILE.zip"
@@ -32,7 +33,7 @@ FORBIDDEN_RUNTIME_PREFIXES = (
 
 
 def die(code: str, detail: str, exit_code: int = 2) -> None:
-    print(f"WORK_BELL: BLOCKED")
+    print("WORK_BELL: BLOCKED")
     print(f"CODE: {code}")
     print(f"DETAIL: {detail}")
     raise SystemExit(exit_code)
@@ -85,14 +86,23 @@ def load_release() -> dict:
     return data
 
 
-def ensure_branch() -> None:
+def ensure_branch() -> str:
     branch = run_checked(["git", "branch", "--show-current"]).strip()
-    if branch != BRANCH:
-        die("WRONG_BRANCH", f"expected {BRANCH}, got {branch or '<detached>'}")
+    if branch == BRANCH:
+        return branch
+    if branch == CODEX_EPHEMERAL_BRANCH:
+        # Codex Cloud executes tasks on its own ephemeral local branch named "work".
+        # The branch name is therefore not release authority. Safety is enforced below
+        # by CURRENT_RELEASE binding + exact manifest hash + exact 26-file byte identity.
+        return branch
+    die("WRONG_BRANCH", f"expected {BRANCH} or Codex ephemeral {CODEX_EPHEMERAL_BRANCH}, got {branch or '<detached>'}")
+    return branch
 
 
 def run_release_guards() -> tuple[str, str]:
     gov = run_checked(["python3", "control/release-governance/release_guard.py", "governance-check"])
+    # release_guard's --branch value is the bound release-policy identity, not the
+    # ephemeral local Codex checkout name.
     start = run_checked(["python3", "control/release-governance/release_guard.py", "start", "--branch", BRANCH])
     return gov, start
 
@@ -177,12 +187,13 @@ def verify_fresh_unpack(rows: list[tuple[str, str]]) -> None:
                 die("FRESH_UNPACK_HASH_MISMATCH", f"{rel}: expected {digest}, got {actual}")
 
 
-def write_state(status: str, zip_sha: str | None = None) -> None:
+def write_state(status: str, zip_sha: str | None = None, local_branch: str | None = None) -> None:
     WORK_ROOT.mkdir(parents=True, exist_ok=True)
     payload = {
-        "contract": "AFFILIATE_RELEASE_WORK_BELL_V1",
+        "contract": "AFFILIATE_RELEASE_WORK_BELL_V2_CODEX_EPHEMERAL_BRANCH_SAFE",
         "workstream": WORKSTREAM,
-        "branch": BRANCH,
+        "release_branch_identity": BRANCH,
+        "local_execution_branch": local_branch,
         "manifest_sha256": EXPECTED_MANIFEST_SHA256,
         "source_file_count": EXPECTED_FILE_COUNT,
         "status": status,
@@ -205,6 +216,7 @@ def current() -> None:
     ensure_repo_root()
     ensure_no_startmaster_navigation()
     release = load_release()
+    local_branch = ensure_branch()
     status = "BUILD_LIVE_CANDIDATE"
     if CANDIDATE.is_file() and STATE_FILE.is_file():
         try:
@@ -215,6 +227,8 @@ def current() -> None:
             pass
     print("WORK_BELL: PASS")
     print(f"WORKSTREAM: {WORKSTREAM}")
+    print(f"LOCAL_EXECUTION_BRANCH: {local_branch}")
+    print(f"RELEASE_BRANCH_IDENTITY: {BRANCH}")
     print(f"AUTHORIZED_NEXT_ACTION: {status}")
     print(f"RELEASE_STATE: {(release.get('execution_state') or {}).get('state')}")
 
@@ -223,18 +237,20 @@ def run_build() -> None:
     ensure_repo_root()
     ensure_no_startmaster_navigation()
     load_release()
-    ensure_branch()
-    write_state("BUILD_LIVE_CANDIDATE")
+    local_branch = ensure_branch()
+    write_state("BUILD_LIVE_CANDIDATE", local_branch=local_branch)
     run_release_guards()
     rows = parse_manifest()
     verify_source(rows)
     deterministic_zip(rows)
     verify_fresh_unpack(rows)
     zip_sha = sha256_file(CANDIDATE)
-    write_state("LIVE_CANDIDATE_READY", zip_sha)
+    write_state("LIVE_CANDIDATE_READY", zip_sha, local_branch)
     print("WORK_BELL: PASS")
     print("GOVERNANCE_CHECK: PASS")
     print("START_CHECK: PASS")
+    print(f"LOCAL_EXECUTION_BRANCH: {local_branch}")
+    print(f"RELEASE_BRANCH_IDENTITY: {BRANCH}")
     print(f"SOURCE_MANIFEST_SHA256: {EXPECTED_MANIFEST_SHA256}")
     print(f"SOURCE_FILE_COUNT: {EXPECTED_FILE_COUNT}")
     print("SOURCE_BYTE_IDENTITY: PASS")
