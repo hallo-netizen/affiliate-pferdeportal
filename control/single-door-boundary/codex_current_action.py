@@ -44,6 +44,7 @@ def _current_only(data: dict) -> dict:
             "allowed_output_root",
             "item_receipt_ref",
             "item_receipt_schema",
+            "fachworkflow_handoff",
             "submission_command",
         )
         if any(key not in data for key in required):
@@ -64,6 +65,7 @@ def _current_only(data: dict) -> dict:
             "allowed_output_root": data["allowed_output_root"],
             "item_receipt_ref": data["item_receipt_ref"],
             "item_receipt_schema": data["item_receipt_schema"],
+            "fachworkflow_handoff": data["fachworkflow_handoff"],
             "existing_article_source_binding": data.get("existing_article_source_binding"),
             "submission_command": "python3 control/single-door-boundary/codex_current_action.py submit " + receipt_ref,
             "publish_allowed": False,
@@ -98,6 +100,7 @@ def selftest() -> dict:
         "allowed_output_root": ".pferde-quarantine/test/",
         "item_receipt_ref": ".pferde-quarantine/test/ITEM_RECEIPT.json",
         "item_receipt_schema": {"contract": "X"},
+        "fachworkflow_handoff": {"contract": "PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1", "command": "python3 adapter.py materialize request.json", "publish_allowed": False},
         "existing_article_source_binding": {"contract": "PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1", "ref": "control/startmaster0107/recovery_sources/test/ARTICLE_test.md", "sha256": "a" * 64},
         "submission_command": "python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json",
         "all_other_actions": "DENY",
