@@ -1,0 +1,19 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER_FORWARD",
+  "sequence": 107010,
+  "worker_profile": "CLOUD_BATCH_PREPARATION",
+  "authorized_inputs": [],
+  "instruction": "Bereite ausschließlich den neuen Artikeltest nach Abschluss der vorgebundenen technischen Vorstufen vor. Verwende ausschließlich READY/Freigaben des bestehenden Fachworkflows. Keine eigenen Titel-/Keyword-/Qualitätsentscheidungen und keine Wiederholung unveränderter PASS-Stufen.",
+  "limits": {
+    "reasoning_effort": "medium",
+    "parallel_workers": 1
+  },
+  "next_binding": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS_FORWARD",
+    "sequence": 107011,
+    "bundle_ref": "control/startmaster0107/STEP_107011_BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS_FORWARD.json",
+    "bundle_sha256": "339151a3e12211cd6f166023c6a161e776f3fcc53d65afa320f3a22d8d8b2b22"
+  }
+}
