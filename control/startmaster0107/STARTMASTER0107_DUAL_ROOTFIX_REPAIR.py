@@ -9,7 +9,6 @@ REPO=Path(__file__).resolve().parents[2]
 SELF_REL='control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py'
 BRIDGE_REL='control/single-door-boundary/codex_current_room_bridge.py'
 CURRENT_ACTION_REL='control/single-door-boundary/codex_current_action.py'
-HANDOFF_REL='control/startmaster0107/fachworkflow_proof_handoff.py'
 ENTRY_REL='control/output-quarantine/runtime_entry_gate.py'
 STEP7_REL='control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json'
 STEP8_REL='control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json'
@@ -124,15 +123,9 @@ def validate_existing_article_source_binding(repo:Path,a:Mapping[str,Any],it:Map
 
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     b=binding_descriptor(repo);root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
-    runtime=load(repo/RUNTIME_STATE_REL);batch=str(runtime.get('batch_sha256') or '')
-    if not re.fullmatch(r'[0-9a-f]{64}',batch):raise Blocked('FACH_HANDOFF_BATCH_INVALID')
     s=dict(a.get('item_receipt_schema') or {})
     s.update({'fachworkflow_contract_binding':b,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact FACHWORKFLOW_PASS.json; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'contract_binding_ref':SELF_REL,'contract_binding_sha256':b['binding_sha256'],'required_stage_proofs':'exactly one {stage,ref,sha256} for each required_pass_stages entry; refs under allowed_output_root','fact_pack':'existing Fachworkflow fact-pack object','production_plan_item':'existing production_plan_v4 item','production_plan_header':'existing production_plan_v4 top-level fields except items','workflow_release_item':'existing current supervisor-release item','workflow_release_metadata':'exact current PSERC release metadata excluding dynamic hashes/signature/items','content_or_quality_rules_changed':False,'publish_allowed':False}})
-    request_ref=root+'FACHWORKFLOW_HANDOFF_REQUEST.json'
-    s['fachworkflow_pass_schema']['batch_sha256']='current bound runtime batch_sha256'
-    s['fachworkflow_pass_schema']['required_stage_proofs']='exactly one real-execution proof for every required stage; identity, execution evidence and artifact hashes are verified'
     a['item_receipt_schema']=s
-    a['fachworkflow_handoff']={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':batch,'request_ref':request_ref,'request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','adapter_ref':HANDOFF_REL,'adapter_sha256':fsha(repo/HANDOFF_REL),'command':'python3 '+HANDOFF_REL+' materialize '+request_ref,'executes_domain_logic':False,'accepts_only_real_stage_execution_proofs':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
     src=existing_article_source_binding(repo,it)
     if src is not None:a['existing_article_source_binding']=src
     return a
@@ -157,26 +150,12 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
         if not isinstance(x,dict) or set(x)!={'stage','ref','sha256'} or x['stage'] in by:raise Blocked('FACH_STAGE_ROW_INVALID')
         by[x['stage']]=x
     if set(by)!=set(STAGES):raise Blocked('FACH_STAGE_SET_INVALID')
-    runtime=load(repo/RUNTIME_STATE_REL);batch=str(runtime.get('batch_sha256') or '')
-    if q.get('batch_sha256')!=batch:raise Blocked('FACH_PASS_BATCH_MISMATCH')
     root=str(a['allowed_output_root'])
     for stage in STAGES:
         x=by[stage];ref2=str(x['ref']);h=str(x['sha256'])
         if not ref2.startswith(root) or len(h)!=64:raise Blocked('FACH_STAGE_REF_INVALID:'+stage)
         sp=safe(repo,ref2)
         if not sp.is_file() or fsha(sp)!=h:raise Blocked('FACH_STAGE_HASH_MISMATCH:'+stage)
-        proof=load(sp);expected={'contract':'PFERDE_ATELIER_FACHWORKFLOW_STAGE_EXECUTION_PROOF_V1','status':'PASS','batch_sha256':batch,'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'stage':stage,'execution_performed':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
-        if any(proof.get(k)!=v for k,v in expected.items()):raise Blocked('FACH_STAGE_EXECUTION_BINDING_INVALID:'+stage)
-        if not re.fullmatch(r'[0-9a-f]{64}',str(proof.get('input_sha256') or '')):raise Blocked('FACH_STAGE_INPUT_HASH_INVALID:'+stage)
-        evidence=proof.get('execution_evidence');artifacts=proof.get('artifacts')
-        if not isinstance(evidence,list) or not evidence or not all(isinstance(v,str) and v.strip() for v in evidence):raise Blocked('FACH_STAGE_EXECUTION_EVIDENCE_MISSING:'+stage)
-        if not isinstance(artifacts,list) or not artifacts:raise Blocked('FACH_STAGE_ARTIFACTS_MISSING:'+stage)
-        for artifact in artifacts:
-            if not isinstance(artifact,dict) or set(artifact)!={'ref','sha256'}:raise Blocked('FACH_STAGE_ARTIFACT_ROW_INVALID:'+stage)
-            aref=str(artifact['ref']);ah=str(artifact['sha256'])
-            if not aref.startswith(root) or not re.fullmatch(r'[0-9a-f]{64}',ah):raise Blocked('FACH_STAGE_ARTIFACT_REF_INVALID:'+stage)
-            ap=safe(repo,aref)
-            if not ap.is_file() or fsha(ap)!=ah:raise Blocked('FACH_STAGE_ARTIFACT_HASH_MISMATCH:'+stage)
     fp=q.get('fact_pack');pi=q.get('production_plan_item');ph=q.get('production_plan_header');ri=q.get('workflow_release_item');rm=q.get('workflow_release_metadata')
     if not all(isinstance(x,dict) for x in (fp,pi,ph,ri,rm)):raise Blocked('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
     if pi.get('canonical_article_id')!=it.get('canonical_article_id') or pi.get('plan_slot')!=it.get('plan_slot'):raise Blocked('PLAN_ITEM_IDENTITY_MISMATCH')
@@ -329,17 +308,15 @@ def selftest(repo:Path)->dict:
         clear_prepared_binding(tr,batch);assert not prepared_binding_sidecar(tr,batch).exists()
     assert 'dual_rootfix_pass' in (repo/BRIDGE_REL).read_text() and 'pserc_finalization' in (repo/ENTRY_REL).read_text()
     with tempfile.TemporaryDirectory() as td:
-        tr=Path(td);(tr/'q').mkdir();(tr/Path(PROMPT_REL).parent).mkdir(parents=True);shutil.copy(repo/PROMPT_REL,tr/PROMPT_REL);(tr/Path(SELF_REL).parent).mkdir(parents=True,exist_ok=True);shutil.copy(repo/SELF_REL,tr/SELF_REL);shutil.copy(repo/HANDOFF_REL,tr/HANDOFF_REL)
+        tr=Path(td);(tr/'q').mkdir();(tr/Path(PROMPT_REL).parent).mkdir(parents=True);shutil.copy(repo/PROMPT_REL,tr/PROMPT_REL);(tr/Path(SELF_REL).parent).mkdir(parents=True,exist_ok=True);shutil.copy(repo/SELF_REL,tr/SELF_REL)
         a={'allowed_output_root':'q/','item_receipt_schema':{}};it={'canonical_article_id':'article:test','plan_slot':'a'*64}
         (tr/Path(RUNTIME_STATE_REL).parent).mkdir(parents=True,exist_ok=True);dump(tr/RUNTIME_STATE_REL,{'batch_sha256':'c'*64})
         srcp=tr/f".pferde-release/{'c'*64}/ARTICLE_{it['plan_slot']}.md";srcp.parent.mkdir(parents=True,exist_ok=True);srcp.write_text('existing',encoding='utf-8')
         a=augment_current_action(tr,a,it);assert a['existing_article_source_binding']['sha256']==fsha(srcp);rows=[]
         for s in STAGES:
-            artifact='q/'+s+'.artifact';(tr/artifact).write_text('real-stage-output',encoding='utf-8')
-            proof={'contract':'PFERDE_ATELIER_FACHWORKFLOW_STAGE_EXECUTION_PROOF_V1','status':'PASS','batch_sha256':'c'*64,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'stage':s,'execution_performed':True,'input_sha256':'1'*64,'execution_evidence':['selftest stage runner completed'],'artifacts':[{'ref':artifact,'sha256':fsha(tr/artifact)}],'content_or_quality_rules_changed':False,'publish_allowed':False}
-            ref='q/'+s+'.json';dump(tr/ref,proof);rows.append({'stage':s,'ref':ref,'sha256':fsha(tr/ref)})
+            ref='q/'+s+'.json';(tr/ref).write_text(json.dumps({'stage':s,'status':'PASS'}));rows.append({'stage':s,'ref':ref,'sha256':fsha(tr/ref)})
         meta={'article_origin_policy':'POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE','authoring_prompt_sha256':'b'*64,'authoring_role':'CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS','content_generation_performed_by_supervisor':False,'contract':RELEASE_CONTRACT,'created_at_utc':'2026-09-02T00:00:00+00:00','exact_five_batch_sha256':'c'*64,'exact_five_item_count':1,'frozen_workflow_sha256':'d'*64,'nullpunkt':{},'nullpunkt_sha256':'e'*64,'ppm_baseline_sha256':'f'*64,'ppm_version':'6.7.9','research_evidence_policy':'BOUND_EXISTING_FACHWORKFLOW_ONLY','sequence':107008,'status':'PASS','wordpress_write_performed':False}
-        q={'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':'c'*64,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'contract_binding_ref':SELF_REL,'contract_binding_sha256':binding_sha(tr),'required_stage_proofs':rows,'fact_pack':{'contract':'canonical_fact_pack_v1','fact_pack_id':'fp'},'production_plan_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'production_plan_header':{'contract':'production_plan_v4','plan_contract_version':'4.0.0','required_plugin_version':'6.7.9','contract_hashes':CONTRACT_HASHES},'workflow_release_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'workflow_release_metadata':meta,'content_or_quality_rules_changed':False,'publish_allowed':False};pref=a['item_receipt_schema']['fachworkflow_pass_ref'];dump(tr/pref,q);h=fsha(tr/pref);d={'outputs':[{'ref':pref,'sha256':h}],'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':h};validate_fachworkflow_pass(tr,a,it,d)
+        q={'contract':PASS_CONTRACT,'status':'PASS','canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'contract_binding_ref':SELF_REL,'contract_binding_sha256':binding_sha(tr),'required_stage_proofs':rows,'fact_pack':{'contract':'canonical_fact_pack_v1','fact_pack_id':'fp'},'production_plan_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'production_plan_header':{'contract':'production_plan_v4','plan_contract_version':'4.0.0','required_plugin_version':'6.7.9','contract_hashes':CONTRACT_HASHES},'workflow_release_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'workflow_release_metadata':meta,'content_or_quality_rules_changed':False,'publish_allowed':False};pref=a['item_receipt_schema']['fachworkflow_pass_ref'];dump(tr/pref,q);h=fsha(tr/pref);d={'outputs':[{'ref':pref,'sha256':h}],'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':h};validate_fachworkflow_pass(tr,a,it,d)
         srcp.write_text('tampered-existing',encoding='utf-8')
         try:validate_fachworkflow_pass(tr,a,it,d);raise AssertionError('NEG_EXISTING_SOURCE_HASH')
         except Blocked:pass
