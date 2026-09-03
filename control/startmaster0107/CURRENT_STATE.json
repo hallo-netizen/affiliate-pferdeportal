@@ -17,7 +17,7 @@
     "IMMUTABLE_BASE_HARDLOCK_POST_BIND_POSITIVE_LIVE_PASS_PR25",
     "IMMUTABLE_BASE_HARDLOCK_POST_BIND_NEGATIVE_LIVE_PASS_PR26"
   ],
-  "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "next_allowed_step": "SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM",
   "queued_after_current_step": [
     "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
     "RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY",
@@ -31,10 +31,10 @@
   "execution_gate": {
     "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V2",
     "enforced": true,
-    "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
-    "sequence": 107001,
-    "bundle_ref": "control/startmaster0107/STEP_107001_ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED.json",
-    "bundle_sha256": "53d81a94c415e32c26c5a2cae90fc9b71b5d354919032045e5c0fa57b39c2eac",
+    "step_id": "SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM",
+    "sequence": 107009,
+    "bundle_ref": "control/startmaster0107/STEP_107009_SUPERVISOR_PROJECTION_READY_STATE_REPAIR.json",
+    "bundle_sha256": "0909ede31ebb371c63f2be32d9808dd328ebfc97406c370cb9a53cef119ac1c4",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -70,5 +70,17 @@
       "hardlock",
       "hardlock-base"
     ]
-  }
+  },
+  "execution_gate_receipts": [
+    {
+      "completed_step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+      "sequence": 107001,
+      "ticket_id": "25dadd7793b35a6a8a8a1ab177ccba8afb1f0fa853d5cce2987c19e7c75e85e5",
+      "receipt_sha256": null,
+      "status": "USER_ACTION_REQUIRED",
+      "transition": "EXTERNAL_REBIND",
+      "rebind_request_sha256": "6c35057b624d0a41f4eb11b2ada117ea5ae74fe3acacc8f36f622c73d069ccc2",
+      "rebind_reason": "Authorized external rebind from terminal nonpass legacy 40/40 step to the requested supervisor projection ready-state repair step."
+    }
+  ]
 }
