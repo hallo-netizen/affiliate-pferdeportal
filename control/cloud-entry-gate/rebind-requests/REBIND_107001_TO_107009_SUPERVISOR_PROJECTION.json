@@ -1,0 +1,13 @@
+{
+  "contract": "PFERDE_ATELIER_EXTERNAL_REBIND_REQUEST_V1",
+  "startmaster": "STARTMASTER0107",
+  "current_step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+  "current_sequence": 107001,
+  "current_bundle_sha256": "53d81a94c415e32c26c5a2cae90fc9b71b5d354919032045e5c0fa57b39c2eac",
+  "current_terminal_status": "USER_ACTION_REQUIRED",
+  "next_step_id": "SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM",
+  "next_sequence": 107009,
+  "next_bundle_ref": "control/startmaster0107/STEP_107009_SUPERVISOR_PROJECTION_READY_STATE_REPAIR.json",
+  "next_bundle_sha256": "0909ede31ebb371c63f2be32d9808dd328ebfc97406c370cb9a53cef119ac1c4",
+  "reason": "Authorized external rebind from terminal nonpass legacy 40/40 step to the requested supervisor projection ready-state repair step."
+}
