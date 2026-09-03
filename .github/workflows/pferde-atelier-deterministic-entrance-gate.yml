@@ -56,6 +56,14 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/wordpress-prewrite-gate/test_wordpress_prewrite_gate.py
+      - name: Assert WordPress prewrite hardlock is mandatory and read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F 'python3 control/wordpress-prewrite-gate/wordpress_prewrite_gate.py <APPROVED_ENVELOPE.json> <EXACT_WORDPRESS_CANDIDATE.json>' AGENTS.md
+          grep -F 'Bei `BLOCKED`, fehlendem Input, nicht auflösbarer Bindung oder technischem Fehler: sofort vor jedem WordPress-Content-Write stoppen.' AGENTS.md
+          ! grep -E 'write_text\(|write_bytes\(|unlink\(|rename\(|replace\(|mkdir\(|rmdir\(|shutil\.|subprocess\.|os\.system\(|requests\.|urllib\.' \
+            control/wordpress-prewrite-gate/wordpress_prewrite_gate.py
       - name: Assert active gate has no OpenAI API dependency
         shell: bash
         run: |
