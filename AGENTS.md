@@ -55,6 +55,21 @@ Wenn der aktuell gebundene STARTMASTER-Step einen Textbatch ausführt, gilt zus�
 - keine Zwischenmeldung während eines aktiven Batches, außer USER_ACTION_REQUIRED oder nicht lokal lösbarem Hard-Fail;
 - ein finales Batch-Ergebnis ist nur gültig, wenn `control/production-continuity/production_continuity_guard.py finalize <checkpoint>` PASS liefert.
 
+## WordPress-Prewrite-Hardlock – unmittelbar vor jedem Content-Write
+Für jeden STARTMASTER-Schritt, der Artikelinhalt in WordPress schreiben würde, ist unmittelbar vor dem ersten WordPress-Content-Write zwingend genau dieser nachgelagerte Kontroll-Gate auszuführen:
+
+`python3 control/wordpress-prewrite-gate/wordpress_prewrite_gate.py <APPROVED_ENVELOPE.json> <EXACT_WORDPRESS_CANDIDATE.json>`
+
+Dabei gilt fail-closed:
+- `<APPROVED_ENVELOPE.json>` muss das bereits im gebundenen Workflow freigegebene/hashgebundene Produktionspaket sein; keine freie Ersatzdatei.
+- `<EXACT_WORDPRESS_CANDIDATE.json>` muss exakt das Artefakt enthalten, dessen Artikelkörper unmittelbar danach nach WordPress geschrieben würden; keine Vorschau und kein älterer Zwischenstand.
+- Nur `status=PASS` und `wordpress_write_allowed=true` erlauben die Fortsetzung zum bestehenden WordPress-Schreibpfad.
+- Bei `BLOCKED`, fehlendem Input, nicht auflösbarer Bindung oder technischem Fehler: sofort vor jedem WordPress-Content-Write stoppen. Keine Ersatzroute, kein Bypass.
+- Der Gate ist ausschließlich read-only. Er darf Artikel, Links, Tabellen, Metadaten, Workflow-State oder Upstream-Textproduktion niemals reparieren, ergänzen oder umschreiben.
+- Der Gate-PASS muss als Evidence des ausführenden Steps/Receipts erhalten bleiben.
+
+Die Fachregeln dieses Hardlocks liegen ausschließlich in `control/wordpress-prewrite-gate/wordpress_prewrite_gate.py`: nachweisbare Herkunft aus dem freigegebenen Textprozess, vertraglich erforderliche Tabelle und ausschließlich gebundene Linkziele. Die Textproduktion selbst bleibt außerhalb dieses Gates und wird durch ihn nicht verändert.
+
 ## Trennung
 Die Eingangstür und Continuity-Schicht sind rein technisch. Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- und sonstige Portalregeln liegen ausschließlich im nachgelagerten Workflow und dürfen hier weder ersetzt noch dupliziert werden.
 
