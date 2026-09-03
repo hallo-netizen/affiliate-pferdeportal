@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "IMMUTABLE_BASE_HARDLOCK_ACTIVE_SUPERVISOR_PROJECTION_REPAIR",
+  "status": "IMMUTABLE_BASE_HARDLOCK_ACTIVE_ROOTFIX_NEXT",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_IMMUTABLE_BASE_HARDLOCK_AND_PREBOUND_ROUTING_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -17,7 +17,7 @@
     "IMMUTABLE_BASE_HARDLOCK_POST_BIND_POSITIVE_LIVE_PASS_PR25",
     "IMMUTABLE_BASE_HARDLOCK_POST_BIND_NEGATIVE_LIVE_PASS_PR26"
   ],
-  "next_allowed_step": "SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM",
+  "next_allowed_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
   "queued_after_current_step": [
     "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
     "RETAINED_BACKLOG_AFTER_SANDBOX_REENTRY",
@@ -31,10 +31,10 @@
   "execution_gate": {
     "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V2",
     "enforced": true,
-    "step_id": "SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM",
-    "sequence": 107009,
-    "bundle_ref": "control/startmaster0107/STEP_107009_SUPERVISOR_PROJECTION_READY_STATE_REPAIR.json",
-    "bundle_sha256": "0909ede31ebb371c63f2be32d9808dd328ebfc97406c370cb9a53cef119ac1c4",
+    "step_id": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED",
+    "sequence": 107001,
+    "bundle_ref": "control/startmaster0107/STEP_107001_ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED.json",
+    "bundle_sha256": "53d81a94c415e32c26c5a2cae90fc9b71b5d354919032045e5c0fa57b39c2eac",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
