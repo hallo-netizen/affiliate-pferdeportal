@@ -331,6 +331,122 @@ def complete(receipt_path: Path):
         'next_action': 'CONTINUE_IMMEDIATELY_WITH_NEW_CAPSULE_INSTRUCTION',
     }
 
+
+def rebind(request_path: Path):
+    ptr, root, state, gate, bundle, bp, rootp, statep, state_hash, bundle_hash = authority()
+    ticket = ticket_for(state, gate, state_hash, bundle_hash)
+    terminal = terminal_for_current(state, ticket)
+
+    if terminal is None:
+        raise Blocked('REBIND_REQUIRES_TERMINAL_STEP')
+    if terminal.get('status') not in {'PASS', 'BLOCKED', 'USER_ACTION_REQUIRED'}:
+        raise Blocked('REBIND_TERMINAL_STATUS_INVALID')
+
+    request_path = request_path.resolve()
+    allowed_dir = (REPO / 'control/cloud-entry-gate/rebind-requests').resolve()
+    try:
+        request_path.relative_to(allowed_dir)
+    except ValueError:
+        raise Blocked('REBIND_REQUEST_OUTSIDE_AUTHORIZED_DIR')
+
+    if not request_path.is_file():
+        raise Blocked('REBIND_REQUEST_MISSING')
+
+    req = load(request_path)
+    allowed = {
+        'contract',
+        'startmaster',
+        'current_step_id',
+        'current_sequence',
+        'current_bundle_sha256',
+        'current_terminal_status',
+        'next_step_id',
+        'next_sequence',
+        'next_bundle_ref',
+        'next_bundle_sha256',
+        'reason',
+    }
+    if set(req) != allowed:
+        raise Blocked('REBIND_REQUEST_FIELDS_INVALID')
+    if req.get('contract') != 'PFERDE_ATELIER_EXTERNAL_REBIND_REQUEST_V1':
+        raise Blocked('REBIND_REQUEST_CONTRACT_INVALID')
+    if req.get('startmaster') != state.get('startmaster'):
+        raise Blocked('REBIND_STARTMASTER_MISMATCH')
+    if req.get('current_step_id') != ticket.get('step_id'):
+        raise Blocked('REBIND_CURRENT_STEP_MISMATCH')
+    if int(req.get('current_sequence', -1)) != int(ticket.get('sequence', -2)):
+        raise Blocked('REBIND_CURRENT_SEQUENCE_MISMATCH')
+    if req.get('current_bundle_sha256') != ticket.get('bundle_sha256'):
+        raise Blocked('REBIND_CURRENT_BUNDLE_MISMATCH')
+    if req.get('current_terminal_status') != terminal.get('status'):
+        raise Blocked('REBIND_TERMINAL_STATUS_MISMATCH')
+    if not isinstance(req.get('reason'), str) or not req.get('reason').strip():
+        raise Blocked('REBIND_REASON_MISSING')
+
+    next_step = str(req.get('next_step_id') or '').strip()
+    if not next_step:
+        raise Blocked('REBIND_NEXT_STEP_MISSING')
+    try:
+        next_seq = int(req.get('next_sequence'))
+    except Exception:
+        raise Blocked('REBIND_NEXT_SEQUENCE_INVALID')
+    if next_seq <= int(gate.get('sequence', -1)):
+        raise Blocked('REBIND_NON_MONOTONIC_SEQUENCE_REJECTED')
+
+    next_rel = rel(req.get('next_bundle_ref'))
+    nextp = REPO / next_rel
+    if not nextp.is_file():
+        raise Blocked('REBIND_NEXT_BUNDLE_MISSING')
+    next_hash = sha(nextp)
+    if next_hash != req.get('next_bundle_sha256'):
+        raise Blocked('REBIND_NEXT_BUNDLE_HASH_MISMATCH')
+
+    next_bundle = load(nextp)
+    if next_bundle.get('step_id') != next_step:
+        raise Blocked('REBIND_NEXT_STEP_IDENTITY_MISMATCH')
+    if int(next_bundle.get('sequence', -1)) != next_seq:
+        raise Blocked('REBIND_NEXT_SEQUENCE_IDENTITY_MISMATCH')
+
+    hist = state.setdefault('execution_gate_receipts', [])
+    hist.append({
+        'completed_step_id': ticket['step_id'],
+        'sequence': ticket['sequence'],
+        'ticket_id': ticket['ticket_id'],
+        'receipt_sha256': terminal.get('receipt_sha256'),
+        'status': terminal.get('status'),
+        'transition': 'EXTERNAL_REBIND',
+        'rebind_request_sha256': sha(request_path),
+        'rebind_reason': req['reason'].strip(),
+    })
+
+    state['next_allowed_step'] = next_step
+    gate['step_id'] = next_step
+    gate['sequence'] = next_seq
+    gate['bundle_ref'] = next_rel.as_posix()
+    gate['bundle_sha256'] = next_hash
+    state.pop('execution_gate_terminal', None)
+
+    dump_atomic(statep, state)
+    root['current_state_sha256'] = sha(statep)
+    root['next_allowed_step'] = next_step
+    dump_atomic(rootp, root)
+
+    result = materialize()
+    return {
+        'ok': True,
+        'status': 'STATE_REBOUND_NEXT_STEP_READY',
+        'previous_step_id': ticket['step_id'],
+        'previous_sequence': ticket['sequence'],
+        'previous_terminal_status': terminal['status'],
+        'next_step_id': result['step_id'],
+        'next_sequence': result['sequence'],
+        'next_ticket_id': result['ticket_id'],
+        'state_advanced': True,
+        'rebind_request_sha256': sha(request_path),
+        'next_action': 'CONTINUE_IMMEDIATELY_WITH_NEW_CAPSULE_INSTRUCTION',
+    }
+
+
 def verify():
     ptr, root, state, gate, bundle, bp, rootp, statep, state_hash, bundle_hash = authority()
     verify_inputs(bundle)
@@ -359,6 +475,10 @@ def main():
             if len(sys.argv) != 3:
                 raise Blocked('COMPLETE_REQUIRES_RECEIPT_PATH')
             result = complete(Path(sys.argv[2]))
+        elif cmd == 'rebind':
+            if len(sys.argv) != 3:
+                raise Blocked('REBIND_REQUIRES_REQUEST_PATH')
+            result = rebind(Path(sys.argv[2]))
         else:
             raise Blocked('UNKNOWN_COMMAND')
         print(json.dumps(result, ensure_ascii=False, indent=2))
