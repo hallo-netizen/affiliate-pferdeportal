@@ -4,11 +4,18 @@
   "sequence": 107009,
   "worker_profile": "CLOUD_MAINTENANCE_STEP",
   "authorized_inputs": [],
-  "instruction": "Arbeite ausschließlich am gebundenen Schritt SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM. Repariere nur die bestehende Ready-/Projection-State-Bindung, sodass der bereits gültig signierte und gebundene Produktionslauf wieder durch den unveränderten Workflow-Supervisor in den bestehenden Importweg weitergegeben werden kann. Keine Änderung der Supervisor-Prüflogik, keine Artikelprüfung oder Artikeländerung, keine neue Signatur, kein neuer Importer, keine neue Architektur. Verwende nur bestehende Mechanismen und erzeuge nach erfolgreichem Fix die installierbare Plugin-ZIP. Bei echtem nicht lokal lösbarem Hindernis ausschließlich BLOCKED oder USER_ACTION_REQUIRED liefern.",
+  "instruction": "Schließe ausschließlich die bereits erledigte 107009-Reparatur als Routing-Schritt ab. Keine erneute Supervisor-/Plugin-/Artikel-/Signatur-/Importer-Reparatur und keine Architekturänderung. Wenn der gebundene Zustand unverändert vorliegt, liefere PASS, damit die vorgebundene monotone Vorwärtskette ab 107010 startet. Bei echtem nicht lokal lösbarem Hindernis ausschließlich BLOCKED oder USER_ACTION_REQUIRED liefern.",
   "limits": {
     "max_wall_seconds": 1800,
     "max_output_bytes": 5242880,
     "reasoning_effort": "high",
     "parallel_workers": 1
+  },
+  "next_binding": {
+    "startmaster": "STARTMASTER0107",
+    "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER_FORWARD",
+    "sequence": 107010,
+    "bundle_ref": "control/startmaster0107/STEP_107010_PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER_FORWARD.json",
+    "bundle_sha256": "a0f5c2d4d9c4d594e0b4cbc623deecc1e40e14e28567c4953e2d3718bfe68eb7"
   }
 }
