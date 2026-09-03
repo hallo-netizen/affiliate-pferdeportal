@@ -1,9 +1,31 @@
 # AFFILIATE-ZENTRALE — EXAKTER LIVEKANDIDAT-BUILD
 
-Stand: 2026-09-02
+Stand: 2026-09-03
 Workstream: `AFFILIATE_ZENTRALE`
 Branch: `affiliate-release-current`
 Status: `BOUND_EXECUTION_TASK`
+
+## ARBEITSGLOCKE — ZWINGENDER EINLASS
+
+Dieser Affiliate-Auftrag darf **nicht** über STARTMASTER oder die globale Cloud-Eingangstür navigiert werden.
+
+**VERBOTEN für diesen Auftrag:**
+
+- `python3 control/cloud-entry-gate/cloud_entry.py start`
+- `control/output-quarantine/runtime_entry_gate.py`
+- `control/single-door-boundary/codex_current_action.py`
+- jede Navigation über `control/startmaster*`, `.pferde-capsule/` oder `.pferde-quarantine/`
+
+Diese Pfade gehören zu anderen Workstreams und dürfen den Affiliate-Auftrag nicht blockieren oder umleiten.
+
+**Einziger technischer Einstieg:**
+
+```bash
+python3 protocol/AFFILIATE_RELEASE_WORK_BELL.py current
+python3 protocol/AFFILIATE_RELEASE_WORK_BELL.py run
+```
+
+Die Glocke validiert selbst Workstream, Branch, Current-Release-Bindung, Manifest, 26 Source-Dateien, Governance/Start-Guard, Source-Byteidentität, ZIP-Build und Fresh-Unpack-Byteidentität. Sie darf nur bei echtem belegtem Mismatch oder nach erzeugtem Livekandidaten für die zwingende WordPress-Nutzerhandlung stoppen.
 
 ## Ziel
 
@@ -23,7 +45,6 @@ Vor Ausführung zwingend lesen:
 
 Aktuell gebundener Source-Stand:
 
-- Commit vor Bindung dieses Tasks: `3823363cce198fedd2e49591a9f9f2c103c9a9ba`
 - Source-Root: `release/affiliate-zentrale/current/affiliate-portal-router/`
 - Manifest: `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`
 - Manifest-SHA-256: `109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77`
@@ -62,53 +83,22 @@ VERBOTEN:
 
 ## Exakte Ausführung
 
-1. Auf `affiliate-release-current` ausführen:
+Die Ausführung erfolgt ausschließlich durch die Arbeitsglocke:
 
-   `python3 control/release-governance/release_guard.py governance-check`
+```bash
+python3 protocol/AFFILIATE_RELEASE_WORK_BELL.py run
+```
 
-2. Danach:
+Die Glocke führt gebunden aus:
 
-   `python3 control/release-governance/release_guard.py start --branch affiliate-release-current`
-
-3. Manifest-SHA-256 selbst berechnen und exakt gegen
-   `109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77`
-   prüfen.
-
-4. Alle 26 Manifestzeilen gegen den direkt committed Source-Tree prüfen:
-   - exakt dieselbe Dateiliste;
-   - keine zusätzliche Datei;
-   - keine fehlende Datei;
-   - SHA-256 jeder Datei exakt wie im Manifest.
-
-5. Erst danach einen **temporären Livekandidaten** erzeugen. Die ZIP muss als Root exakt `affiliate-portal-router/` enthalten. Dateiinhalte dürfen beim Verpacken nicht verändert werden.
-
-   Empfohlene deterministische Buildlogik: Manifest einlesen und ausschließlich die dort gelisteten Dateien in eine neue ZIP schreiben. Keine Cache-, Git-, Evidence-, Protocol- oder versteckte Datei aufnehmen.
-
-   Ausgabename:
-   `affiliate-zentrale_v6.64.0_LIVE_CANDIDATE_26FILE.zip`
-
-6. ZIP sofort in einen frischen temporären Ordner entpacken und erneut prüfen:
-   - exakt 26 Dateien;
-   - Pfade exakt wie Manifest;
-   - SHA-256 jeder entpackten Datei exakt wie Manifest.
-
-7. SHA-256 der erzeugten ZIP berechnen.
-
-8. Ergebnis als **downloadbares Arbeitsartefakt** der Ausführung bereitstellen. Nicht unter `release/affiliate-zentrale/artifacts/final/` committen.
-
-## Erwartete Endausgabe
-
-Nur diese Fakten ausgeben:
-
-- `GOVERNANCE_CHECK: PASS/FAIL`
-- `START_CHECK: PASS/FAIL`
-- `SOURCE_MANIFEST_SHA256: ...`
-- `SOURCE_FILE_COUNT: 26`
-- `SOURCE_BYTE_IDENTITY: PASS/FAIL`
-- `FRESH_UNPACK_FILE_COUNT: 26`
-- `FRESH_UNPACK_BYTE_IDENTITY: PASS/FAIL`
-- `LIVE_CANDIDATE_ZIP_SHA256: ...`
-- Pfad/Download des erzeugten `affiliate-zentrale_v6.64.0_LIVE_CANDIDATE_26FILE.zip`
+1. `release_guard.py governance-check`
+2. `release_guard.py start --branch affiliate-release-current`
+3. Manifest-SHA exakt gegen `109879a3c355dff075db4d0ccfe81e7396ed571e5c180019f85d907d56d55f77`
+4. exakt 26 Manifestdateien und jeden Datei-SHA gegen den direkt committed Source-Tree
+5. deterministischen temporären Livekandidaten `affiliate-zentrale_v6.64.0_LIVE_CANDIDATE_26FILE.zip`
+6. Fresh-Unpack und erneute exakte 26-Dateien-/SHA-Prüfung
+7. ZIP-SHA-256
+8. Status `USER_ACTION_REQUIRED` erst für die echte WordPress-Installation
 
 Bei irgendeinem Mismatch: **keine ZIP zur Installation freigeben**, erster belegter Fehler + tatsächlicher Hash/Pfad, dann STOP FAIL_CLOSED.
 
