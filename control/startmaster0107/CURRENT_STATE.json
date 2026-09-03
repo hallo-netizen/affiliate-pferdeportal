@@ -34,7 +34,7 @@
     "step_id": "SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM",
     "sequence": 107009,
     "bundle_ref": "control/startmaster0107/STEP_107009_SUPERVISOR_PROJECTION_READY_STATE_REPAIR.json",
-    "bundle_sha256": "0909ede31ebb371c63f2be32d9808dd328ebfc97406c370cb9a53cef119ac1c4",
+    "bundle_sha256": "45ab77af202f94a0b1517c1fa480215ceeb52fcce9d15bd20a02c62df5e44153",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
