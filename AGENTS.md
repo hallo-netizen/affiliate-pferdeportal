@@ -1,36 +1,49 @@
-# TEMPORÄRE CODEX-MAINTENANCE-AUTORISIERUNG – NUR DIESER REPARATUR-BRANCH
+# Pferde Atelier – verbindliche Codex-Cloud-Eingangstür
 
-Diese Anweisung gilt ausschließlich auf `rootfix-107007-fachworkflow-proofs-20260903` und darf NICHT nach `main` übernommen werden.
+Diese Datei gilt repositoryweit für Codex Cloud.
 
-## Einziger Auftrag
-Repariere ausschließlich die technische Ursache, warum der bestehende unveränderte Fachworkflow in `107007` zwar echte `FACHWORKFLOW_PASS`-/Stage-Proofs liefern muss, aber die aktuelle Worker-Aktion keinen produktiv ausführbaren, gebundenen Proof-Handoff bereitstellt.
+## Zwingender Start
+Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
 
-## Maintenance-Einstieg
-Für diesen isolierten Reparatur-Task NICHT `cloud_entry.py start` ausführen und NICHT den aktuell gebundenen Produktionsbatch starten. Der aktuelle Produktions-State darf weder verändert noch abgeschlossen werden. Diese Maintenance-Ausnahme ist notwendig, weil die normale repositoryweite Eingangstür sonst jeden Reparatur-Task sofort in den produktiven Step `107007` bindet.
+`python3 control/cloud-entry-gate/cloud_entry.py start`
 
-Zuerst den aktuellen `main`-Stand und die Historie der früher funktionierenden 107007-Artikelausführung sowie der später eingeführten Dual-Rootfix-/Fachworkflow-Proof-Pflicht prüfen. Danach nur den kleinsten technischen Adapter-/Proof-Handoff-Fix implementieren.
+Wenn dieser Befehl BLOCKED meldet: sofort stoppen. Keine Alternativprüfung, kein Rücksprung, kein eigener Workflowpfad.
 
-## HARDLOCK
-- Textmaschine unverändert.
-- PPM, PSERC, PSTE, Redaktionsplan, Artikelregeln, SEO-/Qualitätsregeln und WordPress-Importer unverändert.
-- Keine Prüfung abschalten oder abschwächen.
-- Keine Proofs faken oder bloße PASS-Dateien ohne reale Ausführung erzeugen.
-- Keine alten Artikel-/Produktions-JSONs oder alten Artikelkörper für neue Produktion wiederverwenden.
-- Keine Sonderlösung für den aktuellen 7er-Batch.
-- Keine Parallelarchitektur und keine neue Fachlogik.
-- Kein Auto-Publish.
+Wenn PASS gemeldet wird:
+- ausschließlich `.pferde-capsule/INSTRUCTION.txt` als aktuellen Arbeitsauftrag verwenden;
+- `TICKET.json`, `RECEIPT_SCHEMA.json` und `CAPSULE_MANIFEST.json` sind technisch bindend;
+- die in `.pferde-capsule/inputs/` materialisierten Dateien sind die hashgebundenen Pflichtinputs;
+- das Repository darf nur zur Ausführung des aktuell gebundenen Steps gelesen/geändert werden, wenn `repo_worktree_available_for_bound_step=true` ist;
+- `control/CURRENT_STARTMASTER.json`, STARTMASTER-State, andere Step-Bundles, Protokolle und alte Historie dürfen vom Worker niemals zur Workflow-Navigation benutzt werden;
+- keinen nächsten Workflow-Schritt auswählen, wiederholen, überspringen oder vorziehen;
+- keine State- oder Workflowänderung eigenständig vornehmen;
+- bereits bestandene unveränderte PASS-Stufen nicht erneut prüfen.
 
-## Ziel
-`gebundener Artikel -> bestehender unveränderter Fach-/Textprozess -> reale Stage-Ausführung -> echte hashgebundene Stage-Proofs -> FACHWORKFLOW_PASS.json -> 107007 akzeptiert PASS -> nächster Artikel`
+## Verbindlicher Step-Abschluss
+Nach Ausführung des aktuellen Steps MUSS `.pferde-capsule/RECEIPT.json` exakt gemäß `.pferde-capsule/RECEIPT_SCHEMA.json` geschrieben werden.
 
-Der Mechanismus muss artikel- und batchneutral sein.
+Danach MUSS exakt ausgeführt werden:
 
-## Tests
-Positiv und negativ testen. Fehlender, falscher oder nachträglich veränderter Stage-Proof muss fail-closed blockieren. Soweit im Reparatur-Branch ohne produktive externe Abhängigkeiten möglich, zwei verschiedene synthetische Batch-/Item-Identitäten durch denselben technischen Adapter testen, damit keine aktuelle 7er-Sonderbindung entsteht.
+`python3 control/cloud-entry-gate/cloud_entry.py complete .pferde-capsule/RECEIPT.json`
 
-Ein echter Produktions-End-to-End-Test darf erst NACH Merge über den normalen Dispatcher auf `main` erfolgen; auf diesem Maintenance-Branch niemals den produktiven State verändern.
+Nur die Eingangstür darf daraufhin den State verändern.
 
-## Vor Abschluss zwingend
-`AGENTS.md` byte-identisch auf den aktuellen `main`-Inhalt zurücksetzen. Die temporäre Maintenance-Autorisierung darf im finalen PR-Diff NICHT enthalten sein.
+- Bei `STATE_ADVANCED_NEXT_STEP_READY`: ohne Zwischenmeldung sofort die neu materialisierte `.pferde-capsule/INSTRUCTION.txt` abarbeiten und denselben Abschlusszyklus fortsetzen.
+- Bei `STEP_TERMINAL_NONPASS`: sofort mit dem dort gebundenen `BLOCKED` oder `USER_ACTION_REQUIRED` stoppen. Keine Alternativroute und keine eigene Lösung.
+- Bei `FINAL_STEP_PASS`: am gebundenen finalen Endpunkt stoppen.
+- Ein Chat-/Task-Neustart beginnt wieder ausschließlich mit `cloud_entry.py start`; bei unverändertem State wird dasselbe deterministische Ticket erzeugt und kein PASS-Step neu gebunden.
 
-Im finalen PR dürfen ausschließlich technisch notwendige Adapter-/Proof-Handoff-Dateien, deren Tests und technisch zwingende Hashbindungen enthalten sein. Keine Fachdatei verändern.
+## Aktiver Textbatch / Chatwechsel
+Wenn der aktuell gebundene Step einen Textbatch ausführt, gilt zusätzlich der bestehende Production-Continuity-Vertrag:
+- vorhandenen gebundenen BATCH_CHECKPOINT zuerst verwenden;
+- abgeschlossene unveränderte Items nicht erneut bearbeiten;
+- exakt am ersten offenen Item/Gate fortsetzen;
+- interne Checkpoints still fortschreiben;
+- keine Zwischenmeldung während eines aktiven Batches, außer USER_ACTION_REQUIRED oder nicht lokal lösbarem Hard-Fail;
+- ein finales Batch-Ergebnis ist nur gültig, wenn `control/production-continuity/production_continuity_guard.py finalize <checkpoint>` PASS liefert.
+
+## Trennung
+Die Eingangstür und Continuity-Schicht sind rein technisch. Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- und sonstige Portalregeln liegen ausschließlich im nachgelagerten Workflow und dürfen hier weder ersetzt noch dupliziert werden.
+
+## Definition of Done
+Vor einem terminalen Abschluss muss `python3 control/cloud-entry-gate/cloud_entry.py verify` PASS melden. Ein Ergebnis ohne gültigen Receipt-Abschluss ist nicht workflowgültig.
