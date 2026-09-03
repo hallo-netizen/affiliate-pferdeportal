@@ -8,6 +8,7 @@ on:
       - 'control/deterministic-entrance-gate/**'
       - 'control/cloud-entry-gate/**'
       - 'control/production-continuity/**'
+      - 'control/wordpress-prewrite-gate/**'
       - 'control/startmaster0104/**'
       - 'control/startmaster0105/**'
       - 'control/startmaster0106/**'
@@ -21,6 +22,7 @@ on:
       - 'control/deterministic-entrance-gate/**'
       - 'control/cloud-entry-gate/**'
       - 'control/production-continuity/**'
+      - 'control/wordpress-prewrite-gate/**'
       - 'control/startmaster0104/**'
       - 'control/startmaster0105/**'
       - 'control/startmaster0106/**'
@@ -50,6 +52,10 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/production-continuity/test_production_continuity_guard.py
+      - name: WordPress prewrite content hardlock positive-negative CI
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python control/wordpress-prewrite-gate/test_wordpress_prewrite_gate.py
       - name: Assert active gate has no OpenAI API dependency
         shell: bash
         run: |
@@ -57,8 +63,9 @@ jobs:
           ! grep -E 'api\.openai\.com|OPENAI_API_KEY|requests\.post|httpx\.post|urllib\.request' \
             control/cloud-entry-gate/cloud_entry.py \
             control/deterministic-entrance-gate/door.py \
-            control/production-continuity/production_continuity_guard.py
-      - name: Assert active gate stays domain blind
+            control/production-continuity/production_continuity_guard.py \
+            control/wordpress-prewrite-gate/wordpress_prewrite_gate.py
+      - name: Assert active entrance and continuity gates stay domain blind
         shell: bash
         run: |
           set -euo pipefail
