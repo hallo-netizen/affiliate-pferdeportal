@@ -1,0 +1,14 @@
+{
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V2",
+  "step_id": "SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM",
+  "sequence": 107009,
+  "worker_profile": "CLOUD_MAINTENANCE_STEP",
+  "authorized_inputs": [],
+  "instruction": "Arbeite ausschließlich am gebundenen Schritt SUPERVISOR_PROJECTION_NO_CURRENT_READY_SIGNED_ITEM. Repariere nur die bestehende Ready-/Projection-State-Bindung, sodass der bereits gültig signierte und gebundene Produktionslauf wieder durch den unveränderten Workflow-Supervisor in den bestehenden Importweg weitergegeben werden kann. Keine Änderung der Supervisor-Prüflogik, keine Artikelprüfung oder Artikeländerung, keine neue Signatur, kein neuer Importer, keine neue Architektur. Verwende nur bestehende Mechanismen und erzeuge nach erfolgreichem Fix die installierbare Plugin-ZIP. Bei echtem nicht lokal lösbarem Hindernis ausschließlich BLOCKED oder USER_ACTION_REQUIRED liefern.",
+  "limits": {
+    "max_wall_seconds": 1800,
+    "max_output_bytes": 5242880,
+    "reasoning_effort": "high",
+    "parallel_workers": 1
+  }
+}
