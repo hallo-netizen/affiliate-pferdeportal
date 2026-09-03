@@ -64,7 +64,6 @@ def _current_only(data: dict) -> dict:
             "allowed_output_root": data["allowed_output_root"],
             "item_receipt_ref": data["item_receipt_ref"],
             "item_receipt_schema": data["item_receipt_schema"],
-            "existing_article_source_binding": data.get("existing_article_source_binding"),
             "submission_command": "python3 control/single-door-boundary/codex_current_action.py submit " + receipt_ref,
             "publish_allowed": False,
         }
@@ -105,25 +104,20 @@ def selftest() -> dict:
         "server_executor": "SECRET",
     }
     view = _current_only(sample)
-    forbidden = {"all_other_actions", "next_room_token", "server_executor", "route", "rooms", "future_items", "bound_item_ids"}
+    forbidden = {"all_other_actions", "next_room_token", "server_executor", "route", "rooms", "future_items", "bound_item_ids", "existing_article_source_binding"}
     if forbidden.intersection(view):
         raise AssertionError("WORKER_VIEW_LEAK")
     if view.get("instruction") != "EXECUTE_CURRENT_BOUND_ITEM_NOW":
         raise AssertionError("CURRENT_ACTION_NOT_EXPLICIT")
     if view.get("publish_allowed") is not False:
         raise AssertionError("PUBLISH_NOT_BLOCKED")
-    if view.get("existing_article_source_binding") != sample["existing_article_source_binding"]:
-        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_PROPAGATED")
-    sample_without = dict(sample); sample_without.pop("existing_article_source_binding")
-    view_without = _current_only(sample_without)
-    if view_without.get("existing_article_source_binding") is not None:
-        raise AssertionError("EXISTING_ARTICLE_SOURCE_NOT_OPTIONAL")
     return {
         "ok": True,
         "status": "CODEX_CURRENT_ACTION_VIEW_SELFTEST_PASS",
         "current_action_only": True,
         "server_side_deny_preserved": True,
         "future_route_exposed": False,
+        "existing_article_source_exposed": False,
         "content_or_quality_authority": "NONE",
         "publish_allowed": False,
     }
