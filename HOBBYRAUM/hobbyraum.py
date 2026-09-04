@@ -48,6 +48,18 @@ def safe_rel(value: str) -> Path:
         raise Blocked("DEST_INVALID:" + value)
     return p
 
+def assert_safe_source(src: Path) -> None:
+    if src.is_symlink():
+        raise Blocked("SYMLINK_INPUT_FORBIDDEN:" + str(src))
+    if ".git" in src.parts:
+        raise Blocked("GIT_METADATA_FORBIDDEN:" + str(src))
+    if src.is_dir():
+        for p in src.rglob("*"):
+            if ".git" in p.parts:
+                raise Blocked("GIT_METADATA_FORBIDDEN:" + str(p))
+            if p.is_symlink():
+                raise Blocked("SYMLINK_INPUT_FORBIDDEN:" + str(p))
+
 def prepare(task: dict, task_file: Path) -> Path:
     run = RUNS / task["task_id"]
     if run.exists():
@@ -69,6 +81,9 @@ def prepare(task: dict, task_file: Path) -> Path:
         dest_rel = safe_rel(str(row["dest"]))
         if not src.exists():
             raise Blocked("INPUT_MISSING:" + str(src))
+        assert_safe_source(src)
+        if ".git" in dest_rel.parts:
+            raise Blocked("GIT_METADATA_DEST_FORBIDDEN:" + str(dest_rel))
         dest = workspace / dest_rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         if src.is_dir():
