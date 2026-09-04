@@ -114,11 +114,13 @@ def m21():
             g.require_current_main=lambda:"f"*40
             g.authority=lambda:(None,state,None,policy,ticket)
             g.validate_generic_receipt=lambda *_:(ticket,receipt)
+            ticket_path=root/"ticket.json"; receipt_path=root/"receipt.json"
+            dump(ticket_path,ticket); dump(receipt_path,receipt)
             dump(runtime,{"status":"EXECUTION_READY","batch_sha256":"c"*64,"publish_allowed":False})
-            pos=g.prepare_107007(root/"ticket.json",root/"receipt.json")
+            pos=g.prepare_107007(ticket_path,receipt_path)
             must(pos.get("status")=="OUTPUT_RELEASE_PREPARED_NOT_VISIBLE" and pos.get("publish_allowed") is False,"M21_POSITIVE_NO_PUBLISH_NOT_PASS")
             dump(runtime,{"status":"EXECUTION_READY","batch_sha256":"c"*64,"publish_allowed":True})
-            expect_exc(lambda:g.prepare_107007(root/"ticket.json",root/"receipt.json"),"AUTO_PUBLISH_FORBIDDEN")
+            expect_exc(lambda:g.prepare_107007(ticket_path,receipt_path),"AUTO_PUBLISH_FORBIDDEN")
     finally:
         g.REPO,g.RUNTIME_STATE=old_repo,old_runtime
         g.require_current_main,g.authority,g.validate_generic_receipt=old_main,old_authority,old_validate
