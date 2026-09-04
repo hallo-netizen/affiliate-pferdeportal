@@ -138,9 +138,13 @@ nd_reset();
 $item=(array)$payload['production_plan_item']; $pack=(array)$payload['fact_pack']; $header=(array)$payload['production_plan_header'];
 $cid=(string)$payload['canonical_article_id']; $externalSlot=(string)$payload['plan_slot'];
 if((string)($item['canonical_article_id']??'')!==$cid){fwrite(STDERR,"CANONICAL_ID_MISMATCH\n");exit(2);}
-$slot=PPM679_Editorial_Plan_Registry::find_slot(['canonical_article_id'=>$cid]);
-if(!is_array($slot)){fwrite(STDERR,"CANONICAL_SLOT_MISSING\n");exit(2);}
-if(!hash_equals(PSERC_Plan_Slot_Identity::token($slot),$externalSlot)){fwrite(STDERR,"PLAN_SLOT_MISMATCH\n");exit(2);}
+$matches=[];
+foreach((array)(PPM679_Editorial_Plan_Registry::plan()['slots']??[]) as $candidate){
+  if(is_array($candidate)&&hash_equals(PSERC_Plan_Slot_Identity::token($candidate),$externalSlot)){$matches[]=$candidate;}
+}
+if(count($matches)!==1){fwrite(STDERR,"PLAN_SLOT_REGISTRY_MATCH_NOT_UNIQUE\n");exit(2);}
+$slot=$matches[0];
+$item['canonical_article_id']=(string)$slot['canonical_article_id'];
 $cat=(array)($item['quality_binding']['wordpress_category']??[]);
 if(empty($cat['id'])||empty($cat['slug'])){fwrite(STDERR,"WORDPRESS_CATEGORY_BINDING_MISSING\n");exit(2);}
 nd_seed_terms([$item]);
