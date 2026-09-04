@@ -104,7 +104,7 @@ def m21():
     try:
         with tempfile.TemporaryDirectory() as td:
             root=Path(td); q=root/"q"; q.mkdir(parents=True)
-            out=q/"ARTICLE_"+("1"*64)+".md"; out.write_text("m21\n",encoding="utf-8")
+            out=q/("ARTICLE_"+("1"*64)+".md"); out.write_text("m21\n",encoding="utf-8")
             runtime=root/"RUNTIME.json"
             ticket={"ticket_id":"m21","step_id":"RUN_NEW_ARTICLE_BATCH_NO_STOP","sequence":107007,"state_sha256":"a"*64,"bundle_sha256":"b"*64}
             receipt={"payload":{"execution_origin":"BOUND_WORKER","workflow_pass":True,"batch_sha256":"c"*64,"outputs":[{"ref":"q/"+out.name,"sha256":sha(out)}]}}
