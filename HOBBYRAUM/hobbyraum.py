@@ -175,7 +175,8 @@ def execute(task: dict, task_file: Path) -> dict:
     (run / "COMMAND.stdout.txt").write_text(work.stdout or "", encoding="utf-8")
     (run / "COMMAND.stderr.txt").write_text(work.stderr or "", encoding="utf-8")
     if work.returncode != 0:
-        raise Blocked("TASK_COMMAND_FAILED:" + str(work.returncode))
+        detail = ((work.stderr or "") + "\n" + (work.stdout or "")).strip().replace("\n", " ")[:600]
+        raise Blocked("TASK_COMMAND_FAILED:" + str(work.returncode) + ":" + detail)
 
     for idx, test in enumerate(task["tests"], start=1):
         if not isinstance(test, str) or not test.strip():
@@ -184,7 +185,8 @@ def execute(task: dict, task_file: Path) -> dict:
         (run / f"TEST_{idx}.stdout.txt").write_text(proc.stdout or "", encoding="utf-8")
         (run / f"TEST_{idx}.stderr.txt").write_text(proc.stderr or "", encoding="utf-8")
         if proc.returncode != 0:
-            raise Blocked("TEST_FAILED:" + str(idx) + ":" + str(proc.returncode))
+            detail = ((proc.stderr or "") + "\n" + (proc.stdout or "")).strip().replace("\n", " ")[:600]
+            raise Blocked("TEST_FAILED:" + str(idx) + ":" + str(proc.returncode) + ":" + detail)
 
     return diff_and_export(task, run)
 
