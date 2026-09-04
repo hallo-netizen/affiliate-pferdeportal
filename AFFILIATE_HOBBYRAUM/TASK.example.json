@@ -1,0 +1,18 @@
+{
+  "contract": "AFFILIATE_HOBBYRAUM_V1",
+  "task_id": "genau-eine-aufgabe",
+  "goal": "Eine einzige klar begrenzte Affiliate-Aufgabe",
+  "image": "python:3.12-slim",
+  "inputs": [
+    {
+      "src": "./eingang/datei.php",
+      "dest": "projekt/datei.php"
+    }
+  ],
+  "writable": [
+    "projekt/datei.php"
+  ],
+  "command": "php -l projekt/datei.php",
+  "tests": [],
+  "timeout_seconds": 600
+}
