@@ -18,7 +18,7 @@
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"
+      "sha256": "4c2eccd3163b57861f26dab090118c526b0eb4b3ae4edabb59f7c81615b5107b"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
