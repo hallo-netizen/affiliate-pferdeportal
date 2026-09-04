@@ -9,6 +9,7 @@ SELF=Path(__file__).resolve()
 BRIDGE=REPO/'control/single-door-boundary/codex_current_room_bridge.py'
 PROMPT_REL='control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt'
 RUNTIME_STATE_REL='control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
+HANDOFF_REL='control/startmaster0107/fachworkflow_proof_handoff.py'
 CONTRACT='PFERDE_ATELIER_CODEX_CURRENT_ACTION_VIEW_V1'
 PASS_CONTRACT='PFERDE_ATELIER_FACHWORKFLOW_PASS_V1'
 ARTICLE_TYPE_TEMPLATES_SHA='dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f'
