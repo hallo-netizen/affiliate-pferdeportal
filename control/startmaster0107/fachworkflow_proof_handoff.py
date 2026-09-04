@@ -145,6 +145,7 @@ foreach((array)(PPM679_Editorial_Plan_Registry::plan()['slots']??[]) as $candida
 if(count($matches)!==1){fwrite(STDERR,"PLAN_SLOT_REGISTRY_MATCH_NOT_UNIQUE\n");exit(2);}
 $slot=$matches[0];
 $item['canonical_article_id']=(string)$slot['canonical_article_id'];
+unset($item['plan_slot']);
 $cat=(array)($item['quality_binding']['wordpress_category']??[]);
 if(empty($cat['id'])||empty($cat['slug'])){fwrite(STDERR,"WORDPRESS_CATEGORY_BINDING_MISSING\n");exit(2);}
 nd_seed_terms([$item]);
