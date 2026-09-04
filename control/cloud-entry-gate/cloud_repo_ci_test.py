@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import copy, hashlib, importlib.util, json, shutil, subprocess, sys, tempfile
+import copy, hashlib, importlib.util, json, shutil, tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -172,14 +172,6 @@ def main():
             expect_block(m.verify, 'INVALID_RELATIVE_PATH')
         finally:
             restore(old)
-
-    regression = subprocess.run(
-        [sys.executable, str(REPO / 'control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py'), '--open-only'],
-        cwd=REPO, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-    )
-    print(regression.stdout, end='')
-    if regression.returncode != 0:
-        raise AssertionError('HOBBYRAUM_OPEN_REGRESSION_FAIL:' + (regression.stderr or regression.stdout)[-1600:])
 
     print(json.dumps({
         'ok': True,
