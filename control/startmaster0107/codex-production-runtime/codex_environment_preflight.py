@@ -20,6 +20,10 @@ ALLOWED_STEPS = {
     ("RUN_NEW_ARTICLE_BATCH_NO_STOP", 107007),
     ("FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH", 107008),
 }
+PPM679_PACKAGE_REL = "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+PSERC_FIX_PACKAGE_REL = "control/startmaster0107/runtime_packages/PSERC-FIX.zip"
+PSERC_FIX_PACKAGE_SHA256 = "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
 
 
 class PreflightBlocked(RuntimeError):
@@ -203,6 +207,17 @@ def validate(
     if len(package_sha) != 64 or sha256(packagep) != package_sha:
         raise PreflightBlocked("PRODUCTION_PACKAGE_HASH_MISMATCH")
 
+    ppm_package = repo / PPM679_PACKAGE_REL
+    pserc_package = repo / PSERC_FIX_PACKAGE_REL
+    if not ppm_package.is_file():
+        raise PreflightBlocked("PPM679_PACKAGE_ZIP_MISSING")
+    if sha256(ppm_package) != PPM679_PACKAGE_SHA256:
+        raise PreflightBlocked("PPM679_PACKAGE_ZIP_HASH_MISMATCH")
+    if not pserc_package.is_file():
+        raise PreflightBlocked("PSERC_FIX_ZIP_MISSING")
+    if sha256(pserc_package) != PSERC_FIX_PACKAGE_SHA256:
+        raise PreflightBlocked("PSERC_FIX_ZIP_HASH_MISMATCH")
+
     if (ed25519_provider or ed25519_available)() is not True:
         raise PreflightBlocked("ED25519_RUNTIME_UNAVAILABLE")
 
@@ -223,6 +238,10 @@ def validate(
         "production_package_sha256": package_sha,
         "state_sha256": sha256(statep),
         "bundle_sha256": sha256(bundlep),
+        "ppm679_package_ref": PPM679_PACKAGE_REL,
+        "ppm679_package_sha256": PPM679_PACKAGE_SHA256,
+        "pserc_fix_package_ref": PSERC_FIX_PACKAGE_REL,
+        "pserc_fix_package_sha256": PSERC_FIX_PACKAGE_SHA256,
         "ed25519_runtime": True,
         "chat_execution_authority": "NONE",
         "chat_output_authority": "NONE",

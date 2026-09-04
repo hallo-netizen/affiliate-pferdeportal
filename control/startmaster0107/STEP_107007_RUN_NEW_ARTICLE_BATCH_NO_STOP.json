@@ -10,7 +10,7 @@
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
+      "sha256": "ed9af8df3e6666c2bf17abc817f77fb93058eea854c9e5d9e8da11a80b6459e6"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -18,11 +18,11 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "60ad828e153f3fc33b912b21aafd0f2db7669e9df1001a87018041cc95f008eb"
+      "sha256": "280ab2a470718ff55f9254a19f4a703fc07881157645336bb33338e07bbdd711"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"
+      "sha256": "4c2eccd3163b57861f26dab090118c526b0eb4b3ae4edabb59f7c81615b5107b"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
@@ -46,14 +46,26 @@
     },
     {
       "ref": "control/single-door-boundary/codex_current_action.py",
-      "sha256": "5e165f0eb6d1d66bedd551370e887091f7c30c28ad34d8e5b157fd1fd7eca0d0"
+      "sha256": "144c44443171635ac92f5eeab5a96890cfcf047128f62b944758782f05677385"
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
       "sha256": "020e4f71c244110f637d72fbe722b4ce5cc0d8341f53c31e54b4377e89900e38"
+    },
+    {
+      "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
+      "sha256": "f88c5621d7349993b9350ad54abff59d12e65f96a37e5f77988bac13686e9708"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",
+      "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_packages/PSERC-FIX.zip",
+      "sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
     }
   ],
-  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht bleibt vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ausschließlich:\npython3 control/single-door-boundary/codex_current_action.py current\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten.\n- Beitragsart und zugehörige unveränderte Textmaschinen-Regelautorität sind technisch gebunden; keine freie Auswahl, keine Ersatzregeln.\n- alle für diese Beitragsart geltenden bestehenden Textmaschinen-/Fachworkflow-Regeln vollständig ausführen.\n- NEW bedeutet NEW: alte Artikel-/Recovery-Dateien sind keine Produktionsquelle, werden nicht gebunden und dürfen den Lauf nicht beeinflussen oder blockieren.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- alle geforderten realen Stage-Proofs und Fachworkflow-Kontextdaten erzeugen; ein bloß selbst behauptetes PASS ohne die gebundenen realen Artefakte/Hashes genügt nicht.\n- item_receipt_schema exakt erfüllen und nach item_receipt_ref schreiben.\n- danach ausschließlich submission_command ausführen. submission_command führt direkt durch die bestehende eine Tür; kein submit-request, kein Handoff-Request, keine Capability-Suche, kein zweiter Executor.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam. Niemals nächsten Raum, nächstes Item oder Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED stehenbleiben. Beim finalen 107008-Zustand ausschließlich den gebundenen 107008-Schritt ausführen. Alle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish.",
+  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht bleibt vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ausschließlich:\npython3 control/single-door-boundary/codex_current_action.py current\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten.\n- Beitragsart und zugehörige unveränderte Textmaschinen-Regelautorität sind technisch gebunden; keine freie Auswahl, keine Ersatzregeln.\n- alle für diese Beitragsart geltenden bestehenden Textmaschinen-/Fachworkflow-Regeln vollständig ausführen.\n- NEW bedeutet NEW: alte Artikel-/Recovery-Dateien sind keine Produktionsquelle, werden nicht gebunden und dürfen den Lauf nicht beeinflussen oder blockieren.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- alle geforderten realen Stage-Proofs und Fachworkflow-Kontextdaten erzeugen; ein bloß selbst behauptetes PASS ohne die gebundenen realen Artefakte/Hashes genügt nicht.\n- für die ppm-Stage den finalen Artikel in ppm679_binding exakt nach ppm679_requirement binden; kein vorgefertigter PPM-Report.\n- FACHWORKFLOW_HANDOFF_REQUEST.json exakt unter fachworkflow_handoff.request_ref und mit exakt den fachworkflow_handoff.request_required_fields schreiben. Die Werte stammen ausschließlich aus current_item, item_receipt_schema und den im unveränderten Fachworkflow erzeugten Stage-/Produktionskontextdaten.\n- danach ausschließlich fachworkflow_handoff.command ausführen. Dieser bestehende Adapter führt den gebundenen echten PPM-6.7.9-Schritt aus, prüft alle Stage-Proofs und erzeugt den gebundenen ITEM_RECEIPT.\n- danach ausschließlich submission_command ausführen. Kein eigener zweiter Executor, keine Capability-Suche, keine Alternativroute.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam. Niemals nächsten Raum, nächstes Item oder Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED stehenbleiben. Beim finalen 107008-Zustand ausschließlich den gebundenen 107008-Schritt ausführen. Alle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
@@ -63,6 +75,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "75fdb3f44e59cd982de200eb95249cf485faca287dffe21646cd420b65a63ffc"
+    "bundle_sha256": "ac33dd455261d0e749fce97dd2b436e87d3e01023dcb481dc45e0535832b8300"
   }
 }
