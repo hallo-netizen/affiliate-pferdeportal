@@ -5,8 +5,10 @@ import importlib.util
 import json
 import subprocess
 import tempfile
+import shutil
 from pathlib import Path
 
+SOURCE_REPO = Path(__file__).resolve().parents[3]
 MOD = Path(__file__).resolve().parent / 'codex_environment_preflight.py'
 spec = importlib.util.spec_from_file_location('preflight', MOD)
 m = importlib.util.module_from_spec(spec)
@@ -45,6 +47,11 @@ def make_repo(root: Path) -> tuple[Path, str]:
     policyp = repo/'control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json'; dump(policyp, policy)
     packagep = repo/'control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json'
     packagep.parent.mkdir(parents=True, exist_ok=True); packagep.write_text('{"x":1}\n', encoding='utf-8')
+    for rel in (m.PPM679_PACKAGE_REL, m.PSERC_FIX_PACKAGE_REL):
+        src = SOURCE_REPO / rel
+        dst = repo / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(src, dst)
     runtime = {
         'contract':'PFERDE_ATELIER_RUNTIME_BATCH_SLOT_STATE_V1','status':'EXECUTION_READY','generation':1,
         'batch_sha256':'b'*64,'production_package_ref':'control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json',
