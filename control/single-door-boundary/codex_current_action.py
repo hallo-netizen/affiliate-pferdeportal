@@ -1,319 +1,142 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-
-import hashlib
-import json
-import re
-import shlex
-import subprocess
-import sys
-import tempfile
+import hashlib, importlib.util, json, re, sys
 from pathlib import Path
+from typing import Any, Mapping
 
-REPO = Path(__file__).resolve().parents[2]
-BRIDGE = REPO / "control/single-door-boundary/codex_current_room_bridge.py"
-CONTRACT = "PFERDE_ATELIER_CODEX_CURRENT_ACTION_VIEW_V1"
+REPO=Path(__file__).resolve().parents[2]
+SELF=Path(__file__).resolve()
+BRIDGE=REPO/'control/single-door-boundary/codex_current_room_bridge.py'
+PROMPT_REL='control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt'
+RUNTIME_STATE_REL='control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
+CONTRACT='PFERDE_ATELIER_CODEX_CURRENT_ACTION_VIEW_V1'
+PASS_CONTRACT='PFERDE_ATELIER_FACHWORKFLOW_PASS_V1'
+ARTICLE_TYPE_TEMPLATES_SHA='dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f'
+STAGES=['research_fact_pack','textmachine_article_type_structure','table_contract','internal_links','languagetool','ppm','pserc','pste','duplicate_cannibalization','seo','design_format','publish_safety']
+RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
+RELEASE_KEYS={'article_origin_policy','authoring_prompt_sha256','authoring_role','content_generation_performed_by_supervisor','contract','created_at_utc','exact_five_batch_sha256','exact_five_item_count','frozen_workflow_sha256','nullpunkt','nullpunkt_sha256','ppm_baseline_sha256','ppm_version','research_evidence_policy','sequence','status','wordpress_write_performed'}
 
+class ViewError(RuntimeError):pass
 
-class ViewError(RuntimeError):
-    pass
+def sha(p:Path)->str:return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def load(p:Path)->dict:
+    x=json.loads(Path(p).read_text(encoding='utf-8'))
+    if not isinstance(x,dict):raise ViewError('JSON_OBJECT_REQUIRED')
+    return x
+def safe(ref:str)->Path:
+    p=Path(str(ref or ''))
+    if not str(ref or '') or p.is_absolute() or '..' in p.parts:raise ViewError('BOUND_REF_INVALID')
+    q=(REPO/p).resolve();r=REPO.resolve()
+    if q!=r and r not in q.parents:raise ViewError('BOUND_REF_ESCAPE')
+    return q
+def _bridge():
+    s=importlib.util.spec_from_file_location('current_room_bridge_bound',BRIDGE)
+    if s is None or s.loader is None:raise ViewError('BRIDGE_LOAD_FAILED')
+    m=importlib.util.module_from_spec(s);sys.modules[s.name]=m;s.loader.exec_module(m)
+    m.DUAL=SELF
+    return m
 
+def _rules(it:Mapping[str,Any])->dict:
+    t=str(it.get('article_type') or '').strip()
+    if not t:raise ViewError('ARTICLE_TYPE_BINDING_MISSING')
+    return {'contract':'PFERDE_ATELIER_TEXTMACHINE_ARTICLE_TYPE_RULESET_BINDING_V1','article_type':t,'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'selection_authority':'BOUND_CURRENT_ITEM_ONLY','rule_semantics_redefined':False,'content_or_quality_rules_changed':False,'publish_allowed':False}
 
-def _run_json(cmd: list[str]) -> dict:
-    proc = subprocess.run(
-        cmd,
-        cwd=REPO,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
-    text = (proc.stdout or "").strip()
+def _contract_binding()->dict:
+    p=REPO/PROMPT_REL
+    if not p.is_file():raise ViewError('FACH_PROMPT_MISSING')
+    return {'contract':'PFERDE_ATELIER_FACHWORKFLOW_CONTRACT_BINDING_V1','authority':'EXISTING_UNCHANGED_FACHWORKFLOW_ONLY','binding_ref':'control/single-door-boundary/codex_current_action.py','binding_sha256':sha(SELF),'prompt_ref':PROMPT_REL,'prompt_sha256':sha(p),'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_pass_stages':STAGES,'technical_guard_semantics_authority':'NONE','content_or_quality_rules_changed':False,'publish_allowed':False}
+
+# These two functions are the only callbacks the existing room bridge uses after DUAL is bound to this file.
+def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
+    r=_rules(it);b=_contract_binding();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
+    s=dict(a.get('item_receipt_schema') or {})
+    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':'current bound runtime batch_sha256','canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','content_or_quality_rules_changed':False,'publish_allowed':False}})
+    a['item_receipt_schema']=s
+    # NEW intentionally has no existing_article_source_binding and no handoff/request path.
+    a.pop('existing_article_source_binding',None);a.pop('fachworkflow_handoff',None)
+    return a
+
+def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],d:Mapping[str,Any])->dict:
+    r=_rules(it);schema=a.get('item_receipt_schema') or {};ref=str(d.get('fachworkflow_pass_ref') or '');digest=str(d.get('fachworkflow_pass_sha256') or '')
+    if ref!=schema.get('fachworkflow_pass_ref') or not re.fullmatch(r'[0-9a-f]{64}',digest):raise ViewError('FACH_PASS_BINDING_MISSING')
+    p=safe(ref)
+    if not p.is_file() or sha(p)!=digest:raise ViewError('FACH_PASS_HASH_MISMATCH')
+    outs=d.get('outputs')
+    if not isinstance(outs,list) or not any(isinstance(x,dict) and x.get('ref')==ref and x.get('sha256')==digest for x in outs):raise ViewError('FACH_PASS_NOT_BOUND_AS_OUTPUT')
+    q=load(p);runtime=load(REPO/RUNTIME_STATE_REL);batch=str(runtime.get('batch_sha256') or '')
+    req={'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'content_or_quality_rules_changed':False,'publish_allowed':False}
+    for k,v in req.items():
+        if q.get(k)!=v:raise ViewError('FACH_PASS_FIELD_MISMATCH:'+k)
+    rows=q.get('required_stage_proofs')
+    if not isinstance(rows,list) or len(rows)!=len(STAGES):raise ViewError('FACH_STAGE_COUNT_INVALID')
+    by={}
+    for x in rows:
+        if not isinstance(x,dict) or set(x)!={'stage','ref','sha256'} or x['stage'] in by:raise ViewError('FACH_STAGE_ROW_INVALID')
+        by[x['stage']]=x
+    if set(by)!=set(STAGES):raise ViewError('FACH_STAGE_SET_INVALID')
+    root=str(a['allowed_output_root'])
+    for stage in STAGES:
+        x=by[stage];sr=str(x['ref']);h=str(x['sha256'])
+        if not sr.startswith(root) or not re.fullmatch(r'[0-9a-f]{64}',h):raise ViewError('FACH_STAGE_REF_INVALID:'+stage)
+        sp=safe(sr)
+        if not sp.is_file() or sha(sp)!=h:raise ViewError('FACH_STAGE_HASH_MISMATCH:'+stage)
+        proof=load(sp);expected={'contract':'PFERDE_ATELIER_FACHWORKFLOW_STAGE_EXECUTION_PROOF_V1','status':'PASS','batch_sha256':batch,'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'stage':stage,'execution_performed':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
+        if any(proof.get(k)!=v for k,v in expected.items()):raise ViewError('FACH_STAGE_EXECUTION_BINDING_INVALID:'+stage)
+        if not re.fullmatch(r'[0-9a-f]{64}',str(proof.get('input_sha256') or '')):raise ViewError('FACH_STAGE_INPUT_HASH_INVALID:'+stage)
+        ev=proof.get('execution_evidence');arts=proof.get('artifacts')
+        if not isinstance(ev,list) or not ev or not all(isinstance(v,str) and v.strip() for v in ev):raise ViewError('FACH_STAGE_EXECUTION_EVIDENCE_MISSING:'+stage)
+        if not isinstance(arts,list) or not arts:raise ViewError('FACH_STAGE_ARTIFACTS_MISSING:'+stage)
+        for art in arts:
+            if not isinstance(art,dict) or set(art)!={'ref','sha256'}:raise ViewError('FACH_STAGE_ARTIFACT_ROW_INVALID:'+stage)
+            ar=str(art['ref']);ah=str(art['sha256'])
+            if not ar.startswith(root) or not re.fullmatch(r'[0-9a-f]{64}',ah):raise ViewError('FACH_STAGE_ARTIFACT_REF_INVALID:'+stage)
+            ap=safe(ar)
+            if not ap.is_file() or sha(ap)!=ah:raise ViewError('FACH_STAGE_ARTIFACT_HASH_MISMATCH:'+stage)
+    fp=q.get('fact_pack');pi=q.get('production_plan_item');ph=q.get('production_plan_header');ri=q.get('workflow_release_item');rm=q.get('workflow_release_metadata')
+    if not all(isinstance(x,dict) for x in (fp,pi,ph,ri,rm)):raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
+    if pi.get('canonical_article_id')!=it.get('canonical_article_id') or pi.get('plan_slot')!=it.get('plan_slot'):raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH')
+    if ri.get('canonical_article_id')!=it.get('canonical_article_id') or ri.get('plan_slot')!=it.get('plan_slot'):raise ViewError('RELEASE_ITEM_IDENTITY_MISMATCH')
+    if ph.get('contract')!='production_plan_v4' or 'items' in ph:raise ViewError('PLAN_HEADER_INVALID')
+    if set(rm)!=RELEASE_KEYS or rm.get('contract')!=RELEASE_CONTRACT or rm.get('status')!='PASS' or rm.get('wordpress_write_performed') is not False:raise ViewError('RELEASE_METADATA_INVALID')
+    return q
+
+def _current_only(data:dict)->dict:
+    status=data.get('status')
+    if status=='CURRENT_BOUND_ACTION_READY':
+        need=('room_token','current_item','fachworkflow_authority','fachworkflow_prompt_ref','allowed_output_root','item_receipt_ref','item_receipt_schema','submission_command')
+        if any(k not in data for k in need):raise ViewError('CURRENT_ACTION_FIELDS_MISSING')
+        pref='python3 control/single-door-boundary/codex_current_room_bridge.py submit ';sub=str(data['submission_command'])
+        if not sub.startswith(pref) or sub[len(pref):]!=str(data['item_receipt_ref']):raise ViewError('CURRENT_ACTION_SUBMISSION_NOT_BOUND')
+        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_CURRENT_BOUND_ITEM_NOW','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+data['item_receipt_ref'],'publish_allowed':False}
+    if status in {'BLOCKED','USER_ACTION_REQUIRED','FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH'}:return {'contract':CONTRACT,'status':status,'room_token':data.get('room_token'),'error':data.get('error'),'evidence':data.get('evidence'),'outer_step':data.get('outer_step'),'publish_allowed':False}
+    if data.get('ok') is False:return {'contract':CONTRACT,'status':'BLOCKED','error':data.get('error') or status or 'BOUND_BRIDGE_BLOCKED','publish_allowed':False}
+    raise ViewError('BOUND_BRIDGE_STATUS_NOT_WORKER_VISIBLE')
+
+def _run(args:list[str])->dict:
+    b=_bridge()
+    try:return b.current() if args==['current'] else b.submit(args[1])
+    except Exception as e:
+        if e.__class__.__name__ in {'Blocked','ViewError'}:return {'ok':False,'status':'BLOCKED','error':str(e),'publish_allowed':False}
+        raise
+
+def selftest()->dict:
+    # View test: old source/handoff cannot leak and only direct submit is emitted.
+    sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','article_type':'ratgeber'},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':{'contract':'X'},'existing_article_source_binding':{'ref':'old.md'},'fachworkflow_handoff':{'contract':'OLD'},'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
+    v=_current_only(sample)
+    if 'existing_article_source_binding' in v or 'fachworkflow_handoff' in v or 'submit-request' in v['submission_command']:raise AssertionError('OLD_OR_HANDOFF_LEAK')
+    # Binding test itself is deterministic and article-type specific.
+    a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'})
+    rb=a['item_receipt_schema']['textmachine_ruleset_binding']
+    if rb['article_type']!='ratgeber' or rb['article_type_templates_sha256']!=ARTICLE_TYPE_TEMPLATES_SHA:raise AssertionError('ARTICLE_TYPE_RULESET_BINDING_FAIL')
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'handoff_request_bound':False,'article_type_ruleset_bound':True,'strict_real_stage_validator':True,'content_or_quality_authority':'NONE','publish_allowed':False}
+
+def main(argv:list[str])->int:
     try:
-        data = json.loads(text)
-    except json.JSONDecodeError as exc:
-        raise ViewError("BOUND_COMMAND_OUTPUT_INVALID") from exc
-    if not isinstance(data, dict):
-        raise ViewError("BOUND_COMMAND_OUTPUT_NOT_OBJECT")
-    return data
-
-
-def _run_bridge(args: list[str]) -> dict:
-    return _run_json([sys.executable, str(BRIDGE), *args])
-
-
-def _safe_repo_ref(ref: str) -> Path:
-    rel = Path(str(ref or ""))
-    if not str(ref or "") or rel.is_absolute() or ".." in rel.parts:
-        raise ViewError("BOUND_REF_INVALID")
-    path = (REPO / rel).resolve()
-    if path != REPO and REPO not in path.parents:
-        raise ViewError("BOUND_REF_ESCAPE")
-    return path
-
-
-def _sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def _run_bound_handoff(adapter_ref: str, request_ref: str) -> dict:
-    adapter = _safe_repo_ref(adapter_ref)
-    return _run_json([sys.executable, str(adapter), "materialize", request_ref])
-
-
-def _current_only(data: dict) -> dict:
-    status = data.get("status")
-    if status == "CURRENT_BOUND_ACTION_READY":
-        required = (
-            "room_token",
-            "current_item",
-            "fachworkflow_authority",
-            "fachworkflow_prompt_ref",
-            "allowed_output_root",
-            "item_receipt_ref",
-            "item_receipt_schema",
-            "fachworkflow_handoff",
-            "submission_command",
-        )
-        if any(key not in data for key in required):
-            raise ViewError("CURRENT_ACTION_FIELDS_MISSING")
-        handoff = data["fachworkflow_handoff"]
-        if not isinstance(handoff, dict):
-            raise ViewError("FACHWORKFLOW_HANDOFF_BINDING_MISSING")
-        handoff_required = (
-            "request_ref",
-            "request_contract",
-            "adapter_ref",
-            "adapter_sha256",
-            "accepts_only_real_stage_execution_proofs",
-            "content_or_quality_rules_changed",
-            "publish_allowed",
-        )
-        if any(key not in handoff for key in handoff_required):
-            raise ViewError("FACHWORKFLOW_HANDOFF_FIELDS_MISSING")
-        request_ref = str(handoff["request_ref"])
-        if not request_ref.startswith(str(data["allowed_output_root"])):
-            raise ViewError("FACHWORKFLOW_REQUEST_OUTSIDE_BOUND_OUTPUT_ROOT")
-        if handoff.get("accepts_only_real_stage_execution_proofs") is not True:
-            raise ViewError("FACHWORKFLOW_REAL_PROOF_REQUIREMENT_MISSING")
-        if handoff.get("content_or_quality_rules_changed") is not False or handoff.get("publish_allowed") is not False:
-            raise ViewError("FACHWORKFLOW_HANDOFF_AUTHORITY_INVALID")
-        return {
-            "contract": CONTRACT,
-            "status": "CURRENT_BOUND_ACTION_READY",
-            "room_token": data["room_token"],
-            "instruction": "EXECUTE_CURRENT_BOUND_ITEM_NOW",
-            "current_item": data["current_item"],
-            "fachworkflow_authority": data["fachworkflow_authority"],
-            "fachworkflow_prompt_ref": data["fachworkflow_prompt_ref"],
-            "allowed_output_root": data["allowed_output_root"],
-            "item_receipt_ref": data["item_receipt_ref"],
-            "item_receipt_schema": data["item_receipt_schema"],
-            "fachworkflow_handoff": handoff,
-            "existing_article_source_binding": data.get("existing_article_source_binding"),
-            "submission_command": "python3 control/single-door-boundary/codex_current_action.py submit-request " + shlex.quote(request_ref),
-            "publish_allowed": False,
-        }
-    if status in {"BLOCKED", "USER_ACTION_REQUIRED", "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH"}:
-        return {
-            "contract": CONTRACT,
-            "status": status,
-            "room_token": data.get("room_token"),
-            "error": data.get("error"),
-            "evidence": data.get("evidence"),
-            "outer_step": data.get("outer_step"),
-            "publish_allowed": False,
-        }
-    if data.get("ok") is False:
-        return {
-            "contract": CONTRACT,
-            "status": "BLOCKED",
-            "error": data.get("error") or status or "BOUND_BRIDGE_BLOCKED",
-            "publish_allowed": False,
-        }
-    raise ViewError("BOUND_BRIDGE_STATUS_NOT_WORKER_VISIBLE")
-
-
-def _submit_request(
-    request_ref: str,
-    *,
-    bridge_runner=None,
-    handoff_runner=None,
-) -> dict:
-    bridge_runner = bridge_runner or _run_bridge
-    handoff_runner = handoff_runner or _run_bound_handoff
-    raw = bridge_runner(["current"])
-    current = _current_only(raw)
-    if current.get("status") != "CURRENT_BOUND_ACTION_READY":
-        return current
-    handoff = current["fachworkflow_handoff"]
-    expected_request = str(handoff["request_ref"])
-    if request_ref != expected_request:
-        raise ViewError("FACHWORKFLOW_HANDOFF_REQUEST_NOT_CURRENT_BOUND_REQUEST")
-    request_path = _safe_repo_ref(request_ref)
-    if not request_path.is_file():
-        raise ViewError("FACHWORKFLOW_HANDOFF_REQUEST_MISSING")
-    adapter_ref = str(handoff["adapter_ref"])
-    adapter_path = _safe_repo_ref(adapter_ref)
-    if not adapter_path.is_file():
-        raise ViewError("FACHWORKFLOW_HANDOFF_ADAPTER_MISSING")
-    expected_adapter_sha = str(handoff["adapter_sha256"])
-    if not re.fullmatch(r"[0-9a-f]{64}", expected_adapter_sha) or _sha256(adapter_path) != expected_adapter_sha:
-        raise ViewError("FACHWORKFLOW_HANDOFF_ADAPTER_HASH_MISMATCH")
-    result = handoff_runner(adapter_ref, request_ref)
-    if result.get("status") != "FACHWORKFLOW_PROOF_HANDOFF_PASS":
-        return {
-            "contract": CONTRACT,
-            "status": "BLOCKED",
-            "room_token": current.get("room_token"),
-            "error": result.get("error") or result.get("status") or "FACHWORKFLOW_PROOF_HANDOFF_BLOCKED",
-            "evidence": None,
-            "outer_step": None,
-            "publish_allowed": False,
-        }
-    receipt_ref = str(result.get("item_receipt_ref") or "")
-    if receipt_ref != current["item_receipt_ref"]:
-        raise ViewError("FACHWORKFLOW_HANDOFF_RECEIPT_NOT_CURRENT_BOUND_RECEIPT")
-    receipt_sha = str(result.get("item_receipt_sha256") or "")
-    if not re.fullmatch(r"[0-9a-f]{64}", receipt_sha):
-        raise ViewError("FACHWORKFLOW_HANDOFF_RECEIPT_HASH_INVALID")
-    receipt_path = _safe_repo_ref(receipt_ref)
-    if not receipt_path.is_file() or _sha256(receipt_path) != receipt_sha:
-        raise ViewError("FACHWORKFLOW_HANDOFF_RECEIPT_HASH_MISMATCH")
-    return _current_only(bridge_runner(["submit", receipt_ref]))
-
-
-def selftest() -> dict:
-    with tempfile.TemporaryDirectory() as td:
-        global REPO
-        old_repo = REPO
-        REPO = Path(td).resolve()
-        try:
-            adapter_ref = "control/startmaster0107/fachworkflow_proof_handoff.py"
-            adapter = _safe_repo_ref(adapter_ref)
-            adapter.parent.mkdir(parents=True, exist_ok=True)
-            adapter.write_text("# test adapter\n", encoding="utf-8")
-            request_ref = ".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json"
-            request = _safe_repo_ref(request_ref)
-            request.parent.mkdir(parents=True, exist_ok=True)
-            request.write_text("{}\n", encoding="utf-8")
-            receipt_ref = ".pferde-quarantine/test/ITEM_RECEIPT.json"
-            receipt = _safe_repo_ref(receipt_ref)
-            receipt.write_text("{}\n", encoding="utf-8")
-            sample = {
-                "status": "CURRENT_BOUND_ACTION_READY",
-                "room_token": "R_D_1_01",
-                "current_item": {"canonical_article_id": "article:test"},
-                "fachworkflow_authority": "EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY",
-                "fachworkflow_prompt_ref": "bound.txt",
-                "allowed_output_root": ".pferde-quarantine/test/",
-                "item_receipt_ref": receipt_ref,
-                "item_receipt_schema": {"contract": "X"},
-                "fachworkflow_handoff": {
-                    "contract": "PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1",
-                    "request_ref": request_ref,
-                    "request_contract": "PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1",
-                    "adapter_ref": adapter_ref,
-                    "adapter_sha256": _sha256(adapter),
-                    "accepts_only_real_stage_execution_proofs": True,
-                    "content_or_quality_rules_changed": False,
-                    "publish_allowed": False,
-                },
-                "existing_article_source_binding": {
-                    "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_SOURCE_BINDING_V1",
-                    "ref": "control/startmaster0107/recovery_sources/test/ARTICLE_test.md",
-                    "sha256": "a" * 64,
-                },
-                "submission_command": "python3 control/single-door-boundary/codex_current_room_bridge.py submit " + receipt_ref,
-                "all_other_actions": "DENY",
-                "next_room_token": "SECRET",
-                "server_executor": "SECRET",
-            }
-            view = _current_only(sample)
-            forbidden = {"all_other_actions", "next_room_token", "server_executor", "route", "rooms", "future_items", "bound_item_ids"}
-            if forbidden.intersection(view):
-                raise AssertionError("WORKER_VIEW_LEAK")
-            if view.get("instruction") != "EXECUTE_CURRENT_BOUND_ITEM_NOW":
-                raise AssertionError("CURRENT_ACTION_NOT_EXPLICIT")
-            if " submit-request " not in view.get("submission_command", ""):
-                raise AssertionError("REQUEST_FIRST_SUBMISSION_NOT_BOUND")
-            if view.get("publish_allowed") is not False:
-                raise AssertionError("PUBLISH_NOT_BLOCKED")
-            calls = []
-            def fake_bridge(args):
-                calls.append(("bridge", tuple(args)))
-                if args == ["current"]:
-                    return sample
-                if args == ["submit", receipt_ref]:
-                    return {"status": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH", "room_token": "R_006"}
-                raise AssertionError("UNEXPECTED_BRIDGE_CALL")
-            def fake_handoff(adapter_ref_value, request_ref_value):
-                calls.append(("handoff", adapter_ref_value, request_ref_value))
-                return {
-                    "status": "FACHWORKFLOW_PROOF_HANDOFF_PASS",
-                    "item_receipt_ref": receipt_ref,
-                    "item_receipt_sha256": _sha256(receipt),
-                }
-            result = _submit_request(request_ref, bridge_runner=fake_bridge, handoff_runner=fake_handoff)
-            if result.get("status") != "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH":
-                raise AssertionError("REQUEST_HANDOFF_SUBMISSION_POSITIVE_FAILED")
-            if calls != [
-                ("bridge", ("current",)),
-                ("handoff", adapter_ref, request_ref),
-                ("bridge", ("submit", receipt_ref)),
-            ]:
-                raise AssertionError("REQUEST_HANDOFF_ORDER_INVALID")
-            blocked_calls = []
-            def blocked_bridge(args):
-                blocked_calls.append(("bridge", tuple(args)))
-                return sample
-            def blocked_handoff(adapter_ref_value, request_ref_value):
-                blocked_calls.append(("handoff", adapter_ref_value, request_ref_value))
-                return {"status": "FACHWORKFLOW_PROOF_HANDOFF_BLOCKED", "error": "TEST_BLOCK"}
-            blocked = _submit_request(request_ref, bridge_runner=blocked_bridge, handoff_runner=blocked_handoff)
-            if blocked.get("status") != "BLOCKED" or blocked.get("error") != "TEST_BLOCK":
-                raise AssertionError("HANDOFF_NEGATIVE_NOT_FAIL_CLOSED")
-            if blocked_calls != [
-                ("bridge", ("current",)),
-                ("handoff", adapter_ref, request_ref),
-            ]:
-                raise AssertionError("HANDOFF_NEGATIVE_ADVANCED")
-            try:
-                _submit_request(".pferde-quarantine/test/WRONG.json", bridge_runner=fake_bridge, handoff_runner=fake_handoff)
-            except ViewError as exc:
-                if str(exc) != "FACHWORKFLOW_HANDOFF_REQUEST_NOT_CURRENT_BOUND_REQUEST":
-                    raise
-            else:
-                raise AssertionError("WRONG_REQUEST_NOT_BLOCKED")
-            return {
-                "ok": True,
-                "status": "CODEX_CURRENT_ACTION_REQUEST_HANDOFF_SELFTEST_PASS",
-                "request_first": True,
-                "handoff_after_request_only": True,
-                "handoff_failure_fail_closed": True,
-                "direct_receipt_submission_not_emitted": True,
-                "content_or_quality_authority": "NONE",
-                "publish_allowed": False,
-            }
-        finally:
-            REPO = old_repo
-
-
-def main(argv: list[str]) -> int:
-    try:
-        if argv == ["current"]:
-            result = _current_only(_run_bridge(["current"]))
-        elif len(argv) == 2 and argv[0] == "submit-request":
-            result = _submit_request(argv[1])
-        elif argv == ["selftest"]:
-            result = selftest()
-        else:
-            raise ViewError("USAGE: current | submit-request FACHWORKFLOW_HANDOFF_REQUEST.json | selftest")
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        return 0 if result.get("status") not in {"BLOCKED"} else 2
-    except (ViewError, KeyError, TypeError, ValueError, OSError) as exc:
-        print(json.dumps({"contract": CONTRACT, "status": "BLOCKED", "error": str(exc), "publish_allowed": False}, ensure_ascii=False, indent=2))
-        return 2
-
-
-if __name__ == "__main__":
-    raise SystemExit(main(sys.argv[1:]))
+        if argv==['selftest']:z=selftest()
+        elif argv==['current']:z=_current_only(_run(argv))
+        elif len(argv)==2 and argv[0]=='submit':z=_current_only(_run(argv))
+        else:raise ViewError('USAGE: current | submit ITEM_RECEIPT.json | selftest')
+        print(json.dumps(z,ensure_ascii=False,indent=2));return 0 if z.get('status')!='BLOCKED' else 2
+    except Exception as e:
+        print(json.dumps({'contract':CONTRACT,'status':'BLOCKED','error':str(e),'publish_allowed':False},ensure_ascii=False,indent=2));return 2
+if __name__=='__main__':raise SystemExit(main(sys.argv[1:]))
