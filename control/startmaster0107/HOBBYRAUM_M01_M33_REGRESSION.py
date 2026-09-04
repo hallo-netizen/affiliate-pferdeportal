@@ -128,27 +128,14 @@ def m25():
 
 # Open historical regressions: hard positive + hard negative.
 def m26():
+    # M26 must not manufacture the missing Fachworkflow context inside the test.
+    # The last real production run proved that the public path still lacks a
+    # demonstrated Current Action -> real Fachworkflow -> real context -> handoff chain.
     a=mod(CURRENT_ACTION,"m26_action")
     smoke=a.selftest()
     must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
     must(smoke.get("direct_single_door") is True and smoke.get("prepass_handoff_bound") is False,"M26_DIRECT_PATH_NOT_PASS")
-    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"ratgeber"}
-    action=a.augment_current_action(REPO,base,item)
-    batch,count=a._runtime_batch_identity()
-    current={"room_token":"R_D_1_01","current_item":item,"allowed_output_root":action["allowed_output_root"],"item_receipt_ref":".pferde-quarantine/test/ITEM_RECEIPT.json","item_receipt_schema":action["item_receipt_schema"]}
-    provisional={"contract":"PFERDE_ATELIER_BOUND_ITEM_EXECUTION_RECEIPT_V1","room_token":"R_D_1_01","canonical_article_id":"article:test","plan_slot":"a"*64}
-    meta={k:None for k in a.RELEASE_KEYS};meta.update({"contract":a.RELEASE_CONTRACT,"status":"PASS","exact_five_batch_sha256":batch,"exact_five_item_count":count,"wordpress_write_performed":False})
-    fach={"required_stage_proofs":[{"stage":x,"ref":".pferde-quarantine/test/"+x+".json","sha256":"1"*64} for x in a.STAGES],
-          "fact_pack":{"contract":"canonical_fact_pack_v1"},"production_plan_item":{"canonical_article_id":"article:test","plan_slot":"a"*64},
-          "production_plan_header":{"contract":"production_plan_v4"},"workflow_release_item":{"canonical_article_id":"article:test","plan_slot":"a"*64},
-          "workflow_release_metadata":meta}
-    req=a._handoff_request_from_current(current,provisional,fach)
-    must(req["fact_pack"]==fach["fact_pack"],"M26_POSITIVE_CONTEXT_NOT_MATERIALIZED")
-    bad=copy.deepcopy(fach);bad["fact_pack"]={}
-    expect_exc(lambda:a._handoff_request_from_current(current,provisional,bad),"BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING")
-    bad=copy.deepcopy(fach);bad["production_plan_item"]["canonical_article_id"]="article:other"
-    expect_exc(lambda:a._handoff_request_from_current(current,provisional,bad),"BOUND_CURRENT_PRODUCTION_PLAN_ITEM_IDENTITY_MISMATCH")
+    raise Fail("M26_REAL_CURRENT_ACTION_TO_FACHWORKFLOW_CONTEXT_NOT_PROVEN")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
