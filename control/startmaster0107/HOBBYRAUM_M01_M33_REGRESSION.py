@@ -198,8 +198,14 @@ def main(argv):
             results.append({"id":mid,"status":"FAIL","reason":str(e)});print(mid+" FAIL "+str(e),flush=True)
             print(json.dumps({"ok":False,"status":"REGRESSION_FAIL","first_fail":mid,"results":results,"gesamt_pass":False},ensure_ascii=False,indent=2))
             return 2
+    # Required final re-check against the last real production regression.
+    last=json.loads(cmd("control/single-door-boundary/codex_current_action.py","selftest"))
+    must(last.get("m26_positive_context_materialization") is True,"LAST_REGRESSION_CONTEXT_STILL_MISSING")
+    must(last.get("m26_missing_context_blocked") is True,"LAST_REGRESSION_NEGATIVE_NOT_BLOCKED")
+    must(last.get("m26_wrong_identity_blocked") is True,"LAST_REGRESSION_WRONG_IDENTITY_NOT_BLOCKED")
+    print("LAST_REGRESSION PASS BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING",flush=True)
     status="OPEN_REGRESSIONS_PASS" if open_only else "GESAMT PASS"
-    print(json.dumps({"ok":True,"status":status,"results":results,"gesamt_pass":not open_only},ensure_ascii=False,indent=2))
+    print(json.dumps({"ok":True,"status":status,"results":results,"last_regression":"PASS","gesamt_pass":not open_only},ensure_ascii=False,indent=2))
     return 0
 
 if __name__=="__main__": raise SystemExit(main(sys.argv[1:]))
