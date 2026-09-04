@@ -7,7 +7,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 RUNS = ROOT / ".runs"
 CONTRACT = "AFFILIATE_HOBBYRAUM_V1"
+MATRIX = ROOT / "FEHLERMATRIX.md"
+GUARD_MATRIX_DEST = Path("__affiliate_guard__/FEHLERMATRIX.md")
 FORBIDDEN_TOKENS = ("STARTMASTER", "TEXTMASCHINE", "HOBBYRAUM/")
+KNOWN_DETOUR_PATTERNS = (
+    "git switch",
+    "git fetch",
+    "fetch_head",
+    "cloud_entry",
+    "cloud-entry",
+    "ds24 automatic discovery",
+    "automatic ds24 discovery",
+)
 
 class Blocked(RuntimeError):
     pass
@@ -30,6 +41,21 @@ def reject_foreign(value: str) -> None:
     for token in FORBIDDEN_TOKENS:
         if token in upper:
             raise Blocked("FOREIGN_WORKSTREAM_FORBIDDEN:" + value)
+
+def reject_known_detours(value: str) -> None:
+    lower = value.lower()
+    for pattern in KNOWN_DETOUR_PATTERNS:
+        if pattern in lower:
+            raise Blocked("KNOWN_ERROR_MATRIX_VIOLATION:" + pattern)
+
+def validate_error_matrix() -> str:
+    if not MATRIX.is_file():
+        raise Blocked("ERROR_MATRIX_MISSING")
+    text = MATRIX.read_text(encoding="utf-8")
+    for required in ("AF-001", "AF-025", "Dauerregel"):
+        if required not in text:
+            raise Blocked("ERROR_MATRIX_INVALID:" + required)
+    return sha256(MATRIX)
 
 def load_task(path: Path) -> dict:
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -54,10 +80,13 @@ def load_task(path: Path) -> dict:
         raise Blocked("COMMAND_REQUIRED")
     reject_foreign(data["goal"])
     reject_foreign(data["command"])
+    reject_known_detours(data["goal"])
+    reject_known_detours(data["command"])
     for test in data["tests"]:
         if not isinstance(test, str) or not test.strip():
             raise Blocked("TEST_INVALID")
         reject_foreign(test)
+        reject_known_detours(test)
     return data
 
 def assert_safe_source(src: Path) -> None:
@@ -74,6 +103,11 @@ def prepare(task: dict, task_file: Path) -> Path:
     workspace.mkdir(parents=True)
     baseline.mkdir(parents=True)
     out.mkdir(parents=True)
+
+    matrix_sha = validate_error_matrix()
+    matrix_dest = workspace / GUARD_MATRIX_DEST
+    matrix_dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(MATRIX, matrix_dest)
 
     base = task_file.parent.resolve()
     seen_dest = set()
@@ -98,9 +132,12 @@ def prepare(task: dict, task_file: Path) -> Path:
 
     for w in task["writable"]:
         reject_foreign(str(w))
-        safe_rel(str(w))
+        rel = safe_rel(str(w))
+        if rel == GUARD_MATRIX_DEST or GUARD_MATRIX_DEST.parent in rel.parents:
+            raise Blocked("ERROR_MATRIX_MUST_BE_READ_ONLY")
 
     shutil.copytree(workspace, baseline, dirs_exist_ok=True)
+    (run/"ERROR_MATRIX_SHA256.txt").write_text(matrix_sha+"\n", encoding="utf-8")
     (run/"TASK.json").write_text(json.dumps(task, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     return run
 
@@ -164,6 +201,7 @@ def export(task: dict, run: Path) -> dict:
         "status":"PASS",
         "contract":CONTRACT,
         "goal":task["goal"],
+        "error_matrix_sha256":sha256(MATRIX),
         "changed":changed,
         "patch_ref":str(run/"PATCH.diff"),
         "out_ref":str(run/"out")
