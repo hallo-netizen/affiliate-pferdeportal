@@ -131,9 +131,12 @@ def m26():
     a=mod(CURRENT_ACTION,"m26_action")
     smoke=a.selftest()
     must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
-    must(smoke.get("direct_single_door") is True and smoke.get("prepass_handoff_bound") is False,"M26_DIRECT_PATH_NOT_PASS")
-    # KISS hard stop: M26 must never seed fact_pack/plan/release context itself.
-    # Until the real bound Fachworkflow produces that context, M26 is FAIL.
+    must(smoke.get("direct_single_door") is True,"M26_DIRECT_PATH_NOT_PASS")
+    must(smoke.get("fachworkflow_handoff_bound") is True,"M26_HANDOFF_NOT_BOUND")
+    must(smoke.get("handoff_after_current_fachworkflow") is True,"M26_HANDOFF_ORDER_INVALID")
+    must(smoke.get("missing_handoff_blocked") is True,"M26_NEGATIVE_MISSING_HANDOFF_NOT_BLOCKED")
+    # No fabricated fact_pack / plan / release fixture here.
+    # PASS requires a real bound Fachworkflow run to supply the five context objects.
     raise Fail("M26_REAL_BOUND_FACHWORKFLOW_EXECUTION_NOT_PROVEN")
 
 def m27():
