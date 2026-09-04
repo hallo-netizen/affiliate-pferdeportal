@@ -29,6 +29,7 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 | AF-023 | Source/Manifest-Bindung verändert ohne alle Bindungen nachzuziehen | Manifest, Governance und Runner zeigen auf verschiedene Hashes | Bindungen atomar gemeinsam aktualisieren und gegeneinander prüfen |
 | AF-024 | Final-/Live-Kandidat-Regeln vermischt | temporäre Live-ZIP und finale Release-ZIP werden gleich behandelt | Live-Kandidat darf gebaut werden; Finalrelease erst nach allen Final-Gates |
 | AF-025 | Ein Fehler führte zu Tagen mit Meta-Arbeit statt Zielergebnis | Guard-/Protokoll-/Branch-Arbeit verdrängt die eigentliche Aufgabe | Hobbyraum: 1 Ziel, 1 Inputmenge, 1 Output, kein Meta-Ausbau während des Runs |
+| AF-026 | ZIP-Dateiname/Releasekandidat höher als interne WordPress-Pluginversion | WordPress meldet beim Installieren eine niedrigere Version; Header/const/readme stimmen nicht mit Kandidat überein | Vor jeder Live-ZIP zwingend Plugin-Header, const VERSION und Stable tag gegen Kandidatenversion prüfen; neue Version muss über der belegten installierten Vorversion liegen |
 
 ## Dauerregel
 - Jede neu festgestellte Fehlentscheidung erhält sofort die nächste AF-ID.
