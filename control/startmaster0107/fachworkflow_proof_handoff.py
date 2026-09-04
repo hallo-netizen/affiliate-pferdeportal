@@ -279,6 +279,19 @@ def materialize(repo: Path, request_ref: str) -> dict:
     binding = (repo / str(request["contract_binding_ref"])).resolve()
     if not binding.is_file() or _sha(binding) != request["contract_binding_sha256"]:
         raise Blocked("HANDOFF_CONTRACT_BINDING_HASH_MISMATCH")
+    context_fields = ("fact_pack", "production_plan_item", "production_plan_header",
+                      "workflow_release_item", "workflow_release_metadata")
+    if not all(isinstance(request.get(key), dict) and bool(request.get(key)) for key in context_fields):
+        raise Blocked("BOUND_FACHWORKFLOW_PRODUCTION_CONTEXT_MISSING")
+    item = request["production_plan_item"]
+    if item.get("canonical_article_id") != request["canonical_article_id"] or item.get("plan_slot") != slot:
+        raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_IDENTITY_MISMATCH")
+    release_item = request["workflow_release_item"]
+    if release_item.get("canonical_article_id") != request["canonical_article_id"] or release_item.get("plan_slot") != slot:
+        raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_IDENTITY_MISMATCH")
+    header = request["production_plan_header"]
+    if header.get("contract") != "production_plan_v4" or "items" in header:
+        raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_INVALID")
     rows = request["stage_proofs"]
     if not isinstance(rows, list) or len(rows) != len(STAGES):
         raise Blocked("FACH_STAGE_COUNT_INVALID")
