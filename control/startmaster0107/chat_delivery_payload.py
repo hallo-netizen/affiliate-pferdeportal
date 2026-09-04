@@ -6,7 +6,6 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 ARTICLE_RE = re.compile(r"^ARTICLE_[0-9a-f]{64}\.md$")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
-FINAL_NAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
 
 class Blocked(RuntimeError):
     pass
@@ -36,15 +35,10 @@ def safe(ref: str) -> Path:
         raise Blocked("REF_ESCAPE")
     return q
 
-def build(release_receipt_ref: str, final_package_ref: str) -> dict:
+def build(release_receipt_ref: str) -> dict:
     receipt_path = safe(release_receipt_ref)
-    package_path = safe(final_package_ref)
     if not receipt_path.is_file():
         raise Blocked("RELEASE_RECEIPT_MISSING")
-    if not package_path.is_file():
-        raise Blocked("FINAL_PACKAGE_MISSING")
-    if package_path.name != FINAL_NAME:
-        raise Blocked("FINAL_PACKAGE_NAME_INVALID")
 
     receipt = load_json(receipt_path)
     if receipt.get("contract") != "PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V2":
@@ -110,8 +104,6 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "batch_sha256": batch,
         "release_receipt_ref": release_receipt_ref,
         "release_receipt_sha256": sha256_file(receipt_path),
-        "final_package_ref": final_package_ref,
-        "final_package_sha256": pkg_sha,
         "source_manifest": source_manifest,
         "articles": articles,
         "publish_allowed": False,
@@ -146,10 +138,10 @@ def main() -> int:
     try:
         if len(sys.argv) == 2 and sys.argv[1] == "selftest":
             out = selftest()
-        elif len(sys.argv) == 4 and sys.argv[1] == "build":
-            out = build(sys.argv[2], sys.argv[3])
+        elif len(sys.argv) == 3 and sys.argv[1] == "build":
+            out = build(sys.argv[2])
         else:
-            raise Blocked("USE: chat_delivery_payload.py selftest | build RELEASE_RECEIPT_REF FINAL_PACKAGE_REF")
+            raise Blocked("USE: chat_delivery_payload.py selftest | build RELEASE_RECEIPT_REF")
         print(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
         return 0
     except Exception as exc:
