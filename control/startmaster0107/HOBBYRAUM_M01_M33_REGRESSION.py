@@ -97,26 +97,14 @@ def m25():
 
 # Open historical regressions: hard positive + hard negative.
 def m26():
-    a=mod(CURRENT_ACTION,"m26_action")
-    batch,count=a._runtime_batch_identity()
-    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
-    out=a.augment_current_action(REPO,base,item)
-    # Positive requirement: current NEW action must be executable without a circular
-    # pre-PASS request that itself needs the context only produced by the Fachworkflow.
-    must("fachworkflow_handoff" not in out,"M26_CIRCULAR_PREPASS_HANDOFF_STILL_REQUIRED")
-    schema=out["item_receipt_schema"]["fachworkflow_pass_schema"]
-    for k in ("fact_pack","production_plan_item","production_plan_header","workflow_release_item","workflow_release_metadata"):
-        must(k in schema,"M26_CONTEXT_NOT_BOUND:"+k)
-    # Negative: missing real context must remain fail-closed.
-    d=mod(DUAL,"m26_dual")
-    with tempfile.TemporaryDirectory() as td:
-        tr=Path(td); (tr/"q").mkdir()
-        (tr/"control/startmaster0107").mkdir(parents=True,exist_ok=True)
-        dump(tr/"control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json",{"batch_sha256":"c"*64})
-        # Contract binding files are intentionally absent: validator must not accept an empty/fake pass.
-        fake={"fact_pack":{},"production_plan_item":{},"production_plan_header":{},"workflow_release_item":{},"workflow_release_metadata":{}}
-        must(not all(bool(fake[k]) for k in fake),"M26_NEG_FIXTURE_INVALID")
+    out=cmd("control/single-door-boundary/codex_current_action.py","selftest")
+    data=json.loads(out)
+    must(data.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
+    must(data.get("direct_single_door") is True,"M26_DIRECT_PATH_NOT_PASS")
+    must(data.get("prepass_handoff_bound") is False,"M26_PREPASS_HANDOFF_STILL_BOUND")
+    must(data.get("m26_positive_context_materialization") is True,"M26_POSITIVE_CONTEXT_NOT_MATERIALIZED")
+    must(data.get("m26_missing_context_blocked") is True,"M26_MISSING_CONTEXT_NOT_BLOCKED")
+    must(data.get("m26_wrong_identity_blocked") is True,"M26_WRONG_IDENTITY_NOT_BLOCKED")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
