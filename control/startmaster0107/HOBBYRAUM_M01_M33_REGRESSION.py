@@ -97,33 +97,28 @@ def m20():
     s=(REPO/"control/startmaster0107/chat_delivery_payload.py").read_text(encoding="utf-8")
     must("EXACTLY_SEVEN_ARTICLES_REQUIRED" in s and "import_envelope" in s and "source_manifest" in s,"M20_DELIVERY")
 def m21():
-    # Hard positive/negative against the real release guard, not a text search.
+    # Hard positive/negative against the real visible-release guard.
     g=mod(REPO/"control/output-quarantine/output_release_gate.py","m21_release_guard")
-    old_repo,old_runtime=g.REPO,g.RUNTIME_STATE
-    old_main,old_authority,old_validate=g.require_current_main,g.authority,g.validate_generic_receipt
+    old_repo=g.REPO
     try:
         with tempfile.TemporaryDirectory() as td:
-            root=Path(td); q=root/"q"; q.mkdir(parents=True)
-            out=q/("ARTICLE_"+("1"*64)+".md"); out.write_text("m21\n",encoding="utf-8")
-            runtime=root/"RUNTIME.json"
-            ticket={"ticket_id":"m21","step_id":"RUN_NEW_ARTICLE_BATCH_NO_STOP","sequence":107007,"state_sha256":"a"*64,"bundle_sha256":"b"*64}
-            receipt={"payload":{"execution_origin":"BOUND_WORKER","workflow_pass":True,"batch_sha256":"c"*64,"outputs":[{"ref":"q/"+out.name,"sha256":sha(out)}]}}
-            policy={"bound_worker_origin":"BOUND_WORKER","worker_quarantine_root":"q"}
-            state={"startmaster":"STARTMASTER0107"}
-            g.REPO=root; g.RUNTIME_STATE=runtime
-            g.require_current_main=lambda:"f"*40
-            g.authority=lambda:(None,state,None,policy,ticket)
-            g.validate_generic_receipt=lambda *_:(ticket,receipt)
-            ticket_path=root/"ticket.json"; receipt_path=root/"receipt.json"
-            dump(ticket_path,ticket); dump(receipt_path,receipt)
-            dump(runtime,{"status":"EXECUTION_READY","batch_sha256":"c"*64,"publish_allowed":False})
-            pos=g.prepare_107007(ticket_path,receipt_path)
-            must(pos.get("status")=="OUTPUT_RELEASE_PREPARED_NOT_VISIBLE" and pos.get("publish_allowed") is False,"M21_POSITIVE_NO_PUBLISH_NOT_PASS")
-            dump(runtime,{"status":"EXECUTION_READY","batch_sha256":"c"*64,"publish_allowed":True})
-            expect_exc(lambda:g.prepare_107007(ticket_path,receipt_path),"AUTO_PUBLISH_FORBIDDEN")
+            root=Path(td); staged=root/"staged"; staged.mkdir(parents=True)
+            article=staged/("ARTICLE_"+("1"*64)+".md"); article.write_text("m21\n",encoding="utf-8")
+            prepared={
+                "contract":"PFERDE_ATELIER_PREPARED_OUTPUT_RELEASE_V1",
+                "status":"PREPARED_NOT_VISIBLE",
+                "source_step_id":"RUN_NEW_ARTICLE_BATCH_NO_STOP",
+                "source_sequence":107007,
+                "publish_allowed":False,
+                "staged_outputs":[{"source_ref":"q/"+article.name,"staged_ref":"staged/"+article.name,"sha256":sha(article)}],
+            }
+            pp=root/"PREPARED_RELEASE.json"; dump(pp,prepared); g.REPO=root
+            _,pos=g.validate_prepared("PREPARED_RELEASE.json",sha(pp))
+            must(pos.get("publish_allowed") is False,"M21_POSITIVE_NO_PUBLISH_NOT_PASS")
+            bad=copy.deepcopy(prepared); bad["publish_allowed"]=True; dump(pp,bad)
+            expect_exc(lambda:g.validate_prepared("PREPARED_RELEASE.json",sha(pp)),"AUTO_PUBLISH_FORBIDDEN")
     finally:
-        g.REPO,g.RUNTIME_STATE=old_repo,old_runtime
-        g.require_current_main,g.authority,g.validate_generic_receipt=old_main,old_authority,old_validate
+        g.REPO=old_repo
 def m22(): must("H8_PREPRODUCTION_BOOTSTRAP_POSITIVE_NEGATIVE_PASS" in cmd("control/single-door-boundary/test_h8_preproduction_bootstrap.py"),"M22_H8")
 def m23(): must("POSITIVE_FULL_PACKAGE_CURRENT_GENERATION" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M23_SIGNED_PACKAGE_ONLY")
 def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
