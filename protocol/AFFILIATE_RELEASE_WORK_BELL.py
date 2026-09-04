@@ -13,9 +13,9 @@ from pathlib import Path, PurePosixPath
 WORKSTREAM = "AFFILIATE_ZENTRALE"
 BRANCH = "affiliate-release-current"
 CODEX_EPHEMERAL_BRANCH = "work"
-EXPECTED_MANIFEST_SHA256 = "67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9"
+EXPECTED_MANIFEST_SHA256 = "5a7409487432b460921312380b975e40328615298bdbc5f5485e13ed507d933c"
 EXPECTED_FILE_COUNT = 26
-CANDIDATE_NAME = "affiliate-zentrale_v6.64.0_LIVE_CANDIDATE_26FILE.zip"
+CANDIDATE_NAME = "affiliate-zentrale_v6.64.2_LIVE_CANDIDATE_26FILE.zip"
 RELEASE_JSON = Path("control/release-governance/CURRENT_RELEASE.json")
 MANIFEST = Path("release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt")
 SOURCE_ROOT = Path("release/affiliate-zentrale/current")

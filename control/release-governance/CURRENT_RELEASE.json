@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9",
+    "manifest_sha256": "5a7409487432b460921312380b975e40328615298bdbc5f5485e13ed507d933c",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,13 +35,13 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.64.0",
+    "version": "6.64.2",
     "status": "WORKING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9",
+    "current_source_manifest_sha256": "5a7409487432b460921312380b975e40328615298bdbc5f5485e13ed507d933c",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -156,7 +156,7 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9"
+      "source_manifest_sha256": "5a7409487432b460921312380b975e40328615298bdbc5f5485e13ed507d933c"
     },
     "old_state_reproduction_negative": {
       "status": "PASS",
@@ -210,19 +210,19 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9"
+      "source_manifest_sha256": "5a7409487432b460921312380b975e40328615298bdbc5f5485e13ed507d933c"
     },
     "source_zip_byte_identity": {
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9"
+      "source_manifest_sha256": "5a7409487432b460921312380b975e40328615298bdbc5f5485e13ed507d933c"
     },
     "final_sha256": {
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "67573f105941ed2a48476f11d138a581f9b1549de9e9dab07e03c4bcbbbf10f9"
+      "source_manifest_sha256": "5a7409487432b460921312380b975e40328615298bdbc5f5485e13ed507d933c"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",

@@ -21,7 +21,7 @@ V6.61.11 CATEGORY-ROW ROOTFIX: Nur Kategorie-Produktkarten strecken sich in der 
 V6.61.10 STRUCTURAL EQUAL-ROW ROOTFIX: Kategorie-Produktkarten nutzen keine festen 416/360px-Aussenhoehen mehr. Das reale Produktraster setzt alle impliziten Zeilen mit grid-auto-rows:1fr gleich hoch; jeder Slot, Content-Wrapper und Kartenlink fuellt seine Grid-Zelle zu 100%. Bildflaechen bleiben 150x150 contain. Provider-, Feed-, Ranking- und Designplugin-Logik unveraendert.
 
 Affiliate-Zentrale 6.61.5 – IDEALO STANDARDFEED 2901 + HYBRID-AUSGABE
-Stable tag: 6.63.8
+Stable tag: 6.64.2
 
 V6.61.7 LAST-MILE EQUAL-HEIGHT INVARIANT: Die drei sichtbaren Kategorie-Produktkacheln werden nach dem finalen DOM/CSS-Layout providerneutral auf exakt dieselbe gemessene Außenhöhe gesetzt. Der Ausgleich greift ausschließlich bei Designkarten, die direkt category_product_1/2/3 enthalten; Feed-, Ranking-, Provider-, Bild- und Designplugin-Logik bleiben unverändert.
 
