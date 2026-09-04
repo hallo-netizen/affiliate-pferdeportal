@@ -62,9 +62,10 @@ def _validate_release_metadata_identity(rm:Mapping[str,Any],batch:str,batch_coun
 
 # These two functions are the only callbacks the existing room bridge uses after DUAL is bound to this file.
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
-    r=_rules(it);b=_contract_binding();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
+    r=_rules(it);b=_contract_binding();batch,batch_count=_runtime_batch_identity();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
+    metadata_binding={'required_fields':sorted(RELEASE_KEYS),'contract':RELEASE_CONTRACT,'status':'PASS','exact_five_batch_sha256':batch,'exact_five_item_count':batch_count,'wordpress_write_performed':False,'remaining_fields_authority':'EXISTING_UNCHANGED_FACHWORKFLOW_ONLY','technical_identity_binding_only':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
     s=dict(a.get('item_receipt_schema') or {})
-    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':'current bound runtime batch_sha256','canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','content_or_quality_rules_changed':False,'publish_allowed':False}})
+    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
     a['item_receipt_schema']=s
     # NEW intentionally has no existing_article_source_binding and no handoff/request path.
     a.pop('existing_article_source_binding',None);a.pop('fachworkflow_handoff',None)
@@ -111,7 +112,9 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
     if pi.get('canonical_article_id')!=it.get('canonical_article_id') or pi.get('plan_slot')!=it.get('plan_slot'):raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH')
     if ri.get('canonical_article_id')!=it.get('canonical_article_id') or ri.get('plan_slot')!=it.get('plan_slot'):raise ViewError('RELEASE_ITEM_IDENTITY_MISMATCH')
     if ph.get('contract')!='production_plan_v4' or 'items' in ph:raise ViewError('PLAN_HEADER_INVALID')
-    if set(rm)!=RELEASE_KEYS or rm.get('contract')!=RELEASE_CONTRACT or rm.get('status')!='PASS' or rm.get('wordpress_write_performed') is not False:raise ViewError('RELEASE_METADATA_INVALID')
+    if set(rm)!=RELEASE_KEYS:
+        missing=','.join(sorted(RELEASE_KEYS-set(rm)));extra=','.join(sorted(set(rm)-RELEASE_KEYS));raise ViewError('RELEASE_METADATA_FIELDS_INVALID:missing='+missing+':extra='+extra)
+    if rm.get('contract')!=RELEASE_CONTRACT or rm.get('status')!='PASS' or rm.get('wordpress_write_performed') is not False:raise ViewError('RELEASE_METADATA_IDENTITY_INVALID')
     _validate_release_metadata_identity(rm,batch,batch_count)
     return q
 
@@ -141,8 +144,9 @@ def selftest()->dict:
     if 'existing_article_source_binding' in v or 'fachworkflow_handoff' in v or 'submit-request' in v['submission_command']:raise AssertionError('OLD_OR_HANDOFF_LEAK')
     # Binding test itself is deterministic and article-type specific.
     a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'})
-    rb=a['item_receipt_schema']['textmachine_ruleset_binding']
+    rb=a['item_receipt_schema']['textmachine_ruleset_binding'];mb=a['item_receipt_schema']['fachworkflow_pass_schema']['workflow_release_metadata_binding']
     if rb['article_type']!='ratgeber' or rb['article_type_templates_sha256']!=ARTICLE_TYPE_TEMPLATES_SHA:raise AssertionError('ARTICLE_TYPE_RULESET_BINDING_FAIL')
+    if set(mb['required_fields'])!=RELEASE_KEYS or mb['exact_five_batch_sha256']!=_runtime_batch_identity()[0] or mb['exact_five_item_count']!=_runtime_batch_identity()[1]:raise AssertionError('RELEASE_METADATA_SCHEMA_BINDING_FAIL')
     live_batch,live_count=_runtime_batch_identity()
     if not re.fullmatch(r'[0-9a-f]{64}',live_batch) or live_count<1:raise AssertionError('RUNTIME_BATCH_IDENTITY_FAIL')
     good={'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count};_validate_release_metadata_identity(good,live_batch,live_count)
