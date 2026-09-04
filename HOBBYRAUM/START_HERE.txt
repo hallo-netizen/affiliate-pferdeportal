@@ -1,0 +1,19 @@
+HOBBYRAUM UNIVERSAL V1
+
+FÜR JEDEN NEUEN CHAT:
+"Nutze den HOBBYRAUM UNIVERSAL V1. Arbeite für diese Aufgabe ausschließlich mit den ausdrücklich freigegebenen Eingabedateien im Hobbyraum. Keine Projekt-Gesamtsuche. Keine zusätzlichen Dateien. Ergebnis nur als Patch/Output aus dem Hobbyraum."
+
+GitHub:
+Repository: hallo-netizen/affiliate-pferdeportal
+Branch: hobbyraum-universal-v1
+Pfad: HOBBYRAUM/
+
+Runner:
+python3 HOBBYRAUM/hobbyraum.py TASK.json
+
+Technische Grenzen des Runs:
+- Netzwerk aus
+- nur freigegebene Inputs sichtbar
+- Originalprojekt nicht gemountet
+- nur erlaubte Schreibziele werden akzeptiert
+- Aufgabe/Test fehlerhaft => BLOCKED
