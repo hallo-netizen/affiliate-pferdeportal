@@ -6,7 +6,7 @@
   "authorized_inputs": [
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
+      "sha256": "ed9af8df3e6666c2bf17abc817f77fb93058eea854c9e5d9e8da11a80b6459e6"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -14,7 +14,7 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "60ad828e153f3fc33b912b21aafd0f2db7669e9df1001a87018041cc95f008eb"
+      "sha256": "280ab2a470718ff55f9254a19f4a703fc07881157645336bb33338e07bbdd711"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
