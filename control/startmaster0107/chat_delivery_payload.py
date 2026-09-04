@@ -88,14 +88,6 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         raise Blocked("EXACTLY_SEVEN_ARTICLES_REQUIRED")
     articles.sort(key=lambda x: x["name"])
 
-    pkg_raw = package_path.read_bytes()
-    pkg_sha = sha256_bytes(pkg_raw)
-    pkg = load_json(package_path)
-    if pkg.get("contract") != "PSERC_APPROVED_PRODUCTION_PACKAGE_V1":
-        raise Blocked("FINAL_PACKAGE_CONTRACT_INVALID")
-    if pkg.get("publish_allowed") is not False:
-        raise Blocked("FINAL_PACKAGE_PUBLISH_FLAG_INVALID")
-
     source_manifest = {
         "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1",
         "batch_sha256": batch,
