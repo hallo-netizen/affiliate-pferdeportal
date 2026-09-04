@@ -24,7 +24,7 @@ def main():
  with tempfile.TemporaryDirectory() as td:
   root=Path(td);b,d,rp,orig=fixture(root);priv=Ed25519PrivateKey.generate();pub=priv.public_key().public_bytes(encoding=serialization.Encoding.Raw,format=serialization.PublicFormat.Raw);pb=base64.b64encode(pub).decode();ps=hashlib.sha256(pub).hexdigest();kid='test-'+ps[:16];trust={'signing_key_id':kid,'signing_public_key_sha256':ps,'public_key_b64':pb}
   def signer(h,*_):return {'signing_key_id':kid,'signing_public_key_sha256':ps,'public_key_b64':pb,'signature_b64':base64.b64encode(priv.sign(h.encode('ascii'))).decode()}
-  z=e.finalize(root,str(rp.relative_to(root)),signer,trust);final=root/z['final_ref'];assert all((d/n).read_bytes()==raw for n,raw in orig.items());trusted={kid:{'sha256':ps,'public_key_b64':pb}};assert phprun(final,trusted)[0]==0
+  z=e.finalize(root,str(rp.relative_to(root)),signer,trust);final=root/z['final_ref'];assert all((d/n).read_bytes()==raw for n,raw in orig.items());trusted={kid:{'sha256':ps,'public_key_b64':pb}};rc,out=phprun(final,trusted);assert rc==0,out
   wpriv=Ed25519PrivateKey.generate();wpub=wpriv.public_key().public_bytes(encoding=serialization.Encoding.Raw,format=serialization.PublicFormat.Raw);wpb=base64.b64encode(wpub).decode();wps=hashlib.sha256(wpub).hexdigest()
   def wrong(h,*_):return {'signing_key_id':'wrong','signing_public_key_sha256':wps,'public_key_b64':wpb,'signature_b64':base64.b64encode(wpriv.sign(h.encode('ascii'))).decode()}
   try:e.finalize(root,str(rp.relative_to(root)),wrong,trust);raise AssertionError('WRONG_KEY_ACCEPTED')
