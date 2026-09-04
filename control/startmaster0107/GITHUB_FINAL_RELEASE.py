@@ -21,6 +21,13 @@ SIGN_REQUEST_CONTRACT = "PFERDE_ATELIER_GITHUB_FINAL_SIGN_REQUEST_V1"
 FINAL_FILENAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
 ARTICLE_RE = re.compile(r"^ARTICLE_[0-9a-f]{64}\.md$")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
+IMPORT_ENVELOPE_NAME = "PSERC_IMPORT_ENVELOPE.json"
+IMPORT_ENVELOPE_KEYS = {
+    "contract", "package_id", "package_payload_sha256", "source",
+    "fact_pack_bundle", "fact_pack_bundle_sha256",
+    "production_plan", "production_plan_sha256",
+    "workflow_release", "workflow_release_sha256",
+}
 
 class Blocked(RuntimeError):
     pass
