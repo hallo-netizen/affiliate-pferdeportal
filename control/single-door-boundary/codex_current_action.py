@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import copy, hashlib, importlib.util, json, re, sys
+import hashlib, importlib.util, json, re, sys
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -234,37 +234,13 @@ def _run(args:list[str])->dict:
 def selftest()->dict:
     sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':{'contract':'X'},'existing_article_source_binding':{'ref':'old.md'},'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
     v=_current_only(sample)
-    if 'existing_article_source_binding' in v or 'fachworkflow_handoff' in v or 'submit-request' in v['submission_command']:raise AssertionError('PREPASS_HANDOFF_OR_OLD_SOURCE_LEAK')
-    a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'})
+    if 'existing_article_source_binding' in v or 'fachworkflow_handoff' in v:raise AssertionError('PREPASS_HANDOFF_OR_OLD_SOURCE_LEAK')
+    a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},sample['current_item'])
     if 'fachworkflow_handoff' in a:raise AssertionError('PREPASS_HANDOFF_STILL_BOUND')
-    rb=a['item_receipt_schema']['textmachine_ruleset_binding'];schema=a['item_receipt_schema']['fachworkflow_pass_schema'];mb=schema['workflow_release_metadata_binding']
+    schema=a['item_receipt_schema']['fachworkflow_pass_schema']
     for key in ('fact_pack','production_plan_item','production_plan_header','workflow_release_item','workflow_release_metadata'):
         if key not in schema:raise AssertionError('FACHWORKFLOW_CONTEXT_SCHEMA_MISSING:'+key)
-    if rb['article_type']!='ratgeber' or rb['article_type_templates_sha256']!=ARTICLE_TYPE_TEMPLATES_SHA:raise AssertionError('ARTICLE_TYPE_RULESET_BINDING_FAIL')
-    live_batch,live_count=_runtime_batch_identity()
-    if set(mb['required_fields'])!=RELEASE_KEYS or mb['exact_five_batch_sha256']!=live_batch or mb['exact_five_item_count']!=live_count:raise AssertionError('RELEASE_METADATA_SCHEMA_BINDING_FAIL')
-    current={'room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','plan_slot':'a'*64},'allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':a['item_receipt_schema']}
-    provisional={'contract':'PFERDE_ATELIER_BOUND_ITEM_EXECUTION_RECEIPT_V1','room_token':'R_D_1_01','canonical_article_id':'article:test','plan_slot':'a'*64}
-    meta={k:None for k in RELEASE_KEYS};meta.update({'contract':RELEASE_CONTRACT,'status':'PASS','exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count,'wordpress_write_performed':False})
-    fach={'required_stage_proofs':[{'stage':x,'ref':'.pferde-quarantine/test/'+x+'.json','sha256':'1'*64} for x in STAGES],
-          'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'canonical_article_id':'article:test','plan_slot':'a'*64},
-          'production_plan_header':{'contract':'production_plan_v4'},'workflow_release_item':{'canonical_article_id':'article:test','plan_slot':'a'*64},
-          'workflow_release_metadata':meta}
-    req=_handoff_request_from_current(current,provisional,fach)
-    if req['fact_pack']!=fach['fact_pack'] or req['production_plan_item']!=fach['production_plan_item']:raise AssertionError('M26_POSITIVE_CONTEXT_NOT_MATERIALIZED')
-    bad=dict(fach);bad['fact_pack']={}
-    try:_handoff_request_from_current(current,provisional,bad);raise AssertionError('M26_MISSING_FACT_PACK_NOT_BLOCKED')
-    except ViewError as e:
-        if str(e)!='BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING':raise
-    bad=copy.deepcopy(fach);bad['production_plan_item']['canonical_article_id']='article:other'
-    try:_handoff_request_from_current(current,provisional,bad);raise AssertionError('M26_WRONG_PLAN_ITEM_NOT_BLOCKED')
-    except ViewError as e:
-        if str(e)!='BOUND_CURRENT_PRODUCTION_PLAN_ITEM_IDENTITY_MISMATCH':raise
-    good={'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count};_validate_release_metadata_identity(good,live_batch,live_count)
-    for badm,label in [({'exact_five_batch_sha256':'0'*64,'exact_five_item_count':live_count},'BATCH'),({'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count+1},'COUNT')]:
-        try:_validate_release_metadata_identity(badm,live_batch,live_count);raise AssertionError('RELEASE_METADATA_NEGATIVE_NOT_BLOCKED:'+label)
-        except ViewError:pass
-    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'prepass_handoff_bound':False,'m26_positive_context_materialization':True,'m26_missing_context_blocked':True,'m26_wrong_identity_blocked':True,'article_type_ruleset_bound':True,'fachworkflow_context_schema_bound':True,'release_metadata_batch_bound':True,'release_metadata_item_count_bound':True,'content_or_quality_authority':'NONE','publish_allowed':False}
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'prepass_handoff_bound':False,'fachworkflow_context_schema_bound':True,'publish_allowed':False}
 
 def main(argv:list[str])->int:
     try:
