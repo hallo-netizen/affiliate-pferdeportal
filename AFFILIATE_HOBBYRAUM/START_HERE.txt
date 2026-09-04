@@ -1,0 +1,22 @@
+AFFILIATE HOBBYRAUM V1
+
+DIESER RAUM GILT NUR FÜR:
+AFFILIATE_ZENTRALE
+
+STARTREGEL:
+Nutze ausschließlich die im TASK.json freigegebenen Dateien.
+Bearbeite genau die eine dort definierte Aufgabe.
+Keine Projekt-Gesamtsuche.
+Keine zusätzlichen Dateien.
+Keine neue Architektur.
+Keine alten PASS-Prüfungen wiederholen.
+Keine STARTMASTER-/Textmaschinen-Navigation.
+Keine Ersatzroute bei Fehlern.
+
+Runner:
+python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py TASK.json
+
+Erlaubtes Ergebnis:
+PASS + Patch/Output
+oder
+BLOCKED + exakt ein belegter Fehler
