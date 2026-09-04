@@ -132,9 +132,8 @@ def m26():
     smoke=a.selftest()
     must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
     must(smoke.get("direct_single_door") is True,"M26_DIRECT_PATH_NOT_PASS")
-    must(smoke.get("fachworkflow_handoff_bound") is True,"M26_HANDOFF_NOT_BOUND")
-    must(smoke.get("handoff_after_current_fachworkflow") is True,"M26_HANDOFF_ORDER_INVALID")
-    must(smoke.get("missing_handoff_blocked") is True,"M26_NEGATIVE_MISSING_HANDOFF_NOT_BLOCKED")
+    must(smoke.get("prepass_handoff_bound") is False,"M26_PREPASS_HANDOFF_REGRESSION")
+    must(smoke.get("pre_submit_context_bound") is True,"M26_REAL_CONTEXT_INPUT_NOT_BOUND")
     # No fabricated fact_pack / plan / release fixture here.
     # PASS requires a real bound Fachworkflow run to supply the five context objects.
     raise Fail("M26_REAL_BOUND_FACHWORKFLOW_EXECUTION_NOT_PROVEN")
