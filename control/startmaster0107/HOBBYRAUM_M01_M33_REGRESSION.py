@@ -97,8 +97,31 @@ def m20():
     s=(REPO/"control/startmaster0107/chat_delivery_payload.py").read_text(encoding="utf-8")
     must("EXACTLY_SEVEN_ARTICLES_REQUIRED" in s and "import_envelope" in s and "source_manifest" in s,"M20_DELIVERY")
 def m21():
-    for p in [STEP7,STEP8,RUNTIME,REPO/"control/startmaster0107/chat_delivery_payload.py",REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py"]:
-        must("publish_allowed" in p.read_text(encoding="utf-8"),"M21_PUBLISH_FLAG:"+str(p))
+    # Hard positive/negative against the real release guard, not a text search.
+    g=mod(REPO/"control/output-quarantine/output_release_gate.py","m21_release_guard")
+    old_repo,old_runtime=g.REPO,g.RUNTIME_STATE
+    old_main,old_authority,old_validate=g.require_current_main,g.authority,g.validate_generic_receipt
+    try:
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); q=root/"q"; q.mkdir(parents=True)
+            out=q/"ARTICLE_"+("1"*64)+".md"; out.write_text("m21\n",encoding="utf-8")
+            runtime=root/"RUNTIME.json"
+            ticket={"ticket_id":"m21","step_id":"RUN_NEW_ARTICLE_BATCH_NO_STOP","sequence":107007,"state_sha256":"a"*64,"bundle_sha256":"b"*64}
+            receipt={"payload":{"execution_origin":"BOUND_WORKER","workflow_pass":True,"batch_sha256":"c"*64,"outputs":[{"ref":"q/"+out.name,"sha256":sha(out)}]}}
+            policy={"bound_worker_origin":"BOUND_WORKER","worker_quarantine_root":"q"}
+            state={"startmaster":"STARTMASTER0107"}
+            g.REPO=root; g.RUNTIME_STATE=runtime
+            g.require_current_main=lambda:"f"*40
+            g.authority=lambda:(None,state,None,policy,ticket)
+            g.validate_generic_receipt=lambda *_:(ticket,receipt)
+            dump(runtime,{"status":"EXECUTION_READY","batch_sha256":"c"*64,"publish_allowed":False})
+            pos=g.prepare_107007(root/"ticket.json",root/"receipt.json")
+            must(pos.get("status")=="OUTPUT_RELEASE_PREPARED_NOT_VISIBLE" and pos.get("publish_allowed") is False,"M21_POSITIVE_NO_PUBLISH_NOT_PASS")
+            dump(runtime,{"status":"EXECUTION_READY","batch_sha256":"c"*64,"publish_allowed":True})
+            expect_exc(lambda:g.prepare_107007(root/"ticket.json",root/"receipt.json"),"AUTO_PUBLISH_FORBIDDEN")
+    finally:
+        g.REPO,g.RUNTIME_STATE=old_repo,old_runtime
+        g.require_current_main,g.authority,g.validate_generic_receipt=old_main,old_authority,old_validate
 def m22(): must("H8_PREPRODUCTION_BOOTSTRAP_POSITIVE_NEGATIVE_PASS" in cmd("control/single-door-boundary/test_h8_preproduction_bootstrap.py"),"M22_H8")
 def m23(): must("POSITIVE_FULL_PACKAGE_CURRENT_GENERATION" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M23_SIGNED_PACKAGE_ONLY")
 def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
