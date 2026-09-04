@@ -71,7 +71,18 @@ def m11():
 def m12(): must("test_generic_fake_ppm_pass_is_blocked" in (REPO/"control/startmaster0107/test_ppm679_current_action_binding.py").read_text(encoding="utf-8"),"M12_FAKE_PPM_TEST")
 def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/startmaster0107/test_ppm679_current_action_binding.py").read_text(encoding="utf-8"),"M13_CONTENT_HASH_TEST")
 def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
-def m15(): must("kein zweiter Executor" in STEP7.read_text(encoding="utf-8") or "kein zweiter" in STEP7.read_text(encoding="utf-8"),"M15_INSTRUCTION")
+def _m15_validate_instruction(text):
+    required=("submission_command","Kein Vorab-Handoff durch den Worker","keine Capability-Suche","keine Alternativroute")
+    for token in required: must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
+    must(re.search(r"kein[^\\n.]*zweiter Executor",text,re.I) is not None,"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
+    forbidden=("FACHWORKFLOW_HANDOFF_REQUEST.json","submit-request","Vorab-Handoff durch den Worker erforderlich")
+    for token in forbidden: must(token not in text,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
+
+def m15():
+    text=load(STEP7)["instruction"]
+    _m15_validate_instruction(text)
+    bad=text+"\\nFACHWORKFLOW_HANDOFF_REQUEST.json muss vor submission_command erzeugt werden."
+    expect_exc(lambda:_m15_validate_instruction(bad),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
 def m16():
     s=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
     must("codex_worker_signer_access_allowed" in s and "False" in s,"M16_SIGNER_BOUNDARY")
