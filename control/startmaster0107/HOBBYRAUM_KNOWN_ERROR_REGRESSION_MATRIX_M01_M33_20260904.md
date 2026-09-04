@@ -69,12 +69,13 @@ M25 – Article prompt / Fachworkflow boundary: keine freie Neuplanung; bestehen
 
 ## Historische Regressionen – neu dauerhaft aufgenommen
 
-M26 – Bound runtime production context populated
+M26 – Bound Fachworkflow production context available to real PPM
 - Historischer Fehler: BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING.
-- Das an 107007 gebundene Produktionspaket muss für den aktuellen 7er-Batch echte, nichtleere fact_pack_bundle.fact_packs und production_plan.items enthalten.
-- Exakt 7 aktuelle Plan-Items müssen gegen workflow_release.items / Batch-ID / Plan-Slots konsistent gebunden sein.
-- Leer oder unvollständig = BLOCKED.
-- Keine Erzeugung von Ersatzkontext in 107007.
+- Das H8-Bootstrap-Paket darf fachlich leer bleiben; es ist Herkunfts-/Türbindung und keine Fachquelle.
+- Ab R_001 muss der aktuelle unveränderte Fachworkflow für current_item den echten aktuellen fact_pack und production_plan_v4-Kontext erzeugen/binden und wahrheitsgemäß an den bestehenden PPM-Handoff übergeben.
+- Fact-Pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata müssen artikel-/Plan-Slot-/Batch-konsistent sein.
+- Fehlender oder falscher Fachworkflow-Kontext = BLOCKED.
+- Kein Ersatzkontext aus alten Artikeln/Recovery und kein künstlich befülltes H8-Paket.
 
 M27 – Current-main / production environment identity
 - Historische Fehler: CODEX_CHECKOUT_NOT_CURRENT_MAIN, CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING.
