@@ -74,7 +74,7 @@ def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
 def _m15_validate_instruction(text):
     required=("submission_command","Kein Vorab-Handoff durch den Worker","keine Capability-Suche","keine Alternativroute")
     for token in required: must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
-    must(re.search(r"kein[^\\n.]*zweiter Executor",text,re.I) is not None,"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
+    must(any("zweiter executor" in line.lower() and "kein" in line.lower() for line in text.splitlines()),"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
     forbidden=("FACHWORKFLOW_HANDOFF_REQUEST.json","submit-request","Vorab-Handoff durch den Worker erforderlich")
     for token in forbidden: must(token not in text,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
 
