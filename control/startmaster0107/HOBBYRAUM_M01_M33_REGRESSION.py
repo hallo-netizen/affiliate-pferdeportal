@@ -128,14 +128,13 @@ def m25():
 
 # Open historical regressions: hard positive + hard negative.
 def m26():
-    # M26 must not manufacture the missing Fachworkflow context inside the test.
-    # The last real production run proved that the public path still lacks a
-    # demonstrated Current Action -> real Fachworkflow -> real context -> handoff chain.
     a=mod(CURRENT_ACTION,"m26_action")
     smoke=a.selftest()
     must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
     must(smoke.get("direct_single_door") is True and smoke.get("prepass_handoff_bound") is False,"M26_DIRECT_PATH_NOT_PASS")
-    raise Fail("M26_REAL_CURRENT_ACTION_TO_FACHWORKFLOW_CONTEXT_NOT_PROVEN")
+    # KISS hard stop: M26 must never seed fact_pack/plan/release context itself.
+    # Until the real bound Fachworkflow produces that context, M26 is FAIL.
+    raise Fail("M26_REAL_BOUND_FACHWORKFLOW_EXECUTION_NOT_PROVEN")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
