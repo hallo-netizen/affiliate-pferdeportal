@@ -159,8 +159,11 @@ def m31():
     item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
     out=a.augment_current_action(REPO,base,item)
     must("fachworkflow_handoff" not in out,"M31_SECOND_HANDOFF_DEPENDENCY")
+    bridge=json.loads(cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py"))
+    must(bridge.get("status")=="H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS","M31_CODEX_NATIVE_BOUND_ACTION_NOT_PASS")
+    must(bridge.get("custom_function_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
     step=STEP7.read_text(encoding="utf-8")
-    must("Capability-Suche" not in step and "zweiter Executor" not in step,"M31_SYNTHETIC_EXECUTOR_INSTRUCTION")
+    must("execute_bound_action" not in step,"M31_EXECUTE_BOUND_ACTION_DEPENDENCY")
 
 def m32():
     h=mod(HANDOFF,"m32_handoff")
