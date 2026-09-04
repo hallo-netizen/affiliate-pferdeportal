@@ -2,6 +2,11 @@
 
 Diese Datei gilt repositoryweit für Codex Cloud.
 
+## TEMPORÄRE HOBBYRAUM-REGRESSIONSAUSNAHME
+Nur auf dem Branch `hobbyroom/m01-m33-executable-regression-suite` und nur bei einem ausdrücklich mit `HOBBYRAUM-REGRESSION` bezeichneten Codex-Auftrag darf der Worker den Production-Entry überspringen und ausschließlich die im Auftrag benannten Regressionstest-Dateien bzw. den benannten aktuellen Testartikel bearbeiten.
+
+Dabei strikt verboten: Production-State ändern, `.pferde-environment` erzeugen/verändern, Production-Identität vortäuschen, Signer/Schlüssel benutzen, WordPress schreiben, publishen, main ändern oder einen alternativen Produktionsweg schaffen. Diese Ausnahme dient ausschließlich der isolierten positiven/negativen Regression im Hobbyraum; alle Produktionsregeln bleiben unverändert.
+
 ## Zwingender Start
 Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
 
