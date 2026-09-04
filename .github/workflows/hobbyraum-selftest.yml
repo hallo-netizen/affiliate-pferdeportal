@@ -1,0 +1,78 @@
+name: Hobbyraum Selftest
+
+on:
+  push:
+    branches:
+      - hobbyraum-universal-v1
+    paths:
+      - 'HOBBYRAUM/**'
+      - '.github/workflows/hobbyraum-selftest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python syntax
+        run: python3 -m py_compile HOBBYRAUM/hobbyraum.py
+
+      - name: Prepare offline image
+        run: docker pull python:3.12-slim
+
+      - name: Positive isolation test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .hobbyroom-test/input
+          printf 'VALUE = 1\n' > .hobbyroom-test/input/target.py
+          printf 'from target import VALUE\nassert VALUE == 2\n' > .hobbyroom-test/input/check.py
+          cat > .hobbyroom-test/PASS.json <<'JSON'
+          {
+            "task_id": "ci-positive",
+            "image": "python:3.12-slim",
+            "inputs": [
+              {"src": "input/target.py", "dest": "project/target.py"},
+              {"src": "input/check.py", "dest": "project/check.py"}
+            ],
+            "writable": ["project/target.py"],
+            "command": "printf 'VALUE = 2\\n' > project/target.py",
+            "tests": ["cd project && python check.py"],
+            "timeout_seconds": 120
+          }
+          JSON
+          python3 HOBBYRAUM/hobbyraum.py .hobbyroom-test/PASS.json | tee .hobbyroom-test/pass-result.txt
+          grep -q '"status": "PASS"' .hobbyroom-test/pass-result.txt
+
+      - name: Forbidden-write test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .hobbyroom-test2/input
+          printf 'VALUE = 1\n' > .hobbyroom-test2/input/target.py
+          printf 'SAFE = True\n' > .hobbyroom-test2/input/locked.py
+          cat > .hobbyroom-test2/BLOCKED.json <<'JSON'
+          {
+            "task_id": "ci-blocked",
+            "image": "python:3.12-slim",
+            "inputs": [
+              {"src": "input/target.py", "dest": "project/target.py"},
+              {"src": "input/locked.py", "dest": "project/locked.py"}
+            ],
+            "writable": ["project/target.py"],
+            "command": "printf 'SAFE = False\\n' > project/locked.py",
+            "tests": [],
+            "timeout_seconds": 120
+          }
+          JSON
+          set +e
+          python3 HOBBYRAUM/hobbyraum.py .hobbyroom-test2/BLOCKED.json | tee .hobbyroom-test2/blocked-result.txt
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+          grep -q '"status": "BLOCKED"' .hobbyroom-test2/blocked-result.txt
+          grep -q 'WRITE_OUTSIDE_ALLOWLIST' .hobbyroom-test2/blocked-result.txt
