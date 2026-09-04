@@ -46,6 +46,20 @@ def _contract_binding()->dict:
     if not p.is_file():raise ViewError('FACH_PROMPT_MISSING')
     return {'contract':'PFERDE_ATELIER_FACHWORKFLOW_CONTRACT_BINDING_V1','authority':'EXISTING_UNCHANGED_FACHWORKFLOW_ONLY','binding_ref':'control/single-door-boundary/codex_current_action.py','binding_sha256':sha(SELF),'prompt_ref':PROMPT_REL,'prompt_sha256':sha(p),'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_pass_stages':STAGES,'technical_guard_semantics_authority':'NONE','content_or_quality_rules_changed':False,'publish_allowed':False}
 
+def _runtime_batch_identity()->tuple[str,int]:
+    runtime=load(REPO/RUNTIME_STATE_REL);batch=str(runtime.get('batch_sha256') or '');pref=str(runtime.get('production_package_ref') or '');digest=str(runtime.get('production_package_sha256') or '')
+    if not re.fullmatch(r'[0-9a-f]{64}',batch):raise ViewError('RUNTIME_BATCH_BINDING_INVALID')
+    pp=safe(pref)
+    if not pp.is_file() or not re.fullmatch(r'[0-9a-f]{64}',digest) or sha(pp)!=digest:raise ViewError('RUNTIME_PRODUCTION_PACKAGE_BINDING_INVALID')
+    pkg=load(pp);wr=pkg.get('workflow_release');items=wr.get('items') if isinstance(wr,dict) else None
+    if not isinstance(wr,dict) or not isinstance(items,list) or not items:raise ViewError('RUNTIME_PRODUCTION_PACKAGE_CONTEXT_INVALID')
+    if wr.get('exact_five_batch_sha256')!=batch or int(wr.get('exact_five_item_count') or -1)!=len(items):raise ViewError('RUNTIME_PRODUCTION_PACKAGE_IDENTITY_INVALID')
+    return batch,len(items)
+
+def _validate_release_metadata_identity(rm:Mapping[str,Any],batch:str,batch_count:int)->None:
+    if rm.get('exact_five_batch_sha256')!=batch:raise ViewError('RELEASE_METADATA_BATCH_MISMATCH')
+    if int(rm.get('exact_five_item_count') or -1)!=batch_count:raise ViewError('RELEASE_METADATA_ITEM_COUNT_MISMATCH')
+
 # These two functions are the only callbacks the existing room bridge uses after DUAL is bound to this file.
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     r=_rules(it);b=_contract_binding();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
@@ -63,7 +77,7 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
     if not p.is_file() or sha(p)!=digest:raise ViewError('FACH_PASS_HASH_MISMATCH')
     outs=d.get('outputs')
     if not isinstance(outs,list) or not any(isinstance(x,dict) and x.get('ref')==ref and x.get('sha256')==digest for x in outs):raise ViewError('FACH_PASS_NOT_BOUND_AS_OUTPUT')
-    q=load(p);runtime=load(REPO/RUNTIME_STATE_REL);batch=str(runtime.get('batch_sha256') or '')
+    q=load(p);batch,batch_count=_runtime_batch_identity()
     req={'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'content_or_quality_rules_changed':False,'publish_allowed':False}
     for k,v in req.items():
         if q.get(k)!=v:raise ViewError('FACH_PASS_FIELD_MISMATCH:'+k)
@@ -98,6 +112,7 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
     if ri.get('canonical_article_id')!=it.get('canonical_article_id') or ri.get('plan_slot')!=it.get('plan_slot'):raise ViewError('RELEASE_ITEM_IDENTITY_MISMATCH')
     if ph.get('contract')!='production_plan_v4' or 'items' in ph:raise ViewError('PLAN_HEADER_INVALID')
     if set(rm)!=RELEASE_KEYS or rm.get('contract')!=RELEASE_CONTRACT or rm.get('status')!='PASS' or rm.get('wordpress_write_performed') is not False:raise ViewError('RELEASE_METADATA_INVALID')
+    _validate_release_metadata_identity(rm,batch,batch_count)
     return q
 
 def _current_only(data:dict)->dict:
@@ -128,7 +143,13 @@ def selftest()->dict:
     a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'})
     rb=a['item_receipt_schema']['textmachine_ruleset_binding']
     if rb['article_type']!='ratgeber' or rb['article_type_templates_sha256']!=ARTICLE_TYPE_TEMPLATES_SHA:raise AssertionError('ARTICLE_TYPE_RULESET_BINDING_FAIL')
-    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'handoff_request_bound':False,'article_type_ruleset_bound':True,'strict_real_stage_validator':True,'content_or_quality_authority':'NONE','publish_allowed':False}
+    live_batch,live_count=_runtime_batch_identity()
+    if not re.fullmatch(r'[0-9a-f]{64}',live_batch) or live_count<1:raise AssertionError('RUNTIME_BATCH_IDENTITY_FAIL')
+    good={'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count};_validate_release_metadata_identity(good,live_batch,live_count)
+    for bad,label in [({'exact_five_batch_sha256':'0'*64,'exact_five_item_count':live_count},'BATCH'),({'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count+1},'COUNT')]:
+        try:_validate_release_metadata_identity(bad,live_batch,live_count);raise AssertionError('RELEASE_METADATA_NEGATIVE_NOT_BLOCKED:'+label)
+        except ViewError:pass
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'handoff_request_bound':False,'article_type_ruleset_bound':True,'strict_real_stage_validator':True,'release_metadata_batch_bound':True,'release_metadata_item_count_bound':True,'content_or_quality_authority':'NONE','publish_allowed':False}
 
 def main(argv:list[str])->int:
     try:

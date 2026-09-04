@@ -46,7 +46,7 @@
     },
     {
       "ref": "control/single-door-boundary/codex_current_action.py",
-      "sha256": "e8a334569d0fb2e4f47dd2b11927e58ec7825464cc137e1a2fb019b9ebda6ab4"
+      "sha256": "b78620d4863478f06604594a6a17ed86b1329980073042ef53866ccd92c2705e"
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
