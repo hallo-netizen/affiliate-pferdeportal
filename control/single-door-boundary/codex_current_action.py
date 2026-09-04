@@ -175,15 +175,20 @@ def _run(args:list[str])->dict:
         raise
 
 def selftest()->dict:
-    sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':{'contract':'X'},'existing_article_source_binding':{'ref':'old.md'},'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
+    item={'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'}
+    a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},item)
+    handoff=a.get('fachworkflow_handoff')
+    if not isinstance(handoff,dict):raise AssertionError('FACHWORKFLOW_HANDOFF_NOT_EXPOSED')
+    if handoff.get('context_source')!='CURRENT_UNCHANGED_FACHWORKFLOW_OUTPUTS_ONLY' or handoff.get('bootstrap_package_is_fachworkflow_context') is not False:raise AssertionError('FACHWORKFLOW_CONTEXT_SOURCE_INVALID')
+    if handoff.get('worker_materializes_context_after_current_fachworkflow') is not True:raise AssertionError('FACHWORKFLOW_HANDOFF_ORDER_INVALID')
+    sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':item,'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':a['allowed_output_root'],'item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':a['item_receipt_schema'],'fachworkflow_handoff':handoff,'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
     v=_current_only(sample)
-    if 'existing_article_source_binding' in v or 'fachworkflow_handoff' in v:raise AssertionError('PREPASS_HANDOFF_OR_OLD_SOURCE_LEAK')
-    a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},sample['current_item'])
-    if 'fachworkflow_handoff' in a:raise AssertionError('PREPASS_HANDOFF_STILL_BOUND')
-    schema=a['item_receipt_schema']['fachworkflow_pass_schema']
-    for key in ('fact_pack','production_plan_item','production_plan_header','workflow_release_item','workflow_release_metadata'):
-        if key not in schema:raise AssertionError('FACHWORKFLOW_CONTEXT_SCHEMA_MISSING:'+key)
-    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'prepass_handoff_bound':False,'fachworkflow_context_schema_bound':True,'publish_allowed':False}
+    if v.get('fachworkflow_handoff')!=handoff:raise AssertionError('FACHWORKFLOW_HANDOFF_NOT_VISIBLE')
+    bad=dict(sample);bad.pop('fachworkflow_handoff')
+    try:_current_only(bad);raise AssertionError('MISSING_HANDOFF_NOT_BLOCKED')
+    except ViewError as e:
+        if str(e)!='CURRENT_ACTION_FIELDS_MISSING':raise
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'fachworkflow_handoff_bound':True,'handoff_after_current_fachworkflow':True,'missing_handoff_blocked':True,'publish_allowed':False}
 
 def main(argv:list[str])->int:
     try:
