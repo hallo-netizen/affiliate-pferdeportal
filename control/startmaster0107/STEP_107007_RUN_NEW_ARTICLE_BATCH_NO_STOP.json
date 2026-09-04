@@ -46,7 +46,7 @@
     },
     {
       "ref": "control/single-door-boundary/codex_current_action.py",
-      "sha256": "144c44443171635ac92f5eeab5a96890cfcf047128f62b944758782f05677385"
+      "sha256": "0588aa2f60c10828804c0e332617aad4c375dc4ff92e6600d12c82c4b1f1f30e"
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
@@ -54,7 +54,7 @@
     },
     {
       "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
-      "sha256": "f88c5621d7349993b9350ad54abff59d12e65f96a37e5f77988bac13686e9708"
+      "sha256": "ac38be89f400dae5d19ecac9c3eaaf2544fff4ab0c15f74416babbb4b6a718ac"
     },
     {
       "ref": "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",
