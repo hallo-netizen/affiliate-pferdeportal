@@ -13,6 +13,19 @@ Keine alten PASS-Prüfungen wiederholen.
 Keine STARTMASTER-/Textmaschinen-Navigation.
 Keine Ersatzroute bei Fehlern.
 
+FEHLERMATRIX:
+AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md
+
+Vor JEDEM Lauf:
+1. komplette Fehlermatrix gegen die Aufgabe prüfen,
+2. bekannte Fehler/Umwege ausschließen,
+3. erst dann die eine Aufgabe ausführen.
+
+Bei JEDEM neuen Fehler:
+1. Fehler zuerst mit neuer AF-ID in die Matrix eintragen,
+2. Gegenregel festlegen,
+3. erst danach einen einzigen neuen Versuch starten.
+
 Runner:
 python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py TASK.json
 
