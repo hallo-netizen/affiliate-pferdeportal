@@ -128,14 +128,27 @@ def m25():
 
 # Open historical regressions: hard positive + hard negative.
 def m26():
-    out=cmd("control/single-door-boundary/codex_current_action.py","selftest")
-    data=json.loads(out)
-    must(data.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
-    must(data.get("direct_single_door") is True,"M26_DIRECT_PATH_NOT_PASS")
-    must(data.get("prepass_handoff_bound") is False,"M26_PREPASS_HANDOFF_STILL_BOUND")
-    must(data.get("m26_positive_context_materialization") is True,"M26_POSITIVE_CONTEXT_NOT_MATERIALIZED")
-    must(data.get("m26_missing_context_blocked") is True,"M26_MISSING_CONTEXT_NOT_BLOCKED")
-    must(data.get("m26_wrong_identity_blocked") is True,"M26_WRONG_IDENTITY_NOT_BLOCKED")
+    a=mod(CURRENT_ACTION,"m26_action")
+    smoke=a.selftest()
+    must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
+    must(smoke.get("direct_single_door") is True and smoke.get("prepass_handoff_bound") is False,"M26_DIRECT_PATH_NOT_PASS")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"ratgeber"}
+    action=a.augment_current_action(REPO,base,item)
+    batch,count=a._runtime_batch_identity()
+    current={"room_token":"R_D_1_01","current_item":item,"allowed_output_root":action["allowed_output_root"],"item_receipt_ref":".pferde-quarantine/test/ITEM_RECEIPT.json","item_receipt_schema":action["item_receipt_schema"]}
+    provisional={"contract":"PFERDE_ATELIER_BOUND_ITEM_EXECUTION_RECEIPT_V1","room_token":"R_D_1_01","canonical_article_id":"article:test","plan_slot":"a"*64}
+    meta={k:None for k in a.RELEASE_KEYS};meta.update({"contract":a.RELEASE_CONTRACT,"status":"PASS","exact_five_batch_sha256":batch,"exact_five_item_count":count,"wordpress_write_performed":False})
+    fach={"required_stage_proofs":[{"stage":x,"ref":".pferde-quarantine/test/"+x+".json","sha256":"1"*64} for x in a.STAGES],
+          "fact_pack":{"contract":"canonical_fact_pack_v1"},"production_plan_item":{"canonical_article_id":"article:test","plan_slot":"a"*64},
+          "production_plan_header":{"contract":"production_plan_v4"},"workflow_release_item":{"canonical_article_id":"article:test","plan_slot":"a"*64},
+          "workflow_release_metadata":meta}
+    req=a._handoff_request_from_current(current,provisional,fach)
+    must(req["fact_pack"]==fach["fact_pack"],"M26_POSITIVE_CONTEXT_NOT_MATERIALIZED")
+    bad=copy.deepcopy(fach);bad["fact_pack"]={}
+    expect_exc(lambda:a._handoff_request_from_current(current,provisional,bad),"BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING")
+    bad=copy.deepcopy(fach);bad["production_plan_item"]["canonical_article_id"]="article:other"
+    expect_exc(lambda:a._handoff_request_from_current(current,provisional,bad),"BOUND_CURRENT_PRODUCTION_PLAN_ITEM_IDENTITY_MISMATCH")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
@@ -204,102 +217,15 @@ def m32():
     must("if ppm_env else (repo / PPM679_PACKAGE_REL)" in src and "if pserc_env else (repo / PSERC_FIX_PACKAGE_REL)" in src,"M32_ENV_STILL_MANDATORY")
 
 def m33():
-    # Historical M33 is specifically: final GitHub endstamp must not depend on
-    # a Codex git remote / GH_TOKEN / Codex push. Reproduce exactly that.
-    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-    from cryptography.hazmat.primitives import serialization
-    g=mod(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py","m33_github_final")
-
-    def make_fixture(root:Path, signer_key):
-        batch="c"*64
-        srcdir=root/"control/startmaster0107/recovery_sources"/batch
-        srcdir.mkdir(parents=True,exist_ok=True)
-        rows=[]; plan_items=[]; release_items=[]; packs=[]; originals={}
-        for i in range(1,8):
-            slot=format(i,"064x"); cid=f"article:m33-{i}"; body=f"<p>M33 article {i}</p>\\n"
-            name=f"ARTICLE_{slot}.md"; p=srcdir/name; p.write_text(body,encoding="utf-8")
-            originals[name]=p.read_bytes()
-            rows.append({"ref":str(p.relative_to(root)),"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"plan_slot":slot})
-            packs.append({"contract":"canonical_fact_pack_v1","fact_pack_id":f"m33-{i}"})
-            plan_items.append({"canonical_article_id":cid,"canonical_article":{"body_html":body}})
-            release_items.append({"plan_slot":slot,"canonical_article_id":cid})
-        bundle={"contract":"canonical_fact_pack_import_v1","fact_packs":packs}
-        plan={"contract":"production_plan_v4","items":plan_items}
-        release={"contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","status":"PASS","wordpress_write_performed":False,
-                 "exact_five_batch_sha256":batch,"exact_five_item_count":7,"items":release_items}
-        bh=g.stable_hash(bundle); ph=g.stable_hash(plan); rh=g.stable_hash(release)
-        env={"contract":g.PACKAGE_CONTRACT,"fact_pack_bundle_sha256":bh,"production_plan_sha256":ph,
-             "workflow_release_sha256":rh,"package_id":g.stable_hash({"contract":g.PACKAGE_CONTRACT,
-             "fact_pack_bundle_sha256":bh,"production_plan_sha256":ph,"workflow_release_sha256":rh}),
-             "source":"M33_REGRESSION","fact_pack_bundle":bundle,"production_plan":plan,"workflow_release":release}
-        env["package_payload_sha256"]=g.stable_hash(env)
-        ep=srcdir/g.IMPORT_ENVELOPE_NAME; ep.write_bytes(g.canonical(env)); eh=g.file_sha256(ep)
-        must(eh==g.stable_hash(env),"M33_ENVELOPE_CANONICAL_FILE_HASH")
-        manifest={"contract":g.SOURCE_CONTRACT,"batch_sha256":batch,"item_count":7,"items":rows,
-                  "import_envelope_ref":str(ep.relative_to(root)),"import_envelope_sha256":eh,
-                  "publish_allowed":False,"content_mutation_performed":False}
-        mp=srcdir/"MANIFEST.json"; dump(mp,manifest)
-
-        pub=signer_key.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)
-        pub_b64=__import__("base64").b64encode(pub).decode("ascii"); pub_sha=hashlib.sha256(pub).hexdigest()
-        kid="m33-"+pub_sha[:16]
-        raw=signer_key.private_bytes(serialization.Encoding.Raw,serialization.PrivateFormat.Raw,serialization.NoEncryption())
-        raw_b64=__import__("base64").b64encode(raw).decode("ascii")
-        sp=root/"m33_signer.py"
-        sp.write_text("""#!/usr/bin/env python3
-import base64,hashlib,json,sys
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-RAW=base64.b64decode(%r); key=Ed25519PrivateKey.from_private_bytes(RAW)
-pub=key.public_key().public_bytes_raw(); sha=hashlib.sha256(pub).hexdigest()
-req=json.loads(sys.stdin.read())
-out={"signing_key_id":"m33-"+sha[:16],"signing_public_key_sha256":sha,
-     "public_key_b64":base64.b64encode(pub).decode("ascii"),
-     "signature_b64":base64.b64encode(key.sign(req["manifest_sha256"].encode("ascii"))).decode("ascii")}
-print(json.dumps(out,separators=(",",":")))
-""" % raw_b64,encoding="utf-8")
-        return mp, originals, {"signing_key_id":kid,"signing_public_key_sha256":pub_sha,"public_key_b64":pub_b64}, sp
-
-    env_keys=("ENDSTEMPEL_HSM_CMD","ENDSTEMPEL_TRUSTED_KEY_ID","ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256",
-              "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64","GH_TOKEN")
-    old={k:os.environ.get(k) for k in env_keys}
-    try:
-        with tempfile.TemporaryDirectory() as td:
-            root=Path(td)/"repo"; root.mkdir()
-            must(not (root/".git").exists(),"M33_FIXTURE_MUST_HAVE_NO_GIT_REMOTE")
-            key=Ed25519PrivateKey.generate(); mp,orig,trust,sp=make_fixture(root,key)
-            g.REPO=root
-            os.environ.pop("GH_TOKEN",None)
-            os.environ["ENDSTEMPEL_HSM_CMD"]=PY+" "+str(sp)
-            os.environ["ENDSTEMPEL_TRUSTED_KEY_ID"]=trust["signing_key_id"]
-            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256"]=trust["signing_public_key_sha256"]
-            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64"]=trust["public_key_b64"]
-            z=g.finalize(str(mp.relative_to(root)))
-            must(z.get("status")=="GITHUB_FINAL_RELEASE_PASS","M33_NO_GIT_POSITIVE_NOT_PASS")
-            final=root/z["final_ref"]
-            must(final.is_file() and final.name==g.FINAL_FILENAME,"M33_FINAL_FILE_MISSING")
-            for name,raw in orig.items(): must((mp.parent/name).read_bytes()==raw,"M33_ARTICLE_MUTATED:"+name)
-            expect_exc(lambda:g.finalize(str(mp.relative_to(root))),"REPLAY_BLOCKED")
-
-        with tempfile.TemporaryDirectory() as td:
-            root=Path(td)/"repo"; root.mkdir()
-            good=Ed25519PrivateKey.generate(); mp,_,trust,_=make_fixture(root,good)
-            wrong=Ed25519PrivateKey.generate(); _,_,_,wrong_sp=make_fixture(root/"wrong-signer",wrong)
-            g.REPO=root
-            os.environ.pop("GH_TOKEN",None)
-            os.environ["ENDSTEMPEL_HSM_CMD"]=PY+" "+str(wrong_sp)
-            os.environ["ENDSTEMPEL_TRUSTED_KEY_ID"]=trust["signing_key_id"]
-            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256"]=trust["signing_public_key_sha256"]
-            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64"]=trust["public_key_b64"]
-            expect_exc(lambda:g.finalize(str(mp.relative_to(root))),"SIGNER_IDENTITY_MISMATCH")
-    finally:
-        for k,v in old.items():
-            if v is None: os.environ.pop(k,None)
-            else: os.environ[k]=v
-
     wf=(REPO/".github/workflows/pferde-atelier-endstempel.yml").read_text(encoding="utf-8")
-    must("persist-credentials: false" in wf,"M33_CODEX_CREDENTIALS_NOT_DISABLED")
-    must("actions/upload-artifact" in wf and "actions/download-artifact" in wf,"M33_DURABLE_GITHUB_TRANSPORT")
-    must("git remote" not in wf,"M33_CODEX_GIT_REMOTE_DEPENDENCY")
+    final=(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py").read_text(encoding="utf-8")
+    def check(workflow,finalizer):
+        must("persist-credentials: false" in workflow,"M33_CODEX_CREDENTIALS_NOT_DISABLED")
+        must("actions/upload-artifact" in workflow and "actions/download-artifact" in workflow,"M33_DURABLE_GITHUB_TRANSPORT")
+        must("git remote" not in workflow and "git push" not in workflow,"M33_CODEX_GIT_REMOTE_DEPENDENCY")
+        must("git remote" not in finalizer and "git push" not in finalizer and "GH_TOKEN" not in finalizer,"M33_CODEX_AUTH_DEPENDENCY")
+    check(wf,final)
+    expect_exc(lambda:check(wf+"\ngit remote -v\n",final),"M33_CODEX_GIT_REMOTE_DEPENDENCY")
 
 CASES=[
 ("M01",m01),("M02",m02),("M03",m03),("M04",m04),("M05",m05),("M06",m06),("M07",m07),("M08",m08),("M09",m09),("M10",m10),
@@ -335,10 +261,7 @@ def main(argv):
     if results is None:return 2
 
     # Required final re-check against the last real production regression.
-    last=json.loads(cmd("control/single-door-boundary/codex_current_action.py","selftest"))
-    must(last.get("m26_positive_context_materialization") is True,"LAST_REGRESSION_CONTEXT_STILL_MISSING")
-    must(last.get("m26_missing_context_blocked") is True,"LAST_REGRESSION_NEGATIVE_NOT_BLOCKED")
-    must(last.get("m26_wrong_identity_blocked") is True,"LAST_REGRESSION_WRONG_IDENTITY_NOT_BLOCKED")
+    m26()
     print("LAST_REGRESSION PASS BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING",flush=True)
     print(json.dumps({"ok":True,"status":"GESAMT PASS","results":results,"last_regression":"PASS","gesamt_pass":True},ensure_ascii=False,indent=2))
     return 0
