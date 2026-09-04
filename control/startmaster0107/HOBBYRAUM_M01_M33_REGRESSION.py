@@ -276,27 +276,40 @@ CASES=[
 ("M21",m21),("M22",m22),("M23",m23),("M24",m24),("M25",m25),("M26",m26),("M27",m27),("M28",m28),("M29",m29),("M30",m30),
 ("M31",m31),("M32",m32),("M33",m33)]
 
-def main(argv):
-    must(MATRIX.is_file(),"MATRIX_MISSING")
-    open_only=argv==["--open-only"]
-    if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only]")
+def _run_ordered(cases,phase):
     results=[]
-    start=25 if open_only else 0
-    for mid,fn in CASES[start:]:
+    for mid,fn in cases:
         try:
             fn();results.append({"id":mid,"status":"PASS"});print(mid+" PASS",flush=True)
         except Exception as e:
             results.append({"id":mid,"status":"FAIL","reason":str(e)});print(mid+" FAIL "+str(e),flush=True)
-            print(json.dumps({"ok":False,"status":"REGRESSION_FAIL","first_fail":mid,"results":results,"gesamt_pass":False},ensure_ascii=False,indent=2))
-            return 2
+            print(json.dumps({"ok":False,"status":"REGRESSION_FAIL","phase":phase,"first_fail":mid,"results":results,"gesamt_pass":False},ensure_ascii=False,indent=2))
+            return None
+    return results
+
+def main(argv):
+    must(MATRIX.is_file(),"MATRIX_MISSING")
+    open_only=argv==["--open-only"]
+    if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only]")
+
+    # Repair phase: do not duplicate already-proven old positives while an open
+    # regression still fails. Once M26-M33 are all green, automatically run the
+    # one required final M01-M33 suite on the same head.
+    if open_only:
+        open_results=_run_ordered(CASES[25:],"OPEN_M26_M33")
+        if open_results is None:return 2
+        print("OPEN_REGRESSIONS_PASS",flush=True)
+
+    results=_run_ordered(CASES,"FINAL_M01_M33")
+    if results is None:return 2
+
     # Required final re-check against the last real production regression.
     last=json.loads(cmd("control/single-door-boundary/codex_current_action.py","selftest"))
     must(last.get("m26_positive_context_materialization") is True,"LAST_REGRESSION_CONTEXT_STILL_MISSING")
     must(last.get("m26_missing_context_blocked") is True,"LAST_REGRESSION_NEGATIVE_NOT_BLOCKED")
     must(last.get("m26_wrong_identity_blocked") is True,"LAST_REGRESSION_WRONG_IDENTITY_NOT_BLOCKED")
     print("LAST_REGRESSION PASS BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING",flush=True)
-    status="OPEN_REGRESSIONS_PASS" if open_only else "GESAMT PASS"
-    print(json.dumps({"ok":True,"status":status,"results":results,"last_regression":"PASS","gesamt_pass":not open_only},ensure_ascii=False,indent=2))
+    print(json.dumps({"ok":True,"status":"GESAMT PASS","results":results,"last_regression":"PASS","gesamt_pass":True},ensure_ascii=False,indent=2))
     return 0
 
 if __name__=="__main__": raise SystemExit(main(sys.argv[1:]))
