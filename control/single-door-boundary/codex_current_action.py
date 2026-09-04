@@ -99,12 +99,11 @@ def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     r=_rules(it);b=_contract_binding();batch,batch_count=_runtime_batch_identity();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
     metadata_binding={'required_fields':sorted(RELEASE_KEYS),'contract':RELEASE_CONTRACT,'status':'PASS','exact_five_batch_sha256':batch,'exact_five_item_count':batch_count,'wordpress_write_performed':False,'remaining_fields_authority':'EXISTING_UNCHANGED_FACHWORKFLOW_ONLY','technical_identity_binding_only':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
     s=dict(a.get('item_receipt_schema') or {})
-    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'ppm679_requirement':_ppm_requirement(),'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
+    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'ppm679_requirement':_ppm_requirement(),'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','fact_pack':'current real research_fact_pack output','production_plan_item':'current real production_plan_v4 item','production_plan_header':'current real production_plan_v4 header without items','workflow_release_item':'current real workflow_release item','workflow_release_metadata':'current real workflow_release metadata','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
     a['item_receipt_schema']=s
-    request_ref=root+'FACHWORKFLOW_HANDOFF_REQUEST.json'
-    a['fachworkflow_handoff']={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':batch,'request_ref':request_ref,'request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','request_required_fields':['contract','room_token','batch_sha256','canonical_article_id','plan_slot','allowed_output_root','item_receipt_ref','fachworkflow_pass_ref','contract_binding_ref','contract_binding_sha256','stage_proofs','fact_pack','production_plan_item','production_plan_header','workflow_release_item','workflow_release_metadata'],'context_source':'CURRENT_UNCHANGED_FACHWORKFLOW_OUTPUTS_ONLY','bootstrap_package_is_fachworkflow_context':False,'fact_pack_source_stage':'research_fact_pack','production_plan_context_source':'CURRENT_ITEM_FACHWORKFLOW_PRODUCTION_PLAN_V4','worker_materializes_context_after_current_fachworkflow':True,'adapter_ref':HANDOFF_REL,'adapter_sha256':sha(REPO/HANDOFF_REL),'command':'python3 '+HANDOFF_REL+' materialize '+request_ref,'technical_guard_executes_domain_logic':False,'adapter_executes_bound_ppm_stage':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
-    # NEW intentionally has no existing article source. The existing fachworkflow handoff remains bound.
+    # NEW intentionally has no existing article source and no pre-Fachworkflow handoff dependency.
     a.pop('existing_article_source_binding',None)
+    a.pop('fachworkflow_handoff',None)
     return a
 
 def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],d:Mapping[str,Any])->dict:
@@ -158,11 +157,11 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
 def _current_only(data:dict)->dict:
     status=data.get('status')
     if status=='CURRENT_BOUND_ACTION_READY':
-        need=('room_token','current_item','fachworkflow_authority','fachworkflow_prompt_ref','allowed_output_root','item_receipt_ref','item_receipt_schema','fachworkflow_handoff','submission_command')
+        need=('room_token','current_item','fachworkflow_authority','fachworkflow_prompt_ref','allowed_output_root','item_receipt_ref','item_receipt_schema','submission_command')
         if any(k not in data for k in need):raise ViewError('CURRENT_ACTION_FIELDS_MISSING')
         pref='python3 control/single-door-boundary/codex_current_room_bridge.py submit ';sub=str(data['submission_command'])
         if not sub.startswith(pref) or sub[len(pref):]!=str(data['item_receipt_ref']):raise ViewError('CURRENT_ACTION_SUBMISSION_NOT_BOUND')
-        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_CURRENT_BOUND_ITEM_NOW','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'fachworkflow_handoff':data['fachworkflow_handoff'],'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+data['item_receipt_ref'],'publish_allowed':False}
+        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_CURRENT_BOUND_ITEM_NOW','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+data['item_receipt_ref'],'publish_allowed':False}
     if status in {'BLOCKED','USER_ACTION_REQUIRED','FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH'}:return {'contract':CONTRACT,'status':status,'room_token':data.get('room_token'),'error':data.get('error'),'evidence':data.get('evidence'),'outer_step':data.get('outer_step'),'publish_allowed':False}
     if data.get('ok') is False:return {'contract':CONTRACT,'status':'BLOCKED','error':data.get('error') or status or 'BOUND_BRIDGE_BLOCKED','publish_allowed':False}
     raise ViewError('BOUND_BRIDGE_STATUS_NOT_WORKER_VISIBLE')
@@ -175,27 +174,22 @@ def _run(args:list[str])->dict:
         raise
 
 def selftest()->dict:
-    # View test: old article source cannot leak; the existing bound fachworkflow handoff must remain visible.
-    handoff={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':'b'*64,'request_ref':'.pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json','request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','adapter_ref':HANDOFF_REL,'adapter_sha256':'a'*64,'command':'python3 '+HANDOFF_REL+' materialize .pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json','technical_guard_executes_domain_logic':False,'adapter_executes_bound_ppm_stage':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
-    sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','article_type':'ratgeber'},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':{'contract':'X'},'existing_article_source_binding':{'ref':'old.md'},'fachworkflow_handoff':handoff,'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
+    sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','article_type':'ratgeber'},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':{'contract':'X'},'existing_article_source_binding':{'ref':'old.md'},'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
     v=_current_only(sample)
-    if 'existing_article_source_binding' in v or 'submit-request' in v['submission_command']:raise AssertionError('OLD_SOURCE_OR_SUBMIT_REQUEST_LEAK')
-    if v.get('fachworkflow_handoff')!=handoff:raise AssertionError('FACHWORKFLOW_HANDOFF_NOT_EXPOSED')
-    # Binding test itself is deterministic and article-type specific.
+    if 'existing_article_source_binding' in v or 'fachworkflow_handoff' in v or 'submit-request' in v['submission_command']:raise AssertionError('PREPASS_HANDOFF_OR_OLD_SOURCE_LEAK')
     a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'})
-    rb=a['item_receipt_schema']['textmachine_ruleset_binding'];mb=a['item_receipt_schema']['fachworkflow_pass_schema']['workflow_release_metadata_binding']
-    hb=a['fachworkflow_handoff']
-    if hb.get('context_source')!='CURRENT_UNCHANGED_FACHWORKFLOW_OUTPUTS_ONLY' or hb.get('bootstrap_package_is_fachworkflow_context') is not False:raise AssertionError('FACHWORKFLOW_CONTEXT_SOURCE_BINDING_FAIL')
-    if hb.get('fact_pack_source_stage')!='research_fact_pack' or hb.get('worker_materializes_context_after_current_fachworkflow') is not True:raise AssertionError('FACHWORKFLOW_CONTEXT_STAGE_BINDING_FAIL')
+    if 'fachworkflow_handoff' in a:raise AssertionError('PREPASS_HANDOFF_STILL_BOUND')
+    rb=a['item_receipt_schema']['textmachine_ruleset_binding'];schema=a['item_receipt_schema']['fachworkflow_pass_schema'];mb=schema['workflow_release_metadata_binding']
+    for key in ('fact_pack','production_plan_item','production_plan_header','workflow_release_item','workflow_release_metadata'):
+        if key not in schema:raise AssertionError('FACHWORKFLOW_CONTEXT_SCHEMA_MISSING:'+key)
     if rb['article_type']!='ratgeber' or rb['article_type_templates_sha256']!=ARTICLE_TYPE_TEMPLATES_SHA:raise AssertionError('ARTICLE_TYPE_RULESET_BINDING_FAIL')
     if set(mb['required_fields'])!=RELEASE_KEYS or mb['exact_five_batch_sha256']!=_runtime_batch_identity()[0] or mb['exact_five_item_count']!=_runtime_batch_identity()[1]:raise AssertionError('RELEASE_METADATA_SCHEMA_BINDING_FAIL')
     live_batch,live_count=_runtime_batch_identity()
-    if not re.fullmatch(r'[0-9a-f]{64}',live_batch) or live_count<1:raise AssertionError('RUNTIME_BATCH_IDENTITY_FAIL')
     good={'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count};_validate_release_metadata_identity(good,live_batch,live_count)
     for bad,label in [({'exact_five_batch_sha256':'0'*64,'exact_five_item_count':live_count},'BATCH'),({'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count+1},'COUNT')]:
         try:_validate_release_metadata_identity(bad,live_batch,live_count);raise AssertionError('RELEASE_METADATA_NEGATIVE_NOT_BLOCKED:'+label)
         except ViewError:pass
-    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'handoff_request_bound':True,'article_type_ruleset_bound':True,'strict_real_stage_validator':True,'release_metadata_batch_bound':True,'release_metadata_item_count_bound':True,'content_or_quality_authority':'NONE','publish_allowed':False}
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'prepass_handoff_bound':False,'article_type_ruleset_bound':True,'fachworkflow_context_schema_bound':True,'release_metadata_batch_bound':True,'release_metadata_item_count_bound':True,'content_or_quality_authority':'NONE','publish_allowed':False}
 
 def main(argv:list[str])->int:
     try:
