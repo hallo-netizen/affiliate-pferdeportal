@@ -123,6 +123,8 @@ def run_in_container(task: dict, run: Path, command: str) -> subprocess.Complete
         "--cap-drop", "ALL",
         "--security-opt", "no-new-privileges",
         "--pids-limit", "256",
+        "--user", f"{os.getuid()}:{os.getgid()}",
+        "--env", "HOME=/tmp",
         "--tmpfs", "/tmp:rw,nosuid,nodev,size=256m",
         "-v", f"{workspace}:/workspace:rw",
         "-w", "/workspace",
