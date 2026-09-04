@@ -173,9 +173,100 @@ def m32():
     must("if ppm_env else (repo / PPM679_PACKAGE_REL)" in src and "if pserc_env else (repo / PSERC_FIX_PACKAGE_REL)" in src,"M32_ENV_STILL_MANDATORY")
 
 def m33():
-    out=cmd("control/startmaster0107/ENDSTEMPEL_TEST.py")
-    must("ENDSTEMPEL_FIXED_TESTS_PASS" in out,"M33_ENDSTEMPEL_POSNEG")
+    # Historical M33 is specifically: final GitHub endstamp must not depend on
+    # a Codex git remote / GH_TOKEN / Codex push. Reproduce exactly that.
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+    from cryptography.hazmat.primitives import serialization
+    g=mod(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py","m33_github_final")
+
+    def make_fixture(root:Path, signer_key):
+        batch="c"*64
+        srcdir=root/"control/startmaster0107/recovery_sources"/batch
+        srcdir.mkdir(parents=True,exist_ok=True)
+        rows=[]; plan_items=[]; release_items=[]; packs=[]; originals={}
+        for i in range(1,8):
+            slot=format(i,"064x"); cid=f"article:m33-{i}"; body=f"<p>M33 article {i}</p>\\n"
+            name=f"ARTICLE_{slot}.md"; p=srcdir/name; p.write_text(body,encoding="utf-8")
+            originals[name]=p.read_bytes()
+            rows.append({"ref":str(p.relative_to(root)),"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"plan_slot":slot})
+            packs.append({"contract":"canonical_fact_pack_v1","fact_pack_id":f"m33-{i}"})
+            plan_items.append({"canonical_article_id":cid,"canonical_article":{"body_html":body}})
+            release_items.append({"plan_slot":slot,"canonical_article_id":cid})
+        bundle={"contract":"canonical_fact_pack_import_v1","fact_packs":packs}
+        plan={"contract":"production_plan_v4","items":plan_items}
+        release={"contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","status":"PASS","wordpress_write_performed":False,
+                 "exact_five_batch_sha256":batch,"exact_five_item_count":7,"items":release_items}
+        bh=g.stable_hash(bundle); ph=g.stable_hash(plan); rh=g.stable_hash(release)
+        env={"contract":g.PACKAGE_CONTRACT,"fact_pack_bundle_sha256":bh,"production_plan_sha256":ph,
+             "workflow_release_sha256":rh,"package_id":g.stable_hash({"contract":g.PACKAGE_CONTRACT,
+             "fact_pack_bundle_sha256":bh,"production_plan_sha256":ph,"workflow_release_sha256":rh}),
+             "source":"M33_REGRESSION","fact_pack_bundle":bundle,"production_plan":plan,"workflow_release":release}
+        env["package_payload_sha256"]=g.stable_hash(env)
+        ep=srcdir/g.IMPORT_ENVELOPE_NAME; ep.write_bytes(g.canonical(env)); eh=g.file_sha256(ep)
+        must(eh==g.stable_hash(env),"M33_ENVELOPE_CANONICAL_FILE_HASH")
+        manifest={"contract":g.SOURCE_CONTRACT,"batch_sha256":batch,"item_count":7,"items":rows,
+                  "import_envelope_ref":str(ep.relative_to(root)),"import_envelope_sha256":eh,
+                  "publish_allowed":False,"content_mutation_performed":False}
+        mp=srcdir/"MANIFEST.json"; dump(mp,manifest)
+
+        pub=signer_key.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)
+        pub_b64=__import__("base64").b64encode(pub).decode("ascii"); pub_sha=hashlib.sha256(pub).hexdigest()
+        kid="m33-"+pub_sha[:16]
+        raw=signer_key.private_bytes(serialization.Encoding.Raw,serialization.PrivateFormat.Raw,serialization.NoEncryption())
+        raw_b64=__import__("base64").b64encode(raw).decode("ascii")
+        sp=root/"m33_signer.py"
+        sp.write_text("""#!/usr/bin/env python3
+import base64,hashlib,json,sys
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+RAW=base64.b64decode(%r); key=Ed25519PrivateKey.from_private_bytes(RAW)
+pub=key.public_key().public_bytes_raw(); sha=hashlib.sha256(pub).hexdigest()
+req=json.loads(sys.stdin.read())
+out={"signing_key_id":"m33-"+sha[:16],"signing_public_key_sha256":sha,
+     "public_key_b64":base64.b64encode(pub).decode("ascii"),
+     "signature_b64":base64.b64encode(key.sign(req["manifest_sha256"].encode("ascii"))).decode("ascii")}
+print(json.dumps(out,separators=(",",":")))
+""" % raw_b64,encoding="utf-8")
+        return mp, originals, {"signing_key_id":kid,"signing_public_key_sha256":pub_sha,"public_key_b64":pub_b64}, sp
+
+    env_keys=("ENDSTEMPEL_HSM_CMD","ENDSTEMPEL_TRUSTED_KEY_ID","ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256",
+              "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64","GH_TOKEN")
+    old={k:os.environ.get(k) for k in env_keys}
+    try:
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)/"repo"; root.mkdir()
+            must(not (root/".git").exists(),"M33_FIXTURE_MUST_HAVE_NO_GIT_REMOTE")
+            key=Ed25519PrivateKey.generate(); mp,orig,trust,sp=make_fixture(root,key)
+            g.REPO=root
+            os.environ.pop("GH_TOKEN",None)
+            os.environ["ENDSTEMPEL_HSM_CMD"]=PY+" "+str(sp)
+            os.environ["ENDSTEMPEL_TRUSTED_KEY_ID"]=trust["signing_key_id"]
+            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256"]=trust["signing_public_key_sha256"]
+            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64"]=trust["public_key_b64"]
+            z=g.finalize(str(mp.relative_to(root)))
+            must(z.get("status")=="GITHUB_FINAL_RELEASE_PASS","M33_NO_GIT_POSITIVE_NOT_PASS")
+            final=root/z["final_ref"]
+            must(final.is_file() and final.name==g.FINAL_FILENAME,"M33_FINAL_FILE_MISSING")
+            for name,raw in orig.items(): must((mp.parent/name).read_bytes()==raw,"M33_ARTICLE_MUTATED:"+name)
+            expect_exc(lambda:g.finalize(str(mp.relative_to(root))),"REPLAY_BLOCKED")
+
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)/"repo"; root.mkdir()
+            good=Ed25519PrivateKey.generate(); mp,_,trust,_=make_fixture(root,good)
+            wrong=Ed25519PrivateKey.generate(); _,_,_,wrong_sp=make_fixture(root/"wrong-signer",wrong)
+            g.REPO=root
+            os.environ.pop("GH_TOKEN",None)
+            os.environ["ENDSTEMPEL_HSM_CMD"]=PY+" "+str(wrong_sp)
+            os.environ["ENDSTEMPEL_TRUSTED_KEY_ID"]=trust["signing_key_id"]
+            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256"]=trust["signing_public_key_sha256"]
+            os.environ["ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64"]=trust["public_key_b64"]
+            expect_exc(lambda:g.finalize(str(mp.relative_to(root))),"SIGNER_IDENTITY_MISMATCH")
+    finally:
+        for k,v in old.items():
+            if v is None: os.environ.pop(k,None)
+            else: os.environ[k]=v
+
     wf=(REPO/".github/workflows/pferde-atelier-endstempel.yml").read_text(encoding="utf-8")
+    must("persist-credentials: false" in wf,"M33_CODEX_CREDENTIALS_NOT_DISABLED")
     must("actions/upload-artifact" in wf and "actions/download-artifact" in wf,"M33_DURABLE_GITHUB_TRANSPORT")
     must("git remote" not in wf,"M33_CODEX_GIT_REMOTE_DEPENDENCY")
 
