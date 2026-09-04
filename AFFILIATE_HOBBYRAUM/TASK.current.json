@@ -1,15 +1,33 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "fix-live-candidate-version-6-64-2",
-  "goal": "Korrigiere ausschließlich die WordPress-Pluginversion des Live-Kandidaten konsistent auf 6.64.2 und ziehe die notwendigen Release-Bindungen nach.",
+  "task_id": "fix-live-candidate-version-6-72-1",
+  "goal": "Korrigiere ausschließlich die WordPress-Pluginversion des Live-Kandidaten konsistent auf 6.72.1, weil die installierte Version 6.72.0 ist, und ziehe die notwendigen Release-Bindungen nach.",
   "image": "php:8.2-cli",
   "inputs": [
-    {"src":"release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php","dest":"release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php"},
-    {"src":"release/affiliate-zentrale/current/affiliate-portal-router/readme.txt","dest":"release/affiliate-zentrale/current/affiliate-portal-router/readme.txt"},
-    {"src":"release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt","dest":"release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"},
-    {"src":"control/release-governance/CURRENT_RELEASE.json","dest":"control/release-governance/CURRENT_RELEASE.json"},
-    {"src":"protocol/AFFILIATE_RELEASE_WORK_BELL.py","dest":"protocol/AFFILIATE_RELEASE_WORK_BELL.py"},
-    {"src":"protocol/AFFILIATE_RELEASE_LIVE_CANDIDATE_BUILD_20260902.md","dest":"protocol/AFFILIATE_RELEASE_LIVE_CANDIDATE_BUILD_20260902.md"}
+    {
+      "src": "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
+      "dest": "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php"
+    },
+    {
+      "src": "release/affiliate-zentrale/current/affiliate-portal-router/readme.txt",
+      "dest": "release/affiliate-zentrale/current/affiliate-portal-router/readme.txt"
+    },
+    {
+      "src": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+      "dest": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"
+    },
+    {
+      "src": "control/release-governance/CURRENT_RELEASE.json",
+      "dest": "control/release-governance/CURRENT_RELEASE.json"
+    },
+    {
+      "src": "protocol/AFFILIATE_RELEASE_WORK_BELL.py",
+      "dest": "protocol/AFFILIATE_RELEASE_WORK_BELL.py"
+    },
+    {
+      "src": "protocol/AFFILIATE_RELEASE_LIVE_CANDIDATE_BUILD_20260902.md",
+      "dest": "protocol/AFFILIATE_RELEASE_LIVE_CANDIDATE_BUILD_20260902.md"
+    }
   ],
   "writable": [
     "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
