@@ -1,0 +1,227 @@
+# ZENTRALES MODULREGISTER
+
+STAND: 2026-09-05
+ZWECK: Der Nutzer muss sich NICHT merken, welche Grundmodule existieren, wo sie liegen oder ob sie projektübergreifend nutzbar sind.
+
+## Rolle
+
+Das Modulregister ist kein zusätzliches Fachbüro und keine zweite technische Wahrheit.
+
+Es ist der zentrale Karteikasten des Campus:
+- Welche Module gibt es?
+- Was ist ihr Hauptort?
+- Sind sie allgemeingültig oder projektbezogen?
+- Welcher Stand ist belegt?
+- Welche Projekte nutzen sie?
+- Welche Voraussetzungen gelten?
+
+Die technische Wahrheit bleibt beim jeweiligen Modul.
+
+## Pflichtprüfung
+
+Das Modulregister wird automatisch geprüft bei:
+- neuem Projekt;
+- neuer Masterdatei;
+- neuem Plugin/Modul;
+- geplanter Wiederverwendung;
+- Frage „haben wir dafür schon etwas?“.
+
+Bei normaler Facharbeit ohne Modulbezug muss es nicht jedes Mal vollständig gelesen werden.
+
+## Modulklassen
+
+### ALLGEMEINGÜLTIG
+Der Modul-Kern ist projektunabhängig.
+Hauptort liegt unter `ALLGEMEINGUELTIGE_BAUSTEINE/`.
+
+### PROJEKTBEZOGEN
+Der Modul-Kern ist bewusst nur für ein bestimmtes Projekt bestimmt.
+Hauptort liegt im jeweiligen Projektgebäude.
+
+### UNGEKLÄRT
+Die Modulklasse ist noch nicht belastbar geklärt.
+Default bei Unsicherheit.
+Nicht automatisch verschieben oder wiederverwenden.
+
+## Wichtig: GEMISCHT ist KEINE Modulklasse
+
+„Gemischt“ beschreibt eine Datei/Masterakte, die z. B.:
+- allgemeinen Plugin-Code
+- plus projektspezifische Konfiguration
+- plus Projekthistorie
+
+enthält.
+
+Dann wird die Masterakte im Büro inventarisiert und in Bestandteile zerlegt.
+Der allgemeine Modul-Kern kann trotzdem eindeutig ALLGEMEINGÜLTIG sein.
+
+## Pflichtfelder je Modul
+
+- MOD-ID
+- NAME
+- MODULKLASSE
+- STATUS / Prüfgrad
+- HAUPTORT
+- AKTUELL BELEGTER STAND
+- ZWECK
+- ABHÄNGIGKEITEN
+- NUTZENDE PROJEKTE
+- AUTORITATIVE QUELLE / BELEG
+- OFFENE PUNKTE
+
+## MOD-001 – KATEGORIENMODELL
+
+MODULKLASSE: ALLGEMEINGÜLTIG
+STATUS: Master R10/R9 + WordPress-Plugin V1.8.0 hart inventarisiert; lokaler/fresh Prüfstand PASS; Live-WordPress-Deployment noch nicht PASS
+HAUPTORT: `ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/`
+AKTUELL BELEGTER STAND:
+- Master 016 R10/R9 Runtime Deployment
+- Plugin V1.8.0
+ZWECK:
+evidenzbasierte, allgemeingültige Kategorie-/Strukturentwicklung für Content, HivePress/Marketplace und explizit gebundene Journal-Taxonomien
+ABHÄNGIGKEITEN:
+- WordPress >= 6.4
+- PHP >= 8.1
+- DataForSEO für gebundene Research-Schritte
+- HivePress nur wenn Marketplace-Säule genutzt wird
+NUTZENDE PROJEKTE:
+- historischer Real-/Pilotbeleg Gaumen Atelier im Master; keine fachliche Vererbung
+- konkrete neue Projektnutzungen bei Einsatz eintragen
+AUTORITATIVE QUELLE:
+`ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/CURRENT_STATE.md`
+ARCHIV:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/2026-09-05/`
+OFFEN:
+echter Live-WordPress-Deploymentlauf auf Zielinstallation
+
+## MOD-002 – BILDZENTRALE
+
+MODULKLASSE: ALLGEMEINGÜLTIG
+STATUS: allgemeingültiger Modul-Kern; aktueller 2.6.9-Installer + Nullpunkt 069 als Dateien vorhanden; beide Installer byte-identisch; Pferde-LIVE-Version 2.6.9 separat belegt
+HAUPTORT: `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
+AKTUELL BELEGTER LIVE-STAND: 2.6.9 im Pferde-Atelier
+ZWECK:
+- Beiträge
+- WordPress-Taxonomien
+- optionale HivePress-Taxonomien
+- Pixabay
+- Pexels
+- Magnific
+- sichere Profile
+- Export/Import
+- Readback-Fallback
+ABHÄNGIGKEITEN: WordPress; optionale HivePress-Nutzung; Providerzugänge
+NUTZENDE PROJEKTE:
+- PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/BILD/`
+BELEG:
+- allgemeiner Installer 2.6.9
+- Nullpunkt 069
+- Byte-Identität beider 2.6.9-Installer
+- bestehende Nutzerbestätigung LIVE 2.6.9 im Pferde-Atelier
+- Pferde Master 049 / historischer 2.4.9-Codebeleg
+- 2.6.6-Konfigurationsbeleg
+OFFEN:
+- keine Fachprüfung in diesem Sortierschritt.
+
+## Projektanwendung
+
+Ein Projekt, das ein allgemeingültiges Modul nutzt, speichert NICHT den Modul-Kern ein zweites Mal als Hauptwahrheit.
+
+Im Projekt bleiben nur:
+- Verweis auf MOD-ID/Hauptort;
+- projektspezifische Konfiguration;
+- Projektdaten;
+- projektspezifische Historie;
+- projektspezifische Fehler und Tests.
+
+## Automatische Klassifizierung neuer Eingänge
+
+1. Masterdatei vollständig inventarisieren.
+2. Bestandteile trennen: Code / Konfiguration / Daten / Historie / Tests / Protokolle.
+3. Modul-Kern identifizieren.
+4. Bei Unsicherheit zunächst MODULKLASSE = UNGEKLÄRT.
+5. Auf harte Projektverdrahtung und Konfigurierbarkeit prüfen.
+6. Modulklasse festlegen.
+7. Genau einen Hauptort festlegen.
+8. Projektanwendungen nur verweisen.
+9. Modulregister aktualisieren.
+
+Der Nutzer muss diese Einordnung weder erinnern noch manuell vorgeben.
+
+
+## MOD-003 – UNIVERSAL PORTAL DESIGN SUITE
+
+MODULKLASSE: ALLGEMEINGÜLTIG
+STATUS: V2.2.40 / Contract V104 hart inventarisiert; spätere GitHub-Pferdehistorie bestätigt ausdrücklich „kein Universal-Update erforderlich“
+HAUPTORT:
+`ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/`
+AKTUELL BELEGTER STAND:
+- Plugin 2.2.40
+- Designvertrag V104
+ABHÄNGIGKEITEN:
+- WordPress >= 6.0
+- PHP >= 7.4
+- HivePress-Funktionen nur bei entsprechender Nutzung
+NUTZENDE PROJEKTE:
+- PFERDE_ATELIER → eigene Projektlinie unter `PROJEKTE/PFERDE_ATELIER/DESIGN/`
+BELEG:
+- übergebener Universal Plugin/Master
+- GitHub `UNIVERSAL_STATUS.md` auf Commit `f1e074b...`
+ARCHIV:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-05/`
+
+## MOD-004 – HIVEPRESS-ANZEIGENSUCHE
+
+MODULKLASSE: UNGEKLÄRT
+
+STATUS:
+als separater Plugin-/Source-Baustein in Universal- und Pferde-Designmaster erkannt; eigener Audit noch offen.
+
+HAUPTORT:
+bis zur Modulklassifizierung ausschließlich dieser MOD-004-Registereintrag plus die unten genannten Belegquellen.
+Kein eigener freigegebener Modulraum.
+
+AKTUELL BELEGTER STAND:
+v2.1.5 als Universal- und Pferde-Artefakt in den Designmastern.
+
+ZWECK:
+separater HivePress-Anzeigensuche-Baustein; weitergehende Modulfreigabe UNGEKLÄRT.
+
+ABHÄNGIGKEITEN:
+UNGEKLÄRT bis separatem Audit.
+
+NUTZENDE PROJEKTE:
+PFERDE_ATELIER als belegter Projektkontext.
+
+AUTORITATIVE QUELLEN / BELEGE:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/MASTERDATEIEN_INVENTAR.md`
+- `PROJEKTE/PFERDE_ATELIER/DESIGN/MASTERDATEIEN_INVENTAR.md`
+- Universal: `UNIVERSAL_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
+- Pferde: `PFERDE_ATELIER_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
+
+OFFENE PUNKTE:
+separater Modul-Audit.
+
+REGEL:
+Nicht im Designmaster verlieren; keine Allgemeingültigkeit behaupten.
+
+
+## MOD-005 – UNIVERSAL RESEARCH & FILL
+
+MODULKLASSE: ALLGEMEINGÜLTIG
+STATUS: aktueller Plugin-/Master-Dateibeleg 1.9.9; externer Plugin-ZIP und im Master eingebetteter CURRENT_PLUGIN-ZIP byte-identisch.
+HAUPTORT: `ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
+AKTUELL BELEGTER STAND:
+- Plugin 1.9.9
+- Master 1.9.9
+HISTORISCH:
+- Plugin 1.9.5
+- Master 1.9.5
+NUTZENDES PROJEKT:
+- PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/HIVEPRESS/`
+PROJEKTBEZUG:
+`config/pferde-atelier.php`
+GITHUB-ABGLEICH:
+auf aktuellem `main` kein eigener URF-Dateistand unter den entsprechenden Namen/Pfaden gefunden.
+ARCHIV:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`

@@ -1,0 +1,137 @@
+# STARTMASTER0107 – KOMPLETTE AKTUELLE FEHLERLISTE – 05.09.2026
+
+## A. M01–M33 – bestehende historische Regressionen
+
+| ID | Fehlerklasse | Teststatus | Live-Status / Bemerkung |
+|---|---|---|---|
+| M01 | State-/Bundle-Hash chain | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M02 | Unique article files / keine ARTICLE.md-Kollision | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M03 | PREPARED Persist/Restore | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M04 | Finalize CLI real aufrufbar | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M05 | Durable Release/Receipt | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M06 | No fake production contract | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M07 | Recovery not automatically final | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M08 | PPM 6.7.9 Original-ZIP vorhanden | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M09 | PSERC-FIX Original-ZIP vorhanden | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M10 | Preflight fail-closed | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M11 | Real PPM call | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M12 | Fake PPM blocked | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M13 | PPM content_hash == final article SHA | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M14 | Current Action Handoff | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M15 | 107007 Handoff instruction konsistent | im bestehenden Runner enthalten | **Runner-Test war stale:** verbot aktuellen gebundenen Handoff-Request bzw. wertete `kein submit-request` als Treffer. Im Hobbyraum auf aktuelle Sollarchitektur korrigiert; Positiv-/Negativlogik geprüft. Kein eigener Live-Produktionsblocker. |
+| M16 | Signer boundary außerhalb Codex | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M17 | 107008 fail-closed | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M18 | ENDSTEMPEL constants | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M19 | Merge trigger | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M20 | Delivery 7 Artikel + Envelope + Manifest | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M21 | No auto-publish | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M22 | H8 Provenance / Integrität ohne interne Signatur | im bestehenden Runner enthalten | Altregel korrigiert: 107007-Vorlauf bleibt hash-/batch-/herkunftsgebunden, verlangt aber keine interne ED25519-Signatur mehr. |
+| M23 | Preproduction/Runtime Guards | im bestehenden Runner enthalten | Altregel korrigiert: intern nur Hash-/Herkunftsbindung; externe Signierung nach abgeschlossener Produktion bleibt separat erhalten. |
+| M24 | No H8 rollback | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M25 | Article prompt / Fachworkflow boundary | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M26 | Bound Fachworkflow production context | im bestehenden Runner enthalten | früher mehrfach LIVE BLOCKED; auf aktuellem main im letzten Lauf überwunden |
+| M27 | Current-main / production environment identity | im bestehenden Runner enthalten | Preflight/HEAD im letzten Lauf PASS |
+| M28 | Fachworkflow-Handoff request executable | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M29 | Release metadata current-batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M30 | Final context batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M31 | Codex-native bound action / kein separater Executor | im bestehenden Runner enthalten | **Runner-Test war stale:** erwartete fälschlich überhaupt keinen `fachworkflow_handoff`. Aktueller Sollweg bindet den Handoff innerhalb derselben Current Action und verlangt ausdrücklich keinen separaten Executor/keine separate Capability. Im Hobbyraum korrigiert und positiv/negativ geprüft. |
+| M32 | PPM runtime package path ohne Env-Abhängigkeit | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M33 | GitHub ENDSTEMPEL ohne Codex git auth | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+
+## B. Reale Blocker / Wiederholungsfehler außerhalb bzw. quer zur Matrix
+
+### B01 – WordPress-Kategorie-Identität
+- Bereits am 28.08. als Wiederholungsfehler dokumentiert.
+- Historisch: Name/Slug/Taxonomy müssen korrekt zur gebundenen Kategorie passen.
+- Aktuell erster Live-Blocker auf main: `BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION`.
+- **Kausalbefund 05.09.:** Der aktuelle Handoff blockiert vor dem echten PPM allein auf fehlender numerischer WordPress-ID, obwohl der vorhandene Kategorievertrag Name/Slug/Taxonomy bindet.
+- Exakter Guard-Positiv-/Negativtest:
+  - gültige Name/Slug/Taxonomy ohne ID → alter Guard **BLOCK**, KISS-Guard **PASS**
+  - gültige Kategorie mit ID → alt **PASS**, neu **PASS**
+  - fehlender Name trotz ID → alt fälschlich **PASS**, neu **BLOCK**
+  - falsche Taxonomy trotz ID → alt fälschlich **PASS**, neu **BLOCK**
+  - fehlender Slug → alt **BLOCK**, neu **BLOCK**
+- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, aktueller Head `7990029428399e8ba01d88a6543ce068812e9218`.
+- Kandidat ändert keine SEO-/Textmaschinen-/PPM-Regel; nur der bestehende Handoff verwendet die ID nicht mehr als vorgezogene Produktionsvoraussetzung.
+- `hardlock` und `hardlock-base` auf Head `7990029…`: PASS.
+- **Noch nicht behauptet:** kompletter M01–M33-PASS auf diesem Head oder echter neuer 7/7-Live-PASS.
+- **Harte Nutzerregel:** Nicht durch Erweiterung des SEO-5-Felder-Handoffs lösen.
+
+### B02 – `BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
+- 04./05.09 mehrfach erster realer Blocker vor Artikel 1.
+- Ursache im aktuellen Vertrag: Codex-Worker-Rolle nicht hart genug als Fachworkflow-Ausführung gebunden.
+- PR #136 bindet Current Codex als Fachworkflow-Worker.
+- Letzter Live-Lauf auf `c8a96e7…` kam über diesen Blocker hinaus → derzeit **live überwunden**.
+
+### B03 – PPM-/PASS-Reihenfolge / Kreisschluss
+- Nach Einführung echten PPM 6.7.9 wurde zeitweise ein bereits vollständiger Fachworkflow-PASS/Receipt vor dem realen PPM faktisch vorausgesetzt.
+- PR #135 ordnet vorhandenen Handoff neu: realer Fachoutput → echter PPM → erst danach finaler PASS/Receipt.
+- 4 positive + 4 negative Prinziptests PASS; vollständiger Livebeweis noch ausstehend, weil Live vorher am Kategoriepunkt stoppt.
+
+### B04 – Fake-PPM-PASS im Handoff
+- Prinziptest fand, dass ein behaupteter PPM-PASS zunächst bis zum nachgelagerten Validator gelangen konnte.
+- Fail-closed im Handoff geschlossen: PPM-Stufe verlangt echte `ppm679_binding` und realen PPM-Pfad.
+
+### B05 – `CODEX_CHECKOUT_NOT_CURRENT_MAIN` / stale Environment
+- Historisch wiederholt.
+- Aktueller Preflight verlangt/prüft main-Identität; letzter Live-Lauf HEAD exakt `c8a96e7…` PASS.
+
+### B06 – `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`
+- Hobbyraum kann absichtlich keinen Produktionsproof liefern, weil Preflight current main verlangt.
+- Kein Produktionsfehler auf aktuellem main; wichtig für Testmethodik.
+
+### B07 – Runtime-Pakete PPM/PSERC nicht gebunden / Env-Variablen fehlen
+- Historisch: `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` fehlten.
+- Repo-gebundene Pakete später ergänzt; Original-SHAs dokumentiert.
+
+### B08 – `BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING`
+- Historischer realer Blocker nach PPM-Härtung.
+- Später präzisiert: Bootstrap-Paket ist nicht Fachworkflow-Kontext.
+
+### B09 – `ITEM_RECEIPT_FIELDS_OR_CONTRACT_INVALID` / Pass-Ref-Mismatch
+- Historische Übergabe-/Receipt-Probleme während Handoff-Umstellungen.
+
+### B10 – `RELEASE_METADATA_INVALID`
+- Historischer Blocker: Release-Metadaten nicht exakt an Batch/Count gebunden.
+
+### B11 – `FINAL_CONTEXT_BATCH_MISMATCH`
+- Historischer Blocker zwischen 107007/107008/Host-Finalisierung.
+
+### B12 – `STAGING_DESTINATION_COLLISION:ARTICLE.md`
+- Reale 7/7-Produktion auf `d841ed…` erzeugte 7 Artikel und alle 12 Stages, kollidierte danach wegen gemeinsamem `ARTICLE.md`.
+- Später mit artikel-/plan-slot-eindeutigen Dateinamen adressiert.
+
+### B13 – GitHub Endstempel / fehlendes remote/auth
+- Reale `de21…`-Strecke erreichte 107008 PASS; danach Endstempel/Auth-Persistenzproblem.
+- Hostseitiger Signer/Endstempelweg später gehärtet.
+
+### B14 – Test-Live-Paritätslücke
+- Systemischer Fehler: Regressionstests können PASS melden, obwohl die reale Verkettung nicht bewiesen ist.
+- Besonders kritisch: der sogenannte „last real regression re-check“ im Runner ist kein echter Replay des letzten 7/7-Laufs.
+- Dieser Punkt erklärt die wiederkehrende Erfahrung „Tests grün, Live wieder alter Fehler“.
+
+### B15 – Interne Signieraltlasten aus altem Raum-zu-Raum-Modell
+- Historische Sollentscheidung: **innerhalb der Produktion keine kryptografische Arbeiter-/Raum-Signierung; externe Versiegelung erst nach abgeschlossener Produktion**.
+- Harte Prüfung 05.09. fand trotzdem aktive interne Reste in H8-Bootstrap/Provenance, Preproduction-Handoff, Runtime-Guard, Codex-Preflight und im gebundenen Generation-1-H8-Paket.
+- Hobbyraum-Säuberung auf PR #140: interne Signaturpflicht entfernt; Hash-, Batch-, Slot- und Herkunftsbindung bleiben erhalten.
+- Externe Signierung **nicht entfernt**: hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation bleiben unverändert.
+- Link-/Tabellen-/LanguageTool-/PPM-/PSERC-/PSTE-/SEO-/Designregeln wurden nicht gelockert oder entfernt.
+- M22/M23 sowie die stale M26/M28-Testlogik wurden an den aktuellen Sollweg angepasst.
+- **SCOPE-PASS 05.09.:** aktiver Call-Graph bis 107007 enthält keine interne ED25519-/Signer-/Key-/`SIGNED`-Pflicht mehr; aktuelles gebundenes H8-Paket ist `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder.
+- Interne `HASH_BOUND`-Metadaten werden erst in `finalize_after_107008` in den externen `WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED`-Vertrag überführt.
+- Externer Production-Release-/ENDSTEMPEL-Weg bleibt signiert; der Host-Signer wird erst im 107008-Endzustand verlangt und bleibt für den Codex-Worker verboten.
+- `hardlock` + `hardlock-base` auf Head `7990029428399e8ba01d88a6543ce068812e9218`: **PASS**.
+- **Noch offen:** vollständiger M01–M33-Lauf auf exakt diesem Head; daher kein Hobbyraum-GESAMT-PASS und kein Live-PASS.
+
+## C. Letzte real bewiesene positive Referenzen
+
+- `d841ed7590436ac100b98f15194874573e09bc03`: 7/7 frisch produziert; alle zwölf Stages; späterer Lauf erreichte 107008.
+- `de21f6cd35c60849c551fd82f78e75ce57c99fab`: 7/7 + 107008 Review PASS; späterer Fehler erst im GitHub-Endstempel/Auth-Bereich.
+
+## D. Aktuell offen
+
+**Nur ein aktueller erster Live-Blocker ist auf main belegt:** `BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION` beim ersten Artikel auf main `c8a96e7…`.
+
+Für genau diesen Blocker existiert jetzt ein kausal begründeter Hobbyraum-Kandidat (#140). Die alte ID-Vorbedingung ist als unmittelbare Blockierursache auf Codeebene positiv/negativ belegt. Ob danach weitere Live-Fehler folgen, ist ausdrücklich offen.
+
+Keine Aussage, dass B01 der letzte Fehler der Kette ist; der letzte reale Lauf wurde korrekt am ersten Blocker beendet.

@@ -1,0 +1,162 @@
+# BAUCONTAINER – NEUES PROJEKTGEBÄUDE
+
+Zweck: Minimaler Ablauf für ein eigenständiges neues Projekt.
+
+## Vor dem Bau
+
+1. Hauptpförtner lesen.
+2. Projektziel/Anforderungen bestimmen.
+3. Modulregister prüfen.
+4. nur passende allgemeingültige Module auswählen.
+5. nur wirklich fehlende Funktionen neu vorsehen.
+
+## Minimaler Aufbau
+
+```
+protocol/PROJECT_MEMORY/PROJEKTE/<PROJEKT>/
+├── START_HERE.md
+└── <ERSTES_BÜRO>/
+    ├── START_HERE.md
+    ├── CURRENT_STATE.md
+    └── HOBBYRAUM.md
+```
+
+## Pflicht für jeden neuen Eingang
+
+Jedes neue Gebäude und jedes neue Büro MUSS den Standard erfüllen:
+
+`BAUCONTAINER/EINGANGSSTANDARD.md`
+
+Also oben sofort:
+- WAS IST DAS?
+- HIER BIST DU RICHTIG, WENN …
+- DU DARFST …
+- DU DARFST NICHT …
+- ALS NÄCHSTES …
+
+**Ein Klick = alles klar.**
+
+## Nutzung allgemeiner Module
+
+Allgemeiner Kern bleibt an seinem Hauptort.
+
+Projekt dokumentiert nur:
+- MOD-ID
+- Hauptort
+- verwendeten Stand
+- projektspezifische Konfiguration
+- Projektdaten/-historie
+
+## Weitere Regeln
+
+- weitere Büros erst bei echtem Bedarf;
+- keine bestehende Projektarchitektur blind kopieren;
+- Fehler nur als Verweis registrieren;
+- wichtige Änderungen mit WARUM dokumentieren.
+
+Projektgebäude kann technisch im selben oder eigenen Repository liegen.
+
+
+## Neue Bauvorschriften – verpflichtend
+
+### Flur-/Adressregel
+- jedes neue Verzeichnis unter PROJECT_MEMORY erhält sofort `START_HERE.md`;
+- neues Projekt zusätzlich in `PROJEKTE/START_HERE.md` eintragen;
+- bestehende/verteilte Adressen nicht still umbenennen; bei Umbau Weiterweiser erhalten.
+
+### Büro-Leitungen
+Jedes neue Projektbüro führt vor echter Arbeit sichtbar über:
+1. `CURRENT_STATE.md`;
+2. `HOBBYRAUM.md`;
+3. Handlungsverzeichnis;
+4. Fehlerregister;
+5. Änderungsregister;
+6. Zielvertragsregister;
+7. gebundenen Arbeitsweg.
+
+### Hobbyraum
+Pflicht:
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md`
+
+Genau ein Hobbyraum pro Büro.
+Zustände nur:
+FREI / AKTIV / BLOCKED.
+
+Direktlink in HOBBYRAUM muss selbst 1-Klick-konform sein.
+
+### Abnahme
+Vor Freigabe eines neuen Gebäudes:
+positive und negative Architekturprüfung gegen
+`BAUCONTAINER/EINGANGSSTANDARD.md`
+und
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md`.
+
+
+## Informationsrollen für neue Büros
+
+Neue Büros werden nur mit dieser Trennung freigegeben:
+- START_HERE = Wegweiser
+- CURRENT_STATE = aktuelle Büro-Zusammenfassung
+- HOBBYRAUM = aktuelle Arbeitsbindung / NEXT ACTION
+- FEHLERREGISTER = Index zur Fehlerquelle
+- ZIELVERTRAEGE/REGISTER = Index zur Zielquelle
+- ARCHIV = Historie
+
+Vor Freigabe negativ prüfen:
+- keine dynamischen Versionsangaben in START_HERE als zweite Wahrheit;
+- keine Fehlerhistorie in HOBBYRAUM;
+- keine ausführliche Fehlerkopie im zentralen Fehlerregister.
+
+
+## Spezialworker / Paul – verpflichtende Trennung
+
+Für jedes neue Projekt gilt:
+- Spezialworker sind kein normaler Routing-Schritt;
+- Aktivierung nur durch ausdrücklichen Auftrag;
+- alle Projekt-/Büro-/Campusakten dürfen gelesen, aber vom Spezialworker nicht verändert werden;
+- technischer Schreibbereich + eigener Worker-Branch müssen ausdrücklich gebunden sein;
+- ohne Schreibbereich = READ ONLY;
+- derselbe technische Bereich hat gleichzeitig nur einen Schreiber;
+- Worker integriert/merged nicht selbst;
+- zuständiger Arbeitschat entscheidet über Übernahme und aktualisiert anschließend Stand/Protokolle.
+
+Leitsatz:
+**Single Writer, Multi Reader – keine Echtzeit-Synchronisation als Voraussetzung.**
+
+
+### Automatische Paul-Zuweisung bei neuen Projekten
+
+Neue Projekte verwenden für Paul ausschließlich das Schema aus
+`PAUL/AUFTRAG_VORLAGE.md`.
+
+Pflicht:
+- Zuweisung nur als `PAUL_ASSIGNMENT_V1` im zuständigen Hobbyraum;
+- campusweit maximal ein aktiver Paul-Auftrag;
+- exakter `TECHNICAL_BASE_SHA`;
+- exakter `PAUL_BRANCH`;
+- minimaler `WRITE_SCOPE` oder `READ_ONLY`;
+- nur Verweise auf autoritative TASK-/TARGET-/RULES-Quellen;
+- kein eigener Paul-Statusspeicher;
+- bei Beendigung aktiven Block entfernen.
+
+Damit gilt das automatische Paul-Modell auch für künftige Projektgebäude ohne neue Promptarchitektur.
+
+
+### Paul-Branch-Hygiene / Exklusivscope
+
+Bei jeder neuen Paul-Zuweisung:
+- frischen Paul-Branch direkt vom `TECHNICAL_BASE_SHA`;
+- kein Wiederverwenden eines alten Worker-Branches;
+- der gebundene `WRITE_SCOPE` ist für andere parallele PRs gesperrt;
+- unabhängige Scopes dürfen weiterarbeiten.
+
+
+### Backup-/Archiv-Grenze für jedes neue Projekt
+
+Jedes neue Projekt erbt automatisch:
+- Archiv/Tresor/Mirror = READ/VERIFY/RESTORE ONLY;
+- niemals Arbeitsrepository oder Runner-Quelle;
+- Restore nur in frischen Worktree außerhalb der Sicherungsbereiche;
+- danach normale technische Eingangstür neu prüfen.
+
+Keine projektspezifische Ausnahme.
