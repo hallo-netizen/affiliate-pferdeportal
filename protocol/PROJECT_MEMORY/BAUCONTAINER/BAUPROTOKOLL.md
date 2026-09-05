@@ -704,11 +704,12 @@ HARTER BEFUND LANGUAGETOOL:
 - README: unveränderte Offline-Abhängigkeit, nicht als Plugin installieren;
 - aktuelles `main`: keine LanguageTool-/offline_languagetool-/LANGUAGE_TOOL_PREFLIGHT-Treffer;
 - daher aktuelle Nutzung UNGEKLÄRT;
-- persistent unter `/Campus-Archiv/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/` abgelegt.
+- persistent unter `/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/` abgelegt.
 
 KISS-EINORDNUNG:
-- kein neuer Fachstatus;
-- kein neues Modul;
+- **beide Uploads gehören TEXT/SEO**;
+- kein neuer aktueller Fachstatus;
+- kein allgemeingültiges Modul;
 - kein WordPress-Eintrag;
 - CURRENT_STATE unverändert;
 - HOBBYRAUM unverändert;
@@ -720,3 +721,23 @@ beide GELB – jeweils eine persistente verifizierte Rohablage, keine zweite una
 
 BEZUG:
 ARCH-056; HM-001/HM-002.
+
+
+### 2026-09-05 – Korrektur der LanguageTool-Zuordnung
+
+AUSLÖSER:
+Der Nutzer hat klargestellt, dass sowohl das Historienarchiv 0057 als auch LanguageTool fachlich zu TEXT/SEO gehören.
+
+FEHLER:
+LanguageTool war zunächst zu breit unter einem campusweiten allgemeinen Abhängigkeitsarchiv eingeordnet.
+
+KORREKTUR:
+- LanguageTool-Rohdatei aus dem allgemeinen Abhängigkeitspfad verschoben;
+- alter allgemeiner Archivpfad vollständig entfernt;
+- neuer eindeutiger Ort:
+  `/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`;
+- Register, Hausmeisterprotokoll, TEXT-Inventar und WHY entsprechend korrigiert.
+
+WICHTIG:
+Fachzugehörigkeit TEXT/SEO ist jetzt eindeutig.
+Aktuelle operative Nutzung bleibt weiterhin UNGEKLÄRT, weil dafür kein aktueller main-/Produktionsbeleg vorliegt.

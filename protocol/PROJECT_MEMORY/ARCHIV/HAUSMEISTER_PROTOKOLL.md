@@ -53,7 +53,7 @@ Manifest 4.955/4.955 + innerer tar.zst-SHA-256 PASS.
 ERGEBNIS:
 GELB / korrekt historisch / lokale Originalkopie nicht entbehrlich.
 
-## HM-002 – LanguageTool 6.8 als externe Offline-Abhängigkeit archiviert
+## HM-002 – LanguageTool 6.8 als TEXT/SEO-Offline-Abhängigkeit archiviert
 
 DATUM:
 2026-09-05
@@ -69,10 +69,10 @@ INNERES ARTEFAKT:
 SHA-256 `6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d`
 
 NEUER ARCHIVORT:
-`/Campus-Archiv/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
 
 EINORDNUNG:
-externe Offline-Abhängigkeit / nicht Plugin / aktuelle Nutzung UNGEKLÄRT.
+TEXT/SEO-spezifische Offline-Abhängigkeit / nicht Plugin / aktuelle Nutzung UNGEKLÄRT.
 
 AKTIVE VERWEISE:
 kein CURRENT_STATE, Hobbyraum, Fehler- oder Zielvertrag geändert.

@@ -310,13 +310,13 @@ LOKALE_KOPIE_ENTBEHRLICH:
 Grund:
 eine persistente verifizierte Archivablage vorhanden; zweite unabhängige verifizierte Rohablage fehlt.
 
-## ARC-DEP-LANGUAGETOOL-6_8-20260905 – LanguageTool 6.8 Offline-Abhängigkeit
+## ARC-PFERDE-TEXT-LANGUAGETOOL-6_8-20260905 – TEXT/SEO LanguageTool 6.8 Offline-Abhängigkeit
 
 STATUS:
 GELB / AKTUELLE NUTZUNG UNGEKLÄRT
 
 Archiv:
-`/Campus-Archiv/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
 
 Datei:
 `ARBEITSMASTER_0043_TEIL_2_LANGUAGETOOL_6_8.zip`
@@ -346,10 +346,10 @@ README:
 LanguageTool 6.8 = unveränderte Offline-Abhängigkeit; **nicht als Plugin installieren**.
 
 EINORDNUNG:
-- externe Offline-Abhängigkeit;
-- historisch im Produktionsmaschinenbestand belegt;
+- **TEXT/SEO-spezifische Offline-Abhängigkeit**;
+- historisch im TEXT/SEO-Produktionsmaschinenbestand belegt;
 - kein WordPress-Plugin;
-- kein freigegebenes allgemeingültiges Campus-Modul;
+- kein allgemeingültiges Campus-Modul;
 - aktuelle Verwendung auf `main` nicht belegt und daher **UNGEKLÄRT**.
 
 LOKALE_KOPIE_ENTBEHRLICH:

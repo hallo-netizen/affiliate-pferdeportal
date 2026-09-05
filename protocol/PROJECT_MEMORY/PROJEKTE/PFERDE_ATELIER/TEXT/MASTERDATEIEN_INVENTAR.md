@@ -167,10 +167,10 @@ Version 6.8, SHA-256
 `6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d`
 
 Rolle laut Original:
-`UNCHANGED_DEPENDENCY` / Offline-Abhängigkeit / nicht als Plugin installieren.
+`UNCHANGED_DEPENDENCY` / **TEXT/SEO-Offline-Abhängigkeit** / nicht als Plugin installieren.
 
 Archiv:
-`/Campus-Archiv/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
 
 STATUS:
 **HISTORISCH BELEGT / AKTUELLE NUTZUNG UNGEKLÄRT**
