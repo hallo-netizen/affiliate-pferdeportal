@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-05
-STATUS: AKTIV / TEXT-ARBEITSCHAT FÜHRT
+STATUS: AKTIV / PAUL-SPEZIALAUFTRAG GEBUNDEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,16 +9,16 @@ STATUS: AKTIV / TEXT-ARBEITSCHAT FÜHRT
 Der einzige aktuelle Arbeitsraum des Büros TEXT.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du den aktuellen TEXT/SEO-Auftrag als zuständiger Arbeitschat weiterbearbeitest.
+du sehen musst, wem der aktuell gebundene TEXT/SEO-Arbeitsbereich gehört und wie die Rückgabe läuft.
 
 **DU DARFST …**  
-den gebundenen TEXT-Arbeitsweg und seine Quellen lesen und nach den dortigen Regeln arbeiten.
+den aktuellen Auftrag und alle autoritativen Quellen lesen. Ein normaler TEXT-Arbeitschat darf parallel nur an klar unabhängigen Bereichen arbeiten.
 
 **DU DARFST NICHT …**  
-aus dem Hobbyraum Schreibrechte ableiten, denselben technischen Bereich parallel mit einem anderen Worker verändern oder dich ohne ausdrücklichen Auftrag als Paul ausgeben.
+den aktuell an Paul gebundenen technischen Schreibbereich parallel verändern, dich ohne ausdrücklichen Auftrag als Paul ausgeben oder aus der Raumbelegung Fachregeln ableiten.
 
 **ALS NÄCHSTES …**  
-`protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md` → **Textmaschine / Artikelproduktion** → dortiger technischer Originalweg.
+Als normaler TEXT-Arbeitschat: **nicht zu Paul wechseln.** Prüfen, ob dein Auftrag denselben technischen Schreibbereich betrifft. Wenn ja: keine Paralleländerung; Paul-Rückgabe abwarten. Wenn nein: normalen TEXT-Arbeitsweg über das Handlungsverzeichnis nutzen.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -28,24 +28,33 @@ aus dem Hobbyraum Schreibrechte ableiten, denselben technischen Bereich parallel
 - **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
 - **NICHT ANFASSEN / WARUM:** Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 
-## Paul ist kein normaler Weiterweg
+## Aktuelle Arbeitsbindung
 
-Paul ist ein **separater, ausdrücklich zu beauftragender Spezialworker**.
+Gebundener Spezialworker:
+**PAUL**
 
-Ein normaler Arbeitschat wird von hier **nicht** zu Paul geroutet.
+Pauls eigener Arbeitsbranch:
+`paul/text-seo-campus-ready-20260905`
 
-Wenn Paul separat beauftragt ist:
+Pauls Einstieg ist **nur für den ausdrücklich beauftragten Paul-Worker**:
+`../../../PAUL/TEXT_SEO/START_HERE.md`
+
+Ein normaler Arbeitschat wird von diesem Hobbyraum **nicht** dorthin geroutet.
+
+## Single Writer
+
 - Paul darf alle Büro-/Campusakten lesen;
 - Paul verändert keine Dateien unter `protocol/PROJECT_MEMORY/**`;
 - Paul baut/testet nur im ausdrücklich gebundenen technischen Schreibbereich auf seinem `paul/*`-Branch;
-- der TEXT-Arbeitschat verändert denselben technischen Schreibbereich bis zur Rückgabe nicht parallel;
+- der normale TEXT-Arbeitschat verändert denselben technischen Schreibbereich bis zur Rückgabe nicht;
+- andere klar unabhängige TEXT-Arbeit bleibt möglich;
 - Paul liefert Befund/Fix/Tests/Commit(s);
 - der TEXT-Arbeitschat entscheidet und integriert selbst.
 
-## Raumregel
+## Bei Rückgabe
 
-**Single Writer, Multi Reader.**
-
-Lesen dürfen mehrere.
-Offizielle Büro-/Statuswahrheit schreibt nur der zuständige Arbeitschat.
-Derselbe technische Schreibbereich wird niemals gleichzeitig von Arbeitschat und Paul verändert.
+Vor Übernahme:
+1. aktuellen Campus-/Fachstand frisch lesen;
+2. Paul-Ergebnis gegen den dann aktuellen Stand prüfen;
+3. übernehmen / anpassen / verwerfen;
+4. erst der TEXT-Arbeitschat aktualisiert offiziellen Stand, Protokoll und NEXT ACTION.

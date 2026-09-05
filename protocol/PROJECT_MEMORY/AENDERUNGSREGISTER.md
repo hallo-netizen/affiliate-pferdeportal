@@ -369,3 +369,12 @@ WARUM:
 Eine einmal am Chatbeginn gelesene Anweisung kann im langen Verlauf vergessen werden. Die Pflicht muss deshalb dauerhaft am Campus-Einstieg und im Eingangsstandard sichtbar bleiben und bei jedem Abschluss erneut greifen.
 REGEL:
 Nicht pauschal Dateien anfassen. Nur tatsächlich betroffene autoritative Stellen aktualisieren; keine zweite Wahrheit erzeugen; technische FAIL/BLOCKED-Zustände niemals durch Chat-PASS ersetzen.
+
+
+## ARCH-049 – Architektur darf dynamische Arbeitsbindung nicht erfinden
+WAS:
+STATUS, Worker, Branch und NEXT ACTION im HOBBYRAUM dürfen bei Architektur-/Routingarbeiten nur geändert werden, wenn eine neue Arbeitszuweisung frisch belegt oder ausdrücklich vom Nutzer erteilt ist.
+WARUM:
+Bei der Paul-Isolationsreparatur wurde die Rollenarchitektur korrekt geändert, aber der TEXT-Hobbyraum fälschlich von einer bestehenden Paul-Bindung auf `TEXT-ARBEITSCHAT FÜHRT` umgedeutet.
+REGEL:
+Architektur ändert die Regeln um eine bestehende Arbeitsbindung herum; sie ersetzt die dynamische Bindung nicht aus eigener Annahme.

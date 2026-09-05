@@ -403,3 +403,26 @@ Aktivierung benötigt einmalig den bewussten Repository-Admin-Wartungsweg für e
 
 KEIN FALSCHER PASS:
 Bis zur Aktivierung + Realtest bleibt BAU-024 BLOCKED.
+
+
+### 2026-09-05 – Nachholprüfung fand eigenen HOBBYRAUM-Statusfehler
+
+AUSLÖSER:
+Der Nutzer gab die harte Abschluss-/Nachholprüfung vor: aktuellen Campus/Fachstand frisch lesen, nicht aus Erinnerung antworten, HOBBYRAUM exakt gegen tatsächliche Arbeit prüfen.
+
+BEFUND:
+Bei der Paul-Isolationsreparatur war die dauerhafte Rollenregel korrekt, aber ich hatte den TEXT-HOBBYRAUM ohne neue belegte Fachzuweisung auf
+`STATUS: AKTIV / TEXT-ARBEITSCHAT FÜHRT`
+gesetzt.
+
+Das war unzulässig, weil vor dem Architekturfix eine aktive Paul-Arbeitsbindung belegt war und der Nutzer keine neue Fachzuweisung ausgesprochen hatte.
+
+KISS-KORREKTUR:
+- bestehende Paul-Spezialarbeitsbindung wiederhergestellt;
+- normaler Arbeitschat wird trotzdem nicht zu Paul geroutet;
+- gleicher technischer Bereich bleibt für Parallelwrites gesperrt;
+- unabhängige TEXT-Arbeit bleibt möglich;
+- HOBBYRAUM_STANDARD um harte Schutzregel gegen Status-/Worker-Erfindung ergänzt.
+
+BEZUG:
+ARCH-049; BAU-025.

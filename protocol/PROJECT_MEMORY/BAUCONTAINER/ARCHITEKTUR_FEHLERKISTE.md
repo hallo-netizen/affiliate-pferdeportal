@@ -368,3 +368,23 @@ Der verfügbare GitHub-Zugriff besitzt keinen Ruleset-Admin-Write/BYPASS.
 
 REGRESSIONSSCHUTZ NACH ADMIN-AKTIVIERUNG:
 echter Positiv-/Negativtest auf main; erst danach CLOSED.
+
+
+## BAU-025 – Architekturfix änderte unbelegt den aktuellen Worker
+
+STATUS: CLOSED
+
+KURZ:
+Im Zuge der Paul-Isolation wurde der TEXT-HOBBYRAUM von einer belegten Paul-Arbeitsbindung auf `TEXT-ARBEITSCHAT FÜHRT` umgestellt, obwohl keine neue Fachzuweisung belegt war.
+
+AUSWIRKUNG:
+Die Architektur hätte selbst eine neue aktuelle Arbeitswahrheit erzeugt – genau entgegen dem Eine-Wahrheit-Prinzip.
+
+URSACHE:
+Rollen-/Routingkorrektur und dynamische Arbeitszuweisung wurden vermischt.
+
+KISS-FIX:
+Paul-Bindung als aktuellen Arbeitsstatus wiederhergestellt; nur Routing/Schreibgrenzen geändert. HOBBYRAUM_STANDARD verbietet künftig unbelegte Status-/Worker-/Branch-Umschreibungen durch Architekturarbeit.
+
+REGRESSIONSSCHUTZ:
+ARCH-049 + HOBBYRAUM_STANDARD.

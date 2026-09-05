@@ -82,3 +82,20 @@ Jeder Hobbyraum zeigt nur:
 - Begründung → AENDERUNGSREGISTER
 
 Fachstand, Fehlertext und Zielinhalt werden dort nicht nochmals gepflegt.
+
+
+## Dynamische Arbeitsbindung niemals aus Architekturannahme ändern
+
+STATUS, Worker, Branch und NEXT ACTION sind dynamische Arbeitswahrheit.
+
+Architektur-, Baucontainer- oder Hausmeisterarbeit darf diese Werte **nicht** umdeuten oder neu setzen, nur weil eine neue Rollenregel gebaut wird.
+
+Änderung nur bei:
+- ausdrücklicher neuer Nutzerzuweisung; oder
+- frisch belegter autoritativer Arbeitszuweisung.
+
+Fehlt dieser Beleg:
+bestehende Arbeitsbindung erhalten und nur die Architektur-/Routingregel darum herum korrigieren.
+
+Negativtest:
+Ein Architekturfix darf niemals aus `WORKER = PAUL` still `WORKER = ARBEITSCHAT` machen oder umgekehrt.
