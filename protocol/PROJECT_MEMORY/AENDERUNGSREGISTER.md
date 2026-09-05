@@ -88,3 +88,34 @@ STATUS: OFFENE ARCHITEKTURENTSCHEIDUNG
 EMPFEHLUNG: eigener privater Campus-Repository statt Passwortdateien im öffentlichen Projekt-Repository.
 WARUM: der Campus soll mehrere Projekte umfassen und zentrale Projektakten schützen; Verschlüsselung/Passwortdateien würden Suche, Pförtner und Automatisierung erschweren.
 BIS ZUR ENTSCHEIDUNG: keine Secrets in den öffentlichen Campus-Prototyp.
+
+
+## ARCH-018 – Architektur-Sonderrecht für jeden Chat
+WAS:
+Jeder Chat darf bei einem konkret in der täglichen Arbeit erkannten Optimierungsbedarf die Campus-Architektur selbst verbessern.
+WARUM:
+Architektur soll aus realer Nutzung lernen; Verbesserungen dürfen nicht an einen speziellen Architekten-Chat oder spätere Erinnerung gebunden sein.
+GRENZE:
+Nur Architektur-Ebene; keine fremde Facharbeit, kein Maschinenraum-Umbau ohne Fachauftrag.
+PFLICHT:
+KISS + Bauprotokoll + ggf. Architektur-Fehlerkiste + dauerhaftes WHY.
+
+## ARCH-019 – Bauprotokoll und Architektur-Fehlerkiste
+WAS:
+Der Baucontainer erhält eigenes Arbeitsprotokoll und eigenes Fehlerregister.
+WARUM:
+Die Architektur und der „Architekt“ müssen denselben Lern- und Fehlerregeln unterliegen wie Fachsysteme.
+BELEG:
+`BAUCONTAINER/BAUPROTOKOLL.md`
+`BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
+
+## ARCH-020 – Campus-Hausmeister
+WAS:
+Wiederholbarer Wartungsprozess zum Schlankhalten produktiver Räume.
+WARUM:
+Historischer Ballast soll erhalten, aber aus aktiven Arbeitsräumen herausgehalten werden.
+REGEL:
+Nur eindeutig HISTORISCH/ABGELÖST nach Referenzprüfung archivieren; AKTIV/UNGEKLÄRT tabu; keine Löschung.
+BELEG:
+`BAUCONTAINER/HAUSMEISTER.md`
+`ARCHIV/HAUSMEISTER_PROTOKOLL.md`
