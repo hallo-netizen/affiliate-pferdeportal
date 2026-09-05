@@ -1,0 +1,1 @@
+POSITIVE SELFTEST ONLY: a paul/* PR outside PROJECT_MEMORY must not trigger the Paul write block.
