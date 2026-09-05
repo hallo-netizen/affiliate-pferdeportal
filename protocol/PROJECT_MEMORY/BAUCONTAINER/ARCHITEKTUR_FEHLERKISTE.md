@@ -323,3 +323,23 @@ Wegweiser auf reine Navigation reduziert.
 
 REGRESSIONSSCHUTZ:
 ARCH-043.
+
+
+## BAU-023 – Normaler TEXT-Chat wurde automatisch zu Paul geroutet
+
+STATUS: CLOSED
+
+KURZ:
+Der TEXT-Hobbyraum führte jeden Arbeitschat direkt in den Paul-TEXT/SEO-Eingang.
+
+AUSWIRKUNG:
+Arbeitschat und Paul konnten als zwei gleichzeitige Bearbeiter desselben Problems verstanden werden. Das hätte parallele Writes, veraltete Zustände und Integrationskonflikte begünstigt.
+
+URSACHE:
+Bei der letzten Ausschilderungsvereinheitlichung wurde „Paul als gebundener Spezialworker“ fälschlich zu „Paul als normaler NEXT ACTION“ verkürzt.
+
+KISS-FIX:
+Paul aus der normalen TEXT-Navigation entfernt; Paul-Eingänge WORKER_ONLY; PROJECT_MEMORY für Paul READ ONLY; technischer Schreibbereich explizit; Integration nur durch Arbeitschat.
+
+REGRESSIONSSCHUTZ:
+ARCH-044 + ARCH-045 + EINGANGSSTANDARD + NEUES_PROJEKT_VORLAGE.

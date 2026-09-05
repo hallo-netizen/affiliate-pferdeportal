@@ -323,3 +323,20 @@ WAS:
 Dynamische Versions-/Historienangaben werden aus Wegweisern entfernt, wenn sie bereits im CURRENT_STATE oder einer Originalquelle geführt werden.
 WARUM:
 Wegweiser dürfen nicht veralten und dadurch zur konkurrierenden Wahrheit werden.
+
+
+## ARCH-044 – Paul ist isolierter Spezialworker, kein normaler Arbeitsweg
+WAS:
+Paul ist ausschließlich ein ausdrücklich beauftragter Spezialworker. Normale Arbeitschats werden nicht automatisch zu Paul geroutet.
+WARUM:
+Der ursprüngliche Zweck von Paul war freie Analyse/Tests auf eigenem Branch ohne Einfluss auf offizielle Stände. Eine normale Weiterleitung aus dem TEXT-Hobbyraum vermischte Arbeitschat und Spezialworker und erzeugte unnötiges Parallelitäts-/Synchronisationsrisiko.
+REGEL:
+Paul darf alle Campus-/Büro-/Fachquellen lesen, aber keine Datei unter `protocol/PROJECT_MEMORY/**` verändern. Technische Writes nur im ausdrücklich gebundenen Schreibbereich auf eigenem `paul/*`-Branch. Integration/Merge ausschließlich durch zuständigen Arbeitschat.
+
+## ARCH-045 – Single Writer, Multi Reader
+WAS:
+Für jede offizielle Büro-/Campuswahrheit und jeden konkreten technischen Schreibbereich gibt es gleichzeitig genau einen Schreiber.
+WARUM:
+Unabhängige Chats besitzen keine verlässliche Echtzeit-Synchronisation. Gleichzeitige Writes am selben Bereich erzeugen Konflikte, veraltete Annahmen und doppelte Wahrheiten.
+REGEL:
+Mehrere dürfen lesen. Parallel gearbeitet wird nur an klar unabhängigen Bereichen. Spezialworker liefern Lösungspakete; der zuständige Arbeitschat integriert.

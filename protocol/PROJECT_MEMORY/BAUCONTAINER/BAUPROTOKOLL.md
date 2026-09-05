@@ -278,3 +278,29 @@ kein neues Büro, kein zusätzlicher Statusspeicher, keine zweite Fehler-/Zielwa
 
 BEZUG:
 ARCH-042/043; BAU-021/022.
+
+
+### 2026-09-05 – Paul-Isolation gegen Fremdchat-Test wiederhergestellt
+
+AUSLÖSER:
+Ein normaler Nachbarchat wollte TEXT/SEO weiterbearbeiten und wurde durch den TEXT-Hobbyraum direkt zu Paul geroutet.
+
+BEFUND:
+Das widersprach dem bereits bestehenden Grundkonzept ARCH-004:
+Paul sollte isoliert analysieren/testen und seine Lösung an das Fachbüro zurückgeben. Die spätere Ausschilderung hatte Paul fälschlich zum normalen nächsten Arbeitsschritt gemacht.
+
+KISS-FIX:
+- normaler TEXT-Arbeitschat bleibt im TEXT-Hobbyraum;
+- Paul-Eingänge auf WORKER_ONLY gesetzt;
+- Paul darf alle Campus-/Büroakten lesen, aber `protocol/PROJECT_MEMORY/**` nicht verändern;
+- technische Writes nur auf eigenem Paul-Branch und nur im ausdrücklich gebundenen Schreibbereich;
+- ohne Schreibbereich READ ONLY;
+- kein Merge/keine Integration durch Paul;
+- derselbe technische Schreibbereich nie gleichzeitig durch Paul und Arbeitschat;
+- Regel in Handlungsverzeichnis, Eingangsstandard und Neubauvorlage verankert.
+
+LEITSATZ:
+**Single Writer, Multi Reader. Keine Echtzeit-Synchronisation zwischen Chats als Voraussetzung.**
+
+BEZUG:
+ARCH-004, ARCH-044, ARCH-045; BAU-023.
