@@ -101,12 +101,12 @@ jobs:
             echo "git_bundle_restore=$(cat tresor/meta/restore-test-status.txt)"
           } > tresor/MANIFEST.txt
           sha256sum tresor/affiliate-pferdeportal.bundle > tresor/SHA256SUMS.txt
-          tar -czf CAMPUS_TRESOR_GIT_MIRROR_20260905_V2.tar.gz -C tresor affiliate-pferdeportal.bundle meta MANIFEST.txt SHA256SUMS.txt
+          tar -czf CAMPUS_TRESOR_GIT_MIRROR_20260905_V3.tar.gz -C tresor affiliate-pferdeportal.bundle meta MANIFEST.txt SHA256SUMS.txt
 
       - name: Upload Tresor artifact
         uses: actions/upload-artifact@v4
         with:
-          name: CAMPUS_TRESOR_GIT_MIRROR_20260905_V2
-          path: CAMPUS_TRESOR_GIT_MIRROR_20260905_V2.tar.gz
+          name: CAMPUS_TRESOR_GIT_MIRROR_20260905_V3
+          path: CAMPUS_TRESOR_GIT_MIRROR_20260905_V3.tar.gz
           if-no-files-found: error
           retention-days: 30
