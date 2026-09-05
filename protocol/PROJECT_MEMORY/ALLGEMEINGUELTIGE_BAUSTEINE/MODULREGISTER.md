@@ -178,3 +178,24 @@ BELEGE:
 - Pferde: `PFERDE_ATELIER_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
 REGEL:
 Nicht im Designmaster verlieren, aber vor eigenem Audit noch nicht als vollständig allgemeingültiges Modul freigeben.
+
+
+## MOD-005 – UNIVERSAL RESEARCH & FILL
+
+MODULKLASSE: ALLGEMEINGÜLTIG
+STATUS: aktueller Plugin-/Master-Dateibeleg 1.9.9; externer Plugin-ZIP und im Master eingebetteter CURRENT_PLUGIN-ZIP byte-identisch.
+HAUPTORT: `ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
+AKTUELL BELEGTER STAND:
+- Plugin 1.9.9
+- Master 1.9.9
+HISTORISCH:
+- Plugin 1.9.5
+- Master 1.9.5
+NUTZENDES PROJEKT:
+- PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/HIVEPRESS/`
+PROJEKTBEZUG:
+`config/pferde-atelier.php`
+GITHUB-ABGLEICH:
+auf aktuellem `main` kein eigener URF-Dateistand unter den entsprechenden Namen/Pfaden gefunden.
+ARCHIV:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`

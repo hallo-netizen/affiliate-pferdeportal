@@ -53,20 +53,40 @@ Hauptquellen:
 ### WP-002 – Universal Research & Fill
 
 MOD-ID:
-noch nicht vergeben
+MOD-005
 
-Nachweisbar erhalten:
-- `universal-research-fill-v1.9.5(1).zip`
-- `UNIVERSAL_RESEARCH_FILL_MASTER_V1.9.5(1).zip`
+Aktuellster direkt belegter Installer:
+`universal-research-fill-v1.9.9.zip`
 
 Dateibeleg:
-1.9.5
+**1.9.9**
+
+SHA-256:
+`154102215a0ef4bf7de3362dbf835f05dc5c10b870e3507dbf173c62fb7079e0`
+
+Master:
+`UNIVERSAL_RESEARCH_FILL_MASTER_V1.9.9.zip`
+
+Master SHA-256:
+`452fe76c60f770fa95b9e10bcfa50e23f37efe8051a6c194700b7237d502dcbd`
+
+Byte-Abgleich:
+externer 1.9.9-Plugin-ZIP = eingebetteter CURRENT_PLUGIN-ZIP im Master.
+
+Historisch:
+1.9.5 Plugin + Master.
 
 Modulklasse:
-UNGEKLÄRT im Campus, bis der allgemeine Kern anhand der Dateien sauber inventarisiert wurde.
+ALLGEMEINGÜLTIG.
 
-Hinweis:
-Spätere Projektstände dürfen nicht aus Erinnerung als Dateibeleg eingetragen werden.
+Hauptquelle:
+`ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
+
+Pferde-Anwendung:
+`PROJEKTE/PFERDE_ATELIER/HIVEPRESS/`
+
+GitHub:
+auf aktuellem `main` kein eigener URF-Dateistand unter diesem Namen gefunden.
 
 ### WP-003 – Portal SEO Topic Engine
 

@@ -3,22 +3,24 @@
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das Fachbüro für Anzeigenmarkt- und HivePress-bezogene Funktionalität.
+Das Pferde-Atelier-Büro für HivePress-/Anzeigenmarkt-bezogene Projektakten.
 
 **HIER BIST DU RICHTIG, WENN …**  
-die Aufgabe HivePress-Kategorien, Listings, Anzeigenmarkt oder HivePress-Funktion betrifft.
+du den Pferde-Atelier-HivePress-Bestand oder die Projektanwendung allgemeiner HivePress-Module finden willst.
 
 **DU DARFST …**  
-HivePress-relevante Quellen lesen und im gebundenen HIVEPRESS-Hobbyraum arbeiten.
+Bestandsquellen, Projektverweise und Archivzuordnung finden.
 
 **DU DARFST NICHT …**  
-Designzuständigkeit nur wegen gemeinsamer Dateien übernehmen oder einen ungeklärten Pluginstand als aktuell behaupten.
+HivePress-, Listing-, Kategorie- oder Plugininhalte in diesem Sortierkontext verändern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → dort verifizierte Originalquelle.
+`CURRENT_STATE.md` → allgemeiner Modulverweis → Originalakte.
 
-## Wichtige Grenze
+## Allgemeiner Research-&-Fill-Kern
+MOD-005:
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
 
-HivePress und Design können dieselben Plugin-/Template-Dateien berühren.
-
-Zuständigkeit folgt der Fachfunktion, nicht künstlicher Dateitrennung.
+## Weiterer HivePress-Baustein
+MOD-004:
+HivePress-Anzeigensuche – Modulklasse weiterhin UNGEKLÄRT.

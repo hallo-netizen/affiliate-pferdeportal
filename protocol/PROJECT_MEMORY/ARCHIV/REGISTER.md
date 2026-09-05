@@ -196,3 +196,30 @@ GitHub-Vergleich:
 
 LOKALE_KOPIE_ENTBEHRLICH:
 NEIN
+
+
+## ARC-MOD-005-20260905 – Universal Research & Fill
+
+STATUS:
+GELB
+
+Aktuelles Archiv:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/2026-09-05/`
+
+Kanonisch vorhanden:
+- universal-research-fill-v1.9.9.zip
+- UNIVERSAL_RESEARCH_FILL_MASTER_V1.9.9.zip
+
+Hashes:
+- Plugin 1.9.9: `154102215a0ef4bf7de3362dbf835f05dc5c10b870e3507dbf173c62fb7079e0`
+- Master 1.9.9: `452fe76c60f770fa95b9e10bcfa50e23f37efe8051a6c194700b7237d502dcbd`
+
+Historisch:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/HISTORISCH/`
+
+Dort:
+- Plugin 1.9.5
+- Master 1.9.5
+
+LOKALE_KOPIE_ENTBEHRLICH:
+NEIN
