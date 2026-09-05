@@ -639,3 +639,44 @@ Ein beliebiger freier Chat kann nicht allein durch GitHub beim Öffnen Code auto
 
 BEZUG:
 ARCH-052 bis ARCH-054; BAU-027.
+
+
+### 2026-09-05 – Single-Writer-Gegensperre + Branch-Hygiene hart getestet
+
+KRITISCHER BEFUND:
+Die erste Paul-Sicherung begrenzte Paul, hätte aber einen normalen Parallel-PR im selben technischen Scope noch nicht technisch verhindert.
+
+KISS-FIX:
+`paul_scope_gate.py verify-pr` läuft künftig für **alle** PRs:
+- gebundener Paul-Branch → eigener Scope wird geprüft;
+- anderer `paul/*`-Branch → Branch-Mismatch BLOCK;
+- normaler PR im aktiven Paul-`WRITE_SCOPE` → `PAUL_EXCLUSIVE_SCOPE_LOCKED`;
+- normaler PR außerhalb Scope → PASS;
+- ohne Paul-Auftrag → für normale PRs NOT_APPLICABLE.
+
+HARTER GIT-TEST AUF FINALER LOGIK:
+- Selftest 11/11 PASS;
+- Paul Start gültig → PASS;
+- Paul allowed write → PASS;
+- Paul out-of-scope → BLOCK;
+- Paul-PR im Scope → PASS;
+- normaler PR im gesperrten Paul-Scope → `PAUL_EXCLUSIVE_SCOPE_LOCKED`;
+- normaler PR außerhalb Scope → PASS;
+- falscher Paul-Branch → BLOCK;
+- relevante Source-Drift → STALE BLOCK;
+- Paul ohne Auftrag → BLOCK;
+- normaler PR ohne Paul-Auftrag → NOT_APPLICABLE;
+- Mehrfachauftrag → BLOCK;
+- falsche technische Basis → `PAUL_BASE_MISMATCH_BLOCKED`.
+
+READ_ONLY-RANDTEST:
+Wiederverwendung eines alten Paul-Branches mit bestehendem Commit wurde korrekt bereits beim Start blockiert.
+Auf einem frischen Branch direkt vom Base:
+- READ_ONLY Start → PASS;
+- anschließender Write → `PAUL_WRITE_SCOPE_BLOCKED:READ_ONLY`.
+
+FOLGERUNG:
+Jeder neue Paul-Auftrag = frischer Branch vom exakten Technical Base.
+
+BEZUG:
+ARCH-055; BAU-027.

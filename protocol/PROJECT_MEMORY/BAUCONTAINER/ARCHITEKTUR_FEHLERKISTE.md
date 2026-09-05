@@ -505,3 +505,21 @@ Erwartetes Ergebnis für Paul aktuell:
 
 STATUS BLEIBT:
 BLOCKED / SECURITY-MAINTENANCE – ausschließlich bis Security-PR #137 kontrolliert auf main aktiviert und dort real serverseitig positiv/negativ geprüft wurde.
+
+
+### BAU-027 – EXKLUSIVSCOPE-/BRANCH-NACHTRAG
+
+Gefundene Lücke:
+Nur Pauls eigenen Write-Scope zu kontrollieren verhinderte noch keinen kollidierenden normalen PR.
+
+Fix:
+Aktiver Paul-`WRITE_SCOPE` wird für alle anderen PRs technisch gesperrt.
+
+Belege:
+- Fremd-PR im Scope → `PAUL_EXCLUSIVE_SCOPE_LOCKED`;
+- Fremd-PR außerhalb Scope → PASS;
+- alter Paul-Branch mit Altcommit bei READ_ONLY → korrekt BLOCK;
+- frischer READ_ONLY-Branch vom Base → START PASS, Write BLOCK.
+
+Zusatzregel:
+Jeder Auftrag erhält einen frischen Paul-Branch.

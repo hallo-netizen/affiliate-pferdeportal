@@ -132,3 +132,23 @@ Harte Regeln:
 
 Damit bleibt:
 **HOBBYRAUM = eine aktuelle Auftragswahrheit.**
+
+
+## Exklusiver technischer Paul-Scope
+
+Bei aktivem `PAUL_ASSIGNMENT_V1` gilt `WRITE_SCOPE` nicht nur als Pauls Schreibgrenze.
+
+Er ist gleichzeitig eine **exklusive Sperrfläche**:
+- Paul darf nur darin schreiben;
+- jeder andere PR/Worker darf denselben Scope während der aktiven Paul-Bindung nicht verändern;
+- Kollision → `PAUL_EXCLUSIVE_SCOPE_LOCKED`;
+- unabhängige technische Pfade bleiben parallel erlaubt.
+
+## Frischer Branch pro Paul-Auftrag
+
+Jeder neue Paul-Auftrag erhält einen **frischen** `paul/*`-Branch direkt vom gebundenen `TECHNICAL_BASE_SHA`.
+
+Kein Recycling eines alten Paul-Branches mit Commits aus einem vorherigen Auftrag.
+
+Grund:
+Altcommits könnten sonst bereits vor Arbeitsbeginn außerhalb des neuen Scopes liegen oder einen READ_ONLY-Auftrag unzulässig „vorbelasten“.

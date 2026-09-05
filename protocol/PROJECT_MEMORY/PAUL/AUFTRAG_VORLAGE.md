@@ -64,3 +64,14 @@ Relevante Drift:
 Paul liefert Befund, Ursache, KISS-Lösung, Positiv-/Negativtests, Commit(s), offene Risiken.
 
 Der zuständige Arbeitschat entscheidet über Übernahme/Anpassung/Verwerfen und aktualisiert danach allein die offizielle Campuswahrheit.
+
+
+## Branch-Hygiene
+
+Für jede neue Zuweisung:
+- neuen `paul/<auftrag>`-Branch erzeugen;
+- Ausgangspunkt exakt `TECHNICAL_BASE_SHA`;
+- keinen alten Paul-Branch wiederverwenden.
+
+Der Scope-Gate wertet bereits vorhandene Branch-Deltas gegen `TECHNICAL_BASE_SHA` mit aus.
+Damit werden Altcommits nicht unsichtbar.

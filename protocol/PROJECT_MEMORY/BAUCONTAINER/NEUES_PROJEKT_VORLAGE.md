@@ -140,3 +140,12 @@ Pflicht:
 - bei Beendigung aktiven Block entfernen.
 
 Damit gilt das automatische Paul-Modell auch für künftige Projektgebäude ohne neue Promptarchitektur.
+
+
+### Paul-Branch-Hygiene / Exklusivscope
+
+Bei jeder neuen Paul-Zuweisung:
+- frischen Paul-Branch direkt vom `TECHNICAL_BASE_SHA`;
+- kein Wiederverwenden eines alten Worker-Branches;
+- der gebundene `WRITE_SCOPE` ist für andere parallele PRs gesperrt;
+- unabhängige Scopes dürfen weiterarbeiten.

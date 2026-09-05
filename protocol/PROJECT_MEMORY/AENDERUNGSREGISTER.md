@@ -432,3 +432,12 @@ WARUM:
 Ein gewöhnlicher freier Chat kann nicht allein durch eine Repository-Datei beim Öffnen automatisch Code ausführen. Diese Produktgrenze darf nicht als gelöste Technik behauptet werden.
 REGEL:
 Kein neuer Übergabeprompt nötig. Für Worker automatisch; für beliebige Chats bleibt der Campus die Wahrheit und GitHub blockiert unautorisierte Paul-Integration fail-closed.
+
+
+## ARCH-055 – Pauls technischer Scope ist exklusiv und jeder Auftrag startet auf frischem Branch
+WAS:
+Während eines aktiven Paul-Auftrags ist dessen `WRITE_SCOPE` für andere PRs gesperrt. Jeder neue Paul-Auftrag startet auf einem frischen `paul/*`-Branch direkt vom `TECHNICAL_BASE_SHA`.
+WARUM:
+Nur Paul einzuschränken reicht nicht; sonst könnte der normale Arbeitschat denselben technischen Bereich parallel verändern. Wiederverwendete Paul-Branches tragen außerdem Altcommits in neue Aufträge.
+REGEL:
+Kollidierender Fremd-PR → `PAUL_EXCLUSIVE_SCOPE_LOCKED`. Alter/inkonsistenter Paul-Branch → Scope-/Base-Block.
