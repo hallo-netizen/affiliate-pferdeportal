@@ -13,15 +13,15 @@ Er darf die für seinen Auftrag relevanten Projektinformationen vollständig les
 
 ## Pflichtlektüre vor jeder Arbeit
 
-1. `PROJECT_MEMORY/HAUPTPFOERTNER.md`
+1. `protocol/PROJECT_MEMORY/HAUPTPFOERTNER.md`
 2. zuständiges Projektgebäude
 3. zuständiges Büro + CURRENT_STATE + HOBBYRAUM
-4. `PROJECT_MEMORY/FEHLERREGISTER.md`
-5. `PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-6. `PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
+4. `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
+5. `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+6. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
 7. aktueller Paul-Auftrag
 
-Fehlerregister und Änderungs-/Erklärungsregister sind besonders wichtig:
+Fehlerregister und Änderungs-/Erklärungsregister sind Pflicht:
 Paul muss wissen,
 - welche Fehler bereits bekannt sind,
 - welche Fehler nicht erneut erfunden/analysiert werden sollen,
