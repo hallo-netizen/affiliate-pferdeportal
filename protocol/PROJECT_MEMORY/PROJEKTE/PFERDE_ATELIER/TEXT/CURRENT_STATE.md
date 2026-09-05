@@ -14,6 +14,12 @@ OPEN / Head ebenfalls
 
 Diese Werte wurden am 2026-09-05 direkt mit GitHub abgeglichen.
 
+## Direkt lesbare aktuelle Originalakten
+
+`QUELLEN_AKTUELL/START_HERE.md`
+
+Dort liegen die sechs aktuellen vom Nutzer übergebenen TEXT-/SEO-Akten unverändert als GitHub-lesbare Quellenkopien.
+
 ## Aktuelle übergebene Hauptakte
 
 `MASTER_PFERDE_ATELIER_STARTMASTER0107_AKTUELL_20260905.zip`

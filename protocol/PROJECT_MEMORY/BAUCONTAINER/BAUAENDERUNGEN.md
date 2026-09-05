@@ -31,3 +31,10 @@ Die vollständige Begründung liegt im zentralen `AENDERUNGSREGISTER.md`.
 - ARCH-024 → campusweites WordPress-Register als reiner Technologieindex
 
 Keine Duplikation der ausführlichen Begründungen hier.
+
+- ARCH-025 → Archiv-Ampel
+- ARCH-026 → Masterakten gegen aktuelles GitHub
+- ARCH-027 → Alltagssprache als Campus-Einstieg
+- ARCH-028 → vollständige 1-Klick-Eingänge für Sonderräume
+- ARCH-029 → Paul TEXT/SEO erhält direkte unveränderte Quellenkette
+- ARCH-030 → Tresorstatus fail-closed; kein erfundener TRESOR_PASS

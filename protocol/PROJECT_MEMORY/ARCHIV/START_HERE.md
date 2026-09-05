@@ -1,45 +1,38 @@
 # CAMPUS-ARCHIV
 
 STAND: 2026-09-05
-STATUS: IM AUFBAU
+STATUS: AKTIV
 
-## Zweck
+## 1-KLICK-ÜBERSICHT
 
-Historische Projektakten erhalten, ohne sie mit aktueller Wahrheit zu verwechseln.
+**WAS IST DAS?**  
+Der historische Aktenraum des Campus.
 
-Das Archiv enthält bzw. referenziert:
-- alte Übergaben
-- alte Zielverträge
-- historische Plugin-/Code-Stände
-- Reparaturpakete
-- Protokolle
-- Testbelege
-- alte Exporte
-- alte Branch-/PR-Zuordnungen
-- Masterdatei-Bestandteile, die nicht mehr aktiv sind
+**HIER BIST DU RICHTIG, WENN …**  
+du alte Masterstände, Übergaben, Pluginstände, Protokolle, Exporte oder andere historische Belege suchst.
+
+**DU DARFST …**  
+historische Akten lesen, über Register finden und ihre Archiv-/Hash-Angaben prüfen.
+
+**DU DARFST NICHT …**  
+ARCHIVIERT mit „falsch“ oder „löschbar“ gleichsetzen, UNGEKLÄRT wegarchivieren oder Fachinhalte umschreiben.
+
+**ALS NÄCHSTES …**  
+`REGISTER.md` für vorhandene Bestände; `DATEIEINGANG.md` für neue Akten.
 
 ## Harte Regel
 
-ARCHIVIERT bedeutet NICHT:
-- unwichtig
-- löschbar
-- falsch
-
-Es bedeutet nur:
+ARCHIVIERT bedeutet:
 **historisch, nicht aktuelle Hauptwahrheit.**
 
-## Eingang
+Es bedeutet NICHT:
+- unwichtig;
+- falsch;
+- automatisch löschbar.
 
-Siehe:
-`DATEIEINGANG.md`
+## Archiv-Ampel
 
-Zentraler Archivindex:
-`REGISTER.md`
+ROT / GELB / GRÜN steht in `REGISTER.md`.
 
-Der Index zeigt außerdem die ROT/GELB/GRÜN-Ampel für die Frage, ob lokale Originalkopien noch benötigt werden.
-
-## Sicherheit
-
-UNGEKLÄRT wird nicht ins „kann weg“-Archiv abgeschoben.
-
-Erst klassifizieren, dann archivieren.
+Nur GRÜN darf bedeuten:
+`LOKALE_KOPIE_ENTBEHRLICH: JA`.

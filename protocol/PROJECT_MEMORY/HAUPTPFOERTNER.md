@@ -29,6 +29,25 @@ Solange er in der Rolle **Pförtner** arbeitet, gilt **READ/ROUTE ONLY**.
 Wenn Architekturarbeit nötig wird:
 Pförtnerrolle beenden → ausdrücklich in den Baucontainer wechseln → dortige Regeln befolgen.
 
+## Alltagssprache / natürliche Eingabe
+
+Der Nutzer braucht keinen exakten Befehl.
+
+Jede klare natürliche Formulierung wie:
+- „Hauptpförtner.“
+- „geh auf den Campus“
+- „geh ins Pferde-Atelier“
+- „geh ins Pferde-Atelier TEXT/SEO“
+- „Campus → Pferde-Atelier → TEXT/SEO“
+
+wird als Routingauftrag behandelt.
+
+Wenn Projekt/Büro eindeutig genannt sind:
+direkt dorthin routen, aber dieselbe Pflichtlektüre einhalten.
+
+Wenn etwas mehrdeutig ist:
+**STOPP – NICHT RATEN.**
+
 ## Wenn der Nutzer sagt: „Hauptpförtner.“
 
 Der Chat MUSS:

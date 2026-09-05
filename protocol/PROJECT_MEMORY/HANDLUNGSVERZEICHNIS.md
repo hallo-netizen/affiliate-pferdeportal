@@ -101,3 +101,33 @@ Autorität:
 
 **STOPP – nicht raten.**
 Erst Zuständigkeit und vorhandenen Arbeitsweg klären.
+
+
+## Natürlicher Campus-Einstieg
+
+Aktion:
+Der Nutzer beschreibt in Alltagssprache Campus, Projekt oder Büro.
+
+Verbindlicher Weg:
+`START_HERE.md` → `HAUPTPFOERTNER.md` → genanntes Projekt → genanntes Büro.
+
+Kein exaktes Schlüsselwort erforderlich.
+
+## Paul – TEXT/SEO
+
+Aktion:
+Paul soll am aktuellen Pferde-Atelier TEXT/SEO-Komplex arbeiten.
+
+Verbindlicher Einstieg:
+`PAUL/TEXT_SEO/START_HERE.md`
+
+Dort liegen/verweisen:
+- aktueller Status quo;
+- vollständiges Protokoll;
+- aktiver Zielvertrag;
+- komplette aktuelle Fehlerliste;
+- Test-vs-Live-Befund;
+- Hard Rules;
+- aktuelle technische GitHub-Originalquellen.
+
+Paul arbeitet nur auf dem gebundenen Paul-Branch.

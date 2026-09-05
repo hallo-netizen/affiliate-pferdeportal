@@ -18,12 +18,21 @@ Runner:
 ## TEXT-LIVE-20260905
 
 Bereich: TEXT
-Status: LIVE – PARALLELER CHAT ARBEITET
-Arbeitsstellen:
-- PR #132
-- Issue #133
 
-Vor Übernahme nach Ende des Textchats neu synchronisieren.
+Status:
+AKTUELLER BELEGSTAND 05.09.2026.
+
+Direkte aktuelle Fehlerquelle:
+`PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md`
+
+Status-/Protokollquellen:
+`PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/`
+
+Technische Originalquellen:
+- Root-`AGENTS.md`
+- `control/startmaster0107/`
+
+Keine Fehlerdetails hier duplizieren.
 
 ## AFFILIATE-RELEASE
 

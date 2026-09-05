@@ -16,6 +16,11 @@
 
 <konkretes erwartetes Ergebnis>
 
+## Direkteinstieg TEXT/SEO
+
+Bei einem Pferde-Atelier-TEXT/SEO-Auftrag zuerst:
+`protocol/PROJECT_MEMORY/PAUL/TEXT_SEO/START_HERE.md`
+
 ## Pflichtlektüre
 
 - Hauptpförtner

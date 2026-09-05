@@ -28,6 +28,12 @@ Seitlich:
 - Paul
 - Notfall-Tresor
 
+## Campus-Haupteingang
+
+`../START_HERE.md` → `../HAUPTPFOERTNER.md`
+
+Alltagssprache ist zulässig; Routing bleibt trotzdem deterministisch.
+
 ## Verbindlicher Eingangsstandard
 
 Siehe:
@@ -142,6 +148,12 @@ Offene Empfehlung:
 später eigener privater Campus-Repository.
 
 ## Notfall-Tresor
+
+Eingang:
+`../TRESOR/START_HERE.md`
+
+Aktueller Status:
+`../TRESOR/STATUS.md`
 
 Nur geprüfter `TRESOR_PASS`-Stand ist Wiederherstellungsquelle.
 

@@ -122,3 +122,21 @@ ERGEBNIS:
 
 BEZUG:
 ARCH-026.
+
+
+### 2026-09-05 – Campus-Eingänge + Paul TEXT/SEO + Tresorstatus geschlossen
+
+BEDARF:
+Alltagssprache soll als Campus-Routing funktionieren; Archiv/Zielverträge/Baucontainer/Tresor brauchen vollständige 1-Klick-Eingänge; Paul muss TEXT/SEO ohne Kontextverlust finden.
+
+ERGEBNIS:
+- Campus-`START_HERE.md`;
+- natürliche Sprache als Routingauftrag gebunden;
+- Archiv/Zielverträge/Baucontainer/Tresor mit 1-Klick-Eingang;
+- sechs aktuelle TEXT-/SEO-Originalakten wortgleich unter `TEXT/QUELLEN_AKTUELL/`;
+- aktiver TEXT-Zielvertrag im zentralen Register;
+- Paul-Direkteinstieg `PAUL/TEXT_SEO/START_HERE.md`;
+- Tresorstatus explizit FAIL statt erfundenem PASS.
+
+BEZUG:
+ARCH-027 bis ARCH-030; BAU-006 bis BAU-009.

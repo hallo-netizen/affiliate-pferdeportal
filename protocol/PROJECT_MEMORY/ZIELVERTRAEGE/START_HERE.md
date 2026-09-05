@@ -1,46 +1,28 @@
 # ZIELVERTRÄGE – CAMPUS-AKTENRAUM
 
 STAND: 2026-09-05
+STATUS: AKTIV
 
-## Zweck
+## 1-KLICK-ÜBERSICHT
 
-Zielverträge halten verbindlich fest:
-- welches Ergebnis erreicht werden soll;
-- was ausdrücklich zum Ziel gehört;
-- was ausdrücklich NICHT zum Ziel gehört;
-- welche Bedingungen für PASS gelten;
-- welche Belege den Zielerfolg nachweisen.
+**WAS IST DAS?**  
+Der zentrale Wegweiser zu verbindlichen Zielverträgen.
 
-Sie ersetzen keine Fachregeln, Tests oder technischen States.
+**HIER BIST DU RICHTIG, WENN …**  
+du wissen musst, welches konkrete Endziel für Campus, Projekt, Büro, Modul oder Auftrag gilt.
 
-## Hauptregel
+**DU DARFST …**  
+den aktiven Vertrag finden und seine unveränderte Hauptquelle lesen.
 
-Ein Zielvertrag wird nach seiner Freigabe NICHT still umgeschrieben.
+**DU DARFST NICHT …**  
+einen Zielvertrag still umschreiben, verkürzen oder eine zweite Zielwahrheit erzeugen.
 
-Wenn sich das Ziel ändert:
-- neuer Zielvertrag oder neue versionierte Fassung;
-- alter Vertrag bleibt historisch erhalten;
-- Änderungsregister erklärt WARUM.
+**ALS NÄCHSTES …**  
+`REGISTER.md` → aktiven Vertrag → dort angegebene Hauptquelle.
 
-## Geltungsbereiche
+## Grundregel
 
-Zielverträge können gelten für:
-- CAMPUS
-- PROJEKT
-- BÜRO
-- MODUL
-- konkreten HOBBYRAUM/AUFTRAG
+Ändert sich ein Ziel:
+neue versionierte Fassung oder neuer Vertrag.
 
-## Nutzung
-
-Das zentrale `REGISTER.md` zeigt:
-- Vertrags-ID
-- Geltungsbereich
-- Status
-- aktuelle Fassung
-- Hauptquelle
-- zugehöriges Büro/Modul/Projekt
-
-Ein Büro führt in `CURRENT_STATE.md` nur den Verweis auf den aktuell bindenden Zielvertrag.
-
-Keine zweite Zielwahrheit im Büro nachschreiben.
+Alte Fassungen bleiben historisch erhalten.

@@ -110,3 +110,50 @@ OPEN/UNGEKLÄRTE Architekturfehler werden nicht durch spontane Großumbauten gel
 
 Erst:
 Fehler belegen → kleinste nachhaltige Lösung → protokollieren → prüfen.
+
+
+## BAU-006 – Sonderräume ohne vollständigen 1-Klick-Eingang
+
+STATUS: CLOSED
+
+KURZ:
+Archiv und Zielverträge hatten keinen vollständigen 1-Klick-Block; Baucontainer hatte keinen eigenen START_HERE.
+
+KISS-FIX:
+1-Klick-Eingänge ergänzt.
+
+REGRESSIONSSCHUTZ:
+EINGANGSSTANDARD gilt auch für Sonderräume.
+
+## BAU-007 – Alltagssprache nicht explizit als Routingauftrag gebunden
+
+STATUS: CLOSED
+
+KURZ:
+Der Trigger „Hauptpförtner.“ war definiert, natürliche Formulierungen aber nicht hart beschrieben.
+
+KISS-FIX:
+Campus START_HERE + Hauptpförtner akzeptieren eindeutige Alltagssprache als Routingauftrag.
+
+## BAU-008 – Paul TEXT/SEO hatte keine direkte vollständige Quellenkette
+
+STATUS: CLOSED
+
+KURZ:
+Paul-Eingang verwies allgemein auf Register, aber nicht direkt auf die sechs aktuellen TEXT-/SEO-Akten.
+
+KISS-FIX:
+Wortgleiche aktuelle Quellenkopien + `PAUL/TEXT_SEO/START_HERE.md`.
+
+## BAU-009 – Tresorstatus war implizit statt eindeutig
+
+STATUS: CLOSED
+
+KURZ:
+Tresorkonzept verlangte TRESOR_PASS, aber es gab weder START_HERE noch expliziten aktuellen FAIL-Status.
+
+KISS-FIX:
+`TRESOR/START_HERE.md` + `TRESOR/STATUS.md`.
+
+WICHTIG:
+Architekturlücke geschlossen; operativer TRESOR_PASS bleibt korrekt BLOCKED, bis der Prüfvertrag erfüllt ist.

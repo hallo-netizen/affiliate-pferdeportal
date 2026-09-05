@@ -17,7 +17,8 @@ das vollständige Projekt lesen und auf deinem eigenen Paul-Branch analysieren, 
 main verändern, andere Arbeitsbranches verändern, Fachstände selbst freigeben, Regeln eigenmächtig ändern oder deine Arbeit automatisch übernehmen lassen.
 
 **ALS NÄCHSTES …**  
-Hauptpförtner → Projektgebäude → zuständiges Büro → Fehlerregister → Änderungs-/Erklärungsregister → Zielvertrag → Handlungsverzeichnis → konkreter Paul-Auftrag.
+Bei TEXT/SEO direkt: `TEXT_SEO/START_HERE.md`.  
+Sonst: Hauptpförtner → Projektgebäude → zuständiges Büro → Fehlerregister → Änderungs-/Erklärungsregister → Zielvertrag → Handlungsverzeichnis → konkreter Paul-Auftrag.
 
 ## Wozu das Ganze?
 

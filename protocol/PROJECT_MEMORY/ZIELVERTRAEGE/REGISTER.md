@@ -85,3 +85,30 @@ gebundene V104-Design-/QA-Regeln; keine stillen projektspezifischen Übernahmen.
 
 PFERDE-ANWENDUNG:
 aktueller Live-Stand 1.50.472 verwendet weiterhin Contract V104 unverändert.
+
+
+## ZV-TEXT-001 – STARTMASTER0107 aktueller Produktionszielvertrag
+
+TITEL:
+STARTMASTER0107 – VERBINDLICHER ZIELVERTRAG – 05.09.2026
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / TEXT / STARTMASTER0107
+
+STATUS:
+AKTIV
+
+FASSUNG:
+05.09.2026
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/03_ZIELVERTRAG_AKTUELL_20260905.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/TEXT/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
+
+NACHFOLGER:
+keiner belegt.

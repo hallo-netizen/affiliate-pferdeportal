@@ -189,3 +189,34 @@ DESIGN-BELEG:
 Masterbasis Pferde 1.50.469; main 1.50.421; bestätigter Fachbranch-LIVE 1.50.472.
 REGEL:
 Widerspruch = sichtbar dokumentieren; Autorität anhand Belegen bestimmen; niemals einfach „neueste Datei gewinnt“.
+
+
+## ARCH-027 – Alltagssprache als Campus-Einstieg
+WAS:
+Eindeutige natürliche Sprache ist ein gültiger Routingauftrag.
+WARUM:
+Der Nutzer soll keine Kommandos oder Dateipfade auswendig lernen.
+REGEL:
+Bei Eindeutigkeit routen; bei Mehrdeutigkeit STOPP – NICHT RATEN.
+
+## ARCH-028 – Sonderräume folgen dem 1-Klick-Standard
+WAS:
+Archiv, Zielverträge, Baucontainer und Tresor besitzen eigene START_HERE-Eingänge.
+WARUM:
+„Ein Klick = alles klar“ muss campusweit gelten, nicht nur für Büros.
+
+## ARCH-029 – Paul TEXT/SEO mit direkter Quellenkette
+WAS:
+Sechs aktuelle Nutzerakten liegen wortgleich im TEXT-Büro; Paul besitzt einen direkten TEXT/SEO-Einstieg.
+WARUM:
+Paul soll ohne Chatvorgeschichte Ziel, Status, Protokoll, Fehler und Sperren finden.
+GRENZE:
+Keine inhaltliche Umschreibung; technische Originalquellen bleiben autoritativ.
+
+## ARCH-030 – Tresor fail-closed
+WAS:
+Tresor zeigt explizit PASS oder den ersten blockierenden FAIL.
+WARUM:
+Ein konzeptionell vorhandener Tresor darf nicht mit einem real geprüften Backup verwechselt werden.
+AKTUELL:
+`TRESOR_FAIL:GIT_MIRROR_MISSING`.

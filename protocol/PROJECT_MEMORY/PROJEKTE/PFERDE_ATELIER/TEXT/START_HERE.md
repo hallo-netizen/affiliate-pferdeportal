@@ -26,6 +26,7 @@ GitHub:
 
 Übergebene aktuelle Akten:
 - `MASTERDATEIEN_INVENTAR.md`
+- `QUELLEN_AKTUELL/START_HERE.md` → sechs unveränderte aktuelle TEXT-/SEO-Originalakten
 
 SEO-Dateibestand:
 - `SEO_BESTAND.md`
