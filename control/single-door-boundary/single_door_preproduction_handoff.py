@@ -89,7 +89,7 @@ def _verify_release_signature(release: Mapping[str, Any], trusted_keys: Mapping[
     expected = stable_hash(release_copy); declared_release = release.get("release_sha256")
     if not isinstance(declared_release, str) or not SHA_RE.fullmatch(declared_release) or declared_release != expected: raise HandoffBlocked("WORKFLOW_RELEASE_HASH_MISMATCH")
 
-def validate_production_package(path: Path, *, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+def validate_production_package_integrity(path: Path) -> dict[str, Any]:
     path = Path(path)
     if path.suffix.lower() != ".json": raise HandoffBlocked("HANDOFF_FILE_MUST_BE_JSON")
     if not path.is_file(): raise HandoffBlocked("HANDOFF_FILE_MISSING")
@@ -109,8 +109,15 @@ def validate_production_package(path: Path, *, trusted_keys: Mapping[str, Mappin
     if env.get("package_id") != expected_id: raise HandoffBlocked("HANDOFF_PACKAGE_ID_MISMATCH")
     payload = copy.deepcopy(env); declared_payload = payload.pop("package_payload_sha256", None)
     if not isinstance(declared_payload, str) or not SHA_RE.fullmatch(declared_payload) or stable_hash(payload) != declared_payload: raise HandoffBlocked("HANDOFF_PACKAGE_PAYLOAD_HASH_MISMATCH")
-    _verify_release_signature(release, trusted_keys or TRUSTED_SIGNING_KEYS)
-    return {"ok": True, "status": "SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID", "package_id": expected_id, "artifact_sha256": file_sha(path), "bytes": size, "content_semantics_inspected": False, "publish_allowed": False}
+    return {"ok": True, "status": "PRODUCTION_PACKAGE_INTEGRITY_VALID", "package_id": expected_id, "artifact_sha256": file_sha(path), "bytes": size, "content_semantics_inspected": False, "publish_allowed": False}
+
+def validate_production_package(path: Path, *, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+    proof = validate_production_package_integrity(path)
+    env = json.loads(Path(path).read_text(encoding="utf-8"))
+    _verify_release_signature(env["workflow_release"], trusted_keys or TRUSTED_SIGNING_KEYS)
+    out = dict(proof)
+    out["status"] = "SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID"
+    return out
 
 def resolve_handle(handle_map: Mapping[str, str], handle: str, repo: Path) -> Path:
     if set(handle_map) != {INPUT_HANDLE}: raise HandoffBlocked("HANDLE_MAP_MUST_CONTAIN_EXACTLY_BOUND_HANDLE")
@@ -125,10 +132,10 @@ def resolve_handle(handle_map: Mapping[str, str], handle: str, repo: Path) -> Pa
 def execute_bound_preproduction_action(*, handle_map: Mapping[str, str], repo: Path, attach_callable: Callable[[Path], Mapping[str, Any]], boundary=None, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
     boundary = boundary or boundary_module(); binding = preproduction_binding(boundary)
     package_path = resolve_handle(handle_map, binding.input_handles[0], Path(repo))
-    proof = validate_production_package(package_path, trusted_keys=trusted_keys)
+    proof = validate_production_package_integrity(package_path)
     result = attach_callable(package_path)
     if not isinstance(result, Mapping) or result.get("status") != "RUNTIME_BATCH_EXECUTION_READY": raise HandoffBlocked("ATTACH_PACKAGE_DID_NOT_REACH_EXECUTION_READY")
-    receipt = {"contract": boundary.BOUNDARY_CONTRACT, "room_token": binding.room_token, "action_token": binding.action_token, "receipt_token": binding.receipt_token, "next_room_token": binding.next_room_token, "status": "PASS", "evidence": ["SIGNED_PACKAGE_VALID:" + proof["artifact_sha256"], "RUNTIME_BATCH_EXECUTION_READY"]}
+    receipt = {"contract": boundary.BOUNDARY_CONTRACT, "room_token": binding.room_token, "action_token": binding.action_token, "receipt_token": binding.receipt_token, "next_room_token": binding.next_room_token, "status": "PASS", "evidence": ["PACKAGE_INTEGRITY_VALID:" + proof["artifact_sha256"], "RUNTIME_BATCH_EXECUTION_READY"]}
     return boundary.validate_action_receipt(binding, receipt)
 
 def attach_via_current_lifecycle(*, repo: Path, handle_map: Mapping[str, str], boundary=None) -> dict[str, Any]:
