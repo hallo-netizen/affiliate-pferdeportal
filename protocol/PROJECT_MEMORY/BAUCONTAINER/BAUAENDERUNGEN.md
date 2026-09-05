@@ -47,3 +47,9 @@ Keine Duplikation der ausführlichen Begründungen hier.
 
 - ARCH-035 → Büro-Kommunikationsleitungen bei Direkteinstieg
 - ARCH-036 → Hobbyräume als selbsterklärende 1-Klick-Eingänge
+
+- ARCH-037 → Projekt-Flur mit 1-Klick-Eingang
+- ARCH-038 → ungeklärter Affiliate-Bestand klar gekennzeichnet
+- ARCH-039 → Tresor blockiert korrekt an Roharchiv-Redundanz
+
+- ARCH-040 → jedes PROJECT_MEMORY-Verzeichnis mit START_HERE

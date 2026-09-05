@@ -234,3 +234,48 @@ Mehrere HOBBYRAUM-Dateien enthielten nur STATUS/FREI und keine Rechte-/Weiterweg
 
 KISS-FIX:
 Alle sechs Hobbyräume mit derselben 1-Klick-Übersicht ausgestattet.
+
+
+## BAU-016 – Projekt-Flur ohne Eingang
+
+STATUS: CLOSED
+
+KURZ:
+`PROJEKTE/` war ein begehbarer Campus-Flur ohne START_HERE.
+
+KISS-FIX:
+`PROJEKTE/START_HERE.md` ergänzt.
+
+## BAU-017 – Affiliate-Bestandsordner suggerierte durch Ablageort Allgemeingültigkeit
+
+STATUS: CLOSED
+
+KURZ:
+`ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/` enthielt nur ein Inventar, obwohl Modulklasse UNGEKLÄRT ist.
+
+KISS-FIX:
+START_HERE + CURRENT_STATE mit harter UNGEKLÄRT-Kennzeichnung.
+
+## BAU-018 – Tresor übersprang Roharchiv-Redundanz als ersten Blocker
+
+STATUS: CLOSED
+
+KURZ:
+Tresorstatus nannte bereits Recovery-Secrets als ersten Blocker, obwohl relevante Archivrohdateien laut Archivregister noch GELB/ROT sind.
+
+KISS-FIX:
+Fail-closed auf `TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`.
+
+
+## BAU-019 – TEXT-Quellenraum ohne 1-Klick-Standard
+
+STATUS: CLOSED
+
+KURZ:
+`TEXT/QUELLEN_AKTUELL/START_HERE.md` war als einzige von 22 Eingangstüren nicht 1-Klick-konform.
+
+KISS-FIX:
+Gleiche Adresse beibehalten und 1-Klick-Übersicht ergänzt.
+
+REGRESSIONSSCHUTZ:
+ARCH-040.

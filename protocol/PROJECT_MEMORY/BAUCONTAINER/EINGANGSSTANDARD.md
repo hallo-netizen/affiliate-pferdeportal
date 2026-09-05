@@ -96,3 +96,12 @@ Projektbüros führen bei echter Arbeit zusätzlich sichtbar zu:
 - Zielvertragsregister.
 
 Ein direkter Hobbyraum-Einstieg erfüllt ebenfalls die 1-Klick-Übersicht.
+
+
+## Flächendeckende Eingangstafel
+
+Jedes echte Verzeichnis unter `protocol/PROJECT_MEMORY/` besitzt eine `START_HERE.md`.
+
+Auch Lesesammlungen, Flure und Bestandsräume sind damit bei Direktlink selbsterklärend.
+
+Neue Verzeichnisse ohne `START_HERE.md` sind ein Architekturfehler.

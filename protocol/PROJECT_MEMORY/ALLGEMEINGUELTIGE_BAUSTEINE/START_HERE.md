@@ -32,3 +32,11 @@ projektspezifische Konfiguration als allgemeine Wahrheit ablegen, Modul-Kerne do
 
 Projektstart:
 Hauptpförtner → Anforderungen → Modulregister → nur passende Module → minimales Projektgebäude.
+
+
+## Noch nicht freigegebener Bestand
+
+`AFFILIATE/START_HERE.md`
+
+Wichtig:
+Dieser vorhandene Bestandsordner hat MODULKLASSE **UNGEKLÄRT** und ist trotz seines technischen Ablageorts nicht als allgemeingültiges Modul freigegeben.

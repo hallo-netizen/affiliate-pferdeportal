@@ -2,6 +2,25 @@
 
 STATUS: UNVERÄNDERTE QUELLENKOPIEN
 
+## 1-KLICK-ÜBERSICHT
+
+**WAS IST DAS?**  
+Der direkte Leseraum für die sechs aktuellen TEXT-/SEO-Originalakten vom 05.09.2026.
+
+**HIER BIST DU RICHTIG, WENN …**  
+du Status, Protokoll, Zielvertrag, Fehlerliste, Test-vs-Live-Befund oder Hard Rules wortgleich lesen musst.
+
+**DU DARFST …**  
+die sechs Quellen vollständig lesen und zu den technischen Originalquellen weitergehen.
+
+**DU DARFST NICHT …**  
+diese Quellen hier umschreiben, zusammenfassen und anstelle der Originale als neue Wahrheit ausgeben oder aus dem Leseraum Schreibrechte ableiten.
+
+**ALS NÄCHSTES …**  
+die für den Auftrag benötigte Originalakte öffnen; bei Facharbeit zusätzlich zurück über `../START_HERE.md` → `../CURRENT_STATE.md` → `../HOBBYRAUM.md`.
+
+## Quellenregel
+
 Diese Dateien sind wortgleiche Kopien der vom Nutzer gelieferten aktuellen TEXT-/SEO-Akten.
 
 Sie werden nicht redaktionell zusammengeführt oder umgeschrieben.
