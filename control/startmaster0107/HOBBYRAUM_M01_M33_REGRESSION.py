@@ -125,12 +125,30 @@ def m21():
             expect_exc(lambda:g.validate_prepared("PREPARED_RELEASE.json",sha(pp)),"AUTO_PUBLISH_FORBIDDEN")
     finally:
         g.REPO=old_repo
-def m22(): must("H8_PREPRODUCTION_BOOTSTRAP_POSITIVE_NEGATIVE_PASS" in cmd("control/single-door-boundary/test_h8_preproduction_bootstrap.py"),"M22_H8")
-def m23(): must("POSITIVE_FULL_PACKAGE_CURRENT_GENERATION" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M23_SIGNED_PACKAGE_ONLY")
+def m22():
+    out=cmd("control/single-door-boundary/test_h8_preproduction_bootstrap.py")
+    must("H8_PREPRODUCTION_BOOTSTRAP_POSITIVE_NEGATIVE_PASS" in out,"M22_H8")
+    boot=(REPO/"control/single-door-boundary/single_door_bootstrap.py").read_text(encoding="utf-8")
+    prov=(REPO/"control/single-door-boundary/preproduction_provenance_guard.py").read_text(encoding="utf-8")
+    must("H8_BOOTSTRAP_PROVENANCE_BINDING" in boot and "H8_BOOTSTRAP_PROVENANCE_BINDING" in prov,"M22_PROVENANCE_BINDING_MISSING")
+    must("H8_SIGNED_BOOTSTRAP_BINDING" not in boot and "H8_SIGNED_BOOTSTRAP_BINDING" not in prov,"M22_OLD_INTERNAL_SIGNED_BINDING_STILL_ACTIVE")
+def m23():
+    runtime=(REPO/"control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py").read_text(encoding="utf-8")
+    preflight=(REPO/"control/startmaster0107/codex-production-runtime/codex_environment_preflight.py").read_text(encoding="utf-8")
+    handoff=(REPO/"control/single-door-boundary/single_door_preproduction_handoff.py").read_text(encoding="utf-8")
+    active=handoff.split("def execute_bound_preproduction_action",1)[1].split("def attach_via_current_lifecycle",1)[0]
+    must("WORKFLOW_RELEASE_SIGNATURE_METADATA_INVALID" not in runtime,"M23_INTERNAL_SIGNATURE_METADATA_STILL_REQUIRED")
+    must("ED25519_RUNTIME_UNAVAILABLE" not in preflight and "ed25519_runtime" not in preflight,"M23_INTERNAL_ED25519_PREFLIGHT_STILL_REQUIRED")
+    must("validate_production_package_integrity(package_path)" in active,"M23_INTERNAL_INTEGRITY_PATH_MISSING")
+    must("validate_production_package(package_path" not in active,"M23_INTERNAL_SIGNED_VALIDATOR_STILL_ACTIVE")
+    must("_verify_release_signature" in handoff and "SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID" in handoff,"M23_EXTERNAL_SIGNED_VALIDATOR_REMOVED")
 def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
 def m25():
     s=(REPO/"control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt").read_text(encoding="utf-8")
+    a=CURRENT_ACTION.read_text(encoding="utf-8")
     must("bestehender Fachworkflow" in s and "Keine eigene" in s,"M25_FACHWORKFLOW_BOUNDARY")
+    must("'table_contract'" in a and "'internal_links'" in a,"M25_TABLE_OR_LINK_STAGE_REMOVED")
+    must(PPM.is_file() and sha(PPM)==PPM_SHA,"M25_PPM_RULE_PACKAGE_CHANGED")
 
 # Open historical regressions: hard positive + hard negative.
 def m26():
