@@ -6,7 +6,7 @@
   "authorized_inputs": [
     {
       "ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
-      "sha256": "2a5524aa62fe9fa1ff935275fdc897283d0326f8283911a095aeb4faaa6714fd"
+      "sha256": "151dab23b014fc4e2f05466b73618afd94f463a7a6d972c5a778191a1f4601de"
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
