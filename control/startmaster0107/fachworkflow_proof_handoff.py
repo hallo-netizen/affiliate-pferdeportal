@@ -138,9 +138,14 @@ nd_reset();
 $item=(array)$payload['production_plan_item']; $pack=(array)$payload['fact_pack']; $header=(array)$payload['production_plan_header'];
 $cid=(string)$payload['canonical_article_id']; $externalSlot=(string)$payload['plan_slot'];
 if((string)($item['canonical_article_id']??'')!==$cid){fwrite(STDERR,"CANONICAL_ID_MISMATCH\n");exit(2);}
-$slot=PPM679_Editorial_Plan_Registry::find_slot(['canonical_article_id'=>$cid]);
-if(!is_array($slot)){fwrite(STDERR,"CANONICAL_SLOT_MISSING\n");exit(2);}
-if(!hash_equals(PSERC_Plan_Slot_Identity::token($slot),$externalSlot)){fwrite(STDERR,"PLAN_SLOT_MISMATCH\n");exit(2);}
+$matches=[];
+foreach((array)(PPM679_Editorial_Plan_Registry::plan()['slots']??[]) as $candidate){
+  if(is_array($candidate)&&hash_equals(PSERC_Plan_Slot_Identity::token($candidate),$externalSlot)){$matches[]=$candidate;}
+}
+if(count($matches)!==1){fwrite(STDERR,"PLAN_SLOT_REGISTRY_MATCH_NOT_UNIQUE\n");exit(2);}
+$slot=$matches[0];
+$item['canonical_article_id']=(string)$slot['canonical_article_id'];
+unset($item['plan_slot']);
 $cat=(array)($item['quality_binding']['wordpress_category']??[]);
 if(empty($cat['id'])||empty($cat['slug'])){fwrite(STDERR,"WORDPRESS_CATEGORY_BINDING_MISSING\n");exit(2);}
 nd_seed_terms([$item]);
@@ -296,6 +301,7 @@ def materialize(repo: Path, request_ref: str) -> dict:
     if not isinstance(rows, list) or len(rows) != len(STAGES):
         raise Blocked("FACH_STAGE_COUNT_INVALID")
     verified = []
+    output_by_ref = {}
     seen = set()
     for row in rows:
         if not isinstance(row, dict) or set(row) != {"stage", "ref", "sha256"}:
@@ -308,7 +314,9 @@ def materialize(repo: Path, request_ref: str) -> dict:
         if not proof_path.is_file() or _sha(proof_path) != row["sha256"]:
             raise Blocked("FACH_STAGE_HASH_MISMATCH:" + str(stage))
         proof = _load(proof_path)
-        if stage == "ppm" and isinstance(proof.get("ppm679_binding"), dict):
+        if stage == "ppm":
+            if not isinstance(proof.get("ppm679_binding"), dict):
+                raise Blocked("PPM679_REAL_BINDING_MISSING")
             proof = _real_ppm_stage(repo, request, root, proof_path, proof)
             row = {"stage": stage, "ref": row["ref"], "sha256": _sha(proof_path)}
         expected = {"contract": STAGE_CONTRACT, "status": "PASS", "batch_sha256": batch,
@@ -332,10 +340,17 @@ def materialize(repo: Path, request_ref: str) -> dict:
             if not artifact_path.is_file() or _sha(artifact_path) != artifact["sha256"]:
                 raise Blocked("FACH_STAGE_ARTIFACT_HASH_MISMATCH:" + str(stage))
         verified.append(dict(row))
+        for output in [{"ref": row["ref"], "sha256": row["sha256"]}] + list(artifacts):
+            out_ref = str(output["ref"]); out_sha = str(output["sha256"])
+            if out_ref in output_by_ref and output_by_ref[out_ref] != out_sha:
+                raise Blocked("FACH_STAGE_OUTPUT_HASH_CONFLICT:" + out_ref)
+            output_by_ref[out_ref] = out_sha
     if seen != set(STAGES):
         raise Blocked("FACH_STAGE_SET_INVALID")
     passed = {"contract": PASS_CONTRACT, "status": "PASS", "batch_sha256": batch,
               "canonical_article_id": request["canonical_article_id"], "plan_slot": slot,
+              "article_type": str(request["production_plan_item"].get("article_type") or ""),
+              "article_type_templates_sha256": PPM679_RULESET_SHA256,
               "contract_binding_ref": request["contract_binding_ref"],
               "contract_binding_sha256": request["contract_binding_sha256"],
               "required_stage_proofs": verified, "fact_pack": request["fact_pack"],
@@ -346,8 +361,9 @@ def materialize(repo: Path, request_ref: str) -> dict:
               "content_or_quality_rules_changed": False, "publish_allowed": False}
     pass_path = _path(repo, str(request["fachworkflow_pass_ref"]), root)
     _write(pass_path, passed)
-    output_rows = verified + [{"stage": "fachworkflow_pass", "ref": request["fachworkflow_pass_ref"], "sha256": _sha(pass_path)}]
-    outputs = [{"ref": row["ref"], "sha256": row["sha256"]} for row in output_rows]
+    pass_sha = _sha(pass_path)
+    output_by_ref[str(request["fachworkflow_pass_ref"])] = pass_sha
+    outputs = [{"ref": ref, "sha256": digest} for ref, digest in output_by_ref.items()]
     receipt = {"contract": RECEIPT_CONTRACT, "room_token": request["room_token"],
                "canonical_article_id": request["canonical_article_id"], "plan_slot": slot,
                "status": "PASS", "workflow_pass": True, "navigation_decision": False,
@@ -355,7 +371,7 @@ def materialize(repo: Path, request_ref: str) -> dict:
                "content_or_quality_rules_changed": False, "outputs": outputs,
                "evidence": ["REAL_FACHWORKFLOW_STAGE_EXECUTION_PROOFS_HASH_VERIFIED"],
                "fachworkflow_pass_ref": request["fachworkflow_pass_ref"],
-               "fachworkflow_pass_sha256": _sha(pass_path)}
+               "fachworkflow_pass_sha256": pass_sha}
     receipt_path = _path(repo, str(request["item_receipt_ref"]), root)
     _write(receipt_path, receipt)
     return {"ok": True, "status": "FACHWORKFLOW_PROOF_HANDOFF_PASS",
