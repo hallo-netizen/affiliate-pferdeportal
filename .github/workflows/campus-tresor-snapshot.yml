@@ -1,0 +1,100 @@
+name: Campus Tresor Snapshot
+
+on:
+  push:
+    branches:
+      - tresor/build-20260905
+
+permissions:
+  contents: read
+
+jobs:
+  build-tresor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all branches and tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' '+refs/tags/*:refs/tags/*' --prune
+          mkdir -p tresor/meta tresor/restore-test
+
+      - name: Create Git mirror bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          git bundle create tresor/affiliate-pferdeportal.bundle --all
+          git bundle verify tresor/affiliate-pferdeportal.bundle
+          git show-ref > tresor/meta/show-ref.txt
+          git branch -a > tresor/meta/branches.txt
+          git tag -l > tresor/meta/tags.txt
+          git log --all --oneline --decorate --graph > tresor/meta/commit-graph.txt
+          git rev-parse refs/remotes/origin/main > tresor/meta/main-sha.txt
+          if git rev-parse refs/remotes/origin/hobbyroom/project-memory-campus-v1-20260905 >/dev/null 2>&1; then
+            git rev-parse refs/remotes/origin/hobbyroom/project-memory-campus-v1-20260905 > tresor/meta/campus-sha.txt
+          fi
+          if git rev-parse refs/remotes/origin/paul/text-seo-campus-ready-20260905 >/dev/null 2>&1; then
+            git rev-parse refs/remotes/origin/paul/text-seo-campus-ready-20260905 > tresor/meta/paul-text-seo-sha.txt
+          fi
+
+      - name: Snapshot GitHub metadata
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          api() {
+            local path="$1"
+            local out="$2"
+            if ! curl -fsSL               -H "Authorization: Bearer $GH_TOKEN"               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2022-11-28"               "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/$path" > "$out"; then
+              printf 'UNAVAILABLE:%s\n' "$path" > "$out.UNAVAILABLE"
+              rm -f "$out"
+            fi
+          }
+          curl -fsSL             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY" > tresor/meta/repository.json
+          api "branches?per_page=100" "tresor/meta/branches.json"
+          api "tags?per_page=100" "tresor/meta/tags.json"
+          api "issues?state=all&per_page=100" "tresor/meta/issues.json"
+          api "pulls?state=all&per_page=100" "tresor/meta/pulls.json"
+          api "releases?per_page=100" "tresor/meta/releases.json"
+          api "rulesets?per_page=100" "tresor/meta/rulesets.json"
+          api "actions/workflows?per_page=100" "tresor/meta/workflows.json"
+
+      - name: Restore-test Git bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone tresor/affiliate-pferdeportal.bundle tresor/restore-test/repo
+          git -C tresor/restore-test/repo fsck --full
+          git -C tresor/restore-test/repo log -1 --oneline > tresor/meta/restore-test-head.txt
+          printf 'GIT_BUNDLE_RESTORE_PASS\n' > tresor/meta/restore-test-status.txt
+
+      - name: Build manifest and hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "created_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "repository=$GITHUB_REPOSITORY"
+            echo "workflow_ref=$GITHUB_REF"
+            echo "workflow_sha=$GITHUB_SHA"
+            echo "main_sha=$(cat tresor/meta/main-sha.txt)"
+            echo "branch_count=$(git for-each-ref refs/remotes/origin --format='%(refname)' | wc -l | tr -d ' ')"
+            echo "tag_count=$(git tag -l | wc -l | tr -d ' ')"
+            echo "git_bundle_restore=$(cat tresor/meta/restore-test-status.txt)"
+          } > tresor/MANIFEST.txt
+          sha256sum tresor/affiliate-pferdeportal.bundle > tresor/SHA256SUMS.txt
+          tar -czf CAMPUS_TRESOR_GIT_MIRROR_20260905.tar.gz -C tresor affiliate-pferdeportal.bundle meta MANIFEST.txt SHA256SUMS.txt
+
+      - name: Upload Tresor artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CAMPUS_TRESOR_GIT_MIRROR_20260905
+          path: CAMPUS_TRESOR_GIT_MIRROR_20260905.tar.gz
+          if-no-files-found: error
+          retention-days: 30
