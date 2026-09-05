@@ -73,3 +73,10 @@ Normale Arbeitschats bleiben im TEXT-Arbeitsweg.
 
 Paul darf alle Büroakten lesen, aber **keine Datei unter `protocol/PROJECT_MEMORY/**` verändern**. Integration seiner technischen Lösung erfolgt ausschließlich durch den zuständigen TEXT-Arbeitschat.
 
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

@@ -55,3 +55,11 @@ Für jede echte Arbeit im Campus gilt vor `fertig`, `PASS` oder Übergabe die un
 
 Nicht aus Erinnerung protokollieren:
 aktuellen Campus-/Fachstand zuerst frisch lesen und nur tatsächlich betroffene autoritative Stellen aktualisieren.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

@@ -26,3 +26,11 @@ einen Zielvertrag still umschreiben, verkürzen oder eine zweite Zielwahrheit er
 neue versionierte Fassung oder neuer Vertrag.
 
 Alte Fassungen bleiben historisch erhalten.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

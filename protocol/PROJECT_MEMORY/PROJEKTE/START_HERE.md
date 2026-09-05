@@ -25,3 +25,11 @@ für das aktuelle Projekt: `PFERDE_ATELIER/START_HERE.md`.
 - `PFERDE_ATELIER/START_HERE.md`
 
 Neue Projekte entstehen ausschließlich nach dem definierten Projektstartweg.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

@@ -40,3 +40,11 @@ Technische Originalquellen bleiben zusätzlich im Repository:
 - `control/startmaster0107/`
 
 Der große unveränderte Gesamtmaster liegt weiterhin im persistenten Archiv und wird über `../MASTERDATEIEN_INVENTAR.md` referenziert.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+
