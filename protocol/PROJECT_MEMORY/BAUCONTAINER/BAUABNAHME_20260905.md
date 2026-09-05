@@ -173,6 +173,18 @@ Folgen:
 
 UNGEKLÄRT wird nicht als PASS umgedeutet.
 
+## Neubau-/Regressionsschutz
+PASS.
+
+`NEUES_PROJEKT_VORLAGE.md` bindet jetzt:
+- START_HERE für neue Verzeichnisse;
+- stabile Adressen;
+- Büro-Leitungen;
+- Hobbyraum-Standard;
+- Positiv-/Negativ-Abnahme.
+
+Damit baut die Vorlage nicht mehr nach einem älteren Stand der Bauordnung.
+
 ## Endurteil
 
 ### POSITIV

@@ -279,3 +279,20 @@ Gleiche Adresse beibehalten und 1-Klick-Übersicht ergänzt.
 
 REGRESSIONSSCHUTZ:
 ARCH-040.
+
+
+## BAU-020 – Neubauvorlage hinkte der realen Bauordnung hinterher
+
+STATUS: CLOSED
+
+KURZ:
+NEUES_PROJEKT_VORLAGE enthielt den alten Grundstandard, aber nicht die während der Bauabnahme ergänzten Regeln.
+
+AUSWIRKUNG:
+Ein neues Projekt hätte direkte Büro-/Hobbyraum-/Flurfehler reproduzieren können.
+
+KISS-FIX:
+Vorlage auf ARCH-032 bis ARCH-040 nachgezogen.
+
+REGRESSIONSSCHUTZ:
+ARCH-041.

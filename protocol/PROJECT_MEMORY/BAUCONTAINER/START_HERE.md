@@ -28,6 +28,9 @@ unter dem Vorwand „Architektur“ Fachinhalte, Fachregeln oder technische Fach
 - `ENTWICKLUNGSPROTOKOLL.md` – Gedanken-/Entwicklungsweg
 - `ARCHITEKTUR_FEHLERKISTE.md` – Architekturfehler
 - `EINGANGSSTANDARD.md` – 1-Klick-Standard
+- `HOBBYRAUM_STANDARD.md` – Hobbyraumzustände/Kennwort/Befugnisse
+- `NEUES_PROJEKT_VORLAGE.md` – zukünftige Gebäude nach aktuellem Standard
+- `BAUABNAHME_20260905.md` – letzter harter Abnahmebeleg
 - `HAUSMEISTER.md` – reine Verwaltung
 
 ## Rollenwechsel

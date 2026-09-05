@@ -103,6 +103,8 @@ Keine Räume auf Vorrat.
 - `ARCHITEKTUR_FEHLERKISTE.md` → Architekturfehler
 - `HAUSMEISTER.md` → reine Ordnungsverwaltung
 - `EINGANGSSTANDARD.md` → 1-Klick-Orientierung
+- `HOBBYRAUM_STANDARD.md` → ein Arbeitsraum pro Büro / FREI-AKTIV-BLOCKED
+- `BAUABNAHME_20260905.md` → letzter harter Abnahmebeleg
 
 ## Hauptwahrheit
 
@@ -133,6 +135,13 @@ Damit bleibt es ein Wegweiser und erzeugt keine zweite Wahrheit.
 ## Projektstart
 
 Hauptpförtner → Ziel/Anforderungen → Modulregister → passende Module → minimales Projektgebäude.
+
+Neue Projektgebäude zusätzlich:
+- `NEUES_PROJEKT_VORLAGE.md`;
+- jedes neue Verzeichnis mit `START_HERE.md`;
+- jedes Büro mit CURRENT_STATE + genau einem HOBBYRAUM;
+- Arbeitsleitungen zu Handlungs-/Fehler-/Änderungs-/Zielregister;
+- abschließende Positiv-/Negativ-Bauabnahme.
 
 ## Masterdateien
 

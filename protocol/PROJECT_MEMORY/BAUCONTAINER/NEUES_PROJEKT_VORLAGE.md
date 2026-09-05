@@ -55,3 +55,38 @@ Projekt dokumentiert nur:
 - wichtige Änderungen mit WARUM dokumentieren.
 
 Projektgebäude kann technisch im selben oder eigenen Repository liegen.
+
+
+## Neue Bauvorschriften – verpflichtend
+
+### Flur-/Adressregel
+- jedes neue Verzeichnis unter PROJECT_MEMORY erhält sofort `START_HERE.md`;
+- neues Projekt zusätzlich in `PROJEKTE/START_HERE.md` eintragen;
+- bestehende/verteilte Adressen nicht still umbenennen; bei Umbau Weiterweiser erhalten.
+
+### Büro-Leitungen
+Jedes neue Projektbüro führt vor echter Arbeit sichtbar über:
+1. `CURRENT_STATE.md`;
+2. `HOBBYRAUM.md`;
+3. Handlungsverzeichnis;
+4. Fehlerregister;
+5. Änderungsregister;
+6. Zielvertragsregister;
+7. gebundenen Arbeitsweg.
+
+### Hobbyraum
+Pflicht:
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md`
+
+Genau ein Hobbyraum pro Büro.
+Zustände nur:
+FREI / AKTIV / BLOCKED.
+
+Direktlink in HOBBYRAUM muss selbst 1-Klick-konform sein.
+
+### Abnahme
+Vor Freigabe eines neuen Gebäudes:
+positive und negative Architekturprüfung gegen
+`BAUCONTAINER/EINGANGSSTANDARD.md`
+und
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md`.
