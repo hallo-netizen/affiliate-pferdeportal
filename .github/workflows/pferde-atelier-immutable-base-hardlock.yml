@@ -18,19 +18,198 @@ jobs:
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: git fetch --no-tags --depth=1 origin "$HEAD_SHA"
-      - name: Block changes to immutable entrance and ENDSTEMPEL security layer
+      - name: Block immutable security paths and Paul PROJECT_MEMORY writes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/changed.txt
+          cat /tmp/changed.txt
+          python3 - <<'PY'
+          import os, pathlib, re
+
+          changed = pathlib.Path('/tmp/changed.txt').read_text(encoding='utf-8').splitlines()
+          head_ref = os.environ['HEAD_REF']
+
+          immutable = re.compile(r'^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/paul-scope-gate/|control/startmaster0107/ENDSTEMPEL_)')
+
+          def decision(ref, paths):
+              if ref.startswith('paul/') and any(p.startswith('protocol/PROJECT_MEMORY/') for p in paths):
+                  return 'PAUL_PROJECT_MEMORY_WRITE_BLOCKED'
+              if any(immutable.search(p) for p in paths):
+                  return 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
+              return 'PASS'
+
+          # Built-in positive/negative regression tests.
+          assert decision('paul/test', ['protocol/PROJECT_MEMORY/START_HERE.md']) == 'PAUL_PROJECT_MEMORY_WRITE_BLOCKED'
+          assert decision('paul/test', ['src/example.py']) == 'PASS'
+          assert decision('feature/test', ['protocol/PROJECT_MEMORY/START_HERE.md']) == 'PASS'
+          assert decision('feature/test', ['.github/workflows/x.yml']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
+          print('PATH_GUARD_SELFTEST_PASS')
+
+          result = decision(head_ref, changed)
+          if result != 'PASS':
+              raise SystemExit(result)
+          print('PATH_GUARD_PASS')
+          PY
+      - name: Enforce current Paul assignment and technical write scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/paul-scope-gate/paul_scope_gate.py verify-pr "$HEAD_REF" "$HEAD_SHA" "$BASE_SHA"
+
+      - name: Enforce PROJECT_MEMORY protocol completion
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         shell: bash
         run: |
           set -euo pipefail
-          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/changed.txt
-          cat /tmp/changed.txt
-          if grep -Eq '^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/startmaster0107/ENDSTEMPEL_)' /tmp/changed.txt; then
-            echo 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
-            exit 1
-          fi
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/project-memory-changed.txt
+          python3 - <<'PY'
+          import json, os, pathlib, re
+
+          real_changed = pathlib.Path('/tmp/project-memory-changed.txt').read_text(encoding='utf-8').splitlines()
+          with open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8') as fh:
+              event = json.load(fh)
+          real_body = ((event.get('pull_request') or {}).get('body') or '').replace('\r\n', '\n')
+
+          fields = [
+              'FEHLER',
+              'PROTOKOLL',
+              'WARUM',
+              'CURRENT_STATE',
+              'HOBBYRAUM_NEXT_ACTION',
+              'ZIELVERTRAG',
+              'ARCHIV',
+              'EINE_WAHRHEIT',
+              'TESTS',
+              'TECHNISCHE_CHECKS',
+          ]
+          tri = {'PASS', 'NACHGEHOLT', 'NICHT_BETROFFEN'}
+
+          def evaluate(changed, body):
+              pm = [p for p in changed if p.startswith('protocol/PROJECT_MEMORY/')]
+              if not pm:
+                  return 'PROJECT_MEMORY_PROTOCOLCHECK_NOT_APPLICABLE'
+
+              if not re.search(r'(?m)^PROTOKOLLCHECK\s*$', body):
+                  return 'PROJECT_MEMORY_PROTOCOLCHECK_MISSING'
+
+              values = {}
+              for field in fields:
+                  m = re.search(rf'(?m)^{re.escape(field)}:\s*([A-Z_]+)\s*$', body)
+                  if not m:
+                      return f'PROJECT_MEMORY_PROTOCOLCHECK_FIELD_MISSING:{field}'
+                  values[field] = m.group(1)
+
+              for field in ['FEHLER','PROTOKOLL','WARUM','CURRENT_STATE','HOBBYRAUM_NEXT_ACTION','ZIELVERTRAG','ARCHIV']:
+                  if values[field] not in tri:
+                      return f'PROJECT_MEMORY_PROTOCOLCHECK_VALUE_INVALID:{field}'
+
+              if values['EINE_WAHRHEIT'] != 'PASS':
+                  return 'PROJECT_MEMORY_ONE_TRUTH_NOT_PASS'
+              if values['TESTS'] != 'PASS':
+                  return 'PROJECT_MEMORY_TESTS_NOT_PASS'
+              if values['TECHNISCHE_CHECKS'] not in {'PASS','NICHT_BETROFFEN'}:
+                  return 'PROJECT_MEMORY_TECHNICAL_CHECKS_NOT_PASS'
+
+              def touched(suffix=None, contains=None, prefix=None):
+                  for p in pm:
+                      if suffix is not None and p.endswith(suffix):
+                          return True
+                      if contains is not None and contains in p:
+                          return True
+                      if prefix is not None and p.startswith(prefix):
+                          return True
+                  return False
+
+              affected = {
+                  'CURRENT_STATE': touched(suffix='/CURRENT_STATE.md'),
+                  'HOBBYRAUM_NEXT_ACTION': touched(suffix='/HOBBYRAUM.md'),
+                  'ZIELVERTRAG': touched(contains='ZIELVERTRAG') or touched(contains='ZIELVERTRAEGE'),
+                  'ARCHIV': touched(prefix='protocol/PROJECT_MEMORY/ARCHIV/'),
+                  'FEHLER': any('FEHLER' in pathlib.PurePosixPath(p).name for p in pm),
+                  'PROTOKOLL': any('PROTOKOLL' in pathlib.PurePosixPath(p).name for p in pm),
+                  'WARUM': touched(suffix='/AENDERUNGSREGISTER.md'),
+              }
+              for field, is_affected in affected.items():
+                  if is_affected and values[field] == 'NICHT_BETROFFEN':
+                      return f'PROJECT_MEMORY_PROTOCOLCHECK_CONTRADICTS_DIFF:{field}'
+
+              architecture = any(
+                  p.endswith('/START_HERE.md')
+                  or p == 'protocol/PROJECT_MEMORY/START_HERE.md'
+                  or p.endswith('/HAUPTPFOERTNER.md')
+                  or p.endswith('/HANDLUNGSVERZEICHNIS.md')
+                  or p.endswith('/BAUCONTAINER/EINGANGSSTANDARD.md')
+                  or p.endswith('/BAUCONTAINER/HOBBYRAUM_STANDARD.md')
+                  or p.endswith('/BAUCONTAINER/NEUES_PROJEKT_VORLAGE.md')
+                  or p.endswith('/BAUCONTAINER/HAUSMEISTER.md')
+                  or p.endswith('/PAUL/AUFTRAG_VORLAGE.md')
+                  for p in pm
+              )
+              if architecture:
+                  required = {
+                      'protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md',
+                      'protocol/PROJECT_MEMORY/BAUCONTAINER/BAUPROTOKOLL.md',
+                  }
+                  missing = sorted(required.difference(pm))
+                  if missing:
+                      return 'PROJECT_MEMORY_ARCHITECTURE_PROTOCOL_MISSING:' + ','.join(missing)
+                  if values['WARUM'] == 'NICHT_BETROFFEN' or values['PROTOKOLL'] == 'NICHT_BETROFFEN':
+                      return 'PROJECT_MEMORY_ARCHITECTURE_PROTOCOLCHECK_INVALID'
+
+              return 'PROJECT_MEMORY_PROTOCOLCHECK_PASS'
+
+          valid = """PROTOKOLLCHECK
+FEHLER: NICHT_BETROFFEN
+PROTOKOLL: PASS
+WARUM: PASS
+CURRENT_STATE: NICHT_BETROFFEN
+HOBBYRAUM_NEXT_ACTION: NICHT_BETROFFEN
+ZIELVERTRAG: NICHT_BETROFFEN
+ARCHIV: NICHT_BETROFFEN
+EINE_WAHRHEIT: PASS
+TESTS: PASS
+TECHNISCHE_CHECKS: PASS
+"""
+          architecture_paths = [
+              'protocol/PROJECT_MEMORY/START_HERE.md',
+              'protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md',
+              'protocol/PROJECT_MEMORY/BAUCONTAINER/BAUPROTOKOLL.md',
+          ]
+
+          # Built-in positive/negative regression tests.
+          cases = [
+              ('POS_NON_PM', ['src/x.py'], '', 'PROJECT_MEMORY_PROTOCOLCHECK_NOT_APPLICABLE'),
+              ('POS_ARCH', architecture_paths, valid, 'PROJECT_MEMORY_PROTOCOLCHECK_PASS'),
+              ('NEG_MISSING', ['protocol/PROJECT_MEMORY/X.md'], '', 'PROJECT_MEMORY_PROTOCOLCHECK_MISSING'),
+              ('NEG_ONE_TRUTH', architecture_paths, valid.replace('EINE_WAHRHEIT: PASS','EINE_WAHRHEIT: FAIL'), 'PROJECT_MEMORY_ONE_TRUTH_NOT_PASS'),
+              ('NEG_TESTS', architecture_paths, valid.replace('TESTS: PASS','TESTS: OFFEN'), 'PROJECT_MEMORY_TESTS_NOT_PASS'),
+              ('NEG_CURRENT_CONTRADICTION', ['protocol/PROJECT_MEMORY/X/CURRENT_STATE.md'], valid, 'PROJECT_MEMORY_PROTOCOLCHECK_CONTRADICTS_DIFF:CURRENT_STATE'),
+              ('NEG_HOBBY_CONTRADICTION', ['protocol/PROJECT_MEMORY/X/HOBBYRAUM.md'], valid, 'PROJECT_MEMORY_PROTOCOLCHECK_CONTRADICTS_DIFF:HOBBYRAUM_NEXT_ACTION'),
+              ('NEG_ARCH_PROTOCOL_MISSING', ['protocol/PROJECT_MEMORY/START_HERE.md'], valid, 'PROJECT_MEMORY_ARCHITECTURE_PROTOCOL_MISSING:protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md,protocol/PROJECT_MEMORY/BAUCONTAINER/BAUPROTOKOLL.md'),
+          ]
+          for name, changed, body, expected in cases:
+              got = evaluate(changed, body)
+              assert got == expected, f'{name}: expected {expected}, got {got}'
+          print('PROJECT_MEMORY_PROTOCOLCHECK_SELFTEST_PASS:8/8')
+
+          result = evaluate(real_changed, real_body)
+          if result in {'PROJECT_MEMORY_PROTOCOLCHECK_PASS','PROJECT_MEMORY_PROTOCOLCHECK_NOT_APPLICABLE'}:
+              print(result)
+          else:
+              raise SystemExit(result)
+          PY
+
       - name: Enforce monotonic prebound workflow transition
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}

@@ -1,15 +1,106 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import hashlib, json, shutil, sys
+import hashlib, json, shutil, subprocess, sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 POINTER = REPO / 'control/CURRENT_STARTMASTER.json'
 CAPSULE = REPO / '.pferde-capsule'
 RECEIPT_NAME = 'RECEIPT.json'
+PAUL_GATE = REPO / 'control/paul-scope-gate/paul_scope_gate.py'
 
 class Blocked(RuntimeError):
     pass
+
+OFFICIAL_GITHUB_REPO = 'hallo-netizen/affiliate-pferdeportal'
+FORBIDDEN_EXECUTION_COMPONENTS = {'campus-tresor', 'campus-archiv'}
+
+def _norm_component(value: str) -> str:
+    return str(value).strip().casefold().replace('_', '-').replace(' ', '-')
+
+def _path_is_backup_area(path: Path) -> bool:
+    try:
+        parts = path.resolve().parts
+    except OSError:
+        parts = path.absolute().parts
+    return any(_norm_component(p) in FORBIDDEN_EXECUTION_COMPONENTS for p in parts)
+
+def _git_value(*args: str) -> str:
+    try:
+        p = subprocess.run(
+            ['git', '-C', str(REPO), *args],
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except OSError as exc:
+        raise Blocked(f'OFFICIAL_GIT_WORKTREE_REQUIRED:{exc.__class__.__name__}') from exc
+    if p.returncode != 0:
+        return ''
+    return p.stdout.strip()
+
+def _resolve_git_path(value: str) -> Path | None:
+    if not value:
+        return None
+    p = Path(value)
+    if not p.is_absolute():
+        p = REPO / p
+    try:
+        return p.resolve()
+    except OSError:
+        return p.absolute()
+
+def _origin_is_official_github(url: str) -> bool:
+    u = str(url or '').strip().casefold().rstrip('/')
+    if u.endswith('.git'):
+        u = u[:-4]
+    target = OFFICIAL_GITHUB_REPO.casefold()
+    return u.endswith('github.com/' + target) or u.endswith('github.com:' + target)
+
+def assert_execution_workspace() -> None:
+    if _path_is_backup_area(REPO):
+        raise Blocked('BACKUP_WORKSPACE_EXECUTION_BLOCKED')
+
+    bare = _git_value('rev-parse', '--is-bare-repository').casefold()
+    inside = _git_value('rev-parse', '--is-inside-work-tree').casefold()
+    if bare == 'true':
+        raise Blocked('BARE_GIT_MIRROR_EXECUTION_BLOCKED')
+    if inside != 'true':
+        raise Blocked('OFFICIAL_GIT_WORKTREE_REQUIRED')
+
+    for args in (
+        ('rev-parse', '--git-dir'),
+        ('rev-parse', '--git-common-dir'),
+    ):
+        gp = _resolve_git_path(_git_value(*args))
+        if gp is not None and _path_is_backup_area(gp):
+            raise Blocked('BACKUP_GITDIR_EXECUTION_BLOCKED')
+
+    origin = _git_value('config', '--get', 'remote.origin.url')
+    if not _origin_is_official_github(origin):
+        raise Blocked('OFFICIAL_GITHUB_ORIGIN_REQUIRED')
+
+def run_paul_scope_gate(command: str):
+    branch = _git_value('branch', '--show-current')
+    if not branch.startswith('paul/'):
+        return None
+    if command not in {'start', 'verify'}:
+        raise Blocked('PAUL_SCOPE_GATE_COMMAND_INVALID')
+    if not PAUL_GATE.is_file():
+        raise Blocked('PAUL_SCOPE_GATE_MISSING')
+    p = subprocess.run(
+        [sys.executable, str(PAUL_GATE), command],
+        cwd=str(REPO),
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if p.returncode != 0:
+        detail = (p.stdout or p.stderr or 'UNKNOWN').strip()
+        raise Blocked('PAUL_SCOPE_GATE_BLOCKED:' + detail)
+    return p.stdout.strip()
 
 def sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -34,6 +125,7 @@ def rel(v: str) -> Path:
     return p
 
 def authority():
+    assert_execution_workspace()
     if not POINTER.is_file():
         raise Blocked('STARTMASTER_POINTER_MISSING')
     ptr = load(POINTER)
@@ -418,12 +510,21 @@ def main():
         cmd = sys.argv[1] if len(sys.argv) > 1 else 'verify'
         if cmd == 'start':
             result = materialize()
+            paul = run_paul_scope_gate('start')
+            if paul is not None:
+                result['paul_scope_gate'] = paul
         elif cmd == 'verify':
             result = verify()
+            paul = run_paul_scope_gate('verify')
+            if paul is not None:
+                result['paul_scope_gate'] = paul
         elif cmd == 'complete':
             if len(sys.argv) != 3:
                 raise Blocked('COMPLETE_REQUIRES_RECEIPT_PATH')
+            paul = run_paul_scope_gate('verify')
             result = complete(Path(sys.argv[2]))
+            if paul is not None:
+                result['paul_scope_gate'] = paul
         else:
             raise Blocked('UNKNOWN_COMMAND')
         print(json.dumps(result, ensure_ascii=False, indent=2))

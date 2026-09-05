@@ -19,6 +19,54 @@ Wenn PASS gemeldet wird:
 - keine State- oder Workflowänderung eigenständig vornehmen;
 - bereits bestandene unveränderte PASS-Stufen nicht erneut prüfen.
 
+## Harte Arbeitsort-Sperre – Tresor/Archiv sind niemals Werkbank
+
+Der Notfall-Tresor, Campus-Archiv, Git-Mirror, Backup-Bundles und daraus direkt geöffnete lokale Worktrees sind ausschließlich Sicherungs-/Beleg-/Restore-Quellen.
+
+Verboten:
+- Runner, Tests, Reparaturen oder Produktion direkt aus `Campus-Tresor` oder `Campus-Archiv` starten;
+- einen Bare-Git-Mirror als Arbeitsrepository verwenden;
+- einen Worktree mit lokalem Mirror als `origin` als offiziellen Arbeitsstand verwenden;
+- Tresor/Archiv als Ersatzroute benutzen, wenn der normale gebundene Workflow BLOCKED ist.
+
+`cloud_entry.py start`, `verify` und `complete` prüfen diese Grenze fail-closed.
+
+Zulässige Wiederherstellung:
+Backup/Mirror nur gemäß Tresor-Wiederaufbau lesen → in einen frischen Arbeits-Worktree außerhalb Tresor/Archiv wiederherstellen → offizielles GitHub-`origin` binden → normale Cloud-Eingangstür neu ausführen.
+
+Ein Backup-PASS ist niemals ein Arbeits-PASS.
+
+## Automatische Pflicht auf `paul/*`-Branches
+
+Die bestehende Cloud-Eingangstür bleibt die **einzige manuell aufzurufende Starttür**:
+
+`python3 control/cloud-entry-gate/cloud_entry.py start`
+
+Auf einem `paul/*`-Branch ruft `cloud_entry.py` den Paul-Scope-Gate **selbst automatisch** auf.
+
+Der Worker darf und muss keinen zweiten Paul-Startbefehl mehr erzeugen oder merken.
+
+Automatisch bei `start`:
+- aktueller offizieller Campus wird frisch geholt;
+- aktive Paul-Zuweisung wird geprüft;
+- Branch/technische Basis/WRITE_SCOPE werden geprüft;
+- `.paul-capsule/` wird als temporärer hashgebundener READ-ONLY-Snapshot erzeugt;
+- nur bei `PAUL_BOOTSTRAP_PASS` wird der Cloud-Start gültig.
+
+Automatisch bei `verify`:
+- Paul-Frische-/Scopeprüfung wird erneut ausgeführt.
+
+Automatisch bei `complete`:
+- **vor jeder State-/Receipt-Fortschreibung** wird automatisch Paul-`verify` ausgeführt;
+- relevante Drift oder Scope-Verstoß blockiert den Abschluss fail-closed.
+
+WICHTIG:
+`.pferde-capsule/INSTRUCTION.txt` bleibt die einzige Workflow-Instruktion.
+`.paul-capsule/` ersetzt sie NICHT und wählt keinen Workflow-Schritt.
+
+Bei `PAUL_NOT_ASSIGNED`, `STALE_ASSIGNMENT_BLOCKED`, `PAUL_WRITE_SCOPE_BLOCKED` oder jedem anderen Paul-Gate-Nicht-PASS:
+sofort stoppen; kein gültiger Cloud-Abschluss.
+
 ## Verbindlicher Step-Abschluss
 Nach Ausführung des aktuellen Steps MUSS `.pferde-capsule/RECEIPT.json` exakt gemäß `.pferde-capsule/RECEIPT_SCHEMA.json` geschrieben werden.
 

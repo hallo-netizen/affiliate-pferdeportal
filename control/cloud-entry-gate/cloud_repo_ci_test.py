@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import copy, hashlib, importlib.util, json, shutil, tempfile
+import copy, hashlib, importlib.util, json, shutil, subprocess, tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -47,6 +47,10 @@ def copy_current_repo(td: Path):
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(src, dst)
     return r, root_rel, state_rel, bundle_rel
+
+def init_official_git(r: Path, origin='https://github.com/hallo-netizen/affiliate-pferdeportal.git'):
+    subprocess.run(['git', 'init', '-q', str(r)], check=True)
+    subprocess.run(['git', '-C', str(r), 'remote', 'add', 'origin', origin], check=True)
 
 def bind_root(r: Path, root_rel: str, state_rel: str):
     rp, sp = r / root_rel, r / state_rel
@@ -106,6 +110,7 @@ def main():
 
     with tempfile.TemporaryDirectory() as t:
         r, root_rel, state_rel, bundle_rel = copy_current_repo(Path(t))
+        init_official_git(r)
         old = use_repo(r)
         try:
             assert m.verify()['status'] == 'CODEX_CLOUD_GATE_VERIFY_PASS'
@@ -173,6 +178,59 @@ def main():
         finally:
             restore(old)
 
+    # Backup/archive execution boundary: hard positive/negative tests.
+    with tempfile.TemporaryDirectory() as t:
+        normal, _, _, _ = copy_current_repo(Path(t) / 'normal')
+        init_official_git(normal)
+        old = use_repo(normal)
+        try:
+            assert m.verify()['status'] == 'CODEX_CLOUD_GATE_VERIFY_PASS'
+        finally:
+            restore(old)
+
+    for forbidden_name in ('Campus-Tresor', 'Campus-Archiv'):
+        with tempfile.TemporaryDirectory() as t:
+            r, _, _, _ = copy_current_repo(Path(t) / forbidden_name)
+            init_official_git(r)
+            old = use_repo(r)
+            try:
+                expect_block(m.verify, 'BACKUP_WORKSPACE_EXECUTION_BLOCKED')
+            finally:
+                restore(old)
+
+    with tempfile.TemporaryDirectory() as t:
+        r, _, _, _ = copy_current_repo(Path(t) / 'local-origin')
+        init_official_git(r, origin='/Campus-Tresor/repository.git')
+        old = use_repo(r)
+        try:
+            expect_block(m.verify, 'OFFICIAL_GITHUB_ORIGIN_REQUIRED')
+        finally:
+            restore(old)
+
+    with tempfile.TemporaryDirectory() as t:
+        r = Path(t) / 'mirror.git'
+        subprocess.run(['git', 'init', '--bare', '-q', str(r)], check=True)
+        old = use_repo(r)
+        try:
+            expect_block(m.verify, 'BARE_GIT_MIRROR_EXECUTION_BLOCKED')
+        finally:
+            restore(old)
+
+    with tempfile.TemporaryDirectory() as t:
+        src, _, _, _ = copy_current_repo(Path(t) / 'Campus-Tresor' / 'source')
+        init_official_git(src)
+        subprocess.run(['git', '-C', str(src), 'config', 'user.email', 'ci@example.invalid'], check=True)
+        subprocess.run(['git', '-C', str(src), 'config', 'user.name', 'CI'], check=True)
+        subprocess.run(['git', '-C', str(src), 'add', '.'], check=True)
+        subprocess.run(['git', '-C', str(src), 'commit', '-q', '-m', 'fixture'], check=True)
+        outside = Path(t) / 'outside-worktree'
+        subprocess.run(['git', '-C', str(src), 'worktree', 'add', '-q', str(outside), 'HEAD'], check=True)
+        old = use_repo(outside)
+        try:
+            expect_block(m.verify, 'BACKUP_GITDIR_EXECUTION_BLOCKED')
+        finally:
+            restore(old)
+
     print(json.dumps({
         'ok': True,
         'status': 'CODEX_CLOUD_GATE_CI_PASS',
@@ -184,7 +242,11 @@ def main():
         'terminal_nonpass_chat_restart_no_repeat': 'PASS',
         'api_required': False,
         'local_codex_required': False,
-        'domain_logic_authority': 'NONE'
+        'domain_logic_authority': 'NONE',
+        'backup_archive_workspace_execution_blocked': 'PASS',
+        'bare_mirror_execution_blocked': 'PASS',
+        'local_mirror_origin_execution_blocked': 'PASS',
+        'backup_common_gitdir_execution_blocked': 'PASS'
     }, indent=2))
 
 if __name__ == '__main__':
