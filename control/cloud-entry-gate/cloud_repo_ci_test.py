@@ -216,6 +216,21 @@ def main():
         finally:
             restore(old)
 
+    with tempfile.TemporaryDirectory() as t:
+        src, _, _, _ = copy_current_repo(Path(t) / 'Campus-Tresor' / 'source')
+        init_official_git(src)
+        subprocess.run(['git', '-C', str(src), 'config', 'user.email', 'ci@example.invalid'], check=True)
+        subprocess.run(['git', '-C', str(src), 'config', 'user.name', 'CI'], check=True)
+        subprocess.run(['git', '-C', str(src), 'add', '.'], check=True)
+        subprocess.run(['git', '-C', str(src), 'commit', '-q', '-m', 'fixture'], check=True)
+        outside = Path(t) / 'outside-worktree'
+        subprocess.run(['git', '-C', str(src), 'worktree', 'add', '-q', str(outside), 'HEAD'], check=True)
+        old = use_repo(outside)
+        try:
+            expect_block(m.verify, 'BACKUP_GITDIR_EXECUTION_BLOCKED')
+        finally:
+            restore(old)
+
     print(json.dumps({
         'ok': True,
         'status': 'CODEX_CLOUD_GATE_CI_PASS',
@@ -230,7 +245,8 @@ def main():
         'domain_logic_authority': 'NONE',
         'backup_archive_workspace_execution_blocked': 'PASS',
         'bare_mirror_execution_blocked': 'PASS',
-        'local_mirror_origin_execution_blocked': 'PASS'
+        'local_mirror_origin_execution_blocked': 'PASS',
+        'backup_common_gitdir_execution_blocked': 'PASS'
     }, indent=2))
 
 if __name__ == '__main__':
