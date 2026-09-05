@@ -219,7 +219,7 @@ Tresor zeigt explizit PASS oder den ersten blockierenden FAIL.
 WARUM:
 Ein konzeptionell vorhandener Tresor darf nicht mit einem real geprüften Backup verwechselt werden.
 AKTUELL:
-`TRESOR_FAIL:RECOVERY_DEPENDENCIES_UNVERIFIED`.
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`.
 
 
 ## ARCH-031 – Externer Tresor-Git-/Metadaten-PREPASS
@@ -306,3 +306,20 @@ WAS:
 NEUES_PROJEKT_VORLAGE bindet künftig Flur-/START_HERE-Regel, Büro-Kommunikationsleitungen, Hobbyraum-Standard und Positiv-/Negativ-Abnahme.
 WARUM:
 Die Bauabnahme darf nicht nur den heutigen Bestand reparieren; neue Gebäude dürfen alte Architekturfehler nicht reproduzieren.
+
+
+## ARCH-042 – Eine Wahrheit besser ausgeschildert
+WAS:
+Gebäude, alle sechs Büros, Hobbyräume, Archiv, Fehlerregister und Paul zeigen jetzt einheitlich auf die jeweils eine zuständige Quelle.
+WARUM:
+Der Fremdnutzer-Test zeigte: Informationen waren vorhanden, aber der aktuelle Arbeitspunkt musste noch zu stark zusammengesetzt werden.
+REGEL:
+START_HERE = Wegweiser; CURRENT_STATE = Bürostand; HOBBYRAUM = aktuelle Arbeit; Register = Index zur Hauptquelle.
+KEINE NEUE WAHRHEIT:
+Kein neues TextSEO-Büro, keine zweite Fehlerliste, kein zweiter Zielvertrag, kein paralleler Kurzstatus.
+
+## ARCH-043 – Dynamische Fakten nicht in Wegweisern doppeln
+WAS:
+Dynamische Versions-/Historienangaben werden aus Wegweisern entfernt, wenn sie bereits im CURRENT_STATE oder einer Originalquelle geführt werden.
+WARUM:
+Wegweiser dürfen nicht veralten und dadurch zur konkurrierenden Wahrheit werden.
