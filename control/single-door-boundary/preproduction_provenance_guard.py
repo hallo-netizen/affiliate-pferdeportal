@@ -81,7 +81,7 @@ def _binding_from_release(release: Mapping[str, Any]) -> Mapping[str, Any]:
         raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_HASH_INVALID")
     return binding
 
-def validate_package_provenance(repo: Path, package_path: Path, *, trusted_keys=None) -> dict[str, Any]:
+def validate_package_provenance(repo: Path, package_path: Path) -> dict[str, Any]:
     repo = Path(repo).resolve()
     package_path = Path(package_path).resolve()
     pre = _module(repo / "control/single-door-boundary/single_door_preproduction_handoff.py", "h8_provenance_pre")
@@ -106,16 +106,16 @@ def validate_package_provenance(repo: Path, package_path: Path, *, trusted_keys=
         "publish_allowed": False,
     }
 
-def validate_incoming_package(repo: Path, *, trusted_keys=None) -> dict[str, Any]:
+def validate_incoming_package(repo: Path) -> dict[str, Any]:
     s = _state(repo)
     if s.get("status") != "BATCH_READY_PACKAGE_PENDING":
         raise ProvenanceBlocked("INCOMING_PROVENANCE_REQUIRES_PENDING_STATE")
     p = incoming_package_path(repo, int(s["generation"]))
     if not p.is_file():
         raise ProvenanceBlocked("H8_BOOTSTRAP_INCOMING_PACKAGE_MISSING")
-    return validate_package_provenance(repo, p, trusted_keys=trusted_keys)
+    return validate_package_provenance(repo, p)
 
-def validate_attached_package(repo: Path, *, trusted_keys=None) -> dict[str, Any]:
+def validate_attached_package(repo: Path) -> dict[str, Any]:
     repo = Path(repo).resolve()
     s = _state(repo)
     if s.get("status") != "EXECUTION_READY":
