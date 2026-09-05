@@ -220,3 +220,16 @@ WARUM:
 Ein konzeptionell vorhandener Tresor darf nicht mit einem real geprüften Backup verwechselt werden.
 AKTUELL:
 `TRESOR_FAIL:GIT_MIRROR_MISSING`.
+
+
+## ARCH-031 – Externer Tresor-Git-/Metadaten-PREPASS
+WAS:
+Vollständiger Git-Bundle-Mirror plus paginierter GitHub-Metadaten-Snapshot wird außerhalb GitHub versioniert gespeichert und real restore-getestet.
+WARUM:
+Ein Tresor im selben Repository würde bei Repositoryverlust mit verloren gehen.
+BELEG:
+`/Campus-Tresor/2026-09-05_132542_PREPASS/CAMPUS_TRESOR_GIT_MIRROR_20260905_V2.zip`
+RESTORE:
+`GIT_BUNDLE_RESTORE_PASS`
+GRENZE:
+Noch kein TRESOR_PASS, solange nicht exportierbare Recovery-Abhängigkeiten nicht vollständig verifiziert sind.

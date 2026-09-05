@@ -1,7 +1,7 @@
 # NOTFALL-TRESOR – START_HERE
 
 STAND: 2026-09-05
-STATUS: KEIN TRESOR_PASS VORHANDEN
+STATUS: EXTERNER GIT-/METADATEN-PREPASS VORHANDEN / KEIN TRESOR_PASS
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -23,6 +23,14 @@ einen unvollständigen Backupstand als PASS bezeichnen oder einen älteren gült
 Danach:
 - Backup erstellen → `KONZEPT.md` + `INHALTSVERTRAG.md` + `PRUEFVERTRAG.md`
 - Wiederaufbau → `NOTFALL_WIEDERAUFBAU.md`
+
+## Aktueller Stand
+
+Git-Mirror + GitHub-Metadaten + Git-Restore-Test:
+PASS als externer PREPASS.
+
+Vollständiger Tresor:
+BLOCKED an noch ungeprüften nicht exportierbaren Recovery-Abhängigkeiten.
 
 ## Harte Regel
 
