@@ -1,0 +1,1 @@
+NEGATIVE SELFTEST ONLY: a paul/* PR touching PROJECT_MEMORY must be blocked.
