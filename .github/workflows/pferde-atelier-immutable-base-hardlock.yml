@@ -124,7 +124,7 @@ jobs:
               affected = {
                   'CURRENT_STATE': touched(suffix='/CURRENT_STATE.md'),
                   'HOBBYRAUM_NEXT_ACTION': touched(suffix='/HOBBYRAUM.md'),
-                  'ZIELVERTRAG': touched(contains='ZIELVERTRAG'),
+                  'ZIELVERTRAG': touched(contains='ZIELVERTRAG') or touched(contains='ZIELVERTRAEGE'),
                   'ARCHIV': touched(prefix='protocol/PROJECT_MEMORY/ARCHIV/'),
                   'FEHLER': any('FEHLER' in pathlib.PurePosixPath(p).name for p in pm),
                   'PROTOKOLL': any('PROTOKOLL' in pathlib.PurePosixPath(p).name for p in pm),
