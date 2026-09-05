@@ -19,6 +19,23 @@ Wenn PASS gemeldet wird:
 - keine State- oder Workflowänderung eigenständig vornehmen;
 - bereits bestandene unveränderte PASS-Stufen nicht erneut prüfen.
 
+## Harte Arbeitsort-Sperre – Tresor/Archiv sind niemals Werkbank
+
+Der Notfall-Tresor, Campus-Archiv, Git-Mirror, Backup-Bundles und daraus direkt geöffnete lokale Worktrees sind ausschließlich Sicherungs-/Beleg-/Restore-Quellen.
+
+Verboten:
+- Runner, Tests, Reparaturen oder Produktion direkt aus `Campus-Tresor` oder `Campus-Archiv` starten;
+- einen Bare-Git-Mirror als Arbeitsrepository verwenden;
+- einen Worktree mit lokalem Mirror als `origin` als offiziellen Arbeitsstand verwenden;
+- Tresor/Archiv als Ersatzroute benutzen, wenn der normale gebundene Workflow BLOCKED ist.
+
+`cloud_entry.py start`, `verify` und `complete` prüfen diese Grenze fail-closed.
+
+Zulässige Wiederherstellung:
+Backup/Mirror nur gemäß Tresor-Wiederaufbau lesen → in einen frischen Arbeits-Worktree außerhalb Tresor/Archiv wiederherstellen → offizielles GitHub-`origin` binden → normale Cloud-Eingangstür neu ausführen.
+
+Ein Backup-PASS ist niemals ein Arbeits-PASS.
+
 ## Zusätzliche Pflicht auf `paul/*`-Branches
 
 Die bestehende Cloud-Eingangstür bleibt immer Schritt 1.
