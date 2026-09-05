@@ -9,13 +9,13 @@ Das Pferde-Atelier-Büro für HivePress-/Anzeigenmarkt-bezogene Projektakten.
 du den Pferde-Atelier-HivePress-Bestand oder die Projektanwendung allgemeiner HivePress-Module finden willst.
 
 **DU DARFST …**  
-Bestandsquellen, Projektverweise und Archivzuordnung finden.
+Bestandsquellen, Projektverweise und Archivzuordnung finden und bei gebundenem Fachauftrag nach dessen Regeln arbeiten.
 
 **DU DARFST NICHT …**  
-HivePress-, Listing-, Kategorie- oder Plugininhalte in diesem Sortierkontext verändern.
+aus dem Büroeintritt Schreibrechte ableiten, Modulgrenzen verwischen oder ohne gebundenen Fachauftrag Inhalte/Code verändern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → allgemeiner Modulverweis → Originalakte.
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → relevanter Modulverweis → Originalakte.
 
 ## Allgemeiner Research-&-Fill-Kern
 MOD-005:
@@ -24,3 +24,19 @@ MOD-005:
 ## Weiterer HivePress-Baustein
 MOD-004:
 HivePress-Anzeigensuche – Modulklasse weiterhin UNGEKLÄRT.
+
+## Arbeitsfreigabe bei echter Arbeit
+
+Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
+
+Vor jeder Änderung:
+1. `CURRENT_STATE.md`;
+2. `HOBBYRAUM.md`;
+3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
+4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
+5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
+6. aktiven Zielvertrag über `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`;
+7. erst danach gebundene Arbeitsrolle/Branch.
+
+Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
+

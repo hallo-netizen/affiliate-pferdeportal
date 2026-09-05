@@ -15,7 +15,7 @@ du den aktuellen allgemeinen Plugin-/Masterstand oder die Archivquelle finden wi
 Version, Hash, Dateibeleg und Projektverweise finden.
 
 **DU DARFST NICHT …**  
-Bildlogik, Promptregeln, Providerlogik, Code oder Originalinhalte in diesem Sortierkontext verändern.
+aus dem reinen Bestands-/Moduleinstieg Schreibrechte ableiten oder ohne gebundenen Modulauftrag Bildlogik, Promptregeln, Providerlogik, Code oder Originalinhalte verändern.
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md`.

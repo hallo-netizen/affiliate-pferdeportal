@@ -9,13 +9,13 @@ Das Fachbüro für den belegten TEXT-/STARTMASTER0107-Bestand des Pferde-Atelier
 du den aktuellen Text-/SEO-Bestand, die zugehörigen Originalakten oder den aktuellen GitHub-Verweis finden willst.
 
 **DU DARFST …**  
-Quellen finden, aktuelle/historische Dateistände unterscheiden und zu den Originalakten weitergehen.
+Quellen finden, aktuelle/historische Dateistände unterscheiden und bei einem ausdrücklich gebundenen Fachauftrag nach den dortigen Regeln arbeiten.
 
 **DU DARFST NICHT …**  
-in diesem Sortierkontext Fachregeln, Textmaschine, SEO-Logik, Runner, Produktionsworkflow oder Originalinhalte verändern.
+aus dem bloßen Betreten dieses Büros Schreibrechte ableiten, Fachregeln eigenmächtig ändern oder einen Arbeitsweg erfinden.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md` → bei SEO-Dateien `SEO_BESTAND.md`.
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → `QUELLEN_AKTUELL/START_HERE.md` → gebundener Ziel-/Arbeitsweg.
 
 ## Hauptquellen
 
@@ -31,8 +31,24 @@ GitHub:
 SEO-Dateibestand:
 - `SEO_BESTAND.md`
 
-## Harte Sortiergrenze
+## Harte Quellen-/Schreibgrenze
 
 Diese Campusakten fassen nur den belegten Stand zusammen.
 
 **Originalinhalte bleiben unverändert und autoritativ an ihrer jeweiligen Quelle.**
+
+## Arbeitsfreigabe bei echter Arbeit
+
+Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
+
+Vor jeder Änderung:
+1. `CURRENT_STATE.md`;
+2. `HOBBYRAUM.md`;
+3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
+4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
+5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
+6. aktiven Zielvertrag über `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`;
+7. erst danach gebundene Arbeitsrolle/Branch.
+
+Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
+

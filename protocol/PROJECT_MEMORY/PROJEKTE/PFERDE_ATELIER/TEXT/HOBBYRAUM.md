@@ -1,24 +1,44 @@
 # TEXT – HOBBYRAUM
 
-STATUS: NICHT FÜR FACHARBEIT DURCH DIESEN SORTIERCHAT
-
 STAND: 2026-09-05
+STATUS: AKTIV / PAUL-TEXT/SEO-ARBEITSWEG GEBUNDEN
 
-Aktueller Auftrag dieses Chats:
-**nur Dateien/GitHub-Quellen sortieren und den belegten aktuellen Stand herstellen.**
+## 1-KLICK-ÜBERSICHT
 
-Erlaubt:
-- Dateibestand erfassen;
-- Versionen/Hashes/Quellen verknüpfen;
-- unverändert archivieren;
-- Campus-Metadaten aktualisieren.
+**WAS IST DAS?**  
+Der einzige aktuelle Arbeitsraum des Büros TEXT.
 
-Nicht erlaubt:
-- Textmaschine verändern;
-- SEO-Regeln verändern;
-- Runner prüfen/ändern;
-- Produktionsworkflow prüfen/ändern;
-- Fachfehler reparieren;
-- Originalinhalte umschreiben.
+**HIER BIST DU RICHTIG, WENN …**  
+du den aktuell gebundenen TEXT/SEO-Arbeitsweg oder dessen Rückgabeweg brauchst.
 
-Für Facharbeit bleibt der dafür zuständige TEXT-Arbeitschat/Fachweg maßgeblich.
+**DU DARFST …**  
+den gebundenen Auftrag und seine Quellen lesen; Änderungen nur bei STATUS AKTIV und nur im ausdrücklich gebundenen Arbeitsweg.
+
+**DU DARFST NICHT …**  
+aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelweg eröffnen oder Fachregeln aus der Raumbelegung erfinden.
+
+**ALS NÄCHSTES …**  
+`../../../PAUL/TEXT_SEO/START_HERE.md` vollständig lesen.
+
+## Aktueller Arbeitsweg
+
+Pauls direkter Einstieg:
+`../../../PAUL/TEXT_SEO/START_HERE.md`
+
+Gebundener Arbeitsbranch:
+`paul/text-seo-campus-ready-20260905`
+
+## Raumregel
+
+Dieser Hobbyraum bindet nur Arbeitsweg und Zuständigkeit.
+
+Er ersetzt NICHT:
+- aktiven Zielvertrag;
+- aktuelle Fehlerliste;
+- technische Originalquellen;
+- Hard Rules.
+
+## Bei Abschluss
+
+Ergebnis zurück an das TEXT-Fachbüro.
+Danach STATUS auf FREI oder nächsten ausdrücklich gebundenen Auftrag setzen.

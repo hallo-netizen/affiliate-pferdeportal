@@ -157,3 +157,80 @@ KISS-FIX:
 
 WICHTIG:
 Architekturlücke geschlossen; operativer TRESOR_PASS bleibt korrekt BLOCKED, bis der Prüfvertrag erfüllt ist.
+
+
+## BAU-010 – Dauerakten enthielten temporäre Chat-Zustände
+
+STATUS: CLOSED
+
+KURZ:
+Gebäude-/Büro-/Hobbyraumtexte enthielten „Sortierchat“ bzw. einen veralteten Parallelchat-Hinweis.
+
+AUSWIRKUNG:
+Ein neuer Chat/Paul konnte widersprüchliche Rechte oder veraltete Belegung lesen.
+
+KISS-FIX:
+Temporäre Chatbezüge entfernt; dauerhafte Rollen-/Arbeitsweglogik eingesetzt.
+
+REGRESSIONSSCHUTZ:
+ARCH-034 + EINGANGSSTANDARD.
+
+## BAU-011 – Paul-Pflichtlektüre mit abgekürzten Pfaden
+
+STATUS: CLOSED
+
+KURZ:
+Fünf Paul-Quellen waren als `.../datei.md` angegeben.
+
+AUSWIRKUNG:
+Menschlich verständlich, aber kein deterministischer 1-Klick-Weg.
+
+KISS-FIX:
+Alle fünf Pfade vollständig ausgeschrieben.
+
+REGRESSIONSSCHUTZ:
+Paul-Pfade immer vollständig; keine Ellipsen.
+
+## BAU-012 – Hobbyraum-Zustände/Kennwort nicht zentral normiert
+
+STATUS: CLOSED
+
+KURZ:
+„Ein Hobbyraum pro Büro“ war definiert, aber Zustände und Routing-Kennwort nicht.
+
+KISS-FIX:
+`HOBBYRAUM_STANDARD.md` mit FREI / AKTIV / BLOCKED und Routing-Kennwort „Hobbyraum“.
+
+SICHERHEIT:
+Kein Passwort; echte Rechte bleiben rollen-/branchgebunden.
+
+## BAU-013 – Veraltete Statusduplikate in zentralen Architekturakten
+
+STATUS: CLOSED
+
+KURZ:
+Änderungsregister nannte noch alten Tresorblocker und alten Bild-Dateilückenstatus.
+
+KISS-FIX:
+Nur den belegten aktuellen Metadatenstand nachgezogen; keine Fachbewertung ergänzt.
+
+
+## BAU-014 – Direkter Büroeintritt konnte zentrale Leitungen umgehen
+
+STATUS: CLOSED
+
+KURZ:
+Büro-START_HERE führte zwar zu Current/Hobbyraum, aber nicht überall sichtbar zu Fehler-/Änderungs-/Ziel-/Handlungsregistern.
+
+KISS-FIX:
+Einheitliche Arbeitsfreigabe an allen sechs Pferde-Atelier-Büroeingängen ergänzt.
+
+## BAU-015 – Hobbyräume waren bei Direktlink nicht selbsterklärend
+
+STATUS: CLOSED
+
+KURZ:
+Mehrere HOBBYRAUM-Dateien enthielten nur STATUS/FREI und keine Rechte-/Weiterweg-Erklärung.
+
+KISS-FIX:
+Alle sechs Hobbyräume mit derselben 1-Klick-Übersicht ausgestattet.

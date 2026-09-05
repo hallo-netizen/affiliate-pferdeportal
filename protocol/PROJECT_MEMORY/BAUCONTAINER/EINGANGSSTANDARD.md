@@ -52,3 +52,47 @@ Kein langer Einführungstext vor der 1-KLICK-ÜBERSICHT.
 
 Ein neuer Chat soll nach dem ersten Bildschirm wissen:
 **Wo bin ich, wozu ist das da, was darf ich, was darf ich nicht und wo geht es weiter?**
+
+
+## Dauerhafte Adressen
+
+Bestehende Campus-/Gebäude-/Büro-/Paul-Eingangsadressen werden nicht still umbenannt oder verschoben.
+
+Wenn später eine neue Struktur nötig wird:
+- alte Adresse bleibt als eindeutiger Weiterweiser erhalten;
+- keine tote Eingangstür;
+- bereits verteilte Paul-/Chat-Einstiege bleiben funktionsfähig.
+
+## Büro-Pflichtweg
+
+Jeder Projektbüro-Eingang muss im sichtbaren nächsten Schritt enthalten:
+`CURRENT_STATE.md` → `HOBBYRAUM.md`.
+
+Weitere Inventare/Quellen dürfen danach folgen.
+
+## Paul-Pfade
+
+Pflichtlektüre für Paul verwendet vollständige echte Pfade.
+
+Keine Abkürzungen wie:
+`.../datei.md`
+
+## Dauertexte statt Chattexte
+
+Dauerhafte Eingänge und Hobbyräume dürfen keine Berechtigung an Formulierungen wie
+„dieser Chat“, „Sortierchat“ oder einen längst vergangenen Parallelchat knüpfen.
+
+Temporäre Belegung gehört in den Hobbyraumstatus; dauerhafte Rechte kommen aus Rolle, Zielvertrag und Arbeitsweg.
+
+
+## Direkter Büro-/Hobbyraum-Einstieg
+
+Ein direkter Link in ein Büro darf Hauptpförtnerwissen nicht voraussetzen.
+
+Projektbüros führen bei echter Arbeit zusätzlich sichtbar zu:
+- Handlungsverzeichnis;
+- Fehlerregister;
+- Änderungsregister;
+- Zielvertragsregister.
+
+Ein direkter Hobbyraum-Einstieg erfüllt ebenfalls die 1-Klick-Übersicht.

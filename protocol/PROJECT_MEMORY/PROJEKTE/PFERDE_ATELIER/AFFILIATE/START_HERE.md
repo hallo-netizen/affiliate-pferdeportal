@@ -24,3 +24,19 @@ Release-Governance umgehen, alte Root-/Stagingstände als neue Autorität behand
 - `control/release-governance/release_guard.py`
 
 PROJECT_MEMORY ersetzt diese Governance nicht.
+
+## Arbeitsfreigabe bei echter Arbeit
+
+Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
+
+Vor jeder Änderung:
+1. `CURRENT_STATE.md`;
+2. `HOBBYRAUM.md`;
+3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
+4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
+5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
+6. aktiven Zielvertrag über `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`;
+7. erst danach gebundene Arbeitsrolle/Branch.
+
+Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
+

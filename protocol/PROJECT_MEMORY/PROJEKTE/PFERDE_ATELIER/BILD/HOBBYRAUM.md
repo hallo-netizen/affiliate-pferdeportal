@@ -1,35 +1,29 @@
 # BILD – HOBBYRAUM
 
 STAND: 2026-09-05
-STATUS: AKTUELLER AUFTRAG – MASTERAKTEN AUFNEHMEN
+STATUS: FREI
 
-## Auftrag
+## 1-KLICK-ÜBERSICHT
 
-Alle vom Nutzer übergebenen Bildzentrale-Masterdateien vollständig verwerten und zuordnen.
+**WAS IST DAS?**  
+Der einzige aktuelle Arbeitsraum des Büros BILD.
 
-## Harte Regel
+**HIER BIST DU RICHTIG, WENN …**  
+du prüfen willst, ob aktuell ein BILD-Auftrag gebunden ist.
 
-Nichts aus Masterdateien still verwerfen.
+**DU DARFST …**  
+den gebundenen Auftrag und seine Quellen lesen; Änderungen nur bei STATUS AKTIV und nur im ausdrücklich gebundenen Arbeitsweg.
 
-Jeder Bestandteil bekommt mindestens:
-- Quelle
-- Hash oder eindeutige Identität
-- Typ
-- Bedeutung
-- Status
-- Zuordnung
-- offene Fragen
+**DU DARFST NICHT …**  
+aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelweg eröffnen oder Fachregeln aus der Raumbelegung erfinden.
 
-## Bereits erledigt
+**ALS NÄCHSTES …**  
+`START_HERE.md` → `CURRENT_STATE.md`; ohne neuen Auftrag FREI lassen.
 
-- beide ZIPs vollständig geöffnet und inventarisiert;
-- eingebettete und separat gelieferte 2.4.9-Plugin-ZIP byte-identisch belegt;
-- 2.4.9-PHP funktional inventarisiert;
-- Vor-Migrations-Export strukturell vollständig ausgewertet;
-- 2.6.6-Einstellungs-Export ausgewertet;
-- LIVE-Version 2.6.9 als aktueller produktiver Stand aufgenommen;
-- Zugangsdaten als sensible Projektparameter erkannt und von öffentlicher Ablage ausgeschlossen.
+## Letzte abgeschlossene Arbeit
 
-## Nächster Schritt
-
-Weitere BILD-Masterdateien des Nutzers genauso in dieses Inventar einordnen.
+- allgemeine Bildzentrale 2.6.9 + Nullpunkt 069 zusammengeführt;
+- Pferde Master 049 + Plugin 2.4.9 historisch eingeordnet;
+- Projekt-Konfig-/Migrationsbelege zugeordnet;
+- Roharchive unverändert abgelegt;
+- keine Bildlogik, Promptregel oder Pluginquelle verändert.

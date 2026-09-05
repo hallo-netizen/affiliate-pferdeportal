@@ -131,3 +131,19 @@ Dort liegen/verweisen:
 - aktuelle technische GitHub-Originalquellen.
 
 Paul arbeitet nur auf dem gebundenen Paul-Branch.
+
+
+## Hobbyraum betreten
+
+Aktion:
+Der Nutzer nennt ein Projektbüro und „Hobbyraum“.
+
+Verbindlicher Weg:
+Projektgebäude → Büro-`START_HERE.md` → `CURRENT_STATE.md` → `HOBBYRAUM.md`.
+
+Routing-Kennwort:
+`Hobbyraum`
+
+Wichtig:
+Kein Passwort und keine Schreibberechtigung.
+Befugnisse kommen ausschließlich aus Rolle + gebundenem Auftrag + Branch/Fachregeln.

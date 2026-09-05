@@ -65,7 +65,7 @@ BELEG: BILD-Masterdatei 049.
 ## BILD-002 – Allgemeingültige Bildzentrale 2.6.9
 WAS: allgemeiner Modul-Kern für Beiträge, WP-Taxonomien, optional HivePress, Pixabay/Pexels/Magnific, Profile, Export/Import, Readback-Fallback.
 BELEG: Nutzerbestätigung 2026-09-05.
-OFFEN: 2.6.9-Codeprüfung nach Dateiauslieferung.
+AKTUELL: exakter 2.6.9-Dateibeleg vorhanden; eine Fachprüfung wurde im Sortierauftrag bewusst nicht durchgeführt.
 
 ## TECH-KEYFLOW-001 – Schlüsselübergabe
 Bereich: TEXT
@@ -219,7 +219,7 @@ Tresor zeigt explizit PASS oder den ersten blockierenden FAIL.
 WARUM:
 Ein konzeptionell vorhandener Tresor darf nicht mit einem real geprüften Backup verwechselt werden.
 AKTUELL:
-`TRESOR_FAIL:GIT_MIRROR_MISSING`.
+`TRESOR_FAIL:RECOVERY_DEPENDENCIES_UNVERIFIED`.
 
 
 ## ARCH-031 – Externer Tresor-Git-/Metadaten-PREPASS
@@ -228,8 +228,44 @@ Vollständiger Git-Bundle-Mirror plus paginierter GitHub-Metadaten-Snapshot wird
 WARUM:
 Ein Tresor im selben Repository würde bei Repositoryverlust mit verloren gehen.
 BELEG:
-`/Campus-Tresor/2026-09-05_132542_PREPASS/CAMPUS_TRESOR_GIT_MIRROR_20260905_V2.zip`
+`/Campus-Tresor/LATEST_PREPASS.txt` → jeweils aktuellster externer manifestgebundener PREPASS
 RESTORE:
 `GIT_BUNDLE_RESTORE_PASS`
 GRENZE:
 Noch kein TRESOR_PASS, solange nicht exportierbare Recovery-Abhängigkeiten nicht vollständig verifiziert sind.
+
+
+## ARCH-032 – Dauerhafte Eingangadressen
+WAS:
+Bereits verteilte Campus-/Gebäude-/Büro-/Paul-Adressen bleiben stabil.
+WARUM:
+Ein alter Chat oder Paul-Auftrag darf nicht durch stilles Umbenennen ins Leere laufen.
+REGEL:
+Bei späterem Umbau bleibt die alte Adresse als Weiterweiser bestehen.
+
+## ARCH-033 – Hobbyraum-Standard + Routing-Kennwort
+WAS:
+Ein Hobbyraum pro Büro; Zustände FREI / AKTIV / BLOCKED; „Hobbyraum“ ist ein Routing-Kennwort, kein Passwort.
+WARUM:
+Aktuelle Arbeit muss eindeutig gebunden sein, ohne Scheinsicherheit durch ein Geheimwort im öffentlichen Repository.
+BELEG:
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md`
+
+## ARCH-034 – Keine temporären Chatrechte in Dauerakten
+WAS:
+Dauerhafte START_HERE-/HOBBYRAUM-Akten werden nicht an „diesen Chat“, „Sortierchat“ oder veraltete Parallelchat-Hinweise gebunden.
+WARUM:
+Neue Chats/Paul müssen dieselben Türen widerspruchsfrei verwenden können.
+
+
+## ARCH-035 – Büro-Kommunikationsleitungen auch bei Direkteinstieg
+WAS:
+Jedes Pferde-Atelier-Büro verweist bei echter Arbeit sichtbar auf Hobbyraum, Handlungsverzeichnis, Fehlerregister, Änderungsregister und Zielvertragsregister.
+WARUM:
+Ein direkter Büro-Link darf den Hauptpförtner nicht umgehen und dadurch Sicherheits-/Kontextleitungen verlieren.
+
+## ARCH-036 – Hobbyräume sind selbst erklärende Eingänge
+WAS:
+Alle sechs Pferde-Atelier-Hobbyräume erfüllen ebenfalls die 1-Klick-Übersicht.
+WARUM:
+Der Nutzer kann direkt „Büro → Hobbyraum“ adressieren; auch dort müssen Rechte, Status und nächster Schritt sofort klar sein.
