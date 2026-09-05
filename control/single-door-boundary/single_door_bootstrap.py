@@ -16,7 +16,7 @@ ACTION_TOKEN = "A_BOOT_001"
 INPUT_HANDLE = "I_BOOT_BATCH_001"
 RECEIPT_TOKEN = "P_BOOT_001"
 NEXT_ROOM_TOKEN = "R_PRE_001"
-BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1"
+BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1"
 AUTHORITATIVE_ORIGIN = "SINGLE_DOOR_BOOTSTRAP_ONLY"
 
 class BootstrapBlocked(RuntimeError):
@@ -72,7 +72,7 @@ def current_binding(repo: Path) -> dict[str, Any]:
         "source_manifest_sha256": str(state["source_manifest_sha256"]),
     }
 
-def expected_signed_binding(repo: Path) -> dict[str, Any]:
+def expected_provenance_binding(repo: Path) -> dict[str, Any]:
     cur = current_binding(repo)
     body = {
         "contract": BOOTSTRAP_BINDING_CONTRACT,
@@ -116,7 +116,7 @@ def execute_bound_bootstrap_action(
     cur = current_binding(repo)
     if source != (repo / cur["source_snapshot_ref"]).resolve():
         raise BootstrapBlocked("BOOTSTRAP_INPUT_NOT_CURRENT_BOUND_SNAPSHOT")
-    expected = expected_signed_binding(repo)
+    expected = expected_provenance_binding(repo)
     produced = Path(producer_callable(source, expected)).resolve()
     if not produced.is_file():
         raise BootstrapBlocked("BOOTSTRAP_PRODUCER_RETURNED_NO_PACKAGE")
@@ -140,7 +140,7 @@ def execute_bound_bootstrap_action(
         "next_room_token": binding.next_room_token,
         "status": "PASS",
         "evidence": [
-            "H8_SIGNED_BOOTSTRAP_BINDING:" + str(proof["bootstrap_authority_sha256"]),
+            "H8_BOOTSTRAP_PROVENANCE_BINDING:" + str(proof["bootstrap_authority_sha256"]),
             "H8_PACKAGE_SHA256:" + str(proof["artifact_sha256"]),
         ],
     }
