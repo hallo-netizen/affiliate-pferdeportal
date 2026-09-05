@@ -441,3 +441,12 @@ WARUM:
 Nur Paul einzuschränken reicht nicht; sonst könnte der normale Arbeitschat denselben technischen Bereich parallel verändern. Wiederverwendete Paul-Branches tragen außerdem Altcommits in neue Aufträge.
 REGEL:
 Kollidierender Fremd-PR → `PAUL_EXCLUSIVE_SCOPE_LOCKED`. Alter/inkonsistenter Paul-Branch → Scope-/Base-Block.
+
+
+## ARCH-056 – Historienarchive und externe Dependencies werden nicht zu CURRENT hochgestuft
+WAS:
+Master 0057 Teil A wird ausschließlich als unveränderliches TEXT-Historienarchiv geführt. LanguageTool 6.8 wird als externe Offline-Abhängigkeit archiviert, nicht als Plugin oder freigegebenes allgemeingültiges Modul.
+WARUM:
+Beide Uploads stammen aus älteren Produktionsmaster-Zusammenhängen. Der 0057-README bindet seinen Inhalt ausdrücklich an `98_HISTORY_READ_ONLY`; der 0043-README bezeichnet LanguageTool ausdrücklich als unveränderte Offline-Abhängigkeit. Auf aktuellem `main` wurde kein LanguageTool-Pfad/-Code gefunden.
+REGEL:
+Historischer Nachweis darf Auffindbarkeit und Wiederverwendung ermöglichen, aber ohne neuen aktuellen Beleg weder CURRENT_STATE noch Modulstatus verändern.

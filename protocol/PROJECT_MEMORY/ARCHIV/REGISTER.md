@@ -269,3 +269,91 @@ Aktuelle WordPress-Version:
 
 LOKALE_KOPIE_ENTBEHRLICH:
 NEIN
+
+
+## ARC-PFERDE-TEXT-HISTORY-0057-20260905 – unveränderliches Historienarchiv
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/HISTORISCH/MASTER_0057_TEIL_A/`
+
+Datei:
+`ARBEITSMASTER_0057_NEU_TEIL_A_UNVERAENDERLICHES_HISTORIENARCHIV.zip`
+
+SHA-256 äußere ZIP:
+`25c8a9fa71ff6f1f57137c2afb1e2c03ed8a6e3477f2902fdf003590ea785423`
+
+Größe:
+59.700.573 Bytes
+
+ROLLE:
+**UNVERAENDERLICHES HISTORIENARCHIV / NIEMALS CURRENT**
+
+Verifiziert:
+- README: Teil A enthält ausschließlich `98_HISTORY_READ_ONLY`;
+- Manifest: 4.955 Dateien;
+- Manifest-Dateiliste: 4.955/4.955 vorhanden;
+- enthaltenes `TEIL_A_UNVERAENDERLICHES_HISTORIENARCHIV.tar.zst`;
+- erwarteter Payload-SHA-256:
+  `c169e0293644dfd597a23e90e7b8bdabd88ce78a9d84ef93203249c28bb415ae`;
+- realer Payload-SHA-256: identisch → PASS.
+
+EINORDNUNG:
+Historischer TEXT-/STARTMASTER-Bestand.
+Keine Datei daraus wird allein wegen ihrer Bezeichnung `CURRENT`, aktive Regel oder aktuelle Fehlerquelle.
+
+LOKALE_KOPIE_ENTBEHRLICH:
+**NEIN**
+
+Grund:
+eine persistente verifizierte Archivablage vorhanden; zweite unabhängige verifizierte Rohablage fehlt.
+
+## ARC-DEP-LANGUAGETOOL-6_8-20260905 – LanguageTool 6.8 Offline-Abhängigkeit
+
+STATUS:
+GELB / AKTUELLE NUTZUNG UNGEKLÄRT
+
+Archiv:
+`/Campus-Archiv/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
+
+Datei:
+`ARBEITSMASTER_0043_TEIL_2_LANGUAGETOOL_6_8.zip`
+
+SHA-256 äußere ZIP:
+`187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a`
+
+Größe äußere ZIP:
+258.053.061 Bytes
+
+Enthalten:
+`LanguageTool-6.8.zip`
+
+Innerer SHA-256:
+`6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d`
+
+Innere Größe:
+258.510.816 Bytes
+
+Innerer ZIP-Bestand:
+2.051 Einträge.
+
+Manifeststatus:
+`UNCHANGED_DEPENDENCY`
+
+README:
+LanguageTool 6.8 = unveränderte Offline-Abhängigkeit; **nicht als Plugin installieren**.
+
+EINORDNUNG:
+- externe Offline-Abhängigkeit;
+- historisch im Produktionsmaschinenbestand belegt;
+- kein WordPress-Plugin;
+- kein freigegebenes allgemeingültiges Campus-Modul;
+- aktuelle Verwendung auf `main` nicht belegt und daher **UNGEKLÄRT**.
+
+LOKALE_KOPIE_ENTBEHRLICH:
+**NEIN**
+
+Grund:
+eine persistente verifizierte Archivablage vorhanden; zweite unabhängige verifizierte Rohablage fehlt.

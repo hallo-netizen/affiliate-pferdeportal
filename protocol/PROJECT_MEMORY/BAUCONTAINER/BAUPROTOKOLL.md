@@ -680,3 +680,43 @@ Jeder neue Paul-Auftrag = frischer Branch vom exakten Technical Base.
 
 BEZUG:
 ARCH-055; BAU-027.
+
+
+### 2026-09-05 – Altarchiv 0057 + LanguageTool 6.8 einsortiert
+
+EINGANG:
+1. `ARBEITSMASTER_0057_NEU_TEIL_A_UNVERAENDERLICHES_HISTORIENARCHIV(1).zip`
+2. `ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT(2).zip`
+
+HARTER BEFUND 0057:
+- äußere ZIP SHA-256 `25c8a9fa71ff6f1f57137c2afb1e2c03ed8a6e3477f2902fdf003590ea785423`;
+- README: unveränderliches Historienarchiv;
+- ausschließlich `98_HISTORY_READ_ONLY`;
+- Manifest 4.955 Dateien / Liste 4.955;
+- innerer tar.zst-Hash real gegen Manifest geprüft → PASS;
+- persistent unter TEXT/STARTMASTER/HISTORISCH abgelegt.
+
+HARTER BEFUND LANGUAGETOOL:
+- äußere ZIP SHA-256 `187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a`;
+- inneres LanguageTool 6.8 SHA-256 `6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d`;
+- Hash + Größe gegen Originalmanifest PASS;
+- 2.051 Einträge im LanguageTool-ZIP;
+- README: unveränderte Offline-Abhängigkeit, nicht als Plugin installieren;
+- aktuelles `main`: keine LanguageTool-/offline_languagetool-/LANGUAGE_TOOL_PREFLIGHT-Treffer;
+- daher aktuelle Nutzung UNGEKLÄRT;
+- persistent unter `/Campus-Archiv/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/` abgelegt.
+
+KISS-EINORDNUNG:
+- kein neuer Fachstatus;
+- kein neues Modul;
+- kein WordPress-Eintrag;
+- CURRENT_STATE unverändert;
+- HOBBYRAUM unverändert;
+- Fehler-/Zielwahrheit unverändert;
+- Archivregister + Hausmeisterprotokoll + TEXT-Inventar + WHY aktualisiert.
+
+AMPel:
+beide GELB – jeweils eine persistente verifizierte Rohablage, keine zweite unabhängige verifizierte Ablage.
+
+BEZUG:
+ARCH-056; HM-001/HM-002.

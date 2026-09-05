@@ -130,3 +130,50 @@ eine persistente Ablage vorhanden; zweite unabhängige verifizierte Rohablage fe
 
 LOKALE_KOPIE_ENTBEHRLICH:
 **NEIN**
+
+
+## Historischer Dateieingang 2026-09-05 – NICHT CURRENT
+
+### TXT-HIST-001 – Master 0057 Teil A
+
+Datei:
+`ARBEITSMASTER_0057_NEU_TEIL_A_UNVERAENDERLICHES_HISTORIENARCHIV.zip`
+
+SHA-256:
+`25c8a9fa71ff6f1f57137c2afb1e2c03ed8a6e3477f2902fdf003590ea785423`
+
+Rolle:
+unveränderliches Historienarchiv mit ausschließlich `98_HISTORY_READ_ONLY`.
+
+Manifest:
+4.955 Dateien; innerer Payload-Hash PASS.
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/HISTORISCH/MASTER_0057_TEIL_A/`
+
+STATUS:
+**HISTORISCH / KEINE AKTUELLE FACHWAHRHEIT**
+
+### TXT-DEP-HIST-001 – LanguageTool 6.8 aus Master 0043 Teil 2
+
+Datei:
+`ARBEITSMASTER_0043_TEIL_2_LANGUAGETOOL_6_8.zip`
+
+Äußere SHA-256:
+`187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a`
+
+Inneres LanguageTool:
+Version 6.8, SHA-256
+`6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d`
+
+Rolle laut Original:
+`UNCHANGED_DEPENDENCY` / Offline-Abhängigkeit / nicht als Plugin installieren.
+
+Archiv:
+`/Campus-Archiv/ABHAENGIGKEITEN/LANGUAGETOOL/6.8/`
+
+STATUS:
+**HISTORISCH BELEGT / AKTUELLE NUTZUNG UNGEKLÄRT**
+
+Wichtig:
+Kein Eintrag in CURRENT_STATE und keine Modulfreigabe allein aus diesem historischen Beleg.
