@@ -49,6 +49,10 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/cloud-entry-gate/cloud_repo_ci_test.py
+      - name: Paul automatic cloud-entry bridge CI
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python control/cloud-entry-gate/paul_auto_bridge_ci_test.py
       - name: Paul current-Campus positive-negative CI
         env:
           PYTHONDONTWRITEBYTECODE: '1'
