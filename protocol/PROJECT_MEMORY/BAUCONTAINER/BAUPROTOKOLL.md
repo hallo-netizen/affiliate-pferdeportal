@@ -257,3 +257,24 @@ Vorlage ergänzt um:
 
 BEZUG:
 ARCH-041 / BAU-020.
+
+
+### 2026-09-05 – Fremdnutzer-Test: eine Wahrheit besser ausgeschildert
+
+AUSLÖSER:
+Ein neuer Chat fand den Campus, musste aber aktuellen Stand, aktuelle Arbeit, Fehler und Ziel noch unnötig zusammensetzen.
+
+KISS-FIX:
+- alle sechs Bürotüren mit einheitlichem Quellenwegweiser;
+- CURRENT_STATE als einzige Büro-Standzusammenfassung markiert;
+- Hobbyraum als einzige aktuelle Arbeitsbindung markiert;
+- Fehlerregister auf reinen Index reduziert;
+- Archiv ausdrücklich nie CURRENT;
+- Paul führt keine zweite Fach-/Statuswahrheit;
+- Neubau- und Eingangsstandard entsprechend nachgezogen.
+
+NICHT GEBAUT:
+kein neues Büro, kein zusätzlicher Statusspeicher, keine zweite Fehler-/Zielwahrheit.
+
+BEZUG:
+ARCH-042/043; BAU-021/022.
