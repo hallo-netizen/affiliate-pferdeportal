@@ -67,10 +67,17 @@ WAS: allgemeiner Modul-Kern für Beiträge, WP-Taxonomien, optional HivePress, P
 BELEG: Nutzerbestätigung 2026-09-05.
 AKTUELL: exakter 2.6.9-Dateibeleg vorhanden; eine Fachprüfung wurde im Sortierauftrag bewusst nicht durchgeführt.
 
-## TECH-KEYFLOW-001 – Schlüsselübergabe
+## TECH-KEYFLOW-001 – Signier-/Schlüsselgrenze
 Bereich: TEXT
-WARUM: UNGEKLÄRT.
-ENTFERNBAR: NEIN, BIS GEKLÄRT.
+STATUS: GEKLÄRT / 2026-09-05.
+WAS:
+Innerhalb der Produktionsstraße keine kryptografische Raum-/Worker-Signierung. Interne Sicherheit erfolgt über Single-Door/Wächter, Hash-/Herkunftsbindung, reale Fachprüfungen und PASS/Receipt. Kryptografische Versiegelung beginnt erst nach abgeschlossener Produktion außerhalb des Workers.
+WARUM:
+Das frühere Raum-zu-Raum-Signiermodell erzeugte Signer-/Key-/Übergabeabhängigkeiten und widersprach der später bewusst vereinfachten Ein-Tür-Architektur. Die kryptografische Funktion wird intern nicht benötigt, solange der gebundene Weg und die unveränderten Fachprüfungen fail-closed erzwungen werden; sie bleibt an der externen Manipulationsgrenze notwendig.
+BELEG:
+Draft-PR #140, Head `c3244d5bf838817078a3821c045fb52e86f3db46`: interne ED25519-/Signer-Pflichten aus aktivem 107007-Vorlauf entfernt; `hardlock` + `hardlock-base` PASS. Externe 107008-/ENDSTEMPEL-/WordPress-Signierung unangetastet.
+REGEL:
+Keine interne Signierpflicht wiedereinführen. Externe Signierstufen nur nach separater Positiv-/Negativprüfung vereinfachen.
 
 
 ## ARCH-015 – Zentraler Zielvertragsraum
