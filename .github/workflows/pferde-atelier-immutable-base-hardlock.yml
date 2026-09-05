@@ -57,16 +57,13 @@ jobs:
           PY
       - name: Enforce current Paul assignment and technical write scope
         env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
         shell: bash
         run: |
           set -euo pipefail
-          if [[ "$HEAD_REF" == paul/* ]]; then
-            python3 control/paul-scope-gate/paul_scope_gate.py verify-pr "$HEAD_REF" "$HEAD_SHA"
-          else
-            echo 'PAUL_SCOPE_NOT_APPLICABLE'
-          fi
+          python3 control/paul-scope-gate/paul_scope_gate.py verify-pr "$HEAD_REF" "$HEAD_SHA" "$BASE_SHA"
 
       - name: Enforce PROJECT_MEMORY protocol completion
         env:
