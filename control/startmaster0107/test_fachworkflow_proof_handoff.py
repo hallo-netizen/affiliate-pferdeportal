@@ -26,12 +26,15 @@ class FachworkflowProofHandoffTest(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.repo = Path(self.temp.name)
+        self.real_ppm_stage = handoff._real_ppm_stage
+        handoff._real_ppm_stage = lambda repo, request, root, proof_path, proof: proof
         for rel in (dual.SELF_REL, dual.HANDOFF_REL, dual.PROMPT_REL):
             target = self.repo / rel
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(REPO / rel, target)
 
     def tearDown(self):
+        handoff._real_ppm_stage = self.real_ppm_stage
         self.temp.cleanup()
 
     def write_json(self, path: Path, value: dict):
@@ -56,6 +59,8 @@ class FachworkflowProofHandoffTest(unittest.TestCase):
                      "execution_evidence": ["stage runner completed with verified output"],
                      "artifacts": [{"ref": artifact_ref, "sha256": handoff._sha(artifact)}],
                      "content_or_quality_rules_changed": False, "publish_allowed": False}
+            if stage == "ppm":
+                proof["ppm679_binding"] = {"final_article_ref": artifact_ref, "final_article_sha256": handoff._sha(artifact)}
             self.write_json(self.repo / proof_ref, proof)
             rows.append({"stage": stage, "ref": proof_ref, "sha256": handoff._sha(self.repo / proof_ref)})
         action = {"allowed_output_root": root, "item_receipt_schema": {}}
@@ -88,6 +93,19 @@ class FachworkflowProofHandoffTest(unittest.TestCase):
             self.assertEqual("FACHWORKFLOW_PROOF_HANDOFF_PASS", result["status"])
             receipt = handoff._load(self.repo / result["item_receipt_ref"])
             dual.validate_fachworkflow_pass(self.repo, action, item, receipt)
+
+    def test_missing_ppm_binding_fails_closed(self):
+        _, _, request_ref, rows = self.prepare("k", "l", "article:ppm-binding-missing")
+        request = handoff._load(self.repo / request_ref)
+        ppm_row = next(row for row in rows if row["stage"] == "ppm")
+        proof = handoff._load(self.repo / ppm_row["ref"])
+        proof.pop("ppm679_binding", None)
+        self.write_json(self.repo / ppm_row["ref"], proof)
+        ppm_row["sha256"] = handoff._sha(self.repo / ppm_row["ref"])
+        request["stage_proofs"] = rows
+        self.write_json(self.repo / request_ref, request)
+        with self.assertRaisesRegex(handoff.Blocked, "PPM679_REAL_BINDING_MISSING"):
+            handoff.materialize(self.repo, request_ref)
 
     def test_missing_current_fachworkflow_context_fails_closed(self):
         _, _, request_ref, _ = self.prepare("g", "h", "article:context-missing")
