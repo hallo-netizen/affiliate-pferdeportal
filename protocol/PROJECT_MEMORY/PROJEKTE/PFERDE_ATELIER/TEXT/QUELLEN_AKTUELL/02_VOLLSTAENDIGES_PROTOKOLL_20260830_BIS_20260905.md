@@ -148,3 +148,38 @@ Noch kein Abschlussbeleg:
 - kein neuer 7/7-Live-Lauf;
 - main unverändert `c8a96e7a2f598de69134d90b143257c3559bc98a`.
 
+### Abschluss internes Signierkonzept – SCOPE-PASS
+
+Finaler Hobbyraum-Head: `7990029428399e8ba01d88a6543ce068812e9218`.
+
+Abgrenzung:
+- geprüft und bereinigt wurde ausschließlich die heute aktive interne Strecke bis 107007;
+- historische H7-/Master-/Proof-Dokumente wurden nicht als Reparaturziel behandelt;
+- externe Signierung ab 107008 wurde nicht entfernt.
+
+Finaler Befund:
+- aktiver interner Call-Graph ohne ED25519-, Signer-, Key-, `trusted_keys`- oder `WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED`-Pflicht;
+- `worker_freshness_guard` verlangt kein `ed25519_runtime` mehr;
+- H8-Bootstrap/Provenance/Runtime/Preflight arbeiten hash-/batch-/slot-/herkunftsgebunden;
+- gebundenes Generation-1-H8-Paket: `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND`, keine Signaturfelder;
+- interner Fachworkflow-PASS verlangt `HASH_BOUND`-Release-Metadaten;
+- erst `finalize_after_107008` wandelt diese in den extern signierten Release-Vertrag um;
+- externer Production-Release-/ENDSTEMPEL-/WordPress-Schutz bleibt erhalten.
+
+Nicht verändert:
+- Textmaschine;
+- externe-Link-Regel;
+- Tabellenregel/-stufe;
+- LanguageTool;
+- PPM 6.7.9 / PSERC / PSTE;
+- SEO / Design;
+- Publish-Sperre.
+
+Belege:
+- `hardlock` PASS auf Head `7990029…`;
+- `hardlock-base` PASS auf demselben Head;
+- aktiver interner Call-Graph: CLEAN;
+- aktuelles H8-Paket: HASH_BOUND ohne Signaturfelder.
+
+Grenze:
+Dies ist ausschließlich ein SCOPE-PASS der internen Signier-Säuberung. Kein M01–M33-GESAMT-PASS und kein neuer 7/7-Live-PASS.
