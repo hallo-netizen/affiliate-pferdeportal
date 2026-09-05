@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-05
-STATUS: AKTIV / PAUL-SPEZIALAUFTRAG GEBUNDEN
+STATUS: AKTIV / NORMALER TEXT-ARBEITSCHAT – B01-REGRESSIONSPRÜFUNG
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,16 +9,16 @@ STATUS: AKTIV / PAUL-SPEZIALAUFTRAG GEBUNDEN
 Der einzige aktuelle Arbeitsraum des Büros TEXT.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du sehen musst, wem der aktuell gebundene TEXT/SEO-Arbeitsbereich gehört und wie die Rückgabe läuft.
+du den aktuell gebundenen TEXT/SEO-Arbeitsbereich, Branch und nächsten Schritt sehen musst.
 
 **DU DARFST …**  
-den aktuellen Auftrag und alle autoritativen Quellen lesen. Ein normaler TEXT-Arbeitschat darf parallel nur an klar unabhängigen Bereichen arbeiten.
+den aktuellen Auftrag und alle autoritativen Quellen lesen und ausschließlich im gebundenen Hobbyraum-Branch prüfen/reparieren.
 
 **DU DARFST NICHT …**  
-den aktuell an Paul gebundenen technischen Schreibbereich parallel verändern, dich ohne ausdrücklichen Auftrag als Paul ausgeben oder aus der Raumbelegung Fachregeln ableiten.
+main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Workflow/Runner/Gate/Executor bauen oder Fach-/SEO-/Textmaschinenregeln verändern.
 
 **ALS NÄCHSTES …**  
-Als normaler TEXT-Arbeitschat: **nicht zu Paul wechseln.** Prüfen, ob dein Auftrag denselben technischen Schreibbereich betrifft. Wenn ja: keine Paralleländerung; Paul-Rückgabe abwarten. Wenn nein: normalen TEXT-Arbeitsweg über das Handlungsverzeichnis nutzen.
+Nur B01 weiter belegen: bestehende KISS-Korrektur und die beiden stale Regressionstests M15/M31 hart positiv/negativ prüfen. Danach erst bestehende M01–M33-Gesamtregression; ein echter 7/7-Lauf bleibt der Livebeweis.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -30,31 +30,36 @@ Als normaler TEXT-Arbeitschat: **nicht zu Paul wechseln.** Prüfen, ob dein Auft
 
 ## Aktuelle Arbeitsbindung
 
-Gebundener Spezialworker:
-**PAUL**
+Aktiver Arbeiter:
+**normaler TEXT-Arbeitschat**
 
-Pauls eigener Arbeitsbranch:
-`paul/text-seo-campus-ready-20260905`
+**Paul ist für diesen Auftrag tabu und nicht gebunden.**
 
-Pauls Einstieg ist **nur für den ausdrücklich beauftragten Paul-Worker**:
-`../../../PAUL/TEXT_SEO/START_HERE.md`
+Gebundener Hobbyraum-Branch:
+`hobbyroom/b01-semantic-category-seed`
 
-Ein normaler Arbeitschat wird von diesem Hobbyraum **nicht** dorthin geroutet.
+Draft-PR:
+`#140`
+
+Aktueller Arbeits-Head:
+`f2b47e9ecce643acfdffbd68ccff0805117613da`
+
+main bleibt unverändert:
+`c8a96e7a2f598de69134d90b143257c3559bc98a`
+
+## Aktueller Prüfstand
+
+- B01-KISS-Fix verändert nur den bestehenden `fachworkflow_proof_handoff.py`: keine vorgezogene WordPress-ID im echten Produktionsplan; interne Seed-ID nur für den isolierten lokalen PPM-Testzustand.
+- M15-Test war stale: er verbot inzwischen ausdrücklich erforderliche Handoff-Request-Texte bzw. wertete `kein submit-request` falsch.
+- M31-Test war stale: er erwartete überhaupt keinen `fachworkflow_handoff`, obwohl der aktuelle Sollweg einen gebundenen Handoff innerhalb derselben Current Action vorsieht und gerade keinen separaten Executor verlangt.
+- Korrigierte M15/M31-Logik wurde auf dem Hobbyraum-Branch positiv/negativ geprüft.
+- GitHub `hardlock` und `hardlock-base` auf Head `f2b47e9…`: PASS.
+- Kein Live-7/7-PASS behauptet.
 
 ## Single Writer
 
-- Paul darf alle Büro-/Campusakten lesen;
-- Paul verändert keine Dateien unter `protocol/PROJECT_MEMORY/**`;
-- Paul baut/testet nur im ausdrücklich gebundenen technischen Schreibbereich auf seinem `paul/*`-Branch;
-- der normale TEXT-Arbeitschat verändert denselben technischen Schreibbereich bis zur Rückgabe nicht;
-- andere klar unabhängige TEXT-Arbeit bleibt möglich;
-- Paul liefert Befund/Fix/Tests/Commit(s);
-- der TEXT-Arbeitschat entscheidet und integriert selbst.
-
-## Bei Rückgabe
-
-Vor Übernahme:
-1. aktuellen Campus-/Fachstand frisch lesen;
-2. Paul-Ergebnis gegen den dann aktuellen Stand prüfen;
-3. übernehmen / anpassen / verwerfen;
-4. erst der TEXT-Arbeitschat aktualisiert offiziellen Stand, Protokoll und NEXT ACTION.
+- Dieser normale TEXT-Arbeitschat ist für den aktuellen B01-Hobbyraumauftrag der einzige aktive technische Schreiber.
+- Paul wird nicht benutzt.
+- main wird nicht verändert.
+- Andere Büros/Arbeitsbereiche bleiben unangetastet.
+- Erst nach belastbarer Prüfung werden offizieller Stand und nächste Aktion weitergeschrieben.
