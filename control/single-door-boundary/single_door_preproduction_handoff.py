@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import base64
 import copy
 import hashlib
 import importlib.util
@@ -11,19 +10,11 @@ import sys
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
-try:
-    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
-    from cryptography.exceptions import InvalidSignature
-except Exception:
-    Ed25519PublicKey = None
-    InvalidSignature = Exception
-
 HERE = Path(__file__).resolve().parent
 BOUNDARY_PATH = HERE / "single_door_boundary.py"
 REPO_ROOT = HERE.parents[1]
 PREPRODUCTION_CONTRACT = "PFERDE_ATELIER_PREPRODUCTION_SINGLE_DOOR_V1"
 PACKAGE_CONTRACT = "PSERC_APPROVED_PRODUCTION_PACKAGE_V1"
-RELEASE_CONTRACT = "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED"
 ROOM_TOKEN = "R_PRE_001"
 ACTION_TOKEN = "A_PRE_001"
 INPUT_HANDLE = "I_PRE_PACKAGE_001"
@@ -32,13 +23,6 @@ NEXT_ROOM_TOKEN = "R_001"
 MAX_PACKAGE_BYTES = 12 * 1024 * 1024
 SHA_RE = re.compile(r"^[a-f0-9]{64}$")
 
-# Public verification material only. Private signing keys remain outside the repository.
-TRUSTED_SIGNING_KEYS = {
-    "workflow-ed25519-153d2518dba7b025": {"sha256": "153d2518dba7b025c92036583fcf86e31288a2b9f9e0977fce655225446f2a59", "public_key_b64": "Mcl55V5yPSscQZjGC0BPPHoSxp2xiDNzicGDopaZDPQ="},
-    "workflow-ed25519-b15660ee915a5826": {"sha256": "b15660ee915a5826e3b658c99043b448ba212596f44ad6a09add09cfbd2d48f3", "public_key_b64": "mwu5MTHnBDhZrzKxeqEnDtiDWdgIDYAoY8Gc167R7dc="},
-    "workflow-ed25519-8f521756284cb375": {"sha256": "8f521756284cb375c907f508dac333f51b71b515419ee271ca68fa149db66f87", "public_key_b64": "6FCxYycU2bJysJFvtH5xZ0ia+k59ZLyK6Av8d9/ujm0="},
-    "workflow-ed25519-7ba1c78405b15306": {"sha256": "7ba1c78405b15306000ed241c3de2d7ab14c23ca2a9f3a4c27da5664711c4771", "public_key_b64": "PqyrEbUTc8JlUNq07kgBBecKRWlh/LxxkBjIqlS0KNw="},
-}
 PACKAGE_KEYS = {"contract", "fact_pack_bundle_sha256", "production_plan_sha256", "workflow_release_sha256", "package_id", "source", "fact_pack_bundle", "production_plan", "workflow_release", "package_payload_sha256"}
 
 class HandoffBlocked(RuntimeError): pass
@@ -68,27 +52,6 @@ def worker_request(model: str, boundary=None) -> dict[str, Any]:
     boundary = boundary or boundary_module()
     return boundary.build_worker_request(binding=preproduction_binding(boundary), model=model)
 
-def _verify_release_signature(release: Mapping[str, Any], trusted_keys: Mapping[str, Mapping[str, str]]) -> None:
-    if Ed25519PublicKey is None: raise HandoffBlocked("ED25519_RUNTIME_UNAVAILABLE")
-    if release.get("contract") != RELEASE_CONTRACT or release.get("status") != "PASS": raise HandoffBlocked("WORKFLOW_RELEASE_SHAPE_INVALID")
-    if release.get("signature_algorithm") != "ED25519": raise HandoffBlocked("WORKFLOW_RELEASE_SIGNATURE_ALGORITHM_INVALID")
-    key_id = release.get("signing_key_id"); trusted = trusted_keys.get(str(key_id))
-    if not trusted: raise HandoffBlocked("WORKFLOW_RELEASE_SIGNING_KEY_UNTRUSTED")
-    if release.get("signing_public_key_sha256") != trusted.get("sha256"): raise HandoffBlocked("WORKFLOW_RELEASE_SIGNING_KEY_IDENTITY_MISMATCH")
-    payload = dict(release)
-    payload.pop("release_payload_sha256", None); payload.pop("signature_b64", None); payload.pop("release_sha256", None)
-    payload_sha = stable_hash(payload); declared = release.get("release_payload_sha256")
-    if not isinstance(declared, str) or not SHA_RE.fullmatch(declared) or declared != payload_sha: raise HandoffBlocked("WORKFLOW_RELEASE_PAYLOAD_HASH_MISMATCH")
-    try:
-        sig = base64.b64decode(str(release.get("signature_b64") or ""), validate=True)
-        public = base64.b64decode(str(trusted.get("public_key_b64") or ""), validate=True)
-    except Exception as exc: raise HandoffBlocked("WORKFLOW_RELEASE_SIGNATURE_ENCODING_INVALID") from exc
-    try: Ed25519PublicKey.from_public_bytes(public).verify(sig, payload_sha.encode("ascii"))
-    except (InvalidSignature, ValueError) as exc: raise HandoffBlocked("WORKFLOW_RELEASE_SIGNATURE_INVALID") from exc
-    release_copy = dict(release); release_copy.pop("release_sha256", None)
-    expected = stable_hash(release_copy); declared_release = release.get("release_sha256")
-    if not isinstance(declared_release, str) or not SHA_RE.fullmatch(declared_release) or declared_release != expected: raise HandoffBlocked("WORKFLOW_RELEASE_HASH_MISMATCH")
-
 def validate_production_package_integrity(path: Path) -> dict[str, Any]:
     path = Path(path)
     if path.suffix.lower() != ".json": raise HandoffBlocked("HANDOFF_FILE_MUST_BE_JSON")
@@ -111,14 +74,6 @@ def validate_production_package_integrity(path: Path) -> dict[str, Any]:
     if not isinstance(declared_payload, str) or not SHA_RE.fullmatch(declared_payload) or stable_hash(payload) != declared_payload: raise HandoffBlocked("HANDOFF_PACKAGE_PAYLOAD_HASH_MISMATCH")
     return {"ok": True, "status": "PRODUCTION_PACKAGE_INTEGRITY_VALID", "package_id": expected_id, "artifact_sha256": file_sha(path), "bytes": size, "content_semantics_inspected": False, "publish_allowed": False}
 
-def validate_production_package(path: Path, *, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
-    proof = validate_production_package_integrity(path)
-    env = json.loads(Path(path).read_text(encoding="utf-8"))
-    _verify_release_signature(env["workflow_release"], trusted_keys or TRUSTED_SIGNING_KEYS)
-    out = dict(proof)
-    out["status"] = "SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID"
-    return out
-
 def resolve_handle(handle_map: Mapping[str, str], handle: str, repo: Path) -> Path:
     if set(handle_map) != {INPUT_HANDLE}: raise HandoffBlocked("HANDLE_MAP_MUST_CONTAIN_EXACTLY_BOUND_HANDLE")
     value = handle_map.get(handle)
@@ -129,7 +84,7 @@ def resolve_handle(handle_map: Mapping[str, str], handle: str, repo: Path) -> Pa
     if root not in full.parents and full != root: raise HandoffBlocked("BOUND_HANDLE_PATH_ESCAPE")
     return full
 
-def execute_bound_preproduction_action(*, handle_map: Mapping[str, str], repo: Path, attach_callable: Callable[[Path], Mapping[str, Any]], boundary=None, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+def execute_bound_preproduction_action(*, handle_map: Mapping[str, str], repo: Path, attach_callable: Callable[[Path], Mapping[str, Any]], boundary=None) -> dict[str, Any]:
     boundary = boundary or boundary_module(); binding = preproduction_binding(boundary)
     package_path = resolve_handle(handle_map, binding.input_handles[0], Path(repo))
     proof = validate_production_package_integrity(package_path)
