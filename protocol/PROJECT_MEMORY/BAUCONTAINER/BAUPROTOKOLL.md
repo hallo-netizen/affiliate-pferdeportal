@@ -518,3 +518,38 @@ BEWERTUNG:
 
 BEZUG:
 ARCH-050/051; BAU-024/026.
+
+
+### 2026-09-05 – Real-Diff-Abnahme der automatischen Sicherung
+
+Zusätzlich zu den 22 synthetischen Positiv-/Negativfällen wurde die Kandidatenlogik gegen echte vorhandene PR-Diffs ausgewertet.
+
+PR #138 – echter Negativfall:
+- Head: `paul/hardlock-negative-selftest-20260905`
+- Diff: `protocol/PROJECT_MEMORY/PAUL_WRITE_NEGATIVE_SELFTEST.txt`
+- Erwartung: BLOCK
+- Ergebnis: `PAUL_PROJECT_MEMORY_WRITE_BLOCKED`
+- PASS
+
+PR #139 – echter Positivfall:
+- Head: `paul/hardlock-positive-selftest-20260905`
+- Diff nur außerhalb PROJECT_MEMORY
+- Erwartung: Paul-Sperre darf nicht auslösen
+- Ergebnis: PASS / PROTOKOLLCHECK NOT_APPLICABLE
+- PASS
+
+PR #134 – echter Campusfall:
+- Head: `hobbyroom/project-memory-campus-v1-20260905`
+- realer PROJECT_MEMORY-Gesamtdiff
+- maschinenlesbarer PROTOKOLLCHECK im PR-Text ergänzt
+- Pfadsperre: PASS
+- Protokollguard: `PROJECT_MEMORY_PROTOCOLCHECK_PASS`
+- PASS
+
+GESAMT LOGIKABNAHME:
+- synthetisch: 22/22 PASS nach einem gefundenen und behobenen Zielvertrags-Matcherfehler;
+- echte PR-Diffs: 3/3 erwartungsgemäß;
+- Kandidatenstruktur/Selbsttestmarker: PASS.
+
+WICHTIGE GRENZE:
+Noch kein serverseitiger Required-Check-PASS für die neue Logik, weil Security-PR #137 weiterhin nicht auf main aktiviert ist.

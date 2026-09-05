@@ -435,3 +435,17 @@ BLOCKED / SECURITY-MAINTENANCE – nicht wegen Logikfehler, sondern ausschließl
 
 NACH AKTIVIERUNG:
 echte GitHub-PR-Positiv-/Negativtests bleiben Pflicht.
+
+
+### BAU-026 – REAL-DIFF-NACHTRAG
+
+Echte vorhandene PR-Diffs gegen Kandidatenlogik:
+- #138 Paul + PROJECT_MEMORY → korrekt BLOCK;
+- #139 Paul ohne PROJECT_MEMORY → korrekt PASS;
+- #134 Campus + vollständiger PROTOKOLLCHECK → korrekt PASS.
+
+LOGIK:
+PASS.
+
+SERVERSEITIGE ERZWINGUNG:
+weiterhin BLOCKED bis Admin-Aktivierung von Security-PR #137.
