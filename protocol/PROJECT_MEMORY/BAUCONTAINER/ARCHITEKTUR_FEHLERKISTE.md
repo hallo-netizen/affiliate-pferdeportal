@@ -552,3 +552,25 @@ NEGATIV:
 
 STATUSGRUND:
 Dokumentation umgesetzt; technische Aktivierung bleibt bis kontrollierter Aktivierung von Security-PR #137 BLOCKED.
+
+
+### BAU-028 – TESTNACHTRAG
+
+DOKUMENTATIONSABDECKUNG:
+30/30 direkte Campus-Eingänge/Räume tragen den Verweis auf die globale Arbeitsort-Sperre.
+
+SECURITY-KANDIDAT:
+`hardlock` SUCCESS.
+
+Harte Fälle im echten GitHub-Run:
+- offizieller normaler Worktree → PASS;
+- Campus-Tresor/Archiv-Worktree → BLOCK;
+- Bare-Mirror → BLOCK;
+- lokaler Mirror-origin → BLOCK;
+- externer Worktree mit Tresor-Common-Gitdir → BLOCK.
+
+LOGIK:
+PASS.
+
+STATUS BLEIBT:
+BLOCKED / SECURITY-MAINTENANCE ausschließlich bis PR #137 kontrolliert auf main aktiviert und danach derselbe reale Servercheck erneut bestätigt wurde.

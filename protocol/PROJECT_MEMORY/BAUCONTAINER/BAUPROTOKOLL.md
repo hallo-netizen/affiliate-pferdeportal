@@ -765,3 +765,43 @@ Blockiert Backup-/Archiv-Worktree, Bare-Mirror, Sicherungs-Gitdir/Common-Dir und
 
 BEZUG:
 ARCH-057; BAU-028.
+
+
+### 2026-09-05 – Tresor-/Archiv-Sperre harte Abnahme
+
+FLÄCHENABDECKUNG:
+Vier gezielte Campus-Commits gegen den realen Verzeichnisbaum geprüft:
+- START_HERE: 22/22;
+- HOBBYRAUM: 8/8;
+- Gesamt direkte Eingänge/Räume: **30/30**;
+- alle verweisen nur auf die eine autoritative Regel im `EINGANGSSTANDARD.md`.
+
+ECHTER SECURITY-PR-TEST:
+Security-Head:
+`689176ee7c3ef3c6a5b97cb752553ce37a07f134`
+
+GitHub `hardlock`:
+**SUCCESS**
+
+Ausgabe des real ausgeführten `cloud_repo_ci_test.py`:
+- `CODEX_CLOUD_GATE_CI_PASS`;
+- `positive_negative: PASS`;
+- `backup_archive_workspace_execution_blocked: PASS`;
+- `bare_mirror_execution_blocked: PASS`;
+- `local_mirror_origin_execution_blocked: PASS`;
+- `backup_common_gitdir_execution_blocked: PASS`.
+
+Damit sind positiv/negativ belegt:
+- normaler offizieller Worktree → erlaubt;
+- Worktree direkt in Campus-Tresor/Archiv → BLOCK;
+- Bare-Mirror → BLOCK;
+- lokaler Mirror als origin → BLOCK;
+- Worktree außerhalb mit Git-Common-Dir im Tresor → BLOCK.
+
+WICHTIG:
+`hardlock-base` des Security-PR bleibt erwartungsgemäß FAIL, weil die bestehende immutable Security-Schicht ihre eigene Änderung blockiert.
+Daher:
+**LOGIK + KANDIDATENTEST PASS; SERVERSEITIGE AKTIVIERUNG AUF main WEITER BLOCKED bis Admin-Wartung.**
+
+BEZUG:
+ARCH-057; BAU-028.
