@@ -7,28 +7,34 @@ STATUS: IM AUFBAU
 
 Projektübergreifende, nachweislich allgemeingültige Komponenten sammeln und wiederverwenden.
 
-Dieses Gebäude ist kein Ablageplatz für Kopien aller Projektplugins.
+Zentrale Eingangstabelle:
+`MODULREGISTER.md`
 
-Ein Baustein kommt hierher, wenn:
-- er ausdrücklich projektunabhängig konzipiert wurde;
-- projektspezifische Verdrahtungen geprüft sind;
-- Voraussetzungen und optionale Abhängigkeiten dokumentiert sind;
-- sein geprüfter Stand bekannt ist.
+Dieses Register nimmt dem Nutzer die Erinnerungspflicht ab.
 
 ## Nutzung bei neuen Projekten
 
-Ein neues Projekt wird nicht blind aus dem Pferde-Atelier kopiert.
+Der Projekt-Aufsetzer („Oberwachtmeister“) MUSS zuerst das Modulregister prüfen.
 
-Der Projekt-Aufsetzer („Oberwachtmeister“) geht:
+Er:
+1. identifiziert das neue Projekt;
+2. liest dessen Anforderungen;
+3. prüft alle registrierten Grundmodule;
+4. übernimmt passende allgemeingültige Module;
+5. trennt bei GEMISCHT allgemeine Engine und Projektkonfiguration;
+6. baut nur, was noch fehlt.
 
-1. zum Hauptpförtner;
-2. legt/identifiziert das neue Projektgebäude;
-3. liest dessen Anforderungen;
-4. prüft dieses Gebäude auf passende allgemeingültige Bausteine;
-5. übernimmt nur passende geprüfte Bausteine;
-6. projektspezifische Konfiguration bleibt im neuen Projekt.
+## Hauptwahrheit
+
+Allgemeiner Kern = nur hier.
+
+Projektgebäude enthalten lediglich:
+- Nutzung/Verweis,
+- konkrete Konfiguration,
+- konkrete Projektdaten,
+- projektspezifische Fehler und Historie.
 
 ## Organische Regel
 
-Dieses Gebäude wächst nur mit tatsächlich vorhandenen und geprüften Komponenten.
+Das Register wächst mit jeder Masterdatei und jedem geprüften Modul.
 Keine Bausteine auf Vorrat erfinden.
