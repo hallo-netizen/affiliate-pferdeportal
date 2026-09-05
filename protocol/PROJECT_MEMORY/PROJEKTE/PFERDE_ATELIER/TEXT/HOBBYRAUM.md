@@ -58,6 +58,7 @@ main bleibt unverändert:
 - **Externe Signierung bleibt unangetastet:** hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation.
 - GitHub `hardlock` und `hardlock-base` auf Head `7990029…`: PASS.
 - **SCOPE-PASS internes Signierkonzept:** aktiver Call-Graph bis 107007 ohne ED25519-/Signer-/Key-/`SIGNED`-Pflicht; gebundenes H8-Paket `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder; Host-Signer erscheint erst im 107008-Endzustand.
+- **ZWISCHENTEST INTERN/EXTERN: PASS.** Internes unsigniertes HASH_BOUND-Paket + aktuelle H8-Provenance PASS; manipulierte H8-/Batch-Herkunft bleibt selbst nach Neuberechnung aller normalen Hashes BLOCKED; Qualitätsstufen inkl. Link/Tabelle/PPM unverändert; externe ED25519-Positiv-/Negativprüfung PASS.
 - **Noch nicht ausgeführt/belegt:** kompletter M01–M33-Lauf auf Head `7990029…`.
 - Kein Live-7/7-PASS behauptet.
 
