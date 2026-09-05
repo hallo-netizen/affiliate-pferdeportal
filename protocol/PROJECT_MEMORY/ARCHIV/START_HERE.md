@@ -48,3 +48,14 @@ Für den **aktuellen** Stand immer zurück zum zuständigen:
 
 `ARCHIV/REGISTER.md` darf keine aktuelle Fachwahrheit ersetzen.
 Ein historischer Stand wird niemals allein durch „neuere Dateigröße/Version“ wieder aktuell.
+
+
+## ARCHIV IST NIE WERKBANK
+
+Archivierte Dateien dürfen untersucht, verglichen und als historische Belege genutzt werden.
+
+Sie dürfen **nicht direkt ausgeführt** werden:
+kein Runner, Test, Release, Reparatur- oder Produktionslauf aus `Campus-Archiv`.
+
+Soll ein historischer Stand Wiederherstellungsbasis sein:
+erst über den Tresor-/Restoreweg in einen frischen offiziellen Arbeits-Worktree überführen und dort neu verifizieren.

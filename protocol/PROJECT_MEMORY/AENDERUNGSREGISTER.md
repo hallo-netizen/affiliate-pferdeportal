@@ -457,3 +457,14 @@ WARUM:
 Beide Uploads stammen aus älteren Produktionsmaster-Zusammenhängen. Der 0057-README bindet seinen Inhalt ausdrücklich an `98_HISTORY_READ_ONLY`; der 0043-README bezeichnet LanguageTool ausdrücklich als unveränderte Offline-Abhängigkeit. Auf aktuellem `main` wurde kein LanguageTool-Pfad/-Code gefunden.
 REGEL:
 Beide Bestände gehören fachlich zu TEXT/SEO. Historischer Nachweis darf Auffindbarkeit ermöglichen, aber ohne neuen aktuellen Beleg weder CURRENT_STATE noch aktive Nutzung verändern.
+
+
+## ARCH-057 – Tresor/Archiv/Mirror sind campusweit keine Arbeitsquelle
+WAS:
+Backup-, Archiv- und Mirrorbestände werden von jeder normalen Arbeitsausführung getrennt.
+WARUM:
+Ein Nachbarchat wollte den vorhandenen Campus-Tresor/Git-Mirror als „kürzesten sauberen Weg“ verwenden, um einen Runner direkt auszuführen. Das hätte einen Sicherungsstand zur Arbeitsquelle gemacht und die Workflowbindung umgangen.
+REGEL:
+READ/VERIFY/RESTORE ONLY. Keine Runner, Tests, Reparaturen, Produktion oder Releases aus Tresor/Archiv/Mirror. Restore erst in frischen Arbeits-Worktree außerhalb der Sicherungsbereiche; danach offizielles GitHub-origin + normale Eingangstür.
+TECHNIK:
+Vorbereitet in Security-PR #137 durch die bestehende `cloud_entry.py`: Backup-Pfad, Bare-Mirror, Tresor-/Archiv-Gitdir und lokaler Mirror-origin werden fail-closed blockiert.

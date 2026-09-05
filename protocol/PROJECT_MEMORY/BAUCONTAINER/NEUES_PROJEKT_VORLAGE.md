@@ -149,3 +149,14 @@ Bei jeder neuen Paul-Zuweisung:
 - kein Wiederverwenden eines alten Worker-Branches;
 - der gebundene `WRITE_SCOPE` ist für andere parallele PRs gesperrt;
 - unabhängige Scopes dürfen weiterarbeiten.
+
+
+### Backup-/Archiv-Grenze für jedes neue Projekt
+
+Jedes neue Projekt erbt automatisch:
+- Archiv/Tresor/Mirror = READ/VERIFY/RESTORE ONLY;
+- niemals Arbeitsrepository oder Runner-Quelle;
+- Restore nur in frischen Worktree außerhalb der Sicherungsbereiche;
+- danach normale technische Eingangstür neu prüfen.
+
+Keine projektspezifische Ausnahme.

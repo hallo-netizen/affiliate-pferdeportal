@@ -158,3 +158,16 @@ Routing-Kennwort:
 Wichtig:
 Kein Passwort und keine Schreibberechtigung.
 Befugnisse kommen ausschließlich aus Rolle + gebundenem Auftrag + Branch/Fachregeln.
+
+
+## Tresor / Archiv / Git-Mirror
+
+Verbindlicher Weg:
+- Historie/Beleg → `ARCHIV/START_HERE.md`;
+- Backup/Restore → `TRESOR/START_HERE.md` → `TRESOR/NOTFALL_WIEDERAUFBAU.md`.
+
+Harte Grenze:
+**Nie Runner, Tests, Produktion oder Reparatur direkt aus Archiv/Tresor/Mirror ausführen.**
+Auch nicht als Ersatzroute bei BLOCKED.
+
+Nach Restore erst frischen offiziellen Arbeits-Worktree herstellen und dann den normalen definierten Arbeitsweg neu starten.

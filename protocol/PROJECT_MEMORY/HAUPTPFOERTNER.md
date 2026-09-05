@@ -122,3 +122,12 @@ Zuerst:
 Dann aktuellen `STATUS.md` prüfen.
 
 Nur einen ausdrücklich geprüften `TRESOR_PASS` als vollständige Wiederherstellungsquelle verwenden.
+
+
+## Backup-/Tresor-Grenze
+
+Für normale Fach- oder Technikarbeit ist `TRESOR/` bzw. `ARCHIV/` **niemals ein Arbeitsweg**.
+
+Dorthin wird nur geroutet für Backup/Inventarisierung, historische Belegsuche oder ausdrücklich eingetretenen Katastrophen-/Restorefall.
+
+Ein lokaler Mirror ist kein Ersatz für den aktuellen gebundenen Arbeitsweg.

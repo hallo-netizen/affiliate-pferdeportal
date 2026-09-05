@@ -93,3 +93,12 @@ periodisch oder vor einem neuen Tresor-/Backup-Gesamtstand.
 ## Grundsatz
 
 **Ordnen, nicht bearbeiten. Verschieben, nicht umschreiben. Erhalten, nicht löschen.**
+
+
+## Archiv-Arbeitsgrenze
+
+Der Hausmeister darf Archiv-/Tresorbestände niemals „zum Test“ oder „zur schnellen Reparatur“ ausführen.
+
+Er verwaltet Sicherungs-/Historienmaterial nur als Daten/Beleg.
+Benötigt Facharbeit einen Stand daraus:
+STOPP → regulärer Restore-/Fachweg.

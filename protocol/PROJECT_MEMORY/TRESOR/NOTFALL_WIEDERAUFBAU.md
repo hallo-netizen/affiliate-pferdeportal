@@ -29,6 +29,10 @@ Aus dem Git-Mirror:
 - Branches;
 - Tags.
 
+**Nicht im Mirror arbeiten und dort nichts ausführen.**
+
+Der Mirror ist nur Quelle. Wiederherstellung erfolgt in ein reguläres Repository / einen frischen Arbeits-Worktree **außerhalb** von `Campus-Tresor` und `Campus-Archiv`.
+
 Keine einzelnen Dateien manuell zusammensuchen, wenn der vollständige Mirror vorhanden ist.
 
 ## 4. GitHub-Struktur wiederherstellen
@@ -47,21 +51,31 @@ Alle im Manifest aufgeführten Schlüssel/Autorisierungen/externen Abhängigkeit
 Fehlt ein notwendiger Wert:
 STOPP. Nicht improvisieren.
 
-## 6. Hauptpförtner
+## 6. Arbeitsquelle neu legitimieren
+
+Vor Fach-/Runnerarbeit:
+- wiederhergestelltes offizielles GitHub-Repository vorhanden;
+- frischer Arbeits-Worktree außerhalb Tresor/Archiv;
+- `origin` zeigt auf das offizielle GitHub-Repository;
+- normale technische Eingangstür PASS.
+
+Ein Worktree, der noch am Tresor-/Archiv-Gitdir hängt, ist **nicht** arbeitsfähig.
+
+## 7. Hauptpförtner
 
 Danach:
 `protocol/PROJECT_MEMORY/HAUPTPFOERTNER.md`
 
 lesen und den normalen Campus-Reset durchführen.
 
-## 7. Baucontainer
+## 8. Baucontainer
 
 Bauplan und Änderungen prüfen:
 - welche Projektgebäude existieren;
 - welche Büros existieren;
 - welche Architekturentscheidungen gelten.
 
-## 8. Fachstände
+## 9. Fachstände
 
 Je aktivem Büro:
 - START_HERE;
@@ -71,12 +85,12 @@ Je aktivem Büro:
 - relevante Änderungen;
 - verbindlichen Arbeitsweg.
 
-## 9. Maschinenraum prüfen
+## 10. Maschinenraum prüfen
 
 Bestehende technische Gates/Tests ausführen.
 Keine neue Architektur als Ersatz bauen.
 
-## 10. Wiederaufbau-Abnahme
+## 11. Wiederaufbau-Abnahme
 
 Erst wenn:
 - Struktur vollständig;

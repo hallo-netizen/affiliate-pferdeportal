@@ -741,3 +741,27 @@ KORREKTUR:
 WICHTIG:
 Fachzugehörigkeit TEXT/SEO ist jetzt eindeutig.
 Aktuelle operative Nutzung bleibt weiterhin UNGEKLÄRT, weil dafür kein aktueller main-/Produktionsbeleg vorliegt.
+
+
+### 2026-09-05 – Tresor-/Archiv-Arbeitsquellenfehler campusweit geschlossen
+
+AUSLÖSER:
+Nachbarchat wollte den Campus-Tresor/Git-Mirror als lokalen Repo-Stand verwenden und daraus den vorhandenen Runner direkt ausführen.
+
+BEFUND:
+Falsch. Tresor/Archiv sind Restore-/Belegquellen, niemals Arbeitsquelle.
+
+KISS-FIX:
+- globale Regel im EINGANGSSTANDARD;
+- Hauptpförtner + Handlungsverzeichnis;
+- Archiv + Tresor;
+- Notfall-Wiederaufbau;
+- Hausmeister;
+- Neubauvorlage.
+
+TECHNISCH:
+Bestehende `cloud_entry.py` im Security-PR #137 erweitert, kein neuer Runner.
+Blockiert Backup-/Archiv-Worktree, Bare-Mirror, Sicherungs-Gitdir/Common-Dir und lokalen/nicht offiziellen origin.
+
+BEZUG:
+ARCH-057; BAU-028.

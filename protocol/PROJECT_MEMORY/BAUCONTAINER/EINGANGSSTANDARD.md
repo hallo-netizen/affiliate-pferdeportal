@@ -206,3 +206,30 @@ Für Spezialworker Paul gilt zusätzlich:
 - nur relevante Quellen erzeugen `STALE_ASSIGNMENT`; fremde Campusänderungen dürfen Paul nicht unnötig blockieren.
 
 Automatisierung ergänzt die bestehende Cloud-Eingangstür, ersetzt sie nicht.
+
+
+## Backup-/Tresor-/Archiv-Sperre – campusweit
+
+Diese Regel gilt **für jede Ebene, jedes Gebäude, jedes Büro, jeden Hobbyraum, Paul, Baucontainer, Archiv und Tresor**.
+
+Erlaubt:
+Tresor/Archiv/Backup/Mirror nur lesen, hashen, inventarisieren, verifizieren und für ausdrücklich gebundene Notfall-Wiederherstellung verwenden.
+
+Verboten:
+- aktuelle Fach-/Arbeitswahrheit ersetzen;
+- als normales Arbeitsrepository dienen;
+- Runner, Tests, Reparaturen, Produktion oder Releases direkt daraus ausführen;
+- als Ersatzroute bei BLOCKED benutzen;
+- lokalen Mirror oder daran hängenden Worktree als offiziellen Arbeitsstand verwenden.
+
+Technische Sperre nach Aktivierung von Security-PR #137:
+- `Campus-Tresor`/`Campus-Archiv` als Worktree → `BACKUP_WORKSPACE_EXECUTION_BLOCKED`;
+- Bare-Mirror → `BARE_GIT_MIRROR_EXECUTION_BLOCKED`;
+- Git-Dir/Common-Dir im Sicherungsbereich → `BACKUP_GITDIR_EXECUTION_BLOCKED`;
+- lokaler/nicht offizieller `origin` → `OFFICIAL_GITHUB_ORIGIN_REQUIRED`.
+
+Zulässige Wiederherstellung:
+verifizierten Tresorstand lesen → Git/GitHub wiederherstellen → frischen Arbeits-Worktree außerhalb Tresor/Archiv erzeugen → offizielles GitHub-origin binden → normale Eingangstür neu starten.
+
+Leitsatz:
+**Backup-PASS ≠ Arbeits-PASS. Restore-Quelle ≠ Arbeitsquelle.**

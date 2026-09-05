@@ -39,3 +39,16 @@ Danach verbleibt die Prüfung nicht exportierbarer Recovery-Abhängigkeiten.
 Nur ein real geprüfter, externer, vollständiger Stand darf:
 `TRESOR_PASS`
 heißen.
+
+
+## TRESOR IST NIE WERKBANK
+
+Der Tresor und sein Git-Mirror sind ausschließlich Sicherungs-/Restorequellen.
+
+Verboten:
+- Runner/Tests/Reparaturen/Produktion direkt aus `/Campus-Tresor/`;
+- Mirror als aktuellen Arbeitsstand verwenden;
+- Worktree direkt an Tresor-Git-Metadaten hängen und darin arbeiten;
+- Tresor als Ausweichroute bei BLOCKED benutzen.
+
+Wiederherstellung endet erst nach Aufbau eines **frischen Arbeits-Worktrees außerhalb des Tresors** und erneutem normalen Eingangstest.

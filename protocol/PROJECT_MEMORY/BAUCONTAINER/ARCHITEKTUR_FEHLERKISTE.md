@@ -523,3 +523,32 @@ Belege:
 
 Zusatzregel:
 Jeder Auftrag erhält einen frischen Paul-Branch.
+
+
+## BAU-028 – Tresor/Git-Mirror konnte als Arbeitsquelle missverstanden werden
+
+STATUS: BLOCKED / SECURITY-MAINTENANCE
+
+KURZ:
+Ein Nachbarchat wollte den Campus-Tresor/Git-Mirror als lokalen Arbeitsstand nehmen und dort den Runner direkt ausführen.
+
+AUSWIRKUNG:
+Backup/Archiv hätte die offizielle aktuelle Arbeitsquelle und den gebundenen Workflow umgehen können.
+
+URSACHE:
+„nicht CURRENT“ war dokumentiert; „niemals Werkbank/Runner-Quelle“ war noch nicht explizit und technisch fail-closed.
+
+KISS-FIX:
+Campusweit READ/VERIFY/RESTORE ONLY + Arbeitsortprüfung direkt in bestehender `cloud_entry.py`.
+
+POSITIV:
+frischer normaler Git-Worktree außerhalb Tresor/Archiv mit offiziellem GitHub-origin → erlaubt.
+
+NEGATIV:
+- Worktree unter Campus-Tresor/Archiv → BLOCK;
+- Bare-Mirror → BLOCK;
+- außerhalb liegender Worktree mit Git-Common-Dir im Tresor → BLOCK;
+- lokaler Mirror als origin → BLOCK.
+
+STATUSGRUND:
+Dokumentation umgesetzt; technische Aktivierung bleibt bis kontrollierter Aktivierung von Security-PR #137 BLOCKED.
