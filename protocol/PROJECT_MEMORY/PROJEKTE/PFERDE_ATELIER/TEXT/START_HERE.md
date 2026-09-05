@@ -49,6 +49,28 @@ Diese Campusakten fassen nur den belegten Stand zusammen.
 
 **Originalinhalte bleiben unverändert und autoritativ an ihrer jeweiligen Quelle.**
 
+## HARTE FEHLERABGLEICH-SPERRE
+
+**Vor JEDER technischen Aktion in diesem Büro ist der Fehlerabgleich Pflicht.**
+
+Technische Aktion bedeutet ausdrücklich auch:
+- Test starten;
+- Live-/7/7-Lauf anstoßen;
+- Branch/Head/Dispatcher umstellen;
+- Datei/Code/Hash/Binding ändern;
+- Reparatur, Regression, Merge- oder Release-Schritt auslösen.
+
+Pflichtreihenfolge:
+1. `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` öffnen.
+2. Von dort die für die geplante Aktion relevante **autoritative Fehlerquelle vollständig prüfen**.
+3. Prüfen, ob die geplante Aktion dort bereits als Fehler, Wiederholungsfehler, verbotener Weg oder bekannte Testgrenze dokumentiert ist.
+4. **Bei Treffer: geplante Aktion NICHT ausführen.** Ausschließlich die dort bereits festgelegte Regel/Lösung/Arbeitsgrenze übernehmen.
+5. Erst bei **belegtem KEIN-TREFFER** darf die technische Aktion weiterlaufen.
+
+**Verbot:** bekannte Fehler erneut praktisch „ausprobieren“, um festzustellen, ob sie noch gelten. Die Fehlerliste ist vor der Aktion eine Sperrliste, nicht erst danach ein Nachschlagewerk.
+
+**Diese Prüfung darf nicht übersprungen, durch Erinnerung ersetzt oder auf nachträgliche Kontrolle verschoben werden.**
+
 ## Arbeitsfreigabe bei echter Arbeit
 
 Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
