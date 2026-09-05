@@ -237,6 +237,22 @@ def source_paths(hobbyroom: str, data: Dict[str, str]) -> List[str]:
     return out
 
 
+def critical_source_paths(hobbyroom: str, data: Dict[str, str]) -> List[str]:
+    office = str(pathlib.PurePosixPath(hobbyroom).parent)
+    candidates = [
+        f"{office}/CURRENT_STATE.md",
+        hobbyroom,
+        data["TASK_SOURCE"],
+        data["TARGET_SOURCE"],
+        data["RULES_SOURCE"],
+    ]
+    out: List[str] = []
+    for p in candidates:
+        if p not in out:
+            out.append(p)
+    return out
+
+
 def snapshot_sources(ref: str, paths: List[str]) -> Dict[str, Dict[str, str]]:
     snap: Dict[str, Dict[str, str]] = {}
     for path in paths:
@@ -276,6 +292,7 @@ def write_capsule(campus_head: str, hobbyroom: str, data: Dict[str, str], snap: 
         "hobbyroom": hobbyroom,
         "assignment": data,
         "sources": {p: {"sha256": v["sha256"]} for p, v in snap.items()},
+        "critical_sources": critical_source_paths(hobbyroom, data),
     }
     (CAPSULE_DIR / "ASSIGNMENT.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n",
@@ -350,9 +367,10 @@ def verify() -> None:
     branch, head = ensure_branch_and_base(data)
     enforce_scope(data, changed_paths(data["TECHNICAL_BASE_SHA"], head))
 
-    current = snapshot_sources(campus_head, list(capsule["sources"].keys()))
-    for path, item in capsule["sources"].items():
-        if current[path]["sha256"] != item["sha256"]:
+    critical = list(capsule.get("critical_sources") or [])
+    current = snapshot_sources(campus_head, critical)
+    for path in critical:
+        if current[path]["sha256"] != capsule["sources"][path]["sha256"]:
             raise Blocked(f"STALE_ASSIGNMENT_BLOCKED:SOURCE_CHANGED:{path}")
     print(f"PAUL_VERIFY_PASS:{data['ASSIGNMENT_ID']}:{campus_head}")
 
@@ -396,7 +414,12 @@ RULES_SOURCE: protocol/rules.md
     except Blocked:
         raise AssertionError("READ_ONLY rejected")
     assert parse_kv_block("no assignment", "x") is None
-    print("PAUL_SCOPE_GATE_SELFTEST_PASS:8/8")
+    critical = critical_source_paths(
+        "protocol/PROJECT_MEMORY/PROJEKTE/X/TEXT/HOBBYRAUM.md", d
+    )
+    assert "protocol/PROJECT_MEMORY/PROJEKTE/X/TEXT/CURRENT_STATE.md" in critical
+    assert "protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md" not in critical
+    print("PAUL_SCOPE_GATE_SELFTEST_PASS:11/11")
 
 
 def main() -> int:
