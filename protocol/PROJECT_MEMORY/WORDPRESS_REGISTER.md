@@ -123,22 +123,36 @@ UNGEKLÄRT.
 MOD-ID:
 noch nicht vergeben
 
-Nachweisbar direkt als Plugin-/Kandidaten-ZIP erhalten, unter anderem:
-- `affiliate-zentrale_v6.47.0_DYNAMIC_BUSINESS_RULE_CONTEXT_ROOTFIX_REALGATE(1).zip`
-- `affiliate-zentrale_v6.63.4_LIVE_OBSERVED_GAP_PROOF_DS24_GUARD_PRE_RELEASE_HARD_VERIFIED.zip`
-- `affiliate-zentrale_v6.66.0_LIVEGATE_END_TO_END_WORKFLOW_ROOTFIX_NOT_RELEASE(1).zip`
+Aktuellster belegter WordPress-Live-Installer:
+`affiliate-zentrale_v6.72.2_LIVE_CANDIDATE_26FILE.zip`
 
-Zusätzliche Master-/Handoff-Pakete vorhanden.
+Live-Version:
+**6.72.2**
 
-Neuester direkt gefundener Plugin-Kandidat:
-6.66.0
+Installer SHA-256:
+`789c7859cd9b5390bc561d6a564c2680125bcd453673cf9c6f18285c1103ba2d`
+
+GitHub kanonischer Release-Branch:
+`affiliate-release-current`
+
+GitHub HEAD:
+`355a40ebbeceec0a4b90158db9f197b8f6e2ee7b`
+
+GitHub active candidate:
+**6.72.1**
 
 Wichtig:
-6.66.0 ist im Dateinamen ausdrücklich `NOT_RELEASE`.
-Aktuelle Release-Wahrheit kommt ausschließlich aus AFFILIATE-Governance.
+GitHub-Kandidat und WordPress-Live-Version sind aktuell nicht identisch.
+Das Register dokumentiert nur diese belegte Differenz.
 
 Hauptquelle:
 `PROJEKTE/PFERDE_ATELIER/AFFILIATE/` + technische Release-Governance.
+
+Allgemeiner Gesamtmaster:
+`ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/MASTERDATEIEN_INVENTAR.md`
+
+Modulklasse:
+UNGEKLÄRT.
 
 ### WP-006 – Universal Portal Design Suite / Pferde-Designlinie
 

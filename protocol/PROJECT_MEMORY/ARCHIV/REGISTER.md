@@ -143,3 +143,56 @@ Zusätzlich weiterhin im unveränderten Gesamtmaster enthalten.
 
 LOKALE_KOPIE_ENTBEHRLICH:
 **NEIN**
+
+
+## ARC-AFFILIATE-GENERAL-20260905 – Allgemeiner Affiliate-Gesamtmaster V5_31
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/2026-09-05/`
+
+Kanonisch vorhanden:
+`MASTERDATEI_AFFILIATEPORTAL_ALLGEMEIN_GESAMTPAKET_NEU_V5_31_20260905_KOMPLETT.zip`
+
+SHA-256:
+`874c358129cf8143453d972628d6205c218da525868e1d883a87b1d4a3021a4e`
+
+Größe:
+245.752.501 Bytes
+
+ZIP-Einträge:
+2.835
+
+ARTEFAKTKLASSE:
+GEMISCHTE MASTERAKTE
+
+LOKALE_KOPIE_ENTBEHRLICH:
+NEIN
+
+## ARC-PFERDE-AFFILIATE-20260905 – Aktueller Affiliate-Stand
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/AFFILIATE/2026-09-05/`
+
+Kanonisch vorhanden:
+- Affiliate-Statusbeleg 05.09.2026
+- Live-Installer 6.72.2
+
+Statusbeleg SHA-256:
+`0a45a26b4667ef7ece17c276faf064fd22e5af99fcf710a2924c8261983f55e8`
+
+Live-Installer SHA-256:
+`789c7859cd9b5390bc561d6a564c2680125bcd453673cf9c6f18285c1103ba2d`
+
+GitHub-Vergleich:
+- affiliate-release-current HEAD `355a40ebbeceec0a4b90158db9f197b8f6e2ee7b`
+- GitHub active candidate 6.72.1
+- WordPress live 6.72.2
+
+LOKALE_KOPIE_ENTBEHRLICH:
+NEIN
