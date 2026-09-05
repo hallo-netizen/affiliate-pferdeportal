@@ -371,14 +371,38 @@ def verify() -> None:
     print(f"PAUL_VERIFY_PASS:{data['ASSIGNMENT_ID']}:{campus_head}")
 
 
-def verify_pr(branch: str, head: str) -> None:
+def verify_pr(branch: str, head: str, pr_base: str) -> None:
     campus_head = fetch_official_campus()
-    hobbyroom, data = active_assignment(campus_head)
-    ensure_branch_and_base(data, branch=branch, head=head)
-    enforce_scope(data, changed_paths(data["TECHNICAL_BASE_SHA"], head))
-    # PR-time check validates current assignment/scope. Fresh-source drift is
-    # additionally enforced by local verify against the start capsule.
-    print(f"PAUL_PR_SCOPE_PASS:{data['ASSIGNMENT_ID']}:{hobbyroom}:{campus_head}")
+    try:
+        hobbyroom, data = active_assignment(campus_head)
+    except Blocked as exc:
+        if str(exc) == "PAUL_NOT_ASSIGNED" and not branch.startswith("paul/"):
+            print("PAUL_SCOPE_NOT_APPLICABLE")
+            return
+        raise
+
+    if branch == data["PAUL_BRANCH"]:
+        ensure_branch_and_base(data, branch=branch, head=head)
+        enforce_scope(data, changed_paths(data["TECHNICAL_BASE_SHA"], head))
+        print(f"PAUL_PR_SCOPE_PASS:{data['ASSIGNMENT_ID']}:{hobbyroom}:{campus_head}")
+        return
+
+    if branch.startswith("paul/"):
+        raise Blocked(
+            f"PAUL_BRANCH_MISMATCH_BLOCKED:EXPECTED={data['PAUL_BRANCH']}:GOT={branch}"
+        )
+
+    # Single Writer: while Paul owns a technical write scope, every other PR
+    # is barred from touching that same scope.
+    locked = [
+        p for p in changed_paths(pr_base, head)
+        if path_allowed(p, data["WRITE_SCOPE"])
+    ]
+    if locked:
+        raise Blocked(
+            "PAUL_EXCLUSIVE_SCOPE_LOCKED:" + ",".join(locked)
+        )
+    print(f"PAUL_EXCLUSIVE_SCOPE_PASS:{data['ASSIGNMENT_ID']}")
 
 
 def selftest() -> None:
@@ -428,9 +452,9 @@ def main() -> int:
         elif cmd == "verify":
             verify()
         elif cmd == "verify-pr":
-            if len(sys.argv) != 4:
-                raise Blocked("USAGE:paul_scope_gate.py verify-pr <branch> <head_sha>")
-            verify_pr(sys.argv[2], sys.argv[3])
+            if len(sys.argv) != 5:
+                raise Blocked("USAGE:paul_scope_gate.py verify-pr <branch> <head_sha> <pr_base_sha>")
+            verify_pr(sys.argv[2], sys.argv[3], sys.argv[4])
         elif cmd == "selftest":
             selftest()
         else:
