@@ -85,9 +85,9 @@ def _m15_validate_instruction(text):
 def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
-    bad=text+"\\nsubmit-request ausführen"
+    bad=text+"\nsubmit-request ausführen"
     expect_exc(lambda:_m15_validate_instruction(bad),"M15_SUBMIT_REQUEST_NOT_FORBIDDEN")
-    bad=text+"\\nseparater Fachworkflow-Executor erforderlich"
+    bad=text+"\nseparater Fachworkflow-Executor erforderlich"
     expect_exc(lambda:_m15_validate_instruction(bad),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
 def m16():
     s=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
