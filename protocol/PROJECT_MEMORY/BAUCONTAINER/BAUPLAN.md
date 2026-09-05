@@ -2,6 +2,7 @@
 
 STAND: 2026-09-05
 STATUS: V1
+TECHNISCHER ORT: `protocol/PROJECT_MEMORY/`
 
 ## Grundmodell
 
@@ -48,6 +49,14 @@ Ein neues Projekt darf deshalb nicht dazu zwingen, bestehende Projektgebäude um
 - eigenständiges Vorhaben → neues Projektgebäude.
 
 Keine Räume „auf Vorrat“ bauen.
+
+## Technischer Ablagegrundsatz
+
+Der Campus liegt aktuell unter `protocol/PROJECT_MEMORY/`.
+
+Grund:
+Der bestehende `hardlock`-Workflow überwacht Pull Requests mit Änderungen unter `protocol/**` bereits automatisch.
+Damit nutzt die Gebäudeordnung vorhandene CI statt neue Workflow-/Gate-Architektur zu bauen.
 
 ## Autoritätsgrundsatz
 
