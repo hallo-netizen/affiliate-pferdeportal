@@ -22,12 +22,12 @@ das zuständige Büro auswählen und dessen `START_HERE.md` öffnen.
 
 ## Büroplan
 
-- TEXT → Textmaschine / Artikelproduktion
-- DESIGN → Portaldesign
-- BILD → projektspezifische Nutzung der allgemeinen Bildzentrale
-- AFFILIATE → Affiliate-Zentrale / Release
-- HIVEPRESS → Anzeigenmarkt / HivePress
-- GEMEINSAM → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
+- `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
+- `DESIGN/START_HERE.md` → Portaldesign
+- `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
+- `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
+- `HIVEPRESS/START_HERE.md` → Anzeigenmarkt / HivePress
+- `GEMEINSAM/START_HERE.md` → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
 
 ## Gemeinsame Regeln
 

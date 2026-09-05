@@ -3,6 +3,23 @@
 STAND: 2026-09-05
 STATUS: AKTIV / PAUL-TEXT/SEO-ARBEITSWEG GEBUNDEN
 
+## 1-KLICK-ÜBERSICHT
+
+**WAS IST DAS?**  
+Der einzige aktuelle Arbeitsraum des Büros TEXT.
+
+**HIER BIST DU RICHTIG, WENN …**  
+du den aktuell gebundenen TEXT/SEO-Arbeitsweg oder dessen Rückgabeweg brauchst.
+
+**DU DARFST …**  
+den gebundenen Auftrag und seine Quellen lesen; Änderungen nur bei STATUS AKTIV und nur im ausdrücklich gebundenen Arbeitsweg.
+
+**DU DARFST NICHT …**  
+aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelweg eröffnen oder Fachregeln aus der Raumbelegung erfinden.
+
+**ALS NÄCHSTES …**  
+`../../../PAUL/TEXT_SEO/START_HERE.md` vollständig lesen.
+
 ## Aktueller Arbeitsweg
 
 Pauls direkter Einstieg:
@@ -13,26 +30,15 @@ Gebundener Arbeitsbranch:
 
 ## Raumregel
 
-Dieser Hobbyraum bindet nur den aktuellen Arbeitsweg und die Zuständigkeit.
+Dieser Hobbyraum bindet nur Arbeitsweg und Zuständigkeit.
 
 Er ersetzt NICHT:
-- den aktiven Zielvertrag;
-- die aktuelle Fehlerliste;
+- aktiven Zielvertrag;
+- aktuelle Fehlerliste;
 - technische Originalquellen;
-- die Hard Rules.
-
-## Erlaubt
-
-Facharbeit nur im ausdrücklich gebundenen Arbeitsweg/Branch und nach vollständiger Pflichtlektüre.
-
-## Nicht erlaubt
-
-- aus diesem Raum neue Regeln ableiten;
-- main direkt verändern;
-- parallele Ersatzwege eröffnen;
-- veraltete Chat-Aufträge als aktuelle Raumbelegung behandeln.
+- Hard Rules.
 
 ## Bei Abschluss
 
 Ergebnis zurück an das TEXT-Fachbüro.
-Danach Hobbyraum auf FREI oder nächsten ausdrücklich gebundenen Auftrag setzen.
+Danach STATUS auf FREI oder nächsten ausdrücklich gebundenen Auftrag setzen.
