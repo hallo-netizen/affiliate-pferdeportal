@@ -19,6 +19,38 @@ Wenn PASS gemeldet wird:
 - keine State- oder Workflowänderung eigenständig vornehmen;
 - bereits bestandene unveränderte PASS-Stufen nicht erneut prüfen.
 
+## Zusätzliche Pflicht auf `paul/*`-Branches
+
+Die bestehende Cloud-Eingangstür bleibt immer Schritt 1.
+
+Unmittelbar NACH einem erfolgreichen
+`python3 control/cloud-entry-gate/cloud_entry.py start`
+und VOR jeder Paul-Analyse oder Änderung muss der aktuelle Git-Branch geprüft werden.
+
+Wenn er mit `paul/` beginnt, MUSS exakt ausgeführt werden:
+
+`python3 control/paul-scope-gate/paul_scope_gate.py start`
+
+Nur bei `PAUL_BOOTSTRAP_PASS` darf Paul weiterarbeiten.
+
+Der Paul-Scope-Gate:
+- liest die aktuelle Arbeitszuweisung frisch vom offiziellen Campus;
+- blockiert ohne aktive Paul-Zuweisung mit `PAUL_NOT_ASSIGNED`;
+- blockiert falschen Branch/technische Basis;
+- bindet den ausdrücklich erlaubten Schreibbereich;
+- materialisiert `.paul-capsule/` nur als temporären, hashgebundenen READ-ONLY-Snapshot.
+
+WICHTIG:
+`.pferde-capsule/INSTRUCTION.txt` bleibt die einzige Workflow-Instruktion.
+`.paul-capsule/` ersetzt sie NICHT und wählt keinen Workflow-Schritt; sie begrenzt nur Pauls aktuelle Campus-Berechtigung und liefert den frisch gelesenen Kontext.
+
+Vor jedem Paul-Abschluss und BEVOR `cloud_entry.py complete` ausgeführt wird, MUSS zusätzlich exakt ausgeführt werden:
+
+`python3 control/paul-scope-gate/paul_scope_gate.py verify`
+
+Bei `STALE_ASSIGNMENT_BLOCKED`, `PAUL_WRITE_SCOPE_BLOCKED` oder jedem anderen Nicht-PASS:
+sofort stoppen; kein Receipt-/Workflow-Abschluss auf veraltetem oder unzulässigem Stand.
+
 ## Verbindlicher Step-Abschluss
 Nach Ausführung des aktuellen Steps MUSS `.pferde-capsule/RECEIPT.json` exakt gemäß `.pferde-capsule/RECEIPT_SCHEMA.json` geschrieben werden.
 
