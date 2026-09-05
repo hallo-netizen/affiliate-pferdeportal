@@ -147,7 +147,14 @@ def main() -> None:
             cap_current = (
                 paul / ".paul-capsule/sources" / office / "CURRENT_STATE.md"
             ).read_text(encoding="utf-8")
-            assert cap_current == "CURRENT CAMPUS V1\n"
+            direct_current = run(
+                "git", "show", f"{campus_v1}:{office}/CURRENT_STATE.md", cwd=paul
+            )
+            print("DEBUG_LOCAL_CURRENT=" + repr(local_current))
+            print("DEBUG_DIRECT_CAMPUS_CURRENT=" + repr(direct_current))
+            print("DEBUG_CAPSULE_CURRENT=" + repr(cap_current))
+            assert direct_current == "CURRENT CAMPUS V1"
+            assert cap_current.rstrip("\n") == direct_current
             assert cap_current != local_current
 
             # POSITIVE 2: allowed technical work with unchanged relevant Campus verifies.
