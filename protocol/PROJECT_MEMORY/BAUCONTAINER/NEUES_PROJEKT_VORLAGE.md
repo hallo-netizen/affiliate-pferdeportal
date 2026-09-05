@@ -14,7 +14,7 @@ Sonst vorhandenes Projekt erweitern.
 ## Minimaler Aufbau
 
 ```
-PROJECT_MEMORY/PROJEKTE/<PROJEKT>/
+protocol/PROJECT_MEMORY/PROJEKTE/<PROJEKT>/
 ├── START_HERE.md
 └── <ERSTES_BÜRO>/
     ├── START_HERE.md
