@@ -49,3 +49,10 @@ Vor jeder Änderung:
 
 Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
 
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

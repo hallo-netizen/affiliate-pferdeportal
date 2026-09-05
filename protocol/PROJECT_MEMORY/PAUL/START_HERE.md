@@ -135,3 +135,11 @@ Dafür gilt fail-closed:
 
 Damit wird keine Scheinautomatik behauptet:
 **automatischer Worker-Start + serverseitige Integrationssperre**, nicht magisches Starten eines beliebigen Chats.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

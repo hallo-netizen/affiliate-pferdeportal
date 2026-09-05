@@ -64,3 +64,11 @@ Für jedes Büro gilt:
 `START_HERE.md` → `CURRENT_STATE.md` → `HOBBYRAUM.md` → gebundener Arbeitsweg.
 
 Parallel arbeitende Chats/Worker werden ausschließlich im zuständigen Büro/Hobbyraum oder Paul-Eingang gebunden.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+
