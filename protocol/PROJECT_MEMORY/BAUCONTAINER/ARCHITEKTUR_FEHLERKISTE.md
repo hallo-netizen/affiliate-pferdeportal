@@ -296,3 +296,30 @@ Vorlage auf ARCH-032 bis ARCH-040 nachgezogen.
 
 REGRESSIONSSCHUTZ:
 ARCH-041.
+
+
+## BAU-021 – Ausschilderung des aktuellen Arbeitspunkts
+
+STATUS: CLOSED
+
+KURZ:
+Die vorhandenen Quellen waren korrekt, aber der Weg zu Stand, aktueller Arbeit, Fehler und Ziel war noch zu verteilt.
+
+KISS-FIX:
+Einheitlicher Quellenwegweiser in Gebäude, Büros, Hobbyräumen, Archiv, Fehlerregister und Paul.
+
+REGRESSIONSSCHUTZ:
+ARCH-042.
+
+## BAU-022 – Dynamische Angaben in Wegweisern
+
+STATUS: CLOSED
+
+KURZ:
+Einzelne Wegweiser enthielten Angaben, die bereits im CURRENT_STATE oder einer Originalquelle geführt wurden.
+
+KISS-FIX:
+Wegweiser auf reine Navigation reduziert.
+
+REGRESSIONSSCHUTZ:
+ARCH-043.
