@@ -34,3 +34,11 @@ aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelwe
 ## Historie
 
 Nicht hier dupliziert. Siehe `CURRENT_STATE.md`, `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` und `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

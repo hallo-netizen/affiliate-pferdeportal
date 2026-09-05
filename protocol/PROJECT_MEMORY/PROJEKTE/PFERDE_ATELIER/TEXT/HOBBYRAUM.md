@@ -67,3 +67,11 @@ main bleibt unverändert:
 - main wird nicht verändert.
 - Andere Büros/Arbeitsbereiche bleiben unangetastet.
 - Erst nach belastbarer Prüfung werden offizieller Stand und nächste Aktion weitergeschrieben.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+
