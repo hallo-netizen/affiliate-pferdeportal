@@ -20,6 +20,18 @@ den allgemeinen Plugin-Kern als zweite Wahrheit kopieren, Secrets veröffentlich
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md` → `HOBBYRAUM.md`.
 
+
+## SCHNELLWEGWEISER – EINE WAHRHEIT
+
+- **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
+- **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
+- **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
+- **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+
+**Regel:** Diese Bürotür wiederholt keinen aktuellen Blocker, keine aktuelle Version und keinen Zielinhalt als zweite Wahrheit.
+
 ## Allgemeiner Modul-Kern
 
 MOD-ID: MOD-002  
@@ -29,13 +41,6 @@ Hauptort:
 Modulklasse:
 ALLGEMEINGÜLTIG.
 
-## Aktuelle Beleglage
-
-- allgemeiner aktueller Plugin-Dateibeleg: 2.6.9
-- allgemeiner Nullpunkt-/Masterbeleg: 069
-- LIVE in WordPress: 2.6.9 – bestehende Nutzerbestätigung
-- Pferde-Konfigurationsbeleg: 2.6.6
-- historischer Pferde-Codebeleg: 2.4.9 / Master 049
 
 ## Sicherheit
 

@@ -1,7 +1,7 @@
 # BÜRO DESIGN – PFERDE-ATELIER
 
 STAND: 2026-09-05
-STATUS: AKTIV / LIVE-STAND AUS GITHUB ABGEGLICHEN
+STATUS: EINGANG AKTIV
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -19,6 +19,18 @@ den allgemeinen Designkern doppeln, `main` automatisch als Live-Wahrheit behande
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md` → `HOBBYRAUM.md`.
+
+
+## SCHNELLWEGWEISER – EINE WAHRHEIT
+
+- **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
+- **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
+- **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
+- **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+
+**Regel:** Diese Bürotür wiederholt keinen aktuellen Blocker, keine aktuelle Version und keinen Zielinhalt als zweite Wahrheit.
 
 ## Allgemeiner Kern
 

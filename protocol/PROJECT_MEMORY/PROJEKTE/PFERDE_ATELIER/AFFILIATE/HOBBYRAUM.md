@@ -20,6 +20,17 @@ aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelwe
 **ALS NÄCHSTES …**  
 `START_HERE.md` → `CURRENT_STATE.md`; bei neuem Auftrag zuerst aktuelle Release-Governance lesen.
 
+
+## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
+
+- **BÜROSTAND:** `CURRENT_STATE.md`
+- **AKTUELLER AUFTRAG / NEXT ACTION:** ausschließlich diese `HOBBYRAUM.md`
+- **CURRENT_BLOCKER:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Quelle
+- **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+- **NICHT ANFASSEN / WARUM:** nicht hier duplizieren → Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+
+**Wenn zwei Angaben widersprechen:** nicht raten. Die oben benannte autoritative Quelle gewinnt.
+
 ## Fachweg bei neuer Bindung
 
 `control/release-governance/CURRENT_RELEASE.json`

@@ -20,6 +20,21 @@ am Gebäudeeingang quer durch mehrere Büros ändern, Fachgrenzen ignorieren ode
 **ALS NÄCHSTES …**  
 das zuständige Büro auswählen und dessen `START_HERE.md` öffnen.
 
+
+## AUTORITÄTSPLAN – NICHT DOPPELN
+
+Für jedes Büro gilt genau eine Quelle pro Frage:
+
+- **Was ist der aktuelle Fach-/Bestandsstand?** → Büro-`CURRENT_STATE.md`
+- **Was wird JETZT bearbeitet / was ist NEXT ACTION?** → Büro-`HOBBYRAUM.md`
+- **Welche Fehler sind bekannt?** → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → jeweilige Originalquelle
+- **Welches Ziel gilt?** → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
+- **Warum wurde etwas geändert?** → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **Was ist historisch?** → `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+- **Welche allgemeinen Module gibt es?** → `protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md`
+
+Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
+
 ## Büroplan
 
 - `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
