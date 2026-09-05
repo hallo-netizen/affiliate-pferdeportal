@@ -6,7 +6,7 @@
   "authorized_inputs": [
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
+      "sha256": "ed9af8df3e6666c2bf17abc817f77fb93058eea854c9e5d9e8da11a80b6459e6"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -14,11 +14,11 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "60ad828e153f3fc33b912b21aafd0f2db7669e9df1001a87018041cc95f008eb"
+      "sha256": "280ab2a470718ff55f9254a19f4a703fc07881157645336bb33338e07bbdd711"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"
+      "sha256": "4c2eccd3163b57861f26dab090118c526b0eb4b3ae4edabb59f7c81615b5107b"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
@@ -35,9 +35,17 @@
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
       "sha256": "020e4f71c244110f637d72fbe722b4ce5cc0d8341f53c31e54b4377e89900e38"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",
+      "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_packages/PSERC-FIX.zip",
+      "sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
     }
   ],
-  "instruction": "107008 ist ausschließlich der gebundene finale Review-Schritt des gerade vollständig durch 107007 gelaufenen Batches. Keine Workflow-Navigation, keine Regeländerung, kein Auto-Publish und keinerlei freie Chat-Ausgabeautorität.\n\nSICHTBARKEITS-ZWANG: Noch ist kein Projektergebnis sichtbar freigegeben. Der 107007-Output liegt ausschließlich technisch vorbereitet unter .pferde-release-staging/ und ist durch .pferde-capsule/BOUND_PREPARED_RELEASE_REF.json gebunden. Review darf ausschließlich auf diesen exakt gebundenen staged Dateien erfolgen. Quarantäne-Dateien, Chat-Dateien, Ersatz-ZIPs, neu verpackte Dateien oder andere Outputs sind keine Projektresultate und dürfen nicht geprüft, übernommen oder ausgegeben werden.\n\nCAPSULE-AUSFÜHRUNGSGRENZE: Die unter authorized_inputs gebundenen Dateien werden vor der Agent-Arbeit durch den offiziellen Runtime-Entry hashgeprüft. Danach werden die duplizierten Dateien unter .pferde-capsule/inputs/ absichtlich entfernt. Im CAPSULE_MANIFEST.json bleiben ausschließlich source_ref und sha256 als gebundener Nachweis; capsule_path ist null und input_materialization_mode=HASH_VERIFIED_CANONICAL_REPO_ONLY. Niemals eine Datei unter .pferde-capsule/inputs/ ausführen, importieren, mit --help testen, rekonstruieren oder erneut anlegen. Für technische Ausführung ausschließlich den kanonischen source_ref im Repository verwenden. Der offizielle Runtime-Entry prüft beim complete erneut, dass keine Capsule-Input-Kopien existieren und dass jeder kanonische source_ref noch exakt den gebundenen SHA-256 besitzt. Jede Abweichung ist fail-closed.\n\nZuerst zwingend ausführen:\npython3 control/output-quarantine/final_review_visibility_guard.py verify .pferde-capsule/BOUND_PREPARED_RELEASE_REF.json\n\nNur FINAL_REVIEW_PREPARED_VISIBILITY_PASS erlaubt den bestehenden unveränderten finalen Fachreview. Der Guard ist rein technisch/fachblind und bewertet oder verändert niemals Inhalt, Qualität, Recherche, LanguageTool, PPM, PSERC, PSTE, SEO, Design oder Publish-Regeln.\n\nFühre danach ausschließlich den bereits bestehenden unveränderten finalen Review der exakt gebundenen staged Dateien aus. Keine Korrektur, Ergänzung, Kürzung, Neuformulierung oder Neuverpackung außerhalb der bestehenden gebundenen Fachstraße.\n\nNur wenn der bestehende Review vollständig PASS ist, ausschließlich die im CAPSULE_MANIFEST.json durch source_ref und sha256 gebundene kanonische Datei control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py im Repository verwenden. Keine Capsule-Kopie dieser Datei suchen, prüfen oder ausführen. Dann exakt ausführen:\npython3 control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py clear-after-review --repo . --contract control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json\n\nNur bei RUNTIME_SLOT_CLEARED_AND_IDLE oder RUNTIME_SLOT_ALREADY_IDLE einen PASS-Receipt schreiben. Sein payload muss zusätzlich exakt enthalten: reviewed_prepared_release_only=true, prepared_release_ref, prepared_release_sha256 und prepared_batch_sha256 aus .pferde-capsule/BOUND_PREPARED_RELEASE_REF.json.\n\nDanach ausschließlich ausführen:\npython3 control/output-quarantine/runtime_entry_gate.py complete .pferde-capsule/RECEIPT.json\n\nDer offizielle Runtime-Entry autorisiert die sichtbare Freigabe erst nach gültigem 107008-PASS und erfolgreichem Re-Arm auf 107007. Nur der danach erzeugte PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V2 und exakt dessen gelistete Dateien besitzen Projektresultat-/Sichtbarkeitsautorität. Fehlt dieser Receipt, existiert kein sichtbares Projektergebnis. Kein Chat-Ersatzweg.",
+  "instruction": "107008 ist ausschließlich der gebundene finale Review-Schritt des vollständig durch 107007 gelaufenen Batches. Keine Workflow-Navigation, keine Regeländerung, kein Auto-Publish und keine freie Chat-Fachautorität.\n\nZuerst unverändert:\npython3 control/output-quarantine/runtime_entry_gate.py start\n\nDanach ausschließlich den bestehenden finalen Review auf der gebundenen PREPARED-Datei ausführen. Nur bei vollständigem PASS:\npython3 control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py clear-after-review --repo . --contract control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json\n\nPASS-Receipt wie bisher schreiben und anschließend:\npython3 control/output-quarantine/runtime_entry_gate.py complete .pferde-capsule/RECEIPT.json\n\nNur status=107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED ist zulässig.\nZusätzlich zwingend:\n- host_pserc_finalization_required=true\n- host_pserc_signer_required=true\n- codex_worker_signer_access_allowed=false\n- publish_allowed=false\n\nDamit ist die credential-isolierte Codex-Capsule beendet. Der Codex-Worker darf den Produktionssignierer NICHT aufrufen und darf keine Signer-Credentials erhalten.\n\nErst AUSSERHALB des Codex-Workers führt der vorhandene autorisierte Host exakt host_pserc_finalization_command mit dem bereits vorhandenen Workflow-Supervisor-Production-Signer aus. Nur PSERC_FINAL_PACKAGE_PASS liefert den erlaubten package_ref.\n\nDanach dient ausschließlich als technischer Transporthelfer:\npython3 control/startmaster0107/chat_delivery_payload.py build <release_receipt_ref> <hostseitigem package_ref>\n\nNur DELIVERY_HANDOFF_READY, article_count=7, encoding=gzip+base64 und publish_allowed=false ist zulässig. Das Delivery-Envelope transportiert byte-identisch:\n- die sieben bereits freigegebenen Artikel,\n- das hostseitig mit dem bestehenden Workflow-Supervisor-Production-Signer erzeugte PSERC_APPROVED_PRODUCTION_PACKAGE_V1 als import_envelope_json,\n- das dazu hashgebundene source_manifest.\n\nDer aufrufende Host darf ausschließlich dieses Envelope dekodieren und exakt unter control/startmaster0107/recovery_sources/<batch>/ persistieren:\n- sieben ARTICLE_<plan_slot>.md,\n- PSERC_IMPORT_ENVELOPE.json exakt aus import_envelope_json,\n- MANIFEST.json exakt aus source_manifest.\nAlle Hashes müssen vor GitHub-Schreibzugriff geprüft werden.\n\nDanach ausschließlich den bestehenden GitHub-ENDSTEMPEL aus .github/workflows/pferde-atelier-endstempel.yml / control/startmaster0107/GITHUB_FINAL_RELEASE.py auslösen.\n\nKeine Textänderung. Kein neuer Signierer. Keine Signer-Credentials im Codex-Worker. Kein Auto-Publish.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": 1

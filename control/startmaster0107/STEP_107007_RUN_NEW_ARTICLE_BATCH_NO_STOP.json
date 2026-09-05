@@ -10,7 +10,7 @@
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
+      "sha256": "ed9af8df3e6666c2bf17abc817f77fb93058eea854c9e5d9e8da11a80b6459e6"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -18,11 +18,11 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "60ad828e153f3fc33b912b21aafd0f2db7669e9df1001a87018041cc95f008eb"
+      "sha256": "280ab2a470718ff55f9254a19f4a703fc07881157645336bb33338e07bbdd711"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"
+      "sha256": "4c2eccd3163b57861f26dab090118c526b0eb4b3ae4edabb59f7c81615b5107b"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
@@ -46,7 +46,7 @@
     },
     {
       "ref": "control/single-door-boundary/codex_current_action.py",
-      "sha256": "6f4e949cc72b6b2eb2771b7baed65dd61b6e0240c197a8471c7aad5bebb53cd1"
+      "sha256": "eec4a948c448e65199aa4bc80d23d80bc5cd17e9c45994a00b867b191e5b143c"
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
@@ -54,10 +54,18 @@
     },
     {
       "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
-      "sha256": "6a3d0f3da534ab73aa900ccf91783f084c85acbd3bf38c8895ae439d6aaae909"
+      "sha256": "e35cb7eb7ff9b2526b0b54f3ab402a8c5cb0a5dc9329206c5551e92a8889ec82"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",
+      "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+    },
+    {
+      "ref": "control/startmaster0107/runtime_packages/PSERC-FIX.zip",
+      "sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
     }
   ],
-  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt schon vor Tür 1 keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung, keine Rekonstruktion eines fehlenden Schritts.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ist vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf direkt oder indirekt verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ist ausschließlich der gebundene produktive Eingang zulässig. Danach ausschließlich:\n\npython3 control/single-door-boundary/codex_current_action.py current\n\nDiese Ausgabe ist der einzige Worker-Etagenanzeiger.\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- Das ist ein POSITIVER freigegebener Zustand, kein Fehler.\n- instruction=EXECUTE_CURRENT_BOUND_ITEM_NOW bedeutet: ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten. Der gebundene Worker führt diesen Fachworkflow aus; es darf kein neuer Ersatz-Executor gesucht oder gebaut werden.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- Den bestehenden unveränderten Fachworkflow vollständig real ausführen und dabei die geforderten echten Stage-Proofs und Fachworkflow-Kontextdaten unter allowed_output_root erzeugen.\n- Danach zwingend FACHWORKFLOW_HANDOFF_REQUEST.json unter exakt fachworkflow_handoff.request_ref erzeugen. Die Request-Datei darf ausschließlich aus den gerade real erzeugten Fachworkflow-Ergebnissen und den bereits gebundenen Current-Action-Werten aufgebaut werden; keine Proofs erfinden, rekonstruieren oder aus alten Artikel-/Produktionsläufen wiederverwenden.\n- Request-Mapping exakt: contract=fachworkflow_handoff.request_contract; room_token=room_token; batch_sha256=fachworkflow_handoff.batch_sha256; canonical_article_id=current_item.canonical_article_id; plan_slot=current_item.plan_slot; allowed_output_root=allowed_output_root; item_receipt_ref=item_receipt_ref; fachworkflow_pass_ref=item_receipt_schema.fachworkflow_pass_ref; contract_binding_ref=item_receipt_schema.fachworkflow_contract_binding.binding_ref; contract_binding_sha256=item_receipt_schema.fachworkflow_contract_binding.binding_sha256; stage_proofs=exakt die real erzeugten {stage,ref,sha256}-Nachweise aller geforderten Stufen; fact_pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata=exakt der reale Kontext des gerade durchlaufenen unveränderten Fachworkflows.\n- Erst wenn diese Request-Datei vollständig existiert: ausschließlich submission_command ausführen.\n- submission_command ist jetzt die einzige gebundene Abschlussaktion des Items: sie prüft, dass exakt die aktuelle FACHWORKFLOW_HANDOFF_REQUEST.json existiert, ruft danach ausschließlich den bereits gebundenen neuen Fachworkflow-Handoff auf, verlangt dessen PASS/Receipt-Hash und reicht erst dann dieses Receipt an den bestehenden Room-Bridge-Submit weiter.\n- Der technische Handoff führt selbst keine Fachlogik aus. Fehlt die Request-Datei, ist der Adapter verändert, liefert der Handoff keinen PASS oder stimmt Receipt/Hash nicht exakt, bleibt der Lauf fail-closed und der Room-Bridge-Submit wird nicht ausgeführt.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam. Jede neue Ausgabe des submission_command ersetzt die vorherige vollständig. Niemals den nächsten Raum, das nächste Item oder eine Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED: stehenbleiben, keine eigene Lösung oder Alternativroute. Beim finalen 107008-Zustand: stehenbleiben und Nutzerreview abwarten.\n\nAlle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish. Alles außerhalb der aktuell ausgegebenen Einzelaktion ist DENY.",
+  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht bleibt vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ausschließlich:\npython3 control/single-door-boundary/codex_current_action.py current\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- DIESER STATUS IST DIE AUSFÜHRBARE FACHWORKFLOW-AKTION: der aktuelle Codex-Prozess IST der gebundene Fachworkflow-Worker.\n- fachworkflow_prompt_ref ist die gebundene Arbeitsanweisung dieses Workers für exakt current_item; kein separater Fachworkflow-Executor und keine separate Capability existiert oder wird benötigt.\n- ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten.\n- Beitragsart und zugehörige unveränderte Textmaschinen-Regelautorität sind technisch gebunden; keine freie Auswahl, keine Ersatzregeln.\n- alle für diese Beitragsart geltenden bestehenden Textmaschinen-/Fachworkflow-Regeln vollständig ausführen.\n- NEW bedeutet NEW: alte Artikel-/Recovery-Dateien sind keine Produktionsquelle, werden nicht gebunden und dürfen den Lauf nicht beeinflussen oder blockieren.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- H8-Bootstrap-/Produktionspaket bleibt ausschließlich technische Herkunfts-/Türbindung und darf fachlich leer sein. Es ist niemals Ersatz für aktuellen Fachworkflow-Kontext.\n- fact_pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata ausschließlich aus den realen aktuellen Fachworkflow-Ausgaben ab R_001 verwenden; fact_pack aus der aktuellen research_fact_pack-Stufe.\n- als gebundener Worker die realen aktuellen Fachworkflow-Ausgaben selbst erzeugen: Recherche/fact_pack, finaler Artikel, production_plan-Kontext, workflow_release-Kontext sowie die realen Nicht-PPM-Stage-Artefakte und Proofs.\n- Das Erzeugen dieser realen Arbeitsprodukte durch den gebundenen Worker ist KEINE Selbstbeglaubigung. Verboten bleibt ausschließlich, PASS/PPM/Proofs ohne die real ausgeführten Artefakte und Prüfungen zu behaupten.\n- Kein selbstbehauptetes PASS ohne reale Artefakte/Hashes.\n- für die ppm-Stage vor der echten PPM-Ausführung nur einen noch NICHT als PASS markierten Stage-Proof mit gebundener Identität und ppm679_binding.final_article_ref + ppm679_binding.final_article_sha256 erzeugen. Kein vorgefertigter PPM-Report, kein ppm-PASS, kein execution_performed=true vor dem echten PPM.\n- FACHWORKFLOW_HANDOFF_REQUEST.json exakt unter fachworkflow_handoff.request_ref und exakt nach fachworkflow_handoff.request_required_fields schreiben. Der Request enthält ausschließlich die gerade real erzeugten Fachworkflow-Ergebnisse, alle Stage-Proof-Refs einschließlich des noch nicht bestandenen PPM-Eingangs sowie die gebundenen Current-Action-Werte.\n- FACHWORKFLOW_PASS und ITEM_RECEIPT vor submission_command NICHT erzeugen.\n- danach ausschließlich submission_command ausführen. Diese eine Submission-Aktion ruft intern den bereits vorhandenen fachworkflow_proof_handoff auf, führt dort den echten PPM 6.7.9 aus, bindet PPM content_hash exakt an den finalen Artikel-SHA, vervollständigt erst danach den ppm-Stage-Proof, erzeugt erst danach FACHWORKFLOW_PASS und ITEM_RECEIPT und reicht ausschließlich dieses finale Receipt an die bestehende Room-Bridge weiter.\n- fehlende separate Fachworkflow-Capability oder fehlender separater Fachworkflow-Executor ist KEIN zulässiger Blocker bei CURRENT_BOUND_ACTION_READY; Current Codex ist bereits der gebundene Worker.\n- kein separater Handoff-Befehl durch den Worker, kein submit-request, kein eigener zweiter Executor, keine Capability-Suche, keine Alternativroute.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam. Niemals nächsten Raum, nächstes Item oder Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED stehenbleiben. Beim finalen 107008-Zustand ausschließlich den gebundenen 107008-Schritt ausführen. Alle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
@@ -67,6 +75,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "dac91421b887060d68af3f4a6e80bb4ca5fa72527c57dcea1220af4f3abcd0f5"
+    "bundle_sha256": "ac33dd455261d0e749fce97dd2b436e87d3e01023dcb481dc45e0535832b8300"
   }
 }

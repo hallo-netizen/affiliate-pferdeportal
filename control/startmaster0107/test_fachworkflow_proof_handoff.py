@@ -89,6 +89,22 @@ class FachworkflowProofHandoffTest(unittest.TestCase):
             receipt = handoff._load(self.repo / result["item_receipt_ref"])
             dual.validate_fachworkflow_pass(self.repo, action, item, receipt)
 
+    def test_missing_current_fachworkflow_context_fails_closed(self):
+        _, _, request_ref, _ = self.prepare("g", "h", "article:context-missing")
+        request = handoff._load(self.repo / request_ref)
+        request["fact_pack"] = {}
+        self.write_json(self.repo / request_ref, request)
+        with self.assertRaisesRegex(handoff.Blocked, "BOUND_FACHWORKFLOW_PRODUCTION_CONTEXT_MISSING"):
+            handoff.materialize(self.repo, request_ref)
+
+    def test_wrong_production_plan_item_identity_fails_closed(self):
+        _, _, request_ref, _ = self.prepare("i", "j", "article:context-wrong")
+        request = handoff._load(self.repo / request_ref)
+        request["production_plan_item"]["canonical_article_id"] = "article:other"
+        self.write_json(self.repo / request_ref, request)
+        with self.assertRaisesRegex(handoff.Blocked, "BOUND_PRODUCTION_PLAN_ITEM_IDENTITY_MISMATCH"):
+            handoff.materialize(self.repo, request_ref)
+
     def test_missing_wrong_and_tampered_stage_proofs_fail_closed(self):
         _, _, request_ref, rows = self.prepare("e", "f", "article:negative")
         request = handoff._load(self.repo / request_ref)

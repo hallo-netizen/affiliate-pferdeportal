@@ -21,6 +21,13 @@ SIGN_REQUEST_CONTRACT = "PFERDE_ATELIER_GITHUB_FINAL_SIGN_REQUEST_V1"
 FINAL_FILENAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
 ARTICLE_RE = re.compile(r"^ARTICLE_[0-9a-f]{64}\.md$")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
+IMPORT_ENVELOPE_NAME = "PSERC_IMPORT_ENVELOPE.json"
+IMPORT_ENVELOPE_KEYS = {
+    "contract", "package_id", "package_payload_sha256", "source",
+    "fact_pack_bundle", "fact_pack_bundle_sha256",
+    "production_plan", "production_plan_sha256",
+    "workflow_release", "workflow_release_sha256",
+}
 
 class Blocked(RuntimeError):
     pass
@@ -72,6 +79,69 @@ def load_source(ref: str) -> tuple[dict[str, Any], Path, str]:
     if src.get("item_count") != 7 or src.get("publish_allowed") is not False or src.get("content_mutation_performed") is not False:
         raise Blocked("SOURCE_BINDING_INVALID")
     return src, path, batch
+
+def load_import_envelope(src: dict[str, Any], source_path: Path, batch: str) -> tuple[dict[str, Any], str]:
+    ref = str(src.get("import_envelope_ref") or "")
+    declared = str(src.get("import_envelope_sha256") or "")
+    path = safe(ref)
+    if path.name != IMPORT_ENVELOPE_NAME or path.parent.resolve() != source_path.parent.resolve():
+        raise Blocked("IMPORT_ENVELOPE_LOCATION_INVALID")
+    if not path.is_file() or not SHA_RE.fullmatch(declared) or file_sha256(path) != declared:
+        raise Blocked("IMPORT_ENVELOPE_FILE_HASH_INVALID")
+    envelope = load_json(path)
+    if stable_hash(envelope) != declared:
+        raise Blocked("IMPORT_ENVELOPE_CANONICAL_HASH_INVALID")
+    if set(envelope) != IMPORT_ENVELOPE_KEYS or envelope.get("contract") != PACKAGE_CONTRACT:
+        raise Blocked("IMPORT_ENVELOPE_SCHEMA_INVALID")
+    for field, obj in (
+        ("fact_pack_bundle_sha256", envelope.get("fact_pack_bundle")),
+        ("production_plan_sha256", envelope.get("production_plan")),
+        ("workflow_release_sha256", envelope.get("workflow_release")),
+    ):
+        if not isinstance(obj, dict) or envelope.get(field) != stable_hash(obj):
+            raise Blocked("IMPORT_ENVELOPE_COMPONENT_HASH_INVALID:" + field)
+    expected_id = stable_hash({
+        "contract": PACKAGE_CONTRACT,
+        "fact_pack_bundle_sha256": envelope["fact_pack_bundle_sha256"],
+        "production_plan_sha256": envelope["production_plan_sha256"],
+        "workflow_release_sha256": envelope["workflow_release_sha256"],
+    })
+    if envelope.get("package_id") != expected_id:
+        raise Blocked("IMPORT_ENVELOPE_PACKAGE_ID_INVALID")
+    copy = dict(envelope)
+    payload_hash = copy.pop("package_payload_sha256", None)
+    if payload_hash != stable_hash(copy):
+        raise Blocked("IMPORT_ENVELOPE_PACKAGE_PAYLOAD_HASH_INVALID")
+    release = envelope["workflow_release"]
+    if release.get("contract") != "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED" or release.get("status") != "PASS":
+        raise Blocked("IMPORT_ENVELOPE_RELEASE_INVALID")
+    if release.get("wordpress_write_performed") is not False:
+        raise Blocked("IMPORT_ENVELOPE_PREMATURE_WORDPRESS_WRITE")
+    if release.get("exact_five_batch_sha256") != batch:
+        raise Blocked("IMPORT_ENVELOPE_BATCH_INVALID")
+    return envelope, declared
+
+def validate_import_envelope_articles(envelope: dict[str, Any], articles: list[dict[str, Any]]) -> None:
+    release = envelope["workflow_release"]
+    release_by_slot = {
+        str(row.get("plan_slot") or ""): str(row.get("canonical_article_id") or "")
+        for row in (release.get("items") or []) if isinstance(row, dict)
+    }
+    plan_by_id = {
+        str(row.get("canonical_article_id") or ""): row
+        for row in (envelope["production_plan"].get("items") or []) if isinstance(row, dict)
+    }
+    if len(release_by_slot) != len(articles):
+        raise Blocked("IMPORT_ENVELOPE_ARTICLE_COUNT_INVALID")
+    for article in articles:
+        cid = release_by_slot.get(article["plan_slot"])
+        item = plan_by_id.get(cid) if cid else None
+        body = (item or {}).get("canonical_article", {}).get("body_html")
+        if not isinstance(body, str):
+            raise Blocked("IMPORT_ENVELOPE_ARTICLE_BODY_MISSING:" + article["plan_slot"])
+        raw = body.encode("utf-8")
+        if hashlib.sha256(raw).hexdigest() != article["sha256"] or len(raw) != article["byte_length"]:
+            raise Blocked("IMPORT_ENVELOPE_ARTICLE_BYTES_MISMATCH:" + article["plan_slot"])
 
 def snapshot(src: dict[str, Any], source_path: Path, batch: str) -> list[dict[str, Any]]:
     rows = src.get("items")
@@ -150,7 +220,9 @@ def verify_sig(mhash: str, sig_b64: str, pub_b64: str) -> None:
 def finalize(source_ref: str) -> dict[str, Any]:
     src, source_path, batch = load_source(source_ref)
     before = snapshot(src, source_path, batch)
-    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": 7, "articles": before, "publish_allowed": False, "content_mutation_performed": False}
+    import_envelope, import_envelope_sha256 = load_import_envelope(src, source_path, batch)
+    validate_import_envelope_articles(import_envelope, before)
+    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": 7, "articles": before, "import_envelope_sha256": import_envelope_sha256, "publish_allowed": False, "content_mutation_performed": False}
     mhash = stable_hash(manifest)
     trust = trusted_identity()
     signed = call_signer(mhash, batch, manifest["source_manifest_sha256"], 7)
@@ -160,7 +232,7 @@ def finalize(source_ref: str) -> dict[str, Any]:
     verify_sig(mhash, signed["signature_b64"], signed["public_key_b64"])
     if before != snapshot(src, source_path, batch):
         raise Blocked("ARTICLE_BYTES_CHANGED_DURING_FINALIZE")
-    pkg = {"contract": PACKAGE_CONTRACT, "endstamp_contract": ENDSTAMP_CONTRACT, "status": "ENDSTEMPEL_PASS", "batch_sha256": batch, "article_manifest": manifest, "article_manifest_sha256": mhash, "signature_algorithm": "ED25519", "signing_key_id": signed["signing_key_id"], "signing_public_key_sha256": signed["signing_public_key_sha256"], "public_key_b64": signed["public_key_b64"], "signature_b64": signed["signature_b64"], "publish_allowed": False, "content_mutation_performed": False}
+    pkg = {"contract": PACKAGE_CONTRACT, "endstamp_contract": ENDSTAMP_CONTRACT, "status": "ENDSTEMPEL_PASS", "batch_sha256": batch, "article_manifest": manifest, "article_manifest_sha256": mhash, "import_envelope": import_envelope, "import_envelope_sha256": import_envelope_sha256, "signature_algorithm": "ED25519", "signing_key_id": signed["signing_key_id"], "signing_public_key_sha256": signed["signing_public_key_sha256"], "public_key_b64": signed["public_key_b64"], "signature_b64": signed["signature_b64"], "publish_allowed": False, "content_mutation_performed": False}
     pkg["package_payload_sha256"] = stable_hash(pkg)
     outdir = REPO / ".pferde-final"
     outdir.mkdir(exist_ok=True)

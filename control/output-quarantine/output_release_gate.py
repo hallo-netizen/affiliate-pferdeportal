@@ -443,8 +443,8 @@ def commit_after_rearm(prepared_ref: str, prepared_sha256: str, auth_ref: str, a
     return {
         "ok": True,
         "status": "OUTPUT_RELEASE_PASS_FINAL",
-        "release_receipt_ref": str(release_receipt_path.relative_to(REPO)),
-        "release_receipt_sha256": sha256(release_receipt_path),
+        "release_receipt_ref": str(durable_receipt_path.relative_to(REPO)),
+        "release_receipt_sha256": sha256(durable_receipt_path),
         "batch_sha256": prepared["batch_sha256"],
         "released_count": len(released),
         "publish_allowed": False,
