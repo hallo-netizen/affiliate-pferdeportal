@@ -57,7 +57,16 @@ def fetch_official_campus() -> str:
 
 
 def show(ref: str, path: str) -> str:
-    return git("show", f"{ref}:{path}")
+    p = subprocess.run(
+        ["git", "show", f"{ref}:{path}"],
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if p.returncode != 0:
+        raise Blocked(f"GIT_BLOCKED:show {ref}:{path}:{p.stderr.strip()}")
+    return p.stdout
 
 
 def list_hobbyrooms(ref: str) -> List[str]:
@@ -301,19 +310,19 @@ def write_capsule(campus_head: str, hobbyroom: str, data: Dict[str, str], snap: 
     boundary = f"""# PAUL CAPSULE – READ ONLY
 
 AUTHORITY:
-Official campus ref \`{OFFICIAL_CAMPUS_REF}\` at \`{campus_head}\`.
+Official campus ref `{OFFICIAL_CAMPUS_REF}` at `{campus_head}`.
 
 ASSIGNMENT_ID:
-\`{data['ASSIGNMENT_ID']}\`
+`{data['ASSIGNMENT_ID']}`
 
 PAUL_BRANCH:
-\`{data['PAUL_BRANCH']}\`
+`{data['PAUL_BRANCH']}`
 
 TECHNICAL_BASE_SHA:
-\`{data['TECHNICAL_BASE_SHA']}\`
+`{data['TECHNICAL_BASE_SHA']}`
 
 WRITE_SCOPE:
-\`{data['WRITE_SCOPE']}\`
+`{data['WRITE_SCOPE']}`
 
 This capsule is a temporary hashed snapshot, not a second truth.
 The cloud capsule remains the workflow instruction.
