@@ -46,3 +46,12 @@ Solange das so ist, ist für einen völlig neuen Chat ohne bekannten Repository-
 `Öffne im GitHub-Repo hallo-netizen/affiliate-pferdeportal den Branch hobbyroom/project-memory-campus-v1-20260905 und gehe zu protocol/PROJECT_MEMORY/START_HERE.md. Danach: Pferde-Atelier → TEXT/SEO.`
 
 Nach späterer Verlagerung/Merge in den dauerhaften Campus-Hauptort reicht die Alltagssprache allein.
+
+
+## HARD RULE – PROTOKOLLPFLICHT
+
+Für jede echte Arbeit im Campus gilt vor `fertig`, `PASS` oder Übergabe die universelle Abschlussprüfung aus:
+`BAUCONTAINER/EINGANGSSTANDARD.md` → **Universelle Protokollpflicht vor Abschluss**.
+
+Nicht aus Erinnerung protokollieren:
+aktuellen Campus-/Fachstand zuerst frisch lesen und nur tatsächlich betroffene autoritative Stellen aktualisieren.

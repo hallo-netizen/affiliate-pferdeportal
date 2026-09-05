@@ -343,3 +343,28 @@ Paul aus der normalen TEXT-Navigation entfernt; Paul-Eingänge WORKER_ONLY; PROJ
 
 REGRESSIONSSCHUTZ:
 ARCH-044 + ARCH-045 + EINGANGSSTANDARD + NEUES_PROJEKT_VORLAGE.
+
+
+## BAU-024 – Paul-Schreibgrenze noch nicht serverseitig erzwungen
+
+STATUS: BLOCKED / SECURITY-MAINTENANCE
+
+KURZ:
+Campus und Paul-Eingänge verbieten Paul Änderungen an `protocol/PROJECT_MEMORY/**`, aber der aktuelle main-`hardlock-base` prüft diese Worker-Grenze noch nicht technisch.
+
+AUSWIRKUNG:
+Ein fehlgeleiteter Paul-Worker könnte auf seinem Branch weiterhin PROJECT_MEMORY-Dateien committen. Die dokumentierte Regel verhindert das logisch, aber noch nicht serverseitig beim Integrationsweg.
+
+KISS-FIX:
+Eine einzige trusted-base-Diffregel in `.github/workflows/pferde-atelier-immutable-base-hardlock.yml`:
+`paul/*` + `protocol/PROJECT_MEMORY/**` = `PAUL_PROJECT_MEMORY_WRITE_BLOCKED`.
+
+BELEG:
+Security-PR #137, Commit `68aaced0cb8629577c3b82f02da298b4b74fff93`.
+
+BLOCKER:
+Der bestehende immutable Base-Hardlock blockiert absichtlich jede Änderung seiner eigenen Workflow-Security mit `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`.
+Der verfügbare GitHub-Zugriff besitzt keinen Ruleset-Admin-Write/BYPASS.
+
+REGRESSIONSSCHUTZ NACH ADMIN-AKTIVIERUNG:
+echter Positiv-/Negativtest auf main; erst danach CLOSED.

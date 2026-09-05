@@ -139,3 +139,22 @@ Grundregel:
 - Spezialworker liefern Lösungspakete zurück; der zuständige Arbeitschat entscheidet und integriert.
 
 Damit verlangt der Campus **keine Echtzeit-Synchronisation zwischen Chats**.
+
+
+## Universelle Protokollpflicht vor Abschluss
+
+Diese Regel gilt für **jede Ebene und jeden Raum** unter PROJECT_MEMORY, einschließlich Campus, Projektgebäude, Büros, Hobbyräume, Paul, Register, Archiv, Tresor und Baucontainer.
+
+Vor `fertig`, `PASS` oder Übergabe:
+1. aktuellen autoritativen Stand frisch lesen;
+2. prüfen, ob Fehlerquelle betroffen ist;
+3. tatsächliche Arbeit protokollieren;
+4. dauerhaftes WAS/WARUM im Änderungs-/Erklärungsregister nachziehen;
+5. CURRENT_STATE nur bei geändertem belastbarem Stand;
+6. HOBBYRAUM/NEXT ACTION nur bei geändertem Auftrag/Arbeitsstand;
+7. Zielvertrag nur bei echter Zieländerung;
+8. negativ prüfen, dass keine zweite Wahrheit oder Historie als CURRENT entstanden ist.
+
+Wenn ein Punkt nicht betroffen ist: **nicht künstlich ändern**.
+
+Ein Abschluss ohne diese Prüfung ist kein belastbarer Campus-PASS.

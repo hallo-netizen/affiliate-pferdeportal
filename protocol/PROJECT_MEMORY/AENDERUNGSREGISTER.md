@@ -349,3 +349,14 @@ WARUM:
 Branches synchronisieren sich nicht in Echtzeit. Eine PROJECT_MEMORY-Kopie auf einem Worker-Branch kann während paralleler Arbeit veralten.
 REGEL:
 Bei relevantem Drift `STALE_ASSIGNMENT` und stoppen; keine Lösung auf veralteter Annahme integrieren.
+
+
+## ARCH-047 – Paul-PROJECT_MEMORY-Sperre gehört in den vertrauenswürdigen Base-Hardlock
+WAS:
+Ein `paul/*`-PR, der `protocol/PROJECT_MEMORY/**` verändert, soll technisch mit `PAUL_PROJECT_MEMORY_WRITE_BLOCKED` scheitern.
+WARUM:
+Die reine Rollenregel schützt gegen versehentliche Parallelwrites, aber nur der vertrauenswürdige Base-Hardlock kann verhindern, dass ein Worker seine eigene Sperre im PR umgeht.
+KISS:
+Eine einzige zusätzliche Diff-Prüfung im bestehenden `hardlock-base`; kein neuer Runner, kein neuer Statusspeicher.
+AKTUELL:
+Security-PR #137 vorbereitet. Aktivierung auf `main` ist noch BLOCKED durch den absichtlichen Selbstschutz `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED` und erfordert den bestehenden bewussten Admin-Wartungsweg.

@@ -319,3 +319,48 @@ KISS-FIX:
 
 BEZUG:
 ARCH-046.
+
+
+### 2026-09-05 – Technische Paul-Sperre vorbereitet, Aktivierung fail-closed
+
+BEDARF:
+Die bereits wiederhergestellte Paul-Regel sollte nicht nur dokumentiert, sondern technisch erzwungen werden:
+Paul darf `protocol/PROJECT_MEMORY/**` lesen, aber niemals über seinen `paul/*`-Branch verändern/integrationsfähig machen.
+
+KISS-IMPLEMENTIERUNG:
+Security-Branch:
+`security/paul-project-memory-hardlock-20260905`
+
+Commit:
+`68aaced0cb8629577c3b82f02da298b4b74fff93`
+
+Draft-PR:
+#137 – `SECURITY: block Paul writes to PROJECT_MEMORY`
+
+Geplante trusted-base-Regel:
+- PR-Head `paul/*`;
+- Diff berührt `protocol/PROJECT_MEMORY/**`;
+- Ergebnis: `PAUL_PROJECT_MEMORY_WRITE_BLOCKED`.
+
+ABDECKUNG:
+Damit sind ohne Einzellisten automatisch geschützt:
+Campus, Projektgebäude, alle Büros, CURRENT_STATE, HOBBYRAUM, Paul-Akten, Fehler-/Ziel-/Änderungsregister, Archiv, Tresor und Baucontainer.
+
+PRÜFUNG:
+- normaler `hardlock` auf Security-Kandidat: PASS;
+- bestehender `hardlock-base`: erwartetes FAIL `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil Workflow-Security selbst geändert wird;
+- Test-PRs #138/#139 wurden angelegt und wieder geschlossen;
+- Befund: `pull_request_target` verwendet weiterhin die Default-Branch-Version des vertrauenswürdigen Workflows; Kandidatenregel kann daher vor Aktivierung auf main nicht live über diesen Mechanismus getestet werden.
+
+STATUS:
+**BLOCKED – ADMIN-WARTUNGSAKTIVIERUNG ERFORDERLICH.**
+Kein technischer PASS behauptet.
+
+NACH AKTIVIERUNG ZWINGEND:
+1. realer Negativtest: `paul/*` + `protocol/PROJECT_MEMORY/**` → `PAUL_PROJECT_MEMORY_WRITE_BLOCKED`;
+2. realer Positivtest: `paul/*` ohne PROJECT_MEMORY-Write → diese Sperre darf nicht auslösen;
+3. Ruleset sofort wieder im normalen Hardlock-Zustand;
+4. erst danach TECHNISCHE PAUL-SPERRE = PASS.
+
+BEZUG:
+ARCH-044 bis ARCH-047; BAU-024.
