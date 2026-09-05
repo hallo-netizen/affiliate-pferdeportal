@@ -6,7 +6,7 @@
   "authorized_inputs": [
     {
       "ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
-      "sha256": "81a83f0be77612a49b03afe9ebd1042767518a02f4acac86d5b591f690736ef1"
+      "sha256": "3ffb07688bbb41f3c2ed79e1cabd75892e1849d658a38b94b1d046c4866d488e"
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
@@ -50,7 +50,7 @@
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
-      "sha256": "020e4f71c244110f637d72fbe722b4ce5cc0d8341f53c31e54b4377e89900e38"
+      "sha256": "97534a8758d96855ff9086f3b7e8996220b2e229229e9088abb911785bbc6621"
     },
     {
       "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
@@ -75,6 +75,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "820b0809be4782b4cc3f8ef905d6ce07a5df5f8dd432a6ebf97737a19ee8667e"
+    "bundle_sha256": "d2b7f4e6b7e6c392725606ffaec997def56c19a3faffd33b2b75c63590c3d366"
   }
 }
