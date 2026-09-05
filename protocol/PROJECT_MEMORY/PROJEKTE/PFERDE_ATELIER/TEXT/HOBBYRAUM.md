@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-05
-STATUS: AKTIV / NORMALER TEXT-ARBEITSCHAT – B01-REGRESSIONSPRÜFUNG
+STATUS: AKTIV / NORMALER TEXT-ARBEITSCHAT – SIGNIER-ALTLASTEN BEREINIGT / REGRESSION AUSSTEHEND
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -18,7 +18,7 @@ den aktuellen Auftrag und alle autoritativen Quellen lesen und ausschließlich i
 main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Workflow/Runner/Gate/Executor bauen oder Fach-/SEO-/Textmaschinenregeln verändern.
 
 **ALS NÄCHSTES …**  
-Nur B01 weiter belegen: bestehende KISS-Korrektur und die beiden stale Regressionstests M15/M31 hart positiv/negativ prüfen. Danach erst bestehende M01–M33-Gesamtregression; ein echter 7/7-Lauf bleibt der Livebeweis.
+Auf exakt dem aktuellen Hobbyraum-Head den **bestehenden** M01–M33-Runner ausführen. Nur den ersten echten FAIL bearbeiten. Danach erneut derselbe Runner; erst nach M01–M33 + `hardlock` + `hardlock-base` darf Hobbyraum-PASS behauptet werden. Ein echter 7/7-Lauf bleibt der Livebeweis.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -42,18 +42,22 @@ Draft-PR:
 `#140`
 
 Aktueller Arbeits-Head:
-`f2b47e9ecce643acfdffbd68ccff0805117613da`
+`c3244d5bf838817078a3821c045fb52e86f3db46`
 
 main bleibt unverändert:
 `c8a96e7a2f598de69134d90b143257c3559bc98a`
 
 ## Aktueller Prüfstand
 
-- B01-KISS-Fix verändert nur den bestehenden `fachworkflow_proof_handoff.py`: keine vorgezogene WordPress-ID im echten Produktionsplan; interne Seed-ID nur für den isolierten lokalen PPM-Testzustand.
-- M15-Test war stale: er verbot inzwischen ausdrücklich erforderliche Handoff-Request-Texte bzw. wertete `kein submit-request` falsch.
-- M31-Test war stale: er erwartete überhaupt keinen `fachworkflow_handoff`, obwohl der aktuelle Sollweg einen gebundenen Handoff innerhalb derselben Current Action vorsieht und gerade keinen separaten Executor verlangt.
-- Korrigierte M15/M31-Logik wurde auf dem Hobbyraum-Branch positiv/negativ geprüft.
-- GitHub `hardlock` und `hardlock-base` auf Head `f2b47e9…`: PASS.
+- B01-KISS-Fix bleibt enthalten: keine vorgezogene WordPress-ID im echten Produktionsplan; interne Seed-ID nur für den isolierten lokalen PPM-Testzustand.
+- M15/M31 waren stale und wurden auf den aktuellen gebundenen Request-/Handoff-Weg korrigiert.
+- M26/M28 waren ebenfalls noch auf den alten Direkt-Receipt-/Prepass-Weg ausgerichtet und wurden auf Request → realer PPM → erst danach PASS/Receipt korrigiert.
+- **Interne Signieraltlasten wurden aus dem aktiven 107007-Vorlauf entfernt:** H8-Bootstrap, Provenance, Runtime-Guard, Codex-Preflight und das gebundene Generation-1-H8-Paket verlangen keine ED25519-Signatur, keinen Signer und keinen Schlüssel mehr. Herkunft/Integrität bleiben hash- und batchgebunden.
+- M22/M23 wurden entsprechend auf H8-Provenance/Integrität statt interner Signatur ausgerichtet.
+- **Unverändert:** Textmaschine, Linkregel, Tabellenstufe, LanguageTool, PPM, PSERC/PSTE, SEO/Design und Publish-Sperre.
+- **Externe Signierung bleibt unangetastet:** hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation.
+- GitHub `hardlock` und `hardlock-base` auf Head `c3244d5…`: PASS.
+- **Noch nicht ausgeführt/belegt:** kompletter M01–M33-Lauf auf Head `c3244d5…`.
 - Kein Live-7/7-PASS behauptet.
 
 ## Single Writer
