@@ -227,6 +227,22 @@ Nur GRÜN erlaubt `LOKALE_KOPIE_ENTBEHRLICH: JA`.
 Aktueller Kategoriestand:
 GELB, weil persistente Library-Archivkopien vorhanden sind, aber der zweite unabhängige private Campus-Speicher noch fehlt.
 
+### 2026-09-05 – Masterdatei allein reicht nicht
+
+Nutzer-Hard-Rule:
+Campus muss Masterdateien immer mit dem aktuellen GitHub-System zusammenführen.
+
+Design-Beispiel:
+- Upload Pferde: 1.50.469/V104;
+- GitHub main: 1.50.421;
+- spätere Fachbranches: 1.50.470→1.50.472;
+- GitHub LIVE_PASS bindet 1.50.472/V104 als aktuellen Pferde-Live-Stand;
+- GitHub UNIVERSAL_STATUS bestätigt Universal 2.2.40/V104 unverändert aktuell.
+
+Entscheidung:
+Keine Einzelquelle wird blind zur Wahrheit erklärt.
+Campus-Current-State entsteht aus belegter Quellenhierarchie und sichtbaren Deltas.
+
 ## Offene Punkte
 
 - Campus nach V1-Freigabe in eigenes privates Repository verschieben?

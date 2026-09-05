@@ -60,3 +60,38 @@ Enthält:
 
 LOKALE_KOPIE_ENTBEHRLICH:
 **NEIN**, solange keine zweite unabhängige verifizierte Ablage existiert.
+
+
+## ARC-MOD-003-20260905 – Universal Design
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-05/`
+
+Kanonisch:
+- Universal Plugin 2.2.40
+- Universal Master V104
+
+LOKALE_KOPIE_ENTBEHRLICH:
+NEIN – zweite unabhängige verifizierte Rohablage fehlt.
+
+## ARC-PFERDE-DESIGN-20260905 – Pferde Design
+
+STATUS:
+GELB für vollständige Rohbasis 1.50.469.
+ROT für exakte finale 1.50.472-Rohartefakte.
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/DESIGN/2026-09-05/`
+
+Kanonisch vorhanden:
+- 1.50.469 Plugin
+- vollständiger 1.50.469 Master
+
+Aktueller Live-Stand:
+1.50.472/V104 durch GitHub-Status/Live-Pass belegt, aber finale Plugin-/Master-ZIPs noch nicht in Library vorhanden.
+
+LOKALE_KOPIE_ENTBEHRLICH:
+NEIN.

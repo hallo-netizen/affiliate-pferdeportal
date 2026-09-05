@@ -122,23 +122,29 @@ Aktuelle Release-Wahrheit kommt ausschließlich aus AFFILIATE-Governance.
 Hauptquelle:
 `PROJEKTE/PFERDE_ATELIER/AFFILIATE/` + technische Release-Governance.
 
-### WP-006 – Design / Affiliate Portal Design Template Kit
+### WP-006 – Universal Portal Design Suite / Pferde-Designlinie
 
 MOD-ID:
-noch nicht vergeben
+MOD-003
 
-Nachweisbar erhalten:
-- `affiliate-portal-design-template-kit_v1.50.373_TEST(1).zip`
-- `PFERDE_ATELIER_DESIGN_V1.50.469_CONTRACT_V104_TABELLENABSTAND_HARD_RUNTIME_INSTALLIEREN.zip`
+ALLGEMEINER HAUPTKERN:
+**Universal Portal Design Suite 2.2.40 / Contract V104**
 
-Neuester direkt gefundener Artefaktname:
-1.50.469
+Plugin SHA-256:
+`fbaf1e36fc814b88b952924b9cf2e71a14913864c226eeed46ed8cf03af8e765`
 
-Wichtig:
-Dateibeleg bedeutet nicht automatisch aktueller LIVE-/Release-Stand.
+Master SHA-256:
+`5d8ef907b671ea96ae02605466bccbad41c012cbd7b3aed9436f7725a02238d7`
 
-Hauptquelle:
-`PROJEKTE/PFERDE_ATELIER/DESIGN/`
+PFERDE-PROJEKTLINIE:
+- übergebene Vollbasis: 1.50.469 / V104
+- aktueller GitHub/LIVE-Stand: **1.50.472 / V104**
+- Live-Branch: `fix/category-intro-targeted-79-v150472-20260831`
+- `main` enthält noch 1.50.421 und ist dafür nicht Live-Release-Autorität
+
+Hauptquellen:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/`
+- `PROJEKTE/PFERDE_ATELIER/DESIGN/`
 
 ### WP-007 – Kategoriemodell / Affiliate-Portal Kategorie-Workflow
 
@@ -183,3 +189,19 @@ Bei jedem neuen Plugin-/Masterdatei-Eingang:
 
 **Ein Plugin kann in mehreren Projekten genutzt werden, aber es hat nur eine Hauptwahrheit.  
 Dieses Register zeigt nur den Weg dorthin.**
+
+
+### WP-008 – HivePress-Anzeigensuche
+
+MOD-ID:
+MOD-004
+
+STATUS:
+UNGEKLÄRT / separater Audit ausstehend.
+
+In Designmastern nachweisbar:
+- Universal HivePress Anzeigensuche v2.1.5
+- Pferde Atelier HivePress Anzeigensuche v2.1.5
+
+Regel:
+nicht als bloße Design-Datei verschwinden lassen; eigener Modulstatus folgt nach separater Prüfung.

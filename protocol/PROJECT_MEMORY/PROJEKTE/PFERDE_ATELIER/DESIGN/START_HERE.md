@@ -1,26 +1,36 @@
-# BÜRO DESIGN
+# BÜRO DESIGN – PFERDE-ATELIER
+
+STAND: 2026-09-05
+STATUS: AKTIV / LIVE-STAND AUS GITHUB ABGEGLICHEN
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das Fachbüro für Portaldesign und designbezogene Plugin-/Template-Funktion.
+Die konkrete Pferde-Atelier-Anwendung des allgemeinen Designsystems.
 
 **HIER BIST DU RICHTIG, WENN …**  
-die Aufgabe Darstellung, Layout, Designverhalten oder Designplugin-Funktion betrifft.
+Darstellung, Layout, Pferde-Assets, Kategorietexte, Journal, HivePress-Darstellung oder Pferde-spezifische Designintegration betroffen sind.
 
 **DU DARFST …**  
-Design-relevante Quellen lesen und im gebundenen DESIGN-Hobbyraum arbeiten.
+Pferde-spezifische Designquellen nach aktuellem Fachstand lesen und im gebundenen DESIGN-Hobbyraum arbeiten.
 
 **DU DARFST NICHT …**  
-HivePress-Fachlogik nur wegen gemeinsamer Dateien übernehmen, fremde Büros verändern oder einen aktuellen Stand aus alten Versionsnamen erraten.
+den allgemeinen Designkern doppeln, `main` automatisch als Live-Wahrheit behandeln oder ältere Masterdateien als aktuellen Endstand ausgeben.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → dort genannte Originalquellen.
+`CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md` → `HOBBYRAUM.md`.
 
-## Wichtige Grenze
+## Allgemeiner Kern
 
-Design und HivePress können dieselben technischen Dateien berühren.
+MOD-003:
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/`
 
-Zuständigkeit folgt der **Funktion**, nicht blind dem Dateipfad.
+## Harte Quellenregel
 
-PROJECT_MEMORY verschiebt bestehende technische Dateien nicht.
+Pferde-Design wird aus mehreren Quellen zusammengeführt:
+1. aktuelle GitHub-Fachbranches/Live-Pass;
+2. technische GitHub-Historie/Baselines;
+3. übergebene Plugin-/Masterakten;
+4. erst danach Campus-Zusammenfassung.
+
+Keine Quelle allein blind überschreibt die anderen.

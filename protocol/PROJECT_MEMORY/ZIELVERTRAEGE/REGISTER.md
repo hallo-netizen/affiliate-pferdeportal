@@ -61,3 +61,27 @@ maßgeblich sind die im Master gebundenen 14 Stufen, Hardlocks, Research-/Covera
 
 BELEGSTATUS:
 lokal/fresh R10 stark PASS; echter Live-WordPress-Deploymentlauf noch offen.
+
+
+## ZV-MOD-003 – Designvertrag V104
+
+TITEL:
+DESIGNVERTRAG ALLGEMEIN V104
+
+GELTUNGSBEREICH:
+MOD-003 Universal Portal Design Suite
+
+STATUS:
+AKTIV
+
+FASSUNG:
+V104 / Universal Plugin 2.2.40
+
+HAUPTQUELLE:
+Universal Master V2.2.40/V104 und GitHub Design-Baseline V104.
+
+PASS-BEDINGUNG:
+gebundene V104-Design-/QA-Regeln; keine stillen projektspezifischen Übernahmen.
+
+PFERDE-ANWENDUNG:
+aktueller Live-Stand 1.50.472 verwendet weiterhin Contract V104 unverändert.

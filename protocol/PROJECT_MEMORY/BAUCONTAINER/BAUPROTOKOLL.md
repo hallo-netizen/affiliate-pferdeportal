@@ -101,3 +101,24 @@ ERGEBNIS:
 
 BEZUG:
 ARCH-025.
+
+
+### 2026-09-05 – Design allgemein + Pferde zusammengeführt
+
+BEDARF:
+Zwei allgemeine Design-Dateien und zwei Pferde-Dateien mit aktuellem GitHub-System zusammenführen.
+
+ERGEBNIS:
+- MOD-003 Universal Design 2.2.40/V104 angelegt;
+- Universal-Master 298/298 geprüft;
+- Pferde-Master 1.50.469 792/792 geprüft;
+- Pferde-Dubletten erkannt;
+- Roharchive getrennt persistiert;
+- GitHub main 1.50.421 als älteren Main-Stand erkannt;
+- spätere Design-Fachbranches bis 1.50.472 geprüft;
+- 1.50.472/V104 als aktuellen Pferde-LIVE-Stand gebunden;
+- Universal 2.2.40/V104 durch spätere GitHub-Historie als unverändert aktuell bestätigt;
+- enthaltene HivePress-Anzeigensuche als MOD-004 UNGEKLÄRT separat erfasst.
+
+BEZUG:
+ARCH-026.

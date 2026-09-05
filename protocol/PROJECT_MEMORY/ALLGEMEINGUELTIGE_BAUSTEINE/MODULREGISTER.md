@@ -146,3 +146,35 @@ Im Projekt bleiben nur:
 9. Modulregister aktualisieren.
 
 Der Nutzer muss diese Einordnung weder erinnern noch manuell vorgeben.
+
+
+## MOD-003 – UNIVERSAL PORTAL DESIGN SUITE
+
+MODULKLASSE: ALLGEMEINGÜLTIG
+STATUS: V2.2.40 / Contract V104 hart inventarisiert; spätere GitHub-Pferdehistorie bestätigt ausdrücklich „kein Universal-Update erforderlich“
+HAUPTORT:
+`ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/`
+AKTUELL BELEGTER STAND:
+- Plugin 2.2.40
+- Designvertrag V104
+ABHÄNGIGKEITEN:
+- WordPress >= 6.0
+- PHP >= 7.4
+- HivePress-Funktionen nur bei entsprechender Nutzung
+NUTZENDE PROJEKTE:
+- PFERDE_ATELIER → eigene Projektlinie unter `PROJEKTE/PFERDE_ATELIER/DESIGN/`
+BELEG:
+- übergebener Universal Plugin/Master
+- GitHub `UNIVERSAL_STATUS.md` auf Commit `f1e074b...`
+ARCHIV:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-05/`
+
+## MOD-004 – HIVEPRESS-ANZEIGENSUCHE
+
+MODULKLASSE: UNGEKLÄRT
+STATUS: als separater Plugin-/Source-Baustein in Universal- und Pferde-Designmaster erkannt; eigener Audit noch offen
+BELEGE:
+- Universal: `UNIVERSAL_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
+- Pferde: `PFERDE_ATELIER_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
+REGEL:
+Nicht im Designmaster verlieren, aber vor eigenem Audit noch nicht als vollständig allgemeingültiges Modul freigeben.

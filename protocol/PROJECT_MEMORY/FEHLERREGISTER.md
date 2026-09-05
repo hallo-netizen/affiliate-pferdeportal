@@ -68,3 +68,19 @@ Autoritative Fehlerquellen:
 `ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/FEHLERQUELLEN.md`
 
 Keine Fehlertexte hier duplizieren.
+
+
+## MOD-003-DESIGN-V104
+
+Bereich:
+ALLGEMEINES DESIGN + PFERDE-ATELIER DESIGN
+
+Status:
+V104-Fehler-/QA-Kette historisch vollständig erhalten.
+
+Autoritative Quellen:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/FEHLERQUELLEN.md`
+- `PROJEKTE/PFERDE_ATELIER/DESIGN/FEHLERQUELLEN.md`
+- GitHub `design-baseline/2026-08-22/v101` bis `v104`
+
+Keine Fehlerdetails hier duplizieren.

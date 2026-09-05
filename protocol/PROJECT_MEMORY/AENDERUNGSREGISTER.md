@@ -178,3 +178,14 @@ GRÜN nur bei Hash + mindestens zwei unabhängigen verifizierten Speicherorten.
 Nur GRÜN darf `LOKALE_KOPIE_ENTBEHRLICH: JA` setzen.
 AKTUELL:
 Kategoriemodul = GELB; ChatGPT-Library-Archiv vorhanden, zweite unabhängige Ablage fehlt noch.
+
+
+## ARCH-026 – Masterakten werden immer gegen aktuelles GitHub zusammengeführt
+WAS:
+Neue Master-/Pluginakten werden nicht isoliert inventarisiert, sondern gegen aktuellen main, relevante Fachbranches, Release-/Live-Belege und technische Originalquellen abgeglichen.
+WARUM:
+Masterdateien können älter als spätere GitHub-Arbeit sein; main kann zugleich älter als ein bestätigter Live-Fachbranch sein.
+DESIGN-BELEG:
+Masterbasis Pferde 1.50.469; main 1.50.421; bestätigter Fachbranch-LIVE 1.50.472.
+REGEL:
+Widerspruch = sichtbar dokumentieren; Autorität anhand Belegen bestimmen; niemals einfach „neueste Datei gewinnt“.
