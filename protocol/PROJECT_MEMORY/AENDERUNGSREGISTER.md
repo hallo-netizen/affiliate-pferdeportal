@@ -404,3 +404,22 @@ ERGEBNIS:
 Pfad-/Paul-Regel 5/5 PASS; PROTOKOLLCHECK 17/17 PASS; gesamt 22/22 PASS.
 GRENZE:
 Das ist ein harter Logiktest des exakten Kandidatenverhaltens. Der echte serverseitige Required-Check kann erst nach der einmaligen Admin-Aktivierung von Security-PR #137 bewiesen werden.
+
+
+## ARCH-052 – Paul holt seinen Auftrag automatisch aus der einzigen Hobbyraum-Wahrheit
+WAS:
+Pauls aktuelle Zuweisung wird ausschließlich als maschinenlesbarer `PAUL_ASSIGNMENT_V1` direkt im zuständigen `HOBBYRAUM.md` geführt. Paul erzeugt/erhält keinen täglich neu geschriebenen Übergabeprompt.
+WARUM:
+Eine separate Paul-Auftragsakte oder synchronisierte Kopie würde eine zweite Wahrheit und zusätzlichen Pflegebedarf erzeugen. Der Campus soll alleinige aktuelle Wahrheit bleiben.
+REGEL:
+Null aktive Paul-Blöcke = `PAUL_NOT_ASSIGNED`; mehr als einer = `PAUL_MULTIPLE_ASSIGNMENTS_BLOCKED`. Problem/Ziel/Regeln nur als Verweis auf autoritative Quellen.
+
+## ARCH-053 – Paul-Scope-Gate ergänzt, aber ersetzt nicht die bestehende Cloud-Eingangstür
+WAS:
+Auf `paul/*` bleibt `cloud_entry.py start` zwingend erster Schritt. Danach prüft ein trusted `paul_scope_gate.py start` automatisch aktuelle Campuszuweisung, Branch, technische Basis und Write-Scope; vor Rückgabe folgt `verify`.
+WARUM:
+Ein unabhängiger zweiter Bootstrap hätte die vorhandene deterministische Eingangstür konkurriert. Die neue Schicht darf nur Worker-Berechtigung/Frische begrenzen, nicht den Workflow auswählen.
+KAPSEL:
+`.paul-capsule/` ist temporär, nicht eingecheckt, hashgebunden und keine Wahrheit.
+DRIFT:
+Nur HOBBYRAUM, zuständiger CURRENT_STATE sowie gebundene TASK-/TARGET-/RULES-Originalquellen blockieren bei Änderung; fremde Campusänderungen nicht.

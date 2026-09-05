@@ -99,3 +99,36 @@ bestehende Arbeitsbindung erhalten und nur die Architektur-/Routingregel darum h
 
 Negativtest:
 Ein Architekturfix darf niemals aus `WORKER = PAUL` still `WORKER = ARBEITSCHAT` machen oder umgekehrt.
+
+
+## Automatische Paul-Bindung – einzige Auftragswahrheit bleibt der Hobbyraum
+
+Ein Paul-Auftrag wird **nicht** als separater Prompt oder zweite Auftragsakte gepflegt.
+
+Nur solange Paul tatsächlich gebunden ist, enthält genau der zuständige `HOBBYRAUM.md` zusätzlich diesen maschinenlesbaren Block:
+
+```
+<!-- PAUL_ASSIGNMENT_V1
+STATUS: ACTIVE
+WORKER: PAUL
+ASSIGNMENT_ID: <eindeutige ID>
+PAUL_BRANCH: paul/<auftrag>
+TECHNICAL_BASE_SHA: <exakter 40-stelliger Ausgangscommit>
+WRITE_SCOPE: <datei;verzeichnis/> oder READ_ONLY
+TASK_SOURCE: <autoritative Problem-/Auftragsquelle>
+TARGET_SOURCE: <autoritative Zielquelle>
+RULES_SOURCE: <autoritative Hard-Rules-Quelle>
+-->
+```
+
+Harte Regeln:
+- ohne aktiven Block ist Paul **nicht beauftragt**;
+- campusweit darf gleichzeitig höchstens **ein** `STATUS: ACTIVE / WORKER: PAUL`-Block existieren;
+- mehrere aktive Paul-Blöcke = `PAUL_MULTIPLE_ASSIGNMENTS_BLOCKED`;
+- Problem, Ziel und Regeln werden im Block **nicht kopiert**, sondern nur auf ihre autoritativen Quellen verwiesen;
+- `WRITE_SCOPE` enthält nur technische Pfade; `protocol/PROJECT_MEMORY/**`, Security-/Workflowpfade und `AGENTS.md` sind für Paul niemals zulässiger Scope;
+- `TECHNICAL_BASE_SHA` ist der Commit, auf dem Pauls Branch für genau diesen Auftrag basiert;
+- bei Rückgabe/Beendigung wird der aktive Block aus dem Hobbyraum entfernt; Historie gehört ins Protokoll/Archiv, nicht in die aktuelle Arbeitsbindung.
+
+Damit bleibt:
+**HOBBYRAUM = eine aktuelle Auftragswahrheit.**

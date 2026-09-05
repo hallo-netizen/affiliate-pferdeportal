@@ -192,3 +192,17 @@ Die Prüfung ersetzt nicht die fachliche Wahrheit. Sie zwingt nur dazu, die Absc
 
 AKTIVIERUNGSSTATUS:
 Vorbereitet im Security-PR #137; noch nicht auf `main` aktiv, solange der immutable Base-Hardlock die eigene Security-Wartung blockiert.
+
+
+## Paul ohne Promptübergabe
+
+Für Spezialworker Paul gilt zusätzlich:
+- aktueller Auftrag wird ausschließlich im zuständigen `HOBBYRAUM.md` als `PAUL_ASSIGNMENT_V1` gebunden;
+- keine zweite Paul-Auftragsdatei und kein täglich neu erzeugter Übergabeprompt;
+- der Paul-Scope-Gate liest den offiziellen Campus beim Start selbst;
+- null aktive Paul-Aufträge = STOP;
+- mehr als ein aktiver Paul-Auftrag = STOP;
+- vor Rückgabe erneute Frische-/Scopeprüfung;
+- nur relevante Quellen erzeugen `STALE_ASSIGNMENT`; fremde Campusänderungen dürfen Paul nicht unnötig blockieren.
+
+Automatisierung ergänzt die bestehende Cloud-Eingangstür, ersetzt sie nicht.

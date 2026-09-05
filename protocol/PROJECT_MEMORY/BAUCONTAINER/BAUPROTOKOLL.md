@@ -553,3 +553,41 @@ GESAMT LOGIKABNAHME:
 
 WICHTIGE GRENZE:
 Noch kein serverseitiger Required-Check-PASS für die neue Logik, weil Security-PR #137 weiterhin nicht auf main aktiviert ist.
+
+
+### 2026-09-05 – Paul vollständig auf Campus-Pull statt Promptübergabe umgestellt
+
+AUSLÖSER:
+Der Nutzer will Paul ohne wiederkehrende Übergabeprompts nutzen. Alle aktuellen Informationen sollen automatisch aus der einzigen Campuswahrheit kommen.
+
+KRITISCHE PRÜFUNG:
+Verworfen wurden:
+- 1:1-Livesynchronisation von Campusakten in Pauls Etage;
+- eigener dauerhafter Paul-Status;
+- separater zweiter Workflow-Bootstrap;
+- täglich generierte Paul-Prompts.
+
+GRUND:
+Alle vier Varianten erzeugen zusätzliche Wahrheiten, Synchronisationsbedarf oder Konkurrenz zur bestehenden `cloud_entry.py`-Eingangstür.
+
+KISS-LÖSUNG:
+- `HOBBYRAUM.md` bleibt einzige aktuelle Auftragswahrheit;
+- Paul-Zuweisung nur als kleiner maschinenlesbarer `PAUL_ASSIGNMENT_V1`-Block mit Quellenverweisen;
+- campusweit maximal ein aktiver Paul-Auftrag;
+- Security-Kandidat erhält `control/paul-scope-gate/paul_scope_gate.py`;
+- `AGENTS.md` erzwingt auf `paul/*` nach erfolgreichem Cloud-Start automatisch `paul_scope_gate.py start`;
+- vor Cloud-Abschluss automatisch `verify`;
+- bestehender `hardlock-base` prüft bei Paul-PRs zusätzlich aktuelle Zuweisung und Write-Scope;
+- relevante Quellen werden lokal nur temporär/hashgebunden in `.paul-capsule/` materialisiert;
+- relevante Drift → `STALE_ASSIGNMENT_BLOCKED`;
+- keine Paul-Zuweisung → `PAUL_NOT_ASSIGNED`.
+
+AKTUELLER REALZUSTAND:
+Der TEXT-Hobbyraum weist aktuell den normalen TEXT-Arbeitschat B01 zu und sagt ausdrücklich, dass Paul nicht gebunden ist.
+Daher muss Paul im aktuellen Stand automatisch STOP erhalten.
+
+SECURITY-AKTIVIERUNG:
+Die Automatik ist im Security-PR #137 vorbereitet, aber bis zur einmaligen bewussten Admin-Wartungsaktivierung nicht auf main wirksam.
+
+BEZUG:
+ARCH-052/053; BAU-027.

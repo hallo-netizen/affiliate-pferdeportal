@@ -91,3 +91,32 @@ Für jeden Auftrag gilt:
 - Warum → `AENDERUNGSREGISTER.md`.
 
 Pauls eigene Dateien sind Einstieg und Arbeitsanweisung, nicht eine parallele Statusdatenbank.
+
+
+## Vollautomatischer Paul-Start – kein Übergabeprompt
+
+Für Paul wird kein täglich neu erzeugter Prompt benötigt.
+
+Technischer Sollweg nach Aktivierung der Security-Wartung:
+
+1. bestehende Repository-Eingangstür:
+   `python3 control/cloud-entry-gate/cloud_entry.py start`
+2. auf jedem `paul/*`-Branch automatisch anschließend:
+   `python3 control/paul-scope-gate/paul_scope_gate.py start`
+3. der Gate scannt den **frisch geholten offiziellen Campus** nach genau einem aktiven `PAUL_ASSIGNMENT_V1` im Hobbyraum;
+4. ohne Auftrag: `PAUL_NOT_ASSIGNED`;
+5. falscher Branch/Basis/Scope: BLOCKED;
+6. bei PASS entsteht nur lokal `.paul-capsule/` als hashgebundener READ-ONLY-Snapshot der aktuellen Quellen;
+7. vor Rückgabe:
+   `python3 control/paul-scope-gate/paul_scope_gate.py verify`;
+8. relevante Drift seit Start:
+   `STALE_ASSIGNMENT_BLOCKED`.
+
+Die `.paul-capsule/` ist **keine zweite Wahrheit** und wird nicht eingecheckt.
+Sie enthält nur einen belegten Snapshot des offiziellen Campus-Heads.
+
+Die bestehende `.pferde-capsule/INSTRUCTION.txt` bleibt alleinige Workflow-Instruktion.
+Paul-Scope-Gate = Worker-/Scope-/Frischegrenze, nicht Workflow-Navigation.
+
+Aktueller Zustand:
+Solange der aktuelle Campus keinen aktiven Paul-Block enthält, muss ein Paul-Start korrekt mit `PAUL_NOT_ASSIGNED` stoppen.

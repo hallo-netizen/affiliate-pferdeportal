@@ -1,89 +1,66 @@
-# PAUL – AUFTRAGSVORLAGE
+# PAUL – ZUWEISUNGSSCHEMA
 
-## Projekt
+STATUS: NUR SCHEMA / KEINE AKTUELLE AUFTRAGSWAHRHEIT
 
-<Projektgebäude>
+## Zweck
 
-## Zuständiges Büro
+Diese Datei ist **keine Paul-Auftragsakte** und wird niemals als aktueller Auftrag fortgeschrieben.
 
-<Büro>
+Die einzige aktuelle Paul-Zuweisung liegt – nur solange Paul wirklich arbeitet – direkt im zuständigen Büro-`HOBBYRAUM.md`.
 
-## Offizieller Campus-Ref
+Damit braucht der Nutzer keinen Übergabeprompt zu erzeugen.
 
-<aktueller Branch/Ref, aus dem CURRENT_STATE/HOBBYRAUM frisch gelesen werden>
+## Verbindlicher Block im zuständigen HOBBYRAUM
 
-Beim aktuellen Prototyp:
-`hobbyroom/project-memory-campus-v1-20260905`
+```
+<!-- PAUL_ASSIGNMENT_V1
+STATUS: ACTIVE
+WORKER: PAUL
+ASSIGNMENT_ID: <eindeutige ID>
+PAUL_BRANCH: paul/<auftrag>
+TECHNICAL_BASE_SHA: <exakter 40-stelliger Ausgangscommit>
+WRITE_SCOPE: <datei;verzeichnis/> oder READ_ONLY
+TASK_SOURCE: <autoritative Problem-/Auftragsquelle>
+TARGET_SOURCE: <autoritative Zielquelle>
+RULES_SOURCE: <autoritative Hard-Rules-Quelle>
+-->
+```
 
-## Problem / Auftrag
+## Bedeutung
 
-<genau eine Aufgabe>
+- `ASSIGNMENT_ID`: Identität genau dieses Paul-Auftrags.
+- `PAUL_BRANCH`: exklusiver Paul-Arbeitsbranch.
+- `TECHNICAL_BASE_SHA`: Ausgangscommit, von dem der Paul-Branch abstammt.
+- `WRITE_SCOPE`: einzige technischen Dateien/Verzeichnisse, die Paul verändern darf; `READ_ONLY` erlaubt keine Writes.
+- `TASK_SOURCE`: Verweis auf die autoritative Problem-/Auftragsquelle.
+- `TARGET_SOURCE`: Verweis auf den autoritativen Zielvertrag/die Zielquelle.
+- `RULES_SOURCE`: Verweis auf die bindende Hard-Rules-Quelle.
 
-## Ziel
+Problem-/Fehlertext, Zielinhalt und Regeln werden hier **nicht dupliziert**.
 
-<konkretes erwartetes Ergebnis>
+## Automatik
 
-## Direkteinstieg TEXT/SEO
+Der trusted Paul-Scope-Gate liest den offiziellen Campus selbst.
 
-Bei einem Pferde-Atelier-TEXT/SEO-Auftrag zuerst:
-`protocol/PROJECT_MEMORY/PAUL/TEXT_SEO/START_HERE.md`
+Er verlangt:
+- genau einen aktiven Paul-Auftrag campusweit;
+- Branch = `PAUL_BRANCH`;
+- technischer Ausgangscommit = Vorfahr des Paul-Heads;
+- alle Writes innerhalb `WRITE_SCOPE`;
+- niemals Write unter `protocol/PROJECT_MEMORY/**`;
+- relevante Quellen vor Start und vor Rückgabe unverändert bzw. frisch geprüft.
 
-## Pflichtlektüre
+Fehlt die Bindung:
+`PAUL_NOT_ASSIGNED`.
 
-- Hauptpförtner
-- Projekt START_HERE
-- Büro START_HERE / CURRENT_STATE / HOBBYRAUM
-- Fehlerregister
-- Änderungs-/Erklärungsregister
-- Handlungsverzeichnis
-- relevante technische Originalquellen
+Mehrere Bindungen:
+`PAUL_MULTIPLE_ASSIGNMENTS_BLOCKED`.
 
-## Technischer Schreibbereich
+Relevante Drift:
+`STALE_ASSIGNMENT_BLOCKED`.
 
-<konkrete Dateien/Pfade, die Paul auf seinem Branch ändern darf – oder READ_ONLY>
+## Rückgabe
 
-Ohne eindeutig benannten Schreibbereich gilt:
-**READ_ONLY / KEIN WRITE.**
+Paul liefert Befund, Ursache, KISS-Lösung, Positiv-/Negativtests, Commit(s), offene Risiken.
 
-## Erlaubt
-
-- vollständiges Projekt und alle Campus-/Büroakten lesen;
-- im eigenen Paul-Branch innerhalb des ausdrücklich gebundenen technischen Schreibbereichs analysieren, ändern und testen;
-- notwendige Belege erzeugen.
-
-## Verboten
-
-- main direkt verändern;
-- fremde offizielle Arbeitsbranches verändern;
-- **`protocol/PROJECT_MEMORY/**` verändern**;
-- Büro-, CURRENT_STATE-, HOBBYRAUM-, Fehler-, Ziel-, Änderungs-, Archiv- oder Campusakten verändern;
-- außerhalb des gebundenen technischen Schreibbereichs schreiben;
-- selbst integrieren oder mergen;
-- Regeln eigenmächtig ändern;
-- bekannte Arbeitswege durch Ersatzarchitektur ersetzen;
-- ungeklärte Schutzmechanismen zurückbauen.
-
-## Parallelregel
-
-Paul und Arbeitschat verändern niemals gleichzeitig denselben technischen Schreibbereich.
-Der Arbeitschat kann währenddessen nur an klar unabhängigen Bereichen weiterarbeiten.
-
-## Erwartete Rückgabe
-
-- Befund
-- Ursache
-- konkrete Änderung
-- Tests positiv/negativ
-- geänderte Dateien
-- Commit(s)
-- offene Risiken
-
-Das zuständige Fachbüro entscheidet über jede Übernahme.
-
-
-## Frischeprüfung
-
-Vor Start UND vor Rückgabe:
-- offiziellen Campus-Ref frisch lesen;
-- CURRENT_STATE + HOBBYRAUM + relevante Fehler-/Zielquelle erneut prüfen;
-- wenn sich relevanter Stand/Schreibbereich geändert hat: `STALE_ASSIGNMENT`, keine weitere Änderung auf alter Annahme.
+Der zuständige Arbeitschat entscheidet über Übernahme/Anpassung/Verwerfen und aktualisiert danach allein die offizielle Campuswahrheit.

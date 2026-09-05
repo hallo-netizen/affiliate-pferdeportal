@@ -449,3 +449,36 @@ PASS.
 
 SERVERSEITIGE ERZWINGUNG:
 weiterhin BLOCKED bis Admin-Aktivierung von Security-PR #137.
+
+
+## BAU-027 – Paul brauchte noch manuelle Übergabedisziplin statt automatischem Campus-Pull
+
+STATUS: BLOCKED / SECURITY-MAINTENANCE
+
+KURZ:
+Pauls Eingang verlangte bereits frisches Lesen des Campus, aber kein technischer Mechanismus zwang ihn bei jedem Start automatisch dazu und band Branch/Scope/Frische maschinenlesbar.
+
+AUSWIRKUNG:
+Ein langer Worker-Chat hätte die Frischepflicht vergessen oder eine veraltete Branch-Kopie als Kontext verwenden können. Wiederkehrende Übergabeprompts wären als Ersatz ebenfalls fehleranfällig.
+
+KISS-FIX:
+- einzige Zuweisung = `PAUL_ASSIGNMENT_V1` im zuständigen HOBBYRAUM;
+- trusted `paul_scope_gate.py start/verify`;
+- automatische Verankerung in Root-`AGENTS.md` für `paul/*`;
+- hardlock-base prüft aktuelle Paul-Zuweisung und Write-Scope bei Paul-PRs;
+- temporäre Hash-Kapsel statt synchronisierter Zweitkopie.
+
+POSITIVER ARCHITEKTURFALL:
+Ein korrekt gebundener Auftrag mit passendem Paul-Branch/Basis/Scope darf starten.
+
+NEGATIVE FÄLLE:
+- kein aktiver Auftrag → `PAUL_NOT_ASSIGNED`;
+- mehrere aktive Aufträge → `PAUL_MULTIPLE_ASSIGNMENTS_BLOCKED`;
+- falscher Branch → `PAUL_BRANCH_MISMATCH_BLOCKED`;
+- falsche Basis → `PAUL_BASE_MISMATCH_BLOCKED`;
+- Write außerhalb Scope → `PAUL_WRITE_SCOPE_BLOCKED`;
+- relevante Quellenänderung → `STALE_ASSIGNMENT_BLOCKED`.
+
+AKTUELL:
+Implementierung im Security-PR #137 vorbereitet.
+Serverseitige/agentenseitige Vollaktivierung bleibt bis einmaliger Admin-Wartung BLOCKED.

@@ -122,3 +122,21 @@ Für jedes neue Projekt gilt:
 
 Leitsatz:
 **Single Writer, Multi Reader – keine Echtzeit-Synchronisation als Voraussetzung.**
+
+
+### Automatische Paul-Zuweisung bei neuen Projekten
+
+Neue Projekte verwenden für Paul ausschließlich das Schema aus
+`PAUL/AUFTRAG_VORLAGE.md`.
+
+Pflicht:
+- Zuweisung nur als `PAUL_ASSIGNMENT_V1` im zuständigen Hobbyraum;
+- campusweit maximal ein aktiver Paul-Auftrag;
+- exakter `TECHNICAL_BASE_SHA`;
+- exakter `PAUL_BRANCH`;
+- minimaler `WRITE_SCOPE` oder `READ_ONLY`;
+- nur Verweise auf autoritative TASK-/TARGET-/RULES-Quellen;
+- kein eigener Paul-Statusspeicher;
+- bei Beendigung aktiven Block entfernen.
+
+Damit gilt das automatische Paul-Modell auch für künftige Projektgebäude ohne neue Promptarchitektur.
