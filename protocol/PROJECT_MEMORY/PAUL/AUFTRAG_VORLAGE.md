@@ -8,6 +8,13 @@
 
 <Büro>
 
+## Offizieller Campus-Ref
+
+<aktueller Branch/Ref, aus dem CURRENT_STATE/HOBBYRAUM frisch gelesen werden>
+
+Beim aktuellen Prototyp:
+`hobbyroom/project-memory-campus-v1-20260905`
+
 ## Problem / Auftrag
 
 <genau eine Aufgabe>
@@ -72,3 +79,11 @@ Der Arbeitschat kann währenddessen nur an klar unabhängigen Bereichen weiterar
 - offene Risiken
 
 Das zuständige Fachbüro entscheidet über jede Übernahme.
+
+
+## Frischeprüfung
+
+Vor Start UND vor Rückgabe:
+- offiziellen Campus-Ref frisch lesen;
+- CURRENT_STATE + HOBBYRAUM + relevante Fehler-/Zielquelle erneut prüfen;
+- wenn sich relevanter Stand/Schreibbereich geändert hat: `STALE_ASSIGNMENT`, keine weitere Änderung auf alter Annahme.

@@ -304,3 +304,18 @@ LEITSATZ:
 
 BEZUG:
 ARCH-004, ARCH-044, ARCH-045; BAU-023.
+
+
+### 2026-09-05 – Paul-Frischeprüfung gegen Branch-Drift
+
+BEDARF:
+Auch bei sauberer Schreibtrennung kann Pauls eigener Branch eine ältere Kopie von CURRENT_STATE/HOBBYRAUM enthalten.
+
+KISS-FIX:
+- Paul-Branch ausdrücklich nur als technische Werkbank definiert;
+- offizieller Campus-Ref ist Quelle für Büro-/Statuswahrheit;
+- Frischeprüfung vor Start und vor Rückgabe;
+- relevanter Drift führt zu STALE_ASSIGNMENT statt Weiterarbeit auf altem Stand.
+
+BEZUG:
+ARCH-046.

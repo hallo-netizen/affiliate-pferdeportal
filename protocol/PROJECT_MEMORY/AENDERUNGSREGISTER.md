@@ -340,3 +340,12 @@ WARUM:
 Unabhängige Chats besitzen keine verlässliche Echtzeit-Synchronisation. Gleichzeitige Writes am selben Bereich erzeugen Konflikte, veraltete Annahmen und doppelte Wahrheiten.
 REGEL:
 Mehrere dürfen lesen. Parallel gearbeitet wird nur an klar unabhängigen Bereichen. Spezialworker liefern Lösungspakete; der zuständige Arbeitschat integriert.
+
+
+## ARCH-046 – Worker-Branches sind keine Statusquelle
+WAS:
+Pauls eigener Branch ist ausschließlich technische Werkbank. Büro-/Campusstand wird vor Start und vor Rückgabe frisch aus dem offiziellen Campus-Ref gelesen.
+WARUM:
+Branches synchronisieren sich nicht in Echtzeit. Eine PROJECT_MEMORY-Kopie auf einem Worker-Branch kann während paralleler Arbeit veralten.
+REGEL:
+Bei relevantem Drift `STALE_ASSIGNMENT` und stoppen; keine Lösung auf veralteter Annahme integrieren.

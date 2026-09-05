@@ -65,6 +65,10 @@ Paul schreibt keinen dieser Stände hier ein zweites Mal fort und verändert **k
 
 Die PROJECT_MEMORY erklärt und bindet den Stand.
 
+**Frischepflicht:** PROJECT_MEMORY immer vom aktuellen offiziellen Campus-Ref lesen, nicht aus einer möglicherweise veralteten Kopie auf Pauls Arbeitsbranch. Aktueller Prototyp-Ref: `hobbyroom/project-memory-campus-v1-20260905`.
+
+Vor Rückgabe CURRENT_STATE/HOBBYRAUM/Fehler-/Zielquelle erneut frisch lesen. Bei Drift: `STALE_ASSIGNMENT` statt Integration empfehlen.
+
 Die technische Fachwahrheit bleibt in den Originalquellen.
 
 Bei Widerspruch:

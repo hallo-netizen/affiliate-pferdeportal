@@ -53,6 +53,21 @@ Paul arbeitet ausschließlich auf eigenem Branch, z. B.:
 
 Damit ist keine Echtzeit-Synchronisation zwischen Chats nötig.
 
+## Frische-Regel – Paul-Branch ist keine Statusquelle
+
+Der Paul-Branch ist nur technische Werkbank.
+
+Vor Arbeitsbeginn und unmittelbar vor Rückgabe muss Paul den **aktuellen offiziellen Campus-Ref** frisch lesen:
+`protocol/PROJECT_MEMORY/START_HERE.md` → zuständiges Büro → `CURRENT_STATE.md` → `HOBBYRAUM.md`.
+
+Beim aktuellen Campus-Prototyp ist der offizielle Campus-Ref:
+`hobbyroom/project-memory-campus-v1-20260905`
+
+Die PROJECT_MEMORY-Kopie auf einem älteren Paul-Branch darf niemals als aktuell vorausgesetzt werden.
+
+Wenn sich der relevante Fachstand oder technische Schreibbereich seit Auftragsstart geändert hat:
+**STOPP / STALE_ASSIGNMENT – nicht auf veraltetem Stand weiterbauen.**
+
 ## Rückübernahme
 
 Paul liefert:

@@ -134,6 +134,8 @@ Dort liegen/verweisen:
 
 Paul arbeitet nur auf dem gebundenen Paul-Branch und nur im ausdrücklich benannten technischen Schreibbereich.
 
+Status-/Bürowahrheit liest Paul dagegen frisch vom offiziellen Campus-Ref; sein eigener Branch ist dafür keine Autorität. Vor Start und vor Rückgabe erneut prüfen.
+
 Harte Grenze:
 - `protocol/PROJECT_MEMORY/**` für Paul = READ ONLY;
 - keine Büro-/Status-/Register-/Archivänderungen durch Paul;
