@@ -55,3 +55,6 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-040 → jedes PROJECT_MEMORY-Verzeichnis mit START_HERE
 
 - ARCH-041 → Neubauvorlage erzwingt aktuellen Campusstandard
+
+- ARCH-042 → eine Wahrheit campusweit besser ausgeschildert
+- ARCH-043 → dynamische Fakten nicht in Wegweisern duplizieren
