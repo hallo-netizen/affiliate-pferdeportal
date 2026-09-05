@@ -314,7 +314,9 @@ def materialize(repo: Path, request_ref: str) -> dict:
         if not proof_path.is_file() or _sha(proof_path) != row["sha256"]:
             raise Blocked("FACH_STAGE_HASH_MISMATCH:" + str(stage))
         proof = _load(proof_path)
-        if stage == "ppm" and isinstance(proof.get("ppm679_binding"), dict):
+        if stage == "ppm":
+            if not isinstance(proof.get("ppm679_binding"), dict):
+                raise Blocked("PPM679_REAL_BINDING_MISSING")
             proof = _real_ppm_stage(repo, request, root, proof_path, proof)
             row = {"stage": stage, "ref": row["ref"], "sha256": _sha(proof_path)}
         expected = {"contract": STAGE_CONTRACT, "status": "PASS", "batch_sha256": batch,
