@@ -53,3 +53,5 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-039 → Tresor blockiert korrekt an Roharchiv-Redundanz
 
 - ARCH-040 → jedes PROJECT_MEMORY-Verzeichnis mit START_HERE
+
+- ARCH-041 → Neubauvorlage erzwingt aktuellen Campusstandard

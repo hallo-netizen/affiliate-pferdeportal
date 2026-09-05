@@ -299,3 +299,10 @@ WARUM:
 „Egal wo man eintritt“ darf nicht nur für ausgewählte Haupttüren gelten.
 ABNAHMEBELEG 2026-09-05:
 22/22 PROJECT_MEMORY-Verzeichnisse mit START_HERE; 22/22 Eingänge erfüllen nach Reparatur die 1-Klick-Pflicht.
+
+
+## ARCH-041 – Neubauvorlage muss aktuellen Campusstandard erzwingen
+WAS:
+NEUES_PROJEKT_VORLAGE bindet künftig Flur-/START_HERE-Regel, Büro-Kommunikationsleitungen, Hobbyraum-Standard und Positiv-/Negativ-Abnahme.
+WARUM:
+Die Bauabnahme darf nicht nur den heutigen Bestand reparieren; neue Gebäude dürfen alte Architekturfehler nicht reproduzieren.

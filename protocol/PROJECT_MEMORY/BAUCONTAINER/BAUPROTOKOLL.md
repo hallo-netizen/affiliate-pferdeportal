@@ -240,3 +240,20 @@ NEGATIV / BEWUSST OFFEN:
 GESAMT:
 Architektur/Navigations-/Rollenabnahme PASS.
 Vollständiger Sicherheits-/Katastrophen-PASS BLOCKED.
+
+
+### 2026-09-05 – Bauabnahme: Neubauvorlage gegen aktuellen Standard gehärtet
+
+BEFUND:
+Die bestehende Projektvorlage kannte den ursprünglichen 1-Klick-Standard, aber noch nicht alle späteren Regeln aus ARCH-032 bis ARCH-040.
+
+KISS-FIX:
+Vorlage ergänzt um:
+- START_HERE für jedes neue Verzeichnis;
+- stabile Adressen;
+- zentrale Büro-Leitungen;
+- Hobbyraum-Standard;
+- Positiv-/Negativ-Abnahme.
+
+BEZUG:
+ARCH-041 / BAU-020.
