@@ -20,16 +20,17 @@ aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelwe
 **ALS NÄCHSTES …**  
 `START_HERE.md` → `CURRENT_STATE.md`; ohne neuen Auftrag FREI lassen.
 
-## Letzte abgeschlossene Arbeit
 
-- 1.50.469 Plugin/Master vollständig geprüft;
-- 792/792 Mastermanifest OK;
-- Dubletten erkannt;
-- Roharchive persistent gespeichert;
-- aktuelles GitHub main geprüft: 1.50.421;
-- Design-Fachbranches V104 und 1.50.470/.471/.472 geprüft;
-- 1.50.472 LIVE PASS gefunden und als aktuelle Live-Wahrheit gebunden;
-- Universal 2.2.40/V104 separat bestätigt;
-- finale 1.50.472-Roh-ZIPs als Archivlücke markiert.
+## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
-Keine Designänderung vorgenommen.
+- **BÜROSTAND:** `CURRENT_STATE.md`
+- **AKTUELLER AUFTRAG / NEXT ACTION:** ausschließlich diese `HOBBYRAUM.md`
+- **CURRENT_BLOCKER:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Quelle
+- **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+- **NICHT ANFASSEN / WARUM:** nicht hier duplizieren → Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+
+**Wenn zwei Angaben widersprechen:** nicht raten. Die oben benannte autoritative Quelle gewinnt.
+
+## Historie
+
+Nicht hier dupliziert. Siehe `CURRENT_STATE.md`, `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` und `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`.

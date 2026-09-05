@@ -17,6 +17,18 @@ aus dem bloßen Betreten dieses Büros Schreibrechte ableiten, Fachregeln eigenm
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `HOBBYRAUM.md` → `QUELLEN_AKTUELL/START_HERE.md` → gebundener Ziel-/Arbeitsweg.
 
+
+## SCHNELLWEGWEISER – EINE WAHRHEIT
+
+- **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
+- **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
+- **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
+- **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+
+**Regel:** Diese Bürotür wiederholt keinen aktuellen Blocker, keine aktuelle Version und keinen Zielinhalt als zweite Wahrheit.
+
 ## Hauptquellen
 
 GitHub:

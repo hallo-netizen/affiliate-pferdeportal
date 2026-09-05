@@ -20,10 +20,17 @@ aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelwe
 **ALS NÄCHSTES …**  
 `START_HERE.md` → `CURRENT_STATE.md`; ohne neuen Auftrag FREI lassen.
 
-## Letzte abgeschlossene Arbeit
 
-- allgemeine Bildzentrale 2.6.9 + Nullpunkt 069 zusammengeführt;
-- Pferde Master 049 + Plugin 2.4.9 historisch eingeordnet;
-- Projekt-Konfig-/Migrationsbelege zugeordnet;
-- Roharchive unverändert abgelegt;
-- keine Bildlogik, Promptregel oder Pluginquelle verändert.
+## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
+
+- **BÜROSTAND:** `CURRENT_STATE.md`
+- **AKTUELLER AUFTRAG / NEXT ACTION:** ausschließlich diese `HOBBYRAUM.md`
+- **CURRENT_BLOCKER:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Quelle
+- **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+- **NICHT ANFASSEN / WARUM:** nicht hier duplizieren → Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+
+**Wenn zwei Angaben widersprechen:** nicht raten. Die oben benannte autoritative Quelle gewinnt.
+
+## Historie
+
+Nicht hier dupliziert. Siehe `CURRENT_STATE.md`, `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` und `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`.

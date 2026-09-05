@@ -70,3 +70,15 @@ Jeder Büro-`HOBBYRAUM.md` beginnt ebenfalls mit der 1-KLICK-ÜBERSICHT:
 - ALS NÄCHSTES …
 
 Damit bleibt auch ein direkter Link in den Hobbyraum selbsterklärend.
+
+
+## Arbeitskontrollpunkt
+
+Jeder Hobbyraum zeigt nur:
+- Bürostand → CURRENT_STATE
+- aktuelle Arbeit / NEXT ACTION → HOBBYRAUM selbst
+- Fehler → FEHLERREGISTER → Originalquelle
+- Ziel → Zielvertragsregister → Hauptquelle
+- Begründung → AENDERUNGSREGISTER
+
+Fachstand, Fehlertext und Zielinhalt werden dort nicht nochmals gepflegt.

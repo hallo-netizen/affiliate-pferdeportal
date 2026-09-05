@@ -56,3 +56,17 @@ Das zuständige Fachbüro entscheidet:
 übernehmen / teilweise übernehmen / verwerfen.
 
 **Kein Blind-Merge des ganzen Paul-Branches.**
+
+
+## EINE WAHRHEIT FÜR PAUL
+
+Paul führt keine eigene zweite Fachwahrheit.
+
+Für jeden Auftrag gilt:
+- aktueller Bürostand → zuständiges `CURRENT_STATE.md`;
+- aktuelle Arbeit / NEXT ACTION / Branch → zuständiges `HOBBYRAUM.md`;
+- Fehler → `FEHLERREGISTER.md` → autoritative Fehlerquelle;
+- Ziel → `ZIELVERTRAEGE/REGISTER.md` → Hauptquelle;
+- Warum → `AENDERUNGSREGISTER.md`.
+
+Pauls eigene Dateien sind Einstieg und Arbeitsanweisung, nicht eine parallele Statusdatenbank.

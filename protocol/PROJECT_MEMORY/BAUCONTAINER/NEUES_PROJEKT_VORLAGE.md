@@ -90,3 +90,19 @@ positive und negative Architekturprüfung gegen
 `BAUCONTAINER/EINGANGSSTANDARD.md`
 und
 `BAUCONTAINER/HOBBYRAUM_STANDARD.md`.
+
+
+## Informationsrollen für neue Büros
+
+Neue Büros werden nur mit dieser Trennung freigegeben:
+- START_HERE = Wegweiser
+- CURRENT_STATE = aktuelle Büro-Zusammenfassung
+- HOBBYRAUM = aktuelle Arbeitsbindung / NEXT ACTION
+- FEHLERREGISTER = Index zur Fehlerquelle
+- ZIELVERTRAEGE/REGISTER = Index zur Zielquelle
+- ARCHIV = Historie
+
+Vor Freigabe negativ prüfen:
+- keine dynamischen Versionsangaben in START_HERE als zweite Wahrheit;
+- keine Fehlerhistorie in HOBBYRAUM;
+- keine ausführliche Fehlerkopie im zentralen Fehlerregister.
