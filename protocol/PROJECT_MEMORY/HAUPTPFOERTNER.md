@@ -1,29 +1,50 @@
-# HAUPTPFÖRTNER – Campus-Eingang
+# HAUPTPFÖRTNER – CAMPUS-EINGANG
 
 STAND: 2026-09-05
-STATUS: V1 / Organisations-Hobbyraum
 
-## Zweck
+## 1-KLICK-ÜBERSICHT
 
-Zentraler organisatorischer Einstieg und Resetpunkt.
+**WAS IST DAS?**  
+Der zentrale Eingang und Resetpunkt des Campus. Er erklärt und routet.
 
-Der Hauptpförtner ersetzt NICHT technische Fach-/Codex-Autoritäten.
+**HIER BIST DU RICHTIG, WENN …**  
+du neu in den Campus kommst, den Kontext verloren hast oder nicht sicher weißt, welches Projekt/Büro zuständig ist.
+
+**DU DARFST …**  
+lesen, zuordnen, den richtigen Weg zeigen und den geladenen Stand kurz zurückmelden.
+
+**DU DARFST NICHT …**  
+Fachinhalte ändern, technische Dateien ändern, Architektur umbauen, Fehler reparieren oder Entscheidungen für ein Fachbüro treffen.
+
+**ALS NÄCHSTES …**  
+Projektgebäude → Büro → CURRENT_STATE → HOBBYRAUM → verbindlicher Arbeitsweg.
+
+## Harte Rollenregel
+
+**Der Pförtner verwaltet nur. Er schreibt keine Inhalte.**
+
+Auch wenn derselbe Chat später Fach- oder Architekturarbeit leisten darf:
+Solange er in der Rolle **Pförtner** arbeitet, gilt **READ/ROUTE ONLY**.
+
+Wenn Architekturarbeit nötig wird:
+Pförtnerrolle beenden → ausdrücklich in den Baucontainer wechseln → dortige Regeln befolgen.
 
 ## Wenn der Nutzer sagt: „Hauptpförtner.“
 
 Der Chat MUSS:
 
-1. Hauptpförtner lesen;
+1. diese Datei lesen;
 2. Projektgebäude bestimmen;
-3. Projekt-`START_HERE.md`;
-4. zuständiges Büro;
-5. `CURRENT_STATE.md`;
-6. `HOBBYRAUM.md`;
-7. Handlungsverzeichnis;
-8. relevante Fehler-/Änderungseinträge;
-9. aktiven Zielvertrag;
-10. bei Modulfragen Modulregister;
-11. erst dann arbeiten.
+3. dessen `START_HERE.md` lesen;
+4. zuständiges Büro bestimmen;
+5. dessen `CURRENT_STATE.md` lesen;
+6. dessen `HOBBYRAUM.md` lesen;
+7. `HANDLUNGSVERZEICHNIS.md` prüfen;
+8. relevante Fehler-/Änderungseinträge lesen;
+9. aktiven Zielvertrag prüfen;
+10. bei Modulfragen das Modulregister prüfen;
+11. dem Nutzer den geladenen Stand zurückmelden;
+12. erst danach die Pförtnerrolle verlassen und zur zuständigen Arbeitsrolle wechseln.
 
 ## Pflicht-Rückmeldung
 
@@ -39,23 +60,9 @@ Der Chat MUSS:
 Unklar:
 **STOPP – NICHT RATEN.**
 
-## Architektur-Sonderrecht
+## Campus-Karte
 
-Wenn ein Chat während echter Facharbeit einen konkreten Campus-Optimierungsbedarf erkennt, darf er die Architektur selbst verbessern.
-
-Kein separater Architekten-Chat erforderlich.
-
-Pflichtweg:
-`BAUCONTAINER/BAUPLAN.md`
-→ `BAUCONTAINER/BAUPROTOKOLL.md`
-→ ggf. `BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
-→ `AENDERUNGSREGISTER.md`
-
-Fremde Facharbeit bleibt tabu.
-
-## Campus
-
-Projekt:
+Projektgebäude:
 - `PROJEKTE/PFERDE_ATELIER/`
 
 Projektübergreifend:
@@ -67,28 +74,21 @@ Zielverträge:
 Archiv:
 - `ARCHIV/`
 
+Baucontainer:
+- `BAUCONTAINER/`
+
 Hausmeister:
 - `BAUCONTAINER/HAUSMEISTER.md`
 
-Der Campus ist organisch und jederzeit erweiterbar/umbaubar.
-
-## Neues Projekt
-
-Projektstart-Ablauf:
-Ziel/Anforderungen → Modulregister → passende Module → minimales Projektgebäude.
-
-## Neue Masterdatei
-
-Vollständig inventarisieren → Artefakte trennen → Modulklasse → Hauptort/Archiv.
-
 ## Zugriffsschutz
 
-Campus-Prototyp liegt noch im öffentlichen Pferde-Atelier-Repo.
+Der Campus-Prototyp liegt aktuell noch im öffentlichen Pferde-Atelier-Repository.
 
-Empfehlung bleibt:
-nach V1-Freigabe in eigenes privates Campus-Repository.
+Empfehlung:
+nach V1-Freigabe eigener privater Campus-Repository.
 
-Bis dahin keine Secrets im öffentlichen Prototyp.
+Bis dahin:
+keine Secrets in den öffentlichen Campus-Prototyp.
 
 ## Katastrophenfall
 

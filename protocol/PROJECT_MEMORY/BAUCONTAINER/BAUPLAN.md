@@ -2,7 +2,6 @@
 
 STAND: 2026-09-05
 STATUS: V1
-TECHNISCHER ORT: `protocol/PROJECT_MEMORY/`
 
 ## Grundmodell
 
@@ -12,9 +11,8 @@ CAMPUS
 ├── PROJEKTGEBÄUDE
 │   └── BÜRO
 │       └── HOBBYRAUM
-└── PROJEKTÜBERGREIFENDES GEBÄUDE
-    └── ALLGEMEINGÜLTIGE BAUSTEINE
-        └── MODULREGISTER
+└── ALLGEMEINGÜLTIGE BAUSTEINE
+    └── MODULREGISTER
 ```
 
 Seitlich:
@@ -29,116 +27,105 @@ Seitlich:
 - Paul
 - Notfall-Tresor
 
+## Verbindlicher Eingangsstandard
+
+Siehe:
+`EINGANGSSTANDARD.md`
+
+Campus-, Gebäude-, Büro- und Paul-Eingänge müssen oben sofort erklären:
+**Was ist das? Wo bin ich richtig? Was darf ich? Was darf ich nicht? Wo geht es weiter?**
+
+Grundsatz:
+**Ein Klick = alles klar.**
+
+## Verwaltungsrollen – harte Grenze
+
+### Hauptpförtner
+Nur:
+- lesen;
+- orientieren;
+- routen;
+- Stand zurückmelden.
+
+Nie:
+- Fachinhalt ändern;
+- Architektur ändern;
+- technische Arbeit ausführen.
+
+### Hausmeister
+Nur:
+- unveränderte historische Akten ordnen/verschieben;
+- Archiv-/Hausmeister-Indizes pflegen;
+- Hashes/Dubletten dokumentieren;
+- Aufräumbedarf melden.
+
+Nie:
+- Fachinhalte editieren;
+- CURRENT_STATE/START_HERE/HOBBYRAUM umschreiben;
+- Status fachlich neu bewerten;
+- reparieren;
+- löschen.
+
+## Rollentrennung
+
+Ein Chat darf mehrere Rollen nacheinander haben.
+
+Aber:
+**Rolle bestimmt Rechte.**
+
+Beispiel:
+Pförtner liest/routet → Pförtnerrolle endet → erst danach beginnt Facharbeit.
+
+Architekturänderung:
+Pförtner-/Hausmeisterrolle verlassen → ausdrücklich Baucontainer-Rolle → Bauprotokoll + Änderungsregister.
+
 ## Organischer Grundsatz
 
-Der Campus ist ein wachsender Prozess, kein starres Endmodell.
+Der Campus ist ein wachsender Prozess.
 
-Neue Erkenntnisse dürfen Räume, Büros, Abteilungen, Projektgebäude und projektübergreifende Module ergänzen sowie nach dokumentierter Prüfung zusammenlegen oder zurückbauen.
+Jeder Chat darf bei echtem Arbeitsbedarf die Architektur verbessern, aber nur in der Baucontainer-Rolle und mit KISS/Protokollpflicht.
 
-Kein Gesamtneubau nur wegen neuer Erkenntnisse.
 Keine Räume auf Vorrat.
-
-## Architektur-Sonderrecht für jeden Chat
-
-**Jeder Chat darf die Campus-Architektur verbessern**, wenn in seiner realen täglichen Facharbeit ein konkreter Optimierungsbedarf sichtbar wird.
-
-Dafür braucht es keinen speziellen „Architekten-Chat“.
-
-Dieses Sonderrecht durchbricht die normale Büro-Schreibgrenze NUR für die Architektur-Ebene.
-
-Erlaubt:
-- Baucontainer;
-- Hauptpförtner;
-- Handlungsverzeichnis;
-- Modulregister-Struktur;
-- Zielvertrags-/Archivstruktur;
-- andere reine Campus-Navigations-/Architekturakten.
-
-Nicht erlaubt:
-- fremde Facharbeit nebenbei verändern;
-- Maschinenraum ohne Fachauftrag umbauen;
-- Architektur „vorsorglich“ neu erfinden.
-
-Pflicht bei jeder Architekturänderung:
-1. echter Bedarf aus der Arbeit;
-2. KISS – kleinste nachhaltige Änderung;
-3. `BAUPROTOKOLL.md` aktualisieren;
-4. dauerhaftes WARUM im `AENDERUNGSREGISTER.md`;
-5. bei echtem Architekturfehler `ARCHITEKTUR_FEHLERKISTE.md`;
-6. vorhandene Hardlocks/Prüfungen bestehen.
 
 ## Architektur beobachtet sich selbst
 
-Der Baucontainer verwaltet nicht nur den Bauplan, sondern auch seine eigene Qualität:
+- `BAUPLAN.md` → aktuelle Architektur
+- `BAUAENDERUNGEN.md` → dauerhafte Umbauten
+- `BAUPROTOKOLL.md` → chronologisches Baugeschehen
+- `ARCHITEKTUR_FEHLERKISTE.md` → Architekturfehler
+- `HAUSMEISTER.md` → reine Ordnungsverwaltung
+- `EINGANGSSTANDARD.md` → 1-Klick-Orientierung
 
-- `BAUPLAN.md` → aktuelle Architektur;
-- `BAUAENDERUNGEN.md` → Index dauerhafter Umbauten;
-- `BAUPROTOKOLL.md` → chronologisches Baugeschehen;
-- `ARCHITEKTUR_FEHLERKISTE.md` → Fehler des Campus/Architekten selbst;
-- `HAUSMEISTER.md` → schlanke laufende Ordnung.
+## Hauptwahrheit
 
-Damit gelten Fehler-/Lernregeln nicht nur für Fachinhalte, sondern auch für die Architektur selbst.
+Für jede Wahrheit möglichst ein Hauptort.
 
-## Hauptwahrheits-Regel
+Allgemeiner Modul-Kern:
+ALLGEMEINGÜLTIGE BAUSTEINE.
 
-Für jede Wahrheit möglichst genau ein Hauptort.
+Projektbezogene Nutzung:
+Projektbüro.
 
-Bei Modulen:
-- allgemeiner Modul-Kern → ALLGEMEINGÜLTIGE BAUSTEINE;
-- projektspezifische Nutzung → Projektbüro;
-- keine doppelte vollständige Modulwahrheit.
+## Projektstart
 
-## Modulregister
-
-`ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md`
-
-ist der zentrale Karteikasten für Grundmodule, keine technische Engine.
-
-## Projektstart / Oberwachtmeister
-
-„Oberwachtmeister“ ist nur der Projektstart-Ablauf:
-Hauptpförtner → Anforderungen/Zielvertrag → Modulregister → passende Module → minimales Projektgebäude.
+Hauptpförtner → Ziel/Anforderungen → Modulregister → passende Module → minimales Projektgebäude.
 
 ## Masterdateien
 
-Alles wird vollständig inventarisiert.
-Siehe `MASTERDATEIEN_REGEL.md`.
-
+Alles vollständig inventarisieren.
 Default bei unklarer Modulzuordnung:
 **UNGEKLÄRT.**
 
-## Hausmeister
+## Zugriffsschutz
 
-`HAUSMEISTER.md`
+Campus-Prototyp aktuell unter `protocol/PROJECT_MEMORY/`.
 
-hält produktive Räume schlank.
-Er archiviert nur eindeutig historische, vollständig zugeordnete Dinge.
-AKTIV und UNGEKLÄRT sind tabu.
-Er löscht nichts.
-
-## Technischer Ablagegrundsatz
-
-Campus-Prototyp aktuell unter `protocol/PROJECT_MEMORY/`, weil bestehender `hardlock` `protocol/**` abdeckt.
-
-Offene Architekturfrage:
+Offene Empfehlung:
 später eigener privater Campus-Repository.
-
-## Pflegegrundsatz
-
-- verifizierter Fachschritt → CURRENT_STATE;
-- realer Fachfehler → Fehlerregister;
-- wichtige Fach-/Architekturänderung → Änderungsregister mit WARUM;
-- Gebäudestruktur → Baucontainer;
-- Architekturfehler → Architektur-Fehlerkiste;
-- Architekturarbeit → Bauprotokoll;
-- neues/neu bewertetes Modul → Modulregister;
-- Masterakte → vollständiges Büro-Inventar;
-- Aufräumvorgang → Hausmeister-Protokoll.
 
 ## Notfall-Tresor
 
 Nur geprüfter `TRESOR_PASS`-Stand ist Wiederherstellungsquelle.
-Alte gültige PASS-Stände nicht überschreiben.
 
 ## Umbauprinzip
 

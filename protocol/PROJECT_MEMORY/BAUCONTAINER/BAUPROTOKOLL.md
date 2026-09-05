@@ -6,51 +6,46 @@ STAND: 2026-09-05
 
 Chronologisches Arbeitsprotokoll für den Campus selbst.
 
-Hier steht NICHT die ganze Begründung einer Architekturentscheidung.
-Dafür bleibt das zentrale `AENDERUNGSREGISTER.md` autoritativ.
-
-Das Bauprotokoll hält knapp fest:
-- wann etwas am Campus verändert wurde;
-- aus welchem realen Arbeitsbedarf heraus;
-- welcher ARCH-/BAU-Fehler-Eintrag dazugehört;
-- welche Dateien betroffen waren;
-- welcher Prüfstand erreicht wurde.
+Die ausführliche dauerhafte Begründung liegt im `AENDERUNGSREGISTER.md`.
 
 ## Pflichtregel
 
-Jeder Chat, der die Architektur verändert, ergänzt dieses Protokoll im selben Arbeitsschritt.
-
-Keine Architekturänderung ohne:
-1. konkreten Bedarf;
-2. KISS-Prüfung;
-3. Bauprotokoll;
-4. Änderungsregister mit WARUM, wenn die Änderung dauerhaft relevant ist;
-5. Architektur-Fehlerkiste, wenn ein echter Architekturfehler entdeckt wurde.
+Jeder Chat, der Architektur verändert, protokolliert:
+- konkreten Bedarf;
+- kleinste Änderung;
+- betroffene Architekturakten;
+- ARCH-/BAU-Fehler-Bezug;
+- Prüfstand.
 
 ## Bisherige Bauereignisse
 
 ### 2026-09-05 – Campus-Prototyp
-ERGEBNIS:
-Campus → Projektgebäude → Büro → Hobbyraum als Grundmodell angelegt.
-BEZUG:
-ARCH-001 bis ARCH-006.
-PR:
-#134.
+Campus → Projektgebäude → Büro → Hobbyraum.
+BEZUG: ARCH-001 bis ARCH-006.
+PR: #134.
 
 ### 2026-09-05 – Organischer Ausbau
-ERGEBNIS:
-BILD-Büro, allgemeingültige Bausteine, Modulregister und Masterdateien-Regel ergänzt.
-BEZUG:
-ARCH-008 bis ARCH-014.
+BILD, allgemeingültige Bausteine, Modulregister, Masterdateien-Regel.
+BEZUG: ARCH-008 bis ARCH-014.
 
 ### 2026-09-05 – Zielverträge und Archiv
-ERGEBNIS:
-zentraler Zielvertragsraum und Campus-Archiv-Eingang ergänzt.
-BEZUG:
-ARCH-015 bis ARCH-017.
+Zielvertragsraum + Campus-Archiv-Eingang.
+BEZUG: ARCH-015 bis ARCH-017.
 
 ### 2026-09-05 – Architektur-Selbstpflege
+Architektur-Sonderrecht, Bauprotokoll, Architektur-Fehlerkiste, Hausmeister.
+BEZUG: ARCH-018 bis ARCH-020.
+
+### 2026-09-05 – Verwaltungsrollen hart getrennt + 1-Klick-Eingänge
+BEDARF:
+Pförtner/Hausmeister dürfen Inhalte nicht anfassen. Neue Chats müssen an jeder Ebene sofort verstehen, wo sie sind und was gilt.
+
 ERGEBNIS:
-Architektur-Sonderrecht für jeden Chat, Bauprotokoll, Architektur-Fehlerkiste und Hausmeisterprozess ergänzt.
+- Pförtner = READ/ROUTE ONLY;
+- Hausmeister = ORDNEN/VERSCHIEBEN OHNE INHALTSÄNDERUNG;
+- `EINGANGSSTANDARD.md`;
+- Campus-, Projekt-, Büro- und Paul-Eingänge auf 1-KLICK-ÜBERSICHT vereinheitlicht;
+- neue Projektvorlage erzwingt denselben Standard.
+
 BEZUG:
-ARCH-018 bis ARCH-020.
+ARCH-021, ARCH-022.

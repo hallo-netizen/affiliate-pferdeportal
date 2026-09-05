@@ -3,47 +3,32 @@
 STAND: 2026-09-05
 STATUS: IM AUFBAU
 
-## Zweck
+## 1-KLICK-ÜBERSICHT
 
-Hier liegen die Hauptorte nachweislich projektübergreifender Module.
+**WAS IST DAS?**  
+Das projektübergreifende Gebäude für nachweislich allgemeingültige Module.
 
-Zentraler Karteikasten:
-`MODULREGISTER.md`
+**HIER BIST DU RICHTIG, WENN …**  
+du wissen willst, welche Grundmodule bereits existieren oder ein Modul projektübergreifend nutzen willst.
 
-Das Modulregister ist der Eingang dieses Gebäudes, kein zusätzliches Fachbüro.
+**DU DARFST …**  
+das Modulregister lesen, den Hauptort eines Moduls öffnen und passende allgemeine Module referenzieren.
+
+**DU DARFST NICHT …**  
+projektspezifische Konfiguration als allgemeine Wahrheit ablegen, Modul-Kerne doppeln oder ungeklärte Module als allgemein freigeben.
+
+**ALS NÄCHSTES …**  
+`MODULREGISTER.md` → nur das tatsächlich relevante Modul.
 
 ## KISS-Regel
 
-- ein Modul-Kern = genau ein Hauptort;
+- ein Modul-Kern = ein Hauptort;
 - Projektanwendungen = Verweis + Konfiguration + Projekthistorie;
-- keine vollständigen Modul-Kopien als zweite Wahrheit;
+- keine doppelte Hauptwahrheit;
 - unklare Module bleiben UNGEKLÄRT;
-- keine Module auf Vorrat erfinden.
+- keine Module auf Vorrat.
 
 ## Neues Projekt
 
-Der Projekt-Aufsetzer („Oberwachtmeister“) ist kein eigener Agent und kein Büro.
-Er bezeichnet nur den Projektstart-Ablauf.
-
-Er:
-1. liest den Hauptpförtner;
-2. erfasst die Projektanforderungen;
-3. liest das Modulregister;
-4. wählt nur passende Module;
-5. liest nur deren relevante Hauptakten;
-6. legt die projektspezifische Nutzung im neuen Projektgebäude an;
-7. baut nur, was tatsächlich fehlt.
-
-Er liest NICHT blind alle Module und nicht den gesamten Campus.
-
-## Neue Masterdatei
-
-Masterdateien werden zuerst vollständig inventarisiert.
-Danach werden:
-- Modul-Kern;
-- Projektkonfiguration;
-- Daten;
-- Historie;
-- Fehler-/Testbelege
-
-sauber getrennt und den richtigen Orten zugeordnet.
+Projektstart:
+Hauptpförtner → Anforderungen → Modulregister → nur passende Module → minimales Projektgebäude.

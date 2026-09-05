@@ -1,84 +1,95 @@
 # CAMPUS-HAUSMEISTER
 
 STAND: 2026-09-05
-STATUS: WARTUNGSPROZESS
+STATUS: REINER VERWALTUNGSPROZESS
 
-## Rolle
+## 1-KLICK-ÜBERSICHT
 
-Der Hausmeister ist KEIN neuer Super-Agent, kein Fachbüro und kein Entscheider über fachliche Wahrheit.
+**WAS IST DAS?**  
+Der Ordnungsdienst des Campus.
 
-Er ist ein wiederholbarer Wartungsprozess mit einem Ziel:
+**HIER BIST DU RICHTIG, WENN …**  
+historischer Ballast sauber archiviert, Dubletten erfasst oder Ablagen geordnet werden sollen.
 
-**Produktive Räume so schlank wie möglich halten, ohne Wissen zu verlieren.**
+**DU DARFST …**  
+unveränderte historische Akten verschieben, Archiv-/Hausmeister-Indizes pflegen, Hashes/Dubletten dokumentieren und Aufräumbedarf melden.
 
-## Was er regelmäßig prüft
+**DU DARFST NICHT …**  
+Fachinhalte ändern, CURRENT_STATE umschreiben, START_HERE umschreiben, HOBBYRAUM ändern, Zielverträge verändern, Fehler bewerten/reparieren oder technische Logik verändern.
 
-- erledigte Hobbyraumakten;
-- alte Übergaben;
-- abgelöste Zielverträge;
+**ALS NÄCHSTES …**  
+Status prüfen → Referenzen prüfen → unverändert archivieren → Hausmeister-Protokoll.
+
+## Harte Rollenregel
+
+**Der Hausmeister verwaltet nur. Finger weg von den Inhalten.**
+
+Er darf eine Akte als Ganzes unverändert verschieben, wenn sie eindeutig historisch/abgelöst und vollständig zugeordnet ist.
+
+Er darf NICHT den Inhalt einer Fachakte „verschlanken“, umformulieren, korrigieren oder neu bewerten.
+
+Wenn eine Fachakte selbst geändert werden muss:
+zuständiges Fachbüro übernimmt.
+
+## Was er prüfen darf
+
+- erledigte/historische Übergaben;
+- abgelöste Zielvertragsfassungen;
 - historische Protokolle;
 - alte Plugin-/Code-Stände;
 - Dubletten;
-- veraltete Verweise;
-- aufgeblähte CURRENT_STATE-Dateien;
-- Material, das eindeutig nur noch historisch ist;
-- Archivkandidaten aus Masterdatei-Inventaren.
+- Archivkandidaten;
+- tote oder veraltete reine Verwaltungsverweise;
+- Ballastverdacht.
 
 ## Was er tun darf
 
-1. HISTORISCH klar belegtes Material dem Archiv zuordnen;
-2. Verweise auf den neuen Archivort aktualisieren;
-3. Dubletten per Hash kennzeichnen;
-4. produktive CURRENT_STATE-/START_HERE-Dateien auf aktuelle Wahrheit + notwendige Verweise reduzieren;
-5. erledigte Hobbyräume nach vollständiger Übernahme wieder auf FREI setzen;
-6. Aufräumvorgänge im `ARCHIV/HAUSMEISTER_PROTOKOLL.md` dokumentieren;
-7. Architekturballast als BAU-Fehler melden.
+1. eindeutig HISTORISCHE/ABGELÖSTE Dateien **byte-/inhaltlich unverändert** ins Archiv verschieben;
+2. Archivindex und `ARCHIV/HAUSMEISTER_PROTOKOLL.md` pflegen;
+3. Hashes und Dubletten dokumentieren;
+4. nicht mehr gültige reine Archiv-/Verwaltungsverweise aktualisieren;
+5. Fachbüros auf nötige Inhalts-/Pointeränderungen hinweisen;
+6. Architekturballast als BAU-Fehler melden.
 
-## Was er NICHT tun darf
+## Was er ausdrücklich NICHT tun darf
 
+- Fachdateien editieren;
+- CURRENT_STATE verkürzen;
+- START_HERE verändern;
+- HOBBYRAUM auf FREI setzen;
+- Fachstatus ändern;
 - AKTIV verschieben;
 - UNGEKLÄRT verschieben;
-- autoritative Fehlerquellen/Testquellen archivieren, solange sie aktiv referenziert werden;
-- offene Zielverträge verschieben;
-- Fachregeln ändern;
-- technische Maschinenwege umbauen;
-- Dateien löschen, nur weil sie alt aussehen;
-- Branches/PRs schließen oder löschen ohne separate belegte Prüfung;
-- Rohdateien mit Secrets in ein öffentliches Archiv kopieren.
+- offene Zielverträge verändern/verschieben;
+- autoritative aktive Fehler-/Testquellen archivieren;
+- technische Maschinenwege verändern;
+- Dateien löschen;
+- Branches/PRs schließen/löschen;
+- Secrets in öffentliche Archive kopieren.
 
 ## Vor jeder Verschiebung
 
 Pflicht:
+
 1. Status eindeutig HISTORISCH/ABGELÖST;
-2. aktuelle Referenzen prüfen;
+2. Datei bleibt unverändert;
 3. Hash/Identität festhalten;
-4. Ziel im Archiv festlegen;
-5. alle aktiven Verweise aktualisieren;
-6. Hausmeister-Protokoll ergänzen.
+4. aktive Referenzen prüfen;
+5. falls eine Fachdatei ihren Verweis ändern müsste: **STOPP → Fachbüro**;
+6. Archivziel festlegen;
+7. Hausmeister-Protokoll ergänzen.
 
-Wenn eine Bedingung fehlt:
-**NICHT VERSCHIEBEN → UNGEKLÄRT/ARCHIVKANDIDAT.**
+Fehlt etwas:
+**NICHT VERSCHIEBEN.**
 
-## Regelmäßigkeit
+## Rhythmus
 
-KISS statt Dauer-Automatik:
+Kleiner Check:
+bei abgeschlossenem Hobbyraum oder größerer Masterdatei-Aufnahme.
 
-### Kleiner Hausmeister-Check
-bei Abschluss eines Hobbyraums oder einer größeren Masterdatei-Aufnahme:
-- ist etwas eindeutig historisch geworden?
-- kann CURRENT_STATE schlanker werden?
-- sind alle Verweise aktuell?
-
-### Großer Hausmeister-Check
-periodisch oder vor einem neuen Tresor-/Backup-Gesamtstand:
-- projektübergreifender Ballastcheck;
-- Archivkandidaten;
-- Dubletten;
-- veraltete Verweise;
-- offene Architekturballast-Fehler.
-
-Eine feste Zeitautomatik ist optional und wird erst eingerichtet, wenn der gewünschte Rhythmus feststeht.
+Großer Check:
+periodisch oder vor einem neuen Tresor-/Backup-Gesamtstand.
 
 ## Grundsatz
 
-**Aufräumen = verschieben und verweisen, nicht Wissen vernichten.**
+**Ordnen, nicht bearbeiten. Verschieben, nicht umschreiben. Erhalten, nicht löschen.**

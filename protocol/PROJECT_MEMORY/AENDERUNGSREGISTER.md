@@ -119,3 +119,26 @@ Nur eindeutig HISTORISCH/ABGELÖST nach Referenzprüfung archivieren; AKTIV/UNGE
 BELEG:
 `BAUCONTAINER/HAUSMEISTER.md`
 `ARCHIV/HAUSMEISTER_PROTOKOLL.md`
+
+
+## ARCH-021 – Pförtner und Hausmeister sind reine Verwaltung
+WAS:
+Hauptpförtner und Hausmeister dürfen keinerlei Fachinhalt verändern.
+WARUM:
+Navigation und Ordnung dürfen niemals unbemerkt fachliche Wahrheit erzeugen oder verändern.
+PFÖRTNER:
+READ/ROUTE ONLY.
+HAUSMEISTER:
+unverändert ordnen/archivieren + Verwaltungsprotokoll; keine Fachdatei editieren.
+REGEL:
+Ein Chat muss die Verwaltungsrolle ausdrücklich verlassen, bevor er Fach- oder Architekturarbeit beginnt.
+
+## ARCH-022 – 1-Klick-Eingangsstandard
+WAS:
+Campus-, Gebäude-, Büro- und Paul-Eingänge beginnen mit derselben kurzen 1-KLICK-ÜBERSICHT.
+WARUM:
+Ein völlig neuer Chat soll ohne Vorwissen auf dem ersten Bildschirm verstehen: Zweck, Zuständigkeit, Rechte, Verbote und nächsten Schritt.
+REGEL:
+Neue Gebäude/Büros nur mit `BAUCONTAINER/EINGANGSSTANDARD.md`.
+LEITSATZ:
+**Ein Klick = alles klar.**

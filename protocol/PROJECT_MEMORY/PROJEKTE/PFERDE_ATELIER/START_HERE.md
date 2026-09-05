@@ -3,16 +3,31 @@
 STAND: 2026-09-05
 STATUS: AKTIV
 
-## Büros
+## 1-KLICK-ÜBERSICHT
 
-- TEXT
-- DESIGN
-- BILD
-- AFFILIATE
-- HIVEPRESS
-- GEMEINSAM
+**WAS IST DAS?**  
+Das Projektgebäude für das Pferde-Atelier.
 
-Neue Büros dürfen bei echtem dauerhaften Bedarf ergänzt werden.
+**HIER BIST DU RICHTIG, WENN …**  
+deine Aufgabe konkret zum Pferde-Atelier gehört.
+
+**DU DARFST …**  
+das Projekt lesen, das zuständige Büro auswählen und dort nach dessen Regeln arbeiten.
+
+**DU DARFST NICHT …**  
+am Gebäudeeingang quer durch mehrere Büros ändern, Fachgrenzen ignorieren oder ungeklärte Zuständigkeiten selbst erfinden.
+
+**ALS NÄCHSTES …**  
+das zuständige Büro auswählen und dessen `START_HERE.md` öffnen.
+
+## Büroplan
+
+- TEXT → Textmaschine / Artikelproduktion
+- DESIGN → Portaldesign
+- BILD → projektspezifische Nutzung der allgemeinen Bildzentrale
+- AFFILIATE → Affiliate-Zentrale / Release
+- HIVEPRESS → Anzeigenmarkt / HivePress
+- GEMEINSAM → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
 
 ## Gemeinsame Regeln
 
@@ -22,13 +37,13 @@ Neue Büros dürfen bei echtem dauerhaften Bedarf ergänzt werden.
 - fremde Büros lesen erlaubt;
 - fremde Büros nicht eigenmächtig verändern;
 - ein Hobbyraum pro Büro;
-- Fehler und wichtige Änderungen dauerhaft verweisen/dokumentieren;
-- Maschinenraum nur ändern, wenn der Fachauftrag das ausdrücklich erfordert;
-- Masterdateien vollständig verwerten und zuordnen; nichts still verlieren.
+- Fehler/Änderungen dauerhaft referenzieren;
+- Maschinenraum nur mit ausdrücklichem Fachauftrag;
+- Masterdateien vollständig verwerten und zuordnen.
 
-## Aktueller Sonderhinweis
+## Sonderhinweis TEXT
 
 TEXT wird am 2026-09-05 noch parallel in einem anderen Chat bearbeitet.
-Vor einer späteren Übernahme des TEXT-Status ist eine frische GitHub-Synchronisierung Pflicht.
 
-BILD ist jetzt als eigenes Büro angelegt.
+Vor späterer Übernahme:
+frische GitHub-Synchronisierung.

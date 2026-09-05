@@ -1,9 +1,26 @@
 # BÜRO DESIGN
 
-Zuständig für Portaldesign und Designplugin-bezogene Regeln.
+## 1-KLICK-ÜBERSICHT
 
-Hinweis:
-Design und HivePress können technisch dieselben Dateien berühren.
-Zuständigkeit wird daher nach Funktion festgelegt, nicht blind nach Dateipfad.
+**WAS IST DAS?**  
+Das Fachbüro für Portaldesign und designbezogene Plugin-/Template-Funktion.
 
-Bestehende technische Dateien werden durch PROJECT_MEMORY nicht verschoben.
+**HIER BIST DU RICHTIG, WENN …**  
+die Aufgabe Darstellung, Layout, Designverhalten oder Designplugin-Funktion betrifft.
+
+**DU DARFST …**  
+Design-relevante Quellen lesen und im gebundenen DESIGN-Hobbyraum arbeiten.
+
+**DU DARFST NICHT …**  
+HivePress-Fachlogik nur wegen gemeinsamer Dateien übernehmen, fremde Büros verändern oder einen aktuellen Stand aus alten Versionsnamen erraten.
+
+**ALS NÄCHSTES …**  
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → dort genannte Originalquellen.
+
+## Wichtige Grenze
+
+Design und HivePress können dieselben technischen Dateien berühren.
+
+Zuständigkeit folgt der **Funktion**, nicht blind dem Dateipfad.
+
+PROJECT_MEMORY verschiebt bestehende technische Dateien nicht.

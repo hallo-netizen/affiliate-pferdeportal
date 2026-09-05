@@ -5,21 +5,10 @@ Zweck: Minimaler Ablauf für ein eigenständiges neues Projekt.
 ## Vor dem Bau
 
 1. Hauptpförtner lesen.
-2. Projektziel und Anforderungen bestimmen.
+2. Projektziel/Anforderungen bestimmen.
 3. Modulregister prüfen.
-4. Nur passende allgemeingültige Module auswählen.
-5. Prüfen, welche Funktionen wirklich noch fehlen.
-
-## Wann neues Gebäude?
-
-Nur wenn das Vorhaben:
-- eigenes Ziel;
-- dauerhafte Eigenständigkeit;
-- eigene Zuständigkeiten/Arbeitswege
-
-hat.
-
-Sonst bestehendes Projekt erweitern.
+4. nur passende allgemeingültige Module auswählen.
+5. nur wirklich fehlende Funktionen neu vorsehen.
 
 ## Minimaler Aufbau
 
@@ -32,29 +21,37 @@ protocol/PROJECT_MEMORY/PROJEKTE/<PROJEKT>/
     └── HOBBYRAUM.md
 ```
 
-Weitere Büros erst bei echtem Bedarf.
+## Pflicht für jeden neuen Eingang
+
+Jedes neue Gebäude und jedes neue Büro MUSS den Standard erfüllen:
+
+`BAUCONTAINER/EINGANGSSTANDARD.md`
+
+Also oben sofort:
+- WAS IST DAS?
+- HIER BIST DU RICHTIG, WENN …
+- DU DARFST …
+- DU DARFST NICHT …
+- ALS NÄCHSTES …
+
+**Ein Klick = alles klar.**
 
 ## Nutzung allgemeiner Module
 
-Ein Projekt kopiert den allgemeinen Kern nicht als neue Hauptwahrheit.
+Allgemeiner Kern bleibt an seinem Hauptort.
 
-Es dokumentiert:
-- MOD-ID;
-- Hauptort;
-- verwendeten/kompatiblen Stand;
-- projektspezifische Konfiguration;
-- projektspezifische Daten/History.
+Projekt dokumentiert nur:
+- MOD-ID
+- Hauptort
+- verwendeten Stand
+- projektspezifische Konfiguration
+- Projektdaten/-historie
 
-## Pflicht
+## Weitere Regeln
 
-- Projekt im Hauptpförtner registrieren;
-- Zuständigkeiten beschreiben;
-- vorhandene Arbeitswege verwenden;
+- weitere Büros erst bei echtem Bedarf;
+- keine bestehende Projektarchitektur blind kopieren;
 - Fehler nur als Verweis registrieren;
-- wichtige Änderungen mit WARUM dokumentieren;
-- keine bestehende Projektarchitektur blind kopieren.
+- wichtige Änderungen mit WARUM dokumentieren.
 
-## Technischer Speicherort
-
-Projektgebäude kann im selben oder eigenen Repository liegen.
-Der Campus hält den eindeutigen Weg fest.
+Projektgebäude kann technisch im selben oder eigenen Repository liegen.

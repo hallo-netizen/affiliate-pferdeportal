@@ -1,56 +1,57 @@
-# PAUL – EXTERNER ARBEITSRAUM
+# PAUL – EIGENE EINGANGSTÜR
 
 STAND: 2026-09-05
 
-## Ziel
+## 1-KLICK-ÜBERSICHT
 
-Paul soll ohne Vorwissen arbeiten und prüfen können.
+**WAS IST DAS?**  
+Pauls isolierter Einstieg in einen vollständigen Projektstand.
 
-## Was Paul lesen darf
+**HIER BIST DU RICHTIG, WENN …**  
+Paul einen klaren Auftrag analysieren, ändern und testen soll.
 
-Für Projektarbeit erhält Paul den vollständigen GitHub-Projektstand auf einem eigenen Branch.
-Er darf die für seinen Auftrag relevanten Projektinformationen vollständig lesen.
+**DU DARFST …**  
+das vollständige Projekt lesen und auf deinem eigenen Paul-Branch analysieren, ändern, testen und experimentieren.
 
-## Pflichtlektüre vor jeder Arbeit
+**DU DARFST NICHT …**  
+main verändern, andere Arbeitsbranches verändern, Fachstände selbst freigeben, Regeln eigenmächtig ändern oder deine Arbeit automatisch übernehmen lassen.
+
+**ALS NÄCHSTES …**  
+Hauptpförtner → Projektgebäude → zuständiges Büro → Fehlerregister → Änderungs-/Erklärungsregister → Zielvertrag → Handlungsverzeichnis → konkreter Paul-Auftrag.
+
+## Wozu das Ganze?
+
+Paul soll ohne Vorwissen sofort verstehen:
+- welches Projekt er vor sich hat;
+- welche Fehler bereits bekannt sind;
+- warum wichtige Regeln/Änderungen existieren;
+- welchen Zielvertrag er erfüllen soll;
+- welche Grenzen gelten.
+
+## Pflichtlektüre
 
 1. `protocol/PROJECT_MEMORY/HAUPTPFOERTNER.md`
 2. zuständiges Projektgebäude
 3. zuständiges Büro + CURRENT_STATE + HOBBYRAUM
 4. `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
 5. `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-6. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
-7. aktueller Paul-Auftrag
-
-Fehlerregister und Änderungs-/Erklärungsregister sind Pflicht:
-Paul muss wissen,
-- welche Fehler bereits bekannt sind,
-- welche Fehler nicht erneut erfunden/analysiert werden sollen,
-- welche Änderungen aus welchem Grund existieren,
-- was nicht zurückgebaut werden darf, solange das WARUM ungeklärt ist.
+6. aktiver Zielvertrag
+7. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
+8. aktueller Paul-Auftrag
 
 ## Isolation
 
-Paul arbeitet ausschließlich auf seinem eigenen Branch, z. B.:
+Paul arbeitet ausschließlich auf eigenem Branch, z. B.:
 `paul/<auftrag>`
 
-Seine Änderungen beeinflussen main und andere Arbeitsbranches nicht.
-
-Er darf in seinem Branch:
-- analysieren;
-- ändern;
-- testen;
-- experimentieren;
-- Lösung vorbereiten.
-
-Er darf nicht:
-- main direkt verändern;
-- offizielle Fachstände selbst überschreiben;
-- seine Arbeit automatisch in andere Büros übernehmen;
-- verbindliche Regeln eigenmächtig ändern.
+Seine Änderungen beeinflussen main und offizielle Arbeitsbranches nicht.
 
 ## Rückübernahme
 
-Nie den kompletten Paul-Branch blind mergen.
+Paul liefert:
+Befund → Änderung → Tests → Belege.
 
-Ablauf:
-Paul-Ergebnis → zuständiges Fachbüro prüft → Tests → nur gewünschte Änderung gezielt übernehmen oder verwerfen.
+Das zuständige Fachbüro entscheidet:
+übernehmen / teilweise übernehmen / verwerfen.
+
+**Kein Blind-Merge des ganzen Paul-Branches.**
