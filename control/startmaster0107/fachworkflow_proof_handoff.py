@@ -147,8 +147,10 @@ $slot=$matches[0];
 $item['canonical_article_id']=(string)$slot['canonical_article_id'];
 unset($item['plan_slot']);
 $cat=(array)($item['quality_binding']['wordpress_category']??[]);
-if(empty($cat['id'])||empty($cat['slug'])){fwrite(STDERR,"WORDPRESS_CATEGORY_BINDING_MISSING\n");exit(2);}
-nd_seed_terms([$item]);
+if(empty($cat['name'])||empty($cat['slug'])||(string)($cat['taxonomy']??'')!=='category'){fwrite(STDERR,"WORDPRESS_CATEGORY_BINDING_MISSING\n");exit(2);}
+$seedItem=$item;
+$seedItem['quality_binding']['wordpress_category']['id']=900001;
+nd_seed_terms([$seedItem]);
 $bundle=['contract'=>'canonical_fact_pack_import_v1','fact_packs'=>[$pack]];
 $imp=PPM679_Admin::import_fact_pack_bundle($bundle);
 if(empty($imp['ok'])){echo json_encode(['ok'=>false,'status'=>'PPM_FACT_PACK_IMPORT_BLOCKED','detail'=>$imp],JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);exit(0);}
