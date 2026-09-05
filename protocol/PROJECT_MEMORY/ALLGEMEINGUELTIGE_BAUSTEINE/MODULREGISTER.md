@@ -72,14 +72,27 @@ Der allgemeine Modul-Kern kann trotzdem eindeutig ALLGEMEINGÜLTIG sein.
 ## MOD-001 – KATEGORIENMODELL
 
 MODULKLASSE: ALLGEMEINGÜLTIG
-STATUS: vom Nutzer ausdrücklich als allgemeingültig bestätigt; Masterakten/Code folgen
+STATUS: Master R10/R9 + WordPress-Plugin V1.8.0 hart inventarisiert; lokaler/fresh Prüfstand PASS; Live-WordPress-Deployment noch nicht PASS
 HAUPTORT: `ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/`
-AKTUELL BELEGTER STAND: noch aus Masterakten zu ermitteln
-ZWECK: selbstständige Erstellung und Strukturierung von Kategorien
-ABHÄNGIGKEITEN: noch zu inventarisieren
-NUTZENDE PROJEKTE: bei konkreter Nutzung eintragen
-BELEG: Nutzerbestätigung 2026-09-05
-OFFEN: vollständige technische Inventarisierung nach Übergabe
+AKTUELL BELEGTER STAND:
+- Master 016 R10/R9 Runtime Deployment
+- Plugin V1.8.0
+ZWECK:
+evidenzbasierte, allgemeingültige Kategorie-/Strukturentwicklung für Content, HivePress/Marketplace und explizit gebundene Journal-Taxonomien
+ABHÄNGIGKEITEN:
+- WordPress >= 6.4
+- PHP >= 8.1
+- DataForSEO für gebundene Research-Schritte
+- HivePress nur wenn Marketplace-Säule genutzt wird
+NUTZENDE PROJEKTE:
+- historischer Real-/Pilotbeleg Gaumen Atelier im Master; keine fachliche Vererbung
+- konkrete neue Projektnutzungen bei Einsatz eintragen
+AUTORITATIVE QUELLE:
+`ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/CURRENT_STATE.md`
+ARCHIV:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/2026-09-05/`
+OFFEN:
+echter Live-WordPress-Deploymentlauf auf Zielinstallation
 
 ## MOD-002 – BILDZENTRALE
 

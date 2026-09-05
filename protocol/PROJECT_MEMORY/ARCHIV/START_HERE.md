@@ -33,6 +33,11 @@ Es bedeutet nur:
 Siehe:
 `DATEIEINGANG.md`
 
+Zentraler Archivindex:
+`REGISTER.md`
+
+Der Index zeigt außerdem die ROT/GELB/GRÜN-Ampel für die Frage, ob lokale Originalkopien noch benötigt werden.
+
 ## Sicherheit
 
 UNGEKLÄRT wird nicht ins „kann weg“-Archiv abgeschoben.

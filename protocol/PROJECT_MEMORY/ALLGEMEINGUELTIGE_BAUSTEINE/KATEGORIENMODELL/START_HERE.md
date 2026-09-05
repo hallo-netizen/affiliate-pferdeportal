@@ -1,25 +1,60 @@
 # ALLGEMEINGÜLTIGER BAUSTEIN – KATEGORIENMODELL
 
 STAND: 2026-09-05
-STATUS: ALLGEMEINGÜLTIG / MASTERAKTEN NOCH AUSSTEHEND
+STATUS: ALLGEMEINGÜLTIG / AKTUELLER MASTER R10-R9 / PLUGIN V1.8.0
 
-Vom Nutzer ausdrücklich als allgemeingültig bestätigt.
+## 1-KLICK-ÜBERSICHT
 
-## Zweck
+**WAS IST DAS?**  
+Ein allgemeingültiger WordPress-Kategorie-Workflow für Content, HivePress/Marketplace und optional gebundene Journal-Taxonomien.
 
-Selbstständige Erstellung und Strukturierung von Kategorien für unterschiedliche Projekte.
+**HIER BIST DU RICHTIG, WENN …**  
+ein Projekt Kategorien evidenzbasiert recherchieren, strukturieren, prüfen und nach FINAL kontrolliert in WordPress/HivePress deployen soll.
 
-## Autoritätsgrenze
+**DU DARFST …**  
+den allgemeinen Modul-Kern, Mastervertrag, Tests und Deploymentregeln lesen und für neue Projekte referenzieren.
 
-Die allgemeine Engine/Logik gehört hierher.
+**DU DARFST NICHT …**  
+fachliche Kategorien eines alten Projekts auf ein neues Projekt übertragen, Live-Deployment behaupten oder die 14-Stufen-/Write-Grenzen umgehen.
 
-Ein konkretes Projekt speichert nur:
-- seine konkrete Kategorienstruktur,
-- seine Parameter,
-- seine projektspezifische Historie,
-- seinen Nutzungsverweis auf dieses Modul.
+**ALS NÄCHSTES …**  
+`CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md` → bei Arbeit `HOBBYRAUM.md`.
 
-## Nächster Schritt
+## MOD-ID
 
-Sobald Masterdateien/Plugin-Code übergeben werden:
-vollständig nach der Masterdateien-Regel inventarisieren und allgemeine vs. projektspezifische Bestandteile hart prüfen.
+MOD-001
+
+## Aktueller Hauptstand
+
+Master:
+`ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_R10_R9_RUNTIME_DEPLOYMENT.zip`
+
+Plugin:
+**Affiliate-Portal Kategorie-Workflow V1.8.0**
+
+Master-Contract:
+`ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_WORKFLOW_HARDLOCK`
+
+## Grundgrenze
+
+Die Architektur ist allgemeingültig.
+Projekte übernehmen:
+- Workflow
+- Prüf-/Researcharchitektur
+- Contracts
+- technische Pluginlogik
+
+Projekte übernehmen NICHT:
+- Kategorien
+- Keywords
+- Affiliate-Entscheidungen
+- Portalstruktur
+- Fachentscheidungen anderer Projekte
+
+## Archiv
+
+Persistente Rohakten:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/2026-09-05/`
+
+Details:
+`MASTERDATEIEN_INVENTAR.md`

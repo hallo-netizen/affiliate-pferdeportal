@@ -13,41 +13,47 @@ Der Nutzer muss NICHT selbst entscheiden, in welchen Archivbereich eine Datei ge
 ### Kein Upload nötig
 Wenn die Datei bereits:
 - im zugänglichen GitHub-Repository liegt oder
-- im aktuellen Chat bereits hochgeladen wurde und lesbar ist.
+- in ChatGPT Library/Chat bereits vorhanden und lesbar ist.
 
 ### Einmaliger Upload nötig
-Wenn die Datei ausschließlich:
-- auf dem lokalen Rechner
-- auf einer lokalen Festplatte
-- in einem nicht verbundenen Speicher
+Wenn die Datei ausschließlich lokal liegt.
 
-liegt.
-
-Dann muss sie einmal bereitgestellt werden, damit sie inventarisiert werden kann.
+Dann einmal bereitstellen.
 
 ## Ablauf
 
 1. Original identifizieren.
-2. Hash bilden, wenn technisch möglich.
+2. Hash bilden.
 3. vollständig inventarisieren.
 4. aktuelle Wahrheit vs. Historie trennen.
 5. Büro/Modul/Zielvertrag/Fehlerbeleg zuordnen.
-6. Archivstatus setzen.
-7. Hauptquelle/Referenz festhalten.
+6. persistente Archivkopie anlegen.
+7. Archiv-Ampel setzen.
+8. Hauptquelle/Referenz festhalten.
 
-## Rohdateien
+## Archiv-Ampel für lokale Löschung
 
-Solange der aktuelle Projekt-Repository öffentlich ist:
-Rohdateien mit Secrets/Zugangsdaten NICHT dort ablegen.
+### ROT
+Nicht vollständig archiviert.
+Lokale Datei behalten.
 
-Trotzdem:
-- Hash
-- Herkunft
-- Dateityp
-- Zweck
-- enthaltene Wissensarten
-- Zuordnung
+### GELB
+Hash + Archivkopie vorhanden, aber nur ein unabhängiges Speichersystem.
+Lokale Datei weiter behalten.
 
-vollständig dokumentieren.
+### GRÜN
+Hash + mindestens zwei unabhängige verifizierte Speicherorte.
+Dann darf im Archivregister stehen:
+`LOKALE_KOPIE_ENTBEHRLICH: JA`
 
-Die Entscheidung über einen geschützten Rohdatei-Ablageort hängt an der offenen Campus-Zugriffsschutzentscheidung.
+Der Nutzer muss das nicht selbst beurteilen.
+
+## Rohdateien / Secrets
+
+Secrets niemals in ein öffentliches Repository kopieren.
+
+Existenz, Funktion, Hash und sichere Zuordnung bleiben trotzdem dokumentiert.
+
+## Harte Regel
+
+**Ich sage erst dann ausdrücklich, dass eine lokale Kopie entbehrlich ist, wenn der Archiv-Eintrag GRÜN ist.**

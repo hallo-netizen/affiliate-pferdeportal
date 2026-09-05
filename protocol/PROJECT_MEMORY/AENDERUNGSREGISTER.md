@@ -166,3 +166,15 @@ GRENZE:
 Modulklasse bleibt ausschließlich im MODULREGISTER; LIVE-/Release-/Fachstatus bleibt ausschließlich an der zuständigen Originalquelle.
 REGEL:
 Große Masterpakete werden nicht allein wegen ihres Dateinamens als WordPress-Plugin klassifiziert.
+
+
+## ARCH-025 – Archiv-Ampel für lokale Originale
+WAS:
+ROT/GELB/GRÜN-Status im Archiv.
+WARUM:
+Der Nutzer soll nicht selbst beurteilen müssen, ob eine Datei sicher genug archiviert ist, um die lokale Originalkopie zu entfernen.
+REGEL:
+GRÜN nur bei Hash + mindestens zwei unabhängigen verifizierten Speicherorten.
+Nur GRÜN darf `LOKALE_KOPIE_ENTBEHRLICH: JA` setzen.
+AKTUELL:
+Kategoriemodul = GELB; ChatGPT-Library-Archiv vorhanden, zweite unabhängige Ablage fehlt noch.

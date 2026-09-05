@@ -140,21 +140,34 @@ Dateibeleg bedeutet nicht automatisch aktueller LIVE-/Release-Stand.
 Hauptquelle:
 `PROJEKTE/PFERDE_ATELIER/DESIGN/`
 
-## Noch NICHT automatisch als WordPress-Plugin klassifiziert
+### WP-007 – Kategoriemodell / Affiliate-Portal Kategorie-Workflow
 
-### Kategoriemodell
+MOD-ID:
+MOD-001
 
-Vorhandene allgemeine Masterpakete:
-- `ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_R2_WORKFLOW_HARDLOCK.zip`
-- `ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_R3_WORKFLOW_HARDLOCK.zip`
+WordPress-Plugin:
+`Affiliate-Portal Kategorie-Workflow`
 
-MOD-001 ist bereits als ALLGEMEINGÜLTIG bestätigt.
+Aktuell belegte Version:
+**1.8.0**
 
-Aber:
-Aus dem Dateinamen allein wird NICHT behauptet, dass das Paket ein installierbares WordPress-Plugin ist.
+Installer SHA-256:
+`4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845`
 
-Nach Masterdatei-Inventarisierung:
-falls WordPress-Plugin → hier zusätzlich als WP-Eintrag aufnehmen.
+Source SHA-256:
+`1d17566f309f460e48255b78357912cf5e18b1eba2eed7654516e79c8f9fa7fd`
+
+Master SHA-256:
+`2e6990847c5bc32176f87c6f4b006ccdd0f3f57891c176ed5a6874edfdff942c`
+
+Modulklasse:
+ALLGEMEINGÜLTIG.
+
+Hauptquelle:
+`ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/`
+
+Status:
+lokal/fresh stark geprüft; **kein bestätigter Live-WordPress-Deployment-PASS**.
 
 ## Aufnahme neuer Plugins
 

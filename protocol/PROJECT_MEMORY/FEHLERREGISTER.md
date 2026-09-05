@@ -54,3 +54,17 @@ Regel: nicht eigenmächtig korrigieren; erst LIVE-2.6.9-Code/Beleg prüfen.
 
 Neue reale Fehler erhalten eindeutige ID + Verweis auf autoritative Originalquelle.
 Keine zweite ausführliche Fehlerwahrheit hier anlegen.
+
+
+## MOD-001-KATEGORIENMODELL
+
+Bereich:
+ALLGEMEINGÜLTIGE BAUSTEINE / KATEGORIENMODELL
+
+Status:
+historische Fehlerkette im aktuellen Master vollständig erhalten.
+
+Autoritative Fehlerquellen:
+`ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/FEHLERQUELLEN.md`
+
+Keine Fehlertexte hier duplizieren.

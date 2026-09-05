@@ -210,6 +210,23 @@ Entscheidung:
 Zusätzliche Bestandsaufnahme:
 Bereits übergebene direkte Plugin-/Installer-Artefakte werden dort aufgenommen; große Masterpakete erst nach Inhaltsprüfung als Plugin klassifiziert.
 
+### 2026-09-05 – Wann darf eine lokale Datei gelöscht werden?
+
+Nutzerfrage:
+Wenn Campus/Archiv die Datei sicher enthält, kann die lokale Festplattenkopie entfallen?
+
+Entscheidung:
+Ja, aber nur mit objektiver Archiv-Ampel.
+
+- ROT = nicht sicher archiviert
+- GELB = Hash + Archivkopie, aber nur ein unabhängiges Speichersystem
+- GRÜN = mindestens zwei unabhängige verifizierte Speicherorte
+
+Nur GRÜN erlaubt `LOKALE_KOPIE_ENTBEHRLICH: JA`.
+
+Aktueller Kategoriestand:
+GELB, weil persistente Library-Archivkopien vorhanden sind, aber der zweite unabhängige private Campus-Speicher noch fehlt.
+
 ## Offene Punkte
 
 - Campus nach V1-Freigabe in eigenes privates Repository verschieben?

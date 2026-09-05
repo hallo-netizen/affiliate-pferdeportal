@@ -84,3 +84,20 @@ Modulklasse bleibt im MODULREGISTER; LIVE-/Release-Status bleibt an der Fach-/Te
 
 BEZUG:
 ARCH-024.
+
+
+### 2026-09-05 – Kategoriemodul vollständig eingeordnet + Archiv-Ampel
+
+BEDARF:
+Aktuellen allgemeingültigen Kategorieplugin-Bestand vollständig zuordnen und klären, wann lokale Originale entbehrlich werden.
+
+ERGEBNIS:
+- MOD-001 auf Master R10/R9 / Plugin V1.8.0 aktualisiert;
+- WordPress-Pluginstatus belegt;
+- R2/R3 historisch, R10 Hauptakte;
+- Pferde-Atelier-Kategoriereparatur separat gehalten;
+- persistente Library-Archivkopien erzeugt;
+- Archiv-Ampel ROT/GELB/GRÜN eingeführt.
+
+BEZUG:
+ARCH-025.
