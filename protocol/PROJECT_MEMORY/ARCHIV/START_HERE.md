@@ -36,3 +36,15 @@ ROT / GELB / GRÜN steht in `REGISTER.md`.
 
 Nur GRÜN darf bedeuten:
 `LOKALE_KOPIE_ENTBEHRLICH: JA`.
+
+
+## EINE WAHRHEIT – ARCHIV IST NIE CURRENT
+
+Das Archiv ist ausschließlich historische Ablage und Belegraum.
+
+Für den **aktuellen** Stand immer zurück zum zuständigen:
+- Büro-`CURRENT_STATE.md`, oder
+- Modul-`CURRENT_STATE.md`.
+
+`ARCHIV/REGISTER.md` darf keine aktuelle Fachwahrheit ersetzen.
+Ein historischer Stand wird niemals allein durch „neuere Dateigröße/Version“ wieder aktuell.

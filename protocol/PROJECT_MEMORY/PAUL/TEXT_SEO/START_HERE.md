@@ -20,13 +20,15 @@ main verändern, SEO-/Textregeln eigenmächtig ändern, einen neuen Ersatzworkfl
 **ALS NÄCHSTES …**  
 Pflichtlektüre vollständig in der angegebenen Reihenfolge lesen.
 
-## Gebundener technischer Ausgangspunkt
+## SCHNELLKONTROLLPUNKT – KEINE ZWEITE WAHRHEIT
 
-Technischer Basisstand:
-`main c8a96e7a2f598de69134d90b143257c3559bc98a`
+- **AKTUELLER TEXT/SEO-STAND:** `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`
+- **AKTUELLE ARBEIT / NEXT ACTION / BRANCH:** `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md`
+- **CURRENT_BLOCKER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → `TEXT-LIVE-20260905` → dort genannte Originalquelle
+- **AKTIVER ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → `ZV-TEXT-001` → Hauptquelle
+- **NICHT ANFASSEN:** `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/08_DO_NOT_TOUCH_HARD_RULES.md`
 
-Vorgesehener Paul-Branch:
-`paul/text-seo-campus-ready-20260905`
+Paul schreibt keinen dieser Stände hier ein zweites Mal fort.
 
 ## Pflichtlektüre – vollständig
 
