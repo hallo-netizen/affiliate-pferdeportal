@@ -44,3 +44,32 @@ Auch diese müssen später entweder sicher wiederherstellbar oder mit eindeutige
 Der Tresor meldet immer den ersten belegten Blocker.
 
 Git-/Metadaten-PREPASS ≠ vollständiger Katastrophen-PASS.
+
+
+## Lokaler Backup-Befund 2026-09-05
+
+Aktueller Library-Rohbestand:
+- 38 Dateien;
+- 985.708.251 Bytes;
+- vollständig materialisiert;
+- SHA-256 je Datei berechnet;
+- Export-Restore 38/38 PASS.
+
+Lokaler Export vorbereitet:
+fünf Teile + Manifest + Restore-/Hashwerkzeug.
+
+**Noch nicht als zweite unabhängige Ablage gezählt**, solange der Nutzer diese Dateien nicht tatsächlich lokal/external gespeichert und dort geprüft hat.
+
+Der vorhandene Git-/GitHub-PREPASS V4 ist technisch restore-geprüft, bindet aber einen älteren Campus-/Paul-Stand und ist daher heute nur noch **Restore-Beweis**, nicht aktueller 1:1-Backupstand.
+
+Real nachgewiesene nicht exportierbare Abhängigkeit:
+`ENDSTEMPEL_PRIVATE_KEY`
+
+GitHub enthält nur das Secret, nicht den auslesbaren Originalwert.
+Recovery muss separat vorhanden und praktisch geprüft sein.
+
+Bekannter Rohartefakt-Blocker bleibt außerdem:
+Pferde-Design 1.50.472 – finale Plugin-/Master-ZIPs fehlen.
+
+ERGEBNIS BLEIBT:
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`

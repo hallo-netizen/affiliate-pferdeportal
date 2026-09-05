@@ -63,3 +63,25 @@ Beispiel:
 `TRESOR/2026-09-05_1130/`
 
 Nie einen früheren PASS-Stand überschreiben.
+
+
+## Lokaler Snapshot – Pflichtprüfung
+
+Jeder lokale Snapshot muss zusätzlich beweisen:
+- Git-Mirror erzeugt;
+- Bundle erzeugt und verifiziert;
+- Restore aus Bundle real durchgeführt;
+- alle Git-Refs Quelle/Restore identisch;
+- GitHub-Metadatenexport vollständig oder fail-closed;
+- lokale Campus-Archivkopie Hash-für-Hash identisch;
+- Recovery-Inventar vollständig;
+- gesamte Recovery praktisch getestet;
+- Snapshot unveränderlich/versioniert abgelegt.
+
+Negativ:
+- fehlendes Archiv → BLOCK;
+- Hashabweichung → BLOCK;
+- fehlende Ruleset-/Schutzmetadaten → BLOCK;
+- nicht bestätigte Recovery → BLOCK.
+
+Ein alter PREPASS darf nicht als aktueller Snapshot wiederverwendet werden.

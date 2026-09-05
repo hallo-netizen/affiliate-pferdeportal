@@ -90,3 +90,23 @@ Jeder Tresorstand benötigt ein maschinenlesbares Manifest mit mindestens:
 `UNGEKLÄRT` ist kein PASS.
 
 Was für den Wiederaufbau relevant sein könnte, aber nicht eindeutig gesichert oder ausgeschlossen ist, blockiert den vollständigen Tresor-PASS.
+
+
+## G. Lokale unabhängige Wiederherstellungskopie
+
+Für einen vollständigen Tresor-PASS reicht die ChatGPT-Library allein nicht.
+
+Pflicht:
+- relevante Library-Roharchive zusätzlich auf einem unabhängigen lokalen Speicher;
+- Hashgleichheit belegt;
+- lokale Kopie Bestandteil eines versionierten Tresorsnapshots.
+
+## H. Recovery-Geheimnisse
+
+Aktuell technisch konkret belegt:
+- `ENDSTEMPEL_PRIVATE_KEY` als GitHub Actions Secret.
+
+Der Originalwert ist über GitHub nicht exportierbar.
+Der Tresor darf deshalb nur PASS liefern, wenn dafür außerhalb GitHub eine sichere und praktisch getestete Recovery-Quelle existiert.
+
+Keine Secret-Werte in PROJECT_MEMORY, GitHub oder Chat protokollieren.

@@ -491,3 +491,28 @@ WARUM:
 Der harte Frischetest zeigte, dass führende/abschließende Whitespace-Änderungen sonst aus dem Snapshot verschwinden und damit theoretisch nicht als Drift erkannt werden könnten.
 KISS:
 Nur `show()` liest stdout unverändert; Ref-/Branch-Kommandos behalten die bestehende getrimmte Ausgabe.
+
+
+## ARCH-060 – Lokaler Tresor wird als unabhängiger versionierter Snapshot gebaut
+WAS:
+Git/GitHub, Campus-Archiv und Recovery-Unterlagen werden in einem versionierten lokalen Snapshot zusammengeführt. Jeder Snapshot prüft Git-Restore und Rohdatei-Hashes.
+WARUM:
+Der vorhandene Git-/GitHub-PREPASS bewies die Wiederherstellbarkeit des Git-Teils, deckte aber die großen Library-Roharchive und nicht exportierbare Secrets nicht ab. Außerdem veraltet ein alter PREPASS nach weiterer Campusarbeit.
+REGEL:
+Alter PREPASS = Restore-Beweis, nicht automatisch aktueller Backupstand. Jeder 1:1-Snapshot wird frisch erzeugt.
+
+## ARCH-061 – LOCAL_BACKUP_PASS und TRESOR_PASS bleiben getrennt
+WAS:
+Das lokale Werkzeug darf nur `LOCAL_BACKUP_PASS` melden.
+WARUM:
+Eine technisch perfekte Kopie eines bereits unvollständigen Rohbestands ist noch kein vollständiger Katastrophen-Tresor.
+REGEL:
+`TRESOR_PASS` erst nach zusätzlicher Prüfung aller erforderlichen Originalartefakte und Recovery-Abhängigkeiten.
+
+## ARCH-062 – ENDSTEMPEL_PRIVATE_KEY ist bestätigte Recovery-Abhängigkeit
+WAS:
+Der Workflow nutzt `secrets.ENDSTEMPEL_PRIVATE_KEY`.
+WARUM:
+GitHub Actions Secrets sind nicht als Originalwert wieder auslesbar. Ein 1:1-Wiederaufbau ohne unabhängige Recovery-Quelle wäre nicht möglich.
+REGEL:
+Secret niemals in Campus/Git/Chat kopieren; nur sichere externe Recovery-Quelle + praktischer Recovery-Test dürfen PASS begründen.

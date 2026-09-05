@@ -857,3 +857,64 @@ Aktivierung auf `main` weiterhin durch bestehenden immutable `hardlock-base` BLO
 
 BEZUG:
 ARCH-058/059; BAU-029.
+
+
+### 2026-09-05 – Tresor hart geprüft und lokales 1:1-Backup gebaut
+
+AUSGANG:
+Bestehender V4-PREPASS in der Library gefunden und geprüft.
+Belegt:
+- Git-Bundle-Restore PASS;
+- 261 Branches;
+- 1 Tag;
+- 136 Issues;
+- 127 PRs;
+- 1 Release;
+- 1 Ruleset.
+
+KRITISCH:
+Dieser PREPASS bindet ältere Campus-/Paul-SHAs und ist nach weiterer Campusarbeit kein aktueller 1:1-Snapshot mehr.
+
+ROHARCHIV:
+Aktuelles `/Campus-Archiv`:
+38 Dateien / 985.708.251 Bytes.
+
+Umgesetzt:
+- alle 38 Dateien materialisiert;
+- SHA-256 je Datei;
+- fünfteiliger lokaler Export;
+- Wiederherstellungswerkzeug;
+- realer Restore: 38/38 PASS;
+- Negativtest: absichtlich manipulierter Teil → Hash FAIL.
+
+LOKALER BACKUP-RUNNER:
+`CAMPUS_LOCAL_TRESOR.command`
+
+Positivtest:
+- synthetischer Git-Origin mit mehreren Refs;
+- Mirror;
+- Bundle;
+- Restore;
+- Refvergleich;
+- Archivkopie;
+- bestätigte Recovery;
+→ `LOCAL_BACKUP_PASS`.
+
+Negativtests:
+- Recovery nicht bestätigt → `LOCAL_BACKUP_BLOCKED:RECOVERY_NOT_CONFIRMED`;
+- Campus-Archiv fehlt → BLOCK;
+- manipulierter Exportteil → BLOCK.
+
+RECOVERY:
+Workflowprüfung findet als echten Secret:
+`ENDSTEMPEL_PRIVATE_KEY`.
+
+STATUS:
+Werkzeug/Logik PASS.
+Vollständiger `TRESOR_PASS` weiterhin BLOCKED durch:
+1. zweite lokale Rohablage noch nicht vom Nutzer bestätigt;
+2. fehlende finale Design-1.50.472-Rohartefakte;
+3. Recovery-Secrets noch nicht vollständig praktisch bestätigt.
+
+BEZUG:
+ARCH-060 bis ARCH-062; BAU-030.

@@ -357,3 +357,23 @@ LOKALE_KOPIE_ENTBEHRLICH:
 
 Grund:
 eine persistente verifizierte Archivablage vorhanden; zweite unabhängige verifizierte Rohablage fehlt.
+
+
+## Lokaler Gesamtexport 2026-09-05 – VORBEREITET, NOCH NICHT ALS ZWEITER SPEICHER GEZÄHLT
+
+Aus `/Campus-Archiv` vollständig materialisiert:
+- 38 Dateien;
+- 985.708.251 Bytes;
+- SHA-256-Manifest erzeugt;
+- Export-Wiederherstellung 38/38 PASS;
+- manipulierter Teil im Negativtest korrekt BLOCKED.
+
+Lokales Downloadset:
+fünf Teile + Manifest + Restorewerkzeug.
+
+WICHTIG:
+Die Ampeln bleiben GELB/ROT, bis der Nutzer bestätigt hat, dass das Set auf einem **unabhängigen lokalen Speicher** liegt und dort die Hashprüfung PASS ausgeführt wurde.
+
+Der Export kann fehlende Originale nicht erzeugen.
+Insbesondere bleibt:
+`ARC-PFERDE-DESIGN-20260905` für finale 1.50.472-Rohartefakte ROT.

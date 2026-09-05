@@ -21,7 +21,7 @@ einen unvollständigen Backupstand als PASS bezeichnen oder einen älteren gült
 `STATUS.md`.
 
 Danach:
-- Backup erstellen → `KONZEPT.md` + `INHALTSVERTRAG.md` + `PRUEFVERTRAG.md`
+- Backup erstellen → `KONZEPT.md` + `INHALTSVERTRAG.md` + `PRUEFVERTRAG.md` + `LOKALES_BACKUP_KONZEPT.md`
 - Wiederaufbau → `NOTFALL_WIEDERAUFBAU.md`
 
 ## Aktueller Stand
@@ -60,3 +60,11 @@ Wiederherstellung endet erst nach Aufbau eines **frischen Arbeits-Worktrees auß
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
 
+
+
+## Lokaler 1:1-Wiederaufbau
+
+Verbindlicher lokaler Sicherungsweg:
+`LOKALES_BACKUP_KONZEPT.md`
+
+Der alte PREPASS ist Restore-Beweis, aber nach späteren Campusänderungen kein aktueller 1:1-Snapshot mehr.

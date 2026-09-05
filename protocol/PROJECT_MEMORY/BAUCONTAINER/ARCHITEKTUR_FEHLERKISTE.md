@@ -599,3 +599,30 @@ Der Paul-Frischetest ist dauerhaft Teil des Security-`hardlock`-Workflows.
 
 STATUSGRENZE:
 Fix im Security-PR #137 getestet; produktive Aktivierung auf main bleibt bis Admin-Wartung BLOCKED.
+
+
+## BAU-030 – Tresor hatte Restore-Beweis, aber noch keinen vollständigen aktuellen lokalen 1:1-Snapshot
+
+STATUS: BLOCKED / INHALTLICHE RESTPUNKTE
+
+KURZ:
+Git/GitHub-PREPASS war restore-geprüft, aber Roharchive lagen nur in der Library und der PREPASS wurde durch spätere Campusarbeit zeitlich überholt.
+
+KISS-FIX:
+- lokales Snapshotkonzept;
+- kompletter aktueller Library-Export;
+- Hashmanifest;
+- Restorewerkzeug;
+- lokaler Ein-Klick-Runner mit Git-Mirror/Bundle/Restore, Metadaten, Archivkopie und Recoveryprüfung.
+
+HARD TEST:
+- Archivexport 38/38 Restore PASS;
+- korrupter Teil → BLOCK;
+- lokaler Backup-Positivfall → PASS;
+- fehlendes Archiv → BLOCK;
+- Recovery ungeprüft → BLOCK.
+
+OFFENE BLOCKER FÜR TRESOR_PASS:
+- Nutzer muss zweite unabhängige lokale Ablage real speichern + Hash-PASS bestätigen;
+- finale Design-1.50.472-Rohartefakte fehlen;
+- `ENDSTEMPEL_PRIVATE_KEY`-Recovery und weitere notwendige externe Recovery-Abhängigkeiten müssen vollständig/praktisch geprüft werden.
