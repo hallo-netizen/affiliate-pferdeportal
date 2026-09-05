@@ -105,3 +105,17 @@ Jedes echte Verzeichnis unter `protocol/PROJECT_MEMORY/` besitzt eine `START_HER
 Auch Lesesammlungen, Flure und Bestandsräume sind damit bei Direktlink selbsterklärend.
 
 Neue Verzeichnisse ohne `START_HERE.md` sind ein Architekturfehler.
+
+
+## Rollen der Informationsquellen
+
+Für Projektbüros gilt:
+- START_HERE = Orientierung
+- CURRENT_STATE = aktuelle Büro-Zusammenfassung
+- HOBBYRAUM = aktuelle Arbeitsbindung
+- FEHLERREGISTER = Index zur Fehlerquelle
+- ZIELVERTRAEGE/REGISTER = Index zur Zielquelle
+- AENDERUNGSREGISTER = Begründungen
+- ARCHIV/REGISTER = Historie
+
+Aktuelle Versions-, Fehler- oder Zielangaben werden nicht parallel in mehreren Wegweisern gepflegt.
