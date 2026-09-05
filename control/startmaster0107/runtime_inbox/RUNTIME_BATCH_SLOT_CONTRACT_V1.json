@@ -10,7 +10,7 @@
   "batch_contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
   "ready_status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
   "production_package_contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
-  "workflow_release_contract": "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED",
+  "workflow_release_contract": "WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND",
   "required_metadata_fields": [
     "title",
     "target_keyword",

@@ -10,11 +10,11 @@
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
-      "sha256": "122d0927e56761dd0afa668adb847b44453a42a2102020b1d6c6b940945b9998"
+      "sha256": "b9292f0417e13e913d5476110c4276637a91c664f3e65c2557a3766054616bc6"
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "280ab2a470718ff55f9254a19f4a703fc07881157645336bb33338e07bbdd711"
+      "sha256": "0c15407fbe7a9522ef59405193a4ff59b6f5b2d3fdd4005dc8bc4ca7cb8dd2bc"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
@@ -34,7 +34,7 @@
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
-      "sha256": "020e4f71c244110f637d72fbe722b4ce5cc0d8341f53c31e54b4377e89900e38"
+      "sha256": "97534a8758d96855ff9086f3b7e8996220b2e229229e9088abb911785bbc6621"
     },
     {
       "ref": "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",

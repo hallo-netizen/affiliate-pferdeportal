@@ -72,16 +72,22 @@ def m12(): must("test_generic_fake_ppm_pass_is_blocked" in (REPO/"control/startm
 def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/startmaster0107/test_ppm679_current_action_binding.py").read_text(encoding="utf-8"),"M13_CONTENT_HASH_TEST")
 def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
 def _m15_validate_instruction(text):
-    required=("submission_command","Kein Vorab-Handoff durch den Worker","keine Capability-Suche","keine Alternativroute")
+    required=("submission_command","FACHWORKFLOW_HANDOFF_REQUEST.json","kein separater Handoff-Befehl durch den Worker","keine Capability-Suche","keine Alternativroute")
     for token in required: must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
-    must(any("zweiter executor" in line.lower() and "kein" in line.lower() for line in text.splitlines()),"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
-    forbidden=("FACHWORKFLOW_HANDOFF_REQUEST.json","submit-request","Vorab-Handoff durch den Worker erforderlich")
+    lines=text.splitlines()
+    submit_lines=[line.lower() for line in lines if "submit-request" in line.lower()]
+    must(submit_lines and all("kein" in line for line in submit_lines),"M15_SUBMIT_REQUEST_NOT_FORBIDDEN")
+    executor_lines=[line.lower() for line in lines if "zweiter executor" in line.lower()]
+    must(executor_lines and all("kein" in line for line in executor_lines),"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
+    forbidden=("Vorab-Handoff durch den Worker erforderlich","separater Fachworkflow-Executor erforderlich","Capability-Suche erforderlich","Alternativroute erlaubt")
     for token in forbidden: must(token not in text,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
 
 def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
-    bad=text+"\\nFACHWORKFLOW_HANDOFF_REQUEST.json muss vor submission_command erzeugt werden."
+    bad=text+"\nsubmit-request ausführen"
+    expect_exc(lambda:_m15_validate_instruction(bad),"M15_SUBMIT_REQUEST_NOT_FORBIDDEN")
+    bad=text+"\nseparater Fachworkflow-Executor erforderlich"
     expect_exc(lambda:_m15_validate_instruction(bad),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
 def m16():
     s=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
@@ -119,36 +125,51 @@ def m21():
             expect_exc(lambda:g.validate_prepared("PREPARED_RELEASE.json",sha(pp)),"AUTO_PUBLISH_FORBIDDEN")
     finally:
         g.REPO=old_repo
-def m22(): must("H8_PREPRODUCTION_BOOTSTRAP_POSITIVE_NEGATIVE_PASS" in cmd("control/single-door-boundary/test_h8_preproduction_bootstrap.py"),"M22_H8")
-def m23(): must("POSITIVE_FULL_PACKAGE_CURRENT_GENERATION" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M23_SIGNED_PACKAGE_ONLY")
+def m22():
+    out=cmd("control/single-door-boundary/test_h8_preproduction_bootstrap.py")
+    must("H8_PREPRODUCTION_BOOTSTRAP_POSITIVE_NEGATIVE_PASS" in out,"M22_H8")
+    boot=(REPO/"control/single-door-boundary/single_door_bootstrap.py").read_text(encoding="utf-8")
+    prov=(REPO/"control/single-door-boundary/preproduction_provenance_guard.py").read_text(encoding="utf-8")
+    must("H8_BOOTSTRAP_PROVENANCE_BINDING" in boot and "H8_BOOTSTRAP_PROVENANCE_BINDING" in prov,"M22_PROVENANCE_BINDING_MISSING")
+    must("H8_SIGNED_BOOTSTRAP_BINDING" not in boot and "H8_SIGNED_BOOTSTRAP_BINDING" not in prov,"M22_OLD_INTERNAL_SIGNED_BINDING_STILL_ACTIVE")
+def m23():
+    runtime=(REPO/"control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py").read_text(encoding="utf-8")
+    preflight=(REPO/"control/startmaster0107/codex-production-runtime/codex_environment_preflight.py").read_text(encoding="utf-8")
+    handoff=(REPO/"control/single-door-boundary/single_door_preproduction_handoff.py").read_text(encoding="utf-8")
+    active=handoff.split("def execute_bound_preproduction_action",1)[1].split("def attach_via_current_lifecycle",1)[0]
+    must("WORKFLOW_RELEASE_SIGNATURE_METADATA_INVALID" not in runtime,"M23_INTERNAL_SIGNATURE_METADATA_STILL_REQUIRED")
+    must("ED25519_RUNTIME_UNAVAILABLE" not in preflight and "ed25519_runtime" not in preflight,"M23_INTERNAL_ED25519_PREFLIGHT_STILL_REQUIRED")
+    must("validate_production_package_integrity(package_path)" in active,"M23_INTERNAL_INTEGRITY_PATH_MISSING")
+    must("validate_production_package(package_path" not in active,"M23_INTERNAL_SIGNED_VALIDATOR_STILL_ACTIVE")
+    for token in ("ED25519","trusted_keys","signature_b64","signing_key","WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID","_verify_external_release_signature"):
+        must(token not in active,"M23_OLD_INTERNAL_SIGNER_STILL_ACTIVE:"+token)
 def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
 def m25():
     s=(REPO/"control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt").read_text(encoding="utf-8")
+    a=CURRENT_ACTION.read_text(encoding="utf-8")
     must("bestehender Fachworkflow" in s and "Keine eigene" in s,"M25_FACHWORKFLOW_BOUNDARY")
+    must("'table_contract'" in a and "'internal_links'" in a,"M25_TABLE_OR_LINK_STAGE_REMOVED")
+    must(PPM.is_file() and sha(PPM)==PPM_SHA,"M25_PPM_RULE_PACKAGE_CHANGED")
 
 # Open historical regressions: hard positive + hard negative.
 def m26():
     a=mod(CURRENT_ACTION,"m26_action")
     smoke=a.selftest()
     must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
-    must(smoke.get("direct_single_door") is True and smoke.get("prepass_handoff_bound") is False,"M26_DIRECT_PATH_NOT_PASS")
+    must(smoke.get("direct_single_door") is True,"M26_DIRECT_PATH_NOT_PASS")
+    must(smoke.get("pre_ppm_request_bound") is True,"M26_PRE_PPM_REQUEST_NOT_BOUND")
+    must(smoke.get("worker_separate_handoff_command") is False,"M26_SECOND_HANDOFF_COMMAND_REGRESSION")
+    must(smoke.get("provisional_receipt_required") is False,"M26_PROVISIONAL_RECEIPT_REGRESSION")
+    must(smoke.get("fachworkflow_pass_materialized_after_real_ppm") is True,"M26_PASS_ORDER_REGRESSION")
     base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"ratgeber"}
-    action=a.augment_current_action(REPO,base,item)
-    batch,count=a._runtime_batch_identity()
-    current={"room_token":"R_D_1_01","current_item":item,"allowed_output_root":action["allowed_output_root"],"item_receipt_ref":".pferde-quarantine/test/ITEM_RECEIPT.json","item_receipt_schema":action["item_receipt_schema"]}
-    provisional={"contract":"PFERDE_ATELIER_BOUND_ITEM_EXECUTION_RECEIPT_V1","room_token":"R_D_1_01","canonical_article_id":"article:test","plan_slot":"a"*64}
-    meta={k:None for k in a.RELEASE_KEYS};meta.update({"contract":a.RELEASE_CONTRACT,"status":"PASS","exact_five_batch_sha256":batch,"exact_five_item_count":count,"wordpress_write_performed":False})
-    fach={"required_stage_proofs":[{"stage":x,"ref":".pferde-quarantine/test/"+x+".json","sha256":"1"*64} for x in a.STAGES],
-          "fact_pack":{"contract":"canonical_fact_pack_v1"},"production_plan_item":{"canonical_article_id":"article:test","plan_slot":"a"*64},
-          "production_plan_header":{"contract":"production_plan_v4"},"workflow_release_item":{"canonical_article_id":"article:test","plan_slot":"a"*64},
-          "workflow_release_metadata":meta}
-    req=a._handoff_request_from_current(current,provisional,fach)
-    must(req["fact_pack"]==fach["fact_pack"],"M26_POSITIVE_CONTEXT_NOT_MATERIALIZED")
-    bad=copy.deepcopy(fach);bad["fact_pack"]={}
-    expect_exc(lambda:a._handoff_request_from_current(current,provisional,bad),"BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING")
-    bad=copy.deepcopy(fach);bad["production_plan_item"]["canonical_article_id"]="article:other"
-    expect_exc(lambda:a._handoff_request_from_current(current,provisional,bad),"BOUND_CURRENT_PRODUCTION_PLAN_ITEM_IDENTITY_MISMATCH")
+    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
+    out=a.augment_current_action(REPO,base,item);hb=out.get("fachworkflow_handoff") or {};schema=out.get("item_receipt_schema") or {}
+    must(hb.get("request_ref")==".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json","M26_REQUEST_REF_NOT_BOUND")
+    must(hb.get("worker_executes_adapter_directly") is False,"M26_WORKER_HANDOFF_EXECUTION_NOT_BLOCKED")
+    must("pre_submit_context" not in schema,"M26_PROVISIONAL_CONTEXT_STILL_REQUIRED")
+    ppm=schema.get("ppm679_requirement") or {}
+    must(ppm.get("pre_ppm_binding_required_fields")==["final_article_ref","final_article_sha256"],"M26_PRE_PPM_BINDING_NOT_MINIMAL")
+    must("ppm_report_ref" in ppm.get("final_ppm679_binding_required_fields",[]),"M26_FINAL_PPM_REPORT_NOT_REQUIRED")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
@@ -157,11 +178,13 @@ def m27():
 
 def m28():
     a=mod(CURRENT_ACTION,"m28_action")
-    sample={"status":"CURRENT_BOUND_ACTION_READY","room_token":"R_D_1_01","current_item":{"canonical_article_id":"article:test","article_type":"beratung"},"fachworkflow_authority":"EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY","fachworkflow_prompt_ref":"bound.txt","allowed_output_root":".pferde-quarantine/test/","item_receipt_ref":".pferde-quarantine/test/ITEM_RECEIPT.json","item_receipt_schema":{"contract":"X"},"submission_command":"python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json"}
+    handoff={"contract":"PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1","batch_sha256":"b"*64,"request_ref":".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json","request_contract":"PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","request_required_fields":["contract"],"adapter_ref":"control/startmaster0107/fachworkflow_proof_handoff.py","adapter_sha256":"a"*64,"adapter_executes_bound_ppm_stage":True,"worker_executes_adapter_directly":False,"content_or_quality_rules_changed":False,"publish_allowed":False}
+    sample={"status":"CURRENT_BOUND_ACTION_READY","room_token":"R_D_1_01","current_item":{"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"},"fachworkflow_authority":"EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY","fachworkflow_prompt_ref":"bound.txt","allowed_output_root":".pferde-quarantine/test/","item_receipt_ref":".pferde-quarantine/test/ITEM_RECEIPT.json","item_receipt_schema":{"contract":"X"},"fachworkflow_handoff":handoff,"submission_command":"python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json"}
     v=a._current_only(sample)
-    must(v["submission_command"].endswith("ITEM_RECEIPT.json"),"M28_DIRECT_SUBMIT_POSITIVE")
-    bad=copy.deepcopy(sample);bad["submission_command"]="python3 fake.py"
-    expect_exc(lambda:a._current_only(bad),"CURRENT_ACTION_SUBMISSION_NOT_BOUND")
+    must(v["submission_command"].endswith("FACHWORKFLOW_HANDOFF_REQUEST.json"),"M28_REQUEST_SUBMIT_POSITIVE")
+    must(not v["submission_command"].endswith("ITEM_RECEIPT.json"),"M28_PREMATURE_RECEIPT_SUBMIT")
+    bad=copy.deepcopy(sample);bad["fachworkflow_handoff"]["request_ref"]="outside/FACHWORKFLOW_HANDOFF_REQUEST.json"
+    expect_exc(lambda:a._current_only(bad),"CURRENT_ACTION_HANDOFF_REQUEST_OUTSIDE_BOUND_ROOT")
 
 def m29():
     a=mod(CURRENT_ACTION,"m29_action")
@@ -175,7 +198,7 @@ def _final_ctx_fixture(root:Path,wrong_batch=False):
     batch="c"*64; out=[]; meta={
       "article_origin_policy":"POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE","authoring_prompt_sha256":"b"*64,
       "authoring_role":"CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS","content_generation_performed_by_supervisor":False,
-      "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","created_at_utc":"2026-09-04T00:00:00+00:00",
+      "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND","created_at_utc":"2026-09-04T00:00:00+00:00",
       "exact_five_batch_sha256":("d"*64 if wrong_batch else batch),"exact_five_item_count":7,
       "frozen_workflow_sha256":"e"*64,"nullpunkt":{},"nullpunkt_sha256":"f"*64,"ppm_baseline_sha256":"1"*64,
       "ppm_version":"6.7.9","research_evidence_policy":"BOUND_EXISTING_FACHWORKFLOW_ONLY","sequence":107008,
@@ -197,12 +220,27 @@ def m30():
         root=Path(td);d,rp=_final_ctx_fixture(root,True)
         expect_exc(lambda:d.context_from_release(root,rp.name),"FINAL_CONTEXT_BATCH_MISMATCH")
 
+def _m31_validate_handoff(out):
+    handoff=out.get("fachworkflow_handoff")
+    must(isinstance(handoff,dict),"M31_BOUND_HANDOFF_MISSING")
+    must(handoff.get("worker_executes_adapter_directly") is False,"M31_WORKER_DIRECT_ADAPTER_FORBIDDEN")
+    must(handoff.get("adapter_executes_bound_ppm_stage") is True,"M31_BOUND_PPM_ADAPTER_MISSING")
+    must(str(handoff.get("request_ref") or "").endswith("FACHWORKFLOW_HANDOFF_REQUEST.json"),"M31_REQUEST_REF_NOT_BOUND")
+
 def m31():
     a=mod(CURRENT_ACTION,"m31_action")
     base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
     item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
     out=a.augment_current_action(REPO,base,item)
-    must("fachworkflow_handoff" not in out,"M31_SECOND_HANDOFF_DEPENDENCY")
+    _m31_validate_handoff(out)
+    bad=copy.deepcopy(out);bad["fachworkflow_handoff"]["worker_executes_adapter_directly"]=True
+    expect_exc(lambda:_m31_validate_handoff(bad),"M31_WORKER_DIRECT_ADAPTER_FORBIDDEN")
+    bad=copy.deepcopy(out);bad["fachworkflow_handoff"].pop("request_ref",None)
+    expect_exc(lambda:_m31_validate_handoff(bad),"M31_REQUEST_REF_NOT_BOUND")
+    smoke=a.selftest()
+    must(smoke.get("current_codex_is_bound_fachworkflow_worker") is True,"M31_CURRENT_WORKER_NOT_BOUND")
+    must(smoke.get("separate_fachworkflow_executor_required") is False,"M31_SEPARATE_EXECUTOR_REQUIRED")
+    must(smoke.get("separate_fachworkflow_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
     bridge=json.loads(cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py"))
     must(bridge.get("status")=="H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS","M31_CODEX_NATIVE_BOUND_ACTION_NOT_PASS")
     must(bridge.get("custom_function_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
