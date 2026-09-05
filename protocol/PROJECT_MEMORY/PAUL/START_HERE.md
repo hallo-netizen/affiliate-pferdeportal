@@ -120,3 +120,18 @@ Paul-Scope-Gate = Worker-/Scope-/Frischegrenze, nicht Workflow-Navigation.
 
 Aktueller Zustand:
 Solange der aktuelle Campus keinen aktiven Paul-Block enthält, muss ein Paul-Start korrekt mit `PAUL_NOT_ASSIGNED` stoppen.
+
+
+## Technische Grenze der Automatik
+
+Für einen Repo-/Codex-Worker, der das repositoryweite `AGENTS.md` ausführt, ist der Paul-Start nach Aktivierung technisch verpflichtend und ohne neu erzeugten Prompt.
+
+Ein gewöhnlicher freier Chat außerhalb dieses Repo-Startmechanismus kann durch eine GitHub-Datei nicht beim Öffnen automatisch Code ausführen.
+
+Dafür gilt fail-closed:
+- kein aktiver Campusauftrag = keine gültige Paul-Arbeit;
+- Paul-PR ohne aktuelle Zuweisung/Scope = Hardlock BLOCKED;
+- PROJECT_MEMORY-Write aus `paul/*` = BLOCKED.
+
+Damit wird keine Scheinautomatik behauptet:
+**automatischer Worker-Start + serverseitige Integrationssperre**, nicht magisches Starten eines beliebigen Chats.

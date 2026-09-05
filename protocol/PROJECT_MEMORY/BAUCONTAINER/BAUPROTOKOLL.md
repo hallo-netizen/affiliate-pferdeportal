@@ -591,3 +591,51 @@ Die Automatik ist im Security-PR #137 vorbereitet, aber bis zur einmaligen bewus
 
 BEZUG:
 ARCH-052/053; BAU-027.
+
+
+### 2026-09-05 – Paul-Scope-Gate Volltest + kritische Korrekturen
+
+SELBSTTEST:
+`PAUL_SCOPE_GATE_SELFTEST_PASS:11/11`
+Python-Syntax/Compile: PASS.
+
+VOLLSTÄNDIGER LOKALER GIT-TEST:
+Ein echtes lokales Bare-`origin`, ein offizieller Campus-Branch und echte Paul-Branches wurden aufgebaut.
+
+ERGEBNIS NACH KORREKTUR:
+1. gültiger Auftrag / korrekter Branch → `PAUL_BOOTSTRAP_PASS`;
+2. Write innerhalb Scope → `PAUL_VERIFY_PASS`;
+3. Write außerhalb Scope → `PAUL_WRITE_SCOPE_BLOCKED`;
+4. gebundene TASK_SOURCE ändert sich → `STALE_ASSIGNMENT_BLOCKED:SOURCE_CHANGED`;
+5. kein aktiver Paul-Auftrag → `PAUL_NOT_ASSIGNED`;
+6. zwei aktive Paul-Aufträge → `PAUL_MULTIPLE_ASSIGNMENTS_BLOCKED`;
+7. falscher Paul-Branch → `PAUL_BRANCH_MISMATCH_BLOCKED`;
+8. READ_ONLY-Auftrag → Start PASS;
+9. Write bei READ_ONLY → `PAUL_WRITE_SCOPE_BLOCKED:READ_ONLY`.
+
+GEFUNDENER FEHLER IM ERSTEN VOLLTEST:
+Der erste Entwurf fetchte den offiziellen Campus in eine lokale Remote-Tracking-Referenz.
+Bei einem bewusst zurückgesetzten Test-Campus wurde der Fetch mit non-fast-forward abgelehnt.
+
+KISS-FIX:
+Offizieller Campus wird jetzt direkt gefetcht und über `FETCH_HEAD` ausgewertet.
+Security-Commit:
+`2c2cecce938da5bc4d124dee7015b850133b47ae`.
+
+WIEDERHOLUNG:
+Alle 9 Volltests erwartungsgemäß PASS/BLOCK.
+
+REALER CAMPUSCHECK:
+- aktueller Campus-Head zum Prüfzeitpunkt: `1bc3fa72584fb491cd9ff9be0bab70742df7fb5a`;
+- 8 reale HOBBYRAUM-Dateien;
+- 0 aktive/überhaupt vorhandene `PAUL_ASSIGNMENT_V1`-Marker;
+- daher aktueller erwarteter Paul-Start: `PAUL_NOT_ASSIGNED`.
+- Campus `hardlock`: PASS;
+- Campus `hardlock-base`: PASS.
+
+TECHNISCHE GRENZE:
+Repo-/Codex-Worker können über `AGENTS.md` automatisch gezwungen werden.
+Ein beliebiger freier Chat kann nicht allein durch GitHub beim Öffnen Code automatisch ausführen; dafür bleibt die serverseitige PR-/Hardlock-Sperre die zweite Schutzschicht.
+
+BEZUG:
+ARCH-052 bis ARCH-054; BAU-027.

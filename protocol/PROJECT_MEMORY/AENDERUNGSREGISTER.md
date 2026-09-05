@@ -423,3 +423,12 @@ KAPSEL:
 `.paul-capsule/` ist temporär, nicht eingecheckt, hashgebunden und keine Wahrheit.
 DRIFT:
 Nur HOBBYRAUM, zuständiger CURRENT_STATE sowie gebundene TASK-/TARGET-/RULES-Originalquellen blockieren bei Änderung; fremde Campusänderungen nicht.
+
+
+## ARCH-054 – Paul-Automatik ist Worker-Automatik, keine behauptete Chat-Autostart-Funktion
+WAS:
+Die technische Startautomatik wird über repositoryweites `AGENTS.md` + trusted Paul-Scope-Gate für Repo-/Codex-Worker erzwungen; GitHub-Hardlock erzwingt die Zuweisungs-/Scopegrenze am Integrationsweg.
+WARUM:
+Ein gewöhnlicher freier Chat kann nicht allein durch eine Repository-Datei beim Öffnen automatisch Code ausführen. Diese Produktgrenze darf nicht als gelöste Technik behauptet werden.
+REGEL:
+Kein neuer Übergabeprompt nötig. Für Worker automatisch; für beliebige Chats bleibt der Campus die Wahrheit und GitHub blockiert unautorisierte Paul-Integration fail-closed.

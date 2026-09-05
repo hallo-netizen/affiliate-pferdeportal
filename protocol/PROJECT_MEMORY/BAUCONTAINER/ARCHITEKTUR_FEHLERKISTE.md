@@ -482,3 +482,26 @@ NEGATIVE FÄLLE:
 AKTUELL:
 Implementierung im Security-PR #137 vorbereitet.
 Serverseitige/agentenseitige Vollaktivierung bleibt bis einmaliger Admin-Wartung BLOCKED.
+
+
+### BAU-027 – TESTNACHTRAG
+
+SELBSTTEST:
+11/11 PASS.
+
+VOLL-GIT-TEST:
+9/9 erwartete Positiv-/Negativergebnisse nach einem gefundenen und behobenen Fetch-Fehler.
+
+GEFUNDENER FEHLER:
+lokaler Remote-Tracking-Ref konnte bei non-fast-forward den Frischecheck mit falscher Ursache blockieren.
+
+FIX:
+offizieller Campus wird über frisches `FETCH_HEAD` gelesen.
+
+REALER AKTUELLER CAMPUS:
+8 Hobbyräume, 0 Paul-Assignment-Marker.
+Erwartetes Ergebnis für Paul aktuell:
+`PAUL_NOT_ASSIGNED`.
+
+STATUS BLEIBT:
+BLOCKED / SECURITY-MAINTENANCE – ausschließlich bis Security-PR #137 kontrolliert auf main aktiviert und dort real serverseitig positiv/negativ geprüft wurde.
