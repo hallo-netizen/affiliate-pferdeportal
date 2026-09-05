@@ -6,7 +6,7 @@
   "authorized_inputs": [
     {
       "ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
-      "sha256": "49793f35d143d0bdda5e556e6159ced4e2139bf2874ffc3c763b41c9d23bb4fc"
+      "sha256": "2a5524aa62fe9fa1ff935275fdc897283d0326f8283911a095aeb4faaa6714fd"
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
@@ -18,7 +18,7 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "280ab2a470718ff55f9254a19f4a703fc07881157645336bb33338e07bbdd711"
+      "sha256": "0c15407fbe7a9522ef59405193a4ff59b6f5b2d3fdd4005dc8bc4ca7cb8dd2bc"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
