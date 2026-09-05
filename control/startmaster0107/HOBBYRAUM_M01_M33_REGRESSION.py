@@ -72,17 +72,18 @@ def m12(): must("test_generic_fake_ppm_pass_is_blocked" in (REPO/"control/startm
 def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/startmaster0107/test_ppm679_current_action_binding.py").read_text(encoding="utf-8"),"M13_CONTENT_HASH_TEST")
 def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
 def _m15_validate_instruction(text):
-    required=("submission_command","Kein Vorab-Handoff durch den Worker","keine Capability-Suche","keine Alternativroute")
+    required=("submission_command","FACHWORKFLOW_HANDOFF_REQUEST.json","FACHWORKFLOW_PASS und ITEM_RECEIPT vor submission_command NICHT erzeugen","kein separater Handoff-Befehl durch den Worker","keine Capability-Suche","keine Alternativroute")
     for token in required: must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
     must(any("zweiter executor" in line.lower() and "kein" in line.lower() for line in text.splitlines()),"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
-    forbidden=("FACHWORKFLOW_HANDOFF_REQUEST.json","submit-request","Vorab-Handoff durch den Worker erforderlich")
+    forbidden=("submit-request","fachworkflow_handoff.command ausführen","FACHWORKFLOW_PASS vor submission_command erzeugen")
     for token in forbidden: must(token not in text,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
 
 def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
-    bad=text+"\\nFACHWORKFLOW_HANDOFF_REQUEST.json muss vor submission_command erzeugt werden."
+    bad=text+"\nfachworkflow_handoff.command ausführen"
     expect_exc(lambda:_m15_validate_instruction(bad),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
+
 def m16():
     s=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
     must("codex_worker_signer_access_allowed" in s and "False" in s,"M16_SIGNER_BOUNDARY")
@@ -132,11 +133,19 @@ def m26():
     smoke=a.selftest()
     must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
     must(smoke.get("direct_single_door") is True,"M26_DIRECT_PATH_NOT_PASS")
-    must(smoke.get("prepass_handoff_bound") is False,"M26_PREPASS_HANDOFF_REGRESSION")
-    must(smoke.get("pre_submit_context_bound") is True,"M26_REAL_CONTEXT_INPUT_NOT_BOUND")
-    # No fabricated fact_pack / plan / release fixture here.
-    # PASS requires a real bound Fachworkflow run to supply the five context objects.
-    raise Fail("M26_REAL_BOUND_FACHWORKFLOW_EXECUTION_NOT_PROVEN")
+    must(smoke.get("pre_ppm_request_bound") is True,"M26_PRE_PPM_REQUEST_NOT_BOUND")
+    must(smoke.get("worker_separate_handoff_command") is False,"M26_SECOND_HANDOFF_COMMAND_REGRESSION")
+    must(smoke.get("provisional_receipt_required") is False,"M26_PROVISIONAL_RECEIPT_REGRESSION")
+    must(smoke.get("fachworkflow_pass_materialized_after_real_ppm") is True,"M26_PASS_ORDER_REGRESSION")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
+    out=a.augment_current_action(REPO,base,item);hb=out.get("fachworkflow_handoff") or {};schema=out.get("item_receipt_schema") or {}
+    must(hb.get("request_ref")==".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json","M26_REQUEST_REF_NOT_BOUND")
+    must(hb.get("worker_executes_adapter_directly") is False,"M26_WORKER_HANDOFF_EXECUTION_NOT_BLOCKED")
+    must("pre_submit_context" not in schema,"M26_PROVISIONAL_CONTEXT_STILL_REQUIRED")
+    ppm=schema.get("ppm679_requirement") or {}
+    must(ppm.get("pre_ppm_binding_required_fields")==["final_article_ref","final_article_sha256"],"M26_PRE_PPM_BINDING_NOT_MINIMAL")
+    must("ppm_report_ref" in ppm.get("final_ppm679_binding_required_fields",[]),"M26_FINAL_PPM_REPORT_NOT_REQUIRED")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
@@ -145,11 +154,13 @@ def m27():
 
 def m28():
     a=mod(CURRENT_ACTION,"m28_action")
-    sample={"status":"CURRENT_BOUND_ACTION_READY","room_token":"R_D_1_01","current_item":{"canonical_article_id":"article:test","article_type":"beratung"},"fachworkflow_authority":"EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY","fachworkflow_prompt_ref":"bound.txt","allowed_output_root":".pferde-quarantine/test/","item_receipt_ref":".pferde-quarantine/test/ITEM_RECEIPT.json","item_receipt_schema":{"contract":"X"},"submission_command":"python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json"}
+    handoff={"contract":"PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1","batch_sha256":"b"*64,"request_ref":".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json","request_contract":"PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","request_required_fields":["contract"],"adapter_ref":"control/startmaster0107/fachworkflow_proof_handoff.py","adapter_sha256":"a"*64,"adapter_executes_bound_ppm_stage":True,"worker_executes_adapter_directly":False,"content_or_quality_rules_changed":False,"publish_allowed":False}
+    sample={"status":"CURRENT_BOUND_ACTION_READY","room_token":"R_D_1_01","current_item":{"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"},"fachworkflow_authority":"EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY","fachworkflow_prompt_ref":"bound.txt","allowed_output_root":".pferde-quarantine/test/","item_receipt_ref":".pferde-quarantine/test/ITEM_RECEIPT.json","item_receipt_schema":{"contract":"X"},"fachworkflow_handoff":handoff,"submission_command":"python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json"}
     v=a._current_only(sample)
-    must(v["submission_command"].endswith("ITEM_RECEIPT.json"),"M28_DIRECT_SUBMIT_POSITIVE")
-    bad=copy.deepcopy(sample);bad["submission_command"]="python3 fake.py"
-    expect_exc(lambda:a._current_only(bad),"CURRENT_ACTION_SUBMISSION_NOT_BOUND")
+    must(v["submission_command"].endswith("FACHWORKFLOW_HANDOFF_REQUEST.json"),"M28_REQUEST_SUBMIT_POSITIVE")
+    must(not v["submission_command"].endswith("ITEM_RECEIPT.json"),"M28_PREMATURE_RECEIPT_SUBMIT")
+    bad=copy.deepcopy(sample);bad["fachworkflow_handoff"]["request_ref"]="outside/FACHWORKFLOW_HANDOFF_REQUEST.json"
+    expect_exc(lambda:a._current_only(bad),"CURRENT_ACTION_HANDOFF_REQUEST_OUTSIDE_BOUND_ROOT")
 
 def m29():
     a=mod(CURRENT_ACTION,"m29_action")
@@ -189,13 +200,15 @@ def m31():
     a=mod(CURRENT_ACTION,"m31_action")
     base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
     item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
-    out=a.augment_current_action(REPO,base,item)
-    must("fachworkflow_handoff" not in out,"M31_SECOND_HANDOFF_DEPENDENCY")
+    out=a.augment_current_action(REPO,base,item);hb=out.get("fachworkflow_handoff") or {}
+    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M31_EXISTING_HANDOFF_NOT_BOUND")
+    must(hb.get("worker_executes_adapter_directly") is False,"M31_SECOND_HANDOFF_EXECUTOR_DEPENDENCY")
     bridge=json.loads(cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py"))
     must(bridge.get("status")=="H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS","M31_CODEX_NATIVE_BOUND_ACTION_NOT_PASS")
     must(bridge.get("custom_function_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
     step=STEP7.read_text(encoding="utf-8")
     must("execute_bound_action" not in step,"M31_EXECUTE_BOUND_ACTION_DEPENDENCY")
+    must("submit-request" not in step,"M31_SECOND_SUBMIT_ROUTE")
 
 def m32():
     h=mod(HANDOFF,"m32_handoff")
