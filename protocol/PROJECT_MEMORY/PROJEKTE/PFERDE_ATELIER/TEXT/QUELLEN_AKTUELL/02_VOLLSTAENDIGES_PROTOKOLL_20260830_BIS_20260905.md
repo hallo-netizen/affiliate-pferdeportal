@@ -110,3 +110,41 @@ Daher konnten technische Tests PASS sein, während der echte Workflow später er
 - erster aktueller Live-Blocker: Kategorie-ID-Anforderung vor realem PPM
 - SEO-5-Felder-Handoff und Textmaschine ausdrücklich unangetastet lassen
 - kein Publish / keine WordPress-Schreibaktion
+## 05.09 – Interne Signieraltlasten-Säuberung
+
+Die historische Architekturentscheidung wurde erneut gegen Repository-Historie und aktuellen Code geprüft:
+- interne Raum-/Worker-Signierung war bereits bewusst verworfen worden;
+- innerhalb der Produktionsstraße sollen Wächter, Hash-/Herkunftsbindung, Fachprüfungen und PASS/Receipt-Kette arbeiten;
+- kryptografische Versiegelung gehört erst an die externe Grenze nach abgeschlossener Produktion.
+
+Trotzdem waren im aktiven Vorlauf noch technische Reste des alten Modells vorhanden: H8-Bootstrap/Provenance, Preproduction-Handoff, Runtime-Guard, Codex-Preflight sowie das gebundene Generation-1-H8-Paket verlangten noch ED25519-/Signer-/Key-Merkmale.
+
+KISS-Säuberung auf Draft-PR #140 / Branch `hobbyroom/b01-semantic-category-seed`:
+- interne ED25519-/Signer-/Key-Pflicht entfernt;
+- H8 bleibt hash-, Batch-, Slot- und herkunftsgebunden;
+- gebundenes Generation-1-Paket intern auf reine Hash-/Provenance-Bindung umgestellt;
+- M22/M23 auf die heutige Signiergrenze korrigiert;
+- stale M26/M28 zusätzlich auf den aktuellen Request → realer PPM → PASS/Receipt-Weg korrigiert;
+- 107007/107008-/State-/Root-Hashketten nachgezogen.
+
+Nicht verändert:
+- Textmaschine;
+- externe-Link-Regel;
+- Tabellenpflicht/-stufe;
+- LanguageTool;
+- PPM 6.7.9 / PSERC / PSTE;
+- SEO / Design;
+- Publish-Sperre;
+- externe Signierung nach 107008 und GitHub-ENDSTEMPEL/WordPress-Verifikation.
+
+Beleg auf Head `c3244d5bf838817078a3821c045fb52e86f3db46`:
+- `hardlock`: PASS;
+- `hardlock-base`: PASS;
+- aktiver Innenweg ohne ED25519-/Signer-/Key-Pflicht geprüft;
+- externer ENDSTEMPEL weiterhin vorhanden.
+
+Noch kein Abschlussbeleg:
+- M01–M33 wurde auf diesem exakten Head noch nicht vollständig ausgeführt;
+- kein neuer 7/7-Live-Lauf;
+- main unverändert `c8a96e7a2f598de69134d90b143257c3559bc98a`.
+
