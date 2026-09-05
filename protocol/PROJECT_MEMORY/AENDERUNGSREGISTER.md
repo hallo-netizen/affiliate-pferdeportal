@@ -21,7 +21,7 @@ Wenn WARUM nicht belastbar geklärt ist:
 
 WAS: Zentrales Projektgedächtnis als Campus → Projektgebäude → Büro → Hobbyraum.
 VORHER: Wissen lag verteilt in Chatverläufen, Protokollen, technischen States und Dateien.
-NACHHER: neuer organisatorischer Wegweiser unter `PROJECT_MEMORY/`.
+NACHHER: organisatorischer Wegweiser unter `protocol/PROJECT_MEMORY/`.
 WARUM: neue/wechselnde Chats sollen ohne Vorwissen zuverlässig aktuellen Stand, Regeln, Fehler und vorhandene Arbeitswege finden.
 BELEG: Architekturentscheidung 2026-09-05.
 ENTFERNBAR: nur durch dokumentierte Nachfolgearchitektur.
@@ -51,6 +51,15 @@ REGEL:
 - neue dauerhafte Funktion → neues Büro;
 - größerer Teilbereich → neue Abteilung;
 - eigenständiges Projekt → neues Projektgebäude.
+
+## ARCH-006 – Technischer Standort unter protocol/
+
+WAS: PROJECT_MEMORY liegt technisch unter `protocol/PROJECT_MEMORY/`.
+VORHER: erster Entwurf lag direkt unter `PROJECT_MEMORY/`.
+NACHHER: unverändertes Campusmodell, aber technischer Ablageort unter bereits bestehender `protocol/**`-CI-Abdeckung.
+WARUM: der vorhandene Required Check `hardlock` wird bei Pull Requests für `protocol/**` bereits automatisch ausgelöst. So braucht die neue Gebäudeordnung keine Änderung an geschützten Workflows/Gates und keinen künstlichen Parallelmechanismus.
+BELEG: Draft-PR #134; reiner PROJECT_MEMORY-Head startete zunächst nur `hardlock-base`. Bestehender Workflowpfad zeigt `protocol/**` als PR-Trigger für `hardlock`.
+ENTFERNBAR: nur wenn ein anderer bestehender, gleichwertig geschützter Speicherort beide Required Checks ohne Maschinenraum-Umbau auslöst.
 
 ## TECH-KEYFLOW-001 – Schlüsselübergabe
 
