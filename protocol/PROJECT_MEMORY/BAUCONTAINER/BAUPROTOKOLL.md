@@ -382,3 +382,24 @@ Der Nutzer-Startprompt wurde inhaltlich um Single-Writer/Paul-Grenze, Frischepr�
 
 BEZUG:
 ARCH-048.
+
+
+### 2026-09-05 – Aktivierungsversuch Security-PR #137
+
+AKTION:
+PR #137 aus Draft genommen und normaler Merge gegen den aktiven Ruleset versucht.
+
+ERGEBNIS:
+GitHub hat den Merge serverseitig abgewiesen.
+`hardlock = PASS`.
+`hardlock-base = FAIL` mit dem bestehenden Selbstschutz für Workflow-Security (`IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`).
+
+BEWERTUNG:
+Kein Bypass vorhanden; genau die beabsichtigte Schutzwirkung des aktuellen Systems.
+
+KONSEQUENZ:
+Die Paul-Sperre ist implementiert und reviewbereit, aber **noch nicht aktiv auf main**.
+Aktivierung benötigt einmalig den bewussten Repository-Admin-Wartungsweg für eine Änderung an der immutable Security-Schicht. Danach sofort Positiv-/Negativtest und vollständige Wiederherstellung des normalen Rulesets.
+
+KEIN FALSCHER PASS:
+Bis zur Aktivierung + Realtest bleibt BAU-024 BLOCKED.
