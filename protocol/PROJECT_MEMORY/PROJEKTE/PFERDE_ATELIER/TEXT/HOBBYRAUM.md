@@ -1,24 +1,38 @@
 # TEXT – HOBBYRAUM
 
-STATUS: NICHT FÜR FACHARBEIT DURCH DIESEN SORTIERCHAT
-
 STAND: 2026-09-05
+STATUS: AKTIV / PAUL-TEXT/SEO-ARBEITSWEG GEBUNDEN
 
-Aktueller Auftrag dieses Chats:
-**nur Dateien/GitHub-Quellen sortieren und den belegten aktuellen Stand herstellen.**
+## Aktueller Arbeitsweg
 
-Erlaubt:
-- Dateibestand erfassen;
-- Versionen/Hashes/Quellen verknüpfen;
-- unverändert archivieren;
-- Campus-Metadaten aktualisieren.
+Pauls direkter Einstieg:
+`../../../PAUL/TEXT_SEO/START_HERE.md`
 
-Nicht erlaubt:
-- Textmaschine verändern;
-- SEO-Regeln verändern;
-- Runner prüfen/ändern;
-- Produktionsworkflow prüfen/ändern;
-- Fachfehler reparieren;
-- Originalinhalte umschreiben.
+Gebundener Arbeitsbranch:
+`paul/text-seo-campus-ready-20260905`
 
-Für Facharbeit bleibt der dafür zuständige TEXT-Arbeitschat/Fachweg maßgeblich.
+## Raumregel
+
+Dieser Hobbyraum bindet nur den aktuellen Arbeitsweg und die Zuständigkeit.
+
+Er ersetzt NICHT:
+- den aktiven Zielvertrag;
+- die aktuelle Fehlerliste;
+- technische Originalquellen;
+- die Hard Rules.
+
+## Erlaubt
+
+Facharbeit nur im ausdrücklich gebundenen Arbeitsweg/Branch und nach vollständiger Pflichtlektüre.
+
+## Nicht erlaubt
+
+- aus diesem Raum neue Regeln ableiten;
+- main direkt verändern;
+- parallele Ersatzwege eröffnen;
+- veraltete Chat-Aufträge als aktuelle Raumbelegung behandeln.
+
+## Bei Abschluss
+
+Ergebnis zurück an das TEXT-Fachbüro.
+Danach Hobbyraum auf FREI oder nächsten ausdrücklich gebundenen Auftrag setzen.

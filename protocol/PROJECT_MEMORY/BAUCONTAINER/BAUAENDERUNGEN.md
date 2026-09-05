@@ -40,3 +40,7 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-030 → Tresorstatus fail-closed; kein erfundener TRESOR_PASS
 
 - ARCH-031 → externer Tresor-Git-/Metadaten-PREPASS mit realem Restore-Test
+
+- ARCH-032 → dauerhafte Eingangadressen / keine stillen Umzüge
+- ARCH-033 → Hobbyraum-Standard + Routing-Kennwort
+- ARCH-034 → keine temporären Chatrechte in Dauerakten

@@ -1,35 +1,19 @@
 # BILD – HOBBYRAUM
 
 STAND: 2026-09-05
-STATUS: AKTUELLER AUFTRAG – MASTERAKTEN AUFNEHMEN
+STATUS: FREI
 
-## Auftrag
+## Letzte abgeschlossene Arbeit
 
-Alle vom Nutzer übergebenen Bildzentrale-Masterdateien vollständig verwerten und zuordnen.
+- allgemeine Bildzentrale 2.6.9 + Nullpunkt 069 als aktueller allgemeiner Dateistand zusammengeführt;
+- Pferde-Atelier Master 049 + Plugin 2.4.9 als historische Projektakten eingeordnet;
+- bestehende Projekt-Konfig-/Migrationsbelege zugeordnet;
+- Roharchive unverändert abgelegt;
+- keine Bildlogik, Promptregel oder Pluginquelle verändert.
 
-## Harte Regel
+## Nächster Auftrag
 
-Nichts aus Masterdateien still verwerfen.
+Nur bei ausdrücklicher neuer Bindung.
 
-Jeder Bestandteil bekommt mindestens:
-- Quelle
-- Hash oder eindeutige Identität
-- Typ
-- Bedeutung
-- Status
-- Zuordnung
-- offene Fragen
-
-## Bereits erledigt
-
-- beide ZIPs vollständig geöffnet und inventarisiert;
-- eingebettete und separat gelieferte 2.4.9-Plugin-ZIP byte-identisch belegt;
-- 2.4.9-PHP funktional inventarisiert;
-- Vor-Migrations-Export strukturell vollständig ausgewertet;
-- 2.6.6-Einstellungs-Export ausgewertet;
-- LIVE-Version 2.6.9 als aktueller produktiver Stand aufgenommen;
-- Zugangsdaten als sensible Projektparameter erkannt und von öffentlicher Ablage ausgeschlossen.
-
-## Nächster Schritt
-
-Weitere BILD-Masterdateien des Nutzers genauso in dieses Inventar einordnen.
+Dann zuerst:
+`START_HERE.md` → `CURRENT_STATE.md` → dieser `HOBBYRAUM.md` → gebundener Arbeitsweg.

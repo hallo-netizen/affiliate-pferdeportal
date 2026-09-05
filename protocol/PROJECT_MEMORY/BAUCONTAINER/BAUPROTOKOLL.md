@@ -162,3 +162,25 @@ Nächster Blocker: nicht exportierbare Recovery-Abhängigkeiten noch nicht verif
 
 BEZUG:
 ARCH-031.
+
+
+### 2026-09-05 – Kritische Bauabnahme: erste Mängel direkt geschlossen
+
+BEFUNDE:
+- TEXT-/HIVEPRESS-Eingang führte nicht vollständig über CURRENT_STATE → HOBBYRAUM;
+- TEXT-Eingang/Hobbyraum waren an den alten Sortierchat gebunden und kollidierten mit Pauls Fachauftrag;
+- BILD-Hobbyraum war nach abgeschlossenem Abgleich noch als AKTIV markiert;
+- Pferde-Gebäudeeingang enthielt veralteten Parallelchat-Hinweis;
+- Paul-TEXT/SEO nutzte fünf abgekürzte `.../`-Pfade;
+- zentrale Tresor-/Bild-Metadaten enthielten veraltete Statushinweise;
+- Hobbyraum-Kennwort/Zustände waren nicht zentral definiert.
+
+KISS-FIX:
+Nur Navigations-/Status-/Architekturmetadaten an bestehenden Adressen korrigiert.
+Keine Fachdatei und keine Fachlogik verändert.
+
+ADRESSGARANTIE:
+Alle bereits verteilten Campus-/Büro-/Paul-Einstiege bleiben unverändert erreichbar.
+
+BEZUG:
+ARCH-032 bis ARCH-034; BAU-010 bis BAU-013.

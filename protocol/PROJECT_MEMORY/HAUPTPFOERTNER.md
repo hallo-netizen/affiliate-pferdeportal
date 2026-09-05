@@ -39,6 +39,7 @@ Jede klare natürliche Formulierung wie:
 - „geh ins Pferde-Atelier“
 - „geh ins Pferde-Atelier TEXT/SEO“
 - „Campus → Pferde-Atelier → TEXT/SEO“
+- „Pferde-Atelier → TEXT → Hobbyraum“
 
 wird als Routingauftrag behandelt.
 
@@ -64,7 +65,7 @@ Der Chat MUSS:
 10. bei Modulfragen das Modulregister prüfen;
 11. bei WordPress-/Pluginfragen `WORDPRESS_REGISTER.md` prüfen;
 12. dem Nutzer den geladenen Stand zurückmelden;
-12. erst danach die Pförtnerrolle verlassen und zur zuständigen Arbeitsrolle wechseln.
+13. erst danach die Pförtnerrolle verlassen und zur zuständigen Arbeitsrolle wechseln.
 
 ## Pflicht-Rückmeldung
 
@@ -115,6 +116,9 @@ keine Secrets in den öffentlichen Campus-Prototyp.
 
 ## Katastrophenfall
 
-`protocol/PROJECT_MEMORY/TRESOR/NOTFALL_WIEDERAUFBAU.md`
+Zuerst:
+`protocol/PROJECT_MEMORY/TRESOR/START_HERE.md`
 
-Nur geprüften `TRESOR_PASS` verwenden.
+Dann aktuellen `STATUS.md` prüfen.
+
+Nur einen ausdrücklich geprüften `TRESOR_PASS` als vollständige Wiederherstellungsquelle verwenden.

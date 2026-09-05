@@ -9,13 +9,13 @@ Das Pferde-Atelier-Büro für HivePress-/Anzeigenmarkt-bezogene Projektakten.
 du den Pferde-Atelier-HivePress-Bestand oder die Projektanwendung allgemeiner HivePress-Module finden willst.
 
 **DU DARFST …**  
-Bestandsquellen, Projektverweise und Archivzuordnung finden.
+Bestandsquellen, Projektverweise und Archivzuordnung finden und bei gebundenem Fachauftrag nach dessen Regeln arbeiten.
 
 **DU DARFST NICHT …**  
-HivePress-, Listing-, Kategorie- oder Plugininhalte in diesem Sortierkontext verändern.
+aus dem Büroeintritt Schreibrechte ableiten, Modulgrenzen verwischen oder ohne gebundenen Fachauftrag Inhalte/Code verändern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → allgemeiner Modulverweis → Originalakte.
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → relevanter Modulverweis → Originalakte.
 
 ## Allgemeiner Research-&-Fill-Kern
 MOD-005:
