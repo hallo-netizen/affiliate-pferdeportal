@@ -215,3 +215,28 @@ KISS-FIX:
 
 BEZUG:
 ARCH-037 bis ARCH-039; BAU-016 bis BAU-018.
+
+
+### 2026-09-05 – Formale Bauabnahme nach Reparaturen
+
+POSITIV:
+- 22/22 PROJECT_MEMORY-Verzeichnisse besitzen START_HERE;
+- 22/22 START_HERE-Eingänge erfüllen 1-Klick-Standard;
+- 6/6 Pferde-Büros besitzen START_HERE + CURRENT_STATE + genau einen HOBBYRAUM;
+- 6/6 Hobbyräume besitzen 1-Klick-Übersicht und gültigen Status;
+- 6/6 Büros führen bei echter Arbeit über Handlungs-/Fehler-/Änderungs-/Zielregister;
+- Pförtner READ/ROUTE ONLY;
+- Hausmeister reine Verwaltung;
+- Paul-Pfade vollständig, keine Ellipsen;
+- bestehende Adressen unverändert;
+- Campus-Hardlocks auf den vorausgehenden Abnahmeständen PASS.
+
+NEGATIV / BEWUSST OFFEN:
+- BAU-003: Campus-Prototyp noch im öffentlichen Pferde-Atelier-Repo/Branch;
+- TRESOR: kein vollständiger PASS, erster Blocker fehlende unabhängige Roharchiv-Redundanz;
+- danach weiterhin Recovery-Abhängigkeiten/Secrets zu prüfen;
+- Archivbestände mit ROT/GELB bleiben lokal nicht entbehrlich.
+
+GESAMT:
+Architektur/Navigations-/Rollenabnahme PASS.
+Vollständiger Sicherheits-/Katastrophen-PASS BLOCKED.

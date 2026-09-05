@@ -290,3 +290,12 @@ WARUM:
 Git-Mirror und GitHub-Metadaten sichern nicht automatisch die großen Rohmaster in der ChatGPT-Library.
 AKTUELL:
 `TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
+
+
+## ARCH-040 – Jedes PROJECT_MEMORY-Verzeichnis hat START_HERE
+WAS:
+Jede reale Verzeichnisebene im Campus besitzt eine eigene Eingangstafel.
+WARUM:
+„Egal wo man eintritt“ darf nicht nur für ausgewählte Haupttüren gelten.
+ABNAHMEBELEG 2026-09-05:
+22/22 PROJECT_MEMORY-Verzeichnisse mit START_HERE; 22/22 Eingänge erfüllen nach Reparatur die 1-Klick-Pflicht.
