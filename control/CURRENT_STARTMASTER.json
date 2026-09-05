@@ -10,7 +10,7 @@
   "visible_output_policy_sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f",
   "visible_output_authority": "RELEASE_RECEIPT_ONLY",
   "h8_boundary_ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
-  "h8_boundary_git_blob_sha1": "5e5b0fb7fbe83b7c534c6afb061aca201d314a4c",
+  "h8_boundary_git_blob_sha1": "3d0930e8b687ea523abd45f164802207ca60fd00",
   "immutable_base_hardlock_ref": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
   "free_chat_execution_authority": false,
   "chat_project_result_authority": "NONE",
