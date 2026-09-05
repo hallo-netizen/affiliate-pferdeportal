@@ -156,3 +156,38 @@ Wenn weitere Masterdateien eintreffen:
 - Dubletten über Hash erkennen;
 - aktive Wahrheit, Historie, Fehlerbeleg, Testbeleg, Datenbeleg, Architekturbeleg oder UNGEKLÄRT zuweisen;
 - nichts löschen, solange die Zuordnung nicht abgeschlossen ist.
+
+
+## Quelle BILD-ALLGEMEIN-006
+
+Datei:
+`ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
+
+SHA-256:
+`748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
+
+Zuordnung:
+AKTUELLER ALLGEMEINER PLUGIN-DATEIBELEG / MOD-002.
+
+## Quelle BILD-ALLGEMEIN-007
+
+Datei:
+`NULLPUNKT_BILDSYSTEM_NEU_069_PROMPTGRENZE_REPARIERT.zip`
+
+SHA-256:
+`4258ae194e681dcae2fa37467d1a430d48ef2ae7e2889e2f02939456bbb1d434`
+
+Zuordnung:
+AKTUELLER ALLGEMEINER NULLPUNKT-/MASTERBELEG.
+
+Der darin enthaltene 2.6.9-Installer ist byte-identisch mit BILD-ALLGEMEIN-006.
+
+## Dubletten 2026-09-05
+
+Erneut hochgeladen:
+- `PFERD_ZUR_SICHERHEIT_MASTERDATEI_BILDSYSTEM_NEU_049.zip`
+- `PFERDE_ATELIER_BILDZENTRALE_2.4.9_LOKALE_VORSCHAU_REPARIERT(2).zip`
+
+Beide sind byte-identisch mit den bereits inventarisierten Pferde-Dateien.
+
+Keine zweite Hauptwahrheit.

@@ -36,15 +36,31 @@ Es entscheidet NICHT:
 MOD-ID:
 MOD-002
 
-Nachweisbar erhalten:
-- `PFERDE_ATELIER_BILDZENTRALE_2.4.9_LOKALE_VORSCHAU_REPARIERT(1).zip`
-- zusätzlich BILD-Masterakte + Konfigurations-/Migrationsdaten
+Aktuellster allgemeiner Plugin-Dateibeleg:
+`ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
 
-Dateibeleg-Code:
-2.4.9
+Version:
+**2.6.9**
 
-Aktuell bestätigter LIVE-Stand im Pferde-Atelier:
-2.6.9, aber der 2.6.9-Plugin-ZIP wurde noch nicht als Datei übergeben.
+SHA-256:
+`748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
+
+Nullpunkt:
+`NULLPUNKT_BILDSYSTEM_NEU_069_PROMPTGRENZE_REPARIERT.zip`
+
+Nullpunkt SHA-256:
+`4258ae194e681dcae2fa37467d1a430d48ef2ae7e2889e2f02939456bbb1d434`
+
+Byte-Abgleich:
+separater 2.6.9-Installer = im Nullpunkt eingebetteter 2.6.9-Installer.
+
+Pferde-Atelier:
+- WordPress-Live-Version 2.6.9 laut bestehender Nutzerbestätigung
+- historische Pferde-Dateien: Plugin 2.4.9 + Master 049
+- Projekt-Konfig/Migrationsakten separat erhalten
+
+GitHub:
+auf aktuellem `main` kein separater Bildzentrale-Dateistand unter diesen Namen gefunden.
 
 Hauptquellen:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`

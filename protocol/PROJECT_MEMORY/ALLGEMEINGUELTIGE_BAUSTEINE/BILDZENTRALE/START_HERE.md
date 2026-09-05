@@ -1,30 +1,36 @@
 # ALLGEMEINGÜLTIGER BAUSTEIN – BILDZENTRALE
 
 STAND: 2026-09-05
-STATUS: ALLGEMEINER KERN BESTÄTIGT / 2.6.9-CODEPRÜFUNG AUSSTEHEND
+STATUS: ALLGEMEINER KERN / DATEIBELEG 2.6.9 VORHANDEN
 
-## Allgemeiner Kern
+## 1-KLICK-ÜBERSICHT
 
-Vom Nutzer bestätigter LIVE-Stand 2.6.9:
-allgemeingültige Bildzentrale für Beiträge, WordPress-Taxonomien und optionale HivePress-Taxonomien mit Pixabay, Pexels und Magnific, sicheren Profilen, Export/Import und Readback-Fallback.
+**WAS IST DAS?**  
+Der allgemeingültige Bildzentrale-Kern MOD-002.
+
+**HIER BIST DU RICHTIG, WENN …**  
+du den aktuellen allgemeinen Plugin-/Masterstand oder die Archivquelle finden willst.
+
+**DU DARFST …**  
+Version, Hash, Dateibeleg und Projektverweise finden.
+
+**DU DARFST NICHT …**  
+Bildlogik, Promptregeln, Providerlogik, Code oder Originalinhalte in diesem Sortierkontext verändern.
+
+**ALS NÄCHSTES …**  
+`CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md`.
+
+## Aktueller allgemeiner Dateistand
+
+Plugin:
+**ALLGEMEINE BILDZENTRALE 2.6.9**
+
+Nullpunkt/Master:
+**NULLPUNKT BILDSYSTEM NEU 069**
 
 ## Projekttrennung
 
-Allgemeiner Plugin-Kern:
-hier.
-
 Pferde-Atelier-spezifische Nutzung:
-`../../PROJEKTE/PFERDE_ATELIER/BILD/`
+`../../../PROJEKTE/PFERDE_ATELIER/BILD/`
 
-Dort bleiben:
-- konkrete Pferde-Prompts,
-- Profilwerte,
-- Produktionshistorie,
-- konkrete IDs/Tasks,
-- Migrationen,
-- Projektfehler.
-
-## Offener Nachweis
-
-Der vollständige LIVE-Code 2.6.9 wurde noch nicht als Datei übergeben.
-Bis dahin bleibt die allgemeine Architektur bestätigt, die Byte-/Codeprüfung jedoch offen.
+Dort bleiben historische/projektbezogene Akten.

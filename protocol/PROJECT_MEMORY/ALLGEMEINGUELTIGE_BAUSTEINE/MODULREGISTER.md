@@ -97,7 +97,7 @@ echter Live-WordPress-Deploymentlauf auf Zielinstallation
 ## MOD-002 – BILDZENTRALE
 
 MODULKLASSE: ALLGEMEINGÜLTIG
-STATUS: allgemeingültiger Modul-Kern vom Nutzer bestätigt; LIVE im Pferde-Atelier 2.6.9; Byte-/Codeprüfung 2.6.9 noch offen
+STATUS: allgemeingültiger Modul-Kern; aktueller 2.6.9-Installer + Nullpunkt 069 als Dateien vorhanden; beide Installer byte-identisch; Pferde-LIVE-Version 2.6.9 separat belegt
 HAUPTORT: `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
 AKTUELL BELEGTER LIVE-STAND: 2.6.9 im Pferde-Atelier
 ZWECK:
@@ -114,13 +114,14 @@ ABHÄNGIGKEITEN: WordPress; optionale HivePress-Nutzung; Providerzugänge
 NUTZENDE PROJEKTE:
 - PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/BILD/`
 BELEG:
-- Nutzerbestätigung LIVE 2.6.9
-- BILD-Masterakten-Inventar
+- allgemeiner Installer 2.6.9
+- Nullpunkt 069
+- Byte-Identität beider 2.6.9-Installer
+- bestehende Nutzerbestätigung LIVE 2.6.9 im Pferde-Atelier
+- Pferde Master 049 / historischer 2.4.9-Codebeleg
 - 2.6.6-Konfigurationsbeleg
-- 2.4.9-Codebeleg
 OFFEN:
-- vollständiger 2.6.9-Code noch nicht als Datei übergeben;
-- technische Portabilitätsprüfung des 2.6.9-Codes folgt nach Übergabe.
+- keine Fachprüfung in diesem Sortierschritt.
 
 ## Projektanwendung
 

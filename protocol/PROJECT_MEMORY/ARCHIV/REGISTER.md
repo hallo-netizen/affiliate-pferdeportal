@@ -223,3 +223,49 @@ Dort:
 
 LOKALE_KOPIE_ENTBEHRLICH:
 NEIN
+
+
+## ARC-MOD-002-20260905 – Allgemeine Bildzentrale
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/2026-09-05/`
+
+Kanonisch vorhanden:
+- ALLGEMEINE BILDZENTRALE 2.6.9
+- NULLPUNKT BILDSYSTEM NEU 069
+
+Hashes:
+- Plugin 2.6.9: `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
+- Nullpunkt 069: `4258ae194e681dcae2fa37467d1a430d48ef2ae7e2889e2f02939456bbb1d434`
+
+Byte-Abgleich:
+Installer im Nullpunkt = separater 2.6.9-Installer.
+
+LOKALE_KOPIE_ENTBEHRLICH:
+NEIN
+
+## ARC-PFERDE-BILD-20260905 – Pferde-Atelier Bildakten
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/BILD/2026-09-05/`
+
+Kanonisch vorhanden:
+- Master 049
+- historischer Pluginstand 2.4.9
+- Einstellungs-Export 2.6.6
+- Vor-Migrations-Export 2026-08-05
+
+Dubletten:
+erneut hochgeladener Master 049 und Plugin 2.4.9 sind byte-identisch mit den früher inventarisierten Dateien.
+
+Aktuelle WordPress-Version:
+2.6.9 laut bestehender Nutzerbestätigung.
+
+LOKALE_KOPIE_ENTBEHRLICH:
+NEIN

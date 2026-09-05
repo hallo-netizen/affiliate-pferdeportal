@@ -16,7 +16,7 @@ Das ist die aktuelle fachliche LIVE-Wahrheit.
 ## Beleglage
 
 ### Code
-Letzter vollständig übergebener Plugin-Code:
+Historischer Pferde-spezifischer Plugin-Codebeleg:
 **2.4.9**
 
 Plugin-ZIP SHA-256:
@@ -33,7 +33,7 @@ Späterer übergebener Einstellungs-Export:
 Aktuell eingesetzte Version:
 **2.6.9**.
 
-Der vollständige 2.6.9-Code ist aus den bisher übergebenen Masterdateien noch nicht bytegenau belegbar.
+Der allgemeine 2.6.9-Installer liegt jetzt als exakter Dateibeleg vor und ist byte-identisch mit dem Installer im Nullpunkt 069.
 
 ## Belegtes Funktionsbild
 
@@ -111,9 +111,8 @@ Belegte Tests:
 
 ## Offene Belegpunkte
 
-1. vollständiger 2.6.9-Code noch nicht in den übergebenen Dateien;
-2. exakter Änderungsweg 2.4.9 → 2.6.6 → 2.6.9 noch nicht vollständig historisch belegt;
-3. WordPress-Kategorie: Prompt 16:9 vs. gespeicherte Ausgabe 3:1 ungeklärt;
-4. ein historischer Magnific-Task stand beim Vor-Migrations-Export noch auf `IN_PROGRESS`; späterer Endstatus aus den vorliegenden Akten nicht belegt.
+Bestehende fachliche offene Punkte bleiben unverändert in ihren Originalquellen.
+
+Dieser Sortierschritt löst keine Fachfrage.
 
 Keine Lücke durch Raten schließen.

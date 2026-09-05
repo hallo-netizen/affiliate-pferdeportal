@@ -31,10 +31,11 @@ ALLGEMEINGÜLTIG.
 
 ## Aktuelle Beleglage
 
-- LIVE in WordPress: 2.6.9 – Nutzerbestätigung
-- Konfigurationsbeleg: 2.6.6
-- vollständiger übergebener Codebeleg: 2.4.9
-- vollständiger 2.6.9-Code noch nicht als Datei übergeben
+- allgemeiner aktueller Plugin-Dateibeleg: 2.6.9
+- allgemeiner Nullpunkt-/Masterbeleg: 069
+- LIVE in WordPress: 2.6.9 – bestehende Nutzerbestätigung
+- Pferde-Konfigurationsbeleg: 2.6.6
+- historischer Pferde-Codebeleg: 2.4.9 / Master 049
 
 ## Sicherheit
 
