@@ -256,3 +256,16 @@ WAS:
 Dauerhafte START_HERE-/HOBBYRAUM-Akten werden nicht an „diesen Chat“, „Sortierchat“ oder veraltete Parallelchat-Hinweise gebunden.
 WARUM:
 Neue Chats/Paul müssen dieselben Türen widerspruchsfrei verwenden können.
+
+
+## ARCH-035 – Büro-Kommunikationsleitungen auch bei Direkteinstieg
+WAS:
+Jedes Pferde-Atelier-Büro verweist bei echter Arbeit sichtbar auf Hobbyraum, Handlungsverzeichnis, Fehlerregister, Änderungsregister und Zielvertragsregister.
+WARUM:
+Ein direkter Büro-Link darf den Hauptpförtner nicht umgehen und dadurch Sicherheits-/Kontextleitungen verlieren.
+
+## ARCH-036 – Hobbyräume sind selbst erklärende Eingänge
+WAS:
+Alle sechs Pferde-Atelier-Hobbyräume erfüllen ebenfalls die 1-Klick-Übersicht.
+WARUM:
+Der Nutzer kann direkt „Büro → Hobbyraum“ adressieren; auch dort müssen Rechte, Status und nächster Schritt sofort klar sein.

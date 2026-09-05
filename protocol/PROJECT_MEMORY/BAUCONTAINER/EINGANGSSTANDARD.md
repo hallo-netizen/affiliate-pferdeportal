@@ -83,3 +83,16 @@ Dauerhafte Eingänge und Hobbyräume dürfen keine Berechtigung an Formulierunge
 „dieser Chat“, „Sortierchat“ oder einen längst vergangenen Parallelchat knüpfen.
 
 Temporäre Belegung gehört in den Hobbyraumstatus; dauerhafte Rechte kommen aus Rolle, Zielvertrag und Arbeitsweg.
+
+
+## Direkter Büro-/Hobbyraum-Einstieg
+
+Ein direkter Link in ein Büro darf Hauptpförtnerwissen nicht voraussetzen.
+
+Projektbüros führen bei echter Arbeit zusätzlich sichtbar zu:
+- Handlungsverzeichnis;
+- Fehlerregister;
+- Änderungsregister;
+- Zielvertragsregister.
+
+Ein direkter Hobbyraum-Einstieg erfüllt ebenfalls die 1-Klick-Übersicht.

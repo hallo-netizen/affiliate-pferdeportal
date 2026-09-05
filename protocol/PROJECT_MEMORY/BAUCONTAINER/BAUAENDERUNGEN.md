@@ -44,3 +44,6 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-032 → dauerhafte Eingangadressen / keine stillen Umzüge
 - ARCH-033 → Hobbyraum-Standard + Routing-Kennwort
 - ARCH-034 → keine temporären Chatrechte in Dauerakten
+
+- ARCH-035 → Büro-Kommunikationsleitungen bei Direkteinstieg
+- ARCH-036 → Hobbyräume als selbsterklärende 1-Klick-Eingänge

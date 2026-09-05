@@ -184,3 +184,17 @@ Alle bereits verteilten Campus-/Büro-/Paul-Einstiege bleiben unverändert errei
 
 BEZUG:
 ARCH-032 bis ARCH-034; BAU-010 bis BAU-013.
+
+
+### 2026-09-05 – Bauabnahme: Büro-Leitungen + Hobbyraum-Direkteinstieg
+
+BEFUND:
+Direkter Büro-/Hobbyraumeinstieg war weniger vollständig als der Weg über den Hauptpförtner.
+
+KISS-FIX:
+- alle sechs Pferde-Büros mit sichtbarer Arbeitsfreigabe zu Handlungs-/Fehler-/Änderungs-/Zielregistern;
+- alle sechs Hobbyräume mit 1-Klick-Eingang;
+- Gebäudebüroplan auf echte START_HERE-Pfade präzisiert.
+
+BEZUG:
+ARCH-035/036; BAU-014/015.

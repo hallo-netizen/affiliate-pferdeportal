@@ -58,3 +58,15 @@ Echte Befugnis entsteht durch:
 - Keine Fachregeln duplizieren, wenn ein autoritativer Vertrag/Originalquelle existiert.
 - Kein veralteter Chatstatus als dauerhafte Belegung.
 - Bei Abschluss: FREI oder ausdrücklich nächsten Auftrag binden.
+
+
+## Direkteinstieg in Hobbyraum
+
+Jeder Büro-`HOBBYRAUM.md` beginnt ebenfalls mit der 1-KLICK-ÜBERSICHT:
+- WAS IST DAS?
+- HIER BIST DU RICHTIG, WENN …
+- DU DARFST …
+- DU DARFST NICHT …
+- ALS NÄCHSTES …
+
+Damit bleibt auch ein direkter Link in den Hobbyraum selbsterklärend.

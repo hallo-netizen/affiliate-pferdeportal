@@ -213,3 +213,24 @@ KURZ:
 
 KISS-FIX:
 Nur den belegten aktuellen Metadatenstand nachgezogen; keine Fachbewertung ergänzt.
+
+
+## BAU-014 – Direkter Büroeintritt konnte zentrale Leitungen umgehen
+
+STATUS: CLOSED
+
+KURZ:
+Büro-START_HERE führte zwar zu Current/Hobbyraum, aber nicht überall sichtbar zu Fehler-/Änderungs-/Ziel-/Handlungsregistern.
+
+KISS-FIX:
+Einheitliche Arbeitsfreigabe an allen sechs Pferde-Atelier-Büroeingängen ergänzt.
+
+## BAU-015 – Hobbyräume waren bei Direktlink nicht selbsterklärend
+
+STATUS: CLOSED
+
+KURZ:
+Mehrere HOBBYRAUM-Dateien enthielten nur STATUS/FREI und keine Rechte-/Weiterweg-Erklärung.
+
+KISS-FIX:
+Alle sechs Hobbyräume mit derselben 1-Klick-Übersicht ausgestattet.
