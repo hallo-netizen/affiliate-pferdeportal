@@ -75,7 +75,7 @@ Innerhalb der Produktionsstraße keine kryptografische Raum-/Worker-Signierung. 
 WARUM:
 Das frühere Raum-zu-Raum-Signiermodell erzeugte Signer-/Key-/Übergabeabhängigkeiten und widersprach der später bewusst vereinfachten Ein-Tür-Architektur. Die kryptografische Funktion wird intern nicht benötigt, solange der gebundene Weg und die unveränderten Fachprüfungen fail-closed erzwungen werden; sie bleibt an der externen Manipulationsgrenze notwendig.
 BELEG:
-Draft-PR #140, Head `c3244d5bf838817078a3821c045fb52e86f3db46`: interne ED25519-/Signer-Pflichten aus aktivem 107007-Vorlauf entfernt; `hardlock` + `hardlock-base` PASS. Externe 107008-/ENDSTEMPEL-/WordPress-Signierung unangetastet.
+Draft-PR #140, Head `7990029428399e8ba01d88a6543ce068812e9218`: aktiver interner Call-Graph bis 107007 ohne ED25519-/Signer-/Key-/`SIGNED`-Pflicht; gebundenes H8-Paket `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder; `hardlock` + `hardlock-base` PASS. Erst `finalize_after_107008` erzeugt den externen signierten Release; ENDSTEMPEL-/WordPress-Signierung bleibt unangetastet.
 REGEL:
 Keine interne Signierpflicht wiedereinführen. Externe Signierstufen nur nach separater Positiv-/Negativprüfung vereinfachen.
 
