@@ -32,6 +32,23 @@ Ein eigenständiges neues Vorhaben mit eigenem Ziel und eigener Arbeitslogik bek
 
 Der Campus-Pförtner bleibt der zentrale Einstieg und routet zuerst zum Projekt, dann zum Büro.
 
+Ein Projektgebäude ist zunächst eine **logische Einheit**.
+Technisch darf es später:
+- im selben Repository liegen oder
+- in einem eigenen Repository liegen.
+
+Der Campus hält nur den eindeutigen Weg dorthin fest.
+Ein neues Projekt darf deshalb nicht dazu zwingen, bestehende Projektgebäude umzubauen.
+
+## Raumregel
+
+- neues Thema innerhalb eines bestehenden Aufgabenbereichs → vorhandenes Büro;
+- neue dauerhafte Funktion → neues Büro;
+- größerer dauerhafter Teilbereich → neue Abteilung;
+- eigenständiges Vorhaben → neues Projektgebäude.
+
+Keine Räume „auf Vorrat“ bauen.
+
 ## Autoritätsgrundsatz
 
 PROJECT_MEMORY ist Wegweiser und Gedächtnis.
@@ -39,6 +56,17 @@ Es ersetzt keine bereits funktionierende technische Originalautorität.
 
 Eine Wahrheit möglichst nur einmal pflegen.
 Andere Stellen verweisen darauf.
+
+## Pflegegrundsatz
+
+Das Büro, das eine fachliche Änderung verursacht, pflegt auch den zugehörigen Status.
+
+- abgeschlossener verifizierter Schritt → CURRENT_STATE aktualisieren;
+- realer neuer Fehler → Fehlerregister-Verweis aktualisieren;
+- wichtige Änderung/Entscheidung → Änderungsregister mit WARUM aktualisieren;
+- Änderung am Gebäude selbst → Baucontainer/Änderungsregister aktualisieren.
+
+Damit entsteht kein separates Verwaltungsbüro.
 
 ## Maschinenraum
 
