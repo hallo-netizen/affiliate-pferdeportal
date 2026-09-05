@@ -70,9 +70,12 @@ M25 – Article prompt / Fachworkflow boundary: keine freie Neuplanung; bestehen
 ## Historische Regressionen – neu dauerhaft aufgenommen
 
 M26 – Bound Fachworkflow production context available to real PPM
-- Historischer Fehler: BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING.
+- Historische Fehler: BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING / BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING.
 - Das H8-Bootstrap-Paket darf fachlich leer bleiben; es ist Herkunfts-/Türbindung und keine Fachquelle.
-- Ab R_001 muss der aktuelle unveränderte Fachworkflow für current_item den echten aktuellen fact_pack und production_plan_v4-Kontext erzeugen/binden und wahrheitsgemäß an den bestehenden PPM-Handoff übergeben.
+- Ab R_001 erzeugt der aktuelle unveränderte Fachworkflow für current_item den echten fact_pack, production_plan_v4-Kontext, finalen Artikel und die realen Nicht-PPM-Stage-Ergebnisse.
+- Vor dem echten PPM darf weder FACHWORKFLOW_PASS noch ITEM_RECEIPT als Voraussetzung existieren.
+- Der bestehende FACHWORKFLOW_HANDOFF_REQUEST_V1 transportiert ausschließlich diese aktuellen Ergebnisse plus einen noch nicht als PASS markierten PPM-Eingang mit final_article_ref/final_article_sha256.
+- Erst der bestehende reale PPM-Handoff darf den PPM-Proof vervollständigen und danach FACHWORKFLOW_PASS + ITEM_RECEIPT erzeugen.
 - Fact-Pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata müssen artikel-/Plan-Slot-/Batch-konsistent sein.
 - Fehlender oder falscher Fachworkflow-Kontext = BLOCKED.
 - Kein Ersatzkontext aus alten Artikeln/Recovery und kein künstlich befülltes H8-Paket.
@@ -85,9 +88,10 @@ M27 – Current-main / production environment identity
 
 M28 – Fachworkflow-Handoff request is materially executable
 - Historische Fehler: fehlende FACHWORKFLOW_HANDOFF_REQUEST.json, ITEM_RECEIPT_FIELDS_OR_CONTRACT_INVALID.
-- Current Action muss alle gebundenen Daten liefern, mit denen der aktuelle Worker die eine Handoff-Request wahrheitsgemäß materialisieren kann.
-- Dazu gehören aktueller fact_pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata.
-- Keine leere Pflichtstruktur; kein Fake-Receipt.
+- Current Action bindet exakt einen bestehenden FACHWORKFLOW_HANDOFF_REQUEST_V1 als Datenübergabe vor PPM.
+- Der Worker schreibt diesen Request aus den realen aktuellen Fachworkflow-Ausgaben; er erzeugt vor PPM weder FACHWORKFLOW_PASS noch ITEM_RECEIPT.
+- submission_command verarbeitet exakt diesen gebundenen Request intern über den bestehenden Handoff und reicht danach nur das finale Receipt an die bestehende Tür weiter.
+- Keine leere Pflichtstruktur; kein Fake-Receipt; kein zweiter Submit-Pfad.
 
 M29 – Release metadata current-batch identity
 - Historischer Fehler: RELEASE_METADATA_INVALID.
@@ -102,8 +106,9 @@ M30 – Final context batch identity
 
 M31 – Codex-native bound action; no synthetic executor dependency
 - Historischer Fehler: gebundener Fachworkflow verlangte eine nicht vorhandene separate execute_bound_action-/Executor-Capability.
-- Der vorhandene Codex-Cloud-Worker führt ausschließlich die gebundene aktuelle Aktion aus.
-- Keine synthetische execute_bound_action-Host-Capability, kein zweiter Fachworkflow-Executor, keine Capability-Suche als Voraussetzung.
+- Der vorhandene Worker führt ausschließlich die gebundene aktuelle Facharbeit aus und schreibt den vorhandenen Handoff-Request als Datenübergabe.
+- Der Worker führt keinen separaten Handoff-Executor aus; submission_command übernimmt den bestehenden Handoff intern.
+- Keine synthetische execute_bound_action-Host-Capability, kein zweiter Fachworkflow-Executor, keine Capability-Suche und kein submit-request-Parallelweg.
 
 M32 – PPM runtime package path is bound without environment-variable dependency
 - Historische Fehler: PPM679_PACKAGE_ZIP nicht gesetzt / kein gebundener Paketpfad / echter PPM-Aufruf nicht erreichbar.

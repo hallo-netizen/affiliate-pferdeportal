@@ -62,6 +62,16 @@ class PPM679BindingTest(unittest.TestCase):
         outputs = [{"ref": final_ref, "sha256": final_sha}]
         return temp, repo, root, proof, outputs, report_path
 
+    def test_pre_ppm_binding_requires_only_final_article(self):
+        requirement = action._ppm_requirement()
+        self.assertEqual(["final_article_ref", "final_article_sha256"], requirement["pre_ppm_binding_required_fields"])
+        self.assertNotIn("ppm_report_ref", requirement["pre_ppm_binding_required_fields"])
+
+    def test_final_ppm_binding_still_requires_real_report(self):
+        requirement = action._ppm_requirement()
+        self.assertIn("ppm_report_ref", requirement["final_ppm679_binding_required_fields"])
+        self.assertIn("ppm_report_sha256", requirement["final_ppm679_binding_required_fields"])
+
     def test_exact_ppm_result_binding_passes(self):
         temp, repo, root, proof, outputs, _ = self.prepare()
         try:
