@@ -25,8 +25,8 @@
 | M19 | Merge trigger | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M20 | Delivery 7 Artikel + Envelope + Manifest | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M21 | No auto-publish | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
-| M22 | Signed production package / H8 | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
-| M23 | Preproduction/Runtime Guards | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M22 | H8 Provenance / Integrität ohne interne Signatur | im bestehenden Runner enthalten | Altregel korrigiert: 107007-Vorlauf bleibt hash-/batch-/herkunftsgebunden, verlangt aber keine interne ED25519-Signatur mehr. |
+| M23 | Preproduction/Runtime Guards | im bestehenden Runner enthalten | Altregel korrigiert: intern nur Hash-/Herkunftsbindung; externe Signierung nach abgeschlossener Produktion bleibt separat erhalten. |
 | M24 | No H8 rollback | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M25 | Article prompt / Fachworkflow boundary | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M26 | Bound Fachworkflow production context | im bestehenden Runner enthalten | früher mehrfach LIVE BLOCKED; auf aktuellem main im letzten Lauf überwunden |
@@ -51,9 +51,9 @@
   - fehlender Name trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - falsche Taxonomy trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - fehlender Slug → alt **BLOCK**, neu **BLOCK**
-- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, Head `f2b47e9ecce643acfdffbd68ccff0805117613da`.
+- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, aktueller Head `c3244d5bf838817078a3821c045fb52e86f3db46`.
 - Kandidat ändert keine SEO-/Textmaschinen-/PPM-Regel; nur der bestehende Handoff verwendet die ID nicht mehr als vorgezogene Produktionsvoraussetzung.
-- `hardlock` und `hardlock-base` auf diesem Head: PASS.
+- `hardlock` und `hardlock-base` auf Head `c3244d5…`: PASS.
 - **Noch nicht behauptet:** kompletter M01–M33-PASS auf diesem Head oder echter neuer 7/7-Live-PASS.
 - **Harte Nutzerregel:** Nicht durch Erweiterung des SEO-5-Felder-Handoffs lösen.
 
@@ -109,6 +109,16 @@
 - Systemischer Fehler: Regressionstests können PASS melden, obwohl die reale Verkettung nicht bewiesen ist.
 - Besonders kritisch: der sogenannte „last real regression re-check“ im Runner ist kein echter Replay des letzten 7/7-Laufs.
 - Dieser Punkt erklärt die wiederkehrende Erfahrung „Tests grün, Live wieder alter Fehler“.
+
+### B15 – Interne Signieraltlasten aus altem Raum-zu-Raum-Modell
+- Historische Sollentscheidung: **innerhalb der Produktion keine kryptografische Arbeiter-/Raum-Signierung; externe Versiegelung erst nach abgeschlossener Produktion**.
+- Harte Prüfung 05.09. fand trotzdem aktive interne Reste in H8-Bootstrap/Provenance, Preproduction-Handoff, Runtime-Guard, Codex-Preflight und im gebundenen Generation-1-H8-Paket.
+- Hobbyraum-Säuberung auf PR #140: interne Signaturpflicht entfernt; Hash-, Batch-, Slot- und Herkunftsbindung bleiben erhalten.
+- Externe Signierung **nicht entfernt**: hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation bleiben unverändert.
+- Link-/Tabellen-/LanguageTool-/PPM-/PSERC-/PSTE-/SEO-/Designregeln wurden nicht gelockert oder entfernt.
+- M22/M23 sowie die stale M26/M28-Testlogik wurden an den aktuellen Sollweg angepasst.
+- `hardlock` + `hardlock-base` auf Head `c3244d5bf838817078a3821c045fb52e86f3db46`: **PASS**.
+- **Noch offen:** vollständiger M01–M33-Lauf auf exakt diesem Head; daher kein Hobbyraum-GESAMT-PASS und kein Live-PASS.
 
 ## C. Letzte real bewiesene positive Referenzen
 
