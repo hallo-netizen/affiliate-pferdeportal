@@ -51,9 +51,9 @@
   - fehlender Name trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - falsche Taxonomy trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - fehlender Slug → alt **BLOCK**, neu **BLOCK**
-- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, aktueller Head `c3244d5bf838817078a3821c045fb52e86f3db46`.
+- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, aktueller Head `7990029428399e8ba01d88a6543ce068812e9218`.
 - Kandidat ändert keine SEO-/Textmaschinen-/PPM-Regel; nur der bestehende Handoff verwendet die ID nicht mehr als vorgezogene Produktionsvoraussetzung.
-- `hardlock` und `hardlock-base` auf Head `c3244d5…`: PASS.
+- `hardlock` und `hardlock-base` auf Head `7990029…`: PASS.
 - **Noch nicht behauptet:** kompletter M01–M33-PASS auf diesem Head oder echter neuer 7/7-Live-PASS.
 - **Harte Nutzerregel:** Nicht durch Erweiterung des SEO-5-Felder-Handoffs lösen.
 
@@ -117,7 +117,10 @@
 - Externe Signierung **nicht entfernt**: hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation bleiben unverändert.
 - Link-/Tabellen-/LanguageTool-/PPM-/PSERC-/PSTE-/SEO-/Designregeln wurden nicht gelockert oder entfernt.
 - M22/M23 sowie die stale M26/M28-Testlogik wurden an den aktuellen Sollweg angepasst.
-- `hardlock` + `hardlock-base` auf Head `c3244d5bf838817078a3821c045fb52e86f3db46`: **PASS**.
+- **SCOPE-PASS 05.09.:** aktiver Call-Graph bis 107007 enthält keine interne ED25519-/Signer-/Key-/`SIGNED`-Pflicht mehr; aktuelles gebundenes H8-Paket ist `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder.
+- Interne `HASH_BOUND`-Metadaten werden erst in `finalize_after_107008` in den externen `WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED`-Vertrag überführt.
+- Externer Production-Release-/ENDSTEMPEL-Weg bleibt signiert; der Host-Signer wird erst im 107008-Endzustand verlangt und bleibt für den Codex-Worker verboten.
+- `hardlock` + `hardlock-base` auf Head `7990029428399e8ba01d88a6543ce068812e9218`: **PASS**.
 - **Noch offen:** vollständiger M01–M33-Lauf auf exakt diesem Head; daher kein Hobbyraum-GESAMT-PASS und kein Live-PASS.
 
 ## C. Letzte real bewiesene positive Referenzen
