@@ -28,5 +28,6 @@ Die vollständige Begründung liegt im zentralen `AENDERUNGSREGISTER.md`.
 - ARCH-021 → Pförtner/Hausmeister reine Verwaltung
 - ARCH-022 → 1-Klick-Eingangsstandard
 - ARCH-023 → Entwicklungsprotokoll für Architektur-Austausch
+- ARCH-024 → campusweites WordPress-Register als reiner Technologieindex
 
 Keine Duplikation der ausführlichen Begründungen hier.

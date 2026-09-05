@@ -193,6 +193,23 @@ Am Campus-, Gebäude-, Büro- und Paul-Eingang muss sofort verständlich sein:
 Entscheidung:
 verbindlicher `EINGANGSSTANDARD.md`.
 
+### 2026-09-05 – WordPress-Raum oder Register?
+
+Nutzeridee:
+Zentraler Ort für WordPress-Plugins bzw. Verweise darauf.
+
+Kritische Prüfung:
+Ein eigenes WordPress-Büro wäre aktuell zusätzliche Architektur ohne eigene Facharbeit.
+
+Entscheidung:
+- kein neues Büro/Gebäude;
+- ein campusweites `WORDPRESS_REGISTER.md`;
+- nur Plugin-/Installer-Navigation;
+- keine zweite Modul-, LIVE- oder Release-Wahrheit.
+
+Zusätzliche Bestandsaufnahme:
+Bereits übergebene direkte Plugin-/Installer-Artefakte werden dort aufgenommen; große Masterpakete erst nach Inhaltsprüfung als Plugin klassifiziert.
+
 ## Offene Punkte
 
 - Campus nach V1-Freigabe in eigenes privates Repository verschieben?

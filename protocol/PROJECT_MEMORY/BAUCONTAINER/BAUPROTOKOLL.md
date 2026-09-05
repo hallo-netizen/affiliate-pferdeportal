@@ -66,3 +66,21 @@ TRENNUNG:
 
 BEZUG:
 ARCH-023.
+
+
+### 2026-09-05 – WordPress-Register
+
+BEDARF:
+Zentrale Antwort auf „Welche WordPress-Plugins haben wir bereits?“, ohne ein neues WordPress-Büro oder eine zweite Modulwahrheit zu bauen.
+
+KRITISCHE ENTSCHEIDUNG:
+Kein WordPress-Gebäude/Büro. Ein einziges campusweites Technologie-Register reicht aktuell.
+
+ERGEBNIS:
+`WORDPRESS_REGISTER.md` mit nachweisbar erhaltenen Plugin-/Installer-Artefakten angelegt.
+
+GRENZE:
+Modulklasse bleibt im MODULREGISTER; LIVE-/Release-Status bleibt an der Fach-/Technikquelle.
+
+BEZUG:
+ARCH-024.

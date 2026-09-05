@@ -153,3 +153,16 @@ REGEL:
 Nicht als aktuelle Hauptwahrheit verwenden.
 TRENNUNG:
 Entwicklungsweg = ENTWICKLUNGSPROTOKOLL; gebaut = BAUPROTOKOLL; dauerhaft gültig/WHY = AENDERUNGSREGISTER.
+
+
+## ARCH-024 – Campusweites WordPress-Register
+WAS:
+`WORDPRESS_REGISTER.md` als zentraler Technologieindex für bereits vorhandene WordPress-Plugins/Installer.
+WARUM:
+Der Nutzer soll sofort sehen können, welche WordPress-Werkzeuge bereits vorhanden sind, ohne sich Dateinamen/Projekte merken zu müssen.
+KISS:
+Kein neues WordPress-Büro, solange keine eigene dauerhafte WordPress-Facharbeit entsteht.
+GRENZE:
+Modulklasse bleibt ausschließlich im MODULREGISTER; LIVE-/Release-/Fachstatus bleibt ausschließlich an der zuständigen Originalquelle.
+REGEL:
+Große Masterpakete werden nicht allein wegen ihres Dateinamens als WordPress-Plugin klassifiziert.

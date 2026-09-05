@@ -36,6 +36,19 @@ Harte Grenzen:
 - vor Verschiebung Referenzen/Hash/Ziel prüfen;
 - jede Verschiebung im `ARCHIV/HAUSMEISTER_PROTOKOLL.md`.
 
+## WordPress-Plugin finden
+
+Aktion:
+Prüfen, ob ein WordPress-Plugin/Installer bereits vorhanden ist.
+
+Verbindlicher Weg:
+1. `WORDPRESS_REGISTER.md`;
+2. bei Allgemeingültigkeit → Modulregister;
+3. bei Projektstatus → zuständiges Fachbüro;
+4. bei Installation/Release → dortige technische Originalquelle.
+
+Nie aus einem Dateinamen einen LIVE-/Release-Status ableiten.
+
 ## Neues Projekt beginnen
 
 1. Hauptpförtner;

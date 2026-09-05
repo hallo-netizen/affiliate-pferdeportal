@@ -43,7 +43,8 @@ Der Chat MUSS:
 8. relevante Fehler-/Änderungseinträge lesen;
 9. aktiven Zielvertrag prüfen;
 10. bei Modulfragen das Modulregister prüfen;
-11. dem Nutzer den geladenen Stand zurückmelden;
+11. bei WordPress-/Pluginfragen `WORDPRESS_REGISTER.md` prüfen;
+12. dem Nutzer den geladenen Stand zurückmelden;
 12. erst danach die Pförtnerrolle verlassen und zur zuständigen Arbeitsrolle wechseln.
 
 ## Pflicht-Rückmeldung
@@ -70,6 +71,9 @@ Projektübergreifend:
 
 Zielverträge:
 - `ZIELVERTRAEGE/`
+
+WordPress-Pluginübersicht:
+- `WORDPRESS_REGISTER.md`
 
 Archiv:
 - `ARCHIV/`

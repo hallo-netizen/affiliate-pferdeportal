@@ -17,6 +17,7 @@ CAMPUS
 
 Seitlich:
 - Handlungsverzeichnis
+- WordPress-Register (Technologieindex, keine zweite Wahrheit)
 - Fehlerregister
 - Änderungs-/Erklärungsregister
 - Zielverträge
@@ -106,6 +107,22 @@ ALLGEMEINGÜLTIGE BAUSTEINE.
 
 Projektbezogene Nutzung:
 Projektbüro.
+
+## WordPress-Register
+
+`WORDPRESS_REGISTER.md` ist ein campusweiter Technologieindex.
+
+Es zeigt:
+- vorhandene Plugin-/Installer-Artefakte;
+- Dateibelege/Versionen;
+- zuständige Hauptquelle.
+
+Es entscheidet NICHT:
+- Modulklasse;
+- LIVE-/Release-Status;
+- Fachwahrheit.
+
+Damit bleibt es ein Wegweiser und erzeugt keine zweite Wahrheit.
 
 ## Projektstart
 
