@@ -183,3 +183,18 @@ Belege:
 
 Grenze:
 Dies ist ausschließlich ein SCOPE-PASS der internen Signier-Säuberung. Kein M01–M33-GESAMT-PASS und kein neuer 7/7-Live-PASS.
+
+### Zwischentest Signierthese – PASS
+
+Head: `7990029428399e8ba01d88a6543ce068812e9218`.
+
+Maschinell geprüfte These:
+1. Internes H8-Paket ohne Signaturfelder + aktuelle HASH_BOUND-/Provenance-Bindung → **PASS**.
+2. H8-/Batch-Herkunft manipuliert; Binding-Hash, Workflow-Hash, Package-ID und Package-Payload-Hash anschließend vollständig neu berechnet → normale Paketintegrität weiterhin konsistent, aber aktuelle Provenance-Bindung → **BLOCKED**.
+3. Qualitätskette → `table_contract`, `internal_links`, LanguageTool, PPM, PSERC, PSTE, Dubletten/Kannibalisierung, SEO und Design weiterhin gebunden; Original-PPM-6.7.9-SHA unverändert → **PASS**.
+4. Externe ED25519-Prüfung: gültige Signatur → **PASS**; manipulierte Signatur → **BLOCKED**.
+
+Schlussfolgerung dieses Zwischentests:
+Die entfernte interne Signatur war für die geprüfte innere Weg-/Herkunftssicherheit nicht erforderlich. Die externe kryptografische Grenze bleibt wirksam und getrennt.
+
+Grenze: kein M01–M33-GESAMT-PASS und kein Live-7/7-PASS.
