@@ -146,3 +146,101 @@ Vor Merge weiterhin:
 2. Danach echter frischer 7/7-E2E.
 3. Erst bei 7/7 + 107008 PASS Merge-Kandidat.
 4. Kein Auto-Publish.
+
+
+## Reale Prinzipprüfung mit synthetischen Artikeln – 05.09.2026
+
+Ziel dieser Prüfung war ausschließlich die technische Reihenfolge
+`Fachworkflow-Ergebnisse -> echter PPM 6.7.9 -> FACHWORKFLOW_PASS -> ITEM_RECEIPT`.
+Sie ist **kein Ersatz für den späteren realen 7/7-Produktionslauf**.
+
+### Originalpakete
+
+Für die Prüfung wurden die bereits archivierten Originalpakete bytegenau rekonstruiert und vor Ausführung geprüft:
+
+- PPM 6.7.9:
+  - Größe: 1.614.485 Byte
+  - SHA-256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
+- PSERC-FIX:
+  - Größe: 304.064 Byte
+  - SHA-256: `77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314`
+
+Keine Ersatzimplementierung und kein Fake-PPM wurden für die Positivläufe verwendet.
+
+### Positive reale PPM-Läufe
+
+Vier synthetische Artikel wurden an echte vorhandene PPM-Plan-Slots gebunden und jeweils vollständig durch den realen
+`PSERC_PPM_Intake_Bridge::execute -> PPM679_Normal_Draft_Pipeline::execute_plan`
+geführt.
+
+1. FAQ
+   - finaler Artikel-SHA: `075b125e243205581639b84b1b499f9509f6f91389407aedbbe6d1aa5e8ac995`
+2. Beratung
+   - finaler Artikel-SHA: `906345ed98a6a2547f45e3da6d1f8de87daa930c5ad207ce4d05d5cb25f02b87`
+3. Vergleich
+   - finaler Artikel-SHA: `240da0b1d3eb411b8ef6c2d3c0cd346277f7bdf4aadccfa355e09d4f9723b9b6`
+4. Pflege
+   - finaler Artikel-SHA: `e0ccf15f6b8c8731ae86d626735cd4b52614c765dda9639fbd96f396d05785c6`
+
+Für alle vier:
+- vor PPM kein `FACHWORKFLOW_PASS`,
+- vor PPM kein finales `ITEM_RECEIPT`,
+- echter PPM 6.7.9 ausgeführt,
+- PPM-Status:
+  `NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH`,
+- `PPM content_hash == finaler Artikel-SHA`,
+- erst danach `FACHWORKFLOW_PASS`,
+- erst danach finales `ITEM_RECEIPT`,
+- `publish_allowed=false`.
+
+Ergebnis: **4/4 POSITIV PASS**.
+
+### Negative reale Prüfungen
+
+1. fehlender aktueller Fachworkflow-Kontext:
+   - korrekt BLOCKED:
+     `BOUND_FACHWORKFLOW_PRODUCTION_CONTEXT_MISSING`
+2. falscher finaler Artikelhash:
+   - korrekt BLOCKED:
+     `PPM679_FINAL_ARTICLE_HASH_MISMATCH`
+3. vorgefertigter PPM-Report:
+   - korrekt BLOCKED:
+     `PPM679_PREGENERATED_REPORT_FORBIDDEN`
+4. nur behaupteter Fake-PPM-PASS ohne echte PPM-Bindung:
+   - erster Test deckte auf, dass der Handoff diesen Fall zunächst materialisieren konnte,
+     obwohl der nachgeschaltete Current-Action-Validator ihn später mit
+     `PPM679_REAL_BINDING_MISSING` blockierte.
+   - Das war für einen sicheren Fail-Closed-Übergang nicht ausreichend.
+
+### Daraus entstandener enger KISS-Fix
+
+In `fachworkflow_proof_handoff.py` wurde ausschließlich für `stage == "ppm"` hart gemacht:
+
+- `ppm679_binding` muss vorhanden sein,
+- andernfalls sofort:
+  `PPM679_REAL_BINDING_MISSING`,
+- der echte PPM-Pfad wird zwingend ausgeführt,
+- erst danach darf der PPM-Proof PASS werden.
+
+Commit:
+`c8d471661fca98fd9e404c0f10b8a183f6764d6d`
+
+Vorhandener Handoff-Test wurde entsprechend ergänzt:
+`1724e264cdb446c719b6324256d73ab765e3d0af`
+
+Danach komplette Prinzipserie erneut:
+- **4/4 POSITIV PASS**
+- **4/4 NEGATIV PASS**
+
+Aktueller Handoff-SHA-256:
+`e35cb7eb7ff9b2526b0b54f3ab402a8c5cb0a5dc9329206c5551e92a8889ec82`
+
+107007- und Root-Hashbindung wurden anschließend erneut aktualisiert.
+
+### Aussage dieses Beweises
+
+Belegt ist jetzt:
+**Der technische PPM-/PASS-Kreisschluss ist im Hobbyraum beseitigt und der Übergang arbeitet mit dem echten PPM 6.7.9 fail-closed.**
+
+Noch nicht belegt:
+**der vollständige reale 7/7-Produktionsworkflow auf diesem Hobbyraum-Stand.**
