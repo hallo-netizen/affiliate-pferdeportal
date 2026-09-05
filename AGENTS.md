@@ -36,37 +36,36 @@ Backup/Mirror nur gemäß Tresor-Wiederaufbau lesen → in einen frischen Arbeit
 
 Ein Backup-PASS ist niemals ein Arbeits-PASS.
 
-## Zusätzliche Pflicht auf `paul/*`-Branches
+## Automatische Pflicht auf `paul/*`-Branches
 
-Die bestehende Cloud-Eingangstür bleibt immer Schritt 1.
+Die bestehende Cloud-Eingangstür bleibt die **einzige manuell aufzurufende Starttür**:
 
-Unmittelbar NACH einem erfolgreichen
 `python3 control/cloud-entry-gate/cloud_entry.py start`
-und VOR jeder Paul-Analyse oder Änderung muss der aktuelle Git-Branch geprüft werden.
 
-Wenn er mit `paul/` beginnt, MUSS exakt ausgeführt werden:
+Auf einem `paul/*`-Branch ruft `cloud_entry.py` den Paul-Scope-Gate **selbst automatisch** auf.
 
-`python3 control/paul-scope-gate/paul_scope_gate.py start`
+Der Worker darf und muss keinen zweiten Paul-Startbefehl mehr erzeugen oder merken.
 
-Nur bei `PAUL_BOOTSTRAP_PASS` darf Paul weiterarbeiten.
+Automatisch bei `start`:
+- aktueller offizieller Campus wird frisch geholt;
+- aktive Paul-Zuweisung wird geprüft;
+- Branch/technische Basis/WRITE_SCOPE werden geprüft;
+- `.paul-capsule/` wird als temporärer hashgebundener READ-ONLY-Snapshot erzeugt;
+- nur bei `PAUL_BOOTSTRAP_PASS` wird der Cloud-Start gültig.
 
-Der Paul-Scope-Gate:
-- liest die aktuelle Arbeitszuweisung frisch vom offiziellen Campus;
-- blockiert ohne aktive Paul-Zuweisung mit `PAUL_NOT_ASSIGNED`;
-- blockiert falschen Branch/technische Basis;
-- bindet den ausdrücklich erlaubten Schreibbereich;
-- materialisiert `.paul-capsule/` nur als temporären, hashgebundenen READ-ONLY-Snapshot.
+Automatisch bei `verify`:
+- Paul-Frische-/Scopeprüfung wird erneut ausgeführt.
+
+Automatisch bei `complete`:
+- **vor jeder State-/Receipt-Fortschreibung** wird automatisch Paul-`verify` ausgeführt;
+- relevante Drift oder Scope-Verstoß blockiert den Abschluss fail-closed.
 
 WICHTIG:
 `.pferde-capsule/INSTRUCTION.txt` bleibt die einzige Workflow-Instruktion.
-`.paul-capsule/` ersetzt sie NICHT und wählt keinen Workflow-Schritt; sie begrenzt nur Pauls aktuelle Campus-Berechtigung und liefert den frisch gelesenen Kontext.
+`.paul-capsule/` ersetzt sie NICHT und wählt keinen Workflow-Schritt.
 
-Vor jedem Paul-Abschluss und BEVOR `cloud_entry.py complete` ausgeführt wird, MUSS zusätzlich exakt ausgeführt werden:
-
-`python3 control/paul-scope-gate/paul_scope_gate.py verify`
-
-Bei `STALE_ASSIGNMENT_BLOCKED`, `PAUL_WRITE_SCOPE_BLOCKED` oder jedem anderen Nicht-PASS:
-sofort stoppen; kein Receipt-/Workflow-Abschluss auf veraltetem oder unzulässigem Stand.
+Bei `PAUL_NOT_ASSIGNED`, `STALE_ASSIGNMENT_BLOCKED`, `PAUL_WRITE_SCOPE_BLOCKED` oder jedem anderen Paul-Gate-Nicht-PASS:
+sofort stoppen; kein gültiger Cloud-Abschluss.
 
 ## Verbindlicher Step-Abschluss
 Nach Ausführung des aktuellen Steps MUSS `.pferde-capsule/RECEIPT.json` exakt gemäß `.pferde-capsule/RECEIPT_SCHEMA.json` geschrieben werden.
