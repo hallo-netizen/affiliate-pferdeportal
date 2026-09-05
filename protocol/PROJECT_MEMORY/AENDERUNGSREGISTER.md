@@ -360,3 +360,12 @@ KISS:
 Eine einzige zusätzliche Diff-Prüfung im bestehenden `hardlock-base`; kein neuer Runner, kein neuer Statusspeicher.
 AKTUELL:
 Security-PR #137 vorbereitet. Aktivierung auf `main` ist noch BLOCKED durch den absichtlichen Selbstschutz `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED` und erfordert den bestehenden bewussten Admin-Wartungsweg.
+
+
+## ARCH-048 – Universelle Protokollpflicht an jedem Abschluss
+WAS:
+Vor `fertig`, `PASS` oder Übergabe muss jeder Arbeitschat – unabhängig von Ebene oder Raum – frisch prüfen, ob Fehlerquelle, Arbeits-/Bauprotokoll, dauerhaftes WARUM, CURRENT_STATE, HOBBYRAUM/NEXT ACTION oder Zielvertrag tatsächlich betroffen sind.
+WARUM:
+Eine einmal am Chatbeginn gelesene Anweisung kann im langen Verlauf vergessen werden. Die Pflicht muss deshalb dauerhaft am Campus-Einstieg und im Eingangsstandard sichtbar bleiben und bei jedem Abschluss erneut greifen.
+REGEL:
+Nicht pauschal Dateien anfassen. Nur tatsächlich betroffene autoritative Stellen aktualisieren; keine zweite Wahrheit erzeugen; technische FAIL/BLOCKED-Zustände niemals durch Chat-PASS ersetzen.

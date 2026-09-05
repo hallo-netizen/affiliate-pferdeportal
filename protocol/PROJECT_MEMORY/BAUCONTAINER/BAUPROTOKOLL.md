@@ -364,3 +364,21 @@ NACH AKTIVIERUNG ZWINGEND:
 
 BEZUG:
 ARCH-044 bis ARCH-047; BAU-024.
+
+
+### 2026-09-05 – Startprompt-Protokollpflicht campusweit verankert
+
+AUSLÖSER:
+Der Nutzer verlangt eine dauerhafte Gegenmaßnahme dagegen, dass Arbeitschats im langen Verlauf Fehler-, Änderungs-, WHY-, Status- oder NEXT-ACTION-Dokumentation vergessen.
+
+KISS-FIX:
+- Campus-`START_HERE.md` verweist vor jedem Abschluss auf die Protokollpflicht;
+- `EINGANGSSTANDARD.md` bindet dieselbe Abschlussprüfung für jede Ebene und jeden Raum, einschließlich Archiv/Tresor/Baucontainer;
+- Regel lautet ausdrücklich: nur tatsächlich betroffene autoritative Stellen ändern, nichts künstlich protokollieren;
+- technische Hardlock-/BLOCKED-Ergebnisse schlagen jede Chatbehauptung.
+
+EXTERNER STARTPROMPT:
+Der Nutzer-Startprompt wurde inhaltlich um Single-Writer/Paul-Grenze, Frischeprüfung und technischen Check-Vorrang ergänzt.
+
+BEZUG:
+ARCH-048.
