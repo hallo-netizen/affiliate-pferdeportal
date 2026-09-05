@@ -49,3 +49,20 @@ ERGEBNIS:
 
 BEZUG:
 ARCH-021, ARCH-022.
+
+
+### 2026-09-05 – Entwicklungsprotokoll ergänzt
+
+BEDARF:
+Auch der konzeptionelle Austausch und verworfene/offene Architekturgedanken sollen nicht im Chat verloren gehen.
+
+ERGEBNIS:
+`ENTWICKLUNGSPROTOKOLL.md` ergänzt.
+
+TRENNUNG:
+- Entwicklungsgespräch → ENTWICKLUNGSPROTOKOLL
+- tatsächlich gebaut → BAUPROTOKOLL
+- dauerhaft gültig + WHY → AENDERUNGSREGISTER
+
+BEZUG:
+ARCH-023.

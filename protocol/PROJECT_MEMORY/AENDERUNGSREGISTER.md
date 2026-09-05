@@ -142,3 +142,14 @@ REGEL:
 Neue Gebäude/Büros nur mit `BAUCONTAINER/EINGANGSSTANDARD.md`.
 LEITSATZ:
 **Ein Klick = alles klar.**
+
+
+## ARCH-023 – Entwicklungsprotokoll für den Architektur-Austausch
+WAS:
+Der Baucontainer erhält `ENTWICKLUNGSPROTOKOLL.md` für Ideen, Einwände, Nutzerkorrekturen, verworfene Varianten und offene Architekturfragen.
+WARUM:
+Nicht nur fertige Umbauten, sondern auch der nachvollziehbare Gedankenweg soll erhalten bleiben, ohne BAUPLAN oder AENDERUNGSREGISTER aufzublähen.
+REGEL:
+Nicht als aktuelle Hauptwahrheit verwenden.
+TRENNUNG:
+Entwicklungsweg = ENTWICKLUNGSPROTOKOLL; gebaut = BAUPROTOKOLL; dauerhaft gültig/WHY = AENDERUNGSREGISTER.

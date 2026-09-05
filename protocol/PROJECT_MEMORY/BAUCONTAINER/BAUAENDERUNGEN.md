@@ -27,5 +27,6 @@ Die vollständige Begründung liegt im zentralen `AENDERUNGSREGISTER.md`.
 - ARCH-020 → Campus-Hausmeister
 - ARCH-021 → Pförtner/Hausmeister reine Verwaltung
 - ARCH-022 → 1-Klick-Eingangsstandard
+- ARCH-023 → Entwicklungsprotokoll für Architektur-Austausch
 
 Keine Duplikation der ausführlichen Begründungen hier.

@@ -92,6 +92,7 @@ Keine Räume auf Vorrat.
 - `BAUPLAN.md` → aktuelle Architektur
 - `BAUAENDERUNGEN.md` → dauerhafte Umbauten
 - `BAUPROTOKOLL.md` → chronologisches Baugeschehen
+- `ENTWICKLUNGSPROTOKOLL.md` → Ideen, Einwände, verworfene Varianten und offene Architekturgedanken
 - `ARCHITEKTUR_FEHLERKISTE.md` → Architekturfehler
 - `HAUSMEISTER.md` → reine Ordnungsverwaltung
 - `EINGANGSSTANDARD.md` → 1-Klick-Orientierung
