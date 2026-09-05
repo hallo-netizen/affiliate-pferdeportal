@@ -391,3 +391,16 @@ GRENZE:
 Der Check kann bewusste Falschangaben nicht vollständig beweisen; er erzwingt aber Vollständigkeit, offensichtliche Diff-Widersprüche, PASS für Eine Wahrheit/Tests und die Architektur-Protokollkopplung.
 AKTUELL:
 Im Security-PR #137 implementiert; Aktivierung auf main weiterhin durch die bestehende immutable-Security-Wartungsgrenze BLOCKED.
+
+
+## ARCH-051 – Sicherungslogik besitzt eingebaute Positiv-/Negativ-Selbsttests
+WAS:
+Die vorbereitete trusted `hardlock-base`-Erweiterung testet bei jedem Lauf ihre Paul-Pfadgrenze und den PROJECT_MEMORY-PROTOKOLLCHECK selbst mit positiven und negativen Fällen.
+WARUM:
+Eine Sicherung darf nicht nur existieren; spätere Änderungen müssen auch beweisen, dass erlaubte Fälle erlaubt und verbotene Fälle weiterhin blockiert werden.
+BEFUND:
+Der erste externe Logiktest fand eine reale Lücke bei `ZIELVERTRAEGE/REGISTER.md`. Nach KISS-Fix wurde der vollständige Testblock erneut ausgeführt.
+ERGEBNIS:
+Pfad-/Paul-Regel 5/5 PASS; PROTOKOLLCHECK 17/17 PASS; gesamt 22/22 PASS.
+GRENZE:
+Das ist ein harter Logiktest des exakten Kandidatenverhaltens. Der echte serverseitige Required-Check kann erst nach der einmaligen Admin-Aktivierung von Security-PR #137 bewiesen werden.

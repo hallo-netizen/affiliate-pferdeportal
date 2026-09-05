@@ -414,3 +414,24 @@ REGRESSIONSSCHUTZ NACH AKTIVIERUNG:
 
 BLOCKER:
 Aktivierung benötigt denselben einmaligen Admin-Wartungsweg wie BAU-024.
+
+
+### BAU-026 – TESTNACHTRAG 2026-09-05
+
+ERSTER HARTER POSITIV-/NEGATIVLAUF:
+21/22 PASS.
+
+GEFUNDENE LÜCKE:
+`ZIELVERTRAEGE/REGISTER.md` wurde nicht als Zielvertragsänderung erkannt.
+
+FIX:
+Singular- und Pluralpfad werden jetzt erkannt.
+
+WIEDERHOLUNG:
+22/22 PASS.
+
+STATUS BLEIBT:
+BLOCKED / SECURITY-MAINTENANCE – nicht wegen Logikfehler, sondern ausschließlich weil der neue trusted Check noch nicht auf main aktiviert werden kann.
+
+NACH AKTIVIERUNG:
+echte GitHub-PR-Positiv-/Negativtests bleiben Pflicht.

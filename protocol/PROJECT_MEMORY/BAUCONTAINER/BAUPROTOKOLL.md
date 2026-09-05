@@ -458,3 +458,63 @@ Grund: derselbe bewusste immutable-Base-Selbstschutz wie BAU-024.
 
 BEZUG:
 ARCH-050; BAU-026.
+
+
+### 2026-09-05 – Automatische Sicherung hart positiv/negativ getestet
+
+ZIEL:
+Nicht nur Regeln dokumentieren, sondern die vorbereitete automatische Sicherung gegen erlaubte und verbotene Fälle hart prüfen.
+
+TEST 1 – ERSTER LAUF:
+22 Fälle vorgesehen.
+ERGEBNIS:
+21 PASS / 1 FAIL.
+
+GEFUNDENER ECHTER FEHLER:
+Eine Änderung an
+`protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+wurde noch nicht als Zielvertragsänderung erkannt, weil der Matcher nur `ZIELVERTRAG` prüfte.
+
+KISS-FIX:
+Matcher um `ZIELVERTRAEGE` ergänzt.
+Security-Commit:
+`08b3cd54492623ba621f408969c91445ef474a8d`.
+
+TEST 2 – VOLLSTÄNDIGE WIEDERHOLUNG:
+**22/22 PASS.**
+
+PAUL-/PFADSPERRE 5/5:
+- NEGATIV: `paul/*` + PROJECT_MEMORY → `PAUL_PROJECT_MEMORY_WRITE_BLOCKED`;
+- POSITIV: `paul/*` + rein technischer Pfad → PASS;
+- POSITIV: normaler Arbeitsbranch + PROJECT_MEMORY → Paul-Sperre greift nicht fälschlich;
+- NEGATIV: immutable Workflow-Pfad → `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`;
+- NEGATIV: Paul + gemischter Diff mit PROJECT_MEMORY → BLOCK.
+
+PROTOKOLLCHECK 17/17:
+- Nicht-PROJECT_MEMORY → NOT_APPLICABLE;
+- gültige Architekturänderung → PASS;
+- einfache gültige PROJECT_MEMORY-Änderung → PASS;
+- fehlender PROTOKOLLCHECK → BLOCK;
+- fehlendes Pflichtfeld → BLOCK;
+- Eine Wahrheit != PASS → BLOCK;
+- Tests != PASS → BLOCK;
+- technische Checks BLOCKED → BLOCK;
+- CURRENT_STATE geändert + NICHT_BETROFFEN → BLOCK;
+- HOBBYRAUM geändert + NICHT_BETROFFEN → BLOCK;
+- Zielregister geändert + NICHT_BETROFFEN → BLOCK;
+- Zielvertragsoriginal geändert + NICHT_BETROFFEN → BLOCK;
+- Archiv geändert + NICHT_BETROFFEN → BLOCK;
+- Fehlerakte/-register geändert + NICHT_BETROFFEN → BLOCK;
+- Protokoll geändert + NICHT_BETROFFEN → BLOCK;
+- Änderungsregister geändert + WARUM NICHT_BETROFFEN → BLOCK;
+- Architektur geändert ohne AENDERUNGSREGISTER + BAUPROTOKOLL → BLOCK.
+
+SELBSTTEST IM WORKFLOW:
+Die wichtigsten Positiv-/Negativfälle sind zusätzlich direkt in der Kandidaten-`hardlock-base` eingebaut und laufen nach Aktivierung bei jedem Check mit.
+
+BEWERTUNG:
+**LOGIKTEST PASS.**
+**SERVERSEITIGE AKTIVIERUNG WEITER BLOCKED** bis Admin-Wartung von PR #137; deshalb kein falscher Gesamt-PASS für BAU-024/026.
+
+BEZUG:
+ARCH-050/051; BAU-024/026.
