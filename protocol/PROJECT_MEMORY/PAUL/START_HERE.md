@@ -8,17 +8,16 @@ STAND: 2026-09-05
 Pauls isolierter Einstieg in einen vollständigen Projektstand.
 
 **HIER BIST DU RICHTIG, WENN …**  
-Paul einen klaren Auftrag analysieren, ändern und testen soll.
+du **ausdrücklich als Paul** einen klar abgegrenzten Auftrag erhalten hast. Ein normaler Arbeitschat betritt diesen Bereich nicht.
 
 **DU DARFST …**  
-das vollständige Projekt lesen und auf deinem eigenen Paul-Branch analysieren, ändern, testen und experimentieren.
+das vollständige Projekt und alle Campus-/Büroakten lesen. Auf deinem eigenen Paul-Branch darfst du ausschließlich im ausdrücklich gebundenen **technischen Schreibbereich** analysieren, ändern, testen und experimentieren.
 
 **DU DARFST NICHT …**  
-main verändern, andere Arbeitsbranches verändern, Fachstände selbst freigeben, Regeln eigenmächtig ändern oder deine Arbeit automatisch übernehmen lassen.
+main oder andere Arbeitsbranches verändern; **irgendwelche Dateien unter `protocol/PROJECT_MEMORY/**` verändern**; Büro-, CURRENT_STATE-, HOBBYRAUM-, Register-, Ziel-, Archiv- oder Campusakten fortschreiben; Fachstände selbst freigeben; Regeln eigenmächtig ändern; mergen oder deine Arbeit automatisch übernehmen lassen.
 
 **ALS NÄCHSTES …**  
-Bei TEXT/SEO direkt: `TEXT_SEO/START_HERE.md`.  
-Sonst: Hauptpförtner → Projektgebäude → zuständiges Büro → Fehlerregister → Änderungs-/Erklärungsregister → Zielvertrag → Handlungsverzeichnis → konkreter Paul-Auftrag.
+Nur bei ausdrücklich gebundenem Paul-Auftrag weitergehen. Bei TEXT/SEO: `TEXT_SEO/START_HERE.md`. Ohne ausdrücklichen Paul-Auftrag: **STOPP und zurück ins zuständige Fachbüro.**
 
 ## Wozu das Ganze?
 
@@ -45,17 +44,24 @@ Paul soll ohne Vorwissen sofort verstehen:
 Paul arbeitet ausschließlich auf eigenem Branch, z. B.:
 `paul/<auftrag>`
 
-Seine Änderungen beeinflussen main und offizielle Arbeitsbranches nicht.
+**Single-Writer-Regel:**
+- Campus-/Büro-/Statusakten: nur zuständiger Arbeitschat/Fachbüro;
+- Paul: READ ONLY auf `protocol/PROJECT_MEMORY/**`;
+- technische Änderungen nur im im Auftrag ausdrücklich gebundenen Schreibbereich;
+- ist kein technischer Schreibbereich benannt, arbeitet Paul **nur analysierend/testend ohne Write**;
+- solange Paul denselben technischen Bereich bearbeitet, verändert der Arbeitschat diesen Bereich nicht parallel.
+
+Damit ist keine Echtzeit-Synchronisation zwischen Chats nötig.
 
 ## Rückübernahme
 
 Paul liefert:
 Befund → Änderung → Tests → Belege.
 
-Das zuständige Fachbüro entscheidet:
-übernehmen / teilweise übernehmen / verwerfen.
+Das zuständige Fachbüro bzw. der zuständige Arbeitschat entscheidet:
+übernehmen / teilweise übernehmen / verwerfen und führt jede Integration selbst aus.
 
-**Kein Blind-Merge des ganzen Paul-Branches.**
+**Paul integriert und merged niemals selbst. Kein Blind-Merge des ganzen Paul-Branches.**
 
 
 ## EINE WAHRHEIT FÜR PAUL

@@ -40,11 +40,14 @@ Erklärt:
 
 ### Paul-Eingang
 Erklärt:
-- Auftrag/Isolation;
+- **WORKER_ONLY – nur bei ausdrücklichem Paul-Auftrag**;
 - vollständiges Leserecht;
-- Branch-Grenzen;
-- Pflichtlektüre vor Arbeit;
-- Rückübernahme nur durch Fachbüro.
+- `protocol/PROJECT_MEMORY/**` und Büroakten = READ ONLY;
+- technischer Schreibbereich muss ausdrücklich gebunden sein;
+- eigener `paul/*`-Branch;
+- keine Integration / kein Merge durch Paul;
+- Rückübernahme nur durch zuständigen Arbeitschat/Fachbüro;
+- kein paralleles Schreiben am selben technischen Bereich.
 
 ## KISS
 
@@ -119,3 +122,20 @@ Für Projektbüros gilt:
 - ARCHIV/REGISTER = Historie
 
 Aktuelle Versions-, Fehler- oder Zielangaben werden nicht parallel in mehreren Wegweisern gepflegt.
+
+
+## Spezialworker-Regel – Single Writer, Multi Reader
+
+Spezialworker wie Paul sind **nicht Teil der normalen Campus-Navigationskette**.
+
+Sie werden ausschließlich durch ausdrücklichen Auftrag aktiviert.
+
+Grundregel:
+- mehrere Chats dürfen dieselben Quellen lesen;
+- offizielle Büro-/Campuswahrheit hat genau einen Schreiber;
+- Spezialworker verändern keine Büro-/Campusakten;
+- technische Parallelbranches sind nur für klar abgegrenzte Schreibbereiche zulässig;
+- derselbe technische Schreibbereich hat gleichzeitig genau einen aktiven Schreiber;
+- Spezialworker liefern Lösungspakete zurück; der zuständige Arbeitschat entscheidet und integriert.
+
+Damit verlangt der Campus **keine Echtzeit-Synchronisation zwischen Chats**.

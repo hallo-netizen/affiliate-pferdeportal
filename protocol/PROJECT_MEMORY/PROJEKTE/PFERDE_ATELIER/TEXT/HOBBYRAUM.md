@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-05
-STATUS: AKTIV / PAUL-TEXT/SEO-ARBEITSWEG GEBUNDEN
+STATUS: AKTIV / TEXT-ARBEITSCHAT FÜHRT
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,17 +9,16 @@ STATUS: AKTIV / PAUL-TEXT/SEO-ARBEITSWEG GEBUNDEN
 Der einzige aktuelle Arbeitsraum des Büros TEXT.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du den aktuell gebundenen TEXT/SEO-Arbeitsweg oder dessen Rückgabeweg brauchst.
+du den aktuellen TEXT/SEO-Auftrag als zuständiger Arbeitschat weiterbearbeitest.
 
 **DU DARFST …**  
-den gebundenen Auftrag und seine Quellen lesen; Änderungen nur bei STATUS AKTIV und nur im ausdrücklich gebundenen Arbeitsweg.
+den gebundenen TEXT-Arbeitsweg und seine Quellen lesen und nach den dortigen Regeln arbeiten.
 
 **DU DARFST NICHT …**  
-aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelweg eröffnen oder Fachregeln aus der Raumbelegung erfinden.
+aus dem Hobbyraum Schreibrechte ableiten, denselben technischen Bereich parallel mit einem anderen Worker verändern oder dich ohne ausdrücklichen Auftrag als Paul ausgeben.
 
 **ALS NÄCHSTES …**  
-`../../../PAUL/TEXT_SEO/START_HERE.md` vollständig lesen.
-
+`protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md` → **Textmaschine / Artikelproduktion** → dortiger technischer Originalweg.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -27,29 +26,26 @@ aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelwe
 - **AKTUELLER AUFTRAG / NEXT ACTION:** ausschließlich diese `HOBBYRAUM.md`
 - **CURRENT_BLOCKER:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Quelle
 - **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
-- **NICHT ANFASSEN / WARUM:** nicht hier duplizieren → Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **NICHT ANFASSEN / WARUM:** Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 
-**Wenn zwei Angaben widersprechen:** nicht raten. Die oben benannte autoritative Quelle gewinnt.
+## Paul ist kein normaler Weiterweg
 
-## Aktueller Arbeitsweg
+Paul ist ein **separater, ausdrücklich zu beauftragender Spezialworker**.
 
-Pauls direkter Einstieg:
-`../../../PAUL/TEXT_SEO/START_HERE.md`
+Ein normaler Arbeitschat wird von hier **nicht** zu Paul geroutet.
 
-Gebundener Arbeitsbranch:
-`paul/text-seo-campus-ready-20260905`
+Wenn Paul separat beauftragt ist:
+- Paul darf alle Büro-/Campusakten lesen;
+- Paul verändert keine Dateien unter `protocol/PROJECT_MEMORY/**`;
+- Paul baut/testet nur im ausdrücklich gebundenen technischen Schreibbereich auf seinem `paul/*`-Branch;
+- der TEXT-Arbeitschat verändert denselben technischen Schreibbereich bis zur Rückgabe nicht parallel;
+- Paul liefert Befund/Fix/Tests/Commit(s);
+- der TEXT-Arbeitschat entscheidet und integriert selbst.
 
 ## Raumregel
 
-Dieser Hobbyraum bindet nur Arbeitsweg und Zuständigkeit.
+**Single Writer, Multi Reader.**
 
-Er ersetzt NICHT:
-- aktiven Zielvertrag;
-- aktuelle Fehlerliste;
-- technische Originalquellen;
-- Hard Rules.
-
-## Bei Abschluss
-
-Ergebnis zurück an das TEXT-Fachbüro.
-Danach STATUS auf FREI oder nächsten ausdrücklich gebundenen Auftrag setzen.
+Lesen dürfen mehrere.
+Offizielle Büro-/Statuswahrheit schreibt nur der zuständige Arbeitschat.
+Derselbe technische Schreibbereich wird niemals gleichzeitig von Arbeitschat und Paul verändert.

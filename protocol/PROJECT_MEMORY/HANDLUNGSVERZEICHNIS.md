@@ -116,7 +116,9 @@ Kein exaktes Schlüsselwort erforderlich.
 ## Paul – TEXT/SEO
 
 Aktion:
-Paul soll am aktuellen Pferde-Atelier TEXT/SEO-Komplex arbeiten.
+**Der Nutzer beauftragt ausdrücklich Paul** mit einem klar abgegrenzten TEXT/SEO-Problem.
+
+Ein normaler TEXT-Arbeitschat wird niemals automatisch zu Paul geroutet.
 
 Verbindlicher Einstieg:
 `PAUL/TEXT_SEO/START_HERE.md`
@@ -130,7 +132,14 @@ Dort liegen/verweisen:
 - Hard Rules;
 - aktuelle technische GitHub-Originalquellen.
 
-Paul arbeitet nur auf dem gebundenen Paul-Branch.
+Paul arbeitet nur auf dem gebundenen Paul-Branch und nur im ausdrücklich benannten technischen Schreibbereich.
+
+Harte Grenze:
+- `protocol/PROJECT_MEMORY/**` für Paul = READ ONLY;
+- keine Büro-/Status-/Register-/Archivänderungen durch Paul;
+- kein Merge / keine Integration durch Paul;
+- Rückgabe als Lösungspaket an den zuständigen Arbeitschat;
+- derselbe technische Schreibbereich wird nicht parallel von Paul und Arbeitschat verändert.
 
 
 ## Hobbyraum betreten

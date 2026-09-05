@@ -106,3 +106,19 @@ Vor Freigabe negativ prüfen:
 - keine dynamischen Versionsangaben in START_HERE als zweite Wahrheit;
 - keine Fehlerhistorie in HOBBYRAUM;
 - keine ausführliche Fehlerkopie im zentralen Fehlerregister.
+
+
+## Spezialworker / Paul – verpflichtende Trennung
+
+Für jedes neue Projekt gilt:
+- Spezialworker sind kein normaler Routing-Schritt;
+- Aktivierung nur durch ausdrücklichen Auftrag;
+- alle Projekt-/Büro-/Campusakten dürfen gelesen, aber vom Spezialworker nicht verändert werden;
+- technischer Schreibbereich + eigener Worker-Branch müssen ausdrücklich gebunden sein;
+- ohne Schreibbereich = READ ONLY;
+- derselbe technische Bereich hat gleichzeitig nur einen Schreiber;
+- Worker integriert/merged nicht selbst;
+- zuständiger Arbeitschat entscheidet über Übernahme und aktualisiert anschließend Stand/Protokolle.
+
+Leitsatz:
+**Single Writer, Multi Reader – keine Echtzeit-Synchronisation als Voraussetzung.**

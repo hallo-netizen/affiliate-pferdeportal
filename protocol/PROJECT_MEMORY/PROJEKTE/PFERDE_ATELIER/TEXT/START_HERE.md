@@ -64,3 +64,12 @@ Vor jeder Änderung:
 
 Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
 
+## Paul-Grenze
+
+Paul ist **kein normaler nächster Schritt dieses Büros**.
+
+Nur ein ausdrücklich als Paul gebundener Worker nutzt `protocol/PROJECT_MEMORY/PAUL/`.
+Normale Arbeitschats bleiben im TEXT-Arbeitsweg.
+
+Paul darf alle Büroakten lesen, aber **keine Datei unter `protocol/PROJECT_MEMORY/**` verändern**. Integration seiner technischen Lösung erfolgt ausschließlich durch den zuständigen TEXT-Arbeitschat.
+
