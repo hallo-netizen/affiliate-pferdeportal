@@ -167,7 +167,7 @@ def _current_only(data:dict)->dict:
         request_ref=str(handoff.get('request_ref') or '')
         if not request_ref.startswith(str(data['allowed_output_root'])):raise ViewError('CURRENT_ACTION_HANDOFF_REQUEST_OUTSIDE_BOUND_ROOT')
         if handoff.get('request_contract')!='PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1' or handoff.get('worker_executes_adapter_directly') is not False:raise ViewError('CURRENT_ACTION_HANDOFF_BINDING_INVALID')
-        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_CURRENT_BOUND_ITEM_NOW','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'fachworkflow_handoff':handoff,'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+request_ref,'publish_allowed':False}
+        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_BOUND_FACHWORKFLOW_PROMPT_AS_CURRENT_WORKER_NOW','worker_role':'CURRENT_CODEX_IS_BOUND_FACHWORKFLOW_WORKER','separate_fachworkflow_executor_required':False,'separate_fachworkflow_capability_required':False,'fachworkflow_work_generation_authority':'CURRENT_CODEX_WORKER_MUST_GENERATE_REAL_CURRENT_OUTPUTS','fachworkflow_pass_authority':'REAL_ARTIFACTS_PLUS_REAL_PPM_HANDOFF_ONLY','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'fachworkflow_handoff':handoff,'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+request_ref,'publish_allowed':False}
     if status in {'BLOCKED','USER_ACTION_REQUIRED','FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH'}:return {'contract':CONTRACT,'status':status,'room_token':data.get('room_token'),'error':data.get('error'),'evidence':data.get('evidence'),'outer_step':data.get('outer_step'),'publish_allowed':False}
     if data.get('ok') is False:return {'contract':CONTRACT,'status':'BLOCKED','error':data.get('error') or status or 'BOUND_BRIDGE_BLOCKED','publish_allowed':False}
     raise ViewError('BOUND_BRIDGE_STATUS_NOT_WORKER_VISIBLE')
@@ -211,6 +211,10 @@ def selftest()->dict:
     if 'existing_article_source_binding' in v:raise AssertionError('OLD_SOURCE_LEAK')
     if v.get('fachworkflow_handoff')!=handoff:raise AssertionError('PRE_PPM_REQUEST_NOT_VISIBLE')
     if not v.get('submission_command','').endswith(handoff['request_ref']):raise AssertionError('SUBMISSION_NOT_BOUND_TO_PRE_PPM_REQUEST')
+    if v.get('worker_role')!='CURRENT_CODEX_IS_BOUND_FACHWORKFLOW_WORKER':raise AssertionError('CURRENT_WORKER_ROLE_NOT_BOUND')
+    if v.get('separate_fachworkflow_executor_required') is not False or v.get('separate_fachworkflow_capability_required') is not False:raise AssertionError('SEPARATE_FACHWORKFLOW_DEPENDENCY_REGRESSION')
+    if v.get('fachworkflow_work_generation_authority')!='CURRENT_CODEX_WORKER_MUST_GENERATE_REAL_CURRENT_OUTPUTS':raise AssertionError('FACHWORKFLOW_WORK_GENERATION_NOT_BOUND')
+    if v.get('fachworkflow_pass_authority')!='REAL_ARTIFACTS_PLUS_REAL_PPM_HANDOFF_ONLY':raise AssertionError('PASS_AUTHORITY_NOT_SEPARATED_FROM_WORKER_ROLE')
     a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},sample['current_item'])
     hb=a.get('fachworkflow_handoff') or {};schema=a['item_receipt_schema']
     if hb.get('request_contract')!='PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1' or hb.get('worker_executes_adapter_directly') is not False:raise AssertionError('PRE_PPM_REQUEST_BINDING_FAIL')
@@ -218,7 +222,7 @@ def selftest()->dict:
     req=schema.get('ppm679_requirement') or {}
     if req.get('pre_ppm_binding_required_fields')!=['final_article_ref','final_article_sha256']:raise AssertionError('PRE_PPM_BINDING_NOT_MINIMAL')
     if 'ppm_report_ref' not in req.get('final_ppm679_binding_required_fields',[]):raise AssertionError('FINAL_PPM_REPORT_BINDING_MISSING')
-    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'pre_ppm_request_bound':True,'worker_separate_handoff_command':False,'provisional_receipt_required':False,'fachworkflow_pass_materialized_after_real_ppm':True,'publish_allowed':False}
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'current_codex_is_bound_fachworkflow_worker':True,'separate_fachworkflow_executor_required':False,'separate_fachworkflow_capability_required':False,'worker_generates_real_current_fachworkflow_outputs':True,'worker_does_not_self_attest_pass':True,'pre_ppm_request_bound':True,'worker_separate_handoff_command':False,'provisional_receipt_required':False,'fachworkflow_pass_materialized_after_real_ppm':True,'publish_allowed':False}
 
 def main(argv:list[str])->int:
     try:
