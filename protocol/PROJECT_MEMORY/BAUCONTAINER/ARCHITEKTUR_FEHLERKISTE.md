@@ -626,3 +626,30 @@ OFFENE BLOCKER FÜR TRESOR_PASS:
 - Nutzer muss zweite unabhängige lokale Ablage real speichern + Hash-PASS bestätigen;
 - finale Design-1.50.472-Rohartefakte fehlen;
 - `ENDSTEMPEL_PRIVATE_KEY`-Recovery und weitere notwendige externe Recovery-Abhängigkeiten müssen vollständig/praktisch geprüft werden.
+
+
+## BAU-031 – Paul-Frische hing noch an zweitem AGENTS-Befehl
+
+STATUS: CLOSED IM SECURITY-KANDIDAT / AKTIVIERUNG BLOCKED
+
+KURZ:
+Pauls Frischeprüfung war verpflichtend, aber nach der Cloud-Eingangstür noch als separater Worker-Befehl beschrieben.
+
+RISIKO:
+Ein Worker hätte die zweite Anweisung vergessen können. Damit war „zwingend automatisch“ nicht vollständig technisch umgesetzt.
+
+KISS-FIX:
+`cloud_entry.py` integriert den vorhandenen Paul-Gate direkt:
+- start → Paul start automatisch;
+- verify → Paul verify automatisch;
+- complete → Paul verify automatisch vor Zustandsfortschreibung.
+
+HARD TEST:
+- lokal Frische 10/10 PASS;
+- lokal Auto-Bridge 6/6 PASS;
+- GitHub `Paul automatic cloud-entry bridge CI` SUCCESS;
+- GitHub `Paul current-Campus positive-negative CI` SUCCESS;
+- Security-`hardlock` SUCCESS.
+
+STATUSGRENZE:
+Auf main weiterhin BLOCKED bis kontrollierte Aktivierung von Security-PR #137.

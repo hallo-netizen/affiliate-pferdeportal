@@ -516,3 +516,18 @@ WARUM:
 GitHub Actions Secrets sind nicht als Originalwert wieder auslesbar. Ein 1:1-Wiederaufbau ohne unabhängige Recovery-Quelle wäre nicht möglich.
 REGEL:
 Secret niemals in Campus/Git/Chat kopieren; nur sichere externe Recovery-Quelle + praktischer Recovery-Test dürfen PASS begründen.
+
+
+## ARCH-063 – Paul-Frische wird von der einzigen Cloud-Eingangstür automatisch erzwungen
+WAS:
+`cloud_entry.py` ruft auf jedem `paul/*`-Branch den Paul-Scope-Gate selbst auf: bei `start` mit Startprüfung, bei `verify` erneut mit Frischeprüfung und bei `complete` zwingend vor jeder Zustandsfortschreibung mit `verify`.
+WARUM:
+Die vorherige Lösung war logisch verpflichtend, hing aber noch daran, dass der Worker die zweite Paul-Anweisung aus `AGENTS.md` tatsächlich ausführte. Für „Paul muss zwingend automatisch sein“ war das eine vermeidbare Erinnerungsstelle.
+KISS:
+Kein neuer Runner und keine zweite Eingangstür. Nur die bestehende `cloud_entry.py` ruft die vorhandene Paul-Sicherung automatisch auf.
+LOKAL:
+Frischematrix 10/10 PASS; Auto-Bridge 6/6 PASS.
+GITHUB:
+Security-Head `d9bb690f677a34d09540338ca2a4c32494b42079`; `Paul automatic cloud-entry bridge CI` SUCCESS; `Paul current-Campus positive-negative CI` SUCCESS; gesamter `hardlock` SUCCESS.
+GRENZE:
+Auf `main` weiterhin nicht produktiv aktiv, bis Security-PR #137 kontrolliert aktiviert ist.

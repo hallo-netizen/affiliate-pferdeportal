@@ -97,20 +97,23 @@ Pauls eigene Dateien sind Einstieg und Arbeitsanweisung, nicht eine parallele St
 
 Für Paul wird kein täglich neu erzeugter Prompt benötigt.
 
-Technischer Sollweg nach Aktivierung der Security-Wartung:
+Nach Aktivierung der Security-Wartung existiert für den Worker **nur eine manuell aufzurufende Eingangstür**:
 
-1. bestehende Repository-Eingangstür:
-   `python3 control/cloud-entry-gate/cloud_entry.py start`
-2. auf jedem `paul/*`-Branch automatisch anschließend:
-   `python3 control/paul-scope-gate/paul_scope_gate.py start`
-3. der Gate scannt den **frisch geholten offiziellen Campus** nach genau einem aktiven `PAUL_ASSIGNMENT_V1` im Hobbyraum;
-4. ohne Auftrag: `PAUL_NOT_ASSIGNED`;
-5. falscher Branch/Basis/Scope: BLOCKED;
-6. bei PASS entsteht nur lokal `.paul-capsule/` als hashgebundener READ-ONLY-Snapshot der aktuellen Quellen;
-7. vor Rückgabe:
-   `python3 control/paul-scope-gate/paul_scope_gate.py verify`;
-8. relevante Drift seit Start:
-   `STALE_ASSIGNMENT_BLOCKED`.
+`python3 control/cloud-entry-gate/cloud_entry.py start`
+
+Wenn der aktuelle Branch `paul/*` ist, ruft `cloud_entry.py` den Paul-Scope-Gate **selbst automatisch** auf.
+
+Automatisch:
+1. neuesten offiziellen Campus frisch holen;
+2. genau einen aktiven `PAUL_ASSIGNMENT_V1` im Hobbyraum verlangen;
+3. Branch/Basis/WRITE_SCOPE prüfen;
+4. aktuelle Quellen in die temporäre `.paul-capsule/` laden;
+5. ohne Auftrag → `PAUL_NOT_ASSIGNED`;
+6. vor `verify` automatisch Paul-Frische prüfen;
+7. vor `complete` automatisch **vor jeder State-/Receipt-Fortschreibung** Paul-Frische prüfen;
+8. relevante Drift → `STALE_ASSIGNMENT_BLOCKED`.
+
+Paul bzw. der Nutzer muss keinen zweiten Paul-Start-/Verify-Befehl mehr erzeugen oder merken.
 
 Die `.paul-capsule/` ist **keine zweite Wahrheit** und wird nicht eingecheckt.
 Sie enthält nur einen belegten Snapshot des offiziellen Campus-Heads.

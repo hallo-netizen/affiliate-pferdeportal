@@ -918,3 +918,55 @@ Vollständiger `TRESOR_PASS` weiterhin BLOCKED durch:
 
 BEZUG:
 ARCH-060 bis ARCH-062; BAU-030.
+
+
+### 2026-09-05 – Paul-Eingang auf echte Ein-Tür-Automatik gehärtet
+
+KRITISCHE NACHPRÜFUNG:
+Die Frischelogik selbst war bereits hart getestet, aber `AGENTS.md` verlangte noch einen separaten Paul-Gate-Aufruf nach `cloud_entry.py start`.
+
+BEFUND:
+Das war für die Forderung „Paul muss zwingend automatisch sein“ zu weich: ein Worker konnte theoretisch die zweite Anweisung vergessen.
+
+LOKALER HARTTEST VOR GITHUB-ÄNDERUNG:
+Paul-Frische mit echtem lokalem Bare-origin/Campus-/Paul-Branch:
+**10/10 PASS**
+- alte Branch-Campus-Kopie wird ignoriert;
+- Start liest neuesten Campus;
+- TASK-/CURRENT_STATE-/Assignment-Drift blockiert;
+- Neustart lädt neuen Stand;
+- irrelevante Campusänderung blockiert nicht;
+- ohne Auftrag / Mehrfachauftrag blockiert.
+
+Vorgeschlagene Auto-Bridge separat positiv/negativ:
+**6/6 PASS**
+- normaler Branch → kein Paul-Gate;
+- Paul start → auto;
+- Paul verify → auto;
+- complete → auto-preverify;
+- Gate FAIL → Eingang BLOCK;
+- Gate fehlt → Eingang BLOCK.
+
+KISS-FIX:
+Bestehende `cloud_entry.py` ruft den vorhandenen Paul-Scope-Gate jetzt selbst auf.
+`AGENTS.md` verlangt keinen zweiten Paul-Befehl mehr.
+
+ECHTER GITHUB-RUN:
+Security-Head:
+`d9bb690f677a34d09540338ca2a4c32494b42079`
+
+GitHub Actions:
+- `Paul automatic cloud-entry bridge CI` → SUCCESS;
+- `Paul current-Campus positive-negative CI` → SUCCESS;
+- gesamter `hardlock` → SUCCESS.
+
+AUTOMATISCHE GARANTIE NACH AKTIVIERUNG:
+Ein einziger `cloud_entry.py start` auf `paul/*` lädt automatisch den aktuellen Campus.
+Ein gültiger Paul-Abschluss kann relevante Drift nicht überspringen, weil `complete` vorher automatisch Paul-`verify` ausführt.
+
+STATUS:
+Logik/Kandidat PASS.
+Produktive Aktivierung auf main bleibt bis Admin-Aktivierung von PR #137 BLOCKED.
+
+BEZUG:
+ARCH-063; BAU-031.
