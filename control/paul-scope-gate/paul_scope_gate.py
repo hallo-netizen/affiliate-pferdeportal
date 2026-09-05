@@ -46,18 +46,14 @@ def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def campus_remote_ref() -> str:
-    return f"refs/remotes/origin/{OFFICIAL_CAMPUS_REF}"
-
-
 def fetch_official_campus() -> str:
     git(
         "fetch",
         "--no-tags",
         "origin",
-        f"refs/heads/{OFFICIAL_CAMPUS_REF}:{campus_remote_ref()}",
+        f"refs/heads/{OFFICIAL_CAMPUS_REF}",
     )
-    return git("rev-parse", campus_remote_ref())
+    return git("rev-parse", "FETCH_HEAD")
 
 
 def show(ref: str, path: str) -> str:
