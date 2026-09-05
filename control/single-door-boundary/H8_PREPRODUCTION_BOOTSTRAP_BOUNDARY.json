@@ -35,11 +35,11 @@
     },
     {
       "ref": "control/single-door-boundary/single_door_bootstrap.py",
-      "git_blob_sha1": "81d49f0c7a91fd2dee75e8d125e04178597a9d83"
+      "git_blob_sha1": "4bda518afbc693ab65fc7ea493ac63a450f0cd1d"
     },
     {
       "ref": "control/single-door-boundary/preproduction_provenance_guard.py",
-      "git_blob_sha1": "2209c0504bacbcf845917025585b4bb01f85b978"
+      "git_blob_sha1": "aa771173179d94b2b020c6435083e6ebf1779e75"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard_h8.py",
@@ -63,7 +63,7 @@
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json",
-      "git_blob_sha1": "ee6d5d05ad5e7366ed81045c732e0dc990286889"
+      "git_blob_sha1": "26eb7d4c5c9cac93051f57414bf2d877c6e209d0"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
