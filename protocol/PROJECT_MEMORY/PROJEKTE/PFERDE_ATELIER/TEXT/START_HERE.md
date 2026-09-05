@@ -3,28 +3,35 @@
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das Fachbüro für Textmaschine, Artikelproduktion und deren Produktionsregeln.
+Das Fachbüro für den belegten TEXT-/STARTMASTER0107-Bestand des Pferde-Ateliers.
 
 **HIER BIST DU RICHTIG, WENN …**  
-die Aufgabe Textproduktion, Textworkflow, Produktionsregel oder Text-Regression betrifft.
+du den aktuellen Text-/SEO-Bestand, die zugehörigen Originalakten oder den aktuellen GitHub-Verweis finden willst.
 
 **DU DARFST …**  
-im gebundenen TEXT-Hobbyraum und nach den autoritativen Textregeln arbeiten.
+Quellen finden, aktuelle/historische Dateistände unterscheiden und zu den Originalakten weitergehen.
 
 **DU DARFST NICHT …**  
-freie Ersatzworkflows erfinden, andere Büros verändern, main ungeprüft verändern oder bestandene Fehler ohne Grund neu analysieren.
+in diesem Sortierkontext Fachregeln, Textmaschine, SEO-Logik, Runner, Produktionsworkflow oder Originalinhalte verändern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → verbindlicher Eintrag im Handlungsverzeichnis.
+`CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md` → bei SEO-Dateien `SEO_BESTAND.md`.
 
 ## Hauptquellen
 
+GitHub:
 - Root-`AGENTS.md`
 - `control/CURRENT_STARTMASTER.json`
 - `control/startmaster0107/`
 
-Fehlerhistorie:
-zentrales `FEHLERREGISTER.md`, insbesondere TEXT-M01-M33.
+Übergebene aktuelle Akten:
+- `MASTERDATEIEN_INVENTAR.md`
 
-Änderungsgründe:
-zentrales `AENDERUNGSREGISTER.md`.
+SEO-Dateibestand:
+- `SEO_BESTAND.md`
+
+## Harte Sortiergrenze
+
+Diese Campusakten fassen nur den belegten Stand zusammen.
+
+**Originalinhalte bleiben unverändert und autoritativ an ihrer jeweiligen Quelle.**

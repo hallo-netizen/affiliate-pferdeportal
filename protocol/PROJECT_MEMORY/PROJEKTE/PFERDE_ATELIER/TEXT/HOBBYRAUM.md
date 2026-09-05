@@ -1,13 +1,24 @@
 # TEXT – HOBBYRAUM
 
-STATUS: BELEGT DURCH LAUFENDE EXTERNE TEXTARBEIT
+STATUS: NICHT FÜR FACHARBEIT DURCH DIESEN SORTIERCHAT
 
-Aktuelle organisatorische Regel:
-Dieser PROJECT_MEMORY-Branch führt KEINE Textreparatur aus.
+STAND: 2026-09-05
 
-Vor Wiederverwendung dieses Hobbyraums:
-- laufenden Textchat beenden/einfrieren;
-- aktuellen GitHub-Stand neu synchronisieren;
-- exakt einen offenen Auftrag eintragen.
+Aktueller Auftrag dieses Chats:
+**nur Dateien/GitHub-Quellen sortieren und den belegten aktuellen Stand herstellen.**
 
-Nebenfunde werden nur dokumentiert.
+Erlaubt:
+- Dateibestand erfassen;
+- Versionen/Hashes/Quellen verknüpfen;
+- unverändert archivieren;
+- Campus-Metadaten aktualisieren.
+
+Nicht erlaubt:
+- Textmaschine verändern;
+- SEO-Regeln verändern;
+- Runner prüfen/ändern;
+- Produktionsworkflow prüfen/ändern;
+- Fachfehler reparieren;
+- Originalinhalte umschreiben.
+
+Für Facharbeit bleibt der dafür zuständige TEXT-Arbeitschat/Fachweg maßgeblich.

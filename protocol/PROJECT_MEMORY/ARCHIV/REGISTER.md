@@ -95,3 +95,51 @@ Aktueller Live-Stand:
 
 LOKALE_KOPIE_ENTBEHRLICH:
 NEIN.
+
+
+## ARC-PFERDE-TEXT-20260905 – STARTMASTER0107 aktueller Aktenstand
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/TEXT_STARTMASTER0107/2026-09-05/`
+
+Kanonisch vorhanden:
+- aktueller STARTMASTER0107-Gesamtmaster 2026-09-05
+- Status Quo
+- vollständiges Protokoll
+- Zielvertrag
+- Fehlerliste
+- Test-vs-Live-Befund
+- Do-not-touch-Regeln
+
+Master SHA-256:
+`735aae894f2e7697e6b9221f752a3a568f69b02042cc8cba0a38102f821d6062`
+
+LOKALE_KOPIE_ENTBEHRLICH:
+**NEIN**
+
+Grund:
+zweite unabhängige verifizierte Rohablage fehlt.
+
+## ARC-PFERDE-SEO-20260905 – aktuelle SEO-Installer aus STARTMASTER0107
+
+STATUS:
+GELB
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/SEO/2026-09-05/`
+
+Kanonisch vorhanden:
+- Portal SEO Topic Engine 0.56.25
+- Portal SEO Editorial Plan Compiler 0.28.16
+
+Hashes:
+- Topic Engine: `8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95`
+- Editorial Plan Compiler: `3341805f277dfd77c985e6cfbbc2b57e4e0677bef8c59d8c2067f7f0b79be9bc`
+
+Zusätzlich weiterhin im unveränderten Gesamtmaster enthalten.
+
+LOKALE_KOPIE_ENTBEHRLICH:
+**NEIN**

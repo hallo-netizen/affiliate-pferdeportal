@@ -73,32 +73,50 @@ Spätere Projektstände dürfen nicht aus Erinnerung als Dateibeleg eingetragen 
 MOD-ID:
 noch nicht vergeben
 
-Nachweisbar erhalten:
-- `PORTAL_SEO_TOPIC_ENGINE_0.8.1_PHP80_DORMANT_ACTIVATION_STAGING(1).zip` – historischer älterer Stand
-- `portal-seo-topic-engine_0.56.10_BREADTH_FINAL_READBACK_ROOTFIX_VERIFIED.zip` – späterer Installerbeleg
+Aktuellster direkt belegter Installer:
+`portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip`
 
-Zusätzlicher Prüfbeleg in der Library:
-`PSTE_0.56.14_BATCH_TITLE_DIVERSITY_ROOTFIX_VERIFICATION.json`
+Dateibeleg:
+0.56.25
 
-Wichtig:
-Prüfbeleg 0.56.14 ist kein 0.56.14-Plugin-ZIP.
+SHA-256:
+`8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95`
 
-Zuständigkeit:
-TEXT / Textsystem, bis Allgemeingültigkeit separat geprüft ist.
+Quelle:
+aktueller STARTMASTER0107-Master / `02_CURRENT_INSTALLERS/`
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/SEO/2026-09-05/`
+
+Ältere Installerstände bleiben historisch erhalten.
+
+Modulklasse:
+UNGEKLÄRT.
 
 ### WP-004 – Portal SEO Editorial Plan Compiler
 
 MOD-ID:
 noch nicht vergeben
 
-Nachweisbar erhalten:
-- `portal-seo-editorial-plan-compiler_0.28.5_WORKFLOW_SUPERVISOR_KEY_CUSTODY_FINAL.zip`
+Aktuellster direkt belegter Installer:
+`portal-seo-editorial-plan-compiler_0.28.16_PRODUCTION_PACKAGE_UPLOAD_VISIBILITY.zip`
 
 Dateibeleg:
-0.28.5
+0.28.16
 
-Zuständigkeit:
-TEXT / Produktionssystem, bis Allgemeingültigkeit separat geprüft ist.
+SHA-256:
+`3341805f277dfd77c985e6cfbbc2b57e4e0677bef8c59d8c2067f7f0b79be9bc`
+
+Quelle:
+aktueller STARTMASTER0107-Master / `02_CURRENT_INSTALLERS/`
+
+Archiv:
+`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/SEO/2026-09-05/`
+
+Ältere Installerstände bleiben historisch erhalten.
+
+Modulklasse:
+UNGEKLÄRT.
 
 ### WP-005 – Affiliate-Zentrale
 
