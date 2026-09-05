@@ -51,7 +51,7 @@
     },
     {
       "ref": "control/single-door-boundary/single_door_preproduction_handoff.py",
-      "git_blob_sha1": "05c81d3abe42206b8898b93961be11ced490c507"
+      "git_blob_sha1": "815c845a775b4ad275e1f854e80696b34f8228c2"
     },
     {
       "ref": "control/single-door-boundary/single_door_route_binding.py",
