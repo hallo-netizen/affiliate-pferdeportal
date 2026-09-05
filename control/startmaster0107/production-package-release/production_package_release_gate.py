@@ -94,7 +94,7 @@ def current_generation_binding(repo: Path) -> dict[str, Any]:
     }
 
 
-def validate_package(path: Path, repo: Path, require_current_generation: bool = True, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+def validate_package(path: Path, repo: Path, require_current_generation: bool = True) -> dict[str, Any]:
     env = load_json(path)
     contract = str(env.get('contract') or '')
     if contract == PLAN_CONTRACT:
@@ -103,9 +103,15 @@ def validate_package(path: Path, repo: Path, require_current_generation: bool = 
         raise ReleaseBlocked('UPLOAD_ARTIFACT_CONTRACT_INVALID')
 
     h7 = load_module(repo / 'control/single-door-boundary/single_door_preproduction_handoff.py', 'package_release_h7_validator')
-    proof = h7.validate_production_package(Path(path), trusted_keys=trusted_keys) if trusted_keys is not None else h7.validate_production_package(Path(path))
+    proof = h7.validate_production_package_integrity(Path(path))
     if not isinstance(proof, Mapping) or not proof.get('ok'):
         raise ReleaseBlocked('H7_PACKAGE_VALIDATION_FAILED')
+    release = env.get('workflow_release')
+    if not isinstance(release, dict) or release.get('contract') != 'WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND':
+        raise ReleaseBlocked('WORKFLOW_RELEASE_CONTRACT_INVALID')
+    forbidden_signer_fields = {'signature_algorithm','signing_key_id','signing_public_key_sha256','signature_b64','release_payload_sha256','release_sha256'}
+    if forbidden_signer_fields.intersection(release):
+        raise ReleaseBlocked('INTERNAL_SIGNER_FIELDS_FORBIDDEN')
 
     preflight = load_module(repo / 'control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py', 'package_release_preflight')
     pf = preflight.validate(env)
