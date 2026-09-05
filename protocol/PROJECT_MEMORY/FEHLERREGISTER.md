@@ -10,36 +10,47 @@ Die jeweils verlinkte Originalquelle bleibt autoritativ.
 
 Bereich: TEXT
 Status: AKTIV / Regression
-Kurz: bekannte historische Textmaschinen-/Produktionsfehler
 Autoritative Fehlerquelle:
 `control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
-Autoritativer Runner:
+Runner:
 `control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py`
 
 ## TEXT-LIVE-20260905
 
 Bereich: TEXT
 Status: LIVE – PARALLELER CHAT ARBEITET
-Kurz: aktueller 7-Artikel-/Workflow-Reparaturprozess
-Relevante GitHub-Arbeitsstellen:
-- PR #132 – Hobbyraum M26 regression-matrix verification
-- Issue #133 – REAL 7-Artikel-Textlauf
+Arbeitsstellen:
+- PR #132
+- Issue #133
 
-Wichtig:
-Dieser Eintrag ist KEINE eingefrorene Fehlerwahrheit.
-Vor Übernahme in TEXT-CURRENT_STATE muss nach Ende des laufenden Chats neu synchronisiert werden.
+Vor Übernahme nach Ende des Textchats neu synchronisieren.
 
 ## AFFILIATE-RELEASE
 
 Bereich: AFFILIATE
 Status: AKTIV
-Autoritative State-/Gatequelle:
+Autorität:
 `control/release-governance/CURRENT_RELEASE.json`
-Historische/Release-Regeln:
 `release/affiliate-zentrale/AGENTS.md`
-`AFFILIATE_RELEASE_HARDLOCK_GESAMTFLOW_20260828.md`
+
+## BILD-249-LOCAL-PREVIEW
+
+Bereich: BILD
+Status: CLOSED / historisch belegt
+Kurz: nach Import blieb Sammelübersicht an temporärer Magnific-URL und wurde nach deren Ablauf leer.
+Fix: lokales WordPress-Attachment/URL priorisieren, externe URL nur Fallback.
+Beleg:
+`PROJEKTE/PFERDE_ATELIER/BILD/MASTERDATEIEN_INVENTAR.md`
+Historische Tests: PASS.
+
+## BILD-OPEN-RATIO-001
+
+Bereich: BILD
+Status: UNGEKLÄRT – noch kein bestätigter Fehler
+Kurz: 2.6.6-Category-Profil nennt im Prompt 16:9, gespeichert sind 3:1 / 1200×400.
+Regel: nicht eigenmächtig korrigieren; erst LIVE-2.6.9-Code/Beleg prüfen.
 
 ## Regel
 
-Neue reale Fehler erhalten eine eindeutige ID und einen Verweis auf die autoritative Originalquelle.
-Keine zweite ausführliche Fehlerbeschreibung hier anlegen.
+Neue reale Fehler erhalten eindeutige ID + Verweis auf autoritative Originalquelle.
+Keine zweite ausführliche Fehlerwahrheit hier anlegen.

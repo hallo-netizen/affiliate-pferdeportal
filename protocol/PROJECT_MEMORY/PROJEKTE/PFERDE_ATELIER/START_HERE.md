@@ -7,6 +7,7 @@ STATUS: AKTIV
 
 - TEXT
 - DESIGN
+- BILD
 - AFFILIATE
 - HIVEPRESS
 - GEMEINSAM
@@ -22,9 +23,12 @@ Neue Büros dürfen bei echtem dauerhaften Bedarf ergänzt werden.
 - fremde Büros nicht eigenmächtig verändern;
 - ein Hobbyraum pro Büro;
 - Fehler und wichtige Änderungen dauerhaft verweisen/dokumentieren;
-- Maschinenraum nur ändern, wenn der Fachauftrag das ausdrücklich erfordert.
+- Maschinenraum nur ändern, wenn der Fachauftrag das ausdrücklich erfordert;
+- Masterdateien vollständig verwerten und zuordnen; nichts still verlieren.
 
 ## Aktueller Sonderhinweis
 
 TEXT wird am 2026-09-05 noch parallel in einem anderen Chat bearbeitet.
 Vor einer späteren Übernahme des TEXT-Status ist eine frische GitHub-Synchronisierung Pflicht.
+
+BILD ist jetzt als eigenes Büro angelegt.

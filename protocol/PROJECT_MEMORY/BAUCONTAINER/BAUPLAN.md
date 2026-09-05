@@ -8,9 +8,11 @@ TECHNISCHER ORT: `protocol/PROJECT_MEMORY/`
 
 ```
 CAMPUS
-└── PROJEKTGEBÄUDE
-    └── BÜRO / ABTEILUNG
-        └── HOBBYRAUM
+├── PROJEKTGEBÄUDE
+│   └── BÜRO / ABTEILUNG
+│       └── HOBBYRAUM
+└── PROJEKTÜBERGREIFENDE GEBÄUDE
+    └── ALLGEMEINGÜLTIGE BAUSTEINE
 ```
 
 Seitlich dazu:
@@ -22,34 +24,53 @@ Seitlich dazu:
 - Paul
 - Notfall-Tresor
 
-## Flexibilitätsgrundsatz
+## Organischer Flexibilitätsgrundsatz
 
-Das Gebäude ist modular.
+Der Campus ist kein fertiges starres Schema, sondern ein wachsender Prozess.
 
-Neue Räume, Büros, Abteilungen und komplette Projekte können jederzeit ergänzt oder zurückgebaut werden, ohne bestehende Fachbereiche grundsätzlich umzubauen.
+Neue Erkenntnisse dürfen jederzeit:
+- Räume ergänzen;
+- Büros ergänzen;
+- Abteilungen ergänzen;
+- Projektgebäude ergänzen;
+- projektübergreifende Gebäude ergänzen;
+- bestehende Räume zusammenlegen;
+- überholte Räume nach dokumentierter Prüfung zurückbauen.
+
+Dabei darf nicht der gesamte Campus neu gebaut werden müssen.
+
+Struktur folgt realem Bedarf.
+Keine Räume auf Vorrat.
 
 ## Projektregel
 
 Ein eigenständiges neues Vorhaben mit eigenem Ziel und eigener Arbeitslogik bekommt ein neues Projektgebäude.
 
-Der Campus-Pförtner bleibt der zentrale Einstieg und routet zuerst zum Projekt, dann zum Büro.
+Der Hauptpförtner routet zuerst zum Projekt, dann zum Büro.
 
-Ein Projektgebäude ist zunächst eine **logische Einheit**.
-Technisch darf es später:
-- im selben Repository liegen oder
-- in einem eigenen Repository liegen.
+Ein Projektgebäude ist eine logische Einheit und kann technisch im selben oder in einem eigenen Repository liegen.
 
-Der Campus hält nur den eindeutigen Weg dorthin fest.
-Ein neues Projekt darf deshalb nicht dazu zwingen, bestehende Projektgebäude umzubauen.
+## Neues Projekt / Oberwachtmeister
 
-## Raumregel
+Bei einem neuen Projekt:
 
-- neues Thema innerhalb eines bestehenden Aufgabenbereichs → vorhandenes Büro;
-- neue dauerhafte Funktion → neues Büro;
-- größerer dauerhafter Teilbereich → neue Abteilung;
-- eigenständiges Vorhaben → neues Projektgebäude.
+1. Hauptpförtner lesen;
+2. neues Projektgebäude bestimmen/anlegen;
+3. Anforderungen feststellen;
+4. `ALLGEMEINGUELTIGE_BAUSTEINE/` prüfen;
+5. geeignete geprüfte Bausteine übernehmen;
+6. nur projektspezifische Anpassungen im neuen Projekt vornehmen.
 
-Keine Räume „auf Vorrat“ bauen.
+Nicht blind das Pferde-Atelier kopieren.
+Nicht vorhandene allgemeine Lösungen neu erfinden.
+
+## Masterdateien-Grundsatz
+
+Für alle eingehenden Masterdateien gilt:
+`BAUCONTAINER/MASTERDATEIEN_REGEL.md`
+
+Alles enthaltene Material wird inventarisiert und zugeordnet.
+Nichts wird still verworfen.
 
 ## Technischer Ablagegrundsatz
 
@@ -71,22 +92,19 @@ Andere Stellen verweisen darauf.
 
 Das Büro, das eine fachliche Änderung verursacht, pflegt auch den zugehörigen Status.
 
-- abgeschlossener verifizierter Schritt → CURRENT_STATE aktualisieren;
-- realer neuer Fehler → Fehlerregister-Verweis aktualisieren;
-- wichtige Änderung/Entscheidung → Änderungsregister mit WARUM aktualisieren;
-- Änderung am Gebäude selbst → Baucontainer/Änderungsregister aktualisieren.
-
-Damit entsteht kein separates Verwaltungsbüro.
+- abgeschlossener verifizierter Schritt → CURRENT_STATE;
+- realer neuer Fehler → Fehlerregister;
+- wichtige Änderung/Entscheidung → Änderungsregister mit WARUM;
+- Gebäudeänderung → Baucontainer/Änderungsregister;
+- neue Masterakte → vollständiges Büro-Inventar.
 
 ## Notfall-Tresor
 
 Der Tresor liegt logisch außerhalb des aktiven Campus.
-
 Er steuert keine Facharbeit.
-Er enthält die vollständige Wiederherstellungsgrundlage des Campus und wird vor jedem lokalen Backup frisch gegen den aktuellen Stand erzeugt und geprüft.
+Er enthält die vollständige Wiederherstellungsgrundlage des Campus.
 
-Ein Tresorstand darf nur `TRESOR_PASS` heißen, wenn der Inhalts- und Prüfvertrag vollständig erfüllt ist.
-
+Nur `TRESOR_PASS` ist Wiederherstellungsquelle.
 Ältere gültige Tresorstände werden niemals überschrieben.
 
 Konzept:
@@ -99,7 +117,7 @@ Keine neue Gate-/Runner-/Executor-/Controller-Architektur nur wegen der Gebäude
 
 ## Umbauprinzip
 
-Jeder strukturelle Umbau wird im Änderungsregister mit WARUM dokumentiert.
+Jeder strukturelle Umbau wird mit WARUM dokumentiert.
 
 Unklarer Bestand:
 **nicht verschieben, nicht löschen, nicht umdeuten.**

@@ -42,13 +42,23 @@ Wenn ein Punkt nicht eindeutig gefunden wird:
 
 ## Campus
 
-Aktuell registriertes Projektgebäude:
-
+Aktuelles Projektgebäude:
 - `PROJEKTE/PFERDE_ATELIER/`
+
+Projektübergreifendes Gebäude:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/`
 
 Neue eigenständige Projekte bekommen ein neues Projektgebäude.
 Neue dauerhafte Funktionen innerhalb eines Projekts bekommen ein neues Büro.
-Das Gebäude ist modular und darf jederzeit erweitert, umgebaut oder zurückgebaut werden.
+
+Der Campus ist organisch:
+Er darf jederzeit erweitert, umgebaut, zusammengelegt oder zurückgebaut werden.
+Neue Erkenntnisse ergänzen die Struktur; sie zwingen nicht zum Neuaufbau des gesamten Campus.
+
+## Neues Projekt
+
+Der Projekt-Aufsetzer („Oberwachtmeister“) geht zuerst zum Hauptpförtner und danach zu den allgemeingültigen Bausteinen.
+Er übernimmt vorhandenes geprüftes Wissen, statt jedes Projekt von Null zu bauen oder das Pferde-Atelier blind zu kopieren.
 
 ## Katastrophenfall
 
