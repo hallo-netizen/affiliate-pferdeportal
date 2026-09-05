@@ -141,8 +141,8 @@ def m23():
     must("ED25519_RUNTIME_UNAVAILABLE" not in preflight and "ed25519_runtime" not in preflight,"M23_INTERNAL_ED25519_PREFLIGHT_STILL_REQUIRED")
     must("validate_production_package_integrity(package_path)" in active,"M23_INTERNAL_INTEGRITY_PATH_MISSING")
     must("validate_production_package(package_path" not in active,"M23_INTERNAL_SIGNED_VALIDATOR_STILL_ACTIVE")
-    for token in ("ED25519","trusted_keys","signature_b64","signing_key","WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID","_verify_release_signature"):
-        must(token not in handoff,"M23_OLD_INTERNAL_SIGNER_STILL_PRESENT:"+token)
+    for token in ("ED25519","trusted_keys","signature_b64","signing_key","WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID","_verify_external_release_signature"):
+        must(token not in active,"M23_OLD_INTERNAL_SIGNER_STILL_ACTIVE:"+token)
 def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
 def m25():
     s=(REPO/"control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt").read_text(encoding="utf-8")
@@ -198,7 +198,7 @@ def _final_ctx_fixture(root:Path,wrong_batch=False):
     batch="c"*64; out=[]; meta={
       "article_origin_policy":"POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE","authoring_prompt_sha256":"b"*64,
       "authoring_role":"CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS","content_generation_performed_by_supervisor":False,
-      "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","created_at_utc":"2026-09-04T00:00:00+00:00",
+      "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND","created_at_utc":"2026-09-04T00:00:00+00:00",
       "exact_five_batch_sha256":("d"*64 if wrong_batch else batch),"exact_five_item_count":7,
       "frozen_workflow_sha256":"e"*64,"nullpunkt":{},"nullpunkt_sha256":"f"*64,"ppm_baseline_sha256":"1"*64,
       "ppm_version":"6.7.9","research_evidence_policy":"BOUND_EXISTING_FACHWORKFLOW_ONLY","sequence":107008,
