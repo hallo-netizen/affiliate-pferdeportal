@@ -128,7 +128,7 @@ def validate_attached_package(repo: Path) -> dict[str, Any]:
         raise ProvenanceBlocked("ATTACHED_PACKAGE_REF_ESCAPE")
     if not p.is_file() or file_sha(p) != str(s.get("production_package_sha256") or ""):
         raise ProvenanceBlocked("ATTACHED_PACKAGE_HASH_MISMATCH")
-    return validate_package_provenance(repo, p, trusted_keys=trusted_keys)
+    return validate_package_provenance(repo, p)
 
 def main() -> int:
     try:
