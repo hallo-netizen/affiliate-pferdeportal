@@ -48,22 +48,34 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          api() {
-            local path="$1"
+
+          paged_array() {
+            local endpoint="$1"
             local out="$2"
-            if ! curl -fsSL               -H "Authorization: Bearer $GH_TOKEN"               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2022-11-28"               "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/$path" > "$out"; then
-              printf 'UNAVAILABLE:%s\n' "$path" > "$out.UNAVAILABLE"
-              rm -f "$out"
-            fi
+            gh api --paginate "$endpoint" | jq -s 'add' > "$out"
           }
-          curl -fsSL             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY" > tresor/meta/repository.json
-          api "branches?per_page=100" "tresor/meta/branches.json"
-          api "tags?per_page=100" "tresor/meta/tags.json"
-          api "issues?state=all&per_page=100" "tresor/meta/issues.json"
-          api "pulls?state=all&per_page=100" "tresor/meta/pulls.json"
-          api "releases?per_page=100" "tresor/meta/releases.json"
-          api "rulesets?per_page=100" "tresor/meta/rulesets.json"
-          api "actions/workflows?per_page=100" "tresor/meta/workflows.json"
+
+          gh api "repos/$GITHUB_REPOSITORY" > tresor/meta/repository.json
+          paged_array "repos/$GITHUB_REPOSITORY/branches?per_page=100" "tresor/meta/branches.json"
+          paged_array "repos/$GITHUB_REPOSITORY/tags?per_page=100" "tresor/meta/tags.json"
+          paged_array "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100" "tresor/meta/issues.json"
+          paged_array "repos/$GITHUB_REPOSITORY/pulls?state=all&per_page=100" "tresor/meta/pulls.json"
+          paged_array "repos/$GITHUB_REPOSITORY/releases?per_page=100" "tresor/meta/releases.json"
+          paged_array "repos/$GITHUB_REPOSITORY/rulesets?per_page=100" "tresor/meta/rulesets.json"
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows?per_page=100" > tresor/meta/workflows.json
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("tresor/meta")
+          counts = {}
+          for name in ("branches","tags","issues","pulls","releases","rulesets"):
+              data = json.loads((p / f"{name}.json").read_text())
+              counts[name] = len(data)
+          wf = json.loads((p / "workflows.json").read_text())
+          counts["workflows"] = len(wf.get("workflows", []))
+          (p / "metadata-counts.json").write_text(json.dumps(counts, indent=2) + "\n")
+          PY
 
       - name: Restore-test Git bundle
         shell: bash
@@ -89,12 +101,12 @@ jobs:
             echo "git_bundle_restore=$(cat tresor/meta/restore-test-status.txt)"
           } > tresor/MANIFEST.txt
           sha256sum tresor/affiliate-pferdeportal.bundle > tresor/SHA256SUMS.txt
-          tar -czf CAMPUS_TRESOR_GIT_MIRROR_20260905.tar.gz -C tresor affiliate-pferdeportal.bundle meta MANIFEST.txt SHA256SUMS.txt
+          tar -czf CAMPUS_TRESOR_GIT_MIRROR_20260905_V2.tar.gz -C tresor affiliate-pferdeportal.bundle meta MANIFEST.txt SHA256SUMS.txt
 
       - name: Upload Tresor artifact
         uses: actions/upload-artifact@v4
         with:
-          name: CAMPUS_TRESOR_GIT_MIRROR_20260905
-          path: CAMPUS_TRESOR_GIT_MIRROR_20260905.tar.gz
+          name: CAMPUS_TRESOR_GIT_MIRROR_20260905_V2
+          path: CAMPUS_TRESOR_GIT_MIRROR_20260905_V2.tar.gz
           if-no-files-found: error
           retention-days: 30
