@@ -198,3 +198,20 @@ KISS-FIX:
 
 BEZUG:
 ARCH-035/036; BAU-014/015.
+
+
+### 2026-09-05 – Bauabnahme: Flur/ungeklärter Bestand/Tresor-Reihenfolge
+
+BEFUNDE:
+- Projektflur ohne START_HERE;
+- Affiliate-Bestandsraum unter allgemeingültiger Ablage ohne sichtbare UNGEKLÄRT-Warnung;
+- Tresorstatus übersprang die fehlende unabhängige Roharchiv-Redundanz.
+
+KISS-FIX:
+- Projektflur-Eingang ergänzt;
+- Affiliate-Bestandsraum selbsterklärend gemacht, ohne Modulfreigabe;
+- MOD-004-Registerpflichtfelder vervollständigt, ohne eigenen Modulraum vor Audit;
+- Tresor auf ersten realen Blocker zurückgesetzt.
+
+BEZUG:
+ARCH-037 bis ARCH-039; BAU-016 bis BAU-018.

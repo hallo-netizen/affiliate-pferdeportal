@@ -1,7 +1,7 @@
 # NOTFALL-TRESOR – START_HERE
 
 STAND: 2026-09-05
-STATUS: EXTERNER GIT-/METADATEN-PREPASS VORHANDEN / KEIN TRESOR_PASS
+STATUS: EXTERNER GIT-/METADATEN-PREPASS VORHANDEN / ROHARCHIV-REDUNDANZ BLOCKIERT TRESOR_PASS
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -30,7 +30,9 @@ Git-Mirror + GitHub-Metadaten + Git-Restore-Test:
 PASS als externer PREPASS.
 
 Vollständiger Tresor:
-BLOCKED an noch ungeprüften nicht exportierbaren Recovery-Abhängigkeiten.
+BLOCKED zuerst an noch nicht redundant gesicherten relevanten Roharchiven.
+
+Danach verbleibt die Prüfung nicht exportierbarer Recovery-Abhängigkeiten.
 
 ## Harte Regel
 

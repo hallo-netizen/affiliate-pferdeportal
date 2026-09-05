@@ -269,3 +269,24 @@ WAS:
 Alle sechs Pferde-Atelier-Hobbyräume erfüllen ebenfalls die 1-Klick-Übersicht.
 WARUM:
 Der Nutzer kann direkt „Büro → Hobbyraum“ adressieren; auch dort müssen Rechte, Status und nächster Schritt sofort klar sein.
+
+
+## ARCH-037 – Projekt-Flur mit eigenem Eingang
+WAS:
+`PROJEKTE/START_HERE.md` erklärt den Weg zu registrierten Projektgebäuden.
+WARUM:
+Auch ein direkter Einstieg eine Ebene oberhalb des Pferde-Ateliers muss selbsterklärend sein.
+
+## ARCH-038 – Ungeklärter Affiliate-Bestand wird sichtbar gekennzeichnet
+WAS:
+Der bestehende Ordner `ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/` erhält START_HERE + CURRENT_STATE mit MODULKLASSE UNGEKLÄRT.
+WARUM:
+Der technische Ablageort darf keine falsche Allgemeingültigkeitsfreigabe suggerieren.
+
+## ARCH-039 – Tresor prüft Roharchiv-Redundanz vor Recovery-Secrets
+WAS:
+Der erste Tresorblocker wird aus dem eigenen Inhaltsvertrag korrekt auf fehlende unabhängige Roharchiv-Redundanz gesetzt.
+WARUM:
+Git-Mirror und GitHub-Metadaten sichern nicht automatisch die großen Rohmaster in der ChatGPT-Library.
+AKTUELL:
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`

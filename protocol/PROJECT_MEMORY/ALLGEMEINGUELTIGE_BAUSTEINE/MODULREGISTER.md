@@ -173,12 +173,37 @@ ARCHIV:
 ## MOD-004 – HIVEPRESS-ANZEIGENSUCHE
 
 MODULKLASSE: UNGEKLÄRT
-STATUS: als separater Plugin-/Source-Baustein in Universal- und Pferde-Designmaster erkannt; eigener Audit noch offen
-BELEGE:
+
+STATUS:
+als separater Plugin-/Source-Baustein in Universal- und Pferde-Designmaster erkannt; eigener Audit noch offen.
+
+HAUPTORT:
+bis zur Modulklassifizierung ausschließlich dieser MOD-004-Registereintrag plus die unten genannten Belegquellen.
+Kein eigener freigegebener Modulraum.
+
+AKTUELL BELEGTER STAND:
+v2.1.5 als Universal- und Pferde-Artefakt in den Designmastern.
+
+ZWECK:
+separater HivePress-Anzeigensuche-Baustein; weitergehende Modulfreigabe UNGEKLÄRT.
+
+ABHÄNGIGKEITEN:
+UNGEKLÄRT bis separatem Audit.
+
+NUTZENDE PROJEKTE:
+PFERDE_ATELIER als belegter Projektkontext.
+
+AUTORITATIVE QUELLEN / BELEGE:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/MASTERDATEIEN_INVENTAR.md`
+- `PROJEKTE/PFERDE_ATELIER/DESIGN/MASTERDATEIEN_INVENTAR.md`
 - Universal: `UNIVERSAL_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
 - Pferde: `PFERDE_ATELIER_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
+
+OFFENE PUNKTE:
+separater Modul-Audit.
+
 REGEL:
-Nicht im Designmaster verlieren, aber vor eigenem Audit noch nicht als vollständig allgemeingültiges Modul freigeben.
+Nicht im Designmaster verlieren; keine Allgemeingültigkeit behaupten.
 
 
 ## MOD-005 – UNIVERSAL RESEARCH & FILL
