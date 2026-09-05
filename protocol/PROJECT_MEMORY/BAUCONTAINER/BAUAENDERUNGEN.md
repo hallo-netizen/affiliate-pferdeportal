@@ -38,3 +38,5 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-028 → vollständige 1-Klick-Eingänge für Sonderräume
 - ARCH-029 → Paul TEXT/SEO erhält direkte unveränderte Quellenkette
 - ARCH-030 → Tresorstatus fail-closed; kein erfundener TRESOR_PASS
+
+- ARCH-031 → externer Tresor-Git-/Metadaten-PREPASS mit realem Restore-Test

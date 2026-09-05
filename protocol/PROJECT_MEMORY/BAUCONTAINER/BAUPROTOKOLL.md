@@ -140,3 +140,25 @@ ERGEBNIS:
 
 BEZUG:
 ARCH-027 bis ARCH-030; BAU-006 bis BAU-009.
+
+
+### 2026-09-05 – Externer Tresor-Git-Mirror V2 erzeugt und Restore-getestet
+
+BEDARF:
+Der Tresor durfte nicht nur Konzept sein; Git-Historie/Branches/Tags und GitHub-Metadaten mussten außerhalb des aktiven Repositorys gesichert werden.
+
+ERGEBNIS:
+- isolierter Tresor-Branch;
+- vollständiger Git-Bundle-Mirror;
+- 261 Branches / 1 Tag;
+- vollständige paginierte GitHub-Metadaten: 136 Issues, 127 PRs, 1 Release, 1 Ruleset, 59 Workflows;
+- Ruleset-Detail separat gesichert;
+- Restore-Test + git fsck PASS;
+- V2-Artefakt extern in ChatGPT Library gesichert.
+
+STATUS:
+Kein vollständiger TRESOR_PASS.
+Nächster Blocker: nicht exportierbare Recovery-Abhängigkeiten noch nicht verifiziert.
+
+BEZUG:
+ARCH-031.
