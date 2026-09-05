@@ -59,3 +59,11 @@ kein Runner, Test, Release, Reparatur- oder Produktionslauf aus `Campus-Archiv`.
 
 Soll ein historischer Stand Wiederherstellungsbasis sein:
 erst über den Tresor-/Restoreweg in einen frischen offiziellen Arbeits-Worktree überführen und dort neu verifizieren.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

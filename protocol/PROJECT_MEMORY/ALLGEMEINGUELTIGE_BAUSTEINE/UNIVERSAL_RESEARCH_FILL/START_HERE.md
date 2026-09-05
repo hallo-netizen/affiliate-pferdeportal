@@ -26,3 +26,11 @@ MOD-005
 ## Projektanwendung
 Pferde-Atelier:
 `../../../PROJEKTE/PFERDE_ATELIER/HIVEPRESS/`
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

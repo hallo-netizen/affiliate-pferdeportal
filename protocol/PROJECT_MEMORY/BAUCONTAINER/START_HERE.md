@@ -39,3 +39,11 @@ Pförtner/Hausmeister dürfen nicht nebenbei bauen.
 
 Vor Architekturarbeit:
 Verwaltungsrolle ausdrücklich beenden → Baucontainer-Rolle.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

@@ -40,3 +40,11 @@ Hauptpförtner → Anforderungen → Modulregister → nur passende Module → m
 
 Wichtig:
 Dieser vorhandene Bestandsordner hat MODULKLASSE **UNGEKLÄRT** und ist trotz seines technischen Ablageorts nicht als allgemeingültiges Modul freigegeben.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+
