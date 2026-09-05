@@ -34,7 +34,7 @@ jobs:
           changed = pathlib.Path('/tmp/changed.txt').read_text(encoding='utf-8').splitlines()
           head_ref = os.environ['HEAD_REF']
 
-          immutable = re.compile(r'^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/startmaster0107/ENDSTEMPEL_)')
+          immutable = re.compile(r'^(\.github/workflows/|AGENTS\.md$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/paul-scope-gate/|control/startmaster0107/ENDSTEMPEL_)')
 
           def decision(ref, paths):
               if ref.startswith('paul/') and any(p.startswith('protocol/PROJECT_MEMORY/') for p in paths):
@@ -55,6 +55,19 @@ jobs:
               raise SystemExit(result)
           print('PATH_GUARD_PASS')
           PY
+      - name: Enforce current Paul assignment and technical write scope
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$HEAD_REF" == paul/* ]]; then
+            python3 control/paul-scope-gate/paul_scope_gate.py verify-pr "$HEAD_REF" "$HEAD_SHA"
+          else
+            echo 'PAUL_SCOPE_NOT_APPLICABLE'
+          fi
+
       - name: Enforce PROJECT_MEMORY protocol completion
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
