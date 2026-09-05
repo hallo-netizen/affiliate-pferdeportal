@@ -71,3 +71,20 @@ OFFEN: 2.6.9-Codeprüfung nach Dateiauslieferung.
 Bereich: TEXT
 WARUM: UNGEKLÄRT.
 ENTFERNBAR: NEIN, BIS GEKLÄRT.
+
+
+## ARCH-015 – Zentraler Zielvertragsraum
+WAS: `ZIELVERTRAEGE/` mit einem zentralen Register.
+WARUM: verbindliche Endziele dürfen nicht nur in Chats/Übergaben leben oder mit CURRENT_STATE vermischt werden.
+REGEL: aktive Verträge referenzieren; Änderungen versionieren, nicht still überschreiben.
+
+## ARCH-016 – Campus-Archiv mit automatischer Zuordnung
+WAS: `ARCHIV/` als historischer Aktenraum.
+WARUM: der Nutzer soll Dateien nur bereitstellen müssen, nicht selbst archivieren/sortieren.
+REGEL: bereits erreichbare Dateien benötigen keinen erneuten Upload; lokale-only Dateien müssen einmal bereitgestellt werden.
+
+## ARCH-017 – Zugriffsschutz des Campus
+STATUS: OFFENE ARCHITEKTURENTSCHEIDUNG
+EMPFEHLUNG: eigener privater Campus-Repository statt Passwortdateien im öffentlichen Projekt-Repository.
+WARUM: der Campus soll mehrere Projekte umfassen und zentrale Projektakten schützen; Verschlüsselung/Passwortdateien würden Suche, Pförtner und Automatisierung erschweren.
+BIS ZUR ENTSCHEIDUNG: keine Secrets in den öffentlichen Campus-Prototyp.
