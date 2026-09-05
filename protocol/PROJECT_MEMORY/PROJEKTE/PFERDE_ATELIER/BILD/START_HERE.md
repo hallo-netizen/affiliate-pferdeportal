@@ -5,35 +5,45 @@ STATUS: AKTIV
 
 ## Zuständigkeit
 
-Bildzentrale und Bildsystem des Pferde-Ateliers:
-- Beitragsbilder
-- WordPress-Taxonomiebilder
-- optionale HivePress-Taxonomiebilder
-- Pixabay / Pexels / Magnific
-- Prompt-, Profil- und Variationsregeln
-- Bildimport, Zuordnung, Readback und Rückfalllogik
-- Bildhistorie, Fehler, Tests und Migrationen
+Hier liegt die **Pferde-Atelier-spezifische Anwendung** der allgemeinen Bildzentrale:
+- konkrete Profile/Promptwelt;
+- konkrete WordPress-/HivePress-Nutzung;
+- konkrete Produktionshistorie;
+- konkrete Migrationen;
+- konkrete Fehler/Tests;
+- Projektkonfiguration.
+
+## Allgemeiner Modul-Kern
+
+MOD-ID: MOD-002
+Hauptort:
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
+
+Modulklasse:
+ALLGEMEINGÜLTIG.
+
+Dieses Büro ist NICHT die zweite Hauptkopie des allgemeinen Plugin-Kerns.
 
 ## Pflichtlektüre
 
 1. `CURRENT_STATE.md`
 2. `MASTERDATEIEN_INVENTAR.md`
 3. `HOBBYRAUM.md`
-4. zentrales `FEHLERREGISTER.md`
-5. zentrales `AENDERUNGSREGISTER.md`
+4. zentrales Fehlerregister
+5. zentrales Änderungsregister
+6. bei Modulfragen MOD-002 im Modulregister
 
-## Autoritätsregel
+## Aktuelle Beleglage
+
+- LIVE in WordPress: 2.6.9 – Nutzerbestätigung;
+- Konfigurationsbeleg: 2.6.6;
+- vollständiger übergebener Codebeleg: 2.4.9;
+- vollständiger 2.6.9-Code noch nicht als Datei übergeben.
 
 Nicht aus Versionsnummern raten.
 
-Aktuell gilt:
-- LIVE in WordPress: Version 2.6.9 – vom Nutzer bestätigt.
-- letzter übergebener Konfigurationsbeleg: 2.6.6.
-- letzter übergebener vollständiger Plugin-Code: 2.4.9.
-- der vollständige 2.6.9-Code wurde in den bisher übergebenen Dateien noch nicht bereitgestellt.
+## Sicherheit
 
-## Sicherheitsregel
-
-Die historischen JSON-Exporte enthalten echte API-/Webhook-Zugangsdaten.
-Diese Werte werden nicht in das öffentliche Repository kopiert.
-Ihre Existenz, Funktion und Herkunft bleiben im Inventar dokumentiert.
+Historische Exporte enthalten Zugangsdaten.
+Keine Secrets ins öffentliche Repository kopieren.
+Existenz/Funktion/Herkunft bleiben inventarisiert.

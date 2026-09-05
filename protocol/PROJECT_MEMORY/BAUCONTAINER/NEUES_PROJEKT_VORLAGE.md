@@ -1,15 +1,25 @@
 # BAUCONTAINER – NEUES PROJEKTGEBÄUDE
 
-Zweck: Minimaler Ablauf für ein neues eigenständiges Projekt.
+Zweck: Minimaler Ablauf für ein eigenständiges neues Projekt.
+
+## Vor dem Bau
+
+1. Hauptpförtner lesen.
+2. Projektziel und Anforderungen bestimmen.
+3. Modulregister prüfen.
+4. Nur passende allgemeingültige Module auswählen.
+5. Prüfen, welche Funktionen wirklich noch fehlen.
 
 ## Wann neues Gebäude?
 
 Nur wenn das Vorhaben:
-- ein eigenes Ziel hat,
-- dauerhaft eigenständig ist,
-- eigene Zuständigkeiten/Arbeitswege braucht.
+- eigenes Ziel;
+- dauerhafte Eigenständigkeit;
+- eigene Zuständigkeiten/Arbeitswege
 
-Sonst vorhandenes Projekt erweitern.
+hat.
+
+Sonst bestehendes Projekt erweitern.
 
 ## Minimaler Aufbau
 
@@ -24,19 +34,27 @@ protocol/PROJECT_MEMORY/PROJEKTE/<PROJEKT>/
 
 Weitere Büros erst bei echtem Bedarf.
 
+## Nutzung allgemeiner Module
+
+Ein Projekt kopiert den allgemeinen Kern nicht als neue Hauptwahrheit.
+
+Es dokumentiert:
+- MOD-ID;
+- Hauptort;
+- verwendeten/kompatiblen Stand;
+- projektspezifische Konfiguration;
+- projektspezifische Daten/History.
+
 ## Pflicht
 
-1. Projekt im Hauptpförtner registrieren.
-2. Zuständigkeiten beschreiben.
-3. vorhandene Arbeitswege ins Handlungsverzeichnis aufnehmen, falls projektübergreifend relevant.
-4. reale Fehler nur als Verweis im Fehlerregister erfassen.
-5. wichtige Architektur-/Verhaltensänderungen mit WARUM dokumentieren.
-6. keine bestehende Projektarchitektur kopieren, wenn sie für das neue Projekt nicht gebraucht wird.
+- Projekt im Hauptpförtner registrieren;
+- Zuständigkeiten beschreiben;
+- vorhandene Arbeitswege verwenden;
+- Fehler nur als Verweis registrieren;
+- wichtige Änderungen mit WARUM dokumentieren;
+- keine bestehende Projektarchitektur blind kopieren.
 
 ## Technischer Speicherort
 
-Das Projektgebäude darf:
-- im selben Repository liegen oder
-- in einem eigenen Repository liegen.
-
-Der Campus braucht nur einen eindeutigen Pfad/Verweis.
+Projektgebäude kann im selben oder eigenen Repository liegen.
+Der Campus hält den eindeutigen Weg fest.

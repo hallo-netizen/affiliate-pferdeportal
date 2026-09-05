@@ -5,36 +5,45 @@ STATUS: IM AUFBAU
 
 ## Zweck
 
-Projektübergreifende, nachweislich allgemeingültige Komponenten sammeln und wiederverwenden.
+Hier liegen die Hauptorte nachweislich projektübergreifender Module.
 
-Zentrale Eingangstabelle:
+Zentraler Karteikasten:
 `MODULREGISTER.md`
 
-Dieses Register nimmt dem Nutzer die Erinnerungspflicht ab.
+Das Modulregister ist der Eingang dieses Gebäudes, kein zusätzliches Fachbüro.
 
-## Nutzung bei neuen Projekten
+## KISS-Regel
 
-Der Projekt-Aufsetzer („Oberwachtmeister“) MUSS zuerst das Modulregister prüfen.
+- ein Modul-Kern = genau ein Hauptort;
+- Projektanwendungen = Verweis + Konfiguration + Projekthistorie;
+- keine vollständigen Modul-Kopien als zweite Wahrheit;
+- unklare Module bleiben UNGEKLÄRT;
+- keine Module auf Vorrat erfinden.
+
+## Neues Projekt
+
+Der Projekt-Aufsetzer („Oberwachtmeister“) ist kein eigener Agent und kein Büro.
+Er bezeichnet nur den Projektstart-Ablauf.
 
 Er:
-1. identifiziert das neue Projekt;
-2. liest dessen Anforderungen;
-3. prüft alle registrierten Grundmodule;
-4. übernimmt passende allgemeingültige Module;
-5. trennt bei GEMISCHT allgemeine Engine und Projektkonfiguration;
-6. baut nur, was noch fehlt.
+1. liest den Hauptpförtner;
+2. erfasst die Projektanforderungen;
+3. liest das Modulregister;
+4. wählt nur passende Module;
+5. liest nur deren relevante Hauptakten;
+6. legt die projektspezifische Nutzung im neuen Projektgebäude an;
+7. baut nur, was tatsächlich fehlt.
 
-## Hauptwahrheit
+Er liest NICHT blind alle Module und nicht den gesamten Campus.
 
-Allgemeiner Kern = nur hier.
+## Neue Masterdatei
 
-Projektgebäude enthalten lediglich:
-- Nutzung/Verweis,
-- konkrete Konfiguration,
-- konkrete Projektdaten,
-- projektspezifische Fehler und Historie.
+Masterdateien werden zuerst vollständig inventarisiert.
+Danach werden:
+- Modul-Kern;
+- Projektkonfiguration;
+- Daten;
+- Historie;
+- Fehler-/Testbelege
 
-## Organische Regel
-
-Das Register wächst mit jeder Masterdatei und jedem geprüften Modul.
-Keine Bausteine auf Vorrat erfinden.
+sauber getrennt und den richtigen Orten zugeordnet.

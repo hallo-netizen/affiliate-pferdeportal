@@ -8,57 +8,66 @@ STAND: 2026-09-05
 
 Masterdatei bedeutet nicht „nur die neueste Version“.
 
-Auch enthaltene:
-- Archive
-- alte Versionen
-- Protokolle
-- Fehlerlisten
-- Statusdateien
-- Tests
-- Hashes
-- Exporte
-- Produktionsdaten
-- Migrationsreste
-- Zwischenstände
-- Nebenmaterial
+Auch Archive, Altversionen, Protokolle, Fehlerlisten, Statusdateien, Tests, Hashes, Exporte, Produktionsdaten, Migrationen, Zwischenstände und Nebenmaterial werden inventarisiert.
 
-werden inventarisiert.
+## Zwei getrennte Entscheidungen
+
+### A. Artefaktklassifizierung
+Für jeden Bestandteil:
+- ALLGEMEINER CODE/KERN
+- PROJEKTKONFIGURATION
+- PROJEKTDATEN
+- HISTORIE
+- FEHLERBELEG
+- TESTBELEG
+- PROTOKOLL/ERKLÄRUNG
+- DUBLETTE
+- UNGEKLÄRT
+
+Eine einzelne Masterdatei kann dadurch GEMISCHT sein.
+
+### B. Modulklassifizierung
+Der erkannte Modul-Kern wird separat im Modulregister klassifiziert:
+- ALLGEMEINGÜLTIG
+- PROJEKTBEZOGEN
+- UNGEKLÄRT
+
+**GEMISCHT ist keine Modulklasse.**
+
+## Default
+
+Wenn die Modulklasse nicht sicher belegt ist:
+**UNGEKLÄRT.**
+
+Nicht automatisch als projektbezogen ablegen.
+Nicht automatisch als allgemeingültig wiederverwenden.
 
 ## Pflichtzuordnung je Bestandteil
 
 Mindestens:
-- eindeutige Quelle
+- Quelle
 - Dateiname/Pfad
 - Hash, wenn verfügbar
 - Inhaltstyp
 - Zweck/Bedeutung
-- zugehöriges Projekt/Büro/Baustein
-- Status:
-  - AKTIV
-  - LIVE-BELEG
-  - HISTORISCH
-  - FEHLERBELEG
-  - TESTBELEG
-  - DATENBELEG
-  - ARCHIVKANDIDAT
-  - DUBLETTE
-  - UNGEKLÄRT
+- Artefaktklasse
+- Projekt/Büro/Modul
+- Status
 - offene Fragen
 - Ziel-/Referenzort
 
 ## Dubletten
 
-Byte-identische Dateien werden als DUBLETTE erkannt, aber ihre Herkunft bleibt dokumentiert.
+Byte-identische Dateien werden als DUBLETTE markiert.
+Ihre Herkunft bleibt erhalten.
 
 ## Sensible technische Werte
 
-Zugangsdaten/Secrets werden nicht in ein öffentliches Repository kopiert.
-Ihre Existenz und Funktion werden trotzdem inventarisiert.
-
-Das ist kein „Verlust“, sondern sichere Zuordnung ohne Offenlegung.
+Secrets werden nicht in ein öffentliches Repository kopiert.
+Existenz, Funktion und Herkunft bleiben inventarisiert.
 
 ## Löschen
 
-Erst nach vollständiger Zuordnung und Referenzprüfung darf über Verschieben/Löschen entschieden werden.
+Erst nach vollständiger Zuordnung und Referenzprüfung.
 
 UNGEKLÄRT = NICHT ANFASSEN.

@@ -8,15 +8,16 @@ TECHNISCHER ORT: `protocol/PROJECT_MEMORY/`
 
 ```
 CAMPUS
+├── HAUPTPFÖRTNER
 ├── PROJEKTGEBÄUDE
-│   └── BÜRO / ABTEILUNG
+│   └── BÜRO
 │       └── HOBBYRAUM
-└── PROJEKTÜBERGREIFENDE GEBÄUDE
+└── PROJEKTÜBERGREIFENDES GEBÄUDE
     └── ALLGEMEINGÜLTIGE BAUSTEINE
+        └── MODULREGISTER
 ```
 
-Seitlich dazu:
-- Hauptpförtner
+Seitlich:
 - Handlungsverzeichnis
 - Fehlerregister
 - Änderungs-/Erklärungsregister
@@ -24,100 +25,99 @@ Seitlich dazu:
 - Paul
 - Notfall-Tresor
 
-## Organischer Flexibilitätsgrundsatz
+## Organischer Grundsatz
 
-Der Campus ist kein fertiges starres Schema, sondern ein wachsender Prozess.
+Der Campus ist ein wachsender Prozess, kein starres Endmodell.
 
-Neue Erkenntnisse dürfen jederzeit:
-- Räume ergänzen;
-- Büros ergänzen;
-- Abteilungen ergänzen;
-- Projektgebäude ergänzen;
-- projektübergreifende Gebäude ergänzen;
-- bestehende Räume zusammenlegen;
-- überholte Räume nach dokumentierter Prüfung zurückbauen.
+Er darf:
+- neue Räume;
+- Büros;
+- Abteilungen;
+- Projektgebäude;
+- projektübergreifende Module
 
-Dabei darf nicht der gesamte Campus neu gebaut werden müssen.
+ergänzen sowie nach dokumentierter Prüfung zusammenlegen oder zurückbauen.
 
-Struktur folgt realem Bedarf.
+Kein Gesamtneubau nur wegen neuer Erkenntnisse.
 Keine Räume auf Vorrat.
 
-## Projektregel
+## Hauptwahrheits-Regel
 
-Ein eigenständiges neues Vorhaben mit eigenem Ziel und eigener Arbeitslogik bekommt ein neues Projektgebäude.
+Für jede fachliche Wahrheit gibt es möglichst genau einen Hauptort.
 
-Der Hauptpförtner routet zuerst zum Projekt, dann zum Büro.
+Besonders bei Modulen:
+- allgemeiner Modul-Kern → Hauptort bei ALLGEMEINGÜLTIGE BAUSTEINE;
+- projektspezifische Nutzung → Projektbüro;
+- keine doppelte vollständige Modulwahrheit.
 
-Ein Projektgebäude ist eine logische Einheit und kann technisch im selben oder in einem eigenen Repository liegen.
+## Modulregister
 
-## Neues Projekt / Oberwachtmeister
+`ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md`
 
-Bei einem neuen Projekt:
+ist der zentrale Karteikasten für Grundmodule.
 
-1. Hauptpförtner lesen;
-2. neues Projektgebäude bestimmen/anlegen;
-3. Anforderungen feststellen;
-4. `ALLGEMEINGUELTIGE_BAUSTEINE/` prüfen;
-5. geeignete geprüfte Bausteine übernehmen;
-6. nur projektspezifische Anpassungen im neuen Projekt vornehmen.
+Es ist:
+- kein zweites Fachbüro;
+- keine technische Engine;
+- kein automatischer Installer.
 
-Nicht blind das Pferde-Atelier kopieren.
-Nicht vorhandene allgemeine Lösungen neu erfinden.
+Es beantwortet nur:
+**Was existiert bereits, wo liegt die Hauptwahrheit und darf es wiederverwendet werden?**
 
-## Masterdateien-Grundsatz
+## Modulklasse vs. Masterakte
 
-Für alle eingehenden Masterdateien gilt:
+Diese Ebenen dürfen nie verwechselt werden.
+
+Beispiel Bild:
+- BILDZENTRALE als Modul → ALLGEMEINGÜLTIG;
+- Pferde-Atelier-Masterakte → kann projektspezifische Konfiguration, Daten und Historie enthalten.
+
+Eine gemischte Masterakte macht den Modul-Kern nicht „gemischt“.
+
+## Projektstart / Oberwachtmeister
+
+„Oberwachtmeister“ ist nur der Name für den Projektstart-Ablauf, kein neuer dauerhafter Agent.
+
+Ablauf:
+1. Hauptpförtner;
+2. Projektanforderungen;
+3. Modulregister;
+4. nur passende Module;
+5. minimales Projektgebäude;
+6. projektspezifische Config/Nutzung.
+
+Nicht den gesamten Campus in jedes Projekt laden.
+
+## Masterdateien
+
+Alle Inhalte werden vollständig inventarisiert.
+Siehe:
 `BAUCONTAINER/MASTERDATEIEN_REGEL.md`
 
-Alles enthaltene Material wird inventarisiert und zugeordnet.
-Nichts wird still verworfen.
+Default bei unklarer Modulzuordnung:
+**UNGEKLÄRT**, nicht „projektbezogen“ und nicht „allgemeingültig“.
 
 ## Technischer Ablagegrundsatz
 
-Der Campus liegt aktuell unter `protocol/PROJECT_MEMORY/`.
+Campus unter `protocol/PROJECT_MEMORY/`, weil bestehender `hardlock` `protocol/**` bereits abdeckt.
 
-Grund:
-Der bestehende `hardlock`-Workflow überwacht Pull Requests mit Änderungen unter `protocol/**` bereits automatisch.
-Damit nutzt die Gebäudeordnung vorhandene CI statt neue Workflow-/Gate-Architektur zu bauen.
-
-## Autoritätsgrundsatz
-
-PROJECT_MEMORY ist Wegweiser und Gedächtnis.
-Es ersetzt keine bereits funktionierende technische Originalautorität.
-
-Eine Wahrheit möglichst nur einmal pflegen.
-Andere Stellen verweisen darauf.
+Keine neue CI-/Gate-Architektur dafür.
 
 ## Pflegegrundsatz
 
-Das Büro, das eine fachliche Änderung verursacht, pflegt auch den zugehörigen Status.
-
-- abgeschlossener verifizierter Schritt → CURRENT_STATE;
-- realer neuer Fehler → Fehlerregister;
-- wichtige Änderung/Entscheidung → Änderungsregister mit WARUM;
-- Gebäudeänderung → Baucontainer/Änderungsregister;
-- neue Masterakte → vollständiges Büro-Inventar.
+- verifizierter Fachschritt → CURRENT_STATE;
+- realer Fehler → Fehlerregister;
+- wichtige Änderung → Änderungsregister mit WARUM;
+- Gebäudestruktur → Baucontainer;
+- neues/neu bewertetes Modul → Modulregister;
+- Masterakte → vollständiges Büro-Inventar.
 
 ## Notfall-Tresor
 
-Der Tresor liegt logisch außerhalb des aktiven Campus.
-Er steuert keine Facharbeit.
-Er enthält die vollständige Wiederherstellungsgrundlage des Campus.
-
-Nur `TRESOR_PASS` ist Wiederherstellungsquelle.
-Ältere gültige Tresorstände werden niemals überschrieben.
-
-Konzept:
-`protocol/PROJECT_MEMORY/TRESOR/`
-
-## Maschinenraum
-
-Bestehende technische Infrastruktur bleibt bestehen.
-Keine neue Gate-/Runner-/Executor-/Controller-Architektur nur wegen der Gebäudeorganisation.
+Nur geprüfter `TRESOR_PASS`-Stand ist Wiederherstellungsquelle.
+Alte gültige PASS-Stände nicht überschreiben.
 
 ## Umbauprinzip
-
-Jeder strukturelle Umbau wird mit WARUM dokumentiert.
 
 Unklarer Bestand:
 **nicht verschieben, nicht löschen, nicht umdeuten.**

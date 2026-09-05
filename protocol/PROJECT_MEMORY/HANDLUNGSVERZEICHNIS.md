@@ -7,6 +7,38 @@ Zweck: „Ich will X tun – welcher vorhandene Weg ist verbindlich?“
 HARD RULE:
 **Bekannte Aktion niemals erraten. Existiert ein definierter Workflow, darf kein Ersatzweg erfunden werden.**
 
+## Neues Projekt beginnen
+
+Aktion: eigenständiges neues Projekt aufsetzen
+
+Verbindlicher Weg:
+1. `HAUPTPFOERTNER.md`
+2. Anforderungen/Ziel des Projekts bestimmen
+3. `ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md`
+4. passende vorhandene Module auswählen
+5. nur relevante Modulakten lesen
+6. minimales Projektgebäude nach `BAUCONTAINER/NEUES_PROJEKT_VORLAGE.md` anlegen
+7. projektbezogene Nutzung/Config dokumentieren
+
+Nicht erlaubt:
+- Pferde-Atelier blind kopieren
+- bekannte Grundmodule neu erfinden
+- alle Campusakten ungefiltert in ein neues Projekt kopieren
+
+## Neue Masterdatei aufnehmen
+
+Aktion: Masterdatei/Archiv/Pluginpaket übernehmen
+
+Verbindlicher Weg:
+1. `BAUCONTAINER/MASTERDATEIEN_REGEL.md`
+2. vollständig inventarisieren
+3. nichts still verwerfen
+4. Bestandteile klassifizieren
+5. Modul-Kern bestimmen
+6. `ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md` prüfen/aktualisieren
+7. genau einen Hauptort festlegen
+8. Projektanwendung nur referenzieren
+
 ## Codex / technische Projekteingangstür
 
 Aktion: Codex-Arbeit im Repository beginnen
@@ -18,24 +50,23 @@ Bei BLOCKED: stoppen. Keine Alternativroute.
 
 ## Textmaschine / Artikelproduktion
 
-Aktion: vorhandenen gebundenen Text-/Produktionsprozess ausführen
 Autorität:
 - Root-`AGENTS.md`
 - aktueller technischer State unter `control/startmaster0107/`
-- aktuell gebundene Capsule/Instruction
+- gebundene Capsule/Instruction
 
-Keine manuelle freie Artikelproduktion als Ersatz für einen gebundenen Workflow.
-Da aktuell parallel an TEXT gearbeitet wird: vor jeder neuen Textaktion zuerst TEXT-`CURRENT_STATE.md` neu synchronisieren.
+Keine manuelle freie Artikelproduktion als Ersatz.
+Während paralleler TEXT-Arbeit zuerst TEXT-`CURRENT_STATE.md` neu synchronisieren.
 
 ## Text-Regression
 
-Autoritative historische Matrix:
+Matrix:
 `control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
 
-Ausführbarer Runner:
+Runner:
 `control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py`
 
-Keine theoretischen Zusatzprüfungen anstelle des gebundenen Matrixprozesses.
+Keine theoretischen Zusatzprüfungen anstelle des Matrixprozesses.
 
 ## Affiliate-Release
 
@@ -45,10 +76,10 @@ Autorität:
 Prüfer:
 `control/release-governance/release_guard.py`
 
-Zusätzliche Fachregeln:
+Zusatzregeln:
 `release/affiliate-zentrale/AGENTS.md`
 
-Keine Rekonstruktion oder Ersatzroute, wenn die Governance blockiert.
+Keine Rekonstruktion oder Ersatzroute bei Governance-Blockade.
 
 ## Unbekannte Aktion
 
