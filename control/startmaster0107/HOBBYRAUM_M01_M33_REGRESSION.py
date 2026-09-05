@@ -141,7 +141,8 @@ def m23():
     must("ED25519_RUNTIME_UNAVAILABLE" not in preflight and "ed25519_runtime" not in preflight,"M23_INTERNAL_ED25519_PREFLIGHT_STILL_REQUIRED")
     must("validate_production_package_integrity(package_path)" in active,"M23_INTERNAL_INTEGRITY_PATH_MISSING")
     must("validate_production_package(package_path" not in active,"M23_INTERNAL_SIGNED_VALIDATOR_STILL_ACTIVE")
-    must("_verify_release_signature" in handoff and "SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID" in handoff,"M23_EXTERNAL_SIGNED_VALIDATOR_REMOVED")
+    for token in ("ED25519","trusted_keys","signature_b64","signing_key","WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID","_verify_release_signature"):
+        must(token not in handoff,"M23_OLD_INTERNAL_SIGNER_STILL_PRESENT:"+token)
 def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
 def m25():
     s=(REPO/"control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt").read_text(encoding="utf-8")
