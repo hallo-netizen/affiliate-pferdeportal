@@ -574,3 +574,28 @@ PASS.
 
 STATUS BLEIBT:
 BLOCKED / SECURITY-MAINTENANCE ausschließlich bis PR #137 kontrolliert auf main aktiviert und danach derselbe reale Servercheck erneut bestätigt wurde.
+
+
+## BAU-029 – Paul-Quellsnapshot entfernte Rand-Whitespace
+
+STATUS: CLOSED IM SECURITY-KANDIDAT / AKTIVIERUNG BLOCKED
+
+KURZ:
+Der neue harte Paul-Frischetest zeigte, dass `show()` über die generische Git-Hilfsfunktion Quelltext mit `.strip()` zurückgab.
+
+AUSWIRKUNG:
+Der richtige aktuelle Campus-Commit wurde zwar gelesen, aber Rand-Whitespace/Zeilenumbrüche wurden im Snapshot verändert. Eine reine Whitespace-Änderung hätte theoretisch nicht zuverlässig als relevante Drift gezählt.
+
+KISS-FIX:
+Nur `show()` auf unveränderte stdout-Rückgabe umgestellt.
+
+NEGATIV/POSITIV:
+Der erste neue GitHub-Paul-CI-Lauf FAILte.
+Nach Fix kompletter Wiederholungslauf:
+`PAUL_CURRENT_CAMPUS_CI_PASS` + gesamter `hardlock` SUCCESS.
+
+REGRESSIONSSCHUTZ:
+Der Paul-Frischetest ist dauerhaft Teil des Security-`hardlock`-Workflows.
+
+STATUSGRENZE:
+Fix im Security-PR #137 getestet; produktive Aktivierung auf main bleibt bis Admin-Wartung BLOCKED.

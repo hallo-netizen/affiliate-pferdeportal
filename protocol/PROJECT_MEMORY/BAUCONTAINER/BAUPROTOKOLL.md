@@ -805,3 +805,55 @@ Daher:
 
 BEZUG:
 ARCH-057; BAU-028.
+
+
+### 2026-09-05 – Paul-Frische hart positiv/negativ im echten GitHub-CI geprüft
+
+FRAGE:
+Ist sichergestellt, dass Paul nicht mit veralteten Campusdaten arbeitet, wenn der Fachstand sich weiterentwickelt?
+
+NEUER PERMANENTER CI-TEST:
+`control/paul-scope-gate/paul_scope_gate_ci_test.py`
+
+Er wird im normalen `hardlock` des Security-Kandidaten ausgeführt.
+
+ERSTER LAUF:
+FAIL.
+Befund:
+Test erwartete bytegetreuen Quelltext; Paul-`show()` lief über die generische `git()`-Hilfsfunktion mit `.strip()`.
+Dadurch wurden Rand-Whitespace/Zeilenumbrüche entfernt.
+
+KISS-FIX:
+`show()` liest Git-stdout jetzt unverändert.
+Security-Commit:
+`9e0340d55ce9c7359fed28e171143a54d4cad5ab`.
+
+WIEDERHOLUNG – ECHTER GITHUB-HARDLOCK:
+**SUCCESS**
+
+Paul-CI-Ausgabe:
+`PAUL_CURRENT_CAMPUS_CI_PASS`
+
+HART POSITIV/NEGATIV BELEGT:
+1. Paul-Branch enthält alte CURRENT_STATE-Kopie → wird ignoriert: PASS;
+2. Start liest neuesten offiziellen Campus → PASS;
+3. unveränderte relevante Quellen → VERIFY PASS;
+4. TASK/Problem entwickelt sich weiter → `STALE_ASSIGNMENT_BLOCKED`: PASS;
+5. erneuter Start lädt automatisch neuen Campusstand → PASS;
+6. irrelevante Änderung im AENDERUNGSREGISTER → kein Fehlblock: PASS;
+7. CURRENT_STATE ändert sich → STALE BLOCK: PASS;
+8. Assignment-ID/HOBBYRAUM-Bindung ändert sich → STALE BLOCK: PASS;
+9. Paul-Zuweisung entfernt → `PAUL_NOT_ASSIGNED`: PASS;
+10. zwei aktive Paul-Zuweisungen → `PAUL_MULTIPLE_ASSIGNMENTS_BLOCKED`: PASS.
+
+WICHTIGE DEFINITION:
+Das ist **keine Live-Synchronisation während jeder Sekunde**.
+Die Garantie lautet:
+**frisch beim Start + fail-closed bei relevanter Drift vor gültiger Rückgabe + automatischer Refresh beim Neustart.**
+
+SERVERSTATUS:
+Security-Kandidat Logik = PASS.
+Aktivierung auf `main` weiterhin durch bestehenden immutable `hardlock-base` BLOCKED; deshalb noch keine Behauptung „produktiv serverseitig aktiv“.
+
+BEZUG:
+ARCH-058/059; BAU-029.

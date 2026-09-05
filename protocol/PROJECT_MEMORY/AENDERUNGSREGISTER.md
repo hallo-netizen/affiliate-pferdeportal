@@ -468,3 +468,26 @@ REGEL:
 READ/VERIFY/RESTORE ONLY. Keine Runner, Tests, Reparaturen, Produktion oder Releases aus Tresor/Archiv/Mirror. Restore erst in frischen Arbeits-Worktree außerhalb der Sicherungsbereiche; danach offizielles GitHub-origin + normale Eingangstür.
 TECHNIK:
 Vorbereitet in Security-PR #137 durch die bestehende `cloud_entry.py`: Backup-Pfad, Bare-Mirror, Tresor-/Archiv-Gitdir und lokaler Mirror-origin werden fail-closed blockiert.
+
+
+## ARCH-058 – Paul-Frische ist Start + Driftblock + Refresh, keine Live-Synchronisation
+WAS:
+Paul liest bei jedem Start den frisch geholten offiziellen Campus und materialisiert daraus nur einen temporären hashgebundenen Snapshot. Vor Rückgabe/Integration wird der Campus erneut frisch gelesen.
+WARUM:
+Unabhängige Branches/Chats können nicht zuverlässig live synchronisiert werden. Entscheidend ist deshalb nicht „sekündlich dieselbe Kopie“, sondern dass Paul nie gültig auf einem veralteten relevanten Stand abschließen kann.
+REGEL:
+- alte PROJECT_MEMORY-Kopie auf Pauls Branch wird ignoriert;
+- Start nimmt den neuesten offiziellen Campus;
+- Änderung an zuständigem CURRENT_STATE, HOBBYRAUM oder gebundener TASK-/TARGET-/RULES-Quelle → `STALE_ASSIGNMENT_BLOCKED`;
+- neuer Start lädt den neuen Campusstand automatisch;
+- irrelevante Campusänderungen blockieren Paul nicht.
+BELEG:
+Security-Head `9e0340d55ce9c7359fed28e171143a54d4cad5ab`, echter GitHub-`hardlock` SUCCESS mit `PAUL_CURRENT_CAMPUS_CI_PASS`.
+
+## ARCH-059 – Paul-Snapshots bewahren Quelltext byte-näher ohne strip
+WAS:
+`git show` für Paul-Quellen wird nicht mehr über eine globale `.strip()`-Rückgabe gelesen.
+WARUM:
+Der harte Frischetest zeigte, dass führende/abschließende Whitespace-Änderungen sonst aus dem Snapshot verschwinden und damit theoretisch nicht als Drift erkannt werden könnten.
+KISS:
+Nur `show()` liest stdout unverändert; Ref-/Branch-Kommandos behalten die bestehende getrimmte Ausgabe.

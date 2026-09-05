@@ -143,3 +143,19 @@ Damit wird keine Scheinautomatik behauptet:
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
 
+
+
+## Exakte Frischegarantie
+
+„Aktuell“ bedeutet für Paul technisch:
+
+- **beim Start:** neuesten offiziellen Campus frisch holen und daraus arbeiten;
+- **während des Auftrags:** Pauls eigene alte Campuskopien bleiben bedeutungslos;
+- **vor gültiger Rückgabe:** relevante Quellen erneut gegen den aktuellen Campus prüfen;
+- bei Änderung: `STALE_ASSIGNMENT_BLOCKED`;
+- anschließend neuer `start` → neuer aktueller Snapshot.
+
+Keine behauptete Live-Synchronisation Sekunde für Sekunde.
+
+Die gültige Garantie ist:
+**Paul kann nach Aktivierung der Security-Schicht nicht gültig auf einem veralteten relevanten Campusstand abschließen.**
