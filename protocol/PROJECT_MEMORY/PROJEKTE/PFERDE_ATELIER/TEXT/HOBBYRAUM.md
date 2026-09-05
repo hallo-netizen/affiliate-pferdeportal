@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-05
-STATUS: AKTIV / NORMALER TEXT-ARBEITSCHAT – SIGNIER-ALTLASTEN BEREINIGT / REGRESSION AUSSTEHEND
+STATUS: AKTIV / NORMALER TEXT-ARBEITSCHAT – INTERNES SIGNIERKONZEPT SCOPE-PASS / GESAMTREGRESSION AUSSTEHEND
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -42,7 +42,7 @@ Draft-PR:
 `#140`
 
 Aktueller Arbeits-Head:
-`c3244d5bf838817078a3821c045fb52e86f3db46`
+`7990029428399e8ba01d88a6543ce068812e9218`
 
 main bleibt unverändert:
 `c8a96e7a2f598de69134d90b143257c3559bc98a`
@@ -56,8 +56,9 @@ main bleibt unverändert:
 - M22/M23 wurden entsprechend auf H8-Provenance/Integrität statt interner Signatur ausgerichtet.
 - **Unverändert:** Textmaschine, Linkregel, Tabellenstufe, LanguageTool, PPM, PSERC/PSTE, SEO/Design und Publish-Sperre.
 - **Externe Signierung bleibt unangetastet:** hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation.
-- GitHub `hardlock` und `hardlock-base` auf Head `c3244d5…`: PASS.
-- **Noch nicht ausgeführt/belegt:** kompletter M01–M33-Lauf auf Head `c3244d5…`.
+- GitHub `hardlock` und `hardlock-base` auf Head `7990029…`: PASS.
+- **SCOPE-PASS internes Signierkonzept:** aktiver Call-Graph bis 107007 ohne ED25519-/Signer-/Key-/`SIGNED`-Pflicht; gebundenes H8-Paket `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder; Host-Signer erscheint erst im 107008-Endzustand.
+- **Noch nicht ausgeführt/belegt:** kompletter M01–M33-Lauf auf Head `7990029…`.
 - Kein Live-7/7-PASS behauptet.
 
 ## Single Writer
