@@ -107,7 +107,6 @@ def execute_bound_bootstrap_action(
     repo: Path,
     producer_callable: Callable[[Path, Mapping[str, Any]], Path],
     boundary=None,
-    trusted_keys=None,
 ) -> dict[str, Any]:
     repo = Path(repo).resolve()
     boundary = boundary or boundary_module()
@@ -121,14 +120,14 @@ def execute_bound_bootstrap_action(
     if not produced.is_file():
         raise BootstrapBlocked("BOOTSTRAP_PRODUCER_RETURNED_NO_PACKAGE")
     prov = _module(repo / "control/single-door-boundary/preproduction_provenance_guard.py", "h8_boot_provenance")
-    proof = prov.validate_package_provenance(repo, produced, trusted_keys=trusted_keys)
+    proof = prov.validate_package_provenance(repo, produced)
     if proof.get("status") != "H8_PREPRODUCTION_PROVENANCE_PASS":
         raise BootstrapBlocked("BOOTSTRAP_PROVENANCE_NOT_PASS")
     dst = incoming_path(repo, cur["generation"])
     if dst.exists():
         raise BootstrapBlocked("BOOTSTRAP_INCOMING_PACKAGE_ALREADY_EXISTS")
     shutil.copyfile(produced, dst)
-    copied = prov.validate_incoming_package(repo, trusted_keys=trusted_keys)
+    copied = prov.validate_incoming_package(repo)
     if copied.get("artifact_sha256") != proof.get("artifact_sha256"):
         dst.unlink(missing_ok=True)
         raise BootstrapBlocked("BOOTSTRAP_COPY_HASH_MISMATCH")
