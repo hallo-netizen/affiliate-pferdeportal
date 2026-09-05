@@ -25,5 +25,7 @@ Die vollständige Begründung liegt im zentralen `AENDERUNGSREGISTER.md`.
 - ARCH-018 → Architektur-Sonderrecht für jeden Chat
 - ARCH-019 → Bauprotokoll + Architektur-Fehlerkiste
 - ARCH-020 → Campus-Hausmeister
+- ARCH-021 → Pförtner/Hausmeister reine Verwaltung
+- ARCH-022 → 1-Klick-Eingangsstandard
 
 Keine Duplikation der ausführlichen Begründungen hier.
