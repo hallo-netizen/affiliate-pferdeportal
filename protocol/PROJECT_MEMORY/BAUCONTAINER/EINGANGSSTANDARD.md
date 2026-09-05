@@ -158,3 +158,37 @@ Vor `fertig`, `PASS` oder Übergabe:
 Wenn ein Punkt nicht betroffen ist: **nicht künstlich ändern**.
 
 Ein Abschluss ohne diese Prüfung ist kein belastbarer Campus-PASS.
+
+
+## Maschinenlesbarer PROTOKOLLCHECK – technische Abschlussbremse
+
+Für jeden PR, der irgendeinen Pfad unter `protocol/PROJECT_MEMORY/**` verändert, muss der PR-Text künftig genau einen maschinenlesbaren Abschlussblock enthalten:
+
+```
+PROTOKOLLCHECK
+FEHLER: PASS|NACHGEHOLT|NICHT_BETROFFEN
+PROTOKOLL: PASS|NACHGEHOLT|NICHT_BETROFFEN
+WARUM: PASS|NACHGEHOLT|NICHT_BETROFFEN
+CURRENT_STATE: PASS|NACHGEHOLT|NICHT_BETROFFEN
+HOBBYRAUM_NEXT_ACTION: PASS|NACHGEHOLT|NICHT_BETROFFEN
+ZIELVERTRAG: PASS|NACHGEHOLT|NICHT_BETROFFEN
+ARCHIV: PASS|NACHGEHOLT|NICHT_BETROFFEN
+EINE_WAHRHEIT: PASS
+TESTS: PASS
+TECHNISCHE_CHECKS: PASS|NICHT_BETROFFEN
+```
+
+Technische Regel nach Aktivierung des Security-Hardlocks:
+- fehlt der Block → FAIL;
+- fehlt ein Feld → FAIL;
+- `EINE_WAHRHEIT != PASS` → FAIL;
+- `TESTS != PASS` → FAIL;
+- ein tatsächlich geänderter CURRENT_STATE/HOBBYRAUM/Ziel-/Archiv-/Fehler-/Protokoll-/WARUM-Pfad darf nicht als `NICHT_BETROFFEN` deklariert werden;
+- Architekturdateien wie START_HERE, Hauptpförtner, Handlungsverzeichnis oder Baucontainer-Standards erzwingen zusätzlich eine Änderung von `AENDERUNGSREGISTER.md` und `BAUCONTAINER/BAUPROTOKOLL.md`.
+
+**Geltungsbereich:** der gesamte Baum `protocol/PROJECT_MEMORY/**`. Damit gilt die Abschlussbremse auch für den Baucontainer selbst, Paul-Akten, Archive, Tresor, Register, Gebäude, Büros und Hobbyräume.
+
+Die Prüfung ersetzt nicht die fachliche Wahrheit. Sie zwingt nur dazu, die Abschlussentscheidung sichtbar und widerspruchsfrei zu treffen.
+
+AKTIVIERUNGSSTATUS:
+Vorbereitet im Security-PR #137; noch nicht auf `main` aktiv, solange der immutable Base-Hardlock die eigene Security-Wartung blockiert.

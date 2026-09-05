@@ -388,3 +388,29 @@ Paul-Bindung als aktuellen Arbeitsstatus wiederhergestellt; nur Routing/Schreibg
 
 REGRESSIONSSCHUTZ:
 ARCH-049 + HOBBYRAUM_STANDARD.
+
+
+## BAU-026 – Protokollpflicht war dokumentiert, aber nicht technisch erzwungen
+
+STATUS: BLOCKED / SECURITY-MAINTENANCE
+
+KURZ:
+Campus-START_HERE und EINGANGSSTANDARD verlangen die Nachhol-/Protokollprüfung, aber ein Chat konnte trotzdem einen PR ohne diese Prüfung erzeugen.
+
+AUSWIRKUNG:
+Auch der Baucontainer selbst konnte seine eigene Dokumentationspflicht vergessen. Die Regel hing weiterhin teilweise am Chatgedächtnis.
+
+URSACHE:
+Es existierte noch kein Required-Check, der PROJECT_MEMORY-Diffs mit einer expliziten Abschlussentscheidung koppelt.
+
+KISS-FIX:
+Security-PR #137 um universellen `PROJECT_MEMORY_PROTOCOLCHECK` im bestehenden `hardlock-base` erweitert.
+
+REGRESSIONSSCHUTZ NACH AKTIVIERUNG:
+- fehlender/inkonsistenter PROTOKOLLCHECK blockiert;
+- Architekturänderung ohne AENDERUNGSREGISTER + BAUPROTOKOLL blockiert;
+- Tests oder Eine Wahrheit ohne PASS blockieren;
+- gilt auch für Baucontainer-/Archiv-/Tresor-/Paul-/Büroänderungen.
+
+BLOCKER:
+Aktivierung benötigt denselben einmaligen Admin-Wartungsweg wie BAU-024.

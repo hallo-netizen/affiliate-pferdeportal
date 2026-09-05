@@ -378,3 +378,16 @@ WARUM:
 Bei der Paul-Isolationsreparatur wurde die Rollenarchitektur korrekt geändert, aber der TEXT-Hobbyraum fälschlich von einer bestehenden Paul-Bindung auf `TEXT-ARBEITSCHAT FÜHRT` umgedeutet.
 REGEL:
 Architektur ändert die Regeln um eine bestehende Arbeitsbindung herum; sie ersetzt die dynamische Bindung nicht aus eigener Annahme.
+
+
+## ARCH-050 – PROJECT_MEMORY-Protokollpflicht wird technisch fail-closed
+WAS:
+Jeder PR mit Änderungen unter `protocol/PROJECT_MEMORY/**` muss einen maschinenlesbaren `PROTOKOLLCHECK` im PR-Text enthalten. Der trusted `hardlock-base` vergleicht diesen Block mit dem tatsächlichen Diff.
+WARUM:
+Die bisherige Protokollpflicht war nur dokumentiert. Ein langer Chat – auch der Baucontainer-Chat selbst – kann sie vergessen. Die Erinnerung muss deshalb außerhalb des Chatgedächtnisses liegen und vor Integration technisch blockieren.
+KISS:
+Kein neuer Runner und keine zweite Statusdatei. Eine einzige zusätzliche Prüfung im bestehenden trusted Base-Hardlock.
+GRENZE:
+Der Check kann bewusste Falschangaben nicht vollständig beweisen; er erzwingt aber Vollständigkeit, offensichtliche Diff-Widersprüche, PASS für Eine Wahrheit/Tests und die Architektur-Protokollkopplung.
+AKTUELL:
+Im Security-PR #137 implementiert; Aktivierung auf main weiterhin durch die bestehende immutable-Security-Wartungsgrenze BLOCKED.

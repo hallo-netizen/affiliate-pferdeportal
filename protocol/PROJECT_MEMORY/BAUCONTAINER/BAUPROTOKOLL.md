@@ -426,3 +426,35 @@ KISS-KORREKTUR:
 
 BEZUG:
 ARCH-049; BAU-025.
+
+
+### 2026-09-05 – Universeller technischer PROTOKOLLCHECK vorbereitet
+
+AUSLÖSER:
+Der Nutzer stellte zurecht fest, dass auch der Baucontainer-Chat seine eigenen Anfangs-/Abschlussregeln vergessen kann. Die bisherige „automatische Erinnerung“ war noch keine technische Sperre, sondern nur dokumentierte Pflicht.
+
+KISS-IMPLEMENTIERUNG:
+Security-PR #137 erweitert:
+- gilt für jeden PR mit `protocol/PROJECT_MEMORY/**`-Diff;
+- verlangt maschinenlesbaren `PROTOKOLLCHECK` im PR-Text;
+- Pflichtfelder: Fehler, Protokoll, WARUM, CURRENT_STATE, HOBBYRAUM/NEXT ACTION, Zielvertrag, Archiv, Eine Wahrheit, Tests, technische Checks;
+- Diff-Konsistenzprüfung gegen tatsächlich geänderte CURRENT_STATE-/HOBBYRAUM-/Ziel-/Archiv-/Fehler-/Protokoll-/WARUM-Dateien;
+- Architekturänderungen erzwingen zusätzlich `AENDERUNGSREGISTER.md` + `BAUCONTAINER/BAUPROTOKOLL.md`;
+- `EINE_WAHRHEIT` und `TESTS` müssen PASS sein.
+
+ABDECKUNG:
+Gesamter `protocol/PROJECT_MEMORY/**`-Baum – ausdrücklich einschließlich Baucontainer selbst.
+
+LOKALER LOGIKTEST:
+- gültiger Architektur-PROTOKOLLCHECK → PASS;
+- fehlender Block → BLOCK;
+- Diff widerspricht `NICHT_BETROFFEN` → BLOCK;
+- TESTS = OFFEN → BLOCK;
+- Nicht-PROJECT_MEMORY-Diff → NOT_APPLICABLE.
+
+STATUS:
+Implementiert im Security-Branch, aber noch nicht serverseitig aktiv auf main.
+Grund: derselbe bewusste immutable-Base-Selbstschutz wie BAU-024.
+
+BEZUG:
+ARCH-050; BAU-026.
