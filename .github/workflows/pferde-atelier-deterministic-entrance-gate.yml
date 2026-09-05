@@ -8,6 +8,7 @@ on:
       - 'control/deterministic-entrance-gate/**'
       - 'control/cloud-entry-gate/**'
       - 'control/production-continuity/**'
+      - 'control/paul-scope-gate/**'
       - 'control/single-door-boundary/**'
       - 'control/startmaster0104/**'
       - 'control/startmaster0105/**'
@@ -48,6 +49,10 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/cloud-entry-gate/cloud_repo_ci_test.py
+      - name: Paul current-Campus positive-negative CI
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python control/paul-scope-gate/paul_scope_gate_ci_test.py
       - name: Production continuity no-stop positive-negative CI
         env:
           PYTHONDONTWRITEBYTECODE: '1'
