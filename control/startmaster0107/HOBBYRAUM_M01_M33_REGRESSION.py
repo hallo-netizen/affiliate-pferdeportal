@@ -72,16 +72,22 @@ def m12(): must("test_generic_fake_ppm_pass_is_blocked" in (REPO/"control/startm
 def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/startmaster0107/test_ppm679_current_action_binding.py").read_text(encoding="utf-8"),"M13_CONTENT_HASH_TEST")
 def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
 def _m15_validate_instruction(text):
-    required=("submission_command","Kein Vorab-Handoff durch den Worker","keine Capability-Suche","keine Alternativroute")
+    required=("submission_command","FACHWORKFLOW_HANDOFF_REQUEST.json","kein separater Handoff-Befehl durch den Worker","keine Capability-Suche","keine Alternativroute")
     for token in required: must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
-    must(any("zweiter executor" in line.lower() and "kein" in line.lower() for line in text.splitlines()),"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
-    forbidden=("FACHWORKFLOW_HANDOFF_REQUEST.json","submit-request","Vorab-Handoff durch den Worker erforderlich")
+    lines=text.splitlines()
+    submit_lines=[line.lower() for line in lines if "submit-request" in line.lower()]
+    must(submit_lines and all("kein" in line for line in submit_lines),"M15_SUBMIT_REQUEST_NOT_FORBIDDEN")
+    executor_lines=[line.lower() for line in lines if "zweiter executor" in line.lower()]
+    must(executor_lines and all("kein" in line for line in executor_lines),"M15_SECOND_EXECUTOR_NOT_FORBIDDEN")
+    forbidden=("Vorab-Handoff durch den Worker erforderlich","separater Fachworkflow-Executor erforderlich","Capability-Suche erforderlich","Alternativroute erlaubt")
     for token in forbidden: must(token not in text,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
 
 def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
-    bad=text+"\\nFACHWORKFLOW_HANDOFF_REQUEST.json muss vor submission_command erzeugt werden."
+    bad=text+"\\nsubmit-request ausführen"
+    expect_exc(lambda:_m15_validate_instruction(bad),"M15_SUBMIT_REQUEST_NOT_FORBIDDEN")
+    bad=text+"\\nseparater Fachworkflow-Executor erforderlich"
     expect_exc(lambda:_m15_validate_instruction(bad),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
 def m16():
     s=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
@@ -197,12 +203,27 @@ def m30():
         root=Path(td);d,rp=_final_ctx_fixture(root,True)
         expect_exc(lambda:d.context_from_release(root,rp.name),"FINAL_CONTEXT_BATCH_MISMATCH")
 
+def _m31_validate_handoff(out):
+    handoff=out.get("fachworkflow_handoff")
+    must(isinstance(handoff,dict),"M31_BOUND_HANDOFF_MISSING")
+    must(handoff.get("worker_executes_adapter_directly") is False,"M31_WORKER_DIRECT_ADAPTER_FORBIDDEN")
+    must(handoff.get("adapter_executes_bound_ppm_stage") is True,"M31_BOUND_PPM_ADAPTER_MISSING")
+    must(str(handoff.get("request_ref") or "").endswith("FACHWORKFLOW_HANDOFF_REQUEST.json"),"M31_REQUEST_REF_NOT_BOUND")
+
 def m31():
     a=mod(CURRENT_ACTION,"m31_action")
     base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
     item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
     out=a.augment_current_action(REPO,base,item)
-    must("fachworkflow_handoff" not in out,"M31_SECOND_HANDOFF_DEPENDENCY")
+    _m31_validate_handoff(out)
+    bad=copy.deepcopy(out);bad["fachworkflow_handoff"]["worker_executes_adapter_directly"]=True
+    expect_exc(lambda:_m31_validate_handoff(bad),"M31_WORKER_DIRECT_ADAPTER_FORBIDDEN")
+    bad=copy.deepcopy(out);bad["fachworkflow_handoff"].pop("request_ref",None)
+    expect_exc(lambda:_m31_validate_handoff(bad),"M31_REQUEST_REF_NOT_BOUND")
+    smoke=a.selftest()
+    must(smoke.get("current_codex_is_bound_fachworkflow_worker") is True,"M31_CURRENT_WORKER_NOT_BOUND")
+    must(smoke.get("separate_fachworkflow_executor_required") is False,"M31_SEPARATE_EXECUTOR_REQUIRED")
+    must(smoke.get("separate_fachworkflow_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
     bridge=json.loads(cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py"))
     must(bridge.get("status")=="H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS","M31_CODEX_NATIVE_BOUND_ACTION_NOT_PASS")
     must(bridge.get("custom_function_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
