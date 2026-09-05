@@ -35,6 +35,19 @@ Kein Auto-Publish. Veröffentlichung ausschließlich nach ausdrücklicher Nutzer
 - keine WordPress-Schreibaktion im Test;
 - kein Auto-Publish.
 
+## Verbindliche Signiergrenze
+
+**Innerhalb der Produktion bis einschließlich 107007:**
+- keine kryptografische Raum-/Worker-Signatur;
+- kein privater Signierschlüssel und keine Signer-Credentials im Worker;
+- Sicherheit durch Single-Door/Wächter, Hash-/Herkunftsbindung, reale Fachprüfungen, PPM und PASS/Receipt-Kette.
+
+**Nach abgeschlossener Produktion / ab 107008-Finalisierung:**
+- kryptografische Versiegelung darf und soll außerhalb des Workers stattfinden;
+- die bestehende externe PSERC-/ENDSTEMPEL-/WordPress-Sicherheitsstrecke bleibt bis zu einer separaten, belegten Vereinfachungsprüfung unverändert.
+
+Diese Trennung darf nicht durch erneute interne Signierpflichten aufgeweicht werden.
+
 ## Testvertrag
 
 Ein Test darf nur das behaupten, was er tatsächlich ausgeführt hat.
