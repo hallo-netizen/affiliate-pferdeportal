@@ -49,3 +49,13 @@ Aktuell registriertes Projektgebäude:
 Neue eigenständige Projekte bekommen ein neues Projektgebäude.
 Neue dauerhafte Funktionen innerhalb eines Projekts bekommen ein neues Büro.
 Das Gebäude ist modular und darf jederzeit erweitert, umgebaut oder zurückgebaut werden.
+
+## Katastrophenfall
+
+Wenn der aktive Campus verloren, beschädigt oder nicht mehr vertrauenswürdig ist:
+nicht improvisieren.
+
+Einstieg:
+`protocol/PROJECT_MEMORY/TRESOR/NOTFALL_WIEDERAUFBAU.md`
+
+Nur einen geprüften `TRESOR_PASS`-Stand als Wiederherstellungsquelle verwenden.

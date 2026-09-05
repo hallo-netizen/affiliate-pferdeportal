@@ -58,8 +58,18 @@ WAS: PROJECT_MEMORY liegt technisch unter `protocol/PROJECT_MEMORY/`.
 VORHER: erster Entwurf lag direkt unter `PROJECT_MEMORY/`.
 NACHHER: unverändertes Campusmodell, aber technischer Ablageort unter bereits bestehender `protocol/**`-CI-Abdeckung.
 WARUM: der vorhandene Required Check `hardlock` wird bei Pull Requests für `protocol/**` bereits automatisch ausgelöst. So braucht die neue Gebäudeordnung keine Änderung an geschützten Workflows/Gates und keinen künstlichen Parallelmechanismus.
-BELEG: Draft-PR #134; reiner PROJECT_MEMORY-Head startete zunächst nur `hardlock-base`. Bestehender Workflowpfad zeigt `protocol/**` als PR-Trigger für `hardlock`.
+BELEG: Draft-PR #134.
 ENTFERNBAR: nur wenn ein anderer bestehender, gleichwertig geschützter Speicherort beide Required Checks ohne Maschinenraum-Umbau auslöst.
+
+## ARCH-007 – Externer Notfall-Tresor
+
+WAS: versionierte vollständige Wiederherstellungskapsel des gesamten Campus.
+VORHER: normales Repository/Git-Historie ohne einen einzigen geprüften Gesamt-Wiederaufbaupunkt.
+NACHHER: jeder künftige lokale Backup-Lauf soll zuerst einen frischen Tresorstand erzeugen und vollständig prüfen.
+WARUM: bei Feuer, Fehlumbau, verlorener Struktur oder Totalausfall soll das gesamte Projekt ohne Vorwissen aus einem einzigen gesicherten Stand wiederhergestellt werden können.
+REGEL: kein Überschreiben alter PASS-Stände; keine stillen Lücken; UNGEKLÄRT blockiert TRESOR_PASS.
+BELEG: `protocol/PROJECT_MEMORY/TRESOR/`
+ENTFERNBAR: nur durch nachweislich gleichwertiges oder besseres Disaster-Recovery-System.
 
 ## TECH-KEYFLOW-001 – Schlüsselübergabe
 

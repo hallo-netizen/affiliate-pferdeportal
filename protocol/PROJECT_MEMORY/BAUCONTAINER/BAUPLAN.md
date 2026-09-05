@@ -20,6 +20,7 @@ Seitlich dazu:
 - Änderungs-/Erklärungsregister
 - Maschinenraum
 - Paul
+- Notfall-Tresor
 
 ## Flexibilitätsgrundsatz
 
@@ -76,6 +77,20 @@ Das Büro, das eine fachliche Änderung verursacht, pflegt auch den zugehörigen
 - Änderung am Gebäude selbst → Baucontainer/Änderungsregister aktualisieren.
 
 Damit entsteht kein separates Verwaltungsbüro.
+
+## Notfall-Tresor
+
+Der Tresor liegt logisch außerhalb des aktiven Campus.
+
+Er steuert keine Facharbeit.
+Er enthält die vollständige Wiederherstellungsgrundlage des Campus und wird vor jedem lokalen Backup frisch gegen den aktuellen Stand erzeugt und geprüft.
+
+Ein Tresorstand darf nur `TRESOR_PASS` heißen, wenn der Inhalts- und Prüfvertrag vollständig erfüllt ist.
+
+Ältere gültige Tresorstände werden niemals überschrieben.
+
+Konzept:
+`protocol/PROJECT_MEMORY/TRESOR/`
 
 ## Maschinenraum
 
