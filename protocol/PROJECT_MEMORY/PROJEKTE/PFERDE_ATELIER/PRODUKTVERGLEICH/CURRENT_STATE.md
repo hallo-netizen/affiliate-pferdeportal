@@ -236,3 +236,46 @@ Regel gegen Zuständigkeitskonflikte:
 Keine parallelen Writes desselben technischen Bereichs und keine Kopie fremder CURRENT_STATE-Wahrheit.
 
 Aktuell wird TEXT/SEO nicht verändert: dessen Hobbyraum ist mit einem anderen aktiven Reparaturauftrag gebunden und Textmaschinen-/Fachregeländerungen sind dort derzeit gesperrt.
+
+
+## Campus-Queraudit – bisherige Integrationsprobleme und Muster
+
+Stand: 2026-09-06.
+
+Für die Architekturentscheidung Produktvergleich wurde das Pferde-Atelier-Gebäude plus allgemeine Bausteine, TEXT-Fehlerquellen, Journal/Wissen-Rootcause und Kategoriemodell quer geprüft.
+
+### Belastbare Muster
+
+1. **Allgemeiner Kern + Projektkonfiguration** ist ein bereits mehrfach genutztes Campus-Prinzip:
+   Bildzentrale, Universal Design und Universal Research & Fill trennen allgemeinen Modul-Kern von Pferde-Atelier-Konfiguration/Projektgeschichte.
+
+2. **Single Writer / klare Fachgrenzen** sind eine zentrale Campus-Hardrule.
+   Cross-Office-Lesen ist erlaubt; technische Änderungen gehören ausschließlich in den zuständigen Fachbereich.
+
+3. **Tiefe Cross-Core-Integration war historisch risikoreich.**
+   Die erste Journal/Wissen-Integration wurde direkt in PSTE, PSERC und PPM hart verdrahtet. Dokumentierte Folgen waren u. a. falsche Typ-/Kategoriezuordnung, selbstbestätigende Evidenz, globale Invalidierung großer Bestände, Rebuild-/Timeout-Probleme und falsche PASS-Zustände.
+
+4. Die spätere **additive Article-Type-Extension** repariert diese Architekturverletzung.
+   Sie ist aber kein trivialer Ein-Datei-Anschluss: PSTE, PSERC und PPM konsumieren ein gemeinsames signiertes Manifest; neue Typen benötigen eigene Scope-/Intent-/Kategorie-/Plan-Slot-Bindungen und vollständige Regression.
+
+5. **Journal-Extension erzeugt keine WordPress-Kategorien.**
+   Der PSTE-Extension-Router arbeitet read-only, sucht bereits existierende Kategorien via WordPress-Term-API und blockiert bei NOT_FOUND/AMBIGUOUS. PSERC prüft die reale Kategorie ebenfalls nur read-only und verlangt zusätzlich einen registrierten/signed Plan-Slot.
+   Damit sind reale Kategorieanlage und Article-Type-/Redaktionsplan-Registrierung zwei getrennte Aufgaben.
+
+6. Das allgemeine **Kategoriemodell** ist technisch eigenständig und umfangreich.
+   Es besitzt einen 14-stufigen Research-/Freigabeworkflow und eine lange R2–R10-Fehler-/Rootfixhistorie. Sein aktueller V1.8.0-Stand ist lokal/fresh stark geprüft, echter Live-WordPress-Deployment-PASS aber ausdrücklich noch nicht belegt.
+   Für eine einzelne Produktvergleichs-Kategorie-/Ast-Aufgabe wäre seine vollständige Einbindung deshalb nicht automatisch KISS.
+
+7. Der heutige TEXT-Produktionsweg zeigt weiterhin hohe Kopplungsempfindlichkeit an Übergaben:
+   Kategorieidentität, Plan-Slot, Exact-Five-Handoff, PPM-Reihenfolge und Worker-/Context-Bindung waren reale wiederkehrende Fehlerquellen.
+   Diese Probleme entstanden nicht primär in der Textformulierung, sondern an technischen Übergabe-/Kontrollgrenzen.
+
+### Konsequenz für die Entscheidung
+
+Die frühere Hypothese `Produktvergleich -> interner Vergleich` wird nicht als bevorzugter Shortcut behandelt.
+Der bestehende Typ `Vergleich` bleibt fachlich der allgemeine/symmetrische Vergleichspfad; Produktvergleich benötigt eigene, strengere Herstellerfakten-/Quellen-/Neutralitätsregeln.
+
+Wenn eine TEXT-Integration später gewählt wird, dann ausschließlich als **eigene additive Beitragsart mit eigenem Vertrag**, nicht als stilles Umdeuten des bestehenden Typs `Vergleich`.
+
+Parallel bleibt die eigenständige universelle Engine eine starke KISS-Option:
+allgemeiner Produktvergleichs-Kern + Pferde-Konfiguration + eigener begrenzter Kategorieast + optionale SEO-Schnittstelle + Affiliate-Schnittstelle.
