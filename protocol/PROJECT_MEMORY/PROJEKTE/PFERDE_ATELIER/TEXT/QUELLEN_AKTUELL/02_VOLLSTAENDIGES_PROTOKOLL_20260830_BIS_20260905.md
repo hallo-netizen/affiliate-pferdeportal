@@ -198,3 +198,61 @@ Schlussfolgerung dieses Zwischentests:
 Die entfernte interne Signatur war für die geprüfte innere Weg-/Herkunftssicherheit nicht erforderlich. Die externe kryptografische Grenze bleibt wirksam und getrennt.
 
 Grenze: kein M01–M33-GESAMT-PASS und kein Live-7/7-PASS.
+
+## 06.09 – Vollständiger Hobbyraum-Regressionsabschluss
+
+Aktueller technischer Kandidat:
+- Draft-PR #140;
+- Branch `hobbyroom/b01-semantic-category-seed`;
+- Head `3ed31aa78978a2098f324eead6f2a5335a10e2d4`;
+- main unverändert `c8a96e7a2f598de69134d90b143257c3559bc98a`.
+
+### M15-Testfehler gefunden und KISS behoben
+
+Der erste echte vollständige M01–M33-Lauf stoppte nach M01–M14 PASS bei M15.
+
+Ursache:
+Die beiden M15-Negativtests verwendeten im Teststring ein literales `\\n` statt eines echten Zeilenumbruchs. Dadurch wurde der absichtlich ergänzte verbotene Satz nicht als eigene Zeile erkannt.
+
+Fix:
+Ausschließlich die beiden Teststrings auf echten Zeilenumbruch korrigiert.
+Keine Produktionslogik, Fachregel, Textmaschine, PPM-, Link- oder Tabellenlogik geändert.
+
+### Vollständiger Wiederholungslauf
+
+Bestehender M01–M33-Runner danach vollständig ausgeführt.
+
+Ergebnis:
+- M01 bis M33: **PASS**;
+- `LAST_REGRESSION PASS BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`;
+- Abschluss: **`GESAMT PASS`**.
+
+GitHub auf demselben Quellstand:
+- `hardlock`: **PASS**;
+- `hardlock-base`: **PASS**.
+
+Testgrenze:
+Regression-PASS ≠ Live-PASS.
+
+### B06 erneut praktisch bestätigt – kein neuer Produktionsfehler
+
+Ein Live-/7/7-Versuch aus dem Hobbyraum-Head wurde vom bestehenden Production Preflight korrekt vor 107007 blockiert:
+
+`CODEX_CHECKOUT_NOT_CURRENT_MAIN:3ed31aa…:EXPECTED:c8a96e7…`
+
+Folgen:
+- 107007 nicht ausgeführt;
+- 107008 nicht erreicht;
+- keine Artikelproduktion;
+- keine Codeänderung;
+- keine WordPress-Schreibaktion.
+
+Einordnung:
+Das ist **kein neuer Produktionsfehler**, sondern der bereits bekannte B06-Testgrenzfall.
+Dauerregel: Hobbyraum/PR-Head = Regression/Reparatur; echter Live-/7/7-Beweis erst nach regulärer Integration auf current `main`.
+
+### Abschlussstand dieses Prüfblocks
+
+Hobbyraum-Regressionsstand: **PASS**.
+Live-/Produktionsstand: **nicht neu belegt**.
+Nächster Übergang: keine weiteren Hobbyraum-Liveversuche; Integrationsentscheidung für PR #140 nur nach ausdrücklicher Nutzerfreigabe, danach Livebeweis auf current `main`.
