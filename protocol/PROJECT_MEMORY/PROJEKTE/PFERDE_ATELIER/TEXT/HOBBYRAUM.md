@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
-STAND: 2026-09-05
-STATUS: AKTIV / NORMALER TEXT-ARBEITSCHAT – INTERNES SIGNIERKONZEPT SCOPE-PASS / GESAMTREGRESSION AUSSTEHEND
+STAND: 2026-09-06
+STATUS: AKTIV / HOBBYRAUM-REGRESSION PASS / LIVE-PROOF ERST AUF MAIN MÖGLICH
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -18,7 +18,7 @@ den aktuellen Auftrag und alle autoritativen Quellen lesen und ausschließlich i
 main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Workflow/Runner/Gate/Executor bauen oder Fach-/SEO-/Textmaschinenregeln verändern.
 
 **ALS NÄCHSTES …**  
-Auf exakt dem aktuellen Hobbyraum-Head den **bestehenden** M01–M33-Runner ausführen. Nur den ersten echten FAIL bearbeiten. Danach erneut derselbe Runner; erst nach M01–M33 + `hardlock` + `hardlock-base` darf Hobbyraum-PASS behauptet werden. Ein echter 7/7-Lauf bleibt der Livebeweis.
+Keine weiteren Live-/7/7-Versuche aus dem Hobbyraum. Der Kandidat ist regressionsseitig geprüft. Nächster technischer Übergang ist ausschließlich die bewusste Integrationsentscheidung für PR #140; erst nach regulärer Übernahme auf `main` darf der bestehende produktive 7/7-Liveweg gestartet werden. Kein Merge ohne ausdrückliche Nutzerfreigabe.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -42,7 +42,7 @@ Draft-PR:
 `#140`
 
 Aktueller Arbeits-Head:
-`7990029428399e8ba01d88a6543ce068812e9218`
+`3ed31aa78978a2098f324eead6f2a5335a10e2d4`
 
 main bleibt unverändert:
 `c8a96e7a2f598de69134d90b143257c3559bc98a`
@@ -56,10 +56,12 @@ main bleibt unverändert:
 - M22/M23 wurden entsprechend auf H8-Provenance/Integrität statt interner Signatur ausgerichtet.
 - **Unverändert:** Textmaschine, Linkregel, Tabellenstufe, LanguageTool, PPM, PSERC/PSTE, SEO/Design und Publish-Sperre.
 - **Externe Signierung bleibt unangetastet:** hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation.
-- GitHub `hardlock` und `hardlock-base` auf Head `7990029…`: PASS.
+- GitHub `hardlock` und `hardlock-base` auf Head `3ed31aa…`: PASS.
 - **SCOPE-PASS internes Signierkonzept:** aktiver Call-Graph bis 107007 ohne ED25519-/Signer-/Key-/`SIGNED`-Pflicht; gebundenes H8-Paket `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder; Host-Signer erscheint erst im 107008-Endzustand.
 - **ZWISCHENTEST INTERN/EXTERN: PASS.** Internes unsigniertes HASH_BOUND-Paket + aktuelle H8-Provenance PASS; manipulierte H8-/Batch-Herkunft bleibt selbst nach Neuberechnung aller normalen Hashes BLOCKED; Qualitätsstufen inkl. Link/Tabelle/PPM unverändert; externe ED25519-Positiv-/Negativprüfung PASS.
-- **Noch nicht ausgeführt/belegt:** kompletter M01–M33-Lauf auf Head `7990029…`.
+- **M01–M33 GESAMT PASS:** vorhandener Runner real ausgeführt gegen den Quellstand `3ed31aa…`; M01–M33 PASS, `LAST_REGRESSION PASS`, `GESAMT PASS`.
+- M15-Negativtest enthielt einen Escape-/Zeilenumbruchfehler; ausschließlich dieser Testfehler wurde KISS korrigiert und der komplette Runner danach erneut vollständig PASS ausgeführt.
+- **B06 gilt hart:** Hobbyraum-/PR-Head ist kein Live-/7/7-Testort; Production Preflight verlangt current `main`.
 - Kein Live-7/7-PASS behauptet.
 
 ## Single Writer
