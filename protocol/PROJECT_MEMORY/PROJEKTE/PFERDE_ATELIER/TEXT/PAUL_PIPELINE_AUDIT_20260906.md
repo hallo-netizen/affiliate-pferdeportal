@@ -116,3 +116,45 @@ Diese Befunde sind sicherheits-/produktionsrelevant, aber **nicht Teil der jetzi
 7. Bestehender Regressionstest danach.
 8. Echter 7/7-Lauf bleibt Produktionsbeweis.
 9. WordPress/Public-Funde separat nach Wiederherstellung des 107008-Ziels.
+
+## KRITISCHER GEGENCHECK GEGEN BISHERIGE REPARATURVERSUCHE
+
+### Was NICHT neu ist
+- Übergabe-/Handoff-Probleme wurden bereits vielfach repariert (B02, B03, B07–B13).
+- PASS/Live-Paritätsproblem ist bereits B14.
+- PPM content_hash == final article SHA ist bereits M13.
+- Batch-/Release-/Final-Context-Identität ist bereits M29/M30.
+- Der Grundsatz „ein Modul kann lokal PASS sein und im Gesamtweg trotzdem scheitern“ ist daher nicht neu.
+
+### Was nachweislich bereits Wirkung hatte
+- B02 `BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`: durch Worker-Rollenbindung live überwunden; nächster Liveblocker wurde B01.
+- B03 PPM/PASS-Reihenfolge: Kreisschluss technisch auf Request → realer PPM → erst danach PASS/Receipt korrigiert; Prinziptests PASS.
+- B04 Fake-PPM: technische Selbstbehauptungs-Lücke fail-closed geschlossen.
+- B05 current-main/Environment: letzter Live-Lauf passierte diesen Blocker.
+- B07–B13 führten historisch jeweils weiter in der Kette bis 7/7 bzw. 107008/Endstempel.
+
+Diese Fixes waren deshalb nicht „erfolglos“; sie beseitigten konkrete technische Sperren, lieferten aber keinen dauerhaften Gesamtbeweis.
+
+### Was Paul tatsächlich NEU hinzufügt
+1. **Unerfüllbarer technischer Vertrag zwischen zwei ansonsten gültigen Stufen** als eigener Prüfgegenstand.
+2. **Artefaktzustands-Parität:** Gate A kann auf Version X PASS melden, während Gate B/Output Version Y konsumiert.
+3. **Hash-Semantik statt nur Hash-Format:** derselbe Feldname/Hash kann technisch verschiedene Artefakte meinen.
+4. **Pre-/Post-Transformation-Gate-Reihenfolge:** Prüfung kann vor oder nach Resolver/Sanitizer/Transformation auf dem falschen Zustand sitzen.
+5. **Systematische End-to-End-Wirkungskarte eines einzigen Datensatzes**, statt nur den jeweils ersten sichtbaren Blocker einzeln zu reparieren.
+
+### Direkter STARTMASTER-Abgleich
+- Nicht-PPM-`input_sha256` wird im aktuellen Handoff nur formal als 64-Hex validiert; keine generische technische Bindung erzwingt die konkrete Artefaktidentität.
+- Diese Lücke bestand bereits auf den letzten 7/7-Ständen. **Nicht als aktuelle Regressionsursache behandeln.**
+- Der exakte reale PPM-6.7.9-Executor wurde jedoch erst nach dem letzten echten 7/7 hart in den Handoff eingebaut. Dadurch können bereits vorhandene Plugin-/Gate-Widersprüche erstmals zwingend im heutigen Liveweg wirksam werden.
+- B01 ist dafür bereits ein belegtes Beispiel: der neue reale PPM-Handoff verlangte numerische WP-ID, obwohl der gültige Upstream-Kategorievertrag sie nicht vorsieht.
+
+### Konsequenz
+Pauls Konzept wird NICHT als neuer Sammelfix umgesetzt.
+Es wird ausschließlich verwendet, um auf der technischen Ebene zu unterscheiden:
+- bereits früher geprüft/behoben;
+- alt und nachweislich nicht kausal;
+- erst durch späteren realen PPM-/Handoff-Pfad neu wirksam;
+- tatsächlich neuer reproduzierbarer Vertragskonflikt.
+
+Nur die letzten beiden Klassen dürfen neue Reparaturkandidaten werden.
+
