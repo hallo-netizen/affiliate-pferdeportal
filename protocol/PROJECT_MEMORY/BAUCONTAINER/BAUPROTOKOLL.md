@@ -1006,3 +1006,37 @@ nach Commit:
 
 BEZUG:
 ARCH-064.
+
+
+### 2026-09-06 – PRODUKTVERGLEICH Büro-Abnahme
+
+REALER GIT-BAUM:
+- Pferde-Atelier-Büros geprüft: **7/7**;
+- jedes der sieben Büros besitzt `START_HERE.md + CURRENT_STATE.md + HOBBYRAUM.md`;
+- neues Büro `PRODUKTVERGLEICH/`: 3/3 Pflichtdateien vorhanden.
+
+POSITIV:
+- Produktvergleich-`START_HERE` routet zu `CURRENT_STATE → HOBBYRAUM`;
+- Gebäude-Büroplan routet zu PRODUKTVERGLEICH;
+- Campus-START_HERE enthält natürliche Produktvergleichsroute;
+- Hauptpförtner trennt Produktvergleichsvorbereitung eindeutig von TEXT-Produktion;
+- Handlungsverzeichnis besitzt Produktvergleichsweg;
+- CURRENT_STATE ist einzige Bürostand-Zusammenfassung;
+- Hobbyraum ist `FREI`.
+
+NEGATIV:
+- kein `PAUL_ASSIGNMENT_V1` im neuen Hobbyraum;
+- kein Worker/Branch durch reine Büroeinrichtung erfunden;
+- keine zweite Textmaschine;
+- keine neue Fehlerliste;
+- kein neuer Zielvertrag;
+- keine frühere Produktvergleichsarbeit aus Erinnerung als CURRENT kopiert.
+
+GITHUB-CHECKS AUF HEAD
+`c5d00b645980d26c6664e399547ca4afddaac3d5`:
+- `hardlock` = SUCCESS;
+- `hardlock-base` = SUCCESS.
+
+ERGEBNIS:
+**BÜROARCHITEKTUR PASS.**
+Facharbeit bleibt bis ausdrücklichem Auftrag ungebunden.
