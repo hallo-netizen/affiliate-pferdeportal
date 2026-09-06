@@ -35,17 +35,38 @@ Aktiver Arbeiter:
 
 **Paul ist für diesen Auftrag tabu und nicht gebunden.**
 
-Gebundener Hobbyraum-Branch:
-`hobbyroom/b01-semantic-category-seed`
+Bevorzugter KISS-Testkandidat:
+`hobbyroom/b01-only-kiss-20260906`
 
 Draft-PR:
-`#140`
+`#141`
 
-Aktueller Arbeits-Head:
-`3ed31aa78978a2098f324eead6f2a5335a10e2d4`
+Aktueller KISS-Head:
+`94917596adce04765380c60dd7ade0fb23793393`
+
+Breiterer Prüfstand bleibt erhalten, aber ist **nicht** bevorzugter Integrationskandidat:
+PR #140 / `hobbyroom/b01-semantic-category-seed` / Head `3ed31aa78978a2098f324eead6f2a5335a10e2d4` = B01 + B15 + Testanpassungen.
 
 main bleibt unverändert:
 `c8a96e7a2f598de69134d90b143257c3559bc98a`
+
+## KISS-Isolierung B01 – 2026-09-06
+
+Aus dem bestehenden #140-Verlauf wurde der bereits vorhandene reine B01-Prefix direkt auf current `main` isoliert:
+- Basis: `c8a96e7a2f598de69134d90b143257c3559bc98a`;
+- Head: `94917596adce04765380c60dd7ade0fb23793393`;
+- 4 Commits / 4 Dateien;
+- tatsächliche Fachworkflow-Codeänderung: nur Kategorie-Guard Name+Slug+Taxonomy sowie lokale Seed-ID; Rest = notwendige Hashkette;
+- keine B15-Signierbereinigung;
+- keine Fach-/Inhalts-/Textmaschinen-/SEO-/Link-/Tabellen-/LanguageTool-/PPM-/PSERC-/PSTE-/Design-/Publish-Regeländerung;
+- GitHub `hardlock`: PASS;
+- GitHub `hardlock-base`: PASS;
+- PR #141: Draft, mergeable=true;
+- kein Merge.
+
+**Warum #141 bevorzugt:** Der letzte reale Lauf auf unverändertem `main` kam mit der bisherigen Signierstrecke bereits bis B01. B15 ist daher nicht erforderlich, um den aktuell belegten ersten Live-Blocker zu testen. Ein B01-only-Kandidat erhält die Kausalität.
+
+**Grenze:** M01–M33 wurde auf #141 nicht neu als kompletter Lauf ausgeführt; kein Live-/7/7-PASS.
 
 ## Aktueller Prüfstand
 
@@ -66,11 +87,13 @@ main bleibt unverändert:
 
 ## Integrations-/Fehlschlag-Sicherheitsplan für PR #140
 
-Solange PR #140 nicht ausdrücklich freigegeben ist: **kein Merge**.
+Solange kein Kandidat ausdrücklich freigegeben ist: **kein Merge**.
+
+Für den nächsten kausalen Live-Test ist **PR #141 (B01-only)** gegenüber #140 vorzuziehen. #140 bleibt als separater breiterer B01+B15-Prüfstand bestehen.
 
 Falls später ausdrücklich integriert wird:
 1. Vorherigen `main`-Anker unverändert dokumentieren: `c8a96e7a2f598de69134d90b143257c3559bc98a`.
-2. Regulär integrieren; kein paralleler Umbau.
+2. Für den ersten kausalen Test ausschließlich den B01-only-Kandidaten #141 integrieren; #140/B15 nicht parallel mitziehen.
 3. Auf dem neuen current `main` zuerst bestehende Identitäts-/Preflight-Prüfung.
 4. Danach **genau der bestehende produktive 7er-Lauf**; keine neue Canary-Route und kein alternativer Runner.
 5. Beim **ersten realen Blocker sofort stoppen** und nur diesen gegen Fehlerhistorie/Zielvertrag analysieren.
