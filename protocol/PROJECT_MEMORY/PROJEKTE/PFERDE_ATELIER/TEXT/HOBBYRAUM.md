@@ -18,7 +18,7 @@ den aktuellen Auftrag und alle autoritativen Quellen lesen und ausschließlich i
 main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Workflow/Runner/Gate/Executor bauen oder Fach-/SEO-/Textmaschinenregeln verändern.
 
 **ALS NÄCHSTES …**  
-Solange Codex nicht verfügbar ist: ausschließlich READ-ONLY-Altlasten-/Abhängigkeits-Audit des aktiven technischen 107007/107008-Unterbaus gegen Fehlerhistorie, Zielvertrag und Schutzliste. Keine Produktionsreparatur auf Verdacht, kein neuer Runner/Workflow/Gate/Executor, kein Merge. Danach bleibt der nächste technische Übergang die bewusste Integrationsentscheidung für PR #140; erst nach regulärer Übernahme auf `main` darf der bestehende produktive 7/7-Liveweg gestartet werden.
+Solange Codex nicht verfügbar ist: ausschließlich READ-ONLY-Prüfung der drei nach Historiengegencheck tatsächlich neuen technischen Paul-Kandidaten: **(1) Pre-/Post-Transformation-Gate-Reihenfolge F2/A6/A12, (2) technisch unerfüllbare Tabellen-/Artikeltyp-Bedingung F7/A7, (3) unterschiedliche Hash-Semantik A11.** Jeden Punkt zuerst gegen letzten realen 7/7-Stand und bisherige Fixhistorie prüfen. Kein Produktionsfix ohne reproduzierten aktuellen Widerspruch, kein neuer Runner/Workflow/Gate/Executor, kein Merge.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
