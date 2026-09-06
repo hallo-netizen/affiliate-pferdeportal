@@ -757,3 +757,18 @@ Eigenständige Universal-Engine und additive TEXT-Extension werden anhand dersel
 
 KORREKTUR:
 Ein stiller Bridge-Shortcut `Produktvergleich -> bestehender Vergleich` wird nicht bevorzugt. Produktvergleich benötigt eigene Text-/Fakten-/Quellenregeln.
+
+## TECH-TEXT-ALT-001 – Rückbau nur mit Mikro-, Abhängigkeits-, Historien- und Makrobeweis
+BEREICH: TEXT / STARTMASTER0107
+STATUS: VERBINDLICH / 2026-09-06
+WAS:
+Altlasten werden nicht aufgrund von Alter, Größe oder Ähnlichkeit zum letzten funktionierenden Stand entfernt. Jeder einzelne Rückbaukandidat muss vor Änderung positiv/negativ, auf direkte/indirekte Abhängigkeiten und gegen die vollständige autoritative Fehlerhistorie geprüft werden. Danach ist der bestehende Gesamtregressionslauf Pflicht.
+WARUM:
+Lokale KISS-Fixes können indirekt alte Fehler wieder öffnen oder nachträglich ergänzte, notwendige Funktionen beschädigen. Das bisherige Fehlerprotokoll enthält genau diese historischen Gründe und muss deshalb als Gegenprüfung Teil jeder Rückbauentscheidung sein.
+SCHUTZLISTE:
+Textmaschine/Fachregeln, externe-Link-Regel, Tabellenstufe, LanguageTool, echter PPM 6.7.9, PSERC/PSTE, Dubletten/Kannibalisierung, SEO, Design, Publish-Sperre, Hash-/Herkunftsbindung sowie externe Signierung ab 107008 bleiben erhalten.
+FAIL-CLOSED:
+Ungeklärter Zweck, ungeklärte Abhängigkeit oder ungeklärter historischer Fehlerbezug = NICHT ENTFERNEN.
+TESTGRENZE:
+Regression-PASS ist kein Live-/7/7-PASS.
+
