@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-06
-STATUS: AKTIV / HOBBYRAUM-REGRESSION PASS / LIVE-PROOF ERST AUF MAIN MÖGLICH
+STATUS: AKTIV / B01-ONLY #141 HARDLOCK PASS / #140 M01–M33 REGRESSION PASS / LIVE-PROOF OFFEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -160,6 +160,8 @@ Autorität:
 **Paul-Pipeline-Prüfkarte:** `PAUL_PIPELINE_AUDIT_20260906.md` – priorisiert direkte Gate-/Vertragskollisionen gegenüber späteren WordPress/Public-Folgethemen.
 
 **Vor-Codex-Readiness:** `PRE_CODEX_READINESS_20260906.md` – vollständige technische Vorprüfung, Belege, Grenzen und STOP-Regel für #141.
+
+**First Codex Runbook:** `FIRST_CODEX_RUN_B01_20260906.md` – exakter bestehender Liveweg nach ausdrücklich freigegebenem #141-Merge; STOP beim ersten realen Blocker.
 
 ## Altlasten-Audit – Zwischenstand 2026-09-06
 
