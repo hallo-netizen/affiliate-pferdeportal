@@ -85,7 +85,7 @@ Aus dem bestehenden #140-Verlauf wurde der bereits vorhandene reine B01-Prefix d
 - **B06 gilt hart:** Hobbyraum-/PR-Head ist kein Live-/7/7-Testort; Production Preflight verlangt current `main`.
 - Kein Live-7/7-PASS behauptet.
 
-## Integrations-/Fehlschlag-Sicherheitsplan für PR #140
+## Integrations-/Fehlschlag-Sicherheitsplan für den nächsten B01-Live-Test
 
 Solange kein Kandidat ausdrücklich freigegeben ist: **kein Merge**.
 
@@ -98,7 +98,7 @@ Falls später ausdrücklich integriert wird:
 4. Danach **genau der bestehende produktive 7er-Lauf**; keine neue Canary-Route und kein alternativer Runner.
 5. Beim **ersten realen Blocker sofort stoppen** und nur diesen gegen Fehlerhistorie/Zielvertrag analysieren.
 6. Kein automatischer Rückbau. Falls der Merge selbst als Ursache belegt wird, ist der Merge-Commit gezielt reversierbar; Rücknahme nur mit ausdrücklicher Nutzerfreigabe.
-7. Keine Aussage „PR #140 gelöst“, bevor echter 7/7 + 107008 auf demselben produktiven Stand belegt ist.
+7. Keine Aussage „B01/#141 gelöst“, bevor der echte Lauf B01 passiert; keine Aussage „System wiederhergestellt“, bevor 7/7 + 107008 auf demselben produktiven Stand belegt ist.
 
 Damit wird die B06/B14-Testlücke nicht wegbehauptet, sondern operational begrenzt: Vor Merge nur Regression/Scope; nach Merge erster echter Live-Beweis mit klarer Rückkehrgrenze.
 
@@ -159,6 +159,8 @@ Autorität:
 
 **Paul-Pipeline-Prüfkarte:** `PAUL_PIPELINE_AUDIT_20260906.md` – priorisiert direkte Gate-/Vertragskollisionen gegenüber späteren WordPress/Public-Folgethemen.
 
+**Vor-Codex-Readiness:** `PRE_CODEX_READINESS_20260906.md` – vollständige technische Vorprüfung, Belege, Grenzen und STOP-Regel für #141.
+
 ## Altlasten-Audit – Zwischenstand 2026-09-06
 
 **Noch kein zusätzlicher Rückbau freigegeben.**
@@ -168,10 +170,10 @@ Geprüft:
 - alte Recovery-/Existing-Article-Logik im `STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py`: im heutigen Current-Action-Workerpfad nicht aktiv. **Kein aktueller Fehlerverursacher; nicht anfassen.**
 - `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` Env-Overrides: Repo-Fallback + exakte SHA-Bindung vorhanden; kein belegter aktueller Fehler durch den Override. **Verdacht allein reicht nicht; nicht entfernen.**
 - `test_fachworkflow_proof_handoff.py`: gegenüber dem seit 05.09. zwingenden realen `ppm679_binding` stale und nicht Bestandteil des aktuellen M01–M33-/PR-Beweises. **Testballast/Testlücke, kein aktiver Produktionsblocker.**
-- B01-ID-Pflicht: numerische ID wurde erst mit dem realen PPM-Handoff am 04.09. als technische Vorbedingung eingeführt; historischer Kategorie-Hardlock verlangt Name + Slug + Taxonomy. #140 entfernt nur diese vorgezogene Produktionsvoraussetzung und nutzt eine Seed-ID ausschließlich im isolierten PPM-Testzustand. **Kausal begründeter Kandidat; Live-Beweis weiterhin offen.**
+- B01-ID-Pflicht: numerische ID wurde erst mit dem realen PPM-Handoff am 04.09. als technische Vorbedingung eingeführt; historischer Kategorie-Hardlock verlangt Name + Slug + Taxonomy. **#141** isoliert ausschließlich diesen B01-Fix und nutzt eine Seed-ID nur im lokalen PPM-Seedzustand. #140 bleibt der breitere B01+B15-Prüfstand. **Kausal begründeter Kandidat; Live-Beweis weiterhin offen.**
 
 Konsequenz:
-Bis zu einem neuen echten Live-Lauf keine weitere technische Bereinigung auf Verdacht in PR #140 aufnehmen.
+Bis zu einem neuen echten Live-Lauf keine weitere technische Bereinigung auf Verdacht in #141 aufnehmen; #140 nicht als parallelen Live-Kandidaten verwenden.
 
 ### 107008-/Abschlussweg-Audit 2026-09-06
 
