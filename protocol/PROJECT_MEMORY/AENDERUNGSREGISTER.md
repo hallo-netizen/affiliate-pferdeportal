@@ -849,3 +849,27 @@ Einmal recherchieren, mehrfach verwenden. Keine zweite parallele Produktrecherch
 
 WARUM:
 Vermeidet doppelte Herstellerrecherche, widersprüchliche Produktfakten und die Vermischung von fachlicher Eignung mit kommerzieller Verfügbarkeit.
+
+
+## PV-PLAN-010 – Produktregal ist fachliche Hauptquelle; Affiliate entdeckt und monetarisiert
+
+STAND:
+2026-09-06 / VERBINDLICHER KONZEPTSTAND.
+
+ENTSCHEIDUNG:
+Die fachliche Produktauswahl beginnt nicht im Affiliate-Pool. Zentrale Quelle ist ein Produktregal mit eindeutig identifizierten und quellengebunden recherchierten Produkten/Varianten.
+
+HAUPTRICHTUNG:
+`Produktregal/Faktenbasis -> Beratung/Produktvergleich/Variantenvergleich -> Affiliate-Exact-Match -> Kaufangebot`.
+
+AFFILIATE-ROLLE:
+Affiliate prüft nachgelagert, ob die fachlich ausgewählten Produkte exakt bei Amazon, eBay, idealo, Awin oder anderen angebundenen Quellen verfügbar sind. Kein Exact Match = kein Ersatzprodukt und keine Veränderung des fachlichen Artikels.
+
+ENTDECKUNG:
+Affiliate darf neue Commerce-Produkte als Kandidaten an die Produktrecherche melden. Diese Kandidaten werden erst nach Identitäts- und Quellenprüfung in das fachliche Produktregal aufgenommen und dürfen erst danach für Inhalte genutzt werden.
+
+HARD RULE:
+Provision, Angebotsdichte oder kurzfristige Händlerverfügbarkeit dürfen niemals die fachliche Eignung, Vergleichspaarung oder Herstellerfakten bestimmen.
+
+LEITSATZ:
+**Affiliate darf entdecken. Produktrecherche entscheidet. Affiliate monetarisiert.**
