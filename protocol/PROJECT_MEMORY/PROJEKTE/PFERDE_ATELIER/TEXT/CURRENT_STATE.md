@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
-STAND: 2026-09-05
-STATUS: QUELLENSTAND KONSOLIDIERT / FACHINHALTE UNVERÄNDERT
+STAND: 2026-09-06
+STATUS: QUELLENSTAND KONSOLIDIERT / HOBBYRAUM-KANDIDAT REGRESSIONSGEPRÜFT / LIVE NICHT BELEGT
 
 
 ## AUTORITÄT DIESER DATEI
@@ -26,7 +26,27 @@ PR #107:
 OPEN / Head ebenfalls
 `c8a96e7a2f598de69134d90b143257c3559bc98a`
 
-Diese Werte wurden am 2026-09-05 direkt mit GitHub abgeglichen.
+Diese Werte wurden am 2026-09-06 direkt mit GitHub abgeglichen.
+
+## Aktueller technischer Hobbyraum-Kandidat
+
+Draft-PR #140:
+`hobbyroom/b01-semantic-category-seed`
+
+Aktueller Head:
+`3ed31aa78978a2098f324eead6f2a5335a10e2d4`
+
+Belegter Prüfstand auf diesem Quellstand:
+- vorhandener M01–M33-Runner: **M01 bis M33 PASS**;
+- Runner-Schluss: `LAST_REGRESSION PASS` + `GESAMT PASS`;
+- `hardlock`: **PASS**;
+- `hardlock-base`: **PASS**;
+- internes Signierkonzept bis 107007: SCOPE-PASS, externe Signierung erhalten.
+
+Harte Testgrenze:
+- Hobbyraum-/PR-Head kann absichtlich keinen produktiven Live-/7/7-Proof liefern, weil der Production Preflight current `main` verlangt;
+- daher **kein Live-PASS** aus dem Hobbyraum ableiten;
+- letzter belegter Livefehler auf `main` bleibt an der autoritativen Fehlerquelle.
 
 ## Direkt lesbare aktuelle Originalakten
 
