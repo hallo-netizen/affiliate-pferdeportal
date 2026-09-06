@@ -131,3 +131,29 @@ Bis zu einem neuen echten Live-Lauf keine weitere technische Bereinigung auf Ver
 
 **Audit-Ergebnis:** Außer B01 und der bereits ausgeführten B15-Signierbereinigung ist aktuell keine weitere aktive Altlast kausal oder sicher entfernbar belegt.
 
+### Paul-Architekturmodell – neuer READ-ONLY-Audit-Kandidat 2026-09-06
+
+Paul hat den Problemtyp in einer eigenen Testinfrastruktur end-to-end modelliert. Die dortigen konkreten PBone-Fehler sind **keine direkten Pferde-Atelier-Fehler**, aber die reproduzierte Fehlerklasse ist für STARTMASTER relevant:
+
+**Gate-/Vertragskollision:** Zwei für sich sinnvolle Module können gemeinsam unerfüllbar werden, wenn sie unterschiedliche Zustände desselben Artefakts erwarten oder ein Gate nicht exakt das Artefakt prüft, das später weitergegeben wird.
+
+Direkter STARTMASTER-Befund:
+- Fachvertrag: PASS-Reuse nur bei identischem, hashgebundenem Input/Vertrag.
+- Aktueller Handoff prüft bei Nicht-PPM-Stufen `input_sha256` nur auf formale 64-Hex-Gültigkeit.
+- Er erzwingt dort nicht mechanisch, welches konkrete Artefakt dieser Hash bezeichnet oder wie es mit Vor-/Nachstufe zusammenhängt.
+- PPM ist enger: dort wird `input_sha256` ausdrücklich auf den finalen Artikel-SHA gebunden.
+- derselbe lose Nicht-PPM-Hashcheck existierte bereits auf den belegten früheren 7/7-Ständen `d841ed…` / `de21f6…`; daher **kein Beleg als Ursache des aktuellen B01-Livefehlers**, sondern latente Architektur-/Paritätslücke.
+- B01 selbst passt jedoch zur von Paul reproduzierten Fehlerklasse „Downstream-Gate verlangt ein Feld/einen Zustand, den der gültige Upstream-Vertrag nicht liefern soll“: numerische WP-ID vs. semantischer Kategorievertrag.
+
+Nächster READ-ONLY-Prüfgegenstand:
+Für die bestehende 12-Stufen-Kette je Stufe bestimmen:
+1. welches konkrete Eingangsartefakt geprüft wird;
+2. welcher Hash dieses Artefakt identifiziert;
+3. ob die Stufe das Artefakt verändern darf;
+4. welches Ausgangsartefakt entsteht;
+5. welches nachfolgende Gate genau dieses Ergebnis konsumiert;
+6. ob die technische Prüfung diese Übergabe wirklich bindet oder nur einen beliebigen formal gültigen Hash akzeptiert.
+
+**Keine neue Architektur / kein neuer Runner.**
+Ergebnis zuerst nur als Wirkungskarte. Erst ein konkret reproduzierter Vertragskonflikt darf Fehler-/Rückbaukandidat werden.
+
