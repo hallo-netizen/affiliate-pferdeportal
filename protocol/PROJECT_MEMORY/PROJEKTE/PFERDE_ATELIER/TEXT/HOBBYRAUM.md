@@ -93,3 +93,17 @@ Vor jedem Rückbau im aktiven TEXT-/STARTMASTER-Weg zwingend:
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
 
+## Altlasten-Audit – Zwischenstand 2026-09-06
+
+**Noch kein zusätzlicher Rückbau freigegeben.**
+
+Geprüft:
+- `m.DUAL = SELF`: bewusster KISS-Kompatibilitätskleber zur Wiederverwendung der bestehenden Room-Bridge; löst/umgeht alte DUAL-Fachlogik. **BEHALTEN.**
+- alte Recovery-/Existing-Article-Logik im `STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py`: im heutigen Current-Action-Workerpfad nicht aktiv. **Kein aktueller Fehlerverursacher; nicht anfassen.**
+- `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` Env-Overrides: Repo-Fallback + exakte SHA-Bindung vorhanden; kein belegter aktueller Fehler durch den Override. **Verdacht allein reicht nicht; nicht entfernen.**
+- `test_fachworkflow_proof_handoff.py`: gegenüber dem seit 05.09. zwingenden realen `ppm679_binding` stale und nicht Bestandteil des aktuellen M01–M33-/PR-Beweises. **Testballast/Testlücke, kein aktiver Produktionsblocker.**
+- B01-ID-Pflicht: numerische ID wurde erst mit dem realen PPM-Handoff am 04.09. als technische Vorbedingung eingeführt; historischer Kategorie-Hardlock verlangt Name + Slug + Taxonomy. #140 entfernt nur diese vorgezogene Produktionsvoraussetzung und nutzt eine Seed-ID ausschließlich im isolierten PPM-Testzustand. **Kausal begründeter Kandidat; Live-Beweis weiterhin offen.**
+
+Konsequenz:
+Bis zu einem neuen echten Live-Lauf keine weitere technische Bereinigung auf Verdacht in PR #140 aufnehmen.
+
