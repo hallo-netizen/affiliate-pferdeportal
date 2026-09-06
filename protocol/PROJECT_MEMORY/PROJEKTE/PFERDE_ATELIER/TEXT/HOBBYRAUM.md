@@ -64,6 +64,20 @@ main bleibt unverändert:
 - **B06 gilt hart:** Hobbyraum-/PR-Head ist kein Live-/7/7-Testort; Production Preflight verlangt current `main`.
 - Kein Live-7/7-PASS behauptet.
 
+## Harte Altlasten-/Rückbau-Prüfung
+
+Vor jedem Rückbau im aktiven TEXT-/STARTMASTER-Weg zwingend:
+
+1. **Mikro:** Kandidat positiv/negativ prüfen; konkrete Funktion und Fehlerwirkung trennen.
+2. **Abhängigkeiten:** direkte und indirekte Nutzer, Hashbindungen, Übergaben, Receipts und spätere Schritte prüfen.
+3. **Fehlerprotokoll-Gegencheck:** die vollständige autoritative Fehlerquelle über FEHLERREGISTER lesen und ausdrücklich prüfen, welcher historische Fehler/Fix durch den Rückbau wieder geöffnet werden könnte.
+4. **Schutzliste:** Textmaschine/Fachregeln, externe-Link-Regel, Tabellenstufe, LanguageTool, echter PPM 6.7.9, PSERC/PSTE, Dubletten/Kannibalisierung, SEO, Design, Publish-Sperre, Hash-/Herkunftsbindung und externe Signierung ab 107008 dürfen nicht verloren gehen oder gelockert werden.
+5. **Makro:** vollständigen bestehenden Regressionstest auf demselben Kandidatenstand ausführen. Lokaler PASS allein reicht nicht.
+6. **Realitätsgrenze:** Regression-PASS bleibt ausdrücklich kein Live-/7/7-PASS.
+
+**Fail-closed:** Ist Notwendigkeit, Seiteneffekt oder historischer Fehlerbezug nicht belastbar geklärt, wird nicht zurückgebaut.
+**KISS:** immer nur ein kausal abgegrenzter Kandidat; keine Sammel-Aufräumaktion.
+
 ## Single Writer
 
 - Dieser normale TEXT-Arbeitschat ist für den aktuellen B01-Hobbyraumauftrag der einzige aktive technische Schreiber.
