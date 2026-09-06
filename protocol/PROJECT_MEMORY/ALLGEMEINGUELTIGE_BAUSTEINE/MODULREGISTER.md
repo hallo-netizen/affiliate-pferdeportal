@@ -251,6 +251,7 @@ Projektunabhängige Engine für:
 GEPLANTE GRENZE:
 Keine zweite vollständige Text-/SEO-Maschine.
 Die Engine liefert Fach-/Faktengrundlage; das jeweilige Projekt kann eine vorhandene Textproduktion anbinden.
+Aktuelle Kaufquellen/Preise/Verfügbarkeit gehören nicht zum Faktenkern; dafür wird optional ein bestehendes Affiliate-/Commerce-System über eindeutige Produktidentitäten angebunden.
 
 ERSTE PROJEKTANWENDUNG:
 PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
@@ -267,4 +268,5 @@ OFFEN:
 - Kategorienlogik;
 - Rechercheadapter/Quellenstrategie;
 - Übergabeschnittstelle zu TEXT;
+- Exact-Product-Schnittstelle zur vorhandenen Affiliate-Zentrale;
 - technischer Allgemeingültigkeitstest.
