@@ -828,3 +828,24 @@ Eine Kategorie bedeutet keine fachliche Vermischung. Produktgruppenvergleich, Pr
 
 WARUM:
 Ein zentraler Ort für die Nutzerfrage „vergleichen“, bessere Auffindbarkeit und interne Navigation, weniger künstliche Kategorieebenen und geringere Gefahr dünner Parallelkategorien. Die zusätzliche Komplexität wird einmalig kontrolliert im Vergleichs-Archivtemplate gebündelt.
+
+
+## PV-PLAN-009 – Produktrecherche wird gemeinsame Faktenbasis; Affiliate bleibt Commerce-Schicht
+
+STAND:
+2026-09-06 / VERBINDLICHER KONZEPTSTAND.
+
+WAS:
+Die Produktrecherche des Produktvergleichssystems wird nicht ausschließlich für Produktvergleichsartikel gedacht. Ihre quellengebundenen Produktfakten dürfen auch Beratungsbeiträge und Variantenvergleiche versorgen.
+
+BERATUNG:
+Bedarfsorientiert, z. B. `Reitstiefel für breite Waden`. Sie kann anhand verifizierter Produktmerkmale passende konkrete Modelle nennen oder auswählen.
+
+AFFILIATE:
+Bleibt zuständig für aktuelle Kaufangebote, Verfügbarkeit, Tracking und Produktkarten. Affiliate darf fachliche Eignung nicht aus Händler-/Commerce-Daten selbst ableiten, sondern erhält nur bereits fachlich begründete Produktidentitäten bzw. Bedarfszuordnungen.
+
+KISS-GRUNDSATZ:
+Einmal recherchieren, mehrfach verwenden. Keine zweite parallele Produktrecherche in Beratung oder Affiliate.
+
+WARUM:
+Vermeidet doppelte Herstellerrecherche, widersprüchliche Produktfakten und die Vermischung von fachlicher Eignung mit kommerzieller Verfügbarkeit.
