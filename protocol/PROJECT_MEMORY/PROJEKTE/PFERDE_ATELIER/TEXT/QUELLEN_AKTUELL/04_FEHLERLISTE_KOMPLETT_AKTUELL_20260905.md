@@ -2,6 +2,18 @@
 
 ## A. M01–M33 – bestehende historische Regressionen
 
+### AKTUELLER GESAMTBELEG 06.09.2026
+
+Auf dem aktuellen Hobbyraum-Quellstand `3ed31aa78978a2098f324eead6f2a5335a10e2d4` wurde der **bestehende** M01–M33-Runner vollständig ausgeführt:
+- M01–M33: **PASS**;
+- `LAST_REGRESSION PASS BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`;
+- Abschlussstatus: **`GESAMT PASS`**.
+
+Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zusätzlicher Diff war die temporäre Workflow-Hülle. Der geprüfte Kontroll-/Produktionsbaum entsprach `3ed31aa…`.
+
+**Grenze:** Dieser Regression-PASS ist ausdrücklich **kein Live-/7/7-PASS**.
+
+
 | ID | Fehlerklasse | Teststatus | Live-Status / Bemerkung |
 |---|---|---|---|
 | M01 | State-/Bundle-Hash chain | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
@@ -18,7 +30,7 @@
 | M12 | Fake PPM blocked | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M13 | PPM content_hash == final article SHA | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M14 | Current Action Handoff | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
-| M15 | 107007 Handoff instruction konsistent | im bestehenden Runner enthalten | **Runner-Test war stale:** verbot aktuellen gebundenen Handoff-Request bzw. wertete `kein submit-request` als Treffer. Im Hobbyraum auf aktuelle Sollarchitektur korrigiert; Positiv-/Negativlogik geprüft. Kein eigener Live-Produktionsblocker. |
+| M15 | 107007 Handoff instruction konsistent | **PASS 06.09. auf `3ed31aa…`** | Zusätzlich gefundener Testfehler: zwei Negativfälle hängten `\\n` als Literal statt eines echten Zeilenumbruchs an. Nur dieser Testfehler wurde KISS korrigiert; kompletter M01–M33-Lauf danach PASS. Kein eigener Live-Produktionsblocker. |
 | M16 | Signer boundary außerhalb Codex | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M17 | 107008 fail-closed | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M18 | ENDSTEMPEL constants | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
@@ -51,10 +63,11 @@
   - fehlender Name trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - falsche Taxonomy trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - fehlender Slug → alt **BLOCK**, neu **BLOCK**
-- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, aktueller Head `7990029428399e8ba01d88a6543ce068812e9218`.
+- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, aktueller Head `3ed31aa78978a2098f324eead6f2a5335a10e2d4`.
 - Kandidat ändert keine SEO-/Textmaschinen-/PPM-Regel; nur der bestehende Handoff verwendet die ID nicht mehr als vorgezogene Produktionsvoraussetzung.
-- `hardlock` und `hardlock-base` auf Head `7990029…`: PASS.
-- **Noch nicht behauptet:** kompletter M01–M33-PASS auf diesem Head oder echter neuer 7/7-Live-PASS.
+- `hardlock` und `hardlock-base` auf Head `3ed31aa…`: PASS.
+- vorhandener M01–M33-Runner auf demselben Quellstand: **GESAMT PASS**.
+- **Noch nicht behauptet:** echter neuer 7/7-Live-PASS.
 - **Harte Nutzerregel:** Nicht durch Erweiterung des SEO-5-Felder-Handoffs lösen.
 
 ### B02 – `BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
@@ -76,9 +89,12 @@
 - Historisch wiederholt.
 - Aktueller Preflight verlangt/prüft main-Identität; letzter Live-Lauf HEAD exakt `c8a96e7…` PASS.
 
-### B06 – `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`
-- Hobbyraum kann absichtlich keinen Produktionsproof liefern, weil Preflight current main verlangt.
-- Kein Produktionsfehler auf aktuellem main; wichtig für Testmethodik.
+### B06 – Hobbyraum ist kein Produktions-/Live-Testort
+- Hobbyraum kann absichtlich keinen Produktionsproof liefern, weil Preflight current `main` verlangt.
+- Wiederholungsbeleg 06.09.: Versuch auf Hobbyraum-Head `3ed31aa…` wurde korrekt vor 107007 gestoppt mit `CODEX_CHECKOUT_NOT_CURRENT_MAIN:3ed31aa…:EXPECTED:c8a96e7…`.
+- 107007 nicht ausgeführt; 107008 nicht erreicht; keine Artikelproduktion; keine Code-/WordPress-Schreibaktion.
+- **Harte Testmethodik:** Live-/7/7-Test niemals aus Hobbyraum-/PR-Head starten. Erst nach regulärer Integration auf current `main`.
+- Kein Produktionsfehler auf aktuellem main; dies ist eine bekannte Testgrenze.
 
 ### B07 – Runtime-Pakete PPM/PSERC nicht gebunden / Env-Variablen fehlen
 - Historisch: `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` fehlten.
@@ -120,8 +136,9 @@
 - **SCOPE-PASS 05.09.:** aktiver Call-Graph bis 107007 enthält keine interne ED25519-/Signer-/Key-/`SIGNED`-Pflicht mehr; aktuelles gebundenes H8-Paket ist `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder.
 - Interne `HASH_BOUND`-Metadaten werden erst in `finalize_after_107008` in den externen `WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED`-Vertrag überführt.
 - Externer Production-Release-/ENDSTEMPEL-Weg bleibt signiert; der Host-Signer wird erst im 107008-Endzustand verlangt und bleibt für den Codex-Worker verboten.
-- `hardlock` + `hardlock-base` auf Head `7990029428399e8ba01d88a6543ce068812e9218`: **PASS**.
-- **Noch offen:** vollständiger M01–M33-Lauf auf exakt diesem Head; daher kein Hobbyraum-GESAMT-PASS und kein Live-PASS.
+- `hardlock` + `hardlock-base` auf Head `3ed31aa78978a2098f324eead6f2a5335a10e2d4`: **PASS**.
+- vorhandener M01–M33-Runner auf demselben Quellstand: **M01–M33 PASS + LAST_REGRESSION PASS + GESAMT PASS**.
+- **Noch offen:** echter Live-/7/7-Beweis erst nach regulärer Integration auf current `main`; Hobbyraum ist dafür gemäß B06 kein zulässiger Testort.
 
 ## C. Letzte real bewiesene positive Referenzen
 
