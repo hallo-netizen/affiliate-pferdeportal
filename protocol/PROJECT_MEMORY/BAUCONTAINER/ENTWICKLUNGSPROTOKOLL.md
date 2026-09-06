@@ -298,3 +298,53 @@ Externer Befund wurde gegen den aktuellen Campus und GitHub geprüft.
 
 Keine Produktionsdatei, kein TEXT-Hobbyraum-Code, kein PR-Head und kein main wurden durch diese Dokumentationskorrekturen verändert.
 
+## 2026-09-06 – TEXT / Paul-Technikaudit / B01-only Vor-Codex-Vorbereitung
+
+Auslöser:
+Nutzer übergab Pauls technischen End-to-End-Audit des bestehenden System-/Plugin-/Workflowtyps. Beispielartikel war nur Testdatensatz.
+
+Harte Scope-Grenze:
+- ausschließlich technische Ebene;
+- Architektur und Inhalte tabu;
+- keine Textmaschinen-/SEO-/Link-/Tabellen-/LanguageTool-/PPM-/PSERC-/PSTE-/Design-/Publish-Regeländerung;
+- kein neuer Runner/Workflow/Gate/Executor.
+
+Kritischer Gegencheck gegen bisherige Reparaturen:
+- viele frühere Handoff-/PASS-/Context-Fehler waren nicht wirkungslos; sie wurden live überwunden und legten jeweils den nächsten ersten Blocker frei;
+- Pauls Mehrwert liegt vor allem in bisher nicht systematisch geprüften technischen Artefakt-/Gate-Zustandskollisionen;
+- kein Sammelfix aus Pauls 41 Findings.
+
+Harter historischer Vergleich:
+- letzter echter 7/7+107008-PASS `de21f6…` und aktuelles System nutzen denselben Generation-1-Batch, Source-Snapshot, Source-Manifest und Production-Package;
+- Article-Type-Templates und Tabellenvertrag unverändert;
+- entscheidender technische Delta danach: echter PPM 6.7.9 wurde verpflichtend in 107007 ausgeführt/gebunden.
+
+B01-Kausaltrennung:
+- aus #140-Historie wurde der bereits vorhandene reine B01-Prefix direkt auf current main isoliert;
+- neuer Draft-PR #141 / Branch `hobbyroom/b01-only-kiss-20260906`;
+- Base `c8a96e7…`, Head `94917596…`;
+- 4 Commits / 4 Dateien;
+- keine B15-Änderung.
+
+GitHub-Belege #141:
+- hardlock PASS;
+- hardlock-base PASS;
+- MONOTONIC_PREBOUND_TRANSITION_PASS;
+- Cloud-Gate Positiv/Negativ PASS;
+- Production-Continuity Positiv/Negativ PASS;
+- bestehender Cloud-Gate verifiziert Root/State/Bundle sowie alle 107007-authorized-input-SHAs inkl. Handoff, PPM-ZIP und PSERC-ZIP.
+
+Ehrliche Testgrenze:
+- kein neuer kompletter M01–M33-Lauf exakt auf #141;
+- vorhandener M01–M33-PASS gilt für breiteren #140-Head `3ed31aa…`;
+- kein neuer/temporärer Workflow wurde gebaut.
+
+Dokumentation ergänzt:
+- `PAUL_PIPELINE_AUDIT_20260906.md`;
+- `PRE_CODEX_READINESS_20260906.md`;
+- `FIRST_CODEX_RUN_B01_20260906.md`;
+- CURRENT_STATE / HOBBYRAUM / autoritative Fehlerquelle auf #141 als bevorzugten ersten B01-Kausaltest nachgezogen;
+- #140 ausdrücklich als breiterer, nicht erster Live-Kandidat markiert.
+
+Kein Merge. Main unverändert. Kein Codex-/Live-Lauf gestartet.
+
