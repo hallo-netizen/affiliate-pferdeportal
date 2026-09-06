@@ -653,3 +653,29 @@ HARD TEST:
 
 STATUSGRENZE:
 Auf main weiterhin BLOCKED bis kontrollierte Aktivierung von Security-PR #137.
+
+## BAU-032 – Fehlerregister war Wegweiser, aber keine harte Vorsperre
+
+STATUS: CLOSED
+
+KURZ:
+Die Bürotür verwies bereits auf das Fehlerregister, zwang den Arbeitschat aber nicht vor **jeder technischen Aktion** zu einem frischen Abgleich gegen die autoritative Fehlerquelle.
+
+AUSWIRKUNG:
+Ein bereits dokumentierter Wiederholungsfehler/Testgrenzfall konnte erneut praktisch ausprobiert werden. Im TEXT-Fall wurde B06 erneut ausgelöst: Live-/7/7-Versuch aus Hobbyraum-/PR-Head trotz current-main-Pflicht.
+
+URSACHE:
+„Fehler finden können“ war architektonisch vorhanden; „vor jeder Aktion zwingend abgleichen“ fehlte.
+
+KISS-FIX:
+Harte Fehlerabgleich-Sperre direkt an der Bürotür:
+Fehlerregister → autoritative Fehlerquelle → Trefferprüfung → bei Treffer STOP und vorhandene Arbeitsgrenze übernehmen.
+
+REGRESSIONSSCHUTZ:
+- TEXT-Bürotür enthält die Sperre;
+- EINGANGSSTANDARD macht sie zum Bürostandard;
+- NEUES_PROJEKT_VORLAGE vererbt sie an künftige Projektbüros;
+- Campus-Eingang bleibt unverändert.
+
+BEZUG:
+ARCH-065.
