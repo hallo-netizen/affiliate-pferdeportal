@@ -209,3 +209,30 @@ Wenn dafür Core-Umbauten, zusätzliche Handoff-Felder oder breite PSERC/PPM/PST
 Die Extension-Schnittstelle löst noch nicht automatisch die Frage, wie die **exakten Produktidentitäten A/B und ihre geprüften Herstellerfakten** ohne neue gefährliche Payload-Schnittstelle in die bestehende Recherche-/Textproduktion gelangen.
 
 Genau diese Datenfrage ist der nächste Architekturprüfpunkt.
+
+
+## Büro-Zuständigkeit – Produktvergleich ↔ TEXT/SEO
+
+Fachliche Autorität bleibt im Büro PRODUKTVERGLEICH:
+- Definition der neuen Beitragsart `Produktvergleich`;
+- Abgrenzung zum bestehenden allgemeinen Beitragsart-Typ `Vergleich` (Produktgruppen-/Bauartenvergleich);
+- eigene Produktvergleichs-Textregeln;
+- Kategorien-/Kategorieebenen-Anforderung für Produktvergleiche;
+- Produktfindung und Pairing-Regeln;
+- Recherche-/Quellen-/Faktenregeln;
+- gewünschter Übergabevertrag;
+- Abnahmekriterien für die spätere technische Anbindung.
+
+TEXT/SEO ist nur technische Umsetzungsautorität für Änderungen innerhalb des bestehenden Text-/SEO-Produktionssystems:
+- Article-Type-Extension registrieren;
+- typbezogene Struktur-/Titel-/Textregeln technisch anbinden;
+- PPM/PSERC/PSTE-/Plan-Slot-/Kategorie-Bridge nur soweit zwingend nötig;
+- Regression beweisen: bestehende Typen unverändert.
+
+AFFILIATE bleibt technische Autorität für Kaufquellen/Produktkarten.
+
+Regel gegen Zuständigkeitskonflikte:
+**Fachanforderung wird im PRODUKTVERGLEICH definiert; betroffener Fremdbereich implementiert ausschließlich gegen diesen klaren Vertrag in seinem eigenen Büro.**
+Keine parallelen Writes desselben technischen Bereichs und keine Kopie fremder CURRENT_STATE-Wahrheit.
+
+Aktuell wird TEXT/SEO nicht verändert: dessen Hobbyraum ist mit einem anderen aktiven Reparaturauftrag gebunden und Textmaschinen-/Fachregeländerungen sind dort derzeit gesperrt.
