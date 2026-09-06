@@ -733,3 +733,27 @@ KISS:
 Keine Claude-Etage, kein eigener Status, keine Kopien. Nur absolute Links auf den offiziellen Campus-Branch.
 FALLBACK:
 Wenn auch HTTPS/Webzugriff fehlt, genau eine automatisch erzeugte READ-ONLY-Prüfkapsel; keine manuelle Sammlung vieler Dateien.
+
+
+## PV-PLAN-006 – Campus-Queraudit vor Architekturfestlegung
+
+STAND:
+2026-09-06.
+
+BEFUND:
+Historische Campus-Quellen wurden gezielt auf Integrationsmuster geprüft.
+
+- stabile Organisationsmuster: allgemeiner Kern + Projektkonfiguration + klare Fachgrenzen;
+- problematisch: Cross-Core-Hartverdrahtung neuer Fachlogik;
+- Journal/Wissen belegt diese Gefahr konkret;
+- additive Extension ist der reparierte Weg, aber weiterhin an PSTE + PSERC + PPM + signed Kategorie-/Plan-Slot-Verträge gekoppelt;
+- Extension erzeugt reale WordPress-Kategorien nicht selbst, sondern verlangt bereits vorhandene eindeutig auflösbare Terms;
+- Kategoriemodell ist ein eigener umfangreicher Workflow und für eine einzelne Produktvergleichs-Kategorie nicht automatisch die KISS-Lösung;
+- aktuelle TEXT-Fehlerhistorie zeigt Übergabe-/Kategorie-/Plan-Slot-/Context-Kopplungen als wiederkehrende Risikozone.
+
+FOLGE:
+Noch keine Endarchitektur einfrieren.
+Eigenständige Universal-Engine und additive TEXT-Extension werden anhand derselben festen KISS-/Fehlerrisiko-/Wartungs-/Allgemeingültigkeitskriterien verglichen.
+
+KORREKTUR:
+Ein stiller Bridge-Shortcut `Produktvergleich -> bestehender Vergleich` wird nicht bevorzugt. Produktvergleich benötigt eigene Text-/Fakten-/Quellenregeln.
