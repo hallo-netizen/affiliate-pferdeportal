@@ -774,3 +774,30 @@ Ungeklärter Zweck, ungeklärte Abhängigkeit oder ungeklärter historischer Feh
 TESTGRENZE:
 Regression-PASS ist kein Live-/7/7-PASS.
 
+
+
+## PV-PLAN-007 – Produktvergleichs-Beitragsbilder werden neutral und deterministisch selbst erzeugt
+
+STAND:
+2026-09-06 / VERBINDLICHER KONZEPTSTAND.
+
+WAS:
+Produktvergleich verwendet für Beitrags-/Teaserbilder keine manuell kopierten echten Produktfotos. Stattdessen wird pro Vergleich eine eigene neutrale Vergleichsgrafik automatisch erzeugt und über eine stabile `comparison_id` eindeutig gebunden.
+
+DESIGN-REFERENZ:
+Aus dem bestehenden Designplugin wird ausschließlich das technische Produktionsprinzip übernommen: zentraler Katalog, eigener Asset-Ordner, deterministische Zuordnung und Fail-closed bei fehlender/ungültiger Bindung. Die geprüfte Designquelle besitzt dafür 329 strukturgebundene Icon-Zuordnungen.
+
+NICHT ÜBERNEHMEN:
+Keine bestehenden Pferde-Icons, SVG-Geometrien, Motive oder inhaltlichen Zuordnungen werden kopiert.
+
+ECHTE PRODUKTBILDER:
+Bleiben ausschließlich Teil der vorgesehenen AFFILIATE-Produktdarstellung, sofern die jeweilige Affiliate-/Produktquelle ihre Nutzung trägt. Produktvergleich baut keinen zweiten fremden Produktbildbestand.
+
+FAIL-CLOSED:
+Falsche oder nur ähnliche Vergleichsgrafik ist verboten. Fehlt die korrekte Grafik, lieber kein Beitragsbild als eine falsche Zuordnung.
+
+ALLGEMEINGÜLTIGKEIT:
+Der Grafikgenerator soll als kleiner wiederverwendbarer Baustein mit Projekt-/Stilkonfiguration entwickelt werden; Pferde-Atelier ist nur die erste Konfiguration.
+
+WARUM:
+Weniger Copyright-Risiko, reproduzierbare Optik, automatische Skalierung auf viele Vergleiche, keine Abhängigkeit vom Fortbestand fremder Produktbilder und geringere Fehleranfälligkeit durch eindeutige Schlüsselbindung.
