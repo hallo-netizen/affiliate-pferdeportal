@@ -18,7 +18,7 @@ den aktuellen Auftrag und alle autoritativen Quellen lesen und ausschließlich i
 main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Workflow/Runner/Gate/Executor bauen oder Fach-/SEO-/Textmaschinenregeln verändern.
 
 **ALS NÄCHSTES …**  
-Keine weiteren Live-/7/7-Versuche aus dem Hobbyraum. Der Kandidat ist regressionsseitig geprüft. Nächster technischer Übergang ist ausschließlich die bewusste Integrationsentscheidung für PR #140; erst nach regulärer Übernahme auf `main` darf der bestehende produktive 7/7-Liveweg gestartet werden. Kein Merge ohne ausdrückliche Nutzerfreigabe.
+Solange Codex nicht verfügbar ist: ausschließlich READ-ONLY-Altlasten-/Abhängigkeits-Audit des aktiven technischen 107007/107008-Unterbaus gegen Fehlerhistorie, Zielvertrag und Schutzliste. Keine Produktionsreparatur auf Verdacht, kein neuer Runner/Workflow/Gate/Executor, kein Merge. Danach bleibt der nächste technische Übergang die bewusste Integrationsentscheidung für PR #140; erst nach regulärer Übernahme auf `main` darf der bestehende produktive 7/7-Liveweg gestartet werden.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
