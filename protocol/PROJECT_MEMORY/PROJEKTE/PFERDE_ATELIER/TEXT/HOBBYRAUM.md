@@ -107,3 +107,12 @@ Geprüft:
 Konsequenz:
 Bis zu einem neuen echten Live-Lauf keine weitere technische Bereinigung auf Verdacht in PR #140 aufnehmen.
 
+### 107008-/Abschlussweg-Audit 2026-09-06
+
+- Delivery/Recovery-Persistenz (`chat_delivery_payload.py` → `recovery_sources/<batch>`) entstand als Reaktion auf den realen B13-Endstempel/Auth-/Persistenzfehler nach dem belegten 7/7+107008-PASS. **BEHALTEN.**
+- Hostseitige PSERC-Signatur und GitHub-ENDSTEMPEL sind keine identische Doppelprüfung: Host signiert/verifiziert den fachlichen `workflow_release`; GitHub signiert später das persistierte 7-Artikel-Manifest. **BEHALTEN; externe Signiergrenze ist geschützt.**
+- PPM-/PSERC-Runtimepakete sind auch in 107008 hashgebunden, obwohl dort kein neuer PPM-Lauf stattfindet. Das ist ein möglicher Vereinfachungspunkt, kann aber zugleich die Identität desselben produktiven Standes absichern. **Keine belegte Störung / kein Rückbau.**
+- gzip/base64/Import-Envelope transportiert die bereits geprüften sieben Artikel und den hostseitig geprüften Release in die dauerhafte GitHub-Quelle; die Artikelbytes werden gegen Produktionsplan und Hashes gegengeprüft. **Kein belegter unnötiger Transportlayer.**
+
+**Audit-Ergebnis:** Außer B01 und der bereits ausgeführten B15-Signierbereinigung ist aktuell keine weitere aktive Altlast kausal oder sicher entfernbar belegt.
+
