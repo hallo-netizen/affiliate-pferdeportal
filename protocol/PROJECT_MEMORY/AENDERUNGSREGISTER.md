@@ -660,3 +660,40 @@ Kein allgemeines Kategoriemodul. Produktvergleich verwaltet nur seine eigene min
 
 SEO:
 optional zur Priorisierung/Keyword-/Dublettenprüfung; keine Pflichtabhängigkeit für Recherche oder Produktion.
+
+
+## PV-PLAN-004 – Journal/Wissen-Beleg öffnet die Extension-Option erneut
+
+STAND:
+2026-09-06 / Architekturentscheidung erneut geöffnet.
+
+ERSETZT ALS AKTUELL BEVORZUGTE ENTSCHEIDUNGSLOGIK:
+PV-PLAN-003 ist nicht verworfen, aber nicht mehr automatisch bevorzugt.
+
+NEUER BEFUND:
+Nach den damaligen Problemen mit Wissen/Journal wurde eine allgemeine additive Beitragsart-Erweiterung gebaut.
+PSERC 0.28.2 trennt Core-Release und Extension-Release allgemein.
+Journal wird signiert/versioniert als Erweiterung angebunden; die Textmaschine selbst bleibt unverändert.
+Ein zusätzlicher SyntheticProbe-Extension-Test wurde positiv dokumentiert.
+Aktuelle Snapshots belegen, dass Extension-Registry und signierte Extension-Manifeste weiterhin Teil von PPM 6.7.9 sind.
+
+KISS-FOLGERUNG:
+Nicht theoretisch zwischen Vollintegration und Vollkopie entscheiden.
+Zuerst ein winziger isolierter Machbarkeitstest:
+`Produktvergleich_TEST` ausschließlich über die vorhandene Extension-Tür.
+
+PASS-BEDINGUNGEN:
+- Core-Textmaschine unverändert;
+- 5-Felder-Handoff unverändert;
+- keine neue Workflow-/Runner-/Gate-/Signer-Architektur;
+- keine Änderung bestehender Beitragsarten;
+- bestehende Regressionen unverändert PASS;
+- Produktvergleich kann eigenen Titel-/Strukturvertrag besitzen;
+- keine externe Artikeltext-/HTML-/Fact-Pack-Einspeisung.
+
+ENTSCHEIDUNGSREGEL:
+Kleiner isolierter PASS → gemeinsame bestehende Textproduktion wird bevorzugte KISS-Variante.
+Core-Umbau / sechstes Feld / breite Kopplung nötig → Extension verwerfen und eigenständige Produktvergleichsstraße nach PV-PLAN-003 verwenden.
+
+OFFEN:
+Wie exakte Produktidentitäten A/B und belastbare Herstellerfakten die bestehende Research-Stufe erreichen, ohne die alte externe Fact-Pack-/Content-Grenze zu verletzen.
