@@ -351,3 +351,32 @@ Für jede konkrete Produktgruppe gilt als verbindlicher Konzeptstand:
     Variantenvergleich bleibt eigener Beitrag unter derselben Vergleichskategorie. Die optische Trennung erfolgt im Template, nicht durch noch tiefere WordPress-Kategorien.
 
 Zielbild: eine zentrale, shopartig nutzbare Vergleichswelt pro Produktgruppe, ohne die fachlichen Vergleichstypen technisch zu vermischen.
+
+
+## Gemeinsame Produktrecherche als Faktenbasis für Vergleich und Beratung – 2026-09-06
+
+Verbindlicher Konzeptstand:
+
+1. **Produktrecherche ist keine Beitragsart.**
+   Sie erzeugt belastbare, quellengebundene Produktfakten zu konkreten Produkten und Varianten.
+
+2. **Dieselbe Produktfaktenbasis darf mehrfach genutzt werden.**
+   Sie kann insbesondere Produktvergleich, Variantenvergleich und Beratungsbeiträge versorgen, damit Herstellerdaten nicht mehrfach unabhängig recherchiert werden müssen.
+
+3. **Beratung beantwortet Bedarfsfragen, nicht Modellfragen.**
+   Beispiel: `Welche Reitstiefel eignen sich für breite Waden?` Die Beratung darf aus verifizierten Produktmerkmalen passende konkrete Modelle als Beispiele bzw. passende Optionen ableiten. Ein konkretes Modell wird dadurch nicht selbst zur Beratungsart.
+
+4. **AFFILIATE bleibt Commerce-Schicht, nicht fachliche Eignungsautorität.**
+   AFFILIATE darf verfügbare Kaufangebote/Produktkarten zu bereits fachlich passend bestimmten Produkten liefern. Es soll nicht allein aus Händlerdaten entscheiden, welches Produkt für einen Bedarf wie `breite Waden` fachlich geeignet ist.
+
+5. **Saubere Aufgabenverteilung:**
+   - Produktrecherche: Was ist das Produkt, welche belastbaren Eigenschaften hat es?
+   - Beratung: Welche Eigenschaften/Produkte passen zu welchem Bedarf?
+   - Produktvergleich: Welche konkreten Konkurrenzprodukte unterscheiden sich für eine Kaufentscheidung wie?
+   - Variantenvergleich: Welche kaufrelevanten Ausführungen desselben Modells unterscheiden sich wie?
+   - Affiliate: Wo ist das exakt bestimmte Produkt aktuell kaufbar und wie wird es korrekt monetarisiert?
+
+6. **Mögliche Kopplung ohne Vermischung:**
+   Ein verifiziertes Bedarfsmerkmal wie `für breite Waden geeignet` darf als strukturierte fachliche Zuordnung aus Produktrecherche/Beratung an AFFILIATE weitergereicht werden. AFFILIATE materialisiert daraus nur passende aktuelle Kaufangebote; es erfindet die fachliche Eignung nicht selbst.
+
+Ziel: einmal sauber recherchieren, mehrfach nutzen; Fachentscheidung und Kaufquelle bleiben getrennt.
