@@ -77,3 +77,27 @@ Allgemeingültigkeit ist **Ziel**, aber noch nicht technisch bewiesen. Bis zum b
 Dieses Büro besitzt keine zweite Textmaschine.
 
 TEXT/STARTMASTER bleibt autoritativ für die eigentliche Artikel-/Textproduktion und deren technischen Produktionsweg.
+
+
+## Kaufquellen-/Affiliate-Anbindung – Planungsstand
+
+Der Produktvergleich selbst speichert **keine Händlerpreise, Verfügbarkeiten oder Affiliate-Links als dauerhafte Produktfakten**.
+
+Geplante Rollen:
+- PRODUKTVERGLEICH liefert die exakte Produktidentität der verglichenen Produkte, möglichst Hersteller + Modell + Variante + belastbare Kennung wie GTIN/EAN/MPN, soweit vorhanden;
+- TEXT erstellt den Artikel und bewahrt diese Produktidentitäten als strukturierte Artikel-Metadaten/Übergabedaten;
+- AFFILIATE bleibt alleinige Autorität für aktuelle Kaufangebote, Provider, Preis/Verfügbarkeit, Tracking, Disclosure und Produktkarten.
+
+Bestehender Affiliate-Beleg:
+Der kanonische Affiliate-Code besitzt bereits Artikelpläne für `post_bottom_products`, Qualitätsprüfung, Deduplizierung, bis zu drei Produktkarten, Tracking und Multi-Provider-Angebote. Für Produktvergleiche soll dieser Renderer wiederverwendet werden.
+
+Geplante minimale Erweiterung:
+Produktvergleichsartikel erhalten eine **explizite Exact-Product-Bindung** für Produkt A und Produkt B.
+Die Affiliate-Zentrale versucht zuerst exakt diese Identitäten zu materialisieren.
+Kein beliebiges ähnlich klingendes Ersatzprodukt darf an deren Stelle erscheinen.
+
+Wenn für ein verglichenes Produkt keine belastbare Kaufquelle vorhanden ist:
+- Artikel bleibt gültig;
+- keine falsche Produktkarte;
+- Kaufquelle für dieses Produkt wird ausgelassen bzw. als nicht verfügbar behandelt;
+- Recherchefakten und Artikelinhalt bleiben davon unberührt.
