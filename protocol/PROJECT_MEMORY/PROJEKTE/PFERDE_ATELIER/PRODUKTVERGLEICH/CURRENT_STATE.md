@@ -170,3 +170,42 @@ Ziel: maximal eine zwingende fachliche Laufzeitschnittstelle.
 1. **AFFILIATE** – Exact-Product-Kaufquellen über stabile Produktidentitäten.
 
 Alle anderen Aufgaben sollen innerhalb des Produktvergleichsmoduls liegen oder optional/offline angebunden werden.
+
+
+## Nachprüfung WISSEN/JOURNAL-Erweiterungsarchitektur – 2026-09-06
+
+Der frühere Journal-Umbau verändert die Architekturentscheidung wesentlich.
+
+Belegt:
+- Journal/Wissen verursachte im August reale Rootcause-Arbeit.
+- Danach wurde eine allgemeine additive Article-Type-Extension-Schnittstelle aufgebaut.
+- PSERC 0.28.2 dokumentiert ausdrücklich: bestehender Workflow und Textmaschine bleiben tabu; Journal darf nur additiv über eine signierte/versionierte Extension-Schnittstelle angebunden werden.
+- Core-Typen FAQ/Beratung/Vergleich/Pflege und Extension-Typen wurden nach einem Journal-bedingten Global-Gate-Fehler wieder allgemein getrennt.
+- Eine zusätzliche synthetische Beitragsart (`SyntheticProbe`) wurde als additive Extension positiv geprüft, ohne Core-Support zu verändern.
+- Aktuelle Metadaten-Snapshots führen weiterhin `article-type-extension-registry.php`, ein signiertes `article-type-extension-manifest-v1` und einen separaten Journal-Release.
+- Journal wird aktuell extern als `Journal` geführt und intern über die bestehende Legacy-Art `Wissen` gebridged.
+- Der produktive Übergabevertrag bleibt exakt fünf Felder breit: title, target_keyword, category, article_type, plan_slot. Die Textmaschine bleibt alleinige Content-/Format-Autorität.
+
+### Konsequenz für Produktvergleich
+
+Die Aussage aus PV-PLAN-003, eine STARTMASTER/TEXT-Laufzeitkopplung grundsätzlich zu vermeiden, ist nach diesem neuen Beleg **nicht mehr als bevorzugte Endentscheidung belastbar**.
+
+Neuer Stand:
+**ARCHITEKTURWEG OFFEN – EXTENSION-FIRST-FEASIBILITY-TEST.**
+
+Zu prüfen ist zuerst, ob `Produktvergleich` als vollständig additive Beitragsart über die vorhandene Extension-Tür aufgenommen werden kann:
+- keine Änderung der Core-Textmaschine;
+- keine Erweiterung des 5-Felder-Handoffs;
+- keine Änderung bestehender Typen;
+- keine neue Runner-/Gate-/Signer-Architektur;
+- idealerweise Bridge auf vorhandene interne Vergleichsstruktur, falls fachlich passend;
+- bestehende FAQ/Beratung/Vergleich/Pflege/Journal müssen byte-/verhaltensgleich bleiben.
+
+Nur wenn dieser Test klein und isoliert PASS ist, wird die gemeinsame Textproduktion wieder bevorzugt.
+Wenn dafür Core-Umbauten, zusätzliche Handoff-Felder oder breite PSERC/PPM/PSTE-Eingriffe nötig werden, fällt die Entscheidung zurück auf die eigenständige Produktvergleichsstraße.
+
+### Noch offene Kernfrage
+
+Die Extension-Schnittstelle löst noch nicht automatisch die Frage, wie die **exakten Produktidentitäten A/B und ihre geprüften Herstellerfakten** ohne neue gefährliche Payload-Schnittstelle in die bestehende Recherche-/Textproduktion gelangen.
+
+Genau diese Datenfrage ist der nächste Architekturprüfpunkt.
