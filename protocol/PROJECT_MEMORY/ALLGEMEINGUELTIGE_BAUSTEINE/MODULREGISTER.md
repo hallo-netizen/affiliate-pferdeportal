@@ -249,9 +249,10 @@ Projektunabhängige Engine für:
 - strukturiertes Faktendossier als Übergabe an ein Text-/Publishing-System.
 
 GEPLANTE GRENZE:
-Keine zweite vollständige Text-/SEO-Maschine.
-Die Engine liefert Fach-/Faktengrundlage; das jeweilige Projekt kann eine vorhandene Textproduktion anbinden.
-Aktuelle Kaufquellen/Preise/Verfügbarkeit gehören nicht zum Faktenkern; dafür wird optional ein bestehendes Affiliate-/Commerce-System über eindeutige Produktidentitäten angebunden.
+Kein Klon eines kompletten bestehenden Produktions-/Workflow-Stacks.
+Das Modul soll in V1 selbst eine kleine vollständige Produktvergleichsstraße bis zum WordPress-DRAFT besitzen, einschließlich eigenem schlanken Writer und produktspezifischer Qualitätsprüfung.
+Vorhandene Textsysteme dürfen nur als Regel-/Verhaltensreferenz oder über technisch wirklich isolierbare kleine Bausteine wiederverwendet werden; keine Laufzeitkopplung an STARTMASTER.
+Aktuelle Kaufquellen/Preise/Verfügbarkeit gehören nicht zum Faktenkern; dafür wird die bestehende Affiliate-Zentrale über eindeutige Produktidentitäten angebunden.
 
 ERSTE PROJEKTANWENDUNG:
 PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
@@ -267,6 +268,8 @@ OFFEN:
 - Daten-/Dossiervertrag;
 - Kategorienlogik;
 - Rechercheadapter/Quellenstrategie;
-- Übergabeschnittstelle zu TEXT;
+- minimaler Product-Compare-Writer und dessen Regeln;
+- eigene minimale Kategorie-Konfiguration;
 - Exact-Product-Schnittstelle zur vorhandenen Affiliate-Zentrale;
+- optionale SEO-Priorisierung ohne Pflichtkopplung;
 - technischer Allgemeingültigkeitstest.
