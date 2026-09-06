@@ -619,3 +619,44 @@ Exact Match zuerst; kein belastbarer Exact Match = keine Karte für dieses Produ
 FAIL-SOFT:
 Fehlende Kaufquelle blockiert den fachlich korrekten Artikel nicht.
 Sie darf nur die kommerzielle Ausgabe reduzieren, niemals Fakten oder Fazit verändern.
+
+
+## PV-PLAN-003 – STARTMASTER nicht anbinden; eigenständige vertikale Produktvergleichsstraße
+
+STAND:
+2026-09-06 / revidierte bevorzugte Architektur nach erneuter Prüfung des realen Text-/SEO-Gesamtworkflows.
+
+ERSETZT ALS BEVORZUGTE V1-RICHTUNG:
+PV-PLAN-001, soweit dort eine Laufzeitübergabe des Produktvergleichsdossiers an die bestehende TEXT-/SEO-Produktion vorgesehen war.
+PV-PLAN-001 bleibt als dokumentierte frühere Planungsvariante erhalten.
+
+BEFUND:
+Der heutige Textproduktionsweg ist stark gebunden und fehlerempfindlich. Die nominelle Textmaschine ist nur ein Teil einer Kette aus SEO-Metadaten, Plan-Slot-Bindung, Fachworkflow, Research/Fact-Pack, PPM 6.7.9, PSERC, PSTE, Duplicate-/Cannibalization-, SEO-, Design-, Signer-/Release- und Publish-Safety-Schritten.
+Die aktuelle offizielle SEO→Text-Schnittstelle ist bewusst exakt fünf Felder breit. Produktvergleichsdossiers dort einzuschleusen würde die bestehende Architekturgrenze erneut verletzen oder eine neue Artikeltyp-/Plan-Slot-Erweiterung erzwingen.
+
+KISS-ENTSCHEIDUNG:
+Produktvergleich als eigenständige vertikale Straße entwickeln:
+Discovery → Pair Validation → Research → Dossier → Product-Compare-Writer → Qualitätsprüfung → WordPress-DRAFT.
+
+STARTMASTER/TEXT:
+keine Laufzeit-Abhängigkeit in V1.
+
+WIEDERVERWENDUNG:
+Nur bewährte Schreib-/Struktur-/Formatregeln bzw. technisch wirklich isolierbare kleine Writer-Bestandteile übernehmen.
+Kein Klon des kompletten STARTMASTER-/PSERC-/PPM-/PSTE-Stacks.
+
+WARUM:
+- isoliert reparierbar;
+- keine Synchronisationspflicht mit einem noch instabilen System;
+- keine Plan-Slot-/Signer-/Gate-Kette als Voraussetzung;
+- Produktvergleich kann unabhängig getestet und versioniert werden;
+- spätere Integration bleibt möglich, wenn beide Systeme stabil sind.
+
+EINZIGE ZWINGENDE EXTERNE V1-SCHNITTSTELLE:
+AFFILIATE Exact-Product-Auflösung über stabile Produktidentitäten in WordPress-Post-Metadaten.
+
+KATEGORIEN:
+Kein allgemeines Kategoriemodul. Produktvergleich verwaltet nur seine eigene minimale, projektkonfigurierbare Kategoriezuordnung.
+
+SEO:
+optional zur Priorisierung/Keyword-/Dublettenprüfung; keine Pflichtabhängigkeit für Recherche oder Produktion.
