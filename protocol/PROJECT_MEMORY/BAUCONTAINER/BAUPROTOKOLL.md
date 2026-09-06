@@ -1057,6 +1057,13 @@ Bekannter Treffer = nicht erneut praktisch ausprobieren. Vorhandene Lösung/Arbe
 NICHT VERÄNDERT:
 Campus-Eingang und Campus-Routing.
 
+ABNAHME POSITIV/NEGATIV:
+- TEXT-Bürotür enthält Fehlerabgleich-Sperre + STOP bei Treffer → PASS;
+- EINGANGSSTANDARD enthält die Regel ausschließlich als Bürotür-Regel → PASS;
+- NEUES_PROJEKT_VORLAGE vererbt die Pflicht → PASS;
+- Campus-`START_HERE.md` enthält die neue Bürotür-Sperre **nicht** → NEGATIV-PASS;
+- Campus-Dokumentationshead nach Nachholung: `hardlock-base` SUCCESS.
+
 BEZUG:
 ARCH-065 / BAU-032.
 
