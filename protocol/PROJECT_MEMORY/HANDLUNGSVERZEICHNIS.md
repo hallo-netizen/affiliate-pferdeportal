@@ -171,3 +171,21 @@ Harte Grenze:
 Auch nicht als Ersatzroute bei BLOCKED.
 
 Nach Restore erst frischen offiziellen Arbeits-Worktree herstellen und dann den normalen definierten Arbeitsweg neu starten.
+
+
+## Produktvergleich planen / vorbereiten
+
+Aktion:
+Produktvergleich definieren, Vergleichseigenschaften festlegen, harte Fakten/Quellen recherchieren oder ein Faktendossier für die spätere Artikelproduktion vorbereiten.
+
+Verbindlicher Weg:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
+→ `CURRENT_STATE.md`
+→ `HOBBYRAUM.md`
+→ gebundene Originalquellen.
+
+Fachgrenze:
+Das Büro PRODUKTVERGLEICH bereitet Vergleich und Faktengrundlage vor.
+Die eigentliche Artikel-/Textproduktion bleibt im Büro TEXT und dessen bestehendem Produktionsweg.
+
+Keinen zweiten Textmaschinen-/STARTMASTER-Weg im Produktvergleichsbüro bauen.

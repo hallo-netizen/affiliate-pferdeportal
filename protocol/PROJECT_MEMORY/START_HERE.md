@@ -28,6 +28,7 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 - `Geh auf den Campus.`
 - `Geh ins Pferde-Atelier.`
 - `Geh ins Pferde-Atelier, Büro TEXT/SEO.`
+- `Geh ins Pferde-Atelier, Büro PRODUKTVERGLEICH.`
 - `Geh in den Campus, Bürogebäude Pferde-Atelier, TEXT/SEO. Dort findest du alles für unsere Arbeit.`
 
 Der Nutzer muss keine Dateipfade oder Fachbegriffe auswendig kennen.

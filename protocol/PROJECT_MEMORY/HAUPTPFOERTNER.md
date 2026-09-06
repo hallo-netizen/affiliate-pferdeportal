@@ -38,6 +38,7 @@ Jede klare natürliche Formulierung wie:
 - „geh auf den Campus“
 - „geh ins Pferde-Atelier“
 - „geh ins Pferde-Atelier TEXT/SEO“
+- „geh ins Pferde-Atelier PRODUKTVERGLEICH“
 - „Campus → Pferde-Atelier → TEXT/SEO“
 - „Pferde-Atelier → TEXT → Hobbyraum“
 
@@ -131,3 +132,15 @@ Für normale Fach- oder Technikarbeit ist `TRESOR/` bzw. `ARCHIV/` **niemals ein
 Dorthin wird nur geroutet für Backup/Inventarisierung, historische Belegsuche oder ausdrücklich eingetretenen Katastrophen-/Restorefall.
 
 Ein lokaler Mirror ist kein Ersatz für den aktuellen gebundenen Arbeitsweg.
+
+
+## Produktvergleich – eindeutiges Routing
+
+Wenn der Nutzer Produktvergleiche planen, Vergleichskriterien festlegen, konkrete Vergleiche definieren oder Faktendossiers/Quellen für Produktvergleiche vorbereiten will:
+
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
+
+Wenn der Auftrag dagegen die eigentliche Textproduktion oder den STARTMASTER-/Textmaschinenlauf betrifft:
+`PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md`
+
+Nicht vermischen.

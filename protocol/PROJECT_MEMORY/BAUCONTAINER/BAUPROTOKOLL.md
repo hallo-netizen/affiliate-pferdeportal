@@ -970,3 +970,39 @@ Produktive Aktivierung auf main bleibt bis Admin-Aktivierung von PR #137 BLOCKED
 
 BEZUG:
 ARCH-063; BAU-031.
+
+
+### 2026-09-06 – Büro PRODUKTVERGLEICH eingerichtet
+
+AUFTRAG:
+Neues Büro „Produktvergleich“ im Pferde-Atelier mit Campus-/Gebäudeverweisen einrichten.
+
+KISS-UMSETZUNG:
+- neues Verzeichnis `PRODUKTVERGLEICH/`;
+- `START_HERE.md`;
+- `CURRENT_STATE.md`;
+- genau ein `HOBBYRAUM.md`;
+- Campus-START_HERE um natürliche Route ergänzt;
+- Hauptpförtner um eindeutiges Produktvergleich-vs-TEXT-Routing ergänzt;
+- Pferde-Atelier-Büroplan ergänzt;
+- Handlungsverzeichnis ergänzt;
+- keine neue Fehlerliste, kein neuer Zielvertrag, kein neuer Runner.
+
+FACHGRENZE:
+Produktvergleich bereitet Vergleichsdefinition, Vergleichseigenschaften, Faktendossier und Quellenbindung vor.
+TEXT bleibt alleinige eigentliche Text-/STARTMASTER-Produktion.
+
+DYNAMISCHE WAHRHEIT:
+Neuer Hobbyraum = FREI.
+Keine frühere Produktvergleichsarbeit aus Erinnerung zu CURRENT erklärt.
+
+ABNAHME:
+nach Commit:
+- 7/7 Pferde-Atelier-Büros müssen `START_HERE + CURRENT_STATE + HOBBYRAUM` besitzen;
+- neues Verzeichnis muss 1-Klick-Eingang besitzen;
+- Campus/Pförtner/Gebäude/Handlungsverzeichnis müssen auf das Büro routen;
+- Produktvergleichs-START_HERE darf keine dynamische Arbeitsbindung duplizieren;
+- beide bestehenden Campus-Hardlocks müssen PASS sein.
+
+BEZUG:
+ARCH-064.

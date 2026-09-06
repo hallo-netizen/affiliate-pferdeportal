@@ -531,3 +531,17 @@ GITHUB:
 Security-Head `d9bb690f677a34d09540338ca2a4c32494b42079`; `Paul automatic cloud-entry bridge CI` SUCCESS; `Paul current-Campus positive-negative CI` SUCCESS; gesamter `hardlock` SUCCESS.
 GRENZE:
 Auf `main` weiterhin nicht produktiv aktiv, bis Security-PR #137 kontrolliert aktiviert ist.
+
+
+## ARCH-064 – Eigenes Büro PRODUKTVERGLEICH
+WAS:
+Das Pferde-Atelier erhält ein siebtes Fachbüro `PRODUKTVERGLEICH/` mit `START_HERE.md`, `CURRENT_STATE.md` und genau einem `HOBBYRAUM.md`.
+WARUM:
+Produktvergleichs-Konzept, konkrete Vergleichsdefinition, Vergleichseigenschaften, harte Faktengrundlagen und Quellenbindung sind ein eigener wiederkehrender Fachbereich. Diese Arbeit soll auffindbar bleiben, ohne den aktuellen TEXT-/STARTMASTER-Produktionsstand oder andere Büros zu vermischen.
+FACHGRENZE:
+PRODUKTVERGLEICH = Vergleichsdefinition/Faktendossier/Quellenbindung/Übergabe.
+TEXT = eigentliche Textproduktion und technische Textmaschine.
+EINE WAHRHEIT:
+Das neue Büro führt keine zweite Textmaschine, Fehlerliste oder Zielwahrheit.
+STARTSTATUS:
+HOBBYRAUM FREI; frühere Produktvergleichsarbeit wird nicht aus Erinnerung als CURRENT übernommen.
