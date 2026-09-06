@@ -189,3 +189,21 @@ Das Büro PRODUKTVERGLEICH bereitet Vergleich und Faktengrundlage vor.
 Die eigentliche Artikel-/Textproduktion bleibt im Büro TEXT und dessen bestehendem Produktionsweg.
 
 Keinen zweiten Textmaschinen-/STARTMASTER-Weg im Produktvergleichsbüro bauen.
+
+
+## Externe READ-ONLY-Prüfung über Paul
+
+Aktion:
+Ein externer Prüfer (z. B. Claude) soll Paul/TEXT/SEO nur lesen und prüfen, besitzt aber keine Git-/Repo-Werkzeuge.
+
+Verbindlicher Weg:
+`PAUL/READ_ONLY_REVIEW.md`
+
+Dort:
+- absolute öffentliche GitHub-/Raw-Links;
+- ausschließlich offizieller Campus-Branch;
+- keine Kopie aktueller Fachwahrheit;
+- READ/REVIEW ONLY.
+
+Wenn die externe Umgebung auch öffentliche HTTPS-Links nicht öffnen kann:
+STOPP → eine einzige automatisch erzeugte Prüfkapsel verwenden; keine manuelle Mehrdatei-Übergabe.

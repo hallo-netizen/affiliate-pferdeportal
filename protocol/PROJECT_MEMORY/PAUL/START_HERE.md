@@ -162,3 +162,12 @@ Keine behauptete Live-Synchronisation Sekunde für Sekunde.
 
 Die gültige Garantie ist:
 **Paul kann nach Aktivierung der Security-Schicht nicht gültig auf einem veralteten relevanten Campusstand abschließen.**
+
+
+## Externer READ-ONLY-Prüfer
+
+Externe Prüfer ohne Git-/Repo-Toolzugriff verwenden ausschließlich:
+
+`protocol/PROJECT_MEMORY/PAUL/READ_ONLY_REVIEW.md`
+
+Diese Außentür enthält nur absolute Weblinks auf den offiziellen Campus und keine zweite Statuswahrheit.

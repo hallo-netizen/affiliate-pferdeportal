@@ -1067,3 +1067,26 @@ ABNAHME POSITIV/NEGATIV:
 BEZUG:
 ARCH-065 / BAU-032.
 
+
+
+### 2026-09-06 – Externe READ-ONLY-Außentür für Paul
+
+AUSLÖSER:
+Claude meldete, dass seine aktuelle Umgebung keine Git-/Repository-Werkzeuge besitzt und daher `PAUL/TEXT_SEO/START_HERE.md` nicht direkt erreichen könne.
+
+BEFUND:
+Die Paul-Etage selbst ist korrekt. Das Problem ist die Zugriffsschicht der externen Chatumgebung, nicht die Campusstruktur.
+
+KISS-LÖSUNG:
+- keine neue Claude-Etage;
+- `PAUL/READ_ONLY_REVIEW.md` als eine Außentür;
+- nur absolute GitHub-Web-/Raw-Links auf den offiziellen Campus-Branch;
+- READ/REVIEW ONLY;
+- keine Fach-/Statuskopien;
+- bei komplett fehlendem Webzugriff genau eine automatisch erzeugte Prüfkapsel als Fallback.
+
+NEGATIV:
+Kein Schreibrecht, kein Merge, kein neuer Paul-Auftrag, keine zweite Wahrheit.
+
+BEZUG:
+ARCH-065.

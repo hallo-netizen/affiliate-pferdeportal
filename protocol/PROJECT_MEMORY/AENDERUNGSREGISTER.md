@@ -722,3 +722,14 @@ AFFILIATE implementiert nur seine Kaufquellen-Schnittstelle.
 
 AKTUELL:
 Keine TEXT/SEO-Änderung aus diesem Planungschat. Der aktuelle TEXT-Hobbyraum ist anderweitig gebunden und sperrt Fach-/Textmaschinenregeländerungen.
+
+
+## ARCH-065 – Externe Prüfer bekommen eine READ-ONLY-Außentür
+WAS:
+`PAUL/READ_ONLY_REVIEW.md` stellt externen Prüfern ohne Git-Werkzeuge einen einzigen öffentlichen Einstieg bereit.
+WARUM:
+Ein externer Chat kann die Campus-/Paul-Architektur nur nutzen, wenn seine Umgebung das Repository tatsächlich lesen kann. Viele Chatumgebungen besitzen keine Git-Tools, können aber öffentliche HTTPS-Links öffnen.
+KISS:
+Keine Claude-Etage, kein eigener Status, keine Kopien. Nur absolute Links auf den offiziellen Campus-Branch.
+FALLBACK:
+Wenn auch HTTPS/Webzugriff fehlt, genau eine automatisch erzeugte READ-ONLY-Prüfkapsel; keine manuelle Sammlung vieler Dateien.
