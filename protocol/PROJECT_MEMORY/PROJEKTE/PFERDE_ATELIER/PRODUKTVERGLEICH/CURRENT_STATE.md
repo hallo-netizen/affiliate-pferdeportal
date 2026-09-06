@@ -310,3 +310,44 @@ Für Produktvergleichsartikel gilt als verbindlicher Konzeptstand:
    Der Grafikgenerator soll nach Möglichkeit als kleiner allgemeingültiger Baustein konzipiert werden. Pferde-Atelier liefert nur Stil-/Projektkonfiguration; der Kern darf nicht auf Pferdeprodukte fest verdrahtet sein.
 
 Ziel: copyright-arm, reproduzierbar, einheitlich, automatisierbar und unabhängig von der Lebensdauer fremder Produktbilder.
+
+
+## Eingefrorenes Vergleichs-Kategorie-/Archivkonzept – 2026-09-06
+
+Für jede konkrete Produktgruppe gilt als verbindlicher Konzeptstand:
+
+1. **Nur eine sichtbare Vergleichskategorie.**
+   Beispiel: `Reitstiefel -> Vergleich`, `Pferdeanhänger -> Vergleich`.
+
+2. **Drei fachlich getrennte Vergleichstypen leben unter diesem einen Dach:**
+   - Produktgruppenvergleich;
+   - Produktvergleich;
+   - Variantenvergleich.
+   Jeder einzelne Vergleich ist ein eigener WordPress-Beitrag.
+
+3. **Technisch bleiben die Typen strikt unterscheidbar.**
+   Gemeinsame Kategorie bedeutet keine gemeinsame Text-/Faktenlogik. Der Beitrag trägt einen eindeutigen Vergleichstyp, sodass Darstellung, Textregeln, Suche, Verlinkung und Monetarisierung getrennt steuerbar bleiben.
+
+4. **Eigenes universelles Vergleichs-Archivtemplate.**
+   Die normale WordPress-Kategorieausgabe wird für diese Vergleichskategorien durch eine eigens definierte Vergleichsdarstellung ersetzt.
+
+5. **Prominente Hauptfilter oben:**
+   `Alle | Produktgruppenvergleiche | Produktvergleiche`.
+   Variantenvergleiche gehören zur konkreten Produktentscheidungswelt und werden innerhalb der Produktvergleichsansicht klar als `Variantenvergleich` gekennzeichnet bzw. über einen zusätzlichen Unterfilter `Produkte | Varianten` erreichbar gemacht.
+
+6. **Produktnavigation nur aus real vorhandenen Vergleichsinhalten.**
+   Seitlich auf Desktop werden nur konkrete Produkte aufgeführt, zu denen mindestens ein Produkt- oder Variantenvergleich vorhanden ist. Bei vielen Produkten: `Weitere anzeigen` und/oder ein eigenes AJAX-Produktsuchfeld.
+
+7. **Produktsuche durchsucht beide konkreten Welten.**
+   Suche nach einem Produkt liefert sowohl Produktvergleiche als auch Variantenvergleiche, in denen dieses Produkt vorkommt. Treffer werden sichtbar nach Typ gekennzeichnet.
+
+8. **Mobil andere Navigation statt Sidebar-Zwang.**
+   Desktop darf eine Shop-artige Produktnavigation links oder rechts erhalten. Mobil wird diese nicht als lange Seitenleiste übernommen, sondern kompakt über Suchfeld und aufklappbare Produktliste/Drawer zugänglich gemacht.
+
+9. **Verlinkungs-Hardrule Produkt <-> Variante.**
+   Existiert zu einem Produkt in einem Produktvergleich ein passender Variantenvergleich, muss der Produktvergleich im Text ausdrücklich darauf hinweisen und intern darauf verlinken. Der Variantenvergleich verlinkt zurück auf den passenden Produktvergleich, sofern vorhanden.
+
+10. **Keine zusätzliche Varianten-Kategorieebene.**
+    Variantenvergleich bleibt eigener Beitrag unter derselben Vergleichskategorie. Die optische Trennung erfolgt im Template, nicht durch noch tiefere WordPress-Kategorien.
+
+Zielbild: eine zentrale, shopartig nutzbare Vergleichswelt pro Produktgruppe, ohne die fachlichen Vergleichstypen technisch zu vermischen.
