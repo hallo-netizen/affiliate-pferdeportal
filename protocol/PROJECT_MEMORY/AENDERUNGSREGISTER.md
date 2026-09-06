@@ -564,3 +564,32 @@ UMSETZUNG:
 - `BAUCONTAINER/EINGANGSSTANDARD.md`;
 - `BAUCONTAINER/NEUES_PROJEKT_VORLAGE.md`.
 
+
+
+## PV-PLAN-001 – Eigenes Produktvergleichs-Fachmodul, aber keine zweite Textmaschine
+
+STAND:
+2026-09-06 / reversible Planungsentscheidung.
+
+WAS:
+Produktvergleiche werden als eigener fachlicher Workflow entwickelt:
+Vergleichsauswahl → Vergleichsebene → Merkmale → Recherche → Herstellerfakten → Quellen → Lücken/Konflikte → fachliches neutrales Vergleichsergebnis → strukturiertes Dossier.
+
+Danach übernimmt die bestehende TEXT-/SEO-Maschine die eigentliche Artikelproduktion.
+
+WARUM:
+Die bereitgestellten Produktvergleichs-Arbeitsstände besitzen bereits eine saubere Daten-/Recherchetrennung und einen expliziten Übergabevertrag zur Textproduktion. Ein zweites vollständiges TEXT-/SEO-System würde Recherche-, SEO-, Qualitäts-, WordPress- und Produktionslogik doppeln und damit zusätzliche Fehler- und Synchronisationsquellen erzeugen.
+
+WICHTIGER ZUSATZ:
+Dass die Produktvergleichskategorien noch neu entstehen, ändert diese Entscheidung nicht. Kategorien und Vergleichslogik dürfen im Produktvergleichsmodul frisch und eigenständig entwickelt werden; nur die bereits vorhandene allgemeine Text-/SEO-Produktionsfunktion wird nicht dupliziert.
+
+ALLGEMEINGÜLTIGKEIT:
+Der geplante Kern muss projektunabhängig sein. Pferde-Atelier wird erste Konfiguration/Profil, nicht Bestandteil des Kerncodes.
+Technische Allgemeingültigkeit ist noch nicht bewiesen und bleibt bis zum Prototyp UNGEKLÄRT.
+
+VERWORFENE VARIANTE V0:
+Zweites komplettes Produktvergleichs-Text-/SEO-System parallel zu STARTMASTER.
+Nicht grundsätzlich unmöglich, aber aktuell schlechteres Verhältnis von zusätzlicher Komplexität zu Nutzen.
+
+REVISIONSREGEL:
+Wenn die spätere Schnittstellenanalyse zeigt, dass TEXT wesentliche Produktvergleichsanforderungen nicht ohne invasive Sonderlogik aufnehmen kann, darf diese Entscheidung neu geprüft werden.
