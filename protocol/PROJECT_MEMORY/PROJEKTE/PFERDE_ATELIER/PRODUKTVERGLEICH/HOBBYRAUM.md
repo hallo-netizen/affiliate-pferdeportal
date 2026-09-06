@@ -18,7 +18,7 @@ die bereitgestellten Produktvergleichs-Unterlagen auswerten, das allgemeingülti
 jetzt bereits eine zweite Textmaschine bauen, bestehende TEXT-/SEO-Regeln eigenmächtig duplizieren, Produktfakten erfinden oder Allgemeingültigkeit ohne technischen Beleg als PASS erklären.
 
 **ALS NÄCHSTES …**  
-die minimale V1-Gesamtstraße definieren: **Was muss das Produktvergleichsmodul selbst erledigen, damit STARTMASTER/TEXT gar nicht gekoppelt werden muss und nur AFFILIATE eine kleine stabile Schnittstelle benötigt?**
+einen isolierten **Extension-Feasibility-Test** spezifizieren: Kann `Produktvergleich` über die vorhandene additive Beitragsart-Tür aufgenommen werden, ohne Core-Textmaschine, 5-Felder-Handoff oder bestehende Typen zu verändern?
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -34,7 +34,7 @@ Auftrag:
 Allgemeingültiges Produktvergleichsmodul konzipieren, mit Pferde-Atelier als erster Projektkonfiguration.
 
 Aktuelle Architekturhypothese:
-**eigenständige Produktvergleichsstraße → WordPress-DRAFT → bestehende AFFILIATE-Zentrale nur für Kaufquellen. STARTMASTER/TEXT ist keine Laufzeit-Abhängigkeit.**
+**ENTSCHEIDUNG OFFEN:** zuerst additive `Produktvergleich`-Extension prüfen. Nur bei kleinem, isoliertem PASS gemeinsame Textproduktion nutzen; sonst eigenständige Produktvergleichsstraße.
 
 Noch NICHT bauen:
 - zweite SEO-Engine;
@@ -44,16 +44,14 @@ Noch NICHT bauen:
 
 ## NEXT ACTION
 
-1. V1-Funktionsumfang des Produktvergleichsmoduls festlegen.
-2. universelles Daten-/Dossierformat definieren.
-3. Pferde-spezifische Konfiguration davon trennen.
-4. Kategorien-/Vergleichstypen-Logik für Produktvergleiche definieren.
-5. minimalen Product-Compare-Writer festlegen; prüfen, welche bewährten Textmaschinen-Regeln ohne Runtime-Kopplung übernommen werden.
-6. minimale eigene Kategorie-Konfiguration/Einrichtung definieren; allgemeines Kategoriemodul nicht verwenden.
-7. minimale Exact-Product-Schnittstelle zur bestehenden AFFILIATE-Zentrale festlegen.
-8. festlegen, wie Produkt A/B im WordPress-Draft als strukturierte Identität erhalten bleiben.
-9. SEO nur als optionale Priorisierungs-/Prüfhilfe definieren, nicht als Pflichtabhängigkeit.
-10. erst danach Plugin-Prototyp bauen.
+1. vorhandene Journal/Wissen-Extension-Grenze als Referenz festhalten.
+2. minimalen Testvertrag für eine neue `Produktvergleich_TEST`-Extension definieren.
+3. prüfen, ob sie ohne Core-Textmaschinenänderung und ohne sechstes Handoff-Feld registriert werden kann.
+4. prüfen, ob vorhandene interne `Vergleich`-Struktur als Bridge fachlich genügt oder eine eigene Extension-Struktur nötig ist.
+5. Positiv/Negativ-Regressionsvertrag festlegen: bestehende FAQ/Beratung/Vergleich/Pflege/Journal unverändert.
+6. separat klären, wie Produkt A/B und Herstellerfakten sicher in die Research-Stufe gelangen können, ohne externen Content-/Fact-Pack-Payload.
+7. danach KISS-Entscheidung treffen: additive Extension ODER eigenständige Straße.
+8. erst danach V1-Plugin-/Kategorie-/Affiliate-Schnittstelle finalisieren.
 
 ## Globale Arbeitsort-Sperre
 
