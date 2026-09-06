@@ -17,7 +17,7 @@ Für Details immer die genannte Originalquelle öffnen.
 ## TEXT-M01-M33
 
 Bereich: TEXT  
-Status: AKTIV / Regression
+Status: REGRESSION-SUITE AKTIV / letzter dokumentierter Gesamtlauf 06.09.2026 PASS / kein Live-PASS
 
 Autoritative Fehlerquelle:
 `control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
