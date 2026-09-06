@@ -33,18 +33,29 @@ Diese Werte wurden am 2026-09-06 direkt mit GitHub abgeglichen.
 
 ## Aktueller technischer Hobbyraum-Kandidat
 
-Draft-PR #140:
-`hobbyroom/b01-semantic-category-seed`
+**Bevorzugter kausaler B01-Kandidat: Draft-PR #141**
 
-Aktueller Head:
-`3ed31aa78978a2098f324eead6f2a5335a10e2d4`
+Branch:
+`hobbyroom/b01-only-kiss-20260906`
 
-Belegter Prüfstand auf diesem Quellstand:
-- vorhandener M01–M33-Runner: **M01 bis M33 PASS**;
-- Runner-Schluss: `LAST_REGRESSION PASS` + `GESAMT PASS`;
+Head:
+`94917596adce04765380c60dd7ade0fb23793393`
+
+Scope:
+- ausschließlich B01;
+- 4 Commits / 4 Dateien;
+- keine B15-Signierbereinigung;
+- keine Fach-/Inhalts-/Textmaschinen-/SEO-/Link-/Tabellen-/LanguageTool-/PPM-/PSERC-/PSTE-/Design-/Publish-Regeländerung.
+
+Belegter Prüfstand auf #141:
 - `hardlock`: **PASS**;
 - `hardlock-base`: **PASS**;
-- internes Signierkonzept bis 107007: SCOPE-PASS, externe Signierung erhalten.
+- `MONOTONIC_PREBOUND_TRANSITION_PASS`;
+- Cloud-Gate Positiv/Negativ: **PASS**;
+- Production-Continuity Positiv/Negativ: **PASS**;
+- alle 107007-`authorized_inputs` einschließlich Handoff, PPM-ZIP und PSERC-ZIP sind hashgebunden und im vorhandenen Cloud-Gate verifiziert.
+
+**Breiterer separater Prüfstand:** PR #140 / Head `3ed31aa…` enthält B01 + B15 + Testanpassungen; dort M01–M33 GESAMT PASS. #140 ist nicht der bevorzugte erste Kausaltest.
 
 Harte Testgrenze:
 - Hobbyraum-/PR-Head kann absichtlich keinen produktiven Live-/7/7-Proof liefern, weil der Production Preflight current `main` verlangt;
