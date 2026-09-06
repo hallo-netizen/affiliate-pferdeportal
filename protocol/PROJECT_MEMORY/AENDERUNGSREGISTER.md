@@ -545,3 +545,22 @@ EINE WAHRHEIT:
 Das neue Büro führt keine zweite Textmaschine, Fehlerliste oder Zielwahrheit.
 STARTSTATUS:
 HOBBYRAUM FREI; frühere Produktvergleichsarbeit wird nicht aus Erinnerung als CURRENT übernommen.
+
+## ARCH-065 – Fehlerliste ist technische Vorsperre an jeder Bürotür
+WAS:
+Projektbüro-Eingänge müssen vor jeder technischen Aktion zwingend zuerst über das zentrale Fehlerregister zur relevanten autoritativen Fehlerquelle führen und die geplante Aktion gegen bekannte Fehler, Wiederholungsfehler und Test-/Umgebungsgrenzen abgleichen.
+
+WARUM:
+Im TEXT-Hobbyraum wurde ein bereits als B06 dokumentierter Sachverhalt erneut praktisch ausprobiert: ein Live-/7/7-Start aus einem PR-/Hobbyraum-Head, obwohl der Production Preflight current `main` verlangt. Die Information war vorhanden; sie wurde nur nicht vor der Aktion verpflichtend gelesen.
+
+REGEL:
+Treffer in der autoritativen Fehlerquelle = Aktion nicht wiederholen. Bestehende Lösung/Arbeitsgrenze übernehmen. Erst bei belegtem KEIN-TREFFER weiterarbeiten.
+
+GRENZE:
+Diese Architekturregel betrifft Bürotüren und neue Projektbüros. Der Campus-Eingang selbst wird dadurch nicht verändert.
+
+UMSETZUNG:
+- TEXT-`START_HERE.md`;
+- `BAUCONTAINER/EINGANGSSTANDARD.md`;
+- `BAUCONTAINER/NEUES_PROJEKT_VORLAGE.md`.
+
