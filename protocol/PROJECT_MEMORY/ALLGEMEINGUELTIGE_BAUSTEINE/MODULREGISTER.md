@@ -225,3 +225,46 @@ GITHUB-ABGLEICH:
 auf aktuellem `main` kein eigener URF-Dateistand unter den entsprechenden Namen/Pfaden gefunden.
 ARCHIV:
 `/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
+
+
+## MOD-006 – PRODUKTVERGLEICHS-ENGINE
+
+MODULKLASSE: UNGEKLÄRT
+
+STATUS:
+GEPLANT / KONZEPTPHASE. Allgemeingültigkeit ist Ziel, technisch noch nicht bewiesen.
+
+GEPLANTER HAUPTORT:
+nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; bis dahin keine künstliche zweite Modulwahrheit anlegen.
+
+ZWECK:
+Projektunabhängige Engine für:
+- Definition vergleichbarer Produkte/Varianten;
+- Vergleichstyp und Vergleichsebene;
+- produktgruppenabhängige Vergleichsmerkmale;
+- priorisierte Hersteller-/Primärquellen-Recherche;
+- strukturierte Herstellerfakten;
+- NOT_IN_SOURCE / SOURCE_CONFLICT / CONFIGURATION_DEPENDENT;
+- neutrale Eignungsableitung nach dokumentierten Eigenschaften;
+- strukturiertes Faktendossier als Übergabe an ein Text-/Publishing-System.
+
+GEPLANTE GRENZE:
+Keine zweite vollständige Text-/SEO-Maschine.
+Die Engine liefert Fach-/Faktengrundlage; das jeweilige Projekt kann eine vorhandene Textproduktion anbinden.
+
+ERSTE PROJEKTANWENDUNG:
+PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
+
+PROJEKTKONFIGURATION:
+Pferde-spezifische Kategorien, Produktgruppen, Merkmalskataloge und Quellenprofile müssen außerhalb des Kerncodes liegen.
+
+BELEG:
+Nutzerunterlagen vom 2026-09-06, insbesondere das 68-Dossier-Übergabepaket mit getrennten Produktionsaufträgen, Kernfakten, Herstellerquellen, Konfliktliste und Produktionsvertrag.
+
+OFFEN:
+- V1-Funktionsumfang;
+- Daten-/Dossiervertrag;
+- Kategorienlogik;
+- Rechercheadapter/Quellenstrategie;
+- Übergabeschnittstelle zu TEXT;
+- technischer Allgemeingültigkeitstest.
