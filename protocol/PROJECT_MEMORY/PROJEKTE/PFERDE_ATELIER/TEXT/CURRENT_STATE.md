@@ -26,6 +26,9 @@ PR #107:
 OPEN / Head ebenfalls
 `c8a96e7a2f598de69134d90b143257c3559bc98a`
 
+Einordnung:
+PR #107 ist der bewusst dauerhaft offene **Chat→Codex-Dispatcher** (`codex-chat-launcher`), laut eigenem PR-Vertrag **NICHT MERGEN**. Sein Head wird für Starts absichtlich auf den aktuellen kanonischen `main`-Commit gesetzt. Gleicher Head wie `main` ist daher hier Sollverhalten und keine zweite technische Arbeitslinie.
+
 Diese Werte wurden am 2026-09-06 direkt mit GitHub abgeglichen.
 
 ## Aktueller technischer Hobbyraum-Kandidat
