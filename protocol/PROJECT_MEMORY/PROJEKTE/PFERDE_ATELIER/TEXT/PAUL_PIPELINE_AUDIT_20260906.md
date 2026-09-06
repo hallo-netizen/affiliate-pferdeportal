@@ -1,4 +1,4 @@
-# PAUL PIPELINE AUDIT – PRÜFKARTE 2026-09-06
+# PAUL PIPELINE AUDIT – TECHNISCHE PRÜFKARTE 2026-09-06
 
 ROLLE: READ-ONLY-Prüfkarte / keine zweite Fehlerwahrheit.
 
@@ -12,9 +12,27 @@ AUTORITÄT:
 - Fehlerwahrheit → FEHLERREGISTER → autoritative Fehlerquelle
 - Ziel → ZV-TEXT-001
 
+
+## HARTE SCOPE-GRENZE
+
+Diese Prüfkarte ist **rein technisch**.
+
+TABU:
+- Architekturänderungen;
+- Fach-/Inhaltsänderungen;
+- Änderung oder Neuinterpretation von Textmaschine, SEO, Link-/Tabellenregeln, LanguageTool, PPM, PSERC/PSTE, Design oder Publish-Regeln.
+
+ZULÄSSIG:
+- prüfen, ob bestehende technische Module die vorhandenen Verträge korrekt verbinden;
+- Artefaktzustand, Hash, Übergabereihenfolge, Status/Receipt und Fail-closed-Verhalten vergleichen;
+- nur technische Implementierungsfehler als Kandidaten markieren.
+
+Ein Fachvertrag wird nicht verändert, nur seine technische Durchsetzung geprüft.
+
+
 ## KERNAUSSAGE
 
-Die wichtigste neue Fehlerklasse ist nicht „alte Regel = schlecht“, sondern:
+Die wichtigste technische Fehlerklasse ist nicht „alte Regel = schlecht“, sondern:
 **zwei jeweils sinnvolle Module/Gates können gemeinsam widersprüchlich werden, wenn sie verschiedene Zustände desselben Artefakts erwarten oder nicht exakt dasselbe Artefakt prüfen/weitergeben.**
 
 Das passt direkt zu B01:
