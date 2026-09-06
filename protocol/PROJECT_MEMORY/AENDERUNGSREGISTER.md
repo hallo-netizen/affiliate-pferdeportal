@@ -593,3 +593,29 @@ Nicht grundsätzlich unmöglich, aber aktuell schlechteres Verhältnis von zusä
 
 REVISIONSREGEL:
 Wenn die spätere Schnittstellenanalyse zeigt, dass TEXT wesentliche Produktvergleichsanforderungen nicht ohne invasive Sonderlogik aufnehmen kann, darf diese Entscheidung neu geprüft werden.
+
+
+## PV-PLAN-002 – Kaufquellen gehören zur Affiliate-Zentrale, nicht zur Produktfakten-Engine
+
+STAND:
+2026-09-06 / reversible Planungsentscheidung.
+
+WAS:
+Das Produktvergleichsmodul übergibt für jedes verglichene Produkt eine möglichst eindeutige Produktidentität.
+Die bestehende Affiliate-Zentrale bleibt zuständig für aktuelle Kaufangebote, Provider, Preise, Verfügbarkeit, Tracking, Disclosure und Rendering.
+
+WARUM:
+Preise und Verfügbarkeit sind dynamisch und dürfen nicht mit langlebigen Herstellerfakten vermischt werden. Außerdem besitzt die Affiliate-Zentrale bereits Artikel-Produktkarten, Qualitätsprüfung, Deduplizierung, Tracking und Multi-Provider-Ausgabe. Eine zweite Kaufquellen-/Produktkartenlogik wäre unnötige Doppelarchitektur.
+
+KISS-SCHNITTSTELLE:
+Produktvergleich → Produktidentität A/B.
+TEXT → fertiger Artikel + unveränderte strukturierte Produktidentitäten.
+AFFILIATE → exakte Kaufquellenauflösung und Rendering.
+
+HARD RULE:
+Für einen Produktvergleich darf die Affiliate-Zentrale nicht automatisch ein nur ähnliches Produkt als Ersatz für Produkt A oder B ausgeben.
+Exact Match zuerst; kein belastbarer Exact Match = keine Karte für dieses Produkt.
+
+FAIL-SOFT:
+Fehlende Kaufquelle blockiert den fachlich korrekten Artikel nicht.
+Sie darf nur die kommerzielle Ausgabe reduzieren, niemals Fakten oder Fazit verändern.
