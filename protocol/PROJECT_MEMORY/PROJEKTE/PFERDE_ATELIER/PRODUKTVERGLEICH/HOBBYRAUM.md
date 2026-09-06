@@ -51,7 +51,9 @@ Noch NICHT bauen:
 5. Positiv/Negativ-Regressionsvertrag festlegen: bestehende FAQ/Beratung/Vergleich/Pflege/Journal unverändert.
 6. separat klären, wie Produkt A/B und Herstellerfakten sicher in die Research-Stufe gelangen können, ohne externen Content-/Fact-Pack-Payload.
 7. danach KISS-Entscheidung treffen: additive Extension ODER eigenständige Straße.
-8. erst danach V1-Plugin-/Kategorie-/Affiliate-Schnittstelle finalisieren.
+8. eigene Produktvergleichs-Textregeln und Kategorienanforderung vollständig im PRODUKTVERGLEICH-Büro definieren.
+9. daraus einen kleinen technischen Integrationsauftrag für TEXT/SEO formulieren; keine TEXT-Änderung während dessen aktuell gebundenem Reparaturauftrag.
+10. erst danach V1-Plugin-/Kategorie-/Affiliate-Schnittstelle finalisieren.
 
 ## Globale Arbeitsort-Sperre
 
