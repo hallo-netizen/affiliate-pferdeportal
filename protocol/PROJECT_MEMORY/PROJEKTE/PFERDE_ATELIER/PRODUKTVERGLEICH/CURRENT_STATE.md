@@ -380,3 +380,31 @@ Verbindlicher Konzeptstand:
    Ein verifiziertes Bedarfsmerkmal wie `für breite Waden geeignet` darf als strukturierte fachliche Zuordnung aus Produktrecherche/Beratung an AFFILIATE weitergereicht werden. AFFILIATE materialisiert daraus nur passende aktuelle Kaufangebote; es erfindet die fachliche Eignung nicht selbst.
 
 Ziel: einmal sauber recherchieren, mehrfach nutzen; Fachentscheidung und Kaufquelle bleiben getrennt.
+
+
+## Eingefrorene Richtung Produktregal ↔ Affiliate – 2026-09-06
+
+Verbindlicher Konzeptstand:
+
+1. **Zentrale fachliche Hauptquelle ist das Produktregal / Produktwissen.**
+   Dort liegen eindeutig identifizierte, recherchierte und quellengebundene Produkte/Varianten mit ihren belastbaren Herstellerfakten.
+
+2. **Inhalte werden aus dem Produktregal abgeleitet.**
+   Beratung, Produktvergleich und Variantenvergleich wählen ihre fachlich passenden Produkte aus dieser Faktenbasis aus.
+
+3. **Affiliate bestimmt nicht die fachliche Vergleichsauswahl.**
+   Amazon, eBay, idealo, Awin und andere Commerce-Quellen dürfen nicht allein entscheiden, welche Produkte verglichen oder als passend empfohlen werden. Händlerbestand und Monetarisierbarkeit sind keine fachliche Eignung.
+
+4. **Hauptrichtung:**
+   `Produktregal/Faktenbasis -> Inhalt -> Affiliate-Exact-Match -> Kaufangebote`.
+
+5. **Affiliate gleicht anschließend exakt ab.**
+   Für die im Artikel fachlich ausgewählten Produktidentitäten prüft die Affiliate-Zentrale, ob exakt passende Angebote in ihren angeschlossenen Quellen vorhanden sind. Exact Match vorhanden = Kaufangebot möglich. Kein Exact Match = kein Ersatzprodukt; der fachliche Artikel bleibt gültig.
+
+6. **Affiliate darf Kandidaten entdecken, aber nicht freigeben.**
+   Neue Produkte aus Affiliate-Feeds/-Quellen dürfen als Recherchekandidaten in das Produktregal gemeldet werden. Erst nach eindeutiger Identifikation und Hersteller-/Primärquellenrecherche werden sie für Beratung oder Vergleiche freigegeben.
+
+7. **Kein stiller Rückwärtsfluss.**
+   Kurzfristige Händlerverfügbarkeit, Provision oder Angebotsdichte darf nicht nachträglich Fakten, Eignung oder Vergleichspaarung verändern.
+
+Kurzform: **Affiliate darf entdecken. Produktrecherche entscheidet. Affiliate monetarisiert.**
