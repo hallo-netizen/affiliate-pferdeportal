@@ -279,3 +279,34 @@ Wenn eine TEXT-Integration später gewählt wird, dann ausschließlich als **eig
 
 Parallel bleibt die eigenständige universelle Engine eine starke KISS-Option:
 allgemeiner Produktvergleichs-Kern + Pferde-Konfiguration + eigener begrenzter Kategorieast + optionale SEO-Schnittstelle + Affiliate-Schnittstelle.
+
+
+## Eingefrorene Bild-/Grafikregel für Produktvergleiche – 2026-09-06
+
+Für Produktvergleichsartikel gilt als verbindlicher Konzeptstand:
+
+1. **Kein echtes Produktfoto als automatisch erzeugtes Beitrags-/Teaserbild.**
+   Herstellerbilder, Google-Bilder, Screenshots oder nachgebildete konkrete Produktfotos werden dafür nicht manuell übernommen.
+
+2. **Beitragsbild = eigene neutrale Vergleichsgrafik.**
+   Sie wird automatisch aus einem festen, projektkonfigurierbaren Grafikvertrag erzeugt, z. B. Vergleichssymbol, Produkt-A-/Produkt-B-Bezeichnung, neutrale Produkttyp-Symbole sowie Portal-Farben/-Typografie. Keine Herstellerlogos und keine markengetreuen Produktabbildungen als notwendiger Bestandteil.
+
+3. **Echte Produktbilder bleiben Aufgabe der AFFILIATE-Ausgabe.**
+   Sie dürfen im Artikel nur aus der dafür vorgesehenen Affiliate-/Produktquelle erscheinen. Produktvergleich kopiert oder speichert dafür keine fremden Produktbilder als eigenen dauerhaften Bildbestand.
+
+4. **Prozessmuster aus DESIGN wird übernommen, nicht dessen Inhalte.**
+   Der geprüfte DESIGN-Stand zeigt einen zentralen strukturgebundenen Iconkatalog mit 329 Zuordnungen, eigenem Asset-Ordner, deterministischer Zuordnung und Fail-closed-Verhalten bei fehlender/ungültiger Zuordnung. Dieses Produktionsprinzip ist Referenz für den Produktvergleich.
+
+5. **Keine Übernahme bestehender Pferde-Icons/-SVG-Geometrien.**
+   Weder Motive noch konkrete Icon-Dateien oder deren inhaltliche Zuordnungen werden kopiert. Wiederverwendet wird ausschließlich das technische Prinzip: standardisierte Erzeugung → eigener Asset-Bestand → eindeutiger Schlüssel → deterministische Ausgabe → Fail-closed.
+
+6. **Produktvergleichs-Zuordnung:**
+   Jeder Vergleich erhält eine stabile `comparison_id`. Die erzeugte Grafik wird genau dieser ID zugeordnet, z. B. `PV-00017 -> pv-00017.svg`.
+
+7. **Fail-closed:**
+   Fehlt die korrekte Vergleichsgrafik oder stimmt ihre Bindung nicht, wird keine Grafik eines anderen Vergleichs und kein nur ungefähr passendes Ersatzmotiv eingesetzt. Im Zweifel erscheint kein Beitragsbild, bis die korrekte Grafik erzeugt ist.
+
+8. **Allgemeingültigkeit:**
+   Der Grafikgenerator soll nach Möglichkeit als kleiner allgemeingültiger Baustein konzipiert werden. Pferde-Atelier liefert nur Stil-/Projektkonfiguration; der Kern darf nicht auf Pferdeprodukte fest verdrahtet sein.
+
+Ziel: copyright-arm, reproduzierbar, einheitlich, automatisierbar und unabhängig von der Lebensdauer fremder Produktbilder.
