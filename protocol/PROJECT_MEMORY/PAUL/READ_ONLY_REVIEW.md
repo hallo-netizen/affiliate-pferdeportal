@@ -112,6 +112,20 @@ Die zum Prüfgegenstand benannten autoritativen Originalquellen vollständig les
 
 Bei technischer Fachprüfung zusätzlich die dort verlinkten technischen Originalquellen lesen, soweit der Nutzerauftrag dies erfordert.
 
+
+## Direkter TEXT/STARTMASTER-Quellenzugriff für externe Prüfer
+
+Wenn der Prüfauftrag TEXT/SEO/STARTMASTER0107 betrifft, müssen die aktuellen Detailquellen **direkt** erreichbar sein. Nicht über GitHub-Ordnernavigation gehen.
+
+- [Raw 01 STATUS QUO](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/01_STATUS_QUO_AKTUELL_20260905.md)
+- [Raw 02 VOLLSTÄNDIGES PROTOKOLL](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md)
+- [Raw 03 ZIELVERTRAG](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/03_ZIELVERTRAG_AKTUELL_20260905.md)
+- [Raw 04 FEHLERLISTE](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md)
+- [Raw 05 TEST VS LIVE](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/05_TEST_VS_LIVE_BEFUND_20260905.md)
+- [Raw 08 DO NOT TOUCH / HARD RULES](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/08_DO_NOT_TOUCH_HARD_RULES.md)
+
+Diese Links sind nur Transport. Autorität bleibt die jeweilige Originaldatei im Campus-Quellenstand.
+
 ## Rückgabeformat
 
 Standardmäßig nur:
