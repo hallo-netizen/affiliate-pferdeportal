@@ -73,6 +73,26 @@ Jeder Projektbüro-Eingang muss im sichtbaren nächsten Schritt enthalten:
 
 Weitere Inventare/Quellen dürfen danach folgen.
 
+### Harte Fehlerabgleich-Sperre an Bürotüren
+
+Vor **jeder technischen Aktion** in einem Projektbüro muss der Büro-Eingang zwingend zuerst über
+`FEHLERREGISTER.md` zur relevanten autoritativen Fehlerquelle führen.
+
+Dort ist vor der Aktion zu prüfen, ob der geplante Test, Live-/Produktionsstart, Branch-/Head-Wechsel, Code-/Hash-/Binding-Fix, Merge- oder Release-Schritt bereits als:
+- bekannter Fehler;
+- Wiederholungsfehler;
+- verbotener Weg;
+- bekannte Test-/Umgebungsgrenze
+
+dokumentiert ist.
+
+**Treffer = Aktion nicht erneut ausprobieren.**
+Es gilt ausschließlich die bereits dokumentierte Lösung/Arbeitsgrenze.
+
+Erst bei belegtem **KEIN-TREFFER** darf die technische Aktion fortgesetzt werden.
+
+Diese Sperre gilt für **Büroeingänge**. Sie ändert nicht die Rolle oder Logik des Campus-Eingangs.
+
 ## Paul-Pfade
 
 Pflichtlektüre für Paul verwendet vollständige echte Pfade.
