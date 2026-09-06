@@ -257,3 +257,27 @@ Campus-Current-State entsteht aus belegter Quellenhierarchie und sichtbaren Delt
 Dieses Protokoll bewahrt den **Gedankenweg**.
 
 Aktuelle Wahrheit wird immer aus den dafür vorgesehenen Hauptakten gelesen.
+
+### 2026-09-06 – Externe READ-ONLY-Prüfung TEXT/STARTMASTER kritisch eingeordnet
+
+Anlass:
+Externe Zweitprüfung (Claude) zu Steuerung/Testmethodik, nicht zu den geschützten Fachinhalten.
+
+Bestätigt:
+- B14/Test-Live-Paritätslücke ist real und bereits in der autoritativen TEXT-Fehlerquelle dokumentiert: M01–M33 ist Vorsperre, kein 7/7-Produktionsbeweis.
+- Der aktuelle B01-Fix muss als technischer Übergabefix beurteilt werden; Live-Beweis bleibt erst auf current main möglich.
+- Alte/stale Branchbezeichnungen dürfen keine Arbeitsautorität erzeugen. `paul/text-seo-campus-ready-20260905` ist nicht der gebundene TEXT-Arbeitsbranch.
+- Rückbauprüfung muss historische Fehler/Fixgründe und indirekte Abhängigkeiten einbeziehen.
+
+Präzisiert / nicht bestätigt:
+- Der Paul-Branch ist kein paralleler aktueller technischer TEXT-Stand; er divergiert vom alten main und ist nicht als aktueller Worker gebunden.
+- Der gemeldete doppelte `ARCH-065` ist im aktuellen Campus bereits behoben: die READ-ONLY-Außentür trägt `ARCH-066`.
+- `m.DUAL = SELF` im aktuellen Current-Action-Weg ist nach Historienprüfung bewusster KISS-Kompatibilitätskleber zur Wiederverwendung der bestehenden Room-Bridge, kein belegter Rückbaukandidat.
+- Alte Recovery-Article-Logik im `DUAL_ROOTFIX` ist im heutigen 107007-Workerpfad nicht aktiv, weil Current Action die Bridge-Callbacks auf sich selbst bindet.
+
+Neuer Prüfhinweis:
+- `test_fachworkflow_proof_handoff.py` ist gegenüber dem seit 05.09. zwingenden realen `ppm679_binding` stale und wird vom M01–M33-Runner nicht als vollständiger End-to-End-Handoff-Test ausgeführt. Das ist ein konkretes Beispiel für B14; daraus folgt keine Produktionsänderung auf Verdacht.
+
+Grenze:
+Keine Änderung an Textmaschine, Link-/Tabellenregeln, LanguageTool, PPM, PSERC/PSTE, SEO, Design, Publish-Sperre oder externem Signierweg.
+
