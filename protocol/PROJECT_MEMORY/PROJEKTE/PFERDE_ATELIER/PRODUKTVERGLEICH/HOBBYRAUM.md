@@ -18,7 +18,7 @@ die bereitgestellten Produktvergleichs-Unterlagen auswerten, das allgemeingülti
 jetzt bereits eine zweite Textmaschine bauen, bestehende TEXT-/SEO-Regeln eigenmächtig duplizieren, Produktfakten erfinden oder Allgemeingültigkeit ohne technischen Beleg als PASS erklären.
 
 **ALS NÄCHSTES …**  
-die minimale V1-Schnittstelle definieren: **Was muss das Produktvergleichsmodul selbst liefern, und welches strukturierte Dossier übernimmt TEXT anschließend?**
+die minimale V1-Gesamtstraße definieren: **Was muss das Produktvergleichsmodul selbst erledigen, damit STARTMASTER/TEXT gar nicht gekoppelt werden muss und nur AFFILIATE eine kleine stabile Schnittstelle benötigt?**
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -34,7 +34,7 @@ Auftrag:
 Allgemeingültiges Produktvergleichsmodul konzipieren, mit Pferde-Atelier als erster Projektkonfiguration.
 
 Aktuelle Architekturhypothese:
-**eigenständige Vergleichs-/Recherche-Engine → strukturiertes Faktendossier → bestehende TEXT-/SEO-Maschine → bestehende AFFILIATE-Zentrale für Kaufquellen.**
+**eigenständige Produktvergleichsstraße → WordPress-DRAFT → bestehende AFFILIATE-Zentrale nur für Kaufquellen. STARTMASTER/TEXT ist keine Laufzeit-Abhängigkeit.**
 
 Noch NICHT bauen:
 - zweite SEO-Engine;
@@ -48,10 +48,12 @@ Noch NICHT bauen:
 2. universelles Daten-/Dossierformat definieren.
 3. Pferde-spezifische Konfiguration davon trennen.
 4. Kategorien-/Vergleichstypen-Logik für Produktvergleiche definieren.
-5. exakte Übergabeschnittstelle an TEXT festlegen.
-6. minimale Exact-Product-Schnittstelle zur bestehenden AFFILIATE-Zentrale festlegen.
-7. festlegen, wie Produkt A/B im Artikel als strukturierte Identität erhalten bleiben.
-8. erst danach Plugin-Prototyp bauen.
+5. minimalen Product-Compare-Writer festlegen; prüfen, welche bewährten Textmaschinen-Regeln ohne Runtime-Kopplung übernommen werden.
+6. minimale eigene Kategorie-Konfiguration/Einrichtung definieren; allgemeines Kategoriemodul nicht verwenden.
+7. minimale Exact-Product-Schnittstelle zur bestehenden AFFILIATE-Zentrale festlegen.
+8. festlegen, wie Produkt A/B im WordPress-Draft als strukturierte Identität erhalten bleiben.
+9. SEO nur als optionale Priorisierungs-/Prüfhilfe definieren, nicht als Pflichtabhängigkeit.
+10. erst danach Plugin-Prototyp bauen.
 
 ## Globale Arbeitsort-Sperre
 
