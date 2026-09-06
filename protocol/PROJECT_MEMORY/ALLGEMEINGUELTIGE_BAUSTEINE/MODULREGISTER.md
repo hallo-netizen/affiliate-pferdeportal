@@ -232,7 +232,7 @@ ARCHIV:
 MODULKLASSE: UNGEKLÄRT
 
 STATUS:
-GEPLANT / KONZEPTPHASE. Allgemeingültigkeit ist Ziel, technisch noch nicht bewiesen.
+GEPLANT / KONZEPTPHASE / ARCHITEKTURWEG OFFEN. Allgemeingültigkeit ist Ziel, technisch noch nicht bewiesen.
 
 GEPLANTER HAUPTORT:
 nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; bis dahin keine künstliche zweite Modulwahrheit anlegen.
@@ -250,8 +250,8 @@ Projektunabhängige Engine für:
 
 GEPLANTE GRENZE:
 Kein Klon eines kompletten bestehenden Produktions-/Workflow-Stacks.
-Das Modul soll in V1 selbst eine kleine vollständige Produktvergleichsstraße bis zum WordPress-DRAFT besitzen, einschließlich eigenem schlanken Writer und produktspezifischer Qualitätsprüfung.
-Vorhandene Textsysteme dürfen nur als Regel-/Verhaltensreferenz oder über technisch wirklich isolierbare kleine Bausteine wiederverwendet werden; keine Laufzeitkopplung an STARTMASTER.
+Vor V1 wird zuerst geprüft, ob der vorhandene signierte/versionierte Article-Type-Extension-Weg eine additive `Produktvergleich`-Anbindung erlaubt, ohne Core-Textmaschine oder 5-Felder-Handoff zu verändern.
+Nur bei kleinem isoliertem PASS wird die vorhandene Textproduktion genutzt. Andernfalls besitzt das Modul eine eigene kleine Produktvergleichsstraße bis WordPress-DRAFT.
 Aktuelle Kaufquellen/Preise/Verfügbarkeit gehören nicht zum Faktenkern; dafür wird die bestehende Affiliate-Zentrale über eindeutige Produktidentitäten angebunden.
 
 ERSTE PROJEKTANWENDUNG:
