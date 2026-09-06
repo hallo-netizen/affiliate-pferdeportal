@@ -34,7 +34,7 @@ Auftrag:
 Allgemeingültiges Produktvergleichsmodul konzipieren, mit Pferde-Atelier als erster Projektkonfiguration.
 
 Aktuelle Architekturhypothese:
-**eigenständige Vergleichs-/Recherche-Engine → strukturiertes Faktendossier → bestehende TEXT-/SEO-Maschine.**
+**eigenständige Vergleichs-/Recherche-Engine → strukturiertes Faktendossier → bestehende TEXT-/SEO-Maschine → bestehende AFFILIATE-Zentrale für Kaufquellen.**
 
 Noch NICHT bauen:
 - zweite SEO-Engine;
@@ -49,7 +49,9 @@ Noch NICHT bauen:
 3. Pferde-spezifische Konfiguration davon trennen.
 4. Kategorien-/Vergleichstypen-Logik für Produktvergleiche definieren.
 5. exakte Übergabeschnittstelle an TEXT festlegen.
-6. erst danach Plugin-Prototyp bauen.
+6. minimale Exact-Product-Schnittstelle zur bestehenden AFFILIATE-Zentrale festlegen.
+7. festlegen, wie Produkt A/B im Artikel als strukturierte Identität erhalten bleiben.
+8. erst danach Plugin-Prototyp bauen.
 
 ## Globale Arbeitsort-Sperre
 
