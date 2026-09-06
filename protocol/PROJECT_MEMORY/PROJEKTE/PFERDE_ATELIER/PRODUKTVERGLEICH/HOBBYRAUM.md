@@ -44,6 +44,9 @@ Noch NICHT bauen:
 
 ## NEXT ACTION
 
+Vor einer Architekturfestlegung gilt der Campus-Queraudit als Entscheidungsbasis. Kein technischer Bau vor Abschluss der Vergleichsmatrix Eigenständig vs. additive TEXT-Extension.
+
+
 1. vorhandene Journal/Wissen-Extension-Grenze als Referenz festhalten.
 2. minimalen Testvertrag für eine neue `Produktvergleich_TEST`-Extension definieren.
 3. prüfen, ob sie ohne Core-Textmaschinenänderung und ohne sechstes Handoff-Feld registriert werden kann.
