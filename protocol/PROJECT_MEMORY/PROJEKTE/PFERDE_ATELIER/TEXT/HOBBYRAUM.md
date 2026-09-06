@@ -133,7 +133,7 @@ Bis zu einem neuen echten Live-Lauf keine weitere technische Bereinigung auf Ver
 
 ### Paul-Architekturmodell – neuer READ-ONLY-Audit-Kandidat 2026-09-06
 
-Paul hat den Problemtyp in einer eigenen Testinfrastruktur end-to-end modelliert. Die dortigen konkreten PBone-Fehler sind **keine direkten Pferde-Atelier-Fehler**, aber die reproduzierte Fehlerklasse ist für STARTMASTER relevant:
+Paul hat **unseren realen System-/Workflowtyp mit unseren Plugins und Verträgen** in seiner Testinfrastruktur end-to-end durchgespielt; der Artikel „Duschhocker kaufen“ war nur ein beliebiger Testdatensatz. Die dokumentierten Findings sind deshalb als **direkte Befunde zu unserem System** zu behandeln, soweit sie den jeweils geprüften aktuellen Modulstand betreffen:
 
 **Gate-/Vertragskollision:** Zwei für sich sinnvolle Module können gemeinsam unerfüllbar werden, wenn sie unterschiedliche Zustände desselben Artefakts erwarten oder ein Gate nicht exakt das Artefakt prüft, das später weitergegeben wird.
 
