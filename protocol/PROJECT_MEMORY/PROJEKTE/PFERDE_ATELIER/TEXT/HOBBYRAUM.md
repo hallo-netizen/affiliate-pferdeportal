@@ -58,11 +58,26 @@ main bleibt unverändert:
 - **Externe Signierung bleibt unangetastet:** hostseitige Finalisierung erst nach 107008 sowie GitHub-ENDSTEMPEL/WordPress-Verifikation.
 - GitHub `hardlock` und `hardlock-base` auf Head `3ed31aa…`: PASS.
 - **SCOPE-PASS internes Signierkonzept:** aktiver Call-Graph bis 107007 ohne ED25519-/Signer-/Key-/`SIGNED`-Pflicht; gebundenes H8-Paket `WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND` ohne Signaturfelder; Host-Signer erscheint erst im 107008-Endzustand.
-- **ZWISCHENTEST INTERN/EXTERN: PASS.** Internes unsigniertes HASH_BOUND-Paket + aktuelle H8-Provenance PASS; manipulierte H8-/Batch-Herkunft bleibt selbst nach Neuberechnung aller normalen Hashes BLOCKED; Qualitätsstufen inkl. Link/Tabelle/PPM unverändert; externe ED25519-Positiv-/Negativprüfung PASS.
+- **ZWISCHENTEST INTERN/EXTERN: PASS im belegten Umfang.** Internes unsigniertes HASH_BOUND-Paket + aktuelle H8-Provenance PASS; fehlende, falsche oder nicht-current H8-Provenance wird fail-closed blockiert; Qualitätsstufen inkl. Link/Tabelle/PPM unverändert; externe ED25519-Positiv-/Negativprüfung PASS. **Nicht stärker behaupten:** Ein kombinierter Angreifer-Test „Herkunft manipuliert + alle normalen Hashes passend neu berechnet“ ist im aktuell dauerhaft auffindbaren Testbestand nicht vollständig als eigener End-to-End-Negativtest belegt.
 - **M01–M33 GESAMT PASS:** vorhandener Runner real ausgeführt gegen den Quellstand `3ed31aa…`; M01–M33 PASS, `LAST_REGRESSION PASS`, `GESAMT PASS`.
-- M15-Negativtest enthielt einen Escape-/Zeilenumbruchfehler; ausschließlich dieser Testfehler wurde KISS korrigiert und der komplette Runner danach erneut vollständig PASS ausgeführt.
+- M15-Negativtest enthielt einen Escape-/Zeilenumbruchfehler; ausschließlich dieser Testfehler wurde KISS in Commit `3ed31aa78978a2098f324eead6f2a5335a10e2d4` korrigiert. Der dokumentierte vollständige M01–M33-Re-Run erfolgte auf genau diesem Quellstand und endete PASS.
 - **B06 gilt hart:** Hobbyraum-/PR-Head ist kein Live-/7/7-Testort; Production Preflight verlangt current `main`.
 - Kein Live-7/7-PASS behauptet.
+
+## Integrations-/Fehlschlag-Sicherheitsplan für PR #140
+
+Solange PR #140 nicht ausdrücklich freigegeben ist: **kein Merge**.
+
+Falls später ausdrücklich integriert wird:
+1. Vorherigen `main`-Anker unverändert dokumentieren: `c8a96e7a2f598de69134d90b143257c3559bc98a`.
+2. Regulär integrieren; kein paralleler Umbau.
+3. Auf dem neuen current `main` zuerst bestehende Identitäts-/Preflight-Prüfung.
+4. Danach **genau der bestehende produktive 7er-Lauf**; keine neue Canary-Route und kein alternativer Runner.
+5. Beim **ersten realen Blocker sofort stoppen** und nur diesen gegen Fehlerhistorie/Zielvertrag analysieren.
+6. Kein automatischer Rückbau. Falls der Merge selbst als Ursache belegt wird, ist der Merge-Commit gezielt reversierbar; Rücknahme nur mit ausdrücklicher Nutzerfreigabe.
+7. Keine Aussage „PR #140 gelöst“, bevor echter 7/7 + 107008 auf demselben produktiven Stand belegt ist.
+
+Damit wird die B06/B14-Testlücke nicht wegbehauptet, sondern operational begrenzt: Vor Merge nur Regression/Scope; nach Merge erster echter Live-Beweis mit klarer Rückkehrgrenze.
 
 ## Harte Altlasten-/Rückbau-Prüfung
 
