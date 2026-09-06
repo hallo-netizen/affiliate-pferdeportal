@@ -281,3 +281,20 @@ Neuer Prüfhinweis:
 Grenze:
 Keine Änderung an Textmaschine, Link-/Tabellenregeln, LanguageTool, PPM, PSERC/PSTE, SEO, Design, Publish-Sperre oder externem Signierweg.
 
+### 2026-09-06 – Zweite externe READ-ONLY-Prüfung TEXT/STARTMASTER
+
+Externer Befund wurde gegen den aktuellen Campus und GitHub geprüft.
+
+**Übernommen / korrigiert:**
+- TEXT-M01-M33-Registerstatus präzisiert: Regression-Suite aktiv, letzter dokumentierter Gesamtlauf PASS, kein Live-PASS.
+- B06/B14-Integrationsrisiko operationalisiert: vor Merge nur Regression/Scope; nach ausdrücklicher Integration bestehender produktiver 7er-Lauf, beim ersten Blocker STOP; kein automatischer Rückbau.
+- H8-Provenance-Aussage enger gefasst: aktueller State + generation + batch + source snapshot + source manifest + fester Ursprung werden hashgebunden und gegen current State geprüft. Stärkere Aussage eines vollständigen kombinierten „alles neu gehasht“-Angreifertests wird ohne dauerhaft auffindbaren End-to-End-Test nicht behauptet.
+- M15-Fix exakt an Commit `3ed31aa78978a2098f324eead6f2a5335a10e2d4` gebunden.
+- READ_ONLY_REVIEW um direkte Raw-Links auf die sechs aktuellen TEXT-Detailquellen ergänzt.
+
+**Präzisiert:**
+- PR #107 ist absichtlich dauerhaft offen als Chat→Codex-Dispatcher und soll laut PR-Vertrag nicht gemergt werden; gleicher Head wie main ist dort Sollverhalten.
+- Archivstatus GELB bleibt bekannter Infrastruktur-/Backup-Hinweis, kein aktueller TEXT-Produktionsblocker.
+
+Keine Produktionsdatei, kein TEXT-Hobbyraum-Code, kein PR-Head und kein main wurden durch diese Dokumentationskorrekturen verändert.
+
