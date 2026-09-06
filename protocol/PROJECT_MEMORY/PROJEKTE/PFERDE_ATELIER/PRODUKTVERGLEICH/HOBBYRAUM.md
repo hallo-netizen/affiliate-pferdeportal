@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-06
-STATUS: FREI
+STATUS: AKTIV / KONZEPTPHASE
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,32 +9,47 @@ STATUS: FREI
 Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du prüfen willst, ob aktuell ein Produktvergleichs-Auftrag gebunden ist.
+du den aktuellen Produktvergleichs-Planungsauftrag oder dessen nächsten Schritt brauchst.
 
 **DU DARFST …**  
-den gebundenen Auftrag und seine autoritativen Quellen lesen; Änderungen nur bei STATUS AKTIV und nur im ausdrücklich gebundenen Arbeitsweg.
+die bereitgestellten Produktvergleichs-Unterlagen auswerten, das allgemeingültige Fachmodul konzipieren und die saubere Übergabe zu TEXT definieren.
 
 **DU DARFST NICHT …**  
-aus dem Betreten des Hobbyraums Schreibrechte ableiten, einen zweiten Parallelweg eröffnen, TEXT/STARTMASTER übernehmen oder Produktvergleichs-Fachstände aus Erinnerung erfinden.
+jetzt bereits eine zweite Textmaschine bauen, bestehende TEXT-/SEO-Regeln eigenmächtig duplizieren, Produktfakten erfinden oder Allgemeingültigkeit ohne technischen Beleg als PASS erklären.
 
 **ALS NÄCHSTES …**  
-`START_HERE.md` → `CURRENT_STATE.md`; ohne ausdrücklich gebundenen Produktvergleichs-Auftrag **FREI lassen**.
+die minimale V1-Schnittstelle definieren: **Was muss das Produktvergleichsmodul selbst liefern, und welches strukturierte Dossier übernimmt TEXT anschließend?**
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
 - **BÜROSTAND:** `CURRENT_STATE.md`
 - **AKTUELLER AUFTRAG / NEXT ACTION:** ausschließlich diese `HOBBYRAUM.md`
-- **CURRENT_BLOCKER:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Quelle
-- **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
-- **NICHT ANFASSEN / WARUM:** nicht hier duplizieren → Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-
-**Wenn Angaben widersprechen:** nicht raten. Die oben benannte autoritative Quelle gewinnt.
+- **CURRENT_BLOCKER:** keiner belegt
+- **AKTIVER ZIELVERTRAG:** noch keiner für die neue Pluginentwicklung festgeschrieben
+- **WARUM:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` → `PV-PLAN-001`
 
 ## Aktuelle Arbeitsbindung
 
-Keine.
+Auftrag:
+Allgemeingültiges Produktvergleichsmodul konzipieren, mit Pferde-Atelier als erster Projektkonfiguration.
 
-Kein Worker, kein Branch und kein technischer Schreibbereich sind durch die reine Büroeinrichtung gebunden.
+Aktuelle Architekturhypothese:
+**eigenständige Vergleichs-/Recherche-Engine → strukturiertes Faktendossier → bestehende TEXT-/SEO-Maschine.**
+
+Noch NICHT bauen:
+- zweite SEO-Engine;
+- zweite vollständige Textproduktion;
+- parallelen WordPress-Publisher;
+- eigene Kopie bestehender TEXT-Gates.
+
+## NEXT ACTION
+
+1. V1-Funktionsumfang des Produktvergleichsmoduls festlegen.
+2. universelles Daten-/Dossierformat definieren.
+3. Pferde-spezifische Konfiguration davon trennen.
+4. Kategorien-/Vergleichstypen-Logik für Produktvergleiche definieren.
+5. exakte Übergabeschnittstelle an TEXT festlegen.
+6. erst danach Plugin-Prototyp bauen.
 
 ## Globale Arbeitsort-Sperre
 
