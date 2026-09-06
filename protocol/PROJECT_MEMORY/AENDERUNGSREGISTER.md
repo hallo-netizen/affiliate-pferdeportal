@@ -697,3 +697,28 @@ Core-Umbau / sechstes Feld / breite Kopplung nötig → Extension verwerfen und 
 
 OFFEN:
 Wie exakte Produktidentitäten A/B und belastbare Herstellerfakten die bestehende Research-Stufe erreichen, ohne die alte externe Fact-Pack-/Content-Grenze zu verletzen.
+
+
+## PV-PLAN-005 – Fachkonzept im PRODUKTVERGLEICH, technische Integration im betroffenen Fachbüro
+
+STAND:
+2026-09-06.
+
+WAS:
+Das vollständige fachliche Produktvergleichskonzept wird ausschließlich im Büro PRODUKTVERGLEICH entwickelt.
+Dazu gehören Beitragsart, eigene Textregeln, Kategorieanforderungen, Produktfindung/Pairing, Recherche, Fakten-/Quellenregeln und Abnahmekriterien.
+
+Wenn das Konzept eine Änderung des bestehenden TEXT-/SEO-Systems benötigt, wird daraus ein begrenzter technischer Integrationsauftrag.
+Die Umsetzung dieser Änderung findet ausschließlich im TEXT/SEO-Büro und nach dessen eigener Arbeitsfreigabe statt.
+Affiliate-Änderungen entsprechend ausschließlich im AFFILIATE-Büro.
+
+WARUM:
+Fachliche Verantwortung und technische Besitzgrenzen bleiben eindeutig. So entsteht kein paralleles Schreiben am selben System und kein Zuständigkeitsstreit.
+
+KISS:
+PRODUKTVERGLEICH definiert **WAS** benötigt wird.
+TEXT/SEO entscheidet und implementiert **WIE** es innerhalb seines Systems sicher angebunden wird.
+AFFILIATE implementiert nur seine Kaufquellen-Schnittstelle.
+
+AKTUELL:
+Keine TEXT/SEO-Änderung aus diesem Planungschat. Der aktuelle TEXT-Hobbyraum ist anderweitig gebunden und sperrt Fach-/Textmaschinenregeländerungen.
