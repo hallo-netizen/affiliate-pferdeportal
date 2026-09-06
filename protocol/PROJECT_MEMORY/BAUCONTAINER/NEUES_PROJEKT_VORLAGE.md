@@ -74,6 +74,14 @@ Jedes neue Projektbüro führt vor echter Arbeit sichtbar über:
 6. Zielvertragsregister;
 7. gebundenen Arbeitsweg.
 
+**Vor jeder technischen Aktion zusätzlich zwingend:**
+Fehlerregister → relevante autoritative Fehlerquelle → geplante Aktion gegen bekannte Fehler/Wiederholungsfehler/Testgrenzen abgleichen.
+
+Bei Treffer:
+**nicht erneut ausprobieren**, sondern dokumentierte Lösung/Arbeitsgrenze übernehmen.
+
+Diese Pflicht gehört in jede neue Bürotür gemäß `EINGANGSSTANDARD.md`.
+
 ### Hobbyraum
 Pflicht:
 `BAUCONTAINER/HOBBYRAUM_STANDARD.md`
