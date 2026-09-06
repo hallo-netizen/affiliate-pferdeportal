@@ -801,3 +801,30 @@ Der Grafikgenerator soll als kleiner wiederverwendbarer Baustein mit Projekt-/St
 
 WARUM:
 Weniger Copyright-Risiko, reproduzierbare Optik, automatische Skalierung auf viele Vergleiche, keine Abhängigkeit vom Fortbestand fremder Produktbilder und geringere Fehleranfälligkeit durch eindeutige Schlüsselbindung.
+
+
+## PV-PLAN-008 – Eine Vergleichskategorie pro Produktgruppe mit eigenem Vergleichs-Archiv
+
+STAND:
+2026-09-06 / VERBINDLICHER KONZEPTSTAND.
+
+ENTSCHEIDUNG:
+Konzept 1 wird eingefroren: Produktgruppenvergleich, Produktvergleich und Variantenvergleich werden nicht in getrennte WordPress-Kategorieäste aufgeteilt, sondern unter einer einzigen sichtbaren Kategorie `Vergleich` der jeweiligen Produktgruppe gebündelt.
+
+DARSTELLUNG:
+Eigenes Vergleichs-Archivtemplate statt normaler WordPress-Listenansicht. Oben prominente Filter `Alle | Produktgruppenvergleiche | Produktvergleiche`; Variantenvergleiche werden innerhalb der konkreten Produktvergleichswelt klar gekennzeichnet bzw. über `Produkte | Varianten` unterfilterbar.
+
+PRODUKTNAVIGATION:
+Desktop shopartig seitlich; nur Produkte mit vorhandenen Vergleichsinhalten. Bei größerem Bestand `Weitere anzeigen` und/oder AJAX-Produktsuche. Mobil kompakt über Suchfeld plus aufklappbare Produktliste/Drawer statt langer Sidebar.
+
+SUCHE:
+Produktsuche liefert alle passenden eigenen Beiträge aus Produktvergleich und Variantenvergleich und kennzeichnet deren Typ sichtbar.
+
+HARD RULE VERLINKUNG:
+Vorhandener Variantenvergleich muss aus dem passenden Produktvergleich ausdrücklich im Text genannt und intern verlinkt werden. Variantenvergleich verlinkt zurück zum passenden Produktvergleich, sofern vorhanden.
+
+TECHNISCHE GRENZE:
+Eine Kategorie bedeutet keine fachliche Vermischung. Produktgruppenvergleich, Produktvergleich und Variantenvergleich bleiben intern eindeutige Vergleichstypen mit getrennten Regeln.
+
+WARUM:
+Ein zentraler Ort für die Nutzerfrage „vergleichen“, bessere Auffindbarkeit und interne Navigation, weniger künstliche Kategorieebenen und geringere Gefahr dünner Parallelkategorien. Die zusätzliche Komplexität wird einmalig kontrolliert im Vergleichs-Archivtemplate gebündelt.
