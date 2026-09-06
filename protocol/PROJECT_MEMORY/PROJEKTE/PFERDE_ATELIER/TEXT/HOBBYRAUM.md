@@ -108,6 +108,8 @@ Vor jedem Rückbau im aktiven TEXT-/STARTMASTER-Weg zwingend:
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
 
+**Paul-Pipeline-Prüfkarte:** `PAUL_PIPELINE_AUDIT_20260906.md` – priorisiert direkte Gate-/Vertragskollisionen gegenüber späteren WordPress/Public-Folgethemen.
+
 ## Altlasten-Audit – Zwischenstand 2026-09-06
 
 **Noch kein zusätzlicher Rückbau freigegeben.**
