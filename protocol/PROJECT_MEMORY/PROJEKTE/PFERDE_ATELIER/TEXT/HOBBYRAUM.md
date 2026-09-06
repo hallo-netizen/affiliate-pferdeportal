@@ -79,6 +79,32 @@ Falls später ausdrücklich integriert wird:
 
 Damit wird die B06/B14-Testlücke nicht wegbehauptet, sondern operational begrenzt: Vor Merge nur Regression/Scope; nach Merge erster echter Live-Beweis mit klarer Rückkehrgrenze.
 
+
+## HARTE SCOPE-GRENZE – NUR TECHNIK
+
+**Architektur und Inhalte sind für diesen Auftrag tabu.**
+
+Erlaubt ist ausschließlich die technische Ausführungsebene:
+- konkrete Ein-/Ausgabeartefakte;
+- Hash-/Identitätsbindung;
+- Gate-Reihenfolge;
+- technische Übergaben/Handoffs;
+- Stage-/Receipt-/Status-Logik;
+- Dateipfade/Bindings;
+- technische Fail-closed-/Pass-Weitergabe;
+- technische Positiv-/Negativtests bestehender Mechanismen.
+
+Nicht erlaubt:
+- Architekturumbau oder neue Architektur;
+- neue Runner/Gates/Executor/Workflows;
+- Fach-/Inhaltsregeln verändern oder neu interpretieren;
+- Textmaschine, SEO, Linkregel, Tabellenregel, LanguageTool, PPM, PSERC/PSTE, Design oder Publish-Regeln verändern;
+- neue Artikeltypen-/Contentlogik;
+- technische Probleme durch Fachregeländerung „lösen“.
+
+Prüffrage:
+**Erfüllt die bestehende technische Implementierung die bereits festgelegten Verträge korrekt und auf dem richtigen Artefaktzustand?**
+
 ## Harte Altlasten-/Rückbau-Prüfung
 
 Vor jedem Rückbau im aktiven TEXT-/STARTMASTER-Weg zwingend:
@@ -133,7 +159,7 @@ Bis zu einem neuen echten Live-Lauf keine weitere technische Bereinigung auf Ver
 
 **Audit-Ergebnis:** Außer B01 und der bereits ausgeführten B15-Signierbereinigung ist aktuell keine weitere aktive Altlast kausal oder sicher entfernbar belegt.
 
-### Paul-Architekturmodell – neuer READ-ONLY-Audit-Kandidat 2026-09-06
+### Paul-Technikmodell – neuer READ-ONLY-Audit-Kandidat 2026-09-06
 
 Paul hat **unseren realen System-/Workflowtyp mit unseren Plugins und Verträgen** in seiner Testinfrastruktur end-to-end durchgespielt; der Artikel „Duschhocker kaufen“ war nur ein beliebiger Testdatensatz. Die dokumentierten Findings sind deshalb als **direkte Befunde zu unserem System** zu behandeln, soweit sie den jeweils geprüften aktuellen Modulstand betreffen:
 
@@ -144,7 +170,7 @@ Direkter STARTMASTER-Befund:
 - Aktueller Handoff prüft bei Nicht-PPM-Stufen `input_sha256` nur auf formale 64-Hex-Gültigkeit.
 - Er erzwingt dort nicht mechanisch, welches konkrete Artefakt dieser Hash bezeichnet oder wie es mit Vor-/Nachstufe zusammenhängt.
 - PPM ist enger: dort wird `input_sha256` ausdrücklich auf den finalen Artikel-SHA gebunden.
-- derselbe lose Nicht-PPM-Hashcheck existierte bereits auf den belegten früheren 7/7-Ständen `d841ed…` / `de21f6…`; daher **kein Beleg als Ursache des aktuellen B01-Livefehlers**, sondern latente Architektur-/Paritätslücke.
+- derselbe lose Nicht-PPM-Hashcheck existierte bereits auf den belegten früheren 7/7-Ständen `d841ed…` / `de21f6…`; daher **kein Beleg als Ursache des aktuellen B01-Livefehlers**, sondern latente technische Vertrags-/Paritätslücke.
 - B01 selbst passt jedoch zur von Paul reproduzierten Fehlerklasse „Downstream-Gate verlangt ein Feld/einen Zustand, den der gültige Upstream-Vertrag nicht liefern soll“: numerische WP-ID vs. semantischer Kategorievertrag.
 
 Nächster READ-ONLY-Prüfgegenstand:
