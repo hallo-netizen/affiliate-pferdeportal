@@ -221,3 +221,46 @@ Aktueller erster realer Blocker liegt innerhalb genau dieses neuen Korridors:
 
 **Schluss:** Pauls Mehrwert ist real, aber kein Grund für einen Sammelfix. Nach B01 ist ausschließlich der noch nie live bewiesene reale PPM-Korridor der nächste technische Beobachtungsbereich.
 
+## REALER PPM-KORRIDOR – LIVE-ABDECKUNG BIS / NACH B01
+
+Der letzte reale Lauf auf current `main` erreichte exakt den Kategorie-Blocker innerhalb `_real_ppm_stage`.
+Aus der Code-Reihenfolge folgt: Alles davor wurde in diesem Lauf bereits real passiert.
+
+### Vor B01 – durch den letzten realen Lauf faktisch überwunden
+- PPM-`final_article_ref` vorhanden;
+- finaler Artikeldatei-Hash stimmt;
+- kein vorgefertigter PPM-Report;
+- PPM-/PSERC-Runtimepakete vorhanden und SHA-korrekt;
+- Fact-Pack / Production-Plan-Item / Header als Produktionskontext vorhanden;
+- `production_plan_item.canonical_article.body_html` entspricht dem finalen Artikel;
+- finaler Artikeltext hashgleich zu `final_article_sha256`;
+- Canonical Article ID im PPM-Slot gefunden;
+- externer `plan_slot` stimmt mit PPM/PSERC-Slotidentität.
+
+Diese Punkte sind deshalb **nicht** als nächste Vermutungsfehler zu behandeln.
+
+### B01 – aktuell erster realer Blocker
+- alter technischer Guard verlangte numerische WP-ID;
+- B01-only #141 ersetzt diese Vorbedingung durch den bestehenden semantischen Kategorievertrag und setzt nur für `nd_seed_terms` eine lokale Seed-ID.
+
+### Nach B01 – noch nie im aktuellen harten Real-PPM-Pfad live erreicht
+1. `nd_seed_terms([$seedItem])`;
+2. realer Fact-Pack-Import;
+3. Source-Snapshot-/Source-Hash-Bindung;
+4. Aufbau des `production_plan_v4`-Einzelplans (Headervertrag ist bereits vorgelagert geprüft);
+5. `PSERC_PPM_Intake_Bridge::execute`;
+6. innere PPM-Normal-Draft-Pipeline;
+7. PPM-Reportidentität / Technical PASS / Content-Quality PASS;
+8. PPM-`content_hash == final_article_sha256`;
+9. erst danach finaler PPM-Stage-Proof → FACHWORKFLOW_PASS → ITEM_RECEIPT.
+
+### Testabdeckung
+Die aktuell vorhandenen M01–M33-Checks testen diesen kompletten Nach-B01-Korridor **nicht real**.
+Die dedizierten PPM-Binding-Tests prüfen die äußere Report-/Hashbindung synthetisch.
+Das ältere `test_fachworkflow_proof_handoff.py` ist gegenüber dem heute zwingenden realen PPM-Binding stale und kein Beleg für diesen Korridor.
+
+### Konsequenz
+Vor einem echten Lauf nach B01 darf kein Punkt 1–9 prophylaktisch geändert werden.
+Pauls Findings dienen als vorbereitete Fehlerlandkarte insbesondere für Punkt 6.
+Der erste reale Fehler nach B01 entscheidet, ob Fact-Pack/Source-Bindung, PPM-Bridge oder ein innerer Gate-Konflikt tatsächlich relevant ist.
+
