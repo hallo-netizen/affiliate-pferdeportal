@@ -158,3 +158,66 @@ Es wird ausschließlich verwendet, um auf der technischen Ebene zu unterscheiden
 
 Nur die letzten beiden Klassen dürfen neue Reparaturkandidaten werden.
 
+## ERGEBNIS DER DREI PRIORISIERTEN TECHNISCHEN PRÜFUNGEN
+
+### 1. F2 / A6 / A12 – Pre-/Post-Transformation-Gate-Reihenfolge
+
+**Neu gegenüber bisherigen Reparaturen:** JA.
+B03 reparierte die Makro-Reihenfolge „Fachoutput → realer PPM → PASS/Receipt“, nicht die interne Reihenfolge Render/Resolve/Sanitize/Validate innerhalb des Prüfpfads.
+
+**Aktiver STARTMASTER-Bezug:** NOCH NICHT HART BELEGT.
+Im aktuellen 107007-Handoff werden weder `affiliate_mode`, Affiliate-Placeholder noch ein entsprechender Placeholder-Status als eigene Schnittstelle geführt. Der direkte Handoff bindet finalen Artikel, Produktionsplan, Fact-Pack und PPM-Report.
+
+**Einordnung:** realer Systembefund aus Pauls Reproduktion, aber derzeit kein belegter aktueller STARTMASTER-Blocker. Nicht vorab reparieren.
+
+### 2. F7 / A7 – technisch unerfüllbare Tabellenbedingung
+
+**Neu gegenüber bisherigen Reparaturen:** JA.
+Bisher wurde geprüft, dass `table_contract` als Pflichtstufe vorhanden bleibt; nicht systematisch, ob der durch den realen PPM konsumierte technische Artikelzustand die bereits bestehende Tabellenbedingung überhaupt erfüllen kann.
+
+**Historischer Gegencheck:**
+- `table_contract`-Hash auf letztem echten 7/7/107008-Stand `de21f6…`: `1ab3e892c37e5a48517519afcccbf8ec01b9f08da141eef93d577acd456756c7`.
+- aktueller Kandidat: exakt derselbe Hash.
+- Article-Type-Templates-Hash `dc79a6d7…` ebenfalls unverändert.
+- Generation-1-Batch, Source-Snapshot und Batch-SHA sind auf `de21f6…` und aktuellem `main` identisch.
+- entscheidender technische Delta danach: exakter echter PPM-6.7.9-Pfad wurde ab `6818cc…` / `9d7fe0…` in 107007 verpflichtend.
+
+**Einordnung:** stärkster Paul-Folgekandidat nach B01. Nicht weil Tabellenregel oder Inhalt geändert wurden, sondern weil derselbe bestehende Vertrag jetzt erstmals im realen PPM-Pfad zwingend technisch ausgeführt wird.
+
+**Grenze:** aktueller Live-Lauf stoppt noch vor `PSERC_PPM_Intake_Bridge::execute` an B01. Daher noch kein Beleg, dass F7/A7 der nächste reale Blocker ist. Kein Vorab-Fix.
+
+### 3. A11 – unterschiedliche Hash-Semantik
+
+**Neu gegenüber bisherigen Reparaturen:** TEILWEISE.
+M13 bindet bereits PPM-`content_hash` exakt an den finalen Artikel-SHA. Pauls A11 betrifft dagegen `validated_content_hash` mit zwei unterschiedlichen technischen Bedeutungen.
+
+**Aktiver STARTMASTER-Bezug:** schwach.
+`validated_content_hash` ist in den aktuell offen lesbaren 107007-STARTMASTER-Schnittstellen kein verwendetes Feld; die harte Außengrenze arbeitet mit `final_article_sha256` und PPM-`content_hash`.
+
+**Einordnung:** realer Systembefund, aber derzeit kein belegter aktueller 107007-Blocker. Zurückstellen, bis ein realer PPM-Fehler genau auf diesen inneren Hashpfad zeigt.
+
+## KAUSALER KORRIDOR NACH LETZTEM ECHTEN 7/7
+
+Vergleich `de21f6… → c8a96e7…`:
+
+Gleich geblieben:
+- Generation-1-Batch-SHA;
+- Source-Snapshot-SHA;
+- Source-Manifest-SHA;
+- Production-Package-SHA;
+- Article-Type-Templates-Hash;
+- Tabellenvertrag-Hash;
+- Fach-/Inhaltsregeln.
+
+Neu/härter geworden:
+- PPM 6.7.9 wird nicht mehr nur durch Stage-Proof behauptet, sondern im Handoff real ausgeführt;
+- exakter PPM-/PSERC-Paketpfad und Hash werden erzwungen;
+- finaler Artikel wird an Production-Plan und PPM-`content_hash` gebunden;
+- realer PPM-Handoff erzeugt erst danach PASS/Receipt;
+- Worker-/Context-Bindung wurde nach späteren Blockern zusätzlich gehärtet.
+
+Aktueller erster realer Blocker liegt innerhalb genau dieses neuen Korridors:
+`BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION`.
+
+**Schluss:** Pauls Mehrwert ist real, aber kein Grund für einen Sammelfix. Nach B01 ist ausschließlich der noch nie live bewiesene reale PPM-Korridor der nächste technische Beobachtungsbereich.
+
