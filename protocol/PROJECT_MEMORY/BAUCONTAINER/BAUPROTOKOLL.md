@@ -1089,4 +1089,34 @@ NEGATIV:
 Kein Schreibrecht, kein Merge, kein neuer Paul-Auftrag, keine zweite Wahrheit.
 
 BEZUG:
-ARCH-065.
+ARCH-066.
+
+
+### 2026-09-06 – Außentür von TEXT/SEO auf allgemeingültige Zweitprüfung korrigiert
+
+AUSLÖSER:
+Claude nutzte die erste READ-ONLY-Außentür und prüfte ungefragt Paul-/Branch-/Campusarchitektur statt primär den vom Nutzer gewünschten Fachinhalt.
+
+URSACHE:
+Die Außentür war zu eng auf TEXT/SEO verdrahtet und erlaubte ausdrücklich „Architektur und Konsistenz prüfen“. Damit war die Scope-Ausweitung durch Claude durch unsere eigene Anweisung gedeckt.
+
+KISS-KORREKTUR:
+- keine neue Claude-Etage;
+- bestehende `PAUL/READ_ONLY_REVIEW.md` bleibt die **eine Außentür**;
+- jetzt allgemeingültig für alle Projekte, Büros und Themen;
+- Prüfgegenstand = exakt Nutzerauftrag;
+- Standard = FACH-/INHALTSPRÜFUNG;
+- Paul-/Campus-/Branch-/Routingarchitektur nur bei ausdrücklich verlangter SYSTEM-/ARCHITEKTURPRÜFUNG;
+- Claude bleibt READ-ONLY-Zweitprüfer;
+- Paul darf Befunde anschließend verwenden.
+
+NEBENBEFUND:
+Doppelte ID `ARCH-065` erkannt.
+Die bereits bestehende Fehlerabgleich-Regel behält `ARCH-065`.
+Die externe Außentür wird eindeutig auf `ARCH-066` korrigiert.
+
+NEGATIV:
+kein eigener Claude-Bereich, keine zweite Wahrheit, keine automatische Auftragsübernahme.
+
+BEZUG:
+ARCH-066.

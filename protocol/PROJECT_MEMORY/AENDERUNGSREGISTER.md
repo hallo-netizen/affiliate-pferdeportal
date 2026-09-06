@@ -724,15 +724,17 @@ AKTUELL:
 Keine TEXT/SEO-Änderung aus diesem Planungschat. Der aktuelle TEXT-Hobbyraum ist anderweitig gebunden und sperrt Fach-/Textmaschinenregeländerungen.
 
 
-## ARCH-065 – Externe Prüfer bekommen eine READ-ONLY-Außentür
+## ARCH-066 – Externe Prüfer bekommen eine allgemeingültige READ-ONLY-Außentür
 WAS:
-`PAUL/READ_ONLY_REVIEW.md` stellt externen Prüfern ohne Git-Werkzeuge einen einzigen öffentlichen Einstieg bereit.
+`PAUL/READ_ONLY_REVIEW.md` stellt externen Prüfern ohne Git-Werkzeuge einen einzigen öffentlichen Einstieg für **alle Projekte/Büros/Fachthemen** bereit.
 WARUM:
-Ein externer Chat kann die Campus-/Paul-Architektur nur nutzen, wenn seine Umgebung das Repository tatsächlich lesen kann. Viele Chatumgebungen besitzen keine Git-Tools, können aber öffentliche HTTPS-Links öffnen.
+Ein eigener Claude-Bereich würde Pauls vollständige Lesesicht duplizieren und neue Zuständigkeits-/Synchronisationsprobleme schaffen. Externe Prüfer brauchen nur eine sichere Lesetür und einen klar begrenzten Prüfgegenstand.
 KISS:
-Keine Claude-Etage, kein eigener Status, keine Kopien. Nur absolute Links auf den offiziellen Campus-Branch.
+Keine Claude-Etage, kein eigener Status, keine Fachkopien. Prüfgegenstand = exakt Nutzerauftrag. Standard = FACH-/INHALTSPRÜFUNG. System-/Architekturprüfung nur bei ausdrücklichem Auftrag.
+ZUSAMMENSPIEL:
+Claude = READ-ONLY-Zweitprüfer; Paul kann Befunde verwenden, bleibt aber alleiniger Paul-Worker.
 FALLBACK:
-Wenn auch HTTPS/Webzugriff fehlt, genau eine automatisch erzeugte READ-ONLY-Prüfkapsel; keine manuelle Sammlung vieler Dateien.
+Wenn auch HTTPS/Webzugriff fehlt, genau eine automatisch erzeugte READ-ONLY-Prüfkapsel für den genannten Prüfgegenstand.
 
 
 ## PV-PLAN-006 – Campus-Queraudit vor Architekturfestlegung

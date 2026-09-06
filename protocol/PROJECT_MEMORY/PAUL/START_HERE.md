@@ -164,10 +164,17 @@ Die gültige Garantie ist:
 **Paul kann nach Aktivierung der Security-Schicht nicht gültig auf einem veralteten relevanten Campusstand abschließen.**
 
 
-## Externer READ-ONLY-Prüfer
+## Externer READ-ONLY-Zweitprüfer
 
 Externe Prüfer ohne Git-/Repo-Toolzugriff verwenden ausschließlich:
 
 `protocol/PROJECT_MEMORY/PAUL/READ_ONLY_REVIEW.md`
 
-Diese Außentür enthält nur absolute Weblinks auf den offiziellen Campus und keine zweite Statuswahrheit.
+Die Außentür ist **allgemeingültig für alle Projekte/Büros/Themen**.
+Der externe Prüfer wird nicht zu Paul und übernimmt keinen Auftrag.
+
+Standard:
+Prüfgegenstand = exakt der Nutzerauftrag.
+Paul-/Campus-/Brancharchitektur ist nur dann Prüfgegenstand, wenn der Nutzer ausdrücklich eine System-/Architekturprüfung verlangt.
+
+Keine zweite Statuswahrheit.

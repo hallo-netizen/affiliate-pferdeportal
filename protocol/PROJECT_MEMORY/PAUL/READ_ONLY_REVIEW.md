@@ -1,74 +1,179 @@
-# PAUL – EXTERNER READ-ONLY-PRÜFEINGANG
+# PAUL – ALLGEMEINGÜLTIGE EXTERNE READ-ONLY-AUSSENTÜR
 
 STAND: 2026-09-06
 ROLLE: EXTERNAL_REVIEW_ONLY
 
-## Zweck
+## 1-KLICK-REGEL
 
-Diese Datei ist die **eine öffentliche Außentür für externe Prüfer** wie Claude.
+Diese Datei ist die **eine allgemeingültige Außentür für externe Prüfer** wie Claude.
 
-Sie enthält **keine zweite Fach-/Statuswahrheit**.
-Alle Angaben werden ausschließlich über absolute Links aus dem aktuellen offiziellen Campus gelesen.
+Sie gilt für:
+- jedes Projekt;
+- jedes Fachbüro;
+- Fehler;
+- Konzepte;
+- Zielverträge;
+- technische Originalquellen;
+- Produktvergleich;
+- TEXT/SEO;
+- DESIGN;
+- BILD;
+- AFFILIATE;
+- HIVEPRESS;
+- gemeinsame/projectübergreifende Themen.
 
-## Harte Regel
+**Keine eigene Claude-Etage. Keine zweite Wahrheit.**
 
-**NUR LESEN / PRÜFEN. NICHT ÄNDERN. NICHT MERGEN. NICHT INTEGRIEREN.**
+## Harte Grundregel
 
-Kein Klonen und keine Git-Operation sind für die Prüfung erforderlich.
+**NUR LESEN / PRÜFEN / KOMMENTIEREN. NICHT ÄNDERN. NICHT MERGEN. NICHT INTEGRIEREN.**
 
-## Offizieller Campus
+Claude wird durch diese Tür **nicht zu Paul** und übernimmt keinen Paul-Auftrag.
+Er ist externer Zweitprüfer. Paul kann seine Befunde anschließend verwenden.
 
-Repository:
-`hallo-netizen/affiliate-pferdeportal`
+## Prüfgegenstand = Nutzerauftrag
 
-Offizieller Campus-Branch:
-`hobbyroom/project-memory-campus-v1-20260905`
+Der Prüfgegenstand ist **ausschließlich das, was der Nutzer in seinem Auftrag nennt**.
 
-## Pflichtweg für TEXT/SEO-Prüfung
+Beispiele:
+- „Prüfe Fehler B14.“ → B14 + dafür notwendige Originalquellen.
+- „Prüfe das Produktvergleichskonzept.“ → Produktvergleich + dafür notwendige Quellen.
+- „Prüfe den aktuellen TEXT-Fix fachlich.“ → aktueller TEXT-Fix + Fehler-/Ziel-/Testquellen.
+- „Prüfe das Paul-/Campus-System.“ → erst dann System-/Architekturprüfung.
 
-1. [Campus START_HERE](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/START_HERE.md)
-2. [Paul START_HERE](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PAUL/START_HERE.md)
-3. [Paul TEXT/SEO START_HERE](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PAUL/TEXT_SEO/START_HERE.md)
-4. [TEXT CURRENT_STATE](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md)
-5. [TEXT HOBBYRAUM](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md)
-6. [Fehlerregister](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/FEHLERREGISTER.md)
-7. [Zielvertragsregister](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md)
-8. [Änderungs-/WARUM-Register](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md)
-9. [Handlungsverzeichnis](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md)
+**Der Prüfer darf den Scope nicht selbst auf das ganze Campus-/Paul-System erweitern.**
 
-Danach ausschließlich den dort verlinkten autoritativen Originalquellen folgen, soweit sie für die konkrete Prüfung benötigt werden.
+## Standardmodus: FACH-/INHALTSPRÜFUNG
+
+Wenn der Nutzer nicht ausdrücklich „Systemprüfung“, „Architekturprüfung“ oder sinngleich sagt, gilt automatisch:
+
+**FACH-/INHALTSPRÜFUNG.**
+
+Dann sind nur Transport/Orientierung und **NICHT Prüfgegenstand**:
+- Paul-System;
+- Worker-/Rollenbindung;
+- Branchname;
+- Hobbyraum-Zuweisung;
+- Single-Writer-/Parallelitätsarchitektur;
+- Campus-/Büro-/Pförtnerstruktur;
+- Security-/Routingkonzept;
+- Benennung von Branches oder Räumen.
+
+Diese Dinge dürfen nur soweit gelesen werden, wie nötig ist, um die **aktuell gültigen Originalquellen** des eigentlichen Prüfgegenstands zu finden.
+
+Ein dort bemerkter Nebenwiderspruch wird in der Fachprüfung **nicht zum Hauptergebnis gemacht**.
+
+Ausnahme:
+Wenn ein solcher Widerspruch verhindert, dass die verlangte Fachquelle überhaupt eindeutig bestimmt oder geprüft werden kann:
+knapp `QUELLE NICHT EINDEUTIG / NICHT VERIFIZIERBAR` melden.
+
+## Modus SYSTEM-/ARCHITEKTURPRÜFUNG
+
+Nur wenn der Nutzer dies ausdrücklich verlangt.
+
+Dann dürfen zusätzlich geprüft werden:
+- Campusstruktur;
+- Paul-System;
+- Rollen;
+- Routing;
+- Branch-/Worker-Grenzen;
+- Eine-Wahrheit-Architektur;
+- Protokoll-/Securityregeln.
+
+## Universeller Leseweg
+
+### 1. Campus nur als Navigation
+[Campus START_HERE](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/START_HERE.md)
+
+### 2. Handlungsverzeichnis
+[Handlungsverzeichnis](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md)
+
+Dort den zum Nutzerauftrag passenden Fachweg wählen.
+
+### 3. Zuständiges Projekt/Büro
+Nur das für den Prüfgegenstand relevante Projekt/Büro öffnen.
+
+Dort:
+`START_HERE.md → CURRENT_STATE.md → HOBBYRAUM.md`
+
+Diese drei Dateien dienen in einer Fachprüfung **nur dazu, die aktuelle Fachquelle und den aktuellen Auftrag zu bestimmen**.
+
+### 4. Relevante Register nur als Wegweiser
+[Fehlerregister](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/FEHLERREGISTER.md)
+
+[Zielvertragsregister](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md)
+
+[Änderungs-/WARUM-Register](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md)
+
+Register nicht als Ersatz für die dort benannte Originalquelle behandeln.
+
+### 5. Originalquellen
+Die zum Prüfgegenstand benannten autoritativen Originalquellen vollständig lesen.
+
+Bei technischer Fachprüfung zusätzlich die dort verlinkten technischen Originalquellen lesen, soweit der Nutzerauftrag dies erfordert.
+
+## Rückgabeformat
+
+Standardmäßig nur:
+
+1. **Befund zum Prüfgegenstand**
+2. **Beleg / Originalquelle**
+3. **positiv / negativ / ungeklärt**
+4. **konkretes Risiko oder Verbesserung**
+5. **keine Nebenanalyse außerhalb des Scopes**
+
+Keine Auftragsübernahme.
+Keine Änderung.
+Kein Merge.
+Kein „ich würde jetzt bauen“.
+
+## Zusammenspiel mit Paul
+
+Claude = externer READ-ONLY-Zweitprüfer.
+
+Paul darf:
+- Claudes Befund lesen;
+- ihn gegen die offiziellen Originalquellen verifizieren;
+- daraus eine eigene technische Hypothese/Lösung entwickeln, sofern Paul tatsächlich beauftragt ist.
+
+Claude darf nicht:
+- Pauls Branch führen;
+- Pauls Assignment verändern;
+- Pauls Status fortschreiben;
+- Integration empfehlen, ohne den angeforderten Fachbeleg zu prüfen.
+
+**Claude liefert Senf. Paul bleibt Paul.**
+
+## Direkte Paul-Tür
+
+Wenn ausdrücklich Pauls eigener Arbeitskontext geprüft werden soll:
+
+[Paul START_HERE](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PAUL/START_HERE.md)
+
+Für TEXT/SEO zusätzlich:
+[Paul TEXT/SEO START_HERE](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PAUL/TEXT_SEO/START_HERE.md)
+
+Diese Pfade sind **nicht automatisch Pflicht**, wenn der Nutzer einen anderen Fachbereich prüfen lässt.
 
 ## Raw-Fallback
 
-Falls die GitHub-Webansicht nicht gelesen werden kann:
+Falls GitHub-Webansicht nicht lesbar ist:
 
-- [Raw Paul TEXT/SEO START_HERE](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PAUL/TEXT_SEO/START_HERE.md)
-- [Raw TEXT CURRENT_STATE](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md)
-- [Raw TEXT HOBBYRAUM](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md)
+- [Raw Campus START_HERE](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/START_HERE.md)
+- [Raw Handlungsverzeichnis](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md)
+- [Raw Fehlerregister](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/FEHLERREGISTER.md)
+- [Raw Zielvertragsregister](https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/hobbyroom/project-memory-campus-v1-20260905/protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md)
 
-## Prüfauftrag
-
-Ein externer Prüfer darf:
-- Architektur und Konsistenz prüfen;
-- Quellen gegeneinander prüfen;
-- Fehler/Widersprüche benennen;
-- Verbesserungsvorschläge formulieren.
-
-Er darf nicht:
-- PROJECT_MEMORY verändern;
-- technische Dateien verändern;
-- Branches erzeugen;
-- Pauls Arbeitsauftrag übernehmen;
-- einen neuen Status erzeugen;
-- PASS behaupten, wenn die verlinkten Quellen dies nicht tragen.
+Von dort nur den zum Prüfauftrag gehörenden Originalquellen folgen.
 
 ## Wenn kein Webzugriff vorhanden ist
 
-Wenn die Umgebung **auch diese öffentlichen HTTPS-Links nicht öffnen kann**, besteht technisch kein direkter Campuszugriff.
+Wenn auch öffentliche HTTPS-Links nicht geöffnet werden können:
+**STOPP.**
 
-Dann gilt:
-**STOPP – keine Dateien einzeln zusammensuchen.**
+Keine vielen Dateien manuell zusammensuchen.
 
-Stattdessen eine einzige, automatisch erzeugte READ-ONLY-Prüfkapsel aus dem aktuellen Campus bereitstellen.
+Fallback:
+eine einzige automatisch erzeugte READ-ONLY-Prüfkapsel für **genau den genannten Prüfgegenstand**.
 
-Diese Kapsel ist nur Transport/Snapshot und niemals neue Wahrheit.
+Die Kapsel ist Transport/Snapshot und niemals neue Wahrheit.

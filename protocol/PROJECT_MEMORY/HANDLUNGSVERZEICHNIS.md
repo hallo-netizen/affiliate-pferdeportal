@@ -191,19 +191,23 @@ Die eigentliche Artikel-/Textproduktion bleibt im Büro TEXT und dessen bestehen
 Keinen zweiten Textmaschinen-/STARTMASTER-Weg im Produktvergleichsbüro bauen.
 
 
-## Externe READ-ONLY-Prüfung über Paul
+## Externe READ-ONLY-Zweitprüfung
 
 Aktion:
-Ein externer Prüfer (z. B. Claude) soll Paul/TEXT/SEO nur lesen und prüfen, besitzt aber keine Git-/Repo-Werkzeuge.
+Ein externer Prüfer (z. B. Claude) soll zu **einem beliebigen Campus-/Projekt-/Fachthema** eine unabhängige Zweitmeinung geben, besitzt aber keine Git-/Repo-Werkzeuge.
 
 Verbindlicher Weg:
 `PAUL/READ_ONLY_REVIEW.md`
 
-Dort:
-- absolute öffentliche GitHub-/Raw-Links;
-- ausschließlich offizieller Campus-Branch;
+Regel:
+- eine einzige allgemeingültige Außentür in der Paul-Etage;
+- Prüfgegenstand = exakt das vom Nutzer genannte Thema;
+- Standard = FACH-/INHALTSPRÜFUNG;
+- Paul-/Campus-/Branch-/Routingarchitektur nur bei ausdrücklich verlangter SYSTEM-/ARCHITEKTURPRÜFUNG;
+- externe Prüfung = READ/REVIEW ONLY;
 - keine Kopie aktueller Fachwahrheit;
-- READ/REVIEW ONLY.
+- Claude wird nicht zu Paul;
+- Paul kann Claudes Befund anschließend verwenden.
 
 Wenn die externe Umgebung auch öffentliche HTTPS-Links nicht öffnen kann:
-STOPP → eine einzige automatisch erzeugte Prüfkapsel verwenden; keine manuelle Mehrdatei-Übergabe.
+STOPP → genau eine automatisch erzeugte Prüfkapsel für den genannten Prüfgegenstand; keine manuelle Mehrdatei-Übergabe.
