@@ -1040,3 +1040,23 @@ GITHUB-CHECKS AUF HEAD
 ERGEBNIS:
 **BÜROARCHITEKTUR PASS.**
 Facharbeit bleibt bis ausdrücklichem Auftrag ungebunden.
+
+### 2026-09-06 – Harte Fehlerabgleich-Sperre an Bürotüren
+
+BEDARF:
+Im TEXT-Prüfprozess wurde B06 erneut praktisch ausprobiert, obwohl der Fehler bereits in der autoritativen Fehlerliste dokumentiert war. Die Bürotür verlinkte das Fehlerregister, erzwang den Abgleich aber nicht vor jeder technischen Aktion.
+
+KISS-FIX:
+- TEXT-`START_HERE.md`: harte Fehlerabgleich-Sperre vor Test/Live/Branch-/Code-/Merge-/Release-Aktion;
+- `EINGANGSSTANDARD.md`: gleiche Pflicht als Bürostandard;
+- `NEUES_PROJEKT_VORLAGE.md`: neue Projektbüros erben die Pflicht automatisch.
+
+HARD RULE:
+Bekannter Treffer = nicht erneut praktisch ausprobieren. Vorhandene Lösung/Arbeitsgrenze übernehmen.
+
+NICHT VERÄNDERT:
+Campus-Eingang und Campus-Routing.
+
+BEZUG:
+ARCH-065 / BAU-032.
+
