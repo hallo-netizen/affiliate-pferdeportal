@@ -63,10 +63,10 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
   - fehlender Name trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - falsche Taxonomy trotz ID → alt fälschlich **PASS**, neu **BLOCK**
   - fehlender Slug → alt **BLOCK**, neu **BLOCK**
-- Hobbyraum-Kandidat: Draft-PR #140, Branch `hobbyroom/b01-semantic-category-seed`, aktueller Head `3ed31aa78978a2098f324eead6f2a5335a10e2d4`.
+- Bevorzugter kausaler Hobbyraum-Kandidat: Draft-PR #141, Branch `hobbyroom/b01-only-kiss-20260906`, Head `94917596adce04765380c60dd7ade0fb23793393`. PR #140 bleibt als breiterer B01+B15-Prüfstand separat bestehen.
 - Kandidat ändert keine SEO-/Textmaschinen-/PPM-Regel; nur der bestehende Handoff verwendet die ID nicht mehr als vorgezogene Produktionsvoraussetzung.
-- `hardlock` und `hardlock-base` auf Head `3ed31aa…`: PASS.
-- vorhandener M01–M33-Runner auf demselben Quellstand: **GESAMT PASS**.
+- #141: `hardlock` + `hardlock-base` + `MONOTONIC_PREBOUND_TRANSITION_PASS` + Cloud-/Continuity-Positiv-/Negativtests: **PASS**.
+- kompletter M01–M33-Lauf ist auf dem breiteren #140-Head `3ed31aa…` **GESAMT PASS**; auf exakt #141 wurde er nicht neu ausgeführt, weil kein vorhandener zulässiger Workflow dafür existiert und keine neue Testhülle gebaut wird.
 - **Noch nicht behauptet:** echter neuer 7/7-Live-PASS.
 - **Harte Nutzerregel:** Nicht durch Erweiterung des SEO-5-Felder-Handoffs lösen.
 
@@ -149,6 +149,6 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 
 **Nur ein aktueller erster Live-Blocker ist auf main belegt:** `BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION` beim ersten Artikel auf main `c8a96e7…`.
 
-Für genau diesen Blocker existiert jetzt ein kausal begründeter Hobbyraum-Kandidat (#140). Die alte ID-Vorbedingung ist als unmittelbare Blockierursache auf Codeebene positiv/negativ belegt. Ob danach weitere Live-Fehler folgen, ist ausdrücklich offen.
+Für genau diesen Blocker existiert jetzt der kausal isolierte Hobbyraum-Kandidat **#141 (B01-only)**. #140 bleibt der breitere B01+B15-Prüfstand. Die alte ID-Vorbedingung ist als unmittelbare Blockierursache auf Codeebene positiv/negativ belegt. Ob danach weitere Live-Fehler folgen, ist ausdrücklich offen.
 
 Keine Aussage, dass B01 der letzte Fehler der Kette ist; der letzte reale Lauf wurde korrekt am ersten Blocker beendet.
