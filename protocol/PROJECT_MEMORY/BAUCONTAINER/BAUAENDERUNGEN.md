@@ -1,6 +1,6 @@
 # BAUCONTAINER – BAUÄNDERUNGEN
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 Dieses Dokument ist nur der Architektur-Index.
 Die vollständige Begründung liegt im zentralen `AENDERUNGSREGISTER.md`.
@@ -58,3 +58,32 @@ Keine Duplikation der ausführlichen Begründungen hier.
 
 - ARCH-042 → eine Wahrheit campusweit besser ausgeschildert
 - ARCH-043 → dynamische Fakten nicht in Wegweisern duplizieren
+
+- ARCH-044 → Paul ist isolierter Spezialworker, kein normaler Arbeitsweg
+- ARCH-045 → Single Writer, Multi Reader
+- ARCH-046 → Worker-Branches sind keine Statusquelle
+- ARCH-047 → Paul-PROJECT_MEMORY-Sperre gehört in den vertrauenswürdigen Base-Hardlock
+- ARCH-048 → Universelle Protokollpflicht an jedem Abschluss
+- ARCH-049 → Architektur darf dynamische Arbeitsbindung nicht erfinden
+- ARCH-050 → PROJECT_MEMORY-Protokollpflicht wird technisch fail-closed
+- ARCH-051 → Sicherungslogik besitzt eingebaute Positiv-/Negativ-Selbsttests
+- ARCH-052 → Paul holt seinen Auftrag automatisch aus der einzigen Hobbyraum-Wahrheit
+- ARCH-053 → Paul-Scope-Gate ergänzt, aber ersetzt nicht die bestehende Cloud-Eingangstür
+- ARCH-054 → Paul-Automatik ist Worker-Automatik, keine behauptete Chat-Autostart-Funktion
+- ARCH-055 → Pauls technischer Scope ist exklusiv und jeder Auftrag startet auf frischem Branch
+- ARCH-056 → TEXT/SEO-Historienarchive und Dependencies werden nicht zu CURRENT hochgestuft
+- ARCH-057 → Tresor/Archiv/Mirror sind campusweit keine Arbeitsquelle
+- ARCH-058 → Paul-Frische ist Start + Driftblock + Refresh, keine Live-Synchronisation
+- ARCH-059 → Paul-Snapshots bewahren Quelltext byte-näher ohne strip
+- ARCH-060 → Lokaler Tresor wird als unabhängiger versionierter Snapshot gebaut
+- ARCH-061 → LOCAL_BACKUP_PASS und TRESOR_PASS bleiben getrennt
+- ARCH-062 → ENDSTEMPEL_PRIVATE_KEY ist bestätigte Recovery-Abhängigkeit
+- ARCH-063 → Paul-Frische wird von der einzigen Cloud-Eingangstür automatisch erzwungen
+- ARCH-064 → Eigenes Büro PRODUKTVERGLEICH
+- ARCH-065 → Fehlerliste ist technische Vorsperre an jeder Bürotür
+- ARCH-066 → Externe Prüfer bekommen eine allgemeingültige READ-ONLY-Außentür
+- ARCH-067 → PB ONE ist das zentrale nicht-technische Agenturgebäude
+- ARCH-068 → PB ONE ist gemeinsamer gleichberechtigter Agenturraum von Nutzer und Paul
+- ARCH-069 → PB ONE erhält Zentralregister und Entwicklungsraum
+- ARCH-070 → PB ONE Arbeitsdokumente als eigene Akten
+- ARCH-071 → PB ONE erhält einen Aktenschrank für dauerhafte Referenzakten

@@ -679,3 +679,45 @@ REGRESSIONSSCHUTZ:
 
 BEZUG:
 ARCH-065.
+
+
+## BAU-033 – PB ONE wurde nicht überall auf die korrigierte Gleichberechtigung nachgezogen
+
+STATUS: CLOSED
+
+KURZ:
+Nach der Nutzerkorrektur „PB ONE = gemeinsame Agentur mit gleichen redaktionellen Rechten“ blieb der Hauptpförtner noch bei „Paul als Sparringspartner“. Bauplan und Bauänderungsindex enthielten den neuen PB-ONE-Stand ebenfalls noch nicht vollständig.
+
+AUSWIRKUNG:
+Ein neuer Chat hätte trotz korrekter PB-ONE-Tür eine widersprüchliche Rollenbeschreibung lesen können.
+
+KISS-FIX:
+- Hauptpförtner auf gleichberechtigte PB-ONE-Rolle korrigiert;
+- vollständige PB-ONE-Routen ergänzt;
+- Bauplan um PB ONE ergänzt;
+- Bauänderungsindex ARCH-044 bis ARCH-071 nachgezogen.
+
+REGRESSIONSSCHUTZ:
+ARCH-068 bis ARCH-071 + PB_ONE/START_HERE.md sind die maßgeblichen PB-ONE-Regeln.
+
+
+## BAU-034 – PB-ONE-Schreibrecht für Paul ist technisch noch nicht als Security-Ausnahme umgesetzt
+
+STATUS: BLOCKED / TECHNISCHE ANBINDUNG OFFEN
+
+KURZ:
+PB ONE erlaubt Paul redaktionelle Writes unter `protocol/PROJECT_MEMORY/PB_ONE/**`.
+Die bestehende/ vorbereitete technische Paul-Security behandelt PROJECT_MEMORY dagegen grundsätzlich als READ ONLY.
+
+AUSWIRKUNG:
+Sobald die technische Paul-Sperre produktiv aktiviert wird, würde sie ohne gezielte Ausnahme auch legitime PB-ONE-Redaktionsarbeit blockieren.
+
+SOLL:
+Nur `PB_ONE/**` als klar abgegrenzte redaktionelle Ausnahme.
+Außerhalb PB ONE bleiben die normalen technischen Paul-Sperren unverändert.
+
+STATUSGRUND:
+Noch kein technischer PB-ONE-Write-Kanal/Hardlock-Ausnahmepfad gebaut oder positiv/negativ geprüft.
+
+NICHT ALS PASS MELDEN:
+Erst nach echter schreibfähiger Paul-Anbindung + Positivtest in PB ONE + Negativtest außerhalb PB ONE schließen.

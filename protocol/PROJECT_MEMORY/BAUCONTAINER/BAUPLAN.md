@@ -1,6 +1,6 @@
 # BAUCONTAINER – BAUPLAN
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 STATUS: V1
 
 ## Grundmodell
@@ -8,6 +8,12 @@ STATUS: V1
 ```
 CAMPUS
 ├── HAUPTPFÖRTNER
+├── PB ONE – gemeinsame Agenturzentrale
+│   ├── AKTENSCHRANK
+│   ├── IDEENWERKSTATT
+│   ├── ENTWICKLUNGSRAUM
+│   ├── ARBEITSDOKUMENTE
+│   └── ANGEBOTE / FLYER
 ├── PROJEKTGEBÄUDE
 │   └── BÜRO
 │       └── HOBBYRAUM
@@ -105,6 +111,23 @@ Keine Räume auf Vorrat.
 - `EINGANGSSTANDARD.md` → 1-Klick-Orientierung
 - `HOBBYRAUM_STANDARD.md` → ein Arbeitsraum pro Büro / FREI-AKTIV-BLOCKED
 - `BAUABNAHME_20260905.md` → letzter harter Abnahmebeleg
+
+## PB ONE – gemeinsame Agentur
+
+PB ONE ist der zentrale nicht-technische Agenturknoten.
+
+Nutzer und Paul haben dort dieselben redaktionellen Rechte.
+
+Arbeitslogik:
+- dauerhafte Referenzen → `PB_ONE/AKTENSCHRANK/`;
+- Rohideen → `PB_ONE/IDEENWERKSTATT/`;
+- belastbare Konzepte → `PB_ONE/ENTWICKLUNGSRAUM/`;
+- laufende Unterlagen → `PB_ONE/ARBEITSDOKUMENTE/`;
+- Angebote/Flyer → `PB_ONE/ANGEBOTE_FLYER/`.
+
+Harte Grenze:
+Keine Programmierung in PB ONE.
+Technische/projektspezifische Umsetzung wird bewusst an ein Projekt-/Fachbüro übergeben.
 
 ## Hauptwahrheit
 

@@ -348,3 +348,33 @@ Dokumentation ergänzt:
 
 Kein Merge. Main unverändert. Kein Codex-/Live-Lauf gestartet.
 
+
+
+### 2026-09-07 – PB ONE als gemeinsame Agentur und bewusster Campus-Cut
+
+Entwicklung:
+PB ONE wurde als zentraler Agenturknoten des Campus ergänzt.
+
+Wichtige Nutzerkorrektur:
+PB ONE ist **nicht** Pauls eingeschränkter Sparringsraum.
+Nutzer und Paul haben dort dieselben redaktionellen Rechte.
+
+Daraus entstanden:
+- Zentralregister;
+- Ideenwerkstatt;
+- Entwicklungsraum;
+- Arbeitsdokumente;
+- Angebote/Flyer;
+- Aktenschrank für dauerhafte Referenzakten;
+- erste Website-Akte aus dem WordPress-Export vom 07.09.2026.
+
+Harte Grenze:
+In PB ONE wird vorerst nicht programmiert.
+Technische Umsetzung wird bewusst an ein Projekt-/Fachbüro übergeben.
+
+Abschlussentscheidung:
+Der Campus wird jetzt nicht weiter auf Vorrat ausgebaut.
+Neue Räume/Regeln entstehen erst aus realer Nutzung und konkretem Bedarf.
+
+Offener technischer Punkt:
+Die redaktionelle PB-ONE-Schreibausnahme für Paul ist dokumentiert, aber noch nicht in der technischen Paul-/Security-Sperre umgesetzt.

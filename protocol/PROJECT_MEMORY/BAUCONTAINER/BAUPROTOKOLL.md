@@ -1218,3 +1218,30 @@ Keine Behauptung, dass der Export ein vollständiges Backup oder eine externe Ve
 
 BEZUG:
 ARCH-071.
+
+
+### 2026-09-07 – Abschluss-/Nachholprüfung Architekturbüro
+
+AUSLÖSER:
+Universelle Abschluss-/Nachholprüfung vor dem bewussten Campus-Cut.
+
+FRISCH GEPRÜFT:
+aktueller Campus-Head, Baucontainer, Hauptpförtner, Bauplan, Bauänderungsindex, Entwicklungsprotokoll, Architektur-Fehlerkiste und PB-ONE-Architektur.
+
+GEFUNDEN:
+1. Hauptpförtner nannte Paul in PB ONE noch veraltet nur als Sparringspartner.
+2. Bauplan enthielt PB ONE noch nicht.
+3. Bauänderungsindex endete bei ARCH-043 und war gegenüber ARCH-044 bis ARCH-071 stale.
+4. Technische PB-ONE-Schreibausnahme für Paul ist weiterhin nicht implementiert.
+
+NACHGEHOLT:
+- Hauptpförtner korrigiert;
+- Bauplan PB ONE ergänzt;
+- BAUAENDERUNGEN bis ARCH-071 nachgezogen;
+- Entwicklungsprotokoll um PB-ONE-Entstehung + Campus-Cut ergänzt;
+- BAU-033 CLOSED dokumentiert;
+- BAU-034 als BLOCKED dokumentiert.
+
+CUT:
+Kein weiterer Architektur-Ausbau auf Vorrat.
+Campus ab jetzt real nutzen; nur konkrete Nutzungslücken führen zu neuen Umbauten.

@@ -152,9 +152,14 @@ Wenn der Nutzer Agenturideen, Angebote, Flyer, Positionierung oder Vorhaben **vo
 
 `protocol/PROJECT_MEMORY/PB_ONE/START_HERE.md`
 
+Nutzer und Paul haben innerhalb PB ONE dieselben redaktionellen Rechte.
+
 Routing:
+- dauerhafte Referenzakte → `PB_ONE/AKTENSCHRANK/START_HERE.md`
+- Idee entwickeln → `PB_ONE/IDEENWERKSTATT/START_HERE.md`
+- Konzept weiterentwickeln → `PB_ONE/ENTWICKLUNGSRAUM/START_HERE.md`
+- laufende Präsentation/Unterlage → `PB_ONE/ARBEITSDOKUMENTE/START_HERE.md`
 - Angebot/Flyer/Leistungsunterlage → `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
-- Idee entwickeln / Paul als Sparringspartner → `PB_ONE/IDEENWERKSTATT/START_HERE.md`
 
 Harte Grenze:
 PB ONE programmiert nicht.
