@@ -1,6 +1,6 @@
 # DESIGN – CURRENT STATE
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 
 ## AUTORITÄT DIESER DATEI
@@ -18,20 +18,30 @@ Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wah
 
 ## Aktueller LIVE-Stand
 
-**Pferde Atelier Design 1.50.472 / Contract V104**
+**Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002**
 
-Autoritative Live-Belege:
+Basis-Live:
 GitHub Branch:
 `fix/category-intro-targeted-79-v150472-20260831`
 
 Commit:
 `f1e074b2e6dae9bec76ee8ab3f177080f69d2d41`
 
-Live-Beleg:
+Basis-Live-Beleg:
 `design-baseline/2026-08-31/v150472-category-intro-79/LIVE_PASS.md`
 
-Dort ist Nutzerbestätigung nach Installation dokumentiert:
-V1.50.472 / V104 / finaler 79/79-Kategorietext-Patch.
+Zusätzlicher aktuell bestätigter Live-Patch:
+**Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.**
+Affiliate-Banner sowie Artikel-/Verweisstruktur bleiben unverändert.
+
+Live-Patch-Beleg:
+`LIVE_PASS_DESIGN_ORDER_SWAP_002.md`
+
+Candidate SHA-256:
+`11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`
+
+Hinweis:
+Der Pluginheader bleibt bewusst 1.50.472; der aktuelle Livezustand wird deshalb durch Basisversion + Job-ID + Candidate-SHA eindeutig bestimmt.
 
 ## Wichtige Abweichung zu main
 
@@ -86,6 +96,8 @@ MASTER_STATUS V1.50.472 sagt:
 ## Aktuelle Designregel
 
 V104 bleibt unverändert.
+
+Zusätzlich LIVE bestätigt: Auf der zentralen Kategorieebene stehen Affiliate-Produkte / Produktvorschläge vor der Beitragsvorschau; der Affiliate-Banner bleibt unverändert an seiner bisherigen Position.
 
 1.50.469→1.50.472 ist ausschließlich Pferde-spezifische redaktionelle Kategorietext-/Loader-Entwicklung.
 
