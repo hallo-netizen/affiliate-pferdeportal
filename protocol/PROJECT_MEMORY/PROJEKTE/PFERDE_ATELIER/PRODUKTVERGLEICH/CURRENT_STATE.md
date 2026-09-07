@@ -408,3 +408,21 @@ Verbindlicher Konzeptstand:
    Kurzfristige Händlerverfügbarkeit, Provision oder Angebotsdichte darf nicht nachträglich Fakten, Eignung oder Vergleichspaarung verändern.
 
 Kurzform: **Affiliate darf entdecken. Produktrecherche entscheidet. Affiliate monetarisiert.**
+
+
+## AKTUELLER ARCHITEKTURENTSCHEID – 2026-09-07
+
+Die frühere offene Frage TEXT-Extension vs. eigenständige Straße ist für V1 entschieden:
+
+- **keine Laufzeitabhängigkeit von STARTMASTER/TEXT in V1**;
+- **allgemeiner Produktwissen-Kern** als einzige Produktfaktenquelle;
+- **allgemeiner Produktvergleichs-Kern** liest daraus und erzeugt Produkt-/Variantenvergleiche bis WordPress-DRAFT;
+- SEO liefert nur optionale Signale/Priorisierung;
+- AFFILIATE bleibt separate Commerce-Autorität und matcht exakte Produktidentitäten;
+- vorhandene TEXT-/SEO-Funktionen werden nur gezielt wiederverwendet, wenn sie klein und sauber isolierbar sind;
+- keine zweite allgemeine Textmaschine und keine Kopie des STARTMASTER-/PPM-/PSERC-/PSTE-Stacks.
+
+Produktwissen-Vertrag:
+`PRODUKTWISSEN_V1_VERTRAG.md`.
+
+Damit sind ältere Abschnitte, die eine verpflichtende Übergabe an TEXT oder einen Extension-First-Test als NEXT ACTION nennen, **historische Planungsstände und nicht mehr CURRENT**.
