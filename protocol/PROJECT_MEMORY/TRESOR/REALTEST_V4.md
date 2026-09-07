@@ -1,3 +1,16 @@
+# HISTORISCHER TRESOR-TESTBELEG – NICHT VERBINDLICHER BACKUPWEG
+
+STAND: 2026-09-07
+
+HARD RULE:
+Diese Datei dokumentiert frühere Testtechnik.
+Sie definiert **keinen** aktuellen Backupweg.
+
+Aktuelle Autorität:
+\`KONZEPT.md\`
+
+---
+
 # NOTFALL-TRESOR – REALTEST V4
 
 STAND: 2026-09-07
