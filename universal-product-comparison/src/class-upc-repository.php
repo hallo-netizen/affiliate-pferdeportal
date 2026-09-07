@@ -12,12 +12,14 @@ class UPC_Repository {
     private $knowledge;
     private $comparisons;
     private $items;
+    private $features;
 
     public function __construct( $wpdb, $knowledge ) {
         $this->wpdb        = $wpdb;
         $this->knowledge   = $knowledge;
         $this->comparisons = $wpdb->prefix . 'upc_comparisons';
         $this->items       = $wpdb->prefix . 'upc_items';
+        $this->features    = $wpdb->prefix . 'upc_features';
     }
 
     public function create_comparison( array $data ) {
@@ -67,12 +69,14 @@ class UPC_Repository {
                 'comparison_key'    => $key,
                 'comparison_type'   => $type,
                 'product_group_key' => $validated['product_group_key'],
+                'working_title'     => isset( $data['working_title'] ) ? sanitize_text_field( $data['working_title'] ) : '',
                 'decision_intent'   => isset( $data['decision_intent'] ) ? sanitize_textarea_field( $data['decision_intent'] ) : '',
+                'comparability_note'=> isset( $data['comparability_note'] ) ? sanitize_textarea_field( $data['comparability_note'] ) : '',
                 'set_hash'          => $set_hash,
                 'created_at'        => $now,
                 'updated_at'        => $now,
             ),
-            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
+            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
         );
 
         if ( false === $inserted ) {
@@ -103,6 +107,82 @@ class UPC_Repository {
         }
 
         return $comparison_id;
+    }
+
+    public function set_features( $comparison_id, array $features ) {
+        $comparison_id = absint( $comparison_id );
+        if ( ! $this->comparison_exists( $comparison_id ) ) {
+            return new WP_Error( 'UPC_COMPARISON_NOT_FOUND', 'Comparison does not exist.' );
+        }
+
+        if ( count( $features ) < 1 || count( $features ) > 64 ) {
+            return new WP_Error( 'UPC_INVALID_FEATURE_COUNT', 'A comparison requires one to 64 declared features.' );
+        }
+
+        $normalized = array();
+        $seen = array();
+        foreach ( array_values( $features ) as $index => $feature ) {
+            if ( ! is_array( $feature ) ) {
+                return new WP_Error( 'UPC_INVALID_FEATURE', 'Feature definition is invalid.' );
+            }
+
+            $fact_key = isset( $feature['fact_key'] ) ? sanitize_key( $feature['fact_key'] ) : '';
+            $label    = isset( $feature['label'] ) ? sanitize_text_field( $feature['label'] ) : '';
+
+            if ( '' === $fact_key || '' === $label ) {
+                return new WP_Error( 'UPC_INVALID_FEATURE', 'Feature key and label are required.' );
+            }
+
+            if ( isset( $seen[ $fact_key ] ) ) {
+                return new WP_Error( 'UPC_DUPLICATE_FEATURE', 'Feature keys must be unique within a comparison.' );
+            }
+            $seen[ $fact_key ] = true;
+
+            $normalized[] = array(
+                'fact_key' => $fact_key,
+                'label'    => $label,
+                'position' => $index + 1,
+                'required' => ! isset( $feature['required'] ) || (bool) $feature['required'] ? 1 : 0,
+            );
+        }
+
+        $now = current_time( 'mysql', true );
+        $this->wpdb->query( 'START TRANSACTION' );
+        $deleted = $this->wpdb->delete( $this->features, array( 'comparison_id' => $comparison_id ), array( '%d' ) );
+        if ( false === $deleted ) {
+            $this->wpdb->query( 'ROLLBACK' );
+            return new WP_Error( 'UPC_FEATURE_RESET_FAILED', 'Existing comparison features could not be reset.' );
+        }
+
+        foreach ( $normalized as $feature ) {
+            $ok = $this->wpdb->insert(
+                $this->features,
+                array(
+                    'comparison_id' => $comparison_id,
+                    'fact_key'      => $feature['fact_key'],
+                    'label'         => $feature['label'],
+                    'position'      => $feature['position'],
+                    'required'      => $feature['required'],
+                    'created_at'    => $now,
+                ),
+                array( '%d', '%s', '%s', '%d', '%d', '%s' )
+            );
+            if ( false === $ok ) {
+                $this->wpdb->query( 'ROLLBACK' );
+                return new WP_Error( 'UPC_FEATURE_INSERT_FAILED', $this->wpdb->last_error ? $this->wpdb->last_error : 'Comparison feature insert failed.' );
+            }
+        }
+
+        $this->wpdb->update(
+            $this->comparisons,
+            array( 'updated_at' => $now ),
+            array( 'id' => $comparison_id ),
+            array( '%s' ),
+            array( '%d' )
+        );
+        $this->wpdb->query( 'COMMIT' );
+
+        return count( $normalized );
     }
 
     public function get_comparison_bundle( $comparison_id ) {
@@ -144,10 +224,88 @@ class UPC_Repository {
             );
         }
 
+        $features = $this->wpdb->get_results(
+            $this->wpdb->prepare(
+                "SELECT fact_key, label, position, required FROM {$this->features} WHERE comparison_id = %d ORDER BY position ASC",
+                $comparison_id
+            ),
+            ARRAY_A
+        );
+
+        $matrix = array();
+        $missing = array();
+
+        foreach ( $features as $feature ) {
+            $row = array(
+                'fact_key' => $feature['fact_key'],
+                'label'    => $feature['label'],
+                'position' => (int) $feature['position'],
+                'required' => (bool) $feature['required'],
+                'cells'    => array(),
+            );
+
+            foreach ( $resolved as $item ) {
+                $facts = isset( $item['knowledge']['facts'] ) && is_array( $item['knowledge']['facts'] )
+                    ? $item['knowledge']['facts']
+                    : array();
+
+                $matches = array_values( array_filter(
+                    $facts,
+                    function( $fact ) use ( $feature ) {
+                        return isset( $fact['fact_key'] ) && $fact['fact_key'] === $feature['fact_key'];
+                    }
+                ) );
+
+                if ( empty( $matches ) && (bool) $feature['required'] ) {
+                    $missing[] = array(
+                        'fact_key'      => $feature['fact_key'],
+                        'subject_type'  => $item['subject_type'],
+                        'subject_id'    => $item['subject_id'],
+                    );
+                }
+
+                $row['cells'][] = array(
+                    'subject_type' => $item['subject_type'],
+                    'subject_id'   => $item['subject_id'],
+                    'status'       => empty( $matches ) ? 'MISSING' : 'PRESENT',
+                    'facts'        => $matches,
+                );
+            }
+
+            $matrix[] = $row;
+        }
+
         $comparison['comparison_uid'] = 'UPC-' . str_pad( (string) $comparison_id, 6, '0', STR_PAD_LEFT );
         $comparison['items'] = $resolved;
+        $comparison['features'] = $features;
+        $comparison['feature_matrix'] = $matrix;
+        $comparison['required_facts_complete'] = empty( $missing );
+        $comparison['missing_required_facts'] = $missing;
 
         return $comparison;
+    }
+
+    public function validate_required_facts( $comparison_id ) {
+        $bundle = $this->get_comparison_bundle( $comparison_id );
+        if ( is_wp_error( $bundle ) ) {
+            return $bundle;
+        }
+
+        if ( ! $bundle['required_facts_complete'] ) {
+            return new WP_Error(
+                'UPC_REQUIRED_FACT_MISSING',
+                'One or more required comparison facts are missing.',
+                array( 'missing' => $bundle['missing_required_facts'] )
+            );
+        }
+
+        return true;
+    }
+
+    private function comparison_exists( $comparison_id ) {
+        return (bool) $this->wpdb->get_var(
+            $this->wpdb->prepare( "SELECT id FROM {$this->comparisons} WHERE id = %d LIMIT 1", absint( $comparison_id ) )
+        );
     }
 
     private function validate_products( array $ids ) {
@@ -166,7 +324,7 @@ class UPC_Repository {
                 return new WP_Error( 'UPC_PRODUCT_GROUP_MISMATCH', 'Product comparisons require the same product group.' );
             }
 
-            $manufacturers[] = mb_strtolower( trim( $product['manufacturer'] ) );
+            $manufacturers[] = strtolower( remove_accents( trim( $product['manufacturer'] ) ) );
         }
 
         if ( count( array_unique( $manufacturers ) ) < 2 ) {
