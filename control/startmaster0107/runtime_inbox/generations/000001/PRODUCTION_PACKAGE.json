@@ -2,8 +2,8 @@
   "contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
   "fact_pack_bundle_sha256": "63b170685223b742120a04a346c9639b955b93be10528b39986dd6e301110f2e",
   "production_plan_sha256": "8f92a3da7bfcf190656a5464a70fc79034f42538b0c12c397348a2236c301c1b",
-  "workflow_release_sha256": "410020d00e773ac5fefb6587d251288baa324371a38e44e49b69ad3274516aad",
-  "package_id": "45edacdceae432117c3fd5d984bb42aa896aecc4979fad8a626107a9424414fc",
+  "workflow_release_sha256": "4d1bde9e0d8845397564316ca1d654854e6022de1a2832d0e0b958f024645e07",
+  "package_id": "0e010e8f54a70fa381c833fbfbfbe2bb831373038c80076a7a2a0928e3eb6448",
   "source": "STARTMASTER0107_H8_R_BOOT_001_GENERATION_1",
   "fact_pack_bundle": {
     "contract": "canonical_fact_pack_import_v1",
@@ -14,7 +14,7 @@
     "items": []
   },
   "workflow_release": {
-    "contract": "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED",
+    "contract": "WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND",
     "status": "PASS",
     "exact_five_batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
     "exact_five_item_count": 7,
@@ -52,11 +52,8 @@
     "fact_pack_bundle_sha256": "63b170685223b742120a04a346c9639b955b93be10528b39986dd6e301110f2e",
     "content_generation_performed_by_supervisor": false,
     "wordpress_write_performed": false,
-    "signature_algorithm": "ED25519",
-    "signing_key_id": "workflow-ed25519-8f521756284cb375",
-    "signing_public_key_sha256": "8f521756284cb375c907f508dac333f51b71b515419ee271ca68fa149db66f87",
     "h8_bootstrap_binding": {
-      "contract": "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1",
+      "contract": "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1",
       "room_token": "R_BOOT_001",
       "receipt_token": "P_BOOT_001",
       "generation": 1,
@@ -64,11 +61,8 @@
       "source_snapshot_sha256": "be73a986124fc80429c0c0d85fba94636a0ff5a506d23a6cff68f291e3645027",
       "source_manifest_sha256": "8cb8d86b96bb67f28ec71844cf45df14473c11a4a41c310d7a0691452a50febb",
       "authoritative_origin": "SINGLE_DOOR_BOOTSTRAP_ONLY",
-      "binding_sha256": "e78ea45acc9a11f28f6f44e1c525de6667ca72c771ecef81b42a24822424f744"
-    },
-    "release_payload_sha256": "2a7aa7028a00c48f88d6e09ee73a23e06dd803eedccdddd36811fac514b3f6e0",
-    "signature_b64": "HAqffBSB3k5iPBaWSdFZmJqZS+sLe6Q6dYv+gK22vNAPpVPv8QmrIui4uES/crzxvCmNGrrVl90ITP6Zuo+gBw==",
-    "release_sha256": "ef0bda8fb365dbe56000a517d53f5d765e8d95807608ecea226c7a26c1112ab9"
+      "binding_sha256": "c58cc47e7b3959253e94242469799f6d8cc083ff16047d440856990059fc849c"
+    }
   },
-  "package_payload_sha256": "f691fd7b43cc7e2559e15ccd276c8fe99714b14c2a2adf7d7472c7bef18a7ba9"
+  "package_payload_sha256": "943440140a5ec075f731245eb003066f1834b9b538afbc8ad87172d22788d08f"
 }

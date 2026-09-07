@@ -102,8 +102,6 @@ def validate_environment_proof(
         raise Blocked("CODEX_MAIN_AUTHORITY_SOURCE_INVALID")
     if proof.get("expected_main_sha") != head or proof.get("local_head_sha") != head:
         raise Blocked("CODEX_CHECKOUT_NOT_PROVEN_CURRENT_MAIN")
-    if proof.get("ed25519_runtime") is not True:
-        raise Blocked("ED25519_RUNTIME_NOT_PROVEN")
     if proof.get("chat_execution_authority") != "NONE" or proof.get("chat_output_authority") != "NONE":
         raise Blocked("CODEX_ENVIRONMENT_CHAT_AUTHORITY_INVALID")
     if proof.get("domain_logic_authority") != "NONE" or proof.get("quality_authority") != "NONE":

@@ -10,7 +10,7 @@ Den vom MASTER freigegebenen Beitragsblock so schnell und vollständig wie mögl
 - Vor diesem Aufruf: keine Suche, Analyse, Recherche, Datei-/Paketkonstruktion, Texterstellung, WordPress-Aktion oder eigene Workflowentscheidung.
 - Danach ausschließlich den vom Project-Entry gelieferten Raum und dessen eine gebundene Aktion ausführen.
 - `R_BOOT_001`: keine freie Facharbeit. Nur die gebundene Bootstrap-Capability. Kein Chat-Fallback.
-- `R_PRE_001`: nur das durch `R_BOOT_001` erzeugte, signiert H8-gebundene Paket. Kein frei angeliefertes Paket.
+- `R_PRE_001`: nur das durch `R_BOOT_001` erzeugte, hash- und herkunftsgebundene H8-Paket. Kein frei angeliefertes Paket. Keine interne Signatur/kein Signierschlüssel erforderlich.
 - `R_001` oder späterer gebundener produktiver Raum: erst ab hier darf der bestehende Fachworkflow arbeiten.
 - BLOCKED/fehlende Capability: fail-closed im aktuellen Raum. Keine Ersatzroute.
 - Kein Rücksprung, Seitensprung, vorsorglicher Zusatztest oder Wiederholen eines bereits hashgebundenen PASS.

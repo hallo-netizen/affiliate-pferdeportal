@@ -20,7 +20,8 @@ PROMPT_REL='control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMA
 RUNTIME_STATE_REL='control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
 PASS_CONTRACT='PFERDE_ATELIER_FACHWORKFLOW_PASS_V1'
 PACKAGE_CONTRACT='PSERC_APPROVED_PRODUCTION_PACKAGE_V1'
-RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
+INTERNAL_RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_HASH_BOUND'
+EXTERNAL_RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
 PROD_KEY_ID='workflow-ed25519-8f521756284cb375'
 PROD_KEY_SHA='8f521756284cb375c907f508dac333f51b71b515419ee271ca68fa149db66f87'
 PROD_PUBLIC_B64='6FCxYycU2bJysJFvtH5xZ0ia+k59ZLyK6Av8d9/ujm0='
@@ -182,7 +183,7 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
     if pi.get('canonical_article_id')!=it.get('canonical_article_id') or pi.get('plan_slot')!=it.get('plan_slot'):raise Blocked('PLAN_ITEM_IDENTITY_MISMATCH')
     if ri.get('canonical_article_id')!=it.get('canonical_article_id') or ri.get('plan_slot')!=it.get('plan_slot'):raise Blocked('RELEASE_ITEM_IDENTITY_MISMATCH')
     if ph.get('contract')!='production_plan_v4' or 'items' in ph:raise Blocked('PLAN_HEADER_INVALID')
-    if set(rm)!=RELEASE_META_KEYS or rm.get('contract')!=RELEASE_CONTRACT or rm.get('status')!='PASS' or rm.get('wordpress_write_performed') is not False:raise Blocked('RELEASE_METADATA_INVALID')
+    if set(rm)!=RELEASE_META_KEYS or rm.get('contract')!=INTERNAL_RELEASE_CONTRACT or rm.get('status')!='PASS' or rm.get('wordpress_write_performed') is not False:raise Blocked('RELEASE_METADATA_INVALID')
     return q
 
 def call_signer(payload_sha:str,cmd:str,key_id:str,key_sha:str)->str:
@@ -204,7 +205,7 @@ def build_package(ctx:Mapping[str,Any],signer:Callable[[str],str],key_id:str,key
     bundle=ctx.get('fact_pack_bundle');plan=ctx.get('production_plan');meta=ctx.get('workflow_release_metadata');items=ctx.get('workflow_release_items')
     if not isinstance(bundle,dict) or not isinstance(plan,dict) or not isinstance(meta,dict) or not isinstance(items,list) or not items:raise Blocked('FINAL_CONTEXT_INCOMPLETE')
     if bundle.get('contract')!='canonical_fact_pack_import_v1' or plan.get('contract')!='production_plan_v4' or set(meta)!=RELEASE_META_KEYS:raise Blocked('FINAL_CONTEXT_SCHEMA_INVALID')
-    bh=stable(bundle);ph=stable(plan);rel=dict(meta);rel.update({'fact_pack_bundle_sha256':bh,'items':items,'production_plan_sha256':ph,'signature_algorithm':'ED25519','signing_key_id':key_id,'signing_public_key_sha256':key_sha})
+    bh=stable(bundle);ph=stable(plan);rel=dict(meta);rel['contract']=EXTERNAL_RELEASE_CONTRACT;rel.update({'fact_pack_bundle_sha256':bh,'items':items,'production_plan_sha256':ph,'signature_algorithm':'ED25519','signing_key_id':key_id,'signing_public_key_sha256':key_sha})
     payload=stable(rel);rel['release_payload_sha256']=payload;rel['signature_b64']=signer(payload);rel['release_sha256']=stable(rel)
     if set(rel)!=RELEASE_KEYS:raise Blocked('FINAL_RELEASE_SCHEMA_INVALID')
     rh=stable(rel);pkg={'contract':PACKAGE_CONTRACT,'fact_pack_bundle_sha256':bh,'production_plan_sha256':ph,'workflow_release_sha256':rh,'package_id':stable({'contract':PACKAGE_CONTRACT,'fact_pack_bundle_sha256':bh,'production_plan_sha256':ph,'workflow_release_sha256':rh}),'source':str(ctx.get('source') or 'STARTMASTER0107_107008_RELEASE_FINALIZER'),'fact_pack_bundle':bundle,'production_plan':plan,'workflow_release':rel};pkg['package_payload_sha256']=stable(pkg)
@@ -338,7 +339,7 @@ def selftest(repo:Path)->dict:
             artifact='q/'+s+'.artifact';(tr/artifact).write_text('real-stage-output',encoding='utf-8')
             proof={'contract':'PFERDE_ATELIER_FACHWORKFLOW_STAGE_EXECUTION_PROOF_V1','status':'PASS','batch_sha256':'c'*64,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'stage':s,'execution_performed':True,'input_sha256':'1'*64,'execution_evidence':['selftest stage runner completed'],'artifacts':[{'ref':artifact,'sha256':fsha(tr/artifact)}],'content_or_quality_rules_changed':False,'publish_allowed':False}
             ref='q/'+s+'.json';dump(tr/ref,proof);rows.append({'stage':s,'ref':ref,'sha256':fsha(tr/ref)})
-        meta={'article_origin_policy':'POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE','authoring_prompt_sha256':'b'*64,'authoring_role':'CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS','content_generation_performed_by_supervisor':False,'contract':RELEASE_CONTRACT,'created_at_utc':'2026-09-02T00:00:00+00:00','exact_five_batch_sha256':'c'*64,'exact_five_item_count':1,'frozen_workflow_sha256':'d'*64,'nullpunkt':{},'nullpunkt_sha256':'e'*64,'ppm_baseline_sha256':'f'*64,'ppm_version':'6.7.9','research_evidence_policy':'BOUND_EXISTING_FACHWORKFLOW_ONLY','sequence':107008,'status':'PASS','wordpress_write_performed':False}
+        meta={'article_origin_policy':'POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE','authoring_prompt_sha256':'b'*64,'authoring_role':'CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS','content_generation_performed_by_supervisor':False,'contract':INTERNAL_RELEASE_CONTRACT,'created_at_utc':'2026-09-02T00:00:00+00:00','exact_five_batch_sha256':'c'*64,'exact_five_item_count':1,'frozen_workflow_sha256':'d'*64,'nullpunkt':{},'nullpunkt_sha256':'e'*64,'ppm_baseline_sha256':'f'*64,'ppm_version':'6.7.9','research_evidence_policy':'BOUND_EXISTING_FACHWORKFLOW_ONLY','sequence':107008,'status':'PASS','wordpress_write_performed':False}
         q={'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':'c'*64,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'contract_binding_ref':SELF_REL,'contract_binding_sha256':binding_sha(tr),'required_stage_proofs':rows,'fact_pack':{'contract':'canonical_fact_pack_v1','fact_pack_id':'fp'},'production_plan_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'production_plan_header':{'contract':'production_plan_v4','plan_contract_version':'4.0.0','required_plugin_version':'6.7.9','contract_hashes':CONTRACT_HASHES},'workflow_release_item':{'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot']},'workflow_release_metadata':meta,'content_or_quality_rules_changed':False,'publish_allowed':False};pref=a['item_receipt_schema']['fachworkflow_pass_ref'];dump(tr/pref,q);h=fsha(tr/pref);d={'outputs':[{'ref':pref,'sha256':h}],'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':h};validate_fachworkflow_pass(tr,a,it,d)
         srcp.write_text('tampered-existing',encoding='utf-8')
         try:validate_fachworkflow_pass(tr,a,it,d);raise AssertionError('NEG_EXISTING_SOURCE_HASH')
@@ -353,7 +354,7 @@ def selftest(repo:Path)->dict:
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
     from cryptography.hazmat.primitives import serialization
     priv=Ed25519PrivateKey.generate();pub=priv.public_key().public_bytes(encoding=serialization.Encoding.Raw,format=serialization.PublicFormat.Raw);ks=hashlib.sha256(pub).hexdigest();ki='test-'+ks[:16];pb=base64.b64encode(pub).decode();sign=lambda h:base64.b64encode(priv.sign(h.encode('ascii'))).decode()
-    meta={'article_origin_policy':'POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE','authoring_prompt_sha256':'b'*64,'authoring_role':'CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS','content_generation_performed_by_supervisor':False,'contract':RELEASE_CONTRACT,'created_at_utc':'2026-09-02T00:00:00+00:00','exact_five_batch_sha256':'c'*64,'exact_five_item_count':1,'frozen_workflow_sha256':'d'*64,'nullpunkt':{},'nullpunkt_sha256':'e'*64,'ppm_baseline_sha256':'f'*64,'ppm_version':'6.7.9','research_evidence_policy':'BOUND_EXISTING_FACHWORKFLOW_ONLY','sequence':107008,'status':'PASS','wordpress_write_performed':False}
+    meta={'article_origin_policy':'POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE','authoring_prompt_sha256':'b'*64,'authoring_role':'CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS','content_generation_performed_by_supervisor':False,'contract':INTERNAL_RELEASE_CONTRACT,'created_at_utc':'2026-09-02T00:00:00+00:00','exact_five_batch_sha256':'c'*64,'exact_five_item_count':1,'frozen_workflow_sha256':'d'*64,'nullpunkt':{},'nullpunkt_sha256':'e'*64,'ppm_baseline_sha256':'f'*64,'ppm_version':'6.7.9','research_evidence_policy':'BOUND_EXISTING_FACHWORKFLOW_ONLY','sequence':107008,'status':'PASS','wordpress_write_performed':False}
     ctx={'source':'SELFTEST','fact_pack_bundle':{'contract':'canonical_fact_pack_import_v1','fact_packs':[{'contract':'canonical_fact_pack_v1','fact_pack_id':'fp'}]},'production_plan':{'contract':'production_plan_v4','items':[{'canonical_article_id':'article:test','plan_slot':'a'*64}]},'workflow_release_metadata':meta,'workflow_release_items':[{'canonical_article_id':'article:test','plan_slot':'a'*64}]};pkg=build_package(ctx,sign,ki,ks,pb,False)
     with tempfile.TemporaryDirectory() as td:
         p=Path(td)/'p.json';dump(p,pkg);trusted={ki:{'sha256':ks,'public_key_b64':pb}};assert verify_package(repo,p,trusted)['ok']

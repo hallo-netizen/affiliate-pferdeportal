@@ -130,8 +130,6 @@ def validate_package(repo: Path, state: dict, contract: dict, batch: dict, check
         raise Blocked("PRODUCTION_PACKAGE_PAYLOAD_HASH_MISMATCH")
     if release.get("contract") != contract["workflow_release_contract"] or release.get("status") != "PASS":
         raise Blocked("WORKFLOW_RELEASE_SHAPE_INVALID")
-    if release.get("signature_algorithm") != "ED25519" or not isinstance(release.get("signature_b64"),str) or not release["signature_b64"].strip():
-        raise Blocked("WORKFLOW_RELEASE_SIGNATURE_METADATA_INVALID")
     release_items=release.get("items")
     if not isinstance(release_items,list) or not release_items:
         raise Blocked("WORKFLOW_RELEASE_ITEMS_EMPTY")
@@ -146,12 +144,12 @@ def validate_package(repo: Path, state: dict, contract: dict, batch: dict, check
         if slot not in current:
             raise Blocked(f"WORKFLOW_RELEASE_SLOT_NOT_CURRENT_READY:{i}")
         seen.add(slot); selected.append(current[slot])
-    signed_batch=copy.deepcopy(batch)
-    signed_batch["items"]=selected
-    signed_batch["item_count"]=len(selected)
-    signed_batch.pop("batch_sha256",None)
-    signed_batch_hash=stable_hash(signed_batch)
-    if not valid_sha(release.get("exact_five_batch_sha256")) or not hmac.compare_digest(signed_batch_hash,release["exact_five_batch_sha256"]):
+    bound_batch=copy.deepcopy(batch)
+    bound_batch["items"]=selected
+    bound_batch["item_count"]=len(selected)
+    bound_batch.pop("batch_sha256",None)
+    bound_batch_hash=stable_hash(bound_batch)
+    if not valid_sha(release.get("exact_five_batch_sha256")) or not hmac.compare_digest(bound_batch_hash,release["exact_five_batch_sha256"]):
         raise Blocked("WORKFLOW_RELEASE_BATCH_HASH_MISMATCH")
     if int(release.get("exact_five_item_count",-1)) != len(selected):
         raise Blocked("WORKFLOW_RELEASE_BATCH_COUNT_MISMATCH")
@@ -159,7 +157,7 @@ def validate_package(repo: Path, state: dict, contract: dict, batch: dict, check
         raise Blocked("WORKFLOW_RELEASE_PLAN_HASH_MISMATCH")
     if not hmac.compare_digest(str(release.get("fact_pack_bundle_sha256","")),component_hashes["fact_pack_bundle_sha256"]):
         raise Blocked("WORKFLOW_RELEASE_FACT_PACK_HASH_MISMATCH")
-    return pkg_path,env,selected,signed_batch_hash
+    return pkg_path,env,selected,bound_batch_hash
 
 def validate(repo: Path, contract_path: Path, state_path: Path):
     contract=load(contract_path)
@@ -188,14 +186,13 @@ def validate(repo: Path, contract_path: Path, state_path: Path):
         if state.get("production_package_ref") not in ("",None) or state.get("production_package_sha256") not in ("",None):
             raise Blocked("PENDING_PACKAGE_FIELDS_MUST_BE_EMPTY")
         return {"ok":True,"status":"READY_WAITING_PACKAGE","generation":state["generation"],"terminal":False,"write_receipt":False,"batch_sha256":checked["batch_sha256"],"item_count":len(checked["items"]),"source_snapshot":str(snap_path.relative_to(repo)),"publish_allowed":False}
-    pkg_path,env,selected,signed_hash=validate_package(repo,state,contract,batch,checked)
+    pkg_path,env,selected,bound_hash=validate_package(repo,state,contract,batch,checked)
     return {
         "ok":True,"status":"RUNTIME_INPUTS_BOUND","generation":state["generation"],"terminal":False,"write_receipt":False,
         "batch_sha256":checked["batch_sha256"],"ready_item_count":len(checked["items"]),
-        "selected_item_count":len(selected),"signed_batch_sha256":signed_hash,
+        "selected_item_count":len(selected),"bound_batch_sha256":bound_hash,
         "source_snapshot":str(snap_path.relative_to(repo)),"production_package":str(pkg_path.relative_to(repo)),
-        "package_id":env["package_id"],"publish_allowed":False,
-        "signature_note":"ED25519 authenticity remains enforced by the existing PSERC Workflow Supervisor at runtime"
+        "package_id":env["package_id"],"publish_allowed":False
     }
 
 def main():

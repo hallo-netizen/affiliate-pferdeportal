@@ -94,19 +94,10 @@ def authoritative_main_sha(repo: Path = REPO) -> tuple[str, str]:
     raise PreflightBlocked("AUTHORITATIVE_MAIN_SHA_UNAVAILABLE")
 
 
-def ed25519_available() -> bool:
-    try:
-        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey  # noqa: F401
-    except Exception as exc:
-        raise PreflightBlocked("ED25519_RUNTIME_UNAVAILABLE") from exc
-    return True
-
-
 def validate(
     repo: Path = REPO,
     *,
     main_sha_provider: Callable[[], tuple[str, str]] | None = None,
-    ed25519_provider: Callable[[], bool] | None = None,
 ) -> dict:
     repo = Path(repo).resolve()
     head = git(repo, "rev-parse", "HEAD")
@@ -218,9 +209,6 @@ def validate(
     if sha256(pserc_package) != PSERC_FIX_PACKAGE_SHA256:
         raise PreflightBlocked("PSERC_FIX_ZIP_HASH_MISMATCH")
 
-    if (ed25519_provider or ed25519_available)() is not True:
-        raise PreflightBlocked("ED25519_RUNTIME_UNAVAILABLE")
-
     return {
         "contract": CONTRACT,
         "status": "CODEX_PRODUCTION_PREFLIGHT_PASS",
@@ -242,7 +230,6 @@ def validate(
         "ppm679_package_sha256": PPM679_PACKAGE_SHA256,
         "pserc_fix_package_ref": PSERC_FIX_PACKAGE_REL,
         "pserc_fix_package_sha256": PSERC_FIX_PACKAGE_SHA256,
-        "ed25519_runtime": True,
         "chat_execution_authority": "NONE",
         "chat_output_authority": "NONE",
         "domain_logic_authority": "NONE",

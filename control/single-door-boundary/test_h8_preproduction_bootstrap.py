@@ -53,7 +53,7 @@ pre = entry.resolve_entry(
         "bootstrap_authority_sha256": "a" * 64,
     },
 )
-assert pre["status"] == "PREPRODUCTION_SIGNED_PACKAGE_SINGLE_DOOR_REQUIRED"
+assert pre["status"] == "PREPRODUCTION_PROVENANCE_PACKAGE_SINGLE_DOOR_REQUIRED"
 assert pre["room_token"] == "R_PRE_001"
 assert pre["worker_request"]["input"] == "R_PRE_001"
 assert len(pre["worker_request"]["tools"]) == 1
@@ -86,15 +86,15 @@ expect_block(
     "ATTACHED_PACKAGE_PROVENANCE_NOT_PASS",
 )
 
-# 6. Old package/release shape without H8 signed binding is mechanically rejected.
-expect_block(lambda: prov._binding_from_release({}), "H8_SIGNED_BOOTSTRAP_BINDING_MISSING")
+# 6. Old package/release shape without H8 provenance binding is mechanically rejected.
+expect_block(lambda: prov._binding_from_release({}), "H8_BOOTSTRAP_PROVENANCE_BINDING_MISSING")
 
 # 7. H8 binding itself is exact-key and hash bound.
 expected = prov.expected_binding(REPO)
 checked = dict(prov._binding_from_release({"h8_bootstrap_binding": expected}))
 assert checked == expected
 wrong = dict(expected); wrong["generation"] = int(wrong["generation"]) + 1
-expect_block(lambda: prov._binding_from_release({"h8_bootstrap_binding": wrong}), "H8_SIGNED_BOOTSTRAP_BINDING_HASH_INVALID")
+expect_block(lambda: prov._binding_from_release({"h8_bootstrap_binding": wrong}), "H8_BOOTSTRAP_PROVENANCE_BINDING_HASH_INVALID")
 
 # 8. Door 0 remains domain blind and exposes only one forced no-argument action.
 req = boot.worker_request("gpt-5.6-sol")

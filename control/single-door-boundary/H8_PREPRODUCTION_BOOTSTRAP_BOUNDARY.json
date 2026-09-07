@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY_V1",
   "status": "H8_PROTOTYPE_BOUNDARY_ACTIVE",
-  "purpose": "Close the pre-production gap before the signed production-package handoff without inspecting or judging domain content.",
+  "purpose": "Close the pre-production gap before the hash- and provenance-bound production-package handoff without inspecting or judging domain content.",
   "domain_blind": true,
   "quality_authority": "NONE",
   "content_semantics_authority": "NONE",
@@ -10,7 +10,6 @@
   "bootstrap_room_token": "R_BOOT_001",
   "bootstrap_next_room_token": "R_PRE_001",
   "productive_first_room_token": "R_001",
-  "required_signed_binding_contract": "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1",
   "required_authoritative_origin": "SINGLE_DOOR_BOOTSTRAP_ONLY",
   "old_unprovenanced_packages_allowed": false,
   "publish_allowed": false,
@@ -28,7 +27,7 @@
   "file_bindings": [
     {
       "ref": "control/single-door-boundary/project_single_door_entry_v2.py",
-      "git_blob_sha1": "1077cb7b4dc3e2fae1f0746a1f29c6ac866aded4"
+      "git_blob_sha1": "9bbe3cc26232d6731e041bfae7892e6fa4b4ad0c"
     },
     {
       "ref": "control/single-door-boundary/CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_V1.json",
@@ -36,11 +35,11 @@
     },
     {
       "ref": "control/single-door-boundary/single_door_bootstrap.py",
-      "git_blob_sha1": "5c5239bc3c91ed1145755362e08dd5ef815da02c"
+      "git_blob_sha1": "4bda518afbc693ab65fc7ea493ac63a450f0cd1d"
     },
     {
       "ref": "control/single-door-boundary/preproduction_provenance_guard.py",
-      "git_blob_sha1": "728d5b4dcb7e413d1e82758ba08039643f4d38e6"
+      "git_blob_sha1": "6ca2e875a85b8976903301d839b2ddebfa3981d9"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard_h8.py",
@@ -52,7 +51,7 @@
     },
     {
       "ref": "control/single-door-boundary/single_door_preproduction_handoff.py",
-      "git_blob_sha1": "c301fab2b8e8de2650f976fdbd0604104a0a6cd1"
+      "git_blob_sha1": "3499f22e1372eb5f638e0922727d7c84de324fa2"
     },
     {
       "ref": "control/single-door-boundary/single_door_route_binding.py",
@@ -60,11 +59,11 @@
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py",
-      "git_blob_sha1": "4304659a219f621769d8a8cbc63d1a84fa70e141"
+      "git_blob_sha1": "84fbc123b2f90717623756b5b9b79470d7084431"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json",
-      "git_blob_sha1": "ee6d5d05ad5e7366ed81045c732e0dc990286889"
+      "git_blob_sha1": "26eb7d4c5c9cac93051f57414bf2d877c6e209d0"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
@@ -74,8 +73,10 @@
   "external_bootstrap_producer_requirement": {
     "required": true,
     "must_run_only_as_bound_R_BOOT_001_capability": true,
-    "must_emit_workflow_release_with_signed_h8_bootstrap_binding": true,
-    "private_signing_material_must_remain_outside_repository": true,
+    "must_emit_workflow_release_with_h8_provenance_binding": true,
+    "internal_signature_required": false,
+    "signer_credentials_allowed": false,
     "fallback_to_chat_generation": false
-  }
+  },
+  "required_provenance_binding_contract": "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1"
 }
