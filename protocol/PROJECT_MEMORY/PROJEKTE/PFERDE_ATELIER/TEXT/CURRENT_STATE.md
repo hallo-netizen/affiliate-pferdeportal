@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: GOLDMASTER BASELINE BEREIT / hardlock-base-WORKFLOW STARTET NICHT
+STATUS: GOLDMASTER CLOUD-ENTRY RESTORE BEREIT / ADMIN-SELBSTSCHUTZ BLOCKIERT MERGE
 
 ## AUTORITÄT
 
@@ -117,3 +117,17 @@ Manueller Reopen von PR #148 wurde von GitHub verarbeitet: normaler `hardlock` n
 `Pferde Atelier Immutable Base Hardlock` / `pull_request_target` startete nicht.
 Ruleset fordert `hardlock-base` weiterhin; Merge von #148 wird deshalb korrekt blockiert.
 Goldmaster-Kandidat bleibt unverändert `482fa8ab71f4f180900707ca2309a5bd87727416`.
+
+
+## PR #151 – Goldmaster Cloud Entry
+
+Der erste Realtest auf Goldmaster-Baseline wurde ausschließlich durch die nach `de21f6…` eingeführte #137-Origin-Pflicht blockiert.
+
+Daraufhin wurde kein Einzelpatch weitergeführt, sondern der gesamte motornahe Cloud-Entry-Block auf den bewiesenen Stand zurückgesetzt:
+- `.github/workflows/pferde-atelier-deterministic-entrance-gate.yml`
+- `control/cloud-entry-gate/cloud_entry.py`
+- `control/cloud-entry-gate/cloud_repo_ci_test.py`
+
+Alle drei Dateien sind bytegleich zu `de21f6…`.
+PR #151 normaler hardlock: PASS.
+Einziger Restblocker: absichtliche Immutable-Security-Selbstschutzregel.
