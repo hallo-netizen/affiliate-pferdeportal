@@ -77,19 +77,54 @@ $variant_comparison_id = upc_repository()->create_comparison(
 );
 upc_archive_assert( is_int( $variant_comparison_id ), 'create archive variant comparison' );
 
-$product_post = wp_insert_post(
+$existing_product_posts = get_posts(
     array(
-        'post_type'     => 'post',
-        'post_status'   => 'publish',
-        'post_title'    => 'WeatherBeeta und LeMieux im Produktvergleich',
-        'post_content'  => 'Fixture',
-        'post_category' => array( (int) $child->term_id ),
-    ),
-    true
+        'post_type'      => 'post',
+        'post_status'    => 'any',
+        'posts_per_page' => 2,
+        'fields'         => 'ids',
+        'meta_query'     => array(
+            'relation' => 'AND',
+            array(
+                'key'   => '_upc_comparison_id',
+                'value' => (string) $product_comparison_id,
+            ),
+            array(
+                'key'   => '_upc_project_key',
+                'value' => 'test-project',
+            ),
+        ),
+    )
 );
-upc_archive_assert( ! is_wp_error( $product_post ), 'create published product-comparison archive fixture' );
-update_post_meta( $product_post, '_upc_comparison_id', (string) $product_comparison_id );
-update_post_meta( $product_post, '_upc_project_key', 'test-project' );
+upc_archive_assert( count( $existing_product_posts ) <= 1, 'at most one pre-existing bound product-comparison post' );
+
+if ( empty( $existing_product_posts ) ) {
+    $product_post = wp_insert_post(
+        array(
+            'post_type'     => 'post',
+            'post_status'   => 'publish',
+            'post_title'    => 'WeatherBeeta und LeMieux im Produktvergleich',
+            'post_content'  => 'Fixture',
+            'post_category' => array( (int) $child->term_id ),
+        ),
+        true
+    );
+    upc_archive_assert( ! is_wp_error( $product_post ), 'create published product-comparison archive fixture' );
+    update_post_meta( $product_post, '_upc_comparison_id', (string) $product_comparison_id );
+    update_post_meta( $product_post, '_upc_project_key', 'test-project' );
+} else {
+    $product_post = (int) $existing_product_posts[0];
+    $updated_product_post = wp_update_post(
+        array(
+            'ID'            => $product_post,
+            'post_status'   => 'publish',
+            'post_title'    => 'WeatherBeeta und LeMieux im Produktvergleich',
+            'post_category' => array( (int) $child->term_id ),
+        ),
+        true
+    );
+    upc_archive_assert( ! is_wp_error( $updated_product_post ), 'reuse pre-existing bound product-comparison post' );
+}
 
 $variant_post = wp_insert_post(
     array(
