@@ -2,6 +2,7 @@
   "status": "PASS",
   "runner_selftest": "PASS",
   "current_job_build": "PASS",
+  "current_job_verify": "PASS",
   "baseline_sha256": "ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9",
   "candidate_sha256": "6d1781443da82c6cf4faef2ecf3dbcf9f31d41a1d1166f1302813a9be39ec7bb",
   "archive_members": 498,
@@ -19,7 +20,9 @@
     "EXACT_TWO_RANGE_SWAP_PASS",
     "RANGES_BYTE_IDENTICAL_SINGLETON_PASS",
     "SWAPPED_ORDER_PASS",
-    "REVERSIBILITY_PASS"
+    "REVERSIBILITY_PASS",
+    "PLUGIN_ROOT_SINGLE_PASS",
+    "FILESYSTEM_REPLACEMENT_OVERLAY_PASS"
   ],
   "negative_checks": [
     "NEG_UNCHANGED_WRONG_ORDER_BLOCKED_PASS",
@@ -27,5 +30,6 @@
     "NEG_MUTATED_RANGE_BLOCKED_PASS",
     "NEG_UNRELATED_FILE_CHANGED_BLOCKED_PASS"
   ],
-  "note": "Candidate wird im Hobbyraum immer unter einem festen Namen erzeugt; keine neue Plugin-Version pro Versuch."
+  "artifact_name": "DESIGN_HOBBYRAUM_CANDIDATE.zip",
+  "live_pass": false
 }
