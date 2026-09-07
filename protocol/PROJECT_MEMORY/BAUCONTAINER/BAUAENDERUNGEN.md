@@ -97,3 +97,5 @@ Keine Duplikation der ausführlichen Begründungen hier.
 
 - ARCH-080 → Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery
 - ARCH-081 → Tresor-Nutzerweg ist exakt ein Download
+
+- ARCH-086 → GitHub-Backup-Scope hart wiederhergestellt
