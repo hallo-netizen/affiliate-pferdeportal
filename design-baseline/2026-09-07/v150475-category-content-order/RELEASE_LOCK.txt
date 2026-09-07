@@ -1,0 +1,23 @@
+PFERDE ATELIER – V1.50.475 PURE ELEMENT SWAP LOCK
+
+BASE:
+exact V1.50.472 / Contract V104.
+
+RULE:
+Do not split, parse, rewrite or reconstruct article content.
+
+ONLY ALLOWED RUNTIME CHANGE:
+1. move the complete existing pa266-intro article block behind pa299-types-section;
+2. move the complete existing pa266-network banner block behind pa297-popular.
+
+Everything inside those blocks remains unchanged.
+
+REQUIRED ORDER:
+types -> intro/article -> popular -> network -> products -> direct.
+
+ZIP SHA256:
+ab6f3f820b01f1043d74200b031560695757db8395a2910c18264c40f34aa689
+PHP SHA256:
+0151b5d66132675795c982b8a0c4ca0326ead9419f9e8ba882d751240a75b40c
+
+NO LIVE PASS BEFORE USER CONFIRMATION.
