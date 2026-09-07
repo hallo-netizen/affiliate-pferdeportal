@@ -44,3 +44,18 @@ Vertrieb startklar machen → `TODO/VERTRIEB_STARTKLAR_20260907.md`
 
 REGEL:
 Entschiedene Fach-, Preis-, Vertrags- und Technikstände werden an ihrer jeweiligen autoritativen Hauptquelle gepflegt; das TODO-Fach bleibt nur Arbeits-/Entscheidungsübersicht.
+
+
+### PBO-AKTENSCHRANK-FACH – PREISE
+STATUS: AKTIV / KONZEPT
+HAUPTORT:
+`PREISE/START_HERE.md`
+
+ZWECK:
+Preis-, Paket- und Baukastenmodelle für PB-ONE-Leistungen entwickeln.
+
+AKTUELL:
+Website-Preiskonzept → `PREISE/PREISKONZEPT_WEBSITES_20260907.md`
+
+REGEL:
+Entwurfswerte sind nicht automatisch verbindliche Kundenpreise. Freigegebene Preise müssen ausdrücklich als verbindlich gekennzeichnet werden.
