@@ -1106,6 +1106,7 @@ NACHGEHOLT:
 - `CURRENT_STATE` auf 0.2.4 Technik-PASS / Nutzer-Live-Verify OFFEN bereinigt;
 - `HOBBYRAUM` auf genau einen aktuellen Live-Verifikationsweg gekürzt;
 - `HANDLUNGSVERZEICHNIS`, `HAUPTPFOERTNER` und Pferde-Atelier-`START_HERE` von der alten `Produktvergleich -> TEXT`-Route auf den eigenständigen V1-Draftweg korrigiert;
+- veraltete MOD-006/MOD-007-Prüfstände und fehlende WordPress-Plugin-Einträge nachgezogen, ohne Projekt-Livestatus in diese Register zu kopieren;
 - Fehler- und Zielregister bleiben reine Wegweiser.
 
 WARUM:
