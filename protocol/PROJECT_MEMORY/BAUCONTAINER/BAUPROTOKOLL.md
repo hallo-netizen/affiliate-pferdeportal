@@ -1529,3 +1529,41 @@ echte WordPress-/Hostingquelle, serverseitige Roharchivquelle, Recovery-Bundle, 
 
 BEZUG:
 ARCH-082.
+
+
+### 2026-09-07 – Abschluss-/Nachholprüfung Tresor nach Nutzerweg-Korrektur
+
+AUSLÖSER:
+Universelle Abschluss-/Nachholprüfung nach Umstellung auf „eine Datei herunterladen“.
+
+FRISCH GEPRÜFT:
+- TRESOR START_HERE/STATUS/KONZEPT/INHALTSVERTRAG/PRUEFVERTRAG/LOKALES_BACKUP/NOTFALL/REALTEST;
+- Archivregister;
+- Fehlerregister;
+- Zielvertragsregister;
+- Änderungsregister + Bauänderungsindex;
+- Architektur-Fehlerkiste;
+- serverseitiger Builder + inaktiver Workflow-Kandidat.
+
+GEFUNDEN UND NACHGEHOLT:
+1. `BAUAENDERUNGEN.md` fehlte ARCH-081 → ergänzt.
+2. Ein-Datei-Tresorziel fehlte im Zielvertragsregister → ZV-TRESOR-001 ergänzt.
+3. Alter Status `ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT` war gegenüber dem ROT-Befund zu schwach/stale → korrigiert auf `ARCHIVE_RAW_ARTIFACTS_INCOMPLETE`.
+4. Nutzerweg-Fehler aus diesem Chat war noch nicht in der Architektur-Fehlerkiste → BAU-037 CLOSED ergänzt.
+5. Zentraler Fehlerwegweiser um TRESOR-AUTOMATIK ergänzt, ohne Blocker zu duplizieren.
+6. Aktuelles Asset-Schema auf `.tar.gz.gpg` vereinheitlicht; alte 7z-Angaben bleiben nur in historischen V3-Befunden.
+7. aktuelle NEXT ACTION im TRESOR/STATUS eindeutig nachgezogen.
+
+NICHT ERLEDIGT / KORREKT BLOCKED:
+- finale Design-1.50.472-Rohartefakte fehlen;
+- WordPress-Vollbackup-Provider nicht gebunden;
+- serverseitige Roharchivquelle nicht gebunden;
+- Recovery-Bundle/Masterpasswort nicht gebunden;
+- Workflow-Kandidat nicht produktiv aktiviert;
+- kein realer Gesamt-Restore der final veröffentlichten Sicherungsdatei.
+
+EINE WAHRHEIT:
+Aktueller Stand ausschließlich in `TRESOR/STATUS.md`; Register bleiben Wegweiser/Index.
+
+BEZUG:
+ARCH-080/081; BAU-036/037; ZV-TRESOR-001.

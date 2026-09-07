@@ -785,3 +785,27 @@ Reale Endabnahme auf Nutzer-Mac/GitHub/WordPress bleibt offen und darf nicht als
 
 BEZUG:
 ARCH-080.
+
+
+## BAU-037 – Tresor-Nutzerweg legte interne Technik auf den Nutzer
+
+STATUS: CLOSED
+
+KURZ:
+Dem Nutzer wurden V1–V4-Kits, mehrere `.command`-Dateien und manuelle Testschritte als Bedienweg zugemutet.
+
+AUSWIRKUNG:
+Das widersprach dem KISS-Ziel „regelmäßig genau eine Komplettsicherungsdatei herunterladen“.
+
+KISS-FIX:
+Nutzerweg auf exakt eine Handlung reduziert:
+GitHub Releases → neueste `TRESOR_PASS`-Datei herunterladen → lokal speichern.
+
+INTERNE TECHNIK:
+Backup-Aufbau, Verschlüsselung, Prüfungen und Restore-Test bleiben vollständig hinter den Kulissen.
+
+REGRESSIONSSCHUTZ:
+ARCH-081 + `TRESOR/START_HERE.md`.
+
+NEGATIV:
+Keine `.command`-Datei, kein Teilarchiv und kein Terminalschritt ist mehr Teil des Nutzervertrags.

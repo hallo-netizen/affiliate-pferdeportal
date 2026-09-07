@@ -140,3 +140,38 @@ Nicht hier dupliziert. Vollständig aus der Hauptquelle und der gebundenen Relea
 
 NACHFOLGER:
 keiner belegt.
+
+
+## ZV-TRESOR-001 – Vollständige Ein-Datei-Katastrophensicherung
+
+TITEL:
+CAMPUS-TRESOR – REGELMÄSSIGE EIN-DATEI-DISASTER-RECOVERY
+
+GELTUNGSBEREICH:
+GESAMTER CAMPUS / GITHUB / GEBUNDENE WORDPRESS- UND RECOVERY-BESTÄNDE
+
+STATUS:
+AKTIV
+
+FASSUNG:
+2026-09-07
+
+HAUPTQUELLE:
+`protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md`
+
+ERGÄNZENDE VERBINDLICHE QUELLEN:
+- `protocol/PROJECT_MEMORY/TRESOR/INHALTSVERTRAG.md`
+- `protocol/PROJECT_MEMORY/TRESOR/PRUEFVERTRAG.md`
+
+VERANTWORTLICHER BEREICH:
+`protocol/PROJECT_MEMORY/TRESOR/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert.
+Verbindlich ist: genau eine verschlüsselte Sicherungsdatei muss nach realem isoliertem Restore den vollständigen Wiederaufbau des gebundenen Campus-/Systemstands ohne zusätzliche Projektdateien ermöglichen.
+
+NUTZERWEG:
+GitHub Releases → neueste ausdrücklich als `TRESOR_PASS` freigegebene Datei herunterladen → lokal speichern.
+
+NACHFOLGER:
+keiner belegt.

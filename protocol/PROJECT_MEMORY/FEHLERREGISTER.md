@@ -17,7 +17,7 @@ Für Details immer die genannte Originalquelle öffnen.
 ## CAMPUS-ARCHITEKTUR
 
 Bereich: CAMPUS / ARCHITEKTUR  
-Status: AKTIV / BAU-035 CLOSED, weitere Architekturfehler nach Originalquelle
+Status: AKTIV / BAU-037 CLOSED, weitere Architekturfehler nach Originalquelle
 
 Autoritative Fehlerquelle:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
@@ -111,3 +111,17 @@ Neue reale Fehler erhalten:
 4. genau einen autoritativen Hauptort bzw. klar benannte technische Originalquellen.
 
 Keine ausführliche Fehlerwahrheit an zwei Orten.
+
+
+## TRESOR-AUTOMATIK
+
+Bereich: CAMPUS / TRESOR  
+Status: BLOCKED / Ein-Datei-Ziel definiert, serverseitiger Kandidat vorhanden, Gesamt-Restore noch offen
+
+Autoritative aktuelle Status-/Fehlerquelle:
+`protocol/PROJECT_MEMORY/TRESOR/STATUS.md`
+
+Architektur-/Fehlerhistorie:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
+
+Keine Blocker-Details hier duplizieren.

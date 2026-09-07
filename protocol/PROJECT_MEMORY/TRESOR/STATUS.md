@@ -3,7 +3,7 @@
 STAND: 2026-09-07
 
 ERGEBNIS:
-`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_INCOMPLETE`
 
 ## Git-/Repository-Sicherung – PASS ALS PREPASS
 
@@ -17,20 +17,20 @@ Aktuellster Git-/Metadaten-PREPASS:
 
 ## Erster verbleibender Blocker
 
-Das Campus-Archiv enthält weiterhin mehrere Rohbestände mit Ampel:
-- GELB = nur ein unabhängiges Speichersystem;
-- ROT = noch nicht vollständig roh gesichert/verifiziert.
+Das Archivregister belegt weiterhin einen **ROT**-Befund:
 
-Beleg:
-`protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+`ARC-PFERDE-DESIGN-20260905` → exakte finale **1.50.472 Plugin-/Master-Rohartefakte fehlen**.
 
-Nach dem Tresor-Inhaltsvertrag gehören relevante Artefakte zur vollständigen Rekonstruktion.
+Das ist strenger als fehlende Redundanz:
+Ein nicht vorhandenes Original kann weder serverseitig noch lokal in eine vollständige Recovery-Kapsel aufgenommen werden.
 
-Solange die erforderlichen Roharchive nicht mindestens in einer zweiten unabhängigen verifizierten Ablage gesichert sind:
+Darum aktuell:
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_INCOMPLETE`
 
-**KEIN TRESOR_PASS.**
+Autoritative Belegquelle:
+`protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`.
 
-## Danach bereits bekannter nächster Prüfpunkt
+## Danach bereits bekannte nächste Prüf-/Anbindungspunkte
 
 Nicht automatisch exportierbare Wiederherstellungsabhängigkeiten:
 - Secrets/Schlüssel;
@@ -243,7 +243,7 @@ Bevorzugter Download-Ort:
 bestehender GitHub-Releases-Bereich des Projekts.
 
 Bevorzugtes Asset:
-`PB_ONE_KOMPLETTSICHERUNG_YYYY-MM-DD-HHMM.7z`
+`PB_ONE_KOMPLETTSICHERUNG_YYYY-MM-DD-HHMM.tar.gz.gpg`
 
 Bevorzugter Release-Tag:
 `tresor-YYYY-MM-DD-HHMM`
@@ -256,7 +256,7 @@ Noch offen vor Produktivbetrieb:
 5. erst danach erstmals eine Datei als `TRESOR_PASS` veröffentlichen.
 
 Aktueller Gesamtstatus bleibt:
-`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_INCOMPLETE`
 
 
 ## Serverseitiger Ein-Datei-Kandidat – 2026-09-07
@@ -299,3 +299,19 @@ Noch nicht produktiv:
 
 Bis dahin:
 **kein TRESOR_PASS-Release.**
+
+
+## Aktuelle NEXT ACTION – 2026-09-07
+
+1. fehlende exakte Design-1.50.472-Rohartefakte beschaffen/archivieren;
+2. danach Campus-Roharchiv serverseitig für den Tresor-Workflow erreichbar machen;
+3. vollständige WordPress-Backup-Quelle anbinden;
+4. versiegeltes Recovery-Bundle + Tresor-Masterpasswort anbinden;
+5. Workflow kontrolliert aktivieren;
+6. echten Gesamt-Restore ausschließlich aus der veröffentlichten Ein-Datei-Sicherung durchführen.
+
+Bis Schritt 6 PASS ist:
+**kein `TRESOR_PASS`-Release.**
+
+Hinweis:
+V1–V4-Mac-Kits bleiben historische/interne Testwerkzeuge und sind kein Nutzerweg.

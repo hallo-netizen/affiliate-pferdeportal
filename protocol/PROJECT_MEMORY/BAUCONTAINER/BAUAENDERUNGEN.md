@@ -96,3 +96,4 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-079 → Masterdateien-Inventare sind niemals zweite CURRENT-/Head-/Manifest-Wahrheit
 
 - ARCH-080 → Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery
+- ARCH-081 → Tresor-Nutzerweg ist exakt ein Download
