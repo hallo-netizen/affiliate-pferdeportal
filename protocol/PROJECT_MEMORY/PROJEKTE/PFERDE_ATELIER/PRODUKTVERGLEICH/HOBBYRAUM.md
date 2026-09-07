@@ -32,16 +32,23 @@ Damit sind Produktwissen, Vergleichspaarung, Merkmalsmatrix und deterministische
 
 ## NEXT ACTION
 
-**Nach dem belegten Zero-Freedom-Writer + WordPress-DRAFT-PASS als nächste Integrationsstufe nur schmale Leseschnittstellen bauen:**
-1. AFFILIATE liest exakte Produkt-/Variantenidentitäten; keine Schreibrechte auf Produktwissen oder Vergleich;
-2. SEO liefert nur priorisierende Metadaten/Signale; keine Writer-/Faktenautorität;
-3. beide Anbindungen dürfen den gebundenen Artikeloutput nicht verändern;
-4. danach Vergleichsarchiv/Frontend auf den bereits erzeugten WordPress-Drafts aufsetzen.
+**Vergleichsarchiv als dünne, read-only Frontendschicht auf bestehende WordPress-Beiträge setzen.**
 
-Belegt:
-- Zero-Freedom Renderer + Golden Output: PASS;
-- WordPress-DRAFT No-Publish/Readback: PASS, Run `34112287717`;
-- echte Pferde-Atelier-Kategoriebindung bleibt bis realer WordPress-Verifikation BLOCKED.
+Pflicht:
+1. Produkt-/Variantenvergleiche ausschließlich über ihre gebundenen UPC-Metadaten erkennen;
+2. Produktgruppenvergleiche erst anbinden, wenn ihr bestehender WordPress-Artikeltyp-Marker real belegt ist – nichts erfinden;
+3. Hauptfilter: Alle | Produktgruppenvergleiche | Produktvergleiche;
+4. innerhalb Produktvergleiche: Produkte | Varianten;
+5. Produktindex zeigt nur Produkte mit vorhandenem Vergleich;
+6. Produktsuche liefert Produkt- und Variantenvergleiche;
+7. Filter/Search verändern keine Beiträge und erzeugen keine indexierbaren SEO-Duplikate;
+8. Design nur über Klassen/Contract konsumieren, DESIGN nicht technisch umbauen.
+
+Affiliate Exact-Match:
+PASS / Run `34131779064`.
+
+SEO:
+bewusst keine V1-Laufzeitkopplung, bis der echte SEO-Vertrag geprüft ist.
 
 ## Globale Arbeitsort-Sperre
 
