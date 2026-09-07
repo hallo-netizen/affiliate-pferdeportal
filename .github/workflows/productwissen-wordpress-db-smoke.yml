@@ -1,0 +1,61 @@
+name: Product Knowledge WordPress DB Smoke
+
+on:
+  push:
+    branches:
+      - hobbyroom/productwissen-v1-prototype
+    paths:
+      - 'universal-product-knowledge/**'
+      - '.github/workflows/productwissen-wordpress-db-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wordpress-db-smoke:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wp_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP syntax
+        run: |
+          php -l universal-product-knowledge/universal-product-knowledge.php
+          php -l universal-product-knowledge/src/class-upk-repository.php
+          php -l universal-product-knowledge/tests/wp-db-smoke.php
+
+      - name: Install WP-CLI
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          wp --info
+
+      - name: Install WordPress
+        run: |
+          mkdir -p /tmp/upk-wp
+          wp core download --path=/tmp/upk-wp --quiet
+          wp config create --path=/tmp/upk-wp --dbname=wp_test --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
+          wp core install --path=/tmp/upk-wp --url=http://example.test --title='UPK Test' --admin_user=admin --admin_password='test-password' --admin_email=admin@example.test --skip-email --quiet
+
+      - name: Install and activate plugin
+        run: |
+          cp -a universal-product-knowledge /tmp/upk-wp/wp-content/plugins/universal-product-knowledge
+          wp plugin activate universal-product-knowledge --path=/tmp/upk-wp
+
+      - name: Real WordPress + MySQL readback
+        run: |
+          wp eval-file wp-content/plugins/universal-product-knowledge/tests/wp-db-smoke.php --path=/tmp/upk-wp
