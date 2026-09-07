@@ -1103,3 +1103,32 @@ BELEG:
 `protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
 `release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt`
 
+
+
+## PV-PLAN-012 – Writer übernimmt Zwangsjacken-Grundidee ohne STARTMASTER-Komplexität
+
+STAND: 2026-09-07.
+
+WAS:
+Das bestehende TEXT-/STARTMASTER-Konzept wurde gezielt auf seine Grundidee geprüft. Die starke Grundidee „keine freie Entscheidung ab Produktionsstart; Prompt allein reicht nicht“ wird verbindlich übernommen. Die komplexe technische Altarchitektur wird nicht kopiert.
+
+OBERSTE REGEL:
+Der Produktvergleichs-Writer hat **NULL Freiheit**. Gleiche gebundene Inputs bei gleicher Vertrags-/Renderer-Version müssen byte-identischen Output erzeugen.
+
+ÜBERNOMMEN:
+Single Door, gebundene Inputs, Hashes, Fail-closed, keine Fallbackroute, Output-Quarantäne, Validator vor Sichtbarkeit, Receipt, kein Auto-Publish, Regression aus realen Fehlern.
+
+NICHT ÜBERNOMMEN:
+STARTMASTER-Raumkette, PPM/PSERC/PSTE, Signer/Capsule, mehrere Gate-/Executor-Schichten und freie Worker.
+
+V1-KETTE:
+`BOUND_INPUT -> QUARANTINED_RENDERED -> VALIDATED -> DRAFT_READY_FOR_REVIEW`.
+
+RULEBOOK:
+Keine Callbacks/Promptregeln in Produktion. Ausschließlich manifest- und SHA-256-gebundene, versionierte Datenregeln. Regeln sind an exakte Fakten-Signaturen gebunden.
+
+BELEG:
+PR #142 / Run 34111825722 SUCCESS; Zero-Freedom Static Guard PASS; 100/100 byte-identisch; Golden Output PV-REG-001 `994d20136cebd169daa8a09f38248ee315552f8f63ea5f25c14995a01344828f`; manipuliertes Rulebook und geänderte Fakten korrekt BLOCKED.
+
+LEITSATZ:
+**Nicht der Writer schreibt den Artikel. Der Vertrag schreibt den Artikel.**
