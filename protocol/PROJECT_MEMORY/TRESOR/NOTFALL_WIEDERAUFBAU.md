@@ -3,7 +3,7 @@
 STAND: 2026-09-07
 STATUS: KISS
 
-Nur einen Stand mit \`BACKUP_PASS\` verwenden.
+Nur einen Stand mit `BACKUP_PASS` verwenden.
 
 ## WIEDERAUFBAU
 
@@ -27,11 +27,11 @@ Nur einen Stand mit \`BACKUP_PASS\` verwenden.
 
 Ergebnis:
 
-\`RESTORE_PASS\`
+`RESTORE_PASS`
 
 oder
 
-\`RESTORE_FAIL:<GRUND>\`
+`RESTORE_FAIL:<GRUND>`
 
 ## HARTE REGEL
 
