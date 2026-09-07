@@ -261,6 +261,29 @@ class UPK_Repository {
         return (int) $this->wpdb->insert_id;
     }
 
+    public function get_variant_bundle( $variant_id ) {
+        $variant_id = absint( $variant_id );
+        $variant = $this->wpdb->get_row(
+            $this->wpdb->prepare( "SELECT * FROM {$this->variants} WHERE id = %d", $variant_id ),
+            ARRAY_A
+        );
+
+        if ( ! $variant ) {
+            return new WP_Error( 'UPK_VARIANT_NOT_FOUND', 'Variant does not exist.' );
+        }
+
+        $product = $this->get_product_bundle( (int) $variant['product_id'] );
+        if ( is_wp_error( $product ) ) {
+            return $product;
+        }
+
+        $variant['identifiers'] = $this->get_subject_identifiers( self::SUBJECT_VARIANT, $variant_id );
+        $variant['facts']       = $this->get_subject_facts( self::SUBJECT_VARIANT, $variant_id );
+        $variant['product']     = $product;
+
+        return $variant;
+    }
+
     public function get_product_bundle( $product_id ) {
         $product_id = absint( $product_id );
         $product = $this->wpdb->get_row(
