@@ -12,6 +12,8 @@ RUNTIME_STATE_REL='control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.jso
 CONTRACT='PFERDE_ATELIER_CODEX_CURRENT_ACTION_VIEW_V1'
 PASS_CONTRACT='PFERDE_ATELIER_FACHWORKFLOW_PASS_V1'
 ARTICLE_TYPE_TEMPLATES_SHA='dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f'
+PPM679_VERSION='6.7.9'
+PPM679_PACKAGE_SHA256='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
 STAGES=['research_fact_pack','textmachine_article_type_structure','table_contract','internal_links','languagetool','ppm','pserc','pste','duplicate_cannibalization','seo','design_format','publish_safety']
 RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
 RELEASE_KEYS={'article_origin_policy','authoring_prompt_sha256','authoring_role','content_generation_performed_by_supervisor','contract','created_at_utc','exact_five_batch_sha256','exact_five_item_count','frozen_workflow_sha256','nullpunkt','nullpunkt_sha256','ppm_baseline_sha256','ppm_version','research_evidence_policy','sequence','status','wordpress_write_performed'}
@@ -23,12 +25,13 @@ def load(p:Path)->dict:
     x=json.loads(Path(p).read_text(encoding='utf-8'))
     if not isinstance(x,dict):raise ViewError('JSON_OBJECT_REQUIRED')
     return x
-def safe(ref:str)->Path:
+def _safe_repo(repo:Path,ref:str)->Path:
     p=Path(str(ref or ''))
     if not str(ref or '') or p.is_absolute() or '..' in p.parts:raise ViewError('BOUND_REF_INVALID')
-    q=(REPO/p).resolve();r=REPO.resolve()
+    q=(Path(repo)/p).resolve();r=Path(repo).resolve()
     if q!=r and r not in q.parents:raise ViewError('BOUND_REF_ESCAPE')
     return q
+def safe(ref:str)->Path:return _safe_repo(REPO,ref)
 def _bridge():
     s=importlib.util.spec_from_file_location('current_room_bridge_bound',BRIDGE)
     if s is None or s.loader is None:raise ViewError('BRIDGE_LOAD_FAILED')
@@ -40,6 +43,9 @@ def _rules(it:Mapping[str,Any])->dict:
     t=str(it.get('article_type') or '').strip()
     if not t:raise ViewError('ARTICLE_TYPE_BINDING_MISSING')
     return {'contract':'PFERDE_ATELIER_TEXTMACHINE_ARTICLE_TYPE_RULESET_BINDING_V1','article_type':t,'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'selection_authority':'BOUND_CURRENT_ITEM_ONLY','rule_semantics_redefined':False,'content_or_quality_rules_changed':False,'publish_allowed':False}
+
+def _ppm_requirement()->dict:
+    return {'ppm_version':PPM679_VERSION,'ppm_package_sha256':PPM679_PACKAGE_SHA256,'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'stage':'ppm','real_ppm_execution_required':True,'final_article_hash_must_equal_ppm_content_hash':True,'technical_guard_semantics_authority':'NONE','content_or_quality_rules_changed':False,'publish_allowed':False}
 
 def _contract_binding()->dict:
     p=REPO/PROMPT_REL
@@ -60,12 +66,39 @@ def _validate_release_metadata_identity(rm:Mapping[str,Any],batch:str,batch_coun
     if rm.get('exact_five_batch_sha256')!=batch:raise ViewError('RELEASE_METADATA_BATCH_MISMATCH')
     if int(rm.get('exact_five_item_count') or -1)!=batch_count:raise ViewError('RELEASE_METADATA_ITEM_COUNT_MISMATCH')
 
+def _validate_ppm_stage(repo:Path,root:str,proof:Mapping[str,Any],receipt_outputs:Any)->None:
+    binding=proof.get('ppm679_binding')
+    keys={'ppm_version','ppm_package_sha256','article_type_templates_sha256','final_article_ref','final_article_sha256','ppm_report_ref','ppm_report_sha256'}
+    if not isinstance(binding,dict) or set(binding)!=keys:raise ViewError('PPM679_REAL_BINDING_MISSING')
+    if binding.get('ppm_version')!=PPM679_VERSION:raise ViewError('PPM679_VERSION_MISMATCH')
+    if binding.get('ppm_package_sha256')!=PPM679_PACKAGE_SHA256:raise ViewError('PPM679_PACKAGE_HASH_MISMATCH')
+    if binding.get('article_type_templates_sha256')!=ARTICLE_TYPE_TEMPLATES_SHA:raise ViewError('PPM679_RULESET_HASH_MISMATCH')
+    final_ref=str(binding.get('final_article_ref') or '');final_sha=str(binding.get('final_article_sha256') or '')
+    report_ref=str(binding.get('ppm_report_ref') or '');report_sha=str(binding.get('ppm_report_sha256') or '')
+    if not final_ref.startswith(root) or not report_ref.startswith(root):raise ViewError('PPM679_REF_OUTSIDE_BOUND_ROOT')
+    if not re.fullmatch(r'[0-9a-f]{64}',final_sha) or not re.fullmatch(r'[0-9a-f]{64}',report_sha):raise ViewError('PPM679_HASH_INVALID')
+    final_path=_safe_repo(repo,final_ref);report_path=_safe_repo(repo,report_ref)
+    if not final_path.is_file() or sha(final_path)!=final_sha:raise ViewError('PPM679_FINAL_ARTICLE_HASH_MISMATCH')
+    if not report_path.is_file() or sha(report_path)!=report_sha:raise ViewError('PPM679_REPORT_HASH_MISMATCH')
+    if proof.get('input_sha256')!=final_sha:raise ViewError('PPM679_STAGE_INPUT_NOT_FINAL_ARTICLE')
+    arts=proof.get('artifacts')
+    if not isinstance(arts,list):raise ViewError('PPM679_ARTIFACTS_MISSING')
+    if not any(isinstance(x,dict) and x.get('ref')==final_ref and x.get('sha256')==final_sha for x in arts):raise ViewError('PPM679_FINAL_ARTICLE_NOT_BOUND_AS_ARTIFACT')
+    if not any(isinstance(x,dict) and x.get('ref')==report_ref and x.get('sha256')==report_sha for x in arts):raise ViewError('PPM679_REPORT_NOT_BOUND_AS_ARTIFACT')
+    if not isinstance(receipt_outputs,list) or not any(isinstance(x,dict) and x.get('ref')==final_ref and x.get('sha256')==final_sha for x in receipt_outputs):raise ViewError('PPM679_FINAL_ARTICLE_NOT_BOUND_AS_OUTPUT')
+    report=load(report_path);checks=report.get('checks')
+    if report.get('ok') is not True:raise ViewError('PPM679_NOT_PASS')
+    if report.get('technical_status')!='TECHNICAL_CHECK_OK':raise ViewError('PPM679_TECHNICAL_NOT_PASS')
+    if report.get('content_quality_status')!='CONTENT_QUALITY_CHECK_OK':raise ViewError('PPM679_CONTENT_QUALITY_NOT_PASS')
+    if report.get('content_hash')!=final_sha:raise ViewError('PPM679_CONTENT_HASH_NOT_FINAL_ARTICLE')
+    if not isinstance(checks,dict) or checks.get('content_hash')!=final_sha or checks.get('fail_closed_aggregate_status')!='PASS':raise ViewError('PPM679_FAIL_CLOSED_NOT_PASS')
+
 # These two functions are the only callbacks the existing room bridge uses after DUAL is bound to this file.
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     r=_rules(it);b=_contract_binding();batch,batch_count=_runtime_batch_identity();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
     metadata_binding={'required_fields':sorted(RELEASE_KEYS),'contract':RELEASE_CONTRACT,'status':'PASS','exact_five_batch_sha256':batch,'exact_five_item_count':batch_count,'wordpress_write_performed':False,'remaining_fields_authority':'EXISTING_UNCHANGED_FACHWORKFLOW_ONLY','technical_identity_binding_only':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
     s=dict(a.get('item_receipt_schema') or {})
-    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
+    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'ppm679_requirement':_ppm_requirement(),'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
     a['item_receipt_schema']=s
     # NEW intentionally has no existing_article_source_binding and no handoff/request path.
     a.pop('existing_article_source_binding',None);a.pop('fachworkflow_handoff',None)
@@ -107,6 +140,7 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
             if not ar.startswith(root) or not re.fullmatch(r'[0-9a-f]{64}',ah):raise ViewError('FACH_STAGE_ARTIFACT_REF_INVALID:'+stage)
             ap=safe(ar)
             if not ap.is_file() or sha(ap)!=ah:raise ViewError('FACH_STAGE_ARTIFACT_HASH_MISMATCH:'+stage)
+        if stage=='ppm':_validate_ppm_stage(REPO,root,proof,d.get('outputs'))
     fp=q.get('fact_pack');pi=q.get('production_plan_item');ph=q.get('production_plan_header');ri=q.get('workflow_release_item');rm=q.get('workflow_release_metadata')
     if not all(isinstance(x,dict) for x in (fp,pi,ph,ri,rm)):raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
     if pi.get('canonical_article_id')!=it.get('canonical_article_id') or pi.get('plan_slot')!=it.get('plan_slot'):raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH')
