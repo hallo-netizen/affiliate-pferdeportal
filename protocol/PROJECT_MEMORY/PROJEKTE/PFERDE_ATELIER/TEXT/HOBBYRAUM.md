@@ -109,6 +109,10 @@ Noch **kein** Kandidat freigegeben.
 `CHECK_POS_NEG=PENDING`
 `CHECK_INVARIANTS=PENDING`
 
+Rückgabeweg:
+Planpunkt D → genau ein Kandidat → Planpunkt E PASS → reguläre Integration auf current main → Planpunkt F Codex-Livetest.
+Solange E nicht PASS ist: keine Integration.
+
 ## UNANTASTBAR
 
 - genau eine Tür;
