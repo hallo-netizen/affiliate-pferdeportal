@@ -20,6 +20,7 @@ Hier liegen dauerhafte PB-ONE-Unterlagen, die für spätere Agenturarbeit als be
 - allgemeine Referenzakten → `REGISTER.md`
 - selbstentwickelte Plugins → `PLUGINS/START_HERE.md`
 - offene operative Themen → `TODO/START_HERE.md`
+- Preis- und Produktkonzept → `PREISE/START_HERE.md`
 
 ## Aktueller Bestand
 
