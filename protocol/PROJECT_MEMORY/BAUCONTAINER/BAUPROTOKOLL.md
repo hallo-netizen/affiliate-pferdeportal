@@ -1641,3 +1641,36 @@ KISS-FIX:
 
 BEZUG:
 ARCH-085.
+
+
+### 2026-09-07 – GitHub-only Backup real erneut restore-geprüft
+
+AUSLÖSER:
+Korrektur der falschen WordPress-/Projektarchiv-Erweiterung.
+
+REALER LAUF:
+GitHub Actions Run `34160894135` = SUCCESS.
+
+EXAKTER DOWNLOAD-NACHTEST:
+- Außenhash PASS;
+- Innenhash PASS;
+- TAR PASS;
+- Bundle verify PASS;
+- Mirror-Clone PASS;
+- `git fsck --full --strict` PASS.
+
+ERGEBNIS:
+`GITHUB_REPOSITORY_RESTORE_PASS`.
+
+BESTAND:
+291 Branches, 1 Tag, 173 PR-Refs sowie GitHub-Kollaborations-/Release-Metadaten.
+
+OFFEN:
+Actions Variables/Permissions/Secret-Namen und Webhooks liefern mit der Workflow-Identität HTTP 403.
+Der Workflow referenziert `ENDSTEMPEL_PRIVATE_KEY`; der Secret-Wert selbst ist über GitHub nicht exportierbar.
+
+DARUM:
+`GITHUB_BACKUP_PREPASS`, kein erfundener `GITHUB_KOMPLETT_PASS`.
+
+BEZUG:
+BAU-038 / ARCH-086.
