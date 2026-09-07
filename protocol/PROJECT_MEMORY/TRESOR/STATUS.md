@@ -2,67 +2,94 @@
 
 STAND: 2026-09-07
 
-## KONZEPT
+## AKTUELLER AUFTRAG
 
-`BACKUP_KONZEPT_PASS`
+**GITHUB ONLY**
 
-Verbindlich:
-**GitHub + WordPress + Projektarchiv → ein verschlüsseltes Paket → lokale geschützte Kopie + unabhängige Offsite-Kopie.**
+Repository:
+`hallo-netizen/affiliate-pferdeportal`
+
+WordPress, Website-Backup und Projektarchiv sind nicht Bestandteil dieses Auftrags.
 
 ## TECHNIK
 
-Umgesetzt im Hobbyraum:
+Verbindlicher bestehender Weg:
+Branch `tresor/build-20260905`
+→ `.github/workflows/campus-tresor-snapshot.yml`
 
-- `control/tresor/build_tresor_release.sh`
-  - bestehender komplexer Builder durch KISS-Lauf ersetzt;
-  - Git-Mirror;
-  - vorhandenes .wpress-Vollbackup;
-  - Projektarchiv;
-  - ZIP-Paket;
-  - AES-256/GPG-Verschlüsselung;
-  - SHA-256;
-  - Offsite-Kopie Pflicht;
-  - `latest.json` für WordPress.
+Aktuell gesichert:
+- kompletter Git-Bestand;
+- 291 Branches;
+- 1 Tag;
+- 173 Pull-Request-Refs;
+- Issues + Kommentare + Events;
+- Pull Requests + Reviews + Review-Kommentare;
+- Releases + Release-Artefakte;
+- Labels + Milestones;
+- Rulesets;
+- Workflows;
+- Deployments;
+- Environments, soweit lesbar;
+- Collaborators, soweit lesbar;
+- Wiki, falls initialisiert;
+- Actions-/Webhook-/Variablen-/Secret-Namen-Einstellungen, soweit GitHub sie lesbar macht.
 
-- `control/tresor/pferde-atelier-backup-button.php`
-  - WordPress-Backendseite;
-  - nur Administrator;
-  - zeigt letzten Status;
-  - Download nur bei `BACKUP_PASS`;
-  - SHA-256 wird vor Download erneut geprüft.
+## REALER TEST
 
-- `control/tresor/restore_check.sh`
-  - Entschlüsselung;
-  - Paketstruktur;
-  - Git-Mirror;
-  - WordPress-Backup;
-  - Projektarchiv;
-  - PASS-Markierung.
+Aktueller Workflow-Lauf:
+`34160894135`
 
-## HARTE TESTS
+Ergebnis:
+`SUCCESS`
 
-Lokaler Techniktest:
+Zusätzlich exakt aus der erzeugten Download-Datei geprüft:
+- äußerer SHA-256 → PASS;
+- innerer SHA-256 → PASS;
+- TAR lesbar → PASS;
+- Git-Bundle verify → PASS;
+- Mirror-Clone → PASS;
+- `git fsck --full --strict` → PASS.
 
-- vollständiger Testlauf → `BACKUP_PASS`;
-- Paket entschlüsselt und Struktur geprüft → `RESTORE_STRUCTURE_PASS`;
-- fehlender Offsite-Speicher → korrekt BLOCK;
-- fehlendes WordPress-Vollbackup → korrekt BLOCK;
-- falsches Passwort → Restore korrekt BLOCK.
+Ergebnis:
+`GITHUB_REPOSITORY_RESTORE_PASS`
 
-## LIVE NOCH OFFEN
+## AKTUELLER PREPASS
 
-Noch nicht behauptet:
+Aktuelles getestetes Paket enthält:
+- main SHA zum Laufzeitpunkt;
+- 291 Branches;
+- 173 PR-Refs;
+- 1 Release-Artefakt;
+- vollständige exportierte Kollaborations-/Metadatenklassen laut Inhaltsvertrag.
 
-`TOTALAUSFALL_RESTORE_PASS`
+## PROVIDERGRENZE – NOCH KEIN GITHUB_KOMPLETT_PASS
 
-Dafür fehlen auf dem echten System noch:
+Mit dem normalen GitHub-Actions-`GITHUB_TOKEN` nicht lesbar:
+- Actions Variables → HTTP 403;
+- Actions Permissions → HTTP 403;
+- Workflow Permissions → HTTP 403;
+- Actions Secret-Namen → HTTP 403;
+- Webhooks → HTTP 403.
 
-1. WordPress-/Hosting-Zugriff für Installation des Backendknopfs;
-2. Bindung des realen aktuellen WordPress-Backupordners;
-3. Bindung des realen Projektarchivordners;
-4. Bindung eines unabhängigen privaten Offsite-Speichers;
-5. Aktivierung des wöchentlichen Serverlaufs;
-6. einmaliger echter leerer Gesamt-Restore.
+Direkt aus den Workflows nachgewiesener verwendeter Secret-Name:
+`ENDSTEMPEL_PRIVATE_KEY`
 
-Bis dahin:
-`BACKUP_LIVE_NOT_CONNECTED`
+Secret-**Werte** sind von GitHub grundsätzlich nicht exportierbar.
+
+Darum aktuell korrekt:
+`GITHUB_BACKUP_PREPASS`
+
+Nicht behauptet:
+`GITHUB_KOMPLETT_PASS`
+
+## NÄCHSTE AKTION
+
+1. aktuelle Campus-Korrekturen vollständig abschließen;
+2. denselben GitHub-only Workflow danach noch einmal frisch laufen lassen;
+3. exakt dieses finale Paket erneut restore-prüfen;
+4. finale Datei außerhalb GitHubs sichern;
+5. Admin-/Secret-Grenze separat schließen oder ausdrücklich als Providergrenze dokumentiert akzeptieren.
+
+## HARD RULE
+
+Kein Rücksprung zu WordPress-/Website-/Projektarchiv-Backup.
