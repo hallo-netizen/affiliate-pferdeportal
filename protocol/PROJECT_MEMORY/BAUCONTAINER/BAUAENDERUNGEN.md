@@ -95,4 +95,4 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-077 → PB ONE Aktenschrank erhält Vertriebs-Fach; Lead-Management und Onboarding bleiben dort gebündelt
 - ARCH-079 → Masterdateien-Inventare sind niemals zweite CURRENT-/Head-/Manifest-Wahrheit
 
-- ARCH-079 → Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery
+- ARCH-080 → Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery

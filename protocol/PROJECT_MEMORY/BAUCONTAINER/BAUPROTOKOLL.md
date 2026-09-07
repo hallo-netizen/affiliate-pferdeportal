@@ -1396,13 +1396,13 @@ Nach vollständiger GitHub-Löschung können interne GitHub-Objekt-IDs beim Neua
 Original-IDs/Zeitstempel müssen im Recovery-Metadatenarchiv erhalten bleiben.
 
 BEZUG:
-ARCH-079.
+ARCH-080.
 
 
 ### 2026-09-07 – Ein-Datei-Tresor V3 technisch vorbereitet
 
 ZIEL:
-ARCH-079 praktisch bis zur Nutzer-/WordPress-Grenze umsetzen.
+ARCH-080 praktisch bis zur Nutzer-/WordPress-Grenze umsetzen.
 
 KISS:
 Keine neue Backup-Engine.

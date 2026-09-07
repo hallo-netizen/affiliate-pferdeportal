@@ -1291,7 +1291,7 @@ LEITSATZ:
 **Inventar sagt, was vorhanden/belegt ist. CURRENT_STATE/Governance sagen, was jetzt gilt.**
 
 
-## ARCH-079 – Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery
+## ARCH-080 – Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery
 WAS:
 Der Tresor-Zielzustand wird von mehreren Sicherungsbestandteilen auf **eine einzige verschlüsselte, geschlossene Recovery-Datei** verschärft.
 WARUM:
