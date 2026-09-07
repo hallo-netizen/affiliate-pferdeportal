@@ -1009,3 +1009,23 @@ Run 34141063395 PASS; flache Kategorie positiv PASS; falscher Parent korrekt BLO
 
 LIVE-GRENZE:
 Beim Nutzer kann 0.2.0 bis zum manuellen Ersatz installiert bleiben, weil keine automatische Artikelproduktion/Veröffentlichung ausgelöst wird. Für den nächsten echten Test ist ausschließlich 0.2.1 freigegeben.
+
+
+## PV-PLAN-015 – Gebundener Erstimport und Admin-Drafttest
+
+STAND: 2026-09-07.
+
+WAS:
+Für den ersten echten WordPress-Test wird PV-REG-001 als hashgebundenes Dossier in Version 0.2.2 ausgeliefert. Der Nutzer bekommt unter Werkzeuge genau einen Admin-Testknopf ohne freie Parameter.
+
+ABLAUF:
+Import -> gebundener WordPress-Draft -> Link-/Grafikfinalisierung.
+
+SICHERUNGEN:
+Kein Auto-Import, kein Auto-Publish, keine freie Eingabe, Hashprüfung vor Import, idempotente Wiederholung, exakte Kategoriebindung Term-ID 11.
+
+BELEG:
+Run 34142790804 PASS. Clean-ZIP ohne Testprojekt; Erstimport auf frischer DB erzeugt exakt 2 Produkte, 28 Fakten, 1 Vergleich und 14 Merkmale; Wiederholung erzeugt keine Dubletten; finaler Draft PASS; Endmarker UPC_BOUND_LIVE_PV_REG_001_GESAMT_PASS.
+
+FREIGEGEBENE VERSION:
+Universal Product Comparison 0.2.2-prototype.
