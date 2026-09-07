@@ -426,3 +426,24 @@ Produktwissen-Vertrag:
 `PRODUKTWISSEN_V1_VERTRAG.md`.
 
 Damit sind ältere Abschnitte, die eine verpflichtende Übergabe an TEXT oder einen Extension-First-Test als NEXT ACTION nennen, **historische Planungsstände und nicht mehr CURRENT**.
+
+
+## PRODUKTWISSEN V1 – ERSTER TECHNISCHER PROTOTYP 2026-09-07
+
+Isolierter Technik-Branch:
+`hobbyroom/productwissen-v1-prototype`
+
+Prototyp:
+- `universal-product-knowledge/universal-product-knowledge.php`
+- `universal-product-knowledge/src/class-upk-repository.php`
+- vier Tabellen: Produkte, Varianten, Identifier, Fakten/Quellen;
+- keine UI, keine Veröffentlichung, keine TEXT-/SEO-/Affiliate-Schreibkopplung.
+
+Lokaler Vertrags-/Logiktest:
+- PHP-Syntax: PASS;
+- P01–P11: PASS;
+- `GESAMT PASS` für Produkt anlegen, Variante anbinden, Identifier, Quellenfakt, Readback sowie Negativfälle unvollständige Identität, verwaiste Variante, Identifier-Konflikt, leeres VERIFIED-Faktum und fehlende Quelle.
+
+Testgrenze:
+**Noch kein echter WordPress-Aktivierungs-/Datenbank-PASS.**
+Vor Aufbau des Produktvergleichs muss genau dieser kleine WordPress-Readback-Test folgen.
