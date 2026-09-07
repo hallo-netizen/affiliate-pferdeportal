@@ -182,7 +182,7 @@ Neu:
 - keine Publish-Route.
 
 Clean-ZIP-Beleg:
-- Run `34142790804` PASS;
+- Run `34144140088` PASS;
 - kein `config/test-project` im Benutzerpaket;
 - ZIP-Installation/Aktivierung PASS;
 - bestehende Regression PASS;
@@ -198,3 +198,22 @@ Freigegebene Produktvergleichsversion:
 
 Produktwissen bleibt:
 `0.1.0-prototype`.
+
+
+## AKTUELLER CLEAN-ZIP-BELEG 0.2.2
+
+Finale Benutzer-ZIP:
+`universal-product-comparison-0.2.2-prototype.zip`
+
+SHA-256:
+`683828e03bd4949aa022ccd25fa62ae7ede105ef3921db2e6d0899b66bf29c67`
+
+Beleg:
+- Run `34144140088` PASS;
+- kein `config/test-project`;
+- saubere ZIP-Installation/Aktivierung PASS;
+- frischer WordPress-Stand;
+- exakte Kategorie Term-ID 11;
+- erster gebundener `PV-REG-001`-Draft PASS;
+- zweiter Lauf ohne Dublette PASS;
+- Publish-Sperre bleibt aktiv.
