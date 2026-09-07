@@ -188,6 +188,16 @@ def main():
         finally:
             restore(old)
 
+    # Codex checkout compatibility: a real worktree without any remote is valid.
+    with tempfile.TemporaryDirectory() as t:
+        no_origin, _, _, _ = copy_current_repo(Path(t) / 'codex-no-origin')
+        subprocess.run(['git', 'init', '-q', str(no_origin)], check=True)
+        old = use_repo(no_origin)
+        try:
+            assert m.verify()['status'] == 'CODEX_CLOUD_GATE_VERIFY_PASS'
+        finally:
+            restore(old)
+
     for forbidden_name in ('Campus-Tresor', 'Campus-Archiv'):
         with tempfile.TemporaryDirectory() as t:
             r, _, _, _ = copy_current_repo(Path(t) / forbidden_name)
