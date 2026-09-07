@@ -21,12 +21,14 @@ class UPC_First_Draft_Test {
     }
 
     public static function register_menu() {
-        add_management_page(
-            'Produktvergleich Test',
-            'Produktvergleich Test',
+        add_menu_page(
+            'Produktvergleich',
+            'Produktvergleich',
             'manage_options',
             self::MENU_SLUG,
-            array( __CLASS__, 'render_page' )
+            array( __CLASS__, 'render_page' ),
+            'dashicons-chart-bar',
+            58
         );
     }
 
@@ -80,7 +82,7 @@ class UPC_First_Draft_Test {
                         'page'      => self::MENU_SLUG,
                         'upc_error' => sanitize_key( $result->get_error_code() ),
                     ),
-                    admin_url( 'tools.php' )
+                    admin_url( 'admin.php' )
                 )
             );
             exit;
@@ -93,7 +95,7 @@ class UPC_First_Draft_Test {
                     'upc_status'  => 'pass',
                     'upc_post_id' => (int) $result['post_id'],
                 ),
-                admin_url( 'tools.php' )
+                admin_url( 'admin.php' )
             )
         );
         exit;
