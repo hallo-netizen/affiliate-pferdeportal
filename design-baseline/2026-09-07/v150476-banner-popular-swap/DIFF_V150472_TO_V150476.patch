@@ -1,0 +1,20 @@
+--- V1.50.472/pferde-template-kit.php
++++ V1.50.476/pferde-template-kit.php
+@@ -2,7 +2,7 @@
+- * Version: 1.50.472
++ * Version: 1.50.476
+@@ -10066,10 +10066,6 @@
+-        if ($affiliate_banner !== '') {
+-            $out .= '<section class="pa266-section pa266-network"><header><span>' . esc_html($texts['network_kicker']) . '</span><h2>' . esc_html($texts['network_title']) . '</h2></header><div class="pa266-network-slot is-real">' . $affiliate_banner . '</div></section>';
+-        }
+-
+         $popular_source_ids = !empty($ctx['hub_post_cat_ids']) ? (array)$ctx['hub_post_cat_ids'] : (array)($ctx['cat_ids'] ?? []);
+@@ -10081,6 +10077,10 @@
+             $out .= '</div></section>';
+         }
+ 
++        if ($affiliate_banner !== '') {
++            $out .= '<section class="pa266-section pa266-network"><header><span>' . esc_html($texts['network_kicker']) . '</span><h2>' . esc_html($texts['network_title']) . '</h2></header><div class="pa266-network-slot is-real">' . $affiliate_banner . '</div></section>';
++        }
++
+         if ($affiliate_product_count > 0) {
