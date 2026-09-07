@@ -34,3 +34,20 @@ Plan B bleibt bis zur ausdrücklichen Testfreigabe vollständig unverdrahtet:
 ## D. Abbruch
 
 Ein einziger Unterschied bei Qualität, Inhalt, Design, Hashbindung, Signierung, Endstempel oder Publish-Sperre -> Plan B FAIL, keine Integration.
+
+
+## E. Aktuell erkannte Testlücke – LanguageTool
+
+Live-Befund Plan A vom 07.09.2026:
+`BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`.
+
+Harte Gegenprüfung Plan B:
+Der aktuelle Shadow-Controller prüft bei Nicht-PPM-Stufen nur Stage-Proof, Status, Identität, Evidence und Artefakt-Hashes. Er führt LanguageTool selbst nicht aus und bindet keinen vorhandenen LanguageTool-Ausführungsbefehl.
+
+Damit ist der bisherige Plan-B-Positivtest für `languagetool` **kein Beweis realer LanguageTool-Ausführung**.
+
+Folge:
+- Plan B nicht als Vergleichs-Live-Test starten, solange der bestehende reale LanguageTool-Ausführungsweg nicht historisch/technisch identifiziert ist.
+- keine Qualitätsregel ändern;
+- keine neue LanguageTool-Architektur erfinden;
+- später muss Plan B denselben belegten bestehenden LanguageTool-Weg verwenden wie Plan A.
