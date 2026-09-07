@@ -151,6 +151,67 @@ for ( $i = 0; $i < 100; $i++ ) {
 }
 fwrite( STDOUT, "PASS: 100/100 byte-identical deterministic renders\n" );
 
+$parent_term = wp_insert_term(
+    'Regendecken',
+    'category',
+    array( 'slug' => 'regendecken' )
+);
+upc_real_assert( ! is_wp_error( $parent_term ), 'create bound parent category for draft smoke' );
+
+$child_term = wp_insert_term(
+    'Vergleich',
+    'category',
+    array(
+        'slug'   => 'regendecken-vergleich',
+        'parent' => (int) $parent_term['term_id'],
+    )
+);
+upc_real_assert( ! is_wp_error( $child_term ), 'create bound comparison category for draft smoke' );
+
+$wp_draft = upc_wordpress_draft();
+upc_real_assert( ! is_wp_error( $wp_draft ), 'WordPress draft materializer available' );
+
+$materialized = $wp_draft->materialize( $comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_real_assert( ! is_wp_error( $materialized ), 'materialize validated WordPress draft' );
+upc_real_assert( 'WORDPRESS_DRAFT_VERIFIED' === $materialized['status'], 'WordPress draft readback verified' );
+upc_real_assert( false === $materialized['publish_allowed'], 'WordPress materializer keeps publish forbidden' );
+upc_real_assert( $golden_output_hash === $materialized['output_hash'], 'WordPress draft preserves golden output hash' );
+
+$saved_post = get_post( (int) $materialized['post_id'] );
+upc_real_assert( $saved_post && 'draft' === $saved_post->post_status, 'saved WordPress post status is exactly draft' );
+upc_real_assert( $first_html === $saved_post->post_content, 'saved WordPress body is byte-identical renderer HTML' );
+upc_real_assert( $first_output_hash === hash( 'sha256', $saved_post->post_content ), 'saved WordPress body hash matches renderer' );
+upc_real_assert( '0' === (string) get_post_meta( $saved_post->ID, '_upc_publish_allowed', true ), 'saved WordPress metadata forbids publish' );
+
+$materialized_again = $wp_draft->materialize( $comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_real_assert( ! is_wp_error( $materialized_again ), 'repeat WordPress draft materialization succeeds' );
+upc_real_assert( (int) $materialized_again['post_id'] === (int) $materialized['post_id'], 'repeat materialization reuses same bound draft' );
+upc_real_assert(
+    1 === count(
+        get_posts(
+            array(
+                'post_type'      => 'post',
+                'post_status'    => 'any',
+                'posts_per_page' => -1,
+                'fields'         => 'ids',
+                'meta_key'       => '_upc_comparison_uid',
+                'meta_value'     => $draft['comparison_uid'],
+            )
+        )
+    ),
+    'no duplicate WordPress comparison post created'
+);
+
+$publishing_path = dirname( __DIR__ ) . '/config/test-project/publishing.json';
+$publishing_original = file_get_contents( $publishing_path );
+file_put_contents( $publishing_path, $publishing_original . " " );
+$tampered_publishing = $wp_draft->materialize( $comparison_id, 'test-project', 'pv-reg-001-v1' );
+file_put_contents( $publishing_path, $publishing_original );
+upc_real_assert(
+    is_wp_error( $tampered_publishing ) && 'UPC_PUBLISHING_CONFIG_HASH_MISMATCH' === $tampered_publishing->get_error_code(),
+    'tampered publishing config is blocked'
+);
+
 $ruleset_path = dirname( __DIR__ ) . '/config/pferde-atelier/rulesets/pv-reg-001-v1.json';
 $ruleset_original = file_get_contents( $ruleset_path );
 file_put_contents( $ruleset_path, $ruleset_original . " " );
@@ -177,6 +238,12 @@ $changed_fact = $production->execute( $comparison_id, 'pferde-atelier', 'pv-reg-
 upc_real_assert(
     is_wp_error( $changed_fact ) && 'UPC_DECISION_RULE_FACT_BINDING_MISMATCH' === $changed_fact->get_error_code(),
     'changed source fact blocks old approved decision rule'
+);
+
+$changed_fact_wp = $wp_draft->materialize( $comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_real_assert(
+    is_wp_error( $changed_fact_wp ) && 'UPC_DECISION_RULE_FACT_BINDING_MISMATCH' === $changed_fact_wp->get_error_code(),
+    'WordPress draft layer cannot bypass changed-fact rule binding'
 );
 
 $missing_id = $compare->create_comparison(
