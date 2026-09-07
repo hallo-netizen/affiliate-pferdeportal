@@ -1197,13 +1197,33 @@ trait PPAR_Automation_Suite_Trait {
             self::PROVIDER_CONTRACT_VERSION
         );
         if (is_wp_error($raw)) { return $raw; }
-        if (!is_array($raw) || !$raw) {
+
+        // Adapter may return either a plain non-empty row list or an explicit
+        // envelope. The envelope is required when a real source is bound but
+        // currently returns zero creatives; in that case reconciliation must
+        // be allowed to retire stale banners instead of treating the source as
+        // "not connected".
+        $bound = false;
+        $raw_rows = array();
+        if (is_array($raw) && array_key_exists('bound', $raw)) {
+            $bound = !empty($raw['bound']);
+            if (!$bound) {
+                return array('bound'=>false,'rows'=>array(),'blocked'=>0);
+            }
+            if (!isset($raw['rows']) || !is_array($raw['rows'])) {
+                return new WP_Error('awin_static_creative_rows_invalid', 'Gebundene Awin-Bannerquelle muss rows als Liste liefern.');
+            }
+            $raw_rows = $raw['rows'];
+        } elseif (is_array($raw) && $raw) {
+            $bound = true;
+            $raw_rows = $raw;
+        } else {
             return array('bound'=>false,'rows'=>array(),'blocked'=>0);
         }
 
         $rows = array();
         $blocked = 0;
-        foreach ($raw as $creative) {
+        foreach ($raw_rows as $creative) {
             if (!is_array($creative)) { $blocked++; continue; }
             $row_advertiser = absint($creative['advertiser_id'] ?? $creative['merchant_id'] ?? 0);
             if ($row_advertiser !== $advertiser_id) { $blocked++; continue; }
