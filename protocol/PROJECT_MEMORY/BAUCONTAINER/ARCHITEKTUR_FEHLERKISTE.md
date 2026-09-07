@@ -809,3 +809,27 @@ ARCH-081 + `TRESOR/START_HERE.md`.
 
 NEGATIV:
 Keine `.command`-Datei, kein Teilarchiv und kein Terminalschritt ist mehr Teil des Nutzervertrags.
+
+
+## BAU-038 – GitHub-Backupauftrag zu WordPress-Gesamtbackup verfälscht
+
+STATUS: CLOSED HINSICHTLICH SCOPE / GITHUB-ADMINABDECKUNG OFFEN
+
+KURZ:
+Ein vorhandener und restore-geprüfter GitHub-only-Sicherungsweg wurde trotz BAU-032/BAU-037 durch WordPress-, Projektarchiv- und WP-Plugin-Arbeit ersetzt.
+
+URSACHE:
+Vor der technischen Aktion wurde der vorhandene Tresor-/Fehlerstand nicht hart gegen den Nutzerauftrag abgeglichen.
+
+KISS-FIX:
+- Scope zurück auf GitHub only;
+- vorhandenen `Campus Tresor Snapshot` wiederverwendet und erweitert;
+- WordPress/Projektarchiv aus allen aktuellen Tresorverträgen entfernt;
+- falschen WP-Backupweg aus `control/tresor` entfernen;
+- GitHub-Restore erneut real aus aktueller Sicherung prüfen.
+
+REGRESSIONSSCHUTZ:
+Bei GitHub-Backupauftrag sind WordPress, Website-Backup und Projektarchiv im aktuellen technischen Sicherungsweg verboten, solange der Nutzer keinen neuen separaten Auftrag erteilt.
+
+BEZUG:
+ARCH-086.
