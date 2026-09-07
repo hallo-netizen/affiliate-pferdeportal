@@ -14,6 +14,14 @@ Es enthält bewusst **keine zweite ausführliche Fehlerbeschreibung, keinen kopi
 
 Für Details immer die genannte Originalquelle öffnen.
 
+## CAMPUS-ARCHITEKTUR
+
+Bereich: CAMPUS / ARCHITEKTUR  
+Status: AKTIV / BAU-035 CLOSED, weitere Architekturfehler nach Originalquelle
+
+Autoritative Fehlerquelle:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
+
 ## TEXT-M01-M33
 
 Bereich: TEXT  
