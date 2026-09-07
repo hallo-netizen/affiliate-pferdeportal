@@ -17,6 +17,7 @@ define( 'UPC_SCHEMA_VERSION', '2' );
 define( 'UPC_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/src/class-upc-repository.php';
+require_once __DIR__ . '/src/class-upc-writer.php';
 
 function upc_dependency_ready() {
     return function_exists( 'upk_repository' ) && class_exists( 'UPK_Repository' );
@@ -94,6 +95,14 @@ function upc_maybe_upgrade_schema() {
     }
 }
 add_action( 'plugins_loaded', 'upc_maybe_upgrade_schema', 20 );
+
+function upc_writer() {
+    $repository = upc_repository();
+    if ( is_wp_error( $repository ) ) {
+        return $repository;
+    }
+    return new UPC_Writer( $repository );
+}
 
 function upc_repository() {
     static $repository = null;
