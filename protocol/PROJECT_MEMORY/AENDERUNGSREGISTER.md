@@ -1263,3 +1263,29 @@ V1.50.473 hatte den bestehenden Introblock zu grob umgebaut. V1.50.474 trennt nu
 BELEG:
 `fix/category-content-order-v150474-20260907`
 `design-baseline/2026-09-07/v150474-category-content-order/`
+
+
+## ARCH-079 – Masterdateien-Inventare dürfen keine zweite aktuelle Wahrheit führen
+
+STAND: 2026-09-07.
+
+WAS:
+Masterdateien-Inventare werden campusweit auf ihre eigentliche Rolle begrenzt: Herkunft, Hash, Klassifizierung, historische/technische Belege und Referenzorte.
+
+Sie dürfen keine eigenen dynamischen Aussagen über aktuellen Head, aktuelles Manifest, aktuellen Blocker, NEXT ACTION oder „aktuellen Statusbeleg“ führen.
+
+WARUM:
+Die Abschluss-/Nachholprüfung fand im Affiliate-Inventar einen alten Head/Manifest und eine 05.09.-Statusakte, die als aktuell bezeichnet war. Das erzeugte neben `CURRENT_STATE.md` und Release-Governance eine zweite Standwahrheit.
+
+KISS:
+Keine neue Datei und kein neues Register.
+Nur:
+- betroffenes Affiliate-Inventar bereinigt;
+- `MASTERDATEIEN_REGEL.md` gehärtet;
+- `NEUES_PROJEKT_VORLAGE.md` um dieselbe Negativprüfung ergänzt.
+
+FEHLERBEZUG:
+`BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md` → BAU-035.
+
+LEITSATZ:
+**Inventar sagt, was vorhanden/belegt ist. CURRENT_STATE/Governance sagen, was jetzt gilt.**
