@@ -102,6 +102,31 @@ trait PPAR_Awin_Programme_Gate_Trait {
         return true;
     }
 
+    /**
+     * Enumerate only explicitly allow_local + currently joined advertisers.
+     * This is the bootstrap source for scheduled automation; a pre-existing
+     * Partner-Intake snapshot is intentionally NOT required.
+     */
+    private function awin_programme_gate_allowed_advertiser_ids($portal_key = '') {
+        $portal_key = sanitize_key((string) $portal_key);
+        if ($portal_key === '' && method_exists($this, 'output_local_portal_key')) {
+            $portal_key = sanitize_key((string) $this->output_local_portal_key());
+        }
+        if ($portal_key === '') { return array(); }
+
+        $out = array();
+        foreach ($this->awin_programme_gate_records() as $advertiser_id=>$row) {
+            $advertiser_id = absint($advertiser_id);
+            if ($advertiser_id <= 0 || !is_array($row)) { continue; }
+            if (sanitize_key((string) ($row['status'] ?? 'pending')) !== 'allow_local') { continue; }
+            if (sanitize_key((string) ($row['portal_key'] ?? '')) !== $portal_key) { continue; }
+            if (!$this->awin_programme_gate_current_joined($advertiser_id)) { continue; }
+            $out[] = $advertiser_id;
+        }
+        sort($out, SORT_NUMERIC);
+        return array_values(array_unique($out));
+    }
+
     private function awin_programme_gate_is_allowed($advertiser_id, $portal_key = '') {
         return !is_wp_error($this->awin_programme_gate_validate($advertiser_id, $portal_key));
     }
