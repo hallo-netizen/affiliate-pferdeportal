@@ -135,9 +135,7 @@ final class PPAR_Deal_Radar {
     private static function provider_key($row) {
         $network = sanitize_key((string)($row['network'] ?? ''));
         if ($network === 'awin') {
-            $identity = self::normalize_text((string)($row['programme_name'] ?? ''));
-            if (preg_match('/\botto\b/', $identity)) { return 'otto'; }
-            return '';
+            return absint($row['programme_external_id'] ?? 0) === 14336 ? 'otto' : '';
         }
         return in_array($network, array('idealo','amazon','kelkoo','ebay'), true) ? $network : '';
     }
