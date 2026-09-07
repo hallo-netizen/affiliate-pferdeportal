@@ -152,3 +152,28 @@ Kein Recycling eines alten Paul-Branches mit Commits aus einem vorherigen Auftra
 
 Grund:
 Altcommits könnten sonst bereits vor Arbeitsbeginn außerhalb des neuen Scopes liegen oder einen READ_ONLY-Auftrag unzulässig „vorbelasten“.
+
+
+## Echte Lifecycle-/UI-Prüfung
+
+Wenn eine Änderung ihr Verhalten erst durch einen Framework-/CMS-Lifecycle erhält, darf ein direkter Funktionsaufruf allein **keinen PASS** begründen.
+
+Betroffen sind insbesondere:
+- Admin-/Frontend-Menüs;
+- Hooks und Hook-Reihenfolge;
+- Routing/Redirects;
+- Login-/Capability-Verhalten;
+- gerenderte UI;
+- Aktivierungs-/Installationsverhalten;
+- andere Eigenschaften, deren Ergebnis vom echten Host-Lifecycle abhängt.
+
+Pflicht bei einer solchen Behauptung:
+1. realen Lifecycle starten;
+2. reale Zieloberfläche oder Route aufrufen;
+3. positives Ergebnis dort belegen;
+4. erforderlichen Negativfall ebenfalls im realen oder äquivalenten Lifecycle prüfen.
+
+Direkte Unit-/Funktionsprüfungen bleiben erlaubt, gelten aber nur für die isolierte Funktion.
+
+Leitsatz:
+**Funktions-PASS ≠ Lifecycle-PASS.**
