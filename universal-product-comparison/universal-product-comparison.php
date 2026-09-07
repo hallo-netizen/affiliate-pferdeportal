@@ -21,6 +21,8 @@ require_once __DIR__ . '/src/class-upc-rulebook.php';
 require_once __DIR__ . '/src/class-upc-writer.php';
 require_once __DIR__ . '/src/class-upc-validator.php';
 require_once __DIR__ . '/src/class-upc-production.php';
+require_once __DIR__ . '/src/class-upc-project-config.php';
+require_once __DIR__ . '/src/class-upc-wordpress-draft.php';
 
 function upc_dependency_ready() {
     return function_exists( 'upk_repository' ) && class_exists( 'UPK_Repository' );
@@ -98,6 +100,14 @@ function upc_maybe_upgrade_schema() {
     }
 }
 add_action( 'plugins_loaded', 'upc_maybe_upgrade_schema', 20 );
+
+function upc_wordpress_draft() {
+    $production = upc_production();
+    if ( is_wp_error( $production ) ) {
+        return $production;
+    }
+    return new UPC_WordPress_Draft( $production );
+}
 
 function upc_production() {
     $repository = upc_repository();
