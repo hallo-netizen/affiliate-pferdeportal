@@ -65,6 +65,30 @@ Nur dann: `FIX_ALLOWED_FOR_CODEX_TEST`.
 - nächster zulässiger Schritt: aus den bereits gewonnenen Paul-/Historien-/7/7-Befunden genau **einen konsolidierten KISS-Bindungskandidaten** ableiten und danach E ausführen.
 
 
+
+## HARD RULE – ARBEITSDISZIPLIN / KEINE NEUEN META-REGELN
+
+Der bestehende Abschnitt **VERBINDLICHER ARBEITSPLAN – EINZIGE REIHENFOLGE** ist vollständig und darf nicht durch neue spontane Regeln, Alternativpläne oder Meta-Kommentare erweitert werden.
+
+Für jede weitere Arbeit gilt ausschließlich dieses Ausgabe- und Arbeitsformat:
+
+1. **PLANPUNKT** – welcher konkrete Punkt A–F wird gerade bearbeitet?
+2. **BELEG** – welche vorhandene Datei / welcher Test / welcher historische Stand belegt den Befund?
+3. **ERGEBNIS** – PASS / FAIL / UNKLAR.
+4. **ENTSCHEIDUNG** – ausschließlich die aus dem bestehenden Plan folgende nächste Aktion.
+
+Verboten:
+- bereits verbotene Architekturänderungen erneut als Option diskutieren;
+- neue Architektur-, Workflow-, Runner-, Executor-, Gate- oder Capability-Ideen erwähnen;
+- neue Arbeitsregeln erfinden;
+- bekannte Hard Rules erneut begründen;
+- von einem sichtbaren Blocker direkt in einen Minifix springen;
+- außerhalb A–F prüfen, nur weil etwas „interessant“ erscheint;
+- denselben bereits belegten Sachverhalt erneut untersuchen, solange kein neuer Gegenbeleg vorliegt.
+
+**Harte Folge:** Wenn die nächste Aktion nicht direkt aus dem aktuellen A–F-Planpunkt folgt, wird sie nicht ausgeführt.
+
+
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
