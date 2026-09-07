@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 ## Pflichtfelder
 
@@ -109,6 +109,33 @@ VERANTWORTLICHER BEREICH:
 
 PASS-BEDINGUNG:
 Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
+
+NACHFOLGER:
+keiner belegt.
+
+
+## ZV-AFFILIATE-OTTO-001 – OTTO/Awin vollautomatische Produkt- und Bannerintegration
+
+TITEL:
+OTTO/AWIN – AUTOMATISCHE PRODUKT-, BANNER- UND EXACT-PRODUCT-INTEGRATION
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / AFFILIATE / OTTO über Awin
+
+STATUS:
+AKTIV
+
+FASSUNG:
+2026-09-07
+
+HAUPTQUELLE:
+`protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Vollständig aus der Hauptquelle und der gebundenen Release-Governance lesen.
 
 NACHFOLGER:
 keiner belegt.
