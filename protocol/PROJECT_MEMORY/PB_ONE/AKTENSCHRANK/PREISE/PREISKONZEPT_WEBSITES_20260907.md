@@ -1489,3 +1489,158 @@ Darunter genau ein Satz:
 **„Wünsche außerhalb dieses vereinbarten Leistungsrahmens werden vor Umsetzung transparent als Erweiterung angeboten.“**
 
 Das ist die zentrale KISS-Grenze für Kunde und Vertrieb.
+
+
+---
+
+## 46. LOKALER PREISANKER – ANGEBOT BITBIT 04.10.2024
+
+Quelle:
+Nutzerbereitgestelltes reales lokales Website-Angebot aus Krefeld.
+
+Belegter Umfang:
+- Webkonzeption: 490 € netto;
+- Onepager bis maximal 6 Module: 1.900 € netto;
+- Administration / WordPress-Einrichtung / Launch: 490 € netto;
+- Pluginlizenz: 59 € netto;
+- ausgewiesene, aber vollständig rabattierte Positionen: Rechtstexte 99 €, SEO-Basis 299 €, 3 Monate Wartung à 59 €;
+- tatsächlich berechnete Summe: 2.939 € netto.
+
+Zahlungslogik:
+- 30 % Anzahlung bei Auftragsbestätigung;
+- weitere Rechnungsstellung nach abgeschlossenen Teilleistungen;
+- 7 Tage Zahlungsziel.
+
+Wichtig:
+Im vorliegenden Angebot ist keine eigenständige Position für vollständige Texterstellung oder umfangreiche Bildbearbeitung ausgewiesen.
+Daraus darf nicht abgeleitet werden, dass diese Leistungen enthalten waren.
+
+---
+
+## 47. SCHLUSSFOLGERUNG FÜR PB ONE
+
+Der bisherige Preisentwurf 1.490 € für KOMPAKT ist kritisch zu niedrig, wenn PB ONE zusätzlich zum technischen Aufbau auch
+- Seitenkonzept,
+- vollständige Standard-Texterstellung,
+- normale Bildaufbereitung,
+- Gestaltung,
+- SEO-Basis,
+- Livegang
+liefert.
+
+### Preisfenster V1 – zur internen Prüfung
+
+#### KOMPAKT
+**2.290–2.790 € netto**
+
+Arbeitshypothese für weitere Kalkulation:
+**2.490 € netto**
+
+#### BUSINESS
+**3.490–4.490 € netto**
+
+Arbeitshypothese:
+**3.990 € netto**
+
+#### INDIVIDUELL
+Nach Beratung / Aufwand.
+
+Diese Werte sind noch keine verbindlichen Verkaufspreise.
+
+---
+
+## 48. WARUM DIESE STAFFELUNG
+
+KOMPAKT soll gegenüber dem lokalen Referenzangebot konkurrenzfähig bleiben, aber gleichzeitig den zusätzlichen PB-ONE-Leistungsumfang wie Texterstellung und normale Bildaufbereitung wirtschaftlich abbilden.
+
+BUSINESS darf nicht nur „ein paar Seiten mehr“ sein.
+Der höhere Preis entsteht durch:
+- mehr Seiten;
+- mehr Text;
+- mehr Abstimmung;
+- komplexere Navigation;
+- mehr QA;
+- höhere Änderungswahrscheinlichkeit;
+- größeren Projektmanagement-Aufwand.
+
+---
+
+## 49. PREISALTERNATIVE FÜR LEADSCOUT-VERTRIEB
+
+Für preisempfindliche Leads kann zusätzlich ein Hybrid-/Monatsmodell geprüft werden.
+
+### KOMPAKT FLEX – Kandidat
+- 490–790 € Einrichtung;
+- 99–129 € / Monat;
+- 24 Monate Mindestlaufzeit.
+
+### BUSINESS FLEX – Kandidat
+- 790–1.190 € Einrichtung;
+- 149–189 € / Monat;
+- 24 Monate Mindestlaufzeit.
+
+Wichtig:
+Vor Freigabe Gesamterlös, Betreuungskosten, Kündigung, Eigentum/Herausgabe, Hosting und enthaltene Änderungen exakt kalkulieren.
+
+Strategische Rolle:
+Nicht als Billigmodell verkaufen, sondern als niedrigere Einstiegshürde.
+
+---
+
+## 50. ERSTE PREISIDEEN FÜR ZUSATZANGEBOTE
+
+Noch nicht verbindlich.
+
+### SICHTBARKEIT PLUS
+Einmaliger Startbaustein:
+**490–790 € netto**
+
+Laufende Optimierung:
+**ab 99–199 € / Monat**, nur wenn echter laufender Leistungsumfang definiert ist.
+
+### ANFRAGEN & TERMINE
+Standardisierte Integration:
+**290–690 € netto**
+
+Komplexere Prozesse:
+INDIVIDUELL.
+
+### MITARBEITER GEWINNEN
+Karriere-/Job-Erweiterung:
+**490–790 € netto**
+
+### MARKE & AUFTRITT
+Logo-Refresh / kleine visuelle Grundausstattung:
+**490–990 € netto**
+
+Komplette Markenentwicklung:
+INDIVIDUELL.
+
+### SORGLOS-SERVICE
+Erste Prüfspanne:
+**59–129 € / Monat netto**
+
+Staffelung später nach enthaltenem Support-/Änderungsumfang.
+
+---
+
+## 51. WICHTIGSTE NÄCHSTE PREISPRÜFUNG
+
+Nicht weitere Marktpreise sammeln, sondern reale PB-ONE-Kosten rechnen.
+
+Für KOMPAKT und BUSINESS jeweils Stundenbudget festlegen für:
+- Vertrieb/Briefing;
+- Konzept;
+- Text;
+- Gestaltung;
+- technische Umsetzung;
+- Bilder;
+- Korrekturen;
+- QA/Launch;
+- Projektmanagement.
+
+Dann für jede Preisstufe rechnen:
+
+**Verkaufspreis – Vollkosten – Fremdkosten = Deckungsbeitrag**
+
+Erst danach verbindliche Preise freigeben.
