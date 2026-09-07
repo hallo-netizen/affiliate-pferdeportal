@@ -140,4 +140,47 @@ ok(provider_key($otto)==='otto','Awin advertiser 14336 maps to OTTO');
 $spoof=$otto; $spoof['advertiser_id']=999; $spoof['name']='OTTO';
 ok(provider_key($spoof)==='awin_other','name cannot spoof OTTO identity');
 
+$zeroOnly=[
+ ['campaign'=>$ds24,'specificity'=>500,'matches'=>9,'priority'=>999],
+];
+$positiveOnly=[
+ ['campaign'=>$otto,'specificity'=>350,'matches'=>1,'priority'=>1],
+];
+function auto_weight_filter(array $candidates, array $weights): array {
+    return array_values(array_filter($candidates, static function(array $candidate) use ($weights): bool {
+        $campaign=(array)($candidate['campaign'] ?? []);
+        return (($campaign['creative_type'] ?? '') === 'banner')
+            && ((int)($weights[provider_key($campaign)] ?? 0) > 0);
+    }));
+}
+ok(auto_weight_filter($zeroOnly,$weights)===[],'zero-share source is excluded from automatic banner delivery');
+ok(count(auto_weight_filter($positiveOnly,$weights))===1,'positive-share banner remains automatically eligible');
+
+function normalize_real_awin_creatives(array $rows, int $advertiserId): array {
+    $out=[]; $blocked=0;
+    foreach ($rows as $row) {
+        if (!is_array($row)) { $blocked++; continue; }
+        if ((int)($row['advertiser_id'] ?? $row['merchant_id'] ?? 0) !== $advertiserId) { $blocked++; continue; }
+        $id=trim((string)($row['creative_id'] ?? $row['id'] ?? $row['banner_id'] ?? ''));
+        $title=trim((string)($row['title'] ?? $row['name'] ?? ''));
+        $image=trim((string)($row['image_url'] ?? $row['image_source'] ?? $row['banner_url'] ?? ''));
+        $tracking=trim((string)($row['tracking_url'] ?? $row['affiliate_url'] ?? $row['click_url'] ?? ''));
+        if ($id==='' || $title==='' || $image==='' || $tracking==='') { $blocked++; continue; }
+        $out[]=['creative_id'=>$id,'creative_type'=>'banner','advertiser_id'=>$advertiserId];
+    }
+    return ['rows'=>$out,'blocked'=>$blocked];
+}
+$real=normalize_real_awin_creatives([
+ ['advertiser_id'=>14336,'creative_id'=>'b1','title'=>'OTTO Pferd','image_url'=>'https://img.invalid/b1.jpg','tracking_url'=>'https://trk.invalid/b1'],
+],14336);
+ok(count($real['rows'])===1 && $real['blocked']===0,'real OTTO/Awin banner row passes strict source contract');
+$wrong=normalize_real_awin_creatives([
+ ['advertiser_id'=>999,'creative_id'=>'b1','title'=>'Spoof','image_url'=>'https://img.invalid/b1.jpg','tracking_url'=>'https://trk.invalid/b1'],
+],14336);
+ok(count($wrong['rows'])===0 && $wrong['blocked']===1,'foreign advertiser banner is blocked');
+$incomplete=normalize_real_awin_creatives([
+ ['advertiser_id'=>14336,'creative_id'=>'b1','title'=>'No tracking','image_url'=>'https://img.invalid/b1.jpg'],
+],14336);
+ok(count($incomplete['rows'])===0 && $incomplete['blocked']===1,'incomplete real banner row is blocked');
+
 echo "ALL WEIGHTED BANNER BEHAVIOR TESTS PASS\n";
