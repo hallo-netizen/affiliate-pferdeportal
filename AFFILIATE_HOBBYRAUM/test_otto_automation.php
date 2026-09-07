@@ -10,12 +10,32 @@ function pass_or_fail(bool $ok, string $name): void {
 }
 
 function source(string $name): string {
-    $text = @file_get_contents(__DIR__ . '/' . $name);
-    if ($text === false) {
-        fwrite(STDERR, "FAIL: source missing: {$name}\n");
-        exit(1);
+    $sandbox = __DIR__ . '/' . $name;
+    $text = @file_get_contents($sandbox);
+    if ($text !== false) {
+        return $text;
     }
-    return $text;
+    $repoRoot = dirname(__DIR__);
+    $map = [
+        'pferdeportal-affiliate-router.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php',
+        'trait-ppar-automation-suite.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php',
+        'trait-ppar-output-objects.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php',
+        'trait-ppar-article-plans.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-article-plans.php',
+        'trait-ppar-creative-library.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php',
+        'trait-ppar-ebay.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php',
+        'class-ppar-product-source-plan.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-product-source-plan.php',
+        'class-ppar-partner-analytics.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-partner-analytics.php',
+        'class-ppar-deal-radar.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-deal-radar.php',
+    ];
+    if (isset($map[$name])) {
+        $direct = $repoRoot . '/' . $map[$name];
+        $text = @file_get_contents($direct);
+        if ($text !== false) {
+            return $text;
+        }
+    }
+    fwrite(STDERR, "FAIL: source missing: {$name}\n");
+    exit(1);
 }
 
 $automation = source('trait-ppar-automation-suite.php');
