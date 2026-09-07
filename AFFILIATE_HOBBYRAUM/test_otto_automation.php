@@ -189,6 +189,17 @@ pass_or_fail(
     'real Awin banner source seam is fail-closed and automation-ready'
 );
 pass_or_fail(
+    str_contains($automation, "array_key_exists('bound', \$raw)")
+    && str_contains($automation, 'awin_static_creative_rows_invalid')
+    && str_contains($automation, "\$raw_rows = \$raw['rows']"),
+    'bound-empty real Awin creative source is distinguishable from unbound'
+);
+pass_or_fail(
+    str_contains($router, "banner_distribution_position")
+    && str_contains($router, "\$rank_context['banner_distribution_position'] = \$position"),
+    'multi-position banner slots use independent distribution seeds'
+);
+pass_or_fail(
     str_contains($router, 'handle_save_banner_distribution')
     && str_contains($router, 'Banneranteile speichern')
     && str_contains($router, 'Diese Seite ist zugleich die interne Reparaturinstanz'),
