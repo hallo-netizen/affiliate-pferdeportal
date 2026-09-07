@@ -10,7 +10,7 @@ Für das Pferde-Atelier gibt es genau **einen** Backupweg:
 **GitHub komplett + WordPress komplett + Projektarchiv komplett → ein datiertes Sicherungspaket.**
 
 Autorität:
-\`KONZEPT.md\`
+`KONZEPT.md`
 
 ## HARTE REGEL
 
@@ -24,15 +24,15 @@ Vorhandene Technik wird wiederverwendet:
 ## ERGEBNIS
 
 Nur:
-- \`BACKUP_PASS\`
-- oder \`BACKUP_FAIL:<GRUND>\`
+- `BACKUP_PASS`
+- oder `BACKUP_FAIL:<GRUND>`
 
 ## NÄCHSTER SCHRITT
 
 Aktuellen technischen Stand:
-\`STATUS.md\`
+`STATUS.md`
 
 Wiederherstellung:
-\`NOTFALL_WIEDERAUFBAU.md\`
+`NOTFALL_WIEDERAUFBAU.md`
 
 Alte V1/V2/V3/V4-Tresor-Kits und Ein-Datei-Experimente sind **nicht der verbindliche Nutzerweg**.
