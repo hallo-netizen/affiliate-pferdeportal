@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 27,
+  "generation": 28,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -393,7 +393,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "FIX_AWIN_OTTO_PRODUCT_FEED_DISCOVERY_AND_OFFICIAL_DOWNLOAD_HOST_BEFORE_NEXT_LIVE_TEST",
+    "current_milestone": "VERIFY_ACCOUNT_LEVEL_OTTO_14336_FEED_ACCESS_AGAINST_OFFICIAL_AWIN_METHODS_BEFORE_PLUGIN_FIX",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
@@ -401,5 +401,42 @@
     "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
     "goal_drift_policy": "FAIL_CLOSED",
     "optional_detours": "FORBIDDEN"
+  },
+  "otto_awin_official_prerequisites": {
+    "checked_at": "2026-09-07",
+    "source_policy": "OFFICIAL_OTTO_AND_AWIN_ONLY",
+    "hard_rule": "No implementation or live action before prerequisites are verified; no guessing.",
+    "otto": {
+      "programme": "OTTO DE / Awin advertiser 14336",
+      "participation": "Publisher must be accepted into OTTO programme; additional websites added later must be reported to OTTO and approved before OTTO promotion is integrated.",
+      "product_feed": "OTTO officially offers a product feed with millions of products.",
+      "product_data_refresh": "OTTO recommends at least daily refresh and states updated data is provided via networks about 03:30 and 15:30.",
+      "product_comparisons": "If tests/comparisons are used, evaluation method must be transparent to users.",
+      "product_ad_legal": "For concrete product ads the actual seller must be shown; OTTO logo/otto.de alone is insufficient. Seller name must come from product feed.",
+      "assortment_ad_legal": "For assortment advertising OTTO requires disclosure that assortment may contain offers from OTTO and/or other sellers.",
+      "vouchers": "Voucher promotion is forbidden unless explicitly released in OTTO action tool.",
+      "assets": "OTTO officially provides text/deeplinks, logo, banners and product feed."
+    },
+    "awin": {
+      "programme_access": "Publisher API uses OAuth2 Bearer token; joined relationship can be checked via /publishers/{publisherId}/programmes.",
+      "product_feed_access_legacy": "Product Feed List Download/Create-a-Feed requires a separate product-feed API key; it is different from the Publisher API token.",
+      "product_feed_list": "Feed list contains Advertiser ID, Feed ID, Membership Status, Last Imported and download URL and can be scripted.",
+      "legacy_download_host": "Current official feed-list examples use datafeed.api.productserve.com.",
+      "enhanced_feed": "Enhanced/Google retail feed endpoint uses Bearer token at /publishers/{PUBLISHER_ID}/awinfeeds/download/{ADVERTISER_ID}-retail-{LOCALE}.jsonl; 200 means feed exists and permission is granted; 404 means not proven/locale missing.",
+      "enhanced_limits": "No more than 5 requests/minute; no concurrent requests to same advertiser feed.",
+      "api_limit": "General Awin APIs limited to 20 calls/minute/user.",
+      "cron_best_practice": "Use feed-list Last Imported to download only when updated; avoid peak start-of-minute and retry after 5 minutes on failure."
+    },
+    "current_project_status": {
+      "otto_joined_14336": "CONFIRMED_USER_SCREENSHOT",
+      "otto_gate_allow_local": "CONFIRMED_USER_SCREENSHOT",
+      "awin_bearer_api_access": "CONFIRMED_BY_SUCCESSFUL_PROGRAMME_AND_OFFERS_CALLS",
+      "otto_product_feed_exists_in_general": "CONFIRMED_BY_OTTO_OFFICIAL_SITE",
+      "this_publisher_legacy_feed_access_to_14336": "NOT_YET_CONFIRMED",
+      "this_publisher_enhanced_feed_access_to_14336": "NOT_YET_CONFIRMED",
+      "separate_product_feed_api_key_present": "NOT_CONFIRMED",
+      "seller_field_mapping_for_otto": "NOT_YET_CONFIRMED",
+      "compliant_ottonative_banner_source": "NOT_YET_CONFIRMED"
+    }
   }
 }
