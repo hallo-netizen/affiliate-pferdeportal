@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Comparison
  * Description: Minimal comparison core on top of Universal Product Knowledge.
- * Version: 0.2.3-prototype
+ * Version: 0.2.4-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: universal-product-knowledge
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPC_VERSION', '0.2.3-prototype' );
+define( 'UPC_VERSION', '0.2.4-prototype' );
 define( 'UPC_SCHEMA_VERSION', '2' );
 define( 'UPC_PLUGIN_FILE', __FILE__ );
 
@@ -109,9 +109,7 @@ function upc_maybe_upgrade_schema() {
 }
 add_action( 'plugins_loaded', 'upc_maybe_upgrade_schema', 20 );
 add_action( 'plugins_loaded', array( 'UPC_Affiliate_Bridge', 'register' ), 25 );
-if ( is_admin() ) {
-    UPC_First_Draft_Test::register();
-}
+UPC_First_Draft_Test::register();
 
 function upc_seo_signals( $comparison_id ) {
     return UPC_SEO_Signals::for_comparison( $comparison_id );
