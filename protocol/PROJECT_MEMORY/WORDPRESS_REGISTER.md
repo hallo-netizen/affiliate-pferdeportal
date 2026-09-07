@@ -320,11 +320,8 @@ Technischer Beleg:
 Run `34154550626` PASS mit echter WordPress-HTTP-Adminseite, Login, gerenderter Hauptnavigation und gebundenem PV-REG-001-Drafttest.
 
 Projekt-Live-Status:
-hier nicht festgelegt. Autorität:
+nicht in diesem Register. Autorität:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/CURRENT_STATE.md`.
-
-Aktuell gilt dort:
-Nutzer-Live-Verifikation von 0.2.4 noch offen.
 
 Hauptquellen:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md` → MOD-006;
