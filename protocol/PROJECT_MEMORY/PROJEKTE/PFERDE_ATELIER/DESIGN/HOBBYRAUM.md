@@ -1,71 +1,126 @@
 # DESIGN – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / KANDIDAT BEREIT
+STATUS: AKTIV / SCRIPT-ONLY
 
-## KLARSTELLUNG
+## HARTE OBERREGEL
 
-Die vorherigen Kandidaten V1.50.473, V1.50.474 und V1.50.475 sind **REJECTED**.
+**Im DESIGN-Hobbyraum werden Miniänderungen nicht mehr manuell gebaut.**
 
-Der gewünschte Eingriff ist ausschließlich:
+Bei Elementtausch, Verschiebung oder vergleichbaren lokalen Änderungen ist ausschließlich dieser Runner zulässig:
 
-**Beitragsvorschau / pa297-popular ↔ Affiliate-Partnerbanner / pa266-network**
+`MINIMAL_PATCH_RUNNER.py`
 
-Keine andere Seitenstruktur darf verändert werden.
+Aktueller Auftrag:
 
-## AKTUELLER KANDIDAT
+`MINIMAL_PATCH_JOB_CURRENT.json`
 
-V1.50.476 wurde frisch aus dem exakten bestätigten V1.50.472-Vorgänger gebaut.
+Letzter echter Prüfbeleg:
 
-Unverändert:
-- H1/Artikelblock;
-- Unterkategorie-/Beitragsart-Verweise;
-- CSS;
-- Texte;
-- Karten/Links;
-- Beitragsauswahl;
-- Affiliate-Auswahl;
-- Produktlogik;
-- V104.
+`MINIMAL_PATCH_LAST_RECEIPT.json`
 
-Nur:
-- bestehender pa266-network-Block hinter bestehenden pa297-popular-Block verschoben.
+## WAS DER RUNNER ERZWINGT
 
-## HARD LOCAL QA
+Der Runner darf in V1 ausschließlich:
 
-- exakter V1.50.472 ZIP/PHP-Hash: PASS
-- 498 Dateien geprüft: PASS
-- nur pferde-template-kit.php verändert: PASS
-- Artikel-/Verweisblöcke unverändert: PASS
-- Bannerblock byte-identisch: PASS
-- Beitragsvorschau-Block byte-identisch: PASS
-- Kategorie-CSS byte-identisch: PASS
-- V104 byte-identisch: PASS
-- PHP-Lint: PASS
-- ZIP-Readback 498/498: PASS
-- Rekonstruktion zu byte-identischem V1.50.472: PASS
+**zwei direkt aufeinanderfolgende vollständige Codebereiche in genau einer Datei vertauschen.**
 
-NEGATIV:
-- Banner wieder vor Vorschau -> BLOCKED / PASS
-- Banner dupliziert -> BLOCKED / PASS
-- Artikel verändert -> BLOCKED / PASS
-- Bannerinhalt verändert -> BLOCKED / PASS
+Er darf ausdrücklich NICHT:
+- Artikel zerlegen;
+- Markup neu bauen;
+- Texte umschreiben;
+- CSS ändern;
+- weitere Dateien ändern;
+- zusätzliche Logik ergänzen;
+- selbst eine neue Pluginversion erzeugen;
+- einen anderen Ausgangsstand verwenden.
 
-## KANDIDAT
+## FAIL-CLOSED
 
-Branch:
-`fix/category-banner-popular-swap-v150476-20260907`
+Vor jedem Kandidaten erzwingt das Script:
 
-Beleg:
-`design-baseline/2026-09-07/v150476-banner-popular-swap/`
+1. exakter Baseline-SHA;
+2. ZIP-Integrität;
+3. identische Archivstruktur;
+4. genau eine geänderte Paketdatei;
+5. exakt nur den definierten Tausch;
+6. beide verschobenen Bereiche byte-identisch;
+7. beide Bereiche exakt einmal vorhanden;
+8. Rücktausch ergibt byte-identisch den Vorgänger.
 
-Installer:
-`PFERDE_ATELIER_DESIGN_V1.50.476_CONTRACT_V104_NUR_AFFILIATE_BEITRAGSVORSCHAU_TAUSCH_INSTALLIEREN.zip`
+Danach laufen automatisch Negativtests:
 
-ZIP SHA-256:
-`90fd3d607696150564ad08ad071a4047b10aec8c1cd09d84468b09d0659b6207`
+- unveränderte/falsche Reihenfolge → BLOCKED;
+- Bereich dupliziert → BLOCKED;
+- Bereich verändert → BLOCKED;
+- irgendeine andere Datei verändert → BLOCKED.
 
-## NEXT ACTION
+**Ein Kandidat darf nur bei Gesamt-PASS ausgegeben werden.**
 
-Nur V1.50.476 installieren und dieselbe Seite prüfen.
-Bis dahin: kein LIVE-PASS, kein Merge, keine weitere Änderung.
+## KEINE PLUGIN-SERIE MEHR
+
+Im Hobbyraum wird immer nur eine Datei erzeugt:
+
+`DESIGN_HOBBYRAUM_CANDIDATE.zip`
+
+Fehlversuch:
+Kandidat verwerfen/überschreiben.
+
+**Keine neue Versionsnummer pro Versuch.**
+
+Erst nach echtem Nutzer-LIVE-PASS darf aus dem Kandidaten einmalig ein neuer Release gebaut werden.
+
+## AKTUELLER AUFTRAG
+
+Exakte Basis:
+V1.50.472 / Contract V104
+
+SHA-256:
+`ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9`
+
+Erlaubte Transformation:
+nur
+
+**Affiliate-Partnerbanner ↔ Beitragsvorschau**
+
+auf der zentralen Kategorieebene.
+
+Kein anderer Block darf bewegt werden.
+
+## LETZTER SCRIPT-LAUF
+
+Runner-Selbsttest: **PASS**
+
+Aktueller Job gegen exakte V1.50.472-Basis: **PASS**
+
+- 498 Archivmitglieder;
+- nur `affiliate-portal-template-kit/pferde-template-kit.php` geändert;
+- exakter Zwei-Bereich-Tausch PASS;
+- Byteidentität der beiden Bereiche PASS;
+- Reversibilität PASS;
+- vier Negativtests BLOCKED/PASS.
+
+Der Lauf ist nur ein **lokaler Kandidatenbeleg**, kein LIVE-PASS.
+
+## VERBINDLICHER ABLAUF FÜR JEDEN WEITEREN CHAT
+
+1. `CURRENT_STATE.md` lesen.
+2. diese `HOBBYRAUM.md` lesen.
+3. `MINIMAL_PATCH_JOB_CURRENT.json` lesen.
+4. Runner-Selbsttest ausführen.
+5. exakte Baseline anhand SHA binden.
+6. ausschließlich `MINIMAL_PATCH_RUNNER.py build ...` ausführen.
+7. nur bei Gesamt-PASS den einen `DESIGN_HOBBYRAUM_CANDIDATE.zip` verwenden.
+8. bei FAIL: STOPP. Keine manuelle Reparatur und kein Ersatzweg.
+
+## HARTE GRENZE
+
+V1.50.473, V1.50.474, V1.50.475 und V1.50.476 sind keine Arbeitsbasis für diesen Auftrag.
+
+Es gibt keinen manuellen Nebenweg.
+
+## VERWEISE
+
+- Bürostand: `CURRENT_STATE.md`
+- Fehler: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
+- Warum: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
