@@ -9,7 +9,7 @@ STATUS: AKTIV
 OTTO real abnehmen: Produktfeed + Productwissen-Exact-Match + reale Bannerquelle + automatische anteilsgesteuerte Bannerverteilung + manuelle Reparaturprobe.
 
 **BEREITS STRUKTURELL UMGESETZT:**  
-Awin/OTTO-Produkte, 1/2/3-Produktplätze, Exact-Consumer, Verkäufer-Gate, automatische Bannerziel-/Slotzuordnung, Relevance-First-Anteilssystem, Reparaturinstanz, automatischer Joined-/Feedlisten-Refresh und snapshot-freier Start explizit freigegebener Awin-Programme.
+Awin/OTTO-Produkte, 1/2/3-Produktplätze, Productwissen-Exact-Bridge offiziell integriert, Verkäufer-Gate, automatische Bannerziel-/Slotzuordnung, Relevance-First-Anteilssystem, Reparaturinstanz, automatischer Joined-/Feedlisten-Refresh und snapshot-freier Start explizit freigegebener Awin-Programme.
 
 **NICHT TUN:**  
 kein eigenes OTTO-Plugin; keine zweite Providerarchitektur; keine direkte Productwissen-Tabellenkopplung; kein Ersatzprodukt bei Exact Match; kein Produktbild als Banner; keine Quote vor Relevanz; Digistore24 nicht nebenbei öffnen.
@@ -48,25 +48,30 @@ Intern möglich:
 
 Zusätzlich Control-/Veto-Ebenen und Notabschaltung.
 
-## NEXT ACTION – NUR DIESER WEG
+## NEXT ACTION – ERSTER PLUGINTEST
 
-**JETZT ZUERST:** aktuellen gebundenen Source-Stand exakt prüfen:
+**JETZT:** den gebauten 6.72.1-Aktivierungs-Smoke in einer isolierten/testweisen WordPress-Instanz installieren und aktivieren:
 
-`bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`
+`release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip`
 
-Falls dieser Direktlauf technisch nicht möglich ist, genau den isolierten Ersatzprüfweg verwenden:
+PASS für diesen ersten Plugintest bedeutet ausschließlich:
+- ZIP wird von WordPress als Plugin akzeptiert;
+- Plugin lädt ohne PHP-Fatal;
+- Aktivierung läuft ohne PHP-Fatal;
+- Plugin steht danach als aktiviert.
 
-`python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json`
+Harte Grenze:
+Dieses Paket enthält absichtlich nicht die beiden großen eBay-Laufzeitkataloge. Deshalb **kein eBay-/Vollfunktions-/Release-Test** damit.
 
-**Erst nach PASS dieses aktuellen Source-Standes:**
-1. Produktvergleich-Büro prüft/übernimmt den isolierten Brückenkandidaten `hobbyroom/productwissen-affiliate-exact-bridge-20260907`; Affiliate merged ihn nicht selbst.
-2. OTTO Advertiser **14336** im eigenen Awin-Zugang real nachweisen.
-3. echten OTTO-Produktfeed lesen; reale Verkäufer-Spalte exakt binden.
-4. WordPress/MariaDB End-to-End: Hub 1/2/3, Kategorie 1/2/3, Beitrag, Exact Match / kein Ersatz.
-5. realen OTTO/Awin-Creative-Bestand bzw. belegten Export/API-Weg anbinden.
-6. echtes Banner automatisch prüfen → Ziel → Slot → Anteil → Ausgabe.
-7. reale Stichprobe der Anteilverteilung prüfen.
-8. manuelle Fehlzuordnung reparieren und Rückkehr auf Automatik belegen.
+**Danach bleibt der gebundene technische Releaseweg:**
+1. exakten Current-Source-Lauf `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh` bzw. den vorhandenen isolierten Containerweg ausführen;
+2. OTTO Advertiser **14336** im eigenen Awin-Zugang real nachweisen;
+3. echten OTTO-Produktfeed lesen und reale Verkäufer-Spalte exakt binden;
+4. WordPress/MariaDB End-to-End: Hub 1/2/3, Kategorie 1/2/3, Beitrag, Exact Match / kein Ersatz;
+5. realen OTTO/Awin-Creative-Bestand bzw. belegten Export/API-Weg anbinden;
+6. echtes Banner automatisch prüfen → Ziel → Slot → Anteil → Ausgabe;
+7. reale Stichprobe der Anteilverteilung prüfen;
+8. manuelle Fehlzuordnung reparieren und Rückkehr auf Automatik belegen;
 9. erst danach Release-Gates weiterführen.
 
 ## PRODUCTWISSEN-GRENZE
@@ -120,14 +125,19 @@ Kein erfundener Awin-API-Weg.
 
 ## PRODUCTWISSEN-BRÜCKE
 
-Offizieller Produktwissen-Branch bleibt unangetastet:
+Offizieller Produktwissen-/Produktvergleich-Branch:
 `hobbyroom/productwissen-v1-prototype`
 
-Isolierter Integrationskandidat:
-`hobbyroom/productwissen-affiliate-exact-bridge-20260907`
+Aktueller Head bei letzter Prüfung:
+`020ba35e7d304407e8b71e0751b6f4167b93427d`
 
-Bridge-Vertrag:
-`protocol/PRODUCTWISSEN_AFFILIATE_EXACT_BRIDGE_20260907.md`
+Bridge-PASS-Head:
+`f16f9d9b54a2df9397ef6d5d361b4a61f10347de`
 
-Affiliate darf diesen Branch nicht selbst mergen.
-Übernahmeentscheidung liegt beim Produktvergleich-Büro.
+WordPress+MySQL Run:
+`34131779064` → SUCCESS.
+
+Status:
+**OFFIZIELL INTEGRIERT / READ-ONLY EXACT-BRIDGE PASS.**
+
+Der frühere isolierte Bridge-Branch bleibt nur historischer Beleg. Affiliate merged dort nichts mehr.
