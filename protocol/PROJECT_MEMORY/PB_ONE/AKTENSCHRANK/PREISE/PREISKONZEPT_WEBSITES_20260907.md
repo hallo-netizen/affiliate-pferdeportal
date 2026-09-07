@@ -814,3 +814,151 @@ Damit lautet die bevorzugte externe Architektur:
 **KOMPAKT + BUSINESS + 4 MODULE + INDIVIDUELL**
 
 Intern bleibt die Kalkulation beliebig fein.
+
+
+---
+
+## 28. KRITISCHE MODULPRÜFUNG V4
+
+Prüfregel:
+
+Eine Leistung wird nur ausgelagert, wenn mindestens einer dieser Punkte gilt:
+1. Nicht jeder Kunde braucht sie.
+2. Sie vervielfacht den Aufwand deutlich.
+3. Der Aufwand ist stark variabel.
+4. Sie verursacht laufende Fremd-/Betriebskosten.
+5. Sie gehört fachlich nicht zur normalen Website-Erstellung.
+
+### A. MUSS IM GRUNDPAKET BLEIBEN
+
+Nicht als Zusatzmodul verkaufen:
+- Konzeption der Seitenstruktur im Paketumfang;
+- Texterstellung für die vereinbarten Standardseiten aus Kundeninformationen;
+- redaktionelle Strukturierung und sprachliche Überarbeitung;
+- responsive Umsetzung;
+- Standard-Kontaktweg / Kontaktformular;
+- technische SEO-Basis;
+- SSL / technische Basis;
+- normale Bildoptimierung wie Zuschnitt, Größenanpassung und Webformat;
+- Einbindung vorhandener Bilder;
+- Standard-Consent-/Cookie-Technik, soweit technisch Bestandteil des Projekts;
+- normale Qualitätssicherung / Livegang;
+- vereinbarte Korrekturrunden.
+
+WARUM:
+Das sind Bestandteile einer vollständigen Website. Werden sie einzeln bepreist, wirkt das Grundpaket künstlich entkernt.
+
+### B. SOLLTE ALS ZUSATZMODUL AUSGELAGERT WERDEN
+
+#### 1. SICHTBARKEIT / SEO PLUS
+
+Zusatz, sobald es über technische SEO-Basis hinausgeht:
+- Keyword-Recherche;
+- Local SEO;
+- Google-Business-Optimierung;
+- zusätzliche SEO-/Landingpages;
+- Wettbewerbs-/Suchintention-Recherche;
+- laufende SEO-Arbeit.
+
+Grund:
+Nicht jeder Kunde braucht dieselbe Tiefe und der Aufwand kann deutlich steigen.
+
+#### 2. MEHRSPRACHIGKEIT
+
+Zusatz:
+- zweite und weitere Sprachversionen;
+- Lokalisierung;
+- sprachspezifische SEO-Struktur;
+- QA pro Sprache.
+
+Grund:
+Vervielfacht Seiten-, Text- und Prüfaufwand.
+
+#### 3. LEADS / TERMINE / STANDARD-INTEGRATIONEN
+
+Zusatz, wenn klar standardisierbar:
+- Terminbuchung;
+- erweiterte Anfrage-/Leadstrecke;
+- Newsletter-Anbindung;
+- einfache CRM-Anbindung;
+- Standard-Kalender-/Tool-Anbindung.
+
+Grund:
+Nicht jeder Kunde benötigt diese Funktionen; Integrationen erzeugen zusätzlichen Einrichtungs- und Testaufwand.
+
+#### 4. BRANDING / MEDIEN PLUS
+
+Zusatz:
+- Logo-Neuentwicklung;
+- Corporate-Design-Grundlagen;
+- individuelle Illustrationen;
+- aufwendige Bildretusche;
+- spezielle KI-/Grafikproduktion;
+- professionelles Fotoshooting / Video über externe oder gesonderte Produktion.
+
+Grund:
+Eigenständige kreative Leistung außerhalb der normalen Website-Befüllung.
+
+### C. NICHT ALS NORMALES MODUL, SONDERN INDIVIDUELL
+
+- Shop / E-Commerce;
+- Mitglieder-/Loginbereiche;
+- individuelle Programmierung;
+- komplexe Schnittstellen;
+- Datenimporte;
+- komplexe Migration;
+- Portale;
+- Konfiguratoren;
+- sehr große Inhaltsmengen;
+- außergewöhnliche Fach-/Datenrecherche;
+- spezielle rechtliche/technische Anforderungen.
+
+Grund:
+Ein pauschales Modul würde hier falsche Preissicherheit erzeugen.
+
+### D. NICHT ALS WEBSITE-MODUL, SONDERN LAUFENDE LEISTUNG
+
+- Hosting;
+- Wartung;
+- Backups;
+- Sicherheitsmonitoring;
+- laufende Änderungen;
+- laufende SEO;
+- Ads-/Kampagnenbetreuung;
+- kontinuierliche Content-Produktion.
+
+Grund:
+Projektpreis und laufender Betrieb müssen wirtschaftlich getrennt bleiben.
+
+### E. RECHTLICHE LEISTUNGEN
+
+PB ONE kann technisch bereitgestellte Rechtstexte, Consent-Tools und Pflichtseiten einbinden.
+
+Nicht stillschweigend im Website-Paket versprechen:
+- Rechtsberatung;
+- rechtliche Prüfung;
+- Erstellung rechtssicherer individueller Rechtstexte ohne qualifizierte externe Quelle.
+
+---
+
+## 29. KISS-FOLGE AUS DER MODULPRÜFUNG
+
+Die bisherige sichtbare Gruppe **„Content & Medien“ wird gestrichen**.
+
+Grund:
+Normale Texterstellung und normale Bildbearbeitung gehören zur Website und sollen im Grundpaket enthalten sein.
+
+Extern verbleiben idealerweise nur:
+
+1. **Sichtbarkeit / SEO Plus**
+2. **Leads & Termine**
+3. **Mehrsprachigkeit**
+4. **Branding & Medien Plus**
+
+plus:
+**INDIVIDUELL**
+
+Laufende Betreuung wird separat als Service-/Care-Modell angeboten.
+
+Damit ist für den Kunden klar:
+**Die Website ist im Grundpaket vollständig. Zusatz kostet nur, was wirklich zusätzlich ist.**
