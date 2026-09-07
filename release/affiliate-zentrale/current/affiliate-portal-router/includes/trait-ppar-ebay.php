@@ -2598,6 +2598,14 @@ trait PPAR_Ebay_Trait {
     private function ebay_product_campaigns_share_provider_cohort($campaigns) {
         $mode = method_exists($this, 'idealo_output_mode') ? $this->idealo_output_mode() : 'ebay_only';
         if (in_array($mode, array('separate','combined','automatic'), true)) { return true; }
+        foreach ((array) $campaigns as $campaign) {
+            if ($this->ebay_verified_otto_awin_campaign($campaign)) {
+                // Explicit OTTO scope: a verified OTTO/Awin product may compete
+                // with eBay by the existing central relevance ranking. The old
+                // eBay-only cohort must not silently suppress the new source.
+                return true;
+            }
+        }
         $cohort = '';
         foreach ((array) $campaigns as $campaign) {
             $current = $this->ebay_product_campaign_cohort($campaign);
@@ -2686,6 +2694,24 @@ trait PPAR_Ebay_Trait {
      * eBay-BUSINESS-Produkt nur mit aktivem, erlaubtem Workflow-V2-Quellstatus
      * an der öffentlichen Auswahl teilnehmen.
      */
+    private function ebay_verified_otto_awin_campaign($campaign) {
+        if (!is_array($campaign)
+            || sanitize_key((string) ($campaign['network'] ?? '')) !== 'awin'
+            || sanitize_key((string) ($campaign['creative_type'] ?? '')) !== 'product') {
+            return false;
+        }
+        $post_id = absint($campaign['_post_id'] ?? $campaign['post_id'] ?? 0);
+        return $post_id > 0 && (string) get_post_meta($post_id, '_ppar_otto_awin_auto', true) === '1';
+    }
+
+    private function ebay_candidates_include_verified_otto_awin($candidates) {
+        foreach ((array) $candidates as $candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if ($this->ebay_verified_otto_awin_campaign($campaign)) { return true; }
+        }
+        return false;
+    }
+
     private function ebay_filter_ranked_product_candidates_provider_cohort($candidates) {
         $candidates = array_values((array) $candidates);
         if (!$candidates) { return array(); }
@@ -2696,12 +2722,13 @@ trait PPAR_Ebay_Trait {
         }));
         if (!$candidates) { return array(); }
         $mode = method_exists($this, 'idealo_output_mode') ? $this->idealo_output_mode() : 'ebay_only';
+        $verified_otto_awin_present = $this->ebay_candidates_include_verified_otto_awin($candidates);
         if ($mode === 'idealo_only') {
             $candidates = array_values(array_filter($candidates, function($candidate) {
                 $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
                 return is_array($campaign) && sanitize_key((string)($campaign['network'] ?? '')) === 'idealo';
             }));
-        } elseif ($mode === 'ebay_only') {
+        } elseif ($mode === 'ebay_only' && !$verified_otto_awin_present) {
             $first = is_array($candidates[0] ?? null) ? ($candidates[0]['campaign'] ?? null) : null;
             $cohort = $this->ebay_product_campaign_cohort($first);
             if ($cohort !== '') {
