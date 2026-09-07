@@ -1,0 +1,69 @@
+# OTTO / AWIN AUTOMATISIERUNG – HOBBYRAUM EVIDENCE
+
+STAND: 2026-09-07
+STATUS: LOCAL_PASS_REAL_OTTO_DATA_PENDING
+SOURCE_MANIFEST_SHA256: d47afb0b3447c653583add9d5f25de44ee83d9186814f5aeedb84548450828d3
+
+## Geprüfte Architektur
+
+KISS-Pfad:
+Awin Programm/Feed -> Automationsimport -> Creative Library -> Asset-Verifikation -> zentrale Zielklassifikation -> Slotwahl -> Kampagne -> Kategorie-/Beitragsauswahl.
+
+Kein eigener OTTO-Adapter und kein zweites Plugin.
+
+## Implementierte Änderungen
+
+- Automatischer Awin/ADCELL-Import stößt nach neuen/aktualisierten Assets die bestehende Bildprüfung an.
+- OTTO wird als logische Produktquelle innerhalb des Awin-Transports erkannt.
+- Automatische OTTO-Aktivierung nur nach:
+  - Awin Programme Gate PASS,
+  - provider=awin,
+  - source_kind=product,
+  - eindeutiger automatischer Zielklassifikation,
+  - aktivem Quell-/Verfügbarkeitsstatus,
+  - real verifizierten Bildmaßen,
+  - 64-stelligem Bild-SHA256,
+  - gültigem Trackinglink.
+- Kategorieprodukte verwenden die vorhandene gemeinsame Produkt-Rangliste für Position 1–3.
+- Kategorieprodukte können zusätzlich passende Beitragsblöcke versorgen.
+- Hub/Journal verwenden ihre bestehenden Produktpositionen 1–3.
+- OTTO-Awin-Produkte werden im Artikelplan nur vertraut, wenn die zentrale Ausgabe sie vorher als verifiziert automatisch aktiviert hat.
+- Nach kompletter Asset-Verifikationswelle wird genau eine Campaign-Revision ausgelöst, damit Artikelpläne gebündelt neu gebaut werden.
+- Nicht-OTTO-Awin bleibt auf dem bisherigen Verhalten.
+- Produktbilder werden nicht zu Bannern umgedeutet.
+
+## Isolierter Testlauf
+
+PHP CLI: 8.4.23
+
+PASS:
+1. OTTO/Awin positive auto gate
+2. non-OTTO Awin remains unchanged
+3. offer cannot become product auto-output
+4. unverified image blocks
+5. unapproved Awin programme blocks
+6. category products fan out to 1/2/3 family and articles
+7. hub products support three ranked positions
+8. new automated feed schedules verification
+9. unchanged feed does not reschedule
+10. article plan trusts verified active Awin product
+11. inactive Awin product blocked from article
+
+ERGEBNIS:
+ALL OTTO HOBBYROOM TESTS PASS
+
+## Noch nicht belegt
+
+- echter OTTO-Advertiser-ID-/Feed-Lauf im eigenen Awin-Konto;
+- tatsächliche OTTO-Feedfelder und ggf. mehrere Feedvarianten;
+- WordPress/MariaDB-End-to-End-Lauf;
+- öffentliche reale OTTO-Ausgabe;
+- automatische Bannerbeschaffung.
+
+Bannergrenze:
+Die vorhandene Zentrale kann reale Banner klassifizieren und Slots zuordnen. Ein automatischer Publisher-API-Weg zum OTTO/Awin-Creative-Bestand ist derzeit nicht als reale Projektquelle belegt. Deshalb kein erfundener Banner-Fallback.
+
+## Ergebnis
+
+LOCAL PASS.
+REAL/LIVE PASS AUSDRÜCKLICH NOCH OFFEN.
