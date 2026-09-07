@@ -25,7 +25,7 @@ Alle technischen Werkzeuge, Tests und alten Mac-Kits sind **interne Tresor-Techn
 Regelmäßig wird automatisch genau **eine verschlüsselte Komplettsicherung** erzeugt.
 
 Beispiel:
-`PB_ONE_KOMPLETTSICHERUNG_2026-09-07.7z`
+`PB_ONE_KOMPLETTSICHERUNG_2026-09-07-0317.tar.gz.gpg`
 
 Sie darf nur als `TRESOR_PASS` bereitgestellt werden, wenn sie nachweislich für den vollständigen Wiederaufbau ausreicht.
 
@@ -53,7 +53,7 @@ Release-Schema:
 `tresor-YYYY-MM-DD-HHMM`
 
 Asset:
-`PB_ONE_KOMPLETTSICHERUNG_YYYY-MM-DD-HHMM.7z`
+`PB_ONE_KOMPLETTSICHERUNG_YYYY-MM-DD-HHMM.tar.gz.gpg`
 
 ## HARTE REGEL
 
