@@ -42,9 +42,10 @@ Bereich: AFFILIATE
 Status: AKTIV
 
 Autoritative aktuelle Fehlerquelle:
+Branch `affiliate-release-current` →
 `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md`
 
-Release-/Governance-Autorität:
+Release-/Governance-Autorität ebenfalls auf `affiliate-release-current`:
 - `control/release-governance/CURRENT_RELEASE.json`
 - `release/affiliate-zentrale/AGENTS.md`
 
