@@ -152,3 +152,34 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 Für genau diesen Blocker existiert jetzt der kausal isolierte Hobbyraum-Kandidat **#141 (B01-only)**. #140 bleibt der breitere B01+B15-Prüfstand. Die alte ID-Vorbedingung ist als unmittelbare Blockierursache auf Codeebene positiv/negativ belegt. Ob danach weitere Live-Fehler folgen, ist ausdrücklich offen.
 
 Keine Aussage, dass B01 der letzte Fehler der Kette ist; der letzte reale Lauf wurde korrekt am ersten Blocker beendet.
+
+## LIVE-BEFUND 07.09.2026 – LANGUAGETOOL
+
+Aktueller main:
+`f14ccf187b94c4beab9a86d0c69144f792ba2f64`
+
+Plan-A-Live-Lauf nach Merge von PR #141:
+- Cloud Entry: PASS
+- Environment Preflight: PASS
+- Runtime Entry: PASS
+- Current Action: `CURRENT_BOUND_ACTION_READY`
+- Single Door: READY
+- erster echter STOP: `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`
+- state_advanced=false
+- 107007 nicht abgeschlossen
+- 107008 nicht erreicht
+- keine Code-/Artikel-/Publish-Änderung.
+
+Harte lokale Einordnung:
+- #141 hat LanguageTool nicht verändert.
+- `codex_current_action.py` ist zwischen vorherigem main `c8a96e7…` und aktuellem main byte-identisch.
+- verbindlicher Texterstellungs-Prompt ist zwischen letztem realen 7/7-Stand, `c8a96e7…` und aktuellem main identisch.
+- `languagetool` war bereits im letzten realen 7/7-Stand Pflichtstufe.
+- im gebundenen STARTMASTER-Pfad ist kein eigener LanguageTool-Ausführungsbefehl / keine eigene LanguageTool-Runtime als authorized input sichtbar.
+- der Fehlerstring `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING` ist kein im Repo implementierter Wächterfehler; er wurde vom aktuellen Codex-Lauf aus der fehlenden ausführbaren Bindung abgeleitet.
+- der vorherige Live-Lauf auf `c8a96e7…` erreichte dagegen B01 bei identischer Current-Action-/Prompt-Grundlage.
+
+Schluss:
+Kein belegter LanguageTool-Abbau durch B01. Aktuell sichtbar ist eine ältere technische Lücke: Pflicht zur realen LanguageTool-Ausführung ist fachlich fest, der konkrete ausführbare Weg ist jedoch im aktuellen gebundenen Worker-Interface nicht deterministisch vorgegeben. Kein Qualitäts- oder Regel-Fix zulässig; zuerst bestehenden historischen Ausführungsweg suchen/belegen.
+
+B01 bleibt live noch nicht als PASS bewiesen, weil der neue Lauf vor B01 stoppte.
