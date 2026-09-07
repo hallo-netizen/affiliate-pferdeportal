@@ -186,12 +186,12 @@ später eigener privater Campus-Repository.
 ## Notfall-Tresor
 
 Eingang:
-\`../TRESOR/START_HERE.md\`
+`../TRESOR/START_HERE.md`
 
 Verbindliche Sicherungsarchitektur:
 **GitHub komplett + WordPress komplett + Projektarchiv komplett → ein datiertes Sicherungspaket.**
 
-Nur ein real vollständig geprüfter Stand darf \`BACKUP_PASS\` heißen.
+Nur ein real vollständig geprüfter Stand darf `BACKUP_PASS` heißen.
 
 Alte Tresor-Kits/Ein-Datei-Prototypen sind keine zweite Architektur.
 
@@ -216,6 +216,6 @@ Tresor:
 - Projektarchiv sichern;
 - ein datiertes Paket bilden;
 - auf zwei unabhängigen Speicherorten ablegen;
-- \`BACKUP_PASS\` / \`BACKUP_FAIL\`.
+- `BACKUP_PASS` / `BACKUP_FAIL`.
 
 Der Tresor ist nie Arbeitsquelle.
