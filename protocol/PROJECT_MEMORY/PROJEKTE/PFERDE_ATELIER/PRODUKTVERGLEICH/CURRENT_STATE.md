@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: V1-PROTOTYP / 0.2.2 GEBUNDENER ERSTDRAFT + CLEAN-ZIP PASS / MANUELLER TEST BEREIT
+STATUS: V1-PROTOTYP / 0.2.3 HAUPTNAVIGATION + ERSTDRAFT PASS / MANUELLER TEST BEREIT
 
 ## AUTORITÄT DIESER DATEI
 
@@ -167,7 +167,7 @@ Kurzform:
 ## NÄCHSTER SCHRITT
 
 Siehe ausschließlich `HOBBYRAUM.md`:
-**Produktvergleich 0.2.1 -> 0.2.2 ersetzen und danach ausschließlich den gebundenen PV-REG-001-Admin-Drafttest ausführen; Produktwissen 0.1.0 unverändert lassen.**
+**Produktvergleich auf 0.2.3 ersetzen -> Hauptnavigation Produktvergleich -> PV-REG-001 als Draft testen; Produktwissen 0.1.0 unverändert lassen.**
 
 
 ## 0.2.2 – ERSTER GEBUNDENER LIVE-DRAFT TECHNISCH PASS
@@ -217,3 +217,18 @@ Beleg:
 - erster gebundener `PV-REG-001`-Draft PASS;
 - zweiter Lauf ohne Dublette PASS;
 - Publish-Sperre bleibt aktiv.
+
+
+## 0.2.3 – HAUPTNAVIGATION
+
+Der gebundene Produktvergleich-Test liegt ab 0.2.3 als eigener WordPress-Top-Level-Menüpunkt **Produktvergleich** in der Hauptnavigation.
+
+Beleg:
+- Run `34153930934` PASS;
+- Top-Level-Menü exakt einmal vorhanden;
+- kein Unterpunkt unter `Werkzeuge`;
+- bestehender `PV-REG-001`-Draftweg weiterhin PASS;
+- Clean-ZIP SHA-256 `9b9a3c86fd2c7d82ce60a49d62df0506e223bf6c457b95a4ace7e4c61a9d1efd`.
+
+Nächster manueller Schritt:
+0.2.3 installieren -> Hauptnavigation `Produktvergleich` -> `PV-REG-001 als Draft testen`.
