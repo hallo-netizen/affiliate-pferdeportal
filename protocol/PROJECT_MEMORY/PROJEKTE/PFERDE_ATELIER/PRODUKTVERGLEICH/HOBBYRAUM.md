@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / KATEGORIEBINDUNGSFIX 0.2.1 ZIP-PASS / MANUELLER ERSETZUNGSTEST BEREIT
+STATUS: AKTIV / 0.2.2 GEBUNDENER ERSTDRAFT + CLEAN-ZIP PASS / MANUELLER TEST BEREIT
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,7 +9,7 @@ STATUS: AKTIV / KATEGORIEBINDUNGSFIX 0.2.1 ZIP-PASS / MANUELLER ERSETZUNGSTEST B
 Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
 
 **AKTUELLER AUFTRAG**
-Das bereits installierte Produktwissen 0.1.0 unverändert lassen und nur das installierte Produktvergleich-Plugin 0.2.0 durch den hart geprüften Ersatz 0.2.1 ersetzen. Keine Veröffentlichung.
+Produktwissen 0.1.0 unverändert lassen, Produktvergleich 0.2.1 durch den hart geprüften Clean-ZIP-Stand 0.2.2 ersetzen und danach ausschließlich den gebundenen PV-REG-001-Admin-Test ausführen. Keine Veröffentlichung.
 
 **DU DARFST NICHT**
 STARTMASTER/TEXT umbauen, dessen aktiven Reparaturbereich verändern, Produktfakten erfinden, Affiliate-/SEO-Daten zur fachlichen Produktwahrheit machen oder automatisch veröffentlichen.
@@ -90,16 +90,42 @@ Immutable Base Hardlock -> PASS.
 Wichtig:
 Der beim Nutzer bereits installierte `0.2.0`-Stand führt von selbst keine Artikelproduktion oder Veröffentlichung aus. Er bleibt bis zum manuellen Ersatz unangetastet.
 
+## 0.2.2 – GEBUNDENER ERSTDRAFT PASS
+
+Neu:
+- hashgebundenes Live-Dossier `PV-REG-001`;
+- idempotenter Erstimport: exakt 2 Produkte, 28 Fakten, 1 Vergleich, 14 Merkmale;
+- Wiederholung erzeugt keine Dubletten;
+- Admin-Seite unter Werkzeuge -> Produktvergleich Test;
+- genau ein gebundener Knopf: `PV-REG-001 als Draft testen`;
+- kein freier Titel, Body, Produkt, Kategorie oder Ruleset;
+- Ablauf: Import -> gebundener Core-Draft -> Link-/Grafikfinalisierung;
+- Draft bleibt `publish_allowed=false`.
+
+Harter Clean-ZIP-Test:
+- Run `34142790804` -> PASS;
+- Clean-ZIP enthält **kein** `config/test-project`;
+- ZIP-Installation/Aktivierung -> PASS;
+- vollständige alte Regression -> PASS;
+- frische Datenbank -> gebundener Erstimport -> PASS;
+- exakte Kategorie Term-ID 11 -> PASS;
+- finaler WordPress-Draft -> PASS;
+- Wiederholung ohne Produkt-/Vergleichs-/Post-Dublette -> PASS;
+- Marker: `UPC_BOUND_LIVE_PV_REG_001_GESAMT_PASS`.
+
+Freigegebene ZIP:
+`universal-product-comparison-0.2.2-prototype.zip`
+SHA-256:
+`af4945fe7339ae49e5d0e6719797b9a7ff0ad5079f01691e998d0beb9297fe11`
+
 ## NEXT ACTION
 
-**Manueller Ersetzungstest in WordPress:**
-1. Produktwissen `0.1.0` **nicht anfassen**;
-2. Produktvergleich `0.2.1-prototype` über das bestehende `0.2.0` installieren/ersetzen;
-3. aktiv lassen/aktivieren;
-4. noch keinen Beitrag erzeugen oder veröffentlichen;
-5. zuerst nur prüfen: WordPress akzeptiert den Ersatz ohne Fehlermeldung und zeigt Version `0.2.1-prototype`.
-
-Erst nach diesem manuellen Installations-PASS folgt der erste gebundene `PV-REG-001`-Draft-Test gegen die reale Kategorie ID 11.
+**Manueller Test:**
+1. Produktwissen `0.1.0` nicht anfassen;
+2. Produktvergleich `0.2.2-prototype` über das installierte `0.2.1` ersetzen;
+3. danach WordPress -> Werkzeuge -> Produktvergleich Test;
+4. `PV-REG-001 als Draft testen` einmal klicken;
+5. Ergebnis/Draft prüfen; nichts veröffentlichen.
 
 ## Globale Arbeitsort-Sperre
 
