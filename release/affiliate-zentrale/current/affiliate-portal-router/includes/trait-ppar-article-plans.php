@@ -480,7 +480,17 @@ trait PPAR_Article_Plans_Trait {
         $anchor_content = $this->article_plan_prepare_anchor_content($raw_content);
         $anchor = $this->article_plan_find_anchor($anchor_content);
 
-        $banner_candidates = $this->ranked_campaigns_for_slot($context, 'post_inline_banner');
+        $assigned_banner = method_exists($this, 'assignment_selection_for_slot')
+            ? $this->assignment_selection_for_slot($context, 'post_inline_banner')
+            : array('handled'=>false);
+        $banner_candidates = array();
+        if (!empty($assigned_banner['handled'])) {
+            if (empty($assigned_banner['disabled']) && !empty($assigned_banner['selection'])) {
+                $banner_candidates[] = $assigned_banner['selection'];
+            }
+        } else {
+            $banner_candidates = $this->ranked_campaigns_for_slot($context, 'post_inline_banner');
+        }
         $selected_banner = null;
         foreach ($banner_candidates as $candidate) {
             if ((int) ($candidate['specificity'] ?? 0) < 200 || !$this->article_plan_program_verified((array) ($candidate['campaign'] ?? array()))) {
