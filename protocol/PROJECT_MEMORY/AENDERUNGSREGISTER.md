@@ -1146,3 +1146,32 @@ Run 34112287717 SUCCESS; Draft-Body byte-identisch zum validierten Renderer-HTML
 
 KISS:
 Keine zweite Textlogik in WordPress. WordPress materialisiert nur bereits vollständig validierten Output.
+## AFFILIATE-OTTO-003 – Bannerautomatik ist direkt prüfbar und besitzt realen Awin-Creative-Anschluss
+
+STAND: 2026-09-07.
+
+WAS:
+Die OTTO/Awin-Bannerautomatik wurde bis zur konkreten technischen Anschluss- und Prüfschicht gehärtet.
+
+REAL-SOURCE:
+`ppar_affiliate_awin_static_creatives` nimmt nur reale Awin-Creative-Daten entgegen.
+Keine Awin-API wird erfunden.
+Fremde Advertiser-ID, fehlendes Bild oder fehlendes Tracking werden blockiert.
+Eine real gebundene, aktuell leere Quelle wird mit `bound=true, rows=[]` von einer ungebundenen Quelle unterschieden.
+
+ANTEILE:
+`0` bedeutet automatische Sperre.
+Mehrere Bannerplätze derselben Seite erhalten getrennte deterministische Entscheidungen; Creative-Dubletten zwischen Platz 1 und 2 werden verhindert.
+
+REPARATUR:
+Seitenreparaturen benötigen Begründung und speichern Benutzer/Zeitpunkt.
+Kategorien und andere Portalziele werden über die bestehende feste Creative→Ziel/Slot-Entscheidung mit Begründung repariert.
+
+PRÜFUNG:
+Direkter read-only Test ohne Docker:
+`bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`
+Zusätzlich bleibt der isolierte Container-Hobbyraum bestehen.
+
+WARUM:
+Der Normalbetrieb soll vollautomatisch skalieren, aber reale Datenquellen, technische Fehler und einzelne Fehlzuordnungen müssen ohne Architekturumbau sicher prüf- und reparierbar bleiben.
+
