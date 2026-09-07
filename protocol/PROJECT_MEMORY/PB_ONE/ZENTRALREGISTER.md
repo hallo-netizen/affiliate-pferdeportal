@@ -27,9 +27,17 @@ Hauptort:
 Hauptort:
 `ARBEITSDOKUMENTE/REGISTER.md`
 
-### Angebote / Flyer / Unterlagen
+### Präsentation & Werbung / Angebote / Flyer / Unterlagen
 Hauptort:
 `ANGEBOTE_FLYER/UNTERLAGENREGISTER.md`
+
+### Preise / Pakete
+Hauptort:
+`AKTENSCHRANK/PREISE/START_HERE.md`
+
+### Vertrieb / Lead-Management
+Hauptort:
+`AKTENSCHRANK/VERTRIEB/START_HERE.md`
 
 ### Projekte
 Projektumsetzung liegt in den jeweiligen Projektgebäuden des Campus.
