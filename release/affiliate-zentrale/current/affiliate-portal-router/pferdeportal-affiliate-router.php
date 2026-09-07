@@ -1735,15 +1735,39 @@ JS;
 
     private function banner_distribution_reorder_candidates($candidates, $context, $slot_type) {
         $candidates = array_values((array) $candidates);
-        if (count($candidates) < 2) { return $candidates; }
+        if (!$candidates) { return $candidates; }
         $settings = $this->banner_distribution_settings();
         if (empty($settings['enabled'])) { return $candidates; }
 
-        $best_band = $this->banner_distribution_relevance_band((int) ($candidates[0]['specificity'] ?? 0));
-        $groups = array();
-        foreach ($candidates as $index=>$candidate) {
+        // Weight 0 is an automatic exclusion, not merely "no bonus".
+        // Manual fixed assignments bypass this function and remain the repair layer.
+        $automatic_banner_candidates = array();
+        foreach ($candidates as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-            if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') { continue; }
+            if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') {
+                continue;
+            }
+            $key = $this->banner_distribution_provider_key($campaign);
+            if (absint($settings['weights'][$key] ?? 0) <= 0) {
+                continue;
+            }
+            $automatic_banner_candidates[] = $candidate;
+        }
+        if (!$automatic_banner_candidates) {
+            return array();
+        }
+        if (count($automatic_banner_candidates) === 1) {
+            return $automatic_banner_candidates;
+        }
+
+        $best_band = 0;
+        foreach ($automatic_banner_candidates as $candidate) {
+            $best_band = max($best_band, $this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)));
+        }
+        $groups = array();
+        foreach ($automatic_banner_candidates as $index=>$candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if (!is_array($campaign)) { continue; }
             if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) !== $best_band) {
                 continue;
             }
@@ -1753,7 +1777,6 @@ JS;
             if (!isset($groups[$key])) { $groups[$key] = array(); }
             $groups[$key][] = $index;
         }
-        if (count($groups) < 2) { return $candidates; }
 
         $ordered_keys = array('otto','awin_other','adcell','direct','digistore24','other');
         $eligible = array();
@@ -1765,7 +1788,20 @@ JS;
             $eligible[$key] = $weight;
             $total += $weight;
         }
-        if ($total <= 0 || count($eligible) < 2) { return $candidates; }
+
+        if ($total <= 0 || !$eligible) {
+            return array();
+        }
+        if (count($eligible) === 1) {
+            $only = array_key_first($eligible);
+            $selected_indexes = array_fill_keys($groups[$only], true);
+            $out = array();
+            foreach ($groups[$only] as $index) { $out[] = $automatic_banner_candidates[$index]; }
+            foreach ($automatic_banner_candidates as $index=>$candidate) {
+                if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
+            }
+            return array_values($out);
+        }
 
         $bucket = $this->banner_distribution_bucket($context, $slot_type, $total);
         $cursor = 0;
@@ -1774,24 +1810,25 @@ JS;
             $cursor += $weight;
             if ($bucket < $cursor) { $selected = $key; break; }
         }
-        if ($selected === '' || empty($groups[$selected])) { return $candidates; }
+        if ($selected === '' || empty($groups[$selected])) {
+            return $automatic_banner_candidates;
+        }
 
         $selected_indexes = array_fill_keys($groups[$selected], true);
         $out = array();
         foreach ($groups[$selected] as $index) {
-            $candidate = $candidates[$index];
+            $candidate = $automatic_banner_candidates[$index];
             $candidate['reason'] = sanitize_text_field(
                 (string) ($candidate['reason'] ?? 'Passende Zuordnung.')
                 . ' · Banneranteil ' . $selected . ': ' . absint($eligible[$selected]) . '/' . $total . ' der aktuell gleich relevanten Quellen.'
             );
             $out[] = $candidate;
         }
-        foreach ($candidates as $index=>$candidate) {
+        foreach ($automatic_banner_candidates as $index=>$candidate) {
             if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
         }
         return array_values($out);
     }
-
     private function get_assignments() {
         $value = get_option(self::OPTION_ASSIGNMENTS, array());
         return is_array($value) ? $value : array();
