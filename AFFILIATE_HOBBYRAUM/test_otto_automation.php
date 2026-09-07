@@ -156,6 +156,19 @@ pass_or_fail(
     'banner share covers all real banner placement families'
 );
 pass_or_fail(
+    str_contains($router, 'Weight 0 is an automatic exclusion')
+    && str_contains($router, "absint(\$settings['weights'][\$key] ?? 0) <= 0")
+    && str_contains($router, 'return array();'),
+    'zero banner share is a true automatic exclusion'
+);
+pass_or_fail(
+    str_contains($automation, 'ppar_affiliate_awin_static_creatives')
+    && str_contains($automation, 'automation_import_awin_static_creatives')
+    && str_contains($automation, 'not_bound_real_source_required')
+    && str_contains($automation, 'bound_real_source'),
+    'real Awin banner source seam is fail-closed and automation-ready'
+);
+pass_or_fail(
     str_contains($router, 'handle_save_banner_distribution')
     && str_contains($router, 'Banneranteile speichern')
     && str_contains($router, 'Diese Seite ist zugleich die interne Reparaturinstanz'),
