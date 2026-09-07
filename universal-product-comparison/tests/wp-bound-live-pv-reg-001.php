@@ -57,6 +57,14 @@ upc_bound_assert( $comparison_id === (int) $second['comparison_id'], 'repeat imp
 upc_bound_assert( 2 === (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}upk_products" ), 'repeat import creates no duplicate products' );
 upc_bound_assert( 1 === (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}upc_comparisons" ), 'repeat import creates no duplicate comparison' );
 
+$draft_materializer = upc_wordpress_draft();
+upc_bound_assert( ! is_wp_error( $draft_materializer ), 'bound WordPress draft materializer available' );
+
+$materialized = $draft_materializer->materialize( $comparison_id, 'pferde-atelier', 'pv-reg-001-v1' );
+upc_bound_assert( ! is_wp_error( $materialized ), 'fresh live-bound core WordPress draft succeeds' );
+upc_bound_assert( 'WORDPRESS_DRAFT_VERIFIED' === $materialized['status'], 'fresh bound core draft reaches verified state' );
+upc_bound_assert( false === $materialized['publish_allowed'], 'fresh bound core draft remains non-publishable' );
+
 $final = upc_finalize_article( $comparison_id, 'pferde-atelier', 'pv-reg-001-v1' );
 if ( is_wp_error( $final ) ) {
     fwrite( STDERR, 'FINAL_ERROR_CODE=' . $final->get_error_code() . "\n" );
