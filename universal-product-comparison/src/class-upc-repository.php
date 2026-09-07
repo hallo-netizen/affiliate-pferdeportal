@@ -302,6 +302,120 @@ class UPC_Repository {
         return true;
     }
 
+    public function build_comparison_dossier( $comparison_id ) {
+        $bundle = $this->get_comparison_bundle( $comparison_id );
+        if ( is_wp_error( $bundle ) ) {
+            return $bundle;
+        }
+
+        if ( empty( $bundle['features'] ) ) {
+            return new WP_Error( 'UPC_FEATURES_MISSING', 'Comparison features must be declared before a dossier can be built.' );
+        }
+
+        if ( ! $bundle['required_facts_complete'] ) {
+            return new WP_Error(
+                'UPC_REQUIRED_FACT_MISSING',
+                'One or more required comparison facts are missing.',
+                array( 'missing' => $bundle['missing_required_facts'] )
+            );
+        }
+
+        $subjects = array();
+        foreach ( $bundle['items'] as $item ) {
+            $knowledge = $item['knowledge'];
+            if ( UPK_Repository::SUBJECT_PRODUCT === $item['subject_type'] ) {
+                $subjects[] = array(
+                    'position'        => $item['position'],
+                    'subject_type'    => $item['subject_type'],
+                    'subject_id'      => $item['subject_id'],
+                    'manufacturer'    => $knowledge['manufacturer'],
+                    'model_name'      => $knowledge['model_name'],
+                    'product_group_key' => $knowledge['product_group_key'],
+                    'lifecycle_status'=> $knowledge['lifecycle_status'],
+                    'identifiers'     => $knowledge['identifiers'],
+                );
+            } else {
+                $subjects[] = array(
+                    'position'        => $item['position'],
+                    'subject_type'    => $item['subject_type'],
+                    'subject_id'      => $item['subject_id'],
+                    'variant_name'    => $knowledge['variant_name'],
+                    'variant_key'     => $knowledge['variant_key'],
+                    'base_product_id' => (int) $knowledge['product_id'],
+                    'manufacturer'    => $knowledge['product']['manufacturer'],
+                    'model_name'      => $knowledge['product']['model_name'],
+                    'product_group_key' => $knowledge['product']['product_group_key'],
+                    'lifecycle_status'=> $knowledge['lifecycle_status'],
+                    'identifiers'     => $knowledge['identifiers'],
+                );
+            }
+        }
+
+        $rows = array();
+        $warnings = array();
+
+        foreach ( $bundle['feature_matrix'] as $feature ) {
+            $cells = array();
+
+            foreach ( $feature['cells'] as $cell ) {
+                $facts = isset( $cell['facts'] ) && is_array( $cell['facts'] ) ? $cell['facts'] : array();
+
+                if ( count( $facts ) > 1 ) {
+                    $warnings[] = array(
+                        'code'         => 'MULTIPLE_FACT_RECORDS',
+                        'fact_key'     => $feature['fact_key'],
+                        'subject_type' => $cell['subject_type'],
+                        'subject_id'   => $cell['subject_id'],
+                    );
+                }
+
+                foreach ( $facts as $fact ) {
+                    if ( isset( $fact['fact_status'] ) && 'VERIFIED' !== $fact['fact_status'] ) {
+                        $warnings[] = array(
+                            'code'         => $fact['fact_status'],
+                            'fact_key'     => $feature['fact_key'],
+                            'subject_type' => $cell['subject_type'],
+                            'subject_id'   => $cell['subject_id'],
+                            'source_url'   => isset( $fact['source_url'] ) ? $fact['source_url'] : '',
+                        );
+                    }
+                }
+
+                $cells[] = array(
+                    'subject_type' => $cell['subject_type'],
+                    'subject_id'   => $cell['subject_id'],
+                    'facts'        => $facts,
+                );
+            }
+
+            $rows[] = array(
+                'fact_key' => $feature['fact_key'],
+                'label'    => $feature['label'],
+                'position' => $feature['position'],
+                'required' => $feature['required'],
+                'cells'    => $cells,
+            );
+        }
+
+        return array(
+            'schema_version' => '1',
+            'status'         => empty( $warnings ) ? 'READY' : 'READY_WITH_WARNINGS',
+            'comparison'     => array(
+                'comparison_id'     => (int) $bundle['id'],
+                'comparison_uid'    => $bundle['comparison_uid'],
+                'comparison_key'    => $bundle['comparison_key'],
+                'comparison_type'   => $bundle['comparison_type'],
+                'product_group_key' => $bundle['product_group_key'],
+                'working_title'     => $bundle['working_title'],
+                'decision_intent'   => $bundle['decision_intent'],
+                'comparability_note'=> $bundle['comparability_note'],
+            ),
+            'subjects'       => $subjects,
+            'features'       => $rows,
+            'warnings'       => $warnings,
+        );
+    }
+
     private function comparison_exists( $comparison_id ) {
         return (bool) $this->wpdb->get_var(
             $this->wpdb->prepare( "SELECT id FROM {$this->comparisons} WHERE id = %d LIMIT 1", absint( $comparison_id ) )
