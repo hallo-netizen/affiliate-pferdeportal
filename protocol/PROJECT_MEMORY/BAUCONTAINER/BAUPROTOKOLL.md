@@ -1481,3 +1481,22 @@ Echter 7-Zip-AES-Lauf und echter GitHub-/WordPress-Neuaufbau brauchen die reale 
 
 BEZUG:
 ARCH-080; BAU-036.
+
+
+### 2026-09-07 – Tresor-Bedienweg auf einen Download reduziert
+
+NUTZERKORREKTUR:
+Der Nutzer will keine Backup-Kits, Terminal-Kommandos oder Einzelarchive bedienen.
+Ziel ist ausschließlich eine regelmäßig bereitgestellte Komplettsicherungsdatei.
+
+KISS-ENTSCHEIDUNG:
+- bestehender GitHub-Releases-Bereich = fester Download-Ort;
+- genau eine verschlüsselte Datei je gültigem Stand;
+- alte V1–V4-Kits = interne Technik, nicht Nutzerweg;
+- Nutzerhandlung = nur Download + lokale Ablage.
+
+NICHT ALS GELÖST GEMELDET:
+Die automatische serverseitige Erzeugung und der vollständige WordPress-/Recovery-End-to-End-Restore sind noch nicht produktiv abgenommen.
+
+BEZUG:
+ARCH-081.

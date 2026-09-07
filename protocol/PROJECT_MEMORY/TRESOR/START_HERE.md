@@ -1,146 +1,72 @@
 # NOTFALL-TRESOR – START_HERE
 
 STAND: 2026-09-07
-STATUS: EIN-DATEI V4 TESTVORBEREITET / REALER MAC- + GITHUB- + WORDPRESS-RESTORE OFFEN / TRESOR_PASS BLOCKED
+STATUS: EIN-DATEI-ZIEL / AUTOMATISCHE ERZEUGUNG NOCH NICHT PRODUKTIV / TRESOR_PASS BLOCKED
 
-## 1-KLICK-ÜBERSICHT
+## FÜR DEN NUTZER
 
-**WAS IST DAS?**  
-Die Katastrophen-Wiederherstellung des gesamten Campus und Repositorys.
+Der Nutzerweg ist absichtlich nur:
 
-**HIER BIST DU RICHTIG, WENN …**  
-der aktive Campus/GitHub-Stand verloren, beschädigt oder unzuverlässig ist oder ein neuer Backupstand erstellt werden soll.
+**GitHub → Releases → neueste Datei mit `TRESOR_PASS` herunterladen → lokal speichern.**
 
-**DU DARFST …**  
-Konzept, Inhaltsvertrag, Prüfvertrag, aktuellen Tresorstatus und Wiederaufbauanleitung lesen.
+Mehr nicht.
 
-**DU DARFST NICHT …**  
-einen unvollständigen Backupstand als PASS bezeichnen oder einen älteren gültigen PASS überschreiben.
+Der Nutzer:
+- startet keine Backup-Skripte;
+- führt keine Terminal-Kommandos aus;
+- setzt keine Einzelarchive zusammen;
+- prüft keine Hashlisten manuell;
+- baut keine Testumgebung selbst.
 
-**ALS NÄCHSTES …**  
-`STATUS.md`.
+Alle technischen Werkzeuge, Tests und alten Mac-Kits sind **interne Tresor-Technik** und kein Nutzerweg.
 
-Danach:
-- Backup erstellen → `KONZEPT.md` + `INHALTSVERTRAG.md` + `PRUEFVERTRAG.md` + `LOKALES_BACKUP_KONZEPT.md`
-- Wiederaufbau → `NOTFALL_WIEDERAUFBAU.md`
+## ZIEL
 
-## Aktueller Stand
+Regelmäßig wird automatisch genau **eine verschlüsselte Komplettsicherung** erzeugt.
 
-Git-Mirror + GitHub-Metadaten + Git-Restore-Test:
-PASS als externer PREPASS.
+Beispiel:
+`PB_ONE_KOMPLETTSICHERUNG_2026-09-07.7z`
 
-Vollständiger Tresor:
-BLOCKED zuerst an noch nicht redundant gesicherten relevanten Roharchiven.
+Sie darf nur als `TRESOR_PASS` bereitgestellt werden, wenn sie nachweislich für den vollständigen Wiederaufbau ausreicht.
 
-Danach verbleibt die Prüfung nicht exportierbarer Recovery-Abhängigkeiten.
+Pflichtinhalt:
+- kompletter GitHub-Campus;
+- vollständige Git-Historie, Branches und Tags;
+- alle benötigten Roh-/Masterdateien;
+- relevante GitHub-Metadaten;
+- vollständiger WordPress-Stand;
+- notwendige Recovery-Daten;
+- Wiederaufbauwerkzeuge und Manifest.
 
-## Harte Regel
+## FESTER DOWNLOAD-ORT
 
-Nur ein real geprüfter, externer, vollständiger Stand darf:
-`TRESOR_PASS`
-heißen.
+Bevorzugt wird der bestehende GitHub-**Releases**-Bereich genutzt.
 
+Warum:
+- kein zweites Repository nötig;
+- versionierte Sicherungen;
+- eine Datei pro Sicherungsstand;
+- ältere PASS-Stände bleiben erhalten;
+- für den Nutzer ein klarer Download-Ort.
 
-## TRESOR IST NIE WERKBANK
+Release-Schema:
+`tresor-YYYY-MM-DD-HHMM`
 
-Der Tresor und sein Git-Mirror sind ausschließlich Sicherungs-/Restorequellen.
+Asset:
+`PB_ONE_KOMPLETTSICHERUNG_YYYY-MM-DD-HHMM.7z`
 
-Verboten:
-- Runner/Tests/Reparaturen/Produktion direkt aus `/Campus-Tresor/`;
-- Mirror als aktuellen Arbeitsstand verwenden;
-- Worktree direkt an Tresor-Git-Metadaten hängen und darin arbeiten;
-- Tresor als Ausweichroute bei BLOCKED benutzen.
+## HARTE REGEL
 
-Wiederherstellung endet erst nach Aufbau eines **frischen Arbeits-Worktrees außerhalb des Tresors** und erneutem normalen Eingangstest.
+Eine Datei ohne realen vollständigen Restore-Beweis darf **nicht** `TRESOR_PASS` heißen und wird dem Nutzer nicht als gültige Komplettsicherung angeboten.
 
-## Globale Arbeitsort-Sperre
+## INTERN
 
-**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+Technische Hauptquellen:
+- `KONZEPT.md`
+- `INHALTSVERTRAG.md`
+- `PRUEFVERTRAG.md`
+- `LOKALES_BACKUP_KONZEPT.md`
+- `NOTFALL_WIEDERAUFBAU.md`
+- `STATUS.md`
 
-Autorität:
-`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
-
-
-## Lokaler 1:1-Wiederaufbau
-
-Verbindlicher lokaler Sicherungsweg:
-`LOKALES_BACKUP_KONZEPT.md`
-
-Der alte PREPASS ist Restore-Beweis, aber nach späteren Campusänderungen kein aktueller 1:1-Snapshot mehr.
-
-
-## Aktuelles Download-Kit 2026-09-07
-
-Aktuelles Mac-Kit:
-`CAMPUS_LOCAL_TRESOR_KIT_20260907.zip`
-
-Library:
-`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
-
-SHA-256:
-`74ebe867ddcb3920fe333f3d2bb31a9d7332bc03e0cd6c7a72a99f0a1bf033c6`
-
-Das Kit enthält:
-- Ein-Klick-Backupwerkzeug;
-- Restorewerkzeug für die fünf Roharchivteile;
-- Recovery-Vorlage;
-- Mac-Startanleitung;
-- Download-Checkliste;
-- Testbeleg.
-
-Nächster echter Schritt:
-Kit + fünf Archivteile auf einen unabhängigen lokalen Datenträger herunterladen und dort Restore-/Hashprüfung ausführen.
-
-
-## Ein-Klick-Automatisierung V2
-
-Aktuelles Kit:
-`CAMPUS_LOCAL_TRESOR_KIT_20260907_V2.zip`
-
-Dauerhafte Library-Ablage:
-`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
-
-SHA-256:
-`bb5f28d26885fd8b58fd86bea3548375c97782f58581277daddd651b2151ca54`
-
-Bevorzugter Start:
-`START_CAMPUS_TRESOR.command`
-
-Der Starter prüft/restauriert das Campus-Archiv bei Bedarf und startet danach automatisch die vollständige GitHub-/Campus-/Recovery-Sicherung.
-
-Optional:
-`AUTOMATIK_EINRICHTEN.command` richtet auf dem Mac eine tägliche oder wöchentliche Sicherung ein; Rhythmus und Stunde wählt der Nutzer selbst.
-
-
-## Ein-Datei-Einstieg V3
-
-Bevorzugter zukünftiger Nutzerweg:
-- einmalig V3-Kit auf dem Mac einrichten;
-- automatischer lokaler Campus-Snapshot;
-- automatische verschlüsselte Ein-Datei-Kapsel;
-- Upload als Release in privaten GitHub-Tresor;
-- lokale Kopie behalten.
-
-Kein alter Mehrdatei-Stand darf dadurch rückwirkend als `TRESOR_PASS` gelten.
-
-
-## Testeinstieg V4
-
-Aktuelles Testkit:
-`CAMPUS_LOCAL_TRESOR_ONEFILE_TESTKIT_20260907_V4.zip`
-
-Dauerhafte Library-Ablage:
-`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
-
-SHA-256:
-`83b80a7108c13d17af9d88b03c6da942e8191432106e786bc06af247cd5bae1d`
-
-Bevorzugte Testfolge:
-1. `TEST_VORBEREITUNG_PRUEFEN.command`;
-2. nur bei `TRESOR_TEST_READY` → `TEST_ALLES.command`;
-3. danach separat `TEST_GITHUB_NEUAUFBAU.command` in einem privaten Test-Repository;
-4. abschließend echter WordPress-Restore in isolierter Umgebung/leerem Ziel.
-
-Harte Grenze:
-Der Produktiv-Campus und das produktive GitHub-Repository werden durch die vorbereiteten Tests nicht gelöscht oder überschrieben.
+Tresor/Archiv/Backup bleiben READ/VERIFY/RESTORE ONLY und niemals Werkbank.

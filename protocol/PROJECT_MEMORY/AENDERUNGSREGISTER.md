@@ -1355,3 +1355,24 @@ BELEG:
 `PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_RUNNER.py`
 `PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_JOB_CURRENT.json`
 `PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_LAST_RECEIPT.json`
+
+
+## ARCH-081 – Tresor-Nutzerweg ist exakt ein Download
+
+WAS:
+Der Nutzerweg des Tresors wird auf genau eine Handlung reduziert:
+`GitHub Releases -> neueste TRESOR_PASS-Komplettsicherung herunterladen -> lokal speichern`.
+
+WARUM:
+Die bisherigen Mac-Kits und Einzelkommandos verlagerten interne Sicherungstechnik auf den Nutzer und verletzten damit das KISS-Ziel.
+
+KISS:
+Kein separates Tresor-Repository erforderlich.
+Der bestehende GitHub-Releases-Bereich wird als fester Download-Ort genutzt.
+
+REGEL:
+Pro gültigem Sicherungsstand genau eine verschlüsselte Datei.
+Keine Nutzerkommandos, keine manuellen Teilarchive, keine zusätzlichen Projektdateien.
+
+PASS-GRENZE:
+Eine Datei erscheint erst als gültige `TRESOR_PASS`-Sicherung, nachdem der vollständige Restore aus genau dieser Datei bewiesen ist.

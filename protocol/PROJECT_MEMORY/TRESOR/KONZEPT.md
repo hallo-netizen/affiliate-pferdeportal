@@ -141,3 +141,18 @@ Der Nutzer lädt regelmäßig die neueste PASS-Datei lokal auf einen unabhängig
 
 GitHub-Release = bequemer Download-Ort.
 Lokale Kopie = eigentliche unabhängige Katastrophensicherung.
+
+
+## KISS-Nutzervertrag
+
+Die interne Sicherungstechnik darf komplex sein, der Nutzerweg nicht.
+
+Verbindlich:
+- genau ein fester Download-Ort: GitHub Releases;
+- genau eine Datei pro gültigem Sicherungsstand;
+- eindeutige Kennzeichnung `TRESOR_PASS`;
+- keine Nutzerkommandos;
+- keine manuellen Teilarchive;
+- keine zusätzliche Projektdatei für den Wiederaufbau.
+
+Der Nutzer muss künftig nur regelmäßig die neueste PASS-Datei herunterladen und unabhängig lokal speichern.

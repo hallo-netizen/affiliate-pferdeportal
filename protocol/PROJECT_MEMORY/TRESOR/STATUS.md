@@ -226,3 +226,34 @@ Nutzer-Mac + echtes 7-Zip + echtes Masterpasswort + echter GitHub-Zugang + volls
 ERGEBNIS BLEIBT:
 `TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
 bis die realen externen Voraussetzungen und Restore-Abnahmen erfüllt sind.
+
+
+## Nutzerweg vereinfacht – 2026-09-07
+
+Verbindlicher Nutzerweg:
+
+**GitHub → Releases → neueste `TRESOR_PASS`-Komplettsicherung herunterladen → lokal speichern.**
+
+Die bisherigen V1/V2/V3/V4-Mac-Kits und `.command`-Dateien sind ab jetzt:
+**INTERNE TEST-/ENTWICKLUNGSWERKZEUGE, NICHT NUTZERWEG.**
+
+Der Nutzer soll keine Skripte starten und keine Einzeldateien zusammensetzen müssen.
+
+Bevorzugter Download-Ort:
+bestehender GitHub-Releases-Bereich des Projekts.
+
+Bevorzugtes Asset:
+`PB_ONE_KOMPLETTSICHERUNG_YYYY-MM-DD-HHMM.7z`
+
+Bevorzugter Release-Tag:
+`tresor-YYYY-MM-DD-HHMM`
+
+Noch offen vor Produktivbetrieb:
+1. server-/workflowseitige regelmäßige Erzeugung aktivieren;
+2. vollständigen WordPress-Backup-Zugriff anbinden;
+3. Recovery-Secrets geschlossen einbinden;
+4. echten isolierten Gesamt-Restore beweisen;
+5. erst danach erstmals eine Datei als `TRESOR_PASS` veröffentlichen.
+
+Aktueller Gesamtstatus bleibt:
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`

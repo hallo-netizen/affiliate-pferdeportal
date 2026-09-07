@@ -274,3 +274,19 @@ Testkit:
 `CAMPUS_LOCAL_TRESOR_ONEFILE_TESTKIT_20260907_V4.zip`
 SHA-256:
 `83b80a7108c13d17af9d88b03c6da942e8191432106e786bc06af247cd5bae1d`.
+
+
+## Nutzerweg – ab ARCH-081
+
+Dieses Dokument beschreibt nur die interne Technik.
+
+**Nicht mehr Nutzerweg:**
+- V1/V2/V3/V4-Kits bedienen;
+- `.command`-Dateien starten;
+- fünf Archivteile zusammensetzen;
+- manuell Hashes prüfen.
+
+**Einziger Nutzerweg:**
+GitHub Releases → neueste `TRESOR_PASS`-Datei herunterladen → lokal speichern.
+
+Die bestehende lokale Technik bleibt nur als Entwicklungs-/Restore-Baustein erhalten, bis die automatische serverseitige Kette vollständig aktiviert und real abgenommen ist.
