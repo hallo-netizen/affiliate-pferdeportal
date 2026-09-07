@@ -1,0 +1,122 @@
+name: Product Comparison First Draft TEMP
+
+on:
+  push:
+    branches:
+      - hobbyroom/productwissen-v1-prototype
+    paths:
+      - '.github/workflows/productvergleich-firstdraft-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  first-draft-smoke:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wp_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax and zero-freedom guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          find universal-product-knowledge universal-product-comparison -name '*.php' -print0 | xargs -0 -n1 php -l
+          RUNTIME_FILES=$(find universal-product-comparison/src -name '*.php' -print)
+          ! grep -E -i 'openai|anthropic|gemini|llm|wp_remote_|curl_|fsockopen|stream_socket_client' $RUNTIME_FILES
+          ! grep -E -i 'random|rand\(|mt_rand|microtime|uniqid' $RUNTIME_FILES
+          ! grep -E 'call_user_func|is_callable|eval\(|exec\(|shell_exec|system\(' $RUNTIME_FILES
+          grep -F "Version: 0.2.2-prototype" universal-product-comparison/universal-product-comparison.php
+          echo UPC_ZERO_FREEDOM_STATIC_GUARD_PASS
+
+      - name: Install WP-CLI and WordPress
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          mkdir -p /tmp/upc-wp
+          wp core download --path=/tmp/upc-wp --quiet
+          wp config create --path=/tmp/upc-wp --dbname=wp_test --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
+          wp core install --path=/tmp/upc-wp --url=http://example.test --title='UPC Test' --admin_user=admin --admin_password='test-password' --admin_email=admin@example.test --skip-email --quiet
+
+      - name: Build clean ZIPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/upc-build
+          mkdir -p /tmp/upc-build/universal-product-knowledge
+          mkdir -p /tmp/upc-build/universal-product-comparison
+
+          cp universal-product-knowledge/universal-product-knowledge.php /tmp/upc-build/universal-product-knowledge/
+          cp -a universal-product-knowledge/src /tmp/upc-build/universal-product-knowledge/
+
+          cp universal-product-comparison/universal-product-comparison.php /tmp/upc-build/universal-product-comparison/
+          cp -a universal-product-comparison/src /tmp/upc-build/universal-product-comparison/
+          cp -a universal-product-comparison/assets /tmp/upc-build/universal-product-comparison/
+          cp -a universal-product-comparison/config /tmp/upc-build/universal-product-comparison/
+
+          (
+            cd /tmp/upc-build
+            zip -qr /tmp/universal-product-knowledge.zip universal-product-knowledge
+            zip -qr /tmp/universal-product-comparison.zip universal-product-comparison
+          )
+
+          test "$(unzip -Z1 /tmp/universal-product-comparison.zip | head -n1)" = "universal-product-comparison/"
+          ! unzip -Z1 /tmp/universal-product-comparison.zip | grep -E '/tests/|protocol/|\.git|ZERO_FREEDOM'
+          unzip -p /tmp/universal-product-comparison.zip universal-product-comparison/universal-product-comparison.php | grep -F "Version: 0.2.2-prototype"
+          unzip -Z1 /tmp/universal-product-comparison.zip | grep -F 'universal-product-comparison/config/pferde-atelier/pv-reg-001.json'
+          echo UPC_022_ZIP_STRUCTURE_PASS
+
+      - name: Install ZIPs
+        run: |
+          wp plugin install /tmp/universal-product-knowledge.zip --activate --path=/tmp/upc-wp
+          wp plugin install /tmp/universal-product-comparison.zip --activate --path=/tmp/upc-wp
+          wp plugin is-active universal-product-knowledge --path=/tmp/upc-wp
+          wp plugin is-active universal-product-comparison --path=/tmp/upc-wp
+          echo UPC_022_ZIP_INSTALL_PASS
+
+      - name: Attach tests
+        run: |
+          cp -a universal-product-knowledge/tests /tmp/upc-wp/wp-content/plugins/universal-product-knowledge/tests
+          cp -a universal-product-comparison/tests /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests
+
+      - name: Existing regression
+        run: |
+          wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-knowledge/tests/wp-db-smoke.php --path=/tmp/upc-wp
+          wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-db-smoke.php --path=/tmp/upc-wp
+          wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-real-dossier-smoke.php --path=/tmp/upc-wp
+          wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-archive-smoke.php --path=/tmp/upc-wp
+
+      - name: Fresh database
+        run: |
+          wp db reset --yes --path=/tmp/upc-wp
+          wp core install --path=/tmp/upc-wp --url=http://example.test --title='UPC First Draft' --admin_user=admin --admin_password='test-password' --admin_email=admin@example.test --skip-email --quiet
+          wp plugin activate universal-product-knowledge --path=/tmp/upc-wp
+          wp plugin activate universal-product-comparison --path=/tmp/upc-wp
+          echo UPC_FRESH_DATABASE_READY
+
+      - name: First real bound draft
+        run: |
+          wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-first-real-draft.php --path=/tmp/upc-wp
+
+      - name: Upload replacement ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-product-comparison-0.2.2-prototype
+          path: /tmp/universal-product-comparison.zip
+          if-no-files-found: error
+          retention-days: 7
