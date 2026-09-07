@@ -69,3 +69,26 @@ Produktaktualisierung:
 Mehrprovider:
 Ein zentral verifiziertes OTTO/Awin-Produkt darf durch die alte eBay-Kohortenregel nicht pauschal entfernt werden.
 In diesem Fall entscheidet die bestehende fachliche Rangfolge. Unverifizierte Fremdquellen erhalten diese Ausnahme nicht.
+
+
+## Produktwissen-Schnittstelle
+
+Die parallel entwickelte zentrale Produktwissen-Datenbank ist für den OTTO-Scope **relevant**, aber nicht als zweite Affiliate-Datenbank.
+
+Verbindliche Trennung:
+- Produktwissen = fachliche Produkt-/Variantenidentität und quellengebundene Fakten.
+- Affiliate/Awin = Angebot, Preis, Bestand, Verkäufer, Tracking, reales Werbemittel.
+- Affiliate liest keine Produktwissen-Tabellen direkt und schreibt dort nichts.
+
+Consumer-Vertrag:
+`ppar_affiliate_exact_product_requirements`
+
+Wenn ein Beitrag/Produktvergleich über diese Schnittstelle exakte Produktkennungen liefert, gewinnt die exakte Identität vor generischem Affiliate-Ranking.
+Nur identische GTIN/EAN bzw. belastbare echte MPN dürfen matchen.
+Kein Match = keine Affiliate-Karte. Ein ähnlich benanntes Produkt darf niemals als Ersatz eingesetzt werden.
+
+Die kanonische technische OTTO-Identität im Awin-Transport ist Advertiser-ID `14336`.
+Der Programmname wird nicht als technische Hauptidentität verwendet.
+
+Detailkonzept:
+`protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
