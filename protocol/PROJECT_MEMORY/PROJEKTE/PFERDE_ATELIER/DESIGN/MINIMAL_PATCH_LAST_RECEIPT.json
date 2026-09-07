@@ -39,5 +39,7 @@
     "UNRELATED_FILE_CHANGED_BLOCKED_PASS"
   ],
   "artifact_name": "DESIGN_HOBBYRAUM_CANDIDATE.zip",
-  "live_pass": false
+  "live_pass": true,
+  "live_pass_date": "2026-09-07",
+  "live_pass_scope": "Gebisse real visual confirmation by user"
 }
