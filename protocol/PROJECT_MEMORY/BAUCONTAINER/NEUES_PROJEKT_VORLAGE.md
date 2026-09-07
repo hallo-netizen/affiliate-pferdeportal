@@ -169,3 +169,12 @@ Jedes neue Projekt erbt automatisch:
 - danach normale technische Eingangstür neu prüfen.
 
 Keine projektspezifische Ausnahme.
+
+
+### Technische Reparaturen in neuen Hobbyräumen
+
+Jedes neue Projektbüro verweist für technische Reparaturen auf den verbindlichen A–F-Ablauf in:
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md`
+
+Der Ablauf wird nicht lokal neu erfunden.
+Vor Kandidatenfreigabe gelten dort Pflichtchecks, Anti-Minifix-Regel, Positiv-/Negativtest und Invariantenprüfung.
