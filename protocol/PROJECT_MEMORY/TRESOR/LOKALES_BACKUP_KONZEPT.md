@@ -215,3 +215,29 @@ Der Nutzer wählt selbst täglich oder wöchentlich und die gewünschte Stunde.
 Grenze:
 GitHub wird bei jedem Lauf frisch gesichert.
 ChatGPT-Library-Roharchive können vom lokalen Mac nicht still automatisch synchronisiert werden; ein neuer Roharchivstand benötigt einen neuen Export.
+
+
+## Ein-Datei-Automatik V3
+
+V3 baut auf V2 auf; keine zweite Backup-Engine.
+
+Ablauf:
+1. V2 erzeugt/verifiziert den aktuellen Git-/GitHub-/Campus-/Recovery-Snapshot.
+2. V3 prüft den Snapshot fail-closed.
+3. WordPress-Vollstand wird als zusätzlicher Pflichtbaustein geprüft.
+4. Restore-Werkzeuge + Ein-Datei-Manifest werden eingebettet.
+5. genau eine verschlüsselte 7z-Kapsel wird erzeugt und sofort mit dem Masterpasswort getestet.
+6. SHA-256 wird berechnet.
+7. optional wird genau diese verschlüsselte Datei als versioniertes Release in den privaten GitHub-Tresor hochgeladen.
+8. lokale Datei bleibt erhalten.
+
+Sicherheitsentscheidung:
+Das Masterpasswort wird für automatische lokale Läufe im macOS-Schlüsselbund gehalten.
+Es wird weder in PROJECT_MEMORY noch in GitHub im Klartext gespeichert.
+
+Katastrophenregel:
+Nach Totalverlust benötigt der Nutzer neben der Recovery-Datei nur das Masterpasswort und frei neu installierbare Standardwerkzeuge.
+
+Aktuelle Grenze:
+Die vollständige WordPress-Quelle ist noch nicht technisch angebunden.
+Daher kann V3 aktuell den Campus kapseln, aber noch keinen echten Gesamt-`TRESOR_PASS` erzeugen.

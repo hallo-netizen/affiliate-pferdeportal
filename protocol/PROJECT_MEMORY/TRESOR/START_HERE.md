@@ -1,7 +1,7 @@
 # NOTFALL-TRESOR – START_HERE
 
 STAND: 2026-09-07
-STATUS: LOKALES BACKUP-KIT AKTUELL / NUTZER-LOKALTEST OFFEN / TRESOR_PASS WEITER BLOCKED
+STATUS: EIN-DATEI-ZIEL V3 DEFINIERT / LOKALE AKTIVIERUNG + WORDPRESS-VOLLSTAND OFFEN / TRESOR_PASS BLOCKED
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -111,3 +111,15 @@ Der Starter prüft/restauriert das Campus-Archiv bei Bedarf und startet danach a
 
 Optional:
 `AUTOMATIK_EINRICHTEN.command` richtet auf dem Mac eine tägliche oder wöchentliche Sicherung ein; Rhythmus und Stunde wählt der Nutzer selbst.
+
+
+## Ein-Datei-Einstieg V3
+
+Bevorzugter zukünftiger Nutzerweg:
+- einmalig V3-Kit auf dem Mac einrichten;
+- automatischer lokaler Campus-Snapshot;
+- automatische verschlüsselte Ein-Datei-Kapsel;
+- Upload als Release in privaten GitHub-Tresor;
+- lokale Kopie behalten.
+
+Kein alter Mehrdatei-Stand darf dadurch rückwirkend als `TRESOR_PASS` gelten.

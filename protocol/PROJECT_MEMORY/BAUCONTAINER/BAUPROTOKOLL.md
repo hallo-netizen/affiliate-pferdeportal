@@ -1397,3 +1397,40 @@ Original-IDs/Zeitstempel müssen im Recovery-Metadatenarchiv erhalten bleiben.
 
 BEZUG:
 ARCH-079.
+
+
+### 2026-09-07 – Ein-Datei-Tresor V3 technisch vorbereitet
+
+ZIEL:
+ARCH-079 praktisch bis zur Nutzer-/WordPress-Grenze umsetzen.
+
+KISS:
+Keine neue Backup-Engine.
+V3 kapselt den bereits getesteten V2-Snapshot in genau eine verschlüsselte Recovery-Datei.
+
+KIT:
+`CAMPUS_LOCAL_TRESOR_ONEFILE_KIT_20260907_V3.zip`
+SHA-256:
+`cab73e13c12a10e807146291521601221d05a3094660c373c95afd33e4881489`
+
+ENTHALTEN:
+- Masterpasswort-Keychain-Setup;
+- privater GitHub-Tresor-Repo-Setup;
+- Ein-Datei-Builder;
+- GitHub-Release-Uploader;
+- kombinierter Starter;
+- Restore-Verifikation.
+
+TESTGRENZE:
+Shell-Syntax aller neuen Starter PASS.
+Der echte AES-7z-Lauf kann erst in einer Umgebung mit installiertem 7-Zip durchgeführt werden.
+Daher keine Behauptung eines kryptographischen V3-End-to-End-PASS.
+
+BLOCKER:
+- V3 auf Nutzer-Mac real ausführen;
+- WordPress-Vollbackup anbinden;
+- geschlossene Kapsel real erzeugen;
+- isolierten Vollrestore genau dieser Datei durchführen.
+
+TRESOR_STATUS:
+weiterhin FAIL/BLOCKED.

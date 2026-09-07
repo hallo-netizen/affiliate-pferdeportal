@@ -153,3 +153,32 @@ Zusätzliche offene Voraussetzungen vor echtem `TRESOR_PASS`:
 6. echten isolierten Restore ausschließlich aus dieser einen Datei durchführen.
 
 Keine dieser Voraussetzungen wird durch das bisherige V2-Mac-Kit bereits vollständig erfüllt.
+
+
+## Ein-Datei-Werkzeug V3 – 2026-09-07
+
+Kit:
+`CAMPUS_LOCAL_TRESOR_ONEFILE_KIT_20260907_V3.zip`
+
+SHA-256:
+`cab73e13c12a10e807146291521601221d05a3094660c373c95afd33e4881489`
+
+Umgesetzt:
+- vorhandenen V2-Campus-Snapshot weiterverwenden;
+- lokales Masterpasswort im macOS-Schlüsselbund für Automatik;
+- geschlossene verschlüsselte 7z-Kapsel mit AES-256/Header-Verschlüsselung;
+- Restore-/Hashprüfung innerhalb der Kapsel;
+- privates GitHub-Tresor-Repository als Release-Downloadort vorbereiten;
+- neueste Kapsel per `gh release create` hochladbar;
+- lokales Original bleibt unabhängig erhalten.
+
+Fail-closed:
+- lokaler Snapshot nicht PASS → BUILD BLOCK;
+- Masterpasswort fehlt → BUILD BLOCK;
+- 7-Zip fehlt → BUILD BLOCK;
+- WordPress-Vollbackup fehlt → Datei trägt ausdrücklich `WP_MISSING` und ist kein Gesamt-Tresor;
+- echter isolierter Vollrestore fehlt → niemals `TRESOR_PASS`.
+
+Technische Aktivierung auf dem Nutzer-Mac:
+OFFEN.
+Der private GitHub-Tresor wird erst durch den einmaligen lokalen Setup-Schritt tatsächlich angelegt.
