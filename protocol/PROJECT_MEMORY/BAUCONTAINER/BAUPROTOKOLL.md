@@ -1623,3 +1623,21 @@ Die neue serverseitige Hobbyraum-Sperre ist erst nach kontrollierter Aktivierung
 
 BEZUG:
 ARCH-084.
+
+
+### 2026-09-07 – Hobbyraum-Ablauf gegen wiederholte Minifix-Schleifen gehärtet
+
+AUSLÖSER:
+Im TEXT-Arbeitschat wurden trotz vorhandener Regeln wiederholt neue Prüfpfade und Einzel-Fix-Spuren begonnen.
+
+BEFUND:
+Der maschinenlesbare Lock schützt die spätere Integration, aber der allgemeine Hobbyraum-Standard enthielt die verbindliche A–F-Arbeitsreihenfolge noch nicht ausdrücklich.
+
+KISS-FIX:
+- A–F-Pre-Fix-Ablauf in `HOBBYRAUM_STANDARD.md` verankert;
+- Anti-Minifix-Regel campusweit;
+- `NEUES_PROJEKT_VORLAGE.md` verweist darauf;
+- keine Fachregel, Produktionsarchitektur, Tür oder Wächterlogik verändert.
+
+BEZUG:
+ARCH-085.
