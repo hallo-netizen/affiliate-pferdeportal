@@ -6,12 +6,14 @@ on:
       - hobbyroom/productwissen-v1-prototype
     paths:
       - 'universal-product-knowledge/**'
+      - 'universal-product-comparison/**'
       - '.github/workflows/productwissen-wordpress-db-smoke.yml'
   pull_request:
     branches:
       - hobbyroom/project-memory-campus-v1-20260905
     paths:
       - 'universal-product-knowledge/**'
+      - 'universal-product-comparison/**'
       - '.github/workflows/productwissen-wordpress-db-smoke.yml'
   workflow_dispatch:
 
@@ -60,8 +62,11 @@ jobs:
       - name: Install and activate plugin
         run: |
           cp -a universal-product-knowledge /tmp/upk-wp/wp-content/plugins/universal-product-knowledge
+          cp -a universal-product-comparison /tmp/upk-wp/wp-content/plugins/universal-product-comparison
           wp plugin activate universal-product-knowledge --path=/tmp/upk-wp
+          wp plugin activate universal-product-comparison --path=/tmp/upk-wp
 
       - name: Real WordPress + MySQL readback
         run: |
           wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-knowledge/tests/wp-db-smoke.php --path=/tmp/upk-wp
+          wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-comparison/tests/wp-db-smoke.php --path=/tmp/upk-wp
