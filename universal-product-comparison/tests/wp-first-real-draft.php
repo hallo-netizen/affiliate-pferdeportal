@@ -36,6 +36,9 @@ upc_first_assert( 0 === (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->pref
 upc_first_assert( 0 === (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}upc_comparisons" ), 'comparison store initially empty' );
 
 $first = UPC_First_Draft_Test::execute();
+if ( is_wp_error( $first ) ) {
+    fwrite( STDERR, 'FIRST_EXECUTION_ERROR=' . $first->get_error_code() . ':' . $first->get_error_message() . "\n" );
+}
 upc_first_assert( ! is_wp_error( $first ), 'first bound PV-REG-001 execution succeeds' );
 upc_first_assert( 'PV_REG_001_WORDPRESS_DRAFT_PASS' === $first['status'], 'first execution reaches bound draft PASS' );
 upc_first_assert( false === $first['publish_allowed'], 'first execution forbids publish' );
