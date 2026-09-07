@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) { exit; }
  * feed shape or credential requirement is invented.
  */
 final class PPAR_Affiliate_Source_Plan {
+    const OTTO_AWIN_ADVERTISER_ID = 14336;
     const CONTRACT_VERSION = '1.0';
     private static $booted = false;
     private static $auto_banner_candidates = array();
@@ -41,7 +42,7 @@ final class PPAR_Affiliate_Source_Plan {
             'otto' => array(
                 'label'=>'OTTO','state'=>'prepared','route'=>'Awin → fachlich OTTO',
                 'purpose'=>'Produktquelle & Deals','activation'=>'nach echter Programmfreigabe / nutzbarem Feed',
-                'awin_advertiser_id'=>14336,
+                'awin_advertiser_id'=>self::OTTO_AWIN_ADVERTISER_ID,
             ),
             'kaufland' => array(
                 'label'=>'Kaufland','state'=>'prepared','route'=>'Lead Alliance / Kaufland Private Network',
@@ -130,7 +131,7 @@ final class PPAR_Affiliate_Source_Plan {
             $campaign['name'] ?? '', $campaign['title'] ?? '', $campaign['partner_name'] ?? '',
             $campaign['merchant_name'] ?? '', $campaign['advertiser_name'] ?? '', $campaign['programme_name'] ?? '',
         )))));
-        if ($network === 'awin' && absint($campaign['advertiser_id'] ?? 0) === 14336) { return 'otto'; }
+        if ($network === 'awin' && absint($campaign['advertiser_id'] ?? 0) === self::OTTO_AWIN_ADVERTISER_ID) { return 'otto'; }
         if ($network === 'leadalliance' && strpos($identity, 'kaufland') !== false) { return 'kaufland'; }
         if ($network === 'adcocktail') { return 'adcocktail'; }
         return $key;
