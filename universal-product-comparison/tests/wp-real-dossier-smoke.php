@@ -96,6 +96,16 @@ $not_in_source_b = $matrix_by_key['tail_flap']['cells'][1]['facts'][0];
 upc_real_assert( 'NOT_IN_SOURCE' === $not_in_source_a['fact_status'], 'preserve WeatherBeeta NOT_IN_SOURCE' );
 upc_real_assert( 'NOT_IN_SOURCE' === $not_in_source_b['fact_status'], 'preserve LeMieux NOT_IN_SOURCE' );
 
+$writer_dossier = $compare->build_comparison_dossier( $comparison_id );
+upc_real_assert( ! is_wp_error( $writer_dossier ), 'build deterministic writer dossier' );
+upc_real_assert( 'READY_WITH_WARNINGS' === $writer_dossier['status'], 'real dossier exposes warnings instead of smoothing them' );
+upc_real_assert( 14 === count( $writer_dossier['features'] ), 'writer dossier contains only 14 declared comparison features' );
+upc_real_assert( 4 === count( $writer_dossier['warnings'] ), 'writer dossier exposes four real source warnings' );
+$warning_codes = array_column( $writer_dossier['warnings'], 'code' );
+upc_real_assert( in_array( 'SOURCE_CONFLICT', $warning_codes, true ), 'writer dossier exposes SOURCE_CONFLICT' );
+upc_real_assert( in_array( 'NOT_IN_SOURCE', $warning_codes, true ), 'writer dossier exposes NOT_IN_SOURCE' );
+upc_real_assert( ! isset( $writer_dossier['subjects'][0]['facts'] ), 'writer identity block does not duplicate product facts' );
+
 $missing_id = $compare->create_comparison(
     array(
         'comparison_key'     => 'pv-reg-001-missing-test',
@@ -147,6 +157,12 @@ $missing_validation = $compare->validate_required_facts( $missing_comparison );
 upc_real_assert(
     is_wp_error( $missing_validation ) && 'UPC_REQUIRED_FACT_MISSING' === $missing_validation->get_error_code(),
     'block truly missing required fact'
+);
+
+$missing_dossier = $compare->build_comparison_dossier( $missing_comparison );
+upc_real_assert(
+    is_wp_error( $missing_dossier ) && 'UPC_REQUIRED_FACT_MISSING' === $missing_dossier->get_error_code(),
+    'writer dossier fails closed on missing required fact'
 );
 
 fwrite( STDOUT, "UPC_REAL_DOSSIER_PV_REG_001_PASS\n" );
