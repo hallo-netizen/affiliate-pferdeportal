@@ -1029,3 +1029,22 @@ Run 34142790804 PASS. Clean-ZIP ohne Testprojekt; Erstimport auf frischer DB erz
 
 FREIGEGEBENE VERSION:
 Universal Product Comparison 0.2.2-prototype.
+
+
+## PV-PLAN-016 – Erster manueller Teststart wird als gebundener Admin-Knopf ausgeliefert
+
+STAND: 2026-09-07.
+
+WAS:
+Universal Product Comparison 0.2.2 enthält unter Werkzeuge → Produktvergleich Test genau einen fest gebundenen Startknopf für PV-REG-001.
+
+SICHERUNGEN:
+Kein freier Titel, kein freier Text, kein freies Produkt, keine freie Kategorie, kein freies Ruleset und kein Publish. Erstimport nur auf leerem Produkt-/Vergleichsspeicher; Wiederholung ist idempotent.
+
+BELEG:
+Finale Clean-ZIP ohne Testprojekt in Run 34144140088 installiert und auf frischem WordPress geprüft. Erster PV-REG-001-Draft PASS; Wiederholung ohne Dublette PASS.
+
+ZIP:
+`universal-product-comparison-0.2.2-prototype.zip`
+SHA-256:
+`683828e03bd4949aa022ccd25fa62ae7ede105ef3921db2e6d0899b66bf29c67`
