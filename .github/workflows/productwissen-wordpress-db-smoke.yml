@@ -52,6 +52,8 @@ jobs:
           php -l universal-product-comparison/src/class-upc-production.php
           php -l universal-product-comparison/src/class-upc-project-config.php
           php -l universal-product-comparison/src/class-upc-wordpress-draft.php
+          php -l universal-product-comparison/src/class-upc-affiliate-bridge.php
+          php -l universal-product-comparison/tests/affiliate-exact-bridge-contract.php
           php -l universal-product-comparison/tests/wp-db-smoke.php
           php -l universal-product-comparison/tests/wp-real-dossier-smoke.php
           php -r '$d=json_decode(file_get_contents("universal-product-comparison/tests/fixtures/pv-reg-001.json"),true); if(!is_array($d)){exit(1);} echo "FIXTURE_JSON_PASS\\n";'
@@ -66,6 +68,14 @@ jobs:
           ! grep -E 'call_user_func|is_callable|eval\(|exec\(|shell_exec|system\(' $RUNTIME_FILES
           ! grep -E 'function upc_writer\(' universal-product-comparison/universal-product-comparison.php
           echo UPC_ZERO_FREEDOM_STATIC_GUARD_PASS
+
+      - name: Affiliate bridge read-only guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          php universal-product-comparison/tests/affiliate-exact-bridge-contract.php
+          ! grep -E 'global[[:space:]]+\$wpdb|upk_products|upk_variants|upk_identifiers|wp_insert_post|wp_update_post|update_post_meta|delete_post_meta' universal-product-comparison/src/class-upc-affiliate-bridge.php
+          echo UPC_AFFILIATE_BRIDGE_READ_ONLY_GUARD_PASS
 
       - name: Assert draft materializer cannot publish
         shell: bash
