@@ -146,6 +146,16 @@ pass_or_fail(
     'banner share applies only inside best relevance tier and stays weekly deterministic'
 );
 pass_or_fail(
+    str_contains($router, 'function banner_distribution_slot')
+    && str_contains($router, "'start_after_topics'")
+    && str_contains($router, "'hub_grid_card'")
+    && str_contains($router, "'hub_after_cards'")
+    && str_contains($router, "'product_after_category_tiles'")
+    && str_contains($router, "'journal_banner'")
+    && str_contains($router, "'anzeigenmarkt_top_banner'"),
+    'banner share covers all real banner placement families'
+);
+pass_or_fail(
     str_contains($router, 'handle_save_banner_distribution')
     && str_contains($router, 'Banneranteile speichern')
     && str_contains($router, 'Diese Seite ist zugleich die interne Reparaturinstanz'),
