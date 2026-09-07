@@ -173,10 +173,10 @@ Auch nicht als Ersatzroute bei BLOCKED.
 Nach Restore erst frischen offiziellen Arbeits-Worktree herstellen und dann den normalen definierten Arbeitsweg neu starten.
 
 
-## Produktvergleich planen / vorbereiten
+## Produktvergleich planen / erzeugen / prüfen
 
 Aktion:
-Produktvergleich definieren, Vergleichseigenschaften festlegen, harte Fakten/Quellen recherchieren oder ein Faktendossier für die spätere Artikelproduktion vorbereiten.
+Produktvergleich oder Variantenvergleich definieren, Produktwissen/Fakten binden, Vergleichsregeln pflegen, den deterministischen Vergleichsartikel als WordPress-DRAFT erzeugen oder dessen Archiv/Links/Grafik prüfen.
 
 Verbindlicher Weg:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
@@ -185,10 +185,10 @@ Verbindlicher Weg:
 → gebundene Originalquellen.
 
 Fachgrenze:
-Das Büro PRODUKTVERGLEICH bereitet Vergleich und Faktengrundlage vor.
-Die eigentliche Artikel-/Textproduktion bleibt im Büro TEXT und dessen bestehendem Produktionsweg.
+PRODUKTVERGLEICH V1 besitzt seinen eigenen deterministischen Vergleichs-Renderer und Draftweg.
+TEXT/STARTMASTER bleibt separat und wird für Produktvergleich V1 weder verändert noch als Laufzeitweg benutzt.
 
-Keinen zweiten Textmaschinen-/STARTMASTER-Weg im Produktvergleichsbüro bauen.
+Normale TEXT-/SEO-Artikelproduktion außerhalb des Produktvergleichs bleibt im Büro TEXT.
 
 
 ## Externe READ-ONLY-Zweitprüfung
