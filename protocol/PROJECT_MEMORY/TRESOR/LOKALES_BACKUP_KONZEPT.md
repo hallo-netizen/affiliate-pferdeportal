@@ -1,57 +1,50 @@
 # LOKALES BACKUP – TECHNISCHE UMSETZUNG
 
 STAND: 2026-09-07
-STATUS: KISS
+STATUS: KISS / GETESTETER KANDIDAT
 
-Autorität:
-`KONZEPT.md`
+## AUTOMATISCHER LAUF
 
-## EIN LAUF
+Bestehender Runner:
+`control/tresor/build_tresor_release.sh`
 
-Ein Lauf erzeugt:
+Er benötigt nur fünf reale Bindungen:
 
-`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMM/`
+- `WP_BACKUP_DIR`
+- `PROJECT_ARCHIVE_DIR`
+- `BACKUP_OUTPUT_DIR`
+- `OFFSITE_DIR`
+- `BACKUP_PASSPHRASE_FILE`
 
-mit:
+Danach erzeugt jeder Lauf automatisch:
 
-```
-GITHUB/
-WORDPRESS/
-PROJEKTARCHIV/
-BACKUP_INFO.txt
-```
+`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMMSS.zip.gpg`
 
-### GITHUB
-`git clone --mirror` plus relevanter Metadatenexport.
+plus `latest.json`.
 
-### WORDPRESS
-Frisches Vollbackup mit der bereits vorhandenen WordPress-Backuptechnik.
+## WORDPRESS-KNOPF
 
-### PROJEKTARCHIV
-Aktueller `/Campus-Archiv/`-Stand.
+Datei:
+`control/tresor/pferde-atelier-backup-button.php`
 
-### ABSCHLUSS
-Hashes/Manifest prüfen.
-Nur bei vollständigem Erfolg `BACKUP_PASS`.
+Als MU-Plugin installieren und in `wp-config.php` einmal den geschützten Backupordner binden:
 
-## SPEICHERUNG
+`PA_BACKUP_OUTPUT_DIR`
 
-Mindestens zwei unabhängige Kopien:
-- externe SSD;
-- zweite externe/offsite Kopie.
+Danach:
+**Werkzeuge → Komplettsicherung → Komplettsicherung herunterladen**
 
-## RHYTHMUS
+## SPEICHER
 
-- wöchentlich automatisch;
-- zusätzlich vor größeren Umbauten/Releases.
+- aktuelle Serverkopie: nur für Status/Download;
+- Offsite-Kopie: eigentliche unabhängige Katastrophensicherung;
+- öffentlicher GitHub-Bereich: niemals Backup-Speicher.
 
-## AUFBEWAHRUNG
+## ZEITPLAN
 
-- 4 letzte Wochensicherungen;
-- 3 letzte Monatssicherungen.
+Serverseitig einmal wöchentlich.
+Vor größeren Umbauten kann derselbe Runner zusätzlich gestartet werden.
 
-## HISTORISCHE TECHNIK
+## REGEL
 
-Frühere V1/V2/V3/V4-Mac-Kits, Ein-Datei-Kapseln und serverseitige Tresor-Prototypen sind nur Entwicklungsbelege.
-
-Sie definieren **keinen** zweiten Backupweg.
+Ohne Offsite-Kopie kein `BACKUP_PASS`.
