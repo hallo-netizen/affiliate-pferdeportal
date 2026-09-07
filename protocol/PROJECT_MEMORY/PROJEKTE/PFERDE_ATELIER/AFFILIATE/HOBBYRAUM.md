@@ -59,14 +59,15 @@ Falls dieser Direktlauf technisch nicht möglich ist, genau den isolierten Ersat
 `python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json`
 
 **Erst nach PASS dieses aktuellen Source-Standes:**
-1. OTTO Advertiser **14336** im eigenen Awin-Zugang real nachweisen.
-2. echten OTTO-Produktfeed lesen; reale Verkäufer-Spalte exakt binden.
-3. WordPress/MariaDB End-to-End: Hub 1/2/3, Kategorie 1/2/3, Beitrag, Exact Match / kein Ersatz.
-4. realen OTTO/Awin-Creative-Bestand bzw. belegten Export/API-Weg anbinden.
-5. echtes Banner automatisch prüfen → Ziel → Slot → Anteil → Ausgabe.
-6. reale Stichprobe der Anteilverteilung prüfen.
-7. manuelle Fehlzuordnung reparieren und Rückkehr auf Automatik belegen.
-8. erst danach Release-Gates weiterführen.
+1. Produktvergleich-Büro prüft/übernimmt den isolierten Brückenkandidaten `hobbyroom/productwissen-affiliate-exact-bridge-20260907`; Affiliate merged ihn nicht selbst.
+2. OTTO Advertiser **14336** im eigenen Awin-Zugang real nachweisen.
+3. echten OTTO-Produktfeed lesen; reale Verkäufer-Spalte exakt binden.
+4. WordPress/MariaDB End-to-End: Hub 1/2/3, Kategorie 1/2/3, Beitrag, Exact Match / kein Ersatz.
+5. realen OTTO/Awin-Creative-Bestand bzw. belegten Export/API-Weg anbinden.
+6. echtes Banner automatisch prüfen → Ziel → Slot → Anteil → Ausgabe.
+7. reale Stichprobe der Anteilverteilung prüfen.
+8. manuelle Fehlzuordnung reparieren und Rückkehr auf Automatik belegen.
+9. erst danach Release-Gates weiterführen.
 
 ## PRODUCTWISSEN-GRENZE
 
@@ -116,3 +117,17 @@ Advertiser-ID + Creative-ID + Titel + Bild + Tracking.
 Ungebunden → vorhandene Banner bleiben erhalten.
 Gebunden und leer → `['bound'=>true,'rows'=>[]]` erlaubt kontrollierte Reconciliation.
 Kein erfundener Awin-API-Weg.
+
+## PRODUCTWISSEN-BRÜCKE
+
+Offizieller Produktwissen-Branch bleibt unangetastet:
+`hobbyroom/productwissen-v1-prototype`
+
+Isolierter Integrationskandidat:
+`hobbyroom/productwissen-affiliate-exact-bridge-20260907`
+
+Bridge-Vertrag:
+`protocol/PRODUCTWISSEN_AFFILIATE_EXACT_BRIDGE_20260907.md`
+
+Affiliate darf diesen Branch nicht selbst mergen.
+Übernahmeentscheidung liegt beim Produktvergleich-Büro.
