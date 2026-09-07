@@ -4,7 +4,7 @@ STAND: 2026-09-07
 
 ## KONZEPT
 
-\`BACKUP_KONZEPT_PASS\`
+`BACKUP_KONZEPT_PASS`
 
 Verbindlicher Weg:
 **GitHub + WordPress + Projektarchiv → ein datiertes Sicherungspaket → zwei unabhängige Kopien.**
@@ -28,7 +28,7 @@ Es fehlt nur noch die **Zusammenführung zu einem frischen aktuellen Komplettlau
 
 Bis dieser reale Lauf erfolgt ist:
 
-\`BACKUP_REAL_RUN_OPEN\`
+`BACKUP_REAL_RUN_OPEN`
 
 ## WICHTIGE VEREINFACHUNG
 
@@ -47,4 +47,4 @@ Sie dürfen keinen neuen Backupweg erzeugen.
 
 ## NEXT ACTION
 
-Genau ein realer Komplettlauf nach \`KONZEPT.md\`.
+Genau ein realer Komplettlauf nach `KONZEPT.md`.
