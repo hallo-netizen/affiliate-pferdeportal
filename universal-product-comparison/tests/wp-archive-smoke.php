@@ -235,6 +235,24 @@ wp_delete_post( $wrong_post, true );
 $restored = $archive->build_view( 'test-project', 'regendecken-vergleich' );
 upc_archive_assert( ! is_wp_error( $restored ) && 3 === count( $restored['items'] ), 'archive recovers after invalid fixture removal' );
 
+$restored_fact_id = $knowledge->add_fact(
+    UPK_Repository::SUBJECT_PRODUCT,
+    $base_product_id,
+    array(
+        'fact_key'    => 'outer_material_denier',
+        'fact_value'  => '1200D Ripstop; PFC-freie Guard-Tec-Beschichtung',
+        'source_url'  => 'https://www.weatherbeetaeu.com/weatherbeeta-comfitec-plus-dynamic-turnout-0g-1029009000-950a5b',
+        'source_type' => 'MANUFACTURER',
+        'verified_at' => '2026-08-07',
+        'fact_status' => 'VERIFIED',
+    )
+);
+upc_archive_assert( is_int( $restored_fact_id ) && $restored_fact_id > 0, 'restore original manufacturer fact after prior negative test' );
+
+$restored_core = upc_production()->execute( $product_comparison_id, 'pferde-atelier', 'pv-reg-001-v1' );
+upc_archive_assert( ! is_wp_error( $restored_core ), 'restored manufacturer fact revalidates bound core before link finalization' );
+upc_archive_assert( '994d20136cebd169daa8a09f38248ee315552f8f63ea5f25c14995a01344828f' === $restored_core['output_hash'], 'restored manufacturer fact returns to golden core output' );
+
 $source_back_to_draft = wp_update_post( array( 'ID' => (int) $product_post, 'post_status' => 'draft' ), true );
 upc_archive_assert( ! is_wp_error( $source_back_to_draft ), 'return bound product comparison to draft for link finalization test' );
 
