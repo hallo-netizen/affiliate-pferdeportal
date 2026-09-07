@@ -1,72 +1,50 @@
 # DESIGN – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV
+STATUS: AKTIV / RESTORE
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
 Der einzige aktuelle Arbeitsraum des Büros DESIGN.
 
-**HIER BIST DU RICHTIG, WENN …**  
-du die aktuell gebundene Pferde-Atelier-Designänderung prüfst oder fortsetzt.
+**AKTUELLER BEFUND**  
+V1.50.473 ist nach realer Nutzerprüfung **REJECTED / FAIL**.
 
-**DU DARFST …**  
-den gebundenen Auftrag und seine Quellen lesen und ausschließlich im ausdrücklich gebundenen Arbeitsweg ändern.
+**ALS NÄCHSTES – EINZIGE AKTION**  
+Den bestätigten Vorgänger **V1.50.472 / Contract V104** wieder installieren und den Restore visuell bestätigen.
 
-**DU DARFST NICHT …**  
-`main` verändern, V104 still ändern, einen zweiten Parallelweg eröffnen oder aus dem Kandidaten bereits einen LIVE-Stand ableiten.
+## RESTORE-ARTEFAKT
 
-**ALS NÄCHSTES …**  
-Kandidat V1.50.473 installieren und visuell auf „Gebisse“ plus mindestens einer weiteren Seite derselben Kategorieebene prüfen.
+`PFERDE_ATELIER_DESIGN_V1.50.472_CONTRACT_V104_KATEGORIETEXTE_79_NUR_FAILS_FINAL_INSTALLIEREN.zip`
 
+SHA-256:
+`ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9`
 
-## AKTUELL GEBUNDENER AUFTRAG
+PHP SHA-256:
+`21620a6735a26f85de71c5c052eff056b668dfaf39a9327a322c49512d185d24`
 
-Ziel:
-Die zentrale Kategorieebene wird in dieser Reihenfolge ausgegeben:
+Lokale Restore-Prüfung:
+- ZIP-Integrität PASS
+- exakter Release-Hash PASS
+- PHP-Hash PASS
+- Header 1.50.472 PASS
+- PHP-Lint PASS
+- V1.50.473-/pa473-Marker abwesend PASS
 
-1. H1;
-2. Unterkategorie-/Beitragsart-Verweise;
-3. unveränderter Kategorienartikel;
-4. Beitragsvorschau / meistgelesene Beiträge;
-5. kommerzielle Blöcke.
+## HARTE GRENZE
 
-Arbeitsbranch:
-`fix/category-content-order-v150473-20260907`
+Bis der Restore bestätigt ist:
+- keine weitere Designänderung;
+- keine neue Reihenfolge-Reparatur;
+- kein main-Merge;
+- V1.50.473 nicht weiterverwenden.
 
-Beleg:
-`design-baseline/2026-09-07/v150473-category-content-order/`
+Danach erst die gewünschte Reihenfolgeänderung neu, **gegen V1.50.472 als exakte Basis und mit harter Positiv-/Negativprüfung**, isoliert entwickeln.
 
-Kandidat:
-`PFERDE_ATELIER_DESIGN_V1.50.473_CONTRACT_V104_KATEGORIE_REIHENFOLGE_INSTALLIEREN.zip`
+## VERWEISE
 
-Status:
-lokale Positiv-/Negativprüfung PASS; **noch kein LIVE-PASS**.
-
-## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
-
-- **BÜROSTAND:** `CURRENT_STATE.md`
-- **AKTUELLER AUFTRAG / NEXT ACTION:** ausschließlich diese `HOBBYRAUM.md`
-- **CURRENT_BLOCKER:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Quelle
-- **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
-- **NICHT ANFASSEN / WARUM:** nicht hier duplizieren → Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-
-**Wenn zwei Angaben widersprechen:** nicht raten. Die oben benannte autoritative Quelle gewinnt.
-
-## Harte Grenze
-
-Bis zur Nutzerprüfung bleibt `CURRENT_STATE.md` unverändert auf dem bestätigten LIVE-Stand V1.50.472 / V104.
-
-Kein Merge auf `main`; keine Änderung an Texten, Kartenlogik, Beitragsauswahl, Affiliate-Auswahl oder V104.
-
-## Historie
-
-Nicht hier dupliziert. Siehe `CURRENT_STATE.md`, `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` und `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`.
-
-## Globale Arbeitsort-Sperre
-
-**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
-
-Autorität:
-`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+- Bürostand: `CURRENT_STATE.md`
+- Fehler: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
+- Warum/Änderungen: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- Historie: `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
