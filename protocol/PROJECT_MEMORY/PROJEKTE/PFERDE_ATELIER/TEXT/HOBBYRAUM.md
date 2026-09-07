@@ -20,6 +20,80 @@ main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Wo
 **ALS NÄCHSTES …**  
 Keine weitere Minifix-Kette. Zuerst `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md` als aktuelle technische Wirkungskarte verwenden. Danach die 12 bestehenden Pflichtstufen einmal vollständig als **bestehender Prüfer → exakter Inputzustand → exakter Output/Evidence → nächster Consumer** kartieren. Paul F2/A6/A12, F7/A7, A11 und A37 sowie B01–B15/M01–M33 zwingend gegen jede direkte Übergabe halten. Erst ein konsolidierter Corridor-PASS darf einen neuen Integrationskandidaten erzeugen. Der begonnene LanguageTool-Rebind-Branch ist PARKPLATZ, kein aktueller Integrationskandidat.
 
+
+## HARD RULE – FIX-SPERRE VOR JEDER ÄNDERUNG
+
+**Ab sofort darf im TEXT-Hobbyraum kein technischer Fix begonnen, gebaut oder vorbereitet werden, bevor diese Prüfung vollständig mit PASS abgeschlossen ist.**
+
+Pflichtprüfung vor **jedem** Fix:
+
+1. **Paul-Prüfung gelesen?**
+   - relevante Paul-Befunde für genau den betroffenen technischen Korridor geprüft;
+   - insbesondere F2/A6/A12, F7/A7, A11, A37 sowie retracted F8 als Warnung vor vorschnellem Entfernen.
+
+2. **Gesamte bisherige Fehlerhistorie geprüft?**
+   - autoritative Fehlerquelle über `FEHLERREGISTER.md`;
+   - B01–B15 und M01–M33 gegen den Kandidaten halten;
+   - prüfen, ob der geplante Fix einen früheren Fehler wieder öffnen kann.
+
+3. **Letzten funktionierenden Stand verglichen?**
+   - `d841ed…` und besonders `de21f6…`;
+   - nicht blind zurückbauen;
+   - exakt feststellen, was an der betroffenen Stelle damals anders/gleich war.
+
+4. **Unmittelbare Vor- und Nachstufe geprüft?**
+   - exaktes Eingangsartefakt;
+   - exakter Artefaktzustand;
+   - exakter Output/Evidence;
+   - exakter nächster Consumer;
+   - prüfen, ob nach dem Fix exakt dasselbe validierte Artefakt weitergegeben wird.
+
+5. **Ist es derselbe Fehler-Typ wie früher?**
+   - K1: Ausführung/Abhängigkeit verlangt, aber nicht eindeutig gebunden;
+   - K2: Upstream/Downstream verlangen inkompatible Zustände;
+   - K3: PASS/Hash bindet nicht die reale Prüfung bzw. den richtigen Artefaktzustand;
+   - K4: Test beweist nicht denselben realen Pfad.
+   - Wenn derselbe Typ bereits wiederholt auftritt: **kein weiterer Minifix**; gemeinsame Ursache bearbeiten.
+
+6. **Positiv + Negativ lokal geprüft?**
+   - Positivfall muss den unveränderten Sollweg bestehen;
+   - Negativfall muss exakt fail-closed blockieren;
+   - kein Test darf nur Dateipräsenz oder behaupteten PASS prüfen, wenn reale Ausführung gefordert ist.
+
+7. **Qualität/Inhalt/Design/Sicherheit unverändert?**
+   - Qualität unverändert;
+   - Inhalt/Fachlogik unverändert;
+   - Design unverändert;
+   - Single Door unverändert;
+   - dummer Wächter unverändert;
+   - Chat-Zwangsjacke unverändert;
+   - Publish-Sperre unverändert;
+   - PPM/PSERC/PSTE/LanguageTool/SEO/Tabellen/Links/Dubletten-/Kannibalisierungsschutz nicht abgeschwächt.
+
+### Entscheidung
+
+Nur wenn **1–7 = PASS**:
+`FIX_ALLOWED`
+
+Sobald ein Punkt **FAIL / UNKLAR / NICHT BELEGT**:
+`FIX_FORBIDDEN`
+
+Dann ausschließlich weiter analysieren. **Keine Codeänderung.**
+
+### Anti-Minifix-Regel
+
+Wenn zwei oder mehr Fehler derselben technischen Fehlerklasse auftreten:
+- keine weitere Einzelreparatur;
+- zuerst gemeinsame Ursache im kompletten direkten Korridor prüfen;
+- erst danach ein konsolidierter KISS-Kandidat.
+
+### Aktueller Status
+
+Der begonnene Branch
+`hobbyroom/languagetool-runtime-rebind-20260907`
+bleibt **PARKPLATZ / NICHT INTEGRIEREN**, bis diese 7-Punkte-Prüfung für den gesamten betroffenen Korridor abgeschlossen ist.
+
+
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
 - **BÜROSTAND:** `CURRENT_STATE.md`
