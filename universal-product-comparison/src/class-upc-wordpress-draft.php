@@ -27,7 +27,9 @@ class UPC_WordPress_Draft {
         }
 
         if ( 'DRAFT_READY_FOR_REVIEW' !== $draft['status']
-            || true !== isset( $draft['publish_allowed'] ) && false !== $draft['publish_allowed']
+            || ! array_key_exists( 'publish_allowed', $draft )
+            || false !== $draft['publish_allowed']
+            || empty( $draft['receipt_hash'] )
         ) {
             return new WP_Error( 'UPC_PRODUCTION_RECEIPT_INVALID', 'Production output is not eligible for WordPress draft materialization.' );
         }
