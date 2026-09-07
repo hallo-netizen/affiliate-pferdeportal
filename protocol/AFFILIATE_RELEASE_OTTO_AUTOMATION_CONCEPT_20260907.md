@@ -185,3 +185,86 @@ REAL/LIVE bleibt erforderlich:
 - realer OTTO/Awin-Bannerbestand bzw. belegter Beschaffungsweg.
 
 Ohne diese Realbelege kein LIVE-PASS.
+## 10. Vollautomatische Bannerverteilung nach Anteilen
+
+ZIEL:
+Nach der fachlichen und technischen Zuordnung entscheidet das System selbst, **welche freigegebene Bannerquelle einen konkreten Bannerplatz erhält**.
+
+Die Quote ist niemals die erste Entscheidung.
+
+Verbindliche Reihenfolge:
+1. manuelle Reparatur/Festzuordnung oder Veto;
+2. technische/rechtliche Freigabe;
+3. Ziel-/Themenrelevanz;
+4. Designslot-/Formatpassung;
+5. nur innerhalb der **besten vorhandenen Relevanzstufe**: Anteilssystem;
+6. innerhalb der gewählten Quelle bleibt die bestehende Qualitäts-/Prioritätsreihenfolge erhalten.
+
+Damit kann eine Quote niemals ein fachlich schwaches Fallback-Banner gegen einen deutlich passenderen Banner erzwingen.
+
+### Startverteilung
+
+Konfigurierbarer KISS-Startwert:
+
+- OTTO: 40
+- andere Awin-Programme: 25
+- ADCELL: 20
+- Direktpartner: 15
+- Digistore24: 0 (zurückgestellt)
+- Sonstige: 0
+
+Die Werte sind relative Zielanteile.
+Sind auf einer Seite nur OTTO und ADCELL fachlich geeignet, werden nur deren vorhandene Anteile automatisch normalisiert.
+Eine nicht verfügbare Quelle erzeugt **keinen leeren Bannerplatz**, solange eine andere gleich relevante freigegebene Quelle vorhanden ist.
+
+Diese Startwerte sind keine dauerhafte Geschäftsentscheidung.
+Sie können intern jederzeit geändert werden, ohne die Zuordnungsarchitektur anzufassen.
+
+### Was „Anteil“ bedeutet
+
+V1 verteilt **Bannerplätze**, nicht abrechnungsgenaue Ad-Impressions.
+
+Die Auswahl ist deterministisch pro:
+- Kalenderwoche;
+- Seite/Kontext;
+- Banner-Slot.
+
+Vorteile:
+- kein zufälliges Flackern bei jedem Request;
+- cachefreundlich;
+- reproduzierbar bei Fehlerprüfung;
+- trotzdem regelmäßige Rotation;
+- keine neue Impression-Counter-/Realtime-Architektur.
+
+Wenn später echte Impression-Shares benötigt werden, ist das eine eigene Ausbaustufe und wird nicht still in V1 hineingebaut.
+
+## 11. Manuelle Reparaturinstanz
+
+Die Automatik ist Normalbetrieb.
+Der Mensch repariert nur Ausnahmen.
+
+Die bestehende interne Instanz „Zuordnungen“ wird ausdrücklich als Reparaturinstanz verwendet:
+
+- **Automatik** → System entscheidet wieder selbst;
+- **Fest auswählen** → bestimmtes Banner/Produkt erzwingen;
+- **Nicht anzeigen** → Ausgabe auf dieser Zuordnung sperren;
+- **Vererbung** → Ausnahme auf strukturelle Unterseiten anwenden.
+
+Zusätzlich bleiben die vorhandenen Chef-/Control-Grenzen bestehen:
+- Provider-Veto;
+- Partner-Veto;
+- Creative-Veto;
+- Target-Veto;
+- Slot-Veto;
+- Output-Veto;
+- globale Notabschaltung.
+
+Manuelle Reparatur steht **vor** der automatischen Anteilsauswahl.
+Beim Zurücksetzen auf „Automatik“ fällt die Seite sofort wieder in das normale Relevanz-/Anteilssystem zurück.
+
+## 12. Leitsatz
+
+**Automatik entscheidet alles, was eindeutig ist.  
+Anteile steuern nur zwischen gleich guten Möglichkeiten.  
+Der Mensch repariert Ausnahmen – er betreibt nicht den Normalworkflow.**
+
