@@ -1,0 +1,68 @@
+AFFILIATE_ZENTRALE OTTO/AWIN + PRODUKTWISSEN + BANNER CONTRACT EVIDENCE
+DATE=2026-09-07
+STATUS=LOCAL_CONTRACT_PASS_REAL_OTTO_DATA_PENDING
+SOURCE_MANIFEST_SHA256=7505a05b1a5534f7cfb0d3063b1eb50e40f723e223847299cb3864c5d116cffc
+SOURCE_FILE_COUNT=26
+
+BOUND_SCOPE
+- OTTO stays inside existing AWIN transport.
+- Canonical OTTO identity = AWIN advertiser 14336.
+- No separate OTTO plugin/provider transport.
+- Digistore24 remains deferred/non-blocking.
+- Productwissen is read-only fachliche product-identity authority.
+- Affiliate owns current commerce data: offer, price, availability, seller, tracking, real creatives.
+- Exact Productwissen request = identifier-identical affiliate match or no card; no fuzzy substitute.
+- Banner acquisition and banner assignment are separate.
+- Only real imported/bound OTTO/AWIN banner creative may enter automatic banner classification/activation.
+- No product-image-as-banner fallback.
+
+STATIC CURRENT-SOURCE CONTRACT TEST
+RESULT=PASS
+CHECKS:
+PASS canonical OTTO advertiser 14336
+PASS automated feed imports schedule asset verification
+PASS seller hook + seller public gate
+PASS merchant SKU is not promoted to exact MPN
+PASS exact GTIN/MPN identifiers survive OTTO campaign materialization
+PASS Productwissen read-only filter ppar_affiliate_exact_product_requirements
+PASS no direct UPK table coupling in Affiliate source
+PASS exact identity outranks generic eBay/provider cohort strategy
+PASS central _ppar_otto_awin_auto gate remains required
+PASS product payload changes alter freshness fingerprint
+PASS verified OTTO not suppressed by legacy eBay cohort
+PASS real Awin banners use existing automatic target/slot activation
+PASS no fake product-image banner fallback
+PASS OTTO product campaigns are eligible for exact article product block
+
+LOCAL BEHAVIORAL PHP CONTRACT TEST
+RUNTIME=PHP 8.4.23 CLI
+RESULT=PASS
+CHECKS:
+PASS advertiser 14336 identifies OTTO
+PASS name alone cannot spoof OTTO identity
+PASS EAN and GTIN resolve to same exact identity
+PASS exact MPN matches
+PASS different GTIN is blocked
+PASS merchant SKU is not accepted as exact MPN
+PASS missing exact requested product stays empty; no fuzzy substitution
+PASS category and article placement coexist
+
+HOBBYRAUM
+TASK=AFFILIATE_HOBBYRAUM/TASK.current.json
+TASK_BOUND_TEST=php test_otto_automation.php
+TASK_TEST_BINDING=PASS
+EXACT_CONTAINER_RUN=NOT_EXECUTED_IN_THIS_CHAT_RUNTIME
+REASON=local execution environment has PHP but no Docker/Podman; AFFILIATE_HOBBYRAUM runner itself requires Docker/Podman.
+RULE=Do not upgrade this to Hobbyraum runner PASS until the bound runner actually executes.
+
+REAL DATA / LIVE BOUNDARIES
+PENDING real OTTO programme 14336 proof from the publisher's own Awin account
+PENDING real OTTO product-feed end-to-end run
+PENDING exact seller column binding from the real OTTO/Awin feed; no field name guessed
+PENDING WordPress/MariaDB end-to-end persistence and public output
+PENDING real OTTO/Awin banner creative source/export/catalog proof
+PENDING public banner output with a real OTTO creative
+
+PUBLICATION
+LIVE_PASS=NO
+RELEASE_ALLOWED=NO
