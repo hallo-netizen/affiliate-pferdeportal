@@ -1,38 +1,39 @@
 # NOTFALL-TRESOR – START_HERE
 
 STAND: 2026-09-07
-STATUS: KISS-BACKUPKONZEPT VERBINDLICH
+STATUS: GITHUB-ONLY / VERBINDLICH
 
-## WAS GILT?
+## AUFTRAG
 
-Für das Pferde-Atelier gibt es genau **einen** Backupweg:
+Dieser Tresor sichert ausschließlich:
+**GitHub für `hallo-netizen/affiliate-pferdeportal`.**
 
-**GitHub komplett + WordPress komplett + Projektarchiv komplett → ein datiertes Sicherungspaket.**
+Dazu gehören der komplette Git-Bestand und die für Wiederaufbau relevanten GitHub-Daten.
 
-Autorität:
-`KONZEPT.md`
+## HARD SCOPE LOCK
 
-## HARTE REGEL
+Für diesen Auftrag verboten:
+- WordPress;
+- Website-Dateien oder Datenbank;
+- Campus-Library/Projektarchiv als eigener Sicherungsblock;
+- WP-Plugins als Backup-Runner;
+- neue Parallelarchitektur.
 
-Keine neue Backup-Architektur daneben bauen.
+Der Campus liegt im Repository und wird durch das GitHub-Backup automatisch mitgesichert.
 
-Vorhandene Technik wird wiederverwendet:
-- GitHub → Git-Mirror;
-- WordPress → vorhandene Vollbackup-Lösung;
-- Roh-/Masterdateien → Campus-Archiv.
+## TECHNISCHE HAUPTQUELLE
 
-## ERGEBNIS
+Bestehender, real gelaufener Weg:
+Branch `tresor/build-20260905`
+→ `.github/workflows/campus-tresor-snapshot.yml`
 
-Nur:
-- `BACKUP_PASS`
-- oder `BACKUP_FAIL:<GRUND>`
+## NUTZERWEG
 
-## NÄCHSTER SCHRITT
+Genau eine Handlung:
+**neueste geprüfte `GITHUB_KOMPLETTBACKUP_*.zip` herunterladen und außerhalb GitHubs speichern.**
 
-Aktuellen technischen Stand:
-`STATUS.md`
+Aktueller Prüfstand:
+`STATUS.md`.
 
-Wiederherstellung:
-`NOTFALL_WIEDERAUFBAU.md`
-
-Alte V1/V2/V3/V4-Tresor-Kits und Ein-Datei-Experimente sind **nicht der verbindliche Nutzerweg**.
+Wiederaufbau:
+`NOTFALL_WIEDERAUFBAU.md`.
