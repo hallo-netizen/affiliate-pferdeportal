@@ -1,7 +1,7 @@
 # AFFILIATE – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: OTTO-AUTOMATISIERUNG + PRODUCTWISSEN-EXACT + BANNERVERTEILUNG STRUKTURELL IMPLEMENTIERT / CURRENT-SOURCE STATIC PASS / BOUND CHECK + REALDATEN OFFEN
+STATUS: OTTO-AUTOMATISIERUNG + PRODUCTWISSEN-EXACT + BANNERVERTEILUNG STRUKTURELL IMPLEMENTIERT / PRODUCTWISSEN-BRÜCKE INTEGRIERT / 6.72.1 ACTIVATION-SMOKE BEREIT / BOUND CHECK + REALDATEN OFFEN
 
 ## AUTORITÄT
 
@@ -151,7 +151,10 @@ Deshalb:
 Branch:
 `affiliate-release-current`
 
-HEAD:
+Branch-HEAD:
+`d6f34efc5af36b45aaa5f907f8d7fd505c20b416`
+
+Source-tragender 26-Dateien-Stand:
 `84390240b87e510349c636b9dd9f1a5dfc8ce5d7`
 
 Aktiver Kandidat:
@@ -164,7 +167,7 @@ Source-Manifest SHA-256:
 `680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf`
 
 Governance Generation:
-**17**
+**18**
 
 Release:
 **NICHT FREIGEGEBEN**
@@ -189,15 +192,17 @@ Evidence:
 - `release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt`
 - `release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt`
 
+Zusätzlicher exakter Source-Readback am 07.09.2026:
+- 30/30 OTTO/Awin/Productwissen-/Banner-Strukturassertionen gegen Source-Head `84390240...` PASS;
+- dies ersetzt ausdrücklich **nicht** den direkten PHP-Lauf `run_otto_checks.sh`.
+
 OFFEN:
-- exakter aktueller Repo-Checkout-Lauf `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`;
-- exakter PHP-/WordPress-Test des isolierten Productwissen-Brückenkandidaten und dessen Übernahme durch Produktvergleich;
-- alternativ isolierter Container-Hobbyraum;
+- exakter aktueller Repo-Checkout-Lauf `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh` bzw. gebundener Containerlauf;
+- erster WordPress-Aktivierungs-Smoke des gebauten 6.72.1-Testpakets;
 - frühere lokale Behavior-PASS-Belege gelten nach der letzten Source-Änderung nicht als Current-Source-PASS und wurden entsprechend als stale markiert.
 
 ## Real/LIVE noch offen
 
-- Productwissen-Brückenkandidat im Produktvergleich-Büro prüfen/übernehmen;
 - OTTO 14336 im eigenen Awin-Konto real belegen;
 - echten OTTO-Produktfeed durch WordPress/MariaDB;
 - reale Verkäufer-Spalte binden;
@@ -206,6 +211,31 @@ OFFEN:
 - echtes Banner automatisch zuordnen und ausspielen;
 - reale Stichprobe der Anteilverteilung über genügend Bannerplätze;
 - manuelle Reparatur + Rückkehr zur Automatik real prüfen.
+
+## Erster Plugin-Test – bereit
+
+Testartefakt:
+`release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip`
+
+Build-Beleg:
+`release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.txt`
+
+Gebaut aus:
+- Source-Head `84390240b87e510349c636b9dd9f1a5dfc8ce5d7`;
+- direkt committed aktueller Source;
+- kein Alt-ZIP, keine Historienrekonstruktion;
+- 24 Dateien / 2.417.322 Source-Bytes.
+
+Bewusst ausgelassen für diesen ersten **Aktivierungs-Smoke**:
+- `assets/ebay-portal-catalog-v2.json`;
+- `assets/portal-structure-v279.json`.
+
+Harter Scope:
+**nur Plugin laden + aktivieren / kein vollständiger Funktionstest / kein eBay-Lauf / kein Release.**
+Die beiden JSON-Dateien werden beim Plugin-Laden bzw. in `activate()` nicht gelesen, sind aber für spätere eBay-Laufzeitfunktionen erforderlich.
+
+Status:
+**TESTPAKET GEBAUT / WORDPRESS-AKTIVIERUNG NOCH AUSZUFÜHREN.**
 
 ## Bestehende Live-Differenz
 
@@ -244,28 +274,31 @@ Zusätzlich bleibt der isolierte Container-Hobbyraum:
 
 ## Productwissen-Brücke – offizieller Status
 
-Der aktuelle offizielle Produktwissen-/Produktvergleich-Branch liefert den Affiliate-Exact-Filter noch nicht.
+Die read-only Productwissen→Affiliate-Brücke ist inzwischen vom Produktvergleich-Büro offiziell integriert.
 
-Offizieller Parallelbranch:
+Offizieller Produktwissen-/Produktvergleich-Branch:
 `hobbyroom/productwissen-v1-prototype`
+
 Head bei letzter Prüfung:
-`42ad7460a903a64c22fe4dec1c70b901a6ecdd12`
+`020ba35e7d304407e8b71e0751b6f4167b93427d`
 
-Dafür existiert jetzt ein isolierter Brückenkandidat:
-`hobbyroom/productwissen-affiliate-exact-bridge-20260907`
-Head:
-`823b4712d096c6e5613b20c8d22669447f3bc6ac`
+Bridge-PASS-Head:
+`f16f9d9b54a2df9397ef6d5d361b4a61f10347de`
 
-Umgesetzt im Kandidaten:
-- read-only Producer für `ppar_affiliate_exact_product_requirements`;
-- WordPress-Draft bindet `_upc_comparison_id`;
-- alte Drafts nur über striktes UPC-UID-Format;
-- ausschließlich UPK-Exact-Identifier;
-- keine direkte Tabellenkopplung;
-- kein Identifier = keine Affiliate-Anforderung.
+WordPress+MySQL-Beleg:
+GitHub Actions Run `34131779064` → SUCCESS.
+
+Belegt:
+- `ppar_affiliate_exact_product_requirements` wird read-only geliefert;
+- EAN/GTIN Exact Match PASS;
+- MPN Exact Match PASS;
+- kein Identifier = keine Affiliate-Anforderung;
+- kein Ersatzprodukt;
+- bestehende Anforderungen bleiben erhalten;
+- keine direkte Productwissen-Tabellenkopplung;
+- Zero-Freedom-/Golden-Output-Regressions bleiben PASS.
+
+Der frühere Branch `hobbyroom/productwissen-affiliate-exact-bridge-20260907` ist nur noch historischer Integrationskandidat, keine aktuelle Arbeitsquelle.
 
 Status:
-**STATIC CONTRACT PASS / NICHT OFFIZIELL INTEGRIERT / E2E OFFEN.**
-
-Wichtig:
-Affiliate darf diesen Produktwissen-Parallelbranch nicht selbst übernehmen/mergen. Das Produktvergleich-Büro prüft und integriert den Kandidaten.
+**OFFIZIELL INTEGRIERT / BRIDGE WORDPRESS+MYSQL PASS / AFFILIATE-REAL-OTTO-E2E OFFEN.**
