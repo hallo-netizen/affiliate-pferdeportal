@@ -1,40 +1,30 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / FIX_ALLOWED_FOR_CODEX_TEST
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
 
-## 1-KLICK-ÜBERSICHT
+## EINZIGE ARBEITSWAHRHEIT
 
-**WAS IST DAS?**  
-Der einzige aktuelle Arbeitsraum des Büros TEXT.
+Ziel:
+Den bewiesenen Produktionsstand `de21f6cd35c60849c551fd82f78e75ce57c99fab` reproduzierbar wiederherstellen und danach ausschließlich zwingende spätere Änderungen **einzeln** aufbauen.
 
-**HIER BIST DU RICHTIG, WENN …**  
-du den aktuell gebundenen TEXT-Arbeitsauftrag ausführst.
-
-**DU DARFST …**  
-nur den unten maschinenlesbar gebundenen Planpunkt und Scope bearbeiten.
-
-**DU DARFST NICHT …**  
-einen eigenen Prüfpfad, Minifix, Alternativweg, zweiten Branch, neuen Runner/Gate/Executor oder eine Fach-/Qualitäts-/Designregel erfinden.
-
-**ALS NÄCHSTES …**  
-ausschließlich die HARD RULE Goldmaster-Rekonstruktion in der festgelegten Reihenfolge abarbeiten.
+Es gibt **kein alternatives Reparaturkonzept** und keinen parallelen Reparaturpfad.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_ALLOWED_FOR_CODEX_TEST
+STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
-MAIN_SHA: 003e6899346a9a4193ff86d6caca62df068ebbc6
-ACTIVE_BLOCKER: ADMIN_BYPASS_REQUIRED_FOR_GOLDMASTER_CLOUD_ENTRY_RESTORE
-PLAN_PHASE: GOLDMASTER_CLOUD_ENTRY_RESTORE
+MAIN_SHA: 72dc4ad3d6898b23f1a7dda24427eef8a06fe2c5
+ACTIVE_BLOCKER: BASELINE_REALTEST_PENDING
+PLAN_PHASE: FROZEN_GOLDMASTER_BASELINE_REALTEST
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
-RECOVERY_SEQUENCE: 1_HARDEN_HOBBYROOM;2_COPY_GOLDMASTER;3_REAPPLY_MANDATORY_CHANGES_ONE_BY_ONE;4_REAL_TEST_AFTER_EACH_CHANGE
-CANDIDATE_BRANCH: security/allow-codex-no-origin-20260907
-CANDIDATE_HEAD_SHA: 86b14f84feefd7a84c48d57312c88848094b08f4
+RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
+CANDIDATE_BRANCH: NONE
+CANDIDATE_HEAD_SHA: NONE
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: control/CURRENT_STARTMASTER.json;control/output-quarantine/output_release_gate.py;control/output-quarantine/runtime_entry_gate.py;control/single-door-boundary/codex_current_action.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/GITHUB_FINAL_RELEASE.py;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json;control/startmaster0107/codex-production-runtime/codex_environment_preflight.py;control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py;control/startmaster0107/fachworkflow_proof_handoff.py;control/startmaster0107/test_fachworkflow_proof_handoff.py
+ALLOWED_PATH_PREFIXES: NONE
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -42,172 +32,98 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
-INTEGRATION_ALLOWED: true
+INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
-Bedeutung:
-Solange `STATUS=FIX_FORBIDDEN` oder ein Pflichtcheck nicht PASS ist, gibt es **keine Integrationsfreigabe**.
+## HARD RULE – EINGEFROREN
 
-Security-PR #137 ist **MERGED** auf current main `457f33a09751db3acf78246ee394a59141d94d15`.
-Der eingebaute `HOBBYROOM_WORK_LOCK_V1` besitzt einen Positiv-/Negativ-Selbsttest `PASS 9/9`.
-Noch offen: Im Ruleset `Pferde Atelier Main Hardlock` / ID `21788951` ist aktuell nur `hardlock` Pflichtcheck; `hardlock-base` muss nach der einmaligen Wartung wieder als Pflichtcheck hinzugefügt werden.
-Bis dieser äußere Schutz wieder aktiv ist, bleibt `FIX_FORBIDDEN`.
+Diese Reihenfolge darf **nicht** geändert, erweitert, parallelisiert oder durch einen anderen Reparaturansatz ersetzt werden:
 
-## HARD RULE – GOLDMASTER-REKONSTRUKTION
+1. Goldmaster `de21f6…` als technische Funktionsreferenz.
+2. Unveränderten Goldmaster-Motor real testen.
+3. Erst nach ausgewertetem Realtest genau **eine** zwingend notwendige spätere Änderung auswählen.
+4. Vor dem Einbau genau für diesen Korridor prüfen:
+   - Pauls technische Prüfkarte;
+   - Fehlerhistorie;
+   - letzter funktionierender Stand;
+   - direkte Vor-/Nachstufe.
+5. Genau **eine** Änderung bauen.
+6. Lokale Positiv-/Negativprüfung.
+7. Echter 7/7-Realtest.
+8. Ergebnis:
+   - **PASS:** Änderung wird Bestandteil des neuen eingefrorenen Zwischenstands.
+   - **FAIL:** genau diese Änderung vollständig zurückbauen. Kein Fix auf den fehlgeschlagenen Fix.
+9. Erst danach nächste zwingende Änderung.
+10. Wiederholen bis Ziel `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`.
 
-**Diese Reihenfolge ist verbindlich und darf nicht übersprungen, umgestellt oder parallelisiert werden:**
+## VERBOTEN
 
-1. Hobbyraum technisch dichtmachen.
-2. `de21f6cd35c60849c551fd82f78e75ce57c99fab` als funktionierenden Goldmaster kopieren.
-3. Nur zwingend notwendige spätere Änderungen einzeln nachrüsten.
-4. Nach jedem einzelnen Einbau real testen.
+- Konzeptwechsel während der Reparatur.
+- Sammelfix.
+- Zwei Änderungen zwischen zwei Realtests.
+- Zweiter Fix auf einen fehlgeschlagenen Kandidaten.
+- Prophylaktische Reparatur eines noch nicht real aufgetretenen Fehlers.
+- LanguageTool-/PPM-/SEO-/Link-/Tabellen-/Design-/Security-Umbau außerhalb des gerade gebundenen Einzelkandidaten.
+- neuer Runner, Gate, Executor oder Ersatzweg.
+- Parallelbranch für einen anderen Reparaturansatz.
+- Publish oder WordPress-Schreibvorgang.
+- Änderung des Zielvertrags während der Reparatur.
 
-Bis Schritt 1 technisch wirksam abgeschlossen ist:
-- keine Goldmaster-Kopie;
-- keine LanguageTool-Reparatur;
-- kein anderer Minifix;
-- keine Parallelreparatur;
-- keine Integration.
+## PAUL – VERBINDLICHE PRÜFLINSE, KEIN SAMMELFIX
 
-Pauls/Claudes 41-Punkte-Audit ist dabei **Prüflinse**, kein 41-Punkte-Sammelfix.
-
-## VERBINDLICHER ARBEITSPLAN – EINZIGE REIHENFOLGE
-
-### A – Ausgangspunkt
-- current main;
-- erster echter Liveblocker;
-- letzter echter 7/7-Stand;
-- keine Produktionsänderung.
-
-### B – Pflichtprüfung vor Kandidat
-1. Paul-Befund zum betroffenen Korridor geprüft.
-2. komplette Fehlerhistorie geprüft.
-3. letzter funktionierender Stand verglichen.
-4. unmittelbare Vor-/Nachstufe geprüft.
-5. Wiederholungsfehlerklasse geprüft.
-6. Positiv-/Negativtest auf dem Kandidaten.
-7. Qualität/Inhalt/Design/Sicherheit/Single Door/Zwangsjacke unverändert.
-
-Ein FAIL/UNKLAR = `FIX_FORBIDDEN`.
-
-### C – Anti-Minifix
-Bei wiederholter Fehlerklasse kein weiterer isolierter Minifix.
-Gemeinsame Ursache im direkten Korridor bestimmen.
-
-### D – genau ein KISS-Kandidat
-Nur bestehende technische Bindungen korrekt verbinden.
-Keine neue Fachlogik oder Architektur.
-
-### E – lokale Freigabe
-Positiv + Negativ + direkte Auswirkungen + historische Regression.
-Nur dann:
-`FIX_ALLOWED_FOR_CODEX_TEST`.
-
-### F – Codex-Test
-Exakt current main / bestehende eine Tür / dumme Wächter.
-Beim ersten echten technischen Blocker STOP.
-Keine Reparatur während des Laufs.
-
-## AKTUELLE BINDUNG
-
-Aktiver Arbeiter:
-**normaler TEXT-Arbeitschat**
-
-Paul:
-**nicht gebunden**
-
-Plan B / PR #143:
-**separat eingefroren; für diese Arbeit nicht verwenden**
-
-LanguageTool-Rebind-Branch:
-`hobbyroom/languagetool-runtime-rebind-20260907`
-**PARKPLATZ / NICHT INTEGRIEREN**
-
-Aktueller Planpunkt:
-**1 – HOBBYRAUM DICHTMACHEN / hardlock-base-WORKFLOW REAKTIVIEREN**
-
-Aktuelle Entscheidung:
-**Nur Kandidat `482fa8ab71f4f180900707ca2309a5bd87727416` ist freigegeben.**
-14/14 geänderte TEXT-Korridor-Dateien sind bytegleich zu `de21f6…`.
-Neue Security-/Campus-Zwangsjacke bleibt unangetastet.
-Kein Publish.
-
-Rückgabeweg:
-1. Im Ruleset `Pferde Atelier Main Hardlock` `hardlock-base` wieder als Required Status Check hinzufügen.
-2. Danach realen Hobbyraum-Lock gegen einen technischen Test-PR verifizieren.
-3. Erst dann Goldmaster-Kopie von `de21f6…`; anschließend Pflichtänderungen einzeln und jeweils real testen.
-
-## UNANTASTBAR
-
-- genau eine Tür;
-- dumme/fachblinde Wächter;
-- Chat/Codex ohne freie Workflow-, Routing-, State-, Prüf-, Qualitäts-, Repair- oder Publishentscheidung;
-- Qualität unverändert;
-- Inhalt/Fachlogik unverändert;
-- Design unverändert;
-- PPM/PSERC/PSTE/LanguageTool/SEO/Tabellen/Links/Dubletten-/Kannibalisierungsschutz unverändert;
-- kein Auto-Publish;
-- keine zweite aktuelle Wahrheit.
-
-## AUTORITATIVE QUELLEN
-
-Stand:
-`CURRENT_STATE.md`
-
-Fehler:
-`protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → Originalquelle
-
-Ziel:
-`protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
-
-Paul:
+Quelle:
 `PAUL_PIPELINE_AUDIT_20260906.md`
 
-Systemische technische Wirkungskarte:
-`TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`
-`TECHNICAL_CORRIDOR_MATRIX_20260907.md`
+Pauls Liste wird **vor jedem Einzelkandidaten** für den betroffenen Korridor geprüft.
 
-Warum/Änderungen:
-`protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+Klassifikation eines Paul-Punkts:
+1. bereits historisch behoben;
+2. alt und nicht kausal;
+3. erst durch spätere Pflichtänderung neu wirksam;
+4. neuer reproduzierbarer Vertragskonflikt.
 
+Nur Klasse 3 oder 4 darf nach einem **realen** passenden Fehler Reparaturkandidat werden.
 
-## AKTUELLER TECHNISCHER BLOCKER – hardlock-base STARTET NICHT
+Insbesondere:
+- kein 41-Punkte-Sammelfix;
+- kein Vorab-Fix von F2/A6/A12, F7/A7 oder A11 ohne realen passenden Fehler;
+- der erste reale Fehler entscheidet.
 
-PR #148 wurde manuell geschlossen und wieder geöffnet.
-Der normale `pull_request`-Workflow lief danach neu um 2026-09-07 19:34:31Z und ist PASS.
-Der getrennte `pull_request_target`-Workflow `Pferde Atelier Immutable Base Hardlock` erzeugte dagegen keinen Lauf.
-Der Ruleset verlangt `hardlock-base` weiterhin korrekt und blockiert den Merge deshalb fail-closed.
+## ZWINGENDE SPÄTERE ANFORDERUNGEN
 
-Folge:
-- PR #148 bleibt offen und unverändert;
-- kein Merge;
-- kein Schritt 3;
-- keine Reparatur am Goldmaster;
-- zuerst den bestehenden Workflow in GitHub Actions reaktivieren/aktivieren.
+Nach bestandenem Goldmaster-Baseline-Test werden nur Anforderungen aus dem gültigen Zielvertrag wieder eingeführt, einzeln und mit Realtest. Dazu gehören insbesondere:
+- echter PPM-6.7.9-Lauf statt Selbstbehauptung;
+- PPM-`content_hash == final_article_sha256`;
+- korrekte Reihenfolge Fachoutput → realer PPM → erst danach PASS/Receipt;
+- exakte PPM-/PSERC-Paket- und Hashbindung;
+- SEO-Handoff exakt 5 Felder;
+- kein Auto-Publish / kein WordPress-Schreiben im Test;
+- bestehende Qualitätsregeln bleiben unverändert.
 
+Die konkrete Reihenfolge der späteren Änderungen wird **nicht frei erfunden**, sondern aus Zielvertrag + Commit-/Fehlerhistorie bestimmt. Zwischen zwei Änderungen liegt immer ein echter Realtest.
 
-## GOLDMASTER CLOUD-ENTRY RESTORE – PR #151
+## AKTUELLER STAND
 
-Ziel:
-Produktionsmotor wieder exakt auf den bewiesenen `de21f6…`-Stand setzen; Hobbyraum-/Paul-Schutz bleibt ausschließlich außen im PR-/Ruleset-Hardlock.
+Current main:
+`72dc4ad3d6898b23f1a7dda24427eef8a06fe2c5`
 
-Kandidat:
-- PR #151
-- Branch `security/allow-codex-no-origin-20260907`
-- Head `86b14f84feefd7a84c48d57312c88848094b08f4`
+Goldmaster-Motor auf current main hart geprüft:
+- `.github/workflows/pferde-atelier-deterministic-entrance-gate.yml` = bytegleich `de21f6…`
+- `control/cloud-entry-gate/cloud_entry.py` = bytegleich `de21f6…`
+- `control/cloud-entry-gate/cloud_repo_ci_test.py` = bytegleich `de21f6…`
 
-Exakt bytegleich zu `de21f6cd35c60849c551fd82f78e75ce57c99fab`:
-1. `.github/workflows/pferde-atelier-deterministic-entrance-gate.yml`
-2. `control/cloud-entry-gate/cloud_entry.py`
-3. `control/cloud-entry-gate/cloud_repo_ci_test.py`
+Ruleset:
+- `hardlock` Pflicht
+- `hardlock-base` Pflicht
 
-Prüfung:
-- normaler `hardlock`: PASS
-- `hardlock-base`: FAIL ausschließlich `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`
-- kein weiterer Fehler im Kandidaten
-- kein Publish
-- kein Schritt 3 vor Realtest
+Aktuelle einzige NEXT ACTION:
+**Laufenden Goldmaster-Baseline-7/7-Realtest auswerten. Bis zum Ergebnis: FIX_FORBIDDEN, keine Reparatur.**
 
-NEXT ACTION:
-Einmalige Admin-Wartung: `hardlock-base` im Ruleset kurz entfernen → PR #151 mergen → `hardlock-base` sofort wieder hinzufügen → danach echter 7/7-Realtest.
+## AUTORITÄTEN
+
+Stand → `CURRENT_STATE.md`  
+Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → Originalquelle  
+Ziel → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`  
+Paul → `PAUL_PIPELINE_AUDIT_20260906.md`  
+Warum/Änderungen → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
