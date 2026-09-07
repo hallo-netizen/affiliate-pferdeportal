@@ -112,25 +112,70 @@ class UPC_WordPress_Draft {
     }
 
     private function resolve_category( array $binding ) {
-        $required = array( 'name', 'slug', 'parent_slug' );
+        $required = array( 'name', 'slug', 'expected_parent_id' );
         foreach ( $required as $field ) {
-            if ( ! isset( $binding[ $field ] ) || '' === trim( (string) $binding[ $field ] ) ) {
+            if ( ! array_key_exists( $field, $binding ) || ( 'expected_parent_id' !== $field && '' === trim( (string) $binding[ $field ] ) ) ) {
                 return new WP_Error( 'UPC_CATEGORY_BINDING_INVALID', 'Category binding is incomplete.', array( 'field' => $field ) );
             }
         }
 
-        $term = get_term_by( 'slug', sanitize_title( $binding['slug'] ), 'category' );
+        $name               = (string) $binding['name'];
+        $slug               = sanitize_title( $binding['slug'] );
+        $expected_parent_id = absint( $binding['expected_parent_id'] );
+        $expected_term_id   = isset( $binding['term_id'] ) ? absint( $binding['term_id'] ) : 0;
+        $create_if_missing  = ! empty( $binding['create_if_missing'] );
+
+        $term = get_term_by( 'slug', $slug, 'category' );
+
         if ( ! $term || is_wp_error( $term ) ) {
-            return new WP_Error( 'UPC_CATEGORY_NOT_FOUND', 'Bound category slug does not exist.' );
+            if ( ! $create_if_missing ) {
+                return new WP_Error( 'UPC_CATEGORY_NOT_FOUND', 'Bound category slug does not exist.' );
+            }
+
+            if ( $expected_term_id > 0 ) {
+                return new WP_Error( 'UPC_CATEGORY_CREATE_WITH_FIXED_ID_FORBIDDEN', 'A missing category with a fixed expected term ID may not be auto-created.' );
+            }
+
+            if ( $expected_parent_id > 0 ) {
+                $parent = get_term( $expected_parent_id, 'category' );
+                if ( ! $parent || is_wp_error( $parent ) ) {
+                    return new WP_Error( 'UPC_CATEGORY_PARENT_NOT_FOUND', 'Bound category parent does not exist.' );
+                }
+            }
+
+            $created = wp_insert_term(
+                $name,
+                'category',
+                array(
+                    'slug'   => $slug,
+                    'parent' => $expected_parent_id,
+                )
+            );
+
+            if ( is_wp_error( $created ) ) {
+                return $created;
+            }
+
+            $term = get_term( (int) $created['term_id'], 'category' );
+            if ( ! $term || is_wp_error( $term ) ) {
+                return new WP_Error( 'UPC_CATEGORY_CREATE_READBACK_FAILED', 'Created category could not be read back.' );
+            }
         }
 
-        if ( (string) $term->name !== (string) $binding['name'] ) {
+        if ( $expected_term_id > 0 && (int) $term->term_id !== $expected_term_id ) {
+            return new WP_Error( 'UPC_CATEGORY_ID_MISMATCH', 'Bound category term ID does not match WordPress.' );
+        }
+
+        if ( (string) $term->name !== $name ) {
             return new WP_Error( 'UPC_CATEGORY_NAME_MISMATCH', 'Bound category name does not match WordPress.' );
         }
 
-        $parent = get_term( (int) $term->parent, 'category' );
-        if ( ! $parent || is_wp_error( $parent ) || (string) $parent->slug !== sanitize_title( $binding['parent_slug'] ) ) {
-            return new WP_Error( 'UPC_CATEGORY_PARENT_MISMATCH', 'Bound category parent does not match WordPress.' );
+        if ( (string) $term->slug !== $slug ) {
+            return new WP_Error( 'UPC_CATEGORY_SLUG_MISMATCH', 'Bound category slug does not match WordPress.' );
+        }
+
+        if ( (int) $term->parent !== $expected_parent_id ) {
+            return new WP_Error( 'UPC_CATEGORY_PARENT_MISMATCH', 'Bound category parent ID does not match WordPress.' );
         }
 
         return $term;
