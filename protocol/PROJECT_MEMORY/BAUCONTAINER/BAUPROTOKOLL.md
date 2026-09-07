@@ -1289,3 +1289,32 @@ Entschiedene Inhalte werden später an ihren autoritativen Hauptquellen gepflegt
 
 BEZUG:
 ARCH-074.
+
+
+### 2026-09-07 – Tresor-Mac-Kit aktualisiert und erneut hart getestet
+
+AUFTRAG:
+Nach Campus-Architekturabschluss den praktischen lokalen Sicherungsweg bis zur Nutzergrenze vorbereiten.
+
+BESTAND:
+Vorhandenes V1-Kit nicht neu erfunden, sondern geprüft und um praktische Mac-/Download-Unterlagen ergänzt.
+
+NEUES KIT:
+`CAMPUS_LOCAL_TRESOR_KIT_20260907.zip`
+SHA-256:
+`74ebe867ddcb3920fe333f3d2bb31a9d7332bc03e0cd6c7a72a99f0a1bf033c6`
+
+DAUERHAFTE ABLAGE:
+`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
+
+TEST:
+- positiver Test → LOCAL_BACKUP_PASS;
+- Recovery negativ → korrekt BLOCKED;
+- Archiv fehlt → korrekt BLOCK.
+
+ERGEBNIS:
+Werkzeug/Downloadkonzept PASS.
+Echter Nutzer-Lokalbackup weiterhin OFFEN, weil die unabhängige physische/local Kopie nur auf dem Nutzer-Datenträger entstehen kann.
+
+TRESOR_PASS:
+weiterhin BLOCKED durch Redundanz-/Rohartefakt-/Recovery-Restpunkte.

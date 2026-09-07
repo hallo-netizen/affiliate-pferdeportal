@@ -1,6 +1,6 @@
 # LOKALES CAMPUS-BACKUP – 1:1-WIEDERAUFBAU
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 STATUS: KONZEPT + GETESTETE WERKZEUGE V1
 
 ## Ziel
@@ -160,3 +160,35 @@ Er ist **kein aktueller Backupstand mehr**, sobald Campus/Branches danach weiter
 
 Regel:
 **Restore-Beweis darf alt sein. Ein 1:1-Backupstand muss frisch sein.**
+
+
+## Downloadpaket 2026-09-07
+
+Mac-Kit:
+`CAMPUS_LOCAL_TRESOR_KIT_20260907.zip`
+
+SHA-256:
+`74ebe867ddcb3920fe333f3d2bb31a9d7332bc03e0cd6c7a72a99f0a1bf033c6`
+
+Dauerhafte Library-Ablage:
+`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
+
+Zusätzlich lokal zu speichern:
+- `CAMPUS_ARCHIV_20260905.part-00`
+- `CAMPUS_ARCHIV_20260905.part-01`
+- `CAMPUS_ARCHIV_20260905.part-02`
+- `CAMPUS_ARCHIV_20260905.part-03`
+- `CAMPUS_ARCHIV_20260905.part-04`
+
+Die fünf Teile enthalten den bereits 38/38 restore-geprüften Roharchivexport.
+
+Ablauf auf dem Mac:
+1. Kit entpacken.
+2. fünf Teile in denselben Ordner legen.
+3. `RESTORE_CAMPUS_ARCHIV.command` ausführen.
+4. Ergebnis `CAMPUS_ARCHIV_RESTORE_PASS` verlangen.
+5. Recovery-Verzeichnis separat/sicher einrichten.
+6. `CAMPUS_LOCAL_TRESOR.command` ausführen.
+7. Nur `LOCAL_BACKUP_PASS` akzeptieren.
+
+Erst der reale Lauf auf dem unabhängigen Nutzer-Datenträger schließt die Redundanzlücke.

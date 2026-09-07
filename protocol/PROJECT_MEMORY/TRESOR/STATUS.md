@@ -1,6 +1,6 @@
 # NOTFALL-TRESOR – STATUS
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 ERGEBNIS:
 `TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
@@ -72,4 +72,28 @@ Bekannter Rohartefakt-Blocker bleibt außerdem:
 Pferde-Design 1.50.472 – finale Plugin-/Master-ZIPs fehlen.
 
 ERGEBNIS BLEIBT:
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
+
+
+## Werkzeug-Nachtest 2026-09-07
+
+Aktuelles Kit:
+`CAMPUS_LOCAL_TRESOR_KIT_20260907.zip`
+
+SHA-256:
+`74ebe867ddcb3920fe333f3d2bb31a9d7332bc03e0cd6c7a72a99f0a1bf033c6`
+
+Erneuter Positiv-/Negativtest:
+- gültiges Test-Git + Archiv + bestätigte Recovery → `LOCAL_BACKUP_PASS` / Exit 0;
+- Recovery nicht bestätigt → `LOCAL_BACKUP_BLOCKED:RECOVERY_NOT_CONFIRMED` / Exit 3;
+- Archivquelle fehlt → `BLOCK: CAMPUS_ARCHIV_SOURCE_MISSING` / Exit 2.
+
+Werkzeuglogik:
+**PASS.**
+
+Nutzer-Lokalbackup:
+**OFFEN.**
+Es zählt erst, wenn Kit + fünf Archivteile tatsächlich auf einem unabhängigen lokalen Speicher liegen und dort geprüft wurden.
+
+Ergebnis bleibt:
 `TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`

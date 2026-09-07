@@ -1,7 +1,7 @@
 # NOTFALL-TRESOR – START_HERE
 
-STAND: 2026-09-05
-STATUS: EXTERNER GIT-/METADATEN-PREPASS VORHANDEN / ROHARCHIV-REDUNDANZ BLOCKIERT TRESOR_PASS
+STAND: 2026-09-07
+STATUS: LOKALES BACKUP-KIT AKTUELL / NUTZER-LOKALTEST OFFEN / TRESOR_PASS WEITER BLOCKED
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -68,3 +68,26 @@ Verbindlicher lokaler Sicherungsweg:
 `LOKALES_BACKUP_KONZEPT.md`
 
 Der alte PREPASS ist Restore-Beweis, aber nach späteren Campusänderungen kein aktueller 1:1-Snapshot mehr.
+
+
+## Aktuelles Download-Kit 2026-09-07
+
+Aktuelles Mac-Kit:
+`CAMPUS_LOCAL_TRESOR_KIT_20260907.zip`
+
+Library:
+`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
+
+SHA-256:
+`74ebe867ddcb3920fe333f3d2bb31a9d7332bc03e0cd6c7a72a99f0a1bf033c6`
+
+Das Kit enthält:
+- Ein-Klick-Backupwerkzeug;
+- Restorewerkzeug für die fünf Roharchivteile;
+- Recovery-Vorlage;
+- Mac-Startanleitung;
+- Download-Checkliste;
+- Testbeleg.
+
+Nächster echter Schritt:
+Kit + fünf Archivteile auf einen unabhängigen lokalen Datenträger herunterladen und dort Restore-/Hashprüfung ausführen.
