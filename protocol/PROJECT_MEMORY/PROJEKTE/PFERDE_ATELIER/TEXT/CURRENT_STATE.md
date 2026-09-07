@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: FROZEN REPAIR / STEP 03 MERGED / REALTEST PENDING
+STATUS: FROZEN REPAIR / STEP 04 PR126 CANDIDATE
 
 ## AUTORITÄT
 
@@ -181,3 +181,20 @@ PR #155 merged:
 
 Bis zum Realtest-Ergebnis:
 kein Step 04.
+
+
+## STEP 03 REALTEST
+
+Erster Blocker bleibt:
+`BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`
+
+Kein Rückschritt.
+
+## STEP 04
+
+PR #126 – realen PPM-Handoff in Current Action exponieren.
+Kandidat:
+`988498c76b02b33ecd1ede5c986454ca55c2ba07`
+
+4/4 geänderte Dateien exakt Zielstand.
+Kein Step 05 vor Realtest.
