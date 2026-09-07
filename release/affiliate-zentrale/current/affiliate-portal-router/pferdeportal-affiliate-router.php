@@ -3074,7 +3074,36 @@ JS;
     private function select_campaign_for_slot_position($context, $slot_type, $position = 1) {
         $position = max(1, min(2, (int) $position));
         $rank_context = is_array($context) ? $context : array();
-        $rank_context['banner_distribution_position'] = $position;
+
+        if ($this->banner_distribution_slot($slot_type)) {
+            $rank_context['banner_distribution_position'] = $position;
+            $candidates = $this->ranked_campaigns_for_slot($rank_context, $slot_type);
+            if ($position === 1) {
+                return $candidates[0] ?? null;
+            }
+
+            // Position 2 receives its own weighted decision, but must never
+            // repeat the banner already selected for position 1.
+            $first_context = $rank_context;
+            $first_context['banner_distribution_position'] = 1;
+            $first_candidates = $this->ranked_campaigns_for_slot($first_context, $slot_type);
+            $first_campaign = is_array($first_candidates[0]['campaign'] ?? null) ? $first_candidates[0]['campaign'] : array();
+            $first_key = absint($first_campaign['post_id'] ?? 0) > 0
+                ? 'post:' . absint($first_campaign['post_id'])
+                : 'id:' . sanitize_key((string) ($first_campaign['id'] ?? ''));
+
+            foreach ($candidates as $candidate) {
+                $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
+                $candidate_key = absint($campaign['post_id'] ?? 0) > 0
+                    ? 'post:' . absint($campaign['post_id'])
+                    : 'id:' . sanitize_key((string) ($campaign['id'] ?? ''));
+                if ($candidate_key !== '' && $candidate_key !== $first_key) {
+                    return $candidate;
+                }
+            }
+            return null;
+        }
+
         $candidates = $this->ranked_campaigns_for_slot($rank_context, $slot_type);
         return $candidates[$position - 1] ?? null;
     }
