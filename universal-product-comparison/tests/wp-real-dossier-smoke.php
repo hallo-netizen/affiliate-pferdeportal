@@ -195,6 +195,16 @@ $child_term = wp_insert_term(
 );
 upc_real_assert( ! is_wp_error( $child_term ), 'create bound flat comparison category for draft smoke' );
 
+$pferde_config = UPC_Project_Config::load_publishing( 'pferde-atelier' );
+upc_real_assert( ! is_wp_error( $pferde_config ), 'load hash-bound Pferde Atelier publishing config' );
+upc_real_assert( isset( $pferde_config['category_map']['regendecken'] ), 'Pferde Atelier binds regendecken category' );
+$pferde_reg = $pferde_config['category_map']['regendecken'];
+upc_real_assert( 11 === (int) $pferde_reg['term_id'], 'Pferde Atelier binds exact live term ID 11' );
+upc_real_assert( 'Vergleich Regendecken' === $pferde_reg['name'], 'Pferde Atelier binds exact live category name' );
+upc_real_assert( 'pferdedecken-regendecken-vergleich' === $pferde_reg['slug'], 'Pferde Atelier binds exact live category slug' );
+upc_real_assert( 0 === (int) $pferde_reg['expected_parent_id'], 'Pferde Atelier binds real flat taxonomy parent' );
+upc_real_assert( empty( $pferde_reg['create_if_missing'] ), 'Pferde Atelier existing live category may not be auto-created' );
+
 $wp_draft = upc_wordpress_draft();
 upc_real_assert( ! is_wp_error( $wp_draft ), 'WordPress draft materializer available' );
 
