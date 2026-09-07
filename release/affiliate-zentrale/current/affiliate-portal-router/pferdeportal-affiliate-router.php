@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.3
+ * Version: 6.72.4
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -45,7 +45,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.3';
+    const VERSION = '6.72.4';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -7957,8 +7957,8 @@ JS;
             && absint($automation_settings['batch_size'] ?? 0) <= 1000
             && absint($automation_settings['time_budget'] ?? 0) >= 10
             && absint($automation_settings['time_budget'] ?? 0) <= 25
-            && absint($automation_settings['request_timeout'] ?? 0) >= 15
-            && absint($automation_settings['request_timeout'] ?? 0) <= 45;
+            && absint($automation_settings['request_timeout'] ?? 0) >= 60
+            && absint($automation_settings['request_timeout'] ?? 0) <= 600;
         $this->add_check($checks, 'Automatisierung', 'Sichere Verarbeitungsgrenzen', $automation_limits_ok ? 'PASS' : 'FAIL', $automation_limits_ok ? 'Paket-, Zeit- und Downloadgrenzen gültig.' : 'Mindestens eine Sicherheitsgrenze liegt außerhalb des zulässigen Bereichs.');
         $this->add_check($checks, 'Automatisierung', 'Automatische Synchronisierung', empty($automation_settings['enabled']) ? 'PASS' : 'WARN', empty($automation_settings['enabled']) ? 'Automatisierung ist AUS.' : 'Automatisierung ist aktiv; nur nach bestätigtem Live-Test zulässig.');
         $awin_settings = $this->network_settings('awin');
