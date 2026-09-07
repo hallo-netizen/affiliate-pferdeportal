@@ -112,6 +112,7 @@ Neue Büros werden nur mit dieser Trennung freigegeben:
 
 Vor Freigabe negativ prüfen:
 - keine dynamischen Versionsangaben in START_HERE als zweite Wahrheit;
+- keine dynamischen CURRENT-/Head-/Manifestangaben in Masterdateien-Inventaren; Inventare verweisen dafür nur auf CURRENT_STATE/Governance;
 - keine Fehlerhistorie in HOBBYRAUM;
 - keine ausführliche Fehlerkopie im zentralen Fehlerregister.
 
