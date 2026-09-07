@@ -1370,3 +1370,25 @@ Reine Logiktests werden nicht unnötig zu Browser-/HTTP-Tests aufgebläht.
 
 BEZUG:
 ARCH-078 / PV-PLAN-019.
+
+
+### 2026-09-07 – Produktvergleich-Routing auf aktuelle V1-Fachgrenze nachgezogen
+
+AUSLÖSER:
+Die Abschluss-Negativprüfung fand außerhalb des Produktvergleichsbüros noch alte Wegweiser mit der früheren Annahme `Produktvergleich -> Übergabe an TEXT`.
+
+BETROFFEN:
+- `HANDLUNGSVERZEICHNIS.md`;
+- `HAUPTPFOERTNER.md`;
+- `PROJEKTE/PFERDE_ATELIER/START_HERE.md`.
+
+KORREKTUR:
+Produktvergleich/Variantenvergleich einschließlich gebundenem deterministischem WordPress-DRAFT routet vollständig in das Büro PRODUKTVERGLEICH.
+TEXT/STARTMASTER bleibt für seine normalen Beitragsarten separat und ist keine V1-Laufzeitabhängigkeit des Produktvergleichs.
+
+NEGATIV:
+Keine Versions-, Fehler-, Ziel- oder NEXT-ACTION-Daten in den Wegweisern ergänzt.
+Dynamischer Stand bleibt ausschließlich in CURRENT_STATE/HOBBYRAUM.
+
+BEZUG:
+PV-PLAN-019.
