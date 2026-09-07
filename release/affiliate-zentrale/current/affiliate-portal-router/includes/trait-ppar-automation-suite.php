@@ -1503,6 +1503,17 @@ trait PPAR_Automation_Suite_Trait {
             $this->automation_awin_field($row, array('sale_price','search_price','current_price','price')),
             $this->automation_awin_field($row, array('currency'), 'EUR')
         );
+        // The generic Awin schema has no universal marketplace-seller field.
+        // OTTO requires the concrete seller on specific product advertising.
+        // Bind the exact real OTTO feed column through this explicit hook after
+        // inspecting the account feed; until then the value remains empty and
+        // OTTO automatic publication stays fail-closed.
+        $seller_name = sanitize_text_field((string) apply_filters(
+            'ppar_affiliate_awin_product_seller',
+            '',
+            $row,
+            $advertiser_id
+        ));
         return array(
             'creative_id' => $external,
             'creative_type' => 'product',
@@ -1516,6 +1527,7 @@ trait PPAR_Automation_Suite_Trait {
             'price' => $price_currency['price'],
             'currency' => $price_currency['currency'],
             'availability' => $availability,
+            'seller_name' => $seller_name,
             'brand' => $brand,
             'product_type' => $category,
             'google_product_category' => $google,
@@ -1638,6 +1650,13 @@ trait PPAR_Automation_Suite_Trait {
             } else {
                 $counts['failed']++;
             }
+        }
+        // Automation imports must enter the same verified asset/output pipeline as
+        // manual creative imports. Otherwise Awin/ADCELL products remain stranded
+        // as unverified library rows and can never reach automatic target/slot planning.
+        if (($counts['imported'] > 0 || $counts['updated'] > 0)
+            && method_exists($this, 'creative_library_schedule_asset_verification')) {
+            $this->creative_library_schedule_asset_verification(10);
         }
         return $counts;
     }
