@@ -328,3 +328,23 @@ Offene Punkte:
 
 Grenze:
 LeadScout als Produkt/Plugin bleibt im Plugin-Fach; Preislogik im Preis-Fach; Verkaufsunterlagen im Präsentations-/Werbebereich.
+
+
+## DESIGN – lokale Miniänderung / Elementtausch
+
+Aktion:
+Im Pferde-Atelier-DESIGN soll ein vorhandenes Element lokal verschoben oder mit einem direkt benachbarten Element getauscht werden.
+
+Verbindlicher Weg:
+`PROJEKTE/PFERDE_ATELIER/DESIGN/HOBBYRAUM.md`
+→ `MINIMAL_PATCH_JOB_CURRENT.json`
+→ `MINIMAL_PATCH_RUNNER.py`.
+
+HARD RULE:
+**Kein manueller Patchweg.**
+
+Der Runner ist fail-closed und darf nur den im Job definierten minimalen Tausch auf der exakt hashgebundenen Baseline durchführen.
+
+Kein neuer Plugin-Versionszähler pro Versuch.
+Im Hobbyraum existiert nur `DESIGN_HOBBYRAUM_CANDIDATE.zip`.
+Neue Releaseversion erst nach echtem LIVE-PASS.
