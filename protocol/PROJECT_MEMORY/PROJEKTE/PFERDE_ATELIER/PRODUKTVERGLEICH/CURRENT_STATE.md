@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: V1-PROTOTYP TECHNISCH PASS / ERSTER PLUGINTEST VORBEREITUNG
+STATUS: V1-PROTOTYP + ZIP-INSTALLATIONSTEST PASS / MANUELLER WP-TEST BEREIT
 
 ## AUTORITÄT DIESER DATEI
 
@@ -80,6 +80,19 @@ Geprüfter Head:
 Workflow:
 `Product Knowledge WordPress DB Smoke` -> PASS.
 
+Erster echter ZIP-Installationssmoke:
+- Lauf `34136786494` -> PASS;
+- saubere Plugin-ZIP-Struktur -> PASS;
+- `universal-product-knowledge` per WordPress ZIP installiert + aktiviert -> PASS;
+- `universal-product-comparison` danach installiert + aktiviert -> PASS;
+- derselbe Real-WordPress/MySQL-Gesamtlauf -> PASS;
+- Publish-Sperre bleibt PASS.
+
+Finaler Branch nach Entfernen aller temporären Workflow-Dateien:
+`38ae1137b5d90d64d28b3f02fc31b85f00ee8375`.
+
+`Pferde Atelier Immutable Base Hardlock` -> PASS.
+
 Belegt:
 - Universal Product Knowledge WordPress/MySQL-Schema + Positiv-/Negativtests;
 - Produkt- und Variantenvergleichsregeln;
@@ -144,4 +157,4 @@ Kurzform:
 ## NÄCHSTER SCHRITT
 
 Siehe ausschließlich `HOBBYRAUM.md`:
-**ersten installierbaren Plugintest vorbereiten.**
+**manuellen WordPress-Test mit den bereits ZIP-geprüften Plugins durchführen.**
