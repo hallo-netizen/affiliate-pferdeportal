@@ -1070,3 +1070,22 @@ ZIP:
 `universal-product-comparison-0.2.3-prototype.zip`
 SHA-256:
 `9b9a3c86fd2c7d82ce60a49d62df0506e223bf6c457b95a4ace7e4c61a9d1efd`
+
+
+## PV-PLAN-018 – Hauptmenü muss im echten WP-Admin-Lifecycle geprüft werden
+
+STAND: 2026-09-07.
+
+BEFUND:
+Der 0.2.3-Menütest war ein falscher Positivtest, weil er `register_menu()` direkt aufrief. Er bewies nicht, dass der Menüpunkt in einer real gerenderten WordPress-Adminseite erscheint.
+
+KORREKTUR:
+Version 0.2.4 registriert den Admin-Hook ohne Bootstrap-`is_admin()`-Abhängigkeit und setzt den Top-Level-Menüpunkt bei `admin_menu` Priorität 99999.
+
+BELEG:
+Run 34154550626 PASS mit echtem WordPress-HTTP-Server, echtem Admin-Login, gerenderter `/wp-admin/`-Sidebar und erfolgreichem Abruf der echten Menüseite. PV-REG-001-Drafttest bleibt PASS.
+
+ZIP:
+`universal-product-comparison-0.2.4-prototype.zip`
+SHA-256:
+`b74e3c17eb2cb71ebc4c15aab5da6e4133379b124804c920080a33d20fc78054`
