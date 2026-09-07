@@ -1,0 +1,2 @@
+NEGATIVE SELFTEST 2 ONLY
+Must be blocked by trusted hardlock-base while TEXT lock is FIX_FORBIDDEN.
