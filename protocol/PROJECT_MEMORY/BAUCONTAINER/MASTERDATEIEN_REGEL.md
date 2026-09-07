@@ -71,3 +71,26 @@ Existenz, Funktion und Herkunft bleiben inventarisiert.
 Erst nach vollständiger Zuordnung und Referenzprüfung.
 
 UNGEKLÄRT = NICHT ANFASSEN.
+
+
+## Keine zweite CURRENT-Wahrheit
+
+Masterdateien-Inventare sind **Inventare, keine laufenden Statusspeicher**.
+
+Sie dürfen historische Versionen, Heads, Hashes, Live-Belege und damalige Statusdateien inventarisieren, aber niemals so formulieren, dass daraus eine zweite aktuelle Fach-/Release-Wahrheit entsteht.
+
+Verboten in einem Inventar als eigene aktuelle Aussage:
+- „aktueller Statusbeleg“ für eine datierte Altakte;
+- aktueller Branch-Head;
+- aktuelles Manifest;
+- aktueller Blocker/NEXT ACTION;
+- aktueller Releasekandidat.
+
+Stattdessen nur Verweis auf:
+- zuständiges `CURRENT_STATE.md`;
+- zuständiges `HOBBYRAUM.md`;
+- technische Originalautorität/Governance.
+
+Negativprüfung bei jeder Inventar-Aktualisierung:
+**Kann ein neuer Chat aus dem Inventar einen anderen aktuellen Stand ableiten als aus CURRENT_STATE/Governance?**
+Wenn ja: BLOCKED und Inventar bereinigen.
