@@ -1376,3 +1376,24 @@ Keine Nutzerkommandos, keine manuellen Teilarchive, keine zusätzlichen Projektd
 
 PASS-GRENZE:
 Eine Datei erscheint erst als gültige `TRESOR_PASS`-Sicherung, nachdem der vollständige Restore aus genau dieser Datei bewiesen ist.
+
+
+## ARCH-082 – Tresor läuft serverseitig, Nutzer bleibt reiner Downloader
+
+WAS:
+Die regelmäßige Ein-Datei-Sicherung wird serverseitig in GitHub vorbereitet.
+Der Nutzer-Mac ist weder Backup-Runner noch Voraussetzung für die Erzeugung.
+
+KISS:
+Ein interner Builder + ein Workflow.
+Für den Nutzer unverändert genau ein Weg:
+`GitHub Releases -> TRESOR_PASS-Datei herunterladen`.
+
+PRÜFREIHENFOLGE:
+Build -> Verschlüsselung -> Wiederentschlüsselung -> Hash-/Git-Restore-Prüfung -> erst danach Release.
+
+WACHSTUMSSCHUTZ:
+Frühere `tresor-*`-Backups werden nicht in neue Backups eingebettet.
+
+GRENZE:
+Produktiv erst nach Bindung von WordPress-Vollbackup, serverseitigem Roharchiv, Recovery-Bundle und Masterpasswort sowie kontrollierter Workflow-Aktivierung.
