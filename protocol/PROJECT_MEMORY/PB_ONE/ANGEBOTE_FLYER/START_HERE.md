@@ -1,14 +1,14 @@
-# PB ONE – ANGEBOTE / FLYER – START_HERE
+# PB ONE – PRÄSENTATION & WERBUNG / ANGEBOTE & FLYER – START_HERE
 
 STAND: 2026-09-07
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Unser gemeinsamer PB-ONE-Arbeitsraum für Angebote, Flyer, Leistungsunterlagen und Außenkommunikation.
+Unser gemeinsamer PB-ONE-Arbeitsraum für Präsentationen, Werbung, Angebote, Flyer, Leistungsunterlagen und Außenkommunikation.
 
 **HIER BIST DU RICHTIG, WENN …**  
-ein Flyer, Angebotsbaustein, Leistungszettel, Kurzpräsentation oder eine Verkaufsunterlage entstehen soll.
+eine Präsentation, Pitch-Unterlage, Musterseite, Flyer, Angebotsbaustein, Leistungsbeschreibung oder sonstige Verkaufs-/Werbeunterlage entstehen soll.
 
 **DU DARFST …**  
 gemeinsam mit Paul lesen, schreiben, Inhalte recherchieren, Leistungen strukturieren, Texte/Claims entwickeln, Varianten vergleichen und fertige Unterlagen erstellen.
@@ -18,6 +18,17 @@ hier programmieren oder aus ungeprüften Ideen verbindliche Leistungsversprechen
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `HOBBYRAUM.md` → bei laufendem Entwurf `../ARBEITSDOKUMENTE/START_HERE.md` → nach Freigabe `UNTERLAGENREGISTER.md`.
+
+## Typische Inhalte
+
+- Unternehmens-/Produktpräsentationen;
+- Vertriebs-Pitch;
+- Musterseiten und Visualisierungen;
+- Flyer / Anzeigen / Werbetexte;
+- Angebotsunterlagen;
+- Leistungsbeschreibungen;
+- externe Produktdarstellungen, z. B. LeadScout;
+- wiederverwendbare PB-ONE-Templates.
 
 ## Rechte
 
