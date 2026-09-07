@@ -309,3 +309,241 @@ Der Vertrieb soll sagen können:
 Und PB ONE muss intern jederzeit wissen:
 
 **„Der Preis deckt Aufwand, Risiko und Marge sauber ab.“**
+
+
+---
+
+## 11. PREISENTWURF V1 – KONKRET
+
+STATUS:
+**ENTWURF – NICHT VERBINDLICH**
+
+MARKTPOSITION:
+Nicht Billiganbieter.
+Klare Pakete für kleine und mittlere Unternehmen, mit schneller Umsetzung und modularen Erweiterungen.
+
+### START – 1.490 € netto
+
+Für kleine lokale Betriebe mit einfachem Leistungsangebot.
+
+Enthalten:
+- Onepager;
+- bis zu 6 Inhaltsabschnitte;
+- responsive Umsetzung;
+- Kontaktweg / Formular;
+- grundlegende technische Einrichtung;
+- SSL;
+- technische Einbindung bereitgestellter Pflicht-/Rechtstexte;
+- Basis-SEO-Struktur;
+- Grundredaktion / KI-gestützter Textentwurf aus Kundendaten;
+- Bildauswahl aus bereitgestelltem Material / vorhandenen Quellen;
+- 2 Korrekturschleifen.
+
+Nicht enthalten:
+individuelle Sonderfunktionen, Shop, umfangreiche Recherche, zusätzliche Landingpages, Mehrsprachigkeit.
+
+### BUSINESS – 2.490 € netto
+
+Für den typischen kleinen/mittleren Unternehmensauftritt.
+
+Enthalten:
+- bis zu 5 Inhaltsseiten;
+- individuelle Seitenstruktur;
+- responsive Umsetzung;
+- Kontaktformular;
+- Referenzen / Bewertungen integrierbar;
+- Basis-SEO je Hauptseite;
+- Grundredaktion / KI-gestützte Textentwürfe;
+- Analytics-/Tracking-Grundeinrichtung, sofern gewünscht und technisch/rechtlich vorgesehen;
+- 2 Korrekturschleifen.
+
+Ziel:
+PB-ONE-Standardprodukt für den überwiegenden Teil normaler Firmenwebsites.
+
+### GROWTH – 3.990 € netto
+
+Für Unternehmen, deren Website aktiv Anfragen und Wachstum unterstützen soll.
+
+Enthalten:
+- bis zu 10 Inhaltsseiten;
+- strategische Seiten-/Conversion-Struktur;
+- lokale SEO-Struktur;
+- bis zu 2 zusätzliche fokussierte Landingpages innerhalb des Gesamtumfangs;
+- Kontakt-/Anfrageführung;
+- Tracking-Grundlage;
+- stärkere redaktionelle Ausarbeitung;
+- 2 Korrekturschleifen.
+
+Sonderfunktionen wie Terminbuchung, CRM, Newsletter oder externe Schnittstellen bleiben Module.
+
+### INDIVIDUELL
+
+Für:
+- Shops;
+- Portale;
+- Mitgliederbereiche;
+- komplexe Migrationen;
+- individuelle Schnittstellen;
+- Sonderlogik;
+- sehr große Inhaltsmengen.
+
+Ablauf:
+Kurzqualifizierung → Expertenberatung → individuelles Angebot.
+
+---
+
+## 12. BAUKASTEN V1 – PREISKANDIDATEN
+
+STATUS:
+**ENTWURF – NICHT VERBINDLICH**
+
+- zusätzliche Standard-Unterseite: 190 €;
+- zusätzliche Conversion-/Landingpage: 290 €;
+- Blog-/News-Bereich einrichten: 290 €;
+- Terminbuchung anbinden: ab 290 €;
+- Newsletter-Anbindung: ab 190 €;
+- Google-Business-Optimierungsmodul: 290 €;
+- Bewertungsintegration: 190 €;
+- zusätzliche Sprache: ab 35 % des Grundpakets;
+- Inhaltsmigration bestehender Website: ab 390 €;
+- Logo-/Branding-Arbeiten: ab 490 €;
+- individuelle Grafik-/Illustrationsleistung: nach Aufwand;
+- zusätzliche technische Schnittstelle: INDIVIDUELL;
+- Shop: INDIVIDUELL.
+
+Regel:
+Jedes Modul erhält vor Freigabe eine feste Leistungsgrenze.
+
+---
+
+## 13. LAUFENDE BETREUUNG V1
+
+### TECH – 49 € / Monat netto
+
+Möglicher Umfang:
+- Hosting-/Betriebsbetreuung, sofern von PB ONE übernommen;
+- SSL;
+- technische Updates;
+- Backups;
+- grundlegende Betriebsüberwachung.
+
+### CARE – 99 € / Monat netto
+
+TECH plus:
+- kleines definiertes Änderungs-/Supportkontingent;
+- z. B. bis 30 Minuten redaktionelle Änderung pro Monat.
+
+### GROWTH CARE – 199 € / Monat netto
+
+CARE plus:
+- größeres definiertes Optimierungs-/Änderungskontingent;
+- regelmäßiger Website-Check;
+- definierte SEO-/Conversion-Weiterentwicklung.
+
+Harte Regel:
+Keine „unbegrenzten Änderungen“.
+
+---
+
+## 14. ALTERNATIVE ABO-MODELLE V1
+
+STATUS:
+**ENTWURF – NOCH ZU KALKULIEREN**
+
+Ziel:
+Niedrigere Einstiegshürde bei gleichzeitig planbarem wiederkehrendem Umsatz.
+
+Kandidat:
+
+### START FLEX
+- Einrichtung: 249 €;
+- 99 € / Monat;
+- Mindestlaufzeit: 24 Monate.
+
+### BUSINESS FLEX
+- Einrichtung: 399 €;
+- 149 € / Monat;
+- Mindestlaufzeit: 24 Monate.
+
+### GROWTH FLEX
+- Einrichtung: 599 €;
+- 229 € / Monat;
+- Mindestlaufzeit: 24 Monate.
+
+Vor Freigabe zwingend klären:
+- Eigentum / Herausgabe der Website nach Mindestlaufzeit;
+- enthaltene Änderungsleistungen;
+- Hosting;
+- Kündigungsfrist nach Mindestlaufzeit;
+- Fremdkosten;
+- Domains;
+- Zahlungsverzug.
+
+---
+
+## 15. ZAHLUNGSLOGIK – EMPFEHLUNG
+
+### Kaufmodell
+
+Empfohlener Standard:
+- 50 % Vorkasse bei Auftrag;
+- 50 % vor Livegang / nach vereinbarter Abnahme.
+
+Alternative für kleine START-Projekte:
+- 100 % Vorkasse gegen kleinen Preisvorteil prüfen.
+
+### Abo
+
+- Einrichtungsbetrag vor Projektstart;
+- erste Monatsrate ab Projektstart oder Livegang verbindlich festlegen;
+- Mindestlaufzeit 24 Monate.
+
+---
+
+## 16. PREISPSYCHOLOGIE
+
+Extern möglichst:
+- START – 1.490 €
+- BUSINESS – 2.490 € **„meistgewählt“**
+- GROWTH – 3.990 €
+- INDIVIDUELL – auf Anfrage
+
+BUSINESS soll bewusst das attraktivste Verhältnis aus Preis und Umfang darstellen.
+
+Keine 20 Zusatzpreise auf der ersten Verkaufsseite.
+Im Erstkontakt:
+Grundpaket wählen → nur relevante Module ergänzen.
+
+---
+
+## 17. MARKTCHECK 2026 – EINORDNUNG
+
+Aktuelle veröffentlichte deutsche Preise zeigen eine sehr breite Spanne.
+
+Beobachtete Beispiele / Marktübersichten:
+- Onepager häufig ungefähr 1.000–2.500 €;
+- kleine Unternehmenswebsites ungefähr 1.500–5.000 € bei kleineren Agenturen/Freelancern;
+- klassische Agenturen liegen bei umfangreicheren Unternehmenswebsites teils deutlich darüber.
+
+Der PB-ONE-Entwurf 1.490 / 2.490 / 3.990 € positioniert sich damit im zugänglichen professionellen Segment und nicht im Billigmarkt.
+
+WICHTIG:
+Marktpreis allein entscheidet nicht.
+Vor Freigabe müssen echte PB-ONE-Zeitaufwände und Zielmargen gegengerechnet werden.
+
+---
+
+## 18. NÄCHSTER INTERNER SCHRITT
+
+Für START, BUSINESS und GROWTH jeweils intern schätzen:
+- Vertrieb / Briefing;
+- Struktur;
+- Text;
+- Design;
+- technische Umsetzung;
+- Korrekturen;
+- QA / Livegang;
+- Projektmanagement.
+
+Danach:
+**realer Stundenbedarf × interner Vollkostensatz → prüfen, ob 1.490 / 2.490 / 3.990 wirtschaftlich tragen.**
