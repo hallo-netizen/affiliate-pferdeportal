@@ -72,6 +72,58 @@ $knowledge->add_fact(UPK_Repository::SUBJECT_PRODUCT, $a, array(
 $bundle_after_update = $compare->get_comparison_bundle($comparison_id);
 upc_assert($bundle_after_update['items'][0]['knowledge']['facts'][0]['fact_value'] === '1050', 'comparison reads updated fact without copy');
 
+$ean_a = $knowledge->add_identifier(
+    UPK_Repository::SUBJECT_PRODUCT,
+    $a,
+    'EAN',
+    '4000000000100'
+);
+$mpn_b = $knowledge->add_identifier(
+    UPK_Repository::SUBJECT_PRODUCT,
+    $b,
+    'MPN',
+    'TEST-BETA-MPN'
+);
+upc_assert(is_int($ean_a) && is_int($mpn_b), 'bind exact Affiliate test identifiers');
+
+$bridge_post_id = wp_insert_post(array(
+    'post_type' => 'post',
+    'post_status' => 'draft',
+    'post_title' => 'Bridge Test',
+    'post_content' => 'Bridge Test',
+), true);
+upc_assert(!is_wp_error($bridge_post_id), 'create Affiliate bridge test post');
+update_post_meta($bridge_post_id, '_upc_comparison_id', (string)$comparison_id);
+
+$exact_requirements = UPC_Affiliate_Bridge::exact_product_requirements(array(), $bridge_post_id, array(), '');
+upc_assert(count($exact_requirements) === 2, 'Affiliate bridge emits one exact requirement per identified comparison subject');
+upc_assert($exact_requirements[0]['identifiers'][0]['type'] === 'EAN', 'Affiliate bridge emits EAN');
+upc_assert($exact_requirements[0]['identifiers'][0]['value'] === '4000000000100', 'Affiliate bridge preserves exact EAN value');
+upc_assert($exact_requirements[1]['identifiers'][0]['type'] === 'MPN', 'Affiliate bridge emits exact MPN');
+upc_assert($exact_requirements[1]['identifiers'][0]['value'] === 'TEST-BETA-MPN', 'Affiliate bridge preserves exact MPN value');
+
+$e = upc_make_product($knowledge, 'Maker E', 'Epsilon', 'boots');
+upc_assert(is_int($e), 'create no-identifier product');
+$no_identifier_comparison = $compare->create_comparison(array(
+    'comparison_key' => 'beta-vs-epsilon',
+    'comparison_type' => 'PRODUCT',
+    'subject_ids' => array($b, $e),
+));
+upc_assert(is_int($no_identifier_comparison), 'create comparison with one unidentified subject');
+
+$no_identifier_post = wp_insert_post(array(
+    'post_type' => 'post',
+    'post_status' => 'draft',
+    'post_title' => 'No Identifier Test',
+    'post_content' => 'No Identifier Test',
+), true);
+upc_assert(!is_wp_error($no_identifier_post), 'create no-identifier bridge test post');
+update_post_meta($no_identifier_post, '_upc_comparison_id', (string)$no_identifier_comparison);
+
+$partial_requirements = UPC_Affiliate_Bridge::exact_product_requirements(array(), $no_identifier_post, array(), '');
+upc_assert(count($partial_requirements) === 1, 'subject without exact identifier produces no Affiliate requirement');
+upc_assert($partial_requirements[0]['identifiers'][0]['value'] === 'TEST-BETA-MPN', 'identified subject remains available without substitute for missing subject');
+
 $reverse = $compare->create_comparison(array(
     'comparison_key' => 'beta-vs-alpha',
     'comparison_type' => 'PRODUCT',
