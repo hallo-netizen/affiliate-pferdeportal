@@ -69,6 +69,19 @@ class UPC_Archive {
                 );
             }
 
+            if ( (string) $bundle['product_group_key'] !== (string) $binding['_product_group_key'] ) {
+                return new WP_Error(
+                    'UPC_ARCHIVE_PRODUCT_GROUP_MISMATCH',
+                    'Published comparison post is assigned to a comparison category for a different product group.',
+                    array(
+                        'post_id' => (int) $post->ID,
+                        'comparison_id' => $comparison_id,
+                        'expected_product_group_key' => $binding['_product_group_key'],
+                        'actual_product_group_key' => (string) $bundle['product_group_key'],
+                    )
+                );
+            }
+
             $comparison_type = strtoupper( (string) $bundle['comparison_type'] );
             if ( ! in_array( $comparison_type, array( UPC_Repository::TYPE_PRODUCT, UPC_Repository::TYPE_VARIANT ), true ) ) {
                 return new WP_Error(
