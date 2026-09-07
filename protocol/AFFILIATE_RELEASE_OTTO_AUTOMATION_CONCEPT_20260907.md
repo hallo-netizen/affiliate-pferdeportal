@@ -268,3 +268,69 @@ Beim Zurücksetzen auf „Automatik“ fällt die Seite sofort wieder in das nor
 Anteile steuern nur zwischen gleich guten Möglichkeiten.  
 Der Mensch repariert Ausnahmen – er betreibt nicht den Normalworkflow.**
 
+## 13. Konkret gebundene Bannerquelle
+
+Die Affiliate-Zentrale besitzt jetzt eine fail-closed Anschlussstelle für einen **realen** Awin-Creative-Bestand:
+
+`ppar_affiliate_awin_static_creatives`
+
+Sie erfindet keine Awin-API. Ein später bestätigter Export/API-/Connectorweg liefert darüber reale Zeilen.
+
+Minimaler Realvertrag pro Banner:
+- `advertiser_id`
+- `creative_id`
+- `title`
+- `image_url`
+- `tracking_url`
+- optional Ziel-URL, Breite, Höhe, Tags, Status.
+
+Pflicht:
+Die Advertiser-ID muss exakt dem aktuell verarbeiteten Awin-Programm entsprechen.
+
+Fail-closed:
+- fremde Advertiser-ID → blockiert;
+- Bild fehlt → blockiert;
+- Tracking fehlt und kann nicht aus einer realen Ziel-URL erzeugt werden → blockiert;
+- ungebundene Quelle → vorhandene Banner werden nicht irrtümlich entfernt.
+
+Für den wichtigen Sonderfall „Quelle ist real gebunden, liefert aber aktuell 0 Banner“ unterstützt der Vertrag ein Envelope:
+`['bound'=>true,'rows'=>[]]`.
+Nur dann darf die bestehende Reconciliation alte Banner kontrolliert zurückziehen.
+
+## 14. Anteil 0 und Mehrfachplätze
+
+`0` bedeutet im automatischen Bannerbetrieb **Ausschluss**, nicht nur „kein Bonus“.
+Eine manuelle Festzuordnung darf als bewusste Reparaturausnahme weiterhin greifen, sofern alle Sicherheitsgates bestehen.
+
+Mehrere Bannerplätze auf derselben Seite erhalten getrennte deterministische Anteilssamen.
+Platz 2 darf das auf Platz 1 gewählte Creative nicht wiederholen.
+
+## 15. Reparatur auf allen Ebenen
+
+Seiten/Unterseiten:
+`Zuordnungen` → Automatik / fest / keine Ausgabe / Vererbung.
+Manuelle Abweichung verlangt Reparaturgrund und speichert letzten Benutzer + Zeitpunkt.
+
+Kategorie-/sonstige Portalziele:
+Die vorhandene Creative-Library-Entscheidung `portal_approve_fixed` kann ein konkretes Creative mit Begründung auf ein reales Portalziel + Slot binden.
+
+Übergreifend:
+Provider-/Partner-/Creative-/Target-/Slot-/Output-Veto sowie globale Notabschaltung bleiben erhalten.
+
+## 16. Direkte Prüfmöglichkeit
+
+Im Repository ohne Docker:
+
+`bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`
+
+Der Lauf:
+1. PHP-Syntaxprüfung der gebundenen Source-Dateien;
+2. statischer OTTO/Awin-/Productwissen-/Banner-Vertrag;
+3. ausführbarer Anteil-/Reparatur-/Source-Behavior-Test.
+
+Der isolierte Docker/Podman-Hobbyraum bleibt zusätzlich verfügbar:
+
+`python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json`
+
+Beide lokalen Wege ersetzen keinen realen WordPress-/MariaDB-/Awin-Livebeleg.
+
