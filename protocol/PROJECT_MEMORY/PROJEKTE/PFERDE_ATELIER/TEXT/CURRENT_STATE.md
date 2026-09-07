@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: FROZEN REPAIR / STEP 03 PR125 CANDIDATE
+STATUS: FROZEN REPAIR / STEP 03 MERGED / REALTEST PENDING
 
 ## AUTORITÄT
 
@@ -172,3 +172,12 @@ Kandidat:
 
 5/5 geänderte Dateien exakt Zielstand.
 Kein Step 04 vor Realtest.
+
+
+## STEP 03 MERGE
+
+PR #155 merged:
+`a9cde12a7d82ada06e88235f0ae7e774a013ac93`
+
+Bis zum Realtest-Ergebnis:
+kein Step 04.
