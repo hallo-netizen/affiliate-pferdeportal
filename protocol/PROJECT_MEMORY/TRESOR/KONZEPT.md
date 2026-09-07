@@ -1,96 +1,60 @@
-# NOTFALL-TRESOR – EINFACHES BACKUPKONZEPT
+# NOTFALL-TRESOR – GITHUB-KOMPLETTBACKUP
 
 STAND: 2026-09-07
-STATUS: KISS-KONZEPT VERBINDLICH
+STATUS: GITHUB-ONLY / VERBINDLICH
 
 ## Ziel
 
-Das Pferde-Atelier muss nach Totalausfall aus genau einem geprüften Sicherungsstand wiederherstellbar sein.
+Aus genau einer aktuellen Sicherungsdatei soll der gesicherte GitHub-Stand des Repositorys
+`hallo-netizen/affiliate-pferdeportal`
+so vollständig wie GitHub ihn exportierbar macht wiederaufbaubar sein.
 
-## Genau drei Inhalte
+## Inhalt
 
-1. **GitHub komplett**
-   - vollständiger Git-Mirror
-   - gesamte Historie
-   - alle Branches und Tags
+### Git vollständig
+- komplette Commit-Historie;
+- alle aktuellen Branches;
+- alle Tags;
+- GitHub-Pull-Request-Refs, damit auch PR-Commits nicht unnötig verloren gehen;
+- Bundle-Manifest und Hashes.
 
-2. **WordPress komplett**
-   - vorhandenes vollständiges WordPress-Backup
-   - Datenbank, Dateien, Uploads, Plugins, Themes, Konfiguration
+### GitHub-Daten
+- Repository-Metadaten;
+- Branch-/Tag-Metadaten;
+- Issues, Kommentare und Events;
+- Pull Requests, Reviews und Review-Kommentare;
+- Releases inklusive Release-Artefakten;
+- Labels und Milestones;
+- Rulesets;
+- Workflows;
+- Deployments;
+- Environments, soweit lesbar;
+- Collaborators, soweit lesbar;
+- Actions-/Webhook-/Variablen-/Secret-Namen-Einstellungen, soweit GitHub sie der Backup-Identität lesbar macht;
+- Wiki-Mirror, falls ein Wiki initialisiert ist.
 
-3. **Projektarchiv komplett**
-   - alle für Wiederaufbau benötigten Roh-/Masterdateien außerhalb von GitHub/WordPress
+## Eine Datei
 
-## Ergebnis
+Nutzerdownload:
+`GITHUB_KOMPLETTBACKUP_YYYY-MM-DD.zip`
 
-Ein verschlüsseltes Paket:
+Die interne GitHub-Actions-Datei darf weitere Manifest-/Hashdateien enthalten; der Nutzer bekommt trotzdem genau einen Download.
 
-`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMMSS.zip.gpg`
+## Prüfung vor Freigabe
 
-Darin:
+Pflicht:
+Git-Bundle erzeugen → Bundle verifizieren → isoliert klonen → `git fsck --full --strict` → Branch-Refs vergleichen → Metadaten prüfen → Release-Artefakte sichern → Archiv erneut lesen.
 
-```
-GITHUB/
-WORDPRESS/
-PROJEKTARCHIV/
-BACKUP_INFO.txt
-```
+## Providergrenze
 
-## Speicherort
+GitHub gibt **Secret-Werte** nicht wieder heraus.
+Diese Werte können deshalb nicht durch einen GitHub-Export rekonstruiert werden.
 
-**Nicht im öffentlichen Projekt-Repository.**
+Außerdem sind einzelne Admin-Einstellungen mit dem normalen `GITHUB_TOKEN` nicht lesbar.
+Solange solche Einstellungen nicht lesbar oder als nicht relevant belegt sind, heißt der Gesamtstand:
+`GITHUB_BACKUP_PREPASS`
+und nicht `GITHUB_KOMPLETT_PASS`.
 
-Jeder gültige Lauf erzeugt gleichzeitig:
+## Scope
 
-1. eine aktuelle geschützte Kopie auf dem WordPress-/Backupserver für den Backend-Downloadknopf;
-2. eine zweite unabhängige Kopie auf einem privaten externen/offsite Speicher.
-
-Ohne erfolgreiche Offsite-Kopie gibt es kein `BACKUP_PASS`.
-
-## Automatik
-
-- einmal pro Woche automatisch;
-- zusätzlich vor größeren Umbauten, sobald der Serverlauf eingebunden ist.
-
-Der Lauf verwendet den bestehenden WordPress-Vollbackupstand und baut keinen zweiten WordPress-Backupmotor.
-
-## WordPress-Backend
-
-Unter **Werkzeuge → Komplettsicherung** steht:
-
-- Status;
-- Datum;
-- Dateigröße;
-- **Komplettsicherung herunterladen**.
-
-Der Button liefert ausschließlich einen Stand mit `BACKUP_PASS` und prüft unmittelbar vor dem Download nochmals SHA-256.
-
-## PASS
-
-`BACKUP_PASS` nur wenn:
-
-- Git-Mirror erstellt und `git fsck` bestanden;
-- WordPress-Vollbackup vorhanden;
-- Projektarchiv vorhanden;
-- Paket verschlüsselt;
-- SHA-256 erzeugt;
-- unabhängige Offsite-Kopie erfolgreich geschrieben.
-
-## Totalausfall
-
-Für die Aussage **„1:1 wiederherstellbar“** reicht ein gebautes Backup allein nicht.
-
-Ein echter leerer Wiederaufbau muss zusätzlich einmal vollständig bestanden werden:
-Backup entschlüsseln → GitHub/Campus wiederherstellen → WordPress wiederherstellen → Projektarchiv prüfen.
-
-Erst danach gilt:
-`TOTALAUSFALL_RESTORE_PASS`.
-
-## Hard Rules
-
-- ein Backupweg;
-- keine Parallelarchitektur;
-- kein öffentliches Ablegen der Datenbank;
-- vorhandene WordPress-Backuptechnik wiederverwenden;
-- Backup nie als Arbeitsquelle;
-- ein fehlendes historisches Einzel-ZIP ist kein automatischer Blocker, wenn der aktuelle funktionsfähige Stand vollständig wiederherstellbar gesichert ist.
+**WordPress, Website-Backup und Projektarchiv gehören nicht in diesen GitHub-Backupauftrag.**
