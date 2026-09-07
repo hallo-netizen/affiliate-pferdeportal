@@ -1,6 +1,6 @@
 # ZENTRALES FEHLERREGISTER
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 ROLLE: **REINER FEHLER-WEGWEISER**
 
 ## EINE FEHLERWAHRHEIT
@@ -41,7 +41,10 @@ Begleitquellen:
 Bereich: AFFILIATE  
 Status: AKTIV
 
-Autoritative Quellen:
+Autoritative aktuelle Fehlerquelle:
+`AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md`
+
+Release-/Governance-Autorität:
 - `control/release-governance/CURRENT_RELEASE.json`
 - `release/affiliate-zentrale/AGENTS.md`
 
