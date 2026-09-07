@@ -1,7 +1,7 @@
 # NOTFALL-TRESOR – START_HERE
 
 STAND: 2026-09-07
-STATUS: EIN-DATEI-ZIEL V3 DEFINIERT / LOKALE AKTIVIERUNG + WORDPRESS-VOLLSTAND OFFEN / TRESOR_PASS BLOCKED
+STATUS: EIN-DATEI V4 TESTVORBEREITET / REALER MAC- + GITHUB- + WORDPRESS-RESTORE OFFEN / TRESOR_PASS BLOCKED
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -123,3 +123,24 @@ Bevorzugter zukünftiger Nutzerweg:
 - lokale Kopie behalten.
 
 Kein alter Mehrdatei-Stand darf dadurch rückwirkend als `TRESOR_PASS` gelten.
+
+
+## Testeinstieg V4
+
+Aktuelles Testkit:
+`CAMPUS_LOCAL_TRESOR_ONEFILE_TESTKIT_20260907_V4.zip`
+
+Dauerhafte Library-Ablage:
+`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
+
+SHA-256:
+`83b80a7108c13d17af9d88b03c6da942e8191432106e786bc06af247cd5bae1d`
+
+Bevorzugte Testfolge:
+1. `TEST_VORBEREITUNG_PRUEFEN.command`;
+2. nur bei `TRESOR_TEST_READY` → `TEST_ALLES.command`;
+3. danach separat `TEST_GITHUB_NEUAUFBAU.command` in einem privaten Test-Repository;
+4. abschließend echter WordPress-Restore in isolierter Umgebung/leerem Ziel.
+
+Harte Grenze:
+Der Produktiv-Campus und das produktive GitHub-Repository werden durch die vorbereiteten Tests nicht gelöscht oder überschrieben.

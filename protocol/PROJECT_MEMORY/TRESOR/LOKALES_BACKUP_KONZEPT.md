@@ -241,3 +241,36 @@ Nach Totalverlust benötigt der Nutzer neben der Recovery-Datei nur das Masterpa
 Aktuelle Grenze:
 Die vollständige WordPress-Quelle ist noch nicht technisch angebunden.
 Daher kann V3 aktuell den Campus kapseln, aber noch keinen echten Gesamt-`TRESOR_PASS` erzeugen.
+
+
+## Testautomatik V4
+
+V4 ersetzt die Automatik nicht durch eine neue Backup-Engine.
+
+Die bestehende Kette wird lediglich geschlossen:
+
+`V2 Snapshot`
+→ `V3/V4 Ein-Datei-Kapsel`
+→ `isolierter Restore-Test`
+→ **nur bei PASS**
+→ `GitHub-Tresor-Release`.
+
+Damit gilt:
+Ein automatischer Upload darf nicht erfolgen, wenn der isolierte Restore-Test fehlschlägt.
+
+Zusätzlicher GitHub-Informationsumfang:
+- Issue-Kommentare;
+- PR-Review-Kommentare;
+- PR-Reviews;
+- Milestones;
+- Release-Artefakte;
+- Deployments soweit verfügbar.
+
+WordPress-Vertrag:
+Ein beliebiger Ordner mit Flag reicht nicht mehr.
+`WORDPRESS_BACKUP_PRUEFEN.command` verlangt Datenbank, vollständiges Dateiarchiv, Manifest und passende Hashes.
+
+Testkit:
+`CAMPUS_LOCAL_TRESOR_ONEFILE_TESTKIT_20260907_V4.zip`
+SHA-256:
+`83b80a7108c13d17af9d88b03c6da942e8191432106e786bc06af247cd5bae1d`.

@@ -126,3 +126,75 @@ Jeder dieser Fälle blockiert:
 Erst ein echter isolierter Wiederaufbau ausschließlich aus der einen Recovery-Datei darf:
 `TRESOR_PASS`
 setzen.
+
+
+## V4-Testmatrix
+
+Vor jedem echten End-to-End-Test muss:
+`TEST_VORBEREITUNG_PRUEFEN.command`
+exakt `TRESOR_TEST_READY` liefern.
+
+### Sicherer lokaler Test
+
+`TEST_ALLES.command` muss:
+- frischen Git-/GitHub-/Campus-Snapshot erzeugen;
+- vollständige Ein-Datei-Kapsel erzeugen;
+- dieselbe Kapsel in ein leeres temporäres Verzeichnis entschlüsseln;
+- Payload-Hashes prüfen;
+- Git aus Bundle neu aufbauen;
+- Git-FSCK durchführen;
+- alle gespeicherten Source-Refs vergleichen;
+- Hauptpförtner im wiederhergestellten Gitbestand nachweisen;
+- Campus-Archivmanifest nachweisen;
+- Pflichtklassen der GitHub-Metadaten nachweisen;
+- Recovery-Bestätigung nachweisen;
+- WordPress-Backupvertrag und Hashes prüfen.
+
+Ergebnis:
+`TRESOR_LOCAL_ONEFILE_TEST_PASS`.
+
+### Echter GitHub-Neuaufbau
+
+`TEST_GITHUB_NEUAUFBAU.command` darf ausschließlich ein separates privates Test-Repository verwenden.
+
+Pflicht:
+- produktives Repository unangetastet;
+- neues Test-Repository vorher nicht vorhanden;
+- Push aus der Recovery-Kapsel;
+- erneuter Clone aus GitHub;
+- Vergleich aller Heads und Tags mit dem gesicherten Original.
+
+Ergebnis:
+`GITHUB_RESTORE_TEST_PASS`.
+
+### GitHub-Informationsarchiv V4
+
+Pflichtklassen umfassen zusätzlich:
+- Issue-Kommentare;
+- PR-Review-Kommentare;
+- PR-Reviews;
+- Milestones;
+- Release-Artefakte;
+- Deployments soweit exportierbar.
+
+### WordPress
+
+Ein vollständiger WordPress-Teststand muss mindestens enthalten:
+- `database.sql.gz`;
+- `wordpress-files.tar.gz`;
+- `WORDPRESS_MANIFEST.json`;
+- `WORDPRESS_COMPLETE.flag`.
+
+`WORDPRESS_BACKUP_PRUEFEN.command` muss PASS liefern.
+
+Ein XML-Export allein reicht weiterhin nicht.
+
+### Kryptografie
+
+Der echte Mac-Test muss zusätzlich beweisen:
+- 7-Zip AES-256/Header-Verschlüsselung erzeugt die Kapsel;
+- falsches Passwort blockiert;
+- beschädigte Kapsel blockiert;
+- korrektes Masterpasswort entschlüsselt und verifiziert.
+
+Ohne diesen realen Kryptotest kein End-to-End-`TRESOR_PASS`.

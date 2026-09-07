@@ -182,3 +182,47 @@ Fail-closed:
 Technische Aktivierung auf dem Nutzer-Mac:
 OFFEN.
 Der private GitHub-Tresor wird erst durch den einmaligen lokalen Setup-Schritt tatsächlich angelegt.
+
+
+## Testvorbereitung V4 – 2026-09-07
+
+Kit:
+`CAMPUS_LOCAL_TRESOR_ONEFILE_TESTKIT_20260907_V4.zip`
+
+SHA-256:
+`83b80a7108c13d17af9d88b03c6da942e8191432106e786bc06af247cd5bae1d`
+
+V3-Lücken vor Test erkannt:
+1. macOS-Automatik erzeugte nur V2-Snapshot, nicht die vollständige V3-Ein-Datei-Kette;
+2. GitHub-Informationsarchiv enthielt noch nicht Issue-Kommentare, PR-Reviews/-Review-Kommentare, Milestones und Release-Artefakte;
+3. kein einzelner isolierter Restore-Prüfer kontrollierte Kapsel + Git + Campus + Rohakten + Recovery + WordPress-Vertrag zusammen.
+
+V4 behebt diese Testlücken.
+
+Zusätzlich vorbereitet:
+- `TEST_VORBEREITUNG_PRUEFEN.command`;
+- `TEST_ALLES.command`;
+- `TEST_ONEFILE_ISOLIERT.command`;
+- `TEST_GITHUB_NEUAUFBAU.command`;
+- `WORDPRESS_BACKUP_PRUEFEN.command`;
+- `WORDPRESS_BACKUP_VERSIEGELN.command`;
+- Vollautomatik = bauen → isoliert prüfen → nur danach hochladen.
+
+Interne Positiv-/Negativbelege:
+- Shell-Syntax aller V4-Kommandos → PASS;
+- synthetisches Git mit mehreren Branches + Tag → Mirror/Bundle/Restore/Refvergleich/FSCK PASS;
+- WordPress-Testbackup → PASS;
+- manipulierte WordPress-Datenbank → korrekt BLOCK;
+- Ein-Datei-Kontrollfluss mit Test-Kryptografie-Mock → Build + isolierter Restore PASS;
+- fehlendes WordPress → korrekt `BLOCKED_FOR_TRESOR_PASS`;
+- beschädigte Kapsel → korrekt BLOCK.
+
+Nicht behauptet:
+Die echte AES-256-7z-Verschlüsselung wurde in dieser Prüfmaschine nicht End-to-End ausgeführt, weil dort kein 7-Zip verfügbar ist.
+
+Reale nächste Abnahme:
+Nutzer-Mac + echtes 7-Zip + echtes Masterpasswort + echter GitHub-Zugang + vollständiges Recovery + vollständiger WordPress-Backupstand.
+
+ERGEBNIS BLEIBT:
+`TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
+bis die realen externen Voraussetzungen und Restore-Abnahmen erfüllt sind.

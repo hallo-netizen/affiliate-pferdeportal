@@ -1434,3 +1434,50 @@ BLOCKER:
 
 TRESOR_STATUS:
 weiterhin FAIL/BLOCKED.
+
+
+### 2026-09-07 – Ein-Datei-Tresor V4 vollständig zum Realtest vorbereitet
+
+AUFTRAG:
+Alle nicht-destruktiven Vorbereitungen für den echten Katastrophen-/Restore-Test abschließen.
+
+GEFUNDENE V3-LÜCKEN:
+- Automatik stoppte praktisch nach dem V2-Snapshot;
+- GitHub-Informationsarchiv war für Kommentare/Reviews/Release-Artefakte noch zu schmal;
+- kein einheitlicher isolierter Kapsel-Restore-Test;
+- WordPress-`COMPLETE.flag` war als Vollständigkeitsbeweis zu schwach.
+
+KISS-FIX:
+Keine neue Backup-Engine.
+Bestehende V2/V3-Kette nur vervollständigt und härter geprüft.
+
+V4:
+- Vollautomatik: Build → isolierter Restore → erst dann Upload;
+- Source-Refs dauerhaft im Snapshot;
+- Git-FSCK;
+- zusätzliche GitHub-Metadaten;
+- Release-Artefakte;
+- WordPress-Hashvertrag;
+- Preflight;
+- isolierter Ein-Datei-Restore;
+- separates privates GitHub-Restore-Testskript.
+
+KIT:
+`CAMPUS_LOCAL_TRESOR_ONEFILE_TESTKIT_20260907_V4.zip`
+SHA-256:
+`83b80a7108c13d17af9d88b03c6da942e8191432106e786bc06af247cd5bae1d`
+
+INTERN GETESTET:
+- Syntax PASS;
+- synthetischer Multi-Ref-Git-Restore PASS;
+- WordPress positiv PASS;
+- WordPress manipuliert korrekt BLOCK;
+- Ein-Datei-Kontrollfluss positiv PASS;
+- WordPress fehlt korrekt BLOCKED;
+- beschädigte Kapsel korrekt BLOCK.
+
+NICHT VORGETÄUSCHT:
+Echter 7-Zip-AES-Lauf und echter GitHub-/WordPress-Neuaufbau brauchen die reale Nutzer-/Providerumgebung.
+
+BEZUG:
+ARCH-080; BAU-036.

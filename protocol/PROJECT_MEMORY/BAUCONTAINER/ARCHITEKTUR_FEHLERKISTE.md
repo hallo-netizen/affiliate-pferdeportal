@@ -750,3 +750,38 @@ Inventar darf keinen aktuellen Head, kein aktuelles Manifest, keinen aktuellen B
 
 BEZUG:
 ARCH-079.
+
+
+## BAU-036 – V3-Testkette war noch nicht geschlossen
+
+STATUS: CLOSED IM TESTKIT / REALE ABNAHME OFFEN
+
+KURZ:
+V3 konnte eine Ein-Datei-Kapsel bauen und hochladen, aber der automatische Zeitplan lief noch nur über V2. Außerdem fehlten einzelne GitHub-Informationsklassen und ein gemeinsamer isolierter Restore-Prüfer.
+
+RISIKO:
+Eine Datei hätte automatisiert bereitgestellt werden können, ohne dass genau diese Datei vorher vollständig isoliert wiederhergestellt und geprüft worden wäre.
+
+KISS-FIX:
+V4 schließt nur die vorhandene Kette:
+Build → isolierter Restore-Test → erst bei PASS Upload.
+
+ERGÄNZT:
+- Source-Refs + Git-FSCK;
+- Issue-Kommentare;
+- PR-Reviews/-Kommentare;
+- Milestones;
+- Release-Artefakte;
+- Deployments;
+- WordPress-Hashvertrag;
+- Preflight und eindeutige PASS/BLOCKED-Ausgaben.
+
+POSITIV/NEGATIV:
+Interner Testlauf PASS; manipulierte/fehlende Eingaben blockieren wie vorgesehen.
+
+STATUSGRENZE:
+CLOSED hinsichtlich Testlogik.
+Reale Endabnahme auf Nutzer-Mac/GitHub/WordPress bleibt offen und darf nicht als `TRESOR_PASS` bezeichnet werden.
+
+BEZUG:
+ARCH-080.
