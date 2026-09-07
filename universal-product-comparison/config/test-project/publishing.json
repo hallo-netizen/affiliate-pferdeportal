@@ -6,7 +6,8 @@
     "regendecken": {
       "name": "Vergleich",
       "slug": "regendecken-vergleich",
-      "parent_slug": "regendecken"
+      "expected_parent_id": 0,
+      "create_if_missing": false
     }
   }
 }
