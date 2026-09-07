@@ -1,7 +1,7 @@
 # AFFILIATE – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: OTTO-AUTOMATISIERUNG + PRODUCTWISSEN-EXACT + ANTEILSGESTEUERTE BANNERVERTEILUNG STRUKTURELL IMPLEMENTIERT / REALDATEN + REALE BANNERQUELLE OFFEN
+STATUS: OTTO-AUTOMATISIERUNG + PRODUCTWISSEN-EXACT + BANNERVERTEILUNG STRUKTURELL IMPLEMENTIERT / CURRENT-SOURCE STATIC PASS / BOUND CHECK + REALDATEN OFFEN
 
 ## AUTORITÄT
 
@@ -62,6 +62,9 @@ Strukturell umgesetzt:
 - kein Ersatzmodell;
 - Preis/Bestand/Verkäufer verändern Freshness;
 - Artikelpläne werden nach Verifikationswellen neu bewertet.
+- Joined-Awin-Programmliste und offizielle Produktfeedliste werden zu Beginn eines neuen Automationszyklus aktualisiert.
+- Bei Refreshfehler bleibt Last-Known-Good erhalten.
+- explizit `allow_local` + aktuell `joined` Programme können ohne vorhandenen Partner-Snapshot selbstständig in die Automation starten.
 
 ## Vollautomatische Bannerverteilung
 
@@ -149,7 +152,7 @@ Branch:
 `affiliate-release-current`
 
 HEAD:
-`df616a8cc6690483538116dc9c57e32028b15ddf`
+`d24413db17d97ee49ce1f6f04413dad653903357`
 
 Aktiver Kandidat:
 **6.72.1**
@@ -158,33 +161,38 @@ Source-Dateien:
 26
 
 Source-Manifest SHA-256:
-`b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4`
+`680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf`
 
 Governance Generation:
-**15**
+**16**
 
 Release:
 **NICHT FREIGEGEBEN**
 
 ## Prüfstand
 
-PASS:
-- statische Current-Source-Prüfung der zentralen OTTO-ID;
-- statische Prüfung der Anteilskonfiguration;
+CURRENT-SOURCE STATIC PASS:
+- zentrale OTTO-ID;
+- Productwissen Exact Match / kein Ersatz;
+- Verkäufer-Fail-Closed;
 - Relevanz vor Quote;
-- deterministische Wochenverteilung;
-- automatische Normalisierung bei fehlenden Quellen;
-- alle realen Bannerplatzfamilien eingebunden;
-- manuelle Reparaturinstanz vorhanden;
-- manuelle Reparatur greift vor Artikelplan-Automatik;
-- Digistore24-Anteil 0;
-- Productwissen-Exact-Logik bleibt getrennt.
+- Anteil 0 = automatische Sperre;
+- deterministische Mehrfachplatzverteilung ohne Creative-Dublette;
+- manuelle Reparatur vor Automatik + Begründung/Benutzer/Zeit;
+- reale Awin-Creative-Anschlussstelle fail-closed;
+- Joined-Programmliste wird vor neuem Awin-Zyklus aktualisiert;
+- offizielle Produktfeedliste wird vor neuem Awin-Zyklus aktualisiert;
+- Refreshfehler bewahrt Last-Known-Good;
+- explizit freigegebene + aktuell joined Awin-Programme starten ohne Snapshot-Voraussetzung.
 
 Evidence:
-`release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt`
+- `release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt`
+- `release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt`
 
-Noch **kein** exakter Hobbyraum-Runner-PASS in diesem Chat.
-Der gebundene Test wurde aktualisiert, aber der vorgesehene Docker/Podman-Lauf konnte in der aktuellen Laufzeit nicht ausgeführt werden.
+OFFEN:
+- exakter aktueller Repo-Checkout-Lauf `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`;
+- alternativ isolierter Container-Hobbyraum;
+- frühere lokale Behavior-PASS-Belege gelten nach der letzten Source-Änderung nicht als Current-Source-PASS und wurden entsprechend als stale markiert.
 
 ## Real/LIVE noch offen
 
