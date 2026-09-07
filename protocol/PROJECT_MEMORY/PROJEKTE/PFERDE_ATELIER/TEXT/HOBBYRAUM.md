@@ -26,9 +26,9 @@ ausschließlich die HARD RULE Goldmaster-Rekonstruktion in der festgelegten Reih
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
-MAIN_SHA: f14ccf187b94c4beab9a86d0c69144f792ba2f64
-ACTIVE_BLOCKER: HOBBYROOM_ADMIN_ACTIVATION_REQUIRED
-PLAN_PHASE: HARDEN_HOBBYROOM_ADMIN_ACTIVATION
+MAIN_SHA: 457f33a09751db3acf78246ee394a59141d94d15
+ACTIVE_BLOCKER: HOBBYROOM_RULESET_RESTORE_REQUIRED
+PLAN_PHASE: HARDEN_HOBBYROOM_RESTORE_REQUIRED_CHECK
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_HARDEN_HOBBYROOM;2_COPY_GOLDMASTER;3_REAPPLY_MANDATORY_CHANGES_ONE_BY_ONE;4_REAL_TEST_AFTER_EACH_CHANGE
 CANDIDATE_BRANCH: NONE
@@ -49,11 +49,10 @@ END_HOBBYROOM_WORK_LOCK_V1
 Bedeutung:
 Solange `STATUS=FIX_FORBIDDEN` oder ein Pflichtcheck nicht PASS ist, gibt es **keine Integrationsfreigabe**.
 
-Security-PR #137 ist technisch vorbereitet und auf current main synchronisiert.
-Aktueller Security-Head: `8b32294e861d97f009fa68fe1c61e8fe9a30a81b`.
-Prüfung: `hardlock=SUCCESS`; `hardlock-base=FAIL` ausschließlich an der absichtlichen Immutable-Security-Selbstschutzgrenze.
-Aktiver Ruleset: `Pferde Atelier Main Hardlock` / ID `21788951`; `bypass_actors=[]`; aktueller GitHub-Zugang `current_user_can_bypass=never`.
-Daher ist zur einmaligen Aktivierung eine Repository-Admin-Wartung nötig. Bis dahin bleibt `FIX_FORBIDDEN`.
+Security-PR #137 ist **MERGED** auf current main `457f33a09751db3acf78246ee394a59141d94d15`.
+Der eingebaute `HOBBYROOM_WORK_LOCK_V1` besitzt einen Positiv-/Negativ-Selbsttest `PASS 9/9`.
+Noch offen: Im Ruleset `Pferde Atelier Main Hardlock` / ID `21788951` ist aktuell nur `hardlock` Pflichtcheck; `hardlock-base` muss nach der einmaligen Wartung wieder als Pflichtcheck hinzugefügt werden.
+Bis dieser äußere Schutz wieder aktiv ist, bleibt `FIX_FORBIDDEN`.
 
 ## HARD RULE – GOLDMASTER-REKONSTRUKTION
 
@@ -126,7 +125,7 @@ LanguageTool-Rebind-Branch:
 **PARKPLATZ / NICHT INTEGRIEREN**
 
 Aktueller Planpunkt:
-**1 – HOBBYRAUM TECHNISCH DICHTMACHEN / ADMIN-AKTIVIERUNG AUSSTEHEND**
+**1 – HOBBYRAUM TECHNISCH DICHTMACHEN / NUR RULESET-RESTORE AUSSTEHEND**
 
 Aktuelle Entscheidung:
 **Goldmaster-Rekonstruktion ist als Strategie gebunden.**
@@ -135,10 +134,9 @@ Noch **kein** Reparaturkandidat freigegeben.
 `CHECK_INVARIANTS=PENDING`
 
 Rückgabeweg:
-1. Repository-Admin aktiviert einmalig Security-PR #137 trotz der absichtlichen Immutable-Self-Protection.
-2. Unmittelbar danach Ruleset wieder vollständig aktiv mit `hardlock` + `hardlock-base`.
-3. Reale Positiv-/Negativprüfung des Hobbyraum-Locks.
-4. Erst dann Goldmaster-Kopie von `de21f6…`; anschließend Pflichtänderungen einzeln und jeweils real testen.
+1. Im Ruleset `Pferde Atelier Main Hardlock` `hardlock-base` wieder als Required Status Check hinzufügen.
+2. Danach realen Hobbyraum-Lock gegen einen technischen Test-PR verifizieren.
+3. Erst dann Goldmaster-Kopie von `de21f6…`; anschließend Pflichtänderungen einzeln und jeweils real testen.
 
 ## UNANTASTBAR
 
