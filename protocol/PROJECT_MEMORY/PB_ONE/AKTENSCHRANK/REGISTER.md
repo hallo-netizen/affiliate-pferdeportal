@@ -29,3 +29,18 @@ Agenturweite Übersicht selbstentwickelter PB-ONE-Plugins und digitaler Eigenent
 REGEL:
 Nur bestätigte Eigenentwicklungen aufnehmen.
 Technische Version, Release- und Live-Wahrheit bleibt an der jeweiligen technischen Hauptquelle.
+
+
+### PBO-AKTENSCHRANK-FACH – TODO
+STATUS: AKTIV / OFFENE THEMEN
+HAUPTORT:
+`TODO/START_HERE.md`
+
+ZWECK:
+Offene operative PB-ONE-Aufgaben und Entscheidungsbedarf zentral auffindbar halten.
+
+AKTUELL:
+Vertrieb startklar machen → `TODO/VERTRIEB_STARTKLAR_20260907.md`
+
+REGEL:
+Entschiedene Fach-, Preis-, Vertrags- und Technikstände werden an ihrer jeweiligen autoritativen Hauptquelle gepflegt; das TODO-Fach bleibt nur Arbeits-/Entscheidungsübersicht.
