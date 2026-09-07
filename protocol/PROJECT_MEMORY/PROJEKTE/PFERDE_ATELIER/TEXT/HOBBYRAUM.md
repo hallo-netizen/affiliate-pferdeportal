@@ -18,7 +18,7 @@ nur den unten maschinenlesbar gebundenen Planpunkt und Scope bearbeiten.
 einen eigenen Prüfpfad, Minifix, Alternativweg, zweiten Branch, neuen Runner/Gate/Executor oder eine Fach-/Qualitäts-/Designregel erfinden.
 
 **ALS NÄCHSTES …**  
-ausschließlich den maschinenlesbaren Lock und danach den verbindlichen A–F-Plan befolgen.
+ausschließlich die HARD RULE Goldmaster-Rekonstruktion in der festgelegten Reihenfolge abarbeiten.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
@@ -27,8 +27,10 @@ HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
 MAIN_SHA: f14ccf187b94c4beab9a86d0c69144f792ba2f64
-ACTIVE_BLOCKER: BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING
-PLAN_PHASE: C_D
+ACTIVE_BLOCKER: HOBBYROOM_TECHNICAL_ENFORCEMENT_INACTIVE
+PLAN_PHASE: HARDEN_HOBBYROOM
+RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
+RECOVERY_SEQUENCE: 1_HARDEN_HOBBYROOM;2_COPY_GOLDMASTER;3_REAPPLY_MANDATORY_CHANGES_ONE_BY_ONE;4_REAL_TEST_AFTER_EACH_CHANGE
 CANDIDATE_BRANCH: NONE
 CANDIDATE_HEAD_SHA: NONE
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
@@ -48,6 +50,24 @@ Bedeutung:
 Solange `STATUS=FIX_FORBIDDEN` oder ein Pflichtcheck nicht PASS ist, gibt es **keine Integrationsfreigabe**.
 
 Nach Aktivierung von Security-PR #137 wird dieser Lock vom bestehenden serverseitigen Hardlock geprüft.
+
+## HARD RULE – GOLDMASTER-REKONSTRUKTION
+
+**Diese Reihenfolge ist verbindlich und darf nicht übersprungen, umgestellt oder parallelisiert werden:**
+
+1. Hobbyraum technisch dichtmachen.
+2. `de21f6cd35c60849c551fd82f78e75ce57c99fab` als funktionierenden Goldmaster kopieren.
+3. Nur zwingend notwendige spätere Änderungen einzeln nachrüsten.
+4. Nach jedem einzelnen Einbau real testen.
+
+Bis Schritt 1 technisch wirksam abgeschlossen ist:
+- keine Goldmaster-Kopie;
+- keine LanguageTool-Reparatur;
+- kein anderer Minifix;
+- keine Parallelreparatur;
+- keine Integration.
+
+Pauls/Claudes 41-Punkte-Audit ist dabei **Prüflinse**, kein 41-Punkte-Sammelfix.
 
 ## VERBINDLICHER ARBEITSPLAN – EINZIGE REIHENFOLGE
 
@@ -102,16 +122,16 @@ LanguageTool-Rebind-Branch:
 **PARKPLATZ / NICHT INTEGRIEREN**
 
 Aktueller Planpunkt:
-**C → D**
+**1 – HOBBYRAUM TECHNISCH DICHTMACHEN**
 
 Aktuelle Entscheidung:
-Noch **kein** Kandidat freigegeben.
+**Goldmaster-Rekonstruktion ist als Strategie gebunden.**
+Noch **kein** Reparaturkandidat freigegeben.
 `CHECK_POS_NEG=PENDING`
 `CHECK_INVARIANTS=PENDING`
 
 Rückgabeweg:
-Planpunkt D → genau ein Kandidat → Planpunkt E PASS → reguläre Integration auf current main → Planpunkt F Codex-Livetest.
-Solange E nicht PASS ist: keine Integration.
+Erst technische Hobbyraum-Erzwingung aktivieren und positiv/negativ beweisen. Danach Goldmaster-Kopie von `de21f6…`; anschließend Pflichtänderungen einzeln und jeweils real testen.
 
 ## UNANTASTBAR
 
