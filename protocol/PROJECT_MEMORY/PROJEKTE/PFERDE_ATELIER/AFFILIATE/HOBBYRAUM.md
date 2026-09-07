@@ -5,60 +5,69 @@ STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
 
-**WAS IST DAS?**  
-Der einzige aktuelle Arbeitsraum des Büros AFFILIATE.
-
 **AKTUELLER AUFTRAG:**  
-**OTTO in die bestehende Affiliate-Zentrale integrieren. Digistore24 bis auf Weiteres zurückstellen.**
+OTTO über den bestehenden Awin-Weg vollständig real abnehmen: Produktfeed + automatische Zuordnung + Exact Product Match + reale Bannerquelle.
 
-**DU DARFST …**  
-den gebundenen OTTO-Auftrag und seine Quellen lesen, prüfen und ausschließlich im bestehenden Affiliate-/Awin-/Produktquellenweg bearbeiten.
+**BEREITS STRUKTURELL UMGESETZT:**  
+Awin/OTTO-Verteilung, 1/2/3-Produktplätze, Beitragsprodukte, Productwissen-Exact-Consumer, Verkäufer-Gate und automatische Zuordnung realer importierter Banner.
 
-**DU DARFST NICHT …**  
-einen separaten OTTO-Gesamtworkflow, ein neues Parallel-Plugin oder eine neue Netzwerkarchitektur erfinden; Digistore24 nebenbei weiterbearbeiten; OTTO ohne realen Feed-/Zugangsbeleg öffentlich aktivieren.
+**NICHT TUN:**  
+kein eigenes OTTO-Plugin; keine zweite Providerarchitektur; keine Productwissen-Tabellen direkt lesen/schreiben; kein ähnlich passendes Ersatzprodukt für Exact Match; kein Produktbild als Banner; Digistore24 nicht nebenbei öffnen.
 
-**ALS NÄCHSTES …**  
-bestehenden OTTO-Vorbau gegen den realen Awin-Zugang prüfen und die kleinstmögliche Integrationslücke bestimmen.
+## NEXT ACTION – NUR DIESER WEG
 
-## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
+1. Gebundenen Affiliate-Hobbyraum-Test real ausführen:
+   `AFFILIATE_HOBBYRAUM/TASK.current.json`
+   inklusive `php test_otto_automation.php`.
+2. Im eigenen Awin-Zugang OTTO Advertiser **14336** real nachweisen.
+3. echten OTTO-Produktfeed prüfen:
+   - Feed eindeutig?
+   - reale Felder?
+   - Verkäufer-Spalte exakt bestimmen;
+   - nichts raten.
+4. echten Produktfeed durch WordPress/MariaDB laufen lassen.
+5. real prüfen:
+   - Hub Produkt 1/2/3;
+   - Kategorie Produkt 1/2/3;
+   - normaler Beitrag;
+   - Productwissen Exact Match / kein Ersatz.
+6. realen OTTO/Awin-Bannerbestand bzw. belegten Export/API-Zugang bestimmen.
+7. mindestens ein echtes OTTO-Banner importieren/holen und die vorhandene automatische Ziel-/Slotzuordnung real prüfen.
+8. Erst danach Release-Gates weiterführen.
 
-- **BÜROSTAND:** `CURRENT_STATE.md`
-- **AKTUELLER AUFTRAG / NEXT ACTION:** ausschließlich diese `HOBBYRAUM.md`
-- **CURRENT_BLOCKER:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Quelle
-- **AKTIVER ZIELVERTRAG:** nicht hier duplizieren → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
-- **NICHT ANFASSEN / WARUM:** nicht hier duplizieren → Ziel-/Originalquelle + `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+## PRODUCTWISSEN-GRENZE
 
-**Wenn zwei Angaben widersprechen:** nicht raten. Die oben benannte autoritative Quelle gewinnt.
+Produktwissen ist fachliche Identitätsquelle.
+Affiliate ist Commerce-Schicht.
 
-## NEXT ACTION – OTTO
+Schnittstelle:
+`ppar_affiliate_exact_product_requirements`
 
-1. Den vorhandenen OTTO-Eintrag in `class-ppar-product-source-plan.php` und den bestehenden Awin-Weg als Ausgangspunkt verwenden.
-2. Prüfen, welche reale OTTO-/Awin-Quelle nach der Programmzusage verfügbar ist: insbesondere Produktfeed, Tracking-/Deeplinkdaten und Pflichtfelder.
-3. Danach nur die **kleinstmögliche** Lücke schließen:
-   - OTTO innerhalb des bestehenden Awin-/Produktquellenwegs aktivierbar machen;
-   - keine Doppelarchitektur;
-   - zentrale Zuordnung, Produktkarten, Trackingprüfung und Fail-Closed-Regeln wiederverwenden.
-4. Vor `active` und vor öffentlicher Ausgabe Positiv-/Negativprüfung mit realen OTTO-Daten.
-5. Digistore24 bleibt während dieses Auftrags unangetastet.
+Kein Exact Match = keine Karte.
+Kein Affiliate-Ersatzmodell.
 
-## Konzeptbindung
+## BANNER-GRENZE
 
-Die vorhandene Affiliate-Recherche bleibt gültig:
-**möglichst wenige stabile Kernquellen statt viele Sonderadapter.**
-Awin ist Kernnetzwerk; OTTO wird deshalb als Awin-Produktquelle eingebunden.
+Zuordnung ist automatisiert.
+Beschaffung ist erst automatisiert, wenn ein realer maschinenlesbarer Awin-/OTTO-Creative-Weg belegt ist.
 
-## Fachweg bei der technischen Arbeit
+Bis dahin:
+real importiertes Creative → automatisch prüfen/zuordnen/aktivieren.
+Kein reales Creative → kein Banner.
 
-`control/release-governance/CURRENT_RELEASE.json`
-und
-`release/affiliate-zentrale/AGENTS.md`
-bleiben technische Autoritäten.
+## TECHNISCHE AUTORITÄTEN
 
-Vor einem Codefix zusätzlich die dokumentierte Differenz GitHub 6.72.1 ↔ WordPress live 6.72.2 beachten.
+- `control/release-governance/CURRENT_RELEASE.json`
+- `release/affiliate-zentrale/AGENTS.md`
+- `release/affiliate-zentrale/current/affiliate-portal-router/`
+- `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`
+- `protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
 
-## Globale Arbeitsort-Sperre
+## OFFENE RELEASE-GRENZE
 
-**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+GitHub Kandidat: 6.72.1  
+WordPress-Livebeleg: 6.72.2
 
-Autorität:
-`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+Vor realem Release auflösen; nicht still ignorieren.
+
+Digistore24 bleibt zurückgestellt.
