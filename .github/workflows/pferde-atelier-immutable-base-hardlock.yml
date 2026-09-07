@@ -31,6 +31,67 @@ jobs:
             echo 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
             exit 1
           fi
+      - name: Enforce TEXT Hobbyraum work lock
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/hobbyroom-changed.txt
+
+          if ! grep -Eq '^(control/startmaster0107/|control/single-door-boundary/|control/output-quarantine/)' /tmp/hobbyroom-changed.txt; then
+            echo 'TEXT_HOBBYROOM_WORK_LOCK_NOT_APPLICABLE'
+            exit 0
+          fi
+
+          CAMPUS_BRANCH='hobbyroom/project-memory-campus-v1-20260905'
+          HOBBYROOM_PATH='protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md'
+          git fetch --no-tags --depth=1 origin "refs/heads/$CAMPUS_BRANCH:refs/campus/text-worklock"
+
+          BLOCK="$(git show "refs/campus/text-worklock:$HOBBYROOM_PATH" | awk '
+            /^HOBBYROOM_WORK_LOCK_V1$/ {capture=1; next}
+            /^END_HOBBYROOM_WORK_LOCK_V1$/ {capture=0}
+            capture {print}
+          ')"
+
+          if [[ -z "$BLOCK" ]]; then
+            echo 'TEXT_HOBBYROOM_WORK_LOCK_MISSING'
+            exit 1
+          fi
+
+          field() {
+            local key="$1"
+            printf '%s\n' "$BLOCK" | sed -n "s/^$key: //p" | head -n1
+          }
+
+          [[ "$(field STATUS)" == 'FIX_ALLOWED_FOR_CODEX_TEST' ]] || { echo 'TEXT_HOBBYROOM_FIX_NOT_ALLOWED'; exit 1; }
+          [[ "$(field OFFICE)" == 'TEXT' ]] || { echo 'TEXT_HOBBYROOM_OFFICE_MISMATCH'; exit 1; }
+          [[ "$(field MAIN_SHA)" == "$BASE_SHA" ]] || { echo 'TEXT_HOBBYROOM_BASE_SHA_MISMATCH'; exit 1; }
+          [[ "$(field CANDIDATE_BRANCH)" == "$HEAD_REF" ]] || { echo 'TEXT_HOBBYROOM_BRANCH_MISMATCH'; exit 1; }
+          [[ "$(field CANDIDATE_HEAD_SHA)" == "$HEAD_SHA" ]] || { echo 'TEXT_HOBBYROOM_HEAD_SHA_MISMATCH'; exit 1; }
+          [[ "$(field INTEGRATION_ALLOWED)" == 'true' ]] || { echo 'TEXT_HOBBYROOM_INTEGRATION_NOT_ALLOWED'; exit 1; }
+
+          for key in CHECK_PAUL CHECK_HISTORY CHECK_LAST_GOOD CHECK_NEIGHBORS CHECK_REPEAT_CLASS CHECK_POS_NEG CHECK_INVARIANTS; do
+            [[ "$(field "$key")" == 'PASS' ]] || { echo "TEXT_HOBBYROOM_${key}_NOT_PASS"; exit 1; }
+          done
+
+          PREFIXES="$(field ALLOWED_PATH_PREFIXES)"
+          [[ -n "$PREFIXES" && "$PREFIXES" != 'NONE' ]] || { echo 'TEXT_HOBBYROOM_ALLOWED_PATHS_MISSING'; exit 1; }
+
+          while IFS= read -r changed; do
+            [[ -z "$changed" ]] && continue
+            ok=0
+            IFS=';' read -ra allowed <<< "$PREFIXES"
+            for prefix in "${allowed[@]}"; do
+              [[ -n "$prefix" && "$changed" == "$prefix"* ]] && ok=1 && break
+            done
+            [[ "$ok" == 1 ]] || { echo "TEXT_HOBBYROOM_PATH_OUT_OF_SCOPE:$changed"; exit 1; }
+          done < /tmp/hobbyroom-changed.txt
+
+          echo 'TEXT_HOBBYROOM_WORK_LOCK_PASS'
+
       - name: Enforce monotonic prebound workflow transition
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
