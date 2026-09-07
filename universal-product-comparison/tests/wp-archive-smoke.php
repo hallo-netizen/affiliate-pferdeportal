@@ -143,32 +143,17 @@ update_post_meta( $variant_post, '_upc_project_key', 'test-project' );
 $product_link_manifest = upc_link_manifest( $product_comparison_id, 'test-project' );
 upc_archive_assert( ! is_wp_error( $product_link_manifest ), 'build product-to-variant link manifest' );
 upc_archive_assert( 1 === count( $product_link_manifest['entries'] ), 'product comparison resolves exactly one related variant comparison' );
-upc_archive_assert(
-    'variant_comparison_for_product' === $product_link_manifest['entries'][0]['relation'],
-    'product comparison relation is variant comparison for product'
-);
-upc_archive_assert(
-    (int) $variant_comparison_id === (int) $product_link_manifest['entries'][0]['target_comparison_id'],
-    'product comparison links to exact variant comparison id'
-);
+upc_archive_assert( 'variant_comparison_for_product' === $product_link_manifest['entries'][0]['relation'], 'product comparison relation is variant comparison for product' );
+upc_archive_assert( (int) $variant_comparison_id === (int) $product_link_manifest['entries'][0]['target_comparison_id'], 'product comparison links to exact variant comparison id' );
 
 $variant_link_manifest = upc_link_manifest( $variant_comparison_id, 'test-project' );
 upc_archive_assert( ! is_wp_error( $variant_link_manifest ), 'build variant-to-product link manifest' );
 upc_archive_assert( 1 === count( $variant_link_manifest['entries'] ), 'variant comparison resolves exactly one related product comparison' );
-upc_archive_assert(
-    'product_comparison_for_variant' === $variant_link_manifest['entries'][0]['relation'],
-    'variant comparison relation is product comparison for variant'
-);
-upc_archive_assert(
-    (int) $product_comparison_id === (int) $variant_link_manifest['entries'][0]['target_comparison_id'],
-    'variant comparison links back to exact product comparison id'
-);
+upc_archive_assert( 'product_comparison_for_variant' === $variant_link_manifest['entries'][0]['relation'], 'variant comparison relation is product comparison for variant' );
+upc_archive_assert( (int) $product_comparison_id === (int) $variant_link_manifest['entries'][0]['target_comparison_id'], 'variant comparison links back to exact product comparison id' );
 
 $product_link_manifest_repeat = upc_link_manifest( $product_comparison_id, 'test-project' );
-upc_archive_assert(
-    $product_link_manifest_repeat['manifest_sha256'] === $product_link_manifest['manifest_sha256'],
-    'same project state produces identical link-manifest hash'
-);
+upc_archive_assert( $product_link_manifest_repeat['manifest_sha256'] === $product_link_manifest['manifest_sha256'], 'same project state produces identical link-manifest hash' );
 
 $duplicate_variant_post = wp_insert_post(
     array(
@@ -185,11 +170,7 @@ update_post_meta( $duplicate_variant_post, '_upc_comparison_id', (string) $varia
 update_post_meta( $duplicate_variant_post, '_upc_project_key', 'test-project' );
 
 $duplicate_target_blocked = upc_link_manifest( $product_comparison_id, 'test-project' );
-upc_archive_assert(
-    is_wp_error( $duplicate_target_blocked )
-    && 'UPC_LINK_MANIFEST_DUPLICATE_TARGET_POST' === $duplicate_target_blocked->get_error_code(),
-    'link manifest blocks duplicate WordPress targets for same comparison'
-);
+upc_archive_assert( is_wp_error( $duplicate_target_blocked ) && 'UPC_LINK_MANIFEST_DUPLICATE_TARGET_POST' === $duplicate_target_blocked->get_error_code(), 'link manifest blocks duplicate WordPress targets for same comparison' );
 wp_delete_post( $duplicate_variant_post, true );
 
 $group_post = wp_insert_post(
@@ -228,17 +209,10 @@ upc_archive_assert( false !== strpos( $html, 'data-upc-subfilter="variant"' ), '
 upc_archive_assert( false !== strpos( $html, 'Produkte mit Vergleichen' ), 'product index present' );
 upc_archive_assert( false !== strpos( $html, 'Produkt suchen' ), 'product search present' );
 
-$shortcode_html = do_shortcode(
-    '[upc_comparison_archive project="test-project" category="regendecken-vergleich"]'
-);
+$shortcode_html = do_shortcode( '[upc_comparison_archive project="test-project" category="regendecken-vergleich"]' );
 upc_archive_assert( $shortcode_html === $html, 'shortcode uses same deterministic archive renderer' );
 
-$wrong_group_comparison_id = (int) $wpdb->get_var(
-    $wpdb->prepare(
-        "SELECT id FROM {$wpdb->prefix}upc_comparisons WHERE comparison_key = %s LIMIT 1",
-        'alpha-vs-beta'
-    )
-);
+$wrong_group_comparison_id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}upc_comparisons WHERE comparison_key = %s LIMIT 1", 'alpha-vs-beta' ) );
 upc_archive_assert( $wrong_group_comparison_id > 0, 'resolve wrong-group comparison fixture' );
 
 $wrong_post = wp_insert_post(
@@ -255,26 +229,21 @@ upc_archive_assert( ! is_wp_error( $wrong_post ), 'create wrong-group archive fi
 update_post_meta( $wrong_post, '_upc_comparison_id', (string) $wrong_group_comparison_id );
 
 $blocked = $archive->build_view( 'test-project', 'regendecken-vergleich' );
-upc_archive_assert(
-    is_wp_error( $blocked ) && 'UPC_ARCHIVE_PRODUCT_GROUP_MISMATCH' === $blocked->get_error_code(),
-    'archive blocks comparison assigned to wrong product-group category'
-);
-
+upc_archive_assert( is_wp_error( $blocked ) && 'UPC_ARCHIVE_PRODUCT_GROUP_MISMATCH' === $blocked->get_error_code(), 'archive blocks comparison assigned to wrong product-group category' );
 wp_delete_post( $wrong_post, true );
 
 $restored = $archive->build_view( 'test-project', 'regendecken-vergleich' );
 upc_archive_assert( ! is_wp_error( $restored ) && 3 === count( $restored['items'] ), 'archive recovers after invalid fixture removal' );
 
-$source_back_to_draft = wp_update_post(
-    array(
-        'ID'          => (int) $product_post,
-        'post_status' => 'draft',
-    ),
-    true
-);
+$source_back_to_draft = wp_update_post( array( 'ID' => (int) $product_post, 'post_status' => 'draft' ), true );
 upc_archive_assert( ! is_wp_error( $source_back_to_draft ), 'return bound product comparison to draft for link finalization test' );
 
 $link_finalized = upc_finalize_internal_links( $product_comparison_id, 'test-project', 'pv-reg-001-v1' );
+if ( is_wp_error( $link_finalized ) ) {
+    fwrite( STDERR, 'LINK_FINALIZER_ERROR_CODE=' . $link_finalized->get_error_code() . "\n" );
+    fwrite( STDERR, 'LINK_FINALIZER_ERROR_MESSAGE=' . $link_finalized->get_error_message() . "\n" );
+    fwrite( STDERR, 'LINK_FINALIZER_ERROR_DATA=' . wp_json_encode( $link_finalized->get_error_data(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "\n" );
+}
 upc_archive_assert( ! is_wp_error( $link_finalized ), 'finalize bound internal links on validated draft' );
 upc_archive_assert( 'WORDPRESS_DRAFT_LINKS_VERIFIED' === $link_finalized['status'], 'linked draft readback verified' );
 upc_archive_assert( 1 === $link_finalized['link_count'], 'linked draft contains exactly one manifest-approved relation' );
