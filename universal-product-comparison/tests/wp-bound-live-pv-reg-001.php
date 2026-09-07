@@ -58,6 +58,10 @@ upc_bound_assert( 2 === (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->pref
 upc_bound_assert( 1 === (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}upc_comparisons" ), 'repeat import creates no duplicate comparison' );
 
 $final = upc_finalize_article( $comparison_id, 'pferde-atelier', 'pv-reg-001-v1' );
+if ( is_wp_error( $final ) ) {
+    fwrite( STDERR, 'FINAL_ERROR_CODE=' . $final->get_error_code() . "\n" );
+    fwrite( STDERR, 'FINAL_ERROR_MESSAGE=' . $final->get_error_message() . "\n" );
+}
 upc_bound_assert( ! is_wp_error( $final ), 'fresh live-bound final draft succeeds' );
 upc_bound_assert( 'WORDPRESS_DRAFT_FINAL_VERIFIED' === $final['status'], 'final draft reaches verified state' );
 upc_bound_assert( false === $final['publish_allowed'], 'final draft remains non-publishable' );
