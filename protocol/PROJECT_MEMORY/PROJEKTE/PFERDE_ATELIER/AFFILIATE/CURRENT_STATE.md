@@ -152,7 +152,7 @@ Branch:
 `affiliate-release-current`
 
 HEAD:
-`d24413db17d97ee49ce1f6f04413dad653903357`
+`84390240b87e510349c636b9dd9f1a5dfc8ce5d7`
 
 Aktiver Kandidat:
 **6.72.1**
@@ -164,7 +164,7 @@ Source-Manifest SHA-256:
 `680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf`
 
 Governance Generation:
-**16**
+**17**
 
 Release:
 **NICHT FREIGEGEBEN**
@@ -191,11 +191,13 @@ Evidence:
 
 OFFEN:
 - exakter aktueller Repo-Checkout-Lauf `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`;
+- exakter PHP-/WordPress-Test des isolierten Productwissen-Brückenkandidaten und dessen Übernahme durch Produktvergleich;
 - alternativ isolierter Container-Hobbyraum;
 - frühere lokale Behavior-PASS-Belege gelten nach der letzten Source-Änderung nicht als Current-Source-PASS und wurden entsprechend als stale markiert.
 
 ## Real/LIVE noch offen
 
+- Productwissen-Brückenkandidat im Produktvergleich-Büro prüfen/übernehmen;
 - OTTO 14336 im eigenen Awin-Konto real belegen;
 - echten OTTO-Produktfeed durch WordPress/MariaDB;
 - reale Verkäufer-Spalte binden;
@@ -239,3 +241,31 @@ Zusätzlich bleibt der isolierte Container-Hobbyraum:
 - gebundene Quelle mit 0 Creatives ist von „nicht angeschlossen“ unterscheidbar und kann alte Banner kontrolliert reconciliieren.
 - manuelle Seitenreparaturen benötigen Begründung und speichern Benutzer + Zeitpunkt.
 - Kategorie-/sonstige Zielreparatur nutzt die vorhandene feste Creative→Portalziel/Slot-Entscheidung mit Begründung.
+
+## Productwissen-Brücke – offizieller Status
+
+Der aktuelle offizielle Produktwissen-/Produktvergleich-Branch liefert den Affiliate-Exact-Filter noch nicht.
+
+Offizieller Parallelbranch:
+`hobbyroom/productwissen-v1-prototype`
+Head bei letzter Prüfung:
+`42ad7460a903a64c22fe4dec1c70b901a6ecdd12`
+
+Dafür existiert jetzt ein isolierter Brückenkandidat:
+`hobbyroom/productwissen-affiliate-exact-bridge-20260907`
+Head:
+`823b4712d096c6e5613b20c8d22669447f3bc6ac`
+
+Umgesetzt im Kandidaten:
+- read-only Producer für `ppar_affiliate_exact_product_requirements`;
+- WordPress-Draft bindet `_upc_comparison_id`;
+- alte Drafts nur über striktes UPC-UID-Format;
+- ausschließlich UPK-Exact-Identifier;
+- keine direkte Tabellenkopplung;
+- kein Identifier = keine Affiliate-Anforderung.
+
+Status:
+**STATIC CONTRACT PASS / NICHT OFFIZIELL INTEGRIERT / E2E OFFEN.**
+
+Wichtig:
+Affiliate darf diesen Produktwissen-Parallelbranch nicht selbst übernehmen/mergen. Das Produktvergleich-Büro prüft und integriert den Kandidaten.
