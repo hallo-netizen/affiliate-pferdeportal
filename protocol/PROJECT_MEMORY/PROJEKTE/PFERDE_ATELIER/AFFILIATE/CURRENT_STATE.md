@@ -1,7 +1,7 @@
 # AFFILIATE – CURRENT STATE
 
-STAND: 2026-09-05
-STATUS: QUELLENSTAND KONSOLIDIERT / FACHINHALTE UNVERÄNDERT
+STAND: 2026-09-07
+STATUS: OTTO PRIORISIERT / DIGISTORE24 ZURÜCKGESTELLT / TECHNISCHE AKTIVIERUNG NOCH OFFEN
 
 
 ## AUTORITÄT DIESER DATEI
@@ -16,6 +16,39 @@ Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros
 
 Technische/Fachwahrheit bleibt an den in dieser Datei verlinkten Originalquellen.
 Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
+
+## Prioritätsentscheidung 07.09.2026
+
+Der Nutzer meldet die **Zusage für das OTTO-Partnerprogramm**.
+
+Verbindliche Arbeitspriorität:
+- **OTTO muss in die Affiliate-Zentrale integriert werden.**
+- **Digistore24 wird vorerst zurückgestellt.**
+- Der offene Digistore24-Stand bleibt dokumentiert, wird aber aktuell nicht weiterbearbeitet.
+- Keine Digistore24-Regressionen, Discovery-Schleifen oder Support-URL-Arbeit starten, solange der OTTO-Auftrag gebunden ist.
+
+## Konzeptprüfung OTTO
+
+Die vorhandene Architektur passt bereits zum neuen Auftrag:
+
+- `class-ppar-product-source-plan.php` führt OTTO bereits als vorbereitete Produktquelle.
+- Vorgesehener Weg: **Awin → fachlich OTTO**.
+- Das bestehende Affiliate-Konzept priorisiert Awin als Kernnetzwerk und zentrale Produkt-/Feedverarbeitung.
+- Deshalb wird **kein neuer OTTO-Gesamtworkflow und kein separates OTTO-Netzwerk erfunden**.
+- OTTO wird als konkrete Produktquelle in den vorhandenen Awin-/Produktquellenweg integriert.
+
+Harte Aktivierungsgrenze:
+Die gemeldete Programmzusage ist die Prioritätsfreigabe. **Produktfeed, reale Awin-Zugänglichkeit, Tracking-/Linkdaten und erforderliche Produktfelder müssen vor öffentlicher Ausgabe real geprüft werden.**
+Bis dahin bleibt der technische Providerstatus `prepared / integration pending`, nicht `active`.
+
+## OTTO-spezifische Pflichtpunkte für die Integration
+
+- bestehende zentrale Produktkarten-/Zuordnungslogik wiederverwenden;
+- reale Produktdaten statt erfundener oder manuell nachgebauter Feeds;
+- Produktdaten regelmäßig aktualisieren;
+- Verkäufer-/Merchant-Angaben aus dem Feed korrekt berücksichtigen;
+- bei Produktvergleichen die bestehende transparente Bewertungs-/Vergleichslogik einhalten;
+- Tracking und Ausgabe weiterhin fail-closed behandeln.
 
 ## Aktueller GitHub-Releasebezug
 
@@ -56,8 +89,8 @@ GitHub kanonisch:
 WordPress live:
 **6.72.2**
 
-Diese Differenz wird nur dokumentiert.
-Keine Fachbewertung oder Änderung in diesem Sortierchat.
+Diese Differenz bleibt dokumentiert.
+Sie darf bei späterer technischer OTTO-Arbeit nicht ignoriert werden.
 
 ## Aktuelle Übergabeakten
 
@@ -83,6 +116,6 @@ GELB.
 
 ## Harte Sortiergrenze
 
-Diese Datei fasst nur belegte Quellenstände zusammen.
+Diese Datei fasst nur belegte Quellenstände und die aktuelle Nutzerpriorität zusammen.
 
 Originale, Governance, Pluginquellen und Fachregeln bleiben unangetastet.
