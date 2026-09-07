@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / STEP03 FREIGEGEBEN
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -14,17 +14,17 @@ Es gibt **kein alternatives Reparaturkonzept** und keinen parallelen Reparaturpf
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 7df2008eab8839271230b5dbfc62d7404c6e52f4
-ACTIVE_BLOCKER: STEP02_REALTEST_PENDING
-PLAN_PHASE: STEP02_REALTEST
+ACTIVE_BLOCKER: BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING
+PLAN_PHASE: STEP03_REAPPLY_PR125
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/step03-pr125-107008-envelope-20260907
+CANDIDATE_HEAD_SHA: d0bf2d6b33425a12bf6b9a57bb1819ac9d147458
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
+ALLOWED_PATH_PREFIXES: control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/GITHUB_FINAL_RELEASE.py;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -32,7 +32,7 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
-INTEGRATION_ALLOWED: false
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -222,12 +222,13 @@ Ausschließlich echter 7/7-Realtest auf `46a807ac…`.
 
 ## REALTEST-KRITERIUM FÜR ZWISCHENSCHRITTE
 
-Ein Einzel-Delta gilt als **erfolgreich weitergeführt**, wenn:
-- der vorherige erste Blocker verschwindet;
-- der Lauf real weiterkommt;
-- der neue erste Blocker dem nächsten noch nicht eingebauten chronologischen Pflichtblock entspricht.
+Nach **jedem** chronologischen Pflichtblock erfolgt ein echter Realtest.
 
-Nur unerwartete Regression, gleicher Blocker oder Rückschritt bedeutet Kandidat verwerfen.
+Der Realtest dient zur Standortbestimmung:
+- erster echter Blocker wird protokolliert;
+- kein nächster Block wird vor diesem Test eingebaut;
+- derselbe spätere Blocker darf bestehen bleiben, wenn der gerade eingebaute Pflichtblock nur eine notwendige Vorstufe ist;
+- verworfen wird ein Block nur bei Hardlock-/Invarianten-FAIL oder wenn er einen neuen früheren Rückschritt erzeugt.
 
 Der finale Produktionsbeweis bleibt unverändert: echter 7/7-Lauf bis 107008.
 
@@ -267,3 +268,34 @@ Merge:
 `7df2008eab8839271230b5dbfc62d7404c6e52f4`
 
 Step 03 ist bis zum Realtest-Ergebnis gesperrt.
+
+
+## STEP 02 – REALTESTERGEBNIS
+
+Step 02 / PR #124:
+- HEAD korrekt `7df2008e…`;
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
+- Current Action READY;
+- erster Blocker bleibt `BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`.
+
+Einordnung:
+PR #124 macht den realen PPM-Executor im Handoff ausführbar, exponiert ihn aber noch nicht in der Current Action. Kein Rückschritt, kein Hardlock-FAIL.
+
+## STEP 03 – EINZELKANDIDAT
+
+Quelle:
+PR #125 / Merge `592a026f5f561020431594c452198280f8dca583`
+
+Kandidat:
+`hobbyroom/step03-pr125-107008-envelope-20260907`
+Head:
+`d0bf2d6b33425a12bf6b9a57bb1819ac9d147458`
+
+Änderungen:
+genau 5 Dateien, alle exakt PR-#125-Zielstand.
+`chat_delivery_payload.py` war bereits exakt auf PR-#125-Stand und wird nicht verändert.
+
+HARD RULE:
+kein Step 04 vor Realtest von Step 03.
