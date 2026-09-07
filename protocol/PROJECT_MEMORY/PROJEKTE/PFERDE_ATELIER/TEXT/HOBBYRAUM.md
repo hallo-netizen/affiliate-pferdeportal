@@ -3,6 +3,68 @@
 STAND: 2026-09-06
 STATUS: AKTIV / B01-ONLY #141 HARDLOCK PASS / #140 M01–M33 REGRESSION PASS / LIVE-PROOF OFFEN
 
+## VERBINDLICHER ARBEITSPLAN – EINZIGE REIHENFOLGE
+
+**Dieser Ablauf ist zwingend. Keine neue spontane NEXT-ACTION-Regel. Kein Seitensprung. Kein Minifix außerhalb dieses Plans.**
+
+### A – Ausgangspunkt festhalten
+- aktuelles `main`;
+- erster echter Liveblocker;
+- letzter echter funktionierender 7/7-Stand;
+- keine Produktion ändern.
+
+### B – Pflichtprüfung VOR jedem Kandidaten
+1. Paul-Prüfung gelesen und relevanten Befund zugeordnet?
+2. gesamte bisherige Fehlerhistorie B01–B15 / M01–M33 geprüft?
+3. letzten funktionierenden Stand `d841ed…` / `de21f6…` verglichen?
+4. unmittelbare Vor- und Nachstufe mit exaktem Artefaktzustand geprüft?
+5. geprüft, ob derselbe Fehlertyp bereits früher vorkam?
+6. lokalen Positiv- und Negativtest definiert und ausgeführt?
+7. Qualität / Inhalt / Design / Sicherheit / Single Door / dumme Wächter / Chat-Zwangsjacke unverändert?
+
+Ein `FAIL`, `UNKLAR` oder `NICHT BELEGT` = `FIX_FORBIDDEN`.
+
+### C – Anti-Minifix-Regel
+Wenn derselbe technische Fehlertyp bereits mehrfach aufgetreten ist:
+- **kein weiterer isolierter Minifix**;
+- zuerst die gemeinsame Ursache im direkten technischen Korridor bestimmen;
+- daraus genau **einen konsolidierten KISS-Kandidaten** ableiten.
+
+### D – Kandidat
+Der Kandidat darf ausschließlich:
+- bestehende technische Bindungen wieder korrekt verbinden;
+- keine Fachregel neu definieren;
+- keine Qualitäts-/Design-/SEO-/Link-/Tabellenregel verändern;
+- keine neue Tür, keinen neuen Wächter, keinen neuen Runner/Workflow/Executor erzeugen;
+- dem Chat keinerlei neue Freiheit geben.
+
+### E – lokale Freigabe
+Vor Codex:
+- Positivtest: unveränderter Sollweg PASS;
+- Negativtest: fehlende/falsche reale Evidence BLOCK;
+- Vor-/Nachstufe bleiben kompatibel;
+- historische Fehler werden nicht wieder geöffnet;
+- Paul-Befunde werden nicht verletzt.
+
+Nur dann: `FIX_ALLOWED_FOR_CODEX_TEST`.
+
+### F – Codex-Test
+- exakt aktuelles `main`;
+- exakt bestehende eine Tür;
+- exakt dumme Wächter;
+- Chat ohne eigene Workflow-/Prüf-/Repairentscheidung;
+- beim ersten echten technischen Blocker STOP;
+- keine Reparatur im laufenden Test;
+- Ergebnis zurück in **denselben Plan ab Punkt B**.
+
+### Aktueller Arbeitsstand
+- aktuelles main: `f14ccf187b94c4beab9a86d0c69144f792ba2f64`;
+- erster echter Liveblocker: `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`;
+- LanguageTool-Einzelbranch bleibt PARKPLATZ / NICHT INTEGRIEREN;
+- wegen wiederholter K1/K3-Bindungsfehler ist C aktiv: **kein LT-Minifix**;
+- nächster zulässiger Schritt: aus den bereits gewonnenen Paul-/Historien-/7/7-Befunden genau **einen konsolidierten KISS-Bindungskandidaten** ableiten und danach E ausführen.
+
+
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
@@ -18,8 +80,7 @@ den aktuellen Auftrag und alle autoritativen Quellen lesen und ausschließlich i
 main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Workflow/Runner/Gate/Executor bauen oder Fach-/SEO-/Textmaschinenregeln verändern.
 
 **ALS NÄCHSTES …**  
-Keine weitere Minifix-Kette. Zuerst `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md` als aktuelle technische Wirkungskarte verwenden. Danach die 12 bestehenden Pflichtstufen einmal vollständig als **bestehender Prüfer → exakter Inputzustand → exakter Output/Evidence → nächster Consumer** kartieren. Paul F2/A6/A12, F7/A7, A11 und A37 sowie B01–B15/M01–M33 zwingend gegen jede direkte Übergabe halten. Erst ein konsolidierter Corridor-PASS darf einen neuen Integrationskandidaten erzeugen. Der begonnene LanguageTool-Rebind-Branch ist PARKPLATZ, kein aktueller Integrationskandidat.
-
+Ausschließlich den Abschnitt **VERBINDLICHER ARBEITSPLAN – EINZIGE REIHENFOLGE** von A bis F abarbeiten. Keine andere NEXT-ACTION-Anweisung hat Vorrang.
 
 ## HARD RULE – FIX-SPERRE VOR JEDER ÄNDERUNG
 
