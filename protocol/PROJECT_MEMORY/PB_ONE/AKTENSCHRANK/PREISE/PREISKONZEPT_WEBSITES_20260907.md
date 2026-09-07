@@ -962,3 +962,285 @@ Laufende Betreuung wird separat als Service-/Care-Modell angeboten.
 
 Damit ist für den Kunden klar:
 **Die Website ist im Grundpaket vollständig. Zusatz kostet nur, was wirklich zusätzlich ist.**
+
+
+---
+
+## 30. VERTRIEBSPRÜFUNG – ZIELGRUPPE LOKALE BETRIEBE OHNE WEBSITE
+
+INTERNER KONTEXT:
+LeadScout identifiziert vorrangig lokale Betriebe mit guter Reputation, aber fehlender oder schwacher eigener Website.
+
+### Kernbefund
+
+Der stärkste Verkaufshebel ist nicht:
+„Sie brauchen eine Website.“
+
+Sondern:
+**„Ihr Betrieb wird bereits gut bewertet. Ihr digitaler Auftritt bildet diese Qualität aber nicht ab.“**
+
+Das ist deutlich stärker, weil:
+- der Betrieb nicht abgewertet wird;
+- vorhandene gute Bewertungen als Beweis für Qualität dienen;
+- die Website als fehlendes Bindeglied verkauft wird;
+- der Vertrieb mit einem konkreten sichtbaren Befund startet.
+
+### Was der Kunde wirklich kaufen soll
+
+Nicht:
+- Seitenanzahl;
+- SSL;
+- responsive Design;
+- WordPress;
+- technische Funktionen.
+
+Sondern:
+- professioneller erster Eindruck;
+- eigene kontrollierbare Präsenz;
+- klare Darstellung von Leistungen;
+- Vertrauen;
+- einfacher Kontakt;
+- bessere Nutzung bestehender Bewertungen;
+- bessere digitale Auffindbarkeit;
+- weniger Abhängigkeit von einzelnen Plattformen.
+
+### Verkaufsargumente mit hoher Wahrscheinlichkeit
+
+#### 1. „Ihre Bewertungen arbeiten bereits für Sie – wir machen daraus einen vollständigen Auftritt.“
+
+Sehr stark für LeadScout-Leads mit hoher Bewertung.
+
+Folge:
+Bewertungen / Referenzen gehören in die Website-Basis und nicht in ein Zusatzmodul.
+
+#### 2. „Sie müssen keine Texte schreiben oder Website planen.“
+
+Sehr stark für kleine lokale Betriebe.
+
+PB ONE übernimmt:
+- Struktur;
+- Texterstellung aus kurzem Briefing und vorhandenen Informationen;
+- normale Bildaufbereitung;
+- technische Umsetzung.
+
+Der Kunde liefert Fakten, Freigaben und vorhandenes Material.
+
+#### 3. „Ein klarer Festpreis statt offener Agenturstunden.“
+
+Sehr gut verkäuflich.
+
+Voraussetzung:
+Paketgrenzen müssen intern hart definiert sein.
+
+#### 4. „Ihre Kunden finden sofort Leistungen, Kontakt, Öffnungszeiten und Vertrauen.“
+
+Stärker als abstraktes Webdesign-/SEO-Vokabular.
+
+#### 5. „Sie müssen sich danach nicht selbst darum kümmern.“
+
+Sehr starkes Anschlussargument für laufenden Service.
+
+---
+
+## 31. WAS SICH AM BESTEN ZUSÄTZLICH VERKAUFEN LÄSST
+
+Entscheidend ist nicht technische Nähe, sondern verständlicher Geschäftsnutzen.
+
+### A. SICHTBARKEIT PLUS – HOHE VERKAUFBARKEIT
+
+Verkaufsargument:
+**„Eine gute Website hilft nur, wenn die richtigen Menschen sie finden.“**
+
+Inhalt je Bedarf:
+- Local SEO;
+- zusätzliche Leistungs-/Standortseiten;
+- Google-Business-Abgleich/Optimierung;
+- Suchintention-/Keyword-Arbeit.
+
+Besonders passend wenn LeadScout zeigt:
+- starke lokale Konkurrenz;
+- wenig organische Sichtbarkeit;
+- mehrere wichtige Leistungen;
+- relevantes lokales Suchvolumen.
+
+### B. MEHR ANFRAGEN / TERMINE – HOHE VERKAUFBARKEIT, ABER BRANCHENABHÄNGIG
+
+Verkaufsargument:
+**„Interessenten sollen nicht nur schauen, sondern direkt den nächsten Schritt machen können.“**
+
+Mögliche Inhalte:
+- Terminbuchung;
+- Rückruf;
+- qualifiziertes Anfrageformular;
+- einfache Leadstrecke.
+
+Besonders passend:
+- Praxen;
+- Studios;
+- Friseure;
+- Werkstätten;
+- Beratungen;
+- Dienstleistungen mit Termin-/Anfrageprozess.
+
+### C. MITARBEITER GEWINNEN – SEHR INTERESSANTER ZUSATZVERKAUF
+
+Verkaufsargument:
+**„Die Website soll nicht nur Kunden überzeugen, sondern auch Bewerber.“**
+
+Mögliche Inhalte:
+- Karriere-/Jobseite;
+- Stellen;
+- einfacher Bewerbungsweg;
+- Arbeitgeberdarstellung.
+
+Besonders passend:
+- Handwerk;
+- Gastronomie;
+- Pflege/Gesundheit;
+- lokale Dienstleister mit Personalbedarf.
+
+Bewertung:
+Für viele lokale Betriebe vermutlich leichter verkäuflich als Mehrsprachigkeit oder Branding.
+
+### D. SORGLOS-SERVICE – SEHR HOHE ANSCHLUSSVERKAUFBARKEIT
+
+Nicht als Website-Modul, sondern laufender Service.
+
+Verkaufsargument:
+**„Sie kümmern sich um Ihren Betrieb – wir kümmern uns um die Website.“**
+
+Mögliche Inhalte:
+- Hosting;
+- Updates;
+- Backup;
+- technische Pflege;
+- definierte kleinere Änderungen;
+- Support.
+
+Bewertung:
+Wahrscheinlich der Zusatz mit der höchsten möglichen Quote über alle Branchen hinweg.
+
+---
+
+## 32. WAS NICHT AKTIV ALS ERSTES UPSELL VERKAUFT WERDEN SOLL
+
+### Mehrsprachigkeit
+
+Sinnvoll bei echtem Bedarf.
+Aber kein universelles Verkaufsargument.
+
+→ intern verfügbar, extern nur bei passendem Lead.
+
+### Branding / Medien Plus
+
+Kann notwendig und wertvoll sein.
+Aber für einen Betrieb ohne Website ist „neues Branding“ oft nicht das erste Problem.
+
+→ bedarfsabhängiger Zusatz, kein Haupt-Upsell.
+
+### CRM / Newsletter
+
+Technisch sinnvoll, aber für viele kleine lokale Betriebe im Erstverkauf zu abstrakt.
+
+→ nur verkaufen, wenn klarer Anwendungsfall besteht.
+
+### KI-Sichtbarkeit
+
+Kann künftig wichtig werden.
+Für einfache lokale Erstansprache aktuell oft zu erklärungsbedürftig.
+
+→ eher Hintergrundnutzen / fortgeschrittener Verkauf, nicht Kernpitch.
+
+---
+
+## 33. EMPFOHLENE VERKAUFSARCHITEKTUR V5
+
+### Grundangebot
+
+1. **KOMPAKT**
+2. **BUSINESS**
+3. **INDIVIDUELL**
+
+Die Grundwebsite enthält bereits:
+- Struktur;
+- Standard-Texterstellung;
+- normale Bildaufbereitung;
+- Bewertungen/Referenzen integrieren;
+- mobile Umsetzung;
+- Kontaktweg;
+- technische Basis;
+- SEO-Basis;
+- Livegang.
+
+### Sichtbare verkaufsstarke Erweiterungen
+
+1. **SICHTBARKEIT PLUS**
+2. **ANFRAGEN & TERMINE**
+3. **MITARBEITER GEWINNEN**
+4. **SORGLOS-SERVICE** (laufend)
+
+### Bedarfsabhängige Erweiterungen im Hintergrund
+
+- Mehrsprachigkeit;
+- Branding;
+- Foto/Video;
+- besondere Content-Produktion;
+- Newsletter/CRM;
+- Migration;
+- individuelle Integrationen.
+
+### Sonderfälle
+
+Shop / Portal / komplexe Technik:
+**INDIVIDUELL.**
+
+---
+
+## 34. VERTRIEBSREIHENFOLGE MIT LEADSCOUT
+
+Interne KISS-Logik:
+
+1. **Lob / Beweis**
+   „Sie werden sehr gut bewertet.“
+
+2. **Lücke**
+   „Aber Interessenten finden keinen eigenen Auftritt / der bestehende Auftritt bildet diese Qualität nicht ab.“
+
+3. **Konkrete Wirkung**
+   Leistungen, Vertrauen und Kontakt fehlen bzw. sind unnötig schwer prüfbar.
+
+4. **Visualisierung**
+   Wenn vorhanden: konkreten PB-ONE-Designvorschlag / Wettbewerbsvergleich zeigen.
+
+5. **Einfaches Angebot**
+   passendes Grundpaket nennen.
+
+6. **Nur 1–2 relevante Erweiterungen**
+   Keine komplette Modulliste herunterbeten.
+
+7. **Sorglos-Service**
+   erst nach grundsätzlichem Interesse als einfache Betriebsfrage anbieten.
+
+### Harte Vertriebsregel
+
+**Nie alle Module verkaufen wollen.**
+
+LeadScout soll den Bedarf vorklassifizieren.
+Der Vertrieb zeigt nur das Grundpaket plus die 1–2 Erweiterungen, die sich aus dem konkreten Betrieb logisch begründen lassen.
+
+---
+
+## 35. KRITISCHER SCHLUSSBefund
+
+Für lokale Betriebe ohne Website ist die stärkste Positionierung:
+
+**„Kompletter professioneller Webauftritt ohne Aufwand für den Kunden.“**
+
+Nicht:
+„Webdesign mit vielen Zusatzbausteinen.“
+
+Der Baukasten bleibt intern wichtig.
+Extern soll er möglichst unsichtbar sein.
+
+Der Kunde kauft eine Lösung.
+PB ONE benutzt den Baukasten, um diese Lösung schnell, sauber und wirtschaftlich zusammenzustellen.
