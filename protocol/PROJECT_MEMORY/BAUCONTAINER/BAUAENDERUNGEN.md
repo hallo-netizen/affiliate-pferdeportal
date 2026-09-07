@@ -93,3 +93,4 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-075 → PB ONE Aktenschrank erhält Preis-Fach für Paket-/Baukastenlogik
 - ARCH-076 → bestehender Angebote/Flyer-Bereich wird zu Präsentation & Werbung erweitert
 - ARCH-077 → PB ONE Aktenschrank erhält Vertriebs-Fach; Lead-Management und Onboarding bleiben dort gebündelt
+- ARCH-079 → Masterdateien-Inventare sind niemals zweite CURRENT-/Head-/Manifest-Wahrheit
