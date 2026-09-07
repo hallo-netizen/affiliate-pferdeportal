@@ -205,3 +205,28 @@ Er ist ausschließlich ein dummer technischer Scope-/Status-/Hash-Wächter.
 
 Damit bleibt:
 **HOBBYRAUM = einzige aktuelle Arbeitswahrheit; Hardlock = technische Durchsetzung.**
+
+
+## Verbindlicher Pre-Fix-Ablauf für technische Hobbyräume
+
+Für technische Reparaturarbeit gilt campusweit genau diese Reihenfolge:
+
+A. Ausgangspunkt: current main, erster echter Liveblocker, letzter funktionierender Stand.
+B. Vor jedem Kandidaten zwingend:
+1. relevanten Paul-/Spezialreview prüfen, falls vorhanden;
+2. gesamte bekannte Fehlerhistorie prüfen;
+3. letzten funktionierenden Stand vergleichen;
+4. unmittelbare Vor- und Nachstufe mit exaktem Artefaktzustand prüfen;
+5. Wiederholungsfehlerklasse prüfen;
+6. Positiv- und Negativtest des Kandidaten;
+7. Qualität/Inhalt/Design/Sicherheit/Single Door/Zwangsjacke unverändert nachweisen.
+C. Bei wiederholter Fehlerklasse: kein weiterer isolierter Minifix; gemeinsame Ursache im direkten Korridor bestimmen.
+D. Genau einen KISS-Kandidaten binden.
+E. Erst nach vollständigem Positiv/Negativ/Invarianten-PASS = `FIX_ALLOWED_FOR_CODEX_TEST`.
+F. Realtest auf dem produktiven Weg; beim ersten echten Blocker STOP, keine Reparatur im laufenden Test.
+
+Ein `FAIL`, `PENDING`, `UNKLAR` oder `NICHT BELEGT` in einem Pflichtpunkt bedeutet:
+`FIX_FORBIDDEN`.
+
+Wichtig:
+Diese Reihenfolge enthält keine Fachregeln. Sie erzwingt nur, dass bekannte Fehler, Nachbarwirkungen und reale Tests vor einer technischen Änderung berücksichtigt werden.
