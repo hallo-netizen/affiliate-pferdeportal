@@ -34,11 +34,11 @@ Pflicht:
 - notwendige Recovery-Informationen, soweit für Wiederherstellung erforderlich.
 
 Quelle:
-\`/Campus-Archiv/\`
+`/Campus-Archiv/`
 
 ## D. MANIFEST
 
-Jedes Paket enthält \`BACKUP_INFO.txt\` mit:
+Jedes Paket enthält `BACKUP_INFO.txt` mit:
 - Datum/Zeit;
 - Git-Stand;
 - WordPress-Backupstand;
