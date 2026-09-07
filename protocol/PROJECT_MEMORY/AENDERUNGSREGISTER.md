@@ -953,3 +953,15 @@ PB ONE benötigt einen geschäftlichen Überblick über eigene Produkte/Baustein
 REGEL:
 Pluginfach speichert Beschreibung, Zweck, Eigentums-/Agenturstatus und Verweis auf technische Hauptquelle.
 Version, Release, LIVE, Code und Modulklasse bleiben ausschließlich in den bestehenden autoritativen technischen Quellen.
+
+## ARCH-074 – PB ONE Aktenschrank erhält TODO-Fach
+WAS:
+`PB_ONE/AKTENSCHRANK/TODO/` wird als zentrale Ablage für offene operative PB-ONE-Aufgaben eingerichtet.
+WARUM:
+Offene Entscheidungen und fehlende Vertriebs-/Betriebsgrundlagen sollen chatübergreifend auffindbar bleiben, ohne Fachwahrheiten in Arbeitslisten zu duplizieren.
+KISS:
+Ein Fach, ein START_HERE, konkrete TODO-Akten.
+REGEL:
+Das TODO-Fach hält nur offene Punkte und Verweise. Sobald Preise, Verträge, Prozesse oder technische Stände entschieden sind, liegt die autoritative Wahrheit an der jeweils zuständigen Hauptquelle.
+ERSTE AKTE:
+`TODO/VERTRIEB_STARTKLAR_20260907.md`.
