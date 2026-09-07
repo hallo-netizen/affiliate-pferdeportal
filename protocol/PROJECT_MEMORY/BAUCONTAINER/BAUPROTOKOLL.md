@@ -1567,3 +1567,24 @@ Aktueller Stand ausschließlich in `TRESOR/STATUS.md`; Register bleiben Wegweise
 
 BEZUG:
 ARCH-080/081; BAU-036/037; ZV-TRESOR-001.
+
+
+### 2026-09-07 – Backupkonzept auf einen KISS-Weg reduziert
+
+BEDARF:
+Die Tresorentwicklung war für die einfache Aufgabe „Pferde-Atelier komplett sichern“ zu komplex geworden und erzeugte mehrere technische Varianten.
+
+ERGEBNIS:
+- genau ein Backupweg;
+- GitHub komplett + WordPress komplett + Projektarchiv komplett;
+- ein datiertes Sicherungspaket;
+- zwei unabhängige Kopien;
+- wöchentlich + vor größeren Umbauten;
+- BACKUP_PASS/BACKUP_FAIL;
+- alte V1/V2/V3/V4-Tresorvarianten nur noch historische Entwicklungsbelege.
+
+KISS:
+Keine neue Backup-Engine. Vorhandene Git-, WordPress- und Archivtechnik wird wiederverwendet.
+
+BEZUG:
+ARCH-083.
