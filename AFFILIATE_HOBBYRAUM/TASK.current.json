@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "otto-awin-automated-distribution-20260907",
-  "goal": "Prüfe OTTO über Awin: sichere Feed-/Banner-Zuordnung, Productwissen-Exact-Match ohne Ersatz, relevance-first Banneranteile auf allen Bannerplätzen und Vorrang der manuellen Reparaturinstanz; keine neue Providerarchitektur.",
+  "goal": "Prüfe OTTO/Awin vollständig: Productwissen-Exact-Match ohne Ersatz, real-source-fähige Banneraufnahme, automatische Relevanz-/Anteilzuordnung auf allen Bannerplätzen, 0-Anteil als Ausschluss und Vorrang der manuellen Reparaturinstanz.",
   "image": "php:8.2-cli",
   "inputs": [
     {
@@ -43,12 +43,17 @@
     {
       "src": "test_otto_automation.php",
       "dest": "test_otto_automation.php"
+    },
+    {
+      "src": "test_banner_distribution_behavior.php",
+      "dest": "test_banner_distribution_behavior.php"
     }
   ],
   "writable": [],
-  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php",
+  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
   "tests": [
-    "php test_otto_automation.php"
+    "php test_otto_automation.php",
+    "php test_banner_distribution_behavior.php"
   ],
   "timeout_seconds": 600
 }
