@@ -1,0 +1,24 @@
+PFERDE ATELIER – V1.50.473 CATEGORY CONTENT ORDER CANDIDATE
+
+Base live branch/commit:
+fix/category-intro-targeted-79-v150472-20260831
+f1e074b2e6dae9bec76ee8ab3f177080f69d2d41
+
+Design contract: V104 unchanged
+Scope: central category-level output order only
+
+Required order:
+Unterkategorie-/Beitragsart-Verweise -> Kategorienartikel -> Beitragsvorschau -> kommerzielle Blöcke
+
+Hard boundaries:
+- no text rewrite
+- no card/link logic change
+- no post-selection change
+- no affiliate-selection change
+- no V104 change
+- no main change
+- no LIVE PASS before user verification
+
+Hashes:
+- candidate ZIP SHA256: bf152b24f38615010a9b664dd00c529fdf7b67081e6026d1258eaf6799fee949
+- candidate PHP SHA256: aaed1426fe6e7e866d0e89f1f4acfb25cbca7d773163d7f9eb0e3eb64fa7ec41
