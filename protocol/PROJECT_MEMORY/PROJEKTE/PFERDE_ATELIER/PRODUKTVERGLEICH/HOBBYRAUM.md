@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / V1-PROTOTYP TECHNISCH PASS / ERSTER PLUGINTEST VORBEREITUNG
+STATUS: AKTIV / V1-PROTOTYP + ZIP-INSTALLATIONSTEST PASS / MANUELLER WP-TEST BEREIT
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,7 +9,7 @@ STATUS: AKTIV / V1-PROTOTYP TECHNISCH PASS / ERSTER PLUGINTEST VORBEREITUNG
 Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
 
 **AKTUELLER AUFTRAG**
-Den isolierten allgemeinen V1-Prototyp als installierbare WordPress-Plugins für den ersten manuellen Plugintest vorbereiten.
+Die zwei geprüften Plugin-ZIPs im ersten manuellen WordPress-Test installieren und aktivieren. Keine Veröffentlichung.
 
 **DU DARFST NICHT**
 STARTMASTER/TEXT umbauen, dessen aktiven Reparaturbereich verändern, Produktfakten erfinden, Affiliate-/SEO-Daten zur fachlichen Produktwahrheit machen oder automatisch veröffentlichen.
@@ -53,14 +53,30 @@ V1-Rollen:
 - Affiliate = Exact-Match + Kaufangebote/Preise/Verfügbarkeit;
 - TEXT/STARTMASTER = keine V1-Laufzeitabhängigkeit.
 
+## ERSTER ZIP-PLUGINTEST – PASS
+
+Temporärer echter ZIP-Installationssmoke:
+- ZIP-Struktur PASS;
+- `universal-product-knowledge` per WordPress installiert + aktiviert PASS;
+- `universal-product-comparison` danach per WordPress installiert + aktiviert PASS;
+- Real WordPress/MySQL Gesamtlauf PASS;
+- finales Draft-/Link-/Grafiksystem PASS;
+- Publish-Sperre PASS.
+
+Testlauf: `34136786494`.
+
+Finaler Branch nach Entfernen aller temporären Workflow-Dateien:
+`38ae1137b5d90d64d28b3f02fc31b85f00ee8375`
+
+`Pferde Atelier Immutable Base Hardlock` -> PASS.
+
 ## NEXT ACTION
 
-**Ersten echten Plugintest vorbereiten:**
-1. `universal-product-knowledge` als installierbares ZIP paketieren;
-2. `universal-product-comparison` als installierbares ZIP paketieren;
-3. Installationsreihenfolge hart festhalten: Produktwissen zuerst, Produktvergleich danach;
-4. ZIP-Inhalt prüfen: genau ein Plugin-Root, keine Repo-/Test-/Campus-Altlasten außerhalb des Pluginordners;
-5. keine Live-Veröffentlichung; erster Test endet bei WordPress-DRAFT.
+**Manueller WordPress-Plugintest:**
+1. `universal-product-knowledge-0.1.0-prototype.zip` installieren und aktivieren;
+2. danach `universal-product-comparison-0.2.0-prototype.zip` installieren und aktivieren;
+3. keine Veröffentlichung auslösen;
+4. zuerst nur Installation/Aktivierung und eventuelle WordPress-Fehlermeldungen prüfen.
 
 ## Globale Arbeitsort-Sperre
 
