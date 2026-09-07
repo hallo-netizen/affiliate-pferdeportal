@@ -1,0 +1,45 @@
+name: Chat Export Affiliate 6.72.3
+
+on:
+  push:
+    branches:
+      - chat-export-affiliate-6723-20260907
+    paths:
+      - '.github/workflows/chat-export-affiliate-6723.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify version and source count
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="release/affiliate-zentrale/current/affiliate-portal-router"
+          grep -F "Version: 6.72.3" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.3';" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "Stable tag: 6.72.3" "$ROOT/readme.txt"
+          test "$(find "$ROOT" -type f | wc -l | tr -d ' ')" = "26"
+
+      - name: Build full plugin ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd release/affiliate-zentrale/current
+          zip -X -r "$GITHUB_WORKSPACE/affiliate-zentrale_v6.72.3_TEST.zip" affiliate-portal-router >/tmp/zip.log
+          cd "$GITHUB_WORKSPACE"
+          unzip -l affiliate-zentrale_v6.72.3_TEST.zip
+          sha256sum affiliate-zentrale_v6.72.3_TEST.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-zentrale-v6.72.3-chat
+          path: affiliate-zentrale_v6.72.3_TEST.zip
+          if-no-files-found: error
+          retention-days: 1
