@@ -1,7 +1,7 @@
 AFFILIATE_ZENTRALE OTTO/AWIN + PRODUKTWISSEN + BANNER CONTRACT EVIDENCE
 DATE=2026-09-07
-STATUS=LOCAL_CONTRACT_PASS_REAL_OTTO_DATA_PENDING
-SOURCE_MANIFEST_SHA256=7505a05b1a5534f7cfb0d3063b1eb50e40f723e223847299cb3864c5d116cffc
+STATUS=STATIC_CURRENT_SOURCE_PASS_LOCAL_BEHAVIOR_PASS_BOUND_DIRECT_RUN_READY_REAL_OTTO_DATA_PENDING
+SOURCE_MANIFEST_SHA256=b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4
 SOURCE_FILE_COUNT=26
 
 BOUND_SCOPE
@@ -51,9 +51,13 @@ HOBBYRAUM
 TASK=AFFILIATE_HOBBYRAUM/TASK.current.json
 TASK_BOUND_TEST=php test_otto_automation.php
 TASK_TEST_BINDING=PASS
+DIRECT_READ_ONLY_RUNNER=bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh
+DIRECT_RUNNER_BINDING=PASS
+EXACT_REPOSITORY_DIRECT_RUN=NOT_EXECUTED_IN_THIS_CHAT_RUNTIME
 EXACT_CONTAINER_RUN=NOT_EXECUTED_IN_THIS_CHAT_RUNTIME
-REASON=local execution environment has PHP but no Docker/Podman; AFFILIATE_HOBBYRAUM runner itself requires Docker/Podman.
-RULE=Do not upgrade this to Hobbyraum runner PASS until the bound runner actually executes.
+REASON=the connected GitHub repository is not mounted in the local container and network cloning is unavailable; Docker/Podman is also unavailable.
+LOCAL_EQUIVALENT_BEHAVIOR_TESTS=PASS on PHP 8.4.23.
+RULE=Do not upgrade this to exact-bound-run PASS until one repository-checkout direct run or the isolated container runner executes.
 
 REAL DATA / LIVE BOUNDARIES
 PENDING real OTTO programme 14336 proof from the publisher's own Awin account
