@@ -88,3 +88,12 @@ Neue reale Fehler erhalten:
 4. genau einen autoritativen Hauptort bzw. klar benannte technische Originalquellen.
 
 Keine ausführliche Fehlerwahrheit an zwei Orten.
+
+
+## PV-V1-20260907
+
+Bereich: PRODUKTVERGLEICH
+Status: AKTIV / 0.2.4 FIX-KANDIDAT TECHNISCH PASS / NUTZER-LIVE-VERIFY OFFEN
+
+Autoritative Fehlerquelle:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/FEHLERQUELLEN.md`
