@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 26,
+  "generation": 27,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -351,17 +351,20 @@
       "checked_at": "2026-09-07"
     },
     "otto_awin_first_functional_plugin_test": {
-      "status": "PASS_WITH_EXPECTED_PARTIAL_DATA",
+      "status": "FAIL_INTEGRATION_DEFECT_DISCOVERED",
       "advertiser_id": 14336,
       "programme_name": "OTTO DE",
-      "final_queue_stage": "complete",
-      "final_queue_status": "completed",
-      "run_status": "partial",
-      "imported": 0,
-      "updated": 0,
-      "blocked": 0,
-      "message": "Partnerlauf abgeschlossen; Angebote vollständig, Produktfeed nicht eindeutig verfügbar.",
-      "real_creative_source_bound": false,
+      "evidence": {
+        "otto_feed_exists": "CONFIRMED_OFFICIAL_OTTO_AFFILIATE_SITE",
+        "otto_feed_update_schedule": "twice_daily_about_03_30_and_15_30",
+        "awin_product_feed_list_requires_separate_key": true,
+        "runtime_result": "Partnerlauf partial because plugin had no exact 14336 feed bound"
+      },
+      "defects": [
+        "Awin overall connection can be marked connected even when feed_api_key is missing and feed_status is not_configured.",
+        "Awin feed-list request is capped at 2 MiB and parser caps rows at 3000, so a valid OTTO feed can be omitted from local discovery.",
+        "Official current Awin feed download URLs use datafeed.api.productserve.com, but automation_validate_awin_feed_url currently rejects that host."
+      ],
       "checked_at": "2026-09-07"
     }
   },
@@ -390,7 +393,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "OTTO_FIRST_PLUGIN_TEST_COMPLETE_NEXT_BIND_REAL_PRODUCT_FEED_OR_DOCUMENT_UNAVAILABLE",
+    "current_milestone": "FIX_AWIN_OTTO_PRODUCT_FEED_DISCOVERY_AND_OFFICIAL_DOWNLOAD_HOST_BEFORE_NEXT_LIVE_TEST",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
