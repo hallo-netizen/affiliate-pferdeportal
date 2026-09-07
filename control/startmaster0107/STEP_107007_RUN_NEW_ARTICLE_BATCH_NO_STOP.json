@@ -54,7 +54,7 @@
     },
     {
       "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
-      "sha256": "e35cb7eb7ff9b2526b0b54f3ab402a8c5cb0a5dc9329206c5551e92a8889ec82"
+      "sha256": "64d2e5a58bba6db486191e9badc65938d2ea11f563375228adc82c1fff5688e4"
     },
     {
       "ref": "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",
