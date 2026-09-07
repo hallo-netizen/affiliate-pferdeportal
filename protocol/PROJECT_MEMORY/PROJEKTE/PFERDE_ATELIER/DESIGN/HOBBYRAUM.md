@@ -81,9 +81,13 @@ SHA-256:
 Erlaubte Transformation:
 nur
 
-**Affiliate-Partnerbanner ↔ Beitragsvorschau**
+**Affiliate-PRODUKTE / Produktvorschläge (pa266-products) ↔ Beitragsvorschau (pa297-popular)**
 
-auf der zentralen Kategorieebene.
+Ziel:
+**Produktvorschläge stehen direkt über der Beitragsvorschau.**
+
+Der Affiliate-Banner bleibt exakt an seiner bisherigen V1.50.472-Position.
+Artikel, Verweise und jeder andere Block bleiben exakt wie V1.50.472.
 
 Kein anderer Block darf bewegt werden.
 
