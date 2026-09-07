@@ -1532,7 +1532,11 @@ trait PPAR_Automation_Suite_Trait {
             'product_type' => $category,
             'google_product_category' => $google,
             'gtin' => sanitize_text_field($this->automation_awin_field($row, array('gtin','ean'))),
+            // Keep the legacy display/search MPN fallback for compatibility, but
+            // expose a second exact-only field that never treats merchant SKU as
+            // manufacturer identity. Productwissen Exact Match may use only this.
             'mpn' => sanitize_text_field($this->automation_awin_field($row, array('mpn','sku'))),
+            'exact_mpn' => sanitize_text_field($this->automation_awin_field($row, array('mpn'))),
             '_source_kind' => 'product',
             '_run_uuid' => $run_uuid,
             '_partner_name' => sanitize_text_field((string) ($programme['name'] ?? $snapshot['submitted_name'] ?? 'Awin-Partner')),
