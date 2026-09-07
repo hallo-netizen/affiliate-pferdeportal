@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / 0.2.2 GEBUNDENER ERSTDRAFT + CLEAN-ZIP PASS / MANUELLER TEST BEREIT
+STATUS: AKTIV / 0.2.3 HAUPTNAVIGATION + ERSTDRAFT PASS / MANUELLER TEST BEREIT
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,7 +9,7 @@ STATUS: AKTIV / 0.2.2 GEBUNDENER ERSTDRAFT + CLEAN-ZIP PASS / MANUELLER TEST BER
 Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
 
 **AKTUELLER AUFTRAG**
-Produktwissen 0.1.0 unverändert lassen, Produktvergleich 0.2.1 durch den hart geprüften Clean-ZIP-Stand 0.2.2 ersetzen und danach ausschließlich den gebundenen PV-REG-001-Admin-Test ausführen. Keine Veröffentlichung.
+Produktwissen 0.1.0 unverändert lassen, Produktvergleich durch den hart geprüften Clean-ZIP-Stand 0.2.3 ersetzen und danach ausschließlich den gebundenen PV-REG-001-Admin-Test ausführen. Keine Veröffentlichung.
 
 **DU DARFST NICHT**
 STARTMASTER/TEXT umbauen, dessen aktiven Reparaturbereich verändern, Produktfakten erfinden, Affiliate-/SEO-Daten zur fachlichen Produktwahrheit machen oder automatisch veröffentlichen.
@@ -118,14 +118,34 @@ Freigegebene ZIP:
 SHA-256:
 `683828e03bd4949aa022ccd25fa62ae7ede105ef3921db2e6d0899b66bf29c67`
 
+## 0.2.3 – WORDPRESS-HAUPTNAVIGATION PASS
+
+Änderung:
+- `Produktvergleich` ist ein eigener Top-Level-Menüpunkt in der WordPress-Hauptnavigation;
+- nicht mehr unter `Werkzeuge`;
+- der gebundene `PV-REG-001`-Test bleibt derselbe;
+- keine neue Writer-/Import-/Publish-Logik.
+
+Beleg:
+- Run `34153930934` -> PASS;
+- Clean-ZIP-Installation -> PASS;
+- Top-Level-Menü `Produktvergleich` exakt einmal vorhanden -> PASS;
+- nicht unter `Werkzeuge` -> PASS;
+- erster gebundener Draft weiterhin -> PASS.
+
+Freigegebene ZIP:
+`universal-product-comparison-0.2.3-prototype.zip`
+
+SHA-256:
+`9b9a3c86fd2c7d82ce60a49d62df0506e223bf6c457b95a4ace7e4c61a9d1efd`
+
 ## NEXT ACTION
 
-**Manueller Test:**
 1. Produktwissen `0.1.0` nicht anfassen;
-2. Produktvergleich `0.2.2-prototype` über das installierte `0.2.1` ersetzen;
-3. danach WordPress -> Werkzeuge -> Produktvergleich Test;
+2. Produktvergleich `0.2.3-prototype` über die installierte Version ersetzen;
+3. danach in der WordPress-Hauptnavigation auf **Produktvergleich** klicken;
 4. `PV-REG-001 als Draft testen` einmal klicken;
-5. Ergebnis/Draft prüfen; nichts veröffentlichen.
+5. Draft öffnen und gemeinsam prüfen; nichts veröffentlichen.
 
 ## Globale Arbeitsort-Sperre
 
