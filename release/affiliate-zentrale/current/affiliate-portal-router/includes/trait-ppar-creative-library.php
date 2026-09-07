@@ -717,8 +717,13 @@ trait PPAR_Creative_Library_Trait {
             'declared_height'=>$declared_height,
             'source_status'=>$source_status,
             'source_kind'=>$normalized['source_kind'],
-            'source_payload_hash'=>hash('sha256', wp_json_encode($source_payload_for_hash, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
         );
+        if ($type === 'product') {
+            $source_fingerprint['product_payload_hash'] = hash(
+                'sha256',
+                wp_json_encode($source_payload_for_hash, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            );
+        }
         $normalized['source_hash'] = hash('sha256', wp_json_encode($source_fingerprint, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         return $normalized;
     }
