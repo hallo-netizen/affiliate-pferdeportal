@@ -1,39 +1,28 @@
-# NOTFALL-TRESOR – WIEDERAUFBAU
+# NOTFALL-TRESOR – GITHUB-WIEDERAUFBAU
 
 STAND: 2026-09-07
-STATUS: KISS
+STATUS: GITHUB-ONLY
 
-Nur einen Stand mit `BACKUP_PASS` verwenden.
+## Wiederaufbau
 
-## WIEDERAUFBAU
+1. `GITHUB_KOMPLETTBACKUP_*.zip` entpacken.
+2. enthaltenes `GITHUB_KOMPLETTBACKUP.tar.gz` entpacken.
+3. Git-Bundle in ein neues leeres Repository spiegeln.
+4. `git fsck --full --strict` ausführen.
+5. Branches und Tags aus dem Manifest/Ref-Inventar prüfen.
+6. GitHub-Metadaten als Wiederaufbauquelle verwenden:
+   Issues/PRs/Releases/Labels/Milestones/Rulesets/Workflows usw.
+7. Release-Artefakte wieder anbinden.
+8. nicht exportierbare Secret-Werte aus ihrer separaten sicheren Recovery-Quelle neu setzen.
 
-1. **GitHub**
-   - Git-Mirror zurückspielen;
-   - Branches/Tags prüfen;
-   - notwendige GitHub-Einstellungen anhand des Metadatenexports wiederherstellen.
+## PASS-GRENZE
 
-2. **WordPress**
-   - vorhandene WordPress-Vollsicherung wiederherstellen;
-   - Datenbank + Dateien prüfen.
+Git-Restore:
+`GITHUB_REPOSITORY_RESTORE_PASS`
 
-3. **Projektarchiv**
-   - nur Dateien ergänzen, die nicht bereits durch GitHub/WordPress wiederhergestellt wurden.
+Vollständiger GitHub-Neuaufbau:
+erst nach realem Test eines leeren Zielrepositorys.
 
-4. **Prüfen**
-   - Manifest/Hashes;
-   - Campus-Einstieg;
-   - WordPress erreichbar;
-   - benötigte Projektdateien vorhanden.
+## HARD RULE
 
-Ergebnis:
-
-`RESTORE_PASS`
-
-oder
-
-`RESTORE_FAIL:<GRUND>`
-
-## HARTE REGEL
-
-Backup/Archiv niemals als Arbeitsquelle benutzen.
-Nach Wiederherstellung wieder normal über den Campus arbeiten.
+Das Backup ist READ/VERIFY/RESTORE ONLY und nie Arbeitsquelle.
