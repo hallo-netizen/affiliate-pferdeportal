@@ -32,19 +32,28 @@ Damit sind Produktwissen, Vergleichspaarung, Merkmalsmatrix und deterministische
 
 ## NEXT ACTION
 
-**Minimalen Product-Compare-Writer gegen das echte Writer-Dossier entwickeln und zuerst nur Text-DRAFT erzeugen.**
+**WordPress-DRAFT-Ausgabe als nächste dünne Schicht auf den vollständig gebundenen Single-Door-Output setzen.**
 
-Pflicht:
-1. vorhandene Textmaschinen-Regeln nur gezielt als Referenz/isolierbare Funktion prüfen;
-2. zentrale Vergleichstabelle sehr weit oben;
-3. Tabelle enthält Fakten + verständliche Entscheidungsbedeutung;
-4. `SOURCE_CONFLICT` / `NOT_IN_SOURCE` dürfen niemals glattgebügelt werden;
-5. Vor-/Nachteile nur aus belegbaren Unterschieden;
-6. Fazit: welches Produkt passt zu welchem Bedarf, kein pauschaler Sieger;
-7. fehlende fachliche Entscheidungsgrundlage = BLOCKED statt erfundener Empfehlung;
-8. Artikelvertrag darf anhand echter Testartikel kontrolliert weiterentwickelt werden.
+Harte Regeln:
+1. WordPress-Draft-Writer akzeptiert niemals freien Titel oder freien HTML-Body;
+2. Eingang ausschließlich: Vergleichs-ID + project_key + gebundene ruleset_id;
+3. Draft-Writer ruft intern ausschließlich `upc_production()` auf;
+4. nur `DRAFT_READY_FOR_REVIEW` + gültiger Receipt darf einen WordPress-Draft erzeugen;
+5. Post-Status ausschließlich `draft`;
+6. kein Publish-/Future-/Private-Fallback;
+7. gespeicherter Post-Body muss byte-identisch zum validierten Renderer-HTML sein;
+8. gespeicherter Output-Hash muss erneut geprüft werden;
+9. fehlender/abweichender Receipt oder Hash = BLOCKED.
 
-Noch kein WordPress-Publish, kein Affiliate-Renderer und kein Frontend.
+Belegter Writer-Stand:
+- Zero-Freedom Static Guard PASS;
+- 100/100 byte-identisch;
+- Golden Output PV-REG-001 PASS;
+- Ruleset-Manipulation BLOCKED;
+- Faktenänderung gegen altes Ruleset BLOCKED;
+- Run `34111825722` SUCCESS.
+
+Noch kein Affiliate-Renderer und kein Vergleichsarchiv/Frontend. Diese folgen erst nach WordPress-DRAFT-PASS.
 
 ## Globale Arbeitsort-Sperre
 
