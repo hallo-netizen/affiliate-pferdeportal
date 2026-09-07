@@ -106,6 +106,102 @@ upc_real_assert( in_array( 'SOURCE_CONFLICT', $warning_codes, true ), 'writer do
 upc_real_assert( in_array( 'NOT_IN_SOURCE', $warning_codes, true ), 'writer dossier exposes NOT_IN_SOURCE' );
 upc_real_assert( ! isset( $writer_dossier['subjects'][0]['facts'] ), 'writer identity block does not duplicate product facts' );
 
+$writer = upc_writer();
+upc_real_assert( ! is_wp_error( $writer ), 'writer available' );
+
+$without_rules = $writer->build_draft( $comparison_id );
+upc_real_assert(
+    is_wp_error( $without_rules ) && 'UPC_DECISION_RULE_MISSING' === $without_rules->get_error_code(),
+    'writer blocks differing verified facts without approved decision rules'
+);
+$missing_rule_keys = $without_rules->get_error_data()['fact_keys'];
+upc_real_assert( in_array( 'outer_material_denier', $missing_rule_keys, true ), 'missing denier rule exposed' );
+upc_real_assert( in_array( 'neck_system', $missing_rule_keys, true ), 'missing neck-system rule exposed' );
+
+$neutral_rule = function( $meaning, $need_fit = array(), $pros = array(), $cons = array() ) {
+    return function( $feature ) use ( $meaning, $need_fit, $pros, $cons ) {
+        return array(
+            'meaning'          => $meaning,
+            'need_fit'         => $need_fit,
+            'pros_by_position' => $pros,
+            'cons_by_position' => $cons,
+        );
+    };
+};
+
+$decision_rules = array(
+    'fill_weight' => $neutral_rule(
+        'Beide Hersteller beschreiben diese Modelle als ungefütterte 0-g-Decken. Aus dem Füllgewicht ergibt sich daher keine Präferenz.'
+    ),
+    'outer_material_denier' => $neutral_rule(
+        'WeatherBeeta nennt 1200D, LeMieux 600D. Wer gezielt eine höhere angegebene Denierzahl priorisiert, findet sie beim WeatherBeeta-Modell; aus der Denierzahl allein wird keine pauschale Haltbarkeitswertung abgeleitet.',
+        array(
+            array(
+                'need' => 'höhere angegebene Denierzahl',
+                'positions' => array( 1 ),
+                'reason' => 'WeatherBeeta nennt 1200D, LeMieux 600D.'
+            ),
+        )
+    ),
+    'breathability' => $neutral_rule(
+        'Beide Hersteller nennen einen Wert von 3.000, verwenden aber unterschiedliche Bezeichnungen. Ohne identisch definierte Prüfmethode wird daraus keine belastbare Präferenz abgeleitet.'
+    ),
+    'neck_system' => $neutral_rule(
+        'WeatherBeeta wird als Standard Neck beschrieben, LeMieux mit abnehmbarem Halsteil. Für Nutzer, die die Halsabdeckung je nach Bedarf verändern möchten, bietet die dokumentierte abnehmbare Lösung von LeMieux mehr direkte Flexibilität.',
+        array(
+            array(
+                'need' => 'veränderbare Halsabdeckung',
+                'positions' => array( 2 ),
+                'reason' => 'LeMieux nennt ausdrücklich ein abnehmbares Halsteil.'
+            ),
+        ),
+        array( 2 => array( 'Abnehmbares Halsteil dokumentiert.' ) )
+    ),
+    'liner_compatibility' => $neutral_rule(
+        'Für beide Modelle ist eine Liner-Kompatibilität dokumentiert. Aus diesem Merkmal ergibt sich deshalb keine klare Präferenz.'
+    ),
+    'front_closure' => $neutral_rule(
+        'Die Verschlusssysteme unterscheiden sich konstruktiv. WeatherBeeta nennt einen verstellbaren Quick-Clip-Verschluss mit Touch Tape, LeMieux einen 45° angewinkelten T-Bar-Verschluss. Welche Bedienart besser passt, ist eine Nutzerpräferenz und wird nicht pauschal bewertet.'
+    ),
+    'movement_cut' => $neutral_rule(
+        'Die Hersteller beschreiben unterschiedliche Schnittkonstruktionen. Aus den vorliegenden Herstellerangaben allein lässt sich nicht belastbar ableiten, welche Konstruktion für ein konkretes Pferd besser passt.'
+    ),
+    'cross_surcingles' => $neutral_rule(
+        'WeatherBeeta nennt zwei niedrige Kreuzgurte, LeMieux allgemein Kreuzgurte. Da die LeMieux-Quelle hier keine gleich detaillierte Mengenangabe liefert, wird kein Vorteil abgeleitet.'
+    ),
+    'leg_straps_tail_cord' => $neutral_rule(
+        'WeatherBeeta dokumentiert verstellbare, abnehmbare Beingurte; LeMieux elastische Beingurte plus PVC-beschichteten Fillet Strap. Die passende Lösung hängt davon ab, welches Befestigungskonzept gewünscht ist.',
+        array(
+            array(
+                'need' => 'verstellbare und abnehmbare Beingurte',
+                'positions' => array( 1 ),
+                'reason' => 'WeatherBeeta dokumentiert diese Eigenschaft ausdrücklich.'
+            ),
+            array(
+                'need' => 'elastische Beingurte plus Fillet Strap',
+                'positions' => array( 2 ),
+                'reason' => 'LeMieux dokumentiert diese Kombination ausdrücklich.'
+            ),
+        )
+    ),
+    'sizes' => $neutral_rule(
+        'Die Hersteller geben die Größen in unterschiedlichen Systemen an. Ohne zusätzliche normierte Größenabbildung wird daraus keine Reichweiten- oder Passformpräferenz abgeleitet.'
+    ),
+);
+
+$draft = $writer->build_draft( $comparison_id, $decision_rules );
+upc_real_assert( ! is_wp_error( $draft ), 'build real article draft with approved decision rules' );
+upc_real_assert( 'DRAFT_READY_FOR_REVIEW' === $draft['status'], 'writer returns review-only draft status' );
+upc_real_assert( 0 === $draft['external_link_count'], 'writer emits no external links' );
+upc_real_assert( false !== strpos( $draft['html'], '<h2>Vergleich auf einen Blick</h2>' ), 'comparison table placed high in draft' );
+upc_real_assert( false !== strpos( $draft['html'], 'Bedeutung für die Entscheidung' ), 'table contains decision meaning column' );
+upc_real_assert( false !== strpos( $draft['html'], 'Quellenkonflikt:' ), 'SOURCE_CONFLICT visible in article table' );
+upc_real_assert( false !== strpos( $draft['html'], 'In der verwendeten Herstellerquelle nicht angegeben' ), 'NOT_IN_SOURCE visible in article table' );
+upc_real_assert( false !== strpos( $draft['html'], '<h2>Vor- und Nachteile im direkten Vergleich</h2>' ), 'pros-cons section present' );
+upc_real_assert( false !== strpos( $draft['html'], '<h2>Welches Produkt passt zu welchem Bedarf?</h2>' ), 'need-fit section present' );
+upc_real_assert( false !== strpos( $draft['html'], 'Es gibt keinen pauschalen Sieger.' ), 'no universal winner in conclusion' );
+upc_real_assert( false === strpos( $draft['html'], 'href=' ), 'article body contains no links' );
+
 $missing_id = $compare->create_comparison(
     array(
         'comparison_key'     => 'pv-reg-001-missing-test',
