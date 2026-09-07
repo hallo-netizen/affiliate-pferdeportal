@@ -19,6 +19,7 @@ function source(string $name): string {
     $map = [
         'pferdeportal-affiliate-router.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php',
         'trait-ppar-automation-suite.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php',
+        'trait-ppar-awin-programme-gate.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php',
         'trait-ppar-output-objects.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php',
         'trait-ppar-article-plans.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-article-plans.php',
         'trait-ppar-creative-library.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php',
@@ -39,6 +40,7 @@ function source(string $name): string {
 }
 
 $automation = source('trait-ppar-automation-suite.php');
+$awin_gate = source('trait-ppar-awin-programme-gate.php');
 $output = source('trait-ppar-output-objects.php');
 $articles = source('trait-ppar-article-plans.php');
 $creative = source('trait-ppar-creative-library.php');
@@ -61,6 +63,33 @@ pass_or_fail(
 pass_or_fail(
     str_contains($automation, 'creative_library_schedule_asset_verification(10)'),
     'automated imports enter asset verification'
+);
+pass_or_fail(
+    str_contains($awin_gate, 'function awin_programme_gate_allowed_advertiser_ids')
+    && str_contains($awin_gate, "'allow_local'")
+    && str_contains($awin_gate, 'awin_programme_gate_current_joined'),
+    'scheduled Awin bootstrap enumerates only explicitly allowed and currently joined programmes'
+);
+pass_or_fail(
+    str_contains($automation, 'awin_programme_gate_allowed_advertiser_ids')
+    && !str_contains(substr(
+        $automation,
+        strpos($automation, 'function automation_scheduled_sources'),
+        strpos($automation, 'function automation_scheduled_source_batch') - strpos($automation, 'function automation_scheduled_sources')
+    ), 'partner_intake_snapshots()'),
+    'scheduled Awin sources do not require pre-existing Partner-Intake snapshots'
+);
+pass_or_fail(
+    str_contains($automation, 'function automation_refresh_awin_programme_list')
+    && str_contains($automation, "/programmes?relationship=joined")
+    && str_contains($automation, 'Last-Known-Good bleibt erhalten.'),
+    'joined Awin programme list refreshes automatically with Last-Known-Good fallback'
+);
+pass_or_fail(
+    str_contains($automation, 'function automation_refresh_awin_feed_list')
+    && str_contains($automation, 'https://productdata.awin.com/datafeed/list/apikey/')
+    && str_contains($automation, 'ppar_awin_feed_list_refresh_warning_v1'),
+    'official Awin product-feed list refreshes once per new automation cycle'
 );
 pass_or_fail(
     str_contains($automation, 'ppar_affiliate_awin_product_seller')
