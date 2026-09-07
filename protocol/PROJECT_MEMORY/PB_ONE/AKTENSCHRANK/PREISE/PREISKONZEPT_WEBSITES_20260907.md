@@ -767,3 +767,50 @@ Aktuelle Empfehlung:
 
 Begründung:
 Die dritte Ebene „Growth“ lässt sich sauberer und flexibler durch Zusatzmodule darstellen.
+
+
+---
+
+## 27. KISS-REVISION V3 – 4 SICHTBARE MODULE
+
+Weitere Vereinfachung:
+
+Die Modulgruppen „Sichtbarkeit“ und „Marketing“ überschneiden sich zu stark.
+Deshalb extern nur noch vier Zusatzmodule:
+
+### 1. SICHTBARKEIT
+- lokale SEO;
+- Google Business;
+- zusätzliche SEO-/Kampagnen-Landingpages;
+- Tracking-Grundlage, soweit Teil der vereinbarten Optimierung.
+
+### 2. CONTENT & MEDIEN
+- zusätzliche Texterstellung;
+- Recherche;
+- Bildauswahl/-bearbeitung;
+- Referenz-/Projektaufbereitung.
+
+### 3. LEADS & TERMINE
+- Terminbuchung;
+- erweiterte Anfragewege;
+- Rückruf-/Leadstrecken;
+- Standard-CRM-/Newsletter-Anbindung, soweit klar standardisierbar.
+
+### 4. MEHRSPRACHIGKEIT
+- zusätzliche Sprachversionen;
+- definierter Umfang auf Basis der bestehenden Website.
+
+Alles andere:
+**INDIVIDUELL.**
+
+Regel:
+Ein Modul wird nur separat angeboten, wenn
+1. nicht jeder Kunde es braucht,
+2. der Nutzen sofort verständlich ist,
+3. der Aufwand standardisierbar ist.
+
+Damit lautet die bevorzugte externe Architektur:
+
+**KOMPAKT + BUSINESS + 4 MODULE + INDIVIDUELL**
+
+Intern bleibt die Kalkulation beliebig fein.
