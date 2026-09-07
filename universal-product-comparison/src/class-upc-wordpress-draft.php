@@ -77,6 +77,7 @@ class UPC_WordPress_Draft {
 
         $meta = array(
             '_upc_project_key'              => sanitize_key( $project_key ),
+            '_upc_comparison_id'            => (string) absint( $comparison_id ),
             '_upc_comparison_uid'           => $draft['comparison_uid'],
             '_upc_input_hash'               => $draft['input_hash'],
             '_upc_output_hash'              => $draft['output_hash'],
