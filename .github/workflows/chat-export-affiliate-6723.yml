@@ -26,6 +26,9 @@ jobs:
           grep -F "const VERSION = '6.72.3';" "$ROOT/pferdeportal-affiliate-router.php"
           grep -F "Stable tag: 6.72.3" "$ROOT/readme.txt"
           test "$(find "$ROOT" -type f | wc -l | tr -d ' ')" = "26"
+          cd release/affiliate-zentrale/current
+          sha256sum -c ../CURRENT_SOURCE_SHA256.txt
+          cd "$GITHUB_WORKSPACE"
 
       - name: Build full plugin ZIP
         shell: bash
