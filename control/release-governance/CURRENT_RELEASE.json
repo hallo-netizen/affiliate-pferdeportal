@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 16,
+  "generation": 17,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -110,13 +110,22 @@
       "programme_list": "REFRESH_AT_NEW_AUTOMATION_CYCLE_LAST_KNOWN_GOOD_ON_FAILURE",
       "feed_list": "REFRESH_AT_NEW_AUTOMATION_CYCLE_LAST_KNOWN_GOOD_ON_FAILURE",
       "bootstrap": "ALLOW_LOCAL_AND_CURRENTLY_JOINED_WITHOUT_PARTNER_SNAPSHOT"
+    },
+    "productwissen_bridge": {
+      "official_branch": "hobbyroom/productwissen-v1-prototype",
+      "official_head_at_check": "42ad7460a903a64c22fe4dec1c70b901a6ecdd12",
+      "candidate_branch": "hobbyroom/productwissen-affiliate-exact-bridge-20260907",
+      "candidate_head_at_check": "823b4712d096c6e5613b20c8d22669447f3bc6ac",
+      "status": "ISOLATED_CANDIDATE_NOT_OFFICIALLY_INTEGRATED",
+      "ownership": "PRODUCTVERGLEICH_OFFICE_MUST_REVIEW_AND_INTEGRATE",
+      "e2e": "PENDING"
     }
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "RUN_CURRENT_SOURCE_DIRECT_OR_CONTAINER_HOBBYROOM_CHECK_THEN_BIND_REAL_OTTO_AWIN_PRODUCT_AND_CREATIVE_DATA",
-    "completion_condition": "CURRENT_SOURCE_BOUND_CHECK_PASS_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_PAGE_CATEGORY_ARTICLE_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
+    "bound_user_scope_action": "RUN_CURRENT_SOURCE_BOUND_CHECK; PRODUCTVERGLEICH_REVIEWS_BRIDGE; THEN_REAL_OTTO_AWIN_PRODUCT_AND_CREATIVE_E2E",
+    "completion_condition": "BOUND_CHECK_PASS_AND_PRODUCTWISSEN_BRIDGE_OFFICIALLY_INTEGRATED_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
     "sequence": 4,
@@ -261,9 +270,9 @@
       "source_manifest_sha256": "680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf"
     },
     "otto_awin_automated_product_distribution": {
-      "status": "STATIC_CURRENT_SOURCE_PASS_BOUND_DIRECT_RUN_READY_REAL_OTTO_DATA_PENDING",
+      "status": "STATIC_CURRENT_SOURCE_PASS_PRODUCTWISSEN_BRIDGE_CANDIDATE_READY_BOUND_RUN_AND_INTEGRATION_PENDING_REAL_OTTO_DATA_PENDING",
       "evidence_ref": "release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt",
-      "evidence_sha256": "786ecb39b8fefd21ba768aeb7dbb03be1bf266c407075ffdc1ca08d1391ff46f",
+      "evidence_sha256": "7c2b923886e8b2f5ab8af10b495cf2c46dc51fd46ebf631ed22d3a5b83b915f7",
       "source_manifest_sha256": "680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf"
     },
     "otto_awin_real_banner_source": {
@@ -304,7 +313,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "OTTO_BOUND_DIRECT_CHECK_THEN_REAL_AWIN_PRODUCT_AND_CREATIVE_END_TO_END",
+    "current_milestone": "CURRENT_SOURCE_BOUND_CHECK_PRODUCTWISSEN_BRIDGE_INTEGRATION_THEN_REAL_OTTO_E2E",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
