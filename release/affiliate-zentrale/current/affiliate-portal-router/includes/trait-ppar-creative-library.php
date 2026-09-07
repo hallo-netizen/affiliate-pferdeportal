@@ -502,6 +502,11 @@ trait PPAR_Creative_Library_Trait {
         $remaining = absint($wpdb->get_var("SELECT COUNT(*) FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%')"));
         if ($remaining > 0) {
             $this->creative_library_schedule_asset_verification(20);
+        } elseif (!empty($rows) && method_exists($this, 'article_plan_bump_campaign_revision')) {
+            // One revision bump after the complete verification wave is enough.
+            // This rebuilds article plans only after all newly imported products/
+            // banners have reached their final verified output state.
+            $this->article_plan_bump_campaign_revision('creative_asset_verification_complete');
         }
         return array('processed'=>count((array) $rows), 'remaining'=>$remaining);
     }
@@ -686,6 +691,17 @@ trait PPAR_Creative_Library_Trait {
             'topic_targets' => '[]',
             'payload' => wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
         );
+        // Source freshness must include provider payload fields as well.
+        // Otherwise price, availability, seller or product metadata can change
+        // while the row is incorrectly treated as unchanged.
+        $source_payload_for_hash = array();
+        foreach ((array) $row as $key => $value) {
+            if (strpos((string) $key, '_') === 0 || !is_scalar($value)) {
+                continue;
+            }
+            $source_payload_for_hash[sanitize_text_field((string) $key)] = sanitize_text_field((string) $value);
+        }
+        ksort($source_payload_for_hash);
         $source_fingerprint = array(
             'provider'=>$provider,
             'partner_external_id'=>$partner_external_id,
@@ -702,6 +718,12 @@ trait PPAR_Creative_Library_Trait {
             'source_status'=>$source_status,
             'source_kind'=>$normalized['source_kind'],
         );
+        if ($type === 'product') {
+            $source_fingerprint['product_payload_hash'] = hash(
+                'sha256',
+                wp_json_encode($source_payload_for_hash, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            );
+        }
         $normalized['source_hash'] = hash('sha256', wp_json_encode($source_fingerprint, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         return $normalized;
     }
