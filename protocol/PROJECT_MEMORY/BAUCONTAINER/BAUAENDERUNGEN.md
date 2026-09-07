@@ -90,3 +90,6 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-072 → Sicherungsarchitektur: Baucontainer definiert, Tresor führt aus
 - ARCH-073 → PB ONE Aktenschrank erhält Plugin-Fach für Eigenentwicklungen
 - ARCH-074 → PB ONE Aktenschrank erhält TODO-Fach für offene operative Themen
+- ARCH-075 → PB ONE Aktenschrank erhält Preis-Fach für Paket-/Baukastenlogik
+- ARCH-076 → bestehender Angebote/Flyer-Bereich wird zu Präsentation & Werbung erweitert
+- ARCH-077 → PB ONE Aktenschrank erhält Vertriebs-Fach; Lead-Management und Onboarding bleiben dort gebündelt
