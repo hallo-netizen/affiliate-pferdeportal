@@ -1,0 +1,8 @@
+{
+  "schema_version": "1",
+  "project_key": "pferde-atelier",
+  "publishing": {
+    "file": "publishing.json",
+    "sha256": "c88b0ac4cdc69978970a0b5b1c9666c492c4ae19cbb06e3eed8436fbfbe76b68"
+  }
+}
