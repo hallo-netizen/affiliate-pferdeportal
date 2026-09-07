@@ -136,11 +136,11 @@ Ein lokaler Mirror ist kein Ersatz für den aktuellen gebundenen Arbeitsweg.
 
 ## Produktvergleich – eindeutiges Routing
 
-Wenn der Nutzer Produktvergleiche planen, Vergleichskriterien festlegen, konkrete Vergleiche definieren oder Faktendossiers/Quellen für Produktvergleiche vorbereiten will:
+Wenn der Nutzer Produktvergleiche oder Variantenvergleiche planen, Produktwissen/Fakten binden, Vergleichsartikel als Draft erzeugen, deren QA/Archiv/Links/Grafik bearbeiten oder den Produktvergleichs-Workflow testen will:
 
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
 
-Wenn der Auftrag dagegen die eigentliche Textproduktion oder den STARTMASTER-/Textmaschinenlauf betrifft:
+Wenn der Auftrag normale TEXT-/SEO-Artikelproduktion oder den STARTMASTER-/Textmaschinenlauf außerhalb dieses Produktvergleichswegs betrifft:
 `PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md`
 
 Nicht vermischen.
