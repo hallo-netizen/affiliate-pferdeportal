@@ -1515,3 +1515,54 @@ BELEG:
 - `PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md`
 - Security-PR #137 / Head `5e0547c999a544d57e1891776f2f417e836eb605`
 - GitHub normaler hardlock auf diesem Head: PASS.
+
+
+## TEXT-TECH-20260907-PLANAB – Plan A und Plan B strikt getrennt
+
+WAS:
+Plan A (bestehender Produktionsweg) und Plan B (Slimline-Shadow) werden unabhängig gebaut, geprüft und gelagert.
+Plan B = Draft-PR #143 / `plan-b/text-slimline-shadow-v1-20260907`; keine Produktionsverdrahtung, kein Merge.
+
+WARUM:
+A/B-Vergleich soll jederzeit möglich bleiben, ohne dass Fixes, Tests oder Zustände zwischen den Linien vermischt werden.
+
+REGEL:
+Keine automatische Fixübernahme, kein Cherry-Pick/Teilmischen während der Vergleichsphase. Gemeinsame Basis dürfen nur dieselben Testdaten und unveränderten Qualitäts-/Sicherheitsregeln sein.
+
+
+## TEXT-TECH-20260907-LIVE-LT – B01 integriert, erster neuer Liveblocker LanguageTool
+
+WAS:
+B01-only PR #141 wurde integriert; current main = `f14ccf187b94c4beab9a86d0c69144f792ba2f64`.
+Der reale Plan-A-Codex-Lauf stoppte bei `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING` vor Abschluss von 107007.
+
+WARUM:
+#141 war der kleinste kausal isolierte Kandidat für den vorherigen B01-Liveblocker. Der anschließende Lauf sollte ausschließlich den nächsten realen technischen Zustand sichtbar machen.
+
+REGEL:
+B01 nicht als erneut live bestanden behaupten; neuer Lauf erreichte B01 nicht. LanguageTool-Einzelbranch bleibt Parkplatz.
+
+
+## TEXT-TECH-20260907-CORRIDOR – Anti-Minifix / echte Evidence-Autoritäten
+
+WAS:
+Pauls direkte Pipeline-Befunde, B01–B15/M01–M33, letzter echter 7/7-Stand und neuer LT-Livebefund wurden in einer technischen Corridor-Matrix zusammengeführt.
+
+WARUM:
+Wiederkehrende Fehler sind überwiegend dieselbe Klasse: geforderte Ausführung/Evidence ist nicht eindeutig gebunden oder angrenzende Gates beziehen sich auf unterschiedliche Artefaktzustände. Weitere isolierte Minifixes würden die Fehlerkette fortsetzen.
+
+REGEL:
+Kein Worker-selbstgeschriebenes PASS/Stage-Proof darf allein echte Prüfung beweisen. Keine neue Facharchitektur; vorhandene echte Prüfer/Evidence-Quellen müssen in der bestehenden einen Straße mechanisch eindeutig gebunden sein.
+
+
+## ARCH-085 – Verbindlicher A–F-Pre-Fix-Ablauf für technische Hobbyräume
+
+WAS:
+Der allgemeine Hobbyraum-Standard erhält denselben verbindlichen Ablauf wie der TEXT-Hobbyraum:
+Ausgangspunkt → 7 Pflichtchecks → Anti-Minifix → genau ein KISS-Kandidat → Positiv/Negativ/Invarianten → erst dann Realtest.
+
+WARUM:
+Ein bloßer Prompt oder Chat-Hinweis verhindert wiederholte Minifix-Schleifen nicht zuverlässig. Der Arbeitsraum muss die Reihenfolge und Fix-Sperre dauerhaft vorgeben.
+
+GRENZE:
+Keine Fachlogik im Hobbyraum. Eine Tür, dumme Wächter und fachliche Autoritäten bleiben unverändert.
