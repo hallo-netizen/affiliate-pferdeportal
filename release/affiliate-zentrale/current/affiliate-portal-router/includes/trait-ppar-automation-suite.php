@@ -235,17 +235,21 @@ trait PPAR_Automation_Suite_Trait {
         $sources = array();
         $awin = $this->network_settings('awin');
         if (!empty($awin['enabled'])) {
-            foreach ($this->partner_intake_snapshots() as $snapshot) {
-                if (!is_array($snapshot)
-                    || sanitize_key((string) ($snapshot['provider'] ?? '')) !== 'awin'
-                    || absint($snapshot['external_id'] ?? 0) <= 0
-                    || !$this->awin_programme_gate_is_allowed(absint($snapshot['external_id'] ?? 0))) {
+            // Explicit programme approval is the scheduling truth. A Partner-
+            // Intake snapshot is produced by the job itself and must never be
+            // a bootstrap prerequisite for a newly approved advertiser.
+            $allowed_awin_ids = method_exists($this, 'awin_programme_gate_allowed_advertiser_ids')
+                ? $this->awin_programme_gate_allowed_advertiser_ids()
+                : array();
+            foreach ((array) $allowed_awin_ids as $advertiser_id) {
+                $advertiser_id = absint($advertiser_id);
+                if ($advertiser_id <= 0 || !$this->awin_programme_gate_is_allowed($advertiser_id)) {
                     continue;
                 }
                 $sources[] = array(
-                    'key' => 'awin:' . absint($snapshot['external_id']),
+                    'key' => 'awin:' . $advertiser_id,
                     'provider' => 'awin',
-                    'partner_external_id' => (string) absint($snapshot['external_id']),
+                    'partner_external_id' => (string) $advertiser_id,
                 );
             }
         }
@@ -349,6 +353,66 @@ trait PPAR_Automation_Suite_Trait {
      * of a new automation cycle. Failures keep Last-Known-Good feed metadata;
      * they do not erase the existing list or invent a feed.
      */
+    /**
+     * Refresh currently joined Awin programmes before source scheduling.
+     * Existing approval records are not changed: new programmes stay pending,
+     * previously approved programmes remain schedulable only while still joined.
+     * Failed refresh keeps Last-Known-Good programme metadata.
+     */
+    private function automation_refresh_awin_programme_list() {
+        $settings = $this->network_settings('awin');
+        if (empty($settings['enabled'])) {
+            return array('status'=>'disabled','count'=>0);
+        }
+        $publisher_id = preg_replace('/[^0-9]/', '', (string) ($settings['publisher_id'] ?? ''));
+        $token = $this->network_secret('awin', 'access_token', $settings);
+        if ($publisher_id === '' || $token === '') {
+            return array('status'=>'not_configured','count'=>0);
+        }
+
+        $url = 'https://api.awin.com/publishers/' . rawurlencode($publisher_id) . '/programmes?relationship=joined';
+        $response = $this->api_response(wp_remote_get($url, array(
+            'timeout'=>20,
+            'redirection'=>2,
+            'headers'=>array('Accept'=>'application/json','Authorization'=>'Bearer ' . $token),
+            'limit_response_size'=>1048576,
+        )));
+        if (empty($response['ok']) && in_array(absint($response['code'] ?? 0), array(401,403), true)) {
+            $fallback = add_query_arg('accessToken', rawurlencode($token), $url);
+            $response = $this->api_response(wp_remote_get($fallback, array(
+                'timeout'=>20,
+                'redirection'=>2,
+                'headers'=>array('Accept'=>'application/json'),
+                'limit_response_size'=>1048576,
+            )));
+        }
+        if (empty($response['ok'])) {
+            return new WP_Error(
+                'awin_programme_list_refresh_failed',
+                'Awin-Programmliste konnte nicht aktualisiert werden; Last-Known-Good bleibt erhalten.'
+            );
+        }
+
+        $json = json_decode((string) ($response['body'] ?? ''), true);
+        if (!is_array($json)) {
+            return new WP_Error(
+                'awin_programme_list_invalid',
+                'Awin-Programmliste ist ungültig; Last-Known-Good bleibt erhalten.'
+            );
+        }
+        $safe = array();
+        foreach (array_slice(array_values($json), 0, 5000) as $programme) {
+            if (!is_array($programme)) { continue; }
+            $id = absint($programme['id'] ?? $programme['advertiserId'] ?? 0);
+            $name = sanitize_text_field((string) ($programme['name'] ?? $programme['advertiserName'] ?? ''));
+            $relationship = sanitize_key((string) ($programme['relationship'] ?? 'joined'));
+            if ($id <= 0 || $name === '' || $relationship !== 'joined') { continue; }
+            $safe[] = array('id'=>$id,'name'=>$name,'relationship'=>'joined');
+        }
+        update_option(self::OPTION_NETWORK_AWIN_PROGRAMMES, $safe, false);
+        return array('status'=>'refreshed','count'=>count($safe));
+    }
+
     private function automation_refresh_awin_feed_list() {
         $settings = $this->network_settings('awin');
         if (empty($settings['enabled'])) {
@@ -397,6 +461,19 @@ trait PPAR_Automation_Suite_Trait {
             return;
         }
         if ($new_cycle) {
+            // Refresh joined programmes first so an explicitly allow_local
+            // advertiser can self-bootstrap without a pre-existing snapshot.
+            $programme_refresh = $this->automation_refresh_awin_programme_list();
+            if (is_wp_error($programme_refresh)) {
+                update_option('ppar_awin_programme_list_refresh_warning_v1', array(
+                    'at'=>time(),
+                    'code'=>$programme_refresh->get_error_code(),
+                    'message'=>$programme_refresh->get_error_message(),
+                ), false);
+            } else {
+                delete_option('ppar_awin_programme_list_refresh_warning_v1');
+            }
+
             // Official productdata feed list is scriptable. Refresh it before
             // partner snapshots for the new cycle. On failure keep LKG metadata.
             $feed_refresh = $this->automation_refresh_awin_feed_list();
