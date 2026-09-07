@@ -68,3 +68,34 @@ Der temporäre Workflow wurde danach entfernt.
 Bereinigter Branch vor dieser Abschluss-Nachholprüfung:
 `d9460e19f30f9bbaff5e9d5c63e134f8d9a38333`;
 Immutable Base Hardlock Run `34154765043` PASS.
+
+
+## Abschluss-/Nachholprüfung
+
+Frisch aus autoritativen Quellen geprüft und nachgeholt:
+
+- `FEHLERQUELLEN.md` als einzige detaillierte Produktvergleichs-Fehlerquelle angelegt;
+- `FEHLERREGISTER.md` nur mit einem Zeiger auf diese Quelle ergänzt;
+- `ZIELVERTRAG_V1.md` als aktiver Produktvergleichs-Zielvertrag angelegt;
+- `ZIELVERTRAEGE/REGISTER.md` nur mit einem Zeiger ergänzt;
+- alte Bürotür-Aussage `Produktvergleich -> TEXT-Produktion` entfernt;
+- gleiche alte Route aus `HANDLUNGSVERZEICHNIS.md`, `HAUPTPFOERTNER.md` und Pferde-Atelier-`START_HERE.md` entfernt;
+- `CURRENT_STATE.md` auf `0.2.4 technisch PASS / Nutzer-Live-Verify OFFEN` bereinigt;
+- `HOBBYRAUM.md` auf genau einen aktuellen 0.2.4-Live-Verifikationsweg gekürzt;
+- veraltete MOD-006/MOD-007-Stände im Modulregister auf technisch belegten V1-Prototyp aktualisiert;
+- Universal Product Knowledge und Universal Product Comparison im WordPress-Register als Artefakte aufgenommen;
+- dynamischen Projekt-Livestatus aus WordPress-/Modulregister bewusst **nicht** dupliziert;
+- allgemeine Regel `Funktions-PASS ≠ Lifecycle-PASS` in den Hobbyraum-Standard übernommen und im Bauprotokoll dokumentiert;
+- PR #142 auf aktuellen Produktwissen+Produktvergleich-Scope umbenannt; PR-Text verweist für dynamischen Stand ausschließlich auf CURRENT/HOBBYRAUM.
+
+Negativ geprüft:
+- genau eine Produktvergleichs-`CURRENT_STATE.md`;
+- genau eine Produktvergleichs-Fehlerhauptquelle;
+- genau ein Produktvergleichs-Zielvertrag;
+- keine temporären Produktvergleichs-Testworkflows im Branch;
+- kein aktiver Paul-Auftrag;
+- kein Auto-Publish;
+- kein Merge nach main.
+
+Weiter offen:
+0.2.4 muss auf der echten Nutzer-WordPress-Seite installiert und dort Hauptmenü + erster Draft bestätigt werden.
