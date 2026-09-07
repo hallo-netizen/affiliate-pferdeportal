@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: GOLDMASTER-REKONSTRUKTION / BASELINE-KANDIDAT GEBUNDEN
+STATUS: GOLDMASTER BASELINE BEREIT / hardlock-base-WORKFLOW STARTET NICHT
 
 ## AUTORITÄT
 
@@ -109,3 +109,11 @@ Befund:
 - alle 14 bytegleich zum bewiesenen `de21f6…`-Stand;
 - aktuelle Security-/Campus-Schutzschicht bleibt erhalten;
 - kein Publish.
+
+
+## hardlock-base-Trigger-Befund
+
+Manueller Reopen von PR #148 wurde von GitHub verarbeitet: normaler `hardlock` neu gestartet und PASS.
+`Pferde Atelier Immutable Base Hardlock` / `pull_request_target` startete nicht.
+Ruleset fordert `hardlock-base` weiterhin; Merge von #148 wird deshalb korrekt blockiert.
+Goldmaster-Kandidat bleibt unverändert `482fa8ab71f4f180900707ca2309a5bd87727416`.
