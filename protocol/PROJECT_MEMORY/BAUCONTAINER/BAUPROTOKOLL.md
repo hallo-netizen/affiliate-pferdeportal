@@ -1342,3 +1342,31 @@ PB-ONE-Türschild, Zentralregister, Aktenschrank-START_HERE und Aktenschrank-Reg
 
 BEZUG:
 ARCH-075/076/077.
+
+
+### 2026-09-07 – Allgemeine Lifecycle-Testregel aus Produktvergleichsfehler abgeleitet
+
+AUSLÖSER:
+Beim Produktvergleich 0.2.3 wurde ein Hauptmenü-PASS aus einem direkten Aufruf von `register_menu()` abgeleitet. Auf der echten Nutzer-WordPress-Seite war der Menüpunkt danach nicht sichtbar.
+
+BEFUND:
+Der Test prüfte die isolierte Funktion, nicht den tatsächlichen WordPress-Admin-Lifecycle. Damit war der PASS methodisch falsch.
+
+ALLGEMEINGÜLTIGE KORREKTUR:
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md` erhält die Regel:
+UI-/Menü-/Hook-/Routing-/Login-/Lifecycle-PASS nur nach Ausführung des echten Framework-/CMS-Lifecycles.
+
+POSITIVER BELEG IM AUSLÖSERFALL:
+Produktvergleich 0.2.4 / Run `34154550626`:
+- echter WordPress-HTTP-Server;
+- echter Admin-Login;
+- gerenderte `/wp-admin/`-Sidebar;
+- Top-Level-Menü sichtbar;
+- echte Menüseite aufgerufen;
+- gebundener Draftweg weiterhin PASS.
+
+NEGATIV:
+Reine Logiktests werden nicht unnötig zu Browser-/HTTP-Tests aufgebläht.
+
+BEZUG:
+ARCH-078 / PV-PLAN-019.
