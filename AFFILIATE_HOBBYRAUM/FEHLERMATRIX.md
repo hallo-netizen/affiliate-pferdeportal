@@ -48,3 +48,5 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 
 | AF-035 | OTTO-Produkt wird ohne konkreten Verkäufer veröffentlicht | Produktfeed ist technisch vollständig, Verkäuferbeleg fehlt | OTTO-Produktwerbung bleibt fail-closed, bis der reale Verkäufername aus dem echten Feed gebunden ist; Produktkarte zeigt danach „Verkauf durch …“ |
 | AF-036 | Alte eBay-Kohortenregel unterdrückt verifiziertes OTTO | eBay und OTTO passen fachlich, Legacy-Modus `ebay_only` filtert die neue Quelle weg | Nur bei zentral verifiziertem OTTO/Awin-Kandidaten darf die alte Kohortensperre für diese Auswahl entfallen; Rangfolge bleibt fachlich, unbestätigte Fremdquellen bleiben geschützt |
+
+| AF-037 | Preis/Bestand/Verkäufer ändert sich, Datensatz gilt trotzdem als unverändert | Produkt-Payload ändert sich, alter Source-Fingerprint betrachtet nur Kernfelder | Produkt-Fingerprint bindet deterministisch alle importierten skalaren Produktfelder; dadurch lösen Preis-, Bestands-, Verkäufer- und Metadatenänderungen Update + erneute Prüfung aus. Banner-Fingerprint bleibt unverändert |
