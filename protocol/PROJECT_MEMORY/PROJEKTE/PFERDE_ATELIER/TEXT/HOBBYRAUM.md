@@ -27,12 +27,12 @@ HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 003e6899346a9a4193ff86d6caca62df068ebbc6
-ACTIVE_BLOCKER: GOLDMASTER_BASELINE_HARDLOCK_BASE_PENDING
-PLAN_PHASE: GOLDMASTER_BASELINE_SERVER_CHECK
+ACTIVE_BLOCKER: ADMIN_BYPASS_REQUIRED_FOR_GOLDMASTER_CLOUD_ENTRY_RESTORE
+PLAN_PHASE: GOLDMASTER_CLOUD_ENTRY_RESTORE
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_HARDEN_HOBBYROOM;2_COPY_GOLDMASTER;3_REAPPLY_MANDATORY_CHANGES_ONE_BY_ONE;4_REAL_TEST_AFTER_EACH_CHANGE
-CANDIDATE_BRANCH: hobbyroom/goldmaster-main-reconstruction-20260907
-CANDIDATE_HEAD_SHA: f1083efeee4df3d570b805b426042bc82984d7b5
+CANDIDATE_BRANCH: security/allow-codex-no-origin-20260907
+CANDIDATE_HEAD_SHA: 86b14f84feefd7a84c48d57312c88848094b08f4
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
 ALLOWED_PATH_PREFIXES: control/CURRENT_STARTMASTER.json;control/output-quarantine/output_release_gate.py;control/output-quarantine/runtime_entry_gate.py;control/single-door-boundary/codex_current_action.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/GITHUB_FINAL_RELEASE.py;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json;control/startmaster0107/codex-production-runtime/codex_environment_preflight.py;control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py;control/startmaster0107/fachworkflow_proof_handoff.py;control/startmaster0107/test_fachworkflow_proof_handoff.py
 CHECK_PAUL: PASS
@@ -185,3 +185,29 @@ Folge:
 - kein Schritt 3;
 - keine Reparatur am Goldmaster;
 - zuerst den bestehenden Workflow in GitHub Actions reaktivieren/aktivieren.
+
+
+## GOLDMASTER CLOUD-ENTRY RESTORE – PR #151
+
+Ziel:
+Produktionsmotor wieder exakt auf den bewiesenen `de21f6…`-Stand setzen; Hobbyraum-/Paul-Schutz bleibt ausschließlich außen im PR-/Ruleset-Hardlock.
+
+Kandidat:
+- PR #151
+- Branch `security/allow-codex-no-origin-20260907`
+- Head `86b14f84feefd7a84c48d57312c88848094b08f4`
+
+Exakt bytegleich zu `de21f6cd35c60849c551fd82f78e75ce57c99fab`:
+1. `.github/workflows/pferde-atelier-deterministic-entrance-gate.yml`
+2. `control/cloud-entry-gate/cloud_entry.py`
+3. `control/cloud-entry-gate/cloud_repo_ci_test.py`
+
+Prüfung:
+- normaler `hardlock`: PASS
+- `hardlock-base`: FAIL ausschließlich `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`
+- kein weiterer Fehler im Kandidaten
+- kein Publish
+- kein Schritt 3 vor Realtest
+
+NEXT ACTION:
+Einmalige Admin-Wartung: `hardlock-base` im Ruleset kurz entfernen → PR #151 mergen → `hardlock-base` sofort wieder hinzufügen → danach echter 7/7-Realtest.
