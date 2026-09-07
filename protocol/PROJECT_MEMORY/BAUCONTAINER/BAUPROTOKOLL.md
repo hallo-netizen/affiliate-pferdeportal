@@ -1588,3 +1588,38 @@ Keine neue Backup-Engine. Vorhandene Git-, WordPress- und Archivtechnik wird wie
 
 BEZUG:
 ARCH-083.
+
+
+### 2026-09-07 – Hobbyraum von Erinnerung zu technischer Integrationssperre vorbereitet
+
+AUSLÖSER:
+Der normale TEXT-Arbeitschat wich trotz dokumentierter Hobbyraumregeln wiederholt vom festgelegten Arbeitsplan ab und begann neue Prüfpfade/Minifix-Überlegungen.
+
+HARTER BEFUND:
+- `HOBBYROOM_WORK_LOCK_V1` war bereits im TEXT-Hobbyraum vorhanden;
+- im technischen Security-Pfad wurde dieser Lock bisher nirgends ausgewertet;
+- dadurch war er faktisch nur Dokumentation.
+
+KISS-UMSETZUNG:
+- vorhandenen `HOBBYROOM_WORK_LOCK_V1` um `TECHNICAL_SCOPE_PREFIXES` ergänzt;
+- bestehenden Hobbyraum-Standard um das maschinenlesbare Schema ergänzt;
+- bestehenden #137-`verify-pr`-Gate erweitert, sodass derselbe serverseitige Hardlock den Lock prüft;
+- kein neuer Workflow, keine zweite Tür, kein neuer Fachprüfer.
+
+SERVERREGEL:
+Nur exakt gebundener Branch + Head + main-Basis + erlaubte Pfade + vollständige 7-Punkte-PASSes + `INTEGRATION_ALLOWED=true` kann im gebundenen technischen Scope PASS erhalten.
+
+HARD TEST:
+- Security-Head `5e0547c999a544d57e1891776f2f417e836eb605`;
+- `Pferde Atelier Deterministic Entrance Gate`: SUCCESS;
+- `hardlock-base`: weiterhin erwarteter FAIL an der bestehenden `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`-Selbstschutzgrenze.
+
+EINE-WAHRHEIT-KORREKTUR:
+TEXT-`CURRENT_STATE.md` und `HOBBYRAUM.md` enthielten noch stale Angaben `main c8a96e7…` / PR #141 nicht gemergt.
+Beide wurden auf den frisch geprüften Stand `main f14ccf1…`, PR #141 MERGED und aktuellen LanguageTool-Liveblocker bereinigt.
+
+NICHT ALS AKTIV GEMELDET:
+Die neue serverseitige Hobbyraum-Sperre ist erst nach kontrollierter Aktivierung von Security-PR #137 auf main produktiv erzwungen.
+
+BEZUG:
+ARCH-084.
