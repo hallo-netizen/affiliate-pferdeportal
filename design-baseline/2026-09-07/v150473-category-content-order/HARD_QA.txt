@@ -1,0 +1,47 @@
+PFERDE ATELIER – HARD QA V1.50.473 / KATEGORIE-REIHENFOLGE
+
+AUSGANG
+- Autoritative Live-Basis: Pferde Atelier Design 1.50.472 / Contract V104
+- Basis-Plugin SHA-256: ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9
+- Basis-PHP SHA-256: 21620a6735a26f85de71c5c052eff056b668dfaf39a9327a322c49512d185d24
+- Neuer Pluginheader: 1.50.473
+- Designvertrag: V104 UNVERÄNDERT
+
+SCOPE
+- Exakt eine zentrale Renderer-Datei geändert: pferde-template-kit.php
+- Zentrale Kategorieebene render_category_level_v150269()
+- Gilt damit für alle Seiten dieser strukturellen Kategorieebene, nicht nur „Gebisse“.
+- Neue Reihenfolge:
+  1. H1
+  2. Unterkategorie-/Beitragsart-Verweise
+  3. unveränderter Kategorienartikel
+  4. Beitragsvorschau / meistgelesene Beiträge
+  5. reales Partnerbanner, falls vorhanden
+  6. Produkte, falls vorhanden
+  7. Direktwerbeplatz
+
+POSITIVPRÜFUNG
+- PHP-Lint: PASS
+- Zentrale Reihenfolge statisch eindeutig: PASS
+- Kategorienartikel wird im zentralen Renderer exakt einmal ausgegeben: PASS
+- ZIP-Readback: PASS
+- Readback-PHP byte-identisch zum gebauten PHP: PASS
+
+NEGATIV-/REGRESSIONSPRÜFUNG
+- Alle Paketdateien außer pferde-template-kit.php byte-identisch zu 1.50.472: PASS
+- Kategorietexte/Patchdateien unverändert: PASS
+- Designvertrag allgemein V104 unverändert: PASS
+- Designvertrag Pferde Atelier V104 unverändert: PASS
+- Karteninhalte und Linkziele unverändert: PASS (keine entsprechende Logik geändert)
+- Beitragsauswahl unverändert: PASS (nur Ausgabeposition geändert)
+- Affiliate-Auswahl/Produkte/Bannerinhalte unverändert: PASS (nur Bannerausgabeposition geändert)
+- Keine Änderung an TEXT/SEO, BILD, Suche, Breadcrumb, Publish: PASS
+
+ARTEFAKT
+- Plugin: PFERDE_ATELIER_DESIGN_V1.50.473_CONTRACT_V104_KATEGORIE_REIHENFOLGE_INSTALLIEREN.zip
+- Plugin SHA-256: bf152b24f38615010a9b664dd00c529fdf7b67081e6026d1258eaf6799fee949
+- PHP SHA-256: aaed1426fe6e7e866d0e89f1f4acfb25cbca7d773163d7f9eb0e3eb64fa7ec41
+
+LIVE
+- NOCH KEIN LIVE-PASS.
+- Nächster Schritt: installieren und auf „Gebisse“ plus mindestens einer weiteren Seite derselben Kategorieebene visuell prüfen.
