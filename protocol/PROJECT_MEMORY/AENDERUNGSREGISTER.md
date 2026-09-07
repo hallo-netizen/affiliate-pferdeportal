@@ -1042,3 +1042,20 @@ BELEG:
 `protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
 `release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt`
 
+
+
+## PV-PLAN-011 – Produktwissen und Vergleichskern werden über reales Dossier gehärtet
+
+STAND: 2026-09-07.
+
+WAS:
+Der V1-Kern wird nicht nur mit synthetischen Daten, sondern vor dem Writer mit einem realen freigegebenen Forschungsdossier geprüft. `PV-REG-001` besteht den WordPress+MySQL-Lauf mit 14 Pflichtmerkmalen, SOURCE_CONFLICT und NOT_IN_SOURCE.
+
+KISS-FOLGE:
+Vergleiche speichern keine Produktfaktenkopie. Zusätzlich zu den Produkt-/Varianten-IDs wird nur die geordnete Liste der verbindlichen Vergleichsmerkmale gespeichert. Daraus wird ein deterministisches Writer-Dossier gebaut.
+
+FAIL-CLOSED:
+Fehlt ein erforderlicher Fakt vollständig, entsteht kein Writer-Dossier. NOT_IN_SOURCE und SOURCE_CONFLICT sind dagegen explizite belegte Zustände und bleiben als Warnungen sichtbar.
+
+ALTSTAND:
+Ältere `TIER_SAME_BRAND`-Dossiers aus dem Forschungsbestand werden wegen der späteren Zwei-Hersteller-Regel nicht automatisch importiert.
