@@ -27,8 +27,8 @@ HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 457f33a09751db3acf78246ee394a59141d94d15
-ACTIVE_BLOCKER: GOLDMASTER_BASELINE_REALTEST_PENDING
-PLAN_PHASE: GOLDMASTER_BASELINE_INTEGRATION
+ACTIVE_BLOCKER: IMMUTABLE_BASE_HARDLOCK_WORKFLOW_NOT_TRIGGERING
+PLAN_PHASE: HOBBYROOM_SECURITY_WORKFLOW_REACTIVATION
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_HARDEN_HOBBYROOM;2_COPY_GOLDMASTER;3_REAPPLY_MANDATORY_CHANGES_ONE_BY_ONE;4_REAL_TEST_AFTER_EACH_CHANGE
 CANDIDATE_BRANCH: hobbyroom/goldmaster-main-reconstruction-20260907
@@ -125,7 +125,7 @@ LanguageTool-Rebind-Branch:
 **PARKPLATZ / NICHT INTEGRIEREN**
 
 Aktueller Planpunkt:
-**2 – GOLDMASTER-BASELINE INTEGRIEREN UND REAL TESTEN**
+**1 – HOBBYRAUM DICHTMACHEN / hardlock-base-WORKFLOW REAKTIVIEREN**
 
 Aktuelle Entscheidung:
 **Nur Kandidat `482fa8ab71f4f180900707ca2309a5bd87727416` ist freigegeben.**
@@ -170,3 +170,18 @@ Systemische technische Wirkungskarte:
 
 Warum/Änderungen:
 `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+
+
+## AKTUELLER TECHNISCHER BLOCKER – hardlock-base STARTET NICHT
+
+PR #148 wurde manuell geschlossen und wieder geöffnet.
+Der normale `pull_request`-Workflow lief danach neu um 2026-09-07 19:34:31Z und ist PASS.
+Der getrennte `pull_request_target`-Workflow `Pferde Atelier Immutable Base Hardlock` erzeugte dagegen keinen Lauf.
+Der Ruleset verlangt `hardlock-base` weiterhin korrekt und blockiert den Merge deshalb fail-closed.
+
+Folge:
+- PR #148 bleibt offen und unverändert;
+- kein Merge;
+- kein Schritt 3;
+- keine Reparatur am Goldmaster;
+- zuerst den bestehenden Workflow in GitHub Actions reaktivieren/aktivieren.
