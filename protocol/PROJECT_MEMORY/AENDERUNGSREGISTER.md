@@ -1446,3 +1446,26 @@ HARD LOCAL Positiv/Negativ + Reversibilität PASS; Nutzer-LIVE-PASS auf „Gebis
 BELEG:
 `PROJEKTE/PFERDE_ATELIER/DESIGN/LIVE_PASS_DESIGN_ORDER_SWAP_002.md`
 `PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_LAST_RECEIPT.json`
+
+
+## ARCH-083 – Komplettsicherung auf drei Blöcke reduziert
+
+STAND: 2026-09-07.
+
+WAS:
+Der verbindliche Pferde-Atelier-Backupweg besteht nur noch aus:
+\`GitHub komplett + WordPress komplett + Projektarchiv komplett -> ein datiertes Sicherungspaket\`.
+
+WARUM:
+Die frühere Tresorentwicklung mit mehreren Kits, Kapselvarianten und strikten historischen Einzelartefakt-Blockern war für den eigentlichen Sicherungszweck unnötig komplex und fehleranfällig.
+
+REGEL:
+- vorhandene Backuptechnik wiederverwenden;
+- keine Parallelarchitektur;
+- zwei unabhängige Kopien;
+- wöchentlich und vor größeren Umbauten;
+- nur BACKUP_PASS/BACKUP_FAIL;
+- historisch fehlende Einzel-ZIPs blockieren nicht automatisch, wenn der aktuelle funktionsfähige Stand vollständig wiederherstellbar gesichert ist.
+
+AUTORITÄT:
+\`protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md\`
