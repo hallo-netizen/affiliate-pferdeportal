@@ -456,3 +456,38 @@ Echter WordPress-/Datenbank-Beleg:
 - Endmarker: `UPK_WORDPRESS_DB_GESAMT_PASS`.
 
 Damit ist der minimale Produktwissen-Datenkern im echten WordPress+MySQL-Kontext belegt. Kein Live-Portal-Deployment behauptet.
+
+
+## PRODUKTVERGLEICH V1 – VERGLEICHSKERN + REALDOSSIER 2026-09-07
+
+Technik-Branch / Draft-PR:
+- `hobbyroom/productwissen-v1-prototype`;
+- Draft-PR #142 gegen Campus-Branch, nicht main;
+- geprüfter Head: `f2ec606a4eb0dc00114cf079e184cc94868eb0f9`;
+- WordPress+MySQL Run `34109264265`: SUCCESS.
+
+Belegt:
+- eigener minimaler Vergleichskern `universal-product-comparison`;
+- Produktvergleich: 2–4 Produkte, mindestens zwei Hersteller, gleiche Produktgruppe;
+- Variantenvergleich: 2–4 Varianten desselben Basismodells;
+- A/B und B/A werden als Dublette blockiert;
+- Vergleich speichert Produkt-/Varianten-IDs und Vergleichsmetadaten, keine Produktfaktenkopie;
+- Fakten werden bei Readback dynamisch aus PRODUKTWISSEN gelesen;
+- geänderte Produktfakten erscheinen dadurch ohne Kopie im Vergleich;
+- verbindliche Vergleichsmerkmale werden separat als Schlüssel + Label + Reihenfolge gespeichert;
+- fehlender erforderlicher Fakt blockiert fail-closed.
+
+Realer Datenbeweis:
+- echtes Forschungsdossier `PV-REG-001` aus dem 68-Beiträge-Paket;
+- WeatherBeeta ComFiTec Plus Dynamic Turnout 0G vs. LeMieux Arika Ripstop 0g Turnout;
+- 14 Pflichtmerkmale je Vergleich;
+- `SOURCE_CONFLICT` bleibt sichtbar und wird nicht geglättet;
+- `NOT_IN_SOURCE` bleibt sichtbar;
+- deterministisches Writer-Dossier = `READY_WITH_WARNINGS` statt falschem PASS;
+- Endmarker: `UPC_REAL_DOSSIER_PV_REG_001_PASS`.
+
+Altbestand-Hinweis:
+Das 68-Dossier-Paket enthält noch ältere `TIER_SAME_BRAND`-Vergleiche. Diese sind unter der später eingefrorenen Regel **Produktvergleich = mindestens zwei Hersteller** nicht automatisch freigegeben und dürfen nicht blind importiert werden. Sie müssen neu klassifiziert oder ausgeschlossen werden.
+
+Noch nicht belegt:
+Writer/Textqualität, Entscheidungsinterpretation „welches Merkmal passt zu welchem Bedarf“, WordPress-Draft-Ausgabe, SEO-Anbindung, Affiliate-Exact-Match, Frontend/Archivtemplate.
