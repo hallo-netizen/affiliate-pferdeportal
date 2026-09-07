@@ -112,12 +112,48 @@ jobs:
           wp config create --path=/tmp/upk-wp --dbname=wp_test --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
           wp core install --path=/tmp/upk-wp --url=http://example.test --title='UPK Test' --admin_user=admin --admin_password='test-password' --admin_email=admin@example.test --skip-email --quiet
 
-      - name: Install and activate plugin
+      - name: Build clean installable plugin ZIPs
+        shell: bash
         run: |
-          cp -a universal-product-knowledge /tmp/upk-wp/wp-content/plugins/universal-product-knowledge
-          cp -a universal-product-comparison /tmp/upk-wp/wp-content/plugins/universal-product-comparison
-          wp plugin activate universal-product-knowledge --path=/tmp/upk-wp
-          wp plugin activate universal-product-comparison --path=/tmp/upk-wp
+          set -euo pipefail
+          rm -rf /tmp/upc-plugin-build
+          mkdir -p /tmp/upc-plugin-build/universal-product-knowledge
+          mkdir -p /tmp/upc-plugin-build/universal-product-comparison
+
+          cp universal-product-knowledge/universal-product-knowledge.php /tmp/upc-plugin-build/universal-product-knowledge/
+          cp -a universal-product-knowledge/src /tmp/upc-plugin-build/universal-product-knowledge/
+
+          cp universal-product-comparison/universal-product-comparison.php /tmp/upc-plugin-build/universal-product-comparison/
+          cp -a universal-product-comparison/src /tmp/upc-plugin-build/universal-product-comparison/
+          cp -a universal-product-comparison/assets /tmp/upc-plugin-build/universal-product-comparison/
+          cp -a universal-product-comparison/config /tmp/upc-plugin-build/universal-product-comparison/
+
+          (
+            cd /tmp/upc-plugin-build
+            zip -qr /tmp/universal-product-knowledge.zip universal-product-knowledge
+            zip -qr /tmp/universal-product-comparison.zip universal-product-comparison
+          )
+
+          test "$(unzip -Z1 /tmp/universal-product-knowledge.zip | head -n1)" = "universal-product-knowledge/"
+          test "$(unzip -Z1 /tmp/universal-product-comparison.zip | head -n1)" = "universal-product-comparison/"
+          ! unzip -Z1 /tmp/universal-product-knowledge.zip | grep -E '/tests/|protocol/|\.git'
+          ! unzip -Z1 /tmp/universal-product-comparison.zip | grep -E '/tests/|protocol/|\.git|ZERO_FREEDOM'
+          unzip -Z1 /tmp/universal-product-knowledge.zip | grep -F 'universal-product-knowledge/universal-product-knowledge.php'
+          unzip -Z1 /tmp/universal-product-comparison.zip | grep -F 'universal-product-comparison/universal-product-comparison.php'
+          echo UPC_INSTALLABLE_ZIP_STRUCTURE_PASS
+
+      - name: Install ZIPs and activate in dependency order
+        run: |
+          wp plugin install /tmp/universal-product-knowledge.zip --activate --path=/tmp/upk-wp
+          wp plugin install /tmp/universal-product-comparison.zip --activate --path=/tmp/upk-wp
+          wp plugin is-active universal-product-knowledge --path=/tmp/upk-wp
+          wp plugin is-active universal-product-comparison --path=/tmp/upk-wp
+          echo UPC_REAL_ZIP_INSTALL_ACTIVATION_PASS
+
+      - name: Attach test fixtures after clean ZIP install
+        run: |
+          cp -a universal-product-knowledge/tests /tmp/upk-wp/wp-content/plugins/universal-product-knowledge/tests
+          cp -a universal-product-comparison/tests /tmp/upk-wp/wp-content/plugins/universal-product-comparison/tests
 
       - name: Real WordPress + MySQL readback
         run: |
