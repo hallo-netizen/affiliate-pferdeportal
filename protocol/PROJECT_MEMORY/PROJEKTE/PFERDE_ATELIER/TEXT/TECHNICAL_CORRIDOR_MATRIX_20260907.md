@@ -197,3 +197,141 @@ Aktuelle Entscheidung:
 `FIX_FORBIDDEN`
 
 Kein Produktionscode ändern, bis Punkt 4 vollständig und danach Punkt 6/7 am **einen konsolidierten Kandidaten** bestanden sind.
+
+
+---
+
+# NULL-FREIHEIT / ZWANGSJACKE – HARTE SYSTEMGRENZE 2026-09-07
+
+Unantastbar:
+- genau **eine Tür pro Raum**;
+- genau **ein dummer, fachblinder Wächter**;
+- Chat/Codex hat **keine freie Workflow-, Routing-, State-, Qualitäts-, Prüf-, Publish- oder Ersatzentscheidungsbefugnis**;
+- keine neue Capability, kein neuer Executor, kein zweiter Handoff-Weg, kein Parallelpfad;
+- Fach-/Inhalts-/SEO-/Design-/Tabellen-/Link-/LanguageTool-/PPM-/PSERC-/PSTE-/Publish-Regeln bleiben unverändert.
+
+Der gebundene Worker darf ausschließlich das erzeugen, was der **bereits gebundene Fachworkflow/Textmaschinenvertrag** als Arbeitsprodukt verlangt. Er darf niemals selbst festlegen, welcher Prüfer gilt, welche Evidence genügt oder wie ein PASS zu begründen ist.
+
+**Harte Ableitung:** Ein Worker-geschriebenes `status=PASS`, `execution_performed=true`, beliebiger 64-Hex-`input_sha256` oder selbst erzeugter Stage-Proof darf niemals allein eine Qualitätsstufe freigeben.
+
+## Exakt gebundene PPM-6.7.9-Prüfung – neue harte Befunde
+
+Bytegenau geprüft wurde das in 107007 gebundene Paket:
+`PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`
+SHA-256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`.
+
+### Finaler Artikelzustand
+
+`PPM679_Normal_Draft_Pipeline::execute_plan()` übernimmt den in `production_plan_item.canonical_article.body_html` gebundenen Artikel über `PPM679_Content_Generator`, prüft dessen `content_hash` und führt `PPM679_Content_Validator::check()` auf diesem Inhalt aus.
+
+**Positiv:** An dieser PPM-Außengrenze ist Paul F2 nicht reproduziert: PPM validiert den gebundenen finalen Artikelzustand und erzeugt keinen zweiten unabhängigen Artikeltext.
+
+### Tabelle
+
+Für `Beratung` verlangt der aktive Content-Validator eine Pflicht-Tabelle mit semantischer Mindeststruktur.
+
+Zusätzlich existiert der aktive, separate `PPM679_Table_Hard_Rule_Validator` mit härterem Vertrag:
+- Klasse `system-129-table comparison-table`;
+- keine kollidierenden Inline-Border/Background-Regeln;
+- Rendered-Style-Hardrules.
+
+**Harter Negativbefund:** Entfernen der `system-129-table`-Klasse kann im normalen Draft-Content-Validator weiterhin PASSen, während `PPM679_Table_Hard_Rule_Validator::validate_source_html()` denselben Artikel korrekt BLOCKED meldet.
+
+**Folge:** `table_contract` darf nicht durch einen generischen Worker-Proof ersetzt werden. Der vorhandene Hardrule-Validator muss die Autorität bleiben. Kein Tabellenregel-Fix, keine neue Tabellenlogik.
+
+### Interne Links
+
+Der normale Content-Validator prüft exakt die in `runtime_order.links` gebundenen `href`/Anchor-Paare im finalen Artikel.
+
+Der separate `PPM679_WordPress_Link_Target_Validator` prüft zusätzlich reale Ziel-/Snapshotregeln.
+
+Aber: sein aktuell im PPM-Paket fest gebundener `WORDPRESS_LINK_TARGET_SNAPSHOT_V1` ist ein historischer, G9-spezifischer Transport-Snapshot und **kein allgemeines Registry-Set für beliebige neue Artikel**.
+
+Frühere echte Produktionspläne zeigen dagegen bereits den richtigen allgemeinen Datenvertrag pro Artikel:
+- `link_bindings` mit Rolle, href, Anchor, section_id, target_type, target_status, hierarchy_path;
+- `portal_link_registry`;
+- `portal_link_registry_hash`.
+
+**Folge:** Der Chat darf Links nicht frei wählen oder deren Gültigkeit selbst bestätigen. Die Linkauswahl muss aus dem bestehenden Fachworkflow kommen; die technische Schicht darf nur die bereits erzeugte Bindung/Provenienz mechanisch prüfen. Der G9-Spezial-Snapshot darf nicht als allgemeine Ersatzautorität missbraucht werden.
+
+### LanguageTool
+
+Frühere echte Produktionspläne enthalten bereits die benötigte nicht-freie Provenienz:
+- Engine `LanguageTool 6.8 / Bestand 43`;
+- `executed_commandline_jar_sha256`;
+- Installations-/Manifest-SHAs;
+- `input_sha256`;
+- `raw_stdout_sha256`;
+- `return_code`;
+- Checked-Text-/Raw-Report-SHAs;
+- eigenes Provenienzfile + SHA.
+
+Der aktuelle PPM-Fixture-Builder kann dagegen synthetische LanguageTool-Evidence erzeugen, ohne LanguageTool real aufzurufen.
+
+**Folge:** Der neue Liveblocker `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING` ist kein Einzelfehler. Er beweist, dass die aktuelle Worker-Anweisung die echte bestehende LT-Provenienz nicht deterministisch bindet. Kein LT-Minifix; reale LT-Evidence muss aus der bereits bestehenden LT-Ausführung stammen.
+
+### Design / Rendered DOM
+
+`PPM679_Rendered_DOM_Validator` verlangt ausdrücklich:
+- echten WordPress-Render;
+- `post_id`;
+- Readback-Content-Hash;
+- reale Desktop-/Mobile-Captures;
+- Evidence-Class `SERVER_USER_TRIGGERED_TEST`;
+- Capture-Source `HTTP_RESPONSE_AFTER_WORDPRESS_RENDER`.
+
+107007 verbietet gleichzeitig WordPress-Schreibvorgänge im aktuellen Lauf.
+
+**Harter Befund:** Ein per Artikel in 107007 behaupteter `design_format`-PASS darf **nicht** so tun, als sei damit ein echter Rendered-DOM-PASS erbracht. Diese Evidence kann in diesem Zustand technisch nicht ehrlich entstehen.
+
+Das bedeutet nicht, dass die Designregel geändert oder entfernt werden darf. Es bedeutet nur: die technische Stage-Bedeutung ist bisher nicht exakt genug gebunden und darf vom Chat nicht interpretiert werden.
+
+## Präzisierte Systemursache
+
+Nicht „Prüfer fehlen“.
+
+Sondern:
+
+**Die vorhandenen echten Prüfer/Evidence-Quellen sind im aktuellen 12-Stage-Handoff nicht eindeutig und modellunabhängig den Stage-Namen zugeordnet.**
+
+Dadurch entstehen:
+- Selbstbeglaubigung;
+- falsche doppelte PASS-Wahrheiten;
+- Spezialvalidator vorhanden, aber Hauptpfad ruft ihn nicht auf;
+- Upstream-Evidence wird vom Worker neu behauptet;
+- Stage-Name lässt offen, welcher Artefaktzustand / welche Evidence wirklich gemeint ist.
+
+Das verletzt die Zwangsjacke.
+
+## KISS-Ziel – ohne Architekturänderung
+
+Keine neuen Straßen. Keine neuen Prüfer. Keine neuen Executor. Keine intelligente Wächterlogik.
+
+Nur:
+
+**Im bestehenden einen Handoff jeden Stage-Namen fest auf seine bereits vorhandene autoritative Evidence-Quelle binden.**
+
+Der Wächter prüft ausschließlich mechanisch:
+- erwartete Evidence-Art / Contract;
+- exakte Batch-/Artikel-/Slot-/Beitragsart-Identität;
+- exakten Input-/Output-Hash;
+- vorhandenes echtes Artefakt;
+- unveränderten Prüfer-/Regelpaket-Hash;
+- PASS/FAIL des echten Prüfers.
+
+Er interpretiert keine Fachregel. Der Chat wählt keinen Prüfer. Der Chat darf keinen Ersatz-PASS schreiben.
+
+## 7-Punkte-Fix-Sperre – Update
+
+1. Paul-Prüfung: **PASS**
+2. Fehlerhistorie: **PASS**
+3. letzter funktionierender Stand: **PASS**
+4. Vor-/Nachstufen: **WEITGEHEND PASS; zwei Bedeutungsbindungen bleiben formal zu schließen:**
+   - allgemeine aktuelle Link-Provenienzquelle im NEW-Fachworkflow;
+   - exakte Bedeutung von `design_format` vor WordPress-Render vs. späterem Rendered-DOM-Gate.
+5. wiederkehrende Fehlerklasse: **PASS / JA**
+6. konsolidierter Positiv-/Negativtest: **NOCH NICHT**
+7. unveränderte Qualität/Architektur/Sicherheit: **NOCH NICHT AM KANDIDATEN BEWIESEN**
+
+Aktuell weiterhin:
+`FIX_FORBIDDEN`
