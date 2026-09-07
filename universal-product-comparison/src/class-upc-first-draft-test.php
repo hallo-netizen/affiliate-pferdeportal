@@ -16,7 +16,7 @@ class UPC_First_Draft_Test {
     const MENU_SLUG      = 'upc-first-draft-test';
 
     public static function register() {
-        add_action( 'admin_menu', array( __CLASS__, 'register_menu' ) );
+        add_action( 'admin_menu', array( __CLASS__, 'register_menu' ), 99999 );
         add_action( 'admin_post_upc_run_first_draft_test', array( __CLASS__, 'handle_admin_run' ) );
     }
 
