@@ -1,6 +1,6 @@
 # ZENTRALES MODULREGISTER
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 ZWECK: Der Nutzer muss sich NICHT merken, welche Grundmodule existieren, wo sie liegen oder ob sie projektübergreifend nutzbar sind.
 
 ## Rolle
@@ -263,11 +263,15 @@ Pferde-spezifische Kategorien, Produktgruppen, Merkmalskataloge und Quellenprofi
 BELEG:
 Nutzerunterlagen vom 2026-09-06, insbesondere das 68-Dossier-Übergabepaket mit getrennten Produktionsaufträgen, Kernfakten, Herstellerquellen, Konfliktliste und Produktionsvertrag.
 
+BRÜCKENKANDIDAT:
+`hobbyroom/productwissen-affiliate-exact-bridge-20260907`
+→ read-only Productvergleich/Productwissen → Affiliate Exact-Product-Requirements; isoliert, noch nicht in den offiziellen Produktvergleich-Prototyp integriert.
+
 OFFEN:
 - Product-Compare-Writer und Entscheidungsinterpretation;
 - WordPress-DRAFT-Ausgabe;
 - Vergleichsarchiv/Frontend;
-- Exact-Product-Schnittstelle zur vorhandenen Affiliate-Zentrale;
+- Prüfung/Übernahme + WordPress/E2E der Exact-Product-Brücke zur vorhandenen Affiliate-Zentrale;
 - optionale SEO-Priorisierung ohne Pflichtkopplung;
 - Recherche-/Aktualisierungsadapter;
 - technischer Allgemeingültigkeitstest mit zweiter Projektkonfiguration.
