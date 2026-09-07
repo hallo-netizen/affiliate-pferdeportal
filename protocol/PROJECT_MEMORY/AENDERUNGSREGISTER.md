@@ -1469,3 +1469,49 @@ REGEL:
 
 AUTORITÄT:
 `protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md`
+
+
+## ARCH-084 – Hobbyraum-Arbeitsauftrag wird maschinenlesbar und serverseitig sperrbar
+
+STAND:
+2026-09-07 / vorbereitet, noch nicht auf main aktiviert.
+
+WAS:
+Der bestehende Hobbyraum erhält für technische Arbeiten einen maschinenlesbaren `HOBBYROOM_WORK_LOCK_V1`.
+
+Der bereits vorhandene Security-PR #137 wurde KISS erweitert:
+Sein ohnehin auf jeder PR laufender `verify-pr`-Schritt prüft zusätzlich den aktuellen Hobbyraum-Lock.
+
+WIRKUNG NACH AKTIVIERUNG:
+- `FIX_FORBIDDEN` → technische PR im gebundenen Scope BLOCK;
+- fehlender 7-Punkte-PASS → BLOCK;
+- falscher Branch/Head/main-Basis → BLOCK;
+- Pfad außerhalb des freigegebenen Kandidatenscopes → BLOCK;
+- `INTEGRATION_ALLOWED=false` → BLOCK;
+- nur exakt gebundener Kandidat → PASS.
+
+WARUM:
+Reine Text-/Promptregeln verhindern nicht zuverlässig, dass ein Arbeitschat neue Prüfpfade oder Minifixes beginnt.
+Der Hobbyraum soll deshalb nicht nur erinnern, sondern die Integrationsgrenze technisch fail-closed binden.
+
+KISS:
+- keine neue Campus-Ebene;
+- kein neuer Workflow;
+- keine zweite Tür;
+- vorhandener Hobbyraum;
+- vorhandener #137-Scope-Gate;
+- vorhandener hardlock-base.
+
+UNVERÄNDERT:
+Produktionsarchitektur, Single Door, dumme Wächter, Fachlogik, Qualität, Inhalt, Design, PPM/PSERC/PSTE, LanguageTool und Publish-Sperre.
+
+AKTIVIERUNGSGRENZE:
+Security-PR #137 ist weiterhin nicht gemergt.
+Current immutable-base-Hardlock blockiert Security-Wartung absichtlich.
+Kontrollierte Admin-Aktivierung bleibt erforderlich.
+
+BELEG:
+- `BAUCONTAINER/HOBBYRAUM_STANDARD.md`
+- `PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md`
+- Security-PR #137 / Head `5e0547c999a544d57e1891776f2f417e836eb605`
+- GitHub normaler hardlock auf diesem Head: PASS.
