@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: FROZEN REPAIR / STEP 02 PR124 CANDIDATE
+STATUS: FROZEN REPAIR / STEP 02 MERGED / REALTEST PENDING
 
 ## AUTORITÄT
 
@@ -143,3 +143,12 @@ Genau eine geänderte Datei:
 `control/startmaster0107/fachworkflow_proof_handoff.py`
 
 Kein Step 03 vor Realtest.
+
+
+## STEP 02 MERGE
+
+PR #154 merged:
+`7df2008eab8839271230b5dbfc62d7404c6e52f4`
+
+Bis zum Realtest-Ergebnis:
+kein Step 03, kein weiterer Kandidat.
