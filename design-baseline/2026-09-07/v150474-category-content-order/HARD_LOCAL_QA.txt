@@ -1,0 +1,46 @@
+PFERDE ATELIER – V1.50.474 HARD LOCAL POSITIV/NEGATIV
+
+AUSGANG
+- exakter V1.50.472 Installer aus archivierter Nutzerdatei
+- ZIP 1.50.472 SHA256: ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9
+- PHP 1.50.472 SHA256: 21620a6735a26f85de71c5c052eff056b668dfaf39a9327a322c49512d185d24
+
+POSITIV
+- Basishash exakt: PASS
+- Paketdateien identisch vorhanden: 498/498 PASS
+- außerhalb pferde-template-kit.php keine Datei verändert: PASS
+- V104 allgemein byte-identisch: PASS
+- V104 Pferde byte-identisch: PASS
+- zentrales Kategorie-CSS byte-identisch: PASS
+- const VERSION = 1.50.467 als Vorgängerzustand bewusst unangetastet: PASS
+- keine 1.50.473/pa473-Reste: PASS
+- PHP-Lint: PASS
+- Splitter Positivtest: PASS
+- zentrale Reihenfolge statisch:
+  Lead -> Verweise -> Artikel -> Beitragsvorschau -> Banner -> Produkte -> Direktwerbeplatz: PASS
+- ZIP-Integrität: PASS
+- ZIP-Readback 498/498 byte-identisch zum gebauten Kandidaten: PASS
+
+NEGATIV
+- künstlich Banner vor Beitragsvorschau verschoben -> Order-Check BLOCKED: PASS
+- künstlich KATEGORIETEXTE_PATCH verändert -> Paket-Paritätscheck BLOCKED: PASS
+- unerwartetes Intro-Markup -> keine Teilung, Original bleibt oben (fail-closed): PASS
+
+SCOPE
+Nur:
+1. Pluginheader 1.50.472 -> 1.50.474;
+2. fail-closed Aufteilung des vorhandenen langen Intro-Markups in kurzen Lead + unveränderte Fortsetzung;
+3. Fortsetzung nach den Verweisen einsortiert;
+4. vorhandenen Bannerblock hinter die Beitragsvorschau verschoben.
+
+NICHT GEÄNDERT
+Texte, Karten, Linkziele, Beitragsauswahl, Affiliate-Auswahl, Produktlogik, V104, zentrale CSS-Regeln, Suche, Breadcrumb, Bild, Publish.
+
+KANDIDAT
+ZIP SHA256:
+71e0f88cd2181e55f5dde75d8e94f4ba4439cfd5ea2fc76406edf71b979f9f2e
+PHP SHA256:
+283afddad9cf64eefe2e3a3176e0ec674ad19b6d0672abcd04a0f540e2c0b50d
+
+LIVE:
+NICHT BEHAUPTET.
