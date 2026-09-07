@@ -1851,6 +1851,7 @@ JS;
         $price = isset($banner['price']) ? trim(strtr((string)$banner['price'], $replacements)) : '';
         $currency = isset($banner['currency']) ? strtoupper(substr(sanitize_text_field((string)$banner['currency']), 0, 3)) : 'EUR';
         $availability = isset($banner['availability']) ? trim(strtr((string)$banner['availability'], $replacements)) : '';
+        $seller_name = isset($banner['seller_name']) ? trim(strtr((string)$banner['seller_name'], $replacements)) : '';
         $creative_type = sanitize_key((string)($banner['creative_type'] ?? 'banner'));
         $category_product_slot = (bool) preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
         $category_product_wrap_attr = $category_product_slot
@@ -1892,6 +1893,9 @@ JS;
                 if ($price !== '') { $out .= '<strong class="ppar-banner-price">' . esc_html($price . ($currency !== '' ? ' ' . $currency : '')) . '</strong>'; }
                 if ($availability !== '') { $out .= '<span class="ppar-banner-availability">' . esc_html($availability) . '</span>'; }
                 $out .= '</span>';
+            }
+            if ($creative_type === 'product' && $seller_name !== '') {
+                $out .= '<span class="ppar-banner-seller">Verkauf durch ' . esc_html($seller_name) . '</span>';
             }
             if ($multi && method_exists($this, 'multiprovider_render_offer_buttons')) {
                 $out .= $this->multiprovider_render_offer_buttons($offers, 'banner');
@@ -2488,6 +2492,7 @@ JS;
                     'price' => (string)($campaign['price'] ?? ''),
                     'currency' => (string)($campaign['currency'] ?? 'EUR'),
                     'availability' => (string)($campaign['availability'] ?? ''),
+                    'seller_name' => (string)($campaign['seller_name'] ?? ''),
                     'dimensions' => (string)($campaign['dimensions'] ?? ''),
                     'campaign_post_id' => absint($campaign['post_id'] ?? 0),
                     'product_gtins' => (array)($campaign['product_gtins'] ?? array()),
@@ -2729,6 +2734,23 @@ JS;
         return true;
     }
 
+    private function otto_awin_product_campaign_seller_ready($campaign) {
+        if (!is_array($campaign)
+            || sanitize_key((string) ($campaign['creative_type'] ?? '')) !== 'product'
+            || sanitize_key((string) ($campaign['network'] ?? '')) !== 'awin') {
+            return true;
+        }
+        $identity = remove_accents(strtolower(trim(implode(' ', array_filter(array(
+            (string) ($campaign['partner'] ?? ''),
+            (string) ($campaign['programme_name'] ?? ''),
+            (string) ($campaign['name'] ?? ''),
+        ))))));
+        if ($identity === '' || !preg_match('/(?:^|[^a-z0-9])otto(?:[^a-z0-9]|$)/', $identity)) {
+            return true;
+        }
+        return trim((string) ($campaign['seller_name'] ?? '')) !== '';
+    }
+
     private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
         $candidates = array();
         foreach ($this->get_campaigns() as $campaign) {
@@ -2737,7 +2759,7 @@ JS;
             // product slot even when a campaign could not match the current page.
             // Preserve the same gates, but execute their DB/meta work only for
             // campaigns that are actually eligible for this context.
-            if (!is_array($campaign) || empty($campaign['active']) || !$this->campaign_is_complete($campaign) || !$this->rule_is_current($campaign) || !$this->campaign_program_allows_delivery($campaign)) {
+            if (!is_array($campaign) || empty($campaign['active']) || !$this->campaign_is_complete($campaign) || !$this->rule_is_current($campaign) || !$this->campaign_program_allows_delivery($campaign) || !$this->otto_awin_product_campaign_seller_ready($campaign)) {
                 continue;
             }
             if ($forced_campaign_id !== '' && sanitize_key((string) ($campaign['id'] ?? '')) !== sanitize_key($forced_campaign_id)) {
@@ -6009,6 +6031,7 @@ JS;
             'price' => '',
             'currency' => 'EUR',
             'availability' => '',
+            'seller_name' => '',
             'dimensions' => '',
             'last_synced' => 0,
             'active' => false,
