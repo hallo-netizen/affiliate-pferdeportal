@@ -328,6 +328,27 @@ class UPC_First_Draft_Test {
     }
 
     private static function finalize_and_verify( $comparison_id ) {
+        $draft_layer = upc_wordpress_draft();
+        if ( is_wp_error( $draft_layer ) ) {
+            return $draft_layer;
+        }
+
+        $materialized = $draft_layer->materialize(
+            $comparison_id,
+            self::PROJECT_KEY,
+            self::RULESET_ID
+        );
+
+        if ( is_wp_error( $materialized ) ) {
+            return $materialized;
+        }
+
+        if ( 'WORDPRESS_DRAFT_VERIFIED' !== $materialized['status']
+            || false !== $materialized['publish_allowed']
+        ) {
+            return new WP_Error( 'UPC_FIRST_TEST_MATERIALIZED_STATE_INVALID', 'Initial PV-REG-001 WordPress draft state is invalid.' );
+        }
+
         $final = upc_finalize_article(
             $comparison_id,
             self::PROJECT_KEY,
