@@ -44,6 +44,11 @@ jobs:
           php -l universal-product-knowledge/universal-product-knowledge.php
           php -l universal-product-knowledge/src/class-upk-repository.php
           php -l universal-product-knowledge/tests/wp-db-smoke.php
+          php -l universal-product-comparison/universal-product-comparison.php
+          php -l universal-product-comparison/src/class-upc-repository.php
+          php -l universal-product-comparison/tests/wp-db-smoke.php
+          php -l universal-product-comparison/tests/wp-real-dossier-smoke.php
+          php -r '$d=json_decode(file_get_contents("universal-product-comparison/tests/fixtures/pv-reg-001.json"),true); if(!is_array($d)){exit(1);} echo "FIXTURE_JSON_PASS\\n";'
 
       - name: Install WP-CLI
         run: |
@@ -70,3 +75,4 @@ jobs:
         run: |
           wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-knowledge/tests/wp-db-smoke.php --path=/tmp/upk-wp
           wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-comparison/tests/wp-db-smoke.php --path=/tmp/upk-wp
+          wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-comparison/tests/wp-real-dossier-smoke.php --path=/tmp/upk-wp
