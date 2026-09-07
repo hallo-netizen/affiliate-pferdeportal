@@ -232,7 +232,7 @@ ARCHIV:
 MODULKLASSE: UNGEKLÄRT
 
 STATUS:
-GEPLANT / KONZEPTPHASE / ARCHITEKTURWEG OFFEN. Allgemeingültigkeit ist Ziel, technisch noch nicht bewiesen.
+GEPLANT / V1-ARCHITEKTUR ENTSCHIEDEN / technischer Prototyp noch nicht PASS. Allgemeingültigkeit ist Ziel, technisch noch nicht bewiesen.
 
 GEPLANTER HAUPTORT:
 nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; bis dahin keine künstliche zweite Modulwahrheit anlegen.
@@ -250,9 +250,9 @@ Projektunabhängige Engine für:
 
 GEPLANTE GRENZE:
 Kein Klon eines kompletten bestehenden Produktions-/Workflow-Stacks.
-Vor V1 wird zuerst geprüft, ob der vorhandene signierte/versionierte Article-Type-Extension-Weg eine additive `Produktvergleich`-Anbindung erlaubt, ohne Core-Textmaschine oder 5-Felder-Handoff zu verändern.
-Nur bei kleinem isoliertem PASS wird die vorhandene Textproduktion genutzt. Andernfalls besitzt das Modul eine eigene kleine Produktvergleichsstraße bis WordPress-DRAFT.
-Aktuelle Kaufquellen/Preise/Verfügbarkeit gehören nicht zum Faktenkern; dafür wird die bestehende Affiliate-Zentrale über eindeutige Produktidentitäten angebunden.
+V1 besitzt eine eigene kleine Produktvergleichsstraße bis WordPress-DRAFT und keine Laufzeitabhängigkeit von STARTMASTER/TEXT.
+Produktfakten kommen aus MOD-007 UNIVERSAL PRODUKTWISSEN.
+SEO liefert optional Signale; aktuelle Kaufquellen/Preise/Verfügbarkeit bleiben bei der bestehenden Affiliate-Zentrale über eindeutige Produktidentitäten.
 
 ERSTE PROJEKTANWENDUNG:
 PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
@@ -273,3 +273,40 @@ OFFEN:
 - Exact-Product-Schnittstelle zur vorhandenen Affiliate-Zentrale;
 - optionale SEO-Priorisierung ohne Pflichtkopplung;
 - technischer Allgemeingültigkeitstest.
+
+
+## MOD-007 – UNIVERSAL PRODUKTWISSEN
+
+MODULKLASSE: UNGEKLÄRT
+
+STATUS:
+GEPLANT / V1-DATENVERTRAG DEFINIERT / technischer Prototyp noch nicht PASS.
+
+GEPLANTER HAUPTORT:
+nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`.
+
+ZWECK:
+Eine einzige projektunabhängige interne Produktfaktenbasis für Produktvergleich, Variantenvergleich, Beratung und Affiliate-Exact-Match.
+
+V1-KERN:
+- Produktidentität;
+- Varianten;
+- Identifier;
+- Hersteller-/Primärquellenfakten;
+- Quellenstatus;
+- Lebenszyklus/Aktualität.
+
+NICHT ZUSTÄNDIG:
+- Artikelproduktion;
+- SEO-Priorisierung;
+- Preise/Kaufangebote;
+- öffentliche WordPress-Kategorien.
+
+ERSTE PROJEKTANWENDUNG:
+PFERDE_ATELIER.
+
+AKTUELLER VERTRAG:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/PRODUKTWISSEN_V1_VERTRAG.md`.
+
+OFFEN:
+technischer V1-Prototyp und Allgemeingültigkeitsbeweis.
