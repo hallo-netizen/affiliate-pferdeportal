@@ -278,6 +278,42 @@ upc_archive_assert( ! is_wp_error( $link_finalized_repeat ), 'repeat link finali
 upc_archive_assert( $link_finalized_repeat['linked_output_hash'] === $link_finalized['linked_output_hash'], 'repeat link finalization is byte-identical' );
 upc_archive_assert( $link_finalized_repeat['link_manifest_sha256'] === $link_finalized['link_manifest_sha256'], 'repeat link finalization uses identical bound manifest' );
 
+$article_finalized = upc_finalize_article( $product_comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_archive_assert( ! is_wp_error( $article_finalized ), 'finalize bound article with links and neutral graphic' );
+upc_archive_assert( 'WORDPRESS_DRAFT_FINAL_VERIFIED' === $article_finalized['status'], 'final article reaches verified draft state' );
+upc_archive_assert( false === $article_finalized['publish_allowed'], 'final article remains non-publishable' );
+upc_archive_assert( 1 === $article_finalized['link_count'], 'final article preserves exactly one bound internal relation' );
+upc_archive_assert( 'pv-reg-001.svg' === $article_finalized['graphic_filename'], 'final article binds stable comparison graphic filename' );
+
+$article_final_post = get_post( (int) $product_post );
+upc_archive_assert( $article_final_post && 'draft' === $article_final_post->post_status, 'finalized article remains WordPress draft' );
+upc_archive_assert( 1 === substr_count( $article_final_post->post_content, '<figure class="upc-comparison-graphic"' ), 'final article contains exactly one neutral comparison graphic' );
+upc_archive_assert( false !== strpos( $article_final_post->post_content, '<h2>Passende Variantenvergleiche</h2>' ), 'final article preserves bound internal-link section' );
+upc_archive_assert( 1 === substr_count( $article_final_post->post_content, '<a href=' ), 'final article contains only manifest-approved internal anchor' );
+upc_archive_assert(
+    $article_finalized['final_output_hash'] === hash( 'sha256', $article_final_post->post_content ),
+    'final article hash matches exact WordPress draft bytes'
+);
+upc_archive_assert(
+    $article_finalized['graphic_sha256'] === (string) get_post_meta( (int) $product_post, '_upc_graphic_sha256', true ),
+    'final article stores exact bound graphic hash'
+);
+upc_archive_assert(
+    '0' === (string) get_post_meta( (int) $product_post, '_upc_publish_allowed', true ),
+    'final article metadata still forbids publish'
+);
+
+$article_finalized_repeat = upc_finalize_article( $product_comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_archive_assert( ! is_wp_error( $article_finalized_repeat ), 'repeat full article finalization succeeds' );
+upc_archive_assert(
+    $article_finalized_repeat['final_output_hash'] === $article_finalized['final_output_hash'],
+    'repeat full article finalization is byte-identical'
+);
+upc_archive_assert(
+    $article_finalized_repeat['graphic_sha256'] === $article_finalized['graphic_sha256'],
+    'repeat full article finalization uses identical graphic binding'
+);
+
 fwrite( STDOUT, "UPC_LINK_MANIFEST_WORDPRESS_GESAMT_PASS\n" );
 fwrite( STDOUT, "UPC_LINK_FINALIZER_WORDPRESS_GESAMT_PASS\n" );
 fwrite( STDOUT, "UPC_ARCHIVE_WORDPRESS_GESAMT_PASS\n" );
