@@ -1,7 +1,7 @@
 AFFILIATE_ZENTRALE OTTO/AWIN WEIGHTED BANNER DISTRIBUTION EVIDENCE
 DATE=2026-09-07
 STATUS=STATIC_CURRENT_SOURCE_PASS_LOCAL_BEHAVIOR_PASS_BOUND_DIRECT_RUN_PENDING_REAL_DATA
-SOURCE_MANIFEST_SHA256=b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4
+SOURCE_MANIFEST_SHA256=680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf
 SOURCE_FILE_COUNT=26
 
 USER VISION
@@ -140,3 +140,15 @@ REAL/LIVE STILL PENDING
 
 RELEASE_ALLOWED=NO
 LIVE_PASS=NO
+
+CURRENT-SOURCE NACHHOLPRUEFUNG 2026-09-07
+AF-051 CURRENT STATIC CHECK PASS:
+- joined Awin programme list refreshes at new automation cycle
+- official productdata feed list refreshes before source scheduling
+- refresh failure preserves Last-Known-Good and records warning instead of deleting data
+AF-052 CURRENT STATIC CHECK PASS:
+- scheduled Awin sources derive from explicit allow_local + currently joined programme IDs
+- pre-existing Partner-Intake snapshot is not a bootstrap prerequisite
+- portal mismatch / not joined remain blocked
+BOUND DIRECT/CONTAINER EXECUTION=STILL_PENDING
+REAL AWIN/WORDPRESS LIVE PROOF=STILL_PENDING
