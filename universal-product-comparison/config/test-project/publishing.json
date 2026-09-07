@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "project_key": "test-project",
+  "post_type": "post",
+  "category_map": {
+    "regendecken": {
+      "name": "Vergleich",
+      "slug": "regendecken-vergleich",
+      "parent_slug": "regendecken"
+    }
+  }
+}

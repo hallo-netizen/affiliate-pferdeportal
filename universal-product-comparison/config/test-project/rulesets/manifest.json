@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "project_key": "test-project",
+  "rulesets": {
+    "pv-reg-001-v1": {
+      "file": "pv-reg-001-v1.json",
+      "sha256": "6ffd804f91ab5c0d744f21a8d517cf70094ceeccd5ecaa41cd11eab441ea32a6"
+    }
+  }
+}

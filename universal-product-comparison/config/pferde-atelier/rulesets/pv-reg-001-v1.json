@@ -1,0 +1,165 @@
+{
+  "schema_version": "1",
+  "ruleset_id": "pv-reg-001-v1",
+  "ruleset_version": "1",
+  "article_contract_version": "1",
+  "comparison_key": "pv-reg-001",
+  "rules": {
+    "fill_weight": {
+      "expected_cell_signatures": [
+        "VERIFIED|0 g / ungefüttert|",
+        "VERIFIED|0 g|"
+      ],
+      "meaning": "Beide Hersteller beschreiben diese Modelle als ungefütterte 0-g-Decken. Aus dem Füllgewicht ergibt sich keine Präferenz.",
+      "explanation": "",
+      "pros_by_position": {},
+      "cons_by_position": {},
+      "need_fit": []
+    },
+    "outer_material_denier": {
+      "expected_cell_signatures": [
+        "VERIFIED|1200D Ripstop; PFC-freie Guard-Tec-Beschichtung|",
+        "VERIFIED|600D Ripstop|"
+      ],
+      "meaning": "WeatherBeeta nennt 1200D, LeMieux 600D. Wer gezielt eine höhere angegebene Denierzahl priorisiert, findet sie beim WeatherBeeta-Modell; aus der Denierzahl allein wird keine pauschale Haltbarkeitswertung abgeleitet.",
+      "explanation": "",
+      "pros_by_position": {
+        "1": [
+          "Höhere angegebene Denierzahl."
+        ]
+      },
+      "cons_by_position": {},
+      "need_fit": [
+        {
+          "need": "höhere angegebene Denierzahl",
+          "positions": [
+            1
+          ],
+          "reason": "WeatherBeeta nennt 1200D, LeMieux 600D."
+        }
+      ]
+    },
+    "breathability": {
+      "expected_cell_signatures": [
+        "VERIFIED|3.000 g/m²+ Feuchtigkeitsdampf|",
+        "VERIFIED|3.000 MVP|"
+      ],
+      "meaning": "Beide Hersteller nennen einen Wert von 3.000, verwenden aber unterschiedliche Bezeichnungen. Ohne identisch definierte Prüfmethode wird daraus keine belastbare Präferenz abgeleitet.",
+      "explanation": "",
+      "pros_by_position": {},
+      "cons_by_position": {},
+      "need_fit": []
+    },
+    "neck_system": {
+      "expected_cell_signatures": [
+        "VERIFIED|Standard Neck|",
+        "VERIFIED|abnehmbares Halsteil|"
+      ],
+      "meaning": "WeatherBeeta wird als Standard Neck beschrieben, LeMieux mit abnehmbarem Halsteil. Für Nutzer, die die Halsabdeckung je nach Bedarf verändern möchten, ist die dokumentierte abnehmbare Lösung von LeMieux die freigegebene Zuordnung.",
+      "explanation": "",
+      "pros_by_position": {
+        "2": [
+          "Abnehmbares Halsteil dokumentiert."
+        ]
+      },
+      "cons_by_position": {},
+      "need_fit": [
+        {
+          "need": "veränderbare Halsabdeckung",
+          "positions": [
+            2
+          ],
+          "reason": "LeMieux nennt ausdrücklich ein abnehmbares Halsteil."
+        }
+      ]
+    },
+    "liner_compatibility": {
+      "expected_cell_signatures": [
+        "VERIFIED|WeatherBeeta Liner System kompatibel|",
+        "VERIFIED|Arika Liner-Anschlüsse an Hals und Heck|"
+      ],
+      "meaning": "Für beide Modelle ist eine Liner-Kompatibilität dokumentiert. Aus diesem Merkmal ergibt sich keine freigegebene Präferenz.",
+      "explanation": "",
+      "pros_by_position": {},
+      "cons_by_position": {},
+      "need_fit": []
+    },
+    "front_closure": {
+      "expected_cell_signatures": [
+        "VERIFIED|2-fach verstellbarer Quick-Clip-Frontverschluss mit Touch Tape|",
+        "VERIFIED|45° angewinkelter T-Bar-Frontverschluss|"
+      ],
+      "meaning": "Die Verschlusssysteme unterscheiden sich konstruktiv. WeatherBeeta nennt einen verstellbaren Quick-Clip-Verschluss mit Touch Tape, LeMieux einen 45° angewinkelten T-Bar-Verschluss. Es ist keine pauschale Präferenz freigegeben.",
+      "explanation": "",
+      "pros_by_position": {},
+      "cons_by_position": {},
+      "need_fit": []
+    },
+    "movement_cut": {
+      "expected_cell_signatures": [
+        "VERIFIED|traditionelle Seitengusset; Memory-Foam-Widerristpolster|",
+        "VERIFIED|zweiteiliges Skirt-System; nahtloser Rücken|"
+      ],
+      "meaning": "Die Hersteller dokumentieren unterschiedliche Schnittkonstruktionen. Für dieses Merkmal ist keine pauschale Eignungspräferenz freigegeben.",
+      "explanation": "",
+      "pros_by_position": {},
+      "cons_by_position": {},
+      "need_fit": []
+    },
+    "cross_surcingles": {
+      "expected_cell_signatures": [
+        "VERIFIED|2 niedrige Kreuzgurte|",
+        "VERIFIED|Kreuzgurte|"
+      ],
+      "meaning": "WeatherBeeta nennt zwei niedrige Kreuzgurte, LeMieux allgemein Kreuzgurte. Wegen der unterschiedlich detaillierten Herstellerangaben ist keine Präferenz freigegeben.",
+      "explanation": "",
+      "pros_by_position": {},
+      "cons_by_position": {},
+      "need_fit": []
+    },
+    "leg_straps_tail_cord": {
+      "expected_cell_signatures": [
+        "VERIFIED|verstellbare, abnehmbare Beingurte|",
+        "VERIFIED|elastische Beingurte; PVC-beschichteter Fillet Strap|"
+      ],
+      "meaning": "WeatherBeeta dokumentiert verstellbare, abnehmbare Beingurte; LeMieux elastische Beingurte plus PVC-beschichteten Fillet Strap. Die Zuordnung erfolgt ausschließlich nach dem gewünschten Befestigungskonzept.",
+      "explanation": "",
+      "pros_by_position": {
+        "1": [
+          "Verstellbare und abnehmbare Beingurte dokumentiert."
+        ],
+        "2": [
+          "Elastische Beingurte plus Fillet Strap dokumentiert."
+        ]
+      },
+      "cons_by_position": {},
+      "need_fit": [
+        {
+          "need": "verstellbare und abnehmbare Beingurte",
+          "positions": [
+            1
+          ],
+          "reason": "WeatherBeeta dokumentiert diese Eigenschaft ausdrücklich."
+        },
+        {
+          "need": "elastische Beingurte plus Fillet Strap",
+          "positions": [
+            2
+          ],
+          "reason": "LeMieux dokumentiert diese Kombination ausdrücklich."
+        }
+      ]
+    },
+    "sizes": {
+      "expected_cell_signatures": [
+        "VERIFIED|115/160, 120/170, 125/175, 135/185, 140/190, 145/195, 150/200, 155/205, 160/215 cm|",
+        "VERIFIED|57–87 Zoll|"
+      ],
+      "meaning": "Die Hersteller geben die Größen in unterschiedlichen Systemen an. Ohne gebundene normierte Größenabbildung ist keine Reichweiten- oder Passformpräferenz freigegeben.",
+      "explanation": "",
+      "pros_by_position": {},
+      "cons_by_position": {},
+      "need_fit": []
+    }
+  }
+}
