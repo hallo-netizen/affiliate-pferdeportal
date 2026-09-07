@@ -92,3 +92,14 @@ Aktueller Kandidat:
 `75c9c8a9a2c16b604b2b21aa4253fe20131ff37f`
 
 Genau vier zusammengehörige Dateien. Kein weiterer Fix parallel.
+
+
+## B02 #152 – NICHT INTEGRIERT
+
+PR #152 wurde nach Hardlock-FAIL geschlossen.
+
+Erster Fehler:
+`INPUT_HASH_MISMATCH:1:control/output-quarantine/runtime_entry_gate.py`
+
+Es wurde nichts gemergt und kein Fix auf den fehlgeschlagenen Kandidaten gesetzt.
+Der alte Snapshot wird nicht weiterverwendet.
