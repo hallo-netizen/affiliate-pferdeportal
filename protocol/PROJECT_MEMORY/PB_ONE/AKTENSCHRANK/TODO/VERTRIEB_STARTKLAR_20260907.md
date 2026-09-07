@@ -6,6 +6,10 @@ ZIEL: Alle Informationen, Zugänge und Unterlagen greifbar machen, damit der Ver
 
 ## Produkte und Preise
 
+Arbeits-/Konzeptquelle:
+`../PREISE/PREISKONZEPT_WEBSITES_20260907.md`
+
+
 ### Modelle
 Entscheidung zwischen Pauschal und Abo inklusive Mindestlaufzeit.
 
