@@ -59,3 +59,15 @@ Website-Preiskonzept → `PREISE/PREISKONZEPT_WEBSITES_20260907.md`
 
 REGEL:
 Entwurfswerte sind nicht automatisch verbindliche Kundenpreise. Freigegebene Preise müssen ausdrücklich als verbindlich gekennzeichnet werden.
+
+
+### PBO-AKTENSCHRANK-FACH – VERTRIEB
+STATUS: AKTIV / PROZESS- UND REFERENZBEREICH
+HAUPTORT:
+`VERTRIEB/START_HERE.md`
+
+ZWECK:
+Dauerhafte Vertriebsabläufe, Kundendaten-Schnittstellen, Angebotsprozess, Onboarding und Lead-Management zentral dokumentieren.
+
+REGEL:
+Offene Punkte bleiben im TODO-Fach. Erst entschiedene Abläufe werden hier zur Hauptquelle.
