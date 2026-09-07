@@ -13,6 +13,7 @@ OFFICIAL_CAMPUS_REF = "hobbyroom/project-memory-campus-v1-20260905"
 PROJECT_MEMORY_ROOT = "protocol/PROJECT_MEMORY/"
 CAPSULE_DIR = pathlib.Path(".paul-capsule")
 ASSIGNMENT_MARKER = "PAUL_ASSIGNMENT_V1"
+WORK_LOCK_MARKER = "HOBBYROOM_WORK_LOCK_V1"
 
 FORBIDDEN_WRITE_PREFIXES = (
     "protocol/PROJECT_MEMORY/",
@@ -101,6 +102,135 @@ def parse_kv_block(text: str, path: str) -> Dict[str, str] | None:
             raise Blocked(f"PAUL_ASSIGNMENT_INVALID:DUPLICATE_OR_EMPTY_KEY:{path}:{key}")
         data[key] = value
     return data
+
+
+def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
+    pattern = re.compile(
+        r"(?m)^" + re.escape(WORK_LOCK_MARKER) + r"\s*$\n(?P<body>.*?)\n^END_" + re.escape(WORK_LOCK_MARKER) + r"\s*$",
+        re.S,
+    )
+    matches = list(pattern.finditer(text))
+    if not matches:
+        return None
+    if len(matches) != 1:
+        raise Blocked(f"HOBBYROOM_WORK_LOCK_INVALID:MULTIPLE_BLOCKS:{path}")
+    data: Dict[str, str] = {}
+    for line in matches[0].group("body").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if ":" not in line:
+            raise Blocked(f"HOBBYROOM_WORK_LOCK_INVALID:BAD_LINE:{path}:{line}")
+        key, value = line.split(":", 1)
+        key = key.strip().upper()
+        value = value.strip()
+        if not key or key in data:
+            raise Blocked(f"HOBBYROOM_WORK_LOCK_INVALID:DUPLICATE_OR_EMPTY_KEY:{path}:{key}")
+        data[key] = value
+    required = {
+        "STATUS", "OFFICE", "MAIN_SHA", "ACTIVE_BLOCKER", "PLAN_PHASE",
+        "CANDIDATE_BRANCH", "CANDIDATE_HEAD_SHA", "TECHNICAL_SCOPE_PREFIXES",
+        "ALLOWED_PATH_PREFIXES", "CHECK_PAUL", "CHECK_HISTORY",
+        "CHECK_LAST_GOOD", "CHECK_NEIGHBORS", "CHECK_REPEAT_CLASS",
+        "CHECK_POS_NEG", "CHECK_INVARIANTS", "INTEGRATION_ALLOWED",
+    }
+    missing = sorted(required.difference(data))
+    if missing:
+        raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:MISSING:" + ",".join(missing))
+    if not re.fullmatch(r"[0-9a-fA-F]{40}", data["MAIN_SHA"]):
+        raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:MAIN_SHA")
+    return data
+
+
+def work_locks(ref: str) -> List[Tuple[str, Dict[str, str]]]:
+    out: List[Tuple[str, Dict[str, str]]] = []
+    for path in list_hobbyrooms(ref):
+        text = show(ref, path)
+        if WORK_LOCK_MARKER not in text:
+            continue
+        data = parse_work_lock(text, path)
+        if data is not None:
+            out.append((path, data))
+    return out
+
+
+def _scope_items(spec: str) -> List[str]:
+    if spec == "NONE":
+        return []
+    parts = [p.strip() for p in spec.split(";") if p.strip()]
+    for p in parts:
+        if p.startswith("/") or ".." in pathlib.PurePosixPath(p).parts:
+            raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:SCOPE")
+    return parts
+
+
+def _matches_scope(path: str, spec: str) -> bool:
+    for item in _scope_items(spec):
+        if item.endswith("/"):
+            if path.startswith(item):
+                return True
+        elif path == item:
+            return True
+    return False
+
+
+def evaluate_work_lock_pr(
+    branch: str,
+    head: str,
+    pr_base: str,
+    changed: List[str],
+    locks: List[Tuple[str, Dict[str, str]]],
+) -> str:
+    relevant: List[Tuple[str, Dict[str, str]]] = []
+    for path, data in locks:
+        if any(_matches_scope(p, data["TECHNICAL_SCOPE_PREFIXES"]) for p in changed):
+            relevant.append((path, data))
+    if not relevant:
+        return "HOBBYROOM_WORK_LOCK_NOT_APPLICABLE"
+    if len(relevant) != 1:
+        raise Blocked(
+            "HOBBYROOM_MULTIPLE_WORK_LOCKS_BLOCKED:" +
+            ",".join(sorted(path for path, _ in relevant))
+        )
+
+    hobbyroom, data = relevant[0]
+    if data["STATUS"] != "FIX_ALLOWED_FOR_CODEX_TEST":
+        raise Blocked(f"HOBBYROOM_WORK_LOCK_BLOCKED:{data['STATUS']}:{hobbyroom}")
+    if data["INTEGRATION_ALLOWED"].casefold() != "true":
+        raise Blocked(f"HOBBYROOM_INTEGRATION_NOT_ALLOWED:{hobbyroom}")
+    if branch != data["CANDIDATE_BRANCH"]:
+        raise Blocked(
+            f"HOBBYROOM_CANDIDATE_BRANCH_MISMATCH:EXPECTED={data['CANDIDATE_BRANCH']}:GOT={branch}"
+        )
+    if not re.fullmatch(r"[0-9a-fA-F]{40}", data["CANDIDATE_HEAD_SHA"]):
+        raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:CANDIDATE_HEAD_SHA")
+    if head.lower() != data["CANDIDATE_HEAD_SHA"].lower():
+        raise Blocked(
+            f"HOBBYROOM_CANDIDATE_HEAD_MISMATCH:EXPECTED={data['CANDIDATE_HEAD_SHA']}:GOT={head}"
+        )
+    if pr_base.lower() != data["MAIN_SHA"].lower():
+        raise Blocked(
+            f"HOBBYROOM_MAIN_BASE_MISMATCH:EXPECTED={data['MAIN_SHA']}:GOT={pr_base}"
+        )
+
+    for key in (
+        "CHECK_PAUL", "CHECK_HISTORY", "CHECK_LAST_GOOD", "CHECK_NEIGHBORS",
+        "CHECK_REPEAT_CLASS", "CHECK_POS_NEG", "CHECK_INVARIANTS",
+    ):
+        if data[key] != "PASS":
+            raise Blocked(f"HOBBYROOM_REQUIRED_CHECK_NOT_PASS:{key}:{data[key]}")
+
+    allowed = data["ALLOWED_PATH_PREFIXES"]
+    if not _scope_items(allowed):
+        raise Blocked("HOBBYROOM_ALLOWED_PATHS_MISSING")
+    relevant_changed = [
+        p for p in changed
+        if _matches_scope(p, data["TECHNICAL_SCOPE_PREFIXES"])
+    ]
+    bad = [p for p in relevant_changed if not _matches_scope(p, allowed)]
+    if bad:
+        raise Blocked("HOBBYROOM_ALLOWED_PATHS_BLOCKED:" + ",".join(sorted(bad)))
+    return f"HOBBYROOM_WORK_LOCK_PR_PASS:{hobbyroom}"
 
 
 def active_assignment(ref: str) -> Tuple[str, Dict[str, str]]:
@@ -382,6 +512,11 @@ def verify() -> None:
 
 def verify_pr(branch: str, head: str, pr_base: str) -> None:
     campus_head = fetch_official_campus()
+    changed = changed_paths(pr_base, head)
+    work_result = evaluate_work_lock_pr(
+        branch, head, pr_base, changed, work_locks(campus_head)
+    )
+    print(work_result)
     try:
         hobbyroom, data = active_assignment(campus_head)
     except Blocked as exc:
@@ -414,7 +549,63 @@ def verify_pr(branch: str, head: str, pr_base: str) -> None:
     print(f"PAUL_EXCLUSIVE_SCOPE_PASS:{data['ASSIGNMENT_ID']}")
 
 
+def work_lock_selftest() -> None:
+    base = "0" * 40
+    head = "1" * 40
+    valid = """HOBBYROOM_WORK_LOCK_V1
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
+OFFICE: TEXT
+MAIN_SHA: 0000000000000000000000000000000000000000
+ACTIVE_BLOCKER: X
+PLAN_PHASE: E
+CANDIDATE_BRANCH: hobbyroom/test
+CANDIDATE_HEAD_SHA: 1111111111111111111111111111111111111111
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/
+ALLOWED_PATH_PREFIXES: control/startmaster0107/file.py
+CHECK_PAUL: PASS
+CHECK_HISTORY: PASS
+CHECK_LAST_GOOD: PASS
+CHECK_NEIGHBORS: PASS
+CHECK_REPEAT_CLASS: PASS
+CHECK_POS_NEG: PASS
+CHECK_INVARIANTS: PASS
+INTEGRATION_ALLOWED: true
+END_HOBBYROOM_WORK_LOCK_V1"""
+    data = parse_work_lock(valid, "X/HOBBYRAUM.md")
+    assert data is not None
+    locks = [("X/HOBBYRAUM.md", data)]
+    assert evaluate_work_lock_pr(
+        "feature/x", head, base, ["README.md"], locks
+    ) == "HOBBYROOM_WORK_LOCK_NOT_APPLICABLE"
+    assert evaluate_work_lock_pr(
+        "hobbyroom/test", head, base,
+        ["control/startmaster0107/file.py"], locks
+    ).startswith("HOBBYROOM_WORK_LOCK_PR_PASS:")
+    for label, mutate, expected in (
+        ("STATUS", ("STATUS", "FIX_FORBIDDEN"), "HOBBYROOM_WORK_LOCK_BLOCKED"),
+        ("BRANCH", ("CANDIDATE_BRANCH", "hobbyroom/other"), "HOBBYROOM_CANDIDATE_BRANCH_MISMATCH"),
+        ("HEAD", ("CANDIDATE_HEAD_SHA", "2" * 40), "HOBBYROOM_CANDIDATE_HEAD_MISMATCH"),
+        ("POSNEG", ("CHECK_POS_NEG", "PENDING"), "HOBBYROOM_REQUIRED_CHECK_NOT_PASS"),
+        ("INVARIANTS", ("CHECK_INVARIANTS", "PENDING"), "HOBBYROOM_REQUIRED_CHECK_NOT_PASS"),
+        ("INTEGRATION", ("INTEGRATION_ALLOWED", "false"), "HOBBYROOM_INTEGRATION_NOT_ALLOWED"),
+        ("PATH", ("ALLOWED_PATH_PREFIXES", "control/startmaster0107/other.py"), "HOBBYROOM_ALLOWED_PATHS_BLOCKED"),
+    ):
+        bad = dict(data)
+        bad[mutate[0]] = mutate[1]
+        try:
+            evaluate_work_lock_pr(
+                "hobbyroom/test", head, base,
+                ["control/startmaster0107/file.py"],
+                [("X/HOBBYRAUM.md", bad)],
+            )
+            raise AssertionError(label + " not blocked")
+        except Blocked as exc:
+            assert str(exc).startswith(expected), (label, str(exc))
+    print("HOBBYROOM_WORK_LOCK_SELFTEST_PASS:9/9")
+
+
 def selftest() -> None:
+    work_lock_selftest()
     valid = """<!-- PAUL_ASSIGNMENT_V1
 STATUS: ACTIVE
 WORKER: PAUL
