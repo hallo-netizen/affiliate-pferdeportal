@@ -335,3 +335,160 @@ Er interpretiert keine Fachregel. Der Chat wählt keinen Prüfer. Der Chat darf 
 
 Aktuell weiterhin:
 `FIX_FORBIDDEN`
+
+
+---
+
+# PUNKT 4 VOLLSTÄNDIG GESCHLOSSEN – 2026-09-07
+
+## A. NEW-Link-Provenienz – harter Istbefund
+
+Aktueller `main`: `f14ccf187b94c4beab9a86d0c69144f792ba2f64`.
+
+Die aktuelle Single-Door-Current-Action bindet je Item ausschließlich:
+- `canonical_article_id`;
+- `plan_slot`;
+- `title`;
+- `target_keyword`;
+- `category`;
+- `article_type`.
+
+Der aktuelle Generation-1-`SOURCE_SNAPSHOT.json` enthält ebenfalls ausschließlich die fünf SEO-Felder je Artikel.
+
+Das aktuelle H8-`PRODUCTION_PACKAGE.json` ist fachlich leer:
+- `fact_pack_bundle.fact_packs=[]`;
+- `production_plan.items=[]`;
+- Workflow Release enthält nur Artikel-/Slot-Identitäten.
+
+Im aktuellen STARTMASTER-/Single-Door-Code existiert **kein allgemeiner NEW-Link-Builder**, der aus diesen Eingaben deterministisch
+- `runtime_order.links`;
+- `quality_binding.link_bindings`;
+- `portal_link_registry`;
+- `portal_link_registry_hash`
+materialisiert.
+
+Der aktuelle PSERC-Bestand besitzt mit `PSERC_Portal_Structure_Gate` eine echte, hashgebundene Portalstruktur-Autorität. Diese validiert Kategorien/Historie/Struktur, wählt aber nicht die drei semantischen Artikel-Links.
+
+Frühere echte Produktionspläne beweisen den beabsichtigten Datenvertrag:
+- genau drei Rollen;
+- konkrete href/Anchor/Abschnitt/Reason;
+- Live-/Snapshot-Provenienz;
+- Registry + Registry-Hash.
+
+Sie sind **nur Historienbeleg** und für NEW keine zulässige Produktionsquelle.
+
+### Schluss
+
+**Aktuell fehlt die deterministische Bindung der bereits bestehenden Fachworkflow-Linkentscheidung an die Current Action.**
+
+Der Worker müsste die drei Links heute selbst auswählen.
+Das verletzt die Null-Freiheit-Hardrule.
+
+Kein alter Artikel/Plan darf als Ersatzquelle benutzt werden.
+Keine neue Linklogik darf erfunden werden.
+
+Status:
+`CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`
+
+---
+
+## B. design_format – harter Istbefund
+
+Die Stage `design_format` wurde im technischen 12-Stage-Set erstmals als **bloßer Name** eingeführt.
+
+Beim ursprünglichen Handoff gab es für diese Stage:
+- keinen fest benannten Validator;
+- keinen eigenen Evidence-Contract;
+- keinen festgelegten Input-Artefaktzustand;
+- keine Abgrenzung Source-Format vs. WordPress-Render.
+
+Der Handoff prüfte ursprünglich lediglich Stage-Datei + Hash; später generische `execution_performed=true`-Evidence.
+
+### Bestehende PPM-Prüfer zeigen zwei verschiedene Ebenen
+
+**Source-/Pre-WordPress:**
+- Content-/Structure-Gates;
+- `PPM679_Table_Hard_Rule_Validator::validate_source_html()`;
+- artikelgebundene Link-/Strukturprüfungen.
+
+**Post-WordPress-Render:**
+`PPM679_Rendered_DOM_Validator` verlangt zwingend:
+- reale `post_id`;
+- Readback-Content-Hash;
+- echten HTTP-Render;
+- Desktop + Mobile Capture;
+- `SERVER_USER_TRIGGERED_TEST`;
+- `HTTP_RESPONSE_AFTER_WORDPRESS_RENDER`.
+
+Der 107007-Arbeitsbereich verbietet reale WordPress-Schreibvorgänge und läuft PPM in isolierter Runtime/Fixture-Umgebung.
+
+Daher ist bewiesen:
+
+**Ein 107007-`design_format`-PASS kann nicht ehrlich einen echten Rendered-DOM-PASS bedeuten.**
+
+Der vorhandene lokale Drei-Typ-Source-Validator ist ebenfalls **keine Produktionsautorität**:
+- ausdrücklich local/test-only;
+- keine WordPress-Runtime;
+- kein LT-PASS;
+- kein Produktionsrelease.
+
+Er darf nicht heimlich zum neuen Produktionsprüfer gemacht werden.
+
+Der dauerhaft gespeicherte alte 7er-Endstempel enthält ebenfalls:
+- keine `design_format`-Evidence;
+- keinen Rendered-DOM-Nachweis;
+- keine heutige System-129-Tabellenbindung.
+
+### Schluss
+
+`design_format` besitzt im aktuellen 107007-Vertrag **keine ausreichend definierte bestehende technische Evidence-Semantik**.
+
+Eine neue Bedeutung heute festzulegen wäre eine Vertrags-/Autoritätsdefinition und unter aktuellem Scope nicht zulässig.
+
+Status:
+`CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
+
+---
+
+# 7-PUNKTE-FIX-SPERRE – ENDSTAND DER READ-ONLY-PRÜFUNG
+
+1. Paul-Prüfung: **PASS**
+2. gesamte Fehlerhistorie: **PASS**
+3. letzter funktionierender Stand: **PASS**
+4. Vor-/Nachstufen vollständig bestimmt: **PASS – inklusive Nachweis der beiden fehlenden/undefinierten Bindungen**
+5. wiederkehrende Fehlerklasse: **PASS / JA – K1/K2/K3/K4 systemisch**
+6. konsolidierter Kandidat positiv/negativ: **NICHT ZULÄSSIG VORBEREITBAR**, solange bestehende Link- und design_format-Autorität nicht vorhanden/eindeutig gebunden ist
+7. Null-Freiheit + Qualität + Architektur unverändert: **würde durch jede frei erfundene Ersatzdefinition verletzt**
+
+## Entscheidung
+
+`FIX_FORBIDDEN`
+
+Nicht wegen fehlender Analyse, sondern weil die Analyse zwei echte Vertragslücken bewiesen hat, die unter den derzeitigen Hardrules **nicht durch eine bloße technische Hash-/Pfadkorrektur gelöst werden können**.
+
+### Verbotene Scheinlösungen
+
+- Codex Links wählen lassen;
+- alte Linklisten aus früheren Artikeln wiederverwenden;
+- G9-Spezial-Link-Snapshot generalisieren;
+- lokalen Drei-Typ-Testvalidator zur Produktionsautorität erklären;
+- `design_format` eigenmächtig als Source- oder Render-PASS definieren;
+- Rendered-DOM-PASS ohne echten WordPress-Render behaupten;
+- Stage entfernen;
+- Prüfer abschwächen;
+- neuen Executor/Capability/Runner/zweite Tür bauen.
+
+### Einzige scope-konforme nächste Frage
+
+Nicht „Wie bauen wir einen neuen Prüfer?“
+
+Sondern:
+
+**Existiert außerhalb des aktuell gebundenen STARTMASTER-Pfads bereits eine autoritative, unveränderte Fachworkflow-Quelle, die für NEW exakt**
+1. die drei artikelbezogenen Linkbindungen erzeugt und
+2. die Bedeutung/Evidence von `design_format` definiert?
+
+Nur wenn diese bestehende Quelle gefunden wird, darf sie technisch an die vorhandene eine Straße zurückgebunden werden.
+
+Wenn sie nicht existiert:
+**BLOCKED statt Architektur-/Fachänderung.**
