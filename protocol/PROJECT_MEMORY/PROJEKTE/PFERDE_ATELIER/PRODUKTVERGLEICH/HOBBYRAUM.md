@@ -103,20 +103,20 @@ Neu:
 - Draft bleibt `publish_allowed=false`.
 
 Harter Clean-ZIP-Test:
-- Run `34142790804` -> PASS;
+- Run `34144140088` -> PASS;
 - Clean-ZIP enthält **kein** `config/test-project`;
 - ZIP-Installation/Aktivierung -> PASS;
 - vollständige alte Regression -> PASS;
 - frische Datenbank -> gebundener Erstimport -> PASS;
 - exakte Kategorie Term-ID 11 -> PASS;
-- finaler WordPress-Draft -> PASS;
+- erster echter gebundener `PV-REG-001` WordPress-Draft -> PASS;
 - Wiederholung ohne Produkt-/Vergleichs-/Post-Dublette -> PASS;
 - Marker: `UPC_BOUND_LIVE_PV_REG_001_GESAMT_PASS`.
 
 Freigegebene ZIP:
 `universal-product-comparison-0.2.2-prototype.zip`
 SHA-256:
-`af4945fe7339ae49e5d0e6719797b9a7ff0ad5079f01691e998d0beb9297fe11`
+`683828e03bd4949aa022ccd25fa62ae7ede105ef3921db2e6d0899b66bf29c67`
 
 ## NEXT ACTION
 
