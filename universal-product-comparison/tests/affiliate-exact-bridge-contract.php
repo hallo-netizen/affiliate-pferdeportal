@@ -37,19 +37,25 @@ check(
 );
 
 check(
-    str_contains($bridge, 'UPK_Repository::identifier_types()')
+    str_contains($bridge, "array( 'GTIN', 'EAN', 'MPN' )")
     && str_contains($bridge, "'identifier_type'")
     && str_contains($bridge, "'identifier_value'")
     && str_contains($bridge, "'identifiers' => \$identifiers"),
-    'only Productwissen-supported exact identifiers are emitted'
+    'Affiliate receives only GTIN EAN or real MPN exact identifiers'
+);
+
+check(
+    !str_contains($bridge, "array( 'GTIN', 'EAN', 'MPN', 'MANUFACTURER_ARTICLE_NUMBER' )")
+    && str_contains($bridge, 'MANUFACTURER_ARTICLE_NUMBER remains useful product knowledge')
+    && str_contains($bridge, 'not an automatic commerce match key'),
+    'manufacturer article number is explicitly excluded from automatic Affiliate exact match'
 );
 
 check(
     str_contains($bridge, 'Fail closed')
     && str_contains($bridge, 'if ( empty( $identifiers ) )')
-    && !str_contains($bridge, 'similar')
     && !str_contains($bridge, 'fuzzy_match'),
-    'subject without exact identifier produces no fuzzy Affiliate substitute'
+    'subject without allowed exact identifier produces no Affiliate substitute'
 );
 
 check(
