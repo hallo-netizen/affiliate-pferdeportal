@@ -1,0 +1,2 @@
+NEGATIVE SELFTEST ONLY
+This technical change must be blocked while TEXT HOBBYROOM_WORK_LOCK_V1 is FIX_FORBIDDEN.
