@@ -577,3 +577,37 @@ Belegter Technikstand:
 
 Wichtig:
 Für den echten Pferde-Atelier-Betrieb wurde **keine WordPress-Kategorie erfunden**. Der Mechanismus ist mit einer separaten Testprojekt-Konfiguration bewiesen; die reale Kategoriebindung muss vor Liveeinsatz gegen WordPress belegt werden.
+
+
+## AFFILIATE EXACT-MATCH BRIDGE – PASS 2026-09-07
+
+Übernommen wurde nur die read-only Brücke aus dem isolierten Affiliate-Kandidaten.
+
+Grenze:
+- Productwissen/Produktvergleich liefert exakte Produktidentitäten;
+- Affiliate liefert Angebot, Preis, Bestand, Verkäufer, Tracking;
+- keine direkte Tabellenkopplung;
+- keine Schreibrechte zurück;
+- keine Anbieter-Sonderlogik im Produktvergleich;
+- kein Exact-Identifier = keine Affiliate-Anforderung, kein Ersatzprodukt.
+
+Beleg:
+- Technik-Branch `hobbyroom/productwissen-v1-prototype`;
+- Head `f16f9d9b54a2df9397ef6d5d361b4a61f10347de`;
+- Run `34131779064`: SUCCESS;
+- `ALL PRODUCTWISSEN/AFFILIATE BRIDGE CONTRACT TESTS PASS`;
+- `UPC_AFFILIATE_BRIDGE_READ_ONLY_GUARD_PASS`;
+- EAN: PASS;
+- MPN: PASS;
+- fehlender Identifier: keine Affiliate-Anforderung PASS;
+- identifiziertes zweites Produkt bleibt erhalten, ohne Ersatz für das nicht identifizierte Produkt: PASS;
+- Zero-Freedom/Golden-Output-Regressions bleiben PASS.
+
+## SEO-GRENZE V1
+
+Die aktuelle SEO-Fachlogik liegt laut Campus nur als archivierter Installerbestand vor; ihre Fachregeln sind ausdrücklich noch nicht geprüft. Deshalb wird **keine spekulative technische SEO-Anbindung gebaut**.
+
+Bis zur realen Vertragsprüfung gilt:
+- SEO darf später nur upstream priorisieren/Metadaten liefern;
+- SEO darf Produktfakten, Vergleichsregeln, Renderer oder fertigen Artikeloutput nicht verändern;
+- der Produktvergleichsweg funktioniert ohne SEO-Laufzeitabhängigkeit.
