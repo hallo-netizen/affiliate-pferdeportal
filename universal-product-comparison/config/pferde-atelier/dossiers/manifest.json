@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "project_key": "pferde-atelier",
+  "dossiers": {
+    "pv-reg-001": {
+      "file": "pv-reg-001.json",
+      "sha256": "39c69113bc57d057b002c1a612470f9944446bd414006b9ebe1c8d09f40f5fe5"
+    }
+  }
+}
