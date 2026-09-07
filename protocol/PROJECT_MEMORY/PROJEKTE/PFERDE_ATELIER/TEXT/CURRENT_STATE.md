@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: HOBBYRAUM-HARDLOCK AUF MAIN / RULESET-RESTORE VON hardlock-base AUSSTEHEND
+STATUS: GOLDMASTER-REKONSTRUKTION / BASELINE-KANDIDAT GEBUNDEN
 
 ## AUTORITÄT
 
@@ -89,3 +89,23 @@ Harte unveränderte Grenzen:
 - kein Auto-Publish.
 
 Für alles Weitere gilt ausschließlich der maschinenlesbare Arbeitsstand in `HOBBYRAUM.md`.
+
+
+## Goldmaster-Rekonstruktion
+
+HARD RULE:
+1. Hobbyraum technisch dichtmachen – **PASS**.
+2. `de21f6cd35c60849c551fd82f78e75ce57c99fab` Goldmaster – **KANDIDAT BEREIT**.
+3. Pflichtänderungen einzeln nachrüsten – **NOCH NICHT**.
+4. Nach jedem Einbau Realtest – **VERBINDLICH**.
+
+Aktueller Baseline-Kandidat:
+`hobbyroom/goldmaster-main-reconstruction-20260907`
+Head:
+`482fa8ab71f4f180900707ca2309a5bd87727416`
+
+Befund:
+- exakt 14 technische TEXT-Korridor-Dateien geändert;
+- alle 14 bytegleich zum bewiesenen `de21f6…`-Stand;
+- aktuelle Security-/Campus-Schutzschicht bleibt erhalten;
+- kein Publish.
