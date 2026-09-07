@@ -103,6 +103,15 @@ jobs:
             paged_array "repos/$GITHUB_REPOSITORY/pulls/$pr/comments?per_page=100" "backup/meta/pr-review-comments/$pr.json"
           done
 
+      - name: Record referenced Actions names
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -RhoE '\$\{\{[[:space:]]*secrets\.[A-Za-z0-9_]+' .github/workflows 2>/dev/null \
+            | sed -E 's/.*secrets\.//' | sort -u > backup/meta/referenced-secret-names.txt || true
+          grep -RhoE '\$\{\{[[:space:]]*vars\.[A-Za-z0-9_]+' .github/workflows 2>/dev/null \
+            | sed -E 's/.*vars\.//' | sort -u > backup/meta/referenced-variable-names.txt || true
+
       - name: Download release assets
         shell: bash
         env:
@@ -189,7 +198,8 @@ jobs:
             echo "tag_count=$tag_count"
             echo "release_asset_files=$asset_count"
             echo "git_bundle_restore=$(cat backup/meta/restore-test-status.txt)"
-            echo "secret_values=NOT_EXPORTABLE_BY_GITHUB"\n            echo "admin_only_settings=SEE_meta_optional-api-status.txt"
+            echo "secret_values=NOT_EXPORTABLE_BY_GITHUB"
+            echo "admin_only_settings=SEE_meta_optional-api-status.txt"
           } > backup/MANIFEST.txt
 
           sha256sum backup/affiliate-pferdeportal.bundle > backup/SHA256SUMS.txt
