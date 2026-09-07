@@ -94,3 +94,5 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-076 → bestehender Angebote/Flyer-Bereich wird zu Präsentation & Werbung erweitert
 - ARCH-077 → PB ONE Aktenschrank erhält Vertriebs-Fach; Lead-Management und Onboarding bleiben dort gebündelt
 - ARCH-079 → Masterdateien-Inventare sind niemals zweite CURRENT-/Head-/Manifest-Wahrheit
+
+- ARCH-079 → Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery

@@ -1,8 +1,29 @@
 # NOTFALL-TRESOR – WIEDERAUFBAU OHNE VORWISSEN
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 Diese Datei ist der Einstieg, wenn der aktive Campus ganz oder teilweise verloren oder unzuverlässig ist.
+
+## 0. Ein-Datei-Regel
+
+Bevorzugter Katastrophenfall:
+Es existiert nur noch die zuletzt lokal gespeicherte verschlüsselte Tresordatei.
+
+Zulässige Ausgangsmittel:
+- genau diese eine Recovery-Datei;
+- das bekannte Masterpasswort;
+- ein leerer Rechner/Server bzw. neue leere Providerkonten;
+- frei neu installierbare Standardwerkzeuge.
+
+Nicht zulässig:
+- weitere Projekt-ZIPs;
+- alte Masterdateien;
+- ChatGPT-Library als Pflichtquelle;
+- ein zweites Backup;
+- ein noch funktionierendes WordPress als Quelle;
+- ein noch funktionierendes GitHub-Repository als Quelle.
+
+Der Wiederaufbau gilt nur dann als vollständig, wenn aus dieser Ausgangslage der Campus und die gebundenen Systeme rekonstruiert werden können.
 
 ## 1. Tresorstand wählen
 
@@ -43,6 +64,15 @@ Anhand des Metadaten-Snapshots:
 - relevante Releases;
 - Issues/PRs soweit vorgesehen und technisch wiederherstellbar;
 - aktive Arbeitsbranch-Zuordnungen.
+
+## 4a. Original-GitHub-Informationen
+
+Providerseitig neu vergebene IDs sind zulässig, wenn GitHub sie technisch nicht identisch wiederherstellen lässt.
+
+Pflicht:
+Die ursprünglichen IDs, Nummern, Inhalte, Beziehungen und Zeitstempel bleiben im Metadatenarchiv der Recovery-Datei erhalten.
+
+Dadurch geht keine ursprüngliche Information verloren, auch wenn GitHub beim Neuaufbau neue interne Objekte erzeugt.
 
 ## 5. Nicht exportierbare Abhängigkeiten
 

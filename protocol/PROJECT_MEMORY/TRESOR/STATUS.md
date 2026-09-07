@@ -129,3 +129,27 @@ V2-Harttest:
 - fehlendes Archiv + fehlende Teile → korrekt BLOCK / Exit 2.
 
 Die macOS-Automatik ist vorbereitet, aber erst nach realer Installation auf dem Nutzer-Mac aktiv.
+
+
+## Zielverschärfung 2026-09-07 – geschlossene Ein-Datei-Recovery
+
+Nutzerziel:
+Nach theoretischem Totalverlust soll **eine einzige lokal gespeicherte Tresordatei** reichen, um den kompletten GitHub-Campus mit allen recovery-relevanten Informationen und den gebundenen Systembestand wieder aufzubauen.
+
+Bewertung:
+- KISS → PASS, weil eine Download-/Restore-Einheit;
+- Nachhaltigkeit → PASS, bei versionierten automatischen Ständen + echten Restore-Tests;
+- Sicherheit → PASS nur verschlüsselt und ohne Klartext-Secrets im Repository;
+- Wiederherstellbarkeit → KONZEPT PASS, realer Gesamtbeweis noch OFFEN.
+
+Aktueller Status bleibt FAIL.
+
+Zusätzliche offene Voraussetzungen vor echtem `TRESOR_PASS`:
+1. geschlossene Ein-Datei-Kapsel technisch erzeugen;
+2. alle Campus-Roharchive aktuell einbinden;
+3. GitHub-Kollaborations-/Release-Daten vollständig exportieren;
+4. vollständigen WordPress-Datei- und Datenbankstand anbinden;
+5. Recovery-Geheimnisse verschlüsselt vollständig einbinden;
+6. echten isolierten Restore ausschließlich aus dieser einen Datei durchführen.
+
+Keine dieser Voraussetzungen wird durch das bisherige V2-Mac-Kit bereits vollständig erfüllt.

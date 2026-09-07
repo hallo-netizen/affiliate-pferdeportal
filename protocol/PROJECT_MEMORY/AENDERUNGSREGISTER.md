@@ -1289,3 +1289,20 @@ FEHLERBEZUG:
 
 LEITSATZ:
 **Inventar sagt, was vorhanden/belegt ist. CURRENT_STATE/Governance sagen, was jetzt gilt.**
+
+
+## ARCH-079 – Tresor wird zur geschlossenen Ein-Datei-Disaster-Recovery
+WAS:
+Der Tresor-Zielzustand wird von mehreren Sicherungsbestandteilen auf **eine einzige verschlüsselte, geschlossene Recovery-Datei** verschärft.
+WARUM:
+Der Nutzer will nach theoretischem Totalverlust den kompletten GitHub-Campus einschließlich aller benötigten Informationen ohne zusätzliche Projektdateien wiederherstellen können.
+KISS:
+Eine Download-Einheit, ein Restore-Einstieg, ein Manifest, ein PASS/BLOCKED-Ergebnis.
+SICHERHEIT:
+Keine Klartext-Secrets im Repository. Recovery-Geheimnisse nur verschlüsselt innerhalb der Kapsel.
+VOLLSTÄNDIGKEIT:
+Git + Campus + recovery-relevante Roharchive + persistente GitHub-Projektdaten + WordPress-Vollstand + Recovery + Restore-Werkzeuge.
+GRENZE:
+Providerinterne GitHub-IDs können beim Neuaufbau neu vergeben werden; Original-IDs/Zeitstempel bleiben als archivierte Information erhalten.
+PASS-REGEL:
+`TRESOR_PASS` erst nach echtem isoliertem Wiederaufbau ausschließlich aus genau einer Recovery-Datei + Masterpasswort.

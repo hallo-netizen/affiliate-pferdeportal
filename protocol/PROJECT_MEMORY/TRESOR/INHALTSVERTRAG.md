@@ -1,6 +1,6 @@
 # NOTFALL-TRESOR – INHALTSVERTRAG
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 Ein Tresorstand darf nur `TRESOR_PASS` heißen, wenn alle zum Sicherungszeitpunkt bekannten Wiederherstellungsbestandteile erfasst sind.
 
@@ -110,3 +110,55 @@ Der Originalwert ist über GitHub nicht exportierbar.
 Der Tresor darf deshalb nur PASS liefern, wenn dafür außerhalb GitHub eine sichere und praktisch getestete Recovery-Quelle existiert.
 
 Keine Secret-Werte in PROJECT_MEMORY, GitHub oder Chat protokollieren.
+
+
+## I. Geschlossene Ein-Datei-Kapsel
+
+Für den neuen Zielzustand gilt zusätzlich:
+
+Ein `TRESOR_PASS` darf nur vergeben werden, wenn **eine einzige verschlüsselte Recovery-Datei** alle Wiederherstellungsbestandteile enthält.
+
+Keine Pflichtdatei darf nur:
+- in der ChatGPT-Library;
+- auf einem alten lokalen Datenträger;
+- in einem zweiten GitHub-Repository;
+- auf dem WordPress-Server;
+- in einem separaten Downloadpaket
+
+liegen und trotzdem für den Restore benötigt werden.
+
+Externe Quellen dürfen beim Erzeugen der Kapsel verwendet werden.
+Nach Abschluss muss die Kapsel selbst geschlossen sein.
+
+## J. Campus-Referenzschluss
+
+Jede Campusreferenz auf Rohartefakte wird gegen die Kapsel geprüft.
+
+Regel:
+**Campus verweist auf Datei → Datei muss in der Kapsel enthalten oder nachweislich als nicht wiederherstellungsrelevant klassifiziert sein.**
+
+`UNGEKLÄRT` blockiert weiterhin `TRESOR_PASS`.
+
+## K. GitHub-Kollaborationshistorie
+
+Zur Informationsvollständigkeit werden soweit über GitHub exportierbar zusätzlich archiviert:
+- Issue-Kommentare;
+- PR-Reviews;
+- PR-Review-Kommentare;
+- Milestones;
+- Release-Artefakte;
+- ursprüngliche IDs, Nummern und Zeitstempel.
+
+Beim Restore können providerinterne IDs neu entstehen.
+Der Originaldatensatz bleibt dennoch vollständig im Tresor erhalten.
+
+## L. WordPress-Vollstand
+
+Für den Gesamt-`TRESOR_PASS` reicht ein WordPress-Export-XML nicht.
+
+Pflicht:
+- Datenbankdump;
+- komplette WordPress-Dateien einschließlich Uploads;
+- Plugins/Themes;
+- relevante Laufzeit-/Serverkonfiguration;
+- benötigte Recovery-/Zugangsinformationen.

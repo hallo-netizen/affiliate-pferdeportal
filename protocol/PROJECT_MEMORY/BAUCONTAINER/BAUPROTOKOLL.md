@@ -1367,3 +1367,33 @@ Syntax PASS; positiver Lauf PASS; Recovery-Negativ korrekt BLOCKED; fehlendes Ar
 GRENZE:
 Ein echter unabhängiger lokaler PASS kann nur auf dem Nutzer-Datenträger entstehen.
 Library-Roharchive werden nicht automatisch vom Mac aus ChatGPT nachgeladen.
+
+
+### 2026-09-07 – Tresorziel auf geschlossene Ein-Datei-Recovery verschärft
+
+NUTZERZIEL:
+Nach vollständigem Verlust soll eine einzige lokal gespeicherte Tresordatei genügen, um den kompletten GitHub-Campus mit allen recovery-relevanten Informationen wiederherzustellen; zusätzlich bleibt der zuvor definierte Gesamtanspruch inklusive WordPress bestehen.
+
+KRITISCHE PRÜFUNG:
+- KISS: PASS – eine Einheit statt mehrerer Pflichtdownloads;
+- nachhaltig: PASS – versionierte Kapseln + automatisierte Erzeugung + realer Restore;
+- sicher: PASS nur mit starker Verschlüsselung und ohne Klartext-Secrets;
+- vollständig: nur PASS, wenn externe Roharchive und WordPress wirklich in die Kapsel eingezogen werden.
+
+HARTE KORREKTUR:
+Das bisherige V2-Kit ist ein guter Backup-Runner, aber noch **keine** geschlossene Ein-Datei-Disaster-Recovery.
+Es darf deshalb nicht als TRESOR_PASS ausgegeben werden.
+
+UMGESETZT:
+- TRESOR/KONZEPT auf Ein-Datei-Ziel verschärft;
+- INHALTSVERTRAG um geschlossene Kapsel, Campus-Referenzschluss, GitHub-Kollaborationshistorie und WordPress-Vollstand ergänzt;
+- PRUEFVERTRAG um echten Ein-Datei-Restore ergänzt;
+- NOTFALL_WIEDERAUFBAU auf „eine Datei + Masterpasswort“ als Katastrophen-Ausgangslage erweitert;
+- STATUS um neue Restpunkte ergänzt.
+
+PROVIDERGRENZE:
+Nach vollständiger GitHub-Löschung können interne GitHub-Objekt-IDs beim Neuaufbau neu vergeben werden.
+Original-IDs/Zeitstempel müssen im Recovery-Metadatenarchiv erhalten bleiben.
+
+BEZUG:
+ARCH-079.

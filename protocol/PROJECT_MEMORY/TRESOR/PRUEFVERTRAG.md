@@ -1,6 +1,6 @@
 # NOTFALL-TRESOR – PRÜFVERTRAG
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 ## Ziel
 
@@ -85,3 +85,44 @@ Negativ:
 - nicht bestätigte Recovery → BLOCK.
 
 Ein alter PREPASS darf nicht als aktueller Snapshot wiederverwendet werden.
+
+
+## Ein-Datei-Abnahme
+
+Der neue Zielzustand verschärft die Abnahme:
+
+### Positiv
+
+Ein isolierter Wiederaufbau wird ausschließlich aus:
+1. genau **einer** verschlüsselten Recovery-Datei und
+2. dem Masterpasswort
+
+durchgeführt.
+
+Der Test muss mindestens beweisen:
+- Git-Historie/Branches/Tags vollständig;
+- Campusdateibaum vollständig;
+- alle als recovery-relevant registrierten Rohakten vorhanden;
+- GitHub-Metadatenarchiv vollständig;
+- WordPress-Dateien + Datenbank vorhanden und technisch restorefähig;
+- Recovery-Sektion vorhanden und entschlüsselbar;
+- Manifest/Hashes PASS.
+
+### Negativ
+
+Jeder dieser Fälle blockiert:
+- benötigte Datei nur extern referenziert;
+- ein Roharchiv fehlt;
+- Git-Ref fehlt;
+- Release-Artefakt fehlt, obwohl recovery-relevant;
+- WordPress-Datenbank oder wp-content fehlt;
+- benötigtes Secret nur als GitHub-Secret-Name bekannt;
+- Kapsel kann nicht entschlüsselt/verifiziert werden.
+
+### Endregel
+
+**Kein simulierter Teiltest darf `TRESOR_PASS` erzeugen.**
+
+Erst ein echter isolierter Wiederaufbau ausschließlich aus der einen Recovery-Datei darf:
+`TRESOR_PASS`
+setzen.
