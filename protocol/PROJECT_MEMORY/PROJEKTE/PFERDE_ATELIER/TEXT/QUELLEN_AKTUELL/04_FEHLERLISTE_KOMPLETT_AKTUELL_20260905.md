@@ -145,13 +145,15 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 - `d841ed7590436ac100b98f15194874573e09bc03`: 7/7 frisch produziert; alle zwölf Stages; späterer Lauf erreichte 107008.
 - `de21f6cd35c60849c551fd82f78e75ce57c99fab`: 7/7 + 107008 Review PASS; späterer Fehler erst im GitHub-Endstempel/Auth-Bereich.
 
-## D. Aktuell offen
+## D. Historischer Stand vor dem Plan-A-Live-Lauf vom 07.09.2026 – ABGELÖST
 
-**Nur ein aktueller erster Live-Blocker ist auf main belegt:** `BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION` beim ersten Artikel auf main `c8a96e7…`.
+Der zuvor erste belegte Live-Blocker auf main `c8a96e7…` war:
+`BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION`.
 
-Für genau diesen Blocker existiert jetzt der kausal isolierte Hobbyraum-Kandidat **#141 (B01-only)**. #140 bleibt der breitere B01+B15-Prüfstand. Die alte ID-Vorbedingung ist als unmittelbare Blockierursache auf Codeebene positiv/negativ belegt. Ob danach weitere Live-Fehler folgen, ist ausdrücklich offen.
+Dafür wurde der isolierte B01-Kandidat #141 gebaut und später regulär integriert.
 
-Keine Aussage, dass B01 der letzte Fehler der Kette ist; der letzte reale Lauf wurde korrekt am ersten Blocker beendet.
+**Dieser Abschnitt ist nicht mehr die aktuelle Fehlerwahrheit.**
+Aktuell maßgeblich ist ausschließlich der nachfolgende Live-Befund vom 07.09.2026 auf main `f14ccf1…`.
 
 ## LIVE-BEFUND 07.09.2026 – LANGUAGETOOL
 
