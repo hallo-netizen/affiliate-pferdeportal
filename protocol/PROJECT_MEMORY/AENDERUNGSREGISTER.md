@@ -1105,6 +1105,7 @@ NACHGEHOLT:
 - `START_HERE` auf die inzwischen gültige eigenständige V1-Produktion korrigiert;
 - `CURRENT_STATE` auf 0.2.4 Technik-PASS / Nutzer-Live-Verify OFFEN bereinigt;
 - `HOBBYRAUM` auf genau einen aktuellen Live-Verifikationsweg gekürzt;
+- `HANDLUNGSVERZEICHNIS`, `HAUPTPFOERTNER` und Pferde-Atelier-`START_HERE` von der alten `Produktvergleich -> TEXT`-Route auf den eigenständigen V1-Draftweg korrigiert;
 - Fehler- und Zielregister bleiben reine Wegweiser.
 
 WARUM:
