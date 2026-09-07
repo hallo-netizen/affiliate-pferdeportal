@@ -21,6 +21,10 @@ Exakter Ablauf der Rechnungsstellung und unsere Vorkasseregelung.
 
 ## Operative Abläufe
 
+Ziel-Fach nach Entscheidung:
+`../VERTRIEB/START_HERE.md`
+
+
 ### Schnittstellen
 Wo genau werden Kundendaten eingetragen?
 
@@ -36,6 +40,10 @@ Was passiert Schritt für Schritt direkt nach der Unterschrift?
 
 ## Lead Management
 
+Ziel-Fach nach Entscheidung:
+`../VERTRIEB/START_HERE.md`
+
+
 ### Systemzugang
 Direkter Zugriff auf Pauls generierte Leads.
 
@@ -43,6 +51,10 @@ Direkter Zugriff auf Pauls generierte Leads.
 Wo werden Status und Bearbeitung der Interessenten getrackt?
 
 ## Verkaufsunterlagen
+
+Arbeits-/Zielbereich:
+`../../ANGEBOTE_FLYER/START_HERE.md`
+
 
 ### Visualisierung
 PB one Templates und Musterseiten für den Pitch.
