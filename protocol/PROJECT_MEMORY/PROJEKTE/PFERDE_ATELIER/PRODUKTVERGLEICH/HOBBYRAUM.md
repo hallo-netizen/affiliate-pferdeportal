@@ -28,16 +28,17 @@ V1-Rollen:
 
 ## NEXT ACTION
 
-**Einen minimalen technischen Produktwissen-Prototyp bauen und positiv/negativ prüfen:**
-1. Produkt anlegen;
-2. Variante anbinden;
-3. Identifier anbinden;
-4. Herstellerfakt + Quelle speichern;
-5. Produkt vollständig lesen;
-6. falsche/unklare Identität BLOCKED;
-7. keine SEO-/Affiliate-/TEXT-Schreibkopplung.
+**Den vorhandenen minimalen Produktwissen-Prototyp jetzt nur im echten WordPress-/DB-Kontext prüfen:**
+1. Plugin aktivieren / vier Tabellen anlegen;
+2. ein Testprodukt + eine Variante + Identifier + Herstellerfakt schreiben;
+3. vollständiges Readback prüfen;
+4. dieselben Negativfälle erneut prüfen;
+5. keine TEXT-/SEO-/Affiliate-Schreibkopplung.
 
-Erst danach den ersten Produktvergleich darauf aufsetzen.
+Technik-Branch: `hobbyroom/productwissen-v1-prototype`.
+Lokaler Vertrags-/Logiktest P01–P11 = GESAMT PASS; echter WordPress-/DB-PASS noch offen.
+
+Erst nach diesem PASS den ersten Produktvergleich darauf aufsetzen.
 
 ## Globale Arbeitsort-Sperre
 
