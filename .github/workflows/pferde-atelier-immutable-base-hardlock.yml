@@ -261,9 +261,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git worktree prune
           rm -rf /tmp/candidate
-          mkdir -p /tmp/candidate
-          git archive "$HEAD_SHA" | tar -x -C /tmp/candidate
+          git worktree add --detach /tmp/candidate "$HEAD_SHA"
           rm -rf /tmp/candidate/control/cloud-entry-gate /tmp/candidate/control/deterministic-entrance-gate /tmp/candidate/control/production-continuity
           cp -a control/cloud-entry-gate /tmp/candidate/control/
           cp -a control/deterministic-entrance-gate /tmp/candidate/control/
