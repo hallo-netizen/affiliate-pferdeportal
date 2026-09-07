@@ -1,6 +1,6 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
-STAND: 2026-09-05
+STAND: 2026-09-07
 
 Zweck: **Was wurde geändert – und warum?**
 
@@ -1175,3 +1175,22 @@ Zusätzlich bleibt der isolierte Container-Hobbyraum bestehen.
 WARUM:
 Der Normalbetrieb soll vollautomatisch skalieren, aber reale Datenquellen, technische Fehler und einzelne Fehlzuordnungen müssen ohne Architekturumbau sicher prüf- und reparierbar bleiben.
 
+
+## AFFILIATE-OTTO-004 – Awin-Kataloge aktualisieren sich selbst und freigegebene Programme starten ohne Snapshot-Voraussetzung
+
+STAND: 2026-09-07.
+
+WAS:
+- Zu Beginn eines neuen Awin-Automationszyklus werden Joined-Programmliste und offizielle Produktfeedliste neu gelesen.
+- Schlägt der Refresh fehl, bleibt Last-Known-Good erhalten; es wird nichts leer überschrieben.
+- Scheduled Sources entstehen aus explizit `allow_local` + aktuell `joined` Programmen.
+- Ein vorhandener Partner-Intake-Snapshot ist keine Startvoraussetzung mehr; der Job erzeugt ihn selbst.
+
+WARUM:
+Die gewünschte Vollautomatik darf weder von einem manuellen Verbindungstest noch von einem bereits vorhandenen Snapshot abhängen. Gleichzeitig dürfen Feed-/Programmdaten bei einem Refreshfehler nicht verschwinden.
+
+KISS:
+Kein zweiter Scheduler und kein OTTO-Sondermotor. Der bestehende Awin-Automationszyklus wurde nur an seiner realen Quelle gehärtet.
+
+FEHLERBEZUG:
+`AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md` → AF-051 / AF-052.
