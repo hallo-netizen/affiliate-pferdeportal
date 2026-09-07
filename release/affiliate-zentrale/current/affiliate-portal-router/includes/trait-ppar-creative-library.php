@@ -691,6 +691,17 @@ trait PPAR_Creative_Library_Trait {
             'topic_targets' => '[]',
             'payload' => wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
         );
+        // Source freshness must include provider payload fields as well.
+        // Otherwise price, availability, seller or product metadata can change
+        // while the row is incorrectly treated as unchanged.
+        $source_payload_for_hash = array();
+        foreach ((array) $row as $key => $value) {
+            if (strpos((string) $key, '_') === 0 || !is_scalar($value)) {
+                continue;
+            }
+            $source_payload_for_hash[sanitize_text_field((string) $key)] = sanitize_text_field((string) $value);
+        }
+        ksort($source_payload_for_hash);
         $source_fingerprint = array(
             'provider'=>$provider,
             'partner_external_id'=>$partner_external_id,
@@ -706,6 +717,7 @@ trait PPAR_Creative_Library_Trait {
             'declared_height'=>$declared_height,
             'source_status'=>$source_status,
             'source_kind'=>$normalized['source_kind'],
+            'source_payload_hash'=>hash('sha256', wp_json_encode($source_payload_for_hash, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
         );
         $normalized['source_hash'] = hash('sha256', wp_json_encode($source_fingerprint, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         return $normalized;
