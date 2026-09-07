@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: V1-PROTOTYP / KATEGORIEBINDUNGSFIX 0.2.1 ZIP-PASS / MANUELLER ERSETZUNGSTEST BEREIT
+STATUS: V1-PROTOTYP / 0.2.2 GEBUNDENER ERSTDRAFT + CLEAN-ZIP PASS / MANUELLER TEST BEREIT
 
 ## AUTORITÄT DIESER DATEI
 
@@ -167,4 +167,34 @@ Kurzform:
 ## NÄCHSTER SCHRITT
 
 Siehe ausschließlich `HOBBYRAUM.md`:
-**nur Produktvergleich 0.2.0 -> 0.2.1 manuell ersetzen; Produktwissen 0.1.0 unverändert lassen.**
+**Produktvergleich 0.2.1 -> 0.2.2 ersetzen und danach ausschließlich den gebundenen PV-REG-001-Admin-Drafttest ausführen; Produktwissen 0.1.0 unverändert lassen.**
+
+
+## 0.2.2 – ERSTER GEBUNDENER LIVE-DRAFT TECHNISCH PASS
+
+Stand 2026-09-07.
+
+Neu:
+- hashgebundenes PV-REG-001-Dossier;
+- transaktionaler/idempotenter Erstimport;
+- Admin-Test ohne freie Eingaben;
+- feste Reihenfolge Import -> WordPress-DRAFT -> Link-/Grafikfinalisierung;
+- keine Publish-Route.
+
+Clean-ZIP-Beleg:
+- Run `34142790804` PASS;
+- kein `config/test-project` im Benutzerpaket;
+- ZIP-Installation/Aktivierung PASS;
+- bestehende Regression PASS;
+- frische DB: 2 Produkte / 28 Fakten / 1 Vergleich / 14 Merkmale PASS;
+- Wiederholungsimport ohne Dubletten PASS;
+- reale Kategorie Term-ID 11 PASS;
+- finaler WordPress-Draft PASS;
+- `publish_allowed=false`;
+- Endmarker `UPC_BOUND_LIVE_PV_REG_001_GESAMT_PASS`.
+
+Freigegebene Produktvergleichsversion:
+`0.2.2-prototype`.
+
+Produktwissen bleibt:
+`0.1.0-prototype`.
