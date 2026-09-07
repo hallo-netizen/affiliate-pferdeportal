@@ -119,6 +119,30 @@ def clone_zip_with_one_replacement(baseline: Path, output: Path, target: str, ta
             zout.writestr(ni, data)
 
 
+def replacement_overlay_pass(baseline: Path, candidate: Path) -> bool:
+    """Simulate replacing the installed plugin directory with the candidate ZIP."""
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        installed = root / "installed"
+        installed.mkdir()
+        with zipfile.ZipFile(baseline, "r") as zf:
+            zf.extractall(installed)
+        with zipfile.ZipFile(candidate, "r") as zf:
+            zf.extractall(installed)
+
+        _, c_files = read_zip(candidate)
+        for name, expected in c_files.items():
+            p = installed / name
+            if not p.is_file() or p.read_bytes() != expected:
+                return False
+
+        actual_files = sorted(
+            str(p.relative_to(installed)).replace("\\", "/")
+            for p in installed.rglob("*") if p.is_file()
+        )
+        return actual_files == sorted(c_files)
+
+
 def validate(baseline: Path, candidate: Path, job: dict) -> dict:
     if not baseline.exists():
         blocked("BASELINE_MISSING")
@@ -132,6 +156,11 @@ def validate(baseline: Path, candidate: Path, job: dict) -> dict:
     c_names = [i.filename for i in c_infos]
     if b_names != c_names:
         blocked("ARCHIVE_STRUCTURE_CHANGED")
+
+    b_roots = {name.split("/", 1)[0] for name in b_files}
+    c_roots = {name.split("/", 1)[0] for name in c_files}
+    if len(b_roots) != 1 or b_roots != c_roots:
+        blocked("PLUGIN_ROOT_CHANGED")
 
     target = resolve_target(b_files, job["target_member_suffix"])
     if target not in c_files:
@@ -162,6 +191,11 @@ def validate(baseline: Path, candidate: Path, job: dict) -> dict:
     if restored != b_text:
         blocked("REVERSIBILITY_FAIL")
 
+    # WordPress-ZIP replacement shape: same plugin root/member set and a real
+    # filesystem overlay must result exactly in the candidate bytes.
+    if not replacement_overlay_pass(baseline, candidate):
+        blocked("REPLACEMENT_OVERLAY_FAIL")
+
     return {
         "status": "PASS",
         "baseline_sha256": sha256_file(baseline),
@@ -180,6 +214,8 @@ def validate(baseline: Path, candidate: Path, job: dict) -> dict:
             "RANGES_BYTE_IDENTICAL_SINGLETON_PASS",
             "SWAPPED_ORDER_PASS",
             "REVERSIBILITY_PASS",
+            "PLUGIN_ROOT_SINGLE_PASS",
+            "FILESYSTEM_REPLACEMENT_OVERLAY_PASS",
         ],
     }
 
