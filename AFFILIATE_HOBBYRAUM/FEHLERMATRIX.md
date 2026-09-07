@@ -38,3 +38,11 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 - Kein zweiter Versuch, bevor der neue Fehler hier eingetragen ist.
 - Die Matrix selbst ist im Lauf read-only.
 - Ein Task, der eine bekannte Gegenregel verletzt, wird vor Ausführung BLOCKED.
+
+| AF-029 | Automatischer Feedimport bleibt ohne Bild-/Ausgabeprüfung liegen | Awin-/ADCELL-Produkte sind importiert, aber `format_pending` wird nicht abgearbeitet | Jeder neue/aktualisierte Automationsimport muss die bestehende Asset-Verifikationswarteschlange anstoßen |
+| AF-030 | Automatisch verifiziertes OTTO-Produkt bleibt trotzdem inaktiver Entwurf | OTTO ist fachlich eindeutig zugeordnet, aber Kampagne bleibt `active=false` | OTTO darf nur nach Awin-Programme-Gate + realem Bildhash/-maß + Tracking + eindeutiger automatischer Zielklassifikation automatisch aktiv werden |
+| AF-031 | Ein OTTO-Produkt erreicht nur einen Produktslot | Kategorie hat drei Produktplätze bzw. Beitrag benötigt Produktempfehlungen, Kandidat ist aber nur an einen Slot gebunden | Verifiziertes OTTO-Kategorieprodukt erhält die bestehende generische `category_product`-Platzierung plus `post_bottom_products`; Hub/Journal nutzen ihre drei vorhandenen Produktpositionen |
+| AF-032 | Neue automatisch materialisierte Produkte aktualisieren bestehende Artikelpläne nicht | Feed ist aktuell, Artikel zeigen bis zur manuellen Änderung alte Auswahl | Nach Abschluss einer vollständigen Asset-Verifikationswelle genau einmal Campaign-Revision erhöhen und den vorhandenen gebündelten Artikelplan-Rebuild starten |
+| AF-033 | Produktbild wird als Ersatz für fehlendes echtes Banner missbraucht | OTTO-Produktfeed wird künstlich zu Banner-Werbemittel umgebaut | Produktfeed bleibt Produktquelle. Banner nur aus realem OTTO/Awin-Werbemittelbestand; ohne belegte Bannerquelle bleibt der Bannerzweig fail-closed |
+| AF-034 | Bei mehreren OTTO-Awin-Feeds wird willkürlich einer gewählt | Mehr als ein gültiger Feed ist derselben Advertiser-ID zugeordnet | Keine Feedwahl raten. Bestehende Ambiguitätssperre beibehalten; erst reale Feedstruktur/Regel eindeutig binden |
+
