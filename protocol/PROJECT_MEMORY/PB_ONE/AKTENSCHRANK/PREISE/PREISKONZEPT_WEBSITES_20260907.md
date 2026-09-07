@@ -1244,3 +1244,248 @@ Extern soll er möglichst unsichtbar sein.
 
 Der Kunde kauft eine Lösung.
 PB ONE benutzt den Baukasten, um diese Lösung schnell, sauber und wirtschaftlich zusammenzustellen.
+
+
+---
+
+## 36. LEISTUNGSUMFANG KLAR DEFINIEREN – KISS-MODELL
+
+### Grundregel
+
+Nicht jede Kleinigkeit einzeln bepreisen.
+
+Jedes Paket erhält stattdessen einen klaren **Leistungsrahmen** mit nur sieben messbaren Punkten:
+
+1. Seiten / Abschnitte
+2. Texterstellung
+3. Bilder / Medien
+4. Standardfunktionen
+5. SEO-Basis
+6. Korrekturrunden
+7. Livegang / technische Einrichtung
+
+Alles innerhalb dieses Rahmens ist inklusive.
+
+Alles, was den vereinbarten Rahmen erweitert, wird **vor Umsetzung** als Zusatz oder individuelles Angebot freigegeben.
+
+---
+
+## 37. DEFINITION „STANDARDSEITE“
+
+Eine Standardseite ist eine normale Unternehmensseite mit einem klaren Zweck, z. B.:
+- Startseite;
+- Über uns;
+- Leistungsseite;
+- Referenzen;
+- Kontakt.
+
+Interne Richtgröße:
+- bis zu ca. 5–6 normale Inhaltsabschnitte;
+- normale Text-/Bildstruktur;
+- keine individuelle Datenlogik;
+- keine Sonderfunktion;
+- keine komplexe Integration.
+
+Wichtig:
+Die Definition dient intern zur Kalkulation.
+Dem Kunden wird sie in einfacher Sprache erklärt, nicht technisch zerlegt.
+
+---
+
+## 38. KOMPAKT – KLARER LEISTUNGSRAHMEN
+
+### Enthalten
+
+- 1 Onepager;
+- bis zu 7 normale Inhaltsabschnitte;
+- Texterstellung für den vereinbarten Onepager auf Basis eines kurzen Briefings und bestätigter Unternehmensinformationen;
+- normale Bildauswahl/-aufbereitung innerhalb des Seitenkonzepts;
+- Einbindung von Bewertungen/Referenzen, soweit vorhanden;
+- 1 Standard-Kontaktformular;
+- responsive Umsetzung;
+- technische SEO-Basis;
+- technische Einrichtung und Livegang;
+- 2 gebündelte Korrekturrunden.
+
+### Nicht Teil des Standardumfangs
+
+- zusätzliche eigenständige Landingpages;
+- Terminbuchung;
+- Mehrsprachigkeit;
+- Shop;
+- individuelle Schnittstellen;
+- Logo-/Corporate-Design-Neuentwicklung;
+- umfangreiche Fach-/Keyword-Recherche;
+- laufende Betreuung.
+
+---
+
+## 39. BUSINESS – KLARER LEISTUNGSRAHMEN
+
+### Enthalten
+
+- bis zu 5 normale Inhaltsseiten;
+- Kontakt-/Pflichtseiten zusätzlich, soweit technisch erforderlich und Inhalte bereitgestellt werden;
+- Seiten-/Navigationskonzept;
+- Texterstellung für die vereinbarten Inhaltsseiten auf Basis eines Briefings und bestätigter Unternehmensinformationen;
+- normale Bildauswahl/-aufbereitung innerhalb des Seitenkonzepts;
+- Bewertungen/Referenzen integrierbar;
+- 1 Standard-Kontaktformular;
+- responsive Umsetzung;
+- technische SEO-Basis je Hauptseite;
+- technische Einrichtung und Livegang;
+- 2 gebündelte Korrekturrunden.
+
+### Nicht Teil des Standardumfangs
+
+- zusätzliche Inhalts-/Landingpages über den Paketumfang hinaus;
+- tiefgehende SEO-/Keyword-Recherche;
+- Termin-/Buchungssysteme;
+- komplexe Formulare oder Leadstrecken;
+- Mehrsprachigkeit;
+- Shop;
+- Sonderintegrationen;
+- individuelles Branding;
+- laufende Betreuung.
+
+---
+
+## 40. TEXTERSTELLUNG – HARTE, VERSTÄNDLICHE GRENZE
+
+### Inklusive
+
+PB ONE erstellt die normalen Website-Texte für den vereinbarten Paketumfang.
+
+Grundlage:
+- kurzes Kundenbriefing;
+- Leistungen / Fakten / Besonderheiten des Betriebs;
+- vorhandene Unterlagen;
+- öffentlich auffindbare Informationen nur nach inhaltlicher Bestätigung durch den Kunden.
+
+### Zusatz / individuell
+
+- umfangreiche Fachrecherche;
+- wissenschaftliche/medizinische/rechtliche Fachtexte;
+- große Mengen zusätzlicher SEO-Inhalte;
+- Blog-/Magazinproduktion;
+- laufende Content-Produktion;
+- Inhalte außerhalb des vereinbarten Seitenumfangs.
+
+KISS-Formulierung:
+**„Wir schreiben Ihre Website. Sie liefern uns die Fakten über Ihren Betrieb.“**
+
+---
+
+## 41. BILDER – HARTE, VERSTÄNDLICHE GRENZE
+
+### Inklusive
+
+- vorhandene geeignete Kundenbilder einbinden;
+- Zuschnitt;
+- Größen-/Weboptimierung;
+- einfache Bildkorrekturen;
+- normale Auswahl passend zum Design.
+
+### Zusatz / individuell
+
+- Fotoshooting;
+- professionelle Retusche;
+- umfangreiche Bildrecherche/-produktion;
+- individuelle Illustrationen;
+- Video;
+- aufwendige KI-/Composing-Arbeiten;
+- kostenpflichtige Fremdlizenzen, soweit nicht ausdrücklich im Angebot enthalten.
+
+---
+
+## 42. KORREKTURRUNDE – EINE EINHEITLICHE DEFINITION
+
+Eine Korrekturrunde ist:
+
+**eine gebündelte Rückmeldung des Kunden zum bestehenden vereinbarten Entwurf.**
+
+Inklusive:
+- Textkorrekturen;
+- Austausch einzelner Bilder;
+- kleinere Layout-/Darstellungsanpassungen innerhalb des vereinbarten Konzepts.
+
+Keine Korrektur, sondern Leistungsänderung:
+- neue Seite;
+- neue Funktion;
+- neues Grundkonzept;
+- vollständiger Designwechsel;
+- neue Anforderungen nach Freigabe der Struktur;
+- zusätzliche Inhalte außerhalb des vereinbarten Umfangs.
+
+Regel:
+Neue Anforderungen werden immer vor Umsetzung transparent angeboten.
+
+---
+
+## 43. SEO-BASIS – KLARE GRENZE
+
+### Im Grundpaket
+
+- saubere Seitenstruktur;
+- Überschriftenstruktur;
+- Seitentitel / Meta-Grundlagen;
+- technisch saubere URLs;
+- mobile Nutzbarkeit;
+- Indexierungsgrundlagen;
+- technische Basisoptimierung.
+
+### Sichtbarkeit Plus
+
+- Keyword-Recherche;
+- Wettbewerbsanalyse;
+- Local-SEO-Konzept;
+- zusätzliche Standort-/Leistungsseiten;
+- Google-Business-Optimierung;
+- laufende SEO-Arbeit.
+
+Damit vermeiden wir das missverständliche Versprechen:
+„SEO ist inklusive“,
+wenn tatsächlich nur die technische/inhaltliche Basis gemeint ist.
+
+---
+
+## 44. KUNDENMITWIRKUNG – KISS
+
+Der Kunde muss nicht Website-Texte vorbereiten.
+
+Er liefert bzw. bestätigt nur:
+- korrekte Unternehmensdaten;
+- Leistungen / Angebote;
+- Ansprechpartner / Kontaktdaten;
+- Logo, wenn vorhanden;
+- vorhandenes Bildmaterial, wenn vorhanden;
+- erforderliche Zugänge;
+- freigegebene Rechtstexte bzw. deren Quelle;
+- fachliche Richtigkeit der von PB ONE erstellten Inhalte;
+- Freigaben.
+
+Projektzeiten setzen voraus, dass notwendige Informationen und Freigaben rechtzeitig vorliegen.
+
+---
+
+## 45. KUNDENANSICHT IM ANGEBOT
+
+Nicht zehn Seiten Leistungsbeschreibung.
+
+Pro Paket eine kompakte Tabelle:
+
+| Bereich | Enthalten |
+| --- | --- |
+| Umfang | 1 Onepager / bis 5 Inhaltsseiten |
+| Texte | Erstellung inklusive |
+| Bilder | normale Aufbereitung inklusive |
+| Kontakt | Standardformular inklusive |
+| SEO | technische + strukturelle Basis |
+| Änderungen | 2 Korrekturrunden |
+| Livegang | inklusive |
+
+Darunter genau ein Satz:
+
+**„Wünsche außerhalb dieses vereinbarten Leistungsrahmens werden vor Umsetzung transparent als Erweiterung angeboten.“**
+
+Das ist die zentrale KISS-Grenze für Kunde und Vertrieb.
