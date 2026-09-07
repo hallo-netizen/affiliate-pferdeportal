@@ -6,53 +6,94 @@ STATUS: AKTIV
 ## 1-KLICK-ÜBERSICHT
 
 **AKTUELLER AUFTRAG:**  
-OTTO über den bestehenden Awin-Weg vollständig real abnehmen: Produktfeed + automatische Zuordnung + Exact Product Match + reale Bannerquelle.
+OTTO real abnehmen: Produktfeed + Productwissen-Exact-Match + reale Bannerquelle + automatische anteilsgesteuerte Bannerverteilung + manuelle Reparaturprobe.
 
 **BEREITS STRUKTURELL UMGESETZT:**  
-Awin/OTTO-Verteilung, 1/2/3-Produktplätze, Beitragsprodukte, Productwissen-Exact-Consumer, Verkäufer-Gate und automatische Zuordnung realer importierter Banner.
+Awin/OTTO-Produkte, 1/2/3-Produktplätze, Exact-Consumer, Verkäufer-Gate, automatische Bannerziel-/Slotzuordnung, Relevance-First-Anteilssystem und Reparaturinstanz.
 
 **NICHT TUN:**  
-kein eigenes OTTO-Plugin; keine zweite Providerarchitektur; keine Productwissen-Tabellen direkt lesen/schreiben; kein ähnlich passendes Ersatzprodukt für Exact Match; kein Produktbild als Banner; Digistore24 nicht nebenbei öffnen.
+kein eigenes OTTO-Plugin; keine zweite Providerarchitektur; keine direkte Productwissen-Tabellenkopplung; kein Ersatzprodukt bei Exact Match; kein Produktbild als Banner; keine Quote vor Relevanz; Digistore24 nicht nebenbei öffnen.
+
+## BANNERVERTEILUNG – AKTUELLER VERTRAG
+
+Startanteile:
+- OTTO 40
+- Awin andere 25
+- ADCELL 20
+- Direkt 15
+- Digistore24 0
+- Sonstige 0
+
+Regel:
+**Relevanz/Sicherheit zuerst, Anteil nur zwischen gleich relevanten Möglichkeiten.**
+
+Fehlende Quelle:
+Anteile automatisch unter den verfügbaren gleich relevanten Quellen normalisieren.
+
+Verteilungseinheit:
+Bannerplätze, nicht abrechnungsgenaue Impressionen.
+
+Stabilität:
+Kalenderwoche + Kontext + Slot.
+
+## REPARATURINSTANZ
+
+Normalzustand = Automatik.
+
+Intern möglich:
+- fest auswählen;
+- nicht anzeigen;
+- Vererbung auf Unterseiten;
+- zurück zur Automatik.
+
+Zusätzlich Control-/Veto-Ebenen und Notabschaltung.
 
 ## NEXT ACTION – NUR DIESER WEG
 
-1. Gebundenen Affiliate-Hobbyraum-Test real ausführen:
+1. Gebundenen Hobbyraum-Test real ausführen:
    `AFFILIATE_HOBBYRAUM/TASK.current.json`
    inklusive `php test_otto_automation.php`.
 2. Im eigenen Awin-Zugang OTTO Advertiser **14336** real nachweisen.
-3. echten OTTO-Produktfeed prüfen:
-   - Feed eindeutig?
-   - reale Felder?
-   - Verkäufer-Spalte exakt bestimmen;
-   - nichts raten.
-4. echten Produktfeed durch WordPress/MariaDB laufen lassen.
+3. echten OTTO-Produktfeed prüfen und reale Verkäufer-Spalte bestimmen.
+4. Produktfeed durch WordPress/MariaDB laufen lassen.
 5. real prüfen:
    - Hub Produkt 1/2/3;
    - Kategorie Produkt 1/2/3;
-   - normaler Beitrag;
-   - Productwissen Exact Match / kein Ersatz.
-6. realen OTTO/Awin-Bannerbestand bzw. belegten Export/API-Zugang bestimmen.
-7. mindestens ein echtes OTTO-Banner importieren/holen und die vorhandene automatische Ziel-/Slotzuordnung real prüfen.
-8. Erst danach Release-Gates weiterführen.
+   - Beitrag;
+   - Productwissen Exact Match;
+   - fehlender Exact Match = kein Ersatz.
+6. realen OTTO/Awin-Bannerbestand oder belegten Export/API-Zugang bestimmen.
+7. reale Banner importieren/holen.
+8. reale automatische Bannerprüfung:
+   - Ziel;
+   - Relevanz;
+   - Slot/Format;
+   - Anteil;
+   - Aktivierung.
+9. über genügend Seiten/Slots reale Verteilung gegen Zielanteile prüfen.
+10. mindestens eine bewusste Fehlzuordnung intern reparieren:
+    - fest/none oder Veto;
+    - danach auf Automatik zurücksetzen;
+    - Rückkehr zur Automatik belegen.
+11. Erst danach Release-Gates weiterführen.
 
 ## PRODUCTWISSEN-GRENZE
 
-Produktwissen ist fachliche Identitätsquelle.
-Affiliate ist Commerce-Schicht.
-
-Schnittstelle:
 `ppar_affiliate_exact_product_requirements`
 
+Produktwissen = fachlich.
+Affiliate = Commerce.
+
 Kein Exact Match = keine Karte.
-Kein Affiliate-Ersatzmodell.
 
-## BANNER-GRENZE
+## BANNERQUELLEN-GRENZE
 
-Zuordnung ist automatisiert.
-Beschaffung ist erst automatisiert, wenn ein realer maschinenlesbarer Awin-/OTTO-Creative-Weg belegt ist.
+Zuordnung und Anteilssystem sind strukturell vorhanden.
+
+Beschaffung ist erst vollständig automatisiert, wenn ein realer maschinenlesbarer OTTO/Awin-Creative-Weg belegt ist.
 
 Bis dahin:
-real importiertes Creative → automatisch prüfen/zuordnen/aktivieren.
+reales Creative → Automatik.
 Kein reales Creative → kein Banner.
 
 ## TECHNISCHE AUTORITÄTEN
@@ -68,6 +109,6 @@ Kein reales Creative → kein Banner.
 GitHub Kandidat: 6.72.1  
 WordPress-Livebeleg: 6.72.2
 
-Vor realem Release auflösen; nicht still ignorieren.
+Vor Release auflösen.
 
 Digistore24 bleibt zurückgestellt.
