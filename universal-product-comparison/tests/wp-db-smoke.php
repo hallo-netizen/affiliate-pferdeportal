@@ -1,0 +1,125 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    fwrite(STDERR, "ABSPATH_MISSING\n");
+    exit(1);
+}
+
+function upc_assert($condition, $label) {
+    if (!$condition) {
+        fwrite(STDERR, "FAIL: {$label}\n");
+        exit(1);
+    }
+    fwrite(STDOUT, "PASS: {$label}\n");
+}
+
+global $wpdb;
+$knowledge = upk_repository();
+$compare   = upc_repository();
+upc_assert(!is_wp_error($compare), 'comparison repository available');
+
+foreach (array($wpdb->prefix . 'upc_comparisons', $wpdb->prefix . 'upc_items') as $table) {
+    $found = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table));
+    upc_assert($found === $table, "table {$table}");
+}
+
+function upc_make_product($knowledge, $manufacturer, $model, $group) {
+    return $knowledge->create_product(array(
+        'manufacturer' => $manufacturer,
+        'model_name' => $model,
+        'product_group_key' => $group,
+        'manufacturer_product_url' => 'https://manufacturer.example/' . sanitize_title($model),
+        'lifecycle_status' => 'ACTIVE',
+    ));
+}
+
+$a = upc_make_product($knowledge, 'Maker A', 'Alpha', 'boots');
+$b = upc_make_product($knowledge, 'Maker B', 'Beta', 'boots');
+$c = upc_make_product($knowledge, 'Maker A', 'Gamma', 'boots');
+$d = upc_make_product($knowledge, 'Maker D', 'Delta', 'blankets');
+upc_assert(is_int($a) && is_int($b) && is_int($c) && is_int($d), 'create comparison products');
+
+$knowledge->add_fact(UPK_Repository::SUBJECT_PRODUCT, $a, array(
+    'fact_key' => 'weight',
+    'fact_value' => '1000',
+    'unit' => 'g',
+    'source_url' => 'https://manufacturer.example/alpha',
+    'source_type' => 'MANUFACTURER',
+    'fact_status' => 'VERIFIED',
+));
+
+$comparison_id = $compare->create_comparison(array(
+    'comparison_key' => 'alpha-vs-beta',
+    'comparison_type' => 'PRODUCT',
+    'subject_ids' => array($a, $b),
+    'decision_intent' => 'Which boot better fits the documented use case?',
+));
+upc_assert(is_int($comparison_id) && $comparison_id > 0, 'create valid product comparison');
+
+$bundle = $compare->get_comparison_bundle($comparison_id);
+upc_assert(!is_wp_error($bundle), 'read comparison bundle');
+upc_assert($bundle['comparison_uid'] === 'UPC-' . str_pad((string)$comparison_id, 6, '0', STR_PAD_LEFT), 'stable comparison uid');
+upc_assert(count($bundle['items']) === 2, 'read two comparison items');
+upc_assert($bundle['items'][0]['knowledge']['facts'][0]['fact_value'] === '1000', 'facts resolved from product knowledge');
+
+$knowledge->add_fact(UPK_Repository::SUBJECT_PRODUCT, $a, array(
+    'fact_key' => 'weight',
+    'fact_value' => '1050',
+    'unit' => 'g',
+    'source_url' => 'https://manufacturer.example/alpha',
+    'source_type' => 'MANUFACTURER',
+    'fact_status' => 'VERIFIED',
+));
+$bundle_after_update = $compare->get_comparison_bundle($comparison_id);
+upc_assert($bundle_after_update['items'][0]['knowledge']['facts'][0]['fact_value'] === '1050', 'comparison reads updated fact without copy');
+
+$reverse = $compare->create_comparison(array(
+    'comparison_key' => 'beta-vs-alpha',
+    'comparison_type' => 'PRODUCT',
+    'subject_ids' => array($b, $a),
+));
+upc_assert(is_wp_error($reverse) && 'UPC_DUPLICATE_COMPARISON' === $reverse->get_error_code(), 'block reversed duplicate');
+
+$same_maker = $compare->create_comparison(array(
+    'comparison_key' => 'alpha-vs-gamma',
+    'comparison_type' => 'PRODUCT',
+    'subject_ids' => array($a, $c),
+));
+upc_assert(is_wp_error($same_maker) && 'UPC_MIN_TWO_MANUFACTURERS' === $same_maker->get_error_code(), 'block same-manufacturer comparison');
+
+$cross_group = $compare->create_comparison(array(
+    'comparison_key' => 'alpha-vs-delta',
+    'comparison_type' => 'PRODUCT',
+    'subject_ids' => array($a, $d),
+));
+upc_assert(is_wp_error($cross_group) && 'UPC_PRODUCT_GROUP_MISMATCH' === $cross_group->get_error_code(), 'block cross-group comparison');
+
+$too_many = $compare->create_comparison(array(
+    'comparison_key' => 'too-many',
+    'comparison_type' => 'PRODUCT',
+    'subject_ids' => array($a, $b, $c, $d, 999),
+));
+upc_assert(is_wp_error($too_many) && 'UPC_INVALID_ITEM_COUNT' === $too_many->get_error_code(), 'block more than four products');
+
+$v1 = $knowledge->create_variant($a, array('variant_name' => 'Wide', 'variant_key' => 'wide', 'lifecycle_status' => 'ACTIVE'));
+$v2 = $knowledge->create_variant($a, array('variant_name' => 'Regular', 'variant_key' => 'regular', 'lifecycle_status' => 'ACTIVE'));
+$v3 = $knowledge->create_variant($b, array('variant_name' => 'Wide', 'variant_key' => 'wide', 'lifecycle_status' => 'ACTIVE'));
+upc_assert(is_int($v1) && is_int($v2) && is_int($v3), 'create variants');
+
+$variant_comparison = $compare->create_comparison(array(
+    'comparison_key' => 'alpha-wide-vs-regular',
+    'comparison_type' => 'VARIANT',
+    'subject_ids' => array($v1, $v2),
+));
+upc_assert(is_int($variant_comparison) && $variant_comparison > 0, 'create valid variant comparison');
+
+$variant_bundle = $compare->get_comparison_bundle($variant_comparison);
+upc_assert(!is_wp_error($variant_bundle) && $variant_bundle['items'][0]['knowledge']['product']['id'] === (string)$a, 'variant readback resolves base product');
+
+$wrong_parent = $compare->create_comparison(array(
+    'comparison_key' => 'wrong-parent',
+    'comparison_type' => 'VARIANT',
+    'subject_ids' => array($v1, $v3),
+));
+upc_assert(is_wp_error($wrong_parent) && 'UPC_VARIANT_PARENT_MISMATCH' === $wrong_parent->get_error_code(), 'block variants from different base products');
+
+fwrite(STDOUT, "UPC_WORDPRESS_DB_GESAMT_PASS\n");
