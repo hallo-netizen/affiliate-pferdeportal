@@ -1,43 +1,28 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "fix-live-candidate-version-6-72-1",
-  "goal": "Korrigiere ausschließlich die WordPress-Pluginversion des Live-Kandidaten konsistent auf 6.72.1, weil die installierte Version 6.72.0 ist, und ziehe die notwendigen Release-Bindungen nach.",
+  "task_id": "otto-awin-automated-distribution-20260907",
+  "goal": "Prüfe OTTO über den bestehenden Awin-Weg: automatischer Feedimport, sichere Zielzuordnung, Produktplätze 1–3, Beitragsprodukte und fail-closed Bannergrenze; keine neue Providerarchitektur.",
   "image": "php:8.2-cli",
   "inputs": [
     {
-      "src": "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
-      "dest": "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
+      "dest": "trait-ppar-automation-suite.php"
     },
     {
-      "src": "release/affiliate-zentrale/current/affiliate-portal-router/readme.txt",
-      "dest": "release/affiliate-zentrale/current/affiliate-portal-router/readme.txt"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php",
+      "dest": "trait-ppar-output-objects.php"
     },
     {
-      "src": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-      "dest": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-article-plans.php",
+      "dest": "trait-ppar-article-plans.php"
     },
     {
-      "src": "control/release-governance/CURRENT_RELEASE.json",
-      "dest": "control/release-governance/CURRENT_RELEASE.json"
-    },
-    {
-      "src": "protocol/AFFILIATE_RELEASE_WORK_BELL.py",
-      "dest": "protocol/AFFILIATE_RELEASE_WORK_BELL.py"
-    },
-    {
-      "src": "protocol/AFFILIATE_RELEASE_LIVE_CANDIDATE_BUILD_20260902.md",
-      "dest": "protocol/AFFILIATE_RELEASE_LIVE_CANDIDATE_BUILD_20260902.md"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php",
+      "dest": "trait-ppar-creative-library.php"
     }
   ],
-  "writable": [
-    "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
-    "release/affiliate-zentrale/current/affiliate-portal-router/readme.txt",
-    "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "control/release-governance/CURRENT_RELEASE.json",
-    "protocol/AFFILIATE_RELEASE_WORK_BELL.py",
-    "protocol/AFFILIATE_RELEASE_LIVE_CANDIDATE_BUILD_20260902.md"
-  ],
-  "command": "php -l release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
+  "writable": [],
+  "command": "php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php",
   "tests": [],
   "timeout_seconds": 600
 }
