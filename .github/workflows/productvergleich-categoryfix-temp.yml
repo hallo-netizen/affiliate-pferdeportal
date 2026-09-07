@@ -107,3 +107,11 @@ jobs:
           wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-db-smoke.php --path=/tmp/upc-wp
           wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-real-dossier-smoke.php --path=/tmp/upc-wp
           wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-archive-smoke.php --path=/tmp/upc-wp
+
+      - name: Upload replacement ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-product-comparison-0.2.1-prototype
+          path: /tmp/universal-product-comparison.zip
+          if-no-files-found: error
+          retention-days: 7
