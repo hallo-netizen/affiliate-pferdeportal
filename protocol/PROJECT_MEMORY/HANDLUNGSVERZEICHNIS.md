@@ -262,3 +262,40 @@ Regel:
 Eine laufende Unterlage = eine eigene Akte.
 Register enthalten nur Verweise, nicht den vollständigen Inhalt.
 Keine Programmierung.
+
+
+## Lokale Campus-Sicherung / Tresor-Snapshot
+
+Aktion:
+Aktuellen Campus-/Repositorystand herunterladen, lokal sichern oder Wiederherstellbarkeit prüfen.
+
+Verbindlicher Weg:
+`TRESOR/START_HERE.md`
+→ `STATUS.md`
+→ `LOKALES_BACKUP_KONZEPT.md`
+→ Backup/Download
+→ lokale zweite Kopie
+→ Hash-/Manifestprüfung
+→ Recoveryprüfung
+→ Restore-Test.
+
+Architekturfragen dazu:
+`BAUCONTAINER/BAUPLAN.md`
+
+Harte Grenze:
+Baucontainer definiert nur Regeln.
+Backup/Restore wird ausschließlich im Tresor ausgeführt.
+
+
+## PB ONE – selbstentwickelte Plugins finden
+
+Aktion:
+Geschäftlichen Überblick über bestätigte PB-ONE-Eigenentwicklungen/Plugins erhalten.
+
+Weg:
+`PB_ONE/AKTENSCHRANK/PLUGINS/START_HERE.md`
+→ `REGISTER.md`
+→ technische Hauptquelle.
+
+Regel:
+Kein zweiter Versions-/Release-/LIVE-Stand im PB-ONE-Pluginfach.

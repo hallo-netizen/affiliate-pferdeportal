@@ -10,6 +10,7 @@ CAMPUS
 ├── HAUPTPFÖRTNER
 ├── PB ONE – gemeinsame Agenturzentrale
 │   ├── AKTENSCHRANK
+│   │   └── PLUGINS
 │   ├── IDEENWERKSTATT
 │   ├── ENTWICKLUNGSRAUM
 │   ├── ARBEITSDOKUMENTE
@@ -193,3 +194,23 @@ Nur geprüfter `TRESOR_PASS`-Stand ist Wiederherstellungsquelle.
 
 Unklarer Bestand:
 **nicht verschieben, nicht löschen, nicht umdeuten.**
+
+
+## Sicherungsarchitektur – Zuständigkeit
+
+**Baucontainer definiert. Tresor führt aus.**
+
+Baucontainer:
+- Sicherungsumfang und Regeln;
+- Rollen-/Arbeitsgrenzen;
+- Anforderungen an Vollständigkeit, Unveränderlichkeit und Restore-Nachweis.
+
+Tresorraum:
+- aktuellen Backupstand erzeugen;
+- Download-/Exportpakete bereitstellen;
+- lokale zweite Kopie herstellen;
+- Hash-/Manifestprüfung;
+- Recovery-Inventar;
+- echten Wiederherstellungstest durchführen.
+
+Der Tresor ist nie Arbeitsquelle.

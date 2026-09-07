@@ -87,3 +87,5 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-069 → PB ONE erhält Zentralregister und Entwicklungsraum
 - ARCH-070 → PB ONE Arbeitsdokumente als eigene Akten
 - ARCH-071 → PB ONE erhält einen Aktenschrank für dauerhafte Referenzakten
+- ARCH-072 → Sicherungsarchitektur: Baucontainer definiert, Tresor führt aus
+- ARCH-073 → PB ONE Aktenschrank erhält Plugin-Fach für Eigenentwicklungen

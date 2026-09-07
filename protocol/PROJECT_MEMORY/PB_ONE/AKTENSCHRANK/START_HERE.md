@@ -15,6 +15,11 @@ Hier liegen dauerhafte PB-ONE-Unterlagen, die für spätere Agenturarbeit als be
 - Akten dürfen zusammenfassen, aber keine erfundenen Inhalte ergänzen.
 - Website-Aussagen werden als Website-Aussagen dokumentiert, nicht als extern verifizierte Tatsachen.
 
+## Bereiche
+
+- allgemeine Referenzakten → `REGISTER.md`
+- selbstentwickelte Plugins → `PLUGINS/START_HERE.md`
+
 ## Aktueller Bestand
 
 Siehe:

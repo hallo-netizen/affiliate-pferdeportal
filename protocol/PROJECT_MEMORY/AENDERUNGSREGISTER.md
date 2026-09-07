@@ -932,3 +932,24 @@ ERSTE AKTE:
 `WEBSITE_PB_ONE_20260907.md` – strukturierte Inhaltszusammenfassung aus dem WordPress-Export vom 07.09.2026.
 GRENZE:
 Die Akte dokumentiert Website-Aussagen; sie ist keine externe Tatsachenprüfung und kein vollständiges WordPress-Backup.
+
+
+## ARCH-072 – Sicherungsarchitektur: Baucontainer definiert, Tresor führt aus
+WAS:
+Die Zuständigkeit für Sicherung wird getrennt:
+Baucontainer definiert Sicherungsregeln und Architektur; der Tresorraum erzeugt und prüft die tatsächlichen Backup-/Download-/Restorestände.
+WARUM:
+Sicherungsarchitektur ist Campus-Regel, die konkrete Sicherung ist operative Tresorarbeit. Vermischung würde Baucontainer zur Backup-Werkbank machen.
+KISS:
+Regeln im Baucontainer; Ausführung ausschließlich im Tresor.
+HAUPTQUELLE AUSFÜHRUNG:
+`TRESOR/LOKALES_BACKUP_KONZEPT.md`.
+
+## ARCH-073 – PB ONE Aktenschrank erhält Plugin-Fach für Eigenentwicklungen
+WAS:
+`PB_ONE/AKTENSCHRANK/PLUGINS/` wird als Agentur-/IP-Katalog für bestätigte selbstentwickelte Plugins und digitale Eigenentwicklungen eingerichtet.
+WARUM:
+PB ONE benötigt einen geschäftlichen Überblick über eigene Produkte/Bausteine, ohne technische Wahrheiten zu duplizieren.
+REGEL:
+Pluginfach speichert Beschreibung, Zweck, Eigentums-/Agenturstatus und Verweis auf technische Hauptquelle.
+Version, Release, LIVE, Code und Modulklasse bleiben ausschließlich in den bestehenden autoritativen technischen Quellen.

@@ -16,3 +16,16 @@ QUELLE:
 
 ZWECK:
 Zentrale, chatübergreifende Inhaltsreferenz für Positionierung, Leistungen, Werte, Arbeitsweise, Angebote und spätere PB-ONE-Unterlagen.
+
+
+### PBO-AKTENSCHRANK-FACH – Selbstentwickelte Plugins
+STATUS: AKTIV / KATALOG
+HAUPTORT:
+`PLUGINS/REGISTER.md`
+
+ZWECK:
+Agenturweite Übersicht selbstentwickelter PB-ONE-Plugins und digitaler Eigenentwicklungen.
+
+REGEL:
+Nur bestätigte Eigenentwicklungen aufnehmen.
+Technische Version, Release- und Live-Wahrheit bleibt an der jeweiligen technischen Hauptquelle.

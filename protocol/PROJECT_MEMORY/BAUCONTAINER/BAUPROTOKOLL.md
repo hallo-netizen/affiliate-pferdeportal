@@ -1245,3 +1245,29 @@ NACHGEHOLT:
 CUT:
 Kein weiterer Architektur-Ausbau auf Vorrat.
 Campus ab jetzt real nutzen; nur konkrete Nutzungslücken führen zu neuen Umbauten.
+
+
+### 2026-09-07 – Tresor-Zuständigkeit und PB-ONE-Pluginfach geklärt
+
+ANLASS:
+Vor dem Campus-Cut sollte eindeutig sein, wo Download-/lokale Sicherung konzipiert und praktisch ausgeführt wird und wo PB ONE eigene Plugin-Entwicklungen dauerhaft findet.
+
+ENTSCHEIDUNG TRESOR:
+- Baucontainer definiert Sicherungsarchitektur, Regeln und Anforderungen.
+- Tresorraum führt Backup, Download, lokale Kopie, Hashprüfung, Recovery und Restore-Test aus.
+- bestehendes `TRESOR/LOKALES_BACKUP_KONZEPT.md` bleibt die operative Hauptquelle.
+
+AKTUELLER TRESORBEFUND:
+Konzept + Werkzeuge V1 vorhanden und positiv/negativ getestet.
+Kein TRESOR_PASS, solange zweite unabhängige lokale Kopie, fehlende Rohartefakte und Recovery-Abhängigkeiten nicht vollständig bestätigt sind.
+
+ENTSCHEIDUNG PB ONE:
+Im bestehenden `PB_ONE/AKTENSCHRANK/` wird kein zweiter Aktenschrank gebaut.
+Stattdessen entsteht `PLUGINS/` als eigenes Fach für bestätigte selbstentwickelte Plugins/Eigenentwicklungen.
+
+EINE-WAHRHEIT-REGEL:
+Pluginfach = Agentur-/IP-Katalog.
+Technische Version/Release/LIVE-Wahrheit bleibt im WORDPRESS_REGISTER, MODULREGISTER bzw. zuständiger Fachquelle.
+
+BEZUG:
+ARCH-072/073.
