@@ -143,7 +143,7 @@ trait PPAR_Automation_Suite_Trait {
         $settings['executor'] = 'server_cron';
         $settings['batch_size'] = min(500, absint($settings['batch_size']));
         $settings['time_budget'] = min(20, absint($settings['time_budget']));
-        $settings['request_timeout'] = max(600, min(600, absint($settings['request_timeout'])));
+        $settings['request_timeout'] = 600;
         update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
         update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
         if (function_exists('wp_clear_scheduled_hook')) {
