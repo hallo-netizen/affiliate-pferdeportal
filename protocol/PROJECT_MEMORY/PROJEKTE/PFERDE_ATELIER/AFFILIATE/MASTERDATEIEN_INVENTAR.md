@@ -1,9 +1,24 @@
 # PFERDE-ATELIER AFFILIATE – MASTERDATEIEN-INVENTAR
 
-STAND: 2026-09-05
-MODUS: SORTIERUNG / KEINE FACHINHALTSÄNDERUNG
+STAND: 2026-09-07
+MODUS: INVENTAR / KEINE AKTUELLE FACH- ODER RELEASE-WAHRHEIT
 
-## AFF-P-001 – Aktueller Statusbeleg
+## Harte Rollenregel
+
+Dieses Inventar dokumentiert Herkunft, Hash, Bedeutung und historischen/technischen Belegstatus von Masterdateien.
+
+Es ist **keine CURRENT_STATE-Quelle** und darf keine aktuelle Version, keinen aktuellen Branch-Head, kein aktuelles Manifest und keinen aktuellen Blocker als eigene Wahrheit führen.
+
+Aktueller Bürostand:
+`CURRENT_STATE.md`
+
+Aktuelle Arbeit:
+`HOBBYRAUM.md`
+
+Technische Release-Autorität:
+`control/release-governance/CURRENT_RELEASE.json`
+
+## AFF-P-001 – Master-Statusakte vom 05.09.2026
 
 Datei:
 `AFFILIATE_ZENTRALE_MASTER_STATUS_ZIELVERTRAG_FEHLERPROTOKOLL_2026-09-05.md`
@@ -14,19 +29,22 @@ SHA-256:
 Größe:
 24.212 Bytes
 
-STATUS:
-AKTUELLER PFERDE-ATELIER-AFFILIATE-STATUSBELEG.
+ROLLE:
+Historischer/technischer Status-, Zielvertrags- und Fehlerbeleg vom 05.09.2026.
+
+NICHT:
+kein aktueller Fachstand; keine aktuelle Release-Autorität.
 
 DUBLETTE:
-Der aktuelle Upload ist byte-identisch mit einer bereits vorhandenen Library-Datei gleichen Datums/Namens.
+Der damalige Upload war byte-identisch mit einer bereits vorhandenen Library-Datei gleichen Datums/Namens.
 
-## AFF-P-002 – Live-Installer 6.72.2
+## AFF-P-002 – WordPress-Live-Beleg 6.72.2
 
 Datei:
 `affiliate-zentrale_v6.72.2_LIVE_CANDIDATE_26FILE.zip`
 
 Quelle:
-im aktuellen V5_31-Gesamtmaster enthalten.
+im damaligen V5_31-Gesamtmaster enthalten.
 
 SHA-256:
 `789c7859cd9b5390bc561d6a564c2680125bcd453673cf9c6f18285c1103ba2d`
@@ -34,32 +52,27 @@ SHA-256:
 Größe:
 643.849 Bytes
 
-STATUS:
-WORDPRESS-LIVE-BELEG 6.72.2 laut aktueller Übergabe.
+ROLLE:
+Beleg des dokumentierten WordPress-Live-Stands 6.72.2 aus der damaligen Übergabe.
+
+NICHT:
+keine Aussage darüber, welcher GitHub-Kandidat oder welches Manifest **heute** aktuell ist.
 
 ## GitHub-Abgleich
 
-Branch:
-`affiliate-release-current`
+Keine dynamischen Werte werden hier gespiegelt.
 
-HEAD:
-`355a40ebbeceec0a4b90158db9f197b8f6e2ee7b`
-
-GitHub active candidate:
-6.72.1
-
-GitHub manifest:
-`bc6a47afc0ccac612667eef55b33ec0f7b4f4a6511f3e24546102c4345c141fa`
-
-Source-Dateien:
-26
+Aktuelle Branch-/Head-/Manifest-/Governance-Werte ausschließlich aus:
+- `CURRENT_STATE.md`;
+- `control/release-governance/CURRENT_RELEASE.json`;
+- `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`.
 
 ## Archiv
 
+Historischer Referenzort:
 `/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/AFFILIATE/2026-09-05/`
 
-Ampel:
-GELB
+Der Archiv-/Sicherungsstatus wird nicht aus diesem Inventar als aktueller Campusstatus abgeleitet.
 
 LOKALE_KOPIE_ENTBEHRLICH:
 NEIN
