@@ -1218,3 +1218,23 @@ V104, Kategorietexte, Karten-/Linklogik, Beitragsauswahl und Affiliate-Auswahl b
 BELEG:
 `fix/category-content-order-v150473-20260907`
 `design-baseline/2026-09-07/v150473-category-content-order/`
+
+## AFFILIATE-OTTO-005 – Productwissen→Affiliate Exact-Bridge wird isoliert gebaut, nicht in parallele Produktvergleich-Arbeit geschrieben
+
+STAND: 2026-09-07.
+
+WAS:
+Affiliate besitzt den Exact-Consumer, der offizielle Produktwissen-Prototyp aber noch keinen Producer.
+Ein isolierter Kandidat wurde deshalb auf Basis des aktuellen Produktwissen-Heads erstellt:
+`hobbyroom/productwissen-affiliate-exact-bridge-20260907`.
+
+Der Kandidat liefert Vergleichsprodukte read-only über `ppar_affiliate_exact_product_requirements`, bindet WordPress-Drafts an `_upc_comparison_id` und nutzt ausschließlich Productwissen-Identifier.
+
+WARUM:
+Produktwissen soll die fachliche Produktidentität bestimmen, Affiliate nur monetarisieren. Gleichzeitig darf der Affiliate-Arbeitsweg die parallel laufende Produktvergleich-Entwicklung nicht überschreiben.
+
+REGEL:
+Affiliate darf den Brückenkandidaten nicht selbst in den offiziellen Produktwissen-Branch mergen. Prüfung/Übernahme liegt beim Produktvergleich-Büro.
+
+STATUS:
+STATIC CONTRACT PASS / PRODUKTVERGLEICH-INTEGRATION + E2E OFFEN.
