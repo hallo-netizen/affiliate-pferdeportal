@@ -1448,27 +1448,16 @@ BELEG:
 `PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_LAST_RECEIPT.json`
 
 
-## ARCH-083 – Komplettsicherung auf drei Blöcke reduziert
+## ARCH-083 – ABGELÖST: falsche Erweiterung des GitHub-Backupauftrags
 
-STAND: 2026-09-07.
+STATUS:
+ABGELÖST durch ARCH-086.
 
-WAS:
-Der verbindliche Pferde-Atelier-Backupweg besteht nur noch aus:
-`GitHub komplett + WordPress komplett + Projektarchiv komplett -> ein datiertes Sicherungspaket`.
-
-WARUM:
-Die frühere Tresorentwicklung mit mehreren Kits, Kapselvarianten und strikten historischen Einzelartefakt-Blockern war für den eigentlichen Sicherungszweck unnötig komplex und fehleranfällig.
+HISTORISCHER FEHLER:
+Der GitHub-Backupauftrag wurde fälschlich auf WordPress + Projektarchiv erweitert.
 
 REGEL:
-- vorhandene Backuptechnik wiederverwenden;
-- keine Parallelarchitektur;
-- zwei unabhängige Kopien;
-- wöchentlich und vor größeren Umbauten;
-- nur BACKUP_PASS/BACKUP_FAIL;
-- historisch fehlende Einzel-ZIPs blockieren nicht automatisch, wenn der aktuelle funktionsfähige Stand vollständig wiederherstellbar gesichert ist.
-
-AUTORITÄT:
-`protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md`
+Nicht als aktuelle Sicherungsarchitektur verwenden.
 
 
 ## ARCH-084 – Hobbyraum-Arbeitsauftrag wird maschinenlesbar und serverseitig sperrbar
@@ -1566,3 +1555,28 @@ Ein bloßer Prompt oder Chat-Hinweis verhindert wiederholte Minifix-Schleifen ni
 
 GRENZE:
 Keine Fachlogik im Hobbyraum. Eine Tür, dumme Wächter und fachliche Autoritäten bleiben unverändert.
+
+
+## ARCH-086 – GitHub-Backup-Scope hart wiederhergestellt
+
+STAND: 2026-09-07.
+
+WAS:
+Der Notfall-Tresor für diesen Auftrag sichert ausschließlich GitHub für
+`hallo-netizen/affiliate-pferdeportal`.
+
+WARUM:
+Der vorhandene GitHub-only-Tresorweg war bereits real gebaut und restore-geprüft.
+Die spätere Erweiterung um WordPress/Projektarchiv verletzte Nutzerauftrag und BAU-032.
+
+KISS:
+Bestehenden GitHub-Tresorworkflow weiterverwenden und härten; keine neue Backup-Engine.
+
+REGRESSIONSSCHUTZ:
+- TRESOR/START_HERE enthält GITHUB-ONLY-SCOPE-LOCK;
+- HANDLUNGSVERZEICHNIS verbietet WordPress/Projektarchiv ohne neuen ausdrücklichen Auftrag;
+- BAU-038 dokumentiert den Wiederholungsfehler;
+- falsche WordPress-Backuptechnik wird aus `control/tresor` entfernt.
+
+PASS-GRENZE:
+Git-Restore real PASS; vollständiges GitHub-PASS erst nach Abdeckung bzw. belegter Nichtrelevanz nicht lesbarer Admin-Einstellungen.
