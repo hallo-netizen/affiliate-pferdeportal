@@ -39,7 +39,7 @@ Die bereits vorhandene WordPress-Backuptechnik wird genutzt.
 Gesichert werden nur die projektwichtigen Roh-/Masterdateien, die weder vollständig in GitHub noch im WordPress-Vollbackup enthalten sind.
 
 Quelle:
-\`/Campus-Archiv/\`
+`/Campus-Archiv/`
 
 Dazu gehören auch notwendige Recovery-Informationen, soweit sie nicht anderweitig sicher wiederherstellbar sind.
 
@@ -47,16 +47,16 @@ Dazu gehören auch notwendige Recovery-Informationen, soweit sie nicht anderweit
 
 Alles kommt in genau **ein datiertes Sicherungspaket**:
 
-\`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMM\`
+`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMM`
 
 Inhalt:
 
-\`\`\`
+```
 GITHUB/
 WORDPRESS/
 PROJEKTARCHIV/
 BACKUP_INFO.txt
-\`\`\`
+```
 
 Optional kann dieses Paket anschließend als eine verschlüsselte Archivdatei gespeichert werden.
 Die Verschlüsselung ändert nichts am einfachen Grundmodell.
@@ -85,11 +85,11 @@ Aufbewahrung:
 
 Jeder Lauf endet nur mit:
 
-\`BACKUP_PASS\`
+`BACKUP_PASS`
 oder
-\`BACKUP_FAIL:<GRUND>\`
+`BACKUP_FAIL:<GRUND>`
 
-Für \`BACKUP_PASS\` reicht die einfache technische Prüfung:
+Für `BACKUP_PASS` reicht die einfache technische Prüfung:
 
 - Git-Mirror vorhanden und lesbar;
 - WordPress-Vollbackup vorhanden;
