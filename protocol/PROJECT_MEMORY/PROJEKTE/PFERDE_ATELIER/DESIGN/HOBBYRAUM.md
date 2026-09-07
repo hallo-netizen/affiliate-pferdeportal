@@ -3,69 +3,72 @@
 STAND: 2026-09-07
 STATUS: AKTIV / KANDIDAT BEREIT
 
-## 1-KLICK-ÜBERSICHT
+## AKTUELLER BEFUND
 
-**AKTUELLER BEFUND**  
-V1.50.473 ist nach realer Nutzerprüfung **REJECTED / FAIL** und bleibt gesperrt.
+- V1.50.473: REJECTED / FAIL.
+- V1.50.474: REJECTED / FAIL – Artikel fälschlich intern aufgeteilt.
+- Beide Kandidaten bleiben gesperrt.
 
-**NEUER KANDIDAT**  
-V1.50.474 wurde **frisch aus dem exakten archivierten V1.50.472-Vorgänger** gebaut, nicht aus V1.50.473.
+## AKTUELLER AUFTRAG
 
-**ALS NÄCHSTES – EINZIGE AKTION**  
-V1.50.474 installieren und auf „Gebisse“ prüfen. Danach mindestens eine zweite Kategorie derselben Ebene gegenprüfen.
+**Nur Elementtausch. Keine Artikelzerlegung.**
 
-## ZIELREIHENFOLGE
+V1.50.475 wurde frisch aus dem exakten bestätigten V1.50.472-Vorgänger gebaut.
 
-1. H1 + kurzer bestehender Lead;
-2. Unterkategorie-/Beitragsart-Verweise;
-3. bestehende Artikel-Fortsetzung;
-4. Beitragsvorschau / meistgelesene Beiträge;
-5. Partnerbanner;
-6. Produkte;
-7. Direktwerbeplatz.
+Zentrale Reihenfolge:
+1. Unterkategorie-/Beitragsart-Verweise;
+2. vollständiger bestehender Artikelblock;
+3. Beitragsvorschau / meistgelesene Beiträge;
+4. Partnerbanner;
+5. Produkte;
+6. Direktwerbeplatz.
+
+## HARTE REGEL
+
+Der Artikelblock selbst wird **nicht geparst, nicht geteilt, nicht neu zusammengesetzt und nicht umgestaltet**.
+Er wird nur als vollständiger bestehender Block verschoben.
 
 ## KANDIDAT
 
 Branch:
-`fix/category-content-order-v150474-20260907`
+`fix/category-content-order-v150475-20260907`
 
 Beleg:
-`design-baseline/2026-09-07/v150474-category-content-order/`
+`design-baseline/2026-09-07/v150475-category-content-order/`
 
 Installer:
-`PFERDE_ATELIER_DESIGN_V1.50.474_CONTRACT_V104_KATEGORIE_REIHENFOLGE_HARD_LOCAL_INSTALLIEREN.zip`
+`PFERDE_ATELIER_DESIGN_V1.50.475_CONTRACT_V104_NUR_ELEMENTTAUSCH_HARD_LOCAL_INSTALLIEREN.zip`
 
 ZIP SHA-256:
-`71e0f88cd2181e55f5dde75d8e94f4ba4439cfd5ea2fc76406edf71b979f9f2e`
+`ab6f3f820b01f1043d74200b031560695757db8395a2910c18264c40f34aa689`
 
 PHP SHA-256:
-`283afddad9cf64eefe2e3a3176e0ec674ad19b6d0672abcd04a0f540e2c0b50d`
+`0151b5d66132675795c982b8a0c4ca0326ead9419f9e8ba882d751240a75b40c`
 
-## HARD LOCAL QA
+## HARD LOCAL
 
-- exakter V1.50.472-Basishash: PASS
-- 498/498 Paketdateien vorhanden: PASS
-- außerhalb `pferde-template-kit.php` keine Datei verändert: PASS
-- V104 allgemein/Pferde byte-identisch: PASS
-- zentrales Kategorie-CSS byte-identisch: PASS
-- PHP-Lint: PASS
-- Intro-Split Positiv/Negativ: PASS
-- gewünschte Blockreihenfolge: PASS
-- Negativtest falsche Reihenfolge: BLOCKED / PASS
-- Negativtest fremde Paketdatei verändert: BLOCKED / PASS
-- ZIP-Readback 498/498 byte-identisch: PASS
+POSITIV:
+- Basis exakt V1.50.472: PASS
+- nur eine Paketdatei verändert: PASS
+- V104 byte-identisch: PASS
+- Kategorie-CSS byte-identisch: PASS
+- Artikelblock vollständig/unverändert: PASS
+- Zielreihenfolge: PASS
+- PHP-Lint/ZIP-Integrität: PASS
 
-## HARTE GRENZE
+NEGATIV:
+- Artikel vor Verweise zurückverschoben: BLOCKED / PASS
+- Banner vor Beitragsvorschau zurückverschoben: BLOCKED / PASS
+- Artikel dupliziert: erkannt / PASS
+- fremde Paketdatei verändert: erkannt / PASS
 
-Bis zur Nutzerprüfung:
-- **kein LIVE-PASS** für V1.50.474;
-- kein main-Merge;
-- V1.50.473 nicht wiederverwenden;
-- keine weitere Designänderung parallel.
+## NEXT ACTION
+
+Nur V1.50.475 installieren und die reale Seite prüfen.
+Bis dahin: kein LIVE-PASS, kein Merge, keine weitere Paralleländerung.
 
 ## VERWEISE
 
 - Bürostand: `CURRENT_STATE.md`
 - Fehler: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
-- Warum/Änderungen: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- Historie: `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+- Warum: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
