@@ -38,7 +38,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 ## Büroplan
 
 - `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
-- `PRODUKTVERGLEICH/START_HERE.md` → Produktvergleichs-Konzept / Vergleichsdefinition / Faktendossier / Übergabe an TEXT
+- `PRODUKTVERGLEICH/START_HERE.md` → Produktwissen / Produkt- und Variantenvergleich / deterministischer Vergleichs-WordPress-DRAFT
 - `DESIGN/START_HERE.md` → Portaldesign
 - `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
