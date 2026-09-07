@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: V1-PROTOTYP + ZIP-INSTALLATIONSTEST PASS / MANUELLER WP-TEST BEREIT
+STATUS: V1-PROTOTYP / KATEGORIEBINDUNGSFIX 0.2.1 ZIP-PASS / MANUELLER ERSETZUNGSTEST BEREIT
 
 ## AUTORITÄT DIESER DATEI
 
@@ -80,16 +80,26 @@ Geprüfter Head:
 Workflow:
 `Product Knowledge WordPress DB Smoke` -> PASS.
 
-Erster echter ZIP-Installationssmoke:
-- Lauf `34136786494` -> PASS;
-- saubere Plugin-ZIP-Struktur -> PASS;
-- `universal-product-knowledge` per WordPress ZIP installiert + aktiviert -> PASS;
-- `universal-product-comparison` danach installiert + aktiviert -> PASS;
-- derselbe Real-WordPress/MySQL-Gesamtlauf -> PASS;
-- Publish-Sperre bleibt PASS.
+Erster ZIP-Installationssmoke des 0.2.0-Standes war technisch PASS, danach wurde jedoch bei der realen Pferde-Atelier-Bindung eine falsche Taxonomie-Annahme entdeckt: die vorhandenen redaktionellen Vergleichskategorien sind technisch flach (`parent=0`).
 
-Finaler Branch nach Entfernen aller temporären Workflow-Dateien:
-`38ae1137b5d90d64d28b3f02fc31b85f00ee8375`.
+Korrigierter Kandidat:
+- Universal Product Comparison `0.2.1-prototype`;
+- erster gebundener Live-Term: ID `11`, Name `Vergleich Regendecken`, Slug `pferdedecken-regendecken-vergleich`, Parent `0`;
+- kein Auto-Anlegen dieser bestehenden Live-Kategorie;
+- ID/Name/Slug/Parent müssen exakt stimmen, sonst BLOCKED.
+
+Harter korrigierter ZIP-/WordPress-/MySQL-Lauf:
+- Run `34141063395` -> PASS;
+- Zero-Freedom Static Guard -> PASS;
+- saubere ZIP-Struktur -> PASS;
+- ZIP-Installation/Aktivierung -> PASS;
+- reale Pferde-Atelier-Regendecken-Konfiguration -> PASS;
+- flache Kategorie -> PASS;
+- absichtlich falscher Parent -> korrekt BLOCKED;
+- vollständige bisherige Regression -> PASS.
+
+Bereinigter Branch nach Entfernen des temporären Workflows:
+`89651722cae1fd2c60ddc8a9d288a3d17e71e105`.
 
 `Pferde Atelier Immutable Base Hardlock` -> PASS.
 
@@ -157,4 +167,4 @@ Kurzform:
 ## NÄCHSTER SCHRITT
 
 Siehe ausschließlich `HOBBYRAUM.md`:
-**manuellen WordPress-Test mit den bereits ZIP-geprüften Plugins durchführen.**
+**nur Produktvergleich 0.2.0 -> 0.2.1 manuell ersetzen; Produktwissen 0.1.0 unverändert lassen.**
