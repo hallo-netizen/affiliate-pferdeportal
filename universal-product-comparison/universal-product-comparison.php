@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Comparison
  * Description: Minimal comparison core on top of Universal Product Knowledge.
- * Version: 0.2.1-prototype
+ * Version: 0.2.2-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: universal-product-knowledge
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPC_VERSION', '0.2.1-prototype' );
+define( 'UPC_VERSION', '0.2.2-prototype' );
 define( 'UPC_SCHEMA_VERSION', '2' );
 define( 'UPC_PLUGIN_FILE', __FILE__ );
 
@@ -29,6 +29,8 @@ require_once __DIR__ . '/src/class-upc-link-manifest.php';
 require_once __DIR__ . '/src/class-upc-link-finalizer.php';
 require_once __DIR__ . '/src/class-upc-comparison-graphic.php';
 require_once __DIR__ . '/src/class-upc-article-finalizer.php';
+require_once __DIR__ . '/src/class-upc-bound-dossier-importer.php';
+require_once __DIR__ . '/src/class-upc-admin-pv-reg-001-test.php';
 require_once __DIR__ . '/src/class-upc-archive.php';
 
 function upc_dependency_ready() {
@@ -108,6 +110,9 @@ function upc_maybe_upgrade_schema() {
 }
 add_action( 'plugins_loaded', 'upc_maybe_upgrade_schema', 20 );
 add_action( 'plugins_loaded', array( 'UPC_Affiliate_Bridge', 'register' ), 25 );
+if ( is_admin() ) {
+    UPC_Admin_PV_REG_001_Test::register();
+}
 
 function upc_seo_signals( $comparison_id ) {
     return UPC_SEO_Signals::for_comparison( $comparison_id );
