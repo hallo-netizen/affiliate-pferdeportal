@@ -93,18 +93,20 @@ Kein anderer Block darf bewegt werden.
 
 ## LETZTER SCRIPT-LAUF
 
-Runner-Selbsttest: **PASS**
+Aktueller Job **DESIGN-ORDER-SWAP-002** gegen exakte V1.50.472-Basis: **PASS**
 
-Aktueller Job gegen exakte V1.50.472-Basis: **PASS**
+Ziel eindeutig:
+**Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.**
 
-- 498 Archivmitglieder;
-- nur `affiliate-portal-template-kit/pferde-template-kit.php` geändert;
-- exakter Zwei-Bereich-Tausch PASS;
-- Byteidentität der beiden Bereiche PASS;
-- Reversibilität PASS;
-- Plugin-Root identisch PASS;
-- simuliertes Überschreiben des bestehenden Plugin-Verzeichnisses ergibt exakt den Kandidaten: PASS;
-- vier Negativtests BLOCKED/PASS.
+Ergebnis:
+- Affiliate-Banner bleibt exakt an seiner V1.50.472-Position: PASS;
+- Affiliate-Produkte vor Beitragsvorschau: PASS;
+- Artikel-/Verweisstruktur unverändert: PASS;
+- genau eine Paketdatei verändert: PASS;
+- exakter Zwei-Bereich-Tausch: PASS;
+- Byteidentität/Reversibilität: PASS;
+- vier Negativtests BLOCKED/PASS;
+- Kandidaten-SHA: `11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`.
 
 Der Lauf ist nur ein **lokaler Kandidatenbeleg**, kein LIVE-PASS.
 
