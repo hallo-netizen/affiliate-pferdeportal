@@ -9,7 +9,7 @@ STATUS: AKTIV
 OTTO real abnehmen: Produktfeed + Productwissen-Exact-Match + reale Bannerquelle + automatische anteilsgesteuerte Bannerverteilung + manuelle Reparaturprobe.
 
 **BEREITS STRUKTURELL UMGESETZT:**  
-Awin/OTTO-Produkte, 1/2/3-Produktplätze, Exact-Consumer, Verkäufer-Gate, automatische Bannerziel-/Slotzuordnung, Relevance-First-Anteilssystem und Reparaturinstanz.
+Awin/OTTO-Produkte, 1/2/3-Produktplätze, Exact-Consumer, Verkäufer-Gate, automatische Bannerziel-/Slotzuordnung, Relevance-First-Anteilssystem, Reparaturinstanz, automatischer Joined-/Feedlisten-Refresh und snapshot-freier Start explizit freigegebener Awin-Programme.
 
 **NICHT TUN:**  
 kein eigenes OTTO-Plugin; keine zweite Providerarchitektur; keine direkte Productwissen-Tabellenkopplung; kein Ersatzprodukt bei Exact Match; kein Produktbild als Banner; keine Quote vor Relevanz; Digistore24 nicht nebenbei öffnen.
@@ -50,35 +50,23 @@ Zusätzlich Control-/Veto-Ebenen und Notabschaltung.
 
 ## NEXT ACTION – NUR DIESER WEG
 
-0. Schnellprüfung ohne Docker, sobald ein Repo-Checkout vorhanden ist:
-   `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`
+**JETZT ZUERST:** aktuellen gebundenen Source-Stand exakt prüfen:
 
-1. Gebundenen Hobbyraum-Test real ausführen:
-   `AFFILIATE_HOBBYRAUM/TASK.current.json`
-   inklusive `php test_otto_automation.php`.
-2. Im eigenen Awin-Zugang OTTO Advertiser **14336** real nachweisen.
-3. echten OTTO-Produktfeed prüfen und reale Verkäufer-Spalte bestimmen.
-4. Produktfeed durch WordPress/MariaDB laufen lassen.
-5. real prüfen:
-   - Hub Produkt 1/2/3;
-   - Kategorie Produkt 1/2/3;
-   - Beitrag;
-   - Productwissen Exact Match;
-   - fehlender Exact Match = kein Ersatz.
-6. realen OTTO/Awin-Bannerbestand oder belegten Export/API-Zugang bestimmen.
-7. reale Banner importieren/holen.
-8. reale automatische Bannerprüfung:
-   - Ziel;
-   - Relevanz;
-   - Slot/Format;
-   - Anteil;
-   - Aktivierung.
-9. über genügend Seiten/Slots reale Verteilung gegen Zielanteile prüfen.
-10. mindestens eine bewusste Fehlzuordnung intern reparieren:
-    - fest/none oder Veto;
-    - danach auf Automatik zurücksetzen;
-    - Rückkehr zur Automatik belegen.
-11. Erst danach Release-Gates weiterführen.
+`bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`
+
+Falls dieser Direktlauf technisch nicht möglich ist, genau den isolierten Ersatzprüfweg verwenden:
+
+`python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json`
+
+**Erst nach PASS dieses aktuellen Source-Standes:**
+1. OTTO Advertiser **14336** im eigenen Awin-Zugang real nachweisen.
+2. echten OTTO-Produktfeed lesen; reale Verkäufer-Spalte exakt binden.
+3. WordPress/MariaDB End-to-End: Hub 1/2/3, Kategorie 1/2/3, Beitrag, Exact Match / kein Ersatz.
+4. realen OTTO/Awin-Creative-Bestand bzw. belegten Export/API-Weg anbinden.
+5. echtes Banner automatisch prüfen → Ziel → Slot → Anteil → Ausgabe.
+6. reale Stichprobe der Anteilverteilung prüfen.
+7. manuelle Fehlzuordnung reparieren und Rückkehr auf Automatik belegen.
+8. erst danach Release-Gates weiterführen.
 
 ## PRODUCTWISSEN-GRENZE
 
