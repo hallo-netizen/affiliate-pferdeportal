@@ -3,6 +3,6 @@
   "project_key": "test-project",
   "publishing": {
     "file": "publishing.json",
-    "sha256": "b4308c1107bafda09ce4a6bfc7641f8fb405d2b35d8dc0bd2d6805d697d3ef5c"
+    "sha256": "091b32054aef1029452754768da14ec7d86fe706dd844676e5cb864d2837aa39"
   }
 }
