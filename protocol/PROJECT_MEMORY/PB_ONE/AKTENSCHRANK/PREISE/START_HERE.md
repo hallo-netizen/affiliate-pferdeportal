@@ -30,4 +30,5 @@ Nicht standardisierbare Leistung:
 
 ## Aktueller Bestand
 
-- `PREISKONZEPT_WEBSITES_20260907.md`
+- `PREISKONZEPT_WEBSITES_20260907.md` – ausführliche Konzept-/Ideensammlung
+- `DISKUSSIONSPAPIER_PREISMODELL_WEBSITES_20260907.md` – kurze Team-Diskussionsgrundlage für Vertrieb + Entwicklung
