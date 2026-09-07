@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 13,
+  "generation": 14,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361",
+    "manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361",
+    "current_source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -100,14 +100,18 @@
       ],
       "zero_weight_policy": "AUTOMATIC_EXCLUSION_MANUAL_FIXED_REPAIR_ALLOWED",
       "real_source_interface": "ppar_affiliate_awin_static_creatives",
-      "real_source_policy": "NO_INVENTED_AWIN_API_EMPTY_SOURCE_PRESERVES_EXISTING_BANNERS"
+      "real_source_policy": "NO_INVENTED_AWIN_API_EMPTY_SOURCE_PRESERVES_EXISTING_BANNERS",
+      "multi_position_policy": "INDEPENDENT_DETERMINISTIC_SEED_NO_DUPLICATE_CREATIVE",
+      "manual_repair_trace": "REASON_REQUIRED_ACTOR_AND_TIMESTAMP_STORED_FOR_PAGE_ASSIGNMENTS",
+      "target_repair": "PAGE_ASSIGNMENTS_PLUS_EXISTING_CREATIVE_FIXED_TARGET_SLOT_CONTROL",
+      "bound_empty_source": "BOUND_TRUE_ROWS_EMPTY_ALLOWS_RECONCILIATION"
     }
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "RUN_BOUND_DIRECT_CHECKS_THEN_BIND_REAL_OTTO_AWIN_FEED_AND_CREATIVE_SOURCE_AND_PROVE_PAGE_CATEGORY_ARTICLE_OUTPUT",
-    "completion_condition": "DIRECT_OR_CONTAINER_HOBBYROOM_PASS_AND_REAL_OTTO_PRODUCT_FEED_END_TO_END_PASS_AND_REAL_CREATIVE_SOURCE_BOUND_AND_WEIGHTED_BANNER_SAMPLE_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
+    "bound_user_scope_action": "RUN_DIRECT_HOBBYROOM_CHECK_OR_CONTAINER_CHECK_THEN_BIND_REAL_OTTO_AWIN_PRODUCT_AND_CREATIVE_DATA",
+    "completion_condition": "BOUND_LOCAL_CHECK_PASS_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_PAGE_CATEGORY_ARTICLE_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
     "sequence": 4,
@@ -183,7 +187,7 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361"
+      "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "old_state_reproduction_negative": {
       "status": "STALE_SOURCE_CHANGED",
@@ -237,37 +241,37 @@
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361"
+      "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "source_zip_byte_identity": {
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361"
+      "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "final_sha256": {
       "status": "PENDING",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361"
+      "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "otto_awin_automated_product_distribution": {
       "status": "STATIC_CURRENT_SOURCE_PASS_BOUND_RUN_PENDING_REAL_OTTO_DATA",
       "evidence_ref": "release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt",
       "evidence_sha256": "6ec2b984bebdacb889297a5e213b0165977d678ef9b2b8d0c1cb93bdcf745949",
-      "source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361"
+      "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "otto_awin_real_banner_source": {
-      "status": "SOURCE_SEAM_IMPLEMENTED_REAL_SOURCE_PENDING",
+      "status": "SOURCE_CONTRACT_AND_INGESTION_SEAM_IMPLEMENTED_REAL_SOURCE_PENDING",
       "evidence_ref": "release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt",
-      "evidence_sha256": "2bfe3efe39a0dedfff5a106915ec86126e9ff5f8a14d4e6fc8d8be80e1021724",
-      "source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361"
+      "evidence_sha256": "22e4774dcb90c2c164c9687a74e47b514accdd885616a126a7884903abb24f79",
+      "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "otto_awin_weighted_banner_distribution": {
-      "status": "STATIC_CURRENT_SOURCE_PASS_LOCAL_BEHAVIOR_PASS_BOUND_DIRECT_RUN_PENDING",
+      "status": "STATIC_CURRENT_SOURCE_PASS_LOCAL_BEHAVIOR_PASS_DIRECT_RUN_READY",
       "evidence_ref": "release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt",
-      "evidence_sha256": "2bfe3efe39a0dedfff5a106915ec86126e9ff5f8a14d4e6fc8d8be80e1021724",
-      "source_manifest_sha256": "5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361"
+      "evidence_sha256": "22e4774dcb90c2c164c9687a74e47b514accdd885616a126a7884903abb24f79",
+      "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -295,7 +299,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "OTTO_REAL_FEED_REAL_CREATIVE_BINDING_AND_END_TO_END_WEIGHTED_OUTPUT",
+    "current_milestone": "OTTO_REAL_AWIN_PRODUCT_AND_CREATIVE_BINDING_END_TO_END",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
