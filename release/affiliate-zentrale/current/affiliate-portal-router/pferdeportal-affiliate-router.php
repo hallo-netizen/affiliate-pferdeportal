@@ -49,7 +49,7 @@ final class Pferdeportal_Affiliate_Router {
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
-    const OTTO_AWIN_ADVERTISER_ID = 14336;
+    const OTTO_AWIN_ADVERTISER_ID = PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID;
     const CAMPAIGN_POST_TYPE = 'ap_campaign';
 
     const OPTION_ENABLED = 'ppar_enabled';
