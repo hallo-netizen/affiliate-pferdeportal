@@ -232,7 +232,7 @@ ARCHIV:
 MODULKLASSE: UNGEKLÄRT
 
 STATUS:
-GEPLANT / V1-ARCHITEKTUR ENTSCHIEDEN / technischer Prototyp noch nicht PASS. Allgemeingültigkeit ist Ziel, technisch noch nicht bewiesen.
+V1-ARCHITEKTUR ENTSCHIEDEN / isolierter Vergleichskern vorhanden / WordPress+MySQL Produkt-/Variantenregeln PASS / reales PV-REG-001-Dossier PASS / Writer und Live-Ausgabe noch offen. Allgemeingültigkeit ist Ziel, technisch noch nicht vollständig bewiesen.
 
 GEPLANTER HAUPTORT:
 nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; bis dahin keine künstliche zweite Modulwahrheit anlegen.
@@ -264,15 +264,13 @@ BELEG:
 Nutzerunterlagen vom 2026-09-06, insbesondere das 68-Dossier-Übergabepaket mit getrennten Produktionsaufträgen, Kernfakten, Herstellerquellen, Konfliktliste und Produktionsvertrag.
 
 OFFEN:
-- V1-Funktionsumfang;
-- Daten-/Dossiervertrag;
-- Kategorienlogik;
-- Rechercheadapter/Quellenstrategie;
-- minimaler Product-Compare-Writer und dessen Regeln;
-- eigene minimale Kategorie-Konfiguration;
+- Product-Compare-Writer und Entscheidungsinterpretation;
+- WordPress-DRAFT-Ausgabe;
+- Vergleichsarchiv/Frontend;
 - Exact-Product-Schnittstelle zur vorhandenen Affiliate-Zentrale;
 - optionale SEO-Priorisierung ohne Pflichtkopplung;
-- technischer Allgemeingültigkeitstest.
+- Recherche-/Aktualisierungsadapter;
+- technischer Allgemeingültigkeitstest mit zweiter Projektkonfiguration.
 
 
 ## MOD-007 – UNIVERSAL PRODUKTWISSEN
