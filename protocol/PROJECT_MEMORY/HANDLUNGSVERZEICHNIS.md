@@ -266,26 +266,31 @@ Register enthalten nur Verweise, nicht den vollständigen Inhalt.
 Keine Programmierung.
 
 
-## Komplettsicherung / Backup
+## GitHub-Komplettsicherung / Backup
 
 Aktion:
-Pferde-Atelier vollständig sichern oder Wiederherstellbarkeit prüfen.
+GitHub-Repository `hallo-netizen/affiliate-pferdeportal` vollständig sichern oder Wiederherstellbarkeit prüfen.
 
 Verbindlicher Weg:
 `TRESOR/START_HERE.md` → `TRESOR/KONZEPT.md`.
 
 HARD RULE:
-**Keinen Ersatzweg und keine neue Backup-Architektur erfinden.**
+**GitHub-Backup = GitHub only.**
 
-Genau drei Datenblöcke:
-1. GitHub komplett;
-2. WordPress komplett;
-3. Projektarchiv komplett.
+Verboten ohne neuen ausdrücklichen Nutzerauftrag:
+- WordPress dazunehmen;
+- Projektarchiv dazunehmen;
+- WP-Plugin als Backupweg bauen;
+- neue Backup-Architektur neben dem vorhandenen GitHub-Tresorweg erzeugen.
+
+Technische Hauptquelle:
+Branch `tresor/build-20260905` →
+`.github/workflows/campus-tresor-snapshot.yml`.
 
 Ergebnis:
-ein datiertes Sicherungspaket + `BACKUP_PASS` oder `BACKUP_FAIL:<GRUND>`.
+eine geprüfte GitHub-Sicherungsdatei.
 
-Backup/Archiv ist niemals Arbeitsquelle.
+Backup/Mirror ist niemals Arbeitsquelle.
 
 ## PB ONE – selbstentwickelte Plugins finden
 
