@@ -149,7 +149,7 @@ Branch:
 `affiliate-release-current`
 
 HEAD:
-`c4e7f63b5677602a032ed1e95d948d654ccb51d5`
+`df616a8cc6690483538116dc9c57e32028b15ddf`
 
 Aktiver Kandidat:
 **6.72.1**
@@ -161,7 +161,7 @@ Source-Manifest SHA-256:
 `b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4`
 
 Governance Generation:
-**14**
+**15**
 
 Release:
 **NICHT FREIGEGEBEN**
