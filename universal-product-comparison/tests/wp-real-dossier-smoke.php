@@ -185,22 +185,15 @@ for ( $i = 0; $i < 100; $i++ ) {
 }
 fwrite( STDOUT, "PASS: 100/100 byte-identical deterministic renders\n" );
 
-$parent_term = wp_insert_term(
-    'Regendecken',
-    'category',
-    array( 'slug' => 'regendecken' )
-);
-upc_real_assert( ! is_wp_error( $parent_term ), 'create bound parent category for draft smoke' );
-
 $child_term = wp_insert_term(
     'Vergleich',
     'category',
     array(
         'slug'   => 'regendecken-vergleich',
-        'parent' => (int) $parent_term['term_id'],
+        'parent' => 0,
     )
 );
-upc_real_assert( ! is_wp_error( $child_term ), 'create bound comparison category for draft smoke' );
+upc_real_assert( ! is_wp_error( $child_term ), 'create bound flat comparison category for draft smoke' );
 
 $wp_draft = upc_wordpress_draft();
 upc_real_assert( ! is_wp_error( $wp_draft ), 'WordPress draft materializer available' );
@@ -216,6 +209,33 @@ upc_real_assert( $saved_post && 'draft' === $saved_post->post_status, 'saved Wor
 upc_real_assert( $first_html === $saved_post->post_content, 'saved WordPress body is byte-identical renderer HTML' );
 upc_real_assert( $first_output_hash === hash( 'sha256', $saved_post->post_content ), 'saved WordPress body hash matches renderer' );
 upc_real_assert( '0' === (string) get_post_meta( $saved_post->ID, '_upc_publish_allowed', true ), 'saved WordPress metadata forbids publish' );
+
+$wrong_parent = wp_insert_term(
+    'Wrong Parent',
+    'category',
+    array( 'slug' => 'wrong-parent' )
+);
+upc_real_assert( ! is_wp_error( $wrong_parent ), 'create wrong-parent fixture' );
+
+$reparented = wp_update_term(
+    (int) $child_term['term_id'],
+    'category',
+    array( 'parent' => (int) $wrong_parent['term_id'] )
+);
+upc_real_assert( ! is_wp_error( $reparented ), 'temporarily reparent comparison category' );
+
+$wrong_parent_result = $wp_draft->materialize( $comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_real_assert(
+    is_wp_error( $wrong_parent_result ) && 'UPC_CATEGORY_PARENT_MISMATCH' === $wrong_parent_result->get_error_code(),
+    'flat category binding blocks unexpected taxonomy parent'
+);
+
+$restored_parent = wp_update_term(
+    (int) $child_term['term_id'],
+    'category',
+    array( 'parent' => 0 )
+);
+upc_real_assert( ! is_wp_error( $restored_parent ), 'restore flat comparison category parent' );
 
 $materialized_again = $wp_draft->materialize( $comparison_id, 'test-project', 'pv-reg-001-v1' );
 upc_real_assert( ! is_wp_error( $materialized_again ), 'repeat WordPress draft materialization succeeds' );
