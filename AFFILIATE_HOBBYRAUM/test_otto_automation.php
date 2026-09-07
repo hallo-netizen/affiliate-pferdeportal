@@ -24,15 +24,32 @@ $articles = source('trait-ppar-article-plans.php');
 $creative = source('trait-ppar-creative-library.php');
 $ebay = source('trait-ppar-ebay.php');
 $router = source('pferdeportal-affiliate-router.php');
+$source_plan = source('class-ppar-product-source-plan.php');
+$analytics = source('class-ppar-partner-analytics.php');
+$radar = source('class-ppar-deal-radar.php');
+
+pass_or_fail(
+    str_contains($router, 'OTTO_AWIN_ADVERTISER_ID = 14336')
+    && str_contains($output, 'self::OTTO_AWIN_ADVERTISER_ID')
+    && str_contains($source_plan, "'awin_advertiser_id'=>14336")
+    && str_contains($analytics, "absint(\$campaign['advertiser_id'] ?? 0) === 14336")
+    && str_contains($radar, "absint(\$row['programme_external_id'] ?? 0) === 14336"),
+    'OTTO identity is canonical Awin advertiser 14336'
+);
 
 pass_or_fail(
     str_contains($automation, 'creative_library_schedule_asset_verification(10)'),
     'automated imports enter asset verification'
 );
 pass_or_fail(
-    str_contains($automation, "ppar_affiliate_awin_product_seller")
+    str_contains($automation, 'ppar_affiliate_awin_product_seller')
     && str_contains($automation, "'seller_name' => \$seller_name"),
     'Awin product seller is explicit and fail-closed'
+);
+pass_or_fail(
+    str_contains($automation, "'exact_mpn' =>")
+    && str_contains($automation, "automation_awin_field(\$row, array('mpn'))"),
+    'exact MPN never falls back to merchant SKU'
 );
 pass_or_fail(
     str_contains($output, 'function output_is_otto_awin_product')
@@ -48,6 +65,32 @@ pass_or_fail(
     'OTTO uses existing category hub journal and article product placements'
 );
 pass_or_fail(
+    str_contains($output, "'product_identifiers'")
+    && str_contains($output, "'product_identity_source'] = \$campaign['product_identifiers'] ? 'awin_otto_feed'")
+    && str_contains($router, "'product_identifiers' => array()"),
+    'OTTO exact product identifiers survive materialization'
+);
+pass_or_fail(
+    str_contains($articles, 'ppar_affiliate_exact_product_requirements')
+    && str_contains($router, "exact_product_identifiers")
+    && str_contains($articles, 'kein Ersatzprodukt')
+    && str_contains($router, 'Exakte Produktidentität aus fachlicher Produktbindung.'),
+    'Productwissen exact-product contract is read-only and fail-closed'
+);
+pass_or_fail(
+    !str_contains($articles, 'upk_products')
+    && !str_contains($output, 'upk_products')
+    && !str_contains($router, 'upk_products')
+    && !str_contains($automation, 'upk_products'),
+    'Affiliate does not couple directly to Productwissen tables'
+);
+pass_or_fail(
+    str_contains($router, 'if (!$exact_mode &&')
+    && str_contains($router, 'ebay_filter_ranked_product_candidates_provider_cohort')
+    && str_contains($router, 'multiprovider_filter_candidates_by_strategy'),
+    'exact fach identity outranks generic provider cohort strategy'
+);
+pass_or_fail(
     str_contains($output, "'_ppar_otto_awin_auto'")
     && str_contains($output, "'otto_awin_verified_product'"),
     'only centrally verified OTTO campaigns receive auto marker'
@@ -59,9 +102,9 @@ pass_or_fail(
     'article plans trust only centrally verified OTTO Awin products'
 );
 pass_or_fail(
-    str_contains($creative, "creative_asset_verification_complete")
-    && str_contains($creative, "product_payload_hash")
-    && str_contains($creative, "source_payload_for_hash"),
+    str_contains($creative, 'creative_asset_verification_complete')
+    && str_contains($creative, 'product_payload_hash')
+    && str_contains($creative, 'source_payload_for_hash'),
     'verification wave rebuilds articles and product payload changes alter freshness'
 );
 pass_or_fail(
@@ -77,16 +120,19 @@ pass_or_fail(
     'seller is a public-output gate and rendered on product cards'
 );
 pass_or_fail(
-    !str_contains($output, 'product_image_as_banner')
+    str_contains($source_plan, 'activate_verified_banner_candidates')
+    && str_contains($source_plan, "output_type='portal_banner'")
+    && str_contains($source_plan, "'decision_source'=>'automatic_banner_network'")
+    && !str_contains($output, 'product_image_as_banner')
     && !str_contains($automation, 'product_image_as_banner'),
-    'no product-image banner fallback introduced'
+    'real imported Awin banners are auto-assigned; no product-image banner fallback'
 );
 
 // Behavioral mini-contracts.
 function is_otto(array $row): bool {
-    if (($row['provider'] ?? '') !== 'awin' || ($row['source_kind'] ?? '') !== 'product') return false;
-    $id = strtolower(trim((string)($row['partner_name'] ?? '')));
-    return preg_match('/(?:^|[^a-z0-9])otto(?:[^a-z0-9]|$)/', $id) === 1;
+    return ($row['provider'] ?? '') === 'awin'
+        && ($row['source_kind'] ?? '') === 'product'
+        && (int)($row['partner_external_id'] ?? 0) === 14336;
 }
 function auto_allowed(array $row): bool {
     return is_otto($row)
@@ -97,7 +143,7 @@ function auto_allowed(array $row): bool {
         && trim((string)($row['seller_name'] ?? '')) !== '';
 }
 $good = [
-    'provider'=>'awin','source_kind'=>'product','partner_name'=>'OTTO',
+    'provider'=>'awin','source_kind'=>'product','partner_external_id'=>14336,
     'classification'=>'ready','image_verified'=>true,'programme_allowed'=>true,
     'tracking_ok'=>true,'seller_name'=>'Reitsport Händler GmbH'
 ];
@@ -108,8 +154,32 @@ $bad = $good; $bad['programme_allowed'] = false;
 pass_or_fail(!auto_allowed($bad), 'unapproved Awin programme blocks OTTO');
 $bad = $good; $bad['image_verified'] = false;
 pass_or_fail(!auto_allowed($bad), 'unverified image blocks OTTO');
-$bad = $good; $bad['partner_name'] = 'Loesdau';
-pass_or_fail(!auto_allowed($bad), 'non-OTTO Awin is not auto-enabled by OTTO rule');
+$bad = $good; $bad['partner_external_id'] = 99999;
+pass_or_fail(!auto_allowed($bad), 'non-OTTO Awin cannot be enabled by OTTO rule');
+
+$normalize = static function(array $ids): array {
+    $out = [];
+    foreach ($ids as $id) {
+        $type = strtoupper((string)($id['type'] ?? ''));
+        if ($type === 'EAN') $type = 'GTIN';
+        $value = trim((string)($id['value'] ?? ''));
+        if ($type === 'GTIN') $value = preg_replace('/[^0-9]/', '', $value);
+        if ($type === '' || $value === '') continue;
+        $out[$type . ':' . $value] = true;
+    }
+    return array_keys($out);
+};
+$exact_match = static function(array $wanted, array $candidate) use ($normalize): bool {
+    return (bool)array_intersect($normalize($wanted), $normalize($candidate));
+};
+pass_or_fail(
+    $exact_match([['type'=>'EAN','value'=>'4001234567890']], [['type'=>'GTIN','value'=>'4001234567890']]),
+    'EAN and GTIN resolve to same exact product identity'
+);
+pass_or_fail(
+    !$exact_match([['type'=>'GTIN','value'=>'4001234567890']], [['type'=>'GTIN','value'=>'4001234567891']]),
+    'similar but different product identifier is never substituted'
+);
 
 $fp = static function(array $row): string {
     ksort($row);
