@@ -50,6 +50,8 @@ jobs:
           php -l universal-product-comparison/src/class-upc-writer.php
           php -l universal-product-comparison/src/class-upc-validator.php
           php -l universal-product-comparison/src/class-upc-production.php
+          php -l universal-product-comparison/src/class-upc-project-config.php
+          php -l universal-product-comparison/src/class-upc-wordpress-draft.php
           php -l universal-product-comparison/tests/wp-db-smoke.php
           php -l universal-product-comparison/tests/wp-real-dossier-smoke.php
           php -r '$d=json_decode(file_get_contents("universal-product-comparison/tests/fixtures/pv-reg-001.json"),true); if(!is_array($d)){exit(1);} echo "FIXTURE_JSON_PASS\\n";'
@@ -58,12 +60,21 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          RUNTIME_FILES="universal-product-comparison/src/class-upc-rulebook.php universal-product-comparison/src/class-upc-writer.php universal-product-comparison/src/class-upc-validator.php universal-product-comparison/src/class-upc-production.php"
+          RUNTIME_FILES="universal-product-comparison/src/class-upc-rulebook.php universal-product-comparison/src/class-upc-writer.php universal-product-comparison/src/class-upc-validator.php universal-product-comparison/src/class-upc-production.php universal-product-comparison/src/class-upc-project-config.php universal-product-comparison/src/class-upc-wordpress-draft.php"
           ! grep -E -i 'openai|anthropic|gemini|llm|wp_remote_|curl_|fsockopen|stream_socket_client' $RUNTIME_FILES
           ! grep -E -i 'random|rand\(|mt_rand|microtime|uniqid|current_time|date\(' $RUNTIME_FILES
           ! grep -E 'call_user_func|is_callable|eval\(|exec\(|shell_exec|system\(' $RUNTIME_FILES
           ! grep -E 'function upc_writer\(' universal-product-comparison/universal-product-comparison.php
           echo UPC_ZERO_FREEDOM_STATIC_GUARD_PASS
+
+      - name: Assert draft materializer cannot publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -E "post_status['\"]?[[:space:]]*=>[[:space:]]*['\"](publish|future|private|pending)" universal-product-comparison/src/class-upc-wordpress-draft.php
+          grep -F "'post_status'   => 'draft'" universal-product-comparison/src/class-upc-wordpress-draft.php
+          grep -F "'_upc_publish_allowed'           => '0'" universal-product-comparison/src/class-upc-wordpress-draft.php
+          echo UPC_WORDPRESS_DRAFT_NO_PUBLISH_GUARD_PASS
 
       - name: Install WP-CLI
         run: |
