@@ -135,7 +135,7 @@ final class PPAR_Deal_Radar {
     private static function provider_key($row) {
         $network = sanitize_key((string)($row['network'] ?? ''));
         if ($network === 'awin') {
-            return absint($row['programme_external_id'] ?? 0) === 14336 ? 'otto' : '';
+            return absint($row['programme_external_id'] ?? 0) === PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID ? 'otto' : '';
         }
         return in_array($network, array('idealo','amazon','kelkoo','ebay'), true) ? $network : '';
     }
