@@ -280,7 +280,7 @@ OFFEN:
 MODULKLASSE: UNGEKLÄRT
 
 STATUS:
-V1-DATENVERTRAG DEFINIERT / isolierter Prototyp vorhanden / lokaler Vertrags-/Logiktest P01–P11 GESAMT PASS / echter WordPress-/DB-PASS noch offen.
+V1-DATENVERTRAG DEFINIERT / isolierter Prototyp vorhanden / lokaler Vertrags-/Logiktest PASS / echter WordPress+MySQL-Smoke-Test PASS (`UPK_WORDPRESS_DB_GESAMT_PASS`, Run 34108014923). Kein Live-Portal-Deployment behauptet.
 
 GEPLANTER HAUPTORT:
 nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`.
@@ -309,4 +309,4 @@ AKTUELLER VERTRAG:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/PRODUKTWISSEN_V1_VERTRAG.md`.
 
 OFFEN:
-technischer V1-Prototyp und Allgemeingültigkeitsbeweis.
+Allgemeingültigkeitsbeweis mit mindestens einer zweiten Projektkonfiguration sowie spätere produktive Release-/Liveprüfung.
