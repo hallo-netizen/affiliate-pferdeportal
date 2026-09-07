@@ -1,0 +1,8 @@
+{
+  "schema_version": "1",
+  "project_key": "test-project",
+  "publishing": {
+    "file": "publishing.json",
+    "sha256": "b4308c1107bafda09ce4a6bfc7641f8fb405d2b35d8dc0bd2d6805d697d3ef5c"
+  }
+}
