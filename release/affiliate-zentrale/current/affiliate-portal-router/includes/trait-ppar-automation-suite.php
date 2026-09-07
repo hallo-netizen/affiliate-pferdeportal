@@ -467,7 +467,7 @@ trait PPAR_Automation_Suite_Trait {
             'lock_expires_at'=>0,
             'heartbeat_at'=>0,
             'counts'=>wp_json_encode($this->automation_empty_counts()),
-            'details'=>wp_json_encode(array('feed'=>'pending','feed_complete'=>false,'offers_complete'=>false,'static_creatives'=>'unsupported_no_publisher_catalog_api')),
+            'details'=>wp_json_encode(array('feed'=>'pending','feed_complete'=>false,'offers_complete'=>false,'static_creatives'=>'not_bound_real_source_required')),
             'message'=>'Partnerlauf vorgemerkt.',
             'created_at'=>$now,
             'updated_at'=>$now,
@@ -1177,6 +1177,106 @@ trait PPAR_Automation_Suite_Trait {
         return new WP_Error('adcell_stage_invalid', 'Unbekannte ADCELL-Automatisierungsstufe.');
     }
 
+    /**
+     * Optional real Awin creative source seam.
+     *
+     * This does NOT invent an Awin API. A connector/export adapter may supply
+     * real rows through the filter once such a source is actually available.
+     * Empty input means "not bound" and never deactivates existing banners.
+     */
+    private function automation_awin_static_creative_rows($advertiser_id, $snapshot, $run_uuid) {
+        $advertiser_id = absint($advertiser_id);
+        if ($advertiser_id <= 0) {
+            return new WP_Error('awin_static_creative_advertiser_invalid', 'Ungültige Awin-Advertiser-ID für Bannerquelle.');
+        }
+        $raw = apply_filters(
+            'ppar_affiliate_awin_static_creatives',
+            array(),
+            $advertiser_id,
+            is_array($snapshot) ? $snapshot : array(),
+            self::PROVIDER_CONTRACT_VERSION
+        );
+        if (is_wp_error($raw)) { return $raw; }
+        if (!is_array($raw) || !$raw) {
+            return array('bound'=>false,'rows'=>array(),'blocked'=>0);
+        }
+
+        $rows = array();
+        $blocked = 0;
+        foreach ($raw as $creative) {
+            if (!is_array($creative)) { $blocked++; continue; }
+            $row_advertiser = absint($creative['advertiser_id'] ?? $creative['merchant_id'] ?? 0);
+            if ($row_advertiser !== $advertiser_id) { $blocked++; continue; }
+
+            $creative_id = sanitize_text_field((string) ($creative['creative_id'] ?? $creative['id'] ?? $creative['banner_id'] ?? ''));
+            $title = sanitize_text_field((string) ($creative['title'] ?? $creative['name'] ?? ''));
+            $image = esc_url_raw((string) ($creative['image_url'] ?? $creative['image_source'] ?? $creative['banner_url'] ?? ''));
+            $destination = esc_url_raw((string) ($creative['destination_url'] ?? $creative['landing_page'] ?? ''));
+            $tracking = esc_url_raw((string) ($creative['tracking_url'] ?? $creative['affiliate_url'] ?? $creative['click_url'] ?? ''));
+            if ($tracking === '' && $destination !== '') {
+                $tracking = $this->automation_awin_tracking_url($advertiser_id, $destination, 'banner-' . $creative_id);
+            }
+            if ($creative_id === '' || $title === '' || $image === '' || $tracking === '') {
+                $blocked++;
+                continue;
+            }
+
+            $rows[] = array(
+                'creative_id'=>$creative_id,
+                'creative_type'=>'banner',
+                'creative_title'=>$title,
+                'creative_description'=>sanitize_textarea_field((string) ($creative['description'] ?? '')),
+                'creative_tag'=>sanitize_text_field((string) ($creative['tags'] ?? $creative['category'] ?? '')),
+                'image_source'=>$image,
+                'destination_url'=>$destination !== '' ? $destination : $tracking,
+                'tracking_url'=>$tracking,
+                'width'=>absint($creative['width'] ?? 0),
+                'height'=>absint($creative['height'] ?? 0),
+                'status'=>sanitize_key((string) ($creative['status'] ?? 'active')) === 'inactive' ? 'inactive' : 'active',
+                '_source_kind'=>'banner',
+                '_run_uuid'=>sanitize_text_field((string) $run_uuid),
+            );
+        }
+        return array('bound'=>true,'rows'=>$rows,'blocked'=>$blocked);
+    }
+
+    private function automation_import_awin_static_creatives($advertiser_id, $snapshot, $run_uuid) {
+        $source = $this->automation_awin_static_creative_rows($advertiser_id, $snapshot, $run_uuid);
+        if (is_wp_error($source)) { return $source; }
+        if (empty($source['bound'])) {
+            return array(
+                'bound'=>false,
+                'counts'=>$this->automation_empty_counts(),
+                'imported_rows'=>0,
+                'blocked_rows'=>0,
+            );
+        }
+
+        $programme = is_array($snapshot['programme'] ?? null) ? $snapshot['programme'] : array();
+        $context = array(
+            'provider'=>'awin',
+            'partner_external_id'=>(string) absint($advertiser_id),
+            'partner_name'=>sanitize_text_field((string) ($programme['name'] ?? $snapshot['submitted_name'] ?? 'Awin-Partner')),
+            'source_kind'=>'banner',
+            'run_uuid'=>sanitize_text_field((string) $run_uuid),
+        );
+        $counts = $this->automation_import_rows((array) ($source['rows'] ?? array()), $context);
+        $counts['blocked'] = absint($counts['blocked'] ?? 0) + absint($source['blocked'] ?? 0);
+
+        $this->automation_reconcile_partner_assets(
+            'awin',
+            (string) absint($advertiser_id),
+            'banner',
+            sanitize_text_field((string) $run_uuid)
+        );
+        return array(
+            'bound'=>true,
+            'counts'=>$counts,
+            'imported_rows'=>count((array) ($source['rows'] ?? array())),
+            'blocked_rows'=>absint($source['blocked'] ?? 0),
+        );
+    }
+
     private function automation_process_claimed_job($job) {
         $counts = $this->automation_decode_job_json($job['counts'] ?? '', $this->automation_empty_counts());
         $details = $this->automation_decode_job_json($job['details'] ?? '', array());
@@ -1290,12 +1390,32 @@ trait PPAR_Automation_Suite_Trait {
             return true;
         }
         if ($stage === 'finalize') {
+            $creative_result = $this->automation_import_awin_static_creatives(
+                $advertiser_id,
+                $snapshot,
+                (string) $job['run_uuid']
+            );
+            if (is_wp_error($creative_result)) { return $creative_result; }
+            if (!empty($creative_result['bound'])) {
+                $counts = $this->automation_merge_counts($counts, (array) ($creative_result['counts'] ?? array()));
+                $details['static_creatives'] = 'bound_real_source';
+                $details['static_creatives_rows'] = absint($creative_result['imported_rows'] ?? 0);
+                $details['static_creatives_blocked'] = absint($creative_result['blocked_rows'] ?? 0);
+            } else {
+                $details['static_creatives'] = 'not_bound_real_source_required';
+                $details['static_creatives_rows'] = 0;
+                $details['static_creatives_blocked'] = 0;
+            }
+
             $details['target_edges'] = $this->automation_rebuild_edges('awin', (string) $advertiser_id);
             $partial = empty($details['feed_complete']);
             $status = $partial ? 'partial' : 'success';
             $message = $partial
                 ? 'Partnerlauf abgeschlossen; Angebote vollständig, Produktfeed nicht eindeutig verfügbar.'
                 : 'Partnerlauf vollständig und paketweise abgeschlossen.';
+            if (!empty($creative_result['bound'])) {
+                $message .= ' Reale Awin-Werbemittelquelle wurde mitverarbeitet.';
+            }
             $this->automation_complete_job($job, $counts, $details, $status, $message);
             return true;
         }
