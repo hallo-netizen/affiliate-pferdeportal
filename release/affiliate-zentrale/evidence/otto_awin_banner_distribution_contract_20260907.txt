@@ -1,7 +1,7 @@
 AFFILIATE_ZENTRALE OTTO/AWIN WEIGHTED BANNER DISTRIBUTION EVIDENCE
 DATE=2026-09-07
-STATUS=STATIC_CONTRACT_PASS_BOUND_RUN_PENDING_REAL_BANNER_SOURCE
-SOURCE_MANIFEST_SHA256=1140bba9bd2db78d4a347f1d6ad23ee82e17213fff33270f0ffb169b6d0973fb
+STATUS=STATIC_CURRENT_SOURCE_PASS_LOCAL_BEHAVIOR_PASS_BOUND_DIRECT_RUN_PENDING_REAL_DATA
+SOURCE_MANIFEST_SHA256=5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361
 SOURCE_FILE_COUNT=26
 
 USER VISION
@@ -9,71 +9,130 @@ USER VISION
 - Distribution follows an explicit share system.
 - Manual intervention remains a repair layer, not the normal workflow.
 
-IMPLEMENTED KISS CONTRACT
-1. Relevance and safety before share.
-2. Share only between candidates in the best currently eligible relevance tier.
-3. Starting weights:
-   - OTTO 40
-   - other Awin 25
-   - ADCELL 20
-   - Direct 15
-   - Digistore24 0
-   - Other 0
-4. Missing providers are normalized away; an eligible alternative may fill the slot.
-5. Deterministic allocation by calendar week + page/context + slot.
-6. No request-random rotation and no realtime impression-counter architecture.
-7. Distribution is applied across real banner placement families:
-   - start_after_topics
-   - hub_grid_card
-   - hub_after_cards
-   - hub/banner aliases
-   - product_after_category_tiles / category recommendation
-   - post/article banner placements
-   - journal_banner
-   - anzeigenmarkt_top_banner
-8. Within selected provider the existing relevance/matches/priority order remains.
-9. Digistore24 stays at zero share while deferred.
-10. Real OTTO banners still require a real Awin/OTTO creative source; product images are never invented as banners.
+IMPLEMENTED CONTRACT
+1. Safety/legal/provider/health gates stay fail-closed.
+2. Manual fixed/none repair and control vetoes take precedence over automation.
+3. Automatic banner distribution uses only providers with positive automatic share.
+4. Weight 0 is a true automatic exclusion.
+5. Relevance is evaluated before weighted allocation.
+6. Shares apply only among currently eligible candidates in the best relevance tier.
+7. Starting weights:
+   OTTO=40
+   AWIN_OTHER=25
+   ADCELL=20
+   DIRECT=15
+   DIGISTORE24=0
+   OTHER=0
+8. Missing providers are automatically removed from the denominator.
+9. Allocation is deterministic by calendar week + page/context + slot.
+10. No request-random rotation and no realtime impression-counter architecture.
+11. Real banner placement families covered:
+   start_after_topics
+   hub_grid_card
+   hub_after_cards
+   product_after_category_tiles/category recommendation
+   article/post banner slots
+   journal_banner
+   anzeigenmarkt_top_banner
+12. Product exact-match logic remains separate from banner quota logic.
+13. Product images are never invented as banners.
 
-MANUAL REPAIR
-- Existing Zuordnungen UI remains the internal repair instance.
-- Automatic = return to the share engine.
-- Fixed = force one chosen banner/product on a page assignment.
-- None = suppress output.
-- Descendant inheritance remains available.
-- Existing provider/partner/creative/target/slot/output vetoes and emergency stop remain available.
-- Article-plan banner building now consults the manual assignment before automatic weighted selection.
+REAL AWIN CREATIVE SOURCE SEAM
+IMPLEMENTED:
+filter=ppar_affiliate_awin_static_creatives
+
+CONTRACT:
+- adapter must return real source rows;
+- exact advertiser ID must match the current Awin advertiser;
+- creative ID, title, real image URL and tracking URL are mandatory;
+- rows are normalized to creative_type=banner and source_kind=banner;
+- foreign advertiser rows are blocked;
+- incomplete rows are blocked;
+- if no real source is bound, existing banners are NOT reconciled away;
+- when a real source is bound, rows enter the existing Creative Library -> asset verification -> target -> slot -> weighted distribution path;
+- no Awin API endpoint is invented.
 
 OTTO ID AUTHORITY
 PASS:
-- Exactly one primary technical source: PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID = 14336.
-- Router aliases that authority.
-- Partner Analytics and Deal Radar reference the same authority.
-- No second numeric OTTO ID truth is required in those paths.
+PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID = 14336
+Router, Analytics and Deal Radar reference this authority.
 
-STATIC CURRENT-SOURCE CONTRACT CHECK
-PASS single OTTO advertiser ID authority
-PASS weighted banner defaults
-PASS relevance before share
-PASS deterministic weekly allocation
-PASS missing-source normalization
-PASS all real banner placement families included
-PASS manual repair UI present
-PASS manual article-plan override precedence
-PASS Digistore24 default share zero
-PASS product exact-match logic remains separate from banner share logic
+MANUAL REPAIR
+Existing Zuordnungen UI:
+- automatic
+- fixed banner/product
+- none
+- descendant inheritance
 
-LIMITATION
-The bound Affiliate Hobbyraum test is updated, but the exact Docker/Podman runner was not executed in this chat runtime.
-No runner PASS is claimed.
+Existing control layers remain:
+- provider
+- partner
+- creative
+- target
+- slot
+- output
+- global emergency stop
+
+Article-plan building now checks manual banner assignment before automatic banner ranking.
+
+EXECUTABLE CHECK PATHS
+1. Exact bounded Hobbyroom:
+   python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py TASK.current.json
+2. Direct read-only checkout test without Docker:
+   bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh
+
+The direct runner performs PHP syntax checks on all bound source files and then runs:
+- AFFILIATE_HOBBYRAUM/test_otto_automation.php
+- AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+
+LOCAL EXECUTION IN THIS CHAT RUNTIME
+PHP=8.4.23
+PASS shell syntax of direct runner
+PASS executable weighted-banner behavior:
+- relevance outranks OTTO share
+- deterministic same week/context/slot
+- missing sources renormalize
+- manual fixed overrides automation
+- manual none suppresses
+- return to automatic restores engine
+- Awin advertiser 14336 maps to OTTO
+- name cannot spoof OTTO
+PASS zero-share/source behavior:
+- zero-share provider excluded
+- positive-share source remains eligible
+- valid OTTO/Awin banner row accepted
+- foreign advertiser banner blocked
+- incomplete banner row blocked
+
+STATIC CURRENT-SOURCE CHECK
+PASS single OTTO ID authority
+PASS zero-share automatic exclusion
+PASS relevance before shares
+PASS all banner placement families
+PASS manual repair before article automation
+PASS real Awin creative source seam
+PASS empty source does not reconcile existing banners
+PASS foreign advertiser blocked
+PASS real banner imported as banner
+PASS no fake product-image banner
+PASS direct no-Docker check route present
+PASS bound task includes behavioral test
+PASS START_HERE points to TASK.current.json
+
+NOT CLAIMED
+The exact repository checkout direct runner was not executed in this chat container because the GitHub repository is not locally mounted and network clone is unavailable.
+The Docker/Podman Hobbyroom runner was also not executed here.
+Therefore no exact-bound-run PASS is claimed.
 
 REAL/LIVE STILL PENDING
-- real OTTO/Awin banner creative inventory/source
-- real import/acquisition of at least one OTTO creative
+- OTTO 14336 real in publisher's Awin account
+- real OTTO product feed end-to-end
+- exact seller field binding from real feed
+- real OTTO/Awin creative inventory/source
 - WordPress/MariaDB end-to-end
-- real public placement sampling across page/category/article levels
-- observed share distribution over a sufficiently large real slot sample
-- live manual repair and return-to-automatic test
+- public page/category/article product output
+- real weighted banner sample over sufficient slots
+- real manual repair + return-to-automatic proof
 
 RELEASE_ALLOWED=NO
 LIVE_PASS=NO
