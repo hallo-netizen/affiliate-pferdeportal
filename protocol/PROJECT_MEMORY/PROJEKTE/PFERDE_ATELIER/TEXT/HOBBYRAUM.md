@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / STEP04 FREIGEGEBEN
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -14,17 +14,17 @@ Es gibt **kein alternatives Reparaturkonzept** und keinen parallelen Reparaturpf
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: a9cde12a7d82ada06e88235f0ae7e774a013ac93
-ACTIVE_BLOCKER: STEP03_REALTEST_PENDING
-PLAN_PHASE: STEP03_REALTEST
+ACTIVE_BLOCKER: BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING
+PLAN_PHASE: STEP04_REAPPLY_PR126
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/step04-pr126-expose-real-ppm-handoff-20260907
+CANDIDATE_HEAD_SHA: 988498c76b02b33ecd1ede5c986454ca55c2ba07
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
+ALLOWED_PATH_PREFIXES: control/single-door-boundary/codex_current_action.py;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -32,7 +32,7 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
-INTEGRATION_ALLOWED: false
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -307,3 +307,34 @@ Merge:
 `a9cde12a7d82ada06e88235f0ae7e774a013ac93`
 
 Step 04 ist bis zum Realtest-Ergebnis gesperrt.
+
+
+## STEP 03 – REALTESTERGEBNIS
+
+Step 03 / PR #125:
+- HEAD exakt `a9cde12a7d82ada06e88235f0ae7e774a013ac93`;
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
+- Current Action READY;
+- erster Blocker weiterhin `BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`;
+- kein Rückschritt, kein Publish.
+
+Chronologisch nächster Pflichtblock:
+PR #126 – vorhandenen realen PPM-Handoff in der Current Action exponieren.
+
+## STEP 04 – EINZELKANDIDAT
+
+Quelle:
+PR #126 / Merge `336c6fe87ed3d5c20c54e684b36e45edc7d7cc14`
+
+Kandidat:
+`hobbyroom/step04-pr126-expose-real-ppm-handoff-20260907`
+Head:
+`988498c76b02b33ecd1ede5c986454ca55c2ba07`
+
+Änderungen:
+genau 4 Dateien, alle 4 exakt PR-#126-Zielstand.
+
+HARD RULE:
+kein Step 05 vor Realtest von Step 04.
