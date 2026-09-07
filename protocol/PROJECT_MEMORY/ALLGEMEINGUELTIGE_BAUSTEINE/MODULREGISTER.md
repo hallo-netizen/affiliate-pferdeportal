@@ -232,47 +232,54 @@ ARCHIV:
 MODULKLASSE: UNGEKLÄRT
 
 STATUS:
-GEPLANT / V1-ARCHITEKTUR ENTSCHIEDEN / technischer Prototyp noch nicht PASS. Allgemeingültigkeit ist Ziel, technisch noch nicht bewiesen.
+TECHNISCHER V1-PROTOTYP PASS. Projektunabhängiger Kern und getrennte Pferde-Konfiguration sind technisch belegt; formale Modulklassifizierung/Hauptort-Freigabe ist noch offen.
 
-GEPLANTER HAUPTORT:
-nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; bis dahin keine künstliche zweite Modulwahrheit anlegen.
+VORLÄUFIGER TECHNISCHER HAUPTORT:
+`universal-product-comparison/` auf dem gebundenen Prototyp-Branch.
+Kein Umzug nach `ALLGEMEINGUELTIGE_BAUSTEINE/`, bevor die Modulklasse ausdrücklich abgeschlossen ist.
+
+AKTUELL BELEGTER STAND:
+- Plugin `0.2.4-prototype`;
+- Zero-Freedom-Renderer;
+- WordPress-DRAFT-Weg;
+- Vergleichsarchiv;
+- interne Linkbindung;
+- neutrale deterministische Grafik;
+- Affiliate-read-only-Bridge;
+- SEO-read-only-Signale;
+- realer WordPress-Admin-Lifecycle-Test PASS;
+- Nutzer-Live-Verifikation 0.2.4 noch offen.
 
 ZWECK:
 Projektunabhängige Engine für:
-- Definition vergleichbarer Produkte/Varianten;
-- Vergleichstyp und Vergleichsebene;
-- produktgruppenabhängige Vergleichsmerkmale;
-- priorisierte Hersteller-/Primärquellen-Recherche;
-- strukturierte Herstellerfakten;
-- NOT_IN_SOURCE / SOURCE_CONFLICT / CONFIGURATION_DEPENDENT;
-- neutrale Eignungsableitung nach dokumentierten Eigenschaften;
-- strukturiertes Faktendossier als Übergabe an ein Text-/Publishing-System.
+- konkrete Produkt-/Variantenvergleiche;
+- Vergleichsmerkmale und gebundene Rulesets;
+- deterministische Artikelproduktion ohne Writer-Freiheit;
+- WordPress-DRAFT;
+- Vergleichsarchiv, interne Links und neutrale Vergleichsgrafik.
 
-GEPLANTE GRENZE:
-Kein Klon eines kompletten bestehenden Produktions-/Workflow-Stacks.
-V1 besitzt eine eigene kleine Produktvergleichsstraße bis WordPress-DRAFT und keine Laufzeitabhängigkeit von STARTMASTER/TEXT.
-Produktfakten kommen aus MOD-007 UNIVERSAL PRODUKTWISSEN.
-SEO liefert optional Signale; aktuelle Kaufquellen/Preise/Verfügbarkeit bleiben bei der bestehenden Affiliate-Zentrale über eindeutige Produktidentitäten.
+GRENZE:
+Keine Laufzeitabhängigkeit von STARTMASTER/TEXT.
+Produktfakten kommen aus MOD-007.
+Affiliate bleibt Commerce-Schicht; SEO bleibt read-only Signalquelle.
+Kein Auto-Publish.
 
 ERSTE PROJEKTANWENDUNG:
 PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
 
 PROJEKTKONFIGURATION:
-Pferde-spezifische Kategorien, Produktgruppen, Merkmalskataloge und Quellenprofile müssen außerhalb des Kerncodes liegen.
+Pferde-spezifische Kategorien, Dossiers, Rulesets und Quellenprofile bleiben außerhalb des allgemeinen Kerns.
 
-BELEG:
-Nutzerunterlagen vom 2026-09-06, insbesondere das 68-Dossier-Übergabepaket mit getrennten Produktionsaufträgen, Kernfakten, Herstellerquellen, Konfliktliste und Produktionsvertrag.
+BELEGE:
+- `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/CURRENT_STATE.md`;
+- `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/PROTOKOLL_20260907.md`;
+- Run `34154550626` für echten WP-Admin-Lifecycle.
 
 OFFEN:
-- V1-Funktionsumfang;
-- Daten-/Dossiervertrag;
-- Kategorienlogik;
-- Rechercheadapter/Quellenstrategie;
-- minimaler Product-Compare-Writer und dessen Regeln;
-- eigene minimale Kategorie-Konfiguration;
-- Exact-Product-Schnittstelle zur vorhandenen Affiliate-Zentrale;
-- optionale SEO-Priorisierung ohne Pflichtkopplung;
-- technischer Allgemeingültigkeitstest.
+- Nutzer-Live-Verifikation 0.2.4;
+- fachlich/visuelle Prüfung des ersten echten Nutzer-Drafts;
+- formale Modulklassifizierung und endgültiger Hauptort;
+- Ausbau von PV-REG-001 auf weitere freigegebene Dossiers/Kategorien.
 
 
 ## MOD-007 – UNIVERSAL PRODUKTWISSEN
@@ -280,13 +287,16 @@ OFFEN:
 MODULKLASSE: UNGEKLÄRT
 
 STATUS:
-GEPLANT / V1-DATENVERTRAG DEFINIERT / technischer Prototyp noch nicht PASS.
+TECHNISCHER V1-PROTOTYP PASS. Die projektunabhängige Daten-/Repository-Schicht ist in echtem WordPress/MySQL getestet; formale Modulklassifizierung/Hauptort-Freigabe ist noch offen.
 
-GEPLANTER HAUPTORT:
-nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`.
+VORLÄUFIGER TECHNISCHER HAUPTORT:
+`universal-product-knowledge/` auf dem gebundenen Prototyp-Branch.
+
+AKTUELL BELEGTER STAND:
+`0.1.0-prototype`.
 
 ZWECK:
-Eine einzige projektunabhängige interne Produktfaktenbasis für Produktvergleich, Variantenvergleich, Beratung und Affiliate-Exact-Match.
+Eine einzige interne Produktfaktenbasis für Produktvergleich, Variantenvergleich, Beratung und Affiliate-Exact-Match.
 
 V1-KERN:
 - Produktidentität;
@@ -308,5 +318,12 @@ PFERDE_ATELIER.
 AKTUELLER VERTRAG:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/PRODUKTWISSEN_V1_VERTRAG.md`.
 
+BELEGE:
+- realer WordPress/MySQL-Test PASS;
+- `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/PROTOKOLL_20260907.md`.
+
 OFFEN:
-technischer V1-Prototyp und Allgemeingültigkeitsbeweis.
+- formale Modulklassifizierung und endgültiger Hauptort;
+- Nutzung außerhalb des ersten Produktvergleichsprojekts;
+- Lifecycle-/Freshness-Automatisierung nach Abschluss des V1-Kernwegs.
+
