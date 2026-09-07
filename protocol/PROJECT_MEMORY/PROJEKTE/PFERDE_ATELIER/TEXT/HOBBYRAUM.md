@@ -288,3 +288,24 @@ Für die bestehende 12-Stufen-Kette je Stufe bestimmen:
 **Keine neue Architektur / kein neuer Runner.**
 Ergebnis zuerst nur als Wirkungskarte. Erst ein konkret reproduzierter Vertragskonflikt darf Fehler-/Rückbaukandidat werden.
 
+
+
+## HARD RULE – NULL-FREIHEIT / ZWANGSJACKE 2026-09-07
+
+**Unantastbar:**
+- pro Raum genau **eine Tür**;
+- genau **ein dummer, fachblinder Wächter**;
+- Chat/Codex besitzt **null freie Workflow-, Routing-, State-, Prüf-, Qualitäts-, Ersatz- oder Publishentscheidung**;
+- keine neue Capability, kein separater Executor, kein zweiter Handoff, kein Parallelpfad;
+- Fachworkflow/Textmaschine/SEO/Links/Tabellen/LanguageTool/PPM/PSERC/PSTE/Design/Publish-Regeln unverändert.
+
+Der Worker darf nur die vom bereits gebundenen Fachworkflow verlangten Arbeitsprodukte erzeugen. Er darf **nicht** selbst bestimmen:
+- welcher Prüfer gilt;
+- welche Evidence genügt;
+- welcher Artefaktzustand zu prüfen ist;
+- wie PASS begründet wird;
+- ob ein Ersatzproof zulässig ist.
+
+Ein selbst geschriebenes `PASS`, `execution_performed=true`, beliebiger 64-Hex-Hash oder Stage-Proof ist niemals allein ausreichende Evidence.
+
+**NEXT ACTION:** Fix-Sperre bleibt aktiv. Nur noch die zwei offenen technischen Bedeutungsbindungen schließen: (1) allgemeine NEW-Link-Provenienzquelle des bestehenden Fachworkflows; (2) exakte Bedeutung von `design_format` vor dem WordPress-Render versus späterem echten Rendered-DOM-Gate. Danach erst konsolidierten Kandidaten lokal positiv/negativ prüfen. Bis dahin: `FIX_FORBIDDEN`.
