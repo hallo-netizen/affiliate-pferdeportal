@@ -213,10 +213,10 @@ Wenn die externe Umgebung auch öffentliche HTTPS-Links nicht öffnen kann:
 STOPP → genau eine automatisch erzeugte Prüfkapsel für den genannten Prüfgegenstand; keine manuelle Mehrdatei-Übergabe.
 
 
-## PB ONE – Angebot/Flyer erstellen
+## PB ONE – Präsentation / Werbung / Angebot / Flyer erstellen
 
 Aktion:
-Flyer, Angebotsunterlage, Leistungsdarstellung oder Vertriebsmaterial entwickeln.
+Präsentation, Pitch, Werbung, Flyer, Angebotsunterlage, Leistungsdarstellung oder Vertriebsmaterial entwickeln.
 
 Weg:
 `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
@@ -239,7 +239,9 @@ Weg:
 - Rohidee → `PB_ONE/IDEENWERKSTATT/START_HERE.md`
 - Entwicklung → `PB_ONE/ENTWICKLUNGSRAUM/START_HERE.md`
 - Arbeitsdokument/Präsentationsentwurf → `PB_ONE/ARBEITSDOKUMENTE/START_HERE.md`
-- Angebot/Flyer → `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
+- Preise/Pakete/Baukasten → `PB_ONE/AKTENSCHRANK/PREISE/START_HERE.md`
+- Vertriebsabläufe/Lead-Management → `PB_ONE/AKTENSCHRANK/VERTRIEB/START_HERE.md`
+- Präsentation/Werbung/Angebot/Flyer → `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
 
 Nutzer und Paul haben in PB ONE dieselben redaktionellen Rechte.
 
@@ -299,3 +301,30 @@ Weg:
 
 Regel:
 Kein zweiter Versions-/Release-/LIVE-Stand im PB-ONE-Pluginfach.
+
+
+## PB ONE – Preise / Pakete / Baukasten
+
+Aktion:
+Website-Pakete, Zusatzmodule, Zahlungsmodell, Vorkasse oder Preislogik entwickeln bzw. nachschlagen.
+
+Weg:
+`PB_ONE/AKTENSCHRANK/PREISE/START_HERE.md`
+
+Regel:
+Entwurfswerte sind nicht automatisch verbindliche Kundenpreise.
+
+
+## PB ONE – Vertriebsabläufe / Lead-Management
+
+Aktion:
+Kundendaten-Schnittstellen, Angebotsablauf, Sonderfälle, Onboarding, Lead-Zugänge oder Interessentenstatus klären bzw. nachschlagen.
+
+Weg:
+`PB_ONE/AKTENSCHRANK/VERTRIEB/START_HERE.md`
+
+Offene Punkte:
+`PB_ONE/AKTENSCHRANK/TODO/VERTRIEB_STARTKLAR_20260907.md`
+
+Grenze:
+LeadScout als Produkt/Plugin bleibt im Plugin-Fach; Preislogik im Preis-Fach; Verkaufsunterlagen im Präsentations-/Werbebereich.
