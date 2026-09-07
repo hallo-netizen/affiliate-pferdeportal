@@ -707,6 +707,7 @@ trait PPAR_Article_Plans_Trait {
         $price = isset($banner['price']) ? trim(strtr((string) $banner['price'], $replacements)) : '';
         $currency = isset($banner['currency']) ? strtoupper(substr(sanitize_text_field((string) $banner['currency']), 0, 3)) : 'EUR';
         $availability = isset($banner['availability']) ? trim(strtr((string) $banner['availability'], $replacements)) : '';
+        $seller_name = isset($banner['seller_name']) ? trim(strtr((string) $banner['seller_name'], $replacements)) : '';
         $button = isset($banner['button_text']) ? trim(strtr((string) $banner['button_text'], $replacements)) : '';
         if ($button === '') {
             $button = 'Mehr erfahren';
@@ -744,6 +745,9 @@ trait PPAR_Article_Plans_Trait {
             if ($price !== '') { $out .= '<strong class="ppar-article-product-price">' . esc_html($price . ($currency !== '' ? ' ' . $currency : '')) . '</strong>'; }
             if ($availability !== '') { $out .= '<span class="ppar-article-product-availability">' . esc_html($availability) . '</span>'; }
             $out .= '</span>';
+        }
+        if ($seller_name !== '') {
+            $out .= '<span class="ppar-article-product-seller">Verkauf durch ' . esc_html($seller_name) . '</span>';
         }
         if ($multi && method_exists($this, 'multiprovider_render_offer_buttons')) {
             $out .= $this->multiprovider_render_offer_buttons($offers, 'article');
