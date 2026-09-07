@@ -97,3 +97,35 @@ Es zählt erst, wenn Kit + fünf Archivteile tatsächlich auf einem unabhängige
 
 Ergebnis bleibt:
 `TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
+
+
+## Automatisierungs-Nachtrag V2 – 2026-09-07
+
+Kit:
+`CAMPUS_LOCAL_TRESOR_KIT_20260907_V2.zip`
+
+SHA-256:
+`bb5f28d26885fd8b58fd86bea3548375c97782f58581277daddd651b2151ca54`
+
+Automatisiert:
+- Campus-Archiv prüfen und bei Bedarf aus fünf Teilen restaurieren;
+- Git-Mirror + Bundle;
+- realer Restore-/Refvergleich;
+- GitHub-Metadaten;
+- Campus-Archiv Hash-für-Hash kopieren;
+- Recovery prüfen;
+- versionierten Snapshot + Manifest + SHA-256 erzeugen.
+
+Zusätzliche GitHub-Metadaten:
+- Environments;
+- Actions-Secret-Namen, niemals Secret-Werte;
+- Actions-Variablen;
+- Actions-Berechtigungen.
+
+V2-Harttest:
+- Syntax → PASS;
+- positiver Starterlauf → `LOCAL_BACKUP_PASS` / Exit 0;
+- ungeprüfte Recovery → korrekt `LOCAL_BACKUP_BLOCKED:RECOVERY_NOT_CONFIRMED` / Exit 3;
+- fehlendes Archiv + fehlende Teile → korrekt BLOCK / Exit 2.
+
+Die macOS-Automatik ist vorbereitet, aber erst nach realer Installation auf dem Nutzer-Mac aktiv.

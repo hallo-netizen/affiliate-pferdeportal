@@ -1342,3 +1342,28 @@ PB-ONE-Türschild, Zentralregister, Aktenschrank-START_HERE und Aktenschrank-Reg
 
 BEZUG:
 ARCH-075/076/077.
+
+
+### 2026-09-07 – Tresor V2 Ein-Klick-Automatisierung
+
+ZIEL:
+GitHub + Campus-Tresor möglichst automatisiert als einen Sicherungsweg betreiben.
+
+UMSETZUNG:
+- `START_CAMPUS_TRESOR.command` als einheitlicher Ein-Klick-Starter;
+- automatische Archivprüfung/-wiederherstellung;
+- vollständiger bestehender Git-/GitHub-/Campus-/Recovery-Runner wird danach automatisch aufgerufen;
+- GitHub-Metadaten um Environments, Actions-Secret-Namen, Actions-Variablen und Actions-Berechtigungen erweitert;
+- `AUTOMATIK_EINRICHTEN.command` für täglich/wöchentlich planbare macOS-Sicherung.
+
+KIT:
+`CAMPUS_LOCAL_TRESOR_KIT_20260907_V2.zip`
+SHA-256:
+`bb5f28d26885fd8b58fd86bea3548375c97782f58581277daddd651b2151ca54`
+
+TEST:
+Syntax PASS; positiver Lauf PASS; Recovery-Negativ korrekt BLOCKED; fehlendes Archiv korrekt BLOCK.
+
+GRENZE:
+Ein echter unabhängiger lokaler PASS kann nur auf dem Nutzer-Datenträger entstehen.
+Library-Roharchive werden nicht automatisch vom Mac aus ChatGPT nachgeladen.

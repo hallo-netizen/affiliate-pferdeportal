@@ -192,3 +192,26 @@ Ablauf auf dem Mac:
 7. Nur `LOCAL_BACKUP_PASS` akzeptieren.
 
 Erst der reale Lauf auf dem unabhängigen Nutzer-Datenträger schließt die Redundanzlücke.
+
+
+## Automatisierung V2
+
+Bevorzugter Einstieg:
+`START_CAMPUS_TRESOR.command`
+
+Ein Start erledigt automatisch:
+1. lokales Campus-Archiv verifizieren;
+2. falls nötig aus den fünf Exportteilen wiederherstellen;
+3. Recovery-Vorlage bei Bedarf anlegen;
+4. GitHub/Git vollständig sichern;
+5. Metadaten exportieren;
+6. Archiv bytegenau kopieren;
+7. Recovery prüfen;
+8. Snapshot mit Manifest und Hashes erzeugen.
+
+`AUTOMATIK_EINRICHTEN.command` richtet optional einen macOS-LaunchAgent ein.
+Der Nutzer wählt selbst täglich oder wöchentlich und die gewünschte Stunde.
+
+Grenze:
+GitHub wird bei jedem Lauf frisch gesichert.
+ChatGPT-Library-Roharchive können vom lokalen Mac nicht still automatisch synchronisiert werden; ein neuer Roharchivstand benötigt einen neuen Export.

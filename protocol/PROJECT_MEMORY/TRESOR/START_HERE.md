@@ -91,3 +91,23 @@ Das Kit enthält:
 
 Nächster echter Schritt:
 Kit + fünf Archivteile auf einen unabhängigen lokalen Datenträger herunterladen und dort Restore-/Hashprüfung ausführen.
+
+
+## Ein-Klick-Automatisierung V2
+
+Aktuelles Kit:
+`CAMPUS_LOCAL_TRESOR_KIT_20260907_V2.zip`
+
+Dauerhafte Library-Ablage:
+`/Campus-Archiv/TRESOR_TOOLS/2026-09-07/`
+
+SHA-256:
+`bb5f28d26885fd8b58fd86bea3548375c97782f58581277daddd651b2151ca54`
+
+Bevorzugter Start:
+`START_CAMPUS_TRESOR.command`
+
+Der Starter prüft/restauriert das Campus-Archiv bei Bedarf und startet danach automatisch die vollständige GitHub-/Campus-/Recovery-Sicherung.
+
+Optional:
+`AUTOMATIK_EINRICHTEN.command` richtet auf dem Mac eine tägliche oder wöchentliche Sicherung ein; Rhythmus und Stunde wählt der Nutzer selbst.
