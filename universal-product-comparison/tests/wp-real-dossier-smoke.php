@@ -134,6 +134,7 @@ $first_html = $draft['html'];
 $first_input_hash = $draft['input_hash'];
 $first_output_hash = $draft['output_hash'];
 $first_receipt_hash = $draft['receipt_hash'];
+fwrite( STDOUT, "GOLDEN_OUTPUT_HASH_CANDIDATE=" . $first_output_hash . "\n" );
 
 for ( $i = 0; $i < 100; $i++ ) {
     $repeat = $production->execute( $comparison_id, 'pferde-atelier', 'pv-reg-001-v1' );
