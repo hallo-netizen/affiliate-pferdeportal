@@ -65,3 +65,18 @@ Rechtssicheres, kundenfreundliches Angebot und verständliche Leistungsbeschreib
 ## Abschlusskriterium
 
 Der Vertrieb gilt erst dann als startklar, wenn die oben genannten Punkte entschieden, zugänglich bzw. als belastbare Unterlagen vorhanden und an ihren jeweiligen Hauptquellen dokumentiert sind.
+
+## Strukturentscheidung 2026-09-07
+
+Aus dieser TODO-Liste wurden folgende dauerhafte Bereiche abgeleitet:
+- Preise → `../PREISE/START_HERE.md`
+- Vertriebsprozesse + Lead-Management + Onboarding → `../VERTRIEB/START_HERE.md`
+- Präsentation + Werbung + Verkaufsunterlagen → `../../ANGEBOTE_FLYER/START_HERE.md`
+
+Bewusst KEIN eigenes Fach:
+- Lead Management separat;
+- Onboarding separat;
+- Sonderfälle separat.
+
+Grund:
+Diese Punkte sind Teil desselben Vertriebsprozesses und werden im Vertriebs-Fach gebündelt.
