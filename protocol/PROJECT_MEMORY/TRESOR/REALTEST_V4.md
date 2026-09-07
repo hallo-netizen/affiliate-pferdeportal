@@ -7,7 +7,7 @@ Diese Datei dokumentiert frühere Testtechnik.
 Sie definiert **keinen** aktuellen Backupweg.
 
 Aktuelle Autorität:
-\`KONZEPT.md\`
+`KONZEPT.md`
 
 ---
 
