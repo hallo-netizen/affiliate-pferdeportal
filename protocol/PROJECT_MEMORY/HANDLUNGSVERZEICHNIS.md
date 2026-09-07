@@ -272,7 +272,7 @@ Aktion:
 Pferde-Atelier vollständig sichern oder Wiederherstellbarkeit prüfen.
 
 Verbindlicher Weg:
-\`TRESOR/START_HERE.md\` → \`TRESOR/KONZEPT.md\`.
+`TRESOR/START_HERE.md` → `TRESOR/KONZEPT.md`.
 
 HARD RULE:
 **Keinen Ersatzweg und keine neue Backup-Architektur erfinden.**
@@ -283,7 +283,7 @@ Genau drei Datenblöcke:
 3. Projektarchiv komplett.
 
 Ergebnis:
-ein datiertes Sicherungspaket + \`BACKUP_PASS\` oder \`BACKUP_FAIL:<GRUND>\`.
+ein datiertes Sicherungspaket + `BACKUP_PASS` oder `BACKUP_FAIL:<GRUND>`.
 
 Backup/Archiv ist niemals Arbeitsquelle.
 
