@@ -41,6 +41,7 @@ final class PPAR_Affiliate_Source_Plan {
             'otto' => array(
                 'label'=>'OTTO','state'=>'prepared','route'=>'Awin → fachlich OTTO',
                 'purpose'=>'Produktquelle & Deals','activation'=>'nach echter Programmfreigabe / nutzbarem Feed',
+                'awin_advertiser_id'=>14336,
             ),
             'kaufland' => array(
                 'label'=>'Kaufland','state'=>'prepared','route'=>'Lead Alliance / Kaufland Private Network',
@@ -129,6 +130,7 @@ final class PPAR_Affiliate_Source_Plan {
             $campaign['name'] ?? '', $campaign['title'] ?? '', $campaign['partner_name'] ?? '',
             $campaign['merchant_name'] ?? '', $campaign['advertiser_name'] ?? '', $campaign['programme_name'] ?? '',
         )))));
+        if ($network === 'awin' && absint($campaign['advertiser_id'] ?? 0) === 14336) { return 'otto'; }
         if ($network === 'leadalliance' && strpos($identity, 'kaufland') !== false) { return 'kaufland'; }
         if ($network === 'adcocktail') { return 'adcocktail'; }
         return $key;
