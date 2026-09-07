@@ -502,6 +502,11 @@ trait PPAR_Creative_Library_Trait {
         $remaining = absint($wpdb->get_var("SELECT COUNT(*) FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%')"));
         if ($remaining > 0) {
             $this->creative_library_schedule_asset_verification(20);
+        } elseif (!empty($rows) && method_exists($this, 'article_plan_bump_campaign_revision')) {
+            // One revision bump after the complete verification wave is enough.
+            // This rebuilds article plans only after all newly imported products/
+            // banners have reached their final verified output state.
+            $this->article_plan_bump_campaign_revision('creative_asset_verification_complete');
         }
         return array('processed'=>count((array) $rows), 'remaining'=>$remaining);
     }
