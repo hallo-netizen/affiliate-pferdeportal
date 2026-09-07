@@ -5,6 +5,10 @@
   "image": "php:8.2-cli",
   "inputs": [
     {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
+      "dest": "pferdeportal-affiliate-router.php"
+    },
+    {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
       "dest": "trait-ppar-automation-suite.php"
     },
@@ -19,10 +23,14 @@
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php",
       "dest": "trait-ppar-creative-library.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php",
+      "dest": "trait-ppar-ebay.php"
     }
   ],
   "writable": [],
-  "command": "php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php",
+  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php",
   "tests": [],
   "timeout_seconds": 600
 }
