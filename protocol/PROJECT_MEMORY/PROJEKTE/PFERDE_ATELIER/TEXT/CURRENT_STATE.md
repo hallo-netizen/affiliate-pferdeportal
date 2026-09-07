@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: HOBBYRAUM-FIXSPERRE AKTIV / TECHNISCHE AKTIVIERUNG DURCH REPOSITORY-ADMIN GESPERRT
+STATUS: HOBBYRAUM-HARDLOCK AUF MAIN / RULESET-RESTORE VON hardlock-base AUSSTEHEND
 
 ## AUTORITÄT
 
@@ -16,7 +16,7 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung des Büros TEXT.
 ## Aktueller GitHub-Stand
 
 `main`:
-`f14ccf187b94c4beab9a86d0c69144f792ba2f64`
+`457f33a09751db3acf78246ee394a59141d94d15`
 
 PR #141:
 **MERGED** – B01-only-KISS-Fix ist Bestandteil von current main.
@@ -33,14 +33,12 @@ Head:
 Nicht produktiv verdrahtet, nicht gemergt.
 
 Security-PR #137:
-OPEN / nicht gemergt / auf current main synchronisiert.
-Aktueller Security-Head:
-`8b32294e861d97f009fa68fe1c61e8fe9a30a81b`
-Enthält die serverseitige Prüfung des `HOBBYROOM_WORK_LOCK_V1`.
-`hardlock`: SUCCESS.
-`hardlock-base`: FAIL ausschließlich an der bestehenden Immutable-Security-Selbstschutzgrenze.
-Ruleset `Pferde Atelier Main Hardlock` (ID `21788951`) hat keine Bypass-Akteure; aktueller GitHub-Zugang kann nicht bypassen.
-Aktivierung auf main erfordert daher kontrollierte Repository-Admin-Wartung; serverseitige Hobbyraum-Sperre ist **noch nicht produktiv aktiv**.
+**MERGED** auf main.
+Merge-Commit:
+`457f33a09751db3acf78246ee394a59141d94d15`
+Der `HOBBYROOM_WORK_LOCK_V1` ist damit im serverseitigen Hardlock-Code vorhanden.
+Positiv-/Negativ-Selbsttest des Lock-Codes: **PASS 9/9**.
+Offen bleibt ausschließlich die Rücksetzung des Repository-Rulesets: `hardlock-base` muss wieder als Required Status Check neben `hardlock` eingetragen werden.
 
 ## Aktueller realer Livebefund Plan A
 
