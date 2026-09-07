@@ -2,50 +2,48 @@
 
 STAND: 2026-09-07
 
-## AKTUELLER AUFTRAG
+## AUFTRAG
 
 **GITHUB ONLY**
 
 Repository:
 `hallo-netizen/affiliate-pferdeportal`
 
-WordPress, Website-Backup und Projektarchiv sind nicht Bestandteil dieses Auftrags.
+WordPress, Website-Backup und Projektarchiv gehören nicht zu diesem Auftrag.
 
-## TECHNIK
+## AKTUELLER GEPRÜFTER SNAPSHOT
 
-Verbindlicher bestehender Weg:
-Branch `tresor/build-20260905`
-→ `.github/workflows/campus-tresor-snapshot.yml`
+GitHub Actions:
+- Workflow: `Campus GitHub Complete Backup`
+- Run: `34160894135`
+- Attempt: `2`
+- Ergebnis: `SUCCESS`
+- Artifact ID: `10032706209`
 
-Aktuell gesichert:
-- kompletter Git-Bestand;
-- 291 Branches;
-- 1 Tag;
-- 173 Pull-Request-Refs;
-- Issues + Kommentare + Events;
-- Pull Requests + Reviews + Review-Kommentare;
-- Releases + Release-Artefakte;
-- Labels + Milestones;
-- Rulesets;
-- Workflows;
-- Deployments;
-- Environments, soweit lesbar;
-- Collaborators, soweit lesbar;
-- Wiki, falls initialisiert;
-- Actions-/Webhook-/Variablen-/Secret-Namen-Einstellungen, soweit GitHub sie lesbar macht.
+Download-Datei:
+`GITHUB_KOMPLETTBACKUP_2026-09-07_FINAL.zip`
 
-## REALER TEST
+SHA-256:
+`b885d46a9ad7f9b521677da2cc4c0abcf6d9ecbf6356b83055fc18a6c1259a25`
 
-Aktueller Workflow-Lauf:
-`34160894135`
+Erzeugt:
+`2026-09-07T20:58:14Z`
 
-Ergebnis:
-`SUCCESS`
+Point-in-time:
+- main: `67143a95ee98d6a7ce15167dfd8103ceee087f2d`
+- Campus-Branch im Paket: `52e2d49f63966fbc0e4ebc818c7ecc085637c2f1`
+- Branches: 292
+- Pull-Request-Refs: 174
+- Tags: 1
 
-Zusätzlich exakt aus der erzeugten Download-Datei geprüft:
+## REALER RESTORE-NACHTEST
+
+Exakt die erzeugte Download-Datei wurde separat erneut geprüft:
+
 - äußerer SHA-256 → PASS;
-- innerer SHA-256 → PASS;
 - TAR lesbar → PASS;
+- innerer SHA-256 → PASS;
+- Release-Artefakt-Hash → PASS;
 - Git-Bundle verify → PASS;
 - Mirror-Clone → PASS;
 - `git fsck --full --strict` → PASS.
@@ -53,42 +51,45 @@ Zusätzlich exakt aus der erzeugten Download-Datei geprüft:
 Ergebnis:
 `GITHUB_REPOSITORY_RESTORE_PASS`
 
-## AKTUELLER PREPASS
+## EXTERNE KOPIE
 
-Aktuelles getestetes Paket enthält:
-- main SHA zum Laufzeitpunkt;
-- 291 Branches;
-- 173 PR-Refs;
-- 1 Release-Artefakt;
-- vollständige exportierte Kollaborations-/Metadatenklassen laut Inhaltsvertrag.
+Zusätzlich außerhalb GitHubs abgelegt:
 
-## PROVIDERGRENZE – NOCH KEIN GITHUB_KOMPLETT_PASS
+`/Campus-Tresor/GITHUB_KOMPLETTBACKUP_2026-09-07_FINAL.zip`
+
+Pointer:
+`/Campus-Tresor/LATEST_GITHUB_BACKUP.txt`
+
+## AUTOMATIK
+
+Wöchentlicher Lauf aktiv:
+**Sonntag 03:17 Uhr Europe/Berlin.**
+
+Regel:
+Nur derselbe GitHub-only-Weg.
+Bei FAIL wird die letzte funktionierende externe Kopie nicht ersetzt.
+
+## NOCH OFFENE PROVIDERGRENZE
 
 Mit dem normalen GitHub-Actions-`GITHUB_TOKEN` nicht lesbar:
-- Actions Variables → HTTP 403;
-- Actions Permissions → HTTP 403;
-- Workflow Permissions → HTTP 403;
-- Actions Secret-Namen → HTTP 403;
-- Webhooks → HTTP 403.
+- Actions Variables;
+- Actions Permissions;
+- Workflow Permissions;
+- Actions Secret-Namen;
+- Webhooks.
 
-Direkt aus den Workflows nachgewiesener verwendeter Secret-Name:
+Diese Endpunkte liefern HTTP 403.
+
+Aus den Workflowquellen ist der verwendete Secret-Name belegt:
 `ENDSTEMPEL_PRIVATE_KEY`
 
-Secret-**Werte** sind von GitHub grundsätzlich nicht exportierbar.
+GitHub gibt Secret-**Werte** nicht wieder heraus.
 
-Darum aktuell korrekt:
+Darum Gesamtstatus korrekt:
 `GITHUB_BACKUP_PREPASS`
 
 Nicht behauptet:
 `GITHUB_KOMPLETT_PASS`
-
-## NÄCHSTE AKTION
-
-1. aktuelle Campus-Korrekturen vollständig abschließen;
-2. denselben GitHub-only Workflow danach noch einmal frisch laufen lassen;
-3. exakt dieses finale Paket erneut restore-prüfen;
-4. finale Datei außerhalb GitHubs sichern;
-5. Admin-/Secret-Grenze separat schließen oder ausdrücklich als Providergrenze dokumentiert akzeptieren.
 
 ## HARD RULE
 
