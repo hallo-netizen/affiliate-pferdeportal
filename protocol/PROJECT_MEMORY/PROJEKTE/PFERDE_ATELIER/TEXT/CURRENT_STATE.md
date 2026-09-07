@@ -38,7 +38,8 @@ Aktueller Security-Head:
 `5e0547c999a544d57e1891776f2f417e836eb605`
 Enthält zusätzlich die serverseitige Prüfung des `HOBBYROOM_WORK_LOCK_V1`.
 Normaler hardlock auf diesem Head: PASS.
-Aktivierung auf main weiterhin durch den bestehenden immutable Security-Selbstschutz blockiert und erfordert kontrollierte Admin-Wartung.
+`hardlock-base`: FAIL an der bestehenden `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`-Selbstschutzgrenze.
+Aktivierung auf main weiterhin blockiert und erfordert kontrollierte Admin-Wartung; serverseitige Hobbyraum-Sperre ist daher **noch nicht produktiv aktiv**.
 
 ## Aktueller realer Livebefund Plan A
 
