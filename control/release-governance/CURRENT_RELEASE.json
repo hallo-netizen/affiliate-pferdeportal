@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 31,
+  "generation": 32,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "45e2df82c65a6aec86380e456b88a2872aa1d5815a156587dee5c3464eb68c89",
+    "manifest_sha256": "391ab6c5feff8f013ce067f9c3247e7f1cb26d4710075d63fde4df895b7fd0d7",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,13 +35,13 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.3",
+    "version": "6.72.4",
     "status": "WORKING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "45e2df82c65a6aec86380e456b88a2872aa1d5815a156587dee5c3464eb68c89",
+    "current_source_manifest_sha256": "391ab6c5feff8f013ce067f9c3247e7f1cb26d4710075d63fde4df895b7fd0d7",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -366,6 +366,15 @@
         "Official current Awin feed download URLs use datafeed.api.productserve.com, but automation_validate_awin_feed_url currently rejects that host."
       ],
       "checked_at": "2026-09-07"
+    },
+    "otto_awin_large_feed_download": {
+      "status": "FIX_BUILT_LIVE_RETEST_PENDING",
+      "advertiser_id": 14336,
+      "observed_failure": "cURL error 28 after 45000 ms with 22719835 bytes received",
+      "root_cause": "Plugin hard-capped feed download timeout at 45 seconds.",
+      "fix_version": "6.72.4",
+      "fix": "Download timeout migrated to 600 seconds; UI range 60-600 seconds; no provider/product logic changed.",
+      "evidence": "User screenshot 2026-09-07 22:09"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -393,7 +402,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "PROCESS_OTTO_OFFERS_THEN_VERIFY_MANUAL_FEED_DOWNLOAD",
+    "current_milestone": "INSTALL_6_72_4_AND_RETRY_EXISTING_OTTO_14336_FEED_JOB",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
