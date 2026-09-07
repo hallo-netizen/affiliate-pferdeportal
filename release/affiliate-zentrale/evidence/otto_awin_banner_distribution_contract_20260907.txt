@@ -1,7 +1,7 @@
 AFFILIATE_ZENTRALE OTTO/AWIN WEIGHTED BANNER DISTRIBUTION EVIDENCE
 DATE=2026-09-07
 STATUS=STATIC_CURRENT_SOURCE_PASS_LOCAL_BEHAVIOR_PASS_BOUND_DIRECT_RUN_PENDING_REAL_DATA
-SOURCE_MANIFEST_SHA256=5b91a967de8b9c6be3dbdf62fb4d09ffb5037e5740b46a3241cd6fef542dd361
+SOURCE_MANIFEST_SHA256=b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4
 SOURCE_FILE_COUNT=26
 
 USER VISION
@@ -118,6 +118,10 @@ PASS no fake product-image banner
 PASS direct no-Docker check route present
 PASS bound task includes behavioral test
 PASS START_HERE points to TASK.current.json
+PASS bound-empty real source contract
+PASS independent multi-position distribution seed
+PASS duplicate-free second banner position
+PASS manual page repair requires reason and stores actor/time
 
 NOT CLAIMED
 The exact repository checkout direct runner was not executed in this chat container because the GitHub repository is not locally mounted and network clone is unavailable.
