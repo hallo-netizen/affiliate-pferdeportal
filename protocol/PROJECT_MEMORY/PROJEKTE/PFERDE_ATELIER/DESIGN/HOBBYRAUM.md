@@ -98,6 +98,8 @@ Aktueller Job gegen exakte V1.50.472-Basis: **PASS**
 - exakter Zwei-Bereich-Tausch PASS;
 - Byteidentität der beiden Bereiche PASS;
 - Reversibilität PASS;
+- Plugin-Root identisch PASS;
+- simuliertes Überschreiben des bestehenden Plugin-Verzeichnisses ergibt exakt den Kandidaten: PASS;
 - vier Negativtests BLOCKED/PASS.
 
 Der Lauf ist nur ein **lokaler Kandidatenbeleg**, kein LIVE-PASS.
