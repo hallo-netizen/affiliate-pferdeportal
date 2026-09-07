@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 17,
+  "generation": 18,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -113,19 +113,21 @@
     },
     "productwissen_bridge": {
       "official_branch": "hobbyroom/productwissen-v1-prototype",
-      "official_head_at_check": "42ad7460a903a64c22fe4dec1c70b901a6ecdd12",
-      "candidate_branch": "hobbyroom/productwissen-affiliate-exact-bridge-20260907",
-      "candidate_head_at_check": "823b4712d096c6e5613b20c8d22669447f3bc6ac",
-      "status": "ISOLATED_CANDIDATE_NOT_OFFICIALLY_INTEGRATED",
-      "ownership": "PRODUCTVERGLEICH_OFFICE_MUST_REVIEW_AND_INTEGRATE",
-      "e2e": "PENDING"
+      "official_head_at_check": "020ba35e7d304407e8b71e0751b6f4167b93427d",
+      "bridge_pass_head": "f16f9d9b54a2df9397ef6d5d361b4a61f10347de",
+      "former_candidate_branch": "hobbyroom/productwissen-affiliate-exact-bridge-20260907",
+      "former_candidate_head": "823b4712d096c6e5613b20c8d22669447f3bc6ac",
+      "status": "OFFICIALLY_INTEGRATED_CURRENT_BRANCH_DESCENDANT",
+      "ownership": "PRODUCTVERGLEICH_INTEGRATED",
+      "bridge_test": "WORDPRESS_MYSQL_PASS_RUN_34131779064",
+      "e2e": "AFFILIATE_REAL_OTTO_E2E_PENDING"
     }
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "RUN_CURRENT_SOURCE_BOUND_CHECK; PRODUCTVERGLEICH_REVIEWS_BRIDGE; THEN_REAL_OTTO_AWIN_PRODUCT_AND_CREATIVE_E2E",
-    "completion_condition": "BOUND_CHECK_PASS_AND_PRODUCTWISSEN_BRIDGE_OFFICIALLY_INTEGRATED_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
+    "bound_user_scope_action": "RUN_CURRENT_SOURCE_BOUND_CHECK; THEN_REAL_OTTO_AWIN_PRODUCT_AND_CREATIVE_E2E",
+    "completion_condition": "BOUND_CHECK_PASS_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
     "sequence": 4,
@@ -270,7 +272,7 @@
       "source_manifest_sha256": "680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf"
     },
     "otto_awin_automated_product_distribution": {
-      "status": "STATIC_CURRENT_SOURCE_PASS_PRODUCTWISSEN_BRIDGE_CANDIDATE_READY_BOUND_RUN_AND_INTEGRATION_PENDING_REAL_OTTO_DATA_PENDING",
+      "status": "STATIC_30_OF_30_PASS_PRODUCTWISSEN_BRIDGE_INTEGRATED_BOUND_DIRECT_RUN_PENDING_REAL_OTTO_DATA_PENDING",
       "evidence_ref": "release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt",
       "evidence_sha256": "7c2b923886e8b2f5ab8af10b495cf2c46dc51fd46ebf631ed22d3a5b83b915f7",
       "source_manifest_sha256": "680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf"
@@ -286,6 +288,14 @@
       "evidence_ref": "release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt",
       "evidence_sha256": "677bd2eec08a880a3d90ec74543ea0a00d55b87ae54d2e8fe4b3e050c806ca5d",
       "source_manifest_sha256": "680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf"
+    },
+    "affiliate_6721_activation_smoke": {
+      "status": "TEST_PACKAGE_BUILT_ACTIVATION_PENDING",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.txt",
+      "evidence_sha256": null,
+      "source_manifest_sha256": "680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf",
+      "test_artifact_ref": "release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip",
+      "scope": "PLUGIN_LOAD_AND_ACTIVATION_ONLY_24_FILES_TWO_RUNTIME_JSON_CATALOGS_OMITTED"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -313,7 +323,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "CURRENT_SOURCE_BOUND_CHECK_PRODUCTWISSEN_BRIDGE_INTEGRATION_THEN_REAL_OTTO_E2E",
+    "current_milestone": "CURRENT_SOURCE_BOUND_CHECK_THEN_REAL_OTTO_E2E",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
