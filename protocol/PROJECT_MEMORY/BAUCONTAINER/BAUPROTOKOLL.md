@@ -1318,3 +1318,27 @@ Echter Nutzer-Lokalbackup weiterhin OFFEN, weil die unabhängige physische/local
 
 TRESOR_PASS:
 weiterhin BLOCKED durch Redundanz-/Rohartefakt-/Recovery-Restpunkte.
+
+### 2026-09-07 – PB ONE Vertriebsstruktur aus TODO abgeleitet
+
+ANLASS:
+Die Vertriebs-TODO-Liste sollte auf dauerhafte sinnvolle Bereiche geprüft werden; zusätzlich wurde ein Bereich für Präsentation & Werbung gewünscht.
+
+ERGEBNIS:
+- PREISE = eigenes dauerhaftes Fach;
+- VERTRIEB = eigenes dauerhaftes Fach für Abläufe + Lead-Management + Onboarding;
+- PRÄSENTATION & WERBUNG = kein neuer Doppelraum, sondern Erweiterung des vorhandenen `ANGEBOTE_FLYER`-Bereichs;
+- kein separates Lead-Management-Fach;
+- kein separates Onboarding-Fach.
+
+ROUTING:
+- Preise/Konditionen/Zahlungsmodell → `PB_ONE/AKTENSCHRANK/PREISE/`;
+- Kundendaten/Angebotsablauf/Sonderfälle/Onboarding/Leads → `PB_ONE/AKTENSCHRANK/VERTRIEB/`;
+- Pitch/Musterseiten/Präsentation/Werbung/Angebote/Leistungsbeschreibung → `PB_ONE/ANGEBOTE_FLYER/`;
+- offene Restpunkte → `PB_ONE/AKTENSCHRANK/TODO/`.
+
+BESCHILDERUNG:
+PB-ONE-Türschild, Zentralregister, Aktenschrank-START_HERE und Aktenschrank-Register wurden entsprechend nachgezogen.
+
+BEZUG:
+ARCH-075/076/077.
