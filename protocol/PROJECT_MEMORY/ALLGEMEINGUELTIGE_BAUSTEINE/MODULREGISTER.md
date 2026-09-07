@@ -280,7 +280,7 @@ OFFEN:
 MODULKLASSE: UNGEKLÄRT
 
 STATUS:
-GEPLANT / V1-DATENVERTRAG DEFINIERT / technischer Prototyp noch nicht PASS.
+V1-DATENVERTRAG DEFINIERT / isolierter Prototyp vorhanden / lokaler Vertrags-/Logiktest P01–P11 GESAMT PASS / echter WordPress-/DB-PASS noch offen.
 
 GEPLANTER HAUPTORT:
 nach Prototypprüfung unter `ALLGEMEINGUELTIGE_BAUSTEINE/`.
