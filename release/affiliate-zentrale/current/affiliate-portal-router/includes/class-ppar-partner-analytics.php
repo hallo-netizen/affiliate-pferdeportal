@@ -91,16 +91,8 @@ final class PPAR_Partner_Analytics_Admin {
 
     private static function campaign_provider_key($campaign) {
         $network = sanitize_key((string)($campaign['network'] ?? 'manual'));
-        if ($network === 'awin') {
-            $identity = implode(' ', array_filter(array_map('strval', array(
-                $campaign['name'] ?? '',
-                $campaign['title'] ?? '',
-                $campaign['partner_name'] ?? '',
-                $campaign['merchant_name'] ?? '',
-                $campaign['advertiser_name'] ?? '',
-                $campaign['programme_name'] ?? '',
-            ))));
-            if (self::text_contains($identity, 'otto')) { return 'otto'; }
+        if ($network === 'awin' && absint($campaign['advertiser_id'] ?? 0) === 14336) {
+            return 'otto';
         }
         $key = $network === 'manual' ? 'direct' : $network;
         $key = apply_filters('ppar_partner_analytics_campaign_provider_key', $key, $campaign, self::CONTRACT_VERSION);
