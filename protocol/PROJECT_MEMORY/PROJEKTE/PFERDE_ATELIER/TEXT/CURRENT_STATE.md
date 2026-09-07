@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: FROZEN REPAIR / STEP 01 MERGED / REALTEST PENDING
+STATUS: FROZEN REPAIR / STEP 02 PR124 CANDIDATE
 
 ## AUTORITÄT
 
@@ -124,3 +124,22 @@ PR #153 merged:
 
 Bis zum Realtest-Ergebnis:
 kein Step 02, kein weiterer Kandidat.
+
+
+## STEP 01 REALTEST
+
+Vorheriger Blocker verschwand.
+Neuer erster Blocker:
+`BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`
+
+Dieser ist der nächste chronologische Pflichtblock PR #124.
+
+## STEP 02
+
+Kandidat:
+`e5fc1c88dfac81b3ef18ff9b02bf37a677b0185a`
+
+Genau eine geänderte Datei:
+`control/startmaster0107/fachworkflow_proof_handoff.py`
+
+Kein Step 03 vor Realtest.
