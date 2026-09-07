@@ -49,6 +49,7 @@ final class Pferdeportal_Affiliate_Router {
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
+    const OTTO_AWIN_ADVERTISER_ID = 14336;
     const CAMPAIGN_POST_TYPE = 'ap_campaign';
 
     const OPTION_ENABLED = 'ppar_enabled';
@@ -2320,6 +2321,7 @@ JS;
         $campaign['placements'] = is_array($campaign['placements']) ? array_values(array_filter(array_map('sanitize_key', $campaign['placements']))) : array();
         $campaign['product_gtins'] = isset($campaign['product_gtins']) && is_array($campaign['product_gtins']) ? array_values(array_unique(array_filter(array_map('sanitize_text_field', $campaign['product_gtins'])))) : array();
         $campaign['product_asins'] = isset($campaign['product_asins']) && is_array($campaign['product_asins']) ? array_values(array_unique(array_filter(array_map('sanitize_text_field', $campaign['product_asins'])))) : array();
+        $campaign['product_identifiers'] = $this->affiliate_normalize_product_identifiers($campaign['product_identifiers'] ?? array());
         return $campaign;
     }
 
@@ -2497,6 +2499,7 @@ JS;
                     'campaign_post_id' => absint($campaign['post_id'] ?? 0),
                     'product_gtins' => (array)($campaign['product_gtins'] ?? array()),
                     'product_asins' => (array)($campaign['product_asins'] ?? array()),
+                    'product_identifiers' => (array)($campaign['product_identifiers'] ?? array()),
                     'product_identity_source' => (string)($campaign['product_identity_source'] ?? ''),
                 )),
             );
@@ -2737,22 +2740,65 @@ JS;
     private function otto_awin_product_campaign_seller_ready($campaign) {
         if (!is_array($campaign)
             || sanitize_key((string) ($campaign['creative_type'] ?? '')) !== 'product'
-            || sanitize_key((string) ($campaign['network'] ?? '')) !== 'awin') {
-            return true;
-        }
-        $identity = remove_accents(strtolower(trim(implode(' ', array_filter(array(
-            (string) ($campaign['partner'] ?? ''),
-            (string) ($campaign['programme_name'] ?? ''),
-            (string) ($campaign['name'] ?? ''),
-        ))))));
-        if ($identity === '' || !preg_match('/(?:^|[^a-z0-9])otto(?:[^a-z0-9]|$)/', $identity)) {
+            || sanitize_key((string) ($campaign['network'] ?? '')) !== 'awin'
+            || absint($campaign['advertiser_id'] ?? 0) !== self::OTTO_AWIN_ADVERTISER_ID) {
             return true;
         }
         return trim((string) ($campaign['seller_name'] ?? '')) !== '';
     }
 
+    /**
+     * Normalize product identifiers for cross-plugin Exact-Product matching.
+     * Affiliate never reads Productwissen tables directly; callers provide only
+     * stable identifiers through the public filter contract.
+     */
+    private function affiliate_normalize_product_identifiers($identifiers) {
+        $out = array();
+        foreach ((array) $identifiers as $identifier) {
+            if (!is_array($identifier)) { continue; }
+            $type = strtoupper(sanitize_text_field((string) ($identifier['type'] ?? $identifier['identifier_type'] ?? '')));
+            $value = trim(sanitize_text_field((string) ($identifier['value'] ?? $identifier['identifier_value'] ?? '')));
+            if ($type === 'EAN') { $type = 'GTIN'; }
+            if (!in_array($type, array('GTIN','MPN','MANUFACTURER_ARTICLE_NUMBER'), true) || $value === '') { continue; }
+            if ($type === 'GTIN') {
+                $value = preg_replace('/[^0-9]/', '', $value);
+                if (!in_array(strlen($value), array(8,12,13,14), true)) { continue; }
+            } else {
+                $value = strtoupper(preg_replace('/\s+/', '', $value));
+                if ($value === '') { continue; }
+            }
+            $key = $type . ':' . $value;
+            $out[$key] = array('type'=>$type, 'value'=>$value);
+        }
+        return array_values($out);
+    }
+
+    private function affiliate_campaign_product_identifiers($campaign) {
+        if (!is_array($campaign)) { return array(); }
+        $ids = $this->affiliate_normalize_product_identifiers((array) ($campaign['product_identifiers'] ?? array()));
+        foreach ((array) ($campaign['product_gtins'] ?? array()) as $gtin) {
+            $ids[] = array('type'=>'GTIN', 'value'=>(string) $gtin);
+        }
+        return $this->affiliate_normalize_product_identifiers($ids);
+    }
+
+    private function affiliate_campaign_matches_exact_identifiers($campaign, $identifiers) {
+        $wanted = $this->affiliate_normalize_product_identifiers($identifiers);
+        if (!$wanted) { return false; }
+        $have = $this->affiliate_campaign_product_identifiers($campaign);
+        if (!$have) { return false; }
+        $wanted_keys = array();
+        foreach ($wanted as $row) { $wanted_keys[(string)$row['type'] . ':' . (string)$row['value']] = true; }
+        foreach ($have as $row) {
+            if (isset($wanted_keys[(string)$row['type'] . ':' . (string)$row['value']])) { return true; }
+        }
+        return false;
+    }
+
     private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
         $candidates = array();
+        $exact_identifiers = $this->affiliate_normalize_product_identifiers((array) ($context['exact_product_identifiers'] ?? array()));
+        $exact_mode = $this->slot_required_creative_type($slot_type) === 'product' && !empty($exact_identifiers);
         foreach ($this->get_campaigns() as $campaign) {
             // Cheap eligibility/match checks first. V6.19 evaluated control and
             // health gates for the entire BUSINESS campaign inventory on every
@@ -2765,13 +2811,23 @@ JS;
             if ($forced_campaign_id !== '' && sanitize_key((string) ($campaign['id'] ?? '')) !== sanitize_key($forced_campaign_id)) {
                 continue;
             }
-            if (!$this->campaign_slot_allowed($campaign, $slot_type)) { continue; }
             $required_type = $this->slot_required_creative_type($slot_type);
             if ($required_type !== '' && sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== $required_type) { continue; }
-            $rank_context = $context;
-            $rank_context['slot_type'] = sanitize_key((string) $slot_type);
-            $rank = $this->campaign_match_rank($campaign, $rank_context);
-            if (!$rank) { continue; }
+            if ($exact_mode) {
+                if (!$this->affiliate_campaign_matches_exact_identifiers($campaign, $exact_identifiers)) { continue; }
+                // Productwissen exact identity is the fachliche target decision.
+                // Keep all existing public/safety/health gates, but do not require
+                // a broad topic edge or provider placement to rediscover the same
+                // product. This prevents a missing category edge from causing a
+                // fuzzy substitute.
+                $rank = array('specificity'=>1000, 'matches'=>count($exact_identifiers), 'reason'=>'Exakte Produktidentität aus fachlicher Produktbindung.');
+            } else {
+                if (!$this->campaign_slot_allowed($campaign, $slot_type)) { continue; }
+                $rank_context = $context;
+                $rank_context['slot_type'] = sanitize_key((string) $slot_type);
+                $rank = $this->campaign_match_rank($campaign, $rank_context);
+                if (!$rank) { continue; }
+            }
             if (!$this->campaign_control_allows_delivery($campaign, $slot_type ?? '') || !$this->campaign_health_allows_delivery($campaign)) { continue; }
             $candidates[] = array(
                 'campaign' => $campaign,
@@ -2789,10 +2845,13 @@ JS;
             }
             return strcmp((string) ($a['campaign']['id'] ?? ''), (string) ($b['campaign']['id'] ?? ''));
         });
-        if ($this->slot_required_creative_type($slot_type) === 'product' && method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
+        // Exact Productwissen identity outranks legacy provider cohorts/strategies.
+        // Those strategies decide generic merchandising, never which model a
+        // fachlich exact-bound article is allowed to monetize.
+        if (!$exact_mode && $this->slot_required_creative_type($slot_type) === 'product' && method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
             $candidates = $this->ebay_filter_ranked_product_candidates_provider_cohort($candidates);
         }
-        if ($this->slot_required_creative_type($slot_type) === 'product' && method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
+        if (!$exact_mode && $this->slot_required_creative_type($slot_type) === 'product' && method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
             $candidates = $this->multiprovider_filter_candidates_by_strategy($candidates);
         }
         // V6.61.5: verify structural image readiness only after final provider
@@ -6064,6 +6123,7 @@ JS;
             'external_id' => '',
             'product_gtins' => array(),
             'product_asins' => array(),
+            'product_identifiers' => array(),
             'product_identity_source' => '',
             'product_provider' => '',
         );
