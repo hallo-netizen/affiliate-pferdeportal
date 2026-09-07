@@ -1,0 +1,49 @@
+--- pferde-template-kit_V1.50.472.php
++++ pferde-template-kit_V1.50.473.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate Portal Template Kit (Pferde-kompatibel)
+  * Description: Allgemeines Template-/Design-Plugin für Affiliateportale. Pferde-Shortcodes bleiben als Kompatibilitätsalias erhalten.
+- * Version: 1.50.472
++ * Version: 1.50.473
+  * Author: OpenAI
+  * License: GPL-2.0-or-later
+  */
+@@ -10036,8 +10036,11 @@
+         $page_image = self::portal_page_image_block_v150383($page_id, 'category');
+         $out = '<div id="pa308-category-root" class="pa266-category pa309-category-root" data-pftk-category-version="1.50.309">';
+         $out .= $page_image;
+-        $out .= '<section class="pa266-intro"><span>' . esc_html($texts['kicker']) . '</span><h1>' . esc_html($title) . '</h1>' . self::deck_intro_markup_v150390($texts['intro']) . '</section>';
+-        $out .= '<style>.page-id-' . intval($page_id) . ' .entry-header,.page-id-' . intval($page_id) . ' .ast-single-entry-banner,.page-id-' . intval($page_id) . ' h1.entry-title,.page-id-' . intval($page_id) . ' .wp-block-post-title{display:none!important}</style>';
++        // V1.50.473 – auf dieser Kategorieebene steht die Orientierung zuerst:
++        // H1 bleibt am Seitenkopf, der redaktionelle Kategorienartikel folgt
++        // erst nach den zentral gesteuerten Unterkategorie-/Beitragsart-Verweisen.
++        $out .= '<section class="pa266-intro pa473-category-head"><span>' . esc_html($texts['kicker']) . '</span><h1>' . esc_html($title) . '</h1></section>';
++        $out .= '<style>.page-id-' . intval($page_id) . ' .entry-header,.page-id-' . intval($page_id) . ' .ast-single-entry-banner,.page-id-' . intval($page_id) . ' h1.entry-title,.page-id-' . intval($page_id) . ' .wp-block-post-title{display:none!important}.pa266-category .pa473-category-head{border-top:0!important;border-bottom:0!important;padding-top:4px!important;padding-bottom:0!important}@media(max-width:620px){.pa266-category .pa473-category-head{padding-top:2px!important}}</style>';
+@@ -10056,20 +10059,19 @@
+         if (empty($visible)) { $out .= '<p class="pa266-empty">Für ' . esc_html($title) . ' sind noch keine Beitragsarten veröffentlicht.</p>'; }
+         $out .= '</div></section><span id="pa266-all-content" class="pa297-anchor" aria-hidden="true"></span>';
+ 
+-        // V1.50.341 – verbindliche Reihenfolge auf der gesamten Ebene
+-        // derselben strukturellen Tiefe wie „Regendecken“:
+-        // Kategorieverlinkungen -> Banner -> Beitragsübersicht -> Produkte ->
+-        // Direktwerbeplatz ausschließlich als Fallback. Gestaltung, Texte,
+-        // Inhalte, Karten und Werbemittel bleiben unverändert.
++        // V1.50.473 – zentral für die gesamte Kategorieebene:
++        // Unterkategorie-/Beitragsart-Verweise -> Kategorienartikel ->
++        // Beitragsvorschau -> Banner -> Produkte -> Direktwerbeplatz.
++        // Inhalte, Karten, Affiliate-Auswahl und V104-Regeln bleiben unverändert.
++        if (trim((string)$texts['intro']) !== '') {
++            $out .= '<section class="pa266-section pa266-intro pa473-category-article">' . self::deck_intro_markup_v150390($texts['intro']) . '</section>';
++        }
++
+         $affiliate_layout = self::category_affiliate_layout_v150341($title);
+@@ -10081,6 +10083,10 @@
+             $out .= '</div></section>';
+         }
+ 
++        if ($affiliate_banner !== '') {
++            $out .= '<section class="pa266-section pa266-network"><header><span>' . esc_html($texts['network_kicker']) . '</span><h2>' . esc_html($texts['network_title']) . '</h2></header><div class="pa266-network-slot is-real">' . $affiliate_banner . '</div></section>';
++        }
++
+         if ($affiliate_product_count > 0) {
