@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 28,
+  "generation": 29,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -393,7 +393,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "VERIFY_ACCOUNT_LEVEL_OTTO_14336_FEED_ACCESS_AGAINST_OFFICIAL_AWIN_METHODS_BEFORE_PLUGIN_FIX",
+    "current_milestone": "VERIFY_OR_ESTABLISH_PRODUCT_FEED_ACCESS_ONLY_DO_NOT_RETEST_GENERAL_AWIN_CONNECTION",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
@@ -438,5 +438,16 @@
       "seller_field_mapping_for_otto": "NOT_YET_CONFIRMED",
       "compliant_ottonative_banner_source": "NOT_YET_CONFIRMED"
     }
+  },
+  "awin_connection_baseline": {
+    "status": "ESTABLISHED_AND_CONNECTED",
+    "evidence": "Current WordPress screenshot shows Awin status 'Verbunden'; programmes present and prior real programme/offer calls succeeded.",
+    "hard_rule": "Do not ask user to re-enter or re-prove the general Awin connection unless there is new contradictory evidence.",
+    "separate_product_feed_api_key": {
+      "status": "NOT_STORED_IN_WORDPRESS_UI",
+      "evidence": "Current WordPress screenshot shows 'Produktfeed-API-Schlüssel: nicht gespeichert'.",
+      "note": "This is a separate prerequisite from the already-established general Awin API connection."
+    },
+    "checked_at": "2026-09-07"
   }
 }
