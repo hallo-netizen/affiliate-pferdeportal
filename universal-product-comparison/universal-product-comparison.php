@@ -24,6 +24,7 @@ require_once __DIR__ . '/src/class-upc-production.php';
 require_once __DIR__ . '/src/class-upc-project-config.php';
 require_once __DIR__ . '/src/class-upc-wordpress-draft.php';
 require_once __DIR__ . '/src/class-upc-affiliate-bridge.php';
+require_once __DIR__ . '/src/class-upc-archive.php';
 
 function upc_dependency_ready() {
     return function_exists( 'upk_repository' ) && class_exists( 'UPK_Repository' );
@@ -103,6 +104,14 @@ function upc_maybe_upgrade_schema() {
 add_action( 'plugins_loaded', 'upc_maybe_upgrade_schema', 20 );
 add_action( 'plugins_loaded', array( 'UPC_Affiliate_Bridge', 'register' ), 25 );
 
+function upc_archive() {
+    $repository = upc_repository();
+    if ( is_wp_error( $repository ) ) {
+        return $repository;
+    }
+    return new UPC_Archive( $repository );
+}
+
 function upc_wordpress_draft() {
     $production = upc_production();
     if ( is_wp_error( $production ) ) {
@@ -133,3 +142,28 @@ function upc_repository() {
 
     return $repository;
 }
+
+
+function upc_comparison_archive_shortcode( $atts ) {
+    $atts = shortcode_atts(
+        array(
+            'project'  => '',
+            'category' => '',
+        ),
+        $atts,
+        'upc_comparison_archive'
+    );
+
+    $archive = upc_archive();
+    if ( is_wp_error( $archive ) ) {
+        return '';
+    }
+
+    $html = $archive->render(
+        sanitize_key( $atts['project'] ),
+        sanitize_title( $atts['category'] )
+    );
+
+    return is_wp_error( $html ) ? '' : $html;
+}
+add_shortcode( 'upc_comparison_archive', 'upc_comparison_archive_shortcode' );
