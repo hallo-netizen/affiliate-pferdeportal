@@ -1133,7 +1133,7 @@ KISS-UMSETZUNG:
 - `ANGEBOTE_FLYER/` mit START_HERE, CURRENT_STATE, HOBBYRAUM, UNTERLAGENREGISTER;
 - `IDEENWERKSTATT/` mit START_HERE, CURRENT_STATE, HOBBYRAUM, IDEENREGISTER;
 - Campus/Pförtner/Handlungsverzeichnis ergänzt;
-- Paul erhält nur in der Ideenwerkstatt einen nicht-technischen SPARRING-Modus.
+- Nutzer und Paul arbeiten in PB ONE mit denselben redaktionellen Rechten.
 
 HARTE GRENZE:
 Keine Programmierung in PB ONE.
@@ -1146,3 +1146,28 @@ Keine alten Angebote/Ideen aus Erinnerung zu CURRENT erklärt.
 
 BEZUG:
 ARCH-067/068.
+
+
+### 2026-09-07 – PB ONE auf gleichberechtigte gemeinsame Agentur korrigiert
+
+NUTZERKORREKTUR:
+PB ONE ist nicht ein Paul-Sparringsraum mit eingeschränkten Paul-Rechten.
+PB ONE ist die gemeinsame Agentur von Nutzer und Paul.
+
+KORREKTUR:
+- Nutzer und Paul haben in `PB_ONE/**` dieselben redaktionellen Rechte;
+- Paul darf dort Inhalte/Register/Ideen/Konzepte/Unterlagen lesen und schreiben;
+- die allgemeine PROJECT_MEMORY-READ-ONLY-Regel für Paul erhält für `PB_ONE/**` eine redaktionelle Ausnahme;
+- keine technische Paul-Workerrolle innerhalb PB ONE;
+- weiterhin keine Programmierung;
+- zusätzlich `ZENTRALREGISTER.md`;
+- zusätzlich `ENTWICKLUNGSRAUM/` mit Konzeptregister.
+
+ARBEITSLOGIK:
+Ideenschmiede → Entwicklungsraum → Angebot/Flyer oder bewusste Projektübergabe.
+
+NEGATIV:
+kein `paul/*`-Branch, kein WRITE_SCOPE, keine technische Projektarbeit innerhalb PB ONE.
+
+BEZUG:
+ARCH-068/069.

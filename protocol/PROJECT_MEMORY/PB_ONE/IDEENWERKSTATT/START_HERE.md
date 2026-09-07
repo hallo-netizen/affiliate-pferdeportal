@@ -5,61 +5,47 @@ STAND: 2026-09-07
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Der PB-ONE-Raum zum Sammeln, Entwickeln und kritischen Prüfen von Ideen.
+Unsere gemeinsame Ideenschmiede in PB ONE.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du mit Paul eine Idee entwickeln, eine Geschäftsidee schärfen, ein neues Angebot prüfen oder einen möglichen Projektansatz durchdenken willst.
+du mit Paul eine neue Idee entwickeln, eine Geschäftsidee schärfen oder einen möglichen Agentur-/Projektansatz frei durchdenken willst.
 
 **DU DARFST …**  
-frei denken, Varianten entwickeln, Gegenargumente suchen, Chancen/Risiken prüfen, Konzepte vereinfachen und eine Übergabe an ein Fach-/Projektbüro vorbereiten.
+lesen, schreiben, Ideen anlegen, verändern, verwerfen, Varianten entwickeln, Gegenargumente suchen, Chancen/Risiken prüfen und Entscheidungen festhalten.
 
 **DU DARFST NICHT …**  
-hier programmieren, einen technischen Paul-Branch starten, Fachbüros überschreiben oder eine Rohidee ungeprüft zum offiziellen Projektstatus erklären.
+hier programmieren oder aus einer Rohidee ungeprüft einen technischen Projektauftrag machen.
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `HOBBYRAUM.md` → `IDEENREGISTER.md`.
 
-## Paul in der Ideenwerkstatt
+## Nutzer + Paul
 
-Paul arbeitet hier im **SPARRING-Modus**.
+**Hier seid ihr gleichberechtigte Partner.**
 
-Das bedeutet:
-- lesen;
-- mitdenken;
-- kritisch widersprechen;
-- Alternativen entwickeln;
-- Machbarkeit grob prüfen;
-- KISS-Lösung suchen;
-- offene Fragen benennen.
+Paul darf hier dieselben redaktionellen Dinge tun wie der Nutzer:
+- Ideen aufnehmen;
+- Texte und Konzepte verändern;
+- Registereinträge pflegen;
+- Entscheidungen dokumentieren;
+- neue Varianten entwickeln.
 
-Das bedeutet ausdrücklich NICHT:
-- kein `paul/*`-Technikauftrag;
-- kein `WRITE_SCOPE`;
-- keine Programmierung;
-- keine PROJECT_MEMORY-Änderung durch Paul;
-- kein Merge / keine Integration.
-
-Wenn aus der Idee echte Fach-/Technikarbeit entsteht:
-bewusste Übergabe an das zuständige Projekt-/Fachbüro.
+Kein `paul/*`-Branch und kein technischer WRITE_SCOPE ist dafür nötig.
 
 ## Konkreter Denkablauf
 
-Beispiel Nutzer:
-„Paul, Ideenwerkstatt: Könnten wir für Handwerker automatisch aus Kundenfotos Materiallisten und Angebote erzeugen?“
-
-Dann:
-
 1. Rohidee in einem Satz.
 2. Welches Problem wird gelöst?
-3. Wer hat den Nutzen?
-4. Was wäre die einfachste funktionierende Variante?
+3. Für wen?
+4. Was wäre die einfachste brauchbare Variante?
 5. Welche Annahmen sind unsicher?
 6. Was spricht dagegen?
-7. Welche bestehenden PB-ONE-/Campus-Bausteine helfen?
-8. Was wäre ein kleiner Test?
-9. Entscheidung:
+7. Welche vorhandenen Projekte/Erfahrungen helfen?
+8. Entscheidung:
    - WEITER
    - PARKEN
    - VERWERFEN
+   - IN ENTWICKLUNG
    - ÜBERGEBEN
-10. Bei Übergabe Zielgebäude/Zielbüro eindeutig benennen.
+9. Bei `IN ENTWICKLUNG` → `../ENTWICKLUNGSRAUM/`
+10. Bei `ÜBERGEBEN` → Zielprojekt/-büro eindeutig benennen.

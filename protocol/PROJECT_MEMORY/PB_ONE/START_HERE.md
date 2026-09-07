@@ -1,4 +1,4 @@
-# PB ONE – AGENTURZENTRALE
+# PB ONE – GEMEINSAME AGENTURZENTRALE
 
 STAND: 2026-09-07
 STATUS: AKTIVES ZENTRALGEBÄUDE
@@ -6,46 +6,65 @@ STATUS: AKTIVES ZENTRALGEBÄUDE
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-PB ONE ist das zentrale Agenturgebäude des Campus.
+PB ONE ist unsere gemeinsame Agentur und der zentrale Knotenpunkt des Campus.
 
 **HIER BIST DU RICHTIG, WENN …**  
-es um Agenturideen, Angebote, Flyer, Positionierung, Unterlagen oder die Entwicklung neuer Vorhaben geht, bevor daraus konkrete Projekt- oder Programmierarbeit wird.
+es um Ideen, Konzepte, Angebote, Flyer, Unterlagen, Positionierung, neue Vorhaben oder deren Weiterentwicklung geht.
 
 **DU DARFST …**  
-denken, sammeln, strukturieren, vergleichen, formulieren, Unterlagen erstellen, Entscheidungen vorbereiten und Ideen an bestehende oder neue Projektgebäude übergeben.
+lesen, schreiben, sammeln, verändern, verwerfen, strukturieren, entscheiden, Register pflegen, Unterlagen erstellen und Vorhaben weiterentwickeln.
 
 **DU DARFST NICHT …**  
-hier programmieren, technische Projektdateien ändern, Produktionsrunner starten oder bestehende Fachbüros umgehen.
+hier programmieren, technische Produktionsarbeit ausführen oder bestehende Projekt-/Fachbüros umgehen.
 
 **ALS NÄCHSTES …**
-- Außenauftritt / Angebot / Flyer → `ANGEBOTE_FLYER/START_HERE.md`
-- Ideen entwickeln / mit Paul sparren → `IDEENWERKSTATT/START_HERE.md`
+- Überblick über alles → `ZENTRALREGISTER.md`
+- neue Idee / Ideenschmiede → `IDEENWERKSTATT/START_HERE.md`
+- Idee zum belastbaren Konzept entwickeln → `ENTWICKLUNGSRAUM/START_HERE.md`
+- Angebot / Flyer / Unterlage → `ANGEBOTE_FLYER/START_HERE.md`
 
-## Rolle im Campus
+## Gemeinsame Rechte
 
-PB ONE ist **kein einzelnes Kundenprojekt**.
+**Der Nutzer und Paul haben innerhalb von PB ONE dieselben redaktionellen Rechte und Möglichkeiten.**
 
-Es ist:
-- Agenturzentrale;
-- Ideenspeicher;
-- Unterlagen-/Angebotsraum;
-- Knotenpunkt zwischen Projekten;
-- Ort für Vorentscheidungen und Übergaben.
+Beide dürfen:
+- PB-ONE-Inhalte lesen und schreiben;
+- Ideen anlegen und verändern;
+- Konzepte gemeinsam entwickeln;
+- Register pflegen;
+- Unterlagen erstellen;
+- Entscheidungen und Gründe festhalten;
+- Inhalte verwerfen, parken oder weitergeben.
 
-Projektfacharbeit bleibt in den jeweiligen Projektgebäuden.
+PB ONE ist **kein technischer Paul-Workerraum**.
+
+Innerhalb PB ONE gelten deshalb nicht die technischen `paul/*`-/WRITE_SCOPE-Regeln als Voraussetzung für gemeinsame redaktionelle Arbeit.
 
 ## Harte Grenze
 
-**PB ONE denkt, sammelt, formuliert und entscheidet vor.  
-Projekt-/Fachbüros setzen fachlich oder technisch um.**
+**In PB ONE wird vorerst nicht programmiert.**
 
-Keine Programmierung in PB ONE.
+Sobald eine Idee echte technische oder projektspezifische Umsetzung benötigt:
+PB ONE → bewusste Übergabe → zuständiges Projekt-/Fachbüro.
+
+Erst dort gelten wieder dessen Fach-, Branch-, Worker- und Paul-Regeln.
+
+## Rolle im Campus
+
+PB ONE ist:
+- gemeinsame Agenturzentrale;
+- Zentralregister;
+- Ideenschmiede;
+- Entwicklungsort;
+- Unterlagen-/Angebotsraum;
+- Knotenpunkt zwischen Projekten.
+
+PB ONE ist kein einzelnes Kundenprojekt und ersetzt keine Projektgebäude.
 
 ## Öffentliche Website
 
 Öffentliche Referenz:
 https://p-b.one/
 
-Website-Inhalte dürfen als externe öffentliche Quelle für Positionierung/Angebotsunterlagen herangezogen werden.
-
+Website-Inhalte dürfen als öffentliche Quelle für Positionierung/Angebotsunterlagen herangezogen werden.
 Sie werden nicht ungeprüft als interne CURRENT-Wahrheit kopiert.

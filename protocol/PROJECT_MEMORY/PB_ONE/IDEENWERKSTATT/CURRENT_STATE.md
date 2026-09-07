@@ -1,7 +1,7 @@
 # PB ONE – IDEENWERKSTATT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: BEREICH EINGERICHTET / KEINE AKTIVE IDEE
+STATUS: ARBEITSBEREIT / KEINE AKTIVE IDEE
 
 ## Autorität
 
@@ -13,9 +13,13 @@ Aktuelle gemeinsame Denkarbeit:
 Dauerhafte Ideenübersicht:
 `IDEENREGISTER.md`
 
+## Rechte
+
+Nutzer und Paul haben hier dieselben redaktionellen Rechte.
+
 ## Aktueller Stand
 
-Die Ideenwerkstatt ist arbeitsbereit.
+Keine aktive Idee gebunden.
 
 Frühere Ideen aus Chats werden nicht automatisch aus Erinnerung als aktueller Bestand behauptet.
-Sie können bei Bedarf aus ihren Originalquellen sauber aufgenommen werden.
+Sie können aus ihren Originalquellen sauber aufgenommen werden.

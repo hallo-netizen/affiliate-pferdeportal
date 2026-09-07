@@ -13,6 +13,10 @@ Aktuelle Arbeit:
 Dauerhaft vorhandene/freigegebene Unterlagen:
 `UNTERLAGENREGISTER.md`
 
+## Rechte
+
+Nutzer und Paul haben hier dieselben redaktionellen Rechte.
+
 ## Aktueller Stand
 
 Der Bereich ist arbeitsbereit.

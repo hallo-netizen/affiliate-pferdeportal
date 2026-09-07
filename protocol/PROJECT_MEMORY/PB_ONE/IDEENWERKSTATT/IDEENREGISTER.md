@@ -7,14 +7,14 @@ ROLLE: DAUERHAFTER IDEENINDEX
 
 Ideen sollen nicht in alten Chats verschwinden.
 
-Dieses Register speichert nur den kompakten, dauerhaften Überblick.
-Detailkonzepte bleiben an ihrer jeweiligen Originalquelle.
+Nutzer und Paul dürfen dieses Register gleichberechtigt pflegen.
 
 ## Statuswerte
 
 - ROHIDEE
 - IN_PRÜFUNG
 - WEITER
+- IN_ENTWICKLUNG
 - PARKEN
 - ÜBERGEBEN
 - VERWORFEN
@@ -25,9 +25,9 @@ Detailkonzepte bleiben an ihrer jeweiligen Originalquelle.
 - Kurztitel
 - Problem/Nutzen in einem Satz
 - Status
-- Originalquelle
+- Original-/Detailquelle
 - letzter Entscheidungsgrund
-- ggf. Übergabe an Projekt/Büro
+- ggf. Übergabe an Entwicklungsraum oder Projekt/Büro
 
 ## Aktueller Bestand
 
@@ -37,8 +37,11 @@ Noch kein offiziell aufgenommener Eintrag.
 
 Keine Idee verschwindet still.
 
-VERWORFEN bedeutet:
+VERWORFEN:
 historisch erhalten + kurzer Grund.
 
-ÜBERGEBEN bedeutet:
-PB ONE bleibt Ideenhistorie; die operative Wahrheit liegt danach im Zielprojekt/-büro.
+IN_ENTWICKLUNG:
+weiterführende Arbeit liegt im Entwicklungsraum.
+
+ÜBERGEBEN:
+PB ONE behält Ideenhistorie; operative Wahrheit liegt danach im Zielprojekt/-büro.

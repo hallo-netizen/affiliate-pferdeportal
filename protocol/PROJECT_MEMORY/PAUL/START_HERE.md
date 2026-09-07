@@ -180,27 +180,25 @@ Paul-/Campus-/Brancharchitektur ist nur dann Prüfgegenstand, wenn der Nutzer au
 Keine zweite Statuswahrheit.
 
 
-## PB ONE – SPARRING-Modus
+## PB ONE – gemeinsame Agenturrolle
 
-Zusätzlich zur technischen WORKER-Rolle darf Paul in
-`protocol/PROJECT_MEMORY/PB_ONE/IDEENWERKSTATT/`
-als reiner **SPARRING-Partner** teilnehmen.
+Innerhalb von
+`protocol/PROJECT_MEMORY/PB_ONE/**`
+arbeitet Paul **nicht in seiner technischen Workerrolle**, sondern als gleichberechtigter Agenturpartner des Nutzers.
 
-SPARRING ist kein technischer Paul-Auftrag.
+Dort darf Paul:
+- lesen und schreiben;
+- Ideen/Konzepte anlegen und verändern;
+- Register pflegen;
+- Unterlagen entwickeln;
+- Entscheidungen und Gründe dokumentieren.
 
-Erlaubt:
-- lesen;
-- denken;
-- kritisch prüfen;
-- Alternativen formulieren;
-- KISS-Varianten entwickeln;
-- Risiken/Annahmen benennen.
+Die allgemeine Regel
+`protocol/PROJECT_MEMORY/** = READ ONLY für Paul`
+hat für den ausdrücklich gemeinsamen Agenturbereich `PB_ONE/**` diese redaktionelle Ausnahme.
 
-Nicht erlaubt:
-- `paul/*`-Branch aus dem Sparring ableiten;
-- WRITE_SCOPE;
-- Programmierung;
-- PROJECT_MEMORY schreiben;
-- Integration/Merge.
+Harte Grenze:
+**keine Programmierung in PB ONE.**
+Kein technischer `paul/*`-Branch und kein WRITE_SCOPE für PB-ONE-Arbeit.
 
-Erst eine bewusste Übergabe aus PB ONE an ein Fach-/Projektbüro kann später einen separaten technischen Paul-Auftrag begründen.
+Sobald technische/projektspezifische Umsetzung beginnt, wird bewusst an ein Projekt-/Fachbüro übergeben. Dort gelten wieder die normalen technischen Paul-Regeln.

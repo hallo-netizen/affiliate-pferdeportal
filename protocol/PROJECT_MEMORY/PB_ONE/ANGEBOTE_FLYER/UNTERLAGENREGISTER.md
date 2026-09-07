@@ -9,6 +9,8 @@ Index der erstellten und freigegebenen PB-ONE-Angebots-/Flyerunterlagen.
 
 Keine zweite Inhaltswahrheit.
 
+Nutzer und Paul dürfen dieses Register gleichberechtigt pflegen.
+
 ## Statuswerte
 
 - ENTWURF

@@ -229,18 +229,18 @@ Weg:
 
 Keine Programmierung.
 
-## PB ONE – Idee mit Paul entwickeln
+## PB ONE – gemeinsame Agenturarbeit
 
 Aktion:
-Eine Agentur-/Geschäfts-/Projektidee gemeinsam mit Paul denken und kritisch prüfen.
+Ideen sammeln, mit Paul entwickeln, Konzepte ausarbeiten oder Unterlagen erstellen.
 
 Weg:
-`PB_ONE/IDEENWERKSTATT/START_HERE.md`
-→ `CURRENT_STATE.md`
-→ `HOBBYRAUM.md`
-→ `IDEENREGISTER.md`.
+- Überblick → `PB_ONE/ZENTRALREGISTER.md`
+- Rohidee → `PB_ONE/IDEENWERKSTATT/START_HERE.md`
+- Entwicklung → `PB_ONE/ENTWICKLUNGSRAUM/START_HERE.md`
+- Angebot/Flyer → `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
 
-Paul arbeitet dort nur im SPARRING-Modus.
-Kein technischer Paul-Branch, kein WRITE_SCOPE, keine Programmierung.
+Nutzer und Paul haben in PB ONE dieselben redaktionellen Rechte.
 
-Erst bei bewusster Entscheidung `ÜBERGEBEN` geht die Idee in ein bestehendes oder neues Projekt-/Fachbüro.
+Keine Programmierung in PB ONE.
+Technische Umsetzung erst nach bewusster Übergabe an ein Projekt-/Fachbüro.

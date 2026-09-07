@@ -885,12 +885,24 @@ Keine Programmierung in PB ONE. Operative Fach-/Technikarbeit wird an Projekt-/F
 START:
 Zwei Bereiche: `ANGEBOTE_FLYER` und `IDEENWERKSTATT`.
 
-## ARCH-068 – Paul darf in PB ONE als nicht-technischer Sparringspartner mitdenken
+## ARCH-068 – PB ONE ist gemeinsamer gleichberechtigter Agenturraum von Nutzer und Paul
 WAS:
-Neben der technischen WORKER-Rolle existiert in der PB-ONE-Ideenwerkstatt ein reiner SPARRING-Modus.
+Innerhalb `PB_ONE/**` haben Nutzer und Paul dieselben redaktionellen Rechte: lesen, schreiben, Ideen/Konzepte verändern, Register pflegen, Unterlagen erstellen und Entscheidungen dokumentieren.
 WARUM:
-Der Nutzer möchte mit Paul Ideen entwickeln, ohne daraus automatisch Branch-, Scope- oder Programmierarbeit zu machen.
+PB ONE ist die gemeinsame Agentur, nicht Pauls technischer Spezialworkerraum.
+AUSNAHME:
+Die sonstige Paul-Regel `protocol/PROJECT_MEMORY/** = READ ONLY` gilt für `PB_ONE/**` redaktionell nicht.
 GRENZE:
-SPARRING = lesen/denken/kritisieren. Kein `paul/*`, kein WRITE_SCOPE, keine Programmierung, kein PROJECT_MEMORY-Write.
+Keine Programmierung in PB ONE; kein technischer `paul/*`-Branch und kein WRITE_SCOPE.
 ÜBERGABE:
-Erst eine bewusste Übergabe in ein Projekt-/Fachbüro kann einen separaten technischen Auftrag erzeugen.
+Technische/projektspezifische Umsetzung geht bewusst an ein Projekt-/Fachbüro; dort gelten wieder die normalen Paul-Regeln.
+
+
+## ARCH-069 – PB ONE erhält Zentralregister und Entwicklungsraum
+WAS:
+PB ONE bekommt `ZENTRALREGISTER.md` sowie `ENTWICKLUNGSRAUM/` mit CURRENT_STATE, HOBBYRAUM und KONZEPTREGISTER.
+WARUM:
+Rohideen, weiterentwickelte Konzepte und fertige Unterlagen brauchen unterschiedliche Reifegrade, aber einen gemeinsamen Agenturknoten.
+KISS:
+Idee → Entwicklung → Angebot/Flyer oder Projektübergabe.
+Keine zusätzliche technische Schicht.

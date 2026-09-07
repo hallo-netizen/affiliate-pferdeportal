@@ -6,16 +6,16 @@ STATUS: FREI
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Der einzige aktuelle Denkraum für eine laufende PB-ONE-Idee.
+Der aktuelle gemeinsame Denkraum für eine PB-ONE-Idee.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du mit Paul an genau einer aktuell gebundenen Idee arbeiten willst.
+du mit Paul an einer Idee arbeiten willst.
 
 **DU DARFST …**  
-diskutieren, verwerfen, schärfen, vergleichen und eine Übergabe vorbereiten.
+gemeinsam lesen, schreiben, verändern, schärfen, vergleichen, verwerfen und Entscheidungen festhalten.
 
 **DU DARFST NICHT …**  
-programmieren, technische Branches starten oder mehrere konkurrierende aktuelle Ideen als eine Arbeitsbindung vermischen.
+hier programmieren oder technische Projektarbeit starten.
 
 **ALS NÄCHSTES …**  
 ohne konkrete Idee FREI lassen.
@@ -26,11 +26,10 @@ Keine.
 
 ## Abschluss einer Ideensession
 
-Am Ende genau eine Entscheidung festhalten:
+Am Ende eine klare Entscheidung:
 
 - WEITER
 - PARKEN
 - VERWERFEN
+- IN ENTWICKLUNG
 - ÜBERGEBEN
-
-Nur bei echter Übergabe wird ein anderes Projekt-/Fachbüro aktiv.

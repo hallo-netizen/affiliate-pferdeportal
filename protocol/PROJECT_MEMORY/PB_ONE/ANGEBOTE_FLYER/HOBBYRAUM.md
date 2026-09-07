@@ -12,7 +12,7 @@ Der einzige aktuelle Arbeitsraum für einen laufenden PB-ONE-Angebots-/Flyerauft
 du sehen willst, welcher Flyer oder welche Angebotsunterlage gerade aktiv entwickelt wird.
 
 **DU DARFST …**  
-bei STATUS AKTIV ausschließlich den hier gebundenen Unterlagenauftrag bearbeiten.
+gemeinsam mit Paul lesen, schreiben, ändern und den gebundenen Unterlagenauftrag bearbeiten.
 
 **DU DARFST NICHT …**  
 mehrere konkurrierende „aktuelle Flyer“ gleichzeitig führen oder ohne Freigabe einen Entwurf zum verbindlichen Agenturangebot erklären.
