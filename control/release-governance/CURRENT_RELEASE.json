@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 23,
+  "generation": 24,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -333,6 +333,14 @@
       "message": "Programmdaten geprüft. Angebote folgen.",
       "product_feed_state": "no_exact_feed_assigned",
       "checked_at": "2026-09-07"
+    },
+    "otto_awin_offers_stage": {
+      "status": "PASS_USER_SCREENSHOT",
+      "advertiser_id": 14336,
+      "queue_stage": "feed",
+      "queue_status": "queued",
+      "message": "Angebote vollständig verarbeitet. Produktfeed folgt.",
+      "checked_at": "2026-09-07"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -360,7 +368,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "PROCESS_OTTO_14336_OFFERS_WORK_PACKAGE",
+    "current_milestone": "PROCESS_OTTO_14336_FEED_WORK_PACKAGE",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
