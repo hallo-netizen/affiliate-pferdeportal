@@ -142,19 +142,19 @@ NACHFOLGER:
 keiner belegt.
 
 
-## ZV-TRESOR-001 – Vollständige Ein-Datei-Katastrophensicherung
+## ZV-TRESOR-001 – GitHub-Komplettsicherung
 
 TITEL:
-CAMPUS-TRESOR – REGELMÄSSIGE EIN-DATEI-DISASTER-RECOVERY
+REGELMÄSSIGE GITHUB-KOMPLETTSICHERUNG
 
 GELTUNGSBEREICH:
-GESAMTER CAMPUS / GITHUB / GEBUNDENE WORDPRESS- UND RECOVERY-BESTÄNDE
+`hallo-netizen/affiliate-pferdeportal` / GITHUB
 
 STATUS:
 AKTIV
 
 FASSUNG:
-2026-09-07
+2026-09-07 – GITHUB-ONLY-KORREKTUR
 
 HAUPTQUELLE:
 `protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md`
@@ -167,11 +167,13 @@ VERANTWORTLICHER BEREICH:
 `protocol/PROJECT_MEMORY/TRESOR/`
 
 PASS-BEDINGUNG:
-Nicht hier dupliziert.
-Verbindlich ist: genau eine verschlüsselte Sicherungsdatei muss nach realem isoliertem Restore den vollständigen Wiederaufbau des gebundenen Campus-/Systemstands ohne zusätzliche Projektdateien ermöglichen.
+Git-Repository real restore-geprüft; alle für den Auftrag erforderlichen exportierbaren GitHub-Metadaten/Einstellungen gesichert; nicht exportierbare Providergrenzen ausdrücklich ausgewiesen.
 
 NUTZERWEG:
-GitHub Releases → neueste ausdrücklich als `TRESOR_PASS` freigegebene Datei herunterladen → lokal speichern.
+genau eine aktuelle geprüfte `GITHUB_KOMPLETTBACKUP_*.zip` herunterladen und außerhalb GitHubs speichern.
+
+NICHT IM SCOPE:
+WordPress / Website / Projektarchiv.
 
 NACHFOLGER:
 keiner belegt.
