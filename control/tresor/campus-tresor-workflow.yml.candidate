@@ -1,57 +1,17 @@
-name: Campus Tresor One-File Backup
-
-on:
-  schedule:
-    - cron: '17 3 * * 0'
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-concurrency:
-  group: campus-tresor-onefile
-  cancel-in-progress: false
-
-jobs:
-  tresor:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 90
-    steps:
-      - name: Checkout current repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          fetch-depth: 0
-
-      - name: Prepare full WordPress backup
-        shell: bash
-        run: |
-          echo 'WORDPRESS_BACKUP_PROVIDER_NOT_BOUND'
-          exit 2
-
-      - name: Prepare Campus raw archive
-        shell: bash
-        run: |
-          echo 'CAMPUS_RAW_ARCHIVE_SERVER_SOURCE_NOT_BOUND'
-          exit 2
-
-      - name: Prepare opaque recovery bundle
-        shell: bash
-        run: |
-          echo 'RECOVERY_BUNDLE_PROVIDER_NOT_BOUND'
-          exit 2
-
-      - name: Build, verify and publish exactly one recovery file
-        if: ${{ success() }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO_SLUG: ${{ github.repository }}
-          TARGET_SHA: ${{ github.sha }}
-          SOURCE_REPO_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
-          TRESOR_MASTER_PASSWORD: ${{ secrets.TRESOR_MASTER_PASSWORD }}
-          RECOVERY_BUNDLE_FILE: ${{ runner.temp }}/recovery/recovery.bundle
-          WORDPRESS_BACKUP_DIR: ${{ runner.temp }}/wordpress-full-backup
-          RAW_ARCHIVE_DIR: ${{ runner.temp }}/campus-raw-archive
-          OUT_DIR: ${{ runner.temp }}/tresor-out
-          PUBLISH: '1'
-        run: bash control/tresor/build_tresor_release.sh
+# HISTORISCH / NICHT AKTIVIEREN
+#
+# Der frühere GitHub-hosted Tresor-Workflow ist verworfen.
+#
+# Grund:
+# - das Projekt-Repository ist öffentlich;
+# - der reale WordPress-Vollbackupstand liegt auf dem WordPress-System;
+# - die gültige Komplettsicherung benötigt einen unabhängigen privaten Offsite-Speicher.
+#
+# Verbindlicher automatischer Weg:
+#   serverseitig control/tresor/build_tresor_release.sh
+#
+# Zeitplan:
+#   einmal wöchentlich, bevorzugt Sonntag 03:17 Uhr,
+#   nachdem der vorhandene WordPress-Vollbackupstand aktualisiert wurde.
+#
+# Dieser Kandidat darf keine zweite Backup-Architektur mehr erzeugen.
