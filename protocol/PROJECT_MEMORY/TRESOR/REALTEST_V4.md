@@ -1,69 +1,77 @@
-# HISTORISCHER TRESOR-TESTBELEG – NICHT VERBINDLICHER BACKUPWEG
+# TRESOR – GITHUB-REALTEST
 
 STAND: 2026-09-07
+STATUS: AKTUELLER TESTBELEG
 
-HARD RULE:
-Diese Datei dokumentiert frühere Testtechnik.
-Sie definiert **keinen** aktuellen Backupweg.
+## Scope
 
-Aktuelle Autorität:
-`KONZEPT.md`
+Nur:
+`hallo-netizen/affiliate-pferdeportal`
 
----
+Kein WordPress.
+Kein Website-Backup.
+Kein Projektarchiv.
 
-# NOTFALL-TRESOR – REALTEST V4
+## Reale Ausführung
 
-STAND: 2026-09-07
-STATUS: VORBEREITET / REALE AUSFÜHRUNG OFFEN
+Workflow:
+`Campus GitHub Complete Backup`
 
-## Ziel
+Run:
+`34160894135`
 
-Den vollständigen Ein-Datei-Tresor testen, ohne den produktiven Campus oder das produktive WordPress zu gefährden.
+Ergebnis:
+`SUCCESS`
 
-## Testphasen
+## Paketprüfung
 
-### Phase A – Bereitschaft
-`TEST_VORBEREITUNG_PRUEFEN.command`
-
-PASS:
-`TRESOR_TEST_READY`
-
-### Phase B – sichere lokale Gesamtprüfung
-`TEST_ALLES.command`
+Die tatsächlich erzeugte Datei wurde heruntergeladen und anschließend unabhängig erneut geprüft.
 
 PASS:
-`TRESOR_LOCAL_ONEFILE_TEST_PASS`
+- ZIP entpackbar;
+- äußerer SHA-256 korrekt;
+- `GITHUB_KOMPLETTBACKUP.tar.gz` lesbar;
+- innerer SHA-256 korrekt;
+- Git-Bundle verifiziert;
+- Bundle als Mirror geklont;
+- `git fsck --full --strict` bestanden;
+- Release-Artefakt-Hash korrekt.
 
-### Phase C – echter GitHub-Neuaufbau
-`TEST_GITHUB_NEUAUFBAU.command`
+Ergebnis:
+`GITHUB_REPOSITORY_RESTORE_PASS`
 
-Nur separates privates Test-Repository.
+## Gesicherte Bestandszahlen dieses Laufs
 
-PASS:
-`GITHUB_RESTORE_TEST_PASS`
+- Branches: 291
+- Tags: 1
+- Pull-Request-Refs: 173
+- Issues: 155
+- Issue-Kommentare: 414
+- Issue-Events: 703
+- Pull Requests: 146
+- Releases: 1
+- Release-Artefakte: 1
+- Labels: 9
+- Milestones: 0
+- Rulesets: 1
+- Workflows: 70
+- PR-Reviews: 1
+- PR-Review-Kommentare: 1
+- Deployments: 0
+- Wiki: nicht initialisiert
 
-### Phase D – WordPress-Neuaufbau
-Aus exakt derselben Recovery-Kapsel in eine leere isolierte WordPress-/Serverumgebung.
+## Noch nicht als Komplett-PASS bezeichnet
 
-Pflicht:
-- Dateien wiederherstellen;
-- Datenbank importieren;
-- Konfiguration/Rechte prüfen;
-- Website technisch starten;
-- notwendige Plugins/Themes/Uploads vorhanden;
-- keine weitere Projektdatei als Quelle.
+Nicht lesbare Admin-Endpunkte:
+Actions Variables, Actions Permissions, Workflow Permissions, Actions Secret-Namen und Webhooks.
 
-### Phase E – Endabnahme
+Verwendeter Secret-Name aus Workflowquellen:
+`ENDSTEMPEL_PRIVATE_KEY`
 
-Nur wenn A–D real PASS sind und Recovery/Secrets vollständig funktionieren:
+Secret-Werte können aus GitHub nicht exportiert werden.
 
-`TRESOR_PASS`
+Darum:
+`GITHUB_BACKUP_PREPASS`
 
-Andernfalls:
-`TRESOR_FAIL:<ERSTER_FEHLER>`
-
-## Sicherheitsgrenze
-
-Der produktive Campus, das produktive Repository und die produktive WordPress-Seite werden für den Test nicht gelöscht.
-
-Die Totalverlust-Situation wird ausschließlich mit leeren isolierten Testzielen nachgestellt.
+Nicht:
+`GITHUB_KOMPLETT_PASS`
