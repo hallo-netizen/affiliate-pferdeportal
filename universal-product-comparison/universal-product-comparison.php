@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Comparison
  * Description: Minimal comparison core on top of Universal Product Knowledge.
- * Version: 0.1.1-prototype
+ * Version: 0.2.0-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: universal-product-knowledge
@@ -12,12 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPC_VERSION', '0.1.1-prototype' );
+define( 'UPC_VERSION', '0.2.0-prototype' );
 define( 'UPC_SCHEMA_VERSION', '2' );
 define( 'UPC_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/src/class-upc-repository.php';
+require_once __DIR__ . '/src/class-upc-rulebook.php';
 require_once __DIR__ . '/src/class-upc-writer.php';
+require_once __DIR__ . '/src/class-upc-validator.php';
+require_once __DIR__ . '/src/class-upc-production.php';
 
 function upc_dependency_ready() {
     return function_exists( 'upk_repository' ) && class_exists( 'UPK_Repository' );
@@ -96,12 +99,12 @@ function upc_maybe_upgrade_schema() {
 }
 add_action( 'plugins_loaded', 'upc_maybe_upgrade_schema', 20 );
 
-function upc_writer() {
+function upc_production() {
     $repository = upc_repository();
     if ( is_wp_error( $repository ) ) {
         return $repository;
     }
-    return new UPC_Writer( $repository );
+    return new UPC_Production( $repository );
 }
 
 function upc_repository() {
