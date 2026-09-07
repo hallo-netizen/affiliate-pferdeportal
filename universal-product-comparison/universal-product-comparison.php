@@ -26,6 +26,7 @@ require_once __DIR__ . '/src/class-upc-wordpress-draft.php';
 require_once __DIR__ . '/src/class-upc-affiliate-bridge.php';
 require_once __DIR__ . '/src/class-upc-seo-signals.php';
 require_once __DIR__ . '/src/class-upc-link-manifest.php';
+require_once __DIR__ . '/src/class-upc-link-finalizer.php';
 require_once __DIR__ . '/src/class-upc-archive.php';
 
 function upc_dependency_ready() {
@@ -117,6 +118,19 @@ function upc_link_manifest( $comparison_id, $project_key ) {
     }
     $resolver = new UPC_Link_Manifest( $repository );
     return $resolver->build( $comparison_id, $project_key );
+}
+
+function upc_finalize_internal_links( $comparison_id, $project_key, $ruleset_id ) {
+    $repository = upc_repository();
+    $production = upc_production();
+    if ( is_wp_error( $repository ) ) {
+        return $repository;
+    }
+    if ( is_wp_error( $production ) ) {
+        return $production;
+    }
+    $finalizer = new UPC_Link_Finalizer( $production, $repository );
+    return $finalizer->finalize( $comparison_id, $project_key, $ruleset_id );
 }
 
 function upc_archive() {
