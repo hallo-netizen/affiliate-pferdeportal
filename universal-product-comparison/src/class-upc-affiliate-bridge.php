@@ -52,8 +52,8 @@ class UPC_Affiliate_Bridge {
 
             $identifiers = self::exact_identifiers( $item['knowledge'] );
             if ( empty( $identifiers ) ) {
-                // Fail closed: a comparison subject without a stable exact
-                // identifier must not receive a fuzzy Affiliate substitute.
+                // Fail closed: a comparison subject without a stable Affiliate-
+                // exact identifier must not receive a fuzzy or SKU substitute.
                 continue;
             }
 
@@ -90,8 +90,13 @@ class UPC_Affiliate_Bridge {
     }
 
     private static function exact_identifiers( array $knowledge ) {
-        $out     = array();
-        $allowed = UPK_Repository::identifier_types();
+        $out = array();
+
+        // Affiliate Exact Match is deliberately narrower than Productwissen.
+        // MANUFACTURER_ARTICLE_NUMBER remains useful product knowledge but is
+        // not an automatic commerce match key. This prevents merchant SKU /
+        // manufacturer article-number confusion from producing substitutions.
+        $allowed = array( 'GTIN', 'EAN', 'MPN' );
 
         foreach ( (array) ( $knowledge['identifiers'] ?? array() ) as $identifier ) {
             if ( ! is_array( $identifier ) ) {
