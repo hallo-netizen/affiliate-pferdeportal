@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Comparison
  * Description: Minimal comparison core on top of Universal Product Knowledge.
- * Version: 0.1.0-prototype
+ * Version: 0.1.1-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: universal-product-knowledge
@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPC_VERSION', '0.1.0-prototype' );
-define( 'UPC_SCHEMA_VERSION', '1' );
+define( 'UPC_VERSION', '0.1.1-prototype' );
+define( 'UPC_SCHEMA_VERSION', '2' );
 define( 'UPC_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/src/class-upc-repository.php';
@@ -34,13 +34,16 @@ function upc_install_schema() {
     $charset_collate = $wpdb->get_charset_collate();
     $comparisons     = $wpdb->prefix . 'upc_comparisons';
     $items           = $wpdb->prefix . 'upc_items';
+    $features        = $wpdb->prefix . 'upc_features';
 
     $sql_comparisons = "CREATE TABLE {$comparisons} (
         id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         comparison_key varchar(191) NOT NULL,
         comparison_type varchar(16) NOT NULL,
         product_group_key varchar(191) NOT NULL,
+        working_title text NOT NULL,
         decision_intent text NOT NULL,
+        comparability_note text NOT NULL,
         set_hash char(64) NOT NULL,
         created_at datetime NOT NULL,
         updated_at datetime NOT NULL,
@@ -64,12 +67,33 @@ function upc_install_schema() {
         KEY subject_lookup (subject_type, subject_id)
     ) {$charset_collate};";
 
+    $sql_features = "CREATE TABLE {$features} (
+        id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+        comparison_id bigint(20) unsigned NOT NULL,
+        fact_key varchar(191) NOT NULL,
+        label varchar(191) NOT NULL,
+        position smallint(5) unsigned NOT NULL,
+        required tinyint(1) unsigned NOT NULL DEFAULT 1,
+        created_at datetime NOT NULL,
+        PRIMARY KEY  (id),
+        UNIQUE KEY comparison_fact (comparison_id, fact_key),
+        UNIQUE KEY comparison_position (comparison_id, position)
+    ) {$charset_collate};";
+
     dbDelta( $sql_comparisons );
     dbDelta( $sql_items );
+    dbDelta( $sql_features );
 
     update_option( 'upc_schema_version', UPC_SCHEMA_VERSION, false );
 }
 register_activation_hook( __FILE__, 'upc_install_schema' );
+
+function upc_maybe_upgrade_schema() {
+    if ( (string) get_option( 'upc_schema_version', '' ) !== (string) UPC_SCHEMA_VERSION ) {
+        upc_install_schema();
+    }
+}
+add_action( 'plugins_loaded', 'upc_maybe_upgrade_schema', 20 );
 
 function upc_repository() {
     static $repository = null;
