@@ -9,12 +9,9 @@ SELF=Path(__file__).resolve()
 BRIDGE=REPO/'control/single-door-boundary/codex_current_room_bridge.py'
 PROMPT_REL='control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt'
 RUNTIME_STATE_REL='control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
-HANDOFF_REL='control/startmaster0107/fachworkflow_proof_handoff.py'
 CONTRACT='PFERDE_ATELIER_CODEX_CURRENT_ACTION_VIEW_V1'
 PASS_CONTRACT='PFERDE_ATELIER_FACHWORKFLOW_PASS_V1'
 ARTICLE_TYPE_TEMPLATES_SHA='dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f'
-PPM679_VERSION='6.7.9'
-PPM679_PACKAGE_SHA256='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
 STAGES=['research_fact_pack','textmachine_article_type_structure','table_contract','internal_links','languagetool','ppm','pserc','pste','duplicate_cannibalization','seo','design_format','publish_safety']
 RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
 RELEASE_KEYS={'article_origin_policy','authoring_prompt_sha256','authoring_role','content_generation_performed_by_supervisor','contract','created_at_utc','exact_five_batch_sha256','exact_five_item_count','frozen_workflow_sha256','nullpunkt','nullpunkt_sha256','ppm_baseline_sha256','ppm_version','research_evidence_policy','sequence','status','wordpress_write_performed'}
@@ -26,13 +23,12 @@ def load(p:Path)->dict:
     x=json.loads(Path(p).read_text(encoding='utf-8'))
     if not isinstance(x,dict):raise ViewError('JSON_OBJECT_REQUIRED')
     return x
-def _safe_repo(repo:Path,ref:str)->Path:
+def safe(ref:str)->Path:
     p=Path(str(ref or ''))
     if not str(ref or '') or p.is_absolute() or '..' in p.parts:raise ViewError('BOUND_REF_INVALID')
-    q=(Path(repo)/p).resolve();r=Path(repo).resolve()
+    q=(REPO/p).resolve();r=REPO.resolve()
     if q!=r and r not in q.parents:raise ViewError('BOUND_REF_ESCAPE')
     return q
-def safe(ref:str)->Path:return _safe_repo(REPO,ref)
 def _bridge():
     s=importlib.util.spec_from_file_location('current_room_bridge_bound',BRIDGE)
     if s is None or s.loader is None:raise ViewError('BRIDGE_LOAD_FAILED')
@@ -44,9 +40,6 @@ def _rules(it:Mapping[str,Any])->dict:
     t=str(it.get('article_type') or '').strip()
     if not t:raise ViewError('ARTICLE_TYPE_BINDING_MISSING')
     return {'contract':'PFERDE_ATELIER_TEXTMACHINE_ARTICLE_TYPE_RULESET_BINDING_V1','article_type':t,'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'selection_authority':'BOUND_CURRENT_ITEM_ONLY','rule_semantics_redefined':False,'content_or_quality_rules_changed':False,'publish_allowed':False}
-
-def _ppm_requirement()->dict:
-    return {'ppm_version':PPM679_VERSION,'ppm_package_sha256':PPM679_PACKAGE_SHA256,'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'stage':'ppm','real_ppm_execution_required':True,'final_article_hash_must_equal_ppm_content_hash':True,'pre_ppm_binding_required_fields':['final_article_ref','final_article_sha256'],'final_ppm679_binding_required_fields':['ppm_version','ppm_package_sha256','article_type_templates_sha256','final_article_ref','final_article_sha256','ppm_report_ref','ppm_report_sha256'],'technical_guard_semantics_authority':'NONE','content_or_quality_rules_changed':False,'publish_allowed':False}
 
 def _contract_binding()->dict:
     p=REPO/PROMPT_REL
@@ -67,44 +60,15 @@ def _validate_release_metadata_identity(rm:Mapping[str,Any],batch:str,batch_coun
     if rm.get('exact_five_batch_sha256')!=batch:raise ViewError('RELEASE_METADATA_BATCH_MISMATCH')
     if int(rm.get('exact_five_item_count') or -1)!=batch_count:raise ViewError('RELEASE_METADATA_ITEM_COUNT_MISMATCH')
 
-def _validate_ppm_stage(repo:Path,root:str,proof:Mapping[str,Any],receipt_outputs:Any)->None:
-    binding=proof.get('ppm679_binding')
-    keys={'ppm_version','ppm_package_sha256','article_type_templates_sha256','final_article_ref','final_article_sha256','ppm_report_ref','ppm_report_sha256'}
-    if not isinstance(binding,dict) or set(binding)!=keys:raise ViewError('PPM679_REAL_BINDING_MISSING')
-    if binding.get('ppm_version')!=PPM679_VERSION:raise ViewError('PPM679_VERSION_MISMATCH')
-    if binding.get('ppm_package_sha256')!=PPM679_PACKAGE_SHA256:raise ViewError('PPM679_PACKAGE_HASH_MISMATCH')
-    if binding.get('article_type_templates_sha256')!=ARTICLE_TYPE_TEMPLATES_SHA:raise ViewError('PPM679_RULESET_HASH_MISMATCH')
-    final_ref=str(binding.get('final_article_ref') or '');final_sha=str(binding.get('final_article_sha256') or '')
-    report_ref=str(binding.get('ppm_report_ref') or '');report_sha=str(binding.get('ppm_report_sha256') or '')
-    if not final_ref.startswith(root) or not report_ref.startswith(root):raise ViewError('PPM679_REF_OUTSIDE_BOUND_ROOT')
-    if not re.fullmatch(r'[0-9a-f]{64}',final_sha) or not re.fullmatch(r'[0-9a-f]{64}',report_sha):raise ViewError('PPM679_HASH_INVALID')
-    final_path=_safe_repo(repo,final_ref);report_path=_safe_repo(repo,report_ref)
-    if not final_path.is_file() or sha(final_path)!=final_sha:raise ViewError('PPM679_FINAL_ARTICLE_HASH_MISMATCH')
-    if not report_path.is_file() or sha(report_path)!=report_sha:raise ViewError('PPM679_REPORT_HASH_MISMATCH')
-    if proof.get('input_sha256')!=final_sha:raise ViewError('PPM679_STAGE_INPUT_NOT_FINAL_ARTICLE')
-    arts=proof.get('artifacts')
-    if not isinstance(arts,list):raise ViewError('PPM679_ARTIFACTS_MISSING')
-    if not any(isinstance(x,dict) and x.get('ref')==final_ref and x.get('sha256')==final_sha for x in arts):raise ViewError('PPM679_FINAL_ARTICLE_NOT_BOUND_AS_ARTIFACT')
-    if not any(isinstance(x,dict) and x.get('ref')==report_ref and x.get('sha256')==report_sha for x in arts):raise ViewError('PPM679_REPORT_NOT_BOUND_AS_ARTIFACT')
-    if not isinstance(receipt_outputs,list) or not any(isinstance(x,dict) and x.get('ref')==final_ref and x.get('sha256')==final_sha for x in receipt_outputs):raise ViewError('PPM679_FINAL_ARTICLE_NOT_BOUND_AS_OUTPUT')
-    report=load(report_path);checks=report.get('checks')
-    if report.get('ok') is not True:raise ViewError('PPM679_NOT_PASS')
-    if report.get('technical_status')!='TECHNICAL_CHECK_OK':raise ViewError('PPM679_TECHNICAL_NOT_PASS')
-    if report.get('content_quality_status')!='CONTENT_QUALITY_CHECK_OK':raise ViewError('PPM679_CONTENT_QUALITY_NOT_PASS')
-    if report.get('content_hash')!=final_sha:raise ViewError('PPM679_CONTENT_HASH_NOT_FINAL_ARTICLE')
-    if not isinstance(checks,dict) or checks.get('content_hash')!=final_sha or checks.get('fail_closed_aggregate_status')!='PASS':raise ViewError('PPM679_FAIL_CLOSED_NOT_PASS')
-
 # These two functions are the only callbacks the existing room bridge uses after DUAL is bound to this file.
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     r=_rules(it);b=_contract_binding();batch,batch_count=_runtime_batch_identity();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
     metadata_binding={'required_fields':sorted(RELEASE_KEYS),'contract':RELEASE_CONTRACT,'status':'PASS','exact_five_batch_sha256':batch,'exact_five_item_count':batch_count,'wordpress_write_performed':False,'remaining_fields_authority':'EXISTING_UNCHANGED_FACHWORKFLOW_ONLY','technical_identity_binding_only':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
     s=dict(a.get('item_receipt_schema') or {})
-    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'ppm679_requirement':_ppm_requirement(),'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'materialized only after real PPM 6.7.9 handoff PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set after real PPM 6.7.9 completion','fact_pack':'current real research_fact_pack output','production_plan_item':'current real production_plan_v4 item','production_plan_header':'current real production_plan_v4 header without items','workflow_release_item':'current real workflow_release item','workflow_release_metadata':'current real workflow_release metadata','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
+    s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
     a['item_receipt_schema']=s
-    request_ref=root+'FACHWORKFLOW_HANDOFF_REQUEST.json'
-    a['fachworkflow_handoff']={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':batch,'request_ref':request_ref,'request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','request_required_fields':['contract','room_token','batch_sha256','canonical_article_id','plan_slot','allowed_output_root','item_receipt_ref','fachworkflow_pass_ref','contract_binding_ref','contract_binding_sha256','stage_proofs','fact_pack','production_plan_item','production_plan_header','workflow_release_item','workflow_release_metadata'],'adapter_ref':HANDOFF_REL,'adapter_sha256':sha(REPO/HANDOFF_REL),'adapter_executes_bound_ppm_stage':True,'worker_executes_adapter_directly':False,'content_or_quality_rules_changed':False,'publish_allowed':False}
-    # NEW intentionally has no existing article source. The request is data-only; submission_command owns the existing handoff execution.
-    a.pop('existing_article_source_binding',None)
+    # NEW intentionally has no existing_article_source_binding and no handoff/request path.
+    a.pop('existing_article_source_binding',None);a.pop('fachworkflow_handoff',None)
     return a
 
 def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],d:Mapping[str,Any])->dict:
@@ -143,7 +107,6 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
             if not ar.startswith(root) or not re.fullmatch(r'[0-9a-f]{64}',ah):raise ViewError('FACH_STAGE_ARTIFACT_REF_INVALID:'+stage)
             ap=safe(ar)
             if not ap.is_file() or sha(ap)!=ah:raise ViewError('FACH_STAGE_ARTIFACT_HASH_MISMATCH:'+stage)
-        if stage=='ppm':_validate_ppm_stage(REPO,root,proof,d.get('outputs'))
     fp=q.get('fact_pack');pi=q.get('production_plan_item');ph=q.get('production_plan_header');ri=q.get('workflow_release_item');rm=q.get('workflow_release_metadata')
     if not all(isinstance(x,dict) for x in (fp,pi,ph,ri,rm)):raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
     if pi.get('canonical_article_id')!=it.get('canonical_article_id') or pi.get('plan_slot')!=it.get('plan_slot'):raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH')
@@ -158,78 +121,46 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
 def _current_only(data:dict)->dict:
     status=data.get('status')
     if status=='CURRENT_BOUND_ACTION_READY':
-        need=('room_token','current_item','fachworkflow_authority','fachworkflow_prompt_ref','allowed_output_root','item_receipt_ref','item_receipt_schema','fachworkflow_handoff','submission_command')
+        need=('room_token','current_item','fachworkflow_authority','fachworkflow_prompt_ref','allowed_output_root','item_receipt_ref','item_receipt_schema','submission_command')
         if any(k not in data for k in need):raise ViewError('CURRENT_ACTION_FIELDS_MISSING')
         pref='python3 control/single-door-boundary/codex_current_room_bridge.py submit ';sub=str(data['submission_command'])
         if not sub.startswith(pref) or sub[len(pref):]!=str(data['item_receipt_ref']):raise ViewError('CURRENT_ACTION_SUBMISSION_NOT_BOUND')
-        handoff=data.get('fachworkflow_handoff')
-        if not isinstance(handoff,dict):raise ViewError('CURRENT_ACTION_HANDOFF_BINDING_MISSING')
-        request_ref=str(handoff.get('request_ref') or '')
-        if not request_ref.startswith(str(data['allowed_output_root'])):raise ViewError('CURRENT_ACTION_HANDOFF_REQUEST_OUTSIDE_BOUND_ROOT')
-        if handoff.get('request_contract')!='PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1' or handoff.get('worker_executes_adapter_directly') is not False:raise ViewError('CURRENT_ACTION_HANDOFF_BINDING_INVALID')
-        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_BOUND_FACHWORKFLOW_PROMPT_AS_CURRENT_WORKER_NOW','worker_role':'CURRENT_CODEX_IS_BOUND_FACHWORKFLOW_WORKER','separate_fachworkflow_executor_required':False,'separate_fachworkflow_capability_required':False,'fachworkflow_work_generation_authority':'CURRENT_CODEX_WORKER_MUST_GENERATE_REAL_CURRENT_OUTPUTS','fachworkflow_pass_authority':'REAL_ARTIFACTS_PLUS_REAL_PPM_HANDOFF_ONLY','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'fachworkflow_handoff':handoff,'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+request_ref,'publish_allowed':False}
+        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_CURRENT_BOUND_ITEM_NOW','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+data['item_receipt_ref'],'publish_allowed':False}
     if status in {'BLOCKED','USER_ACTION_REQUIRED','FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH'}:return {'contract':CONTRACT,'status':status,'room_token':data.get('room_token'),'error':data.get('error'),'evidence':data.get('evidence'),'outer_step':data.get('outer_step'),'publish_allowed':False}
     if data.get('ok') is False:return {'contract':CONTRACT,'status':'BLOCKED','error':data.get('error') or status or 'BOUND_BRIDGE_BLOCKED','publish_allowed':False}
     raise ViewError('BOUND_BRIDGE_STATUS_NOT_WORKER_VISIBLE')
 
-def _materialize_current_fachworkflow(b:Any,request_ref:str)->str:
-    current=b.current()
-    if current.get('status')!='CURRENT_BOUND_ACTION_READY':raise ViewError('CURRENT_ACTION_NOT_READY')
-    handoff=current.get('fachworkflow_handoff') or {};expected_ref=str(handoff.get('request_ref') or '')
-    if request_ref!=expected_ref:raise ViewError('CURRENT_ACTION_HANDOFF_REQUEST_NOT_CURRENT_BOUND_ITEM')
-    rp=safe(request_ref)
-    if not rp.is_file():raise ViewError('CURRENT_ACTION_HANDOFF_REQUEST_MISSING')
-    request=load(rp);it=current.get('current_item') or {};schema=current.get('item_receipt_schema') or {};binding=schema.get('fachworkflow_contract_binding') or {}
-    batch,_=_runtime_batch_identity()
-    expected={'contract':handoff.get('request_contract'),'room_token':current.get('room_token'),'batch_sha256':batch,'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'allowed_output_root':current.get('allowed_output_root'),'item_receipt_ref':current.get('item_receipt_ref'),'fachworkflow_pass_ref':schema.get('fachworkflow_pass_ref'),'contract_binding_ref':binding.get('binding_ref'),'contract_binding_sha256':binding.get('binding_sha256')}
-    for key,value in expected.items():
-        if request.get(key)!=value:raise ViewError('CURRENT_ACTION_HANDOFF_REQUEST_BINDING_MISMATCH:'+key)
-    required=set(handoff.get('request_required_fields') or [])
-    if set(request)!=required:raise ViewError('CURRENT_ACTION_HANDOFF_REQUEST_FIELDS_INVALID')
-    adapter=safe(str(handoff.get('adapter_ref') or ''));adapter_sha=str(handoff.get('adapter_sha256') or '')
-    if not adapter.is_file() or sha(adapter)!=adapter_sha:raise ViewError('CURRENT_ACTION_HANDOFF_ADAPTER_HASH_MISMATCH')
-    hs=importlib.util.spec_from_file_location('current_action_internal_real_ppm',adapter)
-    if hs is None or hs.loader is None:raise ViewError('FACHWORKFLOW_HANDOFF_LOAD_FAILED')
-    hm=importlib.util.module_from_spec(hs);sys.modules[hs.name]=hm;hs.loader.exec_module(hm)
-    result=hm.materialize(REPO,request_ref)
-    if result.get('status')!='FACHWORKFLOW_PROOF_HANDOFF_PASS' or result.get('item_receipt_ref')!=current.get('item_receipt_ref'):raise ViewError('CURRENT_ACTION_REAL_PPM_FINALIZATION_NOT_PASS')
-    return str(current['item_receipt_ref'])
-
 def _run(args:list[str])->dict:
     b=_bridge()
-    try:
-        if args==['current']:return b.current()
-        ref=_materialize_current_fachworkflow(b,args[1]);return b.submit(ref)
+    try:return b.current() if args==['current'] else b.submit(args[1])
     except Exception as e:
         if e.__class__.__name__ in {'Blocked','ViewError'}:return {'ok':False,'status':'BLOCKED','error':str(e),'publish_allowed':False}
         raise
 
 def selftest()->dict:
-    handoff={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':'b'*64,'request_ref':'.pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json','request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','request_required_fields':['contract'],'adapter_ref':HANDOFF_REL,'adapter_sha256':'a'*64,'adapter_executes_bound_ppm_stage':True,'worker_executes_adapter_directly':False,'content_or_quality_rules_changed':False,'publish_allowed':False}
-    sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':{'contract':'X'},'fachworkflow_handoff':handoff,'existing_article_source_binding':{'ref':'old.md'},'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
+    # View test: old source/handoff cannot leak and only direct submit is emitted.
+    sample={'status':'CURRENT_BOUND_ACTION_READY','room_token':'R_D_1_01','current_item':{'canonical_article_id':'article:test','article_type':'ratgeber'},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':'bound.txt','allowed_output_root':'.pferde-quarantine/test/','item_receipt_ref':'.pferde-quarantine/test/ITEM_RECEIPT.json','item_receipt_schema':{'contract':'X'},'existing_article_source_binding':{'ref':'old.md'},'fachworkflow_handoff':{'contract':'OLD'},'submission_command':'python3 control/single-door-boundary/codex_current_room_bridge.py submit .pferde-quarantine/test/ITEM_RECEIPT.json'}
     v=_current_only(sample)
-    if 'existing_article_source_binding' in v:raise AssertionError('OLD_SOURCE_LEAK')
-    if v.get('fachworkflow_handoff')!=handoff:raise AssertionError('PRE_PPM_REQUEST_NOT_VISIBLE')
-    if not v.get('submission_command','').endswith(handoff['request_ref']):raise AssertionError('SUBMISSION_NOT_BOUND_TO_PRE_PPM_REQUEST')
-    if v.get('worker_role')!='CURRENT_CODEX_IS_BOUND_FACHWORKFLOW_WORKER':raise AssertionError('CURRENT_WORKER_ROLE_NOT_BOUND')
-    if v.get('separate_fachworkflow_executor_required') is not False or v.get('separate_fachworkflow_capability_required') is not False:raise AssertionError('SEPARATE_FACHWORKFLOW_DEPENDENCY_REGRESSION')
-    if v.get('fachworkflow_work_generation_authority')!='CURRENT_CODEX_WORKER_MUST_GENERATE_REAL_CURRENT_OUTPUTS':raise AssertionError('FACHWORKFLOW_WORK_GENERATION_NOT_BOUND')
-    if v.get('fachworkflow_pass_authority')!='REAL_ARTIFACTS_PLUS_REAL_PPM_HANDOFF_ONLY':raise AssertionError('PASS_AUTHORITY_NOT_SEPARATED_FROM_WORKER_ROLE')
-    a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},sample['current_item'])
-    hb=a.get('fachworkflow_handoff') or {};schema=a['item_receipt_schema']
-    if hb.get('request_contract')!='PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1' or hb.get('worker_executes_adapter_directly') is not False:raise AssertionError('PRE_PPM_REQUEST_BINDING_FAIL')
-    if 'pre_submit_context' in schema:raise AssertionError('PROVISIONAL_RECEIPT_CONTEXT_STILL_REQUIRED')
-    req=schema.get('ppm679_requirement') or {}
-    if req.get('pre_ppm_binding_required_fields')!=['final_article_ref','final_article_sha256']:raise AssertionError('PRE_PPM_BINDING_NOT_MINIMAL')
-    if 'ppm_report_ref' not in req.get('final_ppm679_binding_required_fields',[]):raise AssertionError('FINAL_PPM_REPORT_BINDING_MISSING')
-    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'current_codex_is_bound_fachworkflow_worker':True,'separate_fachworkflow_executor_required':False,'separate_fachworkflow_capability_required':False,'worker_generates_real_current_fachworkflow_outputs':True,'worker_does_not_self_attest_pass':True,'pre_ppm_request_bound':True,'worker_separate_handoff_command':False,'provisional_receipt_required':False,'fachworkflow_pass_materialized_after_real_ppm':True,'publish_allowed':False}
+    if 'existing_article_source_binding' in v or 'fachworkflow_handoff' in v or 'submit-request' in v['submission_command']:raise AssertionError('OLD_OR_HANDOFF_LEAK')
+    # Binding test itself is deterministic and article-type specific.
+    a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'})
+    rb=a['item_receipt_schema']['textmachine_ruleset_binding'];mb=a['item_receipt_schema']['fachworkflow_pass_schema']['workflow_release_metadata_binding']
+    if rb['article_type']!='ratgeber' or rb['article_type_templates_sha256']!=ARTICLE_TYPE_TEMPLATES_SHA:raise AssertionError('ARTICLE_TYPE_RULESET_BINDING_FAIL')
+    if set(mb['required_fields'])!=RELEASE_KEYS or mb['exact_five_batch_sha256']!=_runtime_batch_identity()[0] or mb['exact_five_item_count']!=_runtime_batch_identity()[1]:raise AssertionError('RELEASE_METADATA_SCHEMA_BINDING_FAIL')
+    live_batch,live_count=_runtime_batch_identity()
+    if not re.fullmatch(r'[0-9a-f]{64}',live_batch) or live_count<1:raise AssertionError('RUNTIME_BATCH_IDENTITY_FAIL')
+    good={'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count};_validate_release_metadata_identity(good,live_batch,live_count)
+    for bad,label in [({'exact_five_batch_sha256':'0'*64,'exact_five_item_count':live_count},'BATCH'),({'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count+1},'COUNT')]:
+        try:_validate_release_metadata_identity(bad,live_batch,live_count);raise AssertionError('RELEASE_METADATA_NEGATIVE_NOT_BLOCKED:'+label)
+        except ViewError:pass
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'handoff_request_bound':False,'article_type_ruleset_bound':True,'strict_real_stage_validator':True,'release_metadata_batch_bound':True,'release_metadata_item_count_bound':True,'content_or_quality_authority':'NONE','publish_allowed':False}
 
 def main(argv:list[str])->int:
     try:
         if argv==['selftest']:z=selftest()
         elif argv==['current']:z=_current_only(_run(argv))
         elif len(argv)==2 and argv[0]=='submit':z=_current_only(_run(argv))
-        else:raise ViewError('USAGE: current | submit FACHWORKFLOW_HANDOFF_REQUEST.json | selftest')
+        else:raise ViewError('USAGE: current | submit ITEM_RECEIPT.json | selftest')
         print(json.dumps(z,ensure_ascii=False,indent=2));return 0 if z.get('status')!='BLOCKED' else 2
     except Exception as e:
         print(json.dumps({'contract':CONTRACT,'status':'BLOCKED','error':str(e),'publish_allowed':False},ensure_ascii=False,indent=2));return 2

@@ -356,20 +356,17 @@ def complete(receipt_path: Path) -> dict:
             ) from exc
         if committed.get("status") != "OUTPUT_RELEASE_PASS_FINAL":
             raise Blocked("FINAL_VISIBLE_RELEASE_NOT_PASS")
-        finalizer = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_107008_finalize_boundary")
+        finalizer = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_107008_finalizer")
+        pserc_finalization = finalizer.finalize_after_107008(REPO, committed["release_receipt_ref"])
         finalizer.clear_prepared_binding(REPO, binding["batch_sha256"])
-        release_receipt_ref = committed["release_receipt_ref"]
         return {
             "ok": True,
             "status": "107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED",
-            "release_receipt_ref": release_receipt_ref,
+            "release_receipt_ref": committed["release_receipt_ref"],
             "release_receipt_sha256": committed["release_receipt_sha256"],
             "batch_sha256": committed["batch_sha256"],
             "released_count": committed["released_count"],
-            "host_pserc_finalization_required": True,
-            "host_pserc_finalization_command": "python3 control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py finalize " + release_receipt_ref,
-            "host_pserc_signer_required": True,
-            "codex_worker_signer_access_allowed": False,
+            "pserc_finalization": pserc_finalization,
             "rearmed_step_id": finished.get("rearmed_step_id"),
             "rearmed_sequence": finished.get("rearmed_sequence"),
             "chat_output_authority": "NONE",
