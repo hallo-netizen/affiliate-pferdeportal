@@ -137,6 +137,40 @@ $first_receipt_hash = $draft['receipt_hash'];
 $golden_output_hash = '994d20136cebd169daa8a09f38248ee315552f8f63ea5f25c14995a01344828f';
 upc_real_assert( $first_output_hash === $golden_output_hash, 'golden output hash matches approved article contract V1' );
 
+$graphic = upc_comparison_graphic( $comparison_id );
+upc_real_assert( ! is_wp_error( $graphic ), 'build deterministic neutral comparison graphic' );
+upc_real_assert( 'GRAPHIC_READY' === $graphic['status'], 'comparison graphic reaches GRAPHIC_READY only from bound dossier' );
+upc_real_assert( 'pv-reg-001.svg' === $graphic['filename'], 'comparison graphic filename is derived from stable comparison key' );
+upc_real_assert( 'image/svg+xml' === $graphic['mime_type'], 'comparison graphic uses explicit SVG mime type' );
+upc_real_assert( false !== strpos( $graphic['svg'], '<svg ' ), 'comparison graphic renders SVG root' );
+upc_real_assert( false !== strpos( $graphic['svg'], 'WeatherBeeta' ), 'comparison graphic contains bound product A identity' );
+upc_real_assert( false !== strpos( $graphic['svg'], 'LeMieux' ), 'comparison graphic contains bound product B identity' );
+upc_real_assert( false === strpos( $graphic['svg'], '<image' ), 'comparison graphic contains no product image element' );
+upc_real_assert( false === strpos( $graphic['svg'], '<script' ), 'comparison graphic contains no script' );
+upc_real_assert( false === strpos( $graphic['svg'], 'href=' ), 'comparison graphic contains no link or external asset reference' );
+upc_real_assert( false !== strpos( $graphic['svg'], 'Keine Rangliste' ), 'comparison graphic explicitly avoids ranking language' );
+upc_real_assert( $graphic['svg_sha256'] === hash( 'sha256', $graphic['svg'] ), 'comparison graphic hash matches exact SVG bytes' );
+
+for ( $i = 0; $i < 20; $i++ ) {
+    $graphic_repeat = upc_comparison_graphic( $comparison_id );
+    upc_real_assert( ! is_wp_error( $graphic_repeat ), 'deterministic graphic repeat ' . ( $i + 1 ) );
+    if ( $graphic_repeat['svg'] !== $graphic['svg']
+        || $graphic_repeat['input_hash'] !== $graphic['input_hash']
+        || $graphic_repeat['svg_sha256'] !== $graphic['svg_sha256']
+        || $graphic_repeat['filename'] !== $graphic['filename']
+    ) {
+        fwrite( STDERR, "FAIL: deterministic graphic repeat mismatch " . ( $i + 1 ) . "\n" );
+        exit( 1 );
+    }
+}
+fwrite( STDOUT, "PASS: 20/20 byte-identical deterministic comparison graphics\n" );
+
+$invalid_graphic = upc_comparison_graphic( 0 );
+upc_real_assert(
+    is_wp_error( $invalid_graphic ) && 'UPC_GRAPHIC_COMPARISON_INVALID' === $invalid_graphic->get_error_code(),
+    'comparison graphic blocks invalid unbound comparison id'
+);
+
 for ( $i = 0; $i < 100; $i++ ) {
     $repeat = $production->execute( $comparison_id, 'pferde-atelier', 'pv-reg-001-v1' );
     upc_real_assert( ! is_wp_error( $repeat ), 'deterministic repeat ' . ( $i + 1 ) );
