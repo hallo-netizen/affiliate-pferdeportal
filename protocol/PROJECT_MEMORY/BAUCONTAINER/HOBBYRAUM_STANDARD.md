@@ -152,3 +152,56 @@ Kein Recycling eines alten Paul-Branches mit Commits aus einem vorherigen Auftra
 
 Grund:
 Altcommits könnten sonst bereits vor Arbeitsbeginn außerhalb des neuen Scopes liegen oder einen READ_ONLY-Auftrag unzulässig „vorbelasten“.
+
+
+## Maschinenlesbarer Arbeits-Lock für normale Arbeitschats
+
+Für technische Arbeiten kann ein Hobbyraum zusätzlich genau einen
+`HOBBYROOM_WORK_LOCK_V1` enthalten.
+
+Zweck:
+Nicht der Chat entscheidet, ob ein Fix gebaut oder integriert werden darf.
+Der Hobbyraum bindet den aktuellen Arbeitszustand; der bestehende Security-Hardlock prüft ihn serverseitig.
+
+Schema:
+
+```text
+HOBBYROOM_WORK_LOCK_V1
+STATUS: FIX_FORBIDDEN|FIX_ALLOWED_FOR_CODEX_TEST
+OFFICE: <Büro>
+MAIN_SHA: <40-stelliger aktueller main-Ausgangscommit>
+ACTIVE_BLOCKER: <autoritativer Fehlercode>
+PLAN_PHASE: <aktueller festgelegter Arbeitsplanpunkt>
+CANDIDATE_BRANCH: <exakter Branch> oder NONE
+CANDIDATE_HEAD_SHA: <exakter 40-stelliger Head> oder NONE
+TECHNICAL_SCOPE_PREFIXES: <geschützter technischer Bereich>
+ALLOWED_PATH_PREFIXES: <für Kandidat exakt erlaubte Pfade> oder NONE
+CHECK_PAUL: PASS|PENDING|FAIL
+CHECK_HISTORY: PASS|PENDING|FAIL
+CHECK_LAST_GOOD: PASS|PENDING|FAIL
+CHECK_NEIGHBORS: PASS|PENDING|FAIL
+CHECK_REPEAT_CLASS: PASS|PENDING|FAIL
+CHECK_POS_NEG: PASS|PENDING|FAIL
+CHECK_INVARIANTS: PASS|PENDING|FAIL
+INTEGRATION_ALLOWED: true|false
+END_HOBBYROOM_WORK_LOCK_V1
+```
+
+Harte Wirkung nach Aktivierung des bestehenden Security-Hardlocks:
+- technische PR außerhalb des gebundenen Hobbyraumscopes: nicht betroffen;
+- PR im gebundenen Scope bei `FIX_FORBIDDEN`: **BLOCK**;
+- PR bei fehlendem 7-Punkte-PASS: **BLOCK**;
+- falscher Branch: **BLOCK**;
+- falscher Kandidaten-Head: **BLOCK**;
+- stale `MAIN_SHA`: **BLOCK**;
+- Datei außerhalb `ALLOWED_PATH_PREFIXES`: **BLOCK**;
+- `INTEGRATION_ALLOWED=false`: **BLOCK**.
+
+Nur bei exakt gebundenem Kandidat und vollständigem PASS:
+`HOBBYROOM_WORK_LOCK_PR_PASS`.
+
+Der Lock enthält keine Fachregeln und trifft keine Fachentscheidung.
+Er ist ausschließlich ein dummer technischer Scope-/Status-/Hash-Wächter.
+
+Damit bleibt:
+**HOBBYRAUM = einzige aktuelle Arbeitswahrheit; Hardlock = technische Durchsetzung.**
