@@ -256,3 +256,78 @@ Dauerregel: Hobbyraum/PR-Head = Regression/Reparatur; echter Live-/7/7-Beweis er
 Hobbyraum-Regressionsstand: **PASS**.
 Live-/Produktionsstand: **nicht neu belegt**.
 Nächster Übergang: keine weiteren Hobbyraum-Liveversuche; Integrationsentscheidung für PR #140 nur nach ausdrücklicher Nutzerfreigabe, danach Livebeweis auf current `main`.
+
+
+## 07.09 – Plan A / Plan B / Live-LanguageTool / systemische Bindungsprüfung
+
+### Plan B separat angelegt
+
+Plan B wurde ausschließlich als getrennte Shadow-Linie angelegt:
+- Draft-PR #143;
+- Branch `plan-b/text-slimline-shadow-v1-20260907`;
+- Basis `c8a96e7a2f598de69134d90b143257c3559bc98a`;
+- ausschließlich neue Dateien unter `experiments/plan_b_text_slimline/`;
+- keine Produktionsverdrahtung;
+- kein Merge;
+- keine automatische Übernahme von Plan-A-Fixes.
+
+Zweck:
+späterer A/B-Vergleich mit denselben Qualitäts-/Sicherheitsregeln, ohne Vermischung.
+
+### Plan A – B01-only integriert und real getestet
+
+PR #141 wurde nach Pflichtcheck regulär in main integriert.
+
+Neuer/current main:
+`f14ccf187b94c4beab9a86d0c69144f792ba2f64`.
+
+Dispatcher #107 wurde auf exakt diesen main-Head gebunden.
+
+Realer Codex-Lauf:
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
+- Current Action READY;
+- Single Door READY;
+- erster technischer STOP: `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`;
+- state_advanced=false;
+- 107007 nicht abgeschlossen;
+- 107008 nicht erreicht;
+- kein Publish / kein WordPress-Write.
+
+B01 wurde dadurch **nicht erneut live bestätigt**, weil der Lauf vorher bei LanguageTool stoppte.
+
+### LanguageTool – kein isolierter Fix freigegeben
+
+Historischer LT-6.8-/Bestand-43-Weg wurde identifiziert; der begonnene Branch
+`hobbyroom/languagetool-runtime-rebind-20260907`
+bleibt ausschließlich PARKPLATZ / NICHT INTEGRIEREN.
+
+Grund:
+Paul-Audit + B01–B15/M01–M33 + aktueller Livebefund zeigen wiederkehrende technische Bindungs-/Artefaktzustandsfehler. Ein LT-Einzelfix würde die Fehlerklasse nur an einer Stelle behandeln.
+
+### Systemische technische Prüfung
+
+Dauerhafte Wirkungskarten:
+- `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`;
+- `TECHNICAL_CORRIDOR_MATRIX_20260907.md`.
+
+Kernaussage:
+Die zwölf Stage-Namen sind keine zwölf gleichartigen Worker-Jobs. Mehrere echte Autoritäten liegen upstream, im Fachworkflow, in LT/PPM/PSERC/PSTE oder an äußeren Sicherheitsgrenzen. Der aktuelle Handoff lässt bei Nicht-PPM-Stufen zu viel Nachweisinterpretation beim Worker.
+
+Keine Fach-/Qualitäts-/Designregel wurde geändert.
+
+### Hobbyraum-Fixsperre / Arbeitsplan
+
+Der TEXT-Hobbyraum wurde auf einen einzigen verbindlichen A–F-Ablauf reduziert:
+A Ausgangspunkt → B 7 Pflichtchecks → C Anti-Minifix → D ein KISS-Kandidat → E lokale Positiv-/Negativfreigabe → F Codex-Test.
+
+Maschinenstatus:
+`FIX_FORBIDDEN`.
+
+Solange Positiv/Negativ + Invarianten nicht PASS sind:
+- kein Kandidat;
+- kein Merge;
+- kein Produktionscode-Fix.
+
+Security-PR #137 enthält die vorgesehene serverseitige Prüfung von `HOBBYROOM_WORK_LOCK_V1`, ist aber weiterhin **nicht gemergt**.
