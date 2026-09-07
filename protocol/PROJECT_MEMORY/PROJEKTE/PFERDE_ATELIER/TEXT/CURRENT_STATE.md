@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: FROZEN REPAIR / STEP 02 MERGED / REALTEST PENDING
+STATUS: FROZEN REPAIR / STEP 03 PR125 CANDIDATE
 
 ## AUTORITÄT
 
@@ -152,3 +152,23 @@ PR #154 merged:
 
 Bis zum Realtest-Ergebnis:
 kein Step 03, kein weiterer Kandidat.
+
+
+## STEP 02 REALTEST
+
+Current main:
+`7df2008eab8839271230b5dbfc62d7404c6e52f4`
+
+Erster Blocker bleibt:
+`BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`
+
+Kein Rückschritt; Step 02 bleibt als notwendige Vorstufe.
+
+## STEP 03
+
+PR #125 – 107008 Import-Envelope.
+Kandidat:
+`d0bf2d6b33425a12bf6b9a57bb1819ac9d147458`
+
+5/5 geänderte Dateien exakt Zielstand.
+Kein Step 04 vor Realtest.
