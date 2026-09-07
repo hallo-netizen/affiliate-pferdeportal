@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 20,
+  "generation": 21,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -303,6 +303,16 @@
       "version": "6.72.3",
       "evidence": "User confirmed installation and activation in WordPress on 2026-09-07",
       "scope": "INSTALL_LOAD_ACTIVATE_NO_FATAL"
+    },
+    "otto_awin_real_account_joined": {
+      "status": "PASS_USER_SCREENSHOT",
+      "advertiser_id": 14336,
+      "programme_name": "OTTO DE",
+      "relationship": "joined",
+      "domain": "otto.de",
+      "deeplinks": "available",
+      "checked_at": "2026-09-07",
+      "evidence": "User screenshot in chat; direct partner probe completed successfully"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -330,7 +340,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "FIRST_FUNCTIONAL_PLUGIN_TEST_AFTER_6_72_3_ACTIVATION_PASS",
+    "current_milestone": "ALLOW_LOCAL_OTTO_14336_THEN_OPEN_REAL_DATA_RUN",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
