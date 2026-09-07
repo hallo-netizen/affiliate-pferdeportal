@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / 0.2.3 HAUPTNAVIGATION + ERSTDRAFT PASS / MANUELLER TEST BEREIT
+STATUS: AKTIV / 0.2.4 ECHTER WP-ADMIN-MENÜTEST + ERSTDRAFT PASS / MANUELLER TEST BEREIT
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,7 +9,7 @@ STATUS: AKTIV / 0.2.3 HAUPTNAVIGATION + ERSTDRAFT PASS / MANUELLER TEST BEREIT
 Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
 
 **AKTUELLER AUFTRAG**
-Produktwissen 0.1.0 unverändert lassen, Produktvergleich durch den hart geprüften Clean-ZIP-Stand 0.2.3 ersetzen und danach ausschließlich den gebundenen PV-REG-001-Admin-Test ausführen. Keine Veröffentlichung.
+Produktwissen 0.1.0 unverändert lassen, Produktvergleich durch den hart geprüften Clean-ZIP-Stand 0.2.4 ersetzen und danach ausschließlich den gebundenen PV-REG-001-Admin-Test ausführen. Keine Veröffentlichung.
 
 **DU DARFST NICHT**
 STARTMASTER/TEXT umbauen, dessen aktiven Reparaturbereich verändern, Produktfakten erfinden, Affiliate-/SEO-Daten zur fachlichen Produktwahrheit machen oder automatisch veröffentlichen.
@@ -118,34 +118,43 @@ Freigegebene ZIP:
 SHA-256:
 `683828e03bd4949aa022ccd25fa62ae7ede105ef3921db2e6d0899b66bf29c67`
 
-## 0.2.3 – WORDPRESS-HAUPTNAVIGATION PASS
+## 0.2.4 – ECHTER WORDPRESS-ADMIN-MENÜTEST PASS
 
-Änderung:
-- `Produktvergleich` ist ein eigener Top-Level-Menüpunkt in der WordPress-Hauptnavigation;
-- nicht mehr unter `Werkzeuge`;
-- der gebundene `PV-REG-001`-Test bleibt derselbe;
-- keine neue Writer-/Import-/Publish-Logik.
+Korrektur eines Prüfungsfehlers:
+- der 0.2.3-Test rief `register_menu()` künstlich direkt auf;
+- damit war nur bewiesen, dass die Funktion einen Menüeintrag erzeugen *kann*;
+- nicht bewiesen war, dass sie im echten WordPress-Admin-Lebenszyklus tatsächlich erscheint.
 
-Beleg:
-- Run `34153930934` -> PASS;
-- Clean-ZIP-Installation -> PASS;
-- Top-Level-Menü `Produktvergleich` exakt einmal vorhanden -> PASS;
-- nicht unter `Werkzeuge` -> PASS;
-- erster gebundener Draft weiterhin -> PASS.
+Fix 0.2.4:
+- Admin-Hooks werden immer registriert;
+- Hauptmenü wird im echten `admin_menu`-Hook sehr spät mit Priorität `99999` gesetzt;
+- keine Änderung an Writer, Fakten, Import, Kategoriebindung oder Publish-Sperre.
+
+Harter Realtest:
+- Run `34154550626` -> PASS;
+- Clean-ZIP-Struktur -> PASS;
+- Installation + aktiv -> PASS;
+- echter WordPress-HTTP-Server gestartet;
+- echter Admin-Login durchgeführt;
+- echte `/wp-admin/`-Sidebar gerendert;
+- `Produktvergleich` als Top-Level-Menü im HTML vorhanden -> PASS;
+- echte Menüseite `admin.php?page=upc-first-draft-test` geladen -> PASS;
+- gebundener PV-REG-001-Draft weiterhin -> PASS.
 
 Freigegebene ZIP:
-`universal-product-comparison-0.2.3-prototype.zip`
+`universal-product-comparison-0.2.4-prototype.zip`
 
 SHA-256:
-`9b9a3c86fd2c7d82ce60a49d62df0506e223bf6c457b95a4ace7e4c61a9d1efd`
+`b74e3c17eb2cb71ebc4c15aab5da6e4133379b124804c920080a33d20fc78054`
 
 ## NEXT ACTION
 
 1. Produktwissen `0.1.0` nicht anfassen;
-2. Produktvergleich `0.2.3-prototype` über die installierte Version ersetzen;
-3. danach in der WordPress-Hauptnavigation auf **Produktvergleich** klicken;
-4. `PV-REG-001 als Draft testen` einmal klicken;
-5. Draft öffnen und gemeinsam prüfen; nichts veröffentlichen.
+2. Produktvergleich `0.2.4-prototype` über die installierte Version ersetzen;
+3. WordPress neu laden;
+4. links in der Hauptnavigation muss **Produktvergleich** sichtbar sein;
+5. dort `PV-REG-001 als Draft testen` einmal klicken;
+6. Draft öffnen und gemeinsam prüfen; nichts veröffentlichen.
 
 ## Globale Arbeitsort-Sperre
 
