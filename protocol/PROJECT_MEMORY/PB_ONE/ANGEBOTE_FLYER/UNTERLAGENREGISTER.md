@@ -5,7 +5,7 @@ ROLLE: INDEX
 
 ## Zweck
 
-Index der erstellten und freigegebenen PB-ONE-Angebots-/Flyerunterlagen.
+Index der erstellten und freigegebenen PB-ONE-Präsentations-, Werbe-, Angebots-, Flyer- und Leistungsunterlagen.
 
 Keine zweite Inhaltswahrheit.
 
