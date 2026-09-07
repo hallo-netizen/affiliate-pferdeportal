@@ -989,3 +989,23 @@ WARUM:
 Diese Themen greifen operativ ineinander. Eigene Fächer nur für „Lead Management“ oder „Onboarding“ wären zu kleinteilig und würden Zusammenhänge zerreißen.
 GRENZE:
 LeadScout selbst bleibt im Plugin-Fach; Preise bleiben im Preis-Fach; Verkaufsunterlagen bleiben im Bereich Präsentation & Werbung.
+
+
+## PV-PLAN-014 – Reale Vergleichskategorien sind flach gebunden
+
+STAND: 2026-09-07.
+
+BEFUND:
+Der frühere Produktvergleichs-Prototyp nahm für WordPress eine echte Taxonomie-Unterkategorie an. Die reale Pferde-Atelier-Redaktionsstruktur belegt dagegen für Vergleich Regendecken: Term-ID 11, Slug `pferdedecken-regendecken-vergleich`, Parent 0.
+
+KORREKTUR:
+Universal Product Comparison wird auf `0.2.1-prototype` angehoben. Kategoriebindungen prüfen exakt Term-ID (wenn gebunden), Name, Slug und erwartete Parent-ID. Bestehende Live-Kategorien mit fixer Term-ID dürfen nicht automatisch neu erzeugt werden.
+
+KISS:
+Kein Kategorienumbau und keine neue WordPress-Struktur. Produkt- und Variantenvergleiche nutzen die bereits bestehende redaktionelle `Vergleich …`-Kategorie.
+
+BELEG:
+Run 34141063395 PASS; flache Kategorie positiv PASS; falscher Parent korrekt BLOCKED; ZIP-Installation/Aktivierung und vollständiger Real-Smoke PASS. Temporärer Workflow danach entfernt; Hardlock auf bereinigtem Branch PASS.
+
+LIVE-GRENZE:
+Beim Nutzer kann 0.2.0 bis zum manuellen Ersatz installiert bleiben, weil keine automatische Artikelproduktion/Veröffentlichung ausgelöst wird. Für den nächsten echten Test ist ausschließlich 0.2.1 freigegeben.
