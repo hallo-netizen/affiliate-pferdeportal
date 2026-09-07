@@ -50,6 +50,9 @@ Zusätzlich Control-/Veto-Ebenen und Notabschaltung.
 
 ## NEXT ACTION – NUR DIESER WEG
 
+0. Schnellprüfung ohne Docker, sobald ein Repo-Checkout vorhanden ist:
+   `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`
+
 1. Gebundenen Hobbyraum-Test real ausführen:
    `AFFILIATE_HOBBYRAUM/TASK.current.json`
    inklusive `php test_otto_automation.php`.
@@ -88,7 +91,7 @@ Kein Exact Match = keine Karte.
 
 ## BANNERQUELLEN-GRENZE
 
-Zuordnung und Anteilssystem sind strukturell vorhanden.
+Zuordnung, Anteilssystem, 0-Anteil-Sperre, Mehrfachplatz-Deduplizierung und manuelle Reparatur sind strukturell vorhanden.
 
 Beschaffung ist erst vollständig automatisiert, wenn ein realer maschinenlesbarer OTTO/Awin-Creative-Weg belegt ist.
 
@@ -112,3 +115,16 @@ WordPress-Livebeleg: 6.72.2
 Vor Release auflösen.
 
 Digistore24 bleibt zurückgestellt.
+
+
+## REALER BANNERQUELLEN-ANSCHLUSS
+
+Technische Anschlussstelle:
+`ppar_affiliate_awin_static_creatives`
+
+Nur reale Bannerzeilen:
+Advertiser-ID + Creative-ID + Titel + Bild + Tracking.
+
+Ungebunden → vorhandene Banner bleiben erhalten.
+Gebunden und leer → `['bound'=>true,'rows'=>[]]` erlaubt kontrollierte Reconciliation.
+Kein erfundener Awin-API-Weg.
