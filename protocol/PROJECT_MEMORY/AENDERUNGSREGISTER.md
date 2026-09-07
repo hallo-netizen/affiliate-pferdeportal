@@ -1132,3 +1132,17 @@ PR #142 / Run 34111825722 SUCCESS; Zero-Freedom Static Guard PASS; 100/100 byte-
 
 LEITSATZ:
 **Nicht der Writer schreibt den Artikel. Der Vertrag schreibt den Artikel.**
+
+
+## PV-PLAN-013 – WordPress-Draft bleibt reine Materialisierung des gebundenen Outputs
+
+STAND: 2026-09-07.
+
+REGEL:
+WordPress erhält keinen freien Titel, Body oder Kategorieparameter. Die Draft-Schicht akzeptiert nur Vergleichs-ID + gebundenes Projekt + gebundene Ruleset-ID und ruft intern den Zero-Freedom-Single-Door-Prozess auf.
+
+PASS:
+Run 34112287717 SUCCESS; Draft-Body byte-identisch zum validierten Renderer-HTML; Golden Output erhalten; kein Publish; keine Dublette bei Wiederholung; manipulierte Publishing-Konfiguration BLOCKED; Faktenänderung kann die Draft-Schicht nicht umgehen.
+
+KISS:
+Keine zweite Textlogik in WordPress. WordPress materialisiert nur bereits vollständig validierten Output.
