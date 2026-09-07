@@ -1,67 +1,64 @@
 # BÜRO PRODUKTVERGLEICH
 
-STAND: 2026-09-06
+STAND: 2026-09-07
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das Fachbüro für Produktvergleichs-Konzept, Recherchegrundlage, Vergleichseigenschaften und konkrete Vergleichsdefinitionen des Pferde-Ateliers.
+Das Fachbüro für Produktwissen, konkrete Produkt-/Variantenvergleiche und deren deterministische WordPress-DRAFT-Produktion.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du Produktvergleiche planen, konkrete Vergleichspaare/-gruppen festlegen, harte Vergleichsmerkmale definieren oder belastbare Faktengrundlagen/Quellen für einen Produktvergleich vorbereiten willst.
+du Vergleichspaare/-gruppen, Herstellerfakten, Vergleichsregeln, Produktvergleichsartikel, Variantenvergleiche, Vergleichsarchiv oder den gebundenen Draftweg bearbeiten willst.
 
 **DU DARFST …**  
-Produktvergleichs-Aufträge strukturieren, Vergleichskriterien und Faktendossiers an autoritative Quellen binden und eine saubere Übergabe an die TEXT-/Produktionsmaschine vorbereiten.
+im gebundenen Produktvergleichs-Hobbyraum Produktwissen-/Vergleichsbausteine entwickeln, testen und als WordPress-DRAFT materialisieren.
 
 **DU DARFST NICHT …**  
-den aktuellen TEXT-/SEO-Produktionsworkflow ersetzen, Produktdaten erfinden, Wertungen als Fakten ausgeben, bestehende Fachregeln anderer Büros ändern oder aus dem Betreten des Büros Schreibrechte ableiten.
+STARTMASTER/TEXT verändern, Produktfakten erfinden, Writer-Freiheit hinzufügen, Affiliate-/SEO-Daten zur fachlichen Wahrheit machen oder automatisch veröffentlichen.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → gebundene Originalquellen/Arbeitsweg.
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → über Fehler-/Zielregister zu den autoritativen Originalquellen.
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
 
 - **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
 - **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
-- **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Fehlerquelle
-- **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
-- **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+- **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Produktvergleichs-Fehlerquelle
+- **ZIEL:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → autoritativer Produktvergleichs-Zielvertrag
+- **WARUM:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **PROTOKOLL:** `PROTOKOLL_20260907.md`
+- **HISTORIE:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 
-**Regel:** Diese Bürotür führt keine zweite aktuelle Produktvergleichs-, Fehler-, Ziel- oder Produktionswahrheit.
+Diese Bürotür enthält keine zweite aktuelle Fehler-, Ziel- oder Statuswahrheit.
 
 ## Harte Fachgrenze zu TEXT
 
-**PRODUKTVERGLEICH** verantwortet:
-- Vergleichsgegenstand / Vergleichsdefinition;
-- Vergleichseigenschaften;
-- Recherche-/Faktengrundlage;
-- Quellenbindung;
-- strukturierte Fachübergabe.
+V1 ist eine **eigenständige Produktvergleichsstraße**.
 
-**TEXT** verantwortet weiterhin:
-- eigentliche Textproduktion;
-- bestehenden Textmaschinen-/STARTMASTER-Workflow;
-- dessen technische Regressionen, Gates und Produktionsregeln.
+PRODUKTVERGLEICH verantwortet:
+- Produkt-/Variantenidentität über PRODUKTWISSEN;
+- Vergleichsdefinition und Vergleichsmerkmale;
+- gebundene Rulesets;
+- Zero-Freedom-Renderer;
+- Vergleichs-QA;
+- WordPress-DRAFT;
+- neutrale Vergleichsgrafik;
+- Vergleichsarchiv und interne Vergleichslinks.
 
-Das Produktvergleichsbüro baut **keine zweite Textmaschine**.
+TEXT/STARTMASTER bleibt ein separates System für seine bisherigen Beitragsarten und wird von PRODUKTVERGLEICH V1 **nicht verändert und nicht als Laufzeitabhängigkeit verwendet**.
 
-## Arbeitsfreigabe bei echter Arbeit
+## Arbeitsfreigabe
 
-Vor jeder Änderung:
+Vor technischer Aktion:
 1. `CURRENT_STATE.md`;
 2. `HOBBYRAUM.md`;
 3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
-4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
-5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
-6. aktiven Zielvertrag über `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`;
-7. erst danach gebundene Originalquellen/Arbeitsrolle.
+4. `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → Produktvergleichs-Fehlerquelle;
+5. `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
+6. `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Produktvergleichs-Zielvertrag.
 
-Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
+Treffer in der Fehlerquelle = bekannten Fehlerweg nicht erneut ausprobieren.
 
 ## Globale Arbeitsort-Sperre
 
-**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
-
-Autorität:
-`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.
