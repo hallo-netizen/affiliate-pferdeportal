@@ -1,0 +1,123 @@
+name: Product Comparison Main Nav TEMP
+
+on:
+  push:
+    branches:
+      - hobbyroom/productwissen-v1-prototype
+    paths:
+      - '.github/workflows/productvergleich-mainnav-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  main-nav-smoke:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wp_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install WP-CLI and WordPress
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          mkdir -p /tmp/upc-wp
+          wp core download --path=/tmp/upc-wp --quiet
+          wp config create --path=/tmp/upc-wp --dbname=wp_test --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
+          wp core install --path=/tmp/upc-wp --url=http://example.test --title='UPC Main Nav' --admin_user=admin --admin_password='test-password' --admin_email=admin@example.test --skip-email --quiet
+
+      - name: Build clean user ZIPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/upc-build /tmp/upk-build
+          mkdir -p /tmp/upc-build/universal-product-comparison/config/pferde-atelier
+          cp universal-product-comparison/universal-product-comparison.php /tmp/upc-build/universal-product-comparison/
+          cp -a universal-product-comparison/src /tmp/upc-build/universal-product-comparison/
+          cp -a universal-product-comparison/assets /tmp/upc-build/universal-product-comparison/
+          cp universal-product-comparison/config/pferde-atelier/publishing.json /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+          cp universal-product-comparison/config/pferde-atelier/project-manifest.json /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+          cp universal-product-comparison/config/pferde-atelier/pv-reg-001.json /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+          cp -a universal-product-comparison/config/pferde-atelier/rulesets /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+
+          mkdir -p /tmp/upk-build
+          cp -a universal-product-knowledge /tmp/upk-build/universal-product-knowledge
+          rm -rf /tmp/upk-build/universal-product-knowledge/tests
+
+          (cd /tmp/upc-build && zip -qr /tmp/universal-product-comparison.zip universal-product-comparison)
+          (cd /tmp/upk-build && zip -qr /tmp/universal-product-knowledge.zip universal-product-knowledge)
+
+          ! unzip -Z1 /tmp/universal-product-comparison.zip | grep -E 'test-project|/tests/|protocol/|\.git'
+          unzip -p /tmp/universal-product-comparison.zip universal-product-comparison/universal-product-comparison.php | grep -F 'Version: 0.2.3-prototype'
+          echo UPC_023_CLEAN_ZIP_PASS
+
+      - name: Install clean ZIPs
+        run: |
+          wp plugin install /tmp/universal-product-knowledge.zip --activate --path=/tmp/upc-wp
+          wp plugin install /tmp/universal-product-comparison.zip --activate --path=/tmp/upc-wp
+          echo UPC_023_INSTALL_PASS
+
+      - name: Verify top-level admin menu
+        run: |
+          cat > /tmp/check-menu.php <<'PHP'
+          <?php
+          global $menu, $submenu;
+          $menu = array();
+          $submenu = array();
+          UPC_First_Draft_Test::register_menu();
+
+          $top = array_values(array_filter($menu, function($row){
+              return isset($row[2]) && 'upc-first-draft-test' === $row[2];
+          }));
+
+          if (1 !== count($top)) {
+              fwrite(STDERR, "FAIL: top-level menu missing or duplicated\n");
+              exit(1);
+          }
+          if ('Produktvergleich' !== wp_strip_all_tags($top[0][0])) {
+              fwrite(STDERR, "FAIL: wrong top-level menu label\n");
+              exit(1);
+          }
+
+          foreach ($submenu as $parent => $rows) {
+              foreach ((array)$rows as $row) {
+                  if (isset($row[2]) && 'upc-first-draft-test' === $row[2] && 'tools.php' === $parent) {
+                      fwrite(STDERR, "FAIL: menu still nested under tools\n");
+                      exit(1);
+                  }
+              }
+          }
+
+          echo "UPC_MAIN_NAV_TOP_LEVEL_PASS\n";
+          PHP
+          wp eval-file /tmp/check-menu.php --path=/tmp/upc-wp
+
+      - name: Attach first-draft test
+        run: |
+          mkdir -p /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests
+          cp universal-product-comparison/tests/wp-first-real-draft.php /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/
+
+      - name: Verify first draft still PASS
+        run: |
+          wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-first-real-draft.php --path=/tmp/upc-wp
+
+      - name: Upload replacement ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-product-comparison-0.2.3-prototype
+          path: /tmp/universal-product-comparison.zip
+          if-no-files-found: error
+          retention-days: 7
