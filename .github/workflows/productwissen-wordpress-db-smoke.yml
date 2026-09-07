@@ -64,4 +64,4 @@ jobs:
 
       - name: Real WordPress + MySQL readback
         run: |
-          wp eval-file wp-content/plugins/universal-product-knowledge/tests/wp-db-smoke.php --path=/tmp/upk-wp
+          wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-knowledge/tests/wp-db-smoke.php --path=/tmp/upk-wp
