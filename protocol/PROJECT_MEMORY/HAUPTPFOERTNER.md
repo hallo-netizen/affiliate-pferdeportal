@@ -144,3 +144,18 @@ Wenn der Auftrag dagegen die eigentliche Textproduktion oder den STARTMASTER-/Te
 `PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md`
 
 Nicht vermischen.
+
+
+## PB ONE – Agenturzentrale
+
+Wenn der Nutzer Agenturideen, Angebote, Flyer, Positionierung oder Vorhaben **vor** konkreter Projektumsetzung bearbeiten will:
+
+`protocol/PROJECT_MEMORY/PB_ONE/START_HERE.md`
+
+Routing:
+- Angebot/Flyer/Leistungsunterlage → `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
+- Idee entwickeln / Paul als Sparringspartner → `PB_ONE/IDEENWERKSTATT/START_HERE.md`
+
+Harte Grenze:
+PB ONE programmiert nicht.
+Technische/fachliche Umsetzung wird bewusst an das zuständige Projekt-/Fachbüro übergeben.

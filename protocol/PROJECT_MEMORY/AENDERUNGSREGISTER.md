@@ -873,3 +873,24 @@ Provision, Angebotsdichte oder kurzfristige Händlerverfügbarkeit dürfen niema
 
 LEITSATZ:
 **Affiliate darf entdecken. Produktrecherche entscheidet. Affiliate monetarisiert.**
+
+
+## ARCH-067 – PB ONE ist das zentrale nicht-technische Agenturgebäude
+WAS:
+`protocol/PROJECT_MEMORY/PB_ONE/` wird als zentraler Agenturknoten des Campus eingerichtet.
+WARUM:
+Die Agentur PB ONE ist der organisatorische Mittelpunkt hinter mehreren Projekten. Ideen, Angebote und Unterlagen sollen projektübergreifend auffindbar sein, ohne Pferde-Atelier zum Mittelpunkt des gesamten Campus zu machen.
+GRENZE:
+Keine Programmierung in PB ONE. Operative Fach-/Technikarbeit wird an Projekt-/Fachbüros übergeben.
+START:
+Zwei Bereiche: `ANGEBOTE_FLYER` und `IDEENWERKSTATT`.
+
+## ARCH-068 – Paul darf in PB ONE als nicht-technischer Sparringspartner mitdenken
+WAS:
+Neben der technischen WORKER-Rolle existiert in der PB-ONE-Ideenwerkstatt ein reiner SPARRING-Modus.
+WARUM:
+Der Nutzer möchte mit Paul Ideen entwickeln, ohne daraus automatisch Branch-, Scope- oder Programmierarbeit zu machen.
+GRENZE:
+SPARRING = lesen/denken/kritisieren. Kein `paul/*`, kein WRITE_SCOPE, keine Programmierung, kein PROJECT_MEMORY-Write.
+ÜBERGABE:
+Erst eine bewusste Übergabe in ein Projekt-/Fachbüro kann einen separaten technischen Auftrag erzeugen.

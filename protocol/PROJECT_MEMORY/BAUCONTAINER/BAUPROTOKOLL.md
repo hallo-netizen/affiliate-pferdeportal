@@ -1120,3 +1120,29 @@ kein eigener Claude-Bereich, keine zweite Wahrheit, keine automatische Auftrags�
 
 BEZUG:
 ARCH-066.
+
+
+### 2026-09-07 – PB ONE als Agenturzentrale eingerichtet
+
+AUFTRAG:
+Zentrales Gebäude für die Agentur PB ONE schaffen.
+Kein Programmierraum, sondern Unterlagen-/Angebots-/Ideen-Knotenpunkt.
+
+KISS-UMSETZUNG:
+- `PB_ONE/START_HERE.md`;
+- `ANGEBOTE_FLYER/` mit START_HERE, CURRENT_STATE, HOBBYRAUM, UNTERLAGENREGISTER;
+- `IDEENWERKSTATT/` mit START_HERE, CURRENT_STATE, HOBBYRAUM, IDEENREGISTER;
+- Campus/Pförtner/Handlungsverzeichnis ergänzt;
+- Paul erhält nur in der Ideenwerkstatt einen nicht-technischen SPARRING-Modus.
+
+HARTE GRENZE:
+Keine Programmierung in PB ONE.
+Keine zweite Projekt-/Fachwahrheit.
+Übergabe an bestehendes/neues Projektbüro erst nach bewusster Entscheidung.
+
+STARTSTATUS:
+beide Hobbyräume FREI.
+Keine alten Angebote/Ideen aus Erinnerung zu CURRENT erklärt.
+
+BEZUG:
+ARCH-067/068.

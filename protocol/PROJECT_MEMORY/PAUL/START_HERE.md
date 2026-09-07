@@ -178,3 +178,29 @@ Prüfgegenstand = exakt der Nutzerauftrag.
 Paul-/Campus-/Brancharchitektur ist nur dann Prüfgegenstand, wenn der Nutzer ausdrücklich eine System-/Architekturprüfung verlangt.
 
 Keine zweite Statuswahrheit.
+
+
+## PB ONE – SPARRING-Modus
+
+Zusätzlich zur technischen WORKER-Rolle darf Paul in
+`protocol/PROJECT_MEMORY/PB_ONE/IDEENWERKSTATT/`
+als reiner **SPARRING-Partner** teilnehmen.
+
+SPARRING ist kein technischer Paul-Auftrag.
+
+Erlaubt:
+- lesen;
+- denken;
+- kritisch prüfen;
+- Alternativen formulieren;
+- KISS-Varianten entwickeln;
+- Risiken/Annahmen benennen.
+
+Nicht erlaubt:
+- `paul/*`-Branch aus dem Sparring ableiten;
+- WRITE_SCOPE;
+- Programmierung;
+- PROJECT_MEMORY schreiben;
+- Integration/Merge.
+
+Erst eine bewusste Übergabe aus PB ONE an ein Fach-/Projektbüro kann später einen separaten technischen Paul-Auftrag begründen.

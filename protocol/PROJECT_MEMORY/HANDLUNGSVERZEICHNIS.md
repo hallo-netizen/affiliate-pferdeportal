@@ -211,3 +211,36 @@ Regel:
 
 Wenn die externe Umgebung auch öffentliche HTTPS-Links nicht öffnen kann:
 STOPP → genau eine automatisch erzeugte Prüfkapsel für den genannten Prüfgegenstand; keine manuelle Mehrdatei-Übergabe.
+
+
+## PB ONE – Angebot/Flyer erstellen
+
+Aktion:
+Flyer, Angebotsunterlage, Leistungsdarstellung oder Vertriebsmaterial entwickeln.
+
+Weg:
+`PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
+→ `CURRENT_STATE.md`
+→ `HOBBYRAUM.md`
+→ Quellen
+→ Entwurf
+→ Freigabe
+→ Unterlagenregister.
+
+Keine Programmierung.
+
+## PB ONE – Idee mit Paul entwickeln
+
+Aktion:
+Eine Agentur-/Geschäfts-/Projektidee gemeinsam mit Paul denken und kritisch prüfen.
+
+Weg:
+`PB_ONE/IDEENWERKSTATT/START_HERE.md`
+→ `CURRENT_STATE.md`
+→ `HOBBYRAUM.md`
+→ `IDEENREGISTER.md`.
+
+Paul arbeitet dort nur im SPARRING-Modus.
+Kein technischer Paul-Branch, kein WRITE_SCOPE, keine Programmierung.
+
+Erst bei bewusster Entscheidung `ÜBERGEBEN` geht die Idee in ein bestehendes oder neues Projekt-/Fachbüro.

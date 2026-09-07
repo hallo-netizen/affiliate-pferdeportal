@@ -26,6 +26,9 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 
 - `Hauptpförtner.`
 - `Geh auf den Campus.`
+- `Geh zu PB ONE.`
+- `Geh zu PB ONE in die Ideenwerkstatt.`
+- `Geh zu PB ONE, Angebote/Flyer.`
 - `Geh ins Pferde-Atelier.`
 - `Geh ins Pferde-Atelier, Büro TEXT/SEO.`
 - `Geh ins Pferde-Atelier, Büro PRODUKTVERGLEICH.`
