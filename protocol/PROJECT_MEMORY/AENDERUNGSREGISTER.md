@@ -965,3 +965,27 @@ REGEL:
 Das TODO-Fach hält nur offene Punkte und Verweise. Sobald Preise, Verträge, Prozesse oder technische Stände entschieden sind, liegt die autoritative Wahrheit an der jeweils zuständigen Hauptquelle.
 ERSTE AKTE:
 `TODO/VERTRIEB_STARTKLAR_20260907.md`.
+
+## ARCH-075 – PB ONE erhält Preis-Fach
+WAS:
+`PB_ONE/AKTENSCHRANK/PREISE/` wird als dauerhafter Ort für Preis-, Paket- und Baukastenkonzepte eingerichtet.
+WARUM:
+Preise sind ein wiederkehrender geschäftlicher Kernbereich und dürfen nicht dauerhaft nur in einer TODO-Liste liegen.
+REGEL:
+Entwurf und verbindlicher Preis müssen klar getrennt sein.
+
+## ARCH-076 – Präsentation & Werbung nutzt bestehenden Angebote/Flyer-Raum
+WAS:
+Der bestehende Bereich `PB_ONE/ANGEBOTE_FLYER/` wird funktional und an der Tür zu „Präsentation & Werbung / Angebote & Flyer“ erweitert.
+WARUM:
+Präsentationen, Pitch, Musterseiten, Werbung, Flyer und Angebotsunterlagen gehören fachlich zusammen. Ein zweiter paralleler Raum würde dieselben Unterlagen doppelt verwalten.
+KISS:
+Pfad bleibt stabil; Funktion und Beschilderung werden erweitert.
+
+## ARCH-077 – Vertriebs-Fach bündelt Abläufe und Lead-Management
+WAS:
+`PB_ONE/AKTENSCHRANK/VERTRIEB/` wird als dauerhafter Ort für Vertriebsprozesse, Kundendaten-Schnittstellen, Angebotsablauf, Sonderfälle, Onboarding und Lead-Management eingerichtet.
+WARUM:
+Diese Themen greifen operativ ineinander. Eigene Fächer nur für „Lead Management“ oder „Onboarding“ wären zu kleinteilig und würden Zusammenhänge zerreißen.
+GRENZE:
+LeadScout selbst bleibt im Plugin-Fach; Preise bleiben im Preis-Fach; Verkaufsunterlagen bleiben im Bereich Präsentation & Werbung.
