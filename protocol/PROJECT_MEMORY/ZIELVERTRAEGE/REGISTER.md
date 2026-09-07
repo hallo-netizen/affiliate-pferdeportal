@@ -112,3 +112,30 @@ Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
 
 NACHFOLGER:
 keiner belegt.
+
+
+## ZV-PV-001 – Produktvergleich V1
+
+TITEL:
+Deterministische Produktvergleichsstraße V1
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / PRODUKTVERGLEICH + allgemeingültiger Produktvergleichskern
+
+STATUS:
+AKTIV
+
+FASSUNG:
+V1 / 2026-09-07
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/ZIELVERTRAG_V1.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Aus der Hauptquelle lesen.
+
+NACHFOLGER:
+keiner belegt.
