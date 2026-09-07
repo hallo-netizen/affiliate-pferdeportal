@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 14,
+  "generation": 15,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -256,9 +256,9 @@
       "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "otto_awin_automated_product_distribution": {
-      "status": "STATIC_CURRENT_SOURCE_PASS_BOUND_RUN_PENDING_REAL_OTTO_DATA",
+      "status": "STATIC_CURRENT_SOURCE_PASS_LOCAL_BEHAVIOR_PASS_BOUND_DIRECT_RUN_READY_REAL_OTTO_DATA_PENDING",
       "evidence_ref": "release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt",
-      "evidence_sha256": "6ec2b984bebdacb889297a5e213b0165977d678ef9b2b8d0c1cb93bdcf745949",
+      "evidence_sha256": "35ff83f89e1d5a694aaa942e312b46e5b6d2b4c7faeba98658bd69c44aa8dfa9",
       "source_manifest_sha256": "b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4"
     },
     "otto_awin_real_banner_source": {
