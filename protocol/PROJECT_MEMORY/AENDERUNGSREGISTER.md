@@ -1199,7 +1199,7 @@ FEHLERBEZUG:
 ## DESIGN-ORDER-001 – Kategorieebene: Orientierung vor Vertiefung
 
 STAND:
-2026-09-07 / KANDIDAT V1.50.473 / NOCH NICHT LIVE.
+2026-09-07 / V1.50.473 REJECTED NACH REALER NUTZERPRÜFUNG.
 
 WAS:
 Auf der zentral gesteuerten Pferde-Atelier-Kategorieebene wird die Ausgabereihenfolge geändert zu:
@@ -1238,3 +1238,28 @@ Affiliate darf den Brückenkandidaten nicht selbst in den offiziellen Produktwis
 
 STATUS:
 STATIC CONTRACT PASS / PRODUKTVERGLEICH-INTEGRATION + E2E OFFEN.
+
+
+## DESIGN-ORDER-002 – Korrigierter Kandidat direkt aus V1.50.472
+
+STAND:
+2026-09-07 / V1.50.474 HARD LOCAL PASS / NOCH NICHT LIVE.
+
+WAS:
+Nach dem Fehlversuch V1.50.473 wurde nicht weitergepatcht. V1.50.474 wurde frisch aus dem exakten archivierten V1.50.472-Vorgänger gebaut.
+
+REIHENFOLGE:
+`H1 + kurzer Lead -> Unterkategorie-/Beitragsart-Verweise -> bestehende Artikel-Fortsetzung -> Beitragsvorschau -> Banner -> Produkte -> Direktwerbeplatz`.
+
+KISS:
+Nur `pferde-template-kit.php` ist verändert. Alle übrigen 497 Paketdateien bleiben byte-identisch.
+
+HARD LOCAL:
+Positiv-/Negativprüfung, PHP-Lint, V104-Parität, CSS-Parität und 498/498 ZIP-Readback PASS.
+
+WARUM:
+V1.50.473 hatte den bestehenden Introblock zu grob umgebaut. V1.50.474 trennt nur den bereits vorhandenen kurzen Lead von der vorhandenen Fortsetzung und sortiert ausschließlich die gewünschten Blöcke.
+
+BELEG:
+`fix/category-content-order-v150474-20260907`
+`design-baseline/2026-09-07/v150474-category-content-order/`
