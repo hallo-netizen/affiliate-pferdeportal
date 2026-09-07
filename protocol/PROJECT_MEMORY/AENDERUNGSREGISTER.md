@@ -1048,3 +1048,25 @@ ZIP:
 `universal-product-comparison-0.2.2-prototype.zip`
 SHA-256:
 `683828e03bd4949aa022ccd25fa62ae7ede105ef3921db2e6d0899b66bf29c67`
+
+
+## PV-PLAN-017 – Produktvergleich erhält eigenen WordPress-Hauptmenüpunkt
+
+STAND: 2026-09-07.
+
+WAS:
+Der Produktvergleich-Test wird ab Version 0.2.3 als eigener Top-Level-Menüpunkt `Produktvergleich` in der WordPress-Hauptnavigation geführt.
+
+WARUM:
+Der Bereich ist ein eigenständiges Fachmodul und soll nicht unter `Werkzeuge` versteckt sein.
+
+KISS:
+Nur Menüposition geändert. Keine Änderung an Writer, Fakten, Import, Kategoriebindung oder Publish-Sperre.
+
+BELEG:
+Run 34153930934 PASS; Top-Level-Menü exakt einmal vorhanden; nicht unter Werkzeuge; gebundener Erst-Draft weiterhin PASS.
+
+ZIP:
+`universal-product-comparison-0.2.3-prototype.zip`
+SHA-256:
+`9b9a3c86fd2c7d82ce60a49d62df0506e223bf6c457b95a4ace7e4c61a9d1efd`
