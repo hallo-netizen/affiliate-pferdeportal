@@ -28,6 +28,7 @@ require_once __DIR__ . '/src/class-upc-seo-signals.php';
 require_once __DIR__ . '/src/class-upc-link-manifest.php';
 require_once __DIR__ . '/src/class-upc-link-finalizer.php';
 require_once __DIR__ . '/src/class-upc-comparison-graphic.php';
+require_once __DIR__ . '/src/class-upc-article-finalizer.php';
 require_once __DIR__ . '/src/class-upc-archive.php';
 
 function upc_dependency_ready() {
@@ -141,6 +142,23 @@ function upc_finalize_internal_links( $comparison_id, $project_key, $ruleset_id 
     }
     $finalizer = new UPC_Link_Finalizer( $production, $repository );
     return $finalizer->finalize( $comparison_id, $project_key, $ruleset_id );
+}
+
+function upc_finalize_article( $comparison_id, $project_key, $ruleset_id ) {
+    $repository = upc_repository();
+    $production = upc_production();
+    if ( is_wp_error( $repository ) ) {
+        return $repository;
+    }
+    if ( is_wp_error( $production ) ) {
+        return $production;
+    }
+
+    $links   = new UPC_Link_Finalizer( $production, $repository );
+    $graphic = new UPC_Comparison_Graphic( $repository );
+    $final   = new UPC_Article_Finalizer( $links, $graphic );
+
+    return $final->finalize( $comparison_id, $project_key, $ruleset_id );
 }
 
 function upc_archive() {
