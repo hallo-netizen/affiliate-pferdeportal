@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: GOLDMASTER-REPARATURKONZEPT EINGEFROREN / BASELINE-REALTEST LÄUFT
+STATUS: GOLDMASTER-REPARATURKONZEPT EINGEFROREN / B02 HISTORISCHER EINZELKANDIDAT
 
 ## AUTORITÄT
 
@@ -42,7 +42,7 @@ Damit ist kein neuer technischer Reparaturkandidat freigegeben.
 ## AKTUELLE NEXT ACTION
 
 Ausschließlich:
-**den bereits gestarteten echten 7/7-Goldmaster-Baseline-Lauf auf current main auswerten.**
+**den exakt historischen B02-Worker-Binding-Kandidaten prüfen und danach real testen.**
 
 Bis zum Ergebnis:
 - keine Reparatur;
@@ -63,3 +63,32 @@ Unverändert:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
 
 Kein Auto-Publish.
+
+
+## BASELINE-REALTEST – ERGEBNIS
+
+Erster echter Blocker:
+`BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
+
+Erreicht:
+- Cloud Entry PASS
+- Production Preflight PASS
+- Runtime Entry PASS
+- Current Action READY
+- Single Door READY
+
+Nicht erreicht:
+- 107007 Abschluss
+- 107008
+
+Keine Codeänderung im Test, kein Publish.
+
+## B02 – NÄCHSTER EINZELDELTA
+
+Historisch bereits bewiesener Fix:
+`c8a96e7a2f598de69134d90b143257c3559bc98a`
+
+Aktueller Kandidat:
+`75c9c8a9a2c16b604b2b21aa4253fe20131ff37f`
+
+Genau vier zusammengehörige Dateien. Kein weiterer Fix parallel.
