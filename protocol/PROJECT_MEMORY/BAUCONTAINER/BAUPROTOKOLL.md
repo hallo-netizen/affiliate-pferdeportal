@@ -1271,3 +1271,21 @@ Technische Version/Release/LIVE-Wahrheit bleibt im WORDPRESS_REGISTER, MODULREGI
 
 BEZUG:
 ARCH-072/073.
+
+### 2026-09-07 – PB-ONE-TODO-Fach für Vertriebsbereitschaft ergänzt
+
+ANLASS:
+Der Nutzer benötigt eine dauerhaft auffindbare Liste der noch fehlenden Grundlagen, damit der PB-ONE-Vertrieb direkt arbeitsfähig wird.
+
+UMSETZUNG:
+- `PB_ONE/AKTENSCHRANK/TODO/START_HERE.md` angelegt;
+- `VERTRIEB_STARTKLAR_20260907.md` mit offenen Punkten zu Produkten/Preisen, operativen Abläufen, Lead Management und Verkaufsunterlagen angelegt;
+- PB-ONE-Aktenschrank und Register auf das neue Fach ausgeschildert;
+- keine Preis-, Vertrags-, Prozess- oder technische Wahrheit im TODO-Fach erfunden.
+
+EINE-WAHRHEIT-REGEL:
+TODO = offene Punkte / Entscheidungsübersicht.
+Entschiedene Inhalte werden später an ihren autoritativen Hauptquellen gepflegt.
+
+BEZUG:
+ARCH-074.
