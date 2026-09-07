@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / B02-KANDIDAT FREIGEGEBEN
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -14,17 +14,17 @@ Es gibt **kein alternatives Reparaturkonzept** und keinen parallelen Reparaturpf
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_ALLOWED_FOR_CODEX_TEST
+STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
 MAIN_SHA: 72dc4ad3d6898b23f1a7dda24427eef8a06fe2c5
 ACTIVE_BLOCKER: BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING
-PLAN_PHASE: REAPPLY_HISTORICAL_B02_WORKER_BINDING
+PLAN_PHASE: B02_CURRENT_PORT_ANALYSIS
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: hobbyroom/b02-historical-worker-binding-20260907
-CANDIDATE_HEAD_SHA: 75c9c8a9a2c16b604b2b21aa4253fe20131ff37f
+CANDIDATE_BRANCH: NONE
+CANDIDATE_HEAD_SHA: NONE
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: control/single-door-boundary/codex_current_action.py;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
+ALLOWED_PATH_PREFIXES: NONE
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -32,7 +32,7 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
-INTEGRATION_ALLOWED: true
+INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -161,3 +161,24 @@ Verbot:
 
 Nach Merge zwingend sofort echter 7/7-Realtest.
 Bei FAIL dieses Deltas: vollständiger Rückbau des gesamten B02-Blocks, kein Fix darauf.
+
+
+## B02-KANDIDAT #152 – VERWORFEN
+
+Kandidat:
+`75c9c8a9a2c16b604b2b21aa4253fe20131ff37f`
+
+Ergebnis:
+- nicht gemergt;
+- normaler hardlock FAIL;
+- hardlock-base FAIL;
+- erster Fehler in beiden: `INPUT_HASH_MISMATCH:1:control/output-quarantine/runtime_entry_gate.py`.
+
+Ursache:
+Der komplette historische B02-Dateisnapshot enthielt einen alten Hash des damaligen `runtime_entry_gate.py` und ist deshalb nicht unverändert auf den heutigen Goldmaster-Hybridstand übertragbar.
+
+HARD RULE angewendet:
+- #152 geschlossen;
+- keine Reparatur auf #152;
+- Kandidat vollständig verworfen;
+- nächster zulässiger Schritt ist nur die Analyse des **eigentlichen historischen B02-Semantik-Deltas** gegen den aktuellen Hash-Stand.
