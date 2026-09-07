@@ -91,7 +91,7 @@ final class PPAR_Partner_Analytics_Admin {
 
     private static function campaign_provider_key($campaign) {
         $network = sanitize_key((string)($campaign['network'] ?? 'manual'));
-        if ($network === 'awin' && absint($campaign['advertiser_id'] ?? 0) === 14336) {
+        if ($network === 'awin' && absint($campaign['advertiser_id'] ?? 0) === PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID) {
             return 'otto';
         }
         $key = $network === 'manual' ? 'direct' : $network;
