@@ -115,7 +115,7 @@ trait PPAR_Automation_Suite_Trait {
             'executor' => 'server_cron',
             'batch_size' => 500,
             'time_budget' => 20,
-            'request_timeout' => 45,
+            'request_timeout' => 600,
         );
     }
 
@@ -129,12 +129,12 @@ trait PPAR_Automation_Suite_Trait {
             'executor' => in_array((string) $merged['executor'], array('server_cron','wp_cron'), true) ? (string) $merged['executor'] : 'server_cron',
             'batch_size' => max(100, min(1000, absint($merged['batch_size']))),
             'time_budget' => max(10, min(25, absint($merged['time_budget']))),
-            'request_timeout' => max(15, min(45, absint($merged['request_timeout']))),
+            'request_timeout' => max(60, min(600, absint($merged['request_timeout']))),
         );
     }
 
     public function maybe_apply_automation_safety_upgrade() {
-        $target = '4.0.0';
+        $target = '4.1.0';
         if ((string) get_option(self::OPTION_AUTOMATION_SAFETY_VERSION, '') === $target) {
             return;
         }
@@ -143,7 +143,7 @@ trait PPAR_Automation_Suite_Trait {
         $settings['executor'] = 'server_cron';
         $settings['batch_size'] = min(500, absint($settings['batch_size']));
         $settings['time_budget'] = min(20, absint($settings['time_budget']));
-        $settings['request_timeout'] = min(45, absint($settings['request_timeout']));
+        $settings['request_timeout'] = max(600, min(600, absint($settings['request_timeout'])));
         update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
         update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
         if (function_exists('wp_clear_scheduled_hook')) {
@@ -204,7 +204,7 @@ trait PPAR_Automation_Suite_Trait {
             'executor' => in_array((string) ($raw['executor'] ?? ''), array('server_cron','wp_cron'), true) ? (string) $raw['executor'] : 'server_cron',
             'batch_size' => max(100, min(1000, absint($raw['batch_size'] ?? 500))),
             'time_budget' => max(10, min(25, absint($raw['time_budget'] ?? 20))),
-            'request_timeout' => max(15, min(45, absint($raw['request_timeout'] ?? 45))),
+            'request_timeout' => max(60, min(600, absint($raw['request_timeout'] ?? 600))),
         );
         update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
         $this->reschedule_automation_cron(true);
@@ -2294,7 +2294,7 @@ trait PPAR_Automation_Suite_Trait {
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_save_settings"><?php wp_nonce_field('ppar_automation_save_settings','ppar_automation_settings_nonce'); ?>
         <p><label><input type="checkbox" name="ppar_automation[enabled]" value="1" <?php checked(!empty($automation_settings['enabled'])); ?>> automatische Synchronisierung aktiv</label></p>
         <p><label>Ausführung <select name="ppar_automation[executor]"><option value="server_cron" <?php selected($automation_settings['executor'],'server_cron'); ?>>Server-Cron / WP-CLI</option><option value="wp_cron" <?php selected($automation_settings['executor'],'wp_cron'); ?>>WP-Cron-Fallback</option></select></label> <label style="margin-left:18px">Rhythmus <select name="ppar_automation[schedule]"><option value="daily" <?php selected($automation_settings['schedule'],'daily'); ?>>täglich</option><option value="twicedaily" <?php selected($automation_settings['schedule'],'twicedaily'); ?>>alle 12 Stunden</option></select></label></p>
-        <p><label>Produkte je Paket <input type="number" min="100" max="1000" step="100" name="ppar_automation[batch_size]" value="<?php echo absint($automation_settings['batch_size']); ?>"></label> <label style="margin-left:18px">Zeitbudget <input type="number" min="10" max="25" name="ppar_automation[time_budget]" value="<?php echo absint($automation_settings['time_budget']); ?>"> s</label> <label style="margin-left:18px">Download-Timeout <input type="number" min="15" max="45" name="ppar_automation[request_timeout]" value="<?php echo absint($automation_settings['request_timeout']); ?>"> s</label></p>
+        <p><label>Produkte je Paket <input type="number" min="100" max="1000" step="100" name="ppar_automation[batch_size]" value="<?php echo absint($automation_settings['batch_size']); ?>"></label> <label style="margin-left:18px">Zeitbudget <input type="number" min="10" max="25" name="ppar_automation[time_budget]" value="<?php echo absint($automation_settings['time_budget']); ?>"> s</label> <label style="margin-left:18px">Download-Timeout <input type="number" min="60" max="600" step="60" name="ppar_automation[request_timeout]" value="<?php echo absint($automation_settings['request_timeout']); ?>"> s</label></p>
         <p><code>wp ppar automation-tick</code></p>
         <?php submit_button('Automatisierung speichern','secondary'); ?></form></section>
         <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-creative-library')); ?>">Werbemittel auswählen</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-preview')); ?>">Vorschau öffnen</a></p>
