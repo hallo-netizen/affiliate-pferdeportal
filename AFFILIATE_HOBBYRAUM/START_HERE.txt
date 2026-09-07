@@ -4,7 +4,7 @@ DIESER RAUM GILT NUR FÜR:
 AFFILIATE_ZENTRALE
 
 STARTREGEL:
-Nutze ausschließlich die im TASK.json freigegebenen Dateien.
+Nutze ausschließlich die im TASK.current.json freigegebenen Dateien.
 Bearbeite genau die eine dort definierte Aufgabe.
 Keine Projekt-Gesamtsuche.
 Keine zusätzlichen Dateien.
@@ -27,9 +27,16 @@ Bei JEDEM neuen Fehler:
 3. erst danach einen einzigen neuen Versuch starten.
 
 Runner:
-python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py TASK.json
+python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py TASK.current.json
 
 Erlaubtes Ergebnis:
 PASS + Patch/Output
 oder
 BLOCKED + exakt ein belegter Fehler
+
+
+Direkter READ-ONLY-Prüfweg ohne Docker/Podman:
+bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh
+
+Dieser Direktweg darf nur lesen/prüfen.
+Er ersetzt keinen WordPress-/MariaDB-Livebeleg und keinen realen OTTO/Awin-Datenlauf.
