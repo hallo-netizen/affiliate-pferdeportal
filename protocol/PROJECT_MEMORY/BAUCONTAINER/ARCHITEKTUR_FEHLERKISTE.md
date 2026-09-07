@@ -721,3 +721,32 @@ Noch kein technischer PB-ONE-Write-Kanal/Hardlock-Ausnahmepfad gebaut oder posit
 
 NICHT ALS PASS MELDEN:
 Erst nach echter schreibfähiger Paul-Anbindung + Positivtest in PB ONE + Negativtest außerhalb PB ONE schließen.
+
+
+## BAU-035 – Masterdateien-Inventar führte veraltete aktuelle Fachwahrheit
+
+STATUS: CLOSED
+
+KURZ:
+Im Affiliate-Büro führte `MASTERDATEIEN_INVENTAR.md` noch einen alten GitHub-Head/Manifest und bezeichnete eine datierte Statusakte vom 05.09.2026 als „aktuellen Statusbeleg“.
+
+AUSWIRKUNG:
+Ein neuer Chat konnte aus dem Inventar einen anderen aktuellen Affiliate-Stand ableiten als aus `CURRENT_STATE.md` und der Release-Governance.
+
+URSACHE:
+Die Ein-Wahrheit-Regel war für START_HERE, CURRENT_STATE, HOBBYRAUM, Fehler- und Zielregister hart formuliert, aber für Masterdateien-Inventare noch nicht ausdrücklich negativ abgesichert.
+
+KISS-FIX:
+- Affiliate-Inventar auf reine Herkunfts-/Belegrolle zurückgeführt;
+- dynamische Head-/Manifest-/Current-Aussagen entfernt;
+- `MASTERDATEIEN_REGEL.md` um harte No-Current-Regel ergänzt;
+- `NEUES_PROJEKT_VORLAGE.md` übernimmt die Negativprüfung für künftige Büros.
+
+POSITIV:
+Inventar bewahrt historische Dateien, Hashes und Live-Belege.
+
+NEGATIV:
+Inventar darf keinen aktuellen Head, kein aktuelles Manifest, keinen aktuellen Blocker und keinen „aktuellen Statusbeleg“ als eigene Wahrheit führen.
+
+BEZUG:
+ARCH-079.
