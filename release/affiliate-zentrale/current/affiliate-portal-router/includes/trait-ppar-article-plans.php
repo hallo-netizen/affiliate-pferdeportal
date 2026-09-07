@@ -432,6 +432,39 @@ trait PPAR_Article_Plans_Trait {
         return false;
     }
 
+    /**
+     * Read-only consumer contract for Productwissen / product comparison.
+     * The producer supplies exact identifiers; Affiliate never reads or writes
+     * the Productwissen database directly.
+     */
+    private function article_plan_exact_product_requirements($post_id, $context) {
+        $raw = apply_filters(
+            'ppar_affiliate_exact_product_requirements',
+            array(),
+            absint($post_id),
+            is_array($context) ? $context : array(),
+            self::ARTICLE_PLAN_SCHEMA
+        );
+        if (!is_array($raw) || !$raw) { return array(); }
+        $out = array();
+        foreach (array_slice(array_values($raw), 0, 20) as $index => $requirement) {
+            if (!is_array($requirement)) { continue; }
+            $identifiers = (array) ($requirement['identifiers'] ?? array());
+            if (!$identifiers && (!empty($requirement['identifier_type']) || !empty($requirement['type']))) {
+                $identifiers[] = array(
+                    'type'=>(string) ($requirement['identifier_type'] ?? $requirement['type'] ?? ''),
+                    'value'=>(string) ($requirement['identifier_value'] ?? $requirement['value'] ?? ''),
+                );
+            }
+            $out[] = array(
+                'subject_id'=>sanitize_text_field((string) ($requirement['subject_id'] ?? '')),
+                'identifiers'=>$this->affiliate_normalize_product_identifiers($identifiers),
+                'position'=>$index + 1,
+            );
+        }
+        return $out;
+    }
+
     private function article_plan_build($post_id, $reason = 'manual') {
         $post_id = absint($post_id);
         $post = get_post($post_id);
@@ -479,35 +512,92 @@ trait PPAR_Article_Plans_Trait {
         $product_ids = array();
         $seen = array();
         $selected_titles = array();
-        foreach ($this->ranked_campaigns_for_slot($context, 'post_bottom_products') as $candidate) {
-            $campaign = $candidate['campaign'] ?? null;
-            if (!is_array($campaign)) {
-                continue;
+        $exact_requirements = $this->article_plan_exact_product_requirements($post_id, $context);
+
+        if ($exact_requirements) {
+            // Exact Productwissen identity wins over generic topic merchandising.
+            // Each requested product is resolved independently. A missing match is
+            // deliberately left empty instead of substituting a similar model.
+            foreach ($exact_requirements as $requirement) {
+                if (count($product_ids) >= 3) { break; }
+                $identifiers = (array) ($requirement['identifiers'] ?? array());
+                if (!$identifiers) {
+                    $reports[] = array(
+                        'campaign_post_id'=>0,
+                        'name'=>sanitize_text_field((string) ($requirement['subject_id'] ?? '')),
+                        'overall'=>'fail',
+                        'checks'=>array('exact_identity'=>'fail'),
+                        'specificity'=>0,
+                        'reason'=>'Exact-Product-Anforderung besitzt keine belastbare Kennung; kein Ersatzprodukt erlaubt.',
+                    );
+                    continue;
+                }
+                $exact_context = $context;
+                $exact_context['exact_product_identifiers'] = $identifiers;
+                $matched = false;
+                foreach ($this->ranked_campaigns_for_slot($exact_context, 'post_bottom_products') as $candidate) {
+                    $campaign = $candidate['campaign'] ?? null;
+                    if (!is_array($campaign)) { continue; }
+                    $report = $this->article_product_quality_report($campaign, $exact_context, $candidate);
+                    $report['checks']['exact_identity'] = 'pass';
+                    $reports[] = $report;
+                    if ($report['overall'] !== 'pass') { continue; }
+                    $dedupe = $this->article_plan_product_dedupe_key($campaign);
+                    if ($dedupe === 'title:' || isset($seen[$dedupe]) || $this->article_plan_product_title_is_near_duplicate($campaign, $selected_titles)) {
+                        continue;
+                    }
+                    $seen[$dedupe] = true;
+                    $selected_titles[] = $this->article_plan_product_title_key($campaign);
+                    $product_ids[] = absint($campaign['post_id'] ?? 0);
+                    $matched = true;
+                    break;
+                }
+                if (!$matched) {
+                    $reports[] = array(
+                        'campaign_post_id'=>0,
+                        'name'=>sanitize_text_field((string) ($requirement['subject_id'] ?? '')),
+                        'overall'=>'warn',
+                        'checks'=>array('exact_identity'=>'pass','exact_offer'=>'missing'),
+                        'specificity'=>1000,
+                        'reason'=>'Kein aktuell freigegebenes Affiliate-Angebot mit identischer Produktkennung; kein Ersatzprodukt eingesetzt.',
+                    );
+                }
             }
-            $report = $this->article_product_quality_report($campaign, $context, $candidate);
-            $reports[] = $report;
-            if ($report['overall'] !== 'pass') {
-                continue;
-            }
-            $dedupe = $this->article_plan_product_dedupe_key($campaign);
-            if ($dedupe === 'title:' || isset($seen[$dedupe]) || $this->article_plan_product_title_is_near_duplicate($campaign, $selected_titles)) {
-                continue;
-            }
-            $seen[$dedupe] = true;
-            $selected_titles[] = $this->article_plan_product_title_key($campaign);
-            $product_ids[] = absint($campaign['post_id'] ?? 0);
-            if (count($product_ids) >= 3) {
-                break;
+        } else {
+            foreach ($this->ranked_campaigns_for_slot($context, 'post_bottom_products') as $candidate) {
+                $campaign = $candidate['campaign'] ?? null;
+                if (!is_array($campaign)) {
+                    continue;
+                }
+                $report = $this->article_product_quality_report($campaign, $context, $candidate);
+                $reports[] = $report;
+                if ($report['overall'] !== 'pass') {
+                    continue;
+                }
+                $dedupe = $this->article_plan_product_dedupe_key($campaign);
+                if ($dedupe === 'title:' || isset($seen[$dedupe]) || $this->article_plan_product_title_is_near_duplicate($campaign, $selected_titles)) {
+                    continue;
+                }
+                $seen[$dedupe] = true;
+                $selected_titles[] = $this->article_plan_product_title_key($campaign);
+                $product_ids[] = absint($campaign['post_id'] ?? 0);
+                if (count($product_ids) >= 3) {
+                    break;
+                }
             }
         }
         $plan['products']['reports'] = array_slice($reports, 0, 20);
         if (!empty($product_ids)) {
             $plan['products']['status'] = 'ready';
             $plan['products']['campaign_post_ids'] = $product_ids;
-            $plan['products']['reason'] = count($product_ids) . ' freigegebene, passende und deduplizierte Produkte.';
+            $plan['products']['reason'] = $exact_requirements
+                ? count($product_ids) . ' exakte Kaufangebote; fehlende Exact Matches wurden nicht ersetzt.'
+                : count($product_ids) . ' freigegebene, passende und deduplizierte Produkte.';
         } else {
             $plan['products']['status'] = 'none';
-            $plan['products']['reason'] = 'Keine Produkte mit PASS-Qualität.';
+            $plan['products']['reason'] = $exact_requirements
+                ? 'Exact-Product-Bindung aktiv; kein identisches freigegebenes Kaufangebot. Kein Ersatzprodukt.'
+                : 'Keine Produkte mit PASS-Qualität.';
         }
 
         $has_banner = $plan['banner']['status'] === 'ready';
