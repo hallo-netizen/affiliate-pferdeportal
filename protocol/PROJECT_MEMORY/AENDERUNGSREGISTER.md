@@ -1323,3 +1323,35 @@ Keine spekulative Integration. Der aktuelle SEO-Installerbestand ist dokumentier
 
 KISS:
 Keine neue SEO-API auf Verdacht, keine Rückkopplung in Writer oder Produktwissen.
+
+
+## DESIGN-SCRIPT-001 – Miniänderungen im DESIGN-Hobbyraum nur noch per Fail-Closed-Runner
+
+STAND:
+2026-09-07 / VERBINDLICH.
+
+WAS:
+Für lokale DESIGN-Miniänderungen wird der manuelle Patchweg gesperrt.
+`MINIMAL_PATCH_RUNNER.py` ist der einzige Arbeitsweg.
+
+WARUM:
+Mehrere Fehlversuche zeigten, dass eine einfache Verschiebung durch Interpretation, zusätzliche Umbauten und unzureichend zielgenaue Prüfungen unnötig vergrößert wurde.
+
+ZWANG:
+- exakte Baseline per SHA;
+- genau eine Paketdatei;
+- nur zwei vollständige benachbarte Bereiche tauschen;
+- keine Inhalts-/CSS-/Markup-/Versionsänderung;
+- automatische Positiv-/Negativprüfung;
+- Reversibilität zum byte-identischen Vorgänger;
+- FAIL = kein Artefakt.
+
+PLUGINHYGIENE:
+Im Hobbyraum nur ein überschreibbarer Kandidat.
+Keine neue Pluginversion pro Fehlversuch.
+Releaseversion erst nach bestätigtem LIVE-PASS.
+
+BELEG:
+`PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_RUNNER.py`
+`PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_JOB_CURRENT.json`
+`PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_LAST_RECEIPT.json`
