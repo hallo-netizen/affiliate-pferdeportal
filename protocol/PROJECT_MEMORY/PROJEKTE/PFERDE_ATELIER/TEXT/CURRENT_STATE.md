@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: GOLDMASTER-REPARATURKONZEPT EINGEFROREN / B02 HISTORISCHER EINZELKANDIDAT
+STATUS: FROZEN REPAIR / STEP 01 PR122 CANDIDATE
 
 ## AUTORITÄT
 
@@ -103,3 +103,15 @@ Erster Fehler:
 
 Es wurde nichts gemergt und kein Fix auf den fehlgeschlagenen Kandidaten gesetzt.
 Der alte Snapshot wird nicht weiterverwendet.
+
+
+## STEP 01 – PR #122
+
+Erster chronologischer Pflichtblock nach `de21f6…`:
+`93536d5a61d34d1b24d80d9341e1b437ed3774f5`
+
+Aktueller Kandidat:
+`2f5a71637ee750cf33c763e53c78d6815286105b`
+
+Genau vier geänderte Dateien; alle 4/4 exakt auf Zielstand.
+Kein Step 02 vor echtem 7/7-Test.
