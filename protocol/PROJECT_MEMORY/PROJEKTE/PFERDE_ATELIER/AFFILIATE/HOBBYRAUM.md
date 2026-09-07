@@ -48,31 +48,25 @@ Intern möglich:
 
 Zusätzlich Control-/Veto-Ebenen und Notabschaltung.
 
-## NEXT ACTION – ERSTER PLUGINTEST
+## NEXT ACTION – ERSTER FUNKTIONSTEST
 
-**JETZT:** den gebauten 6.72.1-Aktivierungs-Smoke in einer isolierten/testweisen WordPress-Instanz installieren und aktivieren:
+**JETZT:** WordPress-Backend → **Affiliate-Zentrale → Übersicht** öffnen.
 
-`release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip`
+PASS 1:
+- Seite öffnet ohne Fatal/weiße Seite;
+- Überschrift **Affiliate-Zentrale** sichtbar;
+- Navigation/Submenüs sichtbar.
 
-PASS für diesen ersten Plugintest bedeutet ausschließlich:
-- ZIP wird von WordPress als Plugin akzeptiert;
-- Plugin lädt ohne PHP-Fatal;
-- Aktivierung läuft ohne PHP-Fatal;
-- Plugin steht danach als aktiviert.
+Danach **Netzwerke & API** öffnen.
 
-Harte Grenze:
-Dieses Paket enthält absichtlich nicht die beiden großen eBay-Laufzeitkataloge. Deshalb **kein eBay-/Vollfunktions-/Release-Test** damit.
+PASS 2:
+- Seite öffnet ohne Fatal;
+- Awin-Karte sichtbar;
+- Felder für Publisher-ID / Zugang vorhanden;
+- Button **Speichern & Zugang prüfen** sichtbar;
+- **noch nichts speichern oder starten**.
 
-**Danach bleibt der gebundene technische Releaseweg:**
-1. exakten Current-Source-Lauf `bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh` bzw. den vorhandenen isolierten Containerweg ausführen;
-2. OTTO Advertiser **14336** im eigenen Awin-Zugang real nachweisen;
-3. echten OTTO-Produktfeed lesen und reale Verkäufer-Spalte exakt binden;
-4. WordPress/MariaDB End-to-End: Hub 1/2/3, Kategorie 1/2/3, Beitrag, Exact Match / kein Ersatz;
-5. realen OTTO/Awin-Creative-Bestand bzw. belegten Export/API-Weg anbinden;
-6. echtes Banner automatisch prüfen → Ziel → Slot → Anteil → Ausgabe;
-7. reale Stichprobe der Anteilverteilung prüfen;
-8. manuelle Fehlzuordnung reparieren und Rückkehr auf Automatik belegen;
-9. erst danach Release-Gates weiterführen.
+Bei PASS danach erst der echte OTTO/Awin-Verbindungstest.
 
 ## PRODUCTWISSEN-GRENZE
 
