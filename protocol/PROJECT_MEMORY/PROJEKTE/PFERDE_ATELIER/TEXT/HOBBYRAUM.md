@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / FIX_FORBIDDEN
+STATUS: AKTIV / FIX_ALLOWED_FOR_CODEX_TEST
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -24,25 +24,25 @@ ausschließlich die HARD RULE Goldmaster-Rekonstruktion in der festgelegten Reih
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 457f33a09751db3acf78246ee394a59141d94d15
-ACTIVE_BLOCKER: HOBBYROOM_RULESET_RESTORE_REQUIRED
-PLAN_PHASE: HARDEN_HOBBYROOM_RESTORE_REQUIRED_CHECK
+ACTIVE_BLOCKER: GOLDMASTER_BASELINE_REALTEST_PENDING
+PLAN_PHASE: GOLDMASTER_BASELINE_INTEGRATION
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_HARDEN_HOBBYROOM;2_COPY_GOLDMASTER;3_REAPPLY_MANDATORY_CHANGES_ONE_BY_ONE;4_REAL_TEST_AFTER_EACH_CHANGE
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/goldmaster-main-reconstruction-20260907
+CANDIDATE_HEAD_SHA: 482fa8ab71f4f180900707ca2309a5bd87727416
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
+ALLOWED_PATH_PREFIXES: control/CURRENT_STARTMASTER.json;control/output-quarantine/output_release_gate.py;control/output-quarantine/runtime_entry_gate.py;control/single-door-boundary/codex_current_action.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/GITHUB_FINAL_RELEASE.py;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json;control/startmaster0107/codex-production-runtime/codex_environment_preflight.py;control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py;control/startmaster0107/fachworkflow_proof_handoff.py;control/startmaster0107/test_fachworkflow_proof_handoff.py
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
 CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PENDING
-CHECK_INVARIANTS: PENDING
-INTEGRATION_ALLOWED: false
+CHECK_POS_NEG: PASS
+CHECK_INVARIANTS: PASS
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -125,13 +125,13 @@ LanguageTool-Rebind-Branch:
 **PARKPLATZ / NICHT INTEGRIEREN**
 
 Aktueller Planpunkt:
-**1 – HOBBYRAUM TECHNISCH DICHTMACHEN / NUR RULESET-RESTORE AUSSTEHEND**
+**2 – GOLDMASTER-BASELINE INTEGRIEREN UND REAL TESTEN**
 
 Aktuelle Entscheidung:
-**Goldmaster-Rekonstruktion ist als Strategie gebunden.**
-Noch **kein** Reparaturkandidat freigegeben.
-`CHECK_POS_NEG=PENDING`
-`CHECK_INVARIANTS=PENDING`
+**Nur Kandidat `482fa8ab71f4f180900707ca2309a5bd87727416` ist freigegeben.**
+14/14 geänderte TEXT-Korridor-Dateien sind bytegleich zu `de21f6…`.
+Neue Security-/Campus-Zwangsjacke bleibt unangetastet.
+Kein Publish.
 
 Rückgabeweg:
 1. Im Ruleset `Pferde Atelier Main Hardlock` `hardlock-base` wieder als Required Status Check hinzufügen.
