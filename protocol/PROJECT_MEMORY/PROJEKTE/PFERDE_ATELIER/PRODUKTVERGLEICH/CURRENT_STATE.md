@@ -558,3 +558,22 @@ Technischer Vertrag im Prototyp:
 `universal-product-comparison/ZERO_FREEDOM_WRITER_CONTRACT_V1.md`.
 
 Artikelqualität wird künftig nicht durch spontane Writer-Freiheit verbessert, sondern ausschließlich durch neue geprüfte Versionen von Artikelvertrag/Rulebook mit neuen Golden Outputs.
+
+
+## WORDPRESS-DRAFT V1 – GEBUNDENE AUSGABE PASS 2026-09-07
+
+Belegter Technikstand:
+- Branch `hobbyroom/productwissen-v1-prototype`;
+- Head `42ad7460a903a64c22fe4dec1c70b901a6ecdd12`;
+- GitHub Actions Run `34112287717`: SUCCESS;
+- `UPC_WORDPRESS_DRAFT_NO_PUBLISH_GUARD_PASS`;
+- validierter Renderer-Output wird als WordPress-`draft` materialisiert;
+- gespeicherter Body ist byte-identisch zum validierten HTML;
+- Golden Output Hash bleibt identisch;
+- `publish_allowed=false` bleibt technisch gebunden;
+- wiederholter identischer Lauf verwendet denselben gebundenen Draft statt einen Doppelbeitrag anzulegen;
+- manipulierte Publishing-Konfiguration wird per SHA-Bindung blockiert;
+- geänderte Produktfakten können die Draft-Schicht nicht umgehen.
+
+Wichtig:
+Für den echten Pferde-Atelier-Betrieb wurde **keine WordPress-Kategorie erfunden**. Der Mechanismus ist mit einer separaten Testprojekt-Konfiguration bewiesen; die reale Kategoriebindung muss vor Liveeinsatz gegen WordPress belegt werden.
