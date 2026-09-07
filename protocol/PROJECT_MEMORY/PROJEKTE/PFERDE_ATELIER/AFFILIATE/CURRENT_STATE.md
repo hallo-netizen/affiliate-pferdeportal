@@ -1,7 +1,7 @@
 # AFFILIATE – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: OTTO-AUTOMATISIERUNG STRUKTURELL IMPLEMENTIERT / PRODUCTWISSEN-EXACT-SCHNITTSTELLE BEREIT / REALDATEN + REALE BANNERQUELLE OFFEN
+STATUS: OTTO-AUTOMATISIERUNG + PRODUCTWISSEN-EXACT + ANTEILSGESTEUERTE BANNERVERTEILUNG STRUKTURELL IMPLEMENTIERT / REALDATEN + REALE BANNERQUELLE OFFEN
 
 ## AUTORITÄT
 
@@ -20,86 +20,136 @@ Diese Datei ist die einzige aktuelle Campus-Standzusammenfassung des Büros AFFI
 - Digistore24 bleibt zurückgestellt und nicht blockierend.
 - Kein eigenes OTTO-Plugin.
 - OTTO läuft technisch über Awin.
+- Normalbetrieb soll weitgehend vollautomatisch sein.
+- Menschliche Eingriffe sind Reparaturinstanz, nicht Hauptworkflow.
 
-## OTTO-Konzept
+## Produktwissen
 
-OTTO wird als breite Commerce-Quelle auf mehreren Ebenen genutzt:
+Produktwissen bleibt die fachliche Produkt-/Variantenwahrheit.
 
-- Startseite: reales passendes OTTO/Awin-Banner, kein neuer beliebiger Produktblock.
-- Hub Ebene 1: Banner + bis zu drei passend gerankte Produkte.
-- Hub Ebene 2 / Produktgruppe: Banner + bis zu drei Produkte.
-- Kategorie / Leaf: Banner + bis zu drei Produkte.
-- normale Beiträge: passendes Banner + bis zu drei Produkte.
-- Produktvergleich / Variantenvergleich / fachlich exakt gebundene Beratung: Exact Product Match; niemals ähnlich klingendes Ersatzprodukt.
+Affiliate bleibt Commerce-Schicht für:
+- Angebot;
+- Preis;
+- Verfügbarkeit;
+- Verkäufer;
+- Tracking;
+- reale Werbemittel.
 
-Offizielle Werbeformen werden intern KISS abgebildet:
-- Produktfeed → Produktkarten;
-- reale Banner/Images → bestehender Bannerweg;
-- Deeplinks → Linkziel von Produktkarten/Bannern;
-- Logo → kein eigener neuer Slot; nur als reales passendes Creative;
-- Sortimentswerbung → reales Sortimentscreative oder konkrete Produktkarten, keine erfundene Bannerform.
-
-Detailkonzept:
-`protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
-
-## Produktwissen – relevant, aber getrennt
-
-Die parallel entwickelte zentrale Produktwissen-Datenbank ist relevant.
-
-Verbindliche Rollen:
-- Produktwissen = fachliche Produkt-/Variantenidentität + Fakten.
-- Affiliate = aktuelles Angebot, Preis, Verfügbarkeit, Verkäufer, Tracking, reale Werbemittel.
-
-Keine direkte Tabellenkopplung und kein Affiliate-Schreibrecht in Produktwissen.
-
-Affiliate-Consumer-Schnittstelle:
+Schnittstelle:
 `ppar_affiliate_exact_product_requirements`
 
 Exact Match:
 GTIN/EAN bzw. belastbare echte MPN.
+
 Kein identisches Angebot = keine Affiliate-Karte.
 Kein Ersatzprodukt.
 
-## Technisch umgesetzt
+## OTTO-Produkte
 
-- OTTO wird kanonisch über Awin Advertiser-ID **14336** erkannt, nicht über geratenen Programmnamen.
-- Awin-Produktimport stößt Asset-Verifikation an.
-- OTTO-Autoaktivierung bleibt fail-closed:
-  - Awin-Programme-Gate;
-  - aktives Produkt;
-  - eindeutige automatische Zielklassifikation;
-  - gültiger Trackinglink;
-  - reales/verifiziertes Bild;
-  - konkreter Verkäufer.
-- GTIN/EAN und explizite MPN können als Exact-Product-Identität bis in die Kampagne getragen werden.
-- Händler-SKU wird nicht als echte MPN ausgegeben.
-- Kategorie-/Hub-/Journal-Produkte nutzen die vorhandenen 1/2/3-Plätze.
-- Exact-Product-Anforderungen dürfen generische Provider-/Kohortenlogik überstimmen, aber keine Sicherheits-/Health-Gates.
-- fehlender Exact Match → kein Ersatz.
-- Verkäufer wird auf konkreten OTTO-Produktkarten ausgegeben.
-- Produktänderungen bei Preis/Bestand/Verkäufer verändern den Freshness-Fingerprint.
-- nach kompletter Asset-Verifikationswelle werden Artikelpläne gebündelt neu bewertet.
-- reale importierte Awin-Banner können bereits über den bestehenden zentralen Ziel-/Slotweg automatisch aktiviert werden.
-- Produktbilder werden nicht zu Fake-Bannern umgebaut.
+Strukturell umgesetzt:
 
-## Banner – harte Trennung
+- kanonische Awin-Advertiser-ID **14336**;
+- nur eine technische ID-Hauptwahrheit im Product Source Plan;
+- Awin-Produktimport → Asset-Verifikation;
+- Verkäufer-Gate;
+- echtes Tracking;
+- reales/verifiziertes Bild;
+- GTIN/EAN und echte MPN bis in die Kampagne;
+- Händler-SKU ist keine Exact-MPN;
+- Hub/Kategorie/Journal Produktplätze 1/2/3;
+- normale Beitragsprodukte;
+- Productwissen-Exact-Match;
+- kein Ersatzmodell;
+- Preis/Bestand/Verkäufer verändern Freshness;
+- Artikelpläne werden nach Verifikationswellen neu bewertet.
 
-**Automatische Zuordnung/Activation:** strukturell vorhanden.
+## Vollautomatische Bannerverteilung
 
-**Automatische Beschaffung eines OTTO/Awin-Bannerkatalogs:** noch nicht real belegt.
+Die vorhandene automatische Ziel-/Slotzuordnung wird jetzt zusätzlich durch eine **Relevance-First-Anteilssteuerung** ergänzt.
+
+Verbindliche Reihenfolge:
+
+1. manuelle Reparatur/Festzuordnung/Veto;
+2. technische und rechtliche Freigabe;
+3. Ziel-/Themenrelevanz;
+4. Slot-/Formatpassung;
+5. nur innerhalb der besten aktuell verfügbaren Relevanzstufe → Anteilssystem;
+6. innerhalb der gewählten Quelle bleibt die bestehende Qualitäts-/Prioritätsreihenfolge.
+
+Konfigurierbarer Startwert:
+
+- OTTO: **40**
+- andere Awin-Programme: **25**
+- ADCELL: **20**
+- Direktpartner: **15**
+- Digistore24: **0**
+- Sonstige: **0**
+
+Die Werte sind relative Zielanteile.
+Fehlt eine Quelle, werden nur die vorhandenen gleich relevanten Quellen automatisch neu normalisiert.
+
+V1 verteilt **Bannerplätze**, nicht abrechnungsgenaue Impressionen.
+
+Die Wahl bleibt deterministisch pro:
+- Kalenderwoche;
+- Seite/Kontext;
+- Banner-Slot.
+
+Damit:
+- kein Request-Zufall;
+- kein Flackern;
+- cachefreundlich;
+- reproduzierbar;
+- trotzdem regelmäßige Rotation.
+
+Banneranteile greifen auf allen relevanten Bannerfamilien:
+- Startseite;
+- Hub;
+- Kategorie/Produktseite;
+- Beitrag;
+- Journal;
+- Anzeigenmarkt.
+
+## Manuelle Reparaturinstanz
+
+Die bestehende interne Seite **Zuordnungen** ist ausdrücklich Reparaturinstanz.
+
+Möglichkeiten:
+- Automatik;
+- festes Banner/Produkt;
+- keine Ausgabe;
+- Vererbung auf Unterseiten.
+
+Zusätzlich bleiben:
+- Provider-Veto;
+- Partner-Veto;
+- Creative-Veto;
+- Target-Veto;
+- Slot-Veto;
+- Output-Veto;
+- globale Notabschaltung.
+
+Wichtig:
+Auch der gespeicherte Artikelplan prüft jetzt die manuelle Bannerzuordnung **vor** der Automatik.
+
+## Bannerquelle
+
+Automatische Zuordnung/Verteilung: strukturell vorhanden.
+
+Automatische Beschaffung eines realen OTTO/Awin-Creative-Katalogs: noch nicht real belegt.
 
 Deshalb:
-- reales OTTO/Awin-Creative vorhanden/importiert → automatische Prüfung, Zielzuordnung, Slotwahl und Aktivierung möglich;
-- kein belegter Creative-Katalog/API/Export → Bannerbeschaffung bleibt PENDING;
-- keine Ersatzkonstruktion.
+- reales OTTO/Awin-Creative vorhanden/importiert → automatisch prüfen, Ziel bestimmen, Slot bestimmen, Anteil anwenden, aktivieren;
+- kein reales Creative → kein Banner;
+- kein Produktbild als Fake-Banner.
 
-## Aktueller technischer Stand
+## Technischer Stand
 
 Branch:
 `affiliate-release-current`
 
 HEAD:
-`808ec4f96a42e1647429f318b2fcd035739d9e72`
+`99553e1f94cfde57187b671f23cadb09b0e7c417`
 
 Aktiver Kandidat:
 **6.72.1**
@@ -107,11 +157,11 @@ Aktiver Kandidat:
 Source-Dateien:
 26
 
-Aktuelles Source-Manifest SHA-256:
-`7505a05b1a5534f7cfb0d3063b1eb50e40f723e223847299cb3864c5d116cffc`
+Source-Manifest SHA-256:
+`1140bba9bd2db78d4a347f1d6ad23ee82e17213fff33270f0ffb169b6d0973fb`
 
 Governance Generation:
-**11**
+**12**
 
 Release:
 **NICHT FREIGEGEBEN**
@@ -119,32 +169,40 @@ Release:
 ## Prüfstand
 
 PASS:
-- statischer Current-Source-Contract-Test für OTTO-ID, Exact Match, Seller-Gate, Produktverteilung und Bannergrenze;
-- lokaler PHP-Behavioral-Test für 14336, GTIN/EAN, MPN, No-Substitution und Kategorie/Artikel-Platzierung.
-
-Noch kein vollständiger Hobbyraum-Runner-PASS in diesem Chat:
-Der gebundene Runner benötigt Docker/Podman; die aktuelle lokale Laufzeit hatte PHP, aber weder Docker noch Podman.
-Der Test ist jetzt korrekt in `AFFILIATE_HOBBYRAUM/TASK.current.json` gebunden und muss in einer geeigneten Laufzeit real ausgeführt werden.
+- statische Current-Source-Prüfung der zentralen OTTO-ID;
+- statische Prüfung der Anteilskonfiguration;
+- Relevanz vor Quote;
+- deterministische Wochenverteilung;
+- automatische Normalisierung bei fehlenden Quellen;
+- alle realen Bannerplatzfamilien eingebunden;
+- manuelle Reparaturinstanz vorhanden;
+- manuelle Reparatur greift vor Artikelplan-Automatik;
+- Digistore24-Anteil 0;
+- Productwissen-Exact-Logik bleibt getrennt.
 
 Evidence:
-`release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt`
+`release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt`
+
+Noch **kein** exakter Hobbyraum-Runner-PASS in diesem Chat.
+Der gebundene Test wurde aktualisiert, aber der vorgesehene Docker/Podman-Lauf konnte in der aktuellen Laufzeit nicht ausgeführt werden.
 
 ## Real/LIVE noch offen
 
-- OTTO 14336 im eigenen Awin-Publisherkonto real lesen;
-- echten Produktfeed End-to-End verarbeiten;
-- tatsächliche Verkäufer-Spalte aus dem realen Feed binden – keinen Feldnamen raten;
-- WordPress/MariaDB-End-to-End;
-- öffentliche Produktkarten auf Hub/Kategorie/Beitrag;
-- realen OTTO/Awin-Bannerbestand bzw. realen Beschaffungsweg prüfen;
-- reales Banner automatisiert zuordnen und öffentlich prüfen.
+- OTTO 14336 im eigenen Awin-Konto real belegen;
+- echten OTTO-Produktfeed durch WordPress/MariaDB;
+- reale Verkäufer-Spalte binden;
+- reale Produktkarten auf Hub/Kategorie/Beitrag;
+- echten OTTO/Awin-Bannerbestand bzw. realen Beschaffungsweg;
+- echtes Banner automatisch zuordnen und ausspielen;
+- reale Stichprobe der Anteilverteilung über genügend Bannerplätze;
+- manuelle Reparatur + Rückkehr zur Automatik real prüfen.
 
 ## Bestehende Live-Differenz
 
-Campus-Livebeleg:
-WordPress **6.72.2**
+WordPress-Livebeleg:
+**6.72.2**
 
 GitHub-Kandidat:
 **6.72.1**
 
-Diese Differenz bleibt offen und darf vor einem echten Release nicht ignoriert werden.
+Vor Release auflösen; nicht still ignorieren.
