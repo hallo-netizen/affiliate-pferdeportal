@@ -89,3 +89,4 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-071 → PB ONE erhält einen Aktenschrank für dauerhafte Referenzakten
 - ARCH-072 → Sicherungsarchitektur: Baucontainer definiert, Tresor führt aus
 - ARCH-073 → PB ONE Aktenschrank erhält Plugin-Fach für Eigenentwicklungen
+- ARCH-074 → PB ONE Aktenschrank erhält TODO-Fach für offene operative Themen
