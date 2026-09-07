@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / B02-KANDIDAT FREIGEGEBEN
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -14,17 +14,17 @@ Es gibt **kein alternatives Reparaturkonzept** und keinen parallelen Reparaturpf
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 72dc4ad3d6898b23f1a7dda24427eef8a06fe2c5
-ACTIVE_BLOCKER: BASELINE_REALTEST_PENDING
-PLAN_PHASE: FROZEN_GOLDMASTER_BASELINE_REALTEST
+ACTIVE_BLOCKER: BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING
+PLAN_PHASE: REAPPLY_HISTORICAL_B02_WORKER_BINDING
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/b02-historical-worker-binding-20260907
+CANDIDATE_HEAD_SHA: 75c9c8a9a2c16b604b2b21aa4253fe20131ff37f
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
+ALLOWED_PATH_PREFIXES: control/single-door-boundary/codex_current_action.py;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -32,7 +32,7 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
-INTEGRATION_ALLOWED: false
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -118,7 +118,7 @@ Ruleset:
 - `hardlock-base` Pflicht
 
 Aktuelle einzige NEXT ACTION:
-**Laufenden Goldmaster-Baseline-7/7-Realtest auswerten. Bis zum Ergebnis: FIX_FORBIDDEN, keine Reparatur.**
+**Exakt den historischen B02-Worker-Binding-Kandidaten prüfen. Kein zweiter Kandidat, kein weiterer Fix.**
 
 ## AUTORITÄTEN
 
@@ -127,3 +127,37 @@ Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → Originalquelle
 Ziel → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`  
 Paul → `PAUL_PIPELINE_AUDIT_20260906.md`  
 Warum/Änderungen → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+
+
+## AKTUELLER EINZELKANDIDAT – B02
+
+Realer Baseline-Fehler:
+`BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
+
+Historischer Gegencheck:
+- B02 wurde bereits früher mit der Current-Codex-Fachworkflow-Worker-Bindung überwunden;
+- danach erreichte der reale Lauf den nächsten Blocker B01;
+- Paul stuft B02 ausdrücklich als bereits real überwundenen Handoff-/Worker-Kontextfehler ein, nicht als neuen 41-Punkte-Fix.
+
+Historische bewiesene Quelle:
+`c8a96e7a2f598de69134d90b143257c3559bc98a`
+
+Kandidat:
+`hobbyroom/b02-historical-worker-binding-20260907`
+Head:
+`75c9c8a9a2c16b604b2b21aa4253fe20131ff37f`
+
+Exakt vier zusammengehörige hashgebundene Dateien:
+1. `control/single-door-boundary/codex_current_action.py`
+2. `control/startmaster0107/CURRENT_STATE.json`
+3. `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`
+4. `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json`
+
+Verbot:
+- keine fünfte Datei;
+- kein neuer B02-Fix;
+- kein Paul-Sammelfix;
+- keine prophylaktische Änderung hinter B02.
+
+Nach Merge zwingend sofort echter 7/7-Realtest.
+Bei FAIL dieses Deltas: vollständiger Rückbau des gesamten B02-Blocks, kein Fix darauf.
