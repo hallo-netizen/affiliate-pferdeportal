@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "otto-awin-automated-distribution-20260907",
-  "goal": "Prüfe OTTO über Awin: sichere Feed-/Banner-Zuordnung, Produktplätze, Productwissen-Exact-Match ohne Ersatz und Fail-Closed-Grenzen; keine neue Providerarchitektur.",
+  "goal": "Prüfe OTTO über Awin: sichere Feed-/Banner-Zuordnung, Productwissen-Exact-Match ohne Ersatz, relevance-first Banneranteile auf allen Bannerplätzen und Vorrang der manuellen Reparaturinstanz; keine neue Providerarchitektur.",
   "image": "php:8.2-cli",
   "inputs": [
     {
