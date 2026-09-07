@@ -5,51 +5,29 @@ STATUS: KISS-KONZEPT VERBINDLICH
 
 ## Ziel
 
-Das Pferde-Atelier muss nach Datenverlust vollständig wiederherstellbar sein.
+Das Pferde-Atelier muss nach Totalausfall aus genau einem geprüften Sicherungsstand wiederherstellbar sein.
 
-Dafür gibt es genau **einen** Backupweg.
+## Genau drei Inhalte
 
-## Die Komplettsicherung besteht aus 3 Blöcken
+1. **GitHub komplett**
+   - vollständiger Git-Mirror
+   - gesamte Historie
+   - alle Branches und Tags
 
-### 1. GitHub komplett
-Gesichert werden:
-- gesamtes Repository;
-- komplette Git-Historie;
-- alle Branches;
-- alle Tags;
-- relevante Repository-/Workflow-Einstellungen, soweit exportierbar.
+2. **WordPress komplett**
+   - vorhandenes vollständiges WordPress-Backup
+   - Datenbank, Dateien, Uploads, Plugins, Themes, Konfiguration
 
-Technik:
-ein vollständiger Git-Mirror plus Metadatenexport.
+3. **Projektarchiv komplett**
+   - alle für Wiederaufbau benötigten Roh-/Masterdateien außerhalb von GitHub/WordPress
 
-### 2. WordPress komplett
-Gesichert werden:
-- Datenbank;
-- komplette WordPress-Dateien;
-- Uploads/Bilder;
-- Plugins;
-- Themes;
-- relevante Konfiguration.
+## Ergebnis
 
-Regel:
-Die bereits vorhandene WordPress-Backuptechnik wird genutzt.
-**Kein zweiter WordPress-Backupmotor wird erfunden.**
+Ein verschlüsseltes Paket:
 
-### 3. Projektarchiv komplett
-Gesichert werden nur die projektwichtigen Roh-/Masterdateien, die weder vollständig in GitHub noch im WordPress-Vollbackup enthalten sind.
+`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMMSS.zip.gpg`
 
-Quelle:
-`/Campus-Archiv/`
-
-Dazu gehören auch notwendige Recovery-Informationen, soweit sie nicht anderweitig sicher wiederherstellbar sind.
-
-## Ergebnis jedes Laufs
-
-Alles kommt in genau **ein datiertes Sicherungspaket**:
-
-`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMM`
-
-Inhalt:
+Darin:
 
 ```
 GITHUB/
@@ -58,68 +36,61 @@ PROJEKTARCHIV/
 BACKUP_INFO.txt
 ```
 
-Optional kann dieses Paket anschließend als eine verschlüsselte Archivdatei gespeichert werden.
-Die Verschlüsselung ändert nichts am einfachen Grundmodell.
+## Speicherort
 
-## Speicherung
+**Nicht im öffentlichen Projekt-Repository.**
 
-Von jedem gültigen Sicherungsstand existieren mindestens **2 unabhängige Kopien**:
+Jeder gültige Lauf erzeugt gleichzeitig:
 
-1. externe SSD / lokaler unabhängiger Datenträger;
-2. zweite Kopie außerhalb dieses Datenträgers, z. B. Cloud oder zweites Laufwerk an anderem Ort.
+1. eine aktuelle geschützte Kopie auf dem WordPress-/Backupserver für den Backend-Downloadknopf;
+2. eine zweite unabhängige Kopie auf einem privaten externen/offsite Speicher.
 
-Die aktive Website, GitHub selbst oder die ChatGPT-Library zählen nicht als eine dieser beiden unabhängigen Sicherungskopien.
+Ohne erfolgreiche Offsite-Kopie gibt es kein `BACKUP_PASS`.
 
-## Rhythmus
+## Automatik
 
-- automatisch **1× pro Woche**;
-- zusätzlich **vor größeren Umbauten / Releases**.
+- einmal pro Woche automatisch;
+- zusätzlich vor größeren Umbauten, sobald der Serverlauf eingebunden ist.
 
-Aufbewahrung:
-- letzte 4 Wochensicherungen;
-- zusätzlich letzte 3 Monatssicherungen.
+Der Lauf verwendet den bestehenden WordPress-Vollbackupstand und baut keinen zweiten WordPress-Backupmotor.
 
-Ältere gültige Sicherungen werden nie durch einen fehlerhaften neuen Lauf überschrieben.
+## WordPress-Backend
 
-## Prüfung
+Unter **Werkzeuge → Komplettsicherung** steht:
 
-Jeder Lauf endet nur mit:
+- Status;
+- Datum;
+- Dateigröße;
+- **Komplettsicherung herunterladen**.
 
-`BACKUP_PASS`
-oder
-`BACKUP_FAIL:<GRUND>`
+Der Button liefert ausschließlich einen Stand mit `BACKUP_PASS` und prüft unmittelbar vor dem Download nochmals SHA-256.
 
-Für `BACKUP_PASS` reicht die einfache technische Prüfung:
+## PASS
 
-- Git-Mirror vorhanden und lesbar;
+`BACKUP_PASS` nur wenn:
+
+- Git-Mirror erstellt und `git fsck` bestanden;
 - WordPress-Vollbackup vorhanden;
 - Projektarchiv vorhanden;
-- Manifest/Hashes stimmen.
+- Paket verschlüsselt;
+- SHA-256 erzeugt;
+- unabhängige Offsite-Kopie erfolgreich geschrieben.
 
-Zusätzlich wird regelmäßig und nach Änderungen am Backupweg ein echter Wiederherstellungstest durchgeführt.
+## Totalausfall
 
-## Wiederherstellung
+Für die Aussage **„1:1 wiederherstellbar“** reicht ein gebautes Backup allein nicht.
 
-Im Notfall:
+Ein echter leerer Wiederaufbau muss zusätzlich einmal vollständig bestanden werden:
+Backup entschlüsseln → GitHub/Campus wiederherstellen → WordPress wiederherstellen → Projektarchiv prüfen.
 
-1. GitHub aus dem Git-Mirror wiederherstellen;
-2. WordPress aus dem Vollbackup wiederherstellen;
-3. fehlende Roh-/Masterdateien aus dem Projektarchiv zurückspielen;
-4. Manifest prüfen;
-5. Projekt normal über den Campus starten.
+Erst danach gilt:
+`TOTALAUSFALL_RESTORE_PASS`.
 
-## Harte Regeln
+## Hard Rules
 
-- **Ein Backupweg.**
-- **Keine Parallelarchitektur.**
-- **Keine neuen Backup-Tools, wenn vorhandene Technik den Zweck erfüllt.**
-- **Kein Teilbackup darf als Komplettsicherung bezeichnet werden.**
-- **Backup ist nie Arbeitsquelle.**
-- **Fehlende historische Installer-ZIPs blockieren die Komplettsicherung nicht automatisch, wenn der aktuelle funktionsfähige Stand durch GitHub oder das WordPress-Vollbackup vollständig wiederherstellbar ist.**
-
-## Nutzerweg
-
-Der Nutzer soll im Normalbetrieb nichts zusammensetzen und keine Einzelarchive verwalten.
-
-Ziel:
-**ein aktuelles Sicherungspaket sehen → BACKUP_PASS → fertig.**
+- ein Backupweg;
+- keine Parallelarchitektur;
+- kein öffentliches Ablegen der Datenbank;
+- vorhandene WordPress-Backuptechnik wiederverwenden;
+- Backup nie als Arbeitsquelle;
+- ein fehlendes historisches Einzel-ZIP ist kein automatischer Blocker, wenn der aktuelle funktionsfähige Stand vollständig wiederherstellbar gesichert ist.
