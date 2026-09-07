@@ -1059,3 +1059,47 @@ Fehlt ein erforderlicher Fakt vollständig, entsteht kein Writer-Dossier. NOT_IN
 
 ALTSTAND:
 Ältere `TIER_SAME_BRAND`-Dossiers aus dem Forschungsbestand werden wegen der späteren Zwei-Hersteller-Regel nicht automatisch importiert.
+## AFFILIATE-OTTO-002 – Bannerautomatik arbeitet relevance-first mit Zielanteilen und manueller Reparaturinstanz
+
+STAND: 2026-09-07.
+
+WAS:
+Alle realen Affiliate-Bannerplätze werden nach erfolgreicher Sicherheits-, Format- und Relevanzprüfung automatisch zwischen den aktuell gleich relevanten Bannerquellen verteilt.
+
+STARTANTEILE:
+- OTTO 40
+- andere Awin-Programme 25
+- ADCELL 20
+- Direktpartner 15
+- Digistore24 0
+- Sonstige 0
+
+REGEL:
+Die Quote darf niemals Relevanz schlagen.
+Nur Quellen der besten aktuell vorhandenen Relevanzstufe nehmen an der Anteilsauswahl teil.
+
+FEHLENDE QUELLEN:
+Nicht vorhandene/ungeeignete Quellen erzeugen keine künstlichen Leerplätze.
+Die verbleibenden Anteile werden unter den verfügbaren gleich relevanten Quellen automatisch normalisiert.
+
+STABILITÄT:
+V1 verteilt Bannerplätze deterministisch nach Kalenderwoche + Seite/Kontext + Slot.
+Keine request-zufällige Rotation und keine neue Realtime-Impression-Counter-Architektur.
+
+REPARATUR:
+Die vorhandene interne „Zuordnungen“-Instanz wird ausdrücklich als Reparaturschicht genutzt:
+Automatik / fest auswählen / nicht anzeigen / Vererbung.
+Zusätzlich bleiben Provider-, Partner-, Creative-, Target-, Slot-, Output-Veto und globale Notabschaltung erhalten.
+Manuelle Reparatur gewinnt immer vor automatischer Anteilsauswahl.
+
+WARUM:
+Der Normalbetrieb soll ohne manuelle Einzelpflege skalieren. Gleichzeitig muss ein falscher oder geschäftlich unerwünschter Einzelfall sofort korrigierbar bleiben, ohne die Automatik insgesamt abzuschalten.
+
+KISS:
+Kein eigener Banner-Router, keine zweite Datenbank, kein Impression-Tracking-System und kein neuer OTTO-Sonderworkflow.
+Bestehende Relevanz-, Slot-, Campaign- und Control-Logik wird nur um eine kleine Anteilsschicht ergänzt.
+
+BELEG:
+`protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
+`release/affiliate-zentrale/evidence/otto_awin_banner_distribution_contract_20260907.txt`
+
