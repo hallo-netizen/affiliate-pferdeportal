@@ -273,3 +273,62 @@ In Designmastern nachweisbar:
 
 Regel:
 nicht als bloße Design-Datei verschwinden lassen; eigener Modulstatus folgt nach separater Prüfung.
+
+
+### WP-009 – Universal Product Knowledge
+
+MOD-ID:
+MOD-007
+
+Aktuellster belegter Installer:
+`universal-product-knowledge-0.1.0-prototype.zip`
+
+Dateibeleg:
+**0.1.0-prototype**
+
+SHA-256:
+`4308ae9cac6d9c4531538d1f782cf6d007bbc88ffd7953172f64026ffe7faea0`
+
+Technischer Beleg:
+echter WordPress/MySQL-Prototyp PASS.
+
+Projektanwendung:
+PFERDE_ATELIER / PRODUKTVERGLEICH.
+
+Hauptquellen:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md` → MOD-007;
+- `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/CURRENT_STATE.md`.
+
+Wichtig:
+Dieses Register behauptet keinen eigenen LIVE-/Release-Stand.
+
+### WP-010 – Universal Product Comparison
+
+MOD-ID:
+MOD-006
+
+Aktuellster belegter Installer-Kandidat:
+`universal-product-comparison-0.2.4-prototype.zip`
+
+Dateibeleg:
+**0.2.4-prototype**
+
+SHA-256:
+`b74e3c17eb2cb71ebc4c15aab5da6e4133379b124804c920080a33d20fc78054`
+
+Technischer Beleg:
+Run `34154550626` PASS mit echter WordPress-HTTP-Adminseite, Login, gerenderter Hauptnavigation und gebundenem PV-REG-001-Drafttest.
+
+Projekt-Live-Status:
+hier nicht festgelegt. Autorität:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/CURRENT_STATE.md`.
+
+Aktuell gilt dort:
+Nutzer-Live-Verifikation von 0.2.4 noch offen.
+
+Hauptquellen:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md` → MOD-006;
+- `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/CURRENT_STATE.md`.
+
+Wichtig:
+Technischer Kandidaten-PASS ist kein Nutzer-LIVE-PASS.
