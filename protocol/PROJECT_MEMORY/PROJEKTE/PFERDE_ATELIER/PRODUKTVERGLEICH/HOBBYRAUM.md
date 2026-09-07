@@ -32,28 +32,16 @@ Damit sind Produktwissen, Vergleichspaarung, Merkmalsmatrix und deterministische
 
 ## NEXT ACTION
 
-**WordPress-DRAFT-Ausgabe als nächste dünne Schicht auf den vollständig gebundenen Single-Door-Output setzen.**
+**Nach dem belegten Zero-Freedom-Writer + WordPress-DRAFT-PASS als nächste Integrationsstufe nur schmale Leseschnittstellen bauen:**
+1. AFFILIATE liest exakte Produkt-/Variantenidentitäten; keine Schreibrechte auf Produktwissen oder Vergleich;
+2. SEO liefert nur priorisierende Metadaten/Signale; keine Writer-/Faktenautorität;
+3. beide Anbindungen dürfen den gebundenen Artikeloutput nicht verändern;
+4. danach Vergleichsarchiv/Frontend auf den bereits erzeugten WordPress-Drafts aufsetzen.
 
-Harte Regeln:
-1. WordPress-Draft-Writer akzeptiert niemals freien Titel oder freien HTML-Body;
-2. Eingang ausschließlich: Vergleichs-ID + project_key + gebundene ruleset_id;
-3. Draft-Writer ruft intern ausschließlich `upc_production()` auf;
-4. nur `DRAFT_READY_FOR_REVIEW` + gültiger Receipt darf einen WordPress-Draft erzeugen;
-5. Post-Status ausschließlich `draft`;
-6. kein Publish-/Future-/Private-Fallback;
-7. gespeicherter Post-Body muss byte-identisch zum validierten Renderer-HTML sein;
-8. gespeicherter Output-Hash muss erneut geprüft werden;
-9. fehlender/abweichender Receipt oder Hash = BLOCKED.
-
-Belegter Writer-Stand:
-- Zero-Freedom Static Guard PASS;
-- 100/100 byte-identisch;
-- Golden Output PV-REG-001 PASS;
-- Ruleset-Manipulation BLOCKED;
-- Faktenänderung gegen altes Ruleset BLOCKED;
-- Run `34111825722` SUCCESS.
-
-Noch kein Affiliate-Renderer und kein Vergleichsarchiv/Frontend. Diese folgen erst nach WordPress-DRAFT-PASS.
+Belegt:
+- Zero-Freedom Renderer + Golden Output: PASS;
+- WordPress-DRAFT No-Publish/Readback: PASS, Run `34112287717`;
+- echte Pferde-Atelier-Kategoriebindung bleibt bis realer WordPress-Verifikation BLOCKED.
 
 ## Globale Arbeitsort-Sperre
 
