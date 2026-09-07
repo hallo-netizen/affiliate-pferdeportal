@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: FROZEN REPAIR / STEP 01 PR122 CANDIDATE
+STATUS: FROZEN REPAIR / STEP 01 MERGED / REALTEST PENDING
 
 ## AUTORITÄT
 
@@ -10,7 +10,7 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`72dc4ad3d6898b23f1a7dda24427eef8a06fe2c5`
+`46a807ac8fbdce5d1d4cf96c7e02d2cd4c206d5d`
 
 ## EINGEFRORENER REPARATURWEG
 
@@ -115,3 +115,12 @@ Aktueller Kandidat:
 
 Genau vier geänderte Dateien; alle 4/4 exakt auf Zielstand.
 Kein Step 02 vor echtem 7/7-Test.
+
+
+## STEP 01 MERGE
+
+PR #153 merged:
+`46a807ac8fbdce5d1d4cf96c7e02d2cd4c206d5d`
+
+Bis zum Realtest-Ergebnis:
+kein Step 02, kein weiterer Kandidat.
