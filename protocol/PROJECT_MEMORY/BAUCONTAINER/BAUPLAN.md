@@ -188,12 +188,12 @@ später eigener privater Campus-Repository.
 Eingang:
 `../TRESOR/START_HERE.md`
 
-Verbindliche Sicherungsarchitektur:
-**GitHub komplett + WordPress komplett + Projektarchiv komplett → ein datiertes Sicherungspaket.**
+Verbindliche Sicherungsarchitektur für den aktuellen Auftrag:
+**GitHub vollständig → genau eine geprüfte GitHub-Sicherungsdatei.**
 
-Nur ein real vollständig geprüfter Stand darf `BACKUP_PASS` heißen.
+WordPress, Website und Projektarchiv sind ausdrücklich nicht Bestandteil dieses Backupauftrags.
 
-Alte Tresor-Kits/Ein-Datei-Prototypen sind keine zweite Architektur.
+Nur ein real restore-geprüfter Stand darf als GitHub-PASS bezeichnet werden.
 
 ## Umbauprinzip
 
@@ -212,10 +212,9 @@ Baucontainer:
 
 Tresor:
 - GitHub vollständig sichern;
-- vorhandenes WordPress-Vollbackup nutzen;
-- Projektarchiv sichern;
-- ein datiertes Paket bilden;
-- auf zwei unabhängigen Speicherorten ablegen;
-- `BACKUP_PASS` / `BACKUP_FAIL`.
+- bestehende GitHub-only Workflowtechnik wiederverwenden;
+- genau eine herunterladbare Datei bilden;
+- Git-Restore real prüfen;
+- Providergrenzen für nicht exportierbare GitHub-Daten fail-closed ausweisen.
 
 Der Tresor ist nie Arbeitsquelle.
