@@ -1679,6 +1679,20 @@ JS;
         return $out;
     }
 
+    private function banner_distribution_slot($slot_type) {
+        $slot_type = sanitize_key((string) $slot_type);
+        if ($this->slot_required_creative_type($slot_type) === 'banner') { return true; }
+        return in_array($slot_type, array(
+            'start_after_topics',
+            'top_info','mid_content','bottom_recommendation',
+            'post_after_intro','post_mid_content','post_bottom_recommendation',
+            'hub_top_cta','hub_after_cards','hub_grid_card','hub_mid_banner',
+            'category_recommendation','product_after_category_tiles',
+            'template_top','template_after_intro','template_after_selected','template_mid','template_mid_banner','template_bottom',
+            'journal_banner','anzeigenmarkt_top_banner',
+        ), true);
+    }
+
     private function banner_distribution_provider_key($campaign) {
         if (!is_array($campaign)) { return 'other'; }
         $network = sanitize_key((string) ($campaign['network'] ?? ''));
@@ -1729,7 +1743,7 @@ JS;
         $groups = array();
         foreach ($candidates as $index=>$candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-            if (!is_array($campaign)) { continue; }
+            if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') { continue; }
             if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) !== $best_band) {
                 continue;
             }
@@ -2982,7 +2996,7 @@ JS;
             }
             return strcmp((string) ($a['campaign']['id'] ?? ''), (string) ($b['campaign']['id'] ?? ''));
         });
-        if ($this->slot_required_creative_type($slot_type) === 'banner' && $forced_campaign_id === '') {
+        if ($forced_campaign_id === '' && $this->banner_distribution_slot($slot_type)) {
             $candidates = $this->banner_distribution_reorder_candidates($candidates, $context, $slot_type);
         }
         // Exact Productwissen identity outranks legacy provider cohorts/strategies.
