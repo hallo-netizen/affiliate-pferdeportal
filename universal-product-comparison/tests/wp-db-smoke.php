@@ -52,6 +52,7 @@ $comparison_id = $compare->create_comparison(array(
     'comparison_type' => 'PRODUCT',
     'subject_ids' => array($a, $b),
     'decision_intent' => 'Which boot better fits the documented use case?',
+    'working_title' => 'Bound Alpha vs Beta Title',
 ));
 upc_assert(is_int($comparison_id) && $comparison_id > 0, 'create valid product comparison');
 
@@ -103,13 +104,21 @@ upc_assert($exact_requirements[1]['identifiers'][0]['type'] === 'MPN', 'Affiliat
 upc_assert($exact_requirements[1]['identifiers'][0]['value'] === 'TEST-BETA-MPN', 'Affiliate bridge preserves exact MPN value');
 
 $e = upc_make_product($knowledge, 'Maker E', 'Epsilon', 'boots');
-upc_assert(is_int($e), 'create no-identifier product');
+upc_assert(is_int($e), 'create no-Affiliate-exact-identifier product');
+$manufacturer_article = $knowledge->add_identifier(
+    UPK_Repository::SUBJECT_PRODUCT,
+    $e,
+    'MANUFACTURER_ARTICLE_NUMBER',
+    'MANUFACTURER-ONLY-123'
+);
+upc_assert(is_int($manufacturer_article), 'bind manufacturer article number as product knowledge only');
+
 $no_identifier_comparison = $compare->create_comparison(array(
     'comparison_key' => 'beta-vs-epsilon',
     'comparison_type' => 'PRODUCT',
     'subject_ids' => array($b, $e),
 ));
-upc_assert(is_int($no_identifier_comparison), 'create comparison with one unidentified subject');
+upc_assert(is_int($no_identifier_comparison), 'create comparison with one subject lacking Affiliate exact identifier');
 
 $no_identifier_post = wp_insert_post(array(
     'post_type' => 'post',
@@ -121,8 +130,36 @@ upc_assert(!is_wp_error($no_identifier_post), 'create no-identifier bridge test 
 update_post_meta($no_identifier_post, '_upc_comparison_id', (string)$no_identifier_comparison);
 
 $partial_requirements = UPC_Affiliate_Bridge::exact_product_requirements(array(), $no_identifier_post, array(), '');
-upc_assert(count($partial_requirements) === 1, 'subject without exact identifier produces no Affiliate requirement');
+upc_assert(count($partial_requirements) === 1, 'manufacturer article number does not become Affiliate exact requirement');
 upc_assert($partial_requirements[0]['identifiers'][0]['value'] === 'TEST-BETA-MPN', 'identified subject remains available without substitute for missing subject');
+
+$seo_provider = function($signals, $context) {
+    return array(
+        'target_keyword' => 'alpha vs beta',
+        'demand_score' => 77.5,
+        'priority_score' => 88,
+        'cannibalization_status' => 'CLEAR',
+        'provider' => 'seo-smoke',
+        'provider_version' => '1',
+        'title' => 'MALICIOUS TITLE OVERRIDE',
+        'html' => '<p>MALICIOUS BODY</p>',
+        'ruleset_id' => 'evil-ruleset',
+        'product_id' => 999999,
+    );
+};
+add_filter('upc_product_comparison_seo_signals', $seo_provider, 10, 2);
+$seo_payload = upc_seo_signals($comparison_id);
+remove_filter('upc_product_comparison_seo_signals', $seo_provider, 10);
+
+upc_assert(!is_wp_error($seo_payload), 'read optional SEO signals');
+upc_assert($seo_payload['status'] === 'SIGNALS_AVAILABLE', 'SEO signals available');
+upc_assert($seo_payload['signals']['target_keyword'] === 'alpha vs beta', 'allowed SEO target keyword passes through');
+upc_assert($seo_payload['signals']['demand_score'] === 77.5, 'allowed SEO demand score passes through');
+upc_assert($seo_payload['context']['working_title'] === 'Bound Alpha vs Beta Title', 'SEO cannot rewrite bound comparison title');
+upc_assert(!array_key_exists('title', $seo_payload['signals']), 'SEO title override discarded');
+upc_assert(!array_key_exists('html', $seo_payload['signals']), 'SEO body override discarded');
+upc_assert(!array_key_exists('ruleset_id', $seo_payload['signals']), 'SEO ruleset override discarded');
+upc_assert(!array_key_exists('product_id', $seo_payload['signals']), 'SEO product override discarded');
 
 $reverse = $compare->create_comparison(array(
     'comparison_key' => 'beta-vs-alpha',
@@ -174,4 +211,6 @@ $wrong_parent = $compare->create_comparison(array(
 ));
 upc_assert(is_wp_error($wrong_parent) && 'UPC_VARIANT_PARENT_MISMATCH' === $wrong_parent->get_error_code(), 'block variants from different base products');
 
+fwrite(STDOUT, "UPC_SEO_SIGNALS_READ_ONLY_PASS\n");
+fwrite(STDOUT, "UPC_AFFILIATE_EXACT_IDENTIFIER_POLICY_PASS\n");
 fwrite(STDOUT, "UPC_WORDPRESS_DB_GESAMT_PASS\n");
