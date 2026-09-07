@@ -989,3 +989,15 @@ WARUM:
 Diese Themen greifen operativ ineinander. Eigene Fächer nur für „Lead Management“ oder „Onboarding“ wären zu kleinteilig und würden Zusammenhänge zerreißen.
 GRENZE:
 LeadScout selbst bleibt im Plugin-Fach; Preise bleiben im Preis-Fach; Verkaufsunterlagen bleiben im Bereich Präsentation & Werbung.
+
+## ARCH-078 – OTTO wird nach Programmzusage vor Digistore24 priorisiert
+WAS:
+Der Nutzer meldet am 07.09.2026 die Zusage für das OTTO-Partnerprogramm. OTTO wird damit zum aktuellen gebundenen Affiliate-Auftrag; Digistore24 wird vorerst zurückgestellt.
+WARUM:
+Das bestehende Konzept priorisiert Awin als Kernnetzwerk und möglichst wenige stabile Datenquellen. Die Affiliate-Source führt OTTO bereits als vorbereitete Produktquelle mit dem Weg `Awin → fachlich OTTO`.
+KISS:
+Kein eigener OTTO-Gesamtworkflow und kein neuer Paralleladapter. OTTO wird in den bestehenden Awin-/Produktquellenweg integriert.
+SICHERHEIT:
+Die Nutzerzusage priorisiert die Arbeit, ersetzt aber nicht den technischen Nachweis von Produktfeed, Tracking-/Deeplinkdaten und Pflichtfeldern. Öffentliche Aktivierung erst nach realer Positiv-/Negativprüfung; bis dahin `prepared / integration pending`.
+GRENZE:
+Der dokumentierte Digistore24-Fehlerstand bleibt erhalten, wird während des OTTO-Auftrags aber nicht weiterbearbeitet.
