@@ -113,8 +113,8 @@ Keine ausführliche Fehlerwahrheit an zwei Orten.
 
 ## TRESOR-AUTOMATIK
 
-Bereich: CAMPUS / TRESOR  
-Status: BLOCKED / Ein-Datei-Ziel definiert, serverseitiger Kandidat vorhanden, Gesamt-Restore noch offen
+Bereich: CAMPUS / TRESOR / GITHUB  
+Status: AKTIV / GITHUB-ONLY-KORREKTUR; Repository-Restore real PASS; Admin-Einstellungsabdeckung noch fail-closed prüfen
 
 Autoritative aktuelle Status-/Fehlerquelle:
 `protocol/PROJECT_MEMORY/TRESOR/STATUS.md`
