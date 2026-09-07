@@ -1,50 +1,32 @@
-# LOKALES BACKUP – TECHNISCHE UMSETZUNG
+# GITHUB-BACKUP – NUTZERWEG
 
 STAND: 2026-09-07
-STATUS: KISS / GETESTETER KANDIDAT
+STATUS: KISS
 
-## AUTOMATISCHER LAUF
+## Nutzer
 
-Bestehender Runner:
-`control/tresor/build_tresor_release.sh`
+Nur:
+**eine aktuelle geprüfte `GITHUB_KOMPLETTBACKUP_YYYY-MM-DD.zip` herunterladen und außerhalb GitHubs speichern.**
 
-Er benötigt nur fünf reale Bindungen:
+Keine Terminal-Kommandos.
+Keine Teilarchive.
+Kein WordPress-Plugin.
+Kein WPVibe.
 
-- `WP_BACKUP_DIR`
-- `PROJECT_ARCHIVE_DIR`
-- `BACKUP_OUTPUT_DIR`
-- `OFFSITE_DIR`
-- `BACKUP_PASSPHRASE_FILE`
+## Intern
 
-Danach erzeugt jeder Lauf automatisch:
+Technischer Weg:
+`tresor/build-20260905`
+→ `.github/workflows/campus-tresor-snapshot.yml`
 
-`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMMSS.zip.gpg`
+Der Workflow baut und prüft das GitHub-Backup serverseitig.
 
-plus `latest.json`.
+## Automatik
 
-## WORDPRESS-KNOPF
+Ziel:
+wöchentlich denselben bestehenden Workflow auslösen.
+Keine zweite Backup-Engine.
 
-Datei:
-`control/tresor/pferde-atelier-backup-button.php`
+## Aufbewahrung
 
-Als MU-Plugin installieren und in `wp-config.php` einmal den geschützten Backupordner binden:
-
-`PA_BACKUP_OUTPUT_DIR`
-
-Danach:
-**Werkzeuge → Komplettsicherung → Komplettsicherung herunterladen**
-
-## SPEICHER
-
-- aktuelle Serverkopie: nur für Status/Download;
-- Offsite-Kopie: eigentliche unabhängige Katastrophensicherung;
-- öffentlicher GitHub-Bereich: niemals Backup-Speicher.
-
-## ZEITPLAN
-
-Serverseitig einmal wöchentlich.
-Vor größeren Umbauten kann derselbe Runner zusätzlich gestartet werden.
-
-## REGEL
-
-Ohne Offsite-Kopie kein `BACKUP_PASS`.
+Mindestens die letzte funktionierende lokale Kopie nicht überschreiben, bevor der neue Stand geprüft wurde.
