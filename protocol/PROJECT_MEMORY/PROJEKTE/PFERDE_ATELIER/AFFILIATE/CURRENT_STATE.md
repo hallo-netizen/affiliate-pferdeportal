@@ -158,7 +158,7 @@ Source-tragender 26-Dateien-Stand:
 `84390240b87e510349c636b9dd9f1a5dfc8ce5d7`
 
 Aktiver Kandidat:
-**6.72.1**
+**6.72.3**
 
 Source-Dateien:
 26
@@ -167,12 +167,14 @@ Source-Manifest SHA-256:
 `680fe0078071dcaba63372f4dbd0caf5dab0d5c5c711439d69adf992d9e258cf`
 
 Governance Generation:
-**18**
+**20**
 
 Release:
 **NICHT FREIGEGEBEN**
 
 ## Prüfstand
+
+- **6.72.3 WordPress-Aktivierung: PASS** (Nutzer bestätigt am 07.09.2026; kein PHP-Fatal, Plugin aktiv).
 
 CURRENT-SOURCE STATIC PASS:
 - zentrale OTTO-ID;
@@ -212,30 +214,19 @@ OFFEN:
 - reale Stichprobe der Anteilverteilung über genügend Bannerplätze;
 - manuelle Reparatur + Rückkehr zur Automatik real prüfen.
 
-## Erster Plugin-Test – bereit
+## Erster Plugin-Test – PASS
 
-Testartefakt:
-`release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip`
+Installierter Testkandidat: **6.72.3**
 
-Build-Beleg:
-`release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.txt`
+Belegt:
+- WordPress akzeptiert das Plugin;
+- Plugin lädt ohne PHP-Fatal;
+- Aktivierung läuft ohne PHP-Fatal;
+- Plugin bleibt aktiviert.
 
-Gebaut aus:
-- Source-Head `84390240b87e510349c636b9dd9f1a5dfc8ce5d7`;
-- direkt committed aktueller Source;
-- kein Alt-ZIP, keine Historienrekonstruktion;
-- 24 Dateien / 2.417.322 Source-Bytes.
+Status: **PASS**.
 
-Bewusst ausgelassen für diesen ersten **Aktivierungs-Smoke**:
-- `assets/ebay-portal-catalog-v2.json`;
-- `assets/portal-structure-v279.json`.
-
-Harter Scope:
-**nur Plugin laden + aktivieren / kein vollständiger Funktionstest / kein eBay-Lauf / kein Release.**
-Die beiden JSON-Dateien werden beim Plugin-Laden bzw. in `activate()` nicht gelesen, sind aber für spätere eBay-Laufzeitfunktionen erforderlich.
-
-Status:
-**TESTPAKET GEBAUT / WORDPRESS-AKTIVIERUNG NOCH AUSZUFÜHREN.**
+Nächster Funktionstest: WordPress-Backend → **Affiliate-Zentrale → Übersicht** öffnen; danach **Netzwerke & API** öffnen und prüfen, ob die Awin-Karte vollständig sichtbar ist. Noch nichts speichern oder starten.
 
 ## Bestehende Live-Differenz
 
@@ -243,7 +234,7 @@ WordPress-Livebeleg:
 **6.72.2**
 
 GitHub-Kandidat:
-**6.72.1**
+**6.72.3**
 
 Vor Release auflösen; nicht still ignorieren.
 
