@@ -7,6 +7,12 @@ on:
     paths:
       - 'universal-product-knowledge/**'
       - '.github/workflows/productwissen-wordpress-db-smoke.yml'
+  pull_request:
+    branches:
+      - hobbyroom/project-memory-campus-v1-20260905
+    paths:
+      - 'universal-product-knowledge/**'
+      - '.github/workflows/productwissen-wordpress-db-smoke.yml'
   workflow_dispatch:
 
 permissions:
