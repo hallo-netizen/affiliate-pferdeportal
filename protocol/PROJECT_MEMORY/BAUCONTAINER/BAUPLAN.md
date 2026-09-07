@@ -11,11 +11,13 @@ CAMPUS
 ├── PB ONE – gemeinsame Agenturzentrale
 │   ├── AKTENSCHRANK
 │   │   ├── PLUGINS
+│   │   ├── PREISE
+│   │   ├── VERTRIEB
 │   │   └── TODO
 │   ├── IDEENWERKSTATT
 │   ├── ENTWICKLUNGSRAUM
 │   ├── ARBEITSDOKUMENTE
-│   └── ANGEBOTE / FLYER
+│   └── PRÄSENTATION & WERBUNG / ANGEBOTE & FLYER
 ├── PROJEKTGEBÄUDE
 │   └── BÜRO
 │       └── HOBBYRAUM
