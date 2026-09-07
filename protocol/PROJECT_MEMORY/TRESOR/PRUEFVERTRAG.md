@@ -14,11 +14,11 @@ Genau vier Prüfungen:
 
 Nur dann:
 
-\`BACKUP_PASS\`
+`BACKUP_PASS`
 
 Sonst:
 
-\`BACKUP_FAIL:<GRUND>\`
+`BACKUP_FAIL:<GRUND>`
 
 ## WIEDERHERSTELLUNGSTEST
 
@@ -34,4 +34,4 @@ Der Restore-Test prüft:
 
 ## NEGATIVREGEL
 
-Kein Teilbackup, kein alter Test und kein historischer PREPASS darf als aktueller \`BACKUP_PASS\` ausgegeben werden.
+Kein Teilbackup, kein alter Test und kein historischer PREPASS darf als aktueller `BACKUP_PASS` ausgegeben werden.
