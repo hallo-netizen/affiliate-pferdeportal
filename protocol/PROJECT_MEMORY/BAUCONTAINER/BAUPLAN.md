@@ -186,12 +186,14 @@ später eigener privater Campus-Repository.
 ## Notfall-Tresor
 
 Eingang:
-`../TRESOR/START_HERE.md`
+\`../TRESOR/START_HERE.md\`
 
-Aktueller Status:
-`../TRESOR/STATUS.md`
+Verbindliche Sicherungsarchitektur:
+**GitHub komplett + WordPress komplett + Projektarchiv komplett → ein datiertes Sicherungspaket.**
 
-Nur geprüfter `TRESOR_PASS`-Stand ist Wiederherstellungsquelle.
+Nur ein real vollständig geprüfter Stand darf \`BACKUP_PASS\` heißen.
+
+Alte Tresor-Kits/Ein-Datei-Prototypen sind keine zweite Architektur.
 
 ## Umbauprinzip
 
@@ -204,16 +206,16 @@ Unklarer Bestand:
 **Baucontainer definiert. Tresor führt aus.**
 
 Baucontainer:
-- Sicherungsumfang und Regeln;
-- Rollen-/Arbeitsgrenzen;
-- Anforderungen an Vollständigkeit, Unveränderlichkeit und Restore-Nachweis.
+- genau ein Backupweg;
+- KISS;
+- keine Parallelarchitektur.
 
-Tresorraum:
-- aktuellen Backupstand erzeugen;
-- Download-/Exportpakete bereitstellen;
-- lokale zweite Kopie herstellen;
-- Hash-/Manifestprüfung;
-- Recovery-Inventar;
-- echten Wiederherstellungstest durchführen.
+Tresor:
+- GitHub vollständig sichern;
+- vorhandenes WordPress-Vollbackup nutzen;
+- Projektarchiv sichern;
+- ein datiertes Paket bilden;
+- auf zwei unabhängigen Speicherorten ablegen;
+- \`BACKUP_PASS\` / \`BACKUP_FAIL\`.
 
 Der Tresor ist nie Arbeitsquelle.
