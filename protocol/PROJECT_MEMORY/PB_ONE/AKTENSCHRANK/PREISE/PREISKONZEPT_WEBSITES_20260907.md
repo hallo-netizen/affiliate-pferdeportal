@@ -547,3 +547,223 @@ Für START, BUSINESS und GROWTH jeweils intern schätzen:
 
 Danach:
 **realer Stundenbedarf × interner Vollkostensatz → prüfen, ob 1.490 / 2.490 / 3.990 wirtschaftlich tragen.**
+
+
+---
+
+## 19. KRITISCHE REVISION V2 – KISS
+
+### Befund
+
+Das bisherige Modell mit START / BUSINESS / GROWTH ist verständlich, aber nicht maximal einfach.
+
+Kritik:
+- START und BUSINESS unterscheiden sich sauber über Umfang.
+- GROWTH vermischt dagegen Website-Größe mit Marketing-/Vertriebsfunktionen.
+- SEO, Landingpages, Terminbuchung, Kampagnen und CRM werden je Kunde sehr unterschiedlich benötigt.
+- Dadurch drohen Überschneidungen zwischen Paket und Modulen.
+
+### KISS-Empfehlung
+
+**2 Website-Grundpakete + INDIVIDUELL + wenige Modulgruppen**
+
+#### KOMPAKT
+Für Onepager / sehr kleine Webpräsenzen.
+
+#### BUSINESS
+Für normale Unternehmenswebsites.
+
+#### INDIVIDUELL
+Für Shops, Portale, komplexe Schnittstellen und Sonderprojekte.
+
+Wachstum wird nicht als drittes Website-Paket verkauft, sondern über Zusatzmodule ergänzt.
+
+---
+
+## 20. MODULLOGIK V2 – NICHT ZU KLEINTEILIG
+
+Extern maximal 5 Modulgruppen.
+
+### MODUL 1 – SICHTBARKEIT
+
+Mögliche Inhalte:
+- lokale SEO-Optimierung;
+- Google-Business-Optimierung;
+- zusätzliche SEO-/Landingpages;
+- strukturierte Suchmaschinen-Inhalte.
+
+### MODUL 2 – CONTENT
+
+Mögliche Inhalte:
+- umfangreichere Texterstellung;
+- zusätzliche Inhaltsrecherche;
+- Bildauswahl/-bearbeitung;
+- Referenz-/Projektaufbereitung.
+
+### MODUL 3 – LEADS & TERMINE
+
+Mögliche Inhalte:
+- Terminbuchung;
+- erweitertes Anfrageformular;
+- Rückruf-/Leadstrecke;
+- Newsletter-/CRM-Anbindung im Standardumfang.
+
+### MODUL 4 – MARKETING
+
+Mögliche Inhalte:
+- Kampagnen-Landingpages;
+- Tracking;
+- Newsletter-Grundintegration;
+- Conversion-Optimierung im definierten Umfang.
+
+### MODUL 5 – INTERNATIONAL / ERWEITERT
+
+Mögliche Inhalte:
+- Mehrsprachigkeit;
+- größere Inhaltsmigration;
+- besondere externe Anbindungen.
+
+Sobald Standardumfang überschritten wird:
+**INDIVIDUELL.**
+
+---
+
+## 21. WAS KEIN EIGENES MODUL WERDEN SOLL
+
+Nicht separat nach außen verkaufen:
+- SSL;
+- responsive Darstellung;
+- einzelne Formularfelder;
+- technische Basis;
+- Standard-Kontaktformular;
+- Cookie-/Consent-Grundeinrichtung;
+- einzelne Bilder;
+- einzelne kleine Korrekturen;
+- jede einzelne technische Kleinleistung.
+
+Grund:
+Diese Positionen erzeugen Preislisten-Komplexität, aber kaum wahrgenommenen eigenständigen Kundennutzen.
+
+---
+
+## 22. INTERNE VS. EXTERNE KALKULATION
+
+Extern:
+- 2 Pakete;
+- 5 Modulgruppen;
+- Individuell.
+
+Intern darf deutlich feiner kalkuliert werden:
+- Seiten;
+- Stunden;
+- Textmenge;
+- Integrationen;
+- Recherche;
+- Migration;
+- Korrekturen;
+- PM;
+- QA.
+
+Regel:
+**Intern fein – extern grob.**
+
+---
+
+## 23. ALTERNATIVE MODELLE – KRITISCHE PRÜFUNG
+
+### Alternative A – 3 Pakete + Module
+
+Vorteil:
+Sehr bekannte Preislogik und gute Preisanker.
+
+Nachteil:
+Drittes Paket kann künstlich wirken und sich mit Modulen überschneiden.
+
+Bewertung:
+**brauchbar, aber nicht KISS-Sieger.**
+
+### Alternative B – 1 Basiswebsite + reine Module
+
+Vorteil:
+maximal flexibel.
+
+Nachteil:
+Kunde muss zu viele Einzelentscheidungen treffen; Vertrieb muss mehr erklären; Angebote wirken schnell kleinteilig.
+
+Bewertung:
+**intern gut, extern zu kompliziert.**
+
+### Alternative C – 2 Pakete + 5 Modulgruppen + Individuell
+
+Vorteil:
+sehr leicht verständlich;
+wenig Überschneidung;
+schnell im LeadScout-Vertrieb einsetzbar;
+genug Flexibilität.
+
+Nachteil:
+Paketgrenzen müssen sehr sauber definiert sein.
+
+Bewertung:
+**KISS-FAVORIT.**
+
+### Alternative D – nur Website-Abo
+
+Vorteil:
+niedrige Einstiegshürde und wiederkehrender Umsatz.
+
+Nachteile:
+lange Bindung;
+Eigentums-/Kündigungsfragen;
+höheres Betreuungsrisiko;
+für Kunden schwerer mit Kaufangeboten vergleichbar.
+
+Bewertung:
+**als zusätzliche Zahlungsform interessant, aber nicht als einziges Produktmodell.**
+
+---
+
+## 24. EMPFOHLENE KUNDENANSICHT
+
+Der Kunde sieht zunächst nur:
+
+1. **KOMPAKT**
+2. **BUSINESS**
+3. **INDIVIDUELL**
+
+Darunter:
+„Optional erweiterbar um Sichtbarkeit, Content, Leads & Termine, Marketing und Mehrsprachigkeit/Sonderanforderungen.“
+
+Keine vollständige technische Preisliste im ersten Pitch.
+
+---
+
+## 25. LEADSCOUT-LOGIK
+
+LeadScout soll möglichst keine 20 Optionen berechnen.
+
+KISS-Zuordnung:
+
+- keine Website + kleiner Betrieb → KOMPAKT;
+- keine Website + mehrere Leistungen → BUSINESS;
+- bestehende schwache Website → BUSINESS / Relaunch;
+- SEO-Defizit → SICHTBARKEIT;
+- schlechte Anfrageführung → LEADS & TERMINE;
+- wenig/kein brauchbarer Inhalt → CONTENT;
+- Shop / Sonderfunktion → INDIVIDUELL.
+
+Damit kann ein Lead sehr schnell vorklassifiziert werden.
+
+---
+
+## 26. OFFENE ENTSCHEIDUNG
+
+Vor endgültiger Preisfreigabe nur noch entscheiden:
+
+**Soll PB ONE nach außen mit 2 Paketen oder 3 Paketen auftreten?**
+
+Aktuelle Empfehlung:
+**2 Pakete + Individuell.**
+
+Begründung:
+Die dritte Ebene „Growth“ lässt sich sauberer und flexibler durch Zusatzmodule darstellen.
