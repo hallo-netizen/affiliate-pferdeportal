@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "otto-awin-automated-distribution-20260907",
-  "goal": "Prüfe OTTO/Awin vollständig: Productwissen-Exact-Match ohne Ersatz, real-source-fähige Banneraufnahme, automatische Relevanz-/Anteilzuordnung auf allen Bannerplätzen, 0-Anteil als Ausschluss und Vorrang der manuellen Reparaturinstanz.",
+  "goal": "Prüfe OTTO/Awin vollständig: automatisch aktualisierte Joined-/Feedlisten, snapshot-freier Start explizit freigegebener Awin-Programme, Productwissen-Exact-Match ohne Ersatz, real-source-fähige Banneraufnahme, Relevanz-/Anteilzuordnung, 0-Anteil als Ausschluss und Vorrang der manuellen Reparatur.",
   "image": "php:8.2-cli",
   "inputs": [
     {
@@ -11,6 +11,10 @@
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
       "dest": "trait-ppar-automation-suite.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php",
+      "dest": "trait-ppar-awin-programme-gate.php"
     },
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php",
@@ -50,7 +54,7 @@
     }
   ],
   "writable": [],
-  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
+  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-awin-programme-gate.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
   "tests": [
     "php test_otto_automation.php",
     "php test_banner_distribution_behavior.php"
