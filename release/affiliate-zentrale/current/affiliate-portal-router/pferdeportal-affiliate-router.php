@@ -86,6 +86,7 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_AUTOMATION_LAST_DISPATCH = 'ppar_automation_last_dispatch_v1';
     const OPTION_AUTOMATION_CYCLE = 'ppar_automation_cycle_v1';
     const OPTION_ASSIGNMENTS = 'ppar_assignments_v1';
+    const OPTION_BANNER_DISTRIBUTION = 'ppar_banner_distribution_v1';
     const OPTION_HEALTH_SETTINGS = 'ppar_health_settings_v1';
     const OPTION_HEALTH_CURSOR = 'ppar_health_cursor_v1';
     const OPTION_HEALTH_SCHEMA_VERSION = 'ppar_health_schema_version';
@@ -298,6 +299,7 @@ final class Pferdeportal_Affiliate_Router {
             add_action('admin_post_ppar_save_network', array($this, 'handle_save_network'));
             add_action('admin_post_ppar_save_assignment', array($this, 'handle_save_assignment'));
             add_action('admin_post_ppar_delete_assignment', array($this, 'handle_delete_assignment'));
+            add_action('admin_post_ppar_save_banner_distribution', array($this, 'handle_save_banner_distribution'));
             add_action('admin_post_ppar_test_network', array($this, 'handle_test_network'));
             add_action('admin_post_ppar_save_awin_programme_gate', array($this, 'handle_awin_programme_gate_save'));
             add_action('admin_post_ppar_run_health_check', array($this, 'handle_run_health_check'));
@@ -1641,6 +1643,141 @@ JS;
         $context = $this->get_content_context($post_id);
         return $this->render_affiliate_slot_for_context($post_id, $context, $slot_type, $intent, $forced_group_id);
     }
+    /**
+     * Soft target shares for banner *places*, never a relevance override.
+     * Only providers represented in the best relevance tier participate.
+     * Missing providers are automatically redistributed among eligible ones.
+     */
+    private function banner_distribution_defaults() {
+        return array(
+            'enabled'=>true,
+            'weights'=>array(
+                'otto'=>40,
+                'awin_other'=>25,
+                'adcell'=>20,
+                'direct'=>15,
+                'digistore24'=>0,
+                'other'=>0,
+            ),
+        );
+    }
+
+    private function banner_distribution_settings() {
+        $saved = get_option(self::OPTION_BANNER_DISTRIBUTION, array());
+        $saved = is_array($saved) ? $saved : array();
+        $defaults = $this->banner_distribution_defaults();
+        $weights = isset($saved['weights']) && is_array($saved['weights']) ? $saved['weights'] : array();
+        $out = array(
+            'enabled'=>array_key_exists('enabled', $saved) ? !empty($saved['enabled']) : true,
+            'weights'=>$defaults['weights'],
+        );
+        foreach ($out['weights'] as $key=>$default) {
+            if (array_key_exists($key, $weights)) {
+                $out['weights'][$key] = max(0, min(100, absint($weights[$key])));
+            }
+        }
+        return $out;
+    }
+
+    private function banner_distribution_provider_key($campaign) {
+        if (!is_array($campaign)) { return 'other'; }
+        $network = sanitize_key((string) ($campaign['network'] ?? ''));
+        if ($network === 'awin') {
+            return absint($campaign['advertiser_id'] ?? 0) === self::OTTO_AWIN_ADVERTISER_ID ? 'otto' : 'awin_other';
+        }
+        if ($network === 'adcell') { return 'adcell'; }
+        if ($network === 'digistore24') { return 'digistore24'; }
+        if (in_array($network, array('direct','manual'), true)) { return 'direct'; }
+        return 'other';
+    }
+
+    private function banner_distribution_relevance_band($specificity) {
+        $specificity = (int) $specificity;
+        if ($specificity >= 450) { return 5; }
+        if ($specificity >= 400) { return 4; }
+        if ($specificity >= 350) { return 3; }
+        if ($specificity >= 200) { return 2; }
+        return 1;
+    }
+
+    private function banner_distribution_bucket($context, $slot_type, $total) {
+        $total = max(1, absint($total));
+        $post_id = absint($context['post_id'] ?? 0);
+        $terms = array_values(array_unique(array_map('absint', (array) ($context['term_ids'] ?? array()))));
+        sort($terms, SORT_NUMERIC);
+        $slugs = array_values(array_unique(array_filter(array_map('sanitize_key', (array) ($context['slugs'] ?? array())))));
+        sort($slugs, SORT_STRING);
+        // Weekly stability is deliberate: deterministic enough for caches and
+        // reproducible diagnosis, while banner places rotate over time.
+        $seed = implode('|', array(
+            gmdate('o-W'),
+            (string) $post_id,
+            implode(',', $terms),
+            implode(',', $slugs),
+            sanitize_key((string) $slot_type),
+        ));
+        return (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % $total);
+    }
+
+    private function banner_distribution_reorder_candidates($candidates, $context, $slot_type) {
+        $candidates = array_values((array) $candidates);
+        if (count($candidates) < 2) { return $candidates; }
+        $settings = $this->banner_distribution_settings();
+        if (empty($settings['enabled'])) { return $candidates; }
+
+        $best_band = $this->banner_distribution_relevance_band((int) ($candidates[0]['specificity'] ?? 0));
+        $groups = array();
+        foreach ($candidates as $index=>$candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if (!is_array($campaign)) { continue; }
+            if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) !== $best_band) {
+                continue;
+            }
+            $key = $this->banner_distribution_provider_key($campaign);
+            $weight = absint($settings['weights'][$key] ?? 0);
+            if ($weight <= 0) { continue; }
+            if (!isset($groups[$key])) { $groups[$key] = array(); }
+            $groups[$key][] = $index;
+        }
+        if (count($groups) < 2) { return $candidates; }
+
+        $ordered_keys = array('otto','awin_other','adcell','direct','digistore24','other');
+        $eligible = array();
+        $total = 0;
+        foreach ($ordered_keys as $key) {
+            if (empty($groups[$key])) { continue; }
+            $weight = absint($settings['weights'][$key] ?? 0);
+            if ($weight <= 0) { continue; }
+            $eligible[$key] = $weight;
+            $total += $weight;
+        }
+        if ($total <= 0 || count($eligible) < 2) { return $candidates; }
+
+        $bucket = $this->banner_distribution_bucket($context, $slot_type, $total);
+        $cursor = 0;
+        $selected = '';
+        foreach ($eligible as $key=>$weight) {
+            $cursor += $weight;
+            if ($bucket < $cursor) { $selected = $key; break; }
+        }
+        if ($selected === '' || empty($groups[$selected])) { return $candidates; }
+
+        $selected_indexes = array_fill_keys($groups[$selected], true);
+        $out = array();
+        foreach ($groups[$selected] as $index) {
+            $candidate = $candidates[$index];
+            $candidate['reason'] = sanitize_text_field(
+                (string) ($candidate['reason'] ?? 'Passende Zuordnung.')
+                . ' · Banneranteil ' . $selected . ': ' . absint($eligible[$selected]) . '/' . $total . ' der aktuell gleich relevanten Quellen.'
+            );
+            $out[] = $candidate;
+        }
+        foreach ($candidates as $index=>$candidate) {
+            if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
+        }
+        return array_values($out);
+    }
+
     private function get_assignments() {
         $value = get_option(self::OPTION_ASSIGNMENTS, array());
         return is_array($value) ? $value : array();
@@ -2845,6 +2982,9 @@ JS;
             }
             return strcmp((string) ($a['campaign']['id'] ?? ''), (string) ($b['campaign']['id'] ?? ''));
         });
+        if ($this->slot_required_creative_type($slot_type) === 'banner' && $forced_campaign_id === '') {
+            $candidates = $this->banner_distribution_reorder_candidates($candidates, $context, $slot_type);
+        }
         // Exact Productwissen identity outranks legacy provider cohorts/strategies.
         // Those strategies decide generic merchandising, never which model a
         // fachlich exact-bound article is allowed to monetize.
@@ -3949,6 +4089,32 @@ JS;
         echo '</select>';
     }
 
+    public function handle_save_banner_distribution() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_save_banner_distribution','ppar_banner_distribution_nonce');
+        $raw = is_array($_POST['ppar_banner_distribution'] ?? null) ? wp_unslash($_POST['ppar_banner_distribution']) : array();
+        $keys = array('otto','awin_other','adcell','direct','digistore24','other');
+        $weights = array();
+        foreach ($keys as $key) {
+            $weights[$key] = max(0, min(100, absint($raw['weights'][$key] ?? 0)));
+        }
+        $enabled = !empty($raw['enabled']);
+        if ($enabled && array_sum($weights) <= 0) {
+            wp_die('Für die automatische Bannerverteilung muss mindestens ein Anteil größer als 0 sein.');
+        }
+        update_option(self::OPTION_BANNER_DISTRIBUTION, array(
+            'enabled'=>$enabled,
+            'weights'=>$weights,
+            'updated_at'=>time(),
+            'updated_by'=>get_current_user_id(),
+        ), false);
+        if (method_exists($this, 'article_plan_bump_campaign_revision')) {
+            $this->article_plan_bump_campaign_revision('banner_distribution_changed');
+        }
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-assignments','ppar_banner_distribution_saved'=>'1'), admin_url('admin.php')));
+        exit;
+    }
+
     public function handle_save_assignment() {
         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
         check_admin_referer('ppar_save_assignment','ppar_assignment_nonce');
@@ -3985,7 +4151,25 @@ JS;
         $auto_campaigns = array_filter($this->get_campaigns(), function($c){ return sanitize_key((string)($c['assignment_mode'] ?? '')) === 'auto_topic'; });
         ?>
         <div class="wrap"><h1>Zuordnungen</h1>
-        <div class="notice notice-info inline"><p><strong>Normalfall:</strong> Banner und Produkte werden direkt am Werbemittel automatisch einem eindeutigen Hauptbereich und dessen Unterseiten zugeordnet. Diese Seite dient nur manuellen Ausnahmen. Das frühere Dropdown mit sämtlichen Portal-Seiten wurde entfernt.</p></div>
+        <div class="notice notice-info inline"><p><strong>Normalfall:</strong> Banner und Produkte werden direkt am Werbemittel automatisch einem eindeutigen Hauptbereich und dessen Unterseiten zugeordnet. Diese Seite ist zugleich die interne Reparaturinstanz: Automatik lassen, fest ersetzen oder vollständig ausblenden.</p></div>
+        <?php $banner_distribution = $this->banner_distribution_settings(); $banner_weights = (array)($banner_distribution['weights'] ?? array()); ?>
+        <h2>Automatische Bannerverteilung</h2>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="max-width:900px;background:#fff;border:1px solid #c3c4c7;padding:18px;margin-bottom:24px">
+            <input type="hidden" name="action" value="ppar_save_banner_distribution">
+            <?php wp_nonce_field('ppar_save_banner_distribution','ppar_banner_distribution_nonce'); ?>
+            <p><label><input type="checkbox" name="ppar_banner_distribution[enabled]" value="1" <?php checked(!empty($banner_distribution['enabled'])); ?>> <strong>Anteilsgesteuerte Bannerautomatik aktiv</strong></label></p>
+            <p class="description">Relevanz und Sicherheitsprüfungen kommen immer zuerst. Die Anteile gelten nur zwischen aktuell gleich relevanten, technisch freigegebenen Bannerquellen. Fehlt eine Quelle, wird ihr Anteil automatisch auf die vorhandenen Quellen verteilt. Die Auswahl bleibt pro Seiten-/Slot-Kombination eine Woche stabil.</p>
+            <table class="form-table"><tbody>
+                <tr><th>OTTO</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][otto]" value="<?php echo absint($banner_weights['otto'] ?? 40); ?>"> <span class="description">Startwert 40</span></td></tr>
+                <tr><th>Awin – andere Programme</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][awin_other]" value="<?php echo absint($banner_weights['awin_other'] ?? 25); ?>"></td></tr>
+                <tr><th>ADCELL</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][adcell]" value="<?php echo absint($banner_weights['adcell'] ?? 20); ?>"></td></tr>
+                <tr><th>Direktpartner</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][direct]" value="<?php echo absint($banner_weights['direct'] ?? 15); ?>"></td></tr>
+                <tr><th>Digistore24</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][digistore24]" value="<?php echo absint($banner_weights['digistore24'] ?? 0); ?>"> <span class="description">aktuell zurückgestellt</span></td></tr>
+                <tr><th>Sonstige</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][other]" value="<?php echo absint($banner_weights['other'] ?? 0); ?>"></td></tr>
+            </tbody></table>
+            <p class="description">Die Werte sind relative Zielanteile; 40/25/20/15 entspricht 40/25/20/15 %. Die Summe muss technisch nicht 100 sein, da das System unter den tatsächlich verfügbaren Quellen normalisiert.</p>
+            <?php submit_button('Banneranteile speichern'); ?>
+        </form>
         <h2>Manuelle Ausnahme suchen</h2>
         <form method="get" style="display:flex;gap:8px;max-width:760px"><input type="hidden" name="page" value="affiliate-portal-assignments"><input type="search" name="ppar_page_search" value="<?php echo esc_attr($search); ?>" class="regular-text" placeholder="Seitentitel suchen, z. B. Regendecken" required><?php submit_button('Suchen','secondary','',false); ?></form>
         <?php if ($search !== '') : ?><div style="max-width:900px;margin-top:12px;background:#fff;border:1px solid #c3c4c7;padding:12px 18px"><strong>Treffer:</strong><?php if (!$results) : ?> keine<?php else : ?><ul><?php foreach($results as $result): ?><li><a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-assignments&page_id='.(int)$result->ID)); ?>"><?php echo esc_html((string)$result->post_title); ?></a> <span class="description">· <?php echo esc_html((string)$result->post_name); ?></span></li><?php endforeach; ?></ul><?php endif; ?></div><?php endif; ?>
