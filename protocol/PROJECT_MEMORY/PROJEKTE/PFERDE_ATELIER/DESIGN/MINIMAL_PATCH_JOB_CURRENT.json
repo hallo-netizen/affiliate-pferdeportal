@@ -1,11 +1,11 @@
 {
-  "job_id": "DESIGN-ORDER-SWAP-001",
-  "description": "Nur Affiliate-Partnerbanner und Beitragsvorschau auf der zentralen Kategorieebene tauschen. Sonst nichts.",
+  "job_id": "DESIGN-ORDER-SWAP-002",
+  "description": "Nur Affiliate-PRODUKTE (Produktvorschläge / pa266-products) über die Beitragsvorschau (pa297-popular) setzen. Affiliate-Banner, Artikel, Verweise und alles andere bleiben exakt wie V1.50.472.",
   "mode": "swap_two_adjacent_complete_ranges_only",
   "baseline_sha256": "ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9",
   "target_member_suffix": "/pferde-template-kit.php",
   "encoding": "utf-8",
-  "first_start": "        if ($affiliate_banner !== '') {\n            $out .= '<section class=\"pa266-section pa266-network\"",
-  "second_start": "        $popular_source_ids = !empty($ctx['hub_post_cat_ids']) ? (array)$ctx['hub_post_cat_ids'] : (array)($ctx['cat_ids'] ?? []);\n",
-  "after_second": "        if ($affiliate_product_count > 0) {\n            $out .= '<section class=\"pa266-section pa266-products\""
+  "first_start": "        $popular_source_ids = !empty($ctx['hub_post_cat_ids']) ? (array)$ctx['hub_post_cat_ids'] : (array)($ctx['cat_ids'] ?? []);\n",
+  "second_start": "        if ($affiliate_product_count > 0) {\n            $out .= '<section class=\"pa266-section pa266-products\"",
+  "after_second": "        $out .= '<section class=\"pa266-section pa266-direct pftk-direct-responsive-v150360\""
 }
