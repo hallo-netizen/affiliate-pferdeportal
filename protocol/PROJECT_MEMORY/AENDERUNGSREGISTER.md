@@ -1001,3 +1001,44 @@ SICHERHEIT:
 Die Nutzerzusage priorisiert die Arbeit, ersetzt aber nicht den technischen Nachweis von Produktfeed, Tracking-/Deeplinkdaten und Pflichtfeldern. Öffentliche Aktivierung erst nach realer Positiv-/Negativprüfung; bis dahin `prepared / integration pending`.
 GRENZE:
 Der dokumentierte Digistore24-Fehlerstand bleibt erhalten, wird während des OTTO-Auftrags aber nicht weiterbearbeitet.
+
+## AFFILIATE-OTTO-001 – OTTO als Awin-Breitenquelle mit Productwissen-Exact-Match
+
+STAND: 2026-09-07.
+
+WAS:
+OTTO wird im AFFILIATE-System über den bestehenden Awin-Transport automatisiert für reale Produktkarten und reale Bannerwerbemittel genutzt.
+Kanonische OTTO-Identität ist Awin Advertiser-ID `14336`.
+
+EBENEN:
+- Startseite: reales passendes Banner;
+- Hub Ebene 1/2: Banner + bis zu drei Produkte;
+- Kategorie/Leaf: Banner + bis zu drei Produkte;
+- normale Beiträge: Banner + bis zu drei Produkte;
+- Produktvergleich/Variantenvergleich/fachlich gebundene Beratung: Exact Product Match.
+
+PRODUCTWISSEN:
+Die parallel entwickelte Produktwissen-Datenbank ist die fachliche Produkt-/Variantenwahrheit.
+Affiliate liest sie nur über eine stabile Consumer-Schnittstelle und schreibt keine Produktfakten.
+`ppar_affiliate_exact_product_requirements`
+liefert exakte Kennungen.
+Kein identisches Affiliate-Angebot = keine Karte; kein Ersatzmodell.
+
+AFFILIATE:
+Bleibt zuständig für aktuelles Angebot, Preis, Bestand, Verkäufer, Tracking und reale Werbemittel.
+
+BANNER:
+Automatische Zuordnung/Activation realer importierter Awin-Banner ist Teil der bestehenden Affiliate-Zentrale.
+Die automatische Beschaffung eines OTTO/Awin-Creative-Katalogs wird nicht erfunden und bleibt bis zu einem real belegten Publisher-Zugang/Export/API offen.
+Produktbilder werden niemals als Ersatzbanner verwendet.
+
+WARUM:
+OTTO besitzt eine hohe Sortimentsbreite und kann viele Portalbereiche versorgen. Die Trennung verhindert zugleich, dass Handelsverfügbarkeit oder Provision fachliche Produktentscheidungen übernimmt.
+
+KISS:
+Kein eigenes OTTO-Plugin, kein zweiter Feedmotor, keine direkte Productwissen-Tabellenkopplung, keine neue Bannerarchitektur.
+
+BELEG:
+`protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
+`release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt`
+
