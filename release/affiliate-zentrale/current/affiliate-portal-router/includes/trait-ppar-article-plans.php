@@ -351,9 +351,25 @@ trait PPAR_Article_Plans_Trait {
             && in_array('post_bottom_products', $placements, true)
             && $this->article_plan_program_verified($campaign)
             && (!method_exists($this, 'idealo_campaign_publicly_allowed') || $this->idealo_campaign_publicly_allowed($campaign));
-        $trusted_auto_verified = $trusted_ebay_auto || $trusted_idealo_auto;
+        // OTTO products remain technically Awin campaigns. They may enter an
+        // editorial product block automatically only when the central output
+        // model already activated the exact verified OTTO/Awin candidate.
+        $trusted_awin_auto = $manual === 'auto_verified'
+            && $network === 'awin'
+            && $campaign_source === 'output_object_v4'
+            && !empty($campaign['active'])
+            && !empty($targets)
+            && in_array('post_bottom_products', $placements, true)
+            && !empty($campaign['post_id'])
+            && (string) get_post_meta(absint($campaign['post_id']), '_ppar_otto_awin_auto', true) === '1'
+            && $this->article_plan_program_verified($campaign);
+        $trusted_auto_verified = $trusted_ebay_auto || $trusted_idealo_auto || $trusted_awin_auto;
         $checks['manual_review'] = ($manual === 'approved' || $trusted_auto_verified) ? 'pass' : ($manual === 'rejected' ? 'fail' : 'warn');
-        $checks['approval_source'] = $trusted_ebay_auto ? 'auto_verified_business' : ($trusted_idealo_auto ? 'auto_verified_idealo' : ($manual === 'approved' ? 'manual' : 'unverified'));
+        $checks['approval_source'] = $trusted_ebay_auto
+            ? 'auto_verified_business'
+            : ($trusted_idealo_auto
+                ? 'auto_verified_idealo'
+                : ($trusted_awin_auto ? 'auto_verified_otto_awin' : ($manual === 'approved' ? 'manual' : 'unverified')));
 
         if (in_array('fail', $checks, true)) {
             $report['overall'] = 'fail';
