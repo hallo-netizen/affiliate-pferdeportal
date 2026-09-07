@@ -28,7 +28,7 @@ function provider_key(array $campaign): string {
     return 'other';
 }
 
-function deterministic_bucket(string $week, array $context, string $slot, int $total): int {
+function deterministic_bucket(string $week, array $context, string $slot, int $total, int $position = 1): int {
     if ($total <= 0) return 0;
     $terms = array_map('intval', (array)($context['term_ids'] ?? []));
     sort($terms, SORT_NUMERIC);
@@ -40,6 +40,7 @@ function deterministic_bucket(string $week, array $context, string $slot, int $t
         implode(',', $terms),
         implode(',', $slugs),
         strtolower($slot),
+        (string)max(1,$position),
     ]);
     return (int)(hexdec(substr(hash('sha256', $seed), 0, 8)) % $total);
 }
@@ -182,5 +183,22 @@ $incomplete=normalize_real_awin_creatives([
  ['advertiser_id'=>14336,'creative_id'=>'b1','title'=>'No tracking','image_url'=>'https://img.invalid/b1.jpg'],
 ],14336);
 ok(count($incomplete['rows'])===0 && $incomplete['blocked']===1,'incomplete real banner row is blocked');
+
+$seed1=hash('sha256','2026-37|101|3,8|decken,pferd|product_after_category_tiles|1');
+$seed2=hash('sha256','2026-37|101|3,8|decken,pferd|product_after_category_tiles|2');
+ok($seed1!==$seed2,'multi-position banner slots use independent deterministic seeds');
+
+function source_envelope(array $raw): array {
+    if (array_key_exists('bound',$raw)) {
+        if (empty($raw['bound'])) return ['bound'=>false,'rows'=>[]];
+        if (!isset($raw['rows']) || !is_array($raw['rows'])) return ['error'=>'rows_invalid'];
+        return ['bound'=>true,'rows'=>$raw['rows']];
+    }
+    return $raw ? ['bound'=>true,'rows'=>$raw] : ['bound'=>false,'rows'=>[]];
+}
+$emptyBound=source_envelope(['bound'=>true,'rows'=>[]]);
+ok($emptyBound['bound']===true && $emptyBound['rows']===[],'bound-empty real source is distinct from unbound source');
+$unbound=source_envelope([]);
+ok($unbound['bound']===false,'empty plain source means not bound');
 
 echo "ALL WEIGHTED BANNER BEHAVIOR TESTS PASS\n";
