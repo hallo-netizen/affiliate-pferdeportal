@@ -1,121 +1,150 @@
 # AFFILIATE – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: OTTO PRIORISIERT / DIGISTORE24 ZURÜCKGESTELLT / TECHNISCHE AKTIVIERUNG NOCH OFFEN
+STATUS: OTTO-AUTOMATISIERUNG STRUKTURELL IMPLEMENTIERT / PRODUCTWISSEN-EXACT-SCHNITTSTELLE BEREIT / REALDATEN + REALE BANNERQUELLE OFFEN
 
+## AUTORITÄT
 
-## AUTORITÄT DIESER DATEI
-
-Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros**.
+Diese Datei ist die einzige aktuelle Campus-Standzusammenfassung des Büros AFFILIATE.
 
 - aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
-- Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Fehlerquelle
-- Zielvertrag → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
-- Änderungsgrund → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- Historie → `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+- Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → Originalquelle
+- Zielvertrag → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+- Warum/Änderungen → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- technische Release-Autorität → `control/release-governance/CURRENT_RELEASE.json`
+- kanonische Source → `release/affiliate-zentrale/current/affiliate-portal-router/`
 
-Technische/Fachwahrheit bleibt an den in dieser Datei verlinkten Originalquellen.
-Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
+## Nutzerpriorität
 
-## Prioritätsentscheidung 07.09.2026
+- OTTO ist der aktuell gebundene Affiliate-Auftrag.
+- Digistore24 bleibt zurückgestellt und nicht blockierend.
+- Kein eigenes OTTO-Plugin.
+- OTTO läuft technisch über Awin.
 
-Der Nutzer meldet die **Zusage für das OTTO-Partnerprogramm**.
+## OTTO-Konzept
 
-Verbindliche Arbeitspriorität:
-- **OTTO muss in die Affiliate-Zentrale integriert werden.**
-- **Digistore24 wird vorerst zurückgestellt.**
-- Der offene Digistore24-Stand bleibt dokumentiert, wird aber aktuell nicht weiterbearbeitet.
-- Keine Digistore24-Regressionen, Discovery-Schleifen oder Support-URL-Arbeit starten, solange der OTTO-Auftrag gebunden ist.
+OTTO wird als breite Commerce-Quelle auf mehreren Ebenen genutzt:
 
-## Konzeptprüfung OTTO
+- Startseite: reales passendes OTTO/Awin-Banner, kein neuer beliebiger Produktblock.
+- Hub Ebene 1: Banner + bis zu drei passend gerankte Produkte.
+- Hub Ebene 2 / Produktgruppe: Banner + bis zu drei Produkte.
+- Kategorie / Leaf: Banner + bis zu drei Produkte.
+- normale Beiträge: passendes Banner + bis zu drei Produkte.
+- Produktvergleich / Variantenvergleich / fachlich exakt gebundene Beratung: Exact Product Match; niemals ähnlich klingendes Ersatzprodukt.
 
-Die vorhandene Architektur passt bereits zum neuen Auftrag:
+Offizielle Werbeformen werden intern KISS abgebildet:
+- Produktfeed → Produktkarten;
+- reale Banner/Images → bestehender Bannerweg;
+- Deeplinks → Linkziel von Produktkarten/Bannern;
+- Logo → kein eigener neuer Slot; nur als reales passendes Creative;
+- Sortimentswerbung → reales Sortimentscreative oder konkrete Produktkarten, keine erfundene Bannerform.
 
-- `class-ppar-product-source-plan.php` führt OTTO bereits als vorbereitete Produktquelle.
-- Vorgesehener Weg: **Awin → fachlich OTTO**.
-- Das bestehende Affiliate-Konzept priorisiert Awin als Kernnetzwerk und zentrale Produkt-/Feedverarbeitung.
-- Deshalb wird **kein neuer OTTO-Gesamtworkflow und kein separates OTTO-Netzwerk erfunden**.
-- OTTO wird als konkrete Produktquelle in den vorhandenen Awin-/Produktquellenweg integriert.
+Detailkonzept:
+`protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
 
-Harte Aktivierungsgrenze:
-Die gemeldete Programmzusage ist die Prioritätsfreigabe. **Produktfeed, reale Awin-Zugänglichkeit, Tracking-/Linkdaten und erforderliche Produktfelder müssen vor öffentlicher Ausgabe real geprüft werden.**
-Bis dahin bleibt der technische Providerstatus `prepared / integration pending`, nicht `active`.
+## Produktwissen – relevant, aber getrennt
 
-## OTTO-spezifische Pflichtpunkte für die Integration
+Die parallel entwickelte zentrale Produktwissen-Datenbank ist relevant.
 
-- bestehende zentrale Produktkarten-/Zuordnungslogik wiederverwenden;
-- reale Produktdaten statt erfundener oder manuell nachgebauter Feeds;
-- Produktdaten regelmäßig aktualisieren;
-- Verkäufer-/Merchant-Angaben aus dem Feed korrekt berücksichtigen;
-- bei Produktvergleichen die bestehende transparente Bewertungs-/Vergleichslogik einhalten;
-- Tracking und Ausgabe weiterhin fail-closed behandeln.
+Verbindliche Rollen:
+- Produktwissen = fachliche Produkt-/Variantenidentität + Fakten.
+- Affiliate = aktuelles Angebot, Preis, Verfügbarkeit, Verkäufer, Tracking, reale Werbemittel.
 
-## Aktueller GitHub-Releasebezug
+Keine direkte Tabellenkopplung und kein Affiliate-Schreibrecht in Produktwissen.
+
+Affiliate-Consumer-Schnittstelle:
+`ppar_affiliate_exact_product_requirements`
+
+Exact Match:
+GTIN/EAN bzw. belastbare echte MPN.
+Kein identisches Angebot = keine Affiliate-Karte.
+Kein Ersatzprodukt.
+
+## Technisch umgesetzt
+
+- OTTO wird kanonisch über Awin Advertiser-ID **14336** erkannt, nicht über geratenen Programmnamen.
+- Awin-Produktimport stößt Asset-Verifikation an.
+- OTTO-Autoaktivierung bleibt fail-closed:
+  - Awin-Programme-Gate;
+  - aktives Produkt;
+  - eindeutige automatische Zielklassifikation;
+  - gültiger Trackinglink;
+  - reales/verifiziertes Bild;
+  - konkreter Verkäufer.
+- GTIN/EAN und explizite MPN können als Exact-Product-Identität bis in die Kampagne getragen werden.
+- Händler-SKU wird nicht als echte MPN ausgegeben.
+- Kategorie-/Hub-/Journal-Produkte nutzen die vorhandenen 1/2/3-Plätze.
+- Exact-Product-Anforderungen dürfen generische Provider-/Kohortenlogik überstimmen, aber keine Sicherheits-/Health-Gates.
+- fehlender Exact Match → kein Ersatz.
+- Verkäufer wird auf konkreten OTTO-Produktkarten ausgegeben.
+- Produktänderungen bei Preis/Bestand/Verkäufer verändern den Freshness-Fingerprint.
+- nach kompletter Asset-Verifikationswelle werden Artikelpläne gebündelt neu bewertet.
+- reale importierte Awin-Banner können bereits über den bestehenden zentralen Ziel-/Slotweg automatisch aktiviert werden.
+- Produktbilder werden nicht zu Fake-Bannern umgebaut.
+
+## Banner – harte Trennung
+
+**Automatische Zuordnung/Activation:** strukturell vorhanden.
+
+**Automatische Beschaffung eines OTTO/Awin-Bannerkatalogs:** noch nicht real belegt.
+
+Deshalb:
+- reales OTTO/Awin-Creative vorhanden/importiert → automatische Prüfung, Zielzuordnung, Slotwahl und Aktivierung möglich;
+- kein belegter Creative-Katalog/API/Export → Bannerbeschaffung bleibt PENDING;
+- keine Ersatzkonstruktion.
+
+## Aktueller technischer Stand
 
 Branch:
 `affiliate-release-current`
 
 HEAD:
-`355a40ebbeceec0a4b90158db9f197b8f6e2ee7b`
+`808ec4f96a42e1647429f318b2fcd035739d9e72`
 
-GitHub-Governance:
-`control/release-governance/CURRENT_RELEASE.json`
-
-Dort gebundener aktiver Kandidat:
+Aktiver Kandidat:
 **6.72.1**
 
 Source-Dateien:
 26
 
-Manifest SHA-256:
-`bc6a47afc0ccac612667eef55b33ec0f7b4f4a6511f3e24546102c4345c141fa`
+Aktuelles Source-Manifest SHA-256:
+`7505a05b1a5534f7cfb0d3063b1eb50e40f723e223847299cb3864c5d116cffc`
 
-## WordPress-Livebeleg aus aktueller Übergabe
+Governance Generation:
+**11**
 
-Live-Version:
-**6.72.2**
+Release:
+**NICHT FREIGEGEBEN**
 
-Live-Installer:
-`affiliate-zentrale_v6.72.2_LIVE_CANDIDATE_26FILE.zip`
+## Prüfstand
 
-SHA-256:
-`789c7859cd9b5390bc561d6a564c2680125bcd453673cf9c6f18285c1103ba2d`
+PASS:
+- statischer Current-Source-Contract-Test für OTTO-ID, Exact Match, Seller-Gate, Produktverteilung und Bannergrenze;
+- lokaler PHP-Behavioral-Test für 14336, GTIN/EAN, MPN, No-Substitution und Kategorie/Artikel-Platzierung.
 
-## Harte Statusdifferenz
+Noch kein vollständiger Hobbyraum-Runner-PASS in diesem Chat:
+Der gebundene Runner benötigt Docker/Podman; die aktuelle lokale Laufzeit hatte PHP, aber weder Docker noch Podman.
+Der Test ist jetzt korrekt in `AFFILIATE_HOBBYRAUM/TASK.current.json` gebunden und muss in einer geeigneten Laufzeit real ausgeführt werden.
 
-GitHub kanonisch:
+Evidence:
+`release/affiliate-zentrale/evidence/otto_awin_productwissen_banner_contract_20260907.txt`
+
+## Real/LIVE noch offen
+
+- OTTO 14336 im eigenen Awin-Publisherkonto real lesen;
+- echten Produktfeed End-to-End verarbeiten;
+- tatsächliche Verkäufer-Spalte aus dem realen Feed binden – keinen Feldnamen raten;
+- WordPress/MariaDB-End-to-End;
+- öffentliche Produktkarten auf Hub/Kategorie/Beitrag;
+- realen OTTO/Awin-Bannerbestand bzw. realen Beschaffungsweg prüfen;
+- reales Banner automatisiert zuordnen und öffentlich prüfen.
+
+## Bestehende Live-Differenz
+
+Campus-Livebeleg:
+WordPress **6.72.2**
+
+GitHub-Kandidat:
 **6.72.1**
 
-WordPress live:
-**6.72.2**
-
-Diese Differenz bleibt dokumentiert.
-Sie darf bei späterer technischer OTTO-Arbeit nicht ignoriert werden.
-
-## Aktuelle Übergabeakten
-
-Pferde-Atelier-Status:
-`AFFILIATE_ZENTRALE_MASTER_STATUS_ZIELVERTRAG_FEHLERPROTOKOLL_2026-09-05.md`
-
-Allgemeiner Gesamtmaster:
-`MASTERDATEI_AFFILIATEPORTAL_ALLGEMEIN_GESAMTPAKET_NEU_V5_31_20260905_KOMPLETT.zip`
-
-Details:
-`MASTERDATEIEN_INVENTAR.md`
-
-## Persistentes Archiv
-
-Pferde:
-`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/AFFILIATE/2026-09-05/`
-
-Allgemeiner Master:
-`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/2026-09-05/`
-
-Archivstatus:
-GELB.
-
-## Harte Sortiergrenze
-
-Diese Datei fasst nur belegte Quellenstände und die aktuelle Nutzerpriorität zusammen.
-
-Originale, Governance, Pluginquellen und Fachregeln bleiben unangetastet.
+Diese Differenz bleibt offen und darf vor einem echten Release nicht ignoriert werden.
