@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Comparison
  * Description: Minimal comparison core on top of Universal Product Knowledge.
- * Version: 0.2.2-prototype
+ * Version: 0.2.3-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: universal-product-knowledge
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPC_VERSION', '0.2.2-prototype' );
+define( 'UPC_VERSION', '0.2.3-prototype' );
 define( 'UPC_SCHEMA_VERSION', '2' );
 define( 'UPC_PLUGIN_FILE', __FILE__ );
 
