@@ -344,23 +344,80 @@ trait PPAR_Automation_Suite_Trait {
         return $result === null ? new WP_Error('automation_provider_adapter_missing', 'Für diesen Provider ist kein Automatisierungsadapter registriert.') : $result;
     }
 
+    /**
+     * Refresh the official scriptable Awin product-feed list once at the start
+     * of a new automation cycle. Failures keep Last-Known-Good feed metadata;
+     * they do not erase the existing list or invent a feed.
+     */
+    private function automation_refresh_awin_feed_list() {
+        $settings = $this->network_settings('awin');
+        if (empty($settings['enabled'])) {
+            return array('status'=>'disabled','count'=>0);
+        }
+        $feed_key = $this->network_secret('awin', 'feed_api_key', $settings);
+        if ($feed_key === '') {
+            return array('status'=>'not_configured','count'=>0);
+        }
+
+        $feed_url = 'https://productdata.awin.com/datafeed/list/apikey/' . rawurlencode($feed_key);
+        $response = $this->api_response(wp_remote_get($feed_url, array(
+            'timeout'=>25,
+            'redirection'=>2,
+            'headers'=>array('Accept'=>'text/csv,text/plain'),
+            'limit_response_size'=>2097152,
+        )));
+        if (empty($response['ok']) || trim((string) ($response['body'] ?? '')) === '') {
+            return new WP_Error(
+                'awin_feed_list_refresh_failed',
+                'Awin-Feedliste konnte nicht aktualisiert werden; Last-Known-Good bleibt erhalten.'
+            );
+        }
+
+        $feeds = $this->parse_awin_feed_list((string) $response['body']);
+        if (!$feeds) {
+            return new WP_Error(
+                'awin_feed_list_empty',
+                'Awin-Feedliste war leer; Last-Known-Good bleibt erhalten.'
+            );
+        }
+        update_option(self::OPTION_NETWORK_AWIN_FEEDS, $feeds, false);
+        return array('status'=>'refreshed','count'=>count($feeds));
+    }
+
     public function run_scheduled_partner_sync($external_executor = false) {
         $settings = $this->automation_settings();
         $expected_executor = $external_executor ? 'server_cron' : 'wp_cron';
         if (empty($settings['enabled']) || $settings['executor'] !== $expected_executor || $this->automation_has_open_jobs()) {
             return;
         }
+
+        $cycle = $this->automation_cycle_state();
+        $new_cycle = $cycle['remaining'] <= 0;
+        if ($new_cycle && !$this->automation_dispatch_due()) {
+            return;
+        }
+        if ($new_cycle) {
+            // Official productdata feed list is scriptable. Refresh it before
+            // partner snapshots for the new cycle. On failure keep LKG metadata.
+            $feed_refresh = $this->automation_refresh_awin_feed_list();
+            if (is_wp_error($feed_refresh)) {
+                update_option('ppar_awin_feed_list_refresh_warning_v1', array(
+                    'at'=>time(),
+                    'code'=>$feed_refresh->get_error_code(),
+                    'message'=>$feed_refresh->get_error_message(),
+                ), false);
+            } else {
+                delete_option('ppar_awin_feed_list_refresh_warning_v1');
+            }
+        }
+
         $sources = $this->automation_scheduled_sources();
         if (!$sources) {
             update_option(self::OPTION_AUTOMATION_CURSOR, 0, false);
             update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
             return;
         }
-        $cycle = $this->automation_cycle_state();
-        if ($cycle['remaining'] <= 0) {
-            if (!$this->automation_dispatch_due()) {
-                return;
-            }
+        if ($new_cycle) {
             $cycle = array('remaining'=>count($sources),'total'=>count($sources),'started_at'=>time());
             update_option(self::OPTION_AUTOMATION_LAST_DISPATCH, time(), false);
         }
