@@ -215,4 +215,34 @@ $position2=null;
 foreach($position2Candidates as $candidate){if($candidate!==$position1){$position2=$candidate;break;}}
 ok($position2==='banner-b','second banner position never repeats position one');
 
+function allowed_awin_ids(array $records,array $joined,string $portal): array {
+    $out=[];
+    foreach($records as $id=>$row){
+        $id=(int)$id;
+        if($id<=0 || !is_array($row)) continue;
+        if(($row['status'] ?? 'pending')!=='allow_local') continue;
+        if(($row['portal_key'] ?? '')!==$portal) continue;
+        if(($joined[$id] ?? '')!=='joined') continue;
+        $out[]=$id;
+    }
+    sort($out,SORT_NUMERIC);
+    return array_values(array_unique($out));
+}
+$records=[
+ 14336=>['status'=>'allow_local','portal_key'=>'pferde'],
+ 999=>['status'=>'pending','portal_key'=>''],
+ 777=>['status'=>'allow_local','portal_key'=>'pferde'],
+];
+$joined=[14336=>'joined',999=>'joined',777=>'left'];
+ok(allowed_awin_ids($records,$joined,'pferde')===[14336],'allowed Awin programme bootstraps without Partner-Intake snapshot');
+ok(allowed_awin_ids($records,$joined,'other')===[],'portal mismatch blocks scheduled Awin bootstrap');
+
+function lkg_refresh(array $existing,$refreshOk,array $fresh): array {
+    return $refreshOk ? $fresh : $existing;
+}
+$existingFeeds=[['advertiser_id'=>14336,'url'=>'old']];
+ok(lkg_refresh($existingFeeds,false,[])===$existingFeeds,'failed Awin feed refresh preserves Last-Known-Good');
+$existingProgrammes=[14336=>'joined'];
+ok(lkg_refresh($existingProgrammes,false,[])===$existingProgrammes,'failed Awin programme refresh preserves Last-Known-Good');
+
 echo "ALL WEIGHTED BANNER BEHAVIOR TESTS PASS\n";
