@@ -27,7 +27,7 @@ Bei JEDEM neuen Fehler:
 3. erst danach einen einzigen neuen Versuch starten.
 
 Runner:
-python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py TASK.current.json
+python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json
 
 Erlaubtes Ergebnis:
 PASS + Patch/Output
