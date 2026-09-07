@@ -1171,3 +1171,24 @@ kein `paul/*`-Branch, kein WRITE_SCOPE, keine technische Projektarbeit innerhalb
 
 BEZUG:
 ARCH-068/069.
+
+
+### 2026-09-07 – PB ONE Arbeitsdokumente ergänzt
+
+BEDARF:
+Laufende Präsentationen, Flyer und Konzeptpapiere brauchen eine eigene Akte, damit Punktesammlung, Entscheidungen und Entwürfe chatübergreifend erhalten bleiben.
+
+KISS-UMSETZUNG:
+- `PB_ONE/ARBEITSDOKUMENTE/START_HERE.md`;
+- `REGISTER.md` als Index;
+- `VORLAGE.md` als minimale Aktenvorlage;
+- Verweise aus PB ONE, Zentralregister, Angebote/Flyer und Handlungsverzeichnis.
+
+ARBEITSLOGIK:
+Punkte sammeln → eigene Akte fortschreiben → Entwurf entwickeln → freigeben → finales Ergebnis im zuständigen Register referenzieren.
+
+NEGATIV:
+Keine zweite CURRENT-Wahrheit, kein zusätzlicher Hobbyraum, keine Programmierung.
+
+BEZUG:
+ARCH-070.

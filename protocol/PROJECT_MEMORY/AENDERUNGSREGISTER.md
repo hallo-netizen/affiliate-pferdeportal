@@ -906,3 +906,16 @@ Rohideen, weiterentwickelte Konzepte und fertige Unterlagen brauchen unterschied
 KISS:
 Idee → Entwicklung → Angebot/Flyer oder Projektübergabe.
 Keine zusätzliche technische Schicht.
+
+
+## ARCH-070 – PB ONE Arbeitsdokumente als eigene Akten
+WAS:
+`PB_ONE/ARBEITSDOKUMENTE/` wird als gemeinsamer Ablage- und Entwicklungsort für laufende Präsentationen, Flyer, Konzeptpapiere und andere Unterlagen eingerichtet.
+WARUM:
+Punkte, Entscheidungen und Entwurfsstände sollen nicht in Chats verschwinden und nicht in Zentral-/Unterlagenregister hineinkopiert werden.
+KISS:
+Eine laufende Unterlage = eine eigene Akte. `REGISTER.md` verweist nur auf die Akte; `VORLAGE.md` gibt ein minimales Schema vor.
+RECHTE:
+Nutzer und Paul gleichberechtigt redaktionell.
+GRENZE:
+Keine Programmierung in PB ONE.

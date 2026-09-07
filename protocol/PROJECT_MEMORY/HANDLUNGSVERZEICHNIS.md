@@ -238,9 +238,27 @@ Weg:
 - Überblick → `PB_ONE/ZENTRALREGISTER.md`
 - Rohidee → `PB_ONE/IDEENWERKSTATT/START_HERE.md`
 - Entwicklung → `PB_ONE/ENTWICKLUNGSRAUM/START_HERE.md`
+- Arbeitsdokument/Präsentationsentwurf → `PB_ONE/ARBEITSDOKUMENTE/START_HERE.md`
 - Angebot/Flyer → `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
 
 Nutzer und Paul haben in PB ONE dieselben redaktionellen Rechte.
 
 Keine Programmierung in PB ONE.
 Technische Umsetzung erst nach bewusster Übergabe an ein Projekt-/Fachbüro.
+
+
+## PB ONE – Arbeitsdokument anlegen
+
+Aktion:
+Für eine Präsentation, einen Flyer, ein Konzeptpapier oder eine andere laufende Unterlage Punkte und Entwürfe sammeln.
+
+Weg:
+`PB_ONE/ARBEITSDOKUMENTE/START_HERE.md`
+→ neue Akte nach Vorlage
+→ Punkte/Entscheidungen/Entwürfe fortlaufend dort pflegen
+→ nach Freigabe finales Ergebnis im zuständigen Register referenzieren.
+
+Regel:
+Eine laufende Unterlage = eine eigene Akte.
+Register enthalten nur Verweise, nicht den vollständigen Inhalt.
+Keine Programmierung.

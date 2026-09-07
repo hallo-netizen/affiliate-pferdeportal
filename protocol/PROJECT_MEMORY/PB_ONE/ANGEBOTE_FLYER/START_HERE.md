@@ -17,7 +17,7 @@ gemeinsam mit Paul lesen, schreiben, Inhalte recherchieren, Leistungen strukturi
 hier programmieren oder aus ungeprüften Ideen verbindliche Leistungsversprechen machen.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `UNTERLAGENREGISTER.md`.
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → bei laufendem Entwurf `../ARBEITSDOKUMENTE/START_HERE.md` → nach Freigabe `UNTERLAGENREGISTER.md`.
 
 ## Rechte
 
@@ -31,7 +31,8 @@ Nutzer und Paul haben hier dieselben redaktionellen Rechte.
 4. Leistungsversprechen nur aus belegbaren Fähigkeiten ableiten.
 5. Kernbotschaft formulieren.
 6. Struktur erstellen.
-7. Text + ggf. Bild-/Grafikkonzept erstellen.
-8. gemeinsam überarbeiten.
-9. finale Freigabe festhalten.
-10. fertige Unterlage im `UNTERLAGENREGISTER.md` referenzieren.
+7. dafür eine eigene Akte unter `../ARBEITSDOKUMENTE/` anlegen und dort Punkte, Entscheidungen und Entwürfe sammeln.
+8. Text + ggf. Bild-/Grafikkonzept erstellen.
+9. gemeinsam überarbeiten.
+10. finale Freigabe festhalten.
+11. fertige Unterlage im `UNTERLAGENREGISTER.md` referenzieren.

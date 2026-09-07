@@ -21,6 +21,7 @@ hier programmieren, technische Produktionsarbeit ausführen oder bestehende Proj
 - Überblick über alles → `ZENTRALREGISTER.md`
 - neue Idee / Ideenschmiede → `IDEENWERKSTATT/START_HERE.md`
 - Idee zum belastbaren Konzept entwickeln → `ENTWICKLUNGSRAUM/START_HERE.md`
+- laufende Arbeitsunterlage / Präsentation / Entwurf → `ARBEITSDOKUMENTE/START_HERE.md`
 - Angebot / Flyer / Unterlage → `ANGEBOTE_FLYER/START_HERE.md`
 
 ## Gemeinsame Rechte
@@ -57,6 +58,7 @@ PB ONE ist:
 - Ideenschmiede;
 - Entwicklungsort;
 - Unterlagen-/Angebotsraum;
+- Arbeitsdokumente für laufende Entwürfe;
 - Knotenpunkt zwischen Projekten.
 
 PB ONE ist kein einzelnes Kundenprojekt und ersetzt keine Projektgebäude.

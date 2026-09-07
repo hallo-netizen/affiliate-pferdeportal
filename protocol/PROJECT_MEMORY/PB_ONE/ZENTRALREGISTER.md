@@ -19,6 +19,10 @@ Hauptort:
 Hauptort:
 `ENTWICKLUNGSRAUM/KONZEPTREGISTER.md`
 
+### Arbeitsdokumente
+Hauptort:
+`ARBEITSDOKUMENTE/REGISTER.md`
+
 ### Angebote / Flyer / Unterlagen
 Hauptort:
 `ANGEBOTE_FLYER/UNTERLAGENREGISTER.md`
