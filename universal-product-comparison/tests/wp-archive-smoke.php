@@ -89,6 +89,7 @@ $product_post = wp_insert_post(
 );
 upc_archive_assert( ! is_wp_error( $product_post ), 'create published product-comparison archive fixture' );
 update_post_meta( $product_post, '_upc_comparison_id', (string) $product_comparison_id );
+update_post_meta( $product_post, '_upc_project_key', 'test-project' );
 
 $variant_post = wp_insert_post(
     array(
@@ -102,6 +103,59 @@ $variant_post = wp_insert_post(
 );
 upc_archive_assert( ! is_wp_error( $variant_post ), 'create published variant-comparison archive fixture' );
 update_post_meta( $variant_post, '_upc_comparison_id', (string) $variant_comparison_id );
+update_post_meta( $variant_post, '_upc_project_key', 'test-project' );
+
+$product_link_manifest = upc_link_manifest( $product_comparison_id, 'test-project' );
+upc_archive_assert( ! is_wp_error( $product_link_manifest ), 'build product-to-variant link manifest' );
+upc_archive_assert( 1 === count( $product_link_manifest['entries'] ), 'product comparison resolves exactly one related variant comparison' );
+upc_archive_assert(
+    'variant_comparison_for_product' === $product_link_manifest['entries'][0]['relation'],
+    'product comparison relation is variant comparison for product'
+);
+upc_archive_assert(
+    (int) $variant_comparison_id === (int) $product_link_manifest['entries'][0]['target_comparison_id'],
+    'product comparison links to exact variant comparison id'
+);
+
+$variant_link_manifest = upc_link_manifest( $variant_comparison_id, 'test-project' );
+upc_archive_assert( ! is_wp_error( $variant_link_manifest ), 'build variant-to-product link manifest' );
+upc_archive_assert( 1 === count( $variant_link_manifest['entries'] ), 'variant comparison resolves exactly one related product comparison' );
+upc_archive_assert(
+    'product_comparison_for_variant' === $variant_link_manifest['entries'][0]['relation'],
+    'variant comparison relation is product comparison for variant'
+);
+upc_archive_assert(
+    (int) $product_comparison_id === (int) $variant_link_manifest['entries'][0]['target_comparison_id'],
+    'variant comparison links back to exact product comparison id'
+);
+
+$product_link_manifest_repeat = upc_link_manifest( $product_comparison_id, 'test-project' );
+upc_archive_assert(
+    $product_link_manifest_repeat['manifest_sha256'] === $product_link_manifest['manifest_sha256'],
+    'same project state produces identical link-manifest hash'
+);
+
+$duplicate_variant_post = wp_insert_post(
+    array(
+        'post_type'     => 'post',
+        'post_status'   => 'draft',
+        'post_title'    => 'Duplicate Variant Target',
+        'post_content'  => 'Fixture',
+        'post_category' => array( (int) $child->term_id ),
+    ),
+    true
+);
+upc_archive_assert( ! is_wp_error( $duplicate_variant_post ), 'create duplicate target fixture' );
+update_post_meta( $duplicate_variant_post, '_upc_comparison_id', (string) $variant_comparison_id );
+update_post_meta( $duplicate_variant_post, '_upc_project_key', 'test-project' );
+
+$duplicate_target_blocked = upc_link_manifest( $product_comparison_id, 'test-project' );
+upc_archive_assert(
+    is_wp_error( $duplicate_target_blocked )
+    && 'UPC_LINK_MANIFEST_DUPLICATE_TARGET_POST' === $duplicate_target_blocked->get_error_code(),
+    'link manifest blocks duplicate WordPress targets for same comparison'
+);
+wp_delete_post( $duplicate_variant_post, true );
 
 $group_post = wp_insert_post(
     array(
@@ -176,4 +230,5 @@ wp_delete_post( $wrong_post, true );
 $restored = $archive->build_view( 'test-project', 'regendecken-vergleich' );
 upc_archive_assert( ! is_wp_error( $restored ) && 3 === count( $restored['items'] ), 'archive recovers after invalid fixture removal' );
 
+fwrite( STDOUT, "UPC_LINK_MANIFEST_WORDPRESS_GESAMT_PASS\n" );
 fwrite( STDOUT, "UPC_ARCHIVE_WORDPRESS_GESAMT_PASS\n" );
