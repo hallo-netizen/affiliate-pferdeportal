@@ -491,3 +491,70 @@ Das 68-Dossier-Paket enthält noch ältere `TIER_SAME_BRAND`-Vergleiche. Diese s
 
 Noch nicht belegt:
 Writer/Textqualität, Entscheidungsinterpretation „welches Merkmal passt zu welchem Bedarf“, WordPress-Draft-Ausgabe, SEO-Anbindung, Affiliate-Exact-Match, Frontend/Archivtemplate.
+
+
+## PRODUKTVERGLEICH V1 – ZERO-FREEDOM WRITER 2026-09-07
+
+Kritische Ableitung aus dem bestehenden TEXT-/STARTMASTER-Konzept:
+
+**Übernommen wird die Grundidee, nicht die Altarchitektur.**
+
+Bewährt und übernommen:
+- Prompt ist keine technische Sicherung;
+- ab Produktion keine freie Workflow-/Textentscheidung;
+- Single Door;
+- exakt gebundene Eingaben;
+- Hash-Bindung;
+- fail-closed ohne Ersatzroute;
+- Output-Quarantäne bis Validator-PASS;
+- feste Zustandsreihenfolge;
+- PASS-Receipt;
+- kein Auto-Publish;
+- reale Fehler werden Regressionstests;
+- ein Test darf nur behaupten, was wirklich ausgeführt wurde.
+
+Bewusst nicht übernommen:
+- STARTMASTER-Raumkette;
+- PPM/PSERC/PSTE;
+- Signer-/Capsule-Kaskade;
+- mehrere Executor-/Gate-Ebenen;
+- freie Worker/Handoffs.
+
+Neue harte Writer-Regel:
+**Der Produktions-Writer hat NULL Freiheit.** Er ist ein deterministischer Renderer.
+
+Produktionskette:
+`BOUND_INPUT -> QUARANTINED_RENDERED -> VALIDATED -> DRAFT_READY_FOR_REVIEW`.
+
+Technische Sperren:
+- kein öffentlicher `upc_writer()`-Einstieg;
+- Produktion nur über Single Door `upc_production()`;
+- keine Callbacks oder frei übergebenen Entscheidungsregeln;
+- nur `project_key + ruleset_id`;
+- Rulebook als versionierte Datenfile, im Manifest SHA-256-gebunden;
+- Rulebook an exakten Vergleich gebunden;
+- Regeln an exakte Fakten-Signaturen gebunden;
+- Faktenänderung -> `UPC_DECISION_RULE_FACT_BINDING_MISMATCH` -> BLOCKED;
+- Rulebook-Manipulation -> `UPC_RULESET_HASH_MISMATCH` -> BLOCKED;
+- fehlende Regel bei unterschiedlichen verifizierten Fakten -> BLOCKED;
+- kein Fallback-Titel;
+- kein LLM-/Netzwerkzugriff im Runtime-Renderer;
+- kein Zufall/Uhrzeit zur Textvariation;
+- kein Auto-Publish.
+
+Beleg:
+- Technik-Branch `hobbyroom/productwissen-v1-prototype`;
+- Draft-PR #142 gegen Campus-Branch, nicht main;
+- geprüfter Code-Head `f17f3af60c62e3ffcb58cbba2b4fd19358b97eb6`;
+- WordPress+MySQL Run `34111825722`: SUCCESS;
+- `UPC_ZERO_FREEDOM_STATIC_GUARD_PASS`;
+- 100/100 Wiederholungen byte-identisch;
+- manipuliertes Rulebook korrekt BLOCKED;
+- geänderter Herstellerfakt gegen altes Rulebook korrekt BLOCKED;
+- Golden Output für PV-REG-001 / Artikelvertrag V1: `994d20136cebd169daa8a09f38248ee315552f8f63ea5f25c14995a01344828f` PASS;
+- `UPC_REAL_DOSSIER_PV_REG_001_PASS`.
+
+Technischer Vertrag im Prototyp:
+`universal-product-comparison/ZERO_FREEDOM_WRITER_CONTRACT_V1.md`.
+
+Artikelqualität wird künftig nicht durch spontane Writer-Freiheit verbessert, sondern ausschließlich durch neue geprüfte Versionen von Artikelvertrag/Rulebook mit neuen Golden Outputs.
