@@ -1,48 +1,53 @@
-name: Campus Tresor Snapshot
+name: Campus GitHub Complete Backup
 
 on:
   push:
     branches:
       - tresor/build-20260905
+  workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
+  deployments: read
+  issues: read
+  pull-requests: read
 
 jobs:
-  build-tresor:
+  build-github-backup:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout full repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Fetch all branches and tags
+      - name: Fetch every recoverable Git ref
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin '+refs/heads/*:refs/remotes/origin/*' '+refs/tags/*:refs/tags/*' --prune
-          mkdir -p tresor/meta tresor/restore-test
+          git fetch origin \
+            '+refs/heads/*:refs/backup/heads/*' \
+            '+refs/tags/*:refs/tags/*' \
+            '+refs/pull/*/head:refs/backup/pull/*/head' \
+            '+refs/pull/*/merge:refs/backup/pull/*/merge' \
+            --prune
+          mkdir -p backup/meta backup/release-assets backup/restore-test
 
-      - name: Create Git mirror bundle
+      - name: Build complete Git bundle
         shell: bash
         run: |
           set -euo pipefail
-          git bundle create tresor/affiliate-pferdeportal.bundle --all
-          git bundle verify tresor/affiliate-pferdeportal.bundle
-          git show-ref > tresor/meta/show-ref.txt
-          git branch -a > tresor/meta/branches.txt
-          git tag -l > tresor/meta/tags.txt
-          git log --all --oneline --decorate --graph > tresor/meta/commit-graph.txt
-          git rev-parse refs/remotes/origin/main > tresor/meta/main-sha.txt
-          if git rev-parse refs/remotes/origin/hobbyroom/project-memory-campus-v1-20260905 >/dev/null 2>&1; then
-            git rev-parse refs/remotes/origin/hobbyroom/project-memory-campus-v1-20260905 > tresor/meta/campus-sha.txt
-          fi
-          if git rev-parse refs/remotes/origin/paul/text-seo-campus-ready-20260905 >/dev/null 2>&1; then
-            git rev-parse refs/remotes/origin/paul/text-seo-campus-ready-20260905 > tresor/meta/paul-text-seo-sha.txt
-          fi
+          git bundle create backup/affiliate-pferdeportal.bundle --all
+          git bundle verify backup/affiliate-pferdeportal.bundle
+          git show-ref | sort > backup/meta/show-ref.txt
+          git for-each-ref --format='%(refname) %(objectname)' refs/backup/heads | sort > backup/meta/source-branches.txt
+          git for-each-ref --format='%(refname) %(objectname)' refs/backup/pull | sort > backup/meta/pull-refs.txt
+          git tag -l | sort > backup/meta/tags.txt
+          git log --all --oneline --decorate --graph > backup/meta/commit-graph.txt
+          git rev-parse refs/backup/heads/main > backup/meta/main-sha.txt
 
-      - name: Snapshot GitHub metadata
+      - name: Snapshot GitHub metadata and collaboration history
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -52,61 +57,160 @@ jobs:
           paged_array() {
             local endpoint="$1"
             local out="$2"
-            gh api --paginate "$endpoint" | jq -s 'add' > "$out"
+            gh api --paginate "$endpoint" | jq -s 'add // []' > "$out"
           }
 
-          gh api "repos/$GITHUB_REPOSITORY" > tresor/meta/repository.json
-          paged_array "repos/$GITHUB_REPOSITORY/branches?per_page=100" "tresor/meta/branches.json"
-          paged_array "repos/$GITHUB_REPOSITORY/tags?per_page=100" "tresor/meta/tags.json"
-          paged_array "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100" "tresor/meta/issues.json"
-          paged_array "repos/$GITHUB_REPOSITORY/pulls?state=all&per_page=100" "tresor/meta/pulls.json"
-          paged_array "repos/$GITHUB_REPOSITORY/releases?per_page=100" "tresor/meta/releases.json"
-          paged_array "repos/$GITHUB_REPOSITORY/rulesets?per_page=100" "tresor/meta/rulesets.json"
-          gh api "repos/$GITHUB_REPOSITORY/actions/workflows?per_page=100" > tresor/meta/workflows.json
+          optional_json() {
+            local endpoint="$1"
+            local out="$2"
+            if gh api "$endpoint" > "$out.tmp" 2>"$out.err"; then
+              mv "$out.tmp" "$out"
+              printf 'PASS %s\n' "$endpoint" >> backup/meta/optional-api-status.txt
+              rm -f "$out.err"
+            else
+              printf 'UNAVAILABLE %s :: %s\n' "$endpoint" "$(tr '\n' ' ' < "$out.err")" >> backup/meta/optional-api-status.txt
+              printf '{"status":"UNAVAILABLE","endpoint":%s}\n' "$(jq -Rn --arg x "$endpoint" '$x')" > "$out"
+              rm -f "$out.tmp" "$out.err"
+            fi
+          }
 
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          p = Path("tresor/meta")
-          counts = {}
-          for name in ("branches","tags","issues","pulls","releases","rulesets"):
-              data = json.loads((p / f"{name}.json").read_text())
-              counts[name] = len(data)
-          wf = json.loads((p / "workflows.json").read_text())
-          counts["workflows"] = len(wf.get("workflows", []))
-          (p / "metadata-counts.json").write_text(json.dumps(counts, indent=2) + "\n")
-          PY
+          gh api "repos/$GITHUB_REPOSITORY" > backup/meta/repository.json
+          paged_array "repos/$GITHUB_REPOSITORY/branches?per_page=100" backup/meta/branches.json
+          paged_array "repos/$GITHUB_REPOSITORY/tags?per_page=100" backup/meta/tags.json
+          paged_array "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100" backup/meta/issues.json
+          paged_array "repos/$GITHUB_REPOSITORY/issues/comments?per_page=100" backup/meta/issue-comments.json
+          paged_array "repos/$GITHUB_REPOSITORY/issues/events?per_page=100" backup/meta/issue-events.json
+          paged_array "repos/$GITHUB_REPOSITORY/pulls?state=all&per_page=100" backup/meta/pulls.json
+          paged_array "repos/$GITHUB_REPOSITORY/releases?per_page=100" backup/meta/releases.json
+          paged_array "repos/$GITHUB_REPOSITORY/labels?per_page=100" backup/meta/labels.json
+          paged_array "repos/$GITHUB_REPOSITORY/milestones?state=all&per_page=100" backup/meta/milestones.json
+          paged_array "repos/$GITHUB_REPOSITORY/rulesets?per_page=100" backup/meta/rulesets.json
+          paged_array "repos/$GITHUB_REPOSITORY/deployments?per_page=100" backup/meta/deployments.json
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows?per_page=100" > backup/meta/workflows.json
+
+          : > backup/meta/optional-api-status.txt
+          optional_json "repos/$GITHUB_REPOSITORY/environments?per_page=100" backup/meta/environments.json
+          optional_json "repos/$GITHUB_REPOSITORY/actions/variables?per_page=100" backup/meta/actions-variables.json
+          optional_json "repos/$GITHUB_REPOSITORY/actions/permissions" backup/meta/actions-permissions.json
+          optional_json "repos/$GITHUB_REPOSITORY/actions/permissions/workflow" backup/meta/actions-workflow-permissions.json
+          optional_json "repos/$GITHUB_REPOSITORY/actions/secrets?per_page=100" backup/meta/actions-secret-names.json
+          optional_json "repos/$GITHUB_REPOSITORY/hooks?per_page=100" backup/meta/webhooks.json
+          optional_json "repos/$GITHUB_REPOSITORY/collaborators?affiliation=all&per_page=100" backup/meta/collaborators.json
+
+          mkdir -p backup/meta/pr-reviews backup/meta/pr-review-comments
+          jq -r '.[].number' backup/meta/pulls.json | while read -r pr; do
+            paged_array "repos/$GITHUB_REPOSITORY/pulls/$pr/reviews?per_page=100" "backup/meta/pr-reviews/$pr.json"
+            paged_array "repos/$GITHUB_REPOSITORY/pulls/$pr/comments?per_page=100" "backup/meta/pr-review-comments/$pr.json"
+          done
+
+      - name: Download release assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          jq -r '.[] | .id as $rid | .assets[]? | [$rid,.id,.name] | @tsv' backup/meta/releases.json |
+          while IFS=$'\t' read -r release_id asset_id asset_name; do
+            safe_name="$(basename "$asset_name")"
+            mkdir -p "backup/release-assets/$release_id"
+            gh api -H 'Accept: application/octet-stream'               "repos/$GITHUB_REPOSITORY/releases/assets/$asset_id"               > "backup/release-assets/$release_id/$safe_name"
+          done
+
+      - name: Snapshot wiki if initialized
+        shell: bash
+        run: |
+          set -euo pipefail
+          wiki_url="https://github.com/$GITHUB_REPOSITORY.wiki.git"
+          if git ls-remote "$wiki_url" >/dev/null 2>&1; then
+            git clone --mirror "$wiki_url" backup/wiki.git
+            git -C backup/wiki.git fsck --full --strict
+            printf 'WIKI_MIRROR_PASS\n' > backup/meta/wiki-status.txt
+          else
+            printf 'WIKI_NOT_INITIALIZED\n' > backup/meta/wiki-status.txt
+          fi
 
       - name: Restore-test Git bundle
         shell: bash
         run: |
           set -euo pipefail
-          git clone tresor/affiliate-pferdeportal.bundle tresor/restore-test/repo
-          git -C tresor/restore-test/repo fsck --full
-          git -C tresor/restore-test/repo log -1 --oneline > tresor/meta/restore-test-head.txt
-          printf 'GIT_BUNDLE_RESTORE_PASS\n' > tresor/meta/restore-test-status.txt
+          git bundle verify backup/affiliate-pferdeportal.bundle
+          git clone --mirror backup/affiliate-pferdeportal.bundle backup/restore-test/repo.git
+          git -C backup/restore-test/repo.git fsck --full --strict
 
-      - name: Build manifest and hashes
+          git for-each-ref --format='%(refname) %(objectname)' refs/backup/heads | sort > /tmp/source-heads
+          git -C backup/restore-test/repo.git for-each-ref --format='%(refname) %(objectname)' refs/backup/heads | sort > /tmp/restored-heads
+          diff -u /tmp/source-heads /tmp/restored-heads
+
+          printf 'GIT_BUNDLE_RESTORE_PASS\n' > backup/meta/restore-test-status.txt
+
+      - name: Verify metadata and build manifest
         shell: bash
         run: |
           set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          p=Path("backup/meta")
+          required=[
+            "repository.json","branches.json","tags.json","issues.json","issue-comments.json",
+            "issue-events.json","pulls.json","releases.json","labels.json","milestones.json",
+            "rulesets.json","deployments.json","workflows.json","restore-test-status.txt"
+          ]
+          missing=[x for x in required if not (p/x).exists()]
+          if missing:
+              raise SystemExit("METADATA_MISSING:" + ",".join(missing))
+
+          counts={}
+          for name in ["branches","tags","issues","issue-comments","issue-events","pulls",
+                       "releases","labels","milestones","rulesets","deployments"]:
+              data=json.loads((p/f"{name}.json").read_text())
+              counts[name]=len(data)
+          wf=json.loads((p/"workflows.json").read_text())
+          counts["workflows"]=len(wf.get("workflows",[]))
+          counts["pr_reviews"]=sum(len(json.loads(x.read_text())) for x in (p/"pr-reviews").glob("*.json"))
+          counts["pr_review_comments"]=sum(len(json.loads(x.read_text())) for x in (p/"pr-review-comments").glob("*.json"))
+          (p/"metadata-counts.json").write_text(json.dumps(counts,indent=2)+"\n")
+          PY
+
+          branch_count="$(wc -l < backup/meta/source-branches.txt | tr -d ' ')"
+          pull_ref_count="$(wc -l < backup/meta/pull-refs.txt | tr -d ' ')"
+          tag_count="$(wc -l < backup/meta/tags.txt | tr -d ' ')"
+          asset_count="$(find backup/release-assets -type f | wc -l | tr -d ' ')"
+
           {
+            echo "status=GITHUB_BACKUP_PASS"
             echo "created_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "repository=$GITHUB_REPOSITORY"
-            echo "workflow_ref=$GITHUB_REF"
-            echo "workflow_sha=$GITHUB_SHA"
-            echo "main_sha=$(cat tresor/meta/main-sha.txt)"
-            echo "branch_count=$(git for-each-ref refs/remotes/origin --format='%(refname)' | wc -l | tr -d ' ')"
-            echo "tag_count=$(git tag -l | wc -l | tr -d ' ')"
-            echo "git_bundle_restore=$(cat tresor/meta/restore-test-status.txt)"
-          } > tresor/MANIFEST.txt
-          sha256sum tresor/affiliate-pferdeportal.bundle > tresor/SHA256SUMS.txt
-          tar -czf CAMPUS_TRESOR_GIT_MIRROR_20260905_V5.tar.gz -C tresor affiliate-pferdeportal.bundle meta MANIFEST.txt SHA256SUMS.txt
+            echo "source_workflow_sha=$GITHUB_SHA"
+            echo "main_sha=$(cat backup/meta/main-sha.txt)"
+            echo "branch_count=$branch_count"
+            echo "pull_ref_count=$pull_ref_count"
+            echo "tag_count=$tag_count"
+            echo "release_asset_files=$asset_count"
+            echo "git_bundle_restore=$(cat backup/meta/restore-test-status.txt)"
+            echo "secret_values=NOT_EXPORTABLE_BY_GITHUB"
+          } > backup/MANIFEST.txt
 
-      - name: Upload Tresor artifact
+          sha256sum backup/affiliate-pferdeportal.bundle > backup/SHA256SUMS.txt
+          find backup/release-assets -type f -print0 | sort -z | xargs -0 -r sha256sum >> backup/SHA256SUMS.txt
+
+      - name: Build one downloadable file
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf backup/restore-test
+          tar -czf GITHUB_KOMPLETTBACKUP.tar.gz -C backup .
+          tar -tzf GITHUB_KOMPLETTBACKUP.tar.gz >/dev/null
+          sha256sum GITHUB_KOMPLETTBACKUP.tar.gz > GITHUB_KOMPLETTBACKUP.tar.gz.sha256
+          echo GITHUB_BACKUP_PASS
+
+      - name: Upload verified backup
         uses: actions/upload-artifact@v4
         with:
-          name: CAMPUS_TRESOR_GIT_MIRROR_20260905_V5
-          path: CAMPUS_TRESOR_GIT_MIRROR_20260905_V5.tar.gz
+          name: GITHUB_KOMPLETTBACKUP
+          path: |
+            GITHUB_KOMPLETTBACKUP.tar.gz
+            GITHUB_KOMPLETTBACKUP.tar.gz.sha256
           if-no-files-found: error
           retention-days: 30
