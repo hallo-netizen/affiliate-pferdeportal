@@ -1314,6 +1314,13 @@ trait PPAR_Output_Objects_Trait {
         return $identity !== '' && preg_match('/(?:^|[^a-z0-9])otto(?:[^a-z0-9]|$)/', $identity);
     }
 
+    private function output_otto_seller_name($row) {
+        if (!is_array($row)) { return ''; }
+        $payload = json_decode((string) ($row['payload'] ?? ''), true);
+        $payload = is_array($payload) ? $payload : array();
+        return sanitize_text_field((string) ($payload['seller_name'] ?? ''));
+    }
+
     /**
      * Automatic public OTTO product output is allowed only after the existing
      * Awin programme gate, real image verification, tracking validation and
@@ -1340,6 +1347,11 @@ trait PPAR_Output_Objects_Trait {
         }
         $tracking_url = esc_url_raw((string) ($row['tracking_url'] ?? ''));
         if ($tracking_url === '' || !wp_http_validate_url($tracking_url)) {
+            return false;
+        }
+        // OTTO requires the concrete marketplace seller for every specific
+        // product advertisement. Missing seller evidence blocks automatic output.
+        if ($this->output_otto_seller_name($row) === '') {
             return false;
         }
         $advertiser_id = absint($row['partner_external_id'] ?? 0);
@@ -1433,7 +1445,7 @@ trait PPAR_Output_Objects_Trait {
             : 'Ausgewählter Partner';
         $campaign['ebay_content_isolated'] = $is_ebay_campaign && $output_type === 'product_campaign';
         $campaign['title'] = sanitize_text_field((string) ($row['title'] ?? '')); $campaign['description'] = sanitize_textarea_field((string) ($row['description'] ?? ''));
-        $campaign['price'] = sanitize_text_field((string) ($payload['price'] ?? '')); $campaign['currency'] = strtoupper(substr(sanitize_text_field((string) ($payload['currency'] ?? 'EUR')), 0, 10)); $campaign['availability'] = sanitize_text_field((string) ($payload['availability'] ?? ''));
+        $campaign['price'] = sanitize_text_field((string) ($payload['price'] ?? '')); $campaign['currency'] = strtoupper(substr(sanitize_text_field((string) ($payload['currency'] ?? 'EUR')), 0, 10)); $campaign['availability'] = sanitize_text_field((string) ($payload['availability'] ?? '')); $campaign['seller_name'] = sanitize_text_field((string) ($payload['seller_name'] ?? ''));
         $campaign['voucher_code'] = sanitize_text_field((string) ($payload['voucher_code'] ?? '')); $campaign['start_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['start_date'] ?? '') : ''; $campaign['end_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['end_date'] ?? '') : '';
         $campaign['image_url'] = esc_url_raw((string) ($row['image_url'] ?? '')); $campaign['url'] = $tracking_url; $campaign['destination_url'] = esc_url_raw((string) ($row['destination_url'] ?? '')); $campaign['subid_param'] = ''; $campaign['target'] = '_blank'; $campaign['required_url_fragment'] = ''; $campaign['health_check_enabled'] = true; $campaign['source'] = 'output_object_v4'; $campaign['last_synced'] = time(); $campaign['external_id'] = sanitize_text_field((string) ($row['external_id'] ?? ''));
         $saved = $this->save_campaign_record($campaign, $campaign_id);
