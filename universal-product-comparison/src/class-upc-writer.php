@@ -41,10 +41,11 @@ class UPC_Writer {
             }
 
             $rows[] = array(
-                'fact_key' => $feature['fact_key'],
-                'label'    => $feature['label'],
-                'cells'    => $feature['cells'],
-                'meaning'  => $analysis['meaning'],
+                'fact_key'    => $feature['fact_key'],
+                'label'       => $feature['label'],
+                'cells'       => $feature['cells'],
+                'meaning'     => $analysis['meaning'],
+                'explanation' => isset( $analysis['explanation'] ) ? sanitize_text_field( $analysis['explanation'] ) : '',
             );
 
             foreach ( isset( $analysis['pros_by_position'] ) ? $analysis['pros_by_position'] : array() as $position => $items ) {
@@ -228,20 +229,38 @@ class UPC_Writer {
         }
         $out[] = '</tbody></table>';
 
-        $out[] = '<h2>Was die Unterschiede praktisch bedeuten</h2>';
-        foreach ( $rows as $row ) {
-            $out[] = '<h3>' . esc_html( $row['label'] ) . '</h3>';
-            $out[] = '<p>' . esc_html( $row['meaning'] ) . '</p>';
+        $explanations = array_values(
+            array_filter(
+                $rows,
+                function( $row ) {
+                    return ! empty( $row['explanation'] )
+                        && trim( $row['explanation'] ) !== trim( $row['meaning'] );
+                }
+            )
+        );
+
+        $out[] = '<h2>Die entscheidenden Unterschiede</h2>';
+        if ( empty( $explanations ) ) {
+            $out[] = '<p>Die für die Entscheidung belastbar ableitbaren Unterschiede sind bereits in der Vergleichstabelle zusammengefasst. Zusätzliche Deutungen werden nicht ergänzt.</p>';
+        } else {
+            foreach ( $explanations as $row ) {
+                $out[] = '<h3>' . esc_html( $row['label'] ) . '</h3>';
+                $out[] = '<p>' . esc_html( $row['explanation'] ) . '</p>';
+            }
         }
 
         $out[] = '<h2>Vor- und Nachteile im direkten Vergleich</h2>';
+        $out[] = '<table class="upc-pros-cons-table"><thead><tr><th>Produkt</th><th>Vorteile</th><th>Nachteile</th></tr></thead><tbody>';
         foreach ( $subjects as $subject ) {
             $position = (int) $subject['position'];
             $name = trim( $subject['manufacturer'] . ' ' . $subject['model_name'] );
-            $out[] = '<h3>' . esc_html( $name ) . '</h3>';
-            $out[] = '<p><strong>Vorteile:</strong> ' . esc_html( empty( $pros[ $position ] ) ? 'Keine belastbaren produktspezifischen Vorteile aus den freigegebenen Entscheidungsregeln ableitbar.' : implode( '; ', array_unique( $pros[ $position ] ) ) ) . '</p>';
-            $out[] = '<p><strong>Nachteile:</strong> ' . esc_html( empty( $cons[ $position ] ) ? 'Keine belastbaren produktspezifischen Nachteile aus den freigegebenen Entscheidungsregeln ableitbar.' : implode( '; ', array_unique( $cons[ $position ] ) ) ) . '</p>';
+            $out[] = '<tr>';
+            $out[] = '<th scope="row">' . esc_html( $name ) . '</th>';
+            $out[] = '<td>' . esc_html( empty( $pros[ $position ] ) ? 'Keine belastbaren Vorteile aus den freigegebenen Entscheidungsregeln ableitbar.' : implode( '; ', array_unique( $pros[ $position ] ) ) ) . '</td>';
+            $out[] = '<td>' . esc_html( empty( $cons[ $position ] ) ? 'Keine belastbaren Nachteile aus den freigegebenen Entscheidungsregeln ableitbar.' : implode( '; ', array_unique( $cons[ $position ] ) ) ) . '</td>';
+            $out[] = '</tr>';
         }
+        $out[] = '</tbody></table>';
 
         $out[] = '<h2>Welches Produkt passt zu welchem Bedarf?</h2>';
         if ( empty( $needs ) ) {
@@ -262,11 +281,44 @@ class UPC_Writer {
             $out[] = '</ul>';
         }
 
-        $out[] = '<h2>Fazit</h2>';
-        $out[] = '<p>Es gibt keinen pauschalen Sieger. Entscheidend sind die Anforderungen, für die sich aus den dokumentierten Herstellerangaben und den freigegebenen Entscheidungsregeln tatsächlich Unterschiede ableiten lassen.</p>';
+        if ( ! empty( $dossier['warnings'] ) ) {
+            $labels = array();
+            foreach ( $dossier['warnings'] as $warning ) {
+                if ( ! isset( $warning['fact_key'] ) ) {
+                    continue;
+                }
+                foreach ( $rows as $row ) {
+                    if ( $row['fact_key'] === $warning['fact_key'] ) {
+                        $labels[ $warning['fact_key'] ] = $row['label'];
+                    }
+                }
+            }
+            if ( ! empty( $labels ) ) {
+                $out[] = '<h2>Hinweise zur Quellenlage</h2>';
+                $out[] = '<p>Bei folgenden Merkmalen ist die Herstellerquellenlage unvollständig, widersprüchlich oder konfigurationsabhängig: ' . esc_html( implode( ', ', array_values( $labels ) ) ) . '. Diese Punkte werden nicht als Vorteil oder Nachteil gewertet.</p>';
+            }
+        }
 
-        return implode( "
-", $out );
+        $out[] = '<h2>Fazit</h2>';
+        if ( empty( $needs ) ) {
+            $out[] = '<p>Es gibt keinen pauschalen Sieger. Aus den derzeit freigegebenen Entscheidungsregeln ergibt sich keine belastbare Bedarfspräferenz; maßgeblich bleiben die dokumentierten Unterschiede in der Tabelle.</p>';
+        } else {
+            $summary = array();
+            foreach ( $needs as $need ) {
+                $names = array();
+                foreach ( $need['positions'] as $position ) {
+                    foreach ( $subjects as $subject ) {
+                        if ( (int) $subject['position'] === (int) $position ) {
+                            $names[] = trim( $subject['manufacturer'] . ' ' . $subject['model_name'] );
+                        }
+                    }
+                }
+                $summary[] = $need['need'] . ': ' . implode( ', ', $names );
+            }
+            $out[] = '<p>Es gibt keinen pauschalen Sieger. Die belastbar ableitbare Zuordnung lautet: ' . esc_html( implode( '; ', $summary ) ) . '. Für andere Anforderungen entscheidet die dokumentierte Merkmalslage.</p>';
+        }
+
+        return implode( "\n", $out );
     }
 
     private function display_cell( array $cell ) {
