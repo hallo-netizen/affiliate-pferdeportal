@@ -200,6 +200,17 @@ pass_or_fail(
     'multi-position banner slots use independent distribution seeds'
 );
 pass_or_fail(
+    str_contains($router, 'Position 2 receives its own weighted decision')
+    && str_contains($router, "\$candidate_key !== \$first_key"),
+    'second banner place uses independent share decision without duplicate creative'
+);
+pass_or_fail(
+    str_contains($router, 'Für eine manuelle Affiliate-Reparatur ist eine Begründung erforderlich.')
+    && str_contains($router, "'repair_reason'=>\$manual_repair ? \$repair_reason : ''")
+    && str_contains($router, "'updated_by'=>get_current_user_id()"),
+    'manual page repair stores reason actor and timestamp'
+);
+pass_or_fail(
     str_contains($router, 'handle_save_banner_distribution')
     && str_contains($router, 'Banneranteile speichern')
     && str_contains($router, 'Diese Seite ist zugleich die interne Reparaturinstanz'),
