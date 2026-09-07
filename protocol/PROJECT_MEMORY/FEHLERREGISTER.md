@@ -114,7 +114,7 @@ Keine ausführliche Fehlerwahrheit an zwei Orten.
 ## TRESOR-AUTOMATIK
 
 Bereich: CAMPUS / TRESOR / GITHUB  
-Status: AKTIV / GITHUB-ONLY-KORREKTUR; Repository-Restore real PASS; Admin-Einstellungsabdeckung noch fail-closed prüfen
+Status: AKTIV / GITHUB-ONLY; Repository-Restore real PASS; Admin-Einstellungsabdeckung fail-closed offen
 
 Autoritative aktuelle Status-/Fehlerquelle:
 `protocol/PROJECT_MEMORY/TRESOR/STATUS.md`
