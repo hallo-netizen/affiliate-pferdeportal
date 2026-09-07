@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "otto-awin-automated-distribution-20260907",
-  "goal": "Prüfe OTTO über den bestehenden Awin-Weg: automatischer Feedimport, sichere Zielzuordnung, Produktplätze 1–3, Beitragsprodukte und fail-closed Bannergrenze; keine neue Providerarchitektur.",
+  "goal": "Prüfe OTTO über Awin: sichere Feed-/Banner-Zuordnung, Produktplätze, Productwissen-Exact-Match ohne Ersatz und Fail-Closed-Grenzen; keine neue Providerarchitektur.",
   "image": "php:8.2-cli",
   "inputs": [
     {
@@ -27,10 +27,28 @@
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php",
       "dest": "trait-ppar-ebay.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-product-source-plan.php",
+      "dest": "class-ppar-product-source-plan.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-partner-analytics.php",
+      "dest": "class-ppar-partner-analytics.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-deal-radar.php",
+      "dest": "class-ppar-deal-radar.php"
+    },
+    {
+      "src": "test_otto_automation.php",
+      "dest": "test_otto_automation.php"
     }
   ],
   "writable": [],
-  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php",
-  "tests": [],
+  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php",
+  "tests": [
+    "php test_otto_automation.php"
+  ],
   "timeout_seconds": 600
 }
