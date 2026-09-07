@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: V1-PROTOTYP / 0.2.3 HAUPTNAVIGATION + ERSTDRAFT PASS / MANUELLER TEST BEREIT
+STATUS: V1-PROTOTYP / 0.2.4 ECHTER WP-ADMIN-MENÜTEST + ERSTDRAFT PASS / MANUELLER TEST BEREIT
 
 ## AUTORITÄT DIESER DATEI
 
@@ -167,7 +167,7 @@ Kurzform:
 ## NÄCHSTER SCHRITT
 
 Siehe ausschließlich `HOBBYRAUM.md`:
-**Produktvergleich auf 0.2.3 ersetzen -> Hauptnavigation Produktvergleich -> PV-REG-001 als Draft testen; Produktwissen 0.1.0 unverändert lassen.**
+**Produktvergleich auf 0.2.4 ersetzen -> echte Hauptnavigation Produktvergleich -> PV-REG-001 als Draft testen; Produktwissen 0.1.0 unverändert lassen.**
 
 
 ## 0.2.2 – ERSTER GEBUNDENER LIVE-DRAFT TECHNISCH PASS
@@ -232,3 +232,25 @@ Beleg:
 
 Nächster manueller Schritt:
 0.2.3 installieren -> Hauptnavigation `Produktvergleich` -> `PV-REG-001 als Draft testen`.
+
+
+## 0.2.4 – ECHTER WORDPRESS-ADMIN-LIFECYCLE
+
+Prüfkorrektur:
+Der 0.2.3-Menütest war methodisch unzureichend, weil `register_menu()` direkt aufgerufen wurde. Das war ein falscher Positivnachweis für die reale Adminnavigation.
+
+0.2.4 registriert die Hooks ohne `is_admin()`-Bootstrap-Abhängigkeit und setzt das Top-Level-Menü im echten `admin_menu`-Hook mit Priorität 99999.
+
+Beleg Run `34154550626`:
+- Clean-ZIP PASS;
+- Installation/Aktivierung PASS;
+- echter WordPress-HTTP-Server;
+- echter Admin-Login;
+- echte gerenderte `/wp-admin/`-Sidebar enthält `Produktvergleich`;
+- echte Menüseite antwortet;
+- PV-REG-001-Draftweg weiterhin PASS.
+
+Freigegebene ZIP:
+`universal-product-comparison-0.2.4-prototype.zip`
+SHA-256:
+`b74e3c17eb2cb71ebc4c15aab5da6e4133379b124804c920080a33d20fc78054`
