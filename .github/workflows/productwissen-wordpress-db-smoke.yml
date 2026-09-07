@@ -53,9 +53,11 @@ jobs:
           php -l universal-product-comparison/src/class-upc-project-config.php
           php -l universal-product-comparison/src/class-upc-wordpress-draft.php
           php -l universal-product-comparison/src/class-upc-affiliate-bridge.php
+          php -l universal-product-comparison/src/class-upc-archive.php
           php -l universal-product-comparison/tests/affiliate-exact-bridge-contract.php
           php -l universal-product-comparison/tests/wp-db-smoke.php
           php -l universal-product-comparison/tests/wp-real-dossier-smoke.php
+          php -l universal-product-comparison/tests/wp-archive-smoke.php
           php -r '$d=json_decode(file_get_contents("universal-product-comparison/tests/fixtures/pv-reg-001.json"),true); if(!is_array($d)){exit(1);} echo "FIXTURE_JSON_PASS\\n";'
 
       - name: Zero-freedom static guard
@@ -76,6 +78,16 @@ jobs:
           php universal-product-comparison/tests/affiliate-exact-bridge-contract.php
           ! grep -E 'global[[:space:]]+\$wpdb|upk_products|upk_variants|upk_identifiers|wp_insert_post|wp_update_post|update_post_meta|delete_post_meta' universal-product-comparison/src/class-upc-affiliate-bridge.php
           echo UPC_AFFILIATE_BRIDGE_READ_ONLY_GUARD_PASS
+
+      - name: Archive read-only and SEO-URL guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -E 'wp_insert_post|wp_update_post|update_post_meta|delete_post_meta|wp_delete_post|global[[:space:]]+\$wpdb' universal-product-comparison/src/class-upc-archive.php
+          ! grep -E 'URLSearchParams|pushState|replaceState|location\.search|history\.' universal-product-comparison/assets/archive.js
+          grep -F 'data-upc-filter="product_group"' universal-product-comparison/src/class-upc-archive.php
+          grep -F 'data-upc-filter="product_comparison"' universal-product-comparison/src/class-upc-archive.php
+          echo UPC_ARCHIVE_READ_ONLY_NO_INDEXABLE_FILTER_URL_GUARD_PASS
 
       - name: Assert draft materializer cannot publish
         shell: bash
@@ -112,3 +124,4 @@ jobs:
           wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-knowledge/tests/wp-db-smoke.php --path=/tmp/upk-wp
           wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-comparison/tests/wp-db-smoke.php --path=/tmp/upk-wp
           wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-comparison/tests/wp-real-dossier-smoke.php --path=/tmp/upk-wp
+          wp eval-file /tmp/upk-wp/wp-content/plugins/universal-product-comparison/tests/wp-archive-smoke.php --path=/tmp/upk-wp
