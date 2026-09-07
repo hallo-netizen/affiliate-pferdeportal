@@ -76,6 +76,24 @@ class UPC_Admin_PV_REG_001_Test {
             self::redirect_error( $import );
         }
 
+        $draft_materializer = upc_wordpress_draft();
+        if ( is_wp_error( $draft_materializer ) ) {
+            self::redirect_error( $draft_materializer );
+        }
+
+        $materialized = $draft_materializer->materialize(
+            (int) $import['comparison_id'],
+            'pferde-atelier',
+            'pv-reg-001-v1'
+        );
+        if ( is_wp_error( $materialized ) ) {
+            self::redirect_error( $materialized );
+        }
+
+        if ( 'WORDPRESS_DRAFT_VERIFIED' !== $materialized['status'] || false !== $materialized['publish_allowed'] ) {
+            self::redirect_error( new WP_Error( 'UPC_ADMIN_TEST_DRAFT_STATE_INVALID', 'Bound draft state is invalid.' ) );
+        }
+
         $final = upc_finalize_article( (int) $import['comparison_id'], 'pferde-atelier', 'pv-reg-001-v1' );
         if ( is_wp_error( $final ) ) {
             self::redirect_error( $final );
