@@ -1500,3 +1500,32 @@ Die automatische serverseitige Erzeugung und der vollständige WordPress-/Recove
 
 BEZUG:
 ARCH-081.
+
+
+### 2026-09-07 – Serverseitigen Ein-Datei-Tresor bis zu externen Quellen vorbereitet
+
+ZIEL:
+Regelmäßige Komplettsicherung ohne Nutzerkommandos.
+
+UMGESETZT:
+- serverseitiger Builder;
+- inaktiver Wochen-Workflow-Kandidat;
+- Git-Mirror + Bundle + Refs;
+- GitHub-Metadaten + PR-Reviews + Release-Artefakte;
+- WordPress-Hashvertrag;
+- opaque Recovery-Bundle;
+- Roharchiv-Pflicht;
+- AES256-GPG-Ein-Datei-Verschlüsselung;
+- exakter Wiederentschlüsselungs-/Restore-Test;
+- Release erst nach PASS;
+- keine rekursive Einbettung alter Tresor-Releases.
+
+HARD TEST:
+Positiv: Multi-Ref-Git + WordPress-Testbackup + Roharchiv + Recovery-Testbundle -> Build/Decrypt/Hash/Git-Restore PASS.
+Negativ: falsches Passwort BLOCK; manipulierte WordPress-Datenbank BLOCK; fehlendes Roharchiv BLOCK.
+
+OFFEN:
+echte WordPress-/Hostingquelle, serverseitige Roharchivquelle, Recovery-Bundle, Masterpasswort und Workflow-Aktivierung.
+
+BEZUG:
+ARCH-082.
