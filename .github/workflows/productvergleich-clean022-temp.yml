@@ -1,0 +1,91 @@
+name: Product Comparison Clean 022 TEMP
+
+on:
+  push:
+    branches:
+      - hobbyroom/productwissen-v1-prototype
+    paths:
+      - '.github/workflows/productvergleich-clean022-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  clean-zip-smoke:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wp_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install WP-CLI and WordPress
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          mkdir -p /tmp/upc-wp
+          wp core download --path=/tmp/upc-wp --quiet
+          wp config create --path=/tmp/upc-wp --dbname=wp_test --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
+          wp core install --path=/tmp/upc-wp --url=http://example.test --title='UPC Clean 022' --admin_user=admin --admin_password='test-password' --admin_email=admin@example.test --skip-email --quiet
+
+      - name: Build clean user ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/upc-build
+          mkdir -p /tmp/upc-build/universal-product-comparison/config/pferde-atelier
+          cp universal-product-comparison/universal-product-comparison.php /tmp/upc-build/universal-product-comparison/
+          cp -a universal-product-comparison/src /tmp/upc-build/universal-product-comparison/
+          cp -a universal-product-comparison/assets /tmp/upc-build/universal-product-comparison/
+          cp universal-product-comparison/config/pferde-atelier/publishing.json /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+          cp universal-product-comparison/config/pferde-atelier/project-manifest.json /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+          cp universal-product-comparison/config/pferde-atelier/pv-reg-001.json /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+          cp -a universal-product-comparison/config/pferde-atelier/rulesets /tmp/upc-build/universal-product-comparison/config/pferde-atelier/
+
+          mkdir -p /tmp/upk-build
+          cp -a universal-product-knowledge /tmp/upk-build/universal-product-knowledge
+          rm -rf /tmp/upk-build/universal-product-knowledge/tests
+
+          (cd /tmp/upc-build && zip -qr /tmp/universal-product-comparison.zip universal-product-comparison)
+          (cd /tmp/upk-build && zip -qr /tmp/universal-product-knowledge.zip universal-product-knowledge)
+
+          ! unzip -Z1 /tmp/universal-product-comparison.zip | grep -E 'test-project|/tests/|protocol/|\.git'
+          unzip -p /tmp/universal-product-comparison.zip universal-product-comparison/universal-product-comparison.php | grep -F 'Version: 0.2.2-prototype'
+          unzip -Z1 /tmp/universal-product-comparison.zip | grep -F 'universal-product-comparison/config/pferde-atelier/pv-reg-001.json'
+          echo UPC_022_CLEAN_USER_ZIP_STRUCTURE_PASS
+
+      - name: Install clean user ZIPs
+        run: |
+          wp plugin install /tmp/universal-product-knowledge.zip --activate --path=/tmp/upc-wp
+          wp plugin install /tmp/universal-product-comparison.zip --activate --path=/tmp/upc-wp
+          wp plugin is-active universal-product-knowledge --path=/tmp/upc-wp
+          wp plugin is-active universal-product-comparison --path=/tmp/upc-wp
+          echo UPC_022_CLEAN_USER_ZIP_INSTALL_PASS
+
+      - name: Attach only first-draft test after install
+        run: |
+          mkdir -p /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests
+          cp universal-product-comparison/tests/wp-first-real-draft.php /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/
+
+      - name: First real bound draft from clean user ZIP
+        run: |
+          wp eval-file /tmp/upc-wp/wp-content/plugins/universal-product-comparison/tests/wp-first-real-draft.php --path=/tmp/upc-wp
+
+      - name: Upload clean replacement ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-product-comparison-0.2.2-prototype-clean
+          path: /tmp/universal-product-comparison.zip
+          if-no-files-found: error
+          retention-days: 7
