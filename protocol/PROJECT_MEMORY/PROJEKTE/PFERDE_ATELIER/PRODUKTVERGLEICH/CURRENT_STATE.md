@@ -1,256 +1,86 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: V1-PROTOTYP / 0.2.4 ECHTER WP-ADMIN-MENÜTEST + ERSTDRAFT PASS / MANUELLER TEST BEREIT
+STATUS: AKTIV / 0.2.4 TECHNISCH PASS / NUTZER-LIVE-VERIFY OFFEN
 
-## AUTORITÄT DIESER DATEI
+## AUTORITÄT
 
-Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros**.
+Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 
-- aktuelle Arbeit / NEXT ACTION -> `HOBBYRAUM.md`
-- Fehler -> `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` -> autoritative Fehlerquelle
-- Zielvertrag -> `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` -> Hauptquelle
-- Änderungsgrund -> `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- Historie -> `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+- aktuelle Arbeit: `HOBBYRAUM.md`
+- Fehlerdetails: über `FEHLERREGISTER.md` → `FEHLERQUELLEN.md`
+- Ziel: über `ZIELVERTRAEGE/REGISTER.md` → `ZIELVERTRAG_V1.md`
+- Warum: `AENDERUNGSREGISTER.md`
+- Ausführungsprotokoll: `PROTOKOLL_20260907.md`
 
-Ältere Planungsstände bleiben Git-/Register-Historie und sind **nicht CURRENT**.
+## AKTUELLER STAND
 
-## AKTUELLER ARCHITEKTURENTSCHEID
+V1 läuft eigenständig und ohne STARTMASTER/TEXT-Laufzeitabhängigkeit:
 
-V1 läuft als **eigenständige allgemeine Produktwissen-/Produktvergleichsstraße**.
+`Produktwissen -> Vergleich -> gebundenes Dossier -> Zero-Freedom-Renderer -> Validator -> WordPress-DRAFT -> Link-/Grafikfinalisierung -> finaler Draft-Hash`
 
-Keine Laufzeitabhängigkeit von STARTMASTER/TEXT.
-
-Hauptfluss:
-
-`Produktwissen -> Produktvergleich -> gebundener Writer -> WordPress-DRAFT -> Link-/Grafikfinalisierung -> Affiliate Exact Match`
-
-SEO liefert nur optionale read-only Signale.
-
-## ZUSTÄNDIGKEITEN
-
-### PRODUKTWISSEN
-Single Writer für:
-- eindeutige Produkt-/Variantenidentität;
-- Hersteller-/Primärquellenfakten;
-- Identifier;
-- Quellenstatus/-konflikte;
-- Lebenszyklus/Freshness.
-
-### PRODUKTVERGLEICH
-Single Writer für:
-- Vergleichsauswahl und Vergleichstyp;
-- 2–4 Produktpaarung/-gruppe;
-- Variantenvergleich;
-- Vergleichsmerkmale;
-- Ruleset-/Artikelvertrag;
-- Vergleichsartikel;
-- QA;
-- neutrale Grafik;
-- internes Vergleichsarchiv;
-- Produktvergleich <-> Variantenvergleich-Verlinkung;
-- WordPress-DRAFT.
-
-### SEO
-Nur read-only Signale:
-- Nachfrage/Priorisierung;
-- Target Keyword;
-- Kannibalisierungshinweise.
-
-SEO darf keinen gebundenen Titel, Body, Ruleset oder Produktbestand überschreiben.
-
-### AFFILIATE
-Commerce-Autorität:
-- Provider;
-- Exact Match;
-- Kaufangebote;
-- Preis/Verfügbarkeit;
-- Tracking/Disclosure/Produktkarten.
-
-Affiliate darf Produktkandidaten melden, aber keine Produktfakten oder Vergleichspaarungen schreiben.
-
-## TECHNISCH BEWIESENER V1-STAND
-
-Branch:
-`hobbyroom/productwissen-v1-prototype`
-
-Geprüfter Head:
-`109890eb7762bac276bc3f42be618e161b003f57`
-
-Workflow:
-`Product Knowledge WordPress DB Smoke` -> PASS.
-
-Erster ZIP-Installationssmoke des 0.2.0-Standes war technisch PASS, danach wurde jedoch bei der realen Pferde-Atelier-Bindung eine falsche Taxonomie-Annahme entdeckt: die vorhandenen redaktionellen Vergleichskategorien sind technisch flach (`parent=0`).
-
-Korrigierter Kandidat:
-- Universal Product Comparison `0.2.1-prototype`;
-- erster gebundener Live-Term: ID `11`, Name `Vergleich Regendecken`, Slug `pferdedecken-regendecken-vergleich`, Parent `0`;
-- kein Auto-Anlegen dieser bestehenden Live-Kategorie;
-- ID/Name/Slug/Parent müssen exakt stimmen, sonst BLOCKED.
-
-Harter korrigierter ZIP-/WordPress-/MySQL-Lauf:
-- Run `34141063395` -> PASS;
-- Zero-Freedom Static Guard -> PASS;
-- saubere ZIP-Struktur -> PASS;
-- ZIP-Installation/Aktivierung -> PASS;
-- reale Pferde-Atelier-Regendecken-Konfiguration -> PASS;
-- flache Kategorie -> PASS;
-- absichtlich falscher Parent -> korrekt BLOCKED;
-- vollständige bisherige Regression -> PASS.
-
-Bereinigter Branch nach Entfernen des temporären Workflows:
-`89651722cae1fd2c60ddc8a9d288a3d17e71e105`.
-
-`Pferde Atelier Immutable Base Hardlock` -> PASS.
-
-Belegt:
-- Universal Product Knowledge WordPress/MySQL-Schema + Positiv-/Negativtests;
-- Produkt- und Variantenvergleichsregeln;
-- echtes Dossier `PV-REG-001`;
-- Zero-Freedom-Writer mit gebundenem Ruleset;
-- 100/100 byte-identische Writer-Ausgaben;
-- WordPress-DRAFT-Materialisierung;
-- keine Publish-Route;
-- Affiliate-Brücke read-only und nur GTIN/EAN/echte MPN;
-- SEO-Signale read-only;
-- gemeinsames Vergleichsarchiv für Produktgruppen-, Produkt- und Variantenvergleiche;
-- Produktnavigation/-suche ohne indexierbare Filter-URLs;
-- deterministisches Link-Manifest und Link-Finalisierung;
-- neutrale SVG-Vergleichsgrafik ohne Produktbilder/Logos/externe Assets;
-- 20/20 byte-identische Grafik-Ausgaben;
-- finaler WordPress-DRAFT mit exakt gebundenen internen Links + Grafik + Endhash;
-- Wiederholungsfinalisierung byte-identisch;
-- `publish_allowed=false`.
-
-## FACHLICHE HARD RULES
-
-- Produktvergleich = 2–4 konkrete konkurrierende Produkte aus mindestens zwei Herstellern.
-- Variantenvergleich = Varianten desselben Basismodells.
-- Produktgruppenvergleich bleibt fachlich getrennt.
-- keine Rangliste, Sterne, Punkte oder pauschaler Testsieger.
-- keine erfundenen Fakten.
-- `NOT_IN_SOURCE`, `SOURCE_CONFLICT`, `CONFIGURATION_DEPENDENT` bleiben sichtbar.
-- Affiliate-Verfügbarkeit verändert keine Produktwahrheit.
-- kein Ersatzprodukt bei fehlendem Exact Match.
-- Hersteller-Artikelnummer ist kein automatischer Affiliate-Exact-Match.
-- interne Links nur aus gebundenem Manifest.
-- Produktgrafik nur neutral/deterministisch; keine kopierten Hersteller-/Google-Produktfotos.
-- kein Auto-Publish.
-
-## SICHTBARES VERGLEICHSKONZEPT
-
-Pro Produktgruppe eine sichtbare WordPress-Kategorie `Vergleich`.
-
-Darin getrennte Beitragsarten:
-- Produktgruppenvergleich;
-- Produktvergleich;
-- Variantenvergleich.
-
-Archiv:
-- Hauptfilter: Alle | Produktgruppenvergleiche | Produktvergleiche;
-- Unterfilter: Produkte | Varianten;
-- Produktnavigation nur für real vorhandene Vergleichsinhalte;
-- Produktsuche umfasst Produkt- und Variantenvergleiche;
-- mobil kompakte Suche/aufklappbare Navigation;
-- keine zusätzliche Varianten-Kategorieebene.
-
-## PRODUKTWISSEN- UND AFFILIATE-RICHTUNG
-
-Hauptrichtung:
-
-`Produktwissen -> Inhalt -> Affiliate Exact Match -> Kaufangebote`
-
-Kurzform:
-
-**Affiliate darf entdecken. Produktwissen entscheidet. Affiliate monetarisiert.**
-
-## NÄCHSTER SCHRITT
-
-Siehe ausschließlich `HOBBYRAUM.md`:
-**Produktvergleich auf 0.2.4 ersetzen -> echte Hauptnavigation Produktvergleich -> PV-REG-001 als Draft testen; Produktwissen 0.1.0 unverändert lassen.**
-
-
-## 0.2.2 – ERSTER GEBUNDENER LIVE-DRAFT TECHNISCH PASS
-
-Stand 2026-09-07.
-
-Neu:
-- hashgebundenes PV-REG-001-Dossier;
-- transaktionaler/idempotenter Erstimport;
-- Admin-Test ohne freie Eingaben;
-- feste Reihenfolge Import -> WordPress-DRAFT -> Link-/Grafikfinalisierung;
-- keine Publish-Route.
-
-Clean-ZIP-Beleg:
-- Run `34144140088` PASS;
-- kein `config/test-project` im Benutzerpaket;
-- ZIP-Installation/Aktivierung PASS;
-- bestehende Regression PASS;
-- frische DB: 2 Produkte / 28 Fakten / 1 Vergleich / 14 Merkmale PASS;
-- Wiederholungsimport ohne Dubletten PASS;
-- reale Kategorie Term-ID 11 PASS;
-- finaler WordPress-Draft PASS;
-- `publish_allowed=false`;
-- Endmarker `UPC_BOUND_LIVE_PV_REG_001_GESAMT_PASS`.
-
-Freigegebene Produktvergleichsversion:
-`0.2.2-prototype`.
+Affiliate = Commerce-Leseschicht.  
+SEO = optionale read-only Signale.
 
 Produktwissen bleibt:
 `0.1.0-prototype`.
 
+Aktueller Produktvergleichs-Kandidat:
+`0.2.4-prototype`.
 
-## AKTUELLER CLEAN-ZIP-BELEG 0.2.2
+## 0.2.4 – TECHNISCHER BELEG
 
-Finale Benutzer-ZIP:
-`universal-product-comparison-0.2.2-prototype.zip`
+Plugin-Code:
+- Menü-Hook-Fix: `3295653c19aed3a4af47aad73dc2226e0d7a9b78`;
+- Bootstrap/Version: `47666ef1a0f1dbe36c5c8744382b52e178d734e9`.
 
-SHA-256:
-`683828e03bd4949aa022ccd25fa62ae7ede105ef3921db2e6d0899b66bf29c67`
+Realtest:
+Run `34154550626` → PASS.
 
-Beleg:
-- Run `34144140088` PASS;
-- kein `config/test-project`;
-- saubere ZIP-Installation/Aktivierung PASS;
-- frischer WordPress-Stand;
-- exakte Kategorie Term-ID 11;
-- erster gebundener `PV-REG-001`-Draft PASS;
-- zweiter Lauf ohne Dublette PASS;
-- Publish-Sperre bleibt aktiv.
-
-
-## 0.2.3 – HAUPTNAVIGATION
-
-Der gebundene Produktvergleich-Test liegt ab 0.2.3 als eigener WordPress-Top-Level-Menüpunkt **Produktvergleich** in der Hauptnavigation.
-
-Beleg:
-- Run `34153930934` PASS;
-- Top-Level-Menü exakt einmal vorhanden;
-- kein Unterpunkt unter `Werkzeuge`;
-- bestehender `PV-REG-001`-Draftweg weiterhin PASS;
-- Clean-ZIP SHA-256 `9b9a3c86fd2c7d82ce60a49d62df0506e223bf6c457b95a4ace7e4c61a9d1efd`.
-
-Nächster manueller Schritt:
-0.2.3 installieren -> Hauptnavigation `Produktvergleich` -> `PV-REG-001 als Draft testen`.
-
-
-## 0.2.4 – ECHTER WORDPRESS-ADMIN-LIFECYCLE
-
-Prüfkorrektur:
-Der 0.2.3-Menütest war methodisch unzureichend, weil `register_menu()` direkt aufgerufen wurde. Das war ein falscher Positivnachweis für die reale Adminnavigation.
-
-0.2.4 registriert die Hooks ohne `is_admin()`-Bootstrap-Abhängigkeit und setzt das Top-Level-Menü im echten `admin_menu`-Hook mit Priorität 99999.
-
-Beleg Run `34154550626`:
-- Clean-ZIP PASS;
-- Installation/Aktivierung PASS;
+Tatsächlich ausgeführt:
+- saubere 0.2.4-ZIP gebaut;
+- WordPress installiert und Plugins aktiviert;
 - echter WordPress-HTTP-Server;
 - echter Admin-Login;
-- echte gerenderte `/wp-admin/`-Sidebar enthält `Produktvergleich`;
-- echte Menüseite antwortet;
-- PV-REG-001-Draftweg weiterhin PASS.
+- echte gerenderte `/wp-admin/`-Sidebar;
+- Top-Level-Menü `Produktvergleich` sichtbar;
+- echte Menüseite geladen;
+- `PV-REG-001`-Draftweg weiterhin PASS;
+- kein Publish.
 
-Freigegebene ZIP:
-`universal-product-comparison-0.2.4-prototype.zip`
-SHA-256:
-`b74e3c17eb2cb71ebc4c15aab5da6e4133379b124804c920080a33d20fc78054`
+Bereinigter Branch vor Abschluss-Nachholprüfung:
+`d9460e19f30f9bbaff5e9d5c63e134f8d9a38333`;
+Hardlock Run `34154765043` → PASS.
+
+## NUTZER-LIVE-STATUS
+
+Belegt:
+Beim vorherigen 0.2.3-Schritt war auf der echten Pferde-Atelier-Seite **kein** Hauptmenüpunkt `Produktvergleich` sichtbar.
+
+Noch **nicht** belegt:
+- 0.2.4 auf der echten Nutzerseite installiert;
+- Hauptmenü dort sichtbar;
+- `PV-REG-001` dort als Draft erzeugt;
+- Draft fachlich/visuell geprüft.
+
+Daher:
+**kein LIVE-PASS.**
+
+## HARD RULES
+
+- Writer/Renderer hat null freie Autorität.
+- gleiche gebundene Eingaben + gleiche Versionen = identischer Output.
+- fehlende/abweichende Bindung = BLOCKED.
+- Produktvergleich = 2–4 konkrete konkurrierende Produkte aus mindestens zwei Herstellern.
+- Variantenvergleich = Varianten desselben Basismodells.
+- keine erfundenen Fakten, Ranglisten, Sterne oder pauschalen Testsieger.
+- Quellenkonflikte/Lücken bleiben sichtbar.
+- Affiliate darf keine fachliche Auswahl umschreiben.
+- kein ähnliches Ersatzprodukt bei fehlendem Exact Match.
+- interne Links nur gebunden.
+- neutrale deterministische Grafik.
+- kein Auto-Publish.
+
+## NEXT ACTION
+
+Ausschließlich `HOBBYRAUM.md`.
