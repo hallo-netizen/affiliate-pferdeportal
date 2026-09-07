@@ -1299,19 +1299,11 @@ trait PPAR_Output_Objects_Trait {
      * programme status, feed, tracking and synchronization.
      */
     private function output_is_otto_awin_product($row) {
-        if (!is_array($row)
-            || sanitize_key((string) ($row['provider'] ?? '')) !== 'awin'
-            || sanitize_key((string) ($row['source_kind'] ?? '')) !== 'product'
-            || sanitize_key((string) ($row['creative_type'] ?? '')) !== 'product') {
-            return false;
-        }
-        $identity = remove_accents(strtolower(trim(implode(' ', array_filter(array(
-            (string) ($row['partner_name'] ?? ''),
-            (string) ($row['programme_name'] ?? ''),
-            (string) ($row['advertiser_name'] ?? ''),
-            (string) ($row['merchant_name'] ?? ''),
-        ))))));
-        return $identity !== '' && preg_match('/(?:^|[^a-z0-9])otto(?:[^a-z0-9]|$)/', $identity);
+        return is_array($row)
+            && sanitize_key((string) ($row['provider'] ?? '')) === 'awin'
+            && sanitize_key((string) ($row['source_kind'] ?? '')) === 'product'
+            && sanitize_key((string) ($row['creative_type'] ?? '')) === 'product'
+            && absint($row['partner_external_id'] ?? 0) === self::OTTO_AWIN_ADVERTISER_ID;
     }
 
     private function output_otto_seller_name($row) {
@@ -1381,9 +1373,10 @@ trait PPAR_Output_Objects_Trait {
         if ($context === 'journal') {
             $placements = array_merge($placements, array('journal_product_1','journal_product_2','journal_product_3'));
         }
-        if ($target_type === 'category') {
-            $placements[] = 'post_bottom_products';
-        }
+        // Every verified OTTO product may also satisfy an exact Productwissen
+        // request in an editorial article. Generic article delivery still needs
+        // the normal target match; exact mode matches the product identifier.
+        $placements[] = 'post_bottom_products';
         return array_values(array_unique(array_filter($placements)));
     }
 
@@ -1448,6 +1441,25 @@ trait PPAR_Output_Objects_Trait {
         $campaign['price'] = sanitize_text_field((string) ($payload['price'] ?? '')); $campaign['currency'] = strtoupper(substr(sanitize_text_field((string) ($payload['currency'] ?? 'EUR')), 0, 10)); $campaign['availability'] = sanitize_text_field((string) ($payload['availability'] ?? '')); $campaign['seller_name'] = sanitize_text_field((string) ($payload['seller_name'] ?? ''));
         $campaign['voucher_code'] = sanitize_text_field((string) ($payload['voucher_code'] ?? '')); $campaign['start_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['start_date'] ?? '') : ''; $campaign['end_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['end_date'] ?? '') : '';
         $campaign['image_url'] = esc_url_raw((string) ($row['image_url'] ?? '')); $campaign['url'] = $tracking_url; $campaign['destination_url'] = esc_url_raw((string) ($row['destination_url'] ?? '')); $campaign['subid_param'] = ''; $campaign['target'] = '_blank'; $campaign['required_url_fragment'] = ''; $campaign['health_check_enabled'] = true; $campaign['source'] = 'output_object_v4'; $campaign['last_synced'] = time(); $campaign['external_id'] = sanitize_text_field((string) ($row['external_id'] ?? ''));
+
+        // Exact commerce identity is separate from product facts. OTTO may expose
+        // GTIN/EAN and an explicit MPN; these are carried forward so Productwissen
+        // can request the identical product without Affiliate reading its tables.
+        if ($auto_otto_awin_product) {
+            $exact_identifiers = array();
+            $gtin = preg_replace('/[^0-9]/', '', (string) ($payload['gtin'] ?? ''));
+            if (in_array(strlen($gtin), array(8,12,13,14), true)) {
+                $campaign['product_gtins'] = array($gtin);
+                $exact_identifiers[] = array('type'=>'GTIN', 'value'=>$gtin);
+            }
+            $exact_mpn = trim(sanitize_text_field((string) ($payload['exact_mpn'] ?? '')));
+            if ($exact_mpn !== '') {
+                $exact_identifiers[] = array('type'=>'MPN', 'value'=>$exact_mpn);
+            }
+            $campaign['product_identifiers'] = $this->affiliate_normalize_product_identifiers($exact_identifiers);
+            $campaign['product_identity_source'] = $campaign['product_identifiers'] ? 'awin_otto_feed' : '';
+            $campaign['product_provider'] = 'otto';
+        }
         $saved = $this->save_campaign_record($campaign, $campaign_id);
         if (is_wp_error($saved) || !$saved) { return is_wp_error($saved) ? $saved : new WP_Error('campaign_save_failed', 'Kampagne konnte nicht gespeichert werden.'); }
         $campaign_id = absint($saved);
