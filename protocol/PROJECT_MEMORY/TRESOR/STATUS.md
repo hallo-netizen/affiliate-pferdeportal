@@ -257,3 +257,45 @@ Noch offen vor Produktivbetrieb:
 
 Aktueller Gesamtstatus bleibt:
 `TRESOR_FAIL:ARCHIVE_RAW_ARTIFACTS_NOT_REDUNDANT`
+
+
+## Serverseitiger Ein-Datei-Kandidat – 2026-09-07
+
+Interne Technik:
+`control/tresor/build_tresor_release.sh`
+
+Inaktiver Workflow-Kandidat:
+`control/tresor/campus-tresor-workflow.yml.candidate`
+
+KISS:
+GitHub erzeugt später die Sicherung serverseitig.
+Der Nutzer bleibt reiner Downloader.
+
+Real intern positiv getestet:
+- verschlüsselte Ein-Datei-Kapsel erzeugt;
+- exakt dieselbe Datei wieder entschlüsselt;
+- Payload-Hashes PASS;
+- Git-Bundle PASS;
+- Git-Mirror-Restore mit mehreren Branches + Tag PASS;
+- Git-FSCK PASS.
+
+Negativ getestet:
+- falsches Passwort → BLOCK;
+- manipulierte WordPress-Datenbank → BLOCK;
+- fehlendes Campus-Roharchiv → BLOCK.
+
+Zusätzliche Schutzregeln:
+- Recovery kommt nur als opaque/versiegeltes Bundle in den Builder;
+- frühere `tresor-*`-Release-Assets werden nicht rekursiv eingebettet;
+- >= 2 GiB wird vor GitHub-Release geblockt.
+
+Noch nicht produktiv:
+1. WordPress-Vollbackup-Quelle anbinden;
+2. Campus-Roharchiv serverseitig erreichbar machen;
+3. versiegeltes Recovery-Bundle anbinden;
+4. Masterpasswort als Secret binden;
+5. Workflow durch bestehende Security-Grenze kontrolliert aktivieren;
+6. realen Gesamt-Restore bestehen.
+
+Bis dahin:
+**kein TRESOR_PASS-Release.**
