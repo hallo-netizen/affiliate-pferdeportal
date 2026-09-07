@@ -167,7 +167,7 @@ VERANTWORTLICHER BEREICH:
 `protocol/PROJECT_MEMORY/TRESOR/`
 
 PASS-BEDINGUNG:
-Git-Repository real restore-geprüft; alle für den Auftrag erforderlichen exportierbaren GitHub-Metadaten/Einstellungen gesichert; nicht exportierbare Providergrenzen ausdrücklich ausgewiesen.
+Git-Repository real restore-geprüft; alle für den Auftrag erforderlichen exportierbaren GitHub-Metadaten/Einstellungen gesichert; Providergrenzen ausdrücklich ausgewiesen.
 
 NUTZERWEG:
 genau eine aktuelle geprüfte `GITHUB_KOMPLETTBACKUP_*.zip` herunterladen und außerhalb GitHubs speichern.
