@@ -1397,3 +1397,27 @@ Frühere `tresor-*`-Backups werden nicht in neue Backups eingebettet.
 
 GRENZE:
 Produktiv erst nach Bindung von WordPress-Vollbackup, serverseitigem Roharchiv, Recovery-Bundle und Masterpasswort sowie kontrollierter Workflow-Aktivierung.
+
+
+## DESIGN-ORDER-003 – Affiliate-Produkte vor Beitragsvorschau LIVE
+
+STAND:
+2026-09-07 / LIVE PASS.
+
+WAS:
+Auf der zentralen Kategorieebene wurden ausschließlich die vollständigen Blöcke
+`pa266-products` und `pa297-popular` gegeneinander getauscht.
+
+ERGEBNIS:
+Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.
+Affiliate-Banner, Artikel, Verweise, CSS, Texte, V104 und alle übrigen Bereiche bleiben unverändert.
+
+UMSETZUNG:
+Ausschließlich über den fail-closed `MINIMAL_PATCH_RUNNER.py`.
+Keine manuelle Reparatur.
+
+LIVE-BELEG:
+`PROJEKTE/PFERDE_ATELIER/DESIGN/LIVE_PASS_DESIGN_ORDER_SWAP_002.md`
+
+LIVE-SHA:
+`11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`
