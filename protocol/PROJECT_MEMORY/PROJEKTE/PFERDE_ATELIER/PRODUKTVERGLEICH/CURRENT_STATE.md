@@ -444,6 +444,15 @@ Lokaler Vertrags-/Logiktest:
 - P01–P11: PASS;
 - `GESAMT PASS` für Produkt anlegen, Variante anbinden, Identifier, Quellenfakt, Readback sowie Negativfälle unvollständige Identität, verwaiste Variante, Identifier-Konflikt, leeres VERIFIED-Faktum und fehlende Quelle.
 
-Testgrenze:
-**Noch kein echter WordPress-Aktivierungs-/Datenbank-PASS.**
-Vor Aufbau des Produktvergleichs muss genau dieser kleine WordPress-Readback-Test folgen.
+Echter WordPress-/Datenbank-Beleg:
+- Draft-PR #142 gegen Campus-Branch, **nicht main**;
+- Head: `10283f1ccec504675a0ddb06080877e001f2a09d`;
+- GitHub Actions Run `34108014923`: SUCCESS;
+- Plugin-Aktivierung: PASS;
+- Tabellen Produkte / Varianten / Identifier / Fakten: PASS;
+- Produkt + Variante + Identifier + Herstellerfakt schreiben: PASS;
+- vollständiges Readback: PASS;
+- Negativfälle unvollständige Identität, verwaiste Variante, Identifier-Konflikt, leeres VERIFIED-Faktum und fehlende Quelle: PASS;
+- Endmarker: `UPK_WORDPRESS_DB_GESAMT_PASS`.
+
+Damit ist der minimale Produktwissen-Datenkern im echten WordPress+MySQL-Kontext belegt. Kein Live-Portal-Deployment behauptet.
