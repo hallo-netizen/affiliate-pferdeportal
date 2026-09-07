@@ -19,6 +19,7 @@ hier programmieren, technische Produktionsarbeit ausführen oder bestehende Proj
 
 **ALS NÄCHSTES …**
 - Überblick über alles → `ZENTRALREGISTER.md`
+- dauerhafte PB-ONE-Unterlagen / Website-Akten → `AKTENSCHRANK/START_HERE.md`
 - neue Idee / Ideenschmiede → `IDEENWERKSTATT/START_HERE.md`
 - Idee zum belastbaren Konzept entwickeln → `ENTWICKLUNGSRAUM/START_HERE.md`
 - laufende Arbeitsunterlage / Präsentation / Entwurf → `ARBEITSDOKUMENTE/START_HERE.md`
@@ -55,6 +56,7 @@ Erst dort gelten wieder dessen Fach-, Branch-, Worker- und Paul-Regeln.
 PB ONE ist:
 - gemeinsame Agenturzentrale;
 - Zentralregister;
+- Aktenschrank für dauerhafte Referenzunterlagen;
 - Ideenschmiede;
 - Entwicklungsort;
 - Unterlagen-/Angebotsraum;

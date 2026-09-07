@@ -919,3 +919,16 @@ RECHTE:
 Nutzer und Paul gleichberechtigt redaktionell.
 GRENZE:
 Keine Programmierung in PB ONE.
+
+
+## ARCH-071 – PB ONE erhält einen Aktenschrank für dauerhafte Referenzakten
+WAS:
+`PB_ONE/AKTENSCHRANK/` wird als dauerhafter Ablageort für belastbare PB-ONE-Referenzunterlagen eingerichtet.
+WARUM:
+Quellen wie die eigene Website sollen chatübergreifend verfügbar sein, ohne Rohdaten oder Inhalte in Arbeitsregister zu duplizieren.
+KISS:
+START_HERE + REGISTER + konkrete Akten.
+ERSTE AKTE:
+`WEBSITE_PB_ONE_20260907.md` – strukturierte Inhaltszusammenfassung aus dem WordPress-Export vom 07.09.2026.
+GRENZE:
+Die Akte dokumentiert Website-Aussagen; sie ist keine externe Tatsachenprüfung und kein vollständiges WordPress-Backup.

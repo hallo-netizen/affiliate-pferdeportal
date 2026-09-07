@@ -1192,3 +1192,29 @@ Keine zweite CURRENT-Wahrheit, kein zusätzlicher Hobbyraum, keine Programmierun
 
 BEZUG:
 ARCH-070.
+
+
+### 2026-09-07 – PB ONE Aktenschrank und Website-Akte angelegt
+
+AUFTRAG:
+Die aktuelle PB-ONE-Website aus dem bereitgestellten WordPress-Export dauerhaft im PB-ONE-Aktenschrank verfügbar machen.
+
+KISS-UMSETZUNG:
+- `PB_ONE/AKTENSCHRANK/START_HERE.md`;
+- `PB_ONE/AKTENSCHRANK/REGISTER.md`;
+- `PB_ONE/AKTENSCHRANK/WEBSITE_PB_ONE_20260907.md`;
+- PB-ONE-Eingang und Zentralregister verlinkt.
+
+QUELLE:
+`codetrifftcreativitt.WordPress.2026-09-07.xml`
+WordPress-Export der Website `https://p-b.one`, erzeugt 2026-09-07.
+
+INHALT:
+Positionierung, Leistungen, Arbeitsweise, Werte, Gründerprofil, KI-Angebot, importly/BMEcat, Zusammenarbeit/FAQ und wichtige Nutzungsgrenzen.
+
+NEGATIV:
+Kein XML-Rohdump in der aktiven PB-ONE-Struktur.
+Keine Behauptung, dass der Export ein vollständiges Backup oder eine externe Verifikation der Website-Aussagen ist.
+
+BEZUG:
+ARCH-071.

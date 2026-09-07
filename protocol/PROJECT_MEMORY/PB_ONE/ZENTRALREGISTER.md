@@ -11,6 +11,10 @@ Keine Detailkopien. Das Register verweist auf die jeweilige Hauptquelle.
 
 ## Bereiche
 
+### Aktenschrank
+Hauptort:
+`AKTENSCHRANK/REGISTER.md`
+
 ### Ideen
 Hauptort:
 `IDEENWERKSTATT/IDEENREGISTER.md`
