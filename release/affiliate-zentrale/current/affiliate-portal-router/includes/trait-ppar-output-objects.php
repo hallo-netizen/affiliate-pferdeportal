@@ -1293,6 +1293,100 @@ trait PPAR_Output_Objects_Trait {
         return '';
     }
 
+    /**
+     * OTTO is a logical product source inside the existing Awin transport.
+     * No second provider adapter is created: Awin remains responsible for
+     * programme status, feed, tracking and synchronization.
+     */
+    private function output_is_otto_awin_product($row) {
+        if (!is_array($row)
+            || sanitize_key((string) ($row['provider'] ?? '')) !== 'awin'
+            || sanitize_key((string) ($row['source_kind'] ?? '')) !== 'product'
+            || sanitize_key((string) ($row['creative_type'] ?? '')) !== 'product') {
+            return false;
+        }
+        $identity = remove_accents(strtolower(trim(implode(' ', array_filter(array(
+            (string) ($row['partner_name'] ?? ''),
+            (string) ($row['programme_name'] ?? ''),
+            (string) ($row['advertiser_name'] ?? ''),
+            (string) ($row['merchant_name'] ?? ''),
+        ))))));
+        return $identity !== '' && preg_match('/(?:^|[^a-z0-9])otto(?:[^a-z0-9]|$)/', $identity);
+    }
+
+    private function output_otto_seller_name($row) {
+        if (!is_array($row)) { return ''; }
+        $payload = json_decode((string) ($row['payload'] ?? ''), true);
+        $payload = is_array($payload) ? $payload : array();
+        return sanitize_text_field((string) ($payload['seller_name'] ?? ''));
+    }
+
+    /**
+     * Automatic public OTTO product output is allowed only after the existing
+     * Awin programme gate, real image verification, tracking validation and
+     * unambiguous automatic portal classification have all passed.
+     */
+    private function output_otto_awin_auto_allowed($row, $classification, $output_type) {
+        if ($output_type !== 'product_campaign' || !$this->output_is_otto_awin_product($row)) {
+            return false;
+        }
+        if (sanitize_key((string) ($classification['status'] ?? '')) !== 'ready'
+            || sanitize_key((string) ($classification['source'] ?? '')) !== 'automatic') {
+            return false;
+        }
+        if (sanitize_key((string) ($row['source_status'] ?? 'active')) !== 'active'
+            || sanitize_key((string) ($row['availability_state'] ?? 'active')) !== 'active') {
+            return false;
+        }
+        if (absint($row['width'] ?? 0) <= 0 || absint($row['height'] ?? 0) <= 0) {
+            return false;
+        }
+        $image_hash = strtolower(trim((string) $this->output_row_image_hash($row)));
+        if (!preg_match('/^[a-f0-9]{64}$/', $image_hash)) {
+            return false;
+        }
+        $tracking_url = esc_url_raw((string) ($row['tracking_url'] ?? ''));
+        if ($tracking_url === '' || !wp_http_validate_url($tracking_url)) {
+            return false;
+        }
+        // OTTO requires the concrete marketplace seller for every specific
+        // product advertisement. Missing seller evidence blocks automatic output.
+        if ($this->output_otto_seller_name($row) === '') {
+            return false;
+        }
+        $advertiser_id = absint($row['partner_external_id'] ?? 0);
+        if ($advertiser_id <= 0 || !method_exists($this, 'awin_programme_gate_validate')) {
+            return false;
+        }
+        return !is_wp_error($this->awin_programme_gate_validate($advertiser_id));
+    }
+
+    /**
+     * One verified OTTO product may compete for all equivalent product positions.
+     * Runtime ranking selects position 1/2/3, while category target keys also make
+     * the same product eligible for matching editorial posts.
+     */
+    private function output_otto_product_placements($target, $slot_id) {
+        $placements = array();
+        $slot_id = sanitize_key((string) $slot_id);
+        if ($slot_id !== '') { $placements[] = $slot_id; }
+        $context = sanitize_key((string) ($target['context'] ?? ''));
+        $target_type = sanitize_key((string) ($target['type'] ?? ''));
+        if (in_array($context, array('category','leaf','leaf_category','hub2'), true)) {
+            $placements[] = 'category_product';
+        }
+        if ($context === 'hub1') {
+            $placements = array_merge($placements, array('hub_product_1','hub_product_2','hub_product_3'));
+        }
+        if ($context === 'journal') {
+            $placements = array_merge($placements, array('journal_product_1','journal_product_2','journal_product_3'));
+        }
+        if ($target_type === 'category') {
+            $placements[] = 'post_bottom_products';
+        }
+        return array_values(array_unique(array_filter($placements)));
+    }
+
     private function output_save_local_campaign($object_id, $row, $classification, $slot, $output_type) {
         global $wpdb;
         $object = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->output_objects_table()} WHERE id=%d", absint($object_id)), ARRAY_A);
@@ -1327,17 +1421,31 @@ trait PPAR_Output_Objects_Trait {
             && in_array(sanitize_key((string) ($classification['source'] ?? '')), array('ebay_verified_product_concept','ebay_verified_product_target'), true)
             && method_exists($this, 'ebay_business_product_contract')
             && !empty($this->ebay_business_product_contract($row));
-        $campaign['active'] = $auto_ebay_business; $campaign['assignment_mode'] = 'page_tree'; $campaign['match_descendants'] = false;
-        $auto_targets = $auto_ebay_business && method_exists($this, 'ebay_business_campaign_target_keys') ? $this->ebay_business_campaign_target_keys($row, $target) : array();
-        $auto_placements = $auto_ebay_business && method_exists($this, 'ebay_business_campaign_placements') ? $this->ebay_business_campaign_placements($row) : array();
+        $auto_otto_awin_product = $this->output_otto_awin_auto_allowed($row, $classification, $output_type);
+        $auto_product = $auto_ebay_business || $auto_otto_awin_product;
+        $campaign['active'] = $auto_product; $campaign['assignment_mode'] = 'page_tree'; $campaign['match_descendants'] = false;
+        $auto_targets = $auto_ebay_business && method_exists($this, 'ebay_business_campaign_target_keys')
+            ? $this->ebay_business_campaign_target_keys($row, $target)
+            : array();
+        if ($auto_ebay_business && method_exists($this, 'ebay_business_campaign_placements')) {
+            $auto_placements = $this->ebay_business_campaign_placements($row);
+        } elseif ($auto_otto_awin_product) {
+            $auto_placements = $this->output_otto_product_placements($target, $slot_id);
+        } else {
+            $auto_placements = array();
+        }
         $campaign['automation_target_keys'] = $auto_targets ? $auto_targets : array($target_key);
         $campaign['placements'] = $auto_placements ? $auto_placements : array($slot_id);
-        $campaign['priority'] = $auto_ebay_business ? absint($payload['ebay_quality_score'] ?? ($classification['confidence'] ?? 0)) : absint($campaign['priority'] ?? 0);
+        $campaign['priority'] = $auto_ebay_business
+            ? absint($payload['ebay_quality_score'] ?? ($classification['confidence'] ?? 0))
+            : ($auto_otto_awin_product ? absint($classification['confidence'] ?? 0) : absint($campaign['priority'] ?? 0));
         $campaign['auto_topic_label'] = sanitize_text_field((string) ($target['label'] ?? '')); $campaign['auto_topic_score'] = absint($classification['confidence'] ?? 0); $campaign['auto_topic_reason'] = sanitize_text_field((string) ($classification['reason'] ?? ''));
-        $campaign['label'] = $output_type === 'product_campaign' ? ($is_ebay_campaign ? 'eBay-Angebot · Affiliate' : 'Produktvorschlag') : 'Ausgewählter Partner';
+        $campaign['label'] = $output_type === 'product_campaign'
+            ? ($is_ebay_campaign ? 'eBay-Angebot · Affiliate' : ($auto_otto_awin_product ? 'OTTO-Angebot · Affiliate' : 'Produktvorschlag'))
+            : 'Ausgewählter Partner';
         $campaign['ebay_content_isolated'] = $is_ebay_campaign && $output_type === 'product_campaign';
         $campaign['title'] = sanitize_text_field((string) ($row['title'] ?? '')); $campaign['description'] = sanitize_textarea_field((string) ($row['description'] ?? ''));
-        $campaign['price'] = sanitize_text_field((string) ($payload['price'] ?? '')); $campaign['currency'] = strtoupper(substr(sanitize_text_field((string) ($payload['currency'] ?? 'EUR')), 0, 10)); $campaign['availability'] = sanitize_text_field((string) ($payload['availability'] ?? ''));
+        $campaign['price'] = sanitize_text_field((string) ($payload['price'] ?? '')); $campaign['currency'] = strtoupper(substr(sanitize_text_field((string) ($payload['currency'] ?? 'EUR')), 0, 10)); $campaign['availability'] = sanitize_text_field((string) ($payload['availability'] ?? '')); $campaign['seller_name'] = sanitize_text_field((string) ($payload['seller_name'] ?? ''));
         $campaign['voucher_code'] = sanitize_text_field((string) ($payload['voucher_code'] ?? '')); $campaign['start_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['start_date'] ?? '') : ''; $campaign['end_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['end_date'] ?? '') : '';
         $campaign['image_url'] = esc_url_raw((string) ($row['image_url'] ?? '')); $campaign['url'] = $tracking_url; $campaign['destination_url'] = esc_url_raw((string) ($row['destination_url'] ?? '')); $campaign['subid_param'] = ''; $campaign['target'] = '_blank'; $campaign['required_url_fragment'] = ''; $campaign['health_check_enabled'] = true; $campaign['source'] = 'output_object_v4'; $campaign['last_synced'] = time(); $campaign['external_id'] = sanitize_text_field((string) ($row['external_id'] ?? ''));
         $saved = $this->save_campaign_record($campaign, $campaign_id);
@@ -1357,14 +1465,27 @@ trait PPAR_Output_Objects_Trait {
         } elseif ($is_ebay_campaign && $output_type === 'product_campaign') {
             delete_post_meta($campaign_id, '_ppar_ebay_business_match_contract');
         }
+        if ($auto_otto_awin_product) {
+            update_post_meta($campaign_id, '_ppar_otto_awin_auto', 1);
+        } else {
+            delete_post_meta($campaign_id, '_ppar_otto_awin_auto');
+        }
+        $published_reason = $auto_ebay_business
+            ? 'Verifiziertes eBay-BUSINESS-Produkt automatisch in den freigegebenen Produktslots aktiviert.'
+            : ($auto_otto_awin_product
+                ? 'Verifiziertes OTTO-Produkt aus dem freigegebenen Awin-Programm automatisch für passende Produktplätze und Beiträge aktiviert.'
+                : 'Inaktive Kampagne aus exakt verknüpftem Creative, Ziel und Designslot vorbereitet.');
+        $decision_source = $auto_ebay_business
+            ? 'ebay_verified_product_concept'
+            : ($auto_otto_awin_product ? 'otto_awin_verified_product' : (string) ($object['decision_source'] ?? 'automatic'));
         $wpdb->update($this->output_objects_table(), array(
             'campaign_post_id'=>$campaign_id,
-            'status'=>$auto_ebay_business ? 'published' : 'draft',
-            'decision_source'=>$auto_ebay_business ? 'ebay_verified_product_concept' : (string) ($object['decision_source'] ?? 'automatic'),
-            'decision_reason'=>$auto_ebay_business ? 'Verifiziertes eBay-BUSINESS-Produkt automatisch in den freigegebenen Produktslots aktiviert.' : 'Inaktive Kampagne aus exakt verknüpftem Creative, Ziel und Designslot vorbereitet.',
+            'status'=>$auto_product ? 'published' : 'draft',
+            'decision_source'=>$decision_source,
+            'decision_reason'=>$published_reason,
             'last_verified'=>time(),'updated_at'=>time()
         ), array('id'=>absint($object_id)));
-        return array('campaign_id'=>$campaign_id,'active'=>$auto_ebay_business);
+        return array('campaign_id'=>$campaign_id,'active'=>$auto_product);
     }
     private function output_materialize_banner($object_id, $portal, $row, $classification, $slot) {
         return $this->output_save_local_campaign($object_id, $row, $classification, $slot, 'portal_banner');
