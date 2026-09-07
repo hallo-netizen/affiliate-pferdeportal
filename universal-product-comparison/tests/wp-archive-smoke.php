@@ -265,5 +265,32 @@ wp_delete_post( $wrong_post, true );
 $restored = $archive->build_view( 'test-project', 'regendecken-vergleich' );
 upc_archive_assert( ! is_wp_error( $restored ) && 3 === count( $restored['items'] ), 'archive recovers after invalid fixture removal' );
 
+$source_back_to_draft = wp_update_post(
+    array(
+        'ID'          => (int) $product_post,
+        'post_status' => 'draft',
+    ),
+    true
+);
+upc_archive_assert( ! is_wp_error( $source_back_to_draft ), 'return bound product comparison to draft for link finalization test' );
+
+$link_finalized = upc_finalize_internal_links( $product_comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_archive_assert( ! is_wp_error( $link_finalized ), 'finalize bound internal links on validated draft' );
+upc_archive_assert( 'WORDPRESS_DRAFT_LINKS_VERIFIED' === $link_finalized['status'], 'linked draft readback verified' );
+upc_archive_assert( 1 === $link_finalized['link_count'], 'linked draft contains exactly one manifest-approved relation' );
+upc_archive_assert( false === $link_finalized['publish_allowed'], 'link finalizer keeps publish forbidden' );
+
+$link_finalized_post = get_post( (int) $product_post );
+upc_archive_assert( $link_finalized_post && 'draft' === $link_finalized_post->post_status, 'link-finalized source remains draft' );
+upc_archive_assert( false !== strpos( $link_finalized_post->post_content, '<h2>Passende Variantenvergleiche</h2>' ), 'fixed related-variant heading inserted' );
+upc_archive_assert( 1 === substr_count( $link_finalized_post->post_content, '<a href=' ), 'exactly one internal anchor inserted' );
+upc_archive_assert( false !== strpos( $link_finalized_post->post_content, get_permalink( (int) $variant_post ) ), 'anchor target equals manifest WordPress target' );
+
+$link_finalized_repeat = upc_finalize_internal_links( $product_comparison_id, 'test-project', 'pv-reg-001-v1' );
+upc_archive_assert( ! is_wp_error( $link_finalized_repeat ), 'repeat link finalization succeeds' );
+upc_archive_assert( $link_finalized_repeat['linked_output_hash'] === $link_finalized['linked_output_hash'], 'repeat link finalization is byte-identical' );
+upc_archive_assert( $link_finalized_repeat['link_manifest_sha256'] === $link_finalized['link_manifest_sha256'], 'repeat link finalization uses identical bound manifest' );
+
 fwrite( STDOUT, "UPC_LINK_MANIFEST_WORDPRESS_GESAMT_PASS\n" );
+fwrite( STDOUT, "UPC_LINK_FINALIZER_WORDPRESS_GESAMT_PASS\n" );
 fwrite( STDOUT, "UPC_ARCHIVE_WORDPRESS_GESAMT_PASS\n" );
