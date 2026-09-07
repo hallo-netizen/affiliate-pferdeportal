@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / STEP02 FREIGEGEBEN
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -14,17 +14,17 @@ Es gibt **kein alternatives Reparaturkonzept** und keinen parallelen Reparaturpf
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 46a807ac8fbdce5d1d4cf96c7e02d2cd4c206d5d
-ACTIVE_BLOCKER: STEP01_REALTEST_PENDING
-PLAN_PHASE: STEP01_REALTEST
+ACTIVE_BLOCKER: BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING
+PLAN_PHASE: STEP02_REAPPLY_PR124
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/step02-real-ppm679-execution-pr124-20260907
+CANDIDATE_HEAD_SHA: e5fc1c88dfac81b3ef18ff9b02bf37a677b0185a
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
+ALLOWED_PATH_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -32,7 +32,7 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
-INTEGRATION_ALLOWED: false
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -218,3 +218,44 @@ Step 01 ist integriert. Step 02 ist bis zum echten 7/7-Ergebnis technisch gesper
 
 NEXT ACTION:
 Ausschließlich echter 7/7-Realtest auf `46a807ac…`.
+
+
+## REALTEST-KRITERIUM FÜR ZWISCHENSCHRITTE
+
+Ein Einzel-Delta gilt als **erfolgreich weitergeführt**, wenn:
+- der vorherige erste Blocker verschwindet;
+- der Lauf real weiterkommt;
+- der neue erste Blocker dem nächsten noch nicht eingebauten chronologischen Pflichtblock entspricht.
+
+Nur unerwartete Regression, gleicher Blocker oder Rückschritt bedeutet Kandidat verwerfen.
+
+Der finale Produktionsbeweis bleibt unverändert: echter 7/7-Lauf bis 107008.
+
+
+## STEP 01 – REALTESTERGEBNIS
+
+Step 01 / PR #122:
+- vorheriger Blocker verschwunden;
+- neuer erster Blocker: `BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`;
+- dieser entspricht exakt dem nächsten chronologischen Pflichtblock PR #124.
+
+Daher Step 01 bleibt Bestandteil des eingefrorenen Aufbaupfads.
+
+## STEP 02 – EINZELKANDIDAT
+
+Quelle:
+PR #124 / Merge `0fcc6f9515a7aa32b8be3465ecbb50501eb424cd`
+
+Kandidat:
+`hobbyroom/step02-real-ppm679-execution-pr124-20260907`
+Head:
+`e5fc1c88dfac81b3ef18ff9b02bf37a677b0185a`
+
+Änderung:
+genau 1 Datei:
+`control/startmaster0107/fachworkflow_proof_handoff.py`
+
+Datei ist exakt auf PR-#124-Zielstand.
+
+HARD RULE:
+kein Step 03 vor Realtest von Step 02.
