@@ -1,7 +1,7 @@
 # DESIGN – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / SCRIPT-ONLY
+STATUS: FREI / SCRIPT-ONLY-STANDARD
 
 ## HARTE OBERREGEL
 
@@ -108,7 +108,13 @@ Ergebnis:
 - vier Negativtests BLOCKED/PASS;
 - Kandidaten-SHA: `11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`.
 
-Der Lauf ist nur ein **lokaler Kandidatenbeleg**, kein LIVE-PASS.
+Der Nutzer hat den Kandidaten am 2026-09-07 real geprüft und mit **PASS** bestätigt. LIVE-Beleg: `LIVE_PASS_DESIGN_ORDER_SWAP_002.md`.
+
+## ABSCHLUSS
+
+Aktueller Auftrag DESIGN-ORDER-SWAP-002: **CLOSED / LIVE PASS**.
+
+Der Hobbyraum ist wieder FREI. Der SCRIPT-ONLY-Standard bleibt für künftige Miniänderungen verbindlich.
 
 ## VERBINDLICHER ABLAUF FÜR JEDEN WEITEREN CHAT
 
