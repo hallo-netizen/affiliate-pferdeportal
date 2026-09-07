@@ -54,3 +54,18 @@ REAL:
 - Banner nur nach belegtem echten Creative-Zugang.
 
 Kein REAL-PASS ohne diese Belege.
+
+## OTTO-spezifische Pflichtdaten
+
+Für konkrete OTTO-Produktwerbung ist der reale Verkäufername Pflicht.
+Die Affiliate-Zentrale darf OTTO deshalb erst automatisch öffentlich aktivieren, wenn der Verkäufer aus dem **realen OTTO/Awin-Feed** eindeutig gebunden wurde.
+Die generische Awin-Schnittstelle rät keinen Verkäufer-Spaltennamen.
+
+Produktaktualisierung:
+- Automationsplan nur `daily` oder `twicedaily`;
+- für OTTO mindestens täglich betreiben;
+- realer Betriebszustand wird erst im Live-Test abgenommen.
+
+Mehrprovider:
+Ein zentral verifiziertes OTTO/Awin-Produkt darf durch die alte eBay-Kohortenregel nicht pauschal entfernt werden.
+In diesem Fall entscheidet die bestehende fachliche Rangfolge. Unverifizierte Fremdquellen erhalten diese Ausnahme nicht.
