@@ -1,49 +1,50 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / V1-PLUGINPLANUNG
+STATUS: AKTIV / V1-PLUGINENTWICKLUNG
 
 ## 1-KLICK-ÜBERSICHT
 
-**WAS IST DAS?**  
-Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
-
 **AKTUELLER AUFTRAG**  
-V1 als unabhängigen, allgemeingültigen Produktwissen-/Produktvergleichsweg bis WordPress-DRAFT vorbereiten.
+V1 als unabhängigen, allgemeingültigen Produktwissen-/Produktvergleichsweg bis WordPress-DRAFT entwickeln.
 
-**DU DARFST NICHT**  
-STARTMASTER/TEXT umbauen, dessen aktiven Reparaturbereich verändern, Produktfakten erfinden oder Affiliate-/SEO-Daten zur fachlichen Produktwahrheit machen.
+**HARTE GRENZEN**
+- STARTMASTER/TEXT nicht umbauen;
+- keine Produktfakten erfinden;
+- SEO/Affiliate schreiben keine Produktwahrheit;
+- kein main, kein Live-Publish.
 
-## AKTUELLER VERTRAG
+## BELEGTER STAND
 
-Produktwissen:
-`PRODUKTWISSEN_V1_VERTRAG.md`
+Technik-Branch:
+`hobbyroom/productwissen-v1-prototype`
 
-V1-Rollen:
-- Produktwissen = Produkt-/Varianten-/Fakten-/Quellen-/Lebenszyklus-Wahrheit;
-- Produktvergleich = Vergleichsauswahl, Vergleichsartikel, Variantenvergleich, QA, Grafik, Template, WordPress-DRAFT;
-- SEO = optionale Signale/Priorisierung;
-- Affiliate = Exact-Match + Kaufangebote/Preise/Verfügbarkeit;
-- TEXT/STARTMASTER = keine V1-Laufzeitabhängigkeit.
+Draft-PR:
+#142 gegen Campus-Branch.
+
+PASS:
+- `UPK_WORDPRESS_DB_GESAMT_PASS`;
+- `UPC_WORDPRESS_DB_GESAMT_PASS`;
+- `UPC_REAL_DOSSIER_PV_REG_001_PASS`;
+- letzter belegter WordPress+MySQL Run: `34109264265` SUCCESS.
+
+Damit sind Produktwissen, Vergleichspaarung, Merkmalsmatrix und deterministisches Writer-Dossier real gegen WordPress+MySQL geprüft.
 
 ## NEXT ACTION
 
-**Ersten minimalen Produktvergleichskern auf den jetzt WordPress-/DB-geprüften Produktwissen-Kern setzen:**
-1. Vergleich besitzt eigene stabile `comparison_id`;
-2. Produktvergleich = 2–4 Produkte, mindestens zwei Hersteller;
-3. alle Produkte müssen derselben Produktgruppe angehören;
-4. Variantenvergleich = 2–4 Varianten desselben Basismodells;
-5. Dubletten und unzulässige Paarungen fail-closed blockieren;
-6. Vergleich speichert nur Produkt-/Varianten-IDs und eigene Vergleichsmetadaten, **keine Kopie der Produktfakten**;
-7. vollständiges Readback aus PRODUKTWISSEN positiv/negativ prüfen.
+**Minimalen Product-Compare-Writer gegen das echte Writer-Dossier entwickeln und zuerst nur Text-DRAFT erzeugen.**
 
-Technik-Branch bleibt:
-`hobbyroom/productwissen-v1-prototype`.
+Pflicht:
+1. vorhandene Textmaschinen-Regeln nur gezielt als Referenz/isolierbare Funktion prüfen;
+2. zentrale Vergleichstabelle sehr weit oben;
+3. Tabelle enthält Fakten + verständliche Entscheidungsbedeutung;
+4. `SOURCE_CONFLICT` / `NOT_IN_SOURCE` dürfen niemals glattgebügelt werden;
+5. Vor-/Nachteile nur aus belegbaren Unterschieden;
+6. Fazit: welches Produkt passt zu welchem Bedarf, kein pauschaler Sieger;
+7. fehlende fachliche Entscheidungsgrundlage = BLOCKED statt erfundener Empfehlung;
+8. Artikelvertrag darf anhand echter Testartikel kontrolliert weiterentwickelt werden.
 
-Produktwissen WordPress/MySQL:
-`UPK_WORDPRESS_DB_GESAMT_PASS` / Run `34108014923`.
-
-Noch **kein Writer, kein Frontend, keine Affiliate-Integration**. Erst Vergleichskern beweisen.
+Noch kein WordPress-Publish, kein Affiliate-Renderer und kein Frontend.
 
 ## Globale Arbeitsort-Sperre
 
