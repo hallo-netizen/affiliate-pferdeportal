@@ -1729,6 +1729,7 @@ JS;
             implode(',', $terms),
             implode(',', $slugs),
             sanitize_key((string) $slot_type),
+            (string) max(1, absint($context['banner_distribution_position'] ?? 1)),
         ));
         return (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % $total);
     }
@@ -3072,7 +3073,9 @@ JS;
      */
     private function select_campaign_for_slot_position($context, $slot_type, $position = 1) {
         $position = max(1, min(2, (int) $position));
-        $candidates = $this->ranked_campaigns_for_slot($context, $slot_type);
+        $rank_context = is_array($context) ? $context : array();
+        $rank_context['banner_distribution_position'] = $position;
+        $candidates = $this->ranked_campaigns_for_slot($rank_context, $slot_type);
         return $candidates[$position - 1] ?? null;
     }
 
