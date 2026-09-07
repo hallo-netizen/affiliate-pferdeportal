@@ -1,5 +1,5 @@
 name: Product Comparison Bound Draft TEMP
-# diagnostic rerun after exposing first error
+# rerun after fixing bound draft ordering
 
 on:
   push:
