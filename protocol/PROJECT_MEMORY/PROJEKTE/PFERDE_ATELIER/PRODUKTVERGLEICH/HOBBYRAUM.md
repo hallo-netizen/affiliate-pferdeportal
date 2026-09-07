@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-07
-STATUS: AKTIV / V1-PROTOTYP + ZIP-INSTALLATIONSTEST PASS / MANUELLER WP-TEST BEREIT
+STATUS: AKTIV / KATEGORIEBINDUNGSFIX 0.2.1 ZIP-PASS / MANUELLER ERSETZUNGSTEST BEREIT
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,7 +9,7 @@ STATUS: AKTIV / V1-PROTOTYP + ZIP-INSTALLATIONSTEST PASS / MANUELLER WP-TEST BER
 Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
 
 **AKTUELLER AUFTRAG**
-Die zwei geprüften Plugin-ZIPs im ersten manuellen WordPress-Test installieren und aktivieren. Keine Veröffentlichung.
+Das bereits installierte Produktwissen 0.1.0 unverändert lassen und nur das installierte Produktvergleich-Plugin 0.2.0 durch den hart geprüften Ersatz 0.2.1 ersetzen. Keine Veröffentlichung.
 
 **DU DARFST NICHT**
 STARTMASTER/TEXT umbauen, dessen aktiven Reparaturbereich verändern, Produktfakten erfinden, Affiliate-/SEO-Daten zur fachlichen Produktwahrheit machen oder automatisch veröffentlichen.
@@ -53,30 +53,53 @@ V1-Rollen:
 - Affiliate = Exact-Match + Kaufangebote/Preise/Verfügbarkeit;
 - TEXT/STARTMASTER = keine V1-Laufzeitabhängigkeit.
 
-## ERSTER ZIP-PLUGINTEST – PASS
+## ZIP- UND KATEGORIEBINDUNG – AKTUELLER PASS
 
-Temporärer echter ZIP-Installationssmoke:
-- ZIP-Struktur PASS;
-- `universal-product-knowledge` per WordPress installiert + aktiviert PASS;
-- `universal-product-comparison` danach per WordPress installiert + aktiviert PASS;
-- Real WordPress/MySQL Gesamtlauf PASS;
-- finales Draft-/Link-/Grafiksystem PASS;
-- Publish-Sperre PASS.
+Altstand:
+- Produktwissen `0.1.0-prototype` unverändert;
+- Produktvergleich `0.2.0-prototype` war ZIP-technisch PASS, hatte aber für Pferde Atelier eine falsche Taxonomie-Annahme: echte Vergleichskategorien sind technisch flach (`parent=0`).
 
-Testlauf: `34136786494`.
+Realer Kategorienachweis für ersten Test:
+- Term-ID: `11`;
+- Name: `Vergleich Regendecken`;
+- Slug: `pferdedecken-regendecken-vergleich`;
+- Parent: `0`.
 
-Finaler Branch nach Entfernen aller temporären Workflow-Dateien:
-`38ae1137b5d90d64d28b3f02fc31b85f00ee8375`
+Fix:
+- Produktvergleich `0.2.1-prototype`;
+- reale Kategoriebindung ist hashgebunden;
+- Term-ID/Name/Slug/Parent werden exakt geprüft;
+- bestehende Live-Kategorie wird **nicht** automatisch neu angelegt;
+- unerwarteter Parent wird BLOCKED.
 
-`Pferde Atelier Immutable Base Hardlock` -> PASS.
+Harter ZIP-/WordPress-/MySQL-Test:
+- Run `34141063395` -> PASS;
+- Zero-Freedom Static Guard -> PASS;
+- saubere ZIP-Struktur -> PASS;
+- ZIP-Installation/Aktivierung -> PASS;
+- reale Pferde-Atelier-Regendecken-Konfiguration -> PASS;
+- flache Kategorie positiv -> PASS;
+- falscher Parent negativ -> BLOCKED/PASS;
+- Produktwissen-/Vergleich-/Realdossier-/Archiv-Gesamttests -> PASS.
+
+Bereinigter Branch nach Entfernen des temporären Testworkflows:
+`89651722cae1fd2c60ddc8a9d288a3d17e71e105`
+
+Immutable Base Hardlock -> PASS.
+
+Wichtig:
+Der beim Nutzer bereits installierte `0.2.0`-Stand führt von selbst keine Artikelproduktion oder Veröffentlichung aus. Er bleibt bis zum manuellen Ersatz unangetastet.
 
 ## NEXT ACTION
 
-**Manueller WordPress-Plugintest:**
-1. `universal-product-knowledge-0.1.0-prototype.zip` installieren und aktivieren;
-2. danach `universal-product-comparison-0.2.0-prototype.zip` installieren und aktivieren;
-3. keine Veröffentlichung auslösen;
-4. zuerst nur Installation/Aktivierung und eventuelle WordPress-Fehlermeldungen prüfen.
+**Manueller Ersetzungstest in WordPress:**
+1. Produktwissen `0.1.0` **nicht anfassen**;
+2. Produktvergleich `0.2.1-prototype` über das bestehende `0.2.0` installieren/ersetzen;
+3. aktiv lassen/aktivieren;
+4. noch keinen Beitrag erzeugen oder veröffentlichen;
+5. zuerst nur prüfen: WordPress akzeptiert den Ersatz ohne Fehlermeldung und zeigt Version `0.2.1-prototype`.
+
+Erst nach diesem manuellen Installations-PASS folgt der erste gebundene `PV-REG-001`-Draft-Test gegen die reale Kategorie ID 11.
 
 ## Globale Arbeitsort-Sperre
 
