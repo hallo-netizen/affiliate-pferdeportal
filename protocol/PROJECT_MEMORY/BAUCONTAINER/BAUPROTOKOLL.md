@@ -1674,3 +1674,28 @@ DARUM:
 
 BEZUG:
 BAU-038 / ARCH-086.
+
+
+### 2026-09-07 – Finaler GitHub-Snapshot extern gesichert
+
+FINALER LAUF:
+Run `34160894135`, Attempt 2 = SUCCESS.
+
+ARTEFAKT:
+`GITHUB_KOMPLETTBACKUP_2026-09-07_FINAL.zip`
+SHA-256 `b885d46a9ad7f9b521677da2cc4c0abcf6d9ecbf6356b83055fc18a6c1259a25`.
+
+REALER NACHTEST:
+`GITHUB_REPOSITORY_RESTORE_PASS`.
+
+EXTERNE KOPIE:
+`/Campus-Tresor/GITHUB_KOMPLETTBACKUP_2026-09-07_FINAL.zip`.
+
+AUTOMATIK:
+wöchentlich Sonntag 03:17 Europe/Berlin; derselbe GitHub-only-Weg; bei FAIL keine Ersetzung des letzten funktionierenden Backups.
+
+PROVIDERGRENZE BLEIBT:
+Actions-Adminendpunkte 403; Secret-Werte nicht exportierbar.
+
+DARUM:
+`GITHUB_BACKUP_PREPASS`, nicht `GITHUB_KOMPLETT_PASS`.
