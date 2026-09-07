@@ -109,18 +109,7 @@ class UPC_Repository {
         return $comparison_id;
     }
 
-    public function find_comparison_id_by_key( $comparison_key ) {
-        $comparison_key = sanitize_key( $comparison_key );
-        if ( '' === $comparison_key ) {
-            return 0;
-        }
-
-        return (int) $this->wpdb->get_var(
-            $this->wpdb->prepare( "SELECT id FROM {$this->comparisons} WHERE comparison_key = %s LIMIT 1", $comparison_key )
-        );
-    }
-
-    public function set_features( $comparison_id, array $features, $manage_transaction = true ) {
+    public function set_features( $comparison_id, array $features ) {
         $comparison_id = absint( $comparison_id );
         if ( ! $this->comparison_exists( $comparison_id ) ) {
             return new WP_Error( 'UPC_COMPARISON_NOT_FOUND', 'Comparison does not exist.' );
@@ -158,14 +147,10 @@ class UPC_Repository {
         }
 
         $now = current_time( 'mysql', true );
-        if ( $manage_transaction ) {
-            $this->wpdb->query( 'START TRANSACTION' );
-        }
+        $this->wpdb->query( 'START TRANSACTION' );
         $deleted = $this->wpdb->delete( $this->features, array( 'comparison_id' => $comparison_id ), array( '%d' ) );
         if ( false === $deleted ) {
-            if ( $manage_transaction ) {
-                $this->wpdb->query( 'ROLLBACK' );
-            }
+            $this->wpdb->query( 'ROLLBACK' );
             return new WP_Error( 'UPC_FEATURE_RESET_FAILED', 'Existing comparison features could not be reset.' );
         }
 
@@ -183,9 +168,7 @@ class UPC_Repository {
                 array( '%d', '%s', '%s', '%d', '%d', '%s' )
             );
             if ( false === $ok ) {
-                if ( $manage_transaction ) {
-                    $this->wpdb->query( 'ROLLBACK' );
-                }
+                $this->wpdb->query( 'ROLLBACK' );
                 return new WP_Error( 'UPC_FEATURE_INSERT_FAILED', $this->wpdb->last_error ? $this->wpdb->last_error : 'Comparison feature insert failed.' );
             }
         }
@@ -197,9 +180,7 @@ class UPC_Repository {
             array( '%s' ),
             array( '%d' )
         );
-        if ( $manage_transaction ) {
-            $this->wpdb->query( 'COMMIT' );
-        }
+        $this->wpdb->query( 'COMMIT' );
 
         return count( $normalized );
     }
