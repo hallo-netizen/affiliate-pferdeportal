@@ -61,7 +61,7 @@ PB ONE ist:
 - Aktenschrank für dauerhafte Referenzunterlagen;
 - Ideenschmiede;
 - Entwicklungsort;
-- Unterlagen-/Angebotsraum;
+- Präsentations-/Werbe-/Unterlagen-/Angebotsraum;
 - Arbeitsdokumente für laufende Entwürfe;
 - Knotenpunkt zwischen Projekten.
 
