@@ -9,7 +9,7 @@ STATUS: AKTIVES ZENTRALGEBÄUDE
 PB ONE ist unsere gemeinsame Agentur und der zentrale Knotenpunkt des Campus.
 
 **HIER BIST DU RICHTIG, WENN …**  
-es um Ideen, Konzepte, Angebote, Flyer, Unterlagen, Positionierung, neue Vorhaben oder deren Weiterentwicklung geht.
+es um Ideen, Konzepte, Preise, Vertrieb, Präsentationen, Werbung, Angebote, Flyer, Unterlagen, Positionierung, neue Vorhaben oder deren Weiterentwicklung geht.
 
 **DU DARFST …**  
 lesen, schreiben, sammeln, verändern, verwerfen, strukturieren, entscheiden, Register pflegen, Unterlagen erstellen und Vorhaben weiterentwickeln.
@@ -23,7 +23,9 @@ hier programmieren, technische Produktionsarbeit ausführen oder bestehende Proj
 - neue Idee / Ideenschmiede → `IDEENWERKSTATT/START_HERE.md`
 - Idee zum belastbaren Konzept entwickeln → `ENTWICKLUNGSRAUM/START_HERE.md`
 - laufende Arbeitsunterlage / Präsentation / Entwurf → `ARBEITSDOKUMENTE/START_HERE.md`
-- Angebot / Flyer / Unterlage → `ANGEBOTE_FLYER/START_HERE.md`
+- Preise / Pakete / Baukasten → `AKTENSCHRANK/PREISE/START_HERE.md`
+- Vertriebsabläufe / Lead-Management → `AKTENSCHRANK/VERTRIEB/START_HERE.md`
+- Präsentation / Werbung / Angebot / Flyer / Leistungsunterlage → `ANGEBOTE_FLYER/START_HERE.md`
 
 ## Gemeinsame Rechte
 
