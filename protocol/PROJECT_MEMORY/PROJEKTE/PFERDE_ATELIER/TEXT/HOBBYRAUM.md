@@ -18,7 +18,7 @@ den aktuellen Auftrag und alle autoritativen Quellen lesen und ausschließlich i
 main verändern, zu Paul wechseln, Paul-Dateien/-Branch benutzen, einen neuen Workflow/Runner/Gate/Executor bauen oder Fach-/SEO-/Textmaschinenregeln verändern.
 
 **ALS NÄCHSTES …**  
-Solange Codex nicht verfügbar ist: ausschließlich READ-ONLY-Prüfung der drei nach Historiengegencheck tatsächlich neuen technischen Paul-Kandidaten: **(1) Pre-/Post-Transformation-Gate-Reihenfolge F2/A6/A12, (2) technisch unerfüllbare Tabellen-/Artikeltyp-Bedingung F7/A7, (3) unterschiedliche Hash-Semantik A11.** Jeden Punkt zuerst gegen letzten realen 7/7-Stand und bisherige Fixhistorie prüfen. Kein Produktionsfix ohne reproduzierten aktuellen Widerspruch, kein neuer Runner/Workflow/Gate/Executor, kein Merge.
+Keine weitere Minifix-Kette. Zuerst `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md` als aktuelle technische Wirkungskarte verwenden. Danach die 12 bestehenden Pflichtstufen einmal vollständig als **bestehender Prüfer → exakter Inputzustand → exakter Output/Evidence → nächster Consumer** kartieren. Paul F2/A6/A12, F7/A7, A11 und A37 sowie B01–B15/M01–M33 zwingend gegen jede direkte Übergabe halten. Erst ein konsolidierter Corridor-PASS darf einen neuen Integrationskandidaten erzeugen. Der begonnene LanguageTool-Rebind-Branch ist PARKPLATZ, kein aktueller Integrationskandidat.
 
 ## ARBEITSKONTROLLPUNKT – NUR DIE AKTUELLE ARBEIT
 
@@ -158,6 +158,8 @@ Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
 
 **Paul-Pipeline-Prüfkarte:** `PAUL_PIPELINE_AUDIT_20260906.md` – priorisiert direkte Gate-/Vertragskollisionen gegenüber späteren WordPress/Public-Folgethemen.
+
+**Systemische Root-Cause-Karte:** `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md` – gemeinsame Fehlerklassen aus Paul + B01–B15/M01–M33 + LanguageTool-Livebefund; verhindert weitere Minifix-Ketten.
 
 **Vor-Codex-Readiness:** `PRE_CODEX_READINESS_20260906.md` – vollständige technische Vorprüfung, Belege, Grenzen und STOP-Regel für #141.
 
