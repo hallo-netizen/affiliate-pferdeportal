@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-07
-STATUS: PLAN A AUF MAIN / ERSTER LIVEBLOCKER LANGUAGETOOL-BINDUNG / HOBBYRAUM-FIXSPERRE AKTIV
+STATUS: HOBBYRAUM-FIXSPERRE AKTIV / TECHNISCHE AKTIVIERUNG DURCH REPOSITORY-ADMIN GESPERRT
 
 ## AUTORITÄT
 
@@ -33,13 +33,14 @@ Head:
 Nicht produktiv verdrahtet, nicht gemergt.
 
 Security-PR #137:
-OPEN / nicht gemergt.
+OPEN / nicht gemergt / auf current main synchronisiert.
 Aktueller Security-Head:
-`5e0547c999a544d57e1891776f2f417e836eb605`
-Enthält zusätzlich die serverseitige Prüfung des `HOBBYROOM_WORK_LOCK_V1`.
-Normaler hardlock auf diesem Head: PASS.
-`hardlock-base`: FAIL an der bestehenden `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`-Selbstschutzgrenze.
-Aktivierung auf main weiterhin blockiert und erfordert kontrollierte Admin-Wartung; serverseitige Hobbyraum-Sperre ist daher **noch nicht produktiv aktiv**.
+`8b32294e861d97f009fa68fe1c61e8fe9a30a81b`
+Enthält die serverseitige Prüfung des `HOBBYROOM_WORK_LOCK_V1`.
+`hardlock`: SUCCESS.
+`hardlock-base`: FAIL ausschließlich an der bestehenden Immutable-Security-Selbstschutzgrenze.
+Ruleset `Pferde Atelier Main Hardlock` (ID `21788951`) hat keine Bypass-Akteure; aktueller GitHub-Zugang kann nicht bypassen.
+Aktivierung auf main erfordert daher kontrollierte Repository-Admin-Wartung; serverseitige Hobbyraum-Sperre ist **noch nicht produktiv aktiv**.
 
 ## Aktueller realer Livebefund Plan A
 
@@ -66,6 +67,14 @@ B01 ist in diesem Lauf nicht erneut live bewiesen worden, weil der Lauf vorher b
 
 Der TEXT-Hobbyraum steht auf:
 `FIX_FORBIDDEN`
+
+Verbindliche HARD RULE:
+1. Hobbyraum technisch dichtmachen.
+2. `de21f6cd35c60849c551fd82f78e75ce57c99fab` Goldmaster kopieren.
+3. Pflichtänderungen einzeln nachrüsten.
+4. Nach jeder Änderung real testen.
+
+Aktuell ist ausschließlich Schritt 1 zulässig; Schritt 2–4 sind bis zur Admin-Aktivierung gesperrt.
 
 Kein neuer technischer Integrationskandidat ist freigegeben.
 
