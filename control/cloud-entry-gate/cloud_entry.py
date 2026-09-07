@@ -78,7 +78,7 @@ def assert_execution_workspace() -> None:
             raise Blocked('BACKUP_GITDIR_EXECUTION_BLOCKED')
 
     origin = _git_value('config', '--get', 'remote.origin.url')
-    if not _origin_is_official_github(origin):
+    if origin and not _origin_is_official_github(origin):
         raise Blocked('OFFICIAL_GITHUB_ORIGIN_REQUIRED')
 
 def run_paul_scope_gate(command: str):
