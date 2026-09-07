@@ -149,7 +149,7 @@ Branch:
 `affiliate-release-current`
 
 HEAD:
-`99553e1f94cfde57187b671f23cadb09b0e7c417`
+`c4e7f63b5677602a032ed1e95d948d654ccb51d5`
 
 Aktiver Kandidat:
 **6.72.1**
@@ -158,10 +158,10 @@ Source-Dateien:
 26
 
 Source-Manifest SHA-256:
-`1140bba9bd2db78d4a347f1d6ad23ee82e17213fff33270f0ffb169b6d0973fb`
+`b12706416fa7357ddd4b6ac61ed951b0f2b5b88b0ee5ff8577112c1eea2448f4`
 
 Governance Generation:
-**12**
+**14**
 
 Release:
 **NICHT FREIGEGEBEN**
@@ -206,3 +206,28 @@ GitHub-Kandidat:
 **6.72.1**
 
 Vor Release auflösen; nicht still ignorieren.
+
+
+## Direkter Prüflauf ohne Docker
+
+Im Repository ist jetzt ein read-only Ein-Kommando-Test vorhanden:
+
+`bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh`
+
+Er prüft:
+- PHP-Syntax der gebundenen Affiliate-Source;
+- OTTO/Awin/Productwissen-/Banner-Vertrag;
+- ausführbare Anteil-/Reparatur-/Real-Source-Behavior-Tests.
+
+Zusätzlich bleibt der isolierte Container-Hobbyraum:
+`python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json`
+
+## Letzte Härtungen
+
+- Anteil `0` = harte automatische Ausschlusssperre.
+- Mehrere Bannerplätze derselben Seite erhalten getrennte deterministische Anteilsentscheidungen.
+- Platz 2 darf Platz 1 nicht duplizieren.
+- reale Awin-Bannerquelle kann über `ppar_affiliate_awin_static_creatives` angeschlossen werden.
+- gebundene Quelle mit 0 Creatives ist von „nicht angeschlossen“ unterscheidbar und kann alte Banner kontrolliert reconciliieren.
+- manuelle Seitenreparaturen benötigen Begründung und speichern Benutzer + Zeitpunkt.
+- Kategorie-/sonstige Zielreparatur nutzt die vorhandene feste Creative→Portalziel/Slot-Entscheidung mit Begründung.
