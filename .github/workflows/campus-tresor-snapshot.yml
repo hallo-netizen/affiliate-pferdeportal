@@ -202,8 +202,11 @@ jobs:
             echo "admin_only_settings=SEE_meta_optional-api-status.txt"
           } > backup/MANIFEST.txt
 
-          sha256sum backup/affiliate-pferdeportal.bundle > backup/SHA256SUMS.txt
-          find backup/release-assets -type f -print0 | sort -z | xargs -0 -r sha256sum >> backup/SHA256SUMS.txt
+          (
+            cd backup
+            sha256sum affiliate-pferdeportal.bundle > SHA256SUMS.txt
+            find release-assets -type f -print0 | sort -z | xargs -0 -r sha256sum >> SHA256SUMS.txt
+          )
 
       - name: Build one downloadable file
         shell: bash
@@ -213,6 +216,22 @@ jobs:
           tar -czf GITHUB_KOMPLETTBACKUP.tar.gz -C backup .
           tar -tzf GITHUB_KOMPLETTBACKUP.tar.gz >/dev/null
           sha256sum GITHUB_KOMPLETTBACKUP.tar.gz > GITHUB_KOMPLETTBACKUP.tar.gz.sha256
+
+          rm -rf /tmp/github-backup-final-check
+          mkdir -p /tmp/github-backup-final-check/unpacked /tmp/github-backup-final-check/verifyrepo
+          tar -xzf GITHUB_KOMPLETTBACKUP.tar.gz -C /tmp/github-backup-final-check/unpacked
+          (
+            cd /tmp/github-backup-final-check/unpacked
+            sha256sum -c SHA256SUMS.txt
+          )
+          (
+            cd /tmp/github-backup-final-check/verifyrepo
+            git init -q
+            git bundle verify ../unpacked/affiliate-pferdeportal.bundle
+          )
+          git clone --mirror /tmp/github-backup-final-check/unpacked/affiliate-pferdeportal.bundle /tmp/github-backup-final-check/restore.git
+          git -C /tmp/github-backup-final-check/restore.git fsck --full --strict
+
           echo GITHUB_BACKUP_PREPASS
 
       - name: Upload verified backup
