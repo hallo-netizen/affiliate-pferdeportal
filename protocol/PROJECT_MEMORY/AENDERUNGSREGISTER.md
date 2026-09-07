@@ -1454,7 +1454,7 @@ STAND: 2026-09-07.
 
 WAS:
 Der verbindliche Pferde-Atelier-Backupweg besteht nur noch aus:
-\`GitHub komplett + WordPress komplett + Projektarchiv komplett -> ein datiertes Sicherungspaket\`.
+`GitHub komplett + WordPress komplett + Projektarchiv komplett -> ein datiertes Sicherungspaket`.
 
 WARUM:
 Die frühere Tresorentwicklung mit mehreren Kits, Kapselvarianten und strikten historischen Einzelartefakt-Blockern war für den eigentlichen Sicherungszweck unnötig komplex und fehleranfällig.
@@ -1468,4 +1468,4 @@ REGEL:
 - historisch fehlende Einzel-ZIPs blockieren nicht automatisch, wenn der aktuelle funktionsfähige Stand vollständig wiederherstellbar gesichert ist.
 
 AUTORITÄT:
-\`protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md\`
+`protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md`
