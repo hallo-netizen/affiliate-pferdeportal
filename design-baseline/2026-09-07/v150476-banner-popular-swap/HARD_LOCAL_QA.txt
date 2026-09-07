@@ -1,0 +1,38 @@
+PFERDE ATELIER – V1.50.476 HARD LOCAL POSITIV/NEGATIV
+
+POSITIV:
+- exakter V1.50.472 ZIP-Hash: PASS
+- exakter V1.50.472 PHP-Hash: PASS
+- 498 Paketdateien geprüft: PASS
+- nur pferde-template-kit.php verändert: PASS
+- vollständiger bestehender Beitragsvorschau-Block byte-identisch: PASS
+- vollständiger bestehender Affiliate-Banner-Block byte-identisch: PASS
+- H1/Artikelblock unverändert: PASS
+- Unterkategorie-/Verweisblock unverändert: PASS
+- Kategorie-CSS byte-identisch: PASS
+- V104 allgemein byte-identisch: PASS
+- V104 Pferde byte-identisch: PASS
+- PHP-Lint: PASS
+- ZIP-Readback 498/498: PASS
+- Rekonstruktionstest: Banner/Popular zurücktauschen + Header zurücksetzen ergibt byte-identisch V1.50.472: PASS
+
+NEGATIV:
+- Banner wieder vor Beitragsvorschau gesetzt -> BLOCKED: PASS
+- Bannerblock dupliziert -> BLOCKED: PASS
+- Artikelblock absichtlich verändert -> BLOCKED: PASS
+- Affiliate-Bannerblock absichtlich verändert -> BLOCKED: PASS
+
+DIFF:
+Außer Pluginheader exakt nur:
+1. bestehender pa266-network-Block an alter Position entfernt;
+2. derselbe Block unverändert direkt hinter pa297-popular eingesetzt.
+
+KEINE Artikelverschiebung. KEINE Artikelzerlegung.
+
+ZIP SHA256:
+90fd3d607696150564ad08ad071a4047b10aec8c1cd09d84468b09d0659b6207
+PHP SHA256:
+686cd76c3df888eb8da8b69c7658ddd275a88c860a593b8949c4797b2894a167
+
+LIVE:
+NICHT BEHAUPTET.
