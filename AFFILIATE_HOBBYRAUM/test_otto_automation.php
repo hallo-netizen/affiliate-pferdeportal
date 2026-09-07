@@ -29,12 +29,13 @@ $analytics = source('class-ppar-partner-analytics.php');
 $radar = source('class-ppar-deal-radar.php');
 
 pass_or_fail(
-    str_contains($router, 'OTTO_AWIN_ADVERTISER_ID = 14336')
+    str_contains($source_plan, 'const OTTO_AWIN_ADVERTISER_ID = 14336')
+    && str_contains($router, 'OTTO_AWIN_ADVERTISER_ID = PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID')
     && str_contains($output, 'self::OTTO_AWIN_ADVERTISER_ID')
-    && str_contains($source_plan, "'awin_advertiser_id'=>14336")
-    && str_contains($analytics, "absint(\$campaign['advertiser_id'] ?? 0) === 14336")
-    && str_contains($radar, "absint(\$row['programme_external_id'] ?? 0) === 14336"),
-    'OTTO identity is canonical Awin advertiser 14336'
+    && str_contains($source_plan, "'awin_advertiser_id'=>self::OTTO_AWIN_ADVERTISER_ID")
+    && str_contains($analytics, 'PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID')
+    && str_contains($radar, 'PPAR_Affiliate_Source_Plan::OTTO_AWIN_ADVERTISER_ID'),
+    'OTTO identity has one canonical Awin advertiser 14336 authority'
 );
 
 pass_or_fail(
@@ -128,6 +129,35 @@ pass_or_fail(
     'real imported Awin banners are auto-assigned; no product-image banner fallback'
 );
 
+pass_or_fail(
+    str_contains($router, "const OPTION_BANNER_DISTRIBUTION = 'ppar_banner_distribution_v1'")
+    && str_contains($router, "'otto'=>40")
+    && str_contains($router, "'awin_other'=>25")
+    && str_contains($router, "'adcell'=>20")
+    && str_contains($router, "'direct'=>15")
+    && str_contains($router, "'digistore24'=>0"),
+    'banner distribution has explicit configurable starting shares'
+);
+pass_or_fail(
+    str_contains($router, 'banner_distribution_relevance_band')
+    && str_contains($router, 'best_band')
+    && str_contains($router, 'Banneranteil ')
+    && str_contains($router, "gmdate('o-W')"),
+    'banner share applies only inside best relevance tier and stays weekly deterministic'
+);
+pass_or_fail(
+    str_contains($router, 'handle_save_banner_distribution')
+    && str_contains($router, 'Banneranteile speichern')
+    && str_contains($router, 'Diese Seite ist zugleich die interne Reparaturinstanz'),
+    'banner share settings and manual repair UI are available'
+);
+pass_or_fail(
+    str_contains($articles, "assignment_selection_for_slot(\$context, 'post_inline_banner')")
+    && str_contains($articles, "\$assigned_banner['handled']")
+    && str_contains($articles, "\$assigned_banner['disabled']"),
+    'manual repair overrides automatic article banner planning'
+);
+
 // Behavioral mini-contracts.
 function is_otto(array $row): bool {
     return ($row['provider'] ?? '') === 'awin'
@@ -179,6 +209,26 @@ pass_or_fail(
 pass_or_fail(
     !$exact_match([['type'=>'GTIN','value'=>'4001234567890']], [['type'=>'GTIN','value'=>'4001234567891']]),
     'similar but different product identifier is never substituted'
+);
+
+$choose_provider = static function(array $eligible, int $bucket): string {
+    $total = array_sum($eligible);
+    if ($total <= 0) return '';
+    $bucket %= $total;
+    $cursor = 0;
+    foreach ($eligible as $key=>$weight) {
+        $cursor += $weight;
+        if ($bucket < $cursor) return (string)$key;
+    }
+    return '';
+};
+pass_or_fail($choose_provider(['otto'=>40,'awin_other'=>25,'adcell'=>20,'direct'=>15], 0) === 'otto', 'weighted banner bucket starts in OTTO share');
+pass_or_fail($choose_provider(['otto'=>40,'awin_other'=>25,'adcell'=>20,'direct'=>15], 40) === 'awin_other', 'weighted banner bucket moves to next share at boundary');
+pass_or_fail($choose_provider(['otto'=>40,'adcell'=>20], 45) === 'adcell', 'missing banner sources are redistributed by normalization');
+pass_or_fail(
+    str_contains($router, "if (\$this->banner_distribution_relevance_band((int) (\$candidate['specificity'] ?? 0)) !== \$best_band)")
+    && str_contains($router, "if (!\$exact_mode &&"),
+    'share cannot outrank stronger relevance and product exact logic stays separate'
 );
 
 $fp = static function(array $row): string {
