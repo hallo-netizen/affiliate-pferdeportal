@@ -1,5 +1,7 @@
 # STARTMASTER0107 – VOLLSTÄNDIGES PROTOKOLL 30.08.–05.09.2026
 
+**FORTLAUFENDE KANONISCHE PROTOKOLLQUELLE.** Der historische Dateiname bleibt aus Adressstabilitätsgründen unverändert; neue TEXT-Ereignisse werden hier weitergeführt.
+
 ## 30.08 – H7-Komplettstand
 
 Kanonische H7-MASTER: `MASTER_PFERDE_ATELIER_STARTMASTER0107_H7_PROJECT_SINGLE_DOOR_FINAL_20260830.zip`, ca. 78,5 MB.
