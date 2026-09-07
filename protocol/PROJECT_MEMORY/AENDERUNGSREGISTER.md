@@ -1306,3 +1306,20 @@ GRENZE:
 Providerinterne GitHub-IDs können beim Neuaufbau neu vergeben werden; Original-IDs/Zeitstempel bleiben als archivierte Information erhalten.
 PASS-REGEL:
 `TRESOR_PASS` erst nach echtem isoliertem Wiederaufbau ausschließlich aus genau einer Recovery-Datei + Masterpasswort.
+
+
+## PV-PLAN-014 – Affiliate liest Exact-IDs, SEO bleibt bis Vertragsprüfung upstream
+
+STAND: 2026-09-07.
+
+AFFILIATE:
+Read-only Bridge ist real gegen WordPress/MySQL geprüft. Produktwissen liefert nur stabile Exact-Identifier; Affiliate darf keinen Ersatz erzeugen und schreibt keine Produktwahrheit zurück.
+
+PASS:
+Run 34131779064 SUCCESS; EAN/MPN PASS; fehlender Identifier erzeugt keine Anforderung; keine direkte Tabellenkopplung.
+
+SEO:
+Keine spekulative Integration. Der aktuelle SEO-Installerbestand ist dokumentiert, aber seine Fachregeln sind im Campus ausdrücklich noch nicht geprüft. Produktvergleich bleibt V1 ohne SEO-Laufzeitabhängigkeit. Später darf SEO ausschließlich upstream priorisieren/Metadaten liefern.
+
+KISS:
+Keine neue SEO-API auf Verdacht, keine Rückkopplung in Writer oder Produktwissen.
