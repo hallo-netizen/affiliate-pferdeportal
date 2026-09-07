@@ -1639,6 +1639,13 @@ trait PPAR_Automation_Suite_Trait {
                 $counts['failed']++;
             }
         }
+        // Automation imports must enter the same verified asset/output pipeline as
+        // manual creative imports. Otherwise Awin/ADCELL products remain stranded
+        // as unverified library rows and can never reach automatic target/slot planning.
+        if (($counts['imported'] > 0 || $counts['updated'] > 0)
+            && method_exists($this, 'creative_library_schedule_asset_verification')) {
+            $this->creative_library_schedule_asset_verification(10);
+        }
         return $counts;
     }
 
