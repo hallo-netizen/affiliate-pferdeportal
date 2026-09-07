@@ -1,158 +1,125 @@
-# NOTFALL-TRESOR – KONZEPT
+# NOTFALL-TRESOR – EINFACHES BACKUPKONZEPT
 
 STAND: 2026-09-07
-STATUS: KONZEPT V2 – EIN-DATEI-DISASTER-RECOVERY
+STATUS: KISS-KONZEPT VERBINDLICH
 
 ## Ziel
 
-Der Tresor ist die vollständige Katastrophen-Wiederherstellungskapsel des gesamten Campus.
+Das Pferde-Atelier muss nach Datenverlust vollständig wiederherstellbar sein.
 
-Aus einem gültigen Tresorstand muss ein neuer Mensch oder Chat **ohne Vorwissen** den gesicherten Projektstand wieder aufbauen können:
-- vollständige Git-Historie;
-- main, alle Branches und Tags;
-- alle Projektgebäude;
-- alle Büros, Hobbyräume und Paul-Arbeitsstände;
-- Hauptpförtner;
-- Handlungsverzeichnis;
-- Fehlerregister;
-- Änderungs-/Erklärungsregister;
-- Baucontainer;
-- Konzepte, Ideen, Regeln und Workflows im Projekt;
-- relevante GitHub-Metadaten und Schutzregeln;
-- aktueller verifizierter Arbeitsstand;
-- sichere Wiederherstellungsanleitung.
+Dafür gibt es genau **einen** Backupweg.
 
-## Grundsatz
+## Die Komplettsicherung besteht aus 3 Blöcken
 
-Der Tresor ist **keine zweite lebende Projektwelt** und steuert nichts.
+### 1. GitHub komplett
+Gesichert werden:
+- gesamtes Repository;
+- komplette Git-Historie;
+- alle Branches;
+- alle Tags;
+- relevante Repository-/Workflow-Einstellungen, soweit exportierbar.
 
-Er wird aus dem aktuellen Projektstand erzeugt, geprüft, abgeschlossen und danach unveränderlich gesichert.
+Technik:
+ein vollständiger Git-Mirror plus Metadatenexport.
 
-## Backup-Ablauf
+### 2. WordPress komplett
+Gesichert werden:
+- Datenbank;
+- komplette WordPress-Dateien;
+- Uploads/Bilder;
+- Plugins;
+- Themes;
+- relevante Konfiguration.
 
-1. aktuellen Campus-/Repositoryzustand erfassen;
-2. exakte Git- und GitHub-Quellenstände binden;
-3. vollständigen Tresorstand neu erzeugen;
-4. Inventar und Manifest erzeugen;
-5. Vollständigkeit und Hashes prüfen;
-6. Wiederherstellbarkeit prüfen;
-7. nur bei vollständigem PASS den Stand als `TRESOR_PASS` markieren;
-8. neuen versionierten Tresorstand lokal sichern;
-9. ältere gültige Tresorstände nicht überschreiben.
+Regel:
+Die bereits vorhandene WordPress-Backuptechnik wird genutzt.
+**Kein zweiter WordPress-Backupmotor wird erfunden.**
 
-## Sicherheitsregel
+### 3. Projektarchiv komplett
+Gesichert werden nur die projektwichtigen Roh-/Masterdateien, die weder vollständig in GitHub noch im WordPress-Vollbackup enthalten sind.
 
-Ein Fehler im aktiven Gebäude darf einen früheren gültigen Tresorstand niemals automatisch überschreiben.
+Quelle:
+\`/Campus-Archiv/\`
 
-Darum:
-- jeder Tresorstand ist versioniert;
-- gültige ältere Stände bleiben erhalten;
-- „live spiegeln und überschreiben“ ist verboten.
+Dazu gehören auch notwendige Recovery-Informationen, soweit sie nicht anderweitig sicher wiederherstellbar sind.
 
-## Externer Speicherort
+## Ergebnis jedes Laufs
 
-Der produktive Tresor soll außerhalb des aktiven Repositorys liegen.
+Alles kommt in genau **ein datiertes Sicherungspaket**:
 
-Im Repository liegen nur:
-- Tresorkonzept;
-- Inhaltsvertrag;
-- Prüfvertrag;
-- Wiederaufbauanleitung.
+\`PFERDE_ATELIER_BACKUP_YYYY-MM-DD_HHMM\`
 
-Der spätere lokale Backup-Klick sichert den extern erzeugten Tresorstand.
+Inhalt:
 
+\`\`\`
+GITHUB/
+WORDPRESS/
+PROJEKTARCHIV/
+BACKUP_INFO.txt
+\`\`\`
 
-## Verbindlicher Zielzustand – eine Recovery-Datei
+Optional kann dieses Paket anschließend als eine verschlüsselte Archivdatei gespeichert werden.
+Die Verschlüsselung ändert nichts am einfachen Grundmodell.
 
-Der bevorzugte vollständige Tresorstand ist **eine einzige verschlüsselte Disaster-Recovery-Datei**.
+## Speicherung
 
-Aus dieser einen Datei muss – zusammen mit dem vom Nutzer bekannten Masterpasswort, aber ohne weitere Projektdateien – der komplette gesicherte Systemstand wieder aufgebaut werden können.
+Von jedem gültigen Sicherungsstand existieren mindestens **2 unabhängige Kopien**:
 
-Pflichtinhalt der Kapsel:
+1. externe SSD / lokaler unabhängiger Datenträger;
+2. zweite Kopie außerhalb dieses Datenträgers, z. B. Cloud oder zweites Laufwerk an anderem Ort.
 
-1. **Git vollständig**
-   - kompletter Repository-Mirror;
-   - vollständige Commit-Historie;
-   - main;
-   - alle Branches;
-   - alle Tags;
-   - notwendige Git-LFS-Objekte;
-   - Submodule nur, wenn sie vollständig eingebunden und gesichert sind.
+Die aktive Website, GitHub selbst oder die ChatGPT-Library zählen nicht als eine dieser beiden unabhängigen Sicherungskopien.
 
-2. **GitHub-Campus vollständig**
-   - gesamtes `protocol/PROJECT_MEMORY/**`;
-   - alle Projektgebäude, Büros, Hobbyräume, Register, Zielverträge, Fehlerquellen, Archiveinträge, Baucontainer, Paul-Regeln und Arbeitsstände;
-   - alle Repository-Dateien, Workflows, Regeln und technische Projektquellen.
+## Rhythmus
 
-3. **Alle vom Campus benötigten externen Rohakten**
-   - komplette Roharchive/Installer/Masterdateien/Belege, auf die der Campus verweist;
-   - keine Referenz darf nach Wiederaufbau auf eine verlorene Datei zeigen.
+- automatisch **1× pro Woche**;
+- zusätzlich **vor größeren Umbauten / Releases**.
 
-4. **Persistente GitHub-Projektdaten**
-   - Repository-Metadaten;
-   - Branch-/Tag-Metadaten;
-   - Issues und Kommentare;
-   - Pull Requests, Reviews und Review-Kommentare;
-   - Releases einschließlich Release-Artefakten;
-   - Labels/Milestones;
-   - Rulesets/Schutzregeln;
-   - Actions-/Environment-Konfiguration soweit exportierbar;
-   - ursprüngliche GitHub-IDs/Zeitstempel als Archivinformation.
+Aufbewahrung:
+- letzte 4 Wochensicherungen;
+- zusätzlich letzte 3 Monatssicherungen.
 
-5. **WordPress / Projektlaufzeit**
-   - vollständige WordPress-Dateien;
-   - vollständige Datenbank;
-   - Uploads;
-   - Plugins/Themes;
-   - relevante Server-/Cron-/PHP-/Webserver-Konfiguration;
-   - notwendige Wiederanbindungsinformationen.
+Ältere gültige Sicherungen werden nie durch einen fehlerhaften neuen Lauf überschrieben.
 
-6. **Recovery**
-   - benötigte Secrets/Schlüssel/Zugänge in einer verschlüsselten Recovery-Sektion;
-   - niemals im Klartext im Repository oder in PROJECT_MEMORY.
+## Prüfung
 
-7. **Restore**
-   - Wiederaufbauanleitung und Restore-Werkzeuge;
-   - Manifest und Hashes;
-   - eindeutiger PASS-/BLOCKED-Status.
+Jeder Lauf endet nur mit:
 
-## Bedeutung von „1:1“
+\`BACKUP_PASS\`
+oder
+\`BACKUP_FAIL:<GRUND>\`
 
-**Inhaltlich und funktional 1:1** ist Pflicht.
+Für \`BACKUP_PASS\` reicht die einfache technische Prüfung:
 
-Nach einer vollständigen Löschung darf kein Campusinhalt, keine benötigte Rohakte und keine für den Wiederaufbau notwendige Information fehlen.
+- Git-Mirror vorhanden und lesbar;
+- WordPress-Vollbackup vorhanden;
+- Projektarchiv vorhanden;
+- Manifest/Hashes stimmen.
 
-Technische Provider-Grenze:
-GitHub kann bei neu angelegten Issues/PRs/Releases interne Objekt-IDs oder providerseitige Zeit-/Systemwerte neu vergeben.
-Die ursprünglichen Werte werden deshalb im Tresor archiviert und bleiben als Information erhalten, auch wenn GitHub beim Neuaufbau neue interne IDs erzeugt.
+Zusätzlich wird regelmäßig und nach Änderungen am Backupweg ein echter Wiederherstellungstest durchgeführt.
 
-## Download-Ort
+## Wiederherstellung
 
-Ziel ist ein eigener privater GitHub-Tresorbereich mit versionierten Releases.
+Im Notfall:
 
-Jeder veröffentlichte vollständige Stand:
-- genau eine verschlüsselte Recovery-Datei;
-- klarer Zeitstempel;
-- Hash in der Release-Beschreibung;
-- nur bei erfolgreicher interner Prüfung freigeben;
-- ältere gültige PASS-Stände nicht überschreiben.
+1. GitHub aus dem Git-Mirror wiederherstellen;
+2. WordPress aus dem Vollbackup wiederherstellen;
+3. fehlende Roh-/Masterdateien aus dem Projektarchiv zurückspielen;
+4. Manifest prüfen;
+5. Projekt normal über den Campus starten.
 
-Der Nutzer lädt regelmäßig die neueste PASS-Datei lokal auf einen unabhängigen Datenträger.
+## Harte Regeln
 
-GitHub-Release = bequemer Download-Ort.
-Lokale Kopie = eigentliche unabhängige Katastrophensicherung.
+- **Ein Backupweg.**
+- **Keine Parallelarchitektur.**
+- **Keine neuen Backup-Tools, wenn vorhandene Technik den Zweck erfüllt.**
+- **Kein Teilbackup darf als Komplettsicherung bezeichnet werden.**
+- **Backup ist nie Arbeitsquelle.**
+- **Fehlende historische Installer-ZIPs blockieren die Komplettsicherung nicht automatisch, wenn der aktuelle funktionsfähige Stand durch GitHub oder das WordPress-Vollbackup vollständig wiederherstellbar ist.**
 
+## Nutzerweg
 
-## KISS-Nutzervertrag
+Der Nutzer soll im Normalbetrieb nichts zusammensetzen und keine Einzelarchive verwalten.
 
-Die interne Sicherungstechnik darf komplex sein, der Nutzerweg nicht.
-
-Verbindlich:
-- genau ein fester Download-Ort: GitHub Releases;
-- genau eine Datei pro gültigem Sicherungsstand;
-- eindeutige Kennzeichnung `TRESOR_PASS`;
-- keine Nutzerkommandos;
-- keine manuellen Teilarchive;
-- keine zusätzliche Projektdatei für den Wiederaufbau.
-
-Der Nutzer muss künftig nur regelmäßig die neueste PASS-Datei herunterladen und unabhängig lokal speichern.
+Ziel:
+**ein aktuelles Sicherungspaket sehen → BACKUP_PASS → fertig.**
