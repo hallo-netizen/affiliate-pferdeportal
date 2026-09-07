@@ -266,28 +266,26 @@ Register enthalten nur Verweise, nicht den vollständigen Inhalt.
 Keine Programmierung.
 
 
-## Lokale Campus-Sicherung / Tresor-Snapshot
+## Komplettsicherung / Backup
 
 Aktion:
-Aktuellen Campus-/Repositorystand herunterladen, lokal sichern oder Wiederherstellbarkeit prüfen.
+Pferde-Atelier vollständig sichern oder Wiederherstellbarkeit prüfen.
 
 Verbindlicher Weg:
-`TRESOR/START_HERE.md`
-→ `STATUS.md`
-→ `LOKALES_BACKUP_KONZEPT.md`
-→ Backup/Download
-→ lokale zweite Kopie
-→ Hash-/Manifestprüfung
-→ Recoveryprüfung
-→ Restore-Test.
+\`TRESOR/START_HERE.md\` → \`TRESOR/KONZEPT.md\`.
 
-Architekturfragen dazu:
-`BAUCONTAINER/BAUPLAN.md`
+HARD RULE:
+**Keinen Ersatzweg und keine neue Backup-Architektur erfinden.**
 
-Harte Grenze:
-Baucontainer definiert nur Regeln.
-Backup/Restore wird ausschließlich im Tresor ausgeführt.
+Genau drei Datenblöcke:
+1. GitHub komplett;
+2. WordPress komplett;
+3. Projektarchiv komplett.
 
+Ergebnis:
+ein datiertes Sicherungspaket + \`BACKUP_PASS\` oder \`BACKUP_FAIL:<GRUND>\`.
+
+Backup/Archiv ist niemals Arbeitsquelle.
 
 ## PB ONE – selbstentwickelte Plugins finden
 
