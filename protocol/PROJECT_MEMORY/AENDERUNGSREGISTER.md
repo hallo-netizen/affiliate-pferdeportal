@@ -1089,3 +1089,40 @@ ZIP:
 `universal-product-comparison-0.2.4-prototype.zip`
 SHA-256:
 `b74e3c17eb2cb71ebc4c15aab5da6e4133379b124804c920080a33d20fc78054`
+
+
+## PV-PLAN-019 – Abschluss-Nachholprüfung konsolidiert Produktvergleich V1
+
+STAND: 2026-09-07.
+
+WAS:
+Die Abschluss-/Nachholprüfung hat die Produktvergleichs-Dokumentation auf den realen Endstand dieses Chats konsolidiert.
+
+NACHGEHOLT:
+- eigene autoritative Fehlerquelle `FEHLERQUELLEN.md`;
+- aktiver Zielvertrag `ZIELVERTRAG_V1.md`;
+- dauerhaftes Ausführungsprotokoll `PROTOKOLL_20260907.md`;
+- `START_HERE` auf die inzwischen gültige eigenständige V1-Produktion korrigiert;
+- `CURRENT_STATE` auf 0.2.4 Technik-PASS / Nutzer-Live-Verify OFFEN bereinigt;
+- `HOBBYRAUM` auf genau einen aktuellen Live-Verifikationsweg gekürzt;
+- Fehler- und Zielregister bleiben reine Wegweiser.
+
+WARUM:
+Die alte Bürotür spiegelte noch die frühere Planung „TEXT produziert“ wider und widersprach damit dem später verbindlich gewordenen eigenständigen Zero-Freedom-Produktvergleichsweg. Außerdem fehlten Fehler- und Zielhauptquelle vollständig.
+
+LIVE-GRENZE:
+0.2.4 ist technisch im echten WordPress-Admin-Lifecycle PASS, aber auf der echten Nutzerseite noch nicht bestätigt. Kein LIVE-PASS.
+
+## ARCH-078 – UI-/Lifecycle-PASS nur über echten Lebenszyklus
+
+WAS:
+Für allgemeingültige Campus-Hobbyräume wird festgelegt: Eine UI-, Menü-, Hook-, Routing- oder Lifecycle-Behauptung darf nicht allein durch direkten Funktionsaufruf als PASS gelten.
+
+WARUM:
+Der 0.2.3-Produktvergleichstest rief `register_menu()` direkt auf und erzeugte dadurch einen falschen Positivnachweis. Die echte WordPress-Seite zeigte den Menüpunkt nicht.
+
+REGEL:
+Wenn das Verhalten von Framework-/CMS-Lifecycle, Hooks, Login, Routing oder gerenderter UI abhängt, muss der Positivtest den realen Lifecycle ausführen. Direkte Unit-/Funktionsaufrufe dürfen ergänzen, aber keinen echten UI-/Lifecycle-PASS ersetzen.
+
+NEGATIV:
+Nicht jede reine Logikfunktion braucht einen Browser-/HTTP-Test. Die Regel gilt nur dort, wo die behauptete Eigenschaft gerade aus dem Lifecycle entsteht.
