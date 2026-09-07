@@ -11,7 +11,7 @@ Bei Elementtausch, Verschiebung oder vergleichbaren lokalen Änderungen ist auss
 
 `MINIMAL_PATCH_RUNNER.py`
 
-Aktueller Auftrag:
+Letzter abgeschlossener Job:
 
 `MINIMAL_PATCH_JOB_CURRENT.json`
 
@@ -70,7 +70,7 @@ Kandidat verwerfen/überschreiben.
 
 Erst nach echtem Nutzer-LIVE-PASS darf aus dem Kandidaten einmalig ein neuer Release gebaut werden.
 
-## AKTUELLER AUFTRAG
+## LETZTER ABGESCHLOSSENER AUFTRAG
 
 Exakte Basis:
 V1.50.472 / Contract V104
@@ -115,6 +115,13 @@ Der Nutzer hat den Kandidaten am 2026-09-07 real geprüft und mit **PASS** best�
 Aktueller Auftrag DESIGN-ORDER-SWAP-002: **CLOSED / LIVE PASS**.
 
 Der Hobbyraum ist wieder FREI. Der SCRIPT-ONLY-Standard bleibt für künftige Miniänderungen verbindlich.
+
+## NEXT ACTION
+
+**Keine offene DESIGN-Arbeit.**
+
+Der Hobbyraum ist FREI.
+Bei einem neuen lokalen Miniänderungsauftrag wird zuerst ein neuer hashgebundener Job definiert und danach ausschließlich der Runner verwendet.
 
 ## VERBINDLICHER ABLAUF FÜR JEDEN WEITEREN CHAT
 
