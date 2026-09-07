@@ -83,6 +83,17 @@ Autoritative Quellen:
 - `PROJEKTE/PFERDE_ATELIER/DESIGN/FEHLERQUELLEN.md`
 - GitHub `design-baseline/2026-08-22/v101` bis `v104`
 
+## DESIGN-ORDER-V150473-LIVE
+
+Bereich: DESIGN  
+Status: V1.50.473 REJECTED NACH REALER NUTZERPRÜFUNG / V1.50.474 REPAIR-CANDIDATE HARD LOCAL PASS
+
+Autoritative Fehlerquelle:
+`design-baseline/2026-09-07/v150473-category-content-order/STATUS.md`
+
+Reparaturbeleg:
+`design-baseline/2026-09-07/v150474-category-content-order/HARD_LOCAL_QA.txt`
+
 ## Regel für neue Fehler
 
 Neue reale Fehler erhalten:
