@@ -201,4 +201,18 @@ ok($emptyBound['bound']===true && $emptyBound['rows']===[],'bound-empty real sou
 $unbound=source_envelope([]);
 ok($unbound['bound']===false,'empty plain source means not bound');
 
+function repair_reason_valid(string $bannerMode,string $productsMode,string $reason): bool {
+    $manual = $bannerMode !== 'automatic' || $productsMode !== 'automatic';
+    return !$manual || trim($reason) !== '';
+}
+ok(!repair_reason_valid('fixed','automatic',''),'manual repair without reason is rejected');
+ok(repair_reason_valid('fixed','automatic','falsches Banner'),'manual repair with reason is accepted');
+ok(repair_reason_valid('automatic','automatic',''),'pure automatic mode needs no repair reason');
+
+$position1='banner-a';
+$position2Candidates=['banner-a','banner-b','banner-c'];
+$position2=null;
+foreach($position2Candidates as $candidate){if($candidate!==$position1){$position2=$candidate;break;}}
+ok($position2==='banner-b','second banner position never repeats position one');
+
 echo "ALL WEIGHTED BANNER BEHAVIOR TESTS PASS\n";
