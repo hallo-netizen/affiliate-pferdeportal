@@ -1194,3 +1194,27 @@ Kein zweiter Scheduler und kein OTTO-Sondermotor. Der bestehende Awin-Automation
 
 FEHLERBEZUG:
 `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md` → AF-051 / AF-052.
+
+
+## DESIGN-ORDER-001 – Kategorieebene: Orientierung vor Vertiefung
+
+STAND:
+2026-09-07 / KANDIDAT V1.50.473 / NOCH NICHT LIVE.
+
+WAS:
+Auf der zentral gesteuerten Pferde-Atelier-Kategorieebene wird die Ausgabereihenfolge geändert zu:
+`Unterkategorie-/Beitragsart-Verweise -> Kategorienartikel -> Beitragsvorschau -> kommerzielle Blöcke`.
+H1 bleibt am Seitenkopf.
+
+WARUM:
+Der Besucher soll zuerst die vorhandenen Wege im Thema erkennen, danach den redaktionellen Hauptinhalt lesen und erst anschließend weitere Beiträge entdecken. Banner und Produkte sollen diesen redaktionellen Weg nicht unterbrechen.
+
+KISS:
+Nur die zentrale Renderer-Reihenfolge wird verändert. Keine Einzelpflege pro Kategorie.
+
+GRENZE:
+V104, Kategorietexte, Karten-/Linklogik, Beitragsauswahl und Affiliate-Auswahl bleiben unverändert. `main` bleibt unverändert. LIVE-Stand bleibt bis zur Nutzerprüfung V1.50.472.
+
+BELEG:
+`fix/category-content-order-v150473-20260907`
+`design-baseline/2026-09-07/v150473-category-content-order/`
