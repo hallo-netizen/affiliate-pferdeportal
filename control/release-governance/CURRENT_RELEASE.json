@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 22,
+  "generation": 23,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -323,6 +323,16 @@
       "ui_label": "Für dieses Portal aktiv",
       "start_button": "Datenlauf für diesen Partner öffnen",
       "checked_at": "2026-09-07"
+    },
+    "otto_awin_real_run_started": {
+      "status": "PASS_USER_SCREENSHOT",
+      "advertiser_id": 14336,
+      "programme_name": "OTTO DE",
+      "queue_stage": "offers",
+      "queue_status": "queued",
+      "message": "Programmdaten geprüft. Angebote folgen.",
+      "product_feed_state": "no_exact_feed_assigned",
+      "checked_at": "2026-09-07"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -350,7 +360,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "OPEN_OTTO_14336_AUTOMATION_SCREEN_READ_ONLY",
+    "current_milestone": "PROCESS_OTTO_14336_OFFERS_WORK_PACKAGE",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
