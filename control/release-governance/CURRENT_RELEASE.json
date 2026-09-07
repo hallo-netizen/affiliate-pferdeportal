@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 19,
+  "generation": 20,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -296,6 +296,13 @@
       "source_manifest_sha256": "45e2df82c65a6aec86380e456b88a2872aa1d5815a156587dee5c3464eb68c89",
       "test_artifact_ref": "release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip",
       "scope": "PLUGIN_LOAD_AND_ACTIVATION_ONLY_24_FILES_TWO_RUNTIME_JSON_CATALOGS_OMITTED"
+    },
+    "affiliate_6723_activation_smoke": {
+      "status": "PASS_USER_CONFIRMED_WORDPRESS_ACTIVATION",
+      "source_manifest_sha256": "45e2df82c65a6aec86380e456b88a2872aa1d5815a156587dee5c3464eb68c89",
+      "version": "6.72.3",
+      "evidence": "User confirmed installation and activation in WordPress on 2026-09-07",
+      "scope": "INSTALL_LOAD_ACTIVATE_NO_FATAL"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -323,7 +330,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "6.72.3_VERSION_CORRECTED_FIRST_PLUGIN_TEST_THEN_CURRENT_SOURCE_BOUND_CHECK_AND_REAL_OTTO_E2E",
+    "current_milestone": "FIRST_FUNCTIONAL_PLUGIN_TEST_AFTER_6_72_3_ACTIVATION_PASS",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
