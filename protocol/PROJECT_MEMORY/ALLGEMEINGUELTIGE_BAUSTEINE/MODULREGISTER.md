@@ -247,8 +247,9 @@ AKTUELL BELEGTER STAND:
 - neutrale deterministische Grafik;
 - Affiliate-read-only-Bridge;
 - SEO-read-only-Signale;
-- realer WordPress-Admin-Lifecycle-Test PASS;
-- Nutzer-Live-Verifikation 0.2.4 noch offen.
+- realer WordPress-Admin-Lifecycle-Test PASS.
+
+Projekt-Live-Status wird ausschließlich im zuständigen Projekt-CURRENT gepflegt.
 
 ZWECK:
 Projektunabhängige Engine für:
@@ -276,8 +277,6 @@ BELEGE:
 - Run `34154550626` für echten WP-Admin-Lifecycle.
 
 OFFEN:
-- Nutzer-Live-Verifikation 0.2.4;
-- fachlich/visuelle Prüfung des ersten echten Nutzer-Drafts;
 - formale Modulklassifizierung und endgültiger Hauptort;
 - Ausbau von PV-REG-001 auf weitere freigegebene Dossiers/Kategorien.
 
