@@ -6,45 +6,63 @@ STAND: 2026-09-07
 
 `BACKUP_KONZEPT_PASS`
 
-Verbindlicher Weg:
-**GitHub + WordPress + Projektarchiv → ein datiertes Sicherungspaket → zwei unabhängige Kopien.**
+Verbindlich:
+**GitHub + WordPress + Projektarchiv → ein verschlüsseltes Paket → lokale geschützte Kopie + unabhängige Offsite-Kopie.**
 
-## VORHANDENE BAUSTEINE
+## TECHNIK
 
-- GitHub-Repository und Git-Historie: vorhanden.
-- Git-/GitHub-Restore-Prüfung: bereits grundsätzlich belegt.
-- WordPress-Vollbackup-Technik: vorhanden; auf dem Pferde-Atelier wurden bereits vollständige Backups mit vorhandenen WordPress-Backupwerkzeugen erzeugt.
-- Campus-/Projektarchiv: vorhanden und bereits mit Hash-/Restore-Prüfungen bearbeitet.
+Umgesetzt im Hobbyraum:
 
-## WAS NOCH FEHLT
+- `control/tresor/build_tresor_release.sh`
+  - bestehender komplexer Builder durch KISS-Lauf ersetzt;
+  - Git-Mirror;
+  - vorhandenes .wpress-Vollbackup;
+  - Projektarchiv;
+  - ZIP-Paket;
+  - AES-256/GPG-Verschlüsselung;
+  - SHA-256;
+  - Offsite-Kopie Pflicht;
+  - `latest.json` für WordPress.
 
-Es fehlt nur noch die **Zusammenführung zu einem frischen aktuellen Komplettlauf nach dem neuen einfachen Konzept**:
+- `control/tresor/pferde-atelier-backup-button.php`
+  - WordPress-Backendseite;
+  - nur Administrator;
+  - zeigt letzten Status;
+  - Download nur bei `BACKUP_PASS`;
+  - SHA-256 wird vor Download erneut geprüft.
 
-1. frischen Git-Mirror erzeugen;
-2. frisches WordPress-Vollbackup erzeugen;
-3. aktuellen Campus-Archivstand dazunehmen;
-4. Manifest/Hashes prüfen;
-5. Paket auf zwei unabhängigen Speicherorten ablegen.
+- `control/tresor/restore_check.sh`
+  - Entschlüsselung;
+  - Paketstruktur;
+  - Git-Mirror;
+  - WordPress-Backup;
+  - Projektarchiv;
+  - PASS-Markierung.
 
-Bis dieser reale Lauf erfolgt ist:
+## HARTE TESTS
 
-`BACKUP_REAL_RUN_OPEN`
+Lokaler Techniktest:
 
-## WICHTIGE VEREINFACHUNG
+- vollständiger Testlauf → `BACKUP_PASS`;
+- Paket entschlüsselt und Struktur geprüft → `RESTORE_STRUCTURE_PASS`;
+- fehlender Offsite-Speicher → korrekt BLOCK;
+- fehlendes WordPress-Vollbackup → korrekt BLOCK;
+- falsches Passwort → Restore korrekt BLOCK.
 
-Eine fehlende historische Einzel-ZIP blockiert das Backup nicht automatisch.
+## LIVE NOCH OFFEN
 
-Entscheidend ist:
-**Kann der aktuelle funktionsfähige Projektstand aus GitHub + WordPress-Vollbackup + Projektarchiv vollständig wiederhergestellt werden?**
+Noch nicht behauptet:
 
-Die frühere starre Forderung nach jeder einzelnen historischen Design-1.50.472-ZIP ist daher **kein eigenständiger Komplettbackup-Blocker mehr**, sofern der aktuelle installierte/gebundene Stand vollständig gesichert und wiederherstellbar ist.
+`TOTALAUSFALL_RESTORE_PASS`
 
-## NICHT MEHR VERBINDLICH
+Dafür fehlen auf dem echten System noch:
 
-Die früheren V1/V2/V3/V4-Mac-Kits, serverseitigen Ein-Datei-Experimente und mehrstufigen Tresorvarianten bleiben nur historische Entwicklungsbelege.
+1. WordPress-/Hosting-Zugriff für Installation des Backendknopfs;
+2. Bindung des realen aktuellen WordPress-Backupordners;
+3. Bindung des realen Projektarchivordners;
+4. Bindung eines unabhängigen privaten Offsite-Speichers;
+5. Aktivierung des wöchentlichen Serverlaufs;
+6. einmaliger echter leerer Gesamt-Restore.
 
-Sie dürfen keinen neuen Backupweg erzeugen.
-
-## NEXT ACTION
-
-Genau ein realer Komplettlauf nach `KONZEPT.md`.
+Bis dahin:
+`BACKUP_LIVE_NOT_CONNECTED`
