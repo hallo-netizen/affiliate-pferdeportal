@@ -1243,7 +1243,7 @@ STATIC CONTRACT PASS / PRODUKTVERGLEICH-INTEGRATION + E2E OFFEN.
 ## DESIGN-ORDER-002 – Korrigierter Kandidat direkt aus V1.50.472
 
 STAND:
-2026-09-07 / V1.50.474 HARD LOCAL PASS / NOCH NICHT LIVE.
+2026-09-07 / **V1.50.474 REJECTED NACH REALER NUTZERPRÜFUNG**.
 
 WAS:
 Nach dem Fehlversuch V1.50.473 wurde nicht weitergepatcht. V1.50.474 wurde frisch aus dem exakten archivierten V1.50.472-Vorgänger gebaut.
@@ -1328,7 +1328,7 @@ Keine neue SEO-API auf Verdacht, keine Rückkopplung in Writer oder Produktwisse
 ## DESIGN-SCRIPT-001 – Miniänderungen im DESIGN-Hobbyraum nur noch per Fail-Closed-Runner
 
 STAND:
-2026-09-07 / VERBINDLICH.
+2026-09-07 / VERBINDLICH / MIT DESIGN-ORDER-SWAP-002 LIVE BEWÄHRT.
 
 WAS:
 Für lokale DESIGN-Miniänderungen wird der manuelle Patchweg gesperrt.
@@ -1421,3 +1421,28 @@ LIVE-BELEG:
 
 LIVE-SHA:
 `11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`
+
+
+## DESIGN-ORDER-003 – Affiliate-Produkte stehen vor der Beitragsvorschau
+
+STAND:
+2026-09-07 / **LIVE PASS**.
+
+WAS:
+Auf der zentralen Pferde-Atelier-Kategorieebene stehen die **Affiliate-Produkte / Produktvorschläge** vor der **Beitragsvorschau / Meistgelesen**.
+
+UNVERÄNDERT:
+Affiliate-Banner, Artikel-/Verweisstruktur, Texte, CSS, Karten/Links, Beitragsauswahl, Affiliate-Auswahl, Produktlogik und V104.
+
+WARUM:
+Gewünscht war ausschließlich, die Produktvorschläge früher sichtbar zu machen. Frühere Fehlversuche veränderten versehentlich andere Blöcke.
+
+TECHNISCH:
+Finaler Job `DESIGN-ORDER-SWAP-002`, ausgeführt ausschließlich über `MINIMAL_PATCH_RUNNER.py` gegen die exakte V1.50.472-Baseline.
+
+PASS:
+HARD LOCAL Positiv/Negativ + Reversibilität PASS; Nutzer-LIVE-PASS auf „Gebisse“ am 2026-09-07.
+
+BELEG:
+`PROJEKTE/PFERDE_ATELIER/DESIGN/LIVE_PASS_DESIGN_ORDER_SWAP_002.md`
+`PROJEKTE/PFERDE_ATELIER/DESIGN/MINIMAL_PATCH_LAST_RECEIPT.json`
