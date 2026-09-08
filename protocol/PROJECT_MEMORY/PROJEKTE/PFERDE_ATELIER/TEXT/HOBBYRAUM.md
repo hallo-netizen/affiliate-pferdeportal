@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: REALTEST_ONLY
+STATUS: AKTIV – PPM HANDOFF CORRIDOR RECONSTRUCTION
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -15,12 +15,12 @@ Aktueller main:
 `78bb2576214a8c0a82d201ed35530ad9ac885481`
 
 Aktueller erster echter Blocker:
-`FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`
+`PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`
 
 Fehlerursache:
-die gebundene `FACHWORKFLOW_HANDOFF_REQUEST.json` für den ersten Artikel fehlt am erwarteten Quarantine-Pfad.
+Der aktuelle `fachworkflow_proof_handoff.py` ist beim späteren Reapply auf ältere PR-#124-Semantik zurückgerutscht. Dadurch wurden bereits durch B01 beseitigte Alt-Guards wieder eingeführt und mehrere B01-Vertragsfelder/Output-Bindungen entfernt.
 
-B02 und B07/M32 sind im aktuellen Realtest überwunden.
+B02, B07/M32 und M28 sind im aktuellen Realtest überwunden.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
@@ -80,20 +80,37 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Echter 7/7-Realtest auf current main.**
+**Keine Einzelflicks. Genau einen Handoff-Korridor-Kandidaten bauen.**
 
-Current main:
-`78bb2576214a8c0a82d201ed35530ad9ac885481`
+Belegte funktionale Basis:
+B01 Commit `5fe9967bbd65b4247f5a75ac50c47060fc1f5149`
+Handoff-Blob:
+`2c5d989ebbdb4a9221226b8f6ab675ca2a3122f1`.
 
-Pfad:
-1. Dispatcher PR #107 Head exakt auf current main.
-2. Offiziellen Codex-Lauf für `RUN_NEW_ARTICLE_BATCH_NO_STOP` starten.
-3. Bis zum ersten realen Blocker laufen lassen.
-4. Keine Reparatur während des Laufs.
-5. Kein Auto-Publish / kein WordPress-Write.
+Warum genau dieser Stand:
+- Request-Felder exakt identisch zum heutigen Current-Action-Vertrag;
+- PASS-Felder vollständig kompatibel zum heutigen Submission-Validator;
+- Runtime-Fallback für PPM/PSERC bereits vorhanden;
+- realer PPM wird zwingend ausgeführt;
+- Slot wird über den bereits gebundenen externen `plan_slot` aufgelöst statt über fremde Canonical-ID-Vorbedingung;
+- bestehender semantischer Kategorievertrag bleibt erhalten;
+- Stage-Artefakte werden vollständig in Receipt-Outputs gebunden;
+- B01-Kontext-/Identitätsguards bleiben erhalten.
 
-Ziel bleibt:
-`107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`.
+Zulässiger Produktionskandidat:
+**nur**
+`control/startmaster0107/fachworkflow_proof_handoff.py`
+auf exakt diese belegte B01-Semantik zurückführen.
+
+Nicht ändern:
+- Current Action;
+- 107007-Instruktion;
+- Runner/Gates;
+- Textmaschine/SEO/PPM/PSERC/PSTE-Regeln;
+- Publish/WordPress.
+
+Danach:
+Hardlocks -> Merge bei PASS -> ein echter 7/7-Realtest -> erster realer Blocker.
 
 ## VERBOTEN
 
