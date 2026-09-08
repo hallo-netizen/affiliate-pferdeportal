@@ -306,7 +306,7 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 **NEGATIV:** formal valides fachfremdes OTTO-Produkt wird vor `creative_library_upsert()` verworfen.
 **Regression:** Awin-Programme/Offers, andere Provider, Produktwissen-Exact-Match und bestehende manuelle Auswahl unverändert.
 
-**Status:** FIXED_LOCAL / 6.72.6 — Source-Gate + Installations-Autostop des alten Jobs + lokaler Pre-Upsert-Relevanzguard + getrennte Zähler PASS; Live-Readback noch ausstehend.
+**Status:** LIVE_PASS / 6.72.6 — Screenshot 08.09.2026 zeigt Automatisierung deaktiviert und Awin 14336 stage=products status=failed mit Meldung „Alter/ungefilterter OTTO-Vollfeed wurde beim 6.72.6-Sicherheitsupgrade gestoppt.“
 
 ---
 
@@ -321,4 +321,4 @@ Bindend:
 - `AFF-ERR-006`: gebündelter Rootfix ist gebaut; keine weitere Microfix-Kaskade vor Live-Readback.
 - `AFF-ERR-001`: kein Gesamt-/Release-PASS.
 
-Nächster zulässiger Schritt: **6.72.6 installieren.** Beim ersten normalen Plugin-Init muss das Sicherheitsupgrade einen noch offenen ungefilterten 14336-`products`-Job automatisch terminal stoppen, dessen Tempfeed löschen und die zentrale Automatisierung deaktivieren — kein Paketknopf nötig. Erst danach Awin Create-a-Feed fachlich filtern, URL an 14336 binden und `portal_filtered` bestätigen. Kein neuer OTTO-Lauf vorher.
+Nächster zulässiger Schritt: **keinen neuen OTTO-Lauf starten.** Der Altjob-Stopp ist LIVE PASS. Vor der neuen Feedbindung zuerst den bereits durch 6.72.5 erzeugten OTTO-Bestand sauber abgrenzen und bereinigen; Screenshot zeigt im abgeschlossenen Fehl-Lauf 4500 importierte Zeilen. Danach Awin Create-a-Feed fachlich filtern, URL an 14336 binden und `portal_filtered` bestätigen.
