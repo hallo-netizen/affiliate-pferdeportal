@@ -233,3 +233,9 @@ jobs:
           set -euo pipefail
           cd control/seo-text-buero/alternative-central-machine/prototype
           PYTHONDONTWRITEBYTECODE=1 python3 -m unittest test_p36_kiss_real_controller.py
+
+      - name: P37 exact item identity binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p37_item_identity_binding.py
