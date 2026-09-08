@@ -860,7 +860,7 @@ ARCH-087.
 
 ## BAU-040 – Unabhängiger Backup-Prüfer erzeugte falschen BUNDLE_VERIFY-FAIL
 
-STATUS: CLOSED IM PRÜFER V3 / REALER MAC-ENDTEST OFFEN
+STATUS: CLOSED / REALER MAC-ENDTEST PASS
 
 KURZ:
 Der unabhängige Prüfer V2 rief `git bundle verify` außerhalb eines Git-Repository-Kontexts auf.
@@ -884,4 +884,15 @@ POSITIVTEST V3:
 
 REGEL:
 Der V2-Fehler ist kein Beleg für einen Defekt der Backup-ZIP.
-Vollständiger lokaler Notfall-PASS erst nach realem Nutzerlauf des V3-Prüfers.
+
+REALER ABSCHLUSSTEST:
+Prüfer V3 lief auf dem echten lokalen Nutzerbackup vollständig durch:
+- Bundle verify PASS;
+- Mirror-Restore PASS;
+- `git fsck --full --strict` PASS;
+- Refvergleich PASS;
+- Campus bytegenau PASS;
+- Aktualitätsbindung PASS.
+
+Endergebnis:
+`NOTFALL_WIEDERAUFBAU_PASS`.
