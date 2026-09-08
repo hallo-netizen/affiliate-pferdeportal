@@ -674,3 +674,40 @@ Statische Vorprüfung:
 Noch kein Integrationsbeleg.
 Nächster Schritt ist der erste serverseitige Maschinen-Test.
 
+### Erster serverseitiger Maschinen-Test PR #161
+
+Runs:
+- `hardlock` Run `34210147572` / Job `102008943659`: **PASS**;
+- `hardlock-base` Run `34210147673` / Job `102008943674`: **FAIL**.
+
+`hardlock` bestand vollständig:
+- Legacy deterministic gate regression;
+- Codex Cloud entrance positive/negative;
+- Production continuity;
+- API-frei;
+- domain-blind.
+
+`hardlock-base`:
+- immutable path guard: PASS;
+- danach neuer Maschinen-Gate;
+- `HOBBYROOM_WORK_LOCK_SELFTEST_PASS:8/8`;
+- erster Stop:
+  `HOBBYROOM_ACTIVE_HISTORY_CASE_ROW_INVALID:M28`.
+
+Root-Cause hart im auf main integrierten Gate geprüft:
+`_error_row_for_case()` enthält einen doppelt escaped Markdown-Zeilenregex:
+`r"(?m)^\\|\\s*" + re.escape(case) + r"\\s*\\|.*$"`.
+
+Die autoritative Fehlerquelle besitzt dagegen korrekt die reale Zeile
+`| M28 | Fachworkflow-Handoff request executable | ... FACHWORKFLOW_PROOF_HANDOFF_BLOCKED ... |`.
+
+Einordnung:
+- dies ist ein Fehler des neuen Maschinen-Gates selbst;
+- nicht der M28-Produktionskandidat;
+- der Gate-Lauf kam noch nicht bis zur vorgeschriebenen current-main-M28-Reproduktion und Kandidaten-GESAMT-PASS-Prüfung.
+
+Keine Reparatur im laufenden Test.
+Kein Merge.
+Kein Realtest.
+Kein Publish / WordPress-Write.
+
