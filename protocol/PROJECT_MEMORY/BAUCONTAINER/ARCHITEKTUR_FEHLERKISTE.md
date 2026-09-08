@@ -856,3 +856,32 @@ Bei „regelmäßig GitHub sichern“ ist das Hauptprodukt das wiederverwendbare
 
 BEZUG:
 ARCH-087.
+
+
+## BAU-040 – Unabhängiger Backup-Prüfer erzeugte falschen BUNDLE_VERIFY-FAIL
+
+STATUS: CLOSED IM PRÜFER V3 / REALER MAC-ENDTEST OFFEN
+
+KURZ:
+Der unabhängige Prüfer V2 rief `git bundle verify` außerhalb eines Git-Repository-Kontexts auf.
+Dadurch konnte ein technisch korrektes Bundle mit `BUNDLE_VERIFY` fehlschlagen.
+
+BELEG:
+Realer Nutzerlauf 2026-09-08:
+- äußerer ZIP-Hash PASS;
+- ZIP lesbar PASS;
+- innere Hashes PASS;
+- danach falscher Prüfer-FAIL bei `BUNDLE_VERIFY`.
+
+KISS-FIX:
+Prüfer V3 initialisiert für `git bundle verify` ein eigenes leeres temporäres Git-Repository.
+Danach erfolgt unverändert echter Mirror-Restore + `git fsck --full --strict` + Ref- und Campusvergleich.
+
+POSITIVTEST V3:
+- Bash-Syntax PASS;
+- Bundle-Verify im separaten Test-Repository PASS;
+- Mirror-Restore PASS.
+
+REGEL:
+Der V2-Fehler ist kein Beleg für einen Defekt der Backup-ZIP.
+Vollständiger lokaler Notfall-PASS erst nach realem Nutzerlauf des V3-Prüfers.
