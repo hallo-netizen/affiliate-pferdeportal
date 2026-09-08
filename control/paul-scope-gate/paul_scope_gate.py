@@ -162,6 +162,7 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
             "CURRENT_STATE_REF", "CURRENT_STATE_BLOB_SHA",
             "DECISION_SOURCE_REF", "DECISION_SOURCE_BLOB_SHA",
             "STANDARD_SOURCE_REF", "STANDARD_SOURCE_BLOB_SHA",
+            "PROTOCOL_SOURCE_REF", "PROTOCOL_SOURCE_BLOB_SHA",
         }
         proof_missing = sorted(proof_required.difference(data))
         if proof_missing:
@@ -172,7 +173,7 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         for key in (
             "HISTORY_SOURCE_REF", "HISTORY_PROOF_RUNNER_REF", "PAUL_SOURCE_REF",
             "ERROR_SOURCE_REF", "CURRENT_STATE_REF", "DECISION_SOURCE_REF",
-            "STANDARD_SOURCE_REF",
+            "STANDARD_SOURCE_REF", "PROTOCOL_SOURCE_REF",
         ):
             value = data[key]
             if (
@@ -189,6 +190,7 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
             "CURRENT_STATE_BLOB_SHA",
             "DECISION_SOURCE_BLOB_SHA",
             "STANDARD_SOURCE_BLOB_SHA",
+            "PROTOCOL_SOURCE_BLOB_SHA",
         ):
             if not re.fullmatch(r"[0-9a-fA-F]{40}", data[key]):
                 raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:" + key)
@@ -281,6 +283,7 @@ def _validate_bound_evidence_texts(
     current_state_text: str,
     decision_text: str,
     standard_text: str,
+    protocol_text: str,
 ) -> Tuple[List[str], List[str]]:
     matrix_ids = _normalized_history_ids(
         _history_ids_from_matrix(history_text), "MATRIX"
@@ -310,6 +313,22 @@ def _validate_bound_evidence_texts(
         raise Blocked("HOBBYROOM_MAIN_SHA_NOT_IN_CURRENT_STATE")
     if data["RECOVERY_BASE_SHA"] not in current_state_text:
         raise Blocked("HOBBYROOM_LAST_GOOD_NOT_IN_CURRENT_STATE")
+    if blocker not in protocol_text:
+        raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_PROTOCOL")
+    if data["MAIN_SHA"] not in protocol_text:
+        raise Blocked("HOBBYROOM_MAIN_SHA_NOT_IN_PROTOCOL")
+    if data["RECOVERY_BASE_SHA"] not in protocol_text:
+        raise Blocked("HOBBYROOM_LAST_GOOD_NOT_IN_PROTOCOL")
+    _require_tokens(
+        protocol_text,
+        (
+            "Realtest",
+            "PASS",
+            "FAIL",
+            "Kein Publish",
+        ),
+        "PROTOCOL",
+    )
 
     _require_tokens(
         paul_text,
@@ -419,6 +438,7 @@ def enforce_history_machine_proof(
         ("CURRENT_STATE", campus_head, data["CURRENT_STATE_REF"], data["CURRENT_STATE_BLOB_SHA"]),
         ("DECISION_SOURCE", campus_head, data["DECISION_SOURCE_REF"], data["DECISION_SOURCE_BLOB_SHA"]),
         ("STANDARD_SOURCE", campus_head, data["STANDARD_SOURCE_REF"], data["STANDARD_SOURCE_BLOB_SHA"]),
+        ("PROTOCOL_SOURCE", campus_head, data["PROTOCOL_SOURCE_REF"], data["PROTOCOL_SOURCE_BLOB_SHA"]),
     )
     for label, ref, path, expected in bindings:
         actual = _blob_at(ref, path, label)
@@ -436,6 +456,7 @@ def enforce_history_machine_proof(
     current_state_text = show(campus_head, data["CURRENT_STATE_REF"])
     decision_text = show(campus_head, data["DECISION_SOURCE_REF"])
     standard_text = show(campus_head, data["STANDARD_SOURCE_REF"])
+    protocol_text = show(campus_head, data["PROTOCOL_SOURCE_REF"])
     base_ids, error_ids = _validate_bound_evidence_texts(
         data,
         history_text=base_matrix,
@@ -445,6 +466,7 @@ def enforce_history_machine_proof(
         current_state_text=current_state_text,
         decision_text=decision_text,
         standard_text=standard_text,
+        protocol_text=protocol_text,
     )
 
     authority_changes = [p for p in changed if p in {history_ref, runner_ref}]
@@ -921,6 +943,8 @@ DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: 8888888888888888888888888888888888888888
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: 9999999999999999999999999999999999999999
+PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
+PROTOCOL_SOURCE_BLOB_SHA: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1"""
     data = parse_work_lock(valid, "X/HOBBYRAUM.md")
@@ -995,6 +1019,10 @@ def evidence_semantic_selftest() -> None:
         "Positiv- und Negativtest des Kandidaten",
         "keine Reparatur im laufenden Test",
     ))
+    protocol = (
+        "Realtest PASS FAIL Kein Publish\nBLOCK_X\n" +
+        "0" * 40 + "\n" + "7" * 40
+    )
     data = {
         "ACTIVE_BLOCKER": "BLOCK_X",
         "MAIN_SHA": "0" * 40,
@@ -1010,6 +1038,7 @@ def evidence_semantic_selftest() -> None:
             "current_state_text": current,
             "decision_text": decisions,
             "standard_text": standard,
+            "protocol_text": protocol,
         }
         payload.update(overrides)
         return _validate_bound_evidence_texts(data, **payload)
@@ -1024,6 +1053,7 @@ def evidence_semantic_selftest() -> None:
         ("DECISIONS", {"decision_text": decisions.replace("kein Fix auf einen fehlgeschlagenen Fix", "")}),
         ("STANDARD", {"standard_text": standard.replace("letzten funktionierenden Stand vergleichen", "")}),
         ("LAST_GOOD", {"current_state_text": current.replace("7" * 40, "")}),
+        ("PROTOCOL_MAIN", {"protocol_text": protocol.replace("0" * 40, "")}),
     )
     for label, override in negatives:
         try:
