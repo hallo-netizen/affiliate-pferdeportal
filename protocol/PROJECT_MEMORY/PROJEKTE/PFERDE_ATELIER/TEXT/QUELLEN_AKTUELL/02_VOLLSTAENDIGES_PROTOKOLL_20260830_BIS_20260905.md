@@ -402,6 +402,8 @@ Dies ist kein TEXT-Produktionsblocker und ersetzt keinen Realtest.
 
 ### Maschinengehärteter Wiederaufbau – Fortsetzung 08.09.2026
 
+RECOVERY_BASE_SHA: `de21f6cd35c60849c551fd82f78e75ce57c99fab`.
+
 #### B07/M32 – repositorygebundene PPM-/PSERC-Runtimepfade
 
 Ausgangspunkt:
