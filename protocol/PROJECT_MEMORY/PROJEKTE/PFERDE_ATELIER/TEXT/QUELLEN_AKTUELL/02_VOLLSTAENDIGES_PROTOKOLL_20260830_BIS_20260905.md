@@ -832,3 +832,22 @@ Erwarteter Stop:
 
 Keine Änderung an PR #161 oder M28-Inhalten.
 
+### PR #177 integriert / Kontrollsystem eingefroren
+
+PR #177 wurde integriert.
+Neuer main:
+`a61a380e948e15f2ed3ce5ddec41b128efbe7ae6`.
+
+Danach Ruleset wieder geschlossen:
+kein Bypass, `hardlock` + `hardlock-base` aktiv.
+
+Entscheidung:
+Keine weitere Ausbau-/Absicherungsrunde am Kontrollsystem.
+Ab hier ausschließlich eigentliche Produktionsarbeit.
+
+PR #161 wird nur technisch mit current main synchronisiert.
+Test-Head:
+`a2a4aca682e46ac5913d4cad554a604f4edd8d59`.
+
+Die vier M28-Dateiblobs bleiben identisch.
+
