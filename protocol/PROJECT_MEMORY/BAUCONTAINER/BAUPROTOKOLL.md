@@ -1756,3 +1756,33 @@ Der reale Mac-Backupstand ist noch nicht als vollständiger `NOTFALL_WIEDERAUFBA
 
 BEZUG:
 BAU-040.
+
+
+### 2026-09-08 – Lokaler GitHub-Notfallrestore real auf Nutzer-Mac bestanden
+
+GEPRÜFTER BACKUPSTAND:
+`2026-09-08_09-33-26`
+
+REALER V3-PRÜFLAUF:
+- äußerer ZIP-Hash gegen `.sha256` + Info PASS;
+- ZIP vollständig lesbar PASS;
+- innere Hashes PASS;
+- Git-Bundle verify im separaten Test-Repository PASS;
+- echter Mirror-Restore PASS;
+- `git fsck --full --strict` PASS;
+- alle gesicherten Refs identisch PASS;
+- Campus bytegenau identisch PASS;
+- Aktualitätsbindung über SHA256 PASS.
+
+ENDRESULTAT:
+`NOTFALL_WIEDERAUFBAU_PASS`
+
+FOLGE:
+Der identische lokale Backupstand braucht keinen weiteren Wiederholungstest.
+Nächster lokaler Backup-Lauf erst bei gewünschter Aktualisierung per Doppelklick.
+
+PROVIDERGRENZE:
+GitHub-Secret-Werte und einzelne providerinterne Informationen bleiben technisch nicht 1:1 exportierbar.
+
+BEZUG:
+BAU-040.
