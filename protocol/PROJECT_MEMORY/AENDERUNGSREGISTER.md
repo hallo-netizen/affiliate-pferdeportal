@@ -1925,3 +1925,45 @@ eine Datei, exakter B01-Blob.
 GRENZE:
 Keine neue Architektur und keine Fach-/Text-/SEO-/PPM-/PSERC-/PSTE-/Publish-Regel.
 
+## TEXT-TECH-20260908-M35-PPM-INPUT-CORRIDOR – Kein Source-Hash-Einzelfix
+
+WAS:
+Nach PR #190 wurde im echten 7/7-Lauf der neue Blocker
+`PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
+erreicht.
+
+BELEG:
+- M28 real passiert;
+- M34 / `CANONICAL_SLOT_MISSING` real passiert;
+- frischer Request erzeugt;
+- gebundener Handoff ausgeführt;
+- echter PPM-Eingang erreicht;
+- Stop erst bei Fact-Pack-Quellhashbindung.
+
+ENTSCHEIDUNG:
+Kein einzelner Hash-Fix.
+Vor einem Produktionskandidaten wird der vollständige begrenzte PPM-Eingangsvertrag
+Fact-Pack → Quellenrefs/Hashes → Production-Plan → PPM-Input/Report
+gegen aktuellen Vertrag und letzte reale 7/7-Referenzen geprüft.
+
+WARUM:
+Die vorherige Fehlerkette wurde nachweislich durch alte Reapply-Semantik und partielle Wiederherstellungen verlängert.
+Der nächste Schritt soll deshalb Ursachenparität statt Symptomflick herstellen.
+
+GRENZE:
+Keine neue Architektur, kein Runner/Gate, keine Fachregeländerung, kein Publish/WordPress-Write.
+
+## CAMPUS-KISS-REAPPLY-20260908 – Alte Gesamtdateien nie blind zurückspielen
+
+ALLGEMEINGÜLTIGE REGEL:
+Wenn ein älterer Commit/PR/Dateistand als Reparaturbasis verwendet wird, darf eine ganze Datei nur übernommen werden, wenn zuvor der begrenzte Ein-/Ausgangskorridor gegen den heutigen Vertrag geprüft wurde.
+
+Pflicht:
+- später bewiesene Fixes identifizieren;
+- Upstream-Eingaben und Downstream-Validatoren vergleichen;
+- keine alte Gesamtdatei blind „reapplyen“;
+- bei Verdacht auf Reapply-Regression den gesamten betroffenen Korridor einmal prüfen, statt seriell Einzelblocker zu flicken.
+
+KISS:
+Dokumentations-/Prüfregel, keine neue Gate-/Runner-Architektur.
+
