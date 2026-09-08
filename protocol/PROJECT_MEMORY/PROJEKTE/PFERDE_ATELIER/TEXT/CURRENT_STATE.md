@@ -204,3 +204,32 @@ Status:
 `FIX_FORBIDDEN`.
 Kein Merge, kein Realtest, kein Publish/WordPress-Write.
 
+### Security-Wartung nach erstem Maschinen-Test
+
+Erster PR-#161-Maschinen-Test stoppte vor M28-Kandidatenbewertung mit:
+`HOBBYROOM_ACTIVE_HISTORY_CASE_ROW_INVALID:M28`.
+
+Root-Cause:
+`_error_row_for_case()` im auf main aktiven Gate verwendet einen doppelt escapten Markdown-Zeilenregex.
+
+Security-Fix vorbereitet:
+- PR #166;
+- Branch `hobbyroom/security-fix-m28-row-parser-20260908`;
+- Head `a742c5c917b5e6fe164be2a6267470de89e9d744`;
+- exakt eine Datei;
+- exakt +1/-1 Regex-Zeile.
+
+Lokaler Positiv/Negativ-Beweis:
+- reale M28-Zeile -> genau 1 Treffer;
+- M29 statt M28 -> 0 Treffer;
+- eingebettete Fake-Zeile -> 0 Treffer;
+- doppelte M28-Zeile -> 2 Treffer und damit fail-closed.
+
+GitHub-Test PR #166:
+- `hardlock-base` Run `34226241411`;
+- Stop im immutable path guard;
+- exakt `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`;
+- `PATH_GUARD_SELFTEST_PASS`.
+
+M28-Produktionskandidat PR #161 bleibt unverändert offen und **nicht bewertet**.
+
