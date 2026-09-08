@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 45,
+  "generation": 46,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -125,7 +125,7 @@
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
-    "authorized_next_action": "INSTALL_6_72_8_NO_BUTTONS_READ_CLEANUP_STATUS",
+    "authorized_next_action": "CONFIGURE_AWIN_CREATE_A_FEED_OTTO_14336_FILTERED_SOURCE_NO_NEW_PLUGIN",
     "bound_user_scope_action": "INSTALL_6_72_7; NO_BUTTONS; READ_OTTO_SICHERHEITSBEREINIGUNG; KEEP_AUTOMATION_OFF",
     "completion_condition": "BOUND_CHECK_PASS_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
@@ -214,7 +214,7 @@
       }
     },
     "otto_awin_legacy_exact_cleanup": {
-      "status": "FULL_LOCAL_GATE_PASS_6728_LIVE_RETEST_PENDING",
+      "status": "LIVE_BLOCKED_FAIL_CLOSED_NO_DELETE",
       "advertiser_id": 14336,
       "version": "6.72.8",
       "prior_live_fail": "6.72.7 did not show promised OTTO-Sicherheitsbereinigung readback.",
@@ -241,8 +241,10 @@
       "source_manifest_sha256": "816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.8_TEST.zip",
       "test_artifact_sha256": "b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f",
-      "next_test": "Install 6.72.8; press no run/package buttons; read the always-visible OTTO-Sicherheitsbereinigung status while automation remains disabled.",
-      "checked_at": "2026-09-08"
+      "next_test": "Create and bind a filtered Awin Create-a-Feed for OTTO 14336; run only after source is confirmed portal_filtered.",
+      "checked_at": "2026-09-08",
+      "live_evidence": "2026-09-08 19:13 screenshot: blocked, 1 failed run, 0 products deleted, exact-import-count-mismatch:0/4500.",
+      "decision": "Do not create another cleanup plugin. Use existing filtered-feed workflow and standard reconcile quarantine/inactive_missing over two complete filtered runs."
     }
   },
   "branch_policy": {
@@ -589,7 +591,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "INSTALL_6_72_8_READ_ALWAYS_VISIBLE_OTTO_CLEANUP_STATUS",
+    "current_milestone": "BIND_FILTERED_AWIN_CREATE_A_FEED_FOR_OTTO_14336_NO_NEW_PLUGIN",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
