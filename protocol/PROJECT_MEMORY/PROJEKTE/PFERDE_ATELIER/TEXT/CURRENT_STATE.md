@@ -10,7 +10,7 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`78bb2576214a8c0a82d201ed35530ad9ac885481`
+`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`
 
 Letzter Merge:
 `PR #166 – Security: fix active history M28 row parser`
@@ -423,4 +423,21 @@ Gesamtprüfung vor PR:
 - alte numerische WP-ID-Pflicht entfernt.
 
 Keine Änderung an Current Action, 107007, Runner/Gates, Textmaschine, SEO, PPM/PSERC/PSTE-Regeln oder Publish.
+
+### M34-Handoff-Korridor integriert – REALTEST_ONLY
+
+PR #190 gemergt.
+Neuer main:
+`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`.
+
+Vor Merge:
+- exakt 1 Datei;
+- Kandidat exakt B01-Handoff-Blob;
+- Request -> PPM -> PASS/Receipt -> Submission -> 107008 statisch konsistent;
+- `hardlock`: PASS;
+- `hardlock-base`: PASS.
+
+Status:
+`REALTEST_ONLY`.
+Keine Reparatur während des 7/7-Laufs.
 
