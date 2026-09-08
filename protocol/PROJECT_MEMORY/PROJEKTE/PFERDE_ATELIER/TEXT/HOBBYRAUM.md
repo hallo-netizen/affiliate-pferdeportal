@@ -30,7 +30,7 @@ STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
 MAIN_SHA: 755b531ec08298a86cb0342c2db8c81f5b4df6f9
 ACTIVE_BLOCKER: FACHWORKFLOW_PROOF_HANDOFF_BLOCKED
-PLAN_PHASE: SECURITY_SHALLOW_ANCESTRY_FIX_PENDING
+PLAN_PHASE: SECURITY_PR177_ADMIN_ACTIVATION_PENDING
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 ACTIVE_HISTORY_CASE: M28
 HISTORY_EXPECTED_FAIL: NONE
@@ -55,13 +55,13 @@ PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
 ERROR_SOURCE_BLOB_SHA: e263de9d684e16c5ca95185079cbad1dd02fb26c
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: a6f9f30c85452acf10859707323bb672664fadf2
+CURRENT_STATE_BLOB_SHA: f58d63479b5a4fa90f036b75c3a83cde129eb41a
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 0e070bfe897693f1d6ecb1776d937e6f44647357
+DECISION_SOURCE_BLOB_SHA: c08f129d21f3367dd28cd6a57a2eb8be37d69d7c
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: 62c723d1a147237050278f013c2a63d62f6d1115
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: 2966ba57a7a7ec7e2e293245a8c60d7f608aeae2
+PROTOCOL_SOURCE_BLOB_SHA: 5d9cc3ed9b3525c5883b9742801bc59891de4dfe
 INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -80,29 +80,25 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Nur den falsch-negativen shallow Ahnenbeweis im Security-Gate reparieren.**
+**Einmalige Admin-Aktivierung ausschließlich für Security-PR #177.**
 
-Bewiesener Zustand:
-- PR #161 bleibt unverändert;
-- current main `755b531ec08298a86cb0342c2db8c81f5b4df6f9`;
-- Goldmaster `de21f6cd35c60849c551fd82f78e75ce57c99fab` ist realer Vorfahr / exakter Merge-Base;
-- CI-Checkout ist `fetch-depth: 1`;
-- Gate meldet deshalb fälschlich `HOBBYROOM_RECOVERY_BASE_NOT_ANCESTOR`.
+PR #177:
+- Head `f69b415099f7d9f936a81f21a56bbaa408e8dfc7`;
+- 1 Datei;
+- +2/-0;
+- Ahnenregel unverändert;
+- lokale shallow→unshallow-Positivprüfung PASS;
+- regulärer GitHub-Weg stoppt ausschließlich mit `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`.
 
-Zulässiger Fix:
-Bei shallow Repository vor der bestehenden `git merge-base --is-ancestor`-Prüfung die vollständige Historie des Base-Commits nachladen.
+Bis PR #177 aktiviert und der temporäre Bypass wieder entfernt ist:
+- `FIX_FORBIDDEN`;
+- PR #161 unverändert lassen;
+- kein M28-Merge;
+- kein Realtest;
+- kein Publish/WordPress-Write.
 
-Nicht ändern:
-- Goldmaster;
-- Ahnenregel;
-- Workflow;
-- PR #161;
-- M28-Inhalte;
-- Runner;
-- Publish/WordPress.
-
-Bis Security-Fix aktiviert:
-`FIX_FORBIDDEN`.
+Danach:
+PR #161 erneut ausschließlich technisch auf den neuen main synchronisieren und denselben Maschinen-Test fortsetzen.
 
 ## VERBOTEN
 
