@@ -379,7 +379,7 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 - Readback wird immer angezeigt: `pass / blocked / no_candidate / already_cleaned / nicht ausgeführt`.
 - Bei jedem FAIL bleibt derselbe Kandidat im Hobbyraum; **kein ZIP**.
 
-**Status:** OPEN / 6.72.7 LIVE FAIL. Einziger zulässiger Kandidat ist 6.72.8 im Hobbyraum; Ausgabe erst nach tatsächlich ausgeführtem vollständigem lokalen Gate.
+**Status:** FIXED_LOCAL / 6.72.8 — echter Runtime-POSITIV-/NEGATIV-Harness, Source-Gate-Harness, Gesamtworkflow, 21/21 PHP-Lint, 3-Datei-Diff, Fresh-ZIP-Unpack und 26/26 Source↔ZIP-Byte-Identität PASS; Live-Readback ausstehend.
 
 ---
 
@@ -391,9 +391,10 @@ Bindend:
 - `AFF-ERR-017`: kumulativer Fortschritt LIVE PASS; nicht erneut öffnen.
 - `AFF-ERR-018`: WP-Cron-Fallback LIVE PASS; nicht erneut öffnen.
 - `AFF-ERR-019`: ungefilterter OTTO-Vollfeed bleibt HARD BLOCKED; Source-Gate + lokaler Pre-Upsert-Guard aktiv.
-- `AFF-ERR-020`: 6.72.7 ist durch AFF-ERR-022 als nicht belastbar geprüft verworfen; Cleanup-Ziel bleibt offen.
+- `AFF-ERR-020`: Cleanup-Ziel wird durch 6.72.8 mit stärkerer first_seen/run_uuid/imported-Provenienz erfüllt; FULL LOCAL GATE PASS.
 - `AFF-ERR-021`: Hobbyraum-TASK-Schema CLOSED.
-- `AFF-ERR-006`: 6.72.7-Ausgabe war ein Prozess-FALSE-PASS; ab 6.72.8 zählt nur tatsächlich ausgeführter Runtime-POSITIV-/NEGATIV-/Gesamtworkflow-Test.
-- `AFF-ERR-001`: weiterhin kein Release-/Live-PASS ohne echte WordPress-Evidence.
+- `AFF-ERR-022`: 6.72.7 FALSE-PASS behoben; 6.72.8 tatsächlich lokal Runtime POSITIV/NEGATIV + Gesamtworkflow + Fresh-ZIP getestet.
+- `AFF-ERR-006`: Plugin-Ausgabe-Hardlock für 6.72.8 erfüllt; ein Kandidat bis Gesamt-PASS, kein Zwischen-ZIP.
+- `AFF-ERR-001`: kein Release-/Live-PASS vor echter WordPress-Evidence.
 
-**Nächster zulässiger Schritt:** **kein Plugin ausgeben.** Kandidat 6.72.8 im Hobbyraum gegen den echten 6.72.7-Livefehler härten und tatsächlich lokal ausführen: Runtime POSITIV/NEGATIV, Gesamtworkflow, Regression, vollständiger PHP-Lint, exakter Diff-Scope, Fresh-ZIP-Unpack + erneute Tests. Erst bei vollständigem echten PASS exakt ein ZIP.
+**Nächster zulässiger Schritt:** exakt **6.72.8 TEST installieren**. Danach keine Buttons drücken. Unter `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ist `OTTO-Sicherheitsbereinigung` jetzt immer sichtbar. Erwartet wird `pass`, `blocked`, `no_candidate`, `already_cleaned` oder `nicht ausgeführt` — kein unsichtbarer Zustand mehr. Automatisierung bleibt AUS; kein neuer OTTO-Lauf vor Auswertung dieses Live-Readbacks.
