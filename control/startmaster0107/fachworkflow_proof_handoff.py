@@ -31,6 +31,8 @@ PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb6947
 PPM679_RULESET_SHA256 = "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f"
 PSERC_FIX_PACKAGE_SHA256 = "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
 PSERC_INNER_ZIP = "PSERC-FIX/portal-seo-editorial-plan-compiler_0.28.18_ENDSTEMPEL_IMPORT_ENVELOPE_BINDING.zip"
+PPM679_PACKAGE_REL = "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+PSERC_FIX_PACKAGE_REL = "control/startmaster0107/runtime_packages/PSERC-FIX.zip"
 
 
 class Blocked(RuntimeError):
@@ -89,8 +91,10 @@ def _real_ppm_stage(repo: Path, request: Mapping[str, Any], root: str,
     if report_path.exists():
         raise Blocked("PPM679_PREGENERATED_REPORT_FORBIDDEN")
 
-    ppm_zip = Path(os.environ.get("PPM679_PACKAGE_ZIP", "")).expanduser()
-    pserc_zip = Path(os.environ.get("PSERC_FIX_ZIP", "")).expanduser()
+    ppm_env = os.environ.get("PPM679_PACKAGE_ZIP", "").strip()
+    pserc_env = os.environ.get("PSERC_FIX_ZIP", "").strip()
+    ppm_zip = Path(ppm_env).expanduser() if ppm_env else (repo / PPM679_PACKAGE_REL)
+    pserc_zip = Path(pserc_env).expanduser() if pserc_env else (repo / PSERC_FIX_PACKAGE_REL)
     if not ppm_zip.is_file():
         raise Blocked("PPM679_PACKAGE_ZIP_MISSING")
     if not pserc_zip.is_file():
