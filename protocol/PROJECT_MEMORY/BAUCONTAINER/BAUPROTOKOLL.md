@@ -1852,7 +1852,8 @@ NACHGEHOLT:
 7. ZV-TRESOR-001 auf Fassung 2026-09-08 und zwei unabhängige Sicherungswege aktualisiert;
 8. HANDLUNGSVERZEICHNIS und BAUPLAN auf eine gemeinsame Backupfachlogik mit zwei unabhängigen Wegen korrigiert;
 9. vollständigen GitHub-Metadaten-Neuaufbau ausdrücklich von real bewiesenem Git-/Ref-/Campus-Restore getrennt;
-10. BAU-041 als gefundene und geschlossene Konsistenzlücke dokumentiert.
+10. BAU-041 als gefundene und geschlossene Konsistenzlücke dokumentiert;
+11. zentrales FEHLERREGISTER auf reine Wegweiserrolle zurückgeführt; dynamische Tresor-/Architekturstatusdetails entfernt.
 
 EINE WAHRHEIT:
 - TRESOR/STATUS.md = einzige aktuelle Tresor-Standwahrheit;
