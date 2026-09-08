@@ -392,3 +392,35 @@ Kein isolierter Canonical-Slot-Fix.
 Nächster Schritt ist ein vollständiger, begrenzter Handoff-Korridorvergleich:
 B01-Semantik als funktionale Basis + nur später zwingend bewiesene Änderungen (Runtime-Pfade, M28 Request-first/Current Action) erhalten.
 
+### M34-Korridor-Kandidat – einheitliche Handoff-Rekonstruktion
+
+Aktueller main:
+`78bb2576214a8c0a82d201ed35530ad9ac885481`.
+
+Aktiver Realblocker:
+`PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`.
+
+Systemische Ursache:
+Der aktuelle PPM-Handoff war durch späteres Reapply auf ältere PR-#124-Semantik zurückgerutscht und hatte bereits durch B01 korrigierte Vorbedingungen sowie heutige PASS-/Output-Bindungen verloren.
+
+Kandidat:
+- Branch `hobbyroom/m34-ppm-handoff-corridor-reconstruction-20260908`;
+- Head `5e7ebadd991ae5b43de74f95bc232a4fa42b3b23`;
+- exakt eine Datei:
+  `control/startmaster0107/fachworkflow_proof_handoff.py`;
+- Kandidatenblob exakt B01:
+  `2c5d989ebbdb4a9221226b8f6ab675ca2a3122f1`.
+
+Gesamtprüfung vor PR:
+- Requestfelder exakt heutiger Current-Action-Vertrag: PASS;
+- PASS-/Receipt-Felder heutiger Validator: PASS;
+- echter PPM weiterhin zwingend: PASS;
+- PPM-/PSERC-Repo-Runtime-Fallback: PASS;
+- Slotauflösung über gebundenen externen `plan_slot`: PASS;
+- semantischer Kategorievertrag: PASS;
+- vollständige Stage-/Artefakt-Outputs im Receipt: PASS;
+- alte `CANONICAL_SLOT_MISSING`-Vorbedingung entfernt;
+- alte numerische WP-ID-Pflicht entfernt.
+
+Keine Änderung an Current Action, 107007, Runner/Gates, Textmaschine, SEO, PPM/PSERC/PSTE-Regeln oder Publish.
+
