@@ -1,0 +1,81 @@
+# AFFILIATE 6.72.6 — OTTO/AWIN RELEVANCE PREFILTER ROOTFIX
+
+STAND: 2026-09-08
+STATUS: FIXED_LOCAL / LIVE_RETEST_PENDING
+ERROR: AFF-ERR-019
+ADVERTISER: Awin 14336 / OTTO
+
+## Root Cause
+
+Der 6.72.5-Products-Worker las jede formal gültige OTTO-Feedzeile und übergab sie vor jeder Pferde-/Portalrelevanzprüfung an creative_library_upsert(). Dadurch konnte ein breiter OTTO-Vollfeed fachfremde Produkte in wp_<prefix>ppar_creative_library persistieren.
+
+## Rootfix 6.72.6
+
+1. SOURCE-GATE
+- OTTO 14336 darf keinen automatisch gefundenen Default-/Vollfeed mehr verwenden.
+- Pflicht ist eine explizit gebundene product_feed_url für Advertiser 14336.
+- Zusätzlich muss product_feed_scope exakt portal_filtered sein.
+- Backend-Fachseite besitzt dafür eine ausdrückliche Create-a-Feed-Bestätigung.
+- Ohne diese Bindung ist OTTO bereits vor dem Enqueue fail-closed; der Startbutton ist ebenfalls gesperrt.
+
+2. OLD-JOB-HARDSTOP
+- Ein bereits offener 6.72.5-OTTO-products-Job besitzt keinen feed_scope=portal_filtered.
+- Der erste 6.72.6-Worker-Tick bricht ihn deshalb terminal mit otto_product_feed_unfiltered ab.
+- Die private temporäre Feeddatei wird über den bestehenden terminalen Cleanup gelöscht.
+- Kein Retry des ungefilterten Vollfeeds.
+
+3. LOCAL PRE-UPSERT-GUARD
+- Nur OTTO 14336 wird zusätzlich vor creative_library_upsert() gegen den bereits vorhandenen hashgebundenen Pferde-Atelier-Ziel-/Content-Policy-Katalog geprüft.
+- Fachfremde, Spielzeug-/Medien-/Negativtreffer oder nicht eindeutig routbare Produkte werden vor der Speicherung verworfen.
+- Relevante Produkte erhalten auditierbar portal_product_slug, portal_product_title, portal_relevance_score und portal_relevance_contract=awin_otto_prefilter_v1.
+- Andere Awin-Advertiser und Fremdprovider bleiben unverändert.
+
+4. COUNTER-SEPARATION
+- products bleibt technisch die Zahl geprüfter Feedzeilen.
+- relevant_products zählt fachlich akzeptierte OTTO-Produkte.
+- blocked_products zählt vor Speicherung verworfene/blockierte Produktzeilen.
+- UI-Meldung trennt Feedzeilen geprüft / relevant akzeptiert / verworfen-blockiert.
+
+## Lokale Positiv-/Negativprüfung
+
+PHP-Lint:
+- 21/21 PHP-Dateien PASS.
+
+Source-Manifest:
+- 26/26 Plugin-Dateien gegen CURRENT_SOURCE_SHA256.txt PASS.
+- Manifest SHA256: cdf94ed70b6d764bfe62cb354bdb8780f49034047654a0e318697be7325ad9ba
+
+Byte-Scope gegen exakt belegten 6.72.5-Testinstaller:
+- exakt 4 Dateien geändert:
+  - includes/trait-ppar-automation-suite.php
+  - includes/trait-ppar-provider-registry.php
+  - pferdeportal-affiliate-router.php
+  - readme.txt
+- alle übrigen 22/26 Plugin-Dateien unverändert.
+
+Behavior-Test:
+- relevantes Produkt "Regendecke 1200D wasserdicht für Pferde" => PASS, Ziel pferdedecken-regendecken.
+- fachfremdes "Samsung 55 Zoll UHD Smart TV" => BLOCKED / otto_product_not_portal_relevant.
+- "Schleich Pferd Spielfigur" => BLOCKED / otto_product_content_blocked.
+- relevantes Produkt ohne feed_scope=portal_filtered => BLOCKED / otto_product_feed_unfiltered.
+- OTTO-Feed-URL ohne bestätigten portal_filtered-Scope => BLOCKED / otto_feed_scope_unconfirmed.
+- alter ungefilterter OTTO-Job: terminal failed statt retry + Tempfeed-Datei gelöscht => PASS.
+
+Testausgabe:
+OTTO_6726_PREFILTER_POSITIVE_NEGATIVE_PASS
+OLD_OTTO_JOB_TERMINAL_CLEANUP_PASS
+
+## Testinstaller
+
+Datei: Affiliate-Zentrale_6.72.6_TEST.zip
+ZIP-SHA256: a0f0eb7229fc8701ff30102d930d219a0509310fdd33400fc940701afc47ef24
+ZIP-Integrität: PASS / no errors detected.
+
+## Noch offen
+
+Kein LIVE-PASS behauptet.
+Nächster Live-Schritt:
+1. 6.72.6 installieren.
+2. Bestehenden ungefilterten OTTO-Job einmal vom Worker erfassen lassen; er muss terminal mit dem neuen Hardstop enden und darf keine weiteren Produktzeilen importieren.
+3. Erst danach in Awin einen Create-a-Feed-Export auf relevante Pferde-Atelier-Kategorien begrenzen, dessen URL an 14336 binden und portal_filtered bestätigen.
+4. Neuer OTTO-Lauf: nur relevant akzeptierte Zeilen dürfen persistieren; Counter müssen die Trennung sichtbar machen.
