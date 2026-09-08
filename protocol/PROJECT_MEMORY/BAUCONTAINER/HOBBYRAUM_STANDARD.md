@@ -173,6 +173,7 @@ MAIN_SHA: <40-stelliger aktueller main-Ausgangscommit>
 ACTIVE_BLOCKER: <autoritativer Fehlercode>
 PLAN_PHASE: <aktueller festgelegter Arbeitsplanpunkt>
 RECOVERY_BASE_SHA: <letzter real funktionierender / gebundener Ausgangsstand>
+ACTIVE_HISTORY_CASE: <exakter Mxx-Test, der den aktuellen Realblocker reproduziert>
 HISTORY_EXPECTED_FAIL: NONE | <exakter Mxx-Fehler nur bei HISTORY_AUTHORITY_MAINTENANCE>
 CANDIDATE_BRANCH: <exakter Branch> oder NONE
 CANDIDATE_HEAD_SHA: <exakter 40-stelliger Head> oder NONE
@@ -218,6 +219,10 @@ Harte Wirkung nach Aktivierung des bestehenden Security-Hardlocks:
 - kompletter vertrauenswürdiger historische Regression-Lauf vom PR-Base gegen einen Produktionskandidaten nicht GESAMT PASS: **BLOCK**;
 - Lücke in der fortlaufenden Fehlerhistorie ab M01: **BLOCK**;
 - historischer Runner und Matrix nicht exakt deckungsgleich: **BLOCK**;
+- aktueller Blocker nicht eindeutig einem `ACTIVE_HISTORY_CASE` in der autoritativen Fehlerzeile zugeordnet: **BLOCK**;
+- current main reproduziert `ACTIVE_HISTORY_CASE` nicht als ersten Regression-FAIL: **BLOCK**;
+- Kandidat besteht danach nicht mit demselben vertrauenswürdigen Runner vollständig: **BLOCK**;
+- `RECOVERY_BASE_SHA` ist kein realer Vorfahr des current main: **BLOCK**;
 - autoritative Fehlerquelle und aktuell akzeptierte Historie nicht deckungsgleich: **BLOCK**;
 - Matrix/Runner zusammen mit Produktionscode geändert: **BLOCK**.
 
@@ -229,6 +234,7 @@ Wartung von Fehlermatrix oder Regression-Runner:
 - kein Produktionsfix im selben PR;
 - eigener Plan `HISTORY_AUTHORITY_MAINTENANCE`;
 - `HISTORY_EXPECTED_FAIL` bindet exakt den aktuell realen Fehler Mxx;
+- `HISTORY_EXPECTED_FAIL` muss dabei `ACTIVE_HISTORY_CASE` entsprechen;
 - bestehende Historie darf niemals verkürzt werden;
 - neue Fehler werden fortlaufend M34, M35, ... ergänzt, ohne Änderung des Security-Gates;
 - autoritative Fehlerquelle wird zuerst um den neuen realen Fehler ergänzt;
@@ -279,6 +285,9 @@ Der serverseitige Hardlock muss selbst belegen:
 - `RECOVERY_BASE_SHA` ist ein gültiger Commit und in der zuständigen CURRENT_STATE als letzter funktionierender Stand belegt;
 - mindestens M01–M33 und jeder später real aufgenommene M34/M35/... sind lückenlos in historischer Matrix, vertrauenswürdigem Runner **und** autoritativer Fach-Fehlerquelle vorhanden;
 - `ACTIVE_BLOCKER` steht real in Fach-Fehlerquelle und CURRENT_STATE;
+- `ACTIVE_HISTORY_CASE` zeigt auf genau die Fehlerzeile, die `ACTIVE_BLOCKER` enthält;
+- current main muss vor dem Fix mit dem vertrauenswürdigen Runner exakt bei `ACTIVE_HISTORY_CASE` als erstem Fehler FAIL liefern;
+- derselbe Runner muss nach dem Fix auf dem Kandidaten GESAMT PASS liefern;
 - `MAIN_SHA` steht real in CURRENT_STATE;
 - Pauls Kernregeln sind in der gebundenen Prüfkarte vorhanden: kein Sammelfix, historische Fehlerquelle gegenprüfen, bestehende Regression danach, echter 7/7-Lauf als Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik und Pre-/Post-Transformation;
 - das Änderungs-/Erklärungsregister enthält die eingefrorene Recovery-Regel, den kausalen Corridor und die Maschinenbeweis-Entscheidung;
