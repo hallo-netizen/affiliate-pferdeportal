@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: AKTIV – M34 ONE-FILE CORRIDOR TEST
+STATUS: REALTEST_ONLY
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -12,7 +12,7 @@ Goldmaster:
 `de21f6cd35c60849c551fd82f78e75ce57c99fab`
 
 Aktueller main:
-`78bb2576214a8c0a82d201ed35530ad9ac885481`
+`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`
 
 Aktueller erster echter Blocker:
 `PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`
@@ -80,33 +80,19 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Genau einen strukturellen M34-Kandidaten testen. Keine Flickerei.**
+**Echter 7/7-Realtest auf M34-Korridorstand.**
 
-Main:
-`78bb2576214a8c0a82d201ed35530ad9ac885481`
-
-Kandidat:
-`hobbyroom/m34-ppm-handoff-corridor-reconstruction-20260908`
-Head:
-`5e7ebadd991ae5b43de74f95bc232a4fa42b3b23`
-
-Scope:
-nur
-`control/startmaster0107/fachworkflow_proof_handoff.py`
-
-Kandidat ist exakt der bewiesene B01-Handoff-Blob:
-`2c5d989ebbdb4a9221226b8f6ab675ca2a3122f1`.
-
-Vorprüfung:
-Request -> PPM -> PASS/Receipt -> Submission -> 107008 statisch konsistent.
+Current main:
+`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`
 
 Ablauf:
-1. normaler `hardlock` + `hardlock-base`;
-2. bei PASS mergen;
-3. danach exakt ein echter 7/7-Realtest;
-4. erst der reale nächste Blocker entscheidet weiter.
-
-Keine Gate-/Runner-/Zwangsjackenarbeit.
+1. Dispatcher PR #107 exakt auf current main.
+2. Cloud Entry -> Preflight -> Runtime Entry -> Current Action.
+3. 7 Artikel frisch, keine alten Artefakte.
+4. Request-first Handoff -> realer PPM -> Submission.
+5. bis 107008 oder erstem realen BLOCKED.
+6. keine Reparatur während des Laufs.
+7. kein Auto-Publish / kein WordPress-Write.
 
 ## VERBOTEN
 
