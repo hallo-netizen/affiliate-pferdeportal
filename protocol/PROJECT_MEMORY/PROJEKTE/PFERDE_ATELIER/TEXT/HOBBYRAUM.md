@@ -119,7 +119,7 @@ Der bestehende `hardlock-base` blockiert jede Änderung unter `control/paul-scop
 
 Nächste Prüfschwelle:
 1. genau einmal kontrollierten PR-only-Admin-Wartungsweg für PR #160 öffnen;
-2. exakt PR #160 / Head `d5d876f…` integrieren;
+2. exakt PR #160 / aktuellen gebundenen Head integrieren;
 3. Admin-Wartungsweg sofort wieder schließen;
 4. neuen Maschinenbeweis mit einem echten M28-Kandidaten verwenden;
 5. danach genau ein 7/7-Realtest; erster echter Blocker wird alleinige neue Arbeitswahrheit.
