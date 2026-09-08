@@ -78,3 +78,18 @@ Ausgangsartefakt:
 - ZIP-SHA256: 4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb
 
 Status bleibt: TESTINSTALLER_BUILT / LIVE_RETEST_PENDING. Dies ist kein Finalrelease.
+
+## LIVE-READBACK 08.09.2026 10:40 Europe/Berlin
+
+User-Screenshot der bestehenden Arbeitswarteschlange nach Wartezeit ohne manuellen Paketknopf:
+- Partner: Awin 14336
+- Stufe: products
+- Status: queued
+- Meldung: "3500 Produkte insgesamt verarbeitet; letztes Paket: 500. Fortsetzung vorgemerkt."
+- sichtbarer Jobzeitpunkt: 08.09.2026 08:37 (WordPress-Anzeige)
+
+Bewertung:
+- AFF-ERR-017 kumulative Fortschrittsanzeige: LIVE PASS.
+- AFF-ERR-018 WP-Cron-Fallback / automatische Paketfortsetzung: LIVE PASS.
+- Mehrere Pakete wurden selbständig verarbeitet; kein erneuter manueller 500er-Test erforderlich.
+- Gesamt-/Release-PASS bleibt weiterhin unzulässig, solange der reale OTTO-Lauf nicht die nachgelagerten Stufen bis zum gebundenen Endzustand durchlaufen hat.
