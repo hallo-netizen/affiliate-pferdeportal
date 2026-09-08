@@ -1,218 +1,160 @@
 from __future__ import annotations
-
-import copy
-import hashlib
-import json
-from dataclasses import dataclass, asdict
+import copy, hashlib, json, os, subprocess, sys
+from pathlib import Path
 from typing import Any
-
 
 class Blocked(RuntimeError):
     pass
 
-
 def canon(obj: Any) -> bytes:
-    return json.dumps(
-        obj,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-    ).encode("utf-8")
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
-
-def sha(obj: Any) -> str:
+def sha_obj(obj: Any) -> str:
     return hashlib.sha256(canon(obj)).hexdigest()
 
+def sha_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
-STEP_ORDER = ("RESEARCH", "TEXT_SLOT", "FINAL_CHECK")
-RESULT_KEYS = {"job_id", "step_id", "input_hash", "status", "output", "output_hash"}
-
-
-@dataclass(frozen=True)
-class WorkerResult:
-    job_id: str
-    step_id: str
-    input_hash: str
-    status: str
-    output: Any
-    output_hash: str
-
-    def to_dict(self) -> dict:
-        return asdict(self)
-
-
-def _valid_research(output: Any) -> bool:
-    return (
-        isinstance(output, dict)
-        and set(output) == {"item_id", "facts"}
-        and isinstance(output["item_id"], str)
-        and bool(output["item_id"])
-        and isinstance(output["facts"], list)
-        and all(isinstance(x, str) and bool(x) for x in output["facts"])
-    )
-
-
-def _passes_prototype_link_rule(draft: str) -> bool:
-    """
-    P1 representative hard rule only.
-    This is NOT claimed to be the production link rule.
-    It proves that a mandatory rule can be compiled into the machine
-    instead of being runtime-configurable or worker-selectable.
-    """
-    lowered = draft.lower()
-    return "http://" not in lowered and "https://" not in lowered
-
-
-def _valid_text_slot(output: Any) -> bool:
-    return (
-        isinstance(output, dict)
-        and set(output) == {"item_id", "facts", "draft"}
-        and isinstance(output["item_id"], str)
-        and bool(output["item_id"])
-        and isinstance(output["facts"], list)
-        and all(isinstance(x, str) and bool(x) for x in output["facts"])
-        and isinstance(output["draft"], str)
-        and bool(output["draft"])
-        and _passes_prototype_link_rule(output["draft"])
-    )
-
-
-def _valid_final_check(output: Any) -> bool:
-    return (
-        isinstance(output, dict)
-        and set(output) == {"item_id", "facts", "draft", "checks"}
-        and isinstance(output["item_id"], str)
-        and bool(output["item_id"])
-        and isinstance(output["facts"], list)
-        and all(isinstance(x, str) and bool(x) for x in output["facts"])
-        and isinstance(output["draft"], str)
-        and bool(output["draft"])
-        and output["checks"] == {"all_required_checks_passed": True}
-    )
-
-
-def _validate(step_id: str, output: Any) -> bool:
-    if step_id == "RESEARCH":
-        return _valid_research(output)
-    if step_id == "TEXT_SLOT":
-        return _valid_text_slot(output)
-    if step_id == "FINAL_CHECK":
-        return _valid_final_check(output)
-    return False
-
+STEP_ORDER=("RESEARCH","TEXT_SLOT","FINAL_CHECK")
+RESEARCH_KEYS={"job_id","input_hash","output","output_hash"}
+TEXTMACHINE_FILE="frozen_textmachine_stub.py"
+TEXTMACHINE_SHA256="8fa1056b76ef83dc1e1b2557fcbf3ac7b0996bfe377a8d1c7f4357426dd1cbcd"
+TEXTMACHINE_CONTRACT="P2_FROZEN_TEXTMACHINE_STUB_V1"
 
 class CentralMachine:
-    """
-    P0 architecture prototype only.
-
-    Fixed properties:
-    - fixed step order
-    - no runtime-supplied validator
-    - one central owner of state
-    - no worker-to-worker communication
-    """
-
     def __init__(self, job_id: str, item_id: str):
-        if not isinstance(job_id, str) or not job_id:
+        if not isinstance(job_id,str) or not job_id:
             raise ValueError("job_id required")
-        if not isinstance(item_id, str) or not item_id:
+        if not isinstance(item_id,str) or not item_id:
             raise ValueError("item_id required")
-
-        self._job_id = job_id
-        self._item_id = item_id
-        self._index = 0
-        self._payload = {"item_id": item_id}
-        self._blocked = False
-        self._history: list[dict[str, str]] = []
-
-    @property
-    def current_step(self) -> str | None:
-        if self._blocked or self._index >= len(STEP_ORDER):
-            return None
-        return STEP_ORDER[self._index]
+        self._job_id=job_id
+        self._item_id=item_id
+        self._index=0
+        self._payload={"item_id":item_id}
+        self._history=[]
+        self._blocked=False
 
     @property
-    def finished(self) -> bool:
-        return not self._blocked and self._index == len(STEP_ORDER)
+    def current_step(self):
+        return None if self._blocked or self._index>=len(STEP_ORDER) else STEP_ORDER[self._index]
 
-    def worker_input(self) -> dict:
-        step_id = self.current_step
-        if step_id is None:
-            raise Blocked("NO_ACTIVE_STEP")
+    @property
+    def finished(self):
+        return not self._blocked and self._index==len(STEP_ORDER)
 
-        payload = copy.deepcopy(self._payload)
-        return {
-            "job_id": self._job_id,
-            "step_id": step_id,
-            "input_hash": sha(payload),
-            "payload": payload,
-        }
+    def research_input(self):
+        self._require("RESEARCH")
+        payload=copy.deepcopy(self._payload)
+        return {"job_id":self._job_id,"input_hash":sha_obj(payload),"payload":payload}
 
-    def submit(self, raw_result: dict) -> None:
-        step_id = self.current_step
-        if step_id is None:
-            raise Blocked("NO_ACTIVE_STEP")
-
-        if not isinstance(raw_result, dict) or set(raw_result) != RESULT_KEYS:
-            self._block("RESULT_SCHEMA_INVALID")
-
-        try:
-            result = WorkerResult(**raw_result)
-        except TypeError:
-            self._block("RESULT_SCHEMA_INVALID")
-
-        if result.job_id != self._job_id:
+    def submit_research(self, raw: dict):
+        self._require("RESEARCH")
+        if not isinstance(raw,dict) or set(raw)!=RESEARCH_KEYS:
+            self._block("RESEARCH_SCHEMA_INVALID")
+        if raw["job_id"]!=self._job_id:
             self._block("JOB_ID_MISMATCH")
-        if result.step_id != step_id:
-            self._block("STEP_ID_MISMATCH")
-        if result.input_hash != sha(self._payload):
+        if raw["input_hash"]!=sha_obj(self._payload):
             self._block("INPUT_HASH_MISMATCH")
-        if result.status != "PASS":
-            self._block("WORKER_NONPASS")
-        if result.output_hash != sha(result.output):
+        if raw["output_hash"]!=sha_obj(raw["output"]):
             self._block("OUTPUT_HASH_MISMATCH")
-        if not _validate(step_id, result.output):
-            self._block("VALIDATOR_FAIL")
-        if result.output.get("item_id") != self._item_id:
+        out=raw["output"]
+        if not isinstance(out,dict) or set(out)!={"item_id","facts"}:
+            self._block("RESEARCH_OUTPUT_INVALID")
+        if out.get("item_id")!=self._item_id:
             self._block("ITEM_ID_MISMATCH")
+        facts=out.get("facts")
+        if not isinstance(facts,list) or not facts or not all(isinstance(x,str) and x for x in facts):
+            self._block("RESEARCH_FACTS_INVALID")
+        self._advance(out,raw["input_hash"],raw["output_hash"])
 
-        self._history.append(
-            {
-                "step_id": step_id,
-                "input_hash": result.input_hash,
-                "output_hash": result.output_hash,
-            }
+    def run_textmachine(self):
+        self._require("TEXT_SLOT")
+        engine=Path(__file__).with_name(TEXTMACHINE_FILE)
+        if not engine.is_file() or sha_file(engine)!=TEXTMACHINE_SHA256:
+            self._block("TEXTMACHINE_IDENTITY_MISMATCH")
+        inp={"item_id":self._item_id,"facts":copy.deepcopy(self._payload["facts"])}
+        env={k:v for k,v in os.environ.items() if k not in {"TEXTMACHINE_PATH","TEXTMACHINE_ENGINE","TEXTMACHINE_ARGS"}}
+        proc=subprocess.run(
+            [sys.executable,str(engine)],
+            input=canon(inp),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=10,
+            env=env,
         )
-        self._payload = copy.deepcopy(result.output)
-        self._index += 1
+        if proc.returncode!=0:
+            self._block("TEXTMACHINE_EXECUTION_FAILED")
+        try:
+            out=json.loads(proc.stdout.decode("utf-8"))
+        except Exception:
+            self._block("TEXTMACHINE_OUTPUT_INVALID")
+        required={"engine_contract","input_hash","item_id","facts","draft"}
+        if not isinstance(out,dict) or set(out)!=required:
+            self._block("TEXTMACHINE_OUTPUT_INVALID")
+        if out["engine_contract"]!=TEXTMACHINE_CONTRACT:
+            self._block("TEXTMACHINE_CONTRACT_MISMATCH")
+        if out["input_hash"]!=sha_obj(inp):
+            self._block("TEXTMACHINE_INPUT_BINDING_MISMATCH")
+        if out["item_id"]!=self._item_id or out["facts"]!=inp["facts"]:
+            self._block("TEXTMACHINE_CONTEXT_DRIFT")
+        if not isinstance(out["draft"],str) or not out["draft"]:
+            self._block("TEXTMACHINE_DRAFT_INVALID")
+        self._advance(
+            {"item_id":self._item_id,"facts":inp["facts"],"draft":out["draft"]},
+            sha_obj(inp),
+            sha_obj(out),
+        )
 
-    def snapshot(self) -> dict:
-        return {
-            "job_id": self._job_id,
-            "item_id": self._item_id,
-            "current_step": self.current_step,
-            "finished": self.finished,
-            "blocked": self._blocked,
-            "payload": copy.deepcopy(self._payload),
-            "history": copy.deepcopy(self._history),
-        }
+    def run_final_check(self):
+        self._require("FINAL_CHECK")
+        draft=self._payload.get("draft")
+        if not isinstance(draft,str) or not draft:
+            self._block("FINAL_DRAFT_INVALID")
+        low=draft.lower()
+        if "http://" in low or "https://" in low:
+            self._block("PROTOTYPE_LINK_RULE_BLOCKED")
+        out=copy.deepcopy(self._payload)
+        out["checks"]={"all_required_checks_passed":True}
+        self._advance(out,sha_obj(self._payload),sha_obj(out))
 
-    def final_output(self) -> dict:
+    def final_output(self):
         if not self.finished:
             raise Blocked("NOT_FINISHED")
         return copy.deepcopy(self._payload)
 
-    def _block(self, code: str):
-        self._blocked = True
+    def snapshot(self):
+        return {
+            "job_id":self._job_id,
+            "item_id":self._item_id,
+            "current_step":self.current_step,
+            "finished":self.finished,
+            "blocked":self._blocked,
+            "payload":copy.deepcopy(self._payload),
+            "history":copy.deepcopy(self._history),
+        }
+
+    def _require(self,step):
+        if self.current_step!=step:
+            self._block("STEP_ORDER_VIOLATION")
+
+    def _advance(self,out,input_hash,output_hash):
+        self._history.append({
+            "step_id":STEP_ORDER[self._index],
+            "input_hash":input_hash,
+            "output_hash":output_hash,
+        })
+        self._payload=copy.deepcopy(out)
+        self._index+=1
+
+    def _block(self,code):
+        self._blocked=True
         raise Blocked(code)
 
-
-def make_result(worker_input: dict, output: Any, status: str = "PASS") -> dict:
+def make_research_result(inp: dict, facts: list[str]):
+    out={"item_id":inp["payload"]["item_id"],"facts":facts}
     return {
-        "job_id": worker_input["job_id"],
-        "step_id": worker_input["step_id"],
-        "input_hash": worker_input["input_hash"],
-        "status": status,
-        "output": output,
-        "output_hash": sha(output),
+        "job_id":inp["job_id"],
+        "input_hash":inp["input_hash"],
+        "output":out,
+        "output_hash":sha_obj(out),
     }
