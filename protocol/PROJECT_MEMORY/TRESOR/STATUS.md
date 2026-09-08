@@ -81,9 +81,6 @@ V2-Test:
 - Campus byteidentisch PASS;
 - Negativtest Änderung während Lauf korrekt BLOCK.
 
-Nächster realer Schritt:
-Mac-Lauf mit Doppelklick.
-
 ## PROVIDERGRENZE
 
 Nicht 1:1 aus GitHub exportierbar:
@@ -134,3 +131,25 @@ GitHub-Secret-Werte und einzelne providerinterne Informationen sind nicht 1:1 ex
 
 NEXT ACTION:
 Kein weiterer Test dieses identischen lokalen Backupstands erforderlich. Nächster lokaler Lauf erst bei gewünschter Aktualisierung per Doppelklick.
+
+
+## GESAMT-GITHUB-RESTOREGRENZE
+
+Real bewiesen:
+- Git-Dateien;
+- komplette Git-Historie;
+- gesicherte Branch-/Tag-/Pull-Refs;
+- Campus-Dateien im Repository.
+
+Exportiert, aber noch **nicht** als vollständiger Neuaufbau in ein leeres GitHub-Zielrepository end-to-end eingespielt:
+- Issues/Kommentare/Events;
+- Pull-Request-Metadaten/Reviews;
+- Releases/Labels/Milestones;
+- Rulesets/Workflows/Deployments und weitere exportierbare GitHub-Metadaten.
+
+Darum bleibt für einen vollständigen GitHub-Neuaufbau:
+`GITHUB_KOMPLETT_PASS` **OFFEN**.
+
+Das reale lokale Ergebnis
+`NOTFALL_WIEDERAUFBAU_PASS`
+bezieht sich auf den tatsächlich ausgeführten Git-/Ref-/Campus-Wiederaufbau, nicht auf eine erfundene 1:1-Reproduktion providerinterner GitHub-Objekte.
