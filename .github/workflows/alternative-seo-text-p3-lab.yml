@@ -134,3 +134,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p20_existing_write_gate_discovery.py
+
+      - name: P21 inspect Normal-Draft adapter contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p21_normal_draft_adapter_contract.py
