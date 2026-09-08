@@ -334,7 +334,7 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **GESAMTWORKFLOW:** Nach Cleanup bleibt der 6.72.6-Source-Gate aktiv: neuer OTTO-Lauf nur mit explizit gebundenem Awin Create-a-Feed `portal_filtered`; lokale Relevanzprüfung weiterhin vor `creative_library_upsert()`; automatische Ausgabe nur über bereits bestehenden verifizierten OTTO-Outputvertrag; manuelle Reparatur/andere Provider unverändert.
 
-**Status:** OPEN / Root Cause belegt; genau ein gebündelter Cleanup+Workflow-Kandidat im Hobbyraum zulässig. Kein Plugin-ZIP vor vollständigem Ausgabe-Hardlock-PASS.
+**Status:** FIXED_LOCAL / 6.72.7 FULL LOCAL GATE PASS — exakter Cleanup, Negativfälle, Gesamtworkflow, Regressionen, frischer Installer und Byte-Identität bestanden; Live-Readback ausstehend.
 
 
 ## AFF-ERR-021 — Hobbyraum-TASK-Schema durch zusätzliche Hardlock-Felder ungültig gemacht
@@ -351,7 +351,7 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **NEGATIV:** jedes zusätzliche/unbekannte Feld => Runner muss fail-closed bleiben.
 
-**Status:** OPEN / vor Plugin-Ausgabe zu reparieren und statisch gegen den echten Runner zu prüfen.
+**Status:** CLOSED / TASK.current enthält wieder exakt die neun erlaubten Felder und wurde gegen den echten load_task()-Vertrag statisch validiert.
 
 ---
 
@@ -360,10 +360,12 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt während dieses Scopes zurückgestellt.
 
 Bindend:
-- `AFF-ERR-017`: 6.72.5 kumulativer Fortschritt LIVE PASS; nicht erneut öffnen.
-- `AFF-ERR-018`: 6.72.5 WP-Cron-Fallback LIVE PASS; nicht erneut öffnen.
-- `AFF-ERR-019`: 6.72.6 Rootfix LOCAL PASS. OTTO-Vollfeed ist im neuen Kandidaten fail-closed; nur explizit gebundener `portal_filtered`-Awin-Create-a-Feed darf einen neuen OTTO-Produktlauf speisen; zusätzlich prüft der vorhandene Pferde-Atelier-Katalog jede Zeile vor Persistenz.
-- `AFF-ERR-006`: gebündelter Rootfix ist gebaut; keine weitere Microfix-Kaskade vor Live-Readback.
-- `AFF-ERR-001`: kein Gesamt-/Release-PASS.
+- `AFF-ERR-017`: kumulativer Fortschritt LIVE PASS; nicht erneut öffnen.
+- `AFF-ERR-018`: WP-Cron-Fallback LIVE PASS; nicht erneut öffnen.
+- `AFF-ERR-019`: ungefilterter OTTO-Vollfeed bleibt HARD BLOCKED; Source-Gate + lokaler Pre-Upsert-Guard aktiv.
+- `AFF-ERR-020`: 6.72.7 Exact-run Altimport-Cleanup FULL LOCAL GATE PASS; Live-Readback ausstehend.
+- `AFF-ERR-021`: Hobbyraum-TASK-Schema CLOSED.
+- `AFF-ERR-006`: Ausgabe-Hardlock für 6.72.7 erfüllt: ein Kandidat, kein Zwischen-ZIP, Positiv/Negativ/Gesamtworkflow/Regression/Manifest/Fresh-Unpack/Byte-Identität PASS.
+- `AFF-ERR-001`: weiterhin kein Release-/Live-PASS ohne echte WordPress-Evidence.
 
-Nächster zulässiger Schritt: **keinen neuen OTTO-Lauf starten.** Der Altjob-Stopp ist LIVE PASS. Vor der neuen Feedbindung zuerst den bereits durch 6.72.5 erzeugten OTTO-Bestand sauber abgrenzen und bereinigen; Screenshot zeigt im abgeschlossenen Fehl-Lauf 4500 importierte Zeilen. Danach Awin Create-a-Feed fachlich filtern, URL an 14336 binden und `portal_filtered` bestätigen.
+**Nächster zulässiger Schritt:** exakt **6.72.7 TEST installieren**. Danach keine Buttons drücken. Auf `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ausschließlich den neuen Readback `OTTO-Sicherheitsbereinigung` prüfen. Erst nach bestätigtem Cleanup-Live-PASS Awin Create-a-Feed fachlich filtern/binden. Kein neuer OTTO-Lauf vorher.
