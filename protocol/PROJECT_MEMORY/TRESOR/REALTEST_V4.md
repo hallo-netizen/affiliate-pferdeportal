@@ -1,7 +1,7 @@
 # TRESOR – GITHUB-REALTEST
 
 STAND: 2026-09-07
-STATUS: AKTUELLER TESTBELEG
+STATUS: HISTORISCHER TESTBELEG / DURCH STATUS.md ABGELÖST
 
 ## Scope
 
@@ -75,3 +75,13 @@ Darum:
 
 Nicht:
 `GITHUB_KOMPLETT_PASS`
+
+
+## AKTUELLE WAHRHEIT
+
+Diese Datei bleibt als historischer Beleg des realen 2026-09-07-Laufs erhalten.
+
+Sie ist **keine CURRENT-Quelle**.
+
+Aktueller Tresor-/Lokalsicherungs-/Restore-Stand ausschließlich:
+`protocol/PROJECT_MEMORY/TRESOR/STATUS.md`.
