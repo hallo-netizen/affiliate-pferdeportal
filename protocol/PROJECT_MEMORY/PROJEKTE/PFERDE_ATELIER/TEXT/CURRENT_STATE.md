@@ -10,7 +10,7 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`2f3678aa495d40e5377881a6aa3655fb60e0c12e`
+`914638e67a265cf2e8951b1177a7d80fdf904e98`
 
 Letzter Merge:
 `Merge history machine-proof runner bootstrap`
@@ -130,13 +130,19 @@ Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - Kandidatenänderungen am Runner können den Produktionsbeweis nicht selbst fälschen.
 Aktuell: `ACTIVE_HISTORY_CASE = M28`.
 
-PR #160 ist **noch nicht integriert**.
-Exakter Infrastrukturblocker:
-`IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`
+PR #160 ist **integriert**.
+Merge/main: `914638e67a265cf2e8951b1177a7d80fdf904e98`.
 
-Ursache:
-`hardlock-base` sperrt `control/paul-scope-gate/` selbst als immutable Security-Pfad bereits vor Ausführung der neuen Gate-Logik.
-Das ist kein neuer TEXT-Produktionsblocker, sondern der aktuelle Wartungsblocker für die gewünschte Maschinenbeweis-Härtung.
+Die serverseitige Reparatur-Zwangsjacke ist damit auf `main` aktiv.
+
+Aktueller Sicherheitsstatus:
+Der für diese einmalige Security-Wartung gesetzte Ruleset-Bypass `Repository admin / pull requests only` ist noch aktiv und muss sofort wieder entfernt werden.
+
+Bis zur bestätigten Entfernung:
+- `FIX_FORBIDDEN`;
+- kein M28-Produktionskandidat;
+- kein Merge;
+- kein Realtest.
 
 Der B02-Kandidat `562b71c7…` hatte vor Merge:
 - `hardlock` PASS;
