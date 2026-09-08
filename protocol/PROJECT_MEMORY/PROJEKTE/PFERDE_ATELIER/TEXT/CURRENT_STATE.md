@@ -178,3 +178,29 @@ Kein Auto-Publish.
 
 Nicht hier dupliziert.
 Ausschließlich `HOBBYRAUM.md` ist die aktuelle NEXT-ACTION-Wahrheit.
+
+### Erster Maschinen-Test M28 – FAIL im Gate vor Kandidatenbewertung
+
+PR #161:
+- Branch `hobbyroom/m28-handoff-request-current-main-20260908`;
+- Head `78263594456bb58ae004b5b064816de0f3531720`.
+
+Ergebnis:
+- `hardlock`: PASS;
+- `hardlock-base`: FAIL im Schritt `Enforce current Paul assignment and technical write scope`;
+- Gate-Selbsttest: `HOBBYROOM_WORK_LOCK_SELFTEST_PASS:8/8`;
+- erster echter Gate-Fehler: `HOBBYROOM_ACTIVE_HISTORY_CASE_ROW_INVALID:M28`.
+
+Harte Ursachenprüfung auf current main:
+`_error_row_for_case()` verwendet den Regex
+`r"(?m)^\\|\\s*" ... r"\\s*\\|.*$"`
+und sucht damit nicht korrekt die reale Markdown-Zeile `| M28 | ... |`.
+
+Folge:
+Der neue Vorher-FAIL/Nachher-PASS-Beweis wurde noch **nicht** erreicht.
+Der M28-Produktionskandidat ist noch nicht bewertet.
+
+Status:
+`FIX_FORBIDDEN`.
+Kein Merge, kein Realtest, kein Publish/WordPress-Write.
+
