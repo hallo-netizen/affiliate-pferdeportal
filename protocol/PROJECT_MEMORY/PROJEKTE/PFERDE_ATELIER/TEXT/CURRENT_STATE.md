@@ -10,15 +10,18 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`30e933357dd9e5d3dde7cbd361c930b2a0c352c1`
+`2f3678aa495d40e5377881a6aa3655fb60e0c12e`
 
 Letzter Merge:
-`Merge B07/M32: restore repository-bound PPM runtime paths`
+`Merge history machine-proof runner bootstrap`
 
-Vor Merge:
-- Kandidat `41849f01…`;
+Maschinenbeweis-Runner:
+- PR #159;
+- eine Datei `control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py`;
 - `hardlock` PASS;
-- `hardlock-base` PASS.
+- `hardlock-base` PASS;
+- stale M26/M28/M31-Prüfungen korrigiert;
+- M28-Negativ-Mutanten-Selbsttest eingebaut.
 
 ## EINGEFRORENER REPARATURWEG
 
@@ -88,7 +91,23 @@ Kein Publish, kein WordPress-Write, keine Codeänderung im Realtest.
 
 Ruleset `Pferde Atelier Main Hardlock`:
 - `hardlock` Pflicht;
-- `hardlock-base` Pflicht.
+- `hardlock-base` Pflicht;
+- kein Bypass-Akteur.
+
+Vorbereitete serverseitige Maschinenbeweis-Einklinkung:
+- PR #160;
+- Head `947b56ad638c932a27cf66e77692914e83b09547`;
+- bindet History-Quelle, Paul-Quelle und vertrauenswürdigen Base-Runner per Git-Blob;
+- führt zuerst den Selbst-Mutanten-Beweis des Base-Runners und danach den gebundenen historischen Fall gegen den Kandidaten aus;
+- Kandidatenänderungen am Runner können den Beweis nicht selbst fälschen.
+
+PR #160 ist **noch nicht integriert**.
+Exakter Infrastrukturblocker:
+`IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`
+
+Ursache:
+`hardlock-base` sperrt `control/paul-scope-gate/` selbst als immutable Security-Pfad bereits vor Ausführung der neuen Gate-Logik.
+Das ist kein neuer TEXT-Produktionsblocker, sondern der aktuelle Wartungsblocker für die gewünschte Maschinenbeweis-Härtung.
 
 Der B02-Kandidat `562b71c7…` hatte vor Merge:
 - `hardlock` PASS;
