@@ -1,28 +1,66 @@
 # NOTFALL-TRESOR – GITHUB-WIEDERAUFBAU
 
-STAND: 2026-09-07
-STATUS: GITHUB-ONLY
+STAND: 2026-09-08
+STATUS: VERBINDLICH
 
-## Wiederaufbau
+## QUELLE A – LOKALE AKTUELLE SICHERUNG
 
-1. `GITHUB_KOMPLETTBACKUP_*.zip` entpacken.
-2. enthaltenes `GITHUB_KOMPLETTBACKUP.tar.gz` entpacken.
-3. Git-Bundle in ein neues leeres Repository spiegeln.
-4. `git fsck --full --strict` ausführen.
-5. Branches und Tags aus dem Manifest/Ref-Inventar prüfen.
-6. GitHub-Metadaten als Wiederaufbauquelle verwenden:
-   Issues/PRs/Releases/Labels/Milestones/Rulesets/Workflows usw.
-7. Release-Artefakte wieder anbinden.
-8. nicht exportierbare Secret-Werte aus ihrer separaten sicheren Recovery-Quelle neu setzen.
+Datei:
+`GITHUB_BACKUP_AKTUELL.zip`
 
-## PASS-GRENZE
+Wiederaufbau:
+1. ZIP entpacken.
+2. enthaltene Datei `repository/affiliate-pferdeportal.bundle` verwenden.
+3. Bundle in ein neues leeres Mirror-Repository klonen.
+4. `git fsck --full --strict`.
+5. gesicherte Refs gegen das Ref-Inventar prüfen.
+6. Campus `protocol/PROJECT_MEMORY/**` gegen das Campus-Manifest vergleichen.
 
-Git-Restore:
-`GITHUB_REPOSITORY_RESTORE_PASS`
+Der reale unabhängige Mac-Test dieses Weges hat am 2026-09-08
+`NOTFALL_WIEDERAUFBAU_PASS`
+geliefert.
 
-Vollständiger GitHub-Neuaufbau:
-erst nach realem Test eines leeren Zielrepositorys.
+## QUELLE B – AUTOMATISCHER EXTERNER TRESOR
+
+Aktueller Pointer:
+`/Campus-Tresor/LATEST_GITHUB_BACKUP.txt`
+
+Dort genannte datierte Tresordatei herunterladen.
+
+Bei der aktuellen Workflow-Struktur:
+1. äußere ZIP entpacken;
+2. enthaltenes `GITHUB_KOMPLETTBACKUP.tar.gz` entpacken;
+3. Git-Bundle verifizieren;
+4. Bundle in ein neues leeres Mirror-Repository klonen;
+5. `git fsck --full --strict`;
+6. Ref-Inventar und Manifest prüfen;
+7. exportierte GitHub-Metadaten und Release-Artefakte als Wiederaufbauquelle verwenden.
+
+Der automatische Tresorweg wurde am 2026-09-08 real bis
+`TRESOR_AUTO_BACKUP_REALTEST_PASS`
+geprüft.
+
+## GITHUB-METADATEN
+
+Gesicherte GitHub-Metadaten dienen als Rekonstruktionsquelle für:
+Issues/Kommentare/Events, Pull Requests/Reviews, Releases, Labels, Milestones, Rulesets, Workflows, Deployments usw., soweit GitHub sie exportierbar liefert.
+
+Ein vollständiger Neuaufbau all dieser Metadaten in einem leeren GitHub-Zielrepository wurde **noch nicht** end-to-end als 1:1-PASS nachgewiesen.
+
+Darum:
+Git-/Ref-/Campus-Restore = real PASS.
+`GITHUB_KOMPLETT_PASS` = weiterhin OFFEN.
+
+## PROVIDERGRENZE
+
+GitHub gibt Secret-Werte nicht zurück.
+Einzelne Admininformationen sind je nach Berechtigung nicht lesbar.
+Providerinterne IDs/Zeitstempel können bei Neuaufbau nicht garantiert identisch reproduziert werden.
+
+Diese Punkte dürfen niemals als 1:1-PASS behauptet werden.
 
 ## HARD RULE
 
-Das Backup ist READ/VERIFY/RESTORE ONLY und nie Arbeitsquelle.
+Backup/Tresor/Mirror = READ / VERIFY / RESTORE ONLY.
+
+Nach einem Restore zuerst einen frischen offiziellen Arbeits-Worktree außerhalb des Tresors herstellen und danach wieder den normalen Campus-/Projekt-Eingang verwenden.
