@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 34,
+  "generation": 35,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -149,11 +149,17 @@
       ]
     },
     "otto_awin_wp_cron_followup": {
-      "status": "LIVE_FAIL_NOT_ROOTCAUSED",
+      "status": "LIVE_TRANSPORT_OPEN",
       "advertiser_id": 14336,
-      "observed": "Automation enabled with WP-Cron-Fallback; after more than 10 minutes and a fresh page request the open products job still shows 500 products processed / queued.",
-      "next_test": "Run exactly one manual 'Nächstes Arbeitspaket verarbeiten' tick on the same open job and compare queue timestamp/message.",
-      "rule": "No source fix until manual-worker-vs-scheduler boundary is proven.",
+      "observed": "WP-Cron-Fallback was enabled, but no autonomous visible package advance occurred in the observed >10 minute window.",
+      "next_test": "Do not repeat manual package click. Inspect/runtime-bind the cron transport separately; manual worker progression is already proven.",
+      "checked_at": "2026-09-08"
+    },
+    "otto_awin_manual_batch_progress": {
+      "status": "PASS_ADVANCES_BUT_UI_AMBIGUOUS",
+      "advertiser_id": 14336,
+      "evidence": "User screenshot 2026-09-08 10:12: queue updated_at advanced from 07:16 to 08:12 after manual package; message remains '500 Produkte verarbeitet; Fortsetzung vorgemerkt.'",
+      "source_fact": "automation_process_awin_product_batch increments processed and ftell cursor; products stage persists cursor and cumulative details.products, but message reports only current batch size.",
       "checked_at": "2026-09-08"
     }
   },
@@ -409,7 +415,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "ISOLATE_OTTO_14336_MANUAL_WORKER_VS_WP_CRON_TRANSPORT",
+    "current_milestone": "FIX_AWIN_14336_PROGRESS_VISIBILITY_AND_ISOLATE_CRON_TRANSPORT",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
