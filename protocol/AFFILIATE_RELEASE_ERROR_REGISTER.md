@@ -296,7 +296,7 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** formal valides fachfremdes OTTO-Produkt wird vor `creative_library_upsert()` verworfen.
 **Regression:** Awin-Programme/Offers, andere Provider, Produktwissen-Exact-Match und bestehende manuelle Auswahl unverändert.
 
-**Status:** OPEN / LIVE DEFECT — weiteren OTTO-Vollfeed sofort stoppen; Rootfix vor Fortsetzung erforderlich.
+**Status:** FIXED_LOCAL / 6.72.6 — Source-Gate + alter-Job-Hardstop + lokaler Pre-Upsert-Relevanzguard + getrennte Zähler PASS; Live-Readback noch ausstehend.
 
 ---
 
@@ -304,11 +304,11 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt während dieses Scopes zurückgestellt.
 
-Für den nächsten Live-Schritt sind bindend:
-- `AFF-ERR-017`: 6.72.5 kumulativer Produktfortschritt LIVE PASS; nicht erneut öffnen.
+Bindend:
+- `AFF-ERR-017`: 6.72.5 kumulativer Fortschritt LIVE PASS; nicht erneut öffnen.
 - `AFF-ERR-018`: 6.72.5 WP-Cron-Fallback LIVE PASS; nicht erneut öffnen.
-- `AFF-ERR-019`: weiterer ungefilterter OTTO/Awin-14336-Vollfeed ist HARD BLOCKED. Quelle vor Import fachlich eingrenzen und lokale Pre-Upsert-Relevanzsperre erzwingen.
-- `AFF-ERR-006`: keine Mini-Fix-Kaskade; Quellenfilter + lokaler Guard + Zählertrennung als ein gebündelter Rootfix.
-- `AFF-ERR-001`: kein Gesamt-/Release-PASS aus lokalen Tests.
+- `AFF-ERR-019`: 6.72.6 Rootfix LOCAL PASS. OTTO-Vollfeed ist im neuen Kandidaten fail-closed; nur explizit gebundener `portal_filtered`-Awin-Create-a-Feed darf einen neuen OTTO-Produktlauf speisen; zusätzlich prüft der vorhandene Pferde-Atelier-Katalog jede Zeile vor Persistenz.
+- `AFF-ERR-006`: gebündelter Rootfix ist gebaut; keine weitere Microfix-Kaskade vor Live-Readback.
+- `AFF-ERR-001`: kein Gesamt-/Release-PASS.
 
-Nächster zulässiger Schritt: ausschließlich 6.72.6-Rootfix für AFF-ERR-019 fertigstellen und lokal positiv/negativ prüfen. Der bestehende alte 14336-Job muss nach Installation fail-closed abbrechen, solange kein bestätigter Awin-Create-a-Feed-`portal_filtered`-Scope gebunden ist. Kein weiterer Vollfeed-Fortschritt vorher.
+Nächster zulässiger Schritt: **6.72.6 installieren.** Danach darf der alte ungefilterte 14336-`products`-Job höchstens noch vom Worker erfasst werden und muss terminal mit `otto_product_feed_unfiltered` enden. Erst danach Awin Create-a-Feed fachlich filtern, URL an 14336 binden und `portal_filtered` bestätigen. Kein neuer OTTO-Lauf vorher.
