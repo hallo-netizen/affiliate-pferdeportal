@@ -1778,7 +1778,11 @@ NICHT GEÄNDERT:
 
 KANDIDAT:
 `hobbyroom/m28-handoff-request-current-main-20260908`
-Head `78263594456bb58ae004b5b064816de0f3531720`.
+Inhaltlicher M28-Head `78263594456bb58ae004b5b064816de0f3531720`.
+Nach Parserfix-Synchronisation technischer Test-Head:
+`26d7b5b53044729ab6350f88d16d4ac0f6cacd03`.
+
+Die vier M28-Dateiinhalte bleiben dabei unverändert; der neue Head übernimmt ausschließlich den inzwischen auf main integrierten Parserfix als zweite Elternlinie.
 
 STATUS:
 Statische Korridor- und Hashprüfung PASS.
@@ -1803,4 +1807,18 @@ Der Produktionskandidat darf erst bewertet werden, wenn das Kontrollsystem den a
 GRENZE:
 Security-Pfad bleibt immutable; regulärer PR-Weg blockiert den Fix absichtlich.
 Keine parallele Änderung am M28-Produktionskandidaten.
+
+## TEXT-TECH-20260908-M28-RETEST-SYNC – Kein zweiter Fix zwischen den Tests
+
+WAS:
+PR #161 wird für den Wiederholungstest ausschließlich mit current main `755b531e…` synchronisiert.
+
+Technischer Mergecommit:
+`26d7b5b53044729ab6350f88d16d4ac0f6cacd03`.
+
+WARUM:
+Der korrigierte Security-Parser aus PR #166 muss Teil des Kandidaten-Ausgangsstands sein, ohne die bereits gebauten vier M28-Dateien erneut zu verändern.
+
+HARD RULE:
+Die vier M28-Dateiblobs sind identisch zum ersten Test. Damit ist der nächste Lauf ein echter Wiederholungstest desselben Produktionsfixes, kein Fix auf einen fehlgeschlagenen Fix.
 
