@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 HERE=Path(__file__).resolve().parent
-REPO=HERE.parents[4]
+REPO=HERE.parents[3]
 P22=HERE/"p22_signed_normal_draft_integration.py"
 
 GOLDEN_BATCH="7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a"
