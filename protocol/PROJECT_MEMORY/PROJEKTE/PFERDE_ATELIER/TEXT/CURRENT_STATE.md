@@ -10,7 +10,7 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`914638e67a265cf2e8951b1177a7d80fdf904e98`
+`755b531ec08298a86cb0342c2db8c81f5b4df6f9`
 
 Letzter Merge:
 `Merge history machine-proof runner bootstrap`
@@ -232,4 +232,24 @@ GitHub-Test PR #166:
 - `PATH_GUARD_SELFTEST_PASS`.
 
 M28-Produktionskandidat PR #161 bleibt unverändert offen und **nicht bewertet**.
+
+### PR #166 integriert – Parserfix aktiv
+
+Security-PR #166 wurde kontrolliert gemergt.
+
+Neuer main:
+`755b531ec08298a86cb0342c2db8c81f5b4df6f9`.
+
+Verifiziert auf main:
+`_error_row_for_case()` nutzt jetzt korrekt
+`r"(?m)^\|\s*" + re.escape(case) + r"\s*\|.*$"`.
+
+Temporärer PR-only-Admin-Bypass ist nach dem Merge noch aktiv und muss wieder entfernt werden.
+
+Bis `bypass_actors: []` frisch bestätigt ist:
+- `FIX_FORBIDDEN`;
+- PR #161 nicht verändern;
+- kein Test/Merge/Realtest.
+
+Danach wird PR #161 ausschließlich technisch auf den neuen main synchronisiert; seine vier M28-Inhaltsänderungen bleiben unverändert.
 
