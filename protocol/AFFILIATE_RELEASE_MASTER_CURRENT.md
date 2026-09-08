@@ -4,7 +4,7 @@ Stand: 2026-09-08
 Branch: `affiliate-release-current`
 Workstream: `AFFILIATE_ZENTRALE`
 Governance: `PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4`
-Candidate: `6.72.6` / `WORKING` / `release_allowed=false`
+Candidate: `6.72.7` / `WORKING` / `release_allowed=false`
 
 ## Autoritative Quelle
 
@@ -15,16 +15,19 @@ Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/
 Aktueller Nutzer-Scope ist **OTTO / Awin Advertiser 14336**. Digistore24 bleibt während dieses Scopes zurückgestellt; ältere DS24-Abschnitte in diesem Dokument sind nur Kontext und **keine aktuelle NEXT ACTION**.
 
 Aktuelle belastbare Basis:
-- live installierter Ausgangsstand: 6.72.5; WP-Cron-Automatik und kumulative Anzeige LIVE PASS;
-- dabei entdeckter AFF-ERR-019: ungefilterter OTTO-Vollfeed persistierte formal gültige Produkte vor Pferde-Relevanzprüfung;
-- aktueller Source-/Testkandidat: **6.72.6**;
-- Source-Manifest: `75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d`;
-- 6.72.6-Testinstaller: 26/26 Manifest PASS, 21/21 PHP-Lint PASS, Positiv-/Negativ-Prefilter PASS, alter ungefilterter Job terminal-cleanup PASS und Installations-Autostop PASS;
-- gegenüber dem exakt belegten 6.72.5-Testinstaller exakt 4 Dateien geändert;
-- Testinstaller-SHA256: `f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e`;
-- **kein Live-PASS für 6.72.6**.
+- live installierter Ausgangsstand: **6.72.6**; Vollfeed-Autostop LIVE PASS, automatische Synchronisierung AUS;
+- der gestoppte historische Awin-14336-Fehl-Lauf weist 4500 zuvor importierte Produktzeilen aus;
+- aktueller Source-/Testkandidat: **6.72.7**;
+- 6.72.7 ergänzt ausschließlich den streng provenance-gebundenen Exact-run-Cleanup der Altimporte; 6.72.6-Filtered-Feed- und Pre-Upsert-Relevanzschutz bleiben aktiv;
+- Source-Manifest: `671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f`;
+- **vollständiger lokaler Ausgabe-Hardlock PASS:** 21/21 PHP-Lint, 26/26 Manifest, POSITIV, NEGATIV/fail-closed, kompletter OTTO/Awin-Gesamtworkflow, historische Regressionen, Fresh-Unpack, 26/26 Source↔ZIP-Byte-Identität;
+- Hobbyraum-`TASK.current.json` gegen den echten Runner-Vertrag validiert: PASS;
+- Testinstaller: `Affiliate-Zentrale_6.72.7_TEST.zip`;
+- Testinstaller-SHA256: `da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963`;
+- gegenüber 6.72.6 exakt drei Plugin-Dateien geändert: Automation-Trait funktional, Router nur Version, Readme Dokumentation;
+- **kein Release-/Live-PASS für den 6.72.7-Cleanup** vor WordPress-Readback.
 
-**NEXT ACTION:** Kein neuer OTTO-Lauf. 6.72.6-Autostop ist LIVE PASS. Zuerst die 4500 vom fehlgeschlagenen ungefilterten Awin-14336-Lauf importierten Altzeilen eindeutig über Provider/Partner/Run-Scope abgrenzen und bereinigen, ohne fremde/manuelle Daten anzutasten. Danach Awin Create-a-Feed fachlich filtern, URL an 14336 binden und `portal_filtered` bestätigen. Erst danach Automatisierung wieder aktivieren und neuen OTTO-Lauf starten.
+**NEXT ACTION:** exakt **6.72.7 TEST installieren**. Danach **keinen Lauf starten, kein Arbeitspaket verarbeiten und Automatisierung nicht einschalten**. Unter `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ausschließlich den Readback `OTTO-Sicherheitsbereinigung` prüfen. Erst wenn dieser Live-Readback den sicheren Exact-run-Cleanup bestätigt, darf der gefilterte Awin Create-a-Feed gebunden werden.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
@@ -149,17 +152,12 @@ Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_
 
 ## Aktuell autorisierter nächster Schritt
 
-**KEINE weitere Plugin-Ausgabe.** Kandidat 6.72.6 bleibt im Hobbyraum gebunden, bis der vollständige lokale Ausgabe-Hardlock bestanden ist.
+Der **6.72.7-Ausgabe-Hardlock ist vollständig lokal PASS**. Damit ist exakt ein TEST-Installer zur WordPress-Liveprüfung autorisiert.
 
-Vor einem neuen ZIP oder einer Nutzerinstallation zwingend in **einem Prüfblock**:
-1. PHP-Lint,
-2. POSITIV,
-3. NEGATIV/fail-closed,
-4. kompletter OTTO/Awin-14336-Gesamtworkflow,
-5. relevante Regressionen,
-6. Manifest-/Byte-Scope,
-7. Fehlerregister-Postcheck.
+Installieren:
+`WordPress-Dashboard → Plugins → Installieren → Plugin hochladen → Affiliate-Zentrale_6.72.7_TEST.zip → Jetzt installieren → aktuelle Version ersetzen`.
 
-Bei irgendeinem FAIL: **kein ZIP, keine neue Version, kein Nutzer-Livetest**. Derselbe Kandidat wird im Hobbyraum repariert und vollständig erneut geprüft.
+Danach:
+`WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung`.
 
-Erst nach Gesamt-PASS darf exakt **ein** Installationskandidat ausgegeben werden.
+**Nichts anklicken.** Ausschließlich `OTTO-Sicherheitsbereinigung` ablesen. Automatische Synchronisierung bleibt AUS. Kein neuer OTTO-Lauf vor bestätigtem Cleanup-Live-PASS.
