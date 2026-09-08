@@ -144,8 +144,7 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
     if data["STATUS"] == "FIX_ALLOWED_FOR_CODEX_TEST":
         proof_required = {
             "HISTORY_SOURCE_REF", "HISTORY_SOURCE_BLOB_SHA",
-            "HISTORY_PROOF_CASE", "HISTORY_PROOF_RUNNER_REF",
-            "HISTORY_PROOF_RUNNER_BLOB_SHA",
+            "HISTORY_PROOF_RUNNER_REF", "HISTORY_PROOF_RUNNER_BLOB_SHA",
             "PAUL_SOURCE_REF", "PAUL_SOURCE_BLOB_SHA",
         }
         proof_missing = sorted(proof_required.difference(data))
@@ -169,8 +168,6 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         ):
             if not re.fullmatch(r"[0-9a-fA-F]{40}", data[key]):
                 raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:" + key)
-        if not re.fullmatch(r"M[0-9]{2}", data["HISTORY_PROOF_CASE"]):
-            raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_PROOF_CASE")
     return data
 
 
@@ -216,12 +213,54 @@ def _blob_at(ref: str, path: str, label: str) -> str:
     return value.lower()
 
 
+def _history_ids_from_matrix(text: str) -> List[str]:
+    return sorted(set(re.findall(r"(?m)^M(\\d{2})\\s+[–-]", text)))
+
+
+def _history_ids_from_runner(text: str) -> List[str]:
+    pairs = re.findall(r'\\("M(\\d{2})",\\s*m\\d{2}\\)', text)
+    return sorted(set(pairs))
+
+
+def _run_history_runner(
+    runner_text: str,
+    *,
+    candidate: pathlib.Path,
+    label: str,
+) -> None:
+    with tempfile.NamedTemporaryFile(
+        "w", suffix=".py", encoding="utf-8", delete=False
+    ) as fh:
+        fh.write(runner_text)
+        runner_path = pathlib.Path(fh.name)
+    try:
+        env = dict(os.environ)
+        env["HOBBYROOM_TARGET_ROOT"] = str(candidate)
+        p = subprocess.run(
+            [sys.executable, str(runner_path)],
+            cwd=str(candidate),
+            env=env,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        output = (p.stdout + p.stderr).strip()
+        if p.returncode != 0 or '"status": "GESAMT PASS"' not in output:
+            raise Blocked(
+                f"HOBBYROOM_HISTORY_M01_M33_BLOCKED:{label}:" + output[-2200:]
+            )
+    finally:
+        runner_path.unlink(missing_ok=True)
+
+
 def enforce_history_machine_proof(
     data: Dict[str, str],
     *,
     head: str,
     pr_base: str,
     campus_head: str,
+    changed: List[str],
 ) -> None:
     bindings = (
         ("HISTORY_SOURCE", pr_base, data["HISTORY_SOURCE_REF"], data["HISTORY_SOURCE_BLOB_SHA"]),
@@ -235,49 +274,50 @@ def enforce_history_machine_proof(
                 f"HOBBYROOM_MACHINE_PROOF_SOURCE_STALE:{label}:EXPECTED={expected}:GOT={actual}"
             )
 
-    runner_text = show(pr_base, data["HISTORY_PROOF_RUNNER_REF"])
-    case = data["HISTORY_PROOF_CASE"]
+    history_ref = data["HISTORY_SOURCE_REF"]
+    runner_ref = data["HISTORY_PROOF_RUNNER_REF"]
+    expected_ids = [f"{i:02d}" for i in range(1, 34)]
+
+    base_matrix = show(pr_base, history_ref)
+    base_runner = show(pr_base, runner_ref)
+    if _history_ids_from_matrix(base_matrix) != expected_ids:
+        raise Blocked("HOBBYROOM_HISTORY_MATRIX_COVERAGE_INVALID:BASE")
+    if _history_ids_from_runner(base_runner) != expected_ids:
+        raise Blocked("HOBBYROOM_HISTORY_RUNNER_COVERAGE_INVALID:BASE")
+
+    authority_changes = [p for p in changed if p in {history_ref, runner_ref}]
+    other_changes = [p for p in changed if p not in {history_ref, runner_ref}]
+
     with tempfile.TemporaryDirectory(prefix="hobbyroom-history-proof-") as td:
-        root = pathlib.Path(td)
-        candidate = root / "candidate"
-        runner = root / "trusted_history_runner.py"
-        runner.write_text(runner_text, encoding="utf-8")
+        candidate = pathlib.Path(td) / "candidate"
         git("worktree", "add", "--detach", str(candidate), head)
         try:
-            env = dict(os.environ)
-            env["HOBBYROOM_TARGET_ROOT"] = str(candidate)
-            checks = (
-                (
-                    [sys.executable, str(runner), "--proof-selftest", case],
-                    f"HISTORY_MACHINE_PROOF_SELFTEST_PASS:{case}",
-                    "SELFTEST",
-                ),
-                (
-                    [sys.executable, str(runner), "--case", case],
-                    f"HISTORY_MACHINE_PROOF_PASS:{case}",
-                    "CANDIDATE",
-                ),
-            )
-            for command, token, phase in checks:
-                p = subprocess.run(
-                    command,
-                    cwd=str(candidate),
-                    env=env,
-                    text=True,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    check=False,
-                )
-                output = (p.stdout + p.stderr).strip()
-                if p.returncode != 0 or token not in output:
+            _run_history_runner(base_runner, candidate=candidate, label="TRUSTED_BASE")
+
+            if authority_changes:
+                if data["PLAN_PHASE"] != "HISTORY_AUTHORITY_MAINTENANCE":
+                    raise Blocked("HOBBYROOM_HISTORY_AUTHORITY_CHANGE_BLOCKED")
+                if other_changes:
                     raise Blocked(
-                        f"HOBBYROOM_MACHINE_PROOF_BLOCKED:{phase}:{case}:" +
-                        output[-1600:]
+                        "HOBBYROOM_HISTORY_MAINTENANCE_MIXED_WITH_PRODUCT_CHANGE:" +
+                        ",".join(sorted(other_changes))
                     )
+                candidate_matrix = (candidate / history_ref).read_text(encoding="utf-8")
+                candidate_runner = (candidate / runner_ref).read_text(encoding="utf-8")
+                if _history_ids_from_matrix(candidate_matrix) != expected_ids:
+                    raise Blocked("HOBBYROOM_HISTORY_MATRIX_COVERAGE_INVALID:CANDIDATE")
+                if _history_ids_from_runner(candidate_runner) != expected_ids:
+                    raise Blocked("HOBBYROOM_HISTORY_RUNNER_COVERAGE_INVALID:CANDIDATE")
+                _run_history_runner(
+                    candidate_runner,
+                    candidate=candidate,
+                    label="CANDIDATE_AUTHORITY",
+                )
         finally:
             git("worktree", "remove", "--force", str(candidate), check=False)
             git("worktree", "prune", check=False)
-    print(f"HOBBYROOM_MACHINE_PROOF_PASS:{case}")
+
+    print("HOBBYROOM_HISTORY_M01_M33_MACHINE_PROOF_PASS")
 
 
 def evaluate_work_lock_pr(
@@ -639,6 +679,7 @@ def verify_pr(branch: str, head: str, pr_base: str) -> None:
             head=head,
             pr_base=pr_base,
             campus_head=campus_head,
+            changed=changed,
         )
     try:
         hobbyroom, data = active_assignment(campus_head)
@@ -694,7 +735,6 @@ CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
 HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
 HISTORY_SOURCE_BLOB_SHA: 2222222222222222222222222222222222222222
-HISTORY_PROOF_CASE: M28
 HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
 HISTORY_PROOF_RUNNER_BLOB_SHA: 3333333333333333333333333333333333333333
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
