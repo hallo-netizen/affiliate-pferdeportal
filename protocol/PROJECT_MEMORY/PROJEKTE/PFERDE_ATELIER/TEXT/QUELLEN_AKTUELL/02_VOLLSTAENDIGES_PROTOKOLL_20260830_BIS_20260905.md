@@ -872,3 +872,21 @@ TEXT-Maschinenlock nicht mehr als Integrationsblocker.
 Bestehende normale Repository-Hardlocks bleiben aktiv.
 Nächster Fokus ist wieder ausschließlich PR #161 / M28 und danach Realtest.
 
+### PR #161 M28 gemergt
+
+PR #161 wurde nach normalem Repository-Schutzweg gemergt.
+
+Pre-Merge:
+- `hardlock`: PASS;
+- `hardlock-base`: PASS;
+- exakt vier M28-Dateien;
+- TEXT-Maschinenlock nicht anwendbar;
+- keine weitere Kontrollsystemänderung.
+
+Merge / neuer main:
+`78bb2576214a8c0a82d201ed35530ad9ac885481`.
+
+Ab hier:
+`REALTEST_ONLY`.
+Kein Fix während des echten 7/7-Laufs.
+
