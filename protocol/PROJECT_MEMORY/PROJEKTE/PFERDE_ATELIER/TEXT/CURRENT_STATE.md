@@ -105,21 +105,25 @@ Ruleset `Pferde Atelier Main Hardlock`:
 
 Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - PR #160;
-- Head `eb4b5da07d73443cb40ed74f27ded2c80ebf6ded`;
+- Head `3fd7d6fd27c8f2d5770f081abd44136aa5620b53`;
 - exakt eine Security-Datei: `control/paul-scope-gate/paul_scope_gate.py`;
-- bindet current main, RECOVERY_BASE_SHA, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, M01–M33-Matrix, vertrauenswürdigen Base-Runner, Änderungs-/Erklärungsregister und Hobbyraum-Standard;
-- M01–M33 müssen in Matrix, Runner und Fehlerquelle vollständig 33/33 vorhanden sein;
+- bindet current main, `RECOVERY_BASE_SHA`, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, fortlaufende historische Fehlermatrix, vertrauenswürdigen Base-Runner, Änderungs-/Erklärungsregister und Hobbyraum-Standard;
+- historische Fehler müssen ab M01 lückenlos sein; mindestens M01–M33 bleiben Pflicht;
+- Matrix, Runner und Fehlerquelle müssen dieselbe akzeptierte Historie tragen;
 - `ACTIVE_BLOCKER` muss in Fehlerquelle und CURRENT_STATE real vorhanden sein;
 - `MAIN_SHA` und letzter guter `RECOVERY_BASE_SHA` müssen in CURRENT_STATE real vorhanden sein;
-- Pauls zentrale technische Regeln werden nicht nur per Blob, sondern semantisch auf Vollständigkeit geprüft;
-- Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung müssen im Änderungsregister vorhanden sein;
-- der verbindliche Pre-Fix-Ablauf muss im Hobbyraum-Standard vollständig vorhanden sein;
-- kompletter vertrauenswürdiger M01–M33-Lauf läuft gegen jeden Produktionskandidaten;
+- Pauls zentrale technische Regeln werden semantisch geprüft;
+- Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung werden semantisch geprüft;
+- der verbindliche Pre-Fix-Ablauf wird semantisch geprüft;
+- kompletter vertrauenswürdiger historischer Runner läuft gegen jeden Produktionskandidaten;
 - Matrix/Runner-Wartung ist separat und darf nicht mit Produktionscode gemischt werden;
+- neue reale Fehler müssen vor jedem Fix zuerst als ausführbare Regression aufgenommen werden;
+- `HISTORY_EXPECTED_FAIL` zwingt den neuen/zu korrigierenden Regressionstest, auf dem noch unreparierten Stand exakt als erster Fehler FAIL zu liefern;
+- danach erst darf ein Produktionsfix entstehen und muss die gesamte erweiterte Historie PASS machen;
+- M34, M35, ... können dadurch ohne erneute Security-Gate-Änderung aufgenommen werden;
 - manuelle `CHECK_*`-Felder sind ausdrücklich keine Freigabeautorität;
-- Gate-Selbsttest enthält Negativfälle für fehlende Historien-, Paul-, Entscheidungs-, Standard- und Last-Good-Evidenz;
-- Kandidatenänderungen am Runner können den Beweis nicht selbst fälschen.
-
+- Gate-Arbeitslock-/Evidenz-Selbsttests laufen bei jedem serverseitigen `verify-pr` automatisch;
+- Kandidatenänderungen am Runner können den Produktionsbeweis nicht selbst fälschen.
 PR #160 ist **noch nicht integriert**.
 Exakter Infrastrukturblocker:
 `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`
