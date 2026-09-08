@@ -711,3 +711,29 @@ Kein Merge.
 Kein Realtest.
 Kein Publish / WordPress-Write.
 
+### Security-Parserfix PR #166 – Vorprüfung
+
+PR #166:
+`hobbyroom/security-fix-m28-row-parser-20260908`
+Head `a742c5c917b5e6fe164be2a6267470de89e9d744`.
+
+Diff:
+- ausschließlich `control/paul-scope-gate/paul_scope_gate.py`;
+- +1 / -1;
+- korrigiert ausschließlich `_error_row_for_case()` von doppelt escaptem auf echten Markdown-Zeilenregex.
+
+Lokale Positiv-/Negativprüfung PASS:
+- real M28 = 1;
+- wrong case = 0;
+- embedded fake = 0;
+- duplicate = 2 -> Block.
+
+GitHub:
+`hardlock-base` Run `34226241411`, Job `102060960182`.
+Immutable path guard blockiert erwartungsgemäß:
+`IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`.
+`PATH_GUARD_SELFTEST_PASS`.
+
+Keine M28-Produktionsdatei geändert.
+Keine Reparatur an PR #161.
+
