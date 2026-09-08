@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 43,
+  "generation": 44,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d",
+    "manifest_sha256": "671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,13 +35,13 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.6",
+    "version": "6.72.7",
     "status": "WORKING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d",
+    "current_source_manifest_sha256": "671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -125,8 +125,8 @@
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
-    "authorized_next_action": "INSTALL_6_72_6_VERIFY_AUTOSTOP_THEN_BIND_FILTERED_CREATE_A_FEED",
-    "bound_user_scope_action": "INSTALL_6_72_6; VERIFY_AUTOSTOP_OF_OLD_14336_JOB; THEN_BIND_FILTERED_CREATE_A_FEED",
+    "authorized_next_action": "INSTALL_6_72_7_VERIFY_EXACT_OTTO_LEGACY_CLEANUP",
+    "bound_user_scope_action": "INSTALL_6_72_7; NO_BUTTONS; READ_OTTO_SICHERHEITSBEREINIGUNG; KEEP_AUTOMATION_OFF",
     "completion_condition": "BOUND_CHECK_PASS_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
@@ -212,6 +212,41 @@
         "completed_run_imported": 4500,
         "screenshot_time": "2026-09-08 11:18 Europe/Berlin"
       }
+    },
+    "otto_awin_legacy_exact_cleanup": {
+      "status": "FULL_LOCAL_GATE_PASS_LIVE_RETEST_PENDING",
+      "advertiser_id": 14336,
+      "version": "6.72.7",
+      "defect": "6.72.5 legacy unfiltered OTTO run left exact-run product rows after 6.72.6 autostop.",
+      "contract": [
+        "Cleanup only provider=awin, partner_external_id=14336, source_kind=product.",
+        "Cleanup only exact failed unfiltered products job by run_uuid and creative_library.last_complete_run.",
+        "Run must be status=failed, operation=queued_partner_sync, updated=0, imported>0.",
+        "row_count greater than run.imported fails closed.",
+        "Output objects and target edges are cleaned only by exact creative identity_hash.",
+        "Materialized campaign/listing is deleted only when both provenance post-meta values match.",
+        "portal_filtered and foreign runs/providers/advertisers remain untouched.",
+        "Cleanup is idempotent and central automation remains disabled."
+      ],
+      "local_gate": {
+        "php_lint": "21_OF_21_PASS",
+        "source_manifest": "26_OF_26_PASS",
+        "fresh_unpack_manifest": "26_OF_26_PASS",
+        "source_zip_byte_identity": "26_OF_26_PASS",
+        "positive_cleanup": "PASS",
+        "negative_fail_closed": "PASS",
+        "filtered_feed_guard": "PASS",
+        "pre_persistence_relevance": "PASS",
+        "full_otto_awin_workflow": "PASS",
+        "historical_regressions": "PASS",
+        "hobbyroom_task_schema": "PASS"
+      },
+      "source_manifest_sha256": "671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f",
+      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6727_exact_run_cleanup_full_gate_20260908.txt",
+      "test_artifact_filename": "Affiliate-Zentrale_6.72.7_TEST.zip",
+      "test_artifact_sha256": "da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963",
+      "next_test": "Install 6.72.7. Press no run/package buttons. Read the OTTO-Sicherheitsbereinigung line on Affiliate-Zentrale > Steuerung & System > Automatisierung and verify the exact legacy cleanup result while automatic synchronization stays off.",
+      "checked_at": "2026-09-08"
     }
   },
   "branch_policy": {
@@ -479,6 +514,40 @@
         "old_job_cleanup": "PASS",
         "install_upgrade_autostop": "PASS"
       }
+    },
+    "otto_awin_6727_exact_run_cleanup": {
+      "status": "FULL_LOCAL_GATE_PASS_LIVE_RETEST_PENDING",
+      "advertiser_id": 14336,
+      "version": "6.72.7",
+      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6727_exact_run_cleanup_full_gate_20260908.txt",
+      "source_manifest_sha256": "671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f",
+      "test_artifact_filename": "Affiliate-Zentrale_6.72.7_TEST.zip",
+      "test_artifact_sha256": "da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963",
+      "package_checks": {
+        "php_lint": "21_OF_21_PASS",
+        "source_manifest": "26_OF_26_PASS",
+        "fresh_unpack": "PASS",
+        "fresh_unpack_manifest": "26_OF_26_PASS",
+        "source_zip_byte_identity": "26_OF_26_PASS",
+        "zip_integrity": "PASS",
+        "diff_scope": "EXACTLY_3_FILES"
+      },
+      "behavior_checks": {
+        "exact_failed_run_cleanup": "PASS",
+        "different_run_preserved": "PASS",
+        "different_advertiser_preserved": "PASS",
+        "portal_filtered_run_preserved": "PASS",
+        "updated_run_blocked": "PASS",
+        "row_count_mismatch_fail_closed": "PASS",
+        "idempotent_cleanup": "PASS",
+        "filtered_feed_required": "PASS",
+        "relevant_horse_product": "PASS",
+        "foreign_product_blocked": "PASS",
+        "toy_horse_blocked": "PASS",
+        "full_workflow": "PASS",
+        "historical_regressions": "PASS",
+        "hobbyroom_task_schema": "PASS"
+      }
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -506,7 +575,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "CLEANUP_OLD_OTTO_14336_IMPORTED_ROWS_THEN_BIND_FILTERED_AWIN_FEED",
+    "current_milestone": "INSTALL_6_72_7_VERIFY_EXACT_OTTO_LEGACY_CLEANUP",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
