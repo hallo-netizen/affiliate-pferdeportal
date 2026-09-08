@@ -4,7 +4,7 @@ Stand: 2026-09-08
 Branch: `affiliate-release-current`
 Workstream: `AFFILIATE_ZENTRALE`
 Governance: `PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4`
-Candidate: `6.72.7` / `WORKING` / `release_allowed=false`
+Candidate: `6.72.8` / `WORKING` / `release_allowed=false`
 
 ## Autoritative Quelle
 
@@ -15,19 +15,20 @@ Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/
 Aktueller Nutzer-Scope ist **OTTO / Awin Advertiser 14336**. Digistore24 bleibt während dieses Scopes zurückgestellt; ältere DS24-Abschnitte in diesem Dokument sind nur Kontext und **keine aktuelle NEXT ACTION**.
 
 Aktuelle belastbare Basis:
-- live installierter Ausgangsstand: **6.72.6**; Vollfeed-Autostop LIVE PASS, automatische Synchronisierung AUS;
-- der gestoppte historische Awin-14336-Fehl-Lauf weist 4500 zuvor importierte Produktzeilen aus;
-- aktueller Source-/Testkandidat: **6.72.7**;
-- 6.72.7 ergänzt ausschließlich den streng provenance-gebundenen Exact-run-Cleanup der Altimporte; 6.72.6-Filtered-Feed- und Pre-Upsert-Relevanzschutz bleiben aktiv;
-- Source-Manifest: `671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f`;
-- **vollständiger lokaler Ausgabe-Hardlock PASS:** 21/21 PHP-Lint, 26/26 Manifest, POSITIV, NEGATIV/fail-closed, kompletter OTTO/Awin-Gesamtworkflow, historische Regressionen, Fresh-Unpack, 26/26 Source↔ZIP-Byte-Identität;
-- Hobbyraum-`TASK.current.json` gegen den echten Runner-Vertrag validiert: PASS;
-- Testinstaller: `Affiliate-Zentrale_6.72.7_TEST.zip`;
-- Testinstaller-SHA256: `da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963`;
-- gegenüber 6.72.6 exakt drei Plugin-Dateien geändert: Automation-Trait funktional, Router nur Version, Readme Dokumentation;
-- **kein Release-/Live-PASS für den 6.72.7-Cleanup** vor WordPress-Readback.
+- live installierter Stand: **6.72.7**; angekündigter Cleanup-Readback blieb unsichtbar → LIVE FAIL / AFF-ERR-022;
+- 6.72.7-Papier-PASS ist ausdrücklich verworfen;
+- aktueller einziger Kandidat: **6.72.8**;
+- 6.72.8 korrigiert Cleanup-Provenienz + Sichtbarkeit, ohne Filter-/Output-/Automatikarchitektur zu erweitern;
+- tatsächlich ausgeführter lokaler Runtime-POSITIV-/NEGATIV-Test: PASS;
+- tatsächlich ausgeführter Awin-Filtered-Source-Gate POSITIV/NEGATIV-Test: PASS;
+- kompletter Workflow-Gegencheck: PASS;
+- PHP-Lint 21/21, Diff exakt 3 Dateien, Fresh-ZIP 26 Dateien, Source↔ZIP 26/26 byte-identisch: PASS;
+- Source-Manifest: `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`;
+- Testinstaller: `Affiliate-Zentrale_6.72.8_TEST.zip`;
+- Testinstaller-SHA256: `b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f`;
+- **kein Live-/Release-PASS** vor WordPress-Readback.
 
-**NEXT ACTION:** exakt **6.72.7 TEST installieren**. Danach **keinen Lauf starten, kein Arbeitspaket verarbeiten und Automatisierung nicht einschalten**. Unter `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ausschließlich den Readback `OTTO-Sicherheitsbereinigung` prüfen. Erst wenn dieser Live-Readback den sicheren Exact-run-Cleanup bestätigt, darf der gefilterte Awin Create-a-Feed gebunden werden.
+**NEXT ACTION:** exakt **6.72.8 TEST installieren**. Danach nichts starten/klicken. Unter `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ausschließlich den jetzt immer sichtbaren `OTTO-Sicherheitsbereinigung`-Status ablesen; Automatisierung bleibt AUS. Kein neuer OTTO-Lauf vor Auswertung.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
@@ -152,12 +153,8 @@ Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_
 
 ## Aktuell autorisierter nächster Schritt
 
-Der **6.72.7-Ausgabe-Hardlock ist vollständig lokal PASS**. Damit ist exakt ein TEST-Installer zur WordPress-Liveprüfung autorisiert.
+6.72.8 hat den tatsächlich ausgeführten lokalen Ausgabe-Hardlock bestanden. Exakt ein TEST-Installer ist autorisiert.
 
-Installieren:
-`WordPress-Dashboard → Plugins → Installieren → Plugin hochladen → Affiliate-Zentrale_6.72.7_TEST.zip → Jetzt installieren → aktuelle Version ersetzen`.
+Installieren: `Affiliate-Zentrale_6.72.8_TEST.zip`.
 
-Danach:
-`WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung`.
-
-**Nichts anklicken.** Ausschließlich `OTTO-Sicherheitsbereinigung` ablesen. Automatische Synchronisierung bleibt AUS. Kein neuer OTTO-Lauf vor bestätigtem Cleanup-Live-PASS.
+Danach keine Buttons drücken und Automatisierung nicht aktivieren. Nur den immer sichtbaren Status `OTTO-Sicherheitsbereinigung` ablesen.
