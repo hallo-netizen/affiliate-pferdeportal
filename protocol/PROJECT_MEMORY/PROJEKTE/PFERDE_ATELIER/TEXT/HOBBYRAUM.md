@@ -1,40 +1,49 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: REALTEST_ONLY
+STATUS: **BLOCKED – M35 ANALYSE**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
 Ziel:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
 
-Goldmaster:
-`de21f6cd35c60849c551fd82f78e75ce57c99fab`
-
-Aktueller main:
+Current main:
 `2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`
 
 Aktueller erster echter Blocker:
-`PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`
+`PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
 
-Fehlerursache:
-Der aktuelle `fachworkflow_proof_handoff.py` ist beim späteren Reapply auf ältere PR-#124-Semantik zurückgerutscht. Dadurch wurden bereits durch B01 beseitigte Alt-Guards wieder eingeführt und mehrere B01-Vertragsfelder/Output-Bindungen entfernt.
+Fehler-ID:
+`M35 – Fact-Pack source-hash binding parity`
 
-B02, B07/M32 und M28 sind im aktuellen Realtest überwunden.
+Letzte real erfolgreiche Stelle:
+- frischer `FACHWORKFLOW_HANDOFF_REQUEST.json` für Artikel 1;
+- gebundener `fachworkflow_handoff.command`;
+- echter PPM-6.7.9-Eingang;
+- Stop erst bei Fact-Pack-Quellhashbindung.
+
+Root Cause:
+**noch nicht belegt**.
+
+Kein Produktionskandidat aktiv.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
+
+Der frühere TEXT-Maschinenlock ist **eingefroren und keine aktuelle Reparaturautorität**.
+Normale GitHub-Schutzchecks bleiben verbindlich.
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
-MAIN_SHA: a61a380e948e15f2ed3ce5ddec41b128efbe7ae6
-ACTIVE_BLOCKER: FACHWORKFLOW_PROOF_HANDOFF_BLOCKED
-PLAN_PHASE: CONTROL_FROZEN_NOT_APPLICABLE_PRODUCTION_M28
+MAIN_SHA: 2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea
+ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH
+PLAN_PHASE: M35_PPM_INPUT_CONTRACT_ANALYSIS
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
-ACTIVE_HISTORY_CASE: M28
+ACTIVE_HISTORY_CASE: M35
 HISTORY_EXPECTED_FAIL: NONE
-RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
+RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
 CANDIDATE_BRANCH: NONE
 CANDIDATE_HEAD_SHA: NONE
 TECHNICAL_SCOPE_PREFIXES: NONE
@@ -44,7 +53,7 @@ CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
 CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PASS
+CHECK_POS_NEG: PENDING
 CHECK_INVARIANTS: PASS
 HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
 HISTORY_SOURCE_BLOB_SHA: 9f88203bf4f97c538acf75bdecf8051df1c6b3c2
@@ -53,64 +62,80 @@ HISTORY_PROOF_RUNNER_BLOB_SHA: f8f85aa515bdf7a05c7e54ff7bdc03f2605b4db8
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
-ERROR_SOURCE_BLOB_SHA: e263de9d684e16c5ca95185079cbad1dd02fb26c
+ERROR_SOURCE_BLOB_SHA: 6817cbcb403ebecd1527508a1f2f6d7476882399
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 4a1431e31eeb88caf6ffefed65fa236dcbab5006
+CURRENT_STATE_BLOB_SHA: 125bd683e155806e58c2016c7a9d4e1c35cf502e
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 623e6769ef7d5e77035f2956ae850e0758825e4a
+DECISION_SOURCE_BLOB_SHA: bc7fa6f1bfa06f1a9f52440480f7b69037184f8e
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
-STANDARD_SOURCE_BLOB_SHA: 62c723d1a147237050278f013c2a63d62f6d1115
+STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: d4551df2123d057d0ecfb586ee877470e5d2ce09
+PROTOCOL_SOURCE_BLOB_SHA: de22532cb980630e6f7d9aa5001ed3412d8831a2
 INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
-## EINGEFRORENER REPARATURALGORITHMUS
-
-1. Nur den ersten realen Blocker bearbeiten.
-2. Vor Kandidat: Paul-Prüfkarte, Fehlerhistorie, letzter funktionierender Stand, direkte Vor-/Nachstufe.
-3. Genau eine zwingende Änderung.
-4. Lokale Positiv-/Negativprüfung.
-5. Echter 7/7-Realtest.
-6. PASS bzw. erwartbares Weiterwandern → Zwischenstand einfrieren.
-7. Regression / früherer neuer Fehler / Hardlock-FAIL → Änderung vollständig zurück.
-8. Kein Fix auf einen fehlgeschlagenen Fix.
-9. Kein zweiter Kandidat parallel.
-
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Echter 7/7-Realtest auf M34-Korridorstand.**
+**Keine Reparatur. Erst den kompletten begrenzten PPM-Eingangsvertrag hart klären.**
 
-Current main:
-`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`
+Read-only prüfen:
 
-Ablauf:
-1. Dispatcher PR #107 exakt auf current main.
-2. Cloud Entry -> Preflight -> Runtime Entry -> Current Action.
-3. 7 Artikel frisch, keine alten Artefakte.
-4. Request-first Handoff -> realer PPM -> Submission.
-5. bis 107008 oder erstem realen BLOCKED.
-6. keine Reparatur während des Laufs.
-7. kein Auto-Publish / kein WordPress-Write.
+1. Welche Source-Refs und Source-Hashes erwartet der reale PPM-6.7.9-Vertrag exakt?
+2. Welche Source-Struktur/Hashes erzeugt der frische aktuelle `fact_pack` tatsächlich?
+3. Wie werden diese Werte im `FACHWORKFLOW_HANDOFF_REQUEST.json` weitergegeben?
+4. Stimmen Algorithmus, Normalisierung, Ref-Pfad und Hashgegenstand zwischen:
+   - aktuellem Fact-Pack;
+   - aktuellem Handoff;
+   - PPM-Paket;
+   - Production-Plan;
+   - letztem realen 7/7-Stand `d841ed…`;
+   - letztem 7/7+107008-Stand `de21f6…`
+   überein?
+5. Erst wenn die **eine kausale Abweichung** belegt ist: genau einen KISS-Kandidaten definieren.
 
-## VERBOTEN
+## VERBINDLICHER ARBEITSWEG
 
-- Konzeptwechsel;
-- Parallelreparatur;
-- Sammelfix;
-- prophylaktischer LanguageTool-/SEO-/Link-/Tabellen-/Design-/Security-Fix;
-- neuer Runner/Gate/Executor/Ersatzweg;
-- Publish oder WordPress-Write.
+- KISS;
+- großes Ganzes zuerst;
+- bei vermutetem Reapply-/Paritätsfehler den gesamten betroffenen Korridor einmal prüfen;
+- keine serielle Einzelflickerei;
+- keine alte Gesamtdatei blind reapplyen;
+- kein neuer Runner/Gate/Executor/Ersatzweg;
+- Produktions-PR erst nach belegter Ursache;
+- danach normale `hardlock` + `hardlock-base`;
+- erst nach Merge echter 7/7-Realtest;
+- im Realtest keine Reparatur.
+
+## NICHT ANFASSEN
+
+- SEO-Maschine / 5-Felder-Handoff;
+- Textmaschine;
+- Fachregeln;
+- Tabellen-/Linkregeln;
+- LanguageTool-Regeln;
+- PPM-/PSERC-/PSTE-Fachregeln;
+- Design;
+- Signier-/WordPress-Publish-Grenze;
+- Dispatcher PR #107 mergen;
+- Auto-Publish / WordPress-Write.
 
 ## AUTORITÄTEN
 
-Stand → `CURRENT_STATE.md`
+Stand:
+`CURRENT_STATE.md`
 
-Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative TEXT-Fehlerquelle
+Fehler:
+`protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative TEXT-Fehlerquelle
 
-Paul → `PAUL_PIPELINE_AUDIT_20260906.md`
+Protokoll:
+`QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md`
 
-Ziel → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+Paul:
+`PAUL_PIPELINE_AUDIT_20260906.md`
 
-Warum → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+Ziel:
+`protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → ZV-TEXT-001 → autoritativer Zielvertrag
+
+Warum:
+`protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
