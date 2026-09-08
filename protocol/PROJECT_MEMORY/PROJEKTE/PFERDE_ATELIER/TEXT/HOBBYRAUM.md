@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
+STATUS: FIX_FORBIDDEN
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -28,9 +28,9 @@ B02 und B07/M32 sind im aktuellen Realtest überwunden.
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
-MAIN_SHA: 2f3678aa495d40e5377881a6aa3655fb60e0c12e
+MAIN_SHA: 914638e67a265cf2e8951b1177a7d80fdf904e98
 ACTIVE_BLOCKER: FACHWORKFLOW_PROOF_HANDOFF_BLOCKED
-PLAN_PHASE: ONE_TIME_SECURITY_MAINTENANCE_PENDING
+PLAN_PHASE: SECURITY_BYPASS_REMOVAL_PENDING
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 ACTIVE_HISTORY_CASE: M28
 HISTORY_EXPECTED_FAIL: NONE
@@ -55,13 +55,13 @@ PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
 ERROR_SOURCE_BLOB_SHA: e263de9d684e16c5ca95185079cbad1dd02fb26c
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 69c2c9f82ec559e8b01f0b956ecb722391697b57
+CURRENT_STATE_BLOB_SHA: 91ac10700dd09a6190504756a4fb7362339da967
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 6a80019288acce7b7a82cd49a80459c1c0bab69c
+DECISION_SOURCE_BLOB_SHA: 0db37cb4c04f8f5849621cdbbdf0e1e79a8ad0d7
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: 62c723d1a147237050278f013c2a63d62f6d1115
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: 4ddc0b74c785cdf0f7c1a6a15af1da0eb9a6a1b4
+PROTOCOL_SOURCE_BLOB_SHA: 0f7acc31c3205b19ed4e3e81918fad4bb90101f3
 INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -80,54 +80,21 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Maschinenbeweis zuerst fertigstellen. Produktionsfix bleibt gesperrt.**
+**Temporären Ruleset-Bypass entfernen und serverseitig verifizieren.**
 
-Aktueller Fehlerfall: `ACTIVE_HISTORY_CASE = M28`. Vor einem Produktionsfix muss current main M28 exakt als ersten FAIL reproduzieren; derselbe vertrauenswürdige Runner muss danach den Kandidaten vollständig PASS prüfen.
+Aktueller main:
+`914638e67a265cf2e8951b1177a7d80fdf904e98`.
 
-Neue reale Fehler müssen zuerst als ausführbare Regression separat aufgenommen und auf dem unreparierten Stand exakt FAIL reproduziert werden. Erst danach ist ein Produktionsfix zulässig.
+PR #160 ist integriert; Maschinenbeweis ist auf main aktiv.
 
-Gebundene Evidenz: fortlaufende Fehlermatrix + vertrauenswürdiger Runner + autoritative Fehlerquelle + CURRENT_STATE + Paul-Prüfkarte + Änderungs-/Erklärungsregister + Hobbyraum-Standard + Ausführungs-/Testprotokoll. Diese Quellen werden per Git-Blob und zusätzlich semantisch geprüft.
+Bis `bypass_actors: []` frisch bestätigt ist:
+- `FIX_FORBIDDEN`;
+- kein M28-Kandidat;
+- kein technischer Merge;
+- kein Realtest.
 
-**Einmalige Security-Aktivierung von PR #160 vorbereiten/ausführen. Danach ausschließlich M28 reparieren. Kein weiterer Architekturumbau.**
-
-Letzter Produktions-Realtest auf main `30e933357dd9e5d3dde7cbd361c930b2a0c352c1`:
-- Cloud Entry PASS;
-- Production Preflight PASS;
-- Runtime Entry PASS;
-- Current Action READY;
-- Single Door READY;
-- echter `fachworkflow_proof_handoff.py materialize` wurde erreicht;
-- B07/M32 ist damit real überwunden;
-- neuer erster Blocker: `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`, weil die gebundene `FACHWORKFLOW_HANDOFF_REQUEST.json` fehlt.
-
-Maschinenbeweis-Bootstrap:
-- PR #159 ist gemergt;
-- current main `2f3678aa495d40e5377881a6aa3655fb60e0c12e`;
-- `HOBBYRAUM_M01_M33_REGRESSION.py` enthält jetzt korrigierte M26/M28/M31-Prüfungen;
-- M28 besitzt einen eigenen Negativ-Mutanten-Selbsttest und erkennt fehlende Request-Erzeugung, fehlendes Request-Schema und den widersprüchlichen Satz `kein Handoff-Request`.
-
-Serverseitige Einklinkung:
-- PR #160;
-- Head `a6f6240c05adb75883416440b4618a6ce428ecc6`;
-- exakt eine Datei: `control/paul-scope-gate/paul_scope_gate.py`;
-- bindet current main, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, M01–M33-Matrix und vertrauenswürdigen Base-Runner;
-- manuelle `CHECK_*`-Felder erzeugen keine Freigabe mehr;
-- kompletter vertrauenswürdiger M01–M33-Lauf muss gegen jeden Produktionskandidaten bestehen;
-- Matrix/Runner dürfen nicht mit Produktionscode gemischt werden;
-- Kandidat kann seinen eigenen Prüfer nicht selbst grünschreiben.
-
-Aktueller Infrastrukturblocker:
-`IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`
-
-Exakt:
-Der bestehende `hardlock-base` blockiert jede Änderung unter `control/paul-scope-gate/` bereits vor Ausführung des geänderten Gate-Codes. Das Repository-Ruleset verlangt zugleich `hardlock` + `hardlock-base` und hat keinen Bypass-Akteur.
-
-Nächste Prüfschwelle:
-1. genau einmal kontrollierten PR-only-Admin-Wartungsweg für PR #160 öffnen;
-2. exakt PR #160 / aktuellen gebundenen Head integrieren;
-3. Admin-Wartungsweg sofort wieder schließen;
-4. neuen Maschinenbeweis mit einem echten M28-Kandidaten verwenden;
-5. danach genau ein 7/7-Realtest; erster echter Blocker wird alleinige neue Arbeitswahrheit.
+Danach nächste technische Phase:
+M28 muss auf current main durch den vertrauenswürdigen Runner exakt als erster FAIL reproduziert werden; erst danach darf ein M28-Produktionskandidat gebaut werden.
 
 ## VERBOTEN
 
