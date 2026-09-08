@@ -57,6 +57,7 @@ $write=PPM679_Normal_Draft_Adapter::create_draft($prepared);
 $after_publish=count(PPM679_WP::get_all_post_inventory(array('publish')));
 $after_draft=count(PPM679_WP::get_all_post_inventory(array('draft')));
 $snapshot=!empty($write['ok'])?PPM679_WP::get_post_snapshot($write['post_id']):array();
+$readback=!empty($write['ok'])?PPM679_Normal_Draft_Readback_Validator::validate_batch(array($snapshot),array($prepared['expected']),1):array('ok'=>false);
 echo json_encode(array(
   'status'=>!empty($write['ok'])?'P22_SIGNED_PREPARED_DRAFT_WRITTEN':'P22_WRITE_BLOCKED',
   'write'=>$write,
@@ -65,10 +66,9 @@ echo json_encode(array(
   'before_draft'=>$before_draft,
   'after_draft'=>$after_draft,
   'snapshot_status'=>$snapshot['post_status']??null,
-  'snapshot_title'=>$snapshot['title']??null,
-  'snapshot_content'=>$snapshot['content']??null,
-  'snapshot_meta'=>$snapshot['meta']??null
-),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
+  'readback_ok'=>!empty($readback['ok']),
+  'readback'=>$readback
+),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\\n";
 '''
 
 def run_json(cmd, cwd):
