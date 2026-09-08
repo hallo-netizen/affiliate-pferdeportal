@@ -305,9 +305,10 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt während dieses Scopes zurückgestellt.
 
 Für den nächsten Live-Schritt sind bindend:
-- `AFF-ERR-017`: 6.72.5 kumulativer Produktfortschritt LIVE PASS (3500 gesamt / letztes Paket 500).
-- `AFF-ERR-018`: 6.72.5 WP-Cron-Fallback LIVE PASS; derselbe offene Awin-14336-Job lief ohne manuellen Paketknopf selbständig weiter.
-- `AFF-ERR-006`: keine weitere Mini-Fix-Kaskade. Erst 6.72.5 als gebündelten Rootfix live prüfen.
-- `AFF-ERR-001`: kein Gesamt-/Release-PASS aus dem lokalen Test.
+- `AFF-ERR-017`: 6.72.5 kumulativer Produktfortschritt LIVE PASS; nicht erneut öffnen.
+- `AFF-ERR-018`: 6.72.5 WP-Cron-Fallback LIVE PASS; nicht erneut öffnen.
+- `AFF-ERR-019`: weiterer ungefilterter OTTO/Awin-14336-Vollfeed ist HARD BLOCKED. Quelle vor Import fachlich eingrenzen und lokale Pre-Upsert-Relevanzsperre erzwingen.
+- `AFF-ERR-006`: keine Mini-Fix-Kaskade; Quellenfilter + lokaler Guard + Zählertrennung als ein gebündelter Rootfix.
+- `AFF-ERR-001`: kein Gesamt-/Release-PASS aus lokalen Tests.
 
-Bereits belegte 6.72.4-Pässe und die neuen 6.72.5-Pässe nicht erneut öffnen. Nächster zulässiger Schritt: denselben Awin-14336-Job automatisch bis zum Ende der Products-Stufe weiterlaufen lassen und erst beim Stufenwechsel/Fehler erneut eingreifen.
+Nächster zulässiger Schritt: ausschließlich 6.72.6-Rootfix für AFF-ERR-019 fertigstellen und lokal positiv/negativ prüfen. Der bestehende alte 14336-Job muss nach Installation fail-closed abbrechen, solange kein bestätigter Awin-Create-a-Feed-`portal_filtered`-Scope gebunden ist. Kein weiterer Vollfeed-Fortschritt vorher.
