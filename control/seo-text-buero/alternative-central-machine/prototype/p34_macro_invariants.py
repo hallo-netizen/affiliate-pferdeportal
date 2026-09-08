@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import json
 import subprocess
 import tempfile
 from pathlib import Path
@@ -56,7 +57,7 @@ def main():
         if hasattr(m,attr):
             raise RuntimeError("FREE_CONTROL_API_FOUND:"+attr)
 
-    print({
+    print(json.dumps({
         "status":"P34_MACRO_INVARIANTS_PASS",
         "large_signed_batch_items":1000,
         "architectural_batch_limit_found":False,
@@ -66,7 +67,7 @@ def main():
         "physical_infinity_claimed":False,
         "meaning":"ARBITRARY_FINITE_BATCH_SIZE_SUBJECT_ONLY_TO_REAL_RESOURCE_LIMITS",
         "publish_allowed":False,
-    })
+    },ensure_ascii=False,indent=2))
     return 0
 
 if __name__=="__main__":
