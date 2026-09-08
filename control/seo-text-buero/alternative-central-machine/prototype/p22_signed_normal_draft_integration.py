@@ -5,6 +5,7 @@ import copy
 import hashlib
 import json
 import subprocess
+import sys
 import tempfile
 import zipfile
 from pathlib import Path
@@ -87,7 +88,26 @@ def run_json(cmd, cwd):
             return obj
     raise RuntimeError("JSON_RESULT_NOT_FOUND:"+p.stdout[-3000:])
 
-def main():
+def _parse_args(argv:list[str]):
+    job_id="P22-JOB"
+    expected_item_id=None
+    i=0
+    while i<len(argv):
+        arg=argv[i]
+        if arg=="--job-id" and i+1<len(argv):
+            job_id=argv[i+1]; i+=2; continue
+        if arg=="--expected-item-id" and i+1<len(argv):
+            expected_item_id=argv[i+1]; i+=2; continue
+        raise RuntimeError("P22_ARGUMENT_INVALID")
+    if not isinstance(job_id,str) or not job_id:
+        raise RuntimeError("P22_JOB_ID_INVALID")
+    if expected_item_id is not None and (not isinstance(expected_item_id,str) or not expected_item_id):
+        raise RuntimeError("P22_EXPECTED_ITEM_ID_INVALID")
+    return job_id,expected_item_id
+
+
+def main(argv:list[str]|None=None):
+    job_id,expected_item_id=_parse_args(list(argv or []))
     with tempfile.TemporaryDirectory() as td:
         root=Path(td)
         ppm_out=root/"ppm"
@@ -108,6 +128,13 @@ def main():
         prepared=prep["prepared"]
         if not prepared.get("ok"):
             raise RuntimeError("PREPARED_NOT_OK")
+        prepared_item_id=str(prepared.get("plan_item_key") or "")
+        if not prepared_item_id:
+            raise RuntimeError("PREPARED_ITEM_ID_MISSING")
+        if expected_item_id is not None and prepared_item_id!=expected_item_id:
+            raise RuntimeError("BOUND_ITEM_ID_MISMATCH")
+        bound_item_id=expected_item_id or prepared_item_id
+
         fp=prepared.get("planned_write_fingerprint")
         payload_fp=(prepared.get("payload") or {}).get("meta",{}).get("_ppm679_planned_write_fingerprint")
         if not isinstance(fp,str) or len(fp)!=64 or fp!=payload_fp:
@@ -120,7 +147,7 @@ def main():
         subprocess.run(["openssl","genpkey","-algorithm","Ed25519","-out",str(private)],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         subprocess.run(["openssl","pkey","-in",str(private),"-pubout","-out",str(public)],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 
-        release=build_release("P22-JOB",str(prepared["plan_item_key"]),prepared)
+        release=build_release(job_id,bound_item_id,prepared)
         write_release(release_path,release)
         subprocess.run(["openssl","pkeyutl","-sign","-inkey",str(private),"-rawin","-in",str(release_path),"-out",str(signature)],
                        check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -128,6 +155,8 @@ def main():
         verified=verify_for_import(release_path,signature,public)
         if verified["status"]!="IMPORT_VERIFIED_NO_PUBLISH":
             raise RuntimeError("SIGNED_IMPORT_NOT_VERIFIED")
+        if verified["job_id"]!=job_id or verified["item_id"]!=bound_item_id:
+            raise RuntimeError("SIGNED_ITEM_IDENTITY_DRIFT")
 
         # The write input is materialized only from the verified signed release, never from an alternate object.
         raw=release_path.read_bytes()
@@ -177,6 +206,8 @@ def main():
 
         print(json.dumps({
             "status":"P22_SIGNED_NORMAL_DRAFT_BOUNDARY_PASS",
+            "job_id":job_id,
+            "item_id":bound_item_id,
             "prepare_no_write":True,
             "prepared_fingerprint_bound":True,
             "external_signature_verified":True,
@@ -191,4 +222,4 @@ def main():
     return 0
 
 if __name__=="__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(sys.argv[1:]))
