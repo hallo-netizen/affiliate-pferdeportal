@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-08
-STATUS: FROZEN REPAIR / B02 LIVE ÜBERWUNDEN / B07-M32 AKTUELLER REALBLOCKER
+STATUS: FROZEN REPAIR / B07-M32 MERGED / REALTEST PENDING
 
 ## AUTORITÄT
 
@@ -10,10 +10,15 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9`
+`30e933357dd9e5d3dde7cbd361c930b2a0c352c1`
 
-Merge:
-`Merge B02: bind current Codex as Fachworkflow worker`
+Letzter Merge:
+`Merge B07/M32: restore repository-bound PPM runtime paths`
+
+Vor Merge:
+- Kandidat `41849f01…`;
+- `hardlock` PASS;
+- `hardlock-base` PASS.
 
 ## EINGEFRORENER REPARATURWEG
 
@@ -31,9 +36,9 @@ Bewiesen:
 
 Die motorrelevanten Cloud-Entry-Dateien wurden im Wiederaufbau exakt auf diesen Stand zurückgeführt.
 
-## AKTUELLER REALTEST
+## LETZTER REALTEST
 
-Realtest auf current main `36d1ecb5…`:
+Letzter echter Realtest lief auf `36d1ecb5…`:
 
 PASS:
 - Cloud Entry;
@@ -46,14 +51,18 @@ B02:
 `BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
 ist im aktuellen Realtest **überwunden**.
 
-Erster echter aktueller Blocker:
+Erster echter Blocker dieses letzten Realtests:
 `BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`
 
 Konkret:
 Der gebundene `fachworkflow_handoff.command` exponiert die erforderlichen Runtime-Pfade für
 `PPM679_PACKAGE_ZIP` und `PSERC_FIX_ZIP` nicht.
 
-Nicht erreicht:
+Auf current main `30e93335…` wurde seit dem B07/M32-Merge noch **kein neuer Realtest** ausgeführt.
+
+Damit ist B07/M32 **noch nicht als real behoben bewiesen**.
+
+Nicht erreicht/belegt auf current main:
 - 107007 Abschluss;
 - 107008.
 
