@@ -104,3 +104,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p15_runtime_ai_dependency_audit.py
+
+      - name: P16 exact normal-draft path audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p16_normal_draft_path_audit.py
