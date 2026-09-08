@@ -35,27 +35,23 @@ Aktueller Pointer:
 
 ## REALER AUTOMATIK-TEST 2026-09-08
 
-Trigger-Commit:
-`25e4c462b2a93447a8ca3be68e6ae2942b4dd4b6`
+Finaler Trigger nach Campus-Korrektur:
+`dd8028b81e21f99f6fcbbbe3832d1501e2ecd450`
 
 Workflow Run:
-`34198674940`
+`34199171706`
 
 Ergebnis:
 `SUCCESS`
 
 Artifact:
-`10044960646`
+`10045146430`
 
-Exakte heruntergeladene Datei:
-`GITHUB_TRESOR_AUTO_2026-09-08_072023Z.zip`
+Exakte extern gespeicherte Datei:
+`/Campus-Tresor/GITHUB_TRESOR_AUTO_2026-09-08_FINAL_072615Z.zip`
 
 SHA-256:
-`0d8a7e06813e363784c46289ea92e2e43bab48251e1e892d08a39a6971e43b38`
-
-Zusätzlich extern unter
-`/Campus-Tresor/GITHUB_TRESOR_AUTO_2026-09-08_072023Z.zip`
-abgelegt.
+`9356b1eafc3af3c8c3c3630ecdff08787bd2e7c58033abf460370d69bf7a337a`
 
 Exakter Nachtest:
 - äußere Hashprüfung PASS;
@@ -63,7 +59,9 @@ Exakter Nachtest:
 - Git-Bundle verify PASS;
 - Mirror-Clone PASS;
 - `git fsck --full --strict` PASS;
-- Campus-Dateien auf aktuellem Campus-Branch: 133.
+- Campus-Dateien auf aktuellem Campus-Branch: 133;
+- externer Upload nach `/Campus-Tresor/` PASS;
+- Pointer `LATEST_GITHUB_BACKUP.txt` auf diesen Lauf aktualisiert.
 
 Ergebnis:
 `TRESOR_AUTO_BACKUP_REALTEST_PASS`
