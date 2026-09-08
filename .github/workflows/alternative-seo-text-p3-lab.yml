@@ -66,3 +66,10 @@ jobs:
           set -euo pipefail
           cd control/seo-text-buero/alternative-central-machine/prototype
           PYTHONDONTWRITEBYTECODE=1 python3 test_p7_release_boundary.py
+
+      - name: P10 signed job restart without intermediate checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd control/seo-text-buero/alternative-central-machine/prototype
+          PYTHONDONTWRITEBYTECODE=1 python3 test_p10_batch_resume.py
