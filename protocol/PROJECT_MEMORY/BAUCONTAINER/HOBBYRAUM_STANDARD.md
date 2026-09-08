@@ -183,6 +183,16 @@ CHECK_NEIGHBORS: PASS|PENDING|FAIL
 CHECK_REPEAT_CLASS: PASS|PENDING|FAIL
 CHECK_POS_NEG: PASS|PENDING|FAIL
 CHECK_INVARIANTS: PASS|PENDING|FAIL
+HISTORY_SOURCE_REF: <autoritative historische Fehlermatrix>
+HISTORY_SOURCE_BLOB_SHA: <Git-Blob der Matrix auf geprüftem main>
+HISTORY_PROOF_RUNNER_REF: <bestehender Regression-Runner>
+HISTORY_PROOF_RUNNER_BLOB_SHA: <Git-Blob des vertrauenswürdigen Base-Runners>
+PAUL_SOURCE_REF: <autoritative Paul-Prüfkarte>
+PAUL_SOURCE_BLOB_SHA: <Git-Blob der Paul-Prüfkarte auf offiziellem Campus>
+ERROR_SOURCE_REF: <autoritative Fach-Fehlerquelle>
+ERROR_SOURCE_BLOB_SHA: <Git-Blob der Fehlerquelle auf offiziellem Campus>
+CURRENT_STATE_REF: <zuständige CURRENT_STATE>
+CURRENT_STATE_BLOB_SHA: <Git-Blob der CURRENT_STATE auf offiziellem Campus>
 INTEGRATION_ALLOWED: true|false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -190,21 +200,33 @@ END_HOBBYROOM_WORK_LOCK_V1
 Harte Wirkung nach Aktivierung des bestehenden Security-Hardlocks:
 - technische PR außerhalb des gebundenen Hobbyraumscopes: nicht betroffen;
 - PR im gebundenen Scope bei `FIX_FORBIDDEN`: **BLOCK**;
-- PR bei fehlendem 7-Punkte-PASS: **BLOCK**;
-- falscher Branch: **BLOCK**;
-- falscher Kandidaten-Head: **BLOCK**;
+- falscher Branch / Head / Base: **BLOCK**;
 - stale `MAIN_SHA`: **BLOCK**;
 - Datei außerhalb `ALLOWED_PATH_PREFIXES`: **BLOCK**;
-- `INTEGRATION_ALLOWED=false`: **BLOCK**.
+- `INTEGRATION_ALLOWED=false`: **BLOCK**;
+- geänderte/stale autoritative Fehler-, Paul- oder CURRENT_STATE-Quelle: **BLOCK**;
+- `ACTIVE_BLOCKER` nicht in Fehlerquelle oder CURRENT_STATE: **BLOCK**;
+- kompletter vertrauenswürdiger M01–M33-Lauf vom PR-Base gegen Kandidat nicht GESAMT PASS: **BLOCK**;
+- Matrix/Runner zusammen mit Produktionscode geändert: **BLOCK**.
 
-Nur bei exakt gebundenem Kandidat und vollständigem PASS:
-`HOBBYROOM_WORK_LOCK_PR_PASS`.
+Die sieben `CHECK_*`-Felder bleiben höchstens Arbeitsnotizen.
+Sie erzeugen **keine Integrationsfreigabe** und dürfen einen fehlenden Maschinenbeweis niemals ersetzen.
+
+Wartung von Fehlermatrix oder Regression-Runner:
+- nur separat;
+- kein Produktionsfix im selben PR;
+- eigener Plan `HISTORY_AUTHORITY_MAINTENANCE`;
+- vollständige M01–M33-Abdeckung in Base und Kandidat;
+- vertrauenswürdiger Base-Runner und Kandidaten-Runner müssen die vorgeschriebene Prüfung bestehen.
+
+Nur bei exakt gebundenem Kandidat plus serverseitigem Maschinenbeweis:
+`HOBBYROOM_HISTORY_M01_M33_MACHINE_PROOF_PASS`.
 
 Der Lock enthält keine Fachregeln und trifft keine Fachentscheidung.
-Er ist ausschließlich ein dummer technischer Scope-/Status-/Hash-Wächter.
+Er bindet nur die aktuellen autoritativen Quellen, den realen Fortschritt und den technischen Kandidaten fail-closed.
 
 Damit bleibt:
-**HOBBYRAUM = einzige aktuelle Arbeitswahrheit; Hardlock = technische Durchsetzung.**
+**HOBBYRAUM = einzige aktuelle Arbeitswahrheit; Hardlock = technische Durchsetzung; Historie/Paul/Realstand = maschinell wiederverwendete Evidenz statt wiederholter Chat-Prüfung.**
 
 
 ## Verbindlicher Pre-Fix-Ablauf für technische Hobbyräume
