@@ -199,6 +199,8 @@ DECISION_SOURCE_REF: <AENDERUNGSREGISTER / dauerhafte WAS-WARUM-Quelle>
 DECISION_SOURCE_BLOB_SHA: <Git-Blob der Entscheidungsquelle auf offiziellem Campus>
 STANDARD_SOURCE_REF: <zuständiger Hobbyraum-Standard>
 STANDARD_SOURCE_BLOB_SHA: <Git-Blob des Standards auf offiziellem Campus>
+PROTOCOL_SOURCE_REF: <autoritative vollständige Ausführungs-/Testchronik>
+PROTOCOL_SOURCE_BLOB_SHA: <Git-Blob des Protokolls auf offiziellem Campus>
 INTEGRATION_ALLOWED: true|false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -211,6 +213,7 @@ Harte Wirkung nach Aktivierung des bestehenden Security-Hardlocks:
 - Datei außerhalb `ALLOWED_PATH_PREFIXES`: **BLOCK**;
 - `INTEGRATION_ALLOWED=false`: **BLOCK**;
 - geänderte/stale autoritative Fehler-, Paul- oder CURRENT_STATE-Quelle: **BLOCK**;
+- fehlendes oder stale Ausführungs-/Testprotokoll: **BLOCK**;
 - `ACTIVE_BLOCKER` nicht in Fehlerquelle oder CURRENT_STATE: **BLOCK**;
 - kompletter vertrauenswürdiger historische Regression-Lauf vom PR-Base gegen einen Produktionskandidaten nicht GESAMT PASS: **BLOCK**;
 - Lücke in der fortlaufenden Fehlerhistorie ab M01: **BLOCK**;
@@ -280,6 +283,7 @@ Der serverseitige Hardlock muss selbst belegen:
 - Pauls Kernregeln sind in der gebundenen Prüfkarte vorhanden: kein Sammelfix, historische Fehlerquelle gegenprüfen, bestehende Regression danach, echter 7/7-Lauf als Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik und Pre-/Post-Transformation;
 - das Änderungs-/Erklärungsregister enthält die eingefrorene Recovery-Regel, den kausalen Corridor und die Maschinenbeweis-Entscheidung;
 - der Hobbyraum-Standard enthält weiterhin vollständige Historienprüfung, letzten funktionierenden Stand, direkte Vor-/Nachstufe, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest;
+- das gebundene Ausführungs-/Testprotokoll enthält den aktuellen Realblocker, current main und `RECOVERY_BASE_SHA` sowie reale PASS-/FAIL-/Realtest-Ereignisse;
 - der vertrauenswürdige M01–M33-Runner vom PR-Base/main läuft vollständig gegen den Kandidaten;
 - Produktcode darf Matrix/Runner nicht im selben PR verändern.
 - Neue reale Fehler dürfen nicht direkt repariert werden, wenn sie noch nicht als ausführbare Regression existieren: zuerst separater `HISTORY_AUTHORITY_MAINTENANCE`-Lauf mit exakter FAIL-Reproduktion, danach erst Produktionsfix;
