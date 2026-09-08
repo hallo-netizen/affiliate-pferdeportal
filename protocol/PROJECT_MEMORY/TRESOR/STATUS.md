@@ -1,6 +1,6 @@
 # NOTFALL-TRESOR – STATUS
 
-STAND: 2026-09-07
+STAND: 2026-09-08
 
 ## AUFTRAG
 
@@ -9,88 +9,101 @@ STAND: 2026-09-07
 Repository:
 `hallo-netizen/affiliate-pferdeportal`
 
-WordPress, Website-Backup und Projektarchiv gehören nicht zu diesem Auftrag.
+Ziel:
+regelmäßig per Doppelklick einen frischen, restore-geprüften GitHub-Backupstand erzeugen.
 
-## AKTUELLER GEPRÜFTER SNAPSHOT
+## AKTUELLER NUTZERWEG
 
-GitHub Actions:
-- Workflow: `Campus GitHub Complete Backup`
-- Run: `34160894135`
-- Attempt: `2`
-- Ergebnis: `SUCCESS`
-- Artifact ID: `10032706209`
+Ein Werkzeug:
+`GITHUB_BACKUP_STARTEN.command`
 
-Download-Datei:
-`GITHUB_KOMPLETTBACKUP_2026-09-07_FINAL.zip`
+Nutzeraktion:
+**doppelklicken.**
 
-SHA-256:
-`b885d46a9ad7f9b521677da2cc4c0abcf6d9ecbf6356b83055fc18a6c1259a25`
+Ergebnis auf dem Mac:
+`Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`
 
-Erzeugt:
-`2026-09-07T20:58:14Z`
+Zusätzlich bleibt jeder datierte PASS-Stand erhalten.
 
-Point-in-time:
-- main: `67143a95ee98d6a7ce15167dfd8103ceee087f2d`
-- Campus-Branch im Paket: `52e2d49f63966fbc0e4ebc818c7ecc085637c2f1`
-- Branches: 292
-- Pull-Request-Refs: 174
-- Tags: 1
+## AKTUALITÄT – HARD GATE
 
-## REALER RESTORE-NACHTEST
+Vor dem Backup werden die aktuellen GitHub-Refs gebunden.
 
-Exakt die erzeugte Download-Datei wurde separat erneut geprüft:
+Nach Erstellung und Restore-Test werden die GitHub-Refs erneut gelesen.
 
-- äußerer SHA-256 → PASS;
-- TAR lesbar → PASS;
-- innerer SHA-256 → PASS;
-- Release-Artefakt-Hash → PASS;
-- Git-Bundle verify → PASS;
-- Mirror-Clone → PASS;
-- `git fsck --full --strict` → PASS.
+Wenn sich GitHub während des Laufs verändert hat:
+`BACKUP_FAIL:GITHUB_WAEHREND_BACKUP_GEAENDERT`
 
+Dann:
+- kein PASS;
+- `GITHUB_BACKUP_AKTUELL.zip` wird nicht ersetzt;
+- alter letzter gültiger Stand bleibt bestehen.
+
+Nur wenn Anfangs- und Endrefs identisch sind:
+`AKTUELLITAET_PASS`.
+
+## RESTORE – HARD GATE
+
+Vor PASS wird aus der **finalen ZIP-Datei selbst** wiederhergestellt und geprüft:
+
+- Git-Bundle verify;
+- Mirror-Clone;
+- `git fsck --full --strict`;
+- alle gesicherten Heads/Tags/Pull-Refs identisch;
+- Campus `protocol/PROJECT_MEMORY/**` per Pfad + Git-Blob-Hash identisch.
+
+PASS:
+`GITHUB_DATEIEN_CAMPUS_1ZU1_RESTORE_PASS`
+
+## REALER GITHUB-TEST 2026-09-08
+
+GitHub Actions Run:
+`34160894135`
+Attempt:
+`3`
 Ergebnis:
-`GITHUB_REPOSITORY_RESTORE_PASS`
+`SUCCESS`
 
-## EXTERNE KOPIE
+Frischer Snapshot:
+- Branches: 293;
+- main SHA: `36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9`;
+- Campus-Branch SHA: `abd5f78d71eae6f277714beb4569b12eee36a115`;
+- Campus-Dateien auf diesem Branch: 133.
 
-Zusätzlich außerhalb GitHubs abgelegt:
+Direkter GitHub-Abgleich nach dem Lauf:
+- Branchanzahl: 293 → identisch;
+- main SHA → identisch;
+- Campus SHA → identisch.
 
-`/Campus-Tresor/GITHUB_KOMPLETTBACKUP_2026-09-07_FINAL.zip`
+Restore aus dem erzeugten Bundle:
+- Hashprüfung PASS;
+- Bundle verify PASS;
+- Mirror-Clone PASS;
+- `git fsck --full --strict` PASS.
 
-Pointer:
-`/Campus-Tresor/LATEST_GITHUB_BACKUP.txt`
+## EXAKTER WERKZEUGTEST V2
+
+- Bash-Syntax PASS;
+- exakte finale ZIP erzeugt und wieder eingelesen PASS;
+- Git-Restore aus genau dieser ZIP PASS;
+- Campus byteidentisch PASS;
+- Negativtest: GitHub-Änderung während Backup → korrekt BLOCK;
+- bei Negativtest wurde keine `GITHUB_BACKUP_AKTUELL.zip` erzeugt/ersetzt.
+
+## GRENZE
+
+Für Git-Dateien, Historie, Branches, Tags, Pull-Refs und den im Repository liegenden Campus gilt der oben geprüfte 1:1-Restore.
+
+Nicht 1:1 aus GitHub exportierbar:
+- Secret-Werte;
+- einzelne providerinterne Admininformationen;
+- identische GitHub-interne IDs/Zeitstempel bei Neuaufbau.
+
+Diese Grenze darf nicht als Datei-/Campus-Restore-PASS ausgegeben werden.
 
 ## AUTOMATIK
 
-Wöchentlicher Lauf aktiv:
-**Sonntag 03:17 Uhr Europe/Berlin.**
+Keine separate ChatGPT-/WordPress-Automatik aktiv.
 
-Regel:
-Nur derselbe GitHub-only-Weg.
-Bei FAIL wird die letzte funktionierende externe Kopie nicht ersetzt.
-
-## NOCH OFFENE PROVIDERGRENZE
-
-Mit dem normalen GitHub-Actions-`GITHUB_TOKEN` nicht lesbar:
-- Actions Variables;
-- Actions Permissions;
-- Workflow Permissions;
-- Actions Secret-Namen;
-- Webhooks.
-
-Diese Endpunkte liefern HTTP 403.
-
-Aus den Workflowquellen ist der verwendete Secret-Name belegt:
-`ENDSTEMPEL_PRIVATE_KEY`
-
-GitHub gibt Secret-**Werte** nicht wieder heraus.
-
-Darum Gesamtstatus korrekt:
-`GITHUB_BACKUP_PREPASS`
-
-Nicht behauptet:
-`GITHUB_KOMPLETT_PASS`
-
-## HARD RULE
-
-Kein Rücksprung zu WordPress-/Website-/Projektarchiv-Backup.
+Der aktuelle KISS-Weg ist bewusst:
+**Doppelklick → frisches Backup → harte Aktualitäts- und Restore-Prüfung.**
