@@ -1822,3 +1822,25 @@ Der korrigierte Security-Parser aus PR #166 muss Teil des Kandidaten-Ausgangssta
 HARD RULE:
 Die vier M28-Dateiblobs sind identisch zum ersten Test. Damit ist der nächste Lauf ein echter Wiederholungstest desselben Produktionsfixes, kein Fix auf einen fehlgeschlagenen Fix.
 
+## TEXT-TECH-20260908-MACHINE-GATE-SHALLOW-ANCESTRY – Ahnenbeweis korrekt im CI herstellen
+
+WAS:
+Der Gate soll die bestehende harte Regel
+`RECOVERY_BASE_SHA muss realer Vorfahr von current main sein`
+beibehalten.
+
+FEHLER:
+Die Prüfung läuft im Hardlock auf einem `fetch-depth: 1` Checkout und kann deshalb einen realen Vorfahren fälschlich als Nicht-Vorfahren melden.
+
+BELEG:
+GitHub-Commitgraph bestätigt `de21f6…` als exakten Merge-Base von current main.
+
+KISS-FIX:
+Nur im Gate vor der Ahnenprüfung bei shallow Repository die für den Base-Commit erforderliche vollständige Historie nachladen; danach unverändert `git merge-base --is-ancestor`.
+
+NICHT:
+- Goldmaster ändern;
+- Ahnenregel entfernen;
+- Workflow umbauen;
+- M28-Produktionskandidat ändern.
+
