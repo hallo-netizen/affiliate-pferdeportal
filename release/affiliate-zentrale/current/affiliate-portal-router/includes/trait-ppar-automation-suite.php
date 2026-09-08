@@ -165,17 +165,147 @@ trait PPAR_Automation_Suite_Trait {
         return $stopped;
     }
 
+    private function automation_cleanup_legacy_unfiltered_otto_imports() {
+        $this->maybe_install_automation_schema();
+        if (method_exists($this, 'maybe_install_creative_library_schema')) {
+            $this->maybe_install_creative_library_schema();
+        }
+        if (method_exists($this, 'maybe_install_output_objects_schema')) {
+            $this->maybe_install_output_objects_schema();
+        }
+        global $wpdb;
+        $jobs_table = $this->automation_jobs_table();
+        $runs_table = $this->automation_runs_table();
+        $library_table = $this->creative_library_table();
+        $edges_table = $this->automation_edges_table();
+        $output_table = method_exists($this, 'output_objects_table') ? $this->output_objects_table() : '';
+        $partner_id = (string) absint(self::OTTO_AWIN_ADVERTISER_ID);
+        $jobs = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$jobs_table} WHERE provider='awin' AND partner_external_id=%s AND stage='products' AND status='failed' ORDER BY id ASC",
+            $partner_id
+        ), ARRAY_A);
+        $summary = array(
+            'status'=>'pass',
+            'matched_runs'=>0,
+            'cleaned_runs'=>0,
+            'deleted_products'=>0,
+            'deleted_edges'=>0,
+            'deleted_output_objects'=>0,
+            'deleted_campaigns'=>0,
+            'deleted_listings'=>0,
+            'blocked_runs'=>array(),
+            'checked_at'=>time(),
+        );
+        foreach ((array) $jobs as $job) {
+            if (!is_array($job)) { continue; }
+            $details = $this->automation_decode_job_json($job['details'] ?? '', array());
+            if (sanitize_key((string) ($details['feed_scope'] ?? '')) === 'portal_filtered') { continue; }
+            $message = (string) ($job['message'] ?? '');
+            if (strpos($message, 'Alter/ungefilterter OTTO-Vollfeed') === false) { continue; }
+            $run_uuid = substr(sanitize_text_field((string) ($job['run_uuid'] ?? '')), 0, 36);
+            if (!preg_match('/^[a-f0-9-]{36}$/i', $run_uuid)) {
+                $summary['blocked_runs'][] = 'invalid-run-uuid';
+                continue;
+            }
+            $summary['matched_runs']++;
+            $run = $wpdb->get_row($wpdb->prepare(
+                "SELECT * FROM {$runs_table} WHERE run_uuid=%s AND provider='awin' AND partner_external_id=%s LIMIT 1",
+                $run_uuid,
+                $partner_id
+            ), ARRAY_A);
+            if (!is_array($run)
+                || sanitize_key((string) ($run['status'] ?? '')) !== 'failed'
+                || sanitize_key((string) ($run['operation'] ?? '')) !== 'queued_partner_sync'
+                || absint($run['updated'] ?? 0) !== 0
+                || absint($run['imported'] ?? 0) <= 0) {
+                $summary['blocked_runs'][] = $run_uuid . ':run-provenance';
+                continue;
+            }
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$library_table} WHERE provider='awin' AND partner_external_id=%s AND source_kind='product' AND last_complete_run=%s ORDER BY id ASC",
+                $partner_id,
+                $run_uuid
+            ), ARRAY_A);
+            $row_count = count((array) $rows);
+            if ($row_count > absint($run['imported'])) {
+                $summary['blocked_runs'][] = $run_uuid . ':row-count-exceeds-imported';
+                continue;
+            }
+            foreach ((array) $rows as $row) {
+                if (!is_array($row)) { continue; }
+                $identity_hash = strtolower(sanitize_text_field((string) ($row['identity_hash'] ?? '')));
+                if (!preg_match('/^[a-f0-9]{64}$/', $identity_hash)) {
+                    $summary['blocked_runs'][] = $run_uuid . ':identity-invalid';
+                    continue 2;
+                }
+                if ($output_table !== '') {
+                    $objects = $wpdb->get_results($wpdb->prepare(
+                        "SELECT * FROM {$output_table} WHERE provider='awin' AND partner_external_id=%s AND creative_identity_hash=%s",
+                        $partner_id,
+                        $identity_hash
+                    ), ARRAY_A);
+                    foreach ((array) $objects as $object) {
+                        if (!is_array($object)) { continue; }
+                        if (method_exists($this, 'output_deactivate_materialized_object')) {
+                            $this->output_deactivate_materialized_object($object, 'Ungültiger OTTO-Vollfeed-Altimport wurde sicher bereinigt.');
+                        }
+                        $campaign_id = absint($object['campaign_post_id'] ?? 0);
+                        if ($campaign_id > 0 && function_exists('get_post_meta') && function_exists('wp_delete_post')) {
+                            $bound_hash = strtolower(sanitize_text_field((string) get_post_meta($campaign_id, '_ppar_creative_identity_hash', true)));
+                            $bound_key = sanitize_text_field((string) get_post_meta($campaign_id, '_ppar_output_object_key', true));
+                            if ($bound_hash === $identity_hash && $bound_key !== '' && hash_equals($bound_key, (string) ($object['object_key'] ?? ''))) {
+                                if (wp_delete_post($campaign_id, true)) { $summary['deleted_campaigns']++; }
+                            }
+                        }
+                        $listing_id = absint($object['listing_post_id'] ?? 0);
+                        if ($listing_id > 0 && function_exists('get_post_meta') && function_exists('wp_delete_post')) {
+                            $bound_hash = strtolower(sanitize_text_field((string) get_post_meta($listing_id, '_ppar_creative_identity_hash', true)));
+                            $bound_key = sanitize_text_field((string) get_post_meta($listing_id, '_ppar_output_object_key', true));
+                            if ($bound_hash === $identity_hash && $bound_key !== '' && hash_equals($bound_key, (string) ($object['object_key'] ?? ''))) {
+                                if (wp_delete_post($listing_id, true)) { $summary['deleted_listings']++; }
+                            }
+                        }
+                        if ($wpdb->delete($output_table, array('id'=>absint($object['id']))) !== false) {
+                            $summary['deleted_output_objects']++;
+                        }
+                    }
+                }
+                $edge_deleted = $wpdb->query($wpdb->prepare(
+                    "DELETE FROM {$edges_table} WHERE provider='awin' AND partner_external_id=%s AND asset_identity_hash=%s",
+                    $partner_id,
+                    $identity_hash
+                ));
+                if ($edge_deleted !== false) { $summary['deleted_edges'] += absint($edge_deleted); }
+                if ($wpdb->delete($library_table, array(
+                    'id'=>absint($row['id']),
+                    'provider'=>'awin',
+                    'partner_external_id'=>$partner_id,
+                    'source_kind'=>'product',
+                    'last_complete_run'=>$run_uuid,
+                )) !== false) {
+                    $summary['deleted_products']++;
+                }
+            }
+            $summary['cleaned_runs']++;
+        }
+        if ($summary['blocked_runs']) {
+            $summary['status'] = 'blocked';
+        }
+        update_option('ppar_otto_legacy_cleanup_v6727', $summary, false);
+        return $summary;
+    }
+
     public function maybe_apply_automation_safety_upgrade() {
-        $target = '4.1.1';
+        $target = '4.1.2';
         if ((string) get_option(self::OPTION_AUTOMATION_SAFETY_VERSION, '') === $target) {
             return;
         }
         $stopped_unfiltered_otto = $this->automation_stop_legacy_unfiltered_otto_jobs();
+        $cleanup = $this->automation_cleanup_legacy_unfiltered_otto_imports();
         $settings = $this->automation_settings();
-        if ($stopped_unfiltered_otto > 0) {
+        if ($stopped_unfiltered_otto > 0 || absint($cleanup['matched_runs'] ?? 0) > 0) {
             $settings['enabled'] = false;
             $settings['executor'] = 'server_cron';
-            update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
             update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
             if (function_exists('wp_clear_scheduled_hook')) {
                 wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
@@ -2490,6 +2620,8 @@ trait PPAR_Automation_Suite_Trait {
         $message = rawurldecode((string) ($_GET['ppar_message'] ?? ''));
         $counts = $this->creative_library_count_rows();
         $automation_settings = $this->automation_settings();
+        $otto_cleanup = get_option('ppar_otto_legacy_cleanup_v6727', array());
+        $otto_cleanup = is_array($otto_cleanup) ? $otto_cleanup : array();
         $jobs = $this->automation_recent_jobs();
         $runs = $this->automation_recent_runs();
         $adcell_settings = $this->network_settings('adcell');
@@ -2528,6 +2660,7 @@ trait PPAR_Automation_Suite_Trait {
         <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:18px"><h2>2. Auswahl vorbereiten</h2><p>Es entstehen ausschließlich inaktive Kampagnen zur Vorschau.</p>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_materialize"><?php wp_nonce_field('ppar_automation_materialize','ppar_materialize_nonce'); ?><?php submit_button('Ausgewählte Creatives portalübergreifend als Entwürfe planen','primary'); ?></form></section>
         <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:18px"><h2>Automatische Aktualisierung</h2>
+        <?php if (!empty($otto_cleanup['matched_runs'])) : ?><p><strong>OTTO-Sicherheitsbereinigung:</strong> <?php echo esc_html((string) ($otto_cleanup['status'] ?? '')); ?> · <?php echo absint($otto_cleanup['deleted_products'] ?? 0); ?> Altprodukte · <?php echo absint($otto_cleanup['deleted_output_objects'] ?? 0); ?> Ausgabeobjekte · <?php echo absint($otto_cleanup['deleted_edges'] ?? 0); ?> Zielkanten entfernt.</p><?php endif; ?>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_save_settings"><?php wp_nonce_field('ppar_automation_save_settings','ppar_automation_settings_nonce'); ?>
         <p><label><input type="checkbox" name="ppar_automation[enabled]" value="1" <?php checked(!empty($automation_settings['enabled'])); ?>> automatische Synchronisierung aktiv</label></p>
         <p><label>Ausführung <select name="ppar_automation[executor]"><option value="server_cron" <?php selected($automation_settings['executor'],'server_cron'); ?>>Server-Cron / WP-CLI</option><option value="wp_cron" <?php selected($automation_settings['executor'],'wp_cron'); ?>>WP-Cron-Fallback</option></select></label> <label style="margin-left:18px">Rhythmus <select name="ppar_automation[schedule]"><option value="daily" <?php selected($automation_settings['schedule'],'daily'); ?>>täglich</option><option value="twicedaily" <?php selected($automation_settings['schedule'],'twicedaily'); ?>>alle 12 Stunden</option></select></label></p>
