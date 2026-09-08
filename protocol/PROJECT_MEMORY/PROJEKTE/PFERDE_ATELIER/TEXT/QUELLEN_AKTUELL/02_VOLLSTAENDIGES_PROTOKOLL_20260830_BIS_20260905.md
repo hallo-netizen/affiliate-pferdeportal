@@ -605,3 +605,31 @@ Das Ausführungsprotokoll ist nun selbst Bestandteil der gebundenen Evidenz: vor
 PR #160 ist vorbereitet, aber noch nicht auf main aktiviert.
 M28-Produktionsfix bleibt bis zur Aktivierung gesperrt.
 
+### PR #160 integriert – Maschinenbeweis aktiv
+
+PR #160 wurde kontrolliert über den temporären Ruleset-Wartungsweg gemergt.
+
+Exakter Security-Head:
+`a6f6240c05adb75883416440b4618a6ce428ecc6`.
+
+Merge / neuer main:
+`914638e67a265cf2e8951b1177a7d80fdf904e98`.
+
+Verifiziert auf main:
+- exakt `control/paul-scope-gate/paul_scope_gate.py`;
+- `ACTIVE_HISTORY_CASE`;
+- `HISTORY_EXPECTED_FAIL`;
+- Protokollbindung;
+- current-main-Vorher-FAIL;
+- Kandidaten-Nachher-PASS;
+- Recovery-Ancestor-Prüfung;
+- dynamische M34+-Historie;
+- Gate-Selbsttests.
+
+Keine Produktionsreparatur parallel.
+
+Sicherheitsgrenze:
+Der temporäre Ruleset-Bypass `Repository admin / pull requests only` ist nach dem Merge noch aktiv.
+Bis zu seiner bestätigten Entfernung:
+`FIX_FORBIDDEN`.
+
