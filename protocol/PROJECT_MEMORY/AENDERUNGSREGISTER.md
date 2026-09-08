@@ -1910,3 +1910,18 @@ Vor nächstem Produktions-PR wird der gesamte begrenzte Handoff von Request-Eing
 ZIEL:
 Ein konsistenter Handoff-Stand statt serieller Wiederentdeckung bereits bekannter Altfehler.
 
+## TEXT-TECH-20260908-M34-ONE-FILE-CORRIDOR – Bewiesenen Handoff als Einheit wiederherstellen
+
+WAS:
+Nicht einzelne Guards korrigieren, sondern ausschließlich die regressierte Handoff-Datei als konsistente, bereits bewiesene B01-Einheit wiederherstellen.
+
+WARUM:
+Der Vollvergleich zeigte mehrere voneinander abhängige Rückschritte. Ein Canonical-Einzelfix hätte mindestens zwei sichere Folgeblocker stehen gelassen.
+
+KANDIDAT:
+`5e7ebadd991ae5b43de74f95bc232a4fa42b3b23`
+eine Datei, exakter B01-Blob.
+
+GRENZE:
+Keine neue Architektur und keine Fach-/Text-/SEO-/PPM-/PSERC-/PSTE-/Publish-Regel.
+
