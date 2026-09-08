@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_ALLOWED_FOR_CODEX_TEST
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -26,25 +26,25 @@ B02 ist im aktuellen Realtest überwunden.
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9
 ACTIVE_BLOCKER: BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND
-PLAN_PHASE: B07_M32_ANALYZE_ONLY
+PLAN_PHASE: B07_M32_CANDIDATE_BOUND_FOR_HARDLOCK
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/b07-m32-runtime-package-repo-paths-20260908
+CANDIDATE_HEAD_SHA: 41849f012a381bd0ee0a362b788ea772ed03d382
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
-CHECK_PAUL: PENDING
-CHECK_HISTORY: PENDING
-CHECK_LAST_GOOD: PENDING
-CHECK_NEIGHBORS: PENDING
+ALLOWED_PATH_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py
+CHECK_PAUL: PASS
+CHECK_HISTORY: PASS
+CHECK_LAST_GOOD: PASS
+CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PENDING
-CHECK_INVARIANTS: PENDING
-INTEGRATION_ALLOWED: false
+CHECK_POS_NEG: PASS
+CHECK_INVARIANTS: PASS
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -62,15 +62,18 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Nur B07/M32 analysieren. Noch keinen Fix bauen.**
+**Nur den exakt gebundenen B07/M32-Kandidaten prüfen. Kein weiterer Fix.**
 
-Konkret zu klären:
-- wo der historisch funktionierende reale PPM-6.7.9-/PSERC-Runtime-Pfad gebunden war;
-- warum der aktuelle `fachworkflow_handoff.command` `PPM679_PACKAGE_ZIP` und `PSERC_FIX_ZIP` nicht exponiert;
-- Paul-Punkte für genau diesen Korridor;
-- letzter funktionierender Stand und direkte Vor-/Nachstufe.
+Gebundener Kandidat:
+- Branch `hobbyroom/b07-m32-runtime-package-repo-paths-20260908`;
+- Head `41849f012a381bd0ee0a362b788ea772ed03d382`;
+- einzige erlaubte Datei `control/startmaster0107/fachworkflow_proof_handoff.py`.
 
-Erst wenn alle Pflichtchecks PASS sind, darf genau ein Kandidat gebunden werden.
+Nächste Prüfschwelle:
+1. `hardlock` + `hardlock-base` auf genau diesem Head müssen PASS sein;
+2. erst dann Merge;
+3. danach exakt derselbe echte 7/7-Realtest;
+4. beim ersten echten Blocker STOP, keine Reparatur im laufenden Test.
 
 ## VERBOTEN
 
