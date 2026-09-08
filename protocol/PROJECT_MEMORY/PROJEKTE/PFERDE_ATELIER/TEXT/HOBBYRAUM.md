@@ -54,11 +54,13 @@ PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
 ERROR_SOURCE_BLOB_SHA: e263de9d684e16c5ca95185079cbad1dd02fb26c
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 203d30c28d37708d9f75ef42519ae851d65301b3
+CURRENT_STATE_BLOB_SHA: 95d56907f2578554f7857191ee1395a39fcdeecb
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 572cb8d70a3365b48d95bf7c870cfa6fe329dc80
+DECISION_SOURCE_BLOB_SHA: 27ef5bf5b3c00c36432d93e369e044d41a88aa02
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
-STANDARD_SOURCE_BLOB_SHA: 910582ec4f834b4dc6f28351770965cadc36d5f7
+STANDARD_SOURCE_BLOB_SHA: 290fd2af5dd82050c4b44deda50959e48f4bc0a8
+PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
+PROTOCOL_SOURCE_BLOB_SHA: 0bfb8026b6cf1e3dfca18ab8efc143285c46b5a4
 INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -81,7 +83,7 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 Neue reale Fehler müssen zuerst als ausführbare Regression separat aufgenommen und auf dem unreparierten Stand exakt FAIL reproduziert werden. Erst danach ist ein Produktionsfix zulässig.
 
-Gebundene Evidenz: M01–M33-Matrix + vertrauenswürdiger Runner + autoritative Fehlerquelle + CURRENT_STATE + Paul-Prüfkarte + Änderungs-/Erklärungsregister + Hobbyraum-Standard. Diese Quellen werden per Git-Blob und zusätzlich semantisch geprüft.
+Gebundene Evidenz: fortlaufende Fehlermatrix + vertrauenswürdiger Runner + autoritative Fehlerquelle + CURRENT_STATE + Paul-Prüfkarte + Änderungs-/Erklärungsregister + Hobbyraum-Standard + Ausführungs-/Testprotokoll. Diese Quellen werden per Git-Blob und zusätzlich semantisch geprüft.
 
 **Einmalige Security-Aktivierung von PR #160 vorbereiten/ausführen. Danach ausschließlich M28 reparieren. Kein weiterer Architekturumbau.**
 
@@ -103,7 +105,7 @@ Maschinenbeweis-Bootstrap:
 
 Serverseitige Einklinkung:
 - PR #160;
-- Head `3fd7d6fd27c8f2d5770f081abd44136aa5620b53`;
+- Head `3059c907be76477e44e2396430551c4bec35feb6`;
 - exakt eine Datei: `control/paul-scope-gate/paul_scope_gate.py`;
 - bindet current main, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, M01–M33-Matrix und vertrauenswürdigen Base-Runner;
 - manuelle `CHECK_*`-Felder erzeugen keine Freigabe mehr;
