@@ -122,3 +122,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p18_normal_draft_callgraph.py
+
+      - name: P19 discover existing no-write normal-draft path
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p19_no_write_path_discovery.py
