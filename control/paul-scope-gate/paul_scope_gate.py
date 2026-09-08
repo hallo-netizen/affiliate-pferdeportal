@@ -131,7 +131,7 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         data[key] = value
     required = {
         "STATUS", "OFFICE", "MAIN_SHA", "ACTIVE_BLOCKER", "PLAN_PHASE",
-        "CANDIDATE_BRANCH", "CANDIDATE_HEAD_SHA", "TECHNICAL_SCOPE_PREFIXES",
+        "RECOVERY_BASE_SHA", "CANDIDATE_BRANCH", "CANDIDATE_HEAD_SHA", "TECHNICAL_SCOPE_PREFIXES",
         "ALLOWED_PATH_PREFIXES", "CHECK_PAUL", "CHECK_HISTORY",
         "CHECK_LAST_GOOD", "CHECK_NEIGHBORS", "CHECK_REPEAT_CLASS",
         "CHECK_POS_NEG", "CHECK_INVARIANTS", "INTEGRATION_ALLOWED",
@@ -141,6 +141,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:MISSING:" + ",".join(missing))
     if not re.fullmatch(r"[0-9a-fA-F]{40}", data["MAIN_SHA"]):
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:MAIN_SHA")
+    if not re.fullmatch(r"[0-9a-fA-F]{40}", data["RECOVERY_BASE_SHA"]):
+        raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:RECOVERY_BASE_SHA")
     if data["STATUS"] == "FIX_ALLOWED_FOR_CODEX_TEST":
         proof_required = {
             "HISTORY_SOURCE_REF", "HISTORY_SOURCE_BLOB_SHA",
@@ -148,6 +150,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
             "PAUL_SOURCE_REF", "PAUL_SOURCE_BLOB_SHA",
             "ERROR_SOURCE_REF", "ERROR_SOURCE_BLOB_SHA",
             "CURRENT_STATE_REF", "CURRENT_STATE_BLOB_SHA",
+            "DECISION_SOURCE_REF", "DECISION_SOURCE_BLOB_SHA",
+            "STANDARD_SOURCE_REF", "STANDARD_SOURCE_BLOB_SHA",
         }
         proof_missing = sorted(proof_required.difference(data))
         if proof_missing:
@@ -157,7 +161,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
             )
         for key in (
             "HISTORY_SOURCE_REF", "HISTORY_PROOF_RUNNER_REF", "PAUL_SOURCE_REF",
-            "ERROR_SOURCE_REF", "CURRENT_STATE_REF",
+            "ERROR_SOURCE_REF", "CURRENT_STATE_REF", "DECISION_SOURCE_REF",
+            "STANDARD_SOURCE_REF",
         ):
             value = data[key]
             if (
@@ -172,6 +177,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
             "PAUL_SOURCE_BLOB_SHA",
             "ERROR_SOURCE_BLOB_SHA",
             "CURRENT_STATE_BLOB_SHA",
+            "DECISION_SOURCE_BLOB_SHA",
+            "STANDARD_SOURCE_BLOB_SHA",
         ):
             if not re.fullmatch(r"[0-9a-fA-F]{40}", data[key]):
                 raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:" + key)
@@ -229,6 +236,88 @@ def _history_ids_from_runner(text: str) -> List[str]:
     return sorted(set(pairs))
 
 
+def _error_ids_from_authoritative(text: str) -> List[str]:
+    return sorted(set(re.findall(r"(?m)^\\|\\s*M(\\d{2})\\s*\\|", text)))
+
+
+def _require_tokens(text: str, tokens: Tuple[str, ...], label: str) -> None:
+    missing = [token for token in tokens if token not in text]
+    if missing:
+        raise Blocked(
+            "HOBBYROOM_EVIDENCE_SEMANTIC_MISSING:" + label + ":" +
+            ",".join(missing)
+        )
+
+
+def _validate_bound_evidence_texts(
+    data: Dict[str, str],
+    *,
+    history_text: str,
+    runner_text: str,
+    paul_text: str,
+    error_text: str,
+    current_state_text: str,
+    decision_text: str,
+    standard_text: str,
+) -> None:
+    expected_ids = [f"{i:02d}" for i in range(1, 34)]
+    if _history_ids_from_matrix(history_text) != expected_ids:
+        raise Blocked("HOBBYROOM_HISTORY_MATRIX_COVERAGE_INVALID:BASE")
+    if _history_ids_from_runner(runner_text) != expected_ids:
+        raise Blocked("HOBBYROOM_HISTORY_RUNNER_COVERAGE_INVALID:BASE")
+    if _error_ids_from_authoritative(error_text) != expected_ids:
+        raise Blocked("HOBBYROOM_ERROR_SOURCE_M01_M33_COVERAGE_INVALID")
+
+    blocker = data["ACTIVE_BLOCKER"]
+    if blocker not in error_text:
+        raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_AUTHORITATIVE_ERROR_SOURCE")
+    if blocker not in current_state_text:
+        raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_CURRENT_STATE")
+    if data["MAIN_SHA"] not in current_state_text:
+        raise Blocked("HOBBYROOM_MAIN_SHA_NOT_IN_CURRENT_STATE")
+    if data["RECOVERY_BASE_SHA"] not in current_state_text:
+        raise Blocked("HOBBYROOM_LAST_GOOD_NOT_IN_CURRENT_STATE")
+
+    _require_tokens(
+        paul_text,
+        (
+            "Kein 41-Punkte-Sammelfix.",
+            "Historische Fehlerquelle gegenprüfen.",
+            "Bestehender Regressionstest danach.",
+            "Echter 7/7-Lauf bleibt Produktionsbeweis.",
+            "Unerfüllbarer technischer Vertrag",
+            "Artefaktzustands-Parität",
+            "Hash-Semantik",
+            "Pre-/Post-Transformation-Gate-Reihenfolge",
+        ),
+        "PAUL",
+    )
+    _require_tokens(
+        decision_text,
+        (
+            "TEXT-TECH-20260907-CORRIDOR",
+            "TEXT-TECH-20260908-FROZEN-RECOVERY",
+            "TEXT-TECH-20260908-HISTORY-MACHINE-PROOF",
+            "Kein zweites Reparaturkonzept",
+            "kein Fix auf einen fehlgeschlagenen Fix",
+        ),
+        "DECISIONS",
+    )
+    _require_tokens(
+        standard_text,
+        (
+            "Verbindlicher Pre-Fix-Ablauf für technische Hobbyräume",
+            "gesamte bekannte Fehlerhistorie prüfen",
+            "letzten funktionierenden Stand vergleichen",
+            "unmittelbare Vor- und Nachstufe",
+            "Wiederholungsfehlerklasse prüfen",
+            "Positiv- und Negativtest des Kandidaten",
+            "keine Reparatur im laufenden Test",
+        ),
+        "HOBBYROOM_STANDARD",
+    )
+
+
 def _run_history_runner(
     runner_text: str,
     *,
@@ -275,6 +364,8 @@ def enforce_history_machine_proof(
         ("PAUL_SOURCE", campus_head, data["PAUL_SOURCE_REF"], data["PAUL_SOURCE_BLOB_SHA"]),
         ("ERROR_SOURCE", campus_head, data["ERROR_SOURCE_REF"], data["ERROR_SOURCE_BLOB_SHA"]),
         ("CURRENT_STATE", campus_head, data["CURRENT_STATE_REF"], data["CURRENT_STATE_BLOB_SHA"]),
+        ("DECISION_SOURCE", campus_head, data["DECISION_SOURCE_REF"], data["DECISION_SOURCE_BLOB_SHA"]),
+        ("STANDARD_SOURCE", campus_head, data["STANDARD_SOURCE_REF"], data["STANDARD_SOURCE_BLOB_SHA"]),
     )
     for label, ref, path, expected in bindings:
         actual = _blob_at(ref, path, label)
@@ -285,22 +376,24 @@ def enforce_history_machine_proof(
 
     history_ref = data["HISTORY_SOURCE_REF"]
     runner_ref = data["HISTORY_PROOF_RUNNER_REF"]
-    error_text = show(campus_head, data["ERROR_SOURCE_REF"])
-    current_state_text = show(campus_head, data["CURRENT_STATE_REF"])
-    if data["ACTIVE_BLOCKER"] not in error_text:
-        raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_AUTHORITATIVE_ERROR_SOURCE")
-    if data["ACTIVE_BLOCKER"] not in current_state_text:
-        raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_CURRENT_STATE")
-    if data["MAIN_SHA"] not in current_state_text:
-        raise Blocked("HOBBYROOM_MAIN_SHA_NOT_IN_CURRENT_STATE")
-    expected_ids = [f"{i:02d}" for i in range(1, 34)]
-
     base_matrix = show(pr_base, history_ref)
     base_runner = show(pr_base, runner_ref)
-    if _history_ids_from_matrix(base_matrix) != expected_ids:
-        raise Blocked("HOBBYROOM_HISTORY_MATRIX_COVERAGE_INVALID:BASE")
-    if _history_ids_from_runner(base_runner) != expected_ids:
-        raise Blocked("HOBBYROOM_HISTORY_RUNNER_COVERAGE_INVALID:BASE")
+    paul_text = show(campus_head, data["PAUL_SOURCE_REF"])
+    error_text = show(campus_head, data["ERROR_SOURCE_REF"])
+    current_state_text = show(campus_head, data["CURRENT_STATE_REF"])
+    decision_text = show(campus_head, data["DECISION_SOURCE_REF"])
+    standard_text = show(campus_head, data["STANDARD_SOURCE_REF"])
+    _validate_bound_evidence_texts(
+        data,
+        history_text=base_matrix,
+        runner_text=base_runner,
+        paul_text=paul_text,
+        error_text=error_text,
+        current_state_text=current_state_text,
+        decision_text=decision_text,
+        standard_text=standard_text,
+    )
+    expected_ids = [f"{i:02d}" for i in range(1, 34)]
 
     authority_changes = [p for p in changed if p in {history_ref, runner_ref}]
     other_changes = [p for p in changed if p not in {history_ref, runner_ref}]
@@ -732,6 +825,7 @@ OFFICE: TEXT
 MAIN_SHA: 0000000000000000000000000000000000000000
 ACTIVE_BLOCKER: X
 PLAN_PHASE: E
+RECOVERY_BASE_SHA: 7777777777777777777777777777777777777777
 CANDIDATE_BRANCH: hobbyroom/test
 CANDIDATE_HEAD_SHA: 1111111111111111111111111111111111111111
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/
@@ -753,6 +847,10 @@ ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_A
 ERROR_SOURCE_BLOB_SHA: 5555555555555555555555555555555555555555
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
 CURRENT_STATE_BLOB_SHA: 6666666666666666666666666666666666666666
+DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
+DECISION_SOURCE_BLOB_SHA: 8888888888888888888888888888888888888888
+STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
+STANDARD_SOURCE_BLOB_SHA: 9999999999999999999999999999999999999999
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1"""
     data = parse_work_lock(valid, "X/HOBBYRAUM.md")
@@ -769,8 +867,6 @@ END_HOBBYROOM_WORK_LOCK_V1"""
         ("STATUS", ("STATUS", "FIX_FORBIDDEN"), "HOBBYROOM_WORK_LOCK_BLOCKED"),
         ("BRANCH", ("CANDIDATE_BRANCH", "hobbyroom/other"), "HOBBYROOM_CANDIDATE_BRANCH_MISMATCH"),
         ("HEAD", ("CANDIDATE_HEAD_SHA", "2" * 40), "HOBBYROOM_CANDIDATE_HEAD_MISMATCH"),
-        ("POSNEG", ("CHECK_POS_NEG", "PENDING"), "HOBBYROOM_REQUIRED_CHECK_NOT_PASS"),
-        ("INVARIANTS", ("CHECK_INVARIANTS", "PENDING"), "HOBBYROOM_REQUIRED_CHECK_NOT_PASS"),
         ("INTEGRATION", ("INTEGRATION_ALLOWED", "false"), "HOBBYROOM_INTEGRATION_NOT_ALLOWED"),
         ("PATH", ("ALLOWED_PATH_PREFIXES", "control/startmaster0107/other.py"), "HOBBYROOM_ALLOWED_PATHS_BLOCKED"),
     ):
@@ -785,11 +881,89 @@ END_HOBBYROOM_WORK_LOCK_V1"""
             raise AssertionError(label + " not blocked")
         except Blocked as exc:
             assert str(exc).startswith(expected), (label, str(exc))
-    print("HOBBYROOM_WORK_LOCK_SELFTEST_PASS:9/9")
+    notes = dict(data)
+    notes["CHECK_HISTORY"] = "PENDING"
+    notes["CHECK_POS_NEG"] = "PENDING"
+    assert evaluate_work_lock_pr(
+        "hobbyroom/test", head, base,
+        ["control/startmaster0107/file.py"], [("X/HOBBYRAUM.md", notes)]
+    ).startswith("HOBBYROOM_WORK_LOCK_PR_PASS:")
+    print("HOBBYROOM_WORK_LOCK_SELFTEST_PASS:8/8")
+
+
+def evidence_semantic_selftest() -> None:
+    ids = [f"{i:02d}" for i in range(1, 34)]
+    history = "\n".join("M" + i + " – test" for i in ids)
+    runner = "CASES=[" + ",".join('("M' + i + '",m' + i + ')' for i in ids) + "]"
+    error = "\n".join("| M" + i + " | test |" for i in ids) + "\nBLOCK_X"
+    current = (
+        "AKTUELLER REALTEST\nBLOCK_X\n" + "0" * 40 + "\n" + "7" * 40
+    )
+    paul = "\n".join((
+        "Kein 41-Punkte-Sammelfix.",
+        "Historische Fehlerquelle gegenprüfen.",
+        "Bestehender Regressionstest danach.",
+        "Echter 7/7-Lauf bleibt Produktionsbeweis.",
+        "Unerfüllbarer technischer Vertrag",
+        "Artefaktzustands-Parität",
+        "Hash-Semantik",
+        "Pre-/Post-Transformation-Gate-Reihenfolge",
+    ))
+    decisions = "\n".join((
+        "TEXT-TECH-20260907-CORRIDOR",
+        "TEXT-TECH-20260908-FROZEN-RECOVERY",
+        "TEXT-TECH-20260908-HISTORY-MACHINE-PROOF",
+        "Kein zweites Reparaturkonzept",
+        "kein Fix auf einen fehlgeschlagenen Fix",
+    ))
+    standard = "\n".join((
+        "Verbindlicher Pre-Fix-Ablauf für technische Hobbyräume",
+        "gesamte bekannte Fehlerhistorie prüfen",
+        "letzten funktionierenden Stand vergleichen",
+        "unmittelbare Vor- und Nachstufe",
+        "Wiederholungsfehlerklasse prüfen",
+        "Positiv- und Negativtest des Kandidaten",
+        "keine Reparatur im laufenden Test",
+    ))
+    data = {
+        "ACTIVE_BLOCKER": "BLOCK_X",
+        "MAIN_SHA": "0" * 40,
+        "RECOVERY_BASE_SHA": "7" * 40,
+    }
+    def check(**overrides):
+        payload = {
+            "history_text": history,
+            "runner_text": runner,
+            "paul_text": paul,
+            "error_text": error,
+            "current_state_text": current,
+            "decision_text": decisions,
+            "standard_text": standard,
+        }
+        payload.update(overrides)
+        _validate_bound_evidence_texts(data, **payload)
+    check()
+    negatives = (
+        ("M33_MATRIX", {"history_text": history.replace("M33 – test", "")}),
+        ("M33_RUNNER", {"runner_text": runner.replace('("M33",m33)', "")}),
+        ("M33_ERROR", {"error_text": error.replace("| M33 | test |", "")}),
+        ("PAUL", {"paul_text": paul.replace("Artefaktzustands-Parität", "")}),
+        ("DECISIONS", {"decision_text": decisions.replace("kein Fix auf einen fehlgeschlagenen Fix", "")}),
+        ("STANDARD", {"standard_text": standard.replace("letzten funktionierenden Stand vergleichen", "")}),
+        ("LAST_GOOD", {"current_state_text": current.replace("7" * 40, "")}),
+    )
+    for label, override in negatives:
+        try:
+            check(**override)
+            raise AssertionError(label + " not blocked")
+        except Blocked:
+            pass
+    print("HOBBYROOM_EVIDENCE_SELFTEST_PASS:8/8")
 
 
 def selftest() -> None:
     work_lock_selftest()
+    evidence_semantic_selftest()
     valid = """<!-- PAUL_ASSIGNMENT_V1
 STATUS: ACTIVE
 WORKER: PAUL
