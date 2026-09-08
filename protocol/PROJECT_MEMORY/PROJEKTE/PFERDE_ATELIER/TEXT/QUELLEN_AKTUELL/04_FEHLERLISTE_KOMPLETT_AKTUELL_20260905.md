@@ -43,11 +43,11 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 | M25 | Article prompt / Fachworkflow boundary | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M26 | Bound Fachworkflow production context | im bestehenden Runner enthalten | früher mehrfach LIVE BLOCKED; auf aktuellem main im letzten Lauf überwunden |
 | M27 | Current-main / production environment identity | im bestehenden Runner enthalten | Preflight/HEAD im letzten Lauf PASS |
-| M28 | Fachworkflow-Handoff request executable | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M28 | Fachworkflow-Handoff request executable | Runner auf main korrigiert | **AKTUELLER LIVE-BLOCKER 08.09.2026:** `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`; `FACHWORKFLOW_HANDOFF_REQUEST.json` fehlt. Kausal belegt: Commit `a5f0fba0…` führte mit `kein ... Handoff-Request` den bereits historischen M28-Vertragsfehler wieder ein. |
 | M29 | Release metadata current-batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M30 | Final context batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M31 | Codex-native bound action / kein separater Executor | im bestehenden Runner enthalten | **Runner-Test war stale:** erwartete fälschlich überhaupt keinen `fachworkflow_handoff`. Aktueller Sollweg bindet den Handoff innerhalb derselben Current Action und verlangt ausdrücklich keinen separaten Executor/keine separate Capability. Im Hobbyraum korrigiert und positiv/negativ geprüft. |
-| M32 | PPM runtime package path ohne Env-Abhängigkeit | im bestehenden Runner enthalten | **AKTUELLER LIVE-BLOCKER 08.09.2026:** `BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`; gebundener Submission-Command exponiert `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` nicht. |
+| M32 | PPM runtime package path ohne Env-Abhängigkeit | im bestehenden Runner enthalten | **LIVE ÜBERWUNDEN 08.09.2026:** PR #158 / Merge `30e93335…`; nachfolgender Realtest erreichte den echten `fachworkflow_proof_handoff.py materialize` und stoppte erst bei M28. |
 | M33 | GitHub ENDSTEMPEL ohne Codex git auth | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 
 ## B. Reale Blocker / Wiederholungsfehler außerhalb bzw. quer zur Matrix
