@@ -896,3 +896,36 @@ Prüfer V3 lief auf dem echten lokalen Nutzerbackup vollständig durch:
 
 Endergebnis:
 `NOTFALL_WIEDERAUFBAU_PASS`.
+
+
+## BAU-041 – Abschlussprüfung fand inkonsistenten Tresor-Nachlauf
+
+STATUS: CLOSED
+
+KURZ:
+Nach Einführung von lokalem Doppelklick-Backup + unabhängigem automatischem Tresor waren nicht alle Dauerakten auf denselben Endstand nachgezogen.
+
+GEFUNDEN:
+- doppelte Architektur-ID `ARCH-087`;
+- `TRESOR/STATUS.md` enthielt noch den bereits erledigten NEXT ACTION „Mac-Lauf“;
+- `REALTEST_V4.md` bezeichnete einen älteren 07.09.-Lauf noch als aktuellen Testbeleg;
+- Zielvertrag/Handlungsverzeichnis/Bauplan beschrieben noch den früheren Ein-Datei-/Ein-Weg-Nutzerpfad;
+- Prüf- und Wiederaufbauvertrag trennten automatischen Tresor und lokalen Backupweg noch nicht sauber;
+- vollständiger GitHub-Metadaten-Neuaufbau war nicht klar genug vom real bestandenen Git-/Ref-/Campus-Restore getrennt.
+
+URSACHE:
+Die Sicherungsarchitektur wurde in mehreren realen Testschritten weiterentwickelt; die abschließende Ein-Wahrheit-Nachführung über alle autoritativen Dauerakten erfolgte erst in der Abschlussprüfung.
+
+KISS-FIX:
+- lokaler Doppelklick-Weg bleibt `ARCH-087`;
+- unabhängiger automatischer Tresor erhält eindeutige `ARCH-088`;
+- CURRENT-Wahrheit ausschließlich in `TRESOR/STATUS.md`;
+- alter V4-Test ausdrücklich historisch;
+- Zielvertrag, Handlungsverzeichnis, Bauplan, Prüfvertrag und Notfall-Wiederaufbau auf denselben Zwei-Wege-Stand nachgezogen;
+- `GITHUB_KOMPLETT_PASS` ausdrücklich OFFEN, solange kein vollständiger GitHub-Metadaten-Neuaufbau end-to-end bewiesen ist.
+
+REGRESSIONSSCHUTZ:
+Backupänderungen vor Abschluss immer gegen alle autoritativen Tresorakten + Zielvertrag + Bauplan + Änderungsregister + Fehlerquelle auf Ein-Wahrheit prüfen.
+
+BEZUG:
+ARCH-087 / ARCH-088.
