@@ -132,6 +132,15 @@ def main(argv:list[str]|None=None):
         if not prepared_item_id:
             raise RuntimeError("PREPARED_ITEM_ID_MISSING")
         if expected_item_id is not None and prepared_item_id!=expected_item_id:
+            print(json.dumps({
+                "status":"P22_BOUND_ITEM_ID_BLOCKED",
+                "expected_item_id":expected_item_id,
+                "prepared_item_id":prepared_item_id,
+                "prepare_no_write":prep["before_count"]==prep["after_count"],
+                "signing_started":False,
+                "write_started":False,
+                "publish_allowed":False,
+            },ensure_ascii=False,indent=2))
             raise RuntimeError("BOUND_ITEM_ID_MISMATCH")
         bound_item_id=expected_item_id or prepared_item_id
 
