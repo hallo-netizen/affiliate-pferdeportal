@@ -1784,3 +1784,23 @@ STATUS:
 Statische Korridor- und Hashprüfung PASS.
 Serverseitiger Vorher-FAIL/Nachher-PASS-Beweis noch ausstehend.
 
+## TEXT-TECH-20260908-MACHINE-GATE-M28-ROW-PARSER – Security-Selbstfehler isoliert reparieren
+
+WAS:
+Der erste echte Maschinen-Test von PR #161 legte einen Fehler im neu aktivierten Gate selbst offen:
+`HOBBYROOM_ACTIVE_HISTORY_CASE_ROW_INVALID:M28`.
+
+URSACHE:
+Doppelt escapte Markdown-Pipe-/Whitespace-Sequenzen in `_error_row_for_case()`.
+
+FIX:
+PR #166, Head `a742c5c917b5e6fe164be2a6267470de89e9d744`.
+Exakt eine Regex-Zeile.
+
+WARUM:
+Der Produktionskandidat darf erst bewertet werden, wenn das Kontrollsystem den autoritativen M28-Datensatz korrekt lesen kann.
+
+GRENZE:
+Security-Pfad bleibt immutable; regulärer PR-Weg blockiert den Fix absichtlich.
+Keine parallele Änderung am M28-Produktionskandidaten.
+
