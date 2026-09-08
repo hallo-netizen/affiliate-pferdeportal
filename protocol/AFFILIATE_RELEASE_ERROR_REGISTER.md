@@ -254,7 +254,7 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** Ein unveränderter kumulativer Stand bei unverändertem Cursor darf nicht als Fortschritt gelten.
 **Regression:** Import-, Cursor-, Reconcile-, Provider- und Outputlogik bleiben unverändert.
 
-**Status:** FIXED_LOCAL / 6.72.5; Live-Readback noch ausstehend.
+**Status:** LIVE_PASS / 6.72.5 — Screenshot 08.09.2026 10:40 zeigt 3500 Produkte kumulativ, letztes Paket 500.
 
 ## AFF-ERR-018 — WP-Cron-Fallback hat keinen pluginseitigen Kick für fällige offene Jobs
 
@@ -272,7 +272,7 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** kein offener Job, noch nicht fälliges Ereignis oder `DOING_CRON` => kein zusätzlicher Kick.
 **Regression:** Server-Cron/WP-CLI, täglicher Dispatch, Awin/ADCELL/eBay und Fachlogik unverändert.
 
-**Status:** FIXED_LOCAL / 6.72.5; Live-Transporttest noch ausstehend.
+**Status:** LIVE_PASS / 6.72.5 — ohne manuellen Paketknopf stieg derselbe Awin-14336-Job selbständig auf 3500 Produkte; Jobzeitpunkt fortgeschritten.
 
 ---
 
@@ -281,9 +281,9 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt während dieses Scopes zurückgestellt.
 
 Für den nächsten Live-Schritt sind bindend:
-- `AFF-ERR-017`: 6.72.5 macht den kumulativen Produktfortschritt sichtbar; Live-Readback PENDING.
-- `AFF-ERR-018`: 6.72.5 ergänzt ausschließlich im bestehenden WP-Cron-Fallback den fälligen Core-`spawn_cron()`-Kick; Live-Transporttest PENDING.
+- `AFF-ERR-017`: 6.72.5 kumulativer Produktfortschritt LIVE PASS (3500 gesamt / letztes Paket 500).
+- `AFF-ERR-018`: 6.72.5 WP-Cron-Fallback LIVE PASS; derselbe offene Awin-14336-Job lief ohne manuellen Paketknopf selbständig weiter.
 - `AFF-ERR-006`: keine weitere Mini-Fix-Kaskade. Erst 6.72.5 als gebündelten Rootfix live prüfen.
 - `AFF-ERR-001`: kein Gesamt-/Release-PASS aus dem lokalen Test.
 
-Bereits belegte 6.72.4-Pässe (OTTO-Feeddownload, manuelle Paketfortsetzung) nicht erneut öffnen. Nächster zulässiger Schritt ist ausschließlich der 6.72.5-Livetest gegen denselben offenen Awin-14336-Job.
+Bereits belegte 6.72.4-Pässe und die neuen 6.72.5-Pässe nicht erneut öffnen. Nächster zulässiger Schritt: denselben Awin-14336-Job automatisch bis zum Ende der Products-Stufe weiterlaufen lassen und erst beim Stufenwechsel/Fehler erneut eingreifen.
