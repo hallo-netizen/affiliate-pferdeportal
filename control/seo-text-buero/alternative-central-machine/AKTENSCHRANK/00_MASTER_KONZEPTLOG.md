@@ -247,3 +247,23 @@ Bestehende Start- und Transferfähigkeit wiederverwenden; keine Parallelarchitek
 
 Sicherheitsfolge:
 Diese Fähigkeiten dürfen keine neue Workflowfreiheit erzeugen. Chat/Codex starten nur den fest gebundenen Prozess; die Dateiübergabe transportiert nur das fest gebundene Objekt.
+
+
+## FINALER PROTOTYPSTATUS P34
+
+Status: GO.
+
+Autoritative Abschlussakte dieser Prototypphase:
+`36_P34_FINAL_PROTOTYPE_GO.md`
+
+Eingefrorenes KISS-Ziel:
+bestehender Chat/Codex-Start -> EINE Zentralmaschine -> bestehende Fachbausteine -> prepare ohne Write -> EINE externe Signatur -> verifizierter Draft-Write -> Readback/DOM -> STOP ohne Publish.
+
+P0–P34 sind ausschließlich Labor-/Beweisakten und dürfen nicht als Produktionsstufen interpretiert oder implementiert werden.
+
+Nächste zulässige Entwicklungsphase:
+Minimaler Realintegrations-Prototyp mit genau einem gebundenen Item.
+
+HARD RULE:
+Bei jeder Unstimmigkeit zuerst vorhandenen Baustein prüfen.
+Keine neue Architektur als Reflex.
