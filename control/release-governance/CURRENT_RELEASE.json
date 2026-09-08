@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 40,
+  "generation": 41,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "cdf94ed70b6d764bfe62cb354bdb8780f49034047654a0e318697be7325ad9ba",
+    "manifest_sha256": "75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "cdf94ed70b6d764bfe62cb354bdb8780f49034047654a0e318697be7325ad9ba",
+    "current_source_manifest_sha256": "75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -125,8 +125,8 @@
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
-    "authorized_next_action": "INSTALL_6_72_6_AND_VERIFY_OLD_OTTO_JOB_FAILS_CLOSED",
-    "bound_user_scope_action": "INSTALL_6_72_6; VERIFY_OLD_14336_JOB_STOP; THEN_BIND_FILTERED_CREATE_A_FEED",
+    "authorized_next_action": "INSTALL_6_72_6_VERIFY_AUTOSTOP_THEN_BIND_FILTERED_CREATE_A_FEED",
+    "bound_user_scope_action": "INSTALL_6_72_6; VERIFY_AUTOSTOP_OF_OLD_14336_JOB; THEN_BIND_FILTERED_CREATE_A_FEED",
     "completion_condition": "BOUND_CHECK_PASS_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
     "no_optional_detours": true,
@@ -178,7 +178,8 @@
       "defect": "6.72.5 persisted formally valid OTTO feed rows before portal relevance classification.",
       "rootfix": [
         "OTTO 14336 requires explicitly bound Awin Create-a-Feed URL plus product_feed_scope=portal_filtered.",
-        "Old products job without portal_filtered scope fails terminal and deletes private temp feed file.",
+        "6.72.6 safety upgrade automatically finds any still-open legacy OTTO products job without portal_filtered scope, marks it terminal failed, deletes its private temp feed and disables central automation.",
+        "New OTTO enqueue/start is fail-closed until the filtered source is bound.",
         "Existing hash-bound Pferde-Atelier catalog/content policy classifies OTTO rows before creative_library_upsert.",
         "UI separates scanned feed rows, relevant accepted products and blocked products."
       ],
@@ -190,13 +191,14 @@
         "negative_toy_horse": "PASS_BLOCKED",
         "missing_scope": "PASS_FAIL_CLOSED",
         "unconfirmed_feed": "PASS_FAIL_CLOSED",
-        "old_job_terminal_cleanup": "PASS"
+        "old_job_terminal_cleanup": "PASS",
+        "install_upgrade_autostop": "PASS"
       },
-      "source_manifest_sha256": "cdf94ed70b6d764bfe62cb354bdb8780f49034047654a0e318697be7325ad9ba",
+      "source_manifest_sha256": "75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d",
       "evidence_ref": "release/affiliate-zentrale/evidence/awin_6726_otto_relevance_prefilter_20260908.txt",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.6_TEST.zip",
-      "test_artifact_sha256": "a0f0eb7229fc8701ff30102d930d219a0509310fdd33400fc940701afc47ef24",
-      "next_test": "Install 6.72.6 and verify the already-open unfiltered Awin 14336 products job becomes terminal failed with the new hard-stop and no further product-row growth. Then bind a filtered Awin Create-a-Feed before starting a new OTTO run.",
+      "test_artifact_sha256": "f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e",
+      "next_test": "Install 6.72.6. Without pressing any package button, verify the old Awin 14336 products job is terminal failed and automatic synchronization is disabled. Then create/bind the filtered Awin feed before any new OTTO run.",
       "checked_at": "2026-09-08"
     }
   },
@@ -448,9 +450,9 @@
       "advertiser_id": 14336,
       "version": "6.72.6",
       "evidence_ref": "release/affiliate-zentrale/evidence/awin_6726_otto_relevance_prefilter_20260908.txt",
-      "source_manifest_sha256": "cdf94ed70b6d764bfe62cb354bdb8780f49034047654a0e318697be7325ad9ba",
+      "source_manifest_sha256": "75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.6_TEST.zip",
-      "test_artifact_sha256": "a0f0eb7229fc8701ff30102d930d219a0509310fdd33400fc940701afc47ef24",
+      "test_artifact_sha256": "f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e",
       "package_checks": {
         "manifest": "26_OF_26_PASS",
         "php_lint": "21_OF_21_PASS",
@@ -462,7 +464,8 @@
         "foreign_product": "BLOCKED",
         "toy_horse": "BLOCKED",
         "missing_scope": "FAIL_CLOSED",
-        "old_job_cleanup": "PASS"
+        "old_job_cleanup": "PASS",
+        "install_upgrade_autostop": "PASS"
       }
     }
   },
@@ -491,7 +494,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "INSTALL_6_72_6_STOP_OLD_FULLFEED_THEN_BIND_FILTERED_AWIN_FEED",
+    "current_milestone": "INSTALL_6_72_6_AUTO_STOP_OLD_FULLFEED_THEN_BIND_FILTERED_AWIN_FEED",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
