@@ -381,20 +381,40 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Status:** FIXED_LOCAL / 6.72.8 — echter Runtime-POSITIV-/NEGATIV-Harness, Source-Gate-Harness, Gesamtworkflow, 21/21 PHP-Lint, 3-Datei-Diff, Fresh-ZIP-Unpack und 26/26 Source↔ZIP-Byte-Identität PASS; Live-Readback ausstehend.
 
+
+## AFF-ERR-023 — 6.72.8 Cleanup blockiert sicher mit exact-import-count-mismatch:0/4500
+
+**Datum / Live-Readback:** 08.09.2026 19:13 Europe/Berlin.
+
+**Live-Evidence:** Unter `Automatische Aktualisierung` ist der Status sichtbar:
+`OTTO-Sicherheitsbereinigung: blocked · 1 Fehl-Läufe erkannt · 0 Altprodukte entfernt · 0 Ausgabeobjekte deaktiviert · 0 Zielkanten entfernt. BLOCKED: 42cd06f8-7299-4363-afa9-5e10edee37ea:exact-import-count-mismatch:0/4500`.
+
+**Bewertung:** Der 6.72.8-Fail-closed-Schutz funktioniert: bei unsicherer Provenienz wurden **0** Produkte gelöscht und **0** Ausgabeobjekte verändert. Der historische Fehl-Lauf meldet 4500 Imports, aber der strenge sichere Kandidatensatz ist 0; deshalb darf kein destruktiver Cleanup erzwungen werden.
+
+**KISS-Entscheidung:** Kein weiteres Cleanup-Plugin und keine neue Cleanup-Version. Der historische Altbestand bleibt unangetastet, bis ein regulärer gefilterter OTTO-Feed erfolgreich vollständig läuft. Die bereits vorhandene Reconcile-Logik ist der sichere Standardweg:
+- nach erstem vollständigen gefilterten Lauf: nicht mehr vorkommende alte OTTO-Produkte => `quarantine_missing`, `selected=0`;
+- nach zweitem vollständigen gefilterten Lauf: => `inactive_missing`, `selected=0`;
+- Output blockiert nicht aktive `availability_state` bereits fail-closed.
+
+**Nicht wiederholen:** Keine rückwirkende heuristische Löschung nach Datum, Titel, Advertiser allein oder unbewiesener Run-Zuordnung. Kein weiteres Plugin ausschließlich für Cleanup-Diagnose.
+
+**Nächster fachlicher Weg:** Awin-Create-a-Feed auf OTTO 14336 + pferderelevante Kategorien begrenzen, URL binden, `portal_filtered` bestätigen, dann regulären Lauf durchführen. Erst nach zwei vollständigen gefilterten Läufen ist der Altbestand automatisch aus dem aktiven Outputpfad entfernt.
+
+**Status:** LIVE PASS für Observability/Fail-closed, Cleanup bewusst NICHT erzwungen. Architekturweg: gefilterter Source-Feed + bestehende Reconcile-Logik.
+
 ---
 
 # Aktueller PRECHECK
 
-Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt während dieses Scopes zurückgestellt.
+Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt zurückgestellt.
 
 Bindend:
-- `AFF-ERR-017`: kumulativer Fortschritt LIVE PASS; nicht erneut öffnen.
-- `AFF-ERR-018`: WP-Cron-Fallback LIVE PASS; nicht erneut öffnen.
-- `AFF-ERR-019`: ungefilterter OTTO-Vollfeed bleibt HARD BLOCKED; Source-Gate + lokaler Pre-Upsert-Guard aktiv.
-- `AFF-ERR-020`: Cleanup-Ziel wird durch 6.72.8 mit stärkerer first_seen/run_uuid/imported-Provenienz erfüllt; FULL LOCAL GATE PASS.
-- `AFF-ERR-021`: Hobbyraum-TASK-Schema CLOSED.
-- `AFF-ERR-022`: 6.72.7 FALSE-PASS behoben; 6.72.8 tatsächlich lokal Runtime POSITIV/NEGATIV + Gesamtworkflow + Fresh-ZIP getestet.
-- `AFF-ERR-006`: Plugin-Ausgabe-Hardlock für 6.72.8 erfüllt; ein Kandidat bis Gesamt-PASS, kein Zwischen-ZIP.
-- `AFF-ERR-001`: kein Release-/Live-PASS vor echter WordPress-Evidence.
+- `AFF-ERR-017`: kumulativer Fortschritt LIVE PASS.
+- `AFF-ERR-018`: WP-Cron-Fallback LIVE PASS.
+- `AFF-ERR-019`: ungefilterter OTTO-Vollfeed HARD BLOCKED.
+- `AFF-ERR-022`: 6.72.7 FALSE-PASS behoben.
+- `AFF-ERR-023`: 6.72.8 Cleanup-Readback LIVE sichtbar und fail-closed; 0/4500 => keine unsichere Löschung. Kein weiteres Cleanup-Plugin.
+- `AFF-ERR-006`: keine Pluginorgie; nächster Schritt ist Konfiguration des vorhandenen 6.72.8-Workflows, nicht neue Version.
+- `AFF-ERR-001`: kein Gesamt-/Release-PASS ohne gefilterten OTTO-Live-Lauf.
 
-**Nächster zulässiger Schritt:** exakt **6.72.8 TEST installieren**. Danach keine Buttons drücken. Unter `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ist `OTTO-Sicherheitsbereinigung` jetzt immer sichtbar. Erwartet wird `pass`, `blocked`, `no_candidate`, `already_cleaned` oder `nicht ausgeführt` — kein unsichtbarer Zustand mehr. Automatisierung bleibt AUS; kein neuer OTTO-Lauf vor Auswertung dieses Live-Readbacks.
+**Nächster zulässiger Schritt:** Awin `Toolbox → Create-a-Feed` für OTTO/Awin 14336 fachlich auf Pferde-Atelier-relevante Kategorien eingrenzen. Danach Export-URL im bestehenden Awin-Betriebsprofil binden und `portal_filtered` bestätigen. Kein neues Plugin.
