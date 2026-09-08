@@ -332,3 +332,21 @@ Die vier M28-Dateiblobs sind unverändert.
 Ziel jetzt ausschließlich:
 M28-Kandidat prüfen -> bei PASS mergen -> echter 7/7-Realtest.
 
+### KISS-Korrektur – Maschinenlock für TEXT nicht weiter als Produktionsblocker verwenden
+
+Der aktuelle Runner meldete M15 vor M28.
+Harte Prüfung ergab:
+- M15-Matrix: "keine widersprüchliche Handoff-Sperre";
+- aktueller M15-Runner verlangt dagegen "Kein Vorab-Handoff durch den Worker" und verbietet `FACHWORKFLOW_HANDOFF_REQUEST.json`;
+- gemergte historische PRs #110 und #111 belegen ausdrücklich den Request-first-Weg.
+
+Damit ist M15 im Runner stale und widerspricht der bewiesenen Historie.
+
+Entscheidung:
+Keine weitere Gate-/Security-Reparaturschleife.
+Der komplexe TEXT-Maschinenlock wird als Integrationsblocker deaktiviert.
+Normale Repository-Schutzchecks `hardlock` und `hardlock-base` bleiben vollständig aktiv.
+
+Produktionsfokus:
+PR #161 / M28 -> normale Checks -> Merge -> echter 7/7-Realtest.
+
