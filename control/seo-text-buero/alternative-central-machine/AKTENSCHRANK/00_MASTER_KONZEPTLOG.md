@@ -209,3 +209,19 @@ Jeder Prototypschritt braucht:
 6. ISOLATION
 Alle Arbeiten und Erkenntnisse dieser Route bleiben ausschließlich im separaten Alternativbranch und Aktenschrank.
 Keine Vermischung mit dem parallelen Reparaturchat oder dessen produktivem Arbeitsweg.
+
+
+## HARD RULE – KISS
+
+Für die gesamte Alternativroute gilt zusätzlich:
+
+- immer die kleinstmögliche technische Lösung wählen, die alle Sicherheitsregeln erfüllt
+- keine neue Schicht, kein neuer Gate-Typ, kein neuer Signer, kein neuer Runner und kein neuer Controller, wenn eine bestehende einfache Funktion dieselbe Aufgabe sicher erledigt
+- neue Erkenntnis zuerst in bestehende Struktur einordnen; nicht automatisch neue Architektur bauen
+- wenige feste Zustände statt vieler Zwischenzustände
+- wenige feste Datenobjekte statt vieler Handoff-Dateien
+- eine Regel an genau einer autoritativen Stelle
+- Erweiterbarkeit über feste, klar begrenzte Schnittstellen; keine Sonderwege
+- Komplexität ist ein FAIL-Kriterium, wenn sie keinen nachweisbaren Sicherheits- oder Funktionsgewinn bringt
+
+KISS steht nicht über Sicherheit. Wenn Einfachheit und 0,0-Freiheit kollidieren, gewinnt die Sicherheitsregel. Innerhalb derselben Sicherheit gewinnt immer die einfachere Lösung.
