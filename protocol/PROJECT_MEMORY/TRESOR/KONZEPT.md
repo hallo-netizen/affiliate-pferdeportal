@@ -1,60 +1,73 @@
-# NOTFALL-TRESOR – GITHUB-KOMPLETTBACKUP
+# NOTFALL-TRESOR – KONZEPT
 
-STAND: 2026-09-07
-STATUS: GITHUB-ONLY / VERBINDLICH
+STAND: 2026-09-08
+STATUS: VERBINDLICH
 
-## Ziel
+## ZIEL
 
-Aus genau einer aktuellen Sicherungsdatei soll der gesicherte GitHub-Stand des Repositorys
+Zwei voneinander unabhängige Sicherungen desselben GitHub-Projekts:
+
+1. **Tresor automatisch und extern**
+2. **lokales Backup manuell auf dem Mac**
+
+Ein Ausfall des Macs darf den Tresor nicht verhindern.
+Ein Ausfall des automatischen Tresorwegs darf die lokale Sicherung nicht verhindern.
+
+## TRESOR – AUTOMATISCH
+
+Quelle:
 `hallo-netizen/affiliate-pferdeportal`
-so vollständig wie GitHub ihn exportierbar macht wiederaufbaubar sein.
 
-## Inhalt
+Technischer Weg:
+`tresor/build-20260905`
+→ `.github/workflows/campus-tresor-snapshot.yml`
 
-### Git vollständig
-- komplette Commit-Historie;
-- alle aktuellen Branches;
-- alle Tags;
-- GitHub-Pull-Request-Refs, damit auch PR-Commits nicht unnötig verloren gehen;
-- Bundle-Manifest und Hashes.
+Scheduler:
+sonntags 03:17 Europe/Berlin.
 
-### GitHub-Daten
-- Repository-Metadaten;
-- Branch-/Tag-Metadaten;
-- Issues, Kommentare und Events;
-- Pull Requests, Reviews und Review-Kommentare;
-- Releases inklusive Release-Artefakten;
-- Labels und Milestones;
-- Rulesets;
-- Workflows;
-- Deployments;
-- Environments, soweit lesbar;
-- Collaborators, soweit lesbar;
-- Actions-/Webhook-/Variablen-/Secret-Namen-Einstellungen, soweit GitHub sie der Backup-Identität lesbar macht;
-- Wiki-Mirror, falls ein Wiki initialisiert ist.
+Der Scheduler verändert nur
+`control/tresor/AUTO_TRIGGER.txt`.
+Der Push startet den bestehenden Backupworkflow.
 
-## Eine Datei
+Nach PASS:
+neue datierte Sicherung unter
+`/Campus-Tresor/`.
 
-Nutzerdownload:
-`GITHUB_KOMPLETTBACKUP_YYYY-MM-DD.zip`
+Pointer:
+`/Campus-Tresor/LATEST_GITHUB_BACKUP.txt`
 
-Die interne GitHub-Actions-Datei darf weitere Manifest-/Hashdateien enthalten; der Nutzer bekommt trotzdem genau einen Download.
+## LOKALES BACKUP
 
-## Prüfung vor Freigabe
+Auslöser:
+Doppelklick auf
+`GITHUB_BACKUP_STARTEN.command`.
+
+Ergebnis:
+`Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`.
+
+## GEMEINSAMER SICHERUNGSUMFANG
 
 Pflicht:
-Git-Bundle erzeugen → Bundle verifizieren → isoliert klonen → `git fsck --full --strict` → Branch-Refs vergleichen → Metadaten prüfen → Release-Artefakte sichern → Archiv erneut lesen.
+- komplette Git-Historie;
+- Branches;
+- Tags;
+- Pull-Refs;
+- sämtliche Repository-Dateien;
+- kompletter Campus im Repository;
+- exportierbare GitHub-Metadaten;
+- Release-Artefakte soweit verfügbar;
+- Manifest + Hashes;
+- realer Git-Restore-Test.
 
-## Providergrenze
+## FAIL-CLOSED
 
-GitHub gibt **Secret-Werte** nicht wieder heraus.
-Diese Werte können deshalb nicht durch einen GitHub-Export rekonstruiert werden.
+Eine neue Sicherung ersetzt niemals den letzten gültigen Stand, wenn:
+- Workflow fehlschlägt;
+- Restore-Test fehlschlägt;
+- Download/Upload fehlschlägt;
+- die Sicherung nicht eindeutig dem neuen Lauf zugeordnet werden kann.
 
-Außerdem sind einzelne Admin-Einstellungen mit dem normalen `GITHUB_TOKEN` nicht lesbar.
-Solange solche Einstellungen nicht lesbar oder als nicht relevant belegt sind, heißt der Gesamtstand:
-`GITHUB_BACKUP_PREPASS`
-und nicht `GITHUB_KOMPLETT_PASS`.
+## GRENZE
 
-## Scope
-
-**WordPress, Website-Backup und Projektarchiv gehören nicht in diesen GitHub-Backupauftrag.**
+GitHub kann Secret-Werte nicht zurückgeben.
+Providerinterne IDs/Zeitstempel können bei einem kompletten GitHub-Neuaufbau nicht garantiert identisch reproduziert werden.
