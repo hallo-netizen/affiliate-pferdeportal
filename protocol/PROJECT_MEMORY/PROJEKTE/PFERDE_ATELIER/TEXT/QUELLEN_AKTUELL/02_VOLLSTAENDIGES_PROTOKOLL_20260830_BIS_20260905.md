@@ -997,3 +997,40 @@ prüfen.
 
 Erst nach belegter Ursache darf ein Produktionskandidat entstehen.
 
+### Abschluss-/Nachholprüfung 08.09.2026 – aktuelle Wahrheit synchronisiert
+
+Frisch gegen GitHub und autoritative Campus-Quellen geprüft.
+
+Live:
+- main `2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`;
+- Dispatcher PR #107 offen, nicht gemergt, Head exakt current main;
+- PR #190 closed/merged auf current main;
+- PR #161 closed/merged;
+- Ruleset aktiv, kein Bypass, Required Checks `hardlock` + `hardlock-base`.
+
+Nachgeholt:
+- M28 und M34 in autoritativer Fehlerquelle auf LIVE ÜBERWUNDEN gesetzt;
+- M35 `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH` als einziger aktueller Liveblocker aufgenommen;
+- alte B01/B07/LanguageTool-Aussagen als historisch/überwunden markiert;
+- `CURRENT_STATE.md` auf ausschließlich aktuellen Stand bereinigt;
+- `HOBBYRAUM.md` auf genau eine aktuelle NEXT ACTION bereinigt;
+- WAS/WARUM für M35-Korridoranalyse dokumentiert;
+- campusweite KISS-Reapply-Regel im Hobbyraum-Standard dokumentiert.
+
+Negativprüfung:
+- genau eine TEXT-CURRENT_STATE;
+- genau ein TEXT-HOBBYRAUM;
+- genau eine autoritative TEXT-Fehlerquelle;
+- genau ein aktiver TEXT-Zielvertrag;
+- zentrales Fehlerregister bleibt reiner Wegweiser ohne kopierten Liveblocker;
+- Zielregister bleibt Wegweiser und dupliziert die PASS-Bedingung nicht;
+- Ziel unverändert;
+- kein Produktionskandidat aktiv;
+- kein Publish / kein WordPress-Write.
+
+Offen:
+- Root Cause von M35 noch nicht belegt;
+- M35-Positiv-/Negativtest noch nicht ausgeführt;
+- aktueller main hat keinen 7/7-PASS;
+- 107008 auf aktuellem main nicht erreicht.
+
