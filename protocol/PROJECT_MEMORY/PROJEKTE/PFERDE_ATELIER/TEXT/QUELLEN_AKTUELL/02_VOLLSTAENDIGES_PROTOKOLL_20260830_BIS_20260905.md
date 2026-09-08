@@ -955,3 +955,45 @@ Pre-Merge:
 Ab hier ausschließlich echter 7/7-Realtest.
 Keine Reparatur im Lauf.
 
+### Realtest nach PR #190 – M34 real überwunden / M35 aktueller Blocker
+
+Produktionsstand:
+`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`.
+
+Dispatcher PR #107:
+Head exakt derselbe Commit.
+
+Realtest:
+- frische `FACHWORKFLOW_HANDOFF_REQUEST.json` für Artikel 1 materialisiert;
+- gebundener `fachworkflow_handoff.command` ausgeführt;
+- M28 damit weiterhin real überwunden;
+- `CANONICAL_SLOT_MISSING` trat **nicht mehr** auf;
+- M34 damit real überwunden;
+- echter PPM-6.7.9-Korridor lief bis zur Fact-Pack-Quellhashprüfung.
+
+Erster echter technischer Blocker:
+`PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`.
+
+Letzte erfolgreich erreichte Stelle:
+frischer Request + gebundener Handoff + realer PPM-Eingang; Stop bei Fact-Pack-Source-Hash-Binding.
+
+Keine Reparatur während des Realtests.
+Keine Codeänderung nach dem Blocker.
+Kein Publish / keine WordPress-Schreibaktion.
+107007 nicht abgeschlossen; 107008 nicht erreicht.
+
+Einordnung:
+M35 ist ein neuer realer PPM-Eingangsvertragsblocker.
+Root Cause ist noch nicht belegt.
+Daher kein Source-Hash-Einzelfix.
+
+Nächste Analysegrenze:
+Fact-Pack → Quellenrefs/Hashes → Production-Plan → PPM-Input/Report als begrenzten Eingangskorridor vollständig gegen:
+- aktuellen Request;
+- aktuellen PPM-Paketvertrag;
+- letzten realen 7/7-Stand `d841ed…`;
+- letzten 7/7+107008-Stand `de21f6…`
+prüfen.
+
+Erst nach belegter Ursache darf ein Produktionskandidat entstehen.
+
