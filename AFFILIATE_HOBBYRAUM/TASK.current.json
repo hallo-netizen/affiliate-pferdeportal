@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "otto-awin-automated-distribution-20260907",
-  "goal": "Prüfe OTTO/Awin vollständig: automatisch aktualisierte Joined-/Feedlisten, snapshot-freier Start explizit freigegebener Awin-Programme, Productwissen-Exact-Match ohne Ersatz, real-source-fähige Banneraufnahme, Relevanz-/Anteilzuordnung, 0-Anteil als Ausschluss und Vorrang der manuellen Reparatur.",
+  "goal": "OTTO/Awin 14336 als einen einzigen gebundenen Kandidaten bis zum belastbaren Gesamtworkflow-PASS prüfen. Keine Plugin-Ausgabe, kein Nutzer-Livetest und keine neue Version vor vollständigem lokalem POSITIV-/NEGATIV-/Regression-/Gesamtworkflow-PASS.",
   "image": "php:8.2-cli",
   "inputs": [
     {
@@ -59,5 +59,43 @@
     "php test_otto_automation.php",
     "php test_banner_distribution_behavior.php"
   ],
-  "timeout_seconds": 600
+  "timeout_seconds": 600,
+  "artifact_output_gate": {
+    "status": "HARDLOCK",
+    "rule": "NO_PLUGIN_OUTPUT_BEFORE_COMPLETE_LOCAL_GATE",
+    "candidate_policy": "ONE_CANDIDATE_ONLY_UNTIL_COMPLETE_GATE_PASS",
+    "on_failure": "KEEP_SAME_CANDIDATE_FIX_IN_HOBBYRAUM_AND_RERUN_FULL_GATE",
+    "required_checks": [
+      "PHP_LINT_ALL_BOUND_FILES",
+      "FOCUSED_POSITIVE_FIX_TEST",
+      "FOCUSED_NEGATIVE_FAIL_CLOSED_TEST",
+      "FULL_BOUND_WORKFLOW_TEST",
+      "RELEVANT_HISTORICAL_REGRESSIONS",
+      "SOURCE_MANIFEST_AND_BYTE_SCOPE",
+      "ERROR_REGISTER_POSTCHECK"
+    ],
+    "forbidden": [
+      "INTERMEDIATE_PLUGIN_ZIP",
+      "NEW_VERSION_FOR_NEXT_SYMPTOM",
+      "USER_LIVE_TEST_BEFORE_LOCAL_GATE_PASS",
+      "SKIP_FULL_WORKFLOW_AFTER_LOCAL_FIX"
+    ]
+  },
+  "workflow_scope": {
+    "provider": "awin",
+    "advertiser_id": 14336,
+    "logical_source": "OTTO",
+    "must_cover": [
+      "source_binding",
+      "legacy_unfiltered_job_stop",
+      "product_feed_download",
+      "pre_persistence_relevance_filter",
+      "creative_library_persistence",
+      "target_classification",
+      "selection_materialization",
+      "output_routing",
+      "automatic_worker",
+      "manual_repair_precedence"
+    ]
+  }
 }
