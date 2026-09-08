@@ -94,6 +94,12 @@ Nicht 1:1 aus GitHub exportierbar:
 Erzeugter Stand:
 `2026-09-08_09-33-26`
 
+main SHA:
+`30e933357dd9e5d3dde7cbd361c930b2a0c352c1`
+
+ZIP SHA-256:
+`56eb788f3cf75c8c0af47cd4e2888f40b6d6e542e4f9b59550b908d2441c525f`
+
 Belegt:
 - äußerer ZIP-Hash gegen `.sha256` + Info PASS;
 - ZIP vollständig lesbar PASS;
