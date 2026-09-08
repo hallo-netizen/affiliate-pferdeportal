@@ -26,17 +26,17 @@ STEP 04 real getestet. Kein STEP 05 begonnen.
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 67143a95ee98d6a7ce15167dfd8103ceee087f2d
 ACTIVE_BLOCKER: BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING
-PLAN_PHASE: STEP04_REALTEST_RECORDED
+PLAN_PHASE: B02_SINGLE_CANDIDATE_BOUND
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/b02-semantic-worker-binding-current-hash-20260908
+CANDIDATE_HEAD_SHA: 562b71c726e2232539412376c1b0a047dbd3485d
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
+ALLOWED_PATH_PREFIXES: control/single-door-boundary/codex_current_action.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -44,7 +44,7 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
-INTEGRATION_ALLOWED: false
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -113,8 +113,13 @@ Vor einem Kandidaten zwingend:
 3. letzter Stand, auf dem dieser Kontext real vorhanden war;
 4. direkte Vor-/Nachstufe.
 
-Bis diese Prüfung abgeschlossen und **ein einziger** Kandidat gebunden ist:
-`FIX_FORBIDDEN` / `INTEGRATION_ALLOWED=false`.
+Prüfung abgeschlossen. Einziger gebundener Kandidat:
+- Branch `hobbyroom/b02-semantic-worker-binding-current-hash-20260908`
+- Head `562b71c726e2232539412376c1b0a047dbd3485d`
+- 2 Semantikdateien + 2 reine Hashbindungsdateien
+- historischer Beleg: `c8a96e…` beseitigte B02; danach kam erst `BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION`
+
+Bis CI/Positiv-Negativ PASS: kein Merge. Nach Merge zwingend sofort echter Codex-7/7-Realtest.
 
 ## AUTORITÄTEN
 
