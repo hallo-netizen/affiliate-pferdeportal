@@ -238,6 +238,42 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 **Status:** OPEN / HARD BLOCK für jeden neuen Installer oder Live-Replace.
 
+## AFF-ERR-017 — Paketfortschritt wird im Backend nicht kumulativ sichtbar
+
+**Datum / Arbeitsschritt:** 08.09.2026 / OTTO-Awin-14336-Produktffeed-Livefortsetzung.
+
+**Symptom:** Nach jedem erfolgreich verarbeiteten 500er-Paket zeigt die Arbeitswarteschlange erneut exakt `500 Produkte verarbeitet; Fortsetzung vorgemerkt.`, obwohl der Job-Zeitpunkt fortschreitet.
+
+**Root Cause:** Der Products-Worker erhöht `details.products` kumulativ und schreibt den Dateicursor fort, die persistierte Jobmeldung verwendet jedoch ausschließlich `result.processed` des aktuellen Pakets. Dadurch ist echter Fortschritt im Backend nicht eindeutig ablesbar.
+
+**Gescheiterter Weg:** denselben Meldungstext wiederholt als Stillstandsbeweis interpretieren und den Nutzer denselben Pakettest erneut ausführen lassen.
+
+**Nicht wiederholen:** Fortschritt muss auf derselben Fachseite kumulativ lesbar sein. Die Jobmeldung muss Gesamtzahl + letztes Paket ausgeben; Abschlussmeldung muss die Gesamtzahl nennen. Gleicher Pakettext allein ist niemals Stillstandsbeweis.
+
+**POSITIV:** Nach zwei 500er-Paketen zeigt der Job mindestens 1000 als kumulativen Stand.
+**NEGATIV:** Ein unveränderter kumulativer Stand bei unverändertem Cursor darf nicht als Fortschritt gelten.
+**Regression:** Import-, Cursor-, Reconcile-, Provider- und Outputlogik bleiben unverändert.
+
+**Status:** OPEN / Root Cause belegt, Fix jetzt autorisiert.
+
+## AFF-ERR-018 — WP-Cron-Fallback hat keinen pluginseitigen Kick für fällige offene Jobs
+
+**Datum / Arbeitsschritt:** 08.09.2026 / OTTO-Awin-14336-Automatik-Liveprüfung.
+
+**Symptom:** `automatische Synchronisierung aktiv` + `WP-Cron-Fallback` ist gespeichert; der offene Awin-14336-Job bleibt im beobachteten Zeitraum >10 Minuten ohne selbständigen sichtbaren Paketfortschritt.
+
+**Root Cause:** Der Pluginpfad registriert den 5-Minuten-Worker lediglich über `wp_schedule_event()` und verlässt sich anschließend vollständig auf WordPress' impliziten Cron-Spawn. Wenn dieser Host-/Runtime-Trigger nicht feuert, besitzt der Plugin-Fallback keinen eigenen eng begrenzten Kick für ein bereits fälliges Worker-Ereignis.
+
+**Gescheiterter Weg:** erneut manuell auf `Nächstes Arbeitspaket verarbeiten` klicken, obwohl die manuelle Worker-Fortsetzung bereits belegt ist. Das prüft nicht den Transport.
+
+**Nicht wiederholen:** WP-Cron-Transport separat behandeln. Für `wp_cron` darf bei offenem Job ein bereits fälliger Worker auf einem normalen Request einmal über den vorhandenen WordPress-Core-`spawn_cron()` angestoßen werden; niemals aus `DOING_CRON` rekursiv und ohne neuen Provider-/Endpoint-/Schedulerweg.
+
+**POSITIV:** fälliges Worker-Ereignis + offener Job + normaler Request stößt den Core-Cron an; danach steigt der kumulative Jobfortschritt ohne manuellen Paketknopf.
+**NEGATIV:** kein offener Job, noch nicht fälliges Ereignis oder `DOING_CRON` => kein zusätzlicher Kick.
+**Regression:** Server-Cron/WP-CLI, täglicher Dispatch, Awin/ADCELL/eBay und Fachlogik unverändert.
+
+**Status:** OPEN / Root Cause als fehlender Fallback-Kick im Plugin belegt; Hostursache wird nicht geraten.
+
 ---
 
 # Aktueller PRECHECK
