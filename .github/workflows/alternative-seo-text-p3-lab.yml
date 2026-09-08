@@ -183,3 +183,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p28_design_visual_authority_inventory.py
+
+      - name: P29 deterministic rendered DOM design gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p29_rendered_dom_design_gate_proof.py
