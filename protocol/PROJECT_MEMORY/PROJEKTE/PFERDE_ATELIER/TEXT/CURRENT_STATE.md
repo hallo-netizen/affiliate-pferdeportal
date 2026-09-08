@@ -105,9 +105,9 @@ Ruleset `Pferde Atelier Main Hardlock`:
 
 Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - PR #160;
-- Head `3fd7d6fd27c8f2d5770f081abd44136aa5620b53`;
+- Head `3059c907be76477e44e2396430551c4bec35feb6`;
 - exakt eine Security-Datei: `control/paul-scope-gate/paul_scope_gate.py`;
-- bindet current main, `RECOVERY_BASE_SHA`, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, fortlaufende historische Fehlermatrix, vertrauenswürdigen Base-Runner, Änderungs-/Erklärungsregister und Hobbyraum-Standard;
+- bindet current main, `RECOVERY_BASE_SHA`, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, fortlaufende historische Fehlermatrix, vertrauenswürdigen Base-Runner, Änderungs-/Erklärungsregister, Hobbyraum-Standard und vollständiges Ausführungs-/Testprotokoll;
 - historische Fehler müssen ab M01 lückenlos sein; mindestens M01–M33 bleiben Pflicht;
 - Matrix, Runner und Fehlerquelle müssen dieselbe akzeptierte Historie tragen;
 - `ACTIVE_BLOCKER` muss in Fehlerquelle und CURRENT_STATE real vorhanden sein;
@@ -115,6 +115,7 @@ Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - Pauls zentrale technische Regeln werden semantisch geprüft;
 - Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung werden semantisch geprüft;
 - der verbindliche Pre-Fix-Ablauf wird semantisch geprüft;
+- das Ausführungs-/Testprotokoll muss current main, aktuellen Realblocker und letzten guten `RECOVERY_BASE_SHA` enthalten;
 - kompletter vertrauenswürdiger historischer Runner läuft gegen jeden Produktionskandidaten;
 - Matrix/Runner-Wartung ist separat und darf nicht mit Produktionscode gemischt werden;
 - neue reale Fehler müssen vor jedem Fix zuerst als ausführbare Regression aufgenommen werden;
