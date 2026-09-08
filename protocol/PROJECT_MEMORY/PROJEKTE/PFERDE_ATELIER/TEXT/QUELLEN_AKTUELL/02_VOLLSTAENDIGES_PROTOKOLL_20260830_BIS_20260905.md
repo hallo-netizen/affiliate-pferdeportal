@@ -333,3 +333,69 @@ Solange Positiv/Negativ + Invarianten nicht PASS sind:
 - kein Produktionscode-Fix.
 
 Security-PR #137 enthält die vorgesehene serverseitige Prüfung von `HOBBYROOM_WORK_LOCK_V1`, ist aber weiterhin **nicht gemergt**.
+
+
+## 08.09.2026 – Abschluss-/Nachholprotokoll eingefrorener Wiederaufbau
+
+### Reparaturkonzept
+
+Der Reparaturweg wurde verbindlich eingefroren:
+`de21f6…` Goldmaster → erster realer Blocker → Paul/Fehlerhistorie/letzter funktionierender Stand/Nachbarstufen → genau eine Pflichtänderung → Positiv/Negativ → echter Realtest → PASS einfrieren oder Regression vollständig zurückbauen.
+
+Kein Sammelfix, kein Parallelkonzept, kein Fix auf fehlgeschlagenen Fix.
+
+### Wiederherstellung Goldmaster-naher Eingangsstrecke
+
+Ausgeführt:
+- PR #149: ungültige YAML-Einrückung des `Pferde Atelier Immutable Base Hardlock` korrigiert;
+- PR #150: hardlock-base-Kandidatentest auf echten Git-Worktree umgestellt;
+- PR #151: motornahe Cloud-Entry-Strecke wieder exakt auf `de21f6…` zurückgeführt;
+- Ruleset-Wartung: `hardlock-base` für kontrollierte Security-Wartung kurz entfernt und danach wieder als Required Check aktiviert.
+
+### Chronologischer Pflichtaufbau nach Goldmaster
+
+Einzeln mit Realtest aufgebaut:
+- Step 01 / historischer PR #122 → Merge #153 / main `46a807ac…`;
+- Step 02 / historischer PR #124 → Merge #154 / main `7df2008e…`;
+- Step 03 / historischer PR #125 → Merge #155 / main `a9cde12a…`;
+- Step 04 / historischer PR #126 → Merge #156 / main `67143a95…`.
+
+Nach Step 04 erster Realblocker:
+`BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`.
+
+### B02 – vollständiger alter Snapshot verworfen, Semantikdelta gebaut
+
+Der erste historische B02-Snapshot #152 wurde nach Hardlock-FAIL `INPUT_HASH_MISMATCH` vollständig verworfen; kein Fix auf diesen Kandidaten.
+
+Danach nur die historische B02-Semantik auf die aktuelle Hashkette übertragen:
+- Branch `hobbyroom/b02-semantic-worker-binding-current-hash-20260908`;
+- Head `562b71c726e2232539412376c1b0a047dbd3485d`;
+- Kandidatenchecks: `hardlock` PASS, `hardlock-base` PASS;
+- Merge main `36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9`.
+
+### Echter Realtest nach B02
+
+Ausgeführt auf exact current main `36d1ecb5…`.
+
+PASS:
+- Cloud Entry;
+- Production Preflight;
+- Runtime Entry;
+- Current Action READY;
+- Single Door READY.
+
+B02 ist real überwunden.
+
+Neuer erster echter Blocker:
+`BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`.
+
+Befund:
+`fachworkflow_handoff.command` exponiert `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` nicht; echter PPM-6.7.9-Lauf kann über den gebundenen Befehl nicht starten.
+
+107007 nicht abgeschlossen, 107008 nicht erreicht, kein Publish, kein WordPress-Write.
+
+### Separate Testgrenze PR #107
+
+Der permanente Dispatcher-PR #107 zeigte nach Umschalten seines Heads auf `36d1ecb5…` einen `hardlock-base`-FAIL `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil sein alter Dispatcher-Base historische immutable Änderungen im PR-Diff sichtbar macht.
+
+Dies ist kein TEXT-Produktionsblocker und ersetzt keinen Realtest.
