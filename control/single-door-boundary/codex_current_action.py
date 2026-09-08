@@ -162,7 +162,7 @@ def _current_only(data:dict)->dict:
         if any(k not in data for k in need):raise ViewError('CURRENT_ACTION_FIELDS_MISSING')
         pref='python3 control/single-door-boundary/codex_current_room_bridge.py submit ';sub=str(data['submission_command'])
         if not sub.startswith(pref) or sub[len(pref):]!=str(data['item_receipt_ref']):raise ViewError('CURRENT_ACTION_SUBMISSION_NOT_BOUND')
-        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_CURRENT_BOUND_ITEM_NOW','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'fachworkflow_handoff':data['fachworkflow_handoff'],'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+data['item_receipt_ref'],'publish_allowed':False}
+        return {'contract':CONTRACT,'status':status,'room_token':data['room_token'],'instruction':'EXECUTE_BOUND_FACHWORKFLOW_PROMPT_AS_CURRENT_WORKER_NOW','worker_role':'CURRENT_CODEX_IS_BOUND_FACHWORKFLOW_WORKER','separate_fachworkflow_executor_required':False,'separate_fachworkflow_capability_required':False,'fachworkflow_work_generation_authority':'CURRENT_CODEX_WORKER_MUST_GENERATE_REAL_CURRENT_OUTPUTS','fachworkflow_pass_authority':'REAL_ARTIFACTS_PLUS_REAL_PPM_HANDOFF_ONLY','current_item':data['current_item'],'fachworkflow_authority':data['fachworkflow_authority'],'fachworkflow_prompt_ref':data['fachworkflow_prompt_ref'],'allowed_output_root':data['allowed_output_root'],'item_receipt_ref':data['item_receipt_ref'],'item_receipt_schema':data['item_receipt_schema'],'fachworkflow_handoff':data['fachworkflow_handoff'],'submission_command':'python3 control/single-door-boundary/codex_current_action.py submit '+data['item_receipt_ref'],'publish_allowed':False}
     if status in {'BLOCKED','USER_ACTION_REQUIRED','FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH'}:return {'contract':CONTRACT,'status':status,'room_token':data.get('room_token'),'error':data.get('error'),'evidence':data.get('evidence'),'outer_step':data.get('outer_step'),'publish_allowed':False}
     if data.get('ok') is False:return {'contract':CONTRACT,'status':'BLOCKED','error':data.get('error') or status or 'BOUND_BRIDGE_BLOCKED','publish_allowed':False}
     raise ViewError('BOUND_BRIDGE_STATUS_NOT_WORKER_VISIBLE')
@@ -181,6 +181,10 @@ def selftest()->dict:
     v=_current_only(sample)
     if 'existing_article_source_binding' in v or 'submit-request' in v['submission_command']:raise AssertionError('OLD_SOURCE_OR_SUBMIT_REQUEST_LEAK')
     if v.get('fachworkflow_handoff')!=handoff:raise AssertionError('FACHWORKFLOW_HANDOFF_NOT_EXPOSED')
+    if v.get('worker_role')!='CURRENT_CODEX_IS_BOUND_FACHWORKFLOW_WORKER':raise AssertionError('CURRENT_WORKER_ROLE_NOT_BOUND')
+    if v.get('separate_fachworkflow_executor_required') is not False or v.get('separate_fachworkflow_capability_required') is not False:raise AssertionError('SEPARATE_FACHWORKFLOW_DEPENDENCY_REGRESSION')
+    if v.get('fachworkflow_work_generation_authority')!='CURRENT_CODEX_WORKER_MUST_GENERATE_REAL_CURRENT_OUTPUTS':raise AssertionError('FACHWORKFLOW_WORK_GENERATION_NOT_BOUND')
+    if v.get('fachworkflow_pass_authority')!='REAL_ARTIFACTS_PLUS_REAL_PPM_HANDOFF_ONLY':raise AssertionError('PASS_AUTHORITY_NOT_SEPARATED_FROM_WORKER_ROLE')
     # Binding test itself is deterministic and article-type specific.
     a=augment_current_action(REPO,{'allowed_output_root':'.pferde-quarantine/test/','item_receipt_schema':{}},{'canonical_article_id':'article:test','plan_slot':'a'*64,'article_type':'ratgeber'})
     rb=a['item_receipt_schema']['textmachine_ruleset_binding'];mb=a['item_receipt_schema']['fachworkflow_pass_schema']['workflow_release_metadata_binding']
@@ -192,7 +196,7 @@ def selftest()->dict:
     for bad,label in [({'exact_five_batch_sha256':'0'*64,'exact_five_item_count':live_count},'BATCH'),({'exact_five_batch_sha256':live_batch,'exact_five_item_count':live_count+1},'COUNT')]:
         try:_validate_release_metadata_identity(bad,live_batch,live_count);raise AssertionError('RELEASE_METADATA_NEGATIVE_NOT_BLOCKED:'+label)
         except ViewError:pass
-    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'old_article_source_bound':False,'handoff_request_bound':True,'article_type_ruleset_bound':True,'strict_real_stage_validator':True,'release_metadata_batch_bound':True,'release_metadata_item_count_bound':True,'content_or_quality_authority':'NONE','publish_allowed':False}
+    return {'ok':True,'status':'CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS','direct_single_door':True,'current_codex_is_bound_fachworkflow_worker':True,'separate_fachworkflow_executor_required':False,'separate_fachworkflow_capability_required':False,'worker_generates_real_current_fachworkflow_outputs':True,'worker_does_not_self_attest_pass':True,'old_article_source_bound':False,'handoff_request_bound':True,'article_type_ruleset_bound':True,'strict_real_stage_validator':True,'release_metadata_batch_bound':True,'release_metadata_item_count_bound':True,'content_or_quality_authority':'NONE','publish_allowed':False}
 
 def main(argv:list[str])->int:
     try:
