@@ -24,7 +24,7 @@ Aktuelle belastbare Basis:
 - Testinstaller-SHA256: `f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e`;
 - **kein Live-PASS für 6.72.6**.
 
-**NEXT ACTION:** 6.72.6 installieren. Das 6.72.6-Sicherheitsupgrade stoppt einen noch offenen ungefilterten OTTO/Awin-14336-products-Job beim Plugin-Init automatisch, löscht dessen Tempfeed und deaktiviert die zentrale Automatisierung. Danach in Awin Create-a-Feed nur pferderelevante Kategorien für OTTO auswählen, die Export-URL im Awin-Produktfeed-Betriebsprofil an Advertiser 14336 binden und den neuen `portal_filtered`-Haken bestätigen. Erst danach Automatisierung wieder aktivieren und einen neuen OTTO-Produktlauf starten.
+**NEXT ACTION:** Kein neuer OTTO-Lauf. 6.72.6-Autostop ist LIVE PASS. Zuerst die 4500 vom fehlgeschlagenen ungefilterten Awin-14336-Lauf importierten Altzeilen eindeutig über Provider/Partner/Run-Scope abgrenzen und bereinigen, ohne fremde/manuelle Daten anzutasten. Danach Awin Create-a-Feed fachlich filtern, URL an 14336 binden und `portal_filtered` bestätigen. Erst danach Automatisierung wieder aktivieren und neuen OTTO-Lauf starten.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
