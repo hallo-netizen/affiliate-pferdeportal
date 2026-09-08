@@ -76,7 +76,16 @@ def run_json(cmd, cwd):
     if p.returncode!=0:
         raise RuntimeError("COMMAND_FAILED:"+p.stdout[-3000:])
     lines=[x for x in p.stdout.splitlines() if x.strip()]
-    return json.loads(lines[-1])
+    decoder=json.JSONDecoder()
+    for line in reversed(lines):
+        stripped=line.lstrip()
+        try:
+            obj,end=decoder.raw_decode(stripped)
+        except Exception:
+            continue
+        if isinstance(obj,dict):
+            return obj
+    raise RuntimeError("JSON_RESULT_NOT_FOUND:"+p.stdout[-3000:])
 
 def main():
     with tempfile.TemporaryDirectory() as td:
