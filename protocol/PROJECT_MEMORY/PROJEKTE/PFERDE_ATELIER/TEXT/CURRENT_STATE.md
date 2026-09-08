@@ -136,13 +136,23 @@ Merge/main: `914638e67a265cf2e8951b1177a7d80fdf904e98`.
 Die serverseitige Reparatur-Zwangsjacke ist damit auf `main` aktiv.
 
 Aktueller Sicherheitsstatus:
-Der für diese einmalige Security-Wartung gesetzte Ruleset-Bypass `Repository admin / pull requests only` ist noch aktiv und muss sofort wieder entfernt werden.
+Der temporäre Ruleset-Bypass wurde entfernt und frisch verifiziert:
+- `bypass_actors: []`;
+- `current_user_can_bypass: never`;
+- Required Checks `hardlock` + `hardlock-base` aktiv.
 
-Bis zur bestätigten Entfernung:
-- `FIX_FORBIDDEN`;
-- kein M28-Produktionskandidat;
-- kein Merge;
-- kein Realtest.
+M28-Kandidat vorbereitet:
+- Branch `hobbyroom/m28-handoff-request-current-main-20260908`;
+- Head `78263594456bb58ae004b5b064816de0f3531720`;
+- Base/current main `914638e67a265cf2e8951b1177a7d80fdf904e98`;
+- exakt vier Dateien: Current Action, 107007-Bundle, CURRENT_STATE.json, PFERDE_ATELIER_START_HERE.json;
+- Request-Schema exponiert;
+- 107007 auf Request → vorhandenen Adapter → Submission umgestellt;
+- Hashkette Current Action → 107007 → CURRENT_STATE → Root vollständig konsistent;
+- statische M28-Positiv/Negativ-Vorprüfung PASS.
+
+Nächster Beweis:
+serverseitiger Hardlock muss current main zuerst exakt bei M28 FAIL reproduzieren und denselben vertrauenswürdigen Runner danach auf dem Kandidaten vollständig PASS prüfen.
 
 Der B02-Kandidat `562b71c7…` hatte vor Merge:
 - `hardlock` PASS;
