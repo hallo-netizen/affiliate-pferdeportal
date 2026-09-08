@@ -3,10 +3,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import pathlib
 import re
 import subprocess
 import sys
+import tempfile
 from typing import Dict, List, Tuple
 
 OFFICIAL_CAMPUS_REF = "hobbyroom/project-memory-campus-v1-20260905"
@@ -139,6 +141,36 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:MISSING:" + ",".join(missing))
     if not re.fullmatch(r"[0-9a-fA-F]{40}", data["MAIN_SHA"]):
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:MAIN_SHA")
+    if data["STATUS"] == "FIX_ALLOWED_FOR_CODEX_TEST":
+        proof_required = {
+            "HISTORY_SOURCE_REF", "HISTORY_SOURCE_BLOB_SHA",
+            "HISTORY_PROOF_CASE", "HISTORY_PROOF_RUNNER_REF",
+            "HISTORY_PROOF_RUNNER_BLOB_SHA",
+            "PAUL_SOURCE_REF", "PAUL_SOURCE_BLOB_SHA",
+        }
+        proof_missing = sorted(proof_required.difference(data))
+        if proof_missing:
+            raise Blocked(
+                "HOBBYROOM_WORK_LOCK_INVALID:MACHINE_PROOF_MISSING:" +
+                ",".join(proof_missing)
+            )
+        for key in ("HISTORY_SOURCE_REF", "HISTORY_PROOF_RUNNER_REF", "PAUL_SOURCE_REF"):
+            value = data[key]
+            if (
+                not value
+                or value.startswith("/")
+                or ".." in pathlib.PurePosixPath(value).parts
+            ):
+                raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:" + key)
+        for key in (
+            "HISTORY_SOURCE_BLOB_SHA",
+            "HISTORY_PROOF_RUNNER_BLOB_SHA",
+            "PAUL_SOURCE_BLOB_SHA",
+        ):
+            if not re.fullmatch(r"[0-9a-fA-F]{40}", data[key]):
+                raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:" + key)
+        if not re.fullmatch(r"M[0-9]{2}", data["HISTORY_PROOF_CASE"]):
+            raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_PROOF_CASE")
     return data
 
 
@@ -172,6 +204,80 @@ def _matches_scope(path: str, spec: str) -> bool:
         elif path == item:
             return True
     return False
+
+
+def _blob_at(ref: str, path: str, label: str) -> str:
+    try:
+        value = git("rev-parse", f"{ref}:{path}")
+    except Blocked as exc:
+        raise Blocked(f"HOBBYROOM_MACHINE_PROOF_SOURCE_MISSING:{label}:{path}") from exc
+    if not re.fullmatch(r"[0-9a-fA-F]{40}", value):
+        raise Blocked(f"HOBBYROOM_MACHINE_PROOF_BLOB_INVALID:{label}:{path}")
+    return value.lower()
+
+
+def enforce_history_machine_proof(
+    data: Dict[str, str],
+    *,
+    head: str,
+    pr_base: str,
+    campus_head: str,
+) -> None:
+    bindings = (
+        ("HISTORY_SOURCE", pr_base, data["HISTORY_SOURCE_REF"], data["HISTORY_SOURCE_BLOB_SHA"]),
+        ("HISTORY_PROOF_RUNNER", pr_base, data["HISTORY_PROOF_RUNNER_REF"], data["HISTORY_PROOF_RUNNER_BLOB_SHA"]),
+        ("PAUL_SOURCE", campus_head, data["PAUL_SOURCE_REF"], data["PAUL_SOURCE_BLOB_SHA"]),
+    )
+    for label, ref, path, expected in bindings:
+        actual = _blob_at(ref, path, label)
+        if actual != expected.lower():
+            raise Blocked(
+                f"HOBBYROOM_MACHINE_PROOF_SOURCE_STALE:{label}:EXPECTED={expected}:GOT={actual}"
+            )
+
+    runner_text = show(pr_base, data["HISTORY_PROOF_RUNNER_REF"])
+    case = data["HISTORY_PROOF_CASE"]
+    with tempfile.TemporaryDirectory(prefix="hobbyroom-history-proof-") as td:
+        root = pathlib.Path(td)
+        candidate = root / "candidate"
+        runner = root / "trusted_history_runner.py"
+        runner.write_text(runner_text, encoding="utf-8")
+        git("worktree", "add", "--detach", str(candidate), head)
+        try:
+            env = dict(os.environ)
+            env["HOBBYROOM_TARGET_ROOT"] = str(candidate)
+            checks = (
+                (
+                    [sys.executable, str(runner), "--proof-selftest", case],
+                    f"HISTORY_MACHINE_PROOF_SELFTEST_PASS:{case}",
+                    "SELFTEST",
+                ),
+                (
+                    [sys.executable, str(runner), "--case", case],
+                    f"HISTORY_MACHINE_PROOF_PASS:{case}",
+                    "CANDIDATE",
+                ),
+            )
+            for command, token, phase in checks:
+                p = subprocess.run(
+                    command,
+                    cwd=str(candidate),
+                    env=env,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    check=False,
+                )
+                output = (p.stdout + p.stderr).strip()
+                if p.returncode != 0 or token not in output:
+                    raise Blocked(
+                        f"HOBBYROOM_MACHINE_PROOF_BLOCKED:{phase}:{case}:" +
+                        output[-1600:]
+                    )
+        finally:
+            git("worktree", "remove", "--force", str(candidate), check=False)
+            git("worktree", "prune", check=False)
+    print(f"HOBBYROOM_MACHINE_PROOF_PASS:{case}")
 
 
 def evaluate_work_lock_pr(
@@ -513,10 +619,27 @@ def verify() -> None:
 def verify_pr(branch: str, head: str, pr_base: str) -> None:
     campus_head = fetch_official_campus()
     changed = changed_paths(pr_base, head)
+    locks = work_locks(campus_head)
     work_result = evaluate_work_lock_pr(
-        branch, head, pr_base, changed, work_locks(campus_head)
+        branch, head, pr_base, changed, locks
     )
     print(work_result)
+    if work_result.startswith("HOBBYROOM_WORK_LOCK_PR_PASS:"):
+        relevant = [
+            data for _, data in locks
+            if any(
+                _matches_scope(p, data["TECHNICAL_SCOPE_PREFIXES"])
+                for p in changed
+            )
+        ]
+        if len(relevant) != 1:
+            raise Blocked("HOBBYROOM_MACHINE_PROOF_LOCK_RESOLUTION_FAILED")
+        enforce_history_machine_proof(
+            relevant[0],
+            head=head,
+            pr_base=pr_base,
+            campus_head=campus_head,
+        )
     try:
         hobbyroom, data = active_assignment(campus_head)
     except Blocked as exc:
@@ -569,6 +692,13 @@ CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
+HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
+HISTORY_SOURCE_BLOB_SHA: 2222222222222222222222222222222222222222
+HISTORY_PROOF_CASE: M28
+HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+HISTORY_PROOF_RUNNER_BLOB_SHA: 3333333333333333333333333333333333333333
+PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
+PAUL_SOURCE_BLOB_SHA: 4444444444444444444444444444444444444444
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1"""
     data = parse_work_lock(valid, "X/HOBBYRAUM.md")
