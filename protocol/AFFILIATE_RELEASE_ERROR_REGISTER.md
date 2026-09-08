@@ -308,6 +308,34 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Status:** LIVE_PASS / 6.72.6 — Screenshot 08.09.2026 zeigt Automatisierung deaktiviert und Awin 14336 stage=products status=failed mit Meldung „Alter/ungefilterter OTTO-Vollfeed wurde beim 6.72.6-Sicherheitsupgrade gestoppt.“
 
+
+## AFF-ERR-020 — Gestoppter Vollfeed hinterlässt exakt diesem Fehl-Lauf zugeordnete OTTO-Altimporte
+
+**Datum / Arbeitsschritt:** 08.09.2026 / Nachlauf des 6.72.6-Autostop-Live-PASS.
+
+**Symptom:** Der ungefilterte OTTO/Awin-14336-Lauf wurde korrekt terminal gestoppt, aber der abgeschlossene Fehl-Lauf weist 4500 zuvor neu importierte Produktzeilen aus. Der Autostop beendet nur den Worker/Tempfeed; bereits persistierte Bibliothekszeilen bleiben bestehen.
+
+**Root Cause:** `automation_fail_job()` bereinigt die temporäre Feeddatei und den Jobzustand, besitzt aber absichtlich keine generische Löschlogik für bereits persistierte Creatives. Für diesen historischen Fehlerfall fehlt daher ein strikt provenance-gebundener Cleanup.
+
+**Gefahr des falschen Fixes:** pauschal alle Awin-14336-Produkte löschen oder nach Datum/Titel filtern. Das könnte spätere gültige, manuell geprüfte oder aus einem anderen Lauf stammende Daten treffen.
+
+**Nicht wiederholen / Cleanup-Vertrag:**
+1. Cleanup ausschließlich für `provider=awin`, `partner_external_id=14336`, `source_kind=product`.
+2. Pflicht ist der exakte `run_uuid` eines terminal fehlgeschlagenen, ungefilterten OTTO-`products`-Jobs.
+3. Der zugehörige Run muss `status=failed`, `operation=queued_partner_sync`, `updated=0` und `imported>0` ausweisen.
+4. Bibliothekszeilen dürfen nur gelöscht werden, wenn `last_complete_run=<run_uuid>`; andere OTTO-/Awin-/Providerzeilen bleiben unberührt.
+5. Bereits daraus erzeugte Zielkanten/Ausgabeobjekte werden nur über die exakten `identity_hash`-Werte dieser Zeilen bereinigt; materialisierte Ausgaben zuerst deaktivieren. Keine globale Partnerbereinigung.
+6. Bei widersprüchlicher Provenienz oder mehr gefundenen Zeilen als der Run als neu importiert ausweist: FAIL CLOSED, nichts löschen.
+7. Cleanup ist idempotent; zweiter Lauf löscht nichts zusätzlich.
+
+**POSITIV:** Zwei ausschließlich von einem fehlgeschlagenen ungefilterten OTTO-Run neu importierte Produktzeilen plus ihre exakten Kanten/Ausgabeobjekte werden entfernt.
+
+**NEGATIV:** gleicher Partner, aber anderer `run_uuid`; anderer Provider; anderer Awin-Advertiser; `portal_filtered`-Run; Run mit `updated>0`; Provenienz-Mismatch => bleiben unangetastet bzw. Cleanup blockiert.
+
+**GESAMTWORKFLOW:** Nach Cleanup bleibt der 6.72.6-Source-Gate aktiv: neuer OTTO-Lauf nur mit explizit gebundenem Awin Create-a-Feed `portal_filtered`; lokale Relevanzprüfung weiterhin vor `creative_library_upsert()`; automatische Ausgabe nur über bereits bestehenden verifizierten OTTO-Outputvertrag; manuelle Reparatur/andere Provider unverändert.
+
+**Status:** OPEN / Root Cause belegt; genau ein gebündelter Cleanup+Workflow-Kandidat im Hobbyraum zulässig. Kein Plugin-ZIP vor vollständigem Ausgabe-Hardlock-PASS.
+
 ---
 
 # Aktueller PRECHECK
