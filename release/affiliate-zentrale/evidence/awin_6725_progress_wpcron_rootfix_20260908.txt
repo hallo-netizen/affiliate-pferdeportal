@@ -1,0 +1,62 @@
+# AFFILIATE 6.72.5 — AWIN PROGRESS / WP-CRON FALLBACK ROOTFIX
+
+STAND: 2026-09-08
+STATUS: FIXED_LOCAL_LIVE_RETEST_PENDING
+SOURCE_MANIFEST_SHA256: 033deaaba1c39a3cf2645a1f4ea79663947351fd6ed4070b88f3710eaa7b3921
+
+## Belegter Live-Ausgangszustand
+
+- Awin advertiser 14336 / OTTO.
+- Offener Job: stage=products, status=queued.
+- Manuelle Paketverarbeitung schreitet real fort; user screenshot 2026-09-08 10:12 zeigt geänderten Job-Zeitpunkt.
+- Persistierte Meldung blieb trotzdem identisch: "500 Produkte verarbeitet; Fortsetzung vorgemerkt."
+- WP-Cron-Fallback war aktiv, aber im beobachteten >10-Minuten-Fenster kein selbständiger sichtbarer Paketfortschritt.
+
+## Rootfix
+
+1. Kumulativer Fortschritt
+- details.products bleibt die bestehende kumulative Wahrheit.
+- Jobmeldung nutzt jetzt diese Gesamtzahl.
+- Laufender Job: "<gesamt> Produkte insgesamt verarbeitet; letztes Paket: <paket>. Fortsetzung vorgemerkt."
+- Abschluss: "Produktfeed vollständig verarbeitet (<gesamt> Produkte). Abschlussprüfung folgt."
+- Cursor-/Import-/Reconcile-Logik unverändert.
+
+2. WP-Cron-Fallback
+- Bestehender 5-Minuten-Worker bleibt unverändert registriert.
+- Kein neuer Endpoint, kein neuer Provider-Scheduler, kein neues Plugin.
+- Bei aktiviertem wp_cron, offenem Job und bereits fälligem Worker ruft ein normaler Request einmal WordPress-Core spawn_cron() auf.
+- DOING_CRON ist explizit gesperrt; kein rekursiver Cron-Kick.
+- Noch nicht fälliger Worker oder kein offener Job => kein Kick.
+- Server-Cron / WP-CLI bleibt unverändert.
+
+## Lokale Positiv-/Negativprüfung
+
+Isolierter PHP-8.x-Syntax-/Verhaltenstest:
+- PHP-Lint des isolierten neuen Cron-/Fortschrittsblocks: PASS.
+- POSITIV: offener Job + fälliger Worker => genau ein spawn_cron()-Kick: PASS.
+- NEGATIV: kein offener Job => kein Kick: PASS.
+- NEGATIV: Worker noch nicht fällig => kein Kick: PASS.
+- Kumulativer Fortschritt 500 + 500 => "1000 Produkte insgesamt verarbeitet; letztes Paket: 500. Fortsetzung vorgemerkt.": PASS.
+
+Ausgabe:
+PATCH_6725_POSITIVE_NEGATIVE_PASS
+
+## Source-Prüfung
+
+Geänderte fachliche Source-Dateien seit 6.72.4:
+- includes/trait-ppar-automation-suite.php
+- pferdeportal-affiliate-router.php (nur Versionsbindung)
+- readme.txt (nur Versions-/Rootfix-Dokumentation)
+
+Manifest neu gebunden:
+033deaaba1c39a3cf2645a1f4ea79663947351fd6ed4070b88f3710eaa7b3921
+
+## Noch offen
+
+Kein LIVE-PASS aus lokalem Test.
+Pflicht-Liveretest nach Installation von 6.72.5:
+1. bestehenden Awin-14336-Products-Job unverändert weiterverwenden;
+2. kumulative Zahl muss im Backend sichtbar steigen;
+3. bei WP-Cron-Fallback ohne Paketknopf auf einen fälligen Worker warten und Seite normal aufrufen;
+4. Job muss danach selbständig fortgeschritten sein;
+5. keine Fremdprovider-/Outputregression behaupten ohne reale Evidence.
