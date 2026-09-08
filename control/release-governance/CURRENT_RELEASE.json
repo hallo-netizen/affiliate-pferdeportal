@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 33,
+  "generation": 34,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -147,6 +147,14 @@
         "release/affiliate-zentrale/evidence/",
         "control/release-governance/CURRENT_RELEASE.json"
       ]
+    },
+    "otto_awin_wp_cron_followup": {
+      "status": "LIVE_FAIL_NOT_ROOTCAUSED",
+      "advertiser_id": 14336,
+      "observed": "Automation enabled with WP-Cron-Fallback; after more than 10 minutes and a fresh page request the open products job still shows 500 products processed / queued.",
+      "next_test": "Run exactly one manual 'Nächstes Arbeitspaket verarbeiten' tick on the same open job and compare queue timestamp/message.",
+      "rule": "No source fix until manual-worker-vs-scheduler boundary is proven.",
+      "checked_at": "2026-09-08"
     }
   },
   "branch_policy": {
@@ -401,7 +409,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "CONTINUE_OTTO_14336_PRODUCT_BATCH_PROCESSING",
+    "current_milestone": "ISOLATE_OTTO_14336_MANUAL_WORKER_VS_WP_CRON_TRANSPORT",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
