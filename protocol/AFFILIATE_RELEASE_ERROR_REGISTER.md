@@ -236,7 +236,7 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** fehlende/falsche ZIP, anderer SHA, rekonstruiertes 6.71 oder älterer Source => Build/Live-Replace fail closed.
 **Regression:** Nach Source-Bind erst vollständiger Positiv-/Negativ-/Gesamtworkflowtest; kein Provider-/LKG-/KISS-/Analytics-Rückbau.
 
-**Status:** OPEN / HARD BLOCK für jeden neuen Installer oder Live-Replace.
+**Status:** SUPERSEDED / die später direkt gebundene und real installierte 6.72.4-Source ist die aktuelle Basis; kein Rückbau auf 6.71 mehr zulässig.
 
 ## AFF-ERR-017 — Paketfortschritt wird im Backend nicht kumulativ sichtbar
 
@@ -254,7 +254,7 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** Ein unveränderter kumulativer Stand bei unverändertem Cursor darf nicht als Fortschritt gelten.
 **Regression:** Import-, Cursor-, Reconcile-, Provider- und Outputlogik bleiben unverändert.
 
-**Status:** OPEN / Root Cause belegt, Fix jetzt autorisiert.
+**Status:** FIXED_LOCAL / 6.72.5; Live-Readback noch ausstehend.
 
 ## AFF-ERR-018 — WP-Cron-Fallback hat keinen pluginseitigen Kick für fällige offene Jobs
 
@@ -272,14 +272,18 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 **NEGATIV:** kein offener Job, noch nicht fälliges Ereignis oder `DOING_CRON` => kein zusätzlicher Kick.
 **Regression:** Server-Cron/WP-CLI, täglicher Dispatch, Awin/ADCELL/eBay und Fachlogik unverändert.
 
-**Status:** OPEN / Root Cause als fehlender Fallback-Kick im Plugin belegt; Hostursache wird nicht geraten.
+**Status:** FIXED_LOCAL / 6.72.5; Live-Transporttest noch ausstehend.
 
 ---
 
 # Aktueller PRECHECK
 
-`AFF-ERR-015` ist lokal geschlossen. Der aktuelle fachliche Root-Blocker ist wieder ausschließlich `AFF-ERR-012` automatische DS24-Partnerschafts-Discovery.
+Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt während dieses Scopes zurückgestellt.
 
-Öffentliche dokumentierte API-Wege sind erschöpft und als nicht ausreichend belegt. Nächster zulässiger Discovery-Schritt ist nur reale Read-only-Evidence des Requests hinter `Verkäufe & Partner → Partnerschaften mit Vendoren` bzw. dessen Export; keine Zugangsdaten/Cookies/Tokens übernehmen und keinen privaten Session-Endpunkt als supported Runtime-API ausgeben.
+Für den nächsten Live-Schritt sind bindend:
+- `AFF-ERR-017`: 6.72.5 macht den kumulativen Produktfortschritt sichtbar; Live-Readback PENDING.
+- `AFF-ERR-018`: 6.72.5 ergänzt ausschließlich im bestehenden WP-Cron-Fallback den fälligen Core-`spawn_cron()`-Kick; Live-Transporttest PENDING.
+- `AFF-ERR-006`: keine weitere Mini-Fix-Kaskade. Erst 6.72.5 als gebündelten Rootfix live prüfen.
+- `AFF-ERR-001`: kein Gesamt-/Release-PASS aus dem lokalen Test.
 
-Parallel bleibt `AFF-ERR-016` HARD BLOCK für jeden Installer/Live-Replace, bis die exakte Live-6.71-Quellbasis vorliegt. Die 18er-CSV bleibt ausschließlich Testoracle. Keine Release-/Live-Abnahme aus lokalen Einzeltests.
+Bereits belegte 6.72.4-Pässe (OTTO-Feeddownload, manuelle Paketfortsetzung) nicht erneut öffnen. Nächster zulässiger Schritt ist ausschließlich der 6.72.5-Livetest gegen denselben offenen Awin-14336-Job.
