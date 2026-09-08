@@ -1670,29 +1670,41 @@ Eine GitHub-Backupfachlogik, aber zwei unabhängige Auslöser/Speicherorte:
 REGRESSIONSSCHUTZ:
 Keiner der beiden Wege darf den anderen als Voraussetzung haben.
 
-## TEXT-TECH-20260908-HISTORY-MACHINE-PROOF – Historienprüfung wird ausführbar statt behauptet
+## TEXT-TECH-20260908-HISTORY-MACHINE-PROOF – Eine maschinelle Reparaturstraße statt wiederholter Chat-Prüfung
 
 WAS:
-Der bisherige Hobbyraum-Status `CHECK_HISTORY: PASS` reicht nicht mehr als alleiniger Beleg.
-Der M01–M33-Runner wurde auf main in PR #159 für die stale Fälle M26/M28/M31 korrigiert.
-M28 besitzt zusätzlich einen Negativ-Mutanten-Selbsttest, der den historischen Fehler künstlich wieder einführt und zwingend blockieren muss.
+Der TEXT-Reparaturweg wird serverseitig auf genau eine Evidenzkette reduziert:
+- current main + erster realer Blocker + exakter Kandidatenscope aus dem offiziellen Hobbyraum;
+- autoritative TEXT-Fehlerquelle;
+- zuständige CURRENT_STATE;
+- Paul-Pipeline-Audit;
+- M01–M33-Fehlermatrix;
+- vertrauenswürdiger M01–M33-Runner vom aktuellen PR-Base/main.
+
+Der Runner-Bootstrap PR #159 ist auf main `2f3678aa…` integriert.
+Die bekannten stale Regressionen M26/M28/M31 wurden korrigiert; M28 besitzt zusätzlich einen Negativ-Mutanten-Selbsttest.
 
 WARUM:
-Der bereits bekannte M28-Fehler `fehlende FACHWORKFLOW_HANDOFF_REQUEST.json` wurde durch Commit `a5f0fba0…` erneut eingeführt, obwohl die schriftliche Fehlermatrix M28 korrekt enthielt.
-Ursache: ausführbarer Regressionstest und schriftliche Fehlerdefinition waren auseinander gelaufen; der Hobbyraum konnte deshalb ein inhaltlich falsches `CHECK_HISTORY: PASS` akzeptieren.
+M28 war schriftlich bekannt, wurde aber durch einen späteren B02-Umbau erneut eingeführt.
+Die Ursache war nicht fehlende Information, sondern fehlende technische Kopplung:
+Chat/Hobbyraum konnte `CHECK_HISTORY: PASS` behaupten, obwohl ausführbarer Regressionstest und historische Definition auseinander gelaufen waren.
 
-VERBINDLICHER SOLLWEG:
-Vor Integrationsfreigabe müssen
-1. autoritative Historienquelle,
-2. Paul-Quelle,
-3. vertrauenswürdiger Regression-Runner
-hash-/blobgebunden sein.
-Der vertrauenswürdige Runner führt zuerst seinen eigenen Negativ-Mutanten-Beweis und danach den gebundenen historischen Fall gegen den Kandidaten aus.
-Ein Kandidat darf seinen eigenen Prüfer nicht selbst grünschreiben.
+VERBINDLICHER MASCHINENWEG NACH AKTIVIERUNG VON PR #160:
+1. Branch, Head, Base und erlaubter Dateiscope müssen exakt zum offiziellen Hobbyraum passen.
+2. Manuelle `CHECK_*`-Felder sind keine Integrationsautorität.
+3. Fehlerquelle, CURRENT_STATE und Paul werden per Git-Blob an den geprüften Campus-Stand gebunden.
+4. `ACTIVE_BLOCKER` muss real in Fehlerquelle und CURRENT_STATE vorkommen; `MAIN_SHA` muss real in CURRENT_STATE stehen.
+5. Der komplette vertrauenswürdige M01–M33-Runner vom PR-Base läuft gegen den Kandidaten.
+6. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
+7. Matrix/Runner-Wartung ist nur separat als `HISTORY_AUTHORITY_MAINTENANCE` zulässig und muss Base- und Kandidatenabdeckung vollständig halten.
+8. Erst nach Maschinen-PASS darf gemergt werden.
+9. Danach genau ein echter 7/7-Realtest; erster neuer Blocker wird alleinige nächste Arbeitswahrheit.
+10. Kein Fix während des Realtests, kein Parallel-/Sammelfix.
 
 STATUS:
-- Runner-Bootstrap PR #159: integriert auf main `2f3678aa…`.
-- serverseitige Hardlock-Einklinkung PR #160 / Head `947b56ad…`: vorbereitet, noch nicht integriert.
-- aktueller Wartungsblocker: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil der bestehende immutable Hardlock `control/paul-scope-gate/` selbst schützt.
-- Kein M28-Produktionsfix parallel, bis diese Maschinenbeweis-Härtung abgeschlossen ist.
+- PR #159: integriert.
+- PR #160 / Head `d5d876f66336c4a964c4141b1a5b90ef36b825d5`: vorbereitet, noch nicht integriert.
+- einziger Wartungsblocker: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil der bestehende Hardlock seine eigene Security-Datei schützt.
+- dafür ist genau einmal kontrollierte Admin-Wartung nötig; danach normaler Hardlock sofort wieder schließen.
+- M28-Produktionsfix bleibt bis dahin eingefroren.
 
