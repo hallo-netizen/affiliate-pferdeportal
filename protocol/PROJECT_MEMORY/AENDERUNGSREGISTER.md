@@ -1580,3 +1580,44 @@ REGRESSIONSSCHUTZ:
 
 PASS-GRENZE:
 Git-Restore real PASS; vollständiges GitHub-PASS erst nach Abdeckung bzw. belegter Nichtrelevanz nicht lesbarer Admin-Einstellungen.
+
+
+## TEXT-TECH-20260908-FROZEN-RECOVERY – Ein Reparaturalgorithmus, kein Konzeptwechsel
+
+WAS:
+Der TEXT-Wiederaufbau ist fest gebunden an:
+`de21f6…` → erster realer Blocker → vier Pflichtquellen prüfen → genau ein Delta → Positiv/Negativ → echter 7/7-Realtest → PASS einfrieren oder Regression vollständig zurückbauen.
+
+WARUM:
+Mehrfaches Wechseln zwischen Minifixes, Security-Umbauten und parallelen Ansätzen erzeugte neue Fehler und machte den funktionierenden Stand schlechter reproduzierbar.
+
+REGEL:
+Kein zweites Reparaturkonzept, kein zweiter Kandidat zwischen Realtests, kein Fix auf einen fehlgeschlagenen Fix.
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md`.
+
+## TEXT-TECH-20260908-B02-SEMANTIC – Historische Semantik statt alter Hash-Snapshot
+
+WAS:
+Der vollständige historische B02-Dateisnapshot wurde nach `INPUT_HASH_MISMATCH` verworfen.
+Nur die historisch bewiesene Worker-Bindungssemantik wurde auf die aktuelle Hashkette übertragen.
+
+WARUM:
+Hashgebundene alte Gesamtdateien sind nicht sicher auf einen späteren Zwischenstand übertragbar; die fachlich/technisch notwendige Semantik kann trotzdem exakt isoliert werden.
+
+BELEG:
+B02-Kandidat `562b71c7…`: `hardlock` PASS + `hardlock-base` PASS.
+Merge `36d1ecb5…`.
+Realer Lauf kam über B02 hinaus und stoppte erst bei B07/M32.
+
+REGEL:
+Historische Fixquelle ist Beleg für die Semantik, nicht automatische Cherry-Pick-/Dateisnapshot-Freigabe.
+
+## ARCH-084 – STATUSKORREKTUR 2026-09-08
+
+Der zuvor als vorbereitet dokumentierte `HOBBYROOM_WORK_LOCK_V1` / `hardlock-base`-Weg ist inzwischen auf main aktiviert und im Ruleset `Pferde Atelier Main Hardlock` wieder als Required Check gebunden.
+
+Die frühere Formulierung „noch nicht auf main aktiviert“ ist damit historisch überholt.
+
+Der allgemeine Hobbyraum-Standard bleibt die zuständige campusweite Regel; keine zweite Architektur wurde geschaffen.
