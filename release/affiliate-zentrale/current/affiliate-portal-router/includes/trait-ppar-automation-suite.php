@@ -133,23 +133,59 @@ trait PPAR_Automation_Suite_Trait {
         );
     }
 
+    private function automation_stop_legacy_unfiltered_otto_jobs() {
+        $this->maybe_install_automation_schema();
+        global $wpdb;
+        $table = $this->automation_jobs_table();
+        $jobs = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$table} WHERE provider='awin' AND partner_external_id=%s AND stage='products' AND status IN ('queued','running','retry') ORDER BY id ASC",
+            (string) absint(self::OTTO_AWIN_ADVERTISER_ID)
+        ), ARRAY_A);
+        $stopped = 0;
+        foreach ((array) $jobs as $job) {
+            if (!is_array($job)) {
+                continue;
+            }
+            $details = $this->automation_decode_job_json($job['details'] ?? '', array());
+            if (sanitize_key((string) ($details['feed_scope'] ?? '')) === 'portal_filtered') {
+                continue;
+            }
+            $counts = $this->automation_decode_job_json($job['counts'] ?? '', $this->automation_empty_counts());
+            $this->automation_fail_job(
+                $job,
+                new WP_Error(
+                    'otto_product_feed_unfiltered',
+                    'Alter/ungefilterter OTTO-Vollfeed wurde beim 6.72.6-Sicherheitsupgrade gestoppt.'
+                ),
+                $counts,
+                $details
+            );
+            $stopped++;
+        }
+        return $stopped;
+    }
+
     public function maybe_apply_automation_safety_upgrade() {
-        $target = '4.1.0';
+        $target = '4.1.1';
         if ((string) get_option(self::OPTION_AUTOMATION_SAFETY_VERSION, '') === $target) {
             return;
         }
+        $stopped_unfiltered_otto = $this->automation_stop_legacy_unfiltered_otto_jobs();
         $settings = $this->automation_settings();
-        $settings['enabled'] = false;
-        $settings['executor'] = 'server_cron';
+        if ($stopped_unfiltered_otto > 0) {
+            $settings['enabled'] = false;
+            $settings['executor'] = 'server_cron';
+            update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
+            update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
+            if (function_exists('wp_clear_scheduled_hook')) {
+                wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
+                wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
+            }
+        }
         $settings['batch_size'] = min(500, absint($settings['batch_size']));
         $settings['time_budget'] = min(20, absint($settings['time_budget']));
         $settings['request_timeout'] = 600;
         update_option(self::OPTION_AUTOMATION_SETTINGS, $settings, false);
-        update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
-        if (function_exists('wp_clear_scheduled_hook')) {
-            wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
-            wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
-        }
         update_option(self::OPTION_AUTOMATION_SAFETY_VERSION, $target, false);
     }
 
