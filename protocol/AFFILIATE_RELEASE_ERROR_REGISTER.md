@@ -274,6 +274,30 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 **Status:** LIVE_PASS / 6.72.5 — ohne manuellen Paketknopf stieg derselbe Awin-14336-Job selbständig auf 3500 Produkte; Jobzeitpunkt fortgeschritten.
 
+## AFF-ERR-019 — OTTO/Awin-Vollfeed wird ungefiltert in die lokale Produktbibliothek geschrieben
+
+**Datum / Arbeitsschritt:** 08.09.2026 / OTTO-Awin-14336-Produktlauf.
+
+**Symptom:** Der laufende OTTO-Feed meldet tausende verarbeitete Produkte, obwohl das Portal nur pferderelevante Produkte benötigt.
+
+**Belegte Root Cause:** `automation_process_awin_product_batch()` liest jede Feedzeile; jede formal gültige Zeile wird über `automation_import_rows()` direkt in `creative_library_upsert()` gegeben. Die Normalisierung ist ausdrücklich portalneutral; eine fachliche Pferde-Relevanzprüfung findet **nicht vor der Persistenz** statt. Dadurch wird der Vollfeed lokal verarbeitet und jede formal gültige Produktzeile in der WordPress-Tabelle `{$wpdb->prefix}ppar_creative_library` angelegt/aktualisiert. Die spätere Topic-/Target-Klassifikation kommt erst nach der Speicherung und ist daher kein Importfilter.
+
+**Zusätzliche Speicherung:** Die vollständige heruntergeladene Awin-Feeddatei liegt während des offenen Jobs im privaten Server-Tempverzeichnis `sys_get_temp_dir()/ppar-automation-private-<namespace>/feed-<job_uuid>.dat[.unpacked]` und wird erst bei Jobabschluss bzw. terminalem Fehler gelöscht.
+
+**Gescheiterter Weg:** OTTO-Default/Vollfeed automatisch durchlaufen lassen und Relevanz erst nach Import bestimmen. Das skaliert für ein Pferdeportal unnötig schlecht und speichert fachfremde Produktmetadaten.
+
+**Offiziell verfügbarer besserer Weg:** Awin `Toolbox → Create-a-Feed` erlaubt Filterung nach **Advertiser, Kategorie und Marke** sowie Auswahl der benötigten Spalten. Für OTTO muss deshalb ein pferderelevanter, wiederverwendbarer Awin-Feed vor dem Import gebunden werden; lokaler zusätzlicher Guard bleibt als zweite Schutzschicht sinnvoll.
+
+**Nicht wiederholen:** Kein weiterer automatischer Vollfeed-Lauf für OTTO. Vor erneutem Start muss die Quelle bereits fachlich eingegrenzt sein; zusätzlich darf der Import nur Produkte persistieren, die einen gebundenen Pferde-Relevanzvertrag bestehen. `processed` und `stored/relevant` müssen separat sichtbar sein.
+
+**SOFORTMASSNAHME:** Automatisierung deaktivieren, damit der offene Job nicht weiterarbeitet. Offenen Job und bereits gespeicherte OTTO-Zeilen nicht blind löschen; erst belastbaren Cleanup-Scope bestimmen.
+
+**POSITIV:** Nicht-Pferde-Kategorie gelangt nicht in die lokale Bibliothek; Pferdeprodukt wird gespeichert.
+**NEGATIV:** formal valides fachfremdes OTTO-Produkt wird vor `creative_library_upsert()` verworfen.
+**Regression:** Awin-Programme/Offers, andere Provider, Produktwissen-Exact-Match und bestehende manuelle Auswahl unverändert.
+
+**Status:** OPEN / LIVE DEFECT — weiteren OTTO-Vollfeed sofort stoppen; Rootfix vor Fortsetzung erforderlich.
+
 ---
 
 # Aktueller PRECHECK
