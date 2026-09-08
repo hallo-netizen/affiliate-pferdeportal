@@ -1,56 +1,61 @@
-# GITHUB-BACKUP – REGELMÄSSIGER EIN-KLICK-WEG
+# LOKALES GITHUB-BACKUP
 
 STAND: 2026-09-08
 STATUS: VERBINDLICH
 
-## Nutzerweg
+## ROLLE
 
-Einmal Werkzeug ablegen.
+Das lokale Backup ist die **zusätzliche manuelle Sicherung** auf dem Nutzer-Mac.
 
-Danach für jedes Backup nur:
-**`GITHUB_BACKUP_STARTEN.command` doppelklicken.**
+Es ist nicht vom Tresor abhängig.
+Der Tresor läuft separat automatisch.
 
-Keine GitHub CLI.
-Kein WordPress.
-Kein WPVibe.
+## AUSLÖSER
 
-## Aktuelle Datei
+Nur:
+`GITHUB_BACKUP_STARTEN.command` doppelklicken.
 
-Fester Pfad:
+## ERGEBNIS
+
 `Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`
 
-Diese Datei wird ausschließlich nach vollständigem PASS ersetzt.
+Diese Datei wird nur nach vollständigem PASS ersetzt.
 
-Jeder erfolgreiche Lauf behält außerdem einen datierten Stand.
+Jeder erfolgreiche Lauf behält zusätzlich einen datierten Stand.
 
-## Aktualitätsvertrag
+## AKTUALITÄT
 
-Der Lauf bindet GitHub-Refs am Anfang und liest sie am Ende erneut.
+GitHub-Refs am Anfang binden.
+Nach Erstellung und Restore-Test erneut lesen.
 
 Änderung während des Laufs:
 `BACKUP_FAIL:GITHUB_WAEHREND_BACKUP_GEAENDERT`
 
-Folge:
-letzter gültiger aktueller Backupstand bleibt unverändert.
+Dann bleibt der letzte gültige lokale Stand unverändert.
 
-## Restore-Vertrag
+## RESTORE-PASS
 
-PASS nur nach Restore aus der finalen ZIP selbst:
-
-`ZIP → Bundle → Mirror → git fsck → Refvergleich → Campus-Blobvergleich`
+Pflicht:
+`ZIP → Hashprüfung → Bundle → Mirror → git fsck → Refvergleich → Campus-Blobvergleich`
 
 PASS:
 `GITHUB_DATEIEN_CAMPUS_1ZU1_RESTORE_PASS`
 
-## Campus
+und
 
-Der Campus unter
+`AKTUELLITAET_PASS`
+
+## CAMPUS
+
 `protocol/PROJECT_MEMORY/**`
-wird auf allen enthaltenen Campus-Branches per Pfad + Git-Blob-Hash geprüft.
+wird für die enthaltenen Campus-Branches per Pfad + Git-Blob-Hash geprüft.
 
-## Providergrenze
+## VERHÄLTNIS ZUM TRESOR
 
-GitHub-Secret-Werte sind nicht exportierbar.
-Providerinterne IDs/Zeitstempel sind nicht garantiert identisch reproduzierbar.
+Tresor:
+automatisch + extern + sonntags.
 
-Diese Grenze ändert nichts am 1:1-Test der Git-Dateien und Campus-Dateien.
+Lokales Backup:
+manuell + Mac + Doppelklick.
+
+Beide sichern denselben GitHub-Projektbestand, sind aber unabhängig voneinander.
