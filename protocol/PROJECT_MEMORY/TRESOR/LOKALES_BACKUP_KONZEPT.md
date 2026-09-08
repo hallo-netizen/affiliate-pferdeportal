@@ -1,32 +1,56 @@
-# GITHUB-BACKUP – NUTZERWEG
+# GITHUB-BACKUP – REGELMÄSSIGER EIN-KLICK-WEG
 
-STAND: 2026-09-07
-STATUS: KISS
+STAND: 2026-09-08
+STATUS: VERBINDLICH
 
-## Nutzer
+## Nutzerweg
 
-Nur:
-**eine aktuelle geprüfte `GITHUB_KOMPLETTBACKUP_YYYY-MM-DD.zip` herunterladen und außerhalb GitHubs speichern.**
+Einmal Werkzeug ablegen.
 
-Keine Terminal-Kommandos.
-Keine Teilarchive.
-Kein WordPress-Plugin.
+Danach für jedes Backup nur:
+**`GITHUB_BACKUP_STARTEN.command` doppelklicken.**
+
+Keine GitHub CLI.
+Kein WordPress.
 Kein WPVibe.
 
-## Intern
+## Aktuelle Datei
 
-Technischer Weg:
-`tresor/build-20260905`
-→ `.github/workflows/campus-tresor-snapshot.yml`
+Fester Pfad:
+`Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`
 
-Der Workflow baut und prüft das GitHub-Backup serverseitig.
+Diese Datei wird ausschließlich nach vollständigem PASS ersetzt.
 
-## Automatik
+Jeder erfolgreiche Lauf behält außerdem einen datierten Stand.
 
-Ziel:
-wöchentlich denselben bestehenden Workflow auslösen.
-Keine zweite Backup-Engine.
+## Aktualitätsvertrag
 
-## Aufbewahrung
+Der Lauf bindet GitHub-Refs am Anfang und liest sie am Ende erneut.
 
-Mindestens die letzte funktionierende lokale Kopie nicht überschreiben, bevor der neue Stand geprüft wurde.
+Änderung während des Laufs:
+`BACKUP_FAIL:GITHUB_WAEHREND_BACKUP_GEAENDERT`
+
+Folge:
+letzter gültiger aktueller Backupstand bleibt unverändert.
+
+## Restore-Vertrag
+
+PASS nur nach Restore aus der finalen ZIP selbst:
+
+`ZIP → Bundle → Mirror → git fsck → Refvergleich → Campus-Blobvergleich`
+
+PASS:
+`GITHUB_DATEIEN_CAMPUS_1ZU1_RESTORE_PASS`
+
+## Campus
+
+Der Campus unter
+`protocol/PROJECT_MEMORY/**`
+wird auf allen enthaltenen Campus-Branches per Pfad + Git-Blob-Hash geprüft.
+
+## Providergrenze
+
+GitHub-Secret-Werte sind nicht exportierbar.
+Providerinterne IDs/Zeitstempel sind nicht garantiert identisch reproduzierbar.
+
+Diese Grenze ändert nichts am 1:1-Test der Git-Dateien und Campus-Dateien.
