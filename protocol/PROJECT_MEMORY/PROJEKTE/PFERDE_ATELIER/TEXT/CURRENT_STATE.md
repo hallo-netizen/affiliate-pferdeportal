@@ -105,7 +105,7 @@ Ruleset `Pferde Atelier Main Hardlock`:
 
 Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - PR #160;
-- Head `3059c907be76477e44e2396430551c4bec35feb6`;
+- Head `a6f6240c05adb75883416440b4618a6ce428ecc6`;
 - exakt eine Security-Datei: `control/paul-scope-gate/paul_scope_gate.py`;
 - bindet current main, `RECOVERY_BASE_SHA`, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, fortlaufende historische Fehlermatrix, vertrauenswürdigen Base-Runner, Änderungs-/Erklärungsregister, Hobbyraum-Standard und vollständiges Ausführungs-/Testprotokoll;
 - historische Fehler müssen ab M01 lückenlos sein; mindestens M01–M33 bleiben Pflicht;
@@ -116,7 +116,10 @@ Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung werden semantisch geprüft;
 - der verbindliche Pre-Fix-Ablauf wird semantisch geprüft;
 - das Ausführungs-/Testprotokoll muss current main, aktuellen Realblocker und letzten guten `RECOVERY_BASE_SHA` enthalten;
-- kompletter vertrauenswürdiger historischer Runner läuft gegen jeden Produktionskandidaten;
+- `ACTIVE_HISTORY_CASE` bindet den aktuellen Realblocker an genau einen historischen Regressionstest;
+- current main muss vor einem Produktionsfix exakt `ACTIVE_HISTORY_CASE` als ersten FAIL reproduzieren;
+- derselbe vertrauenswürdige Runner muss danach auf dem Kandidaten die komplette Historie PASS machen;
+- `RECOVERY_BASE_SHA` muss als realer Git-Commit existieren und Vorfahr des current main sein;
 - Matrix/Runner-Wartung ist separat und darf nicht mit Produktionscode gemischt werden;
 - neue reale Fehler müssen vor jedem Fix zuerst als ausführbare Regression aufgenommen werden;
 - `HISTORY_EXPECTED_FAIL` zwingt den neuen/zu korrigierenden Regressionstest, auf dem noch unreparierten Stand exakt als erster Fehler FAIL zu liefern;
@@ -125,6 +128,8 @@ Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - manuelle `CHECK_*`-Felder sind ausdrücklich keine Freigabeautorität;
 - Gate-Arbeitslock-/Evidenz-Selbsttests laufen bei jedem serverseitigen `verify-pr` automatisch;
 - Kandidatenänderungen am Runner können den Produktionsbeweis nicht selbst fälschen.
+Aktuell: `ACTIVE_HISTORY_CASE = M28`.
+
 PR #160 ist **noch nicht integriert**.
 Exakter Infrastrukturblocker:
 `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`
