@@ -140,10 +140,8 @@ def main():
             raise RuntimeError("DRAFT_COUNT_NOT_EXACTLY_ONE")
         if positive["snapshot_status"]!="draft":
             raise RuntimeError("WRITTEN_STATUS_NOT_DRAFT")
-        if positive["snapshot_title"]!=signed_prepared["payload"]["title"]:
-            raise RuntimeError("WRITTEN_TITLE_DRIFT")
-        if positive["snapshot_content"]!=signed_prepared["payload"]["content"]:
-            raise RuntimeError("WRITTEN_CONTENT_DRIFT")
+        if positive.get("readback_ok") is not True:
+            raise RuntimeError("SIGNED_PREPARED_READBACK_DRIFT")
 
         # Tamper after signature: must be blocked before any write helper is invoked.
         tampered=copy.deepcopy(signed_release)
