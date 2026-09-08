@@ -171,3 +171,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p26_research_factpack_chain_map.py
+
+      - name: P27 existing Codex fact-pack handoff proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p27_existing_codex_factpack_handoff.py
