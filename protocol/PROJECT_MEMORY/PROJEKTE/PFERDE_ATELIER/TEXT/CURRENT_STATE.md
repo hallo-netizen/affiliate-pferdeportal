@@ -105,13 +105,19 @@ Ruleset `Pferde Atelier Main Hardlock`:
 
 Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - PR #160;
-- Head `d5d876f66336c4a964c4141b1a5b90ef36b825d5`;
+- Head `eb4b5da07d73443cb40ed74f27ded2c80ebf6ded`;
 - exakt eine Security-Datei: `control/paul-scope-gate/paul_scope_gate.py`;
-- bindet current main, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, M01–M33-Matrix und vertrauenswürdigen Base-Runner;
+- bindet current main, RECOVERY_BASE_SHA, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, M01–M33-Matrix, vertrauenswürdigen Base-Runner, Änderungs-/Erklärungsregister und Hobbyraum-Standard;
+- M01–M33 müssen in Matrix, Runner und Fehlerquelle vollständig 33/33 vorhanden sein;
 - `ACTIVE_BLOCKER` muss in Fehlerquelle und CURRENT_STATE real vorhanden sein;
+- `MAIN_SHA` und letzter guter `RECOVERY_BASE_SHA` müssen in CURRENT_STATE real vorhanden sein;
+- Pauls zentrale technische Regeln werden nicht nur per Blob, sondern semantisch auf Vollständigkeit geprüft;
+- Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung müssen im Änderungsregister vorhanden sein;
+- der verbindliche Pre-Fix-Ablauf muss im Hobbyraum-Standard vollständig vorhanden sein;
 - kompletter vertrauenswürdiger M01–M33-Lauf läuft gegen jeden Produktionskandidaten;
 - Matrix/Runner-Wartung ist separat und darf nicht mit Produktionscode gemischt werden;
-- manuelle `CHECK_*`-PASS-Felder erzeugen keine Freigabe;
+- manuelle `CHECK_*`-Felder sind ausdrücklich keine Freigabeautorität;
+- Gate-Selbsttest enthält Negativfälle für fehlende Historien-, Paul-, Entscheidungs-, Standard- und Last-Good-Evidenz;
 - Kandidatenänderungen am Runner können den Beweis nicht selbst fälschen.
 
 PR #160 ist **noch nicht integriert**.
