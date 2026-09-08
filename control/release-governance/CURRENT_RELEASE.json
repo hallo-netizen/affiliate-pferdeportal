@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 37,
+  "generation": 38,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -149,18 +149,19 @@
       ]
     },
     "otto_awin_wp_cron_followup": {
-      "status": "TESTINSTALLER_6725_BUILT_LIVE_RETEST_PENDING",
+      "status": "LIVE_PASS_6725",
       "advertiser_id": 14336,
       "observed": "WP-Cron-Fallback did not autonomously advance in the prior live window.",
       "rootfix": "Existing due worker now gets a bounded WordPress-Core spawn_cron() kick on a normal request when an open job exists; DOING_CRON recursion blocked; no new endpoint/scheduler.",
-      "next_test": "Install 6.72.5, keep WP-Cron-Fallback enabled, do not press the manual package button, wait until the worker is due and make a normal page request; verify cumulative product progress advances.",
+      "next_test": "No retest. Let same job continue automatically until products stage changes or an actual error appears.",
       "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
       "checked_at": "2026-09-08",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.5_TEST.zip",
-      "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb"
+      "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb",
+      "live_evidence": "User screenshot 2026-09-08 10:40 Europe/Berlin: same Awin 14336 job advanced automatically to 3500 cumulative products, last package 500, without manual package button."
     },
     "otto_awin_manual_batch_progress": {
-      "status": "TESTINSTALLER_6725_BUILT_LIVE_RETEST_PENDING",
+      "status": "LIVE_PASS_6725_CUMULATIVE_UI",
       "advertiser_id": 14336,
       "prior_evidence": "User screenshot 2026-09-08 10:12 proved manual package execution but ambiguous repeated 500-message.",
       "rootfix": "Queue message now reports cumulative details.products plus last package size; completion reports cumulative total.",
@@ -168,7 +169,8 @@
       "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
       "checked_at": "2026-09-08",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.5_TEST.zip",
-      "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb"
+      "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb",
+      "live_evidence": "User screenshot 2026-09-08 10:40 Europe/Berlin: '3500 Produkte insgesamt verarbeitet; letztes Paket: 500. Fortsetzung vorgemerkt.'"
     }
   },
   "branch_policy": {
@@ -398,7 +400,7 @@
       "checked_at": "2026-09-08"
     },
     "awin_6725_progress_wpcron_rootfix": {
-      "status": "TESTINSTALLER_BUILT_LIVE_RETEST_PENDING",
+      "status": "LIVE_PASS",
       "advertiser_id": 14336,
       "version": "6.72.5",
       "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
@@ -411,7 +413,8 @@
         "php_lint": "21_OF_21_PASS",
         "diff_scope": "EXACTLY_3_FILES",
         "zip_integrity": "PASS"
-      }
+      },
+      "live_evidence": "User screenshot 2026-09-08 10:40 Europe/Berlin; automatic cumulative progress 3500, last package 500, same Awin 14336 job."
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -439,7 +442,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "INSTALL_6_72_5_TEST_AND_LIVE_RETEST_SAME_OTTO_14336_JOB",
+    "current_milestone": "LET_OTTO_14336_PRODUCTS_AUTO_RUN_TO_STAGE_TRANSITION",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
