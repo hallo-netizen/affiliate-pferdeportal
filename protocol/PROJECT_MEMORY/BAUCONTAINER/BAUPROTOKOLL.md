@@ -1699,3 +1699,34 @@ Actions-Adminendpunkte 403; Secret-Werte nicht exportierbar.
 
 DARUM:
 `GITHUB_BACKUP_PREPASS`, nicht `GITHUB_KOMPLETT_PASS`.
+
+
+### 2026-09-08 – Unabhängige Tresor-Automatik real eingerichtet
+
+AUFTRAG:
+Tresor soll auch dann aktuell bleiben, wenn längere Zeit kein lokales Mac-Backup ausgelöst wird.
+
+KISS-UMSETZUNG:
+- bestehender GitHub-only Tresorworkflow wiederverwendet;
+- neuer Trigger nur über `control/tresor/AUTO_TRIGGER.txt`;
+- wöchentlicher Scheduler Sonntag 03:17 Europe/Berlin;
+- nach PASS Download des neuen Workflow-Artefakts;
+- externe persistente Ablage unter `/Campus-Tresor/`;
+- Pointer erst nach erfolgreichem externen Upload aktualisieren;
+- alter gültiger Stand bleibt bei jedem FAIL erhalten.
+
+REALTEST:
+Trigger-Commit `25e4c462b2a93447a8ca3be68e6ae2942b4dd4b6`
+→ Run `34198674940` SUCCESS
+→ Artifact `10044960646`
+→ äußerer/innerer Hash PASS
+→ Bundle verify PASS
+→ Mirror-Clone PASS
+→ git fsck --full --strict PASS
+→ externe Ablage PASS.
+
+ERGEBNIS:
+`TRESOR_AUTO_BACKUP_REALTEST_PASS`.
+
+BEZUG:
+ARCH-087.
