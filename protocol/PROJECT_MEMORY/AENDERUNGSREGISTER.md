@@ -1874,3 +1874,23 @@ AB JETZT:
 
 PR #161 bleibt inhaltlich unverändert.
 
+## TEXT-TECH-20260908-KISS-CONTROL-EXIT – Schutzschicht darf nicht zum Parallelprojekt werden
+
+WAS:
+Der TEXT-spezifische Maschinenlock wird nicht weiter als Produktionsblocker verwendet.
+
+WARUM:
+Der dritte Anlauf zeigte einen stale M15-Runner, der der eigenen Matrix und den gemergten Request-first-PRs #110/#111 widerspricht.
+Weitere Gate-Reparaturen würden erneut die Schutzschicht statt den Produktionsworkflow zum Hauptprojekt machen.
+
+BLEIBT:
+- GitHub-Ruleset aktiv;
+- `hardlock`;
+- `hardlock-base`;
+- immutable path guard;
+- historische Fehlerquellen und Runner als Prüfmaterial;
+- echter 7/7-Realtest.
+
+ENTFÄLLT:
+TEXT-spezifischer Maschinenlock als Merge-Blocker.
+
