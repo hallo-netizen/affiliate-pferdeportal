@@ -290,3 +290,30 @@ Einordnung:
 Kontrollsystemfehler, nicht M28-Produktionsfehler.
 PR #161 bleibt unverändert.
 
+### Security-Fix PR #177 vorbereitet – shallow ancestry proof
+
+PR #177:
+- Branch `hobbyroom/security-fix-shallow-recovery-ancestry-20260908`;
+- Head `f69b415099f7d9f936a81f21a56bbaa408e8dfc7`;
+- exakt eine Datei;
+- exakt +2/-0.
+
+Änderung:
+In `_assert_real_recovery_base()` wird nur dann, wenn `git rev-parse --is-shallow-repository == true`, vor der bestehenden Ahnenprüfung
+`git fetch --no-tags --unshallow origin <pr_base>`
+ausgeführt.
+
+Die harte Ahnenregel bleibt unverändert.
+
+Lokaler Git-Beweis:
+- shallow ancestry check vor unshallow: FAIL;
+- nach unshallow: PASS.
+
+GitHub-Vorprüfung PR #177:
+- Run `34229441561`, Job `102071584302`;
+- Stop ausschließlich im immutable path guard;
+- `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`;
+- `PATH_GUARD_SELFTEST_PASS`.
+
+PR #161 bleibt unverändert eingefroren.
+
