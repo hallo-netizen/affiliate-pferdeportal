@@ -1844,3 +1844,17 @@ NICHT:
 - Workflow umbauen;
 - M28-Produktionskandidat ändern.
 
+## TEXT-TECH-20260908-SHALLOW-ANCESTRY-PR177 – Ahnenregel erhalten, CI-Historie vervollständigen
+
+WAS:
+PR #177 ergänzt vor der bestehenden Recovery-Ahnenprüfung ausschließlich die Vollständigung eines shallow Git-Checkouts.
+
+WARUM:
+Der Commitgraph ist korrekt, aber `fetch-depth: 1` macht den lokalen Ahnenbeweis unvollständig.
+
+SICHERHEIT:
+Die Regel wird nicht abgeschwächt. Erst vollständige Historie, dann dieselbe `merge-base --is-ancestor`-Entscheidung.
+
+SCOPE:
+1 Datei, +2/-0. Kein Workflow-/Runner-/M28-/Publish-Umbau.
+
