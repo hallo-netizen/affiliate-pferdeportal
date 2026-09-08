@@ -60,3 +60,21 @@ Pflicht-Liveretest nach Installation von 6.72.5:
 3. bei WP-Cron-Fallback ohne Paketknopf auf einen fälligen Worker warten und Seite normal aufrufen;
 4. Job muss danach selbständig fortgeschritten sein;
 5. keine Fremdprovider-/Outputregression behaupten ohne reale Evidence.
+
+## Installationspaket-Prüfung
+
+Ausgangsartefakt:
+- Library-Datei: Affiliate-Zentrale_6.72.4_TEST.zip
+- 26/26 enthaltene Plugin-Dateien gegen das gebundene 6.72.4-Manifest geprüft: PASS.
+- Damit wurde nicht aus Historie rekonstruiert, sondern der exakt belegte 6.72.4-Testinstaller als Basis verwendet.
+
+6.72.5-Testinstaller:
+- exakt dieselben 26 Dateien wie 6.72.4;
+- gegen 6.72.5-Manifest: 26/26 SHA-256 PASS;
+- PHP-Lint über alle 21 PHP-Dateien: 21/21 PASS;
+- Byte-Diff gegen 6.72.4: exakt 3 Dateien geändert: trait-ppar-automation-suite.php, pferdeportal-affiliate-router.php, readme.txt;
+- ZIP-Strukturtest: PASS / keine komprimierten Datenfehler;
+- Dateiname: Affiliate-Zentrale_6.72.5_TEST.zip
+- ZIP-SHA256: 4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb
+
+Status bleibt: TESTINSTALLER_BUILT / LIVE_RETEST_PENDING. Dies ist kein Finalrelease.
