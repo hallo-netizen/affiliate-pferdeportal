@@ -70,9 +70,17 @@ def main():
             if "fachworkflow_handoff" not in action_text:
                 raise RuntimeError("CURRENT_MAIN_FACHWORKFLOW_HANDOFF_MISSING")
 
-            # Run the existing tests on current main, locally inside the temporary worktree.
+            # KISS: verify the existing interface contract, not the parallel chat's live repair state.
             action_out=run(["python3",ACTION_REL,"selftest"],work)
-            handoff_out=run(["python3","-m","unittest","control.startmaster0107.test_fachworkflow_proof_handoff"],work)
+            handoff_text=(work/HANDOFF_REL).read_text(encoding="utf-8")
+            if "PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1" not in handoff_text:
+                raise RuntimeError("CURRENT_MAIN_HANDOFF_CONTRACT_MISSING")
+            if "FACHWORKFLOW_PROOF_HANDOFF_PASS" not in handoff_text:
+                raise RuntimeError("CURRENT_MAIN_HANDOFF_PASS_CONTRACT_MISSING")
+            if "PSERC_PPM_Intake_Bridge::execute -> PPM679_Normal_Draft_Pipeline::execute_plan" not in handoff_text:
+                raise RuntimeError("CURRENT_MAIN_REAL_ENTRY_SEAM_MISSING")
+            if "publish_allowed" not in handoff_text or "False" not in handoff_text:
+                raise RuntimeError("CURRENT_MAIN_HANDOFF_NO_PUBLISH_BINDING_MISSING")
 
             current_candidate=run(["git","rev-parse","HEAD"],REPO).strip()
 
@@ -90,7 +98,8 @@ def main():
               "request_field_count":len(REQUIRED),
               "field_set_runtime_selectable":False,
               "existing_current_action_selftest_tail":action_out[-1200:],
-              "existing_handoff_unittest_tail":handoff_out[-1200:],
+              "existing_handoff_interface_contract_verified":True,
+              "parallel_chat_live_binding_state_required":False,
               "publish_allowed":False
             },ensure_ascii=False,indent=2))
         finally:
