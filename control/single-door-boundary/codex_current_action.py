@@ -16,6 +16,7 @@ ARTICLE_TYPE_TEMPLATES_SHA='dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d
 PPM679_VERSION='6.7.9'
 PPM679_PACKAGE_SHA256='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
 STAGES=['research_fact_pack','textmachine_article_type_structure','table_contract','internal_links','languagetool','ppm','pserc','pste','duplicate_cannibalization','seo','design_format','publish_safety']
+HANDOFF_REQUEST_REQUIRED_FIELDS=['contract','room_token','batch_sha256','canonical_article_id','plan_slot','allowed_output_root','item_receipt_ref','fachworkflow_pass_ref','contract_binding_ref','contract_binding_sha256','stage_proofs','fact_pack','production_plan_item','production_plan_header','workflow_release_item','workflow_release_metadata']
 RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
 RELEASE_KEYS={'article_origin_policy','authoring_prompt_sha256','authoring_role','content_generation_performed_by_supervisor','contract','created_at_utc','exact_five_batch_sha256','exact_five_item_count','frozen_workflow_sha256','nullpunkt','nullpunkt_sha256','ppm_baseline_sha256','ppm_version','research_evidence_policy','sequence','status','wordpress_write_performed'}
 
@@ -102,7 +103,7 @@ def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'ppm679_requirement':_ppm_requirement(),'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact bound FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'required_stage_proofs':'exact required stage set with real artifacts and hashes','workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
     a['item_receipt_schema']=s
     request_ref=root+'FACHWORKFLOW_HANDOFF_REQUEST.json'
-    a['fachworkflow_handoff']={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':batch,'request_ref':request_ref,'request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','adapter_ref':HANDOFF_REL,'adapter_sha256':sha(REPO/HANDOFF_REL),'command':'python3 '+HANDOFF_REL+' materialize '+request_ref,'technical_guard_executes_domain_logic':False,'adapter_executes_bound_ppm_stage':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
+    a['fachworkflow_handoff']={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':batch,'request_ref':request_ref,'request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','request_required_fields':HANDOFF_REQUEST_REQUIRED_FIELDS,'adapter_ref':HANDOFF_REL,'adapter_sha256':sha(REPO/HANDOFF_REL),'command':'python3 '+HANDOFF_REL+' materialize '+request_ref,'technical_guard_executes_domain_logic':False,'adapter_executes_bound_ppm_stage':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
     # NEW intentionally has no existing article source. The existing fachworkflow handoff remains bound.
     a.pop('existing_article_source_binding',None)
     return a
