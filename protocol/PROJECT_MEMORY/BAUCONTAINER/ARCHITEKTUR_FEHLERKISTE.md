@@ -833,3 +833,26 @@ Bei GitHub-Backupauftrag sind WordPress, Website-Backup und Projektarchiv im akt
 
 BEZUG:
 ARCH-086.
+
+
+## BAU-039 – Backup-Datei statt regelmäßigem Backup-Werkzeug ausgeliefert
+
+STATUS: CLOSED
+
+KURZ:
+Der Nutzer verlangte ein dauerhaft nutzbares System für regelmäßige GitHub-Backups.
+Stattdessen wurde zeitweise nur eine einzelne fertige Backup-Datei als Ergebnis präsentiert.
+
+URSACHE:
+Erzeugtes Backup-Artefakt und eigentliches Backup-Werkzeug wurden verwechselt.
+
+KISS-FIX:
+Ein dauerhaftes `GITHUB_BACKUP_STARTEN.command`.
+Jeder Doppelklick erzeugt einen frischen Stand.
+`GITHUB_BACKUP_AKTUELL.zip` wird nur nach Aktualitäts- und Restore-PASS ersetzt.
+
+REGRESSIONSSCHUTZ:
+Bei „regelmäßig GitHub sichern“ ist das Hauptprodukt das wiederverwendbare Backup-Werkzeug, nicht eine einzelne Snapshot-Datei.
+
+BEZUG:
+ARCH-087.
