@@ -1,39 +1,61 @@
 # NOTFALL-TRESOR – START_HERE
 
-STAND: 2026-09-07
-STATUS: GITHUB-ONLY / VERBINDLICH
+STAND: 2026-09-08
+STATUS: VERBINDLICH
 
 ## AUFTRAG
 
-Dieser Tresor sichert ausschließlich:
-**GitHub für `hallo-netizen/affiliate-pferdeportal`.**
+Der Tresor ist die **unabhängige automatische Notfallsicherung** von
+`hallo-netizen/affiliate-pferdeportal`.
 
-Dazu gehören der komplette Git-Bestand und die für Wiederaufbau relevanten GitHub-Daten.
+Er läuft unabhängig vom Nutzer-Mac.
 
-## HARD SCOPE LOCK
+## ZWEI SICHERUNGSWEGE
 
-Für diesen Auftrag verboten:
-- WordPress;
-- Website-Dateien oder Datenbank;
-- Campus-Library/Projektarchiv als eigener Sicherungsblock;
-- WP-Plugins als Backup-Runner;
-- neue Parallelarchitektur.
+### 1. TRESOR – automatisch
+GitHub → serverseitiger geprüfter Backup-Lauf → externer Speicher
+`/Campus-Tresor/`
 
-Der Campus liegt im Repository und wird durch das GitHub-Backup automatisch mitgesichert.
+Zeitplan:
+**sonntags 03:17 Europe/Berlin**
 
-## TECHNISCHE HAUPTQUELLE
+Auslöser:
+geplanter Tresor-Autolauf aktualisiert
+`control/tresor/AUTO_TRIGGER.txt`
+auf Branch
+`tresor/build-20260905`.
 
-Bestehender, real gelaufener Weg:
-Branch `tresor/build-20260905`
-→ `.github/workflows/campus-tresor-snapshot.yml`
+Dadurch startet der bestehende Workflow:
+`.github/workflows/campus-tresor-snapshot.yml`
 
-## NUTZERWEG
+Nur bei erfolgreichem Workflow + Restore-Prüfung wird die neue datierte Sicherung nach
+`/Campus-Tresor/`
+übernommen und
+`LATEST_GITHUB_BACKUP.txt`
+aktualisiert.
 
-Genau eine Handlung:
-**neueste geprüfte `GITHUB_KOMPLETTBACKUP_*.zip` herunterladen und außerhalb GitHubs speichern.**
+### 2. LOKALES BACKUP – manuell
+Nutzer doppelklickt:
+`GITHUB_BACKUP_STARTEN.command`
+
+Ergebnis:
+`Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`
+
+## HARD RULE
+
+Tresor und lokales Backup sind **unabhängig**.
+Wenn längere Zeit kein lokales Backup gemacht wird, läuft der Tresor trotzdem weiter.
+
+Alte gültige Tresorstände werden bei FAIL niemals überschrieben oder gelöscht.
+
+## INHALT
+
+Kompletter Git-Bestand einschließlich Campus unter
+`protocol/PROJECT_MEMORY/**`
+plus exportierbare GitHub-Metadaten.
+
+Providergrenzen:
+GitHub-Secret-Werte und einzelne interne Admininformationen sind nicht exportierbar.
 
 Aktueller Prüfstand:
 `STATUS.md`.
-
-Wiederaufbau:
-`NOTFALL_WIEDERAUFBAU.md`.
