@@ -502,7 +502,7 @@ PR #160 verändert exakt eine Security-Datei:
 `control/paul-scope-gate/paul_scope_gate.py`.
 
 Aktueller Head:
-`3059c907be76477e44e2396430551c4bec35feb6`.
+`a6f6240c05adb75883416440b4618a6ce428ecc6`.
 
 Gebundene Evidenz:
 - vollständiges Ausführungs-/Testprotokoll selbst;
@@ -525,6 +525,35 @@ Harte Wirkung nach Aktivierung:
 - aktueller Blocker, main und letzter guter Stand müssen in den autoritativen Quellen real vorhanden sein;
 - Produktionskandidat muss den kompletten vertrauenswürdigen historischen Runner PASS machen;
 - Kandidat darf seinen eigenen Runner nicht zusammen mit Produktionscode ändern.
+
+
+#### Vorher-/Nachher-Beweis jedes Produktionsfixes
+
+Zusätzliche harte Bindung:
+`ACTIVE_HISTORY_CASE` verbindet den aktuellen Realblocker mit genau einem historischen Regressionstest.
+
+Für den aktuellen Blocker:
+`ACTIVE_HISTORY_CASE: M28`.
+
+Die autoritative M28-Fehlerzeile enthält exakt:
+`FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`.
+
+Vor jedem Produktionsfix erzwingt der serverseitige Gate:
+1. `RECOVERY_BASE_SHA` muss als realer Git-Commit existieren und Vorfahr des current main sein;
+2. der vertrauenswürdige Base-Runner läuft isoliert gegen current main;
+3. current main muss exakt bei `ACTIVE_HISTORY_CASE` als erstem Fehler FAIL liefern;
+4. derselbe unveränderte Base-Runner läuft isoliert gegen den Kandidaten;
+5. Kandidat muss die vollständige akzeptierte Historie GESAMT PASS machen.
+
+Damit gilt maschinell:
+**erst Fehler beweisen → dann Fix beweisen**.
+
+Ein Fix kann nicht mehr allein durch einen grünen Kandidaten legitimiert werden.
+
+Der Gate testet zusätzlich seinen eigenen PASS-/FAIL-Auswertungsmodus bei jedem serverseitigen `verify-pr`:
+- synthetischer GESAMT-PASS wird akzeptiert;
+- synthetischer M28-FAIL wird bei erwartetem M28 akzeptiert;
+- derselbe M28-FAIL wird bei erwartetem M29 blockiert.
 
 #### Dauerregel für neue Fehler M34/M35/…
 
