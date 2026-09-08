@@ -1,0 +1,162 @@
+# AFFILIATE 6.72.8 — OTTO CLEANUP PROVENANCE / OBSERVABILITY FULL LOCAL GATE
+
+STAND: 2026-09-08
+WORKSTREAM: AFFILIATE_ZENTRALE
+ADVERTISER: Awin 14336 / OTTO
+STATUS: FULL_LOCAL_GATE_PASS / LIVE_RETEST_PENDING
+ERRORS: AFF-ERR-020, AFF-ERR-022
+SOURCE_MANIFEST_SHA256: 816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d
+TEST_ARTIFACT: Affiliate-Zentrale_6.72.8_TEST.zip
+TEST_ARTIFACT_SHA256: b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f
+
+## Warum 6.72.7 verworfen wurde
+
+Der reale Livebefund war: der angekündigte Readback "OTTO-Sicherheitsbereinigung" erschien nicht.
+
+Beim anschließenden echten lokalen Runtime-Test des ausgelieferten 6.72.7-ZIPs wurden zusätzliche Schwächen belegt:
+- Readback war an matched_runs>0 gebunden und konnte Fehlerzustände vollständig verstecken.
+- Cleanup hing an der Queue statt an der dauerhaften terminalen Run-Evidence.
+- last_complete_run allein war kein sicherer Neuanlagebeweis, weil creative_library_upsert() dieses Feld auch bei unchanged existierenden Zeilen aktualisiert.
+- row_count<=imported war daher als Löschbeweis zu schwach.
+- Identitätsvalidierung im destruktiven Loop erlaubte theoretisch partiellen Cleanup.
+
+Der frühere 6.72.7-"FULL LOCAL GATE PASS" ist deshalb als Prozess-FALSE-PASS verworfen.
+
+## 6.72.8 Rootfix
+
+1. Cleanup-Autorität
+- terminale automation_runs-Zeile ist Autorität.
+- provider=awin, partner_external_id=14336, operation=queued_partner_sync, status=failed.
+- zusätzlich eindeutige Stop-Meldung "Alter/ungefilterter OTTO-Vollfeed...".
+- portal_filtered-Runs sind ausgeschlossen.
+
+2. Exakte Neuanlage-Provenienz
+- last_complete_run muss exakt run_uuid sein.
+- immutable first_seen muss zwischen started_at und finished_at des Fehl-Runs liegen.
+- Kandidatenanzahl muss EXAKT run.imported entsprechen.
+- run.updated muss 0 sein.
+- jeder Mismatch => BLOCKED / keine Löschung.
+
+3. Vollständiger Preflight vor Destruktion
+- alle Kandidaten-IDs und identity_hash-Werte werden vollständig validiert, bevor der erste Write erfolgt.
+- ungültige Identity => kompletter Run BLOCKED, keine Teilbereinigung.
+
+4. Ausgabe
+- verknüpfte Output-Objekte werden nicht gelöscht, sondern materialisiert deaktiviert und auf blocked_source gesetzt.
+- Zielkanten werden nur über exakte identity_hash entfernt.
+- Produktzeilen werden nur mit exakter id/provider/partner/source_kind/run_uuid/first_seen-Provenienz gelöscht.
+
+5. Idempotenz / Sichtbarkeit
+- cleaned_run_uuids werden gespeichert.
+- zweiter Cleanup meldet already_cleaned und löscht nichts weiter.
+- Backend zeigt OTTO-Sicherheitsbereinigung IMMER: pass / blocked / no_candidate / already_cleaned / nicht ausgeführt.
+- kein matched_runs-Sichtbarkeitsfilter mehr.
+
+6. Sicherheitsmigration
+- target 4.1.3.
+- bei erkanntem Cleanup-Kandidaten bleibt Automatisierung deaktiviert.
+
+## Tatsächlich ausgeführte lokale Runtime-POSITIV-/NEGATIV-Tests
+
+Getestet wurde die echte 6.72.8-Kandidatendatei in einem PHP-8.4-Harness mit simuliertem WordPress/wpdb-Zustand.
+
+POSITIV:
+PASS: positive exact failed run cleanup passes
+PASS: positive deletes exactly imported new rows
+PASS: preexisting/foreign rows preserved
+PASS: only exact bad-row edges removed
+PASS: only exact bad-row output blocked
+PASS: only exact bad-row materialization deactivated
+PASS: second cleanup is idempotent
+PASS: idempotent rerun preserves survivors
+PASS: safety upgrade is version-bound to 4.1.3
+PASS: safety upgrade disables automation when legacy cleanup candidate exists
+PASS: safety upgrade persists cleanup readback status
+PASS: safety upgrade cleanup removes exact imported rows
+PASS: no-candidate cleanup persists explicit diagnostic
+PASS: no-candidate safety migration still completes deterministically
+PASS: cleanup readback label exists
+PASS: cleanup readback has explicit not-executed state
+PASS: cleanup readback is not silently hidden when no match exists
+
+NEGATIV:
+PASS: count mismatch blocks cleanup
+PASS: count mismatch performs no destructive writes
+PASS: updated run blocks cleanup
+PASS: updated run performs no destructive writes
+PASS: invalid identity blocks cleanup
+PASS: preflight prevents partial deletion
+PASS: filtered run excluded from cleanup
+PASS: filtered run never deletes products
+
+Runtime-Abschluss:
+ALL CLEANUP RUNTIME POSITIVE/NEGATIVE TESTS PASS
+
+## Tatsächlich ausgeführter OTTO/Awin-Source-Gate Runtime-Test
+
+PASS: missing OTTO filtered feed fails closed
+PASS: unconfirmed scope fails closed
+PASS: wrong advertiser binding fails closed
+PASS: foreign feed host fails closed
+PASS: confirmed Awin filtered feed passes
+
+Abschluss:
+ALL SOURCE GATE POSITIVE/NEGATIVE TESTS PASS
+
+## Gesamtworkflow-Gegenprüfung
+
+Auf der echten 6.72.8-Kandidatendatei statisch/strukturell geprüft:
+PASS version_6728
+PASS cleanup_runs_authority
+PASS cleanup_exact_new_rows
+PASS cleanup_preflight
+PASS cleanup_no_output_delete
+PASS cleanup_output_failclosed
+PASS cleanup_idempotence
+PASS cleanup_always_visible
+PASS safety_413
+PASS fullfeed_hardstop
+PASS filtered_source_gate
+PASS enqueue_uses_gate
+PASS preupsert_gate
+PASS worker_cron_intact
+PASS output_contract_intact
+PASS exact_product_intact
+PASS manual_repair_intact
+FULL_STATIC_WORKFLOW_PASS
+
+## Diff-/Regression-Gate
+
+Vergleich gegen exakt den ausgelieferten 6.72.7-Testinstaller:
+- exakt 3/26 Plugin-Dateien geändert:
+  - includes/trait-ppar-automation-suite.php
+  - pferdeportal-affiliate-router.php
+  - readme.txt
+- alle übrigen 23/26 Dateien byte-identisch.
+- Output-/Artikel-/Creative-/eBay-/Awin-Programme-/Provider-Registry-Dateien unverändert.
+
+## PHP-/ZIP-Gate
+
+- PHP-Lint: 21/21 PASS.
+- ZIP-Integrität: PASS.
+- Fresh-Unpack: 26 Dateien.
+- Source↔Fresh-ZIP-Byte-Identität: 26/26 PASS.
+- Fresh-Unpack PHP-Lint: 21/21 PASS.
+- Cleanup Runtime POSITIV/NEGATIV auf Fresh-Unpack: PASS.
+- Source-Gate Runtime POSITIV/NEGATIV auf Fresh-Unpack: PASS.
+- ZIP SHA256: b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f.
+
+## GitHub-Authority-Abgleich
+
+Nach lokalem PASS wurde exakt derselbe Kandidat nach GitHub übertragen.
+SHA256 der drei geänderten GitHub-Quelldateien stimmt mit dem lokal getesteten Kandidaten überein:
+- trait-ppar-automation-suite.php: 695a47cb159521a67dcc4118d1660b3fc822a1ac47d2421e13135995fcb885b3
+- pferdeportal-affiliate-router.php: 63fddfebcf8272836c8177bc21931f9535c07e6398ce22a87b750ffa86ab1f4a
+- readme.txt: 7f7d211745235305138f3d4c58036ef49cb6d89e485e84292a02c9a6010b1fe4
+- CURRENT_SOURCE_SHA256 manifest hash: 816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d
+
+## Ergebnis
+
+6.72.8 ist der erste nach dem 6.72.7-Livefail tatsächlich lokal ausgeführte und negativ/positiv gehärtete Kandidat.
+Kein Release-PASS behauptet.
+Einziger Live-Schritt: 6.72.8 installieren, nichts klicken, nur den immer sichtbaren OTTO-Sicherheitsbereinigung-Readback ablesen.
