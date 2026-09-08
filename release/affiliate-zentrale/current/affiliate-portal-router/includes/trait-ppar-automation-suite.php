@@ -742,7 +742,9 @@ trait PPAR_Automation_Suite_Trait {
         $permanent_gate_error = in_array($error_code, array(
             'awin_partner_id_missing','awin_partner_portal_missing','awin_partner_not_approved',
             'awin_partner_other_portal','awin_partner_test_blocked','awin_partner_excluded',
-            'awin_partner_portal_mismatch','awin_partner_not_joined_current'
+            'awin_partner_portal_mismatch','awin_partner_not_joined_current',
+            'otto_filtered_feed_required','otto_feed_scope_unconfirmed','otto_product_feed_unfiltered',
+            'otto_relevance_contract_missing'
         ), true);
         $now = time();
         if (!$permanent_gate_error && $retry <= 3) {
@@ -849,6 +851,38 @@ trait PPAR_Automation_Suite_Trait {
         $network = $this->network_settings('awin');
         $configured_url = trim((string) ($network['product_feed_url'] ?? ''));
         $configured_partner_id = absint($network['product_feed_partner_id'] ?? 0);
+        $configured_scope = sanitize_key((string) ($network['product_feed_scope'] ?? ''));
+        $is_otto = $snapshot_id === absint(self::OTTO_AWIN_ADVERTISER_ID);
+
+        // OTTO is a very broad merchant. Its generic/default Awin feed must never
+        // become the Pferde-Atelier import source. The operator first creates one
+        // reusable Awin Create-a-Feed export restricted to portal-relevant
+        // categories and binds that exact export here. The local relevance gate
+        // below is a second independent safety layer, not a substitute.
+        if ($is_otto) {
+            if ($configured_url === '' || $configured_partner_id !== $snapshot_id) {
+                return new WP_Error(
+                    'otto_filtered_feed_required',
+                    'OTTO benötigt einen ausdrücklich gebundenen, in Awin Create-a-Feed auf Pferde-Atelier-relevante Kategorien gefilterten Produktfeed.'
+                );
+            }
+            if ($configured_scope !== 'portal_filtered') {
+                return new WP_Error(
+                    'otto_feed_scope_unconfirmed',
+                    'Der gebundene OTTO-Feed ist nicht als in Awin fachlich gefilterter Pferde-Atelier-Feed bestätigt.'
+                );
+            }
+            $validated = $this->automation_validate_awin_feed_url($configured_url);
+            if (is_wp_error($validated)) {
+                return $validated;
+            }
+            return array(
+                'url'=>$validated,
+                'name'=>'Gebundener gefilterter OTTO/Awin-Produktfeed',
+                'scope'=>'portal_filtered',
+            );
+        }
+
         if ($configured_url !== '' && $configured_partner_id === $snapshot_id) {
             $validated = $this->automation_validate_awin_feed_url($configured_url);
             if (is_wp_error($validated)) {
@@ -857,6 +891,7 @@ trait PPAR_Automation_Suite_Trait {
             return array(
                 'url'=>$validated,
                 'name'=>'Manuell gebundener Awin-Produktfeed',
+                'scope'=>$configured_scope,
             );
         }
         $url_keys = array('download_url','downloadurl','feed_url','feedurl','product_feed_url','productfeedurl','url','download_link','downloadlink','download_uri','downloaduri');
@@ -881,6 +916,7 @@ trait PPAR_Automation_Suite_Trait {
             $candidates[$validated] = array(
                 'url'=>$validated,
                 'name'=>sanitize_text_field((string) ($row['feed_name'] ?? $row['advertiser_name'] ?? $row['merchant_name'] ?? 'Awin-Produktfeed')),
+                'scope'=>'provider_default',
             );
         }
         if (!$candidates) {
@@ -1136,6 +1172,74 @@ trait PPAR_Automation_Suite_Trait {
         return absint($row_count) >= $page_size;
     }
 
+    private function automation_otto_product_relevance_gate($normalized, $details) {
+        if (!is_array($normalized)) {
+            return new WP_Error('otto_relevance_row_invalid', 'OTTO-Produktzeile ist nicht auswertbar.');
+        }
+        if (sanitize_key((string) ($details['feed_scope'] ?? '')) !== 'portal_filtered') {
+            return new WP_Error('otto_product_feed_unfiltered', 'Ungefilterter OTTO-Vollfeed ist für das Pferde Atelier gesperrt.');
+        }
+        foreach (array('ebay_portal_catalog','ebay_content_policy_reason','ebay_business_classify_portal_item_strict') as $method) {
+            if (!method_exists($this, $method)) {
+                return new WP_Error('otto_relevance_contract_missing', 'Gebundener Pferde-Atelier-Relevanzvertrag ist nicht verfügbar.');
+            }
+        }
+
+        $product_type = sanitize_text_field((string) ($normalized['product_type'] ?? ''));
+        $google_category = sanitize_text_field((string) ($normalized['google_product_category'] ?? ''));
+        $brand = sanitize_text_field((string) ($normalized['brand'] ?? ''));
+        $categories = array_values(array_filter(array_unique(array($product_type, $google_category))));
+        $localized_aspects = array();
+        if ($product_type !== '') {
+            $localized_aspects[] = array('name'=>'Produktart','value'=>$product_type);
+        }
+        if ($brand !== '') {
+            $localized_aspects[] = array('name'=>'Marke','value'=>$brand);
+        }
+        // This is not invented product evidence. It records the explicit source
+        // contract: the Awin export itself was restricted to portal-relevant
+        // categories. A concrete product concept must still be independently
+        // carried by title/category/product-type evidence below.
+        $localized_aspects[] = array('name'=>'FeedScope','value'=>'Pferdebedarf');
+
+        $raw = array(
+            'title'=>sanitize_text_field((string) ($normalized['creative_title'] ?? '')),
+            'shortDescription'=>sanitize_textarea_field((string) ($normalized['creative_description'] ?? '')),
+            'categories'=>array_map(static function($name) {
+                return array('categoryName'=>sanitize_text_field((string) $name));
+            }, $categories),
+            'localizedAspects'=>$localized_aspects,
+        );
+        $item = array(
+            'title'=>$raw['title'],
+            'short_description'=>$raw['shortDescription'],
+            'category_names'=>$categories,
+            'raw'=>$raw,
+        );
+
+        $policy_reason = $this->ebay_content_policy_reason($item);
+        if ($policy_reason !== '') {
+            return new WP_Error('otto_product_content_blocked', 'Fachfremdes/gesperrtes OTTO-Produkt: ' . $policy_reason);
+        }
+        $classification = $this->ebay_business_classify_portal_item_strict($item, array());
+        if (is_wp_error($classification)) {
+            return new WP_Error(
+                'otto_product_not_portal_relevant',
+                'OTTO-Produkt passt nicht belastbar in den Pferde-Atelier-Produktkatalog: ' . $classification->get_error_message()
+            );
+        }
+        if (sanitize_key((string) ($classification['business_match_contract'] ?? '')) !== 'concept_v3'
+            || sanitize_title((string) ($classification['product_slug'] ?? '')) === '') {
+            return new WP_Error('otto_product_relevance_ambiguous', 'OTTO-Produkt besitzt kein eindeutiges Pferde-Atelier-Produktziel.');
+        }
+        return array(
+            'product_slug'=>sanitize_title((string) $classification['product_slug']),
+            'product_title'=>sanitize_text_field((string) ($classification['product_title'] ?? '')),
+            'score'=>absint($classification['score'] ?? 0),
+            'contract'=>'awin_otto_prefilter_v1',
+        );
+    }
+
     private function automation_process_awin_product_batch($job, $snapshot, $details) {
         $file = (string) ($details['feed_file'] ?? '');
         $format = sanitize_key((string) ($details['feed_format'] ?? ''));
@@ -1160,6 +1264,8 @@ trait PPAR_Automation_Suite_Trait {
         );
         $counts = $this->automation_empty_counts();
         $processed = 0;
+        $relevant_products = 0;
+        $blocked_products = 0;
         $headers = is_array($details['feed_headers'] ?? null) ? $details['feed_headers'] : array();
         $delimiter = (string) ($details['feed_delimiter'] ?? ',');
         while ($processed < $limit && microtime(true) < $deadline) {
@@ -1197,7 +1303,25 @@ trait PPAR_Automation_Suite_Trait {
             $normalized = $this->automation_product_row($row, $snapshot, (string) $job['run_uuid']);
             if (is_wp_error($normalized)) {
                 $counts['blocked']++;
+                $blocked_products++;
             } else {
+                if (absint($snapshot['external_id'] ?? 0) === absint(self::OTTO_AWIN_ADVERTISER_ID)) {
+                    $relevance = $this->automation_otto_product_relevance_gate($normalized, $details);
+                    if (is_wp_error($relevance)) {
+                        $counts['blocked']++;
+                        $blocked_products++;
+                        $processed++;
+                        if (($processed % 100) === 0) {
+                            $this->automation_job_heartbeat(absint($job['id']), (string) $job['lock_token']);
+                        }
+                        continue;
+                    }
+                    $normalized['portal_product_slug'] = (string) $relevance['product_slug'];
+                    $normalized['portal_product_title'] = (string) $relevance['product_title'];
+                    $normalized['portal_relevance_score'] = (string) absint($relevance['score']);
+                    $normalized['portal_relevance_contract'] = (string) $relevance['contract'];
+                }
+                $relevant_products++;
                 $counts = $this->automation_merge_counts($counts, $this->automation_import_rows(array($normalized), $context));
             }
             $processed++;
@@ -1208,7 +1332,14 @@ trait PPAR_Automation_Suite_Trait {
         $cursor = ftell($handle);
         $eof = feof($handle);
         fclose($handle);
-        return array('counts'=>$counts,'processed'=>$processed,'cursor'=>$cursor,'complete'=>$eof);
+        return array(
+            'counts'=>$counts,
+            'processed'=>$processed,
+            'relevant'=>$relevant_products,
+            'blocked_products'=>$blocked_products,
+            'cursor'=>$cursor,
+            'complete'=>$eof,
+        );
     }
 
     private function automation_process_adcell_product_batch($job, $details) {
@@ -1538,24 +1669,54 @@ trait PPAR_Automation_Suite_Trait {
             $details['feed_format'] = sanitize_key((string) $download['format']);
             $details['feed_headers'] = (array) $download['headers'];
             $details['feed_delimiter'] = (string) $download['delimiter'];
+            $details['feed_scope'] = sanitize_key((string) ($feed['scope'] ?? 'provider_default'));
             $details['products'] = 0;
-            $this->automation_release_job($job, 'products', absint($download['cursor']), 1, $counts, $details, 'Feed gespeichert. Erstes Produktpaket folgt.');
+            $details['relevant_products'] = 0;
+            $details['blocked_products'] = 0;
+            $this->automation_release_job($job, 'products', absint($download['cursor']), 1, $counts, $details, 'Feed gespeichert. Erstes gefiltertes Produktpaket folgt.');
             return true;
         }
         if ($stage === 'products') {
+            if ($advertiser_id === absint(self::OTTO_AWIN_ADVERTISER_ID)
+                && sanitize_key((string) ($details['feed_scope'] ?? '')) !== 'portal_filtered') {
+                return new WP_Error(
+                    'otto_product_feed_unfiltered',
+                    'Alter/ungefilterter OTTO-Vollfeed wurde gestoppt. Erst einen in Awin Create-a-Feed fachlich gefilterten Export binden.'
+                );
+            }
             $result = $this->automation_process_awin_product_batch($job, $snapshot, $details);
             if (is_wp_error($result)) {
                 return $result;
             }
             $counts = $this->automation_merge_counts($counts, $result['counts']);
             $details['products'] = absint($details['products'] ?? 0) + absint($result['processed']);
-            $total_products = absint($details['products']);
+            $details['relevant_products'] = absint($details['relevant_products'] ?? 0) + absint($result['relevant'] ?? 0);
+            $details['blocked_products'] = absint($details['blocked_products'] ?? 0) + absint($result['blocked_products'] ?? 0);
+            $total_scanned = absint($details['products']);
+            $total_relevant = absint($details['relevant_products']);
+            $total_blocked = absint($details['blocked_products']);
             if (!empty($result['complete'])) {
                 $details['feed_complete'] = true;
                 $this->automation_reconcile_partner_assets('awin', (string) $advertiser_id, 'product', (string) $job['run_uuid']);
-                $this->automation_release_job($job, 'finalize', absint($result['cursor']), 1, $counts, $details, 'Produktfeed vollständig verarbeitet (' . $total_products . ' Produkte). Abschlussprüfung folgt.');
+                $this->automation_release_job(
+                    $job,
+                    'finalize',
+                    absint($result['cursor']),
+                    1,
+                    $counts,
+                    $details,
+                    'Produktfeed vollständig geprüft: ' . $total_scanned . ' Feedzeilen; relevant akzeptiert: ' . $total_relevant . '; verworfen/blockiert: ' . $total_blocked . '. Abschlussprüfung folgt.'
+                );
             } else {
-                $this->automation_release_job($job, 'products', absint($result['cursor']), 1, $counts, $details, $total_products . ' Produkte insgesamt verarbeitet; letztes Paket: ' . absint($result['processed']) . '. Fortsetzung vorgemerkt.');
+                $this->automation_release_job(
+                    $job,
+                    'products',
+                    absint($result['cursor']),
+                    1,
+                    $counts,
+                    $details,
+                    $total_scanned . ' Feedzeilen geprüft; relevant akzeptiert: ' . $total_relevant . '; verworfen/blockiert: ' . $total_blocked . '; letztes Paket: ' . absint($result['processed']) . '. Fortsetzung vorgemerkt.'
+                );
             }
             return true;
         }
