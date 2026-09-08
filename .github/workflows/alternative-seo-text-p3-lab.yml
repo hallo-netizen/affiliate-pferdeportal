@@ -165,3 +165,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p25_target_keyword_runtime_proof.py
+
+      - name: P26 map research fact-pack chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p26_research_factpack_chain_map.py
