@@ -23,6 +23,7 @@ Der 6.72.5-Products-Worker las jede formal gültige OTTO-Feedzeile und übergab 
 - Der erste 6.72.6-Worker-Tick bricht ihn deshalb terminal mit otto_product_feed_unfiltered ab.
 - Die private temporäre Feeddatei wird über den bestehenden terminalen Cleanup gelöscht.
 - Kein Retry des ungefilterten Vollfeeds.
+- Das 6.72.6-Sicherheitsupgrade findet einen bereits offenen ungefilterten OTTO-products-Job beim normalen Plugin-Init, setzt ihn terminal auf failed, löscht die Tempfeed-Datei und deaktiviert die zentrale Automatisierung; dafür ist kein manueller Paketklick nötig.
 
 3. LOCAL PRE-UPSERT-GUARD
 - Nur OTTO 14336 wird zusätzlich vor creative_library_upsert() gegen den bereits vorhandenen hashgebundenen Pferde-Atelier-Ziel-/Content-Policy-Katalog geprüft.
@@ -43,7 +44,7 @@ PHP-Lint:
 
 Source-Manifest:
 - 26/26 Plugin-Dateien gegen CURRENT_SOURCE_SHA256.txt PASS.
-- Manifest SHA256: cdf94ed70b6d764bfe62cb354bdb8780f49034047654a0e318697be7325ad9ba
+- Manifest SHA256: 75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d
 
 Byte-Scope gegen exakt belegten 6.72.5-Testinstaller:
 - exakt 4 Dateien geändert:
@@ -64,11 +65,12 @@ Behavior-Test:
 Testausgabe:
 OTTO_6726_PREFILTER_POSITIVE_NEGATIVE_PASS
 OLD_OTTO_JOB_TERMINAL_CLEANUP_PASS
+OTTO_6726_INSTALL_UPGRADE_AUTOSTOP_PASS
 
 ## Testinstaller
 
 Datei: Affiliate-Zentrale_6.72.6_TEST.zip
-ZIP-SHA256: a0f0eb7229fc8701ff30102d930d219a0509310fdd33400fc940701afc47ef24
+ZIP-SHA256: f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e
 ZIP-Integrität: PASS / no errors detected.
 
 ## Noch offen
