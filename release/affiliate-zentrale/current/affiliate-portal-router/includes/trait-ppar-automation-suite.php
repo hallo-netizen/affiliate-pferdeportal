@@ -182,6 +182,21 @@ trait PPAR_Automation_Suite_Trait {
             wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
             wp_schedule_event(time() + 300, 'ppar_five_minutes', self::AUTOMATION_WORKER_HOOK);
         }
+        $this->automation_maybe_kick_due_wp_cron();
+    }
+
+    private function automation_maybe_kick_due_wp_cron() {
+        if ((defined('DOING_CRON') && DOING_CRON)
+            || !function_exists('wp_next_scheduled')
+            || !function_exists('spawn_cron')
+            || !$this->automation_has_open_jobs()) {
+            return false;
+        }
+        $next_worker = wp_next_scheduled(self::AUTOMATION_WORKER_HOOK);
+        if ($next_worker === false || absint($next_worker) > time()) {
+            return false;
+        }
+        return (bool) spawn_cron();
     }
 
     public function reschedule_automation_cron($force = false) {
@@ -1534,12 +1549,13 @@ trait PPAR_Automation_Suite_Trait {
             }
             $counts = $this->automation_merge_counts($counts, $result['counts']);
             $details['products'] = absint($details['products'] ?? 0) + absint($result['processed']);
+            $total_products = absint($details['products']);
             if (!empty($result['complete'])) {
                 $details['feed_complete'] = true;
                 $this->automation_reconcile_partner_assets('awin', (string) $advertiser_id, 'product', (string) $job['run_uuid']);
-                $this->automation_release_job($job, 'finalize', absint($result['cursor']), 1, $counts, $details, 'Produktfeed vollständig verarbeitet. Abschlussprüfung folgt.');
+                $this->automation_release_job($job, 'finalize', absint($result['cursor']), 1, $counts, $details, 'Produktfeed vollständig verarbeitet (' . $total_products . ' Produkte). Abschlussprüfung folgt.');
             } else {
-                $this->automation_release_job($job, 'products', absint($result['cursor']), 1, $counts, $details, absint($result['processed']) . ' Produkte verarbeitet; Fortsetzung vorgemerkt.');
+                $this->automation_release_job($job, 'products', absint($result['cursor']), 1, $counts, $details, $total_products . ' Produkte insgesamt verarbeitet; letztes Paket: ' . absint($result['processed']) . '. Fortsetzung vorgemerkt.');
             }
             return true;
         }
