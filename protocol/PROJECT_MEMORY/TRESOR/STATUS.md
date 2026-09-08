@@ -8,7 +8,7 @@ Tresor-Automatik:
 **AKTIV + REAL GETESTET**
 
 Lokales Ein-Klick-Backup:
-**WERKZEUG V2 HART GETESTET / REALER MAC-LAUF NOCH AUSSTEHEND**
+**REALER MAC-BACKUPSTAND VORHANDEN / UNABHÄNGIGER V3-ENDTEST OFFEN**
 
 ## TRESOR – AUTOMATISCH
 
@@ -90,3 +90,24 @@ Nicht 1:1 aus GitHub exportierbar:
 - Secret-Werte;
 - einzelne interne Admininformationen;
 - identische GitHub-interne IDs/Zeitstempel bei Neuaufbau.
+
+
+## REALER LOKALER MAC-TEST 2026-09-08
+
+Erzeugter Stand:
+`2026-09-08_09-33-26`
+
+Belegt:
+- äußerer ZIP-Hash gegen `.sha256` + Info PASS;
+- ZIP vollständig lesbar PASS;
+- innere Hashes PASS;
+- Backup-Info meldet 294 Branches, 1 Tag, 176 Pull-Refs, 4 Campus-Branches, 474 Campus-Dateieinträge;
+- Aktualitätsbindung meldet `PASS_GITHUB_REFS_AM_ENDE_UNVERAENDERT`.
+
+Der erste unabhängige Prüfer V2 scheiterte danach fälschlich bei `BUNDLE_VERIFY`, weil `git bundle verify` ohne Git-Repository-Kontext aufgerufen wurde.
+
+Korrektur:
+Prüfer V3 erzeugt dafür ein separates leeres Test-Repository; dieser Fix ist lokal positiv getestet.
+
+NEXT ACTION:
+Real denselben vorhandenen Mac-Backupstand mit Prüfer V3 bis `NOTFALL_WIEDERAUFBAU_PASS` prüfen.
