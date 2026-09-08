@@ -38,13 +38,31 @@ def build_release(job_id: str,item_id: str,payload: dict) -> dict:
 def write_release(path: Path,release: dict) -> None:
     path.write_bytes(canon(release))
 
-def verify_for_import(release_path: Path,signature_path: Path,public_key_path: Path) -> dict:
-    if not release_path.is_file():
-        raise Blocked("RELEASE_MISSING")
+def verify_external_signature(data_path: Path,signature_path: Path,public_key_path: Path) -> None:
+    if not data_path.is_file():
+        raise Blocked("SIGNED_DATA_MISSING")
     if not signature_path.is_file():
         raise Blocked("SIGNATURE_MISSING")
     if not public_key_path.is_file():
         raise Blocked("PUBLIC_KEY_MISSING")
+    proc=subprocess.run(
+        [
+            "openssl","pkeyutl","-verify","-pubin",
+            "-inkey",str(public_key_path),
+            "-rawin","-in",str(data_path),
+            "-sigfile",str(signature_path),
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+    if proc.returncode!=0:
+        raise Blocked("EXTERNAL_SIGNATURE_INVALID")
+
+
+def verify_for_import(release_path: Path,signature_path: Path,public_key_path: Path) -> dict:
+    if not release_path.is_file():
+        raise Blocked("RELEASE_MISSING")
 
     raw=release_path.read_bytes()
     try:
@@ -71,19 +89,7 @@ def verify_for_import(release_path: Path,signature_path: Path,public_key_path: P
     if raw!=canon(release):
         raise Blocked("RELEASE_NOT_CANONICAL")
 
-    proc=subprocess.run(
-        [
-            "openssl","pkeyutl","-verify","-pubin",
-            "-inkey",str(public_key_path),
-            "-rawin","-in",str(release_path),
-            "-sigfile",str(signature_path),
-        ],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-    )
-    if proc.returncode!=0:
-        raise Blocked("EXTERNAL_SIGNATURE_INVALID")
+    verify_external_signature(release_path,signature_path,public_key_path)
 
     return {
         "status":"IMPORT_VERIFIED_NO_PUBLISH",
