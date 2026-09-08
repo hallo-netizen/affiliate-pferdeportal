@@ -80,3 +80,9 @@ jobs:
           set -euo pipefail
           cd control/seo-text-buero/alternative-central-machine/prototype
           PYTHONDONTWRITEBYTECODE=1 python3 test_p11_workflow_contract.py
+
+      - name: P12 read-only component inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p12_component_inventory.py
