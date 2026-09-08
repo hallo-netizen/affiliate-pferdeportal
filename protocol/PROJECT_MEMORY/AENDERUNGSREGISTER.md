@@ -1673,45 +1673,63 @@ Keiner der beiden Wege darf den anderen als Voraussetzung haben.
 ## TEXT-TECH-20260908-HISTORY-MACHINE-PROOF – Eine maschinelle Reparaturstraße statt wiederholter Chat-Prüfung
 
 WAS:
-Der TEXT-Reparaturweg wird serverseitig auf genau eine Evidenzkette reduziert:
-- current main + erster realer Blocker + exakter Kandidatenscope aus dem offiziellen Hobbyraum;
-- autoritative TEXT-Fehlerquelle;
+Der TEXT-Reparaturweg wird serverseitig auf eine einzige, maschinengebundene Evidenzkette reduziert:
+- current main;
+- erster realer Blocker;
+- letzter real funktionierender Stand (`RECOVERY_BASE_SHA`);
+- exakter Kandidatenscope;
+- autoritative Fach-Fehlerquelle;
 - zuständige CURRENT_STATE;
 - Paul-Pipeline-Audit;
-- M01–M33-Fehlermatrix;
-- vertrauenswürdiger M01–M33-Runner vom aktuellen PR-Base/main.
+- fortlaufende historische Fehlermatrix;
+- vertrauenswürdiger historischer Regression-Runner vom aktuellen PR-Base/main;
+- Änderungs-/Erklärungsregister;
+- campusweiter Hobbyraum-Standard.
 
 Der Runner-Bootstrap PR #159 ist auf main `2f3678aa…` integriert.
-Die bekannten stale Regressionen M26/M28/M31 wurden korrigiert; M28 besitzt zusätzlich einen Negativ-Mutanten-Selbsttest.
+Die stale Regressionen M26/M28/M31 wurden korrigiert; M28 besitzt einen Negativ-Mutanten-Selbsttest.
 
 WARUM:
-M28 war schriftlich bekannt, wurde aber durch einen späteren B02-Umbau erneut eingeführt.
-Die Ursache war nicht fehlende Information, sondern fehlende technische Kopplung:
-Chat/Hobbyraum konnte `CHECK_HISTORY: PASS` behaupten, obwohl ausführbarer Regressionstest und historische Definition auseinander gelaufen waren.
+M28 war bereits schriftlich bekannt und wurde trotzdem erneut eingeführt.
+Die Ursache war nicht Informationsmangel, sondern fehlende technische Kopplung:
+Chat/Hobbyraum konnte `CHECK_HISTORY: PASS` behaupten, obwohl ausführbarer Regressionstest und historische Definition auseinanderliefen.
 
-VERBINDLICHER MASCHINENWEG NACH AKTIVIERUNG VON PR #160:
+DAUERHAFTER ZWANGSWEG NACH AKTIVIERUNG VON PR #160:
 1. Branch, Head, Base und erlaubter Dateiscope müssen exakt zum offiziellen Hobbyraum passen.
 2. Manuelle `CHECK_*`-Felder sind keine Integrationsautorität.
-3. M01–M33-Matrix, vertrauenswürdiger Base-Runner, autoritative Fehlerquelle, CURRENT_STATE, Paul-Prüfkarte, Änderungs-/Erklärungsregister und Hobbyraum-Standard werden per Git-Blob gebunden.
-4. M01–M33 müssen vollständig in Matrix, Runner und autoritativer Fehlerquelle vorhanden sein.
-5. `ACTIVE_BLOCKER` muss real in Fehlerquelle und CURRENT_STATE vorkommen; `MAIN_SHA` und `RECOVERY_BASE_SHA` müssen real in CURRENT_STATE stehen.
-6. Pauls Kernregeln werden semantisch geprüft: kein Sammelfix, historische Fehlerquelle, bestehende Regression, echter 7/7-Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik, Pre-/Post-Transformation.
-7. Änderungsregister muss Frozen-Recovery, kausalen Corridor und Maschinenbeweis-Entscheidung enthalten.
-8. Hobbyraum-Standard muss Historie, letzten funktionierenden Stand, direkte Nachbarn, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest enthalten.
-9. Der komplette vertrauenswürdige M01–M33-Runner vom PR-Base/main läuft gegen den Kandidaten.
-10. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
-11. Matrix/Runner-Wartung ist nur separat als `HISTORY_AUTHORITY_MAINTENANCE` zulässig und muss Base- und Kandidatenabdeckung vollständig halten.
-12. Erst nach Maschinen-PASS darf gemergt werden; danach genau ein echter 7/7-Realtest, dessen erster neuer Blocker alleinige nächste Arbeitswahrheit wird.
-13. Kein Fix während des Realtests, kein Parallel-/Sammelfix.
+3. Alle Evidenzquellen werden per Git-Blob an exakt den geprüften Stand gebunden.
+4. Historische Fehler müssen ab M01 lückenlos sein; mindestens M01–M33 bleiben Pflicht.
+5. Matrix, Runner und autoritative Fehlerquelle müssen dieselbe akzeptierte Fehlerhistorie tragen.
+6. `ACTIVE_BLOCKER` muss real in Fehlerquelle und CURRENT_STATE stehen.
+7. `MAIN_SHA` und `RECOVERY_BASE_SHA` müssen real in CURRENT_STATE stehen.
+8. Pauls Kernregeln werden semantisch geprüft: kein Sammelfix, historische Fehlerquelle, bestehende Regression, echter 7/7-Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik, Pre-/Post-Transformation.
+9. Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung müssen im Änderungsregister stehen.
+10. Historienprüfung, letzter funktionierender Stand, direkte Nachbarn, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest müssen im Hobbyraum-Standard stehen.
+11. Jeder Produktionskandidat muss den kompletten vertrauenswürdigen historischen Runner vom PR-Base/main GESAMT PASS machen.
+12. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
+
+NEUER FEHLER = ZUERST MASCHINELLE ERINNERUNG:
+- Ein neu real auftretender Fehler wird als nächstes Mxx in Fehlerquelle, Matrix und Runner aufgenommen.
+- Dafür ausschließlich separater Plan `HISTORY_AUTHORITY_MAINTENANCE`.
+- `HISTORY_EXPECTED_FAIL` bindet exakt diesen neuen/zu korrigierenden historischen Fehler.
+- Der Base-Runner muss alle bisher akzeptierten Fehler weiter PASS halten.
+- Der Kandidaten-Runner muss auf dem **noch unreparierten** Stand exakt bei `HISTORY_EXPECTED_FAIL` als erstem Fehler FAIL liefern.
+- Bestehende Historie darf nicht verkürzt oder übersprungen werden.
+- Erst nach dieser FAIL-Reproduktion darf der Produktionsfix entstehen.
+- Der spätere Produktionsfix muss die komplette erweiterte Historie PASS machen.
+- Dadurch können M34, M35, ... ohne erneute Security-Gate-Änderung aufgenommen werden.
 
 SELBSTSCHUTZ:
-- die Gate-Logik besitzt eigene Negativtests gegen fehlende M33-Abdeckung, fehlende Paul-Regel, fehlende Entscheidungsregel, fehlende Standardregel und fehlenden letzten guten Stand;
-- `CHECK_*` kann bewusst auf PENDING stehen, ohne Maschinen-PASS zu ersetzen oder zu erzeugen.
+- Gate-Arbeitslock- und Evidenz-Selbsttests laufen bei jedem serverseitigen `verify-pr` automatisch.
+- Negativfälle prüfen fehlende Historienabdeckung, Lücken, Paul-Regeln, Entscheidungsregeln, Standardregeln und fehlenden letzten guten Stand.
+- Eine künstliche Erweiterung um M34 ist als Positivfall eingebaut.
+- `CHECK_*` darf auf PENDING stehen und kann den Maschinenbeweis weder ersetzen noch erzeugen.
 
 STATUS:
 - PR #159: integriert.
-- PR #160 / Head `eb4b5da07d73443cb40ed74f27ded2c80ebf6ded`: vorbereitet, noch nicht integriert.
-- exakt eine Security-Datei.
-- einziger Wartungsblocker: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil der bestehende Hardlock seine eigene Security-Datei schützt.
-- M28-Produktionsfix bleibt bis dahin eingefroren.
-
+- PR #160: exakt eine Security-Datei.
+- aktueller PR-Head: `3fd7d6fd27c8f2d5770f081abd44136aa5620b53`.
+- PR #160 bleibt nur durch `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED` blockiert, weil der bestehende Hardlock seine eigene Gate-Datei schützt.
+- Ein direkter Mergeversuch wurde von GitHub mit Repository-Rule-Verstoß abgewiesen; kein Chat-seitiger Admin-/Ruleset-Schreibweg existiert.
+- Historischer PR #137 belegt denselben kontrollierten Einmal-Admin-Wartungsweg.
+- M28-Produktionsfix bleibt bis zur Aktivierung eingefroren.
