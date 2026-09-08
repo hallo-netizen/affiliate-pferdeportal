@@ -353,6 +353,34 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Status:** CLOSED / TASK.current enthält wieder exakt die neun erlaubten Felder und wurde gegen den echten load_task()-Vertrag statisch validiert.
 
+
+## AFF-ERR-022 — 6.72.7-Cleanup war nicht belastbar geprüft: Status unsichtbar + Provenienz zu schwach
+
+**Datum / Arbeitsschritt:** 08.09.2026 / echter lokaler Nachtest nach Livebefund „OTTO-Sicherheitsbereinigung steht nicht da“.
+
+**Live-Symptom:** Nach Installation von 6.72.7 erscheint der angekündigte Readback `OTTO-Sicherheitsbereinigung` nicht.
+
+**Belegte Root Causes im echten 6.72.7-Code:**
+1. Die UI rendert den Readback nur bei `!empty($otto_cleanup['matched_runs'])`. Bei keinem Treffer/fehlender Ausführung/abweichender Provenienz bleibt der gesamte Diagnosezustand unsichtbar.
+2. Cleanup navigiert über die Queue-Tabelle (`status=failed, stage=products`) statt über die dauerhafte terminale Run-Evidence. Das ist unnötig fragil.
+3. `creative_library_upsert()` überschreibt `last_complete_run` auch bei `unchanged` existierenden Zeilen. `last_complete_run=<Fehl-Run>` allein beweist daher **nicht**, dass die Zeile in diesem Fehl-Run neu importiert wurde.
+4. Die 6.72.7-Regel `row_count <= imported` ist deshalb als Löschbeweis zu schwach. Sicher ist nur: immutable `first_seen` liegt im Run-Zeitfenster **und** die Kandidatenanzahl entspricht exakt `run.imported`.
+5. Der Identitätscheck lag im destruktiven Löschloop. Ein später ungültiger Datensatz hätte einen partiellen Cleanup hinterlassen können.
+
+**Prozessfehler:** Der zuvor behauptete „FULL LOCAL GATE PASS“ für 6.72.7 war nicht belastbar. Der echte Runtime-POSITIV-/NEGATIV-Harness wurde erst nach dem Live-Fail ausgeführt. Diese Art Papier-PASS ist verboten.
+
+**Nicht wiederholen / harter Vertrag:**
+- Kein PASS aus bloßer Source-Inspektion oder behaupteten Tests.
+- Jeder destruktive Cleanup bekommt einen **ausgeführten Runtime-Harness** gegen die echte Kandidatendatei.
+- POSITIV: echter Fehl-Run löscht nur seine neu erzeugten Zeilen.
+- NEGATIV: preexisting unchanged, anderer Run, anderer Advertiser/Provider, `portal_filtered`, `updated>0`, Count-Mismatch und ungültige Identity dürfen keine destruktive Änderung verursachen.
+- Vor dem ersten Write vollständiger Kandidaten-Preflight.
+- Dauerhafte `automation_runs`-Evidence ist Cleanup-Autorität; Queue-Zustand nicht.
+- Readback wird immer angezeigt: `pass / blocked / no_candidate / already_cleaned / nicht ausgeführt`.
+- Bei jedem FAIL bleibt derselbe Kandidat im Hobbyraum; **kein ZIP**.
+
+**Status:** OPEN / 6.72.7 LIVE FAIL. Einziger zulässiger Kandidat ist 6.72.8 im Hobbyraum; Ausgabe erst nach tatsächlich ausgeführtem vollständigem lokalen Gate.
+
 ---
 
 # Aktueller PRECHECK
@@ -363,9 +391,9 @@ Bindend:
 - `AFF-ERR-017`: kumulativer Fortschritt LIVE PASS; nicht erneut öffnen.
 - `AFF-ERR-018`: WP-Cron-Fallback LIVE PASS; nicht erneut öffnen.
 - `AFF-ERR-019`: ungefilterter OTTO-Vollfeed bleibt HARD BLOCKED; Source-Gate + lokaler Pre-Upsert-Guard aktiv.
-- `AFF-ERR-020`: 6.72.7 Exact-run Altimport-Cleanup FULL LOCAL GATE PASS; Live-Readback ausstehend.
+- `AFF-ERR-020`: 6.72.7 ist durch AFF-ERR-022 als nicht belastbar geprüft verworfen; Cleanup-Ziel bleibt offen.
 - `AFF-ERR-021`: Hobbyraum-TASK-Schema CLOSED.
-- `AFF-ERR-006`: Ausgabe-Hardlock für 6.72.7 erfüllt: ein Kandidat, kein Zwischen-ZIP, Positiv/Negativ/Gesamtworkflow/Regression/Manifest/Fresh-Unpack/Byte-Identität PASS.
+- `AFF-ERR-006`: 6.72.7-Ausgabe war ein Prozess-FALSE-PASS; ab 6.72.8 zählt nur tatsächlich ausgeführter Runtime-POSITIV-/NEGATIV-/Gesamtworkflow-Test.
 - `AFF-ERR-001`: weiterhin kein Release-/Live-PASS ohne echte WordPress-Evidence.
 
-**Nächster zulässiger Schritt:** exakt **6.72.7 TEST installieren**. Danach keine Buttons drücken. Auf `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ausschließlich den neuen Readback `OTTO-Sicherheitsbereinigung` prüfen. Erst nach bestätigtem Cleanup-Live-PASS Awin Create-a-Feed fachlich filtern/binden. Kein neuer OTTO-Lauf vorher.
+**Nächster zulässiger Schritt:** **kein Plugin ausgeben.** Kandidat 6.72.8 im Hobbyraum gegen den echten 6.72.7-Livefehler härten und tatsächlich lokal ausführen: Runtime POSITIV/NEGATIV, Gesamtworkflow, Regression, vollständiger PHP-Lint, exakter Diff-Scope, Fresh-ZIP-Unpack + erneute Tests. Erst bei vollständigem echten PASS exakt ein ZIP.
