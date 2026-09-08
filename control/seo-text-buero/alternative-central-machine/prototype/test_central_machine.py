@@ -132,5 +132,41 @@ class P0CentralMachineTests(unittest.TestCase):
             self.assertTrue(m.finished)
 
 
+    def test_positive_p1_fixed_link_rule_accepts_clean_draft(self):
+        m = CentralMachine("JOB-LINK-OK", "ITEM-1")
+        self.good_research(m)
+        self.good_text(m)
+        self.assertEqual(m.current_step, "FINAL_CHECK")
+
+    def test_negative_p1_fixed_link_rule_blocks_external_url(self):
+        m = CentralMachine("JOB-LINK-BLOCK", "ITEM-1")
+        self.good_research(m)
+        wi = m.worker_input()
+        result = make_result(wi, {
+            "item_id": "ITEM-1",
+            "facts": wi["payload"]["facts"],
+            "draft": "Draft mit https://example.org",
+        })
+        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
+            m.submit(result)
+
+    def test_negative_p1_rule_cannot_be_disabled_in_constructor(self):
+        with self.assertRaises(TypeError):
+            CentralMachine("JOB-1", "ITEM-1", allow_external_links=True)
+
+    def test_negative_p1_worker_cannot_disable_rule_in_output(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        self.good_research(m)
+        wi = m.worker_input()
+        result = make_result(wi, {
+            "item_id": "ITEM-1",
+            "facts": wi["payload"]["facts"],
+            "draft": "Draft mit https://example.org",
+            "allow_external_links": True,
+        })
+        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
+            m.submit(result)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
