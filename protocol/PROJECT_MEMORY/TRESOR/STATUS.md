@@ -8,7 +8,7 @@ Tresor-Automatik:
 **AKTIV + REAL GETESTET**
 
 Lokales Ein-Klick-Backup:
-**REALER MAC-BACKUPSTAND VORHANDEN / UNABHÄNGIGER V3-ENDTEST OFFEN**
+**REALER MAC-BACKUPSTAND + UNABHÄNGIGER NOTFALL-RESTORE PASS**
 
 ## TRESOR – AUTOMATISCH
 
@@ -109,5 +109,28 @@ Der erste unabhängige Prüfer V2 scheiterte danach fälschlich bei `BUNDLE_VERI
 Korrektur:
 Prüfer V3 erzeugt dafür ein separates leeres Test-Repository; dieser Fix ist lokal positiv getestet.
 
+## UNABHÄNGIGER NOTFALL-ENDTEST V3 – REALER MAC-LAUF PASS
+
+Exakt derselbe vorhandene lokale Backupstand wurde mit Prüfer V3 unabhängig geprüft.
+
+Realer Nutzerlauf:
+- äußerer ZIP-Hash gegen `.sha256` + Info PASS;
+- ZIP vollständig lesbar PASS;
+- innere Hashes PASS;
+- Git-Bundle im separaten Test-Repository verify PASS;
+- echter Mirror-Restore PASS;
+- `git fsck --full --strict` PASS;
+- alle gesicherten Refs identisch PASS;
+- Campus bytegenau identisch PASS;
+- Aktualitätsbindung über SHA256 PASS.
+
+Endergebnis:
+`NOTFALL_WIEDERAUFBAU_PASS`
+
+Damit ist für den lokalen Stand 2026-09-08_09-33-26 der Wiederaufbau der gesicherten Git-Dateien, Historie, Refs und Campus-Dateien real auf dem Nutzer-Mac nachgewiesen.
+
+Providergrenze bleibt unverändert:
+GitHub-Secret-Werte und einzelne providerinterne Informationen sind nicht 1:1 exportierbar.
+
 NEXT ACTION:
-Real denselben vorhandenen Mac-Backupstand mit Prüfer V3 bis `NOTFALL_WIEDERAUFBAU_PASS` prüfen.
+Kein weiterer Test dieses identischen lokalen Backupstands erforderlich. Nächster lokaler Lauf erst bei gewünschter Aktualisierung per Doppelklick.
