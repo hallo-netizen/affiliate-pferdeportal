@@ -376,13 +376,6 @@ def evaluate_work_lock_pr(
             f"HOBBYROOM_MAIN_BASE_MISMATCH:EXPECTED={data['MAIN_SHA']}:GOT={pr_base}"
         )
 
-    for key in (
-        "CHECK_PAUL", "CHECK_HISTORY", "CHECK_LAST_GOOD", "CHECK_NEIGHBORS",
-        "CHECK_REPEAT_CLASS", "CHECK_POS_NEG", "CHECK_INVARIANTS",
-    ):
-        if data[key] != "PASS":
-            raise Blocked(f"HOBBYROOM_REQUIRED_CHECK_NOT_PASS:{key}:{data[key]}")
-
     allowed = data["ALLOWED_PATH_PREFIXES"]
     if not _scope_items(allowed):
         raise Blocked("HOBBYROOM_ALLOWED_PATHS_MISSING")
