@@ -633,3 +633,44 @@ Der temporäre Ruleset-Bypass `Repository admin / pull requests only` ist nach d
 Bis zu seiner bestätigten Entfernung:
 `FIX_FORBIDDEN`.
 
+### Ruleset wieder geschlossen und M28-Kandidat vorbereitet
+
+Temporärer Security-Bypass nach PR #160 entfernt und frisch verifiziert:
+- `bypass_actors: []`;
+- `current_user_can_bypass: never`;
+- Ruleset aktiv;
+- Required Checks `hardlock` und `hardlock-base` aktiv.
+
+M28-Produktionskandidat:
+- Branch `hobbyroom/m28-handoff-request-current-main-20260908`;
+- Head `78263594456bb58ae004b5b064816de0f3531720`;
+- Base `914638e67a265cf2e8951b1177a7d80fdf904e98`.
+
+Geändert exakt:
+1. `control/single-door-boundary/codex_current_action.py`
+2. `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json`
+3. `control/startmaster0107/CURRENT_STATE.json`
+4. `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`
+
+Semantik:
+- vorhandenes M28-Request-Schema wird als `request_required_fields` exponiert;
+- gebundener Current Codex bleibt derselbe Fachworkflow-Worker;
+- reale Fachworkflow-Ausgaben werden weiterhin durch denselben Worker erzeugt;
+- danach erzeugt er exakt `FACHWORKFLOW_HANDOFF_REQUEST.json` unter `fachworkflow_handoff.request_ref`;
+- vorhandener `fachworkflow_handoff.command` validiert Artefakte, führt den realen PPM-Weg aus und schreibt Fachworkflow-PASS + Item Receipt;
+- erst nach `FACHWORKFLOW_PROOF_HANDOFF_PASS` läuft die bestehende Submission;
+- kein zweiter Executor, keine Capability-Suche, kein neuer Adapter, kein neuer Runner.
+
+Statische Vorprüfung:
+- exakt vier Kandidatendateien: PASS;
+- Current-Action-SHA → 107007 authorized_inputs: PASS;
+- 107007-SHA → CURRENT_STATE execution_gate + rearm: PASS;
+- CURRENT_STATE-SHA → Root: PASS;
+- M28 required fields vorhanden: PASS;
+- Request-Datei/ref/command in Instruktion vorhanden: PASS;
+- alte Sperre `kein Handoff-Request`: nicht mehr vorhanden;
+- Submission ausdrücklich erst nach Handoff-PASS.
+
+Noch kein Integrationsbeleg.
+Nächster Schritt ist der erste serverseitige Maschinen-Test.
+
