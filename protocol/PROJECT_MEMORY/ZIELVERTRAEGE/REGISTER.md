@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-09-07
+STAND: 2026-09-08
 
 ## Pflichtfelder
 
@@ -154,7 +154,7 @@ STATUS:
 AKTIV
 
 FASSUNG:
-2026-09-07 – GITHUB-ONLY-KORREKTUR
+2026-09-08 – UNABHÄNGIGER TRESOR + LOKALES BACKUP
 
 HAUPTQUELLE:
 `protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md`
@@ -162,15 +162,21 @@ HAUPTQUELLE:
 ERGÄNZENDE VERBINDLICHE QUELLEN:
 - `protocol/PROJECT_MEMORY/TRESOR/INHALTSVERTRAG.md`
 - `protocol/PROJECT_MEMORY/TRESOR/PRUEFVERTRAG.md`
+- `protocol/PROJECT_MEMORY/TRESOR/STATUS.md`
 
 VERANTWORTLICHER BEREICH:
 `protocol/PROJECT_MEMORY/TRESOR/`
 
 PASS-BEDINGUNG:
-Git-Repository real restore-geprüft; alle für den Auftrag erforderlichen exportierbaren GitHub-Metadaten/Einstellungen gesichert; Providergrenzen ausdrücklich ausgewiesen.
+Git-/Ref-/Campus-Wiederherstellung real geprüft; automatische externe Tresorsicherung real geprüft; lokaler Backupstand real unabhängig geprüft; Providergrenzen ausdrücklich ausgewiesen.
 
-NUTZERWEG:
-genau eine aktuelle geprüfte `GITHUB_KOMPLETTBACKUP_*.zip` herunterladen und außerhalb GitHubs speichern.
+`GITHUB_KOMPLETT_PASS` erfordert zusätzlich einen realen end-to-end Neuaufbau der erforderlichen exportierbaren GitHub-Metadaten/Einstellungen in einem leeren Zielsystem und ist derzeit nicht belegt.
+
+SICHERUNGSWEGE:
+1. Tresor automatisch, wöchentlich und extern unter `/Campus-Tresor/`.
+2. Lokales Backup manuell per `GITHUB_BACKUP_STARTEN.command` auf dem Nutzer-Mac.
+
+Beide Wege sind unabhängig voneinander und sichern denselben GitHub-Projektbestand.
 
 NICHT IM SCOPE:
 WordPress / Website / Projektarchiv.
