@@ -28,6 +28,26 @@ Root Cause:
 
 Kein Produktionskandidat aktiv.
 
+
+## HISTORY-INTEGRATIONSBLOCKER
+
+PR #196 / Head `655f83344b6ffd33b2a4fad0aed44f780e8f8cbd` ist der einzige aktuelle History-Authority-Kandidat.
+
+Geprüft:
+- M15 aktueller Request-first-Vertrag: PASS;
+- M15 Negativ Reihenfolge: BLOCK;
+- M15 Negativ alter Direkt-Submit-/No-Handoff-Weg: BLOCK;
+- M35 Positivmodell: PASS;
+- M35 Negativ fehlende Registry-Bindung: BLOCK;
+- M35 Negativ Bindung nach Planaufbau: BLOCK;
+- current main unter neuer M35-Regel: exakt `M35_PPM_REGISTRY_HASH_NOT_MATERIALIZED`.
+
+Integrationsblocker:
+`hardlock-base` verlangt vor Kandidatenauswertung einen Gesamt-PASS des alten Base-Runners. Dieser alte Runner stoppt stale bei M15 auf der vor M28 geltenden No-Handoff-Regel. Kein Produkt-, Gate-, Workflow- oder PPM/PSERC-Code wird zur Umgehung verändert.
+
+NEXT ACTION:
+PR #196 einmalig als reine History-Authority-Änderung durch Repository-Admin-PR-Bypass integrieren; danach Bypass wieder entfernen und erst dann separaten M35-Produktionskandidaten erzeugen.
+
 ## MASCHINELLER HOBBYRAUM-LOCK
 
 Der frühere TEXT-Maschinenlock ist **eingefroren und keine aktuelle Reparaturautorität**.
