@@ -1669,3 +1669,30 @@ Eine GitHub-Backupfachlogik, aber zwei unabhängige Auslöser/Speicherorte:
 
 REGRESSIONSSCHUTZ:
 Keiner der beiden Wege darf den anderen als Voraussetzung haben.
+
+## TEXT-TECH-20260908-HISTORY-MACHINE-PROOF – Historienprüfung wird ausführbar statt behauptet
+
+WAS:
+Der bisherige Hobbyraum-Status `CHECK_HISTORY: PASS` reicht nicht mehr als alleiniger Beleg.
+Der M01–M33-Runner wurde auf main in PR #159 für die stale Fälle M26/M28/M31 korrigiert.
+M28 besitzt zusätzlich einen Negativ-Mutanten-Selbsttest, der den historischen Fehler künstlich wieder einführt und zwingend blockieren muss.
+
+WARUM:
+Der bereits bekannte M28-Fehler `fehlende FACHWORKFLOW_HANDOFF_REQUEST.json` wurde durch Commit `a5f0fba0…` erneut eingeführt, obwohl die schriftliche Fehlermatrix M28 korrekt enthielt.
+Ursache: ausführbarer Regressionstest und schriftliche Fehlerdefinition waren auseinander gelaufen; der Hobbyraum konnte deshalb ein inhaltlich falsches `CHECK_HISTORY: PASS` akzeptieren.
+
+VERBINDLICHER SOLLWEG:
+Vor Integrationsfreigabe müssen
+1. autoritative Historienquelle,
+2. Paul-Quelle,
+3. vertrauenswürdiger Regression-Runner
+hash-/blobgebunden sein.
+Der vertrauenswürdige Runner führt zuerst seinen eigenen Negativ-Mutanten-Beweis und danach den gebundenen historischen Fall gegen den Kandidaten aus.
+Ein Kandidat darf seinen eigenen Prüfer nicht selbst grünschreiben.
+
+STATUS:
+- Runner-Bootstrap PR #159: integriert auf main `2f3678aa…`.
+- serverseitige Hardlock-Einklinkung PR #160 / Head `947b56ad…`: vorbereitet, noch nicht integriert.
+- aktueller Wartungsblocker: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil der bestehende immutable Hardlock `control/paul-scope-gate/` selbst schützt.
+- Kein M28-Produktionsfix parallel, bis diese Maschinenbeweis-Härtung abgeschlossen ist.
+
