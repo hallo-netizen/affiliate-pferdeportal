@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 35,
+  "generation": 36,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "391ab6c5feff8f013ce067f9c3247e7f1cb26d4710075d63fde4df895b7fd0d7",
+    "manifest_sha256": "033deaaba1c39a3cf2645a1f4ea79663947351fd6ed4070b88f3710eaa7b3921",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,13 +35,13 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.4",
+    "version": "6.72.5",
     "status": "WORKING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "391ab6c5feff8f013ce067f9c3247e7f1cb26d4710075d63fde4df895b7fd0d7",
+    "current_source_manifest_sha256": "033deaaba1c39a3cf2645a1f4ea79663947351fd6ed4070b88f3710eaa7b3921",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -149,17 +149,21 @@
       ]
     },
     "otto_awin_wp_cron_followup": {
-      "status": "LIVE_TRANSPORT_OPEN",
+      "status": "FIXED_LOCAL_6725_LIVE_RETEST_PENDING",
       "advertiser_id": 14336,
-      "observed": "WP-Cron-Fallback was enabled, but no autonomous visible package advance occurred in the observed >10 minute window.",
-      "next_test": "Do not repeat manual package click. Inspect/runtime-bind the cron transport separately; manual worker progression is already proven.",
+      "observed": "WP-Cron-Fallback did not autonomously advance in the prior live window.",
+      "rootfix": "Existing due worker now gets a bounded WordPress-Core spawn_cron() kick on a normal request when an open job exists; DOING_CRON recursion blocked; no new endpoint/scheduler.",
+      "next_test": "Install 6.72.5, keep WP-Cron-Fallback enabled, do not press the manual package button, wait until the worker is due and make a normal page request; verify cumulative product progress advances.",
+      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
       "checked_at": "2026-09-08"
     },
     "otto_awin_manual_batch_progress": {
-      "status": "PASS_ADVANCES_BUT_UI_AMBIGUOUS",
+      "status": "FIXED_LOCAL_6725_CUMULATIVE_UI_LIVE_RETEST_PENDING",
       "advertiser_id": 14336,
-      "evidence": "User screenshot 2026-09-08 10:12: queue updated_at advanced from 07:16 to 08:12 after manual package; message remains '500 Produkte verarbeitet; Fortsetzung vorgemerkt.'",
-      "source_fact": "automation_process_awin_product_batch increments processed and ftell cursor; products stage persists cursor and cumulative details.products, but message reports only current batch size.",
+      "prior_evidence": "User screenshot 2026-09-08 10:12 proved manual package execution but ambiguous repeated 500-message.",
+      "rootfix": "Queue message now reports cumulative details.products plus last package size; completion reports cumulative total.",
+      "next_test": "Same open Awin-14336 job must show a cumulative number above the previous 500 after next real package.",
+      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
       "checked_at": "2026-09-08"
     }
   },
@@ -388,6 +392,13 @@
       "evidence": "User screenshot shows products stage queued after 500 products processed; feed download no longer times out.",
       "message": "500 Produkte verarbeitet; Fortsetzung vorgemerkt.",
       "checked_at": "2026-09-08"
+    },
+    "awin_6725_progress_wpcron_rootfix": {
+      "status": "FIXED_LOCAL_LIVE_RETEST_PENDING",
+      "advertiser_id": 14336,
+      "version": "6.72.5",
+      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
+      "source_manifest_sha256": "033deaaba1c39a3cf2645a1f4ea79663947351fd6ed4070b88f3710eaa7b3921"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -415,7 +426,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "FIX_AWIN_14336_PROGRESS_VISIBILITY_AND_ISOLATE_CRON_TRANSPORT",
+    "current_milestone": "INSTALL_6_72_5_AND_LIVE_RETEST_SAME_OTTO_14336_JOB",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
