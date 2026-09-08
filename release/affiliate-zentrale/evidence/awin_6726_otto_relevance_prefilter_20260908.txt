@@ -90,3 +90,18 @@ User-Screenshot 2026-09-08:
 - Affiliate-Automatisierung lädt ohne sichtbaren Fatalfehler.
 
 Bewertung: LIVE INSTALL PASS. Der AFF-ERR-019-Live-Readback ist damit noch nicht abgeschlossen. Es fehlt ausschließlich der Sichtnachweis, dass der alte Awin-14336-products-Job terminal gestoppt wurde und die automatische Synchronisierung deaktiviert ist. Keine Buttons drücken.
+
+## LIVE-AUTOSTOP READBACK
+
+User-Screenshots 2026-09-08 11:18 Europe/Berlin:
+- automatische Synchronisierung aktiv: AUS.
+- Executor sichtbar: Server-Cron / WP-CLI.
+- Arbeitswarteschlange: Awin 14336, stage products, status failed.
+- Meldung: "Alter/ungefilterter OTTO-Vollfeed wurde beim 6.72.6-Sicherheitsupgrade gestoppt."
+- Abgeschlossene Läufe: zugehöriger fehlgeschlagener Awin-14336-Lauf zeigt 4500 importiert, 0 aktualisiert, 0 blockiert.
+
+Bewertung:
+- Installations-Autostop: LIVE PASS.
+- Kein weiterer Vollfeed-Fortschritt.
+- AFF-ERR-019 Autostop-Ziel ist live bestätigt.
+- Vor neuem OTTO-Lauf ist Cleanup der 4500 Altimport-Zeilen erforderlich; dabei darf ausschließlich der alte OTTO-Lauf-Scope entfernt werden.
