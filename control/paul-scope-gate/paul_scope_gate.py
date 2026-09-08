@@ -288,6 +288,8 @@ def _error_row_for_case(error_text: str, case: str) -> str:
 
 
 def _assert_real_recovery_base(recovery_sha: str, pr_base: str) -> None:
+    if git("rev-parse", "--is-shallow-repository") == "true":
+        git("fetch", "--no-tags", "--unshallow", "origin", pr_base)
     git("cat-file", "-e", recovery_sha + "^{commit}")
     p = subprocess.run(
         ["git", "merge-base", "--is-ancestor", recovery_sha, pr_base],
