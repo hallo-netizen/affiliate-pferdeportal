@@ -73,3 +73,10 @@ jobs:
           set -euo pipefail
           cd control/seo-text-buero/alternative-central-machine/prototype
           PYTHONDONTWRITEBYTECODE=1 python3 test_p10_batch_resume.py
+
+      - name: P11 immutable twelve-gate contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd control/seo-text-buero/alternative-central-machine/prototype
+          PYTHONDONTWRITEBYTECODE=1 python3 test_p11_workflow_contract.py
