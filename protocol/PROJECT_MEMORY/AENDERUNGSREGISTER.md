@@ -1755,3 +1755,32 @@ SICHERHEIT:
 Der einmalige Ruleset-Bypass `Repository admin / pull requests only` ist unmittelbar nach Merge noch aktiv.
 Bis zur bestätigten Entfernung bleibt jede TEXT-Produktionsreparatur `FIX_FORBIDDEN`.
 
+## TEXT-TECH-20260908-M28-REQUEST-FIRST – Gebundenen Handoff-Request wiederherstellen
+
+WAS:
+Der aktuelle M28-Blocker wird ohne neue Architektur repariert:
+- Current Action exponiert das bereits vom vorhandenen Adapter verlangte Request-Schema;
+- 107007 erzeugt den Request aus ausschließlich gebundenen Current-Action-Feldern;
+- anschließend vorhandener Fachworkflow-Handoff;
+- danach vorhandene Submission.
+
+WARUM:
+Der reale Blocker `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED` entsteht, weil die vorhandene Adapterstrecke einen Request verlangt, während 107007 durch die spätere B02-Instruktion `kein Handoff-Request` verbot.
+Das ist die bereits historisch bekannte Fehlerklasse M28.
+
+NICHT GEÄNDERT:
+- Worker-Rolle;
+- Fach-/Textmaschinen-/SEO-/PPM-/PSERC-/PSTE-/Design-/Publish-Regeln;
+- Fachworkflow-Adapter;
+- Runner;
+- Single Door;
+- kein zweiter Executor/keine Capability.
+
+KANDIDAT:
+`hobbyroom/m28-handoff-request-current-main-20260908`
+Head `78263594456bb58ae004b5b064816de0f3531720`.
+
+STATUS:
+Statische Korridor- und Hashprüfung PASS.
+Serverseitiger Vorher-FAIL/Nachher-PASS-Beweis noch ausstehend.
+
