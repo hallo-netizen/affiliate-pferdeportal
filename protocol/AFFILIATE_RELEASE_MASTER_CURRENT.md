@@ -18,13 +18,13 @@ Aktuelle belastbare Basis:
 - live installierter Ausgangsstand: 6.72.5; WP-Cron-Automatik und kumulative Anzeige LIVE PASS;
 - dabei entdeckter AFF-ERR-019: ungefilterter OTTO-Vollfeed persistierte formal gültige Produkte vor Pferde-Relevanzprüfung;
 - aktueller Source-/Testkandidat: **6.72.6**;
-- Source-Manifest: `cdf94ed70b6d764bfe62cb354bdb8780f49034047654a0e318697be7325ad9ba`;
-- 6.72.6-Testinstaller: 26/26 Manifest PASS, 21/21 PHP-Lint PASS, Positiv-/Negativ-Prefilter PASS, alter ungefilterter Job terminal-cleanup PASS;
+- Source-Manifest: `75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d`;
+- 6.72.6-Testinstaller: 26/26 Manifest PASS, 21/21 PHP-Lint PASS, Positiv-/Negativ-Prefilter PASS, alter ungefilterter Job terminal-cleanup PASS und Installations-Autostop PASS;
 - gegenüber dem exakt belegten 6.72.5-Testinstaller exakt 4 Dateien geändert;
-- Testinstaller-SHA256: `a0f0eb7229fc8701ff30102d930d219a0509310fdd33400fc940701afc47ef24`;
+- Testinstaller-SHA256: `f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e`;
 - **kein Live-PASS für 6.72.6**.
 
-**NEXT ACTION:** 6.72.6 installieren. Der bestehende ungefilterte OTTO/Awin-14336-Job muss anschließend fail-closed stoppen. Danach in Awin Create-a-Feed nur pferderelevante Kategorien für OTTO auswählen, die Export-URL im Awin-Produktfeed-Betriebsprofil an Advertiser 14336 binden und den neuen `portal_filtered`-Haken bestätigen. Erst danach neuer OTTO-Produktlauf.
+**NEXT ACTION:** 6.72.6 installieren. Das 6.72.6-Sicherheitsupgrade stoppt einen noch offenen ungefilterten OTTO/Awin-14336-products-Job beim Plugin-Init automatisch, löscht dessen Tempfeed und deaktiviert die zentrale Automatisierung. Danach in Awin Create-a-Feed nur pferderelevante Kategorien für OTTO auswählen, die Export-URL im Awin-Produktfeed-Betriebsprofil an Advertiser 14336 binden und den neuen `portal_filtered`-Haken bestätigen. Erst danach Automatisierung wieder aktivieren und einen neuen OTTO-Produktlauf starten.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
