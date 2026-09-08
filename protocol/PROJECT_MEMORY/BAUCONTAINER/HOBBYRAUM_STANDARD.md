@@ -172,6 +172,8 @@ OFFICE: <Büro>
 MAIN_SHA: <40-stelliger aktueller main-Ausgangscommit>
 ACTIVE_BLOCKER: <autoritativer Fehlercode>
 PLAN_PHASE: <aktueller festgelegter Arbeitsplanpunkt>
+RECOVERY_BASE_SHA: <letzter real funktionierender / gebundener Ausgangsstand>
+HISTORY_EXPECTED_FAIL: NONE | <exakter Mxx-Fehler nur bei HISTORY_AUTHORITY_MAINTENANCE>
 CANDIDATE_BRANCH: <exakter Branch> oder NONE
 CANDIDATE_HEAD_SHA: <exakter 40-stelliger Head> oder NONE
 TECHNICAL_SCOPE_PREFIXES: <geschützter technischer Bereich>
@@ -210,7 +212,10 @@ Harte Wirkung nach Aktivierung des bestehenden Security-Hardlocks:
 - `INTEGRATION_ALLOWED=false`: **BLOCK**;
 - geänderte/stale autoritative Fehler-, Paul- oder CURRENT_STATE-Quelle: **BLOCK**;
 - `ACTIVE_BLOCKER` nicht in Fehlerquelle oder CURRENT_STATE: **BLOCK**;
-- kompletter vertrauenswürdiger M01–M33-Lauf vom PR-Base gegen Kandidat nicht GESAMT PASS: **BLOCK**;
+- kompletter vertrauenswürdiger historische Regression-Lauf vom PR-Base gegen einen Produktionskandidaten nicht GESAMT PASS: **BLOCK**;
+- Lücke in der fortlaufenden Fehlerhistorie ab M01: **BLOCK**;
+- historischer Runner und Matrix nicht exakt deckungsgleich: **BLOCK**;
+- autoritative Fehlerquelle und aktuell akzeptierte Historie nicht deckungsgleich: **BLOCK**;
 - Matrix/Runner zusammen mit Produktionscode geändert: **BLOCK**.
 
 Die sieben `CHECK_*`-Felder bleiben höchstens Arbeitsnotizen.
@@ -220,11 +225,17 @@ Wartung von Fehlermatrix oder Regression-Runner:
 - nur separat;
 - kein Produktionsfix im selben PR;
 - eigener Plan `HISTORY_AUTHORITY_MAINTENANCE`;
-- vollständige M01–M33-Abdeckung in Base und Kandidat;
-- vertrauenswürdiger Base-Runner und Kandidaten-Runner müssen die vorgeschriebene Prüfung bestehen.
+- `HISTORY_EXPECTED_FAIL` bindet exakt den aktuell realen Fehler Mxx;
+- bestehende Historie darf niemals verkürzt werden;
+- neue Fehler werden fortlaufend M34, M35, ... ergänzt, ohne Änderung des Security-Gates;
+- autoritative Fehlerquelle wird zuerst um den neuen realen Fehler ergänzt;
+- der vertrauenswürdige Base-Runner muss alle bisher akzeptierten Fehler weiterhin PASS halten;
+- der neue Kandidaten-Runner muss auf dem **noch unreparierten** Stand exakt bei `HISTORY_EXPECTED_FAIL` als erstem Fehler FAIL liefern;
+- erst danach darf der spätere Produktionsfix gebaut werden;
+- der Produktionsfix muss anschließend die gesamte nun erweiterte Historie GESAMT PASS machen.
 
 Nur bei exakt gebundenem Kandidat plus serverseitigem Maschinenbeweis:
-`HOBBYROOM_HISTORY_M01_M33_MACHINE_PROOF_PASS`.
+`HOBBYROOM_HISTORY_MACHINE_PROOF_PASS`.
 
 Der Lock enthält keine Fachregeln und trifft keine Fachentscheidung.
 Er bindet nur die aktuellen autoritativen Quellen, den realen Fortschritt und den technischen Kandidaten fail-closed.
@@ -263,7 +274,7 @@ Bei `FIX_ALLOWED_FOR_CODEX_TEST` reicht kein manuelles `CHECK_*: PASS`.
 Der serverseitige Hardlock muss selbst belegen:
 
 - `RECOVERY_BASE_SHA` ist ein gültiger Commit und in der zuständigen CURRENT_STATE als letzter funktionierender Stand belegt;
-- M01–M33 sind vollständig in historischer Matrix, vertrauenswürdigem Runner **und** autoritativer Fach-Fehlerquelle vorhanden;
+- mindestens M01–M33 und jeder später real aufgenommene M34/M35/... sind lückenlos in historischer Matrix, vertrauenswürdigem Runner **und** autoritativer Fach-Fehlerquelle vorhanden;
 - `ACTIVE_BLOCKER` steht real in Fach-Fehlerquelle und CURRENT_STATE;
 - `MAIN_SHA` steht real in CURRENT_STATE;
 - Pauls Kernregeln sind in der gebundenen Prüfkarte vorhanden: kein Sammelfix, historische Fehlerquelle gegenprüfen, bestehende Regression danach, echter 7/7-Lauf als Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik und Pre-/Post-Transformation;
@@ -271,6 +282,9 @@ Der serverseitige Hardlock muss selbst belegen:
 - der Hobbyraum-Standard enthält weiterhin vollständige Historienprüfung, letzten funktionierenden Stand, direkte Vor-/Nachstufe, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest;
 - der vertrauenswürdige M01–M33-Runner vom PR-Base/main läuft vollständig gegen den Kandidaten;
 - Produktcode darf Matrix/Runner nicht im selben PR verändern.
+- Neue reale Fehler dürfen nicht direkt repariert werden, wenn sie noch nicht als ausführbare Regression existieren: zuerst separater `HISTORY_AUTHORITY_MAINTENANCE`-Lauf mit exakter FAIL-Reproduktion, danach erst Produktionsfix;
+- der Gate-Code führt seine eigenen Arbeitslock-/Evidenz-Selbsttests bei jedem serverseitigen `verify-pr` automatisch aus;
+
 
 Fehlt nur ein Beleg oder driftet nur ein gebundener Git-Blob:
 `FIX_FORBIDDEN`.
