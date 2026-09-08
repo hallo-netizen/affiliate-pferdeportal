@@ -52,6 +52,17 @@ def _valid_research(output: Any) -> bool:
     )
 
 
+def _passes_prototype_link_rule(draft: str) -> bool:
+    """
+    P1 representative hard rule only.
+    This is NOT claimed to be the production link rule.
+    It proves that a mandatory rule can be compiled into the machine
+    instead of being runtime-configurable or worker-selectable.
+    """
+    lowered = draft.lower()
+    return "http://" not in lowered and "https://" not in lowered
+
+
 def _valid_text_slot(output: Any) -> bool:
     return (
         isinstance(output, dict)
@@ -62,6 +73,7 @@ def _valid_text_slot(output: Any) -> bool:
         and all(isinstance(x, str) and bool(x) for x in output["facts"])
         and isinstance(output["draft"], str)
         and bool(output["draft"])
+        and _passes_prototype_link_rule(output["draft"])
     )
 
 
