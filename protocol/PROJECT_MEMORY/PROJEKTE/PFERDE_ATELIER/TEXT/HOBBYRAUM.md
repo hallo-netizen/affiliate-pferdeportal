@@ -26,19 +26,19 @@ B02 und B07/M32 sind im aktuellen Realtest überwunden.
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_ALLOWED_FOR_CODEX_TEST
+STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
 MAIN_SHA: 755b531ec08298a86cb0342c2db8c81f5b4df6f9
 ACTIVE_BLOCKER: FACHWORKFLOW_PROOF_HANDOFF_BLOCKED
-PLAN_PHASE: M28_REQUEST_FIRST_RETEST_AFTER_GATE_FIX
+PLAN_PHASE: SECURITY_SHALLOW_ANCESTRY_FIX_PENDING
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 ACTIVE_HISTORY_CASE: M28
 HISTORY_EXPECTED_FAIL: NONE
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: hobbyroom/m28-handoff-request-current-main-20260908
-CANDIDATE_HEAD_SHA: 26d7b5b53044729ab6350f88d16d4ac0f6cacd03
+CANDIDATE_BRANCH: NONE
+CANDIDATE_HEAD_SHA: NONE
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: control/single-door-boundary/codex_current_action.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
+ALLOWED_PATH_PREFIXES: NONE
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -55,14 +55,14 @@ PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
 ERROR_SOURCE_BLOB_SHA: e263de9d684e16c5ca95185079cbad1dd02fb26c
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 3ba308f9cd440c6ef328cb7a2a651fc49c97be0c
+CURRENT_STATE_BLOB_SHA: a6f9f30c85452acf10859707323bb672664fadf2
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 8e77ba9c12c6a87613f350587618856ba5615fde
+DECISION_SOURCE_BLOB_SHA: 0e070bfe897693f1d6ecb1776d937e6f44647357
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: 62c723d1a147237050278f013c2a63d62f6d1115
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: 611aec9bd8bbe1294ff4114f6d2708cd2df3a7b0
-INTEGRATION_ALLOWED: true
+PROTOCOL_SOURCE_BLOB_SHA: 2966ba57a7a7ec7e2e293245a8c60d7f608aeae2
+INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -80,30 +80,29 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Denselben M28-Kandidaten nach Parserfix erneut serverseitig beweisen.**
+**Nur den falsch-negativen shallow Ahnenbeweis im Security-Gate reparieren.**
 
-Current main:
-`755b531ec08298a86cb0342c2db8c81f5b4df6f9`
+Bewiesener Zustand:
+- PR #161 bleibt unverändert;
+- current main `755b531ec08298a86cb0342c2db8c81f5b4df6f9`;
+- Goldmaster `de21f6cd35c60849c551fd82f78e75ce57c99fab` ist realer Vorfahr / exakter Merge-Base;
+- CI-Checkout ist `fetch-depth: 1`;
+- Gate meldet deshalb fälschlich `HOBBYROOM_RECOVERY_BASE_NOT_ANCESTOR`.
 
-Kandidat:
-`hobbyroom/m28-handoff-request-current-main-20260908`
-Test-Head:
-`26d7b5b53044729ab6350f88d16d4ac0f6cacd03`
+Zulässiger Fix:
+Bei shallow Repository vor der bestehenden `git merge-base --is-ancestor`-Prüfung die vollständige Historie des Base-Commits nachladen.
 
-Die vier M28-Dateiblobs sind unverändert zum ersten Test.
-Neu im Head ist ausschließlich die Synchronisation mit dem inzwischen auf main integrierten Parserfix PR #166.
+Nicht ändern:
+- Goldmaster;
+- Ahnenregel;
+- Workflow;
+- PR #161;
+- M28-Inhalte;
+- Runner;
+- Publish/WordPress.
 
-Maschinenpflicht:
-1. Gate-Selbsttests PASS.
-2. current main mit vertrauenswürdigem Base-Runner → erster FAIL exakt M28.
-3. derselbe Base-Runner gegen Kandidat → vollständige Historie GESAMT PASS.
-4. `hardlock` + `hardlock-base` PASS.
-
-Bis Ergebnis:
-- kein Merge;
-- kein Realtest;
-- kein weiterer Fix;
-- kein Publish/WordPress-Write.
+Bis Security-Fix aktiviert:
+`FIX_FORBIDDEN`.
 
 ## VERBOTEN
 
