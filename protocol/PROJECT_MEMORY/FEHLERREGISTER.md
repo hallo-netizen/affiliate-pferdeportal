@@ -1,6 +1,6 @@
 # ZENTRALES FEHLERREGISTER
 
-STAND: 2026-09-07
+STAND: 2026-09-08
 ROLLE: **REINER FEHLER-WEGWEISER**
 
 ## EINE FEHLERWAHRHEIT
@@ -17,7 +17,7 @@ Für Details immer die genannte Originalquelle öffnen.
 ## CAMPUS-ARCHITEKTUR
 
 Bereich: CAMPUS / ARCHITEKTUR  
-Status: AKTIV / BAU-037 CLOSED, weitere Architekturfehler nach Originalquelle
+Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle
 
 Autoritative Fehlerquelle:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
@@ -114,7 +114,7 @@ Keine ausführliche Fehlerwahrheit an zwei Orten.
 ## TRESOR-AUTOMATIK
 
 Bereich: CAMPUS / TRESOR / GITHUB  
-Status: AKTIV / GITHUB-ONLY; Repository-Restore real PASS; Admin-Einstellungsabdeckung fail-closed offen
+Status: AKTIV / Details ausschließlich aus der autoritativen aktuellen Tresorquelle
 
 Autoritative aktuelle Status-/Fehlerquelle:
 `protocol/PROJECT_MEMORY/TRESOR/STATUS.md`
