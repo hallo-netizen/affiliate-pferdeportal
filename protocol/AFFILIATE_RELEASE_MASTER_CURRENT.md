@@ -28,7 +28,7 @@ Aktuelle belastbare Basis:
 - Testinstaller-SHA256: `b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f`;
 - **kein Live-/Release-PASS** vor WordPress-Readback.
 
-**NEXT ACTION:** exakt **6.72.8 TEST installieren**. Danach nichts starten/klicken. Unter `WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung` ausschließlich den jetzt immer sichtbaren `OTTO-Sicherheitsbereinigung`-Status ablesen; Automatisierung bleibt AUS. Kein neuer OTTO-Lauf vor Auswertung.
+**NEXT ACTION:** **kein neues Plugin.** 6.72.8 bleibt installiert. Awin `Toolbox → Create-a-Feed`: OTTO/Awin 14336 auswählen und auf pferderelevante Kategorien eingrenzen; danach Export-URL im bestehenden Awin-Betriebsprofil binden und `portal_filtered` bestätigen. Der blockierte 0/4500-Cleanup bleibt bewusst unangetastet; Altbestand wird über die bestehende Reconcile-Logik nach vollständigen gefilterten Läufen aus dem aktiven Pfad genommen.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
