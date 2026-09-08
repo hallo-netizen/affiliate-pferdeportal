@@ -213,3 +213,10 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p33_existing_m01_m33_reuse.py
+
+      - name: P34 KISS macro invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd control/seo-text-buero/alternative-central-machine/prototype
+          PYTHONDONTWRITEBYTECODE=1 python3 p34_macro_invariants.py
