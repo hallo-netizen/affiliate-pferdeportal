@@ -131,7 +131,7 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         data[key] = value
     required = {
         "STATUS", "OFFICE", "MAIN_SHA", "ACTIVE_BLOCKER", "PLAN_PHASE",
-        "RECOVERY_BASE_SHA", "HISTORY_EXPECTED_FAIL",
+        "RECOVERY_BASE_SHA", "ACTIVE_HISTORY_CASE", "HISTORY_EXPECTED_FAIL",
         "CANDIDATE_BRANCH", "CANDIDATE_HEAD_SHA", "TECHNICAL_SCOPE_PREFIXES",
         "ALLOWED_PATH_PREFIXES", "CHECK_PAUL", "CHECK_HISTORY",
         "CHECK_LAST_GOOD", "CHECK_NEIGHBORS", "CHECK_REPEAT_CLASS",
@@ -144,6 +144,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:MAIN_SHA")
     if not re.fullmatch(r"[0-9a-fA-F]{40}", data["RECOVERY_BASE_SHA"]):
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:RECOVERY_BASE_SHA")
+    if not re.fullmatch(r"M[0-9]{2,}", data["ACTIVE_HISTORY_CASE"]):
+        raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:ACTIVE_HISTORY_CASE")
     if data["HISTORY_EXPECTED_FAIL"] != "NONE" and not re.fullmatch(
         r"M[0-9]{2,}", data["HISTORY_EXPECTED_FAIL"]
     ):
@@ -151,6 +153,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
     if data["PLAN_PHASE"] == "HISTORY_AUTHORITY_MAINTENANCE":
         if data["HISTORY_EXPECTED_FAIL"] == "NONE":
             raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_REQUIRED")
+        if data["HISTORY_EXPECTED_FAIL"] != data["ACTIVE_HISTORY_CASE"]:
+            raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_CASE_MISMATCH")
     elif data["HISTORY_EXPECTED_FAIL"] != "NONE":
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_OUTSIDE_MAINTENANCE")
     if data["STATUS"] == "FIX_ALLOWED_FOR_CODEX_TEST":
@@ -273,6 +277,32 @@ def _require_tokens(text: str, tokens: Tuple[str, ...], label: str) -> None:
         )
 
 
+def _error_row_for_case(error_text: str, case: str) -> str:
+    pattern = re.compile(
+        r"(?m)^\\|\\s*" + re.escape(case) + r"\\s*\\|.*$"
+    )
+    matches = pattern.findall(error_text)
+    if len(matches) != 1:
+        raise Blocked("HOBBYROOM_ACTIVE_HISTORY_CASE_ROW_INVALID:" + case)
+    return matches[0]
+
+
+def _assert_real_recovery_base(recovery_sha: str, pr_base: str) -> None:
+    git("cat-file", "-e", recovery_sha + "^{commit}")
+    p = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", recovery_sha, pr_base],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if p.returncode != 0:
+        raise Blocked(
+            "HOBBYROOM_RECOVERY_BASE_NOT_ANCESTOR:" +
+            recovery_sha + ":MAIN=" + pr_base
+        )
+
+
 def _validate_bound_evidence_texts(
     data: Dict[str, str],
     *,
@@ -304,7 +334,22 @@ def _validate_bound_evidence_texts(
     elif error_ids != matrix_ids:
         raise Blocked("HOBBYROOM_ERROR_SOURCE_HISTORY_MISMATCH")
 
+    active_case = data["ACTIVE_HISTORY_CASE"]
+    active_num = int(active_case[1:])
+    active_id = f"{active_num:02d}" if active_num < 100 else str(active_num)
+    if maintenance:
+        if active_id not in error_ids:
+            raise Blocked("HOBBYROOM_ACTIVE_HISTORY_CASE_NOT_IN_ERROR_SOURCE")
+    elif active_id not in matrix_ids:
+        raise Blocked("HOBBYROOM_ACTIVE_HISTORY_CASE_NOT_IN_ACCEPTED_HISTORY")
+
     blocker = data["ACTIVE_BLOCKER"]
+    row = _error_row_for_case(error_text, active_case)
+    if blocker not in row:
+        raise Blocked(
+            "HOBBYROOM_ACTIVE_BLOCKER_CASE_MISMATCH:" +
+            active_case + ":" + blocker
+        )
     if blocker not in error_text:
         raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_AUTHORITATIVE_ERROR_SOURCE")
     if blocker not in current_state_text:
@@ -422,6 +467,31 @@ def _run_history_runner(
         runner_path.unlink(missing_ok=True)
 
 
+def history_runner_mode_selftest() -> None:
+    root = pathlib.Path.cwd()
+    good = (
+        "import json\n"
+        "print(json.dumps({'status':'GESAMT PASS'}))\n"
+    )
+    fail = (
+        "import json,sys\n"
+        "print(json.dumps({'status':'REGRESSION_FAIL','first_fail':'M28'}))\n"
+        "sys.exit(2)\n"
+    )
+    _run_history_runner(good, candidate=root, label="SELFTEST_PASS")
+    _run_history_runner(
+        fail, candidate=root, label="SELFTEST_FAIL", expected_fail="M28"
+    )
+    try:
+        _run_history_runner(
+            fail, candidate=root, label="SELFTEST_WRONG_FAIL", expected_fail="M29"
+        )
+        raise AssertionError("wrong first fail accepted")
+    except Blocked:
+        pass
+    print("HOBBYROOM_HISTORY_RUNNER_MODE_SELFTEST_PASS:3/3")
+
+
 def enforce_history_machine_proof(
     data: Dict[str, str],
     *,
@@ -446,6 +516,8 @@ def enforce_history_machine_proof(
             raise Blocked(
                 f"HOBBYROOM_MACHINE_PROOF_SOURCE_STALE:{label}:EXPECTED={expected}:GOT={actual}"
             )
+
+    _assert_real_recovery_base(data["RECOVERY_BASE_SHA"], pr_base)
 
     history_ref = data["HISTORY_SOURCE_REF"]
     runner_ref = data["HISTORY_PROOF_RUNNER_REF"]
@@ -473,7 +545,10 @@ def enforce_history_machine_proof(
     other_changes = [p for p in changed if p not in {history_ref, runner_ref}]
 
     with tempfile.TemporaryDirectory(prefix="hobbyroom-history-proof-") as td:
-        candidate = pathlib.Path(td) / "candidate"
+        root = pathlib.Path(td)
+        baseline = root / "baseline"
+        candidate = root / "candidate"
+        git("worktree", "add", "--detach", str(baseline), pr_base)
         git("worktree", "add", "--detach", str(candidate), head)
         try:
             if authority_changes:
@@ -485,7 +560,7 @@ def enforce_history_machine_proof(
                         ",".join(sorted(other_changes))
                     )
                 _run_history_runner(
-                    base_runner, candidate=candidate, label="TRUSTED_BASE"
+                    base_runner, candidate=baseline, label="TRUSTED_BASE"
                 )
                 candidate_matrix = (candidate / history_ref).read_text(encoding="utf-8")
                 candidate_runner = (candidate / runner_ref).read_text(encoding="utf-8")
@@ -510,14 +585,28 @@ def enforce_history_machine_proof(
             else:
                 if data["PLAN_PHASE"] == "HISTORY_AUTHORITY_MAINTENANCE":
                     raise Blocked("HOBBYROOM_HISTORY_MAINTENANCE_WITHOUT_AUTHORITY_CHANGE")
+                # BEFORE proof: current main must reproduce exactly the blocker
+                # this candidate claims to repair.
                 _run_history_runner(
-                    base_runner, candidate=candidate, label="TRUSTED_BASE"
+                    base_runner,
+                    candidate=baseline,
+                    label="CURRENT_MAIN_REPRODUCTION",
+                    expected_fail=data["ACTIVE_HISTORY_CASE"],
+                )
+                # AFTER proof: the same trusted base runner must pass the full
+                # accepted history against the candidate.
+                _run_history_runner(
+                    base_runner, candidate=candidate, label="CANDIDATE_FULL_HISTORY"
                 )
         finally:
             git("worktree", "remove", "--force", str(candidate), check=False)
+            git("worktree", "remove", "--force", str(baseline), check=False)
             git("worktree", "prune", check=False)
 
-    print("HOBBYROOM_HISTORY_MACHINE_PROOF_PASS")
+    print(
+        "HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:" +
+        data["ACTIVE_HISTORY_CASE"]
+    )
 
 
 def evaluate_work_lock_pr(
@@ -853,6 +942,7 @@ def verify_pr(branch: str, head: str, pr_base: str) -> None:
     # Self-test the gate's invariant semantics on every server-side PR check.
     work_lock_selftest()
     evidence_semantic_selftest()
+    history_runner_mode_selftest()
     campus_head = fetch_official_campus()
     changed = changed_paths(pr_base, head)
     locks = work_locks(campus_head)
@@ -917,6 +1007,7 @@ MAIN_SHA: 0000000000000000000000000000000000000000
 ACTIVE_BLOCKER: X
 PLAN_PHASE: E
 RECOVERY_BASE_SHA: 7777777777777777777777777777777777777777
+ACTIVE_HISTORY_CASE: M28
 HISTORY_EXPECTED_FAIL: NONE
 CANDIDATE_BRANCH: hobbyroom/test
 CANDIDATE_HEAD_SHA: 1111111111111111111111111111111111111111
@@ -989,7 +1080,10 @@ def evidence_semantic_selftest() -> None:
     ids = [f"{i:02d}" for i in range(1, 34)]
     history = "\n".join("M" + i + " – test" for i in ids)
     runner = "CASES=[" + ",".join('("M' + i + '",m' + i + ')' for i in ids) + "]"
-    error = "\n".join("| M" + i + " | test |" for i in ids) + "\nBLOCK_X"
+    error = "\n".join(
+        "| M" + i + (" | test BLOCK_X |" if i == "28" else " | test |")
+        for i in ids
+    )
     current = (
         "AKTUELLER REALTEST\nBLOCK_X\n" + "0" * 40 + "\n" + "7" * 40
     )
@@ -1027,6 +1121,7 @@ def evidence_semantic_selftest() -> None:
         "ACTIVE_BLOCKER": "BLOCK_X",
         "MAIN_SHA": "0" * 40,
         "RECOVERY_BASE_SHA": "7" * 40,
+        "ACTIVE_HISTORY_CASE": "M28",
         "PLAN_PHASE": "PRODUCT_FIX",
     }
     def check(**overrides):
@@ -1054,6 +1149,7 @@ def evidence_semantic_selftest() -> None:
         ("STANDARD", {"standard_text": standard.replace("letzten funktionierenden Stand vergleichen", "")}),
         ("LAST_GOOD", {"current_state_text": current.replace("7" * 40, "")}),
         ("PROTOCOL_MAIN", {"protocol_text": protocol.replace("0" * 40, "")}),
+        ("CASE_MAP", {"error_text": error.replace("test BLOCK_X", "test") + "\nBLOCK_X"}),
     )
     for label, override in negatives:
         try:
@@ -1076,6 +1172,7 @@ def evidence_semantic_selftest() -> None:
 def selftest() -> None:
     work_lock_selftest()
     evidence_semantic_selftest()
+    history_runner_mode_selftest()
     valid = """<!-- PAUL_ASSIGNMENT_V1
 STATUS: ACTIVE
 WORKER: PAUL
