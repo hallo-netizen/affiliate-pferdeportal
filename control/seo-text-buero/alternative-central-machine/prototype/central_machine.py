@@ -1,18 +1,32 @@
 from __future__ import annotations
-import copy, hashlib, json
+
+import copy
+import hashlib
+import json
 from dataclasses import dataclass, asdict
-from typing import Any, Callable
+from typing import Any
+
 
 class Blocked(RuntimeError):
     pass
 
+
 def canon(obj: Any) -> bytes:
-    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return json.dumps(
+        obj,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+
 
 def sha(obj: Any) -> str:
     return hashlib.sha256(canon(obj)).hexdigest()
 
-RESULT_KEYS = {"job_id","step_id","input_hash","status","output","output_hash"}
+
+STEP_ORDER = ("RESEARCH", "TEXT_SLOT", "FINAL_CHECK")
+RESULT_KEYS = {"job_id", "step_id", "input_hash", "status", "output", "output_hash"}
+
 
 @dataclass(frozen=True)
 class WorkerResult:
@@ -22,123 +36,166 @@ class WorkerResult:
     status: str
     output: Any
     output_hash: str
-    def to_dict(self):
+
+    def to_dict(self) -> dict:
         return asdict(self)
 
+
+def _valid_research(output: Any) -> bool:
+    return (
+        isinstance(output, dict)
+        and set(output) == {"item_id", "facts"}
+        and isinstance(output["item_id"], str)
+        and bool(output["item_id"])
+        and isinstance(output["facts"], list)
+        and all(isinstance(x, str) and bool(x) for x in output["facts"])
+    )
+
+
+def _valid_text_slot(output: Any) -> bool:
+    return (
+        isinstance(output, dict)
+        and set(output) == {"item_id", "facts", "draft"}
+        and isinstance(output["item_id"], str)
+        and bool(output["item_id"])
+        and isinstance(output["facts"], list)
+        and all(isinstance(x, str) and bool(x) for x in output["facts"])
+        and isinstance(output["draft"], str)
+        and bool(output["draft"])
+    )
+
+
+def _valid_final_check(output: Any) -> bool:
+    return (
+        isinstance(output, dict)
+        and set(output) == {"item_id", "facts", "draft", "checks"}
+        and isinstance(output["item_id"], str)
+        and bool(output["item_id"])
+        and isinstance(output["facts"], list)
+        and all(isinstance(x, str) and bool(x) for x in output["facts"])
+        and isinstance(output["draft"], str)
+        and bool(output["draft"])
+        and output["checks"] == {"all_required_checks_passed": True}
+    )
+
+
+def _validate(step_id: str, output: Any) -> bool:
+    if step_id == "RESEARCH":
+        return _valid_research(output)
+    if step_id == "TEXT_SLOT":
+        return _valid_text_slot(output)
+    if step_id == "FINAL_CHECK":
+        return _valid_final_check(output)
+    return False
+
+
 class CentralMachine:
-    """Architecture POC only. No production/text-machine logic."""
+    """
+    P0 architecture prototype only.
 
-    def __init__(self, job_id: str, initial_payload: Any, steps: list[str]):
-        if not job_id or not steps:
-            raise ValueError("job_id and steps required")
+    Fixed properties:
+    - fixed step order
+    - no runtime-supplied validator
+    - one central owner of state
+    - no worker-to-worker communication
+    """
+
+    def __init__(self, job_id: str, item_id: str):
+        if not isinstance(job_id, str) or not job_id:
+            raise ValueError("job_id required")
+        if not isinstance(item_id, str) or not item_id:
+            raise ValueError("item_id required")
+
         self._job_id = job_id
-        self._steps = tuple(steps)
+        self._item_id = item_id
         self._index = 0
-        self._payload = copy.deepcopy(initial_payload)
-        self._history = []
+        self._payload = {"item_id": item_id}
         self._blocked = False
+        self._history: list[dict[str, str]] = []
 
     @property
-    def current_step(self):
-        if self._blocked or self._index >= len(self._steps):
+    def current_step(self) -> str | None:
+        if self._blocked or self._index >= len(STEP_ORDER):
             return None
-        return self._steps[self._index]
+        return STEP_ORDER[self._index]
 
     @property
-    def finished(self):
-        return not self._blocked and self._index == len(self._steps)
+    def finished(self) -> bool:
+        return not self._blocked and self._index == len(STEP_ORDER)
 
-    def worker_input(self):
-        if self.current_step is None:
+    def worker_input(self) -> dict:
+        step_id = self.current_step
+        if step_id is None:
             raise Blocked("NO_ACTIVE_STEP")
+
         payload = copy.deepcopy(self._payload)
         return {
             "job_id": self._job_id,
-            "step_id": self.current_step,
+            "step_id": step_id,
             "input_hash": sha(payload),
             "payload": payload,
         }
 
-    def submit(self, raw_result: dict, validator: Callable[[Any], bool]):
-        if self.current_step is None:
+    def submit(self, raw_result: dict) -> None:
+        step_id = self.current_step
+        if step_id is None:
             raise Blocked("NO_ACTIVE_STEP")
-        if set(raw_result.keys()) != RESULT_KEYS:
-            self._blocked = True
-            raise Blocked("RESULT_SCHEMA_INVALID")
+
+        if not isinstance(raw_result, dict) or set(raw_result) != RESULT_KEYS:
+            self._block("RESULT_SCHEMA_INVALID")
+
         try:
             result = WorkerResult(**raw_result)
-        except TypeError as exc:
-            self._blocked = True
-            raise Blocked("RESULT_SCHEMA_INVALID") from exc
+        except TypeError:
+            self._block("RESULT_SCHEMA_INVALID")
 
         if result.job_id != self._job_id:
-            self._blocked = True
-            raise Blocked("JOB_ID_MISMATCH")
-        if result.step_id != self.current_step:
-            self._blocked = True
-            raise Blocked("STEP_ID_MISMATCH")
+            self._block("JOB_ID_MISMATCH")
+        if result.step_id != step_id:
+            self._block("STEP_ID_MISMATCH")
         if result.input_hash != sha(self._payload):
-            self._blocked = True
-            raise Blocked("INPUT_HASH_MISMATCH")
+            self._block("INPUT_HASH_MISMATCH")
         if result.status != "PASS":
-            self._blocked = True
-            raise Blocked("WORKER_NONPASS")
+            self._block("WORKER_NONPASS")
         if result.output_hash != sha(result.output):
-            self._blocked = True
-            raise Blocked("OUTPUT_HASH_MISMATCH")
-        if validator(result.output) is not True:
-            self._blocked = True
-            raise Blocked("VALIDATOR_FAIL")
+            self._block("OUTPUT_HASH_MISMATCH")
+        if not _validate(step_id, result.output):
+            self._block("VALIDATOR_FAIL")
+        if result.output.get("item_id") != self._item_id:
+            self._block("ITEM_ID_MISMATCH")
 
-        self._history.append({
-            "step_id": result.step_id,
-            "input_hash": result.input_hash,
-            "output_hash": result.output_hash,
-        })
+        self._history.append(
+            {
+                "step_id": step_id,
+                "input_hash": result.input_hash,
+                "output_hash": result.output_hash,
+            }
+        )
         self._payload = copy.deepcopy(result.output)
         self._index += 1
 
-    def checkpoint(self):
+    def snapshot(self) -> dict:
         return {
             "job_id": self._job_id,
-            "steps": list(self._steps),
-            "index": self._index,
+            "item_id": self._item_id,
+            "current_step": self.current_step,
+            "finished": self.finished,
+            "blocked": self._blocked,
             "payload": copy.deepcopy(self._payload),
             "history": copy.deepcopy(self._history),
-            "blocked": self._blocked,
         }
 
-    @classmethod
-    def restore(cls, cp: dict):
-        required = {"job_id","steps","index","payload","history","blocked"}
-        if set(cp.keys()) != required:
-            raise Blocked("CHECKPOINT_SCHEMA_INVALID")
-        obj = cls(cp["job_id"], cp["payload"], cp["steps"])
-        obj._index = cp["index"]
-        obj._history = copy.deepcopy(cp["history"])
-        obj._blocked = cp["blocked"]
-        if not isinstance(obj._index, int) or not 0 <= obj._index <= len(obj._steps):
-            raise Blocked("CHECKPOINT_INDEX_INVALID")
-        if len(obj._history) != obj._index:
-            raise Blocked("CHECKPOINT_HISTORY_INVALID")
-        for i, rec in enumerate(obj._history):
-            if set(rec.keys()) != {"step_id","input_hash","output_hash"}:
-                raise Blocked("CHECKPOINT_HISTORY_INVALID")
-            if rec["step_id"] != obj._steps[i]:
-                raise Blocked("CHECKPOINT_STEP_ORDER_INVALID")
-        return obj
-
-    def final_package(self):
+    def final_output(self) -> dict:
         if not self.finished:
             raise Blocked("NOT_FINISHED")
-        body = {
-            "job_id": self._job_id,
-            "final_payload": copy.deepcopy(self._payload),
-            "history": copy.deepcopy(self._history),
-        }
-        return {"body": body, "package_hash": sha(body)}
+        return copy.deepcopy(self._payload)
 
-def make_result(worker_input: dict, output: Any, status: str="PASS"):
+    def _block(self, code: str):
+        self._blocked = True
+        raise Blocked(code)
+
+
+def make_result(worker_input: dict, output: Any, status: str = "PASS") -> dict:
     return {
         "job_id": worker_input["job_id"],
         "step_id": worker_input["step_id"],
