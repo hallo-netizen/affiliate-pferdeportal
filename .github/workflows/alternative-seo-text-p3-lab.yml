@@ -110,3 +110,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p16_normal_draft_path_audit.py
+
+      - name: P17 normal-draft enforcement inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p17_normal_draft_enforcement_inventory.py
