@@ -214,11 +214,11 @@ def _blob_at(ref: str, path: str, label: str) -> str:
 
 
 def _history_ids_from_matrix(text: str) -> List[str]:
-    return sorted(set(re.findall(r"(?m)^M(\\d{2})\\s+[–-]", text)))
+    return sorted(set(re.findall(r"(?m)^M(\d{2})\s+[–-]", text)))
 
 
 def _history_ids_from_runner(text: str) -> List[str]:
-    pairs = re.findall(r'\\("M(\\d{2})",\\s*m\\d{2}\\)', text)
+    pairs = re.findall(r'\("M(\d{2})",\s*m\d{2}\)', text)
     return sorted(set(pairs))
 
 
