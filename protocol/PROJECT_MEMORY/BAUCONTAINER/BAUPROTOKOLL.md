@@ -1729,7 +1729,7 @@ ERGEBNIS:
 `TRESOR_AUTO_BACKUP_REALTEST_PASS`.
 
 BEZUG:
-ARCH-087.
+ARCH-088.
 
 
 ### 2026-09-08 – Lokaler Notfallprüfer V2 korrigiert
@@ -1786,3 +1786,75 @@ GitHub-Secret-Werte und einzelne providerinterne Informationen bleiben technisch
 
 BEZUG:
 BAU-040.
+
+
+### 2026-09-08 – Abschluss-/Nachholprüfung GitHub-Tresor und lokales Backup
+
+AUFTRAG:
+Gesamte Arbeit dieses Chats frisch gegen autoritative Campus-/Tresorquellen prüfen; keine Erinnerung als Statusquelle.
+
+FRISCH GEPRÜFT:
+- Campus-START_HERE;
+- zentrales Fehlerregister;
+- Architektur-Fehlerkiste;
+- Änderungsregister + Bauänderungsindex;
+- Bauplan;
+- Bauprotokoll;
+- Handlungsverzeichnis;
+- Zielvertragsregister;
+- TRESOR START_HERE / STATUS / KONZEPT / INHALTSVERTRAG / PRUEFVERTRAG / LOKALES_BACKUP_KONZEPT / NOTFALL_WIEDERAUFBAU / REALTEST_V4;
+- technischer Branch `tresor/build-20260905`;
+- realer automatischer Workflow-Lauf 34199171706;
+- externer Tresor-Pointer und gespeicherte Datei;
+- aktive Wochenautomation;
+- realer Nutzer-Mac-Endtest des lokalen Backupstands.
+
+HARTER ENDSTAND:
+- Tresor automatisch sonntags 03:17 Europe/Berlin, unabhängig vom Nutzer-Mac;
+- technischer Tresor-Head beim Abschluss: `dd8028b81e21f99f6fcbbbe3832d1501e2ecd450`;
+- Automatik-Realtest Run `34199171706` = SUCCESS;
+- Artifact `10045146430`;
+- externe Datei `/Campus-Tresor/GITHUB_TRESOR_AUTO_2026-09-08_FINAL_072615Z.zip`;
+- lokaler Backupstand `2026-09-08_09-33-26`;
+- unabhängiger Prüfer V3 auf diesem lokalen Stand: `NOTFALL_WIEDERAUFBAU_PASS`.
+
+POSITIV REAL GEPRÜFT:
+- ZIP-/Hashintegrität;
+- Bundle verify;
+- echter Mirror-Restore;
+- `git fsck --full --strict`;
+- Refvergleich;
+- Campus bytegenau;
+- lokale Aktualitätsbindung;
+- automatischer externer Upload + Pointer.
+
+NEGATIV REAL GEPRÜFT:
+- lokaler Backup-Lauf blockiert korrekt, wenn GitHub während des Laufs verändert wird;
+- letzter gültiger lokaler Stand wird dabei nicht ersetzt.
+
+NACHGEHOLT:
+1. doppelte Architektur-ID bereinigt: lokaler Weg = ARCH-087; unabhängiger Tresor = ARCH-088;
+2. BAUAENDERUNGEN um ARCH-087/088 ergänzt;
+3. STATUS vom erledigten Mac-NEXT-ACTION bereinigt;
+4. PRUEFVERTRAG auf automatische + lokale Sicherung + unabhängigen Notfalltest nachgezogen;
+5. NOTFALL_WIEDERAUFBAU auf beide Sicherungsformate nachgezogen;
+6. REALTEST_V4 als historischen Beleg markiert;
+7. ZV-TRESOR-001 auf Fassung 2026-09-08 und zwei unabhängige Sicherungswege aktualisiert;
+8. HANDLUNGSVERZEICHNIS und BAUPLAN auf eine gemeinsame Backupfachlogik mit zwei unabhängigen Wegen korrigiert;
+9. vollständigen GitHub-Metadaten-Neuaufbau ausdrücklich von real bewiesenem Git-/Ref-/Campus-Restore getrennt;
+10. BAU-041 als gefundene und geschlossene Konsistenzlücke dokumentiert.
+
+EINE WAHRHEIT:
+- TRESOR/STATUS.md = einzige aktuelle Tresor-Standwahrheit;
+- REALTEST_V4 = historischer Testbeleg;
+- Fehlerregister bleibt Wegweiser;
+- Zielregister verweist auf den aktiven ZV-TRESOR-001 und dessen Hauptquelle.
+
+NICHT ALS PASS BEHAUPTET:
+- GitHub-Secret-Werte;
+- providerinterne identische IDs/Zeitstempel;
+- vollständiger end-to-end Neuaufbau aller exportierten GitHub-Metadaten in einem leeren GitHub-Zielrepository.
+
+DARUM:
+Git-/Ref-/Campus-Restore + automatische Tresorsicherung + lokaler Notfalltest = real PASS.
+`GITHUB_KOMPLETT_PASS` = weiterhin OFFEN.
