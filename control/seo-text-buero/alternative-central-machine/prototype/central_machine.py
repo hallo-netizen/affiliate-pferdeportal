@@ -18,7 +18,7 @@ def sha_file(path: Path) -> str:
 STEP_ORDER=("RESEARCH","TEXT_SLOT","FINAL_CHECK")
 RESEARCH_KEYS={"job_id","input_hash","output","output_hash"}
 TEXTMACHINE_FILE="frozen_textmachine_stub.py"
-TEXTMACHINE_SHA256="8fa1056b76ef83dc1e1b2557fcbf3ac7b0996bfe377a8d1c7f4357426dd1cbcd"
+TEXTMACHINE_SHA256="6c4e5bb17c83b38ae4f39d9b84775471dde006bb15c797684811f5e2a38e2e7e"
 TEXTMACHINE_CONTRACT="P2_FROZEN_TEXTMACHINE_STUB_V1"
 
 class CentralMachine:
