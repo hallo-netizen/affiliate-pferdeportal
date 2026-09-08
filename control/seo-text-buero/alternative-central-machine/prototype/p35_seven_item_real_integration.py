@@ -22,9 +22,12 @@ def run(cmd,cwd,timeout=600):
     return p.stdout
 
 def parse_status(output,status):
-    for line in reversed([x for x in output.splitlines() if x.strip()]):
+    decoder=json.JSONDecoder()
+    for index,ch in enumerate(output):
+        if ch!="{":
+            continue
         try:
-            obj=json.loads(line)
+            obj,end=decoder.raw_decode(output[index:])
         except Exception:
             continue
         if isinstance(obj,dict) and obj.get("status")==status:
