@@ -43,20 +43,21 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 | M25 | Article prompt / Fachworkflow boundary | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M26 | Bound Fachworkflow production context | im bestehenden Runner enthalten | früher mehrfach LIVE BLOCKED; auf aktuellem main im letzten Lauf überwunden |
 | M27 | Current-main / production environment identity | im bestehenden Runner enthalten | Preflight/HEAD im letzten Lauf PASS |
-| M28 | Fachworkflow-Handoff request executable | Runner auf main korrigiert | **AKTUELLER LIVE-BLOCKER 08.09.2026:** `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`; `FACHWORKFLOW_HANDOFF_REQUEST.json` fehlt. Kausal belegt: Commit `a5f0fba0…` führte mit `kein ... Handoff-Request` den bereits historischen M28-Vertragsfehler wieder ein. |
+| M28 | Fachworkflow-Handoff request executable | Runner auf main korrigiert | **LIVE ÜBERWUNDEN 08.09.2026:** PR #161 / Merge `78bb2576…`; Realtest materialisierte den frischen `FACHWORKFLOW_HANDOFF_REQUEST.json`, startete den gebundenen Handoff und erreichte den echten PPM-6.7.9-Korridor. |
 | M29 | Release metadata current-batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M30 | Final context batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M31 | Codex-native bound action / kein separater Executor | im bestehenden Runner enthalten | **Runner-Test war stale:** erwartete fälschlich überhaupt keinen `fachworkflow_handoff`. Aktueller Sollweg bindet den Handoff innerhalb derselben Current Action und verlangt ausdrücklich keinen separaten Executor/keine separate Capability. Im Hobbyraum korrigiert und positiv/negativ geprüft. |
 | M32 | PPM runtime package path ohne Env-Abhängigkeit | im bestehenden Runner enthalten | **LIVE ÜBERWUNDEN 08.09.2026:** PR #158 / Merge `30e93335…`; nachfolgender Realtest erreichte den echten `fachworkflow_proof_handoff.py materialize` und stoppte erst bei M28. |
 | M33 | GitHub ENDSTEMPEL ohne Codex git auth | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
-| M34 | Reapplied legacy PPM handoff guards after B01 | **AKTUELLER LIVE-BLOCKER 08.09.2026:** `PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`. M28 ist real überwunden: Request materialisiert, Handoff real gestartet. Root-Cause-Beleg: B01-Commit `5fe9967…` hatte die starre Canonical-Slot-Prüfung entfernt und die Kategoriebindung auf den bestehenden semantischen Vertrag umgestellt. Späterer Reapply-Commit `e5fc1c8…` stellte den älteren PR-#124-Handoff wieder her und reintroduzierte `find_slot(...)/CANONICAL_SLOT_MISSING` sowie die alte numerische WP-ID-Pflicht. B07/M32 `41849f0…` korrigierte nur Runtime-Pfade auf diesem regressierten Stand. **Kein Canonical-Einzelfix; Handoff-Korridor gegen B01-Semantik rekonstruieren.** |
+| M34 | Reapplied legacy PPM handoff guards after B01 | **LIVE ÜBERWUNDEN 08.09.2026:** PR #190 / Merge `2325f6e1…` stellte den bewiesenen B01-Handoff als konsistente Einheit wieder her. Nachfolgender Realtest kam über `CANONICAL_SLOT_MISSING` hinaus und stoppte erst bei M35. |
+| M35 | Fact-Pack source-hash binding parity | **AKTUELLER LIVE-BLOCKER 08.09.2026:** `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH` auf main `2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`. Frischer Request und Handoff PASS bis zum realen PPM-Eingangsvertrag; Block bei Prüfung der Fact-Pack-Quellhashbindung. Root Cause noch **nicht** belegt. Vor jedem Produktionsfix zuerst den gesamten PPM-Eingangsvertrag Fact-Pack → Quellenrefs/Hashes → Production-Plan → PPM-Input/Report gegen letzten realen 7/7-Stand und aktuellen Paketvertrag prüfen. |
 
 ## B. Reale Blocker / Wiederholungsfehler außerhalb bzw. quer zur Matrix
 
 ### B01 – WordPress-Kategorie-Identität
 - Bereits am 28.08. als Wiederholungsfehler dokumentiert.
 - Historisch: Name/Slug/Taxonomy müssen korrekt zur gebundenen Kategorie passen.
-- Aktuell erster Live-Blocker auf main: `BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION`.
+- Historischer Live-Blocker: `BOUND_WORDPRESS_CATEGORY_ID_MISSING_FOR_REAL_PPM679_EXECUTION`; durch B01-Semantik überwunden. Der Realtest auf `2325f6e1…` passierte Kategorie-/Slot-Vorbedingungen und stoppte erst an M35.
 - **Kausalbefund 05.09.:** Der aktuelle Handoff blockiert vor dem echten PPM allein auf fehlender numerischer WordPress-ID, obwohl der vorhandene Kategorievertrag Name/Slug/Taxonomy bindet.
 - Exakter Guard-Positiv-/Negativtest:
   - gültige Name/Slug/Taxonomy ohne ID → alter Guard **BLOCK**, KISS-Guard **PASS**
@@ -68,7 +69,7 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 - Kandidat ändert keine SEO-/Textmaschinen-/PPM-Regel; nur der bestehende Handoff verwendet die ID nicht mehr als vorgezogene Produktionsvoraussetzung.
 - #141: `hardlock` + `hardlock-base` + `MONOTONIC_PREBOUND_TRANSITION_PASS` + Cloud-/Continuity-Positiv-/Negativtests: **PASS**.
 - kompletter M01–M33-Lauf ist auf dem breiteren #140-Head `3ed31aa…` **GESAMT PASS**; auf exakt #141 wurde er nicht neu ausgeführt, weil kein vorhandener zulässiger Workflow dafür existiert und keine neue Testhülle gebaut wird.
-- **Noch nicht behauptet:** echter neuer 7/7-Live-PASS.
+- **Kein Gesamt-7/7-Live-PASS behauptet:** B01 selbst ist im aktuellen Korridor praktisch überwunden, der Gesamtworkflow bleibt an M35 BLOCKED.
 - **Harte Nutzerregel:** Nicht durch Erweiterung des SEO-5-Felder-Handoffs lösen.
 
 ### B02 – `BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
@@ -100,12 +101,12 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 ### B07 – Runtime-Pakete PPM/PSERC nicht gebunden / Env-Variablen fehlen
 - Historisch: `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` fehlten.
 - Repo-gebundene Pakete wurden später ergänzt; Original-SHAs sind dokumentiert.
-- **08.09.2026 erneut real aktiv:** Nach Merge des B02-Semantikdeltas auf main `36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9` erreichte der echte Codex-Lauf Cloud Entry, Production Preflight, Runtime Entry, Current Action READY und Single Door READY.
+- **Historischer Wiederholungsbefund 08.09.2026:** Nach Merge des B02-Semantikdeltas auf main `36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9` erreichte der echte Codex-Lauf Cloud Entry, Production Preflight, Runtime Entry, Current Action READY und Single Door READY.
 - B02 `BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING` wurde dabei überwunden.
 - Neuer erster echter STOP: `BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`.
 - Konkreter Befund: der ausschließlich zulässige gebundene `fachworkflow_handoff.command` exponiert weder `PPM679_PACKAGE_ZIP` noch `PSERC_FIX_ZIP`; beide Variablen sind im Worker nicht gesetzt.
 - 107007 nicht abgeschlossen; 107008 nicht erreicht; kein Publish; keine Codeänderung im Test.
-- **Aktueller Status: LIVE AKTIV / Analysepflicht vor neuem Kandidaten.**
+- **Aktueller Status: LIVE ÜBERWUNDEN 08.09.2026:** B07/M32 wurde vor M28/M34/M35 real passiert.
 
 ### B08 – `BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING`
 - Historischer realer Blocker nach PPM-Härtung.
@@ -160,11 +161,11 @@ Der zuvor erste belegte Live-Blocker auf main `c8a96e7…` war:
 Dafür wurde der isolierte B01-Kandidat #141 gebaut und später regulär integriert.
 
 **Dieser Abschnitt ist nicht mehr die aktuelle Fehlerwahrheit.**
-Aktuell maßgeblich ist ausschließlich der nachfolgende Live-Befund vom 07.09.2026 auf main `f14ccf1…`.
+Die aktuelle Live-Wahrheit steht oben in der M-Tabelle bei M35. Der nachfolgende LanguageTool-Befund bleibt nur als Historie erhalten.
 
-## LIVE-BEFUND 07.09.2026 – LANGUAGETOOL
+## HISTORISCHER LIVE-BEFUND 07.09.2026 – LANGUAGETOOL – ABGELÖST
 
-Aktueller main:
+Damals geprüfter main:
 `f14ccf187b94c4beab9a86d0c69144f792ba2f64`
 
 Plan-A-Live-Lauf nach Merge von PR #141:
