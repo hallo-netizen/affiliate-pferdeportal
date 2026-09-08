@@ -1,0 +1,43 @@
+name: Alternative SEO Text P3 Isolated Lab
+
+on:
+  pull_request:
+    branches:
+      - alternative/seo-text-central-machine-lab-base-20260908
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  p3-isolated-real-interface:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout candidate only
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Environment proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 --version
+          php --version
+          test -f control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
+          test -f control/startmaster0107/runtime_packages/PSERC-FIX.zip
+
+      - name: P0-P2 regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd control/seo-text-buero/alternative-central-machine/prototype
+          PYTHONDONTWRITEBYTECODE=1 python3 test_central_machine.py
+
+      - name: P3 real immutable PPM interface probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p3_real_interface_probe.py
