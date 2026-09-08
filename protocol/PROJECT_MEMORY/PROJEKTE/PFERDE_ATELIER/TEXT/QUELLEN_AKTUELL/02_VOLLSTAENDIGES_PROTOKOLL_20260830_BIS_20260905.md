@@ -737,3 +737,20 @@ Immutable path guard blockiert erwartungsgemäß:
 Keine M28-Produktionsdatei geändert.
 Keine Reparatur an PR #161.
 
+### PR #166 integriert
+
+Security-Parserfix gemergt.
+
+Merge / neuer main:
+`755b531ec08298a86cb0342c2db8c81f5b4df6f9`.
+
+Verifiziert:
+- genau der korrigierte M28-Zeilenregex auf main;
+- keine M28-Produktionsdatei mitgemergt.
+
+Temporärer Ruleset-Bypass ist noch aktiv.
+Bis zu seiner bestätigten Entfernung:
+`FIX_FORBIDDEN`.
+
+Anschließend wird PR #161 nur auf den neuen main synchronisiert, ohne Änderung seiner vier M28-Dateiinhalte, und derselbe Maschinen-Test erneut ausgelöst.
+
