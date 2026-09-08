@@ -1894,3 +1894,19 @@ BLEIBT:
 ENTFÄLLT:
 TEXT-spezifischer Maschinenlock als Merge-Blocker.
 
+## TEXT-TECH-20260908-PPM-HANDOFF-CORRIDOR-RECONSTRUCTION – Keine weiteren Einzelflicks
+
+WAS:
+Nach M28 wurde `CANONICAL_SLOT_MISSING` nicht als isolierter neuer Fehler behandelt, sondern gegen die Handoff-Historie geprüft.
+
+BEFUND:
+B01 hatte die problematischen alten Vorbedingungen bereits korrigiert.
+Ein späteres Reapply des älteren PR-#124-Handoffs brachte sie zurück.
+
+REGEL:
+Kein weiterer „erster Fehler -> eine Zeile fixen“-Zyklus im PPM-Korridor.
+Vor nächstem Produktions-PR wird der gesamte begrenzte Handoff von Request-Eingang bis PPM-Report/Receipt gegen B01 und die danach zwingend bewiesenen Änderungen verglichen.
+
+ZIEL:
+Ein konsistenter Handoff-Stand statt serieller Wiederentdeckung bereits bekannter Altfehler.
+
