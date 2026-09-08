@@ -1858,3 +1858,19 @@ Die Regel wird nicht abgeschwächt. Erst vollständige Historie, dann dieselbe `
 SCOPE:
 1 Datei, +2/-0. Kein Workflow-/Runner-/M28-/Publish-Umbau.
 
+## TEXT-TECH-20260908-CONTROL-FREEZE – Kontrollsystem ab hier einfrieren
+
+WAS:
+Nach Integration von PR #177 wird das Kontrollsystem nicht weiter funktional erweitert.
+
+WARUM:
+Die Schutzschicht darf nicht selbst zum Parallelprojekt werden.
+
+AB JETZT:
+- nur vorhandene Checks benutzen;
+- keine neue Gate-/Runner-/Sicherungsarchitektur;
+- Fokus auf eigentlichen M28-Produktionsfix;
+- danach echter 7/7-Lauf und nächster realer Blocker.
+
+PR #161 bleibt inhaltlich unverändert.
+
