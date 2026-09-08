@@ -1707,8 +1707,11 @@ DAUERHAFTER ZWANGSWEG NACH AKTIVIERUNG VON PR #160:
 8. Pauls Kernregeln werden semantisch geprüft: kein Sammelfix, historische Fehlerquelle, bestehende Regression, echter 7/7-Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik, Pre-/Post-Transformation.
 9. Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung müssen im Änderungsregister stehen.
 10. Historienprüfung, letzter funktionierender Stand, direkte Nachbarn, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest müssen im Hobbyraum-Standard stehen.
-11. Jeder Produktionskandidat muss den kompletten vertrauenswürdigen historischen Runner vom PR-Base/main GESAMT PASS machen.
-12. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
+11. current main muss vorher mit demselben Runner exakt bei `ACTIVE_HISTORY_CASE` als erstem Fehler FAIL liefern.
+12. Derselbe unveränderte Runner muss danach auf dem Produktionskandidaten die komplette akzeptierte Historie GESAMT PASS machen.
+13. `ACTIVE_HISTORY_CASE` muss in der autoritativen Fehlerzeile exakt den aktuellen `ACTIVE_BLOCKER` enthalten.
+14. `RECOVERY_BASE_SHA` muss als realer Git-Commit existieren und Vorfahr des current main sein.
+15. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
 
 NEUER FEHLER = ZUERST MASCHINELLE ERINNERUNG:
 - Ein neu real auftretender Fehler wird als nächstes Mxx in Fehlerquelle, Matrix und Runner aufgenommen.
@@ -1730,7 +1733,7 @@ SELBSTSCHUTZ:
 STATUS:
 - PR #159: integriert.
 - PR #160: exakt eine Security-Datei.
-- aktueller PR-Head: `3059c907be76477e44e2396430551c4bec35feb6`.
+- aktueller PR-Head: `a6f6240c05adb75883416440b4618a6ce428ecc6`.
 - PR #160 bleibt nur durch `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED` blockiert, weil der bestehende Hardlock seine eigene Gate-Datei schützt.
 - Ein direkter Mergeversuch wurde von GitHub mit Repository-Rule-Verstoß abgewiesen; kein Chat-seitiger Admin-/Ruleset-Schreibweg existiert.
 - Historischer PR #137 belegt denselben kontrollierten Einmal-Admin-Wartungsweg.
