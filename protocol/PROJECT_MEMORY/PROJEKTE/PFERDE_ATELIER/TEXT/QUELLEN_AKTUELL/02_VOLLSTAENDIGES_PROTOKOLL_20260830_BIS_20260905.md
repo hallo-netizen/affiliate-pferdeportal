@@ -500,9 +500,10 @@ PR #160 verändert exakt eine Security-Datei:
 `control/paul-scope-gate/paul_scope_gate.py`.
 
 Aktueller Head:
-`3fd7d6fd27c8f2d5770f081abd44136aa5620b53`.
+`3059c907be76477e44e2396430551c4bec35feb6`.
 
 Gebundene Evidenz:
+- vollständiges Ausführungs-/Testprotokoll selbst;
 - current main;
 - `RECOVERY_BASE_SHA`;
 - aktueller Realblocker;
@@ -569,6 +570,7 @@ Codex-Security-Selbsttest:
 - kein Code geändert, kein Produktionslauf, kein Publish, kein WordPress-Write.
 
 Status:
+Das Ausführungsprotokoll ist nun selbst Bestandteil der gebundenen Evidenz: vor jedem nächsten Fix müssen aktueller Blocker, current main und `RECOVERY_BASE_SHA` auch hier real dokumentiert sein.
 PR #160 ist vorbereitet, aber noch nicht auf main aktiviert.
 M28-Produktionsfix bleibt bis zur Aktivierung gesperrt.
 
