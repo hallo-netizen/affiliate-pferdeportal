@@ -336,6 +336,23 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Status:** OPEN / Root Cause belegt; genau ein gebündelter Cleanup+Workflow-Kandidat im Hobbyraum zulässig. Kein Plugin-ZIP vor vollständigem Ausgabe-Hardlock-PASS.
 
+
+## AFF-ERR-021 — Hobbyraum-TASK-Schema durch zusätzliche Hardlock-Felder ungültig gemacht
+
+**Datum / Arbeitsschritt:** 08.09.2026 / Ausgabe-Hardlock-Nachprüfung vor 6.72.7.
+
+**Symptom:** `AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py` akzeptiert in `TASK.current.json` exakt die Felder `contract, task_id, goal, image, inputs, writable, command, tests, timeout_seconds`. Die zuvor ergänzten Felder `artifact_output_gate` und `workflow_scope` würden den Runner mit `TASK_FIELDS_INVALID` blockieren.
+
+**Root Cause:** Prozessregeln wurden fälschlich in die maschinell streng validierte Task-Datei geschrieben, statt im Fehlerregister/Master zu bleiben.
+
+**Nicht wiederholen:** `TASK.current.json` bleibt schemaexakt. Dauerregeln/HARDLOCKS gehören in Fehlerregister/Master/Fehlermatrix. Vor jeder Hobbyraum-Nutzung TASK gegen `load_task()`-Schema prüfen.
+
+**POSITIV:** aktuelle TASK enthält exakt die neun erlaubten Felder und bleibt auf OTTO/Awin 14336 gebunden.
+
+**NEGATIV:** jedes zusätzliche/unbekannte Feld => Runner muss fail-closed bleiben.
+
+**Status:** OPEN / vor Plugin-Ausgabe zu reparieren und statisch gegen den echten Runner zu prüfen.
+
 ---
 
 # Aktueller PRECHECK
