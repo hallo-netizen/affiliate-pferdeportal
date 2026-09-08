@@ -1,14 +1,29 @@
 # AFFILIATE-ZENTRALE — CURRENT MASTER / HANDOFF
 
-Stand: 2026-09-01
+Stand: 2026-09-08
 Branch: `affiliate-release-current`
 Workstream: `AFFILIATE_ZENTRALE`
 Governance: `PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4`
-Candidate: `6.64.0` / `WORKING` / `release_allowed=false`
+Candidate: `6.72.5` / `WORKING` / `release_allowed=false`
 
 ## Autoritative Quelle
 
 Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` ist aktuelle Release-Quelle. Historische ZIPs, alte Chatstände und Archive sind keine Navigations- oder Rekonstruktionsquelle. Bereits hash-identisch bestandene eBay-Gates werden nicht erneut ausgeführt.
+
+## CURRENT-SCOPE OVERRIDE — 08.09.2026
+
+Aktueller Nutzer-Scope ist **OTTO / Awin Advertiser 14336**. Digistore24 bleibt während dieses Scopes zurückgestellt; ältere DS24-Abschnitte in diesem Dokument sind nur Kontext und **keine aktuelle NEXT ACTION**.
+
+Aktuelle belastbare Basis:
+- live installierter Ausgangsstand: 6.72.4;
+- großer OTTO/Awin-Feeddownload: LIVE PASS;
+- manuelle Paketfortsetzung: LIVE PASS, aber alte Anzeige war nicht kumulativ;
+- aktueller Source-/Testkandidat: **6.72.5**;
+- Source-Manifest: `033deaaba1c39a3cf2645a1f4ea79663947351fd6ed4070b88f3710eaa7b3921`;
+- 6.72.5-Testinstaller: 26/26 Manifest PASS, 21/21 PHP-Lint PASS, exakt drei Dateien gegenüber dem belegten 6.72.4-Testinstaller geändert;
+- Testinstaller-SHA256: `4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb`.
+
+**NEXT ACTION:** 6.72.5 installieren und ausschließlich denselben offenen Awin-14336-`products/queued`-Job live weiterprüfen. Kein neuer Lauf und kein erneuter manueller 500er-Beweis vor dem Automatiktest.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
@@ -133,4 +148,12 @@ Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_
 
 ## Aktuell autorisierter nächster Schritt
 
-Vor dem nächsten Implementierungsblock zuerst `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md` lesen. Danach den gebündelten Banner-Automations-Zielvertrag umsetzen: Bulk-Synchronisation bestätigter Partner als Hauptworkflow, automatische Bannererfassung, flexible und providerunabhängige Slot-/Formatdefinition, automatische Zuordnung auf passende Seiten/Kategorien/Beiträge mit Mehrfachnutzung und Pferde-Fallback, regelmäßige Neubewertung bei organischem Wachstum sowie vollständiger POSITIV-/NEGATIV-/Gesamtworkflow-/Regressionstest. Keine Abnahme aus Einzeltests und keine neue Plugin-Version für einen bloßen Folgefehler derselben Ursache.
+**WordPress-Dashboard → Plugins → Installieren → Plugin hochladen:** `Affiliate-Zentrale_6.72.5_TEST.zip` installieren und die bestehende Affiliate-Zentrale ersetzen.
+
+Danach **WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung** öffnen. `automatische Synchronisierung aktiv` + `WP-Cron-Fallback` bleiben gesetzt. Den bestehenden Awin-14336-Job **nicht neu starten** und **nicht manuell weiterklicken**. Nach Fälligkeit des 5-Minuten-Workers einen normalen Seitenaufruf ausführen und prüfen:
+
+1. Jobzeitpunkt schreitet ohne Paketknopf fort;
+2. Meldung zeigt nun den **kumulativen** Produktstand (>500) plus letztes Paket;
+3. bei Erfolg weiter automatisch bis `finalize/complete`; bei Stillstand kein neuer Microfix, sondern Livezustand gegen AFF-ERR-018 auslesen.
+
+Kein Release-/Gesamt-PASS vor diesem Live-Readback.
