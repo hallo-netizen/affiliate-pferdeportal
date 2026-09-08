@@ -1967,3 +1967,52 @@ Pflicht:
 KISS:
 Dokumentations-/Prüfregel, keine neue Gate-/Runner-Architektur.
 
+
+
+## PV-PLAN-015 – Produktvergleich wird bidirektional aus SEO und Produktwissen geplant
+
+STAND: 2026-09-08 / VERBINDLICH.
+
+WAS:
+Der Vergleichsworkflow wird nicht mehr einseitig aus vorgebildeten Produktpaaren gestartet.
+Beide Entdeckungsrichtungen sind gleichberechtigt:
+
+1. `SEO → Produktwissen`: konkrete Produktnachfrage sowie direkte Suchanfragen wie `Produkt A gegen Produkt B`, `vs` oder `oder` können einen Vergleichs-/Recherchekandidaten erzeugen.
+2. `Produktwissen → SEO`: technisch vergleichbare Konkurrenzprodukte werden vor einem Dossier auf reale Nachfrage, Keyword-Eignung und Kannibalisierung geprüft.
+
+Beide Wege werden vor der Dossierbildung dedupliziert und auf dieselbe Paaridentität gebunden.
+
+WARUM:
+Reale Nutzer suchen sowohl allgemein innerhalb einer Produktklasse als auch gezielt nach konkreten Modellpaaren. Ein nur produktseitiger Pairing-Workflow würde direkte SEO-Nachfrage übersehen; ein nur SEO-seitiger Workflow könnte Produktidentität und Vergleichbarkeit nicht zuverlässig fachlich absichern.
+
+HARD RULES:
+- Produktvergleich = exakt zwei Produkte unterschiedlicher Hersteller;
+- unbekannte konkrete SEO-Produkte gehen zuerst in Produktrecherche;
+- keine Ersatzprodukte und keine erfundenen Fakten;
+- Produktwissen bleibt Produktwahrheit;
+- SEO bleibt Nachfrage-/Prioritäts-/Kannibalisierungsautorität, nicht Faktenautorität;
+- vorhandener SEO-Bestand/Cache zuerst, kostenpflichtiger Provider nur für danach echte Lücken;
+- `PARTIAL` / Providerfehler / offene SEO-Lücke darf nie zu Gesamt-PASS werden;
+- bestehende Dossiers werden vor neuen Writes auf Fakten-/SEO-/Profil-Drift geprüft.
+
+## PV-PLAN-016 – Keine Plugin-Zwischenversionen ohne testbaren Gesamtabschnitt
+
+STAND: 2026-09-08 / VERBINDLICH.
+
+WAS:
+Neue Produktvergleichs-Plugin-ZIPs werden erst ausgegeben, wenn ein in WordPress sinnvoll testbarer Gesamtabschnitt fertig ist.
+
+PFLICHT VOR AUSGABE:
+- jeden geänderten Schritt gegen den gesamten gebundenen Workflow prüfen;
+- Positiv-/Negativtests;
+- bestehende Regressionen;
+- autoritative Fremdverträge (insbesondere Produktwissen/PSTE) gegen echte Quellen prüfen;
+- fertige ZIP in ein leeres Verzeichnis entpacken;
+- vollständige Tests erneut exakt gegen diese ZIP;
+- Paketwurzel und Byteparität prüfen.
+
+WARUM:
+Viele kleine Zwischen-ZIPs erzeugen unnötige Installationsschleifen und verschieben Fehler erst in die Nutzerprüfung. Der Hobbyraum soll Fehler vor der Herausgabe abfangen.
+
+KISS:
+Intern beliebig viele Testiterationen; extern nur ein sinnvoller nächster Testkandidat.
