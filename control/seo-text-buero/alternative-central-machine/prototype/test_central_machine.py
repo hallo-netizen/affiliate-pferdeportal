@@ -1,84 +1,136 @@
-import copy
 import unittest
-from cryptography.exceptions import InvalidSignature
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-from central_machine import CentralMachine, Blocked, make_result, sha, canon
 
-class CentralMachineTests(unittest.TestCase):
-    def build(self):
-        return CentralMachine("JOB-1", {"value": 1}, ["S1","S2","S3"])
+from central_machine import Blocked, CentralMachine, STEP_ORDER, make_result
 
-    def test_positive_full_fixed_sequence(self):
-        m=self.build()
-        for expected in (2,4,8):
-            wi=m.worker_input()
-            m.submit(make_result(wi, {"value": expected}), lambda x: set(x)=={"value"} and isinstance(x["value"], int))
+
+class P0CentralMachineTests(unittest.TestCase):
+    def good_research(self, m):
+        wi = m.worker_input()
+        self.assertEqual(wi["step_id"], "RESEARCH")
+        m.submit(make_result(wi, {"item_id": wi["payload"]["item_id"], "facts": ["f1", "f2"]}))
+
+    def good_text(self, m):
+        wi = m.worker_input()
+        self.assertEqual(wi["step_id"], "TEXT_SLOT")
+        m.submit(make_result(wi, {
+            "item_id": wi["payload"]["item_id"],
+            "facts": wi["payload"]["facts"],
+            "draft": "Draft",
+        }))
+
+    def good_final(self, m):
+        wi = m.worker_input()
+        self.assertEqual(wi["step_id"], "FINAL_CHECK")
+        m.submit(make_result(wi, {
+            "item_id": wi["payload"]["item_id"],
+            "facts": wi["payload"]["facts"],
+            "draft": wi["payload"]["draft"],
+            "checks": {"all_required_checks_passed": True},
+        }))
+
+    def test_positive_exact_three_step_flow(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        self.good_research(m)
+        self.good_text(m)
+        self.good_final(m)
         self.assertTrue(m.finished)
-        pkg=m.final_package()
-        self.assertEqual(pkg["package_hash"], sha(pkg["body"]))
+        self.assertEqual([x["step_id"] for x in m.snapshot()["history"]], list(STEP_ORDER))
 
-    def test_negative_worker_cannot_choose_next_step(self):
-        m=self.build(); wi=m.worker_input(); r=make_result(wi, {"value":2}); r["step_id"]="S3"
-        with self.assertRaisesRegex(Blocked,"STEP_ID_MISMATCH"): m.submit(r, lambda x: True)
+    def test_negative_caller_cannot_supply_validator(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
+        with self.assertRaises(TypeError):
+            m.submit(result, lambda _: True)
 
-    def test_negative_injected_next_step_field_rejected(self):
-        m=self.build(); wi=m.worker_input(); r=make_result(wi, {"value":2}); r["next_step"]="S3"
-        with self.assertRaisesRegex(Blocked,"RESULT_SCHEMA_INVALID"): m.submit(r, lambda x: True)
+    def test_negative_worker_cannot_skip_step(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
+        result["step_id"] = "FINAL_CHECK"
+        with self.assertRaisesRegex(Blocked, "STEP_ID_MISMATCH"):
+            m.submit(result)
 
-    def test_negative_wrong_job_rejected(self):
-        m=self.build(); wi=m.worker_input(); r=make_result(wi, {"value":2}); r["job_id"]="OTHER"
-        with self.assertRaisesRegex(Blocked,"JOB_ID_MISMATCH"): m.submit(r, lambda x: True)
+    def test_negative_worker_cannot_inject_next_step(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
+        result["next_step"] = "FINAL_CHECK"
+        with self.assertRaisesRegex(Blocked, "RESULT_SCHEMA_INVALID"):
+            m.submit(result)
 
-    def test_negative_input_context_forgery_rejected(self):
-        m=self.build(); wi=m.worker_input(); r=make_result(wi, {"value":2}); r["input_hash"]="0"*64
-        with self.assertRaisesRegex(Blocked,"INPUT_HASH_MISMATCH"): m.submit(r, lambda x: True)
+    def test_negative_wrong_job_is_blocked(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
+        result["job_id"] = "OTHER"
+        with self.assertRaisesRegex(Blocked, "JOB_ID_MISMATCH"):
+            m.submit(result)
 
-    def test_negative_output_modified_after_worker_rejected(self):
-        m=self.build(); wi=m.worker_input(); r=make_result(wi, {"value":2}); r["output"]["value"]=999
-        with self.assertRaisesRegex(Blocked,"OUTPUT_HASH_MISMATCH"): m.submit(r, lambda x: True)
+    def test_negative_wrong_item_is_blocked(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-2", "facts": ["f1"]})
+        with self.assertRaisesRegex(Blocked, "ITEM_ID_MISMATCH|VALIDATOR_FAIL"):
+            m.submit(result)
 
-    def test_negative_worker_fail_cannot_be_accepted(self):
-        m=self.build(); wi=m.worker_input(); r=make_result(wi, {"value":2}, status="FAIL")
-        with self.assertRaisesRegex(Blocked,"WORKER_NONPASS"): m.submit(r, lambda x: True)
+    def test_negative_input_hash_tampering_is_blocked(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
+        result["input_hash"] = "0" * 64
+        with self.assertRaisesRegex(Blocked, "INPUT_HASH_MISMATCH"):
+            m.submit(result)
 
-    def test_negative_validator_fail_blocks(self):
-        m=self.build(); wi=m.worker_input(); r=make_result(wi, {"value":2})
-        with self.assertRaisesRegex(Blocked,"VALIDATOR_FAIL"): m.submit(r, lambda x: False)
+    def test_negative_output_tampering_is_blocked(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
+        result["output"]["facts"].append("tampered")
+        with self.assertRaisesRegex(Blocked, "OUTPUT_HASH_MISMATCH"):
+            m.submit(result)
 
-    def test_positive_restart_resumes_exact_next_step(self):
-        m=self.build(); wi=m.worker_input(); m.submit(make_result(wi, {"value":2}), lambda x: True)
-        r=CentralMachine.restore(m.checkpoint())
-        self.assertEqual(r.current_step,"S2")
-        self.assertEqual(r.worker_input()["payload"],{"value":2})
+    def test_negative_extra_rule_field_is_blocked(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {
+            "item_id": "ITEM-1",
+            "facts": ["f1"],
+            "disable_link_rule": True,
+        })
+        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
+            m.submit(result)
 
-    def test_negative_checkpoint_reorder_rejected(self):
-        m=self.build(); wi=m.worker_input(); m.submit(make_result(wi, {"value":2}), lambda x: True)
-        cp=m.checkpoint(); cp["history"][0]["step_id"]="S3"
-        with self.assertRaisesRegex(Blocked,"CHECKPOINT_STEP_ORDER_INVALID"): CentralMachine.restore(cp)
+    def test_negative_worker_fail_blocks_machine(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        wi = m.worker_input()
+        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]}, status="FAIL")
+        with self.assertRaisesRegex(Blocked, "WORKER_NONPASS"):
+            m.submit(result)
+        self.assertIsNone(m.current_step)
 
-    def test_worker_mutation_of_copy_does_not_mutate_machine(self):
-        m=self.build(); wi=m.worker_input(); wi["payload"]["value"]=999
-        self.assertEqual(m.worker_input()["payload"],{"value":1})
+    def test_negative_final_check_cannot_claim_partial_pass(self):
+        m = CentralMachine("JOB-1", "ITEM-1")
+        self.good_research(m)
+        self.good_text(m)
+        wi = m.worker_input()
+        result = make_result(wi, {
+            "item_id": "ITEM-1",
+            "facts": wi["payload"]["facts"],
+            "draft": wi["payload"]["draft"],
+            "checks": {"all_required_checks_passed": False},
+        })
+        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
+            m.submit(result)
 
-    def test_negative_final_package_tamper_detectable(self):
-        m=self.build()
-        for expected in (2,4,8):
-            wi=m.worker_input(); m.submit(make_result(wi, {"value":expected}), lambda x: True)
-        pkg=m.final_package(); tampered=copy.deepcopy(pkg); tampered["body"]["final_payload"]["value"]=999
-        self.assertNotEqual(tampered["package_hash"],sha(tampered["body"]))
+    def test_positive_no_fixed_article_count(self):
+        for i in range(1000):
+            m = CentralMachine(f"JOB-{i}", f"ITEM-{i}")
+            self.good_research(m)
+            self.good_text(m)
+            self.good_final(m)
+            self.assertTrue(m.finished)
 
-    def test_positive_external_signature_verifies_exact_package(self):
-        m=CentralMachine("JOB-1",{"value":1},["S1"])
-        wi=m.worker_input(); m.submit(make_result(wi,{"value":2}),lambda x: True)
-        pkg=m.final_package(); private=Ed25519PrivateKey.generate(); public=private.public_key()
-        signed=canon(pkg); sig=private.sign(signed); public.verify(sig,signed)
 
-    def test_negative_post_output_tampering_breaks_signature(self):
-        m=CentralMachine("JOB-1",{"value":1},["S1"])
-        wi=m.worker_input(); m.submit(make_result(wi,{"value":2}),lambda x: True)
-        pkg=m.final_package(); private=Ed25519PrivateKey.generate(); public=private.public_key()
-        sig=private.sign(canon(pkg)); tampered=copy.deepcopy(pkg); tampered["body"]["final_payload"]["value"]=999
-        with self.assertRaises(InvalidSignature): public.verify(sig, canon(tampered))
-
-if __name__=="__main__":
+if __name__ == "__main__":
     unittest.main(verbosity=2)
