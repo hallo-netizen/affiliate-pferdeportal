@@ -1,6 +1,6 @@
-# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M33
+# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M35
 
-Stand: 2026-09-04
+Stand: 2026-09-08
 
 ## HARD RULE
 
@@ -117,8 +117,29 @@ M33 – GitHub ENDSTEMPEL must not depend on Codex git remote/auth
 - Kein Codex-Push als Voraussetzung für den finalen Produktionsendstempel.
 - Erfolg nur, wenn GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json dauerhaft entsteht; sonst BLOCKED.
 
+
+M34 – Reapplied legacy PPM handoff guards after B01
+- Historischer Live-Fehler: `PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`.
+- Der äußere STARTMASTER-Artikel behält seine gebundene Runtime-`canonical_article_id` und seinen `plan_slot`.
+- Für den **internen PPM-Aufruf** muss derselbe `plan_slot` exakt einen kanonischen PPM-Registry-Slot auflösen.
+- Nur die interne PPM-Kopie übernimmt dessen Registry-`canonical_article_id`; der externe `plan_slot` wird nicht als PPM-Planfeld weitergereicht.
+- Fehlender oder nicht eindeutiger Registry-Slot = BLOCKED.
+- Kein Titel-Fallback, keine Änderung der äußeren Artikelidentität.
+- Real überwunden auf main `2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`: nachfolgender Realtest kam über Canonical/Slot hinaus und stoppte erst an M35.
+
+M35 – PPM Fact-Pack source-hash binding parity
+- Aktueller Live-Fehler: `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`.
+- Reale PPM-6.7.9-Semantik: Forschungs-/Inhalts-Fact-Pack-Hash und PPM-Registry-Hash sind **verschiedene Hash-Namensräume**.
+- Der Forschungs-/Inhalts-Hash darf weiter in seiner bestehenden Evidenzbindung bleiben; er ist **nicht** automatisch der Wert für `production_plan_item.source_hashes`.
+- Nach erfolgreichem `canonical_fact_pack_import_v1` muss der vorhandene PPM-Registry-Hash für `source_snapshot_id` über `PPM679_Storage::fact_pack_hash(...)` ermittelt werden.
+- Vor dem realen PPM-Planlauf muss die **interne PPM-Plan-Kopie** `source_hashes` exakt an diesen gespeicherten Registry-Hash binden.
+- Leerer/nicht auflösbarer Registry-Hash = BLOCKED.
+- Kein Duplizieren des PPM-Hashalgorithmus im Worker, keine Erweiterung des SEO-5-Felder-Handoffs, keine Änderung von PPM/PSERC/Fachregeln.
+- Historischer Negativbeweis für exakt denselben Hindernisstangen-Fall: PPM erwartete den gespeicherten Registry-Hash, während `source_hashes` den Forschungs-/Fact-Pack-Hash enthielt → `BLOCKED_FACT_PACK_HASH_MISMATCH`.
+- Historischer Positivbeweis: korrigiertes PPM-6.7.9-Paket mit getrenntem Forschungs- und Registry-Hash bestand den vollständigen Downstream-Preflight.
+
 ## Abschlussregel
 
-HOBBYRAUM PASS nur wenn M01–M33 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
+HOBBYRAUM PASS nur wenn M01–M35 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
 
 Danach erst Merge-Kandidat und danach kompletter frischer 7/7-E2E. Keine Reparatur während des Produktionslaufs.
