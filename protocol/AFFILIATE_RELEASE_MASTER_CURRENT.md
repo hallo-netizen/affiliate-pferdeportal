@@ -23,7 +23,7 @@ Aktuelle belastbare Basis:
 - 6.72.5-Testinstaller: 26/26 Manifest PASS, 21/21 PHP-Lint PASS, exakt drei Dateien gegenüber dem belegten 6.72.4-Testinstaller geändert;
 - Testinstaller-SHA256: `4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb`.
 
-**NEXT ACTION:** 6.72.5 installieren und ausschließlich denselben offenen Awin-14336-`products/queued`-Job live weiterprüfen. Kein neuer Lauf und kein erneuter manueller 500er-Beweis vor dem Automatiktest.
+**NEXT ACTION:** OTTO/Awin-14336-Automatik sofort stoppen. Der aktuelle Vollfeed darf nicht weiterlaufen, weil formal gültige Produktzeilen vor der Pferde-Relevanzprüfung lokal persistiert werden. Danach Quelle mit Awin Create-a-Feed fachlich eingrenzen und zusätzlich einen lokalen Pre-Upsert-Relevanzguard binden. Kein weiterer OTTO-Produktlauf vorher.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
