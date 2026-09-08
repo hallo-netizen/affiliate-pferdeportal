@@ -86,6 +86,16 @@ Jeder neue Fehler wird **vor dem Fix** hier eingetragen mit Symptom, Root Cause,
 
 **Pflicht:** vor Pluginbuild belegen, warum Codeänderung notwendig ist und welche gemeinsame Ursache sie schließt.
 
+**PLUGIN-AUSGABE-HARDLOCK:** Kein neues Plugin-ZIP, keine neue Versionsnummer und kein Installationsaufruf an den Nutzer, bevor **derselbe gebundene Kandidat** vollständig geprüft ist:
+1. Syntax/Lint aller betroffenen PHP-Dateien,
+2. lokaler POSITIV-Test des konkreten Fixes,
+3. lokaler NEGATIV-/Fail-closed-Test,
+4. kompletter gebundener Gesamtworkflow im Hobbyraum,
+5. relevante historische Regressionen gegen unveränderte Bereiche,
+6. Source-Manifest/Byte-Scope gegen den letzten belegten Kandidaten,
+7. ERROR-REGISTER POSTCHECK.
+Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und **denselben vollständigen Prüfblock erneut** fahren. Kein Zwischen-ZIP, kein Nutzer-Test und keine neue Versionskaskade.
+
 **Status:** OPEN als permanente Prozesssperre.
 
 ## AFF-ERR-007 — Unvollständige Backend-Pfade
