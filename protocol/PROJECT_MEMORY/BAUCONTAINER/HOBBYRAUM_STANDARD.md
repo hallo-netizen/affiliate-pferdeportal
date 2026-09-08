@@ -303,3 +303,18 @@ Fehlt nur ein Beleg oder driftet nur ein gebundener Git-Blob:
 `FIX_FORBIDDEN`.
 
 Die `CHECK_*`-Felder sind nur Arbeitsnotizen und niemals Freigabeautorität.
+
+## 2026-09-08 – KISS-REAPPLY-REGEL
+
+Bei Wiederherstellung eines älteren Commits, PRs oder Dateistands gilt campusweit:
+
+1. **Keine alte Gesamtdatei blind zurückspielen.**
+2. Vor einem Whole-File-Reapply den begrenzten Ein-/Ausgangskorridor gegen den heutigen Vertrag prüfen:
+   - aktuelle Upstream-Eingaben;
+   - aktuelle Downstream-Validatoren;
+   - später bewiesene Fixes;
+   - reale letzte PASS-Referenz.
+3. Wenn ein Live-Fehler nach einem Reapply auftritt, zuerst prüfen, ob weitere bereits behobene Altsemantik mit zurückgekommen ist.
+4. In diesem Fall **einmal den ganzen betroffenen Korridor prüfen**, statt Fehler für Fehler seriell zu flicken.
+5. Daraus keine neue Gate-/Runner-/Sicherungsarchitektur bauen. KISS bleibt verbindlich.
+
