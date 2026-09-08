@@ -146,6 +146,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
             "HISTORY_SOURCE_REF", "HISTORY_SOURCE_BLOB_SHA",
             "HISTORY_PROOF_RUNNER_REF", "HISTORY_PROOF_RUNNER_BLOB_SHA",
             "PAUL_SOURCE_REF", "PAUL_SOURCE_BLOB_SHA",
+            "ERROR_SOURCE_REF", "ERROR_SOURCE_BLOB_SHA",
+            "CURRENT_STATE_REF", "CURRENT_STATE_BLOB_SHA",
         }
         proof_missing = sorted(proof_required.difference(data))
         if proof_missing:
@@ -153,7 +155,10 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
                 "HOBBYROOM_WORK_LOCK_INVALID:MACHINE_PROOF_MISSING:" +
                 ",".join(proof_missing)
             )
-        for key in ("HISTORY_SOURCE_REF", "HISTORY_PROOF_RUNNER_REF", "PAUL_SOURCE_REF"):
+        for key in (
+            "HISTORY_SOURCE_REF", "HISTORY_PROOF_RUNNER_REF", "PAUL_SOURCE_REF",
+            "ERROR_SOURCE_REF", "CURRENT_STATE_REF",
+        ):
             value = data[key]
             if (
                 not value
@@ -165,6 +170,8 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
             "HISTORY_SOURCE_BLOB_SHA",
             "HISTORY_PROOF_RUNNER_BLOB_SHA",
             "PAUL_SOURCE_BLOB_SHA",
+            "ERROR_SOURCE_BLOB_SHA",
+            "CURRENT_STATE_BLOB_SHA",
         ):
             if not re.fullmatch(r"[0-9a-fA-F]{40}", data[key]):
                 raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:" + key)
@@ -266,6 +273,8 @@ def enforce_history_machine_proof(
         ("HISTORY_SOURCE", pr_base, data["HISTORY_SOURCE_REF"], data["HISTORY_SOURCE_BLOB_SHA"]),
         ("HISTORY_PROOF_RUNNER", pr_base, data["HISTORY_PROOF_RUNNER_REF"], data["HISTORY_PROOF_RUNNER_BLOB_SHA"]),
         ("PAUL_SOURCE", campus_head, data["PAUL_SOURCE_REF"], data["PAUL_SOURCE_BLOB_SHA"]),
+        ("ERROR_SOURCE", campus_head, data["ERROR_SOURCE_REF"], data["ERROR_SOURCE_BLOB_SHA"]),
+        ("CURRENT_STATE", campus_head, data["CURRENT_STATE_REF"], data["CURRENT_STATE_BLOB_SHA"]),
     )
     for label, ref, path, expected in bindings:
         actual = _blob_at(ref, path, label)
@@ -276,6 +285,14 @@ def enforce_history_machine_proof(
 
     history_ref = data["HISTORY_SOURCE_REF"]
     runner_ref = data["HISTORY_PROOF_RUNNER_REF"]
+    error_text = show(campus_head, data["ERROR_SOURCE_REF"])
+    current_state_text = show(campus_head, data["CURRENT_STATE_REF"])
+    if data["ACTIVE_BLOCKER"] not in error_text:
+        raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_AUTHORITATIVE_ERROR_SOURCE")
+    if data["ACTIVE_BLOCKER"] not in current_state_text:
+        raise Blocked("HOBBYROOM_ACTIVE_BLOCKER_NOT_IN_CURRENT_STATE")
+    if data["MAIN_SHA"] not in current_state_text:
+        raise Blocked("HOBBYROOM_MAIN_SHA_NOT_IN_CURRENT_STATE")
     expected_ids = [f"{i:02d}" for i in range(1, 34)]
 
     base_matrix = show(pr_base, history_ref)
@@ -739,6 +756,10 @@ HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.p
 HISTORY_PROOF_RUNNER_BLOB_SHA: 3333333333333333333333333333333333333333
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 4444444444444444444444444444444444444444
+ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
+ERROR_SOURCE_BLOB_SHA: 5555555555555555555555555555555555555555
+CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
+CURRENT_STATE_BLOB_SHA: 6666666666666666666666666666666666666666
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1"""
     data = parse_work_lock(valid, "X/HOBBYRAUM.md")
