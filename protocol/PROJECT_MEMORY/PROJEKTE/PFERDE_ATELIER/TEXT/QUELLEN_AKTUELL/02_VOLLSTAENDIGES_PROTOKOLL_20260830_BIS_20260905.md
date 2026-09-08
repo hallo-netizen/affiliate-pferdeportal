@@ -777,3 +777,34 @@ Damit:
 - die vier M28-Dateiinhalte sind byte-identisch zum ersten PR-#161-Test;
 - kein neuer Produktionsfix zwischen den Tests.
 
+### Zweiter serverseitiger PR-#161-Test – shallow ancestry false negative
+
+Re-Run `hardlock-base`:
+Run `34228573901`, aktueller Job `102069474348`.
+
+PASS bis zum Stop:
+- immutable path guard;
+- Work-Lock-Selbsttest 8/8;
+- Evidenz-Selbsttest 10/10;
+- Runner-Modus-Selbsttest 3/3;
+- M28-Reproduktionsmodus-Selbsttest;
+- `HOBBYROOM_WORK_LOCK_PR_PASS`.
+
+Stop:
+`HOBBYROOM_RECOVERY_BASE_NOT_ANCESTOR:de21f6cd35c60849c551fd82f78e75ce57c99fab:MAIN=755b531ec08298a86cb0342c2db8c81f5b4df6f9`.
+
+GitHub-Commitgraph separat geprüft:
+- `de21f6… -> 755b531e…`: status ahead, 176 Commits;
+- Merge-Base exakt `de21f6…`;
+- Gegenrichtung status behind;
+- Goldmaster existiert real und ist Vorfahr.
+
+Workflow-Ursache:
+Trusted Base Checkout `fetch-depth: 1`.
+Candidate fetch `--depth=1`.
+Damit kann lokale `git merge-base --is-ancestor` die reale Ahnenkette nicht vollständig sehen.
+
+Keine Änderung am M28-Kandidaten.
+Kein Merge.
+Kein Realtest.
+
