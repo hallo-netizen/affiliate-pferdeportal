@@ -53,11 +53,11 @@ PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
 ERROR_SOURCE_BLOB_SHA: e263de9d684e16c5ca95185079cbad1dd02fb26c
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 29af7cc7bfde55cb6fa3a4944b77ee793b856bf4
+CURRENT_STATE_BLOB_SHA: d18311775d1080fcd25be5c53214cd38240ee2d8
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 35b7035fbea07d84bcd2ce2dacbf6846d8fd3111
+DECISION_SOURCE_BLOB_SHA: 51b7a15773c1af5c3336e615c55e99accf55e177
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
-STANDARD_SOURCE_BLOB_SHA: 816bd7430c2515b027e8762db2f7af9a090d8629
+STANDARD_SOURCE_BLOB_SHA: 5e4856bc0ca3cfeb24f0dbfad7badc8577e56487
 INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -75,6 +75,10 @@ END_HOBBYROOM_WORK_LOCK_V1
 9. Kein zweiter Kandidat parallel.
 
 ## AKTUELLE EINZIGE NEXT ACTION
+
+**Maschinenbeweis zuerst fertigstellen. Produktionsfix bleibt gesperrt.**
+
+Gebundene Evidenz: M01–M33-Matrix + vertrauenswürdiger Runner + autoritative Fehlerquelle + CURRENT_STATE + Paul-Prüfkarte + Änderungs-/Erklärungsregister + Hobbyraum-Standard. Diese Quellen werden per Git-Blob und zusätzlich semantisch geprüft.
 
 **Einmalige Security-Aktivierung von PR #160 vorbereiten/ausführen. Danach ausschließlich M28 reparieren. Kein weiterer Architekturumbau.**
 
@@ -96,7 +100,7 @@ Maschinenbeweis-Bootstrap:
 
 Serverseitige Einklinkung:
 - PR #160;
-- Head `d5d876f66336c4a964c4141b1a5b90ef36b825d5`;
+- Head `eb4b5da07d73443cb40ed74f27ded2c80ebf6ded`;
 - exakt eine Datei: `control/paul-scope-gate/paul_scope_gate.py`;
 - bindet current main, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, M01–M33-Matrix und vertrauenswürdigen Base-Runner;
 - manuelle `CHECK_*`-Felder erzeugen keine Freigabe mehr;
