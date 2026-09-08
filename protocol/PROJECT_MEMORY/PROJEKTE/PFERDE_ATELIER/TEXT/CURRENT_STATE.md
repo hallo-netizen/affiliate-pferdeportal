@@ -25,9 +25,18 @@ Maschinenbeweis-Runner:
 
 ## EINGEFRORENER REPARATURWEG
 
-`de21f6…` Goldmaster → erster realer Blocker → Paul + Fehlerhistorie + letzter funktionierender Stand + direkte Vor-/Nachstufe prüfen → genau eine Pflichtänderung → Positiv/Negativ → echter 7/7-Realtest → PASS einfrieren oder Regression vollständig zurückbauen.
+Eine einzige maschinelle Reparaturstraße:
 
-Kein Konzeptwechsel, kein Sammelfix, kein zweiter Fix auf einen fehlgeschlagenen Fix.
+1. offizieller Hobbyraum bindet current main + ersten realen Blocker + exakten Kandidatenscope;
+2. autoritative Fehlerquelle, CURRENT_STATE, Paul-Audit, M01–M33-Matrix und vertrauenswürdiger Base-Runner werden per Git-Blob gebunden;
+3. Produktionskandidat darf Matrix/Runner nicht mitändern;
+4. kompletter vertrauenswürdiger M01–M33-Lauf muss gegen den Kandidaten GESAMT PASS sein;
+5. erst dann Merge;
+6. danach genau ein echter 7/7-Realtest;
+7. der erste neue reale Blocker wird alleinige neue Arbeitswahrheit;
+8. kein Fix während des Realtests, kein Parallel-/Sammelfix.
+
+Die bisherigen sieben manuellen `CHECK_*`-Felder sind keine Integrationsautorität mehr. Sie können den Maschinenbeweis nicht ersetzen.
 
 ## LETZTER SICHERER STAND
 
@@ -94,11 +103,15 @@ Ruleset `Pferde Atelier Main Hardlock`:
 - `hardlock-base` Pflicht;
 - kein Bypass-Akteur.
 
-Vorbereitete serverseitige Maschinenbeweis-Einklinkung:
+Vorbereitete serverseitige Reparatur-Zwangsjacke:
 - PR #160;
-- Head `947b56ad638c932a27cf66e77692914e83b09547`;
-- bindet History-Quelle, Paul-Quelle und vertrauenswürdigen Base-Runner per Git-Blob;
-- führt zuerst den Selbst-Mutanten-Beweis des Base-Runners und danach den gebundenen historischen Fall gegen den Kandidaten aus;
+- Head `d5d876f66336c4a964c4141b1a5b90ef36b825d5`;
+- exakt eine Security-Datei: `control/paul-scope-gate/paul_scope_gate.py`;
+- bindet current main, CURRENT_STATE, autoritative Fehlerquelle, Paul-Audit, M01–M33-Matrix und vertrauenswürdigen Base-Runner;
+- `ACTIVE_BLOCKER` muss in Fehlerquelle und CURRENT_STATE real vorhanden sein;
+- kompletter vertrauenswürdiger M01–M33-Lauf läuft gegen jeden Produktionskandidaten;
+- Matrix/Runner-Wartung ist separat und darf nicht mit Produktionscode gemischt werden;
+- manuelle `CHECK_*`-PASS-Felder erzeugen keine Freigabe;
 - Kandidatenänderungen am Runner können den Beweis nicht selbst fälschen.
 
 PR #160 ist **noch nicht integriert**.
