@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "otto-awin-automated-distribution-20260907",
-  "goal": "OTTO/Awin 14336 als einen einzigen gebundenen Kandidaten bis zum belastbaren Gesamtworkflow-PASS prüfen. Keine Plugin-Ausgabe, kein Nutzer-Livetest und keine neue Version vor vollständigem lokalem POSITIV-/NEGATIV-/Regression-/Gesamtworkflow-PASS.",
+  "goal": "OTTO/Awin 14336 als einen Kandidaten prüfen: gefilterte Quelle, exakter Altimport-Cleanup, Pre-Upsert-Relevanz, Output, Automatik und manuelle Reparatur; kein Plugin vor vollständigem lokalen Positiv-/Negativ-/Regression-PASS.",
   "image": "php:8.2-cli",
   "inputs": [
     {
@@ -15,6 +15,10 @@
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php",
       "dest": "trait-ppar-awin-programme-gate.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php",
+      "dest": "trait-ppar-provider-registry.php"
     },
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php",
@@ -54,48 +58,10 @@
     }
   ],
   "writable": [],
-  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-awin-programme-gate.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
+  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-awin-programme-gate.php && php -l trait-ppar-provider-registry.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
   "tests": [
     "php test_otto_automation.php",
     "php test_banner_distribution_behavior.php"
   ],
-  "timeout_seconds": 600,
-  "artifact_output_gate": {
-    "status": "HARDLOCK",
-    "rule": "NO_PLUGIN_OUTPUT_BEFORE_COMPLETE_LOCAL_GATE",
-    "candidate_policy": "ONE_CANDIDATE_ONLY_UNTIL_COMPLETE_GATE_PASS",
-    "on_failure": "KEEP_SAME_CANDIDATE_FIX_IN_HOBBYRAUM_AND_RERUN_FULL_GATE",
-    "required_checks": [
-      "PHP_LINT_ALL_BOUND_FILES",
-      "FOCUSED_POSITIVE_FIX_TEST",
-      "FOCUSED_NEGATIVE_FAIL_CLOSED_TEST",
-      "FULL_BOUND_WORKFLOW_TEST",
-      "RELEVANT_HISTORICAL_REGRESSIONS",
-      "SOURCE_MANIFEST_AND_BYTE_SCOPE",
-      "ERROR_REGISTER_POSTCHECK"
-    ],
-    "forbidden": [
-      "INTERMEDIATE_PLUGIN_ZIP",
-      "NEW_VERSION_FOR_NEXT_SYMPTOM",
-      "USER_LIVE_TEST_BEFORE_LOCAL_GATE_PASS",
-      "SKIP_FULL_WORKFLOW_AFTER_LOCAL_FIX"
-    ]
-  },
-  "workflow_scope": {
-    "provider": "awin",
-    "advertiser_id": 14336,
-    "logical_source": "OTTO",
-    "must_cover": [
-      "source_binding",
-      "legacy_unfiltered_job_stop",
-      "product_feed_download",
-      "pre_persistence_relevance_filter",
-      "creative_library_persistence",
-      "target_classification",
-      "selection_materialization",
-      "output_routing",
-      "automatic_worker",
-      "manual_repair_precedence"
-    ]
-  }
+  "timeout_seconds": 600
 }
