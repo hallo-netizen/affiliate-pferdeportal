@@ -916,3 +916,25 @@ alte Gesamt-/Semantikstände wurden beim Wiederaufbau erneut eingespielt und üb
 
 Kein Einzelfix im Realtest.
 
+### M34 – vollständiger Handoff-Korridorvergleich vor Reparatur
+
+Statt `CANONICAL_SLOT_MISSING` isoliert zu flicken wurde der gesamte begrenzte Korridor
+Request -> realer PPM -> PASS/Receipt -> Submission -> 107008
+gegen den B01-Handoff geprüft.
+
+Zusätzliche vorab gefundene sichere Folgebrüche im regressierten aktuellen Handoff:
+1. `article_type` und `article_type_templates_sha256` fehlen im erzeugten FACHWORKFLOW_PASS, obwohl der heutige Submission-Validator sie zwingend verlangt.
+2. Stage-Artefakte werden nicht mehr vollständig in `ITEM_RECEIPT.outputs` aufgenommen; dadurch würden finaler Artikel/PPM-Report später am heutigen Validator scheitern.
+
+Der B01-Handoff erfüllt dagegen den heutigen Request-, PASS-, Receipt- und Room-Bridge-Vertrag vollständig.
+
+Kandidat:
+`hobbyroom/m34-ppm-handoff-corridor-reconstruction-20260908`
+Head `5e7ebadd991ae5b43de74f95bc232a4fa42b3b23`.
+
+Scope:
+exakt eine Datei, byte-identisch zum bewiesenen B01-Handoff-Blob
+`2c5d989ebbdb4a9221226b8f6ab675ca2a3122f1`.
+
+Kein Einzelflick.
+
