@@ -754,3 +754,26 @@ Bis zu seiner bestätigten Entfernung:
 
 Anschließend wird PR #161 nur auf den neuen main synchronisiert, ohne Änderung seiner vier M28-Dateiinhalte, und derselbe Maschinen-Test erneut ausgelöst.
 
+### Ruleset nach PR #166 wieder geschlossen / PR #161 Synchronisation vorbereitet
+
+Nach Merge von PR #166:
+- temporärer `Repository admin / For pull requests only`-Bypass entfernt;
+- frisch verifiziert: `bypass_actors: []`;
+- `current_user_can_bypass: never`;
+- Required Checks `hardlock` + `hardlock-base` unverändert aktiv.
+
+PR #161 blieb inhaltlich unverändert.
+
+Für den Wiederholungstest wurde ein reiner Synchronisations-Mergecommit **noch ohne Branch-Ref-Update** erzeugt:
+`26d7b5b53044729ab6350f88d16d4ac0f6cacd03`.
+
+Baum:
+- Basis = current main `755b531ec08298a86cb0342c2db8c81f5b4df6f9`;
+- exakt die vier bisherigen PR-#161-M28-Blobs darübergelegt;
+- Parents = bisheriger PR-#161-Head `78263594456bb58ae004b5b064816de0f3531720` + current main.
+
+Damit:
+- Parserfix aus PR #166 ist im Kandidaten-Ausgangsstand enthalten;
+- die vier M28-Dateiinhalte sind byte-identisch zum ersten PR-#161-Test;
+- kein neuer Produktionsfix zwischen den Tests.
+
