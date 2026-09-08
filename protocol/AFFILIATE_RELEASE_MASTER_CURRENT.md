@@ -149,12 +149,17 @@ Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_
 
 ## Aktuell autorisierter nächster Schritt
 
-**WordPress-Dashboard → Plugins → Installieren → Plugin hochladen:** `Affiliate-Zentrale_6.72.5_TEST.zip` installieren und die bestehende Affiliate-Zentrale ersetzen.
+**KEINE weitere Plugin-Ausgabe.** Kandidat 6.72.6 bleibt im Hobbyraum gebunden, bis der vollständige lokale Ausgabe-Hardlock bestanden ist.
 
-Danach **WordPress-Dashboard → Affiliate-Zentrale → Steuerung & System → Automatisierung** öffnen. `automatische Synchronisierung aktiv` + `WP-Cron-Fallback` bleiben gesetzt. Den bestehenden Awin-14336-Job **nicht neu starten** und **nicht manuell weiterklicken**. Nach Fälligkeit des 5-Minuten-Workers einen normalen Seitenaufruf ausführen und prüfen:
+Vor einem neuen ZIP oder einer Nutzerinstallation zwingend in **einem Prüfblock**:
+1. PHP-Lint,
+2. POSITIV,
+3. NEGATIV/fail-closed,
+4. kompletter OTTO/Awin-14336-Gesamtworkflow,
+5. relevante Regressionen,
+6. Manifest-/Byte-Scope,
+7. Fehlerregister-Postcheck.
 
-1. Jobzeitpunkt schreitet ohne Paketknopf fort;
-2. Meldung zeigt nun den **kumulativen** Produktstand (>500) plus letztes Paket;
-3. bei Erfolg weiter automatisch bis `finalize/complete`; bei Stillstand kein neuer Microfix, sondern Livezustand gegen AFF-ERR-018 auslesen.
+Bei irgendeinem FAIL: **kein ZIP, keine neue Version, kein Nutzer-Livetest**. Derselbe Kandidat wird im Hobbyraum repariert und vollständig erneut geprüft.
 
-Kein Release-/Gesamt-PASS vor diesem Live-Readback.
+Erst nach Gesamt-PASS darf exakt **ein** Installationskandidat ausgegeben werden.
