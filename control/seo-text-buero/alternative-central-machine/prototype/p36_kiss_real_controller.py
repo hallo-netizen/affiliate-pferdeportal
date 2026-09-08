@@ -28,11 +28,11 @@ def _parse_status(output:str,status:str)->dict:
             return obj
     raise ControllerBlocked("ITEM_ADAPTER_PASS_MISSING")
 
-def _run_fixed_item()->dict:
+def _run_fixed_item(job_id:str,item_id:str)->dict:
     if not LAB_ITEM_ADAPTER.is_file():
         raise ControllerBlocked("FIXED_ITEM_ADAPTER_MISSING")
     proc=subprocess.run(
-        [sys.executable,str(LAB_ITEM_ADAPTER)],
+        [sys.executable,str(LAB_ITEM_ADAPTER),"--job-id",job_id,"--expected-item-id",item_id],
         cwd=HERE.parents[3],
         text=True,
         stdout=subprocess.PIPE,
@@ -64,7 +64,9 @@ def execute_signed_job(
     # No route selection and no parallel branch: exact manifest order only.
     completed=[]
     for ordinal,item in enumerate(job["items"],1):
-        proof=_run_fixed_item()
+        proof=_run_fixed_item(job["job_id"],item["item_id"])
+        if proof.get("job_id")!=job["job_id"] or proof.get("item_id")!=item["item_id"]:
+            raise ControllerBlocked("ITEM_ADAPTER_IDENTITY_MISMATCH")
         completed.append({
             "ordinal":ordinal,
             "item_id":item["item_id"],
