@@ -141,7 +141,7 @@ def main():
         if positive["snapshot_status"]!="draft":
             raise RuntimeError("WRITTEN_STATUS_NOT_DRAFT")
         if positive.get("readback_ok") is not True:
-            raise RuntimeError("SIGNED_PREPARED_READBACK_DRIFT")
+            raise RuntimeError("SIGNED_PREPARED_READBACK_DRIFT:"+json.dumps(positive.get("readback"),ensure_ascii=False))
 
         # Tamper after signature: must be blocked before any write helper is invoked.
         tampered=copy.deepcopy(signed_release)
