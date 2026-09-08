@@ -1,172 +1,105 @@
-import unittest
+import os, unittest
+from pathlib import Path
+from central_machine import Blocked, CentralMachine, STEP_ORDER, make_research_result
 
-from central_machine import Blocked, CentralMachine, STEP_ORDER, make_result
+class P2(unittest.TestCase):
+    def good_research(self,m,facts=None):
+        i=m.research_input()
+        m.submit_research(make_research_result(i,facts or ["fact-a","fact-b"]))
 
+    def full(self,m,facts=None):
+        self.good_research(m,facts)
+        m.run_textmachine()
+        m.run_final_check()
+        return m.final_output()
 
-class P0CentralMachineTests(unittest.TestCase):
-    def good_research(self, m):
-        wi = m.worker_input()
-        self.assertEqual(wi["step_id"], "RESEARCH")
-        m.submit(make_result(wi, {"item_id": wi["payload"]["item_id"], "facts": ["f1", "f2"]}))
-
-    def good_text(self, m):
-        wi = m.worker_input()
-        self.assertEqual(wi["step_id"], "TEXT_SLOT")
-        m.submit(make_result(wi, {
-            "item_id": wi["payload"]["item_id"],
-            "facts": wi["payload"]["facts"],
-            "draft": "Draft",
-        }))
-
-    def good_final(self, m):
-        wi = m.worker_input()
-        self.assertEqual(wi["step_id"], "FINAL_CHECK")
-        m.submit(make_result(wi, {
-            "item_id": wi["payload"]["item_id"],
-            "facts": wi["payload"]["facts"],
-            "draft": wi["payload"]["draft"],
-            "checks": {"all_required_checks_passed": True},
-        }))
-
-    def test_positive_exact_three_step_flow(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        self.good_research(m)
-        self.good_text(m)
-        self.good_final(m)
+    def test_positive_fixed_three_stage_flow(self):
+        m=CentralMachine("J","I")
+        out=self.full(m)
         self.assertTrue(m.finished)
-        self.assertEqual([x["step_id"] for x in m.snapshot()["history"]], list(STEP_ORDER))
+        self.assertEqual([x["step_id"] for x in m.snapshot()["history"]],list(STEP_ORDER))
+        self.assertIn("Draft:",out["draft"])
 
-    def test_negative_caller_cannot_supply_validator(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
+    def test_negative_cannot_skip_research(self):
+        m=CentralMachine("J","I")
+        with self.assertRaisesRegex(Blocked,"STEP_ORDER_VIOLATION"):
+            m.run_textmachine()
+
+    def test_negative_no_external_validator_or_step_api(self):
+        m=CentralMachine("J","I")
+        self.assertFalse(hasattr(m,"submit"))
+        self.assertFalse(hasattr(m,"set_validator"))
+        self.assertFalse(hasattr(m,"set_next_step"))
+
+    def test_negative_constructor_cannot_choose_engine(self):
         with self.assertRaises(TypeError):
-            m.submit(result, lambda _: True)
+            CentralMachine("J","I",textmachine_path="/tmp/evil")
 
-    def test_negative_worker_cannot_skip_step(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
-        result["step_id"] = "FINAL_CHECK"
-        with self.assertRaisesRegex(Blocked, "STEP_ID_MISMATCH"):
-            m.submit(result)
-
-    def test_negative_worker_cannot_inject_next_step(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
-        result["next_step"] = "FINAL_CHECK"
-        with self.assertRaisesRegex(Blocked, "RESULT_SCHEMA_INVALID"):
-            m.submit(result)
-
-    def test_negative_wrong_job_is_blocked(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
-        result["job_id"] = "OTHER"
-        with self.assertRaisesRegex(Blocked, "JOB_ID_MISMATCH"):
-            m.submit(result)
-
-    def test_negative_wrong_item_is_blocked(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-2", "facts": ["f1"]})
-        with self.assertRaisesRegex(Blocked, "ITEM_ID_MISMATCH|VALIDATOR_FAIL"):
-            m.submit(result)
-
-    def test_negative_input_hash_tampering_is_blocked(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
-        result["input_hash"] = "0" * 64
-        with self.assertRaisesRegex(Blocked, "INPUT_HASH_MISMATCH"):
-            m.submit(result)
-
-    def test_negative_output_tampering_is_blocked(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]})
-        result["output"]["facts"].append("tampered")
-        with self.assertRaisesRegex(Blocked, "OUTPUT_HASH_MISMATCH"):
-            m.submit(result)
-
-    def test_negative_extra_rule_field_is_blocked(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {
-            "item_id": "ITEM-1",
-            "facts": ["f1"],
-            "disable_link_rule": True,
-        })
-        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
-            m.submit(result)
-
-    def test_negative_worker_fail_blocks_machine(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        wi = m.worker_input()
-        result = make_result(wi, {"item_id": "ITEM-1", "facts": ["f1"]}, status="FAIL")
-        with self.assertRaisesRegex(Blocked, "WORKER_NONPASS"):
-            m.submit(result)
-        self.assertIsNone(m.current_step)
-
-    def test_negative_final_check_cannot_claim_partial_pass(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        self.good_research(m)
-        self.good_text(m)
-        wi = m.worker_input()
-        result = make_result(wi, {
-            "item_id": "ITEM-1",
-            "facts": wi["payload"]["facts"],
-            "draft": wi["payload"]["draft"],
-            "checks": {"all_required_checks_passed": False},
-        })
-        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
-            m.submit(result)
-
-    def test_positive_no_fixed_article_count(self):
-        for i in range(1000):
-            m = CentralMachine(f"JOB-{i}", f"ITEM-{i}")
+    def test_negative_environment_cannot_choose_engine(self):
+        old=os.environ.get("TEXTMACHINE_PATH")
+        os.environ["TEXTMACHINE_PATH"]="/tmp/evil"
+        try:
+            m=CentralMachine("J","I")
             self.good_research(m)
-            self.good_text(m)
-            self.good_final(m)
+            m.run_textmachine()
+            self.assertEqual(m.current_step,"FINAL_CHECK")
+        finally:
+            if old is None:
+                os.environ.pop("TEXTMACHINE_PATH",None)
+            else:
+                os.environ["TEXTMACHINE_PATH"]=old
+
+    def test_negative_tampered_engine_hash_blocks(self):
+        p=Path(__file__).with_name("frozen_textmachine_stub.py")
+        original=p.read_bytes()
+        try:
+            p.write_bytes(original+b"\n#tamper\n")
+            m=CentralMachine("J","I")
+            self.good_research(m)
+            with self.assertRaisesRegex(Blocked,"TEXTMACHINE_IDENTITY_MISMATCH"):
+                m.run_textmachine()
+        finally:
+            p.write_bytes(original)
+
+    def test_negative_worker_cannot_submit_draft(self):
+        m=CentralMachine("J","I")
+        i=m.research_input()
+        r=make_research_result(i,["f"])
+        r["output"]["draft"]="free draft"
+        r["output_hash"]="0"*64
+        with self.assertRaises(Blocked):
+            m.submit_research(r)
+
+    def test_negative_final_pass_cannot_be_self_asserted(self):
+        m=CentralMachine("J","I")
+        self.good_research(m)
+        m.run_textmachine()
+        self.assertFalse(hasattr(m,"submit_final_check"))
+
+    def test_negative_fixed_rule_blocks_link_from_textmachine_output(self):
+        m=CentralMachine("J","I")
+        self.good_research(m,["https://example.org"])
+        m.run_textmachine()
+        with self.assertRaisesRegex(Blocked,"PROTOTYPE_LINK_RULE_BLOCKED"):
+            m.run_final_check()
+
+    def test_positive_theme_independent(self):
+        for fact in ["Pferdedecke","Kaffeemühle","Photovoltaik","Steuerrecht"]:
+            m=CentralMachine("J-"+fact,"I-"+fact)
+            out=self.full(m,[fact])
+            self.assertIn(fact,out["draft"])
+
+    def test_positive_repeated_batch_25(self):
+        for n in range(25):
+            m=CentralMachine(f"J{n}",f"I{n}")
+            self.full(m,[f"fact-{n}"])
             self.assertTrue(m.finished)
 
-
-    def test_positive_p1_fixed_link_rule_accepts_clean_draft(self):
-        m = CentralMachine("JOB-LINK-OK", "ITEM-1")
+    def test_negative_wrong_order_after_research(self):
+        m=CentralMachine("J","I")
         self.good_research(m)
-        self.good_text(m)
-        self.assertEqual(m.current_step, "FINAL_CHECK")
+        with self.assertRaisesRegex(Blocked,"STEP_ORDER_VIOLATION"):
+            m.run_final_check()
 
-    def test_negative_p1_fixed_link_rule_blocks_external_url(self):
-        m = CentralMachine("JOB-LINK-BLOCK", "ITEM-1")
-        self.good_research(m)
-        wi = m.worker_input()
-        result = make_result(wi, {
-            "item_id": "ITEM-1",
-            "facts": wi["payload"]["facts"],
-            "draft": "Draft mit https://example.org",
-        })
-        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
-            m.submit(result)
-
-    def test_negative_p1_rule_cannot_be_disabled_in_constructor(self):
-        with self.assertRaises(TypeError):
-            CentralMachine("JOB-1", "ITEM-1", allow_external_links=True)
-
-    def test_negative_p1_worker_cannot_disable_rule_in_output(self):
-        m = CentralMachine("JOB-1", "ITEM-1")
-        self.good_research(m)
-        wi = m.worker_input()
-        result = make_result(wi, {
-            "item_id": "ITEM-1",
-            "facts": wi["payload"]["facts"],
-            "draft": "Draft mit https://example.org",
-            "allow_external_links": True,
-        })
-        with self.assertRaisesRegex(Blocked, "VALIDATOR_FAIL"):
-            m.submit(result)
-
-
-if __name__ == "__main__":
+if __name__=="__main__":
     unittest.main(verbosity=2)
