@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 41,
+  "generation": 42,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -198,8 +198,10 @@
       "evidence_ref": "release/affiliate-zentrale/evidence/awin_6726_otto_relevance_prefilter_20260908.txt",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.6_TEST.zip",
       "test_artifact_sha256": "f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e",
-      "next_test": "Install 6.72.6. Without pressing any package button, verify the old Awin 14336 products job is terminal failed and automatic synchronization is disabled. Then create/bind the filtered Awin feed before any new OTTO run.",
-      "checked_at": "2026-09-08"
+      "next_test": "Read back Arbeitswarteschlange and Automatische Aktualisierung only; do not click any run/package button. Verify old Awin 14336 products job terminal failed with 6.72.6 hard-stop and automatic synchronization disabled.",
+      "checked_at": "2026-09-08",
+      "install_status": "LIVE_INSTALL_PASS_6726",
+      "install_evidence": "User screenshot 2026-09-08: WordPress reports plugin updated successfully to 6.72.6; Affiliate-Automatisierung page loads."
     }
   },
   "branch_policy": {
