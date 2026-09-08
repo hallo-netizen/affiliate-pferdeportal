@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "otto-awin-automated-distribution-20260907",
-  "goal": "OTTO/Awin 14336 als einen Kandidaten prüfen: gefilterte Quelle, exakter Altimport-Cleanup, Pre-Upsert-Relevanz, Output, Automatik und manuelle Reparatur; kein Plugin vor vollständigem lokalen Positiv-/Negativ-/Regression-PASS.",
+  "goal": "OTTO/Awin 14336: 6.72.8 als einzigen Kandidaten gegen Cleanup-Provenienz, Filter, Import, Output, Automatik und Reparatur prüfen; kein weiteres Plugin vor echtem Runtime-Positiv-/Negativ-/Gesamtworkflow-PASS.",
   "image": "php:8.2-cli",
   "inputs": [
     {
