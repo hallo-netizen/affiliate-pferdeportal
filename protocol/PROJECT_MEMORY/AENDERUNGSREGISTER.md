@@ -1621,3 +1621,30 @@ Der zuvor als vorbereitet dokumentierte `HOBBYROOM_WORK_LOCK_V1` / `hardlock-bas
 Die frühere Formulierung „noch nicht auf main aktiviert“ ist damit historisch überholt.
 
 Der allgemeine Hobbyraum-Standard bleibt die zuständige campusweite Regel; keine zweite Architektur wurde geschaffen.
+
+
+## ARCH-087 – Regelmäßiger GitHub-Doppelklick-Backupweg
+
+STAND: 2026-09-08.
+
+WAS:
+Der Nutzerweg ist ein wiederverwendbares lokales Werkzeug:
+`GITHUB_BACKUP_STARTEN.command`.
+
+WARUM:
+Gefordert ist regelmäßiges GitHub-Backup, nicht die einmalige Bereitstellung einer Snapshot-Datei.
+
+HARD GATES:
+- frische Refs am Anfang;
+- kompletter Git-/Campus-Restore aus finaler ZIP;
+- frische Refs am Ende;
+- Änderung während Lauf = BLOCK;
+- fester `GITHUB_BACKUP_AKTUELL.zip`-Stand wird nur nach PASS ersetzt.
+
+PASS:
+`GITHUB_DATEIEN_CAMPUS_1ZU1_RESTORE_PASS`
++
+`AKTUELLITAET_PASS`.
+
+GRENZE:
+GitHub-Secret-Werte und providerinterne IDs sind nicht als 1:1-Export behauptbar.
