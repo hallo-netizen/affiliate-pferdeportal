@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
-STAND: 2026-09-06
-STATUS: PLANUNG AKTIV / ERSTE FACHBASIS EINGELESEN
+STAND: 2026-09-08
+STATUS: V1-PLUGINENTWICKLUNG / BIDIREKTIONALER SEO↔PRODUKTWISSEN-GESAMTWORKFLOW 0.7.0 LOKAL RELEASE-PASS / WORDPRESS-LIVEABNAHME OFFEN
 
 ## AUTORITÄT DIESER DATEI
 
@@ -151,7 +151,7 @@ Die Produktvergleichs-Engine bekommt eine eigene minimale Kategorie-Konfiguratio
 - Pferde-Atelier-Profil definiert die konkrete Produktvergleichsstruktur;
 - Einrichtung/Import der eigenen Produktvergleichskategorien ist Teil des einmaligen Produktvergleichs-Setups, keine dauerhafte externe Kategorie-Schnittstelle.
 
-### SEO
+### SEO (historischer Planungsstand 2026-09-06; durch den aktuellen Architekturentscheid überholt)
 
 SEO ist für die fachliche Vergleichsrecherche **keine Pflichtabhängigkeit**.
 
@@ -417,7 +417,7 @@ Die frühere offene Frage TEXT-Extension vs. eigenständige Straße ist für V1 
 - **keine Laufzeitabhängigkeit von STARTMASTER/TEXT in V1**;
 - **allgemeiner Produktwissen-Kern** als einzige Produktfaktenquelle;
 - **allgemeiner Produktvergleichs-Kern** liest daraus und erzeugt Produkt-/Variantenvergleiche bis WordPress-DRAFT;
-- SEO liefert nur optionale Signale/Priorisierung;
+- SEO ist für die Freigabe eines konkreten Produktvergleichs zwingende Prüfebene und arbeitet bidirektional mit Produktwissen: SEO kann konkrete Produkt-/Paar-Nachfrage entdecken; Produktwissen kann technisch sinnvolle Paare an SEO zur Nachfrage-/Kannibalisierungsprüfung geben;
 - AFFILIATE bleibt separate Commerce-Autorität und matcht exakte Produktidentitäten;
 - vorhandene TEXT-/SEO-Funktionen werden nur gezielt wiederverwendet, wenn sie klein und sauber isolierbar sind;
 - keine zweite allgemeine Textmaschine und keine Kopie des STARTMASTER-/PPM-/PSERC-/PSTE-Stacks.
@@ -603,11 +603,45 @@ Beleg:
 - identifiziertes zweites Produkt bleibt erhalten, ohne Ersatz für das nicht identifizierte Produkt: PASS;
 - Zero-Freedom/Golden-Output-Regressions bleiben PASS.
 
-## SEO-GRENZE V1
+## SEO-GRENZE V1 – AKTUELLER STAND 2026-09-08
 
-Die aktuelle SEO-Fachlogik liegt laut Campus nur als archivierter Installerbestand vor; ihre Fachregeln sind ausdrücklich noch nicht geprüft. Deshalb wird **keine spekulative technische SEO-Anbindung gebaut**.
+Der autoritative PSTE-0.56.25-Installer wurde für die tatsächlich benötigten V1-Schnittstellen geprüft.
 
-Bis zur realen Vertragsprüfung gilt:
-- SEO darf später nur upstream priorisieren/Metadaten liefern;
-- SEO darf Produktfakten, Vergleichsregeln, Renderer oder fertigen Artikeloutput nicht verändern;
-- der Produktvergleichsweg funktioniert ohne SEO-Laufzeitabhängigkeit.
+Verbindlicher Workflow:
+- **SEO → Produktwissen:** konkrete Modellnachfrage und direkte A-gegen-B-/vs-/oder-Anfragen werden erkannt; unbekannte konkrete Produkte werden als Produktrecherche-Lücke zurückgegeben, nie erfunden.
+- **Produktwissen → SEO:** nur technisch vergleichbare, herstellerübergreifende Produktpaare werden an SEO zur Nachfrage-, Keyword- und Kannibalisierungsprüfung gegeben.
+- beide Richtungen werden auf dieselbe Vergleichskandidatenmenge zusammengeführt; A/B und B/A sind dieselbe Paaridentität.
+- ein Vergleichsdossier entsteht nur bei technischer Vergleichbarkeit + SEO-Planning-PASS + Kannibalisierungs-PASS.
+- vorhandener SEO-Bestand/Cache wird zuerst read-only bzw. ohne Providerkosten ausgewertet; kostenpflichtige Providerabfragen dürfen nur danach für echte offene Lücken erfolgen.
+- SEO schreibt keine Produktfakten. Produktwissen bleibt einzige fachliche Produktwahrheit.
+- Teilresultat/Providerfehler darf niemals als Gesamt-PASS erscheinen.
+
+## PRODUKTVERGLEICH 0.7.0 – LOKALER RELEASE-BELEG 2026-09-08
+
+Testkandidat:
+`Universal Product Comparison 0.7.0-prototype`.
+
+Isolierter Technik-Hobbyraum:
+`hobbyroom/productvergleich-workflow-v070-20260908`.
+
+Belegt vor WordPress-Liveabnahme:
+- bidirektionale SEO↔Produktwissen-Erkennung positiv/negativ PASS;
+- direkter A-gegen-B-Fall PASS;
+- unbekannte konkrete SEO-Produkte → RESEARCH_REQUIRED PASS;
+- generische Vergleichsanfrage erzeugt keine erfundenen Produkte PASS;
+- Same-Brand ausgeschlossen PASS;
+- Vergleichbarkeitsprofil 0g/50g BLOCK PASS;
+- bestehende Dossier-/Profil-/Fakten-/SEO-Drift fail-closed PASS;
+- Provider-Teilresultat bleibt PARTIAL PASS;
+- Seite selbst führt keine versteckte Recherche/Materialisierung aus PASS;
+- Writer-/Draft-Aktion bleibt deaktiviert;
+- 81 reale PSTE-Themen gegen False-Pair-Erkennung geprüft PASS;
+- kompletter Test erneut aus frisch gepackter ZIP PASS;
+- ZIP-Wurzel exakt `universal-product-comparison/`;
+- Release-ZIP SHA-256: `b6563940f96d0e9134109779f8046b5e8b9e1109bc9965d9d01deb5c75ed610d`.
+
+Nicht behauptet:
+- noch kein WordPress-Live-PASS von 0.7.0;
+- noch keine Writer-/Artikel-/Publish-Freigabe.
+
+Nächste aktuelle Arbeit ausschließlich aus `HOBBYRAUM.md`.
