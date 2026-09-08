@@ -2,108 +2,93 @@
 
 STAND: 2026-09-08
 
-## AUFTRAG
+## GESAMTSTATUS
 
-**GITHUB ONLY**
+Tresor-Automatik:
+**AKTIV + REAL GETESTET**
 
-Repository:
-`hallo-netizen/affiliate-pferdeportal`
+Lokales Ein-Klick-Backup:
+**WERKZEUG V2 HART GETESTET / REALER MAC-LAUF NOCH AUSSTEHEND**
 
-Ziel:
-regelmäßig per Doppelklick einen frischen, restore-geprüften GitHub-Backupstand erzeugen.
+## TRESOR – AUTOMATISCH
 
-## AKTUELLER NUTZERWEG
+Zeitplan:
+**sonntags 03:17 Europe/Berlin**
 
-Ein Werkzeug:
-`GITHUB_BACKUP_STARTEN.command`
+Unabhängig vom Nutzer-Mac:
+**JA**
 
-Nutzeraktion:
-**doppelklicken.**
+Auslöser:
+Scheduler aktualisiert
+`control/tresor/AUTO_TRIGGER.txt`
+auf
+`tresor/build-20260905`.
 
-Ergebnis auf dem Mac:
-`Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`
+Dadurch startet:
+`Campus GitHub Complete Backup`.
 
-Zusätzlich bleibt jeder datierte PASS-Stand erhalten.
+Externer Speicher:
+`/Campus-Tresor/`
 
-## AKTUALITÄT – HARD GATE
+Aktueller Pointer:
+`/Campus-Tresor/LATEST_GITHUB_BACKUP.txt`
 
-Vor dem Backup werden die aktuellen GitHub-Refs gebunden.
+## REALER AUTOMATIK-TEST 2026-09-08
 
-Nach Erstellung und Restore-Test werden die GitHub-Refs erneut gelesen.
+Trigger-Commit:
+`25e4c462b2a93447a8ca3be68e6ae2942b4dd4b6`
 
-Wenn sich GitHub während des Laufs verändert hat:
-`BACKUP_FAIL:GITHUB_WAEHREND_BACKUP_GEAENDERT`
+Workflow Run:
+`34198674940`
 
-Dann:
-- kein PASS;
-- `GITHUB_BACKUP_AKTUELL.zip` wird nicht ersetzt;
-- alter letzter gültiger Stand bleibt bestehen.
-
-Nur wenn Anfangs- und Endrefs identisch sind:
-`AKTUELLITAET_PASS`.
-
-## RESTORE – HARD GATE
-
-Vor PASS wird aus der **finalen ZIP-Datei selbst** wiederhergestellt und geprüft:
-
-- Git-Bundle verify;
-- Mirror-Clone;
-- `git fsck --full --strict`;
-- alle gesicherten Heads/Tags/Pull-Refs identisch;
-- Campus `protocol/PROJECT_MEMORY/**` per Pfad + Git-Blob-Hash identisch.
-
-PASS:
-`GITHUB_DATEIEN_CAMPUS_1ZU1_RESTORE_PASS`
-
-## REALER GITHUB-TEST 2026-09-08
-
-GitHub Actions Run:
-`34160894135`
-Attempt:
-`3`
 Ergebnis:
 `SUCCESS`
 
-Frischer Snapshot:
-- Branches: 293;
-- main SHA: `36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9`;
-- Campus-Branch SHA: `abd5f78d71eae6f277714beb4569b12eee36a115`;
-- Campus-Dateien auf diesem Branch: 133.
+Artifact:
+`10044960646`
 
-Direkter GitHub-Abgleich nach dem Lauf:
-- Branchanzahl: 293 → identisch;
-- main SHA → identisch;
-- Campus SHA → identisch.
+Exakte heruntergeladene Datei:
+`GITHUB_TRESOR_AUTO_2026-09-08_072023Z.zip`
 
-Restore aus dem erzeugten Bundle:
-- Hashprüfung PASS;
-- Bundle verify PASS;
+SHA-256:
+`0d8a7e06813e363784c46289ea92e2e43bab48251e1e892d08a39a6971e43b38`
+
+Zusätzlich extern unter
+`/Campus-Tresor/GITHUB_TRESOR_AUTO_2026-09-08_072023Z.zip`
+abgelegt.
+
+Exakter Nachtest:
+- äußere Hashprüfung PASS;
+- innere Hashprüfung PASS;
+- Git-Bundle verify PASS;
 - Mirror-Clone PASS;
-- `git fsck --full --strict` PASS.
+- `git fsck --full --strict` PASS;
+- Campus-Dateien auf aktuellem Campus-Branch: 133.
 
-## EXAKTER WERKZEUGTEST V2
+Ergebnis:
+`TRESOR_AUTO_BACKUP_REALTEST_PASS`
 
+## LOKALES BACKUP
+
+Werkzeug:
+`GITHUB_BACKUP_STARTEN.command`
+
+Feste aktuelle Datei:
+`Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`
+
+V2-Test:
 - Bash-Syntax PASS;
-- exakte finale ZIP erzeugt und wieder eingelesen PASS;
-- Git-Restore aus genau dieser ZIP PASS;
+- exakte finale ZIP erneut geöffnet PASS;
+- Restore aus finaler ZIP PASS;
 - Campus byteidentisch PASS;
-- Negativtest: GitHub-Änderung während Backup → korrekt BLOCK;
-- bei Negativtest wurde keine `GITHUB_BACKUP_AKTUELL.zip` erzeugt/ersetzt.
+- Negativtest Änderung während Lauf korrekt BLOCK.
 
-## GRENZE
+Nächster realer Schritt:
+Mac-Lauf mit Doppelklick.
 
-Für Git-Dateien, Historie, Branches, Tags, Pull-Refs und den im Repository liegenden Campus gilt der oben geprüfte 1:1-Restore.
+## PROVIDERGRENZE
 
 Nicht 1:1 aus GitHub exportierbar:
 - Secret-Werte;
-- einzelne providerinterne Admininformationen;
+- einzelne interne Admininformationen;
 - identische GitHub-interne IDs/Zeitstempel bei Neuaufbau.
-
-Diese Grenze darf nicht als Datei-/Campus-Restore-PASS ausgegeben werden.
-
-## AUTOMATIK
-
-Keine separate ChatGPT-/WordPress-Automatik aktiv.
-
-Der aktuelle KISS-Weg ist bewusst:
-**Doppelklick → frisches Backup → harte Aktualitäts- und Restore-Prüfung.**
