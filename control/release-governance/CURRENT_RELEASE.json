@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 32,
+  "generation": 33,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -368,13 +368,12 @@
       "checked_at": "2026-09-07"
     },
     "otto_awin_large_feed_download": {
-      "status": "FIX_BUILT_LIVE_RETEST_PENDING",
+      "status": "PASS_LIVE",
       "advertiser_id": 14336,
-      "observed_failure": "cURL error 28 after 45000 ms with 22719835 bytes received",
-      "root_cause": "Plugin hard-capped feed download timeout at 45 seconds.",
       "fix_version": "6.72.4",
-      "fix": "Download timeout migrated to 600 seconds; UI range 60-600 seconds; no provider/product logic changed.",
-      "evidence": "User screenshot 2026-09-07 22:09"
+      "evidence": "User screenshot shows products stage queued after 500 products processed; feed download no longer times out.",
+      "message": "500 Produkte verarbeitet; Fortsetzung vorgemerkt.",
+      "checked_at": "2026-09-08"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
@@ -402,7 +401,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "INSTALL_6_72_4_AND_RETRY_EXISTING_OTTO_14336_FEED_JOB",
+    "current_milestone": "CONTINUE_OTTO_14336_PRODUCT_BATCH_PROCESSING",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
