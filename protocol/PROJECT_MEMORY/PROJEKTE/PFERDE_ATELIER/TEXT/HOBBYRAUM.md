@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_ALLOWED_FOR_CODEX_TEST
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -26,25 +26,25 @@ B02 und B07/M32 sind im aktuellen Realtest überwunden.
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_FORBIDDEN
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
 MAIN_SHA: 30e933357dd9e5d3dde7cbd361c930b2a0c352c1
 ACTIVE_BLOCKER: FACHWORKFLOW_PROOF_HANDOFF_BLOCKED
-PLAN_PHASE: HANDOFF_REQUEST_MISSING_ANALYZE_ONLY
+PLAN_PHASE: HISTORY_MACHINE_PROOF_BOOTSTRAP_BOUND
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
+CANDIDATE_BRANCH: hobbyroom/history-machine-proof-bootstrap-20260908
+CANDIDATE_HEAD_SHA: c9644ccd0bdc2c8721acb9b13b73b534da9aa5e7
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: NONE
-CHECK_PAUL: PENDING
-CHECK_HISTORY: PENDING
-CHECK_LAST_GOOD: PENDING
-CHECK_NEIGHBORS: PENDING
-CHECK_REPEAT_CLASS: PENDING
-CHECK_POS_NEG: PENDING
-CHECK_INVARIANTS: PENDING
-INTEGRATION_ALLOWED: false
+ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+CHECK_PAUL: PASS
+CHECK_HISTORY: PASS
+CHECK_LAST_GOOD: PASS
+CHECK_NEIGHBORS: PASS
+CHECK_REPEAT_CLASS: PASS
+CHECK_POS_NEG: PASS
+CHECK_INVARIANTS: PASS
+INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
@@ -62,7 +62,7 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Nur `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED` / fehlende `FACHWORKFLOW_HANDOFF_REQUEST.json` analysieren. Noch keinen Fix bauen.**
+**Nur den Maschinenbeweis-Runner aus PR #159 integrieren. Noch keinen Produktionsfix für M28 bauen.**
 
 Realtest-Beleg auf current main `30e933357dd9e5d3dde7cbd361c930b2a0c352c1`:
 - Cloud Entry PASS;
@@ -74,10 +74,19 @@ Realtest-Beleg auf current main `30e933357dd9e5d3dde7cbd361c930b2a0c352c1`:
 - B07/M32 ist damit real überwunden;
 - neuer erster Blocker: `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`, weil die gebundene `FACHWORKFLOW_HANDOFF_REQUEST.json` fehlt.
 
+Maschinenbeweis-Bootstrap:
+- PR #159;
+- Head `c9644ccd0bdc2c8721acb9b13b73b534da9aa5e7`;
+- exakt eine Datei: `control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py`;
+- M26/M28/M31 stale Prüfungen korrigiert;
+- M28-Proof-Selbsttest reproduziert künstlich drei historische Fehlervarianten und blockiert sie;
+- normaler `hardlock` auf dem Kandidaten PASS.
+
 Nächste Prüfschwelle:
-1. nur Historie/Paul/letzten funktionierenden Stand/direkte Vor- und Nachstufe für diesen neuen Blocker prüfen;
-2. keine Codeänderung während der Analyse;
-3. erst nach vollständigem Pflichtcheck genau einen KISS-Kandidaten binden.
+1. `hardlock-base` auf exakt diesem gebundenen Head PASS;
+2. dann nur diesen Proof-Runner mergen;
+3. anschließend Hardlock-Einklinkung des vertrauenswürdigen Base-Runners klären;
+4. erst danach M28-Produktionsfix.
 
 ## VERBOTEN
 
