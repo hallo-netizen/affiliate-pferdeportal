@@ -1648,3 +1648,24 @@ PASS:
 
 GRENZE:
 GitHub-Secret-Werte und providerinterne IDs sind nicht als 1:1-Export behauptbar.
+
+
+## ARCH-087 – Tresor und lokales Backup unabhängig
+
+STAND: 2026-09-08.
+
+WAS:
+Der Tresor ist wieder eine echte eigenständige Sicherungsinstanz.
+Er läuft automatisch wöchentlich und speichert außerhalb GitHubs.
+Das lokale Mac-Backup bleibt als zweite unabhängige Sicherung per Doppelklick bestehen.
+
+WARUM:
+Auch bei längerer Zeit ohne lokalen Backup-Lauf muss eine aktuelle Notfallsicherung existieren.
+
+KISS:
+Eine GitHub-Backupfachlogik, aber zwei unabhängige Auslöser/Speicherorte:
+- Tresor automatisch;
+- Mac manuell.
+
+REGRESSIONSSCHUTZ:
+Keiner der beiden Wege darf den anderen als Voraussetzung haben.
