@@ -938,3 +938,20 @@ exakt eine Datei, byte-identisch zum bewiesenen B01-Handoff-Blob
 
 Kein Einzelflick.
 
+### PR #190 M34-Handoff-Korridor gemergt
+
+Ein-Datei-Korridorrekonstruktion integriert.
+
+Merge/main:
+`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`.
+
+Pre-Merge:
+- 1 Datei;
+- exakter B01-Handoff;
+- kompletter statischer Korridorcheck bis 107008 PASS;
+- hardlock PASS;
+- hardlock-base PASS.
+
+Ab hier ausschließlich echter 7/7-Realtest.
+Keine Reparatur im Lauf.
+
