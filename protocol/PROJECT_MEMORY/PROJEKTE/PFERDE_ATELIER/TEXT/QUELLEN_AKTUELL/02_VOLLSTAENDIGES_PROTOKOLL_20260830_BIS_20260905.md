@@ -890,3 +890,29 @@ Ab hier:
 `REALTEST_ONLY`.
 Kein Fix während des echten 7/7-Laufs.
 
+### Realtest nach M28-Merge – M28 überwunden, PPM-Handoff-Regression gefunden
+
+Main:
+`78bb2576214a8c0a82d201ed35530ad9ac885481`.
+
+Real:
+- `FACHWORKFLOW_HANDOFF_REQUEST.json` für Artikel 1 materialisiert;
+- vorhandener Handoff ausgeführt;
+- echter PPM-6.7.9-Lauf erreicht.
+
+Damit M28 real PASS/überwunden.
+
+Neuer erster Blocker:
+`PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`.
+
+Historische Kausalprüfung:
+- `9d7fe0a…` / alter realer PPM-Handoff enthielt `find_slot(canonical_article_id)`, `CANONICAL_SLOT_MISSING`, `PLAN_SLOT_MISMATCH` und numerische WP-ID-Pflicht.
+- B01 `5fe9967…` entfernte die starre Canonical-Slot-Vorbedingung und stellte Kategorie auf semantischen Vertrag um.
+- `e5fc1c8…` („Step 02: reapply PR #124 real PPM 6.7.9 execution“) reintroduzierte den älteren PPM-Handoff mit Canonical-Slot- und numerischer WP-ID-Pflicht.
+- `41849f0…` B07/M32 ergänzte später nur den Repo-Runtime-Fallback; alte Guards blieben.
+
+Das erklärt die wiederkehrende Fehlerkette:
+alte Gesamt-/Semantikstände wurden beim Wiederaufbau erneut eingespielt und überschrieben bereits reparierte Korridorentscheidungen.
+
+Kein Einzelfix im Realtest.
+
