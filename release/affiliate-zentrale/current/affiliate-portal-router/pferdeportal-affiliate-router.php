@@ -5054,6 +5054,7 @@ JS;
             'feed_api_key' => '',
             'product_feed_url' => '',
             'product_feed_partner_id' => '',
+            'product_feed_scope' => '',
             'last_status' => 'not_configured',
             'last_checked' => 0,
             'last_message' => '',
@@ -5145,8 +5146,15 @@ JS;
         $product_feed_partner_id = array_key_exists('product_feed_partner_id', $raw)
             ? preg_replace('/[^0-9]/', '', (string) wp_unslash($raw['product_feed_partner_id']))
             : preg_replace('/[^0-9]/', '', (string) ($old['product_feed_partner_id'] ?? ''));
+        $product_feed_scope = array_key_exists('product_feed_scope', $raw)
+            ? sanitize_key((string) wp_unslash($raw['product_feed_scope']))
+            : sanitize_key((string) ($old['product_feed_scope'] ?? ''));
+        if ($product_feed_scope !== 'portal_filtered') {
+            $product_feed_scope = '';
+        }
         if ($product_feed_url === '') {
             $product_feed_partner_id = '';
+            $product_feed_scope = '';
         }
         return array_merge($old, array(
             'enabled' => array_key_exists('enabled', $raw) ? !empty($raw['enabled']) : !empty($old['enabled']),
@@ -5155,6 +5163,7 @@ JS;
             'feed_api_key' => $feed,
             'product_feed_url' => $product_feed_url,
             'product_feed_partner_id' => $product_feed_partner_id,
+            'product_feed_scope' => $product_feed_scope,
             'last_saved' => time(),
         ));
     }
@@ -5228,7 +5237,7 @@ JS;
         $option = $network === 'awin' ? self::OPTION_NETWORK_AWIN : self::OPTION_NETWORK_ADCELL;
         update_option($option, $new, false);
         $saved = $this->network_settings($network);
-        $keys = $network === 'awin' ? array('publisher_id','access_token','feed_api_key','product_feed_url','product_feed_partner_id') : array('username','password','test_path','csv_feed_url');
+        $keys = $network === 'awin' ? array('publisher_id','access_token','feed_api_key','product_feed_url','product_feed_partner_id','product_feed_scope') : array('username','password','test_path','csv_feed_url');
         foreach ($keys as $key) {
             if ((string)($saved[$key] ?? '') !== (string)($new[$key] ?? '')) {
                 return new WP_Error('network_save_failed', 'Die Zugangsdaten konnten nicht vollständig zurückgelesen werden.');
