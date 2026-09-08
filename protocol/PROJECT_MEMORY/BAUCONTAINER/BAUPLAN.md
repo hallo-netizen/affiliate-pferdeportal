@@ -1,6 +1,6 @@
 # BAUCONTAINER – BAUPLAN
 
-STAND: 2026-09-07
+STAND: 2026-09-08
 STATUS: V1
 
 ## Grundmodell
@@ -189,7 +189,10 @@ Eingang:
 `../TRESOR/START_HERE.md`
 
 Verbindliche Sicherungsarchitektur für den aktuellen Auftrag:
-**GitHub vollständig → genau eine geprüfte GitHub-Sicherungsdatei.**
+**eine GitHub-Backupfachlogik → zwei unabhängige Sicherungswege.**
+
+- Tresor automatisch + extern;
+- lokales Backup manuell + Mac.
 
 WordPress, Website und Projektarchiv sind ausdrücklich nicht Bestandteil dieses Backupauftrags.
 
@@ -206,15 +209,16 @@ Unklarer Bestand:
 **Baucontainer definiert. Tresor führt aus.**
 
 Baucontainer:
-- genau ein Backupweg;
+- genau eine gemeinsame Backupfachlogik;
 - KISS;
-- keine Parallelarchitektur.
+- zwei ausdrücklich gebundene unabhängige Auslöser/Speicherorte, keine dritte Parallelarchitektur.
 
 Tresor:
 - GitHub vollständig sichern;
-- bestehende GitHub-only Workflowtechnik wiederverwenden;
-- genau eine herunterladbare Datei bilden;
-- Git-Restore real prüfen;
+- automatischen externen Wochenweg betreiben;
+- lokalen Doppelklick-Weg als zweite unabhängige Sicherung führen;
+- je Lauf genau eine geprüfte Sicherungsdatei bilden;
+- Git-/Ref-/Campus-Restore real prüfen;
 - Providergrenzen für nicht exportierbare GitHub-Daten fail-closed ausweisen.
 
 Der Tresor ist nie Arbeitsquelle.
