@@ -279,7 +279,7 @@ def _require_tokens(text: str, tokens: Tuple[str, ...], label: str) -> None:
 
 def _error_row_for_case(error_text: str, case: str) -> str:
     pattern = re.compile(
-        r"(?m)^\\|\\s*" + re.escape(case) + r"\\s*\\|.*$"
+        r"(?m)^\|\s*" + re.escape(case) + r"\s*\|.*$"
     )
     matches = pattern.findall(error_text)
     if len(matches) != 1:
