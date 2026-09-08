@@ -1,6 +1,6 @@
 # HANDLUNGSVERZEICHNIS
 
-STAND: 2026-09-05
+STAND: 2026-09-08
 
 HARD RULE:
 **Bekannte Aktion niemals erraten. Existiert ein definierter Workflow, darf kein Ersatzweg erfunden werden.**
@@ -269,10 +269,10 @@ Keine Programmierung.
 ## GitHub-Komplettsicherung / Backup
 
 Aktion:
-GitHub-Repository `hallo-netizen/affiliate-pferdeportal` vollständig sichern oder Wiederherstellbarkeit prüfen.
+GitHub-Repository `hallo-netizen/affiliate-pferdeportal` regelmäßig vollständig sichern oder Wiederherstellbarkeit prüfen.
 
 Verbindlicher Weg:
-`TRESOR/START_HERE.md` → `TRESOR/KONZEPT.md`.
+`TRESOR/START_HERE.md` → `TRESOR/KONZEPT.md` → `TRESOR/STATUS.md`.
 
 HARD RULE:
 **GitHub-Backup = GitHub only.**
@@ -281,14 +281,16 @@ Verboten ohne neuen ausdrücklichen Nutzerauftrag:
 - WordPress dazunehmen;
 - Projektarchiv dazunehmen;
 - WP-Plugin als Backupweg bauen;
-- neue Backup-Architektur neben dem vorhandenen GitHub-Tresorweg erzeugen.
+- eine dritte parallele Backup-Architektur erzeugen.
 
-Technische Hauptquelle:
-Branch `tresor/build-20260905` →
-`.github/workflows/campus-tresor-snapshot.yml`.
+Verbindliche Sicherungsarchitektur:
+- **Tresor automatisch:** wöchentlich sonntags 03:17 Europe/Berlin; technischer Branch `tresor/build-20260905`; bestehender Workflow `.github/workflows/campus-tresor-snapshot.yml`; externe PASS-Ablage unter `/Campus-Tresor/`.
+- **Lokales Backup:** manuell per `GITHUB_BACKUP_STARTEN.command`; aktueller PASS-Stand `Schreibtisch/GitHub-Backup/GITHUB_BACKUP_AKTUELL.zip`.
 
-Ergebnis:
-eine geprüfte GitHub-Sicherungsdatei.
+Beide Wege sichern denselben GitHub-Projektbestand, sind aber unabhängig voneinander.
+
+Prüfung/Wiederaufbau:
+`TRESOR/PRUEFVERTRAG.md` + `TRESOR/NOTFALL_WIEDERAUFBAU.md`.
 
 Backup/Mirror ist niemals Arbeitsquelle.
 
