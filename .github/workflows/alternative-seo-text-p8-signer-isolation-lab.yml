@@ -1,0 +1,118 @@
+name: Alternative SEO Text P8 Signer Isolation Lab
+
+on:
+  pull_request:
+    branches:
+      - alternative/seo-text-central-machine-lab-base-20260908
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  producer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Assert producer has no signing material and build release only
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! find . -maxdepth 3 -type f \( -iname '*private*.pem' -o -iname '*signing*key*' \) | grep .
+          mkdir -p /tmp/p8-producer
+          PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'
+          import importlib.util, pathlib
+          p=pathlib.Path('control/seo-text-buero/alternative-central-machine/prototype/p7_release_boundary.py')
+          spec=importlib.util.spec_from_file_location('p7',p)
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          release=m.build_release('P8-JOB','P8-ITEM',{'draft':'P8 TEST','facts':['fixed']})
+          m.write_release(pathlib.Path('/tmp/p8-producer/release.json'),release)
+          print('P8_PRODUCER_NO_SIGNING_CAPABILITY_PASS')
+          PY
+          test -f /tmp/p8-producer/release.json
+
+      - name: Export unsigned release only
+        uses: actions/upload-artifact@v4
+        with:
+          name: p8-unsigned-release
+          path: /tmp/p8-producer/release.json
+          if-no-files-found: error
+          retention-days: 1
+
+  external-signer:
+    needs: producer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download unsigned release
+        uses: actions/download-artifact@v4
+        with:
+          name: p8-unsigned-release
+          path: /tmp/p8-sign
+
+      - name: Generate private key only here and sign
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f /tmp/p8-sign/release.json
+          openssl genpkey -algorithm Ed25519 -out "$RUNNER_TEMP/p8-private.pem"
+          openssl pkey -in "$RUNNER_TEMP/p8-private.pem" -pubout -out /tmp/p8-sign/public.pem
+          openssl pkeyutl -sign -inkey "$RUNNER_TEMP/p8-private.pem" -rawin -in /tmp/p8-sign/release.json -out /tmp/p8-sign/release.sig
+          rm -f "$RUNNER_TEMP/p8-private.pem"
+          test ! -e "$RUNNER_TEMP/p8-private.pem"
+          ! find /tmp/p8-sign -type f -iname '*private*' | grep .
+          echo P8_EXTERNAL_SIGNER_PRIVATE_KEY_EPHEMERAL_PASS
+
+      - name: Export only release signature and public key
+        uses: actions/upload-artifact@v4
+        with:
+          name: p8-signed-release
+          path: |
+            /tmp/p8-sign/release.json
+            /tmp/p8-sign/release.sig
+            /tmp/p8-sign/public.pem
+          if-no-files-found: error
+          retention-days: 1
+
+  importer:
+    needs: external-signer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout candidate verifier
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Download signed release
+        uses: actions/download-artifact@v4
+        with:
+          name: p8-signed-release
+          path: /tmp/p8-import
+
+      - name: Assert importer has no private key and verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! find /tmp/p8-import -type f -iname '*private*' | grep .
+          PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'
+          import importlib.util, pathlib
+          p=pathlib.Path('control/seo-text-buero/alternative-central-machine/prototype/p7_release_boundary.py')
+          spec=importlib.util.spec_from_file_location('p7',p)
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          out=m.verify_for_import(
+              pathlib.Path('/tmp/p8-import/release.json'),
+              pathlib.Path('/tmp/p8-import/release.sig'),
+              pathlib.Path('/tmp/p8-import/public.pem'),
+          )
+          assert out['status']=='IMPORT_VERIFIED_NO_PUBLISH'
+          assert out['publish_allowed'] is False
+          print('P8_IMPORTER_PUBLIC_KEY_ONLY_PASS')
+          PY
+          echo P8_SIGNER_PROCESS_ISOLATION_PASS
