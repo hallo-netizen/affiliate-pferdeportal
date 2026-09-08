@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: AKTIV – PPM HANDOFF CORRIDOR RECONSTRUCTION
+STATUS: AKTIV – M34 ONE-FILE CORRIDOR TEST
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -80,37 +80,33 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Keine Einzelflicks. Genau einen Handoff-Korridor-Kandidaten bauen.**
+**Genau einen strukturellen M34-Kandidaten testen. Keine Flickerei.**
 
-Belegte funktionale Basis:
-B01 Commit `5fe9967bbd65b4247f5a75ac50c47060fc1f5149`
-Handoff-Blob:
+Main:
+`78bb2576214a8c0a82d201ed35530ad9ac885481`
+
+Kandidat:
+`hobbyroom/m34-ppm-handoff-corridor-reconstruction-20260908`
+Head:
+`5e7ebadd991ae5b43de74f95bc232a4fa42b3b23`
+
+Scope:
+nur
+`control/startmaster0107/fachworkflow_proof_handoff.py`
+
+Kandidat ist exakt der bewiesene B01-Handoff-Blob:
 `2c5d989ebbdb4a9221226b8f6ab675ca2a3122f1`.
 
-Warum genau dieser Stand:
-- Request-Felder exakt identisch zum heutigen Current-Action-Vertrag;
-- PASS-Felder vollständig kompatibel zum heutigen Submission-Validator;
-- Runtime-Fallback für PPM/PSERC bereits vorhanden;
-- realer PPM wird zwingend ausgeführt;
-- Slot wird über den bereits gebundenen externen `plan_slot` aufgelöst statt über fremde Canonical-ID-Vorbedingung;
-- bestehender semantischer Kategorievertrag bleibt erhalten;
-- Stage-Artefakte werden vollständig in Receipt-Outputs gebunden;
-- B01-Kontext-/Identitätsguards bleiben erhalten.
+Vorprüfung:
+Request -> PPM -> PASS/Receipt -> Submission -> 107008 statisch konsistent.
 
-Zulässiger Produktionskandidat:
-**nur**
-`control/startmaster0107/fachworkflow_proof_handoff.py`
-auf exakt diese belegte B01-Semantik zurückführen.
+Ablauf:
+1. normaler `hardlock` + `hardlock-base`;
+2. bei PASS mergen;
+3. danach exakt ein echter 7/7-Realtest;
+4. erst der reale nächste Blocker entscheidet weiter.
 
-Nicht ändern:
-- Current Action;
-- 107007-Instruktion;
-- Runner/Gates;
-- Textmaschine/SEO/PPM/PSERC/PSTE-Regeln;
-- Publish/WordPress.
-
-Danach:
-Hardlocks -> Merge bei PASS -> ein echter 7/7-Realtest -> erster realer Blocker.
+Keine Gate-/Runner-/Zwangsjackenarbeit.
 
 ## VERBOTEN
 
