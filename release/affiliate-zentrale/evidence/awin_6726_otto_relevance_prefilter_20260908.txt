@@ -81,3 +81,12 @@ Nächster Live-Schritt:
 2. Bestehenden ungefilterten OTTO-Job einmal vom Worker erfassen lassen; er muss terminal mit dem neuen Hardstop enden und darf keine weiteren Produktzeilen importieren.
 3. Erst danach in Awin einen Create-a-Feed-Export auf relevante Pferde-Atelier-Kategorien begrenzen, dessen URL an 14336 binden und portal_filtered bestätigen.
 4. Neuer OTTO-Lauf: nur relevant akzeptierte Zeilen dürfen persistieren; Counter müssen die Trennung sichtbar machen.
+
+## LIVE-INSTALL 6.72.6
+
+User-Screenshot 2026-09-08:
+- WordPress meldet Plugin erfolgreich aktualisiert.
+- Version 6.72.6 ist installiert.
+- Affiliate-Automatisierung lädt ohne sichtbaren Fatalfehler.
+
+Bewertung: LIVE INSTALL PASS. Der AFF-ERR-019-Live-Readback ist damit noch nicht abgeschlossen. Es fehlt ausschließlich der Sichtnachweis, dass der alte Awin-14336-products-Job terminal gestoppt wurde und die automatische Synchronisierung deaktiviert ist. Keine Buttons drücken.
