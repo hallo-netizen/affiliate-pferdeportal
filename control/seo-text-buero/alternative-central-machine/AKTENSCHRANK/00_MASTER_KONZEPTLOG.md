@@ -153,3 +153,59 @@ Noch KEINE Anbindung der echten Textmaschine.
 
 Nächster zulässiger Prototypschritt:
 P0 so härten, dass Validatoren, Reihenfolge und Zustandsübergänge vollständig nicht-injizierbar und nicht frei steuerbar sind; dann 3-Worker-Positiv/Negativtest und GO/STOP.
+
+
+## HARD RULE – PROTOTYP-ENTWICKLUNG VON GROSS NACH KLEIN
+
+Diese Regel ist für die gesamte Alternativroute bindend.
+
+1. PROTOTYP ZUERST, KEINE DETAILORGIE
+- zuerst nur beweisen, ob das Grundkonzept trägt
+- keine vollständige Produktionsarchitektur bauen, bevor der kleine Prototyp eindeutig PASS ist
+- keine Nebenbaustellen und keine vorsorglichen Zusatzmodule
+
+2. VON GROSS NACH KLEIN
+- zuerst Architekturprinzip und zentrale Zustandsführung
+- danach wenige Mikroworker
+- danach genau eine reale Problemregelklasse
+- erst danach echte Textmaschine und weitere Fachkomponenten
+- Details nur dann bauen, wenn die vorherige Ebene ihren Nutzen bewiesen hat
+
+3. ZWINGENDE GEGENPRÜFUNG NACH JEDEM SCHRITT
+Jeder Schritt muss gegen alle folgenden Kriterien geprüft werden:
+- 0,0 Entscheidungsfreiheit für Chat/KI
+- 0,0 freie Workflow-/Folgeschritt-/Reparaturwahl für Worker
+- kein von außen austauschbarer oder abschaltbarer Prüfer
+- keine freie Einflussnahme von außen auf Zustand, Reihenfolge, Regeln oder Ergebnis
+- fail-closed bei Abweichung
+- nachhaltig und wartbar
+- themenunabhängig
+- vollautomatisierbar
+- theoretisch auf beliebig viele Artikel/Items wiederholbar
+- keine neue versteckte Handoff-/Kontextkomplexität
+- nachweislich einfacher oder mindestens nicht komplexer als der bisherige Weg
+- nachweislich weniger oder mindestens nicht stärker fehleranfällig
+
+4. SACKGASSEN-SCHUTZ
+Wenn ein Prototypschritt:
+- mehr Sonderfälle als Nutzen erzeugt,
+- neue freie Entscheidungsstellen benötigt,
+- zusätzliche Handoff-Schichten braucht,
+- alte Fehlerklassen nur verschiebt statt beseitigt,
+- oder die Architektur sichtbar komplizierter macht,
+
+dann gilt sofort:
+STOP -> Ursache dokumentieren -> Konzept verwerfen oder auf vorherige Ebene zurückgehen.
+Kein Weiterbauen eines unbewiesenen Weges.
+
+5. BEWEISPFLICHT
+Ein subjektives „sieht gut aus“ ist kein PASS.
+Jeder Prototypschritt braucht:
+- mindestens einen positiven Test,
+- gezielte negative Manipulations-/Umgehungstests,
+- dokumentierte GO/STOP-Entscheidung,
+- Vergleich gegen die oben genannten Kriterien.
+
+6. ISOLATION
+Alle Arbeiten und Erkenntnisse dieser Route bleiben ausschließlich im separaten Alternativbranch und Aktenschrank.
+Keine Vermischung mit dem parallelen Reparaturchat oder dessen produktivem Arbeitsweg.
