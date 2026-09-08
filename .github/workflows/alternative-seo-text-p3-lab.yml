@@ -116,3 +116,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p17_normal_draft_enforcement_inventory.py
+
+      - name: P18 normal-draft internal callgraph trace
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p18_normal_draft_callgraph.py
