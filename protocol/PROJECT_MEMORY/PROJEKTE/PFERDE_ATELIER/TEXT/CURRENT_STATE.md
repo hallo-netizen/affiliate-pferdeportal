@@ -259,3 +259,34 @@ current main `755b531e…`.
 Darauf exakt die vier unveränderten M28-Dateiblobs des bisherigen PR #161.
 Kein zusätzlicher M28-Fix, kein Runner-/Gate-/Publish-Umbau.
 
+### Zweiter PR-#161-Maschinen-Test – Goldmaster-Ahnenprüfung falsch-negativ
+
+PR #161, synchronisierter Head:
+`26d7b5b53044729ab6350f88d16d4ac0f6cacd03`.
+
+Ergebnis:
+- `hardlock`: PASS;
+- `hardlock-base`: FAIL;
+- Gate-Selbsttests PASS:
+  - `HOBBYROOM_WORK_LOCK_SELFTEST_PASS:8/8`;
+  - `HOBBYROOM_EVIDENCE_SELFTEST_PASS:10/10`;
+  - `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M28`;
+  - `HOBBYROOM_HISTORY_RUNNER_MODE_SELFTEST_PASS:3/3`;
+- Work-Lock selbst PASS:
+  `HOBBYROOM_WORK_LOCK_PR_PASS`;
+- erster Stop danach:
+  `HOBBYROOM_RECOVERY_BASE_NOT_ANCESTOR:de21f6…:MAIN=755b531e…`.
+
+Harte Gegenprüfung über GitHub-Commitgraph:
+- Merge-Base = exakt `de21f6cd35c60849c551fd82f78e75ce57c99fab`;
+- current main liegt 176 Commits voraus;
+- Goldmaster ist damit **realer Vorfahr**.
+
+Root-Cause:
+`.github/workflows/pferde-atelier-immutable-base-hardlock.yml` checkt Base mit `fetch-depth: 1` aus und Kandidat ebenfalls nur mit `--depth=1`.
+Der Gate führt danach `git merge-base --is-ancestor` im shallow Repository aus und erzeugt einen falschen Negativbefund.
+
+Einordnung:
+Kontrollsystemfehler, nicht M28-Produktionsfehler.
+PR #161 bleibt unverändert.
+
