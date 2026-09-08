@@ -1738,3 +1738,20 @@ STATUS:
 - Ein direkter Mergeversuch wurde von GitHub mit Repository-Rule-Verstoß abgewiesen; kein Chat-seitiger Admin-/Ruleset-Schreibweg existiert.
 - Historischer PR #137 belegt denselben kontrollierten Einmal-Admin-Wartungsweg.
 - M28-Produktionsfix bleibt bis zur Aktivierung eingefroren.
+
+## TEXT-TECH-20260908-HISTORY-MACHINE-PROOF-ACTIVE – Security-Gate auf main aktiviert
+
+WAS:
+PR #160 wurde auf main integriert.
+Neuer main:
+`914638e67a265cf2e8951b1177a7d80fdf904e98`.
+
+Die bestehende Gate-Datei `control/paul-scope-gate/paul_scope_gate.py` erzwingt nun serverseitig die gebundene Historien-/Paul-/CURRENT_STATE-/Protokoll-/Vorher-FAIL-/Nachher-PASS-Kette.
+
+WARUM:
+Die bisherige Chat-/PASS-Feld-Prüfung war nicht ausreichend fail-closed.
+
+SICHERHEIT:
+Der einmalige Ruleset-Bypass `Repository admin / pull requests only` ist unmittelbar nach Merge noch aktiv.
+Bis zur bestätigten Entfernung bleibt jede TEXT-Produktionsreparatur `FIX_FORBIDDEN`.
+
