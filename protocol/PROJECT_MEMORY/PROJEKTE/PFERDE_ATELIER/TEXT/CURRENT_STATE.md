@@ -10,7 +10,7 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`a61a380e948e15f2ed3ce5ddec41b128efbe7ae6`
+`78bb2576214a8c0a82d201ed35530ad9ac885481`
 
 Letzter Merge:
 `PR #166 – Security: fix active history M28 row parser`
@@ -349,4 +349,23 @@ Normale Repository-Schutzchecks `hardlock` und `hardlock-base` bleiben vollstän
 
 Produktionsfokus:
 PR #161 / M28 -> normale Checks -> Merge -> echter 7/7-Realtest.
+
+### M28 integriert – Realtest freigegeben
+
+PR #161 ist gemergt.
+Neuer main:
+`78bb2576214a8c0a82d201ed35530ad9ac885481`.
+
+Vor Merge:
+- `hardlock`: PASS;
+- `hardlock-base`: PASS;
+- exakt 4 M28-Dateien;
+- kein Publish/WordPress-Write.
+
+Status jetzt:
+`REALTEST_ONLY`.
+
+Nächster Schritt:
+permanenten Dispatcher PR #107 exakt auf current main setzen und echten 7/7-Lauf starten.
+Keine Reparatur während des Laufs.
 
