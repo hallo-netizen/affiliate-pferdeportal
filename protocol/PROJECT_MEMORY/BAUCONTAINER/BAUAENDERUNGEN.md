@@ -1,6 +1,6 @@
 # BAUCONTAINER – BAUÄNDERUNGEN
 
-STAND: 2026-09-07
+STAND: 2026-09-08
 
 Dieses Dokument ist nur der Architektur-Index.
 Die vollständige Begründung liegt im zentralen `AENDERUNGSREGISTER.md`.
@@ -99,3 +99,6 @@ Keine Duplikation der ausführlichen Begründungen hier.
 - ARCH-081 → Tresor-Nutzerweg ist exakt ein Download
 
 - ARCH-086 → GitHub-Backup-Scope hart wiederhergestellt
+
+- ARCH-087 → regelmäßiger GitHub-Doppelklick-Backupweg
+- ARCH-088 → Tresor und lokales Backup unabhängig
