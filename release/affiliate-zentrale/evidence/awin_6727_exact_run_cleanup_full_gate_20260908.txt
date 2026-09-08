@@ -1,0 +1,149 @@
+# AFFILIATE 6.72.7 — OTTO EXACT-RUN CLEANUP / FILTERED-FEED FULL LOCAL GATE
+
+STAND: 2026-09-08
+WORKSTREAM: AFFILIATE_ZENTRALE
+ADVERTISER: Awin 14336 / OTTO
+STATUS: FULL_LOCAL_GATE_PASS / LIVE_RETEST_PENDING
+ERRORS: AFF-ERR-020, AFF-ERR-021
+SOURCE_MANIFEST_SHA256: 671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f
+TEST_ARTIFACT: Affiliate-Zentrale_6.72.7_TEST.zip
+TEST_ARTIFACT_SHA256: da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963
+
+## Gebündelter Rootfix
+
+1. Historischer OTTO-Altimport-Cleanup
+- ausschließlich provider=awin, partner_external_id=14336, source_kind=product.
+- ausschließlich exakter terminal fehlgeschlagener ungefilterter products-Job.
+- exakter run_uuid + creative_library.last_complete_run.
+- Run muss status=failed, operation=queued_partner_sync, updated=0, imported>0 erfüllen.
+- mehr gefundene Rows als imported => FAIL CLOSED, keine Löschung.
+- andere run_uuid, andere Advertiser, andere Provider und portal_filtered-Läufe bleiben unangetastet.
+- verknüpfte Output-Objekte nur über exakte identity_hash.
+- materialisierte Ausgabe zuerst deaktiviert.
+- Kampagne/Listing nur gelöscht, wenn _ppar_creative_identity_hash UND _ppar_output_object_key exakt zum Output-Objekt passen.
+- Zielkanten nur über exakten identity_hash.
+- Cleanup ist idempotent.
+- Cleanup-Readback erscheint auf Affiliate-Zentrale → Steuerung & System → Automatisierung.
+
+2. Bestehender 6.72.6-Source-/Relevanzschutz bleibt gebunden
+- OTTO 14336 startet nicht ohne explizite Awin Create-a-Feed-URL + product_feed_scope=portal_filtered.
+- lokale OTTO-Relevanzprüfung liegt vor creative_library_upsert().
+- scanned / relevant / blocked bleiben getrennte Zähler.
+- kein generischer Vollfeed-Fallback.
+
+3. Automatik-Sicherheitsupgrade
+- Safety target 4.1.2.
+- historischer Cleanup wird beim normalen Plugin-Init ausgeführt.
+- bei erkanntem historischem OTTO-Fehl-Lauf bleibt zentrale Automatisierung deaktiviert.
+- kein manueller Paketknopf erforderlich.
+
+## Harte lokale POSITIV-/NEGATIV-Prüfung
+
+Ausgeführte Verhaltenstests gegen den echten 6.72.7-Automation-Trait in einem isolierten PHP-Harness:
+
+POSITIV:
+- exakter failed run löscht genau seine zwei Test-Produktzeilen: PASS.
+- anderer OTTO-run_uuid bleibt erhalten: PASS.
+- anderer Awin-Advertiser bleibt erhalten: PASS.
+- exakt verknüpftes Output-Objekt wird entfernt: PASS.
+- exakt verknüpfte Zielkante wird entfernt: PASS.
+- materialisierte Kampagne wird zuerst deaktiviert und nur mit exakter Post-Meta-Provenienz gelöscht: PASS.
+- zweiter Cleanup-Lauf ist idempotent: PASS.
+- bestätigter portal_filtered-Feed wird akzeptiert: PASS.
+- relevantes Produkt "Regendecke 1200D wasserdicht für Pferde" wird akzeptiert und auf pferdedecken-regendecken gebunden: PASS.
+
+NEGATIV:
+- failed run mit updated>0: BLOCKED, keine Löschung: PASS.
+- portal_filtered-Run: kein Cleanup-Ziel: PASS.
+- mehr Rows als Run-imported: FAIL CLOSED, keine Löschung: PASS.
+- OTTO-Feed ohne portal_filtered-Bestätigung: BLOCKED: PASS.
+- Samsung 55 Zoll UHD Smart TV: vor Persistenz BLOCKED: PASS.
+- Schleich Pferd Spielfigur: Content-Policy BLOCKED: PASS.
+- relevantes Pferdeprodukt aus unfiltered scope: BLOCKED: PASS.
+
+Testabschluss:
+ALL 6.72.7 CLEANUP/PREFILTER BEHAVIOR TESTS PASS
+
+## Gesamtworkflow-/Regressionstest
+
+Gebundener Gesamtworkflow geprüft:
+- source binding: PASS.
+- filtered feed fail-closed: PASS.
+- enqueue/start uses same filtered source gate: PASS.
+- exact legacy cleanup provenance: PASS.
+- no broad partner-wide delete: PASS.
+- relevance gate precedes persistence: PASS.
+- accepted product enters asset verification: PASS.
+- verified asset reaches central output planning: PASS.
+- OTTO seller/programme/tracking public-output gate unchanged: PASS.
+- exact product identifiers survive materialization: PASS.
+- Productwissen exact-match/no-substitute contract unchanged: PASS.
+- 5-minute central worker path unchanged: PASS.
+- manual article repair precedence unchanged: PASS.
+- weighted banner/manual repair policy remains present: PASS.
+
+Historische Regressionen byte-identisch gegen den belegten 6.72.6-Testinstaller:
+- trait-ppar-output-objects.php: PASS.
+- trait-ppar-article-plans.php: PASS.
+- trait-ppar-creative-library.php: PASS.
+- trait-ppar-ebay.php: PASS.
+- trait-ppar-awin-programme-gate.php: PASS.
+- trait-ppar-digistore24.php: PASS.
+- trait-ppar-idealo.php: PASS.
+- trait-ppar-provider-registry.php: PASS.
+- class-ppar-product-source-plan.php: PASS.
+- class-ppar-partner-analytics.php: PASS.
+- class-ppar-deal-radar.php: PASS.
+
+Finaler Plugin-Diff gegen 6.72.6:
+- includes/trait-ppar-automation-suite.php — funktionaler Cleanup.
+- pferdeportal-affiliate-router.php — ausschließlich Versionszeilen 6.72.7.
+- readme.txt — Dokumentation/Stable tag.
+Alle übrigen 23/26 Plugin-Dateien byte-identisch.
+Router nach Normalisierung der Versionszeilen byte-identisch: PASS.
+
+Gesamtabschluss:
+ALL 6.72.7 FULL WORKFLOW / REGRESSION TESTS PASS
+
+## Build-/Installer-Gates
+
+- PHP-Lint aller Plugin-PHP-Dateien: 21/21 PASS.
+- CURRENT_SOURCE_SHA256: 26/26 PASS.
+- Manifest SHA256: 671fe842ef19cf7f37f3b4327780eb520a06895d31a45c98f77b7895c382578f.
+- ZIP-Integrität: PASS.
+- frischer ZIP-Unpack: 26 Plugin-Dateien.
+- frischer ZIP-Unpack gegen Manifest: 26/26 PASS.
+- frischer ZIP-Unpack PHP-Lint: 21/21 PASS.
+- POSITIV-/NEGATIV-Harness auf frischem Unpack: PASS.
+- Gesamtworkflow-/Regressionstest auf frischem Unpack: PASS.
+- Source↔ZIP-Fresh-Unpack Byte-Identität: 26/26 PASS.
+- Testinstaller SHA256: da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963.
+
+## Hobbyraum-Hardening
+
+AFFILIATE_HOBBYRAUM/TASK.current.json wurde gegen den echten load_task()-Vertrag geprüft:
+- exakt erlaubte 9 Felder: PASS.
+- contract AFFILIATE_HOBBYRAUM_V1: PASS.
+- einzeiliges goal <=300 Zeichen: PASS.
+- inputs <=20: PASS.
+- aktuelle Inputanzahl: 13.
+- unbekannte Zusatzfelder entfernt.
+- persistenter test_otto_automation.php enthält nun Cleanup-/Filtered-Feed-/Pre-Persistence-Regressionen.
+
+AFF-ERR-021 damit FIXED.
+
+## Postcheck
+
+- AFF-ERR-006 Mini-Fix-/Pluginorgie: Kandidat wurde als EIN gebündelter 6.72.7-Rootfix bis zum vollständigen lokalen Gate gehalten; kein Zwischen-ZIP ausgegeben.
+- AFF-ERR-017/018 bestehende Live-Pässe nicht erneut geöffnet.
+- AFF-ERR-019 Vollfeed-Sperre bleibt aktiv.
+- AFF-ERR-020 Exact-run Cleanup lokal vollständig PASS.
+- AFF-ERR-021 Hobbyraum-Schema repariert und gegen Runner validiert.
+- kein Release-/Live-PASS behauptet.
+
+## Nächster Live-Schritt
+
+6.72.7 installieren. Danach keine Buttons drücken.
+Auf Affiliate-Zentrale → Steuerung & System → Automatisierung muss der neue Readback "OTTO-Sicherheitsbereinigung" erscheinen.
+Erwartet: historischer Awin-14336-Fehl-Lauf erkannt; exakt dessen Altprodukte werden entfernt. Die automatische Synchronisierung bleibt AUS.
+Erst nach diesem Live-Readback wird in Awin der gefilterte Create-a-Feed-Export gebunden.
