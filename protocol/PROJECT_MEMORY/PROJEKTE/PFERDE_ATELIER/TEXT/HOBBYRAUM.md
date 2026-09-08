@@ -28,9 +28,9 @@ B02 und B07/M32 sind im aktuellen Realtest überwunden.
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
-MAIN_SHA: 914638e67a265cf2e8951b1177a7d80fdf904e98
+MAIN_SHA: 755b531ec08298a86cb0342c2db8c81f5b4df6f9
 ACTIVE_BLOCKER: FACHWORKFLOW_PROOF_HANDOFF_BLOCKED
-PLAN_PHASE: SECURITY_M28_ROW_PARSER_ADMIN_ACTIVATION_PENDING
+PLAN_PHASE: SECURITY_BYPASS_REMOVAL_PENDING_AFTER_PR166
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 ACTIVE_HISTORY_CASE: M28
 HISTORY_EXPECTED_FAIL: NONE
@@ -55,13 +55,13 @@ PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
 ERROR_SOURCE_BLOB_SHA: e263de9d684e16c5ca95185079cbad1dd02fb26c
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 63cb169a8ee9af835e33f69952f495e4c00ce737
+CURRENT_STATE_BLOB_SHA: a35a7a4e11b33ffa96fb66c8109a8d6c440d1d41
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: c856055cf2419552f8ab2088362980e938fa9dc0
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: 62c723d1a147237050278f013c2a63d62f6d1115
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: 0e1d224983fab766ddc867e6206590afccc5c244
+PROTOCOL_SOURCE_BLOB_SHA: d2deb0dc9a07d3612d1c459e2804413db3425fcc
 INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -80,25 +80,21 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Einmalige Admin-Aktivierung ausschließlich für Security-PR #166.**
+**Temporären PR-only-Admin-Bypass nach PR #166 entfernen und frisch verifizieren.**
 
-PR #166:
-- Branch `hobbyroom/security-fix-m28-row-parser-20260908`;
-- Head `a742c5c917b5e6fe164be2a6267470de89e9d744`;
-- exakt eine Datei;
-- exakt +1/-1 Regex-Zeile;
-- lokale Positiv-/Negativprüfung PASS;
-- regulärer `hardlock-base` blockiert erwartungsgemäß ausschließlich mit `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`.
+Neuer main:
+`755b531ec08298a86cb0342c2db8c81f5b4df6f9`.
 
-Bis PR #166 kontrolliert aktiviert und der temporäre Bypass danach wieder entfernt ist:
+PR #166 ist integriert; Parserfix aktiv.
+
+Bis `bypass_actors: []` frisch bestätigt ist:
 - `FIX_FORBIDDEN`;
 - PR #161 unverändert lassen;
-- kein M28-Merge;
-- kein Realtest;
+- kein Test/Merge/Realtest;
 - kein Publish/WordPress-Write.
 
 Danach:
-denselben PR #161 ohne Codeänderung erneut serverseitig testen.
+PR #161 ausschließlich technisch auf den neuen main synchronisieren; vier M28-Dateiinhalte unverändert lassen; Hobbyraum neu binden; denselben Maschinen-Test erneut auslösen.
 
 ## VERBOTEN
 
