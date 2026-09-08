@@ -225,3 +225,25 @@ Für die gesamte Alternativroute gilt zusätzlich:
 - Komplexität ist ein FAIL-Kriterium, wenn sie keinen nachweisbaren Sicherheits- oder Funktionsgewinn bringt
 
 KISS steht nicht über Sicherheit. Wenn Einfachheit und 0,0-Freiheit kollidieren, gewinnt die Sicherheitsregel. Innerhalb derselben Sicherheit gewinnt immer die einfachere Lösung.
+
+
+## HARD RULE – BESTEHENDE CHAT/CODEX- UND DATEIÜBERGABE-INFRASTRUKTUR NICHT NEU ERFINDEN
+
+Für alle weiteren Prüfungen der Alternativroute gelten zwei bereits implementierte Systemfähigkeiten als bestehende Infrastruktur:
+
+1. CODEX-START AUS JEDEM CHAT
+- Codex kann bereits aus jedem Chat gestartet werden.
+- Das gilt ausdrücklich auch innerhalb der Artikelerstellung.
+- Die Alternativarchitektur baut dafür KEINEN neuen Entry-, Runner-, Dispatcher- oder Startweg.
+- Geprüft wird nur, ob die Zentralmaschine diesen bestehenden Einstieg sicher nutzen kann.
+
+2. KORREKTE DATEIÜBERGABE IST BEREITS IMPLEMENTIERT
+- Die bestehende korrekte Dateiübergabe im Workflow gilt als vorhandene Infrastruktur.
+- Kein neuer Datei-Handoff, kein neues Übergabeformat und keine zweite Transferarchitektur werden erfunden.
+- In der Alternativroute wird ausschließlich geprüft, wie der bereits vorhandene Übergabeweg an den einen kanonischen Jobzustand bzw. die signierte Releasegrenze angebunden wird.
+
+KISS-Folge:
+Bestehende Start- und Transferfähigkeit wiederverwenden; keine Parallelarchitektur bauen.
+
+Sicherheitsfolge:
+Diese Fähigkeiten dürfen keine neue Workflowfreiheit erzeugen. Chat/Codex starten nur den fest gebundenen Prozess; die Dateiübergabe transportiert nur das fest gebundene Objekt.
