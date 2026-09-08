@@ -851,3 +851,24 @@ Test-Head:
 
 Die vier M28-Dateiblobs bleiben identisch.
 
+### KISS-Abbruch der Kontrollsystem-Endlosschleife
+
+Letzter PR-#161-Test:
+- `hardlock`: PASS;
+- Work-Lock/Evidenz/Selbsttests: PASS;
+- danach historischer Runner erster FAIL M15.
+
+M15 hart geprüft:
+- Matrix verlangt nur konsistente Handoff-Instruktion;
+- Runner erzwingt alte No-Handoff-Semantik;
+- PR #110 und #111 sind gemergte Belege für Request-first-Handoff.
+
+Einordnung:
+stale Regressionstest, kein realer neuer Produktionsblocker.
+
+Entscheidung:
+Keine weitere Gate-/Security-Ausbaurunde.
+TEXT-Maschinenlock nicht mehr als Integrationsblocker.
+Bestehende normale Repository-Hardlocks bleiben aktiv.
+Nächster Fokus ist wieder ausschließlich PR #161 / M28 und danach Realtest.
+
