@@ -1,6 +1,6 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
-STAND: 2026-09-07
+STAND: 2026-09-08
 
 Zweck: **Was wurde geändert – und warum?**
 
@@ -1650,7 +1650,7 @@ GRENZE:
 GitHub-Secret-Werte und providerinterne IDs sind nicht als 1:1-Export behauptbar.
 
 
-## ARCH-087 – Tresor und lokales Backup unabhängig
+## ARCH-088 – Tresor und lokales Backup unabhängig
 
 STAND: 2026-09-08.
 
