@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: AKTIV – M28 PRODUKTIONSWEG
+STATUS: REALTEST_ONLY
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -12,7 +12,7 @@ Goldmaster:
 `de21f6cd35c60849c551fd82f78e75ce57c99fab`
 
 Aktueller main:
-`a61a380e948e15f2ed3ce5ddec41b128efbe7ae6`
+`78bb2576214a8c0a82d201ed35530ad9ac885481`
 
 Aktueller erster echter Blocker:
 `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`
@@ -80,25 +80,20 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**PR #161 / M28 auf dem normalen Produktionsweg abschließen.**
+**Echter 7/7-Realtest auf current main.**
 
 Current main:
-`a61a380e948e15f2ed3ce5ddec41b128efbe7ae6`
+`78bb2576214a8c0a82d201ed35530ad9ac885481`
 
-PR #161:
-`a2a4aca682e46ac5913d4cad554a604f4edd8d59`
-exakt 4 M28-Dateien.
+Pfad:
+1. Dispatcher PR #107 Head exakt auf current main.
+2. Offiziellen Codex-Lauf für `RUN_NEW_ARTICLE_BATCH_NO_STOP` starten.
+3. Bis zum ersten realen Blocker laufen lassen.
+4. Keine Reparatur während des Laufs.
+5. Kein Auto-Publish / kein WordPress-Write.
 
-Kontrollsystem:
-- TEXT-Maschinenlock eingefroren / nicht anwendbar;
-- keine weitere Gate-/Runner-/Security-Baustelle;
-- GitHub `hardlock` + `hardlock-base` bleiben Pflicht.
-
-Ablauf:
-1. normalen `hardlock-base` erneut ausführen;
-2. bei PASS PR #161 mergen;
-3. sofort echter 7/7-Realtest;
-4. beim ersten realen Blocker stoppen.
+Ziel bleibt:
+`107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`.
 
 ## VERBOTEN
 
