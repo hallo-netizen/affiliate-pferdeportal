@@ -20,6 +20,7 @@ function source(string $name): string {
         'pferdeportal-affiliate-router.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php',
         'trait-ppar-automation-suite.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php',
         'trait-ppar-awin-programme-gate.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php',
+        'trait-ppar-provider-registry.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php',
         'trait-ppar-output-objects.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php',
         'trait-ppar-article-plans.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-article-plans.php',
         'trait-ppar-creative-library.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php',
@@ -41,6 +42,7 @@ function source(string $name): string {
 
 $automation = source('trait-ppar-automation-suite.php');
 $awin_gate = source('trait-ppar-awin-programme-gate.php');
+$provider_registry = source('trait-ppar-provider-registry.php');
 $output = source('trait-ppar-output-objects.php');
 $articles = source('trait-ppar-article-plans.php');
 $creative = source('trait-ppar-creative-library.php');
@@ -333,5 +335,41 @@ $a = $fp(['price'=>'49.99','availability'=>'active','seller_name'=>'A']);
 $b = $fp(['price'=>'54.99','availability'=>'active','seller_name'=>'A']);
 $c = $fp(['price'=>'49.99','availability'=>'active','seller_name'=>'B']);
 pass_or_fail($a !== $b && $a !== $c, 'price and seller changes alter product freshness');
+
+
+pass_or_fail(
+    str_contains($automation, 'function automation_cleanup_legacy_unfiltered_otto_imports')
+    && str_contains($automation, "last_complete_run=%s")
+    && str_contains($automation, "absint(\$run['updated'] ?? 0) !== 0")
+    && str_contains($automation, 'row-count-exceeds-imported'),
+    'legacy OTTO cleanup is exact-run scoped and fails closed on provenance mismatch'
+);
+pass_or_fail(
+    str_contains($automation, 'output_deactivate_materialized_object')
+    && str_contains($automation, "'_ppar_creative_identity_hash'")
+    && str_contains($automation, "'_ppar_output_object_key'")
+    && !str_contains($automation, 'DELETE FROM {$library_table} WHERE provider='),
+    'legacy OTTO cleanup removes only exact linked output and never broad-deletes partner library'
+);
+pass_or_fail(
+    str_contains($automation, "update_option('ppar_otto_legacy_cleanup_v6727'")
+    && str_contains($automation, 'OTTO-Sicherheitsbereinigung:')
+    && str_contains($automation, "\$target = '4.1.2'"),
+    'cleanup is idempotently version-bound and visible in automation readback'
+);
+pass_or_fail(
+    str_contains($automation, 'function automation_otto_filtered_feed_binding')
+    && str_contains($automation, "'portal_filtered'")
+    && str_contains($provider_registry, 'Create-a-Feed')
+    && str_contains($provider_registry, 'portal_filtered'),
+    'OTTO requires explicit source-side filtered Awin feed before enqueue'
+);
+$batch_start = strpos($automation, 'private function automation_process_awin_product_batch');
+$batch_end = strpos($automation, 'private function automation_process_adcell_product_batch', $batch_start);
+$batch = substr($automation, $batch_start, $batch_end - $batch_start);
+pass_or_fail(
+    strpos($batch, 'automation_otto_product_relevance_gate') < strpos($batch, 'automation_import_rows(array($normalized)'),
+    'OTTO local relevance gate executes before creative library persistence'
+);
 
 echo "ALL OTTO HOBBYROOM TESTS PASS\n";
