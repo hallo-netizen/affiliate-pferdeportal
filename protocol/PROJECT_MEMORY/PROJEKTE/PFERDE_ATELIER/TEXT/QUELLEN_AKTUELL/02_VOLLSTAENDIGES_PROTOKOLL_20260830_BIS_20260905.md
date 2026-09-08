@@ -808,3 +808,27 @@ Keine Änderung am M28-Kandidaten.
 Kein Merge.
 Kein Realtest.
 
+### Security-Wartungs-PR #177 – Vorprüfung
+
+PR #177:
+`hobbyroom/security-fix-shallow-recovery-ancestry-20260908`
+Head `f69b415099f7d9f936a81f21a56bbaa408e8dfc7`.
+
+Diff:
+- ausschließlich `control/paul-scope-gate/paul_scope_gate.py`;
+- +2/-0;
+- bei shallow Repository unshallow trusted base history;
+- danach unverändert `cat-file` + `merge-base --is-ancestor`.
+
+Lokale Positivprüfung mit echtem shallow Git-Repo:
+- vor unshallow kein belastbarer Ahnenbeweis;
+- nach unshallow korrekter PASS.
+
+GitHub:
+Run `34229441561`, Job `102071584302`.
+Erwarteter Stop:
+`IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`.
+`PATH_GUARD_SELFTEST_PASS`.
+
+Keine Änderung an PR #161 oder M28-Inhalten.
+
