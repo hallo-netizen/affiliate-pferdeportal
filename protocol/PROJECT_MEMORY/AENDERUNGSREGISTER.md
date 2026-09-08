@@ -1692,19 +1692,26 @@ Chat/Hobbyraum konnte `CHECK_HISTORY: PASS` behaupten, obwohl ausführbarer Regr
 VERBINDLICHER MASCHINENWEG NACH AKTIVIERUNG VON PR #160:
 1. Branch, Head, Base und erlaubter Dateiscope müssen exakt zum offiziellen Hobbyraum passen.
 2. Manuelle `CHECK_*`-Felder sind keine Integrationsautorität.
-3. Fehlerquelle, CURRENT_STATE und Paul werden per Git-Blob an den geprüften Campus-Stand gebunden.
-4. `ACTIVE_BLOCKER` muss real in Fehlerquelle und CURRENT_STATE vorkommen; `MAIN_SHA` muss real in CURRENT_STATE stehen.
-5. Der komplette vertrauenswürdige M01–M33-Runner vom PR-Base läuft gegen den Kandidaten.
-6. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
-7. Matrix/Runner-Wartung ist nur separat als `HISTORY_AUTHORITY_MAINTENANCE` zulässig und muss Base- und Kandidatenabdeckung vollständig halten.
-8. Erst nach Maschinen-PASS darf gemergt werden.
-9. Danach genau ein echter 7/7-Realtest; erster neuer Blocker wird alleinige nächste Arbeitswahrheit.
-10. Kein Fix während des Realtests, kein Parallel-/Sammelfix.
+3. M01–M33-Matrix, vertrauenswürdiger Base-Runner, autoritative Fehlerquelle, CURRENT_STATE, Paul-Prüfkarte, Änderungs-/Erklärungsregister und Hobbyraum-Standard werden per Git-Blob gebunden.
+4. M01–M33 müssen vollständig in Matrix, Runner und autoritativer Fehlerquelle vorhanden sein.
+5. `ACTIVE_BLOCKER` muss real in Fehlerquelle und CURRENT_STATE vorkommen; `MAIN_SHA` und `RECOVERY_BASE_SHA` müssen real in CURRENT_STATE stehen.
+6. Pauls Kernregeln werden semantisch geprüft: kein Sammelfix, historische Fehlerquelle, bestehende Regression, echter 7/7-Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik, Pre-/Post-Transformation.
+7. Änderungsregister muss Frozen-Recovery, kausalen Corridor und Maschinenbeweis-Entscheidung enthalten.
+8. Hobbyraum-Standard muss Historie, letzten funktionierenden Stand, direkte Nachbarn, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest enthalten.
+9. Der komplette vertrauenswürdige M01–M33-Runner vom PR-Base/main läuft gegen den Kandidaten.
+10. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
+11. Matrix/Runner-Wartung ist nur separat als `HISTORY_AUTHORITY_MAINTENANCE` zulässig und muss Base- und Kandidatenabdeckung vollständig halten.
+12. Erst nach Maschinen-PASS darf gemergt werden; danach genau ein echter 7/7-Realtest, dessen erster neuer Blocker alleinige nächste Arbeitswahrheit wird.
+13. Kein Fix während des Realtests, kein Parallel-/Sammelfix.
+
+SELBSTSCHUTZ:
+- die Gate-Logik besitzt eigene Negativtests gegen fehlende M33-Abdeckung, fehlende Paul-Regel, fehlende Entscheidungsregel, fehlende Standardregel und fehlenden letzten guten Stand;
+- `CHECK_*` kann bewusst auf PENDING stehen, ohne Maschinen-PASS zu ersetzen oder zu erzeugen.
 
 STATUS:
 - PR #159: integriert.
-- PR #160 / Head `d5d876f66336c4a964c4141b1a5b90ef36b825d5`: vorbereitet, noch nicht integriert.
+- PR #160 / Head `eb4b5da07d73443cb40ed74f27ded2c80ebf6ded`: vorbereitet, noch nicht integriert.
+- exakt eine Security-Datei.
 - einziger Wartungsblocker: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil der bestehende Hardlock seine eigene Security-Datei schützt.
-- dafür ist genau einmal kontrollierte Admin-Wartung nötig; danach normaler Hardlock sofort wieder schließen.
 - M28-Produktionsfix bleibt bis dahin eingefroren.
 
