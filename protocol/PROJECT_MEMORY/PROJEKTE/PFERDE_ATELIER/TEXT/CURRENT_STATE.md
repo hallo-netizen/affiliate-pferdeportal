@@ -10,7 +10,7 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`755b531ec08298a86cb0342c2db8c81f5b4df6f9`
+`a61a380e948e15f2ed3ce5ddec41b128efbe7ae6`
 
 Letzter Merge:
 `PR #166 – Security: fix active history M28 row parser`
@@ -316,4 +316,19 @@ GitHub-Vorprüfung PR #177:
 - `PATH_GUARD_SELFTEST_PASS`.
 
 PR #161 bleibt unverändert eingefroren.
+
+### Kontrollsystem eingefroren / M28-Test fortsetzen
+
+PR #177 ist integriert. Das Kontrollsystem wird ab hier **nicht weiter ausgebaut**.
+
+Aktueller main:
+`a61a380e948e15f2ed3ce5ddec41b128efbe7ae6`.
+
+PR #161 bleibt derselbe M28-Produktionsfix.
+Neuer reiner Synchronisations-Test-Head:
+`a2a4aca682e46ac5913d4cad554a604f4edd8d59`.
+
+Die vier M28-Dateiblobs sind unverändert.
+Ziel jetzt ausschließlich:
+M28-Kandidat prüfen -> bei PASS mergen -> echter 7/7-Realtest.
 
