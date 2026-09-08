@@ -369,3 +369,26 @@ Nächster Schritt:
 permanenten Dispatcher PR #107 exakt auf current main setzen und echten 7/7-Lauf starten.
 Keine Reparatur während des Laufs.
 
+### Neuer Realblocker nach M28 – systemische Ursache belegt
+
+Realtest auf main `78bb2576214a8c0a82d201ed35530ad9ac885481`.
+
+M28 **real überwunden**:
+- reale `FACHWORKFLOW_HANDOFF_REQUEST.json` erzeugt;
+- gebundener `fachworkflow_handoff.command` gestartet;
+- echter PPM-6.7.9-Lauf erreicht.
+
+Erster neuer Blocker:
+`PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`.
+
+Harte Historienprüfung:
+- B01 `5fe9967bbd65b4247f5a75ac50c47060fc1f5149` hatte im Handoff die starre Canonical-Slot-Vorbedingung bereits entfernt und die Kategorieprüfung auf den bestehenden semantischen Vertrag umgestellt.
+- späterer Reapply `e5fc1c88dfac81b3ef18ff9b02bf37a677b0185a` stellte den älteren PR-#124-Handoff wieder her;
+- dadurch wurden `find_slot(...)/CANONICAL_SLOT_MISSING` **und** die alte numerische WordPress-ID-Pflicht wieder eingeführt;
+- B07/M32 `41849f0…` reparierte nur die Runtime-Pfade auf diesem regressierten Handoff.
+
+Konsequenz:
+Kein isolierter Canonical-Slot-Fix.
+Nächster Schritt ist ein vollständiger, begrenzter Handoff-Korridorvergleich:
+B01-Semantik als funktionale Basis + nur später zwingend bewiesene Änderungen (Runtime-Pfade, M28 Request-first/Current Action) erhalten.
+
