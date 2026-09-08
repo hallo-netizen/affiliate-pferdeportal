@@ -267,11 +267,63 @@ def m33():
     check(wf,final)
     expect_exc(lambda:check(wf+"\ngit remote -v\n",final),"M33_CODEX_GIT_REMOTE_DEPENDENCY")
 
+
+def _m34_contract_check(src:str)->None:
+    required=(
+        "PPM679_Editorial_Plan_Registry::plan()['slots']",
+        "PSERC_Plan_Slot_Identity::token($candidate)",
+        "count($matches)!==1",
+        "$item['canonical_article_id']=(string)$slot['canonical_article_id'];",
+        "unset($item['plan_slot']);",
+    )
+    for token in required:
+        must(token in src,"M34_SLOT_PARITY_MISSING:"+token)
+
+def m34():
+    src=HANDOFF.read_text(encoding="utf-8")
+    _m34_contract_check(src)
+    bad=src.replace("unset($item['plan_slot']);","")
+    expect_exc(lambda:_m34_contract_check(bad),"M34_SLOT_PARITY_MISSING")
+
+def _m35_contract_check(src:str)->None:
+    imp="PPM679_Admin::import_fact_pack_bundle"
+    expected="PPM679_Storage::fact_pack_hash"
+    plan="$plan=$header"
+    must(imp in src,"M35_FACT_PACK_IMPORT_MISSING")
+    must(expected in src,"M35_PPM_REGISTRY_HASH_LOOKUP_MISSING")
+    must("SOURCE_HASH_BINDING_MISMATCH" in src,"M35_FAIL_CLOSED_HASH_GUARD_MISSING")
+    binding=re.search(r"\$item\['source_hashes'\]\s*=\s*\[\$expectedSource\]\s*;",src)
+    must(binding is not None,"M35_PPM_REGISTRY_HASH_NOT_MATERIALIZED")
+    i_imp=src.index(imp)
+    i_expected=src.index(expected)
+    i_bind=binding.start()
+    i_plan=src.index(plan)
+    must(i_imp < i_expected < i_bind < i_plan,"M35_PPM_REGISTRY_HASH_BINDING_ORDER")
+    between=src[i_expected:i_bind]
+    must("$expectedSource===''" in between or "$expectedSource === ''" in between,"M35_EMPTY_REGISTRY_HASH_NOT_BLOCKED")
+
+def m35():
+    _m35_contract_check(HANDOFF.read_text(encoding="utf-8"))
+
+def m35_machine_proof_selftest():
+    good="""$imp=PPM679_Admin::import_fact_pack_bundle($bundle);
+$expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
+if($expectedSource===''){fwrite(STDERR,"SOURCE_HASH_BINDING_MISMATCH");exit(2);}
+$item['source_hashes']=[$expectedSource];
+$plan=$header;"""
+    _m35_contract_check(good)
+    bad=good.replace("$item['source_hashes']=[$expectedSource];","if(!in_array($expectedSource,(array)($item['source_hashes']??[]),true)){fwrite(STDERR,\"SOURCE_HASH_BINDING_MISMATCH\");exit(2);}")
+    expect_exc(lambda:_m35_contract_check(bad),"M35_PPM_REGISTRY_HASH_NOT_MATERIALIZED")
+    bad_order=good.replace("$item['source_hashes']=[$expectedSource];\n$plan=$header;","$plan=$header;\n$item['source_hashes']=[$expectedSource];")
+    expect_exc(lambda:_m35_contract_check(bad_order),"M35_PPM_REGISTRY_HASH_BINDING_ORDER")
+    print("HISTORY_MACHINE_PROOF_SELFTEST_PASS:M35",flush=True)
+
+
 CASES=[
 ("M01",m01),("M02",m02),("M03",m03),("M04",m04),("M05",m05),("M06",m06),("M07",m07),("M08",m08),("M09",m09),("M10",m10),
 ("M11",m11),("M12",m12),("M13",m13),("M14",m14),("M15",m15),("M16",m16),("M17",m17),("M18",m18),("M19",m19),("M20",m20),
 ("M21",m21),("M22",m22),("M23",m23),("M24",m24),("M25",m25),("M26",m26),("M27",m27),("M28",m28),("M29",m29),("M30",m30),
-("M31",m31),("M32",m32),("M33",m33)]
+("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35)]
 
 def _run_ordered(cases,phase):
     results=[]
@@ -287,8 +339,13 @@ def _run_ordered(cases,phase):
 def main(argv):
     must(MATRIX.is_file(),"MATRIX_MISSING")
     if len(argv)==2 and argv[0]=="--proof-selftest":
-        if argv[1]!="M28": raise Fail("UNKNOWN_PROOF_SELFTEST:"+argv[1])
-        m28_machine_proof_selftest()
+        case=argv[1].upper()
+        if case=="M28":
+            m28_machine_proof_selftest()
+        elif case=="M35":
+            m35_machine_proof_selftest()
+        else:
+            raise Fail("UNKNOWN_PROOF_SELFTEST:"+argv[1])
         return 0
     if len(argv)==2 and argv[0]=="--case":
         case=argv[1].upper()
@@ -303,17 +360,17 @@ def main(argv):
         return 0
 
     open_only=argv==["--open-only"]
-    if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only] | --case MXX | --proof-selftest M28")
+    if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only] | --case MXX | --proof-selftest M28|M35")
 
     # Repair phase: do not duplicate already-proven old positives while an open
-    # regression still fails. Once M26-M33 are all green, automatically run the
-    # one required final M01-M33 suite on the same head.
+    # regression still fails. Once M26-M35 are resolved, automatically run the
+    # one required final M01-M35 suite on the same head.
     if open_only:
-        open_results=_run_ordered(CASES[25:],"OPEN_M26_M33")
+        open_results=_run_ordered(CASES[25:],"OPEN_M26_M35")
         if open_results is None:return 2
         print("OPEN_REGRESSIONS_PASS",flush=True)
 
-    results=_run_ordered(CASES,"FINAL_M01_M33")
+    results=_run_ordered(CASES,"FINAL_M01_M35")
     if results is None:return 2
 
     # Required final re-check against the last real production regression.
