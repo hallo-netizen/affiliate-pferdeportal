@@ -1,55 +1,71 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
-STAND: 2026-09-07
-STATUS: AKTIV / V1-PLUGINENTWICKLUNG
+STAND: 2026-09-08
+STATUS: AKTIV / 0.7.0 WORDPRESS-LIVEABNAHME
 
-## 1-KLICK-ÜBERSICHT
+## AKTUELLER AUFTRAG
 
-**AKTUELLER AUFTRAG**  
-V1 als unabhängigen, allgemeingültigen Produktwissen-/Produktvergleichsweg bis WordPress-DRAFT entwickeln.
+Den jetzt lokal vollständig geprüften bidirektionalen Produktvergleichs-Gesamtworkflow einmal real in WordPress abnehmen.
 
-**HARTE GRENZEN**
-- STARTMASTER/TEXT nicht umbauen;
-- keine Produktfakten erfinden;
-- SEO/Affiliate schreiben keine Produktwahrheit;
-- kein main, kein Live-Publish.
+## GEBUNDENER WORKFLOW
 
-## BELEGTER STAND
+`SEO ↔ Produktwissen → Vergleichbarkeit → Nachfrage/Kannibalisierung → Dossier → Audit`
 
-Technik-Branch:
-`hobbyroom/productwissen-v1-prototype`
+Harte Regeln:
+- genau 2 Produkte je Produktvergleich;
+- unterschiedliche Hersteller;
+- keine erfundenen Produktidentitäten oder Fakten;
+- SEO darf konkrete Produkt-/Paar-Nachfrage entdecken;
+- Produktwissen darf technisch sinnvolle Paare zur SEO-Prüfung geben;
+- unbekannte konkrete SEO-Produkte → Produktrecherche, nicht Ersatzprodukt;
+- vorhandener SEO-Bestand/Cache zuerst;
+- Provider nur für danach echte SEO-Lücken;
+- Teilresultat nie Gesamt-PASS;
+- keine Writer-/Draft-/Publish-Arbeit in dieser Prüfstufe.
 
-Draft-PR:
-#142 gegen Campus-Branch.
+## TESTKANDIDAT
+
+Plugin:
+`Universal Product Comparison 0.7.0-prototype`
+
+ZIP SHA-256:
+`b6563940f96d0e9134109779f8046b5e8b9e1109bc9965d9d01deb5c75ed610d`
+
+Technischer Isolationsbranch:
+`hobbyroom/productvergleich-workflow-v070-20260908`
+
+Kein main-Merge.
+
+## LOKALER BELEG
 
 PASS:
-- `UPK_WORDPRESS_DB_GESAMT_PASS`;
-- `UPC_WORDPRESS_DB_GESAMT_PASS`;
-- `UPC_REAL_DOSSIER_PV_REG_001_PASS`;
-- letzter belegter WordPress+MySQL Run: `34109264265` SUCCESS.
-
-Damit sind Produktwissen, Vergleichspaarung, Merkmalsmatrix und deterministisches Writer-Dossier real gegen WordPress+MySQL geprüft.
+- PHP-Lint 31/31;
+- 0.6 SEO-Regressions;
+- 0.6 Dossier-Regressions;
+- bidirektionale SEO-/Produktrecherche-Erkennung positiv/negativ;
+- Pairing positiv/negativ;
+- Profil-Drift negativ;
+- kompletter Workflow positiv/negativ;
+- Bootstrap/Single-Door;
+- echte PSTE-Themenmap 81 Themen / False-Pair-Guard;
+- statischer Gesamtworkflow-Release-Gate;
+- fertige ZIP frisch entpackt und vollständig erneut geprüft;
+- Source ↔ Fresh-ZIP byte-identisch.
 
 ## NEXT ACTION
 
-**Vergleichsarchiv als dünne, read-only Frontendschicht auf bestehende WordPress-Beiträge setzen.**
+**Einziger nächster Nutzertest:**
 
-Pflicht:
-1. Produkt-/Variantenvergleiche ausschließlich über ihre gebundenen UPC-Metadaten erkennen;
-2. Produktgruppenvergleiche erst anbinden, wenn ihr bestehender WordPress-Artikeltyp-Marker real belegt ist – nichts erfinden;
-3. Hauptfilter: Alle | Produktgruppenvergleiche | Produktvergleiche;
-4. innerhalb Produktvergleiche: Produkte | Varianten;
-5. Produktindex zeigt nur Produkte mit vorhandenem Vergleich;
-6. Produktsuche liefert Produkt- und Variantenvergleiche;
-7. Filter/Search verändern keine Beiträge und erzeugen keine indexierbaren SEO-Duplikate;
-8. Design nur über Klassen/Contract konsumieren, DESIGN nicht technisch umbauen.
+WordPress → Plugins → `Universal Product Comparison` mit 0.7.0 ersetzen.
 
-Affiliate Exact-Match:
-PASS / Run `34131779064`.
+Danach:
+WordPress → **Produktvergleich → Vergleichsplanung** → **Regendecken** → **Gesamtworkflow starten**.
 
-SEO:
-bewusst keine V1-Laufzeitkopplung, bis der echte SEO-Vertrag geprüft ist.
+Danach Screenshot/Ergebnis zurückgeben.
 
-## Globale Arbeitsort-Sperre
+Erst diesen realen Zustand prüfen. Kein neuer Pluginstand, kein Writer, kein Draft, kein Publish vor dieser Abnahme.
 
-Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.
+## RÜCKGABEWEG
+
+Realbefund hier im PRODUKTVERGLEICH-Büro auswerten.
+Bei Fehler: zuerst gegen den gesamten gebundenen Workflow prüfen, dann kleinster KISS-Fix im Hobbyraum; keine neue Architektur und keine Zwischen-ZIP.
