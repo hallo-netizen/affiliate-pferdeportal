@@ -589,6 +589,12 @@ trait PPAR_Automation_Suite_Trait {
         if (is_wp_error($gate)) {
             return $gate;
         }
+        if ($advertiser_id === absint(self::OTTO_AWIN_ADVERTISER_ID)) {
+            $feed_gate = $this->automation_otto_filtered_feed_binding($advertiser_id);
+            if (is_wp_error($feed_gate)) {
+                return $feed_gate;
+            }
+        }
         global $wpdb;
         $table = $this->automation_jobs_table();
         $existing = $wpdb->get_var($wpdb->prepare(
@@ -843,6 +849,38 @@ trait PPAR_Automation_Suite_Trait {
         return $url;
     }
 
+    private function automation_otto_filtered_feed_binding($advertiser_id) {
+        $advertiser_id = absint($advertiser_id);
+        if ($advertiser_id !== absint(self::OTTO_AWIN_ADVERTISER_ID)) {
+            return new WP_Error('otto_partner_invalid', 'OTTO-Feedbindung wurde für einen anderen Advertiser aufgerufen.');
+        }
+        $network = $this->network_settings('awin');
+        $configured_url = trim((string) ($network['product_feed_url'] ?? ''));
+        $configured_partner_id = absint($network['product_feed_partner_id'] ?? 0);
+        $configured_scope = sanitize_key((string) ($network['product_feed_scope'] ?? ''));
+        if ($configured_url === '' || $configured_partner_id !== $advertiser_id) {
+            return new WP_Error(
+                'otto_filtered_feed_required',
+                'OTTO benötigt einen ausdrücklich gebundenen, in Awin Create-a-Feed auf Pferde-Atelier-relevante Kategorien gefilterten Produktfeed.'
+            );
+        }
+        if ($configured_scope !== 'portal_filtered') {
+            return new WP_Error(
+                'otto_feed_scope_unconfirmed',
+                'Der gebundene OTTO-Feed ist nicht als in Awin fachlich gefilterter Pferde-Atelier-Feed bestätigt.'
+            );
+        }
+        $validated = $this->automation_validate_awin_feed_url($configured_url);
+        if (is_wp_error($validated)) {
+            return $validated;
+        }
+        return array(
+            'url'=>$validated,
+            'name'=>'Gebundener gefilterter OTTO/Awin-Produktfeed',
+            'scope'=>'portal_filtered',
+        );
+    }
+
     private function automation_select_awin_feed($snapshot) {
         $snapshot_id = absint($snapshot['external_id'] ?? 0);
         if ($snapshot_id <= 0) {
@@ -860,27 +898,7 @@ trait PPAR_Automation_Suite_Trait {
         // categories and binds that exact export here. The local relevance gate
         // below is a second independent safety layer, not a substitute.
         if ($is_otto) {
-            if ($configured_url === '' || $configured_partner_id !== $snapshot_id) {
-                return new WP_Error(
-                    'otto_filtered_feed_required',
-                    'OTTO benötigt einen ausdrücklich gebundenen, in Awin Create-a-Feed auf Pferde-Atelier-relevante Kategorien gefilterten Produktfeed.'
-                );
-            }
-            if ($configured_scope !== 'portal_filtered') {
-                return new WP_Error(
-                    'otto_feed_scope_unconfirmed',
-                    'Der gebundene OTTO-Feed ist nicht als in Awin fachlich gefilterter Pferde-Atelier-Feed bestätigt.'
-                );
-            }
-            $validated = $this->automation_validate_awin_feed_url($configured_url);
-            if (is_wp_error($validated)) {
-                return $validated;
-            }
-            return array(
-                'url'=>$validated,
-                'name'=>'Gebundener gefilterter OTTO/Awin-Produktfeed',
-                'scope'=>'portal_filtered',
-            );
+            return $this->automation_otto_filtered_feed_binding($snapshot_id);
         }
 
         if ($configured_url !== '' && $configured_partner_id === $snapshot_id) {
@@ -2404,9 +2422,15 @@ trait PPAR_Automation_Suite_Trait {
      * nicht an submit_button() übergeben werden.
      */
     private function automation_awin_start_button_attributes($selected_snapshot) {
-        return is_array($selected_snapshot) && absint($selected_snapshot['external_id'] ?? 0) > 0
-            ? array()
-            : array('disabled' => 'disabled');
+        if (!is_array($selected_snapshot) || absint($selected_snapshot['external_id'] ?? 0) <= 0) {
+            return array('disabled' => 'disabled');
+        }
+        $advertiser_id = absint($selected_snapshot['external_id'] ?? 0);
+        if ($advertiser_id === absint(self::OTTO_AWIN_ADVERTISER_ID)
+            && is_wp_error($this->automation_otto_filtered_feed_binding($advertiser_id))) {
+            return array('disabled' => 'disabled');
+        }
+        return array();
     }
 
     public function render_automation_page() {
