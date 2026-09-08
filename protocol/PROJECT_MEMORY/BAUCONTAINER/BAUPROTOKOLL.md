@@ -1730,3 +1730,29 @@ ERGEBNIS:
 
 BEZUG:
 ARCH-087.
+
+
+### 2026-09-08 – Lokaler Notfallprüfer V2 korrigiert
+
+REALER NUTZERLAUF:
+- ZIP-Außenhash PASS;
+- ZIP-Lesetest PASS;
+- innere Hashes PASS;
+- Prüfer stoppte bei `BUNDLE_VERIFY`.
+
+ROOT CAUSE:
+Prüfer V2 führte `git bundle verify` außerhalb eines Git-Repository-Kontexts aus.
+
+FIX:
+Prüfer V3 initialisiert vor Bundle-Verify ein separates temporäres Git-Repository.
+
+POSITIVTEST DES FIXES:
+- Bash-Syntax PASS;
+- Bundle-Verify im Test-Repository PASS;
+- Mirror-Restore PASS.
+
+NICHT ÜBERBEWERTET:
+Der reale Mac-Backupstand ist noch nicht als vollständiger `NOTFALL_WIEDERAUFBAU_PASS` freigegeben, bis V3 auf genau diesem Nutzerbackup durchläuft.
+
+BEZUG:
+BAU-040.
