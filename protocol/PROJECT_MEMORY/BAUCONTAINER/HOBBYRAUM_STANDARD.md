@@ -193,6 +193,10 @@ ERROR_SOURCE_REF: <autoritative Fach-Fehlerquelle>
 ERROR_SOURCE_BLOB_SHA: <Git-Blob der Fehlerquelle auf offiziellem Campus>
 CURRENT_STATE_REF: <zuständige CURRENT_STATE>
 CURRENT_STATE_BLOB_SHA: <Git-Blob der CURRENT_STATE auf offiziellem Campus>
+DECISION_SOURCE_REF: <AENDERUNGSREGISTER / dauerhafte WAS-WARUM-Quelle>
+DECISION_SOURCE_BLOB_SHA: <Git-Blob der Entscheidungsquelle auf offiziellem Campus>
+STANDARD_SOURCE_REF: <zuständiger Hobbyraum-Standard>
+STANDARD_SOURCE_BLOB_SHA: <Git-Blob des Standards auf offiziellem Campus>
 INTEGRATION_ALLOWED: true|false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -252,3 +256,23 @@ Ein `FAIL`, `PENDING`, `UNKLAR` oder `NICHT BELEGT` in einem Pflichtpunkt bedeut
 
 Wichtig:
 Diese Reihenfolge enthält keine Fachregeln. Sie erzwingt nur, dass bekannte Fehler, Nachbarwirkungen und reale Tests vor einer technischen Änderung berücksichtigt werden.
+### Maschinengehärtete Evidenzpflicht
+
+Bei `FIX_ALLOWED_FOR_CODEX_TEST` reicht kein manuelles `CHECK_*: PASS`.
+
+Der serverseitige Hardlock muss selbst belegen:
+
+- `RECOVERY_BASE_SHA` ist ein gültiger Commit und in der zuständigen CURRENT_STATE als letzter funktionierender Stand belegt;
+- M01–M33 sind vollständig in historischer Matrix, vertrauenswürdigem Runner **und** autoritativer Fach-Fehlerquelle vorhanden;
+- `ACTIVE_BLOCKER` steht real in Fach-Fehlerquelle und CURRENT_STATE;
+- `MAIN_SHA` steht real in CURRENT_STATE;
+- Pauls Kernregeln sind in der gebundenen Prüfkarte vorhanden: kein Sammelfix, historische Fehlerquelle gegenprüfen, bestehende Regression danach, echter 7/7-Lauf als Produktionsbeweis, Vertragskollision, Artefaktzustands-Parität, Hash-Semantik und Pre-/Post-Transformation;
+- das Änderungs-/Erklärungsregister enthält die eingefrorene Recovery-Regel, den kausalen Corridor und die Maschinenbeweis-Entscheidung;
+- der Hobbyraum-Standard enthält weiterhin vollständige Historienprüfung, letzten funktionierenden Stand, direkte Vor-/Nachstufe, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest;
+- der vertrauenswürdige M01–M33-Runner vom PR-Base/main läuft vollständig gegen den Kandidaten;
+- Produktcode darf Matrix/Runner nicht im selben PR verändern.
+
+Fehlt nur ein Beleg oder driftet nur ein gebundener Git-Blob:
+`FIX_FORBIDDEN`.
+
+Die `CHECK_*`-Felder sind nur Arbeitsnotizen und niemals Freigabeautorität.
