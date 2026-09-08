@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: **BLOCKED – M35 ANALYSE**
+STATUS: **AKTIV – M34/M35 HISTORY AUTHORITY MAINTENANCE**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -24,7 +24,7 @@ Letzte real erfolgreiche Stelle:
 - Stop erst bei Fact-Pack-Quellhashbindung.
 
 Root Cause:
-**noch nicht belegt**.
+**Fehlerklasse belegt:** Der reale PPM-6.7.9-Vertrag trennt Forschungs-/Inhalts-Fact-Pack-Hash und PPM-Registry-Hash. `production_plan_item.source_hashes` muss den nach Import von PPM gespeicherten Registry-Hash für `source_snapshot_id` enthalten. Derselbe Hindernisstangen-Fall hat historisch exakt diese Verwechslung bereits real geblockt. Der aktuelle M35-Stop liegt an derselben Vertragsgrenze.
 
 Kein Produktionskandidat aktiv.
 
@@ -39,21 +39,21 @@ STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
 MAIN_SHA: 2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea
 ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH
-PLAN_PHASE: M35_PPM_INPUT_CONTRACT_ANALYSIS
+PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 ACTIVE_HISTORY_CASE: M35
-HISTORY_EXPECTED_FAIL: NONE
+HISTORY_EXPECTED_FAIL: M35
 RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
-CANDIDATE_BRANCH: NONE
-CANDIDATE_HEAD_SHA: NONE
-TECHNICAL_SCOPE_PREFIXES: NONE
-ALLOWED_PATH_PREFIXES: NONE
+CANDIDATE_BRANCH: hobbyroom/m34-m35-history-authority-20260908
+CANDIDATE_HEAD_SHA: 2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
 CHECK_NEIGHBORS: PASS
 CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PENDING
+CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
 HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
 HISTORY_SOURCE_BLOB_SHA: 9f88203bf4f97c538acf75bdecf8051df1c6b3c2
@@ -77,22 +77,14 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Keine Reparatur. Erst den kompletten begrenzten PPM-Eingangsvertrag hart klären.**
+**History Authority zuerst. Noch keine Produktionsreparatur.**
 
-Read-only prüfen:
-
-1. Welche Source-Refs und Source-Hashes erwartet der reale PPM-6.7.9-Vertrag exakt?
-2. Welche Source-Struktur/Hashes erzeugt der frische aktuelle `fact_pack` tatsächlich?
-3. Wie werden diese Werte im `FACHWORKFLOW_HANDOFF_REQUEST.json` weitergegeben?
-4. Stimmen Algorithmus, Normalisierung, Ref-Pfad und Hashgegenstand zwischen:
-   - aktuellem Fact-Pack;
-   - aktuellem Handoff;
-   - PPM-Paket;
-   - Production-Plan;
-   - letztem realen 7/7-Stand `d841ed…`;
-   - letztem 7/7+107008-Stand `de21f6…`
-   überein?
-5. Erst wenn die **eine kausale Abweichung** belegt ist: genau einen KISS-Kandidaten definieren.
+1. Im separaten Branch `hobbyroom/m34-m35-history-authority-20260908` ausschließlich die bestehende Fehlermatrix und den bestehenden Regression-Runner lückenlos um **M34 und M35** erweitern.
+2. M34 muss auf current main PASS sein.
+3. M35 muss auf dem noch unreparierten current main als **erster neuer Regression-FAIL** exakt den PPM-Registry-Source-Hash-Vertragsbruch reproduzieren.
+4. Positiv-/Negativ-Selbsttest der M35-Regressionslogik ausführen.
+5. Keine Produktionsdatei im selben Wartungs-PR ändern.
+6. Erst nach integriertem History-Beweis: genau einen KISS-Produktionskandidaten definieren; bis dahin `FIX_FORBIDDEN`.
 
 ## VERBINDLICHER ARBEITSWEG
 
