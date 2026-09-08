@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-08
-STATUS: FROZEN REPAIR / B07-M32 MERGED / REALTEST PENDING
+STATUS: FROZEN REPAIR / B07-M32 LIVE ÜBERWUNDEN / HANDOFF-REQUEST AKTUELLER REALBLOCKER
 
 ## AUTORITÄT
 
@@ -58,13 +58,29 @@ Konkret:
 Der gebundene `fachworkflow_handoff.command` exponiert die erforderlichen Runtime-Pfade für
 `PPM679_PACKAGE_ZIP` und `PSERC_FIX_ZIP` nicht.
 
-Auf current main `30e93335…` wurde seit dem B07/M32-Merge noch **kein neuer Realtest** ausgeführt.
+## AKTUELLER REALTEST
 
-Damit ist B07/M32 **noch nicht als real behoben bewiesen**.
+Realtest auf current main `30e93335…`:
+- `CODEX_CLOUD_ENTRANCE_PASS`;
+- `CODEX_PRODUCTION_PREFLIGHT_PASS`;
+- `OFFICIAL_RUNTIME_ENTRY_PASS`;
+- `CURRENT_BOUND_ACTION_READY`;
+- `PRODUCTIVE_SINGLE_DOOR_READY`;
+- echter `fachworkflow_proof_handoff.py materialize` wurde gestartet.
 
-Nicht erreicht/belegt auf current main:
+Damit ist B07/M32 **real überwunden**.
+
+Neuer erster echter Blocker:
+`FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`
+
+Exakte Ursache:
+die gebundene `FACHWORKFLOW_HANDOFF_REQUEST.json` für den ersten Artikel fehlt am erwarteten Quarantine-Pfad.
+
+Nicht erreicht:
 - 107007 Abschluss;
 - 107008.
+
+Keine Codeänderung, kein Publish, kein WordPress-Write.
 
 Kein Publish, kein WordPress-Write, keine Codeänderung im Realtest.
 
