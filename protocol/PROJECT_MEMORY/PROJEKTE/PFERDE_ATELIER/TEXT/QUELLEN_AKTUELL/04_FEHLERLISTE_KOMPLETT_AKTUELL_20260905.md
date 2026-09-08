@@ -47,7 +47,7 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 | M29 | Release metadata current-batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M30 | Final context batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M31 | Codex-native bound action / kein separater Executor | im bestehenden Runner enthalten | **Runner-Test war stale:** erwartete fälschlich überhaupt keinen `fachworkflow_handoff`. Aktueller Sollweg bindet den Handoff innerhalb derselben Current Action und verlangt ausdrücklich keinen separaten Executor/keine separate Capability. Im Hobbyraum korrigiert und positiv/negativ geprüft. |
-| M32 | PPM runtime package path ohne Env-Abhängigkeit | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M32 | PPM runtime package path ohne Env-Abhängigkeit | im bestehenden Runner enthalten | **AKTUELLER LIVE-BLOCKER 08.09.2026:** `BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`; gebundener Submission-Command exponiert `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` nicht. |
 | M33 | GitHub ENDSTEMPEL ohne Codex git auth | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 
 ## B. Reale Blocker / Wiederholungsfehler außerhalb bzw. quer zur Matrix
@@ -98,7 +98,13 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 
 ### B07 – Runtime-Pakete PPM/PSERC nicht gebunden / Env-Variablen fehlen
 - Historisch: `PPM679_PACKAGE_ZIP` / `PSERC_FIX_ZIP` fehlten.
-- Repo-gebundene Pakete später ergänzt; Original-SHAs dokumentiert.
+- Repo-gebundene Pakete wurden später ergänzt; Original-SHAs sind dokumentiert.
+- **08.09.2026 erneut real aktiv:** Nach Merge des B02-Semantikdeltas auf main `36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9` erreichte der echte Codex-Lauf Cloud Entry, Production Preflight, Runtime Entry, Current Action READY und Single Door READY.
+- B02 `BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING` wurde dabei überwunden.
+- Neuer erster echter STOP: `BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`.
+- Konkreter Befund: der ausschließlich zulässige gebundene `fachworkflow_handoff.command` exponiert weder `PPM679_PACKAGE_ZIP` noch `PSERC_FIX_ZIP`; beide Variablen sind im Worker nicht gesetzt.
+- 107007 nicht abgeschlossen; 107008 nicht erreicht; kein Publish; keine Codeänderung im Test.
+- **Aktueller Status: LIVE AKTIV / Analysepflicht vor neuem Kandidaten.**
 
 ### B08 – `BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING`
 - Historischer realer Blocker nach PPM-Härtung.
