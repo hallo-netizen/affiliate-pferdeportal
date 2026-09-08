@@ -147,3 +147,9 @@ jobs:
           set -euo pipefail
           cd control/seo-text-buero/alternative-central-machine/prototype
           PYTHONDONTWRITEBYTECODE=1 python3 p22_signed_normal_draft_integration.py
+
+      - name: P23 map existing Content Validator enforcement
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p23_content_validator_map.py
