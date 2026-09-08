@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-08
-STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / REALTEST_ONLY
+STATUS: AKTIV / REPARATURKONZEPT EINGEFROREN / FIX_FORBIDDEN
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -15,12 +15,12 @@ Aktueller main:
 `30e933357dd9e5d3dde7cbd361c930b2a0c352c1`
 
 Aktueller erster echter Blocker:
-`BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`
+`FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`
 
-Fehlerklasse:
-bestehende B07/M32-Runtime-Paket-/Pfadbindung.
+Fehlerursache:
+die gebundene `FACHWORKFLOW_HANDOFF_REQUEST.json` für den ersten Artikel fehlt am erwarteten Quarantine-Pfad.
 
-B02 ist im aktuellen Realtest überwunden.
+B02 und B07/M32 sind im aktuellen Realtest überwunden.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
@@ -29,21 +29,21 @@ HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_FORBIDDEN
 OFFICE: TEXT
 MAIN_SHA: 30e933357dd9e5d3dde7cbd361c930b2a0c352c1
-ACTIVE_BLOCKER: BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND
-PLAN_PHASE: B07_M32_REALTEST_ONLY
+ACTIVE_BLOCKER: FACHWORKFLOW_PROOF_HANDOFF_BLOCKED
+PLAN_PHASE: HANDOFF_REQUEST_MISSING_ANALYZE_ONLY
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 RECOVERY_SEQUENCE: 1_GOLDMASTER_EXACT;2_REALTEST;3_ONE_MANDATORY_DELTA;4_REALTEST;5_PASS_FREEZE_OR_FAIL_FULL_REVERT;6_REPEAT
 CANDIDATE_BRANCH: NONE
 CANDIDATE_HEAD_SHA: NONE
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/;control/single-door-boundary/;control/output-quarantine/;control/CURRENT_STARTMASTER.json
 ALLOWED_PATH_PREFIXES: NONE
-CHECK_PAUL: PASS
-CHECK_HISTORY: PASS
-CHECK_LAST_GOOD: PASS
-CHECK_NEIGHBORS: PASS
-CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PASS
-CHECK_INVARIANTS: PASS
+CHECK_PAUL: PENDING
+CHECK_HISTORY: PENDING
+CHECK_LAST_GOOD: PENDING
+CHECK_NEIGHBORS: PENDING
+CHECK_REPEAT_CLASS: PENDING
+CHECK_POS_NEG: PENDING
+CHECK_INVARIANTS: PENDING
 INTEGRATION_ALLOWED: false
 END_HOBBYROOM_WORK_LOCK_V1
 ```
@@ -62,18 +62,22 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Nur echten 7/7-Realtest auf current main `30e93335…` ausführen. Kein weiterer Fix.**
+**Nur `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED` / fehlende `FACHWORKFLOW_HANDOFF_REQUEST.json` analysieren. Noch keinen Fix bauen.**
 
-Merge-Beleg:
-- PR #158;
-- Merge `30e933357dd9e5d3dde7cbd361c930b2a0c352c1`;
-- vor Merge `hardlock` PASS + `hardlock-base` PASS.
+Realtest-Beleg auf current main `30e933357dd9e5d3dde7cbd361c930b2a0c352c1`:
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
+- Current Action READY;
+- Single Door READY;
+- echter `fachworkflow_proof_handoff.py materialize` wurde erreicht;
+- B07/M32 ist damit real überwunden;
+- neuer erster Blocker: `FACHWORKFLOW_PROOF_HANDOFF_BLOCKED`, weil die gebundene `FACHWORKFLOW_HANDOFF_REQUEST.json` fehlt.
 
 Nächste Prüfschwelle:
-1. exakt derselbe echte 7/7-Realtest auf current main;
-2. B07/M32 muss real überwunden sein oder der Kandidat gilt nicht als PASS;
-3. beim ersten echten Blocker STOP;
-4. keine Reparatur im laufenden Test.
+1. nur Historie/Paul/letzten funktionierenden Stand/direkte Vor- und Nachstufe für diesen neuen Blocker prüfen;
+2. keine Codeänderung während der Analyse;
+3. erst nach vollständigem Pflichtcheck genau einen KISS-Kandidaten binden.
 
 ## VERBOTEN
 
