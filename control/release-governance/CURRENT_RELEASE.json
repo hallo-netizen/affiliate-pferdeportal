@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 42,
+  "generation": 43,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -173,7 +173,7 @@
       "live_evidence": "User screenshot 2026-09-08 10:40 Europe/Berlin: '3500 Produkte insgesamt verarbeitet; letztes Paket: 500. Fortsetzung vorgemerkt.'"
     },
     "otto_awin_full_feed_relevance": {
-      "status": "FIXED_LOCAL_6726_LIVE_RETEST_PENDING",
+      "status": "LIVE_PASS_6726_AUTOSTOP",
       "advertiser_id": 14336,
       "defect": "6.72.5 persisted formally valid OTTO feed rows before portal relevance classification.",
       "rootfix": [
@@ -198,10 +198,20 @@
       "evidence_ref": "release/affiliate-zentrale/evidence/awin_6726_otto_relevance_prefilter_20260908.txt",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.6_TEST.zip",
       "test_artifact_sha256": "f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e",
-      "next_test": "Read back Arbeitswarteschlange and Automatische Aktualisierung only; do not click any run/package button. Verify old Awin 14336 products job terminal failed with 6.72.6 hard-stop and automatic synchronization disabled.",
+      "next_test": "Do not start a new OTTO run. First isolate and clean the 4500 rows imported by the failed legacy OTTO run without touching non-OTTO/manual data; then bind the filtered Awin Create-a-Feed.",
       "checked_at": "2026-09-08",
       "install_status": "LIVE_INSTALL_PASS_6726",
-      "install_evidence": "User screenshot 2026-09-08: WordPress reports plugin updated successfully to 6.72.6; Affiliate-Automatisierung page loads."
+      "install_evidence": "User screenshot 2026-09-08: WordPress reports plugin updated successfully to 6.72.6; Affiliate-Automatisierung page loads.",
+      "live_evidence": {
+        "automation_enabled": false,
+        "executor": "server_cron",
+        "job_partner": "awin:14336",
+        "job_stage": "products",
+        "job_status": "failed",
+        "job_message": "Alter/ungefilterter OTTO-Vollfeed wurde beim 6.72.6-Sicherheitsupgrade gestoppt.",
+        "completed_run_imported": 4500,
+        "screenshot_time": "2026-09-08 11:18 Europe/Berlin"
+      }
     }
   },
   "branch_policy": {
@@ -496,7 +506,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "INSTALL_6_72_6_AUTO_STOP_OLD_FULLFEED_THEN_BIND_FILTERED_AWIN_FEED",
+    "current_milestone": "CLEANUP_OLD_OTTO_14336_IMPORTED_ROWS_THEN_BIND_FILTERED_AWIN_FEED",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
