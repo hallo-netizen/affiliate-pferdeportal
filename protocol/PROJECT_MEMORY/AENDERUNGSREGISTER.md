@@ -1684,7 +1684,8 @@ Der TEXT-Reparaturweg wird serverseitig auf eine einzige, maschinengebundene Evi
 - fortlaufende historische Fehlermatrix;
 - vertrauenswürdiger historischer Regression-Runner vom aktuellen PR-Base/main;
 - Änderungs-/Erklärungsregister;
-- campusweiter Hobbyraum-Standard.
+- campusweiter Hobbyraum-Standard;
+- vollständiges Ausführungs-/Testprotokoll.
 
 Der Runner-Bootstrap PR #159 ist auf main `2f3678aa…` integriert.
 Die stale Regressionen M26/M28/M31 wurden korrigiert; M28 besitzt einen Negativ-Mutanten-Selbsttest.
@@ -1698,6 +1699,7 @@ DAUERHAFTER ZWANGSWEG NACH AKTIVIERUNG VON PR #160:
 1. Branch, Head, Base und erlaubter Dateiscope müssen exakt zum offiziellen Hobbyraum passen.
 2. Manuelle `CHECK_*`-Felder sind keine Integrationsautorität.
 3. Alle Evidenzquellen werden per Git-Blob an exakt den geprüften Stand gebunden.
+3a. Das Ausführungsprotokoll muss aktuellen Blocker, current main und `RECOVERY_BASE_SHA` real enthalten; sonst BLOCK.
 4. Historische Fehler müssen ab M01 lückenlos sein; mindestens M01–M33 bleiben Pflicht.
 5. Matrix, Runner und autoritative Fehlerquelle müssen dieselbe akzeptierte Fehlerhistorie tragen.
 6. `ACTIVE_BLOCKER` muss real in Fehlerquelle und CURRENT_STATE stehen.
@@ -1728,7 +1730,7 @@ SELBSTSCHUTZ:
 STATUS:
 - PR #159: integriert.
 - PR #160: exakt eine Security-Datei.
-- aktueller PR-Head: `3fd7d6fd27c8f2d5770f081abd44136aa5620b53`.
+- aktueller PR-Head: `3059c907be76477e44e2396430551c4bec35feb6`.
 - PR #160 bleibt nur durch `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED` blockiert, weil der bestehende Hardlock seine eigene Gate-Datei schützt.
 - Ein direkter Mergeversuch wurde von GitHub mit Repository-Rule-Verstoß abgewiesen; kein Chat-seitiger Admin-/Ruleset-Schreibweg existiert.
 - Historischer PR #137 belegt denselben kontrollierten Einmal-Admin-Wartungsweg.
