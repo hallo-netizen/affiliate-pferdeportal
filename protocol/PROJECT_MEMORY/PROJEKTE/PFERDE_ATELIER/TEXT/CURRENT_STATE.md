@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
-STAND: 2026-09-07
-STATUS: FROZEN REPAIR / STEP 04 REALTEST BLOCKED AT CURRENT FACHWORKFLOW CONTEXT
+STAND: 2026-09-08
+STATUS: FROZEN REPAIR / B02 LIVE ÜBERWUNDEN / B07-M32 AKTUELLER REALBLOCKER
 
 ## AUTORITÄT
 
@@ -10,52 +10,73 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 
 ## CURRENT MAIN
 
-`46a807ac8fbdce5d1d4cf96c7e02d2cd4c206d5d`
+`36d1ecb52cf80c91e2f30f5a1eb7ecc1f14782c9`
+
+Merge:
+`Merge B02: bind current Codex as Fachworkflow worker`
 
 ## EINGEFRORENER REPARATURWEG
 
-`de21f6…` Goldmaster → Realtest → genau eine zwingende spätere Änderung → Realtest → PASS einfrieren oder FAIL vollständig zurückbauen → nächste Änderung.
+`de21f6…` Goldmaster → erster realer Blocker → Paul + Fehlerhistorie + letzter funktionierender Stand + direkte Vor-/Nachstufe prüfen → genau eine Pflichtänderung → Positiv/Negativ → echter 7/7-Realtest → PASS einfrieren oder Regression vollständig zurückbauen.
 
-Kein Konzeptwechsel, kein Sammelfix, keine Parallelreparatur.
+Kein Konzeptwechsel, kein Sammelfix, kein zweiter Fix auf einen fehlgeschlagenen Fix.
 
-## GOLDMASTER-BASIS
+## LETZTER SICHERER STAND
 
-Referenz:
+Goldmaster:
 `de21f6cd35c60849c551fd82f78e75ce57c99fab`
 
-Auf current main sind die drei motorrelevanten Cloud-Entry-Dateien hart bytegleich zur Goldmaster-Referenz:
-- `.github/workflows/pferde-atelier-deterministic-entrance-gate.yml`
-- `control/cloud-entry-gate/cloud_entry.py`
-- `control/cloud-entry-gate/cloud_repo_ci_test.py`
+Bewiesen:
+7/7 + 107008 Review PASS; späterer Fehler erst im GitHub-Endstempel/Auth-Bereich.
 
-## SCHUTZ
+Die motorrelevanten Cloud-Entry-Dateien wurden im Wiederaufbau exakt auf diesen Stand zurückgeführt.
+
+## AKTUELLER REALTEST
+
+Realtest auf current main `36d1ecb5…`:
+
+PASS:
+- Cloud Entry;
+- Production Preflight;
+- Runtime Entry;
+- Current Action READY;
+- Single Door READY.
+
+B02:
+`BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
+ist im aktuellen Realtest **überwunden**.
+
+Erster echter aktueller Blocker:
+`BOUND_REAL_PPM679_RUNTIME_PATH_NOT_EXPOSED_TO_SUBMISSION_COMMAND`
+
+Konkret:
+Der gebundene `fachworkflow_handoff.command` exponiert die erforderlichen Runtime-Pfade für
+`PPM679_PACKAGE_ZIP` und `PSERC_FIX_ZIP` nicht.
+
+Nicht erreicht:
+- 107007 Abschluss;
+- 107008.
+
+Kein Publish, kein WordPress-Write, keine Codeänderung im Realtest.
+
+## SCHUTZ / TESTGRENZE
 
 Ruleset `Pferde Atelier Main Hardlock`:
-- `hardlock` Pflicht
-- `hardlock-base` Pflicht
+- `hardlock` Pflicht;
+- `hardlock-base` Pflicht.
 
-Der Hobbyraum steht während des Baseline-Realtests auf:
-`FIX_FORBIDDEN`
+Der B02-Kandidat `562b71c7…` hatte vor Merge:
+- `hardlock` PASS;
+- `hardlock-base` PASS.
 
-Damit ist kein neuer technischer Reparaturkandidat freigegeben.
-
-## AKTUELLE NEXT ACTION
-
-Ausschließlich:
-**den exakt historischen B02-Worker-Binding-Kandidaten prüfen und danach real testen.**
-
-Bis zum Ergebnis:
-- keine Reparatur;
-- kein neuer Kandidat;
-- kein weiterer Security-/Hobbyraum-Umbau;
-- kein LanguageTool-/PPM-/SEO-/Link-/Tabellen-/Design-Fix;
-- kein Publish.
+Der danach auf dem permanenten Dispatcher-PR #107 ausgelöste `hardlock-base`-Lauf scheiterte separat an
+`IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil PR #107 gegen seinen alten Dispatcher-Base historische immutable Änderungen enthält.
+Das ist **kein TEXT-Produktionsblocker** und kein PASS-Beleg für den Produktionslauf.
 
 ## PAUL
 
-`PAUL_PIPELINE_AUDIT_20260906.md` ist verpflichtende technische Prüflinse für jeden späteren Einzelkandidaten, aber niemals Sammelfix.
-
-Nur ein real aufgetretener Fehler darf einen Paul-Punkt zum Reparaturkandidaten machen.
+`PAUL_PIPELINE_AUDIT_20260906.md` bleibt verpflichtende technische Prüflinse.
+Kein 41-Punkte-Sammelfix.
 
 ## ZIEL
 
@@ -64,159 +85,7 @@ Unverändert:
 
 Kein Auto-Publish.
 
+## NEXT ACTION
 
-## BASELINE-REALTEST – ERGEBNIS
-
-Erster echter Blocker:
-`BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
-
-Erreicht:
-- Cloud Entry PASS
-- Production Preflight PASS
-- Runtime Entry PASS
-- Current Action READY
-- Single Door READY
-
-Nicht erreicht:
-- 107007 Abschluss
-- 107008
-
-Keine Codeänderung im Test, kein Publish.
-
-## B02 – NÄCHSTER EINZELDELTA
-
-Historisch bereits bewiesener Fix:
-`c8a96e7a2f598de69134d90b143257c3559bc98a`
-
-Aktueller Kandidat:
-`75c9c8a9a2c16b604b2b21aa4253fe20131ff37f`
-
-Genau vier zusammengehörige Dateien. Kein weiterer Fix parallel.
-
-
-## B02 #152 – NICHT INTEGRIERT
-
-PR #152 wurde nach Hardlock-FAIL geschlossen.
-
-Erster Fehler:
-`INPUT_HASH_MISMATCH:1:control/output-quarantine/runtime_entry_gate.py`
-
-Es wurde nichts gemergt und kein Fix auf den fehlgeschlagenen Kandidaten gesetzt.
-Der alte Snapshot wird nicht weiterverwendet.
-
-
-## STEP 01 – PR #122
-
-Erster chronologischer Pflichtblock nach `de21f6…`:
-`93536d5a61d34d1b24d80d9341e1b437ed3774f5`
-
-Aktueller Kandidat:
-`2f5a71637ee750cf33c763e53c78d6815286105b`
-
-Genau vier geänderte Dateien; alle 4/4 exakt auf Zielstand.
-Kein Step 02 vor echtem 7/7-Test.
-
-
-## STEP 01 MERGE
-
-PR #153 merged:
-`46a807ac8fbdce5d1d4cf96c7e02d2cd4c206d5d`
-
-Bis zum Realtest-Ergebnis:
-kein Step 02, kein weiterer Kandidat.
-
-
-## STEP 01 REALTEST
-
-Vorheriger Blocker verschwand.
-Neuer erster Blocker:
-`BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`
-
-Dieser ist der nächste chronologische Pflichtblock PR #124.
-
-## STEP 02
-
-Kandidat:
-`e5fc1c88dfac81b3ef18ff9b02bf37a677b0185a`
-
-Genau eine geänderte Datei:
-`control/startmaster0107/fachworkflow_proof_handoff.py`
-
-Kein Step 03 vor Realtest.
-
-
-## STEP 02 MERGE
-
-PR #154 merged:
-`7df2008eab8839271230b5dbfc62d7404c6e52f4`
-
-Bis zum Realtest-Ergebnis:
-kein Step 03, kein weiterer Kandidat.
-
-
-## STEP 02 REALTEST
-
-Current main:
-`7df2008eab8839271230b5dbfc62d7404c6e52f4`
-
-Erster Blocker bleibt:
-`BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`
-
-Kein Rückschritt; Step 02 bleibt als notwendige Vorstufe.
-
-## STEP 03
-
-PR #125 – 107008 Import-Envelope.
-Kandidat:
-`d0bf2d6b33425a12bf6b9a57bb1819ac9d147458`
-
-5/5 geänderte Dateien exakt Zielstand.
-Kein Step 04 vor Realtest.
-
-
-## STEP 03 MERGE
-
-PR #155 merged:
-`a9cde12a7d82ada06e88235f0ae7e774a013ac93`
-
-Bis zum Realtest-Ergebnis:
-kein Step 04.
-
-
-## STEP 03 REALTEST
-
-Erster Blocker bleibt:
-`BOUND_REAL_PPM679_EXECUTION_ACTION_MISSING`
-
-Kein Rückschritt.
-
-## STEP 04
-
-PR #126 – realen PPM-Handoff in Current Action exponieren.
-Kandidat:
-`988498c76b02b33ecd1ede5c986454ca55c2ba07`
-
-4/4 geänderte Dateien exakt Zielstand.
-Kein Step 05 vor Realtest.
-
-
-## STEP 04 MERGE
-
-PR #156 merged:
-`67143a95ee98d6a7ce15167dfd8103ceee087f2d`
-
-Bis zum Realtest-Ergebnis:
-kein Step 05.
-
-
-## STEP 04 REALTEST RESULT
-
-HEAD:
-`67143a95ee98d6a7ce15167dfd8103ceee087f2d`
-
-Erster Blocker:
-`BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING`
-
-Der reale PPM-Handoff ist jetzt sichtbar und ausführbar; der Lauf scheitert erst am fehlenden gebundenen aktuellen R_001-Fachworkflow-Kontext.
-
-Kein Step 05 begonnen.
+Nicht hier dupliziert.
+Ausschließlich `HOBBYRAUM.md` ist die aktuelle NEXT-ACTION-Wahrheit.
