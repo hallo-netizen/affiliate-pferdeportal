@@ -13,7 +13,7 @@ Die einzige aktuelle Arbeits-/NEXT-ACTION-Wahrheit steht in `HOBBYRAUM.md`.
 `755b531ec08298a86cb0342c2db8c81f5b4df6f9`
 
 Letzter Merge:
-`Merge history machine-proof runner bootstrap`
+`PR #166 – Security: fix active history M28 row parser`
 
 Maschinenbeweis-Runner:
 - PR #159;
@@ -103,7 +103,7 @@ Ruleset `Pferde Atelier Main Hardlock`:
 - `hardlock-base` Pflicht;
 - kein Bypass-Akteur.
 
-Vorbereitete serverseitige Reparatur-Zwangsjacke:
+Aktive serverseitige Reparatur-Zwangsjacke:
 - PR #160;
 - Head `a6f6240c05adb75883416440b4618a6ce428ecc6`;
 - exakt eine Security-Datei: `control/paul-scope-gate/paul_scope_gate.py`;
@@ -233,23 +233,29 @@ GitHub-Test PR #166:
 
 M28-Produktionskandidat PR #161 bleibt unverändert offen und **nicht bewertet**.
 
-### PR #166 integriert – Parserfix aktiv
+### PR #166 integriert – Parserfix aktiv / Ruleset wieder geschlossen
 
 Security-PR #166 wurde kontrolliert gemergt.
 
-Neuer main:
+Current main:
 `755b531ec08298a86cb0342c2db8c81f5b4df6f9`.
 
 Verifiziert auf main:
 `_error_row_for_case()` nutzt jetzt korrekt
 `r"(?m)^\|\s*" + re.escape(case) + r"\s*\|.*$"`.
 
-Temporärer PR-only-Admin-Bypass ist nach dem Merge noch aktiv und muss wieder entfernt werden.
+Temporärer PR-only-Admin-Bypass danach entfernt und frisch verifiziert:
+- `bypass_actors: []`;
+- `current_user_can_bypass: never`;
+- Required Checks `hardlock` + `hardlock-base` aktiv.
 
-Bis `bypass_actors: []` frisch bestätigt ist:
-- `FIX_FORBIDDEN`;
-- PR #161 nicht verändern;
-- kein Test/Merge/Realtest.
+PR #161 wurde inhaltlich **nicht verändert**.
+Technischer Synchronisationscommit vorbereitet:
+`26d7b5b53044729ab6350f88d16d4ac0f6cacd03`.
 
-Danach wird PR #161 ausschließlich technisch auf den neuen main synchronisiert; seine vier M28-Inhaltsänderungen bleiben unverändert.
+Baumgrundlage:
+current main `755b531e…`.
+
+Darauf exakt die vier unveränderten M28-Dateiblobs des bisherigen PR #161.
+Kein zusätzlicher M28-Fix, kein Runner-/Gate-/Publish-Umbau.
 
