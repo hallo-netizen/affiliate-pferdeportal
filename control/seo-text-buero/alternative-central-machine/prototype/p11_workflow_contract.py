@@ -7,7 +7,9 @@ from typing import Any
 class Blocked(RuntimeError):
     pass
 
-# 1:1 from the current authoritative Fachworkflow STAGES list.
+# 1:1 stage checklist from the current authoritative Fachworkflow source.
+# IMPORTANT: this is a mandatory set, not the runtime execution order.
+# Runtime order remains owned exclusively by the deterministic central machine.
 REQUIRED_STAGES=(
     "research_fact_pack",
     "textmachine_article_type_structure",
@@ -31,6 +33,16 @@ STAGE_RESULT_KEYS={
     "publish_allowed",
 }
 
+def _verify_exact_stage_set(actual: list[str]) -> None:
+    if len(actual)!=len(REQUIRED_STAGES):
+        raise Blocked("STAGE_COUNT_INVALID")
+    if len(set(actual))!=len(actual):
+        raise Blocked("STAGE_DUPLICATE")
+    if set(actual)!=set(REQUIRED_STAGES):
+        missing=[x for x in REQUIRED_STAGES if x not in actual]
+        unknown=[x for x in actual if x not in REQUIRED_STAGES]
+        raise Blocked("STAGE_SET_DRIFT:missing="+",".join(missing)+";unknown="+",".join(unknown))
+
 def verify_authoritative_stage_source(source_path: Path) -> None:
     tree=ast.parse(source_path.read_text(encoding="utf-8"))
     value=None
@@ -39,14 +51,15 @@ def verify_authoritative_stage_source(source_path: Path) -> None:
             for target in node.targets:
                 if isinstance(target,ast.Name) and target.id=="STAGES":
                     value=ast.literal_eval(node.value)
-    if tuple(value or ())!=REQUIRED_STAGES:
-        raise Blocked("AUTHORITATIVE_STAGE_SET_DRIFT")
+    actual=list(value or ())
+    try:
+        _verify_exact_stage_set(actual)
+    except Blocked as exc:
+        raise Blocked("AUTHORITATIVE_STAGE_SET_DRIFT:"+str(exc)) from exc
 
 def verify_stage_results(results: Any) -> None:
     if not isinstance(results,list):
         raise Blocked("STAGE_RESULTS_LIST_REQUIRED")
-    if len(results)!=len(REQUIRED_STAGES):
-        raise Blocked("STAGE_COUNT_INVALID")
 
     actual=[]
     for row in results:
@@ -62,14 +75,9 @@ def verify_stage_results(results: Any) -> None:
         if row["publish_allowed"] is not False:
             raise Blocked("PUBLISH_FORBIDDEN:"+str(row["stage"]))
 
-    if tuple(actual)!=REQUIRED_STAGES:
-        if set(actual)==set(REQUIRED_STAGES):
-            raise Blocked("STAGE_ORDER_DRIFT")
-        if len(set(actual))!=len(actual):
-            raise Blocked("STAGE_DUPLICATE")
-        missing=[x for x in REQUIRED_STAGES if x not in actual]
-        unknown=[x for x in actual if x not in REQUIRED_STAGES]
-        raise Blocked("STAGE_SET_DRIFT:missing="+",".join(missing)+";unknown="+",".join(unknown))
+    # Checklist semantics only: every required proof exactly once.
+    # The checklist must never become a second workflow controller.
+    _verify_exact_stage_set(actual)
 
 def canonical_pass_results() -> list[dict]:
     return [
