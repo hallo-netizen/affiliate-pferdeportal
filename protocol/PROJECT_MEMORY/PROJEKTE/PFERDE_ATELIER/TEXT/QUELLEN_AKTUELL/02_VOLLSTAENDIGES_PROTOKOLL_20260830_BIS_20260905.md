@@ -1232,3 +1232,32 @@ Einordnung:
 - kein M17-/M22-/M35-Produktionsfehler;
 - Ruleset-Bypass ist aktuell leer;
 - für Integration der eigenen Gate-Wartung ist einmalig der bekannte Repository-admin-PR-Bypass nötig; danach sofort wieder entfernen.
+
+
+### 09.09.2026 – PR #200 integriert / M17 auf fresh main neu gebunden
+
+PR #200:
+- gemergt;
+- neuer main `462a67b4d25c6d1d7bf4cc1f010116c0017f7da6`;
+- ausschließlich bestehende Matrix, bestehender Regression-Runner und bestehendes `paul_scope_gate.py`;
+- kein Produktionscode;
+- sequenzieller Beweis jetzt aktiv: aktiver Fehler muss verschwinden; optional darf exakt ein späterer bereits bekannter Fehler erster FAIL werden.
+
+M17:
+- derselbe PR #199 wiederverwendet, kein neuer Produktions-PR;
+- Branch wurde auf fresh main zurückgesetzt und exakt dieselben sechs bewiesenen M17-/Hashdateien erneut aufgetragen;
+- fresh Head `45b318673856ff45f42b292c04f56f06ddf76ab1`;
+- Scope unverändert: 1 Runtime-Logikdatei + 5 reine Hash-/Bindungsdateien;
+- erwarteter Nachherzustand ist jetzt korrekt gebunden: M17 weg, M22 als nächster bekannter erster FAIL zulässig.
+
+Dispatcher:
+- permanenter PR #107 / `codex-chat-launcher` auf main `462a67b4d25c6d1d7bf4cc1f010116c0017f7da6` synchronisiert.
+
+Schutz:
+- temporärer Repository-admin-PR-Bypass ist nach #200 aktuell noch aktiv;
+- deshalb kein Produktionsmerge, bis der Bypass wieder entfernt ist.
+
+M22/M35:
+- M22 bleibt eigener nächster Fix;
+- M35 bleibt separater geparkter Kandidat;
+- keine Sammelfixes.
