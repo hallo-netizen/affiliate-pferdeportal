@@ -33,6 +33,79 @@ VERBOTEN auf dieser Route:
 10. Interne Signierung wird nicht als Voraussetzung wieder eingeführt.
 11. Jede Konzeptänderung wird lokal positiv und negativ getestet, bevor sie als Kandidat gilt.
 
+## CHAT-START-ZWANGSGATE – GILT AUCH IN JEDEM NEUEN CHAT
+
+Bevor in irgendeinem Chat technische ACM-Arbeit begonnen, fortgesetzt, geplant oder ein Kandidat erzeugt wird, müssen zwingend frisch gelesen werden:
+
+1. `control/seo-text-buero/alternative-central-machine/00_ROUTE_BOUNDARY.md`
+2. `control/seo-text-buero/alternative-central-machine/AKTENSCHRANK/58_ACM_ROUTE_STATUS_20260909.md`
+3. die dort ausdrücklich benannten autoritativen Fehler-/Übergabequellen, wenn sie für den nächsten Schritt relevant sind.
+
+Ohne diesen frischen Read:
+`ACM_CHAT_START_BLOCKED`
+
+Verboten ist:
+- aus Erinnerung weiterarbeiten;
+- aus einem alten Chatstatus weiterarbeiten;
+- eine ältere P0–P59-Akte als CURRENT verwenden;
+- einen früheren PASS ungeprüft auf den aktuellen Schritt übertragen.
+
+### Übernahme alter Bausteine – harte Trennung
+
+Altbestand darf nur in zwei Klassen behandelt werden:
+
+**A. Fach-/Sicherheitsbaustein**
+Beispiele:
+- Textmaschine
+- PPM
+- PSERC
+- PSTE
+- LanguageTool-Regeln
+- vorhandene Validatoren
+- externe Signatur
+- WordPress Draft-/Readback-/DOM-Prüfer
+
+Diese dürfen nur unverändert als bestehende Autorität benutzt werden.
+
+**B. Workflow-/Übergabe-/Orchestrierungsbaustein**
+Beispiele:
+- Current Action / 107007-Orchestrierung
+- Handoff-Vertrag
+- Stage-Proof-Semantik
+- Reihenfolge-/State-/Worker-Bindung
+- Runner/Controller/Executor
+
+Diese dürfen **nicht automatisch** übernommen werden, nur weil sie bereits existieren.
+
+Vor jeder solchen Übernahme muss separat bewiesen werden:
+1. keine bekannte Fehlerklasse wird mit übernommen;
+2. keine neue oder alte Worker-/Chat-Freiheit bleibt bestehen;
+3. keine doppelte Wahrheit entsteht;
+4. keine Lifecycle-/Reihenfolgekollision entsteht;
+5. Gesamtsystemwirkung ist positiv/negativ geprüft.
+
+Fehlt einer dieser Beweise:
+`OLD_WORKFLOW_COMPONENT_ADOPTION_BLOCKED`
+
+### Bekannter Fehlgriff dieser Route
+
+Die Entscheidung P27/P38, `FACHWORKFLOW_HANDOFF_REQUEST.json` als komplette einzige Produktions-Eingangswahrheit zu übernehmen, war zu breit.
+
+Zulässige Motivation war:
+- vorhandenen Chat/Codex-Start wiederverwenden;
+- keine neue Dateiübergabe erfinden;
+- Identitäten/Hashes nicht neu erfinden.
+
+Nicht ausreichend getrennt wurde:
+- **Transport-/Identitätsvertrag** der Datei
+gegen
+- **alte 12-Stage-Orchestrierungs-/Proof-Semantik**.
+
+Dadurch wurde eine bekannte Altlast erneut in den Realintegrationstest hineingetragen.
+
+Diese Übernahme gilt deshalb nicht mehr als pauschal freigegeben.
+Transport/Identität und Workflow-/Stage-Semantik müssen getrennt bewertet werden.
+
 ## PRE-CHANGE-ZWANGSGATE – FAIL CLOSED
 
 Vor **jeder** technischen Änderung, jedem Fix, jedem neuen Testkandidaten und jedem Schreibzugriff muss diese Prüfung vollständig beantwortet werden.
