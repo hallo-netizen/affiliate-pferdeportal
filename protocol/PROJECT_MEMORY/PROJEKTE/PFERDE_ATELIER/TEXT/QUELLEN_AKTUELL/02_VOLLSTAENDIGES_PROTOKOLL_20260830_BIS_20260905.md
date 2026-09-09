@@ -1416,3 +1416,28 @@ Nächster Beweis:
 - derselbe trusted Runner muss auf dem Kandidaten M01–M35 vollständig GESAMT PASS liefern.
 
 Kein Publish.
+
+
+### 09.09.2026 – M35 gemergt / Reparaturphase beendet / Realtest freigegeben
+
+M35:
+- PR #197 regulär gemergt;
+- neuer main `05f5d00ec924e108d6700f39d22d9ec1d47318a6`;
+- `hardlock` PASS;
+- `hardlock-base` PASS;
+- final gebundener Beweis:
+  - `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M35`;
+  - `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M35`;
+- `HISTORY_EXPECTED_FAIL=NONE`: Kandidat musste M01–M35 vollständig bestehen;
+- Ruleset-Bypass vor Merge leer.
+
+Dispatcher:
+- `codex-chat-launcher` auf exakt `05f5d00ec924e108d6700f39d22d9ec1d47318a6` synchronisiert;
+- PR #107 bleibt permanent offen und wird nicht gemergt.
+
+Folge:
+- Reparaturphase M01–M35 beendet;
+- jetzt ausschließlich echter frischer 7/7-Realtest;
+- im Realtest keine Reparatur;
+- Stop nur bei erstem echten BLOCKED/USER_ACTION_REQUIRED oder bei 7/7 + 107008 PASS;
+- kein Auto-Publish / keine WordPress-Schreibaktion.
