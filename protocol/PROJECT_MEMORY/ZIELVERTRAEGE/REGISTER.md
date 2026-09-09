@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-09-05
+STAND: 2026-09-09
 
 ## Pflichtfelder
 
@@ -18,20 +18,7 @@ STAND: 2026-09-05
 
 Bei neuer Facharbeit prüft der zuständige Bereich, ob ein aktiver Zielvertrag existiert.
 
-Bei:
-- Projektstart
-- größerem Umbau
-- Modulfreigabe
-- komplexer Reparatur mit festem Endzustand
-
-soll ein Zielvertrag angelegt oder referenziert werden.
-
-## Noch aufzunehmende bestehende Verträge
-
-Bereits vorhandene historische Zielverträge aus Repository/Masterakten werden bei der Archiv-/Masterdatei-Aufnahme hier eingeordnet.
-
 Nichts aus alten Zielverträgen still ersetzen.
-
 
 ## ZV-MOD-001 – Allgemeingültiger Kategorie-Master 016
 
@@ -62,7 +49,6 @@ maßgeblich sind die im Master gebundenen 14 Stufen, Hardlocks, Research-/Covera
 BELEGSTATUS:
 lokal/fresh R10 stark PASS; echter Live-WordPress-Deploymentlauf noch offen.
 
-
 ## ZV-MOD-003 – Designvertrag V104
 
 TITEL:
@@ -85,7 +71,6 @@ gebundene V104-Design-/QA-Regeln; keine stillen projektspezifischen Übernahmen.
 
 PFERDE-ANWENDUNG:
 aktueller Live-Stand 1.50.472 verwendet weiterhin Contract V104 unverändert.
-
 
 ## ZV-TEXT-001 – STARTMASTER0107 aktueller Produktionszielvertrag
 
@@ -113,7 +98,6 @@ Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
 NACHFOLGER:
 keiner belegt.
 
-
 ## ZV-PV-001 – Produktvergleich V1
 
 TITEL:
@@ -123,13 +107,36 @@ GELTUNGSBEREICH:
 PFERDE_ATELIER / PRODUKTVERGLEICH + allgemeingültiger Produktvergleichskern
 
 STATUS:
-AKTIV
+ABGELÖST
 
 FASSUNG:
 V1 / 2026-09-07
 
 HAUPTQUELLE:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/ZIELVERTRAG_V1.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
+
+NACHFOLGER:
+ZV-PV-002
+
+## ZV-PV-002 – Produktvergleich Dossier-zu-Text V2
+
+TITEL:
+Gebundener Produktvergleichsdossier-Workflow V2
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / PRODUKTVERGLEICH + allgemeingültiger Produktvergleichskern
+
+STATUS:
+AKTIV
+
+FASSUNG:
+V2 / 2026-09-09
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/ZIELVERTRAG_V2.md`
 
 VERANTWORTLICHER BEREICH:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/`
