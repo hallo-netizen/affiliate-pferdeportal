@@ -111,7 +111,7 @@ Frisch geprüft:
 Frisch geprüft:
 - Branch `alternative/seo-text-central-machine-20260908`;
 - Draft-PR #195 offen/ungemergt;
-- aktueller Head `3cd425f0a212b8cf79eea578c687bfbab4485046`;
+- aktueller Head `95df66ce3c4a706fc7d8f7f61d8ce01eb44fbbc0`;
 - ACM bleibt strikt vom laufenden STARTMASTER-/Reparaturweg getrennt;
 - bestehende Textmaschine und Fachregeln bleiben autoritativ;
 - Controller ist beitragsart-unabhängig;
