@@ -62,6 +62,9 @@ def _load_exact_handoff(path:Path)->dict:
         raise HandoffBlocked("HANDOFF_PRODUCTION_CONTEXT_INVALID")
     if item.get("canonical_article_id")!=cid or item.get("plan_slot")!=slot:
         raise HandoffBlocked("HANDOFF_PLAN_ITEM_IDENTITY_MISMATCH")
+    plan_item_key=item.get("plan_item_key")
+    if not isinstance(plan_item_key,str) or not plan_item_key:
+        raise HandoffBlocked("HANDOFF_PLAN_ITEM_KEY_MISSING")
     if release.get("canonical_article_id")!=cid or release.get("plan_slot")!=slot:
         raise HandoffBlocked("HANDOFF_RELEASE_ITEM_IDENTITY_MISMATCH")
     if header.get("contract")!="production_plan_v4" or "items" in header:
@@ -79,13 +82,14 @@ def _load_exact_handoff(path:Path)->dict:
 def execute_handoff(path:Path)->dict:
     request=_load_exact_handoff(path)
 
-    # KISS: the existing canonical_article_id is the one bound item identity.
-    # The fixed P22 adapter independently verifies it against PPM prepare() before signing/write.
+    # KISS: use the two identities PPM already owns; do not invent or merge them.
+    plan_item_key=request["production_plan_item"]["plan_item_key"]
     proc=subprocess.run(
         [
             sys.executable,str(P22),
             "--job-id",request["batch_sha256"],
-            "--expected-item-id",request["canonical_article_id"],
+            "--expected-item-id",plan_item_key,
+            "--expected-canonical-article-id",request["canonical_article_id"],
         ],
         cwd=HERE.parents[3],
         text=True,
@@ -95,19 +99,29 @@ def execute_handoff(path:Path)->dict:
     )
     if proc.returncode!=0:
         # If identity is wrong, P22 blocks after no-write prepare and before signing/write.
+        blocked_item=None
+        blocked_canonical=None
         try:
-            blocked=_parse_status(proc.stdout,"P22_BOUND_ITEM_ID_BLOCKED")
+            blocked_item=_parse_status(proc.stdout,"P22_BOUND_ITEM_ID_BLOCKED")
         except HandoffBlocked:
-            blocked=None
-        if isinstance(blocked,dict):
-            raise HandoffBlocked("HANDOFF_ITEM_NOT_BOUND_TO_PPM_PREPARE")
+            pass
+        try:
+            blocked_canonical=_parse_status(proc.stdout,"P22_BOUND_CANONICAL_ID_BLOCKED")
+        except HandoffBlocked:
+            pass
+        if isinstance(blocked_item,dict):
+            raise HandoffBlocked("HANDOFF_PLAN_ITEM_KEY_NOT_BOUND_TO_PPM_PREPARE")
+        if isinstance(blocked_canonical,dict):
+            raise HandoffBlocked("HANDOFF_CANONICAL_ID_NOT_BOUND_TO_PPM_PREPARE")
         raise HandoffBlocked("FIXED_ITEM_ADAPTER_FAILED")
 
     proof=_parse_status(proc.stdout,"P22_SIGNED_NORMAL_DRAFT_BOUNDARY_PASS")
     if proof.get("job_id")!=request["batch_sha256"]:
         raise HandoffBlocked("HANDOFF_BATCH_IDENTITY_DRIFT")
-    if proof.get("item_id")!=request["canonical_article_id"]:
-        raise HandoffBlocked("HANDOFF_ITEM_IDENTITY_DRIFT")
+    if proof.get("item_id")!=plan_item_key:
+        raise HandoffBlocked("HANDOFF_PLAN_ITEM_KEY_DRIFT")
+    if proof.get("canonical_article_id")!=request["canonical_article_id"]:
+        raise HandoffBlocked("HANDOFF_CANONICAL_ID_DRIFT")
 
     required_true=(
         "prepare_no_write","external_signature_verified",
@@ -122,6 +136,7 @@ def execute_handoff(path:Path)->dict:
         "status":"HANDOFF_ITEM_PASS_NO_PUBLISH",
         "batch_sha256":request["batch_sha256"],
         "canonical_article_id":request["canonical_article_id"],
+        "plan_item_key":plan_item_key,
         "plan_slot":request["plan_slot"],
         "input_truth":"FACHWORKFLOW_HANDOFF_REQUEST.json",
         "new_job_manifest_used":False,
