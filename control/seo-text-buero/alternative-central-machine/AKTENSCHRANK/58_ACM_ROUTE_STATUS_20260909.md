@@ -27,11 +27,11 @@ Produktive Fehlermatrix bleibt separat:
 **PRODUKTIONSADOPTION: BLOCKED**
 
 Aktueller vollständig getesteter ACM-Head:
-`7aaf0c2ac8ad41523e9afbf49d78b8b9b8d0a1f3`
+`0ddda8ab03101e8a9ac6297e99455b9de0d3f6ce`
 
 Harte Gesamtprüfung auf diesem Stand:
-- Alternative SEO Text P3 Isolated Lab – Run `34374100752` – SUCCESS
-- Alternative SEO Text P8 Signer Isolation Lab – Run `34374100651` – SUCCESS
+- Alternative SEO Text P3 Isolated Lab – Run `34380362468` – SUCCESS
+- Alternative SEO Text P8 Signer Isolation Lab – Run `34380362404` – SUCCESS
 - ACM Machine Hardlock – PASS
 - P0–P47 – PASS
 - ACM first full one-article lab test – PASS
@@ -170,6 +170,35 @@ Sie dürfen nicht:
 Provenienz/Hashes bleiben gebunden.
 Nach finaler externer Signatur ist jede Byteänderung fail-closed.
 
+## ENDSTRECKE – HARTER AKTUELLER BEWEIS
+
+Der Zielweg ab fertigem Fachprodukt ist technisch bewiesen:
+
+`fertiger geprüfter Artikel/Batch -> neutrale Enddatei -> externer Endstempel -> WordPress-Preimportprüfung -> Draft-only`
+
+Neutraler Dateiname:
+`PFERDE_ATELIER_SIGNED_ARTICLE_BATCH_FINAL.json`
+
+Harter Test auf aktuellem ACM-Head:
+- Endstempel + echter `ENDSTEMPEL_WORDPRESS_VERIFY.php`: PASS für 1, 3, 25 und 1000 Artikel;
+- tatsächliche Artikelzahl ausschließlich dynamisch im Manifest;
+- kein 7er-Limit;
+- Artikelbytes bleiben unverändert;
+- WordPress prüft vor dem ersten Write Signatur, Manifest, Batch, Dateiset, Byte-Längen und SHA-256;
+- `publish_allowed=false`.
+
+Negativ jeweils BLOCKED:
+- ein Byte verändert;
+- Artikel fehlt;
+- zusätzlicher Artikel;
+- falsche deklarierte Anzahl;
+- falsche Signatur;
+- Replay/bereits verwendeter Batch.
+
+Der vorhandene PPM-Produktionskern verarbeitet Artikel in seinen bestehenden zulässigen Chunks/Items. Das ist kein Gesamtlimit der Enddatei oder des Systems.
+
+Die 12 Fachnachweise werden nicht an WordPress übergeben und von WordPress nicht erneut fachlich bewertet. Sie gehören an ihre reale Stelle im Fachworkflow.
+
 ## KORREKTUR EINES BISHERIGEN ACM-FEHLWEGS
 
 Die frühere ACM-Gleichsetzung
@@ -203,42 +232,35 @@ Damit ist für die Nicht-PPM-Nachweise noch nicht allgemein technisch bewiesen:
 
 Das ist der nächste reale Integrationspunkt.
 
-## DIREKTE PRÜFERHERKUNFT – HARTER STAND
+## DIREKTE PRÜFERHERKUNFT – AUTORITATIVER ABGLEICH
 
-Ohne neue Architektur direkt an vorhandene echte Prüfer bindbar:
+Die frühere ACM-Einordnung `8/12 direkt belastbar, research_fact_pack erster Blocker` war zu weitgehend und wird verworfen.
 
-- `textmachine_article_type_structure` -> PPM Content Validator
-- `table_contract` -> PPM Content/Table Validator
-- `internal_links` -> PPM Content/Link Validator; konkrete NEW-Linkziel-Erzeugung bleibt separat offen
-- `ppm` -> reale PPM-Ausführung
-- `pserc` -> PSERC Bridge/Supervisor
-- `duplicate_cannibalization` -> Editorial Plan Runtime Gate / Systemwide Duplicate Guard
-- `seo` -> PPM Target-Keyword-Check + Keyword-Ownership-Gate
-- `publish_safety` -> vorhandene No-Write/No-Publish-/Signer-Grenze
+Autoritativer TEXT-`CURRENT_STATE`-Abgleich 09.09.2026:
 
-Noch NICHT direkt herkunftssicher bewiesen:
+Bereits eindeutig zugeordnet:
+- SEO / PSTE / Duplicate-Cannibalization = vorhandene Upstream-READY-Autorität;
+- PPM 6.7.9 = realer gebundener Prüfer;
+- PSERC = realer Bestandteil des PPM-/Bridge-Korridors;
+- Publish-Safety = reale äußere Guards/Receipts;
+- Artikeltyp/Struktur, Tabelle, Linkvalidierung und LanguageTool-Evidence besitzen vorhandene PPM-Fachregeln/Validatoren; deren Lifecycle-Bindung darf nicht durch Worker-Selbst-PASS ersetzt werden.
 
-1. `research_fact_pack`
-   - Fact-Pack, Status und Hashbindungen werden geprüft.
-   - PSERC verlangt `research_evidence_gate_status=PASS` plus Attest-Hash.
-   - Im aktuellen Repo wurde aber kein vorhandener Prüfer gefunden, der dieses Research-Attest selbst nachprüft.
-   - Daher kein GO für direkte Prüferherkunft.
+Die zwei aktuell autoritativ offenen Bedeutungs-/Bindungspunkte sind:
 
-2. `languagetool`
-   - vorhandene Qualitätskomponenten prüfen LanguageTool-Evidence.
-   - der ausführbare LT-6.8-Runtime ist aktuell nicht reproduzierbar gebunden.
-   - daher kein vollständiger echter Runtime-Nachweis.
+1. `CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`
+   - PPM kann drei gebundene Links hart prüfen;
+   - bestehende Rollen: `parent_category`, `semantic_related`, `further_information`;
+   - für NEW fehlt im aktuellen gebundenen Pfad die deterministische Quelle, die die drei konkreten Ziele auswählt;
+   - Worker/Chat darf diese Auswahl nicht frei erfinden.
 
-3. `pste`
-   - historischer PSTE Planning-/Pre-Title-Gate ist positiv/negativ belegt.
-   - PSERC blockiert falsche PSTE-Verträge.
-   - die aktuelle zwingende ausführbare PSTE-Bindung im produktiven Pfad ist aber noch nicht vollständig belegt.
+2. `CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
+   - Source-/Formatregeln existieren bereits in PPM;
+   - ein realer Rendered-DOM-Validator existiert ebenfalls;
+   - echter DOM-Zustand entsteht erst nach einem WordPress-Draft;
+   - deshalb darf kein `design_format`-PASS vor diesem Zustand behauptet werden;
+   - die Lifecycle-Bindung muss an den vorhandenen realen Prüfer erfolgen, ohne neue Designregel und ohne menschliche Sichtprüfung als technische Autorität.
 
-4. `design_format`
-   - keine aktuelle unveränderte eigenständige Stage-Autorität belegt.
-   - keine neue Bedeutung und keine WordPress-Zwischenprüfung erfinden.
-
-Damit sind aktuell **8/12 Prüferherkünfte direkt belastbar**, 4/12 offen.
+Research ist nach autoritativem TEXT-Abgleich **nicht der erste aktuelle Corridor-Blocker**.
 
 ## KISS-GRENZE
 
@@ -274,15 +296,20 @@ Diese Punkte werden nicht durch neue Architektur verdeckt.
 
 ## NEXT ACTION
 
-**STATUS: BLOCKED / KEINE TECHNISCHE ÄNDERUNG.**
+Nur die zwei autoritativ offenen Bindungen bearbeiten, in dieser Reihenfolge:
 
-Erster offene Punkt ist `research_fact_pack`:
-Im aktuellen zulässigen Bestand wurde kein echter Research-Attest-Prüfer gefunden, der den Worker-Selbst-PASS technisch ausschließt.
+1. `design_format`:
+   vorhandenen deterministischen Rendered-DOM-Prüfer an den Zustand binden, an dem realer WordPress-Draft/Readback vorliegt.
+   Keine menschliche Sichtprüfung als Gate.
+   Kein neuer Designprüfer.
+   Positiv/negativ + kompletter P3/P8-Gegencheck.
 
-KISS-Folge:
-- keinen neuen Research-Prüfer bauen;
-- keinen Adapter/Runner/Handoff ergänzen;
-- nur weiter, wenn ein bereits vorhandener autoritativer Research-Prüfpfad gefunden/belegt wird oder eine ausdrückliche Grundsatzentscheidung die aktuelle Architekturgrenze ändert.
+2. `internal_links`:
+   keine neue Linklogik erfinden.
+   Entweder vorhandene deterministische NEW-Quelle finden/binden oder BLOCKED.
+   Chat/Worker darf konkrete Linkziele nicht frei wählen.
+
+Die Enddatei-/Endstempel-/WordPress-Preimportstrecke wird nicht erneut umgebaut; sie ist auf 1/3/25/1000 hart bewiesen.
 
 ## VERBINDLICHER ARBEITSWEG
 
