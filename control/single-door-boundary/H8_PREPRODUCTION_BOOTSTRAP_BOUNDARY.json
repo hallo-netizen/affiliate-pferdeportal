@@ -39,7 +39,7 @@
     },
     {
       "ref": "control/single-door-boundary/preproduction_provenance_guard.py",
-      "git_blob_sha1": "6ca2e875a85b8976903301d839b2ddebfa3981d9"
+      "git_blob_sha1": "5c2b3debceced4068124910201e8c891526a491f"
     },
     {
       "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_guard_h8.py",
