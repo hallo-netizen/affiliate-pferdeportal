@@ -146,13 +146,13 @@ STOP. Nicht weiterbauen.
 - Regel zur Laufzeit deaktivieren
 - freien Folgeschritt einschleusen
 
-## Aktueller Arbeitsstand
+## Historischer Arbeitsstand beim Start der Route
 
-Noch KEIN Produktions-PASS.
-Noch KEINE Anbindung der echten Textmaschine.
+Dieser Abschnitt ist historische Ausgangslage und keine aktuelle Arbeitswahrheit.
 
-Nächster zulässiger Prototypschritt:
-P0 so härten, dass Validatoren, Reihenfolge und Zustandsübergänge vollständig nicht-injizierbar und nicht frei steuerbar sind; dann 3-Worker-Positiv/Negativtest und GO/STOP.
+Zum Start waren Produktions-PASS und echte Textmaschinen-/PPM-Anbindung noch nicht bewiesen.
+Der damalige nächste Schritt war P0.
+Der aktuelle Stand steht ausschließlich unten unter **AKTUELLER ROUTENSTAND P46**.
 
 
 ## HARD RULE – PROTOTYP-ENTWICKLUNG VON GROSS NACH KLEIN
@@ -267,3 +267,55 @@ Minimaler Realintegrations-Prototyp mit genau einem gebundenen Item.
 HARD RULE:
 Bei jeder Unstimmigkeit zuerst vorhandenen Baustein prüfen.
 Keine neue Architektur als Reflex.
+
+
+## AKTUELLER ROUTENSTAND P46
+
+Stand: 2026-09-09
+Status: AKTIV – REALINTEGRATIONS-PROTOTYP, NOCH KEINE PRODUKTIONSFREIGABE
+
+Aktueller Alternativbranch:
+`alternative/seo-text-central-machine-20260908`
+
+Aktueller Beweisstand:
+- P0–P46 im gemeinsamen isolierten Laborlauf PASS
+- historischer 7/7-Goldbatch vollständig hashgeprüft
+- 7 × derselbe reale Ein-Item-Pfad PASS
+- vorhandene `FACHWORKFLOW_HANDOFF_REQUEST.json` bleibt einzige Produktions-Eingangswahrheit
+- kein neues Jobmanifest im Zielbetrieb
+- dünner Handoff-Controller ohne frei wählbare Route/Worker/Validator/Engine
+- plan_slot / canonical_article_id / plan_item_key vollständig getrennt und fail-closed gebunden
+- bestehender PPM-`prepare()`-Punkt als schreibfreie Vor-Signatur-Grenze bewiesen
+- externe Signatur vor Draft-Write bewiesen
+- bestehende öffentliche PPM-Prewrite-Bausteine vorhanden
+- exakte Prewrite-Reihenfolge aus bestehendem `execute_plan` gelesen
+- private Helper wurden nur inventarisiert; keine Reflection-/Umgehungslösung
+- publish_allowed=false
+
+### AKTUELLE EINZIGE NEXT ACTION
+
+P47 – kleinster Realintegrationsschritt:
+
+Aus exakt der bestehenden `FACHWORKFLOW_HANDOFF_REQUEST.json` im bereits vorhandenen dünnen Controller ausschließlich die in P44/P45 belegten **öffentlichen bestehenden PPM-Bausteine** in der belegten Reihenfolge bis zum schreibfreien `prepare()` ausführen.
+
+Danach ausschließlich:
+`prepare -> externe Signatur -> verifizierter Prepared-Payload -> bestehendes create_draft -> Readback/DOM -> STOP ohne Publish`.
+
+Harte STOP-Regel:
+Wenn dafür private PPM-Helper kopiert, per Reflection aufgerufen, neue PPM-APIs, ein zweites Handoff, ein neues Jobmanifest oder ein weiterer Controller nötig wären:
+STOP. Erst vorhandenen Baustein erneut prüfen.
+
+### PARALLELWEG-GRENZE
+
+Der produktive STARTMASTER-/Reparaturweg bleibt vollständig getrennt.
+Dessen CURRENT_STATE, Fehlerstatus, Hobbyraum und aktive Reparaturbranches werden von dieser Route nicht überschrieben.
+
+### CAMPUS-STANDARD
+
+Die erkannte allgemeine KISS-Architektur ist noch **nicht** in den Campus-Neubaustandard übernommen.
+Grund: Diese Route ist ausdrücklich isolierter Prototyp und noch nicht als allgemeiner Campus-Standard freigegeben.
+
+Status:
+`CAMPUS_PROPAGATION_BLOCKED_UNTIL_ALTERNATIVE_ARCHITECTURE_APPROVED`
+
+Bis zur Freigabe keine Vermischung mit dem Campus-/Produktionsstandard.
