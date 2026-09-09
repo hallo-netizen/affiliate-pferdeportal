@@ -1,73 +1,75 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: AKTIV / 0.8.1 LOKAL HART PASS / WORDPRESS-LIVE-RETEST OFFEN
+STATUS: AKTIV / 0.8.2 LOKAL HART PASS / WORDPRESS-LIVE-RETEST OFFEN
 
 ## AUTORITÄT
 
 Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 
 - aktuelle Arbeit: `HOBBYRAUM.md`
-- Fehlerdetails: über `FEHLERREGISTER.md` → `FEHLERQUELLEN.md`
-- Ziel: über `ZIELVERTRAEGE/REGISTER.md` → `ZIELVERTRAG_V1.md`
-- Warum/Prüfbeleg: `AKTENSCHRANK/02_V081_HARD_LOCAL_RELEASE_RECEIPT.md`
+- Fehlerdetails: `FEHLERQUELLEN.md`
+- Ziel: `ZIELVERTRAG_V1.md`
+- Prüfbeleg: `AKTENSCHRANK/03_V082_HARD_LOCAL_RELEASE_RECEIPT.md`
 
 ## AKTUELLER KANDIDAT
 
-`universal-product-comparison-0.8.1-prototype.zip`
+`universal-product-comparison-0.8.2-prototype.zip`
 
 SHA-256:
-`3ae3fe30365f767ea1e225554c7e986d70c6225d79884eeb796beadf1f6cb902`
+`6f0f1f8d62870fd2cd1ee34010c1b157d9ac140327e46cd8a6d0b48a1a05f2ad`
 
 Aktuelle Stufe:
-`Produktwissen -> Vergleichbarkeit -> bidirektionales SEO -> aktuelle Readiness/Kannibalisierung -> Dossier -> unabhängiger Abschluss-Audit`
+`Produktwissen -> Vergleichbarkeit -> bidirektionales SEO -> persistente Produkt-/Paar-Zwischenevidenz -> aktuelle Readiness/Kannibalisierung -> Dossier -> unabhängiger Abschluss-Audit`
 
-Writer/Draft/Publish sind in dieser 0.8.1-Prüfstufe nicht aktiv.
+Writer/Draft/Publish bleiben in dieser Prüfstufe dormant.
+
+## NEUER KISS-FIX 0.8.2
+
+0.8.1 speicherte den fertigen Kandidatenbefund 90 Tage, verließ sich für Produkt-/Paar-Zwischenergebnisse aber zusätzlich auf den nativen PSTE-Providercache von 24 Stunden.
+
+0.8.2 speichert deshalb hash-gebunden und autoload=false:
+- Produktabfrage;
+- Paarabfrage;
+- bereits erfolgreich bezahlte Teilantworten;
+- positiv UND negativ;
+- 90 Tage.
+
+Reihenfolge:
+`persistente UPC-Zwischenevidenz -> PSTE-Cache -> nur fehlender Provider-Endpunkt`.
+
+Abgelaufen, Kontextdrift oder manipuliert => nicht still weiterverwenden.
 
 ## HARTER LOKALBELEG
 
-Finale Fresh-ZIP:
-- 19/19 Positiv-/Negativtests PASS;
-- PHP-Lint 39/39 PASS;
-- Source ↔ finale ZIP 50/50 byte-inhaltlich identisch;
-- Report-Hashbindung 49/49 PASS;
-- ZIP-Wurzel/Pfade/Dubletten PASS;
+Exakte finale Fresh-ZIP:
+- komplette Regression 20/20 PASS;
+- PHP-Lint 40/40 PASS;
+- Source↔finale ZIP 51/51 exakt;
+- Report-Hashbindung 50/50 exakt;
 - echte Product-Knowledge-0.5.0-Abhängigkeit SHA PASS;
 - echter PSTE-0.56.25-Installer SHA PASS;
-- echte PSTE-Themenmap / False-Pair-Guard PASS;
-- Kosten- und API-Vertrag gegen PSTE PASS;
-- Mutationstests PASS.
-
-Zusätzliche unabhängige Gegenbeweise:
-- Reaktivierung des echten alten Draft-Hooks -> Test ROT;
-- Entfernen des neuen Abschluss-Audit-Guards -> Test ROT.
-
-## GEFUNDENER UND BEHOBENER FEHLER
-
-0.8.0 konnte in einem künstlich erzwungenen Negativfall PASS melden, obwohl die Dossier-Materialisierung Erfolg behauptete, aber im unabhängigen Abschluss-Audit kein zugehöriger Dossier-Receipt vorhanden war.
-
-0.8.1 blockiert jetzt fail-closed:
-- Rückgabemenge != Dossierliste -> `UPC_DOSSIER_MATERIALIZATION_COUNT_MISMATCH`;
-- gemeldetes Dossier fehlt im Abschluss-Audit -> `UPC_DOSSIER_FINAL_AUDIT_RECEIPT_MISSING`.
+- reale PSTE-Themenmap PASS;
+- PSTE nativer Providercache 86400 Sekunden belegt;
+- UPC persistente Probe-TTL 7776000 Sekunden / 90 Tage;
+- drei unabhängige Rückfallmutationen korrekt ROT.
 
 ## GESAMTWORKFLOW-GRENZEN
 
-Bestätigt:
+Weiter PASS:
 - keine freie Produkterfindung;
 - Same-Brand-/Profil-Drift fail-closed;
-- nur A oder nur B mit Nachfrage reicht nicht;
-- 0 Nachfrage reicht nicht;
-- direkte A-vs-B-Nachfrage oder Nachfrage beider exakten Produkte ist gebunden zulässig;
+- nur ein Produkt mit Nachfrage reicht nicht;
+- null Nachfrage reicht nicht;
 - Provider PARTIAL bleibt PARTIAL;
-- veraltete SEO-Signale werden nicht als aktuelle Wahrheit verwendet;
-- Dossier muss im unabhängigen Abschluss-Audit real gebunden vorhanden sein;
-- Dossier-Export bleibt read-only;
+- Dossier muss real im unabhängigen Abschluss-Audit vorhanden sein;
 - Affiliate bleibt Exact-Match-Leseschicht;
-- aktiver 0.8.1-Workflow besitzt keinen WordPress-Post-/Publish-Schreibweg;
+- kein aktiver WordPress-Post-/Publishweg;
 - kein Auto-Publish.
 
 ## LIVE-STATUS
 
-Noch kein WordPress-LIVE-PASS für 0.8.1.
+0.8.1 hat auf WordPress bereits korrekt `NO_ELIGIBLE_COMPARISONS` geliefert.
+0.8.2 ist noch nicht live verifiziert.
 
 NEXT ACTION ausschließlich `HOBBYRAUM.md`.
