@@ -258,3 +258,9 @@ jobs:
           set -euo pipefail
           cd control/seo-text-buero/alternative-central-machine/prototype
           PYTHONDONTWRITEBYTECODE=1 python3 test_p40_handoff_controller.py
+
+      - name: P41 plan-slot identity inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p41_plan_slot_identity_inventory.py
