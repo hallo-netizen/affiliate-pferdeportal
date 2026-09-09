@@ -297,24 +297,26 @@ Wenn die vorhandene Prüferherkunft nicht ohne einen solchen neuen Baustein bind
 
 ## NEXT ACTION
 
-**Aktueller Arbeitsauftrag: unabhängiger Realtest eines vollständig neuen Artikels über den bestehenden gebundenen Codex-Fachworkflow.**
+**Aktueller erster echter Realtest-Blocker: `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`.**
 
-Zweck:
-- Allgemeingültigkeit der ACM-Orchestrierung mit neuen Inhalten prüfen;
-- vorhandenen Codex-Entry tatsächlich benutzen;
-- keine alten Artikel-/Proof-Artefakte übernehmen;
-- den Artikel vom gebundenen Auftrag bis zur signierten Enddatei durch die bestehende Kette führen.
+Unabhängiger Codex-Realtest am 09.09.2026:
+- Thema: `Wie funktioniert ein mechanischer Bleistift?`
+- vorhandener Einstieg: `python3 control/cloud-entry-gate/cloud_entry.py start` -> `CODEX_CLOUD_ENTRANCE_PASS`;
+- nächster vorhandener Pflichtgate: `python3 control/output-quarantine/runtime_entry_gate.py` -> `OFFICIAL_RUNTIME_ENTRY_BLOCKED`;
+- Grund: `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`;
+- Artikel erstellt: nein;
+- signierte End-JSON erstellt: nein;
+- HTML-Artefakt: keines;
+- WordPress-Write/Publish: keiner;
+- Abschluss über vorhandenen Entry: `STEP_TERMINAL_NONPASS`, Status `BLOCKED`, `state_advanced=false`.
 
-Harte Grenzen:
-- Textmaschine, PPM/PSERC/PSTE, bestehendes Handoff, Codex-Entry und WordPress-Schnittstellen bleiben unverändert;
-- Chat besitzt keinerlei Fach-, Workflow-, Worker-, Prüfer-, Reparatur- oder Publish-Autorität;
-- Codex ist ausschließlich der gebundene Fachworkflow-Worker;
-- PASS/BLOCKED ausschließlich durch die fest gebundenen vorhandenen Prüfer;
-- keine neue Architektur, kein neuer Runner, kein neues Handoff, kein neuer Importweg;
-- kein WordPress-Produktivwrite und kein Auto-Publish;
-- bei erstem echten neuen Blocker: STOP und genau diesen Befund prüfen.
+Bewertung:
+- Zwangsjacke hat korrekt fail-closed gestoppt;
+- Codex hat keine Route, keinen Prüfer und keinen Reparaturweg selbst gewählt;
+- Textmaschine / PPM / PSERC / PSTE / Handoff / WordPress-Schnittstellen wurden nicht verändert;
+- kein Workaround und keine neue Architektur.
 
-Für einen sachfremden Orchestrierungs-Test darf das Thema nur dort frei gewählt werden, wo keine Pferdeportal-Fachbindung als Prüfziel missbraucht wird. Die ACM-/Sicherheitskette darf dafür nicht gelockert werden.
+**Nächster zulässiger Arbeitspunkt:** ausschließlich prüfen, warum der bereits bestehende Produktionsumgebungs-Nachweis am offiziellen Runtime-Entry fehlt bzw. nicht gebunden wird. Keine Artikel-/Text- oder Workflowänderung davor.
 
 Separat offen, aber nicht durch diesen ACM-Test verursacht:
 - repository-weites `Pferde Atelier Immutable Base Hardlock` ist auf dem ACM-Branch weiterhin rot; vor Merge/Produktionsadoption muss dieser Branch/Basis-Konflikt separat geklärt werden.
