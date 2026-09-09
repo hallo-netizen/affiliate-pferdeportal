@@ -1,10 +1,10 @@
 # AFFILIATE-ZENTRALE — CURRENT MASTER / HANDOFF
 
-Stand: 2026-09-08
+Stand: 2026-09-09
 Branch: `affiliate-release-current`
 Workstream: `AFFILIATE_ZENTRALE`
 Governance: `PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4`
-Candidate: `6.72.8` / `WORKING` / `release_allowed=false`
+Candidate: `6.72.8` / `LIVE_INSTALLED_ROOTFIX_PENDING` / `release_allowed=false`
 
 ## Autoritative Quelle
 
@@ -15,20 +15,18 @@ Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/
 Aktueller Nutzer-Scope ist **OTTO / Awin Advertiser 14336**. Digistore24 bleibt während dieses Scopes zurückgestellt; ältere DS24-Abschnitte in diesem Dokument sind nur Kontext und **keine aktuelle NEXT ACTION**.
 
 Aktuelle belastbare Basis:
-- live installierter Stand: **6.72.7**; angekündigter Cleanup-Readback blieb unsichtbar → LIVE FAIL / AFF-ERR-022;
-- 6.72.7-Papier-PASS ist ausdrücklich verworfen;
-- aktueller einziger Kandidat: **6.72.8**;
-- 6.72.8 korrigiert Cleanup-Provenienz + Sichtbarkeit, ohne Filter-/Output-/Automatikarchitektur zu erweitern;
-- tatsächlich ausgeführter lokaler Runtime-POSITIV-/NEGATIV-Test: PASS;
-- tatsächlich ausgeführter Awin-Filtered-Source-Gate POSITIV/NEGATIV-Test: PASS;
-- kompletter Workflow-Gegencheck: PASS;
-- PHP-Lint 21/21, Diff exakt 3 Dateien, Fresh-ZIP 26 Dateien, Source↔ZIP 26/26 byte-identisch: PASS;
-- Source-Manifest: `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`;
-- Testinstaller: `Affiliate-Zentrale_6.72.8_TEST.zip`;
-- Testinstaller-SHA256: `b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f`;
-- **kein Live-/Release-PASS** vor WordPress-Readback.
+- live installierter Stand: **6.72.8**;
+- 6.72.8-Cleanup-Readback ist live sichtbar und blockierte korrekt fail-closed: `exact-import-count-mismatch:0/4500`; **0** Altprodukte gelöscht, **0** Ausgabeobjekte/Kanten verändert;
+- kein weiterer Cleanup-Fix: historischer Altbestand bleibt fail-closed und wird nur über den normalen Reconcile-Weg behandelt;
+- gefilterter Awin-Create-a-Feed wurde gebunden und ein vollständiger Live-Lauf abgeschlossen: **298 Feedzeilen**, **1 importiert**, **297 blockiert**, 0 aktualisiert;
+- direkte Prüfung der exakt verwendeten Datei `datafeed_2990695.csv.gz`: **298/298 fachfremd** — 211 Skincare/Gesichtspflege, 31 Cosmetics/Make-up, 28 Basketball, 22 Garden/Sonnenschutz, 6 Football;
+- der eine Import ist ein belegtes False Positive: `aw_product_id=45749237798`, WPC-Gartenzaun mit `Windschutz`; Ursache ist synthetisches `FeedScope=Pferdebedarf` als starkes Pferdesignal plus generisches Portal-Konzept `Windschutz für Pferde`;
+- direkte Prüfung der Awin-Feedliste `datafeeds.csv`: für OTTO DE / Advertiser 14336 sind aktuell exakt **3 aktive Feeds** sichtbar: `54165 Wohnen, Spielzeug und Baumarkt (317451)`, `54179 Technik und Sport (90547)`, `54183 Kategorien: Mode und Beauty (347642)`; kein separater Pferde-/Tierbedarf-/Schuhe-Feed ist in dieser Feedliste vorhanden;
+- automatische Synchronisierung bleibt **AUS**;
+- Produktionssource ist weiterhin unverändert **6.72.8**; Source-Manifest: `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`;
+- für den FeedScope-Rootfix wurde **noch kein neuer Plugin-Kandidat gebaut und noch kein Rootfix-Test ausgeführt**.
 
-**NEXT ACTION:** Feedprüfung abgeschlossen: 298/298 Zeilen fachfremd (Skincare/Cosmetics/Basketball/Garden/Football); der eine importierte Datensatz ist ein belegtes False Positive durch `FeedScope=Pferdebedarf` + generisches Portal-Konzept `Windschutz für Pferde`. Automatik AUS. Awin-Feed fachlich neu konfigurieren; parallel minimalen OTTO-Relevanz-Gate reparieren und erst nach vollem Positiv-/Negativtest nächsten Plugin-Kandidaten ausgeben.
+**NEXT ACTION:** Awin-Feed fachlich nur aus den real vorhandenen drei OTTO-Feeds neu eingrenzen **und** den OTTO-Relevanz-Gate minimal so reparieren, dass Feed-/Scope-Metadaten niemals selbst Pferde-Domain-Evidence erzeugen. Danach derselbe Kandidat vollständig POSITIV/NEGATIV/Gesamtworkflow prüfen; erst dann ist ein neuer TEST-Installer zulässig. Automatik bleibt AUS.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
@@ -153,8 +151,9 @@ Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_
 
 ## Aktuell autorisierter nächster Schritt
 
-6.72.8 hat den tatsächlich ausgeführten lokalen Ausgabe-Hardlock bestanden. Exakt ein TEST-Installer ist autorisiert.
+**Kein Installationsschritt und keine Automatik.** 6.72.8 ist bereits live installiert.
 
-Installieren: `Affiliate-Zentrale_6.72.8_TEST.zip`.
-
-Danach keine Buttons drücken und Automatisierung nicht aktivieren. Nur den immer sichtbaren Status `OTTO-Sicherheitsbereinigung` ablesen.
+1. Awin-Feedwahl anhand der real belegten drei OTTO-Feeds fachlich korrigieren; keine erfundenen Zusatzfeeds.
+2. Kleinster Code-Rootfix: `FeedScope`/deklarierter Quellscope darf nur Source-Gate-Metadatum sein und niemals selbst Pferde-/Reitsportrelevanz beweisen.
+3. Vor jedem neuen Plugin: gebundener POSITIV-Test mit echtem Pferdeprodukt, NEGATIV-Test mit dem belegten WPC-`Windschutz`-Artikel und fachfremden Rows, danach kompletter OTTO/Awin-Gesamtworkflow + historische Regressionen + Manifest/Byte-Scope + Error-Register-Postcheck.
+4. Bis dahin: **Automatische Synchronisierung AUS.**
