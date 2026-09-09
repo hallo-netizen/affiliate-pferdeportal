@@ -14,7 +14,7 @@ Diese Datei ist die **einzige aktuelle Standwahrheit der ACM-Route** für:
 - verbindlichen Arbeitsweg
 
 `00_MASTER_KONZEPTLOG.md` ist nur Wegweiser/Entwicklungslog.
-Ältere P0–P57-Akten sind Beweis-, Entscheidungs- oder Fortschrittsakten und keine aktuelle Standwahrheit.
+Ältere P0–P57-Akten sowie `59_INTERFACE_TABOO_ENTRYPOINT_REASSESSMENT.md` sind Beweis-/Entscheidungsakten und keine zweite aktuelle Standwahrheit.
 
 Die produktive Wahrheit bleibt separat und unverändert:
 `control/startmaster0107/CURRENT_STATE.json`
@@ -180,6 +180,19 @@ Audit:
 - vorhandener Verifier und isolierter Seam funktionieren
 - aber kein echter WordPress-Admin-/Runtime-Handler ruft den Verifier derzeit vor dem Import auf
 
+**Status nach Schnittpunkt-Neubewertung: `BLOCKED_BY_INTERFACE_TABOO`**
+
+Frisch geprüft:
+- `WORDPRESS_SIGNATURE_ENTRY_LOCK_V1` erlaubt Verification-only und verbietet `IMPORT_LOGIC_CHANGE` sowie `WORKFLOW_ARCHITECTURE_CHANGE`
+- vorhandener `production_package_release_gate.py` prüft die vollständige Produktionspaket-Datei, endet aber vor WordPress
+- vorhandener WordPress-Endstempel-Verifier und vorhandener Normal-Draft-Import besitzen unterschiedliche bestehende Eingangsverträge
+- eine direkte bereits verdrahtete One-JSON-Runtime-Schnittstelle existiert nicht
+
+Folge:
+- WP-01 bleibt Produktionsadoptionsblocker
+- in ACM kein Wrapper, kein neuer Handler, kein neuer Importer und kein neues Übergabeformat
+- der Schnittpunkt wird nicht verändert oder umgangen
+
 ### ACM-WP-02 – kontrollierter manueller Publish-/Freigabeweg nicht nachgewiesen
 Audit:
 - `manual_publish_release_wired=false`
@@ -218,23 +231,32 @@ Keine davon ist ein neuer Produktionsfehler:
 HOBBYRAUM_STATUS: **AKTIV**
 PRODUKTIONSADOPTION: **BLOCKED**
 
-**NEXT ACTION – nur erster offener Punkt:**
-ACM-WP-01 schließen.
+**WP-01 bleibt BLOCKED und wird in dieser Route nicht angefasst.**
+
+Das ist kein Produktions-Bypass. Solange WP-01 ungelöst ist, gibt es keine Produktionsadoption.
+
+**NEXT ACTION – erster zulässiger Alternativ-Test:**
+ACM-REAL-01 upstream bis zum ersten echten Block prüfen.
+
+Verbindlicher Einstieg:
+`offizieller Runtime-Start -> CURRENT_BOUND_ACTION_READY -> aktuelles gebundenes Hindernisstangen-Item -> bestehende FACHWORKFLOW_HANDOFF_REQUEST.json`
 
 KISS-Arbeitsauftrag:
-Den bereits bewiesenen Signatur-/Hash-Verifier **vor den bestehenden WordPress-Normal-Draft-Import** hängen.
-Dabei:
-- keine zweite Importpipeline
-- kein neuer Paketvertrag
-- kein neuer Signierer
+- nur den bereits vorhandenen Chat/Codex-/Runtime-Einstieg benutzen
+- genau das gebundene aktuelle Item verwenden
+- reale Fachprodukte/Fact-Pack über den bestehenden Fachworkflow erzeugen
+- bestehendes 16-Feld-Handoff unverändert verwenden
+- danach nur die bereits bewiesene unveränderte ACM-Laborkette prüfen
+- beim ersten echten Block STOP
+- kein neuer Handoff
 - kein neuer Controller
-- keine Textmaschinenänderung
-- weiterhin nur Draft
-- positiver Test: eine gültige signierte JSON -> exakt ein Draft + Readback
-- negative Tests: Manipulation/falscher Schlüssel/Replay/falsche Bindung -> 0 Write
+- keine neue PPM-API
+- kein WordPress-Runtime-Handler
+- kein WordPress-Write
+- keine Schnittstellenänderung
+- kein Auto-Publish
 
-Erst nach PASS dieses einen Punktes:
-ACM-WP-02 prüfen.
+Wenn der reale Lauf an LanguageTool oder einer anderen vorhandenen Pflichtabhängigkeit blockiert, ist genau dieser erste reale Block der nächste Befund.
 
 ## VERBINDLICHER ARBEITSWEG
 
@@ -246,6 +268,7 @@ ACM-WP-02 prüfen.
 6. Parallelroute nicht anfassen.
 7. main/CURRENT_STATE/Zielvertrag nicht verändern, solange ACM nicht ausdrücklich adoptiert wird.
 8. Kein Auto-Publish.
+9. Bestehende Schnittpunkte sind absolut tabu: nur unverändert benutzen oder read-only prüfen; keine neuen Wrapper/Handler/Übergabeformate als Umgehung.
 
 ## ZIELVERTRAG
 
@@ -260,7 +283,7 @@ Er beschreibt nur die noch nicht adoptierte Alternative.
 ## ARCHIV
 
 Keine aktive oder ungeklärte Information wurde archiviert.
-P0–P57 bleiben Entwicklungs-/Beweisakten.
+P0–P57 sowie P59 bleiben Entwicklungs-/Beweis-/Entscheidungsakten.
 Sie dürfen nicht als aktuelle Standquelle verwendet werden.
 
 ## EINE WAHRHEIT – NEGATIVPRÜFUNG
