@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – READ_ONLY CORRIDOR / FIX_FORBIDDEN**
+STATUS: **BLOCKED – EXISTING FACH-AUTHORITY NOT FOUND / FIX_FORBIDDEN**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -32,44 +32,44 @@ permanenter Dispatcher / offen / niemals mergen.
 
 ## AKTUELLE ARBEIT
 
-**Kein Produktfix. Kein Realtest. Nur read-only Corridor-Arbeit.**
+**Kein Produktfix. Kein Realtest. Read-only Corridor-Frage abgeschlossen – Produktionsweg BLOCKED.**
 
 Current State bindet:
 - B16 als aktuellen Liveblocker;
 - `FIX_FORBIDDEN`;
 - keinen Produktkandidaten;
-- zwei offene bestehende Autoritätslücken:
+- zwei bestätigte bestehende Autoritätslücken:
   1. NEW-Link-Provenienz;
   2. `design_format`-Evidence-Semantik.
+- die zulässige Suche nach einer bereits existierenden gemeinsamen Autorität außerhalb STARTMASTER0107 ist negativ abgeschlossen:
+  `EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`.
 
 Der sichtbare LanguageTool-Stop wird nicht separat repariert.
 
 ## NEXT ACTION
 
-**Genau eine Frage read-only schließen:**
+**BLOCKED – kein technischer Reparaturschritt innerhalb der aktuellen Hard Rules zulässig.**
 
-Existiert bereits eine unveränderte autoritative Fachworkflow-Quelle außerhalb des aktuell gebundenen STARTMASTER-Pfads, die für NEW
+Die gebundene Read-only-Frage ist abgeschlossen:
+`EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`.
 
-1. die drei artikelbezogenen Linkbindungen deterministisch erzeugt und
-2. die bestehende Bedeutung/Evidence von `design_format` eindeutig definiert?
+Damit gilt:
+- keine neue Linklogik;
+- keine neue `design_format`-Bedeutung;
+- keine neue Stage;
+- kein neuer Validator;
+- kein neuer Executor/Runner/Workflow;
+- kein Produktkandidat;
+- kein M37;
+- kein weiterer 7/7-Realtest.
 
-Arbeitsweg:
-1. nur vorhandene aktuelle/originale Quellen lesen;
-2. keine historischen Produktionspläne als Produktionsquelle verwenden;
-3. keine neue Linklogik;
-4. keine neue Designregel;
-5. keine neue Stage;
-6. keinen neuen Executor/Runner/Workflow bauen.
+Erst wenn eine **autoritative externe Fach-/Architekturentscheidung** die fehlenden NEW-Link- und `design_format`-Verträge bereitstellt oder die Hard Rules ausdrücklich ändert, darf der technische Workflow fortgesetzt werden.
 
-Wenn beide vorhandenen Autoritäten gefunden werden:
-- Corridor-Matrix aktualisieren;
-- B16 zuerst als fortlaufende ausführbare History-Regression aufnehmen;
-- danach genau einen konsolidierten KISS-Kandidaten;
-- Positiv/Negativ/Invarianten;
-- erst danach neuer Realtest.
-
-Wenn eine Autorität nicht existiert:
-**STATUS → BLOCKED dokumentieren. Kein Ersatzweg.**
+Danach bleibt die bereits festgelegte Reihenfolge:
+1. B16 als fortlaufende ausführbare History-Regression aufnehmen;
+2. genau einen konsolidierten KISS-Kandidaten;
+3. Positiv/Negativ/Invarianten;
+4. erst danach neuer Realtest.
 
 ## KEIN AKTIVER KANDIDAT
 
@@ -113,13 +113,13 @@ Aus diesem Originalweg:
 ## AUTORITATIVE BLOB-BINDUNGEN
 
 CURRENT_STATE:
-`accd8010443fdb99eeab2ebd47d85a43c8b845ca`
+`e2ae5599cb9d78eeb09608abe6eda2b993612581`
 
 Fehlerquelle:
-`12f49603118c7448c436ec97e85be41bddf80d7f`
+`06a45d966e06ae06f87640fe78fe1bff592161d3`
 
 Protokoll:
-`66fed328939f002d52657249741a63c8b7648a01`
+`90410a089119d5abbd354aaaf00939b9d5794828`
 
 Änderungsregister:
 `0cf9e1eb3744add9e79f1eab5b19fc8892945b04`
@@ -128,7 +128,7 @@ Hobbyraum-Standard:
 `8c90de4920ec81e10f3952bbd52208fad5a42367`
 
 Corridor-Matrix:
-`5d19d5a0c2b56533f1a47cab349ad768ec1e6663`
+`3b3eacc9dcce82fcec12d76fb505c04de076e62d`
 
 Corridor-Rootcause:
 `93fe9ac6df12faef654dfdba5e08f35f83362b94`
