@@ -48,3 +48,40 @@ Release-Kandidat SHA-256:
 `5d5bcdc191d64524145486064f6830b6843032402dbae4095bb734939b8fe0fd`.
 
 Fehler bleibt bis realem WordPress-Retest **offen**.
+
+
+## PV-LIVE-002 – BIDIREKTIONALE SEO-LOGIK UNVOLLSTÄNDIG
+
+STATUS: AKTIV / 0.8.0-KORREKTUR IM HOBBYRAUM
+
+Befund nach dem 0.7.1-Liveretest:
+Der Statusfehler PV-LIVE-001 ist korrigiert. Die 8 Regendecken-Kandidaten bleiben jedoch sämtlich SEO-blockiert.
+
+Rootcause aus Code-/Gesamtworkflowprüfung:
+- Produktnachfrage wurde im SEO-Discovery-Bestand zwar erkannt, aber ohne direkte A-gegen-B-Evidenz nicht als vollständiges Vergleichssignal bis zur Dossierfreigabe geführt;
+- der Live-PSTE-Weg recherchierte primär das konkrete Paar, nicht zwingend beide konkreten Produkte einzeln;
+- damit konnte echte Nachfrage nach Produkt A **und** Produkt B unberücksichtigt bleiben, obwohl genau daraus ein sinnvoller Vergleich entstehen soll.
+
+Verbindliche Regel:
+Ein Produktvergleich darf SEO-seitig freigegeben werden, wenn entweder
+1. direkte belastbare Paar-Nachfrage A gegen B / vs / oder vorhanden ist, **oder**
+2. beide konkreten Produkte belastbare externe Nachfrage haben,
+und danach derselbe Planning-/Kannibalisierungs-Gate PASS ist.
+
+Nur ein Produkt mit Nachfrage reicht nicht.
+Generische Produktgruppen-Nachfrage reicht nicht.
+Same-Brand und fachlich nicht vergleichbare Produkte bleiben ausgeschlossen.
+
+## PV-LIVE-003 – SEO-SIGNALE OHNE ALTERUNG / CURRENT-READINESS-REBINDUNG
+
+STATUS: AKTIV / 0.8.0-KORREKTUR IM HOBBYRAUM
+
+Rootcause:
+0.7.x speicherte normalisierte Provider-Signale ohne verbindliche Ablaufzeit. Ein negativer Altbefund konnte dadurch dauerhaft terminal bleiben. Positive Signale waren zudem nicht zwingend an den aktuellen WordPress-Inventar-/Strukturzustand gebunden.
+
+Verbindlicher Fix:
+- regelmäßig veränderliche SEO-Evidenz hat eine Ablaufzeit;
+- alte 0.7.x-Providerverträge werden unter dem neuen Vertrag als stale behandelt und erneut geprüft;
+- aktuelle positive Signale werden read-only gegen aktuellen PSTE-Planning-/Kannibalisierungszustand revalidiert;
+- Inventar-/Strukturhash wird in die Dossierbindung aufgenommen;
+- kein stilles Weiterverwenden veralteter SEO-Freigaben.
