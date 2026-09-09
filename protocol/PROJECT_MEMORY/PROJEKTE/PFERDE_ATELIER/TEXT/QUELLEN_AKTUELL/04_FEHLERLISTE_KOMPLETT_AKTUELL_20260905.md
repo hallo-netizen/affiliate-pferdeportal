@@ -41,7 +41,7 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 | M23 | Preproduction/Runtime Guards | im bestehenden Runner enthalten | Altregel korrigiert: intern nur Hash-/Herkunftsbindung; externe Signierung nach abgeschlossener Produktion bleibt separat erhalten. |
 | M24 | No H8 rollback | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M25 | Article prompt / Fachworkflow boundary | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
-| M26 | Bound Fachworkflow production context | im bestehenden Runner enthalten | früher mehrfach LIVE BLOCKED; auf aktuellem main im letzten Lauf überwunden |
+| M26 | Bound Fachworkflow production context | **NÄCHSTER MASCHINENSTOP NACH M22 – MARKERDRIFT** | M22-Kandidat passiert M23–M25 und stoppt bei `M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`. Gegenprüfung: Current-Action-Selftest, gebundener Worker und Handoff-Vertrag PASS; STEP107007 enthält dieselbe Semantik bereits als `die realen Nicht-PPM-Stage-Artefakte und Proofs`. Kein funktionaler Kontextverlust; separat nach M22 bearbeiten. |
 | M27 | Current-main / production environment identity | im bestehenden Runner enthalten | Preflight/HEAD im letzten Lauf PASS |
 | M28 | Fachworkflow-Handoff request executable | Runner auf main korrigiert | **LIVE ÜBERWUNDEN 08.09.2026:** PR #161 / Merge `78bb2576…`; Realtest materialisierte den frischen `FACHWORKFLOW_HANDOFF_REQUEST.json`, startete den gebundenen Handoff und erreichte den echten PPM-6.7.9-Korridor. |
 | M29 | Release metadata current-batch identity | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
