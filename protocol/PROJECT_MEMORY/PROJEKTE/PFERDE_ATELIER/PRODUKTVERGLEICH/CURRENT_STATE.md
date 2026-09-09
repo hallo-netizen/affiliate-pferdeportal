@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: AKTIV / 0.8.2 LOKAL HART PASS / WORDPRESS-LIVE-RETEST OFFEN
+STATUS: AKTIV / 0.8.2 LOKAL HART PASS + WORDPRESS-LIVE-CACHE-REUSE PASS
 
 ## AUTORITÄT
 
@@ -10,7 +10,8 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - aktuelle Arbeit: `HOBBYRAUM.md`
 - Fehlerdetails: `FEHLERQUELLEN.md`
 - Ziel: `ZIELVERTRAG_V1.md`
-- Prüfbeleg: `AKTENSCHRANK/03_V082_HARD_LOCAL_RELEASE_RECEIPT.md`
+- lokaler Prüfbeleg: `AKTENSCHRANK/03_V082_HARD_LOCAL_RELEASE_RECEIPT.md`
+- Live-Beleg: `AKTENSCHRANK/04_V082_WORDPRESS_LIVE_CACHE_REUSE_RECEIPT.md`
 
 ## AKTUELLER KANDIDAT
 
@@ -24,7 +25,7 @@ Aktuelle Stufe:
 
 Writer/Draft/Publish bleiben in dieser Prüfstufe dormant.
 
-## NEUER KISS-FIX 0.8.2
+## KISS-FIX 0.8.2
 
 0.8.1 speicherte den fertigen Kandidatenbefund 90 Tage, verließ sich für Produkt-/Paar-Zwischenergebnisse aber zusätzlich auf den nativen PSTE-Providercache von 24 Stunden.
 
@@ -54,6 +55,33 @@ Exakte finale Fresh-ZIP:
 - UPC persistente Probe-TTL 7776000 Sekunden / 90 Tage;
 - drei unabhängige Rückfallmutationen korrekt ROT.
 
+## WORDPRESS-LIVE-BEFUND 0.8.2
+
+Vor erneutem Start:
+- Version: 0.8.2-prototype;
+- Kandidaten: 8;
+- SEO offen: 0;
+- SEO blockiert: 8;
+- maximale neue Providerkosten nach Wiederverwendung: $0.0000.
+
+Nach genau einem erneuten `Gesamtworkflow starten`:
+- Ergebnis: `NO_ELIGIBLE_COMPARISONS`;
+- neue Dossiers: 0;
+- bestehende unverändert: 0;
+- Provider-Aufrufe: 0;
+- Kosten: $0.0000;
+- Produktrecherche offen: 0;
+- SEO-PASS final: 0;
+- blockiert final: 8.
+
+Damit ist für denselben bereits geprüften Live-Bestand belegt:
+**kein erneuter kostenpflichtiger Providerabruf.**
+
+Nicht durch diesen einen Live-Lauf bewiesen, aber lokal hart geprüft:
+- gleiches Produkt in neuem Paar;
+- Teil-Lauf-Retry;
+- Manipulations-/Ablauf-/Kontextdrift-Fälle.
+
 ## GESAMTWORKFLOW-GRENZEN
 
 Weiter PASS:
@@ -66,10 +94,5 @@ Weiter PASS:
 - Affiliate bleibt Exact-Match-Leseschicht;
 - kein aktiver WordPress-Post-/Publishweg;
 - kein Auto-Publish.
-
-## LIVE-STATUS
-
-0.8.1 hat auf WordPress bereits korrekt `NO_ELIGIBLE_COMPARISONS` geliefert.
-0.8.2 ist noch nicht live verifiziert.
 
 NEXT ACTION ausschließlich `HOBBYRAUM.md`.
