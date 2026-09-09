@@ -178,6 +178,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p27_existing_codex_factpack_handoff.py
 
+      - name: ACM real current action read-only probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_real_current_action_probe.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
@@ -308,3 +314,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/startmaster0107/ENDSTEMPEL_TEST.py
+
+      - name: ACM neutral article-count-independent final filename
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_neutral_end_file_contract_test.py
