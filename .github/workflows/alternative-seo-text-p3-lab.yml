@@ -226,6 +226,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_wp_import_publish_redaktionsplan_wiring_audit.py
 
+      - name: ACM neighbor historical integration-error reuse
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_neighbor_errorchain_reuse.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
