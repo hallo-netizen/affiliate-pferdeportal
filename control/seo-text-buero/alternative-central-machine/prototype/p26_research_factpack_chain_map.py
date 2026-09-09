@@ -79,6 +79,7 @@ def main():
           "ppm_generate":class_method(ppm,"PPM679_Content_Generator","generate"),
           "pserc_bridge_prepare":class_method(pserc,"PSERC_PPM_Intake_Bridge","prepare"),
           "pserc_bridge_execute":class_method(pserc,"PSERC_PPM_Intake_Bridge","execute"),
+          "pserc_bridge_verify_package_item":class_method(pserc,"PSERC_PPM_Intake_Bridge","verifyPackageItem"),
           "pserc_supervisor_validate":class_method(pserc,"PSERC_Workflow_Supervisor","validate"),
         }
         if not critical["ppm_load_fact_pack"] or not critical["ppm_generate"]:
@@ -116,6 +117,10 @@ def main():
                 (prepare_tests if direct else supervisor_tests).append(row)
         covered=prepare_tests+supervisor_tests
         if not covered:
+            print(json.dumps({
+              "status":"PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING",
+              "verify_package_item":critical["pserc_bridge_verify_package_item"]
+            },ensure_ascii=False,indent=2))
             raise RuntimeError("PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING")
         failed=[x["test"] for x in covered if x["returncode"]!=0]
         if failed:
