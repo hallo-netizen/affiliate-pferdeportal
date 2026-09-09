@@ -357,6 +357,47 @@ Keine Änderung an bestehenden Schnittpunkten.
 Der ACM-Laborkern `prepare(no write) -> externe Signatur -> Draft -> Readback` bleibt als isolierter technischer PASS bestehen.
 Nicht bewiesen ist die vollständige frische 12-Stage-Produktion ohne freie Workerentscheidung.
 
+## KONKRETE ALTBESTAND-ÜBERNAHMEN – KRITISCHE BEWERTUNG
+
+### Beibehalten – GO als unveränderte Fach-/Sicherheitsautorität
+- bestehender Chat→Codex-Start/Dispatcher: nur Eingang, keine Fachentscheidung
+- Textmaschine: bestehende Inhaltsautorität
+- PSTE/PSERC: bestehende Planungs-/SEO-/Metadatenautorität
+- PPM-Fach-/Content-/Prepare-/Draft-/Readback-Bausteine: bestehende Produktions-/Prüfautorität
+- LanguageTool-Regel/Version/Provenienz: bestehende Qualitätsautorität
+- externe Signatur/Endstempel-Prinzip: bestehende Manipulationsschutzgrenze
+- vorhandene WordPress Draft-/Readback-/DOM-Prüfer: bestehende Zielsystemprüfer
+
+Diese Teile werden nicht nachgebaut und nicht fachlich verändert.
+
+### Neu bewertet – NICHT pauschal übernehmen
+- `FACHWORKFLOW_HANDOFF_REQUEST.json` als kompletter alter Workflowvertrag
+- 107007/Current-Action als ACM-Orchestrierungsmodell
+- generische 12-Stage-Proof-Semantik
+- jede alte Reihenfolge-/State-/Worker-Bindung, die über reinen Transport/Identität hinausgeht
+
+Warum sie zunächst übernommen wurden:
+P27/P38 interpretierten die Vorgabe
+„bestehender Codex-Start und korrekte Dateiübergabe sind vorhanden; keine neue Handoff-Architektur“
+zu breit als Freigabe des vollständigen alten Handoff-Vertrags.
+
+Korrektur:
+Nur **Transport, feste Identitäten und vorhandene Fachautoritäten** dürfen als Bestand weiterverwendet werden.
+Alte Orchestrierungs-/Stage-Semantik muss separat durch das PRE-CHANGE-ZWANGSGATE.
+
+### Gesamtsystemwirkung
+
+Aktueller Branch bleibt technisch isoliert:
+alle ACM-Änderungen liegen unter
+`control/seo-text-buero/alternative-central-machine/`.
+
+Keine produktive Datei wurde verändert.
+
+Für jede spätere Adoption gilt trotzdem:
+lokaler PASS genügt nicht.
+Pflicht ist:
+`Positiv -> Negativ -> kompletter ACM-Workflow -> Gesamtsystem-Auswirkung -> erst danach Realtest`.
+
 ## HARTE ZWANGSJACKE FÜR JEDE WEITERE ACM-ARBEIT
 
 Die Route darf keinen Fix-/Testkandidaten erzeugen, bevor das in `00_ROUTE_BOUNDARY.md` definierte
