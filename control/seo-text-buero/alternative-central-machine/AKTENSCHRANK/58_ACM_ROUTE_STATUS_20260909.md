@@ -226,6 +226,32 @@ Keine davon ist ein neuer Produktionsfehler:
 - LanguageTool-Inventar: Evidence-Dateien fälschlich als Runtime gezählt -> getrennt
 - keine neue Route/kein neuer Runner/kein neuer Signer/kein neuer Fachvertrag erforderlich
 
+## UNABHÄNGIGER 7/7-ABNAHMETEST – HARD RULE
+
+Für die harte ACM-Konzeptabnahme gilt:
+
+- alle 7 Artikel vollständig neu von null erzeugen
+- keine alten 7/7-Artikel als Produktionsquelle
+- keine alten Fact-Packs
+- keine alten Rechercheergebnisse
+- keine alten JSON-/Proof-/Recovery-/Quarantäne-/Release-Artefakte als Produktionsquelle
+- wiederverwendet werden ausschließlich die unveränderten bestehenden Regeln, Verträge, Gates und Schnittstellen
+- erst NACH abgeschlossenem frischem Test dürfen die alten 7/7 als Vergleichs-/Goldstandard herangezogen werden
+- der Vergleich darf den Nulltest nicht beeinflussen
+
+Zweck:
+Der Test soll beweisen, dass ACM unabhängig neue Artikel erzeugen und durch den gebundenen Workflow führen kann – nicht, dass vorhandene Artikel erfolgreich weiterverarbeitet werden.
+
+Aktueller frischer Nulltest:
+- Start über bestehenden permanenten Chat→Codex-Dispatcher PR #107
+- Dispatcher-Head = current main `93ba987c56f7b08ffba009210e3012c036fec18d`
+- vorhandener Codex-Cloud-Worker
+- kein neuer Startweg
+- keine Schnittstellenänderung
+- keine Reparatur während des Tests
+- Stop nur am ersten echten BLOCKED/USER_ACTION_REQUIRED oder bei 7/7-Ende
+- kein Publish
+
 ## HOBBYRAUM / NEXT ACTION
 
 HOBBYRAUM_STATUS: **AKTIV**
