@@ -1147,3 +1147,34 @@ Dispatcher:
 M35:
 - Kandidat `ef2eceb…` unverändert geparkt;
 - keine Vermischung mit M17.
+
+
+### 09.09.2026 – M17 Hash-Kette nach erstem Kandidatenlauf
+
+Serverbefund auf initialem M17-Head `6dcf42d…`:
+- current main M17-Reproduktion: PASS (`HOBBYROOM_HISTORY_REPRODUCTION_PASS:M17`);
+- Kandidat stoppte danach bei M01 mit `INPUT_HASH_MISMATCH:1:control/output-quarantine/runtime_entry_gate.py`.
+
+Einordnung:
+- kein M17-Logikfehler;
+- Runtime Entry ist absichtlich hashgebunden;
+- vorhandene autoritative Routine `STARTMASTER0107_DUAL_ROOTFIX_REPAIR.refresh()` definiert die notwendige Kette.
+
+Kohärenter Kandidat:
+- neuer Head `66e9f24a06a6ddb37fd5e8e50f4c158965263abd`;
+- 1 Logikdatei: `runtime_entry_gate.py`;
+- 5 reine Bindungsdateien:
+  - `STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json`;
+  - `STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json`;
+  - `CURRENT_STATE.json`;
+  - `PFERDE_ATELIER_START_HERE.json`;
+  - `control/CURRENT_STARTMASTER.json`.
+- keine zusätzliche Fach-/Runtime-Logik in den 5 Bindungsdateien.
+
+Berechnete Bindungen:
+- Runtime SHA256 `c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24`;
+- STEP107008 SHA256 `ecfb3152234f3bfaa91b33bbe09a7ae6b50f3c51ab3b8837911f0920154dcb1b`;
+- STEP107007 SHA256 `ebd6ed5cd8a446d2081b60010f5626d175cab120b2a067a194ce2eaa1f3a5012`;
+- CURRENT_STATE SHA256 `feffeeea4e84e91d96269870fed1407c2c4d99653a7c13cfc167f94e45ffa5cf`.
+
+Alle acht Bindungsbeziehungen der vorhandenen Refresh-Kette wurden vor Push positiv geprüft.
