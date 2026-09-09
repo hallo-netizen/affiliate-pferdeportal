@@ -1,7 +1,7 @@
 # ACM – ABSCHLUSS OFFENE PUNKTE / HARTE INVARIANTEN
 
 Stand: 2026-09-09
-Status: PRÜFUNG AKTIV – KEINE PRODUKTIONSFREIGABE
+Status: TECHNISCHE ABSCHLUSSPRÜFUNG PASS – KEINE PRODUKTIONSFREIGABE
 
 ## Verbindliche Entscheidungen
 
@@ -113,3 +113,53 @@ Niemals stichprobenartig:
 - realen Workflow-Handoff durch die komplette ACM-Kette testen
 
 Keine neue Architektur erforderlich.
+
+
+## Harte Abschlussbeweise 2026-09-09
+
+Getesteter ACM-Head:
+`9612c7574e20db27bd6295af0c005e3df590cabc`
+
+GitHub Actions:
+- Alternative SEO Text P3 Isolated Lab: Run `34335572795` -> SUCCESS
+- Alternative SEO Text P8 Signer Isolation Lab: Run `34335572775` -> SUCCESS
+
+Zusätzlicher Endstempel-/WordPress-Test:
+`ENDSTEMPEL_FIXED_TESTS_PASS`
+
+Positiv:
+- gültiger gebundener Endstempel -> WordPress-Preimport PASS
+
+Negativ jeweils BLOCK:
+- ein Zeichen verändert
+- falscher Batch
+- Datei fehlt
+- zusätzliche Datei
+- falsche Signiereridentität
+- falsche Signatur
+- bereits importierter Batch / Replay
+- simuliertes Importversagen -> null committed content writes
+
+Weitere bereits im selben grünen Lauf bestätigte Invarianten:
+- P34: signierter 1000-Item-Batch akzeptiert
+- kein architektonisches Artikelzahl-Limit
+- zentrale Steuerung ohne Domainlogik
+- keine vom Aufrufer wählbare Route/Validator
+- P27: aktueller Codex ist gebundener Fachworkflow-Worker
+- Feldsatz des Handoffs nicht zur Laufzeit wählbar
+- Content-/Quality-Authority der technischen Steuerung = NONE
+- LanguageTool in bestehender Hard-Rule-/Language-Evidence-Struktur gebunden
+- LanguageTool required engine: LanguageTool 6.8 / Bestand 43
+- vollständiger sichtbarer Text benötigt exakte LanguageTool-Raw-Evidence mit null ungelösten Findings
+- erster vollständiger ACM-Einartikeltest weiterhin PASS
+- kein Publish
+
+### Ergebnis
+
+Offene technische Konzeptpunkte Signatur, WordPress-Preimport, beliebige Artikelzahl, Chat-/Codex-Autorität und LanguageTool sind für den Prototyp geschlossen.
+
+Noch keine Produktionsübernahme.
+Vor Produktionsübernahme bleiben ausschließlich:
+1. formale Vereinheitlichung der Signaturposition im Zielvertrag,
+2. neutraler artikelzahlunabhängiger Enddateiname,
+3. erster realer workflow-produzierter Handoff durch die unveränderte ACM-Kette.
