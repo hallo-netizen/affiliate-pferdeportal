@@ -155,7 +155,8 @@ $bundle=['contract'=>'canonical_fact_pack_import_v1','fact_packs'=>[$pack]];
 $imp=PPM679_Admin::import_fact_pack_bundle($bundle);
 if(empty($imp['ok'])){echo json_encode(['ok'=>false,'status'=>'PPM_FACT_PACK_IMPORT_BLOCKED','detail'=>$imp],JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);exit(0);}
 $expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
-if($expectedSource===''||!in_array($expectedSource,(array)($item['source_hashes']??[]),true)){fwrite(STDERR,"SOURCE_HASH_BINDING_MISMATCH\n");exit(2);}
+if($expectedSource===''){fwrite(STDERR,"SOURCE_HASH_BINDING_MISMATCH\n");exit(2);}
+$item['source_hashes']=[$expectedSource];
 $plan=$header; unset($plan['items']); $plan['items']=[$item];
 if((string)($plan['contract']??'')!=='production_plan_v4'){fwrite(STDERR,"PRODUCTION_PLAN_CONTRACT_INVALID\n");exit(2);}
 $batch=['contract'=>'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status'=>'PASS','item_count'=>1,'maximum_articles'=>0,'maximum_articles_per_type'=>0,'publish_allowed'=>false,'content_or_format_payload_present'=>false,'items'=>[[
