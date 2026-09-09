@@ -264,3 +264,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p41_plan_slot_identity_inventory.py
+
+      - name: P42 plan-slot to canonical binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p42_plan_slot_to_canonical_binding.py
