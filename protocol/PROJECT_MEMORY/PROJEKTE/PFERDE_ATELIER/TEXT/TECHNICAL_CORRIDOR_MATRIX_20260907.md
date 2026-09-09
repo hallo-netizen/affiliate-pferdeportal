@@ -492,3 +492,31 @@ Nur wenn diese bestehende Quelle gefunden wird, darf sie technisch an die vorhan
 
 Wenn sie nicht existiert:
 **BLOCKED statt Architektur-/Fachänderung.**
+
+
+# FRESH REVALIDATION – 09.09.2026 NACH M36
+
+Current main:
+`93ba987c56f7b08ffba009210e3012c036fec18d`.
+
+Der erneute echte 7/7-Lauf reproduziert den sichtbaren K1/K3-Stop:
+`BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`.
+
+Read-only erneut geprüft:
+- aktueller SOURCE_SNAPSHOT = weiterhin exakt fünf SEO-Felder je Item + gebundene Snapshot/Manifest/Batch-Identität;
+- aktuelles H8-PRODUCTION_PACKAGE = Fach-Plan/Facts leer; keine versteckte aktuelle NEW-`quality_binding`-Quelle;
+- Current Action exponiert die fünf Felder, Fachworkflow-Prompt, Outputroot und Handoff, aber keine deterministische allgemeine NEW-Linkentscheidung;
+- `fachworkflow_proof_handoff.py` erwartet `production_plan_item.quality_binding` bereits vor dem realen PPM-Lauf;
+- der Handoff übernimmt aus dem PPM-Registry-Slot nicht automatisch eine vollständige `quality_binding`;
+- Originalmaster `MASTER_PFERDE_ATELIER_STARTMASTER0107_AKTUELL_20260905.zip` bytegenau intakt:
+  SHA-256 `735aae894f2e7697e6b9221f752a3a568f69b02042cc8cba0a38102f821d6062`, ZIP-Test PASS;
+- historische Produktionspläne/LT-Evidence bestätigen den vorhandenen Datenvertrag, bleiben aber Historienbeleg und sind keine NEW-Produktionsquelle.
+
+Damit bleiben die bereits am 07.09. vollständig identifizierten Vertragslücken aktuell:
+- `CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`;
+- `CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`.
+
+Status:
+`FIX_FORBIDDEN`.
+
+Kein konsolidierter Produktkandidat wurde gebaut.
