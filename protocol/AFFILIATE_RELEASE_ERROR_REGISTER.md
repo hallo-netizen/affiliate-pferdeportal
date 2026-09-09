@@ -1,6 +1,6 @@
 # AFFILIATE-ZENTRALE — VERBINDLICHES FEHLERREGISTER
 
-Stand: 2026-09-02
+Stand: 2026-09-09
 Workstream: `AFFILIATE_ZENTRALE`
 Branch: `affiliate-release-current`
 Status: `MANDATORY_PRESTEP_GATE`
@@ -421,6 +421,7 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Nächster Schritt:** Awin-Feed-Auswahl fachlich korrigieren UND den lokalen OTTO-Gate minimal so reparieren, dass FeedScope nur Metadatum bleibt und niemals allein die Pferde-Domain beweist. Vor Plugin-Ausgabe vollständiger Positiv-/Negativ-/Gesamtworkflow-Test. Automatik bleibt AUS.
 
+**Status:** ROOT_CAUSE_PROVEN / FIX_PENDING — Feed fachlich falsch, False Positive vollständig erklärt; Produktionscode noch unverändert.
 
 ## AFF-ERR-025 — CURRENT-/Hobbyraum-Drift nach neuem OTTO-Livebefund
 
@@ -438,20 +439,21 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Tests / Postcheck:** strukturelle Gegenprüfung der vier autoritativen CURRENT-/Scope-/Task-Quellen plus Branch-Head; keine Source-/Pluginänderung, daher keine PHP-/Runtime-Regression durch diesen Nachholfix erforderlich.
 
-**Status:** OPEN — zuerst dokumentiert; Konsistenzfix folgt.
+**Status:** CLOSED / NACHGEHOLT — Master, Governance, Scope-Kennzeichnung und Hobbyraum-TASK wurden auf denselben 09.09.-Stand gezogen; struktureller Postcheck PASS.
 
 ---
 
 # Aktueller PRECHECK
 
-Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`.
+Aktueller Nutzer-Scope: `AFFILIATE_ZENTRALE → OTTO/Awin 14336`.
 
 Bindend:
 - `AFF-ERR-019`: ungefilterter OTTO-Vollfeed HARD BLOCKED.
-- `AFF-ERR-023`: unsicherer Alt-Cleanup 0/4500 bleibt bewusst fail-closed.
-- `AFF-ERR-024`: 298-Zeilen-Feed fachlich geprüft; 298/298 fachfremd, 1 belegtes False Positive durch `FeedScope=Pferdebedarf` + `Windschutz`.
-- `AFF-ERR-025`: CURRENT-/Hobbyraum-Drift erkannt; Master/Governance/TASK/Scope müssen auf eine Wahrheit nachgezogen werden.
-- `AFF-ERR-006`: keine Pluginorgie; Codeänderung erst als kleinster Root-Cause-Fix und nur nach vollständigem Gate.
-- `AFF-ERR-001`: kein Gesamt-/Automatik-PASS ohne belegte Relevanz- und Liveprüfung.
+- `AFF-ERR-023`: 6.72.8-Cleanup live sichtbar, fail-closed 0/4500, keine destruktive Bereinigung erzwingen.
+- `AFF-ERR-024`: Root Cause bewiesen: verwendeter 298-Zeilen-Feed ist 298/298 fachfremd; einziges Importobjekt ist False Positive durch synthetisches `FeedScope=Pferdebedarf` + `Windschutz`. Fix noch offen.
+- `AFF-ERR-025`: CURRENT-/Hobbyraum-Drift NACHGEHOLT/CLOSED.
+- `AFF-ERR-006`: keine Pluginorgie; nächster Kandidat erst nach vollständigem gebundenem Gate.
+- `AFF-ERR-007`: Nutzerhandlungen nur mit vollständigem real belegtem WordPress-/Awin-Pfad; keine erfundenen Menünamen.
+- `AFF-ERR-001`: kein Gesamt-/Automatik-/Release-PASS ohne echte Evidence.
 
-**Nächster zulässiger Schritt:** zuerst CURRENT-/Hobbyraum-Konsistenz nachholen. Danach Awin-Feed fachlich korrekt auswählen und den OTTO-Gate minimal so reparieren, dass deklariertes FeedScope niemals selbst Pferde-Domain-Evidence erzeugt. Automatik bleibt AUS.
+**Nächster zulässiger Schritt:** im Hobbyraum zuerst den exakten `Windschutz`-Negativfall als Regression binden, dann den kleinsten OTTO-Gate-Rootfix durchführen: Feed-/Scope-Metadaten dürfen niemals selbst Pferde-Domain-Evidence erzeugen. Danach POSITIV/NEGATIV/Gesamtworkflow + historische Regressionen + Manifest/Byte-Scope + Error-Register-Postcheck. Parallel dazu Awin-Auswahl ausschließlich aus den real belegten drei OTTO-Feeds korrigieren. Automatik bleibt AUS.
