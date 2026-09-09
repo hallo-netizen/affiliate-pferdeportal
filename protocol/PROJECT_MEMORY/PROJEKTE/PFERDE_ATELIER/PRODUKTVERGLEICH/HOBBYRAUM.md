@@ -1,71 +1,54 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
-STAND: 2026-09-08
-STATUS: AKTIV / 0.7.0 WORDPRESS-LIVEABNAHME
+STAND: 2026-09-09
+STATUS: AKTIV / PV-LIVE-001 / 0.7.1-KORREKTUR
 
 ## AKTUELLER AUFTRAG
 
-Den jetzt lokal vollständig geprüften bidirektionalen Produktvergleichs-Gesamtworkflow einmal real in WordPress abnehmen.
+Den realen 0.7.0-WordPress-Fehler `PV-LIVE-001` im bestehenden Gesamtworkflow reparieren.
 
-## GEBUNDENER WORKFLOW
+## AUSGANGSPUNKT
 
-`SEO ↔ Produktwissen → Vergleichbarkeit → Nachfrage/Kannibalisierung → Dossier → Audit`
+Realer Livebefund:
+- 8 Regendecken-Kandidaten;
+- 16 Provider-Aufrufe / $0.1920;
+- danach 0 SEO-PASS, 8 blockiert, 0 Dossiers;
+- trotzdem grünes `PASS`;
+- post-run Kostenfeld zeigte $0.0000 mit irreführender Beschriftung `dieses Laufs`.
 
-Harte Regeln:
-- genau 2 Produkte je Produktvergleich;
-- unterschiedliche Hersteller;
-- keine erfundenen Produktidentitäten oder Fakten;
-- SEO darf konkrete Produkt-/Paar-Nachfrage entdecken;
-- Produktwissen darf technisch sinnvolle Paare zur SEO-Prüfung geben;
-- unbekannte konkrete SEO-Produkte → Produktrecherche, nicht Ersatzprodukt;
-- vorhandener SEO-Bestand/Cache zuerst;
-- Provider nur für danach echte SEO-Lücken;
-- Teilresultat nie Gesamt-PASS;
-- keine Writer-/Draft-/Publish-Arbeit in dieser Prüfstufe.
+Autoritative Fehlerquelle:
+`FEHLERQUELLEN.md`.
 
-## TESTKANDIDAT
-
-Plugin:
-`Universal Product Comparison 0.7.0-prototype`
-
-ZIP SHA-256:
-`b6563940f96d0e9134109779f8046b5e8b9e1109bc9965d9d01deb5c75ed610d`
-
-Technischer Isolationsbranch:
+Technischer Hobbyraum:
 `hobbyroom/productvergleich-workflow-v070-20260908`
 
-Kein main-Merge.
+## KISS-KORREKTUR
 
-## LOKALER BELEG
+Nur:
+1. finaler Workflowstatus kennt `NO_ELIGIBLE_COMPARISONS`;
+2. dieser Status wird nie als Success-Notice gerendert;
+3. Run-Notice zeigt finalen SEO-PASS-/Blockiert-Stand;
+4. Kostenfeld wird als Schätzung für einen **jetzt neu gestarteten** Lauf beschriftet;
+5. exakter 8→16→8 BLOCKED→0-Dossier-Livefall wird Regressionstest.
 
-PASS:
-- PHP-Lint 31/31;
-- 0.6 SEO-Regressions;
-- 0.6 Dossier-Regressions;
-- bidirektionale SEO-/Produktrecherche-Erkennung positiv/negativ;
-- Pairing positiv/negativ;
-- Profil-Drift negativ;
-- kompletter Workflow positiv/negativ;
-- Bootstrap/Single-Door;
-- echte PSTE-Themenmap 81 Themen / False-Pair-Guard;
-- statischer Gesamtworkflow-Release-Gate;
-- fertige ZIP frisch entpackt und vollständig erneut geprüft;
-- Source ↔ Fresh-ZIP byte-identisch.
+Keine neue Architektur. Kein Writer. Kein Draft. Kein Publish.
+
+## PFLICHTPRÜFUNG VOR NÄCHSTER ZIP
+
+- bestehende 0.6/0.7 Regressionen;
+- exakter PV-LIVE-001-Negativfall;
+- echter A-gegen-B-SEO-Positivfall;
+- generische Anfrage negativ;
+- Same-Brand negativ;
+- Vergleichbarkeit negativ;
+- Provider PARTIAL negativ;
+- Dossier-/Profil-Drift negativ;
+- autoritative PSTE-0.56.25-Kostenrate;
+- Admin-Notice Positiv/Negativ;
+- PHP-Lint;
+- statische Write-/Publish-Grenzen;
+- komplette Suite aus frisch gepackter ZIP in leerem Verzeichnis.
 
 ## NEXT ACTION
 
-**Einziger nächster Nutzertest:**
-
-WordPress → Plugins → `Universal Product Comparison` mit 0.7.0 ersetzen.
-
-Danach:
-WordPress → **Produktvergleich → Vergleichsplanung** → **Regendecken** → **Gesamtworkflow starten**.
-
-Danach Screenshot/Ergebnis zurückgeben.
-
-Erst diesen realen Zustand prüfen. Kein neuer Pluginstand, kein Writer, kein Draft, kein Publish vor dieser Abnahme.
-
-## RÜCKGABEWEG
-
-Realbefund hier im PRODUKTVERGLEICH-Büro auswerten.
-Bei Fehler: zuerst gegen den gesamten gebundenen Workflow prüfen, dann kleinster KISS-Fix im Hobbyraum; keine neue Architektur und keine Zwischen-ZIP.
+0.7.1-Kandidat intern fertig prüfen. Erst bei Gesamt-PASS genau **eine** neue ZIP für den WordPress-Retest ausgeben.
