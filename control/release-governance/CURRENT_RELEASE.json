@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 48,
+  "generation": 49,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -125,7 +125,7 @@
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
-    "authorized_next_action": "CORRECT_AWIN_FEED_AND_FIX_FEEDSCOPE_FALSE_POSITIVE_NO_AUTOMATION",
+    "authorized_next_action": "RESELECT_OTTO_FROM_REAL_THREE_FEEDS_AND_FIX_FEEDSCOPE_EVIDENCE_NO_AUTOMATION",
     "bound_user_scope_action": "INSTALL_6_72_7; NO_BUTTONS; READ_OTTO_SICHERHEITSBEREINIGUNG; KEEP_AUTOMATION_OFF",
     "completion_condition": "BOUND_CHECK_PASS_AND_REAL_OTTO_PRODUCT_FEED_PASS_AND_REAL_CREATIVE_SOURCE_PASS_AND_WEIGHTED_OUTPUT_PASS_AND_MANUAL_REPAIR_RETURN_TO_AUTO_PASS",
     "after_completion_action": "FINALIZE_RELEASE",
@@ -247,12 +247,37 @@
       "decision": "Do not create another cleanup plugin. Use existing filtered-feed workflow and standard reconcile quarantine/inactive_missing over two complete filtered runs."
     },
     "otto_awin_filtered_live_run": {
-      "status": "FEED_VALIDATED_WRONG_SCOPE_AND_GATE_FALSE_POSITIVE",
-      "evidence": "Uploaded datafeed_2990695.csv.gz: 298 rows; categories 211 Skincare, 31 Cosmetics, 28 Basketball, 22 Garden, 6 Football; no explicit horse/equestrian marker. False positive aw_product_id 45749237798 contains 'Windschutz'.",
-      "decision": "Keep automation OFF until exact feed rows are reviewed; no plugin change merely to expose discarded block reasons if the feed itself can be inspected.",
-      "next_action": "Correct Awin Create-a-Feed selection and minimally change OTTO relevance gate so FeedScope cannot establish horse-domain evidence; run full positive/negative workflow before any plugin output.",
+      "status": "LIVE_SUCCESS_FEED_WRONG_SCOPE_FALSE_POSITIVE_PROVEN_ROOTFIX_PENDING",
+      "evidence": "2026-09-09 live: 298 scanned / 1 imported / 297 blocked. Exact uploaded feed review: all 298 rows off-topic; categories 211 Skincare, 31 Cosmetics, 28 Basketball, 22 Garden, 6 Football. False positive aw_product_id 45749237798 contains Windschutz.",
+      "decision": "Automation remains OFF. Do not treat declared FeedScope as horse evidence. Correct feed selection from the exact three available OTTO feeds and apply the smallest gate rootfix before any new installer.",
+      "next_action": "Bind a regression against the Windschutz false positive plus a real horse positive case, implement minimal FeedScope evidence fix, then run full bound gate.",
       "root_cause": "OTTO gate injects FeedScope=Pferdebedarf, shared classifier counts pferdebedarf as strong horse evidence; generic Windschutz then matches catalog concept 'Windschutz für Pferde'."
-    }
+    },
+    "otto_awin_feed_inventory": {
+      "status": "PASS_USER_FILE_EXACT_THREE_ACTIVE_FEEDS",
+      "source": "User-uploaded Awin feed list datafeeds.csv; secret URL/API key intentionally not persisted.",
+      "advertiser_id": 14336,
+      "checked_at": "2026-09-09",
+      "feeds": [
+        {
+          "feed_id": 54165,
+          "name": "Wohnen, Spielzeug und Baumarkt",
+          "products": 317451
+        },
+        {
+          "feed_id": 54179,
+          "name": "Technik und Sport",
+          "products": 90547
+        },
+        {
+          "feed_id": 54183,
+          "name": "Kategorien: Mode und Beauty",
+          "products": 347642
+        }
+      ],
+      "conclusion": "No separate Pferde/Tierbedarf/Schuhe feed is present in the supplied current Awin feed list."
+    },
+    "current_protocol_ref": "protocol/AFFILIATE_RELEASE_OTTO_FEED_VALIDATION_20260909.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -598,7 +623,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "FIX_OTTO_FEED_SELECTION_AND_REMOVE_FEEDSCOPE_AS_HORSE_EVIDENCE",
+    "current_milestone": "FIX_OTTO_FEEDSCOPE_FALSE_POSITIVE_AND_RESELECT_FROM_REAL_THREE_FEEDS",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
