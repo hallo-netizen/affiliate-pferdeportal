@@ -1,11 +1,9 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: AKTIV / NÄCHSTER SCHRITT WORDPRESS-LIVE-RETEST 0.8.2
+STATUS: AKTIV / 0.8.2 LIVE-CACHE-REUSE PASS / NÄCHSTE OFFENE PRODUKTVERGLEICHS-LÜCKE ERMITTELN
 
-## AKTUELLER AUFTRAG
-
-Nur diesen lokal hart geprüften Kandidaten testen:
+## AKTUELLER KANDIDAT
 
 `universal-product-comparison-0.8.2-prototype.zip`
 
@@ -15,10 +13,10 @@ SHA-256:
 Branch:
 `hobbyroom/productvergleich-workflow-v070-20260908`
 
-## LOKALE ABNAHMEGRENZE
+## ABGESCHLOSSENE STUFE
 
-PASS:
-- finale Fresh-ZIP 20/20;
+Lokale Vorprüfung:
+- finale Fresh-ZIP 20/20 PASS;
 - PHP-Lint 40/40;
 - Source↔ZIP 51/51;
 - Report-Hashes 50/50;
@@ -27,18 +25,16 @@ PASS:
 - Gesamtworkflow;
 - Mutation/Gegenbeweise.
 
-Damit ist nur die **lokale Vorprüfung PASS**.
+WordPress-Live-Gegenbeweis:
+- bestehende 8 terminalen SEO-Ergebnisse erhalten;
+- vor erneutem Lauf neue Providerkosten $0.0000;
+- nach erneutem Workflow: 0 Provider-Aufrufe;
+- Kosten $0.0000;
+- `NO_ELIGIBLE_COMPARISONS`;
+- 8 final blockiert;
+- 0 Dossiers.
 
-## NEXT ACTION WORDPRESS
-
-1. 0.8.2 installieren/ersetzen.
-2. WordPress neu laden.
-3. `Produktvergleich` öffnen.
-4. Noch keinen Workflow starten.
-5. Screenshot an den Arbeitschat zurückgeben.
-6. Prüfen: Version 0.8.2, bestehende 8 terminalen SEO-Ergebnisse weiterhin erhalten, Kostenanzeige für den aktuellen Stand $0.0000.
-7. Erst danach gezielter Live-Retest.
-8. Nichts veröffentlichen.
+Damit ist PV-COST-082-001 für den wiederholten identischen Live-Bestand CLOSED.
 
 ## SPEICHER-HARD-RULE
 
@@ -52,8 +48,17 @@ Persistente Evidenz wird nur neu gekauft bei:
 
 Manipulierte Evidenz => BLOCK, nicht still neu kaufen.
 
-## BLOCK-GRENZE
+## NEXT ACTION
 
-Falsche Version/SHA, verlorene bestehende SEO-Befunde, unerwartete Providerkosten, Cache-/Hashfehler, Dossier-/Audit-Drift oder Schreib-/Publishweg => BLOCKED.
+Keine neue Plugin-Version erzeugen.
 
-Keine weitere Funktion vor dem Live-Retest.
+Zuerst die verbleibenden Produktvergleichs-Ziel-/Fehlerquellen lesen und exakt den **nächsten noch offenen Punkt** bestimmen.
+
+Dann:
+1. nur diesen einen Punkt bearbeiten;
+2. positive + negative Prüfung;
+3. gegen den gesamten Produktvergleichsworkflow prüfen;
+4. erst bei echter Änderung neuer Kandidat.
+
+Kein ACM-/SEO-TEXT-Integrationsbau an dieser Stelle.
+Kein Publish.
