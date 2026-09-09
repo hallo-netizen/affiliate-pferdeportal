@@ -36,3 +36,5 @@ def main():
 
 if __name__=="__main__":
     raise SystemExit(main())
+
+# workflow-trigger: lt-runtime-inventory-v1
