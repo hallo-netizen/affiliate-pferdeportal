@@ -78,29 +78,32 @@ PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
 ERROR_SOURCE_BLOB_SHA: b502d5ec07b4f464f3c069b20d56c0bb8cab5c47
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 76b667eb3713907c95ab7f5409e4a8358962856a
+CURRENT_STATE_BLOB_SHA: b01fdc3f14d1f3117119cd952485ad00ce6c7253
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: 4e261360bb768b98a1bf58ac0c8cf153f5bec10a
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: 49aa11a8aed3427f2a1ff39ce3fcd48e8f20f971
+PROTOCOL_SOURCE_BLOB_SHA: e8e93a1944e3cedc13ff6fe0c21ac82bf4f8c885
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**Nur die Zwangsjacke einmal KISS korrigieren, dann sofort zurück zu M17.**
+**PR #200 ist fertig geprüft; nur der bekannte einmalige Selbstschutz-Bypass fehlt.**
 
-1. Wartungs-PR `hobbyroom/m22-sequential-history-gate-20260909` gegen current main öffnen.
-2. Scope exakt 3 bestehende Dateien: Matrix, Runner, `paul_scope_gate.py`.
-3. M22-Orakel muss current main FAIL und bewiesenen B15-Stand `799002…` PASS liefern.
-4. Sequenzregel muss M17→M22/M35 erlauben, M17→M17/früher/unbekannt blockieren; ohne Folgefehler Gesamt-PASS.
-5. Kein Produktionscode im Wartungs-PR.
-6. Nach Integration: Bypass sofort wieder entfernen.
-7. M17-Kandidat #199 auf fresh main neu binden, `HISTORY_EXPECTED_FAIL: M22`, normal hardlock/hardlock-base.
-8. Nach regulärem M17-Merge wird ausschließlich M22 repariert; M35 bleibt geparkt.
+GitHub:
+`Settings → Rules → Rulesets → Pferde Atelier Main Hardlock → Edit → Bypass list → Add bypass → Repository admin → For pull requests only → Add Selected → Save changes`
+
+Danach:
+1. ausschließlich PR #200 mergen;
+2. Bypass sofort wieder entfernen;
+3. M17-Kandidat #199 auf fresh main neu binden;
+4. `HISTORY_EXPECTED_FAIL: M22`;
+5. normal `hardlock` + `hardlock-base`;
+6. M17 regulär mergen;
+7. anschließend ausschließlich M22 reparieren; M35 bleibt geparkt.
 
 ## VERBINDLICHER ARBEITSWEG
 
