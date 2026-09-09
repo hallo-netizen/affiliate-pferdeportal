@@ -7,11 +7,18 @@
 function acm_wp_fail($reason){ throw new RuntimeException((string)$reason); }
 
 function acm_wp_sort_recursive($value){
-    if(!is_array($value)) return $value;
-    $isList=array_keys($value)===range(0,count($value)-1);
-    if($isList){$out=[];foreach($value as $v)$out[]=acm_wp_sort_recursive($v);return $out;}
-    ksort($value,SORT_STRING);
-    foreach($value as $k=>$v)$value[$k]=acm_wp_sort_recursive($v);
+    if($value instanceof stdClass){
+        $vars=get_object_vars($value);
+        ksort($vars,SORT_STRING);
+        $obj=new stdClass();
+        foreach($vars as $k=>$v)$obj->{$k}=acm_wp_sort_recursive($v);
+        return $obj;
+    }
+    if(is_array($value)){
+        $out=[];
+        foreach($value as $v)$out[]=acm_wp_sort_recursive($v);
+        return $out;
+    }
     return $value;
 }
 function acm_wp_hash($value){
@@ -27,7 +34,9 @@ function acm_wp_exact_keys($value,$keys,$error){
 function acm_wp_verify_signed_package($path,$trustedKeys,$isBatchUsed){
     $raw=@file_get_contents($path);
     if($raw===false)acm_wp_fail('FINAL_JSON_MISSING');
+    $pkgObj=json_decode($raw,false);
     $pkg=json_decode($raw,true);
+    if(!($pkgObj instanceof stdClass)||!is_array($pkg))acm_wp_fail('FINAL_JSON_INVALID');
     $packageKeys=[
       'contract','fact_pack_bundle_sha256','production_plan_sha256',
       'workflow_release_sha256','package_id','source','fact_pack_bundle',
@@ -41,14 +50,14 @@ function acm_wp_verify_signed_package($path,$trustedKeys,$isBatchUsed){
     if(($bundle['contract']??'')!=='canonical_fact_pack_import_v1')acm_wp_fail('FACT_PACK_BUNDLE_CONTRACT_INVALID');
     if(($plan['contract']??'')!=='production_plan_v4')acm_wp_fail('PRODUCTION_PLAN_CONTRACT_INVALID');
 
-    $bh=acm_wp_hash($bundle);$ph=acm_wp_hash($plan);$rh=acm_wp_hash($release);
+    $bh=acm_wp_hash($pkgObj->fact_pack_bundle);$ph=acm_wp_hash($pkgObj->production_plan);$rh=acm_wp_hash($pkgObj->workflow_release);
     if(!hash_equals((string)($pkg['fact_pack_bundle_sha256']??''),$bh))acm_wp_fail('HANDOFF_COMPONENT_HASH_MISMATCH:fact_pack_bundle_sha256');
     if(!hash_equals((string)($pkg['production_plan_sha256']??''),$ph))acm_wp_fail('HANDOFF_COMPONENT_HASH_MISMATCH:production_plan_sha256');
     if(!hash_equals((string)($pkg['workflow_release_sha256']??''),$rh))acm_wp_fail('HANDOFF_COMPONENT_HASH_MISMATCH:workflow_release_sha256');
     $pid=acm_wp_hash(['contract'=>'PSERC_APPROVED_PRODUCTION_PACKAGE_V1','fact_pack_bundle_sha256'=>$bh,'production_plan_sha256'=>$ph,'workflow_release_sha256'=>$rh]);
     if(!hash_equals((string)($pkg['package_id']??''),$pid))acm_wp_fail('HANDOFF_PACKAGE_ID_MISMATCH');
-    $copy=$pkg;$declared=$copy['package_payload_sha256']??'';unset($copy['package_payload_sha256']);
-    if(!hash_equals((string)$declared,acm_wp_hash($copy)))acm_wp_fail('HANDOFF_PACKAGE_PAYLOAD_HASH_MISMATCH');
+    $copyObj=clone $pkgObj;$declared=(string)($pkg['package_payload_sha256']??'');unset($copyObj->package_payload_sha256);
+    if(!hash_equals($declared,acm_wp_hash($copyObj)))acm_wp_fail('HANDOFF_PACKAGE_PAYLOAD_HASH_MISMATCH');
 
     if(($release['contract']??'')!=='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'||($release['status']??'')!=='PASS')acm_wp_fail('WORKFLOW_RELEASE_SHAPE_INVALID');
     if(($release['signature_algorithm']??'')!=='ED25519')acm_wp_fail('WORKFLOW_RELEASE_SIGNATURE_ALGORITHM_INVALID');
@@ -63,14 +72,14 @@ function acm_wp_verify_signed_package($path,$trustedKeys,$isBatchUsed){
     if(!hash_equals((string)($trusted['sha256']??''),$pubSha))acm_wp_fail('TRUSTED_PUBLIC_KEY_SHA_INVALID');
     if(!hash_equals((string)($release['signing_public_key_sha256']??''),$pubSha))acm_wp_fail('WORKFLOW_RELEASE_SIGNING_KEY_IDENTITY_MISMATCH');
 
-    $payload=$release;unset($payload['release_payload_sha256'],$payload['signature_b64'],$payload['release_sha256']);
-    $payloadSha=acm_wp_hash($payload);
+    $payloadObj=clone $pkgObj->workflow_release;unset($payloadObj->release_payload_sha256,$payloadObj->signature_b64,$payloadObj->release_sha256);
+    $payloadSha=acm_wp_hash($payloadObj);
     if(!hash_equals((string)($release['release_payload_sha256']??''),$payloadSha))acm_wp_fail('WORKFLOW_RELEASE_PAYLOAD_HASH_MISMATCH');
     $sig=base64_decode((string)($release['signature_b64']??''),true);
     if($sig===false||strlen($sig)!==SODIUM_CRYPTO_SIGN_BYTES)acm_wp_fail('WORKFLOW_RELEASE_SIGNATURE_ENCODING_INVALID');
     if(!sodium_crypto_sign_verify_detached($sig,$payloadSha,$pub))acm_wp_fail('WORKFLOW_RELEASE_SIGNATURE_INVALID');
-    $releaseCopy=$release;unset($releaseCopy['release_sha256']);
-    if(!hash_equals((string)($release['release_sha256']??''),acm_wp_hash($releaseCopy)))acm_wp_fail('WORKFLOW_RELEASE_HASH_MISMATCH');
+    $releaseCopyObj=clone $pkgObj->workflow_release;unset($releaseCopyObj->release_sha256);
+    if(!hash_equals((string)($release['release_sha256']??''),acm_wp_hash($releaseCopyObj)))acm_wp_fail('WORKFLOW_RELEASE_HASH_MISMATCH');
 
     $batch=(string)($release['exact_five_batch_sha256']??'');
     if(!preg_match('/^[0-9a-f]{64}$/',$batch))acm_wp_fail('BATCH_INVALID');
