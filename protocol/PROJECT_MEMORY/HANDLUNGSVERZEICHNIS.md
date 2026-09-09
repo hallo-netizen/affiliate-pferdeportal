@@ -173,10 +173,10 @@ Auch nicht als Ersatzroute bei BLOCKED.
 Nach Restore erst frischen offiziellen Arbeits-Worktree herstellen und dann den normalen definierten Arbeitsweg neu starten.
 
 
-## Produktvergleich planen / vorbereiten
+## Produktvergleich planen / entwickeln
 
 Aktion:
-Produktvergleich definieren, Vergleichseigenschaften festlegen, harte Fakten/Quellen recherchieren oder ein Faktendossier für die spätere Artikelproduktion vorbereiten.
+Produktwissen/Produktrecherche, konkrete Produktvergleiche, Vergleichsmerkmale, SEO-Nachfrageabgleich, harte Fakten/Quellen, Dossiers oder den eigenständigen V1-Produktvergleichsweg bearbeiten.
 
 Verbindlicher Weg:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
@@ -184,11 +184,15 @@ Verbindlicher Weg:
 → `HOBBYRAUM.md`
 → gebundene Originalquellen.
 
-Fachgrenze:
-Das Büro PRODUKTVERGLEICH bereitet Vergleich und Faktengrundlage vor.
-Die eigentliche Artikel-/Textproduktion bleibt im Büro TEXT und dessen bestehendem Produktionsweg.
+Fachgrenzen:
+- PRODUKTWISSEN bleibt Produktwahrheit;
+- SEO/PSTE liefert nur Nachfrage-/Planning-/Kannibalisierungssignale und schreibt keine Produktfakten;
+- AFFILIATE bleibt nachgelagerter Exact-Match-Commerce-Layer;
+- STARTMASTER/TEXT wird aus diesem Büro nicht umgebaut;
+- V1 besitzt aktuell keine STARTMASTER/TEXT-Laufzeitabhängigkeit;
+- eine spätere ACM-/TEXT-Anbindung ist nur nach eigener isolierter Machbarkeits-/Vertragsentscheidung zulässig und niemals automatische Ersatzroute.
 
-Keinen zweiten Textmaschinen-/STARTMASTER-Weg im Produktvergleichsbüro bauen.
+Keinen parallelen STARTMASTER-/TEXT-Umbau aus dem Produktvergleichsbüro beginnen.
 
 
 ## Externe READ-ONLY-Zweitprüfung
