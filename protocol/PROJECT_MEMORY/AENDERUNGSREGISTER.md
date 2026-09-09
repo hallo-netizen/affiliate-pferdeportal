@@ -1176,3 +1176,40 @@ BELEG:
 
 GRENZE:
 Noch kein WordPress-LIVE-PASS für 0.8.3. Keine SEO/TEXT-/ACM-Integration aus diesem Büro.
+
+
+## PV-PLAN-022 – Aktiver Produktvergleichs-Planstatus nach V2 konsolidiert
+STAND:
+2026-09-09 / VERBINDLICHER STATUSWEGWEISER.
+
+ZWECK:
+Frühere PV-PLAN-Einträge bleiben als Entscheidungs-/Fehlerhistorie erhalten, dürfen aber nicht mehr als gleichzeitige aktive Architektur gelesen werden.
+
+AKTIV / DURCH V2 BESTÄTIGT:
+- PV-PLAN-001: eigenes Fachmodul, keine zweite Textmaschine;
+- PV-PLAN-002: Affiliate bleibt Kaufquellen-/Commerce-Schicht;
+- PV-PLAN-005: Fachkonzept hier, technische Integration im zuständigen Nachbarbüro;
+- PV-PLAN-009: Produktwissen einmal recherchieren, mehrfach fachlich lesen;
+- PV-PLAN-010: Produktwissen entscheidet fachlich, Affiliate darf nur entdecken/monetarisieren;
+- PV-PLAN-014: reale Vergleichskategorie Regendecken ist flach gebunden;
+- PV-PLAN-017: eigener WordPress-Hauptmenüpunkt;
+- PV-PLAN-018: UI/Lifecycle-PASS nur über echten Lifecycle;
+- PV-PLAN-020: Dossier -> bestehende SEO/TEXT-Straße;
+- PV-PLAN-021: Fachpolicy im Dossier gebunden.
+
+ABGELÖST ALS AKTIVER PRODUKTIONSWEG:
+- PV-PLAN-003: eigenständiger Product-Compare-Writer -> WordPress-DRAFT;
+- PV-PLAN-004: damaliger Extension-Probe-Entscheidungsweg;
+- PV-PLAN-015: alter eigener Erst-Draft-Produktionsweg;
+- PV-PLAN-016: alter PV-REG-001-Draftknopf;
+- PV-PLAN-019: damaliger V1-Abschlussstand.
+
+NUR ZUKUNFTS-/DESIGNKONZEPT, NICHT AKTIVER PRODUCT_COMPARISON-V1-SCOPE:
+- PV-PLAN-007: neutrale eigene Vergleichsgrafik;
+- PV-PLAN-008: Gruppen-/Produkt-/Varianten-Vergleichsarchiv.
+
+PV-PLAN-006:
+historischer Queraudit-/Entscheidungsbeleg, keine aktuelle Route.
+
+HARD RULE:
+Für aktuellen Ziel-/Arbeitsweg gelten ausschließlich ZIELVERTRAG_V2 + CURRENT_STATE + HOBBYRAUM. Historische PV-PLAN-Einträge dürfen keinen abgelösten Writer-, Draft-, Extension- oder Gruppenvergleichsweg reaktivieren.
