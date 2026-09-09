@@ -79,18 +79,25 @@ def main():
           "ppm_generate":class_method(ppm,"PPM679_Content_Generator","generate"),
           "pserc_bridge_prepare":class_method(pserc,"PSERC_PPM_Intake_Bridge","prepare"),
           "pserc_bridge_execute":class_method(pserc,"PSERC_PPM_Intake_Bridge","execute"),
+          "pserc_supervisor_validate":class_method(pserc,"PSERC_Workflow_Supervisor","validate"),
         }
         if not critical["ppm_load_fact_pack"] or not critical["ppm_generate"]:
             raise RuntimeError("PPM_FACTPACK_CRITICAL_METHOD_MISSING")
         if not critical["pserc_bridge_prepare"]:
             raise RuntimeError("PSERC_BRIDGE_PREPARE_MISSING")
+        supervisor_validate=critical["pserc_supervisor_validate"]
+        if not supervisor_validate or "PSERC_PPM_Intake_Bridge::prepare" not in supervisor_validate["source"]:
+            raise RuntimeError("PSERC_SUPERVISOR_PREPARE_BINDING_MISSING")
 
         prepare_tests=[]
+        supervisor_tests=[]
         tests_root=pserc/"tests"
         if tests_root.is_dir():
             for test in sorted(tests_root.rglob("*.php")):
                 txt=test.read_text(encoding="utf-8")
-                if "PSERC_PPM_Intake_Bridge::prepare" not in txt:
+                direct="PSERC_PPM_Intake_Bridge::prepare" in txt
+                indirect="PSERC_Workflow_Supervisor::validate(" in txt
+                if not direct and not indirect:
                     continue
                 proc=subprocess.run(
                     ["php",str(test)],
@@ -100,22 +107,25 @@ def main():
                     stderr=subprocess.STDOUT,
                     timeout=180,
                 )
-                prepare_tests.append({
+                row={
                     "test":str(test.relative_to(pserc)),
                     "returncode":proc.returncode,
                     "status":"PASS" if proc.returncode==0 else "FAIL",
                     "output_tail":proc.stdout[-2400:],
-                })
-        if not prepare_tests:
-            raise RuntimeError("PSERC_BRIDGE_PREPARE_ORIGINAL_TEST_MISSING")
-        failed=[x["test"] for x in prepare_tests if x["returncode"]!=0]
+                }
+                (prepare_tests if direct else supervisor_tests).append(row)
+        covered=prepare_tests+supervisor_tests
+        if not covered:
+            raise RuntimeError("PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING")
+        failed=[x["test"] for x in covered if x["returncode"]!=0]
         if failed:
-            raise RuntimeError("PSERC_BRIDGE_PREPARE_ORIGINAL_TEST_FAILED:"+",".join(failed))
+            raise RuntimeError("PSERC_BRIDGE_PREPARE_EXISTING_TEST_FAILED:"+",".join(failed))
 
         print(json.dumps({
           "status":"P26_RESEARCH_FACTPACK_CHAIN_MAP_PASS",
           "critical_methods":critical,
-          "pserc_bridge_prepare_original_tests":prepare_tests,
+          "pserc_bridge_prepare_direct_tests":prepare_tests,
+          "pserc_bridge_prepare_via_supervisor_tests":supervisor_tests,
           "ppm_matches":scan(ppm,"PPM",70),
           "pserc_matches":scan(pserc,"PSERC",90),
           "pste_matches":scan(PSTE,"PSTE",90),
