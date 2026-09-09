@@ -102,7 +102,7 @@ Eine „komplette Fresh-ZIP-Suite“ ist nur dann bewiesen, wenn die externen re
 
 Frisch geprüft:
 - Campus-Branch `hobbyroom/project-memory-campus-v1-20260905` ist die Büro-/Statusautorität.
-- Produktwissen-Draft-PR #142: offen, ungemergt, Head `49363529463509b87a8ea7deb079d7d4c1b6e006`.
+- Produktwissen-Draft-PR #142: offen und ungemergt; Head ist dynamisch und wird nicht als Dauerwahrheit hier geführt.
 - Produktvergleich-Technikbranch `hobbyroom/productvergleich-workflow-v070-20260908`: Head `5d6863a9fe9b9082c1111debc22cde96191a34eb`; enthält **nicht** den kompletten 0.8.0-Quellstand und ist daher aktuell **keine 0.8-Source-Autorität**.
 - 0.8.0 ist derzeit als hashgebundener getesteter ZIP-Kandidat verfügbar; kein Merge/Produktionsstatus wird aus dem älteren Technikbranch abgeleitet.
 
@@ -111,7 +111,7 @@ Frisch geprüft:
 Frisch geprüft:
 - Branch `alternative/seo-text-central-machine-20260908`;
 - Draft-PR #195 offen/ungemergt;
-- aktueller Head `95df66ce3c4a706fc7d8f7f61d8ce01eb44fbbc0`;
+- Branch/PR bewegte sich während der Abschlussprüfung weiter; aktueller Head wird bewusst nicht als Dauerwahrheit in dieser Chronik festgeschrieben;
 - ACM bleibt strikt vom laufenden STARTMASTER-/Reparaturweg getrennt;
 - bestehende Textmaschine und Fachregeln bleiben autoritativ;
 - Controller ist beitragsart-unabhängig;
