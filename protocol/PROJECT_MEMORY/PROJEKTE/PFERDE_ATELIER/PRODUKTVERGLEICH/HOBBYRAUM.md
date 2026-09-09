@@ -1,64 +1,60 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: AKTIV / 0.8.2 LIVE-CACHE-REUSE PASS / NÄCHSTE OFFENE PRODUKTVERGLEICHS-LÜCKE ERMITTELN
+STATUS: AKTIV / 0.8.3 FINAL-FRESH-ZIP LOKAL PASS / WORDPRESS-LIVE-RETEST OFFEN
 
-## AKTUELLER KANDIDAT
+## AKTUELLER TESTKANDIDAT
 
-`universal-product-comparison-0.8.2-prototype.zip`
+`universal-product-comparison-0.8.3-prototype.zip`
 
 SHA-256:
-`6f0f1f8d62870fd2cd1ee34010c1b157d9ac140327e46cd8a6d0b48a1a05f2ad`
+`4c08ca1df348ab49849ddde8f85980db450694c58010cd0c431575bc6a3cd11e`
 
 Branch:
 `hobbyroom/productvergleich-workflow-v070-20260908`
 
-## ABGESCHLOSSENE STUFE
+## ABGESCHLOSSEN
 
-Lokale Vorprüfung:
-- finale Fresh-ZIP 20/20 PASS;
-- PHP-Lint 40/40;
-- Source↔ZIP 51/51;
-- Report-Hashes 50/50;
-- echte UPK-/PSTE-Abhängigkeiten;
-- Positiv/Negativ;
-- Gesamtworkflow;
-- Mutation/Gegenbeweise.
+0.8.2:
+- WordPress-Live-Kostenwiederholung PASS;
+- 0 Provider;
+- $0.0000;
+- `NO_ELIGIBLE_COMPARISONS`.
 
-WordPress-Live-Gegenbeweis:
-- bestehende 8 terminalen SEO-Ergebnisse erhalten;
-- vor erneutem Lauf neue Providerkosten $0.0000;
-- nach erneutem Workflow: 0 Provider-Aufrufe;
-- Kosten $0.0000;
-- `NO_ELIGIBLE_COMPARISONS`;
-- 8 final blockiert;
-- 0 Dossiers.
+0.8.3 lokal:
+- 25/25 Tests PASS;
+- PHP-Lint 43/43;
+- Source↔finale ZIP 57/57;
+- Report-Hashes 56/56;
+- 11 echte UPK-Regendecken-Paare geprüft;
+- Dossier V2 mit gebundener Fachpolicy;
+- Policy-Drift fail-closed;
+- Fachpolicy ändert bezahlte SEO-Bindung nicht;
+- Mutation/Gegenbeweise PASS;
+- kein Auto-Publish.
 
-Damit ist PV-COST-082-001 für den wiederholten identischen Live-Bestand CLOSED.
+## NEXT ACTION WORDPRESS
 
-## SPEICHER-HARD-RULE
+1. ausschließlich 0.8.3 installieren/ersetzen;
+2. WordPress neu laden;
+3. `Produktvergleich` öffnen;
+4. **noch keinen Workflow starten**;
+5. zuerst Version, 8 bestehende SEO-Endstände und Kostenanzeige prüfen;
+6. nur wenn dort weiterhin $0.0000 für den bekannten Bestand steht: genau einen gebundenen Lauf;
+7. prüfen, dass der Lauf weiterhin 0 Provider / $0.0000 / 8 BLOCKED / 0 Dossiers liefert;
+8. Dossier-V2-/Policy-Liveweg erst an einem später tatsächlich SEO-geeigneten Paar positiv verifizieren;
+9. nichts veröffentlichen.
 
-Ein bezahlter Produkt-/Paar-Endpunkt darf innerhalb seiner gültigen Bindung nicht erneut gekauft werden.
+## BLOCK-GRENZE
 
-Persistente Evidenz wird nur neu gekauft bei:
-- Ablauf;
-- Provider-/PSTE-Kontextänderung;
-- Produkt-/Paar-/Signaturänderung;
-- anderer Sprache/Region/Umgebung.
+BLOCKED bei:
+- falscher Version/SHA;
+- Verlust bestehender SEO-Evidenz;
+- neue Providerkosten für unveränderten Bestand;
+- mehr oder weniger als exakt 2 Produkte im A-vs-B-Dossier;
+- Policy-/Fakten-/Audit-Drift;
+- ungebundener fachlicher Aussage;
+- unerwartetem Writer-/Draft-/Publishweg.
 
-Manipulierte Evidenz => BLOCK, nicht still neu kaufen.
-
-## NEXT ACTION
-
-Keine neue Plugin-Version erzeugen.
-
-Zuerst die verbleibenden Produktvergleichs-Ziel-/Fehlerquellen lesen und exakt den **nächsten noch offenen Punkt** bestimmen.
-
-Dann:
-1. nur diesen einen Punkt bearbeiten;
-2. positive + negative Prüfung;
-3. gegen den gesamten Produktvergleichsworkflow prüfen;
-4. erst bei echter Änderung neuer Kandidat.
-
-Kein ACM-/SEO-TEXT-Integrationsbau an dieser Stelle.
+Kein ACM-/SEO-TEXT-Integrationsbau in diesem Schritt.
 Kein Publish.
