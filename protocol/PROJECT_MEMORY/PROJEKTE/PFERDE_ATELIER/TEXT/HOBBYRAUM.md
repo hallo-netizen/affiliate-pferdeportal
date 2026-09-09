@@ -38,9 +38,9 @@ Branch:
 `hobbyroom/m22-h8-provenance-no-internal-signature-20260909`
 
 Head:
-`0aebd56998c2cb4e102b0d3e19cb3ea29985a65c`
+`13d76a2b22b2794827f6a277f7d85ab1566e19d3`
 
-Scope exakt 6 vorhandene Dateien:
+Scope: 6 H8-Semantik/Test-Dateien + 4 reine bestehende Hash-/Pointer-Bindungen:
 - `H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json`;
 - `preproduction_provenance_guard.py`;
 - `single_door_bootstrap.py`;
@@ -66,7 +66,8 @@ M35 bleibt unverändert geparkt:
 - H8-Test zustandsunabhängig;
 - negative Hashprüfung vorhanden;
 - externe M23-Signaturprüfung erhalten;
-- Boundary-Hashbindung 11/11 PASS.
+- Boundary-Hashbindung 11/11 PASS;
+- bestehende H8→STEP107007→CURRENT_STATE→START_HERE/Pointer-Hashkette nachgezogen.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
@@ -82,9 +83,9 @@ ACTIVE_HISTORY_CASE: M22
 HISTORY_EXPECTED_FAIL: M35
 RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
 CANDIDATE_BRANCH: hobbyroom/m22-h8-provenance-no-internal-signature-20260909
-CANDIDATE_HEAD_SHA: 0aebd56998c2cb4e102b0d3e19cb3ea29985a65c
-TECHNICAL_SCOPE_PREFIXES: control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json;control/single-door-boundary/preproduction_provenance_guard.py;control/single-door-boundary/single_door_bootstrap.py;control/single-door-boundary/single_door_preproduction_handoff.py;control/single-door-boundary/project_single_door_entry_v2.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py
-ALLOWED_PATH_PREFIXES: control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json;control/single-door-boundary/preproduction_provenance_guard.py;control/single-door-boundary/single_door_bootstrap.py;control/single-door-boundary/single_door_preproduction_handoff.py;control/single-door-boundary/project_single_door_entry_v2.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py
+CANDIDATE_HEAD_SHA: 13d76a2b22b2794827f6a277f7d85ab1566e19d3
+TECHNICAL_SCOPE_PREFIXES: control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json;control/single-door-boundary/preproduction_provenance_guard.py;control/single-door-boundary/single_door_bootstrap.py;control/single-door-boundary/single_door_preproduction_handoff.py;control/single-door-boundary/project_single_door_entry_v2.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/CURRENT_STARTMASTER.json
+ALLOWED_PATH_PREFIXES: control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json;control/single-door-boundary/preproduction_provenance_guard.py;control/single-door-boundary/single_door_bootstrap.py;control/single-door-boundary/single_door_preproduction_handoff.py;control/single-door-boundary/project_single_door_entry_v2.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/CURRENT_STARTMASTER.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -99,15 +100,15 @@ HISTORY_PROOF_RUNNER_BLOB_SHA: f7af847ed46fcae6527037eef06487b2f6d77786
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
-ERROR_SOURCE_BLOB_SHA: d71c360e20bae154a27835a5215c636252ca2733
+ERROR_SOURCE_BLOB_SHA: 3b4dbcd3e84a3370b4433306fcda8a142e8cfd94
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 188525c26dab0c3d0c5299043c9c02357ffe89b6
+CURRENT_STATE_BLOB_SHA: 5cbef76ae8dbf4f6878af200280f7dba44644997
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: 7d8fca295939176076b8ed0dc0e5ab652f1023f5
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: ccebd2f0b0c55f1ddf0da6d37bda78da8643c4f7
+PROTOCOL_SOURCE_BLOB_SHA: 98ab719ca10ba2623f681ff041c277c19dcda477
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
