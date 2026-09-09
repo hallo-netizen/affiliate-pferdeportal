@@ -390,6 +390,44 @@ def _m35_contract_check(src:str)->None:
 def m35():
     _m35_contract_check(HANDOFF.read_text(encoding="utf-8"))
 
+def _m36_rehash_integrity_package(env,prov,pre):
+    binding=env["workflow_release"]["h8_bootstrap_binding"]
+    payload=dict(binding);payload.pop("binding_sha256",None)
+    binding["binding_sha256"]=prov.stable_hash(payload)
+    env["workflow_release_sha256"]=pre.stable_hash(env["workflow_release"])
+    env["package_id"]=pre.stable_hash({
+        "contract":env["contract"],
+        "fact_pack_bundle_sha256":env["fact_pack_bundle_sha256"],
+        "production_plan_sha256":env["production_plan_sha256"],
+        "workflow_release_sha256":env["workflow_release_sha256"],
+    })
+    package_payload=copy.deepcopy(env);package_payload.pop("package_payload_sha256",None)
+    env["package_payload_sha256"]=pre.stable_hash(package_payload)
+
+def m36():
+    prov=mod(REPO/"control/single-door-boundary/preproduction_provenance_guard.py","m36_prov")
+    pre=mod(REPO/"control/single-door-boundary/single_door_preproduction_handoff.py","m36_pre")
+    pkg=REPO/"control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json"
+    env=load(pkg)
+    binding=((env.get("workflow_release") or {}).get("h8_bootstrap_binding") or {})
+    must(binding.get("contract")=="PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1","M36_REAL_FIXTURE_NOT_LEGACY_SIGNED_BINDING")
+    proof=prov.validate_package_provenance(REPO,pkg)
+    must(proof.get("status")=="H8_PREPRODUCTION_PROVENANCE_PASS","M36_PERSISTED_LEGACY_BINDING_NOT_ACCEPTED")
+
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td)
+        bad=copy.deepcopy(env)
+        bad["workflow_release"]["h8_bootstrap_binding"]["generation"]=int(binding["generation"])+1
+        _m36_rehash_integrity_package(bad,prov,pre)
+        bp=root/"bad-generation.json";dump(bp,bad)
+        expect_exc(lambda:prov.validate_package_provenance(REPO,bp),"H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT")
+
+        unknown=copy.deepcopy(env)
+        unknown["workflow_release"]["h8_bootstrap_binding"]["contract"]="PFERDE_ATELIER_H8_BOOTSTRAP_UNKNOWN_BINDING_V1"
+        _m36_rehash_integrity_package(unknown,prov,pre)
+        up=root/"unknown-contract.json";dump(up,unknown)
+        expect_exc(lambda:prov.validate_package_provenance(REPO,up),"H8_BOOTSTRAP_PROVENANCE_BINDING_CONTRACT_INVALID")
+
 def m35_machine_proof_selftest():
     good="""$imp=PPM679_Admin::import_fact_pack_bundle($bundle);
 $expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
@@ -408,7 +446,7 @@ CASES=[
 ("M01",m01),("M02",m02),("M03",m03),("M04",m04),("M05",m05),("M06",m06),("M07",m07),("M08",m08),("M09",m09),("M10",m10),
 ("M11",m11),("M12",m12),("M13",m13),("M14",m14),("M15",m15),("M16",m16),("M17",m17),("M18",m18),("M19",m19),("M20",m20),
 ("M21",m21),("M22",m22),("M23",m23),("M24",m24),("M25",m25),("M26",m26),("M27",m27),("M28",m28),("M29",m29),("M30",m30),
-("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35)]
+("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36)]
 
 def _run_ordered(cases,phase):
     results=[]
@@ -448,14 +486,14 @@ def main(argv):
     if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only] | --case MXX | --proof-selftest M28|M35")
 
     # Repair phase: do not duplicate already-proven old positives while an open
-    # regression still fails. Once M26-M35 are resolved, automatically run the
-    # one required final M01-M35 suite on the same head.
+    # regression still fails. Once M26-M36 are resolved, automatically run the
+    # one required final M01-M36 suite on the same head.
     if open_only:
-        open_results=_run_ordered(CASES[25:],"OPEN_M26_M35")
+        open_results=_run_ordered(CASES[25:],"OPEN_M26_M36")
         if open_results is None:return 2
         print("OPEN_REGRESSIONS_PASS",flush=True)
 
-    results=_run_ordered(CASES,"FINAL_M01_M35")
+    results=_run_ordered(CASES,"FINAL_M01_M36")
     if results is None:return 2
 
     # Required final re-check against the last real production regression.
