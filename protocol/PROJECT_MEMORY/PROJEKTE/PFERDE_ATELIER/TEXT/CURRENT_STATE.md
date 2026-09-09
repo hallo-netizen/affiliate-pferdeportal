@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – ECHTER 7/7-REALTEST NACH M01–M35 GESAMT-PASS**
+STATUS: **AKTIV – M36 HISTORY AUTHORITY / REALTEST BLOCKED**
 
 ## AUTORITÄT
 
@@ -14,59 +14,77 @@ Fehlerdetails → autoritative TEXT-Fehlerquelle.
 
 `05f5d00ec924e108d6700f39d22d9ec1d47318a6`
 
-M17, M22, M26 und M35 sind regulär integriert behoben.
-PR #197 / M35 wurde nach vollständigem M01–M35-Maschinenbeweis regulär gemergt.
+M01–M35 sind maschinell Gesamt-PASS und regulär integriert.
+Der danach ausgeführte echte 7/7-Realtest hat einen neuen ersten technischen Blocker aufgedeckt.
 
-## DISPATCHER / SCHUTZ
+## REALTEST 09.09.2026
 
-Permanenter Dispatcher PR #107:
-- offen, **nicht mergen**;
-- Branch `codex-chat-launcher` zeigt exakt auf `05f5d00ec924e108d6700f39d22d9ec1d47318a6`.
+HEAD:
+`05f5d00ec924e108d6700f39d22d9ec1d47318a6`
 
-GitHub Ruleset `Pferde Atelier Main Hardlock`:
-- enforcement: active;
-- Required Checks: `hardlock`, `hardlock-base`;
-- bypass: leer.
+PASS:
+- Cloud Entry;
+- Production Preflight;
+- Runtime Entry `OFFICIAL_RUNTIME_ENTRY_PASS`.
 
-## MASCHINENSTATUS
+Erster echter Blocker:
+`H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT`
 
-M01–M35:
-**GESAMT PASS auf dem integrierten M35-Kandidaten vor Merge.**
+Stop:
+- vor `CURRENT_BOUND_ACTION_READY`;
+- `STEP_TERMINAL_NONPASS`;
+- state_advanced=false;
+- keine Reparatur im Realtest;
+- kein Publish / kein WordPress-Write.
 
-M35-Beleg:
-- current main vor Fix reproduzierte exakt M35;
-- Kandidat bestand danach die vollständige Historienprüfung;
-- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M35`;
-- `hardlock` PASS;
-- `hardlock-base` PASS.
+## ROOT CAUSE M36
 
-## AKTUELLER ARBEITSMODUS
+Aktueller Runtime-State ist konsistent:
+- status `EXECUTION_READY`;
+- generation 1;
+- Batch-/Snapshot-/Manifest-Hashes stimmen.
 
-**REALTEST – KEINE REPARATUR IM LAUF.**
+Persistiertes Paket:
+`control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json`
 
-Auszuführen:
-- frischer STARTMASTER0107-7/7-Lauf;
-- exakt current main;
-- offizieller Cloud Entry → Production Preflight → Runtime Entry → Current Action / Single Door;
-- alle 7 Artikel frisch;
-- echter PPM 6.7.9 über den gebundenen Fachworkflow-Handoff;
-- anschließend 107008;
-- kein Auto-Publish;
-- keine WordPress-Schreibaktion.
+trägt noch:
+`PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`
 
-Terminal:
-1. 7/7 + 107008 PASS,
-oder
-2. erster echter BLOCKED/USER_ACTION_REQUIRED mit exakt einem technischen Blocker.
+Aktueller Guard erwartet:
+`PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1`
 
-## LETZTER SICHERER POSITIVER REFERENZSTAND
+Alle Provenienzfelder außer Vertragsname/Binding-Hash stimmen exakt.
+Das persistierte H8- und Production-Paket sind identisch alt.
+Die incoming-Quelle besitzt keine H8-Bindung.
 
-- `d841ed7590436ac100b98f15194874573e09bc03`: 7/7 frisch produziert;
-- `de21f6cd35c60849c551fd82f78e75ce57c99fab`: 7/7 + 107008 Review PASS.
+Der vorhandene Bootstrap besitzt im Repo keinen produktiven Producer; ein Reset/Reattach löst das Problem daher nicht ohne neue externe Erzeugung.
+
+## AKTUELLER ARBEITSWEG
+
+Neuer Fehler:
+`M36 – Persisted H8 legacy-binding compatibility after provenance migration`
+
+Zuerst History Authority:
+- Matrix/Runner um M36 erweitern;
+- current main muss M01–M35 PASS und exakt M36 FAIL reproduzieren;
+- kein Produktcode in diesem Schritt.
+
+History-Kandidat:
+- Branch `hobbyroom/m36-history-authority-20260909`;
+- Head `2465052149974f52cfb84797cf369cea430c23cc`;
+- exakt Matrix + bestehender Runner.
+
+Danach erst Produktfix:
+- eng begrenzter Legacy-Alias nur für `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`;
+- alle Provenienzidentitäten müssen aktuell sein;
+- unbekannter Vertrag BLOCK;
+- falsche Generation/Batch/Snapshot/Manifest/Origin BLOCK;
+- keine interne Signaturpflicht zurück;
+- keine Paketmutation/Neusignierung.
 
 ## ZIEL
 
 Unverändert:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`.
 
-Veröffentlichung nur nach ausdrücklicher Nutzerfreigabe.
+Kein Auto-Publish.
