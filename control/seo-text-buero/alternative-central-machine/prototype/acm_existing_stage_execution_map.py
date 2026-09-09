@@ -104,3 +104,5 @@ def main():
 
 if __name__=="__main__":
     raise SystemExit(main())
+
+# workflow-trigger: existing-stage-map-v1
