@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M22 / SEQUENTIAL HISTORY-GATE MAINTENANCE**
+STATUS: **AKTIV – M17 PRODUCT FIX TEST**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -9,7 +9,7 @@ Ziel:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
 
 Current main:
-`6e650edce60b24baf7d7feef66e60cca2817e59e`
+`462a67b4d25c6d1d7bf4cc1f010116c0017f7da6`
 
 Aktueller Integrationsblocker:
 `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`
@@ -36,32 +36,32 @@ Geparkter M35-Produktionskandidat:
 
 ## HISTORY AUTHORITY
 
-PR #198 ist integriert.
+PR #200 ist integriert.
 - M16 aktueller Signer-Vertrag: PASS.
-- M17 current main: reproduziert `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`.
-- M17-Kandidat `66e9f24…`: M17 PASS, danach erster bekannter FAIL M22.
-- M22-Orakel gegen TECH-KEYFLOW-001/B15 korrigiert: current main FAIL, bewiesener Stand `799002…` PASS.
-- Wartung ändert keinen Produktionscode.
+- M17 current main reproduziert `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`.
+- M17-Kandidat #199 / `45b3186…`: derselbe bewiesene Fix auf fresh main.
+- M22-Orakel ist jetzt autoritativ: current main FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`, bewiesener B15-Stand `799002…` PASS.
+- Sequenzregel: M17 muss verschwinden; exakt M22 darf danach erster bekannter FAIL sein.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
-Der Lock bindet ausschließlich die notwendige M22-/Sequenz-Wartung an current main. Kein Produktionscode ist in diesem Kandidaten. Normale GitHub-Schutzchecks bleiben verbindlich.
+Der Lock bindet ausschließlich den isolierten M17-Kandidaten an fresh main und den bereits bekannten nächsten Fehler M22. Normale GitHub-Schutzchecks bleiben verbindlich.
 
 ```text
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
-MAIN_SHA: 6e650edce60b24baf7d7feef66e60cca2817e59e
+MAIN_SHA: 462a67b4d25c6d1d7bf4cc1f010116c0017f7da6
 ACTIVE_BLOCKER: M17_HOST_FINALIZATION_NOT_FAIL_CLOSED
-PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
+PLAN_PHASE: PRODUCT_FIX
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 ACTIVE_HISTORY_CASE: M17
-HISTORY_EXPECTED_FAIL: M17
+HISTORY_EXPECTED_FAIL: M22
 RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
-CANDIDATE_BRANCH: hobbyroom/m22-sequential-history-gate-20260909
-CANDIDATE_HEAD_SHA: 90eb7e897897636d51bc13e8ad590fe5d953b0c3
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py;control/paul-scope-gate/paul_scope_gate.py
-ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py;control/paul-scope-gate/paul_scope_gate.py
+CANDIDATE_BRANCH: hobbyroom/m17-host-finalization-fail-closed-20260909
+CANDIDATE_HEAD_SHA: 45b318673856ff45f42b292c04f56f06ddf76ab1
+TECHNICAL_SCOPE_PREFIXES: control/output-quarantine/runtime_entry_gate.py;control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/CURRENT_STARTMASTER.json
+ALLOWED_PATH_PREFIXES: control/output-quarantine/runtime_entry_gate.py;control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/CURRENT_STARTMASTER.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -70,40 +70,36 @@ CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
 HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
-HISTORY_SOURCE_BLOB_SHA: b1fc329e2c440cfaba75aef6a6206666969802d6
+HISTORY_SOURCE_BLOB_SHA: a3c6a468dc1cf380c3a874ef86805d978d78e582
 HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-HISTORY_PROOF_RUNNER_BLOB_SHA: 1ba35cc4738d8894ad76fdf97b71cbac43c80764
+HISTORY_PROOF_RUNNER_BLOB_SHA: f7af847ed46fcae6527037eef06487b2f6d77786
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
-ERROR_SOURCE_BLOB_SHA: b502d5ec07b4f464f3c069b20d56c0bb8cab5c47
+ERROR_SOURCE_BLOB_SHA: e863891c7a510ad8af36ba011b3785456a647a5e
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: b01fdc3f14d1f3117119cd952485ad00ce6c7253
+CURRENT_STATE_BLOB_SHA: 9357fc9081ca0d860f500713857af86fb82a7e9a
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 4e261360bb768b98a1bf58ac0c8cf153f5bec10a
+DECISION_SOURCE_BLOB_SHA: 7d8fca295939176076b8ed0dc0e5ab652f1023f5
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: e8e93a1944e3cedc13ff6fe0c21ac82bf4f8c885
+PROTOCOL_SOURCE_BLOB_SHA: ecd9289dba4c922d24f16e12345eb634c144d567
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**PR #200 ist fertig geprüft; nur der bekannte einmalige Selbstschutz-Bypass fehlt.**
+**M17 #199 jetzt gegen fresh main und den gebundenen nächsten Fehler M22 prüfen.**
 
-GitHub:
-`Settings → Rules → Rulesets → Pferde Atelier Main Hardlock → Edit → Bypass list → Add bypass → Repository admin → For pull requests only → Add Selected → Save changes`
-
-Danach:
-1. ausschließlich PR #200 mergen;
-2. Bypass sofort wieder entfernen;
-3. M17-Kandidat #199 auf fresh main neu binden;
-4. `HISTORY_EXPECTED_FAIL: M22`;
-5. normal `hardlock` + `hardlock-base`;
-6. M17 regulär mergen;
-7. anschließend ausschließlich M22 reparieren; M35 bleibt geparkt.
+1. `hardlock` + `hardlock-base` auf Head `45b318673856ff45f42b292c04f56f06ddf76ab1`.
+2. Vorher: current main muss exakt M17 als ersten FAIL reproduzieren.
+3. Nachher: M17 muss verschwunden sein; exakt M22 darf als neuer erster bekannter FAIL erscheinen.
+4. Kein weiterer M17-Codefix.
+5. Produktionsmerge erst, wenn der temporäre Repository-admin-Bypass wieder entfernt ist.
+6. Nach regulärem M17-Merge ausschließlich M22 reparieren.
+7. M35 bleibt separat geparkt.
 
 ## VERBINDLICHER ARBEITSWEG
 
