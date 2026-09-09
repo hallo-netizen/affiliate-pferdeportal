@@ -9,7 +9,8 @@ from p40_handoff_controller import HandoffBlocked, REQUIRED, execute_handoff
 
 SLOT="a"*64
 BATCH="b"*64
-CID="canonical-faq-001"
+CID="article:b94aa30f3f4063cb5f140a3e"
+PLAN_ITEM_KEY="canonical-faq-001"
 
 def request():
     return {
@@ -28,6 +29,7 @@ def request():
         "production_plan_item":{
             "canonical_article_id":CID,
             "plan_slot":SLOT,
+            "plan_item_key":PLAN_ITEM_KEY,
         },
         "production_plan_header":{"contract":"production_plan_v4"},
         "workflow_release_item":{
@@ -50,6 +52,8 @@ class P40Tests(unittest.TestCase):
             self.assertEqual(r["status"],"HANDOFF_ITEM_PASS_NO_PUBLISH")
             self.assertEqual(r["input_truth"],"FACHWORKFLOW_HANDOFF_REQUEST.json")
             self.assertFalse(r["new_job_manifest_used"])
+            self.assertEqual(r["canonical_article_id"],CID)
+            self.assertEqual(r["plan_item_key"],PLAN_ITEM_KEY)
             self.assertFalse(r["publish_allowed"])
 
     def test_negative_extra_field(self):
@@ -76,13 +80,28 @@ class P40Tests(unittest.TestCase):
             with self.assertRaisesRegex(HandoffBlocked,"RELEASE_ITEM_IDENTITY_MISMATCH"):
                 execute_handoff(write(Path(td),x))
 
-    def test_negative_wrong_ppm_item_blocks(self):
+    def test_negative_wrong_plan_item_key_blocks_after_no_write_prepare(self):
         with tempfile.TemporaryDirectory() as td:
             x=request()
-            x["canonical_article_id"]="WRONG-"+CID
-            x["production_plan_item"]["canonical_article_id"]=x["canonical_article_id"]
-            x["workflow_release_item"]["canonical_article_id"]=x["canonical_article_id"]
-            with self.assertRaisesRegex(HandoffBlocked,"HANDOFF_ITEM_NOT_BOUND_TO_PPM_PREPARE"):
+            x["production_plan_item"]["plan_item_key"]="WRONG-"+PLAN_ITEM_KEY
+            with self.assertRaisesRegex(HandoffBlocked,"HANDOFF_PLAN_ITEM_KEY_NOT_BOUND_TO_PPM_PREPARE"):
+                execute_handoff(write(Path(td),x))
+
+    def test_negative_wrong_canonical_id_blocks_after_no_write_prepare(self):
+        with tempfile.TemporaryDirectory() as td:
+            x=request()
+            wrong="article:wrong"
+            x["canonical_article_id"]=wrong
+            x["production_plan_item"]["canonical_article_id"]=wrong
+            x["workflow_release_item"]["canonical_article_id"]=wrong
+            with self.assertRaisesRegex(HandoffBlocked,"HANDOFF_CANONICAL_ID_NOT_BOUND_TO_PPM_PREPARE"):
+                execute_handoff(write(Path(td),x))
+
+    def test_negative_missing_plan_item_key_before_adapter(self):
+        with tempfile.TemporaryDirectory() as td:
+            x=request()
+            del x["production_plan_item"]["plan_item_key"]
+            with self.assertRaisesRegex(HandoffBlocked,"PLAN_ITEM_KEY_MISSING"):
                 execute_handoff(write(Path(td),x))
 
     def test_no_manifest_or_route_api(self):
