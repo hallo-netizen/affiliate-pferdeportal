@@ -40,9 +40,14 @@ def main()->int:
         if cp.returncode!=0:
             raise RuntimeError("WORKTREE_FAILED:"+cp.stdout[-2000:])
         try:
-            # Exact existing entry sequence: materialize the bound capsule first,
-            # then ask only for the current bound action. Everything occurs in
-            # the temporary detached main worktree.
+            # Exact existing production entrance sequence:
+            # 1) current-main Codex environment preflight,
+            # 2) official runtime entry materializes the bound capsule,
+            # 3) ask only for the current bound action.
+            pre=run(["python3","control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"],work)
+            pre_data=parse_last_json(pre.stdout)
+            if pre.returncode!=0 or pre_data.get("status")!="CODEX_PRODUCTION_PREFLIGHT_PASS":
+                raise RuntimeError("REAL_CODEX_PREFLIGHT_NOT_PASS:"+str(pre_data))
             start=run(["python3","control/output-quarantine/runtime_entry_gate.py","start"],work)
             start_data=parse_last_json(start.stdout)
             if start.returncode!=0 or start_data.get("status")!="OFFICIAL_RUNTIME_ENTRY_PASS":
