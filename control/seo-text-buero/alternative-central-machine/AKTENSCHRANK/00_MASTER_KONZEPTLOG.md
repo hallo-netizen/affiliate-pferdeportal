@@ -395,3 +395,25 @@ Vor Produktionsübernahme verbleiben nur:
 3. ersten real workflow-produzierten FACHWORKFLOW_HANDOFF_REQUEST durch dieselbe ACM-Kette ausführen.
 
 Keine neue Architektur erforderlich.
+
+
+## AKTUELLER ACM-ROUTENSTATUS – EINZIGE STANDWAHRHEIT
+
+Stand: 2026-09-09
+
+Autoritative aktuelle ACM-Standquelle:
+`58_ACM_ROUTE_STATUS_20260909.md`
+
+Dort stehen ausschließlich:
+- aktueller belastbarer Status
+- offene ACM-Integrationsfehler
+- NEXT ACTION
+- Abschluss-/Nachholprüfung
+- Übergabearbeitsweg
+
+Alle älteren in diesem Entwicklungslog enthaltenen Abschnitte mit damaligem „aktuellen“ Stand sind Fortschritts-/Historienkontext und **nicht** die aktuelle Standwahrheit.
+
+Produktive Standwahrheit bleibt separat:
+`control/startmaster0107/CURRENT_STATE.json`
+
+Die produktive STARTMASTER-Fehlermatrix bleibt ausschließlich bei der parallelen Reparaturroute.

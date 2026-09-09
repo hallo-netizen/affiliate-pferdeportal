@@ -89,3 +89,45 @@ Ergebnis:
 - publish_allowed=false
 
 Der echte Handoff selbst wird erst dann als echt gewertet, wenn die realen Fachprodukte für dieses gebundene Item erzeugt wurden. Fixture- oder Recovery-Daten werden dafür nicht als Ersatz akzeptiert.
+
+
+## Verbindliche Klarstellungen aus Abschlussprüfung 2026-09-09
+
+### Redaktionsplan bleibt Ursprung
+Der SEO-Redaktionsplan bleibt die vorgelagerte autoritative Fachplanung.
+Er bindet insbesondere Beitragsart, Kategorie, plan_slot, Target Keyword und Titel.
+ACM darf diese Werte nicht frei ersetzen.
+Bestehender Inventar-/Dubletten-/Keyword-Ownership-Abgleich bleibt erhalten.
+
+### Claude gehört nicht zum Zielsystem
+Claude war externe Zusatzberatung und ist strukturell nicht erforderlich.
+
+Für ACM gilt:
+- keine Claude-Abhängigkeit
+- kein Claude-Reviewer als Pflicht
+- keine Claude-Freigabe
+- kein Claude-Gate
+- keine Workflowautorität für Claude
+
+Ein historischer, explizit aktivierbarer Sonderzweig im unveränderten PPM wird nicht gebunden.
+Nur zu dessen physischer Entfernung wird PPM/Textmaschine nicht verändert.
+
+### Ziel-Nutzerfluss
+Der einfache Zielablauf lautet:
+
+`Redaktionsplan -> Fachworkflow/Textmaschine -> alle maschinellen Gates -> eine signierte JSON -> manueller Upload in WordPress -> Signatur-/Hashprüfung vor erstem Write -> Entwurf -> Readback/DOM -> Nutzer-Sichtprüfung -> manuelle Freigabe`
+
+Keine automatische Veröffentlichung.
+
+### Aktueller Adoptionsblock
+Die isolierte One-JSON-Seam ist technisch PASS.
+Im echten WordPress-Runtime/Admin-Weg fehlen aber noch:
+1. die reale Verdrahtung des One-JSON-Verifiers vor den bestehenden Normal-Draft-Import,
+2. der nachgewiesene kontrollierte manuelle Freigabe-/Publish-Punkt.
+
+Deshalb bleibt diese Datei Kandidat und ist noch keine produktive Zielquelle.
+
+### LanguageTool
+LanguageTool-Vertrag und Evidence bleiben unverändert.
+Für unbeaufsichtigte Vollautomatik muss zusätzlich die fest gehashte LanguageTool-6.8-Runtime reproduzierbar gebunden sein.
+Kein neuer Qualitätsweg und kein Fallback-Provider.
