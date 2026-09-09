@@ -91,6 +91,7 @@ def run_json(cmd, cwd):
 def _parse_args(argv:list[str]):
     job_id="P22-JOB"
     expected_item_id=None
+    expected_canonical_article_id=None
     i=0
     while i<len(argv):
         arg=argv[i]
@@ -98,16 +99,20 @@ def _parse_args(argv:list[str]):
             job_id=argv[i+1]; i+=2; continue
         if arg=="--expected-item-id" and i+1<len(argv):
             expected_item_id=argv[i+1]; i+=2; continue
+        if arg=="--expected-canonical-article-id" and i+1<len(argv):
+            expected_canonical_article_id=argv[i+1]; i+=2; continue
         raise RuntimeError("P22_ARGUMENT_INVALID")
     if not isinstance(job_id,str) or not job_id:
         raise RuntimeError("P22_JOB_ID_INVALID")
     if expected_item_id is not None and (not isinstance(expected_item_id,str) or not expected_item_id):
         raise RuntimeError("P22_EXPECTED_ITEM_ID_INVALID")
-    return job_id,expected_item_id
+    if expected_canonical_article_id is not None and (not isinstance(expected_canonical_article_id,str) or not expected_canonical_article_id):
+        raise RuntimeError("P22_EXPECTED_CANONICAL_ID_INVALID")
+    return job_id,expected_item_id,expected_canonical_article_id
 
 
 def main(argv:list[str]|None=None):
-    job_id,expected_item_id=_parse_args(list(argv or []))
+    job_id,expected_item_id,expected_canonical_article_id=_parse_args(list(argv or []))
     with tempfile.TemporaryDirectory() as td:
         root=Path(td)
         ppm_out=root/"ppm"
@@ -129,8 +134,11 @@ def main(argv:list[str]|None=None):
         if not prepared.get("ok"):
             raise RuntimeError("PREPARED_NOT_OK")
         prepared_item_id=str(prepared.get("plan_item_key") or "")
+        prepared_canonical_article_id=str(prepared.get("canonical_article_id") or "")
         if not prepared_item_id:
             raise RuntimeError("PREPARED_ITEM_ID_MISSING")
+        if not prepared_canonical_article_id:
+            raise RuntimeError("PREPARED_CANONICAL_ID_MISSING")
         if expected_item_id is not None and prepared_item_id!=expected_item_id:
             print(json.dumps({
                 "status":"P22_BOUND_ITEM_ID_BLOCKED",
@@ -143,6 +151,20 @@ def main(argv:list[str]|None=None):
             },ensure_ascii=False,indent=2))
             raise RuntimeError("BOUND_ITEM_ID_MISMATCH")
         bound_item_id=expected_item_id or prepared_item_id
+
+        if expected_canonical_article_id is not None and prepared_canonical_article_id!=expected_canonical_article_id:
+            print(json.dumps({
+                "status":"P22_BOUND_CANONICAL_ID_BLOCKED",
+                "expected_canonical_article_id":expected_canonical_article_id,
+                "prepared_canonical_article_id":prepared_canonical_article_id,
+                "prepare_no_write":prep["before_count"]==prep["after_count"],
+                "signing_started":False,
+                "write_started":False,
+                "publish_allowed":False,
+            },ensure_ascii=False,indent=2))
+            raise RuntimeError("BOUND_CANONICAL_ID_MISMATCH")
+
+        bound_canonical_article_id=expected_canonical_article_id or prepared_canonical_article_id
 
         fp=prepared.get("planned_write_fingerprint")
         payload_fp=(prepared.get("payload") or {}).get("meta",{}).get("_ppm679_planned_write_fingerprint")
@@ -166,6 +188,8 @@ def main(argv:list[str]|None=None):
             raise RuntimeError("SIGNED_IMPORT_NOT_VERIFIED")
         if verified["job_id"]!=job_id or verified["item_id"]!=bound_item_id:
             raise RuntimeError("SIGNED_ITEM_IDENTITY_DRIFT")
+        if str(signed_release["payload"].get("canonical_article_id") or "")!=bound_canonical_article_id:
+            raise RuntimeError("SIGNED_CANONICAL_IDENTITY_DRIFT")
 
         # The write input is materialized only from the verified signed release, never from an alternate object.
         raw=release_path.read_bytes()
@@ -217,6 +241,7 @@ def main(argv:list[str]|None=None):
             "status":"P22_SIGNED_NORMAL_DRAFT_BOUNDARY_PASS",
             "job_id":job_id,
             "item_id":bound_item_id,
+            "canonical_article_id":bound_canonical_article_id,
             "prepare_no_write":True,
             "prepared_fingerprint_bound":True,
             "external_signature_verified":True,
