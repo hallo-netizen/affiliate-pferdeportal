@@ -2090,3 +2090,27 @@ Suchnachfrage, Konkurrenz und WordPress-Bestand ändern sich. Ein alter BLOCK da
 
 KISS:
 Keine neue SEO-Datenbank. Bestehender Signalspeicher erhält nur klare Freshness-/Binding-Regeln.
+
+
+## TEXT-TECH-20260909-M36-H8-LEGACY-ALIAS – Persistierte H8-Altbindung nur eng lesekompatibel
+
+STAND: 2026-09-09 / VERBINDLICH.
+
+WAS:
+Nach der M22-Umstellung auf provenance-only H8-Bindung darf ein bereits persistiertes Runtime-Paket mit dem historischen Vertrag
+`PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`
+ausschließlich als read-only Legacy-Alias akzeptiert werden, wenn:
+
+- der historische Binding-Hash selbst gültig ist;
+- room_token, receipt_token, generation, batch_sha256, source_snapshot_sha256, source_manifest_sha256 und authoritative_origin exakt dem aktuellen erwarteten H8-Provenance-Binding entsprechen.
+
+Unbekannte H8-Verträge oder jede Identitätsabweichung bleiben fail-closed BLOCKED.
+
+WARUM:
+Der echte 7/7-Realtest nach M01–M35 Gesamt-PASS zeigte, dass das persistierte Generation-1-Paket noch den alten Vertragsnamen trägt, obwohl alle Provenienzidentitäten aktuell sind. Ein Reset/Reattach wäre kein KISS-Weg, weil im Repo kein produktiver Bootstrap-Producer für einen einfachen Neuaufbau existiert. Paketmutation oder Neusignierung würde zusätzlich die externe Signaturkette verändern.
+
+GRENZE:
+- aktueller Provenance-Vertrag bleibt Sollvertrag;
+- keine interne ED25519-/Signer-Pflicht wird wieder eingeführt;
+- externe Release-Signaturprüfung bleibt unverändert separat;
+- keine Paketmutation, keine Neusignierung, kein neuer Bootstrap-/Executor-Pfad.
