@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – 12-STAGE CORRIDOR / FIX_FORBIDDEN**
+STATUS: **BLOCKED – EXISTING FACH-AUTHORITY NOT FOUND / FIX_FORBIDDEN**
 
 ## CURRENT MAIN
 
@@ -75,6 +75,23 @@ Zwei autoritative Lücken bleiben:
    - 107007 kann keinen echten WordPress-Rendered-DOM-PASS erzeugen, weil WordPress-Schreibvorgänge dort verboten sind;
    - die Stage `design_format` darf nicht eigenmächtig als Source- oder Render-PASS neu definiert werden.
 
+### READ-ONLY-AUTORITÄTSSUCHE – 09.09.2026 ABGESCHLOSSEN
+
+Die im Hobbyraum gebundene offene Frage wurde ohne Codeänderung geschlossen.
+Außerhalb des aktuell gebundenen `control/startmaster0107/`-Pfads wurde in den zulässigen aktuellen Quellen **keine bereits existierende unveränderte Fachworkflow-Quelle gefunden, die beide Lücken schließt**.
+
+Negativ belegt:
+- Single-Door/H1/H8 sind fachblind und deklarieren `design_authority = NONE` bzw. `quality_authority = NONE`;
+- STARTMASTER0104/0105/0106 deklarieren `content_quality_design_authority = NONE` bzw. `design_authority = NONE`;
+- PSTE 0.56.25 liefert keine NEW-Link-Builder-/`design_format`-Autorität;
+- der aktuelle Repo-Baum enthält außerhalb 0107 keinen eigenständigen aktuellen PPM-/PSERC-/Design-/Link-Fachquellpfad, der beide gesuchten Verträge bereitstellt;
+- datierte/historische ZIPs und alte Produktionspläne bleiben gemäß Hard Rule Beweisquellen und sind keine zulässige NEW-Produktionsquelle.
+
+Ergebnis:
+`EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`
+
+Damit ist die bisher offene Suchfrage beendet. Der Produktionsweg ist **BLOCKED**; es darf keine Ersatzautorität durch Chat/Worker erfunden werden.
+
 ## ORIGINALMASTER-RECHECK
 
 Read-only geprüft:
@@ -98,17 +115,15 @@ Keine neue Linklogik.
 Keine neue `design_format`-Bedeutung.
 Keine historischen Produktionsartefakte als NEW-Quelle.
 
-Falls eine bereits existierende unveränderte Fachautorität für
+Die zulässige Read-only-Suche nach einer bereits existierenden unveränderten Fachautorität für
 1. NEW-Linkbindungen und
 2. `design_format`-Evidence
-gefunden wird:
-- zuerst B16 als fortlaufende ausführbare History-Regression aufnehmen;
-- erst danach genau einen konsolidierten KISS-Kandidaten bauen;
-- Positiv/Negativ/Invarianten;
-- dann Realtest.
+ist abgeschlossen: **nicht gefunden**.
 
-Falls diese Autorität nicht existiert:
+Daher gilt jetzt verbindlich:
 **BLOCKED statt Architektur-/Fachentscheidung durch den Chat.**
+
+Kein Produktkandidat, kein M37, kein weiterer 7/7-Realtest, bis eine autoritative Quelle außerhalb des Chats die fehlenden Verträge bereitstellt oder die Hard Rules ausdrücklich geändert werden.
 
 ## TESTS – TATSÄCHLICH AUSGEFÜHRT
 
