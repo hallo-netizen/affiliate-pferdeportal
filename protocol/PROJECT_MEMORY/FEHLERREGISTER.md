@@ -22,10 +22,10 @@ Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle
 Autoritative Fehlerquelle:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
 
-## TEXT-M01-M33
+## TEXT-M01-M36
 
 Bereich: TEXT  
-Status: REGRESSION-SUITE AKTIV / letzter dokumentierter Gesamtlauf 06.09.2026 PASS / kein Live-PASS
+Status: REGRESSION-SUITE AKTIV / M01–M36 integriert; Live-Status ausschließlich aus der autoritativen TEXT-Fehlerquelle
 
 Autoritative Fehlerquelle:
 `control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
