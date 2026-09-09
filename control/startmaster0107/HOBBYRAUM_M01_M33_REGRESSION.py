@@ -113,10 +113,47 @@ def m15():
     expect_exc(lambda:_m15_validate_instruction(bad_order),"M15_HANDOFF_ORDER_CONTRADICTION")
     bad_direct=text+"\nKein Handoff-Request; submission_command führt direkt."
     expect_exc(lambda:_m15_validate_instruction(bad_direct),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
+def _m16_validate_signer_boundary(runtime_src:str,finalizer_src:str,step_instruction:str)->None:
+    for token in ("PSERC_SIGNER_CMD","ENDSTEMPEL_HSM_CMD","call_signer("):
+        must(token not in runtime_src,"M16_SIGNER_EXPOSED_TO_RUNTIME:"+token)
+    for token in ("def finalize_after_107008","resolve_signer_cmd","call_signer("):
+        must(token in finalizer_src,"M16_HOST_SIGNER_BOUNDARY_MISSING:"+token)
+    must("signer" not in step_instruction.casefold(),"M16_SIGNER_EXPOSED_TO_107007")
+
 def m16():
-    s=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
-    must("codex_worker_signer_access_allowed" in s and "False" in s,"M16_SIGNER_BOUNDARY")
-def m17(): must("host_pserc_finalization_required" in (REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8"),"M17_HOST_FINALIZATION")
+    runtime=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
+    finalizer=DUAL.read_text(encoding="utf-8")
+    step=load(STEP7)["instruction"]
+    _m16_validate_signer_boundary(runtime,finalizer,step)
+    expect_exc(
+        lambda:_m16_validate_signer_boundary(runtime+"\nPSERC_SIGNER_CMD=x",finalizer,step),
+        "M16_SIGNER_EXPOSED_TO_RUNTIME",
+    )
+
+def _m17_validate_finalization_fail_closed(runtime_src:str)->None:
+    call="pserc_finalization = finalizer.finalize_after_107008"
+    guard_ok='pserc_finalization.get("ok") is not True'
+    guard_status='pserc_finalization.get("status") != "PSERC_FINAL_PACKAGE_PASS"'
+    blocker='HOST_PSERC_FINALIZATION_NOT_PASS'
+    must(call in runtime_src,"M17_FINALIZATION_CALL_MISSING")
+    must(guard_ok in runtime_src and guard_status in runtime_src and blocker in runtime_src,"M17_HOST_FINALIZATION_NOT_FAIL_CLOSED")
+    i_call=runtime_src.index(call)
+    i_guard=runtime_src.index(guard_ok)
+    i_clear=runtime_src.index("finalizer.clear_prepared_binding",i_call)
+    i_return=runtime_src.index('"status": "107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED"',i_call)
+    must(i_call < i_guard < i_clear < i_return,"M17_FINALIZATION_GUARD_ORDER")
+
+def m17():
+    runtime=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
+    _m17_validate_finalization_fail_closed(runtime)
+    good='''pserc_finalization = finalizer.finalize_after_107008(repo, receipt)
+if pserc_finalization.get("ok") is not True or pserc_finalization.get("status") != "PSERC_FINAL_PACKAGE_PASS":
+    raise Blocked("HOST_PSERC_FINALIZATION_NOT_PASS")
+finalizer.clear_prepared_binding(repo, batch)
+return {"status": "107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED"}'''
+    _m17_validate_finalization_fail_closed(good)
+    bad=good.replace('if pserc_finalization.get("ok") is not True or pserc_finalization.get("status") != "PSERC_FINAL_PACKAGE_PASS":\n    raise Blocked("HOST_PSERC_FINALIZATION_NOT_PASS")\n',"")
+    expect_exc(lambda:_m17_validate_finalization_fail_closed(bad),"M17_HOST_FINALIZATION_NOT_FAIL_CLOSED")
 def m18():
     s=(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py").read_text(encoding="utf-8")
     must("IMPORT_ENVELOPE" in s,"M18_ENDSTEMPEL_CONSTANTS")
