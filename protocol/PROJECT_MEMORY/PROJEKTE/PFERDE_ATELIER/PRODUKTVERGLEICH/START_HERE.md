@@ -1,20 +1,20 @@
 # BÜRO PRODUKTVERGLEICH
 
-STAND: 2026-09-06
+STAND: 2026-09-09
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das Fachbüro für Produktvergleichs-Konzept, Recherchegrundlage, Vergleichseigenschaften und konkrete Vergleichsdefinitionen des Pferde-Ateliers.
+Das Fachbüro für Produktwissen, Produktrecherche, konkrete Produktvergleichsdefinitionen, Vergleichsmerkmale, SEO-Nachfrageabgleich, Faktendossiers und den eigenständigen V1-Produktvergleichsweg des Pferde-Ateliers.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du Produktvergleiche planen, konkrete Vergleichspaare/-gruppen festlegen, harte Vergleichsmerkmale definieren oder belastbare Faktengrundlagen/Quellen für einen Produktvergleich vorbereiten willst.
+du konkrete Produktvergleiche planen, Produktkandidaten/-paare recherchieren, Herstellerfakten und Quellen binden, SEO-Nachfrage/Kannibalisierung prüfen oder ein belastbares Vergleichsdossier vorbereiten willst.
 
 **DU DARFST …**  
-Produktvergleichs-Aufträge strukturieren, Vergleichskriterien und Faktendossiers an autoritative Quellen binden und eine saubere Übergabe an die TEXT-/Produktionsmaschine vorbereiten.
+Produktwissen read-only konsumieren, Produktvergleichs- und SEO-Signale zusammenführen, Vergleichbarkeit/Quellen/Fakten prüfen und den gebundenen Produktvergleichsweg weiterentwickeln.
 
 **DU DARFST NICHT …**  
-den aktuellen TEXT-/SEO-Produktionsworkflow ersetzen, Produktdaten erfinden, Wertungen als Fakten ausgeben, bestehende Fachregeln anderer Büros ändern oder aus dem Betreten des Büros Schreibrechte ableiten.
+Produktdaten erfinden, Affiliate-Verfügbarkeit zur fachlichen Auswahl machen, STARTMASTER/TEXT/PPM/PSERC/PSTE ungefragt umbauen, Auto-Publish aktivieren oder aus diesem Büro Schreibrechte für fremde Fachbereiche ableiten.
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `HOBBYRAUM.md` → gebundene Originalquellen/Arbeitsweg.
@@ -24,27 +24,21 @@ den aktuellen TEXT-/SEO-Produktionsworkflow ersetzen, Produktdaten erfinden, Wer
 - **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
 - **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Fehlerquelle
+- **ARBEITSPROTOKOLL:** `PROTOKOLL.md` – nur Chronik/Belege, niemals CURRENT
 - **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
 - **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 - **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 
 **Regel:** Diese Bürotür führt keine zweite aktuelle Produktvergleichs-, Fehler-, Ziel- oder Produktionswahrheit.
 
-## Harte Fachgrenze zu TEXT
+## AKTUELLE FACHGRENZEN
 
-**PRODUKTVERGLEICH** verantwortet:
-- Vergleichsgegenstand / Vergleichsdefinition;
-- Vergleichseigenschaften;
-- Recherche-/Faktengrundlage;
-- Quellenbindung;
-- strukturierte Fachübergabe.
-
-**TEXT** verantwortet weiterhin:
-- eigentliche Textproduktion;
-- bestehenden Textmaschinen-/STARTMASTER-Workflow;
-- dessen technische Regressionen, Gates und Produktionsregeln.
-
-Das Produktvergleichsbüro baut **keine zweite Textmaschine**.
+- **PRODUKTWISSEN** ist die einzige fachliche Produkt-/Variantenwahrheit.
+- **PRODUKTVERGLEICH** verantwortet Pairing, Vergleichbarkeit, SEO-Nachfrageabgleich, Fakten-/Quellenbindung und Dossier.
+- **SEO/PSTE** liefert Nachfrage-, Keyword-, Planning- und Kannibalisierungssignale; SEO schreibt keine Produktfakten.
+- **AFFILIATE** liefert nachgelagert Exact-Match-Kaufangebote; Affiliate entscheidet nicht über fachliche Eignung.
+- **STARTMASTER/TEXT** bleibt unangetastet. V1 besitzt keine Laufzeitabhängigkeit davon. Bewährte Textmaschinenregeln dürfen später nur als Referenz/kleine isolierte Wiederverwendung dienen, solange keine ausdrückliche neue Architekturentscheidung getroffen wurde.
+- **ACM** ist ein strikt isolierter Parallelprototyp im TEXT/SEO-Bereich. Eine mögliche spätere Produktvergleich-Anbindung darf nur nach gesonderter Machbarkeits-/Vertragsprüfung erfolgen und ändert den aktuellen Produktvergleichsweg nicht automatisch.
 
 ## Arbeitsfreigabe bei echter Arbeit
 
