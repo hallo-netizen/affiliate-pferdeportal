@@ -87,10 +87,17 @@ Alternative:
 `alternative/seo-text-central-machine-20260908`
 
 Fresh Head:
-`b3cdf639fc8bd40e7c3c044fce03f88bb3508472`
+`3dffea336412e8df6c112d82adece38e2e1c69df`
 
 PR #195:
 offen / Draft / isoliert.
+
+Parallelbranch-Fresh-Check:
+- technischer ACM-Kandidat `573cfa2fdf472d338586f55cae2e9b7257f40413`;
+- dokumentierter Branchstand beim Check `3dffea336412e8df6c112d82adece38e2e1c69df`;
+- P3 aktuell BLOCKED bei P26-Testabdeckung;
+- P8 SUCCESS;
+- keine Übernahme dieser Parallelwahrheit in den Original-Fachstatus.
 
 Aus diesem Originalweg:
 - nicht verändern;
@@ -113,7 +120,7 @@ Aus diesem Originalweg:
 ## AUTORITATIVE BLOB-BINDUNGEN
 
 CURRENT_STATE:
-`e2ae5599cb9d78eeb09608abe6eda2b993612581`
+`320a9f198a51835e17643192492dc91a8ed841fd`
 
 Fehlerquelle:
 `06a45d966e06ae06f87640fe78fe1bff592161d3`
