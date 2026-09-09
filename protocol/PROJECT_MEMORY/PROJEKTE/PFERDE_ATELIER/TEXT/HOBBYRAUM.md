@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M35 FINAL KNOWN PRODUCT FIX TEST**
+STATUS: **AKTIV – REALTEST / REPARATUR VERBOTEN**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -9,141 +9,83 @@ Ziel:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
 
 Current main:
-`d32e16cdf6b45ffa282e42fa78e07da84863e362`
+`05f5d00ec924e108d6700f39d22d9ec1d47318a6`
 
-Aktueller Integrations-/Realblocker:
-`PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
+Dispatcher:
+`codex-chat-launcher = 05f5d00ec924e108d6700f39d22d9ec1d47318a6`
 
-Aktive Fehler-ID:
-`M35 – Fact-Pack source-hash binding parity`
+M01–M35:
+**MASCHINELL GESAMT PASS.**
 
-M17, M22 und M26:
-**integriert behoben**.
+M17 / M22 / M26 / M35:
+**integriert behoben.**
 
-## ROOT CAUSE M35
+## JETZT AUSSCHLIESSLICH
 
-Der echte PPM-6.7.9-Vertrag besitzt nach Fact-Pack-Import einen eigenen Registry-Hash.
+**Echter frischer STARTMASTER0107-7/7-Realtest.**
 
-Fehler:
-- Research-/Content-Fact-Pack-Hash und PPM-Registry-Hash wurden gleichgesetzt;
-- `production_plan_item.source_hashes` trägt vor dem PPM-Import den Research-/Content-Hash;
-- der interne PPM-Plan muss nach Import den von `PPM679_Storage::fact_pack_hash(...)` gelieferten Registry-Hash verwenden.
+Verbindlich:
+- zuerst exakten HEAD prüfen;
+- Cloud Entry;
+- Production Preflight;
+- Runtime Entry;
+- Current Action / Single Door;
+- alle 7 Artikel vollständig frisch;
+- keine alten Artikel/JSONs/Proofs/Recovery-/Quarantäne-/Release-Artefakte als Produktionsquelle;
+- Current Codex ist der gebundene Fachworkflow-Worker;
+- kein zweiter Executor / keine Capability-Suche;
+- reale aktuelle Fachworkflow-Artefakte und Pflicht-Stage-Proofs erzeugen;
+- `FACHWORKFLOW_HANDOFF_REQUEST.json` exakt aus den gebundenen Current-Action-Werten erzeugen;
+- ausschließlich `fachworkflow_handoff.command`;
+- echter PPM 6.7.9;
+- nur nach `FACHWORKFLOW_PROOF_HANDOFF_PASS` → `submission_command`;
+- nächstes gebundenes Item;
+- danach 107008.
 
-## KISS-KANDIDAT
+## STOP-REGEL
 
-PR:
-`#197 – M35: bind internal PPM plan to registry fact-pack hash`
+Im Realtest:
+- **keine Reparatur**;
+- keine Architekturänderung;
+- keine neue Route;
+- kein Fix auf einen FAIL.
 
-Branch:
-`hobbyroom/m35-ppm-registry-hash-binding-20260909`
+Terminal ausschließlich:
+1. 7/7 PASS + 107008 PASS,
+oder
+2. erster echter technischer BLOCKED / USER_ACTION_REQUIRED.
 
-Fresh Head:
-`a611a5c150cc3d8f182ca9c1855339fb98fea0c2`
+Dann erst wieder Hobbyraum-Reparaturphase eröffnen.
 
-Scope exakt:
-`control/startmaster0107/fachworkflow_proof_handoff.py`
+## PUBLISH-GRENZE
 
-Änderung:
-- leerer Registry-Hash bleibt BLOCK;
-- `$item['source_hashes']=[$expectedSource];`;
-- erst danach PPM-Planaufbau.
+- `publish_allowed=false`;
+- kein Auto-Publish;
+- keine WordPress-Schreibaktion;
+- Veröffentlichung nur nach ausdrücklicher Nutzerfreigabe.
 
-Nicht geändert:
-- Research-/Content-Evidence;
-- SEO 5-Felder;
-- Textmaschine;
-- Fachregeln;
-- LanguageTool;
-- PPM-/PSERC-/PSTE-Regeln;
-- Design;
-- Publish.
+## AUTORITATIVE BELEGE
 
-## BEREITS GEPRÜFT
+Current State Blob:
+`65da28894fd3af555150dc85a1b3249f7cf45a1e`
 
-- M34 PASS;
-- M35 positiv PASS;
-- fehlende Registry-Bindung BLOCK;
-- Registry-Bindung nach Planaufbau BLOCK;
-- current main enthält den Fehler weiterhin;
-- fresh Kandidat enthält exakt den bereits bewiesenen M35-Dateistand.
+Fehlerquelle Blob:
+`b322f233f60f45d22976fea9bc3a227be29c6fbb`
 
-## MASCHINELLER HOBBYRAUM-LOCK
+Protokoll Blob:
+`bfdc8baa14775bc849de942758f16d04c3067a85`
 
-```text
-HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_ALLOWED_FOR_CODEX_TEST
-OFFICE: TEXT
-MAIN_SHA: d32e16cdf6b45ffa282e42fa78e07da84863e362
-ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH
-PLAN_PHASE: PRODUCT_FIX
-RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
-ACTIVE_HISTORY_CASE: M35
-HISTORY_EXPECTED_FAIL: NONE
-RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
-CANDIDATE_BRANCH: hobbyroom/m35-ppm-registry-hash-binding-20260909
-CANDIDATE_HEAD_SHA: a611a5c150cc3d8f182ca9c1855339fb98fea0c2
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py
-ALLOWED_PATH_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py
-CHECK_PAUL: PASS
-CHECK_HISTORY: PASS
-CHECK_LAST_GOOD: PASS
-CHECK_NEIGHBORS: PASS
-CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PASS
-CHECK_INVARIANTS: PASS
-HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
-HISTORY_SOURCE_BLOB_SHA: a3c6a468dc1cf380c3a874ef86805d978d78e582
-HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-HISTORY_PROOF_RUNNER_BLOB_SHA: f7af847ed46fcae6527037eef06487b2f6d77786
-PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
-PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
-ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
-ERROR_SOURCE_BLOB_SHA: e327a9561e65c13262f992651852a029a217242e
-CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: ee987a364f3e2a79c9e8931a30d5a3453315d6ab
-DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 7d8fca295939176076b8ed0dc0e5ab652f1023f5
-STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
-STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
-PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: ec52624d8b91e707d8887f54f5d4109dc1904ece
-INTEGRATION_ALLOWED: true
-END_HOBBYROOM_WORK_LOCK_V1
-```
+Historische Matrix:
+`a3c6a468dc1cf380c3a874ef86805d978d78e582`
 
-## AKTUELLE EINZIGE NEXT ACTION
+Regression-Runner:
+`f7af847ed46fcae6527037eef06487b2f6d77786`
 
-**M35-Kandidat vollständig gegen M01–M35 prüfen.**
+RECOVERY_BASE_SHA:
+`de21f6cd35c60849c551fd82f78e75ce57c99fab`
 
-1. `hardlock` + `hardlock-base` auf Head `a611a5c150cc3d8f182ca9c1855339fb98fea0c2`.
-2. Current main muss exakt M35 als ersten FAIL reproduzieren.
-3. Kandidat muss M01–M35 vollständig `GESAMT PASS` liefern.
-4. Kein weiterer Fix im laufenden Test.
-5. Ruleset-Bypass muss vor Merge leer sein.
-6. Bei PASS PR #197 regulär mergen.
-7. Danach Dispatcher #107 auf fresh main synchronisieren.
-8. Danach echter 7/7-Realtest auf main – ohne Reparatur im Lauf.
-9. Kein Publish.
+## NEXT ACTION
 
-## VERBINDLICHER ARBEITSWEG
+**Realtest auf Dispatcher PR #107 starten und ohne Zwischenreparatur bis Terminal laufen lassen.**
 
-- KISS;
-- jeder Fehler gegen Historie, Paul, Gesamtworkflow und Nutzbarkeit;
-- kein Sammelfix;
-- keine neue Architektur;
-- kein Fix auf einen fehlgeschlagenen Fix;
-- Positiv/Negativ vor Integration;
-- im Realtest keine Reparatur.
-
-## NICHT ANFASSEN
-
-- parallele Alternative / PR #195;
-- SEO-Maschine / 5-Felder-Handoff;
-- Textmaschine;
-- Fachregeln;
-- Tabellen-/Link-/LanguageTool-Regeln;
-- PPM-/PSERC-/PSTE-Fachregeln;
-- Design;
-- WordPress-Publish-Grenze;
-- Dispatcher PR #107 mergen;
-- Auto-Publish / WordPress-Write.
+PR #107 bleibt offen und wird niemals gemergt.
