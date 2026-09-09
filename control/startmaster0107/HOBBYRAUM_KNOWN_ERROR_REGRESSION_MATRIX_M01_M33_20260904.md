@@ -59,7 +59,7 @@ M20 – Delivery: 7 Artikel + Import-Envelope + Source-Manifest exakt hashgebund
 
 M21 – No auto-publish: publish_allowed=false in Runtime, Bundles, Delivery, ENDSTEMPEL und WP-Test.
 
-M22 – Signed production package / H8: WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED / ED25519 / H8-Binding gültig.
+M22 – H8 Provenance / Integrität: 107007-Vorlauf bleibt hash-/batch-/herkunftsgebunden, verlangt keine interne ED25519-/Signer-Pflicht; gebundener Codex-Capsule-Weg bleibt fail-closed.
 
 M23 – Preproduction/Runtime Guards: automatischer Produktionspfad akzeptiert nur signierten Produktionsvertrag.
 
