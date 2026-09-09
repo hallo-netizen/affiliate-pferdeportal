@@ -48,9 +48,20 @@ def main():
       "pferde_endstempel_atomic_import"
     ],exclude=("control/seo-text-buero/alternative-central-machine/","protocol/"))
     runtime_calls=[]
+    non_runtime_refs=[]
     for r in refs:
-        if r["file"]=="control/startmaster0107/ENDSTEMPEL_WORDPRESS_VERIFY.php":continue
-        if "/test" in r["file"].lower() or r["file"].lower().startswith("test"):continue
+        rel=r["file"]
+        low=rel.lower()
+        if rel=="control/startmaster0107/ENDSTEMPEL_WORDPRESS_VERIFY.php":
+            continue
+        if (
+            "/test" in low or low.startswith("test")
+            or rel=="control/startmaster0107/ENDSTEMPEL_BUILD_CAPSULE_V1.py"
+            or rel=="control/startmaster0107/ENDSTEMPEL_TEST.py"
+            or "capsule" in low
+        ):
+            non_runtime_refs.append(r)
+            continue
         runtime_calls.append(r)
 
     with tempfile.TemporaryDirectory() as td:
@@ -92,7 +103,9 @@ def main():
           "status":"ACM_WP_IMPORT_PUBLISH_REDAKTIONSPLAN_WIRING_AUDIT_PASS",
           "final_signed_json_runtime_wiring":{
             "runtime_callers":runtime_calls,
-            "wired":bool(runtime_calls)
+            "non_runtime_refs":non_runtime_refs,
+            "wired":bool(runtime_calls),
+            "strict_definition":"A real WordPress runtime/admin/import handler must call the verifier; build capsules and tests do not count."
           },
           "ppm_current_admin_upload":{
             "refs":admin[:60],
@@ -110,6 +123,13 @@ def main():
             "inventory_reconciler":inventory,
             "duplicate_guard":duplicate
           },
+          "integration_readiness":{
+            "single_final_signed_json_wp_upload_wired":bool(runtime_calls) and any("endstempel" in json.dumps(r,ensure_ascii=False).lower() for r in admin),
+            "manual_publish_release_wired":publish_release_like or transition_hook or wp_publish_call,
+            "draft_only_core_wired":True,
+            "redaktionsplan_inventory_reconciliation_wired":bool(inventory) and bool(duplicate),
+            "ready":bool(runtime_calls) and any("endstempel" in json.dumps(r,ensure_ascii=False).lower() for r in admin) and (publish_release_like or transition_hook or wp_publish_call)
+          },
           "publish_allowed":False
         },ensure_ascii=False,indent=2))
     return 0
@@ -118,3 +138,5 @@ if __name__=="__main__":
     raise SystemExit(main())
 
 # workflow-trigger: wp-import-publish-wiring-v1
+
+# strict-runtime-wiring-audit-v2
