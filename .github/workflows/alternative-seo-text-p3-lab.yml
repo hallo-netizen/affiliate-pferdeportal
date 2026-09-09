@@ -202,6 +202,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_languagetool_authority_probe.py
 
+      - name: ACM bound LanguageTool runtime inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_languagetool_runtime_inventory.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
