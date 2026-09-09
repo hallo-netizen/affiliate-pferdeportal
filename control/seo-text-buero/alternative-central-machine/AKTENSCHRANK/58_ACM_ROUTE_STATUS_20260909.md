@@ -424,6 +424,11 @@ Explizite Regel:
 **Ungefilterte oder aktive Übernahme alter Workflowlogik = standardmäßig verboten.**
 
 Der Hardlock enthält positive und negative Selbsttests und läuft vor der bestehenden vollständigen ACM-Laborregression.
+Hardlock-Testnachtrag:
+- erster externer Lauf blockierte fail-closed wegen zu enger Konstruktor-Syntaxprüfung;
+- ausschließlich der externe Lab-Guard wurde syntaxfest auf AST-Prüfung korrigiert;
+- keine ACM-Produktiv-/Prototyptechnik wurde dafür verändert.
+
 
 ## HARTE ZWANGSJACKE FÜR JEDE WEITERE ACM-ARBEIT
 
