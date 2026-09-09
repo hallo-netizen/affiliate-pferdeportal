@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M16/M17 HISTORY AUTHORITY MAINTENANCE**
+STATUS: **AKTIV – M17 KISS PRODUCT FIX TEST**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -9,7 +9,7 @@ Ziel:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
 
 Current main:
-`d6de9265cddc1b2a011d707ad615c144cdd9d4ab`
+`6e650edce60b24baf7d7feef66e60cca2817e59e`
 
 Aktueller Integrationsblocker:
 `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`
@@ -36,10 +36,10 @@ Geparkter M35-Produktionskandidat:
 
 ## HISTORY AUTHORITY
 
-PR #196 ist integriert. M01–M35 sind die akzeptierte Historie.
-Aktuell wird ausschließlich das bestehende Runner-Orakel für M16/M17 an diese bereits dokumentierten Verträge angeglichen:
-- M16 aktueller Signer-Vertrag PASS;
-- M17 current main muss exakt `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED` reproduzieren.
+PR #198 ist integriert.
+- M16 aktueller Signer-Vertrag: PASS.
+- M17 current main: reproduziert `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`.
+- M01–M35 bleiben die akzeptierte Historie.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
@@ -49,17 +49,17 @@ Der Lock bindet ausschließlich den isolierten M35-Kandidaten an current main un
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
-MAIN_SHA: d6de9265cddc1b2a011d707ad615c144cdd9d4ab
+MAIN_SHA: 6e650edce60b24baf7d7feef66e60cca2817e59e
 ACTIVE_BLOCKER: M17_HOST_FINALIZATION_NOT_FAIL_CLOSED
-PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
+PLAN_PHASE: PRODUCT_FIX
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
 ACTIVE_HISTORY_CASE: M17
-HISTORY_EXPECTED_FAIL: M17
+HISTORY_EXPECTED_FAIL: NONE
 RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
-CANDIDATE_BRANCH: hobbyroom/m16-m17-history-authority-20260909
-CANDIDATE_HEAD_SHA: 5ea8d5da54ca946dd99b3d85a2f3fb8488b7a7b8
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+CANDIDATE_BRANCH: hobbyroom/m17-host-finalization-fail-closed-20260909
+CANDIDATE_HEAD_SHA: 6dcf42daa1dfc0e7960a17da49f8ca2dfee2b5ba
+TECHNICAL_SCOPE_PREFIXES: control/output-quarantine/runtime_entry_gate.py
+ALLOWED_PATH_PREFIXES: control/output-quarantine/runtime_entry_gate.py
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -70,33 +70,34 @@ CHECK_INVARIANTS: PASS
 HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
 HISTORY_SOURCE_BLOB_SHA: b1fc329e2c440cfaba75aef6a6206666969802d6
 HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-HISTORY_PROOF_RUNNER_BLOB_SHA: 583444719bfe8a94f2cf153cbe920c8ee11fad43
+HISTORY_PROOF_RUNNER_BLOB_SHA: 1ba35cc4738d8894ad76fdf97b71cbac43c80764
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
-ERROR_SOURCE_BLOB_SHA: 473281fa16e2159991f8690f9d6e1757458dce45
+ERROR_SOURCE_BLOB_SHA: 5ac7af2d21ad4bb825d769ff0e7a4148cde45b92
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 774a02d328bdfc7e81a850ee6e95f08874cb77d9
+CURRENT_STATE_BLOB_SHA: 58014917e82ff0f63c0aeb528378a53ec03654e1
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: 34d62af8d924b7579c1d45fabec039b8e350d5b2
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: 1a268cc6fe264a786a30cd4453765cca20e2f8c2
+PROTOCOL_SOURCE_BLOB_SHA: 8ae3424135d6b8ab81340fe26ef068a68782ecba
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**M16/M17 History Authority zuerst; M35 bleibt eingefroren.**
+**M17-Kandidat jetzt vollständig gegen M01–M35 prüfen.**
 
-1. Separaten History-PR `hobbyroom/m16-m17-history-authority-20260909` gegen current main öffnen.
-2. M16 muss auf current main nach aktuellem Signer-Vertrag PASS sein.
-3. M17 muss auf current main exakt `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED` reproduzieren.
-4. Kein Produktionscode im History-PR.
-5. Danach separaten Ein-Datei-M17-Produktionskandidaten bauen.
-6. Erst nach M17-Gesamt-PASS den unveränderten M35-Kandidaten erneut auf fresh main binden.
+1. PR `hobbyroom/m17-host-finalization-fail-closed-20260909` gegen current main öffnen.
+2. `hardlock` und `hardlock-base` müssen auf exakt Head `6dcf42daa1dfc0e7960a17da49f8ca2dfee2b5ba` laufen.
+3. Trusted Runner muss current main zuerst exakt als M17 reproduzieren.
+4. Derselbe Runner muss den Kandidaten M01–M35 vollständig PASS melden.
+5. Kein weiterer Codefix im selben Kandidaten.
+6. Repository-admin-PR-Bypass vor Produktionsmerge entfernen.
+7. Erst nach regulärem M17-Merge M35 auf fresh main neu binden.
 
 ## VERBINDLICHER ARBEITSWEG
 
