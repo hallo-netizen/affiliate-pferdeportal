@@ -313,24 +313,65 @@ Status für realen ACM-Nulltest:
 
 Der erste sichtbare Stop ist LanguageTool; der **Root Cause darf aber nicht auf LanguageTool verengt werden**.
 
+## READ-ONLY-CORRIDOR-ENTSCHEIDUNG – ENDSTAND
+
+Die in der autoritativen Übergabe verlangte read-only Frage ist geschlossen.
+
+### NEW internal_links
+Im aktuellen unveränderten PPM/Fachworkflow wurden gefunden:
+- `PPM679_WordPress_Link_Target_Validator`
+- `Content_Structure_Language_Gate::check_links`
+- `Content_Validator`
+- weitere Link-/Known-Error-Prüfer
+
+Diese Komponenten validieren bereits gebundene Links.
+Es wurde kein unveränderter allgemeiner deterministischer NEW-Erzeuger gefunden, der für einen frischen Artikel die drei artikelbezogenen `quality_binding.link_bindings` / Registry-Bindungen ohne Worker-/Chatentscheidung erzeugt.
+
+Ergebnis:
+`CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`
+
+### design_format
+Vorhandene echte Autorität:
+- Rendered-DOM-/Computed-Style-/Readback-Prüfung nach Draft/WordPress-Render.
+
+Der produktive 107007-Handoff verlangt `design_format` jedoch bereits als Teil der 12 Stage-Proofs vor Abschluss des Handoffs.
+Ein echter Rendered-DOM-PASS kann dort nicht ehrlich vorliegen.
+
+Keine vorhandene unveränderte Produktionsautorität wurde gefunden, die `design_format` im Prewrite-Handoff eindeutig anders definiert.
+Eine Umdeutung auf Source-Format wäre eine neue Vertrags-/Autoritätsentscheidung und ist verboten.
+
+Ergebnis:
+`CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
+
+### Konsequenz
+
+`ACM_REAL_STAGE_CORRIDOR_BLOCKED`
+
+Kein LanguageTool-Einzelfix.
+Kein Produktkandidat.
+Kein neuer 7/7-Realtest.
+Kein neuer Runner/Executor/Handoff/Controller.
+Keine neue Link- oder Designlogik.
+Keine Änderung an bestehenden Schnittpunkten.
+
+Der ACM-Laborkern `prepare(no write) -> externe Signatur -> Draft -> Readback` bleibt als isolierter technischer PASS bestehen.
+Nicht bewiesen ist die vollständige frische 12-Stage-Produktion ohne freie Workerentscheidung.
+
 ## HOBBYRAUM / NEXT ACTION
 
-HOBBYRAUM_STATUS: **AKTIV**
+HOBBYRAUM_STATUS: **BLOCKED**
 PRODUKTIONSADOPTION: **BLOCKED**
 
 **WP-01 bleibt BLOCKED und wird in dieser Route nicht angefasst.**
 
 Das ist kein Produktions-Bypass. Solange WP-01 ungelöst ist, gibt es keine Produktionsadoption.
 
-**NEXT ACTION – ausschließlich read-only, kein Produktfix:**
+**NEXT ACTION:**
 
-Vor jeder weiteren Realintegration genau die bereits autoritativ offene Frage schließen:
-Existiert bereits eine unveränderte Fachworkflow-Quelle, die für NEW
-1. die artikelbezogenen internen Linkbindungen deterministisch erzeugt und
-2. die bestehende `design_format`-Evidence so definiert, dass sie ohne Umdeutung mit der realen Lifecycle-Reihenfolge vereinbar ist?
+Keine technische Reparatur zulässig.
 
-Bis diese beiden Autoritäten belegt sind:
-`FIX_FORBIDDEN` für ACM-REAL-01; insbesondere kein LanguageTool-Einzelfix.
+Die read-only Suche ist abgeschlossen und hat beide fehlenden Autoritäten bestätigt.
+Unter den aktuellen Hard Rules bleibt die reale ACM-Integration BLOCKED, bis eine bereits bestehende autoritative Quelle nachgewiesen wird oder eine spätere ausdrücklich freigegebene Ziel-/Schnittstellenentscheidung erfolgt.
 
 Verbindlicher Einstieg:
 `offizieller Runtime-Start -> CURRENT_BOUND_ACTION_READY -> aktuelles gebundenes Hindernisstangen-Item -> bestehende FACHWORKFLOW_HANDOFF_REQUEST.json`
