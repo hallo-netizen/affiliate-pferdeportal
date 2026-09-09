@@ -340,3 +340,27 @@ Dessen CURRENT_STATE, Fehlerstatus, Hobbyraum und aktive Reparaturbranches werde
 
 Noch keine Übernahme.
 `CAMPUS_PROPAGATION_BLOCKED_UNTIL_ALTERNATIVE_ARCHITECTURE_APPROVED`
+
+
+## SICHERHEITS-/GRUNDWORKFLOW-PRÜFUNG 2026-09-09
+
+Autoritative Detailakte:
+`55_SECURITY_WORKFLOW_REVIEW.md`
+
+Ergebnis:
+- ACM technisch weiterhin GO
+- vorhandenes Endstempel-Prinzip wird für Produktion wiederverwendet
+- privater Ed25519-Schlüssel bleibt ausschließlich GitHub/externer Signer
+- WordPress erhält nur festen Public Key und prüft vor erstem Write
+- finale Dateiausgabe muss wieder über kanonische hash-/receiptgebundene Release-Kette laufen
+- menschliche Prüfung darf später stichprobenartig werden; maschinelle Gates bleiben für jeden Artikel vollständig
+- verbleibendes Automations-Risiko: externe Recherchequellen müssen ausdrücklich als untrusted data ohne Workflow-/Prompt-Autorität gebunden werden
+- kein neuer Runner, Signer, Controller, Handoff oder Ausgabeweg erforderlich
+
+Vor unbeaufsichtigter Vollautomatik:
+1. Laborschlüssel durch vorhandenen Produktions-Endstempelweg ersetzen.
+2. Enddatei an vorhandenen Release-/Receipt-Weg binden.
+3. Recherchequellen als untrusted data technisch/fachvertraglich festschreiben und kritische Fakten unabhängig bestätigen.
+
+Grundworkflow-Passung: GO.
+Produktionsfreigabe bleibt gesperrt bis diese drei Punkte und die bekannte Signaturpositions-/Zielvertragsentscheidung sauber vereinheitlicht sind.
