@@ -27,11 +27,11 @@ Produktive Fehlermatrix bleibt separat:
 **PRODUKTIONSADOPTION: BLOCKED**
 
 Aktueller vollständig getesteter ACM-Head:
-`70df4bc29a604dabcc34874eed93d1a52bc4ddcf`
+`fe9d5dd375c00139f206bf8791104482f357afba`
 
 Harte Gesamtprüfung auf diesem Stand:
-- Alternative SEO Text P3 Isolated Lab – Run `34381992239` – SUCCESS
-- Alternative SEO Text P8 Signer Isolation Lab – Run `34381992313` – SUCCESS
+- Alternative SEO Text P3 Isolated Lab – Run `34382240065` – SUCCESS
+- Alternative SEO Text P8 Signer Isolation Lab – Run `34382240055` – SUCCESS
 - ACM Machine Hardlock – PASS
 - P0–P47 – PASS
 - ACM first full one-article lab test – PASS
@@ -334,3 +334,24 @@ Separat offen, aber nicht durch diese ACM-Änderung verursacht:
 - kein Auto-Publish
 - keine Inhalts-/Qualitätsänderung
 - jede technische Änderung positiv + negativ + Gesamtworkflow prüfen
+## ABSCHLUSS-/NACHHOLPRÜFUNG DIESES CHATS – 2026-09-09
+
+Frisch gegen ACM-CURRENT, Campus/TEXT-CURRENT, Hobbyraum, Zielvertrag, Fehlerquelle, main-CURRENT und aktuelle GitHub-Runs geprüft.
+
+Tatsächlich in dieser ACM-Route geändert/geprüft:
+- 12 Pflichtnachweise als unveränderliche Pflichtmenge statt als zweite Ablaufsteuerung gebunden;
+- Dreier-Zickzack als Sollprinzip festgehalten: Worker -> Zentrale -> vorhandener Prüfer -> Zentrale;
+- Endstrecke als artikelzahlunabhängige signierte Enddatei gegen den echten WordPress-Preimport-Prüfer positiv/negativ geprüft;
+- Zwischenfehler aus 25er-Labortests nicht als Produktionsfehler übernommen; aktuelle Endstreckenbeweise für 1/3/25/1000 sind im grünen Gesamtstand enthalten;
+- frühere falsche Einordnung von Research als erstem Blocker verworfen;
+- design_format-Lifecycle an den vorhandenen Rendered-DOM-Prüfer gebunden;
+- erster aktueller fachlicher ACM-Corridor-Blocker ist NEW-Linkbindung.
+
+Aktueller Teststand auf Head `fe9d5dd375c00139f206bf8791104482f357afba`:
+- P3 Gesamtworkflow: SUCCESS, Run `34382240065`;
+- P8 Signer-Isolation: SUCCESS, Run `34382240055`;
+- repository-weites Immutable Base Hardlock: FAILURE, Run `34382238025`; bekannter Branch/Basis-Konflikt, keine Produktionsfreigabe.
+
+Original-TEXT-/Campus-Parallelweg bleibt unverändert BLOCKED/FIX_FORBIDDEN und wurde nicht überschrieben.
+Kein main-Write, kein WordPress-Produktivwrite, kein Publish.
+
