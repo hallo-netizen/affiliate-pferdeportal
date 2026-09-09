@@ -282,3 +282,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p45_execute_plan_prewrite_sequence.py
+
+      - name: P46 existing prewrite helper inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p46_prewrite_helper_inventory.py
