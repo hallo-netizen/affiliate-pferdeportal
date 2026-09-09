@@ -1034,3 +1034,45 @@ Offen:
 - aktueller main hat keinen 7/7-PASS;
 - 107008 auf aktuellem main nicht erreicht.
 
+
+
+### 09.09.2026 – M35 History Authority integriert / KISS-Produktionskandidat
+
+History Authority:
+- PR #196 gemergt;
+- neuer main: `d6de9265cddc1b2a011d707ad615c144cdd9d4ab`;
+- Scope ausschließlich bestehende Fehlermatrix + bestehenden Regression-Runner;
+- M15 stale Orakel an den seit M28 real gültigen Request-first-Handoff angepasst;
+- M35 dauerhaft aufgenommen;
+- kein Produktionscode im History-PR.
+
+M35-Kausalprüfung:
+- aktueller Realblocker bleibt `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`;
+- PPM-Fact-Pack-Import erzeugt/speichert einen eigenen Registry-Hash;
+- der bestehende Handoff liest diesen Registry-Hash bereits über `PPM679_Storage::fact_pack_hash(...)`;
+- bisher wurde er gegen `production_plan_item.source_hashes` geprüft, das noch den Forschungs-/Fact-Pack-Hash enthält;
+- damit wurden zwei Hash-Namensräume verwechselt;
+- der Fehler liegt ausschließlich in der internen PPM-Plan-Kopie, nicht im SEO-5-Felder-Handoff und nicht in Fach-/SEO-/Textmaschinenregeln.
+
+KISS-Kandidat:
+- Branch `hobbyroom/m35-ppm-registry-hash-binding-20260909`;
+- Head `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
+- exakt eine geänderte Produktionsdatei: `control/startmaster0107/fachworkflow_proof_handoff.py`;
+- nach erfolgreichem Fact-Pack-Import: leeren Registry-Hash weiter fail-closed blockieren, danach interne `source_hashes` exakt auf den bereits von PPM ermittelten Registry-Hash setzen;
+- keine neue Architektur, kein neuer Runner/Gate/Executor, keine Änderung von PPM/PSERC/Fachregeln, kein Publish.
+
+Lokale/source-level Gegenprüfung:
+- M34 PASS;
+- M35 positiv PASS;
+- fehlende Registry-Bindung BLOCK;
+- Registry-Bindung nach Planaufbau BLOCK.
+
+Dispatcher:
+- permanenter PR #107 / Branch `codex-chat-launcher` auf current main `d6de9265cddc1b2a011d707ad615c144cdd9d4ab` synchronisiert;
+- nicht mergen.
+
+Offen:
+- serverseitige `hardlock`-/`hardlock-base`-Abnahme des M35-Kandidaten;
+- temporären Repository-admin-PR-Bypass vor jedem Produktionsmerge wieder entfernen;
+- danach erst regulärer Merge und echter 7/7-Realtest;
+- keine Reparatur während des Realtests.
