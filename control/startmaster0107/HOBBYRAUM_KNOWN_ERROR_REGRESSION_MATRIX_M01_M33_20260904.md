@@ -12,7 +12,7 @@ Verbindliche bekannte Fehler-/Regressionstestliste für den Hobbyraum.
 - Keine Architekturänderung.
 - Bereits bestandene Punkte nur als Regression prüfen, nicht neu analysieren.
 - Jeder einmal real aufgetretene, weiterhin relevante Workflowfehler bleibt dauerhaft in dieser Matrix.
-- main bleibt unangetastet, bis die komplette Matrix PASS ist.
+- main bleibt unangetastet, bis der aktive Fehler im Kandidaten behoben ist und derselbe Runner danach entweder Gesamt-PASS oder ausschließlich einen späteren bereits bekannten Fehler als ersten FAIL meldet.
 - publish_allowed=false bleibt unverändert.
 
 ## Bestehende Matrix M01–M25
