@@ -302,3 +302,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_first_full_one_article_test.py
+
+      - name: Existing generic Endstempel and WordPress preimport positive-negative
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/startmaster0107/ENDSTEMPEL_TEST.py
