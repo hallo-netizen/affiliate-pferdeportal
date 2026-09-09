@@ -83,9 +83,19 @@ Boundary:
 - sämtliche 11 `file_bindings` gegen den Kandidaten geprüft;
 - 11/11 Blob-SHAs stimmen exakt.
 
-## NÄCHSTER BEKANNTER FEHLER DANACH
+## NÄCHSTER MASCHINENFEHLER DANACH
 
-M35 bleibt unverändert der bekannte reale Liveblocker:
+M26 ist nach M22 der nächste Runner-Stop:
+`M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`
+
+Gegenprüfung:
+- Current-Action-Selftest PASS;
+- gebundener Fachworkflow-Worker PASS;
+- Handoff-Request-Vertrag PASS;
+- STEP107007 enthält die geforderte Semantik bereits als `die realen Nicht-PPM-Stage-Artefakte und Proofs`;
+- damit kein funktionaler Kontextverlust, sondern exakter Marker-/Wortlaut-Drift.
+
+M35 bleibt danach unverändert der bekannte reale Liveblocker:
 `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
 
 Geparkter M35-Kandidat:
