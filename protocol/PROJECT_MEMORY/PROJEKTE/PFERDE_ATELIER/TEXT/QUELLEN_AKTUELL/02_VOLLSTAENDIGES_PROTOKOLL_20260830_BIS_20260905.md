@@ -1325,3 +1325,31 @@ Exakte Hashes:
 - CURRENT_STATE SHA256 `03919ba816f0fbb8e91705a85cbaaae6f5b86189b65ff6d6ee01793af8dad9bf`.
 
 Kein Publish. M35 unverändert geparkt.
+
+
+### 09.09.2026 – M22 Kandidat erreicht M26
+
+Gebundener hardlock-base-Lauf:
+- current main reproduziert M22;
+- M22-Kandidat: M22 PASS;
+- M23 PASS;
+- M24 PASS;
+- M25 PASS;
+- erster nachfolgender Stop M26:
+  `M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`.
+
+M26-Gegenprüfung gegen Historie/Paul/Nutzbarkeit:
+- Current-Action-Selftest PASS;
+- Worker-Bindung PASS;
+- Handoff-Request-Vertrag PASS;
+- produktive STEP107007-Anweisung enthält die geforderte Semantik bereits:
+  `die realen Nicht-PPM-Stage-Artefakte und Proofs`;
+- Ursache ist exakter Wortlaut-/Markerdrift (`reale` vs. `realen`), kein fehlender Fachworkflow-Kontext.
+
+Folge:
+- M22 nicht mit M26 vermischen;
+- M22-Maschinenziel jetzt sauber: erster Folge-FAIL M26;
+- M26 danach separat KISS bearbeiten;
+- M35 bleibt der bekannte reale Liveblocker dahinter.
+
+Kein Publish.
