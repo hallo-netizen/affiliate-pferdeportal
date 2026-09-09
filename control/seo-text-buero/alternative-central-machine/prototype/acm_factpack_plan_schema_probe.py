@@ -35,14 +35,26 @@ def main()->int:
         probe.write_text(r'''<?php
 require __DIR__.'/tests/normal-draft-production/fixture-builder.php';
 nd_reset();
-$p=nd_build_plan(1,'acm-schema-probe');
+$p=nd_build_plan(4,'acm-schema-probe');
 $item=$p['items'][0];
 $pack=PPM679_Storage::load_fact_pack($item['source_snapshot_id']);
+$beratungItem=null;$beratungPack=null;
+foreach($p['items'] as $candidate){
+  if((string)($candidate['article_type']??'')==='Beratung'){
+    $beratungItem=$candidate;
+    $beratungPack=PPM679_Storage::load_fact_pack($candidate['source_snapshot_id']);
+    break;
+  }
+}
+if(!is_array($beratungItem)||!is_array($beratungPack)){fwrite(STDERR,"BERATUNG_SAMPLE_MISSING\n");exit(2);}
+if(isset($beratungItem['canonical_article']['body_html'])){$beratungItem['canonical_article']['body_html']='[OMITTED_SCHEMA_PROBE]';}
 echo json_encode(array(
   'status'=>'ACM_FACTPACK_PLAN_SCHEMA_SAMPLE',
   'plan_header'=>array_diff_key($p,array('items'=>true)),
-  'plan_item'=>$item,
-  'fact_pack'=>$pack
+  'faq_item'=>$item,
+  'faq_fact_pack'=>$pack,
+  'beratung_item'=>$beratungItem,
+  'beratung_fact_pack'=>$beratungPack
 ),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT)."\n";
 ''',encoding="utf-8")
         import subprocess
