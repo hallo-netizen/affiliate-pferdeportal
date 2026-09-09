@@ -1115,3 +1115,35 @@ Entscheidung:
 - M35-Kandidat `ef2eceb…` bleibt unverändert geparkt;
 - zuerst M17 wieder PASS machen;
 - keine Vermischung von M17- und M35-Produktionsfix.
+
+
+### 09.09.2026 – M17 Ein-Datei-Kandidat nach History-Integration
+
+History:
+- PR #198 gemergt;
+- neuer main `6e650edce60b24baf7d7feef66e60cca2817e59e`;
+- M16 aktueller Signer-Vertrag PASS;
+- M17 ausführbar als `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`.
+
+M17-KISS-Kandidat:
+- Branch `hobbyroom/m17-host-finalization-fail-closed-20260909`;
+- Head `6dcf42daa1dfc0e7960a17da49f8ca2dfee2b5ba`;
+- exakt eine Datei: `control/output-quarantine/runtime_entry_gate.py`;
+- nach `finalize_after_107008(...)` wird vor Clear/Final-PASS zwingend geprüft:
+  - Rückgabe ist dict;
+  - `ok is True`;
+  - `status == PSERC_FINAL_PACKAGE_PASS`;
+- andernfalls `HOST_PSERC_FINALIZATION_NOT_PASS`.
+
+Lokale/source-level Prüfung:
+- M16 PASS;
+- M17 positiv PASS;
+- fehlender Guard BLOCK;
+- Guard nach finalem PASS BLOCK.
+
+Dispatcher:
+- PR #107 / `codex-chat-launcher` auf main `6e650edce60b24baf7d7feef66e60cca2817e59e` synchronisiert.
+
+M35:
+- Kandidat `ef2eceb…` unverändert geparkt;
+- keine Vermischung mit M17.
