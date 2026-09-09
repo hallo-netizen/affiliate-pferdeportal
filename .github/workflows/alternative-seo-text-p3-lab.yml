@@ -208,6 +208,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_languagetool_runtime_inventory.py
 
+      - name: ACM full workflow and editorial-plan audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_full_workflow_redaktionsplan_audit.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
