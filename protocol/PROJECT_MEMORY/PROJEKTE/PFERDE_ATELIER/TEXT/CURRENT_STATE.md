@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **BLOCKED – M17 FAIL-CLOSED REGRESSION BEFORE M35**
+STATUS: **AKTIV – M17 KISS PRODUCT CANDIDATE UNDER TEST**
 
 ## AUTORITÄT
 
@@ -12,15 +12,15 @@ Fehlerdetails → autoritative TEXT-Fehlerquelle.
 
 ## CURRENT MAIN
 
-`d6de9265cddc1b2a011d707ad615c144cdd9d4ab`
+`6e650edce60b24baf7d7feef66e60cca2817e59e`
 
-PR #196 ist als reine History Authority gemergt. Produktionscode blieb dabei unverändert.
+PR #198 ist als reine M16/M17-History-Authority gemergt. Produktionscode blieb dabei unverändert.
 
 ## DISPATCHER / SCHUTZ
 
 Permanenter Dispatcher PR #107:
 - offen, **nicht mergen**;
-- Head exakt `d6de9265cddc1b2a011d707ad615c144cdd9d4ab`.
+- Head exakt `6e650edce60b24baf7d7feef66e60cca2817e59e`.
 
 GitHub Ruleset `Pferde Atelier Main Hardlock`:
 - enforcement: active;
@@ -81,19 +81,29 @@ Diese Referenzen sind historische Vergleichsstände, **nicht** aktueller main.
 
 ## AKTIVER ARBEITSSTAND
 
-Aktive History Authority:
-- Branch `hobbyroom/m16-m17-history-authority-20260909`;
-- Head `5ea8d5da54ca946dd99b3d85a2f3fb8488b7a7b8`;
-- ausschließlich bestehender M01–M35-Runner;
-- M16-Orakel an aktuellen Signer-Vertrag angepasst;
-- M17-Orakel auf echten Fail-closed-Vertrag gehärtet.
+M16/M17 History Authority:
+- PR #198: closed / merged;
+- current main `6e650edce60b24baf7d7feef66e60cca2817e59e`;
+- M16 aktueller Vertrag PASS;
+- M17 ist jetzt als ausführbarer Fail-closed-Fall gebunden.
 
-Geparkter M35-KISS-Kandidat:
-- Branch `hobbyroom/m35-ppm-registry-hash-binding-20260909`;
-- Head `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
-- unverändert, kein weiterer Fix.
+Aktiver M17-KISS-Kandidat:
+- Branch `hobbyroom/m17-host-finalization-fail-closed-20260909`;
+- Head `6dcf42daa1dfc0e7960a17da49f8ca2dfee2b5ba`;
+- exakt eine Datei: `control/output-quarantine/runtime_entry_gate.py`;
+- nur fehlenden Check ergänzen: `pserc_finalization.ok==true` und Status `PSERC_FINAL_PACKAGE_PASS` müssen vor Clear/Final-PASS vorliegen.
+
+Geparkter M35-Kandidat:
+- `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
+- unverändert; wird erst nach M17-PASS neu auf fresh main gebunden.
 
 ## TESTS – TATSÄCHLICH AUSGEFÜHRT
+
+M17-Kandidat `6dcf42d…` lokal/source-level:
+- M16 PASS;
+- M17 positiv PASS;
+- fehlender Finalization-Guard BLOCK;
+- Guard in falscher Reihenfolge BLOCK.
 
 History Authority #196:
 - M15 aktueller Request-first-Vertrag positiv PASS;
