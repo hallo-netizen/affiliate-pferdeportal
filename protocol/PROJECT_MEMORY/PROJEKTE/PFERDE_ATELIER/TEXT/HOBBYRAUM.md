@@ -1,94 +1,152 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – REALTEST / REPARATUR VERBOTEN**
+STATUS: **AKTIV – READ_ONLY CORRIDOR / FIX_FORBIDDEN**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
+Aktueller Stand:
+`CURRENT_STATE.md`
+
+Autoritative aktuelle Fehlerquelle:
+`QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md`
+
+Technischer Corridor:
+- `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`
+- `TECHNICAL_CORRIDOR_MATRIX_20260907.md`
+
 Ziel:
-`107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
+`QUELLEN_AKTUELL/03_ZIELVERTRAG_AKTUELL_20260905.md`
 
-Current main:
-`93ba987c56f7b08ffba009210e3012c036fec18d`
+WARUM:
+`protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 
-Dispatcher:
+## CURRENT MAIN / DISPATCHER
+
+`main = 93ba987c56f7b08ffba009210e3012c036fec18d`
+
 `codex-chat-launcher = 93ba987c56f7b08ffba009210e3012c036fec18d`
 
-M01–M36:
-**MASCHINELL GESAMT PASS.**
+PR #107:
+permanenter Dispatcher / offen / niemals mergen.
 
-M17 / M22 / M26 / M35 / M36:
-**integriert behoben.**
+## AKTUELLE ARBEIT
 
-## JETZT AUSSCHLIESSLICH
+**Kein Produktfix. Kein Realtest. Nur read-only Corridor-Arbeit.**
 
-**Echter frischer STARTMASTER0107-7/7-Realtest.**
+Current State bindet:
+- B16 als aktuellen Liveblocker;
+- `FIX_FORBIDDEN`;
+- keinen Produktkandidaten;
+- zwei offene bestehende Autoritätslücken:
+  1. NEW-Link-Provenienz;
+  2. `design_format`-Evidence-Semantik.
 
-Verbindlich:
-- zuerst exakten HEAD prüfen;
-- Cloud Entry;
-- Production Preflight;
-- Runtime Entry;
-- Current Action / Single Door;
-- alle 7 Artikel vollständig frisch;
-- keine alten Artikel/JSONs/Proofs/Recovery-/Quarantäne-/Release-Artefakte als Produktionsquelle;
-- Current Codex ist der gebundene Fachworkflow-Worker;
-- kein zweiter Executor / keine Capability-Suche;
-- reale aktuelle Fachworkflow-Artefakte und Pflicht-Stage-Proofs erzeugen;
-- `FACHWORKFLOW_HANDOFF_REQUEST.json` exakt aus den gebundenen Current-Action-Werten erzeugen;
-- ausschließlich `fachworkflow_handoff.command`;
-- echter PPM 6.7.9;
-- nur nach `FACHWORKFLOW_PROOF_HANDOFF_PASS` → `submission_command`;
-- nächstes gebundenes Item;
-- danach 107008.
-
-## STOP-REGEL
-
-Im Realtest:
-- **keine Reparatur**;
-- keine Architekturänderung;
-- keine neue Route;
-- kein Fix auf einen FAIL.
-
-Terminal ausschließlich:
-1. 7/7 PASS + 107008 PASS,
-oder
-2. erster echter technischer BLOCKED / USER_ACTION_REQUIRED.
-
-Dann erst wieder Hobbyraum-Reparaturphase eröffnen.
-
-## PUBLISH-GRENZE
-
-- `publish_allowed=false`;
-- kein Auto-Publish;
-- keine WordPress-Schreibaktion;
-- Veröffentlichung nur nach ausdrücklicher Nutzerfreigabe.
-
-## AUTORITATIVE BELEGE
-
-Current State Blob:
-`b91219b9613ff8557c7ddd510d959076348242eb`
-
-Fehlerquelle Blob:
-`1d55e12d845126a3ffd359f4ee080ebaba6fbe7b`
-
-Protokoll Blob:
-`11b9f4d874e5535fcecb2dea5289d3d4b42e218d`
-
-Änderungsregister Blob:
-`28b90ca69e033609c6e482d7e3e54bee7ea11574`
-
-Historische Matrix:
-`647732791cdf764399164b471aa7fddc262d9296`
-
-Regression-Runner:
-`a6d42c7f355b9ad23ff435a78ff7e74aee4dc8be`
-
-RECOVERY_BASE_SHA:
-`de21f6cd35c60849c551fd82f78e75ce57c99fab`
+Der sichtbare LanguageTool-Stop wird nicht separat repariert.
 
 ## NEXT ACTION
 
-**Realtest auf Dispatcher PR #107 starten und ohne Zwischenreparatur bis Terminal laufen lassen.**
+**Genau eine Frage read-only schließen:**
 
-PR #107 bleibt offen und wird niemals gemergt.
+Existiert bereits eine unveränderte autoritative Fachworkflow-Quelle außerhalb des aktuell gebundenen STARTMASTER-Pfads, die für NEW
+
+1. die drei artikelbezogenen Linkbindungen deterministisch erzeugt und
+2. die bestehende Bedeutung/Evidence von `design_format` eindeutig definiert?
+
+Arbeitsweg:
+1. nur vorhandene aktuelle/originale Quellen lesen;
+2. keine historischen Produktionspläne als Produktionsquelle verwenden;
+3. keine neue Linklogik;
+4. keine neue Designregel;
+5. keine neue Stage;
+6. keinen neuen Executor/Runner/Workflow bauen.
+
+Wenn beide vorhandenen Autoritäten gefunden werden:
+- Corridor-Matrix aktualisieren;
+- B16 zuerst als fortlaufende ausführbare History-Regression aufnehmen;
+- danach genau einen konsolidierten KISS-Kandidaten;
+- Positiv/Negativ/Invarianten;
+- erst danach neuer Realtest.
+
+Wenn eine Autorität nicht existiert:
+**STATUS → BLOCKED dokumentieren. Kein Ersatzweg.**
+
+## KEIN AKTIVER KANDIDAT
+
+CANDIDATE_BRANCH: NONE  
+CANDIDATE_HEAD_SHA: NONE  
+INTEGRATION_ALLOWED: false
+
+Der geparkte LT-Branch
+`hobbyroom/languagetool-runtime-rebind-20260907`
+ist nur historische Beweisquelle und kein Integrationskandidat.
+
+## PARALLELBRANCH
+
+Alternative:
+`alternative/seo-text-central-machine-20260908`
+
+Fresh Head:
+`b3cdf639fc8bd40e7c3c044fce03f88bb3508472`
+
+PR #195:
+offen / Draft / isoliert.
+
+Aus diesem Originalweg:
+- nicht verändern;
+- nicht mergen;
+- keine Statuswahrheit übernehmen.
+
+## NICHT ANFASSEN
+
+- SEO-5-Felder-Handoff;
+- Textmaschine/Fachregeln;
+- Tabellen-/Link-/LanguageTool-/Designregeln;
+- PPM/PSERC/PSTE-Regeln;
+- Single Door;
+- Publish-Grenze;
+- WordPress;
+- PR #107 mergen;
+- PR #195 verändern;
+- historische Artikel/Pläne als NEW-Produktionsquelle.
+
+## AUTORITATIVE BLOB-BINDUNGEN
+
+CURRENT_STATE:
+`accd8010443fdb99eeab2ebd47d85a43c8b845ca`
+
+Fehlerquelle:
+`12f49603118c7448c436ec97e85be41bddf80d7f`
+
+Protokoll:
+`c5b0bef4424be6c572364b7e6eacfaaf1b816f79`
+
+Änderungsregister:
+`0cf9e1eb3744add9e79f1eab5b19fc8892945b04`
+
+Hobbyraum-Standard:
+`8c90de4920ec81e10f3952bbd52208fad5a42367`
+
+Corridor-Matrix:
+`5d19d5a0c2b56533f1a47cab349ad768ec1e6663`
+
+Corridor-Rootcause:
+`93fe9ac6df12faef654dfdba5e08f35f83362b94`
+
+Paul:
+`08fee3940a8f693ac6bb505df2e083b8515e2dd9`
+
+Zielvertrag:
+`9150da14699e319381f9119cebfcee90233c3521`
+
+## SCHUTZ
+
+Ruleset:
+`Pferde Atelier Main Hardlock`
+
+- active;
+- required: `hardlock`, `hardlock-base`;
+- bypass: leer;
+- current user bypass: never.
+
+Kein Publish.
