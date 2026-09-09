@@ -196,6 +196,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_existing_stage_execution_map.py
 
+      - name: ACM normal Beratung LanguageTool no-external-authority proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_languagetool_authority_probe.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
