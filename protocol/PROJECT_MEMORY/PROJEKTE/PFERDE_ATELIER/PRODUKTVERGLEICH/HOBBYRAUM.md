@@ -1,9 +1,9 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: AKTIV / 0.8.3 FINAL-FRESH-ZIP LOKAL PASS / WORDPRESS-LIVE-RETEST OFFEN
+STATUS: FREI FÜR ÜBERGABE / FACHBLOCK 0.8.3 ABGESCHLOSSEN
 
-## AKTUELLER TESTKANDIDAT
+## ABGESCHLOSSENER KANDIDAT
 
 `universal-product-comparison-0.8.3-prototype.zip`
 
@@ -13,48 +13,48 @@ SHA-256:
 Branch:
 `hobbyroom/productvergleich-workflow-v070-20260908`
 
-## ABGESCHLOSSEN
+## PASS
 
-0.8.2:
-- WordPress-Live-Kostenwiederholung PASS;
-- 0 Provider;
-- $0.0000;
-- `NO_ELIGIBLE_COMPARISONS`.
-
-0.8.3 lokal:
-- 25/25 Tests PASS;
-- PHP-Lint 43/43;
-- Source↔finale ZIP 57/57;
+Lokal:
+- 25/25 Tests;
+- 43/43 PHP-Lint;
+- Source↔ZIP 57/57;
 - Report-Hashes 56/56;
-- 11 echte UPK-Regendecken-Paare geprüft;
-- Dossier V2 mit gebundener Fachpolicy;
-- Policy-Drift fail-closed;
-- Fachpolicy ändert bezahlte SEO-Bindung nicht;
-- Mutation/Gegenbeweise PASS;
+- echte UPK/PSTE-Abhängigkeiten;
+- 11 reale herstellerübergreifende Regendecken-Paare;
+- Dossier V2 + Fachpolicy;
+- Policy-/3-Produkte-/Quellen-/Audit-Negativfälle;
 - kein Auto-Publish.
 
-## NEXT ACTION WORDPRESS
+WordPress-Live:
+- Version 0.8.3 bestätigt;
+- bestehende 8 terminalen SEO-Befunde erhalten;
+- vor Lauf $0.0000 neue Providerkosten;
+- nach Lauf 0 Provider-Aufrufe;
+- $0.0000;
+- 8 BLOCKED;
+- 0 Dossiers;
+- korrekt `NO_ELIGIBLE_COMPARISONS`.
 
-1. ausschließlich 0.8.3 installieren/ersetzen;
-2. WordPress neu laden;
-3. `Produktvergleich` öffnen;
-4. **noch keinen Workflow starten**;
-5. zuerst Version, 8 bestehende SEO-Endstände und Kostenanzeige prüfen;
-6. nur wenn dort weiterhin $0.0000 für den bekannten Bestand steht: genau einen gebundenen Lauf;
-7. prüfen, dass der Lauf weiterhin 0 Provider / $0.0000 / 8 BLOCKED / 0 Dossiers liefert;
-8. Dossier-V2-/Policy-Liveweg erst an einem später tatsächlich SEO-geeigneten Paar positiv verifizieren;
-9. nichts veröffentlichen.
+## KEIN OFFENER REPARATURFEHLER
 
-## BLOCK-GRENZE
+Für den aktuell realen Bestand ist kein weiterer Produktvergleichs-Fix belegt.
 
-BLOCKED bei:
-- falscher Version/SHA;
-- Verlust bestehender SEO-Evidenz;
-- neue Providerkosten für unveränderten Bestand;
-- mehr oder weniger als exakt 2 Produkte im A-vs-B-Dossier;
-- Policy-/Fakten-/Audit-Drift;
-- ungebundener fachlicher Aussage;
-- unerwartetem Writer-/Draft-/Publishweg.
+Der positive Dossier-V2-Livefall bleibt nur **bedingt offen**:
+Er kann erst real ausgeführt werden, wenn ein echtes A-vs-B-Paar SEO-PASS erreicht.
 
-Kein ACM-/SEO-TEXT-Integrationsbau in diesem Schritt.
+Keine künstliche Freischaltung, kein Testprodukt als Live-Wahrheit, kein Providerkauf nur um einen grünen Dossierfall zu erzwingen.
+
+## NÄCHSTE AKTION
+
+Wenn der Nachbarweg SEO/TEXT/ACM vollständig hart freigegeben ist:
+
+1. dort read-only den Produktvergleich-Übergabevertrag lesen;
+2. Fachvertrag + Dossier-V2-Vertrag gegen den echten bestehenden Handoff prüfen;
+3. nur dort die minimale Anbindung entwerfen/testen;
+4. Produktvergleich-Branch dabei read-only lassen.
+
+Bis dahin:
+STATUS FREI.
+Kein weiterer Plugin-Fix.
 Kein Publish.
