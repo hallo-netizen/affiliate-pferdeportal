@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import json,re,subprocess,tempfile,zipfile
+import hashlib,json,re,subprocess,tempfile,zipfile
 from pathlib import Path
 
 REPO=Path(__file__).resolve().parents[4]
@@ -90,47 +90,147 @@ def main():
         if not supervisor_validate or "PSERC_PPM_Intake_Bridge::prepare" not in supervisor_validate["source"]:
             raise RuntimeError("PSERC_SUPERVISOR_PREPARE_BINDING_MISSING")
 
-        prepare_tests=[]
-        supervisor_tests=[]
-        tests_root=pserc/"tests"
-        if tests_root.is_dir():
-            for test in sorted(tests_root.rglob("*.php")):
-                txt=test.read_text(encoding="utf-8")
-                direct="PSERC_PPM_Intake_Bridge::prepare" in txt
-                indirect="PSERC_Workflow_Supervisor" in txt
-                if not direct and not indirect:
-                    continue
-                proc=subprocess.run(
-                    ["php",str(test)],
-                    cwd=pserc,
-                    text=True,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    timeout=180,
-                )
-                row={
-                    "test":str(test.relative_to(pserc)),
-                    "returncode":proc.returncode,
-                    "status":"PASS" if proc.returncode==0 else "FAIL",
-                    "output_tail":proc.stdout[-2400:],
-                }
-                (prepare_tests if direct else supervisor_tests).append(row)
-        covered=prepare_tests+supervisor_tests
-        if not covered:
-            print(json.dumps({
-              "status":"PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING",
-              "verify_package_item":critical["pserc_bridge_verify_package_item"]
-            },ensure_ascii=False,indent=2))
-            raise RuntimeError("PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING")
-        failed=[x["test"] for x in covered if x["returncode"]!=0]
-        if failed:
-            raise RuntimeError("PSERC_BRIDGE_PREPARE_EXISTING_TEST_FAILED:"+",".join(failed))
+        # P26 only: prove the existing PSERC prepare seam with frozen real package/plan data.
+        approved=pserc/"approved-production-packages/gen1-7-final-existing-import-envelope.json"
+        canonical_plan=ppm/"contracts/canonical-complete-editorial-plan-v1.json"
+        if not approved.is_file() or not canonical_plan.is_file():
+            raise RuntimeError("P26_FIXED_INPUT_SOURCE_MISSING")
+
+        def tree_fingerprint(root):
+            h=hashlib.sha256()
+            for fp in sorted(x for x in root.rglob("*") if x.is_file()):
+                h.update(str(fp.relative_to(root)).encode("utf-8")+b"\0")
+                h.update(hashlib.sha256(fp.read_bytes()).digest())
+            return h.hexdigest()
+
+        before={"ppm":tree_fingerprint(ppm),"pserc":tree_fingerprint(pserc)}
+        proof_php=t/"p26-pserc-prepare-proof.php"
+        proof_php.write_text(r'''<?php
+define('ABSPATH', __DIR__.'/');
+require_once $argv[1].'/includes/class-pserc-stable-json.php';
+require_once $argv[1].'/includes/class-pserc-metadata-boundary.php';
+require_once $argv[1].'/includes/class-pserc-plan-slot-identity.php';
+require_once $argv[1].'/includes/class-pserc-ppm-intake-bridge.php';
+
+$env=json_decode(file_get_contents($argv[1].'/approved-production-packages/gen1-7-final-existing-import-envelope.json'),true);
+$productionPackage=is_array($env['production_plan']??null)?$env['production_plan']:null;
+$plan=json_decode(file_get_contents($argv[2].'/contracts/canonical-complete-editorial-plan-v1.json'),true);
+if(!is_array($productionPackage)||!is_array($plan)){fwrite(STDERR,"P26_INPUT_JSON_INVALID\n");exit(2);}
+
+$slots=[];
+foreach((array)($plan['slots']??[]) as $slot){
+    if(!is_array($slot))continue;
+    $cid=(string)($slot['canonical_article_id']??'');
+    if($cid!=='')$slots[$cid]=$slot;
+}
+$items=[];
+foreach((array)($productionPackage['items']??[]) as $pitem){
+    if(!is_array($pitem)){fwrite(STDERR,"P26_PACKAGE_ITEM_INVALID\n");exit(2);}
+    $cid=(string)($pitem['canonical_article_id']??'');
+    $slot=$slots[$cid]??null;
+    if(!is_array($slot)){fwrite(STDERR,"P26_CANONICAL_SLOT_MISSING:".$cid."\n");exit(2);}
+    $items[]=[
+        'title'=>(string)($pitem['topic']??''),
+        'target_keyword'=>(string)($pitem['target_keyword']??''),
+        'category'=>(string)($slot['category_slug']??''),
+        'article_type'=>(string)($pitem['article_type']??''),
+        'plan_slot'=>PSERC_Plan_Slot_Identity::token($slot),
+    ];
+}
+$batch=[
+    'contract'=>'PSERC_TEXTMACHINE_METADATA_BATCH_V2',
+    'status'=>'READY_FOR_METADATA_HANDOFF',
+    'item_count'=>count($items),
+    'maximum_articles'=>0,
+    'maximum_articles_per_type'=>0,
+    'publish_allowed'=>false,
+    'content_or_format_payload_present'=>false,
+    'items'=>$items,
+];
+$batch['batch_sha256']=PSERC_Stable_Json::hash($batch);
+$snapshot=['ok'=>true,'status'=>'P26_FIXED_PPM_SNAPSHOT','version'=>'6.7.9','plan'=>$plan,'write_attempted'=>false];
+
+$rehash=function(array $b): array {
+    unset($b['batch_sha256']);
+    $b['batch_sha256']=PSERC_Stable_Json::hash($b);
+    return $b;
+};
+$blocked=function($r): bool {
+    return is_array($r)&&empty($r['ok'])&&str_starts_with((string)($r['status']??''),'PSERC_BRIDGE_');
+};
+
+$positive=PSERC_PPM_Intake_Bridge::prepare($batch,$productionPackage,$snapshot);
+
+$wrongSlot=$batch;
+$wrongSlot['items'][0]['plan_slot']=str_repeat('0',64);
+$wrongSlot=$rehash($wrongSlot);
+$negSlot=PSERC_PPM_Intake_Bridge::prepare($wrongSlot,$productionPackage,$snapshot);
+
+$wrongTitle=$batch;
+$wrongTitle['items'][0]['title'].=' P26-WRONG';
+$wrongTitle=$rehash($wrongTitle);
+$negTitle=PSERC_PPM_Intake_Bridge::prepare($wrongTitle,$productionPackage,$snapshot);
+
+$wrongKeyword=$batch;
+$wrongKeyword['items'][0]['target_keyword'].=' p26-wrong';
+$wrongKeyword=$rehash($wrongKeyword);
+$negKeyword=PSERC_PPM_Intake_Bridge::prepare($wrongKeyword,$productionPackage,$snapshot);
+
+$wrongIdentity=$productionPackage;
+$wrongIdentity['items'][0]['canonical_article_id']='article:p26-invalid-identity';
+$negIdentity=PSERC_PPM_Intake_Bridge::prepare($batch,$wrongIdentity,$snapshot);
+
+$pass=
+    !empty($positive['ok']) &&
+    ($positive['status']??'')==='PSERC_PPM_INTAKE_BRIDGE_PREPARED' &&
+    (($positive['report']['write_attempted_by_bridge']??null)===false) &&
+    (($positive['report']['publish_allowed']??null)===false) &&
+    $blocked($negSlot) &&
+    $blocked($negTitle) &&
+    $blocked($negKeyword) &&
+    $blocked($negIdentity);
+
+echo json_encode([
+    'status'=>$pass?'P26_PSERC_PREPARE_PROOF_PASS':'P26_PSERC_PREPARE_PROOF_BLOCKED',
+    'positive_status'=>$positive['status']??null,
+    'positive_item_count'=>count($items),
+    'prepare_no_write'=>($positive['report']['write_attempted_by_bridge']??null)===false,
+    'publish_allowed'=>$positive['report']['publish_allowed']??null,
+    'negative_plan_slot'=>$negSlot['status']??null,
+    'negative_identity'=>$negIdentity['status']??null,
+    'negative_title'=>$negTitle['status']??null,
+    'negative_keyword'=>$negKeyword['status']??null,
+],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
+exit($pass?0:2);
+''',encoding="utf-8")
+
+        proc=subprocess.run(
+            ["php",str(proof_php),str(pserc),str(ppm)],
+            cwd=t,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=180,
+        )
+        if proc.returncode!=0:
+            raise RuntimeError("P26_PSERC_PREPARE_PROOF_FAILED\n"+proc.stdout[-5000:])
+        try:
+            proof=json.loads(proc.stdout.strip().splitlines()[-1])
+        except Exception as e:
+            raise RuntimeError("P26_PSERC_PREPARE_PROOF_JSON_INVALID") from e
+        after={"ppm":tree_fingerprint(ppm),"pserc":tree_fingerprint(pserc)}
+        if before!=after:
+            raise RuntimeError("P26_PSERC_PREPARE_WRITE_DETECTED")
+        if proof.get("status")!="P26_PSERC_PREPARE_PROOF_PASS":
+            raise RuntimeError("P26_PSERC_PREPARE_PROOF_NOT_PASS")
+        if proof.get("prepare_no_write") is not True or proof.get("publish_allowed") is not False:
+            raise RuntimeError("P26_PSERC_PREPARE_SAFETY_INVARIANT_FAILED")
 
         print(json.dumps({
           "status":"P26_RESEARCH_FACTPACK_CHAIN_MAP_PASS",
           "critical_methods":critical,
-          "pserc_bridge_prepare_direct_tests":prepare_tests,
-          "pserc_bridge_prepare_via_supervisor_tests":supervisor_tests,
+          "pserc_prepare_proof":proof,
+          "filesystem_unchanged":True,
           "ppm_matches":scan(ppm,"PPM",70),
           "pserc_matches":scan(pserc,"PSERC",90),
           "pste_matches":scan(PSTE,"PSTE",90),
