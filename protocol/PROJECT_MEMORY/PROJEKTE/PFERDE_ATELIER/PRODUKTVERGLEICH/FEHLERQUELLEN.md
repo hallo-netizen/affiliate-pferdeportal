@@ -4,72 +4,71 @@ STAND: 2026-09-09
 ROLLE: einzige detaillierte Fehlerquelle für den aktuellen PRODUKTVERGLEICH-V1-Arbeitsweg.
 
 ## PV-ERR-001 – falsche WordPress-Kategoriehierarchie
-
 STATUS: CLOSED
-
-Befund:
-Der frühe Prototyp erwartete für `Vergleich Regendecken` eine echte Taxonomie-Unterkategorie. Die reale Pferde-Atelier-Kategorie ist technisch flach.
-
-Fix:
-Ab 0.2.1 werden ID/Name/Slug/Parent exakt geprüft.
 
 ## PV-ERR-002 – Erst-Draft sprang an Materialisierungsstufe vorbei
-
 STATUS: CLOSED
 
-Befund:
-Der frühe Erst-Draft-Test rief die Link-Finalisierung vor der WordPress-DRAFT-Materialisierung auf.
-
-Fix:
-`Import -> WordPress-DRAFT -> Link-Finalisierung -> Grafik-Finalisierung -> Endhash`.
-
 ## PV-ERR-003 – Hauptmenü-Test war falscher Positivtest
-
-STATUS: TECHNISCHER FIX BESTÄTIGT / AKTUELLER 0.8.1-LIVE-RETEST NOCH OFFEN
-
-Befund:
-Der alte Test rief Menüregistrierung künstlich direkt auf statt den echten WordPress-Admin-Lifecycle zu prüfen.
-
-Technischer Fix wurde lokal im echten WP-Admin-Lifecycle bewiesen. Der aktuelle 0.8.1-Kandidat erhält trotzdem erst nach dem neuen Nutzer-Live-Retest einen LIVE-PASS.
+STATUS: TECHNISCH CLOSED / LIVE-GESAMTWEG WEITER IN PRÜFUNG
 
 ## PV-LIVE-001 – falsches PASS bei null geeigneten Vergleichen
+STATUS: CLOSED / LIVE 0.8.1 BESTÄTIGT / REGRESSION AKTIV
 
-STATUS: CLOSED / REGRESSION AKTIV
+Realer Befund:
+0.7.0 meldete bei 0 SEO-PASS / 0 Dossiers fälschlich grün PASS.
 
-Realer 0.7.0-Befund:
-8 Kandidaten -> 16 Provider-Aufrufe -> 0 SEO-PASS -> 8 blockiert -> 0 Dossiers, aber die Oberfläche meldete grün PASS.
+Fix:
+`NO_ELIGIBLE_COMPARISONS` statt Success.
 
-Fix ab 0.7.1:
-0 gültige Dossiers + 0 SEO-PASS -> `NO_ELIGIBLE_COMPARISONS`, niemals Success-Notice.
+WordPress 0.8.1:
+8 Kandidaten -> 9 Provider-Aufrufe -> $0.1090 -> 0 SEO-PASS -> 8 blockiert -> 0 Dossiers -> `NO_ELIGIBLE_COMPARISONS`.
 
-0.8.1:
-entsprechende Regression weiterhin PASS.
+## PV-ERR-004 – PASS ohne realen Dossier-Receipt
+STATUS: CLOSED IM 0.8.1+ / REGRESSION AKTIV
 
-## PV-ERR-004 – PASS möglich ohne realen Dossier-Receipt im Abschluss-Audit
+Fix:
+- Dossier-Rückgabemenge muss exakt stimmen;
+- jedes gemeldete Dossier muss im unabhängigen finalen Audit vorhanden sein.
 
-STATUS: CLOSED IM 0.8.1-KANDIDAT / WORDPRESS-LIVE-RETEST OFFEN
+Blocks:
+- `UPC_DOSSIER_MATERIALIZATION_COUNT_MISMATCH`
+- `UPC_DOSSIER_FINAL_AUDIT_RECEIPT_MISSING`
 
-Harter lokaler Negativbefund gegen 0.8.0:
-Die Materialisierungsstufe konnte Erfolg + Dossier melden, während der unabhängige finale Registry-Audit tatsächlich null passende Dossier-Receipts enthielt. 0.8.0 konnte trotzdem `PASS` zurückgeben.
+## PV-COST-082-001 – bezahlte Produkt-/Paar-Zwischenergebnisse nicht dauerhaft genug gebunden
 
-Das verletzt fail-closed.
+STATUS: CLOSED IM 0.8.2-KANDIDAT / WORDPRESS-LIVE-RETEST OFFEN
 
-KISS-Fix 0.8.1:
-- `dossier_count` muss exakt zur gemeldeten Dossierliste passen;
-- jede gemeldete `comparison_id` muss im unabhängigen finalen Audit vorhanden sein;
-- sonst BLOCK.
+Befund gegen 0.8.1:
+Der fertige Kandidatenbefund wurde 90 Tage gespeichert. Einzelne Produkt-/Paar-Providerantworten waren jedoch nur über den nativen PSTE-Cache abgesichert. Der autoritative PSTE-0.56.25-Code hat dort standardmäßig 86400 Sekunden / 24 Stunden.
 
-Exakte Blocks:
-- `UPC_DOSSIER_MATERIALIZATION_COUNT_MISMATCH`;
-- `UPC_DOSSIER_FINAL_AUDIT_RECEIPT_MISSING`.
+Risiko:
+Dasselbe Produkt in einem neuen Paar oder ein später fortgesetzter Teil-Lauf könnte nach Ablauf des PSTE-Caches denselben Provider-Endpunkt erneut kaufen.
+
+KISS-Fix 0.8.2:
+- persistenter UPC-Probe-Store;
+- Produkt + Paar;
+- Teilstände nach jedem erfolgreichen Provider-Endpunkt;
+- positiv + negativ;
+- 90 Tage;
+- exakte Hash-/Kontextbindung;
+- Wiederverwendung vor PSTE-/Providerzugriff;
+- Kostenprognose berücksichtigt vorhandene persistente Evidenz.
+
+Fail-closed:
+- manipuliert -> `UPC_PSTE_PROBE_CACHE_INTEGRITY_FAILED`;
+- Speichern nach bezahlter Antwort fehlgeschlagen -> `UPC_PSTE_PROBE_PERSISTENCE_FAILED`;
+- Ablauf/Kontextdrift -> frische Recherche erforderlich.
 
 Beleg:
-- kompletter Kandidat 19/19 PASS;
-- finale Fresh-ZIP erneut 19/19 PASS;
-- PHP-Lint 39/39;
-- unabhängige Gegenprobe: Guard entfernt -> Regression ROT.
+- finale Fresh-ZIP 20/20 PASS;
+- PHP-Lint 40/40 PASS;
+- gleicher kompletter Befund erneut -> 0 Provideraufrufe;
+- gleiches Produkt in neuem Paar -> Produkt nicht erneut abgefragt;
+- Abbruch nach erstem bezahlten Endpunkt -> Retry kauft nur den fehlenden Endpunkt;
+- 3 unabhängige Mutationen werden von der Regression verworfen.
 
 ## Regel
 
 Neue Produktvergleichsfehler werden ausschließlich hier ergänzt.
-Das zentrale `FEHLERREGISTER.md` bleibt reiner Wegweiser.
+Das zentrale Fehlerregister bleibt Wegweiser.
