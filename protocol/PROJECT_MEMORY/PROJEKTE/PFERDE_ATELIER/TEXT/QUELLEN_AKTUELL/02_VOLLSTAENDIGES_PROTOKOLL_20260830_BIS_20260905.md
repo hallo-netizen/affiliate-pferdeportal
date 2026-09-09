@@ -1383,3 +1383,36 @@ Source-Level:
 M35 bleibt der bekannte reale Liveblocker danach.
 Kein Publish.
 RECOVERY_BASE_SHA: `de21f6cd35c60849c551fd82f78e75ce57c99fab`.
+
+
+### 09.09.2026 – M26 gemergt / M35 auf fresh main gebunden
+
+M26:
+- PR #202 regulär gemergt;
+- neuer main `d32e16cdf6b45ffa282e42fa78e07da84863e362`;
+- `hardlock` PASS;
+- `hardlock-base` PASS;
+- Maschinenbeweis: current main erster FAIL M26, Kandidat danach erster FAIL M35;
+- kein Bypass beim Produktionsmerge.
+
+M35:
+- bestehender isolierter PR #197 wiederverwendet;
+- Branch `hobbyroom/m35-ppm-registry-hash-binding-20260909`;
+- auf fresh main rebased;
+- fresh Head `a611a5c150cc3d8f182ca9c1855339fb98fea0c2`;
+- exakt eine Produktionsdatei:
+  `control/startmaster0107/fachworkflow_proof_handoff.py`;
+- Dateiblob des bewiesenen M35-Fixes unverändert `e3388ec06a3b597e799c17a1625dd4ca1e1c72b2`.
+
+M35-Semantik:
+- PPM-Registry-Hash nach Fact-Pack-Import ist eigener interner Hash;
+- Research-/Content-Hash bleibt Evidence und wird nicht umdefiniert;
+- interne PPM-Plan-Kopie erhält `source_hashes=[PPM-Registry-Hash]`;
+- leerer Registry-Hash bleibt fail-closed;
+- Planaufbau erfolgt erst danach.
+
+Nächster Beweis:
+- current main muss exakt M35 als ersten FAIL reproduzieren;
+- derselbe trusted Runner muss auf dem Kandidaten M01–M35 vollständig GESAMT PASS liefern.
+
+Kein Publish.
