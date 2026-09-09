@@ -34,6 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
+          import ast
           import pathlib
           import re
           import subprocess
@@ -136,8 +137,14 @@ jobs:
           # D. The central controller keeps a fixed caller API. No engine,
           # validator, route or next-step selection may be injected.
           core = pathlib.Path(ACM + "prototype/central_machine.py").read_text(encoding="utf-8")
-          if re.search(r"def\s+__init__\s*\(\s*self\s*,\s*job_id\s*,\s*item_id\s*\)", core) is None:
-              block("CENTRAL_MACHINE_CONSTRUCTOR_FREEDOM_BLOCKED")
+          tree = ast.parse(core)
+          cls = next((n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == "CentralMachine"), None)
+          init = None if cls is None else next((n for n in cls.body if isinstance(n, ast.FunctionDef) and n.name == "__init__"), None)
+          if init is None:
+              block("CENTRAL_MACHINE_CONSTRUCTOR_MISSING")
+          arg_names = [a.arg for a in init.args.args]
+          if arg_names != ["self", "job_id", "item_id"] or init.args.vararg or init.args.kwarg or init.args.kwonlyargs:
+              block("CENTRAL_MACHINE_CONSTRUCTOR_FREEDOM_BLOCKED", ",".join(arg_names))
           for pat in FREEDOM_PATTERNS:
               if re.search(pat, core):
                   block("CENTRAL_MACHINE_FREEDOM_API_BLOCKED", pat)
