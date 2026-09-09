@@ -1,48 +1,29 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M36 HISTORY AUTHORITY / REALTEST BLOCKED**
-
-## AUTORITÄT
-
-Diese Datei enthält ausschließlich den belastbaren aktuellen TEXT-Stand.
-Historie → vollständiges Protokoll.
-Aktuelle Arbeitsanweisung → `HOBBYRAUM.md`.
-Fehlerdetails → autoritative TEXT-Fehlerquelle.
+STATUS: **AKTIV – M36 PRODUCT FIX UNDER TEST**
 
 ## CURRENT MAIN
 
-`05f5d00ec924e108d6700f39d22d9ec1d47318a6`
+`239a64261c1fbaf467d0adbd5a2bb1ad2139eca4`
 
-M01–M35 sind maschinell Gesamt-PASS und regulär integriert.
-Der danach ausgeführte echte 7/7-Realtest hat einen neuen ersten technischen Blocker aufgedeckt.
+PR #203 / M36 History Authority ist regulär integriert.
+M01–M35 bleiben historisch PASS; M36 reproduziert jetzt den echten Realblocker.
 
-## REALTEST 09.09.2026
+## AKTUELLER REALBLOCKER
 
-HEAD:
-`05f5d00ec924e108d6700f39d22d9ec1d47318a6`
-
-PASS:
-- Cloud Entry;
-- Production Preflight;
-- Runtime Entry `OFFICIAL_RUNTIME_ENTRY_PASS`.
-
-Erster echter Blocker:
 `H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT`
 
-Stop:
-- vor `CURRENT_BOUND_ACTION_READY`;
-- `STEP_TERMINAL_NONPASS`;
-- state_advanced=false;
-- keine Reparatur im Realtest;
-- kein Publish / kein WordPress-Write.
+Der echte 7/7-Realtest auf dem vorherigen main stoppte nach:
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
 
-## ROOT CAUSE M36
+und vor `CURRENT_BOUND_ACTION_READY`.
 
-Aktueller Runtime-State ist konsistent:
-- status `EXECUTION_READY`;
-- generation 1;
-- Batch-/Snapshot-/Manifest-Hashes stimmen.
+## ROOT CAUSE
+
+Runtime-/Batch-/Snapshot-/Manifest-Identität ist aktuell.
 
 Persistiertes Paket:
 `control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json`
@@ -50,37 +31,54 @@ Persistiertes Paket:
 trägt noch:
 `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`
 
-Aktueller Guard erwartet:
+Aktueller Sollvertrag:
 `PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1`
 
-Alle Provenienzfelder außer Vertragsname/Binding-Hash stimmen exakt.
-Das persistierte H8- und Production-Paket sind identisch alt.
-Die incoming-Quelle besitzt keine H8-Bindung.
+Alle übrigen Provenienzfelder stimmen exakt.
+Ein einfacher Reset/Reattach ist keine KISS-Lösung, weil im Repo kein produktiver Bootstrap-Producer für den Neuaufbau existiert.
 
-Der vorhandene Bootstrap besitzt im Repo keinen produktiven Producer; ein Reset/Reattach löst das Problem daher nicht ohne neue externe Erzeugung.
+## AKTIVER M36-KANDIDAT
 
-## AKTUELLER ARBEITSWEG
+Branch:
+`hobbyroom/m36-h8-legacy-provenance-alias-20260909`
 
-Neuer Fehler:
-`M36 – Persisted H8 legacy-binding compatibility after provenance migration`
+Head:
+`fceee7f1959ed2597489a86161b92a024d5a30fc`
 
-Zuerst History Authority:
-- Matrix/Runner um M36 erweitern;
-- current main muss M01–M35 PASS und exakt M36 FAIL reproduzieren;
-- kein Produktcode in diesem Schritt.
+Scope:
+- 1 Logikdatei:
+  `control/single-door-boundary/preproduction_provenance_guard.py`
+- 5 ausschließlich bestehende Hash-/Pointer-Bindungen:
+  - `control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json`
+  - `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json`
+  - `control/startmaster0107/CURRENT_STATE.json`
+  - `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`
+  - `control/CURRENT_STARTMASTER.json`
 
-History-Kandidat:
-- Branch `hobbyroom/m36-history-authority-20260909`;
-- Head `2465052149974f52cfb84797cf369cea430c23cc`;
-- exakt Matrix + bestehender Runner.
+KISS-Fix:
+- aktueller Provenance-Vertrag bleibt unverändert;
+- ausschließlich alter Vertrag `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1` wird als read-only Legacy-Alias zugelassen;
+- der alte Binding-Hash muss gültig sein;
+- room/receipt/generation/batch/snapshot/manifest/origin müssen exakt dem aktuellen Binding entsprechen;
+- unbekannter H8-Vertrag BLOCK;
+- keine interne ED25519-/Signer-Pflicht;
+- keine Paketmutation / keine Neusignierung.
 
-Danach erst Produktfix:
-- eng begrenzter Legacy-Alias nur für `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`;
-- alle Provenienzidentitäten müssen aktuell sein;
-- unbekannter Vertrag BLOCK;
-- falsche Generation/Batch/Snapshot/Manifest/Origin BLOCK;
-- keine interne Signaturpflicht zurück;
-- keine Paketmutation/Neusignierung.
+## VORPRÜFUNG
+
+- main: Legacy-Alias fehlt → erwarteter M36 FAIL;
+- Kandidat: aktuelles persistiertes Legacy-Paket identitätsgleich → PASS-fähig;
+- falsche Generation → BLOCK;
+- unbekannter Vertrag → BLOCK;
+- Signer-Tokens im Provenance-Guard: keine;
+- Boundary file_bindings: 11/11 PASS;
+- bestehende H8 → STEP107007 → CURRENT_STATE → START_HERE / Pointer-Hashkette nachgezogen.
+
+## OFFEN
+
+- serverseitiger M01–M36-Gesamttest des Produktkandidaten;
+- kein neuer Realtest vor Produktmerge;
+- kein Publish / kein WordPress-Write.
 
 ## LETZTER SICHERER POSITIVER REFERENZSTAND
 
