@@ -188,12 +188,12 @@ def main(argv:list[str]|None=None):
             raise RuntimeError("SIGNED_IMPORT_NOT_VERIFIED")
         if verified["job_id"]!=job_id or verified["item_id"]!=bound_item_id:
             raise RuntimeError("SIGNED_ITEM_IDENTITY_DRIFT")
-        if str(signed_release["payload"].get("canonical_article_id") or "")!=bound_canonical_article_id:
-            raise RuntimeError("SIGNED_CANONICAL_IDENTITY_DRIFT")
 
         # The write input is materialized only from the verified signed release, never from an alternate object.
         raw=release_path.read_bytes()
         signed_release=json.loads(raw.decode("utf-8"))
+        if str((signed_release.get("payload") or {}).get("canonical_article_id") or "")!=bound_canonical_article_id:
+            raise RuntimeError("SIGNED_CANONICAL_IDENTITY_DRIFT")
         if raw!=canon(signed_release):
             raise RuntimeError("SIGNED_RELEASE_NOT_CANONICAL")
         signed_prepared=signed_release["payload"]
