@@ -1076,3 +1076,42 @@ Offen:
 - temporären Repository-admin-PR-Bypass vor jedem Produktionsmerge wieder entfernen;
 - danach erst regulärer Merge und echter 7/7-Realtest;
 - keine Reparatur während des Realtests.
+
+
+### 09.09.2026 – M16/M17 Vorprüfung vor M35
+
+Auslöser:
+- PR #197 / M35-Kandidat: `hardlock` PASS;
+- `hardlock-base` kam nach M15 weiter und stoppte zuerst bei M16.
+
+M16-Prüfung:
+- alter Runner erwartete Marker `codex_worker_signer_access_allowed=False`;
+- diese Marker gehören nicht mehr zum aktuellen Sollweg;
+- aktueller Vertrag laut B15: keine Signer-Kommandos/-Credentials im 107007-/Runtime-Pfad; externe Signierung erst in `finalize_after_107008`;
+- aktueller main erfüllt diesen Vertrag;
+- M16 ist daher ein stale Runner-Orakel, kein Produktionsfehler.
+
+M17-Prüfung:
+- Matrix-Vertrag unverändert: kein finaler 107008-PASS, wenn erforderliche hostseitige Finalisierung fehlt;
+- `runtime_entry_gate.py` ruft `finalize_after_107008(...)` auf;
+- `finalize_after_107008` kann `ok=false / PSERC_FINAL_PACKAGE_BLOCKED` zurückgeben;
+- der Runtime-Pfad prüft diesen Rückgabewert aktuell nicht, bevor `107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED` zurückgegeben wird;
+- damit ist M17 real als latente Fail-closed-Regression belegt.
+
+History-Kandidat:
+- Branch `hobbyroom/m16-m17-history-authority-20260909`;
+- Head `5ea8d5da54ca946dd99b3d85a2f3fb8488b7a7b8`;
+- ausschließlich bestehender Regression-Runner;
+- M16 an aktuellen Signer-Vertrag angepasst;
+- M17 als echter Fail-closed-Vertrag ausführbar gemacht.
+
+Lokale/source-level Prüfung:
+- M16 current main: PASS;
+- M17 current main: erwarteter FAIL `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`;
+- M17 synthetischer positiver Vertrag: PASS;
+- M17 ohne Guard: BLOCK.
+
+Entscheidung:
+- M35-Kandidat `ef2eceb…` bleibt unverändert geparkt;
+- zuerst M17 wieder PASS machen;
+- keine Vermischung von M17- und M35-Produktionsfix.
