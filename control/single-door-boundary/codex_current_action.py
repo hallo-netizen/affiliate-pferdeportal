@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import hashlib, importlib.util, json, re, sys
+import hashlib, importlib.util, json, re, subprocess, sys, tempfile, zipfile
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -12,6 +12,8 @@ RUNTIME_STATE_REL='control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.jso
 CONTRACT='PFERDE_ATELIER_CODEX_CURRENT_ACTION_VIEW_V1'
 PASS_CONTRACT='PFERDE_ATELIER_FACHWORKFLOW_PASS_V1'
 ARTICLE_TYPE_TEMPLATES_SHA='dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f'
+PPM679_PACKAGE_REL='.pferde-environment/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+PPM679_PACKAGE_SHA='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
 STAGES=['research_fact_pack','textmachine_article_type_structure','table_contract','internal_links','languagetool','ppm','pserc','pste','duplicate_cannibalization','seo','design_format','publish_safety']
 RELEASE_CONTRACT='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED'
 RELEASE_KEYS={'article_origin_policy','authoring_prompt_sha256','authoring_role','content_generation_performed_by_supervisor','contract','created_at_utc','exact_five_batch_sha256','exact_five_item_count','frozen_workflow_sha256','nullpunkt','nullpunkt_sha256','ppm_baseline_sha256','ppm_version','research_evidence_policy','sequence','status','wordpress_write_performed'}
@@ -60,6 +62,55 @@ def _validate_release_metadata_identity(rm:Mapping[str,Any],batch:str,batch_coun
     if rm.get('exact_five_batch_sha256')!=batch:raise ViewError('RELEASE_METADATA_BATCH_MISMATCH')
     if int(rm.get('exact_five_item_count') or -1)!=batch_count:raise ViewError('RELEASE_METADATA_ITEM_COUNT_MISMATCH')
 
+def _article_control_check(fact_pack:Mapping[str,Any],plan_item:Mapping[str,Any],expected_input_sha:str)->dict:
+    package=REPO/PPM679_PACKAGE_REL
+    if not package.is_file():raise ViewError('ARTICLE_CONTROL_MACHINE_MISSING')
+    if sha(package)!=PPM679_PACKAGE_SHA:raise ViewError('ARTICLE_CONTROL_MACHINE_HASH_MISMATCH')
+    canonical=plan_item.get('canonical_article')
+    if not isinstance(canonical,dict):raise ViewError('ARTICLE_CONTROL_CANONICAL_ARTICLE_MISSING')
+    html=str(canonical.get('body_html') or '');title=str(canonical.get('title') or '');article_type=str(plan_item.get('article_type') or '')
+    if not html or not title or not article_type:raise ViewError('ARTICLE_CONTROL_ARTICLE_FIELDS_MISSING')
+    content_sha=hashlib.sha256(html.encode('utf-8')).hexdigest();declared=str(canonical.get('body_html_sha256') or '')
+    if declared!=content_sha:raise ViewError('ARTICLE_CONTROL_ARTICLE_HASH_MISMATCH')
+    if expected_input_sha!=content_sha:raise ViewError('ARTICLE_CONTROL_NOT_BOUND_TO_FINAL_ARTICLE')
+    payload={'fact_pack':dict(fact_pack),'production_plan_item':dict(plan_item)}
+    php=r'''<?php
+$root=$argv[1];$payload=json_decode((string)file_get_contents($argv[2]),true);
+if(!is_array($payload)){fwrite(STDERR,"PAYLOAD_INVALID\\n");exit(2);}
+require $root.'/tests/bootstrap-test.php';
+PPM679_WP::reset_test_state();PPM679_Storage::reset_test_state();PPM679_Handoff_Permit::reset_test_state();PPM679_Storage::ensure_schema();
+$pack=(array)($payload['fact_pack']??[]);$item=(array)($payload['production_plan_item']??[]);$ca=(array)($item['canonical_article']??[]);
+$import=PPM679_Admin::import_fact_pack_bundle(['contract'=>'canonical_fact_pack_import_v1','fact_packs'=>[$pack]]);
+if(empty($import['ok'])){echo json_encode(['ok'=>false,'phase'=>'FACT_PACK_IMPORT','result'=>$import],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);exit(0);}
+$html=(string)($ca['body_html']??'');
+$generated=['article_type'=>(string)($item['article_type']??''),'title'=>(string)($ca['title']??''),'content_html'=>$html,'content_hash'=>hash('sha256',$html)];
+$result=PPM679_Content_Validator::check($generated,$item,'startmaster107007_direct_article_control','bound-current');
+echo json_encode(['ok'=>!empty($result['ok']),'result'=>$result],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+?>'''
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td)/'ppm';root.mkdir()
+        with zipfile.ZipFile(package) as z:z.extractall(root)
+        ppm_root=root/'portal-production-machine'
+        if not (ppm_root/'tests/bootstrap-test.php').is_file():raise ViewError('ARTICLE_CONTROL_MACHINE_RUNTIME_MISSING')
+        payload_path=Path(td)/'payload.json';payload_path.write_text(json.dumps(payload,ensure_ascii=False),encoding='utf-8')
+        script=Path(td)/'check.php';script.write_text(php,encoding='utf-8')
+        proc=subprocess.run(['php',str(script),str(ppm_root),str(payload_path)],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
+    if proc.returncode!=0:raise ViewError('ARTICLE_CONTROL_EXECUTION_FAILED:'+(proc.stderr or proc.stdout).strip()[:240])
+    try:wrapper=json.loads(proc.stdout)
+    except json.JSONDecodeError as exc:raise ViewError('ARTICLE_CONTROL_RESULT_INVALID') from exc
+    result=wrapper.get('result') if isinstance(wrapper,dict) else None
+    if not isinstance(result,dict):raise ViewError('ARTICLE_CONTROL_RESULT_MISSING')
+    if wrapper.get('ok') is not True:
+        errors=result.get('errors') if isinstance(result.get('errors'),list) else []
+        codes=[str(e.get('error_code') or '') for e in errors if isinstance(e,dict) and e.get('error_code')]
+        raise ViewError('ARTICLE_CONTROL_BLOCKED:'+(codes[0] if codes else str(wrapper.get('phase') or 'UNKNOWN')))
+    checks=result.get('checks')
+    if result.get('technical_status')!='TECHNICAL_CHECK_OK':raise ViewError('ARTICLE_CONTROL_TECHNICAL_NOT_PASS')
+    if result.get('content_quality_status')!='CONTENT_QUALITY_CHECK_OK':raise ViewError('ARTICLE_CONTROL_QUALITY_NOT_PASS')
+    if result.get('content_hash')!=content_sha:raise ViewError('ARTICLE_CONTROL_CONTENT_HASH_MISMATCH')
+    if not isinstance(checks,dict) or checks.get('fail_closed_aggregate_status')!='PASS':raise ViewError('ARTICLE_CONTROL_FAIL_CLOSED_NOT_PASS')
+    return {'status':'ARTICLE_CONTROL_PASS','content_sha256':content_sha,'publish_allowed':False}
+
 # These two functions are the only callbacks the existing room bridge uses after DUAL is bound to this file.
 def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     r=_rules(it);b=_contract_binding();batch,batch_count=_runtime_batch_identity();root=str(a['allowed_output_root']);pref=root+'FACHWORKFLOW_PASS_'+str(it['plan_slot'])+'.json'
@@ -89,7 +140,7 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
         if not isinstance(x,dict) or set(x)!={'stage','ref','sha256'} or x['stage'] in by:raise ViewError('FACH_STAGE_ROW_INVALID')
         by[x['stage']]=x
     if set(by)!=set(STAGES):raise ViewError('FACH_STAGE_SET_INVALID')
-    root=str(a['allowed_output_root'])
+    root=str(a['allowed_output_root']);ppm_input_sha=''
     for stage in STAGES:
         x=by[stage];sr=str(x['ref']);h=str(x['sha256'])
         if not sr.startswith(root) or not re.fullmatch(r'[0-9a-f]{64}',h):raise ViewError('FACH_STAGE_REF_INVALID:'+stage)
@@ -97,7 +148,9 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
         if not sp.is_file() or sha(sp)!=h:raise ViewError('FACH_STAGE_HASH_MISMATCH:'+stage)
         proof=load(sp);expected={'contract':'PFERDE_ATELIER_FACHWORKFLOW_STAGE_EXECUTION_PROOF_V1','status':'PASS','batch_sha256':batch,'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'stage':stage,'execution_performed':True,'content_or_quality_rules_changed':False,'publish_allowed':False}
         if any(proof.get(k)!=v for k,v in expected.items()):raise ViewError('FACH_STAGE_EXECUTION_BINDING_INVALID:'+stage)
-        if not re.fullmatch(r'[0-9a-f]{64}',str(proof.get('input_sha256') or '')):raise ViewError('FACH_STAGE_INPUT_HASH_INVALID:'+stage)
+        input_sha=str(proof.get('input_sha256') or '')
+        if not re.fullmatch(r'[0-9a-f]{64}',input_sha):raise ViewError('FACH_STAGE_INPUT_HASH_INVALID:'+stage)
+        if stage=='ppm':ppm_input_sha=input_sha
         ev=proof.get('execution_evidence');arts=proof.get('artifacts')
         if not isinstance(ev,list) or not ev or not all(isinstance(v,str) and v.strip() for v in ev):raise ViewError('FACH_STAGE_EXECUTION_EVIDENCE_MISSING:'+stage)
         if not isinstance(arts,list) or not arts:raise ViewError('FACH_STAGE_ARTIFACTS_MISSING:'+stage)
@@ -110,6 +163,8 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
     fp=q.get('fact_pack');pi=q.get('production_plan_item');ph=q.get('production_plan_header');ri=q.get('workflow_release_item');rm=q.get('workflow_release_metadata')
     if not all(isinstance(x,dict) for x in (fp,pi,ph,ri,rm)):raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
     if pi.get('canonical_article_id')!=it.get('canonical_article_id') or pi.get('plan_slot')!=it.get('plan_slot'):raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH')
+    if not ppm_input_sha:raise ViewError('ARTICLE_CONTROL_FINAL_ARTICLE_BINDING_MISSING')
+    _article_control_check(fp,pi,ppm_input_sha)
     if ri.get('canonical_article_id')!=it.get('canonical_article_id') or ri.get('plan_slot')!=it.get('plan_slot'):raise ViewError('RELEASE_ITEM_IDENTITY_MISMATCH')
     if ph.get('contract')!='production_plan_v4' or 'items' in ph:raise ViewError('PLAN_HEADER_INVALID')
     if set(rm)!=RELEASE_KEYS:
