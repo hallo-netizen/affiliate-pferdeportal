@@ -116,3 +116,5 @@ def main():
 
 if __name__=="__main__":
     raise SystemExit(main())
+
+# workflow-trigger: wp-import-publish-wiring-v1
