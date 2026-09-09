@@ -276,3 +276,9 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p44_prewrite_api_inventory.py
+
+      - name: P45 exact existing prewrite sequence
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p45_execute_plan_prewrite_sequence.py
