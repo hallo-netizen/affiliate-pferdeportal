@@ -112,7 +112,7 @@ if(empty($validated['ok'])){
 
 $generated=PPM679_Content_Generator::generate($item,$pack);
 $checked=PPM679_Content_Validator::check($generated,$item,'p47-public-check',$state_hash);
-if(($checked['technical_status']??'')!=='PASS'||($checked['content_quality_status']??'')!=='PASS'){
+if(empty($checked['ok'])||($checked['technical_status']??'')!=='TECHNICAL_CHECK_OK'||($checked['content_quality_status']??'')!=='CONTENT_QUALITY_CHECK_OK'){
   echo json_encode(array('status'=>'P47_BLOCKED_CONTENT_CHECK','detail'=>$checked,'publish_allowed'=>false),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
   exit(2);
 }
