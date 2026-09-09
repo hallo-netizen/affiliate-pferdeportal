@@ -364,3 +364,34 @@ Vor unbeaufsichtigter Vollautomatik:
 
 Grundworkflow-Passung: GO.
 Produktionsfreigabe bleibt gesperrt bis diese drei Punkte und die bekannte Signaturpositions-/Zielvertragsentscheidung sauber vereinheitlicht sind.
+
+
+## ABSCHLUSS OFFENE PUNKTE 2026-09-09
+
+Autoritative Detailakte:
+`56_FINAL_INVARIANTS_CLOSURE.md`
+
+Technischer Stand:
+- ACM-Prototyp weiterhin GO
+- beliebige endliche Artikelzahl; kein 7er-Limit in der ACM-Architektur
+- P34: 1000-Item-Batch PASS
+- Chat/Codex: keine freie Workflow-/Navigations-/State-/Publish-Autorität
+- aktueller Codex-Prozess ist ausschließlich gebundener Fachworkflow-Worker
+- LanguageTool bleibt vollständig integriert und pro Artikel verbindlich
+- bestehende Textmaschine und Fachregeln unverändert
+- vorhandener allgemeiner Endstempel-/WordPress-Preimport-Weg erfolgreich positiv/negativ geprüft
+- P3-Lab Run 34335572795 SUCCESS
+- P8 Signer-Isolation Run 34335572775 SUCCESS
+- ENDSTEMPEL_FIXED_TESTS_PASS
+- kein Publish
+
+Zusätzliche Beitragsarten:
+Grundsätzlich einfacher anschließbar, da der ACM-Controller beitragsart-unabhängig bleibt.
+Neue Beitragsart benötigt weiterhin einen vollständigen bestehenden Textmaschinen-/Artikeltyp-Vertrag plus positive/negative Fachtests; keine freie Typwahl durch Chat/Codex.
+
+Vor Produktionsübernahme verbleiben nur:
+1. Signaturposition im Zielvertrag vereinheitlichen.
+2. historischen 7_ARTIKEL-Dateinamen durch neutralen artikelzahlunabhängigen Enddateinamen ersetzen.
+3. ersten real workflow-produzierten FACHWORKFLOW_HANDOFF_REQUEST durch dieselbe ACM-Kette ausführen.
+
+Keine neue Architektur erforderlich.
