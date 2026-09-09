@@ -68,3 +68,24 @@ Bis dahin:
 - keine Änderung an CURRENT_STATE
 - keine Änderung der Parallelroute
 - kein Auto-Publish
+
+
+## Echt-Einstieg-Beweis
+
+Aktueller produktiver `main` wurde ausschließlich in einem temporären detached Worktree geprüft.
+
+Ergebnis:
+- offizieller Codex-Environment-Preflight PASS
+- offizieller Runtime-Entry PASS
+- `CURRENT_BOUND_ACTION_READY` real erreicht
+- aktuelles Item:
+  - canonical_article_id: `article:a8282e69ecd43b615de17eb1`
+  - plan_slot: `9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56`
+  - Titel: `Das Wichtigste über Hindernisstangen für Pferde`
+  - Target Keyword: `Hindernisstangen für Pferde`
+  - Beitragsart: `Beratung`
+- vorhandener Handoff-Pfad real gebunden
+- Worker-Rolle: `CURRENT_CODEX_IS_BOUND_FACHWORKFLOW_WORKER`
+- publish_allowed=false
+
+Der echte Handoff selbst wird erst dann als echt gewertet, wenn die realen Fachprodukte für dieses gebundene Item erzeugt wurden. Fixture- oder Recovery-Daten werden dafür nicht als Ersatz akzeptiert.
