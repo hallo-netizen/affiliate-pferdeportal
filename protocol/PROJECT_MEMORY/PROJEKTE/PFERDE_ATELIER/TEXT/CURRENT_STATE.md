@@ -90,8 +90,10 @@ M16/M17 History Authority:
 Aktiver M17-KISS-Kandidat:
 - Branch `hobbyroom/m17-host-finalization-fail-closed-20260909`;
 - Head `6dcf42daa1dfc0e7960a17da49f8ca2dfee2b5ba`;
-- exakt eine Datei: `control/output-quarantine/runtime_entry_gate.py`;
-- nur fehlenden Check ergänzen: `pserc_finalization.ok==true` und Status `PSERC_FINAL_PACKAGE_PASS` müssen vor Clear/Final-PASS vorliegen.
+- Head nach bestehender Hash-Refresh-Kette: `66e9f24a06a6ddb37fd5e8e50f4c158965263abd`;
+- genau 1 Logikdatei: `control/output-quarantine/runtime_entry_gate.py`;
+- zusätzlich ausschließlich 5 bereits vorhandene Bindungsdateien gemäß bestehender `STARTMASTER0107_DUAL_ROOTFIX_REPAIR.refresh()`-Kette: STEP 107008, STEP 107007, CURRENT_STATE.json, PFERDE_ATELIER_START_HERE.json, CURRENT_STARTMASTER.json;
+- keine zusätzliche Logik in diesen 5 Dateien; nur Runtime-/Bundle-/State-Hashes nachgezogen.
 
 Geparkter M35-Kandidat:
 - `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
@@ -99,11 +101,12 @@ Geparkter M35-Kandidat:
 
 ## TESTS – TATSÄCHLICH AUSGEFÜHRT
 
-M17-Kandidat `6dcf42d…` lokal/source-level:
+M17-Kandidat `66e9f24…` lokal/source-level:
 - M16 PASS;
 - M17 positiv PASS;
 - fehlender Finalization-Guard BLOCK;
-- Guard in falscher Reihenfolge BLOCK.
+- Guard in falscher Reihenfolge BLOCK;
+- vollständige Hash-Kette Runtime → 107008 → 107007 → CURRENT_STATE → START_HERE → Pointer rechnerisch konsistent.
 
 History Authority #196:
 - M15 aktueller Request-first-Vertrag positiv PASS;
