@@ -1523,3 +1523,34 @@ Vorprüfung:
 - Hashkette nachgezogen.
 
 Kein Publish.
+
+
+### 09.09.2026 – M36 Produktfix gemergt / Realtest erneut freigegeben
+
+PR #204:
+- regulär gemergt;
+- neuer main `93ba987c56f7b08ffba009210e3012c036fec18d`;
+- `hardlock` PASS;
+- `hardlock-base` PASS;
+- current main vor Fix reproduzierte exakt M36;
+- Kandidat bestand M01–M36 vollständig;
+- Ruleset-Bypass leer.
+
+M36-Verhalten:
+- aktueller Provenance-Vertrag bleibt Soll;
+- historischer Signed-Binding-Vertrag nur eng begrenzter read-only Alias;
+- alter Binding-Hash muss gültig sein;
+- sieben Provenienzidentitäten müssen exakt aktuell sein;
+- unbekannter Vertrag / falsche Generation BLOCK;
+- keine interne Signaturpflicht;
+- keine Paketmutation / Neusignierung.
+
+Dispatcher:
+- `codex-chat-launcher` auf exakt `93ba987c56f7b08ffba009210e3012c036fec18d` synchronisiert.
+
+Folge:
+- Reparaturphase beendet;
+- jetzt ausschließlich neuer echter 7/7-Realtest;
+- im Realtest keine Reparatur;
+- Stop nur beim ersten echten BLOCKED/USER_ACTION_REQUIRED oder bei 7/7 + 107008 PASS;
+- kein Publish.
