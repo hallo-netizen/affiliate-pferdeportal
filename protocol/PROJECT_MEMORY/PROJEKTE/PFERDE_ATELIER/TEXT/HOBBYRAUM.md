@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – REALTEST / REPARATUR VERBOTEN**
+STATUS: **AKTIV – M36 HISTORY AUTHORITY**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -11,81 +11,112 @@ Ziel:
 Current main:
 `05f5d00ec924e108d6700f39d22d9ec1d47318a6`
 
-Dispatcher:
-`codex-chat-launcher = 05f5d00ec924e108d6700f39d22d9ec1d47318a6`
+Aktueller Realblocker:
+`H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT`
+
+Aktive Fehler-ID:
+`M36 – Persisted H8 legacy-binding compatibility after provenance migration`
 
 M01–M35:
-**MASCHINELL GESAMT PASS.**
+vor diesem Realtest **GESAMT PASS**.
 
-M17 / M22 / M26 / M35:
-**integriert behoben.**
+## REALBEFUND
 
-## JETZT AUSSCHLIESSLICH
+Der echte 7/7-Lauf stoppte nach:
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
 
-**Echter frischer STARTMASTER0107-7/7-Realtest.**
+und vor:
+- `CURRENT_BOUND_ACTION_READY`.
 
-Verbindlich:
-- zuerst exakten HEAD prüfen;
-- Cloud Entry;
-- Production Preflight;
-- Runtime Entry;
-- Current Action / Single Door;
-- alle 7 Artikel vollständig frisch;
-- keine alten Artikel/JSONs/Proofs/Recovery-/Quarantäne-/Release-Artefakte als Produktionsquelle;
-- Current Codex ist der gebundene Fachworkflow-Worker;
-- kein zweiter Executor / keine Capability-Suche;
-- reale aktuelle Fachworkflow-Artefakte und Pflicht-Stage-Proofs erzeugen;
-- `FACHWORKFLOW_HANDOFF_REQUEST.json` exakt aus den gebundenen Current-Action-Werten erzeugen;
-- ausschließlich `fachworkflow_handoff.command`;
-- echter PPM 6.7.9;
-- nur nach `FACHWORKFLOW_PROOF_HANDOFF_PASS` → `submission_command`;
-- nächstes gebundenes Item;
-- danach 107008.
+Persistiertes Runtime-Paket:
+`control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json`
 
-## STOP-REGEL
+Altvertrag:
+`PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`
 
-Im Realtest:
-- **keine Reparatur**;
-- keine Architekturänderung;
-- keine neue Route;
-- kein Fix auf einen FAIL.
+Sollvertrag:
+`PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1`
 
-Terminal ausschließlich:
-1. 7/7 PASS + 107008 PASS,
-oder
-2. erster echter technischer BLOCKED / USER_ACTION_REQUIRED.
+Alle übrigen Provenienzfelder stimmen exakt.
 
-Dann erst wieder Hobbyraum-Reparaturphase eröffnen.
+## KISS-ENTSCHEIDUNG FÜR DIE PRÜFUNG
 
-## PUBLISH-GRENZE
+Noch **kein Produktfix**.
 
-- `publish_allowed=false`;
-- kein Auto-Publish;
-- keine WordPress-Schreibaktion;
-- Veröffentlichung nur nach ausdrücklicher Nutzerfreigabe.
+Zuerst bestehende History Authority um M36:
+- echtes persistiertes Paket = positiver M36-Fall nach späterem Fix;
+- Legacy-Binding mit falscher Generation = BLOCK;
+- unbekannter H8-Vertrag = BLOCK.
 
-## AUTORITATIVE BELEGE
+Kein neuer Runner/Gate/Contract/Executor.
 
-Current State Blob:
-`65da28894fd3af555150dc85a1b3249f7cf45a1e`
+History-Kandidat:
+- Branch `hobbyroom/m36-history-authority-20260909`;
+- Head `2465052149974f52cfb84797cf369cea430c23cc`;
+- Scope exakt Matrix + bestehender Runner.
 
-Fehlerquelle Blob:
-`b322f233f60f45d22976fea9bc3a227be29c6fbb`
+## MASCHINELLER HOBBYRAUM-LOCK
 
-Protokoll Blob:
-`bfdc8baa14775bc849de942758f16d04c3067a85`
+```text
+HOBBYROOM_WORK_LOCK_V1
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
+OFFICE: TEXT
+MAIN_SHA: 05f5d00ec924e108d6700f39d22d9ec1d47318a6
+ACTIVE_BLOCKER: H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT
+PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
+RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
+ACTIVE_HISTORY_CASE: M36
+HISTORY_EXPECTED_FAIL: M36
+RECOVERY_SEQUENCE: 1_REALTEST_BLOCKER;2_HISTORY_AUTHORITY;3_PRODUCT_FIX;4_HARDLOCKS;5_REALTEST
+CANDIDATE_BRANCH: hobbyroom/m36-history-authority-20260909
+CANDIDATE_HEAD_SHA: 2465052149974f52cfb84797cf369cea430c23cc
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+CHECK_PAUL: PASS
+CHECK_HISTORY: PASS
+CHECK_LAST_GOOD: PASS
+CHECK_NEIGHBORS: PASS
+CHECK_REPEAT_CLASS: PASS
+CHECK_POS_NEG: PASS
+CHECK_INVARIANTS: PASS
+HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
+HISTORY_SOURCE_BLOB_SHA: a3c6a468dc1cf380c3a874ef86805d978d78e582
+HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+HISTORY_PROOF_RUNNER_BLOB_SHA: f7af847ed46fcae6527037eef06487b2f6d77786
+PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
+PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
+ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
+ERROR_SOURCE_BLOB_SHA: e1a4a786d39ae4af1cd5e04aa4e57cbb8c4b068d
+CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
+CURRENT_STATE_BLOB_SHA: c608cf7e176824b4e7f903c05adebb5dc9bc03fc
+DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
+DECISION_SOURCE_BLOB_SHA: 7d8fca295939176076b8ed0dc0e5ab652f1023f5
+STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
+STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
+PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
+PROTOCOL_SOURCE_BLOB_SHA: a0653ecfc614cbdbd35829b0071c221386e203e6
+INTEGRATION_ALLOWED: true
+END_HOBBYROOM_WORK_LOCK_V1
+```
 
-Historische Matrix:
-`a3c6a468dc1cf380c3a874ef86805d978d78e582`
+## AKTUELLE EINZIGE NEXT ACTION
 
-Regression-Runner:
-`f7af847ed46fcae6527037eef06487b2f6d77786`
+1. History-PR öffnen.
+2. `hardlock` + `hardlock-base`.
+3. Trusted Base muss M01–M35 vollständig PASS sein.
+4. Neue Candidate History muss exakt M36 als ersten FAIL reproduzieren.
+5. Kein Produktcode in diesem Schritt.
+6. Erst danach eng begrenzten M36-Produktfix bauen.
+7. Kein Publish.
 
-RECOVERY_BASE_SHA:
-`de21f6cd35c60849c551fd82f78e75ce57c99fab`
+## NICHT ANFASSEN
 
-## NEXT ACTION
-
-**Realtest auf Dispatcher PR #107 starten und ohne Zwischenreparatur bis Terminal laufen lassen.**
-
-PR #107 bleibt offen und wird niemals gemergt.
+- parallele Alternative / PR #195;
+- SEO-/Textmaschine;
+- Fachregeln;
+- PPM-/PSERC-/PSTE-Regeln;
+- Design;
+- WordPress;
+- Dispatcher #107 mergen.
