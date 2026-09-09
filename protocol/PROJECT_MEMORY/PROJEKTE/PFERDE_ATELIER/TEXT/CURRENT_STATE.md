@@ -147,10 +147,17 @@ OFFEN / NICHT AUSGEFÜHRT:
 Alternative:
 `alternative/seo-text-central-machine-20260908`
 Head:
-`b3cdf639fc8bd40e7c3c044fce03f88bb3508472`
+`3dffea336412e8df6c112d82adece38e2e1c69df`
 
 PR #195:
 offen / Draft / isoliert / nicht mergen / nicht verändern aus diesem TEXT-Originalweg.
+
+Parallelbranch-Fresh-Check 09.09.2026:
+- technischer ACM-Kandidat: `573cfa2fdf472d338586f55cae2e9b7257f40413`;
+- aktueller dokumentierter Branchstand beim Check: `3dffea336412e8df6c112d82adece38e2e1c69df`;
+- P3 Run `34355166622`: FAILURE exakt bei P26 `PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING`;
+- P8 Run `34355166627`: SUCCESS;
+- diese Parallelstatus-Info ändert B16/FIX_FORBIDDEN des Originalwegs nicht.
 
 ## SCHUTZ
 
