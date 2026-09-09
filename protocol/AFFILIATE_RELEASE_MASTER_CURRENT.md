@@ -28,7 +28,7 @@ Aktuelle belastbare Basis:
 - Testinstaller-SHA256: `b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f`;
 - **kein Live-/Release-PASS** vor WordPress-Readback.
 
-**NEXT ACTION:** Gefilterter OTTO-Lauf ist technisch SUCCESS (298 geprüft / 1 importiert / 297 blockiert), aber fachlich noch nicht validiert. Automatik AUS lassen. Exakt denselben Awin-Create-a-Feed als Datei prüfen; erst danach Automatik freigeben oder den Relevanz-Gate minimal korrigieren.
+**NEXT ACTION:** Feedprüfung abgeschlossen: 298/298 Zeilen fachfremd (Skincare/Cosmetics/Basketball/Garden/Football); der eine importierte Datensatz ist ein belegtes False Positive durch `FeedScope=Pferdebedarf` + generisches Portal-Konzept `Windschutz für Pferde`. Automatik AUS. Awin-Feed fachlich neu konfigurieren; parallel minimalen OTTO-Relevanz-Gate reparieren und erst nach vollem Positiv-/Negativtest nächsten Plugin-Kandidaten ausgeben.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
