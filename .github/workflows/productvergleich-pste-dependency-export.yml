@@ -1,0 +1,29 @@
+name: Productvergleich PSTE dependency export
+on:
+  push:
+    branches:
+      - hobbyroom/productvergleich-workflow-v070-20260908
+    paths:
+      - .github/workflows/productvergleich-pste-dependency-export.yml
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact repository dependency exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f CODEX_PSTE056_HANDOFF_MINIMAL_20260820.zip
+          git ls-files --error-unmatch CODEX_PSTE056_HANDOFF_MINIMAL_20260820.zip
+      - name: Upload exact dependency
+        uses: actions/upload-artifact@v4
+        with:
+          name: productvergleich-pste056-authoritative-dependency
+          path: CODEX_PSTE056_HANDOFF_MINIMAL_20260820.zip
+          if-no-files-found: error
+          retention-days: 1
