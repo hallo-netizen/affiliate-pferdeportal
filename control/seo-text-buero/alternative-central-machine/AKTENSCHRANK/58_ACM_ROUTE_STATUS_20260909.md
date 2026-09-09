@@ -398,6 +398,33 @@ lokaler PASS genügt nicht.
 Pflicht ist:
 `Positiv -> Negativ -> kompletter ACM-Workflow -> Gesamtsystem-Auswirkung -> erst danach Realtest`.
 
+## MASCHINENFESTE ZWANGSJACKE – EXTERNER LAB-HARDLOCK
+
+Der reine Prompt-/Dokumentationsschutz ist nicht ausreichend.
+
+Deshalb ist der ACM-Hardlock zusätzlich im **separaten Lab-Basisbranch**
+`alternative/seo-text-central-machine-lab-base-20260908`
+im bestehenden Workflow
+`.github/workflows/alternative-seo-text-p3-lab.yml`
+verankert.
+
+Wichtig:
+Der Kandidatenbranch kann diesen Wächter nicht zusammen mit seiner eigenen Änderung verändern.
+
+Maschinell erzwungen:
+- Änderungen außerhalb des isolierten ACM-Ordners => BLOCK;
+- neue ausführbare ACM-Komponente => BLOCK;
+- Änderung der eingefrorenen alten Handoff-/107007-Beweisdateien => BLOCK;
+- aktive Übernahme alter Orchestrierungsmarker wie `FACHWORKFLOW_HANDOFF_REQUEST`, `CURRENT_BOUND_ACTION_READY`, `codex_current_action`, `fachworkflow_proof_handoff`, `STEP_107007` => BLOCK;
+- neue caller-selected Route/Validator/Engine/Worker-API => BLOCK;
+- Zentralmaschine darf keinen frei wählbaren Engine-/Validator-/Routenparameter erhalten.
+
+Explizite Regel:
+**Inspiration/read-only aus Altbestand = erlaubt.**
+**Ungefilterte oder aktive Übernahme alter Workflowlogik = standardmäßig verboten.**
+
+Der Hardlock enthält positive und negative Selbsttests und läuft vor der bestehenden vollständigen ACM-Laborregression.
+
 ## HARTE ZWANGSJACKE FÜR JEDE WEITERE ACM-ARBEIT
 
 Die Route darf keinen Fix-/Testkandidaten erzeugen, bevor das in `00_ROUTE_BOUNDARY.md` definierte
