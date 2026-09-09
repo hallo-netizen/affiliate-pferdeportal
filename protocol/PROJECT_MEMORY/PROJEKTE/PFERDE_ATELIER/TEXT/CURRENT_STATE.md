@@ -1,28 +1,33 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – 12-STAGE TECHNICAL CORRIDOR ANALYSIS / FIX FORBIDDEN**
+STATUS: **AKTIV – 12-STAGE CORRIDOR / FIX_FORBIDDEN**
 
 ## CURRENT MAIN
 
 `93ba987c56f7b08ffba009210e3012c036fec18d`
 
+Dispatcher:
+`codex-chat-launcher = 93ba987c56f7b08ffba009210e3012c036fec18d`
+
+PR #107 bleibt permanent offen und wird nicht gemergt.
+
 M01–M36:
-**MASCHINELL GESAMT PASS.**
+**MASCHINELL GESAMT PASS UND INTEGRIERT.**
 
-## LETZTER ECHTER 7/7-REALTEST
+## AKTUELLER ECHTER LIVE-STOP
 
-HEAD:
-`93ba987c56f7b08ffba009210e3012c036fec18d`
+Autoritative Fehler-ID:
+`B16 – aktueller 12-Stage-Corridor / wiederkehrender LanguageTool-Livestop`
 
-PASS:
-- Cloud Entry;
-- Production Preflight;
-- Runtime Entry;
-- `CURRENT_BOUND_ACTION_READY` in Raum `R_D_1_01`.
-
-Erster technischer Blocker:
+Erster technischer Blocker des letzten echten 7/7-Laufs:
 `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`
+
+Letzte erfolgreiche Stelle:
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
+- `CURRENT_BOUND_ACTION_READY` in `R_D_1_01`.
 
 Betroffenes erstes Item:
 `article:a8282e69ecd43b615de17eb1`
@@ -32,55 +37,113 @@ Betroffenes erstes Item:
 107008 nicht erreicht.
 Kein Publish / kein WordPress-Write.
 
-## EINORDNUNG
+## HARTE EINORDNUNG
 
-Der Blocker ist **kein neuer isolierter LanguageTool-Defekt**.
+Der sichtbare LanguageTool-Stop ist **kein zulässiger isolierter LT-Minifix**.
 
-Der exakt gleiche Livebefund wurde bereits am 07.09.2026 dokumentiert.
-Die autoritativen Dateien
-- `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`
-- `TECHNICAL_CORRIDOR_MATRIX_20260907.md`
+Autoritative technische Quellen:
+- `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`;
+- `TECHNICAL_CORRIDOR_MATRIX_20260907.md`;
+- `PAUL_PIPELINE_AUDIT_20260906.md`.
 
-ordnen ihn der gemeinsamen technischen Fehlerklasse K1/K3 zu:
-- echte Prüfung/Abhängigkeit vorhanden, aber nicht eindeutig im aktuellen 107007 gebunden;
-- generische Nicht-PPM-Stage-Proofs beweisen die reale Prüfung nicht.
+Gemeinsame Ursache:
+Mehrere der zwölf Stage-Namen sind im aktuellen Handoff nicht eindeutig an ihre bereits vorhandene echte Prüf-/Evidence-Autorität gebunden.
+Ein generischer Worker-Proof mit `status=PASS` / `execution_performed=true` ist kein Ausführungsbeweis.
 
-Historisch echter LT-Weg ist belegt:
-- LanguageTool 6.8 / Bestand 43;
-- reale `--json -l de-DE`-Ausführung;
-- Checked-Text-Hash + Raw-Report-Hash + Returncode + Findings;
-- fester Dependency-/JAR-Hash.
+## 12-STAGE-CORRIDOR – BELASTBARER ENDSTAND
 
-Der geparkte Branch
-`hobbyroom/languagetool-runtime-rebind-20260907`
-bleibt **nur Beweisquelle / NICHT INTEGRIEREN**.
+Frisch am 09.09. gegen current main und Originalmaster bestätigt:
 
-## AKTUELLER VERBINDLICHER ARBEITSWEG
+Bereits eindeutig:
+- SEO / PSTE / Duplicate-Cannibalization = Upstream-READY-Autorität vor 107007; fünf SEO-Felder bleiben unverändert;
+- LanguageTool = historisch echter LT-6.8-Ausführungs-/Provenienzweg vorhanden, aktuell aber nicht deterministisch an Current Action gebunden;
+- PPM 6.7.9 = realer gebundener Prüfer im Handoff;
+- PSERC = realer Teil des PPM-/Bridge-Korridors;
+- Publish-Safety = reale äußere Guards/Receipts;
+- aktueller Runtime-Snapshot = exakt fünf SEO-Felder + Snapshot-/Manifest-/Batch-Bindung;
+- aktuelles H8-Produktionspaket enthält keine Fach-Planitems/Fact-Packs;
+- der Handoff erwartet `production_plan_item.quality_binding` bereits vor dem realen PPM-Lauf.
 
-Kein LT-Minifix.
+Zwei autoritative Lücken bleiben:
 
-Vor jeglichem Produktionscode muss für alle 12 vorhandenen Stufen eindeutig feststehen:
-1. EXISTING_EXECUTOR_OR_VALIDATOR_IDENTIFIED;
-2. INPUT_STATE_IDENTIFIED;
-3. OUTPUT_STATE_IDENTIFIED;
-4. NEXT_CONSUMER_IDENTIFIED;
-5. NO_CHAT_DECISION_REQUIRED;
-6. keine ungeklärte direkte Paul-Vertragskollision.
+1. `CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`
+   - im aktuell gebundenen NEW-Pfad existiert kein allgemeiner deterministischer Builder für
+     `runtime_order.links`, `quality_binding.link_bindings`, `portal_link_registry`, `portal_link_registry_hash`;
+   - historische vollständige Pläne beweisen den Datenvertrag, sind aber keine zulässige NEW-Produktionsquelle.
 
-Aktuell bereits belastbar:
-- SEO/PSTE/Duplicate-Cannibalization: Upstream-READY-Autorität vor 107007; fünf Felder bleiben unverändert;
-- LanguageTool: historischer echter LT-6.8-Weg identifiziert;
-- PPM: real im Handoff ausgeführt;
-- PSERC: real im PPM-Bridge-Korridor;
-- Publish-Safety: reale äußere Guards/Receipts.
+2. `CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
+   - 107007 kann keinen echten WordPress-Rendered-DOM-PASS erzeugen, weil WordPress-Schreibvorgänge dort verboten sind;
+   - die Stage `design_format` darf nicht eigenmächtig als Source- oder Render-PASS neu definiert werden.
 
-Noch final zu schließen:
-- konkrete PPM-Checkzuordnung für Table / Design / Article-Type / ggf. Links;
-- Internal-Links Pre-/Post-Zustand;
-- daraus ein einziger konsolidierter KISS-Bindungskandidat.
+## ORIGINALMASTER-RECHECK
 
-Bis dahin:
-`FIX_FORBIDDEN`.
+Read-only geprüft:
+`MASTER_PFERDE_ATELIER_STARTMASTER0107_AKTUELL_20260905.zip`
+
+- Größe: 80.158.822 Bytes;
+- SHA-256: `735aae894f2e7697e6b9221f752a3a568f69b02042cc8cba0a38102f821d6062`;
+- ZIP-Integrität: PASS;
+- keine Ausführung aus Archiv/Tresor;
+- historische Produktionspläne, LanguageTool-Evidence und PPM/PSERC-Belege dienen nur als Beleg, nicht als aktuelle Produktionsquelle.
+
+## FIX-GRENZE
+
+`FIX_FORBIDDEN`
+
+Kein Produktkandidat ist aktuell zulässig.
+Kein LT-Einzelfix.
+Kein neuer Executor.
+Kein neuer Prüfer.
+Keine neue Linklogik.
+Keine neue `design_format`-Bedeutung.
+Keine historischen Produktionsartefakte als NEW-Quelle.
+
+Falls eine bereits existierende unveränderte Fachautorität für
+1. NEW-Linkbindungen und
+2. `design_format`-Evidence
+gefunden wird:
+- zuerst B16 als fortlaufende ausführbare History-Regression aufnehmen;
+- erst danach genau einen konsolidierten KISS-Kandidaten bauen;
+- Positiv/Negativ/Invarianten;
+- dann Realtest.
+
+Falls diese Autorität nicht existiert:
+**BLOCKED statt Architektur-/Fachentscheidung durch den Chat.**
+
+## TESTS – TATSÄCHLICH AUSGEFÜHRT
+
+PASS:
+- M01–M36 Maschinenhistorie vor letztem Merge;
+- `hardlock` + `hardlock-base` für M36;
+- letzter echter Realtest bis `CURRENT_BOUND_ACTION_READY`;
+- Originalmaster SHA-256 + ZIP-Integrität;
+- fresh Repo-/Runtime-/Current-Action-/Handoff-Read-only-Gegenprüfung;
+- Parallelbranch-/Dispatcher-/Ruleset-Status frisch geprüft.
+
+OFFEN / NICHT AUSGEFÜHRT:
+- kein konsolidierter 12-Stage-Produktkandidat;
+- keine Positiv-/Negativprüfung eines solchen Kandidaten;
+- kein neuer M37-History-Test;
+- kein weiterer 7/7-Lauf nach B16;
+- kein 107008 nach B16.
+
+## PARALLELWEG
+
+Alternative:
+`alternative/seo-text-central-machine-20260908`
+Head:
+`b3cdf639fc8bd40e7c3c044fce03f88bb3508472`
+
+PR #195:
+offen / Draft / isoliert / nicht mergen / nicht verändern aus diesem TEXT-Originalweg.
+
+## SCHUTZ
+
+Ruleset `Pferde Atelier Main Hardlock`:
+- active;
+- required: `hardlock`, `hardlock-base`;
+- bypass: leer;
+- current user bypass: never.
 
 ## LETZTER SICHERER POSITIVER REFERENZSTAND
 
@@ -91,6 +154,8 @@ Bis dahin:
 
 ## ZIEL
 
+Unverändert:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`.
 
 Kein Auto-Publish.
+Veröffentlichung nur nach ausdrücklicher Nutzerfreigabe.
