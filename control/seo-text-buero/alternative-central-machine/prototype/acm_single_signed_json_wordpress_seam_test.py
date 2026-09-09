@@ -161,20 +161,46 @@ nd_reset();
 $beforeDraft=count(PPM679_WP::get_all_post_inventory(['draft']));
 $beforePublish=count(PPM679_WP::get_all_post_inventory(['publish']));
 try{
+  // Verify the complete signed file once, before the first write.
   $verified=acm_wp_verify_signed_package($argv[1],$trusted,function($b){return false;});
   $bundle=$verified['fact_pack_bundle'];$plan=$verified['production_plan'];
-  nd_seed_terms($plan['items']);
+  $items=(array)($plan['items']??[]);
+  if(!$items){throw new RuntimeException('VERIFIED_PLAN_EMPTY');}
+  nd_seed_terms($items);
   $imp=PPM679_Admin::import_fact_pack_bundle($bundle);
   if(empty($imp['ok'])){echo json_encode(['status'=>'BLOCKED_FACTPACK_IMPORT','detail'=>$imp]);exit(3);}
-  $runtime=nd_runtime($plan,'acm-single-json-wp');
-  $result=PPM679_Normal_Draft_Pipeline::execute_plan($plan,$runtime);
-  $artifact=is_array($result)?($result['artifact']??null):null;
+
+  // Existing PPM is item-bounded. Keep the final file batch-generic by
+  // feeding each already-verified item through the unchanged writer sequentially.
+  $statuses=[];
+  foreach($items as $i=>$item){
+    $one=$plan;
+    $one['items']=[$item];
+    $runtime=nd_runtime($one,'acm-single-json-wp-item-'.$i);
+    $result=PPM679_Normal_Draft_Pipeline::execute_plan($one,$runtime);
+    $artifact=is_array($result)?($result['artifact']??null):null;
+    $status=is_array($artifact)?(string)($artifact['status']??''):'';
+    $statuses[]=$status;
+    if($status!=='NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH'){
+      echo json_encode([
+        'status'=>'ACM_SINGLE_JSON_WP_ITEM_BLOCKED',
+        'item_index'=>$i,
+        'pipeline_status'=>$status,
+        'pipeline_statuses'=>$statuses,
+        'publish_allowed'=>false
+      ],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+      exit(4);
+    }
+  }
+
   $afterDraft=count(PPM679_WP::get_all_post_inventory(['draft']));
   $afterPublish=count(PPM679_WP::get_all_post_inventory(['publish']));
   echo json_encode([
     'status'=>'ACM_SINGLE_JSON_WP_RESULT',
     'verified_status'=>$verified['status'],
-    'pipeline_status'=>is_array($artifact)?($artifact['status']??null):null,
+    'pipeline_status'=>'ALL_ITEMS_NORMAL_DRAFT_END_TO_END_PASS',
+    'pipeline_statuses'=>$statuses,
+    'processed_item_count'=>count($statuses),
     'before_draft'=>$beforeDraft,'after_draft'=>$afterDraft,
     'before_publish'=>$beforePublish,'after_publish'=>$afterPublish,
     'publish_allowed'=>false
@@ -226,8 +252,10 @@ def main():
                 raise RuntimeError("WP_DRAFT_COUNT_WRONG:"+str(count))
             if pos.get("after_publish")!=pos.get("before_publish"):
                 raise RuntimeError("WP_PUBLISH_CHANGED:"+str(count))
-            if pos.get("pipeline_status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
+            if pos.get("pipeline_status")!="ALL_ITEMS_NORMAL_DRAFT_END_TO_END_PASS":
                 raise RuntimeError("WP_PIPELINE_NOT_FULL_PASS:"+str(count)+":"+str(pos.get("pipeline_status")))
+            if pos.get("processed_item_count")!=count:
+                raise RuntimeError("WP_PROCESSED_ITEM_COUNT_WRONG:"+str(count))
             positive_results.append({
                 "article_count":count,
                 "wordpress_verify_before_write":True,
@@ -285,7 +313,7 @@ def main():
             obj=json.loads(cp.stdout)
             if obj.get("after_publish")!=obj.get("before_publish"):
                 raise RuntimeError("SIGNED_PUBLISH_WISH_CHANGED_PUBLISH_COUNT")
-            if not (obj.get("pipeline_status")=="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH" or str(obj.get("pipeline_status") or "").startswith("BLOCKED_")):
+            if not (obj.get("pipeline_status")=="ALL_ITEMS_NORMAL_DRAFT_END_TO_END_PASS" or str(obj.get("pipeline_status") or "").startswith("BLOCKED_")):
                 raise RuntimeError("SIGNED_PUBLISH_WISH_UNEXPECTED:"+cp.stdout[-2000:])
         negatives.append("signed_publish_wish_no_publish_authority")
 
