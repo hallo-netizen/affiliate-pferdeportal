@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: AKTIV / PV-LIVE-001 / 0.7.1 WORDPRESS-RETEST
+STATUS: AKTIV / PV-LIVE-002+003 / 0.8.0 GESAMTWORKFLOW-KORREKTUR
 
 ## AKTUELLER AUFTRAG
 
@@ -51,18 +51,22 @@ Keine neue Architektur. Kein Writer. Kein Draft. Kein Publish.
 
 ## NEXT ACTION
 
-**Einziger nächster Schritt: realer WordPress-Retest mit genau 0.7.1.**
+0.8.0 ausschließlich intern im Hobbyraum fertigstellen.
 
-1. vorhandenes Universal Product Comparison durch 0.7.1 ersetzen;
-2. Produktvergleich → Vergleichsplanung → Regendecken;
-3. Gesamtworkflow starten;
-4. Screenshot zurückgeben.
+Pflicht vor irgendeiner neuen ZIP:
+1. echte Produktnachfrage A + B ohne direkte Paaranfrage => Vergleich kann PASS werden;
+2. direkte A-gegen-B-Nachfrage => PASS;
+3. nur A oder nur B Nachfrage => BLOCKED;
+4. keine Nachfrage => NO_ELIGIBLE;
+5. generische Gruppenanfrage => kein konkretes Produkt-/Paar-Signal;
+6. alte 0.7.x-Signale => stale/research again;
+7. abgelaufene Signale => stale;
+8. frische positive Signale gegen aktuellen Inventory-/Structure-/Cannibalization-Stand revalidieren;
+9. kompletter Workflow bis Dossier in einem Test;
+10. Provider-Teilfail, Same-Brand, falsche Produktklasse, Drift und Dubletten negativ;
+11. echte PSTE-0.56.25-Kostenobergrenze;
+12. komplette bestehende Regression;
+13. Mutationstests müssen beweisen, dass die neuen Tests alte fehlerhafte Logik wirklich abfangen;
+14. Fresh-ZIP erneut komplett testen und bytegleich zum geprüften Source-Stand.
 
-Erwartung für denselben Nachfragemangel:
-- **kein grünes PASS**;
-- Status `NO_ELIGIBLE_COMPARISONS`;
-- 0 SEO-PASS / 8 blockiert / 0 Dossiers;
-- tatsächliche Providerkosten bleiben im Run-Notice sichtbar;
-- Kostenfeld darunter bezeichnet eindeutig nur einen **neuen** Lauf.
-
-Kein weiterer Pluginstand vor diesem Retest.
+Kein Writer, kein Draft, kein Publish. Keine Zwischen-ZIP.
