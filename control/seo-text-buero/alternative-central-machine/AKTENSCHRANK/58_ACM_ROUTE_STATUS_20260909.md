@@ -290,37 +290,34 @@ Wenn die vorhandene Prüferherkunft nicht ohne einen solchen neuen Baustein bind
 
 ## WEITERE OFFENE BESTANDSBEFUNDE
 
-- Für NEW internal_links existieren die Regeln/Validatoren; eine unveränderte deterministische Erzeugungsquelle für die konkreten drei neuen Linkziele ist weiterhin nicht abschließend gebunden.
-- LanguageTool-Regel/Evidence ist vorhanden; ausführbarer LT-6.8-Runtime ist für unbeaufsichtigte Vollautomatik noch nicht reproduzierbar gebunden.
+- NEW-internal_links ist im aktuellen grünen Gesamtstand nicht mehr der erste offene ACM-Punkt: vorhandene drei Linkbindungen und reale Link-Target-Validierung laufen im P3-Gesamtlauf positiv; negative Linkfälle blockieren fail-closed.
+- Der frühere 25er-Draft-Zählfehler war ein Labortest-/Fixture-Zwischenbefund und ist **kein Mengenvertrag und kein aktueller Produktionsblocker**.
 - Finale produktive Übergabe/Adoption bleibt separat zu beweisen.
 - Kein Auto-Publish.
 
-Diese Punkte werden nicht durch neue Architektur verdeckt.
-
 ## NEXT ACTION
 
-**Einziger fachlicher ACM-Corridor-Blocker: NEW-Linkbindung.**
+**Aktueller Arbeitsauftrag: unabhängiger Realtest eines vollständig neuen Artikels über den bestehenden gebundenen Codex-Fachworkflow.**
 
-Vorhanden und unverändert:
-- exakt drei Rollen: `parent_category`, `semantic_related`, `further_information`;
-- PPM prüft Anzahl, Rolle, href/Anchor, Abschnitt, aktives Ziel, Registry und Hash fail-closed.
+Zweck:
+- Allgemeingültigkeit der ACM-Orchestrierung mit neuen Inhalten prüfen;
+- vorhandenen Codex-Entry tatsächlich benutzen;
+- keine alten Artikel-/Proof-Artefakte übernehmen;
+- den Artikel vom gebundenen Auftrag bis zur signierten Enddatei durch die bestehende Kette führen.
 
-Fehlt:
-- eine autoritative deterministische Quelle, die für einen NEW-Artikel die drei konkreten Ziele vor dem Worker fest bindet.
+Harte Grenzen:
+- Textmaschine, PPM/PSERC/PSTE, bestehendes Handoff, Codex-Entry und WordPress-Schnittstellen bleiben unverändert;
+- Chat besitzt keinerlei Fach-, Workflow-, Worker-, Prüfer-, Reparatur- oder Publish-Autorität;
+- Codex ist ausschließlich der gebundene Fachworkflow-Worker;
+- PASS/BLOCKED ausschließlich durch die fest gebundenen vorhandenen Prüfer;
+- keine neue Architektur, kein neuer Runner, kein neues Handoff, kein neuer Importweg;
+- kein WordPress-Produktivwrite und kein Auto-Publish;
+- bei erstem echten neuen Blocker: STOP und genau diesen Befund prüfen.
 
-Verboten:
-- Chat/Worker frei wählen lassen;
-- alte Linklisten kopieren;
-- G9-Spezial-Snapshot generalisieren;
-- neue semantische Linkregel erfinden.
+Für einen sachfremden Orchestrierungs-Test darf das Thema nur dort frei gewählt werden, wo keine Pferdeportal-Fachbindung als Prüfziel missbraucht wird. Die ACM-/Sicherheitskette darf dafür nicht gelockert werden.
 
-KISS-Ziel:
-Die drei bereits bestehenden Linkentscheidungen müssen **vor Texterstellung als gebundene Eingabe** vorliegen. Erst dann darf der Textworker sie nur einbauen; PPM prüft danach exakt diese Bindung.
-
-Wenn keine bestehende upstream Quelle dafür vorhanden ist, braucht es eine ausdrückliche Zielvertragsentscheidung, **wo** diese bestehende Linkentscheidung künftig autoritativ erzeugt wird. Ohne diese Entscheidung bleibt BLOCKED.
-
-Separat offen, aber nicht durch diese ACM-Änderung verursacht:
-- repository-weites `Pferde Atelier Immutable Base Hardlock` ist auf dem ACM-Branch weiterhin rot, bereits auf älteren ACM-Heads; ACM-spezifischer Machine-Hardlock/P3 ist grün. Vor Merge/Produktionsadoption muss dieser Branch/Basis-Konflikt sauber geklärt werden.
+Separat offen, aber nicht durch diesen ACM-Test verursacht:
+- repository-weites `Pferde Atelier Immutable Base Hardlock` ist auf dem ACM-Branch weiterhin rot; vor Merge/Produktionsadoption muss dieser Branch/Basis-Konflikt separat geklärt werden.
 
 ## VERBINDLICHER ARBEITSWEG
 
@@ -345,7 +342,7 @@ Tatsächlich in dieser ACM-Route geändert/geprüft:
 - Zwischenfehler aus 25er-Labortests nicht als Produktionsfehler übernommen; aktuelle Endstreckenbeweise für 1/3/25/1000 sind im grünen Gesamtstand enthalten;
 - frühere falsche Einordnung von Research als erstem Blocker verworfen;
 - design_format-Lifecycle an den vorhandenen Rendered-DOM-Prüfer gebunden;
-- erster aktueller fachlicher ACM-Corridor-Blocker ist NEW-Linkbindung.
+- die frühere NEW-Linkbindung ist nach dem späteren grünen Gesamtstand kein aktueller erster Blocker mehr; nächster Arbeitsauftrag ist der unabhängige neue Codex-Realtest.
 
 Aktueller Teststand auf Head `fe9d5dd375c00139f206bf8791104482f357afba`:
 - P3 Gesamtworkflow: SUCCESS, Run `34382240065`;
