@@ -150,13 +150,18 @@ def parse_work_lock(text: str, path: str) -> Dict[str, str] | None:
         r"M[0-9]{2,}", data["HISTORY_EXPECTED_FAIL"]
     ):
         raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL")
-    if data["PLAN_PHASE"] == "HISTORY_AUTHORITY_MAINTENANCE":
-        if data["HISTORY_EXPECTED_FAIL"] == "NONE":
+    phase = data["PLAN_PHASE"]
+    expected_fail = data["HISTORY_EXPECTED_FAIL"]
+    if phase == "HISTORY_AUTHORITY_MAINTENANCE":
+        if expected_fail == "NONE":
             raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_REQUIRED")
-        if data["HISTORY_EXPECTED_FAIL"] != data["ACTIVE_HISTORY_CASE"]:
+        if expected_fail != data["ACTIVE_HISTORY_CASE"]:
             raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_CASE_MISMATCH")
-    elif data["HISTORY_EXPECTED_FAIL"] != "NONE":
-        raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_OUTSIDE_MAINTENANCE")
+    elif phase == "PRODUCT_FIX":
+        if expected_fail != "NONE" and int(expected_fail[1:]) <= int(data["ACTIVE_HISTORY_CASE"][1:]):
+            raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_NOT_LATER")
+    elif expected_fail != "NONE":
+        raise Blocked("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_OUTSIDE_ALLOWED_PHASE")
     if data["STATUS"] == "FIX_ALLOWED_FOR_CODEX_TEST":
         proof_required = {
             "HISTORY_SOURCE_REF", "HISTORY_SOURCE_BLOB_SHA",
@@ -344,6 +349,15 @@ def _validate_bound_evidence_texts(
             raise Blocked("HOBBYROOM_ACTIVE_HISTORY_CASE_NOT_IN_ERROR_SOURCE")
     elif active_id not in matrix_ids:
         raise Blocked("HOBBYROOM_ACTIVE_HISTORY_CASE_NOT_IN_ACCEPTED_HISTORY")
+
+    expected_next = data.get("HISTORY_EXPECTED_FAIL", "NONE")
+    if not maintenance and data["PLAN_PHASE"] == "PRODUCT_FIX" and expected_next != "NONE":
+        expected_num = int(expected_next[1:])
+        expected_id = f"{expected_num:02d}" if expected_num < 100 else str(expected_num)
+        if expected_num <= active_num:
+            raise Blocked("HOBBYROOM_HISTORY_EXPECTED_NEXT_FAIL_NOT_LATER")
+        if expected_id not in matrix_ids:
+            raise Blocked("HOBBYROOM_HISTORY_EXPECTED_NEXT_FAIL_NOT_KNOWN")
 
     blocker = data["ACTIVE_BLOCKER"]
     row = _error_row_for_case(error_text, active_case)
@@ -595,11 +609,21 @@ def enforce_history_machine_proof(
                     label="CURRENT_MAIN_REPRODUCTION",
                     expected_fail=data["ACTIVE_HISTORY_CASE"],
                 )
-                # AFTER proof: the same trusted base runner must pass the full
-                # accepted history against the candidate.
-                _run_history_runner(
-                    base_runner, candidate=candidate, label="CANDIDATE_FULL_HISTORY"
-                )
+                # AFTER proof: the repaired case must disappear. If another
+                # already-known later case is explicitly bound, it may become
+                # the new first fail; otherwise the full accepted history must pass.
+                expected_next = data["HISTORY_EXPECTED_FAIL"]
+                if expected_next == "NONE":
+                    _run_history_runner(
+                        base_runner, candidate=candidate, label="CANDIDATE_FULL_HISTORY"
+                    )
+                else:
+                    _run_history_runner(
+                        base_runner,
+                        candidate=candidate,
+                        label="CANDIDATE_NEXT_KNOWN_FAIL",
+                        expected_fail=expected_next,
+                    )
         finally:
             git("worktree", "remove", "--force", str(candidate), check=False)
             git("worktree", "remove", "--force", str(baseline), check=False)
@@ -1075,7 +1099,20 @@ END_HOBBYROOM_WORK_LOCK_V1"""
         "hobbyroom/test", head, base,
         ["control/startmaster0107/file.py"], [("X/HOBBYRAUM.md", notes)]
     ).startswith("HOBBYROOM_WORK_LOCK_PR_PASS:")
-    print("HOBBYROOM_WORK_LOCK_SELFTEST_PASS:8/8")
+    sequential = valid.replace("PLAN_PHASE: E", "PLAN_PHASE: PRODUCT_FIX").replace(
+        "HISTORY_EXPECTED_FAIL: NONE", "HISTORY_EXPECTED_FAIL: M35"
+    )
+    seq_data = parse_work_lock(sequential, "X/HOBBYRAUM.md")
+    assert seq_data is not None and seq_data["HISTORY_EXPECTED_FAIL"] == "M35"
+    try:
+        parse_work_lock(
+            sequential.replace("HISTORY_EXPECTED_FAIL: M35", "HISTORY_EXPECTED_FAIL: M27"),
+            "X/HOBBYRAUM.md",
+        )
+        raise AssertionError("earlier next fail accepted")
+    except Blocked as exc:
+        assert str(exc).startswith("HOBBYROOM_WORK_LOCK_INVALID:HISTORY_EXPECTED_FAIL_NOT_LATER")
+    print("HOBBYROOM_WORK_LOCK_SELFTEST_PASS:10/10")
 
 
 def evidence_semantic_selftest() -> None:

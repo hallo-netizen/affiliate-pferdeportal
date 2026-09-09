@@ -12,7 +12,7 @@ Verbindliche bekannte Fehler-/Regressionstestliste für den Hobbyraum.
 - Keine Architekturänderung.
 - Bereits bestandene Punkte nur als Regression prüfen, nicht neu analysieren.
 - Jeder einmal real aufgetretene, weiterhin relevante Workflowfehler bleibt dauerhaft in dieser Matrix.
-- main bleibt unangetastet, bis die komplette Matrix PASS ist.
+- main bleibt unangetastet, bis der aktive Fehler im Kandidaten behoben ist und derselbe Runner danach entweder Gesamt-PASS oder ausschließlich einen späteren bereits bekannten Fehler als ersten FAIL meldet.
 - publish_allowed=false bleibt unverändert.
 
 ## Bestehende Matrix M01–M25
@@ -59,7 +59,7 @@ M20 – Delivery: 7 Artikel + Import-Envelope + Source-Manifest exakt hashgebund
 
 M21 – No auto-publish: publish_allowed=false in Runtime, Bundles, Delivery, ENDSTEMPEL und WP-Test.
 
-M22 – Signed production package / H8: WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED / ED25519 / H8-Binding gültig.
+M22 – H8 Provenance / Integrität: 107007-Vorlauf bleibt hash-/batch-/herkunftsgebunden, verlangt keine interne ED25519-/Signer-Pflicht; gebundener Codex-Capsule-Weg bleibt fail-closed.
 
 M23 – Preproduction/Runtime Guards: automatischer Produktionspfad akzeptiert nur signierten Produktionsvertrag.
 
