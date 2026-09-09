@@ -1652,3 +1652,25 @@ Nach der finalen Fresh-Read-Prüfung wurden ausschließlich Dokumentations-/Gove
 Abschlussgrenze:
 Kein Produktkandidat und keine Kandidaten-Positiv/Negativprüfung vorhanden.
 Daher Tests für die nächste Reparaturstufe weiterhin OFFEN; kein „fertig“-Status.
+
+
+### 09.09.2026 – Read-only-Autoritätssuche negativ geschlossen
+
+Gebundener Ausgangspunkt war ausschließlich die in `HOBBYRAUM.md` festgelegte offene Frage: Existiert außerhalb des aktuell gebundenen STARTMASTER0107-Pfads bereits eine unveränderte autoritative Fachworkflow-Quelle, die für NEW sowohl die drei artikelbezogenen Linkbindungen deterministisch erzeugt als auch die bestehende Bedeutung/Evidence von `design_format` definiert?
+
+Ausgeführt: ausschließlich Read-only-Quellenprüfung auf current main `93ba987c56f7b08ffba009210e3012c036fec18d`. Keine Wiederholung M01–M36, kein neuer Realtest, kein Produktcode, kein Candidate-Branch, kein WordPress-Write, kein Publish.
+
+Geprüft wurden die zulässigen aktuellen Quellen außerhalb 0107: Single-Door/H1/H8, technische Control-/Preflight-/Release-Schicht, STARTMASTER0103–0106 sowie PSTE 0.56.25 und der aktuelle Repo-Baum auf eigenständige Fachquellen.
+
+Befund:
+- H1/H8 besitzen ausdrücklich keine Design-/Qualitätsautorität;
+- STARTMASTER0104/0105/0106 besitzen ausdrücklich keine Content-/Quality-/Design-Autorität;
+- PSTE 0.56.25 stellt weder den gesuchten allgemeinen NEW-Link-Builder noch `design_format`-Evidence bereit;
+- im aktuellen Baum existiert außerhalb 0107 kein eigenständiger aktueller PPM-/PSERC-/Link-/Design-Fachquellpfad, der beide Verträge liefert;
+- historische Produktionspläne und datierte ZIP-/Evidence-Pakete bleiben gemäß Hard Rule reine Beweise und wurden nicht als NEW-Produktionsquelle verwendet;
+- Alternativkonzept/PR #195 wurde nicht verwendet oder verändert.
+
+Ergebnis:
+`EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`.
+
+Gemäß bereits autoritativ festgelegter Corridor-Regel folgt daraus: `STATUS = BLOCKED`, `FIX_FORBIDDEN` bleibt bestehen. B16 bleibt dieselbe aktuelle Fehlerwahrheit; keine neue Fehler-ID. Kein Ersatzweg und keine neue Fach-/Architekturentscheidung durch Chat/Worker.
