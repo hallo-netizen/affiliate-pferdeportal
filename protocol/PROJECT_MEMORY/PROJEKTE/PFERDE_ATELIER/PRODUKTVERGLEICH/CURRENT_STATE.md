@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: V1-PLUGINENTWICKLUNG / 0.7.1 LOCAL+FRESH-ZIP PASS / PV-LIVE-001 WORDPRESS-RETEST OFFEN
+STATUS: V1-PLUGINENTWICKLUNG / 0.8.0 SOURCE+FRESH-ZIP PASS / PV-LIVE-002+003 WORDPRESS-RETEST OFFEN
 
 ## AUTORITÄT DIESER DATEI
 
@@ -676,3 +676,18 @@ SHA-256:
 
 PV-LIVE-001 bleibt bis zum realen WordPress-Retest offen.
 Kein Writer/Draft/Publish freigegeben.
+
+
+## 0.8.0 – AKTUELLER KANDIDAT 2026-09-09
+
+Der nächste sinnvolle Testkandidat ist 0.8.0-prototype.
+
+Korrigierter Gesamtworkflow:
+`SEO ↔ Produktwissen → Vergleichbarkeit → direkte Paar-Nachfrage ODER Nachfrage A+B → aktuelle Planning-/Kannibalisierungsprüfung → Dossier → Audit`.
+
+Source-Suite und vollständige Fresh-ZIP-Suite einschließlich Mutationstests: PASS.
+
+SHA-256:
+`c9eec5b4c7faafa23af6bd5c554d85c2c4d1763e4c618fbd49c3e04dd45abb66`.
+
+Noch kein WordPress-Live-PASS für 0.8.0.
