@@ -203,6 +203,43 @@ Damit ist für die Nicht-PPM-Nachweise noch nicht allgemein technisch bewiesen:
 
 Das ist der nächste reale Integrationspunkt.
 
+## DIREKTE PRÜFERHERKUNFT – HARTER STAND
+
+Ohne neue Architektur direkt an vorhandene echte Prüfer bindbar:
+
+- `textmachine_article_type_structure` -> PPM Content Validator
+- `table_contract` -> PPM Content/Table Validator
+- `internal_links` -> PPM Content/Link Validator; konkrete NEW-Linkziel-Erzeugung bleibt separat offen
+- `ppm` -> reale PPM-Ausführung
+- `pserc` -> PSERC Bridge/Supervisor
+- `duplicate_cannibalization` -> Editorial Plan Runtime Gate / Systemwide Duplicate Guard
+- `seo` -> PPM Target-Keyword-Check + Keyword-Ownership-Gate
+- `publish_safety` -> vorhandene No-Write/No-Publish-/Signer-Grenze
+
+Noch NICHT direkt herkunftssicher bewiesen:
+
+1. `research_fact_pack`
+   - Fact-Pack, Status und Hashbindungen werden geprüft.
+   - PSERC verlangt `research_evidence_gate_status=PASS` plus Attest-Hash.
+   - Im aktuellen Repo wurde aber kein vorhandener Prüfer gefunden, der dieses Research-Attest selbst nachprüft.
+   - Daher kein GO für direkte Prüferherkunft.
+
+2. `languagetool`
+   - vorhandene Qualitätskomponenten prüfen LanguageTool-Evidence.
+   - der ausführbare LT-6.8-Runtime ist aktuell nicht reproduzierbar gebunden.
+   - daher kein vollständiger echter Runtime-Nachweis.
+
+3. `pste`
+   - historischer PSTE Planning-/Pre-Title-Gate ist positiv/negativ belegt.
+   - PSERC blockiert falsche PSTE-Verträge.
+   - die aktuelle zwingende ausführbare PSTE-Bindung im produktiven Pfad ist aber noch nicht vollständig belegt.
+
+4. `design_format`
+   - keine aktuelle unveränderte eigenständige Stage-Autorität belegt.
+   - keine neue Bedeutung und keine WordPress-Zwischenprüfung erfinden.
+
+Damit sind aktuell **8/12 Prüferherkünfte direkt belastbar**, 4/12 offen.
+
 ## KISS-GRENZE
 
 Zur Schließung dieses Punktes gilt zwingend:
@@ -237,19 +274,15 @@ Diese Punkte werden nicht durch neue Architektur verdeckt.
 
 ## NEXT ACTION
 
-Nur den ersten offenen Integrationspunkt bearbeiten:
+**STATUS: BLOCKED / KEINE TECHNISCHE ÄNDERUNG.**
 
-**Vorhandene reale Prüfer-Ausgänge für die Nicht-PPM-Nachweise bestimmen und prüfen, ob sie ohne neue Komponente direkt an die ACM-Zentralmaschine gebunden werden können.**
+Erster offene Punkt ist `research_fact_pack`:
+Im aktuellen zulässigen Bestand wurde kein echter Research-Attest-Prüfer gefunden, der den Worker-Selbst-PASS technisch ausschließt.
 
-Reihenfolge:
-1. vorhandenen Prüfer/Output lesen;
-2. keine neue Fachlogik;
-3. wenn direkte Bindung möglich: genau eine kleinste isolierte Änderung;
-4. Positivtest;
-5. Negativtest;
-6. kompletter P3-Gesamtworkflow;
-7. P8 Signer-Isolation;
-8. erst danach nächster Punkt.
+KISS-Folge:
+- keinen neuen Research-Prüfer bauen;
+- keinen Adapter/Runner/Handoff ergänzen;
+- nur weiter, wenn ein bereits vorhandener autoritativer Research-Prüfpfad gefunden/belegt wird oder eine ausdrückliche Grundsatzentscheidung die aktuelle Architekturgrenze ändert.
 
 ## VERBINDLICHER ARBEITSWEG
 
