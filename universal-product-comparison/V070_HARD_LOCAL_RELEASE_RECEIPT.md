@@ -1,7 +1,7 @@
 # Universal Product Comparison 0.7.0 – Hard Local Release Receipt
 
 Stand: 2026-09-08
-Status: LOCAL RELEASE PASS / WORDPRESS LIVE TEST OFFEN
+Status: REJECTED NACH WORDPRESS-LIVEFAIL PV-LIVE-001
 
 Release artifact:
 `universal-product-comparison-0.7.0-prototype.zip`
@@ -34,3 +34,12 @@ PASS:
 
 Grenze:
 Kein WordPress-Live-PASS behauptet. Kein Writer/Draft/Publish in dieser Prüfstufe.
+
+
+## REJECT 2026-09-09
+
+Realer WordPress-Lauf:
+8 Kandidaten → 16 Provider-Aufrufe / $0.1920 → 0 SEO-PASS / 8 blockiert / 0 Dossiers.
+
+0.7.0 meldete trotzdem grünes PASS.
+Dieser Receipt ist dadurch **historisch verworfen** und keine Freigabequelle mehr.
