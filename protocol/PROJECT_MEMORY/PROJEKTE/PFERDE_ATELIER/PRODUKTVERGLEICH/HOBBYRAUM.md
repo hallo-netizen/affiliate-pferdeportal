@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: AKTIV / PV-LIVE-001 / 0.7.1-KORREKTUR
+STATUS: AKTIV / PV-LIVE-001 / 0.7.1 WORDPRESS-RETEST
 
 ## AKTUELLER AUFTRAG
 
@@ -51,4 +51,18 @@ Keine neue Architektur. Kein Writer. Kein Draft. Kein Publish.
 
 ## NEXT ACTION
 
-0.7.1-Kandidat intern fertig prüfen. Erst bei Gesamt-PASS genau **eine** neue ZIP für den WordPress-Retest ausgeben.
+**Einziger nächster Schritt: realer WordPress-Retest mit genau 0.7.1.**
+
+1. vorhandenes Universal Product Comparison durch 0.7.1 ersetzen;
+2. Produktvergleich → Vergleichsplanung → Regendecken;
+3. Gesamtworkflow starten;
+4. Screenshot zurückgeben.
+
+Erwartung für denselben Nachfragemangel:
+- **kein grünes PASS**;
+- Status `NO_ELIGIBLE_COMPARISONS`;
+- 0 SEO-PASS / 8 blockiert / 0 Dossiers;
+- tatsächliche Providerkosten bleiben im Run-Notice sichtbar;
+- Kostenfeld darunter bezeichnet eindeutig nur einen **neuen** Lauf.
+
+Kein weiterer Pluginstand vor diesem Retest.
