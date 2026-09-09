@@ -1149,3 +1149,30 @@ AUSWIRKUNG:
 
 GRENZE:
 Bestehende SEO/TEXT-/ACM-Systeme werden aus dem Produktvergleichs-Büro nicht verändert. Die technische Integration erfolgt erst nach separater Freigabe des Nachbarwegs.
+
+
+## PV-PLAN-021 – Fachpolicy wird im Dossier gebunden, nicht vom Text erfunden
+STAND:
+2026-09-09 / VERBINDLICH.
+
+WAS:
+Der Produktvergleich bindet ab 0.8.3 zusätzlich zur Fakten-/SEO-Wahrheit eine allgemeine Produktgruppen-Decision-Policy in den bestehenden Dossierweg.
+
+Der aktive PRODUCT_COMPARISON-V1-Typ ist exakt A gegen B mit zwei Produkten.
+
+Das Dossier V2 liefert strukturierte erlaubte Aussagearten, Verbote und feste Bedarfs-Codes. Es liefert keine Prosa.
+
+WARUM:
+Ohne diese Bindung müsste die spätere SEO/TEXT-Produktion selbst aus technischen Produktunterschieden fachliche Vorteile oder Bedarfszuordnungen ableiten. Das wäre eine neue inhaltliche Freiheitslücke.
+
+KISS:
+Policy im vorhandenen Produktgruppenprofil; eigener Policy-Hash; bestehendes Dossier erweitert. Kein Writer, keine zweite Datenbank, kein zweiter Handoff.
+
+KOSTENGRENZE:
+Decision-Policy und bezahltes SEO-Binding sind getrennt. Reine Policy-Änderungen erzwingen fachliche Dossier-Neuprüfung, aber keinen erneuten Providerkauf unveränderter SEO-Evidenz.
+
+BELEG:
+0.8.3 finale Fresh-ZIP 25/25 PASS; PHP-Lint 43/43; 11 reale herstellerübergreifende Regendecken-Paare; Policy-Drift-/3-Produkte-/Hash-Mutationen korrekt BLOCK/ROT.
+
+GRENZE:
+Noch kein WordPress-LIVE-PASS für 0.8.3. Keine SEO/TEXT-/ACM-Integration aus diesem Büro.
