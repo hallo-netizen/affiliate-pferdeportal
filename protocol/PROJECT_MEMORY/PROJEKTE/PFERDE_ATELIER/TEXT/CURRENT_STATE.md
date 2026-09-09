@@ -82,6 +82,13 @@ Danach erst Produktfix:
 - keine interne Signaturpflicht zurück;
 - keine Paketmutation/Neusignierung.
 
+## LETZTER SICHERER POSITIVER REFERENZSTAND
+
+- `d841ed7590436ac100b98f15194874573e09bc03`: 7/7 frisch produziert;
+- `de21f6cd35c60849c551fd82f78e75ce57c99fab`: 7/7 + 107008 Review PASS.
+
+`RECOVERY_BASE_SHA = de21f6cd35c60849c551fd82f78e75ce57c99fab`.
+
 ## ZIEL
 
 Unverändert:
