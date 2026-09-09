@@ -50,7 +50,7 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 | M32 | PPM runtime package path ohne Env-Abhängigkeit | im bestehenden Runner enthalten | **LIVE ÜBERWUNDEN 08.09.2026:** PR #158 / Merge `30e93335…`; nachfolgender Realtest erreichte den echten `fachworkflow_proof_handoff.py materialize` und stoppte erst bei M28. |
 | M33 | GitHub ENDSTEMPEL ohne Codex git auth | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M34 | Reapplied legacy PPM handoff guards after B01 | **LIVE ÜBERWUNDEN 08.09.2026:** PR #190 / Merge `2325f6e1…` stellte den bewiesenen B01-Handoff als konsistente Einheit wieder her. Nachfolgender Realtest kam über `CANONICAL_SLOT_MISSING` hinaus und stoppte erst bei M35. |
-| M35 | Fact-Pack source-hash binding parity | **AKTUELLER INTEGRATIONS-/REALBLOCKER: `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`** | Root Cause belegt: PPM-Registry-Hash und Research-Fact-Pack-Hash wurden verwechselt. Fresh Kandidat PR #197 / Head `a611a5c150cc3d8f182ca9c1855339fb98fea0c2`, exakt eine Datei. Fix bindet nur die interne PPM-Plan-Kopie an den Registry-Hash; leerer Registry-Hash bleibt BLOCK. Vollständiger M01–M35-Serverbeweis noch offen. |
+| M35 | Fact-Pack source-hash binding parity | **INTEGRIERT BEHOBEN 09.09.2026** | PR #197 regulär gemergt; main `05f5d00ec924e108d6700f39d22d9ec1d47318a6`. Vor Merge: current main reproduzierte M35, Kandidat M01–M35 Gesamt-PASS / `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M35`; hardlock + hardlock-base PASS; Bypass leer. Echter 7/7-Realtest danach ist noch auszuführen. |
 
 ## B. Reale Blocker / Wiederholungsfehler außerhalb bzw. quer zur Matrix
 
