@@ -269,41 +269,67 @@ Bei jeder Unstimmigkeit zuerst vorhandenen Baustein prüfen.
 Keine neue Architektur als Reflex.
 
 
-## AKTUELLER ROUTENSTAND P46
+## AKTUELLER ROUTENSTAND P47
 
 Stand: 2026-09-09
-Status: AKTIV – REALINTEGRATIONS-PROTOTYP, NOCH KEINE PRODUKTIONSFREIGABE
+Status: TECHNISCHER REALINTEGRATIONS-PROTOTYP GO – KEINE PRODUKTIONSFREIGABE
 
 Aktueller Alternativbranch:
 `alternative/seo-text-central-machine-20260908`
 
-Aktueller Beweisstand:
-- P0–P46 im gemeinsamen isolierten Laborlauf PASS
-- historischer 7/7-Goldbatch vollständig hashgeprüft
-- 7 × derselbe reale Ein-Item-Pfad PASS
-- vorhandene `FACHWORKFLOW_HANDOFF_REQUEST.json` bleibt einzige Produktions-Eingangswahrheit
-- kein neues Jobmanifest im Zielbetrieb
-- dünner Handoff-Controller ohne frei wählbare Route/Worker/Validator/Engine
-- plan_slot / canonical_article_id / plan_item_key vollständig getrennt und fail-closed gebunden
-- bestehender PPM-`prepare()`-Punkt als schreibfreie Vor-Signatur-Grenze bewiesen
-- externe Signatur vor Draft-Write bewiesen
-- bestehende öffentliche PPM-Prewrite-Bausteine vorhanden
-- exakte Prewrite-Reihenfolge aus bestehendem `execute_plan` gelesen
-- private Helper wurden nur inventarisiert; keine Reflection-/Umgehungslösung
-- publish_allowed=false
+Aktueller verifizierter Head:
+`70ccba6c3233ab64010ca2b1a1d224f6096a953f`
+
+Aktuelle Beweise:
+- gemeinsamer isolierter ACM-Laborlauf `34329572978`: SUCCESS
+- Signer-Isolation-Laborlauf `34329572818`: SUCCESS
+- P47: bestehende `FACHWORKFLOW_HANDOFF_REQUEST.json` ist ausreichende einzige Eingangswahrheit
+- direkter öffentlicher PPM-Weg bis `prepare()` PASS:
+  `Editorial preflight -> Live State -> Plan Validate -> Content Generate -> Content Check -> prepare`
+- `prepare_no_write=true`
+- Identität bleibt gebunden
+- Handoff bleibt unverändert
+- keine privaten PPM-Helper
+- keine Reflection
+- keine neue PPM-API
+- kein neues Handoff
+- kein neues Jobmanifest
+- kein neuer Controller
+- `publish_allowed=false`
+
+P47 hatte im ersten neuen Testlauf einen lokalen Testfehler:
+Der Test erwartete für den bereits erfolgreichen Content-Check die generischen Wörter `PASS`.
+PPM liefert autoritativ `TECHNICAL_CHECK_OK` und `CONTENT_QUALITY_CHECK_OK`.
+Es wurde ausschließlich diese eine neue Testannahme korrigiert; keine Fach-, PPM- oder Architekturänderung.
+Danach P47 PASS.
+
+### KISS-VERDIKT
+
+Der bisher fehlende reale Übergang
+`bestehendes Handoff -> öffentliche PPM-Bausteine -> prepare(no write)`
+ist bewiesen.
+
+Die nachfolgende Signatur-/Verifikations-/Draft-Strecke war bereits separat bewiesen und ist auf demselben Head erneut grün.
+Daher wird **kein P48 nur zur Wiederholung bereits bewiesener Technik gebaut**.
 
 ### AKTUELLE EINZIGE NEXT ACTION
 
-P47 – kleinster Realintegrationsschritt:
+Keine weitere Prototyparchitektur.
 
-Aus exakt der bestehenden `FACHWORKFLOW_HANDOFF_REQUEST.json` im bereits vorhandenen dünnen Controller ausschließlich die in P44/P45 belegten **öffentlichen bestehenden PPM-Bausteine** in der belegten Reihenfolge bis zum schreibfreien `prepare()` ausführen.
+Vor einer späteren Produktionsübernahme ist ausschließlich die bereits bekannte Zielvertragsentscheidung nötig:
+Die ACM setzt die externe kryptografische Versiegelung vor den Draft-Write; der aktuelle produktive Zielvertrag `ZV-TEXT-001` positioniert sie derzeit später.
 
-Danach ausschließlich:
-`prepare -> externe Signatur -> verifizierter Prepared-Payload -> bestehendes create_draft -> Readback/DOM -> STOP ohne Publish`.
+Bis zu einer ausdrücklichen Entscheidung:
+- kein Merge nach main
+- keine Änderung am offiziellen Zielvertrag
+- keine Änderung an CURRENT_STATE
+- keine Änderung an Textmaschine/PPM/PSERC/PSTE
+- keine Änderung am Parallelweg
+- keine Campus-Standardübernahme
+- kein Publish
 
-Harte STOP-Regel:
-Wenn dafür private PPM-Helper kopiert, per Reflection aufgerufen, neue PPM-APIs, ein zweites Handoff, ein neues Jobmanifest oder ein weiterer Controller nötig wären:
-STOP. Erst vorhandenen Baustein erneut prüfen.
+Status:
+`ACM_TECHNICAL_PROTOTYPE_GO_PRODUCTION_ADOPTION_BLOCKED_TARGET_CONTRACT_DECISION_REQUIRED`
 
 ### PARALLELWEG-GRENZE
 
@@ -312,10 +338,5 @@ Dessen CURRENT_STATE, Fehlerstatus, Hobbyraum und aktive Reparaturbranches werde
 
 ### CAMPUS-STANDARD
 
-Die erkannte allgemeine KISS-Architektur ist noch **nicht** in den Campus-Neubaustandard übernommen.
-Grund: Diese Route ist ausdrücklich isolierter Prototyp und noch nicht als allgemeiner Campus-Standard freigegeben.
-
-Status:
+Noch keine Übernahme.
 `CAMPUS_PROPAGATION_BLOCKED_UNTIL_ALTERNATIVE_ARCHITECTURE_APPROVED`
-
-Bis zur Freigabe keine Vermischung mit dem Campus-/Produktionsstandard.
