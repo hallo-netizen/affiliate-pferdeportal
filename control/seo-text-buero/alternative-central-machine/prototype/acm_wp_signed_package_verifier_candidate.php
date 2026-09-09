@@ -54,7 +54,12 @@ function acm_wp_verify_signed_package($path,$trustedKeys,$isBatchUsed){
     if(!hash_equals((string)($pkg['fact_pack_bundle_sha256']??''),$bh))acm_wp_fail('HANDOFF_COMPONENT_HASH_MISMATCH:fact_pack_bundle_sha256');
     if(!hash_equals((string)($pkg['production_plan_sha256']??''),$ph))acm_wp_fail('HANDOFF_COMPONENT_HASH_MISMATCH:production_plan_sha256');
     if(!hash_equals((string)($pkg['workflow_release_sha256']??''),$rh))acm_wp_fail('HANDOFF_COMPONENT_HASH_MISMATCH:workflow_release_sha256');
-    $pid=acm_wp_hash(['contract'=>'PSERC_APPROVED_PRODUCTION_PACKAGE_V1','fact_pack_bundle_sha256'=>$bh,'production_plan_sha256'=>$ph,'workflow_release_sha256'=>$rh]);
+    $pidObj=new stdClass();
+    $pidObj->contract='PSERC_APPROVED_PRODUCTION_PACKAGE_V1';
+    $pidObj->fact_pack_bundle_sha256=$bh;
+    $pidObj->production_plan_sha256=$ph;
+    $pidObj->workflow_release_sha256=$rh;
+    $pid=acm_wp_hash($pidObj);
     if(!hash_equals((string)($pkg['package_id']??''),$pid))acm_wp_fail('HANDOFF_PACKAGE_ID_MISMATCH');
     $copyObj=clone $pkgObj;$declared=(string)($pkg['package_payload_sha256']??'');unset($copyObj->package_payload_sha256);
     if(!hash_equals($declared,acm_wp_hash($copyObj)))acm_wp_fail('HANDOFF_PACKAGE_PAYLOAD_HASH_MISMATCH');
