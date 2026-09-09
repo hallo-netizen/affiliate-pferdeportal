@@ -1178,3 +1178,36 @@ Berechnete Bindungen:
 - CURRENT_STATE SHA256 `feffeeea4e84e91d96269870fed1407c2c4d99653a7c13cfc167f94e45ffa5cf`.
 
 Alle acht Bindungsbeziehungen der vorhandenen Refresh-Kette wurden vor Push positiv geprüft.
+
+
+### 09.09.2026 – Sequenzieller History-Beweis und M22-Gegenprüfung
+
+Ausgang:
+- M17-Kandidat #199 / Head `66e9f24a06a6ddb37fd5e8e50f4c158965263abd`;
+- `hardlock` PASS;
+- `hardlock-base`: current main reproduziert M17; Kandidat PASS M01–M21; erster nachfolgender FAIL M22.
+
+M22:
+- altes Runner-Orakel war zustandsabhängig und scheiterte im isolierten Worktree an fehlender echter Capsule;
+- autoritative Entscheidung TECH-KEYFLOW-001/B15 verlangt intern hash-/batch-/herkunftsgebundenen H8-Vorlauf ohne interne ED25519-/Signer-Pflicht;
+- korrigiertes M22-Orakel auf current main: FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
+- dasselbe Orakel auf bewiesenem B15-Stand `7990029428399e8ba01d88a6543ce068812e9218`: PASS.
+
+Zwangsjacken-KISS:
+- kein neuer Runner, Gate, Contract oder Parallelweg;
+- bestehendes Feld `HISTORY_EXPECTED_FAIL` wird bei `PRODUCT_FIX` optional als exakt gebundener nächster späterer bekannter Fehler verwendet;
+- Vorher bleibt Pflicht: current main muss exakt am aktiven Fehler FAIL sein;
+- Nachher gilt:
+  - `HISTORY_EXPECTED_FAIL=NONE` => Gesamt-PASS Pflicht;
+  - späterer bekannter `HISTORY_EXPECTED_FAIL` => reparierter Fehler muss verschwunden sein und exakt dieser spätere Fall darf erster FAIL werden;
+  - gleicher oder früherer FAIL bleibt BLOCK.
+- damit bleiben M17, M22 und M35 getrennte Reparaturen.
+
+Wartungskandidat:
+- Branch `hobbyroom/m22-sequential-history-gate-20260909`;
+- Head `90eb7e897897636d51bc13e8ad590fe5d953b0c3`;
+- 3 Dateien: bestehende Fehlermatrix, bestehender Runner, bestehendes `paul_scope_gate.py`;
+- keine Produktionslogik.
+
+Ruleset:
+- Repository-admin-Bypass wieder entfernt / bypass leer.
