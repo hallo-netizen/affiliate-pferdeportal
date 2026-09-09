@@ -69,8 +69,9 @@ then
 fi
 
 # Restore the exact historic LanguageTool 6.8 dependency before the agent phase.
-# The large immutable runtime is cached outside .pferde-environment so maintenance
-# does not rebuild/re-extract 258 MB on every task. Production authority remains
+# The large immutable transport and extracted runtime live in the persistent
+# LanguageTool cache. Every reuse is still hash-validated; corrupt cache data
+# is rebuilt from the exact bound inner archive. Production authority remains
 # strictly current-main-only below. No content/quality rule is implemented here.
 python3 - <<'PY'
 from pathlib import Path
@@ -82,9 +83,8 @@ import zipfile
 
 ENV = Path(".pferde-environment")
 CACHE = Path.home() / ".cache" / "pferde-atelier-languagetool"
-RUNTIME = Path(".pferde-runtime-cache") / "languagetool-runtime"
+RUNTIME = CACHE / "languagetool-runtime"
 CACHE.mkdir(parents=True, exist_ok=True)
-RUNTIME.parent.mkdir(parents=True, exist_ok=True)
 
 ASSET_URL = "https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip"
 INNER_SHA = "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d"
@@ -146,9 +146,55 @@ if not inner.is_file() or inner.stat().st_size != INNER_SIZE or sha256(inner) !=
         raise SystemExit("LANGUAGETOOL_INNER_ZIP_HASH_MISMATCH")
     tmp.replace(inner)
 
+# Preserve the historic Bestand-43 transport proof exactly, but cache the
+# verified outer archive instead of rebuilding 258 MB on every maintenance run.
+outer = CACHE / "ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip"
+if not outer.is_file() or sha256(outer) != OUTER_SHA:
+    outer_tmp = CACHE / "ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip.tmp"
+    if outer_tmp.exists():
+        outer_tmp.unlink()
+    base = "ARBEITSMASTER_0043_NEU_PRODUKTIONSMASCHINE_PFERDEPORTAL_REVISION_8_REC_03E_COMPLETE_TYPE_DIAGNOSIS_CHALLENGE_NEXT_FULL_CURRENT_STATE_2026-07-22/"
+    readme = "LanguageTool 6.8 – unveränderte Offline-Abhängigkeit. Nicht als Plugin installieren.\n".encode("utf-8")
+    manifest = (
+        '{\n'
+        '  "contract": "MASTER_0043_PART2_MANIFEST_V1",\n'
+        '  "language_tool_sha256": "' + INNER_SHA + '",\n'
+        '  "language_tool_size": 258510816,\n'
+        '  "status": "UNCHANGED_DEPENDENCY"\n'
+        '}\n'
+    ).encode("utf-8")
+    entries = [
+        (base, True, None),
+        (base + "90_DEPENDENCIES/", True, None),
+        (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/", True, None),
+        (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/LanguageTool-6.8.zip", False, inner),
+        (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/README.txt", False, readme),
+        (base + "MASTER_0043_TEIL_2_MANIFEST_SHA256.json", False, manifest),
+    ]
+    with zipfile.ZipFile(outer_tmp, "w") as zf:
+        for name, is_dir, payload in entries:
+            zi = zipfile.ZipInfo(name, (2026, 7, 22, 19, 0, 14))
+            zi.create_system = 3
+            zi.create_version = 20
+            zi.extract_version = 20
+            zi.flag_bits = 0
+            zi.internal_attr = 0
+            zi.external_attr = 1106051088 if is_dir else 2175008768
+            zi.compress_type = zipfile.ZIP_STORED if is_dir else zipfile.ZIP_DEFLATED
+            if is_dir:
+                zf.writestr(zi, b"")
+            elif isinstance(payload, bytes):
+                zf.writestr(zi, payload)
+            else:
+                with zf.open(zi, "w") as dst, Path(payload).open("rb") as src:
+                    shutil.copyfileobj(src, dst, 1024 * 1024)
+    if sha256(outer_tmp) != OUTER_SHA:
+        raise SystemExit("LANGUAGETOOL_OUTER_PROVENANCE_HASH_MISMATCH")
+    outer_tmp.replace(outer)
+
 jar = validate_runtime(RUNTIME)
 if jar is None:
-    tmp_runtime = RUNTIME.parent / "languagetool-runtime.tmp"
+    tmp_runtime = CACHE / "languagetool-runtime.tmp"
     if tmp_runtime.exists():
         shutil.rmtree(tmp_runtime)
     tmp_runtime.mkdir(parents=True)
@@ -175,10 +221,8 @@ proof = {
     "status": "LANGUAGETOOL_RUNTIME_READY",
     "engine": ENGINE,
     "source_url": ASSET_URL,
-    "outer_dependency_ref": "HISTORICAL_PROVENANCE_ONLY:ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip",
+    "outer_dependency_ref": str(outer),
     "outer_dependency_sha256": OUTER_SHA,
-    "outer_dependency_materialized": False,
-    "outer_dependency_role": "HISTORICAL_TRANSPORT_PROVENANCE_ONLY",
     "inner_dependency_cache_ref": str(inner),
     "inner_dependency_sha256": INNER_SHA,
     "inner_dependency_size": INNER_SIZE,
@@ -217,7 +261,7 @@ PPM = ROOT / "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE
 PSERC = ROOT / "control/startmaster0107/runtime_packages/PSERC-FIX.zip"
 PPM_SHA = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
 PSERC_SHA = "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
-LT_JAR = ROOT / ".pferde-runtime-cache/languagetool-runtime/LanguageTool-6.8/languagetool-commandline.jar"
+LT_JAR = Path.home() / ".cache/pferde-atelier-languagetool/languagetool-runtime/LanguageTool-6.8/languagetool-commandline.jar"
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
