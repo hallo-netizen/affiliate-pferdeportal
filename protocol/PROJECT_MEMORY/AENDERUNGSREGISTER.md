@@ -1310,7 +1310,8 @@ PASS-REGEL:
 
 ## PV-PLAN-014 – Affiliate liest Exact-IDs, SEO bleibt bis Vertragsprüfung upstream
 
-STAND: 2026-09-07.
+STAND: 2026-09-07.  
+ABGELÖST FÜR SEO DURCH: PV-PLAN-015, PV-PLAN-018 und PV-PLAN-019.
 
 AFFILIATE:
 Read-only Bridge ist real gegen WordPress/MySQL geprüft. Produktwissen liefert nur stabile Exact-Identifier; Affiliate darf keinen Ersatz erzeugen und schreibt keine Produktwahrheit zurück.
@@ -2114,3 +2115,25 @@ GRENZE:
 - keine interne ED25519-/Signer-Pflicht wird wieder eingeführt;
 - externe Release-Signaturprüfung bleibt unverändert separat;
 - keine Paketmutation, keine Neusignierung, kein neuer Bootstrap-/Executor-Pfad.
+
+
+## PV-PLAN-020 – Fresh-ZIP-PASS braucht reale gebundene Fremdabhängigkeiten
+
+STAND: 2026-09-09 / VERBINDLICH.
+
+WAS:
+Ein Produktvergleichs-Release darf nur als vollständiger Fresh-ZIP-PASS gelten, wenn neben dem frisch entpackten Plugin auch alle von der Testsuite verlangten realen Fremdabhängigkeiten/Fixtures explizit gebunden sind.
+
+AKTUELL BETROFFEN:
+- reale PSTE-Topic-Map;
+- Universal Product Knowledge 0.5.0;
+- autoritativer PSTE-0.56.25-Installer/Wurzel.
+
+WARUM:
+Bei der Abschlussprüfung von 0.8.0 schlug der erste Gesamtlauf korrekt fehl, weil diese Abhängigkeiten nicht gesetzt waren. Erst der zweite Lauf mit real gebundenen Abhängigkeiten durfte als vollständiger PASS gelten.
+
+REGEL:
+Fehlende Testvoraussetzung = FAIL/OFFEN, niemals aus einem vorhandenen Testreport oder früherer Erinnerung zu PASS hochstufen.
+
+KISS:
+Keine neue Testarchitektur. Nur die bereits vorhandene Suite mit ihren echten Voraussetzungen ausführen und den ersten echten FAIL nicht weginterpretieren.
