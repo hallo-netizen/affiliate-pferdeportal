@@ -28,7 +28,7 @@ Aktuelle belastbare Basis:
 - Testinstaller-SHA256: `b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f`;
 - **kein Live-/Release-PASS** vor WordPress-Readback.
 
-**NEXT ACTION:** **kein neues Plugin.** 6.72.8 bleibt installiert. Awin `Toolbox → Create-a-Feed`: OTTO/Awin 14336 auswählen und auf pferderelevante Kategorien eingrenzen; danach Export-URL im bestehenden Awin-Betriebsprofil binden und `portal_filtered` bestätigen. Der blockierte 0/4500-Cleanup bleibt bewusst unangetastet; Altbestand wird über die bestehende Reconcile-Logik nach vollständigen gefilterten Läufen aus dem aktiven Pfad genommen.
+**NEXT ACTION:** Gefilterter OTTO-Lauf ist technisch SUCCESS (298 geprüft / 1 importiert / 297 blockiert), aber fachlich noch nicht validiert. Automatik AUS lassen. Exakt denselben Awin-Create-a-Feed als Datei prüfen; erst danach Automatik freigeben oder den Relevanz-Gate minimal korrigieren.
 
 ## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
 
