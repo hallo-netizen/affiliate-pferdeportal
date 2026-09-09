@@ -186,7 +186,25 @@ def m21():
             expect_exc(lambda:g.validate_prepared("PREPARED_RELEASE.json",sha(pp)),"AUTO_PUBLISH_FORBIDDEN")
     finally:
         g.REPO=old_repo
-def m22(): must("H8_PREPRODUCTION_BOOTSTRAP_POSITIVE_NEGATIVE_PASS" in cmd("control/single-door-boundary/test_h8_preproduction_bootstrap.py"),"M22_H8")
+def m22():
+    boundary=load(REPO/"control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json")
+    req=boundary.get("external_bootstrap_producer_requirement") or {}
+    must(req.get("internal_signature_required") is False,"M22_INTERNAL_SIGNATURE_STILL_REQUIRED")
+    must(req.get("signer_credentials_allowed") is False,"M22_SIGNER_CREDENTIAL_POLICY_MISSING")
+    must(
+        boundary.get("required_provenance_binding_contract")=="PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1",
+        "M22_PROVENANCE_CONTRACT_NOT_BOUND",
+    )
+    src=(REPO/"control/single-door-boundary/preproduction_provenance_guard.py").read_text(encoding="utf-8")
+    must(
+        'BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1"' in src,
+        "M22_PROVENANCE_GUARD_OLD_CONTRACT",
+    )
+    must("H8_BOOTSTRAP_PROVENANCE_BINDING_HASH_INVALID" in src,"M22_HASH_NEGATIVE_NOT_BOUND")
+    for token in ("ED25519","signature_b64","signing_key_id","SIGNER_CMD"):
+        must(token not in src,"M22_INTERNAL_SIGNER_LEAK:"+token)
+    out=cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py")
+    must("H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS" in out,"M22_CODEX_BRIDGE")
 def m23(): must("POSITIVE_FULL_PACKAGE_CURRENT_GENERATION" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M23_SIGNED_PACKAGE_ONLY")
 def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
 def m25():
