@@ -52,15 +52,19 @@ Branch:
 `hobbyroom/m22-h8-provenance-no-internal-signature-20260909`
 
 Head:
-`0aebd56998c2cb4e102b0d3e19cb3ea29985a65c`
+`13d76a2b22b2794827f6a277f7d85ab1566e19d3`
 
-Scope exakt 6 vorhandene H8-Dateien:
+Scope: 6 vorhandene H8-Semantik/Test-Dateien plus 4 ausschließlich bestehende Hash-/Pointer-Bindungen:
 - `control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json`;
 - `control/single-door-boundary/preproduction_provenance_guard.py`;
 - `control/single-door-boundary/single_door_bootstrap.py`;
 - `control/single-door-boundary/single_door_preproduction_handoff.py`;
 - `control/single-door-boundary/project_single_door_entry_v2.py`;
-- `control/single-door-boundary/test_h8_preproduction_bootstrap.py`.
+- `control/single-door-boundary/test_h8_preproduction_bootstrap.py`;
+- `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json` — nur H8 authorized-input SHA;
+- `control/startmaster0107/CURRENT_STATE.json` — nur Bundle-SHA;
+- `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` — nur State-SHA;
+- `control/CURRENT_STARTMASTER.json` — nur H8 Blob-SHA.
 
 Kein neuer Runner, Gate, Contract, Executor oder Parallelweg.
 
