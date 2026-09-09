@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M26 CONTEXT MARKER NORMALIZATION UNDER TEST**
+STATUS: **AKTIV – M35 PRODUCT CANDIDATE FINAL HISTORY TEST**
 
 ## AUTORITÄT
 
@@ -12,68 +12,83 @@ Fehlerdetails → autoritative TEXT-Fehlerquelle.
 
 ## CURRENT MAIN
 
-`a63c20100759b4e42d07f2e70a11ee9875709d37`
+`d32e16cdf6b45ffa282e42fa78e07da84863e362`
 
-PR #201 / M22 ist regulär über `hardlock` + `hardlock-base` gemergt.
-M22 ist integriert behoben.
+M17, M22 und M26 sind regulär integriert behoben.
+Letzter Merge: PR #202 / M26.
 
 ## DISPATCHER / SCHUTZ
 
 Permanenter Dispatcher PR #107:
 - offen, **nicht mergen**;
-- Head exakt `a63c20100759b4e42d07f2e70a11ee9875709d37`.
+- Head exakt `d32e16cdf6b45ffa282e42fa78e07da84863e362`.
 
 GitHub Ruleset `Pferde Atelier Main Hardlock`:
 - enforcement: active;
-- Required Checks: `hardlock`, `hardlock-base`.
+- Required Checks: `hardlock`, `hardlock-base`;
+- Produktionsmerge nur bei leerem Bypass.
 
-## AKTUELLER INTEGRATIONSBLOCKER
+## AKTUELLER INTEGRATIONS- UND REALBLOCKER
 
-`M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`
-
-Fehler-ID:
-`M26 – Bound Fachworkflow production context`.
-
-Gegenprüfung:
-- Current-Action-Selftest PASS;
-- gebundener Fachworkflow-Worker PASS;
-- Handoff-Request-Vertrag PASS;
-- STEP107007 enthält die geforderte Semantik bereits als `die realen Nicht-PPM-Stage-Artefakte und Proofs`;
-- Ursache ist ausschließlich exakter Marker-/Wortlaut-Drift `reale` vs. `realen`;
-- kein funktionaler Kontextverlust.
-
-## AKTIVER M26-KANDIDAT
-
-Branch:
-`hobbyroom/m26-context-marker-normalization-20260909`
-
-Head:
-`b55621e556eb25ec5bee4fd9b2f9662380575398`
-
-Scope exakt 3 Dateien:
-- `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json` — nur `die realen ...` → `reale ...`;
-- `control/startmaster0107/CURRENT_STATE.json` — nur Bundle-SHA;
-- `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` — nur State-SHA.
-
-Keine Fachregel, kein Handoff-Verhalten, kein Runner/Gate/Contract/Executor geändert.
-
-## PRÜFUNG – TATSÄCHLICH AUSGEFÜHRT
-
-- main: drei M26-Kontextmarker PASS, exakter vierter Marker FAIL;
-- Kandidat: alle vier Marker PASS;
-- Worker-Bindung bleibt vorhanden;
-- `FACHWORKFLOW_HANDOFF_REQUEST.json` bleibt vorhanden;
-- No-Publish bleibt vorhanden;
-- Instruction-Delta ausschließlich Wortlautnormalisierung, Länge -5 Zeichen;
-- STEP107007/State/Root-Hashkette nachgezogen.
-
-## NÄCHSTER BEKANNTER FEHLER DANACH
-
-M35 bleibt der bekannte reale Liveblocker:
 `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
 
-Geparkter M35-Kandidat:
-`ef2ecebeb2992013873ba72100d79ffd7c48393c`
+Fehler-ID:
+`M35 – Fact-Pack source-hash binding parity`.
+
+Letzte real erreichte Stelle:
+- frische `FACHWORKFLOW_HANDOFF_REQUEST.json`;
+- gebundener Fachworkflow-Handoff;
+- echter PPM-6.7.9-Eingang;
+- Stop bei PPM-Registry-Quellhashbindung.
+
+Root Cause:
+- Research-/Content-Fact-Pack-Hash und interner PPM-Registry-Hash sind zwei unterschiedliche Hash-Namensräume;
+- PPM speichert nach `canonical_fact_pack_import_v1` einen eigenen Registry-Hash;
+- der Handoff liest diesen Hash bereits über `PPM679_Storage::fact_pack_hash(...)`;
+- der alte Code vergleicht ihn fälschlich mit den Research-Hashes in `production_plan_item.source_hashes`.
+
+## AKTIVER M35-KANDIDAT
+
+PR #197:
+`M35: bind internal PPM plan to registry fact-pack hash`
+
+Branch:
+`hobbyroom/m35-ppm-registry-hash-binding-20260909`
+
+Fresh Head:
+`a611a5c150cc3d8f182ca9c1855339fb98fea0c2`
+
+Base:
+`d32e16cdf6b45ffa282e42fa78e07da84863e362`
+
+Scope:
+- exakt eine Produktionsdatei:
+  `control/startmaster0107/fachworkflow_proof_handoff.py`.
+
+KISS-Fix:
+- leerer PPM-Registry-Hash bleibt BLOCK;
+- sonst ausschließlich in der internen PPM-Plan-Kopie:
+  `$item['source_hashes']=[$expectedSource];`
+- erst danach Planaufbau.
+
+Nicht geändert:
+- Research-/Content-Evidence-Hash;
+- SEO 5-Felder;
+- Textmaschine;
+- Fachregeln;
+- PPM-/PSERC-/PSTE-Regeln;
+- LanguageTool;
+- Design;
+- Publish.
+
+## BEREITS GEPRÜFT
+
+- M34 PASS;
+- M35 positiv PASS;
+- fehlende Registry-Bindung BLOCK;
+- Registry-Bindung erst nach Planaufbau BLOCK;
+- fresh main enthält den Fehler weiterhin;
+- rebased M35-Kandidat enthält exakt den bewiesenen Fix.
 
 ## LETZTER SICHERER POSITIVER REFERENZSTAND
 
@@ -84,7 +99,8 @@ Geparkter M35-Kandidat:
 
 ## OFFEN / NICHT BEHAUPTET
 
-- serverseitige Required Checks des M26-Kandidaten noch offen;
+- serverseitiger vollständiger M01–M35-PASS des fresh M35-Kandidaten noch offen;
+- M35 noch nicht gemergt;
 - kein neuer 7/7-Realtest;
 - kein Publish;
 - keine WordPress-Schreibaktion.
