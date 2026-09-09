@@ -1,6 +1,6 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
-STAND: 2026-09-08
+STAND: 2026-09-09
 
 Zweck: **Was wurde geändert – und warum?**
 
