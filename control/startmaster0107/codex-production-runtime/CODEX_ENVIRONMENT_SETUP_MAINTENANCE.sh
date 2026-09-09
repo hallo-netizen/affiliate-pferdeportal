@@ -317,13 +317,6 @@ proof = {
 )
 PY
 
-# Temporary Hobbyraum autostart probe. It fires only on non-main candidate
-# checkouts and only after the complete runtime-toolbox smoke test passed.
-if [[ "$LOCAL_SHA" != "$MAIN_SHA" ]]; then
-  echo "RUNTIME_TOOLBOX_AUTOSTART_PROBE_PASS"
-  exit 86
-fi
-
 # Run the production preflight whenever this checkout is proven to be the
 # current GitHub main commit, regardless of Codex's synthetic local branch name.
 if [[ "$LOCAL_SHA" == "$MAIN_SHA" ]]; then
