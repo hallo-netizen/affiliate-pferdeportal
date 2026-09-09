@@ -220,6 +220,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_zero_freedom_no_text_mutation_seam_test.py
 
+      - name: ACM WordPress import, publish and editorial reconciliation wiring audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_wp_import_publish_redaktionsplan_wiring_audit.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
