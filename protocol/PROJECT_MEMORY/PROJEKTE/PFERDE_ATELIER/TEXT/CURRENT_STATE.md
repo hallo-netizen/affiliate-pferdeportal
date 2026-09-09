@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M22 H8 PROVENANCE PRODUCT CANDIDATE UNDER TEST**
+STATUS: **AKTIV – M26 CONTEXT MARKER NORMALIZATION UNDER TEST**
 
 ## AUTORITÄT
 
@@ -12,96 +12,68 @@ Fehlerdetails → autoritative TEXT-Fehlerquelle.
 
 ## CURRENT MAIN
 
-`7531154a6218a06e49d35b78062933df3c886625`
+`a63c20100759b4e42d07f2e70a11ee9875709d37`
 
-PR #199 / M17 ist regulär über die Required Checks gemergt.
-M17 `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED` ist damit integriert behoben.
+PR #201 / M22 ist regulär über `hardlock` + `hardlock-base` gemergt.
+M22 ist integriert behoben.
 
 ## DISPATCHER / SCHUTZ
 
 Permanenter Dispatcher PR #107:
 - offen, **nicht mergen**;
-- Head exakt `7531154a6218a06e49d35b78062933df3c886625`.
+- Head exakt `a63c20100759b4e42d07f2e70a11ee9875709d37`.
 
 GitHub Ruleset `Pferde Atelier Main Hardlock`:
 - enforcement: active;
-- bypass: **leer**;
 - Required Checks: `hardlock`, `hardlock-base`.
 
 ## AKTUELLER INTEGRATIONSBLOCKER
 
-`M22_INTERNAL_SIGNATURE_STILL_REQUIRED`
+`M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`
 
 Fehler-ID:
-`M22 – H8 Provenance / Integrität ohne interne Signatur`.
-
-Root Cause:
-- autoritative TECH-KEYFLOW-001/B15-Regel verlangt im internen 107007-/H8-Vorlauf nur Hash-/Batch-/Herkunftsbindung;
-- kryptografische Signierung bleibt außerhalb dieses internen Worker-Korridors;
-- current main enthält im H8-Korridor wieder die ältere `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`-/Signer-Pflicht;
-- bewiesener B15-Stand `7990029428399e8ba01d88a6543ce068812e9218` erfüllt den aktuellen Sollvertrag.
-
-M23-Abgrenzung:
-- externe Upload-/Release-Prüfung bleibt signiert;
-- `validate_production_package()` mit ED25519 bleibt erhalten;
-- nur der interne Preproduction-Pfad nutzt wieder `validate_production_package_integrity()`.
-
-## AKTIVER M22-KANDIDAT
-
-Branch:
-`hobbyroom/m22-h8-provenance-no-internal-signature-20260909`
-
-Head:
-`13d76a2b22b2794827f6a277f7d85ab1566e19d3`
-
-Scope: 6 vorhandene H8-Semantik/Test-Dateien plus 4 ausschließlich bestehende Hash-/Pointer-Bindungen:
-- `control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json`;
-- `control/single-door-boundary/preproduction_provenance_guard.py`;
-- `control/single-door-boundary/single_door_bootstrap.py`;
-- `control/single-door-boundary/single_door_preproduction_handoff.py`;
-- `control/single-door-boundary/project_single_door_entry_v2.py`;
-- `control/single-door-boundary/test_h8_preproduction_bootstrap.py`;
-- `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json` — nur H8 authorized-input SHA;
-- `control/startmaster0107/CURRENT_STATE.json` — nur Bundle-SHA;
-- `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` — nur State-SHA;
-- `control/CURRENT_STARTMASTER.json` — nur H8 Blob-SHA.
-
-Kein neuer Runner, Gate, Contract, Executor oder Parallelweg.
-
-## PRÜFUNG – TATSÄCHLICH AUSGEFÜHRT
-
-Source-level Positiv/Negativ:
-- current main → FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
-- M22-Kandidat → PASS;
-- interne Signer-/Trusted-Key-Abhängigkeit entfernt;
-- Hash-/Provenienzbindung bleibt fail-closed;
-- externe M23-Signaturprüfung bleibt erhalten;
-- Codex-Capsule-Weg bleibt erhalten;
-- H8-Test wieder zustandsunabhängig und enthält negative Hashprüfung.
-
-Boundary:
-- sämtliche 11 `file_bindings` gegen den Kandidaten geprüft;
-- 11/11 Blob-SHAs stimmen exakt.
-
-## NÄCHSTER MASCHINENFEHLER DANACH
-
-M26 ist nach M22 der nächste Runner-Stop:
-`M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`
+`M26 – Bound Fachworkflow production context`.
 
 Gegenprüfung:
 - Current-Action-Selftest PASS;
 - gebundener Fachworkflow-Worker PASS;
 - Handoff-Request-Vertrag PASS;
 - STEP107007 enthält die geforderte Semantik bereits als `die realen Nicht-PPM-Stage-Artefakte und Proofs`;
-- damit kein funktionaler Kontextverlust, sondern exakter Marker-/Wortlaut-Drift.
+- Ursache ist ausschließlich exakter Marker-/Wortlaut-Drift `reale` vs. `realen`;
+- kein funktionaler Kontextverlust.
 
-M35 bleibt danach unverändert der bekannte reale Liveblocker:
+## AKTIVER M26-KANDIDAT
+
+Branch:
+`hobbyroom/m26-context-marker-normalization-20260909`
+
+Head:
+`b55621e556eb25ec5bee4fd9b2f9662380575398`
+
+Scope exakt 3 Dateien:
+- `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json` — nur `die realen ...` → `reale ...`;
+- `control/startmaster0107/CURRENT_STATE.json` — nur Bundle-SHA;
+- `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` — nur State-SHA.
+
+Keine Fachregel, kein Handoff-Verhalten, kein Runner/Gate/Contract/Executor geändert.
+
+## PRÜFUNG – TATSÄCHLICH AUSGEFÜHRT
+
+- main: drei M26-Kontextmarker PASS, exakter vierter Marker FAIL;
+- Kandidat: alle vier Marker PASS;
+- Worker-Bindung bleibt vorhanden;
+- `FACHWORKFLOW_HANDOFF_REQUEST.json` bleibt vorhanden;
+- No-Publish bleibt vorhanden;
+- Instruction-Delta ausschließlich Wortlautnormalisierung, Länge -5 Zeichen;
+- STEP107007/State/Root-Hashkette nachgezogen.
+
+## NÄCHSTER BEKANNTER FEHLER DANACH
+
+M35 bleibt der bekannte reale Liveblocker:
 `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
 
 Geparkter M35-Kandidat:
 `ef2ecebeb2992013873ba72100d79ffd7c48393c`
-
-M22 und M35 bleiben getrennte Reparaturen.
 
 ## LETZTER SICHERER POSITIVER REFERENZSTAND
 
@@ -112,8 +84,8 @@ M22 und M35 bleiben getrennte Reparaturen.
 
 ## OFFEN / NICHT BEHAUPTET
 
-- serverseitige `hardlock`-/`hardlock-base`-Abnahme des M22-Kandidaten noch offen;
-- kein neuer echter 7/7-Realtest nach M22;
+- serverseitige Required Checks des M26-Kandidaten noch offen;
+- kein neuer 7/7-Realtest;
 - kein Publish;
 - keine WordPress-Schreibaktion.
 
@@ -123,9 +95,3 @@ Unverändert:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`.
 
 Kein Auto-Publish.
-Veröffentlichung nur nach ausdrücklicher Nutzerfreigabe.
-
-## NEXT ACTION
-
-Nicht hier dupliziert.
-Ausschließlich `HOBBYRAUM.md` enthält die aktuelle NEXT ACTION.
