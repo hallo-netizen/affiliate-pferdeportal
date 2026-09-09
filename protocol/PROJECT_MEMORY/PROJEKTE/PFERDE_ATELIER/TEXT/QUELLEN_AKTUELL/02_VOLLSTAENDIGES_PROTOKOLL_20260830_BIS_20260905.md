@@ -1301,3 +1301,27 @@ RECOVERY_BASE_SHA:
 
 PASS/FAIL-Grenze:
 Serverseitige Required Checks des M22-Kandidaten noch offen. Kein Realtest-PASS behauptet. Kein Publish.
+
+
+### 09.09.2026 – M22 bestehende Hashkette nachgezogen
+
+Erster Serverlauf PR #201:
+- `hardlock` stoppte bei `INPUT_HASH_MISMATCH:0:control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json`;
+- Einordnung: kein neuer M22-Logikfehler, sondern bestehende authorized-input-Hashbindung.
+
+KISS-Nachzug:
+- H8-Boundary SHA256 → STEP107007 authorized_inputs;
+- neuer STEP107007 SHA256 → CURRENT_STATE execution_gate + rearm target;
+- neuer CURRENT_STATE SHA256 → START_HERE;
+- neuer H8 Git-Blob-SHA1 → CURRENT_STARTMASTER;
+- keine zusätzliche Logik.
+
+Aktueller Kandidaten-Head:
+`13d76a2b22b2794827f6a277f7d85ab1566e19d3`
+
+Exakte Hashes:
+- H8 Boundary SHA256 `5225203da6a61bb4eeeb77bae98689ee938387994c6a8513b15c72089a8bf53f`;
+- STEP107007 SHA256 `48e1d34d4c4c2d1763be1eeaf17f5c8d1f0fda34f65608b4097bc8e7172562ab`;
+- CURRENT_STATE SHA256 `03919ba816f0fbb8e91705a85cbaaae6f5b86189b65ff6d6ee01793af8dad9bf`.
+
+Kein Publish. M35 unverändert geparkt.
