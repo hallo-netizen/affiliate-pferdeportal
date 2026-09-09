@@ -252,6 +252,67 @@ Aktueller frischer Nulltest:
 - Stop nur am ersten echten BLOCKED/USER_ACTION_REQUIRED oder bei 7/7-Ende
 - kein Publish
 
+## KORREKTUR NACH AUTORITATIVER ORIGINALWEG-ÜBERGABE / 12-STAGE-CORRIDOR
+
+Frisch gegen die autoritativen TEXT-Quellen geprüft:
+- `CURRENT_STATE.md`
+- `HOBBYRAUM.md`
+- `04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md`
+- `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`
+- `TECHNICAL_CORRIDOR_MATRIX_20260907.md`
+- `PAUL_PIPELINE_AUDIT_20260906.md`
+
+### Harter Befund
+
+Der aktuelle frische Nulltest-Stop
+`BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`
+darf **nicht** als isolierter LanguageTool-Minifix behandelt werden.
+
+Grund:
+Der produktive 107007-Handoff verlangt 12 Stage-Proofs. Im realen
+`fachworkflow_proof_handoff.py` wird nur die Stage `ppm` selbst mechanisch durch einen echten Stage-spezifischen Executor ausgeführt. Die übrigen Stage-Proofs werden überwiegend generisch als Dateien/Hashes/PASS-Evidence validiert.
+
+Das erzeugt genau den bereits historisch dokumentierten K1/K3-Interpretationsspielraum.
+
+### Alternativ-Labor korrekt eingeordnet
+
+Der bisherige P40/P22-Ein-Artikel-PASS bleibt gültig für seine eigentliche Aussage:
+`prepare(no write) -> externe Signatur -> genau ein Draft -> Readback -> kein Publish`.
+
+Er ist aber **kein Beweis eines vollständigen frischen 12-Stage-Codex-Laufs**:
+- P22 benutzt die vorhandene PPM-Test-/Fixture-Umgebung (`fixture-builder.php`);
+- P40 prüft bei `stage_proofs` nur Vorhandensein/Anzahl 12, nicht die reale stage-spezifische Ausführung;
+- deshalb darf aus dem Labor-PASS keine Produktionsbindung aller 12 Stufen abgeleitet werden.
+
+### Zwei bereits bekannte Autoritätslücken bleiben auch für ACM relevant
+
+1. `CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`
+   - ACM hat bisher vorhandene Link-Validatoren inventarisiert;
+   - keine unveränderte deterministische NEW-Quelle gefunden, die die artikelbezogenen Linkbindungen ohne freie Worker-/Chatentscheidung erzeugt.
+
+2. `CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
+   - ACM hat den vorhandenen Rendered-DOM-/Style-Validator sauber identifiziert;
+   - dieser ist sinnvoll **nach** Draft/Readback;
+   - der reale bestehende Handoff verlangt `design_format` aber bereits als Teil der 12 Stage-Proofs **vor** Abschluss des Handoffs/realen Draftwegs;
+   - `design_format` darf nicht eigenmächtig in einen Source-PASS umdefiniert werden.
+
+### KISS-Folge
+
+- kein LT-Einzelfix;
+- geparkter `hobbyroom/languagetool-runtime-rebind-20260907` bleibt nur historische Beweisquelle;
+- kein neuer Executor;
+- kein neuer Handoff;
+- kein zweiter Controller;
+- keine neue Linklogik;
+- keine neue `design_format`-Bedeutung;
+- keine alten Artikel/Pläne als NEW-Produktionsquelle;
+- keine Änderung an Textmaschine/PPM/PSERC/PSTE/WordPress/Publish.
+
+Status für realen ACM-Nulltest:
+`ACM_REAL_STAGE_CORRIDOR_BLOCKED`
+
+Der erste sichtbare Stop ist LanguageTool; der **Root Cause darf aber nicht auf LanguageTool verengt werden**.
+
 ## HOBBYRAUM / NEXT ACTION
 
 HOBBYRAUM_STATUS: **AKTIV**
@@ -261,8 +322,15 @@ PRODUKTIONSADOPTION: **BLOCKED**
 
 Das ist kein Produktions-Bypass. Solange WP-01 ungelöst ist, gibt es keine Produktionsadoption.
 
-**NEXT ACTION – erster zulässiger Alternativ-Test:**
-ACM-REAL-01 upstream bis zum ersten echten Block prüfen.
+**NEXT ACTION – ausschließlich read-only, kein Produktfix:**
+
+Vor jeder weiteren Realintegration genau die bereits autoritativ offene Frage schließen:
+Existiert bereits eine unveränderte Fachworkflow-Quelle, die für NEW
+1. die artikelbezogenen internen Linkbindungen deterministisch erzeugt und
+2. die bestehende `design_format`-Evidence so definiert, dass sie ohne Umdeutung mit der realen Lifecycle-Reihenfolge vereinbar ist?
+
+Bis diese beiden Autoritäten belegt sind:
+`FIX_FORBIDDEN` für ACM-REAL-01; insbesondere kein LanguageTool-Einzelfix.
 
 Verbindlicher Einstieg:
 `offizieller Runtime-Start -> CURRENT_BOUND_ACTION_READY -> aktuelles gebundenes Hindernisstangen-Item -> bestehende FACHWORKFLOW_HANDOFF_REQUEST.json`
