@@ -10,6 +10,7 @@ from typing import Any, Mapping
 
 HERE = Path(__file__).resolve().parent
 BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1"
+LEGACY_BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1"
 AUTHORITATIVE_ORIGIN = "SINGLE_DOOR_BOOTSTRAP_ONLY"
 ROOM_TOKEN = "R_BOOT_001"
 RECEIPT_TOKEN = "P_BOOT_001"
@@ -75,11 +76,24 @@ def _binding_from_release(release: Mapping[str, Any]) -> Mapping[str, Any]:
     }
     if set(binding) != expected_keys:
         raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_FIELDS_INVALID")
+    if binding.get("contract") not in {BOOTSTRAP_BINDING_CONTRACT, LEGACY_BOOTSTRAP_BINDING_CONTRACT}:
+        raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_CONTRACT_INVALID")
     payload = dict(binding)
     declared = payload.pop("binding_sha256", None)
     if declared != stable_hash(payload):
         raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_HASH_INVALID")
     return binding
+
+def _binding_matches_current(actual: Mapping[str, Any], expected: Mapping[str, Any]) -> bool:
+    if actual.get("contract") == BOOTSTRAP_BINDING_CONTRACT:
+        return dict(actual) == dict(expected)
+    if actual.get("contract") == LEGACY_BOOTSTRAP_BINDING_CONTRACT:
+        identity_fields = (
+            "room_token", "receipt_token", "generation", "batch_sha256",
+            "source_snapshot_sha256", "source_manifest_sha256", "authoritative_origin",
+        )
+        return all(actual.get(field) == expected.get(field) for field in identity_fields)
+    return False
 
 def validate_package_provenance(repo: Path, package_path: Path) -> dict[str, Any]:
     repo = Path(repo).resolve()
@@ -92,7 +106,7 @@ def validate_package_provenance(repo: Path, package_path: Path) -> dict[str, Any
         raise ProvenanceBlocked("WORKFLOW_RELEASE_MISSING")
     actual = dict(_binding_from_release(release))
     expected = expected_binding(repo)
-    if actual != expected:
+    if not _binding_matches_current(actual, expected):
         raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT")
     return {
         "ok": True,
