@@ -1441,3 +1441,47 @@ Folge:
 - im Realtest keine Reparatur;
 - Stop nur bei erstem echten BLOCKED/USER_ACTION_REQUIRED oder bei 7/7 + 107008 PASS;
 - kein Auto-Publish / keine WordPress-Schreibaktion.
+
+
+### 09.09.2026 – echter 7/7-Realtest nach M01–M35 / neuer M36
+
+Start:
+- main/Dispatcher exakt `05f5d00ec924e108d6700f39d22d9ec1d47318a6`;
+- keine Reparatur im Lauf.
+
+PASS:
+- `CODEX_CLOUD_ENTRANCE_PASS`;
+- `CODEX_PRODUCTION_PREFLIGHT_PASS`;
+- `OFFICIAL_RUNTIME_ENTRY_PASS`.
+
+Erster echter Blocker:
+`H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT`
+
+Letzte erfolgreiche Stelle:
+`OFFICIAL_RUNTIME_ENTRY_PASS`; `codex_current_action.py current` blockierte vor `CURRENT_BOUND_ACTION_READY`.
+
+Terminal:
+- `STEP_TERMINAL_NONPASS`;
+- `state_advanced=false`;
+- kein Publish / kein WordPress-Write.
+
+Root Cause:
+- Runtime-State generation 1 und Batch-/Snapshot-/Manifest-Hashes aktuell;
+- persistiertes `H8_BOOTSTRAP_PRODUCTION_PACKAGE.json` und `PRODUCTION_PACKAGE.json` identisch;
+- beide tragen den alten Vertrag `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`;
+- aktueller M22-Provenance-Guard erwartet `PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1`;
+- alle übrigen Provenienzfelder stimmen;
+- incoming-Quelle hat keine H8-Bindung;
+- im Repo existiert kein produktiver Aufrufer von `execute_bound_bootstrap_action` / kein gebundener Producer für einen einfachen Neuaufbau.
+
+Entscheidung:
+- kein Paket mutieren oder neu signieren;
+- kein Reset in einen nicht ausführbaren Bootstrap-Pfad;
+- neuer Fehler M36;
+- zuerst ausführbare History Authority;
+- danach eng begrenzte Legacy-Lesekompatibilität im bestehenden Provenance-Guard, mit fail-closed Negativfällen.
+
+History-Kandidat:
+`hobbyroom/m36-history-authority-20260909`
+Head `2465052149974f52cfb84797cf369cea430c23cc`
+Scope: bestehende Matrix + bestehender Runner.
