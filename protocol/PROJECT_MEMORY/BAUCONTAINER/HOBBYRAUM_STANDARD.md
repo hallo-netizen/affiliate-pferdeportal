@@ -318,3 +318,29 @@ Bei Wiederherstellung eines älteren Commits, PRs oder Dateistands gilt campuswe
 4. In diesem Fall **einmal den ganzen betroffenen Korridor prüfen**, statt Fehler für Fehler seriell zu flicken.
 5. Daraus keine neue Gate-/Runner-/Sicherungsarchitektur bauen. KISS bleibt verbindlich.
 
+
+
+## 2026-09-09 – Autoritative Evidence statt Worker-Selbstbeglaubigung
+
+Allgemeingültig für technische Mehrstufen-Workflows:
+
+Ein Stage-Name oder eine vom Worker selbst geschriebene Proof-Datei ist **kein** Ausführungsbeweis.
+
+Für jede freigaberelevante Stufe muss vor einem Produktfix eindeutig feststehen:
+1. vorhandene autoritative Ausführung bzw. vorhandener Validator;
+2. exakter Input-Artefaktzustand;
+3. exakter Output/Evidence-Zustand;
+4. realer nächster Consumer;
+5. mechanische Identitäts-/Hashbindung;
+6. keine Fach-/Qualitätsentscheidung durch Chat oder Worker.
+
+Verboten:
+- `status=PASS` / `execution_performed=true` als alleinige Freigabe;
+- einen fehlenden Prüfer oder eine unklare Stage-Bedeutung selbst definieren;
+- historische Artefakte als aktuelle Produktionsquelle verwenden;
+- bei wiederkehrender Bindungsklasse Stufe für Stufe Minifixes bauen.
+
+Wenn eine benötigte bestehende Autorität nicht gefunden oder die Stage-Semantik nicht eindeutig belegt ist:
+`FIX_FORBIDDEN`.
+
+Das ist eine technische Evidenzregel, keine neue Fachlogik.
