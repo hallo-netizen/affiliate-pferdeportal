@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
-STAND: 2026-09-07
-STATUS: AKTIV / 0.2.4 TECHNISCH PASS / NUTZER-LIVE-VERIFY OFFEN
+STAND: 2026-09-09
+STATUS: AKTIV / 0.8.1 LOKAL HART PASS / WORDPRESS-LIVE-RETEST OFFEN
 
 ## AUTORITÄT
 
@@ -10,77 +10,64 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - aktuelle Arbeit: `HOBBYRAUM.md`
 - Fehlerdetails: über `FEHLERREGISTER.md` → `FEHLERQUELLEN.md`
 - Ziel: über `ZIELVERTRAEGE/REGISTER.md` → `ZIELVERTRAG_V1.md`
-- Warum: `AENDERUNGSREGISTER.md`
-- Ausführungsprotokoll: `PROTOKOLL_20260907.md`
+- Warum/Prüfbeleg: `AKTENSCHRANK/02_V081_HARD_LOCAL_RELEASE_RECEIPT.md`
 
-## AKTUELLER STAND
+## AKTUELLER KANDIDAT
 
-V1 läuft eigenständig und ohne STARTMASTER/TEXT-Laufzeitabhängigkeit:
+`universal-product-comparison-0.8.1-prototype.zip`
 
-`Produktwissen -> Vergleich -> gebundenes Dossier -> Zero-Freedom-Renderer -> Validator -> WordPress-DRAFT -> Link-/Grafikfinalisierung -> finaler Draft-Hash`
+SHA-256:
+`3ae3fe30365f767ea1e225554c7e986d70c6225d79884eeb796beadf1f6cb902`
 
-Affiliate = Commerce-Leseschicht.  
-SEO = optionale read-only Signale.
+Aktuelle Stufe:
+`Produktwissen -> Vergleichbarkeit -> bidirektionales SEO -> aktuelle Readiness/Kannibalisierung -> Dossier -> unabhängiger Abschluss-Audit`
 
-Produktwissen bleibt:
-`0.1.0-prototype`.
+Writer/Draft/Publish sind in dieser 0.8.1-Prüfstufe nicht aktiv.
 
-Aktueller Produktvergleichs-Kandidat:
-`0.2.4-prototype`.
+## HARTER LOKALBELEG
 
-## 0.2.4 – TECHNISCHER BELEG
+Finale Fresh-ZIP:
+- 19/19 Positiv-/Negativtests PASS;
+- PHP-Lint 39/39 PASS;
+- Source ↔ finale ZIP 50/50 byte-inhaltlich identisch;
+- Report-Hashbindung 49/49 PASS;
+- ZIP-Wurzel/Pfade/Dubletten PASS;
+- echte Product-Knowledge-0.5.0-Abhängigkeit SHA PASS;
+- echter PSTE-0.56.25-Installer SHA PASS;
+- echte PSTE-Themenmap / False-Pair-Guard PASS;
+- Kosten- und API-Vertrag gegen PSTE PASS;
+- Mutationstests PASS.
 
-Plugin-Code:
-- Menü-Hook-Fix: `3295653c19aed3a4af47aad73dc2226e0d7a9b78`;
-- Bootstrap/Version: `47666ef1a0f1dbe36c5c8744382b52e178d734e9`.
+Zusätzliche unabhängige Gegenbeweise:
+- Reaktivierung des echten alten Draft-Hooks -> Test ROT;
+- Entfernen des neuen Abschluss-Audit-Guards -> Test ROT.
 
-Realtest:
-Run `34154550626` → PASS.
+## GEFUNDENER UND BEHOBENER FEHLER
 
-Tatsächlich ausgeführt:
-- saubere 0.2.4-ZIP gebaut;
-- WordPress installiert und Plugins aktiviert;
-- echter WordPress-HTTP-Server;
-- echter Admin-Login;
-- echte gerenderte `/wp-admin/`-Sidebar;
-- Top-Level-Menü `Produktvergleich` sichtbar;
-- echte Menüseite geladen;
-- `PV-REG-001`-Draftweg weiterhin PASS;
-- kein Publish.
+0.8.0 konnte in einem künstlich erzwungenen Negativfall PASS melden, obwohl die Dossier-Materialisierung Erfolg behauptete, aber im unabhängigen Abschluss-Audit kein zugehöriger Dossier-Receipt vorhanden war.
 
-Bereinigter Branch vor Abschluss-Nachholprüfung:
-`d9460e19f30f9bbaff5e9d5c63e134f8d9a38333`;
-Hardlock Run `34154765043` → PASS.
+0.8.1 blockiert jetzt fail-closed:
+- Rückgabemenge != Dossierliste -> `UPC_DOSSIER_MATERIALIZATION_COUNT_MISMATCH`;
+- gemeldetes Dossier fehlt im Abschluss-Audit -> `UPC_DOSSIER_FINAL_AUDIT_RECEIPT_MISSING`.
 
-## NUTZER-LIVE-STATUS
+## GESAMTWORKFLOW-GRENZEN
 
-Belegt:
-Beim vorherigen 0.2.3-Schritt war auf der echten Pferde-Atelier-Seite **kein** Hauptmenüpunkt `Produktvergleich` sichtbar.
-
-Noch **nicht** belegt:
-- 0.2.4 auf der echten Nutzerseite installiert;
-- Hauptmenü dort sichtbar;
-- `PV-REG-001` dort als Draft erzeugt;
-- Draft fachlich/visuell geprüft.
-
-Daher:
-**kein LIVE-PASS.**
-
-## HARD RULES
-
-- Writer/Renderer hat null freie Autorität.
-- gleiche gebundene Eingaben + gleiche Versionen = identischer Output.
-- fehlende/abweichende Bindung = BLOCKED.
-- Produktvergleich = 2–4 konkrete konkurrierende Produkte aus mindestens zwei Herstellern.
-- Variantenvergleich = Varianten desselben Basismodells.
-- keine erfundenen Fakten, Ranglisten, Sterne oder pauschalen Testsieger.
-- Quellenkonflikte/Lücken bleiben sichtbar.
-- Affiliate darf keine fachliche Auswahl umschreiben.
-- kein ähnliches Ersatzprodukt bei fehlendem Exact Match.
-- interne Links nur gebunden.
-- neutrale deterministische Grafik.
+Bestätigt:
+- keine freie Produkterfindung;
+- Same-Brand-/Profil-Drift fail-closed;
+- nur A oder nur B mit Nachfrage reicht nicht;
+- 0 Nachfrage reicht nicht;
+- direkte A-vs-B-Nachfrage oder Nachfrage beider exakten Produkte ist gebunden zulässig;
+- Provider PARTIAL bleibt PARTIAL;
+- veraltete SEO-Signale werden nicht als aktuelle Wahrheit verwendet;
+- Dossier muss im unabhängigen Abschluss-Audit real gebunden vorhanden sein;
+- Dossier-Export bleibt read-only;
+- Affiliate bleibt Exact-Match-Leseschicht;
+- aktiver 0.8.1-Workflow besitzt keinen WordPress-Post-/Publish-Schreibweg;
 - kein Auto-Publish.
 
-## NEXT ACTION
+## LIVE-STATUS
 
-Ausschließlich `HOBBYRAUM.md`.
+Noch kein WordPress-LIVE-PASS für 0.8.1.
+
+NEXT ACTION ausschließlich `HOBBYRAUM.md`.
