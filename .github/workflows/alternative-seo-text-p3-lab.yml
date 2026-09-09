@@ -288,3 +288,10 @@ jobs:
         run: |
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p46_prewrite_helper_inventory.py
+
+
+      - name: P47 existing handoff public prewrite execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p47_existing_handoff_public_prewrite.py
