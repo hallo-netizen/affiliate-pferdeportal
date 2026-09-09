@@ -27,12 +27,30 @@ Die produktive STARTMASTER-Fehlermatrix gehört zur parallelen Reparaturroute un
 **ACM-PROTOTYP: PASS**
 **PRODUKTIONSADOPTION: BLOCKED**
 
-Letzter vollständig getesteter funktionaler ACM-Head:
-`c6f38f0c1ad1c992f3738d83c342dfd9a5637272`
+Aktueller ACM-Kandidaten-Head:
+`573cfa2fdf472d338586f55cae2e9b7257f40413`
 
-Ausgeführte Tests auf exakt diesem funktionalen Head:
-- Alternative SEO Text P3 Isolated Lab – Run `34346471176` – SUCCESS – 61/61 Schritte abgeschlossen
-- Alternative SEO Text P8 Signer Isolation Lab – Run `34346471175` – SUCCESS
+Aktueller Teststatus auf exakt diesem Head:
+- externer ACM Machine Hardlock: PASS
+- P0–P25: PASS
+- P26 `map research fact-pack chain`: **BLOCKED**
+- exakter Blocker: `PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING`
+- alle nachfolgenden P3-Schritte: SKIPPED
+- Alternative SEO Text P3 Isolated Lab – Run `34354268196` – FAILURE genau bei P26
+- Alternative SEO Text P8 Signer Isolation Lab – Run `34354267927` – SUCCESS
+
+Letzter vollständig getesteter sicherer ACM-Head:
+`1c3f7354ceac8a301bfe0212488b20314fccac57`
+
+Ausgeführte Tests auf exakt diesem sicheren Head:
+- Alternative SEO Text P3 Isolated Lab – Run `34352651422` – SUCCESS – 62/62 Schritte abgeschlossen
+- Alternative SEO Text P8 Signer Isolation Lab – Run `34352651337` – SUCCESS
+
+Zusätzlicher sicherer Seam-Beweis auf Head `c2116ccb9759ef7237894f0ef8a696aa9f3b0295`:
+- direkter ACM-Ausgang -> vorhandene externe Signaturgrenze: POSITIV PASS
+- Manipulation nach Signatur: NEGATIV BLOCKED
+- kompletter P3-Lauf `34352023627`: SUCCESS – 62/62
+- P8 `34352023599`: SUCCESS
 
 Frisch geprüfter produktiver main:
 `93ba987c56f7b08ffba009210e3012c036fec18d`
@@ -47,6 +65,40 @@ Parallelroute:
 - ACM hat diese Wahrheit nicht verändert
 - im ACM-Lauf wurden die ausgewählten relevanten historischen Seam-Fälle bis M36 gegen den aktuellen main wiederverwendet und bestanden
 - kein Merge, kein Schreibzugriff auf main, kein CURRENT_STATE-Update
+
+## AKTUELLER ERSTER OFFENER ACM-TESTBLOCKER
+
+`ACM-P26-TESTCOVERAGE-01`
+
+Befund:
+Der unveränderte PSERC besitzt den öffentlichen, schreibfreien
+`PSERC_PPM_Intake_Bridge::prepare()`-Seam.
+
+Read-only belegt:
+- bindet Exact-Five-Metadaten an kanonischen Plan-Slot / canonical_article_id;
+- prüft Kategorie, Artikeltyp, Titel und Target Keyword gegen das Produktionspaket;
+- erzeugt/ändert keinen Artikelinhalt und kein Design;
+- `write_attempted_by_bridge=false`;
+- `publish_allowed=false`.
+
+Der aktuelle Kandidat übernimmt diesen Seam **noch nicht**.
+
+Warum BLOCKED:
+Im unveränderten PSERC-Paket wurde trotz direkter und Supervisor-basierter Suche kein eigenständiger ausführbarer Originaltest gefunden, der diesen `prepare()`-Seam positiv/negativ als Übernahmepunkt beweist.
+
+Der P26-Probe stoppt deshalb absichtlich fail-closed mit:
+`PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING`.
+
+Wichtig:
+- kein PSERC-Funktionsfehler bewiesen;
+- kein Produktionsfehler neu angelegt;
+- kein alter Handoff übernommen;
+- keine neue Architektur;
+- kein neuer Runner/Controller/Handoff/Executor;
+- keine Änderung außerhalb ACM;
+- keine Änderung an PPM/PSERC/PSTE/Textmaschine/WordPress/main.
+
+Die früher dokumentierte 12-Stage-/107007-Handoff-Problematik bleibt **historische Integrationsbeweisquelle**, ist aber nicht mehr die aktuelle ACM-NEXT-ACTION.
 
 ## ZIELBILD – EINFACH
 
@@ -454,32 +506,25 @@ PRODUKTIONSADOPTION: **BLOCKED**
 
 Das ist kein Produktions-Bypass. Solange WP-01 ungelöst ist, gibt es keine Produktionsadoption.
 
-**NEXT ACTION:**
+**NEXT ACTION: P26-TESTCOVERAGE-01**
 
-Keine technische Reparatur zulässig.
+Keine Produktionsreparatur und keine Integrationsübernahme.
 
-Die read-only Suche ist abgeschlossen und hat beide fehlenden Autoritäten bestätigt.
-Unter den aktuellen Hard Rules bleibt die reale ACM-Integration BLOCKED, bis eine bereits bestehende autoritative Quelle nachgewiesen wird oder eine spätere ausdrücklich freigegebene Ziel-/Schnittstellenentscheidung erfolgt.
+Im nächsten Chat zuerst `00_ROUTE_BOUNDARY.md` + diese Datei frisch lesen.
 
-Verbindlicher Einstieg:
-`offizieller Runtime-Start -> CURRENT_BOUND_ACTION_READY -> aktuelles gebundenes Hindernisstangen-Item -> bestehende FACHWORKFLOW_HANDOFF_REQUEST.json`
+Dann ausschließlich die eine offene Beweisfrage:
+Kann der unveränderte öffentliche `PSERC_PPM_Intake_Bridge::prepare()`-Seam innerhalb des **bestehenden P26-Probes** mit einem kleinen isolierten Positiv-/Negativtest gegen echte vorhandene PSERC-Verträge/Fixtures geprüft werden, ohne neue Test-/Workflowkomponente, neue Semantik oder freie Auswahl einzuführen?
 
-KISS-Arbeitsauftrag:
-- nur den bereits vorhandenen Chat/Codex-/Runtime-Einstieg benutzen
-- genau das gebundene aktuelle Item verwenden
-- reale Fachprodukte/Fact-Pack über den bestehenden Fachworkflow erzeugen
-- bestehendes 16-Feld-Handoff unverändert verwenden
-- danach nur die bereits bewiesene unveränderte ACM-Laborkette prüfen
-- beim ersten echten Block STOP
-- kein neuer Handoff
-- kein neuer Controller
-- keine neue PPM-API
-- kein WordPress-Runtime-Handler
-- kein WordPress-Write
-- keine Schnittstellenänderung
-- kein Auto-Publish
+Nur wenn das PRE-CHANGE-ZWANGSGATE `4x NEIN + SYSTEMWIRKUNG BELEGT` ergibt:
+- exakt den bestehenden P26-Probe erweitern;
+- POSITIV: gültige gebundene Eingaben -> PREPARED / no write / no publish;
+- NEGATIV: Identitäts-/Plan-Slot-/Titel-/Keyword-Abweichung -> BLOCKED;
+- danach kompletter P3-Gesamtworkflow;
+- danach P8 Signer-Isolation;
+- erst bei Gesamt-PASS darf der Seam als ACM-Übernahmekandidat bewertet werden.
 
-Wenn der reale Lauf an LanguageTool oder einer anderen vorhandenen Pflichtabhängigkeit blockiert, ist genau dieser erste reale Block der nächste Befund.
+Wenn dafür neue Fachsemantik, neue Produktionsdatenlogik, neuer Runner/Adapter/Handoff oder künstlich erfundene Produktionswahrheit nötig wäre:
+**STOP / BLOCKED.**
 
 ## VERBINDLICHER ARBEITSWEG
 
@@ -533,6 +578,29 @@ PASS:
 - Parallelroute bleibt separat
 - kein Archiv als Current
 - kein Auto-Publish
+
+## ABSCHLUSS-/NACHHOLPRÜFUNG DIESES CHATS – 09.09.2026
+
+Aktueller Head bei Abschluss:
+`573cfa2fdf472d338586f55cae2e9b7257f40413`
+
+Letzter sicherer Gesamt-PASS:
+`1c3f7354ceac8a301bfe0212488b20314fccac57`
+
+Neue dauerhafte Entscheidungen/Befunde:
+- Inspiration aus Altbestand erlaubt; ungefilterte Workflowübernahme verboten.
+- externer maschinenfester Hardlock liegt im separaten Lab-Basisbranch; Kandidat kann ihn nicht mitändern.
+- direkte ACM-Ausgabe passt ohne neue Zwischenarchitektur in die bestehende externe Signaturgrenze; positiv/negativ und im Gesamtworkflow bewiesen.
+- öffentlicher PSERC-`prepare()`-Seam ist fachlich interessant und schreibfrei, wird aber wegen fehlender bestehender Testabdeckung **noch nicht übernommen**.
+- aktueller erster offener Testblocker ist ausschließlich `ACM-P26-TESTCOVERAGE-01`.
+
+Nicht ausgeführt:
+- kein positiver/negativer eigener `PSERC_PPM_Intake_Bridge::prepare()`-Adoptionstest auf aktuellem Head;
+- kein vollständiger P3 nach P26 auf aktuellem Head;
+- kein frischer 1-Artikel-Produktionslauf;
+- kein frischer 7/7-Nulltest;
+- kein WordPress-Produktivwrite;
+- kein Publish.
 
 ## CAMPUS-/ARCHITEKTURFOLGE
 
