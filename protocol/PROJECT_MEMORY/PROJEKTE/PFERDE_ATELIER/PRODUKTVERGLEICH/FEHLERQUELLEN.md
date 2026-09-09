@@ -5,7 +5,7 @@ ROLLE: AUTORITATIVE FEHLERQUELLE DIESES BÜROS
 
 ## PV-LIVE-001 – FALSCHER GESAMT-PASS BEI 0 GÜLTIGEN VERGLEICHEN
 
-STATUS: FIX-KANDIDAT 0.7.1 LOCAL + FRESH-ZIP PASS / WORDPRESS-RETEST OFFEN
+STATUS: CLOSED / WORDPRESS-LIVE-PASS 0.7.1 / 2026-09-09
 
 Realer WordPress-Befund 2026-09-09 mit Universal Product Comparison 0.7.0-prototype:
 - Regendecken: 8 Kandidaten;
@@ -74,7 +74,7 @@ Same-Brand und fachlich nicht vergleichbare Produkte bleiben ausgeschlossen.
 
 ## PV-LIVE-003 – SEO-SIGNALE OHNE ALTERUNG / CURRENT-READINESS-REBINDUNG
 
-STATUS: AKTIV / 0.8.0-KORREKTUR IM HOBBYRAUM
+STATUS: FIX-KANDIDAT 0.8.0 SOURCE+FRESH-ZIP PASS / WORDPRESS-LIVERETEST OFFEN
 
 Rootcause:
 0.7.x speicherte normalisierte Provider-Signale ohne verbindliche Ablaufzeit. Ein negativer Altbefund konnte dadurch dauerhaft terminal bleiben. Positive Signale waren zudem nicht zwingend an den aktuellen WordPress-Inventar-/Strukturzustand gebunden.
@@ -110,3 +110,15 @@ SHA-256:
 `c9eec5b4c7faafa23af6bd5c554d85c2c4d1763e4c618fbd49c3e04dd45abb66`.
 
 Fehler bleiben bis WordPress-Retest offen.
+
+
+### PV-LIVE-001 – Live-Abschluss 2026-09-09
+
+0.7.1 wurde real in WordPress geprüft.
+Belegt im Screenshot:
+- `NO_ELIGIBLE_COMPARISONS` statt grünem False-PASS;
+- 0 SEO-PASS / 8 blockiert / 0 Dossiers;
+- Warning-Darstellung;
+- Kostenfeld eindeutig als Schätzung eines jetzt neu gestarteten Laufs.
+
+PV-LIVE-001 ist damit geschlossen.
