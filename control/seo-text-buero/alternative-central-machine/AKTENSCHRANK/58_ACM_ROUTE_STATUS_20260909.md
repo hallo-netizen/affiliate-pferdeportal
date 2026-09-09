@@ -27,11 +27,11 @@ Produktive Fehlermatrix bleibt separat:
 **PRODUKTIONSADOPTION: BLOCKED**
 
 Aktueller vollständig getesteter ACM-Head:
-`0ddda8ab03101e8a9ac6297e99455b9de0d3f6ce`
+`70df4bc29a604dabcc34874eed93d1a52bc4ddcf`
 
 Harte Gesamtprüfung auf diesem Stand:
-- Alternative SEO Text P3 Isolated Lab – Run `34380362468` – SUCCESS
-- Alternative SEO Text P8 Signer Isolation Lab – Run `34380362404` – SUCCESS
+- Alternative SEO Text P3 Isolated Lab – Run `34381992239` – SUCCESS
+- Alternative SEO Text P8 Signer Isolation Lab – Run `34381992313` – SUCCESS
 - ACM Machine Hardlock – PASS
 - P0–P47 – PASS
 - ACM first full one-article lab test – PASS
@@ -253,12 +253,15 @@ Die zwei aktuell autoritativ offenen Bedeutungs-/Bindungspunkte sind:
    - für NEW fehlt im aktuellen gebundenen Pfad die deterministische Quelle, die die drei konkreten Ziele auswählt;
    - Worker/Chat darf diese Auswahl nicht frei erfinden.
 
-2. `CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
-   - Source-/Formatregeln existieren bereits in PPM;
-   - ein realer Rendered-DOM-Validator existiert ebenfalls;
-   - echter DOM-Zustand entsteht erst nach einem WordPress-Draft;
-   - deshalb darf kein `design_format`-PASS vor diesem Zustand behauptet werden;
-   - die Lifecycle-Bindung muss an den vorhandenen realen Prüfer erfolgen, ohne neue Designregel und ohne menschliche Sichtprüfung als technische Autorität.
+2. `design_format` – **ACM-BINDUNG HART PASS**
+   - vorhandener echter Prüfer: `PPM679_Rendered_DOM_Validator`;
+   - Lifecycle fest: `AFTER_WORDPRESS_DRAFT_READBACK_RENDER`;
+   - der Prüfer verlangt u. a. `post_id`, `readback_content_hash`, Desktop- und Mobile-Evidence;
+   - ein `design_format`-PASS vor WordPress ist damit technisch unzulässig;
+   - vorhandene Positivtests PASS;
+   - DOM-/Viewport-/Heading-/Readback-Mutationen BLOCKED;
+   - menschliche Sichtprüfung ist keine technische PASS-Autorität;
+   - keine Design-/Inhaltsregel geändert.
 
 Research ist nach autoritativem TEXT-Abgleich **nicht der erste aktuelle Corridor-Blocker**.
 
@@ -296,20 +299,28 @@ Diese Punkte werden nicht durch neue Architektur verdeckt.
 
 ## NEXT ACTION
 
-Nur die zwei autoritativ offenen Bindungen bearbeiten, in dieser Reihenfolge:
+**Einziger fachlicher ACM-Corridor-Blocker: NEW-Linkbindung.**
 
-1. `design_format`:
-   vorhandenen deterministischen Rendered-DOM-Prüfer an den Zustand binden, an dem realer WordPress-Draft/Readback vorliegt.
-   Keine menschliche Sichtprüfung als Gate.
-   Kein neuer Designprüfer.
-   Positiv/negativ + kompletter P3/P8-Gegencheck.
+Vorhanden und unverändert:
+- exakt drei Rollen: `parent_category`, `semantic_related`, `further_information`;
+- PPM prüft Anzahl, Rolle, href/Anchor, Abschnitt, aktives Ziel, Registry und Hash fail-closed.
 
-2. `internal_links`:
-   keine neue Linklogik erfinden.
-   Entweder vorhandene deterministische NEW-Quelle finden/binden oder BLOCKED.
-   Chat/Worker darf konkrete Linkziele nicht frei wählen.
+Fehlt:
+- eine autoritative deterministische Quelle, die für einen NEW-Artikel die drei konkreten Ziele vor dem Worker fest bindet.
 
-Die Enddatei-/Endstempel-/WordPress-Preimportstrecke wird nicht erneut umgebaut; sie ist auf 1/3/25/1000 hart bewiesen.
+Verboten:
+- Chat/Worker frei wählen lassen;
+- alte Linklisten kopieren;
+- G9-Spezial-Snapshot generalisieren;
+- neue semantische Linkregel erfinden.
+
+KISS-Ziel:
+Die drei bereits bestehenden Linkentscheidungen müssen **vor Texterstellung als gebundene Eingabe** vorliegen. Erst dann darf der Textworker sie nur einbauen; PPM prüft danach exakt diese Bindung.
+
+Wenn keine bestehende upstream Quelle dafür vorhanden ist, braucht es eine ausdrückliche Zielvertragsentscheidung, **wo** diese bestehende Linkentscheidung künftig autoritativ erzeugt wird. Ohne diese Entscheidung bleibt BLOCKED.
+
+Separat offen, aber nicht durch diese ACM-Änderung verursacht:
+- repository-weites `Pferde Atelier Immutable Base Hardlock` ist auf dem ACM-Branch weiterhin rot, bereits auf älteren ACM-Heads; ACM-spezifischer Machine-Hardlock/P3 ist grün. Vor Merge/Produktionsadoption muss dieser Branch/Basis-Konflikt sauber geklärt werden.
 
 ## VERBINDLICHER ARBEITSWEG
 
