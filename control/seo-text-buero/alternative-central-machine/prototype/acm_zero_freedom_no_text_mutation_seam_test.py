@@ -262,3 +262,5 @@ def main():
 
 if __name__=="__main__":
     raise SystemExit(main())
+
+# workflow-trigger: zero-freedom-seam-v1
