@@ -56,3 +56,9 @@ Jeder PASS benötigt Evidence unter `release/affiliate-zentrale/evidence/` mit E
 Vor Freigabe muss `python3 control/release-governance/release_guard.py release-check` PASS liefern.
 
 Wenn ein Gate FAIL ist, lautet der Zustand **FIX_FIRST_FAILED_GATE**. Wenn alle Pflichtgates PASS sind, lautet der nächste Schritt **RELEASE_CHECK**.
+
+## Fach-Evidence-Hardlock für Feed-/Providerdaten
+
+- **Deklarierter Quellen-/Feed-Scope ist niemals Fach-Evidence.** Werte wie `portal_filtered`, `FeedScope=Pferdebedarf`, Providerlabel oder manuelle Scope-Bestätigung dürfen den Transport/Source-Gate freigeben, aber niemals selbst beweisen, dass eine einzelne Produktzeile fachlich ins Pferdeportal gehört.
+- Automatische Fachklassifikation muss auf realen Zeilenfakten beruhen: Produkttitel, reale Kategorie/Produkttyp-/Merkmalsdaten und andere tatsächlich vom Anbieter gelieferte Produktinformationen.
+- Ein synthetischer Scope darf keine generische Produktphrase in einen Pferde-Treffer verwandeln. NEGATIV-Regressionen müssen diesen Gegenfall bei neuen Provider-/Feedwegen binden.
