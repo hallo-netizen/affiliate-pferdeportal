@@ -190,6 +190,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_factpack_plan_schema_probe.py
 
+      - name: ACM existing execution sources for all handoff stages
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_existing_stage_execution_map.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
