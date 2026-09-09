@@ -128,47 +128,11 @@ if not inner.is_file() or inner.stat().st_size != INNER_SIZE or sha256(inner) !=
         raise SystemExit("LANGUAGETOOL_INNER_ZIP_HASH_MISMATCH")
     tmp.replace(inner)
 
-# Rebuild the historical Bestand-43 transport byte-for-byte from the exact
-# inner archive. Its final SHA proves the old outer provenance without storing
-# a 258 MB binary in the repository.
-outer = ENV / "ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip"
-base = "ARBEITSMASTER_0043_NEU_PRODUKTIONSMASCHINE_PFERDEPORTAL_REVISION_8_REC_03E_COMPLETE_TYPE_DIAGNOSIS_CHALLENGE_NEXT_FULL_CURRENT_STATE_2026-07-22/"
-readme = "LanguageTool 6.8 – unveränderte Offline-Abhängigkeit. Nicht als Plugin installieren.\n".encode("utf-8")
-manifest = (
-    '{\n'
-    '  "contract": "MASTER_0043_PART2_MANIFEST_V1",\n'
-    '  "language_tool_sha256": "' + INNER_SHA + '",\n'
-    '  "language_tool_size": 258510816,\n'
-    '  "status": "UNCHANGED_DEPENDENCY"\n'
-    '}\n'
-).encode("utf-8")
-entries = [
-    (base, True, None),
-    (base + "90_DEPENDENCIES/", True, None),
-    (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/", True, None),
-    (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/LanguageTool-6.8.zip", False, inner),
-    (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/README.txt", False, readme),
-    (base + "MASTER_0043_TEIL_2_MANIFEST_SHA256.json", False, manifest),
-]
-with zipfile.ZipFile(outer, "w") as zf:
-    for name, is_dir, payload in entries:
-        zi = zipfile.ZipInfo(name, (2026, 7, 22, 19, 0, 14))
-        zi.create_system = 3
-        zi.create_version = 20
-        zi.extract_version = 20
-        zi.flag_bits = 0
-        zi.internal_attr = 0
-        zi.external_attr = 1106051088 if is_dir else 2175008768
-        zi.compress_type = zipfile.ZIP_STORED if is_dir else zipfile.ZIP_DEFLATED
-        if is_dir:
-            zf.writestr(zi, b"")
-        elif isinstance(payload, bytes):
-            zf.writestr(zi, payload)
-        else:
-            with zf.open(zi, "w") as dst, Path(payload).open("rb") as src:
-                shutil.copyfileobj(src, dst, 1024 * 1024)
-if sha256(outer) != OUTER_SHA:
-    raise SystemExit("LANGUAGETOOL_OUTER_PROVENANCE_HASH_MISMATCH")
+# Preserve the historical Bestand-43 provenance as fixed metadata only.
+# The 258 MB outer transport is not rebuilt on every Codex start. The current
+# preflight binds its exact SHA while the actual executable dependency remains
+# independently bound by inner ZIP, JAR, manifest, version and real execution.
+outer_ref = "ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip"
 
 runtime = ENV / "languagetool-runtime"
 if runtime.exists():
@@ -197,7 +161,7 @@ proof = {
     "status": "LANGUAGETOOL_RUNTIME_READY",
     "engine": ENGINE,
     "source_url": ASSET_URL,
-    "outer_dependency_ref": str(outer),
+    "outer_dependency_ref": outer_ref,
     "outer_dependency_sha256": OUTER_SHA,
     "inner_dependency_cache_ref": str(inner),
     "inner_dependency_sha256": INNER_SHA,
