@@ -156,7 +156,7 @@ $rehash=function(array $b): array {
     return $b;
 };
 $blocked=function($r): bool {
-    return is_array($r)&&empty($r['ok'])&&str_starts_with((string)($r['status']??''),'PSERC_BRIDGE_');
+    return is_array($r)&&empty($r['ok'])&&((string)($r['status']??'')==='PSERC_PPM_INTAKE_BRIDGE_BLOCKED');
 };
 
 $positive=PSERC_PPM_Intake_Bridge::prepare($batch,$productionPackage,$snapshot);
