@@ -351,3 +351,33 @@ wenn private Helper kopiert/reflektiert, neue PPM-API, zweiter Handoff, zweites 
 Kein Produktions-`fertig`.
 Kein Merge.
 Kein Publish.
+
+
+## 17. ZIELVERTRAGS-KOMPATIBILITÄT / PRODUKTIONSÜBERNAHME
+
+Bei der finalen frischen Prüfung der autoritativen Zielhauptquelle wurde eine relevante Abgrenzung festgestellt:
+
+Aktiver Zielvertrag `ZV-TEXT-001` sagt:
+- innerhalb der Produktion bis einschließlich 107007 keine kryptografische Worker-/Raumsignatur;
+- kryptografische Versiegelung erst nach abgeschlossener Produktion / ab 107008-Finalisierung;
+- bestehende externe PSERC-/ENDSTEMPEL-/WordPress-Sicherheitsstrecke bleibt bis zu einer separaten belegten Vereinfachungsprüfung unverändert.
+
+Die Alternativroute hat separat und isoliert genau eine solche Vereinfachung technisch geprüft und als Prototyp bewiesen:
+`prepare(no write) -> externe Signatur -> verifizierter Payload -> Draft-Write`.
+
+Das ist jedoch **noch nicht produktionsautoritativ übernommen**.
+
+Daher gilt strikt:
+
+- offizieller Zielvertrag: UNVERÄNDERT;
+- Alternativprototyp: GO als isolierter technischer Kandidat;
+- Merge/Produktionsübernahme: BLOCKED;
+- vor jeder späteren Übernahme muss der Nutzer die neue Signaturposition ausdrücklich als Zieländerung freigeben;
+- danach muss der Zielvertrag sauber versioniert/aktualisiert werden;
+- bis dahin darf die Alternativroute die bestehende 107008-Signier-/ENDSTEMPEL-Strecke auf main nicht ersetzen.
+
+Status:
+`PRODUCTION_ADOPTION_BLOCKED_TARGET_CONTRACT_DECISION_REQUIRED`
+
+P47 darf ausschließlich als isolierte Prototypprüfung fortgesetzt werden.
+P47 erzeugt keine produktive Zieländerung und keine Mergefreigabe.
