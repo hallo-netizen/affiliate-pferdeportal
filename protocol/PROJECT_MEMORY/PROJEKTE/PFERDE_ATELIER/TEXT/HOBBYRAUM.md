@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M22 H8 PROVENANCE PRODUCT FIX TEST**
+STATUS: **AKTIV – M26 CONTEXT MARKER PRODUCT FIX TEST**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -9,68 +9,54 @@ Ziel:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
 
 Current main:
-`7531154a6218a06e49d35b78062933df3c886625`
+`a63c20100759b4e42d07f2e70a11ee9875709d37`
 
 Aktueller Integrationsblocker:
-`M22_INTERNAL_SIGNATURE_STILL_REQUIRED`
+`M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`
 
 Aktive Fehler-ID:
-`M22 – H8 Provenance / Integrität ohne interne Signatur`
-
-Direkter Maschinenstop danach:
-`M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`
+`M26 – Bound Fachworkflow production context`
 
 Bekannter realer Liveblocker danach:
 `M35 – PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
 
-## ROOT CAUSE M22
+## ROOT CAUSE M26
 
-Autoritative TECH-KEYFLOW-001/B15-Regel:
-- interner 107007-/H8-Vorlauf = Hash-/Batch-/Herkunftsbindung;
-- keine interne ED25519-/Signer-Pflicht;
-- externe kryptografische Release-Prüfung bleibt separat erhalten.
+Kein funktionaler Kontextverlust.
 
-Current main ist an dieser Stelle auf die ältere Signed-H8-Semantik zurückgerutscht.
+Gegenprüfung:
+- Current-Action-Selftest PASS;
+- aktueller Codex ist gebundener Fachworkflow-Worker;
+- Handoff-Request-Vertrag PASS;
+- STEP107007 enthält bereits die gleiche Semantik als `die realen Nicht-PPM-Stage-Artefakte und Proofs`;
+- Runner erwartet exakt `reale Nicht-PPM-Stage-Artefakte`.
 
-Bewiesene Referenz:
-`7990029428399e8ba01d88a6543ce068812e9218`.
+Ursache:
+reiner Wortlaut-/Markerdrift `realen` → `reale`.
 
 ## KISS-KANDIDAT
 
 Branch:
-`hobbyroom/m22-h8-provenance-no-internal-signature-20260909`
+`hobbyroom/m26-context-marker-normalization-20260909`
 
 Head:
-`13d76a2b22b2794827f6a277f7d85ab1566e19d3`
+`b55621e556eb25ec5bee4fd9b2f9662380575398`
 
-Scope: 6 H8-Semantik/Test-Dateien + 4 reine bestehende Hash-/Pointer-Bindungen:
-- `H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json`;
-- `preproduction_provenance_guard.py`;
-- `single_door_bootstrap.py`;
-- `single_door_preproduction_handoff.py`;
-- `project_single_door_entry_v2.py`;
-- `test_h8_preproduction_bootstrap.py`.
+Scope exakt 3 Dateien:
+- STEP107007: nur Markerwortlaut normalisiert;
+- CURRENT_STATE.json: nur daraus folgender Bundle-SHA;
+- PFERDE_ATELIER_START_HERE.json: nur daraus folgender State-SHA.
 
-Kein neuer Runner, Gate, Contract, Signer, Executor oder Parallelweg.
-
-M23 bleibt getrennt:
-- interne H8-Prüfung nutzt `validate_production_package_integrity()`;
-- externe Release-Prüfung nutzt weiterhin `validate_production_package()` + ED25519.
-
-M35 bleibt unverändert geparkt:
-`ef2ecebeb2992013873ba72100d79ffd7c48393c`.
+Kein Fachverhalten, kein Runner, kein Gate, kein Contract, kein Executor geändert.
 
 ## BEREITS GEPRÜFT
 
-- current main → M22 FAIL;
-- Kandidat → M22 PASS;
-- Signer-/Trusted-Key-Abhängigkeit aus internem H8-Pfad entfernt;
-- Codex-Capsule-Weg erhalten;
-- H8-Test zustandsunabhängig;
-- negative Hashprüfung vorhanden;
-- externe M23-Signaturprüfung erhalten;
-- Boundary-Hashbindung 11/11 PASS;
-- bestehende H8→STEP107007→CURRENT_STATE→START_HERE/Pointer-Hashkette nachgezogen.
+- main: M26 exakter vierter Marker FAIL;
+- Kandidat: alle vier Kontextmarker PASS;
+- Worker-Bindung unverändert PASS;
+- Handoff-Request unverändert vorhanden;
+- No-Publish unverändert vorhanden;
+- STEP107007 → CURRENT_STATE → START_HERE Hashkette nachgezogen.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
@@ -78,17 +64,17 @@ M35 bleibt unverändert geparkt:
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
-MAIN_SHA: 7531154a6218a06e49d35b78062933df3c886625
-ACTIVE_BLOCKER: M22_INTERNAL_SIGNATURE_STILL_REQUIRED
+MAIN_SHA: a63c20100759b4e42d07f2e70a11ee9875709d37
+ACTIVE_BLOCKER: M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte
 PLAN_PHASE: PRODUCT_FIX
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
-ACTIVE_HISTORY_CASE: M22
-HISTORY_EXPECTED_FAIL: M26
+ACTIVE_HISTORY_CASE: M26
+HISTORY_EXPECTED_FAIL: M35
 RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
-CANDIDATE_BRANCH: hobbyroom/m22-h8-provenance-no-internal-signature-20260909
-CANDIDATE_HEAD_SHA: 13d76a2b22b2794827f6a277f7d85ab1566e19d3
-TECHNICAL_SCOPE_PREFIXES: control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json;control/single-door-boundary/preproduction_provenance_guard.py;control/single-door-boundary/single_door_bootstrap.py;control/single-door-boundary/single_door_preproduction_handoff.py;control/single-door-boundary/project_single_door_entry_v2.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/CURRENT_STARTMASTER.json
-ALLOWED_PATH_PREFIXES: control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json;control/single-door-boundary/preproduction_provenance_guard.py;control/single-door-boundary/single_door_bootstrap.py;control/single-door-boundary/single_door_preproduction_handoff.py;control/single-door-boundary/project_single_door_entry_v2.py;control/single-door-boundary/test_h8_preproduction_bootstrap.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json;control/CURRENT_STARTMASTER.json
+CANDIDATE_BRANCH: hobbyroom/m26-context-marker-normalization-20260909
+CANDIDATE_HEAD_SHA: b55621e556eb25ec5bee4fd9b2f9662380575398
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
+ALLOWED_PATH_PREFIXES: control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -103,28 +89,28 @@ HISTORY_PROOF_RUNNER_BLOB_SHA: f7af847ed46fcae6527037eef06487b2f6d77786
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
-ERROR_SOURCE_BLOB_SHA: 027e34a7ef1464dbcf3180460d89eca43b192aa4
+ERROR_SOURCE_BLOB_SHA: 34c7eead18daa21772edd09ea73d13df6a3be78a
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 8ec5921bae80f4df1dc43221fb91e265b5efc6d7
+CURRENT_STATE_BLOB_SHA: 2be3925b0d00971252c00be418ff626b84462b02
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: 7d8fca295939176076b8ed0dc0e5ab652f1023f5
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: 8106e3357c52926c6d22ac95523f4f6eeb6ae4fa
+PROTOCOL_SOURCE_BLOB_SHA: fca477853c3aca006bcda5dc6ac80b360e27b099
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**M22-Kandidat serverseitig gegen M01–M35 prüfen.**
+**M26-Kandidat serverseitig gegen M01–M35 prüfen.**
 
-1. PR gegen current main öffnen.
+1. PR gegen current main.
 2. `hardlock` + `hardlock-base`.
-3. Vorher: current main muss exakt M22 als ersten FAIL reproduzieren.
-4. Nachher: M22 muss verschwunden sein; erster späterer FAIL muss exakt M26 sein.
-5. Kein weiterer M22-Fix im laufenden Test.
+3. Vorher: current main muss exakt M26 als ersten FAIL reproduzieren.
+4. Nachher: M26 muss verschwunden sein; erster späterer bekannter FAIL darf ausschließlich M35 sein.
+5. Kein weiterer M26-Fix im laufenden Test.
 6. Bei PASS regulär mergen.
 7. Danach M35 auf fresh main neu binden.
 8. Erst nach M35-Merge echter 7/7-Realtest.
