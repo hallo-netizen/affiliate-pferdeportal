@@ -127,8 +127,8 @@ Keine Blocker-Details hier duplizieren.
 
 ## PRODUKTVERGLEICH-LIVE
 
-Bereich: PRODUKTVERGLEICH
-Status: AKTIV / realer WordPress-Fehler 2026-09-09
+Bereich: PRODUKTVERGLEICH  
+Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle
 
 Autoritative Fehlerquelle:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/FEHLERQUELLEN.md`
