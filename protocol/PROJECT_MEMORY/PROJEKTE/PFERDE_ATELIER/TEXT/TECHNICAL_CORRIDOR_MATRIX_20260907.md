@@ -520,3 +520,36 @@ Status:
 `FIX_FORBIDDEN`.
 
 Kein konsolidierter Produktkandidat wurde gebaut.
+
+
+# READ-ONLY-AUTORITÄTSSUCHE – ABSCHLUSS 09.09.2026
+
+Die einzige noch zulässige Corridor-Frage wurde gegen current main `93ba987c56f7b08ffba009210e3012c036fec18d` geschlossen.
+
+Geprüfter zulässiger Suchraum außerhalb `control/startmaster0107/`:
+- `control/single-door-boundary/*`;
+- aktuelle Vorgängerbindung `control/startmaster0103/` bis `control/startmaster0106/`;
+- `PSTE_0.56.25/*`;
+- aktuelle technische Control-/Preflight-/Release-Schicht;
+- aktueller Repo-Baum auf vorhandene eigenständige PPM-/PSERC-/Link-/Design-Fachquellen.
+
+Belegter Negativbefund:
+- H1/H8: fachblind; `design_authority = NONE` / `quality_authority = NONE`;
+- STARTMASTER0104/0105: `content_quality_design_authority = NONE`;
+- STARTMASTER0106: `content_quality_design_authority = NONE`, `design_authority = NONE`;
+- PSTE 0.56.25 enthält weder deterministischen allgemeinen NEW-Link-Builder noch eine bestehende `design_format`-Evidence-Autorität;
+- außerhalb 0107 existiert im aktuellen Baum kein eigenständiger aktueller PPM-/PSERC-/Design-/Link-Fachquellpfad, der beide gesuchten Verträge liefert.
+
+Nicht als Produktionsquelle zulässig und daher nicht als Lösung gewertet:
+- historische Produktionspläne;
+- datierte/historische ZIP-/Evidence-Pakete;
+- geparkte LT-Beweisquellen;
+- Alternativkonzept/PR #195.
+
+Ergebnis:
+`EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`
+
+Folge gemäß bereits festgelegter Fix-Sperre:
+`STATUS = BLOCKED`
+
+Keine neue Linklogik, keine neue `design_format`-Semantik, kein neuer Validator, kein neuer Executor/Runner, kein Produktkandidat.
