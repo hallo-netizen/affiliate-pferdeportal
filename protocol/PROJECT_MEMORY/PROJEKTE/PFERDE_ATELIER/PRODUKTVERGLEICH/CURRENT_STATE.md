@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: V1-PLUGINENTWICKLUNG / PV-LIVE-001 AKTIV / 0.7.1-KORREKTUR IM HOBBYRAUM
+STATUS: V1-PLUGINENTWICKLUNG / 0.7.1 LOCAL+FRESH-ZIP PASS / PV-LIVE-001 WORDPRESS-RETEST OFFEN
 
 ## AUTORITÄT DIESER DATEI
 
@@ -665,3 +665,14 @@ Autoritative Fehlerdetails:
 
 Aktuelle Korrekturrichtung:
 kleiner Status-/UI-Fix ohne Architekturänderung; exakter Livefall wird ausführbarer Regressionstest. Kein neuer Plugin-Download vor Fresh-ZIP-Gesamt-PASS.
+
+
+## 0.7.1 KORREKTURSTAND 2026-09-09
+
+0.7.1-prototype ist lokal und aus frisch entpackter ZIP vollständig positiv/negativ geprüft.
+
+SHA-256:
+`5d5bcdc191d64524145486064f6830b6843032402dbae4095bb734939b8fe0fd`.
+
+PV-LIVE-001 bleibt bis zum realen WordPress-Retest offen.
+Kein Writer/Draft/Publish freigegeben.
