@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M17 PRODUCT CANDIDATE AFTER SEQUENTIAL GATE FIX**
+STATUS: **AKTIV – M22 H8 PROVENANCE PRODUCT CANDIDATE UNDER TEST**
 
 ## AUTORITÄT
 
@@ -12,149 +12,94 @@ Fehlerdetails → autoritative TEXT-Fehlerquelle.
 
 ## CURRENT MAIN
 
-`462a67b4d25c6d1d7bf4cc1f010116c0017f7da6`
+`7531154a6218a06e49d35b78062933df3c886625`
 
-PR #200 ist als reine 3-Datei History-/Gate-Wartung gemergt. Kein Produktionscode darin.
+PR #199 / M17 ist regulär über die Required Checks gemergt.
+M17 `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED` ist damit integriert behoben.
 
 ## DISPATCHER / SCHUTZ
 
 Permanenter Dispatcher PR #107:
 - offen, **nicht mergen**;
-- Head exakt `462a67b4d25c6d1d7bf4cc1f010116c0017f7da6`.
+- Head exakt `7531154a6218a06e49d35b78062933df3c886625`.
 
 GitHub Ruleset `Pferde Atelier Main Hardlock`:
 - enforcement: active;
-- bypass: **temporär Repository admin / For pull requests only aktiv**; vor jedem Produktionsmerge zwingend entfernen;
+- bypass: **leer**;
 - Required Checks: `hardlock`, `hardlock-base`.
 
 ## AKTUELLER INTEGRATIONSBLOCKER
 
-`M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`
-
-Befund:
-- 107008 ruft `finalize_after_107008(...)` auf;
-- `finalize_after_107008` kann `PSERC_FINAL_PACKAGE_BLOCKED` / `ok=false` zurückgeben;
-- `runtime_entry_gate.py` prüft diesen Rückgabewert aktuell nicht, bevor `107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED` zurückgegeben wird;
-- damit ist der historische M17-Vertrag „kein finaler PASS ohne erfolgreiche Host-Finalisierung“ aktuell verletzt.
-
-M16:
-- alter Runner-Marker war stale;
-- aktueller Sollvertrag ist: keine Signer-Credentials/-Kommandos im 107007-/Runtime-Pfad; Signer erst in `finalize_after_107008`;
-- dieser aktuelle M16-Vertrag ist auf main PASS.
-
-M35:
-- realer Liveblocker bleibt unverändert;
-- Produktionskandidat `ef2ecebeb2992013873ba72100d79ffd7c48393c` bleibt unverändert geparkt, bis M17 wieder PASS ist.
-
-## AKTUELLER REALBLOCKER
-
-`PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
+`M22_INTERNAL_SIGNATURE_STILL_REQUIRED`
 
 Fehler-ID:
-`M35 – Fact-Pack source-hash binding parity`.
-
-Letzte erfolgreich erreichte Stelle im echten Realtest:
-- frische `FACHWORKFLOW_HANDOFF_REQUEST.json` für Artikel 1 materialisiert;
-- gebundener `fachworkflow_handoff.command` ausgeführt;
-- echter PPM-6.7.9-Eingang erreicht;
-- Stop erst bei Prüfung der Fact-Pack-Quellhashbindung.
+`M22 – H8 Provenance / Integrität ohne interne Signatur`.
 
 Root Cause:
-**belegt.** Der echte PPM-6.7.9-Vertrag speichert nach `canonical_fact_pack_import_v1` einen eigenen Registry-Hash. Der aktuelle Handoff liest diesen Hash bereits über `PPM679_Storage::fact_pack_hash(...)`, prüft ihn aber nur gegen `production_plan_item.source_hashes`, das noch den Forschungs-/Fact-Pack-Hash enthält. Dadurch werden zwei Hash-Namensräume verwechselt.
+- autoritative TECH-KEYFLOW-001/B15-Regel verlangt im internen 107007-/H8-Vorlauf nur Hash-/Batch-/Herkunftsbindung;
+- kryptografische Signierung bleibt außerhalb dieses internen Worker-Korridors;
+- current main enthält im H8-Korridor wieder die ältere `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`-/Signer-Pflicht;
+- bewiesener B15-Stand `7990029428399e8ba01d88a6543ce068812e9218` erfüllt den aktuellen Sollvertrag.
 
-## REAL ÜBERWUNDEN AUF DEM AKTUELLEN WEG
+M23-Abgrenzung:
+- externe Upload-/Release-Prüfung bleibt signiert;
+- `validate_production_package()` mit ED25519 bleibt erhalten;
+- nur der interne Preproduction-Pfad nutzt wieder `validate_production_package_integrity()`.
 
-- B02 / Fachworkflow-Worker-Kontext;
-- B07/M32 / PPM-/PSERC-Runtime-Pfad;
-- M28 / echter Request-first-Handoff;
-- M34 / `CANONICAL_SLOT_MISSING` und zurückgerutschte Legacy-Handoff-Guards.
+## AKTIVER M22-KANDIDAT
 
-M34 wurde mit PR #190 als kompletter Handoff-Korridor auf den bewiesenen B01-Stand zurückgeführt.
-Der nachfolgende Realtest kam real über Canonical/Slot hinaus.
+Branch:
+`hobbyroom/m22-h8-provenance-no-internal-signature-20260909`
+
+Head:
+`0aebd56998c2cb4e102b0d3e19cb3ea29985a65c`
+
+Scope exakt 6 vorhandene H8-Dateien:
+- `control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json`;
+- `control/single-door-boundary/preproduction_provenance_guard.py`;
+- `control/single-door-boundary/single_door_bootstrap.py`;
+- `control/single-door-boundary/single_door_preproduction_handoff.py`;
+- `control/single-door-boundary/project_single_door_entry_v2.py`;
+- `control/single-door-boundary/test_h8_preproduction_bootstrap.py`.
+
+Kein neuer Runner, Gate, Contract, Executor oder Parallelweg.
+
+## PRÜFUNG – TATSÄCHLICH AUSGEFÜHRT
+
+Source-level Positiv/Negativ:
+- current main → FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
+- M22-Kandidat → PASS;
+- interne Signer-/Trusted-Key-Abhängigkeit entfernt;
+- Hash-/Provenienzbindung bleibt fail-closed;
+- externe M23-Signaturprüfung bleibt erhalten;
+- Codex-Capsule-Weg bleibt erhalten;
+- H8-Test wieder zustandsunabhängig und enthält negative Hashprüfung.
+
+Boundary:
+- sämtliche 11 `file_bindings` gegen den Kandidaten geprüft;
+- 11/11 Blob-SHAs stimmen exakt.
+
+## NÄCHSTER BEKANNTER FEHLER DANACH
+
+M35 bleibt unverändert der bekannte reale Liveblocker:
+`PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
+
+Geparkter M35-Kandidat:
+`ef2ecebeb2992013873ba72100d79ffd7c48393c`
+
+M22 und M35 bleiben getrennte Reparaturen.
 
 ## LETZTER SICHERER POSITIVER REFERENZSTAND
 
 - `d841ed7590436ac100b98f15194874573e09bc03`: 7/7 frisch produziert;
 - `de21f6cd35c60849c551fd82f78e75ce57c99fab`: 7/7 + 107008 Review PASS.
 
-Diese Referenzen sind historische Vergleichsstände, **nicht** aktueller main.
+`RECOVERY_BASE_SHA = de21f6cd35c60849c551fd82f78e75ce57c99fab`.
 
-## AKTIVER ARBEITSSTAND
+## OFFEN / NICHT BEHAUPTET
 
-History/Gate:
-- PR #200: merged;
-- main `462a67b4d25c6d1d7bf4cc1f010116c0017f7da6`;
-- sequenzieller Beweis aktiv: aktiver Fehler muss verschwinden; optional darf exakt ein späterer bereits bekannter Fehler erster FAIL werden;
-- korrigiertes M22-Orakel ist jetzt auf main autoritativ.
-
-M17-Kandidat #199:
-- derselbe bestehende PR, kein neuer Produktions-PR;
-- Branch `hobbyroom/m17-host-finalization-fail-closed-20260909`;
-- fresh Head `45b318673856ff45f42b292c04f56f06ddf76ab1`;
-- Base fresh main `462a67b4d25c6d1d7bf4cc1f010116c0017f7da6`;
-- genau 1 Logikdatei + 5 vorhandene Hash-/Bindungsdateien;
-- erwarteter Nachherzustand: M17 verschwunden, M22 darf als exakt gebundener nächster bekannter erster FAIL erscheinen.
-
-M22:
-- eigener späterer Fix;
-- current main muss unter korrigiertem Orakel `M22_INTERNAL_SIGNATURE_STILL_REQUIRED` liefern;
-- bewiesener B15-Stand `7990029428399e8ba01d88a6543ce068812e9218` PASS.
-
-M35:
-- separater geparkter Kandidat `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
-- unverändert.
-
-## TESTS – TATSÄCHLICH AUSGEFÜHRT
-
-Sequenz-/M22-Prüfung:
-- PRODUCT_FIX M17 → M22: PASS;
-- M17 → M35: PASS;
-- M17 → M17 oder rückwärts: BLOCK;
-- ohne `HISTORY_EXPECTED_FAIL`: Gesamt-PASS bleibt Pflicht;
-- korrigiertes M22-Orakel: current main FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
-- dasselbe Orakel auf bewiesenem B15-Stand `799002…`: PASS.
-
-M17-Kandidat `66e9f24…` lokal/source-level:
-- M16 PASS;
-- M17 positiv PASS;
-- fehlender Finalization-Guard BLOCK;
-- Guard in falscher Reihenfolge BLOCK;
-- vollständige Hash-Kette Runtime → 107008 → 107007 → CURRENT_STATE → START_HERE → Pointer rechnerisch konsistent.
-
-History Authority #196:
-- M15 aktueller Request-first-Vertrag positiv PASS;
-- alte Direct-Submit-/No-Handoff-Semantik negativ BLOCK;
-- M35-Modell positiv PASS;
-- fehlende Registry-Bindung negativ BLOCK;
-- zu späte Bindung nach Planaufbau negativ BLOCK;
-- current main reproduziert unter der neuen History-Regel exakt `M35_PPM_REGISTRY_HASH_NOT_MATERIALIZED`.
-
-M35-Kandidat `ef2eceb…` lokal/source-level:
-- M34 PASS;
-- M35 positiv PASS;
-- fehlende Registry-Bindung BLOCK;
-- Bindung nach Planaufbau BLOCK.
-
-Auf PR #190:
-- `hardlock`: PASS;
-- `hardlock-base`: PASS;
-- Scope: exakt 1 Datei;
-- statischer Korridorcheck Request → PPM → PASS/Receipt → Submission → 107008: PASS.
-
-Auf main `2325f6e1…`:
-- echter STARTMASTER0107-Realtest gestartet;
-- M28 real passiert;
-- M34 / Canonical real passiert;
-- erster Stop: M35 `SOURCE_HASH_BINDING_MISMATCH`.
-
-## TESTS – OFFEN / NICHT BEHAUPTET
-
-- M17-Produktionfix noch nicht gebaut oder integriert;
-- M35-Kandidat bis M17-PASS pausiert;
-- serverseitige `hardlock`-/`hardlock-base`-Abnahme des M35-Kandidaten nicht maßgeblich, solange M17 offen ist;
-- kein 7/7-PASS auf aktuellem main;
-- 107008 auf aktuellem main nicht erreicht;
-- kein Live-PASS des M35-Fixes;
+- serverseitige `hardlock`-/`hardlock-base`-Abnahme des M22-Kandidaten noch offen;
+- kein neuer echter 7/7-Realtest nach M22;
 - kein Publish;
 - keine WordPress-Schreibaktion.
 
