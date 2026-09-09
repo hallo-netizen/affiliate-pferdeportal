@@ -1630,3 +1630,25 @@ Parallel:
 - PR #107 bleibt permanenter, nicht zu mergender Dispatcher.
 
 Kein Publish / kein WordPress-Write.
+
+
+### 09.09.2026 – Abschlussnachholung der Campus-Wahrheiten
+
+Nach der finalen Fresh-Read-Prüfung wurden ausschließlich Dokumentations-/Governancequellen korrigiert, kein Produktionscode:
+
+- autoritative TEXT-Fehlerquelle: B16 als aktuelle Live-Wahrheit nach M36 ergänzt; stale Verweis „aktuell M35“ entfernt;
+- CURRENT_STATE: auf B16 / 12-Stage-Corridor / `FIX_FORBIDDEN` aktualisiert;
+- HOBBYRAUM: stale „Realtest aktiv“ entfernt; jetzt READ_ONLY Corridor, kein Kandidat, `INTEGRATION_ALLOWED=false`;
+- AENDERUNGSREGISTER: dauerhafte Post-M36-Anti-Minifix-Entscheidung ergänzt;
+- HOBBYRAUM_STANDARD: allgemeingültige Regel „autoritative Evidence statt Worker-Selbstbeglaubigung“ ergänzt;
+- TECHNICAL_CORRIDOR_MATRIX: current-main-/Originalmaster-Revalidierung nach M36 ergänzt;
+- zentrales FEHLERREGISTER: nur Wegweiser geblieben; Label auf TEXT-M01-M36 aktualisiert, keine Fehlerdetails dupliziert;
+- Zielvertrag unverändert; Zielregister verweist weiterhin ausschließlich auf ZV-TEXT-001-Hauptquelle;
+- keine Archivverschiebung, weil B16/Corridor aktiv und ungeklärt bleibt;
+- Parallel-PR #195 fresh geprüft: offen, Draft, isoliert, nicht verändert;
+- Dispatcher #107 fresh geprüft: exakt current main, offen, niemals mergen;
+- Ruleset fresh geprüft: active, `hardlock` + `hardlock-base`, bypass leer.
+
+Abschlussgrenze:
+Kein Produktkandidat und keine Kandidaten-Positiv/Negativprüfung vorhanden.
+Daher Tests für die nächste Reparaturstufe weiterhin OFFEN; kein „fertig“-Status.
