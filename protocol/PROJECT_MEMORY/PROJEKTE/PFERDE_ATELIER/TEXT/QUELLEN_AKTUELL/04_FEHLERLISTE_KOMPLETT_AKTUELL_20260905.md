@@ -1,5 +1,43 @@
 # STARTMASTER0107 – KOMPLETTE AKTUELLE FEHLERLISTE – 05.09.2026
 
+
+## AKTUELLE LIVE-WAHRHEIT – 09.09.2026
+
+Current main:
+`93ba987c56f7b08ffba009210e3012c036fec18d`
+
+M01–M36 sind maschinell Gesamt-PASS und integriert.
+Der danach erneut ausgeführte echte 7/7-Realtest stoppte nach
+Cloud Entry → Production Preflight → Runtime Entry → `CURRENT_BOUND_ACTION_READY`
+beim ersten Item mit:
+
+`BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`
+
+Dieser Stop ist die **aktuelle Live-Wahrheit**.
+
+Er wird nicht als isolierter LanguageTool-Minifix behandelt.
+Die autoritative Corridor-Analyse ordnet ihn derselben systemischen K1/K3-Bindungsklasse zu:
+mehrere der zwölf Stage-Namen sind im aktuellen 107007-Handoff nicht eindeutig an ihre bereits vorhandene echte Evidence-/Prüfautorität gebunden.
+
+Aktive technische Arbeitsgrenze:
+`FIX_FORBIDDEN`.
+
+Kein Produktkandidat, solange die bestehende NEW-Link-Provenienzquelle und die bestehende Bedeutung/Evidence von `design_format` nicht eindeutig gefunden und gebunden sind.
+
+### B16 – aktueller 12-Stage-Corridor / wiederkehrender LanguageTool-Livestop
+
+- **Status: AKTUELL / OFFEN.**
+- Realblocker: `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`.
+- Betroffenes erstes Item: `article:a8282e69ecd43b615de17eb1` („Das Wichtigste über Hindernisstangen für Pferde“).
+- 107007 nicht abgeschlossen; 107008 nicht erreicht; kein Publish.
+- Derselbe sichtbare LT-Stop war bereits am 07.09. real vorhanden; nach M36 trat er erneut auf.
+- Autoritative technische Einordnung:
+  - `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`;
+  - `TECHNICAL_CORRIDOR_MATRIX_20260907.md`.
+- Kein LT-Einzelbranch integrieren; `hobbyroom/languagetool-runtime-rebind-20260907` bleibt ausschließlich historische Beweisquelle.
+- Vor jedem späteren Produktfix muss B16 zuerst als ausführbare fortlaufende History-Regression aufgenommen werden; aktuell ist wegen der offenen Corridor-Autoritätslücken noch kein Produktfix zulässig.
+
+
 ## A. M01–M33 – bestehende historische Regressionen
 
 ### AKTUELLER GESAMTBELEG 06.09.2026
@@ -162,7 +200,7 @@ Der zuvor erste belegte Live-Blocker auf main `c8a96e7…` war:
 Dafür wurde der isolierte B01-Kandidat #141 gebaut und später regulär integriert.
 
 **Dieser Abschnitt ist nicht mehr die aktuelle Fehlerwahrheit.**
-Die aktuelle Live-Wahrheit steht oben in der M-Tabelle bei M35. Der nachfolgende LanguageTool-Befund bleibt nur als Historie erhalten.
+Die aktuelle Live-Wahrheit steht am Anfang dieser Datei unter `AKTUELLE LIVE-WAHRHEIT – 09.09.2026`. Der nachfolgende 07.09.-LanguageTool-Befund bleibt als historische Vorläuferinstanz erhalten.
 
 ## HISTORISCHER LIVE-BEFUND 07.09.2026 – LANGUAGETOOL – ABGELÖST
 
