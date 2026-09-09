@@ -1353,3 +1353,33 @@ Folge:
 - M35 bleibt der bekannte reale Liveblocker dahinter.
 
 Kein Publish.
+
+
+### 09.09.2026 – M22 gemergt / M26 isolierter Markerfix
+
+M22:
+- PR #201 regulär gemergt;
+- neuer main `a63c20100759b4e42d07f2e70a11ee9875709d37`;
+- `hardlock` PASS;
+- `hardlock-base` PASS;
+- Maschinenbeweis: current main erster FAIL M22, Kandidat danach erster FAIL M26;
+- kein Bypass für Produktionsmerge.
+
+M26:
+- Blocker `M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`;
+- funktionale Gegenprüfung PASS: Current-Action-Selftest, gebundener Worker, Handoff-Request-Vertrag;
+- STEP107007 enthält bereits dieselbe Semantik als `die realen Nicht-PPM-Stage-Artefakte und Proofs`;
+- KISS-Fix normalisiert ausschließlich diesen Marker;
+- Kandidat Branch `hobbyroom/m26-context-marker-normalization-20260909`;
+- Head `b55621e556eb25ec5bee4fd9b2f9662380575398`;
+- Scope: STEP107007 Wortlaut + CURRENT_STATE Bundle-SHA + START_HERE State-SHA;
+- kein Fachverhalten geändert.
+
+Source-Level:
+- main exakter M26-Marker FAIL;
+- Kandidat alle vier M26-Kontextmarker PASS;
+- Worker-/Handoff-/No-Publish-Marker unverändert PASS.
+
+M35 bleibt der bekannte reale Liveblocker danach.
+Kein Publish.
+RECOVERY_BASE_SHA: `de21f6cd35c60849c551fd82f78e75ce57c99fab`.
