@@ -1128,3 +1128,24 @@ Wenn das Verhalten von Framework-/CMS-Lifecycle, Hooks, Login, Routing oder gere
 
 NEGATIV:
 Nicht jede reine Logikfunktion braucht einen Browser-/HTTP-Test. Die Regel gilt nur dort, wo die behauptete Eigenschaft gerade aus dem Lifecycle entsteht.
+
+
+## PV-PLAN-020 – Produktvergleich liefert Dossier, bestehende SEO/TEXT-Straße schreibt
+STAND:
+2026-09-09 / VERBINDLICH.
+
+WAS:
+Der aktive Produktvergleichs-Zielweg wird von der früheren eigenen Writer-/WordPress-DRAFT-Straße auf eine klare Bürotrennung umgestellt:
+`Produktwissen -> Produktvergleichsdossier -> bestehender SEO/TEXT-Fachworkflow -> bestehender FACHWORKFLOW_HANDOFF_REQUEST.json -> ACM -> signierter WordPress-DRAFT -> Readback -> STOP`.
+
+WARUM:
+Die eigene Produktvergleichs-Writerstrecke würde eine zweite Textmaschine und damit doppelte Textregeln, doppelte Qualitätslogik und zusätzliche Fehler-/Freiheitsstellen erzeugen. Die Produktvergleichs-Fachwahrheit soll stattdessen einmal gebunden als Dossier an die bereits vorhandene Textproduktion übergeben werden.
+
+KISS:
+Keine zweite Textmaschine, kein zweites Handoff, kein neues Jobmanifest. Produktvergleich liefert die geprüften Zutaten; SEO/TEXT schreibt; ACM transportiert.
+
+AUSWIRKUNG:
+`ZIELVERTRAG_V1.md` ist ABGELÖST. Aktive Hauptquelle ist `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/ZIELVERTRAG_V2.md`.
+
+GRENZE:
+Bestehende SEO/TEXT-/ACM-Systeme werden aus dem Produktvergleichs-Büro nicht verändert. Die technische Integration erfolgt erst nach separater Freigabe des Nachbarwegs.
