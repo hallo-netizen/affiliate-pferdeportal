@@ -14,14 +14,21 @@ REPO=Path(__file__).resolve().parents[4]
 AUTHORITATIVE=REPO/"control/startmaster0107/fachworkflow_proof_handoff.py"
 
 class P11WorkflowContractTests(unittest.TestCase):
-    def test_positive_authoritative_stage_list_exact(self):
+    def test_positive_authoritative_stage_set_exact(self):
         verify_authoritative_stage_source(AUTHORITATIVE)
 
     def test_positive_all_twelve_exactly_once(self):
         rows=canonical_pass_results()
         verify_stage_results(rows)
         self.assertEqual(len(rows),12)
-        self.assertEqual(tuple(r["stage"] for r in rows),REQUIRED_STAGES)
+        self.assertEqual(set(r["stage"] for r in rows),set(REQUIRED_STAGES))
+
+    def test_positive_checklist_does_not_control_runtime_order(self):
+        rows=canonical_pass_results()
+        rows[2],rows[10]=rows[10],rows[2]
+        rows[0],rows[11]=rows[11],rows[0]
+        verify_stage_results(rows)
+        self.assertEqual(set(r["stage"] for r in rows),set(REQUIRED_STAGES))
 
     def test_negative_missing_stage(self):
         rows=canonical_pass_results()[:-1]
@@ -31,13 +38,7 @@ class P11WorkflowContractTests(unittest.TestCase):
     def test_negative_duplicate_replacing_stage(self):
         rows=canonical_pass_results()
         rows[-1]=copy.deepcopy(rows[-2])
-        with self.assertRaises(Blocked):
-            verify_stage_results(rows)
-
-    def test_negative_reordered_stage(self):
-        rows=canonical_pass_results()
-        rows[2],rows[3]=rows[3],rows[2]
-        with self.assertRaisesRegex(Blocked,"STAGE_ORDER_DRIFT"):
+        with self.assertRaisesRegex(Blocked,"STAGE_DUPLICATE"):
             verify_stage_results(rows)
 
     def test_negative_unknown_stage(self):
