@@ -249,7 +249,7 @@ def main():
             if pos.get("verified_status")!="SIGNED_JSON_VERIFIED_FOR_EXISTING_IMPORT_HANDOFF":
                 raise RuntimeError("WP_VERIFY_STATUS_WRONG:"+str(count))
             if pos.get("after_draft")!=pos.get("before_draft")+count:
-                raise RuntimeError("WP_DRAFT_COUNT_WRONG:"+str(count))
+                raise RuntimeError("WP_DRAFT_COUNT_WRONG:"+str(count)+":"+json.dumps(pos,ensure_ascii=False,sort_keys=True))
             if pos.get("after_publish")!=pos.get("before_publish"):
                 raise RuntimeError("WP_PUBLISH_CHANGED:"+str(count))
             if pos.get("pipeline_status")!="ALL_ITEMS_NORMAL_DRAFT_END_TO_END_PASS":
