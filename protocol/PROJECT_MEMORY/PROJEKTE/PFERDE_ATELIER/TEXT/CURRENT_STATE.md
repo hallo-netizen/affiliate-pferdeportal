@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M35 KISS PRODUCT CANDIDATE UNDER TEST**
+STATUS: **BLOCKED – M17 FAIL-CLOSED REGRESSION BEFORE M35**
 
 ## AUTORITÄT
 
@@ -26,6 +26,25 @@ GitHub Ruleset `Pferde Atelier Main Hardlock`:
 - enforcement: active;
 - bypass: **temporär Repository admin / For pull requests only aktiv**; vor Produktionsmerge zwingend wieder entfernen;
 - Required Checks: `hardlock`, `hardlock-base`.
+
+## AKTUELLER INTEGRATIONSBLOCKER
+
+`M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`
+
+Befund:
+- 107008 ruft `finalize_after_107008(...)` auf;
+- `finalize_after_107008` kann `PSERC_FINAL_PACKAGE_BLOCKED` / `ok=false` zurückgeben;
+- `runtime_entry_gate.py` prüft diesen Rückgabewert aktuell nicht, bevor `107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED` zurückgegeben wird;
+- damit ist der historische M17-Vertrag „kein finaler PASS ohne erfolgreiche Host-Finalisierung“ aktuell verletzt.
+
+M16:
+- alter Runner-Marker war stale;
+- aktueller Sollvertrag ist: keine Signer-Credentials/-Kommandos im 107007-/Runtime-Pfad; Signer erst in `finalize_after_107008`;
+- dieser aktuelle M16-Vertrag ist auf main PASS.
+
+M35:
+- realer Liveblocker bleibt unverändert;
+- Produktionskandidat `ef2ecebeb2992013873ba72100d79ffd7c48393c` bleibt unverändert geparkt, bis M17 wieder PASS ist.
 
 ## AKTUELLER REALBLOCKER
 
@@ -62,15 +81,17 @@ Diese Referenzen sind historische Vergleichsstände, **nicht** aktueller main.
 
 ## AKTIVER ARBEITSSTAND
 
-History Authority:
-- PR #196: closed / merged;
-- main `d6de9265cddc1b2a011d707ad615c144cdd9d4ab`.
+Aktive History Authority:
+- Branch `hobbyroom/m16-m17-history-authority-20260909`;
+- Head `5ea8d5da54ca946dd99b3d85a2f3fb8488b7a7b8`;
+- ausschließlich bestehender M01–M35-Runner;
+- M16-Orakel an aktuellen Signer-Vertrag angepasst;
+- M17-Orakel auf echten Fail-closed-Vertrag gehärtet.
 
-M35-KISS-Kandidat:
+Geparkter M35-KISS-Kandidat:
 - Branch `hobbyroom/m35-ppm-registry-hash-binding-20260909`;
 - Head `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
-- exakt eine Produktionsdatei: `control/startmaster0107/fachworkflow_proof_handoff.py`;
-- Änderung ausschließlich in der internen PPM-Plan-Kopie nach Fact-Pack-Import: leeren Registry-Hash weiter blockieren, sonst `source_hashes` auf den bereits von PPM ermittelten Registry-Hash setzen.
+- unverändert, kein weiterer Fix.
 
 ## TESTS – TATSÄCHLICH AUSGEFÜHRT
 
@@ -102,7 +123,9 @@ Auf main `2325f6e1…`:
 
 ## TESTS – OFFEN / NICHT BEHAUPTET
 
-- serverseitige `hardlock`-/`hardlock-base`-Abnahme des M35-Kandidaten noch offen;
+- M17-Produktionfix noch nicht gebaut oder integriert;
+- M35-Kandidat bis M17-PASS pausiert;
+- serverseitige `hardlock`-/`hardlock-base`-Abnahme des M35-Kandidaten nicht maßgeblich, solange M17 offen ist;
 - kein 7/7-PASS auf aktuellem main;
 - 107008 auf aktuellem main nicht erreicht;
 - kein Live-PASS des M35-Fixes;
