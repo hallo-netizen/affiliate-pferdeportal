@@ -5,7 +5,7 @@ ROLLE: AUTORITATIVE FEHLERQUELLE DIESES BÜROS
 
 ## PV-LIVE-001 – FALSCHER GESAMT-PASS BEI 0 GÜLTIGEN VERGLEICHEN
 
-STATUS: AKTIV / KORREKTUR IM HOBBYRAUM
+STATUS: FIX-KANDIDAT 0.7.1 LOCAL + FRESH-ZIP PASS / WORDPRESS-RETEST OFFEN
 
 Realer WordPress-Befund 2026-09-09 mit Universal Product Comparison 0.7.0-prototype:
 - Regendecken: 8 Kandidaten;
@@ -32,3 +32,19 @@ Verbindlicher Fix:
 
 PASS-GRENZE:
 Erst lokale Positiv-/Negativ-Gesamtsuite + Fresh-ZIP-Gesamtsuite PASS. Danach genau ein neuer WordPress-Retest.
+
+
+### Fix-Kandidat 0.7.1 – Prüfbeleg 2026-09-09
+
+- exakter Realfall 8 → 16 Provider-Aufrufe → $0.1920 → 8 BLOCKED → 0 Dossiers ergibt `NO_ELIGIBLE_COMPARISONS`;
+- Admin rendert diesen Zustand als Warnung, nicht Success;
+- echter PASS bleibt Success;
+- autoritative PSTE-Kostenschätzung für 8 offene Kandidaten = max. $0.2496;
+- post-run Kostenanzeige ist eindeutig als Schätzung eines jetzt neu gestarteten Laufs beschriftet;
+- komplette Suite aus frisch gepackter ZIP PASS;
+- Mutationstest beweist, dass der alte False-PASS und die alte falsche Notice von den Regressionen verworfen werden.
+
+Release-Kandidat SHA-256:
+`5d5bcdc191d64524145486064f6830b6843032402dbae4095bb734939b8fe0fd`.
+
+Fehler bleibt bis realem WordPress-Retest **offen**.
