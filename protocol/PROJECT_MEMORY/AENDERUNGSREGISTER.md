@@ -2040,3 +2040,24 @@ Der gleichzeitig korrigierte History-Test richtet sich wieder nach TECH-KEYFLOW-
 
 GRENZE:
 Keine neue Architektur, kein neuer Runner, kein neuer Gate-Pfad, kein Bypass für Produktionscode.
+
+
+## PV-PLAN-017 – Gesamt-PASS braucht ein wirklich nutzbares Vergleichsergebnis
+
+STAND: 2026-09-09 / VERBINDLICH.
+
+WAS:
+Ein vollständig abgearbeiteter Workflow ist nicht automatisch ein fachlicher PASS.
+Wenn nach SEO-/Kannibalisierungsprüfung **0 freigegebene Vergleiche und 0 gültige gebundene Dossiers** verbleiben, lautet der Gesamtstatus `NO_ELIGIBLE_COMPARISONS`, nicht `PASS`.
+
+WARUM:
+0.7.0 meldete im realen WordPress-Lauf grünes PASS, obwohl alle 8 Regendeckenpaare terminal SEO-blockiert waren und kein Dossier entstand. Die frühere Statuslogik prüfte nur offene/technische Fehlerzustände, nicht das Vorhandensein eines fachlich nutzbaren Ergebnisses.
+
+KISS:
+Nur finales Statusgate + UI-Zuordnung korrigiert. Keine neue Architektur.
+
+REGRESSION:
+Der exakte Livefall 8 Kandidaten → 16 Provider-Aufrufe → $0.1920 → 8 BLOCKED → 0 Dossiers ist ausführbarer Negativtest. Ein Mutationstest beweist, dass die alte False-PASS-Logik den Test nicht besteht.
+
+ZUSATZ:
+Kostenanzeige nach einem Lauf muss klar zwischen tatsächlichen Kosten des abgeschlossenen Laufs und der maximalen Schätzung eines **neu gestarteten** Laufs unterscheiden.
