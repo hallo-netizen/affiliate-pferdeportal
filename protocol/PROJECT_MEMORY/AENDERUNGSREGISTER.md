@@ -1708,7 +1708,7 @@ DAUERHAFTER ZWANGSWEG NACH AKTIVIERUNG VON PR #160:
 9. Frozen-Recovery, kausaler Corridor und Maschinenbeweis-Entscheidung müssen im Änderungsregister stehen.
 10. Historienprüfung, letzter funktionierender Stand, direkte Nachbarn, Wiederholungsfehlerklasse, Positiv/Negativ und STOP ohne Reparatur im Realtest müssen im Hobbyraum-Standard stehen.
 11. current main muss vorher mit demselben Runner exakt bei `ACTIVE_HISTORY_CASE` als erstem Fehler FAIL liefern.
-12. Derselbe unveränderte Runner muss danach auf dem Produktionskandidaten die komplette akzeptierte Historie GESAMT PASS machen.
+12. Derselbe unveränderte Runner muss danach beweisen, dass der aktive Fehler verschwunden ist. Ohne gebundenen Folgefehler bleibt GESAMT PASS Pflicht; ist mit `HISTORY_EXPECTED_FAIL` ein späterer bereits bekannter Fehler gebunden, darf ausschließlich dieser als neuer erster FAIL erscheinen. Gleicher oder früherer FAIL bleibt BLOCK.
 13. `ACTIVE_HISTORY_CASE` muss in der autoritativen Fehlerzeile exakt den aktuellen `ACTIVE_BLOCKER` enthalten.
 14. `RECOVERY_BASE_SHA` muss als realer Git-Commit existieren und Vorfahr des current main sein.
 15. Produktionscode darf Matrix/Runner nicht im selben PR ändern.
@@ -1721,7 +1721,7 @@ NEUER FEHLER = ZUERST MASCHINELLE ERINNERUNG:
 - Der Kandidaten-Runner muss auf dem **noch unreparierten** Stand exakt bei `HISTORY_EXPECTED_FAIL` als erstem Fehler FAIL liefern.
 - Bestehende Historie darf nicht verkürzt oder übersprungen werden.
 - Erst nach dieser FAIL-Reproduktion darf der Produktionsfix entstehen.
-- Der spätere Produktionsfix muss die komplette erweiterte Historie PASS machen.
+- Der spätere Produktionsfix muss seinen aktiven Fehler beseitigen; danach gilt Gesamt-PASS oder ausschließlich ein explizit gebundener späterer bereits bekannter erster FAIL. Kein Rücksprung und kein Sammelfix-Zwang.
 - Dadurch können M34, M35, ... ohne erneute Security-Gate-Änderung aufgenommen werden.
 
 SELBSTSCHUTZ:
@@ -2016,3 +2016,27 @@ Viele kleine Zwischen-ZIPs erzeugen unnötige Installationsschleifen und verschi
 
 KISS:
 Intern beliebig viele Testiterationen; extern nur ein sinnvoller nächster Testkandidat.
+
+
+## TEXT-TECH-20260909-SEQUENTIAL-HISTORY-PROOF – Ein Fehler nach dem anderen bleibt technisch möglich
+
+WAS:
+Die bestehende Maschinenprüfung darf einen isolierten Produktfix nicht dazu zwingen, gleichzeitig alle späteren bereits bekannten Fehler zu reparieren.
+Das vorhandene Feld `HISTORY_EXPECTED_FAIL` erhält deshalb bei `PRODUCT_FIX` genau eine zusätzliche Bedeutung: optionaler nächster späterer bereits bekannter erster FAIL.
+
+REGEL:
+- current main muss weiterhin exakt bei `ACTIVE_HISTORY_CASE` als erstem Fehler FAIL liefern;
+- Kandidat muss diesen Fehler beseitigen;
+- `HISTORY_EXPECTED_FAIL=NONE` bedeutet weiterhin vollständiger Gesamt-PASS;
+- ist ein späteres bekanntes Mxx gebunden, darf exakt dieses als neuer erster FAIL erscheinen;
+- gleicher, früherer oder unbekannter Fehler blockiert;
+- History-Maintenance behält ihre bisherige Bedeutung unverändert.
+
+WARUM:
+Der M17-Kandidat beseitigt M17 real und kommt bis M22. Die bisherige Gesamt-PASS-Pflicht hätte M17 und M22 künstlich in einen Sammelfix gezwungen und damit der verbindlichen KISS-/Ein-Fehler-nach-dem-anderen-Regel widersprochen.
+
+M22:
+Der gleichzeitig korrigierte History-Test richtet sich wieder nach TECH-KEYFLOW-001/B15: interner H8-Vorlauf hash-/batch-/herkunftsgebunden, keine interne ED25519-/Signer-Pflicht. Korrigiertes Orakel: current main FAIL; bewiesener Stand `7990029428399e8ba01d88a6543ce068812e9218` PASS.
+
+GRENZE:
+Keine neue Architektur, kein neuer Runner, kein neuer Gate-Pfad, kein Bypass für Produktionscode.
