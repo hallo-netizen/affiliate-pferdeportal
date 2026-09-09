@@ -1,30 +1,25 @@
 # P39 – BESTEHENDE HANDOFF-DATEI DIREKT AN PREPARE/SIGN-GRENZE
 
 Datum: 2026-09-09
-Status: TEST AKTIV
+Status: ABGESCHLOSSEN – PASS
 
-## KISS-Ziel
+## Ergebnis
 
-Keine neue Datei.
-Kein neues Handoff-Format.
-Kein neues Jobmanifest.
-Kein neuer Fachworkflow.
+Die bestehende `FACHWORKFLOW_HANDOFF_REQUEST.json` enthält bereits alle Identitäts-/Produktionskontexte für den schreibfreien PPM-`prepare()`-Punkt.
 
-Weiterhin genau:
-`FACHWORKFLOW_HANDOFF_REQUEST.json`
+Der heutige `fachworkflow_proof_handoff.py materialize` erreicht dagegen den vollständigen PPM-Normal-Draft-Pfad und ist deshalb **nicht** die richtige Vor-Signatur-Grenze.
 
-## Zu beweisen
+Bewiesenes KISS-Ziel:
 
-1. Der heutige `fachworkflow_proof_handoff.py materialize` erreicht den vollständigen PPM-Normal-Draft-Pfad und ist deshalb NICHT die richtige Vor-Signatur-Grenze.
-2. Die bestehende 16-Feld-Handoff-Datei enthält bereits alle Identitäts-/Produktionskontexte für den schreibfreien PPM-`prepare()`-Punkt.
-3. Der bereits bewiesene Ablauf bleibt:
-   `prepare -> externe Signatur -> verifizierter Prepared-Payload -> create_draft -> readback`
-4. Keine Mutation nach Signatur möglich.
-5. publish_allowed=false.
+`SAME_HANDOFF -> EXISTING_PPM_PREPARE -> EXTERNAL_SIGNATURE -> EXISTING_CREATE_DRAFT`
 
-## STOP-Regel
+- keine neue Datei
+- kein neues Handoff-Format
+- kein neues Jobmanifest
+- kein neuer Fachworkflow
+- prepare_no_write = PASS
+- externe Signaturgrenze = PASS
+- Post-Signatur-Manipulation = BLOCKED
+- publish_allowed=false
 
-Falls dafür eine zweite Übergabedatei, ein zweites Jobmanifest oder ein weiterer Controller nötig wäre:
-STOP.
-
-Dann erst vorhandene Bausteine erneut prüfen.
+Laborbeleg: P39 im gemeinsamen P0–P46-Lauf PASS.
