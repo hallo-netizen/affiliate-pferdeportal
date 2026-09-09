@@ -18,7 +18,7 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "60ad828e153f3fc33b912b21aafd0f2db7669e9df1001a87018041cc95f008eb"
+      "sha256": "f772d9672c2cdcf4bd90ac0c932ea38775d0b956b8e2abf20d7e567e9dc3b513"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
