@@ -2,7 +2,11 @@
 
 Stand: 2026-09-02
 Branch: `affiliate-release-current`
-Status: `USER_SCOPE_AUTHORITY`
+Status: `SUPERSEDED_BY_OTTO_AWIN_SCOPE_20260907`
+
+## Aktueller Geltungsstatus
+
+Diese Datei dokumentiert die Nutzerentscheidung vom **02.09.2026** und bleibt als Historie erhalten. Sie ist **nicht mehr CURRENT**: Die spätere ausdrückliche Nutzerentscheidung vom 07.09.2026 priorisiert OTTO/Awin 14336 und ist gebunden in `protocol/AFFILIATE_RELEASE_OTTO_AWIN_AUTOMATION_SCOPE_20260907.md` sowie im aktuellen Master/Governance. Diese Datei darf nicht als aktuelle NEXT ACTION verwendet werden.
 
 ## Verbindliche Nutzerentscheidung
 
