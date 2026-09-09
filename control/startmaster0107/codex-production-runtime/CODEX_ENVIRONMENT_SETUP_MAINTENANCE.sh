@@ -186,7 +186,6 @@ proof = {
     "executed_commandline_jar_ref": str(jar),
     "executed_commandline_jar_sha256": JAR_SHA,
     "executed_commandline_jar_manifest_sha256": JAR_MANIFEST_SHA,
-    "runtime_cache_reused": True,
     "command_argv_template": [
         "java", "-Xmx1024m", "-jar", str(jar),
         "--json", "-l", "de-DE", "{checked_text_file}"
