@@ -218,7 +218,7 @@ def main():
             a=x["production_plan"]["items"][0]["canonical_article"];a["body_html"]=a["body_html"]+"X";a["body_html_sha256"]=hashlib.sha256(a["body_html"].encode()).hexdigest()
         unsigned_tamper("tamper_body",tamper_body)
         def tamper_pack(x):
-            x["fact_pack_bundle"]["fact_packs"][0]["facts"][0]["claim"]=str(x["fact_pack_bundle"]["fact_packs"][0]["facts"][0].get("claim",""))+"X"
+            x["fact_pack_bundle"]["fact_packs"][0]["claims"][0]["statement"]=str(x["fact_pack_bundle"]["fact_packs"][0]["claims"][0].get("statement",""))+"X"
         unsigned_tamper("tamper_fact_pack",tamper_pack)
 
         extra=copy.deepcopy(pkg);extra["route_selectable"]=True;p=root/"extra_route.json";dump(p,extra)
