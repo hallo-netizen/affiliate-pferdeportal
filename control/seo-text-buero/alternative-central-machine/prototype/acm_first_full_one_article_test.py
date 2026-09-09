@@ -128,6 +128,7 @@ def main() -> int:
             "publish_count_unchanged": True,
             "post_signature_tamper_blocked": True,
             "second_write_after_tamper": False,
+            "article_html": str(((prepared.get("payload") or {}).get("content")) or ""),
             "new_controller_used": False,
             "new_ppm_api_used": False,
             "publish_allowed": False
