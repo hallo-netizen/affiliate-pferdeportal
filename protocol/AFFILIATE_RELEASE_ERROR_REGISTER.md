@@ -402,19 +402,30 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Status:** LIVE PASS für Observability/Fail-closed, Cleanup bewusst NICHT erzwungen. Architekturweg: gefilterter Source-Feed + bestehende Reconcile-Logik.
 
+
+## AFF-ERR-024 — Gefilterter OTTO-Lauf fachlich noch nicht validiert: 1/298 akzeptiert
+
+**Datum / Live-Evidence:** 09.09.2026 10:36 Europe/Berlin.
+
+**Live-Status:** Awin/OTTO 14336, gefilterter Create-a-Feed, Lauf `success`; 298 Feedzeilen vollständig geprüft, **1 importiert**, **297 blockiert**, 0 aktualisiert.
+
+**Technischer Befund:** Der aktuelle OTTO-Relevanz-Gate verwirft blockierte Produktzeilen vor Persistenz. Die Oberfläche speichert für diese 297 Zeilen nur den Zähler, nicht die einzelnen Produkte bzw. Ablehnungsgründe. Deshalb ist aus dem Live-Readback allein **nicht beweisbar**, ob 297/298 fachlich korrekt oder der lokale Relevanz-Gate zu streng ist.
+
+**HARD RULE:** Automatische Synchronisierung bleibt AUS, bis der exakt verwendete 298-Zeilen-Create-a-Feed fachlich gegen die 297 Verwerfungen geprüft wurde. Nicht raten. Kein neues Plugin nur zur Diagnose, solange der Feed direkt analysierbar ist.
+
+**Nächster Schritt:** Exakt denselben Awin-Create-a-Feed als Datei (CSV/Download) prüfen und die 298 Zeilen gegen Pferde-Relevanz auswerten. Erst danach entscheiden: Filter korrekt → Automatik freigeben; Gate zu streng → kleinste gezielte Reparatur mit Positiv-/Negativtest.
+
 ---
 
 # Aktueller PRECHECK
 
-Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`; Digistore24 bleibt zurückgestellt.
+Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`.
 
 Bindend:
-- `AFF-ERR-017`: kumulativer Fortschritt LIVE PASS.
-- `AFF-ERR-018`: WP-Cron-Fallback LIVE PASS.
 - `AFF-ERR-019`: ungefilterter OTTO-Vollfeed HARD BLOCKED.
-- `AFF-ERR-022`: 6.72.7 FALSE-PASS behoben.
-- `AFF-ERR-023`: 6.72.8 Cleanup-Readback LIVE sichtbar und fail-closed; 0/4500 => keine unsichere Löschung. Kein weiteres Cleanup-Plugin.
-- `AFF-ERR-006`: keine Pluginorgie; nächster Schritt ist Konfiguration des vorhandenen 6.72.8-Workflows, nicht neue Version.
-- `AFF-ERR-001`: kein Gesamt-/Release-PASS ohne gefilterten OTTO-Live-Lauf.
+- `AFF-ERR-023`: unsicherer Alt-Cleanup 0/4500 bleibt bewusst fail-closed.
+- `AFF-ERR-024`: erster gefilterter Live-Lauf SUCCESS, aber 1/298 akzeptiert und 297 blockiert; fachliche Korrektheit noch nicht belegt.
+- `AFF-ERR-006`: keine Pluginorgie; zuerst den realen 298-Zeilen-Feed direkt prüfen.
+- `AFF-ERR-001`: kein Gesamt-/Automatik-PASS ohne belegte Relevanzprüfung.
 
-**Nächster zulässiger Schritt:** Awin `Toolbox → Create-a-Feed` für OTTO/Awin 14336 fachlich auf Pferde-Atelier-relevante Kategorien eingrenzen. Danach Export-URL im bestehenden Awin-Betriebsprofil binden und `portal_filtered` bestätigen. Kein neues Plugin.
+**Nächster zulässiger Schritt:** exakt den verwendeten Awin-Create-a-Feed als CSV/Datei gegen Pferde-Relevanz prüfen. Automatische Synchronisierung bleibt bis dahin AUS. Kein neuer Lauf erforderlich.
