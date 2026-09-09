@@ -413,7 +413,13 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **HARD RULE:** Automatische Synchronisierung bleibt AUS, bis der exakt verwendete 298-Zeilen-Create-a-Feed fachlich gegen die 297 Verwerfungen geprüft wurde. Nicht raten. Kein neues Plugin nur zur Diagnose, solange der Feed direkt analysierbar ist.
 
-**Nächster Schritt:** Exakt denselben Awin-Create-a-Feed als Datei (CSV/Download) prüfen und die 298 Zeilen gegen Pferde-Relevanz auswerten. Erst danach entscheiden: Filter korrekt → Automatik freigeben; Gate zu streng → kleinste gezielte Reparatur mit Positiv-/Negativtest.
+**Feedprüfung abgeschlossen:** Die hochgeladene Datei `datafeed_2990695.csv.gz` enthält exakt 298 OTTO-Zeilen (merchant_id 14336). Kategorien: 211 Skincare / Gesichtspflege, 31 Cosmetics / Make-up, 28 Basketball, 22 Garden / Sonnenschutz, 6 Football. In Titel/Beschreibung/Kategorie gibt es **keinen** expliziten Pferde-/Reitsporttoken aus dem gebundenen Marker-Set.
+
+**Ursache des einen Fehlpositivs:** Der OTTO-Relevanz-Gate injiziert bei jeder Zeile `FeedScope=Pferdebedarf`. Der gemeinsame eBay-Klassifikator wertet diesen Wert als starkes Pferdesignal. Dadurch kann ein generischer Produktbegriff aus dem Portal-Katalog genügen. Exakt die Feedzeile `aw_product_id=45749237798`, `neu.holz Sonnenschutz, blickdicht, WPC Gartenzaun Sichtschutz Windschutz Braun 185 x 376 cm`, trägt `Windschutz`; der Katalog enthält das Konzept `Windschutz für Pferde`, dessen distinctive core nach Stop-Token-Entfernung `windschutz` ist. Damit erklärt sich der einzige importierte Datensatz als **falsch positiv**.
+
+**Bewertung:** Der Awin-Create-a-Feed selbst ist fachlich falsch zusammengestellt; er enthält keine Pferdeartikel. Zusätzlich besitzt der lokale Gate eine echte Sicherheitslücke: `FeedScope=Pferdebedarf` darf nicht selbst als starkes Pferdesignal dienen.
+
+**Nächster Schritt:** Awin-Feed-Auswahl fachlich korrigieren UND den lokalen OTTO-Gate minimal so reparieren, dass FeedScope nur Metadatum bleibt und niemals allein die Pferde-Domain beweist. Vor Plugin-Ausgabe vollständiger Positiv-/Negativ-/Gesamtworkflow-Test. Automatik bleibt AUS.
 
 ---
 
