@@ -116,7 +116,7 @@ function acm_wp_verify_signed_package($path,$trustedKeys,$isBatchUsed){
     }
     foreach($packs as $pack){
         if(!is_array($pack))acm_wp_fail('FACT_PACK_INVALID');
-        $sid=(string)($pack['source_snapshot_id']??'');
+        $sid=(string)($pack['fact_pack_id']??'');
         if($sid===''||!isset($sourceIds[$sid]))acm_wp_fail('FACT_PACK_SOURCE_BINDING_INVALID');
     }
 
