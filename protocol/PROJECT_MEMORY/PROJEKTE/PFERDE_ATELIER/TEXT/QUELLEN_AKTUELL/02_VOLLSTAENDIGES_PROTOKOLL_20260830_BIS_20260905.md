@@ -1485,3 +1485,41 @@ History-Kandidat:
 `hobbyroom/m36-history-authority-20260909`
 Head `2465052149974f52cfb84797cf369cea430c23cc`
 Scope: bestehende Matrix + bestehender Runner.
+
+
+### 09.09.2026 – M36 History integriert / Produktkandidat gebaut
+
+History:
+- PR #203 regulär gemergt;
+- neuer main `239a64261c1fbaf467d0adbd5a2bb1ad2139eca4`;
+- hardlock PASS;
+- hardlock-base PASS;
+- `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M36`;
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M36`.
+
+Produktkandidat:
+- Branch `hobbyroom/m36-h8-legacy-provenance-alias-20260909`;
+- Head `fceee7f1959ed2597489a86161b92a024d5a30fc`;
+- 1 Logikdatei + 5 bestehende Hash-/Pointer-Bindungen.
+
+Semantik:
+- neuer Provenance-Vertrag bleibt alleiniger Sollvertrag;
+- alter `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1` nur read-only Legacy-Alias;
+- alter Binding-Hash bleibt prüfpflichtig;
+- room/receipt/generation/batch/snapshot/manifest/origin müssen exakt aktuell sein;
+- unbekannter Vertrag BLOCK;
+- falsche Generation BLOCK;
+- keine interne Signaturpflicht;
+- externe M23-Signaturprüfung unverändert;
+- keine Mutation/Neusignierung des persistierten Pakets.
+
+Vorprüfung:
+- main reproduziert fehlenden Alias;
+- Kandidat positives reales Legacy-Paket PASS-fähig;
+- negative Generation BLOCK;
+- unbekannter Vertrag BLOCK;
+- Signer-Tokens im Guard weiterhin abwesend;
+- H8 file_bindings 11/11 konsistent;
+- Hashkette nachgezogen.
+
+Kein Publish.
