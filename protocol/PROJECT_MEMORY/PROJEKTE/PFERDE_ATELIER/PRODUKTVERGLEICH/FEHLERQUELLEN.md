@@ -52,7 +52,7 @@ Fehler bleibt bis realem WordPress-Retest **offen**.
 
 ## PV-LIVE-002 – BIDIREKTIONALE SEO-LOGIK UNVOLLSTÄNDIG
 
-STATUS: AKTIV / 0.8.0-KORREKTUR IM HOBBYRAUM
+STATUS: FIX-KANDIDAT 0.8.0 SOURCE+FRESH-ZIP PASS / WORDPRESS-RETEST OFFEN
 
 Befund nach dem 0.7.1-Liveretest:
 Der Statusfehler PV-LIVE-001 ist korrigiert. Die 8 Regendecken-Kandidaten bleiben jedoch sämtlich SEO-blockiert.
@@ -85,3 +85,28 @@ Verbindlicher Fix:
 - aktuelle positive Signale werden read-only gegen aktuellen PSTE-Planning-/Kannibalisierungszustand revalidiert;
 - Inventar-/Strukturhash wird in die Dossierbindung aufgenommen;
 - kein stilles Weiterverwenden veralteter SEO-Freigaben.
+
+
+### 0.8.0 – Prüfstand 2026-09-09
+
+PV-LIVE-002/003 sind im lokalen Kandidaten repariert.
+
+Belegt:
+- direkte A-gegen-B-Nachfrage → Vergleichs-SEO-PASS möglich;
+- alternativ: belastbare Nachfrage nach **beiden** konkreten Produkten A+B → Vergleichs-SEO-PASS möglich;
+- nur A oder nur B → kein Vergleichs-PASS;
+- generische Gruppenanfrage → kein konkretes Produktsignal;
+- alter 0.7.x-Providervertrag → stale;
+- abgelaufenes Signal → stale;
+- positiver Altbestand wird read-only gegen aktuelle Planning-/Kannibalisierungsentscheidung revalidiert;
+- Inventory-/Structure-Hash bindet den Dossierstand;
+- identischer Wiederholungslauf erzeugt weder Provider-Doppelaufrufe noch Dossier-Dubletten;
+- Worst-Case-Schätzung für 8 Paare + 5 eindeutige Produkte = $0.4056;
+- Mutationstests verwerfen absichtlich wieder eingeführte Altfehler.
+
+Fresh-ZIP:
+`universal-product-comparison-0.8.0-prototype.zip`
+SHA-256:
+`c9eec5b4c7faafa23af6bd5c554d85c2c4d1763e4c618fbd49c3e04dd45abb66`.
+
+Fehler bleiben bis WordPress-Retest offen.
