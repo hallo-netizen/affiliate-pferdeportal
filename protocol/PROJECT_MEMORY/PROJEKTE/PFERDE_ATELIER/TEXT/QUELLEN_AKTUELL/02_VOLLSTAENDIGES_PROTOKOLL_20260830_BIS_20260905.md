@@ -1554,3 +1554,42 @@ Folge:
 - im Realtest keine Reparatur;
 - Stop nur beim ersten echten BLOCKED/USER_ACTION_REQUIRED oder bei 7/7 + 107008 PASS;
 - kein Publish.
+
+
+### 09.09.2026 – Realtest nach M36: LanguageTool-Stop bestätigt systemische Corridor-Lücke
+
+Main/Dispatcher:
+`93ba987c56f7b08ffba009210e3012c036fec18d`.
+
+Realtest:
+- Cloud Entry PASS;
+- Production Preflight PASS;
+- Runtime Entry PASS;
+- Current Action READY in `R_D_1_01`;
+- erstes Item `article:a8282e69ecd43b615de17eb1`;
+- erster technischer Blocker `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`;
+- 107007 nicht abgeschlossen;
+- 107008 nicht erreicht;
+- kein Publish / kein WordPress-Write;
+- keine Reparatur im Realtest.
+
+Historiengegenprüfung:
+Der exakt gleiche LanguageTool-Livebefund war bereits am 07.09. dokumentiert.
+Die damals autoritativ eingefrorene Entscheidung gilt weiterhin:
+**kein isolierter LT-Fix**.
+
+Begründung:
+Die zwölf Stage-Namen sind keine zwölf gleichartigen Worker-Jobs.
+Elf Nicht-PPM-Stufen werden im heutigen Handoff weitgehend nur durch generische Worker-Proofs dargestellt.
+Damit liegt der Fehler in derselben K1/K3-Bindungsklasse wie der frühere LT-Stop.
+
+Wiederverwendbare LT-Beweisquelle:
+Branch `hobbyroom/languagetool-runtime-rebind-20260907`, Commit `b5aa14b94b5f5874c487afa2bccef31f90f04e90`.
+Dort historischer echter LT-6.8-Runtimeweg mit festen Dependency-/JAR-Hashes und `--json -l de-DE`.
+Branch bleibt PARKPLATZ / NICHT INTEGRIEREN.
+
+Aktiver Weg:
+- 12-Stage-Corridor vollständig technisch zuordnen;
+- keine Fach-/Qualitätsregel verändern;
+- keine neue Stufe, kein neuer Executor, kein neuer Workflow;
+- erst nach Corridor-PASS genau ein konsolidierter KISS-Bindungskandidat.
