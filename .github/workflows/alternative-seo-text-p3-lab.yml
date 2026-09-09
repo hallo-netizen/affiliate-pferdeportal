@@ -184,6 +184,12 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_real_current_action_probe.py
 
+      - name: ACM existing fact-pack and production-plan schema probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/acm_factpack_plan_schema_probe.py
+
       - name: P28 design visual authority inventory
         shell: bash
         run: |
