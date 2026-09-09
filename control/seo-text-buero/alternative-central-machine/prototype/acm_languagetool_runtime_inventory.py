@@ -11,8 +11,13 @@ def main():
         out=Path(td)/"ppm";out.mkdir()
         with zipfile.ZipFile(PPM) as z:z.extractall(out)
         root=out/"portal-production-machine"
-        paths=[str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()]
-        runtime=[p for p in paths if re.search(r"(languagetool|language-tool|\.jar$|bestand.?43)",p,re.I)]
+        files=[p for p in root.rglob("*") if p.is_file()]
+        paths=[str(p.relative_to(root)) for p in files]
+        evidence=[str(p.relative_to(root)) for p in files if re.search(r"(languagetool|language-tool|bestand.?43)",str(p.relative_to(root)),re.I)]
+        runtime=[str(p.relative_to(root)) for p in files if (
+            p.suffix.lower()==".jar"
+            or (p.suffix.lower() in {".sh",".py"} and re.search(r"(languagetool|language-tool)",p.name,re.I))
+        )]
         refs=[]
         for p in root.rglob("*"):
             if not p.is_file() or p.suffix.lower() not in {".php",".py",".sh",".json",".md",".txt"}:continue
@@ -28,8 +33,10 @@ def main():
           "status":"ACM_LANGUAGETOOL_RUNTIME_INVENTORY_PASS",
           "runtime_candidate_paths":runtime,
           "runtime_candidate_count":len(runtime),
+          "evidence_candidate_paths":evidence,
           "contract_and_code_refs":refs[:80],
           "repository_contains_bound_languagetool_runtime":len(runtime)>0,
+          "note":"JSON/TXT LanguageTool reports are evidence only and are not counted as an executable runtime.",
           "publish_allowed":False
         },ensure_ascii=False,indent=2))
     return 0
