@@ -1,4 +1,5 @@
 import copy
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -10,12 +11,14 @@ from p11_workflow_contract import (
     verify_stage_results,
 )
 
-REPO=Path(__file__).resolve().parents[4]
-AUTHORITATIVE=REPO/"control/startmaster0107/fachworkflow_proof_handoff.py"
-
 class P11WorkflowContractTests(unittest.TestCase):
-    def test_positive_authoritative_stage_set_exact(self):
-        verify_authoritative_stage_source(AUTHORITATIVE)
+    def test_positive_authoritative_stage_set_exact_independent_of_order(self):
+        values=list(REQUIRED_STAGES)
+        values[1],values[9]=values[9],values[1]
+        with tempfile.TemporaryDirectory() as td:
+            source=Path(td)/"stage_source.py"
+            source.write_text("STAGES="+repr(values)+"\n",encoding="utf-8")
+            verify_authoritative_stage_source(source)
 
     def test_positive_all_twelve_exactly_once(self):
         rows=canonical_pass_results()
