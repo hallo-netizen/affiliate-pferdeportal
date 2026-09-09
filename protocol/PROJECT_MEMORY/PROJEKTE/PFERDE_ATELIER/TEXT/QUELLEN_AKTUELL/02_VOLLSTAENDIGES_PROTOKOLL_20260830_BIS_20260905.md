@@ -1211,3 +1211,24 @@ Wartungskandidat:
 
 Ruleset:
 - Repository-admin-Bypass wieder entfernt / bypass leer.
+
+
+### 09.09.2026 – PR #200 serverseitige Wartungsprüfung
+
+PR #200:
+- Branch `hobbyroom/m22-sequential-history-gate-20260909`;
+- Head `90eb7e897897636d51bc13e8ad590fe5d953b0c3`;
+- exakt 3 bestehende Kontroll-/History-Dateien;
+- kein Produktionscode.
+
+GitHub:
+- `hardlock`: PASS;
+- `hardlock-base`: FAIL ausschließlich im Schritt „Block immutable security paths…“;
+- exakter Stop: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`;
+- betroffener Selbstschutzpfad: `control/paul-scope-gate/paul_scope_gate.py`.
+
+Einordnung:
+- erwarteter Bootstrap-/Selbstschutzfall;
+- kein M17-/M22-/M35-Produktionsfehler;
+- Ruleset-Bypass ist aktuell leer;
+- für Integration der eigenen Gate-Wartung ist einmalig der bekannte Repository-admin-PR-Bypass nötig; danach sofort wieder entfernen.
