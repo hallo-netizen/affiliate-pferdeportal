@@ -2061,3 +2061,32 @@ Der exakte Livefall 8 Kandidaten → 16 Provider-Aufrufe → $0.1920 → 8 BLOCK
 
 ZUSATZ:
 Kostenanzeige nach einem Lauf muss klar zwischen tatsächlichen Kosten des abgeschlossenen Laufs und der maximalen Schätzung eines **neu gestarteten** Laufs unterscheiden.
+
+
+## PV-PLAN-018 – Vergleichsnachfrage = direktes Paar ODER Nachfrage nach beiden Produkten
+
+STAND: 2026-09-09 / VERBINDLICH.
+
+WAS:
+SEO darf einen konkreten Produktvergleich freigeben, wenn entweder eine belastbare direkte Paaranfrage A gegen B / vs / oder existiert **oder** beide konkreten Produkte jeweils belastbare externe Nachfrage besitzen. Danach bleibt die aktuelle Planning-/Kannibalisierungsprüfung zwingend.
+
+NICHT AUSREICHEND:
+- Nachfrage nur nach A oder nur nach B;
+- generische Produktgruppen-Nachfrage;
+- interne synthetische Themen ohne externe Nachfrage.
+
+WARUM:
+Der bidirektionale Workflow muss auch Vergleiche erkennen, die Nutzer sinnvoll benötigen, obwohl sie nicht exakt als Paarphrase suchen.
+
+## PV-PLAN-019 – SEO-Signale sind zeitgebundene Evidenz, keine dauerhafte Wahrheit
+
+STAND: 2026-09-09 / VERBINDLICH.
+
+WAS:
+Provider-/SEO-Signale besitzen Vertragsversion und Ablaufzeit. Veraltete Vertragsstände oder abgelaufene Evidenz werden erneut geprüft. Positive Evidenz wird vor Dossierfreigabe read-only gegen aktuellen Planning-/Kannibalisierungs- sowie Inventory-/Structure-Zustand revalidiert.
+
+WARUM:
+Suchnachfrage, Konkurrenz und WordPress-Bestand ändern sich. Ein alter BLOCK darf nicht dauerhaft sperren und ein alter PASS darf nicht still weitergelten.
+
+KISS:
+Keine neue SEO-Datenbank. Bestehender Signalspeicher erhält nur klare Freshness-/Binding-Regeln.
