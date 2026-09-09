@@ -5,6 +5,15 @@ Branch: `alternative/seo-text-central-machine-20260908`
 Zweck: vollständig getrennte Dokumentation dieser Alternativroute
 Datum: 2026-09-08
 
+## CURRENT-POINTER – KEINE ZWEITE STANDWAHRHEIT
+
+Die einzige aktuelle ACM-Standwahrheit ist:
+`AKTENSCHRANK/58_ACM_ROUTE_STATUS_20260909.md`.
+
+Alle weiter unten enthaltenen Überschriften wie
+`AKTUELLER ROUTENSTAND Pxx`
+sind historische Entwicklungsstände und **nicht CURRENT**.
+
 ## Dokumentationsregel
 
 Alles Relevante aus dieser Parallelentwicklung wird ausschließlich hier bzw. im zugehörigen Alternativordner dauerhaft abgelegt:
@@ -417,3 +426,44 @@ Produktive Standwahrheit bleibt separat:
 `control/startmaster0107/CURRENT_STATE.json`
 
 Die produktive STARTMASTER-Fehlermatrix bleibt ausschließlich bei der parallelen Reparaturroute.
+
+
+## CHAT-ENDPROTOKOLL 09.09.2026 – KISS / HARDLOCK / SIGNATUR / P26
+
+### WAS tatsächlich geändert wurde
+- `00_ROUTE_BOUNDARY.md`: fail-closed Pre-Change- und New-Chat-Zwangsgate.
+- separater Lab-Basisbranch: bestehender P3-Workflow um externen ACM Machine Hardlock ergänzt.
+- `test_p7_release_boundary.py`: direkte ACM-Ausgabe gegen vorhandene Signaturgrenze positiv/negativ geprüft.
+- `p26_research_factpack_chain_map.py`: ausschließlich read-only Untersuchung des vorhandenen öffentlichen PSERC-`prepare()`-Seams und Suche nach vorhandener Originaltestabdeckung.
+- ACM-Current-Akte nachgezogen.
+
+### WARUM
+Der alte Produktionsworkflow darf nur Inspiration sein.
+Insbesondere darf die alte 107007-/12-Stage-/Handoff-Orchestrierung nicht ungefiltert als neue ACM-Workflowlogik zurückkehren.
+
+Der Hardlock erzwingt deshalb vor jedem Kandidaten:
+- Isolation;
+- keine neue ausführbare Schicht;
+- keine aktive Altworkflowübernahme;
+- keine neue Route-/Worker-/Validator-/Engine-Freiheit.
+
+### TATSÄCHLICHE TESTS
+PASS:
+- Head `c2116ccb9759ef7237894f0ef8a696aa9f3b0295`: P3 `34352023627` 62/62 + P8 `34352023599`.
+- Head `1c3f7354ceac8a301bfe0212488b20314fccac57`: P3 `34352651422` 62/62 + P8 `34352651337`.
+- direkter ACM->Signatur-Seam positiv PASS; Post-Signatur-Manipulation BLOCKED.
+- Machine Hardlock PASS.
+
+AKTUELL BLOCKED:
+- Head `573cfa2fdf472d338586f55cae2e9b7257f40413`
+- P3 `34354268196` stoppt bei P26 mit
+  `PSERC_BRIDGE_PREPARE_EXISTING_TEST_COVERAGE_MISSING`.
+- P8 `34354267927` SUCCESS.
+- P0–P25 und Hardlock vor dem P26-Stop PASS; alles danach SKIPPED.
+
+### EINORDNUNG
+Das ist kein bewiesener PSERC-Funktionsfehler.
+Es ist eine bewusst fail-closed behandelte Beweislücke vor einer möglichen Übernahme des vorhandenen schreibfreien PSERC-`prepare()`-Seams.
+
+Keine Produktionsdatei, kein main, kein WordPress und kein Publish wurden verändert.
+
