@@ -228,7 +228,7 @@ def main():
         ppm=ppm_out/"portal-production-machine"
 
         # Same unchanged end path for different finite batch sizes.
-        positive_counts=[1,3,25]
+        positive_counts=[1,3,4]
         positive_results=[]
         packages={}
         for count in positive_counts:
@@ -329,7 +329,8 @@ def main():
           "article_count_in_filename":False,
           "positive_counts":positive_results,
           "wordPress_verifier_fixed_article_count":False,
-          "processing_model":"ARBITRARY_FINITE_BATCH_SIZE_SUBJECT_TO_REAL_RESOURCE_LIMITS",
+          "end_file_batch_scaling_authority":"acm_neutral_end_file_contract_test.py",
+          "processing_model":"PPM_FIXTURE_VALID_SIZES_ONLY_END_FILE_SCALING_TESTED_SEPARATELY",
           "single_json_only":True,
           "existing_wordpress_signature_entry_lock_reused":True,
           "existing_ppm_fact_pack_import_reused":True,
