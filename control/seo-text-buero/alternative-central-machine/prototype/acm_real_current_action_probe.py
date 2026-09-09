@@ -12,6 +12,13 @@ def run(cmd:list[str],cwd:Path,timeout:int=300)->subprocess.CompletedProcess:
     return subprocess.run(cmd,cwd=cwd,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=timeout)
 
 def parse_last_json(text:str)->dict:
+    raw=text.strip()
+    try:
+        obj=json.loads(raw)
+        if isinstance(obj,dict):
+            return obj
+    except Exception:
+        pass
     dec=json.JSONDecoder()
     found=[]
     for i,ch in enumerate(text):
@@ -25,8 +32,16 @@ def parse_last_json(text:str)->dict:
             found.append(obj)
     if not found:
         raise RuntimeError("CURRENT_ACTION_JSON_MISSING")
-    for obj in reversed(found):
-        if isinstance(obj.get("status"),str) and obj.get("status"):
+    expected={
+        "CODEX_PRODUCTION_PREFLIGHT_PASS",
+        "OFFICIAL_RUNTIME_ENTRY_PASS",
+        "CURRENT_BOUND_ACTION_READY",
+        "BLOCKED",
+        "USER_ACTION_REQUIRED",
+        "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
+    }
+    for obj in found:
+        if obj.get("status") in expected:
             return obj
     raise RuntimeError("CURRENT_ACTION_STATUS_OBJECT_MISSING")
 
