@@ -2137,3 +2137,27 @@ Fehlende Testvoraussetzung = FAIL/OFFEN, niemals aus einem vorhandenen Testrepor
 
 KISS:
 Keine neue Testarchitektur. Nur die bereits vorhandene Suite mit ihren echten Voraussetzungen ausführen und den ersten echten FAIL nicht weginterpretieren.
+
+
+## TEXT-TECH-20260909-CORRIDOR-POST-M36 – B16 bleibt Corridor-Blocker, kein LT-Minifix
+
+WAS:
+Nach M01–M36 Gesamt-PASS und Integration von M36 wurde der echte 7/7-Realtest erneut ausgeführt.
+Er stoppt aktuell bei `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`.
+Der Stop wird als B16 in der autoritativen TEXT-Fehlerquelle geführt.
+
+WARUM:
+Die erneute Gegenprüfung gegen Paul, Fehlerhistorie, letzten 7/7-Stand, die technische Corridor-Matrix und den bytegenau verifizierten Originalmaster bestätigt:
+Der sichtbare LanguageTool-Stop ist ein Symptom derselben K1/K3-Bindungsklasse und kein zulässiger isolierter Minifix.
+
+DAUERHAFTE REGEL:
+- kein LanguageTool-Einzelfix;
+- kein Worker darf Stage-PASS selbst beglaubigen;
+- keine historischen Produktionspläne als NEW-Produktionsquelle;
+- kein G9-Spezial-Link-Snapshot als allgemeine NEW-Linkautorität;
+- `design_format` nicht eigenmächtig als Source- oder Render-PASS definieren;
+- solange bestehende NEW-Link-Provenienz und bestehende `design_format`-Autorität nicht eindeutig gefunden sind: `FIX_FORBIDDEN`;
+- falls eine vorhandene Autorität gefunden wird, zuerst B16 als fortlaufende ausführbare History-Regression aufnehmen, erst danach genau einen konsolidierten KISS-Produktkandidaten.
+
+UNVERÄNDERT:
+SEO-5-Felder-Handoff, Textmaschine/Fachregeln, PPM/PSERC/PSTE, Tabellen-/Link-/LanguageTool-/Designregeln, Single Door und Publish-Sperre.
