@@ -18,7 +18,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Environment proof
         shell: bash
@@ -28,6 +28,139 @@ jobs:
           php --version
           test -f control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
           test -f control/startmaster0107/runtime_packages/PSERC-FIX.zip
+
+      - name: ACM machine hardlock
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib
+          import re
+          import subprocess
+          import sys
+
+          ACM = "control/seo-text-buero/alternative-central-machine/"
+          ISOLATION_BASE = "914638e67a265cf2e8951b1177a7d80fdf904e98"
+          HARDLOCK_BASE = "22e987a780d71711597c07b0a38a077c703c315f"
+
+          # These files may remain as historical/read-only evidence, but may not evolve
+          # into active ACM orchestration.
+          FROZEN_OLD_WORKFLOW_EVIDENCE = {
+              ACM + "prototype/p27_existing_codex_factpack_handoff.py",
+              ACM + "prototype/acm_real_current_action_probe.py",
+              ACM + "prototype/p38_existing_handoff_contract.py",
+              ACM + "prototype/p39_existing_handoff_to_prepare_boundary.py",
+              ACM + "prototype/p40_handoff_controller.py",
+              ACM + "prototype/test_p40_handoff_controller.py",
+              ACM + "prototype/p47_existing_handoff_public_prewrite.py",
+          }
+
+          OLD_WORKFLOW_TOKENS = (
+              "FACHWORKFLOW_HANDOFF_REQUEST",
+              "CURRENT_BOUND_ACTION_READY",
+              "codex_current_action",
+              "fachworkflow_proof_handoff",
+              "STEP_107007",
+              "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+          )
+
+          FREEDOM_PATTERNS = (
+              r"\bset_next_step\b",
+              r"\bset_validator\b",
+              r"\bset_route\b",
+              r"\bset_engine\b",
+              r"\bchoose_worker\b",
+              r"\bchoose_route\b",
+              r"\bchoose_validator\b",
+              r"\bchoose_engine\b",
+              r"\bregister_validator\b",
+              r"\bregister_worker\b",
+          )
+
+          EXEC_SUFFIXES = {".py", ".php", ".sh", ".js", ".ts"}
+
+          def git(*args):
+              return subprocess.check_output(["git", *args], text=True).strip()
+
+          def rows(value):
+              return [x for x in value.splitlines() if x.strip()]
+
+          def block(code, detail=""):
+              print(code + (":" + detail if detail else ""), file=sys.stderr)
+              raise SystemExit(2)
+
+          # A. Isolation is absolute: nothing outside ACM may differ from the
+          # original isolated starting point.
+          changed_from_isolation = rows(git("diff", "--name-only", f"{ISOLATION_BASE}...HEAD"))
+          outside = [p for p in changed_from_isolation if not p.startswith(ACM)]
+          if outside:
+              block("ACM_ISOLATION_VIOLATION", ",".join(outside))
+
+          # B. From the hardlock point onward, KISS means no new executable
+          # components. Existing code may be minimally changed, but architecture
+          # cannot grow sideways.
+          status_rows = rows(git("diff", "--name-status", f"{HARDLOCK_BASE}...HEAD"))
+          changed = []
+          added = set()
+          for row in status_rows:
+              parts = row.split("\t")
+              if len(parts) < 2:
+                  continue
+              p = parts[-1]
+              changed.append(p)
+              if parts[0] == "A":
+                  added.add(p)
+
+          for p in changed:
+              if not p.startswith(ACM):
+                  block("ACM_POST_HARDLOCK_ISOLATION_VIOLATION", p)
+              if p in FROZEN_OLD_WORKFLOW_EVIDENCE:
+                  block("OLD_WORKFLOW_HISTORY_MUTATION_BLOCKED", p)
+              if p in added and pathlib.Path(p).suffix.lower() in EXEC_SUFFIXES:
+                  block("NEW_EXECUTABLE_COMPONENT_BLOCKED", p)
+
+          # C. Inspiration is allowed in documentation. Active executable code
+          # may not import/call/adopt old workflow orchestration.
+          for p in changed:
+              pp = pathlib.Path(p)
+              if pp.suffix.lower() not in EXEC_SUFFIXES or not pp.is_file():
+                  continue
+              txt = pp.read_text(encoding="utf-8")
+              for token in OLD_WORKFLOW_TOKENS:
+                  if token in txt:
+                      block("OLD_WORKFLOW_COMPONENT_ADOPTION_BLOCKED", p + ":" + token)
+              for pat in FREEDOM_PATTERNS:
+                  if re.search(pat, txt):
+                      block("NEW_DECISION_FREEDOM_BLOCKED", p + ":" + pat)
+
+          # D. The central controller keeps a fixed caller API. No engine,
+          # validator, route or next-step selection may be injected.
+          core = pathlib.Path(ACM + "prototype/central_machine.py").read_text(encoding="utf-8")
+          if re.search(r"def\s+__init__\s*\(\s*self\s*,\s*job_id\s*,\s*item_id\s*\)", core) is None:
+              block("CENTRAL_MACHINE_CONSTRUCTOR_FREEDOM_BLOCKED")
+          for pat in FREEDOM_PATTERNS:
+              if re.search(pat, core):
+                  block("CENTRAL_MACHINE_FREEDOM_API_BLOCKED", pat)
+
+          # E. Negative self-checks of the hardlock logic itself.
+          def synthetic_active_code_allowed(txt):
+              if any(tok in txt for tok in OLD_WORKFLOW_TOKENS):
+                  return False
+              if any(re.search(pat, txt) for pat in FREEDOM_PATTERNS):
+                  return False
+              return True
+
+          assert synthetic_active_code_allowed("def fixed_step(x): return x")
+          assert not synthetic_active_code_allowed("FACHWORKFLOW_HANDOFF_REQUEST = {}")
+          assert not synthetic_active_code_allowed("def set_validator(x): pass")
+
+          print("ACM_MACHINE_HARDLOCK_PASS")
+          print("INSPIRATION_READ_ONLY_ALLOWED=true")
+          print("UNFILTERED_OLD_WORKFLOW_ADOPTION_ALLOWED=false")
+          print("NEW_EXECUTABLE_COMPONENT_ALLOWED=false")
+          print("CALLER_SELECTED_ROUTE_VALIDATOR_ENGINE_ALLOWED=false")
+          print("ISOLATION_ENFORCED=true")
+          PY
 
       - name: P0-P2 regression
         shell: bash
