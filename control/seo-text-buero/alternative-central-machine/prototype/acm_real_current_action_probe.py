@@ -25,7 +25,10 @@ def parse_last_json(text:str)->dict:
             found.append(obj)
     if not found:
         raise RuntimeError("CURRENT_ACTION_JSON_MISSING")
-    return found[-1]
+    for obj in reversed(found):
+        if isinstance(obj.get("status"),str) and obj.get("status"):
+            return obj
+    raise RuntimeError("CURRENT_ACTION_STATUS_OBJECT_MISSING")
 
 def main()->int:
     cp=run(["git","fetch","--depth=1","origin","main"],REPO)
