@@ -1261,3 +1261,43 @@ M22/M35:
 - M22 bleibt eigener nächster Fix;
 - M35 bleibt separater geparkter Kandidat;
 - keine Sammelfixes.
+
+
+### 09.09.2026 – M17 regulär gemergt / M22 isoliert aufgebaut
+
+M17:
+- PR #199 regulär gemergt;
+- neuer main `7531154a6218a06e49d35b78062933df3c886625`;
+- vor Merge: `hardlock` PASS, `hardlock-base` PASS;
+- Maschinenbeleg: current main erster FAIL M17; Kandidat erster bekannter FAIL M22;
+- Repository-admin-Bypass war vor Produktionsmerge leer.
+
+M22:
+- aktiver Blocker `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
+- Root Cause gegen TECH-KEYFLOW-001/B15 geprüft;
+- bewiesener Referenzstand `7990029428399e8ba01d88a6543ce068812e9218`;
+- interner H8-Vorlauf muss hash-/batch-/herkunftsgebunden und ohne interne ED25519-/Signer-Pflicht bleiben;
+- externe Upload-/Release-Signaturprüfung bleibt separat erhalten.
+
+Kandidat:
+- Branch `hobbyroom/m22-h8-provenance-no-internal-signature-20260909`;
+- Head `0aebd56998c2cb4e102b0d3e19cb3ea29985a65c`;
+- exakt 6 vorhandene H8-Dateien;
+- kein neuer Runner/Gate/Contract/Executor;
+- current main Source-Level: FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
+- Kandidat Source-Level: PASS;
+- M23 externe Signaturprüfung erhalten;
+- Codex-Capsule-Weg erhalten;
+- H8-Test zustandsunabhängig;
+- Boundary `file_bindings`: 11/11 PASS.
+
+Realtest:
+- nach M22 noch nicht ausgeführt;
+- M35 bleibt der bekannte spätere Liveblocker;
+- kein Publish / keine WordPress-Schreibaktion.
+
+RECOVERY_BASE_SHA:
+`de21f6cd35c60849c551fd82f78e75ce57c99fab`
+
+PASS/FAIL-Grenze:
+Serverseitige Required Checks des M22-Kandidaten noch offen. Kein Realtest-PASS behauptet. Kein Publish.
