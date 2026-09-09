@@ -96,7 +96,7 @@ def main():
             for test in sorted(tests_root.rglob("*.php")):
                 txt=test.read_text(encoding="utf-8")
                 direct="PSERC_PPM_Intake_Bridge::prepare" in txt
-                indirect="PSERC_Workflow_Supervisor::validate(" in txt
+                indirect="PSERC_Workflow_Supervisor" in txt
                 if not direct and not indirect:
                     continue
                 proc=subprocess.run(
