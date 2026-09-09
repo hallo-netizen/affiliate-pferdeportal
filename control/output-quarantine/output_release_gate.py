@@ -421,6 +421,25 @@ def commit_after_rearm(prepared_ref: str, prepared_sha256: str, auth_ref: str, a
     receipt_name = str(policy.get("release_receipt_name") or "RELEASE_RECEIPT.json")
     release_receipt_path = destination / receipt_name
     release_receipt_path.write_text(json.dumps(release_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    durable_destination = REPO / "control/startmaster0107/durable_release_archive" / prepared["batch_sha256"]
+    durable_destination.mkdir(parents=True, exist_ok=True)
+    durable_outputs = []
+    for row in released:
+        src = REPO / rel(row["released_ref"])
+        dst = durable_destination / src.name
+        if dst.exists() and sha256(dst) != row["sha256"]:
+            raise Blocked("DURABLE_DESTINATION_COLLISION:" + dst.name)
+        if not dst.exists():
+            shutil.copyfile(src, dst)
+        if sha256(dst) != row["sha256"]:
+            raise Blocked("DURABLE_COPY_HASH_MISMATCH:" + dst.name)
+        durable_outputs.append({"source_ref": row["source_ref"], "released_ref": str(dst.relative_to(REPO)), "sha256": row["sha256"]})
+    durable_receipt = dict(release_receipt)
+    durable_receipt["outputs"] = durable_outputs
+    durable_receipt_path = durable_destination / receipt_name
+    durable_receipt_path.write_text(json.dumps(durable_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     return {
         "ok": True,
         "status": "OUTPUT_RELEASE_PASS_FINAL",

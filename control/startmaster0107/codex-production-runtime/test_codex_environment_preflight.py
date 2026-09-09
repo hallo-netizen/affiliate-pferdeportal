@@ -81,6 +81,37 @@ def make_repo(root: Path) -> tuple[Path, str]:
     return repo, head
 
 
+
+def toolbox_ok():
+    return {
+        'status':'RUNTIME_TOOLBOX_PASS',
+        'php_executable':True,
+        'php_version':'8.test',
+        'java_executable':True,
+        'java_version':'java test',
+        'languagetool_real_execution':True,
+        'languagetool_engine':m.LT_ENGINE,
+        'languagetool_outer_sha256':m.LT_OUTER_SHA256,
+        'languagetool_inner_sha256':m.LT_INNER_SHA256,
+        'languagetool_jar_sha256':m.LT_JAR_SHA256,
+        'ppm679_package_sha256':m.PPM679_PACKAGE_SHA256,
+        'pserc_fix_package_sha256':m.PSERC_FIX_PACKAGE_SHA256,
+        'agent_network_required':False,
+        'content_semantics_inspected':False,
+        'quality_authority':'NONE',
+        'publish_allowed':False,
+    }
+
+
+def validate(repo, head, *, ed25519=True, toolbox=None, main_sha=None):
+    return m.validate(
+        repo,
+        main_sha_provider=lambda:((main_sha or head),'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'),
+        ed25519_provider=lambda:ed25519,
+        runtime_tools_provider=lambda _repo:(toolbox if toolbox is not None else toolbox_ok()),
+    )
+
+
 def blocked(fn, token: str):
     try:
         fn()
@@ -93,7 +124,7 @@ def blocked(fn, token: str):
 def main():
     with tempfile.TemporaryDirectory() as td:
         repo, head = make_repo(Path(td))
-        proof = m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True)
+        proof = validate(repo, head)
         assert proof['status']=='CODEX_PRODUCTION_PREFLIGHT_PASS'
         assert proof['content_semantics_inspected'] is False
         assert proof['quality_authority']=='NONE'
@@ -102,18 +133,29 @@ def main():
         detected, source = m.authoritative_main_sha(repo)
         assert detected == head and source == 'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'
 
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:('0'*40,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'CODEX_CHECKOUT_NOT_CURRENT_MAIN')
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:False), 'ED25519_RUNTIME_UNAVAILABLE')
+        blocked(lambda:validate(repo, head, main_sha='0'*40), 'CODEX_CHECKOUT_NOT_CURRENT_MAIN')
+        blocked(lambda:validate(repo, head, ed25519=False), 'ED25519_RUNTIME_UNAVAILABLE')
+
+        bad=toolbox_ok(); bad['languagetool_jar_sha256']='0'*64
+        blocked(lambda:validate(repo, head, toolbox=bad), 'RUNTIME_TOOLBOX_PROOF_INVALID:languagetool_jar_sha256')
+        bad=toolbox_ok(); bad['java_executable']=False
+        blocked(lambda:validate(repo, head, toolbox=bad), 'RUNTIME_TOOLBOX_PROOF_INVALID:java_executable')
+        bad=toolbox_ok(); bad['php_executable']=False
+        blocked(lambda:validate(repo, head, toolbox=bad), 'RUNTIME_TOOLBOX_PROOF_INVALID:php_executable')
+        bad=toolbox_ok(); bad['ppm679_package_sha256']='0'*64
+        blocked(lambda:validate(repo, head, toolbox=bad), 'RUNTIME_TOOLBOX_PROOF_INVALID:ppm679_package_sha256')
+        bad=toolbox_ok(); bad['pserc_fix_package_sha256']='0'*64
+        blocked(lambda:validate(repo, head, toolbox=bad), 'RUNTIME_TOOLBOX_PROOF_INVALID:pserc_fix_package_sha256')
 
         runtimep=repo/'control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json'
         runtime=json.loads(runtimep.read_text()); runtime['status']='BATCH_READY_PACKAGE_PENDING'; dump(runtimep,runtime)
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'RUNTIME_NOT_EXECUTION_READY')
+        blocked(lambda:validate(repo, head), 'RUNTIME_NOT_EXECUTION_READY')
         runtime['status']='EXECUTION_READY'; dump(runtimep,runtime)
 
         ptrp=repo/'control/CURRENT_STARTMASTER.json'; ptr=json.loads(ptrp.read_text()); ptr['free_chat_execution_authority']=True; dump(ptrp,ptr)
-        blocked(lambda:m.validate(repo, main_sha_provider=lambda:(head,'CODEX_CHECKOUT_REMOTE_TRACKING_MAIN'), ed25519_provider=lambda:True), 'FREE_CHAT_EXECUTION_MUST_BE_FALSE')
+        blocked(lambda:validate(repo, head), 'FREE_CHAT_EXECUTION_MUST_BE_FALSE')
 
-    print(json.dumps({'ok':True,'status':'CODEX_ENVIRONMENT_PREFLIGHT_POSITIVE_NEGATIVE_PASS','positive':1,'negative':4,'content_semantics_inspected':False,'quality_authority':'NONE','publish_allowed':False}, indent=2))
+    print(json.dumps({'ok':True,'status':'CODEX_ENVIRONMENT_PREFLIGHT_POSITIVE_NEGATIVE_PASS','positive':1,'negative':9,'content_semantics_inspected':False,'quality_authority':'NONE','publish_allowed':False}, indent=2))
 
 if __name__=='__main__':
     main()

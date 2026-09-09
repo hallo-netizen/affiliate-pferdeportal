@@ -3,7 +3,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 import subprocess
+import tempfile
 import urllib.request
 from pathlib import Path
 from typing import Callable
@@ -20,6 +22,15 @@ ALLOWED_STEPS = {
     ("RUN_NEW_ARTICLE_BATCH_NO_STOP", 107007),
     ("FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH", 107008),
 }
+PPM679_PACKAGE_REL = "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+PSERC_FIX_PACKAGE_REL = "control/startmaster0107/runtime_packages/PSERC-FIX.zip"
+PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+PSERC_FIX_PACKAGE_SHA256 = "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
+LT_PROOF_REL = ".pferde-environment/LANGUAGETOOL_RUNTIME.json"
+LT_ENGINE = "LanguageTool 6.8 / Bestand 43"
+LT_OUTER_SHA256 = "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a"
+LT_INNER_SHA256 = "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d"
+LT_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
 
 
 class PreflightBlocked(RuntimeError):
@@ -98,11 +109,162 @@ def ed25519_available() -> bool:
     return True
 
 
+
+def _run_local_tool(argv: list[str], repo: Path, token: str, timeout: int = 60) -> subprocess.CompletedProcess:
+    try:
+        cp = subprocess.run(
+            argv,
+            cwd=repo,
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=timeout,
+        )
+    except Exception as exc:
+        raise PreflightBlocked(token) from exc
+    if cp.returncode != 0:
+        raise PreflightBlocked(token)
+    return cp
+
+
+def validate_runtime_tools(repo: Path) -> dict:
+    repo = Path(repo).resolve()
+
+    ppm = repo / PPM679_PACKAGE_REL
+    if not ppm.is_file():
+        raise PreflightBlocked("PPM679_PACKAGE_ZIP_MISSING")
+    if sha256(ppm) != PPM679_PACKAGE_SHA256:
+        raise PreflightBlocked("PPM679_PACKAGE_HASH_MISMATCH")
+
+    pserc = repo / PSERC_FIX_PACKAGE_REL
+    if not pserc.is_file():
+        raise PreflightBlocked("PSERC_FIX_ZIP_MISSING")
+    if sha256(pserc) != PSERC_FIX_PACKAGE_SHA256:
+        raise PreflightBlocked("PSERC_FIX_PACKAGE_HASH_MISMATCH")
+
+    php = shutil.which("php")
+    if not php:
+        raise PreflightBlocked("PHP_RUNTIME_UNAVAILABLE")
+    php_cp = _run_local_tool([php, "-r", "echo PHP_VERSION;"], repo, "PHP_RUNTIME_NOT_EXECUTABLE")
+    php_version = php_cp.stdout.strip()
+    if not php_version:
+        raise PreflightBlocked("PHP_RUNTIME_VERSION_UNAVAILABLE")
+
+    java = shutil.which("java")
+    if not java:
+        raise PreflightBlocked("JAVA_RUNTIME_UNAVAILABLE")
+    java_cp = _run_local_tool([java, "-version"], repo, "JAVA_RUNTIME_NOT_EXECUTABLE")
+    java_version = (java_cp.stderr or java_cp.stdout).splitlines()[0].strip() if (java_cp.stderr or java_cp.stdout) else ""
+    if not java_version:
+        raise PreflightBlocked("JAVA_RUNTIME_VERSION_UNAVAILABLE")
+
+    lt_proof_path = repo / LT_PROOF_REL
+    if not lt_proof_path.is_file():
+        raise PreflightBlocked("LANGUAGETOOL_RUNTIME_PROOF_MISSING")
+    lt = load(lt_proof_path)
+    required_lt = {
+        "status": "LANGUAGETOOL_RUNTIME_READY",
+        "engine": LT_ENGINE,
+        "outer_dependency_sha256": LT_OUTER_SHA256,
+        "inner_dependency_sha256": LT_INNER_SHA256,
+        "executed_commandline_jar_sha256": LT_JAR_SHA256,
+        "executed_component_version": "6.8",
+        "agent_network_required_for_execution": False,
+        "content_semantics_inspected": False,
+        "quality_authority": "NONE",
+        "content_or_quality_rules_changed": False,
+        "publish_allowed": False,
+    }
+    for key, expected in required_lt.items():
+        if lt.get(key) != expected:
+            raise PreflightBlocked("LANGUAGETOOL_RUNTIME_PROOF_INVALID:" + key)
+
+    jar_ref = str(lt.get("executed_commandline_jar_ref") or "")
+    jar_path = rel(repo, jar_ref)
+    if not jar_path.is_file():
+        raise PreflightBlocked("LANGUAGETOOL_COMMANDLINE_JAR_MISSING")
+    if sha256(jar_path) != LT_JAR_SHA256:
+        raise PreflightBlocked("LANGUAGETOOL_COMMANDLINE_JAR_HASH_MISMATCH")
+
+    proof_dir = repo / ".pferde-environment"
+    proof_dir.mkdir(parents=True, exist_ok=True)
+    smoke_path = proof_dir / "LANGUAGETOOL_PREFLIGHT_SMOKE.txt"
+    smoke_path.write_text("Das ist ein einfacher Testsatz.\n", encoding="utf-8")
+    try:
+        lt_cp = _run_local_tool(
+            [java, "-Xmx1024m", "-jar", str(jar_path), "--json", "-l", "de-DE", str(smoke_path)],
+            repo,
+            "LANGUAGETOOL_RUNTIME_NOT_EXECUTABLE",
+            timeout=120,
+        )
+        try:
+            parsed = json.loads(lt_cp.stdout)
+        except Exception as exc:
+            raise PreflightBlocked("LANGUAGETOOL_RUNTIME_OUTPUT_INVALID") from exc
+        if not isinstance(parsed, dict):
+            raise PreflightBlocked("LANGUAGETOOL_RUNTIME_OUTPUT_INVALID")
+    finally:
+        try:
+            smoke_path.unlink()
+        except FileNotFoundError:
+            pass
+
+    return {
+        "status": "RUNTIME_TOOLBOX_PASS",
+        "php_executable": True,
+        "php_version": php_version,
+        "java_executable": True,
+        "java_version": java_version,
+        "languagetool_real_execution": True,
+        "languagetool_engine": LT_ENGINE,
+        "languagetool_outer_sha256": LT_OUTER_SHA256,
+        "languagetool_inner_sha256": LT_INNER_SHA256,
+        "languagetool_jar_sha256": LT_JAR_SHA256,
+        "ppm679_package_sha256": PPM679_PACKAGE_SHA256,
+        "pserc_fix_package_sha256": PSERC_FIX_PACKAGE_SHA256,
+        "agent_network_required": False,
+        "content_semantics_inspected": False,
+        "quality_authority": "NONE",
+        "publish_allowed": False,
+    }
+
+
+def require_runtime_tools(value: dict) -> dict:
+    required = {
+        "status": "RUNTIME_TOOLBOX_PASS",
+        "php_executable": True,
+        "java_executable": True,
+        "languagetool_real_execution": True,
+        "languagetool_engine": LT_ENGINE,
+        "languagetool_outer_sha256": LT_OUTER_SHA256,
+        "languagetool_inner_sha256": LT_INNER_SHA256,
+        "languagetool_jar_sha256": LT_JAR_SHA256,
+        "ppm679_package_sha256": PPM679_PACKAGE_SHA256,
+        "pserc_fix_package_sha256": PSERC_FIX_PACKAGE_SHA256,
+        "agent_network_required": False,
+        "content_semantics_inspected": False,
+        "quality_authority": "NONE",
+        "publish_allowed": False,
+    }
+    if not isinstance(value, dict):
+        raise PreflightBlocked("RUNTIME_TOOLBOX_PROOF_INVALID")
+    for key, expected in required.items():
+        if value.get(key) != expected:
+            raise PreflightBlocked("RUNTIME_TOOLBOX_PROOF_INVALID:" + key)
+    if not str(value.get("php_version") or "").strip():
+        raise PreflightBlocked("RUNTIME_TOOLBOX_PROOF_INVALID:php_version")
+    if not str(value.get("java_version") or "").strip():
+        raise PreflightBlocked("RUNTIME_TOOLBOX_PROOF_INVALID:java_version")
+    return value
+
+
 def validate(
     repo: Path = REPO,
     *,
     main_sha_provider: Callable[[], tuple[str, str]] | None = None,
     ed25519_provider: Callable[[], bool] | None = None,
+    runtime_tools_provider: Callable[[Path], dict] | None = None,
 ) -> dict:
     repo = Path(repo).resolve()
     head = git(repo, "rev-parse", "HEAD")
@@ -206,6 +368,10 @@ def validate(
     if (ed25519_provider or ed25519_available)() is not True:
         raise PreflightBlocked("ED25519_RUNTIME_UNAVAILABLE")
 
+    runtime_tools = require_runtime_tools(
+        runtime_tools_provider(repo) if runtime_tools_provider is not None else validate_runtime_tools(repo)
+    )
+
     return {
         "contract": CONTRACT,
         "status": "CODEX_PRODUCTION_PREFLIGHT_PASS",
@@ -224,6 +390,7 @@ def validate(
         "state_sha256": sha256(statep),
         "bundle_sha256": sha256(bundlep),
         "ed25519_runtime": True,
+        "runtime_tools": runtime_tools,
         "chat_execution_authority": "NONE",
         "chat_output_authority": "NONE",
         "domain_logic_authority": "NONE",

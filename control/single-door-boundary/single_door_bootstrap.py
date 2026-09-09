@@ -16,7 +16,7 @@ ACTION_TOKEN = "A_BOOT_001"
 INPUT_HANDLE = "I_BOOT_BATCH_001"
 RECEIPT_TOKEN = "P_BOOT_001"
 NEXT_ROOM_TOKEN = "R_PRE_001"
-BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1"
+BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1"
 AUTHORITATIVE_ORIGIN = "SINGLE_DOOR_BOOTSTRAP_ONLY"
 
 class BootstrapBlocked(RuntimeError):
@@ -72,7 +72,7 @@ def current_binding(repo: Path) -> dict[str, Any]:
         "source_manifest_sha256": str(state["source_manifest_sha256"]),
     }
 
-def expected_signed_binding(repo: Path) -> dict[str, Any]:
+def expected_provenance_binding(repo: Path) -> dict[str, Any]:
     cur = current_binding(repo)
     body = {
         "contract": BOOTSTRAP_BINDING_CONTRACT,
@@ -107,7 +107,6 @@ def execute_bound_bootstrap_action(
     repo: Path,
     producer_callable: Callable[[Path, Mapping[str, Any]], Path],
     boundary=None,
-    trusted_keys=None,
 ) -> dict[str, Any]:
     repo = Path(repo).resolve()
     boundary = boundary or boundary_module()
@@ -116,19 +115,19 @@ def execute_bound_bootstrap_action(
     cur = current_binding(repo)
     if source != (repo / cur["source_snapshot_ref"]).resolve():
         raise BootstrapBlocked("BOOTSTRAP_INPUT_NOT_CURRENT_BOUND_SNAPSHOT")
-    expected = expected_signed_binding(repo)
+    expected = expected_provenance_binding(repo)
     produced = Path(producer_callable(source, expected)).resolve()
     if not produced.is_file():
         raise BootstrapBlocked("BOOTSTRAP_PRODUCER_RETURNED_NO_PACKAGE")
     prov = _module(repo / "control/single-door-boundary/preproduction_provenance_guard.py", "h8_boot_provenance")
-    proof = prov.validate_package_provenance(repo, produced, trusted_keys=trusted_keys)
+    proof = prov.validate_package_provenance(repo, produced)
     if proof.get("status") != "H8_PREPRODUCTION_PROVENANCE_PASS":
         raise BootstrapBlocked("BOOTSTRAP_PROVENANCE_NOT_PASS")
     dst = incoming_path(repo, cur["generation"])
     if dst.exists():
         raise BootstrapBlocked("BOOTSTRAP_INCOMING_PACKAGE_ALREADY_EXISTS")
     shutil.copyfile(produced, dst)
-    copied = prov.validate_incoming_package(repo, trusted_keys=trusted_keys)
+    copied = prov.validate_incoming_package(repo)
     if copied.get("artifact_sha256") != proof.get("artifact_sha256"):
         dst.unlink(missing_ok=True)
         raise BootstrapBlocked("BOOTSTRAP_COPY_HASH_MISMATCH")
@@ -140,7 +139,7 @@ def execute_bound_bootstrap_action(
         "next_room_token": binding.next_room_token,
         "status": "PASS",
         "evidence": [
-            "H8_SIGNED_BOOTSTRAP_BINDING:" + str(proof["bootstrap_authority_sha256"]),
+            "H8_BOOTSTRAP_PROVENANCE_BINDING:" + str(proof["bootstrap_authority_sha256"]),
             "H8_PACKAGE_SHA256:" + str(proof["artifact_sha256"]),
         ],
     }

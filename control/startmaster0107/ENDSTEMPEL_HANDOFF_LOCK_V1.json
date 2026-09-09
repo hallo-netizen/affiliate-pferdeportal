@@ -1,0 +1,35 @@
+{
+  "contract": "PFERDE_ATELIER_ENDSTEMPEL_HANDOFF_LOCK_V1",
+  "status": "LOCKED",
+  "scope": "107008_PASS_TO_ENDSTEMPEL_ONLY",
+  "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "source_receipt_ref": ".pferde-release/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/RELEASE_RECEIPT.json",
+  "expected_receipt_sha256": "68a6e3f2c353f8bcf94962f19f89232314a70103e339949b0b7a74836e6558e9",
+  "expected_articles": [
+    {"name": "ARTICLE_9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56.md", "sha256": "1eebc6d5afc538be2c594a7f313a48c2c0c6c7acf15962e67d25265474e10e21"},
+    {"name": "ARTICLE_6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19.md", "sha256": "07c409860e30b5dc8a657123530ecb27a3f16b524754e4fbbc918b7daa45ba8d"},
+    {"name": "ARTICLE_7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87.md", "sha256": "2fdbc79b064435d2a618fa6fefb43827d6f0628fbff842fe2f53c76c12225209"},
+    {"name": "ARTICLE_5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288.md", "sha256": "d6aa46ffdc9fb558f8e97b0413a0cefeecf8b40cac3df37aefb72af34b5a517c"},
+    {"name": "ARTICLE_7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da.md", "sha256": "02e88eba33ff213836f0dbb55aa8af6f0060224bcbe143bc2ee8ad8df9442b66"},
+    {"name": "ARTICLE_8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648.md", "sha256": "bf2cc48e67dfb6c3c762acd05c1c3772ee6491f8d17849c1fd58c481117fe8ff"},
+    {"name": "ARTICLE_906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5.md", "sha256": "ec6a8c3656360a5569aa764b4b16762d565d17383b7c68f6837ac7c0ca1eeba3"}
+  ],
+  "allowed_action": "PERSIST_EXISTING_107008_RELEASE_SET_BYTE_IDENTICAL_TO_GITHUB",
+  "next_action_on_pass": "RUN_EXISTING_ENDSTEMPEL_ONLY",
+  "denied_actions": [
+    "NEW_107007_RUN",
+    "NEW_107008_RUN",
+    "ARTICLE_REWRITE",
+    "RECEIPT_RECONSTRUCTION",
+    "BASE64_OR_GZIP_FALLBACK",
+    "COMMENT_EXPORT_FALLBACK",
+    "OLD_COMMIT_FALLBACK",
+    "ALTERNATIVE_ROUTE",
+    "WORKFLOW_NAVIGATION",
+    "ARCHITECTURE_CHANGE",
+    "PUBLISH"
+  ],
+  "publish_allowed": false,
+  "content_mutation_allowed": false,
+  "workflow_navigation_authority": "NONE"
+}

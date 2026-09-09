@@ -17,6 +17,7 @@ RGUARD=REPO/'control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py'
 PREFLIGHT=REPO/'control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py'
 CONT=REPO/'control/production-continuity/production_continuity_guard.py'
 RUNTIME_ENTRY=REPO/'control/output-quarantine/runtime_entry_gate.py'
+DUAL=REPO/'control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py'
 FACH='control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt'
 BRIDGE='PFERDE_ATELIER_CODEX_CURRENT_ROOM_BRIDGE_V1'; BSTATE='PFERDE_ATELIER_CODEX_CURRENT_ROOM_BRIDGE_STATE_V1'
 ACTION='PFERDE_ATELIER_CODEX_CURRENT_BOUND_ACTION_V1'; IREC='PFERDE_ATELIER_BOUND_ITEM_EXECUTION_RECEIPT_V1'; CPC='PFERDE_ATELIER_BATCH_CHECKPOINT_V1'
@@ -110,9 +111,10 @@ def item_for(its,token):
 def slug(v): return ''.join(c if c.isalnum() else '_' for c in v).strip('_')[:96] or 'item'
 def action(s,it):
     root=f".pferde-quarantine/{s['ticket_id']}/{slug(it['canonical_article_id'])}"; rec=root+'/ITEM_RECEIPT.json'
-    return {'contract':ACTION,'status':'CURRENT_BOUND_ACTION_READY','room_token':s['current_room_token'],'action':'EXECUTE_EXISTING_BOUND_ITEM_EXECUTOR_OPAQUE','current_item':{k:it[k] for k in ('canonical_article_id','plan_slot','title','target_keyword','category','article_type')},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':FACH,'allowed_output_root':root+'/','item_receipt_ref':rec,'item_receipt_schema':{'contract':IREC,'room_token':s['current_room_token'],'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'status':['PASS','BLOCKED','USER_ACTION_REQUIRED'],'workflow_pass':'true only with PASS; false otherwise','navigation_decision':False,'state_write_requested':False,'workflow_change_requested':False,'content_or_quality_rules_changed':False,'outputs':'non-empty [{ref,sha256}] under allowed_output_root, excluding item_receipt_ref, only with PASS; [] otherwise','evidence':'non-empty string list'},'submission_command':f'python3 control/single-door-boundary/codex_current_room_bridge.py submit {rec}','worker_may_choose_next_room':False,'worker_may_choose_next_item':False,'workflow_navigation_authority':False,'content_or_quality_rule_change_authority':'NONE','publish_allowed':False,'all_other_actions':'DENY'}
+    base={'contract':ACTION,'status':'CURRENT_BOUND_ACTION_READY','room_token':s['current_room_token'],'action':'EXECUTE_EXISTING_BOUND_ITEM_EXECUTOR_OPAQUE','current_item':{k:it[k] for k in ('canonical_article_id','plan_slot','title','target_keyword','category','article_type')},'fachworkflow_authority':'EXISTING_UNCHANGED_BOUND_FACHWORKFLOW_ONLY','fachworkflow_prompt_ref':FACH,'allowed_output_root':root+'/','item_receipt_ref':rec,'item_receipt_schema':{'contract':IREC,'room_token':s['current_room_token'],'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'status':['PASS','BLOCKED','USER_ACTION_REQUIRED'],'workflow_pass':'true only with PASS; false otherwise','navigation_decision':False,'state_write_requested':False,'workflow_change_requested':False,'content_or_quality_rules_changed':False,'outputs':'non-empty [{ref,sha256}] under allowed_output_root, excluding item_receipt_ref, only with PASS; [] otherwise','evidence':'non-empty string list'},'submission_command':f'python3 control/single-door-boundary/codex_current_room_bridge.py submit {rec}','worker_may_choose_next_room':False,'worker_may_choose_next_item':False,'workflow_navigation_authority':False,'content_or_quality_rule_change_authority':'NONE','publish_allowed':False,'all_other_actions':'DENY'}
+    return mod(DUAL,'dual_rootfix_action').augment_current_action(REPO,base,it)
 def check_item_receipt(d,s,it,verify=True):
-    keys={'contract','room_token','canonical_article_id','plan_slot','status','workflow_pass','navigation_decision','state_write_requested','workflow_change_requested','content_or_quality_rules_changed','outputs','evidence'}
+    keys={'contract','room_token','canonical_article_id','plan_slot','status','workflow_pass','navigation_decision','state_write_requested','workflow_change_requested','content_or_quality_rules_changed','outputs','evidence','fachworkflow_pass_ref','fachworkflow_pass_sha256'}
     if set(d)!=keys or d.get('contract')!=IREC: raise Blocked('ITEM_RECEIPT_FIELDS_OR_CONTRACT_INVALID')
     if d.get('room_token')!=s.get('current_room_token'): raise Blocked('ITEM_RECEIPT_ROOM_MISMATCH')
     if d.get('canonical_article_id')!=it.get('canonical_article_id'): raise Blocked('ITEM_RECEIPT_ARTICLE_MISMATCH')
@@ -128,6 +130,7 @@ def check_item_receipt(d,s,it,verify=True):
         if d.get('workflow_pass') is not False: raise Blocked('NONPASS_WORKFLOW_PASS_MUST_BE_FALSE')
         return {'status':d['status'],'outputs':[],'evidence':ev}
     if d.get('workflow_pass') is not True: raise Blocked('ITEM_FULL_WORKFLOW_PASS_REQUIRED')
+    mod(DUAL,'dual_rootfix_pass').validate_fachworkflow_pass(REPO,action(s,it),it,d)
     outs=d.get('outputs')
     if not isinstance(outs,list) or not outs: raise Blocked('ITEM_OUTPUTS_REQUIRED')
     a=action(s,it); seen=set(); clean=[]

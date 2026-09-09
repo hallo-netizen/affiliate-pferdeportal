@@ -1,0 +1,505 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import copy, hashlib, importlib.util, json, os, re, subprocess, sys, tempfile
+from pathlib import Path
+
+REPO=Path(os.environ.get("HOBBYROOM_TARGET_ROOT") or Path(__file__).resolve().parents[2]).resolve()
+PY=sys.executable
+MATRIX=REPO/"control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md"
+CURRENT_ACTION=REPO/"control/single-door-boundary/codex_current_action.py"
+ROOM_BRIDGE=REPO/"control/single-door-boundary/codex_current_room_bridge.py"
+HANDOFF=REPO/"control/startmaster0107/fachworkflow_proof_handoff.py"
+DUAL=REPO/"control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py"
+STEP7=REPO/"control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json"
+STEP8=REPO/"control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json"
+STATE=REPO/"control/startmaster0107/CURRENT_STATE.json"
+ROOT=REPO/"control/startmaster0107/PFERDE_ATELIER_START_HERE.json"
+RUNTIME=REPO/"control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json"
+PPM=REPO/"control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+PSERC=REPO/"control/startmaster0107/runtime_packages/PSERC-FIX.zip"
+PPM_SHA="acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+PSERC_SHA="77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
+
+class Fail(RuntimeError): pass
+
+def sha(p:Path)->str:return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def load(p:Path):
+    return json.loads(Path(p).read_text(encoding="utf-8"))
+def dump(p:Path,o):
+    p.parent.mkdir(parents=True,exist_ok=True)
+    p.write_text(json.dumps(o,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+def mod(path:Path,name:str):
+    s=importlib.util.spec_from_file_location(name,path)
+    if s is None or s.loader is None: raise Fail("MODULE_LOAD_FAILED:"+str(path))
+    m=importlib.util.module_from_spec(s);sys.modules[name]=m;s.loader.exec_module(m);return m
+def must(cond,msg):
+    if not cond: raise Fail(msg)
+def expect_exc(fn,token):
+    try: fn()
+    except Exception as e:
+        if token not in str(e): raise Fail("WRONG_BLOCK:"+token+":"+str(e))
+        return
+    raise Fail("NEGATIVE_NOT_BLOCKED:"+token)
+_CMD_CACHE={}
+def cmd(rel,*args):
+    key=(rel,)+args
+    if key not in _CMD_CACHE:
+        p=subprocess.run([PY,str(REPO/rel),*args],cwd=REPO,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        _CMD_CACHE[key]=p
+    p=_CMD_CACHE[key]
+    if p.returncode!=0: raise Fail("COMMAND_FAIL:"+rel+":"+((p.stdout+p.stderr)[-1200:]))
+    return p.stdout
+
+# M01-M25: already established regression machinery. Full mode re-runs it once;
+# open-only mode deliberately does not duplicate already-proven positive paths.
+def m01(): must("CODEX_CLOUD_GATE_CI_PASS" in cmd("control/cloud-entry-gate/cloud_repo_ci_test.py"),"M01_HASH_CHAIN")
+def m02():
+    s=STEP7.read_text(encoding="utf-8")
+    must("ARTICLE_<plan_slot>.md" in s or "ARTICLE_" in s,"M02_UNIQUE_ARTICLE_BINDING_MISSING")
+    must("STAGING_DESTINATION_COLLISION" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M02_COLLISION_GUARD_MISSING")
+def m03(): must("DUAL_ROOTFIX_POSITIVE_NEGATIVE_PASS" in cmd("control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py","selftest"),"M03_PREPARED_TEST")
+def m04(): must("def finalize_after_107008" in DUAL.read_text(encoding="utf-8") and "elif len(a)==2 and a[0]=='finalize'" in DUAL.read_text(encoding="utf-8"),"M04_FINALIZE_CLI")
+def m05(): must("durable_receipt_path" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M05_DURABLE_RECEIPT")
+def m06(): must("NEGATIVE_UNKNOWN_CONTRACT_BLOCKED" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M06_FAKE_CONTRACT")
+def m07(): must("POSITIVE_RECOVERY_LOCK_REVERIFY" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M07_RECOVERY")
+def m08(): must(PPM.is_file() and sha(PPM)==PPM_SHA,"M08_PPM_ZIP")
+def m09(): must(PSERC.is_file() and sha(PSERC)==PSERC_SHA,"M09_PSERC_ZIP")
+def m10(): must("CODEX_ENVIRONMENT_PREFLIGHT_POSITIVE_NEGATIVE_PASS" in cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py"),"M10_PREFLIGHT")
+def m11():
+    s=HANDOFF.read_text(encoding="utf-8")
+    must("PSERC_PPM_Intake_Bridge::execute" in s and "PPM679_Normal_Draft_Pipeline::execute_plan" in s,"M11_REAL_PPM_CALL")
+def m12(): must("test_generic_fake_ppm_pass_is_blocked" in (REPO/"control/startmaster0107/test_ppm679_current_action_binding.py").read_text(encoding="utf-8"),"M12_FAKE_PPM_TEST")
+def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/startmaster0107/test_ppm679_current_action_binding.py").read_text(encoding="utf-8"),"M13_CONTENT_HASH_TEST")
+def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
+def _m15_validate_instruction(text):
+    required=(
+        "fachworkflow_handoff.request_required_fields",
+        "fachworkflow_handoff.request_ref",
+        "fachworkflow_handoff.command",
+        "FACHWORKFLOW_PROOF_HANDOFF_PASS",
+        "submission_command",
+    )
+    for token in required:
+        must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
+    low=text.casefold()
+    must("keine capability-suche" in low,"M15_CAPABILITY_SEARCH_NOT_FORBIDDEN")
+    must(
+        "kein zweiter executor" in low or "kein separater fachworkflow-executor" in low,
+        "M15_SECOND_EXECUTOR_NOT_FORBIDDEN",
+    )
+    must("keine alternativroute" in low,"M15_ALTERNATIVE_ROUTE_NOT_FORBIDDEN")
+    i_request=text.index("fachworkflow_handoff.request_ref")
+    i_command=text.index("fachworkflow_handoff.command")
+    i_pass=text.index("FACHWORKFLOW_PROOF_HANDOFF_PASS")
+    i_submit=text.index("submission_command")
+    must(i_request < i_command < i_pass < i_submit,"M15_HANDOFF_ORDER_CONTRADICTION")
+    forbidden=(
+        "kein handoff-request",
+        "handoff-request nicht erzeugen",
+        "submission_command führt direkt",
+        "vorab-handoff durch den worker erforderlich",
+    )
+    for token in forbidden:
+        must(token not in low,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
+
+def m15():
+    text=load(STEP7)["instruction"]
+    _m15_validate_instruction(text)
+    bad_order=text.replace(
+        "danach ausschließlich fachworkflow_handoff.command ausführen.",
+        "submission_command ausführen; danach ausschließlich fachworkflow_handoff.command ausführen.",
+        1,
+    )
+    expect_exc(lambda:_m15_validate_instruction(bad_order),"M15_HANDOFF_ORDER_CONTRADICTION")
+    bad_direct=text+"\nKein Handoff-Request; submission_command führt direkt."
+    expect_exc(lambda:_m15_validate_instruction(bad_direct),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
+def _m16_validate_signer_boundary(runtime_src:str,finalizer_src:str,step_instruction:str)->None:
+    for token in ("PSERC_SIGNER_CMD","ENDSTEMPEL_HSM_CMD","call_signer("):
+        must(token not in runtime_src,"M16_SIGNER_EXPOSED_TO_RUNTIME:"+token)
+    for token in ("def finalize_after_107008","resolve_signer_cmd","call_signer("):
+        must(token in finalizer_src,"M16_HOST_SIGNER_BOUNDARY_MISSING:"+token)
+    must("signer" not in step_instruction.casefold(),"M16_SIGNER_EXPOSED_TO_107007")
+
+def m16():
+    runtime=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
+    finalizer=DUAL.read_text(encoding="utf-8")
+    step=load(STEP7)["instruction"]
+    _m16_validate_signer_boundary(runtime,finalizer,step)
+    expect_exc(
+        lambda:_m16_validate_signer_boundary(runtime+"\nPSERC_SIGNER_CMD=x",finalizer,step),
+        "M16_SIGNER_EXPOSED_TO_RUNTIME",
+    )
+
+def _m17_validate_finalization_fail_closed(runtime_src:str)->None:
+    call="pserc_finalization = finalizer.finalize_after_107008"
+    guard_ok='pserc_finalization.get("ok") is not True'
+    guard_status='pserc_finalization.get("status") != "PSERC_FINAL_PACKAGE_PASS"'
+    blocker='HOST_PSERC_FINALIZATION_NOT_PASS'
+    must(call in runtime_src,"M17_FINALIZATION_CALL_MISSING")
+    must(guard_ok in runtime_src and guard_status in runtime_src and blocker in runtime_src,"M17_HOST_FINALIZATION_NOT_FAIL_CLOSED")
+    i_call=runtime_src.index(call)
+    i_guard=runtime_src.index(guard_ok)
+    i_clear=runtime_src.index("finalizer.clear_prepared_binding",i_call)
+    i_return=runtime_src.index('"status": "107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED"',i_call)
+    must(i_call < i_guard < i_clear < i_return,"M17_FINALIZATION_GUARD_ORDER")
+
+def m17():
+    runtime=(REPO/"control/output-quarantine/runtime_entry_gate.py").read_text(encoding="utf-8")
+    _m17_validate_finalization_fail_closed(runtime)
+    good='''pserc_finalization = finalizer.finalize_after_107008(repo, receipt)
+if pserc_finalization.get("ok") is not True or pserc_finalization.get("status") != "PSERC_FINAL_PACKAGE_PASS":
+    raise Blocked("HOST_PSERC_FINALIZATION_NOT_PASS")
+finalizer.clear_prepared_binding(repo, batch)
+return {"status": "107008_FINAL_REVIEW_PASS_VISIBLE_RELEASE_REARMED"}'''
+    _m17_validate_finalization_fail_closed(good)
+    bad=good.replace('if pserc_finalization.get("ok") is not True or pserc_finalization.get("status") != "PSERC_FINAL_PACKAGE_PASS":\n    raise Blocked("HOST_PSERC_FINALIZATION_NOT_PASS")\n',"")
+    expect_exc(lambda:_m17_validate_finalization_fail_closed(bad),"M17_HOST_FINALIZATION_NOT_FAIL_CLOSED")
+def m18():
+    s=(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py").read_text(encoding="utf-8")
+    must("IMPORT_ENVELOPE" in s,"M18_ENDSTEMPEL_CONSTANTS")
+def m19():
+    s=(REPO/".github/workflows/pferde-atelier-endstempel.yml").read_text(encoding="utf-8")
+    must("git diff-tree -m" in s,"M19_MERGE_TRIGGER")
+def m20():
+    s=(REPO/"control/startmaster0107/chat_delivery_payload.py").read_text(encoding="utf-8")
+    must("EXACTLY_SEVEN_ARTICLES_REQUIRED" in s and "import_envelope" in s and "source_manifest" in s,"M20_DELIVERY")
+def m21():
+    # Hard positive/negative against the real visible-release guard.
+    g=mod(REPO/"control/output-quarantine/output_release_gate.py","m21_release_guard")
+    old_repo=g.REPO
+    try:
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); staged=root/"staged"; staged.mkdir(parents=True)
+            article=staged/("ARTICLE_"+("1"*64)+".md"); article.write_text("m21\n",encoding="utf-8")
+            prepared={
+                "contract":"PFERDE_ATELIER_PREPARED_OUTPUT_RELEASE_V1",
+                "status":"PREPARED_NOT_VISIBLE",
+                "source_step_id":"RUN_NEW_ARTICLE_BATCH_NO_STOP",
+                "source_sequence":107007,
+                "publish_allowed":False,
+                "staged_outputs":[{"source_ref":"q/"+article.name,"staged_ref":"staged/"+article.name,"sha256":sha(article)}],
+            }
+            pp=root/"PREPARED_RELEASE.json"; dump(pp,prepared); g.REPO=root
+            _,pos=g.validate_prepared("PREPARED_RELEASE.json",sha(pp))
+            must(pos.get("publish_allowed") is False,"M21_POSITIVE_NO_PUBLISH_NOT_PASS")
+            bad=copy.deepcopy(prepared); bad["publish_allowed"]=True; dump(pp,bad)
+            expect_exc(lambda:g.validate_prepared("PREPARED_RELEASE.json",sha(pp)),"AUTO_PUBLISH_FORBIDDEN")
+    finally:
+        g.REPO=old_repo
+def m22():
+    boundary=load(REPO/"control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json")
+    req=boundary.get("external_bootstrap_producer_requirement") or {}
+    must(req.get("internal_signature_required") is False,"M22_INTERNAL_SIGNATURE_STILL_REQUIRED")
+    must(req.get("signer_credentials_allowed") is False,"M22_SIGNER_CREDENTIAL_POLICY_MISSING")
+    must(
+        boundary.get("required_provenance_binding_contract")=="PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1",
+        "M22_PROVENANCE_CONTRACT_NOT_BOUND",
+    )
+    src=(REPO/"control/single-door-boundary/preproduction_provenance_guard.py").read_text(encoding="utf-8")
+    must(
+        'BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1"' in src,
+        "M22_PROVENANCE_GUARD_OLD_CONTRACT",
+    )
+    must("H8_BOOTSTRAP_PROVENANCE_BINDING_HASH_INVALID" in src,"M22_HASH_NEGATIVE_NOT_BOUND")
+    for token in ("ED25519","signature_b64","signing_key_id","SIGNER_CMD"):
+        must(token not in src,"M22_INTERNAL_SIGNER_LEAK:"+token)
+    out=cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py")
+    must("H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS" in out,"M22_CODEX_BRIDGE")
+def m23(): must("POSITIVE_FULL_PACKAGE_CURRENT_GENERATION" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M23_SIGNED_PACKAGE_ONLY")
+def m24(): must("STARTMASTER_ROLLBACK_BLOCKED" in (REPO/".github/workflows/pferde-atelier-immutable-base-hardlock.yml").read_text(encoding="utf-8"),"M24_H8_ROLLBACK")
+def m25():
+    s=(REPO/"control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt").read_text(encoding="utf-8")
+    must("bestehender Fachworkflow" in s and "Keine eigene" in s,"M25_FACHWORKFLOW_BOUNDARY")
+
+# Open historical regressions: hard positive + hard negative.
+def m26():
+    a=mod(CURRENT_ACTION,"m26_action")
+    smoke=a.selftest()
+    must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
+    must(smoke.get("current_codex_is_bound_fachworkflow_worker") is True,"M26_CURRENT_WORKER_NOT_BOUND")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"ratgeber"}
+    action=a.augment_current_action(REPO,base,item)
+    hb=action.get("fachworkflow_handoff")
+    must(isinstance(hb,dict),"M26_FACHWORKFLOW_HANDOFF_MISSING")
+    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M26_HANDOFF_REQUEST_CONTRACT_MISSING")
+    step=load(STEP7).get("instruction","")
+    for token in ("Recherche/fact_pack","production_plan-Kontext","workflow_release-Kontext","reale Nicht-PPM-Stage-Artefakte"):
+        must(token in step,"M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:"+token)
+    must("alte Artikel-/Recovery-Dateien sind keine Produktionsquelle" in step,"M26_OLD_CONTEXT_NOT_EXCLUDED")
+
+def m27():
+    out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
+    must("CODEX_ENVIRONMENT_PREFLIGHT_POSITIVE_NEGATIVE_PASS" in out,"M27_PREFLIGHT_POSITIVE")
+    must("negative" in out.lower(),"M27_PREFLIGHT_NEGATIVE")
+
+M28_REQUIRED_FIELDS=[
+    "contract","room_token","batch_sha256","canonical_article_id","plan_slot",
+    "allowed_output_root","item_receipt_ref","fachworkflow_pass_ref",
+    "contract_binding_ref","contract_binding_sha256","stage_proofs","fact_pack",
+    "production_plan_item","production_plan_header","workflow_release_item",
+    "workflow_release_metadata",
+]
+
+def _m28_contract_check(step_instruction:str,action_src:str)->None:
+    must("FACHWORKFLOW_HANDOFF_REQUEST.json" in step_instruction,"M28_REQUEST_GENERATION_INSTRUCTION_MISSING")
+    must("fachworkflow_handoff.request_ref" in step_instruction,"M28_REQUEST_REF_INSTRUCTION_MISSING")
+    must("fachworkflow_handoff.command" in step_instruction,"M28_HANDOFF_COMMAND_ORDER_MISSING")
+    must("request_required_fields" in action_src,"M28_REQUEST_SCHEMA_NOT_EXPOSED")
+    for field in M28_REQUIRED_FIELDS:
+        must(repr(field) in action_src or ('"'+field+'"') in action_src,"M28_REQUIRED_FIELD_NOT_BOUND:"+field)
+    must("kein handoff-request" not in step_instruction.casefold(),"M28_REQUEST_CONTRADICTED_BY_DIRECT_SUBMIT")
+
+def m28():
+    step=load(STEP7).get("instruction","")
+    src=CURRENT_ACTION.read_text(encoding="utf-8")
+    _m28_contract_check(step,src)
+    a=mod(CURRENT_ACTION,"m28_action")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
+    out=a.augment_current_action(REPO,base,item)
+    hb=out.get("fachworkflow_handoff")
+    must(isinstance(hb,dict),"M28_HANDOFF_BINDING_MISSING")
+    must(hb.get("request_ref")==".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json","M28_REQUEST_REF_NOT_BOUND")
+    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M28_REQUEST_CONTRACT_NOT_BOUND")
+    must(hb.get("request_required_fields")==M28_REQUIRED_FIELDS,"M28_REQUEST_REQUIRED_FIELDS_MISMATCH")
+
+def m28_machine_proof_selftest():
+    good_step=(
+        "FACHWORKFLOW_HANDOFF_REQUEST.json unter fachworkflow_handoff.request_ref erzeugen; "
+        "danach fachworkflow_handoff.command ausführen."
+    )
+    good_src="request_required_fields="+repr(M28_REQUIRED_FIELDS)
+    _m28_contract_check(good_step,good_src)
+    expect_exc(
+        lambda:_m28_contract_check(good_step.replace("FACHWORKFLOW_HANDOFF_REQUEST.json","BROKEN_REQUEST.json"),good_src),
+        "M28_REQUEST_GENERATION_INSTRUCTION_MISSING",
+    )
+    expect_exc(
+        lambda:_m28_contract_check(good_step,good_src.replace("request_required_fields","removed_schema")),
+        "M28_REQUEST_SCHEMA_NOT_EXPOSED",
+    )
+    expect_exc(
+        lambda:_m28_contract_check(good_step+" kein Handoff-Request",good_src),
+        "M28_REQUEST_CONTRADICTED_BY_DIRECT_SUBMIT",
+    )
+    print("HISTORY_MACHINE_PROOF_SELFTEST_PASS:M28",flush=True)
+
+def m29():
+    a=mod(CURRENT_ACTION,"m29_action")
+    batch,count=a._runtime_batch_identity()
+    a._validate_release_metadata_identity({"exact_five_batch_sha256":batch,"exact_five_item_count":count},batch,count)
+    expect_exc(lambda:a._validate_release_metadata_identity({"exact_five_batch_sha256":"0"*64,"exact_five_item_count":count},batch,count),"RELEASE_METADATA_BATCH_MISMATCH")
+    expect_exc(lambda:a._validate_release_metadata_identity({"exact_five_batch_sha256":batch,"exact_five_item_count":count+1},batch,count),"RELEASE_METADATA_ITEM_COUNT_MISMATCH")
+
+def _final_ctx_fixture(root:Path,wrong_batch=False):
+    d=mod(DUAL,"m30_dual")
+    batch="c"*64; out=[]; meta={
+      "article_origin_policy":"POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE","authoring_prompt_sha256":"b"*64,
+      "authoring_role":"CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS","content_generation_performed_by_supervisor":False,
+      "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","created_at_utc":"2026-09-04T00:00:00+00:00",
+      "exact_five_batch_sha256":("d"*64 if wrong_batch else batch),"exact_five_item_count":7,
+      "frozen_workflow_sha256":"e"*64,"nullpunkt":{},"nullpunkt_sha256":"f"*64,"ppm_baseline_sha256":"1"*64,
+      "ppm_version":"6.7.9","research_evidence_policy":"BOUND_EXISTING_FACHWORKFLOW_ONLY","sequence":107008,
+      "status":"PASS","wordpress_write_performed":False}
+    header={"contract":"production_plan_v4","plan_contract_version":"4.0.0"}
+    for i in range(7):
+        p=root/f"FACHWORKFLOW_PASS_{i}.json"
+        q={"production_plan_header":header,"workflow_release_metadata":meta,"production_plan_item":{"canonical_article_id":f"article:{i}"},"fact_pack":{"contract":"canonical_fact_pack_v1","fact_pack_id":f"fp{i}"},"workflow_release_item":{"canonical_article_id":f"article:{i}"}}
+        dump(p,q);out.append({"released_ref":p.name,"sha256":sha(p)})
+    r={"contract":"PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V2","status":"OUTPUT_RELEASE_PASS_FINAL_REVIEW_AND_REARM_CONFIRMED","batch_sha256":batch,"outputs":out,"publish_allowed":False}
+    rp=root/"RELEASE_RECEIPT.json";dump(rp,r)
+    return d,rp
+
+def m30():
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td);d,rp=_final_ctx_fixture(root,False)
+        ctx=d.context_from_release(root,rp.name);must(len(ctx["production_plan"]["items"])==7,"M30_POSITIVE_COUNT")
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td);d,rp=_final_ctx_fixture(root,True)
+        expect_exc(lambda:d.context_from_release(root,rp.name),"FINAL_CONTEXT_BATCH_MISMATCH")
+
+def m31():
+    a=mod(CURRENT_ACTION,"m31_action")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
+    out=a.augment_current_action(REPO,base,item)
+    hb=out.get("fachworkflow_handoff")
+    must(isinstance(hb,dict),"M31_BOUND_HANDOFF_MISSING")
+    must(hb.get("technical_guard_executes_domain_logic") is False,"M31_HANDOFF_DOMAIN_LOGIC_AUTHORITY")
+    bridge=json.loads(cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py"))
+    must(bridge.get("status")=="H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS","M31_CODEX_NATIVE_BOUND_ACTION_NOT_PASS")
+    must(bridge.get("custom_function_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
+    step=load(STEP7).get("instruction","")
+    must("execute_bound_action" not in step,"M31_EXECUTE_BOUND_ACTION_DEPENDENCY")
+    must("kein separater Fachworkflow-Executor" in step or "kein zweiter Executor" in step,"M31_SEPARATE_EXECUTOR_NOT_FORBIDDEN")
+
+def m32():
+    h=mod(HANDOFF,"m32_handoff")
+    must(PPM.is_file() and PSERC.is_file(),"M32_PACKAGES_MISSING")
+    must(sha(PPM)==h.PPM679_PACKAGE_SHA256 and sha(PSERC)==h.PSERC_FIX_PACKAGE_SHA256,"M32_BOUND_PACKAGE_HASH")
+    src=HANDOFF.read_text(encoding="utf-8")
+    must("if ppm_env else (repo / PPM679_PACKAGE_REL)" in src and "if pserc_env else (repo / PSERC_FIX_PACKAGE_REL)" in src,"M32_ENV_STILL_MANDATORY")
+
+def m33():
+    wf=(REPO/".github/workflows/pferde-atelier-endstempel.yml").read_text(encoding="utf-8")
+    final=(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py").read_text(encoding="utf-8")
+    def check(workflow,finalizer):
+        must("persist-credentials: false" in workflow,"M33_CODEX_CREDENTIALS_NOT_DISABLED")
+        must("actions/upload-artifact" in workflow and "actions/download-artifact" in workflow,"M33_DURABLE_GITHUB_TRANSPORT")
+        must("git remote" not in workflow and "git push" not in workflow,"M33_CODEX_GIT_REMOTE_DEPENDENCY")
+        must("git remote" not in finalizer and "git push" not in finalizer and "GH_TOKEN" not in finalizer,"M33_CODEX_AUTH_DEPENDENCY")
+    check(wf,final)
+    expect_exc(lambda:check(wf+"\ngit remote -v\n",final),"M33_CODEX_GIT_REMOTE_DEPENDENCY")
+
+
+def _m34_contract_check(src:str)->None:
+    required=(
+        "PPM679_Editorial_Plan_Registry::plan()['slots']",
+        "PSERC_Plan_Slot_Identity::token($candidate)",
+        "count($matches)!==1",
+        "$item['canonical_article_id']=(string)$slot['canonical_article_id'];",
+        "unset($item['plan_slot']);",
+    )
+    for token in required:
+        must(token in src,"M34_SLOT_PARITY_MISSING:"+token)
+
+def m34():
+    src=HANDOFF.read_text(encoding="utf-8")
+    _m34_contract_check(src)
+    bad=src.replace("unset($item['plan_slot']);","")
+    expect_exc(lambda:_m34_contract_check(bad),"M34_SLOT_PARITY_MISSING")
+
+def _m35_contract_check(src:str)->None:
+    imp="PPM679_Admin::import_fact_pack_bundle"
+    expected="PPM679_Storage::fact_pack_hash"
+    plan="$plan=$header"
+    must(imp in src,"M35_FACT_PACK_IMPORT_MISSING")
+    must(expected in src,"M35_PPM_REGISTRY_HASH_LOOKUP_MISSING")
+    must("SOURCE_HASH_BINDING_MISMATCH" in src,"M35_FAIL_CLOSED_HASH_GUARD_MISSING")
+    binding=re.search(r"\$item\['source_hashes'\]\s*=\s*\[\$expectedSource\]\s*;",src)
+    must(binding is not None,"M35_PPM_REGISTRY_HASH_NOT_MATERIALIZED")
+    i_imp=src.index(imp)
+    i_expected=src.index(expected)
+    i_bind=binding.start()
+    i_plan=src.index(plan)
+    must(i_imp < i_expected < i_bind < i_plan,"M35_PPM_REGISTRY_HASH_BINDING_ORDER")
+    between=src[i_expected:i_bind]
+    must("$expectedSource===''" in between or "$expectedSource === ''" in between,"M35_EMPTY_REGISTRY_HASH_NOT_BLOCKED")
+
+def m35():
+    _m35_contract_check(HANDOFF.read_text(encoding="utf-8"))
+
+def _m36_rehash_integrity_package(env,prov,pre):
+    binding=env["workflow_release"]["h8_bootstrap_binding"]
+    payload=dict(binding);payload.pop("binding_sha256",None)
+    binding["binding_sha256"]=prov.stable_hash(payload)
+    env["workflow_release_sha256"]=pre.stable_hash(env["workflow_release"])
+    env["package_id"]=pre.stable_hash({
+        "contract":env["contract"],
+        "fact_pack_bundle_sha256":env["fact_pack_bundle_sha256"],
+        "production_plan_sha256":env["production_plan_sha256"],
+        "workflow_release_sha256":env["workflow_release_sha256"],
+    })
+    package_payload=copy.deepcopy(env);package_payload.pop("package_payload_sha256",None)
+    env["package_payload_sha256"]=pre.stable_hash(package_payload)
+
+def m36():
+    prov=mod(REPO/"control/single-door-boundary/preproduction_provenance_guard.py","m36_prov")
+    pre=mod(REPO/"control/single-door-boundary/single_door_preproduction_handoff.py","m36_pre")
+    pkg=REPO/"control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json"
+    env=load(pkg)
+    binding=((env.get("workflow_release") or {}).get("h8_bootstrap_binding") or {})
+    must(binding.get("contract")=="PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1","M36_REAL_FIXTURE_NOT_LEGACY_SIGNED_BINDING")
+    proof=prov.validate_package_provenance(REPO,pkg)
+    must(proof.get("status")=="H8_PREPRODUCTION_PROVENANCE_PASS","M36_PERSISTED_LEGACY_BINDING_NOT_ACCEPTED")
+
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td)
+        bad=copy.deepcopy(env)
+        bad["workflow_release"]["h8_bootstrap_binding"]["generation"]=int(binding["generation"])+1
+        _m36_rehash_integrity_package(bad,prov,pre)
+        bp=root/"bad-generation.json";dump(bp,bad)
+        expect_exc(lambda:prov.validate_package_provenance(REPO,bp),"H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT")
+
+        unknown=copy.deepcopy(env)
+        unknown["workflow_release"]["h8_bootstrap_binding"]["contract"]="PFERDE_ATELIER_H8_BOOTSTRAP_UNKNOWN_BINDING_V1"
+        _m36_rehash_integrity_package(unknown,prov,pre)
+        up=root/"unknown-contract.json";dump(up,unknown)
+        expect_exc(lambda:prov.validate_package_provenance(REPO,up),"H8_BOOTSTRAP_PROVENANCE_BINDING_CONTRACT_INVALID")
+
+def m35_machine_proof_selftest():
+    good="""$imp=PPM679_Admin::import_fact_pack_bundle($bundle);
+$expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
+if($expectedSource===''){fwrite(STDERR,"SOURCE_HASH_BINDING_MISMATCH");exit(2);}
+$item['source_hashes']=[$expectedSource];
+$plan=$header;"""
+    _m35_contract_check(good)
+    bad=good.replace("$item['source_hashes']=[$expectedSource];","if(!in_array($expectedSource,(array)($item['source_hashes']??[]),true)){fwrite(STDERR,\"SOURCE_HASH_BINDING_MISMATCH\");exit(2);}")
+    expect_exc(lambda:_m35_contract_check(bad),"M35_PPM_REGISTRY_HASH_NOT_MATERIALIZED")
+    bad_order=good.replace("$item['source_hashes']=[$expectedSource];\n$plan=$header;","$plan=$header;\n$item['source_hashes']=[$expectedSource];")
+    expect_exc(lambda:_m35_contract_check(bad_order),"M35_PPM_REGISTRY_HASH_BINDING_ORDER")
+    print("HISTORY_MACHINE_PROOF_SELFTEST_PASS:M35",flush=True)
+
+
+CASES=[
+("M01",m01),("M02",m02),("M03",m03),("M04",m04),("M05",m05),("M06",m06),("M07",m07),("M08",m08),("M09",m09),("M10",m10),
+("M11",m11),("M12",m12),("M13",m13),("M14",m14),("M15",m15),("M16",m16),("M17",m17),("M18",m18),("M19",m19),("M20",m20),
+("M21",m21),("M22",m22),("M23",m23),("M24",m24),("M25",m25),("M26",m26),("M27",m27),("M28",m28),("M29",m29),("M30",m30),
+("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36)]
+
+def _run_ordered(cases,phase):
+    results=[]
+    for mid,fn in cases:
+        try:
+            fn();results.append({"id":mid,"status":"PASS"});print(mid+" PASS",flush=True)
+        except Exception as e:
+            results.append({"id":mid,"status":"FAIL","reason":str(e)});print(mid+" FAIL "+str(e),flush=True)
+            print(json.dumps({"ok":False,"status":"REGRESSION_FAIL","phase":phase,"first_fail":mid,"results":results,"gesamt_pass":False},ensure_ascii=False,indent=2))
+            return None
+    return results
+
+def main(argv):
+    must(MATRIX.is_file(),"MATRIX_MISSING")
+    if len(argv)==2 and argv[0]=="--proof-selftest":
+        case=argv[1].upper()
+        if case=="M28":
+            m28_machine_proof_selftest()
+        elif case=="M35":
+            m35_machine_proof_selftest()
+        else:
+            raise Fail("UNKNOWN_PROOF_SELFTEST:"+argv[1])
+        return 0
+    if len(argv)==2 and argv[0]=="--case":
+        case=argv[1].upper()
+        table=dict(CASES)
+        if case not in table: raise Fail("UNKNOWN_CASE:"+case)
+        try:
+            table[case]()
+        except Exception as e:
+            print(case+" FAIL "+str(e),flush=True)
+            return 2
+        print("HISTORY_MACHINE_PROOF_PASS:"+case,flush=True)
+        return 0
+
+    open_only=argv==["--open-only"]
+    if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only] | --case MXX | --proof-selftest M28|M35")
+
+    # Repair phase: do not duplicate already-proven old positives while an open
+    # regression still fails. Once M26-M36 are resolved, automatically run the
+    # one required final M01-M36 suite on the same head.
+    if open_only:
+        open_results=_run_ordered(CASES[25:],"OPEN_M26_M36")
+        if open_results is None:return 2
+        print("OPEN_REGRESSIONS_PASS",flush=True)
+
+    results=_run_ordered(CASES,"FINAL_M01_M36")
+    if results is None:return 2
+
+    # Required final re-check against the last real production regression.
+    m26()
+    print("LAST_REGRESSION PASS BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING",flush=True)
+    print(json.dumps({"ok":True,"status":"GESAMT PASS","results":results,"last_regression":"PASS","gesamt_pass":True},ensure_ascii=False,indent=2))
+    return 0
+
+if __name__=="__main__": raise SystemExit(main(sys.argv[1:]))
