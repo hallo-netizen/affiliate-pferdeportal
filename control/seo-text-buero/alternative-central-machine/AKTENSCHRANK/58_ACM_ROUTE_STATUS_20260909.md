@@ -1,615 +1,265 @@
-# ACM – AKTUELLER ROUTENSTATUS / ABSCHLUSS- UND NACHHOLPRÜFUNG
+# ACM – AKTUELLER ROUTENSTATUS
 
 Stand: 2026-09-09
 Route: Alternative Central Machine (ACM)
 Branch: `alternative/seo-text-central-machine-20260908`
 PR: #195 (Draft)
 
-## Autorität
+## AUTORITÄT
 
-Diese Datei ist die **einzige aktuelle Standwahrheit der ACM-Route** für:
-- belastbaren Status
-- offene ACM-Integrationsfehler
+Diese Datei ist die einzige aktuelle Standwahrheit der ACM-Route für:
+- belastbaren ACM-Status
+- offene Integrationspunkte
 - NEXT ACTION
 - verbindlichen Arbeitsweg
 
-`00_MASTER_KONZEPTLOG.md` ist nur Wegweiser/Entwicklungslog.
-Ältere P0–P57-Akten sowie `59_INTERFACE_TABOO_ENTRYPOINT_REASSESSMENT.md` sind Beweis-/Entscheidungsakten und keine zweite aktuelle Standwahrheit.
-
-Die produktive Wahrheit bleibt separat und unverändert:
+Produktive Wahrheit bleibt separat und unverändert:
 `control/startmaster0107/CURRENT_STATE.json`
 
-Die produktive STARTMASTER-Fehlermatrix gehört zur parallelen Reparaturroute und wird von ACM nicht überschrieben:
+Produktive Fehlermatrix bleibt separat:
 `control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
 
-## AKTUELLER STAND
+Ältere ACM-Akten bleiben Beweis-/Historienquellen und sind keine zweite CURRENT-Wahrheit.
 
-**ACM-PROTOTYP: PASS**
+## STATUS
+
+**ACM-KERN: PASS**
 **PRODUKTIONSADOPTION: BLOCKED**
 
-Aktueller technisch vollständig getesteter ACM-Kandidat:
-`7d55d407c4a8ba13255818eb85a472262d662684`
+Aktueller vollständig getesteter ACM-Head:
+`7aaf0c2ac8ad41523e9afbf49d78b8b9b8d0a1f3`
 
-Aktueller Teststatus auf exakt diesem Kandidaten:
-- externer ACM Machine Hardlock im P3-Labor: PASS
-- P0–P60: PASS
-- P26 `map research fact-pack chain`: **PASS**
-- Positiv: `PSERC_PPM_INTAKE_BRIDGE_PREPARED` mit 7 echten gebundenen Items
-- `write_attempted_by_bridge=false`
-- `publish_allowed=false`
-- Negativ Plan-Slot / Identität / Titel / Target Keyword: jeweils BLOCKED
-- extrahierte PPM-/PSERC-Dateibäume vor/nach dem P26-Beweis: bytebezogen unverändert
-- Alternative SEO Text P3 Isolated Lab – Run `34364733316` – SUCCESS
-- Alternative SEO Text P8 Signer Isolation Lab – Run `34364733293` – SUCCESS
+Harte Gesamtprüfung auf diesem Stand:
+- Alternative SEO Text P3 Isolated Lab – Run `34374100752` – SUCCESS
+- Alternative SEO Text P8 Signer Isolation Lab – Run `34374100651` – SUCCESS
+- ACM Machine Hardlock – PASS
+- P0–P47 – PASS
+- ACM first full one-article lab test – PASS
+- Endstempel-/Preimport positive/negative – PASS
+- Zero-freedom / no-text-mutation seam – PASS
+- relevante historische Fehlerkette bis M36 – PASS
 
-Letzter vollständig getesteter sicherer ACM-Head:
-`7d55d407c4a8ba13255818eb85a472262d662684`
+Produktiver main wurde durch diese Änderung nicht verändert.
+Kein WordPress-Produktivwrite.
+Kein Publish.
 
-Ausgeführte Tests auf exakt diesem sicheren Head:
-- Alternative SEO Text P3 Isolated Lab – Run `34364733316` – SUCCESS – kompletter Workflow bis einschließlich P60
-- Alternative SEO Text P8 Signer Isolation Lab – Run `34364733293` – SUCCESS – Producer / External-Signer / Importer
+## VERBINDLICHES ZIELBILD
 
-Zusätzlicher sicherer Seam-Beweis auf Head `c2116ccb9759ef7237894f0ef8a696aa9f3b0295`:
-- direkter ACM-Ausgang -> vorhandene externe Signaturgrenze: POSITIV PASS
-- Manipulation nach Signatur: NEGATIV BLOCKED
-- kompletter P3-Lauf `34352023627`: SUCCESS – 62/62
-- P8 `34352023599`: SUCCESS
+Am Ende des Fachworkflows steht **eine einzige fertige, vollständig maschinell geprüfte Datei**.
 
-Frisch geprüfter produktiver main:
-`93ba987c56f7b08ffba009210e3012c036fec18d`
+Danach:
+- keine fachliche Nachbearbeitung;
+- keine technische WordPress-Sichtprüfung als Pflichtstufe;
+- WordPress ist erst Ziel für den späteren Upload/Import;
+- die bisherige menschliche Sichtkontrolle war nur zusätzliche Kontrolle und soll nach mehrfach bewiesenem Workflow entfallen;
+- kein Auto-Publish.
 
-Frisch gelesener Produktionsstatus:
-- `IMMUTABLE_BASE_HARDLOCK_ACTIVE_H8_PREPRODUCTION_OUTPUT_LOCKED`
-- next_allowed_step: `RUN_NEW_ARTICLE_BATCH_NO_STOP`
-- publish_allowed: false
+Keine WordPress-Zwischenstufe wird in ACM neu erfunden.
 
-Parallelroute:
-- aktuelle bekannte Regressionen reichen bis M36
-- ACM hat diese Wahrheit nicht verändert
-- im ACM-Lauf wurden die ausgewählten relevanten historischen Seam-Fälle bis M36 gegen den aktuellen main wiederverwendet und bestanden
-- kein Merge, kein Schreibzugriff auf main, kein CURRENT_STATE-Update
+## DREIER-ZICKZACK – AKTUELL ADOPTIERTE ACM-ENTSCHEIDUNG
 
-## P26-TESTBLOCKER – AUFGELÖST
+Verbindliches Prinzip:
 
-`ACM-P26-TESTCOVERAGE-01`: **RESOLVED / PASS**
+`Arbeiter -> Zentralmaschine -> fest gebundener vorhandener Prüfer -> Zentralmaschine -> nächster Arbeiter`
 
-Beweis auf technischem Kandidaten
-`7d55d407c4a8ba13255818eb85a472262d662684`:
+Dabei gilt:
 
-- vorhandener öffentlicher `PSERC_PPM_Intake_Bridge::prepare()` unverändert benutzt;
-- keine neue PSERC-/PPM-/PSTE-/Textmaschinenlogik;
-- keine neue Test-/Workflowkomponente;
-- Positiv mit realem vorhandenen `production_plan_v4` und realem kanonischen PPM-Plan: PASS;
-- 7 gebundene Items;
-- no write / no publish;
-- falscher Plan-Slot: BLOCKED;
-- falsche canonical identity: BLOCKED;
-- falscher Titel: BLOCKED;
-- falsches Target Keyword: BLOCKED;
-- Dateisystem der extrahierten PPM-/PSERC-Pakete vor/nach Test unverändert;
-- kompletter P3-Gesamtworkflow danach PASS;
-- P8 Signer-Isolation danach PASS.
+1. Die Zentralmaschine besitzt allein Reihenfolge und Zustand.
+2. Jeder Worker führt nur seinen gebundenen Mikroschritt aus.
+3. Kein Worker darf den nächsten Schritt, Prüfer oder Reparaturweg wählen.
+4. Kein Worker darf sich selbst PASS geben.
+5. Der vorhandene Prüfer darf nur PASS oder BLOCKED liefern.
+6. BLOCKED bedeutet STOP; keine improvisierte Reparaturroute.
+7. Fach-, Inhalts- und Qualitätsregeln bleiben unverändert.
+8. Keine Worker-zu-Worker-Kommunikation.
+9. Kein zweiter Controller.
+10. Keine neue Fachprüfung.
 
-Der erste Versuch auf Head `236345a09a3fcd5b1731c1eae964d999ca3d90cc` blockierte ausschließlich wegen einer falschen Testprädikat-Annahme: Der reale vorhandene Top-Level-Blockstatus lautet
-`PSERC_PPM_INTAKE_BRIDGE_BLOCKED`, nicht Präfix `PSERC_BRIDGE_*`.
-Die Korrektur änderte nur diese Testbedingung und keine Fachlogik.
+## 12 NACHWEISE – CHECKLISTE, NICHT FAHRPLAN
 
-Damit ist der PSERC-`prepare()`-Seam als unveränderter, schreibfreier ACM-Baustein positiv/negativ und im Gesamtworkflow bewiesen.
+Die 12 bestehenden Pflichtnachweise bleiben vollständig erhalten:
 
-## ZIELBILD – EINFACH
+- research_fact_pack
+- textmachine_article_type_structure
+- table_contract
+- internal_links
+- languagetool
+- ppm
+- pserc
+- pste
+- duplicate_cannibalization
+- seo
+- design_format
+- publish_safety
 
-`Redaktionsplan -> gebundener Fachworkflow/Codex -> Research/Fact-Pack -> unveränderte Textmaschine und alle Qualitätsgates -> PPM prepare(no write) -> eine signierte JSON -> WordPress prüft Signatur/Hashes vor dem ersten Write -> Entwurf -> Readback/DOM -> menschliche Sichtprüfung -> manuelle Freigabe`
+Neue harte Semantik:
 
-Kein Auto-Publish.
+**Die 12 Namen sind eine unveränderliche Pflichtmenge. Sie bestimmen nicht die Laufreihenfolge.**
 
-## REDAKTIONSPLAN
+Die Laufreihenfolge gehört ausschließlich der Zentralmaschine und richtet sich nach den realen technischen Abhängigkeiten.
 
-Harte Prüfung PASS:
-- realer SEO-Redaktionsplan-Snapshot ist gebunden
-- Beitragsart, Kategorie, plan_slot, Target Keyword und Titel werden daraus übernommen
-- plan_slot ist eindeutig
-- plan_slot ist an canonical_article_id gebunden
-- WordPress-Inventar für draft/publish/trash wird read-only abgeglichen
-- systemweiter Dubletten-/Keyword-Ownership-Guard ist vorhanden
-- bereits vorhandener regulärer Draft oder veröffentlichter Artikel blockiert stille Neuproduktion
+Implementiert in:
+- `prototype/p11_workflow_contract.py`
+- `prototype/test_p11_workflow_contract.py`
 
-Real gebundenes aktuelles Beispiel:
-- canonical_article_id: `article:a8282e69ecd43b615de17eb1`
-- plan_slot: `9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56`
-- Titel: `Das Wichtigste über Hindernisstangen für Pferde`
-- Target Keyword: `Hindernisstangen für Pferde`
-- Kategorie: `hindernisstangen-beratung`
-- Beitragsart: `Beratung`
+Positiv:
+- alle 12 exakt einmal vorhanden, auch in anderer Reihenfolge -> PASS.
 
-## TEXTMASCHINE / CODEX / CHAT
+Negativ:
+- fehlt -> BLOCKED
+- doppelt -> BLOCKED
+- unbekannter Nachweis -> BLOCKED
+- Status nicht PASS -> BLOCKED
+- nicht ausgeführt -> BLOCKED
+- Fach-/Qualitätsregel geändert -> BLOCKED
+- Publish erlaubt -> BLOCKED
+- optional/enabled-Laufzeitschalter eingeschleust -> BLOCKED
 
-Unverändert:
+Damit kann die 12er-Checkliste nicht als zweiter Workflowcontroller wirken.
+
+## INHALT / QUALITÄT
+
+Unverändert und tabu:
 - Textmaschine
 - Research-/Fact-Pack-Regeln
 - Artikeltyp-/Strukturregeln
-- Tabellen
-- interne Links
-- SEO/Target Keyword
-- LanguageTool-Vertrag
+- Tabellenregeln
+- interne Linkregeln
+- LanguageTool-Regeln
+- SEO
+- Dubletten-/Kannibalisierungsschutz
 - PPM
 - PSERC
 - PSTE
-- Dubletten-/Kannibalisierungsschutz
-- Design/DOM/Readback
 - Publish-Sicherheit
 
-Chat/KI:
-- keine Workflow-/Navigations-/State-/Publish-Autorität
-- keine freie Route
-- keine freie Validatorwahl
-- keine freie Workerwahl
-- keine freie Reparaturroute
+Die aktuelle Änderung betrifft ausschließlich ACM-Orchestrierungssemantik.
 
-Codex:
-- nur gebundener Fachworkflow-Worker
-- darf Fachprodukte für das gebundene Item erzeugen
-- darf PASS/PUBLISH nicht frei bestimmen
+## 0,0 FREIHEIT / ZWANGSJACKE
 
-## CLAUDE – DAUERHAFTE ENTSCHEIDUNG
+Weiterhin bewiesen:
+- keine caller-selected Route
+- keine caller-selected Workerwahl
+- keine caller-selected Validatorwahl
+- keine freie Next-Step-API
+- kein freier Reparaturweg
+- Chat besitzt keine Fach-/Workflow-/Publish-Autorität
+- Worker besitzt keine Publish-Autorität
+- externe Signatur bleibt außerhalb des Producers
+- Manipulation nach Signatur -> BLOCKED
+- Inhalts-/Metadatendrift -> BLOCKED
+- unbekannte Zusatzfelder -> BLOCKED
+- publish_allowed=true -> BLOCKED
 
-Claude gehört **nicht** zum ACM-Zielsystem.
+Der externe ACM-Hardlock im separaten Lab-Basisbranch bleibt wirksam und kann vom Kandidaten nicht mitverändert werden.
 
-Grund:
-Claude war ausschließlich externe Zusatzberatung und hatte keine strukturelle Workflowfunktion.
+## EINFLUSSNAHME VON AUSSEN
 
-Folge:
-- keine Claude-Abhängigkeit in ACM
-- kein Claude-Reviewer als Pflicht
-- keine Claude-Freigabe
-- kein Claude-Gate
-- normaler Beratungspfad ist mit LanguageTool + bestehendem Content Validator ohne Claude PASS bewiesen
+Externe Recherchequellen sind ausschließlich untrusted data.
 
-Im unveränderten historischen PPM existiert noch ein explizit aktivierbarer alter Sonderzweig mit Claude-Bezeichnung.
-Er ist im normalen Beratungspfad nicht aktiv und wird von ACM nicht gebunden.
-Nur wegen dieses historischen Namens wird die Textmaschine/PPM **nicht** verändert.
+Sie dürfen:
+- Fakteninhalt für die vorhandene Recherche liefern.
 
-## LANGUAGETOOL
+Sie dürfen nicht:
+- Workflow bestimmen;
+- Folgeaktionen bestimmen;
+- Regeln verändern;
+- Prüfer auswählen;
+- PASS/PUBLISH auslösen.
 
-Vertrag/Qualitätsweg: PASS.
-- `LanguageTool 6.8 / Bestand 43`
-- Raw Evidence gebunden
-- 0 ungelöste Findings
-- normaler Beratungspfad ohne Claude PASS
+Provenienz/Hashes bleiben gebunden.
+Nach finaler externer Signatur ist jede Byteänderung fail-closed.
 
-Nachholbefund:
-Im Repository ist aktuell **kein ausführbarer LanguageTool-Runtime (JAR/Runner) gebündelt**.
-Vor unbeaufsichtigter Vollautomatik muss die bereits fest gehashte LanguageTool-6.8-Abhängigkeit reproduzierbar bereitgestellt/gebunden sein.
-Keine neue Architektur und kein Fallback-Provider.
+## KORREKTUR EINES BISHERIGEN ACM-FEHLWEGS
 
-## DATEI / SIGNATUR
+Die frühere ACM-Gleichsetzung
 
-Ziel-Enddatei:
-`PFERDE_ATELIER_SIGNED_ARTICLE_BATCH_FINAL.json`
+`design_format = zwingender WordPress-DOM-/Draft-Prüfschritt innerhalb der Artikelproduktion`
 
-Eigenschaften:
-- Artikelzahl nicht im Dateinamen
-- tatsächliche article_count dynamisch im Manifest
-- vorhandener allgemeiner Endstempel wird wiederverwendet
-- privater Ed25519-Schlüssel bleibt beim externen/GitHub-Signer
-- WordPress besitzt nur den vertrauenswürdigen Public Key
-- falsche Signatur/Schlüssel/Batch/Dateien/Replay/Manipulation => BLOCK
-- import failure => 0 committed writes
+wird **nicht weiter als aktuelle Wahrheit verwendet**.
 
-## WORDPRESS-SEAM
-
-Isolierter technischer Beweis: PASS.
-
-`ACM_SINGLE_SIGNED_JSON_WORDPRESS_SEAM_PASS`:
-- vorhandener `PSERC_APPROVED_PRODUCTION_PACKAGE_V1`
-- genau eine JSON
-- Signaturprüfung vor Write
-- vorhandener Fact-Pack-Import
-- vorhandene Normal-Draft-Pipeline
-- exakt ein Draft
-- Readback PASS
-- Publish-Zahl unverändert
-- 14 gezielte Negativtests BLOCK
-- keine neue Importlogik
-- kein neuer Paketvertrag
-
-KISS-Fixes auf dem Weg:
-1. WordPress-Kandidat musste vorhandene Fact-Pack-Bindung `production_plan.source_snapshot_id -> fact_pack.fact_pack_id` verwenden.
-2. Negativtest musste den realen Fact-Pack-Pfad `claims[].statement` statt erfundenem `facts[].claim` verwenden.
-3. Kanonische JSON-Prüfung musste Objekt-/Listenidentität erhalten.
-4. LanguageTool-Inventar darf gespeicherte JSON/TXT-Evidence nicht als ausführbare Runtime zählen.
-
-Diese Punkte waren Test-/Adapterannahmen, keine neue Facharchitektur.
-
-## OFFENE ACM-INTEGRATIONSFEHLER / BLOCKER
-
-### ACM-WP-01 – echte One-JSON-WordPress-Runtime-Anbindung fehlt
-Audit:
-- `single_final_signed_json_wp_upload_wired=false`
-- vorhandener Verifier und isolierter Seam funktionieren
-- aber kein echter WordPress-Admin-/Runtime-Handler ruft den Verifier derzeit vor dem Import auf
-
-**Status nach Schnittpunkt-Neubewertung: `BLOCKED_BY_INTERFACE_TABOO`**
-
-Frisch geprüft:
-- `WORDPRESS_SIGNATURE_ENTRY_LOCK_V1` erlaubt Verification-only und verbietet `IMPORT_LOGIC_CHANGE` sowie `WORKFLOW_ARCHITECTURE_CHANGE`
-- vorhandener `production_package_release_gate.py` prüft die vollständige Produktionspaket-Datei, endet aber vor WordPress
-- vorhandener WordPress-Endstempel-Verifier und vorhandener Normal-Draft-Import besitzen unterschiedliche bestehende Eingangsverträge
-- eine direkte bereits verdrahtete One-JSON-Runtime-Schnittstelle existiert nicht
+Fakt:
+Der tatsächlich benutzte Zielablauf liefert zuerst die fertige Datei; WordPress kommt danach.
 
 Folge:
-- WP-01 bleibt Produktionsadoptionsblocker
-- in ACM kein Wrapper, kein neuer Handler, kein neuer Importer und kein neues Übergabeformat
-- der Schnittpunkt wird nicht verändert oder umgangen
-
-### ACM-WP-02 – kontrollierter manueller Publish-/Freigabeweg nicht nachgewiesen
-Audit:
-- `manual_publish_release_wired=false`
-- Draft-only-Kern ist vorhanden
-- Nutzerreview ist vorgesehen
-- der anschließende kontrollierte manuelle Freigabepunkt ist im Repo noch nicht als gebundener Weg bewiesen
-
-### ACM-LT-01 – ausführbarer LanguageTool-Runtime nicht im Repository gebunden
-- Vertrags-/Evidence-Seite vorhanden und PASS
-- ausführbarer Runtime-Kandidat: 0
-- vor unbeaufsichtigter Vollautomatik zu schließen
-
-### ACM-ADOPT-01 – Produktions-Zielvertrag noch nicht versioniert/adoptiert
-- ACM-Kandidat positioniert externe Signatur vor dem ersten WordPress-Draft-Write
-- produktiver Zielvertrag wurde bewusst nicht verändert
-- Adoption erst nach ausdrücklichem kontrolliertem Produktionsentscheid
-
-### ACM-REAL-01 – echter workflow-produzierter Artikel-Handoff noch nicht vollständig durch ACM-Endkette gelaufen
-- echter aktuelle Einstieg/Item ist gebunden
-- Fixture-/isolierter Komplettweg ist PASS
-- real erzeugtes Fact-Pack + Production-Plan + LanguageTool-Evidence des aktuellen Hindernisstangen-Items bis zur finalen signierten JSON/WordPress-Runtime ist noch offen
-
-## AUFGELÖSTE FEHLER DIESES ARBEITSBLOCKS
-
-Keine davon ist ein neuer Produktionsfehler:
-- P47 erwartete falsche generische PASS-Strings -> Testannahme korrigiert
-- Echt-Einstieg-Probe: fehlender vorgeschalteter offizieller Preflight -> vorhandenen Preflight wiederverwendet
-- Echt-Einstieg-Probe: verschachteltes JSON falsch ausgewählt -> Parser korrigiert
-- WordPress-Seam: falsche Fact-Pack-Feldbindung -> auf bestehenden `fact_pack_id`-Vertrag korrigiert
-- Fact-Pack-Tampertest: erfundenes `facts`-Feld -> realen `claims`-Vertrag verwendet
-- LanguageTool-Inventar: Evidence-Dateien fälschlich als Runtime gezählt -> getrennt
-- keine neue Route/kein neuer Runner/kein neuer Signer/kein neuer Fachvertrag erforderlich
-
-## UNABHÄNGIGER 7/7-ABNAHMETEST – HARD RULE
-
-Für die harte ACM-Konzeptabnahme gilt:
-
-- alle 7 Artikel vollständig neu von null erzeugen
-- keine alten 7/7-Artikel als Produktionsquelle
-- keine alten Fact-Packs
-- keine alten Rechercheergebnisse
-- keine alten JSON-/Proof-/Recovery-/Quarantäne-/Release-Artefakte als Produktionsquelle
-- wiederverwendet werden ausschließlich die unveränderten bestehenden Regeln, Verträge, Gates und Schnittstellen
-- erst NACH abgeschlossenem frischem Test dürfen die alten 7/7 als Vergleichs-/Goldstandard herangezogen werden
-- der Vergleich darf den Nulltest nicht beeinflussen
-
-Zweck:
-Der Test soll beweisen, dass ACM unabhängig neue Artikel erzeugen und durch den gebundenen Workflow führen kann – nicht, dass vorhandene Artikel erfolgreich weiterverarbeitet werden.
-
-Aktueller frischer Nulltest:
-- Start über bestehenden permanenten Chat→Codex-Dispatcher PR #107
-- Dispatcher-Head = current main `93ba987c56f7b08ffba009210e3012c036fec18d`
-- vorhandener Codex-Cloud-Worker
-- kein neuer Startweg
-- keine Schnittstellenänderung
-- keine Reparatur während des Tests
-- Stop nur am ersten echten BLOCKED/USER_ACTION_REQUIRED oder bei 7/7-Ende
-- kein Publish
-
-## KORREKTUR NACH AUTORITATIVER ORIGINALWEG-ÜBERGABE / 12-STAGE-CORRIDOR
-
-Frisch gegen die autoritativen TEXT-Quellen geprüft:
-- `CURRENT_STATE.md`
-- `HOBBYRAUM.md`
-- `04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md`
-- `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`
-- `TECHNICAL_CORRIDOR_MATRIX_20260907.md`
-- `PAUL_PIPELINE_AUDIT_20260906.md`
-
-### Harter Befund
-
-Der aktuelle frische Nulltest-Stop
-`BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`
-darf **nicht** als isolierter LanguageTool-Minifix behandelt werden.
-
-Grund:
-Der produktive 107007-Handoff verlangt 12 Stage-Proofs. Im realen
-`fachworkflow_proof_handoff.py` wird nur die Stage `ppm` selbst mechanisch durch einen echten Stage-spezifischen Executor ausgeführt. Die übrigen Stage-Proofs werden überwiegend generisch als Dateien/Hashes/PASS-Evidence validiert.
-
-Das erzeugt genau den bereits historisch dokumentierten K1/K3-Interpretationsspielraum.
-
-### Alternativ-Labor korrekt eingeordnet
-
-Der bisherige P40/P22-Ein-Artikel-PASS bleibt gültig für seine eigentliche Aussage:
-`prepare(no write) -> externe Signatur -> genau ein Draft -> Readback -> kein Publish`.
-
-Er ist aber **kein Beweis eines vollständigen frischen 12-Stage-Codex-Laufs**:
-- P22 benutzt die vorhandene PPM-Test-/Fixture-Umgebung (`fixture-builder.php`);
-- P40 prüft bei `stage_proofs` nur Vorhandensein/Anzahl 12, nicht die reale stage-spezifische Ausführung;
-- deshalb darf aus dem Labor-PASS keine Produktionsbindung aller 12 Stufen abgeleitet werden.
-
-### Zwei bereits bekannte Autoritätslücken bleiben auch für ACM relevant
-
-1. `CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`
-   - ACM hat bisher vorhandene Link-Validatoren inventarisiert;
-   - keine unveränderte deterministische NEW-Quelle gefunden, die die artikelbezogenen Linkbindungen ohne freie Worker-/Chatentscheidung erzeugt.
-
-2. `CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
-   - ACM hat den vorhandenen Rendered-DOM-/Style-Validator sauber identifiziert;
-   - dieser ist sinnvoll **nach** Draft/Readback;
-   - der reale bestehende Handoff verlangt `design_format` aber bereits als Teil der 12 Stage-Proofs **vor** Abschluss des Handoffs/realen Draftwegs;
-   - `design_format` darf nicht eigenmächtig in einen Source-PASS umdefiniert werden.
+- kein neuer WordPress-Vorschauweg;
+- kein Draft/Readback/DOM-Zickzack als neue Pflicht;
+- die tatsächliche bestehende Autorität für `design_format` muss ausschließlich aus dem real funktionierenden Fachworkflow abgeleitet werden;
+- bis dieser Punkt belegt ist, wird nichts geraten und keine neue Designlogik gebaut.
 
-### KISS-Folge
+## AKTUELLER REALER INTEGRATIONSPUNKT
 
-- kein LT-Einzelfix;
-- geparkter `hobbyroom/languagetool-runtime-rebind-20260907` bleibt nur historische Beweisquelle;
-- kein neuer Executor;
-- kein neuer Handoff;
-- kein zweiter Controller;
-- keine neue Linklogik;
-- keine neue `design_format`-Bedeutung;
-- keine alten Artikel/Pläne als NEW-Produktionsquelle;
-- keine Änderung an Textmaschine/PPM/PSERC/PSTE/WordPress/Publish.
+Der Dreier-Zickzack ist als ACM-Prinzip sauber.
 
-Status für realen ACM-Nulltest:
-`ACM_REAL_STAGE_CORRIDOR_BLOCKED`
+Der heute produktive 107007-Weg hat jedoch noch eine andere Proof-Herkunftssemantik:
 
-Der erste sichtbare Stop ist LanguageTool; der **Root Cause darf aber nicht auf LanguageTool verengt werden**.
+- der gebundene Codex-Worker erzeugt die Nicht-PPM-Stage-Artefakte/Proof-Dateien;
+- der bestehende Handoff prüft Schema, Identität, Hash, PASS-Felder und Artefakte;
+- nur die PPM-Stufe wird dort zusätzlich selbst real ausgeführt.
 
-## READ-ONLY-CORRIDOR-ENTSCHEIDUNG – ENDSTAND
+Damit ist für die Nicht-PPM-Nachweise noch nicht allgemein technisch bewiesen:
 
-Die in der autoritativen Übergabe verlangte read-only Frage ist geschlossen.
+**PASS stammt zwingend direkt aus dem fest gebundenen echten Prüfer und nicht aus einer vom Worker materialisierten PASS-Datei.**
 
-### NEW internal_links
-Im aktuellen unveränderten PPM/Fachworkflow wurden gefunden:
-- `PPM679_WordPress_Link_Target_Validator`
-- `Content_Structure_Language_Gate::check_links`
-- `Content_Validator`
-- weitere Link-/Known-Error-Prüfer
+Das ist der nächste reale Integrationspunkt.
 
-Diese Komponenten validieren bereits gebundene Links.
-Es wurde kein unveränderter allgemeiner deterministischer NEW-Erzeuger gefunden, der für einen frischen Artikel die drei artikelbezogenen `quality_binding.link_bindings` / Registry-Bindungen ohne Worker-/Chatentscheidung erzeugt.
+## KISS-GRENZE
 
-Ergebnis:
-`CURRENT_NEW_LINK_BINDING = BLOCKED_MISSING_EXISTING_DETERMINISTIC_BINDING`
+Zur Schließung dieses Punktes gilt zwingend:
 
-### design_format
-Vorhandene echte Autorität:
-- Rendered-DOM-/Computed-Style-/Readback-Prüfung nach Draft/WordPress-Render.
+Erlaubt:
+- vorhandene echte Prüfer und deren vorhandene reale Outputs unverändert wiederverwenden;
+- mehrere Nachweise aus demselben vorhandenen Fachvalidator ableiten, wenn dieser sie bereits atomar prüft;
+- genau eine kleinste Bindung in der bestehenden ACM-Zentralsteuerung.
 
-Der produktive 107007-Handoff verlangt `design_format` jedoch bereits als Teil der 12 Stage-Proofs vor Abschluss des Handoffs.
-Ein echter Rendered-DOM-PASS kann dort nicht ehrlich vorliegen.
+Verboten:
+- 12 neue Prüfer;
+- neuer Runner;
+- neuer Executor;
+- zweiter Controller;
+- neues Handoff;
+- neues Übergabeformat;
+- neue Fach-/Qualitätslogik;
+- Änderung von Textmaschine/PPM/PSERC/PSTE/LanguageTool-Regeln;
+- Worker-Selbst-PASS.
 
-Keine vorhandene unveränderte Produktionsautorität wurde gefunden, die `design_format` im Prewrite-Handoff eindeutig anders definiert.
-Eine Umdeutung auf Source-Format wäre eine neue Vertrags-/Autoritätsentscheidung und ist verboten.
+Wenn die vorhandene Prüferherkunft nicht ohne einen solchen neuen Baustein bindbar ist:
+**STOP statt Architekturumbau.**
 
-Ergebnis:
-`CURRENT_DESIGN_FORMAT_BINDING = BLOCKED_UNDEFINED_EXISTING_STAGE_AUTHORITY`
+## WEITERE OFFENE BESTANDSBEFUNDE
 
-### Konsequenz
+- Für NEW internal_links existieren die Regeln/Validatoren; eine unveränderte deterministische Erzeugungsquelle für die konkreten drei neuen Linkziele ist weiterhin nicht abschließend gebunden.
+- LanguageTool-Regel/Evidence ist vorhanden; ausführbarer LT-6.8-Runtime ist für unbeaufsichtigte Vollautomatik noch nicht reproduzierbar gebunden.
+- Finale produktive Übergabe/Adoption bleibt separat zu beweisen.
+- Kein Auto-Publish.
 
-`ACM_REAL_STAGE_CORRIDOR_BLOCKED`
+Diese Punkte werden nicht durch neue Architektur verdeckt.
 
-Kein LanguageTool-Einzelfix.
-Kein Produktkandidat.
-Kein neuer 7/7-Realtest.
-Kein neuer Runner/Executor/Handoff/Controller.
-Keine neue Link- oder Designlogik.
-Keine Änderung an bestehenden Schnittpunkten.
+## NEXT ACTION
 
-Der ACM-Laborkern `prepare(no write) -> externe Signatur -> Draft -> Readback` bleibt als isolierter technischer PASS bestehen.
-Nicht bewiesen ist die vollständige frische 12-Stage-Produktion ohne freie Workerentscheidung.
+Nur den ersten offenen Integrationspunkt bearbeiten:
 
-## KONKRETE ALTBESTAND-ÜBERNAHMEN – KRITISCHE BEWERTUNG
+**Vorhandene reale Prüfer-Ausgänge für die Nicht-PPM-Nachweise bestimmen und prüfen, ob sie ohne neue Komponente direkt an die ACM-Zentralmaschine gebunden werden können.**
 
-### Beibehalten – GO als unveränderte Fach-/Sicherheitsautorität
-- bestehender Chat→Codex-Start/Dispatcher: nur Eingang, keine Fachentscheidung
-- Textmaschine: bestehende Inhaltsautorität
-- PSTE/PSERC: bestehende Planungs-/SEO-/Metadatenautorität
-- PPM-Fach-/Content-/Prepare-/Draft-/Readback-Bausteine: bestehende Produktions-/Prüfautorität
-- LanguageTool-Regel/Version/Provenienz: bestehende Qualitätsautorität
-- externe Signatur/Endstempel-Prinzip: bestehende Manipulationsschutzgrenze
-- vorhandene WordPress Draft-/Readback-/DOM-Prüfer: bestehende Zielsystemprüfer
-
-Diese Teile werden nicht nachgebaut und nicht fachlich verändert.
-
-### Neu bewertet – NICHT pauschal übernehmen
-- `FACHWORKFLOW_HANDOFF_REQUEST.json` als kompletter alter Workflowvertrag
-- 107007/Current-Action als ACM-Orchestrierungsmodell
-- generische 12-Stage-Proof-Semantik
-- jede alte Reihenfolge-/State-/Worker-Bindung, die über reinen Transport/Identität hinausgeht
-
-Warum sie zunächst übernommen wurden:
-P27/P38 interpretierten die Vorgabe
-„bestehender Codex-Start und korrekte Dateiübergabe sind vorhanden; keine neue Handoff-Architektur“
-zu breit als Freigabe des vollständigen alten Handoff-Vertrags.
-
-Korrektur:
-Nur **Transport, feste Identitäten und vorhandene Fachautoritäten** dürfen als Bestand weiterverwendet werden.
-Alte Orchestrierungs-/Stage-Semantik muss separat durch das PRE-CHANGE-ZWANGSGATE.
-
-### Gesamtsystemwirkung
-
-Aktueller Branch bleibt technisch isoliert:
-alle ACM-Änderungen liegen unter
-`control/seo-text-buero/alternative-central-machine/`.
-
-Keine produktive Datei wurde verändert.
-
-Für jede spätere Adoption gilt trotzdem:
-lokaler PASS genügt nicht.
-Pflicht ist:
-`Positiv -> Negativ -> kompletter ACM-Workflow -> Gesamtsystem-Auswirkung -> erst danach Realtest`.
-
-## MASCHINENFESTE ZWANGSJACKE – EXTERNER LAB-HARDLOCK
-
-Der reine Prompt-/Dokumentationsschutz ist nicht ausreichend.
-
-Deshalb ist der ACM-Hardlock zusätzlich im **separaten Lab-Basisbranch**
-`alternative/seo-text-central-machine-lab-base-20260908`
-im bestehenden Workflow
-`.github/workflows/alternative-seo-text-p3-lab.yml`
-verankert.
-
-Wichtig:
-Der Kandidatenbranch kann diesen Wächter nicht zusammen mit seiner eigenen Änderung verändern.
-
-Maschinell erzwungen:
-- Änderungen außerhalb des isolierten ACM-Ordners => BLOCK;
-- neue ausführbare ACM-Komponente => BLOCK;
-- Änderung der eingefrorenen alten Handoff-/107007-Beweisdateien => BLOCK;
-- aktive Übernahme alter Orchestrierungsmarker wie `FACHWORKFLOW_HANDOFF_REQUEST`, `CURRENT_BOUND_ACTION_READY`, `codex_current_action`, `fachworkflow_proof_handoff`, `STEP_107007` => BLOCK;
-- neue caller-selected Route/Validator/Engine/Worker-API => BLOCK;
-- Zentralmaschine darf keinen frei wählbaren Engine-/Validator-/Routenparameter erhalten.
-
-Explizite Regel:
-**Inspiration/read-only aus Altbestand = erlaubt.**
-**Ungefilterte oder aktive Übernahme alter Workflowlogik = standardmäßig verboten.**
-
-Der Hardlock enthält positive und negative Selbsttests und läuft vor der bestehenden vollständigen ACM-Laborregression.
-Hardlock-Testnachtrag:
-- erster externer Lauf blockierte fail-closed wegen zu enger Konstruktor-Syntaxprüfung;
-- ausschließlich der externe Lab-Guard wurde syntaxfest auf AST-Prüfung korrigiert;
-- keine ACM-Produktiv-/Prototyptechnik wurde dafür verändert.
-
-
-## HARTE ZWANGSJACKE FÜR JEDE WEITERE ACM-ARBEIT
-
-Die Route darf keinen Fix-/Testkandidaten erzeugen, bevor das in `00_ROUTE_BOUNDARY.md` definierte
-`PRE-CHANGE-ZWANGSGATE – FAIL CLOSED`
-vollständig bestanden ist.
-
-Verbindliche Entscheidung:
-- `4x NEIN + SYSTEMWIRKUNG BELEGT` => genau eine kleinste Änderung darf geprüft werden.
-- jedes `JA`, `UNKLAR`, `NICHT BELEGT` => **STOP**.
-- kein Chat-/Worker-Ermessen darf diese Entscheidung überschreiben.
-- kein Einzeltest-PASS darf die verpflichtende Positiv-/Negativ-/Gesamtworkflow-/Gesamtsystemprüfung ersetzen.
-- keine Änderung darf neue Freiheitsgrade erzeugen oder das Ergebnis fachlich beeinflussen.
-
-Diese Regel gilt vor Codeänderung, Handoff-Anbindung, Testkandidat, Runtime-Bindung, WordPress-Anbindung und Produktionsadoption gleichermaßen.
-
-## HOBBYRAUM / NEXT ACTION
-
-HOBBYRAUM_STATUS: **BLOCKED**
-PRODUKTIONSADOPTION: **BLOCKED**
-
-P26 ist geschlossen und darf nicht erneut bearbeitet oder erneut isoliert geprüft werden.
-
-Der erste verbleibende reale Endpunkt ist:
-`ACM_REAL_STAGE_CORRIDOR_BLOCKED`
-
-Bereits autoritativ bewiesen:
-- der frische echte Einstieg erreichte als ersten sichtbaren Stop `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`;
-- der Root Cause darf nicht auf LanguageTool verengt werden;
-- für NEW `internal_links` fehlt eine unveränderte deterministische Erzeugungsautorität;
-- für `design_format` fehlt im alten Prewrite-12-Stage-Korridor eine eindeutige bestehende Stage-Autorität;
-- WP-01 bleibt zusätzlich `BLOCKED_BY_INTERFACE_TABOO`.
-
-**NEXT ACTION: STOP / KEINE TECHNISCHE ACM-ÄNDERUNG.**
-
-Unter den aktuellen unverhandelbaren Regeln wäre zur Schließung des realen Stage-Corridors mindestens neue Stage-Semantik, ein neuer Executor/Handoff/Controller oder eine Umdeutung bestehender Autorität nötig.
-Das verletzt PRE-CHANGE-ZWANGSGATE und KISS.
-
-Deshalb:
-- kein LanguageTool-Einzelfix;
-- kein neuer Runner/Executor/Handoff/Controller;
-- keine neue Linklogik;
-- keine neue `design_format`-Bedeutung;
-- kein WP-01-Wrapper/Handler/Importer;
-- kein neuer 7/7-Realtest;
-- kein Produktionswrite;
-- kein Publish.
-
-Weiterarbeit erst nach einer ausdrücklich autorisierten Grundsatzentscheidung außerhalb dieses blockierten technischen Pfads.
+Reihenfolge:
+1. vorhandenen Prüfer/Output lesen;
+2. keine neue Fachlogik;
+3. wenn direkte Bindung möglich: genau eine kleinste isolierte Änderung;
+4. Positivtest;
+5. Negativtest;
+6. kompletter P3-Gesamtworkflow;
+7. P8 Signer-Isolation;
+8. erst danach nächster Punkt.
 
 ## VERBINDLICHER ARBEITSWEG
 
-1. Immer vorhandenen Baustein zuerst prüfen.
-2. Nur den ersten offenen Fehler bearbeiten.
-3. Kleinste Änderung.
-4. Derselbe positive/negative Seam-Test danach.
-5. Bei wachsender Sonderlogik STOP statt neue Architektur.
-6. Parallelroute nicht anfassen.
-7. main/CURRENT_STATE/Zielvertrag nicht verändern, solange ACM nicht ausdrücklich adoptiert wird.
-8. Kein Auto-Publish.
-9. Bestehende Schnittpunkte sind absolut tabu: nur unverändert benutzen oder read-only prüfen; keine neuen Wrapper/Handler/Übergabeformate als Umgehung.
-
-## ZIELVERTRAG
-
-Produktiver Zielvertrag: **unverändert**.
-
-ACM-Adoptionskandidat:
-`57_PRODUCTION_ADOPTION_CONTRACT_CANDIDATE.md`
-
-Er ist keine zweite produktive Zielwahrheit.
-Er beschreibt nur die noch nicht adoptierte Alternative.
-
-## ARCHIV
-
-Keine aktive oder ungeklärte Information wurde archiviert.
-P0–P57 sowie P59 bleiben Entwicklungs-/Beweis-/Entscheidungsakten.
-Sie dürfen nicht als aktuelle Standquelle verwendet werden.
-
-## ABSCHLUSSPRÜFUNG DES SCHNITTPUNKT-TABU-STANDS
-
-PASS auf Head `c6f38f0c1ad1c992f3738d83c342dfd9a5637272`:
-- kompletter bestehender P3-Laborlauf SUCCESS
-- P8 Producer/External-Signer/Importer-Isolation SUCCESS
-- P47 bestehendes Handoff unverändert PASS
-- One-Article-End-to-End-Labortest PASS
-- Endstempel-/WordPress-Preimport positive/negative PASS
-- keine Änderung außerhalb `control/seo-text-buero/alternative-central-machine/`
-- keine Schnittstellenänderung
-- kein WordPress-Write auf Produktion
-- kein Publish
-
-## EINE WAHRHEIT – NEGATIVPRÜFUNG
-
-PASS:
-- keine zweite produktive CURRENT_STATE erzeugt
-- keine ACM-Änderung an produktiver Fehlermatrix
-- kein zweiter produktiver Zielvertrag
-- Master ist nur Wegweiser auf diese Datei
-- ältere Fortschrittsakten sind keine aktuelle Standwahrheit
-- Parallelroute bleibt separat
-- kein Archiv als Current
+- KISS
+- nur erster offener Fehler
+- keine Doppelprüfung
+- keine Architektur auf Architektur
+- vorhandenen Baustein zuerst
+- Inspiration aus Altbestand ja, ungefilterte Workflowübernahme nein
+- main/CURRENT_STATE nicht verändern
 - kein Auto-Publish
-
-## ABSCHLUSS-/NACHHOLPRÜFUNG DIESES CHATS – 09.09.2026
-
-Aktueller technisch getesteter Head bei Abschluss:
-`7d55d407c4a8ba13255818eb85a472262d662684`
-
-Letzter sicherer Gesamt-PASS:
-`7d55d407c4a8ba13255818eb85a472262d662684`
-
-Neue dauerhafte Entscheidungen/Befunde:
-- Inspiration aus Altbestand erlaubt; ungefilterte Workflowübernahme verboten.
-- externer maschinenfester Hardlock liegt im separaten Lab-Basisbranch; Kandidat kann ihn nicht mitändern.
-- direkte ACM-Ausgabe passt ohne neue Zwischenarchitektur in die bestehende externe Signaturgrenze; positiv/negativ und im Gesamtworkflow bewiesen.
-- öffentlicher PSERC-`prepare()`-Seam ist schreibfrei und jetzt mit realen vorhandenen Daten positiv/negativ sowie im Gesamtworkflow bewiesen.
-- `ACM-P26-TESTCOVERAGE-01` ist geschlossen.
-- nächster realer Endpunkt bleibt `ACM_REAL_STAGE_CORRIDOR_BLOCKED`; unter den geltenden Schnittpunkt-/KISS-Regeln ist dafür keine technische ACM-Änderung zulässig.
-
-Nicht ausgeführt:
-- kein frischer 1-Artikel-Produktionslauf;
-- kein frischer 7/7-Nulltest;
-- kein WordPress-Produktivwrite;
-- kein Publish.
-
-## CAMPUS-/ARCHITEKTURFOLGE
-
-Die ACM-Erkenntnis ist allgemeingültig:
-`bestehende Fachlogik behalten -> technische Orchestrierung vereinfachen -> eine signierte Übergabedatei -> fail-closed Draft-Import`.
-
-Sie wird **noch nicht** in einen allgemeinen Campus-/Neubau-Standard propagiert, weil ACM noch nicht produktiv adoptiert ist.
-
-Status:
-`CAMPUS_PROPAGATION_BLOCKED_UNTIL_ALTERNATIVE_ARCHITECTURE_APPROVED`
-
-Nach späterer Adoption ist genau dieses KISS-Prinzip als Neubau-Standard zu übernehmen.
+- keine Inhalts-/Qualitätsänderung
+- jede technische Änderung positiv + negativ + Gesamtworkflow prüfen
