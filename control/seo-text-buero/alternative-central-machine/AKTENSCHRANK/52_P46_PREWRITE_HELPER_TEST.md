@@ -1,15 +1,30 @@
 # P46 – PREWRITE-HELPER INVENTUR
 
 Datum: 2026-09-09
-Status: TEST AKTIV
+Status: ABGESCHLOSSEN – PASS
 
-Nur prüfen:
-- Sichtbarkeit/Signaturen von bootstrap, generate_all, check_all, create_drafts
-- bestehende Variablen/Aufrufzeilen aus execute_plan bis vor create_drafts
+## Ergebnis
 
-Keine neue Pipeline.
-Keine neue Fachlogik.
-Keine Reflexions-/Umgehungslösung als Zielarchitektur.
+Vorhandene interne Helper:
+- `bootstrap` – private static
+- `generate_all` – private static
+- `check_all` – private static
+- `create_drafts` – private static
 
-Wenn private Helper existieren:
-vorhandene öffentliche Fachbausteine verwenden, nicht neue API bauen.
+Die tatsächlichen Orchestrierungszeilen bis unmittelbar vor `create_drafts` wurden aus dem bestehenden `execute_plan` extrahiert.
+
+Belegt:
+- create_drafts-Grenze vorhanden
+- kein neuer Helper erforderlich
+- keine neue Pipeline erforderlich
+- publish_allowed=false
+
+## KISS-Folge
+
+Keine Reflection-/Private-Helper-Umgehung.
+Keine neue PPM-API.
+
+Nächste zulässige Prüfung:
+Den bestehenden dünnen Handoff-Controller mit **nur den vorhandenen öffentlichen PPM-Bausteinen** und der in P45 belegten Reihenfolge bis `prepare()` real ausführen.
+
+STOP, falls dafür private Helper kopiert, neue PPM-APIs oder ein zweiter Handoff gebaut werden müssten.
