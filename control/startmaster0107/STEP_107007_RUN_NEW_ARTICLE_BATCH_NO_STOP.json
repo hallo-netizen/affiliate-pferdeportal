@@ -10,7 +10,7 @@
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
+      "sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
@@ -63,6 +63,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "75fdb3f44e59cd982de200eb95249cf485faca287dffe21646cd420b65a63ffc"
+    "bundle_sha256": "ecfb3152234f3bfaa91b33bbe09a7ae6b50f3c51ab3b8837911f0920154dcb1b"
   }
 }
