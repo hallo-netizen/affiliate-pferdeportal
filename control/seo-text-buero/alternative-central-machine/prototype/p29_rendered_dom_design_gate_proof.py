@@ -48,6 +48,15 @@ def main():
         if not tv.is_file():raise RuntimeError("TABLE_HARD_RULE_VALIDATOR_MISSING")
 
         rv_hits=scan(rv); tv_hits=scan(tv)
+        rv_source=rv.read_text(encoding="utf-8")
+        # Lifecycle hard binding: this existing checker can only prove design_format
+        # after a real draft/readback/render state exists.
+        for required in ("post_id","readback_content_hash","desktop","mobile"):
+            if required not in rv_source:
+                raise RuntimeError("DESIGN_FORMAT_LIFECYCLE_BINDING_MISSING:"+required)
+        if "validate_pair" not in rv_source:
+            raise RuntimeError("DESIGN_FORMAT_REAL_CHECKER_MISSING")
+
         runtime_network=[x for x in rv_hits+tv_hits if any(t in x["tokens"] for t in NETWORK)]
         runtime_ai=[x for x in rv_hits+tv_hits if any(t in x["tokens"] for t in AI)]
         if runtime_network:raise RuntimeError("DESIGN_GATE_NETWORK_DEPENDENCY_FOUND")
@@ -77,7 +86,12 @@ def main():
           "hard_rules":found,
           "tests":results,
           "design_decision_mode":"DETERMINISTIC_FAIL_CLOSED_VALIDATORS",
+          "design_format_stage_owner":"PPM679_Rendered_DOM_Validator",
+          "design_format_stage_lifecycle":"AFTER_WORDPRESS_DRAFT_READBACK_RENDER",
+          "pre_wordpress_design_format_pass_allowed":False,
+          "required_runtime_bindings":["post_id","readback_content_hash","desktop","mobile"],
           "free_visual_reviewer_required":False,
+          "content_or_design_rules_changed":False,
           "publish_allowed":False
         },ensure_ascii=False,indent=2))
     return 0
