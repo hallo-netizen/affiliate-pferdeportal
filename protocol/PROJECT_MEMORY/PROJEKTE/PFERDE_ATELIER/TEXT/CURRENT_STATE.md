@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
-STAND: 2026-09-08
-STATUS: **BLOCKED – M35 PPM INPUT CONTRACT ANALYSIS**
+STAND: 2026-09-09
+STATUS: **AKTIV – M35 KISS PRODUCT CANDIDATE UNDER TEST**
 
 ## AUTORITÄT
 
@@ -12,19 +12,19 @@ Fehlerdetails → autoritative TEXT-Fehlerquelle.
 
 ## CURRENT MAIN
 
-`2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`
+`d6de9265cddc1b2a011d707ad615c144cdd9d4ab`
 
-PR #190 ist gemergt und entspricht diesem main.
+PR #196 ist als reine History Authority gemergt. Produktionscode blieb dabei unverändert.
 
 ## DISPATCHER / SCHUTZ
 
 Permanenter Dispatcher PR #107:
 - offen, **nicht mergen**;
-- Head exakt `2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`.
+- Head exakt `d6de9265cddc1b2a011d707ad615c144cdd9d4ab`.
 
 GitHub Ruleset `Pferde Atelier Main Hardlock`:
 - enforcement: active;
-- bypass: leer;
+- bypass: **temporär Repository admin / For pull requests only aktiv**; vor Produktionsmerge zwingend wieder entfernen;
 - Required Checks: `hardlock`, `hardlock-base`.
 
 ## AKTUELLER REALBLOCKER
@@ -41,7 +41,7 @@ Letzte erfolgreich erreichte Stelle im echten Realtest:
 - Stop erst bei Prüfung der Fact-Pack-Quellhashbindung.
 
 Root Cause:
-**noch nicht belegt**.
+**belegt.** Der echte PPM-6.7.9-Vertrag speichert nach `canonical_fact_pack_import_v1` einen eigenen Registry-Hash. Der aktuelle Handoff liest diesen Hash bereits über `PPM679_Storage::fact_pack_hash(...)`, prüft ihn aber nur gegen `production_plan_item.source_hashes`, das noch den Forschungs-/Fact-Pack-Hash enthält. Dadurch werden zwei Hash-Namensräume verwechselt.
 
 ## REAL ÜBERWUNDEN AUF DEM AKTUELLEN WEG
 
@@ -62,13 +62,31 @@ Diese Referenzen sind historische Vergleichsstände, **nicht** aktueller main.
 
 ## AKTIVER ARBEITSSTAND
 
-Kein offener Produktions-Reparatur-PR.
-PR #190: closed / merged.
-PR #161: closed / merged.
+History Authority:
+- PR #196: closed / merged;
+- main `d6de9265cddc1b2a011d707ad615c144cdd9d4ab`.
 
-Aktuell existiert **kein Produktionskandidat** für M35.
+M35-KISS-Kandidat:
+- Branch `hobbyroom/m35-ppm-registry-hash-binding-20260909`;
+- Head `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
+- exakt eine Produktionsdatei: `control/startmaster0107/fachworkflow_proof_handoff.py`;
+- Änderung ausschließlich in der internen PPM-Plan-Kopie nach Fact-Pack-Import: leeren Registry-Hash weiter blockieren, sonst `source_hashes` auf den bereits von PPM ermittelten Registry-Hash setzen.
 
 ## TESTS – TATSÄCHLICH AUSGEFÜHRT
+
+History Authority #196:
+- M15 aktueller Request-first-Vertrag positiv PASS;
+- alte Direct-Submit-/No-Handoff-Semantik negativ BLOCK;
+- M35-Modell positiv PASS;
+- fehlende Registry-Bindung negativ BLOCK;
+- zu späte Bindung nach Planaufbau negativ BLOCK;
+- current main reproduziert unter der neuen History-Regel exakt `M35_PPM_REGISTRY_HASH_NOT_MATERIALIZED`.
+
+M35-Kandidat `ef2eceb…` lokal/source-level:
+- M34 PASS;
+- M35 positiv PASS;
+- fehlende Registry-Bindung BLOCK;
+- Bindung nach Planaufbau BLOCK.
 
 Auf PR #190:
 - `hardlock`: PASS;
@@ -84,10 +102,10 @@ Auf main `2325f6e1…`:
 
 ## TESTS – OFFEN / NICHT BEHAUPTET
 
+- serverseitige `hardlock`-/`hardlock-base`-Abnahme des M35-Kandidaten noch offen;
 - kein 7/7-PASS auf aktuellem main;
 - 107008 auf aktuellem main nicht erreicht;
-- kein M35-Fix getestet;
-- keine M35-Positiv-/Negativabnahme;
+- kein Live-PASS des M35-Fixes;
 - kein Publish;
 - keine WordPress-Schreibaktion.
 
