@@ -1,7 +1,7 @@
 # TEXT – CURRENT STATE
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M17 KISS PRODUCT CANDIDATE UNDER TEST**
+STATUS: **AKTIV – KISS HISTORY/GATE MAINTENANCE BEFORE M17 MERGE**
 
 ## AUTORITÄT
 
@@ -24,7 +24,7 @@ Permanenter Dispatcher PR #107:
 
 GitHub Ruleset `Pferde Atelier Main Hardlock`:
 - enforcement: active;
-- bypass: **temporär Repository admin / For pull requests only aktiv**; vor Produktionsmerge zwingend wieder entfernen;
+- bypass: **leer**;
 - Required Checks: `hardlock`, `hardlock-base`.
 
 ## AKTUELLER INTEGRATIONSBLOCKER
@@ -81,25 +81,39 @@ Diese Referenzen sind historische Vergleichsstände, **nicht** aktueller main.
 
 ## AKTIVER ARBEITSSTAND
 
-M16/M17 History Authority:
-- PR #198: closed / merged;
-- current main `6e650edce60b24baf7d7feef66e60cca2817e59e`;
-- M16 aktueller Vertrag PASS;
-- M17 ist jetzt als ausführbarer Fail-closed-Fall gebunden.
-
-Aktiver M17-KISS-Kandidat:
+M17-KISS-Kandidat #199:
 - Branch `hobbyroom/m17-host-finalization-fail-closed-20260909`;
-- Head `6dcf42daa1dfc0e7960a17da49f8ca2dfee2b5ba`;
-- Head nach bestehender Hash-Refresh-Kette: `66e9f24a06a6ddb37fd5e8e50f4c158965263abd`;
-- genau 1 Logikdatei: `control/output-quarantine/runtime_entry_gate.py`;
-- zusätzlich ausschließlich 5 bereits vorhandene Bindungsdateien gemäß bestehender `STARTMASTER0107_DUAL_ROOTFIX_REPAIR.refresh()`-Kette: STEP 107008, STEP 107007, CURRENT_STATE.json, PFERDE_ATELIER_START_HERE.json, CURRENT_STARTMASTER.json;
-- keine zusätzliche Logik in diesen 5 Dateien; nur Runtime-/Bundle-/State-Hashes nachgezogen.
+- Head `66e9f24a06a6ddb37fd5e8e50f4c158965263abd`;
+- M17 selbst PASS;
+- bestehende Runtime-Hashkette konsistent;
+- serverseitiger Runner: current main reproduziert M17; Kandidat PASS M01–M21 und stoppt danach bei M22.
+
+M22-Gegenprüfung:
+- autoritative B15/TECH-KEYFLOW-001-Regel: interner 107007-/H8-Vorlauf hash-/batch-/herkunftsgebunden, keine interne ED25519-/Signer-Pflicht;
+- bewiesener Stand `7990029428399e8ba01d88a6543ce068812e9218`: korrigiertes M22-Orakel PASS;
+- current main: korrigiertes M22-Orakel FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
+- M22 ist damit ein realer späterer bekannter Regressionstreffer, nicht Grund M17 und M22 in einen Sammelfix zu mischen.
+
+Aktive KISS-Wartung:
+- Branch `hobbyroom/m22-sequential-history-gate-20260909`;
+- Head `90eb7e897897636d51bc13e8ad590fe5d953b0c3`;
+- exakt 3 Dateien: bestehender Regression-Runner, bestehende Matrix, bestehendes `paul_scope_gate.py`;
+- kein neuer Runner/Gate/Contract;
+- vorhandenes Feld `HISTORY_EXPECTED_FAIL` wird bei PRODUCT_FIX als optionaler exakt gebundener nächster späterer bekannter FAIL verwendet.
 
 Geparkter M35-Kandidat:
 - `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
-- unverändert; wird erst nach M17-PASS neu auf fresh main gebunden.
+- unverändert.
 
 ## TESTS – TATSÄCHLICH AUSGEFÜHRT
+
+Sequenz-/M22-Prüfung:
+- PRODUCT_FIX M17 → M22: PASS;
+- M17 → M35: PASS;
+- M17 → M17 oder rückwärts: BLOCK;
+- ohne `HISTORY_EXPECTED_FAIL`: Gesamt-PASS bleibt Pflicht;
+- korrigiertes M22-Orakel: current main FAIL `M22_INTERNAL_SIGNATURE_STILL_REQUIRED`;
+- dasselbe Orakel auf bewiesenem B15-Stand `799002…`: PASS.
 
 M17-Kandidat `66e9f24…` lokal/source-level:
 - M16 PASS;
