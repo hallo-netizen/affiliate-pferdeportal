@@ -252,7 +252,7 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python3 control/seo-text-buero/alternative-central-machine/prototype/p39_existing_handoff_to_prepare_boundary.py
 
-      - name: P40 handoff-only thin controller
+      - name: P40-P43 handoff-only controller complete identity binding
         shell: bash
         run: |
           set -euo pipefail
