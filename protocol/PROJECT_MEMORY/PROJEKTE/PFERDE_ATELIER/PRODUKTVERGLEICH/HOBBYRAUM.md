@@ -1,71 +1,56 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
-STAND: 2026-09-07
-STATUS: AKTIV
-
-## 1-KLICK-ÜBERSICHT
-
-**WAS IST DAS?**  
-Der einzige aktuelle Arbeitsraum des Büros PRODUKTVERGLEICH.
-
-**HIER BIST DU RICHTIG, WENN …**  
-du den aktuell gebundenen 0.2.4-Live-Verifikationstest fortsetzt.
-
-**DU DARFST …**  
-nur den unten definierten 0.2.4-Testweg fortsetzen und dessen realen Nutzerbefund zurückführen.
-
-**DU DARFST NICHT …**  
-neue Architektur bauen, Writer/Fakten/Import/Kategoriebindung verändern, STARTMASTER/TEXT anfassen oder veröffentlichen.
-
-**ALS NÄCHSTES …**  
-0.2.4 auf der echten WordPress-Seite verifizieren.
+STAND: 2026-09-09
+STATUS: AKTIV / NÄCHSTER SCHRITT WORDPRESS-LIVE-RETEST 0.8.1
 
 ## AKTUELLER AUFTRAG
 
-Produktwissen `0.1.0` unverändert lassen.
+Nur den lokal hart geprüften Kandidaten testen:
 
-Produktvergleich `0.2.4-prototype` über die installierte Produktvergleichsversion ersetzen und danach ausschließlich:
+`universal-product-comparison-0.8.1-prototype.zip`
 
-1. WordPress neu laden;
-2. Hauptnavigation auf **Produktvergleich** prüfen;
-3. falls sichtbar: öffnen;
-4. `PV-REG-001 als Draft testen` genau einmal klicken;
-5. Draft öffnen;
-6. Screenshot/Befund an den Arbeitschat zurückgeben;
-7. nichts veröffentlichen.
-
-## ARBEITSBINDUNG
+SHA-256:
+`3ae3fe30365f767ea1e225554c7e986d70c6225d79884eeb796beadf1f6cb902`
 
 Branch:
-`hobbyroom/productwissen-v1-prototype`
+`hobbyroom/productvergleich-workflow-v070-20260908`
 
-Technischer Codebeleg:
-`47666ef1a0f1dbe36c5c8744382b52e178d734e9`
+## LOKALE ABNAHMEGRENZE
 
-Realtest:
-Run `34154550626` → PASS.
+PASS:
+- finale Fresh-ZIP 19/19 Tests;
+- PHP-Lint 39/39;
+- Source↔ZIP 50/50;
+- echte UPK-/PSTE-Abhängigkeiten;
+- Positiv/Negativ;
+- Mutation/Gegenbeweise;
+- Gesamtworkflow-Grenzen.
 
-Fehlerquelle:
-`FEHLERQUELLEN.md` → aktuell PV-ERR-003.
+Damit ist die **lokale Vorprüfung PASS**.
 
-Ziel:
-`ZIELVERTRAG_V1.md`.
+Nicht behaupten:
+- WordPress-LIVE-PASS;
+- fertige Writer-/Draft-Produktion;
+- Publish-Freigabe.
 
-Rückgabeweg:
-**echter WordPress-Screenshot/Befund → zuständiger Arbeitschat → erst danach nächste Entscheidung.**
+## NEXT ACTION
+
+Auf der echten Pferde-Atelier-WordPress-Seite:
+
+1. 0.8.1 installieren/ersetzen;
+2. WordPress neu laden;
+3. `Produktvergleich` öffnen;
+4. vor jedem Providerlauf zuerst Screenshot/Status an den Arbeitschat zurückgeben;
+5. erst nach Prüfung den gebundenen Gesamtworkflow genau einmal starten;
+6. Ergebnis gegen PV-LIVE-001 und den neuen Dossier-Audit-Guard prüfen;
+7. nichts veröffentlichen.
 
 ## BLOCK-GRENZE
 
-Wenn 0.2.4 auf der echten Seite keinen Hauptmenüpunkt zeigt:
-STATUS auf BLOCKED setzen und ausschließlich PV-ERR-003 weiterbearbeiten.
+Jede Abweichung vom lokal gebundenen Kandidaten, falsche Version/SHA, falsche Success-Anzeige, Dossier-/Audit-Drift oder unerwarteter Schreib-/Publishweg -> BLOCKED.
 
-Kein weiterer Funktionsausbau vor dieser Live-Verifikation.
+Keine neue Funktion und keine neue Architektur vor dem Live-Retest.
 
 ## PAUL
 
 Kein aktiver Paul-Auftrag.
-Kein `PAUL_ASSIGNMENT_V1`.
-
-## Globale Arbeitsort-Sperre
-
-Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.
