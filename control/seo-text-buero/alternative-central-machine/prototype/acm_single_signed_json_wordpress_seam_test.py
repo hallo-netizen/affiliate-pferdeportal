@@ -27,22 +27,24 @@ def dump(path,obj):
 def php_quote(path):
     return str(path).replace("\\","\\\\").replace("'","\\'")
 
-def build_context(ppm):
+def build_context(ppm,count):
     helper=ppm/"acm-single-json-context.php"
     helper.write_text(r'''<?php
 require __DIR__.'/tests/normal-draft-production/fixture-builder.php';
 nd_reset();
-$p=nd_build_plan(1,'acm-single-json');
-$item=$p['items'][0];
-$pack=PPM679_Storage::load_fact_pack($item['source_snapshot_id']);
-$header=$p; unset($header['items']);
+$count=(int)$argv[1];
+if($count<1){fwrite(STDERR,"COUNT_INVALID\n");exit(2);}
+$p=nd_build_plan($count,'acm-single-json');
+$packs=[];
+foreach($p['items'] as $item){
+  $packs[]=PPM679_Storage::load_fact_pack($item['source_snapshot_id']);
+}
 echo json_encode([
   'plan'=>$p,
-  'pack'=>$pack,
-  'canonical_article_id'=>$item['canonical_article_id']
+  'packs'=>$packs
 ],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 ?>''',encoding="utf-8")
-    cp=run(["php",str(helper)],ppm)
+    cp=run(["php",str(helper),str(count)],ppm)
     if cp.returncode!=0: raise RuntimeError("CONTEXT_BUILD_FAILED:"+cp.stdout[-3000:])
     return json.loads(cp.stdout)
 
@@ -70,16 +72,26 @@ def release_meta(dual,batch,count):
         raise RuntimeError("RELEASE_META_SCHEMA_DRIFT:"+str(sorted(set(dual.RELEASE_META_KEYS)-set(base))))
     return base
 
-def make_package(dual,private,pub_b64,pub_sha,kid,ctx,batch,plan_slot):
+def make_package(dual,private,pub_b64,pub_sha,kid,ctx,batch):
     plan=ctx["plan"]
-    pack=ctx["pack"]
-    bundle={"contract":"canonical_fact_pack_import_v1","created_at":"2026-09-09T00:00:00+00:00","fact_packs":[pack]}
-    rel_item={"plan_slot":plan_slot,"canonical_article_id":ctx["canonical_article_id"]}
-    meta=release_meta(dual,batch,1)
-    c={"source":"ACM_SINGLE_JSON_TEST","fact_pack_bundle":bundle,"production_plan":plan,
-       "workflow_release_metadata":meta,"workflow_release_items":[rel_item]}
+    packs=ctx["packs"]
+    if not isinstance(plan.get("items"),list) or not plan["items"]:
+        raise RuntimeError("PLAN_ITEMS_MISSING")
+    if not isinstance(packs,list) or len(packs)!=len(plan["items"]):
+        raise RuntimeError("FACT_PACK_COUNT_MISMATCH")
+    bundle={"contract":"canonical_fact_pack_import_v1","created_at":"2026-09-09T00:00:00+00:00","fact_packs":packs}
+    rel_items=[
+        {
+            "plan_slot":hashlib.sha256((batch+":"+str(i)).encode("utf-8")).hexdigest(),
+            "canonical_article_id":item["canonical_article_id"],
+        }
+        for i,item in enumerate(plan["items"])
+    ]
+    meta=release_meta(dual,batch,len(plan["items"]))
+    payload={"source":"ACM_SINGLE_JSON_TEST","fact_pack_bundle":bundle,"production_plan":plan,
+       "workflow_release_metadata":meta,"workflow_release_items":rel_items}
     signer=lambda h: base64.b64encode(private.sign(h.encode("ascii"))).decode("ascii")
-    return dual.build_package(c,signer,kid,pub_sha,pub_b64,False)
+    return dual.build_package(payload,signer,kid,pub_sha,pub_b64,False)
 
 def resign(dual,pkg,private):
     release=pkg["workflow_release"]
@@ -183,28 +195,49 @@ def main():
     raw_pub=private.public_key().public_bytes(encoding=serialization.Encoding.Raw,format=serialization.PublicFormat.Raw)
     pub_b64=base64.b64encode(raw_pub).decode("ascii");pub_sha=hashlib.sha256(raw_pub).hexdigest();kid="acm-test-"+pub_sha[:16]
     trusted={kid:{"sha256":pub_sha,"public_key_b64":pub_b64}}
-    batch=hashlib.sha256(b"acm-single-json-batch").hexdigest();slot="a"*64
 
     with tempfile.TemporaryDirectory() as td:
         root=Path(td);ppm_out=root/"ppm";ppm_out.mkdir()
         with zipfile.ZipFile(PPM) as z:z.extractall(ppm_out)
         ppm=ppm_out/"portal-production-machine"
-        ctx=build_context(ppm)
-        pkg=make_package(dual,private,pub_b64,pub_sha,kid,ctx,batch,slot)
-        final=root/"PFERDE_ATELIER_SIGNED_ARTICLE_BATCH_FINAL.json";dump(final,pkg)
 
-        proof=h7.validate_production_package(final,trusted_keys=trusted)
-        if proof.get("status")!="SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID":raise RuntimeError("H7_PACKAGE_NOT_VALID")
+        # Same unchanged end path for different finite batch sizes.
+        positive_counts=[1,3,25]
+        positive_results=[]
+        packages={}
+        for count in positive_counts:
+            batch=hashlib.sha256(("acm-single-json-batch:"+str(count)).encode("utf-8")).hexdigest()
+            ctx=build_context(ppm,count)
+            pkg=make_package(dual,private,pub_b64,pub_sha,kid,ctx,batch)
+            case=root/("case-"+str(count));case.mkdir()
+            final=case/"PFERDE_ATELIER_SIGNED_ARTICLE_BATCH_FINAL.json";dump(final,pkg)
 
-        positive=wp_full_import(final,trusted,ppm)
-        if positive.returncode!=0:raise RuntimeError("WP_POSITIVE_FAILED:"+positive.stdout[-4000:])
-        pos=json.loads(positive.stdout)
-        if pos.get("verified_status")!="SIGNED_JSON_VERIFIED_FOR_EXISTING_IMPORT_HANDOFF":raise RuntimeError("WP_VERIFY_STATUS_WRONG")
-        if pos.get("after_draft")!=pos.get("before_draft")+1:raise RuntimeError("WP_NOT_EXACT_ONE_DRAFT")
-        if pos.get("after_publish")!=pos.get("before_publish"):raise RuntimeError("WP_PUBLISH_CHANGED")
-        if pos.get("pipeline_status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
-            raise RuntimeError("WP_PIPELINE_NOT_FULL_PASS:"+str(pos.get("pipeline_status")))
+            proof=h7.validate_production_package(final,trusted_keys=trusted)
+            if proof.get("status")!="SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID":
+                raise RuntimeError("H7_PACKAGE_NOT_VALID:"+str(count))
 
+            positive=wp_full_import(final,trusted,ppm)
+            if positive.returncode!=0:
+                raise RuntimeError("WP_POSITIVE_FAILED:"+str(count)+":"+positive.stdout[-4000:])
+            pos=json.loads(positive.stdout)
+            if pos.get("verified_status")!="SIGNED_JSON_VERIFIED_FOR_EXISTING_IMPORT_HANDOFF":
+                raise RuntimeError("WP_VERIFY_STATUS_WRONG:"+str(count))
+            if pos.get("after_draft")!=pos.get("before_draft")+count:
+                raise RuntimeError("WP_DRAFT_COUNT_WRONG:"+str(count))
+            if pos.get("after_publish")!=pos.get("before_publish"):
+                raise RuntimeError("WP_PUBLISH_CHANGED:"+str(count))
+            if pos.get("pipeline_status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
+                raise RuntimeError("WP_PIPELINE_NOT_FULL_PASS:"+str(count)+":"+str(pos.get("pipeline_status")))
+            positive_results.append({
+                "article_count":count,
+                "wordpress_verify_before_write":True,
+                "draft_count_added":count,
+                "publish_count_unchanged":True,
+            })
+            packages[count]=(pkg,final,batch)
+
+        # Negatives use the one-item case only; they test the seam, not batch size.
+        pkg,final,batch=packages[1]
         negatives=[]
         def unsigned_tamper(label,mut):
             bad=copy.deepcopy(pkg);mut(bad);rehash_without_resign(dual,bad);p=root/(label+".json");dump(p,bad)
@@ -229,9 +262,10 @@ def main():
         negatives.append(expect_block(wp_verify_only(final,wrong_trusted),"wrong_public_key"))
         negatives.append(expect_block(wp_verify_only(final,trusted,used=True),"replay"))
 
-        # Signed bad inputs: even an authorized signer cannot create publish freedom
-        # or bypass the legacy M34/M35 PPM protections.
-        badslot=copy.deepcopy(pkg);badslot["production_plan"]["items"][0]["plan_slot"]=slot;resign(dual,badslot,private);p=root/"signed_foreign_plan_slot.json";dump(p,badslot)
+        # Even a valid signer cannot create workflow or publish authority.
+        badslot=copy.deepcopy(pkg)
+        badslot["production_plan"]["items"][0]["plan_slot"]=badslot["workflow_release"]["items"][0]["plan_slot"]
+        resign(dual,badslot,private);p=root/"signed_foreign_plan_slot.json";dump(p,badslot)
         negatives.append(expect_block(wp_verify_only(p,trusted),"signed_foreign_plan_slot"))
 
         badcid=copy.deepcopy(pkg);badcid["workflow_release"]["items"][0]["canonical_article_id"]="article:not-in-plan";resign(dual,badcid,private);p=root/"signed_release_plan_id_mismatch.json";dump(p,badcid)
@@ -251,14 +285,23 @@ def main():
             obj=json.loads(cp.stdout)
             if obj.get("after_publish")!=obj.get("before_publish"):
                 raise RuntimeError("SIGNED_PUBLISH_WISH_CHANGED_PUBLISH_COUNT")
-            # PASS-as-draft or BLOCK are both safe: the field has zero publish authority.
             if not (obj.get("pipeline_status")=="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH" or str(obj.get("pipeline_status") or "").startswith("BLOCKED_")):
                 raise RuntimeError("SIGNED_PUBLISH_WISH_UNEXPECTED:"+cp.stdout[-2000:])
         negatives.append("signed_publish_wish_no_publish_authority")
 
+        verifier_source=WP_CAND.read_text(encoding="utf-8")
+        fixed_count_markers=("!==7","===7","!=7","==7","<7",">7")
+        if any(marker in verifier_source.replace(" ","") for marker in fixed_count_markers):
+            raise RuntimeError("WORDPRESS_FIXED_ARTICLE_COUNT_FOUND")
+
         print(json.dumps({
-          "status":"ACM_SINGLE_SIGNED_JSON_WORDPRESS_SEAM_PASS",
+          "status":"ACM_SIGNED_JSON_WORDPRESS_SEAM_BATCH_GENERIC_PASS",
           "package_contract":"PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
+          "final_filename":"PFERDE_ATELIER_SIGNED_ARTICLE_BATCH_FINAL.json",
+          "article_count_in_filename":False,
+          "positive_counts":positive_results,
+          "wordPress_verifier_fixed_article_count":False,
+          "processing_model":"ARBITRARY_FINITE_BATCH_SIZE_SUBJECT_TO_REAL_RESOURCE_LIMITS",
           "single_json_only":True,
           "existing_wordpress_signature_entry_lock_reused":True,
           "existing_ppm_fact_pack_import_reused":True,
@@ -266,17 +309,9 @@ def main():
           "existing_textmachine_rules_changed":False,
           "new_import_logic_created":False,
           "new_package_contract_created":False,
-          "positive":{
-            "h7_signed_package_valid":True,
-            "wordpress_verify_before_write":True,
-            "exactly_one_draft":True,
-            "readback_pipeline_pass":True,
-            "publish_count_unchanged":True,
-          },
           "negative_tests":negatives,
           "negative_count":len(negatives),
           "private_key_in_wordpress":False,
-          "manual_user_review_after_draft":True,
           "auto_publish":False,
           "publish_allowed":False
         },ensure_ascii=False,indent=2))
