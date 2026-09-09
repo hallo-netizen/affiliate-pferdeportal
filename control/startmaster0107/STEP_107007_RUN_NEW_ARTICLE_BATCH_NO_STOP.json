@@ -63,6 +63,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "ecfb3152234f3bfaa91b33bbe09a7ae6b50f3c51ab3b8837911f0920154dcb1b"
+    "bundle_sha256": "dbc431384f754dda77af2df75deb2016f202b179efbc1c0da2d126b58f87db1a"
   }
 }
