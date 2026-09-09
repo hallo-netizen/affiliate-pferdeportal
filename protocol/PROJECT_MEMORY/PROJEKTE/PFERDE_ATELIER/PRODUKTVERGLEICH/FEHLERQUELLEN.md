@@ -1,16 +1,16 @@
 # PRODUKTVERGLEICH – AUTORITATIVE FEHLERQUELLE
 
 STAND: 2026-09-09
-ROLLE: einzige detaillierte Fehlerquelle für den aktuellen PRODUKTVERGLEICH-V1-Arbeitsweg.
+ROLLE: einzige detaillierte Fehlerquelle für den aktuellen PRODUKTVERGLEICH-Arbeitsweg.
 
 ## PV-ERR-001 – falsche WordPress-Kategoriehierarchie
 STATUS: CLOSED
 
 ## PV-ERR-002 – Erst-Draft sprang an Materialisierungsstufe vorbei
-STATUS: CLOSED
+STATUS: CLOSED / HISTORISCHER EIGENER DRAFTWEG NICHT MEHR ZIELARCHITEKTUR
 
 ## PV-ERR-003 – Hauptmenü-Test war falscher Positivtest
-STATUS: TECHNISCH CLOSED / LIVE-GESAMTWEG WEITER IN PRÜFUNG
+STATUS: CLOSED / ECHTER WP-LIFECYCLE ALS PFLICHTREGEL ERHALTEN
 
 ## PV-LIVE-001 – falsches PASS bei null geeigneten Vergleichen
 STATUS: CLOSED / LIVE 0.8.1 UND 0.8.2 BESTÄTIGT / REGRESSION AKTIV
@@ -21,10 +21,7 @@ Realer Befund:
 Fix:
 `NO_ELIGIBLE_COMPARISONS` statt Success.
 
-WordPress 0.8.1:
-8 Kandidaten -> 9 Provider-Aufrufe -> $0.1090 -> 0 SEO-PASS -> 8 blockiert -> 0 Dossiers -> `NO_ELIGIBLE_COMPARISONS`.
-
-WordPress 0.8.2 Wiederholung:
+WordPress 0.8.2:
 8 Kandidaten -> 0 Provider-Aufrufe -> $0.0000 -> 0 SEO-PASS -> 8 blockiert -> 0 Dossiers -> `NO_ELIGIBLE_COMPARISONS`.
 
 ## PV-ERR-004 – PASS ohne realen Dossier-Receipt
@@ -39,41 +36,60 @@ Blocks:
 - `UPC_DOSSIER_FINAL_AUDIT_RECEIPT_MISSING`
 
 ## PV-COST-082-001 – bezahlte Produkt-/Paar-Zwischenergebnisse nicht dauerhaft genug gebunden
-
 STATUS: CLOSED / LOKAL + WORDPRESS-LIVE-WIEDERHOLUNG PASS
 
-Befund gegen 0.8.1:
-Der fertige Kandidatenbefund wurde 90 Tage gespeichert. Einzelne Produkt-/Paar-Providerantworten waren jedoch nur über den nativen PSTE-Cache abgesichert. Der autoritative PSTE-0.56.25-Code hat dort standardmäßig 86400 Sekunden / 24 Stunden.
-
-KISS-Fix 0.8.2:
-- persistenter UPC-Probe-Store;
-- Produkt + Paar;
-- Teilstände nach jedem erfolgreichen Provider-Endpunkt;
+Fix 0.8.2:
+- persistenter Produkt-/Paar-Probe-Store;
+- PARTIAL nach jedem bezahlten Endpunkt;
 - positiv + negativ;
 - 90 Tage;
 - exakte Hash-/Kontextbindung;
-- Wiederverwendung vor PSTE-/Providerzugriff;
-- Kostenprognose berücksichtigt vorhandene persistente Evidenz.
+- Wiederverwendung vor Providerzugriff.
+
+WordPress-Live:
+erneuter identischer Workflow -> 0 Provider-Aufrufe / $0.0000.
+
+## PV-FACH-083-001 – Dossier band Fakten, aber keine allgemeine erlaubte fachliche Interpretation
+
+STATUS: CLOSED IM 0.8.3-KANDIDAT / WORDPRESS-LIVE-RETEST OFFEN
+
+Befund gegen 0.8.2:
+Das Dossier band Produktfakten, SEO und Audit. Die später schreibende SEO/TEXT-Strecke hätte für Unterschiede jedoch teilweise selbst entscheiden müssen, welche fachliche Aussage oder Bedarfszuordnung daraus zulässig ist.
+
+Das würde eine Freiheitslücke erzeugen.
+
+KISS-Fix 0.8.3:
+- vorhandenes Produktgruppenprofil erhält gebundene `decision_policy`;
+- exakt 2 Produkte für PRODUCT_COMPARISON V1;
+- jedes der 14 Regendecken-Merkmale besitzt genau eine Policy;
+- Dossier V2 exportiert strukturierte Entscheidungsklassen, erlaubte Aussagearten, Verbote und feste Need-Codes;
+- keine Prosa;
+- kein neuer Writer;
+- Policy-Hash getrennt vom bezahlten SEO-Binding.
 
 Fail-closed:
-- manipuliert -> `UPC_PSTE_PROBE_CACHE_INTEGRITY_FAILED`;
-- Speichern nach bezahlter Antwort fehlgeschlagen -> `UPC_PSTE_PROBE_PERSISTENCE_FAILED`;
-- Ablauf/Kontextdrift -> frische Recherche erforderlich.
+- fehlende/abweichende Policy -> BLOCK;
+- Policy-Drift nach Dossiererzeugung -> Export BLOCK;
+- 3 Produkte im A-vs-B-Typ -> BLOCK;
+- Quellenwarnung darf keine Präferenz/Need-Fit erzeugen.
 
-Lokaler Beleg:
-- finale Fresh-ZIP 20/20 PASS;
-- PHP-Lint 40/40 PASS;
-- gleicher kompletter Befund erneut -> 0 Provideraufrufe;
-- gleiches Produkt in neuem Paar -> Produkt nicht erneut abgefragt;
-- Abbruch nach erstem bezahlten Endpunkt -> Retry kauft nur den fehlenden Endpunkt;
-- 3 unabhängige Mutationen werden von der Regression verworfen.
+Harter Beleg:
+- finale Fresh-ZIP 25/25 PASS;
+- PHP-Lint 43/43;
+- Source↔ZIP 57/57;
+- Report-Hashes 56/56;
+- 11 echte herstellerübergreifende UPK-Regendecken-Paare;
+- 3 unabhängige 0.8.3-Mutationen korrekt ROT;
+- bestehende Regressionen weiter PASS.
 
-WordPress-Live-Beleg:
-- vor Wiederholung maximale neue Providerkosten $0.0000;
-- erneuter identischer Workflow -> 0 Provider-Aufrufe;
-- Kosten $0.0000;
-- bestehende 8 terminalen SEO-Befunde weiter vorhanden;
-- korrekt `NO_ELIGIBLE_COMPARISONS`.
+Kosten-Gegenbeleg:
+0.8.2 und 0.8.3 besitzen denselben echten Laufzeit-SEO-Binding-Hash:
+`863a724d9f349770d9f62c7c65ee7c74565d4247f9bf15504984ae4ece2c9003`
+
+Damit kauft eine reine Fachpolicy-Änderung unveränderte SEO-Evidenz nicht neu.
+
+LIVE-GRENZE:
+0.8.3 auf echter WordPress-Seite noch offen.
 
 ## Regel
 
