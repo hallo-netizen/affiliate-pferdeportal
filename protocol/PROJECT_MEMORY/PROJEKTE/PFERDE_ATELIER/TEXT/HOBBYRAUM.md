@@ -1,7 +1,7 @@
 # TEXT – HOBBYRAUM
 
 STAND: 2026-09-09
-STATUS: **AKTIV – M26 CONTEXT MARKER PRODUCT FIX TEST**
+STATUS: **AKTIV – M35 FINAL KNOWN PRODUCT FIX TEST**
 
 ## EINZIGE ARBEITSWAHRHEIT
 
@@ -9,54 +9,63 @@ Ziel:
 `107008 – FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH`
 
 Current main:
-`a63c20100759b4e42d07f2e70a11ee9875709d37`
+`d32e16cdf6b45ffa282e42fa78e07da84863e362`
 
-Aktueller Integrationsblocker:
-`M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte`
+Aktueller Integrations-/Realblocker:
+`PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
 
 Aktive Fehler-ID:
-`M26 – Bound Fachworkflow production context`
+`M35 – Fact-Pack source-hash binding parity`
 
-Bekannter realer Liveblocker danach:
-`M35 – PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`
+M17, M22 und M26:
+**integriert behoben**.
 
-## ROOT CAUSE M26
+## ROOT CAUSE M35
 
-Kein funktionaler Kontextverlust.
+Der echte PPM-6.7.9-Vertrag besitzt nach Fact-Pack-Import einen eigenen Registry-Hash.
 
-Gegenprüfung:
-- Current-Action-Selftest PASS;
-- aktueller Codex ist gebundener Fachworkflow-Worker;
-- Handoff-Request-Vertrag PASS;
-- STEP107007 enthält bereits die gleiche Semantik als `die realen Nicht-PPM-Stage-Artefakte und Proofs`;
-- Runner erwartet exakt `reale Nicht-PPM-Stage-Artefakte`.
-
-Ursache:
-reiner Wortlaut-/Markerdrift `realen` → `reale`.
+Fehler:
+- Research-/Content-Fact-Pack-Hash und PPM-Registry-Hash wurden gleichgesetzt;
+- `production_plan_item.source_hashes` trägt vor dem PPM-Import den Research-/Content-Hash;
+- der interne PPM-Plan muss nach Import den von `PPM679_Storage::fact_pack_hash(...)` gelieferten Registry-Hash verwenden.
 
 ## KISS-KANDIDAT
 
+PR:
+`#197 – M35: bind internal PPM plan to registry fact-pack hash`
+
 Branch:
-`hobbyroom/m26-context-marker-normalization-20260909`
+`hobbyroom/m35-ppm-registry-hash-binding-20260909`
 
-Head:
-`b55621e556eb25ec5bee4fd9b2f9662380575398`
+Fresh Head:
+`a611a5c150cc3d8f182ca9c1855339fb98fea0c2`
 
-Scope exakt 3 Dateien:
-- STEP107007: nur Markerwortlaut normalisiert;
-- CURRENT_STATE.json: nur daraus folgender Bundle-SHA;
-- PFERDE_ATELIER_START_HERE.json: nur daraus folgender State-SHA.
+Scope exakt:
+`control/startmaster0107/fachworkflow_proof_handoff.py`
 
-Kein Fachverhalten, kein Runner, kein Gate, kein Contract, kein Executor geändert.
+Änderung:
+- leerer Registry-Hash bleibt BLOCK;
+- `$item['source_hashes']=[$expectedSource];`;
+- erst danach PPM-Planaufbau.
+
+Nicht geändert:
+- Research-/Content-Evidence;
+- SEO 5-Felder;
+- Textmaschine;
+- Fachregeln;
+- LanguageTool;
+- PPM-/PSERC-/PSTE-Regeln;
+- Design;
+- Publish.
 
 ## BEREITS GEPRÜFT
 
-- main: M26 exakter vierter Marker FAIL;
-- Kandidat: alle vier Kontextmarker PASS;
-- Worker-Bindung unverändert PASS;
-- Handoff-Request unverändert vorhanden;
-- No-Publish unverändert vorhanden;
-- STEP107007 → CURRENT_STATE → START_HERE Hashkette nachgezogen.
+- M34 PASS;
+- M35 positiv PASS;
+- fehlende Registry-Bindung BLOCK;
+- Registry-Bindung nach Planaufbau BLOCK;
+- current main enthält den Fehler weiterhin;
+- fresh Kandidat enthält exakt den bereits bewiesenen M35-Dateistand.
 
 ## MASCHINELLER HOBBYRAUM-LOCK
 
@@ -64,17 +73,17 @@ Kein Fachverhalten, kein Runner, kein Gate, kein Contract, kein Executor geände
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
-MAIN_SHA: a63c20100759b4e42d07f2e70a11ee9875709d37
-ACTIVE_BLOCKER: M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:reale Nicht-PPM-Stage-Artefakte
+MAIN_SHA: d32e16cdf6b45ffa282e42fa78e07da84863e362
+ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH
 PLAN_PHASE: PRODUCT_FIX
 RECOVERY_BASE_SHA: de21f6cd35c60849c551fd82f78e75ce57c99fab
-ACTIVE_HISTORY_CASE: M26
-HISTORY_EXPECTED_FAIL: M35
+ACTIVE_HISTORY_CASE: M35
+HISTORY_EXPECTED_FAIL: NONE
 RECOVERY_SEQUENCE: 1_ANALYSE_FULL_BOUNDED_CORRIDOR;2_PROVE_ROOT_CAUSE;3_ONE_KISS_CANDIDATE;4_HARDLOCKS;5_REALTEST
-CANDIDATE_BRANCH: hobbyroom/m26-context-marker-normalization-20260909
-CANDIDATE_HEAD_SHA: b55621e556eb25ec5bee4fd9b2f9662380575398
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
-ALLOWED_PATH_PREFIXES: control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
+CANDIDATE_BRANCH: hobbyroom/m35-ppm-registry-hash-binding-20260909
+CANDIDATE_HEAD_SHA: a611a5c150cc3d8f182ca9c1855339fb98fea0c2
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py
+ALLOWED_PATH_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -89,31 +98,31 @@ HISTORY_PROOF_RUNNER_BLOB_SHA: f7af847ed46fcae6527037eef06487b2f6d77786
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md
-ERROR_SOURCE_BLOB_SHA: 34c7eead18daa21772edd09ea73d13df6a3be78a
+ERROR_SOURCE_BLOB_SHA: e327a9561e65c13262f992651852a029a217242e
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 2be3925b0d00971252c00be418ff626b84462b02
+CURRENT_STATE_BLOB_SHA: ee987a364f3e2a79c9e8931a30d5a3453315d6ab
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: 7d8fca295939176076b8ed0dc0e5ab652f1023f5
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: ebc17644fa0793bace4b6c93408909df515d8792
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/02_VOLLSTAENDIGES_PROTOKOLL_20260830_BIS_20260905.md
-PROTOCOL_SOURCE_BLOB_SHA: fca477853c3aca006bcda5dc6ac80b360e27b099
+PROTOCOL_SOURCE_BLOB_SHA: ec52624d8b91e707d8887f54f5d4109dc1904ece
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 ```
 
 ## AKTUELLE EINZIGE NEXT ACTION
 
-**M26-Kandidat serverseitig gegen M01–M35 prüfen.**
+**M35-Kandidat vollständig gegen M01–M35 prüfen.**
 
-1. PR gegen current main.
-2. `hardlock` + `hardlock-base`.
-3. Vorher: current main muss exakt M26 als ersten FAIL reproduzieren.
-4. Nachher: M26 muss verschwunden sein; erster späterer bekannter FAIL darf ausschließlich M35 sein.
-5. Kein weiterer M26-Fix im laufenden Test.
-6. Bei PASS regulär mergen.
-7. Danach M35 auf fresh main neu binden.
-8. Erst nach M35-Merge echter 7/7-Realtest.
+1. `hardlock` + `hardlock-base` auf Head `a611a5c150cc3d8f182ca9c1855339fb98fea0c2`.
+2. Current main muss exakt M35 als ersten FAIL reproduzieren.
+3. Kandidat muss M01–M35 vollständig `GESAMT PASS` liefern.
+4. Kein weiterer Fix im laufenden Test.
+5. Ruleset-Bypass muss vor Merge leer sein.
+6. Bei PASS PR #197 regulär mergen.
+7. Danach Dispatcher #107 auf fresh main synchronisieren.
+8. Danach echter 7/7-Realtest auf main – ohne Reparatur im Lauf.
 9. Kein Publish.
 
 ## VERBINDLICHER ARBEITSWEG
@@ -128,11 +137,11 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## NICHT ANFASSEN
 
+- parallele Alternative / PR #195;
 - SEO-Maschine / 5-Felder-Handoff;
 - Textmaschine;
 - Fachregeln;
-- Tabellen-/Linkregeln;
-- LanguageTool-Regeln;
+- Tabellen-/Link-/LanguageTool-Regeln;
 - PPM-/PSERC-/PSTE-Fachregeln;
 - Design;
 - WordPress-Publish-Grenze;
