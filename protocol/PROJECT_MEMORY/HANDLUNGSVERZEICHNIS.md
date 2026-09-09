@@ -1,6 +1,6 @@
 # HANDLUNGSVERZEICHNIS
 
-STAND: 2026-09-08
+STAND: 2026-09-09
 
 HARD RULE:
 **Bekannte Aktion niemals erraten. Existiert ein definierter Workflow, darf kein Ersatzweg erfunden werden.**
