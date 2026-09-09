@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 49,
+  "generation": 50,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -277,7 +277,16 @@
       ],
       "conclusion": "No separate Pferde/Tierbedarf/Schuhe feed is present in the supplied current Awin feed list."
     },
-    "current_protocol_ref": "protocol/AFFILIATE_RELEASE_OTTO_FEED_VALIDATION_20260909.md"
+    "current_protocol_ref": "protocol/AFFILIATE_RELEASE_OTTO_FEED_VALIDATION_20260909.md",
+    "hobbyroom_current": {
+      "status": "AKTIV",
+      "task_ref": "AFFILIATE_HOBBYRAUM/TASK.current.json",
+      "task_id": "otto-awin-feedscope-rootfix-20260909",
+      "next_action": "Bind exact Windschutz negative regression, then implement the smallest FeedScope evidence rootfix and run the full bound gate.",
+      "branch": "affiliate-release-current",
+      "return_path": "Patch/evidence back to canonical affiliate release workflow only after full gate.",
+      "no_parallel_workstream": true
+    }
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
