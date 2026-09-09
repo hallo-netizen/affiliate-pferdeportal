@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
-STAND: 2026-09-08
-STATUS: V1-PLUGINENTWICKLUNG / BIDIREKTIONALER SEO↔PRODUKTWISSEN-GESAMTWORKFLOW 0.7.0 LOKAL RELEASE-PASS / WORDPRESS-LIVEABNAHME OFFEN
+STAND: 2026-09-09
+STATUS: V1-PLUGINENTWICKLUNG / PV-LIVE-001 AKTIV / 0.7.1-KORREKTUR IM HOBBYRAUM
 
 ## AUTORITÄT DIESER DATEI
 
@@ -645,3 +645,23 @@ Nicht behauptet:
 - noch keine Writer-/Artikel-/Publish-Freigabe.
 
 Nächste aktuelle Arbeit ausschließlich aus `HOBBYRAUM.md`.
+
+
+## REALER WORDPRESS-BEFUND 2026-09-09
+
+0.7.0-prototype ist **nicht freigegeben**.
+
+Realer Lauf Regendecken:
+- 8 Kandidaten;
+- 0 SEO-PASS;
+- 8 terminal SEO-blockiert;
+- 0 Dossiers;
+- 16 Provider-Aufrufe;
+- $0.1920 reale Kosten;
+- falscher grüner Gesamtstatus PASS.
+
+Autoritative Fehlerdetails:
+`FEHLERQUELLEN.md` → `PV-LIVE-001`.
+
+Aktuelle Korrekturrichtung:
+kleiner Status-/UI-Fix ohne Architekturänderung; exakter Livefall wird ausführbarer Regressionstest. Kein neuer Plugin-Download vor Fresh-ZIP-Gesamt-PASS.
