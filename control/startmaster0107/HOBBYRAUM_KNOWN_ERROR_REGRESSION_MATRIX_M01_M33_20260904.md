@@ -138,8 +138,17 @@ M35 – PPM Fact-Pack source-hash binding parity
 - Historischer Negativbeweis für exakt denselben Hindernisstangen-Fall: PPM erwartete den gespeicherten Registry-Hash, während `source_hashes` den Forschungs-/Fact-Pack-Hash enthielt → `BLOCKED_FACT_PACK_HASH_MISMATCH`.
 - Historischer Positivbeweis: korrigiertes PPM-6.7.9-Paket mit getrenntem Forschungs- und Registry-Hash bestand den vollständigen Downstream-Preflight.
 
+M36 – Persisted H8 legacy-binding compatibility after provenance migration
+- Realer Live-Fehler nach M22/M35-Gesamt-PASS: `H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT`.
+- Aktiver Runtime-State und Batch-/Snapshot-/Manifest-Hashes sind aktuell; das persistierte Generation-1-Paket trägt jedoch noch den früheren Vertrag `PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1`.
+- Dieser historische Vertrag ist nur als **eng begrenzter Legacy-Alias** zulässig, wenn alle Provenienzfelder exakt dem aktuellen erwarteten Binding entsprechen und der alte Binding-Hash selbst gültig ist.
+- Falsche Generation, Batch-, Snapshot-, Manifest-, Origin- oder sonstige Provenienzidentität bleibt BLOCKED.
+- Unbekannte H8-Binding-Verträge bleiben BLOCKED.
+- Keine interne Signaturpflicht wird wieder eingeführt; externe Release-Signaturprüfung M23 bleibt unverändert separat.
+- Keine Mutation oder Neusignierung des persistierten Produktionspakets; nur Lesekompatibilität im bestehenden Provenance-Guard.
+
 ## Abschlussregel
 
-HOBBYRAUM PASS nur wenn M01–M35 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
+HOBBYRAUM PASS nur wenn M01–M36 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
 
 Danach erst Merge-Kandidat und danach kompletter frischer 7/7-E2E. Keine Reparatur während des Produktionslaufs.
