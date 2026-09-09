@@ -34,7 +34,7 @@ PASS-GRENZE:
 Erst lokale Positiv-/Negativ-Gesamtsuite + Fresh-ZIP-Gesamtsuite PASS. Danach genau ein neuer WordPress-Retest.
 
 
-### Fix-Kandidat 0.7.1 – Prüfbeleg 2026-09-09
+### Historischer Fix-Kandidat 0.7.1 – Prüfbeleg 2026-09-09
 
 - exakter Realfall 8 → 16 Provider-Aufrufe → $0.1920 → 8 BLOCKED → 0 Dossiers ergibt `NO_ELIGIBLE_COMPARISONS`;
 - Admin rendert diesen Zustand als Warnung, nicht Success;
@@ -47,7 +47,7 @@ Erst lokale Positiv-/Negativ-Gesamtsuite + Fresh-ZIP-Gesamtsuite PASS. Danach ge
 Release-Kandidat SHA-256:
 `5d5bcdc191d64524145486064f6830b6843032402dbae4095bb734939b8fe0fd`.
 
-Fehler bleibt bis realem WordPress-Retest **offen**.
+Historischer Zwischenstand; durch den späteren WordPress-Liveretest geschlossen.
 
 
 ## PV-LIVE-002 – BIDIREKTIONALE SEO-LOGIK UNVOLLSTÄNDIG
