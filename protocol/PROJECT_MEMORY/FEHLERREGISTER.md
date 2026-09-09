@@ -123,3 +123,12 @@ Architektur-/Fehlerhistorie:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
 
 Keine Blocker-Details hier duplizieren.
+
+
+## PRODUKTVERGLEICH-LIVE
+
+Bereich: PRODUKTVERGLEICH
+Status: AKTIV / realer WordPress-Fehler 2026-09-09
+
+Autoritative Fehlerquelle:
+`PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/FEHLERQUELLEN.md`
