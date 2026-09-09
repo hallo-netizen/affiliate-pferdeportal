@@ -1,0 +1,8 @@
+{
+  "contract": "PPM679_PINNED_DEPENDENCY_V1",
+  "source_name": "PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",
+  "size": 1614485,
+  "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+  "parts": ["ppm.00.b64","ppm.01.b64","ppm.02.b64","ppm.03.b64","ppm.04.b64","ppm.05.b64","ppm.06.b64"],
+  "publish_allowed": false
+}

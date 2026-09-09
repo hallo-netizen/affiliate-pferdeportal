@@ -68,6 +68,25 @@ then
   python3 -m pip install --disable-pip-version-check --no-input "cryptography==50.0.1"
 fi
 
+# Materialize the exact pinned PPM 6.7.9 dependency for the offline agent phase.
+PPM_PART_DIR="control/startmaster0107/codex-production-runtime/dependencies/ppm679"
+PPM_ZIP=".pferde-environment/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+python3 - "$PPM_PART_DIR" "$PPM_ZIP" <<'PY'
+import base64, hashlib, pathlib, sys
+part_dir=pathlib.Path(sys.argv[1])
+target=pathlib.Path(sys.argv[2])
+expected_size=1614485
+expected_sha="acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+raw=b"".join(base64.b64decode((part_dir/f"ppm.{i:02d}.b64").read_bytes()) for i in range(7))
+if len(raw)!=expected_size:
+    raise SystemExit("PPM679_DEPENDENCY_SIZE_MISMATCH")
+if hashlib.sha256(raw).hexdigest()!=expected_sha:
+    raise SystemExit("PPM679_DEPENDENCY_HASH_MISMATCH")
+tmp=target.with_suffix(target.suffix+".tmp")
+tmp.write_bytes(raw)
+tmp.replace(target)
+PY
+
 # Run the production preflight whenever this checkout is proven to be the
 # current GitHub main commit, regardless of Codex's synthetic local branch name.
 if [[ "$LOCAL_SHA" == "$MAIN_SHA" ]]; then
