@@ -421,6 +421,25 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Nächster Schritt:** Awin-Feed-Auswahl fachlich korrigieren UND den lokalen OTTO-Gate minimal so reparieren, dass FeedScope nur Metadatum bleibt und niemals allein die Pferde-Domain beweist. Vor Plugin-Ausgabe vollständiger Positiv-/Negativ-/Gesamtworkflow-Test. Automatik bleibt AUS.
 
+
+## AFF-ERR-025 — CURRENT-/Hobbyraum-Drift nach neuem OTTO-Livebefund
+
+**Datum / Nachholprüfung:** 09.09.2026.
+
+**Symptom:** Der aktuelle Master enthält gleichzeitig einen neuen NEXT ACTION zum falschen 298-Zeilen-Feed/FeedScope-False-Positive und weiter unten noch die alte Anweisung, 6.72.8 erst zu installieren und nur den Cleanup-Readback abzulesen. Zusätzlich nennt der Master als Live-Stand noch 6.72.7, obwohl 6.72.8 installiert und live geprüft wurde. `AFFILIATE_HOBBYRAUM/TASK.current.json` ist ebenfalls noch auf den bereits abgeschlossenen Cleanup-Provenienz-Test gebunden. Der ältere DS24-Scope-Lock bezeichnet sich weiterhin als aktuelle Nutzerautorität, obwohl die spätere ausdrückliche OTTO-Priorisierung vom 07.09.2026 den aktiven Scope geändert hat.
+
+**Root Cause:** Nach Live-/Fachstandsänderungen wurden Governance und oberer Masterteil aktualisiert, aber nicht alle CURRENT-/Task-/Scope-Wahrheiten atomar nachgezogen.
+
+**Nicht wiederholen:** Nach jeder Änderung des belastbaren Live-Standes oder NEXT ACTION müssen Master, Governance, Hobbyraum-Task und aktive Scope-Kennzeichnung in demselben Abschlussblock gegengeprüft werden. Historische Scope-Dateien dürfen nicht weiter als aktuell markiert bleiben. Keine konkurrierende zweite NEXT ACTION.
+
+**POSITIV:** Master, Governance und TASK nennen denselben aktuellen OTTO-Schritt; Live-Stand ist 6.72.8; alter Cleanup-Installationsschritt ist nicht mehr aktuell; DS24-Scope-Datei ist sichtbar superseded.
+
+**NEGATIV:** Suche nach aktiven Aussagen `live installierter Stand: 6.72.7`, `Installieren: Affiliate-Zentrale_6.72.8_TEST.zip` oder Cleanup-Provenienz als aktuelle TASK darf keine zweite aktuelle Wahrheit mehr ergeben.
+
+**Tests / Postcheck:** strukturelle Gegenprüfung der vier autoritativen CURRENT-/Scope-/Task-Quellen plus Branch-Head; keine Source-/Pluginänderung, daher keine PHP-/Runtime-Regression durch diesen Nachholfix erforderlich.
+
+**Status:** OPEN — zuerst dokumentiert; Konsistenzfix folgt.
+
 ---
 
 # Aktueller PRECHECK
@@ -430,8 +449,9 @@ Aktueller Nutzer-Scope bleibt `AFFILIATE_ZENTRALE → OTTO/Awin 14336`.
 Bindend:
 - `AFF-ERR-019`: ungefilterter OTTO-Vollfeed HARD BLOCKED.
 - `AFF-ERR-023`: unsicherer Alt-Cleanup 0/4500 bleibt bewusst fail-closed.
-- `AFF-ERR-024`: erster gefilterter Live-Lauf SUCCESS, aber 1/298 akzeptiert und 297 blockiert; fachliche Korrektheit noch nicht belegt.
-- `AFF-ERR-006`: keine Pluginorgie; zuerst den realen 298-Zeilen-Feed direkt prüfen.
-- `AFF-ERR-001`: kein Gesamt-/Automatik-PASS ohne belegte Relevanzprüfung.
+- `AFF-ERR-024`: 298-Zeilen-Feed fachlich geprüft; 298/298 fachfremd, 1 belegtes False Positive durch `FeedScope=Pferdebedarf` + `Windschutz`.
+- `AFF-ERR-025`: CURRENT-/Hobbyraum-Drift erkannt; Master/Governance/TASK/Scope müssen auf eine Wahrheit nachgezogen werden.
+- `AFF-ERR-006`: keine Pluginorgie; Codeänderung erst als kleinster Root-Cause-Fix und nur nach vollständigem Gate.
+- `AFF-ERR-001`: kein Gesamt-/Automatik-PASS ohne belegte Relevanz- und Liveprüfung.
 
-**Nächster zulässiger Schritt:** exakt den verwendeten Awin-Create-a-Feed als CSV/Datei gegen Pferde-Relevanz prüfen. Automatische Synchronisierung bleibt bis dahin AUS. Kein neuer Lauf erforderlich.
+**Nächster zulässiger Schritt:** zuerst CURRENT-/Hobbyraum-Konsistenz nachholen. Danach Awin-Feed fachlich korrekt auswählen und den OTTO-Gate minimal so reparieren, dass deklariertes FeedScope niemals selbst Pferde-Domain-Evidence erzeugt. Automatik bleibt AUS.
