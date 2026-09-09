@@ -22,11 +22,11 @@ mehrere der zwölf Stage-Namen sind im aktuellen 107007-Handoff nicht eindeutig 
 Aktive technische Arbeitsgrenze:
 `FIX_FORBIDDEN`.
 
-Kein Produktkandidat, solange die bestehende NEW-Link-Provenienzquelle und die bestehende Bedeutung/Evidence von `design_format` nicht eindeutig gefunden und gebunden sind.
+Die gebundene Read-only-Suche nach einer bereits existierenden unveränderten Quelle für NEW-Link-Provenienz **und** `design_format` wurde am 09.09.2026 negativ abgeschlossen. In den zulässigen aktuellen Quellen außerhalb `control/startmaster0107/` wurde keine Quelle gefunden, die beide Verträge bereitstellt. Daher bleibt `FIX_FORBIDDEN`; der Produktionsweg ist jetzt dokumentiert **BLOCKED**.
 
 ### B16 – aktueller 12-Stage-Corridor / wiederkehrender LanguageTool-Livestop
 
-- **Status: AKTUELL / OFFEN.**
+- **Status: AKTUELL / BLOCKED.**
 - Realblocker: `BOUND_LANGUAGETOOL_EXECUTION_PATH_MISSING`.
 - Betroffenes erstes Item: `article:a8282e69ecd43b615de17eb1` („Das Wichtigste über Hindernisstangen für Pferde“).
 - 107007 nicht abgeschlossen; 107008 nicht erreicht; kein Publish.
@@ -35,7 +35,9 @@ Kein Produktkandidat, solange die bestehende NEW-Link-Provenienzquelle und die b
   - `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`;
   - `TECHNICAL_CORRIDOR_MATRIX_20260907.md`.
 - Kein LT-Einzelbranch integrieren; `hobbyroom/languagetool-runtime-rebind-20260907` bleibt ausschließlich historische Beweisquelle.
-- Vor jedem späteren Produktfix muss B16 zuerst als ausführbare fortlaufende History-Regression aufgenommen werden; aktuell ist wegen der offenen Corridor-Autoritätslücken noch kein Produktfix zulässig.
+- Die Read-only-Autoritätssuche ist abgeschlossen: `EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`.
+- Beide Corridor-Lücken bleiben technisch unverändert; kein neuer Fehler wird dafür angelegt.
+- Vor jedem späteren Produktfix muss B16 zuerst als ausführbare fortlaufende History-Regression aufgenommen werden; aktuell ist wegen der bestätigten fehlenden bestehenden Corridor-Autorität kein Produktfix zulässig.
 
 
 ## A. M01–M33 – bestehende historische Regressionen
