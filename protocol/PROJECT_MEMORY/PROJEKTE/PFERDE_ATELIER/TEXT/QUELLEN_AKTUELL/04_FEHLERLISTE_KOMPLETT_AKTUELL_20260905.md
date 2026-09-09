@@ -31,8 +31,8 @@ Ausführung erfolgte in einer wegwerfbaren GitHub-Testhülle; deren einziger zus
 | M13 | PPM content_hash == final article SHA | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M14 | Current Action Handoff | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M15 | 107007 Handoff instruction konsistent | **PASS 06.09. auf `3ed31aa…`** | Zusätzlich gefundener Testfehler: zwei Negativfälle hängten `\\n` als Literal statt eines echten Zeilenumbruchs an. Nur dieser Testfehler wurde KISS korrigiert; kompletter M01–M33-Lauf danach PASS. Kein eigener Live-Produktionsblocker. |
-| M16 | Signer boundary außerhalb Codex | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
-| M17 | 107008 fail-closed | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
+| M16 | Signer boundary außerhalb Codex | **Runner-Orakel stale / aktueller Vertrag lokal PASS** | Alte Marker `codex_worker_signer_access_allowed=False` sind nicht mehr Soll. Aktueller Vertrag: keine Signer-Kommandos/-Credentials im 107007-/Runtime-Pfad; Signer erst in `finalize_after_107008`. History-Kandidat `5ea8d5da…` prüft genau diese Grenze positiv/negativ. |
+| M17 | 107008 fail-closed | **AKTUELLER PRE-MERGE-REGRESSIONBLOCKER 09.09.2026: `M17_HOST_FINALIZATION_NOT_FAIL_CLOSED`** | `runtime_entry_gate.py` ruft `finalize_after_107008` auf, prüft aber aktuell weder `ok=true` noch `status=PSERC_FINAL_PACKAGE_PASS`, bevor der finale 107008-PASS zurückgegeben wird. Damit kann fehlgeschlagene Host-Finalisierung fälschlich in einen finalen PASS münden. M35 bleibt separater realer Liveblocker und ist bis M17-PASS geparkt. |
 | M18 | ENDSTEMPEL constants | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M19 | Merge trigger | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
 | M20 | Delivery 7 Artikel + Envelope + Manifest | im bestehenden Runner enthalten | historisch / nicht als eigener aktueller Live-Blocker offen |
