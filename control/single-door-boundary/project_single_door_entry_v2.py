@@ -227,7 +227,7 @@ def resolve_entry(
             raise ProjectEntryBlocked("INCOMING_PACKAGE_PROVENANCE_INVALID:" + str(exc)) from exc
         pre = _module(repo / "control/single-door-boundary/single_door_preproduction_handoff.py", "h8_pre_entry")
         req = pre.worker_request(model)
-        return {"ok": True, "contract": PROJECT_ENTRY_CONTRACT, "status": "PREPRODUCTION_SIGNED_PACKAGE_SINGLE_DOOR_REQUIRED", "room_token": pre.ROOM_TOKEN, "worker_request": req, "next_room_after_pass": pre.NEXT_ROOM_TOKEN, "bootstrap_authority_sha256": proof.get("bootstrap_authority_sha256"), "authoritative_execution_origin": "SINGLE_DOOR_EXECUTOR_ONLY", "publish_allowed": False}
+        return {"ok": True, "contract": PROJECT_ENTRY_CONTRACT, "status": "PREPRODUCTION_PROVENANCE_PACKAGE_SINGLE_DOOR_REQUIRED", "room_token": pre.ROOM_TOKEN, "worker_request": req, "next_room_after_pass": pre.NEXT_ROOM_TOKEN, "bootstrap_authority_sha256": proof.get("bootstrap_authority_sha256"), "authoritative_execution_origin": "SINGLE_DOOR_EXECUTOR_ONLY", "publish_allowed": False}
     if status == "RUNTIME_INPUTS_BOUND":
         prov = _module(repo / "control/single-door-boundary/preproduction_provenance_guard.py", "h8_prov_bound")
         provider = attached_provenance_provider or prov.validate_attached_package
