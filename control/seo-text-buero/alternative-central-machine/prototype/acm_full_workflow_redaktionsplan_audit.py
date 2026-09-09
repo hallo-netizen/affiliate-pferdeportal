@@ -172,3 +172,5 @@ def main():
 
 if __name__=="__main__":
     raise SystemExit(main())
+
+# workflow-trigger: full-redaktionsplan-audit-v1
