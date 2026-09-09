@@ -69,7 +69,8 @@ then
 fi
 
 # Restore the exact historic LanguageTool 6.8 dependency before the agent phase.
-# Environment provisioning is branch-independent; production authority remains
+# The large immutable runtime is cached outside .pferde-environment so maintenance
+# does not rebuild/re-extract 258 MB on every task. Production authority remains
 # strictly current-main-only below. No content/quality rule is implemented here.
 python3 - <<'PY'
 from pathlib import Path
@@ -81,7 +82,9 @@ import zipfile
 
 ENV = Path(".pferde-environment")
 CACHE = Path.home() / ".cache" / "pferde-atelier-languagetool"
+RUNTIME = Path(".pferde-runtime-cache") / "languagetool-runtime"
 CACHE.mkdir(parents=True, exist_ok=True)
+RUNTIME.parent.mkdir(parents=True, exist_ok=True)
 
 ASSET_URL = "https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip"
 INNER_SHA = "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d"
@@ -101,6 +104,21 @@ def sha256(path: Path) -> str:
             h.update(block)
     return h.hexdigest()
 
+def validate_runtime(root: Path) -> Path | None:
+    jar = root / "LanguageTool-6.8" / "languagetool-commandline.jar"
+    if not jar.is_file() or sha256(jar) != JAR_SHA:
+        return None
+    try:
+        with zipfile.ZipFile(jar) as zf:
+            manifest = zf.read("META-INF/MANIFEST.MF")
+    except Exception:
+        return None
+    if hashlib.sha256(manifest).hexdigest() != JAR_MANIFEST_SHA:
+        return None
+    if b"ComponentVersion: 6.8" not in manifest:
+        return None
+    return jar
+
 inner = CACHE / "LanguageTool-6.8.zip"
 if not inner.is_file() or inner.stat().st_size != INNER_SIZE or sha256(inner) != INNER_SHA:
     tmp = CACHE / "LanguageTool-6.8.zip.tmp"
@@ -114,91 +132,53 @@ if not inner.is_file() or inner.stat().st_size != INNER_SIZE or sha256(inner) !=
     h = hashlib.sha256()
     with urllib.request.urlopen(req, timeout=120) as resp, tmp.open("wb") as out:
         while True:
-            block = resp.read(1024 * 1024)
-            if not block:
+            chunk = resp.read(1024 * 1024)
+            if not chunk:
                 break
-            total += len(block)
+            total += len(chunk)
             if total > INNER_SIZE:
                 raise SystemExit("LANGUAGETOOL_DOWNLOAD_SIZE_OVERFLOW")
-            h.update(block)
-            out.write(block)
+            h.update(chunk)
+            out.write(chunk)
     if total != INNER_SIZE:
         raise SystemExit("LANGUAGETOOL_DOWNLOAD_SIZE_MISMATCH")
     if h.hexdigest() != INNER_SHA:
         raise SystemExit("LANGUAGETOOL_INNER_ZIP_HASH_MISMATCH")
     tmp.replace(inner)
 
-# Rebuild the historical Bestand-43 transport byte-for-byte from the exact
-# inner archive. Its final SHA proves the old outer provenance without storing
-# a 258 MB binary in the repository.
-outer = ENV / "ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip"
-base = "ARBEITSMASTER_0043_NEU_PRODUKTIONSMASCHINE_PFERDEPORTAL_REVISION_8_REC_03E_COMPLETE_TYPE_DIAGNOSIS_CHALLENGE_NEXT_FULL_CURRENT_STATE_2026-07-22/"
-readme = "LanguageTool 6.8 – unveränderte Offline-Abhängigkeit. Nicht als Plugin installieren.\n".encode("utf-8")
-manifest = (
-    '{\n'
-    '  "contract": "MASTER_0043_PART2_MANIFEST_V1",\n'
-    '  "language_tool_sha256": "' + INNER_SHA + '",\n'
-    '  "language_tool_size": 258510816,\n'
-    '  "status": "UNCHANGED_DEPENDENCY"\n'
-    '}\n'
-).encode("utf-8")
-entries = [
-    (base, True, None),
-    (base + "90_DEPENDENCIES/", True, None),
-    (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/", True, None),
-    (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/LanguageTool-6.8.zip", False, inner),
-    (base + "90_DEPENDENCIES/LANGUAGETOOL_6_8/README.txt", False, readme),
-    (base + "MASTER_0043_TEIL_2_MANIFEST_SHA256.json", False, manifest),
-]
-with zipfile.ZipFile(outer, "w") as zf:
-    for name, is_dir, payload in entries:
-        zi = zipfile.ZipInfo(name, (2026, 7, 22, 19, 0, 14))
-        zi.create_system = 3
-        zi.create_version = 20
-        zi.extract_version = 20
-        zi.flag_bits = 0
-        zi.internal_attr = 0
-        zi.external_attr = 1106051088 if is_dir else 2175008768
-        zi.compress_type = zipfile.ZIP_STORED if is_dir else zipfile.ZIP_DEFLATED
-        if is_dir:
-            zf.writestr(zi, b"")
-        elif isinstance(payload, bytes):
-            zf.writestr(zi, payload)
-        else:
-            with zf.open(zi, "w") as dst, Path(payload).open("rb") as src:
-                shutil.copyfileobj(src, dst, 1024 * 1024)
-if sha256(outer) != OUTER_SHA:
-    raise SystemExit("LANGUAGETOOL_OUTER_PROVENANCE_HASH_MISMATCH")
+jar = validate_runtime(RUNTIME)
+if jar is None:
+    tmp_runtime = RUNTIME.parent / "languagetool-runtime.tmp"
+    if tmp_runtime.exists():
+        shutil.rmtree(tmp_runtime)
+    tmp_runtime.mkdir(parents=True)
+    with zipfile.ZipFile(inner) as zf:
+        root = tmp_runtime.resolve()
+        for info in zf.infolist():
+            target = (tmp_runtime / info.filename).resolve()
+            if target != root and root not in target.parents:
+                raise SystemExit("LANGUAGETOOL_ZIP_PATH_ESCAPE")
+        zf.extractall(tmp_runtime)
+    tmp_jar = validate_runtime(tmp_runtime)
+    if tmp_jar is None:
+        raise SystemExit("LANGUAGETOOL_RUNTIME_CACHE_VALIDATION_FAILED")
+    if RUNTIME.exists():
+        shutil.rmtree(RUNTIME)
+    tmp_runtime.replace(RUNTIME)
+    jar = validate_runtime(RUNTIME)
 
-runtime = ENV / "languagetool-runtime"
-if runtime.exists():
-    shutil.rmtree(runtime)
-runtime.mkdir(parents=True)
-with zipfile.ZipFile(inner) as zf:
-    root = runtime.resolve()
-    for info in zf.infolist():
-        target = (runtime / info.filename).resolve()
-        if target != root and root not in target.parents:
-            raise SystemExit("LANGUAGETOOL_ZIP_PATH_ESCAPE")
-    zf.extractall(runtime)
-
-jar = runtime / "LanguageTool-6.8" / "languagetool-commandline.jar"
-if not jar.is_file() or sha256(jar) != JAR_SHA:
-    raise SystemExit("LANGUAGETOOL_COMMANDLINE_JAR_HASH_MISMATCH")
-with zipfile.ZipFile(jar) as zf:
-    jar_manifest = zf.read("META-INF/MANIFEST.MF")
-if hashlib.sha256(jar_manifest).hexdigest() != JAR_MANIFEST_SHA:
-    raise SystemExit("LANGUAGETOOL_COMMANDLINE_MANIFEST_HASH_MISMATCH")
-if b"ComponentVersion: 6.8" not in jar_manifest:
-    raise SystemExit("LANGUAGETOOL_COMPONENT_VERSION_MISMATCH")
+if jar is None:
+    raise SystemExit("LANGUAGETOOL_RUNTIME_CACHE_VALIDATION_FAILED")
 
 proof = {
     "contract": "PFERDE_ATELIER_LANGUAGETOOL_RUNTIME_BINDING_V1",
     "status": "LANGUAGETOOL_RUNTIME_READY",
     "engine": ENGINE,
     "source_url": ASSET_URL,
-    "outer_dependency_ref": str(outer),
+    "outer_dependency_ref": "HISTORICAL_PROVENANCE_ONLY:ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip",
     "outer_dependency_sha256": OUTER_SHA,
+    "outer_dependency_materialized": False,
+    "outer_dependency_role": "HISTORICAL_TRANSPORT_PROVENANCE_ONLY",
     "inner_dependency_cache_ref": str(inner),
     "inner_dependency_sha256": INNER_SHA,
     "inner_dependency_size": INNER_SIZE,
@@ -206,6 +186,7 @@ proof = {
     "executed_commandline_jar_ref": str(jar),
     "executed_commandline_jar_sha256": JAR_SHA,
     "executed_commandline_jar_manifest_sha256": JAR_MANIFEST_SHA,
+    "runtime_cache_reused": True,
     "command_argv_template": [
         "java", "-Xmx1024m", "-jar", str(jar),
         "--json", "-l", "de-DE", "{checked_text_file}"
@@ -237,7 +218,7 @@ PPM = ROOT / "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE
 PSERC = ROOT / "control/startmaster0107/runtime_packages/PSERC-FIX.zip"
 PPM_SHA = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
 PSERC_SHA = "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
-LT_JAR = ENV / "languagetool-runtime/LanguageTool-6.8/languagetool-commandline.jar"
+LT_JAR = ROOT / ".pferde-runtime-cache/languagetool-runtime/LanguageTool-6.8/languagetool-commandline.jar"
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
