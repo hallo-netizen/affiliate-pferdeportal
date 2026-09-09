@@ -119,7 +119,7 @@ Fehlerquelle:
 `12f49603118c7448c436ec97e85be41bddf80d7f`
 
 Protokoll:
-`c5b0bef4424be6c572364b7e6eacfaaf1b816f79`
+`66fed328939f002d52657249741a63c8b7648a01`
 
 Änderungsregister:
 `0cf9e1eb3744add9e79f1eab5b19fc8892945b04`
