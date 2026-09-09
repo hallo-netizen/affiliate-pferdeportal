@@ -100,6 +100,10 @@ Aktive KISS-Wartung:
 - exakt 3 Dateien: bestehender Regression-Runner, bestehende Matrix, bestehendes `paul_scope_gate.py`;
 - kein neuer Runner/Gate/Contract;
 - vorhandenes Feld `HISTORY_EXPECTED_FAIL` wird bei PRODUCT_FIX als optionaler exakt gebundener nächster späterer bekannter FAIL verwendet.
+- PR #200 offen;
+- normaler `hardlock`: PASS;
+- `hardlock-base`: ausschließlich `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`, weil `control/paul-scope-gate/paul_scope_gate.py` sich selbst als immutable schützt;
+- kein weiterer technischer FAIL vor diesem Selbstschutz erreicht.
 
 Geparkter M35-Kandidat:
 - `ef2ecebeb2992013873ba72100d79ffd7c48393c`;
