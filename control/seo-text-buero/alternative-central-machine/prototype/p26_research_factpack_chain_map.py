@@ -77,10 +77,13 @@ def main():
         critical={
           "ppm_load_fact_pack":class_method(ppm,"PPM679_Storage","load_fact_pack"),
           "ppm_generate":class_method(ppm,"PPM679_Content_Generator","generate"),
+          "pserc_bridge_prepare":class_method(pserc,"PSERC_PPM_Intake_Bridge","prepare"),
           "pserc_bridge_execute":class_method(pserc,"PSERC_PPM_Intake_Bridge","execute"),
         }
         if not critical["ppm_load_fact_pack"] or not critical["ppm_generate"]:
             raise RuntimeError("PPM_FACTPACK_CRITICAL_METHOD_MISSING")
+        if not critical["pserc_bridge_prepare"]:
+            raise RuntimeError("PSERC_BRIDGE_PREPARE_MISSING")
 
         print(json.dumps({
           "status":"P26_RESEARCH_FACTPACK_CHAIN_MAP_PASS",
