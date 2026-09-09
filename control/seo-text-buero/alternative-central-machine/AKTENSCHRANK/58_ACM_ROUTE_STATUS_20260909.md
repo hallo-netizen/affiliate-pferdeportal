@@ -357,6 +357,21 @@ Keine Änderung an bestehenden Schnittpunkten.
 Der ACM-Laborkern `prepare(no write) -> externe Signatur -> Draft -> Readback` bleibt als isolierter technischer PASS bestehen.
 Nicht bewiesen ist die vollständige frische 12-Stage-Produktion ohne freie Workerentscheidung.
 
+## HARTE ZWANGSJACKE FÜR JEDE WEITERE ACM-ARBEIT
+
+Die Route darf keinen Fix-/Testkandidaten erzeugen, bevor das in `00_ROUTE_BOUNDARY.md` definierte
+`PRE-CHANGE-ZWANGSGATE – FAIL CLOSED`
+vollständig bestanden ist.
+
+Verbindliche Entscheidung:
+- `4x NEIN + SYSTEMWIRKUNG BELEGT` => genau eine kleinste Änderung darf geprüft werden.
+- jedes `JA`, `UNKLAR`, `NICHT BELEGT` => **STOP**.
+- kein Chat-/Worker-Ermessen darf diese Entscheidung überschreiben.
+- kein Einzeltest-PASS darf die verpflichtende Positiv-/Negativ-/Gesamtworkflow-/Gesamtsystemprüfung ersetzen.
+- keine Änderung darf neue Freiheitsgrade erzeugen oder das Ergebnis fachlich beeinflussen.
+
+Diese Regel gilt vor Codeänderung, Handoff-Anbindung, Testkandidat, Runtime-Bindung, WordPress-Anbindung und Produktionsadoption gleichermaßen.
+
 ## HOBBYRAUM / NEXT ACTION
 
 HOBBYRAUM_STATUS: **BLOCKED**
