@@ -69,7 +69,7 @@ Autoritative Details ausschließlich in `FEHLERQUELLEN.md`.
 ## PARALLELWEGE
 
 - Produktwissen-Draft-PR #142 bleibt offen und ungemergt; Head frisch geprüft: `49363529463509b87a8ea7deb079d7d4c1b6e006`.
-- ACM-Draft-PR #195 ist ein strikt isolierter TEXT/SEO-Parallelprototyp; aktueller Head frisch geprüft: `3cd425f0a212b8cf79eea578c687bfbab4485046`.
+- ACM-Draft-PR #195 ist ein strikt isolierter TEXT/SEO-Parallelprototyp; aktueller Head frisch geprüft: `95df66ce3c4a706fc7d8f7f61d8ce01eb44fbbc0`.
 - ACM ändert den aktuellen Produktvergleichsweg nicht automatisch und wird nicht als Ersatzroute benutzt.
 
 ## NICHT FREIGEGEBEN
