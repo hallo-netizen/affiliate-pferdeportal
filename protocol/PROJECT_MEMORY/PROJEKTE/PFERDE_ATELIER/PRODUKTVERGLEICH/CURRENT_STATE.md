@@ -9,7 +9,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 
 - aktuelle Arbeit: `HOBBYRAUM.md`
 - Fehlerdetails: `FEHLERQUELLEN.md`
-- Ziel: `ZIELVERTRAG_V1.md`
+- Ziel: `ZIELVERTRAG_V2.md`
 - lokaler Prüfbeleg: `AKTENSCHRANK/03_V082_HARD_LOCAL_RELEASE_RECEIPT.md`
 - Live-Beleg: `AKTENSCHRANK/04_V082_WORDPRESS_LIVE_CACHE_REUSE_RECEIPT.md`
 
