@@ -1,21 +1,18 @@
 # P42 – PLAN-SLOT -> CANONICAL BINDING
 
 Datum: 2026-09-09
-Status: TEST AKTIV
+Status: ABGESCHLOSSEN – PASS
 
-## KISS-Ziel
+## Ergebnis
 
-Keine neue Identität.
-Keine neue Binding-Schicht.
+Vorhandene Rollen bleiben getrennt:
+- extern/Handoff: `plan_slot`
+- PPM: `canonical_article_id` + `plan_item_key`
 
-Bestehende Rollen:
-- extern/Handoff: plan_slot
-- PPM: canonical_article_id + plan_item_key
-
-## Zu beweisen
-
-- plan_slot wird vor PPM eindeutig gegen genau einen Registry-Slot aufgelöst
-- canonical_article_id stammt aus genau diesem gematchten Slot
-- plan_slot wird vor production_plan_v4 entfernt
-- PPM lehnt fremdes plan_slot-Feld ab
+Bewiesen:
+- plan_slot wird vor PPM eindeutig gegen Registry-Slot aufgelöst
+- canonical_article_id stammt aus dem gematchten Slot
+- plan_slot wird nicht als fremdes PPM-Planfeld weitergereicht
 - keine zusätzliche Identitätskopie nötig
+
+Die vollständige Fail-closed-Bindung wurde in P43 abgeschlossen.
