@@ -1,0 +1,46 @@
+name: TEMP PR223 KISS Full Test V2
+on:
+  push:
+    branches:
+      - hobbyroom/107007-simple-entry-aggregate-checker-v2
+permissions:
+  contents: write
+jobs:
+  rerun:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Execute corrected existing PR223 apply block
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path('.github/workflows/pr223-kiss-finalize.yml').read_text(encoding='utf-8')
+          def get(name):
+              mark='      - name: '+name+'\n'; a=src.index(mark); r=src.index('        run: |\n',a)+len('        run: |\n'); e=src.find('\n      - name:',r); e=len(src) if e<0 else e
+              lines=src[r:e].splitlines(); return '\n'.join((x[10:] if x.startswith('          ') else x) for x in lines)+'\n'
+          apply=get('Apply simple-entry aggregate-checker KISS fix')
+          apply=apply.replace('M26_FACHWORKFLOW_HANDOFF_REQUEST_CONTRACT_MISSING','M26_HANDOFF_REQUEST_CONTRACT_MISSING')
+          Path('/tmp/apply.sh').write_text(apply,encoding='utf-8')
+          Path('/tmp/test.sh').write_text(get('Hard local positive negative and full regression'),encoding='utf-8')
+          PY
+          bash /tmp/apply.sh
+          bash /tmp/test.sh
+      - name: Final clean proof and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/pr223-kiss-finalize.yml .github/workflows/pr223-kiss-finalize-v2.yml
+          git diff --check
+          test "$(git show 2f0a3a25da77e95fb28e7da4f500aa3c50ac9910:AGENTS.md | sha256sum | cut -d' ' -f1)" = "$(sha256sum AGENTS.md | cut -d' ' -f1)"
+          test -z "$(git diff --name-only 2f0a3a25da77e95fb28e7da4f500aa3c50ac9910 -- control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt control/startmaster0107/runtime_packages control/output-quarantine .github/workflows/pferde-atelier-endstempel.yml AGENTS.md)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Restore simple article entry and keep aggregate checker"
+          git push origin HEAD:hobbyroom/107007-simple-entry-aggregate-checker-v2
