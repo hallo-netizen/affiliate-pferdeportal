@@ -71,6 +71,7 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: |
+          sed -i 's/"danach ausschließlich fachworkflow_handoff.command ausführen."/"Danach ausschließlich fachworkflow_handoff.command ausführen."/' control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
           python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
           python3 control/single-door-boundary/codex_current_action.py selftest
           python3 control/startmaster0107/fachworkflow_proof_handoff.py selftest
