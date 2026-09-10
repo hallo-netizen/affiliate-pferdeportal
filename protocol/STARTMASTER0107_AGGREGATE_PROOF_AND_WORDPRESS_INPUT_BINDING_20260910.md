@@ -35,6 +35,10 @@ KISS-Ursachenfix im bestehenden Intake/R_001-Weg:
 6. Danach genau ein realer positiver Gesamtpfad `frische WordPress-Datei -> gebundener Intake/R_001 -> Handoff -> Aggregate-PASS -> Consumer` und die nötigen negativen Source-/Hash-/Identity-Manipulationen.
 7. Erst danach frischer echter 7/7-Lauf bis 107008; dort vor Publish stoppen.
 
+## Parallelweg / Dispatcher – Abschlussprüfung
+
+Der permanente Dispatcher PR107 / Branch `codex-chat-launcher` wurde nach dem Abschluss-Merge wieder exakt auf den aktuellen `main`-Head gesetzt. Sein eigener `hardlock-base`-PR-Check bleibt rot, weil PR107 dauerhaft gegen den historischen Dispatcher-Base-Commit `e3ad9d23ca0c6a0bf2158b71b1dfa45e28c93fc0` diffed und dadurch seitdem regulär hinzugekommene geschützte Dateien als `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED` sieht. Das ist **nicht** der aktuelle Produktionsblocker und darf nicht als zweite Fach-/CURRENT-Wahrheit verwendet werden. Maßgeblich bleibt `CURRENT_STATE.json`.
+
 ## Sicherheits-/Architekturfolge
 
 Allgemeingültiges Prinzip für zukünftige Büros/Projekte: **Quelleigentümer-Daten werden pro Lauf als unveränderliche, hash-gebundene Eingabe übernommen; ein Worker darf sie nicht als Ersatzquelle rekonstruieren.** Diese Regel darf erst in einen Campus-/Neubaustandard übernommen werden, wenn dessen autoritative Standardquelle eindeutig bestimmt ist. Diese Protokolldatei ist kein Ersatz für einen Campus-Standard.
