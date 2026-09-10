@@ -106,7 +106,7 @@ def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
     bad_order=text.replace(
-        "danach ausschließlich fachworkflow_handoff.command ausführen.",
+        "Danach ausschließlich fachworkflow_handoff.command ausführen.",
         "submission_command ausführen; danach ausschließlich fachworkflow_handoff.command ausführen.",
         1,
     )
@@ -233,6 +233,13 @@ def m26():
     hb=action.get("fachworkflow_handoff")
     must(isinstance(hb,dict),"M26_FACHWORKFLOW_HANDOFF_MISSING")
     must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M26_HANDOFF_REQUEST_CONTRACT_MISSING")
+    raw=hb.get("raw_context_binding")
+    must(isinstance(raw,dict),"M26_RAW_CONTEXT_BINDING_MISSING")
+    must(re.fullmatch(r"[0-9a-f]{64}",str(raw.get("source_snapshot_id") or "")) is not None,"M26_SOURCE_ID_BINDING_MISSING")
+    must(isinstance(raw.get("production_plan_header"),dict),"M26_PLAN_HEADER_BINDING_MISSING")
+    must(isinstance(raw.get("workflow_release_item"),dict),"M26_RELEASE_ITEM_BINDING_MISSING")
+    must(isinstance(raw.get("workflow_release_metadata"),dict),"M26_RELEASE_METADATA_BINDING_MISSING")
+    must(hb.get("worker_generated_raw_fields")==["fact_pack","production_plan_item"],"M26_WORKER_RAW_FIELDS_INVALID")
     step=load(STEP7).get("instruction","")
     for token in ("Recherche/fact_pack","production_plan-Kontext","workflow_release-Kontext","stage_proofs MUSS exakt [] sein"):
         must(token in step,"M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:"+token)

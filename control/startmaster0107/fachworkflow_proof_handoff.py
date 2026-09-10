@@ -77,27 +77,33 @@ def _runtime_context(repo: Path, batch: str) -> dict:
     state = _load(repo / RUNTIME_STATE_REL)
     if state.get("status") != "EXECUTION_READY" or state.get("publish_allowed") is not False: raise Blocked("RUNTIME_NOT_EXECUTION_READY")
     if state.get("batch_sha256") != batch: raise Blocked("RUNTIME_BATCH_MISMATCH")
-    source_ref = str(state.get("source_snapshot_ref") or ""); source_path = _safe_repo(repo, source_ref)
-    source_sha = str(state.get("source_snapshot_sha256") or "")
-    if not source_path.is_file() or _sha(source_path) != source_sha: raise Blocked("RUNTIME_SOURCE_SNAPSHOT_HASH_MISMATCH")
+    generation=state.get('generation')
+    if not isinstance(generation,int) or generation<1: raise Blocked('RUNTIME_GENERATION_INVALID')
+    gbase=f'control/startmaster0107/runtime_inbox/generations/{generation:06d}'
+    source_ref = str(state.get("source_snapshot_ref") or "")
+    if source_ref!=gbase+'/SOURCE_SNAPSHOT.json': raise Blocked('RUNTIME_GENERATION_SOURCE_REF_MISMATCH')
+    source_path = _safe_repo(repo, source_ref); source_sha = str(state.get("source_snapshot_sha256") or "")
+    if not source_path.is_file() or not re.fullmatch(r'[0-9a-f]{64}',source_sha) or _sha(source_path) != source_sha: raise Blocked("RUNTIME_SOURCE_SNAPSHOT_HASH_MISMATCH")
     source = _load(source_path)
-    package_ref = str(state.get("production_package_ref") or ""); package_path = _safe_repo(repo, package_ref)
-    package_sha = str(state.get("production_package_sha256") or "")
-    if not package_path.is_file() or _sha(package_path) != package_sha: raise Blocked("RUNTIME_PRODUCTION_PACKAGE_HASH_MISMATCH")
-    package = _load(package_path); release = package.get("workflow_release")
-    release_items = release.get("items") if isinstance(release, dict) else None
-    if not isinstance(release, dict) or not isinstance(release_items, list) or not release_items: raise Blocked("RUNTIME_WORKFLOW_RELEASE_INVALID")
-    if release.get("exact_five_batch_sha256") != batch: raise Blocked("RUNTIME_RELEASE_BATCH_MISMATCH")
-    if int(release.get("exact_five_item_count") or -1) != len(release_items): raise Blocked("RUNTIME_RELEASE_COUNT_MISMATCH")
+    package_ref = str(state.get("production_package_ref") or "")
+    if package_ref!=gbase+'/PRODUCTION_PACKAGE.json': raise Blocked('RUNTIME_GENERATION_PACKAGE_REF_MISMATCH')
+    package_path = _safe_repo(repo, package_ref); package_sha = str(state.get("production_package_sha256") or "")
+    if not package_path.is_file() or not re.fullmatch(r'[0-9a-f]{64}',package_sha) or _sha(package_path) != package_sha: raise Blocked("RUNTIME_PRODUCTION_PACKAGE_HASH_MISMATCH")
+    package = _load(package_path)
+    if package.get('contract')!='PSERC_APPROVED_PRODUCTION_PACKAGE_V1': raise Blocked('RUNTIME_PRODUCTION_PACKAGE_CONTRACT_INVALID')
+    release = package.get("workflow_release"); release_items = release.get("items") if isinstance(release, dict) else None
+    if not isinstance(release, dict) or release.get('contract')!='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED' or release.get('status')!='PASS' or not isinstance(release_items, list) or not release_items: raise Blocked("RUNTIME_WORKFLOW_RELEASE_INVALID")
+    if release.get("exact_five_batch_sha256") != batch or int(release.get("exact_five_item_count") or -1) != len(release_items): raise Blocked("RUNTIME_RELEASE_IDENTITY_MISMATCH")
     if release.get("wordpress_write_performed") is not False: raise Blocked("RUNTIME_RELEASE_WORDPRESS_WRITE_FORBIDDEN")
     meta_batch = source.get("next_textmachine_metadata_batch"); meta_items = meta_batch.get("items") if isinstance(meta_batch, dict) else None
-    if not isinstance(meta_batch, dict) or meta_batch.get("batch_sha256") != batch or not isinstance(meta_items, list): raise Blocked("RUNTIME_METADATA_BATCH_INVALID")
-    if len(meta_items) != len(release_items): raise Blocked("RUNTIME_METADATA_COUNT_MISMATCH")
-    plan = package.get("production_plan")
-    if not isinstance(plan, dict) or plan.get("contract") != "production_plan_v4": raise Blocked("RUNTIME_PRODUCTION_PLAN_HEADER_INVALID")
+    if not isinstance(meta_batch, dict) or meta_batch.get("batch_sha256") != batch or not isinstance(meta_items, list) or len(meta_items)!=len(release_items): raise Blocked("RUNTIME_METADATA_BATCH_INVALID")
+    plan = package.get("production_plan"); plan_items=plan.get('items') if isinstance(plan,dict) else None
+    if not isinstance(plan, dict) or plan.get("contract") not in {'production_plan_v4','production_plan_v5'} or not isinstance(plan_items,list): raise Blocked("RUNTIME_PRODUCTION_PLAN_HEADER_INVALID")
+    bundle=package.get('fact_pack_bundle'); fact_packs=bundle.get('fact_packs') if isinstance(bundle,dict) else None
+    if not isinstance(bundle,dict) or bundle.get('contract')!='canonical_fact_pack_import_v1' or not isinstance(fact_packs,list): raise Blocked('RUNTIME_FACT_PACK_BUNDLE_INVALID')
     plan_header = dict(plan); plan_header.pop("items", None)
     release_metadata = dict(release); release_metadata.pop("items", None)
-    return {"state":state,"release_items":release_items,"meta_items":meta_items,"plan_header":plan_header,"release_metadata":release_metadata,"source_sha256":source_sha,"package_sha256":package_sha}
+    return {"state":state,"release_items":release_items,"meta_items":meta_items,"plan_items":plan_items,"fact_packs":fact_packs,"plan_header":plan_header,"release_metadata":release_metadata,"source_sha256":source_sha,"package_sha256":package_sha}
 
 def _bound_item(ctx: Mapping[str, Any], canonical_id: str, slot: str) -> tuple[dict, dict]:
     metas=[x for x in ctx["meta_items"] if isinstance(x,dict) and str(x.get("plan_slot") or "")==slot]
@@ -114,11 +120,13 @@ def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], me
     if request.get("production_plan_header")!=ctx["plan_header"]: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
     if request.get("workflow_release_item")!=release_item: raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_MISMATCH")
     if request.get("workflow_release_metadata")!=ctx["release_metadata"]: raise Blocked("BOUND_WORKFLOW_RELEASE_METADATA_MISMATCH")
-    expected={"canonical_article_id":request["canonical_article_id"],"plan_slot":request["plan_slot"],"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
+    source_id=ctx['source_sha256']
+    if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')
+    expected={"canonical_article_id":request["canonical_article_id"],"plan_slot":request["plan_slot"],"source_snapshot_id":source_id,"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
     for k,v in expected.items():
         if item.get(k)!=v: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISMATCH:"+k)
     quality=item.get("quality_binding"); category=quality.get("wordpress_category") if isinstance(quality,dict) else None
-    if not isinstance(category,dict) or category.get("slug")!=meta.get("category") or category.get("taxonomy")!="category": raise Blocked("BOUND_WORDPRESS_CATEGORY_MISMATCH")
+    if not isinstance(category,dict) or not category.get('name') or category.get("slug")!=meta.get("category") or category.get("taxonomy")!="category": raise Blocked("BOUND_WORDPRESS_CATEGORY_MISMATCH")
     return dict(item)
 
 def _validate_worker_stage_proofs(value: Any) -> None:
