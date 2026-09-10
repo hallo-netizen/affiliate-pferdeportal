@@ -130,5 +130,50 @@
     "domain_logic_authority": "NONE",
     "quality_authority": "NONE",
     "publish_allowed": false
+  },
+  "current_work_status": "BLOCKED",
+  "current_execution_blocker": {
+    "code": "BOUND_RAW_FACHWORKFLOW_OUTPUT_CONTRACTS_MISSING",
+    "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+    "sequence": 107007,
+    "evidence": "PR107 issuecomment-5623141641",
+    "root_cause": "R_001/current action requires five raw Fachworkflow context values, but the current bound input path does not supply them to the handoff request.",
+    "authoritative_raw_source": "FRESH_USER_PROVIDED_WORDPRESS_FILE_PER_RUN",
+    "required_raw_values": [
+      "fact_pack",
+      "production_plan_item",
+      "production_plan_header",
+      "workflow_release_item",
+      "workflow_release_metadata"
+    ],
+    "internal_generator_required": false,
+    "resolved": false,
+    "publish_allowed": false
+  },
+  "last_safe_main_sha": "7fcae6ad09e002903d44ff3800e6f22d9679d92e",
+  "last_safe_change": "PR217 aggregate proof rootfix merged; M01-M36 plus aggregate/action selftests passed; post-merge real 7/7 stopped at current raw-input binding blocker.",
+  "hobbyroom_status": "FREI",
+  "next_action": {
+    "goal": "Bind the fresh user-provided WordPress source file as the immutable per-run source for R_001 and derive the five required raw values from that bound source through the existing intake/lifecycle path.",
+    "must_fail_closed_on": [
+      "missing source file",
+      "wrong source hash",
+      "stale source generation",
+      "batch mismatch",
+      "plan_slot mismatch",
+      "canonical_article_id mismatch",
+      "tampered source or derived context"
+    ],
+    "forbidden": [
+      "new internal raw-data generator",
+      "new runner",
+      "new gate",
+      "new controller",
+      "new sidecar truth",
+      "worker-authored PASS",
+      "content or quality rule change",
+      "auto-publish"
+    ],
+    "proof_after_fix": "One real positive source->R_001->handoff->aggregate-consumer chain plus negative source/hash/identity tamper checks; then fresh real 7/7 to 107008 and stop before publish."
   }
 }
