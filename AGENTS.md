@@ -1,3 +1,7 @@
+# TEMPORÄRE PR223-HOBBYRAUM-AUSNAHME
+
+Nur auf dem PR223-Checkout/Head für die ausdrücklich beauftragte isolierte Reparatur- und Testarbeit gilt: NICHT `python3 control/cloud-entry-gate/cloud_entry.py start` als Arbeitsvoraussetzung ausführen und KEINEN Produktionslauf starten. Direkt am Kandidaten arbeiten und nur lokale bestehende Tests ausführen. Diese Ausnahme gibt keinerlei Workflow-, Fach-, PASS- oder Publish-Autorität und muss vor finaler Kandidatenabnahme vollständig entfernt werden. Auf `main` und jedem anderen Branch gilt sie nicht.
+
 # Pferde Atelier – verbindliche Codex-Cloud-Eingangstür
 
 Diese Datei gilt repositoryweit für Codex Cloud.
