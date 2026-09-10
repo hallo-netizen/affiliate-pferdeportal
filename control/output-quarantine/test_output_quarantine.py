@@ -83,6 +83,114 @@ def main() -> int:
         for token in forbidden_content_mutation_tokens:
             check(token not in source, "CONTENT_OR_QUALITY_MUTATION_TOKEN:" + name + ":" + token)
 
+    worker_path = HERE / "worker_freshness_guard.py"
+    worker_source = worker_path.read_text(encoding="utf-8")
+    check(
+        "PFERDE_ATELIER_CODEX_PRODUCTION_ENVIRONMENT_PREFLIGHT_V" not in worker_source,
+        "SECOND_PREFLIGHT_CONTRACT_TRUTH_IN_CONSUMER",
+    )
+    worker = load_module(worker_path, "worker_freshness_contract_test")
+    producer = load_module(worker.PREFLIGHT_PRODUCER, "preflight_contract_producer_test")
+    expected_contract = worker.expected_preflight_contract()
+    check(expected_contract == producer.CONTRACT, "PRODUCER_CONSUMER_CONTRACT_NOT_SINGLE_TRUTH")
+
+    with tempfile.TemporaryDirectory() as td:
+        base = Path(td)
+        statep = base / "state.json"
+        bundlep = base / "bundle.json"
+        statep.write_text("{}\n", encoding="utf-8")
+        bundlep.write_text("{}\n", encoding="utf-8")
+        head = "1" * 40
+        runtime = {
+            "status": "EXECUTION_READY",
+            "generation": 1,
+            "batch_sha256": "2" * 64,
+            "production_package_ref": "x",
+            "production_package_sha256": "3" * 64,
+        }
+        state = {
+            "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+            "execution_gate": {"sequence": 107007},
+        }
+        proof = {
+            "contract": expected_contract,
+            "status": "CODEX_PRODUCTION_PREFLIGHT_PASS",
+            "repository": worker.EXPECTED_REPOSITORY,
+            "main_authority_source": "CODEX_CHECKOUT_REMOTE_TRACKING_MAIN",
+            "expected_main_sha": head,
+            "local_head_sha": head,
+            "ed25519_runtime": True,
+            "chat_execution_authority": "NONE",
+            "chat_output_authority": "NONE",
+            "domain_logic_authority": "NONE",
+            "quality_authority": "NONE",
+            "content_semantics_inspected": False,
+            "workflow_navigation_decision": False,
+            "publish_allowed": False,
+            "runtime_status": "EXECUTION_READY",
+            "generation": 1,
+            "batch_sha256": "2" * 64,
+            "production_package_ref": "x",
+            "production_package_sha256": "3" * 64,
+            "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+            "sequence": 107007,
+            "state_sha256": worker.sha256(statep),
+            "bundle_sha256": worker.sha256(bundlep),
+        }
+        worker.validate_environment_proof(
+            proof,
+            expected_contract=expected_contract,
+            head=head,
+            state=state,
+            statep=statep,
+            bundlep=bundlep,
+            runtime=runtime,
+        )
+        tampered = dict(proof)
+        tampered["contract"] = expected_contract + "_TAMPERED"
+        try:
+            worker.validate_environment_proof(
+                tampered,
+                expected_contract=expected_contract,
+                head=head,
+                state=state,
+                statep=statep,
+                bundlep=bundlep,
+                runtime=runtime,
+            )
+            raise AssertionError("TAMPERED_PREFLIGHT_CONTRACT_NOT_BLOCKED")
+        except worker.Blocked as exc:
+            check(str(exc) == "CODEX_ENVIRONMENT_PROOF_CONTRACT_INVALID", "TAMPERED_CONTRACT_REASON")
+
+        original_producer = worker.PREFLIGHT_PRODUCER
+        try:
+            worker.PREFLIGHT_PRODUCER = base / "missing.py"
+            try:
+                worker.expected_preflight_contract()
+                raise AssertionError("MISSING_PREFLIGHT_CONTRACT_SOURCE_NOT_BLOCKED")
+            except worker.Blocked as exc:
+                check(
+                    str(exc) == "CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_MISSING",
+                    "MISSING_CONTRACT_SOURCE_REASON",
+                )
+            invalid = base / "invalid.py"
+            invalid.write_text("CONTRACT = None\n", encoding="utf-8")
+            worker.PREFLIGHT_PRODUCER = invalid
+            try:
+                worker.expected_preflight_contract()
+                raise AssertionError("INVALID_PREFLIGHT_CONTRACT_SOURCE_NOT_BLOCKED")
+            except worker.Blocked as exc:
+                check(
+                    str(exc) == "CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID",
+                    "INVALID_CONTRACT_SOURCE_REASON",
+                )
+        finally:
+            worker.PREFLIGHT_PRODUCER = original_producer
+
+    bind_check = worker_source.index("for ref, digest in required.items():")
+    contract_read = worker_source.index("expected_contract = expected_preflight_contract()")
+    check(bind_check < contract_read, "PREFLIGHT_CONTRACT_SOURCE_MUST_BE_HASH_BOUND_BEFORE_READ")
+
     runtime_source = (HERE / "runtime_entry_gate.py").read_text(encoding="utf-8")
     check("prepare_107007" in runtime_source, "PREPARE_107007_MISSING")
     check("authorize_final_107008" in runtime_source, "FINAL_AUTH_MISSING")
