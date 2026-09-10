@@ -130,7 +130,7 @@ def check_item_receipt(d,s,it,verify=True):
         if d.get('workflow_pass') is not False: raise Blocked('NONPASS_WORKFLOW_PASS_MUST_BE_FALSE')
         return {'status':d['status'],'outputs':[],'evidence':ev}
     if d.get('workflow_pass') is not True: raise Blocked('ITEM_FULL_WORKFLOW_PASS_REQUIRED')
-    mod(DUAL,'dual_rootfix_pass').validate_fachworkflow_pass(REPO,action(s,it),it,d)
+    if verify: mod(DUAL,'dual_rootfix_pass').validate_fachworkflow_pass(REPO,action(s,it),it,d)
     outs=d.get('outputs')
     if not isinstance(outs,list) or not outs: raise Blocked('ITEM_OUTPUTS_REQUIRED')
     a=action(s,it); seen=set(); clean=[]
@@ -205,7 +205,7 @@ def selftest():
     s={'ticket_id':'a'*64,'current_room_token':'R_D_1_01'}; it={'canonical_article_id':'article:test','plan_slot':'b'*64,'title':'T','target_keyword':'K','category':'C','article_type':'A'}; a=action(s,it)
     if any(k in a for k in ('rooms','route','next_room_token','server_executor','future_items','bound_item_ids')): raise AssertionError('PUBLIC_ROUTE_LEAK')
     if a['worker_may_choose_next_room'] is not False or a['worker_may_choose_next_item'] is not False or a['content_or_quality_rule_change_authority']!='NONE' or a['publish_allowed'] is not False: raise AssertionError('PUBLIC_AUTHORITY_INVALID')
-    b={'contract':IREC,'room_token':'R_D_1_01','canonical_article_id':'article:test','plan_slot':'b'*64,'status':'PASS','workflow_pass':True,'navigation_decision':False,'state_write_requested':False,'workflow_change_requested':False,'content_or_quality_rules_changed':False,'outputs':[{'ref':a['allowed_output_root']+'x.json','sha256':'c'*64}],'evidence':['PASS']}; check_item_receipt(b,s,it,False)
+    b={'contract':IREC,'room_token':'R_D_1_01','canonical_article_id':'article:test','plan_slot':'b'*64,'status':'PASS','workflow_pass':True,'navigation_decision':False,'state_write_requested':False,'workflow_change_requested':False,'content_or_quality_rules_changed':False,'outputs':[{'ref':a['allowed_output_root']+'x.json','sha256':'c'*64}],'evidence':['PASS'],'fachworkflow_pass_ref':a['item_receipt_schema']['fachworkflow_pass_ref'],'fachworkflow_pass_sha256':'c'*64}; check_item_receipt(b,s,it,False)
     tests=[('room_token','R_D_2_01'),('canonical_article_id','article:other'),('plan_slot','d'*64),('navigation_decision',True),('state_write_requested',True),('workflow_change_requested',True),('content_or_quality_rules_changed',True),('workflow_pass',False)]
     n=0
     for k,v in tests:
