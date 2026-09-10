@@ -67,3 +67,10 @@ jobs:
           ! grep -E -i 'pste|pserc|ppm|languagetool|wordpress|beratung|pflege|cannibal|title_rule|keyword_rule|design_rule' \
             control/cloud-entry-gate/cloud_entry.py \
             control/production-continuity/production_continuity_guard.py
+      - name: PR217 temporary complete positive-negative regression
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+          python3 control/single-door-boundary/codex_current_action.py selftest
+          python3 control/startmaster0107/fachworkflow_proof_handoff.py selftest
