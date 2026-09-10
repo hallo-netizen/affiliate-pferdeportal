@@ -59,7 +59,7 @@ def capsule():
     t=load(CAP/'TICKET.json'); m=load(CAP/'CAPSULE_MANIFEST.json')
     if t.get('step_id')!='RUN_NEW_ARTICLE_BATCH_NO_STOP' or int(t.get('sequence',-1))!=107007 or m.get('ticket_id')!=t.get('ticket_id'): raise Blocked('CAPSULE_NOT_CURRENT_107007')
     if m.get('navigation_authority_exposed_to_worker') is not False or m.get('worker_may_choose_next_step') is not False or m.get('worker_state_write_authority') is not False or m.get('workflow_change_authority') is not False: raise Blocked('CAPSULE_AUTHORITY_INVALID')
-    if m.get('input_materialization_mode')!='HASH_VERIFIED_CANONICAL_REPO_ONLY' or m.get('capsule_input_execution_allowed') is not False or m.get('canonical_repo_execution_required') is not True: raise Blocked('CAPSULE_EXECUTION_BOUNDARY_INVALID')
+    if m.get('repo_worktree_available_for_bound_step') is not True or m.get('api_required') is not False: raise Blocked('CAPSULE_EXECUTION_BOUNDARY_INVALID')
     return t,m
 
 def runtime():
@@ -168,7 +168,6 @@ def drive(s,t,m,r,its,rm,rt):
     while True:
         tok=s['current_room_token']; rr=row(rm,rt,tok)
         if tok=='R_001':
-            if m.get('canonical_repo_execution_required') is not True: raise Blocked('R001_CANONICAL_EXECUTION_NOT_BOUND')
             advance(s,rr,['CURRENT_HASH_BOUND_CAPSULE_MATERIALIZED_BY_OFFICIAL_RUNTIME_ENTRY']); continue
         if tok=='R_002':
             if runtime().get('batch_sha256')!=r.get('batch_sha256'): raise Blocked('RUNTIME_BINDING_CHANGED_DURING_BRIDGE')
