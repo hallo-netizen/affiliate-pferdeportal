@@ -14,7 +14,15 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "f772d9672c2cdcf4bd90ac0c932ea38775d0b956b8e2abf20d7e567e9dc3b513"
+      "sha256": "d9393c50edc21dfae591012d5ea520249254c072879e0dbf26aa484031c1b9d8"
+    },
+    {
+      "ref": "control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json",
+      "sha256": "daee323ff219ba4918c40660b34ea39cb960f1664a0a0ac8d5e76c3ccc7296be"
+    },
+    {
+      "ref": "control/startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh",
+      "sha256": "c1b6d5c698a20a223656814dc5937b3a45baa96e984ba46586772c1576619db6"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
