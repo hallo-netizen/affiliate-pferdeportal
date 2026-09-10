@@ -212,13 +212,23 @@ def m25():
     must("bestehender Fachworkflow" in s and "Keine eigene" in s,"M25_FACHWORKFLOW_BOUNDARY")
 
 # Open historical regressions: hard positive + hard negative.
+def _real_bound_item(a):
+    c=a._runtime_context()
+    must(isinstance(c.get("meta_items"),list) and c["meta_items"],"REGRESSION_BOUND_META_ITEM_MISSING")
+    meta=next((dict(x) for x in c["meta_items"] if isinstance(x,dict) and x.get("plan_slot")),None)
+    must(isinstance(meta,dict),"REGRESSION_BOUND_META_ITEM_INVALID")
+    slot=str(meta["plan_slot"])
+    rel=next((dict(x) for x in c["release_items"] if isinstance(x,dict) and str(x.get("plan_slot") or "")==slot),None)
+    must(isinstance(rel,dict) and rel.get("canonical_article_id"),"REGRESSION_BOUND_RELEASE_ITEM_INVALID")
+    return {"canonical_article_id":rel["canonical_article_id"],"plan_slot":slot,"title":meta.get("title"),"target_keyword":meta.get("target_keyword"),"category":meta.get("category"),"article_type":meta.get("article_type")}
+
 def m26():
     a=mod(CURRENT_ACTION,"m26_action")
     smoke=a.selftest()
     must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
     must(smoke.get("current_codex_is_bound_fachworkflow_worker") is True,"M26_CURRENT_WORKER_NOT_BOUND")
     base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"ratgeber"}
+    item=_real_bound_item(a)
     action=a.augment_current_action(REPO,base,item)
     hb=action.get("fachworkflow_handoff")
     must(isinstance(hb,dict),"M26_FACHWORKFLOW_HANDOFF_MISSING")
@@ -256,7 +266,7 @@ def m28():
     _m28_contract_check(step,src)
     a=mod(CURRENT_ACTION,"m28_action")
     base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
+    item=_real_bound_item(a)
     out=a.augment_current_action(REPO,base,item)
     hb=out.get("fachworkflow_handoff")
     must(isinstance(hb,dict),"M28_HANDOFF_BINDING_MISSING")
@@ -322,7 +332,7 @@ def m30():
 def m31():
     a=mod(CURRENT_ACTION,"m31_action")
     base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item={"canonical_article_id":"article:test","plan_slot":"a"*64,"article_type":"beratung"}
+    item=_real_bound_item(a)
     out=a.augment_current_action(REPO,base,item)
     hb=out.get("fachworkflow_handoff")
     must(isinstance(hb,dict),"M31_BOUND_HANDOFF_MISSING")
