@@ -2,9 +2,6 @@
 
 Diese Datei gilt repositoryweit für Codex Cloud.
 
-## TEMPORÄRE PR221-HOBBYRAUM-AUSNAHME – VOR MERGE ENTFERNEN
-Nur für PR221/KISS-R_001-Reparatur: reine lokale Code-/Testarbeit darf ohne `cloud_entry.py start` erfolgen. Verboten bleiben Produktionslauf, State-Fortschreibung, WordPress-Schreiben, Publish, neue Runner/Gates/Controller/Sidecars/Contracts/Fallbacks/Parallelwege und jede Fach-/Inhalts-/SEO-/PPM-/PSERC-/PSTE-/LanguageTool-Regeländerung. Diese Ausnahme besitzt keine Produktionsautorität und muss vor Kandidatenabnahme vollständig entfernt werden.
-
 ## Zwingender Start
 Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
 
