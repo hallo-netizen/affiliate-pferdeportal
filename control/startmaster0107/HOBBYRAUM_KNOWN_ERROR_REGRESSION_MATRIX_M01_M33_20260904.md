@@ -1,6 +1,6 @@
-# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M35
+# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M36
 
-Stand: 2026-09-08
+Stand: 2026-09-10
 
 ## HARD RULE
 
@@ -35,7 +35,19 @@ M08 – PPM ZIP available: Original PPM 6.7.9 vorhanden; SHA-256 acbda93bd1c4292
 
 M09 – PSERC ZIP available: Original PSERC-FIX vorhanden; SHA-256 77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314.
 
-M10 – Preflight fail-closed: fehlende/falsche Runtime-ZIPs blockieren vor Produktion.
+M10 – Runtime toolbox / Preflight fail-closed
+- Historisch reale Fehlerklasse: `LANGUAGETOOL_6_8_BESTAND_43_EXECUTOR_OR_DEPENDENCY_NOT_AVAILABLE` sowie Codex-Host-Abbrüche durch unnötig schwere bzw. doppelte Vorstart-Arbeit.
+- Eine einzige technische Werkzeugwahrheit ist verbindlich: `control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json`.
+- Setup und bestehender Preflight müssen dieselbe Manifest-Wahrheit verwenden; keine doppelten frei driftenden Versions-/Hash-Konstanten als zweite Autorität.
+- LanguageTool 6.8: persistenter Cache, exakter ZIP-/JAR-/Manifest-Hash, exakte Version und reale Ausführung; fehlender/falscher Cache darf nur manifestgebunden repariert werden.
+- Java und PHP: exakt manifestgebundene Version/Feature-Linie und reale Ausführung; bloßes Vorhandensein reicht nicht.
+- Cryptography/Ed25519: exakt manifestgebundene Version/Symbolprüfung.
+- PPM/PSERC: repositorygebundener Pfad + exakter Hash; keine zweite Kopie als Autorität.
+- Worker/Chat dürfen weder Werkzeug, Version, Fallback, Reparatur noch nächsten Workflow-Schritt wählen.
+- Agentphase bleibt netzlos; Install/Update/Toolwahl dort verboten.
+- Positiv: vollständiger Werkzeugkasten => Preflight PASS.
+- Negativ: fehlendes/falsches LT/Java/PHP/Cryptography/PPM/PSERC oder Manifest-Drift => BLOCKED vor Produktion.
+- Keine inhaltliche, SEO-, Design-, Qualitäts- oder Publish-Autorität im technischen Werkzeugwächter.
 
 M11 – Real PPM call: PSERC_PPM_Intake_Bridge::execute -> PPM679_Normal_Draft_Pipeline::execute_plan.
 
@@ -117,7 +129,6 @@ M33 – GitHub ENDSTEMPEL must not depend on Codex git remote/auth
 - Kein Codex-Push als Voraussetzung für den finalen Produktionsendstempel.
 - Erfolg nur, wenn GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json dauerhaft entsteht; sonst BLOCKED.
 
-
 M34 – Reapplied legacy PPM handoff guards after B01
 - Historischer Live-Fehler: `PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`.
 - Der äußere STARTMASTER-Artikel behält seine gebundene Runtime-`canonical_article_id` und seinen `plan_slot`.
@@ -128,7 +139,7 @@ M34 – Reapplied legacy PPM handoff guards after B01
 - Real überwunden auf main `2325f6e18bcd8cbb491a604780ee5b65d4bbf8ea`: nachfolgender Realtest kam über Canonical/Slot hinaus und stoppte erst an M35.
 
 M35 – PPM Fact-Pack source-hash binding parity
-- Aktueller Live-Fehler: `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`.
+- Historischer Fehler: `PPM679_REAL_EXECUTION_FAILED:SOURCE_HASH_BINDING_MISMATCH`.
 - Reale PPM-6.7.9-Semantik: Forschungs-/Inhalts-Fact-Pack-Hash und PPM-Registry-Hash sind **verschiedene Hash-Namensräume**.
 - Der Forschungs-/Inhalts-Hash darf weiter in seiner bestehenden Evidenzbindung bleiben; er ist **nicht** automatisch der Wert für `production_plan_item.source_hashes`.
 - Nach erfolgreichem `canonical_fact_pack_import_v1` muss der vorhandene PPM-Registry-Hash für `source_snapshot_id` über `PPM679_Storage::fact_pack_hash(...)` ermittelt werden.
