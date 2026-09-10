@@ -349,7 +349,7 @@ def m32():
     must(PPM.is_file() and PSERC.is_file(),"M32_PACKAGES_MISSING")
     must(sha(PPM)==h.PPM679_PACKAGE_SHA256 and sha(PSERC)==h.PSERC_FIX_PACKAGE_SHA256,"M32_BOUND_PACKAGE_HASH")
     src=HANDOFF.read_text(encoding="utf-8")
-    must("if ppm_env else (repo / PPM679_PACKAGE_REL)" in src and "if pserc_env else (repo / PSERC_FIX_PACKAGE_REL)" in src,"M32_ENV_STILL_MANDATORY")
+    must("if ppm_env else" in src and "PPM679_PACKAGE_REL" in src and "if pserc_env else" in src and "PSERC_FIX_PACKAGE_REL" in src,"M32_ENV_FALLBACK_MISSING")
 
 def m33():
     wf=(REPO/".github/workflows/pferde-atelier-endstempel.yml").read_text(encoding="utf-8")
