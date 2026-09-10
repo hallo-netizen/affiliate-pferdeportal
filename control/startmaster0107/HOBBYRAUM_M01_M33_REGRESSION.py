@@ -234,7 +234,7 @@ def m26():
     must(isinstance(hb,dict),"M26_FACHWORKFLOW_HANDOFF_MISSING")
     must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M26_HANDOFF_REQUEST_CONTRACT_MISSING")
     step=load(STEP7).get("instruction","")
-    for token in ("Recherche/fact_pack","production_plan-Kontext","workflow_release-Kontext","reale Nicht-PPM-Stage-Artefakte"):
+    for token in ("Recherche/fact_pack","production_plan-Kontext","workflow_release-Kontext","stage_proofs MUSS exakt [] sein"):
         must(token in step,"M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:"+token)
     must("alte Artikel-/Recovery-Dateien sind keine Produktionsquelle" in step,"M26_OLD_CONTEXT_NOT_EXCLUDED")
 
