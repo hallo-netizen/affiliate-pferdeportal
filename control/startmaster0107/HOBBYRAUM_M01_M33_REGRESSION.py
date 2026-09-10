@@ -106,7 +106,7 @@ def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
     bad_order=text.replace(
-        "Danach ausschließlich fachworkflow_handoff.command ausführen.",
+        "danach ausschließlich fachworkflow_handoff.command ausführen.",
         "submission_command ausführen; danach ausschließlich fachworkflow_handoff.command ausführen.",
         1,
     )

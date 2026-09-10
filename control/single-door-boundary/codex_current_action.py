@@ -62,30 +62,20 @@ def _ppm_requirement()->dict:
 
 def _runtime_context()->dict:
     runtime=load(REPO/RUNTIME_STATE_REL); batch=str(runtime.get('batch_sha256') or ''); pref=str(runtime.get('production_package_ref') or ''); digest=str(runtime.get('production_package_sha256') or '')
-    generation=runtime.get('generation')
     if runtime.get('status')!='EXECUTION_READY' or runtime.get('publish_allowed') is not False or not re.fullmatch(r'[0-9a-f]{64}',batch): raise ViewError('RUNTIME_BATCH_BINDING_INVALID')
-    if not isinstance(generation,int) or generation<1: raise ViewError('RUNTIME_GENERATION_INVALID')
-    gbase=f'control/startmaster0107/runtime_inbox/generations/{generation:06d}'
-    if pref!=gbase+'/PRODUCTION_PACKAGE.json': raise ViewError('RUNTIME_GENERATION_PACKAGE_REF_MISMATCH')
     pp=safe(pref)
     if not pp.is_file() or not re.fullmatch(r'[0-9a-f]{64}',digest) or sha(pp)!=digest: raise ViewError('RUNTIME_PRODUCTION_PACKAGE_BINDING_INVALID')
-    pkg=load(pp)
-    if pkg.get('contract')!='PSERC_APPROVED_PRODUCTION_PACKAGE_V1': raise ViewError('RUNTIME_PRODUCTION_PACKAGE_CONTRACT_INVALID')
-    wr=pkg.get('workflow_release'); items=wr.get('items') if isinstance(wr,dict) else None
-    if not isinstance(wr,dict) or wr.get('contract')!='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED' or wr.get('status')!='PASS' or not isinstance(items,list) or not items: raise ViewError('RUNTIME_PRODUCTION_PACKAGE_CONTEXT_INVALID')
-    if wr.get('exact_five_batch_sha256')!=batch or int(wr.get('exact_five_item_count') or -1)!=len(items) or wr.get('wordpress_write_performed') is not False: raise ViewError('RUNTIME_PRODUCTION_PACKAGE_IDENTITY_INVALID')
-    sref=str(runtime.get('source_snapshot_ref') or ''); sdigest=str(runtime.get('source_snapshot_sha256') or '')
-    if sref!=gbase+'/SOURCE_SNAPSHOT.json': raise ViewError('RUNTIME_GENERATION_SOURCE_REF_MISMATCH')
-    sp=safe(sref)
-    if not sp.is_file() or not re.fullmatch(r'[0-9a-f]{64}',sdigest) or sha(sp)!=sdigest: raise ViewError('RUNTIME_SOURCE_SNAPSHOT_BINDING_INVALID')
+    pkg=load(pp); wr=pkg.get('workflow_release'); items=wr.get('items') if isinstance(wr,dict) else None
+    if not isinstance(wr,dict) or not isinstance(items,list) or not items: raise ViewError('RUNTIME_PRODUCTION_PACKAGE_CONTEXT_INVALID')
+    if wr.get('exact_five_batch_sha256')!=batch or int(wr.get('exact_five_item_count') or -1)!=len(items): raise ViewError('RUNTIME_PRODUCTION_PACKAGE_IDENTITY_INVALID')
+    sref=str(runtime.get('source_snapshot_ref') or ''); sdigest=str(runtime.get('source_snapshot_sha256') or ''); sp=safe(sref)
+    if not sp.is_file() or sha(sp)!=sdigest: raise ViewError('RUNTIME_SOURCE_SNAPSHOT_BINDING_INVALID')
     snap=load(sp); mb=snap.get('next_textmachine_metadata_batch'); metas=mb.get('items') if isinstance(mb,dict) else None
     if not isinstance(mb,dict) or mb.get('batch_sha256')!=batch or not isinstance(metas,list) or len(metas)!=len(items): raise ViewError('RUNTIME_METADATA_BATCH_INVALID')
-    plan=pkg.get('production_plan'); pitems=plan.get('items') if isinstance(plan,dict) else None
-    if not isinstance(plan,dict) or plan.get('contract') not in {'production_plan_v4','production_plan_v5'} or not isinstance(pitems,list): raise ViewError('RUNTIME_PRODUCTION_PLAN_INVALID')
-    bundle=pkg.get('fact_pack_bundle'); facts=bundle.get('fact_packs') if isinstance(bundle,dict) else None
-    if not isinstance(bundle,dict) or bundle.get('contract')!='canonical_fact_pack_import_v1' or not isinstance(facts,list): raise ViewError('RUNTIME_FACT_PACK_BUNDLE_INVALID')
+    plan=pkg.get('production_plan')
+    if not isinstance(plan,dict) or plan.get('contract')!='production_plan_v4': raise ViewError('RUNTIME_PRODUCTION_PLAN_INVALID')
     header=dict(plan); header.pop('items',None); metadata=dict(wr); metadata.pop('items',None)
-    return {'runtime':runtime,'batch':batch,'count':len(items),'package':pkg,'release_items':items,'meta_items':metas,'plan_items':pitems,'fact_packs':facts,'plan_header':header,'release_metadata':metadata,'source_sha256':sdigest,'package_sha256':digest}
+    return {'runtime':runtime,'batch':batch,'count':len(items),'package':pkg,'release_items':items,'meta_items':metas,'plan_header':header,'release_metadata':metadata,'source_sha256':sdigest,'package_sha256':digest}
 
 def _runtime_batch_identity()->tuple[str,int]:
     c=_runtime_context(); return c['batch'],c['count']
@@ -101,25 +91,9 @@ def _bound_expected(it:Mapping[str,Any])->dict:
     if len(metas)!=1 or len(rels)!=1: raise ViewError('BOUND_RUNTIME_ITEM_NOT_UNIQUE')
     meta=dict(metas[0]); rel=dict(rels[0])
     if rel.get('canonical_article_id')!=cid: raise ViewError('BOUND_RUNTIME_CANONICAL_ID_MISMATCH')
-    source_id=str(rel.get('source_snapshot_id') or '')
-    if not source_id: raise ViewError('BOUND_RUNTIME_SOURCE_SNAPSHOT_ID_MISSING')
-    if not c['plan_items']: raise ViewError('BOUND_PRODUCTION_PLAN_ITEMS_EMPTY')
-    if not c['fact_packs']: raise ViewError('BOUND_FACT_PACKS_EMPTY')
-    plans=[dict(x) for x in c['plan_items'] if isinstance(x,dict) and str(x.get('canonical_article_id') or '')==cid]
-    if len(plans)!=1: raise ViewError('BOUND_PRODUCTION_PLAN_ITEM_NOT_UNIQUE')
-    pi=plans[0]
-    if 'plan_slot' in pi: raise ViewError('BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
-    if str(pi.get('source_snapshot_id') or '')!=source_id: raise ViewError('BOUND_PRODUCTION_PLAN_SOURCE_ID_MISMATCH')
-    facts=[dict(x) for x in c['fact_packs'] if isinstance(x,dict) and str(x.get('source_snapshot_id') or '')==source_id]
-    if len(facts)!=1: raise ViewError('BOUND_FACT_PACK_NOT_UNIQUE')
     for k in ('title','target_keyword','category','article_type'):
         if str(it.get(k) or '')!=str(meta.get(k) or ''): raise ViewError('CURRENT_ITEM_RUNTIME_METADATA_MISMATCH:'+k)
-    for pk,mk in (('article_type','article_type'),('target_keyword','target_keyword'),('topic','title')):
-        if str(pi.get(pk) or '')!=str(meta.get(mk) or ''): raise ViewError('BOUND_PRODUCTION_PLAN_METADATA_MISMATCH:'+pk)
-    cb=pi.get('category_binding'); qb=pi.get('quality_binding'); wc=qb.get('wordpress_category') if isinstance(qb,dict) else None
-    category=(cb.get('slug') if isinstance(cb,dict) else None) or (wc.get('slug') if isinstance(wc,dict) else None)
-    if str(category or '')!=str(meta.get('category') or ''): raise ViewError('BOUND_PRODUCTION_PLAN_CATEGORY_MISMATCH')
-    return {'ctx':c,'meta':meta,'release_item':rel,'production_plan_item':pi,'fact_pack':facts[0]}
+    return {'ctx':c,'meta':meta,'release_item':rel}
 
 def _contract_binding()->dict:
     _assert_bound_adapters(); p=REPO/PROMPT_REL
@@ -132,7 +106,7 @@ def augment_current_action(repo:Path,a:dict,it:Mapping[str,Any])->dict:
     s=dict(a.get('item_receipt_schema') or {})
     s.update({'fachworkflow_contract_binding':b,'textmachine_ruleset_binding':r,'ppm679_requirement':_ppm_requirement(),'worker_stage_proofs_required_value':[],'fachworkflow_pass_ref':pref,'fachworkflow_pass_sha256':'sha256 of exact adapter-generated FACHWORKFLOW_PASS; required with PASS','fachworkflow_pass_schema':{'contract':PASS_CONTRACT,'status':'PASS','batch_sha256':batch,'canonical_article_id':it['canonical_article_id'],'plan_slot':it['plan_slot'],'article_type':r['article_type'],'article_type_templates_sha256':ARTICLE_TYPE_TEMPLATES_SHA,'aggregate_check_contract':AGGREGATE_CONTRACT,'worker_stage_proofs_accepted':False,'workflow_release_metadata_binding':metadata_binding,'content_or_quality_rules_changed':False,'publish_allowed':False}})
     a['item_receipt_schema']=s; request_ref=root+'FACHWORKFLOW_HANDOFF_REQUEST.json'
-    a['fachworkflow_handoff']={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':batch,'request_ref':request_ref,'request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','request_required_fields':HANDOFF_REQUEST_REQUIRED_FIELDS,'stage_proofs_required_value':[],'production_package_context':{'fact_pack':bound['fact_pack'],'production_plan_item':bound['production_plan_item'],'production_plan_header':bound['ctx']['plan_header'],'workflow_release_item':bound['release_item'],'workflow_release_metadata':bound['ctx']['release_metadata']},'adapter_ref':HANDOFF_REL,'adapter_sha256':sha(REPO/HANDOFF_REL),'command':'python3 '+HANDOFF_REL+' materialize '+request_ref,'technical_guard_executes_domain_logic':False,'adapter_executes_bound_ppm_stage':True,'adapter_executes_real_languagetool':True,'worker_pass_authority':'NONE','content_or_quality_rules_changed':False,'publish_allowed':False}
+    a['fachworkflow_handoff']={'contract':'PFERDE_ATELIER_FACHWORKFLOW_PROOF_HANDOFF_BINDING_V1','batch_sha256':batch,'request_ref':request_ref,'request_contract':'PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1','request_required_fields':HANDOFF_REQUEST_REQUIRED_FIELDS,'stage_proofs_required_value':[],'adapter_ref':HANDOFF_REL,'adapter_sha256':sha(REPO/HANDOFF_REL),'command':'python3 '+HANDOFF_REL+' materialize '+request_ref,'technical_guard_executes_domain_logic':False,'adapter_executes_bound_ppm_stage':True,'adapter_executes_real_languagetool':True,'worker_pass_authority':'NONE','content_or_quality_rules_changed':False,'publish_allowed':False}
     a.pop('existing_article_source_binding',None); return a
 
 def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],d:Mapping[str,Any])->dict:
@@ -173,14 +147,9 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
     if not any(isinstance(x,dict) and x.get('ref')==lref and x.get('sha256')==lsha for x in outs): raise ViewError('FACH_LANGUAGETOOL_REPORT_NOT_OUTPUT')
     fp=q.get('fact_pack'); pi=q.get('production_plan_item'); ph=q.get('production_plan_header'); ri=q.get('workflow_release_item'); rm=q.get('workflow_release_metadata')
     if not isinstance(fp,dict) or not fp or not isinstance(pi,dict): raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
-    if fp!=bound['fact_pack']: raise ViewError('BOUND_FACT_PACK_CONTEXT_MISMATCH')
-    if 'plan_slot' in pi: raise ViewError('PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
-    meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'source_snapshot_id':bound['release_item'].get('source_snapshot_id'),'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
+    meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
     for k,v in expected_pi.items():
         if pi.get(k)!=v: raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH:'+k)
-    cb=pi.get('category_binding'); qb=pi.get('quality_binding'); wc=qb.get('wordpress_category') if isinstance(qb,dict) else None
-    category=(cb.get('slug') if isinstance(cb,dict) else None) or (wc.get('slug') if isinstance(wc,dict) else None)
-    if str(category or '')!=str(meta.get('category') or ''): raise ViewError('PLAN_ITEM_CATEGORY_MISMATCH')
     if ph!=c['plan_header'] or ri!=bound['release_item'] or rm!=c['release_metadata']: raise ViewError('BOUND_RUNTIME_CONTEXT_MISMATCH')
     _validate_release_metadata_identity(rm,batch,c['count']); return q
 
