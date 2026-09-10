@@ -1,0 +1,242 @@
+name: TEMP PR223 KISS Apply Full Test Finalize
+on:
+  push:
+    branches:
+      - hobbyroom/107007-simple-entry-aggregate-checker-v2
+permissions:
+  contents: write
+jobs:
+  apply-test-finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Apply simple-entry aggregate-checker KISS fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, re
+
+          A=Path('control/single-door-boundary/codex_current_action.py')
+          H=Path('control/startmaster0107/fachworkflow_proof_handoff.py')
+          S=Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json')
+          C=Path('control/startmaster0107/CURRENT_STATE.json')
+          R=Path('control/startmaster0107/PFERDE_ATELIER_START_HERE.json')
+          T=Path('control/startmaster0107/test_fachworkflow_proof_handoff.py')
+          M=Path('control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py')
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          def dump(p,o): p.write_text(json.dumps(o,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          def block(text,start,end,new):
+              i=text.index(start); j=text.index(end,i)
+              return text[:i]+new.rstrip()+'\n\n'+text[j:]
+
+          a=A.read_text(encoding='utf-8')
+          new_runtime='''def _runtime_context()->dict:
+              runtime=load(REPO/RUNTIME_STATE_REL); batch=str(runtime.get('batch_sha256') or ''); pref=str(runtime.get('production_package_ref') or ''); digest=str(runtime.get('production_package_sha256') or '')
+              generation=runtime.get('generation')
+              if runtime.get('status')!='EXECUTION_READY' or runtime.get('publish_allowed') is not False or not re.fullmatch(r'[0-9a-f]{64}',batch): raise ViewError('RUNTIME_BATCH_BINDING_INVALID')
+              if not isinstance(generation,int) or generation<1: raise ViewError('RUNTIME_GENERATION_INVALID')
+              gbase=f'control/startmaster0107/runtime_inbox/generations/{generation:06d}'
+              if pref!=gbase+'/PRODUCTION_PACKAGE.json': raise ViewError('RUNTIME_GENERATION_PACKAGE_REF_MISMATCH')
+              pp=safe(pref)
+              if not pp.is_file() or not re.fullmatch(r'[0-9a-f]{64}',digest) or sha(pp)!=digest: raise ViewError('RUNTIME_PRODUCTION_PACKAGE_BINDING_INVALID')
+              pkg=load(pp)
+              if pkg.get('contract')!='PSERC_APPROVED_PRODUCTION_PACKAGE_V1': raise ViewError('RUNTIME_PRODUCTION_PACKAGE_CONTRACT_INVALID')
+              wr=pkg.get('workflow_release'); items=wr.get('items') if isinstance(wr,dict) else None
+              if not isinstance(wr,dict) or wr.get('contract')!='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED' or wr.get('status')!='PASS' or not isinstance(items,list) or not items: raise ViewError('RUNTIME_PRODUCTION_PACKAGE_CONTEXT_INVALID')
+              if wr.get('exact_five_batch_sha256')!=batch or int(wr.get('exact_five_item_count') or -1)!=len(items) or wr.get('wordpress_write_performed') is not False: raise ViewError('RUNTIME_PRODUCTION_PACKAGE_IDENTITY_INVALID')
+              sref=str(runtime.get('source_snapshot_ref') or ''); sdigest=str(runtime.get('source_snapshot_sha256') or '')
+              if sref!=gbase+'/SOURCE_SNAPSHOT.json': raise ViewError('RUNTIME_GENERATION_SOURCE_REF_MISMATCH')
+              sp=safe(sref)
+              if not sp.is_file() or not re.fullmatch(r'[0-9a-f]{64}',sdigest) or sha(sp)!=sdigest: raise ViewError('RUNTIME_SOURCE_SNAPSHOT_BINDING_INVALID')
+              snap=load(sp); mb=snap.get('next_textmachine_metadata_batch'); metas=mb.get('items') if isinstance(mb,dict) else None
+              if not isinstance(mb,dict) or mb.get('batch_sha256')!=batch or not isinstance(metas,list) or len(metas)!=len(items): raise ViewError('RUNTIME_METADATA_BATCH_INVALID')
+              plan=pkg.get('production_plan'); pitems=plan.get('items') if isinstance(plan,dict) else None
+              if not isinstance(plan,dict) or plan.get('contract') not in {'production_plan_v4','production_plan_v5'} or not isinstance(pitems,list): raise ViewError('RUNTIME_PRODUCTION_PLAN_INVALID')
+              bundle=pkg.get('fact_pack_bundle'); facts=bundle.get('fact_packs') if isinstance(bundle,dict) else None
+              if not isinstance(bundle,dict) or bundle.get('contract')!='canonical_fact_pack_import_v1' or not isinstance(facts,list): raise ViewError('RUNTIME_FACT_PACK_BUNDLE_INVALID')
+              header=dict(plan); header.pop('items',None); metadata=dict(wr); metadata.pop('items',None)
+              return {'runtime':runtime,'batch':batch,'count':len(items),'package':pkg,'release_items':items,'meta_items':metas,'plan_items':pitems,'fact_packs':facts,'plan_header':header,'release_metadata':metadata,'source_sha256':sdigest,'package_sha256':digest}
+          '''
+          a=block(a,'def _runtime_context()->dict:','def _runtime_batch_identity',new_runtime)
+          new_bound='''def _bound_expected(it:Mapping[str,Any])->dict:
+              c=_runtime_context(); slot=str(it.get('plan_slot') or ''); cid=str(it.get('canonical_article_id') or '')
+              metas=[x for x in c['meta_items'] if isinstance(x,dict) and str(x.get('plan_slot') or '')==slot]
+              rels=[x for x in c['release_items'] if isinstance(x,dict) and str(x.get('plan_slot') or '')==slot]
+              if len(metas)!=1 or len(rels)!=1: raise ViewError('BOUND_RUNTIME_ITEM_NOT_UNIQUE')
+              meta=dict(metas[0]); rel=dict(rels[0])
+              if rel.get('canonical_article_id')!=cid: raise ViewError('BOUND_RUNTIME_CANONICAL_ID_MISMATCH')
+              for k in ('title','target_keyword','category','article_type'):
+                  if str(it.get(k) or '')!=str(meta.get(k) or ''): raise ViewError('CURRENT_ITEM_RUNTIME_METADATA_MISMATCH:'+k)
+              return {'ctx':c,'meta':meta,'release_item':rel}
+          '''
+          a=block(a,'def _bound_expected(it:Mapping[str,Any])->dict:','def _contract_binding',new_bound)
+          old="'stage_proofs_required_value':[],'adapter_ref':HANDOFF_REL"
+          new="'stage_proofs_required_value':[],'raw_context_binding':{'source_snapshot_id':bound['ctx']['source_sha256'],'production_plan_header':bound['ctx']['plan_header'],'workflow_release_item':bound['release_item'],'workflow_release_metadata':bound['ctx']['release_metadata']},'worker_generated_raw_fields':['fact_pack','production_plan_item'],'adapter_ref':HANDOFF_REL"
+          if old not in a: raise SystemExit('ACTION_HANDOFF_INSERT_POINT_MISSING')
+          a=a.replace(old,new,1)
+          old_tail="""    fp=q.get('fact_pack'); pi=q.get('production_plan_item'); ph=q.get('production_plan_header'); ri=q.get('workflow_release_item'); rm=q.get('workflow_release_metadata')
+              if not isinstance(fp,dict) or not fp or not isinstance(pi,dict): raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
+              meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
+              for k,v in expected_pi.items():
+                  if pi.get(k)!=v: raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH:'+k)
+              if ph!=c['plan_header'] or ri!=bound['release_item'] or rm!=c['release_metadata']: raise ViewError('BOUND_RUNTIME_CONTEXT_MISMATCH')
+              _validate_release_metadata_identity(rm,batch,c['count']); return q"""
+          new_tail="""    fp=q.get('fact_pack'); pi=q.get('production_plan_item'); ph=q.get('production_plan_header'); ri=q.get('workflow_release_item'); rm=q.get('workflow_release_metadata')
+              if not isinstance(fp,dict) or not fp or not isinstance(pi,dict) or not pi: raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
+              source_id=c['source_sha256']
+              if fp.get('contract')!='canonical_fact_pack_v1' or str(fp.get('source_snapshot_id') or '')!=source_id: raise ViewError('FACT_PACK_SOURCE_ID_MISMATCH')
+              meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'source_snapshot_id':source_id,'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
+              for k,v in expected_pi.items():
+                  if pi.get(k)!=v: raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH:'+k)
+              qb=pi.get('quality_binding'); wc=qb.get('wordpress_category') if isinstance(qb,dict) else None
+              if not isinstance(wc,dict) or str(wc.get('slug') or '')!=str(meta.get('category') or '') or wc.get('taxonomy')!='category': raise ViewError('PLAN_ITEM_CATEGORY_MISMATCH')
+              if ph!=c['plan_header'] or ri!=bound['release_item'] or rm!=c['release_metadata']: raise ViewError('BOUND_RUNTIME_CONTEXT_MISMATCH')
+              _validate_release_metadata_identity(rm,batch,c['count']); return q"""
+          if old_tail not in a: raise SystemExit('ACTION_VALIDATE_TAIL_MISSING')
+          a=a.replace(old_tail,new_tail,1)
+          A.write_text(a,encoding='utf-8')
+
+          h=H.read_text(encoding='utf-8')
+          new_hruntime='''def _runtime_context(repo: Path, batch: str) -> dict:
+              state = _load(repo / RUNTIME_STATE_REL)
+              if state.get("status") != "EXECUTION_READY" or state.get("publish_allowed") is not False: raise Blocked("RUNTIME_NOT_EXECUTION_READY")
+              if state.get("batch_sha256") != batch: raise Blocked("RUNTIME_BATCH_MISMATCH")
+              generation=state.get('generation')
+              if not isinstance(generation,int) or generation<1: raise Blocked('RUNTIME_GENERATION_INVALID')
+              gbase=f'control/startmaster0107/runtime_inbox/generations/{generation:06d}'
+              source_ref = str(state.get("source_snapshot_ref") or "")
+              if source_ref!=gbase+'/SOURCE_SNAPSHOT.json': raise Blocked('RUNTIME_GENERATION_SOURCE_REF_MISMATCH')
+              source_path = _safe_repo(repo, source_ref); source_sha = str(state.get("source_snapshot_sha256") or "")
+              if not source_path.is_file() or not re.fullmatch(r'[0-9a-f]{64}',source_sha) or _sha(source_path) != source_sha: raise Blocked("RUNTIME_SOURCE_SNAPSHOT_HASH_MISMATCH")
+              source = _load(source_path)
+              package_ref = str(state.get("production_package_ref") or "")
+              if package_ref!=gbase+'/PRODUCTION_PACKAGE.json': raise Blocked('RUNTIME_GENERATION_PACKAGE_REF_MISMATCH')
+              package_path = _safe_repo(repo, package_ref); package_sha = str(state.get("production_package_sha256") or "")
+              if not package_path.is_file() or not re.fullmatch(r'[0-9a-f]{64}',package_sha) or _sha(package_path) != package_sha: raise Blocked("RUNTIME_PRODUCTION_PACKAGE_HASH_MISMATCH")
+              package = _load(package_path)
+              if package.get('contract')!='PSERC_APPROVED_PRODUCTION_PACKAGE_V1': raise Blocked('RUNTIME_PRODUCTION_PACKAGE_CONTRACT_INVALID')
+              release = package.get("workflow_release"); release_items = release.get("items") if isinstance(release, dict) else None
+              if not isinstance(release, dict) or release.get('contract')!='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED' or release.get('status')!='PASS' or not isinstance(release_items, list) or not release_items: raise Blocked("RUNTIME_WORKFLOW_RELEASE_INVALID")
+              if release.get("exact_five_batch_sha256") != batch or int(release.get("exact_five_item_count") or -1) != len(release_items): raise Blocked("RUNTIME_RELEASE_IDENTITY_MISMATCH")
+              if release.get("wordpress_write_performed") is not False: raise Blocked("RUNTIME_RELEASE_WORDPRESS_WRITE_FORBIDDEN")
+              meta_batch = source.get("next_textmachine_metadata_batch"); meta_items = meta_batch.get("items") if isinstance(meta_batch, dict) else None
+              if not isinstance(meta_batch, dict) or meta_batch.get("batch_sha256") != batch or not isinstance(meta_items, list) or len(meta_items)!=len(release_items): raise Blocked("RUNTIME_METADATA_BATCH_INVALID")
+              plan = package.get("production_plan"); plan_items=plan.get('items') if isinstance(plan,dict) else None
+              if not isinstance(plan, dict) or plan.get("contract") not in {'production_plan_v4','production_plan_v5'} or not isinstance(plan_items,list): raise Blocked("RUNTIME_PRODUCTION_PLAN_HEADER_INVALID")
+              bundle=package.get('fact_pack_bundle'); fact_packs=bundle.get('fact_packs') if isinstance(bundle,dict) else None
+              if not isinstance(bundle,dict) or bundle.get('contract')!='canonical_fact_pack_import_v1' or not isinstance(fact_packs,list): raise Blocked('RUNTIME_FACT_PACK_BUNDLE_INVALID')
+              plan_header = dict(plan); plan_header.pop("items", None)
+              release_metadata = dict(release); release_metadata.pop("items", None)
+              return {"state":state,"release_items":release_items,"meta_items":meta_items,"plan_items":plan_items,"fact_packs":fact_packs,"plan_header":plan_header,"release_metadata":release_metadata,"source_sha256":source_sha,"package_sha256":package_sha}
+          '''
+          h=block(h,'def _runtime_context(repo: Path, batch: str) -> dict:','def _bound_item',new_hruntime)
+          new_raw='''def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], meta: Mapping[str, Any], release_item: Mapping[str, Any]) -> dict:
+              fact_pack=request.get("fact_pack"); item=request.get("production_plan_item")
+              if not isinstance(fact_pack,dict) or not fact_pack: raise Blocked("BOUND_FACT_PACK_MISSING")
+              if not isinstance(item,dict) or not item: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISSING")
+              if request.get("production_plan_header")!=ctx["plan_header"]: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
+              if request.get("workflow_release_item")!=release_item: raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_MISMATCH")
+              if request.get("workflow_release_metadata")!=ctx["release_metadata"]: raise Blocked("BOUND_WORKFLOW_RELEASE_METADATA_MISMATCH")
+              source_id=ctx['source_sha256']
+              if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')
+              expected={"canonical_article_id":request["canonical_article_id"],"plan_slot":request["plan_slot"],"source_snapshot_id":source_id,"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
+              for k,v in expected.items():
+                  if item.get(k)!=v: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISMATCH:"+k)
+              quality=item.get("quality_binding"); category=quality.get("wordpress_category") if isinstance(quality,dict) else None
+              if not isinstance(category,dict) or not category.get('name') or category.get("slug")!=meta.get("category") or category.get("taxonomy")!="category": raise Blocked("BOUND_WORDPRESS_CATEGORY_MISMATCH")
+              return dict(item)
+          '''
+          h=block(h,'def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], meta: Mapping[str, Any], release_item: Mapping[str, Any]) -> dict:','def _validate_worker_stage_proofs',new_raw)
+          H.write_text(h,encoding='utf-8')
+
+          step=json.loads(S.read_text(encoding='utf-8'))
+          instruction='''107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.
+
+          GRUNDGESETZ §1: ChatGPT/Codex besitzt keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung.
+
+          GRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ändert keinerlei Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel.
+
+          Nach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ausschließlich:
+          python3 control/single-door-boundary/codex_current_action.py current
+
+          Wenn status=CURRENT_BOUND_ACTION_READY:
+          - Der aktuelle Codex-Prozess ist ausschließlich der gebundene Fachworkflow-Worker für exakt current_item.
+          - fachworkflow_prompt_ref und die gebundene Beitragsart/Textmaschinen-Regelautorität unverändert anwenden; keine freie Auswahl und keine Ersatzregeln.
+          - NEW bleibt NEW: alte Artikel-/Recovery-Dateien sind keine Produktionsquelle.
+          - Ergebnisse ausschließlich unter allowed_output_root schreiben.
+          - Worker erzeugt ausschließlich reale Roharbeitsprodukte: Recherche/fact_pack, finaler Artikel und production_plan-Kontext für current_item. Diese Rohdaten sind KEIN PASS und keine Prüfbelege.
+          - workflow_release-Kontext und production_plan-Header werden NICHT neu erzeugt; sie werden unverändert aus fachworkflow_handoff.raw_context_binding übernommen.
+          - fact_pack.source_snapshot_id und production_plan_item.source_snapshot_id müssen exakt fachworkflow_handoff.raw_context_binding.source_snapshot_id entsprechen. production_plan_item bleibt an current_item (canonical_article_id, plan_slot, article_type, target_keyword, topic, WordPress-Kategorie) gebunden.
+          - Worker/Codex besitzt keinerlei PASS- oder Prüfbeleg-Autorität. Keine eigenen Stage-PASS-Zettel erzeugen oder behaupten.
+          - stage_proofs MUSS exakt [] sein. Jeder andere Wert blockiert im hash-gebundenen Handoff.
+          - fachworkflow_handoff.request_required_fields ist die exakte vollständige Feldliste; keine zusätzlichen oder fehlenden Felder.
+          - FACHWORKFLOW_HANDOFF_REQUEST.json exakt unter fachworkflow_handoff.request_ref erzeugen. contract=fachworkflow_handoff.request_contract; room_token=room_token; batch_sha256=fachworkflow_handoff.batch_sha256; canonical_article_id=current_item.canonical_article_id; plan_slot=current_item.plan_slot; allowed_output_root=allowed_output_root; item_receipt_ref=item_receipt_ref; fachworkflow_pass_ref=item_receipt_schema.fachworkflow_pass_ref; contract_binding_ref=item_receipt_schema.fachworkflow_contract_binding.binding_ref; contract_binding_sha256=item_receipt_schema.fachworkflow_contract_binding.binding_sha256; stage_proofs=[]; fact_pack=der real erzeugte fact_pack; production_plan_item=der real erzeugte production_plan_item; production_plan_header=fachworkflow_handoff.raw_context_binding.production_plan_header; workflow_release_item=fachworkflow_handoff.raw_context_binding.workflow_release_item; workflow_release_metadata=fachworkflow_handoff.raw_context_binding.workflow_release_metadata.
+          - Danach ausschließlich fachworkflow_handoff.command ausführen. Nur der hash-gebundene bestehende Handoff führt die vorhandenen realen Prüfungen aus/prüft sie und erzeugt daraus genau einen gebundenen Gesamt-PASS.
+          - Erst nach FACHWORKFLOW_PROOF_HANDOFF_PASS ausschließlich submission_command ausführen. Kein submit-request, keine Capability-Suche, kein zweiter Executor.
+
+          Die serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam. Niemals nächsten Raum, nächstes Item oder Folgeaktion selbst ableiten.
+
+          Bei BLOCKED oder USER_ACTION_REQUIRED stehenbleiben. Beim finalen 107008-Zustand ausschließlich den gebundenen 107008-Schritt ausführen. Alle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish.'''
+          step['instruction']='\n'.join(x[10:] if x.startswith('          ') else x for x in instruction.splitlines())
+          binds={x['ref']:x for x in step['authorized_inputs']}
+          binds[str(A)]['sha256']=sha(A); binds[str(H)]['sha256']=sha(H)
+          dump(S,step)
+
+          # Add the changed behaviour to the existing full regression instead of creating a second runner.
+          m=M.read_text(encoding='utf-8')
+          needle='''    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M26_FACHWORKFLOW_HANDOFF_REQUEST_CONTRACT_MISSING")\n'''
+          insert='''    raw=hb.get("raw_context_binding")\n    must(isinstance(raw,dict),"M26_RAW_CONTEXT_BINDING_MISSING")\n    must(re.fullmatch(r"[0-9a-f]{64}",str(raw.get("source_snapshot_id") or "")) is not None,"M26_SOURCE_ID_BINDING_MISSING")\n    must(isinstance(raw.get("production_plan_header"),dict),"M26_PLAN_HEADER_BINDING_MISSING")\n    must(isinstance(raw.get("workflow_release_item"),dict),"M26_RELEASE_ITEM_BINDING_MISSING")\n    must(isinstance(raw.get("workflow_release_metadata"),dict),"M26_RELEASE_METADATA_BINDING_MISSING")\n    must(hb.get("worker_generated_raw_fields")==["fact_pack","production_plan_item"],"M26_WORKER_RAW_FIELDS_INVALID")\n'''
+          if needle not in m: raise SystemExit('M26_INSERT_POINT_MISSING')
+          m=m.replace(needle,needle+insert,1)
+          M.write_text(m,encoding='utf-8')
+
+          # Focused POS/NEG regression for the repaired seam. It deliberately uses the real persisted empty Generation-1 package.
+          T.write_text('''from __future__ import annotations\nimport copy, importlib.util, re, unittest\nfrom pathlib import Path\nHERE=Path(__file__).resolve().parent; REPO=HERE.parents[1]\ndef mod(path,name):\n    s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m\naction=mod(REPO/"control/single-door-boundary/codex_current_action.py","simple_entry_action_test")\nhandoff=mod(HERE/"fachworkflow_proof_handoff.py","simple_entry_handoff_test")\nclass SimpleEntryAggregateTest(unittest.TestCase):\n    def item(self,c):\n        meta=next(dict(x) for x in c["meta_items"] if isinstance(x,dict) and x.get("plan_slot")); rel=next(dict(x) for x in c["release_items"] if x.get("plan_slot")==meta["plan_slot"]); return meta,rel,{"canonical_article_id":rel["canonical_article_id"],"plan_slot":meta["plan_slot"],"title":meta["title"],"target_keyword":meta["target_keyword"],"category":meta["category"],"article_type":meta["article_type"]}\n    def test_real_empty_generation_one_reaches_current_action(self):\n        c=action._runtime_context(); self.assertEqual([],c["plan_items"]); self.assertEqual([],c["fact_packs"]); meta,rel,item=self.item(c); action._bound_expected(item); out=action.augment_current_action(REPO,{"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}},item); raw=out["fachworkflow_handoff"]["raw_context_binding"]; self.assertEqual(c["source_sha256"],raw["source_snapshot_id"]); self.assertEqual(["fact_pack","production_plan_item"],out["fachworkflow_handoff"]["worker_generated_raw_fields"])\n    def test_current_item_identity_negatives(self):\n        c=action._runtime_context(); meta,rel,item=self.item(c)\n        for key,val in (("plan_slot","0"*64),("canonical_article_id","article:wrong"),("title","wrong"),("target_keyword","wrong"),("category","wrong"),("article_type","wrong")):\n            bad=dict(item); bad[key]=val\n            with self.assertRaises(action.ViewError): action._bound_expected(bad)\n    def test_worker_raw_context_positive_and_negatives(self):\n        c=action._runtime_context(); meta,rel,item0=self.item(c); ctx=handoff._runtime_context(REPO,c["batch"]); source=ctx["source_sha256"]; plan={"canonical_article_id":rel["canonical_article_id"],"plan_slot":meta["plan_slot"],"source_snapshot_id":source,"article_type":meta["article_type"],"target_keyword":meta["target_keyword"],"topic":meta["title"],"quality_binding":{"wordpress_category":{"name":meta["category"],"slug":meta["category"],"taxonomy":"category"}},"canonical_article":{"body_html":"test"}}; fact={"contract":"canonical_fact_pack_v1","source_snapshot_id":source,"fact_pack_id":"test"}; req={"batch_sha256":c["batch"],"canonical_article_id":rel["canonical_article_id"],"plan_slot":meta["plan_slot"],"fact_pack":fact,"production_plan_item":plan,"production_plan_header":ctx["plan_header"],"workflow_release_item":rel,"workflow_release_metadata":ctx["release_metadata"]}; self.assertEqual(plan,handoff._validate_raw_context(req,ctx,meta,rel))\n        for field in ("fact_pack","production_plan_item"):\n            bad=copy.deepcopy(req); bad[field]["source_snapshot_id"]="0"*64\n            with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n        for field in ("production_plan_header","workflow_release_item","workflow_release_metadata"):\n            bad=copy.deepcopy(req); bad[field]["tampered"]=True\n            with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n        for bad in ([{"stage":"fake"}],None,{}):\n            with self.assertRaises(handoff.Blocked): handoff._validate_worker_stage_proofs(bad)\nif __name__=="__main__": unittest.main()\n''',encoding='utf-8')
+
+          # Hash-chain propagation after all bound adapters and instruction are final.
+          step=json.loads(S.read_text(encoding='utf-8')); binds={x['ref']:x for x in step['authorized_inputs']}; binds[str(A)]['sha256']=sha(A); binds[str(H)]['sha256']=sha(H); dump(S,step)
+          state=json.loads(C.read_text(encoding='utf-8')); state['execution_gate']['bundle_sha256']=sha(S); state['execution_gate_rearm_target']['bundle_sha256']=sha(S); dump(C,state)
+          root=json.loads(R.read_text(encoding='utf-8')); root['current_state_sha256']=sha(C); dump(R,root)
+          print('PR223_KISS_PATCH_APPLIED')
+          PY
+      - name: Hard local positive negative and full regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile control/single-door-boundary/codex_current_action.py control/startmaster0107/fachworkflow_proof_handoff.py control/startmaster0107/test_fachworkflow_proof_handoff.py control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+          python3 -m unittest -v control/startmaster0107/test_fachworkflow_proof_handoff.py
+          python3 control/single-door-boundary/codex_current_action.py selftest
+          python3 control/startmaster0107/fachworkflow_proof_handoff.py selftest
+          python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+          git diff --check
+          test -z "$(git diff --name-only 2f0a3a25da77e95fb28e7da4f500aa3c50ac9910 -- control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt control/startmaster0107/runtime_packages control/output-quarantine .github/workflows/pferde-atelier-endstempel.yml)"
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          S=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+          step=Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json'); state=Path('control/startmaster0107/CURRENT_STATE.json'); root=Path('control/startmaster0107/PFERDE_ATELIER_START_HERE.json')
+          st=json.loads(state.read_text()); rt=json.loads(root.read_text())
+          assert st['execution_gate']['bundle_sha256']==S(step)
+          assert st['execution_gate_rearm_target']['bundle_sha256']==S(step)
+          assert rt['current_state_sha256']==S(state)
+          assert st['publish_allowed'] is False
+          print('HASH_CHAIN_PUBLISH_FALSE_PASS')
+          PY
+      - name: Finalize clean candidate and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/pr223-kiss-finalize.yml
+          git diff --check
+          test "$(git show 2f0a3a25da77e95fb28e7da4f500aa3c50ac9910:AGENTS.md | sha256sum | cut -d' ' -f1)" = "$(sha256sum AGENTS.md | cut -d' ' -f1)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add control/single-door-boundary/codex_current_action.py control/startmaster0107/fachworkflow_proof_handoff.py control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json control/startmaster0107/CURRENT_STATE.json control/startmaster0107/PFERDE_ATELIER_START_HERE.json control/startmaster0107/test_fachworkflow_proof_handoff.py control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py .github/workflows/pr223-kiss-finalize.yml
+          git commit -m "Restore simple article entry and keep aggregate checker"
+          git push origin HEAD:hobbyroom/107007-simple-entry-aggregate-checker-v2
