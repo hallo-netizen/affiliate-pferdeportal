@@ -1,6 +1,6 @@
 # HANDLUNGSVERZEICHNIS
 
-STAND: 2026-09-05
+STAND: 2026-09-11
 
 HARD RULE:
 **Bekannte Aktion niemals erraten. Existiert ein definierter Workflow, darf kein Ersatzweg erfunden werden.**
@@ -176,7 +176,7 @@ Nach Restore erst frischen offiziellen Arbeits-Worktree herstellen und dann den 
 ## Produktvergleich planen / erzeugen / prüfen
 
 Aktion:
-Produktvergleich oder Variantenvergleich definieren, Produktwissen/Fakten binden, Vergleichsregeln pflegen, den deterministischen Vergleichsartikel als WordPress-DRAFT erzeugen oder dessen Archiv/Links/Grafik prüfen.
+Marktrecherche/Produktwissen für Produktvergleiche aufbauen, A-vs-B-Paare fachlich prüfen, Vergleichsregeln/Decision-Policies pflegen, SEO-Eignung prüfen oder ein gebundenes Vergleichsdossier erzeugen/prüfen.
 
 Verbindlicher Weg:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
@@ -185,10 +185,17 @@ Verbindlicher Weg:
 → gebundene Originalquellen.
 
 Fachgrenze:
-PRODUKTVERGLEICH V1 besitzt seinen eigenen deterministischen Vergleichs-Renderer und Draftweg.
-TEXT/STARTMASTER bleibt separat und wird für Produktvergleich V1 weder verändert noch als Laufzeitweg benutzt.
+PRODUKTVERGLEICH verantwortet Research/Product Knowledge, Vergleichbarkeit, Fachpolicy, SEO-Eignung und das gebundene Dossier V2.
+PRODUKTVERGLEICH besitzt im aktiven Zielweg **keinen eigenen produktiven Writer-/Draftweg**.
 
-Normale TEXT-/SEO-Artikelproduktion außerhalb des Produktvergleichs bleibt im Büro TEXT.
+Spätere Artikelproduktion:
+`Produktvergleichsdossier V2 -> bestehender SEO/TEXT-Fachworkflow -> bestehender FACHWORKFLOW_HANDOFF_REQUEST.json -> ACM -> signierter WordPress-DRAFT -> STOP`.
+
+Die technische Anbindung wird ausschließlich im zuständigen SEO/TEXT-/ACM-Nachbarweg und erst nach dessen eigener Freigabe geprüft/gebaut.
+
+Kein zweiter Writer.
+Kein neues Handoff.
+Kein Auto-Publish.
 
 
 ## Externe READ-ONLY-Zweitprüfung
