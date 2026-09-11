@@ -13,7 +13,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...`, `63_...`, `64_...`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...`, `63_...`, `64_...`, `65_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -61,23 +61,36 @@ Exakter UPC-0.8.6-Gegencheck:
 - **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
 - damit **143/150 V1-fähige Gruppen maschinenfest noch offen**.
 
-Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, weitere Profilspezifikationen für **7 Gruppen** erstellt:
+Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, weitere Profilspezifikationen für **10 Gruppen** erstellt:
 - `high-neck-decken`;
 - `deckengurte`;
 - `deckentaschen-und-aufbewahrung`;
 - `stallhalfter`;
 - `knotenhalfter`;
 - `sicherheitshalfter`;
-- `fohlenhalfter`.
+- `fohlenhalfter`;
+- `pferdebuersten`;
+- `striegel`;
+- `kardaetschen`.
 
-Diese sieben Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
+Die drei Pflegezubehör-Gruppen sind in `AKTENSCHRANK/65_PROFILE_FACT_MATRIX_PFERDEBUERSTEN_STRIEGEL_KARDAETSCHEN_V1_20260911.md` source-bound getrennt:
+- `pferdebuersten` nur als Residualgruppe mit identischem `brush_type`;
+- `striegel` als `MANUAL_CURRY_COMB`;
+- `kardaetschen` als `BODY_GROOMING_BRUSH`.
+
+Diese zehn Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
 
 ## AKTUELLER ARBEITSBLOCK
 
-Nächster zusammenhängender Profilblock in Registry-Reihenfolge:
-`pferdebuersten` -> `striegel` -> `kardaetschen`.
+`schermaschinen` wird übersprungen, weil bereits maschinenfestes 0.8.6-Profil vorhanden.
 
-Danach `schermaschinen` überspringen, weil bereits maschinenfestes 0.8.6-Profil vorhanden, und mit der nächsten V1-Gruppe ohne Profil fortfahren.
+Nächster zusammenhängender Profilblock in Registry-Reihenfolge:
+`satteldecken` -> `schabracken` -> `sattelgurte`.
+
+Bekannte fachliche Startgaps:
+- `satteldecken`: exakte Produktklasse gebunden, zweite unabhängige Herstellerfamilie + gemeinsame Faktenmatrix noch zu härten;
+- `schabracken`: mehrere Herstellerfamilien vorhanden, Form/Satteltyp/Disziplin + gemeinsame Faktenmatrix noch zu normalisieren;
+- `sattelgurte`: Acavallo-Evidence vorhanden, zweite Herstellerfamilie + Nutzungsklassen-/Faktenmatrix noch zu binden.
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> in sinnvollen Blöcken sammeln -> erst dann technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
