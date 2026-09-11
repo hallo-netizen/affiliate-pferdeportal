@@ -12,7 +12,7 @@ Nicht daraus:
 - Regression behaupten;
 - Folgefix starten.
 
-## Aktuell freigegebener Testkandidat
+## Aktuell freigegebener technischer Testkandidat
 
 `universal-product-comparison-0.8.5-prototype.zip`
 
@@ -24,14 +24,24 @@ Die exakte ZIP enthält:
 
 Der Report bindet 70 Source-Datei-SHA256-Werte.
 
-Finale Prüfung:
+Finale lokale Prüfung:
 - 35/35 ausführbare Tests PASS;
 - PHP-Lint 50/50 PASS;
 - Source↔ZIP 71/71 exakt;
 - Report-Hashbindung 70/70 exakt;
 - 175/175 Portalparität PASS;
-- 130 zusätzliche echte Cross-Family-Paare aus vorhandenem Product Knowledge fachlich gebunden;
 - Herstellerfamilien-Readiness und Paarplaner identisch fail-closed.
+
+## Interpretationskorrektur zu den 130 Paaren
+
+Der 0.8.5-Lokaltest bewies für fünf zusätzliche Fachprofile insgesamt **130 katalogseitige Cross-Family-Paarpotentiale**, wenn die freigegebenen Recherchekandidaten erfolgreich als Product Knowledge materialisiert vorliegen.
+
+Er bewies **nicht**, dass diese 130 Paare bereits auf WordPress als reales Product-Knowledge-Inventar vorhanden waren.
+
+Der echte WordPress-Vorcheck zeigte diese Grenze korrekt fail-closed und führte zu:
+`AKTENSCHRANK/12_V085_LIVE_INVENTORY_GAP_UPK051_HARD_LOCAL_RECEIPT.md`.
+
+Danach wurde Universal Product Knowledge 0.5.1 über den vorhandenen kanonischen Importweg real ausgeführt. Der Live-Batch materialisierte die kleine Alt-Recherchebasis von 17 Gruppen; eine neue globale reale Paarzahl wurde nach diesem Batch noch nicht separat im Produktvergleich abgelesen und wird hier nicht behauptet.
 
 ## Portalbindung
 
@@ -52,16 +62,20 @@ Der historische GitHub-Source-Ordner ist nicht automatisch byte-identisch zu die
 Eine teilweise Synchronisierung würde Scheinsicherheit erzeugen.
 
 KISS:
-Bis zu einer späteren **exakten byte-identischen Source-Materialisierung** ist ausschließlich die gebundene 0.8.5-ZIP die Release-Kandidaten-Wahrheit.
+Bis zu einer späteren **exakten byte-identischen Source-Materialisierung** ist ausschließlich die gebundene 0.8.5-ZIP die technische Release-Kandidaten-Wahrheit.
 
 ## Folgearbeit
 
-Vor jeder weiteren Codeänderung:
+Aktueller Arbeitsblock ist Marktrecherche, nicht Code.
+
+Vor jeder späteren Codeänderung:
 1. exakt die 0.8.5-ZIP materialisieren;
 2. SHA prüfen;
 3. daraus isolierten Arbeitsbaum erzeugen;
 4. erst dann ändern;
 5. wieder komplette positive/negative/Gesamtworkflow-/Fresh-ZIP-Prüfung.
+
+Vor jeder Plugin-Übergabe an den Nutzer muss die **exakt auszugebende ZIP** selbst positiv, negativ/Mutation und gegen den vollständigen aktuellen Produktvergleichsworkflow geprüft sein.
 
 GitHub-Akten bleiben Status-/WHY-Wahrheit.
 Der alte Source-Bestand bleibt historischer technischer Bestand.
