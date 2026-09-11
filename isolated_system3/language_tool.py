@@ -6,7 +6,8 @@ import urllib.request
 from typing import Any, Dict
 
 
-LT_ENDPOINT = "https://api.languagetool.org/v2/check"
+LT_ENDPOINT = "http://127.0.0.1:8081/v2/check"
+LT_VERSION = "6.8"
 
 
 class LanguageToolFail(RuntimeError):
@@ -20,7 +21,7 @@ def check_text(text: str, timeout: int = 20) -> Dict[str, Any]:
     req = urllib.request.Request(
         LT_ENDPOINT,
         data=payload,
-        headers={"Content-Type": "application/x-www-form-urlencoded", "User-Agent": "system3-isolated-live-test/1.0"},
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
         method="POST",
     )
     try:
@@ -36,6 +37,7 @@ def check_text(text: str, timeout: int = 20) -> Dict[str, Any]:
         raise LanguageToolFail("LANGUAGETOOL_SCHEMA_FAIL")
     return {
         "status": "PASS",
+        "version": LT_VERSION,
         "endpoint": LT_ENDPOINT,
         "match_count": len(data["matches"]),
         "matches": data["matches"],
