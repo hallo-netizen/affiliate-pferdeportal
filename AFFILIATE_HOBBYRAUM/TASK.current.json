@@ -4,56 +4,24 @@
   "goal": "ADCELL API v2 aus kanonischem 6.72.8: Token-Auth, accepted+active+programId-Allowlist und automatische CSV/Banner/Deeplink-Verarbeitung; kein Awin-Fallthrough und keine manuelle CSV-URL als Normalbetrieb.",
   "image": "php:8.2-cli",
   "inputs": [
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
-      "dest": "pferdeportal-affiliate-router.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php",
-      "dest": "trait-ppar-provider-registry.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-intake.php",
-      "dest": "trait-ppar-provider-intake.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
-      "dest": "trait-ppar-automation-suite.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php",
-      "dest": "trait-ppar-network-sync.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php",
-      "dest": "trait-ppar-creative-library.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php",
-      "dest": "trait-ppar-output-objects.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-control-contract.php",
-      "dest": "trait-ppar-control-contract.php"
-    },
-    {
-      "src": "test_adcell_api_v2_automation.php",
-      "dest": "test_adcell_api_v2_automation.php"
-    },
-    {
-      "src": "test_otto_automation.php",
-      "dest": "test_otto_automation.php"
-    },
-    {
-      "src": "test_banner_distribution_behavior.php",
-      "dest": "test_banner_distribution_behavior.php"
-    }
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php","dest":"pferdeportal-affiliate-router.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php","dest":"trait-ppar-provider-registry.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-intake.php","dest":"trait-ppar-provider-intake.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php","dest":"trait-ppar-automation-suite.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php","dest":"trait-ppar-network-sync.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php","dest":"trait-ppar-creative-library.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php","dest":"trait-ppar-output-objects.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-control-contract.php","dest":"trait-ppar-control-contract.php"},
+    {"src":"test_adcell_api_v2_automation.php","dest":"test_adcell_api_v2_automation.php"},
+    {"src":"test_otto_automation.php","dest":"test_otto_automation.php"},
+    {"src":"test_banner_distribution_behavior.php","dest":"test_banner_distribution_behavior.php"}
   ],
   "writable": [
+    "trait-ppar-provider-registry.php",
     "trait-ppar-network-sync.php",
     "trait-ppar-automation-suite.php"
   ],
-  "command": "php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
+  "command": "php -l trait-ppar-provider-registry.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
   "tests": [
     "php test_adcell_api_v2_automation.php",
     "php test_otto_automation.php",
