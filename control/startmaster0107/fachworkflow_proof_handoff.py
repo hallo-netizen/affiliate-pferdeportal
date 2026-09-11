@@ -185,6 +185,7 @@ def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], me
     if release_item.get('canonical_article_id')!=request.get('canonical_article_id'): raise Blocked('BOUND_RELEASE_CANONICAL_ID_MISMATCH')
     source_id=ctx['source_sha256']
     if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')
+    if str(fact_pack.get('fact_pack_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_ID_MISMATCH')
     if 'plan_slot' in item: raise Blocked('BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
     expected={"canonical_article_id":request["canonical_article_id"],"source_snapshot_id":source_id,"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
     for k,v in expected.items():
