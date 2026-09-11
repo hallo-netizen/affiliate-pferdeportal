@@ -12,7 +12,7 @@ STATUS: AKTIV
 
 UPC 0.8.6 besitzt technisch weiterhin nur 7 maschinenfeste Vergleichsprofile/Decision-Policies; 143/150 sind technisch noch offen.
 
-Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, weitere Profilspecs für 13 Gruppen erstellt:
+Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, weitere Profilspecs für 21 Gruppen erstellt:
 - High-Neck-Decken;
 - Deckengurte;
 - Deckentaschen/Aufbewahrung;
@@ -22,18 +22,22 @@ Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, we
 - Kardätschen;
 - Satteldecken;
 - Schabracken;
-- Sattelgurte.
+- Sattelgurte;
+- Sattelschränke;
+- Satteltransport;
+- Englische Trensen;
+- Gebisse;
+- gebisslose Zäumungen;
+- Zügel;
+- Sperrriemen;
+- Reithalfter.
 
 Belege:
 `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-`AKTENSCHRANK/62_PROFILE_FACT_MATRIX_HIGH_NECK_DECKEN_V1_20260911.md`
-`AKTENSCHRANK/63_PROFILE_FACT_MATRIX_DECKENZUBEHOER_V1_20260911.md`
-`AKTENSCHRANK/64_PROFILE_FACT_MATRIX_HALFTER_V1_20260911.md`
-`AKTENSCHRANK/65_PROFILE_FACT_MATRIX_PFERDEBUERSTEN_STRIEGEL_KARDAETSCHEN_V1_20260911.md`
-`AKTENSCHRANK/66_PROFILE_FACT_MATRIX_SATTELDECKEN_SCHABRACKEN_SATTELGURTE_V1_20260911.md`
+`AKTENSCHRANK/62_...` bis `AKTENSCHRANK/69_...`.
 
-Technischer 0.8.6-Stand bleibt lokal hart grün. WordPress-Live für 0.8.6 ist offen.
+Technischer 0.8.6-Stand bleibt unverändert lokal hart grün. WordPress-Live für 0.8.6 ist offen.
 
 ## BRANCH
 
@@ -41,24 +45,31 @@ Technischer 0.8.6-Stand bleibt lokal hart grün. WordPress-Live für 0.8.6 ist o
 
 ## NEXT ACTION
 
-`steigbuegel` überspringen, weil bereits maschinenfest in UPC 0.8.6 vorhanden.
+Registry nach `reithalfter` frisch gegen Portalstruktur + finale V1-Disposition geprüft.
 
-Nächster fachlich zusammenhängender Profilblock in Registry-Reihenfolge:
-1. `sattelschraenke`
-2. `satteltransport`
-3. `englische-trensen`
+Explizit überspringen:
+- `offenstallraufen` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`;
+- `offenstalltore` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`.
 
-Für diese drei source-bound binden:
-- konkrete Produktklasse/Subklasse je Registry-Key;
+Nächster fachlich zulässiger Profilblock in Registry-Reihenfolge:
+1. `liegeflaechen-im-offenstall`
+2. `offenstall-bodenbefestigung`
+3. `fressstaender-im-offenstall`
+
+Danach:
+`trennwaende-im-offenstall`.
+
+Für den Dreierblock source-bound binden:
+- konkrete Produkt-/Konstruktionsklasse je Registry-Key;
 - gemeinsame Faktenmatrix;
 - Nutzungsklasse/Pairing-Regeln;
 - Decision-Policy je Fact-Key;
 - aktuelle Herstellerprodukte dagegen prüfen.
 
 Vor Paaruniversum hart prüfen:
-- `sattelschraenke`: stationär/fahrbar/Turnier-/Transportausführung nicht blind mischen;
-- `satteltransport`: Tasche/Case/Transportwagen oder andere Funktionsklassen nicht kreuzen;
-- `englische-trensen`: Trensentyp/Reithalfter-/Anatomieklasse und mitgelieferte Komponenten normalisieren, keine bloße Markenpaarung.
+- Liegefläche: Gummi-/Matten-/Belagsklasse und Einsatzart nicht mit kompletter Bodenbefestigung vermischen;
+- Offenstall-Bodenbefestigung: Paddock-/Flächenbefestigungssysteme nach Bau-/Mechanikklasse normalisieren; keine reine Liege-/Boxenmatte einschleusen;
+- Fressständer: echter räumlich abgegrenzter Individual-Fressstand, nicht bloß Fressgitter/Fresszaun/Raufe.
 
 Keine finalen Produktpärchen manuell festlegen.
 Kein Pluginrelease pro Gruppe.
