@@ -66,14 +66,32 @@ Allowed persisted files:
 
 Do not persist research, facts, state.json files, credentials, signatures or legacy packages.
 
+## Mandatory remote persistence gate
+A local Codex commit is NOT durable evidence and MUST NOT be reported as PASS.
+
+After writing the allowed proof files:
+1. `git add` only the allowed System-4 proof files (and only a separately justified minimal System-4 fix/test if one was required by this task).
+2. Commit them locally.
+3. Push the resulting HEAD to the actual PR branch exactly:
+   `git push origin HEAD:hobbyroom/system4-true-single-room-v1`
+4. Run:
+   `python3 isolated_system4/proof_persistence_guard.py verify hobbyroom/system4-true-single-room-v1`
+5. A terminal batch PASS is allowed only if this returns exactly `SYSTEM4_PROOF_REMOTE_PASS:<same-local-head>`.
+
+The persistence guard independently requires the remote branch SHA to equal local HEAD and all nine proof files to exist in that committed remote HEAD. A local-only commit, missing remote branch update, missing proof file, wrong seven slots, `publish_allowed!=false`, or wrong next boundary is a hard FAIL.
+
+If the execution environment cannot push the proof commit to the PR branch, return the genuine blocker:
+`SYSTEM4_HARD_BLOCKER:REMOTE_PROOF_PERSISTENCE_UNAVAILABLE`
+and DO NOT report `SYSTEM4_7_7_FULL_BATCH_PASS`, even if all seven temporary article states and the local batch gate passed.
+
 A minimal System-4-only fix under `isolated_system4/**` is allowed only if a genuine current System-4 bug blocks this bound batch. Any such fix requires a positive and negative regression test before continuing. Do not redesign the architecture.
 
 ## Terminal return
 Return only one of:
 
 `SYSTEM4_7_7_FULL_BATCH_PASS`
-with all seven titles, plan slots, final draft SHA256 values, revision counts, test-suite/NO-LEGACY results, exact batch-gate result, durable proof paths/commit, `publish_allowed=false`, and exact next boundary `SIGNED_WORKFLOW_RELEASE_REQUIRED`;
+with all seven titles, plan slots, final draft SHA256 values, revision counts, test-suite/NO-LEGACY results, exact batch-gate result, durable REMOTE proof paths/commit, `SYSTEM4_PROOF_REMOTE_PASS:<commit>`, `publish_allowed=false`, and exact next boundary `SIGNED_WORKFLOW_RELEASE_REQUIRED`;
 
-or the first genuine non-repairable current System-4 checker/tool blocker with exact item index/title/error/source.
+or the first genuine non-repairable current System-4 checker/tool/persistence blocker with exact item index/title/error/source.
 
 Do not stop for commentary or any repairable draft defect.
