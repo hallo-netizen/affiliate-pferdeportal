@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Hash-bound handoff from raw Fachworkflow work to one aggregate PASS."""
 from __future__ import annotations
-import hashlib, json, os, re, subprocess, sys, tempfile, zipfile
+import hashlib, html, json, os, re, subprocess, sys, tempfile, zipfile
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -198,6 +198,16 @@ def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], me
 def _validate_worker_stage_proofs(value: Any) -> None:
     if value != []: raise Blocked("WORKER_STAGE_PASS_PROOFS_FORBIDDEN")
 
+def _languagetool_plaintext_from_html(value: str) -> str:
+    text=re.sub(r"(?is)<!--.*?-->","\n",value)
+    text=re.sub(r"(?is)<(script|style)\b[^>]*>.*?</\1>","\n",text)
+    text=re.sub(r"(?is)</?(?:article|section|p|div|li|h[1-6]|br|tr|td|th|ul|ol|table|blockquote)\b[^>]*>","\n",text)
+    text=re.sub(r"(?s)<[^>]+>","",text)
+    text=html.unescape(text)
+    text=re.sub(r"[ \t\r\f\v]+"," ",text)
+    text=re.sub(r"\n[ \t]*\n+","\n\n",text)
+    return text.strip()+"\n"
+
 def _run_languagetool(repo: Path, final_path: Path, root: str, item: Mapping[str, Any]) -> tuple[dict,dict,str,str]:
     proof_path=repo/LT_RUNTIME_REL
     if not proof_path.is_file(): raise Blocked("LANGUAGETOOL_RUNTIME_PROOF_MISSING")
@@ -210,7 +220,11 @@ def _run_languagetool(repo: Path, final_path: Path, root: str, item: Mapping[str
     jar=Path(str(runtime.get("executed_commandline_jar_ref") or ""))
     if not jar.is_absolute() or not jar.is_file(): raise Blocked("LANGUAGETOOL_JAR_MISSING")
     if _sha(jar)!=runtime.get("executed_commandline_jar_sha256") or _sha(jar)!=lt.get("commandline_jar_sha256"): raise Blocked("LANGUAGETOOL_JAR_HASH_MISMATCH")
-    proc=subprocess.run(["java","-Xmx1024m","-jar",str(jar),"--json","-l","de-DE",str(final_path)],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
+    source_html=final_path.read_text(encoding="utf-8"); plaintext=_languagetool_plaintext_from_html(source_html)
+    if not plaintext.strip(): raise Blocked("LANGUAGETOOL_PLAINTEXT_EMPTY")
+    with tempfile.TemporaryDirectory() as td:
+        lt_input=Path(td)/"article.txt"; lt_input.write_text(plaintext,encoding="utf-8")
+        proc=subprocess.run(["java","-Xmx1024m","-jar",str(jar),"--json","-l","de-DE",str(lt_input)],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
     if proc.returncode!=0: raise Blocked("LANGUAGETOOL_REAL_EXECUTION_FAILED:"+(proc.stderr or proc.stdout).strip()[:300])
     try: report=json.loads(proc.stdout)
     except json.JSONDecodeError as exc: raise Blocked("LANGUAGETOOL_REPORT_INVALID") from exc
@@ -356,12 +370,16 @@ def materialize(repo: Path, request_ref: str) -> dict:
 
 def selftest() -> dict:
     _validate_worker_stage_proofs([]); blocked=0
+    sample='<article><section data-block="x" data-fact-ids="y"><p>Pferd &amp; Reiter.</p></section></article>'
+    sample_sha=hashlib.sha256(sample.encode("utf-8")).hexdigest(); plain=_languagetool_plaintext_from_html(sample)
+    if "Pferd & Reiter." not in plain or any(token in plain for token in ("article","section","data-block","data-fact-ids")): raise AssertionError("LANGUAGETOOL_HTML_TO_TEXT_POSITIVE_FAILED")
+    if hashlib.sha256(sample.encode("utf-8")).hexdigest()!=sample_sha: raise AssertionError("LANGUAGETOOL_HTML_INPUT_MUTATED")
     for bad in ([{"stage":"ppm"}],[{"stage":"seo","status":"PASS"}],None,{}):
         try: _validate_worker_stage_proofs(bad)
         except Blocked: blocked+=1
         else: raise AssertionError("WORKER_STAGE_PROOF_NEGATIVE_NOT_BLOCKED")
     if blocked!=4: raise AssertionError("WORKER_STAGE_PROOF_NEGATIVE_COUNT_INVALID")
-    return {"ok":True,"status":"FACHWORKFLOW_AGGREGATE_SELFTEST_PASS","positive":1,"negative":blocked,"worker_stage_pass_proofs_allowed":False,"aggregate_pass_generated_by_adapter_only":True,"content_or_quality_rules_changed":False,"publish_allowed":False}
+    return {"ok":True,"status":"FACHWORKFLOW_AGGREGATE_SELFTEST_PASS","positive":2,"negative":blocked,"worker_stage_pass_proofs_allowed":False,"aggregate_pass_generated_by_adapter_only":True,"content_or_quality_rules_changed":False,"publish_allowed":False}
 
 def main(argv:list[str])->int:
     try:
