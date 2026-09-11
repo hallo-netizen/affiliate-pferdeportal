@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect bound PPM and PSERC package contents
+      - name: Inspect and execute bound content validators
         shell: bash
         run: |
           set -euo pipefail
@@ -21,10 +21,19 @@ jobs:
           inner=$(find /tmp/pserc_outer -type f -name '*.zip' | head -n1)
           test -n "$inner"
           unzip -q "$inner" -d /tmp/pserc
-          echo '=== TERM HITS ==='
-          for term in 'internal_link' 'internal links' 'table' 'cannibal' 'duplicate' 'seo' 'design' 'pste' 'languagetool' 'external_link'; do
-            echo "--- $term ---"
-            grep -RniI --exclude='*.md' --exclude='*.txt' "$term" /tmp/ppm /tmp/pserc | head -n 40 || true
-          done
-          echo '=== RELEVANT FILENAMES ==='
-          find /tmp/ppm /tmp/pserc -type f | grep -Ei 'link|table|seo|design|pste|duplicate|cannibal|quality|validator|check' | head -n 200 || true
+          PPM=/tmp/ppm/portal-production-machine
+          echo '=== CONTENT VALIDATOR API ==='
+          grep -n "function check" "$PPM/includes/content-validator.php" | head -n 20
+          grep -n "function check" "$PPM/includes/content-structure-language-gate.php" | head -n 20
+          echo '=== EXISTING DIRECT CONTENT VALIDATOR NEGATIVE/POSITIVE TEST ==='
+          php "$PPM/tests/test-canonical-runtime-binding.php"
+          echo '=== MAINBLOCK LINK HARD RULE TEST ==='
+          php "$PPM/tests/test-mainblock1-link-targets.php"
+          echo '=== MAINBLOCK TABLE HARD RULE TEST ==='
+          php "$PPM/tests/test-mainblock1-table-hard-rules.php"
+          echo '=== CONTENT VALIDATOR INTEGRATION ==='
+          php "$PPM/tests/test-wave2-content-validator-integration.php"
+          echo '=== REPAIRABLE BLOCKER TOKENS ==='
+          grep -RhoE "BLOCKED_(CONTENT|WAVE2)_[A-Z0-9_]+" "$PPM/includes/content-validator.php" "$PPM/includes/content-structure-language-gate.php" | sort -u
+          echo '=== NO REPOSITORY MUTATION FROM DIRECT VALIDATOR TESTS ==='
+          git diff --exit-code
