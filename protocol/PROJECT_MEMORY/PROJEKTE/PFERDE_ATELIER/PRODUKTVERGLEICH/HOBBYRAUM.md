@@ -1,113 +1,94 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-11
-STATUS: AKTIV / 0.8.5 LIVE FAIL-CLOSED PASS / UPK 0.5.1 LOCAL HARD PASS / LIVE-MATERIALISIERUNG OFFEN
+STATUS: AKTIV
 
-## AKTUELLER VERGLEICHSKANDIDAT
+## 1-KLICK-ÜBERSICHT
 
-`universal-product-comparison-0.8.5-prototype.zip`
+**WAS IST DAS?**  
+Isolierter Arbeitsraum für die laufende Produktvergleichs-Fachskalierung.
 
-SHA-256:
+**AKTUELL:**  
+Technik bleibt stehen. Der aktive Block ist reine Markt-/Produktrecherche über die 175 autoritativen Vergleichsgruppen.
+
+**DU DARFST …**  
+Research-Evidence sammeln, Hersteller-/Modellkandidaten prüfen, Nutzungsklassen/Faktenmatrizen vorbereiten und die 175er Coverage konsolidieren.
+
+**DU DARFST NICHT …**  
+neue Plugins pro Gruppe/Batch bauen, Research-Funde automatisch zu Product Knowledge erklären, SEO starten, den Nachbarweg ändern, mergen oder veröffentlichen.
+
+**ALS NÄCHSTES …**  
+Research A–J gegen die 175er Registry konsolidieren; erst danach an der ersten wirklich ungedeckten Gruppe weiterrecherchieren.
+
+## BRANCH
+
+`hobbyroom/productvergleich-workflow-v070-20260908`
+
+Aktueller bei Abschlussprüfung frisch gelesener Head vor Nachholwrites:
+`a4439ee8367c62a045e5aeaf8e6a30649293b797`
+
+Die nachfolgenden Nachholwrites ändern ausschließlich Campus-/Fachakten dieses Arbeitswegs.
+
+## SICHERER TECHNISCHER STAND
+
+UPC 0.8.5:
 `0174051e6584902142f5be5787642426b30aab6c7ba15ef0b07ccbdb4a5844fd`
 
-0.8.5 nicht erneut reparieren.
-Es hat live korrekt `PRODUCT_INVENTORY_MISSING` gezeigt und keinen Providerlauf gestartet.
+UPK 0.5.1:
+`17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
+
+Kein weiterer Code-/Plugin-Fix ist im aktuellen Arbeitsblock belegt.
 
 ## LIVE-BEFUND
 
-Oben:
-- `PAIRING_READY: 1`;
-- `PROFILE_MISSING: 166`;
-- `POLICY_MISSING: 0`;
-- `PRODUCT_INVENTORY_MISSING: 6`;
-- `GROUP_KEY_COLLISION: 2`.
+UPK 0.5.1 Batch abgeschlossen:
+- 17/17 alte Recherchegruppen verarbeitet;
+- PASS 6;
+- TEIL-PASS 8;
+- BLOCKED 3;
+- pairing-ready 9.
 
-Winterdecken:
-- Recherchekatalog: 8 Kandidaten / 3 Hersteller;
-- Research-Vollständigkeit `UNPROVEN`;
-- echtes Inventar 0 Produkte / 0 Hersteller;
-- 0 Cross-Family-Paare;
-- korrekt fail-closed.
+Grenze:
+Die alte Basis enthielt nur 102 Kandidaten und ist kein Markt-Vollständigkeitsbeleg.
+Keine globale Live-Paarzahl aus diesem Batch ableiten, solange die Produktvergleichs-Vorschau nicht separat gelesen wurde.
 
-## ROOT CAUSE
+## PARALLEL/SHARED RESEARCH A–J
 
-Der Lokaltest 0.8.5 prüfte die vorhandenen Recherchekandidaten synthetisch gegen Profile/Policies.
-Das war geeignet für Fach-/Paarlogik, aber kein Beweis der echten WordPress-Inventarmaterialisierung.
+Auf demselben Branch liegen `AKTENSCHRANK/13_...` bis `22_...` als reine Research-Evidence.
 
-Keine 130 Live-Paare behaupten.
-Die 130 sind nur katalogseitiges Potential **nach** erfolgreicher Live-Quellenprüfung und Materialisierung.
+Frischer Vergleich gegen den vorherigen Statuscommit zeigte:
+- 10 Commits;
+- ausschließlich zehn neue Marktrecherche-Akten A–J;
+- keine konkurrierende Änderung an CURRENT_STATE/HOBBYRAUM/Fehler/Ziel oder Plugin-Code.
 
-## KISS-KANDIDAT PRODUCT KNOWLEDGE 0.5.1
+Diese Akten bleiben aktiv und werden nicht überschrieben oder archiviert.
 
-`universal-product-knowledge-0.5.1-prototype.zip`
+## NEXT ACTION
 
-SHA-256:
-`17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
-
-0.5.1 automatisiert ausschließlich den vorhandenen kanonischen Product-Knowledge-Weg:
-- vorhandene freigegebene Recherchegruppen;
-- eine Gruppe pro AJAX-Request;
-- `UPK_Research::run_product_group()` unverändert;
-- echte Herstellerquellenprüfung;
-- nur PASS-Produkte/Fakten werden mit dem bestehenden Import materialisiert;
-- fachlich BLOCKED sichtbar;
-- Security-/Transportfehler STOP;
-- Markt-Vollständigkeit bleibt UNPROVEN.
-
-## HARTER LOKAL-PASS
-
-UPK 0.5.1:
-- Positiv/Negativ PASS;
-- Nonce/Capability PASS;
-- sequenzieller Batch PASS;
-- vorhandener Einzelgruppenweg erhalten;
-- 4 Mutationen korrekt ROT;
-- PHP-Lint 5/5;
-- Source↔ZIP 8/8;
-- Report-Hashes 7/7;
-- kein SEO/UPC/Writer/Publish-Eigentum.
-
-Gesamtworkflow-Gegenprüfung:
-UPC 0.8.5 gegen exakt finale UPK-0.5.1-ZIP = **35/35 PASS**.
-
-## NEXT ACTION WORDPRESS
-
-1. ausschließlich **Universal Product Knowledge 0.5.1** installieren/ersetzen;
-2. Product Comparison 0.8.5 unverändert lassen;
-3. WordPress → `Produktvergleich` → `Produktwissen` öffnen;
-4. **noch keinen Batch starten**;
-5. Screenshot schicken;
-6. dort prüfen wir nur:
-   - Version 0.5.1;
-   - bestehender Einzelgruppenweg erhalten;
-   - neuer Button `Alle freigegebenen Recherchegruppen nacheinander prüfen/importieren` sichtbar;
-   - keine falsche Vollständigkeitsbehauptung;
-7. erst danach genau einen Batch starten;
-8. nach Batchende Summary-Screenshot;
-9. danach UPC Winterdecken nur read-only neu prüfen.
-
-## LIVE-ERWARTUNG NACH SPÄTEREM BATCH
-
-Keine feste Produkt-/Paarzahl vorhersagen.
-Die Herstellerseiten werden live neu geprüft; veraltete/fehlende Quellen dürfen Produkte blockieren.
-
-Erlaubte Aussage danach ausschließlich aus echtem Ergebnis:
-- welche Gruppen PASS/PARTIAL/BLOCKED;
-- wie viele Produkte tatsächlich materialisiert;
-- wie viele echte Herstellerfamilien;
-- welche Gruppen danach `PAIRING_READY` werden;
-- reales Paaruniversum daraus.
+1. Autoritative 175er Registry lesen.
+2. Research-Batches A–J gegen diese Registry abgleichen.
+3. Eine einzige Coverage-/Gap-Map erzeugen:
+   - Gruppe recherchiert / teilweise / ungedeckt;
+   - Research-Evidence-Quelle;
+   - Herstellerfamilienkandidaten;
+   - offene Fakten-/Identitäts-/Nutzungsklassenfragen.
+4. Keine Coverage-Zahl raten; nur aus dem Abgleich ableiten.
+5. Danach Marktrecherche an den ersten wirklich ungedeckten Gruppen fortsetzen.
+6. Research-Funde bleiben Kandidaten, bis Herstellerquelle + exakte Identität + gemeinsame Faktenmatrix + Sinnprüfung gebunden sind.
+7. Erst nach einem großen belastbaren Datenblock eine **gebündelte** Aktualisierung des bestehenden Product Knowledge erwägen.
+8. Vor jeder Plugin-Übergabe: exakt auszugebende ZIP positiv + negativ/Mutation + kompletter Produktvergleichsworkflow.
 
 ## BLOCK-GRENZE
 
 BLOCK bei:
-- UPK-Version falsch;
-- Batch umgeht `run_product_group()`;
-- Parallel-/Monsterrequest statt Sequenz;
-- fehlendem Nonce/Capability;
-- falschem COMPLETE-/Markt-vollständig-Status;
-- Product Comparison Providerlauf vor Materialisierung;
-- Writer/Draft/Publish-Aktivierung.
+- Research-Fund wird ohne Herstellerquellen-/Identitätsbeleg als Product Knowledge behandelt;
+- Markt-Vollständigkeit wird geschätzt;
+- blinder Cross-Product ohne Sinn-/Nutzungsebenenprüfung;
+- Top-N-/Pair-Cap reduziert Coverage;
+- neuer Pluginbau nur wegen eines Recherchebatches;
+- Plugin-Übergabe ohne exakten Positiv-/Negativ-/Gesamtworkflow-Beweis;
+- SEO-/Providerstart aus Research-Evidence;
+- Änderung an SEO/TEXT/ACM aus diesem Büro;
+- Merge oder Publish.
 
-Kein SEO/TEXT-/ACM-Umbau.
-Kein Publish.
+Kein Auto-Publish.
