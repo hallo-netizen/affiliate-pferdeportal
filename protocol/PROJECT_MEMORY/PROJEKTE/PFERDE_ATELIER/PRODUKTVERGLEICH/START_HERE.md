@@ -26,11 +26,10 @@ STARTMASTER/TEXT oder ACM eigenmächtig verändern, Produktfakten erfinden, eine
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Produktvergleichs-Fehlerquelle
 - **ZIEL:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → aktiver Produktvergleichs-Zielvertrag V2
 - **WARUM:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- **AKTUELLES ARBEITSPROTOKOLL:** `PROTOKOLL_20260911.md`
-- **ÄLTERE PROTOKOLLE:** `PROTOKOLL_20260907.md`, `PROTOKOLL_20260909.md`
+- **AKTUELLE PROTOKOLLKETTE:** ausschließlich aus `CURRENT_STATE.md` lesen; hier keine dynamische Protokolldatei fest verdrahten
 - **HISTORIE:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 
-Diese Bürotür enthält keine zweite aktuelle Fehler-, Ziel- oder Statuswahrheit.
+Diese Bürotür enthält keine zweite aktuelle Fehler-, Ziel-, Status- oder Protokollwahrheit.
 
 ## Harte Fachgrenze zu SEO/TEXT
 
