@@ -8,22 +8,28 @@ VORGÄNGER NUR HISTORISCHER LANGBELEG:
 ## AKTUELLE LIVE-WAHRHEIT – 11.09.2026
 
 Current main:
-`a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6`
+`f791dcc6c926f9c136faed29957e64786ffca08e`
 
 Letzter belastbarer Live-Baseline-/Recovery-Stand vor dem aktuellen Sichtbarkeitskandidaten:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
 
-M01–M36 sind die integrierte bekannte Regression.
-Der danach ausgeführte frische Produktionslauf recherchierte und erzeugte den ersten Artikel und erreichte den echten PPM-6.7.9-/PSERC-Handoff. Dort endete der sichtbare äußere Befund mit:
+M01–M37 sind jetzt die verbindliche bekannte Regression. M37 wurde in PR248 ausschließlich als History-Autorität integriert; der bestehende Maschinenbeweis lieferte `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M37` und `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`, hardlock und hardlock-base PASS.
+
+Der letzte frische Produktionslauf recherchierte und erzeugte den ersten Artikel und erreichte den echten PPM-6.7.9-/PSERC-Handoff. Dort endete der sichtbare äußere Befund mit:
 
 `PPM679_REAL_EXECUTION_BLOCKED`
 
-Der bereits zurückgegebene konkrete innere Bridge-Grund wurde vom äußeren Handoff nicht erhalten. Der ursprüngliche Codex-Task ist inzwischen nicht mehr verfügbar; deshalb bleibt der fachliche/technische innere Produktions-Rootcause ausdrücklich **UNKNOWN**, bis ein neuer echter erster Artikel denselben Handoff erreicht.
+Der bereits zurückgegebene konkrete innere Bridge-Grund wurde vom äußeren Handoff nicht erhalten. Der ursprüngliche Codex-Task ist inzwischen nicht mehr verfügbar; deshalb bleibt der eigentliche Produktions-Rootcause ausdrücklich **UNKNOWN**, bis nach abgeschlossenem M37-Produktfix genau ein neuer echter erster Artikel denselben Handoff erreicht.
 
-Aktive History-Regression: **M37**.
-Aktuelle Arbeit ist ausschließlich zweiphasig nach vorhandenem Hobbyraum-Maschinenbeweis:
-1. M37 in bestehender Matrix + bestehendem Runner als History-Autorität aufnehmen und auf unverändertem Main reproduzierbar FAIL beweisen.
-2. Erst danach separater Produktfix: Handoff bleibt fail-closed, erhält aber den ersten bereits vorhandenen inneren PPM/PSERC-Grund sichtbar; anschließend kompletter M01–M37-PASS.
+Aktive Arbeit: **M37 PRODUCT_FIX**.
+Produktkandidat: PR247 / `hobbyroom/ppm-inner-reason-visibility-20260911` / Head `59ad44da3d89769c05f0725f9929135b0262f4dd`.
+
+Zulässiger Fix ausschließlich:
+- Handoff bleibt fail-closed BLOCKED;
+- der erste bereits vorhandene konkrete nicht-reparierbare PPM/PSERC-Grund wird sichtbar erhalten;
+- ohne konkreteren Grund wird nichts erfunden;
+- reparierbare `BLOCKED_CONTENT_*`, `BLOCKED_WAVE2_*`, `BLOCKED_CANONICAL_RUNTIME_LINK_*` bleiben `FACHWORKFLOW_REPAIR_REQUIRED`;
+- bestehende Hashkette wird nachgezogen.
 
 Kein neuer Runner, kein neuer Gate, kein neuer Controller, keine PPM-/PSERC-/PSTE-/Textmaschinen-/SEO-/Link-/Tabellen-/Design-/Publish-Regeländerung.
 Kein Publish.
@@ -68,16 +74,18 @@ Kein Publish.
 | M34 | Legacy PPM handoff guards / canonical slot parity | historisch / Regression |
 | M35 | PPM Fact-Pack source-hash binding parity | historisch / Regression |
 | M36 | Persisted H8 legacy-binding compatibility | historisch / Regression |
-| M37 | `PPM679_REAL_EXECUTION_BLOCKED` – non-repairable PPM/PSERC inner reason visibility | **AKTIV / HISTORY-AUTORITÄT ZUERST** |
+| M37 | `PPM679_REAL_EXECUTION_BLOCKED` – non-repairable PPM/PSERC inner reason visibility | **AKTIV / PRODUCT_FIX** |
 
-## M37 – EXAKTE GRENZE
+## M37 – PASS-GRENZE
 
-Positiv:
-- vorhandener verschachtelter nicht-reparierbarer `error_code` oder Reason-Code bleibt im äußeren BLOCKED sichtbar.
+BEFORE auf aktuellem Main:
+- bestehender M01–M37-Runner muss exakt M37 als ersten FAIL reproduzieren.
 
-Negativ:
-- ohne vorhandenen konkreteren Grund wird nichts erfunden; der Sammelcode bleibt `PPM679_REAL_EXECUTION_BLOCKED`.
-- reparierbare `BLOCKED_CONTENT_*`, `BLOCKED_WAVE2_*`, `BLOCKED_CANONICAL_RUNTIME_LINK_*` bleiben unverändert `FACHWORKFLOW_REPAIR_REQUIRED`.
+AFTER auf Produktkandidat:
+- kompletter bestehender M01–M37-Runner = `GESAMT PASS`;
+- hardlock = PASS;
+- hardlock-base = PASS;
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`.
 
 Produktions-Rootcause: **UNKNOWN BIS NEUER LIVE-LAUF**.
 107008: nicht erreicht.
