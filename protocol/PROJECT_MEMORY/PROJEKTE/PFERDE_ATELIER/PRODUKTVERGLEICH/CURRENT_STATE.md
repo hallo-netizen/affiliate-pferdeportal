@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-11
-STATUS: AKTIV / UPC 0.8.5 WORDPRESS-LIVE FAIL-CLOSED PASS / UPC 0.8.6 LOCAL HARD + FRESH-ZIP + READ-ONLY ARCHITEKTURAUDIT PASS, LIVE OFFEN / 175ER RESEARCH-/FACHKLASSIFIKATION 150 V1-PRODUKTGRUPPEN + 25 V1-NOT-APPLICABLE + 0 UNGEKLÄRT / READINESS-PROFILPHASE AKTIV
+STATUS: AKTIV / UPC 0.8.5 WORDPRESS-LIVE FAIL-CLOSED PASS / UPC 0.8.6 LOCAL HARD + FRESH-ZIP + READ-ONLY ARCHITEKTURAUDIT PASS, LIVE OFFEN / 175ER FACHDISPOSITION 150 V1-PRODUKTGRUPPEN + 25 V1-NOT-APPLICABLE + 0 UNGEKLÄRT / READINESS-PROFILPHASE AKTIV
 
 ## AUTORITÄT
 
@@ -10,8 +10,10 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - aktuelle Arbeit: `HOBBYRAUM.md`
 - Fehlerdetails: `FEHLERQUELLEN.md`
 - Ziel: `ZIELVERTRAG_V2.md`
+- finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...`, `63_...`, `64_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -50,29 +52,37 @@ SHA-256 `17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
 - `UNRESOLVED_COVERAGE`: **0**
 - Summe: 175/175.
 
-Die 25 V1-NOT-APPLICABLE-Keys sind bewusst fail-closed und erzeugen kein Produktpaar. Manche können später nur über einen eigenen separaten Service-/Versicherungs-/Tool-/Wissensvertrag weitergeführt werden.
+Die 25 V1-NOT-APPLICABLE-Keys sind bewusst fail-closed und erzeugen kein Produktpaar.
 
 ## READINESS-GAP
 
-Exakter Gegencheck der gebundenen UPC-0.8.6-Fresh-ZIP:
-- Group Registry: 175;
-- aktuelle Vergleichsprofile/Decision-Policies: **7**.
+Exakter UPC-0.8.6-Gegencheck:
+- 175 Registry-Gruppen;
+- **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
+- damit **143/150 V1-fähige Gruppen maschinenfest noch offen**.
 
-Vorhandene Profile:
-`regendecken`, `winterdecken`, `uebergangsdecken`, `stalldecken`, `unterdecken`, `schermaschinen`, `steigbuegel`.
+Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, weitere Profilspezifikationen für **7 Gruppen** erstellt:
+- `high-neck-decken`;
+- `deckengurte`;
+- `deckentaschen-und-aufbewahrung`;
+- `stallhalfter`;
+- `knotenhalfter`;
+- `sicherheitshalfter`;
+- `fohlenhalfter`.
 
-Damit besitzen **143 der 150 V1-fähigen Produktgruppen noch kein maschinenfestes aktuelles Vergleichsprofil/Decision-Policy**.
-Das ist kein Codefehler, sondern der jetzt aktive Daten-/Fachbindungsblock.
+Diese sieben Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
 
 ## AKTUELLER ARBEITSBLOCK
 
-Profile/Faktenmatrizen in Registry-Reihenfolge source-bound vorbereiten; keine manuellen Endpärchen.
+Nächster zusammenhängender Profilblock in Registry-Reihenfolge:
+`pferdebuersten` -> `striegel` -> `kardaetschen`.
 
-Erste V1-fähige Gruppe ohne Profil:
-`pferdedecken-high-neck-decken` / `high-neck-decken`.
+Danach `schermaschinen` überspringen, weil bereits maschinenfestes 0.8.6-Profil vorhanden, und mit der nächsten V1-Gruppe ohne Profil fortfahren.
 
-Danach große fachlich zusammenhängende Profilblöcke, nicht ein Pluginrelease pro Gruppe.
-Erst ein sinnvoll gebündelter Datenstand wird technisch materialisiert und anschließend wieder hart positiv/negativ/Fresh-ZIP geprüft.
+Arbeitsweise:
+source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> in sinnvollen Blöcken sammeln -> erst dann technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
+
+Finale konkrete Paarentscheidung bleibt ausschließlich beim Produktvergleichs-Plugin und muss aus aktuellem Product Knowledge regelmäßig neu bewertet werden.
 
 Kein SEO vor fachlich zulässigem Kandidatenuniversum.
 Kein Merge.
