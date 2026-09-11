@@ -175,10 +175,10 @@ def _bound_item(ctx: Mapping[str, Any], canonical_id: str, slot: str) -> tuple[d
     return meta,rel
 
 def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], meta: Mapping[str, Any], release_item: Mapping[str, Any]) -> dict:
-    fact_pack=request.get("fact_pack"); item=request.get("production_plan_item")
+    fact_pack=request.get("fact_pack"); item=request.get("production_plan_item"); header=request.get("production_plan_header")
     if not isinstance(fact_pack,dict) or not fact_pack: raise Blocked("BOUND_FACT_PACK_MISSING")
     if not isinstance(item,dict) or not item: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISSING")
-    if request.get("production_plan_header")!=ctx["plan_header"]: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
+    if not isinstance(header,dict) or not header or header.get("contract")!="production_plan_v4" or "items" in header: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
     if request.get("workflow_release_item")!=release_item: raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_MISMATCH")
     if request.get("workflow_release_metadata")!=ctx["release_metadata"]: raise Blocked("BOUND_WORKFLOW_RELEASE_METADATA_MISMATCH")
     if str(release_item.get('plan_slot') or '')!=str(request.get('plan_slot') or ''): raise Blocked('BOUND_RELEASE_PLAN_SLOT_MISMATCH')
