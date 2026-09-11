@@ -13,12 +13,14 @@ Allowed bound tasks on this branch:
    follow `isolated_system4/FIRST_ARTICLE_TASK.md` exactly.
 3. First full-rule article test:
    follow `isolated_system4/FULL_RULE_ARTICLE_TASK.md` exactly.
+4. Full real 7/7 System-4 batch test:
+   follow `isolated_system4/FULL_RULE_BATCH_TASK.md` exactly.
 
-For task 3 only, Codex may READ repository files outside `isolated_system4/**` solely to identify current authoritative rule texts/specifications and pure checker/tool inputs. It may not modify, import, execute, wrap, call or runtime-depend on old orchestration/workflow code. All implementation changes remain inside `isolated_system4/**`.
+For tasks 3 and 4 only, Codex may READ repository files outside `isolated_system4/**` solely to identify current authoritative rule texts/specifications and pure checker/tool inputs. It may not modify, import, execute, wrap, call or runtime-depend on old orchestration/workflow code. All implementation changes remain inside `isolated_system4/**`.
 
 Rules:
 - no modification outside `isolated_system4/**`;
-- generated runtime/article/output files must stay in a temporary directory outside the repository unless a task explicitly says otherwise;
+- generated runtime/article/output files must stay in a temporary directory outside the repository unless a bound task explicitly authorizes a narrow proof persistence exception under `isolated_system4/**`;
 - no import/copy/wrap/reuse of runtime, handoffs, workers, gates, signers, contracts or state machines from concepts 1–3;
 - no legacy Cloud Entry or STARTMASTER on this branch;
 - no merge;
