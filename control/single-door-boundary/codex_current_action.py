@@ -159,11 +159,14 @@ def validate_fachworkflow_pass(repo:Path,a:Mapping[str,Any],it:Mapping[str,Any],
     if not isinstance(fp,dict) or not fp or not isinstance(pi,dict) or not pi: raise ViewError('FACH_PRODUCTION_CONTEXT_INCOMPLETE')
     source_id=c['source_sha256']
     if fp.get('contract')!='canonical_fact_pack_v1' or str(fp.get('source_snapshot_id') or '')!=source_id: raise ViewError('FACT_PACK_SOURCE_ID_MISMATCH')
-    meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'source_snapshot_id':source_id,'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
+    meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'source_snapshot_id':source_id,'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
+    if 'plan_slot' in pi: raise ViewError('PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
     for k,v in expected_pi.items():
         if pi.get(k)!=v: raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH:'+k)
-    qb=pi.get('quality_binding'); wc=qb.get('wordpress_category') if isinstance(qb,dict) else None
-    if not isinstance(wc,dict) or str(wc.get('slug') or '')!=str(meta.get('category') or '') or wc.get('taxonomy')!='category': raise ViewError('PLAN_ITEM_CATEGORY_MISMATCH')
+    cb=pi.get('category_binding'); qb=pi.get('quality_binding'); wc=qb.get('wordpress_category') if isinstance(qb,dict) else None
+    category=(cb.get('slug') if isinstance(cb,dict) else None) or (wc.get('slug') if isinstance(wc,dict) else None)
+    if str(category or '')!=str(meta.get('category') or ''): raise ViewError('PLAN_ITEM_CATEGORY_MISMATCH')
+    if isinstance(wc,dict) and wc.get('taxonomy') not in (None,'category'): raise ViewError('PLAN_ITEM_CATEGORY_TAXONOMY_MISMATCH')
     if ph!=c['plan_header'] or ri!=bound['release_item'] or rm!=c['release_metadata']: raise ViewError('BOUND_RUNTIME_CONTEXT_MISMATCH')
     _validate_release_metadata_identity(rm,batch,c['count']); return q
 

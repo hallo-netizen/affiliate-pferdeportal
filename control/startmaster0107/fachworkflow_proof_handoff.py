@@ -120,13 +120,18 @@ def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], me
     if request.get("production_plan_header")!=ctx["plan_header"]: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
     if request.get("workflow_release_item")!=release_item: raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_MISMATCH")
     if request.get("workflow_release_metadata")!=ctx["release_metadata"]: raise Blocked("BOUND_WORKFLOW_RELEASE_METADATA_MISMATCH")
+    if str(release_item.get('plan_slot') or '')!=str(request.get('plan_slot') or ''): raise Blocked('BOUND_RELEASE_PLAN_SLOT_MISMATCH')
+    if release_item.get('canonical_article_id')!=request.get('canonical_article_id'): raise Blocked('BOUND_RELEASE_CANONICAL_ID_MISMATCH')
     source_id=ctx['source_sha256']
     if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')
-    expected={"canonical_article_id":request["canonical_article_id"],"plan_slot":request["plan_slot"],"source_snapshot_id":source_id,"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
+    if 'plan_slot' in item: raise Blocked('BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
+    expected={"canonical_article_id":request["canonical_article_id"],"source_snapshot_id":source_id,"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
     for k,v in expected.items():
         if item.get(k)!=v: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISMATCH:"+k)
-    quality=item.get("quality_binding"); category=quality.get("wordpress_category") if isinstance(quality,dict) else None
-    if not isinstance(category,dict) or not category.get('name') or category.get("slug")!=meta.get("category") or category.get("taxonomy")!="category": raise Blocked("BOUND_WORDPRESS_CATEGORY_MISMATCH")
+    cb=item.get('category_binding'); quality=item.get("quality_binding"); category=quality.get("wordpress_category") if isinstance(quality,dict) else None
+    slug=(cb.get('slug') if isinstance(cb,dict) else None) or (category.get('slug') if isinstance(category,dict) else None)
+    if str(slug or '')!=str(meta.get('category') or ''): raise Blocked("BOUND_WORDPRESS_CATEGORY_MISMATCH")
+    if isinstance(category,dict) and category.get('taxonomy') not in (None,'category'): raise Blocked('BOUND_WORDPRESS_CATEGORY_TAXONOMY_MISMATCH')
     return dict(item)
 
 def _validate_worker_stage_proofs(value: Any) -> None:
@@ -200,7 +205,7 @@ $seedItem=$item; $seedItem['quality_binding']['wordpress_category']['id']=900001
 $bundle=['contract'=>'canonical_fact_pack_import_v1','fact_packs'=>[$pack]]; $imp=PPM679_Admin::import_fact_pack_bundle($bundle);
 if(empty($imp['ok'])){echo json_encode(['ok'=>false,'status'=>'PPM_FACT_PACK_IMPORT_BLOCKED','detail'=>$imp],JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);exit(0);}
 $expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??'')); if($expectedSource===''){fwrite(STDERR,"SOURCE_HASH_BINDING_MISMATCH\n");exit(2);} $item['source_hashes']=[$expectedSource];
-$plan=$header; unset($plan['items']); $plan['items']=[$item]; if((string)($plan['contract']??'')!=='production_plan_v4'){fwrite(STDERR,"PRODUCTION_PLAN_CONTRACT_INVALID\n");exit(2);}
+$plan=$header; unset($plan['items']); $plan['items']=[$item]; if(!in_array((string)($plan['contract']??''),['production_plan_v4','production_plan_v5'],true)){fwrite(STDERR,"PRODUCTION_PLAN_CONTRACT_INVALID\n");exit(2);}
 $batch=['contract'=>'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status'=>'PASS','item_count'=>1,'maximum_articles'=>0,'maximum_articles_per_type'=>0,'publish_allowed'=>false,'content_or_format_payload_present'=>false,'items'=>[['title'=>(string)($item['topic']??''),'target_keyword'=>(string)($item['target_keyword']??''),'category'=>(string)($slot['category_slug']??''),'article_type'=>(string)($item['article_type']??''),'plan_slot'=>$externalSlot]]];
 $tmp=$batch; unset($tmp['batch_sha256']); $batch['batch_sha256']=PSERC_Stable_Json::hash($tmp); $snapshot=['ok'=>true,'version'=>'6.7.9','plan'=>PPM679_Editorial_Plan_Registry::plan()];
 $runtime=nd_runtime($plan,'startmaster107007-'.substr(hash('sha256',$cid.'|'.$payload['final_article_sha256'].'|'.$externalSlot),0,40)); $r=PSERC_PPM_Intake_Bridge::execute($batch,$plan,$runtime,$snapshot); echo json_encode($r,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
