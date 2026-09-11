@@ -1,0 +1,80 @@
+name: TEMP PR229 Apply Source ID Binding
+on:
+  push:
+    branches:
+      - hobbyroom/107007-source-hash-kiss-20260911
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply one KISS fact-pack identity binding and self-delete
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, py_compile
+
+          def sha(path):
+              return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+          def load(path):
+              return json.loads(Path(path).read_text(encoding='utf-8'))
+          def save(path,obj):
+              Path(path).write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+
+          handoff=Path('control/startmaster0107/fachworkflow_proof_handoff.py')
+          text=handoff.read_text(encoding='utf-8')
+          old="    if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')"
+          new=old+"\n    if str(fact_pack.get('fact_pack_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_ID_MISMATCH')"
+          if text.count(old)!=1:
+              raise SystemExit('EXPECTED_FACT_PACK_SOURCE_BINDING_NOT_UNIQUE')
+          handoff.write_text(text.replace(old,new,1),encoding='utf-8')
+          py_compile.compile(str(handoff),doraise=True)
+
+          step_path=Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json')
+          step=load(step_path)
+          old_instruction='fact_pack.source_snapshot_id und production_plan_item.source_snapshot_id müssen exakt fachworkflow_handoff.raw_context_binding.source_snapshot_id entsprechen.'
+          new_instruction='fact_pack.source_snapshot_id, fact_pack.fact_pack_id und production_plan_item.source_snapshot_id müssen exakt fachworkflow_handoff.raw_context_binding.source_snapshot_id entsprechen.'
+          instruction=str(step.get('instruction') or '')
+          if instruction.count(old_instruction)!=1:
+              raise SystemExit('EXPECTED_107007_FACT_PACK_INSTRUCTION_NOT_UNIQUE')
+          step['instruction']=instruction.replace(old_instruction,new_instruction,1)
+          target='control/startmaster0107/fachworkflow_proof_handoff.py'
+          matches=[x for x in step.get('authorized_inputs',[]) if isinstance(x,dict) and x.get('ref')==target]
+          if len(matches)!=1:
+              raise SystemExit('HANDOFF_AUTHORIZED_INPUT_NOT_UNIQUE')
+          matches[0]['sha256']=sha(handoff)
+          save(step_path,step)
+
+          current_path=Path('control/startmaster0107/CURRENT_STATE.json')
+          current=load(current_path)
+          current['execution_gate']['bundle_sha256']=sha(step_path)
+          save(current_path,current)
+
+          start_path=Path('control/startmaster0107/PFERDE_ATELIER_START_HERE.json')
+          start=load(start_path)
+          start['current_state_sha256']=sha(current_path)
+          save(start_path,start)
+
+          assert "fact_pack.get('fact_pack_id')" in handoff.read_text(encoding='utf-8')
+          assert new_instruction in load(step_path)['instruction']
+          print('HANDOFF_SHA256='+sha(handoff))
+          print('STEP_SHA256='+sha(step_path))
+          print('CURRENT_STATE_SHA256='+sha(current_path))
+          print('SOURCE_ID_BINDING_KISS_APPLIED')
+          PY
+
+          rm -f .github/workflows/temp-pr229-apply-source-id-binding.yml
+          git config user.name 'hallo-netizen'
+          git config user.email 'hallo@oliver-beil.de'
+          git add control/startmaster0107/fachworkflow_proof_handoff.py \
+                  control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json \
+                  control/startmaster0107/CURRENT_STATE.json \
+                  control/startmaster0107/PFERDE_ATELIER_START_HERE.json \
+                  .github/workflows/temp-pr229-apply-source-id-binding.yml
+          git diff --cached --check
+          git commit -m 'KISS: bind canonical fact-pack ID to source snapshot ID'
+          git push origin HEAD:hobbyroom/107007-source-hash-kiss-20260911
