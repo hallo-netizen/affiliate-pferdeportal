@@ -16,6 +16,9 @@ ALLOWED={
 def show(workspace: Path) -> int:
  p=workspace/'state.json'
  if not p.is_file(): print('SYSTEM4_CODEX_ENTRY_FAIL:STATE_MISSING'); return 2
+ v=subprocess.run([sys.executable,str(CONTROLLER),'verify',str(workspace)],text=True,capture_output=True)
+ if v.returncode:
+  print('SYSTEM4_CODEX_ENTRY_FAIL:'+v.stdout.strip().removeprefix('SYSTEM4_FAIL:')); return v.returncode
  s=json.loads(p.read_text(encoding='utf-8')); phase=s.get('phase')
  if phase not in ALLOWED: print('SYSTEM4_CODEX_ENTRY_FAIL:UNKNOWN_PHASE'); return 2
  print('SYSTEM4_CODEX_ENTRY_PASS:'+phase)
