@@ -13,7 +13,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `75_...`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `77_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -61,7 +61,7 @@ Exakter technischer UPC-0.8.6-Stand:
 - **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
 - **143/150 V1-fähige Gruppen technisch noch offen**.
 
-Seit der Readiness-Baseline wurden source-bound, aber **nicht materialisiert**, zusätzliche Profilspezifikationen für **39 Gruppen** erstellt.
+Seit der Readiness-Baseline wurden source-bound, aber **nicht materialisiert**, zusätzliche Profilspezifikationen für **45 Gruppen** erstellt.
 
 Aktenübersicht:
 - 62: High-Neck-Decken;
@@ -77,32 +77,36 @@ Aktenübersicht:
 - 72: Werkzeughalter / Namensschilder / Stalltafeln;
 - 73: Whiteboards / Hoftraktoren / Hoflader-Zubehör;
 - 74: Hofbesen / Hofabsperrungen / Rampen;
-- 75: Hofbeleuchtung / Stallbeleuchtung / Frostwächter.
+- 75: Hofbeleuchtung / Stallbeleuchtung / Frostwächter;
+- 76: Lüfter / Zeitschaltuhren / Kameras;
+- 77: Mobile Unterstände / Windschutz / Dachrinnen.
 
 Wichtige Fail-closed-Bindungen der jüngsten Akten:
-- Hoflader-Zubehör nur innerhalb Anbaugerät-Subtyp; keine Cross-Brand-Aufnahmekompatibilität erfinden;
-- Rampen-Traglast nur bei identischer Einheit/Bedingung vergleichen;
-- Hofbeleuchtung ≠ Stallbeleuchtung;
-- Stallbeleuchtung benötigt source-bound Tierstall-/Ammoniakeignung;
-- technischer Frostwächter darf nicht als Tierzonen-/Heu-/Stroh-Heizer umgedeutet werden.
+- Lüfter: konkretes Cross-Brand-Paar erst nach beidseitig gebundener Motor-/Regelvariante;
+- Zeitschaltuhren: keine Stall-/Feuerstaubfreigabe aus IP44 ableiten;
+- Kameras: Farm-/Stall-PTZ-IP-Klasse mit lokaler Speicherung; keine Wohnraum-/Baby-/Cloud-only-Kamera einschleusen;
+- mobile Unterstände: starre versetzbare Konstruktion, nicht `weidezelt`;
+- Windschutz: luftdurchlässige Netzklasse, keine geschlossene Plane;
+- Dachrinnen: halbrunde Kunststoff-Systemklasse RG100; hydraulische Dachflächeneignung nicht pauschalisieren.
 
-Diese 39 Specs ändern den technischen Profilbestand nicht.
+Diese 45 Specs ändern den technischen Profilbestand nicht.
 
 ## AKTUELLER ARBEITSBLOCK
 
-Registry nach `frostwaechter` frisch direkt aus der Portalstruktur + finaler V1-Disposition geprüft:
-- `luefter-im-stall` = V1-fähig;
-- `wasserleitungen-im-stall` = `PRODUCT_COMPARISON_V1_NOT_APPLICABLE` -> überspringen;
-- `zeitschaltuhren-im-stall` = V1-fähig;
-- `kameras-im-stall` = V1-fähig.
+Registry nach `dachrinnen-am-unterstand` frisch direkt aus der Portalstruktur gelesen:
+- `unterstand-beleuchtung`;
+- danach `boxentueren`;
+- danach `boxenriegel`;
+- danach `boxengitter`.
 
 Nächster Profilblock:
-`luefter-im-stall` -> `zeitschaltuhren-im-stall` -> `kameras-im-stall`.
+`unterstand-beleuchtung` -> `boxentueren` -> `boxenriegel` -> `boxengitter`.
 
 Vor Pairing hart zu normalisieren:
-- Lüfter: Bau-/Montage-/Leistungsklasse, Stall-/Landwirtschaftseignung und Schutzklasse;
-- Zeitschaltuhren: physische Netz-/Schaltklasse, Kanalzahl, Schaltleistung und Installationsart;
-- Kameras: Überwachungsklasse, Innen/Außen, Netz/WLAN, lokale/cloudbasierte Speicherung sowie Tierstall-Eignung nicht vermischen.
+- Unterstand-Beleuchtung: konkrete Außen-/Unterstands-Leuchtenklasse; nicht Hof-/Stallbeleuchtung nur über Einsatzort duplizieren;
+- Boxentüren: gleiche Türbauart und Öffnungs-/Füllungsklasse;
+- Boxenriegel: gleiche Verriegelungsmechanik und Montageklasse;
+- Boxengitter: gleiche Gitter-/Front-/Montageklasse; keine komplette Boxenfront gegen Einzelgitter.
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> in sinnvollen Blöcken sammeln -> erst dann technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
