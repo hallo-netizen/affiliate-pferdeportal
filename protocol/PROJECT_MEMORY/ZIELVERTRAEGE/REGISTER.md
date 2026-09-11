@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-09-08
+STAND: 2026-09-11
 
 ## Pflichtfelder
 
@@ -137,6 +137,44 @@ VERANTWORTLICHER BEREICH:
 
 PASS-BEDINGUNG:
 Nicht hier dupliziert. Vollständig aus der Hauptquelle und der gebundenen Release-Governance lesen.
+
+AKTUELLER ARBEITSSTATUS:
+Durch explizite Nutzerentscheidung vom 11.09.2026 pausiert zugunsten des ADCELL-Auftrags. Nicht erfüllt, nicht abgelöst, kein PASS.
+
+NACHFOLGER:
+keiner belegt.
+
+
+## ZV-AFFILIATE-ADCELL-001 – ADCELL vollautomatische API-v2-Integration
+
+TITEL:
+ADCELL – AUTOMATISCHE PROGRAMM-, PRODUKT-, BANNER- UND DEEPLINK-INTEGRATION ÜBER API V2
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / AFFILIATE / ADCELL
+
+STATUS:
+AKTIV
+
+FASSUNG:
+2026-09-11
+
+HAUPTQUELLE:
+Branch `affiliate-release-current` →
+`protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
+
+PASS-BEDINGUNG:
+- exakter ADCELL-API-v2-Authentifizierungsvertrag autoritativ belegt;
+- provider-spezifisches ADCELL-Routing ohne Awin-Fallthrough;
+- accepted+active Programme nur über explizite `programId`-Allowlist, fail-closed;
+- CSV/Banner/Deeplink automatisch über dokumentierte API-v2-Wege;
+- kein manueller Import/Export bzw. keine manuelle CSV-URL als Normalbetriebs-Voraussetzung;
+- kanonischer Positiv-/Negativ-/Gesamtworkflow-/Fresh-Unpack-/Source-ZIP-Identity-PASS;
+- echter ADCELL-Live-API- und WordPress/MariaDB-End-to-End-PASS;
+- alte/fachfremde accepted Partnerschaften ohne Freigabe bleiben gesperrt.
 
 NACHFOLGER:
 keiner belegt.
