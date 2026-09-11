@@ -1,0 +1,47 @@
+name: System3 LanguageTool Real
+
+on:
+  pull_request:
+    paths:
+      - 'isolated_system3/**'
+      - '.github/workflows/system3-languagetool-real.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  languagetool-real:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Real positive and negative LanguageTool test
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from isolated_system3.language_tool import check_text, LanguageToolFail
+
+          evidence = json.loads(Path('isolated_system3/live_fixture/stage_evidence.json').read_text(encoding='utf-8'))
+          text = evidence['DRAFT']['article']
+          result = check_text(text)
+          assert result['status'] == 'PASS'
+          assert result['endpoint'] == 'https://api.languagetool.org/v2/check'
+          assert isinstance(result['matches'], list)
+          print('SYSTEM3_LANGUAGETOOL_REAL_POSITIVE_PASS')
+          print('SYSTEM3_LANGUAGETOOL_MATCH_COUNT=' + str(result['match_count']))
+
+          try:
+              check_text('   ')
+          except LanguageToolFail as exc:
+              assert str(exc) == 'LANGUAGETOOL_TEXT_MISSING'
+              print('SYSTEM3_LANGUAGETOOL_NEGATIVE_PASS')
+          else:
+              raise SystemExit('SYSTEM3_LANGUAGETOOL_NEGATIVE_FAIL')
+          PY
