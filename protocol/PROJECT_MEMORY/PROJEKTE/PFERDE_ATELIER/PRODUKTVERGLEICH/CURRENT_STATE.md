@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-11
-STATUS: AKTIV / UPC 0.8.5 LIVE FAIL-CLOSED PASS / UPK 0.5.1 LIVE-BATCH 17/17 ABGESCHLOSSEN / 175-GRUPPEN-COVERAGE SOURCE-BOUND 78/60/37 / PLUGIN = FINALE PAARINSTANZ / NÄCHSTER GAP MISTLAGERUNG
+STATUS: AKTIV / UPC 0.8.5 LIVE FAIL-CLOSED PASS / UPK 0.5.1 LIVE-BATCH ABGESCHLOSSEN / ERSTER 175ER RESEARCH-DURCHLAUF 97/78/0 / PLUGIN = FINALE PAARINSTANZ / TECHNISCHE GESAMTPRÜFUNG JETZT ZULÄSSIG
 
 ## AUTORITÄT
 
@@ -16,10 +16,9 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - Testgrenzen-/UPK-0.5.1-Beleg: `AKTENSCHRANK/12_V085_LIVE_INVENTORY_GAP_UPK051_HARD_LOCAL_RECEIPT.md`
 - 0.5.1 WordPress-Live-Batch: `AKTENSCHRANK/23_UPK051_WORDPRESS_LIVE_BATCH_RECEIPT_20260911.md`
 - A–J-Checkpoint: `AKTENSCHRANK/25_MARKTRECHERCHE_COVERAGE_175_A_J_20260911.md`
-- Research K–O: `AKTENSCHRANK/26_...` bis `30_...`
+- Research K–T: `AKTENSCHRANK/26_...` bis `37_...` mit Architekturbeleg `31_...`
 - finale Plugin-Autorität/Refresh-Regel: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
-- Research Batch P: `AKTENSCHRANK/32_MARKTRECHERCHE_BATCH_P_20260911.md`
-- aktuelle Coverage-Fortschreibung: `AKTENSCHRANK/33_MARKTRECHERCHE_COVERAGE_DELTA_K_P_20260911.md`
+- aktueller 175er Research-Coverage-Beleg: `AKTENSCHRANK/38_MARKTRECHERCHE_COVERAGE_DELTA_K_T_20260911.md`
 
 ## INSTALLIERTER / GEPRÜFTER TECHNISCHER STAND
 
@@ -63,59 +62,46 @@ Lokal belegt:
 
 ## WORDPRESS-LIVE-BATCH 0.5.1
 
-Realer Batch über die alte freigegebene Recherchebasis:
+Realer Batch über alte freigegebene Recherchebasis:
 - 17/17 Gruppen verarbeitet;
 - PASS 6;
 - TEIL-PASS 8;
 - BLOCKED 3;
-- `pairing-ready 9` laut Product-Knowledge-Batchsummary.
+- `pairing-ready 9` laut Batchsummary.
 
 Grenze:
 Die Altbasis umfasste nur 17 Gruppen / 102 Kandidaten. Sie ist keine 175-Gruppen-Marktrecherche und kein Markt-Vollständigkeitsbeleg.
 
-`Research-Vollständigkeit = UNPROVEN`.
+## ERSTER RESEARCH-DURCHLAUF 175/175
 
-## RESEARCH-COVERAGE 175
+Autoritativer aktueller Beleg:
+`AKTENSCHRANK/38_MARKTRECHERCHE_COVERAGE_DELTA_K_T_20260911.md`
 
-Autoritativer A–J-Checkpoint:
-- `EVIDENCE_PRESENT`: 70;
-- `PARTIAL_AMBIGUOUS`: 57;
-- `NO_GROUP_EVIDENCE`: 48;
-- Summe 175/175.
-
-Danach source-bound Research K–P:
-- K Deckengurte -> Evidence;
-- L Deckentaschen/Aufbewahrung -> Evidence;
-- M Sicherheitshalfter -> Evidence;
-- N Satteltransport -> Evidence;
-- O Sperrriemen -> Evidence;
-- P Frostwächter -> Partial;
-- P Lüfter im Stall -> Partial;
-- P Wasserleitungen im Stall -> Partial;
-- P Mistboy -> Evidence;
-- P Schubkarren -> Evidence;
-- P Mistcontainer -> Evidence.
-
-Aktueller Research-Coverage-Stand gemäß Akte 33:
-- `EVIDENCE_PRESENT`: **78**;
-- `PARTIAL_AMBIGUOUS`: **60**;
-- `NO_GROUP_EVIDENCE`: **37**;
+Aktuell:
+- `EVIDENCE_PRESENT`: **97**;
+- `PARTIAL_AMBIGUOUS`: **78**;
+- `NO_GROUP_EVIDENCE`: **0**;
 - Summe: **175/175**.
 
-Diese Werte bedeuten **nicht** Markt-Vollständigkeit, Pairing-Ready, Product Knowledge oder SEO-PASS.
+`0 NO_GROUP_EVIDENCE` bedeutet nur:
+Jede Registry-Identität wurde betrachtet und besitzt jetzt konkrete Research-Evidence oder einen sichtbaren source-bound Fach-/Produktklassen-/Artikeltyp-/Quellenblock.
 
-Die sichtbare Bezeichnung `Weidezaungeräte` existiert weiterhin mit zwei getrennten Registry-Identitäten:
-- `weidezaungeraete`;
-- `weide-zauntechnik-weidezaungeraete`.
+Es bedeutet ausdrücklich nicht:
+- Markt-Vollständigkeit;
+- Product Knowledge vollständig;
+- 175 READY/Pairing-Ready;
+- 175 PRODUCT_COMPARISON-V1-fähige Gruppen;
+- SEO-PASS;
+- fertige Dossiers.
 
-Keine stille Zusammenführung.
+Die 78 `PARTIAL_AMBIGUOUS` enthalten unterschiedliche Ursachen und müssen künftig in echte Ursachenklassen zerlegt werden, statt pauschal erneut recherchiert zu werden.
 
 ## FINALE PAAR-/AKTUALISIERUNGSAUTORITÄT
 
 Verbindlich:
-Die letzte Entscheidung, welche konkreten Produkte tatsächlich als A-vs-B-Vergleich zulässig sind und ein Dossier erhalten dürfen, liegt beim PRODUKTVERGLEICH-System/Plugin.
+Die letzte Entscheidung, welche konkreten Produkte als A-vs-B-Vergleich zulässig sind und ein Dossier erhalten dürfen, liegt beim PRODUKTVERGLEICH-System/Plugin.
 
-Research/Product Knowledge liefert aktuellen Produktbestand und Fakten.
+Research/Product Knowledge liefert Produktbestand/Fakten.
 SEO liefert Nachfrage-/A-vs-B-/Keyword-/Kannibalisierungssignale.
 SEO darf keine fachlich unzulässige Paarung erzwingen.
 
@@ -132,27 +118,26 @@ Paare können dadurch neu entstehen, entfallen oder BLOCKED werden.
 Dauerbeleg:
 `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`.
 
-## AKTUELLES GESAMTZIEL
-
-Für alle 175 autoritativen Vergleichsgruppen:
-`Marktrecherche -> echte Herstellerfamilien -> aktuelle konkrete Modelle -> Herstellerquellen -> gruppenspezifische Faktenmatrix -> Sinn-/Nutzungsebenenprüfung -> Plugin bestimmt fachlich zulässige A-vs-B-Kandidaten -> SEO-Evidenz -> Plugin trifft finale Paar-/Dossierentscheidung -> später Textproduktion`.
-
-Keine Top-N-/Pair-Cap.
-Keine automatische Übernahme bloßer Research-Funde.
-Keine Markt-Vollständigkeitsbehauptung ohne gruppenspezifischen Beleg.
-
 ## AKTUELLER ARBEITSBLOCK
 
-Keine weitere Pluginentwicklung.
+Der erste breite Marktrecherche-Durchlauf ist abgeschlossen.
 
-Die laufende Arbeit ist reine Markt-/Produktrecherche der verbleibenden `NO_GROUP_EVIDENCE`-Keys.
+Jetzt **kein blindes Weiterrecherchieren**.
 
-Erster verbleibender echter Gap in Registry-Reihenfolge:
-`mistlagerung`.
+Erster zulässiger nächster Schritt:
+Bestehende UPC-0.8.5-/UPK-0.5.1-Logik read-only hart gegen den nun vollständigen Fachstand prüfen:
+1. Plugin ist tatsächlich letzte Paarinstanz;
+2. Paaruniversum wird aus aktuellem gebundenem Product Knowledge berechnet;
+3. neue/entfallene/ungültige Produkte führen bei Neubewertung korrekt zu neuen/entfallenen/BLOCKED Paaren;
+4. bloße Research-Evidence kann kein Paar erzeugen;
+5. Service/Knowledge/Checklisten-/nicht V1-fähige Registry-Gruppen bleiben fail-closed;
+6. keine Top-N-/Pair-Cap;
+7. SEO kann fachliche Paarfreigabe nicht überschreiben.
 
-Danach nur den jeweils nächsten echten Gap aus der source-bound Coverage-Fortschreibung nehmen.
+Nur eine konkret belegte technische Lücke darf anschließend einen KISS-Fix auslösen.
 
-Erst nach einem großen belastbaren Forschungsblock wird das bestehende Product Knowledge gebündelt aktualisiert und anschließend geprüft, ob die bestehende Pluginlogik die finale Paarentscheidung + regelmäßige Neubewertung bereits vollständig erfüllt oder ein KISS-Fix erforderlich ist.
+Parallel fachlich danach:
+78 Partial-Gruppen nach Ursache klassifizieren und nur `MORE_MARKET_RESEARCH_REQUIRED`-Fälle erneut recherchieren.
 
 Vor jeder zukünftigen Plugin-Übergabe zwingend:
 **exakt auszugebende ZIP lokal positiv + negativ/Mutation + gegen den gesamten aktuellen Produktvergleichsworkflow prüfen.**
@@ -160,13 +145,7 @@ Vor jeder zukünftigen Plugin-Übergabe zwingend:
 ## NACHBARWEG
 
 SEO/TEXT/ACM ist getrennt und wird hier nicht verändert.
-Letzter separat geprüfter ACM-Head aus der Abschlussprüfung:
-`ba511c2caec5e970948cf8e5c0139bcfea017ce2`
-
-Dort erster echter Realtest-Blocker:
-`CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`.
-
-Keine Produktvergleichs-Anbindung, solange der Nachbarweg nicht separat freigegeben ist.
+Keine Produktvergleichs-Anbindung ohne separate Nachbarfreigabe.
 
 Kein Merge.
 Kein Publish.
