@@ -14,7 +14,7 @@ jobs:
   codex-draft:
     runs-on: ubuntu-24.04
     outputs:
-      article: ${{ steps.codex.outputs.final-message }}
+      article: ${{ steps.codex.outputs.article }}
     steps:
       - name: Checkout only to stage System 3
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -47,15 +47,27 @@ jobs:
             exit 1
           fi
           echo SYSTEM3_HISTORY_FREE_MINIREPO_PASS
-      - name: Run Codex in isolated mini repository
+      - name: Install Codex CLI
+        run: npm install -g @openai/codex
+      - name: Run real Codex CLI in isolated mini repository
         id: codex
-        uses: openai/codex-action@86365089eb2b84e0a8fb0717b304f8bdcb13b20e
-        with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          working-directory: .
-          permission-profile: ':read-only'
-          safety-strategy: drop-sudo
-          prompt-file: codex_prompt.md
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$(mktemp)"
+          codex exec --ephemeral --sandbox read-only --skip-git-repo-check --output-last-message "$out" - < codex_prompt.md
+          test -s "$out" || { echo SYSTEM3_CODEX_OUTPUT_MISSING; exit 1; }
+          words=$(wc -w < "$out")
+          test "$words" -ge 120 || { echo SYSTEM3_CODEX_OUTPUT_TOO_SHORT:$words; exit 1; }
+          delim="SYSTEM3_EOF_${RANDOM}_${RANDOM}"
+          {
+            echo "article<<$delim"
+            cat "$out"
+            echo "$delim"
+          } >> "$GITHUB_OUTPUT"
+          echo SYSTEM3_REAL_CODEX_PASS
 
   language-tool:
     needs: codex-draft
@@ -86,7 +98,6 @@ jobs:
               raise SystemExit('SYSTEM3_CODEX_OUTPUT_TOO_SHORT')
           result = check_text(article)
           assert result['status'] == 'PASS'
-          print('SYSTEM3_REAL_CODEX_PASS')
           print('SYSTEM3_REAL_LANGUAGETOOL_PASS')
           print('SYSTEM3_LT_MATCH_COUNT=' + str(result['match_count']))
           PY
