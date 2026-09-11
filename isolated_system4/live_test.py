@@ -51,7 +51,8 @@ with tempfile.TemporaryDirectory() as td:
  rel=json.loads((out/'release.json').read_text()); assert rel['publish_allowed'] is False and rel['wordpress_status']=='draft'
  xml=(out/'wordpress_draft.xml').read_text(); assert '<wp:status>draft</wp:status>' in xml and s['article']['title'] in xml
  s['article']['title']='MANIPULIERT'; (w/'state.json').write_text(json.dumps(s,ensure_ascii=False,indent=2,sort_keys=True))
- run([sys.executable,str(ROOT/'codex_entry.py'),'next',str(w)],expect=(0,))
+ p=run([sys.executable,str(ROOT/'codex_entry.py'),'next',str(w)],expect=(2,))
+ assert 'IMMUTABLE_CORE_TAMPERED' in p.stdout
  p=subprocess.run([sys.executable,str(ROOT/'controller.py'),'release',str(w),str(out/'tampered')],text=True,capture_output=True)
  print(p.stdout.strip()); assert p.returncode==2 and 'IMMUTABLE_CORE_TAMPERED' in p.stdout
  print('SYSTEM4_FIRST_CODEX_BOUNDARY_LIVE_TEST_PASS')
