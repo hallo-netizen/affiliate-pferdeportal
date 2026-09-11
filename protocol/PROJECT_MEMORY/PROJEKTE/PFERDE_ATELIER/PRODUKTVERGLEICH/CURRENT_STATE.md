@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-11
-STATUS: AKTIV / 0.8.4 FINAL-FRESH-ZIP LOCAL HARD PASS + WORDPRESS-LIVE PASS / 175-GRUPPEN-RECHERCHE+PROFILE OFFEN
+STATUS: AKTIV / 0.8.5 FINAL-FRESH-ZIP LOCAL HARD PASS / WORDPRESS-LIVE-RETEST OFFEN / 175-GRUPPEN-RECHERCHE WEITER OFFEN
 
 ## AUTORITÄT
 
@@ -11,119 +11,95 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - Fehlerdetails: `FEHLERQUELLEN.md`
 - Ziel: `ZIELVERTRAG_V2.md`
 - Fachvertrag: `AKTENSCHRANK/05_FACH_DOSSIER_ARTIKELTYP_VERTRAG_V1.md`
-- 0.8.3 Proof-Belege: `AKTENSCHRANK/06_V083_HARD_LOCAL_RELEASE_RECEIPT.md` und `07_V083_WORDPRESS_LIVE_REPEAT_RECEIPT.md`
-- 0.8.4 lokaler Prüfbeleg: `AKTENSCHRANK/09_V084_HARD_LOCAL_RELEASE_RECEIPT.md`
 - 0.8.4 Live-Beleg: `AKTENSCHRANK/10_V084_WORDPRESS_LIVE_RECEIPT.md`
+- 0.8.5 lokaler Prüfbeleg: `AKTENSCHRANK/11_V085_HARD_LOCAL_RELEASE_RECEIPT.md`
 
-## 0.8.4 KANDIDAT
+## 0.8.5 KANDIDAT
 
-`universal-product-comparison-0.8.4-prototype.zip`
-
-SHA-256:
-`00035ec0e166d9830f97140b6fc0f4f7666504d548bac507b1b206a2173ce856`
-
-## AUTORITATIVE PORTALABDECKUNG
-
-Portalquelle:
-`affiliate-portal-router/assets/portal-structure-v279.json`
+`universal-product-comparison-0.8.5-prototype.zip`
 
 SHA-256:
-`b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0`
+`0174051e6584902142f5be5787642426b30aab6c7ba15ef0b07ccbdb4a5844fd`
 
-Gebunden und live sichtbar:
-- 329 Produktseiten;
-- 1124 Themenkategorien;
-- **175/175 Vergleichs-Produktgruppen**;
-- Regendecken = Proofgruppe 1/175.
+## WAS 0.8.5 FACHLICH ÖFFNET
 
-0.8.4 zeigt alle 175 Gruppen in der Produktvergleichsoberfläche. Keine Gruppe darf still verschwinden.
+Die 0.8.4-Registry bleibt vollständig erhalten. Zusätzlich werden aus der bereits vorhandenen, quellengebundenen Product-Knowledge-Recherche fünf weitere echte Mehrhersteller-Gruppen fachlich profiliert:
 
-## SINNHAFTIGKEIT / PAARABDECKUNG
+- Winterdecken: 20 echte Cross-Family-Paare;
+- Übergangsdecken: 14;
+- Stalldecken: 28;
+- Unterdecken: 63;
+- Steigbügel: 5.
 
-Verbindlicher Weg:
-`alle Produkte der Gruppe -> gesamtes A-vs-B-Paaruniversum -> Same Brand / fachlich unpassende Nutzung BLOCK -> nur sinnvolle Paare -> SEO`.
+Zusammen: **130 zusätzliche echte Cross-Family-Paare** neben der Regendecken-Proofgruppe.
+
+Für jede Gruppe gilt weiterhin:
+`gesamtes Paaruniversum -> Herstellerfamilie/Sinnprüfung -> nur fachlich zulässige Paare -> erst danach SEO`.
 
 Keine Top-N-/Pair-Cap.
+Keine freie fachliche Aussage.
+Research-Vollständigkeit bleibt `UNPROVEN`.
 
-Harter Großtest:
-- 50 Produkte;
-- 5 Hersteller;
-- 1000 Cross-Brand-Paare vollständig erzeugt;
-- 500 fachlich vergleichbar;
-- 500 falsche Nutzungsklasse sichtbar BLOCKED;
-- 0 verlorene Paare;
-- Reihenfolge/alte Dubletten ändern Coverage nicht.
+## GEFUNDENER URSACHENFEHLER / FIX
 
-## RECHERCHEWAHRHEIT
+`Aesculap/Kerbl` und `Kerbl` waren im alten Recherchekatalog als zwei Herstellerbezeichnungen sichtbar, gehören fachlich aber zur selben Herstellerfamilie.
 
-Wichtig getrennt:
-- `PAIRING_READY` = vorhandene Fakten/Profil/Policy reichen zur Paarprüfung;
-- `research_completeness_status = UNPROVEN` = Markt-/Produktrecherche ist **nicht** als vollständig bewiesen.
+Der Paarplaner behandelte sie bereits korrekt als eine Familie. Die 0.8.4-Readiness konnte dagegen rohe Herstellerbezeichnungen zählen und dadurch theoretisch falsch `PAIRING_READY` melden.
 
-Der aktuelle Product-Knowledge-Recherchekatalog enthält 17 Gruppen mit Produktkandidaten. Davon gehören 14 zum autoritativen 175er Vergleichsscope; 3 liegen außerhalb dieses Vergleichsscopes.
+0.8.5 vereinheitlicht die Herstellerfamilien-Wahrheit:
+- Readiness;
+- Cross-Brand-Paaruniversum;
+- Research-Kandidaten-Herstellerzahl;
+- Paarplaner
+verwenden dieselbe Herstellerfamilienlogik.
 
-Vorhandene Kandidaten dürfen sinnvoll geprüft werden, während fehlende Produkte/Hersteller weiterhin sichtbar Recherchearbeit bleiben.
+Folge für Schermaschinen:
+- vorhandene 4 Produkte;
+- `Aesculap/Kerbl` + `Kerbl` = **1 echte Herstellerfamilie**;
+- 0 echte Cross-Family-Paare;
+- Status muss `INSUFFICIENT_MANUFACTURERS` bleiben;
+- erst ein vollständig gebundener echter zweiter Hersteller wie Lister darf diese Gruppe öffnen.
 
-Keine Gruppe wird allein wegen vorhandener Kandidaten als vollständig recherchiert bezeichnet.
-
-## ZWEI PORTAL-KEY-KOLLISIONEN
-
-Die Portalquelle enthält zweimal den kurzen Produktgruppen-Key `weidezaungeraete` unter zwei verschiedenen Portal-Slugs.
-
-0.8.4 verschmilzt diese nicht still.
-Status: `GROUP_KEY_COLLISION` bis die autoritative Identität geklärt ist.
-
-## HARTER LOKALBELEG 0.8.4
+## HARTER LOKALBELEG 0.8.5
 
 Finale Fresh-ZIP:
-- 32/32 ausführbare Positiv-/Negativ-/Regressionstests PASS;
-- PHP-Lint 48/48 PASS;
-- Source↔finale ZIP 67/67 exakt;
-- Report-Hashbindung 66/66 exakt;
-- 175/175 Portalparität PASS;
-- Product Knowledge 0.5.0 SHA exakt;
-- PSTE 0.56.25 SHA exakt;
-- 0.8.3 Dossier-/Policy-/Kosten-/Auditregeln unverändert PASS;
-- Research-Vollständigkeits-Falschbehauptung wird von Mutationstest ROT;
-- Drop einer Portalgruppe / Manipulation einer mittleren Gruppe / Top-N-Paarcap / ignorierte Key-Kollision werden ROT;
+- 35/35 ausführbare Regressionen PASS;
+- PHP-Lint 50/50 PASS;
+- Source↔finale ZIP 71/71 exakt;
+- Report-Hashbindung 70/70 exakt;
+- 175/175 Portalregistry/-coverage unverändert PASS;
+- 130/130 aktuelle echte Cross-Family-Paare der fünf neu aktivierten Gruppen erhalten;
+- alle neuen Profilmerkmale gegen vorhandene Product-Knowledge-Fakten gebunden;
+- Decision-Policies für alle aktuellen 130 Paare vollständig auflösbar;
+- Quellenlimits erzeugen keine Präferenz/Bedarfszuordnung;
+- Schermaschinen-Familienzählung negativ geprüft;
+- synthetischer echter zweiter Hersteller öffnet exakt die erwarteten 4 Cross-Family-Paare;
+- drei unabhängige Herstellerfamilien-Rückfallmutationen korrekt ROT;
+- bestehende 0.8–0.8.4 Mutations-/Kosten-/SEO-/Dossier-/Auditregeln weiter PASS;
+- SEO-Kostenbindung unverändert;
 - kein Writer-/Draft-/Publishweg;
 - kein Auto-Publish.
 
-## WORDPRESS-LIVE 0.8.4
+## 0.8.4 WORDPRESS-LIVE-BASIS
 
-Vor Workflowstart:
-- Version 0.8.4-prototype;
+Weiter gültig:
 - 175/175 Gruppen sichtbar;
-- Regendecken `PAIRING_READY`;
-- Recherchevollständigkeit `UNPROVEN`;
-- 172 `PROFILE_MISSING` sichtbar;
-- 2 Key-Kollisionen sichtbar/fail-closed;
-- PSTE PASS / READY;
-- maximale neue Providerkosten $0.0000.
-
-Nach genau einem Regendecken-Gesamtworkflow:
-- `NO_ELIGIBLE_COMPARISONS`;
-- neue Dossiers 0;
-- bestehende unverändert 0;
-- Provider-Aufrufe 0;
-- Kosten $0.0000;
-- Produktrecherche offen 0 für diesen vorhandenen Kandidatenbestand;
-- SEO-PASS final 0;
-- blockiert final 8.
-
-Damit ist 0.8.4 live regressionssicher und kostenneutral für den bestehenden Proofbestand.
+- Regendecken Proofstand erhalten;
+- 0 Provider-Aufrufe / $0.0000 beim identischen Wiederholungslauf;
+- korrekt `NO_ELIGIBLE_COMPARISONS` bei 0 SEO-PASS.
 
 ## OFFENES GESAMTZIEL
 
-0.8.4 schließt Registry-/Coverage-Infrastruktur und Live-Regressionsbeleg, **nicht** die reale Produktrecherche aller 175 Gruppen.
+0.8.5 nutzt mehr des bereits vorhandenen Produktwissens, beweist aber **nicht** Markt-Vollständigkeit.
 
 Weiter offen:
-1. Produktrecherche je Vergleichsgruppe möglichst vollständig ausbauen;
-2. gruppenspezifische Profile/Decision-Policies fachlich binden;
-3. alle dadurch sinnvollen A-vs-B-Paare vollständig prüfen;
-4. Coverage/Recherche-Vollständigkeit erst bei echtem Beleg auf vollständig setzen;
-5. erster echter positiver Dossier-V2-Livefall;
-6. danach erst spätere SEO/TEXT-/ACM-Anbindung.
+1. WordPress-Live-Vorcheck 0.8.5 ohne Providerstart;
+2. fehlende Hersteller/Modelle je Gruppe systematisch nachrecherchieren;
+3. weitere gruppenspezifische Profile/Decision-Policies binden;
+4. alle dadurch entstehenden sinnvollen A-vs-B-Paare vollständig prüfen;
+5. Research-Vollständigkeit nur mit echtem Beleg hochstufen;
+6. erster echter positiver Dossier-V2-Livefall;
+7. später erst SEO/TEXT-/ACM-Anbindung.
 
 Kein Publish.
 
