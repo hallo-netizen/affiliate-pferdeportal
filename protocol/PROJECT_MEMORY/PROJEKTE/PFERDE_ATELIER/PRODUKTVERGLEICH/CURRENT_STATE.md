@@ -13,7 +13,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `69_...`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `72_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -61,7 +61,7 @@ Exakter UPC-0.8.6-Gegencheck:
 - **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
 - damit **143/150 V1-fähige Gruppen maschinenfest noch offen**.
 
-Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, zusätzliche Profilspezifikationen für **21 Gruppen** erstellt:
+Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, zusätzliche Profilspezifikationen für **30 Gruppen** erstellt:
 - `high-neck-decken`;
 - `deckengurte`;
 - `deckentaschen-und-aufbewahrung`;
@@ -82,26 +82,39 @@ Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, zu
 - `gebisslose-zaeumungen`;
 - `zuegel`;
 - `sperrriemen`;
-- `reithalfter`.
+- `reithalfter`;
+- `liegeflaechen-im-offenstall`;
+- `offenstall-bodenbefestigung`;
+- `fressstaender-im-offenstall`;
+- `trennwaende-im-offenstall`;
+- `stallordner-und-dokumentenmappen`;
+- `futterkarten-und-boxenschilder`;
+- `werkzeughalter-im-stall`;
+- `namensschilder-fuer-pferdeboxen`;
+- `stalltafeln`.
 
-Akte 67 bindet Sattelschränke/Satteltransport/englische Trensen.
-Akte 68 bindet Gebisse/gebisslose Zäumungen/Zügel mit harten Wirk-/Konstruktionsklassen.
-Akte 69 bindet Sperrriemen/Reithalfter mit hartem Cross-Brand-Kompatibilitätsgate; fehlende belegte Kompatibilitätsüberschneidung muss korrekt bei 0 Paaren bleiben.
+Neu seit letztem Stand:
+- Akte 70 bindet Liegeflächen/Bodenbefestigung/Fressständer mit klar getrennten Funktionsklassen;
+- Akte 71 bindet Trennwände/Stalldokumente/Futtertafeln; Trennwände bleiben ohne identische Konfiguration korrekt bei 0 Cross-Brand-Paaren;
+- Akte 72 bindet Werkzeughalter/Namensschilder/Stalltafeln mit getrennten Organisations-Unterklassen.
 
-Diese 21 Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
+Diese 30 Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
 
 ## AKTUELLER ARBEITSBLOCK
 
-Registry nach `reithalfter` frisch geprüft:
-- `offenstallraufen` = `PRODUCT_COMPARISON_V1_NOT_APPLICABLE` -> überspringen;
-- nächster V1-fähiger Key `liegeflaechen-im-offenstall`;
-- `offenstalltore` = `PRODUCT_COMPARISON_V1_NOT_APPLICABLE` -> überspringen;
-- danach `offenstall-bodenbefestigung`;
-- danach `fressstaender-im-offenstall`;
-- anschließend `trennwaende-im-offenstall`.
+Registry nach `stalltafeln` frisch direkt aus der Portalstruktur gelesen:
+- `whiteboards-fuer-stallplanung`;
+- `hoftraktoren`;
+- `hoflader-zubehoer`;
+- danach `hofbesen`.
 
 Nächster Profilblock:
-`liegeflaechen-im-offenstall` -> `offenstall-bodenbefestigung` -> `fressstaender-im-offenstall`.
+`whiteboards-fuer-stallplanung` -> `hoftraktoren` -> `hoflader-zubehoer`.
+
+Vor Pairing hart zu normalisieren:
+- Whiteboards: zentrale Stallplanungs-/Organisationsboards, nicht Einzelbox-Stalltafeln;
+- Hoftraktoren: gleiche Fahrzeug-/Leistungsklasse und Nutzungsniveau, keine Hoflader/Kommunalfahrzeuge blind kreuzen;
+- Hoflader-Zubehör: Pflicht-Subtyp je Anbaugerät; Schaufel, Palettengabel, Ballenspieß, Greifschaufel etc. nie blind mischen.
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> in sinnvollen Blöcken sammeln -> erst dann technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
