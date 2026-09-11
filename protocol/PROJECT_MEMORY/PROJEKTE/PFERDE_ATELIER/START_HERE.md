@@ -1,6 +1,6 @@
 # PROJEKTGEBÄUDE – PFERDE-ATELIER
 
-STAND: 2026-09-05
+STAND: 2026-09-11
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -20,7 +20,6 @@ am Gebäudeeingang quer durch mehrere Büros ändern, Fachgrenzen ignorieren ode
 **ALS NÄCHSTES …**  
 das zuständige Büro auswählen und dessen `START_HERE.md` öffnen.
 
-
 ## AUTORITÄTSPLAN – NICHT DOPPELN
 
 Für jedes Büro gilt genau eine Quelle pro Frage:
@@ -29,7 +28,7 @@ Für jedes Büro gilt genau eine Quelle pro Frage:
 - **Was wird JETZT bearbeitet / was ist NEXT ACTION?** → Büro-`HOBBYRAUM.md`
 - **Welche Fehler sind bekannt?** → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → jeweilige Originalquelle
 - **Welches Ziel gilt?** → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
-- **Warum wurde etwas geändert?** → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **Warum wurde etwas geändert?** → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` bzw. dort gebundene fachliche Originalentscheidung
 - **Was ist historisch?** → `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 - **Welche allgemeinen Module gibt es?** → `protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md`
 
@@ -38,7 +37,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 ## Büroplan
 
 - `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
-- `PRODUKTVERGLEICH/START_HERE.md` → Produktwissen / Produkt- und Variantenvergleich / deterministischer Vergleichs-WordPress-DRAFT
+- `PRODUKTVERGLEICH/START_HERE.md` → Produktwissen / Produkt- und Variantenvergleich / gebundenes Vergleichsdossier für die spätere bestehende SEO/TEXT-Produktion
 - `DESIGN/START_HERE.md` → Portaldesign
 - `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
@@ -72,4 +71,3 @@ Parallel arbeitende Chats/Worker werden ausschließlich im zuständigen Büro/Ho
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
