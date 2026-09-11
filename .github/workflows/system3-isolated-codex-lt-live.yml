@@ -1,0 +1,75 @@
+name: System3 Isolated Codex LT Live
+
+on:
+  pull_request:
+    paths:
+      - 'isolated_system3/**'
+      - '.github/workflows/system3-isolated-codex-lt-live.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  codex-draft:
+    runs-on: ubuntu-24.04
+    outputs:
+      article: ${{ steps.codex.outputs.final-message }}
+    steps:
+      - name: Sparse checkout only System 3
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            isolated_system3
+          sparse-checkout-cone-mode: true
+      - name: Prove old systems are absent
+        shell: bash
+        run: |
+          test -d isolated_system3
+          count=$(find . -mindepth 1 -maxdepth 1 ! -name isolated_system3 ! -name .git -print | wc -l)
+          test "$count" -eq 0
+          echo SYSTEM3_CODEX_FILESYSTEM_ISOLATION_PASS
+      - name: Run Codex as final step
+        id: codex
+        uses: openai/codex-action@86365089eb2b84e0a8fb0717b304f8bdcb13b20e
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          working-directory: isolated_system3
+          permission-profile: ':read-only'
+          safety-strategy: drop-sudo
+          prompt-file: isolated_system3/codex_prompt.md
+
+  language-tool:
+    needs: codex-draft
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Sparse checkout only System 3
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            isolated_system3
+          sparse-checkout-cone-mode: true
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Real LanguageTool call and fail-closed verification
+        env:
+          SYSTEM3_ARTICLE: ${{ needs.codex-draft.outputs.article }}
+        run: |
+          python - <<'PY'
+          import os
+          from isolated_system3.language_tool import check_text
+          article = os.environ.get('SYSTEM3_ARTICLE', '')
+          if not article.strip():
+              raise SystemExit('SYSTEM3_CODEX_OUTPUT_MISSING')
+          if len(article.split()) < 120:
+              raise SystemExit('SYSTEM3_CODEX_OUTPUT_TOO_SHORT')
+          result = check_text(article)
+          assert result['status'] == 'PASS'
+          print('SYSTEM3_REAL_CODEX_PASS')
+          print('SYSTEM3_REAL_LANGUAGETOOL_PASS')
+          print('SYSTEM3_LT_MATCH_COUNT=' + str(result['match_count']))
+          PY
