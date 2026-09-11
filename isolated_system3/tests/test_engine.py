@@ -1,4 +1,5 @@
-import copy
+import ast
+import pathlib
 import unittest
 
 from isolated_system3.engine import ArticleProfile, System3Engine, System3Fail
@@ -34,6 +35,20 @@ def valid_evidence(article="Ein eigenständig formulierter Testartikel."):
 class System3FirstTest(unittest.TestCase):
     def setUp(self):
         self.engine = System3Engine(PROFILES)
+
+    def test_isolation_engine_imports_only_python_stdlib(self):
+        engine_path = pathlib.Path(__file__).resolve().parents[1] / "engine.py"
+        tree = ast.parse(engine_path.read_text(encoding="utf-8"))
+        allowed_roots = {"__future__", "copy", "hashlib", "json", "dataclasses", "typing"}
+        imported_roots = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imported_roots.update(alias.name.split(".")[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported_roots.add(node.module.split(".")[0])
+        self.assertTrue(imported_roots <= allowed_roots, imported_roots - allowed_roots)
+        self.assertNotIn("control", imported_roots)
+        self.assertNotIn("protocol", imported_roots)
 
     def test_positive_valid_article_reaches_done(self):
         capsule = self.engine.ingress(valid_input())
