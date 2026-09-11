@@ -34,6 +34,60 @@ REQUEST_FIELDS = {
 
 class Blocked(RuntimeError): pass
 
+class RepairRequired(RuntimeError):
+    def __init__(self, source: str, findings: Any):
+        self.source = str(source)
+        self.findings = list(findings) if isinstance(findings, list) else [findings]
+        super().__init__(self.source)
+
+def _lt_repair_findings(matches: list[Any]) -> list[dict]:
+    out=[]
+    for raw in matches:
+        m=raw if isinstance(raw,dict) else {}
+        rule=m.get("rule") if isinstance(m.get("rule"),dict) else {}
+        context=m.get("context") if isinstance(m.get("context"),dict) else {}
+        replacements=m.get("replacements") if isinstance(m.get("replacements"),list) else []
+        out.append({
+            "rule_id": str(rule.get("id") or ""),
+            "message": str(m.get("message") or ""),
+            "short_message": str(m.get("shortMessage") or ""),
+            "offset": m.get("offset"),
+            "length": m.get("length"),
+            "context": str(context.get("text") or ""),
+            "context_offset": context.get("offset"),
+            "context_length": context.get("length"),
+            "replacements": [str(x.get("value") or "") for x in replacements if isinstance(x,dict)][:10],
+        })
+    return out
+
+_PPM_REPAIRABLE_PREFIXES=("BLOCKED_CONTENT_","BLOCKED_WAVE2_","BLOCKED_CANONICAL_RUNTIME_LINK_")
+
+def _ppm_repair_findings(value: Any) -> list[dict]:
+    found=[]
+    def walk(node: Any) -> None:
+        if isinstance(node,dict):
+            code=str(node.get("error_code") or "")
+            if code.startswith(_PPM_REPAIRABLE_PREFIXES):
+                found.append({
+                    "error_code": code,
+                    "failed_rule": node.get("failed_rule"),
+                    "field_path": node.get("field_path"),
+                    "expected": node.get("expected"),
+                    "actual": node.get("actual"),
+                    "reason": node.get("reason"),
+                    "validator_id": node.get("validator_id"),
+                })
+            for child in node.values(): walk(child)
+        elif isinstance(node,list):
+            for child in node: walk(child)
+    walk(value)
+    unique=[]; seen=set()
+    for item in found:
+        key=json.dumps(item,ensure_ascii=False,sort_keys=True,default=str)
+        if key not in seen:
+            seen.add(key); unique.append(item)
+    return unique
+
 def _load(path: Path) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict): raise Blocked("JSON_OBJECT_REQUIRED")
@@ -155,7 +209,7 @@ def _run_languagetool(repo: Path, final_path: Path, root: str, item: Mapping[str
     except json.JSONDecodeError as exc: raise Blocked("LANGUAGETOOL_REPORT_INVALID") from exc
     matches=report.get("matches") if isinstance(report,dict) else None
     if not isinstance(matches,list): raise Blocked("LANGUAGETOOL_MATCHES_INVALID")
-    if matches: raise Blocked("LANGUAGETOOL_UNRESOLVED_FINDINGS:"+str(len(matches)))
+    if matches: raise RepairRequired("languagetool",_lt_repair_findings(matches))
     ref=root+"LANGUAGETOOL_REPORT.json"; path=_path(repo,ref,root)
     if path.exists(): raise Blocked("LANGUAGETOOL_PREGENERATED_REPORT_FORBIDDEN")
     _write_text(path,proc.stdout); raw_sha=_sha(path)
@@ -226,17 +280,31 @@ $runtime=nd_runtime($plan,'startmaster107007-'.substr(hash('sha256',$cid.'|'.$pa
     if proc.returncode!=0: raise Blocked("PPM679_REAL_EXECUTION_FAILED:"+(proc.stderr or proc.stdout).strip()[:400])
     try: bridge=json.loads(proc.stdout)
     except json.JSONDecodeError as exc: raise Blocked("PPM679_REAL_EXECUTION_OUTPUT_INVALID") from exc
-    if not isinstance(bridge,dict) or bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED": raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")
+    if not isinstance(bridge,dict): raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")
+    if bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
+        repair=_ppm_repair_findings(bridge)
+        if repair: raise RepairRequired("ppm_content_quality",repair)
+        raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")
     ppm_result=bridge.get("ppm_result"); artifact=ppm_result.get("artifact") if isinstance(ppm_result,dict) else None
     if not isinstance(artifact,dict) or artifact.get("contract")!="ppm_action_report_v1" or artifact.get("version")!=PPM679_VERSION: raise Blocked("PPM679_REAL_REPORT_IDENTITY_INVALID")
-    if artifact.get("status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH": raise Blocked("PPM679_REAL_REPORT_NOT_PASS")
+    artifact_status=artifact.get("status")
     check_only=artifact.get("check_only"); items=check_only.get("items") if isinstance(check_only,dict) else None
     if not isinstance(items,list) or len(items)!=1 or not isinstance(items[0],dict): raise Blocked("PPM679_REAL_CHECK_ITEM_INVALID")
     check=items[0]; checks=check.get("checks")
     if check.get("technical_status")!="TECHNICAL_CHECK_OK": raise Blocked("PPM679_TECHNICAL_NOT_PASS")
-    if check.get("content_quality_status")!="CONTENT_QUALITY_CHECK_OK": raise Blocked("PPM679_CONTENT_QUALITY_NOT_PASS")
+    repair=_ppm_repair_findings({"bridge":bridge,"ppm_result":ppm_result,"artifact":artifact,"check":check})
+    if check.get("content_quality_status")!="CONTENT_QUALITY_CHECK_OK":
+        if not repair:
+            repair=[{"error_code":"PPM679_CONTENT_QUALITY_NOT_PASS","reason":"Existing PPM content-quality validator did not pass."}]
+        raise RepairRequired("ppm_content_quality",repair)
+    if artifact_status!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
+        if repair: raise RepairRequired("ppm_content_quality",repair)
+        raise Blocked("PPM679_REAL_REPORT_NOT_PASS")
     if check.get("content_hash")!=final_sha: raise Blocked("PPM679_CONTENT_HASH_NOT_FINAL_ARTICLE")
-    if not isinstance(checks,dict) or checks.get("content_hash")!=final_sha or checks.get("fail_closed_aggregate_status")!="PASS": raise Blocked("PPM679_FAIL_CLOSED_NOT_PASS")
+    if not isinstance(checks,dict) or checks.get("content_hash")!=final_sha: raise Blocked("PPM679_FAIL_CLOSED_NOT_PASS")
+    if checks.get("fail_closed_aggregate_status")!="PASS":
+        if repair: raise RepairRequired("ppm_content_quality",repair)
+        raise Blocked("PPM679_FAIL_CLOSED_NOT_PASS")
     report=dict(check); report.update(ok=True,ppm_version=PPM679_VERSION,ppm_status=artifact["status"],execution_path="PSERC_PPM_Intake_Bridge::execute -> PPM679_Normal_Draft_Pipeline::execute_plan",raw_ppm_result=ppm_result)
     _write_json(report_path,report)
     return {"report_ref":report_ref,"report_sha256":_sha(report_path),"technical_status":check["technical_status"],"content_quality_status":check["content_quality_status"],"fail_closed_aggregate_status":checks["fail_closed_aggregate_status"],"execution_path":report["execution_path"],"ppm_status":artifact["status"]}
@@ -294,6 +362,8 @@ def main(argv:list[str])->int:
         elif len(argv)==2 and argv[0]=="materialize": result=materialize(REPO,argv[1])
         else: raise Blocked("USAGE: materialize HANDOFF_REQUEST.json | selftest")
         print(json.dumps(result,ensure_ascii=False,indent=2)); return 0
+    except RepairRequired as exc:
+        print(json.dumps({"ok":False,"status":"FACHWORKFLOW_REPAIR_REQUIRED","source":exc.source,"finding_count":len(exc.findings),"findings":exc.findings,"same_current_item_required":True,"worker_pass_authority":"NONE","pass_generated":False,"publish_allowed":False},ensure_ascii=False,indent=2)); return 0
     except (Blocked,OSError,ValueError,KeyError,TypeError,json.JSONDecodeError) as exc:
         print(json.dumps({"ok":False,"status":"FACHWORKFLOW_PROOF_HANDOFF_BLOCKED","error":str(exc),"publish_allowed":False},ensure_ascii=False,indent=2)); return 2
 
