@@ -1,20 +1,20 @@
 # BÜRO PRODUKTVERGLEICH
 
-STAND: 2026-09-09
+STAND: 2026-09-11
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**
-Das Fachbüro für Produktwissen, konkrete Produkt-/Variantenvergleiche und das gebundene Vergleichsdossier für die bestehende SEO/TEXT-Produktion.
+Das Fachbüro für Produktwissen, konkrete A-vs-B-Produktvergleiche, Marktrecherche und das gebundene Vergleichsdossier für die spätere bestehende SEO/TEXT-Produktion.
 
 **HIER BIST DU RICHTIG, WENN …**
-du Vergleichspaare/-gruppen, Herstellerfakten, Vergleichsregeln, SEO-Eignung, Variantenvergleiche oder das gebundene Vergleichsdossier bearbeiten willst.
+du Produktgruppen, Hersteller/Modelle, Vergleichspaare, Herstellerfakten, Vergleichsregeln, SEO-Eignung oder das gebundene Vergleichsdossier bearbeiten willst.
 
 **DU DARFST …**
-im gebundenen Produktvergleichs-Hobbyraum Produktwissen-/Vergleichsbausteine und Dossierlogik entwickeln und hart testen.
+im gebundenen Produktvergleichs-Hobbyraum Research-/Produktwissen-/Vergleichsbausteine und Dossierlogik entwickeln und hart testen.
 
 **DU DARFST NICHT …**
-STARTMASTER/TEXT oder ACM eigenmächtig verändern, Produktfakten erfinden, einen zweiten Produktions-Writer aufbauen, Affiliate-/SEO-Daten zur fachlichen Wahrheit machen oder automatisch veröffentlichen.
+STARTMASTER/TEXT oder ACM eigenmächtig verändern, Produktfakten erfinden, einen zweiten Produktions-Writer aufbauen, Research-Funde ungeprüft zu Product Knowledge erklären, Affiliate-/SEO-Daten zur fachlichen Wahrheit machen oder automatisch veröffentlichen.
 
 **ALS NÄCHSTES …**
 `CURRENT_STATE.md` → `HOBBYRAUM.md` → über Fehler-/Zielregister zu den autoritativen Originalquellen.
@@ -26,7 +26,8 @@ STARTMASTER/TEXT oder ACM eigenmächtig verändern, Produktfakten erfinden, eine
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Produktvergleichs-Fehlerquelle
 - **ZIEL:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → aktiver Produktvergleichs-Zielvertrag V2
 - **WARUM:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- **PROTOKOLL:** `PROTOKOLL_20260907.md`
+- **AKTUELLES ARBEITSPROTOKOLL:** `PROTOKOLL_20260911.md`
+- **ÄLTERE PROTOKOLLE:** `PROTOKOLL_20260907.md`, `PROTOKOLL_20260909.md`
 - **HISTORIE:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 
 Diese Bürotür enthält keine zweite aktuelle Fehler-, Ziel- oder Statuswahrheit.
@@ -34,12 +35,13 @@ Diese Bürotür enthält keine zweite aktuelle Fehler-, Ziel- oder Statuswahrhei
 ## Harte Fachgrenze zu SEO/TEXT
 
 PRODUKTVERGLEICH verantwortet:
-- Produkt-/Variantenidentität über PRODUKTWISSEN;
+- Marktrecherche und Produkt-/Variantenidentität;
+- Herstellerfakten/Quellenstatus;
 - Vergleichsdefinition und Vergleichsmerkmale;
-- gebundene Rulesets;
+- gebundene Rulesets/Decision-Policies;
 - Vergleichs-QA;
 - bidirektionale SEO-Eignung;
-- gebundenes Vergleichsdossier.
+- gebundenes Vergleichsdossier V2.
 
 SEO/TEXT verantwortet später:
 - den Artikeltyp `Produktvergleich`;
