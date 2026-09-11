@@ -12,54 +12,55 @@ STATUS: AKTIV
 
 UPC 0.8.6 besitzt technisch weiterhin nur 7 maschinenfeste Vergleichsprofile/Decision-Policies; **143/150 sind technisch noch offen**.
 
-Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, weitere Profilspecs für **61 Gruppen** erstellt.
+Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, zusätzliche Profilspecs für **67 Gruppen** erstellt.
 
 Belege:
-`AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
-`AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-`AKTENSCHRANK/62_...` bis `AKTENSCHRANK/82_...`.
+- `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
+- `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
+- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/84_...`
+- Nachholchronik: `PROTOKOLL_NACHHOLUNG_20260911.md`
 
-Jüngste Blöcke:
-- 79: Boxenmatten / Krippen / Lecksteinhalter;
-- 80: Putzplatzmatten / Anbindebalken / Anbinderinge;
-- 81: Putzboxhalter / Schlauchhalter / Waschplatz;
-- 82: Mistboy / Bollengabeln / Stallbesen.
+Jüngste Fachblöcke:
+- 82: Mistboy / Bollengabeln / Stallbesen;
+- 83: Schubkarren / Mistcontainer / Paddockzäune;
+- 84: Reitplatzboden / Reitplatzumrandung / Reitplatzbeleuchtung.
 
-Technischer 0.8.6-Stand bleibt unverändert lokal hart grün. WordPress-Live für 0.8.6 ist offen.
+Technischer 0.8.6-Stand bleibt unverändert: historisch lokal hart + Fresh-ZIP + read-only Audit grün; **WordPress-Live für 0.8.6 offen**.
 
 ## BRANCH
 
 `hobbyroom/productvergleich-workflow-v070-20260908`
 
+Arbeitsweg und Rückgabeweg bleiben auf diesem Branch.
+Kein Merge und kein Publish vor vollständiger Freigabe.
+Fremde/parallel laufende Branches nicht überschreiben.
+
 ## NEXT ACTION
 
-Autoritative Portalstruktur in exakter Registry-Reihenfolge:
-1. `p155 schubkarren`
-2. `p156 mistcontainer`
-3. `p157 mistlagerung` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`, **überspringen**
-4. `p158 paddockzaeune`
-5. danach `p159 reitplatzboden`
-6. `p160 reitplatzdrainage` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`, **überspringen**
+Autoritative Portalstruktur hinter Akte 84 in exakter Registry-Reihenfolge:
+1. `p163 hindernisstangen`
+2. `p164 sprungstaender`
+3. `p165 cavaletti`
 
-Nächster fachlich zulässiger Profilblock:
-1. `schubkarren`
-2. `mistcontainer`
-3. `paddockzaeune`
+Alle drei sind fachlich V1-zulässig und nicht Teil der finalen 25er `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`-Liste.
+
+Nächster fachlich zulässiger Profilblock ausschließlich:
+1. `hindernisstangen`
+2. `sprungstaender`
+3. `cavaletti`
 
 Vor Paaruniversum hart prüfen:
-- Schubkarren: gleiche Mulden-/Rahmen-/Rad-/Kapazitätsklasse; keine Zweiradkarre, Futterwagen oder Elektroschubkarre blind kreuzen;
-- Mistcontainer: gleiche mobile/stationäre Containerklasse, Material, Volumen und Aufnahme-/Entleerungsmechanik; keine bauliche Mistlagerstätte;
-- Paddockzäune: Pflicht-Subtyp nach Bau-/Material-/Elektrifizierungsprinzip; Holz-, Kunststoff-, Elektro- und mobile Panelzäune nie blind mischen;
-- `mistlagerung` bleibt V1 NOT_APPLICABLE.
+- identische reale Nutzungsklasse/Subtyp-Bindung;
+- Material, Maße, Bauart, Nutzung und relevante Sicherheits-/Kompatibilitätsmerkmale nicht frei interpolieren;
+- Hindernisstange != Sprungständer != Cavaletti;
+- fehlende Cross-Brand-Vergleichbarkeit -> 0 Paar, nicht erzwingen;
+- finale konkrete Produktpaarentscheidung nicht manuell festlegen.
 
-Aktuelle Dedup-/Fail-closed-Gates bleiben bindend:
-- `stallbesen` gegen `hofbesen`;
-- `boxenmatten` gegen `liegeflaechen-im-offenstall`;
-- `putzboxhalter`, `boxenriegel`, bestimmte `boxengitter`-Subtypen bleiben bei fehlender Herstellerbreite 0 Paar.
+Aktuelle Dedup-/Fail-closed-Gates aller bisherigen Akten bleiben bindend.
+Die 25 V1-NOT-APPLICABLE-Gruppen bleiben gesperrt.
 
-Keine finalen Produktpärchen manuell festlegen.
 Kein Pluginrelease pro Gruppe.
-Erst sinnvoll gebündelte Profilspecs -> technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
+Erst sinnvoll gebündelte source-bound Profilspecs -> technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
 
 ## BLOCK-GRENZE
 
@@ -67,5 +68,7 @@ Kein Research-Fund automatisch als Product Knowledge.
 Kein SEO vor fachlich zulässigem Kandidatenuniversum.
 Keine freie Decision-Policy ohne Fakten-/Quellenbindung.
 Finale Paarentscheidung ausschließlich im Plugin aus aktuellem Product Knowledge; regelmäßige Neubewertung bleibt Pflicht.
+Kein Writer/Draft/Publish aus diesem Büro.
+Kein Codex.
 Kein Merge.
 Kein Publish.
