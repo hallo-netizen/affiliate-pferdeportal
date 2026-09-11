@@ -12,18 +12,18 @@ STATUS: AKTIV
 
 UPC 0.8.6 besitzt technisch weiterhin nur 7 maschinenfeste Vergleichsprofile/Decision-Policies; **143/150 sind technisch noch offen**.
 
-Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, zusätzliche Profilspecs für **67 Gruppen** erstellt.
+Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, zusätzliche Profilspecs für **71 Gruppen** erstellt.
 
 Belege:
 - `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/84_...`
-- Nachholchronik: `PROTOKOLL_NACHHOLUNG_20260911.md`
+- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/85_...`
+- Nachhol-/Fortsetzungsprotokoll: `PROTOKOLL_NACHHOLUNG_20260911.md`
 
 Jüngste Fachblöcke:
-- 82: Mistboy / Bollengabeln / Stallbesen;
 - 83: Schubkarren / Mistcontainer / Paddockzäune;
-- 84: Reitplatzboden / Reitplatzumrandung / Reitplatzbeleuchtung.
+- 84: Reitplatzboden / Reitplatzumrandung / Reitplatzbeleuchtung;
+- 85: Reitplatzbewässerung / Reitplatzspiegel / Reitplatzplaner / Reitplatzschleppe.
 
 Technischer 0.8.6-Stand bleibt unverändert: historisch lokal hart + Fresh-ZIP + read-only Audit grün; **WordPress-Live für 0.8.6 offen**.
 
@@ -37,22 +37,26 @@ Fremde/parallel laufende Branches nicht überschreiben.
 
 ## NEXT ACTION
 
-Autoritative Portalstruktur hinter Akte 84 in exakter Registry-Reihenfolge:
-1. `p163 hindernisstangen`
-2. `p164 sprungstaender`
-3. `p165 cavaletti`
+Die frühere p163–p165-Beschriftung mit Hindernisstangen/Sprungständern/Cavaletti war falsch und ist in `FEHLERQUELLEN.md` als `PV-GOV-20260911-002` korrigiert.
 
-Alle drei sind fachlich V1-zulässig und nicht Teil der finalen 25er `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`-Liste.
+Autoritative Portalstruktur hinter Akte 85:
+- `p167 bahnplaner` -> V1-NOT-APPLICABLE, überspringen;
+- `p168 sandverteiler` -> V1-NOT-APPLICABLE, überspringen;
+- `p169 hufschlagraeumer`;
+- `p170 reitplatzbewaesserung-mobil`;
+- `p171 weidepflegegeraete`.
 
 Nächster fachlich zulässiger Profilblock ausschließlich:
-1. `hindernisstangen`
-2. `sprungstaender`
-3. `cavaletti`
+1. `hufschlagraeumer`
+2. `reitplatzbewaesserung-mobil`
+3. `weidepflegegeraete`
 
 Vor Paaruniversum hart prüfen:
 - identische reale Nutzungsklasse/Subtyp-Bindung;
-- Material, Maße, Bauart, Nutzung und relevante Sicherheits-/Kompatibilitätsmerkmale nicht frei interpolieren;
-- Hindernisstange != Sprungständer != Cavaletti;
+- `reitplatzbewaesserung-mobil` strikt von fest installierter `reitplatzbewaesserung` trennen;
+- bei mobilen Beregnungsgeräten OEM-/Herstellerfamilie nicht aus Produktnamen ableiten;
+- `weidepflegegeraete` nur über einen klar definierten ersten mechanischen Produkt-Subtyp öffnen;
+- Hufschlagräumer als eigenes Produkt/Zubehör nur gegen denselben Mechanik-/Anbau-Subtyp paaren;
 - fehlende Cross-Brand-Vergleichbarkeit -> 0 Paar, nicht erzwingen;
 - finale konkrete Produktpaarentscheidung nicht manuell festlegen.
 
