@@ -133,3 +133,43 @@ Live-PASS zusätzlich erst nach wiederhergestelltem ADCELL-Zugang und echtem Wor
 - keine Pluginversionskette vor vollständigem kanonischem Test;
 - keine manuelle CSV-Import/Export-Lösung als Ersatz für die geforderte Automatik;
 - keine vom offiziellen v2-Beleg abweichende API-Authentifizierung.
+
+## ABSCHLUSS-/NACHHOLPRÜFUNG DIESES CHATS – 2026-09-11
+
+Frisch gegen den tatsächlichen Branchzustand geprüft:
+- `affiliate-release-current` stand vor diesem Abschlussblock auf `9815caaa24a6d2587da8890fb24773b2e67e76d8` und enthält einen **partiellen** kanonischen ADCELL-Sourceeingriff in `trait-ppar-network-sync.php`;
+- dort sind offizieller API-v2-Host, `/user/getToken`, Query-`token`, accepted+active-Prüfung, `programId`-Allowlist sowie gebundene Program-/Promotion-Hilfsfunktionen eingeführt;
+- `trait-ppar-automation-suite.php` ist dagegen weiterhin am alten `csv-feed`-/manuellen CSV-Normalweg gebunden; AF-058/AF-059 sind deshalb offen;
+- `trait-ppar-provider-registry.php` ruft weiterhin `test_adcell_connection()` auf; der kanonische Router verwendet dort noch `Authorization: Basic ...`. Dieser neu erkannte aktive Altpfad ist als **AF-062** in der autoritativen Fehlermatrix nachgetragen;
+- AF-060 ist nur hinsichtlich der früher fehlenden **Dokumentationswahrheit** geschlossen: der offizielle Auth-Vertrag ist belegt. Die Runtime darf trotzdem erst als korrigiert gelten, wenn AF-062 beseitigt und negativ getestet ist.
+
+Zusätzlich ist **AF-023 aktuell offen**:
+- Commit `9815caaa...` änderte kanonische Source (`trait-ppar-network-sync.php`), ohne `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` und dessen Governance-Bindung nachzuziehen;
+- `CURRENT_RELEASE.json` bindet weiterhin das vor der ADCELL-Sourceänderung gültige Manifest `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`;
+- deshalb darf kein Release-Guard-/Source-PASS behauptet werden.
+
+Tatsächlich in diesem Chat dauerhaft ausgeführt:
+- offizieller ADCELL-v2-Auth-/Endpoint-Beleg in Release-Evidence gebunden;
+- Hobbyraum-Task/Testvertrag auf den dreiteiligen ADCELL-Fix vorbereitet;
+- partieller Network-Sync-Sourcefix auf den offiziellen Token-/Allowlist-Weg committed;
+- AF-062 nach Abschlussprüfung in der Fehlerautorität ergänzt.
+
+Nicht ausgeführt bzw. nicht bestanden:
+- kein vollständiger kanonischer ADCELL-Hobbyraumlauf;
+- kein Positiv-/Negativ-Runtime-PASS des aktuellen Heads;
+- kein Awin/OTTO-/Veto-/Pause-Gesamtworkflow-PASS nach ADCELL-Änderung;
+- kein sauberer Release-Source-Guard nach `9815caaa...`;
+- kein Fresh-Unpack, keine Source/ZIP-Identity, keine Test-ZIP;
+- kein echter ADCELL-Live-API-/WordPress-/MariaDB-E2E.
+
+### VERBINDLICHE NEXT ACTION NACH DIESEM ABSCHLUSS
+
+**Zuerst AF-023 beheben, bevor irgendein weiterer Sourcefix oder Testlauf beginnt:**
+aktuellen 26-Dateien-Sourcebaum neu hashen, `CURRENT_SOURCE_SHA256.txt` und die zugehörige Governance-Bindung atomar auf denselben Iststand setzen und danach den gebundenen Release-Source-/Governance-Guard tatsächlich ausführen.
+
+Erst wenn diese Bindung wieder sauber ist:
+1. AF-062: Provider-Registry ausschließlich auf `adcell_api_v2_test_connection()` umstellen und Legacy-Basic-Auth aus dem ADCELL-v2-Runtimeweg entfernen;
+2. AF-058/AF-059 im kanonischen Automationskern fertigstellen;
+3. gebundene Positiv-/Negativ-/Gesamtworkflow-Prüfung;
+4. Fresh-Unpack/Identity;
+5. erst danach Test-Plugin; Live-PASS weiterhin erst nach echtem ADCELL-Zugang.
