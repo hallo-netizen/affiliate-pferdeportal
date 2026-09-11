@@ -25,9 +25,26 @@ STATUS: CLOSED / LOKAL + WORDPRESS-LIVE 0.8.2–0.8.4 PASS
 STATUS: CLOSED / 0.8.3 LOCAL HARD + WORDPRESS-LIVE-REGRESSION PASS
 
 ## PV-SCALE-084-001 – Proofgruppe statt vollständiger Vergleichsgruppen-Abdeckung
-STATUS: INFRASTRUKTUR CLOSED / 0.8.4 LOCAL HARD + WORDPRESS-LIVE PASS / FACHLICHE 175-GRUPPEN-RECHERCHE WEITER OFFEN
+STATUS: INFRASTRUKTUR CLOSED / FACHLICHE 175-GRUPPEN-MARKTRECHERCHE AKTIV OFFEN
 
-0.8.4 bindet 175/175 Portalgruppen, vollständige Paar-Coverage ohne Top-N und Research-Vollständigkeit fail-closed `UNPROVEN`.
+Geschlossen:
+- 175/175 Portalgruppen in Registry;
+- jede Gruppe sichtbar;
+- keine stille Top-N-/Pair-Cap;
+- Research-Vollständigkeit fail-closed `UNPROVEN`;
+- WordPress-Live 0.8.4 PASS.
+
+Weiter offen:
+- Markt-/Produktrecherche über alle 175 Gruppen;
+- Hersteller-/Modell-/Fakten-/Nutzungsklassenabdeckung;
+- gruppenspezifische Profile/Policies;
+- alle daraus entstehenden fachlich zulässigen Paare.
+
+Aktueller Research-Stand:
+- alte Basis: 17 Recherchegruppen / 102 Kandidaten;
+- diese Basis wurde mit UPK 0.5.1 live sequenziell geprüft/materialisiert;
+- zusätzlich Research-Evidence Batches A–J im Aktenschrank gesichert;
+- Coverage A–J gegen 175 noch nicht konsolidiert; daher keine Vollständigkeitszahl behaupten.
 
 ## PV-FAMILY-085-001 – Readiness zählte Herstellerbezeichnungen statt Herstellerfamilien
 STATUS: CLOSED IM 0.8.5 / LOKAL HART PASS
@@ -42,7 +59,7 @@ Harter Beleg:
 - finale 0.8.5-Regression 35/35 PASS.
 
 ## PV-FACH-085-002 – Fachprofile für vorhandene Mehrhersteller-Recherche
-STATUS: PROFILE/POLICY LOCAL PASS / LIVE-INVENTAR NICHT MATERIALISIERT / MARKTVOLLSTÄNDIGKEIT UNPROVEN
+STATUS: PROFILE/POLICY LOCAL PASS / ALT-BASIS LIVE MATERIALISIERT / REALE POST-BATCH-PAARZAHL NOCH NICHT SEPARAT ABGELESEN / MARKTVOLLSTÄNDIGKEIT UNPROVEN
 
 Fachprofile/Policies sind lokal gegen freigegebene Recherchekandidaten geprüft für:
 - Winterdecken;
@@ -51,92 +68,66 @@ Fachprofile/Policies sind lokal gegen freigegebene Recherchekandidaten geprüft 
 - Unterdecken;
 - Steigbügel.
 
-Die daraus berechneten 130 Cross-Family-Paare sind **Katalogpotential nach erfolgreicher Materialisierung**, nicht bereits live vorhandene Paarzahl.
+Die lokal berechneten 130 Cross-Family-Paare waren **Katalogpotential nach erfolgreicher Materialisierung**, nicht vorab bewiesene Live-Paarzahlen.
+
+Der 0.5.1-Live-Batch hat die alte Recherchebasis inzwischen real geprüft/materialisiert. Eine globale tatsächliche Live-Paarzahl nach diesem Batch wurde im Produktvergleich noch nicht separat abgelesen und wird daher nicht behauptet.
 
 ## PV-TEST-085-003 – Recherchekandidaten im Lokaltest als materialisiertes Inventar behandelt
+STATUS: CLOSED / TESTGRENZE KORRIGIERT / UPK 0.5.1 LOCAL HARD + WORDPRESS-LIVE-BATCH ABGESCHLOSSEN
 
-STATUS: ROOT CAUSE GEFUNDEN / TESTGRENZE KORRIGIERT / UPK 0.5.1 LOCAL HARD PASS / WORDPRESS-MATERIALISIERUNG OFFEN
+### Ursprünglicher Befund
 
-### Live-Befund
+Der lokale 0.8.5-Fachtest materialisierte freigegebene Research-Kandidaten nur innerhalb des Tests als Laufzeitprodukte.
+Das bewies Profile/Policies/Paarlogik, aber nicht bereits vorhandenes echtes WordPress-Inventar.
 
-0.8.5 auf WordPress:
-- `PAIRING_READY: 1`;
-- `PROFILE_MISSING: 166`;
-- `PRODUCT_INVENTORY_MISSING: 6`;
-- 2 Key-Kollisionen;
-- $0.0000 maximale neue Providerkosten.
+Die damalige Release-Erwartung `PAIRING_READY: 6` war deshalb falsch.
 
-Winterdecken:
-- Research-Katalog 8 Kandidaten / 3 Hersteller;
-- echtes Product-Knowledge-Inventar 0 / 0;
-- Cross-Family-Paare 0;
-- korrekt `PRODUCT_INVENTORY_MISSING`.
+### Live-Gegenbeleg UPC 0.8.5
 
-### Ursache
-
-Der lokale 0.8.5-Fachtest materialisierte seine freigegebenen Research-Kandidaten **nur innerhalb des Tests** als Laufzeitprodukte, um Profile, Policies und Paarlogik zu prüfen.
-
-Das bewies nicht, dass die Produkte bereits in der echten WordPress-Product-Knowledge-Datenbank importiert waren.
-
-Die Release-Erwartung `PAIRING_READY: 6` war deshalb falsch.
-
-### Wichtiger Gegenbeleg
-
-Der Live-Produktvergleich selbst reagierte korrekt fail-closed:
-- kein Produkt erfunden;
-- kein Paar erfunden;
-- kein SEO-/Providerlauf;
-- $0.0000.
-
-Damit ist dies primär eine **Test-/Freigabegrenzen-Lücke**, nicht ein fail-open Laufzeitfehler von UPC 0.8.5.
+WordPress reagierte korrekt fail-closed:
+- Research-Kandidaten wurden nicht als Product Knowledge ausgegeben;
+- fehlendes Inventar blieb `PRODUCT_INVENTORY_MISSING`;
+- kein Paar/SEO-/Providerlauf wurde erfunden;
+- Kosten blieben $0.0000.
 
 ### KISS-Fix UPK 0.5.1
 
-Kein neuer Importer.
-Kein neues Datenmodell.
-Kein Parallelweg.
-
-0.5.1 ergänzt nur einen sequenziellen Batch-Aufruf über den bestehenden kanonischen Product-Knowledge-Weg:
+Kein neuer Importer, kein neues Datenmodell, kein Parallelweg.
+Nur sequenzielle Admin-Orchestrierung über den vorhandenen kanonischen Weg:
 `UPK_Research::run_product_group()`.
 
-Pro vorhandener freigegebener Recherchegruppe:
-1. echte Herstellerquelle neu prüfen;
-2. nur PASS-Produkte/Fakten verwenden;
-3. bestehenden Importpfad verwenden;
-4. BLOCKED sichtbar lassen;
-5. nächste Gruppe sequenziell;
-6. Security-/Transportfehler stoppt fail-closed.
-
-### Harter lokaler Beleg UPK 0.5.1
-
-Finale ZIP:
-`universal-product-knowledge-0.5.1-prototype.zip`
-
-SHA-256:
-`17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
-
-PASS:
-- Batch Positiv/Negativ;
-- Nonce/Capability;
-- sequenzielle Verarbeitung;
-- kanonischer `run_product_group()`-Pfad;
-- 4 unabhängige Rückfallmutationen korrekt ROT;
+Lokaler Beleg:
+- Positiv/Negativ PASS;
+- Nonce/Capability PASS;
+- sequenziell PASS;
+- 4 Mutationen korrekt ROT;
 - PHP-Lint 5/5;
 - Source↔ZIP 8/8;
 - Report-Hashes 7/7;
-- keine SEO-/UPC-/Writer-/Publish-Autorität.
+- UPC 0.8.5 gegen exakt finale UPK-0.5.1-ZIP 35/35 PASS.
 
-Gesamtgegenprüfung:
-UPC 0.8.5 gegen exakt finale UPK-0.5.1-ZIP = **35/35 PASS**.
+### WordPress-Live 0.5.1
 
-## Aktueller erster offener Arbeitsblock
+Batchsummary:
+- 17/17 alte Recherchegruppen verarbeitet;
+- PASS 6;
+- TEIL-PASS 8;
+- BLOCKED 3;
+- pairing-ready 9.
 
-WordPress-Live:
-UPK 0.5.1 installieren -> Oberfläche/Batchbutton read-only prüfen -> danach einmal sequenziell materialisieren -> echte Ergebnisse auslesen.
+Damit ist die Materialisierungslücke geschlossen.
+Die kleine Alt-Recherchebasis selbst bleibt jedoch unvollständig; das ist Bestandteil von PV-SCALE-084-001.
 
-Keine festen Produkt-/Paarzahlen vor dem echten Quellenlauf behaupten.
-Research-Vollständigkeit bleibt `UNPROVEN`.
-Kein Produktvergleich-Gesamtworkflow vor dieser Materialisierung.
+## AKTUELLER ERSTER OFFENER ARBEITSBLOCK
+
+Kein neuer Plugin-Reparaturfehler belegt.
+
+Aktive Arbeit:
+**Research-Evidence A–J gegen die autoritative 175er Registry konsolidieren und anschließend ausschließlich an tatsächlich ungedeckten Gruppen weiterrecherchieren.**
+
+Keine neue Plugin-Version im Researchblock.
+Keine künstlichen SEO-PASS-Werte.
+Kein SEO-/Providerstart aus bloßer Research-Evidence.
 Kein Writer/Draft/Publish.
 
 ## Regel
