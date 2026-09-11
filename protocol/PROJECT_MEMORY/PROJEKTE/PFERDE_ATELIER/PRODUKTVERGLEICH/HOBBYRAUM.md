@@ -18,7 +18,8 @@ Belege:
 - `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
 - `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/87_...`
-- Nachhol-/Fortsetzungsprotokoll: `PROTOKOLL_NACHHOLUNG_20260911.md`
+- Nachhol-/Fortsetzungsprotokoll Teil 1: `PROTOKOLL_NACHHOLUNG_20260911.md`
+- Nachhol-/Fortsetzungsprotokoll Teil 2: `PROTOKOLL_NACHHOLUNG_20260911_TEIL2.md`
 
 Jüngste Fachblöcke:
 - 84: Reitplatzboden / Reitplatzumrandung / Reitplatzbeleuchtung;
