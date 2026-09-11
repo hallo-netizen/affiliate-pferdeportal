@@ -1,100 +1,58 @@
 # PFERDE ATELIER – TEXT – HOBBYRAUM
 
 STAND: 2026-09-11
-STATUS: AKTIV – M37 PRODUCT_FIX
+STATUS: BLOCKED – EIN FRISCHER ARTIKEL REALTEST IST NEXT ACTION
 
-## AKTUELLE ARBEIT
+## ABGESCHLOSSENE HOBBYRAUMARBEIT M37
 
-Nur Phase 2 des vorhandenen Maschinenwegs:
-M37-Produktfix als reine Observability-Änderung am bestehenden Handoff prüfen.
+History-Autorität und Produktfix sind getrennt, hart geprüft und integriert.
 
-Aktueller Main:
-`f791dcc6c926f9c136faed29957e64786ffca08e`
-
-Aktiver äußerer Liveblocker:
-`PPM679_REAL_EXECUTION_BLOCKED`
-
-Produktions-Rootcause: UNKNOWN bis neuer Realtest.
-
-History M37 ist bereits integriert und maschinell bewiesen:
+History:
 - PR248;
-- `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M37`;
 - `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
 - hardlock PASS;
 - hardlock-base PASS.
 
-Produktkandidat:
+Produktfix:
 - PR247;
-- Branch: `hobbyroom/ppm-inner-reason-visibility-20260911`;
-- Head: `59ad44da3d89769c05f0725f9929135b0262f4dd`;
-- Parent exakt current main;
-- Diff ausschließlich Handoff + bestehende 107007→CURRENT_STATE→START_HERE-Hashkette;
-- Matrix und Runner unverändert aus Main.
+- Head `59ad44da3d89769c05f0725f9929135b0262f4dd`;
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
+- hardlock PASS;
+- hardlock-base PASS.
+
+Current main:
+`f1d1605f18bd23d9189f89ad173598958718d08a`
+
+M01–M37 sind integriert.
+
+## AKTUELLER REALSTATUS
+
+Letzter Realtest vor M37 endete äußerlich bei:
+`PPM679_REAL_EXECUTION_BLOCKED`.
+
+M37 stellt nur sicher, dass ein künftig vorhandener konkreter innerer nicht-reparierbarer Grund nicht mehr verschluckt wird.
+
+Produktions-Rootcause: **UNKNOWN** bis zum neuen Realtest.
 
 ## NEXT ACTION
 
-Bestehenden `hardlock-base` auf PR247 ausführen lassen.
-Er muss mit demselben vorhandenen M01–M37-Runner beweisen:
-1. current main reproduziert M37 als ersten FAIL;
-2. Produktkandidat liefert vollständigen `GESAMT PASS`;
-3. `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
-4. hardlock und hardlock-base PASS.
+Genau einen frischen ersten Artikel auf dem aktuellen Main über den offiziellen 107007-Weg laufen lassen.
 
-Erst dann Integration. Danach genau ein frischer erster Artikel bis zum echten PPM/PSERC-Handoff.
+Stopbedingungen:
+- erster `BLOCKED`;
+- erster `FACHWORKFLOW_REPAIR_REQUIRED`;
+- erster konkret sichtbarer innerer PPM/PSERC-Grund;
+- oder erster echter `FACHWORKFLOW_PROOF_HANDOFF_PASS`.
 
-## VERBOTEN
-
-- Matrix/Runner im Produktkandidaten ändern;
-- neuer Runner/Gate/Controller/Sidecar;
-- PPM/PSERC/PSTE/Textmaschine/Recherche/SEO/Links/Tabellen/Design verändern;
-- Rootcause raten;
-- Produktionslauf vor Produktfix-Gesamt-PASS;
-- WordPress-Write;
-- Publish.
-
-HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_ALLOWED_FOR_CODEX_TEST
-OFFICE: TEXT
-MAIN_SHA: f791dcc6c926f9c136faed29957e64786ffca08e
-ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_BLOCKED
-PLAN_PHASE: PRODUCT_FIX
-RECOVERY_BASE_SHA: bb005a5324a0a6270aacb52b5927613bde1ab4bc
-ACTIVE_HISTORY_CASE: M37
-HISTORY_EXPECTED_FAIL: NONE
-CANDIDATE_BRANCH: hobbyroom/ppm-inner-reason-visibility-20260911
-CANDIDATE_HEAD_SHA: 59ad44da3d89769c05f0725f9929135b0262f4dd
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
-ALLOWED_PATH_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
-CHECK_PAUL: PASS
-CHECK_HISTORY: PASS
-CHECK_LAST_GOOD: PASS
-CHECK_NEIGHBORS: PASS
-CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PASS
-CHECK_INVARIANTS: PASS
-HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
-HISTORY_SOURCE_BLOB_SHA: dbc77c1eb820bdc91918b81d290fc46016faecf6
-HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-HISTORY_PROOF_RUNNER_BLOB_SHA: ee1701de79a577c611c0e55a5b76fe6d7837441a
-PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
-PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
-ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md
-ERROR_SOURCE_BLOB_SHA: 78f51bfa6d7e5f0418ef35a9fe1e43d0bd1c5d26
-CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: dda5ca454e8592bfde80a2feade6e786251f3e07
-DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 0cf9e1eb3744add9e79f1eab5b19fc8892945b04
-STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
-STANDARD_SOURCE_BLOB_SHA: 8c90de4920ec81e10f3952bbd52208fad5a42367
-PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/M37_ARBEITSPROTOKOLL_20260911.md
-PROTOCOL_SOURCE_BLOB_SHA: 761e8cacb29262f3c3748ea40d9895358aaf96a8
-INTEGRATION_ALLOWED: true
-END_HOBBYROOM_WORK_LOCK_V1
+Keinen zweiten Artikel in diesem Diagnoseauftrag.
+Keine Reparatur im laufenden Test.
+Kein 7/7-Lauf vor Auswertung dieses einen Artikels.
+Kein WordPress-Write.
+Kein Publish.
 
 ## VERWEISE
 
 - CURRENT: `CURRENT_STATE.md`
 - aktuelle Fehlerquelle: `QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
-- Arbeitsprotokoll: `M37_ARBEITSPROTOKOLL_20260911.md`
-- dauerhafte Entscheidungen: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- M37-Protokoll: `M37_ARBEITSPROTOKOLL_20260911.md`
 - Standard: `protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md`
