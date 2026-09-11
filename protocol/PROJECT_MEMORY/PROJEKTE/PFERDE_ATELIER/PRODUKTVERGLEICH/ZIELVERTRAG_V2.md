@@ -1,108 +1,111 @@
 # PRODUKTVERGLEICH – ZIELVERTRAG V2
 
-STAND: 2026-09-09
+STAND: 2026-09-11
 STATUS: AKTIV
 
 ## Ziel
 
-PRODUKTVERGLEICH erzeugt aus eindeutig gebundenem Produktwissen einen fachlich und technisch vollständig gebundenen **A-vs-B-Vergleichsdossier-Output**.
+PRODUKTVERGLEICH erzeugt für **alle relevanten Pferde-Atelier-Produktgruppen mit eigener Vergleichskategorie** aus eindeutig gebundenem Produktwissen fachlich und technisch vollständig gebundene A-vs-B-Vergleichsdossiers.
 
-Der fertige redaktionelle Artikel wird später durch den bestehenden SEO/TEXT-Fachworkflow erzeugt und über den bestehenden Produktions-Handoff/ACM-Weg bis zum WordPress-DRAFT geführt.
+Autoritative Portalbasis:
+- 329 Produktseiten;
+- 1124 Artikelkategorien;
+- **175 eindeutige Produktgruppen mit `theme = Vergleich`**.
 
-Pferde-Atelier ist die erste Projektkonfiguration; der Vergleichskern bleibt allgemeingültig.
+Regendecken ist nur die erste Proofgruppe, nicht der Zielumfang.
 
-## Verbindlicher Hauptfluss
+## Verbindlicher Gesamtfluss
 
-`Produktwissen -> Vergleichbarkeit -> SEO-Nachfrage/Kannibalisierung -> gebundene Fachpolicy -> Vergleichsdossier V2 -> SEO/TEXT-Fachworkflow -> bestehender FACHWORKFLOW_HANDOFF_REQUEST.json -> ACM -> signierter WordPress-DRAFT -> Readback/DOM -> STOP`
-
-Affiliate liest separat exakte Produktidentitäten für aktuelle Kaufangebote.
+`alle Vergleichsgruppen -> möglichst vollständiges Produktwissen je Gruppe -> alle fachlich zulässigen A-vs-B-Paare -> SEO-Nachfrage/Kannibalisierung -> gebundene Fachpolicy -> Vergleichsdossier V2 -> später SEO/TEXT -> bestehender Handoff -> ACM -> signierter WordPress-DRAFT -> STOP`
 
 Kein Auto-Publish.
 
-## Aktiver Artikeltyp-Scope
+## Vollständigkeitsvertrag
 
-### PRODUCT_COMPARISON V1
-- exakt **2 konkrete Produkte**;
-- A gegen B;
+Für jede autoritative Vergleichsgruppe muss ein expliziter Status existieren.
+Keine Gruppe darf still fehlen.
+
+READY erst wenn:
+- Produktgruppenidentität portalgebunden;
+- Produktinventar ausreichend/aktuell recherchiert;
+- Vergleichsprofil vollständig;
+- Decision-Policy vollständig;
+- erforderliche Produktfakten gebunden.
+
+Andere Zustände müssen sichtbar sein, z. B.:
+- `PROFILE_MISSING`;
+- `POLICY_MISSING`;
+- `PRODUCT_INVENTORY_MISSING`;
+- `RESEARCH_INCOMPLETE`;
+- `BLOCKED`.
+
+## Kandidatenabdeckung
+
+Pro READY-Gruppe:
+- PRODUCT_COMPARISON V1 = exakt 2 Produkte, A gegen B;
 - mindestens zwei Hersteller;
-- gleiche Produktgruppe;
-- gleiche fachliche Nutzungsebene;
-- keine künstliche Paarung wegen Affiliate-Verfügbarkeit.
+- gleiche Produktgruppe/Nutzungsebene;
+- alle fachlich zulässigen Cross-Brand-Paare werden erzeugt;
+- Same Brand/incompatible Profile werden vor kostenpflichtigem SEO ausgeschlossen;
+- keine willkürliche Top-N-/Pair-/Group-Grenze;
+- technische Batchverarbeitung ist zulässig, darf Coverage aber nicht reduzieren;
+- Resume muss vollständig/idempotent sein.
 
-### Nicht Teil dieses aktiven Vertrags
-- 3–4-Produkte-Gruppenvergleich;
-- Variantenvergleich als eigener Artikeltyp.
-
-Diese können später separat gebunden werden, dürfen aber nicht still die A-vs-B-Regeln erweitern.
+Coverage muss pro Gruppe und global nachweisen:
+- bekannte Produkte;
+- Hersteller;
+- mathematisches Paaruniversum;
+- fachlich zulässige Kandidaten;
+- terminal geprüfte Paare;
+- offene Paare;
+- BLOCKED nach Grund;
+- SEO-PASS;
+- Dossiers;
+- neue Providerkosten.
 
 ## Zuständigkeiten
 
 ### PRODUKTVERGLEICH
 Verantwortet:
-- exakte Produktidentität;
-- Vergleichsdefinition;
+- vollständige Gruppenregistry;
+- Produkt-/Variantenidentität;
 - Vergleichbarkeit;
-- gebundene Herstellerfakten/Quellenstatus;
-- Vergleichsmerkmale;
-- gebundene Decision-Policy;
-- erlaubte Aussagearten;
-- feste Bedarfs-Codes;
-- verbotene/unbelegte Schlussfolgerungen;
+- Herstellerfakten/Quellenstatus;
+- Vergleichsprofile;
+- Decision-Policies;
+- alle fachlich zulässigen A-vs-B-Kandidaten;
 - bidirektionale SEO-Eignung;
-- gebundenes Vergleichsdossier;
-- Vergleichs-QA bis zur Dossiergrenze.
+- Coverage-Nachweis;
+- Dossier V2.
 
-PRODUKTVERGLEICH schreibt im Zielbetrieb **nicht** den fertigen Artikel und erzeugt keinen eigenen produktiven WordPress-DRAFT.
+PRODUKTVERGLEICH schreibt keinen fertigen Produktionsartikel.
 
 ### SEO/TEXT
-Verantwortet später:
-- Artikeltyp-Textvertrag `Produktvergleich`;
-- Aufbau/Abschnittsreihenfolge;
-- Überschriften-/Tabellenvertrag;
-- Sprache/Stil;
-- SEO-Textproduktion;
-- interne Links;
-- LanguageTool;
-- allgemeine bestehende Qualitätsregeln.
-
-SEO/TEXT darf keine fachliche Produktbedeutung ergänzen, die im Dossier nicht gebunden ist.
+Verantwortet später Sprache, Struktur, Tabellen, Links, LanguageTool und eigentliche Textproduktion. Es darf keine fachliche Produktbedeutung erfinden.
 
 ### ACM
-Orchestriert nur den bestehenden gebundenen Produktionsweg.
-Keine fachliche Entscheidungsfreiheit.
+Orchestriert nur den gebundenen bestehenden Produktionsweg.
 
 ### AFFILIATE
-Liefert separat:
-- Angebot;
-- Preis;
-- Verfügbarkeit;
-- Händler;
-- Tracking.
+Liefert separat Angebot, Preis, Verfügbarkeit, Händler und Tracking. Commerce darf Fachauswahl/Fazit nicht verändern.
 
-Affiliate darf Produktwahrheit, Paarung oder Vergleichsaussage nicht verändern.
-
-## Harte Fachregeln
+## Fachregeln je Artikel
 
 - exakt zwei gebundene Produkte;
-- keine Rangliste, Sterne, Punkte oder pauschaler Testsieger;
-- Quellenstatus wie `NOT_IN_SOURCE`, `SOURCE_CONFLICT`, `CONFIGURATION_DEPENDENT` bleiben fachlich wirksam;
-- Quellenlimit erzeugt keine Präferenz;
+- keine Rangliste/Punkte/Sterne/pauschaler Testsieger;
+- Quellenlücken erzeugen keine Präferenz;
 - kein ähnliches Ersatzprodukt;
 - nur belegte Herstellerfakten;
-- keine freie Produkterfindung;
-- keine freie fachliche Schlussfolgerung außerhalb der Decision-Policy;
+- keine freie Schlussfolgerung außerhalb der Decision-Policy;
 - technische Andersartigkeit ist nicht automatisch Vorteil/Nachteil;
-- SEO darf Produktidentitäten nicht erfinden;
-- Affiliate-Verfügbarkeit ändert keine fachliche Wahrheit;
-- fehlende/abweichende Bindung -> BLOCKED;
-- kein Auto-Publish.
+- fehlende/abweichende Bindung -> BLOCKED.
 
-## Decision-Policy / Dossier V2
+## Dossier
 
-Dossier-Vertrag:
+Vertrag:
 `UPC_BOUND_COMPARISON_DOSSIER_V2`
 
-Gebunden werden:
+Gebunden werden u. a.:
 - beide Produktidentitäten;
 - Fakten/Quellenstatus;
 - SEO-Evidenz;
@@ -116,65 +119,38 @@ Gebunden werden:
 
 Keine Prosa aus PRODUKTVERGLEICH.
 
-Fachvertrag:
-`AKTENSCHRANK/05_FACH_DOSSIER_ARTIKELTYP_VERTRAG_V1.md`
+## Kostenregel
 
-## Kosten-/Zwischenspeicherregel
-
-Bereits bezahlte Produkt-/Paar-SEO-Evidenz wird innerhalb ihrer gültigen Hash-/Kontextbindung wiederverwendet.
-
-Reihenfolge:
 `persistente UPC-Zwischenevidenz -> PSTE-Cache -> nur fehlender Provider-Endpunkt`.
 
-Decision-Policy besitzt eine getrennte Bindung.
-Eine reine Fachpolicy-Änderung:
-- erzwingt Dossier-Neuprüfung;
-- darf unveränderte bezahlte SEO-Evidenz nicht erneut kaufen.
-
-0.8.2/0.8.3 echter Laufzeit-SEO-Binding-Hash:
-`863a724d9f349770d9f62c7c65ee7c74565d4247f9bf15504984ae4ece2c9003`
-
-Manipulation -> BLOCK.
-Ablauf/echte Kontextdrift -> frische Recherche.
+Bereits gültig bezahlte Produkt-/Paar-Evidenz wird wiederverwendet.
+Reine Fachpolicy-Änderung darf unveränderte SEO-Evidenz nicht neu kaufen.
 
 ## Schnittstellengrenze
 
-Einzige spätere Produktions-Eingangswahrheit bleibt:
-
+Spätere einzige Produktions-Eingangswahrheit bleibt:
 `FACHWORKFLOW_HANDOFF_REQUEST.json`
 
-Kein zweites Handoff-Format.
-Kein neues Jobmanifest.
-Keine 17. Top-Level-Eigenschaft.
-
-Die exakte Dossier-Abbildung in bestehende Produktionskontexte wird ausschließlich im SEO/TEXT-Büro gegen das reale Schema festgelegt und positiv/negativ getestet.
+Kein neues Handoff, kein neues Jobmanifest, keine 17. Top-Level-Eigenschaft, keine zweite Textmaschine.
 
 ## Aktuelle Abnahmegrenze
 
-Im PRODUKTVERGLEICH-Büro bereits belegt:
-- 0.8.2 WordPress-Live-Kostenwiederholung PASS;
-- 0.8.3 finale Fresh-ZIP lokal hart PASS;
-- 25/25 Tests;
-- 43/43 PHP-Lint;
-- 11 reale herstellerübergreifende UPK-Regendecken-Paare;
-- Decision-Policy/Dossier V2 fail-closed;
-- Fachvertrag geschlossen;
-- kein Auto-Publish.
+Belegt:
+- Regendecken-Proof 0.8.3 lokal hart PASS;
+- WordPress-Live-Wiederholung PASS;
+- Dossier-V2-/Policy-Mechanismus PASS;
+- Kostenschutz PASS.
 
-Noch offen:
-1. 0.8.3 WordPress-Live-Retest auf unverändertem Bestand;
-2. positiver Dossier-V2-Livefall erst bei realem SEO-geeignetem A-vs-B-Paar;
-3. ACM/SEO-TEXT-Nachbarweg vollständig hart freigeben;
-4. danach read-only Übergabevertrag im Nachbarbüro prüfen lassen;
-5. minimale Dossier-Abbildung in bestehenden Handoff;
-6. positiver/negativer Schnittstellentest;
-7. ein vollständiger echter Produktvergleich bis signiertem WordPress-DRAFT + Readback;
-8. Nutzerreview;
-9. kein Auto-Publish.
+Offen vor fachlicher Gesamtfreigabe:
+1. generische Registry aller 175 Vergleichsgruppen;
+2. expliziter Readiness-/Coverage-Status für 175/175;
+3. Produktrecherche je Gruppe;
+4. fachliche Profile/Policies je READY-Gruppe;
+5. vollständige gültige Paarabdeckung je READY-Gruppe;
+6. globale Coverage-Prüfung ohne stille Lücken;
+7. erster echter positiver Dossier-V2-Livefall;
+8. danach erst spätere SEO/TEXT-/ACM-Anbindung.
 
 ## Ablösung
 
-Dieser Zielvertrag löst `ZIELVERTRAG_V1.md` ab.
-
-WARUM:
-V1 beschrieb die verworfene eigene Produktvergleichs-Writer/Draft-Straße. V2 trennt Fach-Dossier und bestehende Textproduktion und verhindert damit eine zweite Textmaschine.
+`ZIELVERTRAG_V1.md` bleibt abgelöst.
