@@ -1,11 +1,11 @@
 {
   "system": "SYSTEM3_ISOLATED_ONE_PROCESS",
-  "status": "BLOCKED_FIRST_CANONICAL_ARTICLE",
+  "status": "FIRST_CANONICAL_ARTICLE_PASS_PRODUCTION_BLOCKED",
   "authoritative_runtime_scope": "isolated_system3 only",
   "architecture_branch": "hobbyroom/system3-isolated-one-process-v1",
   "architecture_head": "5c34cf9e981d4e98134b40818c27a779c45524ce",
   "codex_live_branch": "hobbyroom/system3-codex-proven-path-v1",
-  "codex_live_head_before_state_record": "c9854442fd03c9d9eccf3299ce66bfcabae13b65",
+  "canonical_article_test_head": "52e9437d69d70dd8caeb7e75e188c468f6f3f693",
   "production_or_publish_allowed": false,
   "completed": [
     "isolated fixed process prototype built",
@@ -14,22 +14,54 @@
     "sealed copy created and outside repository access cut",
     "sealed-rule tamper negative test blocked correctly",
     "canonical article type for current topic resolved to FAQ",
-    "canonical FAQ primary_question input path bound"
+    "canonical FAQ primary_question input path bound",
+    "canonical_fact_pack_import_v1 externally researched and bound with three FULLY_SUPPORTED claims",
+    "negative realtest without canonical fact pack blocked fail-closed",
+    "negative realtest with fact pack but without required internal-link targets blocked fail-closed",
+    "exactly three externally pre-bound internal-link targets supplied for the test fixture",
+    "first canonical-rule-bound FAQ article returned SYSTEM3_RETURN_PASS",
+    "returned artifact independently audited against the same sealed canonical rules",
+    "artifact SHA256 independently confirmed as 40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
+    "current PR head repository entrance positive-negative CI green"
   ],
+  "resolved_blockers": [
+    {
+      "code": "MISSING_CANONICAL_SOURCE_FACT_PACK",
+      "resolved": true,
+      "evidence": "PR232 issuecomment-5633865978 proves the run progressed beyond the fact-pack gate once the canonical fact pack was supplied"
+    },
+    {
+      "code": "MISSING_REQUIRED_INTERNAL_LINK_TARGETS",
+      "resolved_for_current_test_fixture": true,
+      "evidence": "PR232 issuecomment-5634085512 returned SYSTEM3_RETURN_PASS after exactly three fixed runtime_order.links were supplied"
+    }
+  ],
+  "first_canonical_article": {
+    "article_id": "SYSTEM3-LIVE-001",
+    "article_type": "FAQ",
+    "subject": "Woran erkennt man eine passende Regendecke für ein Pferd?",
+    "return_evidence": "PR232 issuecomment-5634085512",
+    "artifact_audit_evidence": "PR232 issuecomment-5634121819",
+    "artifact_sha256": "40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
+    "status": "PASS"
+  },
   "current_blocker": {
-    "code": "MISSING_CANONICAL_SOURCE_FACT_PACK",
-    "evidence": "PR232 issuecomment-5633598160 and diagnostic issuecomment-5633656653",
-    "detail": "First canonical-rule-bound article realtest stops because the input does not contain the required externally researched canonical fact-pack evidence. Article generation is not allowed to research, invent, repair or populate missing evidence itself.",
-    "required_contract": "canonical_fact_pack_import_v1",
-    "minimum_claims": 3,
+    "code": "CANONICAL_LINK_PRESELECTION_AUTHORITY_NOT_DEFINED",
+    "detail": "The sealed canonical rules require exactly one preselected published WordPress page/category target for each role parent_category, semantic_related and further_information before article generation, but define no deterministic multi-candidate selection/tie-breaker and no authoritative external stage that assigns those roles. The current single test passed only because the three targets, anchors and reasons were fixed externally in the test fixture.",
+    "evidence": "PR232 issuecomment-5633965684",
     "resolved": false
   },
-  "last_safe_state": "Rule binding/isolation live PASS on architecture head 5c34cf9e981d4e98134b40818c27a779c45524ce; canonical FAQ metadata binding on Codex live head c9854442fd03c9d9eccf3299ce66bfcabae13b65.",
-  "next_action": "Supply the required externally researched canonical_fact_pack_import_v1 for the same FAQ fixture, with at least three FULLY_SUPPORTED claims and exact source/evidence bindings, then rerun the same canonical-rule-bound System 3 article test without changing rules, architecture or route.",
+  "validator_boundary": {
+    "cloud_entry_verify_is_canonical_rule_validator": false,
+    "detail": "isolated_system3/cloud_entry.py verify only checks output presence and minimum word count; canonical article PASS therefore requires sealed-rule validation/audit, not that helper alone."
+  },
+  "last_safe_state": "First canonical FAQ article PASS and independent sealed-rule artifact audit PASS on test head 52e9437d69d70dd8caeb7e75e188c468f6f3f693; no WordPress write, publish or merge performed.",
+  "next_action": "Close only the canonical link-preselection authority gap for the fixed System 3 process: determine or define the single allowed pre-article authority/input that supplies exactly one eligible WordPress page/category target plus bound anchor/reason for each required role, without giving Codex/model free selection authority. Then rerun the same article path with positive and negative selection/input cases. Do not change content rules, article rules, PPM, PSERC or PSTE.",
   "forbidden": [
     "reuse runtime/workflow code from System 1 or System 2",
     "outside control of routing, rules, prompts, tools or output policy",
     "model-invented facts or missing evidence",
+    "model/Codex free selection of internal link targets",
     "rule changes or reinterpretation",
     "alternate route or fallback",
     "auto-publish or WordPress write"
