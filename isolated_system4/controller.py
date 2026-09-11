@@ -20,6 +20,23 @@ def verify_state(state):
     if state.get('contract')!=CONTRACT: raise Fail('STATE_CONTRACT_FAIL')
     if sha(immutable_core(state))!=state.get('immutable_core_sha256'): raise Fail('IMMUTABLE_CORE_TAMPERED')
     if state.get('publish_allowed') is not False: raise Fail('PUBLISH_AUTHORITY_FAIL')
+    for field in ('research','facts'):
+        value=state.get(field)
+        if value is not None:
+            if not isinstance(value,dict) or not isinstance(value.get('text'),str) or hashlib.sha256(value['text'].encode()).hexdigest()!=value.get('sha256'):
+                raise Fail(field.upper()+'_INTEGRITY_FAIL')
+    draft=state.get('draft_markdown')
+    if draft is not None and (not isinstance(draft,str) or hashlib.sha256(draft.encode()).hexdigest()!=state.get('draft_sha256')):
+        raise Fail('DRAFT_INTEGRITY_FAIL')
+    phase=state.get('phase')
+    if phase not in {'RESEARCH_REQUIRED','FACT_CHECK_REQUIRED','DRAFT_REQUIRED','CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','RELEASED'}:
+        raise Fail('PHASE_INVALID')
+    if phase=='FACT_CHECK_REQUIRED' and state.get('research') is None: raise Fail('PHASE_STATE_MISMATCH')
+    if phase in {'DRAFT_REQUIRED','CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','RELEASED'} and (state.get('research') is None or state.get('facts') is None): raise Fail('PHASE_STATE_MISMATCH')
+    if phase in {'CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','RELEASED'} and not draft: raise Fail('PHASE_STATE_MISMATCH')
+    if phase=='REPAIR_REQUIRED' and (state.get('checks',{}).get('status')!='FAIL' or state.get('last_error') not in state.get('checks',{}).get('errors',[])): raise Fail('PHASE_STATE_MISMATCH')
+    if phase in {'OUTPUT_GATE_REQUIRED','RELEASED'} and (state.get('checks',{}).get('status')!='PASS' or state.get('checks',{}).get('checked_draft_sha256')!=state.get('draft_sha256')): raise Fail('PHASE_STATE_MISMATCH')
+    if phase=='RELEASED' and state.get('released') is not True: raise Fail('PHASE_STATE_MISMATCH')
 
 def extract_first_ready(snapshot):
     batch=snapshot.get('next_textmachine_metadata_batch')
@@ -136,6 +153,7 @@ def main(argv):
       elif cmd=='draft': cmd_draft(argv[2],argv[3])
       elif cmd=='check': return cmd_check(argv[2])
       elif cmd=='release': cmd_release(argv[2],argv[3])
+      elif cmd=='verify': load(argv[2]); print('SYSTEM4_STATE_VERIFY_PASS')
       else: raise Fail('BAD_COMMAND')
       return 0
     except (Fail,KeyError,IndexError,json.JSONDecodeError) as e:
