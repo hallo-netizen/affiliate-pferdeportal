@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-11
-STATUS: AKTIV / UPC 0.8.5 LIVE FAIL-CLOSED PASS / UPK 0.5.1 LIVE-BATCH 17/17 ABGESCHLOSSEN / MARKTRECHERCHE A–J GESICHERT / 175-GRUPPEN-COVERAGE WEITER OFFEN
+STATUS: AKTIV / UPC 0.8.5 LIVE FAIL-CLOSED PASS / UPK 0.5.1 LIVE-BATCH 17/17 ABGESCHLOSSEN / MARKTRECHERCHE A–J GESICHERT / 175-GRUPPEN-COVERAGE KONSOLIDIERT / NÄCHSTER GAP DECKENGURTE
 
 ## AUTORITÄT
 
@@ -16,6 +16,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - Testgrenzen-/UPK-0.5.1-Beleg: `AKTENSCHRANK/12_V085_LIVE_INVENTORY_GAP_UPK051_HARD_LOCAL_RECEIPT.md`
 - 0.5.1 WordPress-Live-Batch: `AKTENSCHRANK/23_UPK051_WORDPRESS_LIVE_BATCH_RECEIPT_20260911.md`
 - aktuelle Marktrecherchebelege: `AKTENSCHRANK/13_MARKTRECHERCHE_BATCH_A_20260911.md` bis `22_MARKTRECHERCHE_BATCH_J_20260911.md`
+- konsolidierte 175er Coverage-/Gap-Map: `AKTENSCHRANK/25_MARKTRECHERCHE_COVERAGE_175_A_J_20260911.md`
 
 ## INSTALLIERTER / GEPRÜFTER TECHNISCHER STAND
 
@@ -74,18 +75,22 @@ Daher gilt weiterhin:
 
 Aus dem Batch darf ohne anschließende Produktvergleichs-Vorschau keine neue globale Live-Paarzahl behauptet werden.
 
-## MARKTRECHERCHE A–J
+## MARKTRECHERCHE A–J / 175ER COVERAGE
 
-Auf demselben Produktvergleichs-Hobbybranch wurden nach dem Live-Batch zehn reine Research-Evidence-Akten gesichert:
-- Batch A bis J;
-- keine Codeänderung;
-- kein Product-Knowledge-Import;
-- keine SEO-Freigabe;
-- keine Markt-Vollständigkeitsbehauptung.
+Die zehn Research-Evidence-Akten A–J sind gegen die autoritative Portal-Registry mit exakt 175 eindeutigen `product_slug`-Identitäten konsolidiert.
 
-Die Akten enthalten aktuelle Hersteller-/Modellkandidaten und Nutzungsklassen für weitere Produktgruppen.
+Der source-bound Coverage-Checkpoint ergibt:
+- `EVIDENCE_PRESENT`: 70;
+- `PARTIAL_AMBIGUOUS`: 57;
+- `NO_GROUP_EVIDENCE`: 48;
+- Summe: 175/175.
 
-**Noch nicht belegt:** wie viele der 175 Vergleichsgruppen A–J zusammen bereits abdecken. Diese Coverage darf nicht geschätzt werden.
+Diese Statuswerte bedeuten **nicht** Markt-Vollständigkeit und **nicht** Pairing-Ready. Hersteller-/Modellkandidaten und offene Fakten-/Nutzungsklassenfragen bleiben in ihren jeweiligen Research-Akten gebunden.
+
+Der frühere Chat-Zwischenwert `129 / 52 / 77 / 46` ist verworfen; autoritativ für diesen Checkpoint ist ausschließlich `AKTENSCHRANK/25_MARKTRECHERCHE_COVERAGE_175_A_J_20260911.md`.
+
+Wichtiger Fail-closed-Befund:
+Die sichtbare Bezeichnung `Weidezaungeräte` existiert mit zwei verschiedenen Registry-Identitäten (`weidezaungeraete` und `weide-zauntechnik-weidezaungeraete`). Keine stille Zusammenführung.
 
 ## AKTUELLES GESAMTZIEL
 
@@ -100,11 +105,10 @@ Keine Markt-Vollständigkeitsbehauptung ohne gruppenspezifischen Beleg.
 
 Keine weitere Pluginentwicklung.
 
-Zuerst die vorhandenen Research-Akten A–J **gegen die autoritative 175er Registry konsolidieren**:
-- bereits recherchierte Gruppen eindeutig markieren;
-- noch ungedeckte Gruppen eindeutig bestimmen;
-- Dubletten/mehrdeutige Gruppenkeys sichtbar lassen;
-- erst danach Marktrecherche an der ersten wirklich ungedeckten Gruppe fortsetzen.
+Der A–J-vs-175-Abgleich ist abgeschlossen. Der erste echte `NO_GROUP_EVIDENCE`-Gap in Registry-Reihenfolge ist:
+`pferdedecken-deckengurte`.
+
+Jetzt ausschließlich dort mit aktueller Hersteller-/Modellrecherche fortsetzen. Danach den nächsten echten Gap aus der Coverage-Map nehmen.
 
 Erst nach einem großen belastbaren Forschungsblock wird das bestehende Product Knowledge einmal gebündelt aktualisiert.
 
@@ -114,7 +118,7 @@ Vor jeder zukünftigen Plugin-Übergabe zwingend:
 ## NACHBARWEG
 
 SEO/TEXT/ACM ist getrennt und wird hier nicht verändert.
-Aktueller frisch geprüfter ACM-Head:
+Aktueller frisch geprüfter ACM-Head aus der letzten Abschlussprüfung:
 `ba511c2caec5e970948cf8e5c0139bcfea017ce2`
 
 Dort erster echter Realtest-Blocker:
