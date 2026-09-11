@@ -38,16 +38,14 @@ Geschlossen:
 Weiter offen:
 - exakte UPC-0.8.6-Fresh-ZIP besitzt nur 7 maschinenfeste Vergleichsprofile/Decision-Policies;
 - 143 der 150 grundsätzlich V1-fähigen Gruppen fehlen dort noch maschinenfest;
-- für 7 weitere Gruppen liegen inzwischen source-bound Profilspezifikationen in Akten 62–64 vor, aber noch **nicht** materialisiert;
+- source-bound Profilspezifikationen liegen inzwischen für **67 zusätzliche Gruppen** in Akten 62–84 vor, aber sind noch **nicht** technisch materialisiert;
 - weitere Profil-/Faktenmatrizen source-bound vorbereiten, danach gebündelt materialisieren und erneut hart testen;
 - Product Knowledge und daraus entstehende fachlich zulässige Paarabdeckung bleiben je Gruppe fail-closed nachzuweisen.
 
 Dauerbelege:
 - `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`;
 - `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`;
-- `AKTENSCHRANK/62_PROFILE_FACT_MATRIX_HIGH_NECK_DECKEN_V1_20260911.md`;
-- `AKTENSCHRANK/63_PROFILE_FACT_MATRIX_DECKENZUBEHOER_V1_20260911.md`;
-- `AKTENSCHRANK/64_PROFILE_FACT_MATRIX_HALFTER_V1_20260911.md`.
+- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/84_...`.
 
 ## PV-FAMILY-085-001 – Readiness zählte Herstellerbezeichnungen statt Herstellerfamilien
 STATUS: CLOSED IM 0.8.5 / LOKAL HART PASS
@@ -132,14 +130,32 @@ Belegt:
 Dauerbeleg:
 `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`.
 
+## PV-GOV-20260911-001 – veraltete Stand-/Protokollbindung in der Abschlussprüfung
+STATUS: CLOSED / NACHGEHOLT 2026-09-11
+
+Befunde der frischen Abschluss-/Nachholprüfung:
+- Branch-Commit vor der Nachholung war `8f00f65254a63d21e9cf02f37df8839338d9684c` mit Akte 84; `70917470d9d8b85d5d33cf8004712b45dbf79acc` ist dessen Tree-SHA, nicht der Commit-HEAD;
+- `CURRENT_STATE.md` und `HOBBYRAUM.md` waren nur bis Akte 82 / 61 source-bound Gruppen nachgezogen;
+- `PROTOKOLL_20260911.md` war nur bis Akte 65 fortgeführt;
+- eine zwischenzeitlich gelesene ältere `FEHLERQUELLEN.md`-Fassung zeigte auf eine am geprüften Branch nicht vorhandene Akte 24;
+- während der Nachholung wurde `FEHLERQUELLEN.md` parallel in die vorliegende detaillierte autoritative Fehlerquelle umgebaut; ein 409-Konflikt verhinderte ein blindes Überschreiben.
+
+Reparatur:
+- keine fremde Paralleländerung überschrieben;
+- kurzzeitig zusätzlich erzeugte zweite Fehlerbilanz wieder entfernt;
+- `FEHLERQUELLEN.md` bleibt die **eine** detaillierte Fehlerautorität;
+- CURRENT_STATE/HOBBYRAUM werden auf Akten 62–84 / 67 source-bound Gruppen nachgezogen;
+- fehlende Chronik Akten 66–84 und die Abschlussprüfung werden in `PROTOKOLL_NACHHOLUNG_20260911.md` dauerhaft fortgeführt.
+
 ## AKTUELLER ERSTER OFFENER ARBEITSBLOCK
 
 Kein neuer technischer Pluginfehler ist nach `PV-LIFECYCLE-086-001` belegt.
 
 Aktive Arbeit ist der V2-Readiness-Daten-/Fachblock:
 - source-bound Profil-/Faktenmatrizen in Registry-Reihenfolge;
-- Akten 62–64 sind erstellt, aber nicht materialisiert;
-- nächster zusammenhängender Profilblock: `pferdebuersten`, `striegel`, `kardaetschen`;
+- Akten 62–84 sind erstellt, aber nicht technisch materialisiert;
+- **67 zusätzliche Gruppen** sind source-bound vorbereitet;
+- nächster zusammenhängender zulässiger Profilblock laut autoritativer Portalstruktur: `p163 hindernisstangen` -> `p164 sprungstaender` -> `p165 cavaletti`;
 - erst ein sinnvoll gebündelter Profil-/Faktenstand darf technisch materialisiert werden;
 - danach wieder vollständiger Positiv-/Negativ-/Mutation-/Fresh-ZIP-Weg.
 
@@ -154,3 +170,4 @@ Kein Publish.
 
 Neue Produktvergleichsfehler werden ausschließlich hier ergänzt.
 Das zentrale Fehlerregister bleibt reiner Wegweiser.
+Es darf keine zweite detaillierte Produktvergleichs-Fehlerliste geben.
