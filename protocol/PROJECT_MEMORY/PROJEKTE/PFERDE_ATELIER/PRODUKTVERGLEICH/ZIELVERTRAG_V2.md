@@ -43,17 +43,17 @@ Andere Zustände müssen sichtbar sein, z. B.:
 
 Pro READY-Gruppe:
 - PRODUCT_COMPARISON V1 = exakt 2 Produkte, A gegen B;
-- mindestens zwei Hersteller;
+- mindestens zwei Herstellerfamilien;
 - gleiche Produktgruppe/Nutzungsebene;
 - alle fachlich zulässigen Cross-Brand-Paare werden erzeugt;
-- Same Brand/incompatible Profile werden vor kostenpflichtigem SEO ausgeschlossen;
+- Same Brand/Same Family/incompatible Profile werden vor kostenpflichtigem SEO ausgeschlossen;
 - keine willkürliche Top-N-/Pair-/Group-Grenze;
 - technische Batchverarbeitung ist zulässig, darf Coverage aber nicht reduzieren;
 - Resume muss vollständig/idempotent sein.
 
 Coverage muss pro Gruppe und global nachweisen:
 - bekannte Produkte;
-- Hersteller;
+- Herstellerfamilien;
 - mathematisches Paaruniversum;
 - fachlich zulässige Kandidaten;
 - terminal geprüfte Paare;
@@ -62,6 +62,21 @@ Coverage muss pro Gruppe und global nachweisen:
 - SEO-PASS;
 - Dossiers;
 - neue Providerkosten.
+
+## Research-/Product-Knowledge-Grenze
+
+Research-Evidence ist **nicht** automatisch Product Knowledge.
+
+Vor Übernahme zwingend:
+- exakte Produktidentität;
+- belastbare Herstellerquelle;
+- gruppenspezifische gemeinsame Faktenmatrix;
+- Nutzungsebene/Sinnprüfung;
+- Quellen-/Konfliktstatus.
+
+Markt-Vollständigkeit darf nie aus bloßer Kandidatenzahl oder einem Importlauf abgeleitet werden.
+
+Research darf in großen Datenblöcken gesammelt werden. Es ist **kein** eigener Plugin-Release pro Produktgruppe oder Research-Batch erforderlich.
 
 ## Zuständigkeiten
 
@@ -126,6 +141,18 @@ Keine Prosa aus PRODUKTVERGLEICH.
 Bereits gültig bezahlte Produkt-/Paar-Evidenz wird wiederverwendet.
 Reine Fachpolicy-Änderung darf unveränderte SEO-Evidenz nicht neu kaufen.
 
+## Plugin-/Freigaberegel
+
+Research-/Datenarbeit löst nicht automatisch eine neue Pluginversion aus.
+
+Wenn eine technische Änderung tatsächlich nötig wird, darf ein Plugin erst an den Nutzer übergeben werden, wenn die **exakt auszugebende ZIP** belegt hat:
+- lokalen Positivtest;
+- lokalen Negativ-/Mutationstest;
+- Gegenprüfung gegen den gesamten aktuellen Produktvergleichsworkflow;
+- Fresh-ZIP-/Hashbindung entsprechend dem betroffenen Releaseweg.
+
+Kein PASS nur aus Codeansicht.
+
 ## Schnittstellengrenze
 
 Spätere einzige Produktions-Eingangswahrheit bleibt:
@@ -133,23 +160,20 @@ Spätere einzige Produktions-Eingangswahrheit bleibt:
 
 Kein neues Handoff, kein neues Jobmanifest, keine 17. Top-Level-Eigenschaft, keine zweite Textmaschine.
 
-## Aktuelle Abnahmegrenze
+## Abnahmebedingungen
 
-Belegt:
-- Regendecken-Proof 0.8.3 lokal hart PASS;
-- WordPress-Live-Wiederholung PASS;
-- Dossier-V2-/Policy-Mechanismus PASS;
-- Kostenschutz PASS.
+Gesamtfreigabe erst wenn:
+1. 175/175 Vergleichsgruppen ohne stille Lücke geführt werden;
+2. Markt-/Produktrecherche je Gruppe belastbar genug oder explizit offen/blockiert ist;
+3. Profile/Policies je READY-Gruppe vollständig gebunden sind;
+4. alle fachlich zulässigen Paare je READY-Gruppe vollständig abgedeckt sind;
+5. globale Coverage-/Resume-/Idempotenzprüfung PASS ist;
+6. Kosten-/SEO-/Dossier-/Audit-Schutzregeln PASS bleiben;
+7. mindestens ein echter positiver Dossier-V2-Livefall vorliegt;
+8. spätere SEO/TEXT-/ACM-Anbindung separat im zuständigen Nachbarweg freigegeben und positiv/negativ geprüft ist;
+9. kein Auto-Publish entsteht.
 
-Offen vor fachlicher Gesamtfreigabe:
-1. generische Registry aller 175 Vergleichsgruppen;
-2. expliziter Readiness-/Coverage-Status für 175/175;
-3. Produktrecherche je Gruppe;
-4. fachliche Profile/Policies je READY-Gruppe;
-5. vollständige gültige Paarabdeckung je READY-Gruppe;
-6. globale Coverage-Prüfung ohne stille Lücken;
-7. erster echter positiver Dossier-V2-Livefall;
-8. danach erst spätere SEO/TEXT-/ACM-Anbindung.
+**Dynamischer Fortschritt gehört ausschließlich in `CURRENT_STATE.md` und `HOBBYRAUM.md`, nicht in diesen Zielvertrag.**
 
 ## Ablösung
 
