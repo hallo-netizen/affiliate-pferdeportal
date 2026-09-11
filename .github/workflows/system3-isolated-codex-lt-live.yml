@@ -16,17 +16,18 @@ jobs:
     outputs:
       article: ${{ steps.codex.outputs.final-message }}
     steps:
-      - name: Sparse checkout only System 3
+      - name: Sparse checkout System 3
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
           sparse-checkout: |
             isolated_system3
           sparse-checkout-cone-mode: true
-      - name: Prove old systems are absent
+      - name: Physically remove every non-System-3 working file
         shell: bash
         run: |
           test -d isolated_system3
+          find . -mindepth 1 -maxdepth 1 ! -name isolated_system3 ! -name .git -exec rm -rf {} +
           count=$(find . -mindepth 1 -maxdepth 1 ! -name isolated_system3 ! -name .git -print | wc -l)
           test "$count" -eq 0
           echo SYSTEM3_CODEX_FILESYSTEM_ISOLATION_PASS
