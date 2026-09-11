@@ -80,7 +80,7 @@ Wichtige aktuelle Fail-closed-/Dedup-Bindungen:
 
 ## AKTUELLER ARBEITSBLOCK
 
-Autoritative Portalstruktur frisch weitergelesen:
+Autoritative Portalstruktur frisch in exakter Registry-Reihenfolge gelesen:
 - `p155 schubkarren`;
 - `p156 mistcontainer`;
 - `p157 mistlagerung` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`, überspringen;
@@ -89,12 +89,16 @@ Autoritative Portalstruktur frisch weitergelesen:
 - `p160 reitplatzdrainage` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`, überspringen.
 
 Nächster Profilblock:
-`paddockzaeune` -> `reitplatzboden`, danach nächsten zulässigen Registry-Key hinter `reitplatzdrainage` direkt aus der autoritativen Portalstruktur lesen.
+`schubkarren` -> `mistcontainer` -> `paddockzaeune`.
+
+Danach:
+`reitplatzboden`, anschließend nächsten zulässigen Registry-Key hinter `reitplatzdrainage` direkt aus der autoritativen Portalstruktur lesen.
 
 Vor Pairing hart zu normalisieren:
-- Paddockzäune: konkrete Zaun-/Panel-/Material-/Elektrifizierungs-Unterklasse; keine Obergruppe blind gegen Holz-, Kunststoff-, Elektro- oder mobile Panels mischen;
-- Reitplatzboden: konkrete serien-/systemgebundene Boden-/Tretschichtklasse; keine Bauleistung, Drainage oder unterschiedliche Schichtsysteme blind paaren;
-- `reitplatzdrainage` bleibt V1 fail-closed NOT_APPLICABLE.
+- Schubkarren: gleiche Mulden-/Rahmen-/Rad-/Kapazitätsklasse; keine Zweiradkarre, Futterwagen oder Elektroschubkarre blind kreuzen;
+- Mistcontainer: gleiche Container-/Volumen-/Aufnahme-/Entleerungsklasse; keine bauliche Mistlagerstätte;
+- Paddockzäune: Pflicht-Subtyp nach Bau-/Material-/Elektrifizierungsprinzip; Holz-, Kunststoff-, Elektro- und mobile Panelzäune nie blind mischen;
+- Reitplatzboden: konkrete serien-/systemgebundene Boden-/Tretschichtklasse; keine Bauleistung oder Drainage blind paaren.
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> sinnvoll bündeln -> erst danach technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
