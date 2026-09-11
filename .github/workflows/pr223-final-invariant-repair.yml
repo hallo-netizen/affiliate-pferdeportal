@@ -1,0 +1,112 @@
+name: TEMP PR223 final invariant repair
+on:
+  push:
+    branches:
+      - hobbyroom/107007-simple-entry-aggregate-checker-v2
+permissions:
+  contents: write
+jobs:
+  repair-test-finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Restore slotless plan item and v4-v5 compatibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          action=Path('control/single-door-boundary/codex_current_action.py')
+          s=action.read_text(encoding='utf-8')
+          old="""    meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'plan_slot':it.get('plan_slot'),'source_snapshot_id':source_id,'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
+              for k,v in expected_pi.items():
+                  if pi.get(k)!=v: raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH:'+k)
+              qb=pi.get('quality_binding'); wc=qb.get('wordpress_category') if isinstance(qb,dict) else None
+              if not isinstance(wc,dict) or str(wc.get('slug') or '')!=str(meta.get('category') or '') or wc.get('taxonomy')!='category': raise ViewError('PLAN_ITEM_CATEGORY_MISMATCH')
+          """
+          new="""    meta=bound['meta']; expected_pi={'canonical_article_id':it.get('canonical_article_id'),'source_snapshot_id':source_id,'article_type':meta.get('article_type'),'target_keyword':meta.get('target_keyword'),'topic':meta.get('title')}
+              if 'plan_slot' in pi: raise ViewError('PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
+              for k,v in expected_pi.items():
+                  if pi.get(k)!=v: raise ViewError('PLAN_ITEM_IDENTITY_MISMATCH:'+k)
+              cb=pi.get('category_binding'); qb=pi.get('quality_binding'); wc=qb.get('wordpress_category') if isinstance(qb,dict) else None
+              category=(cb.get('slug') if isinstance(cb,dict) else None) or (wc.get('slug') if isinstance(wc,dict) else None)
+              if str(category or '')!=str(meta.get('category') or ''): raise ViewError('PLAN_ITEM_CATEGORY_MISMATCH')
+              if isinstance(wc,dict) and wc.get('taxonomy') not in (None,'category'): raise ViewError('PLAN_ITEM_CATEGORY_TAXONOMY_MISMATCH')
+          """
+          if old not in s: raise SystemExit('ACTION_SLOTLESS_REPLACE_POINT_MISSING')
+          action.write_text(s.replace(old,new,1),encoding='utf-8')
+
+          handoff=Path('control/startmaster0107/fachworkflow_proof_handoff.py')
+          s=handoff.read_text(encoding='utf-8')
+          old="""    source_id=ctx['source_sha256']
+              if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')
+              expected={\"canonical_article_id\":request[\"canonical_article_id\"],\"plan_slot\":request[\"plan_slot\"],\"source_snapshot_id\":source_id,\"article_type\":meta.get(\"article_type\"),\"target_keyword\":meta.get(\"target_keyword\"),\"topic\":meta.get(\"title\")}
+              for k,v in expected.items():
+                  if item.get(k)!=v: raise Blocked(\"BOUND_PRODUCTION_PLAN_ITEM_MISMATCH:\"+k)
+              quality=item.get(\"quality_binding\"); category=quality.get(\"wordpress_category\") if isinstance(quality,dict) else None
+              if not isinstance(category,dict) or not category.get('name') or category.get(\"slug\")!=meta.get(\"category\") or category.get(\"taxonomy\")!=\"category\": raise Blocked(\"BOUND_WORDPRESS_CATEGORY_MISMATCH\")
+          """
+          new="""    if str(release_item.get('plan_slot') or '')!=str(request.get('plan_slot') or ''): raise Blocked('BOUND_RELEASE_PLAN_SLOT_MISMATCH')
+              if release_item.get('canonical_article_id')!=request.get('canonical_article_id'): raise Blocked('BOUND_RELEASE_CANONICAL_ID_MISMATCH')
+              source_id=ctx['source_sha256']
+              if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')
+              if 'plan_slot' in item: raise Blocked('BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
+              expected={\"canonical_article_id\":request[\"canonical_article_id\"],\"source_snapshot_id\":source_id,\"article_type\":meta.get(\"article_type\"),\"target_keyword\":meta.get(\"target_keyword\"),\"topic\":meta.get(\"title\")}
+              for k,v in expected.items():
+                  if item.get(k)!=v: raise Blocked(\"BOUND_PRODUCTION_PLAN_ITEM_MISMATCH:\"+k)
+              cb=item.get('category_binding'); quality=item.get(\"quality_binding\"); category=quality.get(\"wordpress_category\") if isinstance(quality,dict) else None
+              slug=(cb.get('slug') if isinstance(cb,dict) else None) or (category.get('slug') if isinstance(category,dict) else None)
+              if str(slug or '')!=str(meta.get('category') or ''): raise Blocked(\"BOUND_WORDPRESS_CATEGORY_MISMATCH\")
+              if isinstance(category,dict) and category.get('taxonomy') not in (None,'category'): raise Blocked('BOUND_WORDPRESS_CATEGORY_TAXONOMY_MISMATCH')
+          """
+          if old not in s: raise SystemExit('HANDOFF_SLOTLESS_REPLACE_POINT_MISSING')
+          s=s.replace(old,new,1)
+          old_php="if((string)($plan['contract']??'')!=='production_plan_v4'){fwrite(STDERR,\"PRODUCTION_PLAN_CONTRACT_INVALID\\n\");exit(2);}"
+          new_php="if(!in_array((string)($plan['contract']??''),['production_plan_v4','production_plan_v5'],true)){fwrite(STDERR,\"PRODUCTION_PLAN_CONTRACT_INVALID\\n\");exit(2);}"
+          if old_php not in s: raise SystemExit('HANDOFF_V4_V5_REPLACE_POINT_MISSING')
+          handoff.write_text(s.replace(old_php,new_php,1),encoding='utf-8')
+
+          test=Path('control/startmaster0107/test_fachworkflow_proof_handoff.py')
+          s=test.read_text(encoding='utf-8')
+          needle='\"canonical_article_id\":rel[\"canonical_article_id\"],\"plan_slot\":meta[\"plan_slot\"],\"source_snapshot_id\":source'
+          if needle not in s: raise SystemExit('TEST_PLAN_SLOT_REPLACE_POINT_MISSING')
+          s=s.replace(needle,'\"canonical_article_id\":rel[\"canonical_article_id\"],\"source_snapshot_id\":source',1)
+          anchor='''        for field in (\"fact_pack\",\"production_plan_item\"):\n            bad=copy.deepcopy(req); bad[field][\"source_snapshot_id\"]=\"0\"*64\n            with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n'''
+          extra='''        for field in (\"fact_pack\",\"production_plan_item\"):\n            bad=copy.deepcopy(req); bad[field][\"source_snapshot_id\"]=\"0\"*64\n            with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n        bad=copy.deepcopy(req); bad[\"production_plan_item\"][\"plan_slot\"]=meta[\"plan_slot\"]\n        with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n        bad=copy.deepcopy(req); bad[\"plan_slot\"]=\"0\"*64\n        with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n'''
+          if anchor not in s: raise SystemExit('TEST_NEGATIVE_INSERT_POINT_MISSING')
+          test.write_text(s.replace(anchor,extra,1),encoding='utf-8')
+          print('PR223_INVARIANTS_RESTORED')
+          PY
+      - name: Hard positive negative full regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v control.startmaster0107.test_fachworkflow_proof_handoff
+          python3 control/single-door-boundary/codex_current_action.py selftest
+          python3 control/startmaster0107/fachworkflow_proof_handoff.py selftest
+          python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+          grep -F "['production_plan_v4','production_plan_v5']" control/startmaster0107/fachworkflow_proof_handoff.py >/dev/null
+          grep -F "PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN" control/single-door-boundary/codex_current_action.py >/dev/null
+          grep -F "BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN" control/startmaster0107/fachworkflow_proof_handoff.py >/dev/null
+          git diff --check
+          test -z "$(git diff --name-only origin/main...HEAD -- control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt control/startmaster0107/runtime_packages control/output-quarantine .github/workflows/pferde-atelier-endstempel.yml AGENTS.md)"
+      - name: Remove temporary test path and push clean candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/pr223-final-invariant-repair.yml
+          find control -type d -name __pycache__ -prune -exec rm -rf {} + || true
+          find . -name '*.pyc' -delete
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Preserve slotless plan binding and v4-v5 compatibility"
+          git push origin HEAD:hobbyroom/107007-simple-entry-aggregate-checker-v2
