@@ -1,130 +1,107 @@
 {
   "system": "SYSTEM3_ISOLATED_ONE_PROCESS",
-  "status": "FIRST_CANONICAL_ARTICLE_PASS_PRODUCTION_BLOCKED",
+  "status": "CANONICAL_LINK_RULE_RETEST_IN_PROGRESS",
   "authoritative_runtime_scope": "isolated_system3 only",
   "architecture_branch": "hobbyroom/system3-isolated-one-process-v1",
   "architecture_head": "5c34cf9e981d4e98134b40818c27a779c45524ce",
   "codex_live_branch": "hobbyroom/system3-codex-proven-path-v1",
-  "canonical_article_test_head": "52e9437d69d70dd8caeb7e75e188c468f6f3f693",
   "production_or_publish_allowed": false,
   "completed": [
     "isolated fixed process prototype built",
-    "no runtime code/handoff/worker/gate/state/signature reuse from other text systems",
-    "authoritative PPM 6.7.9, PSERC and PSTE rule sources hash-bound",
-    "sealed copy created and outside repository access cut",
+    "authoritative PPM 6.7.9, PSERC and PSTE rule sources hash-bound and sealed",
     "sealed-rule tamper negative test blocked correctly",
-    "canonical article type for current topic resolved to FAQ",
-    "canonical FAQ primary_question input path bound",
-    "canonical_fact_pack_import_v1 externally researched and bound with three FULLY_SUPPORTED claims",
-    "negative realtest without canonical fact pack blocked fail-closed",
-    "negative realtest with fact pack but without required internal-link targets blocked fail-closed",
-    "exactly three externally pre-bound internal-link targets supplied for the test fixture",
-    "first canonical-rule-bound FAQ article returned SYSTEM3_RETURN_PASS",
-    "returned artifact independently audited against the same sealed canonical rules",
-    "artifact SHA256 independently confirmed as 40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
-    "current PR head repository entrance positive-negative CI green",
-    "existing legacy 7/7 production package and associated WordPress WXR re-read from retained file library; no re-upload required",
-    "7/7 WordPress WXR proves one fixed category binding per article and carries canonical article id, plan slot, article type and focus keyword",
-    "sealed canonical link rules re-verified from PR232 diagnostic evidence: exact three roles, exact input shape, page/category-only targets, no external URLs, no post targets, no unbound links, no automatic replacement"
+    "canonical FAQ type and primary_question contract bound",
+    "canonical_fact_pack_import_v1 supplied with three FULLY_SUPPORTED claims",
+    "negative missing-fact-pack test blocked fail-closed",
+    "negative missing-link-target test blocked fail-closed",
+    "first FAQ artifact returned SYSTEM3_RETURN_PASS and independent sealed-rule artifact audit PASS",
+    "retained legacy 7/7 production package and WordPress WXR re-read; no re-upload required",
+    "fixed canonical internal-link rules re-verified: exactly three roles, page/category targets only, external/post/unbound/replacement forbidden",
+    "retained production plan 02_PRODUKTIONSPLAN_3_ENTWUERFE.json found with already materialized link_bindings and portal_link_registry",
+    "for Regendecken FAQ the retained fixed bindings are parent_category=Regendecken, semantic_related=Pferdedecken, further_information=Journal with exact anchors/reasons and FAQ section ids answer/details/further_information",
+    "System3 fixture corrected from ad-hoc test links to the retained fixed Regendecken FAQ bindings"
   ],
   "resolved_blockers": [
     {
       "code": "MISSING_CANONICAL_SOURCE_FACT_PACK",
       "resolved": true,
-      "evidence": "PR232 issuecomment-5633865978 proves the run progressed beyond the fact-pack gate once the canonical fact pack was supplied"
+      "evidence": "PR232 issuecomment-5633865978"
     },
     {
       "code": "MISSING_REQUIRED_INTERNAL_LINK_TARGETS",
       "resolved_for_current_test_fixture": true,
-      "evidence": "PR232 issuecomment-5634085512 returned SYSTEM3_RETURN_PASS after exactly three fixed runtime_order.links were supplied"
+      "evidence": "PR232 issuecomment-5634085512"
+    },
+    {
+      "code": "CANONICAL_LINK_PRESELECTION_AUTHORITY_NOT_DEFINED",
+      "resolved_for_regendecken_fixture": true,
+      "evidence": "Retained 02_PRODUKTIONSPLAN_3_ENTWUERFE.json already contains exact link_bindings and portal_link_registry for Regendecken FAQ, including href, anchor, reason, role and section_id. The prior statement that no fixed binding authority existed was too broad."
     }
   ],
+  "fixed_link_rules": {
+    "verified": true,
+    "runtime_path": "runtime_order.links",
+    "required_roles": ["parent_category", "semantic_related", "further_information"],
+    "regendecken_faq_binding": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken",
+        "reason": "Die übergeordnete Fachseite ordnet Regendecken und ihren vorgesehenen Einsatz ein.",
+        "section_id": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/ausruestung/ausruestung-decken/",
+        "anchor": "Pferdedecken",
+        "reason": "Die übergeordnete Deckenseite ergänzt Material-, Einsatz- und Auswahlgrundlagen.",
+        "section_id": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/journal/",
+        "anchor": "Journal",
+        "reason": "Das Journal enthält ergänzende Ratgeber und vertiefende Praxisinformationen.",
+        "section_id": "further_information"
+      }
+    ],
+    "source": "retained 02_PRODUKTIONSPLAN_3_ENTWUERFE.json / link_bindings + portal_link_registry"
+  },
   "first_canonical_article": {
     "article_id": "SYSTEM3-LIVE-001",
     "article_type": "FAQ",
     "subject": "Woran erkennt man eine passende Regendecke für ein Pferd?",
-    "return_evidence": "PR232 issuecomment-5634085512",
-    "artifact_audit_evidence": "PR232 issuecomment-5634121819",
-    "artifact_sha256": "40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
-    "status": "PASS"
+    "previous_return_evidence": "PR232 issuecomment-5634085512",
+    "previous_artifact_audit_evidence": "PR232 issuecomment-5634121819",
+    "previous_artifact_sha256": "40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
+    "previous_link_conformance_status": "SUPERSEDED_FOR_LINK_RULE_PROOF",
+    "detail": "The previous PASS used externally inserted test links that were valid by generic sealed constraints but did not use the retained fixed Regendecken FAQ link bindings. It remains evidence for article/fact/rule execution but is not the final link-rule regression proof."
   },
-  "fixed_link_rules": {
-    "verified": true,
-    "evidence": "PR232 issuecomment-5633887332 from sealed canonical rule content",
-    "runtime_path": "runtime_order.links",
-    "exact_link_count": 3,
-    "required_roles": [
-      "parent_category",
-      "semantic_related",
-      "further_information"
-    ],
-    "required_fields": [
-      "role",
-      "href",
-      "anchor",
-      "reason",
-      "section_id"
-    ],
-    "constraints": [
-      "href must be a relative internal URL path; external URLs forbidden",
-      "anchor must be non-empty and used exactly with its bound href",
-      "reason must be non-empty and role-specific",
-      "section_id must be non-empty",
-      "three links must be used in three different content blocks",
-      "further_information.section_id must equal further_information",
-      "targets must be published WordPress page or category objects",
-      "post targets forbidden",
-      "unbound internal links block",
-      "automatic target replacement forbidden",
-      "article generation may not research, invent, replace, repair or automatically remap missing link targets",
-      "before any WordPress write all targets require read-only live revalidation including URL-to-object-ID resolution"
-    ],
-    "canonical_role_meaning": {
-      "parent_category": "published page/category target fulfilling the hierarchical parent role",
-      "semantic_related": "published page/category target semantically relevant to the article subject",
-      "further_information": "published page/category target providing further information and bound to section further_information"
-    }
+  "current_test": {
+    "head_before_state_update": "9f3ba4d848d0cd513d4a9727ceedfdbe0d687cb0",
+    "start_comment": "PR232 issuecomment-5634318235",
+    "purpose": "rerun the same canonical FAQ article path with the already retained fixed Regendecken FAQ link bindings",
+    "result": "PENDING"
   },
   "legacy_7of7_reference": {
     "production_package": "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
     "production_package_sha256": "8536206bbe34d3cad197186f26870cb75f4f6bb5a7737d4be3684b6522e5feb8",
     "status": "ENDSTEMPEL_PASS",
     "article_count": 7,
-    "wordpress_wxr": "GEN1_7_ARTIKEL_KURZWEG_WORDPRESS_IMPORT_AKTUELL.xml",
-    "verified_fields": [
-      "one WordPress category binding per article",
-      "_ppm679_canonical_article_id",
-      "_ppm679_plan_slot_sha256",
-      "_ppm679_article_type",
-      "_ppm679_category_slug",
-      "_yoast_wpseo_focuskw",
-      "draft status"
-    ],
-    "link_authority_finding": {
-      "parent_category_source_available": true,
-      "semantic_related_assignment_present": false,
-      "further_information_assignment_present": false,
-      "anchor_reason_assignment_present": false
-    }
+    "wordpress_wxr": "GEN1_7_ARTIKEL_KURZWEG_WORDPRESS_IMPORT_AKTUELL.xml"
   },
   "current_blocker": {
-    "code": "CANONICAL_LINK_PRESELECTION_AUTHORITY_NOT_DEFINED",
-    "detail": "The link rules themselves ARE fixed and verified. They require exactly three bound internal links with roles parent_category, semantic_related and further_information, exact field/target constraints, fixed use before article generation, and no model replacement. The remaining undefined point is narrower: when the authoritative read-only WordPress link-target snapshot contains multiple eligible candidates, the sealed rules define no deterministic tie-breaker/external preselection authority, and anchor/reason derivation from that snapshot is not canonically defined. This must not be described as missing or undefined link rules.",
-    "evidence": "PR232 issuecomment-5633887332 defines the fixed link rules; issuecomment-5633965684 states only preselection authority/tie-breaker and anchor/reason derivation are NOT_DEFINED",
+    "code": "NONE_UNTIL_FIXED_LINK_RETEST_RETURNS",
+    "detail": "No new technical blocker is established after discovery of the retained fixed link bindings. Await only the first exact PASS/BLOCKED return from the already-started same canonical article retest. Do not open a new repair path before that return.",
     "resolved": false
   },
-  "validator_boundary": {
-    "cloud_entry_verify_is_canonical_rule_validator": false,
-    "detail": "isolated_system3/cloud_entry.py verify only checks output presence and minimum word count; canonical article PASS therefore requires sealed-rule validation/audit, not that helper alone."
-  },
-  "last_safe_state": "First canonical FAQ article PASS and independent sealed-rule artifact audit PASS. Fixed canonical link rules are verified and must not be reopened. Existing retained 7/7 production/WXR corpus proves category binding data already exists. Only multi-candidate preselection authority/tie-breaker plus anchor/reason derivation remains undefined. No WordPress write, publish or merge performed.",
-  "next_action": "Do not redesign or rediscover link rules. Apply the already fixed canonical link rules. Reuse the retained 7/7 WordPress reference. Resolve only the narrowly NOT_DEFINED preselection/tie-breaker and anchor/reason derivation without Codex/model freedom; then rerun positive/negative System 3 tests and expand through the existing 7/7 corpus without a new runner. Do not change content rules, article rules, PPM, PSERC or PSTE.",
+  "last_safe_state": "Fixture now uses the retained fixed Regendecken FAQ link bindings and CI on head 9f3ba4d848d0cd513d4a9727ceedfdbe0d687cb0 is green. Same canonical article retest has been started. No WordPress write, publish or merge performed.",
+  "next_action": "Consume only the exact result of PR232 issuecomment-5634318235. On PASS, independently audit the returned artifact and then proceed to the existing 7/7 corpus without a new runner. On BLOCKED, stop only at that first exact blocker. Do not redesign link rules or ask for another upload.",
   "forbidden": [
     "reuse runtime/workflow code from System 1 or System 2",
-    "outside control of routing, rules, prompts, tools or output policy",
-    "model-invented facts or missing evidence",
     "model/Codex free selection of internal link targets",
-    "rule changes or reinterpretation",
+    "invent or reinterpret fixed link bindings",
+    "rule changes",
     "alternate route or fallback",
     "auto-publish or WordPress write"
   ]
