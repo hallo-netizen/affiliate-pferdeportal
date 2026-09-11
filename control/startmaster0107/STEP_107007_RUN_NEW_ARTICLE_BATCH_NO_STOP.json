@@ -58,7 +58,7 @@
     },
     {
       "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
-      "sha256": "5026074ce7aa967c4d64b906f49411b5bc3485ef32aa740cd2d88378d0bca788"
+      "sha256": "ed6d3ac0b8c7677bb65b93376310d7c574b8144a4baff6181a09830ca2c177d5"
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
