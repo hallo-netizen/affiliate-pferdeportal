@@ -78,7 +78,7 @@
     {
       "completed_step_id": "SAFE_SANDBOX_AUTO_REENTRY_AFTER_40_40_ROOTFIX",
       "sequence": 107002,
-      "ticket_id": "5167cb4f7017242cb80eea46e1a4d533d2726e5312af89765bc5e355df310ba",
+      "ticket_id": "5167cb4f701a7242cb80eea46e1a4d533d2726e5312af89765bc5e355df310ba",
       "receipt_sha256": "f52caa53c8399ec5c8ca5cac2f4eb3f9c522c716e97000f80d53eda8d7de5a34",
       "status": "PASS"
     },
