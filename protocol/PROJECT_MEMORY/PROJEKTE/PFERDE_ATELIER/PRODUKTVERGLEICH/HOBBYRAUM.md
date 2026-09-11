@@ -1,87 +1,89 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
 STAND: 2026-09-11
-STATUS: AKTIV / 0.8.4 WORDPRESS-LIVE PASS / FACHLICHER SKALIERUNGSBLOCK 175 GRUPPEN
+STATUS: AKTIV / 0.8.5 FINAL-FRESH-ZIP LOCAL PASS / WORDPRESS-LIVE-VORCHECK OFFEN
 
-## ABGESCHLOSSENER KANDIDAT
+## AKTUELLER KANDIDAT
 
-`universal-product-comparison-0.8.4-prototype.zip`
+`universal-product-comparison-0.8.5-prototype.zip`
 
 SHA-256:
-`00035ec0e166d9830f97140b6fc0f4f7666504d548bac507b1b206a2173ce856`
+`0174051e6584902142f5be5787642426b30aab6c7ba15ef0b07ccbdb4a5844fd`
 
-## 0.8.4 PASS
+Ausgangsbasis:
+exakt geprüfte 0.8.4-ZIP.
 
-Lokal:
-- 32/32 Tests;
-- 48/48 PHP-Lint;
-- Source↔ZIP 67/67;
-- Report-Hashes 66/66;
-- 175/175 Portalparität;
-- 50-Produkte-Test: 1000/1000 Cross-Brand-Paare erhalten;
-- davon 500 sinnvoll / 500 fachlich BLOCKED;
-- keine Top-N-/Pair-Cap;
-- Research-Kandidaten ≠ Markt-Vollständigkeit;
+## WAS 0.8.5 NEU ÖFFNET
+
+Zusätzliche fachlich gebundene vorhandene Gruppen:
+- Winterdecken: 20 Cross-Family-Paare;
+- Übergangsdecken: 14;
+- Stalldecken: 28;
+- Unterdecken: 63;
+- Steigbügel: 5.
+
+Summe: **130 zusätzliche sinnvolle Paar-Kandidaten** aus bereits vorhandener Product-Knowledge-Recherche.
+
+Schermaschinen besitzt zwar ein Fachprofil, bleibt aber `INSUFFICIENT_MANUFACTURERS`, weil `Aesculap/Kerbl` und `Kerbl` dieselbe Herstellerfamilie sind.
+
+## HARTER LOKAL-PASS
+
+- 35/35 Regression PASS;
+- 50/50 PHP-Lint PASS;
+- Source↔ZIP 71/71;
+- Report-Hashes 70/70;
+- 175/175 Portalabdeckung weiter PASS;
+- 130/130 echte Cross-Family-Paare erhalten;
+- Herstellerfamilienregel für Readiness und Planner identisch;
+- drei neue Mutationen korrekt ROT;
+- bestehende Regressionen/Mutation Guards weiter PASS;
 - kein Auto-Publish.
 
-WordPress-Live:
-- Version 0.8.4 bestätigt;
-- 175/175 Gruppen sichtbar/selectable;
-- Regendecken PAIRING_READY;
-- Recherchevollständigkeit UNPROVEN;
-- 172 PROFILE_MISSING sichtbar;
-- 2 Key-Kollisionen fail-closed sichtbar;
-- vor Lauf $0.0000 neue Providerkosten;
-- nach exakt einem Regendecken-Gesamtworkflow: 0 Provider / $0.0000 / 8 BLOCKED / 0 Dossiers / `NO_ELIGIBLE_COMPARISONS`.
+## NEXT ACTION WORDPRESS
 
-## AKTUELLER AUFTRAG
+1. ausschließlich 0.8.5 installieren/ersetzen;
+2. `Produktvergleich` öffnen;
+3. **keinen Gesamtworkflow starten**;
+4. Screenshot des oberen Coverage-Bereichs;
+5. erwartet:
+   - Version `0.8.5-prototype`;
+   - 175/175 Gruppen;
+   - `PAIRING_READY: 6`;
+   - `PROFILE_MISSING: 166`;
+   - `INSUFFICIENT_MANUFACTURERS: 1`;
+   - `GROUP_KEY_COLLISION: 2`;
+   - Research-Kandidaten: mehrere echte Herstellerfamilien in 6 Gruppen, nur eine Herstellerfamilie in 8 Gruppen;
+6. danach Winterdecken auswählen und nur `Vorschau aktualisieren` / read-only prüfen;
+7. erwartet Winterdecken:
+   - `PAIRING_READY`;
+   - 8 vorhandene Produkte;
+   - 3 Herstellerfamilien;
+   - vollständiges Cross-Family-Paaruniversum 20;
+   - Research-Vollständigkeit weiterhin `UNPROVEN`;
+8. vor jedem möglichen Providerlauf zuerst Kostenanzeige prüfen;
+9. nichts veröffentlichen.
 
-Jetzt **keine weitere 0.8.4-Reparaturschleife**.
+## DANACH
 
-Fachlicher Skalierungsblock:
-
-`175 Vergleichsgruppen -> Produktrecherche möglichst vollständig -> gruppenspezifische Vergleichsprofile/Decision-Policies -> gesamtes Paaruniversum -> Sinnprüfung -> nur sinnvolle Paare -> SEO -> Dossier V2 oder terminal BLOCK`
-
-## HARD RULES
-
-- Ziel = so viele **sinnvolle** Produktvergleiche wie real möglich;
-- keine willkürliche Gruppen-/Produkt-/Paarobergrenze;
-- kein blindes Kreuzprodukt zur SEO-Stufe;
-- Same Brand, falsche Nutzungsebene, inkompatibles Profil vor Providerkosten BLOCK;
-- PRODUCT_COMPARISON V1 bleibt exakt A gegen B = 2 Produkte;
-- vorhandene Produkte bedeuten nicht automatisch Markt vollständig recherchiert;
-- Research-Vollständigkeit nur mit echtem gruppenspezifischem Beleg;
-- fehlende Hersteller/Produkte sichtbar offen;
-- vorhandene Product-Knowledge-Recherche wiederverwenden;
-- keine Produktfakten erfinden;
-- Decision-Policies gruppenspezifisch; Regendecken-Regeln nicht blind auf andere Gruppen kopieren;
-- bereits bezahlte SEO-Evidenz wiederverwenden;
-- kein Writer-/Draft-/Publishweg;
-- kein Auto-Publish.
-
-## NÄCHSTE GROSSE STUFE
-
-1. die bereits vorhandenen 14 recherchierten Vergleichsgruppen gegen ihre Faktenlage auswerten;
-2. pro Gruppe echte Nutzungsebenen/entscheidungsrelevante Merkmale bestimmen;
-3. fehlende Hersteller/Modelle systematisch recherchieren;
-4. Profile + Decision-Policies nur aus belegten Merkmalen bauen;
-5. pro READY-Gruppe vollständiges fachlich zulässiges Paaruniversum erzeugen;
-6. erst danach SEO-Kostenstufe;
-7. anschließend weitere Gruppen bis 175/175.
-
-Keine manuelle Auswahl „nur ein paar bekannte Produkte“.
-Keine Plugin-Ausgabe nötig, solange reine Fach-/Datenarbeit genügt.
+Keine weitere Plugin-Fixschleife, wenn Live-Vorcheck passt.
+Dann fachlich weiter:
+- Ein-Hersteller-Gruppen mit echten Konkurrenzherstellern vervollständigen;
+- fehlende Faktenmatrix je Modell hart belegen;
+- erst dann Product Knowledge erweitern;
+- danach weitere Profile;
+- pro Gruppe alle sinnvollen Paare, keine künstliche Obergrenze.
 
 ## BLOCK-GRENZE
 
 BLOCK bei:
-- still ausgelassener Gruppe;
-- unbewiesener Research-Vollständigkeit;
-- ungeprüfter Übernahme eines Regendecken-Merkmals auf fremde Gruppe;
-- unsinnigem Paar trotz Nutzungsklassenkonflikt;
+- falscher Version/SHA;
+- Verlust der 175er Registry;
+- weniger als die erwarteten 130 neuen echten Cross-Family-Paare;
+- Schermaschinen fälschlich `PAIRING_READY` ohne echten zweiten Hersteller;
+- roher Herstellername statt Herstellerfamilie als Readiness-Wahrheit;
+- Research-Vollständigkeit fälschlich COMPLETE;
 - Top-N-/Pair-Cap;
-- künstlichem SEO-PASS;
-- doppelten Providerkosten für gültige Evidenz;
+- Providerlauf ohne vorherige Kostenanzeige;
 - Writer-/Draft-/Publish-Aktivierung.
 
 Kein SEO/TEXT-/ACM-Umbau.
