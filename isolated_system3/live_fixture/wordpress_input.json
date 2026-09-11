@@ -14,23 +14,23 @@
     "links": [
       {
         "role": "parent_category",
-        "href": "/category/pferdedecken-regendecken-faq/",
-        "anchor": "FAQ Regendecken",
-        "reason": "Fest gebundenes veröffentlichtes FAQ-Kategorieziel für Regendecken im Testfixture.",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken",
+        "reason": "Die übergeordnete Fachseite ordnet Regendecken und ihren vorgesehenen Einsatz ein.",
         "section_id": "answer"
       },
       {
         "role": "semantic_related",
-        "href": "/category/pferdedecken-regendecken-beratung/",
-        "anchor": "Beratung Regendecken",
-        "reason": "Fest gebundenes veröffentlichtes thematisch verwandtes Beratungsziel zu Auswahl und Passform von Regendecken im Testfixture.",
+        "href": "/ausruestung/ausruestung-decken/",
+        "anchor": "Pferdedecken",
+        "reason": "Die übergeordnete Deckenseite ergänzt Material-, Einsatz- und Auswahlgrundlagen.",
         "section_id": "details"
       },
       {
         "role": "further_information",
-        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
-        "anchor": "Regendecken",
-        "reason": "Fest gebundene veröffentlichte Regendecken-Übersichtsseite als weiterführendes Informationsziel im Testfixture.",
+        "href": "/journal/",
+        "anchor": "Journal",
+        "reason": "Das Journal enthält ergänzende Ratgeber und vertiefende Praxisinformationen.",
         "section_id": "further_information"
       }
     ]
