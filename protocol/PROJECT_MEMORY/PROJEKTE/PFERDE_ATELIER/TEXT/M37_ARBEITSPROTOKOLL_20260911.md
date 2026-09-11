@@ -4,13 +4,10 @@ ROLLE: PROTOKOLL / kein CURRENT_STATE / keine zweite Fehlerwahrheit.
 
 ## AUSGANGSSTAND
 
-Current main:
-`a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6`
-
 Recovery-/letzter belastbarer Live-Baseline-Stand:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
 
-Letzter echter frischer Realtest:
+Letzter echter frischer Realtest vor M37:
 - Recherche: ausgeführt;
 - erster Artikel: erzeugt;
 - echter PPM-6.7.9-/PSERC-Handoff: erreicht;
@@ -29,42 +26,61 @@ Der vorhandene `hardlock-base` unterscheidet ausdrücklich:
 - `PRODUCT_FIX`: Produktcode ändern.
 
 Eine Mischung beider Klassen in einem Kandidaten ist fail-closed verboten.
-PR247 enthielt zunächst beides. Deshalb wird nicht am Hardlock vorbeigearbeitet, sondern der vorhandene Vertrag eingehalten.
+PR247 enthielt zunächst beides. Deshalb wurde nicht am Hardlock vorbeigearbeitet, sondern der vorhandene Vertrag eingehalten.
 
-## PHASE 1 – HISTORY AUTHORITY
+## PHASE 1 – HISTORY AUTHORITY – PASS / INTEGRIERT
 
-Kandidat:
+History-Kandidat:
 `hobbyroom/m37-history-authority-20260911`
 
 Head:
 `245b596f9d6dd67c759527a0f211dbe957f4e34f`
 
-Erlaubter Diff:
-- `control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md`
-- `control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py`
+Maschinenbeweis:
+- erlaubter Diff exakt Matrix + bestehender Runner;
+- `HOBBYROOM_WORK_LOCK_PR_PASS`;
+- `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M37`;
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
+- hardlock PASS;
+- hardlock-base PASS.
 
-Soll:
-- bestehender Main-Runner M01–M36: PASS;
-- History-Kandidat: erster neue Fehler exakt M37 = FAIL;
-- kein Produktfix;
-- hardlock/hardlock-base müssen den vorhandenen Maschinenbeweis liefern.
+Integration:
+- PR248 gemergt;
+- neuer Main `f791dcc6c926f9c136faed29957e64786ffca08e`.
 
-Ein M37-FAIL in dieser Phase ist der gewünschte Reproduktionsbeweis, kein Produktionsfehler.
+Damit ist M37 Bestandteil der bestehenden History-Autorität. Kein Produktfix wurde in Phase 1 integriert.
 
-## PHASE 2 – PRODUCT FIX
+## PHASE 2 – PRODUCT FIX – AKTIV
 
-Erst nach integrierter History-Autorität:
-- separater Handoff-Kandidat;
-- current main muss M37 als ersten FAIL reproduzieren;
-- Kandidat muss denselben bestehenden Runner vollständig M01–M37 PASS bestehen;
-- Positiv: vorhandener innerer nicht-reparierbarer PPM/PSERC-Grund wird sichtbar erhalten;
-- Negativ: ohne vorhandenen inneren Grund wird nichts erfunden;
-- Negativ: reparierbare Content-Codes bleiben RepairRequired;
-- Hashkette + hardlock + hardlock-base auf demselben Head PASS.
+Current main:
+`f791dcc6c926f9c136faed29957e64786ffca08e`
+
+Produktkandidat:
+- PR247;
+- Branch `hobbyroom/ppm-inner-reason-visibility-20260911`;
+- Head `59ad44da3d89769c05f0725f9929135b0262f4dd`;
+- Parent exakt current main;
+- Diff exakt Handoff + bestehende STEP→CURRENT_STATE→START_HERE-Hashkette;
+- Matrix und Runner unverändert aus Main.
+
+Fix:
+- bestehender Handoff bleibt fail-closed BLOCKED;
+- bereits vorhandener erster innerer nicht-reparierbarer PPM/PSERC-Grund wird sichtbar erhalten;
+- ohne vorhandenen konkreteren Grund wird nichts erfunden;
+- reparierbare Content-Codes bleiben RepairRequired;
+- keine Fach-/PPM-/PSERC-/PSTE-/Textmaschinen-/SEO-/Link-/Tabellen-/Design-/Publish-Regeländerung.
+
+Pflichtbeweis:
+- BEFORE: current main muss mit bestehendem M01–M37-Runner exakt M37 als ersten FAIL reproduzieren;
+- AFTER: Produktkandidat muss mit demselben Runner vollständig `GESAMT PASS` liefern;
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
+- hardlock PASS;
+- hardlock-base PASS;
+- kein Bypass.
 
 ## DANACH
 
-Erst nach Phase-2-PASS genau ein frischer erster Artikel als Realtest bis zum echten PPM/PSERC-Handoff.
+Erst nach Phase-2-PASS und Integration genau ein frischer erster Artikel als Realtest bis zum echten PPM/PSERC-Handoff.
 Bei PASS weiter nach gebundenem Workflow; bei FAIL nur den ersten konkret sichtbaren inneren Grund übernehmen.
 Keine Reparatur im laufenden Test.
 Kein WordPress-Write.
@@ -78,5 +94,5 @@ FAIL
 Kein Publish
 
 Aktiver äußerer Blocker: `PPM679_REAL_EXECUTION_BLOCKED`
-Main: `a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6`
+Main: `f791dcc6c926f9c136faed29957e64786ffca08e`
 Recovery: `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
