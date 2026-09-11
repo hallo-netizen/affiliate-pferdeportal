@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "adcell-api-v2-auth-routing-20260911",
-  "goal": "ADCELL: zuerst den exakten API-v2-Authentifizierungsvertrag autoritativ belegen; danach aus kanonischem 6.72.8 genau den Provider-Routing-/API-v2-Automationsfix bauen. accepted+active Programme nur über explizite programId-Allowlist; CSV/Banner/Deeplink automatisch, kein manueller Import/Export als Normalbetrieb. Kein Plugin vor POSITIV-/NEGATIV-/Gesamtworkflow-/Fresh-Unpack-/Identity-PASS; kein Live-PASS ohne wiederhergestellten ADCELL-Zugang.",
+  "task_id": "adcell-api-v2-routing-allowlist-fix-20260911",
+  "goal": "ADCELL API v2 aus kanonischem 6.72.8: Token-Auth, accepted+active+programId-Allowlist und automatische CSV/Banner/Deeplink-Verarbeitung; kein Awin-Fallthrough und keine manuelle CSV-URL als Normalbetrieb.",
   "image": "php:8.2-cli",
   "inputs": [
     {
@@ -37,6 +37,10 @@
       "dest": "trait-ppar-control-contract.php"
     },
     {
+      "src": "test_adcell_api_v2_automation.php",
+      "dest": "test_adcell_api_v2_automation.php"
+    },
+    {
       "src": "test_otto_automation.php",
       "dest": "test_otto_automation.php"
     },
@@ -45,9 +49,13 @@
       "dest": "test_banner_distribution_behavior.php"
     }
   ],
-  "writable": [],
-  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-provider-registry.php && php -l trait-ppar-provider-intake.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-control-contract.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
+  "writable": [
+    "trait-ppar-network-sync.php",
+    "trait-ppar-automation-suite.php"
+  ],
+  "command": "php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
   "tests": [
+    "php test_adcell_api_v2_automation.php",
     "php test_otto_automation.php",
     "php test_banner_distribution_behavior.php"
   ],
