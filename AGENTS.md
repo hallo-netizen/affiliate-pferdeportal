@@ -1,97 +1,22 @@
-# Pferde Atelier – verbindliche Codex-Cloud-Eingangstür
+# SYSTEM 4 — ISOLATED CODEX TEST ENTRANCE
 
-Diese Datei gilt repositoryweit für Codex Cloud.
+This branch exists only for the isolated System 4 prototype test.
 
-## Zwingender Start
-Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
+Before any repository-wide workflow, STARTMASTER, capsule, production preflight, handoff or legacy gate: do not execute them on this branch.
 
-`python3 control/cloud-entry-gate/cloud_entry.py start`
+Codex may operate only inside `isolated_system4/**` and must follow `isolated_system4/AGENTS.md`.
 
-Wenn dieser Befehl BLOCKED meldet: sofort stoppen. Keine Alternativprüfung, kein Rücksprung, kein eigener Workflowpfad.
+For the first live test execute exactly:
 
-Wenn PASS gemeldet wird:
-- ausschließlich `.pferde-capsule/INSTRUCTION.txt` als aktuellen Arbeitsauftrag verwenden;
-- `TICKET.json`, `RECEIPT_SCHEMA.json` und `CAPSULE_MANIFEST.json` sind technisch bindend;
-- die in `.pferde-capsule/inputs/` materialisierten Dateien sind die hashgebundenen Pflichtinputs;
-- das Repository darf nur zur Ausführung des aktuell gebundenen Steps gelesen/geändert werden, wenn `repo_worktree_available_for_bound_step=true` ist;
-- `control/CURRENT_STARTMASTER.json`, STARTMASTER-State, andere Step-Bundles, Protokolle und alte Historie dürfen vom Worker niemals zur Workflow-Navigation benutzt werden;
-- keinen nächsten Workflow-Schritt auswählen, wiederholen, überspringen oder vorziehen;
-- keine State- oder Workflowänderung eigenständig vornehmen;
-- bereits bestandene unveränderte PASS-Stufen nicht erneut prüfen.
+`python3 isolated_system4/live_test.py isolated_system4/live_fixture/wordpress_snapshot.json`
 
-## Harte Arbeitsort-Sperre – Tresor/Archiv sind niemals Werkbank
+Rules:
+- no modification outside `isolated_system4/**`;
+- no import/copy/wrap/reuse of runtime, handoffs, workers, gates, signers, contracts or state machines from concepts 1–3;
+- no merge;
+- no production;
+- no publish;
+- if the command fails, return the first actual System 4 blocker and stop;
+- if it passes, return complete stdout and terminal PASS only.
 
-Der Notfall-Tresor, Campus-Archiv, Git-Mirror, Backup-Bundles und daraus direkt geöffnete lokale Worktrees sind ausschließlich Sicherungs-/Beleg-/Restore-Quellen.
-
-Verboten:
-- Runner, Tests, Reparaturen oder Produktion direkt aus `Campus-Tresor` oder `Campus-Archiv` starten;
-- einen Bare-Git-Mirror als Arbeitsrepository verwenden;
-- einen Worktree mit lokalem Mirror als `origin` als offiziellen Arbeitsstand verwenden;
-- Tresor/Archiv als Ersatzroute benutzen, wenn der normale gebundene Workflow BLOCKED ist.
-
-`cloud_entry.py start`, `verify` und `complete` prüfen diese Grenze fail-closed.
-
-Zulässige Wiederherstellung:
-Backup/Mirror nur gemäß Tresor-Wiederaufbau lesen → in einen frischen Arbeits-Worktree außerhalb Tresor/Archiv wiederherstellen → offizielles GitHub-`origin` binden → normale Cloud-Eingangstür neu ausführen.
-
-Ein Backup-PASS ist niemals ein Arbeits-PASS.
-
-## Automatische Pflicht auf `paul/*`-Branches
-
-Die bestehende Cloud-Eingangstür bleibt die **einzige manuell aufzurufende Starttür**:
-
-`python3 control/cloud-entry-gate/cloud_entry.py start`
-
-Auf einem `paul/*`-Branch ruft `cloud_entry.py` den Paul-Scope-Gate **selbst automatisch** auf.
-
-Der Worker darf und muss keinen zweiten Paul-Startbefehl mehr erzeugen oder merken.
-
-Automatisch bei `start`:
-- aktueller offizieller Campus wird frisch geholt;
-- aktive Paul-Zuweisung wird geprüft;
-- Branch/technische Basis/WRITE_SCOPE werden geprüft;
-- `.paul-capsule/` wird als temporärer hashgebundener READ-ONLY-Snapshot erzeugt;
-- nur bei `PAUL_BOOTSTRAP_PASS` wird der Cloud-Start gültig.
-
-Automatisch bei `verify`:
-- Paul-Frische-/Scopeprüfung wird erneut ausgeführt.
-
-Automatisch bei `complete`:
-- **vor jeder State-/Receipt-Fortschreibung** wird automatisch Paul-`verify` ausgeführt;
-- relevante Drift oder Scope-Verstoß blockiert den Abschluss fail-closed.
-
-WICHTIG:
-`.pferde-capsule/INSTRUCTION.txt` bleibt die einzige Workflow-Instruktion.
-`.paul-capsule/` ersetzt sie NICHT und wählt keinen Workflow-Schritt.
-
-Bei `PAUL_NOT_ASSIGNED`, `STALE_ASSIGNMENT_BLOCKED`, `PAUL_WRITE_SCOPE_BLOCKED` oder jedem anderen Paul-Gate-Nicht-PASS:
-sofort stoppen; kein gültiger Cloud-Abschluss.
-
-## Verbindlicher Step-Abschluss
-Nach Ausführung des aktuellen Steps MUSS `.pferde-capsule/RECEIPT.json` exakt gemäß `.pferde-capsule/RECEIPT_SCHEMA.json` geschrieben werden.
-
-Danach MUSS exakt ausgeführt werden:
-
-`python3 control/cloud-entry-gate/cloud_entry.py complete .pferde-capsule/RECEIPT.json`
-
-Nur die Eingangstür darf daraufhin den State verändern.
-
-- Bei `STATE_ADVANCED_NEXT_STEP_READY`: ohne Zwischenmeldung sofort die neu materialisierte `.pferde-capsule/INSTRUCTION.txt` abarbeiten und denselben Abschlusszyklus fortsetzen.
-- Bei `STEP_TERMINAL_NONPASS`: sofort mit dem dort gebundenen `BLOCKED` oder `USER_ACTION_REQUIRED` stoppen. Keine Alternativroute und keine eigene Lösung.
-- Bei `FINAL_STEP_PASS`: am gebundenen finalen Endpunkt stoppen.
-- Ein Chat-/Task-Neustart beginnt wieder ausschließlich mit `cloud_entry.py start`; bei unverändertem State wird dasselbe deterministische Ticket erzeugt und kein PASS-Step neu gebunden.
-
-## Aktiver Textbatch / Chatwechsel
-Wenn der aktuell gebundene Step einen Textbatch ausführt, gilt zusätzlich der bestehende Production-Continuity-Vertrag:
-- vorhandenen gebundenen BATCH_CHECKPOINT zuerst verwenden;
-- abgeschlossene unveränderte Items nicht erneut bearbeiten;
-- exakt am ersten offenen Item/Gate fortsetzen;
-- interne Checkpoints still fortschreiben;
-- keine Zwischenmeldung während eines aktiven Batches, außer USER_ACTION_REQUIRED oder nicht lokal lösbarem Hard-Fail;
-- ein finales Batch-Ergebnis ist nur gültig, wenn `control/production-continuity/production_continuity_guard.py finalize <checkpoint>` PASS liefert.
-
-## Trennung
-Die Eingangstür und Continuity-Schicht sind rein technisch. Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- und sonstige Portalregeln liegen ausschließlich im nachgelagerten Workflow und dürfen hier weder ersetzt noch dupliziert werden.
-
-## Definition of Done
-Vor einem terminalen Abschluss muss `python3 control/cloud-entry-gate/cloud_entry.py verify` PASS melden. Ein Ergebnis ohne gültigen Receipt-Abschluss ist nicht workflowgültig.
+This branch-specific entrance is test isolation only. It does not change `main` or any productive workflow.
