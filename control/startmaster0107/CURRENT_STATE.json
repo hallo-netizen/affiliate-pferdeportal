@@ -25,7 +25,12 @@
     "H8_PREPRODUCTION_BOOTSTRAP_PROTOTYPE_BOUND",
     "OUTPUT_QUARANTINE_ROOTFIX_BOUND",
     "CODEX_CLOUD_OFFLINE_FRESHNESS_BOUND",
-    "CODEX_CLOUD_NATIVE_BOUND_CAPSULE_BRIDGE_BOUND"
+    "CODEX_CLOUD_NATIVE_BOUND_CAPSULE_BRIDGE_BOUND",
+    "PR223_SIMPLE_ENTRY_AGGREGATE_CHECKER_MERGED",
+    "PR224_MACHINE_ENFORCED_REPAIR_RETURN_MERGED",
+    "PR226_PPM_REPAIR_FINDINGS_RETURN_MERGED",
+    "PR228_LANGUAGETOOL_VISIBLE_TEXT_INPUT_MERGED",
+    "PR230_FACT_PACK_SOURCE_ID_BINDING_MERGED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -133,36 +138,30 @@
   },
   "current_work_status": "BLOCKED",
   "current_execution_blocker": {
-    "code": "BOUND_RAW_FACHWORKFLOW_OUTPUT_CONTRACTS_MISSING",
+    "code": "PPM679_REAL_EXECUTION_BLOCKED",
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "evidence": "PR107 issuecomment-5623141641",
-    "root_cause": "R_001/current action requires five raw Fachworkflow context values, but the current bound input path does not supply them to the handoff request.",
-    "authoritative_raw_source": "FRESH_USER_PROVIDED_WORDPRESS_FILE_PER_RUN",
-    "required_raw_values": [
-      "fact_pack",
-      "production_plan_item",
-      "production_plan_header",
-      "workflow_release_item",
-      "workflow_release_metadata"
-    ],
-    "internal_generator_required": false,
+    "evidence": "PR107 issuecomment-5632009778",
+    "root_cause": "UNKNOWN_UNTIL_FIRST_NESTED_PPM_REASON_IS_EXPOSED; the visible live terminal output reports only the aggregate PPM 6.7.9 blocker.",
+    "first_nested_ppm_reason_status": "NOT_EXPOSED",
     "resolved": false,
     "publish_allowed": false
   },
-  "last_safe_main_sha": "7fcae6ad09e002903d44ff3800e6f22d9679d92e",
-  "last_safe_change": "PR217 aggregate proof rootfix merged; M01-M36 plus aggregate/action selftests passed; post-merge real 7/7 stopped at current raw-input binding blocker.",
+  "last_safe_main_sha": "66c4224d68532307f6c7f69aff81d1da04cae4e7",
+  "last_safe_change": "PR230 source-identity KISS fix merged after PR223/PR224/PR226/PR228; PR230 head passed Deterministic Entrance Gate and Immutable Base Hardlock; fresh real 7/7 then reached PPM 6.7.9 and stopped at PPM679_REAL_EXECUTION_BLOCKED. Production 7/7 is NOT PASS.",
   "hobbyroom_status": "FREI",
   "next_action": {
-    "goal": "Bind the fresh user-provided WordPress source file as the immutable per-run source for R_001 and derive the five required raw values from that bound source through the existing intake/lifecycle path.",
+    "goal": "Expose the first nested PPM 6.7.9 reason from the same bound 107007 live path. If it is already classified as repairable by the existing repair-return policy, return only the same bound current_item for correction and rerun the same handoff. If it is technical/binding/hash/identity/publish related, stop and fix only that root cause.",
     "must_fail_closed_on": [
-      "missing source file",
       "wrong source hash",
       "stale source generation",
       "batch mismatch",
       "plan_slot mismatch",
       "canonical_article_id mismatch",
-      "tampered source or derived context"
+      "tampered source or derived context",
+      "technical PPM failure",
+      "binding or identity mismatch",
+      "forbidden publish attempt"
     ],
     "forbidden": [
       "new internal raw-data generator",
@@ -174,6 +173,6 @@
       "content or quality rule change",
       "auto-publish"
     ],
-    "proof_after_fix": "One real positive source->R_001->handoff->aggregate-consumer chain plus negative source/hash/identity tamper checks; then fresh real 7/7 to 107008 and stop before publish."
+    "proof_after_fix": "Fresh real 7/7 through the unchanged bound production path to 107008; stop before publish. Component/selftests remain guardrails and do not by themselves grant production PASS."
   }
 }
