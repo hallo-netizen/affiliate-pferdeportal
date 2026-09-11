@@ -1,0 +1,84 @@
+name: System3 Isolated Rule Binding Live
+
+on:
+  pull_request:
+    paths:
+      - 'isolated_system3/**'
+      - '.github/workflows/system3-rule-binding-live.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-rule-binding-live:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+      - name: Verify exact authoritative shared rule sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          PPM='control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+          PSERC='control/startmaster0107/runtime_packages/PSERC-FIX.zip'
+          test -f "$PPM"
+          test -f "$PSERC"
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  '"$PPM" | sha256sum -c -
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  '"$PSERC" | sha256sum -c -
+          test "$(git rev-parse HEAD:PSTE_0.56.25)" = 'b411a8b12e7c3e8c99645cfc9a762ba30eff0905'
+          echo SYSTEM3_AUTHORITATIVE_RULE_SOURCES_EXACT_PASS
+      - name: Make one sealed System3 copy and cut all outside access
+        shell: bash
+        run: |
+          set -euo pipefail
+          dst='isolated_system3/_sealed_rule_live'
+          rm -rf "$dst"
+          mkdir -p "$dst/packages" "$dst/pste"
+          cp 'control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip' "$dst/packages/ppm679.zip"
+          cp 'control/startmaster0107/runtime_packages/PSERC-FIX.zip' "$dst/packages/pserc.zip"
+          cp -a PSTE_0.56.25/. "$dst/pste/"
+          (
+            cd "$dst"
+            find packages pste -type f -print0 | sort -z | xargs -0 sha256sum > SEALED_MANIFEST.sha256
+          )
+          test -z "$(find "$dst" -type l -print -quit)"
+          find . -mindepth 1 -maxdepth 1 ! -name isolated_system3 -exec rm -rf {} +
+          test "$(find . -mindepth 1 -maxdepth 1 -printf '%f\n')" = 'isolated_system3'
+          echo SYSTEM3_OUTSIDE_CUT_PASS
+      - name: Verify sealed copy and locate real rule corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          dst='isolated_system3/_sealed_rule_live'
+          (cd "$dst" && sha256sum -c SEALED_MANIFEST.sha256)
+          rm -rf /tmp/ppm679-bound /tmp/pserc-bound
+          mkdir -p /tmp/ppm679-bound /tmp/pserc-bound
+          unzip -q "$dst/packages/ppm679.zip" -d /tmp/ppm679-bound
+          unzip -q "$dst/packages/pserc.zip" -d /tmp/pserc-bound
+          grep -RIlE 'ARTICLE_TYPE|Article.?Type|RULE|Rule|VALIDATOR|Validator|TEMPLATE|Template' /tmp/ppm679-bound > /tmp/system3-rule-files.txt
+          test -s /tmp/system3-rule-files.txt
+          grep -RIlE 'PSERC|RULE|Rule|VALIDATOR|Validator' /tmp/pserc-bound > /tmp/system3-pserc-rule-files.txt
+          test -s /tmp/system3-pserc-rule-files.txt
+          test -f "$dst/pste/includes/class-pste-breadth-research-queue.php"
+          echo SYSTEM3_REAL_RULE_CORPUS_PRESENT_PASS
+      - name: Negative proof sealed rules cannot be changed silently
+        shell: bash
+        run: |
+          set -euo pipefail
+          dst='isolated_system3/_sealed_rule_live'
+          cp "$dst/packages/ppm679.zip" /tmp/ppm679-original.zip
+          printf X >> "$dst/packages/ppm679.zip"
+          if (cd "$dst" && sha256sum -c SEALED_MANIFEST.sha256 >/dev/null 2>&1); then
+            echo SYSTEM3_RULE_TAMPER_BYPASS
+            exit 1
+          fi
+          mv /tmp/ppm679-original.zip "$dst/packages/ppm679.zip"
+          (cd "$dst" && sha256sum -c SEALED_MANIFEST.sha256 >/dev/null)
+          echo SYSTEM3_RULE_TAMPER_BLOCKED
+      - name: Run System3 tests after outside repository is gone
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s isolated_system3/tests -p 'test_*.py'
+          echo SYSTEM3_ISOLATED_RULE_BINDING_LIVE_PASS
