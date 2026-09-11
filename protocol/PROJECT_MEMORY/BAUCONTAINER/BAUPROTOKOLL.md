@@ -1392,3 +1392,25 @@ Dynamischer Stand bleibt ausschließlich in CURRENT_STATE/HOBBYRAUM.
 
 BEZUG:
 PV-PLAN-019.
+
+
+### 2026-09-11 – Produktvergleich-V2-Ausschilderung und Abschlussnachholung
+
+AUSLÖSER:
+Die harte Abschluss-/Nachholprüfung fand im zentralen `HANDLUNGSVERZEICHNIS.md` noch die am 07.09.2026 gültige, inzwischen aber durch Zielvertrag V2 abgelöste Route mit eigenem Produktvergleich-Writer-/Draftweg. Zusätzlich verwies die Produktvergleichs-Bürotür nur auf ältere Protokolle.
+
+KLEINSTE ÄNDERUNG:
+- `HANDLUNGSVERZEICHNIS.md` auf den bereits verbindlichen V2-Weg korrigiert: Produktvergleich verantwortet Research/Product Knowledge/Fachpolicy/Dossier; spätere Textproduktion ausschließlich im bestehenden SEO/TEXT-/ACM-Nachbarweg nach dessen eigener Freigabe;
+- Produktvergleich-`START_HERE.md` auf `PROTOKOLL_20260911.md` und die aktuelle Research-Grenze nachgezogen;
+- keine neue Route, kein neuer Runner, kein neues Handoff.
+
+WARUM:
+Wegweiser dürfen nach ARCH-043 keine abgelöste Fachroute als aktuellen Weg anzeigen. Die Korrektur stellt nur die bereits in `ZIELVERTRAG_V2.md` und PV-PLAN-020/022 bestehende Wahrheit wieder her.
+
+NEGATIV:
+- keine dynamische Versions-/Fehler-/NEXT-ACTION-Wahrheit in das Handlungsverzeichnis aufgenommen;
+- SEO/TEXT-/ACM-Nachbarbranch nicht verändert;
+- Archiv nicht als CURRENT verwendet.
+
+BEZUG:
+ARCH-043 / ARCH-048 / PV-PLAN-020 / PV-PLAN-022 / PV-PLAN-023.
