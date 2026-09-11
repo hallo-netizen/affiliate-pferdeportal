@@ -38,7 +38,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "ae7938702bee10cbc78c563551153a2aededd48d538e495102421662a2290d53",
+    "bundle_sha256": "ec25657dd0cdc4da8ee2f91c7a3e446a929edc08702767988c168dae7fd271be",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
