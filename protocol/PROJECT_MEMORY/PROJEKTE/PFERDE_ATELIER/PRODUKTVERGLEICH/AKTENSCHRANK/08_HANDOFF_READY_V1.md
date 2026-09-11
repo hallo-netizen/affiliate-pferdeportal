@@ -1,115 +1,47 @@
 # PRODUKTVERGLEICH – ÜBERGABEBEREIT V1
 
-Stand: 2026-09-09
-Status: FACHLICH BEREIT / TECHNISCHE ANBINDUNG WARTET AUF SEO-TEXT-ACM-FREIGABE
+Stand: 2026-09-11
+Status: HOLD / DURCH PV-SCALE-084-001 NOCH NICHT ÜBERGABEBEREIT
 
-## Produktvergleich-Stand
+## Korrektur
 
-Kandidat:
-`universal-product-comparison-0.8.3-prototype.zip`
+Die frühere Freigabe war zu eng, weil 0.8.3 nur die Proofgruppe Regendecken vollständig belegte.
 
-SHA-256:
-`4c08ca1df348ab49849ddde8f85980db450694c58010cd0c431575bc6a3cd11e`
+Autoritative Portalabdeckung:
+- 329 Produktseiten;
+- 1124 Artikelkategorien;
+- 175 eindeutige Produktgruppen mit eigener `Vergleich`-Kategorie.
 
-Fachblock:
-PASS.
+Regendecken ist 1/175.
 
-WordPress-Live-Wiederholung:
-PASS für unveränderten realen Bestand:
-- 0 Provider;
-- $0.0000;
-- 8 BLOCKED;
-- 0 Dossiers;
-- `NO_ELIGIBLE_COMPARISONS`.
+Damit bleibt diese Übergabeakte auf HOLD, bis die generische Multi-Group-Abdeckung fachlich geschlossen ist.
 
-Kein offener Produktvergleichs-Reparaturfehler.
+## Was 0.8.3 weiterhin gültig beweist
 
-## Für das Nachbarbüro verbindlich zu lesen
+- Dossier V2;
+- gebundene Decision-Policy;
+- A-vs-B = exakt 2 Produkte;
+- Kostenwiederverwendung;
+- fail-closed bei Null-Eignung;
+- kein Auto-Publish.
 
-1. `ZIELVERTRAG_V2.md`
-2. `AKTENSCHRANK/01_UEBERGABEKONZEPT_PRODUKTVERGLEICH_TEXT_ACM_V1.md`
-3. `AKTENSCHRANK/05_FACH_DOSSIER_ARTIKELTYP_VERTRAG_V1.md`
-4. `AKTENSCHRANK/06_V083_HARD_LOCAL_RELEASE_RECEIPT.md`
-5. `AKTENSCHRANK/07_V083_WORDPRESS_LIVE_REPEAT_RECEIPT.md`
-6. `CURRENT_STATE.md`
+Diese Beweise bleiben Regression-Basis für alle weiteren Gruppen.
 
-## Gebundener Fachinput
+## Vor erneuter Übergabefreigabe zwingend
 
-Aktiver Artikeltyp-Scope:
-`PRODUCT_COMPARISON V1`
+- 175/175 Gruppen in portalgebundener Registry;
+- jede Gruppe mit explizitem Readiness-/Coverage-Status;
+- keine stille Auslassung;
+- vollständige fachlich zulässige A-vs-B-Paarabdeckung je READY-Gruppe;
+- Produktrecherche/Profil/Policy sichtbar vollständig oder explizit offen/blockiert;
+- Kosten-/Resume-/Idempotenzschutz;
+- globale Coverage-Prüfung;
+- harte positive/negative/Fresh-ZIP-Prüfung.
 
-Bedeutung:
-- exakt 2 Produkte;
-- A gegen B;
-- mindestens zwei Hersteller;
-- gleiche Produktgruppe/Nutzungsebene.
+## Spätere Schnittstellengrenze bleibt unverändert
 
-Dossier:
-`UPC_BOUND_COMPARISON_DOSSIER_V2`
+Produktvergleich -> Dossier V2 -> bestehender SEO/TEXT-Fachworkflow -> bestehender `FACHWORKFLOW_HANDOFF_REQUEST.json` -> ACM.
 
-Es liefert strukturiert:
-- Produktidentitäten;
-- Fakten/Quellenstatus;
-- SEO-Evidenz;
-- Zielkeyword;
-- Readiness/Kannibalisierung;
-- Decision-Policy-Hash;
-- erlaubte Aussagearten;
-- Verbote;
-- feste Need-Codes;
-- Abschluss-Audit.
-
-Es liefert **keine Prosa**.
-
-## Harte Schnittstellengrenze
-
-Spätere Produktions-Eingangswahrheit bleibt ausschließlich:
-`FACHWORKFLOW_HANDOFF_REQUEST.json`
-
-Verboten:
-- neues Handoff;
-- 17. Top-Level-Feld;
-- neues Jobmanifest;
-- neuer Controller;
-- neue Textmaschine;
-- Produktvergleich-Writer als zweite Produktionsstraße.
-
-Die exakte Abbildung des Dossier V2 in vorhandene `fact_pack` / `production_plan_item`-Kontexte ist erst im SEO/TEXT-Büro gegen das reale Schema zu bestimmen und positiv/negativ zu testen.
-
-## Aktueller Nachbarstatus
-
-Read-only geprüft auf:
-`alternative/seo-text-central-machine-20260908`
-
-Autoritative ACM-Statusakte:
-`control/seo-text-buero/alternative-central-machine/AKTENSCHRANK/58_ACM_ROUTE_STATUS_20260909.md`
-
-Dort:
-- ACM-KERN PASS;
-- PRODUKTIONSADOPTION BLOCKED;
-- erster offener Punkt: direkte Prüferherkunft für `research_fact_pack`;
-- keine technische Änderung erlaubt, solange kein vorhandener autoritativer Prüferpfad belegt ist.
-
-Neuester Branch-Head:
-`fd1ae90a60e91f75759ab88da0386835eb377901`
-
-Dieser beweist zusätzlich den signierten WordPress-Seam batch-generic, ersetzt aber die autoritative BLOCKED-Statusakte nicht.
-
-## Übergaberegel
-
-Solange ACM/SEO-TEXT BLOCKED:
-**keine technische Produktvergleichs-Anbindung beginnen.**
-
-Sobald dort die Produktionsadoption hart freigegeben ist:
-
-Nachbarchat bekommt nur diesen Auftrag:
-
-`Campus -> Pferde Atelier -> SEO/TEXT/ACM. Lies read-only den Produktvergleich-Übergabestand auf branch hobbyroom/productvergleich-workflow-v070-20260908, insbesondere AKTENSCHRANK/08_HANDOFF_READY_V1.md, 01_UEBERGABEKONZEPT..., 05_FACH_DOSSIER... und ZIELVERTRAG_V2.md. Produktvergleich-Branch nicht verändern. Prüfe gegen deinen aktuellen autoritativen SEO/TEXT-/ACM-Stand, wie UPC_BOUND_COMPARISON_DOSSIER_V2 ohne neues Handoff und ohne neue Top-Level-Felder in die bestehenden gebundenen Produktionskontexte passt. Ergebnis ACCEPTED oder BLOCKED in deinem eigenen Aktenschrank dokumentieren.`
-
-## Bedingungsabhängiger Rest
-
-Positiver WordPress-Dossier-V2-Livefall:
-wird beim ersten realen SEO-PASS-A-vs-B-Paar nachgeholt.
-
-Kein künstliches SEO-PASS erzeugen.
-Kein Providerkauf nur für einen Test.
+Kein neues Handoff.
+Kein zweiter Writer.
+Kein Publish.
