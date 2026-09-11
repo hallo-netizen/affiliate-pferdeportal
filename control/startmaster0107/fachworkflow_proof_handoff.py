@@ -64,19 +64,26 @@ _PPM_REPAIRABLE_PREFIXES=("BLOCKED_CONTENT_","BLOCKED_WAVE2_","BLOCKED_CANONICAL
 
 def _ppm_repair_findings(value: Any) -> list[dict]:
     found=[]
+    def add(code: Any, node: Mapping[str, Any]) -> None:
+        code=str(code or "")
+        if not code.startswith(_PPM_REPAIRABLE_PREFIXES): return
+        found.append({
+            "error_code": code,
+            "failed_rule": node.get("failed_rule"),
+            "field_path": node.get("field_path"),
+            "expected": node.get("expected"),
+            "actual": node.get("actual"),
+            "reason": node.get("reason"),
+            "validator_id": node.get("validator_id"),
+        })
     def walk(node: Any) -> None:
         if isinstance(node,dict):
-            code=str(node.get("error_code") or "")
-            if code.startswith(_PPM_REPAIRABLE_PREFIXES):
-                found.append({
-                    "error_code": code,
-                    "failed_rule": node.get("failed_rule"),
-                    "field_path": node.get("field_path"),
-                    "expected": node.get("expected"),
-                    "actual": node.get("actual"),
-                    "reason": node.get("reason"),
-                    "validator_id": node.get("validator_id"),
-                })
+            add(node.get("error_code"),node)
+            for key in ("reason_codes","errors"):
+                codes=node.get(key)
+                if isinstance(codes,list):
+                    for code in codes:
+                        if isinstance(code,str): add(code,node)
             for child in node.values(): walk(child)
         elif isinstance(node,list):
             for child in node: walk(child)
