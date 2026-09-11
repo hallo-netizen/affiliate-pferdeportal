@@ -38,14 +38,14 @@ Geschlossen:
 Weiter offen:
 - exakte UPC-0.8.6-Fresh-ZIP besitzt nur 7 maschinenfeste Vergleichsprofile/Decision-Policies;
 - 143 der 150 grundsätzlich V1-fähigen Gruppen fehlen dort noch maschinenfest;
-- source-bound Profilspezifikationen liegen inzwischen für **71 zusätzliche Gruppen** in Akten 62–85 vor, aber sind noch **nicht** technisch materialisiert;
+- source-bound Profilspezifikationen liegen inzwischen für **77 zusätzliche Gruppen** in Akten 62–87 vor, aber sind noch **nicht** technisch materialisiert;
 - weitere Profil-/Faktenmatrizen source-bound vorbereiten, danach gebündelt materialisieren und erneut hart testen;
 - Product Knowledge und daraus entstehende fachlich zulässige Paarabdeckung bleiben je Gruppe fail-closed nachzuweisen.
 
 Dauerbelege:
 - `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`;
 - `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`;
-- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/85_...`.
+- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/87_...`.
 
 ## PV-FAMILY-085-001 – Readiness zählte Herstellerbezeichnungen statt Herstellerfamilien
 STATUS: CLOSED IM 0.8.5 / LOKAL HART PASS
@@ -133,7 +133,7 @@ Dauerbeleg:
 ## PV-GOV-20260911-001 – veraltete Stand-/Protokollbindung in der Abschlussprüfung
 STATUS: CLOSED / NACHGEHOLT 2026-09-11
 
-Befunde der frischen Abschluss-/Nachholprüfung:
+Befunde der früheren Abschluss-/Nachholprüfung:
 - Branch-Commit vor der Nachholung war `8f00f65254a63d21e9cf02f37df8839338d9684c` mit Akte 84; `70917470d9d8b85d5d33cf8004712b45dbf79acc` ist dessen Tree-SHA, nicht der Commit-HEAD;
 - `CURRENT_STATE.md` und `HOBBYRAUM.md` waren nur bis Akte 82 / 61 source-bound Gruppen nachgezogen;
 - `PROTOKOLL_20260911.md` war nur bis Akte 65 fortgeführt;
@@ -144,8 +144,8 @@ Reparatur:
 - keine fremde Paralleländerung überschrieben;
 - kurzzeitig zusätzlich erzeugte zweite Fehlerbilanz wieder entfernt;
 - `FEHLERQUELLEN.md` bleibt die **eine** detaillierte Fehlerautorität;
-- CURRENT_STATE/HOBBYRAUM wurden auf Akten 62–84 / 67 source-bound Gruppen nachgezogen;
-- fehlende Chronik Akten 66–84 und die Abschlussprüfung wurden in `PROTOKOLL_NACHHOLUNG_20260911.md` dauerhaft fortgeführt.
+- CURRENT_STATE/HOBBYRAUM wurden nachgezogen;
+- fehlende Chronik wird in `PROTOKOLL_NACHHOLUNG_20260911.md` fortgeführt.
 
 ## PV-GOV-20260911-002 – NEXT ACTION mit falschen Registry-IDs beschriftet
 STATUS: CLOSED / KORRIGIERT 2026-09-11
@@ -167,8 +167,23 @@ Befund beim frischen Registry-Read vor Akte 85:
 Reparatur:
 - Akte 85 wurde ausschließlich auf Basis der echten p163–p166-Folge erstellt;
 - `p167 bahnplaner` und `p168 sandverteiler` bleiben gemäß finaler 25er Disposition V1-NOT-APPLICABLE und werden übersprungen;
-- CURRENT_STATE, HOBBYRAUM und Protokoll werden auf `p169 hufschlagraeumer -> p170 reitplatzbewaesserung-mobil -> p171 weidepflegegeraete` korrigiert;
 - keine technische Materialisierung und kein Plugin-PASS daraus abgeleitet.
+
+## PV-GOV-20260911-003 – Akte 86/87 nicht in allen Standquellen nachgezogen
+STATUS: CLOSED / NACHGEHOLT 2026-09-11
+
+Befund der erneuten Abschluss-/Nachholprüfung:
+- realer Branch-HEAD vor dieser Nachholung war `97daffebb527c08e4611ed66b1a5b47c780d6029` mit Akte 87;
+- `CURRENT_STATE.md` und `HOBBYRAUM.md` standen noch bei Akte 86 / 74 source-bound Gruppen;
+- `FEHLERQUELLEN.md` stand noch bei Akte 85 / 71 source-bound Gruppen und dem bereits abgearbeiteten p169–p171-Block;
+- `PROTOKOLL_NACHHOLUNG_20260911.md` endete bei Akte 85;
+- dadurch bestand eine dokumentarische, nicht technische, konkurrierende Standwahrheit.
+
+Reparatur:
+- CURRENT_STATE und HOBBYRAUM auf Akte 87 / **77 source-bound Gruppen** nachgezogen;
+- diese Fehlerquelle auf Akten 62–87 und den echten offenen Folgeblock nachgezogen;
+- Nachholprotokoll um Akte 86, Akte 87 und diese Abschlussprüfung ergänzt;
+- technische Wahrheit unverändert: 7 maschinenfeste Profile, 143/150 technisch offen, UPC 0.8.6 WordPress-Live offen.
 
 ## AKTUELLER ERSTER OFFENER ARBEITSBLOCK
 
@@ -176,10 +191,11 @@ Kein neuer technischer Pluginfehler ist nach `PV-LIFECYCLE-086-001` belegt.
 
 Aktive Arbeit ist der V2-Readiness-Daten-/Fachblock:
 - source-bound Profil-/Faktenmatrizen in Registry-Reihenfolge;
-- Akten 62–85 sind erstellt, aber nicht technisch materialisiert;
-- **71 zusätzliche Gruppen** sind source-bound vorbereitet;
-- `p167 bahnplaner` und `p168 sandverteiler` bleiben V1-NOT-APPLICABLE;
-- nächster zusammenhängender zulässiger Profilblock laut autoritativer Portalstruktur: `p169 hufschlagraeumer` -> `p170 reitplatzbewaesserung-mobil` -> `p171 weidepflegegeraete`;
+- Akten 62–87 sind erstellt, aber nicht technisch materialisiert;
+- **77 zusätzliche Gruppen** sind source-bound vorbereitet;
+- `p167 bahnplaner`, `p168 sandverteiler` und `p177 weidebrunnen` bleiben V1-NOT-APPLICABLE;
+- nächster fachlich zulässiger Profilblock laut autoritativer Portalstruktur: `p175 weidewalzen` -> `p176 solar-weidepumpen` -> p177 überspringen -> `p178 wassertroege-fuer-weiden`;
+- danach folgt `p179 weidetimer`;
 - erst ein sinnvoll gebündelter Profil-/Faktenstand darf technisch materialisiert werden;
 - danach wieder vollständiger Positiv-/Negativ-/Mutation-/Fresh-ZIP-Weg.
 
