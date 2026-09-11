@@ -1,7 +1,20 @@
 # PRODUKTVERGLEICH 0.8.5 – HARD LOCAL RELEASE RECEIPT
 
 Stand: 2026-09-11
-Status: FINAL-FRESH-ZIP HARD PASS / WORDPRESS-LIVE-VORCHECK OFFEN
+Status: FINAL-FRESH-ZIP HARD PASS / HISTORISCHER LOKALBELEG MIT SPÄTERER LIVE-INTERPRETATIONSKORREKTUR
+
+## Interpretationskorrektur nach WordPress-Live-Vorcheck
+
+Die in diesem lokalen Beleg genannten **130 zusätzlichen Cross-Family-Paare** sind als katalogseitige Fach-/Paarpotentiale der freigegebenen Research-Kandidaten zu lesen.
+
+Der lokale Test materialisierte diese Kandidaten innerhalb des Testlaufs, um Profile, Policies und Paarlogik zu prüfen. Er bewies **nicht**, dass dieselben Kandidaten bereits im echten WordPress-Product-Knowledge-Inventar persistiert waren.
+
+Der echte Live-Vorcheck zeigte diese Grenze korrekt fail-closed.
+Autoritative Korrektur-/Folgebelege:
+- `12_V085_LIVE_INVENTORY_GAP_UPK051_HARD_LOCAL_RECEIPT.md`;
+- `23_UPK051_WORDPRESS_LIVE_BATCH_RECEIPT_20260911.md`.
+
+Die nachfolgenden lokalen Testresultate dieses Receipts bleiben als Testbeleg unverändert gültig.
 
 Artefakt:
 `universal-product-comparison-0.8.5-prototype.zip`
@@ -11,21 +24,21 @@ SHA-256:
 
 ## Ziel
 
-Vorhandenes Product Knowledge besser nutzen, ohne Markt-Vollständigkeit zu behaupten:
+Vorhandene Product-Knowledge-/Research-Kandidaten fachlich verarbeiten, ohne Markt-Vollständigkeit zu behaupten:
 - weitere echte Mehrhersteller-Gruppen fachlich profilieren;
-- vollständiges Cross-Family-Paaruniversum öffnen;
+- vollständiges Cross-Family-Paaruniversum im Test öffnen;
 - gleiche Herstellerfamilien-Wahrheit in Readiness und Planner erzwingen.
 
-## Aktivierte vorhandene Gruppen
+## Aktivierte Research-Testgruppen
 
-- Winterdecken: 20 Paare;
+- Winterdecken: 20 Paarpotentiale;
 - Übergangsdecken: 14;
 - Stalldecken: 28;
 - Unterdecken: 63;
 - Steigbügel: 5.
 
 Summe:
-**130 zusätzliche aktuelle echte Cross-Family-Paare**.
+**130 zusätzliche katalogseitige Cross-Family-Paarpotentiale im Test.**
 
 Keine Top-N-/Pair-Cap.
 Research-Vollständigkeit bleibt `UNPROVEN`.
@@ -34,7 +47,7 @@ Research-Vollständigkeit bleibt `UNPROVEN`.
 
 `Aesculap/Kerbl` und `Kerbl` werden identisch als `kerbl-family` behandelt.
 
-Schermaschinen mit aktuellem Bestand:
+Schermaschinen mit aktuellem Research-Bestand im Test:
 - 4 Produkte;
 - 1 echte Herstellerfamilie;
 - 0 echte Cross-Family-Paare;
@@ -83,7 +96,7 @@ Weiter PASS:
 - kein Writer-/Draft-/Publishweg;
 - kein Auto-Publish.
 
-## Abhängigkeiten
+## Abhängigkeiten zum Zeitpunkt des lokalen 0.8.5-Tests
 
 Universal Product Knowledge 0.5.0:
 `80218ec721631353d62a7e3058e76d9c4a4829802c4d5c6bd6f1f2014b6879e3`
@@ -100,9 +113,9 @@ SEO-Discovery weiter byte-identisch zum realen PSTE-Gegenbeweis:
 SEO-Kostenbindung weiter unverändert:
 `863a724d9f349770d9f62c7c65ee7c74565d4247f9bf15504984ae4ece2c9003`
 
-## Live-Grenze
+## Spätere Live-Grenze / Nachweis
 
-Noch kein WordPress-LIVE-PASS für 0.8.5.
+Der damals offene WordPress-Vorcheck wurde durchgeführt und fand die Testgrenze oben.
+Die Materialisierung der Alt-Recherchebasis wurde anschließend mit UPK 0.5.1 real abgeschlossen.
 
-Nächster Schritt:
-installieren -> Seite nur öffnen -> keine Providerarbeit starten -> Coverage-/Readiness-Screenshot prüfen.
+Keine Markt-Vollständigkeit daraus ableiten.
