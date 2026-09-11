@@ -2,11 +2,50 @@
   "article_id": "SYSTEM3-LIVE-001",
   "article_type": "FAQ",
   "item": {
+    "source_snapshot_id": "SYSTEM3-LIVE-001-SOURCE-FACTS-001",
     "quality_binding": {
       "type_meta": {
         "primary_question": "Woran erkennt man eine passende Regendecke für ein Pferd?"
       }
     }
+  },
+  "runtime_order": {
+    "subject_scope": "Woran erkennt man eine passende Regendecke für ein Pferd?"
+  },
+  "fact_pack_bundle": {
+    "contract": "canonical_fact_pack_import_v1",
+    "fact_packs": [
+      {
+        "fact_pack_id": "SYSTEM3-LIVE-001-SOURCE-FACTS-001",
+        "article_type": "FAQ",
+        "title_scope": "Woran erkennt man eine passende Regendecke für ein Pferd?",
+        "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+        "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+        "claims": [
+          {
+            "fact_id": "SYSTEM3-LIVE-001-F001",
+            "source_id": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+            "statement": "Beim Brustverschluss soll die obere Schnalle auf Höhe des Schulterpunkts liegen; unter der Vorderseite soll eine Hand passen, damit die Brust Bewegungsfreiheit hat.",
+            "claim_status": "FULLY_SUPPORTED",
+            "evidence_text_sha256": "31261c7c9e830906b91dd3fcd0c9ed9d023477ac85dd09cffcc822df0de27d6f"
+          },
+          {
+            "fact_id": "SYSTEM3-LIVE-001-F002",
+            "source_id": "https://www.smartpakequine.com/learn-products/how-to-measure-a-horse-for-a-blanket",
+            "statement": "Die Passform soll beim Gehen und Grasen geprüft werden, weil natürliche Bewegungen Passformprobleme sichtbar machen.",
+            "claim_status": "FULLY_SUPPORTED",
+            "evidence_text_sha256": "a7979e3fc7e8e504b4d4f462e66722c0bfcf04ccc428632d5d1727130b3e1e31"
+          },
+          {
+            "fact_id": "SYSTEM3-LIVE-001-F003",
+            "source_id": "https://www.weatherbeeta.com/how-to-guides",
+            "statement": "Eine passende Decke sitzt an Widerrist und Schulter so, dass freie Bewegung möglich ist, ohne nach hinten zu rutschen; am Halsausschnitt soll noch eine Hand entlanggleiten können.",
+            "claim_status": "FULLY_SUPPORTED",
+            "evidence_text_sha256": "eca2ec401f2a2739565d78699286c6845e05e10ec55d6462df7d8dfea577c946"
+          }
+        ]
+      }
+    ]
   },
   "source_payload": {
     "topic": "Woran erkennt man eine passende Regendecke für ein Pferd?",
