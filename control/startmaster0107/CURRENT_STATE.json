@@ -33,7 +33,11 @@
     "PR230_FACT_PACK_SOURCE_ID_BINDING_MERGED",
     "PR236_BOUND_WORKER_DUTY_KISS_MERGED",
     "PR237_FACHWORKFLOW_PLAN_HEADER_BINDING_MERGED",
-    "PR243_FACT_PACK_READINESS_BINDING_MERGED"
+    "PR243_FACT_PACK_READINESS_BINDING_MERGED",
+    "PR248_M37_HISTORY_REGRESSION_MERGED",
+    "PR247_M37_INNER_REASON_VISIBILITY_MERGED",
+    "M01_M37_HISTORY_MACHINE_PROOF_PASS",
+    "LIVE_FIRST_ARTICLE_LANGUAGETOOL_SINGLE_REPAIR_APPLIED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -141,13 +145,15 @@
   },
   "current_work_status": "BLOCKED",
   "current_execution_blocker": {
-    "code": "PPM679_REAL_EXECUTION_BLOCKED",
+    "code": "PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH",
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "evidence": "PR107 issuecomment-5634231573",
-    "detail": "First freshly researched and generated article reached the real PPM 6.7.9/PSERC handoff and stopped at FACHWORKFLOW_PROOF_HANDOFF_BLOCKED.",
-    "root_cause": "UNKNOWN_UNTIL_FIRST_NESTED_PPM_REASON_FROM_THE_SAME_FIRST_ARTICLE_IS_EXPOSED",
-    "first_nested_ppm_reason_status": "NOT_EXPOSED",
+    "evidence": "PR107 issuecomment-5638153888",
+    "detail": "The same first fresh Hindernisstangen article, after the exact LanguageTool repair `Stangenarbiet -> Stangenarbeit`, reached the real PPM 6.7.9/PSERC handoff and stopped at FACHWORKFLOW_PROOF_HANDOFF_BLOCKED with the exact nested reason PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH.",
+    "root_cause": "EXACT_INNER_BLOCK_CODE_KNOWN; EXPECTED_VS_ACTUAL_PLAN_VERSION_FIELDS_NOT_YET_AUTHORIZED_OR_PROVEN",
+    "first_nested_ppm_reason_status": "EXPOSED_BY_M37",
+    "diagnostic_followup_evidence": "PR107 issuecomment-5638208428",
+    "diagnostic_followup_result": "NOT_INSPECTED_CAPSULE_AUTHORIZES_ONLY_RUN_NEW_ARTICLE_BATCH_NO_STOP_107007; expected/actual and minimal fix location remain NOT_DETERMINABLE.",
     "resolved": false,
     "publish_allowed": false
   },
@@ -155,7 +161,7 @@
     "code": "CODEX_USAGE_LIMIT_REACHED",
     "evidence": "PR107 issuecomment-5634273871",
     "classification": "EXTERNAL_EXECUTION_AVAILABILITY_NOT_PROJECT_FAILURE",
-    "effect": "Codex became available again; the exact read-only retry proved that the original first-article task workspace is no longer available.",
+    "effect": "Resolved. Codex became available again. The original task workspace was unavailable, so M37 was registered and integrated before a fresh one-article live retest.",
     "resolved": true,
     "resolution_evidence": "PR107 issuecomment-5637219382"
   },
@@ -168,8 +174,10 @@
     },
     {
       "code": "PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH",
-      "status": "RESOLVED_BY_PR237",
-      "merge_sha": "c2258ead34b506d0b06f85e639e1d776ee5268cf"
+      "status": "HISTORICAL_OCCURRENCE_RESOLVED_BY_PR237_BUT_RECURRED_ON_CURRENT_MAIN",
+      "historical_merge_sha": "c2258ead34b506d0b06f85e639e1d776ee5268cf",
+      "current_recurrence_evidence": "PR107 issuecomment-5638153888",
+      "current_recurrence_resolved": false
     },
     {
       "code": "BLOCKED_FACT_PACK_IMPORT_ITEM_INVALID",
@@ -178,27 +186,43 @@
     }
   ],
   "latest_live_evidence": {
-    "main_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
+    "main_sha": "f1d1605f18bd23d9189f89ad173598958718d08a",
     "dispatcher_pr": 107,
+    "dispatcher_head_sha": "f1d1605f18bd23d9189f89ad173598958718d08a",
     "first_article_title": "Das Wichtigste über Hindernisstangen für Pferde",
     "first_article_target_keyword": "Hindernisstangen für Pferde",
     "research_completed": true,
     "article_generated": true,
+    "languagetool_repair_required": true,
+    "languagetool_repair_rule_id": "GERMAN_SPELLER_RULE",
+    "languagetool_repair_applied": "Stangenarbiet -> Stangenarbeit",
+    "languagetool_repair_evidence": "PR107 issuecomment-5638153888",
     "real_ppm_reached": true,
     "ppm_pass": false,
+    "exact_nested_blocker": "PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH",
+    "second_article_started": false,
+    "repository_tracked_changed_by_live_run": false,
     "sequence_107008_reached": false,
-    "publish_performed": false
+    "publish_performed": false,
+    "last_read_only_diagnostic_evidence": "PR107 issuecomment-5638208428",
+    "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
-  "last_safe_main_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
-  "last_safe_change": "Guard-green merged baseline after PR236, PR237 and PR243. This is NOT a production PASS: the first fresh article reaches the real PPM 6.7.9/PSERC handoff and is still BLOCKED before 107008.",
-  "hobbyroom_status": "AKTIV",
-  "hobbyroom_branch": "hobbyroom/ppm-inner-reason-visibility-20260911",
-  "hobbyroom_sync_policy": "Before any functional hobbyroom edit, fast-forward hobbyroom/ppm-inner-reason-visibility-20260911 to the then-current canonical main. During freeze the branch must contain no functional divergence.",
-  "hobbyroom_blocker": "M37 observability candidate is active in PR247; full M01-M37 plus hardlock/hardlock-base proof is not yet complete.",
+  "last_safe_main_sha": "f1d1605f18bd23d9189f89ad173598958718d08a",
+  "last_safe_change": "M37 history authority and product observability fix are merged and machine-proven on main. This is NOT a production PASS. One fresh article reached real LanguageTool, received one exact spelling repair, then reached real PPM/PSERC and is blocked by the exact nested code PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH before 107008.",
+  "hobbyroom_status": "BLOCKED",
+  "hobbyroom_branch": "hobbyroom/m38-plan-version-history-20260911",
+  "hobbyroom_sync_policy": "User pause is active. PR249 is a draft/unmerged parallel HISTORY_AUTHORITY_MAINTENANCE path. Do not overwrite, merge, or treat it as proof until its intended matrix/runner-only scope is actually present and machine-tested against canonical main.",
+  "hobbyroom_blocker": "PAUSED_BY_USER plus unresolved live blocker PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH. PR249 is not yet a valid M38 history candidate: current diff contains only `.tmp_m38_history_anchor`; M38 matrix/runner changes and machine proof are absent.",
   "next_action": {
-    "goal": "Complete M37 in the existing hobbyroom runner, bind the existing hash chain, and require full M01-M37 plus hardlock/hardlock-base PASS on one candidate head. No production run before that proof.",
-    "if_same_task_artifacts_unavailable": "Condition confirmed by PR107 issuecomment-5637219382. PR247 therefore contains only the smallest observability-only M37 change: preserve the already returned first inner non-repairable PPM/PSERC reason while remaining fail-closed BLOCKED. No PPM/PSERC/content/quality rule change.",
-    "after_nested_reason": "After M37 candidate and hardlocks pass and the candidate is safely integrated, run only one fresh first-article live path to the same PPM boundary. Repair only the newly exposed proven root cause. First prove one article end-to-end through real LanguageTool and real PPM; only then resume the remaining batch and finally 107008; stop before publish.",
+    "goal": "After the user explicitly resumes: continue only from the exact live blocker PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH. First verify PR249 as a history-only M38 path; do not accept its proposed expected/actual version values as authoritative until independently proven.",
+    "parallel_path": "PR249 / hobbyroom/m38-plan-version-history-20260911 / head 0d23e592a91a448fcc07fb5bd0a54b59985ef70c is draft and unmerged. Current diff is only the temporary anchor, so M38 is NOT registered or machine-proven yet.",
+    "required_order": [
+      "Re-read current main and PR249 head before any edit.",
+      "If PR249 remains the bound M38 path, complete only history authority in the existing error matrix and existing regression runner; remove the temporary anchor.",
+      "Prove canonical main M01-M37 PASS and M38 as the first new FAIL, then prove the history candidate with the existing hardlock/history-machine-proof mechanism. No product fix in the history phase.",
+      "Only after history proof, isolate the smallest product fix for the exact proven expected/actual plan-version mismatch. Do not infer `4.0.0`/`6.7.9` solely from PR249 text; prove the bridge contract or accepted authoritative plan evidence first.",
+      "After any product fix passes the full existing regression and hardlocks, rerun exactly one fresh first article through real LanguageTool and real PPM/PSERC. Only after one article PASS may the remaining batch continue to 107008; stop before publish."
+    ],
     "must_fail_closed_on": [
       "wrong source hash",
       "stale source generation",
@@ -220,8 +244,13 @@
       "content or quality rule change",
       "auto-publish",
       "new architecture",
-      "symptom fix before root cause"
+      "symptom fix before root cause",
+      "second article before first article full PASS",
+      "merge PR249 while it only contains the temporary anchor",
+      "treat PR249 proposed version values as proven root cause without independent evidence"
     ],
     "proof_after_fix": "One fresh first article must pass the unchanged real LT/PPM path first. Only then complete a fresh 7/7 through unchanged 107007 to 107008 and stop before publish. Component/selftests remain guardrails and do not grant production PASS."
-  }
+  },
+  "hobbyroom_pr": 249,
+  "hobbyroom_head_sha": "0d23e592a91a448fcc07fb5bd0a54b59985ef70c"
 }
