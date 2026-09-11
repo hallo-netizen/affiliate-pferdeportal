@@ -7,13 +7,15 @@ STATUS: AKTIV / UPC 0.8.5 WORDPRESS-LIVE FAIL-CLOSED PASS / UPC 0.8.6 LOCAL HARD
 
 Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 
-- aktuelle Arbeit: `HOBBYRAUM.md`
-- Fehlerdetails: `FEHLERQUELLEN.md`
+- aktuelle Arbeit / NEXT ACTION: `HOBBYRAUM.md`
+- einzige detaillierte Fehlerquelle: `FEHLERQUELLEN.md`
 - Ziel: `ZIELVERTRAG_V2.md`
+- Tagesprotokoll bis Akte 65: `PROTOKOLL_20260911.md`
+- Nachhol-/Abschlussfortsetzung Akten 66–84: `PROTOKOLL_NACHHOLUNG_20260911.md`
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `82_...`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `84_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -40,6 +42,7 @@ SHA-256 `6ad160d18fb0973463c214de4356447923cbb728e222725e5407868e580c24f6`
 - SEO kann fachliches BLOCKED nicht überschreiben;
 - Dossier-Neuaudit bei Produktentfall fail-closed.
 
+**Diese technischen PASS-Belege wurden in der Abschluss-/Nachholprüfung nicht neu ausgeführt.**
 **WordPress-Live für 0.8.6 wurde noch nicht ausgeführt.**
 
 UPK 0.5.1 bleibt gebunden:
@@ -61,51 +64,45 @@ Exakter technischer UPC-0.8.6-Stand:
 - **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
 - **143/150 V1-fähige Gruppen technisch noch offen**.
 
-Seit der Readiness-Baseline wurden source-bound, aber **nicht materialisiert**, zusätzliche Profilspezifikationen für **61 Gruppen** erstellt.
+Seit der Readiness-Baseline wurden source-bound, aber **nicht materialisiert**, zusätzliche Profilspezifikationen für **67 Gruppen** erstellt.
 
 Aktenübersicht:
-- 62–78: bisherige source-bound Profilblöcke bis Unterstand-Beleuchtung / Boxentüren / Boxenriegel / Boxengitter;
-- 79: Boxenmatten / Krippen / Lecksteinhalter;
-- 80: Putzplatzmatten / Anbindebalken / Anbinderinge;
-- 81: Putzboxhalter / Schlauchhalter / Waschplatz;
-- 82: Mistboy / Bollengabeln / Stallbesen.
+- Akten 62–84 enthalten die source-bound Profil-/Faktenmatrizen;
+- Akte 83: `schubkarren`, `mistcontainer`, `paddockzaeune`;
+- Akte 84: `reitplatzboden`, `reitplatzumrandung`, `reitplatzbeleuchtung`;
+- keine source-bound Profilspec ändert den technischen 0.8.6-Profilbestand automatisch.
 
-Wichtige aktuelle Fail-closed-/Dedup-Bindungen:
-- `boxenriegel`: nur eine sauber separate Einzelproduktfamilie -> 0 Cross-Brand-Paare;
-- `boxengitter`: unterschiedliche Unterklassen -> 0 Paar bis zweite Herstellerfamilie je Subtyp;
-- `boxenmatten`: Cross-Group-Dedup gegen `liegeflaechen-im-offenstall`;
-- `putzboxhalter`: nur eine eigenständige Boxkantenhalter-Familie -> 0 Cross-Brand-Paare;
-- `stallbesen`: Cross-Group-Dedup gegen `hofbesen`, da aktuelle Produkte selbst als Stall- und Hofbesen geführt werden;
-- keine source-bound Profilspec ändert den technischen 0.8.6-Profilbestand.
+Wichtige Fail-closed-/Dedup-Regeln bleiben bindend, unter anderem:
+- fehlende gleiche Nutzungsklasse/Subtyp-/Kompatibilitätsbindung -> kein Paar;
+- `boxenmatten` gegen `liegeflaechen-im-offenstall` deduplizieren;
+- `stallbesen` gegen `hofbesen` deduplizieren;
+- `boxenriegel`, `putzboxhalter` und nicht ausreichend breit belegte Subtypen bleiben bei fehlender Herstellerbreite 0 Paar;
+- keine 25er V1-NOT-APPLICABLE-Gruppe reaktivieren.
 
 ## AKTUELLER ARBEITSBLOCK
 
-Autoritative Portalstruktur frisch in exakter Registry-Reihenfolge gelesen:
-- `p155 schubkarren`;
-- `p156 mistcontainer`;
-- `p157 mistlagerung` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`, überspringen;
-- `p158 paddockzaeune`;
-- `p159 reitplatzboden`;
-- `p160 reitplatzdrainage` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`, überspringen.
+Autoritative Portalstruktur nach Akte 84 frisch gelesen:
+- `p163 hindernisstangen`;
+- `p164 sprungstaender`;
+- `p165 cavaletti`.
 
-Nächster Profilblock:
-`schubkarren` -> `mistcontainer` -> `paddockzaeune`.
+Alle drei sind in der finalen 25er NOT-APPLICABLE-Liste **nicht** enthalten.
 
-Danach:
-`reitplatzboden`, anschließend nächsten zulässigen Registry-Key hinter `reitplatzdrainage` direkt aus der autoritativen Portalstruktur lesen.
+Nächster fachlich zulässiger Profilblock:
+`hindernisstangen` -> `sprungstaender` -> `cavaletti`.
 
 Vor Pairing hart zu normalisieren:
-- Schubkarren: gleiche Mulden-/Rahmen-/Rad-/Kapazitätsklasse; keine Zweiradkarre, Futterwagen oder Elektroschubkarre blind kreuzen;
-- Mistcontainer: gleiche Container-/Volumen-/Aufnahme-/Entleerungsklasse; keine bauliche Mistlagerstätte;
-- Paddockzäune: Pflicht-Subtyp nach Bau-/Material-/Elektrifizierungsprinzip; Holz-, Kunststoff-, Elektro- und mobile Panelzäune nie blind mischen;
-- Reitplatzboden: konkrete serien-/systemgebundene Boden-/Tretschichtklasse; keine Bauleistung oder Drainage blind paaren.
+- nur gleiche reale Produkt-/Nutzungsklasse miteinander paaren;
+- Bauart, Material, Maße, Nutzung und sicherheitsrelevante Ausführung als Pflichtattribute binden, soweit sie die Vergleichbarkeit bestimmen;
+- Hindernisstange, Sprungständer und Cavaletti niemals als austauschbare Produktklasse behandeln;
+- kein finaler Produktpair manuell festschreiben; finale Paarentscheidung ausschließlich im Produktvergleichs-Plugin aus aktuellem Product Knowledge.
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> sinnvoll bündeln -> erst danach technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
 
-Finale konkrete Paarentscheidung ausschließlich im Produktvergleichs-Plugin aus aktuellem Product Knowledge; regelmäßige Neubewertung bleibt Pflicht.
-
 Kein SEO vor fachlich zulässigem Kandidatenuniversum.
+Kein Writer/Draft/Publish aus diesem Büro.
+Kein Codex.
 Kein Merge.
 Kein Publish.
 
