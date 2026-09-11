@@ -4,6 +4,7 @@ from pathlib import Path
 
 BATCH_SHA='7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a'
 PROOF_REL=Path('isolated_system4')/'batch_proof'/BATCH_SHA
+PROOF_NAME='SYSTEM4_7_7_FULL_BATCH_PROOF.json'
 PLAN_SLOTS=[
 '9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56',
 '6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19',
@@ -13,7 +14,7 @@ PLAN_SLOTS=[
 '8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648',
 '906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5',
 ]
-EXPECTED_FILES=['system4_batch_evidence.json','SYSTEM4_7_7_FULL_BATCH_PROOF.json']+[f'ARTICLE_{s}.md' for s in PLAN_SLOTS]
+SHA_RE=re.compile(r'^[0-9a-f]{64}$')
 
 class GuardFail(RuntimeError): pass
 
@@ -32,18 +33,20 @@ def verify(repo: Path, branch: str) -> str:
     fields=remote.split()
     if len(fields)!=2 or fields[1] != f'refs/heads/{branch}': raise GuardFail('REMOTE_BRANCH_MISSING')
     if fields[0] != head: raise GuardFail('REMOTE_HEAD_MISMATCH')
-    for name in EXPECTED_FILES:
-        rel=(PROOF_REL/name).as_posix()
-        if not (repo/rel).is_file(): raise GuardFail('PROOF_FILE_MISSING:'+name)
-        run(repo,'cat-file','-e',f'HEAD:{rel}')
-    proof=json.loads((repo/PROOF_REL/'SYSTEM4_7_7_FULL_BATCH_PROOF.json').read_text(encoding='utf-8'))
+    rel=(PROOF_REL/PROOF_NAME).as_posix()
+    if not (repo/rel).is_file(): raise GuardFail('PROOF_FILE_MISSING:'+PROOF_NAME)
+    run(repo,'cat-file','-e',f'HEAD:{rel}')
+    proof=json.loads((repo/PROOF_REL/PROOF_NAME).read_text(encoding='utf-8'))
     if proof.get('publish_allowed') is not False: raise GuardFail('PROOF_PUBLISH_AUTHORITY_FAIL')
     if proof.get('next_required')!='SIGNED_WORKFLOW_RELEASE': raise GuardFail('PROOF_NEXT_BOUNDARY_FAIL')
-    if 'batch_sha256' in proof and proof.get('batch_sha256')!=BATCH_SHA: raise GuardFail('PROOF_BATCH_SHA_FAIL')
+    if proof.get('batch_sha256')!=BATCH_SHA: raise GuardFail('PROOF_BATCH_SHA_FAIL')
     articles=proof.get('articles')
     if not isinstance(articles,list) or len(articles)!=7: raise GuardFail('PROOF_ARTICLE_COUNT_FAIL')
     slots=[str(x.get('plan_slot') or '') for x in articles if isinstance(x,dict)]
     if slots != PLAN_SLOTS: raise GuardFail('PROOF_PLAN_SLOTS_FAIL')
+    for row in articles:
+        if not isinstance(row,dict) or not SHA_RE.fullmatch(str(row.get('final_draft_sha256') or '')) or not SHA_RE.fullmatch(str(row.get('check_evidence_sha256') or '')):
+            raise GuardFail('PROOF_ARTICLE_HASH_FAIL')
     print('SYSTEM4_PROOF_REMOTE_PASS:'+head)
     return head
 
