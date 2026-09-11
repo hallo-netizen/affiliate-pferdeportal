@@ -1,6 +1,13 @@
 {
   "article_id": "SYSTEM3-LIVE-001",
-  "article_type": "ratgeber",
+  "article_type": "FAQ",
+  "item": {
+    "quality_binding": {
+      "type_meta": {
+        "primary_question": "Woran erkennt man eine passende Regendecke für ein Pferd?"
+      }
+    }
+  },
   "source_payload": {
     "topic": "Woran erkennt man eine passende Regendecke für ein Pferd?",
     "facts": [
