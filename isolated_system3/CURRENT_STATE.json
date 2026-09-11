@@ -24,7 +24,8 @@
     "artifact SHA256 independently confirmed as 40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
     "current PR head repository entrance positive-negative CI green",
     "existing legacy 7/7 production package and associated WordPress WXR re-read from retained file library; no re-upload required",
-    "7/7 WordPress WXR proves one fixed category binding per article and carries canonical article id, plan slot, article type and focus keyword"
+    "7/7 WordPress WXR proves one fixed category binding per article and carries canonical article id, plan slot, article type and focus keyword",
+    "sealed canonical link rules re-verified from PR232 diagnostic evidence: exact three roles, exact input shape, page/category-only targets, no external URLs, no post targets, no unbound links, no automatic replacement"
   ],
   "resolved_blockers": [
     {
@@ -46,6 +47,43 @@
     "artifact_audit_evidence": "PR232 issuecomment-5634121819",
     "artifact_sha256": "40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
     "status": "PASS"
+  },
+  "fixed_link_rules": {
+    "verified": true,
+    "evidence": "PR232 issuecomment-5633887332 from sealed canonical rule content",
+    "runtime_path": "runtime_order.links",
+    "exact_link_count": 3,
+    "required_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "required_fields": [
+      "role",
+      "href",
+      "anchor",
+      "reason",
+      "section_id"
+    ],
+    "constraints": [
+      "href must be a relative internal URL path; external URLs forbidden",
+      "anchor must be non-empty and used exactly with its bound href",
+      "reason must be non-empty and role-specific",
+      "section_id must be non-empty",
+      "three links must be used in three different content blocks",
+      "further_information.section_id must equal further_information",
+      "targets must be published WordPress page or category objects",
+      "post targets forbidden",
+      "unbound internal links block",
+      "automatic target replacement forbidden",
+      "article generation may not research, invent, replace, repair or automatically remap missing link targets",
+      "before any WordPress write all targets require read-only live revalidation including URL-to-object-ID resolution"
+    ],
+    "canonical_role_meaning": {
+      "parent_category": "published page/category target fulfilling the hierarchical parent role",
+      "semantic_related": "published page/category target semantically relevant to the article subject",
+      "further_information": "published page/category target providing further information and bound to section further_information"
+    }
   },
   "legacy_7of7_reference": {
     "production_package": "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
@@ -71,16 +109,16 @@
   },
   "current_blocker": {
     "code": "CANONICAL_LINK_PRESELECTION_AUTHORITY_NOT_DEFINED",
-    "detail": "The existing retained 7/7 WordPress WXR is now verified as a usable pre-existing input for the parent/category side: each of its seven articles carries exactly one bound WordPress category plus canonical article id, plan slot, article type and focus keyword. However that 7/7 WXR contains no stored assignment for semantic_related or further_information and no bound anchor/reason for those roles. The sealed canonical rules still define no deterministic multi-candidate selection/tie-breaker and no external authority that assigns the two remaining roles. Therefore no upload is missing; the unresolved production gap is narrowed to deterministic preselection/binding of semantic_related and further_information (plus their anchor/reason), without model freedom.",
-    "evidence": "Retained 7/7 files re-read on 2026-09-11: final ENDSTEMPEL package + GEN1_7_ARTIKEL_KURZWEG_WORDPRESS_IMPORT_AKTUELL.xml; WXR has 7 category bindings and no semantic/related/further role metadata",
+    "detail": "The link rules themselves ARE fixed and verified. They require exactly three bound internal links with roles parent_category, semantic_related and further_information, exact field/target constraints, fixed use before article generation, and no model replacement. The remaining undefined point is narrower: when the authoritative read-only WordPress link-target snapshot contains multiple eligible candidates, the sealed rules define no deterministic tie-breaker/external preselection authority, and anchor/reason derivation from that snapshot is not canonically defined. This must not be described as missing or undefined link rules.",
+    "evidence": "PR232 issuecomment-5633887332 defines the fixed link rules; issuecomment-5633965684 states only preselection authority/tie-breaker and anchor/reason derivation are NOT_DEFINED",
     "resolved": false
   },
   "validator_boundary": {
     "cloud_entry_verify_is_canonical_rule_validator": false,
     "detail": "isolated_system3/cloud_entry.py verify only checks output presence and minimum word count; canonical article PASS therefore requires sealed-rule validation/audit, not that helper alone."
   },
-  "last_safe_state": "First canonical FAQ article PASS and independent sealed-rule artifact audit PASS. Existing retained 7/7 production/WXR corpus has now been re-read and proves parent/category binding data already exists; semantic_related/further_information preselection remains undefined. No WordPress write, publish or merge performed.",
-  "next_action": "Do not ask for another upload. Reuse the retained 7/7 WordPress WXR as the existing category/WordPress-reference input. Close only the remaining deterministic preselection/binding for semantic_related and further_information plus bound anchor/reason before article generation, with zero Codex/model selection freedom. Then run the same System 3 path positive and negative and expand to the retained 7/7 corpus without creating a new runner. Do not change content rules, article rules, PPM, PSERC or PSTE.",
+  "last_safe_state": "First canonical FAQ article PASS and independent sealed-rule artifact audit PASS. Fixed canonical link rules are verified and must not be reopened. Existing retained 7/7 production/WXR corpus proves category binding data already exists. Only multi-candidate preselection authority/tie-breaker plus anchor/reason derivation remains undefined. No WordPress write, publish or merge performed.",
+  "next_action": "Do not redesign or rediscover link rules. Apply the already fixed canonical link rules. Reuse the retained 7/7 WordPress reference. Resolve only the narrowly NOT_DEFINED preselection/tie-breaker and anchor/reason derivation without Codex/model freedom; then rerun positive/negative System 3 tests and expand through the existing 7/7 corpus without a new runner. Do not change content rules, article rules, PPM, PSERC or PSTE.",
   "forbidden": [
     "reuse runtime/workflow code from System 1 or System 2",
     "outside control of routing, rules, prompts, tools or output policy",
