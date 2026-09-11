@@ -1,0 +1,157 @@
+name: TEMP PR224 Implement Repair Loop
+
+on:
+  push:
+    branches:
+      - hobbyroom/107007-worker-checker-boundary-20260911
+
+permissions:
+  contents: write
+
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/107007-worker-checker-boundary-20260911
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Implement KISS repair lifecycle
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout origin/main -- control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+
+          handoff = Path('control/startmaster0107/fachworkflow_proof_handoff.py')
+          step_path = Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json')
+          state_path = Path('control/startmaster0107/CURRENT_STATE.json')
+
+          def replace_once(text, old, new, label):
+              n = text.count(old)
+              if n != 1:
+                  raise SystemExit(f'{label}: expected exactly 1 match, got {n}')
+              return text.replace(old, new, 1)
+
+          def sha(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          text = handoff.read_text(encoding='utf-8')
+
+          text = replace_once(
+              text,
+              'class Blocked(RuntimeError): pass\n',
+              '''class Blocked(RuntimeError): pass\n\nclass RepairRequired(RuntimeError):\n    def __init__(self, source: str, findings: Any):\n        self.source = str(source)\n        self.findings = list(findings) if isinstance(findings, list) else [findings]\n        super().__init__(self.source)\n\ndef _lt_repair_findings(matches: list[Any]) -> list[dict]:\n    out=[]\n    for raw in matches:\n        m=raw if isinstance(raw,dict) else {}\n        rule=m.get("rule") if isinstance(m.get("rule"),dict) else {}\n        context=m.get("context") if isinstance(m.get("context"),dict) else {}\n        replacements=m.get("replacements") if isinstance(m.get("replacements"),list) else []\n        out.append({\n            "rule_id": str(rule.get("id") or ""),\n            "message": str(m.get("message") or ""),\n            "short_message": str(m.get("shortMessage") or ""),\n            "offset": m.get("offset"),\n            "length": m.get("length"),\n            "context": str(context.get("text") or ""),\n            "context_offset": context.get("offset"),\n            "context_length": context.get("length"),\n            "replacements": [str(x.get("value") or "") for x in replacements if isinstance(x,dict)][:10],\n        })\n    return out\n\n_PPM_REPAIRABLE_PREFIXES=("BLOCKED_CONTENT_","BLOCKED_WAVE2_","BLOCKED_CANONICAL_RUNTIME_LINK_")\n\ndef _ppm_repair_findings(value: Any) -> list[dict]:\n    found=[]\n    def walk(node: Any) -> None:\n        if isinstance(node,dict):\n            code=str(node.get("error_code") or "")\n            if code.startswith(_PPM_REPAIRABLE_PREFIXES):\n                found.append({\n                    "error_code": code,\n                    "failed_rule": node.get("failed_rule"),\n                    "field_path": node.get("field_path"),\n                    "expected": node.get("expected"),\n                    "actual": node.get("actual"),\n                    "reason": node.get("reason"),\n                    "validator_id": node.get("validator_id"),\n                })\n            for child in node.values(): walk(child)\n        elif isinstance(node,list):\n            for child in node: walk(child)\n    walk(value)\n    unique=[]; seen=set()\n    for item in found:\n        key=json.dumps(item,ensure_ascii=False,sort_keys=True,default=str)\n        if key not in seen:\n            seen.add(key); unique.append(item)\n    return unique\n''',
+              'insert repair types')
+
+          text = replace_once(
+              text,
+              '    if matches: raise Blocked("LANGUAGETOOL_UNRESOLVED_FINDINGS:"+str(len(matches)))\n',
+              '    if matches: raise RepairRequired("languagetool",_lt_repair_findings(matches))\n',
+              'LT repair return')
+
+          text = replace_once(
+              text,
+              '    if not isinstance(bridge,dict) or bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED": raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")\n',
+              '''    if not isinstance(bridge,dict): raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")\n    if bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":\n        repair=_ppm_repair_findings(bridge)\n        if repair: raise RepairRequired("ppm_content_quality",repair)\n        raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")\n''',
+              'PPM bridge repair return')
+
+          text = replace_once(
+              text,
+              '    if artifact.get("status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH": raise Blocked("PPM679_REAL_REPORT_NOT_PASS")\n',
+              '    artifact_status=artifact.get("status")\n',
+              'defer PPM report status')
+
+          text = replace_once(
+              text,
+              '''    check=items[0]; checks=check.get("checks")\n    if check.get("technical_status")!="TECHNICAL_CHECK_OK": raise Blocked("PPM679_TECHNICAL_NOT_PASS")\n    if check.get("content_quality_status")!="CONTENT_QUALITY_CHECK_OK": raise Blocked("PPM679_CONTENT_QUALITY_NOT_PASS")\n    if check.get("content_hash")!=final_sha: raise Blocked("PPM679_CONTENT_HASH_NOT_FINAL_ARTICLE")\n    if not isinstance(checks,dict) or checks.get("content_hash")!=final_sha or checks.get("fail_closed_aggregate_status")!="PASS": raise Blocked("PPM679_FAIL_CLOSED_NOT_PASS")\n''',
+              '''    check=items[0]; checks=check.get("checks")\n    if check.get("technical_status")!="TECHNICAL_CHECK_OK": raise Blocked("PPM679_TECHNICAL_NOT_PASS")\n    repair=_ppm_repair_findings({"bridge":bridge,"ppm_result":ppm_result,"artifact":artifact,"check":check})\n    if check.get("content_quality_status")!="CONTENT_QUALITY_CHECK_OK":\n        if not repair:\n            repair=[{"error_code":"PPM679_CONTENT_QUALITY_NOT_PASS","reason":"Existing PPM content-quality validator did not pass."}]\n        raise RepairRequired("ppm_content_quality",repair)\n    if artifact_status!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":\n        if repair: raise RepairRequired("ppm_content_quality",repair)\n        raise Blocked("PPM679_REAL_REPORT_NOT_PASS")\n    if check.get("content_hash")!=final_sha: raise Blocked("PPM679_CONTENT_HASH_NOT_FINAL_ARTICLE")\n    if not isinstance(checks,dict) or checks.get("content_hash")!=final_sha: raise Blocked("PPM679_FAIL_CLOSED_NOT_PASS")\n    if checks.get("fail_closed_aggregate_status")!="PASS":\n        if repair: raise RepairRequired("ppm_content_quality",repair)\n        raise Blocked("PPM679_FAIL_CLOSED_NOT_PASS")\n''',
+              'PPM content repair return')
+
+          text = replace_once(
+              text,
+              '''    except (Blocked,OSError,ValueError,KeyError,TypeError,json.JSONDecodeError) as exc:\n        print(json.dumps({"ok":False,"status":"FACHWORKFLOW_PROOF_HANDOFF_BLOCKED","error":str(exc),"publish_allowed":False},ensure_ascii=False,indent=2)); return 2\n''',
+              '''    except RepairRequired as exc:\n        print(json.dumps({"ok":False,"status":"FACHWORKFLOW_REPAIR_REQUIRED","source":exc.source,"finding_count":len(exc.findings),"findings":exc.findings,"same_current_item_required":True,"worker_pass_authority":"NONE","pass_generated":False,"publish_allowed":False},ensure_ascii=False,indent=2)); return 0\n    except (Blocked,OSError,ValueError,KeyError,TypeError,json.JSONDecodeError) as exc:\n        print(json.dumps({"ok":False,"status":"FACHWORKFLOW_PROOF_HANDOFF_BLOCKED","error":str(exc),"publish_allowed":False},ensure_ascii=False,indent=2)); return 2\n''',
+              'machine repair status')
+
+          handoff.write_text(text, encoding='utf-8')
+
+          old_step_sha = sha(step_path)
+          step = json.loads(step_path.read_text(encoding='utf-8'))
+          new_handoff_sha = sha(handoff)
+          matched=0
+          for entry in step.get('authorized_inputs',[]):
+              if isinstance(entry,dict) and entry.get('ref')=='control/startmaster0107/fachworkflow_proof_handoff.py':
+                  entry['sha256']=new_handoff_sha; matched+=1
+          if matched != 1:
+              raise SystemExit(f'step handoff binding count={matched}')
+          old = '- Danach ausschließlich fachworkflow_handoff.command ausführen. Nur der hash-gebundene bestehende Handoff führt die vorhandenen realen Prüfungen aus/prüft sie und erzeugt daraus genau einen gebundenen Gesamt-PASS.\n- Erst nach FACHWORKFLOW_PROOF_HANDOFF_PASS ausschließlich submission_command ausführen. Kein submit-request, keine Capability-Suche, kein zweiter Executor.'
+          new = '- Danach ausschließlich fachworkflow_handoff.command ausführen. Der hash-gebundene bestehende Handoff führt die vorhandenen realen Prüfungen aus. Wenn er FACHWORKFLOW_REPAIR_REQUIRED liefert, bleibt exakt derselbe current_item gebunden: ausschließlich die gemeldeten bestehenden Fachbefunde in den bereits worker-eigenen Roharbeitsdaten korrigieren, Artikel und production_plan_item wieder exakt aneinander binden, FACHWORKFLOW_HANDOFF_REQUEST.json mit unveränderten extern gebundenen Identitäts-/Header-/Releasefeldern und stage_proofs=[] aktualisieren und exakt denselben fachworkflow_handoff.command erneut ausführen. FACHWORKFLOW_REPAIR_REQUIRED ist KEIN PASS, erzeugt keinen Prüfbeleg und erlaubt keine Submission.\n- Erst nach FACHWORKFLOW_PROOF_HANDOFF_PASS ausschließlich submission_command ausführen. Kein submit-request, keine Capability-Suche, kein zweiter Executor.'
+          if step.get('instruction','').count(old) != 1:
+              raise SystemExit('step instruction anchor mismatch')
+          step['instruction']=step['instruction'].replace(old,new,1)
+          step_path.write_text(json.dumps(step,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          new_step_sha=sha(step_path)
+
+          state=json.loads(state_path.read_text(encoding='utf-8'))
+          gate=state.get('execution_gate')
+          if not isinstance(gate,dict) or gate.get('bundle_ref')!='control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json':
+              raise SystemExit('CURRENT_STATE execution_gate binding mismatch')
+          if gate.get('bundle_sha256') != old_step_sha:
+              raise SystemExit(f'CURRENT_STATE old step sha mismatch: {gate.get("bundle_sha256")} != {old_step_sha}')
+          gate['bundle_sha256']=new_step_sha
+          state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+
+          rm -f .github/workflows/temp-pr224-stage-forensics.yml
+          rm -f control/startmaster0107/WORKER_CHECKER_BOUNDARY_TASK.tmp.md
+          rm -f control/startmaster0107/CLAUDE_FORENSIC_REVIEW.md
+          rm -f .github/workflows/temp-pr224-implement-repair-loop.yml
+
+      - name: Hard candidate checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile control/startmaster0107/fachworkflow_proof_handoff.py
+          python3 control/startmaster0107/fachworkflow_proof_handoff.py selftest
+          python3 control/single-door-boundary/codex_current_action.py selftest
+          python3 control/startmaster0107/test_fachworkflow_proof_handoff.py
+          python3 control/startmaster0107/test_ppm679_current_action_binding.py
+          python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+          python3 - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          p=Path('control/startmaster0107/fachworkflow_proof_handoff.py')
+          spec=importlib.util.spec_from_file_location('fw',p); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          lt=m._lt_repair_findings([{'message':'Fehler','offset':1,'length':2,'rule':{'id':'X'},'replacements':[{'value':'Korrektur'}]}])
+          assert lt and lt[0]['rule_id']=='X' and lt[0]['replacements']==['Korrektur']
+          ppm=m._ppm_repair_findings({'errors':[{'error_code':'BLOCKED_CONTENT_TABLE_RULE','failed_rule':'TABLE','reason':'x'},{'error_code':'RUNTIME_SOURCE_SNAPSHOT_HASH_MISMATCH'}]})
+          assert len(ppm)==1 and ppm[0]['error_code']=='BLOCKED_CONTENT_TABLE_RULE'
+          r=m.RepairRequired('languagetool',lt)
+          assert r.source=='languagetool' and len(r.findings)==1
+          print('REPAIR_LIFECYCLE_HELPERS_PASS')
+          PY
+          grep -q 'FACHWORKFLOW_REPAIR_REQUIRED' control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
+          ! git diff -- control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt | grep -q '^+'
+          test ! -e .github/workflows/temp-pr224-stage-forensics.yml
+          test ! -e control/startmaster0107/WORKER_CHECKER_BOUNDARY_TASK.tmp.md
+          test ! -e control/startmaster0107/CLAUDE_FORENSIC_REVIEW.md
+
+      - name: Commit tested candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          echo '=== FINAL DIFF ==='
+          git status --short
+          git diff --check
+          git add -A
+          git commit -m 'Hobbyraum: allow bound article repair before final PASS'
+          git push origin HEAD:hobbyroom/107007-worker-checker-boundary-20260911
