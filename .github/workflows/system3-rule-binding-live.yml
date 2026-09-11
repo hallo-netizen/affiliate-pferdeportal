@@ -63,6 +63,12 @@ jobs:
           test -f "$dst/pste/includes/class-pste-breadth-research-queue.php"
           echo SYSTEM3_WHOLE_PPM_PACKAGE_BOUND_FILES=$ppm_count
           echo SYSTEM3_WHOLE_PSERC_PACKAGE_BOUND_FILES=$pserc_count
+          echo SYSTEM3_PPM_FILEMAP_BEGIN
+          find /tmp/ppm679-bound -type f | sort | sed 's#^/tmp/ppm679-bound/##'
+          echo SYSTEM3_PPM_FILEMAP_END
+          echo SYSTEM3_PSERC_FILEMAP_BEGIN
+          find /tmp/pserc-bound -type f | sort | sed 's#^/tmp/pserc-bound/##'
+          echo SYSTEM3_PSERC_FILEMAP_END
           echo SYSTEM3_COMPLETE_RULE_PACKAGES_BOUND_PASS
       - name: Negative proof sealed rules cannot be changed silently
         shell: bash
