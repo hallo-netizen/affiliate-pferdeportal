@@ -24,53 +24,71 @@ STATUS: CLOSED / LOKAL + WORDPRESS-LIVE 0.8.2/0.8.3 PASS
 ## PV-FACH-083-001 – Fachinterpretation nicht vollständig im Dossier gebunden
 STATUS: CLOSED / 0.8.3 LOCAL HARD + WORDPRESS-LIVE-REGRESSION PASS
 
-0.8.3 belegt für Regendecken:
-- Dossier V2;
-- Decision-Policy;
-- Kostenwiederverwendung;
-- fail-closed bei Null-Eignung;
-- kein Auto-Publish.
+## PV-SCALE-084-001 – Proofgruppe statt vollständiger Vergleichsgruppen-Abdeckung
 
-## PV-SCALE-084-001 – Produktvergleich deckt nur Proofgruppe Regendecken statt aller Vergleichs-Produktgruppen ab
+STATUS: PARTIAL CLOSED / 0.8.4 REGISTRY+COVERAGE LOCAL HARD PASS / WORDPRESS-LIVE-RETEST OFFEN / PRODUKTRECHERCHE+PROFILE 175-GRUPPEN-GESAMTZIEL WEITER OFFEN
 
-STATUS: OPEN / AKTUELLER ERSTER OFFENER PUNKT
+### Ursprungsbefund
 
-### Befund
-
-Die autoritative Portalstruktur enthält:
+0.8.3 kannte in der auswählbaren Profilkonfiguration nur Regendecken.
+Die autoritative Portalstruktur enthält jedoch:
 - 329 Produktseiten;
-- 1124 Artikelkategorien;
-- **175 eindeutige Produktgruppen mit eigener Themenkategorie `Vergleich`**.
+- 1124 Themenkategorien;
+- **175 eindeutige Produktgruppen mit eigener `Vergleich`-Kategorie**.
 
-0.8.3 bietet in `comparison-profiles.json` nur `regendecken` an.
+Regendecken ist 1/175.
 
-Damit ist der Mechanismus bewiesen, die fachliche Portalabdeckung aber nicht vollständig.
+### KISS-Fix 0.8.4 – lokal belegt
 
-### Ziel
-
-Für jede der 175 Vergleichsgruppen:
-- möglichst vollständiger realer Produktbestand;
-- alle fachlich zulässigen A-vs-B-Paare;
-- vollständige terminale SEO-Prüfung oder explizit offener Status;
-- Dossier V2 für reale SEO-PASS-Paare;
-- vollständiger Coverage-Nachweis.
-
-### Hard Rules
-
-- keine stille Auslassung von Gruppen;
+0.8.4 ergänzt keine 175 PHP-Hardcodes, sondern eine portalgebundene Datenregistry + Coverage:
+- 175/175 Gruppen exakt aus Portalquelle gebunden;
+- jede Gruppe sichtbar;
+- fehlendes Profil/Policy/Inventar bleibt sichtbar OPEN/BLOCKED;
+- keine stille Auslassung;
 - keine willkürliche Gruppen-/Paarobergrenze;
-- fehlendes Profil/Policy/Inventar sichtbar BLOCK/OPEN;
-- inkompatible Produkte vor Providerkosten aussortieren;
-- Wiederaufnahme ohne doppelte Providerkosten;
-- keine künstlichen SEO-PASS-Werte;
-- PRODUCT_COMPARISON bleibt exakt A vs B;
-- kein Writer/Draft/Publish.
+- Same Brand und fachlich unpassende Nutzung vor Providerkosten ausgesondert;
+- vollständiges Cross-Brand-Paaruniversum je vorbereiteter Gruppe;
+- Coverage-Receipt;
+- Research-Kandidaten und Markt-Recherchevollständigkeit getrennt.
 
-### KISS-Fixrichtung
+### Harter Beleg 0.8.4
 
-Generische, portalgebundene Registry + Coverage-Status.
-Nicht 175 Gruppen im PHP-Code hartcodieren.
-Gruppenspezifische Fachprofile bleiben Daten/Verträge und müssen vor READY vollständig gebunden sein.
+Finale Fresh-ZIP:
+- 32/32 ausführbare Tests PASS;
+- PHP-Lint 48/48 PASS;
+- Source↔ZIP 67/67;
+- Report-Hashes 66/66;
+- 175/175 Portalparität PASS;
+- Großtest 50 Produkte / 5 Hersteller -> 1000 Cross-Brand-Paare vollständig;
+- davon 500 fachlich vergleichbar, 500 falsche Nutzungsklasse sichtbar BLOCKED;
+- Reihenfolge/Dubletten verändern Coverage nicht;
+- fünf 0.8.4-Mutationen korrekt ROT.
+
+### Research-Hard-Rule
+
+Der aktuelle Product-Knowledge-Recherchekatalog enthält Produktkandidaten, aber **keinen Markt-Vollständigkeitsbeleg**.
+
+Daher 0.8.4:
+`research_completeness_status = UNPROVEN` für 175/175, bis echte gruppenspezifische Vollständigkeit bewiesen ist.
+
+Vorhandene sinnvolle Paare dürfen bereits geprüft werden; fehlende Produkte/Hersteller bleiben als Recherchearbeit offen.
+
+### Portal-Key-Kollision
+
+Zwei autoritative Portal-Slugs besitzen denselben kurzen Key `weidezaungeraete`.
+0.8.4 verschmilzt sie nicht still, sondern zeigt `GROUP_KEY_COLLISION`.
+
+### Weiter offener Teil desselben Skalierungsziels
+
+Nach 0.8.4-LIVE-PASS:
+- Produktrecherche möglichst vollständig für alle 175 Vergleichsgruppen;
+- gruppenspezifische fachliche Profile/Decision-Policies;
+- alle daraus sinnvollen A-vs-B-Paare;
+- globale Coverage ohne stille Lücke;
+- positiver Dossier-V2-Livefall.
+
+Keine künstlichen SEO-PASS-Werte.
+Kein Writer/Draft/Publish.
 
 ## Regel
 
