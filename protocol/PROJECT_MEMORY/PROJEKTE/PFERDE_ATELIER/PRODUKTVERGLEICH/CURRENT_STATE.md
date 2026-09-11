@@ -13,7 +13,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `72_...`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `75_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -52,69 +52,57 @@ SHA-256 `17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
 - `UNRESOLVED_COVERAGE`: **0**
 - Summe: 175/175.
 
-Die 25 V1-NOT-APPLICABLE-Keys sind bewusst fail-closed und erzeugen kein Produktpaar.
+Die 25 V1-NOT-APPLICABLE-Keys bleiben fail-closed und erzeugen kein Produktpaar.
 
 ## READINESS-GAP
 
-Exakter UPC-0.8.6-Gegencheck:
+Exakter technischer UPC-0.8.6-Stand:
 - 175 Registry-Gruppen;
 - **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
-- damit **143/150 V1-fähige Gruppen maschinenfest noch offen**.
+- **143/150 V1-fähige Gruppen technisch noch offen**.
 
-Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, zusätzliche Profilspezifikationen für **30 Gruppen** erstellt:
-- `high-neck-decken`;
-- `deckengurte`;
-- `deckentaschen-und-aufbewahrung`;
-- `stallhalfter`;
-- `knotenhalfter`;
-- `sicherheitshalfter`;
-- `fohlenhalfter`;
-- `pferdebuersten`;
-- `striegel`;
-- `kardaetschen`;
-- `satteldecken`;
-- `schabracken`;
-- `sattelgurte`;
-- `sattelschraenke`;
-- `satteltransport`;
-- `englische-trensen`;
-- `gebisse`;
-- `gebisslose-zaeumungen`;
-- `zuegel`;
-- `sperrriemen`;
-- `reithalfter`;
-- `liegeflaechen-im-offenstall`;
-- `offenstall-bodenbefestigung`;
-- `fressstaender-im-offenstall`;
-- `trennwaende-im-offenstall`;
-- `stallordner-und-dokumentenmappen`;
-- `futterkarten-und-boxenschilder`;
-- `werkzeughalter-im-stall`;
-- `namensschilder-fuer-pferdeboxen`;
-- `stalltafeln`.
+Seit der Readiness-Baseline wurden source-bound, aber **nicht materialisiert**, zusätzliche Profilspezifikationen für **39 Gruppen** erstellt.
 
-Neu seit letztem Stand:
-- Akte 70 bindet Liegeflächen/Bodenbefestigung/Fressständer mit klar getrennten Funktionsklassen;
-- Akte 71 bindet Trennwände/Stalldokumente/Futtertafeln; Trennwände bleiben ohne identische Konfiguration korrekt bei 0 Cross-Brand-Paaren;
-- Akte 72 bindet Werkzeughalter/Namensschilder/Stalltafeln mit getrennten Organisations-Unterklassen.
+Aktenübersicht:
+- 62: High-Neck-Decken;
+- 63: Deckenzubehör;
+- 64: Halfter;
+- 65: Pferdebürsten / Striegel / Kardätschen;
+- 66: Satteldecken / Schabracken / Sattelgurte;
+- 67: Sattelschränke / Satteltransport / Englische Trensen;
+- 68: Gebisse / gebisslose Zäumungen / Zügel;
+- 69: Sperrriemen / Reithalfter;
+- 70: Liegeflächen / Offenstall-Bodenbefestigung / Fressständer;
+- 71: Trennwände / Stalldokumente / Futtertafeln;
+- 72: Werkzeughalter / Namensschilder / Stalltafeln;
+- 73: Whiteboards / Hoftraktoren / Hoflader-Zubehör;
+- 74: Hofbesen / Hofabsperrungen / Rampen;
+- 75: Hofbeleuchtung / Stallbeleuchtung / Frostwächter.
 
-Diese 30 Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
+Wichtige Fail-closed-Bindungen der jüngsten Akten:
+- Hoflader-Zubehör nur innerhalb Anbaugerät-Subtyp; keine Cross-Brand-Aufnahmekompatibilität erfinden;
+- Rampen-Traglast nur bei identischer Einheit/Bedingung vergleichen;
+- Hofbeleuchtung ≠ Stallbeleuchtung;
+- Stallbeleuchtung benötigt source-bound Tierstall-/Ammoniakeignung;
+- technischer Frostwächter darf nicht als Tierzonen-/Heu-/Stroh-Heizer umgedeutet werden.
+
+Diese 39 Specs ändern den technischen Profilbestand nicht.
 
 ## AKTUELLER ARBEITSBLOCK
 
-Registry nach `stalltafeln` frisch direkt aus der Portalstruktur gelesen:
-- `whiteboards-fuer-stallplanung`;
-- `hoftraktoren`;
-- `hoflader-zubehoer`;
-- danach `hofbesen`.
+Registry nach `frostwaechter` frisch direkt aus der Portalstruktur + finaler V1-Disposition geprüft:
+- `luefter-im-stall` = V1-fähig;
+- `wasserleitungen-im-stall` = `PRODUCT_COMPARISON_V1_NOT_APPLICABLE` -> überspringen;
+- `zeitschaltuhren-im-stall` = V1-fähig;
+- `kameras-im-stall` = V1-fähig.
 
 Nächster Profilblock:
-`whiteboards-fuer-stallplanung` -> `hoftraktoren` -> `hoflader-zubehoer`.
+`luefter-im-stall` -> `zeitschaltuhren-im-stall` -> `kameras-im-stall`.
 
 Vor Pairing hart zu normalisieren:
-- Whiteboards: zentrale Stallplanungs-/Organisationsboards, nicht Einzelbox-Stalltafeln;
-- Hoftraktoren: gleiche Fahrzeug-/Leistungsklasse und Nutzungsniveau, keine Hoflader/Kommunalfahrzeuge blind kreuzen;
-- Hoflader-Zubehör: Pflicht-Subtyp je Anbaugerät; Schaufel, Palettengabel, Ballenspieß, Greifschaufel etc. nie blind mischen.
+- Lüfter: Bau-/Montage-/Leistungsklasse, Stall-/Landwirtschaftseignung und Schutzklasse;
+- Zeitschaltuhren: physische Netz-/Schaltklasse, Kanalzahl, Schaltleistung und Installationsart;
+- Kameras: Überwachungsklasse, Innen/Außen, Netz/WLAN, lokale/cloudbasierte Speicherung sowie Tierstall-Eignung nicht vermischen.
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> in sinnvollen Blöcken sammeln -> erst dann technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
