@@ -129,9 +129,9 @@
     }
   },
   "execution_state": {
-    "state": "BLOCKED_CURRENT_BOUND_GATE",
-    "authorized_next_action": "PROVE_ADCELL_API_V2_AUTH_THEN_CANONICAL_PROVIDER_ROUTING_ALLOWLIST_NO_PLUGIN",
-    "bound_user_scope_action": "ADCELL_CURRENT; DIGISTORE24_DEFERRED; OTTO_PAUSED; NO_PLUGIN_BEFORE_CANONICAL_POS_NEG_FULL_GATE",
+    "state": "RUNNING_BOUND_RELEASE_GATES",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "ADCELL_CURRENT; DIGISTORE24_DEFERRED; OTTO_PAUSED; FIRST_GATE_AUTH_PROOF; NO_PLUGIN_BEFORE_CANONICAL_POS_NEG_FULL_GATE",
     "completion_condition": "ADCELL_AUTH_CONTRACT_PROVEN_AND_CANONICAL_POS_NEG_FULL_WORKFLOW_FRESH_UNPACK_IDENTITY_PASS_AND_REAL_ADCELL_WORDPRESS_MARIADB_E2E_PASS",
     "after_completion_action": "RETURN_TO_EXPLICIT_USER_NEXT_SCOPE_NOT_FINALIZE_RELEASE_WHILE_OTHER_ACTIVE_TARGETS_REMAIN_OPEN",
     "no_optional_detours": true,
@@ -141,20 +141,18 @@
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
       "release/affiliate-zentrale/evidence/",
       "control/release-governance/CURRENT_RELEASE.json",
-      "protocol/AFFILIATE_RELEASE_",
-      "AFFILIATE_HOBBYRAUM/"
+      "protocol/AFFILIATE_RELEASE_"
     ],
     "next_state_binding": {
       "sequence": 6,
       "state": "RUNNING_BOUND_RELEASE_GATES",
-      "authorized_next_action": "ADCELL_CANONICAL_LOCAL_AND_LIVE_GATES_AFTER_AUTH_PROOF",
+      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
       "authorized_change_prefixes": [
         "release/affiliate-zentrale/current/",
         "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
         "release/affiliate-zentrale/evidence/",
         "control/release-governance/CURRENT_RELEASE.json",
-        "protocol/AFFILIATE_RELEASE_",
-        "AFFILIATE_HOBBYRAUM/"
+        "protocol/AFFILIATE_RELEASE_"
       ]
     },
     "otto_awin_wp_cron_followup": {
@@ -290,6 +288,7 @@
       "status": "BLOCKED_LIVE_AUTH_CANONICAL_SOURCE_FIX_PENDING",
       "checked_at": "2026-09-11",
       "scope_ref": "protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md",
+      "evidence_ref": "release/affiliate-zentrale/evidence/adcell_api_v2_scope_audit_20260911.txt",
       "confirmed_program_path": "Affiliate/Program/export",
       "confirmed_promotion_paths": [
         "getPromotionTypeCsv",
@@ -650,7 +649,7 @@
     "control/release-governance/release_guard.py",
     "control/release-governance/test_release_guard.py"
   ],
-  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE_EVIDENCE_ONLY",
+  "definition_of_authority": "ONLY_THE_DIRECT_COMMITTED_TREE_AT_SOURCE_ROOT_PLUS_ITS_HASH_BOUND_MANIFEST_IS_CURRENT_RELEASE_AUTHORITY; NO_BASE64_GZIP_PATCH_ZIP_OR_HISTORY_RECONSTRUCTION_MAY_CREATE_CURRENT_SOURCE; HISTORICAL_ARTIFACTS_ARE EVIDENCE_ONLY",
   "immutable_snapshot_binding": {
     "version": "6.63.8",
     "candidate_reference_artifact_sha256": "ed134f7d94359a88c316f5c4975a9e37bb2ba4681445d7cfb2f0a84f40912ce2",
