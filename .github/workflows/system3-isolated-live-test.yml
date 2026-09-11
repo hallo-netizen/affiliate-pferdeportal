@@ -20,6 +20,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Prove exact Codex same-task return bytes
+        run: |
+          echo '0ade417f0b136c6047eb36693d2185934c356cfeaf1c65a161b83002a9022088  isolated_system3/codex_output.md' | sha256sum -c -
+          echo SYSTEM3_CODEX_RETURN_SHA_PASS
       - name: Bind verified Codex output into runtime evidence
         run: |
           python - <<'PY'
