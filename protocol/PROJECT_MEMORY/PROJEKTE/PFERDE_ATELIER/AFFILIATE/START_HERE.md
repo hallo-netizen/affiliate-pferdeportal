@@ -24,7 +24,8 @@ Release-Governance umgehen, alte Root-/Stagingstände als neue Autorität behand
 - **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
 - **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
-- **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **WARUM GEÄNDERT – ZENTRAL:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **AKTUELLER ADCELL-WAS/WARUM-BELEG:** `ENTSCHEIDUNG_ADCELL_20260911.md`
 - **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 
 **Regel:** Diese Bürotür wiederholt keinen aktuellen Blocker, keine aktuelle Version und keinen Zielinhalt als zweite Wahrheit.
@@ -46,7 +47,7 @@ Vor jeder Änderung:
 2. `HOBBYRAUM.md`;
 3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
 4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
-5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
+5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` sowie bei aktuellem ADCELL-Auftrag `ENTSCHEIDUNG_ADCELL_20260911.md`;
 6. aktiven Zielvertrag über `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`;
 7. erst danach gebundene Arbeitsrolle/Branch.
 
@@ -58,4 +59,3 @@ Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
