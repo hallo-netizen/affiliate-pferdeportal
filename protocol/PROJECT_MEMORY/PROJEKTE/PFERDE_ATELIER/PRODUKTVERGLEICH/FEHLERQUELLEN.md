@@ -38,14 +38,14 @@ Geschlossen:
 Weiter offen:
 - exakte UPC-0.8.6-Fresh-ZIP besitzt nur 7 maschinenfeste Vergleichsprofile/Decision-Policies;
 - 143 der 150 grundsätzlich V1-fähigen Gruppen fehlen dort noch maschinenfest;
-- source-bound Profilspezifikationen liegen inzwischen für **67 zusätzliche Gruppen** in Akten 62–84 vor, aber sind noch **nicht** technisch materialisiert;
+- source-bound Profilspezifikationen liegen inzwischen für **71 zusätzliche Gruppen** in Akten 62–85 vor, aber sind noch **nicht** technisch materialisiert;
 - weitere Profil-/Faktenmatrizen source-bound vorbereiten, danach gebündelt materialisieren und erneut hart testen;
 - Product Knowledge und daraus entstehende fachlich zulässige Paarabdeckung bleiben je Gruppe fail-closed nachzuweisen.
 
 Dauerbelege:
 - `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`;
 - `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`;
-- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/84_...`.
+- `AKTENSCHRANK/62_...` bis `AKTENSCHRANK/85_...`.
 
 ## PV-FAMILY-085-001 – Readiness zählte Herstellerbezeichnungen statt Herstellerfamilien
 STATUS: CLOSED IM 0.8.5 / LOKAL HART PASS
@@ -144,8 +144,31 @@ Reparatur:
 - keine fremde Paralleländerung überschrieben;
 - kurzzeitig zusätzlich erzeugte zweite Fehlerbilanz wieder entfernt;
 - `FEHLERQUELLEN.md` bleibt die **eine** detaillierte Fehlerautorität;
-- CURRENT_STATE/HOBBYRAUM werden auf Akten 62–84 / 67 source-bound Gruppen nachgezogen;
-- fehlende Chronik Akten 66–84 und die Abschlussprüfung werden in `PROTOKOLL_NACHHOLUNG_20260911.md` dauerhaft fortgeführt.
+- CURRENT_STATE/HOBBYRAUM wurden auf Akten 62–84 / 67 source-bound Gruppen nachgezogen;
+- fehlende Chronik Akten 66–84 und die Abschlussprüfung wurden in `PROTOKOLL_NACHHOLUNG_20260911.md` dauerhaft fortgeführt.
+
+## PV-GOV-20260911-002 – NEXT ACTION mit falschen Registry-IDs beschriftet
+STATUS: CLOSED / KORRIGIERT 2026-09-11
+
+Befund beim frischen Registry-Read vor Akte 85:
+- dokumentiert war fälschlich `p163 hindernisstangen -> p164 sprungstaender -> p165 cavaletti`;
+- autoritative `portal-structure-v279.json` enthält tatsächlich:
+  - `p163 reitplatzbewaesserung`;
+  - `p164 reitplatzspiegel`;
+  - `p165 reitplatzplaner`;
+  - `p166 reitplatzschleppe`;
+  - `p167 bahnplaner`;
+  - `p168 sandverteiler`;
+  - `p169 hufschlagraeumer`;
+  - `p170 reitplatzbewaesserung-mobil`;
+  - `p171 weidepflegegeraete`;
+- `hindernisstangen` liegt tatsächlich erst bei `p331`.
+
+Reparatur:
+- Akte 85 wurde ausschließlich auf Basis der echten p163–p166-Folge erstellt;
+- `p167 bahnplaner` und `p168 sandverteiler` bleiben gemäß finaler 25er Disposition V1-NOT-APPLICABLE und werden übersprungen;
+- CURRENT_STATE, HOBBYRAUM und Protokoll werden auf `p169 hufschlagraeumer -> p170 reitplatzbewaesserung-mobil -> p171 weidepflegegeraete` korrigiert;
+- keine technische Materialisierung und kein Plugin-PASS daraus abgeleitet.
 
 ## AKTUELLER ERSTER OFFENER ARBEITSBLOCK
 
@@ -153,9 +176,10 @@ Kein neuer technischer Pluginfehler ist nach `PV-LIFECYCLE-086-001` belegt.
 
 Aktive Arbeit ist der V2-Readiness-Daten-/Fachblock:
 - source-bound Profil-/Faktenmatrizen in Registry-Reihenfolge;
-- Akten 62–84 sind erstellt, aber nicht technisch materialisiert;
-- **67 zusätzliche Gruppen** sind source-bound vorbereitet;
-- nächster zusammenhängender zulässiger Profilblock laut autoritativer Portalstruktur: `p163 hindernisstangen` -> `p164 sprungstaender` -> `p165 cavaletti`;
+- Akten 62–85 sind erstellt, aber nicht technisch materialisiert;
+- **71 zusätzliche Gruppen** sind source-bound vorbereitet;
+- `p167 bahnplaner` und `p168 sandverteiler` bleiben V1-NOT-APPLICABLE;
+- nächster zusammenhängender zulässiger Profilblock laut autoritativer Portalstruktur: `p169 hufschlagraeumer` -> `p170 reitplatzbewaesserung-mobil` -> `p171 weidepflegegeraete`;
 - erst ein sinnvoll gebündelter Profil-/Faktenstand darf technisch materialisiert werden;
 - danach wieder vollständiger Positiv-/Negativ-/Mutation-/Fresh-ZIP-Weg.
 
@@ -163,6 +187,7 @@ WordPress-Live für UPC 0.8.6 bleibt offen und wird nicht als PASS behauptet.
 
 Kein SEO vor fachlich zulässigem Kandidatenuniversum.
 Kein Writer/Draft/Publish aus diesem Büro.
+Kein Codex.
 Kein Merge.
 Kein Publish.
 
