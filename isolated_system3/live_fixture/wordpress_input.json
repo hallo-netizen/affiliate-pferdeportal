@@ -10,7 +10,30 @@
     }
   },
   "runtime_order": {
-    "subject_scope": "Woran erkennt man eine passende Regendecke für ein Pferd?"
+    "subject_scope": "Woran erkennt man eine passende Regendecke für ein Pferd?",
+    "links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "anchor": "FAQ Regendecken",
+        "reason": "Fest gebundenes veröffentlichtes FAQ-Kategorieziel für Regendecken im Testfixture.",
+        "section_id": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "anchor": "Beratung Regendecken",
+        "reason": "Fest gebundenes veröffentlichtes thematisch verwandtes Beratungsziel zu Auswahl und Passform von Regendecken im Testfixture.",
+        "section_id": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken",
+        "reason": "Fest gebundene veröffentlichte Regendecken-Übersichtsseite als weiterführendes Informationsziel im Testfixture.",
+        "section_id": "further_information"
+      }
+    ]
   },
   "fact_pack_bundle": {
     "contract": "canonical_fact_pack_import_v1",
