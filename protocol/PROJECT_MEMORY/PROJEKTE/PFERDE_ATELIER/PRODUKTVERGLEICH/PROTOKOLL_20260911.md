@@ -122,10 +122,9 @@ Frischer Compare zeigte:
 Jede Akte bleibt ausdrücklich:
 Research Candidate Evidence / nicht Product Knowledge / nicht SEO-freigegeben / keine Markt-Vollständigkeit.
 
-Der gemeinsame A–J-vs-175-Coverage-Abgleich wurde noch nicht erzeugt.
-Daher keine erfundene Coverage-Zahl.
+Zu diesem damaligen Zeitpunkt war der gemeinsame A–J-vs-175-Coverage-Abgleich noch nicht erzeugt; deshalb wurde dort bewusst keine Coverage-Zahl behauptet.
 
-Dauerbeleg:
+Dauerbeleg dieses Zwischenstands:
 `AKTENSCHRANK/24_MARKTRECHERCHE_PROGRESS_A_J_20260911.md`.
 
 ## Nutzer-Hard-Rule zur Plugin-Übergabe
@@ -157,6 +156,39 @@ Gefundene Nachholpunkte:
 
 Diese Punkte werden in der Abschlussnachholung korrigiert.
 
+## A–J-vs-175 Coverage-Checkpoint
+
+Ausgangs-Head vor dem Coverage-Write:
+`95ccb7347fe4b655930da0d751845a8930754a5c`.
+
+Maschinell/fail-closed gegen die autoritative Registry gelesen:
+- Registry-Datei: `affiliate-portal-router/assets/portal-structure-v279.json`;
+- Blob: `c1f244008c22dfa93acbd68fd3efad2be23ffdcb`;
+- exakt 175 eindeutige `product_slug`-Identitäten mit Themenkategorie `Vergleich`.
+
+Source-bound Konsolidierung aus Baseline + A–J:
+- `EVIDENCE_PRESENT`: 70;
+- `PARTIAL_AMBIGUOUS`: 57;
+- `NO_GROUP_EVIDENCE`: 48;
+- Summe 175/175.
+
+Der vorher nur im Chat genannte Zwischenwert `129 / 52 / 77 / 46` war nicht ausreichend source-bound und ist verworfen.
+
+Dauerbeleg:
+`AKTENSCHRANK/25_MARKTRECHERCHE_COVERAGE_175_A_J_20260911.md`.
+
+Wichtiger Negativbefund:
+Die sichtbare Bezeichnung `Weidezaungeräte` existiert zweimal mit verschiedenen Registry-Keys:
+- `weidezaungeraete`;
+- `weide-zauntechnik-weidezaungeraete`.
+
+Keine stille Deduplizierung.
+
+Erster echter `NO_GROUP_EVIDENCE`-Gap in Registry-Reihenfolge:
+`pferdedecken-deckengurte`.
+
+Bei diesem Coverage-Schritt wurde kein Plugin-Code geändert, kein Product Knowledge materialisiert, kein SEO-/Providerlauf gestartet, nicht gemergt und nicht veröffentlicht.
+
 ## Nachbarweg
 
 Frisch gelesen:
@@ -172,7 +204,7 @@ Nachbarbranch nicht verändert.
 ## Offen
 
 Aktiver erster Produktvergleichs-Arbeitsblock:
-A–J gegen autoritative 175er Registry konsolidieren, danach nur ungedeckte Gruppen weiterrecherchieren.
+Marktrecherche für `pferdedecken-deckengurte` mit aktuellen konkreten Hersteller-/Modellkandidaten und Herstellerquellen. Danach ausschließlich den nächsten echten `NO_GROUP_EVIDENCE`-Gap aus Akte 25 bearbeiten.
 
 Kein neuer Pluginbau in diesem Researchblock.
 Kein SEO-Lauf aus Research-Evidence.
