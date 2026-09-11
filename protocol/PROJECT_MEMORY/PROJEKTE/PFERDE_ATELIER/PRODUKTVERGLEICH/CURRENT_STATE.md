@@ -11,7 +11,8 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - einzige detaillierte Fehlerquelle: `FEHLERQUELLEN.md`
 - Ziel: `ZIELVERTRAG_V2.md`
 - Tagesprotokoll bis Akte 65: `PROTOKOLL_20260911.md`
-- Nachhol-/Fortsetzungsprotokoll: `PROTOKOLL_NACHHOLUNG_20260911.md`
+- Nachhol-/Fortsetzungsprotokoll Teil 1: `PROTOKOLL_NACHHOLUNG_20260911.md`
+- Nachhol-/Fortsetzungsprotokoll Teil 2: `PROTOKOLL_NACHHOLUNG_20260911_TEIL2.md`
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
