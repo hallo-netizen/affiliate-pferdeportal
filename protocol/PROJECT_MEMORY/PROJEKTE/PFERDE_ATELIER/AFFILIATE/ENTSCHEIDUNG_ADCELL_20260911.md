@@ -52,3 +52,22 @@ Kein Plugin vor:
 - Source/ZIP-Byte-Identity.
 
 Kein Live-PASS ohne echten ADCELL-Zugang und WordPress/MariaDB-End-to-End.
+
+## NACHHOLSTAND NACH AUTORITATIVER ABSCHLUSSPRÜFUNG
+
+Der Authentifizierungsvertrag ist inzwischen **belegt**: offizieller ADCELL-v2-Tokenweg über `/user/getToken` mit `userName` + `password`, danach Query-Parameter `token`.
+
+Daraufhin wurde kanonisch bereits ein **partieller** Sourcefix in `trait-ppar-network-sync.php` begonnen. Dieser Schritt war sinnvoll, weil er die neue Implementierung an den belegten statt an einen geratenen Auth-Vertrag bindet.
+
+Die Abschlussprüfung zeigte jedoch zwei zwingende Korrekturen des Arbeitsstands:
+
+1. **AF-023 offen:** Die Sourceänderung wurde nicht atomar mit `CURRENT_SOURCE_SHA256.txt` und der Governance-Manifestbindung nachgezogen. Deshalb muss die Source-/Manifest-/Governance-Identität vor jeder weiteren Entwicklungsarbeit wiederhergestellt werden.
+
+2. **AF-062 neu:** Die Provider-Registry ruft weiterhin den alten `test_adcell_connection()` auf; der kanonische Router sendet dort noch Basic Auth. Der belegte Tokenvertrag ist also dokumentarisch geklärt, aber im Runtime-Verbindungstest noch nicht vollständig durchgesetzt.
+
+WARUM diese Reihenfolge jetzt verbindlich ist:
+- Ohne korrekte Source-/Manifest-Bindung wäre jeder weitere Test gegen eine nicht eindeutig gebundene Sourcebasis und damit kein belastbarer PASS.
+- Erst danach darf der aktive Legacy-Basic-Auth-Pfad entfernt werden.
+- Erst anschließend dürfen Routing und Automation (AF-058/059) fertiggestellt und der Gesamtworkflow geprüft werden.
+
+Der Zielvertrag selbst ändert sich dadurch **nicht**. Es ändert sich nur der belastbare aktuelle Reparaturweg.
