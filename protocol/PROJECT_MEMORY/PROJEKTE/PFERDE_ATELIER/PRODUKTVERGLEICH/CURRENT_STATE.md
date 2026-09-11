@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-11
-STATUS: AKTIV / UPC 0.8.5 WORDPRESS-LIVE FAIL-CLOSED PASS / UPC 0.8.6 LOCAL HARD + FRESH-ZIP + READ-ONLY ARCHITEKTURAUDIT PASS, LIVE OFFEN / UPK 0.5.1 LIVE-BATCH 17/17 / RESEARCH 175 = 97 EVIDENCE + 78 KLASSIFIZIERTE PARTIAL + 0 NO-EVIDENCE
+STATUS: AKTIV / UPC 0.8.5 WORDPRESS-LIVE FAIL-CLOSED PASS / UPC 0.8.6 LOCAL HARD + FRESH-ZIP + READ-ONLY ARCHITEKTURAUDIT PASS, LIVE OFFEN / UPK 0.5.1 LIVE-BATCH 17/17 / RESEARCH 175 = 117 EVIDENCE + 58 PARTIAL + 0 NO-EVIDENCE
 
 ## AUTORITÄT
 
@@ -10,9 +10,9 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - aktuelle Arbeit: `HOBBYRAUM.md`
 - Fehlerdetails: `FEHLERQUELLEN.md`
 - Ziel: `ZIELVERTRAG_V2.md`
-- 175er Coverage: `AKTENSCHRANK/38_MARKTRECHERCHE_COVERAGE_DELTA_K_T_20260911.md`
+- aktueller Coverage-Beleg: `AKTENSCHRANK/50_COVERAGE_DELTA_W_X_Y_Z_20260911.md`
+- 78er Ausgangsklassifikation: `AKTENSCHRANK/40_PARTIAL_CAUSE_CLASSIFICATION_78_20260911.md`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
-- 78er Partial-Ursachen: `AKTENSCHRANK/40_PARTIAL_CAUSE_CLASSIFICATION_78_20260911.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
 ## TECHNISCHER STAND
@@ -25,55 +25,59 @@ Aktueller lokal hart geprüfter Kandidat:
 `UPC 0.8.6-prototype`
 SHA-256 `6ad160d18fb0973463c214de4356447923cbb728e222725e5407868e580c24f6`
 
-Belegt für 0.8.6:
-- Lifecycle-Gap `PV-LIFECYCLE-086-001` geschlossen;
+0.8.6 belegt:
+- `PV-LIFECYCLE-086-001` geschlossen;
 - 38/38 Regression PASS;
 - 51/51 PHP-Lint PASS;
 - Source↔Fresh-ZIP 74/74 exakt;
 - Report-Hashes 73/73 exakt;
 - 175/175 Portalparität PASS;
 - 1000-Pair-No-Cap PASS;
-- Research-Evidence ohne Product Knowledge -> 0 Paare;
-- Nicht-V1-/Service-/Knowledge-/Checklisten-Keys fail-closed vor Inventarzugriff;
-- SEO-PASS kann fachliches BLOCKED nicht überschreiben;
-- vorhandenes Dossier verliert READY bei aktuellem Produktentfall.
+- Research ohne Product Knowledge -> 0 Paare;
+- Nicht-V1-Gruppen fail-closed;
+- SEO kann fachliches BLOCKED nicht überschreiben;
+- bestehendes Dossier verliert READY bei aktuellem Produktentfall.
 
 **WordPress-Live für 0.8.6 wurde noch nicht ausgeführt.**
 
-UPK 0.5.1 bleibt gebunden:
+UPK 0.5.1:
 SHA-256 `17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
 
 ## RESEARCH-STAND
 
-175/175 Registry-Keys wurden betrachtet:
-- `EVIDENCE_PRESENT`: **97**;
-- `PARTIAL_AMBIGUOUS`: **78**;
+Aktuell 175/175:
+- `EVIDENCE_PRESENT`: **117**;
+- `PARTIAL_AMBIGUOUS`: **58**;
 - `NO_GROUP_EVIDENCE`: **0**.
 
-Die 78 Partial-Gruppen sind jetzt nach primärer Ursache vollständig klassifiziert:
-- `MORE_MARKET_RESEARCH_REQUIRED`: **9**;
-- `SECOND_MANUFACTURER_REQUIRED`: **1**;
-- `HORSE_USE_PROOF_REQUIRED`: **4**;
-- `EXACT_PRODUCT_IDENTITY_REQUIRED`: **12**;
-- `SUBTYPE_USE_CLASS_REQUIRED`: **21**;
-- `REGISTRY_OVERLAP_KEY_AMBIGUITY`: **19**;
-- `SERVICE_KNOWLEDGE_CHECKLIST_ARTICLE_TYPE`: **4**;
-- `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`: **8**.
+Vollständig abgearbeitete Primärursachen:
+- `MORE_MARKET_RESEARCH_REQUIRED`: **0**;
+- `SECOND_MANUFACTURER_REQUIRED`: **0**;
+- `HORSE_USE_PROOF_REQUIRED`: **0**;
+- `EXACT_PRODUCT_IDENTITY_REQUIRED`: **0**.
 
-Damit ist blindes Weiterrecherchieren über alle 78 ausdrücklich beendet.
+Verbleibende 58 Partial-Gruppen:
+- `SUBTYPE_USE_CLASS_REQUIRED`: **24**;
+- `REGISTRY_OVERLAP_KEY_AMBIGUITY`: **20**;
+- `SERVICE_KNOWLEDGE_CHECKLIST_ARTICLE_TYPE`: **6**;
+- `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`: **8**.
 
 ## AKTUELLER ARBEITSBLOCK
 
-Nächster echte Markt-Recherche-Gap in Registry-Reihenfolge:
-`solar-weidepumpen`.
+Keine weitere breite Markt-Recherche.
 
-Danach nur die übrigen acht `MORE_MARKET_RESEARCH_REQUIRED`-Keys in Registry-Reihenfolge.
+Nächster Block:
+`SUBTYPE_USE_CLASS_REQUIRED` – 24 Gruppen in Registry-Reihenfolge.
 
-Die anderen Partial-Gruppen gehen zuerst in ihre jeweilige Fach-/Registry-/Artikeltyp-Auflösung; keine unnötige Produktsuche.
+Erster Key:
+`pferdedecken-high-neck-decken`.
 
-Keine neue Pluginversion aus Research.
-Kein Product-Knowledge-Import ohne vollständige Bindung.
-Kein SEO-/Providerlauf aus Research-Evidence.
+Ziel:
+Subtypen/Nutzungsebenen so trennen, dass später keine fachlich ungleichen Produkte in Product Knowledge/Paaruniversum zusammenfallen.
+
+Kein Product-Knowledge-Import aus bloßer Research-Evidence.
+Kein SEO-/Providerlauf.
+Kein neuer Pluginbau ohne technischen Gap.
 Kein Merge.
 Kein Publish.
 
