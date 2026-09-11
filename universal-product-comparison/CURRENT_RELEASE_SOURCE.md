@@ -4,7 +4,7 @@ Stand: 2026-09-11
 
 ## HARD RULE
 
-Der aktuell in diesem GitHub-Verzeichnis sichtbare historische Source-Bestand ist **NICHT** die freigegebene Build-/Runner-Quelle für 0.8.4.
+Der aktuell in diesem GitHub-Verzeichnis sichtbare historische Source-Bestand ist **NICHT** die freigegebene Build-/Runner-Quelle für 0.8.5.
 
 Nicht daraus:
 - neue ZIP bauen;
@@ -14,22 +14,24 @@ Nicht daraus:
 
 ## Aktuell freigegebener Testkandidat
 
-`universal-product-comparison-0.8.4-prototype.zip`
+`universal-product-comparison-0.8.5-prototype.zip`
 
 SHA-256:
-`00035ec0e166d9830f97140b6fc0f4f7666504d548bac507b1b206a2173ce856`
+`0174051e6584902142f5be5787642426b30aab6c7ba15ef0b07ccbdb4a5844fd`
 
 Die exakte ZIP enthält:
-`tests/HARD_LOCAL_TEST_REPORT_0.8.4.json`
+`tests/HARD_LOCAL_TEST_REPORT_0.8.5.json`
 
-Der Report bindet 66 Source-Datei-SHA256-Werte.
+Der Report bindet 70 Source-Datei-SHA256-Werte.
 
 Finale Prüfung:
-- 32/32 ausführbare Tests PASS;
-- PHP-Lint 48/48 PASS;
-- Source↔ZIP 67/67 exakt;
-- Report-Hashbindung 66/66 exakt;
-- 175/175 Portalparität PASS.
+- 35/35 ausführbare Tests PASS;
+- PHP-Lint 50/50 PASS;
+- Source↔ZIP 71/71 exakt;
+- Report-Hashbindung 70/70 exakt;
+- 175/175 Portalparität PASS;
+- 130 zusätzliche echte Cross-Family-Paare aus vorhandenem Product Knowledge fachlich gebunden;
+- Herstellerfamilien-Readiness und Paarplaner identisch fail-closed.
 
 ## Portalbindung
 
@@ -44,18 +46,18 @@ Abgeleiteter autoritativer Katalog SHA-256:
 
 ## Warum keine stille Source-Synchronisierung
 
-0.8.4 wurde aus der exakt geprüften 0.8.3-ZIP abgeleitet und anschließend erneut als Fresh-ZIP vollständig geprüft.
+0.8.5 wurde aus der exakt geprüften 0.8.4-ZIP abgeleitet und erneut als Fresh-ZIP vollständig geprüft.
 
 Der historische GitHub-Source-Ordner ist nicht automatisch byte-identisch zu dieser Release-Kandidatenquelle.
 Eine teilweise Synchronisierung würde Scheinsicherheit erzeugen.
 
 KISS:
-Bis zu einer späteren **exakten byte-identischen Source-Materialisierung** ist ausschließlich die gebundene 0.8.4-ZIP die Release-Kandidaten-Wahrheit.
+Bis zu einer späteren **exakten byte-identischen Source-Materialisierung** ist ausschließlich die gebundene 0.8.5-ZIP die Release-Kandidaten-Wahrheit.
 
 ## Folgearbeit
 
 Vor jeder weiteren Codeänderung:
-1. exakt die 0.8.4-ZIP materialisieren;
+1. exakt die 0.8.5-ZIP materialisieren;
 2. SHA prüfen;
 3. daraus isolierten Arbeitsbaum erzeugen;
 4. erst dann ändern;
