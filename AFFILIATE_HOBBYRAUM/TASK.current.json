@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "otto-awin-feedscope-rootfix-20260909",
-  "goal": "OTTO/Awin 14336: FeedScope-Windschutz-False-Positive als kleinsten Root-Cause-Fix prüfen; Automatik AUS, kein Plugin vor POSITIV-/NEGATIV-/Gesamtworkflow-PASS.",
+  "task_id": "adcell-api-v2-auth-routing-20260911",
+  "goal": "ADCELL: zuerst den exakten API-v2-Authentifizierungsvertrag autoritativ belegen; danach aus kanonischem 6.72.8 genau den Provider-Routing-/API-v2-Automationsfix bauen. accepted+active Programme nur über explizite programId-Allowlist; CSV/Banner/Deeplink automatisch, kein manueller Import/Export als Normalbetrieb. Kein Plugin vor POSITIV-/NEGATIV-/Gesamtworkflow-/Fresh-Unpack-/Identity-PASS; kein Live-PASS ohne wiederhergestellten ADCELL-Zugang.",
   "image": "php:8.2-cli",
   "inputs": [
     {
@@ -9,44 +9,32 @@
       "dest": "pferdeportal-affiliate-router.php"
     },
     {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
-      "dest": "trait-ppar-automation-suite.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php",
-      "dest": "trait-ppar-awin-programme-gate.php"
-    },
-    {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php",
       "dest": "trait-ppar-provider-registry.php"
     },
     {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php",
-      "dest": "trait-ppar-output-objects.php"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-intake.php",
+      "dest": "trait-ppar-provider-intake.php"
     },
     {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-article-plans.php",
-      "dest": "trait-ppar-article-plans.php"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
+      "dest": "trait-ppar-automation-suite.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php",
+      "dest": "trait-ppar-network-sync.php"
     },
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php",
       "dest": "trait-ppar-creative-library.php"
     },
     {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php",
-      "dest": "trait-ppar-ebay.php"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php",
+      "dest": "trait-ppar-output-objects.php"
     },
     {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-product-source-plan.php",
-      "dest": "class-ppar-product-source-plan.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-partner-analytics.php",
-      "dest": "class-ppar-partner-analytics.php"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-deal-radar.php",
-      "dest": "class-ppar-deal-radar.php"
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-control-contract.php",
+      "dest": "trait-ppar-control-contract.php"
     },
     {
       "src": "test_otto_automation.php",
@@ -58,7 +46,7 @@
     }
   ],
   "writable": [],
-  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-awin-programme-gate.php && php -l trait-ppar-provider-registry.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-article-plans.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-ebay.php && php -l class-ppar-product-source-plan.php && php -l class-ppar-partner-analytics.php && php -l class-ppar-deal-radar.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
+  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-provider-registry.php && php -l trait-ppar-provider-intake.php && php -l trait-ppar-automation-suite.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-creative-library.php && php -l trait-ppar-output-objects.php && php -l trait-ppar-control-contract.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
   "tests": [
     "php test_otto_automation.php",
     "php test_banner_distribution_behavior.php"
