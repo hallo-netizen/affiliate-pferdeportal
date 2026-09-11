@@ -1,137 +1,65 @@
 # AFFILIATE – HOBBYRAUM
 
-STAND: 2026-09-07
-STATUS: AKTIV
+STAND: 2026-09-11
+STATUS: BLOCKED
 
-## 1-KLICK-ÜBERSICHT
+## AKTUELLER AUFTRAG
 
-**AKTUELLER AUFTRAG:**  
-OTTO real abnehmen: Produktfeed + Productwissen-Exact-Match + reale Bannerquelle + automatische anteilsgesteuerte Bannerverteilung + manuelle Reparaturprobe.
+ADCELL vollautomatisch über API v2 anbinden.
 
-**BEREITS STRUKTURELL UMGESETZT:**  
-Awin/OTTO-Produkte, 1/2/3-Produktplätze, Productwissen-Exact-Bridge offiziell integriert, Verkäufer-Gate, automatische Bannerziel-/Slotzuordnung, Relevance-First-Anteilssystem, Reparaturinstanz, automatischer Joined-/Feedlisten-Refresh und snapshot-freier Start explizit freigegebener Awin-Programme.
+Normalweg:
+`accepted + active Programme -> explizite programId-Allowlist -> CSV/Banner/Deeplink automatisch -> zentrale Affiliate-Prüfung/Ausgabe`.
 
-**NICHT TUN:**  
-kein eigenes OTTO-Plugin; keine zweite Providerarchitektur; keine direkte Productwissen-Tabellenkopplung; kein Ersatzprodukt bei Exact Match; kein Produktbild als Banner; keine Quote vor Relevanz; Digistore24 nicht nebenbei öffnen.
+Kein manueller Import/Export als Normalbetrieb.
 
-## BANNERVERTEILUNG – AKTUELLER VERTRAG
+## BLOCKER
 
-Startanteile:
-- OTTO 40
-- Awin andere 25
-- ADCELL 20
-- Direkt 15
-- Digistore24 0
-- Sonstige 0
+Der exakte technische ADCELL-API-v2-Authentifizierungsvertrag ist noch nicht autoritativ belegt.
 
-Regel:
-**Relevanz/Sicherheit zuerst, Anteil nur zwischen gleich relevanten Möglichkeiten.**
+Zusätzlich ist der Nutzerzugang zu ADCELL aktuell gesperrt/unerreichbar, weil das Passwort überschrieben wurde und der Passwort-Zurücksetzen-Mailweg nicht funktioniert.
 
-Fehlende Quelle:
-Anteile automatisch unter den verfügbaren gleich relevanten Quellen normalisieren.
+Deshalb:
+- keine API-Authentifizierung raten;
+- kein kanonischer Source-Fix vor Auth-Beleg;
+- kein Live-PASS.
 
-Verteilungseinheit:
-Bannerplätze, nicht abrechnungsgenaue Impressionen.
+## NEXT ACTION
 
-Stabilität:
-Kalenderwoche + Kontext + Slot.
+**GENAU EIN SCHRITT:**
+Exakten ADCELL-API-v2-Authentifizierungsvertrag aus autoritativer ADCELL-Dokumentation belegen.
 
-## REPARATURINSTANZ
+Danach, ohne Parallelweg:
+- kanonische Basis 6.72.8 verwenden;
+- ADCELL provider-spezifisch routen;
+- accepted+active + programId-Allowlist fail-closed;
+- CSV/Banner/Deeplink automatisch via API v2;
+- POSITIV/NEGATIV/Gesamtworkflow;
+- Fresh-Unpack + Source/ZIP-Identity;
+- erst danach Test-Plugin.
 
-Normalzustand = Automatik.
+## ARBEITSWEG
 
-Intern möglich:
-- fest auswählen;
-- nicht anzeigen;
-- Vererbung auf Unterseiten;
-- zurück zur Automatik.
+Technische Arbeits-/Rückgabeautorität:
+`affiliate-release-current`
 
-Zusätzlich Control-/Veto-Ebenen und Notabschaltung.
+Task:
+`AFFILIATE_HOBBYRAUM/TASK.current.json`
 
-## NEXT ACTION – ERSTER FUNKTIONSTEST
+Scope:
+`protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md`
 
-**JETZT:** WordPress-Backend → **Affiliate-Zentrale → Übersicht** öffnen.
+Fehler:
+`AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md`
 
-PASS 1:
-- Seite öffnet ohne Fatal/weiße Seite;
-- Überschrift **Affiliate-Zentrale** sichtbar;
-- Navigation/Submenüs sichtbar.
+Side-Branch `hobbyroom/adcell-api-v2-automation-20260911` ist frisch geprüft identisch zum früheren Release-Head und enthält keinen Fix. Für release-scoped Änderungen nicht verwenden.
 
-Danach **Netzwerke & API** öffnen.
+## NICHT ANFASSEN
 
-PASS 2:
-- Seite öffnet ohne Fatal;
-- Awin-Karte sichtbar;
-- Felder für Publisher-ID / Zugang vorhanden;
-- Button **Speichern & Zugang prüfen** sichtbar;
-- **noch nichts speichern oder starten**.
-
-Bei PASS danach erst der echte OTTO/Awin-Verbindungstest.
-
-## PRODUCTWISSEN-GRENZE
-
-`ppar_affiliate_exact_product_requirements`
-
-Produktwissen = fachlich.
-Affiliate = Commerce.
-
-Kein Exact Match = keine Karte.
-
-## BANNERQUELLEN-GRENZE
-
-Zuordnung, Anteilssystem, 0-Anteil-Sperre, Mehrfachplatz-Deduplizierung und manuelle Reparatur sind strukturell vorhanden.
-
-Beschaffung ist erst vollständig automatisiert, wenn ein realer maschinenlesbarer OTTO/Awin-Creative-Weg belegt ist.
-
-Bis dahin:
-reales Creative → Automatik.
-Kein reales Creative → kein Banner.
-
-## TECHNISCHE AUTORITÄTEN
-
-- `control/release-governance/CURRENT_RELEASE.json`
-- `release/affiliate-zentrale/AGENTS.md`
-- `release/affiliate-zentrale/current/affiliate-portal-router/`
-- `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`
-- `protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
-
-## OFFENE RELEASE-GRENZE
-
-GitHub Kandidat: 6.72.1  
-WordPress-Livebeleg: 6.72.2
-
-Vor Release auflösen.
-
-Digistore24 bleibt zurückgestellt.
-
-
-## REALER BANNERQUELLEN-ANSCHLUSS
-
-Technische Anschlussstelle:
-`ppar_affiliate_awin_static_creatives`
-
-Nur reale Bannerzeilen:
-Advertiser-ID + Creative-ID + Titel + Bild + Tracking.
-
-Ungebunden → vorhandene Banner bleiben erhalten.
-Gebunden und leer → `['bound'=>true,'rows'=>[]]` erlaubt kontrollierte Reconciliation.
-Kein erfundener Awin-API-Weg.
-
-## PRODUCTWISSEN-BRÜCKE
-
-Offizieller Produktwissen-/Produktvergleich-Branch:
-`hobbyroom/productwissen-v1-prototype`
-
-Aktueller Head bei letzter Prüfung:
-`020ba35e7d304407e8b71e0751b6f4167b93427d`
-
-Bridge-PASS-Head:
-`f16f9d9b54a2df9397ef6d5d361b4a61f10347de`
-
-WordPress+MySQL Run:
-`34131779064` → SUCCESS.
-
-Status:
-**OFFIZIELL INTEGRIERT / READ-ONLY EXACT-BRIDGE PASS.**
-
-Der frühere isolierte Bridge-Branch bleibt nur historischer Beleg. Affiliate merged dort nichts mehr.
+- Digistore24: BLOCKED/zurückgestellt, siehe `DIGISTORE24_STATUS.md`;
+- OTTO/Awin: ungelöst und pausiert, nicht parallel fortsetzen;
+- keine neue Providerarchitektur;
+- kein eigenes ADCELL-Plugin;
+- keine Pluginversionskette;
+- keinen 6.72.18-Scratch übernehmen;
+- keine manuelle CSV-URL als Ersatz für Vollautomatik;
+- keine Authentifizierung raten.
