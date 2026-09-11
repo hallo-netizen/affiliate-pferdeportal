@@ -101,104 +101,122 @@ Alle folgenden Profilakten sind source-bound Fach-/Faktenmatrizen. Sie sind **ke
 - 81: `putzboxhalter`, `schlauchhalter`, `waschplatz`
 - 82: `mistboy`, `bollengabeln`, `stallbesen`
 
-Diese Akten waren beim frischen Abschlussread vorhanden und waren bereits in CURRENT_STATE/HOBBYRAUM bis Akte 82 berücksichtigt, aber nicht im Tagesprotokoll nachgetragen.
-
-### Akte 83 – am Branch-Head vorgefunden
+### Akte 83
 `AKTENSCHRANK/83_PROFILE_FACT_MATRIX_SCHUBKARREN_MISTCONTAINER_PADDOCKZAEUNE_20260911.md`
 - `schubkarren`
 - `mistcontainer`
 - `paddockzaeune`
 
-Commit vor Akte 84:
-`ef0f1faa7d381b1d9d1c62b2d364c69ddf31844c`
-
-### Akte 84 – am Branch-Head vorgefunden
+### Akte 84
 `AKTENSCHRANK/84_PROFILE_FACT_MATRIX_REITPLATZBODEN_REITPLATZUMRANDUNG_REITPLATZBELEUCHTUNG_20260911.md`
 - `reitplatzboden`
 - `reitplatzumrandung`
 - `reitplatzbeleuchtung`
 
-Geprüfter Commit-HEAD vor dieser Nachholung:
+Geprüfter Commit-HEAD vor der früheren Nachholung:
 `8f00f65254a63d21e9cf02f37df8839338d9684c`
 
-Dessen Tree-SHA ist:
+Dessen Tree-SHA:
 `70917470d9d8b85d5d33cf8004712b45dbf79acc`
 
 Die beiden Werte dürfen nicht verwechselt werden.
 
-## FACHLICHER GESAMTSTAND NACH AKTE 84
+### Registry-Korrektur vor Akte 85
+
+Beim erneuten direkten Read der autoritativen `affiliate-portal-router/assets/portal-structure-v279.json` wurde festgestellt, dass der zuvor protokollierte NEXT ACTION falsch beschriftet war.
+
+Falsch dokumentiert:
+- `p163 hindernisstangen`;
+- `p164 sprungstaender`;
+- `p165 cavaletti`.
+
+Tatsächliche Registry:
+- `p163 reitplatzbewaesserung`;
+- `p164 reitplatzspiegel`;
+- `p165 reitplatzplaner`;
+- `p166 reitplatzschleppe`;
+- `p167 bahnplaner`;
+- `p168 sandverteiler`;
+- `p169 hufschlagraeumer`;
+- `p170 reitplatzbewaesserung-mobil`;
+- `p171 weidepflegegeraete`.
+
+`hindernisstangen` ist tatsächlich `p331`.
+
+Die falsche NEXT ACTION wurde nicht weiter abgearbeitet. `FEHLERQUELLEN.md` führt den Befund als `PV-GOV-20260911-002`.
+
+### Akte 85
+`AKTENSCHRANK/85_PROFILE_FACT_MATRIX_REITPLATZBEWAESSERUNG_REITPLATZSPIEGEL_REITPLATZPLANER_REITPLATZSCHLEPPE_20260911.md`
+- `reitplatzbewaesserung`;
+- `reitplatzspiegel`;
+- `reitplatzplaner`;
+- `reitplatzschleppe`.
+
+Commit der Aktenanlage:
+`51de478a898e04cbc0b8b50ae62526f53dcae0ea`
+
+Wesentliche Hard Rules:
+- `reitplatzbewaesserung` p163 = feste installierte Reitplatzberegnung; mobile Bewässerung bleibt p170 `reitplatzbewaesserung-mobil`;
+- Wasserstrom nie ohne zugehörigen Fließdruck und Bezugsgröße vergleichen;
+- `reitplatzspiegel` nur mit am konkreten Produkt/System belegter Außeneignung paaren;
+- `reitplatzplaner` und `reitplatzschleppe` mechanisch/subtypisch trennen, nicht nach Marketingnamen;
+- `bahnplaner` p167 und `sandverteiler` p168 bleiben V1-NOT-APPLICABLE;
+- fehlende identische Subtyp-/Konfigurationsbindung => 0 Paar.
+
+Aktuelle öffentliche Hersteller-/Produktseiten wurden für alle vier Gruppen gegengeprüft. Keine PDF-Faktauswertung verwendet. Keine finale Paarentscheidung manuell festgeschrieben.
+
+## FACHLICHER GESAMTSTAND NACH AKTE 85
 
 - finale Registry-Disposition unverändert: 175/175 = 150 `PRODUCT_EVIDENCE_PRESENT` + 25 `PRODUCT_COMPARISON_V1_NOT_APPLICABLE` + 0 ungeklärt;
 - technisch in UPC 0.8.6 unverändert: 7 maschinenfeste Profile/Decision-Policies;
 - technisch offen: 143/150 V1-fähige Gruppen;
-- source-bound zusätzliche Profilspezifikationen Akten 62–84: **67 Gruppen**;
-- keine dieser Profilspezifikationen wurde in diesem Nachholschritt technisch materialisiert;
-- kein Merge, kein Publish.
+- source-bound zusätzliche Profilspezifikationen Akten 62–85: **71 Gruppen**;
+- keine dieser Profilspezifikationen wurde technisch materialisiert;
+- kein Merge, kein Publish, kein Codex.
 
-## ABSCHLUSS-/NACHHOLPRÜFUNG – BEFUNDE UND REPARATUREN
+## ABSCHLUSS-/NACHHOLPRÜFUNG – BESTEHENDE BEFUNDE
 
 ### Fehlerwahrheit
 
-Während des frischen Reads wurde zunächst eine ältere `FEHLERQUELLEN.md`-Fassung mit einem Zeiger auf die nicht vorhandene `AKTENSCHRANK/24_FEHLERBILANZ_NACH_V084_20260910.md` gelesen.
-Während der Nachholung wurde `FEHLERQUELLEN.md` parallel zu einer vollständigen detaillierten autoritativen Fehlerquelle geändert.
-
-Ein Updateversuch mit der alten Blob-SHA lief korrekt in einen GitHub-409-Konflikt und wurde **nicht** erzwungen.
-Eine kurzzeitig neu angelegte zweite Fehlerbilanz wurde danach wieder gelöscht, damit keine zweite Fehlerwahrheit bestehen bleibt.
-Die frische `FEHLERQUELLEN.md` wurde anschließend reconciled und bleibt die einzige detaillierte Fehlerquelle.
-
-### CURRENT_STATE / HOBBYRAUM
-
-Befund vor Reparatur:
-- beide Dateien standen nur auf Akte 82 / 61 source-bound Gruppen;
-- NEXT ACTION war noch `schubkarren -> mistcontainer -> paddockzaeune`, obwohl Akten 83 und 84 bereits vorhanden waren.
-
-Reparatur:
-- auf Akten 62–84 / 67 source-bound Gruppen nachgezogen;
-- technische Wahrheit 7 maschinenfest / 143 offen unverändert;
-- neuer exakter NEXT ACTION aus Portalregistry: `p163 hindernisstangen -> p164 sprungstaender -> p165 cavaletti`.
+Während der vorigen Abschlussprüfung wurde eine ältere `FEHLERQUELLEN.md`-Fassung mit einem Zeiger auf eine nicht vorhandene Akte 24 gelesen. Parallel wurde die Datei in eine vollständige detaillierte autoritative Fehlerquelle geändert. Ein 409-Konflikt wurde nicht erzwungen; eine kurzzeitig angelegte zweite Fehlerbilanz wurde wieder gelöscht. `FEHLERQUELLEN.md` bleibt die einzige detaillierte Fehlerautorität.
 
 ### Ziel / Architektur / Warum
 
-- `ZIELVERTRAG_V2.md` frisch gelesen; Ziel unverändert.
-- finale Paarentscheidung bleibt ausschließlich beim Produktvergleichs-Plugin aus aktuellem Product Knowledge.
-- Research liefert aktuelle Produktfakten; SEO liefert Nachfrage-/A-vs-B-/Kannibalisierungssignale; SEO kann fachlich unzulässige Paare nicht erzwingen.
-- In diesem Nachholschritt wurde **keine neue Architekturregel** eingeführt.
-- Die fachlichen WHAT/WHY-/Negativgrenzen der Profilblöcke bleiben in den jeweiligen Akten dokumentiert.
-
-### Parallelwege
-
-Gebundener Arbeitsbranch:
-`hobbyroom/productvergleich-workflow-v070-20260908`
-
-Der direkte Branch-Lookup bestätigte vor der Nachholung Commit `8f00f65254a63d21e9cf02f37df8839338d9684c`.
-Eine zwischenzeitliche Branch-Such/API-Unstimmigkeit wurde durch direkten Branch-Lookup widerlegt; fremde Parallelbranches wurden nicht überschrieben.
+- `ZIELVERTRAG_V2.md` bleibt unverändert;
+- finale Paarentscheidung bleibt ausschließlich beim Produktvergleichs-Plugin aus aktuellem Product Knowledge;
+- Research liefert aktuelle Produktfakten; SEO liefert Nachfrage-/A-vs-B-/Kannibalisierungssignale; SEO kann fachlich unzulässige Paare nicht erzwingen;
+- die Akte-85-Trennregeln sind fachliche WHAT/WHY-Grenzen, keine neue Systemarchitektur.
 
 ### Tests / PASS-Grenze
 
-In dieser Abschluss-/Nachholprüfung tatsächlich ausgeführt:
-- frischer Branch-/Commit-/Tree-Abgleich;
-- frischer Read von CURRENT_STATE, HOBBYRAUM, FEHLERQUELLEN, ZIELVERTRAG und Tagesprotokoll;
-- Registry-Folge p163–p165 direkt aus `portal-structure-v279.json` gelesen;
-- finale 25er NOT-APPLICABLE-Disposition gegengeprüft;
-- positive/negative Governance-Prüfung auf zweite Fehlerwahrheit; 409-Konflikt nicht überschrieben; kurzzeitig erzeugte Duplikat-Fehlerquelle entfernt;
-- Dokumentations-/State-Nachholung.
+In der Fortsetzung bis Akte 85 tatsächlich ausgeführt:
+- Branch-/Standdateien frisch gelesen;
+- Registry p162–p171 direkt aus `portal-structure-v279.json` gegengeprüft;
+- falsche p163–p165-Beschriftung erkannt und nicht weiterverwendet;
+- p167/p168 gegen die finale NOT-APPLICABLE-Disposition gegengeprüft;
+- aktuelle öffentliche Hersteller-/Produktquellen für Akte 85 recherchiert;
+- fachliche Positiv-/Negativgrenzen in Akte 85 festgelegt;
+- Governance-Korrektur in der einen `FEHLERQUELLEN.md` dokumentiert.
 
-In dieser Abschluss-/Nachholprüfung **nicht** ausgeführt:
+Nicht ausgeführt:
 - kein UPC-Code geändert;
-- keine technische Materialisierung der 67 source-bound Specs;
+- keine technische Materialisierung der 71 source-bound Specs;
 - keine neue Plugin-Regression;
 - kein neuer PHP-Lint;
 - kein neuer Fresh-ZIP-Test;
-- kein WordPress-Live-Test von UPC 0.8.6.
+- kein WordPress-Live-Test von UPC 0.8.6;
+- kein Codex.
 
-Historische 0.8.6-PASS-Belege bleiben gültig als vorhandene Belege, wurden hier aber nicht neu ausgeführt.
+Historische 0.8.6-PASS-Belege bleiben vorhandene Belege, wurden in dieser Fortsetzung nicht neu ausgeführt.
 
 ## NEXT ACTION
 
-Exakte nächste Registry-Gruppe nach Akte 84:
-1. `p163 hindernisstangen`
-2. `p164 sprungstaender`
-3. `p165 cavaletti`
+`p167 bahnplaner` und `p168 sandverteiler` gemäß finaler V1-Disposition überspringen.
+
+Exakter nächster fachlich zulässiger Registry-Block:
+1. `p169 hufschlagraeumer`
+2. `p170 reitplatzbewaesserung-mobil`
+3. `p171 weidepflegegeraete`
 
 Arbeitsweg:
 source-bound Faktenmatrix -> gleiche Nutzungsklasse/Subtypen hart normalisieren -> Positiv-/Negativgrenzen festlegen -> Produktgegenprüfung -> sinnvoll bündeln -> erst danach technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
