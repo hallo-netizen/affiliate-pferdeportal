@@ -13,7 +13,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `66_...`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `69_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -61,7 +61,7 @@ Exakter UPC-0.8.6-Gegencheck:
 - **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
 - damit **143/150 V1-fähige Gruppen maschinenfest noch offen**.
 
-Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, weitere Profilspezifikationen für **13 Gruppen** erstellt:
+Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, zusätzliche Profilspezifikationen für **21 Gruppen** erstellt:
 - `high-neck-decken`;
 - `deckengurte`;
 - `deckentaschen-und-aufbewahrung`;
@@ -74,22 +74,34 @@ Seit dieser Baseline wurden source-bound, aber noch **nicht materialisiert**, we
 - `kardaetschen`;
 - `satteldecken`;
 - `schabracken`;
-- `sattelgurte`.
+- `sattelgurte`;
+- `sattelschraenke`;
+- `satteltransport`;
+- `englische-trensen`;
+- `gebisse`;
+- `gebisslose-zaeumungen`;
+- `zuegel`;
+- `sperrriemen`;
+- `reithalfter`.
 
-Akte 65 bindet die drei Pflegezubehör-Gruppen fail-closed getrennt.
-Akte 66 bindet:
-- `satteldecken` als `CLOSE_FIT_SADDLE_BLANKET` mit Pflicht-Disziplin;
-- `schabracken` als `SADDLE_PAD_SQUARE/SHABRACKE` mit Pflicht-Disziplin; erste Cross-Brand-Belegklasse `DRESSAGE_SADDLE_PAD`;
-- `sattelgurte` mit Pflichtfeldern Disziplin/Längentyp/Formklasse; erste Cross-Brand-Belegklasse `ANATOMICAL_DRESSAGE_SHORT_GIRTH`.
+Akte 67 bindet Sattelschränke/Satteltransport/englische Trensen.
+Akte 68 bindet Gebisse/gebisslose Zäumungen/Zügel mit harten Wirk-/Konstruktionsklassen.
+Akte 69 bindet Sperrriemen/Reithalfter mit hartem Cross-Brand-Kompatibilitätsgate; fehlende belegte Kompatibilitätsüberschneidung muss korrekt bei 0 Paaren bleiben.
 
-Diese 13 Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
+Diese 21 Specs ändern den technischen 0.8.6-Profilbestand noch nicht. Sie sind Vorarbeit für einen später gebündelten Daten-/Release-Schritt.
 
 ## AKTUELLER ARBEITSBLOCK
 
-`steigbuegel` wird übersprungen, weil bereits maschinenfestes 0.8.6-Profil vorhanden.
+Registry nach `reithalfter` frisch geprüft:
+- `offenstallraufen` = `PRODUCT_COMPARISON_V1_NOT_APPLICABLE` -> überspringen;
+- nächster V1-fähiger Key `liegeflaechen-im-offenstall`;
+- `offenstalltore` = `PRODUCT_COMPARISON_V1_NOT_APPLICABLE` -> überspringen;
+- danach `offenstall-bodenbefestigung`;
+- danach `fressstaender-im-offenstall`;
+- anschließend `trennwaende-im-offenstall`.
 
-Nächster zusammenhängender Profilblock in Registry-Reihenfolge:
-`sattelschraenke` -> `satteltransport` -> `englische-trensen`.
+Nächster Profilblock:
+`liegeflaechen-im-offenstall` -> `offenstall-bodenbefestigung` -> `fressstaender-im-offenstall`.
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> in sinnvollen Blöcken sammeln -> erst dann technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
