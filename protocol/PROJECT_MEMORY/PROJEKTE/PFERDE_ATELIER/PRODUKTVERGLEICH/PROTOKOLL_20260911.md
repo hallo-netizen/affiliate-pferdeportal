@@ -114,17 +114,10 @@ Verbindlich bestätigt:
 Auf dem gleichen Hobbybranch wurden zehn Research-Evidence-Akten A–J gesichert:
 `AKTENSCHRANK/13_...` bis `22_...`.
 
-Frischer Compare zeigte:
-- 10 Commits;
-- ausschließlich diese zehn neuen Research-Akten;
-- kein Plugin-Code und keine konkurrierende Status-/Fehler-/Zieländerung in diesen zehn Commits.
-
 Jede Akte bleibt ausdrücklich:
 Research Candidate Evidence / nicht Product Knowledge / nicht SEO-freigegeben / keine Markt-Vollständigkeit.
 
-Zu diesem damaligen Zeitpunkt war der gemeinsame A–J-vs-175-Coverage-Abgleich noch nicht erzeugt; deshalb wurde dort bewusst keine Coverage-Zahl behauptet.
-
-Dauerbeleg dieses Zwischenstands:
+Dauerbeleg des damaligen Zwischenstands:
 `AKTENSCHRANK/24_MARKTRECHERCHE_PROGRESS_A_J_20260911.md`.
 
 ## Nutzer-Hard-Rule zur Plugin-Übergabe
@@ -138,75 +131,167 @@ Keine Plugin-Übergabe ohne Beweis an der **exakt auszugebenden ZIP**:
 
 Research-/Datenbatch erzeugt nicht automatisch eine neue Pluginversion.
 
-## Abschluss-/Nachholprüfung
-
-Frisch gelesen:
-- Campus START_HERE / Eingangsstandard;
-- Produktvergleich START_HERE / CURRENT_STATE / HOBBYRAUM / FEHLERQUELLEN / ZIELVERTRAG V2;
-- zentrale Fehler-/Ziel-/Änderungs-/Archiv-/Handlungsquellen;
-- Branch/Research-Head;
-- Nachbarbranch ACM read-only.
-
-Gefundene Nachholpunkte:
-- HOBBYRAUM/Fehlerregister noch vor bereits abgeschlossenem 17/17-Live-Batch;
-- Zielvertrag enthielt veralteten dynamischen Fortschritt;
-- Handlungsverzeichnis enthielt noch abgelösten eigenen Writer-/Draftweg;
-- START_HERE verwies nur auf altes Protokoll;
-- technischer 0.8.5-Sourcehinweis musste 130-Paare-Interpretation korrigieren.
-
-Diese Punkte werden in der Abschlussnachholung korrigiert.
-
 ## A–J-vs-175 Coverage-Checkpoint
 
-Ausgangs-Head vor dem Coverage-Write:
+Ausgangs-Head:
 `95ccb7347fe4b655930da0d751845a8930754a5c`.
 
-Maschinell/fail-closed gegen die autoritative Registry gelesen:
-- Registry-Datei: `affiliate-portal-router/assets/portal-structure-v279.json`;
-- Blob: `c1f244008c22dfa93acbd68fd3efad2be23ffdcb`;
-- exakt 175 eindeutige `product_slug`-Identitäten mit Themenkategorie `Vergleich`.
+Autoritative Registry:
+`affiliate-portal-router/assets/portal-structure-v279.json` mit exakt 175 eindeutigen `product_slug`-Identitäten und `theme = Vergleich`.
 
-Source-bound Konsolidierung aus Baseline + A–J:
+Source-bound Baseline + A–J:
 - `EVIDENCE_PRESENT`: 70;
 - `PARTIAL_AMBIGUOUS`: 57;
 - `NO_GROUP_EVIDENCE`: 48;
 - Summe 175/175.
 
-Der vorher nur im Chat genannte Zwischenwert `129 / 52 / 77 / 46` war nicht ausreichend source-bound und ist verworfen.
+Der vorher nur als Zwischenwert genannte Stand `129 / 52 / 77 / 46` wurde verworfen.
 
 Dauerbeleg:
 `AKTENSCHRANK/25_MARKTRECHERCHE_COVERAGE_175_A_J_20260911.md`.
 
-Wichtiger Negativbefund:
-Die sichtbare Bezeichnung `Weidezaungeräte` existiert zweimal mit verschiedenen Registry-Keys:
-- `weidezaungeraete`;
-- `weide-zauntechnik-weidezaungeraete`.
+Negativbefund:
+Die sichtbare Bezeichnung `Weidezaungeräte` existiert mit zwei verschiedenen Registry-Keys. Keine stille Deduplizierung.
 
-Keine stille Deduplizierung.
+## Architekturentscheidung – Plugin ist finale Paarinstanz
 
-Erster echter `NO_GROUP_EVIDENCE`-Gap in Registry-Reihenfolge:
-`pferdedecken-deckengurte`.
+Verbindlich festgelegt:
+- Research/Product Knowledge liefert aktuellen Produktbestand/Fakten;
+- SEO liefert Nachfrage-/A-vs-B-/Kannibalisierungssignale;
+- die **letzte Paar-/Dossierentscheidung liegt im Produktvergleichs-Plugin**;
+- neue, geänderte, ersetzte oder abgekündigte Produkte erzwingen wiederholbare Neubewertung aus aktuellem Product Knowledge;
+- SEO darf keine fachlich unzulässige Paarung erzwingen;
+- Research legt keine finalen Produktpärchen manuell fest.
 
-Bei diesem Coverage-Schritt wurde kein Plugin-Code geändert, kein Product Knowledge materialisiert, kein SEO-/Providerlauf gestartet, nicht gemergt und nicht veröffentlicht.
+WAS/WARUM dauerhaft gebunden in:
+`AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
+und `ZIELVERTRAG_V2.md`.
 
-## Nachbarweg
+## UPC 0.8.6 – Lifecycle-Neubewertung
 
-Frisch gelesen:
+Neuer realer technischer Fehler:
+`PV-LIFECYCLE-086-001`.
+
+Gegen unveränderte, exakt gebundene UPC-0.8.5-ZIP bewiesen:
+Ein `DISCONTINUED`-Produkt blieb im Paaruniversum; Solltest ROT mit 3 statt 1 gültigem Paar und 3 statt 2 Herstellerfamilien.
+
+KISS-Fix 0.8.6:
+- `ACTIVE` pairable;
+- `TEMPORARILY_UNAVAILABLE` pairable;
+- `DISCONTINUED`, `UNKNOWN` und fehlender Lifecycle fail-closed ausgeschlossen;
+- kanonische Deduplizierung vor Lifecycle-Gate.
+
+Exakte 0.8.6-Fresh-ZIP SHA-256:
+`6ad160d18fb0973463c214de4356447923cbb728e222725e5407868e580c24f6`
+
+Tatsächlich ausgeführt:
+- Working Tree Regression 38/38 PASS;
+- zwei Lifecycle-Mutationen korrekt ROT;
+- PHP-Lint 51/51 PASS;
+- Source↔Fresh-ZIP 74/74 exakt;
+- Report-Hashes 73/73 exakt;
+- Fresh-ZIP Regression 38/38 PASS;
+- Fresh-ZIP PHP-Lint 51/51 PASS.
+
+Nicht ausgeführt:
+- WordPress-Live für UPC 0.8.6.
+
+Dauerbeleg:
+`AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`.
+
+## UPC 0.8.6 – Read-only Architektur-Audit
+
+Ohne zweiten Codefix tatsächlich geprüft:
+- Research-Evidence ohne materialisiertes Product Knowledge -> 0 Paare;
+- Nicht-V1-/Service-/Knowledge-/Checklisten-Keys fail-closed;
+- künstliches SEO-PASS überschreibt fachliches BLOCKED nicht;
+- vorhandenes Dossier verliert READY, wenn aktuelles Product Knowledge das gebundene Produkt entfallen/abkündigen lässt;
+- 1000-Pair-No-Cap-Regel bleibt PASS.
+
+Dauerbeleg:
+`AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`.
+
+## Research-/Fachklärung K–Z und Folgeblöcke
+
+Der 175er Lauf wurde ohne Plugin-Orgie weitergeführt:
+- K–T schlossen alle zunächst völlig ungedeckten Registry-Gruppen;
+- Partial-Ursachen wurden fail-closed klassifiziert statt blind weiter recherchiert;
+- U–Z/W/X/Y/Z bearbeiteten echte Markt-, Zweithersteller-, Horse-Use- und Produktidentitätsgaps;
+- Subtyp-/Nutzungsklassen wurden fachlich normalisiert;
+- Registry-Overlap und Restidentitäten wurden geklärt;
+- Service-/Knowledge-/Checklisten-/Nicht-V1-Fälle wurden bewusst fail-closed disponiert.
+
+Finale 175er V1-Disposition:
+- 150 `PRODUCT_EVIDENCE_PRESENT`;
+- 25 `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`;
+- 0 `UNRESOLVED_COVERAGE`.
+
+Dauerbeleg:
+`AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`.
+
+Das ist keine Markt-Vollständigkeit, keine Pairing-Ready-Zahl und kein SEO-PASS.
+
+## Readiness-Baseline und Profilphase
+
+Exakte UPC-0.8.6-Fresh-ZIP read-only geprüft:
+- 175 Registry-Gruppen;
+- nur 7 maschinenfeste Comparison Profiles/Decision Policies;
+- damit 143 der 150 V1-fähigen Gruppen technisch noch ohne maschinenfestes Profil/Policy.
+
+Dauerbeleg:
+`AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`.
+
+Danach source-bound Profilspezifikationen erzeugt, **noch nicht materialisiert**:
+- Akte 62: `high-neck-decken`;
+- Akte 63: `deckengurte`, `deckentaschen-und-aufbewahrung`;
+- Akte 64: `stallhalfter`, `knotenhalfter`, `sicherheitshalfter`, `fohlenhalfter`.
+
+Damit sind 7 zusätzliche fachliche Profilspecs vorbereitet; der maschinenfeste 0.8.6-Bestand bleibt technisch unverändert bei 7 Profilen.
+
+Nächster Profilblock in Registry-Reihenfolge:
+`pferdebuersten` -> `striegel` -> `kardaetschen`.
+
+## Abschluss-/Nachholprüfung – frisch am Endzustand
+
+Frisch gelesen/gegengeprüft:
+- Campus `START_HERE.md`, `HAUPTPFOERTNER.md`, `HANDLUNGSVERZEICHNIS.md`;
+- Pferde-Atelier `START_HERE.md`;
+- Produktvergleich `START_HERE.md`, `CURRENT_STATE.md`, `HOBBYRAUM.md`, `FEHLERQUELLEN.md`, `ZIELVERTRAG_V2.md`;
+- zentrale Fehler-/Ziel-/Änderungs-/Archivquellen;
+- finale 175er Disposition und Readiness-Baseline;
+- aktuelle Profilspecs 62–64;
+- Produktvergleichsbranch frisch;
+- ACM-Nachbarbranch read-only frisch;
+- Paul-Verzeichnis: kein gebundener Produktvergleichs-Paul-Arbeitsweg gefunden.
+
+Frischer Produktvergleichsbranch vor Nachholung:
+`708750eae3726fb03c458630ea6d68c12efbe52a`.
+
+Frischer ACM-Nachbarbranch:
 `alternative/seo-text-central-machine-20260908`
-Head:
-`ba511c2caec5e970948cf8e5c0139bcfea017ce2`
-
-Erster echter Realtest-Blocker:
-`CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`.
-
+Head `ba511c2caec5e970948cf8e5c0139bcfea017ce2`.
 Nachbarbranch nicht verändert.
 
-## Offen
+Gefundene Nachholpunkte und jetzt korrigiert:
+- `FEHLERQUELLEN.md` enthielt alten 97/78/0-Scale-Stand und einen bereits erledigten Architektur-Audit als NEXT;
+- zentrales `FEHLERREGISTER.md` enthielt dynamische/stale Produktvergleichs-Fachstände statt nur Wegweiser;
+- `CURRENT_STATE.md` und `HOBBYRAUM.md` waren hinter den bereits angelegten Profilspecs 62–64 zurück;
+- dieses Tagesprotokoll endete noch beim alten Deckengurte-Research-Gap.
 
-Aktiver erster Produktvergleichs-Arbeitsblock:
-Marktrecherche für `pferdedecken-deckengurte` mit aktuellen konkreten Hersteller-/Modellkandidaten und Herstellerquellen. Danach ausschließlich den nächsten echten `NO_GROUP_EVIDENCE`-Gap aus Akte 25 bearbeiten.
+Zielvertrag:
+Keine Zieländerung erforderlich. V2 ist weiterhin aktiv und enthält bereits finale Plugin-Autorität + regelmäßige Neubewertung. Zielregister bleibt Wegweiser.
 
-Kein neuer Pluginbau in diesem Researchblock.
-Kein SEO-Lauf aus Research-Evidence.
+WARUM/Entscheidung:
+Die dauerhafte Entscheidung zur finalen Plugin-Autorität ist source-bound in Akte 31 und im aktiven V2-Zielvertrag enthalten. Kein zweiter konkurrierender Entscheidungsstand angelegt.
+
+Archiv:
+Keine aktive/ungeklärte Produktvergleichsarbeit archiviert. Keine Archivänderung erforderlich.
+
+Campus-/Architekturfolge:
+Die Regel betrifft den allgemeinen Produktvergleichskern bereits über Geltungsbereich von ZV-PV-002; kein zusätzlicher Campus-Neubau-/Bürostandard erforderlich.
+
+Tests im Abschlusscheck:
+Keine neuen Codeänderungen und daher kein neuer technischer Testlauf ausgelöst. Es gelten nur die oben tatsächlich ausgeführten 0.8.6-Hardtests. WordPress-Live 0.8.6 bleibt offen.
+
 Kein Merge.
 Kein Publish.
