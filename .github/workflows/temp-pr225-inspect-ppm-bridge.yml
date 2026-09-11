@@ -1,0 +1,30 @@
+name: TEMP PR225 Inspect PPM Bridge
+on:
+  push:
+    branches:
+      - hobbyroom/107007-ppm-repair-detail-20260911
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect packaged PSERC PPM bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pserc_outer /tmp/pserc
+          mkdir -p /tmp/pserc_outer /tmp/pserc
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc_outer
+          inner=$(find /tmp/pserc_outer -type f -name '*.zip' | head -n1)
+          test -n "$inner"
+          unzip -q "$inner" -d /tmp/pserc
+          f=$(find /tmp/pserc -type f -name 'class-pserc-ppm-intake-bridge.php' | head -n1)
+          test -n "$f"
+          echo '=== BRIDGE FILE ==='
+          echo "$f"
+          echo '=== BRIDGE SOURCE ==='
+          cat "$f"
+          echo '=== BLOCK/ERROR SHAPES IN PSERC ==='
+          grep -RniE "error_code|BLOCKED_|status.*BLOCK|ok.*false|errors" "$(dirname "$f")" | head -n 500 || true
