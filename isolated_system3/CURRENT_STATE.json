@@ -1,0 +1,37 @@
+{
+  "system": "SYSTEM3_ISOLATED_ONE_PROCESS",
+  "status": "BLOCKED_FIRST_CANONICAL_ARTICLE",
+  "authoritative_runtime_scope": "isolated_system3 only",
+  "architecture_branch": "hobbyroom/system3-isolated-one-process-v1",
+  "architecture_head": "5c34cf9e981d4e98134b40818c27a779c45524ce",
+  "codex_live_branch": "hobbyroom/system3-codex-proven-path-v1",
+  "codex_live_head_before_state_record": "c9854442fd03c9d9eccf3299ce66bfcabae13b65",
+  "production_or_publish_allowed": false,
+  "completed": [
+    "isolated fixed process prototype built",
+    "no runtime code/handoff/worker/gate/state/signature reuse from other text systems",
+    "authoritative PPM 6.7.9, PSERC and PSTE rule sources hash-bound",
+    "sealed copy created and outside repository access cut",
+    "sealed-rule tamper negative test blocked correctly",
+    "canonical article type for current topic resolved to FAQ",
+    "canonical FAQ primary_question input path bound"
+  ],
+  "current_blocker": {
+    "code": "MISSING_CANONICAL_SOURCE_FACT_PACK",
+    "evidence": "PR232 issuecomment-5633598160 and diagnostic issuecomment-5633656653",
+    "detail": "First canonical-rule-bound article realtest stops because the input does not contain the required externally researched canonical fact-pack evidence. Article generation is not allowed to research, invent, repair or populate missing evidence itself.",
+    "required_contract": "canonical_fact_pack_import_v1",
+    "minimum_claims": 3,
+    "resolved": false
+  },
+  "last_safe_state": "Rule binding/isolation live PASS on architecture head 5c34cf9e981d4e98134b40818c27a779c45524ce; canonical FAQ metadata binding on Codex live head c9854442fd03c9d9eccf3299ce66bfcabae13b65.",
+  "next_action": "Supply the required externally researched canonical_fact_pack_import_v1 for the same FAQ fixture, with at least three FULLY_SUPPORTED claims and exact source/evidence bindings, then rerun the same canonical-rule-bound System 3 article test without changing rules, architecture or route.",
+  "forbidden": [
+    "reuse runtime/workflow code from System 1 or System 2",
+    "outside control of routing, rules, prompts, tools or output policy",
+    "model-invented facts or missing evidence",
+    "rule changes or reinterpretation",
+    "alternate route or fallback",
+    "auto-publish or WordPress write"
+  ]
+}
