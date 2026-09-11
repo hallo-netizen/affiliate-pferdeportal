@@ -6,9 +6,9 @@ Publish: **verboten**
 
 ## Autoritativer Endstand
 
-- Canonical `main`: `f1d1605f18bd23d9189f89ad173598958718d08a`.
+- Technischer/Livetest-Baseline-Commit vor der reinen Closeout-Dokumentationsintegration: `f1d1605f18bd23d9189f89ad173598958718d08a`. Den jeweils aktuellen Repository-`main` nicht aus diesem Chronologieprotokoll ableiten, sondern frisch aus dem Branch lesen.
 - `CURRENT_STARTMASTER` bleibt `STARTMASTER0107`.
-- PR107 bleibt permanenter, ungemergter Dispatcher; Head ist exakt derselbe Main-Commit.
+- PR107 bleibt permanenter, ungemergter Dispatcher; sein Head entsprach beim letzten Produktionsstart exakt dem damaligen technischen Main-Commit. Vor jedem künftigen Start muss er gemäß seinem Vertrag erneut auf den dann aktuellen `main` synchronisiert werden.
 - M37 History-Autorität wurde über PR248 integriert.
 - M37 Produkt-/Observability-Fix wurde über PR247 integriert.
 - Der bestehende Maschinenbeweis M01–M37 sowie `hardlock`/`hardlock-base` wurde vor Integration erbracht.
