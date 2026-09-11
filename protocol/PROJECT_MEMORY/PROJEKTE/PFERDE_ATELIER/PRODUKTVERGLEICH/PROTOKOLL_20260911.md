@@ -272,11 +272,18 @@ Frischer ACM-Nachbarbranch:
 Head `ba511c2caec5e970948cf8e5c0139bcfea017ce2`.
 Nachbarbranch nicht verändert.
 
-Gefundene Nachholpunkte und jetzt korrigiert:
+Gefundene Nachholpunkte und korrigiert:
 - `FEHLERQUELLEN.md` enthielt alten 97/78/0-Scale-Stand und einen bereits erledigten Architektur-Audit als NEXT;
 - zentrales `FEHLERREGISTER.md` enthielt dynamische/stale Produktvergleichs-Fachstände statt nur Wegweiser;
 - `CURRENT_STATE.md` und `HOBBYRAUM.md` waren hinter den bereits angelegten Profilspecs 62–64 zurück;
-- dieses Tagesprotokoll endete noch beim alten Deckengurte-Research-Gap.
+- dieses Tagesprotokoll endete noch beim alten Deckengurte-Research-Gap;
+- Campus-`START_HERE.md` bezeichnete den alten Campus-Basisbranch zu stark als aktuellen Einstieg und konnte damit einen neuen Produktvergleichs-Chat auf stale Fachwahrheit führen;
+- Pferde-Atelier-`START_HERE.md` bezeichnete PRODUKTVERGLEICH noch als eigenen deterministischen WordPress-DRAFT-Weg, obwohl V2 nur das gebundene Dossier an SEO/TEXT/ACM übergibt.
+
+Nachholung Campus-Routing:
+- alter Campus-Basisbranch ist jetzt ausdrücklich nur Bootstrap-/Navigation und keine aktuelle Fachwahrheit für Büros mit neuerem Fachbranch;
+- aktueller Produktvergleichsbranch ist am Campus-Eingang explizit gebunden;
+- Pferde-Atelier-Büroplan beschreibt PRODUKTVERGLEICH jetzt als Produktwissen/Vergleich/deterministisches Dossier für die bestehende SEO/TEXT-Produktion, nicht als eigenen Draft-Writer.
 
 Zielvertrag:
 Keine Zieländerung erforderlich. V2 ist weiterhin aktiv und enthält bereits finale Plugin-Autorität + regelmäßige Neubewertung. Zielregister bleibt Wegweiser.
@@ -288,7 +295,7 @@ Archiv:
 Keine aktive/ungeklärte Produktvergleichsarbeit archiviert. Keine Archivänderung erforderlich.
 
 Campus-/Architekturfolge:
-Die Regel betrifft den allgemeinen Produktvergleichskern bereits über Geltungsbereich von ZV-PV-002; kein zusätzlicher Campus-Neubau-/Bürostandard erforderlich.
+Die finale Plugin-Autorität betrifft den allgemeinen Produktvergleichskern bereits über den Geltungsbereich von ZV-PV-002. Die gefundene Routingabweichung wurde direkt an den bestehenden Campus-/Projekt-Eingängen korrigiert; kein neuer Campus-Raum und kein neuer Workflow angelegt.
 
 Tests im Abschlusscheck:
 Keine neuen Codeänderungen und daher kein neuer technischer Testlauf ausgelöst. Es gelten nur die oben tatsächlich ausgeführten 0.8.6-Hardtests. WordPress-Live 0.8.6 bleibt offen.
