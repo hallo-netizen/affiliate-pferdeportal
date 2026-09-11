@@ -1,7 +1,7 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
 STAND: 2026-09-11
-STATUS: AKTIV / 0.8.3 PROOFGRUPPE PASS / MULTI-GROUP-VOLLABDECKUNG OFFEN
+STATUS: AKTIV / 0.8.4 FINAL-FRESH-ZIP LOCAL HARD PASS / WORDPRESS-LIVE-RETEST OFFEN / 175-GRUPPEN-RECHERCHE WEITER OFFEN
 
 ## AUTORITÄT
 
@@ -11,61 +11,96 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - Fehlerdetails: `FEHLERQUELLEN.md`
 - Ziel: `ZIELVERTRAG_V2.md`
 - Fachvertrag: `AKTENSCHRANK/05_FACH_DOSSIER_ARTIKELTYP_VERTRAG_V1.md`
-- 0.8.3 Belege: `AKTENSCHRANK/06_V083_HARD_LOCAL_RELEASE_RECEIPT.md` und `07_V083_WORDPRESS_LIVE_REPEAT_RECEIPT.md`
+- 0.8.3 Proof-Belege: `AKTENSCHRANK/06_V083_HARD_LOCAL_RELEASE_RECEIPT.md` und `07_V083_WORDPRESS_LIVE_REPEAT_RECEIPT.md`
+- 0.8.4 Prüfbeleg: `AKTENSCHRANK/09_V084_HARD_LOCAL_RELEASE_RECEIPT.md`
 
-## 0.8.3 BELEG
+## 0.8.4 KANDIDAT
 
-Regendecken ist als Proofgruppe hart belegt:
-- finale Fresh-ZIP 25/25 PASS;
-- PHP-Lint 43/43 PASS;
-- WordPress-Live-Wiederholung: 0 Provider / $0.0000 / 8 BLOCKED / 0 Dossiers / korrekt `NO_ELIGIBLE_COMPARISONS`;
-- Dossier V2 + gebundene Decision-Policy;
-- kein Auto-Publish.
+`universal-product-comparison-0.8.4-prototype.zip`
 
-0.8.3 beweist den Mechanismus für **eine** Produktgruppe. Es beweist nicht die vollständige Portalabdeckung.
+SHA-256:
+`00035ec0e166d9830f97140b6fc0f4f7666504d548bac507b1b206a2173ce856`
 
 ## AUTORITATIVE PORTALABDECKUNG
 
-Autoritative Portalquelle: `affiliate-portal-router/assets/portal-structure-v279.json`.
+Portalquelle:
+`affiliate-portal-router/assets/portal-structure-v279.json`
 
-Gebundener Quell-SHA256:
+SHA-256:
 `b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0`
 
-Die strukturgebundene Auswertung ergibt:
-- 329 Produktseiten insgesamt;
-- 1124 Artikelkategorien;
-- **175 eindeutige Produktgruppen mit eigener Themenkategorie `Vergleich`**;
-- 175/175 dieser Vergleichsgruppen sind im Business-/Produktkatalog enthalten.
+Gebunden:
+- 329 Produktseiten;
+- 1124 Themenkategorien;
+- **175/175 Vergleichs-Produktgruppen**;
+- Regendecken = Proofgruppe 1/175.
 
-Regendecken = 1 von 175 Vergleichsgruppen.
+0.8.4 zeigt alle 175 Gruppen in der Produktvergleichsoberfläche. Keine Gruppe darf still verschwinden.
 
-## VERBINDLICHES SKALIERUNGSZIEL
+## SINNHAFTIGKEIT / PAARABDECKUNG
 
-Für **jede** der 175 relevanten Vergleichs-Produktgruppen:
-1. möglichst vollständigen realen Produktbestand recherchieren;
-2. exakte Produktidentitäten + Herstellerfakten im Produktwissen binden;
-3. aus dem gesamten Bestand alle fachlich zulässigen A-vs-B-Paare erzeugen;
-4. inkompatible/Same-Brand/falsche Nutzungsprofile vor kostenpflichtigem SEO blockieren;
-5. alle verbleibenden gültigen Paare bidirektional auf SEO-Nachfrage prüfen;
-6. bereits bezahlte Evidenz wiederverwenden;
-7. SEO-PASS -> Dossier V2;
-8. kein SEO-PASS -> terminal BLOCKED;
-9. Coverage pro Gruppe und global vollständig nachweisen.
+Verbindlicher Weg:
+`alle Produkte der Gruppe -> gesamtes A-vs-B-Paaruniversum -> Same Brand / fachlich unpassende Nutzung BLOCK -> nur sinnvolle Paare -> SEO`.
 
-Keine willkürliche Obergrenze für Produktgruppen oder Kandidatenpaare.
-Verarbeitung darf technisch in Batches erfolgen, Coverage darf dadurch aber keine Paare verlieren.
+Keine Top-N-/Pair-Cap.
 
-## OFFENER PUNKT
+Harter Großtest:
+- 50 Produkte;
+- 5 Hersteller;
+- 1000 Cross-Brand-Paare vollständig erzeugt;
+- 500 fachlich vergleichbar;
+- 500 falsche Nutzungsklasse sichtbar BLOCKED;
+- 0 verlorene Paare;
+- Reihenfolge/alte Dubletten ändern Coverage nicht.
 
-`PV-SCALE-084-001`:
-0.8.3 kennt in der auswählbaren Profilkonfiguration nur Regendecken. Die generische 175-Gruppen-Abdeckung inklusive explizitem Readiness-/Coverage-Status fehlt.
+## RECHERCHEWAHRHEIT
 
-## GRENZE
+Wichtig getrennt:
+- `PAIRING_READY` = vorhandene Fakten/Profil/Policy reichen zur Paarprüfung;
+- `research_completeness_status = UNPROVEN` = Markt-/Produktrecherche ist **nicht** als vollständig bewiesen.
 
-PRODUCT_COMPARISON V1 bleibt pro Artikel **exakt A gegen B = 2 Produkte**.
-175 Produktgruppen bedeutet nicht 175 Artikel und nicht 3–4 Produkte pro Artikel, sondern die vollständige Kandidatenrecherche innerhalb jeder Gruppe.
+Der aktuelle Product-Knowledge-Recherchekatalog enthält 17 Gruppen mit Produktkandidaten. Davon gehören 14 zum autoritativen 175er Vergleichsscope; 3 liegen außerhalb dieses Vergleichsscopes.
 
-SEO/TEXT/ACM-Integration bleibt separat und wird hier nicht verändert.
+Vorhandene Kandidaten dürfen sinnvoll geprüft werden, während fehlende Produkte/Hersteller weiterhin sichtbar Recherchearbeit bleiben.
+
+Keine Gruppe wird allein wegen vorhandener Kandidaten als vollständig recherchiert bezeichnet.
+
+## ZWEI PORTAL-KEY-KOLLISIONEN
+
+Die Portalquelle enthält zweimal den kurzen Produktgruppen-Key `weidezaungeraete` unter zwei verschiedenen Portal-Slugs.
+
+0.8.4 verschmilzt diese nicht still.
+Status: `GROUP_KEY_COLLISION` bis die autoritative Identität geklärt ist.
+
+## HARTER LOKALBELEG 0.8.4
+
+Finale Fresh-ZIP:
+- 32/32 ausführbare Positiv-/Negativ-/Regressionstests PASS;
+- PHP-Lint 48/48 PASS;
+- Source↔finale ZIP 67/67 exakt;
+- Report-Hashbindung 66/66 exakt;
+- 175/175 Portalparität PASS;
+- Product Knowledge 0.5.0 SHA exakt;
+- PSTE 0.56.25 SHA exakt;
+- 0.8.3 Dossier-/Policy-/Kosten-/Auditregeln unverändert PASS;
+- Research-Vollständigkeits-Falschbehauptung wird von Mutationstest ROT;
+- Drop einer Portalgruppe / Manipulation einer mittleren Gruppe / Top-N-Paarcap / ignorierte Key-Kollision werden ROT;
+- kein Writer-/Draft-/Publishweg;
+- kein Auto-Publish.
+
+## OFFENES GESAMTZIEL
+
+0.8.4 schließt die generische Registry-/Coverage-Infrastruktur, **nicht** die reale Produktrecherche aller 175 Gruppen.
+
+Weiter offen:
+1. WordPress-Live-Retest 0.8.4;
+2. Produktrecherche je Vergleichsgruppe möglichst vollständig ausbauen;
+3. gruppenspezifische Profile/Decision-Policies fachlich binden;
+4. alle dadurch sinnvollen A-vs-B-Paare vollständig prüfen;
+5. Coverage/Recherche-Vollständigkeit erst bei echtem Beleg auf vollständig setzen;
+6. erster echter positiver Dossier-V2-Livefall;
+7. danach erst spätere SEO/TEXT-/ACM-Anbindung.
+
 Kein Publish.
 
 NEXT ACTION ausschließlich `HOBBYRAUM.md`.
