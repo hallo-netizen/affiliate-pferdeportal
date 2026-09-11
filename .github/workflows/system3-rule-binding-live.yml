@@ -63,13 +63,28 @@ jobs:
           test -f "$dst/pste/includes/class-pste-breadth-research-queue.php"
           echo SYSTEM3_WHOLE_PPM_PACKAGE_BOUND_FILES=$ppm_count
           echo SYSTEM3_WHOLE_PSERC_PACKAGE_BOUND_FILES=$pserc_count
-          echo SYSTEM3_PPM_FILEMAP_BEGIN
-          find /tmp/ppm679-bound -type f | sort | sed 's#^/tmp/ppm679-bound/##'
-          echo SYSTEM3_PPM_FILEMAP_END
-          echo SYSTEM3_PSERC_FILEMAP_BEGIN
-          find /tmp/pserc-bound -type f | sort | sed 's#^/tmp/pserc-bound/##'
-          echo SYSTEM3_PSERC_FILEMAP_END
           echo SYSTEM3_COMPLETE_RULE_PACKAGES_BOUND_PASS
+      - name: Emit exact sealed content rule contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=/tmp/ppm679-bound/portal-production-machine/contracts
+          for f in \
+            article-type-templates.json \
+            content-structure-language-gate-v2.json \
+            content-validation-contract-v2.json \
+            general-production-contract-v679.json \
+            hard-rule-registry-v1.json \
+            table-contract-v1.json \
+            wordpress-link-target-snapshot-v1.json
+          do
+            test -f "$root/$f"
+            echo "SYSTEM3_RULE_FILE_BEGIN:$f"
+            sha256sum "$root/$f"
+            cat "$root/$f"
+            echo
+            echo "SYSTEM3_RULE_FILE_END:$f"
+          done
       - name: Negative proof sealed rules cannot be changed silently
         shell: bash
         run: |
