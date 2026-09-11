@@ -29,6 +29,9 @@ Den vom MASTER freigegebenen Beitragsblock so schnell und vollständig wie mögl
 - Keine Absenkung irgendeines Gates zugunsten von Geschwindigkeit.
 - PASS-Reuse nur bei identischem, hashgebundenem Input/Vertrag.
 - Artikelabhängige Recherche-, Qualitäts-, LanguageTool-, PPM-, Dubletten-/Kannibalisierungs- und sonstige Fachgates bleiben pro Artikel erhalten.
+- Vor dem finalen `fachworkflow_handoff.command` muss der gebundene Worker LanguageTool real als reine Arbeitsprüfung auf dem finalen Artikel ausführen. Verwendet werden ausschließlich Engine/JAR aus `.pferde-environment/LANGUAGETOOL_RUNTIME.json`; keine alternative Version, kein anderes Tool und keine Ersatzregel.
+- LanguageTool-Findings sind ausschließlich Bearbeitungshinweise für den Artikel: vorhandene Findings regelkonform korrigieren und denselben Artikel erneut mit dem gebundenen LanguageTool prüfen. Der finale Handoff darf erst mit einem Arbeitsstand ohne verbleibende LanguageTool-Findings aufgerufen werden. Falls ein Finding nicht ohne Verletzung einer bindenden Inhalts-/Fachregel korrigierbar ist: fail-closed BLOCKED, keine Umgehung.
+- Diese Worker-Arbeitsprüfung erzeugt KEINEN PASS und KEINEN Stage-Proof. Insbesondere darf der Worker keine `LANGUAGETOOL_REPORT.json`, keinen `FACHWORKFLOW_PASS` und keinen sonstigen Prüfbeleg vorerzeugen. Der hash-gebundene `fachworkflow_handoff.command` führt LanguageTool anschließend unabhängig erneut aus und bleibt alleinige PASS-Autorität.
 - Kein Auto-Publish.
 
 4. GESCHWINDIGKEIT
