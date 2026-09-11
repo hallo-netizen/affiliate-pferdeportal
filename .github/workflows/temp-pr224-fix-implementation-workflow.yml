@@ -1,0 +1,30 @@
+name: TEMP PR224 Fix Implementation Workflow
+
+on:
+  push:
+    branches:
+      - hobbyroom/107007-worker-checker-boundary-20260911
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/107007-worker-checker-boundary-20260911
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Remove obsolete pre-PR217 standalone test from candidate runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i '/test_ppm679_current_action_binding.py/d' .github/workflows/temp-pr224-implement-repair-loop.yml
+          rm -f .github/workflows/temp-pr224-fix-implementation-workflow.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'TEMP PR224: use current aggregate regression path'
+          git push origin HEAD:hobbyroom/107007-worker-checker-boundary-20260911
