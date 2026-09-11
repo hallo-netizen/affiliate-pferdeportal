@@ -1,12 +1,12 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-09-11
-STATUS: BLOCKED / M37 HISTORY→PRODUCT TWO-PHASE ACTIVE
+STATUS: BLOCKED / M37 PRODUCT_FIX ACTIVE
 
 ## EINE AKTUELLE WAHRHEIT
 
 Current technical main:
-`a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6`
+`f791dcc6c926f9c136faed29957e64786ffca08e`
 
 Letzter belastbarer Live-/Recovery-Baseline-Stand:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
@@ -28,43 +28,64 @@ Der konkrete bereits vorhandene innere Bridge-Grund wurde vom äußeren Handoff 
 **Produktions-Rootcause bleibt UNKNOWN.**
 Nicht raten und keinen PPM-/PSERC-Fehler erfinden.
 
-## AKTIVE REGRESSION
+## REGRESSION
 
-M01–M36: integrierte bekannte Regression.
+M01–M37 sind jetzt die verbindliche bekannte Regression.
 
-M37:
-`Non-repairable PPM/PSERC inner reason visibility`
+History-Phase M37: **PASS / integriert**.
+- PR248
+- History-Head `245b596f9d6dd67c759527a0f211dbe957f4e34f`
+- Merge/Main `f791dcc6c926f9c136faed29957e64786ffca08e`
+- `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M37`
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`
+- hardlock PASS
+- hardlock-base PASS
 
-Der vorhandene `hardlock-base` erzwingt dafür den bestehenden Zwei-Phasen-Weg:
-1. `HISTORY_AUTHORITY_MAINTENANCE`: nur Matrix + bestehender Runner; unverändertes Main muss bei M37 reproduzierbar FAIL sein.
-2. `PRODUCT_FIX`: erst nach integrierter M37-History; Handoff-Fix separat; current main M37 FAIL → Kandidat kompletter M01–M37 PASS.
+## AKTIVER PRODUKTFIX
 
-## AKTUELLE KANDIDATEN
+PR247 / Branch:
+`hobbyroom/ppm-inner-reason-visibility-20260911`
 
-History-Autorität:
-- Branch: `hobbyroom/m37-history-authority-20260911`
-- Head: `245b596f9d6dd67c759527a0f211dbe957f4e34f`
-- Scope: ausschließlich bestehende Matrix + bestehender Runner.
-- Sollbeweis: Kandidat reproduziert M37 als ersten FAIL; kein Produktfix in diesem Kandidaten.
+Head:
+`59ad44da3d89769c05f0725f9929135b0262f4dd`
 
-Produktfix-Vorarbeit:
-- PR247 / Branch `hobbyroom/ppm-inner-reason-visibility-20260911`
-- Head vor Trennung: `d4e6d77afdb68bbb3b6759b21d159293a9e49273`
-- Dort ist M37 lokal Positiv/Negativ PASS und hardlock/hardlock-base technisch PASS, aber der PR mischt History-Autorität + Produktfix und darf deshalb in dieser Form nicht integriert werden.
-- Produktfix wird erst nach integrierter M37-History sauber neu auf aktuelles Main gebunden.
+Diff exakt vier Dateien:
+- `control/startmaster0107/fachworkflow_proof_handoff.py`
+- `control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json`
+- `control/startmaster0107/CURRENT_STATE.json`
+- `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`
+
+Matrix und Runner kommen unverändert aus Main.
+
+Fix-Grenze:
+- nur Observability;
+- Handoff bleibt BLOCKED;
+- vorhandenen ersten inneren nicht-reparierbaren PPM/PSERC-Grund erhalten;
+- nichts erfinden;
+- reparierbare Content-Codes bleiben RepairRequired;
+- Hashkette nachziehen.
+
+## PASS-GRENZE PRODUKTFIX
+
+Der vorhandene hardlock-base muss auf PR247 beweisen:
+1. current main reproduziert M37 als ersten FAIL;
+2. Kandidat läuft mit demselben bestehenden M01–M37-Runner vollständig `GESAMT PASS`;
+3. `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
+4. hardlock + hardlock-base PASS auf demselben Head.
+
+Erst danach Integration.
+
+## DANACH
+
+Genau einen frischen ersten Artikel über den gebundenen 107007-Weg bis zum echten PPM/PSERC-Handoff laufen lassen.
+Dann nur den ersten konkret sichtbar gewordenen inneren Grund bearbeiten.
+Kein neuer 7/7-Lauf vor dem Ein-Artikel-Beweis.
 
 ## HARTE GRENZEN
 
-- kein neuer Runner;
-- kein neuer Gate/Controller/Sidecar;
+- kein neuer Runner/Gate/Controller/Sidecar;
 - keine PPM-/PSERC-/PSTE-/Textmaschinen-/Recherche-/SEO-/Link-/Tabellen-/Designregel ändern;
 - kein Fake-Rootcause;
 - keine Reparatur während des Produktionslaufs;
 - kein WordPress-Write;
 - Kein Publish.
-
-## NÄCHSTE AKTION
-
-History-Phase M37 maschinengebunden über bestehenden `hardlock-base` beweisen und integrieren.
-Danach separaten M37-Produktfix auf das neue Main binden und M01–M37 vollständig beweisen.
-Erst danach genau einen frischen ersten Artikel bis zum echten PPM/PSERC-Handoff laufen lassen, um den realen inneren Rootcause sichtbar zu erhalten.
