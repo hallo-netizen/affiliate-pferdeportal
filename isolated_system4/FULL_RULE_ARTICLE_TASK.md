@@ -45,16 +45,18 @@ At minimum prove:
 - forbidden legacy import/call -> BLOCKED;
 - `publish_allowed=true` -> BLOCKED.
 
-## First fresh article
-Preferred input is the first item of `isolated_system4/live_fixture/wordpress_snapshot.json`.
+## First fresh article — fixed real binding
+Use the FIRST item of `isolated_system4/live_fixture/wordpress_snapshot.json` exactly as bound. It is the real 7/7 `Beratung` item.
 
-If and only if that bound article type is currently blocked by an authoritative rule such as `production_allowed=false`, DO NOT weaken or bypass the rule. Instead continue automatically:
-1. Read the SAME current authoritative article-type contract and determine an article type explicitly marked/certified for production (`production_allowed=true` or the exact equivalent current contract state).
-2. Prefer an already existing CURRENT WordPress/PSERC editorial-plan metadata item of that certified type, with its real title/keyword/category/plan_slot, found read-only from current authoritative metadata.
-3. If no current bound metadata item of any certified type exists, create a clearly synthetic TEST-ONLY metadata fixture under `isolated_system4/**` for a certified type and an invented harmless horse-related topic. This synthetic fallback may prove System-4 rules/architecture but must NOT be misrepresented as a real production/WordPress-plan binding.
-4. If the current WordPress output contract requires a real canonical plan binding and no certified current plan item exists, still generate and fully rule-check the synthetic test article, but terminal status must explicitly distinguish `FULL_RULE_ARTICLE_PASS_OUTPUT_BINDING_BLOCKED` rather than claim full production-output PASS.
+Hard correction after fresh evidence:
+- The current PSERC metadata batch marks all seven `Beratung` items `READY_FOR_TEXTMACHINE_METADATA_INTAKE`.
+- The bound runtime batch for the same batch SHA is `EXECUTION_READY`.
+- The current PSERC-approved production package contains a signed workflow release with `status=PASS` for the same seven plan slots.
+- Therefore an isolated article-type field such as `production_allowed=false` / `WAVE2_QUARANTINE_PENDING_RECERTIFICATION` found inside a PPM package MUST NOT by itself be interpreted as a current production blocker.
+- Do not switch article type and do not create a synthetic fallback because of that field.
+- Only a CURRENT actually executed authoritative domain checker against the bound article may block the article. If such a checker genuinely returns a non-repairable article-type prohibition during execution, report that exact runtime result and source.
 
-For whichever eligible test input is selected:
+For the bound first item:
 - Fresh research/facts/draft only in a temporary workspace.
 - No old article body as source.
 - Run through every now-bound real production rule/checker.
@@ -62,16 +64,13 @@ For whichever eligible test input is selected:
 - Continue to PASS or the first genuine non-repairable hard blocker.
 
 ## Output
-Determine the CURRENT authoritative WordPress draft-output contract freshly. Do not use WXR merely because the earlier architecture test used it if the actual current production handoff requires another contract. Produce only a draft/non-publish output. Never fabricate a real plan binding for a synthetic fixture.
+Determine the CURRENT authoritative WordPress draft-output contract freshly. Do not use WXR merely because the earlier architecture test used it if the actual current production handoff requires another contract. Produce only a draft/non-publish output.
 
 ## Terminal return
 Return only one of:
 
 `SYSTEM4_FIRST_FULL_RULE_ARTICLE_PASS`
 with title, article type, authoritative sources/tools actually bound, checker sequence, repair sequence if any, final article verbatim, output contract/file, SHA256, `publish_allowed=false`, and NO-LEGACY PASS;
-
-or `SYSTEM4_FULL_RULE_ARTICLE_PASS_OUTPUT_BINDING_BLOCKED`
-when the fresh synthetic article fully passes every real article rule/checker but a real WordPress/PSERC plan-bound output cannot truthfully be created because no certified current plan item exists; include the exact output-binding blocker;
 
 or the first genuine non-repairable blocker with exact status/error and authoritative source causing it.
 
