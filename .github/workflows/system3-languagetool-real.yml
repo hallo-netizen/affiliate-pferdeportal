@@ -50,21 +50,20 @@ jobs:
           done
           cat /tmp/lt.log
           exit 1
-      - name: Real positive and negative LanguageTool test
+      - name: Real positive and negative LanguageTool test on verified Codex output
         shell: bash
         run: |
           python - <<'PY'
-          import json
           from pathlib import Path
           from isolated_system3.language_tool import check_text, LanguageToolFail
 
-          evidence = json.loads(Path('isolated_system3/live_fixture/stage_evidence.json').read_text(encoding='utf-8'))
-          result = check_text(evidence['DRAFT']['article'])
+          article = Path('isolated_system3/codex_output.md').read_text(encoding='utf-8')
+          result = check_text(article)
           assert result['status'] == 'PASS'
           assert result['version'] == '6.8'
           assert result['endpoint'] == 'http://127.0.0.1:8081/v2/check'
           assert isinstance(result['matches'], list)
-          print('SYSTEM3_LANGUAGETOOL_REAL_POSITIVE_PASS')
+          print('SYSTEM3_CODEX_OUTPUT_LANGUAGETOOL_REAL_PASS')
 
           try:
               check_text('   ')
