@@ -358,6 +358,12 @@ def complete(receipt_path: Path) -> dict:
             raise Blocked("FINAL_VISIBLE_RELEASE_NOT_PASS")
         finalizer = module(REPO / "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py", "dual_rootfix_107008_finalizer")
         pserc_finalization = finalizer.finalize_after_107008(REPO, committed["release_receipt_ref"])
+        if (
+            not isinstance(pserc_finalization, dict)
+            or pserc_finalization.get("ok") is not True
+            or pserc_finalization.get("status") != "PSERC_FINAL_PACKAGE_PASS"
+        ):
+            raise Blocked("HOST_PSERC_FINALIZATION_NOT_PASS")
         finalizer.clear_prepared_binding(REPO, binding["batch_sha256"])
         return {
             "ok": True,

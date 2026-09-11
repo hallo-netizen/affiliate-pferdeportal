@@ -25,7 +25,15 @@
     "H8_PREPRODUCTION_BOOTSTRAP_PROTOTYPE_BOUND",
     "OUTPUT_QUARANTINE_ROOTFIX_BOUND",
     "CODEX_CLOUD_OFFLINE_FRESHNESS_BOUND",
-    "CODEX_CLOUD_NATIVE_BOUND_CAPSULE_BRIDGE_BOUND"
+    "CODEX_CLOUD_NATIVE_BOUND_CAPSULE_BRIDGE_BOUND",
+    "PR223_SIMPLE_ENTRY_AGGREGATE_CHECKER_MERGED",
+    "PR224_MACHINE_ENFORCED_REPAIR_RETURN_MERGED",
+    "PR226_PPM_REPAIR_FINDINGS_RETURN_MERGED",
+    "PR228_LANGUAGETOOL_VISIBLE_TEXT_INPUT_MERGED",
+    "PR230_FACT_PACK_SOURCE_ID_BINDING_MERGED",
+    "PR236_BOUND_WORKER_DUTY_KISS_MERGED",
+    "PR237_FACHWORKFLOW_PLAN_HEADER_BINDING_MERGED",
+    "PR243_FACT_PACK_READINESS_BINDING_MERGED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -38,7 +46,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "574d5e8b0c7698a72360a9f10d7b03113129c49fbb1d21cc4ca790d1289de3b9",
+    "bundle_sha256": "13fd743b67e079877d0e99d7670b7041232ad4769e4533cea11c51eb336a9818",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -114,14 +122,14 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "574d5e8b0c7698a72360a9f10d7b03113129c49fbb1d21cc4ca790d1289de3b9"
+    "bundle_sha256": "13fd743b67e079877d0e99d7670b7041232ad4769e4533cea11c51eb336a9818"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
     "policy_sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f",
     "official_runtime_entry_ref": "control/output-quarantine/runtime_entry_gate.py",
-    "official_runtime_entry_sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894",
-    "worker_freshness_guard_sha256": "122d0927e56761dd0afa668adb847b44453a42a2102020b1d6c6b940945b9998",
+    "official_runtime_entry_sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24",
+    "worker_freshness_guard_sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84",
     "output_release_gate_sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55",
     "final_review_visibility_guard_sha256": "c5f7284dc5d6a3bd69464162d18abed66e164ce8fd3bea05181f57fec2095913",
     "chat_execution_authority": "NONE",
@@ -130,5 +138,90 @@
     "domain_logic_authority": "NONE",
     "quality_authority": "NONE",
     "publish_allowed": false
+  },
+  "current_work_status": "BLOCKED",
+  "current_execution_blocker": {
+    "code": "PPM679_REAL_EXECUTION_BLOCKED",
+    "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+    "sequence": 107007,
+    "evidence": "PR107 issuecomment-5634231573",
+    "detail": "First freshly researched and generated article reached the real PPM 6.7.9/PSERC handoff and stopped at FACHWORKFLOW_PROOF_HANDOFF_BLOCKED.",
+    "root_cause": "UNKNOWN_UNTIL_FIRST_NESTED_PPM_REASON_FROM_THE_SAME_FIRST_ARTICLE_IS_EXPOSED",
+    "first_nested_ppm_reason_status": "NOT_EXPOSED",
+    "resolved": false,
+    "publish_allowed": false
+  },
+  "external_execution_blocker": {
+    "code": "CODEX_USAGE_LIMIT_REACHED",
+    "evidence": "PR107 issuecomment-5634273871",
+    "classification": "EXTERNAL_EXECUTION_AVAILABILITY_NOT_PROJECT_FAILURE",
+    "effect": "Codex became available again; the exact read-only retry proved that the original first-article task workspace is no longer available.",
+    "resolved": true,
+    "resolution_evidence": "PR107 issuecomment-5637219382"
+  },
+  "superseded_live_findings": [
+    {
+      "code": "REAL_RESEARCH_FACT_PACK_SOURCE_ACCESS_UNAVAILABLE",
+      "evidence": "PR107 issuecomment-5634082510",
+      "status": "SUPERSEDED_BY_LATER_LIVE_RUN",
+      "reason": "A later unchanged-main live run successfully researched and generated the first fresh article and reached real PPM; therefore HTTP 401 is not the current project blocker."
+    },
+    {
+      "code": "PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH",
+      "status": "RESOLVED_BY_PR237",
+      "merge_sha": "c2258ead34b506d0b06f85e639e1d776ee5268cf"
+    },
+    {
+      "code": "BLOCKED_FACT_PACK_IMPORT_ITEM_INVALID",
+      "status": "RESOLVED_BY_PR243",
+      "merge_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc"
+    }
+  ],
+  "latest_live_evidence": {
+    "main_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
+    "dispatcher_pr": 107,
+    "first_article_title": "Das Wichtigste über Hindernisstangen für Pferde",
+    "first_article_target_keyword": "Hindernisstangen für Pferde",
+    "research_completed": true,
+    "article_generated": true,
+    "real_ppm_reached": true,
+    "ppm_pass": false,
+    "sequence_107008_reached": false,
+    "publish_performed": false
+  },
+  "last_safe_main_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
+  "last_safe_change": "Guard-green merged baseline after PR236, PR237 and PR243. This is NOT a production PASS: the first fresh article reaches the real PPM 6.7.9/PSERC handoff and is still BLOCKED before 107008.",
+  "hobbyroom_status": "AKTIV",
+  "hobbyroom_branch": "hobbyroom/ppm-inner-reason-visibility-20260911",
+  "hobbyroom_sync_policy": "Before any functional hobbyroom edit, fast-forward hobbyroom/ppm-inner-reason-visibility-20260911 to the then-current canonical main. During freeze the branch must contain no functional divergence.",
+  "hobbyroom_blocker": "M37 observability candidate is active in PR247; full M01-M37 plus hardlock/hardlock-base proof is not yet complete.",
+  "next_action": {
+    "goal": "Complete M37 in the existing hobbyroom runner, bind the existing hash chain, and require full M01-M37 plus hardlock/hardlock-base PASS on one candidate head. No production run before that proof.",
+    "if_same_task_artifacts_unavailable": "Condition confirmed by PR107 issuecomment-5637219382. PR247 therefore contains only the smallest observability-only M37 change: preserve the already returned first inner non-repairable PPM/PSERC reason while remaining fail-closed BLOCKED. No PPM/PSERC/content/quality rule change.",
+    "after_nested_reason": "After M37 candidate and hardlocks pass and the candidate is safely integrated, run only one fresh first-article live path to the same PPM boundary. Repair only the newly exposed proven root cause. First prove one article end-to-end through real LanguageTool and real PPM; only then resume the remaining batch and finally 107008; stop before publish.",
+    "must_fail_closed_on": [
+      "wrong source hash",
+      "stale source generation",
+      "batch mismatch",
+      "plan_slot mismatch",
+      "canonical_article_id mismatch",
+      "tampered source or derived context",
+      "technical PPM failure",
+      "binding or identity mismatch",
+      "forbidden publish attempt"
+    ],
+    "forbidden": [
+      "new internal raw-data generator",
+      "new runner",
+      "new gate",
+      "new controller",
+      "new sidecar truth",
+      "worker-authored PASS",
+      "content or quality rule change",
+      "auto-publish",
+      "new architecture",
+      "symptom fix before root cause"
+    ],
+    "proof_after_fix": "One fresh first article must pass the unchanged real LT/PPM path first. Only then complete a fresh 7/7 through unchanged 107007 to 107008 and stop before publish. Component/selftests remain guardrails and do not grant production PASS."
   }
 }

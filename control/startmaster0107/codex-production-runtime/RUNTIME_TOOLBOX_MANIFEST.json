@@ -1,0 +1,79 @@
+{
+  "contract": "PFERDE_ATELIER_RUNTIME_TOOLBOX_MANIFEST_V1",
+  "schema_version": 1,
+  "scope": "TECHNICAL_RUNTIME_IDENTITY_ONLY",
+  "authority": {
+    "chat_execution_authority": "NONE",
+    "chat_tool_selection_authority": "NONE",
+    "worker_tool_selection_authority": "NONE",
+    "workflow_navigation_authority": "NONE",
+    "repair_choice_authority": "NONE",
+    "content_semantics_authority": "NONE",
+    "quality_authority": "NONE",
+    "design_authority": "NONE",
+    "seo_authority": "NONE",
+    "publish_allowed": false
+  },
+  "update_policy": {
+    "mode": "EXACT_MANIFEST_ONLY_FAIL_CLOSED",
+    "allowed_triggers": [
+      "CACHE_MISSING",
+      "CACHE_HASH_MISMATCH",
+      "MANIFEST_CHANGED"
+    ],
+    "alternative_tool_allowed": false,
+    "fallback_version_allowed": false,
+    "worker_choice_allowed": false,
+    "chat_choice_allowed": false
+  },
+  "system_runtimes": {
+    "java": {
+      "provider": "CODEX_UNIVERSAL",
+      "selector": "21",
+      "probe": "JAVA_FEATURE_VERSION",
+      "real_execution_required": true
+    },
+    "php": {
+      "provider": "CODEX_UNIVERSAL",
+      "selector": "8.4",
+      "probe": "PHP_MAJOR_MINOR",
+      "real_execution_required": true
+    }
+  },
+  "python_packages": {
+    "cryptography": {
+      "version": "50.0.1",
+      "required_symbol": "cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey",
+      "real_import_required": true
+    }
+  },
+  "languagetool": {
+    "engine": "LanguageTool 6.8 / Bestand 43",
+    "component_version": "6.8",
+    "source_url": "https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip",
+    "inner_zip_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "inner_zip_size": 258510816,
+    "historical_outer_ref": "ARBEITSMASTER_0043_NEU_TEIL_2_LANGUAGETOOL_ABHAENGIGKEIT.zip",
+    "historical_outer_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+    "commandline_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+    "commandline_jar_manifest_sha256": "eb6fbf76ab6747b7a5a156390149c103f0e31e2ae14eddb28317cac0201ebe5c",
+    "persistent_cache_root": ".cache/pferde-atelier-languagetool",
+    "real_execution_required": true
+  },
+  "repository_packages": {
+    "ppm679": {
+      "ref": "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip",
+      "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+    },
+    "pserc": {
+      "ref": "control/startmaster0107/runtime_packages/PSERC-FIX.zip",
+      "sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
+    }
+  },
+  "agent_phase": {
+    "network_required": false,
+    "tool_install_allowed": false,
+    "tool_update_allowed": false,
+    "tool_selection_allowed": false
+  }
+}

@@ -6,19 +6,27 @@
   "authorized_inputs": [
     {
       "ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
-      "sha256": "49793f35d143d0bdda5e556e6159ced4e2139bf2874ffc3c763b41c9d23bb4fc"
+      "sha256": "caed4231e905f1ff7ee1f0424a432b9a4f0a5d99ee8c2e828a0c3eb47d54e57d"
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "42fbd0c1aa407064a1679bdafde7600e5256ce6f04badec4984e373157a53894"
+      "sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
-      "sha256": "122d0927e56761dd0afa668adb847b44453a42a2102020b1d6c6b940945b9998"
+      "sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84"
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "60ad828e153f3fc33b912b21aafd0f2db7669e9df1001a87018041cc95f008eb"
+      "sha256": "d9393c50edc21dfae591012d5ea520249254c072879e0dbf26aa484031c1b9d8"
+    },
+    {
+      "ref": "control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json",
+      "sha256": "daee323ff219ba4918c40660b34ea39cb960f1664a0a0ac8d5e76c3ccc7296be"
+    },
+    {
+      "ref": "control/startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh",
+      "sha256": "c1b6d5c698a20a223656814dc5937b3a45baa96e984ba46586772c1576619db6"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
@@ -46,18 +54,18 @@
     },
     {
       "ref": "control/single-door-boundary/codex_current_action.py",
-      "sha256": "6f4e949cc72b6b2eb2771b7baed65dd61b6e0240c197a8471c7aad5bebb53cd1"
+      "sha256": "3184f197159b1740f0aa5307a15552d22847cf9958185080270c82f0e9dee3e8"
+    },
+    {
+      "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
+      "sha256": "6d04edb9d9ce0711cdce2ff0c696026f865f728f30f54a691f83ca9129d01353"
     },
     {
       "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
       "sha256": "020e4f71c244110f637d72fbe722b4ce5cc0d8341f53c31e54b4377e89900e38"
-    },
-    {
-      "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
-      "sha256": "6a3d0f3da534ab73aa900ccf91783f084c85acbd3bf38c8895ae439d6aaae909"
     }
   ],
-  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt schon vor Tür 1 keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung, keine Rekonstruktion eines fehlenden Schritts.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ist vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf direkt oder indirekt verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ist ausschließlich der gebundene produktive Eingang zulässig. Danach ausschließlich:\n\npython3 control/single-door-boundary/codex_current_action.py current\n\nDiese Ausgabe ist der einzige Worker-Etagenanzeiger.\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- Das ist ein POSITIVER freigegebener Zustand, kein Fehler.\n- instruction=EXECUTE_CURRENT_BOUND_ITEM_NOW bedeutet: ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten. Der gebundene Worker führt diesen Fachworkflow aus; es darf kein neuer Ersatz-Executor gesucht oder gebaut werden.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- Den bestehenden unveränderten Fachworkflow vollständig real ausführen und dabei die geforderten echten Stage-Proofs und Fachworkflow-Kontextdaten unter allowed_output_root erzeugen.\n- Danach zwingend FACHWORKFLOW_HANDOFF_REQUEST.json unter exakt fachworkflow_handoff.request_ref erzeugen. Die Request-Datei darf ausschließlich aus den gerade real erzeugten Fachworkflow-Ergebnissen und den bereits gebundenen Current-Action-Werten aufgebaut werden; keine Proofs erfinden, rekonstruieren oder aus alten Artikel-/Produktionsläufen wiederverwenden.\n- Request-Mapping exakt: contract=fachworkflow_handoff.request_contract; room_token=room_token; batch_sha256=fachworkflow_handoff.batch_sha256; canonical_article_id=current_item.canonical_article_id; plan_slot=current_item.plan_slot; allowed_output_root=allowed_output_root; item_receipt_ref=item_receipt_ref; fachworkflow_pass_ref=item_receipt_schema.fachworkflow_pass_ref; contract_binding_ref=item_receipt_schema.fachworkflow_contract_binding.binding_ref; contract_binding_sha256=item_receipt_schema.fachworkflow_contract_binding.binding_sha256; stage_proofs=exakt die real erzeugten {stage,ref,sha256}-Nachweise aller geforderten Stufen; fact_pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata=exakt der reale Kontext des gerade durchlaufenen unveränderten Fachworkflows.\n- Erst wenn diese Request-Datei vollständig existiert: ausschließlich submission_command ausführen.\n- submission_command ist jetzt die einzige gebundene Abschlussaktion des Items: sie prüft, dass exakt die aktuelle FACHWORKFLOW_HANDOFF_REQUEST.json existiert, ruft danach ausschließlich den bereits gebundenen neuen Fachworkflow-Handoff auf, verlangt dessen PASS/Receipt-Hash und reicht erst dann dieses Receipt an den bestehenden Room-Bridge-Submit weiter.\n- Der technische Handoff führt selbst keine Fachlogik aus. Fehlt die Request-Datei, ist der Adapter verändert, liefert der Handoff keinen PASS oder stimmt Receipt/Hash nicht exakt, bleibt der Lauf fail-closed und der Room-Bridge-Submit wird nicht ausgeführt.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam. Jede neue Ausgabe des submission_command ersetzt die vorherige vollständig. Niemals den nächsten Raum, das nächste Item oder eine Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED: stehenbleiben, keine eigene Lösung oder Alternativroute. Beim finalen 107008-Zustand: stehenbleiben und Nutzerreview abwarten.\n\nAlle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish. Alles außerhalb der aktuell ausgegebenen Einzelaktion ist DENY.",
+  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ändert keinerlei Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ausschließlich:\npython3 control/single-door-boundary/codex_current_action.py current\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- Der aktuelle Codex-Prozess ist ausschließlich der gebundene Fachworkflow-Worker für exakt current_item.\n- fachworkflow_prompt_ref und die gebundene Beitragsart/Textmaschinen-Regelautorität unverändert anwenden; keine freie Auswahl und keine Ersatzregeln.\n- Alle für diese Beitragsart geltenden bestehenden Textmaschinen-/Fachworkflow-Regeln vollständig ausführen.\n- NEW bleibt NEW: alte Artikel-/Recovery-Dateien sind keine Produktionsquelle.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- Worker erzeugt ausschließlich reale Roharbeitsprodukte: Recherche/fact_pack, finaler Artikel und vollständigen production_plan-Kontext für current_item gemäß den bereits gebundenen bestehenden Fachworkflow-/PPM-Verträgen. Diese Rohdaten sind KEIN PASS und keine Prüfbelege.\n- workflow_release-Kontext wird NICHT neu erzeugt; er wird unverändert aus fachworkflow_handoff.raw_context_binding übernommen. Der production_plan-Header wird real im gebundenen Fachworkflow für current_item erzeugt.\n- fact_pack.source_snapshot_id, fact_pack.fact_pack_id und production_plan_item.source_snapshot_id müssen exakt fachworkflow_handoff.raw_context_binding.source_snapshot_id entsprechen. Der real erzeugte fact_pack MUSS zusätzlich status exakt SOURCE_VERIFIED_PRODUCTION_READY enthalten und claims MUSS als Array vorhanden sein; diese Felder werden im bestehenden Fachworkflow/research_fact_pack erzeugt und niemals durch H8 oder den Handoff ergänzt. production_plan_item bleibt slotlos und an current_item (canonical_article_id, article_type, target_keyword, topic, WordPress-Kategorie) gebunden; plan_slot wird ausschließlich über current_item/workflow_release_item/Handoff-Request gebunden und darf im production_plan_item nicht vorkommen.\n- Worker/Codex besitzt keinerlei PASS- oder Prüfbeleg-Autorität. Keine eigenen Stage-PASS-Zettel erzeugen oder behaupten.\n- stage_proofs MUSS exakt [] sein. Jeder andere Wert blockiert im hash-gebundenen Handoff.\n- fachworkflow_handoff.request_required_fields ist die exakte vollständige Feldliste; keine zusätzlichen oder fehlenden Felder.\n- FACHWORKFLOW_HANDOFF_REQUEST.json exakt unter fachworkflow_handoff.request_ref erzeugen. contract=fachworkflow_handoff.request_contract; room_token=room_token; batch_sha256=fachworkflow_handoff.batch_sha256; canonical_article_id=current_item.canonical_article_id; plan_slot=current_item.plan_slot; allowed_output_root=allowed_output_root; item_receipt_ref=item_receipt_ref; fachworkflow_pass_ref=item_receipt_schema.fachworkflow_pass_ref; contract_binding_ref=item_receipt_schema.fachworkflow_contract_binding.binding_ref; contract_binding_sha256=item_receipt_schema.fachworkflow_contract_binding.binding_sha256; stage_proofs=[]; fact_pack=der real erzeugte fact_pack; production_plan_item=der real erzeugte production_plan_item; production_plan_header=der real erzeugte production_plan_header; workflow_release_item=fachworkflow_handoff.raw_context_binding.workflow_release_item; workflow_release_metadata=fachworkflow_handoff.raw_context_binding.workflow_release_metadata.\n- Danach ausschließlich fachworkflow_handoff.command ausführen. Der hash-gebundene bestehende Handoff führt die vorhandenen realen Prüfungen aus. Wenn er FACHWORKFLOW_REPAIR_REQUIRED liefert, bleibt exakt derselbe current_item gebunden: ausschließlich die gemeldeten bestehenden Fachbefunde in den bereits worker-eigenen Roharbeitsdaten korrigieren, Artikel und production_plan_item wieder exakt aneinander binden, FACHWORKFLOW_HANDOFF_REQUEST.json mit unveränderten extern gebundenen Identitäts-/Header-/Releasefeldern und stage_proofs=[] aktualisieren und exakt denselben fachworkflow_handoff.command erneut ausführen. FACHWORKFLOW_REPAIR_REQUIRED ist KEIN PASS, erzeugt keinen Prüfbeleg und erlaubt keine Submission.\n- Erst nach FACHWORKFLOW_PROOF_HANDOFF_PASS ausschließlich submission_command ausführen. Kein submit-request, keine Capability-Suche, kein zweiter Executor.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam. Niemals nächsten Raum, nächstes Item oder Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED stehenbleiben. Beim finalen 107008-Zustand ausschließlich den gebundenen 107008-Schritt ausführen. Alle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
@@ -67,6 +75,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "dac91421b887060d68af3f4a6e80bb4ca5fa72527c57dcea1220af4f3abcd0f5"
+    "bundle_sha256": "82aca07bc39a3f0fa0e290bfc307b6c6e1c71e022c8aa4c7ea3dd740169beb52"
   }
 }
