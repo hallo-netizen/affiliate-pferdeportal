@@ -4,95 +4,76 @@ ROLLE: PROTOKOLL / kein CURRENT_STATE / keine zweite Fehlerwahrheit.
 
 ## AUSGANGSSTAND
 
-Recovery-/letzter belastbarer Live-Baseline-Stand:
-`bb005a5324a0a6270aacb52b5927613bde1ab4bc`
-
 Letzter echter frischer Realtest vor M37:
-- Recherche: ausgeführt;
-- erster Artikel: erzeugt;
-- echter PPM-6.7.9-/PSERC-Handoff: erreicht;
-- äußerer sichtbarer Stop: `PPM679_REAL_EXECUTION_BLOCKED`;
-- konkreter innerer Grund: durch äußeren Handoff nicht erhalten;
-- ursprünglicher Codex-Task später nicht mehr verfügbar;
-- 107008: nicht erreicht;
+- Recherche ausgeführt;
+- erster Artikel erzeugt;
+- realer LanguageTool-/PPM-6.7.9-/PSERC-Handoff erreicht;
+- äußerer Stop `PPM679_REAL_EXECUTION_BLOCKED`;
+- innerer Grund damals vom äußeren Handoff nicht erhalten;
+- alter Codex-Task später nicht mehr verfügbar;
+- kein 107008;
 - Kein Publish.
-
-Produktions-Rootcause bleibt bis zu einem neuen echten Lauf UNKNOWN.
-
-## WARUM M37 ZWEIPHASIG LÄUFT
-
-Der vorhandene `hardlock-base` unterscheidet ausdrücklich:
-- `HISTORY_AUTHORITY_MAINTENANCE`: Matrix/Runner als Fehlerhistorie ändern;
-- `PRODUCT_FIX`: Produktcode ändern.
-
-Eine Mischung beider Klassen in einem Kandidaten ist fail-closed verboten.
-PR247 enthielt zunächst beides. Deshalb wurde nicht am Hardlock vorbeigearbeitet, sondern der vorhandene Vertrag eingehalten.
 
 ## PHASE 1 – HISTORY AUTHORITY – PASS / INTEGRIERT
 
-History-Kandidat:
-`hobbyroom/m37-history-authority-20260911`
+PR248 / Head `245b596f9d6dd67c759527a0f211dbe957f4e34f`
 
-Head:
-`245b596f9d6dd67c759527a0f211dbe957f4e34f`
+Beweis:
+- `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M37`;
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
+- hardlock PASS;
+- hardlock-base PASS.
 
-Maschinenbeweis:
-- erlaubter Diff exakt Matrix + bestehender Runner;
+Merge/Main danach:
+`f791dcc6c926f9c136faed29957e64786ffca08e`
+
+## PHASE 2 – PRODUCT FIX – PASS / INTEGRIERT
+
+PR247 / Produkthead:
+`59ad44da3d89769c05f0725f9929135b0262f4dd`
+
+Produktdiff exakt:
+- `fachworkflow_proof_handoff.py`;
+- `STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json`;
+- `CURRENT_STATE.json`;
+- `PFERDE_ATELIER_START_HERE.json`.
+
+Matrix/Runner unverändert aus Main.
+
+Beweis auf PRODUCT_FIX-Work-Lock:
 - `HOBBYROOM_WORK_LOCK_PR_PASS`;
 - `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M37`;
 - `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
 - hardlock PASS;
 - hardlock-base PASS.
 
-Integration:
-- PR248 gemergt;
-- neuer Main `f791dcc6c926f9c136faed29957e64786ffca08e`.
+Merge/Main danach:
+`f1d1605f18bd23d9189f89ad173598958718d08a`
 
-Damit ist M37 Bestandteil der bestehenden History-Autorität. Kein Produktfix wurde in Phase 1 integriert.
-
-## PHASE 2 – PRODUCT FIX – AKTIV
-
-Current main:
-`f791dcc6c926f9c136faed29957e64786ffca08e`
-
-Produktkandidat:
-- PR247;
-- Branch `hobbyroom/ppm-inner-reason-visibility-20260911`;
-- Head `59ad44da3d89769c05f0725f9929135b0262f4dd`;
-- Parent exakt current main;
-- Diff exakt Handoff + bestehende STEP→CURRENT_STATE→START_HERE-Hashkette;
-- Matrix und Runner unverändert aus Main.
-
-Fix:
-- bestehender Handoff bleibt fail-closed BLOCKED;
-- bereits vorhandener erster innerer nicht-reparierbarer PPM/PSERC-Grund wird sichtbar erhalten;
-- ohne vorhandenen konkreteren Grund wird nichts erfunden;
+Fixsemantik:
+- bleibt fail-closed BLOCKED;
+- bereits vorhandenen inneren nicht-reparierbaren PPM/PSERC-Grund sichtbar erhalten;
+- ohne konkreteren Grund nichts erfinden;
 - reparierbare Content-Codes bleiben RepairRequired;
-- keine Fach-/PPM-/PSERC-/PSTE-/Textmaschinen-/SEO-/Link-/Tabellen-/Design-/Publish-Regeländerung.
+- keine Fach-/PPM-/PSERC-/PSTE-/Textmaschinen-/SEO-/Link-/Tabellen-/Design-/Publish-Regel geändert.
 
-Pflichtbeweis:
-- BEFORE: current main muss mit bestehendem M01–M37-Runner exakt M37 als ersten FAIL reproduzieren;
-- AFTER: Produktkandidat muss mit demselben Runner vollständig `GESAMT PASS` liefern;
-- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
-- hardlock PASS;
-- hardlock-base PASS;
-- kein Bypass.
+## PRODUKTIONSSTATUS NACH M37
 
-## DANACH
+M37 selbst repariert nur die verlorene Fehlersichtbarkeit.
+Der eigentliche Produktions-Rootcause ist noch nicht neu gemessen und bleibt **UNKNOWN**.
 
-Erst nach Phase-2-PASS und Integration genau ein frischer erster Artikel als Realtest bis zum echten PPM/PSERC-Handoff.
-Bei PASS weiter nach gebundenem Workflow; bei FAIL nur den ersten konkret sichtbaren inneren Grund übernehmen.
+## NÄCHSTER REALTEST
+
+Genau ein frischer erster Artikel auf Main `f1d1605f18bd23d9189f89ad173598958718d08a`.
+
+Gebundener Weg:
+Cloud Entry → Production Preflight → Runtime Entry → Current Action → frische Recherche/fact_pack → Artikel → real LanguageTool → real PPM/PSERC-Handoff.
+
+Terminalentscheidung:
+- PASS: erster Artikel real durch PPM/PSERC; erst danach Restbatch;
+- FAIL/BLOCKED/REPAIR_REQUIRED: nur ersten neuen konkreten Grund übernehmen und Test beenden.
+
 Keine Reparatur im laufenden Test.
+Kein zweiter Artikel in diesem Diagnoseauftrag.
 Kein WordPress-Write.
 Kein Publish.
-
-## STATUSWÖRTER FÜR MASCHINENBEWEIS
-
-Realtest
-PASS
-FAIL
-Kein Publish
-
-Aktiver äußerer Blocker: `PPM679_REAL_EXECUTION_BLOCKED`
-Main: `f791dcc6c926f9c136faed29957e64786ffca08e`
-Recovery: `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
