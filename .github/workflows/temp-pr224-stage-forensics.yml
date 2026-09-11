@@ -1,0 +1,30 @@
+name: TEMP PR224 Stage Forensics
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect bound PPM and PSERC package contents
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/ppm /tmp/pserc_outer /tmp/pserc
+          mkdir -p /tmp/ppm /tmp/pserc_outer /tmp/pserc
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc_outer
+          inner=$(find /tmp/pserc_outer -type f -name '*.zip' | head -n1)
+          test -n "$inner"
+          unzip -q "$inner" -d /tmp/pserc
+          echo '=== TERM HITS ==='
+          for term in 'internal_link' 'internal links' 'table' 'cannibal' 'duplicate' 'seo' 'design' 'pste' 'languagetool' 'external_link'; do
+            echo "--- $term ---"
+            grep -RniI --exclude='*.md' --exclude='*.txt' "$term" /tmp/ppm /tmp/pserc | head -n 40 || true
+          done
+          echo '=== RELEVANT FILENAMES ==='
+          find /tmp/ppm /tmp/pserc -type f | grep -Ei 'link|table|seo|design|pste|duplicate|cannibal|quality|validator|check' | head -n 200 || true
