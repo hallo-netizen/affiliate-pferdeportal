@@ -9,25 +9,25 @@ STATUS: AKTIV
 Isolierter Arbeitsraum für die laufende Produktvergleichs-Fachskalierung.
 
 **AKTUELL:**  
-Technik bleibt stehen. A–J sind gegen die autoritative 175er Registry konsolidiert. Der aktive Block ist jetzt reine Markt-/Produktrecherche am ersten echten ungedeckten Registry-Key.
+Technik bleibt stehen. Die Research-Coverage steht source-bound bei 78 `EVIDENCE_PRESENT` / 60 `PARTIAL_AMBIGUOUS` / 37 `NO_GROUP_EVIDENCE`. Der aktive Block ist reine Markt-/Produktrecherche am nächsten echten Gap.
 
 **DU DARFST …**  
 Research-Evidence sammeln, Hersteller-/Modellkandidaten prüfen, Nutzungsklassen/Faktenmatrizen vorbereiten und die 175er Coverage source-bound fortschreiben.
 
 **DU DARFST NICHT …**  
-neue Plugins pro Gruppe/Batch bauen, Research-Funde automatisch zu Product Knowledge erklären, SEO starten, den Nachbarweg ändern, mergen oder veröffentlichen.
+neue Plugins pro Gruppe/Batch bauen, Research-Funde automatisch zu Product Knowledge erklären, manuell finale Produktpärchen festschreiben, SEO starten, den Nachbarweg ändern, mergen oder veröffentlichen.
 
 **ALS NÄCHSTES …**  
-`pferdedecken-deckengurte` mit aktuellen Hersteller-/Modellkandidaten und Herstellerquellen recherchieren; danach ausschließlich den nächsten echten `NO_GROUP_EVIDENCE`-Gap aus der konsolidierten Coverage-Map nehmen.
+`mistlagerung` recherchieren; danach ausschließlich den nächsten echten `NO_GROUP_EVIDENCE`-Gap aus der aktuellen Coverage-Fortschreibung nehmen.
 
 ## BRANCH
 
 `hobbyroom/productvergleich-workflow-v070-20260908`
 
-Frisch gelesener Head vor diesem Statuswrite:
-`639c416e833dc8d9458203d6d1ed185eba03744b`
+Frisch gelesener Head vor den jüngsten Statuswrites:
+`2125c49b5cb03b5913cf039a1a81f9ce0de70604`
 
-Dieser HOBBYRAUM-Write ändert ausschließlich die zuständige aktuelle Arbeitsnavigation und setzt keine neue Fach-/Produktwahrheit neben die Coverage-Akte.
+Die nachfolgenden Statuswrites ändern nur CURRENT/HOBBYRAUM und keine Produktwahrheit.
 
 ## SICHERER TECHNISCHER STAND
 
@@ -37,61 +37,61 @@ UPC 0.8.5:
 UPK 0.5.1:
 `17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
 
-Kein weiterer Code-/Plugin-Fix ist im aktuellen Arbeitsblock belegt.
+Kein weiterer Code-/Plugin-Fix ist im aktuellen Researchblock belegt.
 
-## LIVE-BEFUND
+## COVERAGE
 
-UPK 0.5.1 Batch abgeschlossen:
-- 17/17 alte Recherchegruppen verarbeitet;
-- PASS 6;
-- TEIL-PASS 8;
-- BLOCKED 3;
-- pairing-ready 9.
-
-Grenze:
-Die alte Basis enthielt nur 102 Kandidaten und ist kein Markt-Vollständigkeitsbeleg.
-Keine globale Live-Paarzahl aus diesem Batch ableiten, solange die Produktvergleichs-Vorschau nicht separat gelesen wurde.
-
-## RESEARCH A–J / 175ER COVERAGE
-
-Autoritativer Coverage-Beleg:
+A–J-Checkpoint:
 `AKTENSCHRANK/25_MARKTRECHERCHE_COVERAGE_175_A_J_20260911.md`
 
-Source-bound Checkpoint:
-- `EVIDENCE_PRESENT`: 70;
-- `PARTIAL_AMBIGUOUS`: 57;
-- `NO_GROUP_EVIDENCE`: 48;
+Fortschreibung K–P:
+`AKTENSCHRANK/33_MARKTRECHERCHE_COVERAGE_DELTA_K_P_20260911.md`
+
+Aktuell:
+- `EVIDENCE_PRESENT`: 78;
+- `PARTIAL_AMBIGUOUS`: 60;
+- `NO_GROUP_EVIDENCE`: 37;
 - Summe: 175/175.
 
 Das ist **keine** Markt-Vollständigkeit und **kein** Pairing-Ready-Beleg.
-Der frühere Chat-Zwischenwert `129 / 52 / 77 / 46` ist verworfen.
 
-Fail-closed bleibt insbesondere die Registry-Kollision der sichtbaren Bezeichnung `Weidezaungeräte`:
-- `weidezaungeraete`;
-- `weide-zauntechnik-weidezaungeraete`.
+## FINALE ENTSCHEIDUNGSINSTANZ
 
-Keine stille Zusammenführung.
+Dauerbeleg:
+`AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
+
+Verbindlich:
+- Research/Product Knowledge liefert Produkte/Fakten;
+- SEO liefert Nachfrage-/Priorisierungssignale;
+- PRODUKTVERGLEICH-System/Plugin trifft die letzte Paar-/Dossierentscheidung;
+- neue/entfallene/geänderte Produkte müssen regelmäßig aus aktuellem Product Knowledge neu bewertet werden;
+- Paare dürfen dadurch entstehen, entfallen oder BLOCKED werden.
+
+Im aktuellen Researchblock werden **keine endgültigen Paarlisten manuell festgeschrieben**.
 
 ## NEXT ACTION
 
-1. Erster echter Gap: `pferdedecken-deckengurte`.
-2. Nur aktuelle konkrete Deckengurt-/Ersatzgurt-Produkte recherchieren; keine Brustverschlüsse, Beinschnüre, Longiergurte oder beliebiges Deckenzubehör hineinziehen.
-3. Herstellerquelle + exakte Produktidentität + tatsächliche Pferdedecken-Nutzung binden.
-4. Mindestens eine belastbare Nutzungsklassen-/Funktionsgrenze dokumentieren; keine bloße Shop-Terminologie übernehmen.
-5. Research-Fund bleibt Kandidat, bis Herstellerquelle + exakte Identität + gemeinsame Faktenmatrix + Sinnprüfung gebunden sind.
-6. Danach nächsten echten `NO_GROUP_EVIDENCE`-Gap aus Akte 25 nehmen.
-7. Erst nach einem großen belastbaren Datenblock eine **gebündelte** Aktualisierung des bestehenden Product Knowledge erwägen.
-8. Vor jeder Plugin-Übergabe: exakt auszugebende ZIP positiv + negativ/Mutation + kompletter Produktvergleichsworkflow.
+1. Aktiver Gap: `mistlagerung`.
+2. Nur konkrete kaufbare Produkte/Systeme binden; baurechtliche reine Dienstleistung/Planung nicht künstlich als Produkt behandeln.
+3. Herstellerquelle + exakte Produktidentität + Stall-/Mistlagerungsnutzung binden.
+4. Container, Mistplatte, Überdachung, mobile Lagerung und komplette Entmistungssysteme nicht ungeprüft als gleiche Produktklasse mischen.
+5. Research-Fund bleibt Kandidat bis Product Knowledge + Faktenmatrix + Sinnprüfung.
+6. Danach nächsten echten `NO_GROUP_EVIDENCE`-Gap nehmen.
+7. Erst nach großem Researchblock Product Knowledge gebündelt aktualisieren.
+8. Danach bestehende Pluginlogik hart darauf prüfen, ob finale Paarautorität + regelmäßige Neubewertung vollständig erzwungen werden; nur bei belegter technischer Lücke KISS-Fix.
+9. Vor jeder Plugin-Übergabe exakt auszugebende ZIP positiv + negativ/Mutation + kompletter Workflow.
 
 ## BLOCK-GRENZE
 
 BLOCK bei:
-- Research-Fund wird ohne Herstellerquellen-/Identitätsbeleg als Product Knowledge behandelt;
+- Research-Fund wird ohne Herstellerquellen-/Identitätsbeleg zu Product Knowledge;
+- manuell festgeschriebenes finales Produktpaar umgeht Pluginentscheidung;
+- SEO erzwingt fachlich unzulässige Paarung;
 - Markt-Vollständigkeit wird geschätzt;
 - blinder Cross-Product ohne Sinn-/Nutzungsebenenprüfung;
 - Top-N-/Pair-Cap reduziert Coverage;
 - mehrdeutige Registry-Keys werden still zusammengeführt;
-- neuer Pluginbau nur wegen eines Recherchebatches;
+- neuer Pluginbau nur wegen Researchbatch;
 - Plugin-Übergabe ohne exakten Positiv-/Negativ-/Gesamtworkflow-Beweis;
 - SEO-/Providerstart aus Research-Evidence;
 - Änderung an SEO/TEXT/ACM aus diesem Büro;
