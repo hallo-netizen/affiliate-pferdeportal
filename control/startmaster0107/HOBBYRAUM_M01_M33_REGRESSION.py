@@ -236,10 +236,10 @@ def m26():
     raw=hb.get("raw_context_binding")
     must(isinstance(raw,dict),"M26_RAW_CONTEXT_BINDING_MISSING")
     must(re.fullmatch(r"[0-9a-f]{64}",str(raw.get("source_snapshot_id") or "")) is not None,"M26_SOURCE_ID_BINDING_MISSING")
-    must(isinstance(raw.get("production_plan_header"),dict),"M26_PLAN_HEADER_BINDING_MISSING")
+    must("production_plan_header" not in raw,"M26_PLAN_HEADER_MUST_NOT_BE_H8_BOUND")
     must(isinstance(raw.get("workflow_release_item"),dict),"M26_RELEASE_ITEM_BINDING_MISSING")
     must(isinstance(raw.get("workflow_release_metadata"),dict),"M26_RELEASE_METADATA_BINDING_MISSING")
-    must(hb.get("worker_generated_raw_fields")==["fact_pack","production_plan_item"],"M26_WORKER_RAW_FIELDS_INVALID")
+    must(hb.get("worker_generated_raw_fields")==["fact_pack","production_plan_item","production_plan_header"],"M26_WORKER_RAW_FIELDS_INVALID")
     step=load(STEP7).get("instruction","")
     for token in ("Recherche/fact_pack","production_plan-Kontext","workflow_release-Kontext","stage_proofs MUSS exakt [] sein"):
         must(token in step,"M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:"+token)
@@ -357,7 +357,6 @@ def m32():
     must(sha(PPM)==h.PPM679_PACKAGE_SHA256 and sha(PSERC)==h.PSERC_FIX_PACKAGE_SHA256,"M32_BOUND_PACKAGE_HASH")
     src=HANDOFF.read_text(encoding="utf-8")
     must("if ppm_env else" in src and "PPM679_PACKAGE_REL" in src and "if pserc_env else" in src and "PSERC_FIX_PACKAGE_REL" in src,"M32_ENV_FALLBACK_MISSING")
-
 def m33():
     wf=(REPO/".github/workflows/pferde-atelier-endstempel.yml").read_text(encoding="utf-8")
     final=(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py").read_text(encoding="utf-8")
