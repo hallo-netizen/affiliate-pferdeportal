@@ -444,6 +444,34 @@ def m36():
         up=root/"unknown-contract.json";dump(up,unknown)
         expect_exc(lambda:prov.validate_package_provenance(REPO,up),"H8_BOOTSTRAP_PROVENANCE_BINDING_CONTRACT_INVALID")
 
+def m37():
+    h=mod(HANDOFF,"m37_handoff")
+
+    nested={"ok":False,"status":"PSERC_WRAPPER_BLOCKED","detail":{"error_code":"INNER_TECHNICAL_BLOCK"}}
+    expect_exc(lambda:h._raise_ppm_bridge_failure(nested),"PPM679_REAL_EXECUTION_BLOCKED:INNER_TECHNICAL_BLOCK")
+
+    reason_code={"ok":False,"detail":{"reason_codes":["INNER_REASON_CODE"]}}
+    expect_exc(lambda:h._raise_ppm_bridge_failure(reason_code),"PPM679_REAL_EXECUTION_BLOCKED:INNER_REASON_CODE")
+
+    generic={"ok":False,"status":"UNKNOWN"}
+    try:
+        h._raise_ppm_bridge_failure(generic)
+    except h.Blocked as exc:
+        must(str(exc)=="PPM679_REAL_EXECUTION_BLOCKED","M37_GENERIC_BLOCK_REASON_INVENTED:"+str(exc))
+    else:
+        raise Fail("M37_GENERIC_BLOCK_NOT_BLOCKED")
+
+    repairable={"ok":False,"detail":{"error_code":"BLOCKED_CONTENT_M37_SAMPLE","reason":"existing content finding"}}
+    try:
+        h._raise_ppm_bridge_failure(repairable)
+    except h.RepairRequired as exc:
+        must(exc.source=="ppm_content_quality","M37_REPAIR_SOURCE_CHANGED")
+        must(any(x.get("error_code")=="BLOCKED_CONTENT_M37_SAMPLE" for x in exc.findings if isinstance(x,dict)),"M37_REPAIR_FINDING_LOST")
+    except Exception as exc:
+        raise Fail("M37_REPAIRABLE_RECLASSIFIED:"+str(exc))
+    else:
+        raise Fail("M37_REPAIRABLE_NOT_REPAIR_REQUIRED")
+
 def m35_machine_proof_selftest():
     good="""$imp=PPM679_Admin::import_fact_pack_bundle($bundle);
 $expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
@@ -462,7 +490,7 @@ CASES=[
 ("M01",m01),("M02",m02),("M03",m03),("M04",m04),("M05",m05),("M06",m06),("M07",m07),("M08",m08),("M09",m09),("M10",m10),
 ("M11",m11),("M12",m12),("M13",m13),("M14",m14),("M15",m15),("M16",m16),("M17",m17),("M18",m18),("M19",m19),("M20",m20),
 ("M21",m21),("M22",m22),("M23",m23),("M24",m24),("M25",m25),("M26",m26),("M27",m27),("M28",m28),("M29",m29),("M30",m30),
-("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36)]
+("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36),("M37",m37)]
 
 def _run_ordered(cases,phase):
     results=[]
@@ -502,14 +530,14 @@ def main(argv):
     if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only] | --case MXX | --proof-selftest M28|M35")
 
     # Repair phase: do not duplicate already-proven old positives while an open
-    # regression still fails. Once M26-M36 are resolved, automatically run the
-    # one required final M01-M36 suite on the same head.
+    # regression still fails. Once M26-M37 are resolved, automatically run the
+    # one required final M01-M37 suite on the same head.
     if open_only:
-        open_results=_run_ordered(CASES[25:],"OPEN_M26_M36")
+        open_results=_run_ordered(CASES[25:],"OPEN_M26_M37")
         if open_results is None:return 2
         print("OPEN_REGRESSIONS_PASS",flush=True)
 
-    results=_run_ordered(CASES,"FINAL_M01_M36")
+    results=_run_ordered(CASES,"FINAL_M01_M37")
     if results is None:return 2
 
     # Required final re-check against the last real production regression.
