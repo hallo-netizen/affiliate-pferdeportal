@@ -1,159 +1,87 @@
-# TEXT – HOBBYRAUM
+# PFERDE ATELIER – TEXT – HOBBYRAUM
 
-STAND: 2026-09-09
-STATUS: **BLOCKED – EXISTING FACH-AUTHORITY NOT FOUND / FIX_FORBIDDEN**
-
-## EINZIGE ARBEITSWAHRHEIT
-
-Aktueller Stand:
-`CURRENT_STATE.md`
-
-Autoritative aktuelle Fehlerquelle:
-`QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260905.md`
-
-Technischer Corridor:
-- `TECHNICAL_CORRIDOR_ROOTCAUSE_20260907.md`
-- `TECHNICAL_CORRIDOR_MATRIX_20260907.md`
-
-Ziel:
-`QUELLEN_AKTUELL/03_ZIELVERTRAG_AKTUELL_20260905.md`
-
-WARUM:
-`protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-
-## CURRENT MAIN / DISPATCHER
-
-`main = 93ba987c56f7b08ffba009210e3012c036fec18d`
-
-`codex-chat-launcher = 93ba987c56f7b08ffba009210e3012c036fec18d`
-
-PR #107:
-permanenter Dispatcher / offen / niemals mergen.
+STAND: 2026-09-11
+STATUS: AKTIV – M37 HISTORY_AUTHORITY_MAINTENANCE
 
 ## AKTUELLE ARBEIT
 
-**Kein Produktfix. Kein Realtest. Read-only Corridor-Frage abgeschlossen – Produktionsweg BLOCKED.**
+Nur Phase 1 des vorhandenen Maschinenwegs:
+M37 als reale fortlaufende History-Regression in die bestehende Matrix und den bestehenden Runner aufnehmen.
 
-Current State bindet:
-- B16 als aktuellen Liveblocker;
-- `FIX_FORBIDDEN`;
-- keinen Produktkandidaten;
-- zwei bestätigte bestehende Autoritätslücken:
-  1. NEW-Link-Provenienz;
-  2. `design_format`-Evidence-Semantik.
-- die zulässige Suche nach einer bereits existierenden gemeinsamen Autorität außerhalb STARTMASTER0107 ist negativ abgeschlossen:
-  `EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`.
+Aktueller Main:
+`a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6`
 
-Der sichtbare LanguageTool-Stop wird nicht separat repariert.
+Aktiver äußerer Liveblocker:
+`PPM679_REAL_EXECUTION_BLOCKED`
+
+Produktions-Rootcause: UNKNOWN bis neuer Realtest.
+
+History-Kandidat:
+- Branch: `hobbyroom/m37-history-authority-20260911`
+- Head: `245b596f9d6dd67c759527a0f211dbe957f4e34f`
+- erlaubt: ausschließlich bestehende Fehlermatrix + bestehender Regressionrunner;
+- erwartet: unveränderter Main M01–M36 PASS; History-Kandidat erster neuer FAIL exakt M37;
+- ausdrücklich kein Handoff-/Produktfix in dieser Phase.
 
 ## NEXT ACTION
 
-**BLOCKED – kein technischer Reparaturschritt innerhalb der aktuellen Hard Rules zulässig.**
+Bestehenden `hardlock-base` auf dem History-Kandidaten ausführen lassen.
+Nur bei `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37` plus hardlock/hardlock-base PASS darf die History-Autorität integriert werden.
+Danach Hobbyraum auf PRODUCT_FIX M37 umstellen und den Handoff-Fix separat prüfen.
 
-Die gebundene Read-only-Frage ist abgeschlossen:
-`EXISTING_OUTSIDE_STARTMASTER_FACH_AUTHORITY = NOT_FOUND`.
+## VERBOTEN
 
-Damit gilt:
-- keine neue Linklogik;
-- keine neue `design_format`-Bedeutung;
-- keine neue Stage;
-- kein neuer Validator;
-- kein neuer Executor/Runner/Workflow;
-- kein Produktkandidat;
-- kein M37;
-- kein weiterer 7/7-Realtest.
+- History-Autorität und Produktfix in einem Kandidaten mischen;
+- neuer Runner/Gate/Controller/Sidecar;
+- PPM/PSERC/PSTE/Textmaschine/Recherche/SEO/Links/Tabellen/Design verändern;
+- Rootcause raten;
+- Produktionslauf vor abgeschlossenem Phase-2-PASS;
+- WordPress-Write;
+- Publish.
 
-Erst wenn eine **autoritative externe Fach-/Architekturentscheidung** die fehlenden NEW-Link- und `design_format`-Verträge bereitstellt oder die Hard Rules ausdrücklich ändert, darf der technische Workflow fortgesetzt werden.
+HOBBYROOM_WORK_LOCK_V1
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
+OFFICE: TEXT
+MAIN_SHA: a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6
+ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_BLOCKED
+PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
+RECOVERY_BASE_SHA: bb005a5324a0a6270aacb52b5927613bde1ab4bc
+ACTIVE_HISTORY_CASE: M37
+HISTORY_EXPECTED_FAIL: M37
+CANDIDATE_BRANCH: hobbyroom/m37-history-authority-20260911
+CANDIDATE_HEAD_SHA: 245b596f9d6dd67c759527a0f211dbe957f4e34f
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+CHECK_PAUL: PASS
+CHECK_HISTORY: PASS
+CHECK_LAST_GOOD: PASS
+CHECK_NEIGHBORS: PASS
+CHECK_REPEAT_CLASS: PASS
+CHECK_POS_NEG: PASS
+CHECK_INVARIANTS: PASS
+HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
+HISTORY_SOURCE_BLOB_SHA: a63405267b1c7b6db42af58af67cb459e097887d
+HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+HISTORY_PROOF_RUNNER_BLOB_SHA: cf0bcd52af2b76971f0345061853e32a161594b0
+PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
+PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
+ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md
+ERROR_SOURCE_BLOB_SHA: 026098f9ee20d063539f9f0d4f03a2c2ea112516
+CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
+CURRENT_STATE_BLOB_SHA: 8db67dc4000b33cfa1d80e9c16d93be63155aaa7
+DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
+DECISION_SOURCE_BLOB_SHA: 0cf9e1eb3744add9e79f1eab5b19fc8892945b04
+STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
+STANDARD_SOURCE_BLOB_SHA: 8c90de4920ec81e10f3952bbd52208fad5a42367
+PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/M37_ARBEITSPROTOKOLL_20260911.md
+PROTOCOL_SOURCE_BLOB_SHA: 48160bde2da6c94598eea8b80fb296f9fa1f342f
+INTEGRATION_ALLOWED: true
+END_HOBBYROOM_WORK_LOCK_V1
 
-Danach bleibt die bereits festgelegte Reihenfolge:
-1. B16 als fortlaufende ausführbare History-Regression aufnehmen;
-2. genau einen konsolidierten KISS-Kandidaten;
-3. Positiv/Negativ/Invarianten;
-4. erst danach neuer Realtest.
+## VERWEISE
 
-## KEIN AKTIVER KANDIDAT
-
-CANDIDATE_BRANCH: NONE  
-CANDIDATE_HEAD_SHA: NONE  
-INTEGRATION_ALLOWED: false
-
-Der geparkte LT-Branch
-`hobbyroom/languagetool-runtime-rebind-20260907`
-ist nur historische Beweisquelle und kein Integrationskandidat.
-
-## PARALLELBRANCH
-
-Alternative:
-`alternative/seo-text-central-machine-20260908`
-
-Fresh Head:
-`3dffea336412e8df6c112d82adece38e2e1c69df`
-
-PR #195:
-offen / Draft / isoliert.
-
-Parallelbranch-Fresh-Check:
-- technischer ACM-Kandidat `573cfa2fdf472d338586f55cae2e9b7257f40413`;
-- dokumentierter Branchstand beim Check `3dffea336412e8df6c112d82adece38e2e1c69df`;
-- P3 aktuell BLOCKED bei P26-Testabdeckung;
-- P8 SUCCESS;
-- keine Übernahme dieser Parallelwahrheit in den Original-Fachstatus.
-
-Aus diesem Originalweg:
-- nicht verändern;
-- nicht mergen;
-- keine Statuswahrheit übernehmen.
-
-## NICHT ANFASSEN
-
-- SEO-5-Felder-Handoff;
-- Textmaschine/Fachregeln;
-- Tabellen-/Link-/LanguageTool-/Designregeln;
-- PPM/PSERC/PSTE-Regeln;
-- Single Door;
-- Publish-Grenze;
-- WordPress;
-- PR #107 mergen;
-- PR #195 verändern;
-- historische Artikel/Pläne als NEW-Produktionsquelle.
-
-## AUTORITATIVE BLOB-BINDUNGEN
-
-CURRENT_STATE:
-`320a9f198a51835e17643192492dc91a8ed841fd`
-
-Fehlerquelle:
-`06a45d966e06ae06f87640fe78fe1bff592161d3`
-
-Protokoll:
-`90410a089119d5abbd354aaaf00939b9d5794828`
-
-Änderungsregister:
-`0cf9e1eb3744add9e79f1eab5b19fc8892945b04`
-
-Hobbyraum-Standard:
-`8c90de4920ec81e10f3952bbd52208fad5a42367`
-
-Corridor-Matrix:
-`3b3eacc9dcce82fcec12d76fb505c04de076e62d`
-
-Corridor-Rootcause:
-`93fe9ac6df12faef654dfdba5e08f35f83362b94`
-
-Paul:
-`08fee3940a8f693ac6bb505df2e083b8515e2dd9`
-
-Zielvertrag:
-`9150da14699e319381f9119cebfcee90233c3521`
-
-## SCHUTZ
-
-Ruleset:
-`Pferde Atelier Main Hardlock`
-
-- active;
-- required: `hardlock`, `hardlock-base`;
-- bypass: leer;
-- current user bypass: never.
-
-Kein Publish.
+- CURRENT: `CURRENT_STATE.md`
+- aktuelle Fehlerquelle: `QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
+- Arbeitsprotokoll: `M37_ARBEITSPROTOKOLL_20260911.md`
+- dauerhafte Entscheidungen: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- Standard: `protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md`
