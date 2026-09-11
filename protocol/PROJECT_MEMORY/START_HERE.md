@@ -1,6 +1,6 @@
 # CAMPUS – START_HERE
 
-STAND: 2026-09-05
+STAND: 2026-09-11
 STATUS: AKTIVER CAMPUS-EINGANG
 
 ## 1-KLICK-ÜBERSICHT
@@ -38,19 +38,23 @@ Der Nutzer muss keine Dateipfade oder Fachbegriffe auswendig kennen.
 
 ## Aktueller technischer Hinweis
 
-Der Campus-Prototyp liegt noch NICHT auf `main`.
+Der Campus-Prototyp liegt noch NICHT vollständig auf `main`.
 
-Aktueller Ort:
-- Repository: `hallo-netizen/affiliate-pferdeportal`
-- Branch: `hobbyroom/project-memory-campus-v1-20260905`
-- Pfad: `protocol/PROJECT_MEMORY/`
+Der historische Basisbranch
+`hobbyroom/project-memory-campus-v1-20260905`
+ist nur Bootstrap-/Navigationsbasis und **keine aktuelle Fach-/Statuswahrheit** für Büros mit einem neueren aktiven Arbeitsbranch.
 
-Solange das so ist, ist für einen völlig neuen Chat ohne bekannten Repository-Kontext der robuste Einstieg:
+HARD RULE:
+Nach dem Routing zu einem ausdrücklich genannten Büro zuerst den **aktuellen gebundenen Büro-Ref/Branch** bestimmen und dort `CURRENT_STATE.md` + `HOBBYRAUM.md` lesen. Niemals einen Fachstand aus dem alten Campus-Basisbranch ableiten, wenn ein neuerer gebundener Fachbranch existiert.
 
-`Öffne im GitHub-Repo hallo-netizen/affiliate-pferdeportal den Branch hobbyroom/project-memory-campus-v1-20260905 und gehe zu protocol/PROJECT_MEMORY/START_HERE.md. Danach: Pferde-Atelier → TEXT/SEO.`
+Für den aktuell gebundenen Pferde-Atelier-PRODUKTVERGLEICH-Weg gilt:
+- Repository: `hallo-netizen/affiliate-pferdeportal`;
+- Branch: `hobbyroom/productvergleich-workflow-v070-20260908`;
+- Einstieg: `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`.
 
-Nach späterer Verlagerung/Merge in den dauerhaften Campus-Hauptort reicht die Alltagssprache allein.
+Für andere Büros deren eigenen aktuellen Ref frisch ermitteln; nicht vom Produktvergleichsbranch auf fremde Fachstände schließen.
 
+Nach späterer Verlagerung/Merge in einen dauerhaften Campus-Hauptort reicht wieder die Alltagssprache allein.
 
 ## HARD RULE – PROTOKOLLPFLICHT
 
@@ -66,4 +70,3 @@ aktuellen Campus-/Fachstand zuerst frisch lesen und nur tatsächlich betroffene 
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
