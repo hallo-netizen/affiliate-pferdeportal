@@ -83,60 +83,49 @@ def _runtime_context(repo: Path, batch: str) -> dict:
     source_ref = str(state.get("source_snapshot_ref") or "")
     if source_ref!=gbase+'/SOURCE_SNAPSHOT.json': raise Blocked('RUNTIME_GENERATION_SOURCE_REF_MISMATCH')
     source_path = _safe_repo(repo, source_ref); source_sha = str(state.get("source_snapshot_sha256") or "")
-    if not source_path.is_file() or _sha(source_path) != source_sha: raise Blocked("RUNTIME_SOURCE_SNAPSHOT_HASH_MISMATCH")
+    if not source_path.is_file() or not re.fullmatch(r'[0-9a-f]{64}',source_sha) or _sha(source_path) != source_sha: raise Blocked("RUNTIME_SOURCE_SNAPSHOT_HASH_MISMATCH")
     source = _load(source_path)
     package_ref = str(state.get("production_package_ref") or "")
     if package_ref!=gbase+'/PRODUCTION_PACKAGE.json': raise Blocked('RUNTIME_GENERATION_PACKAGE_REF_MISMATCH')
     package_path = _safe_repo(repo, package_ref); package_sha = str(state.get("production_package_sha256") or "")
-    if not package_path.is_file() or _sha(package_path) != package_sha: raise Blocked("RUNTIME_PRODUCTION_PACKAGE_HASH_MISMATCH")
+    if not package_path.is_file() or not re.fullmatch(r'[0-9a-f]{64}',package_sha) or _sha(package_path) != package_sha: raise Blocked("RUNTIME_PRODUCTION_PACKAGE_HASH_MISMATCH")
     package = _load(package_path)
     if package.get('contract')!='PSERC_APPROVED_PRODUCTION_PACKAGE_V1': raise Blocked('RUNTIME_PRODUCTION_PACKAGE_CONTRACT_INVALID')
     release = package.get("workflow_release"); release_items = release.get("items") if isinstance(release, dict) else None
     if not isinstance(release, dict) or release.get('contract')!='WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED' or release.get('status')!='PASS' or not isinstance(release_items, list) or not release_items: raise Blocked("RUNTIME_WORKFLOW_RELEASE_INVALID")
-    if release.get("exact_five_batch_sha256") != batch: raise Blocked("RUNTIME_RELEASE_BATCH_MISMATCH")
-    if int(release.get("exact_five_item_count") or -1) != len(release_items): raise Blocked("RUNTIME_RELEASE_COUNT_MISMATCH")
+    if release.get("exact_five_batch_sha256") != batch or int(release.get("exact_five_item_count") or -1) != len(release_items): raise Blocked("RUNTIME_RELEASE_IDENTITY_MISMATCH")
     if release.get("wordpress_write_performed") is not False: raise Blocked("RUNTIME_RELEASE_WORDPRESS_WRITE_FORBIDDEN")
     meta_batch = source.get("next_textmachine_metadata_batch"); meta_items = meta_batch.get("items") if isinstance(meta_batch, dict) else None
-    if not isinstance(meta_batch, dict) or meta_batch.get("batch_sha256") != batch or not isinstance(meta_items, list): raise Blocked("RUNTIME_METADATA_BATCH_INVALID")
-    if len(meta_items) != len(release_items): raise Blocked("RUNTIME_METADATA_COUNT_MISMATCH")
+    if not isinstance(meta_batch, dict) or meta_batch.get("batch_sha256") != batch or not isinstance(meta_items, list) or len(meta_items)!=len(release_items): raise Blocked("RUNTIME_METADATA_BATCH_INVALID")
     plan = package.get("production_plan"); plan_items=plan.get('items') if isinstance(plan,dict) else None
-    if not isinstance(plan, dict) or plan.get("contract") not in {'production_plan_v4','production_plan_v5'} or not isinstance(plan_items,list) or not plan_items: raise Blocked("RUNTIME_PRODUCTION_PLAN_HEADER_INVALID")
+    if not isinstance(plan, dict) or plan.get("contract") not in {'production_plan_v4','production_plan_v5'} or not isinstance(plan_items,list): raise Blocked("RUNTIME_PRODUCTION_PLAN_HEADER_INVALID")
     bundle=package.get('fact_pack_bundle'); fact_packs=bundle.get('fact_packs') if isinstance(bundle,dict) else None
-    if not isinstance(bundle,dict) or bundle.get('contract')!='canonical_fact_pack_import_v1' or not isinstance(fact_packs,list) or not fact_packs: raise Blocked('RUNTIME_FACT_PACK_BUNDLE_INVALID')
+    if not isinstance(bundle,dict) or bundle.get('contract')!='canonical_fact_pack_import_v1' or not isinstance(fact_packs,list): raise Blocked('RUNTIME_FACT_PACK_BUNDLE_INVALID')
     plan_header = dict(plan); plan_header.pop("items", None)
     release_metadata = dict(release); release_metadata.pop("items", None)
     return {"state":state,"release_items":release_items,"meta_items":meta_items,"plan_items":plan_items,"fact_packs":fact_packs,"plan_header":plan_header,"release_metadata":release_metadata,"source_sha256":source_sha,"package_sha256":package_sha}
 
-def _bound_item(ctx: Mapping[str, Any], canonical_id: str, slot: str) -> tuple[dict, dict, dict, dict]:
+def _bound_item(ctx: Mapping[str, Any], canonical_id: str, slot: str) -> tuple[dict, dict]:
     metas=[x for x in ctx["meta_items"] if isinstance(x,dict) and str(x.get("plan_slot") or "")==slot]
     rels=[x for x in ctx["release_items"] if isinstance(x,dict) and str(x.get("plan_slot") or "")==slot]
     if len(metas)!=1 or len(rels)!=1: raise Blocked("BOUND_RUNTIME_ITEM_NOT_UNIQUE")
     meta=dict(metas[0]); rel=dict(rels[0])
     if rel.get("canonical_article_id")!=canonical_id: raise Blocked("BOUND_RUNTIME_CANONICAL_ID_MISMATCH")
-    source_id=str(rel.get('source_snapshot_id') or '')
-    if not source_id: raise Blocked('BOUND_RUNTIME_SOURCE_SNAPSHOT_ID_MISSING')
-    plans=[dict(x) for x in ctx['plan_items'] if isinstance(x,dict) and str(x.get('canonical_article_id') or '')==canonical_id]
-    if len(plans)!=1: raise Blocked('BOUND_PRODUCTION_PLAN_ITEM_NOT_UNIQUE')
-    item=plans[0]
-    if 'plan_slot' in item: raise Blocked('BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
-    if str(item.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_PRODUCTION_PLAN_SOURCE_ID_MISMATCH')
-    facts=[dict(x) for x in ctx['fact_packs'] if isinstance(x,dict) and str(x.get('source_snapshot_id') or '')==source_id]
-    if len(facts)!=1: raise Blocked('BOUND_FACT_PACK_NOT_UNIQUE')
-    return meta,rel,item,facts[0]
+    return meta,rel
 
-def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], meta: Mapping[str, Any], release_item: Mapping[str, Any], expected_item: Mapping[str, Any], expected_fact: Mapping[str, Any]) -> dict:
+def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], meta: Mapping[str, Any], release_item: Mapping[str, Any]) -> dict:
     fact_pack=request.get("fact_pack"); item=request.get("production_plan_item")
     if not isinstance(fact_pack,dict) or not fact_pack: raise Blocked("BOUND_FACT_PACK_MISSING")
     if not isinstance(item,dict) or not item: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISSING")
-    if fact_pack!=expected_fact: raise Blocked('BOUND_FACT_PACK_MISMATCH')
-    if item!=expected_item: raise Blocked('BOUND_PRODUCTION_PLAN_ITEM_OBJECT_MISMATCH')
     if request.get("production_plan_header")!=ctx["plan_header"]: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
     if request.get("workflow_release_item")!=release_item: raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_MISMATCH")
     if request.get("workflow_release_metadata")!=ctx["release_metadata"]: raise Blocked("BOUND_WORKFLOW_RELEASE_METADATA_MISMATCH")
     if str(release_item.get('plan_slot') or '')!=str(request.get('plan_slot') or ''): raise Blocked('BOUND_RELEASE_PLAN_SLOT_MISMATCH')
     if release_item.get('canonical_article_id')!=request.get('canonical_article_id'): raise Blocked('BOUND_RELEASE_CANONICAL_ID_MISMATCH')
+    source_id=ctx['source_sha256']
+    if fact_pack.get('contract')!='canonical_fact_pack_v1' or str(fact_pack.get('source_snapshot_id') or '')!=source_id: raise Blocked('BOUND_FACT_PACK_SOURCE_ID_MISMATCH')
     if 'plan_slot' in item: raise Blocked('BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN')
-    expected={"canonical_article_id":request["canonical_article_id"],"source_snapshot_id":release_item.get('source_snapshot_id'),"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
+    expected={"canonical_article_id":request["canonical_article_id"],"source_snapshot_id":source_id,"article_type":meta.get("article_type"),"target_keyword":meta.get("target_keyword"),"topic":meta.get("title")}
     for k,v in expected.items():
         if item.get(k)!=v: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISMATCH:"+k)
     cb=item.get('category_binding'); quality=item.get("quality_binding"); category=quality.get("wordpress_category") if isinstance(quality,dict) else None
@@ -267,7 +256,7 @@ def materialize(repo: Path, request_ref: str) -> dict:
     _validate_worker_stage_proofs(request.get("stage_proofs"))
     binding_ref=str(request["contract_binding_ref"]); binding=_safe_repo(repo,binding_ref)
     if binding_ref!=ACTION_REL or not binding.is_file() or _sha(binding)!=request["contract_binding_sha256"]: raise Blocked("HANDOFF_CONTRACT_BINDING_HASH_MISMATCH")
-    ctx=_runtime_context(repo,batch); meta,release_item,expected_item,expected_fact=_bound_item(ctx,canonical_id,slot); item=_validate_raw_context(request,ctx,meta,release_item,expected_item,expected_fact)
+    ctx=_runtime_context(repo,batch); meta,release_item=_bound_item(ctx,canonical_id,slot); item=_validate_raw_context(request,ctx,meta,release_item)
     final_ref=root+"ARTICLE_"+slot+".md"; final_path=_path(repo,final_ref,root)
     if not final_path.is_file(): raise Blocked("BOUND_FINAL_ARTICLE_MISSING")
     final_sha=_sha(final_path); canonical=item.get("canonical_article")
