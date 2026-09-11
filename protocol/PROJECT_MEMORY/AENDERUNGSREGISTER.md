@@ -382,7 +382,7 @@ Nicht pauschal Dateien anfassen. Nur tatsächlich betroffene autoritative Stelle
 WAS:
 STATUS, Worker, Branch und NEXT ACTION im HOBBYRAUM dürfen bei Architektur-/Routingarbeiten nur geändert werden, wenn eine neue Arbeitszuweisung frisch belegt oder ausdrücklich vom Nutzer erteilt ist.
 WARUM:
-Bei der Paul-Isolationsreparatur wurde die Rollenarchitektur korrekt geändert, aber der TEXT-Hobbyraum fälschlich von einer bestehenden Paul-Bindung auf `TEXT-ARBEITSCHAT FÜHRT` umgedeutet.
+Bei der Paul-Isolationsreparatur wurde die Rollenarchitektur korrekt geändert, aber der TEXT-HOBBYRAUM fälschlich von einer bestehenden Paul-Bindung auf `TEXT-ARBEITSCHAT FÜHRT` umgedeutet.
 REGEL:
 Architektur ändert die Regeln um eine bestehende Arbeitsbindung herum; sie ersetzt die dynamische Bindung nicht aus eigener Annahme.
 
@@ -1213,3 +1213,38 @@ historischer Queraudit-/Entscheidungsbeleg, keine aktuelle Route.
 
 HARD RULE:
 Für aktuellen Ziel-/Arbeitsweg gelten ausschließlich ZIELVERTRAG_V2 + CURRENT_STATE + HOBBYRAUM. Historische PV-PLAN-Einträge dürfen keinen abgelösten Writer-, Draft-, Extension- oder Gruppenvergleichsweg reaktivieren.
+
+
+## PV-PLAN-023 – Research zuerst skalieren; Pluginänderungen nur gebündelt und hart geprüft
+STAND:
+2026-09-11 / VERBINDLICH.
+
+WAS:
+Die 175-Gruppen-Skalierung wird in klar getrennten Wahrheitsstufen geführt:
+`Research Candidate Evidence -> quellengebundenes Product Knowledge -> fachliche Paar-/Policyprüfung -> erst danach SEO/Dossier`.
+
+Während der Markt-/Produktrecherche wird **nicht pro Produktgruppe oder Recherchebatch eine neue Pluginversion erzeugt**. Research wird zunächst als großer belastbarer Datenblock gesammelt und gegen die 175er Registry konsolidiert. Erst wenn eine echte technische bzw. gebündelte Datenintegration nötig ist, wird das bestehende Product Knowledge einmal kontrolliert aktualisiert.
+
+WARUM:
+Der reale WordPress-Lauf zeigte, dass die frühere Alt-Recherchebasis nur 17 Gruppen / 102 Kandidaten umfasste. Ein technischer Batch kann vorhandene Kandidaten sauber prüfen/materialisieren, ersetzt aber keine Markt-Recherche. Häufige Pluginwechsel während reiner Datenrecherche erzeugen zusätzliche Installations-/Test-/Statusrisiken ohne fachlichen Nutzen.
+
+HARD RULE PLUGIN-ÜBERGABE:
+Kein Plugin an den Nutzer, bevor die **exakt auszugebende ZIP** lokal belegt hat:
+- Positivtest;
+- Negativ-/Mutationstest;
+- Gegenprüfung gegen den vollständigen aktuellen Produktvergleichsworkflow;
+- Fresh-ZIP-/Hashbindung nach betroffenem Releaseweg.
+
+HARD RULE RESEARCH:
+- möglichst viele relevante Hersteller/Modelle je Gruppe;
+- keine Markt-Vollständigkeitsbehauptung ohne Beleg;
+- keine Paarung ohne gleiche Produkt-/Nutzungsebene und gemeinsame Faktenmatrix;
+- kein blindes Kreuzprodukt;
+- keine künstliche Top-N-/Pair-Cap;
+- Research-Fund allein ist nie Product Knowledge.
+
+NAVIGATIONSKORREKTUR:
+`HANDLUNGSVERZEICHNIS.md` wurde am 11.09.2026 vom abgelösten eigenen Produktvergleich-Writer-/Draftweg auf den seit Zielvertrag V2 verbindlichen Weg `Dossier V2 -> bestehender SEO/TEXT-Fachworkflow -> bestehender Handoff -> ACM` korrigiert.
+
+WARUM NAVIGATION:
+Ein Wegweiser darf nach ARCH-043 keine veraltete dynamische bzw. abgelöste Fachroute als aktuell darstellen. Die Änderung erzeugt keine neue Architektur, sondern entfernt eine widersprüchliche alte Ausschilderung.
