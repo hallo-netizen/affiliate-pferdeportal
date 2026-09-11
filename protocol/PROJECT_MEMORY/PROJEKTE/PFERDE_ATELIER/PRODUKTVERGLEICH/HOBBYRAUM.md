@@ -5,18 +5,20 @@ STATUS: AKTIV
 
 ## AKTUELL
 
-175/175 Registry-Keys bearbeitet:
-- 131 `EVIDENCE_PRESENT`;
-- 44 `PARTIAL_AMBIGUOUS`;
-- 0 `NO_GROUP_EVIDENCE`.
+175/175 fachlich disponiert:
+- 150 V1-fähige Produkt-Evidence-Gruppen;
+- 25 `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`;
+- 0 ungeklärte Coverage-Gruppen.
 
-Aktueller Coverage-Beleg:
-`AKTENSCHRANK/52_COVERAGE_DELTA_SUBTYPE_24_20260911.md`.
+Dauerbeleg:
+`AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`.
 
-Die 24 Subtyp-/Nutzungsklassen sind fachlich fail-closed geklärt:
-`AKTENSCHRANK/51_FACHKLAERUNG_SUBTYPE_USE_CLASS_24_20260911.md`.
+Exakte UPC-0.8.6-Fresh-ZIP besitzt aktuell nur 7 Vergleichsprofile/Decision-Policies. Für 143 der 150 V1-fähigen Gruppen ist die maschinenfeste Profil-/Policy-Bindung noch offen.
 
-Technischer 0.8.6-Stand bleibt lokal hart grün. WordPress-Live für 0.8.6 ist noch offen.
+Readiness-Beleg:
+`AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`.
+
+Technischer 0.8.6-Stand bleibt lokal hart grün. WordPress-Live für 0.8.6 ist offen.
 
 ## BRANCH
 
@@ -24,25 +26,26 @@ Technischer 0.8.6-Stand bleibt lokal hart grün. WordPress-Live für 0.8.6 ist n
 
 ## NEXT ACTION
 
-Nur die drei `EXACT_PRODUCT_IDENTITY_REQUIRED`-Fälle in Registry-Reihenfolge:
-1. `hoflader-zubehoer`
-2. `anhaengerbeleuchtung`
-3. `wasserleitungen-im-stall`
+Erste V1-fähige Registry-Gruppe ohne aktuelles Profil:
+`pferdedecken-high-neck-decken` / `high-neck-decken`.
 
-Ziel:
-- konkrete aktuelle Hersteller-/Produktidentitäten binden;
-- nur innerhalb derselben bereits definierten Nutzungsklasse;
-- bei fehlender echter Serienproduktklasse fail-closed in die fachlich richtige Ursache verschieben;
-- keine künstlichen Produkte erzeugen.
+Jetzt source-bound binden:
+1. gemeinsame Faktenmatrix;
+2. zwingende Nutzungsklasse/Pairing-Regeln;
+3. Decision-Policy je Fact-Key;
+4. konkrete Herstellerprodukte dagegen prüfen.
 
-Danach Registry-Overlap 26.
+Danach die nächsten fachlich zusammenhängenden Profilgruppen in einem Datenblock vorbereiten.
+
+Keine finalen Produktpärchen manuell festlegen.
+Kein einzelner Pluginrelease pro Gruppe.
+Erst gebündelter Profil-/Faktenstand -> technische Materialisierung -> komplette Positiv-/Negativ-/Fresh-ZIP-Regressionsprüfung.
 
 ## BLOCK-GRENZE
 
-Kein Pluginbau aus Research/Fachklärung.
 Kein Research-Fund automatisch als Product Knowledge.
+Kein SEO vor fachlich zulässigem Kandidatenuniversum.
+Keine freie Decision-Policy-Erfindung ohne Fakten-/Quellenbindung.
 Keine finale Paarentscheidung außerhalb des Plugins.
-Kein SEO-/Providerlauf.
-Keine stillen Registry-Zusammenführungen.
 Kein Merge.
 Kein Publish.
