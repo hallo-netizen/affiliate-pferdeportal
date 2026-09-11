@@ -30,7 +30,10 @@
     "PR224_MACHINE_ENFORCED_REPAIR_RETURN_MERGED",
     "PR226_PPM_REPAIR_FINDINGS_RETURN_MERGED",
     "PR228_LANGUAGETOOL_VISIBLE_TEXT_INPUT_MERGED",
-    "PR230_FACT_PACK_SOURCE_ID_BINDING_MERGED"
+    "PR230_FACT_PACK_SOURCE_ID_BINDING_MERGED",
+    "PR236_BOUND_WORKER_DUTY_KISS_MERGED",
+    "PR237_FACHWORKFLOW_PLAN_HEADER_BINDING_MERGED",
+    "PR243_FACT_PACK_READINESS_BINDING_MERGED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -119,7 +122,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "630ff7f55a836afd39dfc6612db833bc1c218529921ce114ec5912f3bb7d40d8"
+    "bundle_sha256": "73d1030f0540559905e713ddccbb36f6d55e5ef98a214e89faf2a74c1c40267c"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -141,17 +144,60 @@
     "code": "PPM679_REAL_EXECUTION_BLOCKED",
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "evidence": "PR107 issuecomment-5632009778",
-    "root_cause": "UNKNOWN_UNTIL_FIRST_NESTED_PPM_REASON_IS_EXPOSED; the visible live terminal output reports only the aggregate PPM 6.7.9 blocker.",
+    "evidence": "PR107 issuecomment-5634231573",
+    "detail": "First freshly researched and generated article reached the real PPM 6.7.9/PSERC handoff and stopped at FACHWORKFLOW_PROOF_HANDOFF_BLOCKED.",
+    "root_cause": "UNKNOWN_UNTIL_FIRST_NESTED_PPM_REASON_FROM_THE_SAME_FIRST_ARTICLE_IS_EXPOSED",
     "first_nested_ppm_reason_status": "NOT_EXPOSED",
     "resolved": false,
     "publish_allowed": false
   },
-  "last_safe_main_sha": "66c4224d68532307f6c7f69aff81d1da04cae4e7",
-  "last_safe_change": "PR230 source-identity KISS fix merged after PR223/PR224/PR226/PR228; PR230 head passed Deterministic Entrance Gate and Immutable Base Hardlock; fresh real 7/7 then reached PPM 6.7.9 and stopped at PPM679_REAL_EXECUTION_BLOCKED. Production 7/7 is NOT PASS.",
-  "hobbyroom_status": "FREI",
+  "external_execution_blocker": {
+    "code": "CODEX_USAGE_LIMIT_REACHED",
+    "evidence": "PR107 issuecomment-5634273871",
+    "classification": "EXTERNAL_EXECUTION_AVAILABILITY_NOT_PROJECT_FAILURE",
+    "effect": "Read-only extraction of the first nested PPM reason from the same first-article task could not run.",
+    "resolved": false
+  },
+  "superseded_live_findings": [
+    {
+      "code": "REAL_RESEARCH_FACT_PACK_SOURCE_ACCESS_UNAVAILABLE",
+      "evidence": "PR107 issuecomment-5634082510",
+      "status": "SUPERSEDED_BY_LATER_LIVE_RUN",
+      "reason": "A later unchanged-main live run successfully researched and generated the first fresh article and reached real PPM; therefore HTTP 401 is not the current project blocker."
+    },
+    {
+      "code": "PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH",
+      "status": "RESOLVED_BY_PR237",
+      "merge_sha": "c2258ead34b506d0b06f85e639e1d776ee5268cf"
+    },
+    {
+      "code": "BLOCKED_FACT_PACK_IMPORT_ITEM_INVALID",
+      "status": "RESOLVED_BY_PR243",
+      "merge_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc"
+    }
+  ],
+  "latest_live_evidence": {
+    "main_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
+    "dispatcher_pr": 107,
+    "first_article_title": "Das Wichtigste über Hindernisstangen für Pferde",
+    "first_article_target_keyword": "Hindernisstangen für Pferde",
+    "research_completed": true,
+    "article_generated": true,
+    "real_ppm_reached": true,
+    "ppm_pass": false,
+    "sequence_107008_reached": false,
+    "publish_performed": false
+  },
+  "last_safe_main_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
+  "last_safe_change": "Guard-green merged baseline after PR236, PR237 and PR243. This is NOT a production PASS: the first fresh article reaches the real PPM 6.7.9/PSERC handoff and is still BLOCKED before 107008.",
+  "hobbyroom_status": "BLOCKED",
+  "hobbyroom_branch": "hobbyroom/ppm-inner-reason-visibility-20260911",
+  "hobbyroom_head_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
+  "hobbyroom_blocker": "CODEX_USAGE_LIMIT_REACHED before read-only extraction of the nested PPM reason; no functional hobbyroom change is committed.",
   "next_action": {
-    "goal": "Expose the first nested PPM 6.7.9 reason from the same bound 107007 live path. If it is already classified as repairable by the existing repair-return policy, return only the same bound current_item for correction and rerun the same handoff. If it is technical/binding/hash/identity/publish related, stop and fix only that root cause.",
+    "goal": "When Codex Cloud is available again, retry exactly the read-only same-task diagnosis requested in PR107 issuecomment-5634272023: expose the first nested PPM 6.7.9/PSERC reason for the already first freshly researched/generated article. No new article, no new 7/7 run and no code change before that diagnosis.",
+    "if_same_task_artifacts_unavailable": "Only then use hobbyroom/ppm-inner-reason-visibility-20260911 for the smallest observability-only change: keep the handoff BLOCKED but surface the already returned first inner non-repairable PPM/PSERC reason instead of collapsing it to PPM679_REAL_EXECUTION_BLOCKED. Positive and negative test, existing hash chain and existing hardlocks are mandatory before merge. Then run only one fresh first-article live path to the same PPM boundary.",
+    "after_nested_reason": "Repair only the proven root cause. First prove one article end-to-end through real LanguageTool and real PPM. Only after that resume the remaining batch and finally 107008; stop before publish.",
     "must_fail_closed_on": [
       "wrong source hash",
       "stale source generation",
@@ -171,8 +217,10 @@
       "new sidecar truth",
       "worker-authored PASS",
       "content or quality rule change",
-      "auto-publish"
+      "auto-publish",
+      "new architecture",
+      "symptom fix before root cause"
     ],
-    "proof_after_fix": "Fresh real 7/7 through the unchanged bound production path to 107008; stop before publish. Component/selftests remain guardrails and do not by themselves grant production PASS."
+    "proof_after_fix": "One fresh first article must pass the unchanged real LT/PPM path first. Only then complete a fresh 7/7 through unchanged 107007 to 107008 and stop before publish. Component/selftests remain guardrails and do not grant production PASS."
   }
 }
