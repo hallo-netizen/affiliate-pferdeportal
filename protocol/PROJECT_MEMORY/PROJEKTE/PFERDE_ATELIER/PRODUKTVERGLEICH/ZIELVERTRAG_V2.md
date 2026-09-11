@@ -16,7 +16,7 @@ Regendecken ist nur die erste Proofgruppe, nicht der Zielumfang.
 
 ## Verbindlicher Gesamtfluss
 
-`alle Vergleichsgruppen -> möglichst vollständiges Produktwissen je Gruppe -> alle fachlich zulässigen A-vs-B-Paare -> SEO-Nachfrage/Kannibalisierung -> gebundene Fachpolicy -> Vergleichsdossier V2 -> später SEO/TEXT -> bestehender Handoff -> ACM -> signierter WordPress-DRAFT -> STOP`
+`alle Vergleichsgruppen -> möglichst vollständiges Produktwissen je Gruppe -> PRODUKTVERGLEICH bestimmt alle fachlich zulässigen A-vs-B-Paare -> SEO-Nachfrage/Kannibalisierung -> PRODUKTVERGLEICH trifft finale Paar-/Dossierentscheidung -> gebundene Fachpolicy -> Vergleichsdossier V2 -> später SEO/TEXT -> bestehender Handoff -> ACM -> signierter WordPress-DRAFT -> STOP`
 
 Kein Auto-Publish.
 
@@ -104,6 +104,28 @@ Orchestriert nur den gebundenen bestehenden Produktionsweg.
 ### AFFILIATE
 Liefert separat Angebot, Preis, Verfügbarkeit, Händler und Tracking. Commerce darf Fachauswahl/Fazit nicht verändern.
 
+## Finale Entscheidungsautorität und regelmäßige Neubewertung
+
+Die **letzte verbindliche Entscheidung**, ob ein konkretes Produktpaar als Vergleich zulässig ist und ein Dossier erhalten darf, liegt ausschließlich im PRODUKTVERGLEICH-System/Plugin.
+
+Research/Product Knowledge und SEO sind Eingabequellen:
+- Research/Product Knowledge liefert aktuellen Produktbestand, Identität, Herstellerfamilien und Fakten;
+- SEO liefert Nachfrage-, A-vs-B-, Keyword- und Kannibalisierungssignale;
+- weder Research noch SEO darf allein eine fachlich unzulässige Paarung freigeben.
+
+Das PRODUKTVERGLEICH-System muss wiederholbar aus dem **jeweils aktuellen gebundenen Produktwissen** neu entscheiden. Neubewertung ist insbesondere erforderlich bei:
+- neuen Produkten/Modellen;
+- Nachfolgern oder Abkündigungen;
+- geänderten Hersteller-/Familienzuordnungen;
+- geänderten Herstellerfakten;
+- neuen konkreten SEO-Vergleichsanfragen;
+- geänderten Vergleichsprofilen oder Decision-Policies.
+
+Dadurch können Paare neu entstehen, entfallen oder BLOCKED werden. Ein früher gültiger Vergleich besitzt keine dauerhafte Freigabe allein aufgrund seines Alters.
+
+Dauerbeleg:
+`AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`.
+
 ## Fachregeln je Artikel
 
 - exakt zwei gebundene Produkte;
@@ -170,8 +192,9 @@ Gesamtfreigabe erst wenn:
 5. globale Coverage-/Resume-/Idempotenzprüfung PASS ist;
 6. Kosten-/SEO-/Dossier-/Audit-Schutzregeln PASS bleiben;
 7. mindestens ein echter positiver Dossier-V2-Livefall vorliegt;
-8. spätere SEO/TEXT-/ACM-Anbindung separat im zuständigen Nachbarweg freigegeben und positiv/negativ geprüft ist;
-9. kein Auto-Publish entsteht.
+8. regelmäßige Neubewertung aus aktuellem Product Knowledge neue/entfallene/geänderte Produkte fail-closed korrekt in das zulässige Paaruniversum einbezieht;
+9. spätere SEO/TEXT-/ACM-Anbindung separat im zuständigen Nachbarweg freigegeben und positiv/negativ geprüft ist;
+10. kein Auto-Publish entsteht.
 
 **Dynamischer Fortschritt gehört ausschließlich in `CURRENT_STATE.md` und `HOBBYRAUM.md`, nicht in diesen Zielvertrag.**
 
