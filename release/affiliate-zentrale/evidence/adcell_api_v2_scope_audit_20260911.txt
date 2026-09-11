@@ -1,0 +1,60 @@
+ADCELL API-V2 SCOPE / ABSCHLUSS-AUDIT
+Date: 2026-09-11
+
+CANONICAL BASE BEFORE ADCELL SOURCE CHANGE
+- candidate: 6.72.8
+- source manifest: 816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d
+- source files: 26
+- no ADCELL source fix committed in this audit
+- no ADCELL plugin candidate accepted
+
+HARD DISCOVERIES AGAINST CANONICAL SOURCE
+1. ADCELL specialist automation link points to affiliate-portal-automation&provider=adcell.
+2. Existing automation/intake path is Awin-oriented and does not provide safe ADCELL provider isolation.
+3. Canonical ADCELL automation still expects an explicitly configured ADCELL CSV export URL.
+4. User-provided ADCELL API-v2 documentation proves Program/export plus Promotion CSV/Banner/Deeplink paths, so normal operation can be API-driven.
+5. Exact API-v2 request authentication is not currently authoritatively proven outside the logged-in documentation UI.
+
+ERROR AUTHORITY
+- AF-058: ADCELL provider routing falls through to Awin path.
+- AF-059: ADCELL normal automation still depends on manual CSV export URL instead of documented API-v2 discovery/creative paths.
+- AF-060: discarded scratch used contradictory unproven auth assumptions.
+Authoritative details: AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md
+
+DISCARDED LOCAL SCRATCH
+A local 6.72.18 scratch was inspected only as a prototype and is NOT a candidate because:
+- base was an unaccepted 6.72.17 test line rather than canonical 6.72.8;
+- standalone adapter test assumed query token auth;
+- scratch plugin implementation used Basic Auth;
+- neither auth mechanism was authoritatively established for the real API-v2 requests;
+- no canonical WordPress/MariaDB E2E existed.
+
+ACTUALLY EXECUTED LOCAL CHECKS ON THE DISCARDED SCRATCH
+- PHP lint: 22 PHP files / 0 failures.
+- isolated ADCELL adapter prototype test: 18/18 assertions PASS.
+  Covered accepted/active/allowlist gates, stale irrelevant programme blocking, inactive/pending blocking, empty allowlist fail-closed, CSV/banner/deeplink filtering, host validation and malformed-response blocking.
+- existing Pferde-Atelier classifier samples:
+  POSITIVE Regendecke -> pferdedecken-regendecken
+  NEGATIVE Tarot/Kartenlegen -> blocked
+  NEGATIVE toy/Playmobil horse -> blocked
+
+IMPORTANT: These are prototype/scratch checks only and MUST NOT be promoted to plugin PASS.
+
+NOT EXECUTED / STILL OPEN
+- exact ADCELL API-v2 authentication proof;
+- canonical 6.72.8-derived ADCELL source fix;
+- canonical ADCELL runtime positive test;
+- canonical ADCELL runtime negative tests;
+- Awin/OTTO + provider pause/veto + creative/output regression after ADCELL fix;
+- full bound workflow after ADCELL fix;
+- Fresh-Unpack after ADCELL fix;
+- source/ZIP byte identity after ADCELL fix;
+- real ADCELL API request;
+- WordPress/MariaDB ADCELL end-to-end;
+- real product/banner/deeplink output.
+
+LIVE BLOCKER
+User currently cannot access ADCELL account/API documentation because the password was overwritten and the password-reset mail path is not working. No live PASS is possible while this remains unresolved.
+
+CURRENT BOUND NEXT ACTION
+Prove the exact ADCELL API-v2 authentication contract from authoritative ADCELL documentation. Only then rebuild the smallest provider-routing/API-v2 allowlist fix from canonical 6.72.8 and run the full positive/negative/regression/fresh-package gate before any plugin handoff.
