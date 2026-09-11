@@ -13,79 +13,80 @@ STATUS: CLOSED / NICHT MEHR ZIELARCHITEKTUR
 STATUS: CLOSED / ECHTER WP-LIFECYCLE ALS PFLICHT ERHALTEN
 
 ## PV-LIVE-001 – falsches PASS bei null geeigneten Vergleichen
-STATUS: CLOSED / LIVE 0.8.1–0.8.3 BESTÄTIGT / REGRESSION AKTIV
+STATUS: CLOSED / LIVE 0.8.1–0.8.4 BESTÄTIGT / REGRESSION AKTIV
 
 ## PV-ERR-004 – PASS ohne realen Dossier-Receipt
 STATUS: CLOSED IM 0.8.1+ / REGRESSION AKTIV
 
 ## PV-COST-082-001 – bezahlte Produkt-/Paar-Zwischenergebnisse nicht dauerhaft genug gebunden
-STATUS: CLOSED / LOKAL + WORDPRESS-LIVE 0.8.2/0.8.3 PASS
+STATUS: CLOSED / LOKAL + WORDPRESS-LIVE 0.8.2–0.8.4 PASS
 
 ## PV-FACH-083-001 – Fachinterpretation nicht vollständig im Dossier gebunden
 STATUS: CLOSED / 0.8.3 LOCAL HARD + WORDPRESS-LIVE-REGRESSION PASS
 
 ## PV-SCALE-084-001 – Proofgruppe statt vollständiger Vergleichsgruppen-Abdeckung
 
-STATUS: PARTIAL CLOSED / 0.8.4 REGISTRY+COVERAGE LOCAL HARD PASS / WORDPRESS-LIVE-RETEST OFFEN / PRODUKTRECHERCHE+PROFILE 175-GRUPPEN-GESAMTZIEL WEITER OFFEN
+STATUS: INFRASTRUKTUR CLOSED / 0.8.4 LOCAL HARD + WORDPRESS-LIVE PASS / FACHLICHE 175-GRUPPEN-RECHERCHE+PROFILE WEITER OFFEN
 
 ### Ursprungsbefund
 
-0.8.3 kannte in der auswählbaren Profilkonfiguration nur Regendecken.
-Die autoritative Portalstruktur enthält jedoch:
-- 329 Produktseiten;
-- 1124 Themenkategorien;
-- **175 eindeutige Produktgruppen mit eigener `Vergleich`-Kategorie**.
+0.8.3 kannte nur die Proofgruppe Regendecken.
+Die autoritative Portalstruktur enthält 175 Vergleichs-Produktgruppen.
 
-Regendecken ist 1/175.
+### KISS-Fix 0.8.4
 
-### KISS-Fix 0.8.4 – lokal belegt
-
-0.8.4 ergänzt keine 175 PHP-Hardcodes, sondern eine portalgebundene Datenregistry + Coverage:
-- 175/175 Gruppen exakt aus Portalquelle gebunden;
-- jede Gruppe sichtbar;
-- fehlendes Profil/Policy/Inventar bleibt sichtbar OPEN/BLOCKED;
+- 175/175 Gruppen portalgebunden;
+- jede Gruppe live sichtbar/selectable;
+- Readiness sichtbar;
 - keine stille Auslassung;
-- keine willkürliche Gruppen-/Paarobergrenze;
-- Same Brand und fachlich unpassende Nutzung vor Providerkosten ausgesondert;
-- vollständiges Cross-Brand-Paaruniversum je vorbereiteter Gruppe;
+- keine Top-N-/Pair-Cap;
+- vollständiges Cross-Brand-Paaruniversum;
+- fachlich unpassende Paare vor SEO/Providerkosten BLOCK;
 - Coverage-Receipt;
-- Research-Kandidaten und Markt-Recherchevollständigkeit getrennt.
+- Research-Kandidaten und Markt-Recherchevollständigkeit strikt getrennt;
+- Key-Kollisionen fail-closed statt stiller Verschmelzung.
 
-### Harter Beleg 0.8.4
+### Harter lokaler Beleg
 
-Finale Fresh-ZIP:
-- 32/32 ausführbare Tests PASS;
-- PHP-Lint 48/48 PASS;
+- finale Fresh-ZIP 32/32 Tests PASS;
+- PHP-Lint 48/48;
 - Source↔ZIP 67/67;
 - Report-Hashes 66/66;
-- 175/175 Portalparität PASS;
-- Großtest 50 Produkte / 5 Hersteller -> 1000 Cross-Brand-Paare vollständig;
-- davon 500 fachlich vergleichbar, 500 falsche Nutzungsklasse sichtbar BLOCKED;
-- Reihenfolge/Dubletten verändern Coverage nicht;
+- 175/175 Portalparität;
+- 50 Produkte / 5 Hersteller -> 1000 Cross-Brand-Paare vollständig;
+- 500 fachlich sinnvoll, 500 falsche Nutzungsklasse BLOCKED;
 - fünf 0.8.4-Mutationen korrekt ROT.
 
-### Research-Hard-Rule
+### WordPress-Live-Beleg 0.8.4
 
-Der aktuelle Product-Knowledge-Recherchekatalog enthält Produktkandidaten, aber **keinen Markt-Vollständigkeitsbeleg**.
+Vor Lauf:
+- Version 0.8.4;
+- 175/175 Gruppen sichtbar;
+- Regendecken PAIRING_READY;
+- Research UNPROVEN;
+- 172 PROFILE_MISSING;
+- 2 Key-Kollisionen;
+- PSTE PASS/READY;
+- $0.0000 maximale neue Providerkosten.
 
-Daher 0.8.4:
-`research_completeness_status = UNPROVEN` für 175/175, bis echte gruppenspezifische Vollständigkeit bewiesen ist.
+Nach genau einem Regendecken-Gesamtworkflow:
+- `NO_ELIGIBLE_COMPARISONS`;
+- Provider-Aufrufe 0;
+- Kosten $0.0000;
+- SEO-PASS 0;
+- blockiert 8;
+- Dossiers 0.
 
-Vorhandene sinnvolle Paare dürfen bereits geprüft werden; fehlende Produkte/Hersteller bleiben als Recherchearbeit offen.
+Damit ist die **Registry-/Coverage-Infrastruktur 0.8.4 geschlossen**.
 
-### Portal-Key-Kollision
+### Weiter offener fachlicher Skalierungsauftrag
 
-Zwei autoritative Portal-Slugs besitzen denselben kurzen Key `weidezaungeraete`.
-0.8.4 verschmilzt sie nicht still, sondern zeigt `GROUP_KEY_COLLISION`.
-
-### Weiter offener Teil desselben Skalierungsziels
-
-Nach 0.8.4-LIVE-PASS:
+Kein Infrastrukturfehler, sondern noch nicht abgeschlossene Facharbeit:
 - Produktrecherche möglichst vollständig für alle 175 Vergleichsgruppen;
-- gruppenspezifische fachliche Profile/Decision-Policies;
+- gruppenspezifische Vergleichsprofile/Decision-Policies;
 - alle daraus sinnvollen A-vs-B-Paare;
-- globale Coverage ohne stille Lücke;
-- positiver Dossier-V2-Livefall.
+- Research-Vollständigkeit nur bei echtem Beleg;
+- positiver Dossier-V2-Livefall bei erstem realen SEO-PASS.
 
 Keine künstlichen SEO-PASS-Werte.
 Kein Writer/Draft/Publish.
