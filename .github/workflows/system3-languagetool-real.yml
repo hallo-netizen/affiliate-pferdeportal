@@ -1,4 +1,4 @@
-name: System3 LanguageTool Real
+name: System3 Real End-to-End Test
 
 on:
   pull_request:
@@ -9,13 +9,53 @@ on:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
-  languagetool-real:
+  real-end-to-end:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout candidate
         uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch and verify exact Codex same-task return
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/hallo-netizen/affiliate-pferdeportal/issues/comments/5632314085 \
+            -o /tmp/system3-codex-comment.json
+          python - <<'PY'
+          import base64, hashlib, json, re
+          from pathlib import Path
+
+          data = json.loads(Path('/tmp/system3-codex-comment.json').read_text(encoding='utf-8'))
+          assert data['user']['login'] == 'chatgpt-codex-connector[bot]', 'SYSTEM3_CODEX_RETURN_WRONG_AUTHOR'
+          assert data['issue_url'].endswith('/issues/232'), 'SYSTEM3_CODEX_RETURN_WRONG_PR'
+          app = data.get('performed_via_github_app') or {}
+          assert app.get('slug') == 'chatgpt-codex-connector', 'SYSTEM3_CODEX_RETURN_WRONG_APP'
+          body = data['body']
+          payload = body.split('\n\n [View task →]', 1)[0]
+          m = re.fullmatch(
+              r'SYSTEM3_ARTICLE_B64_BEGIN\n([A-Za-z0-9+/=]+)\nSYSTEM3_ARTICLE_B64_END\n'
+              r'SYSTEM3_ARTICLE_SHA256:([0-9a-f]{64})\nSYSTEM3_RETURN_PASS',
+              payload,
+          )
+          assert m, 'SYSTEM3_CODEX_RETURN_SCHEMA_FAIL'
+          raw = base64.b64decode(m.group(1), validate=True)
+          actual = hashlib.sha256(raw).hexdigest()
+          assert actual == m.group(2), 'SYSTEM3_CODEX_RETURN_SHA_FAIL'
+          assert actual == '0ade417f0b136c6047eb36693d2185934c356cfeaf1c65a161b83002a9022088', 'SYSTEM3_CODEX_RETURN_BINDING_FAIL'
+          Path('/tmp/system3-codex-output.md').write_bytes(raw)
+          print('SYSTEM3_CODEX_RETURN_REAL_PASS')
+          PY
       - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
@@ -50,20 +90,22 @@ jobs:
           done
           cat /tmp/lt.log
           exit 1
-      - name: Real positive and negative LanguageTool test on verified Codex output
+      - name: Run real LanguageTool on exact Codex bytes
         shell: bash
         run: |
           python - <<'PY'
+          import json
           from pathlib import Path
           from isolated_system3.language_tool import check_text, LanguageToolFail
 
-          article = Path('isolated_system3/codex_output.md').read_text(encoding='utf-8')
+          article = Path('/tmp/system3-codex-output.md').read_text(encoding='utf-8')
           result = check_text(article)
           assert result['status'] == 'PASS'
           assert result['version'] == '6.8'
           assert result['endpoint'] == 'http://127.0.0.1:8081/v2/check'
-          assert isinstance(result['matches'], list)
+          Path('/tmp/system3-language-evidence.json').write_text(json.dumps(result, ensure_ascii=False), encoding='utf-8')
           print('SYSTEM3_CODEX_OUTPUT_LANGUAGETOOL_REAL_PASS')
+          print('SYSTEM3_LANGUAGETOOL_MATCH_COUNT=' + str(result['match_count']))
 
           try:
               check_text('   ')
@@ -72,4 +114,40 @@ jobs:
               print('SYSTEM3_LANGUAGETOOL_NEGATIVE_PASS')
           else:
               raise SystemExit('SYSTEM3_LANGUAGETOOL_NEGATIVE_FAIL')
+          PY
+      - name: Bind real evidence and run fixed System3 process
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          evidence = json.loads(Path('isolated_system3/live_fixture/stage_evidence.json').read_text(encoding='utf-8'))
+          evidence['DRAFT']['article'] = Path('/tmp/system3-codex-output.md').read_text(encoding='utf-8')
+          evidence['LANGUAGE'] = json.loads(Path('/tmp/system3-language-evidence.json').read_text(encoding='utf-8'))
+          evidence['RULE_CHECK'] = {'status':'UNTRUSTED'}
+          evidence['QUALITY_CHECK'] = {'status':'UNTRUSTED'}
+          Path('/tmp/system3-runtime-evidence.json').write_text(json.dumps(evidence, ensure_ascii=False), encoding='utf-8')
+          PY
+          python -m isolated_system3.live_test \
+            --input isolated_system3/live_fixture/wordpress_input.json \
+            --evidence /tmp/system3-runtime-evidence.json \
+            --output /tmp/SYSTEM3-LIVE-001.json
+      - name: Prove sealed non-publishing output
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from isolated_system3.engine import _sha256
+          p = Path('/tmp/SYSTEM3-LIVE-001.json')
+          assert p.is_file(), 'SYSTEM3_FINAL_OUTPUT_MISSING'
+          e = json.loads(p.read_text(encoding='utf-8'))
+          assert e['contract'] == 'SYSTEM3_WORDPRESS_DRAFT_ENVELOPE_V1'
+          assert e['publish_allowed'] is False
+          assert e['wordpress_write_allowed'] is False
+          supplied = e.pop('envelope_hash')
+          assert supplied == _sha256(e), 'SYSTEM3_FINAL_ENVELOPE_HASH_FAIL'
+          assert e['result']['article'] == Path('/tmp/system3-codex-output.md').read_text(encoding='utf-8')
+          assert e['result']['trace'] == ['INGRESS','CAPSULE','RESEARCH','FACT_CHECK','DRAFT','LANGUAGE','RULE_CHECK','QUALITY_CHECK','OUTPUT_GATE','DONE']
+          print('SYSTEM3_REAL_END_TO_END_PASS')
           PY
