@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from isolated_system3.engine import ArticleProfile, System3Engine, System3Fail, _sha256
+from isolated_system3.independent_checks import build_quality_evidence, build_rule_evidence
 
 
 class LiveBoundaryFail(System3Fail):
@@ -42,9 +43,18 @@ def run_live_boundary(
     if not isinstance(evidence_raw, Mapping):
         raise LiveBoundaryFail("LIVE_EVIDENCE_SCHEMA_FAIL")
 
+    draft = evidence_raw.get("DRAFT", {}).get("article") if isinstance(evidence_raw.get("DRAFT"), Mapping) else None
+    if not isinstance(draft, str) or not draft.strip():
+        raise LiveBoundaryFail("LIVE_DRAFT_MISSING")
+
+    # Never trust supplied RULE_CHECK / QUALITY_CHECK verdicts. Recompute them here.
+    checked_evidence = dict(evidence_raw)
+    checked_evidence["RULE_CHECK"] = build_rule_evidence(raw, draft)
+    checked_evidence["QUALITY_CHECK"] = build_quality_evidence(draft)
+
     engine = build_engine(profile_registry)
     capsule = engine.ingress(raw)
-    result = engine.run(capsule, evidence_raw)
+    result = engine.run(capsule, checked_evidence)
 
     envelope = {
         "contract": "SYSTEM3_WORDPRESS_DRAFT_ENVELOPE_V1",
