@@ -46,7 +46,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "73d1030f0540559905e713ddccbb36f6d55e5ef98a214e89faf2a74c1c40267c",
+    "bundle_sha256": "13fd743b67e079877d0e99d7670b7041232ad4769e4533cea11c51eb336a9818",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -122,7 +122,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "73d1030f0540559905e713ddccbb36f6d55e5ef98a214e89faf2a74c1c40267c"
+    "bundle_sha256": "13fd743b67e079877d0e99d7670b7041232ad4769e4533cea11c51eb336a9818"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -155,8 +155,9 @@
     "code": "CODEX_USAGE_LIMIT_REACHED",
     "evidence": "PR107 issuecomment-5634273871",
     "classification": "EXTERNAL_EXECUTION_AVAILABILITY_NOT_PROJECT_FAILURE",
-    "effect": "Read-only extraction of the first nested PPM reason from the same first-article task could not run.",
-    "resolved": false
+    "effect": "Codex became available again; the exact read-only retry proved that the original first-article task workspace is no longer available.",
+    "resolved": true,
+    "resolution_evidence": "PR107 issuecomment-5637219382"
   },
   "superseded_live_findings": [
     {
@@ -190,14 +191,14 @@
   },
   "last_safe_main_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
   "last_safe_change": "Guard-green merged baseline after PR236, PR237 and PR243. This is NOT a production PASS: the first fresh article reaches the real PPM 6.7.9/PSERC handoff and is still BLOCKED before 107008.",
-  "hobbyroom_status": "BLOCKED",
+  "hobbyroom_status": "AKTIV",
   "hobbyroom_branch": "hobbyroom/ppm-inner-reason-visibility-20260911",
   "hobbyroom_sync_policy": "Before any functional hobbyroom edit, fast-forward hobbyroom/ppm-inner-reason-visibility-20260911 to the then-current canonical main. During freeze the branch must contain no functional divergence.",
-  "hobbyroom_blocker": "CODEX_USAGE_LIMIT_REACHED before read-only extraction of the nested PPM reason; no functional hobbyroom change is committed.",
+  "hobbyroom_blocker": "M37 observability candidate is active in PR247; full M01-M37 plus hardlock/hardlock-base proof is not yet complete.",
   "next_action": {
-    "goal": "When Codex Cloud is available again, retry exactly the read-only same-task diagnosis requested in PR107 issuecomment-5634272023: expose the first nested PPM 6.7.9/PSERC reason for the already first freshly researched/generated article. No new article, no new 7/7 run and no code change before that diagnosis.",
-    "if_same_task_artifacts_unavailable": "Only then use hobbyroom/ppm-inner-reason-visibility-20260911 for the smallest observability-only change: keep the handoff BLOCKED but surface the already returned first inner non-repairable PPM/PSERC reason instead of collapsing it to PPM679_REAL_EXECUTION_BLOCKED. Positive and negative test, existing hash chain and existing hardlocks are mandatory before merge. Then run only one fresh first-article live path to the same PPM boundary.",
-    "after_nested_reason": "Repair only the proven root cause. First prove one article end-to-end through real LanguageTool and real PPM. Only after that resume the remaining batch and finally 107008; stop before publish.",
+    "goal": "Complete M37 in the existing hobbyroom runner, bind the existing hash chain, and require full M01-M37 plus hardlock/hardlock-base PASS on one candidate head. No production run before that proof.",
+    "if_same_task_artifacts_unavailable": "Condition confirmed by PR107 issuecomment-5637219382. PR247 therefore contains only the smallest observability-only M37 change: preserve the already returned first inner non-repairable PPM/PSERC reason while remaining fail-closed BLOCKED. No PPM/PSERC/content/quality rule change.",
+    "after_nested_reason": "After M37 candidate and hardlocks pass and the candidate is safely integrated, run only one fresh first-article live path to the same PPM boundary. Repair only the newly exposed proven root cause. First prove one article end-to-end through real LanguageTool and real PPM; only then resume the remaining batch and finally 107008; stop before publish.",
     "must_fail_closed_on": [
       "wrong source hash",
       "stale source generation",
