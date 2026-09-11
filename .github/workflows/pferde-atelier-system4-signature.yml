@@ -1,0 +1,109 @@
+name: Pferde Atelier System4 Signature
+
+on:
+  push:
+    branches:
+      - hobbyroom/system4-true-single-room-v1
+    paths:
+      - 'isolated_system4/sign_requests/*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  sign-manifest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact System4 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Resolve and validate exactly one sign request
+        id: request
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t refs < <(git diff-tree -m --no-commit-id --name-only -r "$GITHUB_SHA" | sort -u | grep -E '^isolated_system4/sign_requests/[A-Za-z0-9._-]+\.json$' || true)
+          [ "${#refs[@]}" -eq 1 ] || { echo "SYSTEM4_EXACTLY_ONE_SIGN_REQUEST_REQUIRED:${#refs[@]}"; exit 2; }
+          ref="${refs[0]}"
+          test -f "$ref" || { echo 'SYSTEM4_SIGN_REQUEST_MISSING'; exit 2; }
+          python3 - "$ref" <<'PY'
+          import hashlib,json,pathlib,re,sys
+          p=pathlib.Path(sys.argv[1]); req=json.loads(p.read_text(encoding='utf-8'))
+          required={'contract','manifest_sha256','batch_sha256','article_count','algorithm','proof_ref','proof_sha256','publish_allowed'}
+          if not isinstance(req,dict) or set(req)!=required: raise SystemExit('SYSTEM4_SIGN_REQUEST_SCHEMA_INVALID')
+          if req.get('contract')!='SYSTEM4_GITHUB_MANIFEST_SIGN_REQUEST_V1' or req.get('algorithm')!='ED25519': raise SystemExit('SYSTEM4_SIGN_REQUEST_CONTRACT_INVALID')
+          if req.get('article_count')!=7 or req.get('publish_allowed') is not False: raise SystemExit('SYSTEM4_SIGN_REQUEST_FLAGS_INVALID')
+          for k in ('manifest_sha256','batch_sha256','proof_sha256'):
+              if not re.fullmatch(r'[0-9a-f]{64}',str(req.get(k) or '')): raise SystemExit('SYSTEM4_SIGN_REQUEST_HASH_INVALID:'+k)
+          pref=str(req.get('proof_ref') or '')
+          if not re.fullmatch(r'isolated_system4/batch_proof/[0-9a-f]{64}/SYSTEM4_7_7_FULL_BATCH_PROOF\.json',pref): raise SystemExit('SYSTEM4_SIGN_REQUEST_PROOF_REF_INVALID')
+          proof_path=pathlib.Path(pref)
+          if not proof_path.is_file(): raise SystemExit('SYSTEM4_SIGN_REQUEST_PROOF_MISSING')
+          if hashlib.sha256(proof_path.read_bytes()).hexdigest()!=req['proof_sha256']: raise SystemExit('SYSTEM4_SIGN_REQUEST_PROOF_HASH_INVALID')
+          proof=json.loads(proof_path.read_text(encoding='utf-8'))
+          if proof.get('publish_allowed') is not False: raise SystemExit('SYSTEM4_SIGN_PROOF_PUBLISH_INVALID')
+          if proof.get('batch_sha256')!=req['batch_sha256']: raise SystemExit('SYSTEM4_SIGN_PROOF_BATCH_INVALID')
+          if proof.get('next_required') not in ('SIGNED_WORKFLOW_RELEASE','SIGNED_WORKFLOW_RELEASE_REQUIRED'): raise SystemExit('SYSTEM4_SIGN_PROOF_BOUNDARY_INVALID')
+          articles=proof.get('articles')
+          if not isinstance(articles,list) or len(articles)!=7: raise SystemExit('SYSTEM4_SIGN_PROOF_ARTICLE_COUNT_INVALID')
+          for row in articles:
+              if not isinstance(row,dict) or not re.fullmatch(r'[0-9a-f]{64}',str(row.get('plan_slot') or '')) or not re.fullmatch(r'[0-9a-f]{64}',str(row.get('final_draft_sha256') or row.get('draft_sha256') or '')): raise SystemExit('SYSTEM4_SIGN_PROOF_ARTICLE_BINDING_INVALID')
+          print('SYSTEM4_SIGN_REQUEST_VALID')
+          PY
+          echo "request_ref=$ref" >> "$GITHUB_OUTPUT"
+
+      - name: Sign manifest hash with GitHub-owned Ed25519 key
+        id: signer
+        shell: bash
+        env:
+          REQUEST_REF: ${{ steps.request.outputs.request_ref }}
+          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
+          umask 077
+          python3 - <<'PY'
+          import base64,hashlib,json,os,pathlib
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey,Ed25519PublicKey
+          req=json.loads(pathlib.Path(os.environ['REQUEST_REF']).read_text(encoding='utf-8'))
+          raw=os.environ['ENDSTEMPEL_PRIVATE_KEY'].encode()
+          try:
+              key=serialization.load_ssh_private_key(raw,password=None) if b'OPENSSH PRIVATE KEY' in raw else serialization.load_pem_private_key(raw,password=None)
+          except Exception as exc:
+              raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_INVALID') from exc
+          if not isinstance(key,Ed25519PrivateKey): raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_NOT_ED25519')
+          pub=key.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)
+          pub_sha=hashlib.sha256(pub).hexdigest(); pub_b64=base64.b64encode(pub).decode('ascii')
+          key_id='github-secret-ed25519-'+pub_sha[:16]
+          if key_id!='github-secret-ed25519-d2ebbf13f6c930e9' or pub_sha!='d2ebbf13f6c930e987d097a494e3d091db5de028775e1ecc27cbf877d1912df4' or pub_b64!='o909SI05NPsf9GvOM/M3ce33Od09lhYK8NPyf6SecMA=': raise SystemExit('SYSTEM4_SIGNER_IDENTITY_MISMATCH')
+          sig=key.sign(req['manifest_sha256'].encode('ascii'))
+          Ed25519PublicKey.from_public_bytes(pub).verify(sig,req['manifest_sha256'].encode('ascii'))
+          out={
+              'contract':'SYSTEM4_GITHUB_MANIFEST_SIGNATURE_V1',
+              'manifest_sha256':req['manifest_sha256'],
+              'batch_sha256':req['batch_sha256'],
+              'article_count':7,
+              'algorithm':'ED25519',
+              'signing_key_id':key_id,
+              'signing_public_key_sha256':pub_sha,
+              'public_key_b64':pub_b64,
+              'signature_b64':base64.b64encode(sig).decode('ascii'),
+          }
+          pathlib.Path('SYSTEM4_SIGNATURE.json').write_text(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print('SYSTEM4_GITHUB_SIGNATURE_PASS')
+          PY
+
+      - name: Upload signature only
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: system4-signature-${{ github.sha }}
+          path: SYSTEM4_SIGNATURE.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
