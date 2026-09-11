@@ -1,57 +1,70 @@
 # PFERDE ATELIER – TEXT – HOBBYRAUM
 
 STAND: 2026-09-11
-STATUS: AKTIV – M37 HISTORY_AUTHORITY_MAINTENANCE
+STATUS: AKTIV – M37 PRODUCT_FIX
 
 ## AKTUELLE ARBEIT
 
-Nur Phase 1 des vorhandenen Maschinenwegs:
-M37 als reale fortlaufende History-Regression in die bestehende Matrix und den bestehenden Runner aufnehmen.
+Nur Phase 2 des vorhandenen Maschinenwegs:
+M37-Produktfix als reine Observability-Änderung am bestehenden Handoff prüfen.
 
 Aktueller Main:
-`a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6`
+`f791dcc6c926f9c136faed29957e64786ffca08e`
 
 Aktiver äußerer Liveblocker:
 `PPM679_REAL_EXECUTION_BLOCKED`
 
 Produktions-Rootcause: UNKNOWN bis neuer Realtest.
 
-History-Kandidat:
-- Branch: `hobbyroom/m37-history-authority-20260911`
-- Head: `245b596f9d6dd67c759527a0f211dbe957f4e34f`
-- erlaubt: ausschließlich bestehende Fehlermatrix + bestehender Regressionrunner;
-- erwartet: unveränderter Main M01–M36 PASS; History-Kandidat erster neuer FAIL exakt M37;
-- ausdrücklich kein Handoff-/Produktfix in dieser Phase.
+History M37 ist bereits integriert und maschinell bewiesen:
+- PR248;
+- `HOBBYROOM_HISTORY_REPRODUCTION_PASS:M37`;
+- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
+- hardlock PASS;
+- hardlock-base PASS.
+
+Produktkandidat:
+- PR247;
+- Branch: `hobbyroom/ppm-inner-reason-visibility-20260911`;
+- Head: `59ad44da3d89769c05f0725f9929135b0262f4dd`;
+- Parent exakt current main;
+- Diff ausschließlich Handoff + bestehende 107007→CURRENT_STATE→START_HERE-Hashkette;
+- Matrix und Runner unverändert aus Main.
 
 ## NEXT ACTION
 
-Bestehenden `hardlock-base` auf dem History-Kandidaten ausführen lassen.
-Nur bei `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37` plus hardlock/hardlock-base PASS darf die History-Autorität integriert werden.
-Danach Hobbyraum auf PRODUCT_FIX M37 umstellen und den Handoff-Fix separat prüfen.
+Bestehenden `hardlock-base` auf PR247 ausführen lassen.
+Er muss mit demselben vorhandenen M01–M37-Runner beweisen:
+1. current main reproduziert M37 als ersten FAIL;
+2. Produktkandidat liefert vollständigen `GESAMT PASS`;
+3. `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
+4. hardlock und hardlock-base PASS.
+
+Erst dann Integration. Danach genau ein frischer erster Artikel bis zum echten PPM/PSERC-Handoff.
 
 ## VERBOTEN
 
-- History-Autorität und Produktfix in einem Kandidaten mischen;
+- Matrix/Runner im Produktkandidaten ändern;
 - neuer Runner/Gate/Controller/Sidecar;
 - PPM/PSERC/PSTE/Textmaschine/Recherche/SEO/Links/Tabellen/Design verändern;
 - Rootcause raten;
-- Produktionslauf vor abgeschlossenem Phase-2-PASS;
+- Produktionslauf vor Produktfix-Gesamt-PASS;
 - WordPress-Write;
 - Publish.
 
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
-MAIN_SHA: a2f2f1b4b7af1e905c6a0cb69c5389664b7c4ad6
+MAIN_SHA: f791dcc6c926f9c136faed29957e64786ffca08e
 ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_BLOCKED
-PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
+PLAN_PHASE: PRODUCT_FIX
 RECOVERY_BASE_SHA: bb005a5324a0a6270aacb52b5927613bde1ab4bc
 ACTIVE_HISTORY_CASE: M37
-HISTORY_EXPECTED_FAIL: M37
-CANDIDATE_BRANCH: hobbyroom/m37-history-authority-20260911
-CANDIDATE_HEAD_SHA: 245b596f9d6dd67c759527a0f211dbe957f4e34f
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+HISTORY_EXPECTED_FAIL: NONE
+CANDIDATE_BRANCH: hobbyroom/ppm-inner-reason-visibility-20260911
+CANDIDATE_HEAD_SHA: 59ad44da3d89769c05f0725f9929135b0262f4dd
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
+ALLOWED_PATH_PREFIXES: control/startmaster0107/fachworkflow_proof_handoff.py;control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json;control/startmaster0107/CURRENT_STATE.json;control/startmaster0107/PFERDE_ATELIER_START_HERE.json
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -60,21 +73,21 @@ CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
 HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
-HISTORY_SOURCE_BLOB_SHA: a63405267b1c7b6db42af58af67cb459e097887d
+HISTORY_SOURCE_BLOB_SHA: dbc77c1eb820bdc91918b81d290fc46016faecf6
 HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-HISTORY_PROOF_RUNNER_BLOB_SHA: cf0bcd52af2b76971f0345061853e32a161594b0
+HISTORY_PROOF_RUNNER_BLOB_SHA: ee1701de79a577c611c0e55a5b76fe6d7837441a
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md
-ERROR_SOURCE_BLOB_SHA: 026098f9ee20d063539f9f0d4f03a2c2ea112516
+ERROR_SOURCE_BLOB_SHA: 78f51bfa6d7e5f0418ef35a9fe1e43d0bd1c5d26
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 8db67dc4000b33cfa1d80e9c16d93be63155aaa7
+CURRENT_STATE_BLOB_SHA: dda5ca454e8592bfde80a2feade6e786251f3e07
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
 DECISION_SOURCE_BLOB_SHA: 0cf9e1eb3744add9e79f1eab5b19fc8892945b04
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
 STANDARD_SOURCE_BLOB_SHA: 8c90de4920ec81e10f3952bbd52208fad5a42367
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/M37_ARBEITSPROTOKOLL_20260911.md
-PROTOCOL_SOURCE_BLOB_SHA: 48160bde2da6c94598eea8b80fb296f9fa1f342f
+PROTOCOL_SOURCE_BLOB_SHA: 761e8cacb29262f3c3748ea40d9895358aaf96a8
 INTEGRATION_ALLOWED: true
 END_HOBBYROOM_WORK_LOCK_V1
 
