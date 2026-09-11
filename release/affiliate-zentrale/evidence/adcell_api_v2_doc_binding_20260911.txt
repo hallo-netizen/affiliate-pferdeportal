@@ -1,0 +1,13 @@
+ADCELL API v2 – dokumentierte Bindung, 2026-09-11
+
+Autoritative, vom Nutzer gespeicherte ADCELL-API-Dokumentation bestätigt:
+- API Host: https://api.adcell.org/api/v2/
+- Token: /user/getToken mit userName + password; Token wird als Parameter token an Folgerequests übergeben.
+- Programme: /affiliate/program/export; affiliateStatus=accepted; isActive=1 bedeutet aktiv.
+- Werbemittel: /affiliate/promotion/getPromotionTypeCsv, /getPromotionTypeBanner, /getPromotionTypeDeeplink.
+- CSV: csvUrl ist dokumentierter Downloadpfad; Beispiel https://www.adcell.de/promotion/csv?... und enthält passende Produkt-Deeplinks.
+- Banner: promotionId/programId/bannerUrl/clickoutLink/width/height sind dokumentiert.
+- Deeplink: programmspezifische Werbemittel; outputDeeplink ist optional und wird nur bei explizitem Ziel verwendet. Ohne erfundenes Ziel wird der dokumentierte bestehende clickoutLink übernommen.
+
+Sicherheitsbindung:
+accepted AND isActive=1 AND explizite lokale programId-Allowlist. Leere Allowlist = fail closed. Keine Basic Auth. Keine manuelle ADCELL-CSV-Export-URL als Normalbetrieb.
