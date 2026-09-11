@@ -1,7 +1,7 @@
 # AFFILIATE RELEASE – ADCELL API-V2 AUTOMATISIERUNG – SCOPE 2026-09-11
 
 STAND: 2026-09-11
-STATUS: AKTIV / LIVE-AUTH BLOCKED / KANONISCHER SOURCE-FIX NOCH NICHT AUSGEFÜHRT
+STATUS: AKTIV / AUTH-VERTRAG BELEGT / LIVE-ZUGANG BLOCKED / KANONISCHER SOURCE-FIX OFFEN
 
 ## AUSLÖSER
 
@@ -20,31 +20,39 @@ Technische Release-Autorität:
 - Branch `affiliate-release-current`
 - Source `release/affiliate-zentrale/current/affiliate-portal-router/`
 - Kandidat vor ADCELL-Änderung: `6.72.8`
-- Branch-Head bei Abschlussprüfung: `cb563f914690cea473db6e02177544f61bd0f2d8`
 - Source-Manifest SHA-256: `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`
 
 Release-scoped Änderungen dürfen gemäß Release-Governance nicht über einen parallelen Side-Branch zur zweiten Standwahrheit werden.
 
 ## LIVE / DOKUMENTATION HART BELEGT
 
-Aus den vom Nutzer geöffneten ADCELL-API-v2-Seiten sind folgende read-only/Promotion-Wege belegt:
+Autoritativer Auth-Beleg:
+`release/affiliate-zentrale/evidence/adcell_api_v2_auth_contract_20260911.txt`
+
+Aus der offiziellen, vom Nutzer am 11.09.2026 geöffneten ADCELL-API-v2-Dokumentation ist jetzt technisch belegt:
+- API-Basis: `https://api.adcell.org/api/v2/`;
+- Token-Verfahren;
+- Token-Erzeugung über `/user/getToken` mit `userName` und `password`;
+- dokumentierte Standardgültigkeit des Tokens: 15 Minuten;
+- jeder weitere API-v2-Request benötigt den Parameter `token`;
+- kein Basic-Auth- oder Bearer-Auth-Vertrag für diesen belegten API-v2-Weg.
 
 Programme:
-- `Affiliate -> Program -> export`
+- GET `https://api.adcell.org/api/v2/affiliate/program/export`;
 - angenommene Programme können über `affiliateStatus=accepted` gefiltert werden;
 - Ergebnis enthält u. a. `programId`, `programName`, `isActive`, `affiliateStatus`.
 
 Werbemittel:
-- `Affiliate -> Promotion -> getPromotionTypeCsv`
-- `Affiliate -> Promotion -> getPromotionTypeBanner`
-- `Affiliate -> Promotion -> getPromotionTypeDeeplink`
+- GET `https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeCsv`;
+- GET `https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeBanner`;
+- GET `https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeDeeplink`.
 
 Belegt ist außerdem:
 - CSV-Werbemittel liefern eine `csvUrl`;
 - Banner liefern programmspezifische IDs/Status, Ziel-/Trackingdaten, Maße und `bannerUrl`;
-- Deeplinks sind programmspezifisch.
+- Deeplinks sind programmspezifisch und besitzen eine eigene `promotionId`.
 
-Nicht belegt ist derzeit der exakte technische Authentifizierungsvertrag für API-v2-Requests außerhalb der eingeloggten Dokumentationsoberfläche. Kein Query-Token-, Basic-Auth- oder anderer Auth-Weg darf geraten werden.
+Damit ist der frühere Auth-Beleg-Blocker geschlossen. Der 6.72.18-Scratch bleibt trotzdem verworfen und wird nicht übernommen.
 
 ## VERBINDLICHER ZIELWEG
 
@@ -68,21 +76,25 @@ Pflichtregeln:
 Detailautorität bleibt ausschließlich:
 `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md`
 
-Dort nachgetragen:
-- ADCELL-Automatisierungsbutton fällt in den vorhandenen Awin-orientierten Automationspfad;
-- ADCELL-Automation ist im kanonischen Stand noch an eine manuell konfigurierte CSV-Export-URL gebunden statt an den bestätigten API-v2-Weg.
+Dort gebunden:
+- AF-058: ADCELL-Automatisierungsbutton fällt in den vorhandenen Awin-orientierten Automationspfad;
+- AF-059: ADCELL-Automation ist im kanonischen Stand noch an eine manuell konfigurierte CSV-Export-URL gebunden statt an den bestätigten API-v2-Weg;
+- AF-060: historische falsche Auth-Annahme; durch den oben gebundenen offiziellen Auth-Beleg fachlich geschlossen, darf aber als Gegenregel nicht entfernt werden.
 
 ## LIVE-BLOCKER
 
-Der Nutzer kann sich aktuell nicht in sein ADCELL-Konto/API-Dokumentation einloggen; das versehentlich überschriebene Passwort ist nicht verfügbar und der Passwort-Zurücksetzen-Mailweg funktioniert aktuell nicht.
+Der Nutzer kann sich aktuell nicht wieder in sein ADCELL-Konto einloggen; das versehentlich überschriebene Passwort ist nicht verfügbar und der Passwort-Zurücksetzen-Mailweg funktioniert aktuell nicht.
 
 Folge:
 - kein echter ADCELL-Live-API-Request möglich;
 - kein Live-PASS behaupten;
-- lokale Entwicklung darf den Authentifizierungsvertrag nicht erfinden.
+- lokaler/kanonischer Source-Fix und harte Tests dürfen jetzt auf dem belegten Auth-Vertrag aufgebaut werden;
+- Live-Abnahme bleibt bis zur Wiederherstellung des Zugangs gesperrt.
 
-NEXT ACTION vor Source-Fix:
-**exakten ADCELL-API-v2-Authentifizierungsvertrag aus autoritativer ADCELL-Dokumentation belegen.**
+## NEXT ACTION
+
+**GENAU EIN ARBEITSSTRANG:**
+Aus der kanonischen Basis `6.72.8` den kleinsten ADCELL-Provider-Routing-/API-v2-Fix bauen und danach den gebundenen Positiv-/Negativ-/Gesamtworkflow ausführen.
 
 ## VERWORFENER SCRATCH-STAND
 
@@ -97,6 +109,8 @@ Aus dem Scratch dürfen nur Konzepte erneut aus der kanonischen 6.72.8-Basis ent
 
 Pflicht auf kanonischer Basis:
 - PHP-Syntax aller betroffenen Dateien;
+- POSITIV: Token wird ausschließlich über den belegten `user/getToken`-Weg erzeugt und als Parameter `token` weitergereicht;
+- NEGATIV: kein Basic-/Bearer-Fallback und kein Request an einen unbelegten API-v2-Host;
 - POSITIV: ADCELL-Route bleibt ADCELL; accepted+active+allowlisted Programm wird verarbeitet;
 - NEGATIV: ADCELL zeigt/benutzt keine Awin-Partnerlogik;
 - NEGATIV: altes/fachfremdes accepted Programm ohne Allowlist wird blockiert;
@@ -118,4 +132,4 @@ Live-PASS zusätzlich erst nach wiederhergestelltem ADCELL-Zugang und echtem Wor
 - keine neue Providerarchitektur oder separates ADCELL-Plugin;
 - keine Pluginversionskette vor vollständigem kanonischem Test;
 - keine manuelle CSV-Import/Export-Lösung als Ersatz für die geforderte Automatik;
-- keine API-Authentifizierung raten.
+- keine vom offiziellen v2-Beleg abweichende API-Authentifizierung.
