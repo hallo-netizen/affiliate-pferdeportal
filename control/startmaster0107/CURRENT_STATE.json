@@ -192,7 +192,7 @@
   "last_safe_change": "Guard-green merged baseline after PR236, PR237 and PR243. This is NOT a production PASS: the first fresh article reaches the real PPM 6.7.9/PSERC handoff and is still BLOCKED before 107008.",
   "hobbyroom_status": "BLOCKED",
   "hobbyroom_branch": "hobbyroom/ppm-inner-reason-visibility-20260911",
-  "hobbyroom_head_sha": "bb005a5324a0a6270aacb52b5927613bde1ab4bc",
+  "hobbyroom_sync_policy": "Before any functional hobbyroom edit, fast-forward hobbyroom/ppm-inner-reason-visibility-20260911 to the then-current canonical main. During freeze the branch must contain no functional divergence.",
   "hobbyroom_blocker": "CODEX_USAGE_LIMIT_REACHED before read-only extraction of the nested PPM reason; no functional hobbyroom change is committed.",
   "next_action": {
     "goal": "When Codex Cloud is available again, retry exactly the read-only same-task diagnosis requested in PR107 issuecomment-5634272023: expose the first nested PPM 6.7.9/PSERC reason for the already first freshly researched/generated article. No new article, no new 7/7 run and no code change before that diagnosis.",
