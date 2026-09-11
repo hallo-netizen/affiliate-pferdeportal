@@ -48,24 +48,30 @@ def verify_state(state):
     if phase=='SIGNATURE_REQUIRED' and not isinstance(state.get('release_prepared'),dict): raise Fail('PHASE_STATE_MISMATCH')
     if phase=='RELEASED' and state.get('released') is not True: raise Fail('PHASE_STATE_MISMATCH')
 
-def extract_first_ready(snapshot):
+def extract_ready(snapshot,item_index=0):
     batch=snapshot.get('next_textmachine_metadata_batch')
     if not isinstance(batch,dict) or batch.get('status')!='READY_FOR_TEXTMACHINE_METADATA_INTAKE': raise Fail('WORDPRESS_READY_BATCH_MISSING')
     items=batch.get('items')
     if not isinstance(items,list) or not items: raise Fail('WORDPRESS_READY_ITEMS_MISSING')
-    item=items[0]
-    if set(item)!=ALLOWED_ITEM_KEYS: raise Fail('WORDPRESS_ITEM_SCHEMA_FAIL')
+    if batch.get('item_count')!=len(items): raise Fail('WORDPRESS_BATCH_COUNT_MISMATCH')
+    if batch.get('publish_allowed') is not False: raise Fail('WORDPRESS_PUBLISH_AUTHORITY_FAIL')
+    if not isinstance(item_index,int) or isinstance(item_index,bool) or item_index<0 or item_index>=len(items): raise Fail('WORDPRESS_ITEM_INDEX_INVALID')
+    item=items[item_index]
+    if not isinstance(item,dict) or set(item)!=ALLOWED_ITEM_KEYS: raise Fail('WORDPRESS_ITEM_SCHEMA_FAIL')
     if any(k in item for k in FORBIDDEN_CONTROL_KEYS): raise Fail('EXTERNAL_CONTROL_FIELD_BLOCKED')
     if not all(isinstance(item[k],str) and item[k].strip() for k in ALLOWED_ITEM_KEYS): raise Fail('WORDPRESS_ITEM_VALUE_FAIL')
     batch_sha=str(batch.get('batch_sha256') or '')
     if not re.fullmatch(r'[0-9a-f]{64}',batch_sha): raise Fail('WORDPRESS_BATCH_SHA_FAIL')
     return dict(item),batch_sha
 
-def cmd_ingress(snapshot_path, workspace):
+def extract_first_ready(snapshot):
+    return extract_ready(snapshot,0)
+
+def cmd_ingress(snapshot_path, workspace, item_index=0):
     p=Path(snapshot_path); w=Path(workspace); w.mkdir(parents=True,exist_ok=True)
     if p.suffix.lower()!='.json': raise Fail('WORDPRESS_INPUT_FORMAT_FAIL')
     snap=json.loads(p.read_text(encoding='utf-8'))
-    article,batch_sha=extract_first_ready(snap)
+    article,batch_sha=extract_ready(snap,item_index)
     state={
       'contract':CONTRACT,'source_snapshot_sha256':file_sha(p),'batch_sha256':batch_sha,'article':article,
       'immutable_core_sha256':'','publish_allowed':False,'phase':'RESEARCH_REQUIRED',
@@ -214,7 +220,7 @@ def cmd_finalize_signed(workspace,signature_path,final_path):
 def main(argv):
     try:
       cmd=argv[1]
-      if cmd=='ingress': cmd_ingress(argv[2],argv[3])
+      if cmd=='ingress': cmd_ingress(argv[2],argv[3],int(argv[4]) if len(argv)>4 else 0)
       elif cmd=='research': cmd_research(argv[2],argv[3])
       elif cmd=='facts': cmd_facts(argv[2],argv[3])
       elif cmd=='context': cmd_context(argv[2],argv[3],argv[4])
@@ -227,6 +233,6 @@ def main(argv):
       elif cmd=='verify': load(argv[2]); print('SYSTEM4_STATE_VERIFY_PASS')
       else: raise Fail('BAD_COMMAND')
       return 0
-    except (Fail,KeyError,IndexError,json.JSONDecodeError) as e:
+    except (Fail,KeyError,IndexError,ValueError,json.JSONDecodeError) as e:
       print('SYSTEM4_FAIL:'+str(e)); return 2
 if __name__=='__main__': raise SystemExit(main(sys.argv))
