@@ -6,36 +6,67 @@ STATUS: AKTIV
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Isolierter Arbeitsraum für die laufende Produktvergleichs-Fachskalierung.
+Isolierter Arbeitsraum für den laufenden Produktvergleichs-Gesamtaudit.
 
 **AKTUELL:**  
-Der erste Research-Durchlauf über alle 175 Registry-Keys ist abgeschlossen: 97 `EVIDENCE_PRESENT`, 78 `PARTIAL_AMBIGUOUS`, 0 `NO_GROUP_EVIDENCE`. Jetzt wird nicht blind weiterrecherchiert. Der aktive Block ist die harte read-only Prüfung der bestehenden UPC-/UPK-Logik gegen die verbindliche finale Plugin-Autorität und regelmäßige Neubewertung.
+175/175 Registry-Keys wurden im ersten Research-Durchlauf betrachtet: 97 `EVIDENCE_PRESENT`, 78 `PARTIAL_AMBIGUOUS`, 0 `NO_GROUP_EVIDENCE`. Der erste technische Auditfehler `PV-LIFECYCLE-086-001` ist auf Basis der exakt gebundenen 0.8.5-ZIP bewiesen und als 0.8.6-KISS-Fix lokal inklusive Fresh-ZIP hart grün. WordPress-Live für 0.8.6 ist noch offen.
 
 **DU DARFST …**  
-aktuellen Plugin-/Testcode lesen, vorhandene Paar-/Readiness-/Refresh-Logik gegen Zielvertrag und Fachbelege prüfen, exakt den ersten technischen Gap benennen, danach nur bei belegter Lücke einen KISS-Fix vorbereiten.
+den bestehenden Audit ohne Seitensprung am nächsten noch nicht hart belegten Punkt fortsetzen; nur bei realem RED einen weiteren KISS-Fix bauen; denselben Gesamtworkflow danach erneut positiv/negativ prüfen.
 
 **DU DARFST NICHT …**  
-Plugin umbauen, bevor die Lücke belegt ist; Research-Funde automatisch zu Product Knowledge erklären; manuell finale Produktpärchen festschreiben; SEO starten; den Nachbarweg ändern; mergen oder veröffentlichen.
+einen zweiten Fix aus Vermutung bauen; Research-Funde automatisch zu Product Knowledge erklären; manuell finale Produktpärchen festschreiben; SEO starten; den Nachbarweg ändern; mergen oder veröffentlichen.
 
 **ALS NÄCHSTES …**  
-UPC 0.8.5 + UPK 0.5.1 read-only prüfen: finale Paarinstanz, Neubewertung aus aktuellem Product Knowledge, Entfall/Block ungültiger Produkte, Research!=Pair, Nicht-V1-Gruppen fail-closed, keine Pair-Cap, SEO ohne Override.
+Read-only beweisen, dass bloße Research-Evidence ohne materialisiertes Product Knowledge **kein** Paar erzeugen kann. Danach Nicht-V1-Gruppen fail-closed, SEO-ohne-Override und Dossier-Neuaudit prüfen. Beim ersten realen Fehler stoppen und nur diesen ursachenbasiert bearbeiten.
 
 ## BRANCH
 
 `hobbyroom/productvergleich-workflow-v070-20260908`
 
-Aktueller Research-Stand ist source-bound in:
+Research-Stand:
 `AKTENSCHRANK/38_MARKTRECHERCHE_COVERAGE_DELTA_K_T_20260911.md`
+
+Lifecycle-Fix-Beleg:
+`AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 
 ## SICHERER TECHNISCHER STAND
 
-UPC 0.8.5:
+Letzter WordPress-Live-Stand UPC 0.8.5:
 `0174051e6584902142f5be5787642426b30aab6c7ba15ef0b07ccbdb4a5844fd`
+
+Aktueller lokal hart geprüfter UPC-0.8.6-Kandidat:
+`6ad160d18fb0973463c214de4356447923cbb728e222725e5407868e580c24f6`
 
 UPK 0.5.1:
 `17ba686ebbfeac774de5224a042e8ea5fcc472b91774c47271e6b585d74960a1`
 
-Bis zur jetzigen Auditstufe ist **kein neuer technischer Fix** belegt.
+0.8.6 Hardbeleg:
+- Original-0.8.5 Solltest real ROT: `DISCONTINUED` blieb in 3 Paaren statt nur 1 gültigem Paar;
+- Working Tree 38/38 PASS;
+- zwei neue Lifecycle-Mutationen korrekt ROT;
+- PHP-Lint 51/51 PASS;
+- Fresh-ZIP Source↔ZIP 74/74 exakt;
+- Report-Hashes 73/73 exakt;
+- Fresh-ZIP Regression 38/38 PASS;
+- Fresh-ZIP PHP-Lint 51/51 PASS.
+
+Kein WordPress-Write wurde für 0.8.6 ausgeführt.
+
+## GESCHLOSSENER ERSTER TECHNISCHER GAP
+
+`PV-LIFECYCLE-086-001`
+
+0.8.5 las aktuelles UPK neu, filterte aber den Lifecycle nicht vor Pairing/Readiness.
+
+0.8.6:
+- `ACTIVE` paarbar;
+- `TEMPORARILY_UNAVAILABLE` paarbar;
+- `DISCONTINUED` ausgeschlossen;
+- `UNKNOWN`/fehlend ausgeschlossen;
+- Deduplizierung vor Lifecycle-Gate verhindert Wiederbelebung älterer ACTIVE-Zeilen.
+
+Keine neue Route, kein neues Datenmodell, kein Writer/Draft/Publish.
 
 ## COVERAGE
 
@@ -61,21 +92,18 @@ Verbindlich:
 - neue/entfallene/geänderte Produkte müssen aus aktuellem Product Knowledge wiederholt neu bewertet werden;
 - Paare dürfen dadurch entstehen, entfallen oder BLOCKED werden.
 
-## NEXT ACTION – READ-ONLY AUDIT
+## NEXT ACTION – GESAMTAUDIT FORTSETZEN
 
-Prüfe im bestehenden Code/Testbestand genau:
-1. Wo wird das Produktinventar bezogen und gebunden?
-2. Wo entsteht das Paaruniversum?
-3. Welche Stelle trifft die letzte `eligible/BLOCKED`-Entscheidung?
-4. Wird bei erneutem Lauf das aktuelle Product Knowledge neu gelesen oder nur alter Pair-/Dossierzustand fortgeführt?
-5. Werden fehlende/entfallene/ungültige Produkte entfernt bzw. blockiert?
-6. Kann bloße Research-Evidence ohne Product Knowledge ein Paar erzeugen? Muss NEIN sein.
-7. Können Service/Knowledge/Checklisten-/nicht PRODUCT_COMPARISON-V1-fähige Registry-Keys ein Produktpaar erzwingen? Muss NEIN sein.
-8. Kann SEO eine fachliche Sperre überschreiben? Muss NEIN sein.
-9. Gibt es irgendeine Top-N-/Pair-Cap? Muss NEIN sein.
-10. Bestehende Tests lesen: welche dieser Regeln sind real positiv UND negativ/mutativ belegt?
+Prüfe im **exakten 0.8.6-Fresh-ZIP-Stand** jetzt nur den nächsten noch nicht hart geschlossenen Punkt:
+
+1. Kann bloße Research-Evidence ohne materialisiertes Product Knowledge ein Paar erzeugen? Muss **NEIN** sein.
+2. Falls PASS: Können Service/Knowledge/Checklisten-/nicht PRODUCT_COMPARISON-V1-fähige Registry-Keys ein Produktpaar erzwingen? Muss **NEIN** sein.
+3. Falls PASS: Kann SEO eine fachliche Sperre überschreiben? Muss **NEIN** sein.
+4. No-Cap bleibt über bestehenden 1000-Pair-Test gebunden.
+5. Danach bestehenden Dossier-Neuaudit bei Produktentfall/Profile-/Policy-Drift hart prüfen.
 
 Nur der **erste tatsächlich offene technische Fehler** wird anschließend bearbeitet.
+Nach jedem Fix derselbe Gesamtregressionsweg; kein Sammelfix.
 
 ## DANACH FACHLICH
 
@@ -92,7 +120,7 @@ BLOCK bei:
 - Markt-Vollständigkeit wird geschätzt;
 - Top-N-/Pair-Cap reduziert Coverage;
 - mehrdeutige Registry-Keys werden still zusammengeführt;
-- Plugin-Übergabe ohne exakten Positiv-/Negativ-/Gesamtworkflow-Beweis;
+- Plugin-Übergabe ohne exakten Positiv-/Negativ-/Gesamtworkflow-/Fresh-ZIP-Beweis;
 - Änderung an SEO/TEXT/ACM aus diesem Büro;
 - Merge oder Publish.
 
