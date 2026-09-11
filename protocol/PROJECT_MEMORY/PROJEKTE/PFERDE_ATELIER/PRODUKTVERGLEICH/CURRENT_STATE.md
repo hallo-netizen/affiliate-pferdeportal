@@ -15,7 +15,7 @@ Diese Datei ist die einzige aktuelle Büro-Standzusammenfassung.
 - finale Paar-/Refresh-Autorität: `AKTENSCHRANK/31_ARCHITEKTURENTSCHEIDUNG_PLUGIN_FINAL_AUTHORITY_20260911.md`
 - finale 175er V1-Disposition: `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 - Readiness-Baseline: `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `86_...`
+- aktuelle source-bound Profilspecs: `AKTENSCHRANK/62_...` bis `87_...`
 - UPC-0.8.6 Lifecycle-Hardbeleg: `AKTENSCHRANK/39_V086_LIFECYCLE_REEVALUATION_HARD_LOCAL_RECEIPT.md`
 - UPC-0.8.6 Read-only Architektur-Audit: `AKTENSCHRANK/41_V086_READ_ONLY_ARCHITECTURE_AUDIT_RECEIPT.md`
 
@@ -29,7 +29,7 @@ Aktueller lokal hart geprüfter Kandidat:
 `UPC 0.8.6-prototype`
 SHA-256 `6ad160d18fb0973463c214de4356447923cbb728e222725e5407868e580c24f6`
 
-0.8.6 belegt unverändert:
+0.8.6 belegt unverändert aus den vorhandenen Receipts:
 - Lifecycle-Gap geschlossen;
 - 38/38 Regression PASS;
 - 51/51 PHP-Lint PASS;
@@ -64,13 +64,14 @@ Exakter technischer UPC-0.8.6-Stand:
 - **7 maschinenfeste** Vergleichsprofile/Decision-Policies;
 - **143/150 V1-fähige Gruppen technisch noch offen**.
 
-Seit der Readiness-Baseline wurden source-bound, aber **nicht materialisiert**, zusätzliche Profilspezifikationen für **74 Gruppen** erstellt.
+Seit der Readiness-Baseline wurden source-bound, aber **nicht materialisiert**, zusätzliche Profilspezifikationen für **77 Gruppen** erstellt.
 
 Aktenübersicht:
-- Akten 62–86 enthalten die source-bound Profil-/Faktenmatrizen;
+- Akten 62–87 enthalten die source-bound Profil-/Faktenmatrizen;
 - Akte 84: `reitplatzboden`, `reitplatzumrandung`, `reitplatzbeleuchtung`;
 - Akte 85: `reitplatzbewaesserung`, `reitplatzspiegel`, `reitplatzplaner`, `reitplatzschleppe`;
 - Akte 86: `hufschlagraeumer`, `reitplatzbewaesserung-mobil`, `weidepflegegeraete`;
+- Akte 87: `nachsaat-fuer-pferdeweiden`, `weideschleppen`, `unkrautstecher`;
 - keine source-bound Profilspec ändert den technischen 0.8.6-Profilbestand automatisch.
 
 Wichtige Fail-closed-/Dedup-Regeln bleiben bindend, unter anderem:
@@ -78,28 +79,28 @@ Wichtige Fail-closed-/Dedup-Regeln bleiben bindend, unter anderem:
 - `reitplatzbewaesserung` p163 = feste Anlage; mobile Systeme ausschließlich p170 `reitplatzbewaesserung-mobil`;
 - `hufschlagraeumer`: Handgerät != Batterie-Standalone != Planer-Anbaugerät;
 - p170 Cross-Family-Pairing nur bei belastbarer Hersteller-/OEM-Identität;
-- `weidepflegegeraete` p171 erste Klasse = reiner 3-m-Grünlandstriegel ohne montiertes Sägerät; Nachsaat p172 und Weideschleppen p173 separat;
-- `bahnplaner` p167 und `sandverteiler` p168 bleiben V1-NOT-APPLICABLE;
+- `weidepflegegeraete` p171 = mechanischer Grünlandstriegel ohne montiertes Sägerät;
+- `nachsaat-fuer-pferdeweiden` p172 = Saatgutmischung zur Nachsaat bestehender Pferdeweiden, nicht Nachsaatmaschine;
+- `weideschleppen` p173 = passive Gussstern-/Netz-Wiesenschleppe, nicht Federzinkenstriegel;
+- `unkrautstecher` p174 = erste V1-Klasse langstieliger Ampfer-/Pfahlwurzelstecher für Grünland/Weide, nicht allgemeiner Gartenstecher;
+- `bahnplaner` p167, `sandverteiler` p168 und `weidebrunnen` p177 bleiben V1-NOT-APPLICABLE;
 - keine 25er V1-NOT-APPLICABLE-Gruppe reaktivieren.
 
 ## AKTUELLER ARBEITSBLOCK
 
 Die frühere Zuordnung `p163 hindernisstangen / p164 sprungstaender / p165 cavaletti` war falsch und ist als `PV-GOV-20260911-002` korrigiert. `hindernisstangen` liegt tatsächlich erst bei p331.
 
-Autoritative Registry-Folge nach Akte 86:
-- `p172 nachsaat-fuer-pferdeweiden`;
-- `p173 weideschleppen`;
-- `p174 unkrautstecher`.
+Akte 87 ist real auf dem Branch vorhanden und fachlich source-bound abgeschlossen. Der zwischenzeitlich veraltete Stand Akte 86/74 Gruppen wurde in der Abschluss-/Nachholprüfung als `PV-GOV-20260911-003` nachgezogen.
+
+Autoritative Registry-Folge nach Akte 87:
+- `p175 weidewalzen`;
+- `p176 solar-weidepumpen`;
+- `p177 weidebrunnen` = V1-NOT-APPLICABLE, überspringen;
+- `p178 wassertroege-fuer-weiden`;
+- danach `p179 weidetimer`.
 
 Nächster fachlich zulässiger Profilblock:
-`nachsaat-fuer-pferdeweiden` -> `weideschleppen` -> `unkrautstecher`.
-
-Vor Pairing hart zu normalisieren:
-- Nachsaat-Mischung/Saatgutprodukt von Nachsaatmaschine strikt trennen und Registry-Intent source-bound festlegen;
-- p173 passive Weideschleppe nicht mit p171 Federzinken-Grünlandstriegel duplizieren;
-- Unkrautstecher nur innerhalb identischer Hand-/Hebel-/Standmechanik paaren;
-- fehlende Herstellerfamilien-, Bauart-, Saatgut-/Einsatz- oder Anschlussgleichheit -> 0 Paar;
-- kein finaler Produktpair manuell festschreiben; finale Paarentscheidung ausschließlich im Produktvergleichs-Plugin aus aktuellem Product Knowledge.
+`weidewalzen` -> `solar-weidepumpen` -> `wassertroege-fuer-weiden` (p177 wird fail-closed übersprungen).
 
 Arbeitsweise:
 source-bound Faktenmatrix -> Nutzungsklasse/Pairing-Regeln -> Decision-Policy -> Produktgegenprüfung -> sinnvoll bündeln -> erst danach technische Materialisierung -> kompletter Positiv-/Negativ-/Mutation-/Fresh-ZIP-Test.
