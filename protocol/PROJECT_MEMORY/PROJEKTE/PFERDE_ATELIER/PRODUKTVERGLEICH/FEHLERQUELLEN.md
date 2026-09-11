@@ -25,68 +25,71 @@ STATUS: CLOSED / LOKAL + WORDPRESS-LIVE 0.8.2–0.8.4 PASS
 STATUS: CLOSED / 0.8.3 LOCAL HARD + WORDPRESS-LIVE-REGRESSION PASS
 
 ## PV-SCALE-084-001 – Proofgruppe statt vollständiger Vergleichsgruppen-Abdeckung
+STATUS: INFRASTRUKTUR CLOSED / 0.8.4 LOCAL HARD + WORDPRESS-LIVE PASS / FACHLICHE 175-GRUPPEN-RECHERCHE WEITER OFFEN
 
-STATUS: INFRASTRUKTUR CLOSED / 0.8.4 LOCAL HARD + WORDPRESS-LIVE PASS / FACHLICHE 175-GRUPPEN-RECHERCHE+PROFILE WEITER OFFEN
+0.8.4 bindet 175/175 Portalgruppen, vollständige Paar-Coverage ohne Top-N und Research-Vollständigkeit fail-closed `UNPROVEN`.
 
-### Ursprungsbefund
+## PV-FAMILY-085-001 – Readiness zählte Herstellerbezeichnungen statt Herstellerfamilien
 
-0.8.3 kannte nur die Proofgruppe Regendecken.
-Die autoritative Portalstruktur enthält 175 Vergleichs-Produktgruppen.
+STATUS: CLOSED IM 0.8.5-KANDIDAT / WORDPRESS-LIVE-VORCHECK OFFEN
 
-### KISS-Fix 0.8.4
+### Befund
 
-- 175/175 Gruppen portalgebunden;
-- jede Gruppe live sichtbar/selectable;
-- Readiness sichtbar;
-- keine stille Auslassung;
-- keine Top-N-/Pair-Cap;
-- vollständiges Cross-Brand-Paaruniversum;
-- fachlich unpassende Paare vor SEO/Providerkosten BLOCK;
-- Coverage-Receipt;
-- Research-Kandidaten und Markt-Recherchevollständigkeit strikt getrennt;
-- Key-Kollisionen fail-closed statt stiller Verschmelzung.
+Im vorhandenen Schermaschinen-Recherchebestand stehen Herstellerbezeichnungen:
+- `Aesculap/Kerbl`;
+- `Kerbl`.
 
-### Harter lokaler Beleg
+Der Paarplaner normalisierte beide bereits korrekt auf dieselbe Herstellerfamilie `kerbl-family` und erzeugte deshalb 0 echte Cross-Brand-Paare.
 
-- finale Fresh-ZIP 32/32 Tests PASS;
-- PHP-Lint 48/48;
-- Source↔ZIP 67/67;
-- Report-Hashes 66/66;
-- 175/175 Portalparität;
-- 50 Produkte / 5 Hersteller -> 1000 Cross-Brand-Paare vollständig;
-- 500 fachlich sinnvoll, 500 falsche Nutzungsklasse BLOCKED;
-- fünf 0.8.4-Mutationen korrekt ROT.
+Die 0.8.4-Gruppenreadiness konnte rohe Herstellerstrings dagegen als zwei Hersteller zählen.
+Damit wäre theoretisch ein falsches `PAIRING_READY` möglich gewesen.
 
-### WordPress-Live-Beleg 0.8.4
+### KISS-Fix 0.8.5
 
-Vor Lauf:
-- Version 0.8.4;
-- 175/175 Gruppen sichtbar;
-- Regendecken PAIRING_READY;
-- Research UNPROVEN;
-- 172 PROFILE_MISSING;
-- 2 Key-Kollisionen;
-- PSTE PASS/READY;
-- $0.0000 maximale neue Providerkosten.
+Eine Herstellerfamilien-Wahrheit für:
+- Research-Kandidaten-Herstellerzahl;
+- Inventar-Readiness;
+- Cross-Brand-Paaruniversum;
+- Paarplaner.
 
-Nach genau einem Regendecken-Gesamtworkflow:
-- `NO_ELIGIBLE_COMPARISONS`;
-- Provider-Aufrufe 0;
-- Kosten $0.0000;
-- SEO-PASS 0;
-- blockiert 8;
-- Dossiers 0.
+Die bestehende Planner-Normalisierung wird wiederverwendet, nicht dupliziert.
 
-Damit ist die **Registry-/Coverage-Infrastruktur 0.8.4 geschlossen**.
+### Harter Beleg
 
-### Weiter offener fachlicher Skalierungsauftrag
+- Aesculap/Kerbl + Kerbl => genau 1 Herstellerfamilie;
+- Schermaschinen => 0 Cross-Family-Paare und `INSUFFICIENT_MANUFACTURERS`;
+- synthetischer echter zweiter Hersteller `Lister` => 2 Familien und exakt 4 Cross-Family-Paare;
+- drei unabhängige Rückfallmutationen korrekt ROT;
+- komplette finale Fresh-ZIP-Regression 35/35 PASS;
+- PHP-Lint 50/50;
+- Source↔ZIP 71/71;
+- Report-Hashes 70/70.
 
-Kein Infrastrukturfehler, sondern noch nicht abgeschlossene Facharbeit:
-- Produktrecherche möglichst vollständig für alle 175 Vergleichsgruppen;
-- gruppenspezifische Vergleichsprofile/Decision-Policies;
-- alle daraus sinnvollen A-vs-B-Paare;
-- Research-Vollständigkeit nur bei echtem Beleg;
-- positiver Dossier-V2-Livefall bei erstem realen SEO-PASS.
+## PV-FACH-085-002 – vorhandene Mehrhersteller-Recherche war mangels Profil nicht nutzbar
+
+STATUS: PARTIAL CLOSED IM 0.8.5 / LIVE-VORCHECK OFFEN / MARKT-RECHERCHEVOLLSTÄNDIGKEIT WEITER UNPROVEN
+
+### Geschlossener Teil
+
+Fachprofile/Decision-Policies gebunden für vorhandene echte Mehrhersteller-Gruppen:
+- Winterdecken 20 Paare;
+- Übergangsdecken 14;
+- Stalldecken 28;
+- Unterdecken 63;
+- Steigbügel 5.
+
+Insgesamt 130 zusätzliche echte Cross-Family-Paare.
+
+### Weiter offen
+
+Diese Aktivierung bedeutet **nicht**, dass der Markt vollständig recherchiert ist.
+Fehlende Hersteller/Modelle werden weiter systematisch ergänzt.
+Research-Vollständigkeit bleibt `UNPROVEN` bis gruppenspezifischer echter Beleg vorliegt.
+
+## Aktueller erster offener Arbeitsblock
+
+Kein 0.8.5-Reparaturfehler lokal belegt.
+Nächster Schritt: WordPress-Live-Vorcheck 0.8.5, danach weitere Produktrecherche/Profilskalierung.
 
 Keine künstlichen SEO-PASS-Werte.
 Kein Writer/Draft/Publish.
