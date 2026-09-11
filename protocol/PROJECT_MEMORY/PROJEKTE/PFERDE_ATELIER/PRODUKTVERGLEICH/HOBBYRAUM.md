@@ -12,17 +12,17 @@ STATUS: AKTIV
 
 UPC 0.8.6 besitzt technisch weiterhin nur 7 maschinenfeste Vergleichsprofile/Decision-Policies; **143/150 sind technisch noch offen**.
 
-Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, weitere Profilspecs für **39 Gruppen** erstellt.
+Seit der Readiness-Baseline sind source-bound, aber **nicht materialisiert**, weitere Profilspecs für **45 Gruppen** erstellt.
 
 Belege:
 `AKTENSCHRANK/60_FINAL_COVERAGE_DISPOSITION_175_V1_20260911.md`
 `AKTENSCHRANK/61_READINESS_BASELINE_V1_150_20260911.md`
-`AKTENSCHRANK/62_...` bis `AKTENSCHRANK/75_...`.
+`AKTENSCHRANK/62_...` bis `AKTENSCHRANK/77_...`.
 
 Jüngste Blöcke:
-- 73: Whiteboards / Hoftraktoren / Hoflader-Zubehör;
-- 74: Hofbesen / Hofabsperrungen / Rampen;
-- 75: Hofbeleuchtung / Stallbeleuchtung / Frostwächter.
+- 75: Hofbeleuchtung / Stallbeleuchtung / Frostwächter;
+- 76: Lüfter / Zeitschaltuhren / Kameras;
+- 77: Mobile Unterstände / Windschutz / Dachrinnen.
 
 Technischer 0.8.6-Stand bleibt unverändert lokal hart grün. WordPress-Live für 0.8.6 ist offen.
 
@@ -32,27 +32,26 @@ Technischer 0.8.6-Stand bleibt unverändert lokal hart grün. WordPress-Live fü
 
 ## NEXT ACTION
 
-Registry nach `frostwaechter` frisch direkt aus Portalstruktur + finaler V1-Disposition geprüft.
-
-Explizit überspringen:
-- `wasserleitungen-im-stall` -> `PRODUCT_COMPARISON_V1_NOT_APPLICABLE`.
+Registry nach `dachrinnen-am-unterstand` frisch direkt aus der Portalstruktur gelesen.
 
 Nächster fachlich zulässiger Profilblock:
-1. `luefter-im-stall`
-2. `zeitschaltuhren-im-stall`
-3. `kameras-im-stall`
+1. `unterstand-beleuchtung`
+2. `boxentueren`
+3. `boxenriegel`
+4. `boxengitter`
 
-Für den Dreierblock source-bound binden:
+Für diesen Block source-bound binden:
 - konkrete Produkt-/Konstruktionsklasse;
-- gemeinsame Faktenmatrix;
+- Faktenmatrix;
 - Nutzungsklasse/Pairing-Regeln;
 - Decision-Policy je Fact-Key;
 - aktuelle Herstellerprodukte dagegen prüfen.
 
 Vor Paaruniversum hart prüfen:
-- Lüfter: Stall-/Landwirtschaftseignung, Montageart, Luftleistung, Schutzart und Regelklasse; keine Haushaltsventilatoren einschleusen;
-- Zeitschaltuhren: physische Schaltklasse, Kanalzahl, Installationsart, Schaltleistung und Schutzart; keine reine App/Cloud-Automation gegen Hardware;
-- Kameras: Innen/Außen-/Stallklasse, IP-Schutz, Netz/WLAN, Speicherung, Nachtsicht und Datenschutz-/Cloudabhängigkeit getrennt halten; keine Baby-/Wohnraumkamera allein wegen Bildfunktion einschleusen.
+- Unterstand-Beleuchtung: gleiche technische Leuchtenklasse; nicht bloß Hof- oder Stallbeleuchtung über einen anderen Standort-Key duplizieren;
+- Boxentüren: gleiche Türbauart, Öffnungsmechanik, Material-/Füllungsklasse und Größenklasse;
+- Boxenriegel: gleiche Verriegelungsmechanik und Montageklasse; Türbeschlag nicht mit allgemeinem Stallriegel mischen;
+- Boxengitter: gleiche Gitter-/Front-/Montageklasse; keine komplette Boxenfront, Trennwand oder Fenstervergitterung blind kreuzen.
 
 Keine finalen Produktpärchen manuell festlegen.
 Kein Pluginrelease pro Gruppe.
