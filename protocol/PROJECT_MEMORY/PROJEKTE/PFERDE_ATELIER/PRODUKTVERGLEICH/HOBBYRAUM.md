@@ -1,60 +1,63 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
-STAND: 2026-09-09
-STATUS: FREI FÜR ÜBERGABE / FACHBLOCK 0.8.3 ABGESCHLOSSEN
+STAND: 2026-09-11
+STATUS: AKTIV / PV-SCALE-084-001
 
-## ABGESCHLOSSENER KANDIDAT
+## AUSGANGSBASIS
 
+Exakt geprüfte Basis:
 `universal-product-comparison-0.8.3-prototype.zip`
 
 SHA-256:
 `4c08ca1df348ab49849ddde8f85980db450694c58010cd0c431575bc6a3cd11e`
 
-Branch:
-`hobbyroom/productvergleich-workflow-v070-20260908`
+0.8.3 bleibt unverändert als Proof-/Regression-Basis.
 
-## PASS
+## AKTUELLER AUFTRAG
 
-Lokal:
-- 25/25 Tests;
-- 43/43 PHP-Lint;
-- Source↔ZIP 57/57;
-- Report-Hashes 56/56;
-- echte UPK/PSTE-Abhängigkeiten;
-- 11 reale herstellerübergreifende Regendecken-Paare;
-- Dossier V2 + Fachpolicy;
-- Policy-/3-Produkte-/Quellen-/Audit-Negativfälle;
+Generische Vollabdeckung aller autoritativen Vergleichs-Produktgruppen bauen.
+
+Portalbindung:
+- Produktseiten: 329;
+- Vergleichs-Produktgruppen: **175**;
+- Regendecken: Proofgruppe 1/175.
+
+Ziel pro Gruppe:
+`vollständiger Produktbestand -> alle fachlich zulässigen A-vs-B-Paare -> SEO-Prüfung -> terminal BLOCK oder Dossier V2`.
+
+## HARD RULES
+
+- keine Gruppe hartcodiert;
+- keine willkürliche Gruppenobergrenze;
+- keine willkürliche Paarobergrenze;
+- PRODUCT_COMPARISON V1 bleibt exakt 2 Produkte;
+- Same Brand/incompatible Profile vor Providerkosten BLOCK;
+- fehlendes Gruppenprofil/Decision-Policy/Produktinventar muss sichtbar als Coverage-Lücke erscheinen und darf nicht still verschwinden;
+- Batch/Resume zulässig, aber ohne verlorene oder doppelte Paare;
+- persistente SEO-Evidenz wiederverwenden;
+- keine Providerkosten für bereits gültig vorhandene Evidenz;
+- kein Writer-/Draft-/Publishweg;
 - kein Auto-Publish.
 
-WordPress-Live:
-- Version 0.8.3 bestätigt;
-- bestehende 8 terminalen SEO-Befunde erhalten;
-- vor Lauf $0.0000 neue Providerkosten;
-- nach Lauf 0 Provider-Aufrufe;
-- $0.0000;
-- 8 BLOCKED;
-- 0 Dossiers;
-- korrekt `NO_ELIGIBLE_COMPARISONS`.
+## NÄCHSTE TECHNISCHE STUFE
 
-## KEIN OFFENER REPARATURFEHLER
+0.8.4-Kandidat ausschließlich aus der exakten 0.8.3-ZIP ableiten:
+1. portalgebundene 175-Gruppen-Registry;
+2. Readiness je Gruppe (`READY`, `PROFILE_MISSING`, `POLICY_MISSING`, `PRODUCT_INVENTORY_MISSING` usw.);
+3. vollständige Paar-Coverage je READY-Gruppe;
+4. Coverage-Receipt je Gruppe + global;
+5. Kostenprognose nur für noch offene Providerarbeit;
+6. bestehende 0.8.3-Regeln unverändert erhalten.
 
-Für den aktuell realen Bestand ist kein weiterer Produktvergleichs-Fix belegt.
+## ABNAHME
 
-Der positive Dossier-V2-Livefall bleibt nur **bedingt offen**:
-Er kann erst real ausgeführt werden, wenn ein echtes A-vs-B-Paar SEO-PASS erreicht.
+Vor neuer ZIP zwingend:
+- positiv/negativ;
+- alle bestehenden Regressionen;
+- Gesamtworkflow;
+- große synthetische Produktgruppe ohne Paarverlust;
+- Resume/Idempotenz/Kostenschutz;
+- Coverage-Manipulationen müssen ROT werden;
+- Fresh-ZIP erneut komplett PASS.
 
-Keine künstliche Freischaltung, kein Testprodukt als Live-Wahrheit, kein Providerkauf nur um einen grünen Dossierfall zu erzwingen.
-
-## NÄCHSTE AKTION
-
-Wenn der Nachbarweg SEO/TEXT/ACM vollständig hart freigegeben ist:
-
-1. dort read-only den Produktvergleich-Übergabevertrag lesen;
-2. Fachvertrag + Dossier-V2-Vertrag gegen den echten bestehenden Handoff prüfen;
-3. nur dort die minimale Anbindung entwerfen/testen;
-4. Produktvergleich-Branch dabei read-only lassen.
-
-Bis dahin:
-STATUS FREI.
-Kein weiterer Plugin-Fix.
-Kein Publish.
+Vorher keine Ausgabe/Freigabe.
