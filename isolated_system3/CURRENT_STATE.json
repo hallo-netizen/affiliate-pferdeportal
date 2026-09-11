@@ -1,6 +1,6 @@
 {
   "system": "SYSTEM3_ISOLATED_ONE_PROCESS",
-  "status": "CANONICAL_LINK_RULE_RETEST_IN_PROGRESS",
+  "status": "BLOCKED_CODEX_USAGE_LIMIT_AFTER_FIXED_LINK_BINDING",
   "authoritative_runtime_scope": "isolated_system3 only",
   "architecture_branch": "hobbyroom/system3-isolated-one-process-v1",
   "architecture_head": "5c34cf9e981d4e98134b40818c27a779c45524ce",
@@ -19,7 +19,10 @@
     "fixed canonical internal-link rules re-verified: exactly three roles, page/category targets only, external/post/unbound/replacement forbidden",
     "retained production plan 02_PRODUKTIONSPLAN_3_ENTWUERFE.json found with already materialized link_bindings and portal_link_registry",
     "for Regendecken FAQ the retained fixed bindings are parent_category=Regendecken, semantic_related=Pferdedecken, further_information=Journal with exact anchors/reasons and FAQ section ids answer/details/further_information",
-    "System3 fixture corrected from ad-hoc test links to the retained fixed Regendecken FAQ bindings"
+    "System3 fixture corrected from ad-hoc test links to the retained fixed Regendecken FAQ bindings",
+    "CI on fixed-link test head 9f3ba4d848d0cd513d4a9727ceedfdbe0d687cb0 passed",
+    "subsequent CURRENT_STATE-only commit ff2300b6add3e0183e12209cc02d6132e4c3c021 also passed deterministic entrance CI",
+    "compare 9f3ba4d8..ff2300b6 proves only isolated_system3/CURRENT_STATE.json changed; fixture remained unchanged"
   ],
   "resolved_blockers": [
     {
@@ -35,7 +38,7 @@
     {
       "code": "CANONICAL_LINK_PRESELECTION_AUTHORITY_NOT_DEFINED",
       "resolved_for_regendecken_fixture": true,
-      "evidence": "Retained 02_PRODUKTIONSPLAN_3_ENTWUERFE.json already contains exact link_bindings and portal_link_registry for Regendecken FAQ, including href, anchor, reason, role and section_id. The prior statement that no fixed binding authority existed was too broad."
+      "evidence": "Retained 02_PRODUKTIONSPLAN_3_ENTWUERFE.json contains exact link_bindings and portal_link_registry for Regendecken FAQ, including href, anchor, reason, role and section_id."
     }
   ],
   "fixed_link_rules": {
@@ -75,13 +78,16 @@
     "previous_artifact_audit_evidence": "PR232 issuecomment-5634121819",
     "previous_artifact_sha256": "40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
     "previous_link_conformance_status": "SUPERSEDED_FOR_LINK_RULE_PROOF",
-    "detail": "The previous PASS used externally inserted test links that were valid by generic sealed constraints but did not use the retained fixed Regendecken FAQ link bindings. It remains evidence for article/fact/rule execution but is not the final link-rule regression proof."
+    "detail": "Previous PASS remains valid evidence for fact/rule/article execution but used ad-hoc test links rather than the retained fixed Regendecken FAQ bindings."
   },
   "current_test": {
-    "head_before_state_update": "9f3ba4d848d0cd513d4a9727ceedfdbe0d687cb0",
-    "start_comment": "PR232 issuecomment-5634318235",
-    "purpose": "rerun the same canonical FAQ article path with the already retained fixed Regendecken FAQ link bindings",
-    "result": "PENDING"
+    "fixed_link_fixture_commit": "9f3ba4d848d0cd513d4a9727ceedfdbe0d687cb0",
+    "current_head_at_retry": "ff2300b6add3e0183e12209cc02d6132e4c3c021",
+    "active_start_comment": "PR232 issuecomment-5634341724",
+    "purpose": "rerun the same canonical FAQ article path with the retained fixed Regendecken FAQ bindings",
+    "result": "NOT_EXECUTED",
+    "execution_blocker": "CODEX_USAGE_LIMIT_REACHED",
+    "detail": "Codex returned usage-limit exhaustion before executing the canonical article retest. This is not an article FAIL, rule FAIL or link-rule FAIL."
   },
   "legacy_7of7_reference": {
     "production_package": "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
@@ -91,13 +97,15 @@
     "wordpress_wxr": "GEN1_7_ARTIKEL_KURZWEG_WORDPRESS_IMPORT_AKTUELL.xml"
   },
   "current_blocker": {
-    "code": "NONE_UNTIL_FIXED_LINK_RETEST_RETURNS",
-    "detail": "No new technical blocker is established after discovery of the retained fixed link bindings. Await only the first exact PASS/BLOCKED return from the already-started same canonical article retest. Do not open a new repair path before that return.",
+    "code": "CODEX_USAGE_LIMIT_REACHED",
+    "detail": "The fixed-link canonical retest could not execute because the Codex GitHub task returned that the Codex usage limit has been reached. No canonical PASS/BLOCKED result exists for the corrected fixed-link fixture yet.",
+    "evidence": "PR232 bot response immediately before issuecomment-5634341724: You have reached your Codex usage limits.",
     "resolved": false
   },
-  "last_safe_state": "Fixture now uses the retained fixed Regendecken FAQ link bindings and CI on head 9f3ba4d848d0cd513d4a9727ceedfdbe0d687cb0 is green. Same canonical article retest has been started. No WordPress write, publish or merge performed.",
-  "next_action": "Consume only the exact result of PR232 issuecomment-5634318235. On PASS, independently audit the returned artifact and then proceed to the existing 7/7 corpus without a new runner. On BLOCKED, stop only at that first exact blocker. Do not redesign link rules or ask for another upload.",
+  "last_safe_state": "Fixed canonical Regendecken FAQ link bindings are now in the fixture and CI is green. The required canonical retest has not executed solely because of Codex usage limits. No WordPress write, publish or merge performed.",
+  "next_action": "When Codex execution is available again, rerun exactly the same canonical test on the unchanged fixed-link fixture before any further repair or 7/7 expansion. Accept only SYSTEM3_RETURN_PASS or the first exact SYSTEM3_RETURN_BLOCKED result, then independently audit the artifact. Do not alter links, rules, fixture facts, runner, architecture or route beforehand.",
   "forbidden": [
+    "treat Codex usage-limit response as an article or rule FAIL",
     "reuse runtime/workflow code from System 1 or System 2",
     "model/Codex free selection of internal link targets",
     "invent or reinterpret fixed link bindings",
