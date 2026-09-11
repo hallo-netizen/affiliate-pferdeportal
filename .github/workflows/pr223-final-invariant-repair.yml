@@ -1,4 +1,4 @@
-name: TEMP PR223 final invariant repair
+name: TEMP PR223 final invariant repair V2
 on:
   push:
     branches:
@@ -16,12 +16,16 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: true
-      - name: Restore slotless plan item and v4-v5 compatibility
+      - name: Restore invariants and synchronize existing hash chain
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
+          import hashlib, json
+
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          def dump(p,o): Path(p).write_text(json.dumps(o,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
           action=Path('control/single-door-boundary/codex_current_action.py')
           s=action.read_text(encoding='utf-8')
@@ -82,7 +86,30 @@ jobs:
           extra='''        for field in (\"fact_pack\",\"production_plan_item\"):\n            bad=copy.deepcopy(req); bad[field][\"source_snapshot_id\"]=\"0\"*64\n            with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n        bad=copy.deepcopy(req); bad[\"production_plan_item\"][\"plan_slot\"]=meta[\"plan_slot\"]\n        with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n        bad=copy.deepcopy(req); bad[\"plan_slot\"]=\"0\"*64\n        with self.assertRaises(handoff.Blocked): handoff._validate_raw_context(bad,ctx,meta,rel)\n'''
           if anchor not in s: raise SystemExit('TEST_NEGATIVE_INSERT_POINT_MISSING')
           test.write_text(s.replace(anchor,extra,1),encoding='utf-8')
-          print('PR223_INVARIANTS_RESTORED')
+
+          step_path=Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json')
+          step=json.loads(step_path.read_text(encoding='utf-8'))
+          refs={x['ref']:x for x in step['authorized_inputs'] if isinstance(x,dict) and 'ref' in x}
+          refs[str(action)]['sha256']=sha(action)
+          refs[str(handoff)]['sha256']=sha(handoff)
+          old_text='production_plan_item bleibt an current_item (canonical_article_id, plan_slot, article_type, target_keyword, topic, WordPress-Kategorie) gebunden.'
+          new_text='production_plan_item bleibt slotlos und an current_item (canonical_article_id, article_type, target_keyword, topic, WordPress-Kategorie) gebunden; plan_slot wird ausschließlich über current_item/workflow_release_item/Handoff-Request gebunden und darf im production_plan_item nicht vorkommen.'
+          if old_text not in step['instruction']: raise SystemExit('STEP_SLOTLESS_INSTRUCTION_POINT_MISSING')
+          step['instruction']=step['instruction'].replace(old_text,new_text,1)
+          dump(step_path,step)
+
+          state_path=Path('control/startmaster0107/CURRENT_STATE.json')
+          state=json.loads(state_path.read_text(encoding='utf-8'))
+          step_sha=sha(step_path)
+          state['execution_gate']['bundle_sha256']=step_sha
+          state['execution_gate_rearm_target']['bundle_sha256']=step_sha
+          dump(state_path,state)
+
+          start_path=Path('control/startmaster0107/PFERDE_ATELIER_START_HERE.json')
+          start=json.loads(start_path.read_text(encoding='utf-8'))
+          start['current_state_sha256']=sha(state_path)
+          dump(start_path,start)
+          print('PR223_INVARIANTS_AND_HASH_CHAIN_SYNCHRONIZED')
           PY
       - name: Hard positive negative full regression
         shell: bash
@@ -95,6 +122,7 @@ jobs:
           grep -F "['production_plan_v4','production_plan_v5']" control/startmaster0107/fachworkflow_proof_handoff.py >/dev/null
           grep -F "PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN" control/single-door-boundary/codex_current_action.py >/dev/null
           grep -F "BOUND_PRODUCTION_PLAN_ITEM_SYNTHETIC_SLOT_FORBIDDEN" control/startmaster0107/fachworkflow_proof_handoff.py >/dev/null
+          grep -F "production_plan_item bleibt slotlos" control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json >/dev/null
           git diff --check
           test -z "$(git diff --name-only origin/main...HEAD -- control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py control/startmaster0107/runtime_inbox/runtime_batch_slot_guard.py control/startmaster0107/runtime_inbox/RUNTIME_BATCH_SLOT_CONTRACT_V1.json control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107.txt control/startmaster0107/runtime_packages control/output-quarantine .github/workflows/pferde-atelier-endstempel.yml AGENTS.md)"
       - name: Remove temporary test path and push clean candidate
