@@ -302,3 +302,41 @@ Keine neuen Codeänderungen und daher kein neuer technischer Testlauf ausgelöst
 
 Kein Merge.
 Kein Publish.
+
+## Profilblock Pferdebürsten / Striegel / Kardätschen
+
+Einstieg frisch gegen `CURRENT_STATE.md`, `HOBBYRAUM.md`, Akten 51/55/60/61 und Branchstand geprüft.
+
+Ausgeführt:
+- aktuelle Herstellerprodukte für LeMieux und Waldhausen gegen die drei getrennten Nutzungsklassen geprüft;
+- `pferdebuersten` fail-closed als Residualgruppe gebunden, Paarung nur innerhalb identischem `brush_type`;
+- erste belegte Residual-Unterklasse `DANDY_BRUSH`;
+- `striegel` auf `MANUAL_CURRY_COMB` gebunden;
+- `kardaetschen` auf `BODY_GROOMING_BRUSH` gebunden;
+- je Gruppe Faktenmatrix, Pairing-Regeln und Decision-Policy source-bound festgelegt;
+- Bewertungsableitungen zu Komfort, Hautverträglichkeit, Reinigungsleistung, Ergonomie oder Haltbarkeit ohne direkte Evidenz ausdrücklich ausgeschlossen.
+
+Dauerbeleg:
+`AKTENSCHRANK/65_PROFILE_FACT_MATRIX_PFERDEBUERSTEN_STRIEGEL_KARDAETSCHEN_V1_20260911.md`.
+
+Commit Akte 65:
+`56b8dacf0cc73a47071dcfb0f5c64c8f8abc73f8`.
+
+Negativprüfung:
+- keine Vermischung `pferdebuersten` / `striegel` / `kardaetschen`;
+- kein manuell festgeschriebenes Produktpaar;
+- kein Research-Fund automatisch Product Knowledge;
+- keine SEO-Freigabe;
+- keine Änderung an `comparison-profiles.json`;
+- kein Pluginrelease.
+
+Standfolge:
+- technisch UPC 0.8.6 unverändert 7 maschinenfeste Profile;
+- technisch weiterhin 143/150 V1-Gruppen ohne maschinenfestes Profil;
+- source-bound vorbereitet nun 10 nicht materialisierte Gruppen (Akten 62–65).
+
+Nächster Registry-Block nach Überspringen des bereits maschinenfesten `schermaschinen`:
+`satteldecken` -> `schabracken` -> `sattelgurte`.
+
+Kein Merge.
+Kein Publish.
