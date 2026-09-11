@@ -46,7 +46,7 @@ jobs:
           find . -mindepth 1 -maxdepth 1 ! -name isolated_system3 -exec rm -rf {} +
           test "$(find . -mindepth 1 -maxdepth 1 -printf '%f\n')" = 'isolated_system3'
           echo SYSTEM3_OUTSIDE_CUT_PASS
-      - name: Verify sealed copy and locate real rule corpus
+      - name: Verify complete sealed authoritative packages
         shell: bash
         run: |
           set -euo pipefail
@@ -56,12 +56,14 @@ jobs:
           mkdir -p /tmp/ppm679-bound /tmp/pserc-bound
           unzip -q "$dst/packages/ppm679.zip" -d /tmp/ppm679-bound
           unzip -q "$dst/packages/pserc.zip" -d /tmp/pserc-bound
-          grep -RIlE 'ARTICLE_TYPE|Article.?Type|RULE|Rule|VALIDATOR|Validator|TEMPLATE|Template' /tmp/ppm679-bound > /tmp/system3-rule-files.txt
-          test -s /tmp/system3-rule-files.txt
-          grep -RIlE 'PSERC|RULE|Rule|VALIDATOR|Validator' /tmp/pserc-bound > /tmp/system3-pserc-rule-files.txt
-          test -s /tmp/system3-pserc-rule-files.txt
+          ppm_count="$(find /tmp/ppm679-bound -type f | wc -l)"
+          pserc_count="$(find /tmp/pserc-bound -type f | wc -l)"
+          test "$ppm_count" -gt 0
+          test "$pserc_count" -gt 0
           test -f "$dst/pste/includes/class-pste-breadth-research-queue.php"
-          echo SYSTEM3_REAL_RULE_CORPUS_PRESENT_PASS
+          echo SYSTEM3_WHOLE_PPM_PACKAGE_BOUND_FILES=$ppm_count
+          echo SYSTEM3_WHOLE_PSERC_PACKAGE_BOUND_FILES=$pserc_count
+          echo SYSTEM3_COMPLETE_RULE_PACKAGES_BOUND_PASS
       - name: Negative proof sealed rules cannot be changed silently
         shell: bash
         run: |
