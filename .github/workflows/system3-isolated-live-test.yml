@@ -20,12 +20,26 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run isolated live boundary
+      - name: Bind verified Codex output into runtime evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          src = Path('isolated_system3/live_fixture/stage_evidence.json')
+          evidence = json.loads(src.read_text(encoding='utf-8'))
+          article = Path('isolated_system3/codex_output.md').read_text(encoding='utf-8')
+          evidence['DRAFT']['article'] = article
+          evidence['RULE_CHECK'] = {'status':'UNTRUSTED'}
+          evidence['QUALITY_CHECK'] = {'status':'UNTRUSTED'}
+          Path('/tmp/system3-runtime-evidence.json').write_text(json.dumps(evidence, ensure_ascii=False), encoding='utf-8')
+          print('SYSTEM3_CODEX_OUTPUT_BOUND_PASS')
+          PY
+      - name: Run isolated live boundary on Codex output
         run: |
           rm -rf isolated_system3/live_output
           python -m isolated_system3.live_test \
             --input isolated_system3/live_fixture/wordpress_input.json \
-            --evidence isolated_system3/live_fixture/stage_evidence.json \
+            --evidence /tmp/system3-runtime-evidence.json \
             --output isolated_system3/live_output/SYSTEM3-LIVE-001.json
       - name: Prove output gate is non-writing and sealed
         run: |
@@ -42,14 +56,15 @@ jobs:
           supplied = e.pop('envelope_hash')
           assert supplied == _sha256(e), 'LIVE_OUTPUT_HASH_FAIL'
           assert e['result']['trace'] == ['INGRESS','CAPSULE','RESEARCH','FACT_CHECK','DRAFT','LANGUAGE','RULE_CHECK','QUALITY_CHECK','OUTPUT_GATE','DONE']
-          print('SYSTEM3_LIVE_OUTPUT_GATE_PASS')
+          assert e['result']['article'] == Path('isolated_system3/codex_output.md').read_text(encoding='utf-8')
+          print('SYSTEM3_CODEX_OUTPUT_GATE_PASS')
           PY
       - name: Negative test forged PASS cannot bypass independent checks
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          src = Path('isolated_system3/live_fixture/stage_evidence.json')
+          src = Path('/tmp/system3-runtime-evidence.json')
           bad = json.loads(src.read_text(encoding='utf-8'))
           bad['DRAFT']['article'] = '# Woran erkennt man eine passende Regendecke für ein Pferd?\n\nZu kurz.'
           bad['RULE_CHECK'] = {'status':'PASS','all_rules_exact':True}
