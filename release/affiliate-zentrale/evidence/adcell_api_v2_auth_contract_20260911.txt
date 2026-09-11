@@ -1,0 +1,39 @@
+AFFILIATE_ZENTRALE – ADCELL API v2 AUTH CONTRACT PROOF
+Date: 2026-09-11
+Status: AUTH_CONTRACT_PROVEN / LIVE_ACCOUNT_ACCESS_STILL_BLOCKED
+
+Authoritative source:
+Official ADCELL API v2 documentation opened by the user on 2026-09-11 and preserved in the user-supplied screenshots/document extracts.
+
+PROVEN AUTH CONTRACT
+- API base: https://api.adcell.org/api/v2/
+- Authentication method: token-based authentication.
+- Token endpoint: https://api.adcell.org/api/v2/user/getToken
+- Token request parameters: userName and password.
+- The documented default token lifetime is 15 minutes.
+- The same valid token may be reused during its validity period.
+- Every API request except /user/getToken requires the parameter named exactly: token.
+- No Basic-Auth contract is used by the proven API-v2 documentation.
+- No Bearer-Auth contract is used by the proven API-v2 documentation.
+
+PROVEN READ-ONLY / PROMOTION ENDPOINTS
+- GET https://api.adcell.org/api/v2/affiliate/program/export
+- GET https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeCsv
+- GET https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeBanner
+- GET https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeDeeplink
+
+PROGRAM CONTRACT
+- /affiliate/program/export accepts affiliateStatus=accepted.
+- Response contains programId, programName, isActive and affiliateStatus.
+- Portal policy remains stricter than account state: only accepted + active + explicitly allowlisted programId may enter the portal pipeline.
+
+PROMOTION CONTRACT
+- CSV/Banner/Deeplink requests accept programIds or promotionId.
+- CSV response exposes csvUrl.
+- Banner response exposes promotionId/programId, clickoutLink, trackViewLink, width, height and bannerUrl.
+- Deeplink is program-specific and has its own promotionId; outputDeeplink can be supplied where needed.
+
+SOURCE SAFETY CONSEQUENCE
+- The discarded Basic-Auth scratch is invalid and must not be reused.
+- The canonical 6.72.8 source may now proceed to the smallest ADCELL provider-routing/API-v2 fix.
+- Live PASS remains forbidden until the user's ADCELL account access is restored and a real WordPress/MariaDB/API end-to-end run succeeds.
