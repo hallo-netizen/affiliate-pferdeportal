@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 54,
+  "generation": 55,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -668,7 +668,7 @@
     "current_milestone": "ADCELL_API_V2_67219_MERGED_CANONICAL_GATES_AND_LIVE_E2E",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
-    "new_version_policy": "CURRENT_BOUND_PLUGINBUERO_67217_PLUS_ADCELL_67219_ONLY",
+    "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
     "investigation_policy": "ONLY_CURRENT_BOUND_GATE_OR_EXPLICIT_USER_SCOPE",
     "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
     "goal_drift_policy": "FAIL_CLOSED",

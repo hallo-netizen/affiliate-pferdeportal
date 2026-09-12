@@ -79,6 +79,8 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 | AF-063 | 6.72.9-Manifesthash wurde in Status/Evidence falsch transkribiert | Exakte 26-Dateien-Manifestdatei und frisch regeneriertes Manifest ergeben `83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e`, während Status/Evidence abweichend `83c75bf1359...` festhielten | Kandidaten-Manifesthash ausschließlich aus der gespeicherten exakten Manifestdatei ableiten und vor jeder Status-/Governance-Bindung Manifestdatei ↔ regenerierter 26-Dateien-Baum ↔ Fresh-Unpack bytegenau gegentesten; abweichend transkribierte Hashes nie weiterbinden |
 | AF-064 | Neueren Pluginbüro-Stand bei Versionswahl nicht geprüft | Für ADCELL wurde 6.72.9 als nächster Kandidat vorbereitet, obwohl im Pluginbüro bereits die vollständig geprüfte Affiliate-Zentrale-Linie bis 6.72.17 vorlag; 6.72.17 enthält den ADCELL-v2-Fix noch nicht | Vor jeder neuen Affiliate-Kandidatenversion zuerst Campus/Pluginbüro nach dem jüngsten vollständig geprüften Affiliate-Zentrale-Stand prüfen. Neue Fachänderungen müssen auf diesem jüngsten belegten Stand integriert werden; niemals eine ältere Linie durch niedrigere Versionsnummer oder Source-Rücksprung überschreiben. Beide Seiten des Merges separat regressieren. |
 
+| AF-065 | 6.72.19-Bind schwächte versehentlich einen unveränderlichen Release-Guard-Vertragswert | Kanonischer Gate-Lauf 34689810939 blockiert exakt mit `OBJECTIVE_CONTROL_WEAKENED:new_version_policy` | `objective_control.new_version_policy` niemals für einen Meilenstein umbenennen; der Guard-Vertragswert bleibt exakt `FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE`. Fachlicher Versions-/Meilensteinstatus gehört ausschließlich in `current_milestone`, Task und Scope. |
+
 ## AUFLÖSUNGSSTATUS 2026-09-12 – ADCELL API V2
 - AF-023: BEHOBEN – Source/Manifest/Governance gebunden; originaler Release-Guard real PASS.
 - AF-057: BEHOBEN für aktuellen ADCELL-Meilenstein – Task nachgezogen; stale OTTO-Mischtest durch 18/18-Funktionshash-Regression ersetzt.
@@ -87,4 +89,6 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 - AF-060: BEHOBEN – offizieller ADCELL-v2-Tokenvertrag autoritativ belegt; keine Auth-Annahme mehr.
 - AF-062: BEHOBEN – ADCELL-v2-Runtimeweg nutzt Token-Test; Legacy-Basic-Auth-Hooks werden ersetzt; Hook-Runtime-Gate PASS.
 - AF-063: BEHOBEN – gespeicherte Manifestdatei, regenerierter 26-Dateien-Baum und Fresh-Unpack ergeben bytegenau `83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e`; falsche Status-/Evidence-/Governance-/Campus-Referenzen wurden korrigiert.
-- AF-064: OFFEN – jüngster vollständig geprüfter Pluginbüro-Stand 6.72.17 muss als neue Integrationsbasis gegen den kanonischen ADCELL-v2-Fix zusammengeführt und beidseitig regressiert werden.
+- AF-064: BEHOBEN – Pluginbüro-6.72.17 wurde konfliktfrei mit dem ADCELL-v2-Fix zusammengeführt; 6.72.19 ist kanonisch gebunden und die beidseitigen Regressionen sind gebunden.
+
+- AF-065: BEHOBEN – `new_version_policy` auf den unveränderlichen Guard-Vertragswert zurückgesetzt; derselbe kanonische Gate-Lauf wird erneut ausgeführt.
