@@ -195,7 +195,7 @@ class UPC_Repository {
                 if ( $manage_transaction ) {
                     $this->wpdb->query( 'ROLLBACK' );
                 }
-                return new WP_Error( 'UPC_FEATURE_INSERT_FAILED', $this->wpdb->last_error ? $this->wpdb->last_error : 'Feature insert failed.' );
+                return new WP_Error( 'UPC_FEATURE_INSERT_FAILED', $this->wpdb->last_error ? $this->wpdb->last_error : 'Comparison feature insert failed.' );
             }
         }
 
