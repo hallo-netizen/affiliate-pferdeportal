@@ -8,6 +8,14 @@ TEST ONLY. No merge. No publish. No production release.
 - Old attempts may be read only as negative/design evidence.
 - Do not reuse old articles, fact packs, research, stage proofs, recovery or production artifacts.
 
+## Textmaschine + design are immutable
+- The current Textmaschine/content rules are READ-ONLY. Do not edit, relax, extend, reinterpret, normalize, replace or shadow them.
+- PPM 6.7.9, current article-type/content rules, table contract, WordPress plugin, theme/CSS and design selectors are READ-ONLY.
+- System 4 may validate a candidate against those existing contracts but may not repair or restyle the contract itself.
+- Existing production HTML/design must remain unchanged: current production root/type classes and attributes, current table selector classes and current Beratung H2 section-heading level.
+- `design_guard.py` is PASS/BLOCK only and performs zero content/design mutation.
+- If the test would require a Textmaschine-rule or design change, stop with `BLOCKED_TEXTMASCHINE_OR_DESIGN_IMMUTABLE`.
+
 ## Read-only authority discovery
 Codex MAY read repository files outside `isolated_system4/**` solely to identify the CURRENT AUTHORITATIVE rule texts/specifications and pure checker/tool inputs for:
 - isolated Textmaschine/content rules;
@@ -38,6 +46,7 @@ Add a machine test that fails if System 4 Python code imports/executes/calls or 
 At minimum prove:
 - valid article -> all attached real rule checkers PASS;
 - required table removed -> BLOCKED when the authoritative contract requires it;
+- existing production/design class drift -> BLOCKED with zero mutation;
 - external link inserted -> BLOCKED;
 - required internal-link binding missing/wrong -> BLOCKED when required;
 - mandatory LanguageTool/domain checker unavailable -> fail closed;
@@ -60,17 +69,18 @@ For the bound first item:
 - Fresh research/facts/draft only in a temporary workspace.
 - No old article body as source.
 - Run through every now-bound real production rule/checker.
+- Preserve the existing Textmaschine rules and design contract byte-for-byte at their authority sources; do not modify them to obtain PASS.
 - On repairable FAIL, change only the same draft for the exact reported defect and rerun the same checker.
 - Continue to PASS or the first genuine non-repairable hard blocker.
 
 ## Output
-Determine the CURRENT authoritative WordPress draft-output contract freshly. Do not use WXR merely because the earlier architecture test used it if the actual current production handoff requires another contract. Produce only a draft/non-publish output.
+Determine the CURRENT authoritative WordPress draft-output contract freshly. Do not use WXR merely because the earlier architecture test used it if the actual current production handoff requires another contract. Produce only a draft/non-publish output. No design transformation may occur after the checked body.
 
 ## Terminal return
 Return only one of:
 
 `SYSTEM4_FIRST_FULL_RULE_ARTICLE_PASS`
-with title, article type, authoritative sources/tools actually bound, checker sequence, repair sequence if any, final article verbatim, output contract/file, SHA256, `publish_allowed=false`, and NO-LEGACY PASS;
+with title, article type, authoritative sources/tools actually bound, checker sequence, repair sequence if any, final article verbatim, output contract/file, SHA256, `publish_allowed=false`, unchanged-design PASS, and NO-LEGACY PASS;
 
 or the first genuine non-repairable blocker with exact status/error and authoritative source causing it.
 
