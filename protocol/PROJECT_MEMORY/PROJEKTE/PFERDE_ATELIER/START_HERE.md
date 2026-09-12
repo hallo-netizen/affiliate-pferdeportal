@@ -1,6 +1,6 @@
 # PROJEKTGEBÄUDE – PFERDE-ATELIER
 
-STAND: 2026-09-05
+STAND: 2026-09-12
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -39,6 +39,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 
 - `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
 - `PRODUKTVERGLEICH/START_HERE.md` → Produktvergleichs-Konzept / Vergleichsdefinition / Faktendossier / Übergabe an TEXT
+- `PFERDERASSEN/START_HERE.md` → zentrale quellengebundene Pferde-/Pony-/Kleinpferde-Rassenbasis / Recherchegrundlage
 - `DESIGN/START_HERE.md` → Portaldesign
 - `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
