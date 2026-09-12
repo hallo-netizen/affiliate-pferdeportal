@@ -5,8 +5,8 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - Do not modify anything outside `isolated_system4/`.
 - Do not import/copy/wrap runtime, workers, gates, handoffs, signers, contracts or state machines from concepts 1–3.
 - Historical systems may be read only as inspiration/negative evidence.
-- No merge, no production, no publish.
-- Runtime workspaces and generated article/output files must live outside the repository unless a bound task explicitly authorizes a narrow proof-only exception under `isolated_system4/**`.
+- No merge, no production publish.
+- Runtime workspaces and generated article/output files must live outside the repository except for the narrow parent-chat transport exception defined below.
 - Allowed tasks:
   1. architecture live test via `live_test.py`;
   2. first generated article test exactly per `FIRST_ARTICLE_TASK.md`;
@@ -30,15 +30,25 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - Only a genuine `FULL_CHECK_HARD_BLOCK`, tool/runtime failure, integrity failure or other non-repairable controller/batch-gate blocker may terminate the run.
 
 ## PARENT-CHAT DOWNLOAD HANDOFF HARD RULE
-- A real 7/7 production run is NOT complete and MUST NOT be reported as `SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS` until the exact final `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` bytes are available as a directly downloadable file in the parent ChatGPT conversation.
+- A real 7/7 production run is NOT complete and MUST NOT be reported as `SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS` until the exact final `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` bytes are directly downloadable in the parent ChatGPT conversation.
 - A Codex-task-local `sandbox:/mnt/data/...` link does NOT satisfy this requirement.
 - A `View task` link does NOT satisfy this requirement.
 - A PR comment containing only a filename, SHA256 or task link does NOT satisfy this requirement.
-- Before Codex starts, the exact handoff transport must be proven end-to-end WITHOUT Codex by delivering a real dummy file into the parent ChatGPT conversation and verifying that the caller can access its bytes there.
-- After Codex finishes, the parent Chat must receive the exact produced file, recompute SHA256 from those received bytes, and compare it to the Codex-reported SHA256 before final PASS.
-- If the exact produced bytes are not retrievable in the parent ChatGPT conversation, status is `SYSTEM4_HANDOFF_FAIL`; article-generation PASS alone is insufficient and final workflow PASS is forbidden.
-- Do not require the user to open GitHub, open a Codex task, manually download from another UI, or re-upload the artifact into ChatGPT.
-- This handoff requirement is part of the production workflow and must be regression-tested like every other hard rule.
+- Asking the user to manually download elsewhere and re-upload into ChatGPT is forbidden.
+- The final handoff file MUST be valid UTF-8 JSON with contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1` and MUST pass `handoff_transport.py validate`.
+- It MUST contain the exact seven checked bodies, immutable WordPress metadata, `production_context` for each article, real LT 6.8 PASS evidence, real PPM 6.7.9 PASS evidence, and the `wordpress_review` block required for the later WordPress pre-import review.
+- The handoff file MUST NOT falsely claim direct WordPress-upload readiness. The current verified next step is WordPress PREIMPORT review against Portal SEO Editorial Plan Compiler 0.28.22 / PPM 6.7.9; direct import still requires a valid PSERC import envelope and Supervisor authenticity.
+
+### Narrow transport exception
+- After the seven-article batch has passed, Codex may create exactly one transport envelope with `handoff_transport.py pack`.
+- The transport envelope may be persisted ONLY on the dedicated temporary branch `system4-parent-chat-handoff`, only at `isolated_system4/.handoff/SYSTEM4_PARENT_CHAT_TRANSPORT_V1.json`.
+- The production PR branch MUST NOT receive article/output transport content and MUST NOT change because of handoff transport.
+- The transport branch must contain only Base64 transport data plus exact plaintext SHA/length/filename metadata; no second workflow truth, no publish flag, no source-code changes.
+- Codex must report the exact transport commit SHA and plaintext SHA256.
+- The parent Chat fetches that exact commit/path, unpacks with `handoff_transport.py unpack`, recomputes SHA256 from the resulting bytes, and exposes that exact file as the direct parent-chat download.
+- After successful parent-chat readback, the transport branch must be force-reset to the production source head so the transport payload is no longer reachable from the branch tip.
+- Any transport SHA/length/schema mismatch is `SYSTEM4_HANDOFF_FAIL`.
+- This transport path must be positively and negatively regression-tested without Codex before another real production run.
 
 ## CODEX ECONOMY HARD RULE
 - Codex quota is a scarce production resource.
@@ -47,6 +57,6 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - Before any Codex production invocation, the caller must already have verified the current System-4 entry/test suite/NO-LEGACY preflight without Codex and bound that PASS to the exact PR head SHA.
 - A Codex production run MUST NOT repeat that unchanged-head preflight. If the head changes, the caller must re-run the preflight without Codex before another production invocation.
 - A Codex invocation is permitted only for a REAL bound article-production run.
-- Before starting that run, the caller must also have a confirmed mechanism that returns ONE real retrievable output file/artifact containing the completed batch into the parent ChatGPT conversation. If that file handoff is not confirmed end-to-end, DO NOT START CODEX.
+- Before starting that run, the complete parent-chat transport route above must have passed a real dummy roundtrip without Codex.
 - Never require seven full article bodies to be pasted into a PR comment as the production handoff.
 - Signing/ENDSTEMPEL/WordPress are deferred until after a real 7/7 article batch exists and the parent-chat file handoff has passed.
