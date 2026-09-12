@@ -1,10 +1,11 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "adcell-api-v2-routing-allowlist-fix-20260911",
-  "goal": "Der ADCELL API-v2 Kandidat ist lokal positiv/negativ und gegen Awin/OTTO-Funktionsidentitaet geprueft. Naechster Schritt ist ausschliesslich die bytegenaue Rueckbindung der drei freigegebenen Traits an affiliate-release-current; danach dieselben Gates auf dem committed Stand erneut ausfuehren. Kein manueller CSV-Normalweg, kein Awin-Fallthrough, kein Plugin vor Fresh-Unpack/Identity.",
+  "task_id": "adcell-6729-version-bind-20260912",
+  "goal": "Der kanonische ADCELL API-v2 Sourcefix auf 6.72.8 ist committed und hat Positiv/Negativ, Awin/OTTO-Identitaet, Banner, PHP, Release-Guard sowie Fresh-Unpack/Identity bestanden. Naechster technischer Schritt ist ausschliesslich der bereits lokal gepruefte version-only Sprung 6.72.8 -> 6.72.9: Plugin-Header, const VERSION und readme Stable tag. Keine Fachlogik aendern. Die grossen Sourcebytes nur ueber einen nachweislich bytegenauen Transportweg schreiben. Danach dieselben Gates auf dem committed 6.72.9-Stand erneut ausfuehren. Live-PASS bleibt bis zum echten ADCELL API + WordPress/MariaDB E2E gesperrt.",
   "image": "php:8.2-cli",
   "inputs": [
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php","dest":"pferdeportal-affiliate-router.php"},
+    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/readme.txt","dest":"readme.txt"},
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php","dest":"trait-ppar-provider-registry.php"},
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-intake.php","dest":"trait-ppar-provider-intake.php"},
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php","dest":"trait-ppar-automation-suite.php"},
@@ -17,15 +18,17 @@
     {"src":"test_banner_distribution_behavior.php","dest":"test_banner_distribution_behavior.php"}
   ],
   "writable": [
-    "trait-ppar-provider-registry.php",
-    "trait-ppar-network-sync.php",
-    "trait-ppar-automation-suite.php"
+    "pferdeportal-affiliate-router.php",
+    "readme.txt"
   ],
-  "command": "php -l trait-ppar-provider-registry.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_adcell_awin_otto_unchanged.php && php -l test_banner_distribution_behavior.php",
+  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-provider-registry.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_adcell_awin_otto_unchanged.php && php -l test_banner_distribution_behavior.php",
   "tests": [
+    "Version diff must be exactly: plugin Header 6.72.8->6.72.9, const VERSION 6.72.8->6.72.9, readme Stable tag 6.72.8->6.72.9; no other source change",
     "php test_adcell_api_v2_automation.php",
     "php test_adcell_awin_otto_unchanged.php",
-    "php test_banner_distribution_behavior.php"
+    "php test_banner_distribution_behavior.php",
+    "original release_guard.py governance/source/tree/start on committed 6.72.9",
+    "Fresh-Unpack + Source/Unpack byte identity 26/26"
   ],
   "timeout_seconds": 600
 }
