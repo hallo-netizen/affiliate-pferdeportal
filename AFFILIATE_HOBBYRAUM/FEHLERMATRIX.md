@@ -79,6 +79,7 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 | AF-066 | ADCELL-Weblogin/Passwort-Reset vorschnell als absolute Live-Test-Sperre behandelt | Der kanonische 6.72.19-Stand besitzt einen read-only Test `Token + Programme prüfen`, der gespeicherte API-Zugangsdaten nutzt; vorhandene accepted+aktive Partnerprogramme können für den Live-Test genügen, auch wenn der Weblogin aktuell nicht verfügbar ist | Vor einem Weblogin-Blocker immer zuerst den kanonischen read-only API-Test mit den bereits gespeicherten ADCELL-API-Zugangsdaten ausführen. Bei erfolgreichem Token-/Programmlauf einen vorhandenen accepted+aktiven programId explizit allowlisten und E2E fortsetzen. Erst fehlende/ungültige API-Zugangsdaten machen Credential-Recovery zum echten Blocker. |
 | AF-067 | Lokales 6.72.19-Test-ZIP wurde aus einem vor-kanonischen Mergebaum statt aus der kanonischen Source gebaut | Das lokale `Affiliate-Zentrale_6.72.19_LIVE_TEST.zip` weicht in `includes/trait-ppar-network-sync.php` vom kanonischen Manifest ab (`b22b442c...` statt `a7183a025...`) | Kein lokaler Vor-Bind-/Mergebaum darf Übergabeartefakt werden. Jedes installierbare ZIP unmittelbar vor Übergabe aus dem aktuellen kanonischen Sourcebaum bauen und gegen das aktuelle kanonische 26-Dateien-Manifest 26/26 bytegenau prüfen; jede Abweichung blockiert die Ausgabe. |
 
+| AF-068 | Einmaliger Closeout-Workflow war wegen falsch eingerücktem mehrzeiligen Python-String ungültiges YAML | Run `34693152406` endete vor jedem Job; keine Fachdatei wurde verändert | Vor erneutem Lauf Fehler zuerst in dieser Matrix binden; temporäre Workflow-YAML vor Branch-Bind mit YAML-Parser validieren und Ersatztexte ohne YAML-brechende Einrückung einbetten. |
 ## AUFLÖSUNGSSTATUS 2026-09-12 – ADCELL API V2
 - AF-023: BEHOBEN – Source/Manifest/Governance gebunden; originaler Release-Guard real PASS.
 - AF-057: BEHOBEN für aktuellen ADCELL-Meilenstein – Task nachgezogen; stale OTTO-Mischtest durch 18/18-Funktionshash-Regression ersetzt.
@@ -91,3 +92,5 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 - AF-065: BEHOBEN – `new_version_policy` auf den unveränderlichen Guard-Vertragswert zurückgesetzt; derselbe kanonische Gate-Lauf wurde anschließend erfolgreich wiederholt.
 - AF-066: AKTIV – read-only Live-API-Preflight mit bereits gespeicherten ADCELL-Zugangsdaten und vorhandenem Partnerprogramm noch nicht ausgeführt.
 - AF-067: AKTIV – fehlerhaftes lokales ZIP gesperrt; kanonischer 26/26-Neubau noch auszuführen.
+
+- AF-068: AKTIV – korrigierter Closeout-Workflow ist noch nicht erfolgreich durchgelaufen.
