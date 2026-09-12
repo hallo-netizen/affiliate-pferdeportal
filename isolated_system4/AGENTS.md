@@ -29,6 +29,17 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - `raise`, `exit`, task abort or batch restart for a repairable finding is forbidden.
 - Only a genuine `FULL_CHECK_HARD_BLOCK`, tool/runtime failure, integrity failure or other non-repairable controller/batch-gate blocker may terminate the run.
 
+## PARENT-CHAT DOWNLOAD HANDOFF HARD RULE
+- A real 7/7 production run is NOT complete and MUST NOT be reported as `SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS` until the exact final `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` bytes are available as a directly downloadable file in the parent ChatGPT conversation.
+- A Codex-task-local `sandbox:/mnt/data/...` link does NOT satisfy this requirement.
+- A `View task` link does NOT satisfy this requirement.
+- A PR comment containing only a filename, SHA256 or task link does NOT satisfy this requirement.
+- Before Codex starts, the exact handoff transport must be proven end-to-end WITHOUT Codex by delivering a real dummy file into the parent ChatGPT conversation and verifying that the caller can access its bytes there.
+- After Codex finishes, the parent Chat must receive the exact produced file, recompute SHA256 from those received bytes, and compare it to the Codex-reported SHA256 before final PASS.
+- If the exact produced bytes are not retrievable in the parent ChatGPT conversation, status is `SYSTEM4_HANDOFF_FAIL`; article-generation PASS alone is insufficient and final workflow PASS is forbidden.
+- Do not require the user to open GitHub, open a Codex task, manually download from another UI, or re-upload the artifact into ChatGPT.
+- This handoff requirement is part of the production workflow and must be regression-tested like every other hard rule.
+
 ## CODEX ECONOMY HARD RULE
 - Codex quota is a scarce production resource.
 - Do NOT invoke Codex for diagnostics, read-only inspection, architecture work, preflight repair, test-only proof, GitHub persistence experiments, signing experiments or WordPress work.
@@ -36,6 +47,6 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - Before any Codex production invocation, the caller must already have verified the current System-4 entry/test suite/NO-LEGACY preflight without Codex and bound that PASS to the exact PR head SHA.
 - A Codex production run MUST NOT repeat that unchanged-head preflight. If the head changes, the caller must re-run the preflight without Codex before another production invocation.
 - A Codex invocation is permitted only for a REAL bound article-production run.
-- Before starting that run, the caller must also have a confirmed mechanism that returns ONE real retrievable output file/artifact containing the completed batch. If that file handoff is not confirmed, DO NOT START CODEX.
+- Before starting that run, the caller must also have a confirmed mechanism that returns ONE real retrievable output file/artifact containing the completed batch into the parent ChatGPT conversation. If that file handoff is not confirmed end-to-end, DO NOT START CODEX.
 - Never require seven full article bodies to be pasted into a PR comment as the production handoff.
-- Signing/ENDSTEMPEL/WordPress are deferred until after a real 7/7 article batch exists.
+- Signing/ENDSTEMPEL/WordPress are deferred until after a real 7/7 article batch exists and the parent-chat file handoff has passed.
