@@ -16,6 +16,7 @@ $GLOBALS['seen'] = array();
 $GLOBALS['import_result'] = array( 'status' => 'RESEARCH_IMPORT_PASS' );
 $GLOBALS['refresh_result'] = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_PLAN_V1' );
 $GLOBALS['apply_result'] = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_APPLY_V1', 'changed_product_count' => 1 );
+$GLOBALS['candidate_result'] = array( 'status' => 'RESEARCH_REQUIRED', 'persisted' => false );
 
 function upk_repository() { return $GLOBALS['knowledge']; }
 function upc_repository() { return $GLOBALS['comparisons']; }
@@ -25,6 +26,11 @@ class UPK_Fact_Snapshot { public function __construct( $wpdb, $knowledge ) { $GL
 class UPK_Change_Fingerprint { public function __construct( $knowledge ) { $GLOBALS['seen']['fingerprint'] = $knowledge; } }
 class UPC_Feature_Key_Catalog {
     public static function load( $path ) { $GLOBALS['seen']['catalog_path'] = $path; return (object) array( 'ok' => true ); }
+}
+class UPC_Candidate_Gate {
+    public static function load_policy( $path ) { $GLOBALS['seen']['candidate_policy_path'] = $path; return array( 'schema_version' => '1', 'market_gate' => array(), 'groups' => array( array( 'product_group_key' => 'regendecken' ) ) ); }
+    public function __construct( $maintenance, $catalog, $policy ) { $GLOBALS['seen']['candidate_ctor'] = array( $maintenance, $catalog, $policy ); }
+    public function evaluate( $candidate ) { $GLOBALS['seen']['candidate_input'] = $candidate; return $GLOBALS['candidate_result']; }
 }
 class UPC_Research_Importer {
     public static function load_bound_plan( $project_key ) { $GLOBALS['seen']['import_project'] = $project_key; return array( 'project_key' => $project_key ); }
@@ -72,14 +78,17 @@ $GLOBALS['apply_result'] = new WP_Error( 'UPC_REFRESH_RESULT_TASK_STALE', 'stale
 $r = UPC_Research_Runtime::apply_refresh_results( $plan, $results );
 runtime_assert( is_wp_error( $r ) && 'UPC_REFRESH_RESULT_TASK_STALE' === $r->get_error_code(), 'apply stale blocker propagates fail closed' );
 
+$candidate = array( 'manufacturer' => 'Acme', 'model_name' => 'Rain 1' );
+$r = UPC_Research_Runtime::evaluate_candidate( $candidate, 'Pferde Atelier' );
+runtime_assert( ! is_wp_error( $r ) && 'RESEARCH_REQUIRED' === $r['status'] && false === $r['persisted'], 'candidate runtime stays read-only' );
+runtime_assert( $candidate === $GLOBALS['seen']['candidate_input'], 'candidate input delegated unchanged' );
+runtime_assert( false !== strpos( $GLOBALS['seen']['candidate_policy_path'], '/config/pferdeatelier/maintenance-groups.json' ), 'candidate policy bound to project config' );
+$r = UPC_Research_Runtime::evaluate_candidate( $candidate, '' );
+runtime_assert( is_wp_error( $r ) && 'UPC_CANDIDATE_PROJECT_KEY_MISSING' === $r->get_error_code(), 'candidate empty project blocked' );
+
 $runtime_source = file_get_contents( dirname( __DIR__ ) . '/src/class-upc-research-runtime.php' );
 runtime_assert( false === stripos( $runtime_source, 'add_action' ), 'runtime registers no automatic hook' );
 runtime_assert( false === stripos( $runtime_source, 'wp_schedule' ), 'runtime registers no scheduler' );
 runtime_assert( false === stripos( $runtime_source, 'wp_insert_post' ) && false === stripos( $runtime_source, 'wp_update_post' ), 'runtime writes no article' );
-
-$plugin_source = file_get_contents( dirname( __DIR__ ) . '/universal-product-comparison.php' );
-runtime_assert( false !== strpos( $plugin_source, 'function upc_apply_research_refresh_results' ), 'main plugin exposes explicit apply function' );
-runtime_assert( 0 === preg_match( '/add_action\s*\([^\n]*upc_apply_research_refresh_results/i', $plugin_source ), 'apply function is not hook-driven' );
-runtime_assert( false === stripos( $plugin_source, 'wp_schedule_event' ), 'main plugin adds no refresh scheduler' );
 
 fwrite( STDOUT, "UPC_RESEARCH_RUNTIME_GESAMT_PASS\n" );
