@@ -1,6 +1,7 @@
 <?php
 
 define( 'ABSPATH', __DIR__ . '/' );
+define( 'ARRAY_A', 'ARRAY_A' );
 
 class WP_Error {
     private $code;
@@ -100,8 +101,6 @@ $id = $repo->add_fact( UPK_Repository::SUBJECT_PRODUCT, 1, array(
 ) );
 note_assert( 10 === $id && '' === $wpdb->last_insert['data']['fact_note'], 'legacy fact without note remains compatible' );
 
-$ref = new ReflectionClass( 'UPK_Repository' );
-$method = $ref->getMethod( 'get_product_bundle' );
 $repo->get_product_bundle( 1 );
 note_assert( false !== strpos( $wpdb->last_results_query, 'fact_note' ), 'fact readback query includes note' );
 
