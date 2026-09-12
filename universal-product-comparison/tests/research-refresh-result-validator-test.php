@@ -137,6 +137,11 @@ $r = $validator->validate( $plan, array( $bad ) );
 result_assert( is_wp_error( $r ) && 'UPC_REFRESH_RESULT_FACT_DUPLICATE' === $r->get_error_code(), 'duplicate fact source binding blocked' );
 
 $bad = $good;
+$bad['facts'][0]['source_type'] = 'APPROVED_SECONDARY';
+$r = $validator->validate( $plan, array( $bad ) );
+result_assert( is_wp_error( $r ) && 'UPC_REFRESH_RESULT_FACT_INVALID' === $r->get_error_code(), 'secondary source blocked for manufacturer refresh' );
+
+$bad = $good;
 $bad['completed_additional_contracts'] = array();
 $r = $validator->validate( $plan, array( $bad ) );
 result_assert( is_wp_error( $r ) && 'UPC_REFRESH_RESULT_ADDITIONAL_CONTRACT_MISSING' === $r->get_error_code(), 'required safety contract blocked when missing' );
