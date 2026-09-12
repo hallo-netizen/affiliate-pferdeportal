@@ -1,0 +1,380 @@
+# BAUCONTAINER – ENTWICKLUNGSPROTOKOLL
+
+STAND: 2026-09-05
+STATUS: AKTIV
+
+## 1-KLICK-ÜBERSICHT
+
+**WAS IST DAS?**  
+Das Gedächtnis unseres konzeptionellen Austauschs über den Campus.
+
+**HIER BIST DU RICHTIG, WENN …**  
+du verstehen willst, wie eine Architekturidee entstanden ist, welche Alternativen diskutiert wurden oder welche offenen Gedanken noch nicht zu einer festen Regel geworden sind.
+
+**DU DARFST …**  
+Ideen, Einwände, Korrekturen, verworfene Varianten und offene Architekturfragen dokumentieren.
+
+**DU DARFST NICHT …**  
+dieses Protokoll als aktuelle Hauptwahrheit behandeln oder damit BAUPLAN/AENDERUNGSREGISTER ersetzen.
+
+**ALS NÄCHSTES …**  
+für aktuelle Architektur → `BAUPLAN.md`; für tatsächlich gebaute Änderungen → `BAUPROTOKOLL.md`; für dauerhaft gültige Entscheidungen/WHY → `AENDERUNGSREGISTER.md`.
+
+## Harte Regel
+
+Substanzieller Architektur-Austausch darf nicht nur im Chat verschwinden.
+
+Wenn ein Gespräch eine relevante:
+- Idee,
+- Nutzerkorrektur,
+- verworfene Variante,
+- offene Architekturfrage,
+- neue Metapher/Arbeitsregel
+
+hervorbringt, wird sie hier kurz festgehalten.
+
+Nicht als Wort-für-Wort-Chatkopie, sondern als vollständiger sachlicher Entscheidungs-/Gedankenverlauf.
+
+## Bisheriger Entwicklungsverlauf
+
+### 2026-09-05 – Ausgangsproblem
+
+Wiederkehrendes Problem:
+Chats raten oder erfinden Ersatzwege, obwohl verbindliche Prozesse bereits existieren.
+
+Daraus entstanden:
+- Hauptpförtner als Reset;
+- Handlungsverzeichnis;
+- Pflicht-Readback;
+- STOPP bei Unklarheit.
+
+### 2026-09-05 – Bürogebäude-Metapher
+
+Entwicklung:
+- Projektorganisation als Gebäude;
+- Fachbereiche als Büros;
+- genau ein Hobbyraum je Büro;
+- bestehender Maschinenraum bleibt technische Originalinfrastruktur.
+
+Korrektur:
+Keine neue Parallelarchitektur nur für die Metapher.
+
+### 2026-09-05 – Campus statt nur ein Gebäude
+
+Nutzerfrage:
+Wie wird ein wirklich neues unabhängiges Projekt eingeordnet?
+
+Entscheidung:
+- eigenständiges Projekt = neues Projektgebäude;
+- Campus-Hauptpförtner routet zuerst zum Projekt, dann zum Büro;
+- Struktur bleibt organisch und umbaubar.
+
+### 2026-09-05 – Paul
+
+Entwicklung:
+Paul erhält vollständigen Projektstand auf eigenem isolierten Branch.
+
+Wichtige Nutzerkorrektur:
+Fehlerregister und Änderungs-/Erklärungsregister sind für Paul Pflichtlektüre.
+
+Entscheidung:
+Paul darf frei lesen/testen/ändern auf seinem Branch, aber nicht selbst in offizielle Fachstände übernehmen.
+
+### 2026-09-05 – BILD
+
+Nutzer lieferte Masterakten und bestätigte:
+LIVE-Version Bildzentrale = 2.6.9.
+
+Erkenntnis:
+- allgemeiner Bildzentrale-Kern ist allgemeingültig;
+- Pferde-Atelier-Masterakten enthalten zugleich projektspezifische Konfiguration, Produktionsdaten und Historie;
+- Masterakte und Modulklasse müssen getrennt werden.
+
+### 2026-09-05 – Vollständige Masterdatei-Verwertung
+
+Nutzerregel:
+Nichts aus Masterdateien darf verloren gehen.
+
+Entscheidung:
+Jeder Bestandteil wird inventarisiert und zugeordnet:
+Code, Daten, Historie, Fehler, Tests, Protokolle, Dubletten, UNGEKLÄRT.
+
+Secrets werden nicht öffentlich kopiert, ihre Existenz/Funktion bleibt dokumentiert.
+
+### 2026-09-05 – Allgemeingültige Module
+
+Nutzer bestätigt:
+Kategoriemodell ist allgemeingültig.
+
+Entwicklung:
+- Gebäude ALLGEMEINGÜLTIGE BAUSTEINE;
+- zentrales MODULREGISTER;
+- Nutzer muss nicht erinnern, was wiederverwendbar ist;
+- neue Projekte prüfen zuerst vorhandene Module.
+
+Korrektur:
+„GEMISCHT“ ist keine Modulklasse.
+Ein Modul ist ALLGEMEINGÜLTIG / PROJEKTBEZOGEN / UNGEKLÄRT.
+Gemischt kann nur eine Masterakte sein.
+
+### 2026-09-05 – Zielverträge
+
+Nutzerbedarf:
+Fester Ort für Zielverträge.
+
+Entscheidung:
+zentraler Zielvertragsraum mit Register.
+Alte Fassungen bleiben erhalten; keine stillen Zieländerungen.
+
+### 2026-09-05 – Archiv
+
+Nutzerfrage:
+Muss er selbst sortieren/hochladen?
+
+Entscheidung:
+Der bearbeitende Chat ordnet zu.
+Nur lokale, noch nicht zugängliche Dateien müssen einmal bereitgestellt werden.
+Historisch bedeutet nicht löschbar.
+
+### 2026-09-05 – Zugriffsschutz
+
+Nutzerfrage:
+Gesamten Campus per Kennwort schützen?
+
+Aktuelle Empfehlung:
+kein Datei-Passwortsystem.
+Stattdessen nach V1-Freigabe eigener privater Campus-Repository.
+
+STATUS:
+noch offene Architekturentscheidung.
+
+### 2026-09-05 – Architektur darf selbst lernen
+
+Nutzerregel:
+Jeder Chat darf bei realem Optimierungsbedarf die Architektur verbessern.
+
+Entscheidung:
+kein spezieller Architekten-Chat nötig.
+Architekturänderung nur in Baucontainer-Rolle + KISS + Bauprotokoll + WHY + Architektur-Fehlerkiste.
+
+### 2026-09-05 – Hausmeister
+
+Nutzeridee:
+regelmäßig Ballast aus produktiven Räumen ins Archiv verteilen.
+
+Entwicklung:
+Hausmeister als Wartungsprozess.
+
+Wichtige spätere Korrektur:
+Hausmeister darf **keine Inhalte ändern**.
+Nur unverändert ordnen/verschieben/verweisen/protokollieren.
+
+### 2026-09-05 – Pförtner/Hausmeister reine Verwaltung
+
+Nutzer-Hard-Rule:
+Pförtner und Hausmeister müssen die Finger von Inhalten lassen.
+
+Entscheidung:
+- Pförtner = READ/ROUTE ONLY;
+- Hausmeister = ORDNEN/VERSCHIEBEN OHNE INHALTSÄNDERUNG;
+- Rolle bestimmt Rechte;
+- für Architekturarbeit muss Chat ausdrücklich in Baucontainer-Rolle wechseln.
+
+### 2026-09-05 – Ein Klick = alles klar
+
+Nutzerregel:
+Am Campus-, Gebäude-, Büro- und Paul-Eingang muss sofort verständlich sein:
+- was ist das;
+- wozu ist es da;
+- was darf ich;
+- was darf ich nicht;
+- wo geht es weiter.
+
+Entscheidung:
+verbindlicher `EINGANGSSTANDARD.md`.
+
+### 2026-09-05 – WordPress-Raum oder Register?
+
+Nutzeridee:
+Zentraler Ort für WordPress-Plugins bzw. Verweise darauf.
+
+Kritische Prüfung:
+Ein eigenes WordPress-Büro wäre aktuell zusätzliche Architektur ohne eigene Facharbeit.
+
+Entscheidung:
+- kein neues Büro/Gebäude;
+- ein campusweites `WORDPRESS_REGISTER.md`;
+- nur Plugin-/Installer-Navigation;
+- keine zweite Modul-, LIVE- oder Release-Wahrheit.
+
+Zusätzliche Bestandsaufnahme:
+Bereits übergebene direkte Plugin-/Installer-Artefakte werden dort aufgenommen; große Masterpakete erst nach Inhaltsprüfung als Plugin klassifiziert.
+
+### 2026-09-05 – Wann darf eine lokale Datei gelöscht werden?
+
+Nutzerfrage:
+Wenn Campus/Archiv die Datei sicher enthält, kann die lokale Festplattenkopie entfallen?
+
+Entscheidung:
+Ja, aber nur mit objektiver Archiv-Ampel.
+
+- ROT = nicht sicher archiviert
+- GELB = Hash + Archivkopie, aber nur ein unabhängiges Speichersystem
+- GRÜN = mindestens zwei unabhängige verifizierte Speicherorte
+
+Nur GRÜN erlaubt `LOKALE_KOPIE_ENTBEHRLICH: JA`.
+
+Aktueller Kategoriestand:
+GELB, weil persistente Library-Archivkopien vorhanden sind, aber der zweite unabhängige private Campus-Speicher noch fehlt.
+
+### 2026-09-05 – Masterdatei allein reicht nicht
+
+Nutzer-Hard-Rule:
+Campus muss Masterdateien immer mit dem aktuellen GitHub-System zusammenführen.
+
+Design-Beispiel:
+- Upload Pferde: 1.50.469/V104;
+- GitHub main: 1.50.421;
+- spätere Fachbranches: 1.50.470→1.50.472;
+- GitHub LIVE_PASS bindet 1.50.472/V104 als aktuellen Pferde-Live-Stand;
+- GitHub UNIVERSAL_STATUS bestätigt Universal 2.2.40/V104 unverändert aktuell.
+
+Entscheidung:
+Keine Einzelquelle wird blind zur Wahrheit erklärt.
+Campus-Current-State entsteht aus belegter Quellenhierarchie und sichtbaren Deltas.
+
+## Offene Punkte
+
+- Campus nach V1-Freigabe in eigenes privates Repository verschieben?
+- exakter großer Hausmeister-Rhythmus erst nach realer Nutzung festlegen;
+- weitere Masterdateien vollständig einordnen;
+- Kategoriemodul-Code/Masterakten nach Übergabe inventarisieren;
+- BILD 2.6.9-Code nach Übergabe byte-/portabilitätsprüfen;
+- TEXT-Endstand erst nach Abschluss des parallelen Chats frisch synchronisieren.
+
+## Grundsatz
+
+Dieses Protokoll bewahrt den **Gedankenweg**.
+
+Aktuelle Wahrheit wird immer aus den dafür vorgesehenen Hauptakten gelesen.
+
+### 2026-09-06 – Externe READ-ONLY-Prüfung TEXT/STARTMASTER kritisch eingeordnet
+
+Anlass:
+Externe Zweitprüfung (Claude) zu Steuerung/Testmethodik, nicht zu den geschützten Fachinhalten.
+
+Bestätigt:
+- B14/Test-Live-Paritätslücke ist real und bereits in der autoritativen TEXT-Fehlerquelle dokumentiert: M01–M33 ist Vorsperre, kein 7/7-Produktionsbeweis.
+- Der aktuelle B01-Fix muss als technischer Übergabefix beurteilt werden; Live-Beweis bleibt erst auf current main möglich.
+- Alte/stale Branchbezeichnungen dürfen keine Arbeitsautorität erzeugen. `paul/text-seo-campus-ready-20260905` ist nicht der gebundene TEXT-Arbeitsbranch.
+- Rückbauprüfung muss historische Fehler/Fixgründe und indirekte Abhängigkeiten einbeziehen.
+
+Präzisiert / nicht bestätigt:
+- Der Paul-Branch ist kein paralleler aktueller technischer TEXT-Stand; er divergiert vom alten main und ist nicht als aktueller Worker gebunden.
+- Der gemeldete doppelte `ARCH-065` ist im aktuellen Campus bereits behoben: die READ-ONLY-Außentür trägt `ARCH-066`.
+- `m.DUAL = SELF` im aktuellen Current-Action-Weg ist nach Historienprüfung bewusster KISS-Kompatibilitätskleber zur Wiederverwendung der bestehenden Room-Bridge, kein belegter Rückbaukandidat.
+- Alte Recovery-Article-Logik im `DUAL_ROOTFIX` ist im heutigen 107007-Workerpfad nicht aktiv, weil Current Action die Bridge-Callbacks auf sich selbst bindet.
+
+Neuer Prüfhinweis:
+- `test_fachworkflow_proof_handoff.py` ist gegenüber dem seit 05.09. zwingenden realen `ppm679_binding` stale und wird vom M01–M33-Runner nicht als vollständiger End-to-End-Handoff-Test ausgeführt. Das ist ein konkretes Beispiel für B14; daraus folgt keine Produktionsänderung auf Verdacht.
+
+Grenze:
+Keine Änderung an Textmaschine, Link-/Tabellenregeln, LanguageTool, PPM, PSERC/PSTE, SEO, Design, Publish-Sperre oder externem Signierweg.
+
+### 2026-09-06 – Zweite externe READ-ONLY-Prüfung TEXT/STARTMASTER
+
+Externer Befund wurde gegen den aktuellen Campus und GitHub geprüft.
+
+**Übernommen / korrigiert:**
+- TEXT-M01-M33-Registerstatus präzisiert: Regression-Suite aktiv, letzter dokumentierter Gesamtlauf PASS, kein Live-PASS.
+- B06/B14-Integrationsrisiko operationalisiert: vor Merge nur Regression/Scope; nach ausdrücklicher Integration bestehender produktiver 7er-Lauf, beim ersten Blocker STOP; kein automatischer Rückbau.
+- H8-Provenance-Aussage enger gefasst: aktueller State + generation + batch + source snapshot + source manifest + fester Ursprung werden hashgebunden und gegen current State geprüft. Stärkere Aussage eines vollständigen kombinierten „alles neu gehasht“-Angreifertests wird ohne dauerhaft auffindbaren End-to-End-Test nicht behauptet.
+- M15-Fix exakt an Commit `3ed31aa78978a2098f324eead6f2a5335a10e2d4` gebunden.
+- READ_ONLY_REVIEW um direkte Raw-Links auf die sechs aktuellen TEXT-Detailquellen ergänzt.
+
+**Präzisiert:**
+- PR #107 ist absichtlich dauerhaft offen als Chat→Codex-Dispatcher und soll laut PR-Vertrag nicht gemergt werden; gleicher Head wie main ist dort Sollverhalten.
+- Archivstatus GELB bleibt bekannter Infrastruktur-/Backup-Hinweis, kein aktueller TEXT-Produktionsblocker.
+
+Keine Produktionsdatei, kein TEXT-Hobbyraum-Code, kein PR-Head und kein main wurden durch diese Dokumentationskorrekturen verändert.
+
+## 2026-09-06 – TEXT / Paul-Technikaudit / B01-only Vor-Codex-Vorbereitung
+
+Auslöser:
+Nutzer übergab Pauls technischen End-to-End-Audit des bestehenden System-/Plugin-/Workflowtyps. Beispielartikel war nur Testdatensatz.
+
+Harte Scope-Grenze:
+- ausschließlich technische Ebene;
+- Architektur und Inhalte tabu;
+- keine Textmaschinen-/SEO-/Link-/Tabellen-/LanguageTool-/PPM-/PSERC-/PSTE-/Design-/Publish-Regeländerung;
+- kein neuer Runner/Workflow/Gate/Executor.
+
+Kritischer Gegencheck gegen bisherige Reparaturen:
+- viele frühere Handoff-/PASS-/Context-Fehler waren nicht wirkungslos; sie wurden live überwunden und legten jeweils den nächsten ersten Blocker frei;
+- Pauls Mehrwert liegt vor allem in bisher nicht systematisch geprüften technischen Artefakt-/Gate-Zustandskollisionen;
+- kein Sammelfix aus Pauls 41 Findings.
+
+Harter historischer Vergleich:
+- letzter echter 7/7+107008-PASS `de21f6…` und aktuelles System nutzen denselben Generation-1-Batch, Source-Snapshot, Source-Manifest und Production-Package;
+- Article-Type-Templates und Tabellenvertrag unverändert;
+- entscheidender technische Delta danach: echter PPM 6.7.9 wurde verpflichtend in 107007 ausgeführt/gebunden.
+
+B01-Kausaltrennung:
+- aus #140-Historie wurde der bereits vorhandene reine B01-Prefix direkt auf current main isoliert;
+- neuer Draft-PR #141 / Branch `hobbyroom/b01-only-kiss-20260906`;
+- Base `c8a96e7…`, Head `94917596…`;
+- 4 Commits / 4 Dateien;
+- keine B15-Änderung.
+
+GitHub-Belege #141:
+- hardlock PASS;
+- hardlock-base PASS;
+- MONOTONIC_PREBOUND_TRANSITION_PASS;
+- Cloud-Gate Positiv/Negativ PASS;
+- Production-Continuity Positiv/Negativ PASS;
+- bestehender Cloud-Gate verifiziert Root/State/Bundle sowie alle 107007-authorized-input-SHAs inkl. Handoff, PPM-ZIP und PSERC-ZIP.
+
+Ehrliche Testgrenze:
+- kein neuer kompletter M01–M33-Lauf exakt auf #141;
+- vorhandener M01–M33-PASS gilt für breiteren #140-Head `3ed31aa…`;
+- kein neuer/temporärer Workflow wurde gebaut.
+
+Dokumentation ergänzt:
+- `PAUL_PIPELINE_AUDIT_20260906.md`;
+- `PRE_CODEX_READINESS_20260906.md`;
+- `FIRST_CODEX_RUN_B01_20260906.md`;
+- CURRENT_STATE / HOBBYRAUM / autoritative Fehlerquelle auf #141 als bevorzugten ersten B01-Kausaltest nachgezogen;
+- #140 ausdrücklich als breiterer, nicht erster Live-Kandidat markiert.
+
+Kein Merge. Main unverändert. Kein Codex-/Live-Lauf gestartet.
+
+
+
+### 2026-09-07 – PB ONE als gemeinsame Agentur und bewusster Campus-Cut
+
+Entwicklung:
+PB ONE wurde als zentraler Agenturknoten des Campus ergänzt.
+
+Wichtige Nutzerkorrektur:
+PB ONE ist **nicht** Pauls eingeschränkter Sparringsraum.
+Nutzer und Paul haben dort dieselben redaktionellen Rechte.
+
+Daraus entstanden:
+- Zentralregister;
+- Ideenwerkstatt;
+- Entwicklungsraum;
+- Arbeitsdokumente;
+- Angebote/Flyer;
+- Aktenschrank für dauerhafte Referenzakten;
+- erste Website-Akte aus dem WordPress-Export vom 07.09.2026.
+
+Harte Grenze:
+In PB ONE wird vorerst nicht programmiert.
+Technische Umsetzung wird bewusst an ein Projekt-/Fachbüro übergeben.
+
+Abschlussentscheidung:
+Der Campus wird jetzt nicht weiter auf Vorrat ausgebaut.
+Neue Räume/Regeln entstehen erst aus realer Nutzung und konkretem Bedarf.
+
+Offener technischer Punkt:
+Die redaktionelle PB-ONE-Schreibausnahme für Paul ist dokumentiert, aber noch nicht in der technischen Paul-/Security-Sperre umgesetzt.

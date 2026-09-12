@@ -1,0 +1,223 @@
+# ZIELVERTRAGSREGISTER
+
+STAND: 2026-09-11
+
+## Pflichtfelder
+
+- ZV-ID
+- TITEL
+- GELTUNGSBEREICH
+- STATUS: ENTWURF / AKTIV / ERFÜLLT / ABGELÖST
+- FASSUNG
+- HAUPTQUELLE
+- VERANTWORTLICHER BEREICH
+- PASS-BEDINGUNG
+- NACHFOLGER, falls abgelöst
+
+## Regel
+
+Bei neuer Facharbeit prüft der zuständige Bereich, ob ein aktiver Zielvertrag existiert.
+
+Bei:
+- Projektstart
+- größerem Umbau
+- Modulfreigabe
+- komplexer Reparatur mit festem Endzustand
+
+soll ein Zielvertrag angelegt oder referenziert werden.
+
+## Noch aufzunehmende bestehende Verträge
+
+Bereits vorhandene historische Zielverträge aus Repository/Masterakten werden bei der Archiv-/Masterdatei-Aufnahme hier eingeordnet.
+
+Nichts aus alten Zielverträgen still ersetzen.
+
+
+## ZV-MOD-001 – Allgemeingültiger Kategorie-Master 016
+
+TITEL:
+ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_WORKFLOW_HARDLOCK
+
+GELTUNGSBEREICH:
+MOD-001 KATEGORIENMODELL
+
+STATUS:
+AKTIV
+
+FASSUNG:
+R10/R9 Runtime Deployment / Plugin V1.8.0
+
+HAUPTQUELLE:
+R10-Master:
+`00_STEUERUNG/STEUERDATEI.md`
+und aktiver Lock:
+`15_WORKFLOW_HARDLOCK/MASTER_LOCK.json`
+
+VERANTWORTLICHER BEREICH:
+`ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/`
+
+PASS-BEDINGUNG:
+maßgeblich sind die im Master gebundenen 14 Stufen, Hardlocks, Research-/Coverage-/Affiliate-Gates und Post-FINAL-Deploymentbedingungen.
+
+BELEGSTATUS:
+lokal/fresh R10 stark PASS; echter Live-WordPress-Deploymentlauf noch offen.
+
+
+## ZV-MOD-003 – Designvertrag V104
+
+TITEL:
+DESIGNVERTRAG ALLGEMEIN V104
+
+GELTUNGSBEREICH:
+MOD-003 Universal Portal Design Suite
+
+STATUS:
+AKTIV
+
+FASSUNG:
+V104 / Universal Plugin 2.2.40
+
+HAUPTQUELLE:
+Universal Master V2.2.40/V104 und GitHub Design-Baseline V104.
+
+PASS-BEDINGUNG:
+gebundene V104-Design-/QA-Regeln; keine stillen projektspezifischen Übernahmen.
+
+PFERDE-ANWENDUNG:
+aktueller Live-Stand 1.50.472 verwendet weiterhin Contract V104 unverändert.
+
+
+## ZV-TEXT-001 – STARTMASTER0107 aktueller Produktionszielvertrag
+
+TITEL:
+STARTMASTER0107 – VERBINDLICHER ZIELVERTRAG – 05.09.2026
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / TEXT / STARTMASTER0107
+
+STATUS:
+AKTIV
+
+FASSUNG:
+05.09.2026
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/03_ZIELVERTRAG_AKTUELL_20260905.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/TEXT/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
+
+NACHFOLGER:
+keiner belegt.
+
+
+## ZV-AFFILIATE-OTTO-001 – OTTO/Awin vollautomatische Produkt- und Bannerintegration
+
+TITEL:
+OTTO/AWIN – AUTOMATISCHE PRODUKT-, BANNER- UND EXACT-PRODUCT-INTEGRATION
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / AFFILIATE / OTTO über Awin
+
+STATUS:
+AKTIV
+
+FASSUNG:
+2026-09-07
+
+HAUPTQUELLE:
+Branch `affiliate-release-current` →
+`protocol/AFFILIATE_RELEASE_OTTO_AUTOMATION_CONCEPT_20260907.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Vollständig aus der Hauptquelle und der gebundenen Release-Governance lesen.
+
+AKTUELLER ARBEITSSTATUS:
+Durch explizite Nutzerentscheidung vom 11.09.2026 pausiert zugunsten des ADCELL-Auftrags. Nicht erfüllt, nicht abgelöst, kein PASS.
+
+NACHFOLGER:
+keiner belegt.
+
+
+## ZV-AFFILIATE-ADCELL-001 – ADCELL vollautomatische API-v2-Integration
+
+TITEL:
+ADCELL – AUTOMATISCHE PROGRAMM-, PRODUKT-, BANNER- UND DEEPLINK-INTEGRATION ÜBER API V2
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / AFFILIATE / ADCELL
+
+STATUS:
+AKTIV
+
+FASSUNG:
+2026-09-11
+
+HAUPTQUELLE:
+Branch `affiliate-release-current` →
+`protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
+
+PASS-BEDINGUNG:
+- exakter ADCELL-API-v2-Authentifizierungsvertrag autoritativ belegt;
+- provider-spezifisches ADCELL-Routing ohne Awin-Fallthrough;
+- accepted+active Programme nur über explizite `programId`-Allowlist, fail-closed;
+- CSV/Banner/Deeplink automatisch über dokumentierte API-v2-Wege;
+- kein manueller Import/Export bzw. keine manuelle CSV-URL als Normalbetriebs-Voraussetzung;
+- kanonischer Positiv-/Negativ-/Gesamtworkflow-/Fresh-Unpack-/Source-ZIP-Identity-PASS;
+- echter ADCELL-Live-API- und WordPress/MariaDB-End-to-End-PASS;
+- alte/fachfremde accepted Partnerschaften ohne Freigabe bleiben gesperrt.
+
+NACHFOLGER:
+keiner belegt.
+
+
+## ZV-TRESOR-001 – GitHub-Komplettsicherung
+
+TITEL:
+REGELMÄSSIGE GITHUB-KOMPLETTSICHERUNG
+
+GELTUNGSBEREICH:
+`hallo-netizen/affiliate-pferdeportal` / GITHUB
+
+STATUS:
+AKTIV
+
+FASSUNG:
+2026-09-08 – UNABHÄNGIGER TRESOR + LOKALES BACKUP
+
+HAUPTQUELLE:
+`protocol/PROJECT_MEMORY/TRESOR/KONZEPT.md`
+
+ERGÄNZENDE VERBINDLICHE QUELLEN:
+- `protocol/PROJECT_MEMORY/TRESOR/INHALTSVERTRAG.md`
+- `protocol/PROJECT_MEMORY/TRESOR/PRUEFVERTRAG.md`
+- `protocol/PROJECT_MEMORY/TRESOR/STATUS.md`
+
+VERANTWORTLICHER BEREICH:
+`protocol/PROJECT_MEMORY/TRESOR/`
+
+PASS-BEDINGUNG:
+Git-/Ref-/Campus-Wiederherstellung real geprüft; automatische externe Tresorsicherung real geprüft; lokaler Backupstand real unabhängig geprüft; Providergrenzen ausdrücklich ausgewiesen.
+
+`GITHUB_KOMPLETT_PASS` erfordert zusätzlich einen realen end-to-end Neuaufbau der erforderlichen exportierbaren GitHub-Metadaten/Einstellungen in einem leeren Zielsystem und ist derzeit nicht belegt.
+
+SICHERUNGSWEGE:
+1. Tresor automatisch, wöchentlich und extern unter `/Campus-Tresor/`.
+2. Lokales Backup manuell per `GITHUB_BACKUP_STARTEN.command` auf dem Nutzer-Mac.
+
+Beide Wege sind unabhängig voneinander und sichern denselben GitHub-Projektbestand.
+
+NICHT IM SCOPE:
+WordPress / Website / Projektarchiv.
+
+NACHFOLGER:
+keiner belegt.

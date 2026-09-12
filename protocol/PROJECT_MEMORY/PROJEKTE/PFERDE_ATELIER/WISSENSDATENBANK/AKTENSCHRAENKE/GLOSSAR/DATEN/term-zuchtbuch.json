@@ -1,0 +1,15 @@
+{
+  "id":"term-zuchtbuch",
+  "begriff":"Zuchtbuch",
+  "synonyme":["Studbook","Stud Book"],
+  "oberbereich":"Zucht & Zuchtbuchwesen",
+  "unterbereich":"Zuchtorganisation",
+  "kurzdefinition":"Von einer anerkannten Zuchtorganisation geführtes Register für Tiere eines Zuchtprogramms bzw. einer Rasse.",
+  "facherklaerung":"Ein Zuchtbuch dokumentiert die für das jeweilige Zuchtprogramm zugelassenen Tiere und ihre Abstammungs-/Zuchtinformationen. Je nach Programm kann es Haupt- und zusätzliche Abteilungen oder Klassen geben.",
+  "abgrenzung":"Nicht jedes Pferderegister oder jeder Passaussteller führt ein anerkanntes Zuchtbuch.",
+  "verwandte_begriffe":["Zuchtprogramm","Abstammung","Rasseverband","UELN"],
+  "seo_status":"NICHT_GEPRUEFT",
+  "quellen":[{"organisation":"UK Department for Environment, Food & Rural Affairs / GOV.UK","titel":"Approved breeding programmes: standards for breed societies and organisations","url":"https://www.gov.uk/guidance/approved-breeding-programmes-standards-for-breed-societies-and-organisations","trust":"A","beleg":"Regeln für Eintragung in breeding book/studbook und anerkannte Zuchtorganisationen"},{"organisation":"Department of Agriculture, Environment and Rural Affairs Northern Ireland","titel":"Single Lifetime Identification Document for Equines","url":"https://www.daera-ni.gov.uk/articles/single-lifetime-identification-document-equines-horse-passports","trust":"A","beleg":"Breed societies betreiben breeding programmes/studbooks; Abgrenzung zu reinen ID-Pässen"}],
+  "recherche_status":"GEPRUEFT",
+  "letzte_pruefung":"2026-09-12"
+}

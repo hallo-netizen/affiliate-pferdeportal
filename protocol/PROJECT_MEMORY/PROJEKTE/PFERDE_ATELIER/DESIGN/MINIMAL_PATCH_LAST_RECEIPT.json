@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "runner_job": "DESIGN-ORDER-SWAP-002",
+  "baseline_sha256": "ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9",
+  "candidate_sha256": "11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b",
+  "archive_members": 498,
+  "target_member": "affiliate-portal-template-kit/pferde-template-kit.php",
+  "changed_members": [
+    "affiliate-portal-template-kit/pferde-template-kit.php"
+  ],
+  "first_range": "Beitragsvorschau / pa297-popular",
+  "first_range_sha256": "247c5b66d073fb7fea9e8b8cce963503f3277af2aefbc9a8bc95e11a69becd0a",
+  "second_range": "Affiliate-Produkte / pa266-products",
+  "second_range_sha256": "ad8e8165f4f3d2d45ec50b13462e0de76ec4be7f8f4cd27c72d946db25e35c13",
+  "resulting_order": [
+    "affiliate_banner_unchanged",
+    "affiliate_products",
+    "post_previews",
+    "direct_ad"
+  ],
+  "positive_checks": [
+    "BASELINE_HASH_PASS",
+    "ZIP_CRC_PASS",
+    "ARCHIVE_STRUCTURE_IDENTICAL",
+    "PLUGIN_ROOT_IDENTICAL",
+    "ONLY_ONE_MEMBER_CHANGED",
+    "EXACT_TWO_RANGE_SWAP_PASS",
+    "RANGES_BYTE_IDENTICAL_SINGLETON_PASS",
+    "SWAPPED_ORDER_PASS",
+    "REVERSIBILITY_PASS",
+    "FILESYSTEM_OVERLAY_PASS",
+    "AFFILIATE_BANNER_POSITION_UNCHANGED_PASS",
+    "ARTICLE_AND_REFERENCE_MARKERS_UNCHANGED_PASS"
+  ],
+  "negative_checks": [
+    "UNCHANGED_WRONG_ORDER_BLOCKED_PASS",
+    "DUPLICATE_RANGE_BLOCKED_PASS",
+    "MUTATED_RANGE_BLOCKED_PASS",
+    "UNRELATED_FILE_CHANGED_BLOCKED_PASS"
+  ],
+  "artifact_name": "DESIGN_HOBBYRAUM_CANDIDATE.zip",
+  "live_pass": true,
+  "live_pass_date": "2026-09-07",
+  "live_pass_scope": "Gebisse real visual confirmation by user"
+}

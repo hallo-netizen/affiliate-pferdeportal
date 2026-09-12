@@ -1,0 +1,15 @@
+{
+  "id":"term-stockmass",
+  "begriff":"Stockmaß",
+  "synonyme":["Widerristhöhe als Stockmaß"],
+  "oberbereich":"Maße",
+  "unterbereich":"Körpermaße",
+  "kurzdefinition":"Senkrechte Höhe vom ebenen Boden bis zum höchsten Punkt des Widerrists.",
+  "facherklaerung":"Das Stockmaß wird mit einem starren Messgerät lotrecht gemessen. Es unterscheidet sich vom Bandmaß, das dem Körperverlauf folgt.",
+  "abgrenzung":"Nicht mit Bandmaß oder Gesamthöhe bis zum Kopf verwechseln.",
+  "verwandte_begriffe":["Widerrist","Bandmaß"],
+  "seo_status":"NICHT_GEPRUEFT",
+  "quellen":[{"organisation":"Stiftung Tierärztliche Hochschule Hannover","titel":"Dissertation – Körpermaße beim Pferd","url":"https://elib.tiho-hannover.de/servlets/MCRFileNodeServlet/etd_derivate_00002522/meyerp_2003.pdf","trust":"A","beleg":"Stockmaß als Lot vom höchsten Punkt des Widerrists auf die ebene Bodenfläche"}],
+  "recherche_status":"GEPRUEFT",
+  "letzte_pruefung":"2026-09-12"
+}

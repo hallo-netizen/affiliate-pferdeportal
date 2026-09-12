@@ -1,0 +1,15 @@
+{
+  "id":"term-widerrist",
+  "begriff":"Widerrist",
+  "synonyme":[],
+  "oberbereich":"Anatomie",
+  "unterbereich":"Rücken / Brustwirbelsäule",
+  "kurzdefinition":"Der erhöhte vordere Abschnitt des Pferderückens am Übergang von Hals und Rücken.",
+  "facherklaerung":"Anatomisch wird der Widerrist durch besonders hohe Dornfortsätze der vorderen Brustwirbelsäule geprägt. Sein höchster Punkt dient als Bezugspunkt für das Stockmaß.",
+  "abgrenzung":"Nicht mit Schulter oder Kruppe verwechseln.",
+  "verwandte_begriffe":["Stockmaß","Schulter","Rücken"],
+  "seo_status":"NICHT_GEPRUEFT",
+  "quellen":[{"organisation":"Stiftung Tierärztliche Hochschule Hannover","titel":"Dissertation – Körpermaße beim Pferd","url":"https://elib.tiho-hannover.de/servlets/MCRFileNodeServlet/etd_derivate_00002522/meyerp_2003.pdf","trust":"A","beleg":"Widerrist als durch hohe Dornfortsätze geprägter kranialer Wirbelsäulenabschnitt und Messbezug"}],
+  "recherche_status":"GEPRUEFT",
+  "letzte_pruefung":"2026-09-12"
+}
