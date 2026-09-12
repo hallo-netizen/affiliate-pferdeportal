@@ -1,0 +1,184 @@
+name: Glossar 0.2.5 Real Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-025-hardfix-source]
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge025*'
+      - '.github/workflows/glossar-025-real-hardtest.yml'
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  hardtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp
+          C22=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.2
+          C23=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3
+          mkdir -p /tmp/u
+          cat "$T"/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          test "$(sha256sum /tmp/base.zip|cut -d' ' -f1)" = b20fc92e106989d96e701ca3cc2c4091096e8e8cdb207f63a958b411a0c6aaa7
+          unzip -q /tmp/base.zip -d /tmp/u
+          P=/tmp/u/universal-glossary-engine
+          cp "$C22/universal-glossary-engine.php" "$P/"
+          cp "$C22/includes/class-uge-config.php" "$P/includes/"
+          cp "$C22/includes/class-uge-core.php" "$P/includes/"
+          cp "$C22/includes/class-uge-seo.php" "$P/includes/"
+          cat "$C22"/frontend-parts/part-* > "$P/includes/class-uge-frontend.php"
+          cp "$C23/universal-glossary-engine.php" "$P/"
+          cp "$C23/includes/class-uge-config.php" "$P/includes/"
+          cp "$C23/includes/class-uge-core.php" "$P/includes/"
+          cp "$C23/includes/class-uge-seo.php" "$P/includes/"
+          cp "$C23/includes/class-uge-policy.php" "$P/includes/"
+          base64 -d "$T/uge024.patch.gz.b64" | gzip -d >/tmp/024.patch
+          patch -d "$P" -p3 </tmp/024.patch
+          base64 -d "$T/uge025.patch.gz.b64" | gzip -d >/tmp/025.patch
+          patch -d "$P" -p3 </tmp/025.patch
+          rm -f "$P/assets/glossar-hero-books-stall.png"
+          mkdir -p "$P/assets"
+          base64 -d "$T/uge025.hero750.webp.b64" > "$P/assets/glossar-hero-books-stall.webp"
+          test "$(sha256sum "$P/assets/glossar-hero-books-stall.webp"|cut -d' ' -f1)" = 8b9ad3fc17eca50d6510c360a4ea1972976f52876877f364eca30ce026f9fca9
+          grep -q 'Version: 0.2.5' "$P/universal-glossary-engine.php"
+          ! grep -R 'site-content .ast-container{padding-top:0' "$P"
+          find "$P" -name '*.php' -print0 | xargs -0 -n1 php -l
+          echo UGE025_BUILD_LINT_ASSET_PASS
+      - name: Start WordPress MySQL Astra
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker network create n
+          docker run -d --name db --network n -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=3s --health-retries=30 mysql:8.0
+          for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
+          docker run -d --name wp --network n -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/u/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro wordpress:php8.1-apache
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp wp:/usr/local/bin/wp; docker exec wp chmod +x /usr/local/bin/wp
+          docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title=x --admin_user=admin --admin_password='UGE-test-123456' --admin_email=x@example.test --skip-email
+          docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root
+          docker exec wp wp theme install astra --activate --allow-root
+          cat >/tmp/stub.php <<'PHP'
+          <?php
+          /* Plugin Name: Pferde Atelier Design Test Stub */
+          final class Pferde_Template_Kit {
+            public static function affiliate_page_type($id){return get_post_meta((int)$id,'_uge_test_portal_category',true)==='1'?'category':'';}
+            public static function design_profile(){return 'pferde_atelier';}
+          }
+          add_action('uge_ad_slot',static function($slot){echo '<span>AD-'.esc_html($slot).'</span>';},10,1);
+          PHP
+          docker exec wp mkdir -p /var/www/html/wp-content/plugins/affiliate-portal-template-kit
+          docker cp /tmp/stub.php wp:/var/www/html/wp-content/plugins/affiliate-portal-template-kit/affiliate-portal-template-kit.php
+          docker exec wp wp plugin activate affiliate-portal-template-kit universal-glossary-engine --allow-root
+          test "$(docker exec wp wp plugin get universal-glossary-engine --field=version --allow-root)" = 0.2.5
+      - name: Seed real data
+        shell: bash
+        run: |
+          set -euo pipefail
+          G=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Glossar --post_name=glossar --post_excerpt='Pferdebegriffe verständlich erklärt.' --porcelain)
+          HEALTH=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Gesundheit --post_name=gesundheit --porcelain)
+          FEED=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Fütterung --post_name=fuetterung --porcelain)
+          docker exec wp wp post meta update $HEALTH _uge_test_portal_category 1 --allow-root >/dev/null
+          docker exec wp wp post meta update $FEED _uge_test_portal_category 1 --allow-root >/dev/null
+          docker exec wp wp eval --allow-root "\$c=UGE_Config::get();\$c['main_page_id']=$G;\$c['rewrite_base']='glossar';\$c['term_segment']='begriff';\$c['design_profile']='auto';update_option(UGE_Config::OPTION,UGE_Config::sanitize(\$c));UGE_Core::register_content();UGE_Core::ensure_navigation_groups();flush_rewrite_rules();"
+          docker exec wp wp term create uge_group 'Farben & Genetik' --slug=farben-genetik --allow-root >/dev/null
+          docker exec wp wp term create uge_group 'Huf & Gliedmaßen' --slug=huf-gliedmassen --allow-root >/dev/null
+          A=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Aalstrich --post_name=aalstrich --post_content='FULL-AALSTRICH-SENTINEL' --porcelain)
+          H=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Hufbein --post_name=hufbein --post_content='FULL-HUFBEIN-SENTINEL' --porcelain)
+          HP=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Hufpflege --post_name=hufpflege --post_content='FULL-HUFPFLEGE-SENTINEL' --porcelain)
+          for id in $A $H $HP; do docker exec wp wp post meta update $id _uge_primary_category_id $HEALTH --allow-root >/dev/null; done
+          docker exec wp wp post meta update $H _uge_short_definition 'SHORT-HUFBEIN-SENTINEL' --allow-root >/dev/null
+          docker exec wp wp post meta update $H _uge_synonyms 'Hufknochen' --allow-root >/dev/null
+          docker exec wp wp post term add $A uge_group 'Farben & Genetik' --allow-root >/dev/null
+          docker exec wp wp post term add $H uge_group 'Huf & Gliedmaßen' --allow-root >/dev/null
+          docker exec wp wp post term add $HP uge_group 'Huf & Gliedmaßen' --allow-root >/dev/null
+          for id in $A $H $HP; do docker exec wp wp post update $id --post_status=publish --allow-root >/dev/null; done
+          D=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Hufentwurf' --post_name=hufentwurf --post_content='DRAFT-SENTINEL' --porcelain)
+          docker exec wp wp post meta update $D _uge_primary_category_id $HEALTH --allow-root >/dev/null
+          docker exec wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Huf normaler Beitrag' --post_content='NORMAL-POST-SENTINEL' >/dev/null
+          docker exec wp wp eval --allow-root 'UGE_Core::migrate_legacy_navigation_groups(); flush_rewrite_rules();'
+          echo $D >/tmp/draftid
+      - name: Hard positive negative six-point frontend matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/home',encoding='utf8').read()
+          assert len(re.findall(r'<h1(?:\s|>)',s,re.I))==1
+          assert 'glossar-hero-books-stall.webp' in s
+          assert 'site-content .ast-container{padding-top:0' not in s
+          labels=['Rassen &amp; Zucht','Anatomie','Gesundheit','Haltung &amp; Fütterung','Verhalten','Reiten &amp; Ausbildung','Pferdesport','Ausrüstung &amp; Stall','Geschichte &amp; Kultur','Kauf, Recht &amp; Versicherung']
+          nav=re.search(r'<nav class="uge-nav[^>]*>(.*?)</nav>',s,re.S).group(1)
+          for x in labels: assert x in nav,x
+          assert '>Glossar<' not in nav
+          assert nav.count('uge-nav-icon')==10
+          assert 'justify-content:center' in s
+          assert 'q.length&lt;2' in s or 'q.length<2' in s
+          print('HOME_LAYOUT_NAV_ICONS_PASS')
+          PY
+          asset=$(grep -oE 'https?[^" ]+glossar-hero-books-stall\.webp' /tmp/home | head -1)
+          test -n "$asset"
+          curl -fsS "$asset" -o /tmp/hero.webp
+          test "$(sha256sum /tmp/hero.webp|cut -d' ' -f1)" = 8b9ad3fc17eca50d6510c360a4ea1972976f52876877f364eca30ce026f9fca9
+          nonce=$(python3 - <<'PY'
+          import re
+          s=open('/tmp/home').read(); print(re.search(r'data-uge-nonce="([^"]+)"',s).group(1))
+          PY
+          )
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data-urlencode nonce="$nonce" --data-urlencode q=Hu -o /tmp/ajax.json
+          grep -q Hufbein /tmp/ajax.json; grep -q Hufpflege /tmp/ajax.json
+          ! grep -q SHORT-HUFBEIN-SENTINEL /tmp/ajax.json
+          ! grep -q FULL-HUFBEIN-SENTINEL /tmp/ajax.json
+          ! grep -q NORMAL-POST-SENTINEL /tmp/ajax.json
+          ! grep -q Hufentwurf /tmp/ajax.json
+          bad=$(curl -sS -o /tmp/bad -w '%{http_code}' -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data nonce=bad --data q=Hu); test "$bad" != 200
+          curl -fsS http://127.0.0.1:8080/glossar/begriff/hufbein/ -o /tmp/term
+          grep -q FULL-HUFBEIN-SENTINEL /tmp/term
+          grep -q 'Startseite' /tmp/term; grep -q 'Glossar' /tmp/term; grep -q 'Gesundheit' /tmp/term; grep -q 'Hufbein' /tmp/term
+          test "$(curl -sS -o /tmp/missing -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/nicht-da/)" = 404
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/glossar/hufbein/)" = 301
+          curl -fsS http://127.0.0.1:8080/glossar/gesundheit/ -o /tmp/cat
+          grep -q 'Startseite' /tmp/cat; grep -q 'Glossar' /tmp/cat; grep -q 'Gesundheit' /tmp/cat
+          grep -q '/glossar/begriff/hufbein/' /tmp/cat
+          curl -fsS http://127.0.0.1:8080/glossar/rassen-zucht/ -o /tmp/rassen
+          grep -q Aalstrich /tmp/rassen
+          grep -qi 'noindex' /tmp/rassen
+          echo UGE025_SIX_POINT_POSITIVE_NEGATIVE_PASS
+      - name: Regression A-Z preview semantic link duplicates
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_letter=A' -o /tmp/A
+          grep -q Aalstrich /tmp/A; ! grep -q Hufbein /tmp/A
+          D=$(cat /tmp/draftid)
+          test "$(curl -sS -o /tmp/draft -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufentwurf/)" != 200
+          curl -sS -c /tmp/c -d 'log=admin&pwd=UGE-test-123456&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%3A8080%2Fwp-admin%2F' http://127.0.0.1:8080/wp-login.php >/dev/null
+          u=$(docker exec wp wp eval --allow-root "echo get_preview_post_link($D);")
+          curl -fsS -b /tmp/c "$u" -o /tmp/pre; grep -q DRAFT-SENTINEL /tmp/pre
+          grep -q '>Gesundheit</a>' /tmp/term
+          DUP=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Hufbein --post_name=hufbein-zwei --post_content=DUP --porcelain)
+          docker exec wp wp post meta update $DUP _uge_primary_category_id $(docker exec wp wp post list --allow-root --post_type=page --name=gesundheit --field=ID) --allow-root >/dev/null
+          docker exec wp wp post update $DUP --post_status=publish --allow-root >/dev/null
+          test "$(docker exec wp wp post get $DUP --field=post_status --allow-root)" = draft
+          echo UGE025_REGRESSION_PASS
+      - name: Package tested candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/u
+          zip -qr /tmp/universal-glossary-engine-0.2.5.zip universal-glossary-engine
+          unzip -t /tmp/universal-glossary-engine-0.2.5.zip | grep -q 'No errors detected'
+          sha256sum /tmp/universal-glossary-engine-0.2.5.zip | tee /tmp/SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.5-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.5.zip
+            /tmp/SHA256.txt
+      - name: Final
+        run: echo UGE025_REAL_WORDPRESS_ASTRA_ALL_POSITIVE_NEGATIVE_PASS
