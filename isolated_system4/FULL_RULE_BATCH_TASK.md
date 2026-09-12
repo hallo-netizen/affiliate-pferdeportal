@@ -9,8 +9,10 @@ Before Codex is invoked, the caller must have already verified on the exact curr
 1. `python3 -m unittest discover -s isolated_system4 -p 'test_*.py' -v` = PASS;
 2. existing NO-LEGACY machine proof = PASS;
 3. System-4 entry/current snapshot = clean;
-4. one supported, real, retrievable handoff mechanism can return the completed batch to Chat;
+4. the exact handoff transport has been end-to-end proven WITHOUT Codex by delivering a real dummy file into the parent ChatGPT conversation and making its bytes directly downloadable there;
 5. the seven article bodies will not be pasted into a PR comment and will not be persisted as ordinary repository article content.
+
+A Codex-task-local `sandbox:/mnt/data/...` link, a `View task` link, a filename-only PR comment or a SHA-only PR comment is NOT proof of a retrievable parent-chat handoff.
 
 If any precondition is unproven: DO NOT START CODEX.
 If the PR head changes after preflight: re-run the preflight WITHOUT CODEX before any new production run.
@@ -71,9 +73,7 @@ Required:
 
 Signing / ENDSTEMPEL / WordPress release is DEFERRED.
 
-## Mandatory handoff to Chat — ONE REAL FILE
-Use only the handoff mechanism that was positively proven BEFORE Codex started. Do not discover, debug, replace or redesign handoff transport inside the production task.
-
+## Mandatory handoff to parent ChatGPT conversation — ONE REAL FILE
 Create exactly one file/artifact named:
 `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json`
 
@@ -87,13 +87,28 @@ It must contain:
 - test_suite_status from the head-bound preflight;
 - exactly seven rows in snapshot order, each with index, title, target_keyword, category, article_type, plan_slot, final_draft_sha256, revision_count, exact final checked body, real LanguageTool 6.8 PASS/zero unresolved findings, and real PPM 6.7.9 technical/content-quality/aggregate PASS.
 
-Return only the proven retrievable artifact reference plus SHA256. Do not paste the seven bodies into the PR conversation.
+The workflow is NOT complete when Codex merely creates that file in its own sandbox.
+The exact final bytes must be transferred into the parent ChatGPT conversation as a directly downloadable file without requiring the user to open GitHub/Codex, manually download elsewhere, or re-upload anything.
+The parent Chat must recompute SHA256 from the received bytes and compare it to the Codex-produced SHA256.
+Only after that equality check may final workflow PASS be reported.
+
+The following are explicitly INVALID handoffs:
+- `sandbox:/mnt/data/...` that works only inside the Codex task;
+- `View task` links;
+- PR comments containing only filename/SHA/task link;
+- asking the user to manually download from Codex/GitHub and upload back into ChatGPT.
+
+If exact produced bytes cannot be delivered to the parent ChatGPT conversation, terminal status is:
+`SYSTEM4_HANDOFF_FAIL`
+Article-generation or batch-gate PASS must not be promoted to final workflow PASS.
 
 ## Terminal return
 Return exactly one of:
 
 `SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS`
-with retrievable `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` reference and SHA256;
+ONLY after the exact final JSON bytes are directly downloadable in the parent ChatGPT conversation and parent-chat SHA256 verification matches;
+
+or `SYSTEM4_HANDOFF_FAIL` if article/batch production succeeded but parent-chat delivery did not;
 
 or the FIRST genuine non-repairable current System-4 controller/checker/tool/integrity blocker with exact stage, status/error and source.
 
