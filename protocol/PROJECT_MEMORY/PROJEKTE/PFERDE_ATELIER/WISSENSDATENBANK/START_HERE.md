@@ -31,10 +31,10 @@ für bloße Ideen bereits Aktenschränke anlegen, aus Recherche automatisch Arti
 5. **Trust vor Vollständigkeit.** Lieber ein Feld offen lassen als eine schwache Quelle als Tatsache übernehmen.
 6. **Vor jeder neuen Themenrecherche zuerst Strukturprüfung.** Bestehende Kategorien/Artikel/SEO-Bestände werden auf Überschneidung und Kannibalisierungsrisiko geprüft. Diese Prüfung entscheidet über Forschungsumfang, nicht automatisch über Veröffentlichung.
 7. **Aktenschrank erst bei echter Recherche.** Keine leeren Schranklandschaften.
-8. **Glossar wächst organisch.** Erklärungswürdige Fachbegriffe aus realer Recherche dürfen im bereits vorhandenen Glossar recherchiert und abgelegt werden; dafür entsteht kein neues Büro und kein neuer Aktenschrank pro Begriff.
+8. **Glossar wächst organisch.** Erklärungswürdige Fachbegriffe aus realer Recherche dürfen im bereits vorhandenen Glossar-Aktenschrank recherchiert und abgelegt werden; dafür entsteht kein neuer Aktenschrank pro Begriff. Die öffentliche Glossarstruktur und Veröffentlichung werden im Nachbarbüro `../GLOSSAR/` gesteuert.
 9. **Erweiterbar bleiben.** Ein später neu erkannter sinnvoller Punkt darf in einem Themenmodell ergänzt und bei bestehenden Datensätzen nachrecherchiert werden.
 10. **Quellen rückverfolgbar.** Jede belastbare Aussage muss auf eine Quelle bzw. einen Quellenverbund zurückführbar sein.
-11. **Veröffentlichen entscheidet dieses Büro niemals.** Veröffentlichung, URL, Kategorie, Keyword und Kannibalisierung bleiben nachgelagerten zuständigen Systemen vorbehalten.
+11. **Veröffentlichen entscheidet dieses Büro niemals.** Veröffentlichung, URL, öffentliche Glossarstruktur, Keyword und Kannibalisierung bleiben nachgelagerten zuständigen Systemen vorbehalten.
 
 ---
 
@@ -51,10 +51,10 @@ Unmittelbar bevor echte Recherche startet: Abgrenzung, vorhandene Portalabdeckun
 **3. AKTENSCHRÄNKE**  
 Erst nach Start echter Recherche. Ein größeres Forschungsthema = ein Aktenschrank. Dort liegen Datenmodell, Register, Einzeldatensätze und Quellenbelege. Aktuell vorhanden:
 - `PFERDERASSEN/` → eine Rasse = ein Datensatz; aktive Hauptrecherche.
-- `GLOSSAR/` → ein Fachbegriff = ein Datensatz; organische Querschnittsbasis.
+- `GLOSSAR/` → ein Fachbegriff = ein Datensatz; organische Querschnittsbasis und fachliche Glossar-Hauptquelle.
 
 **4. SPÄTERE NUTZUNG**  
-Fachwissen kann später von SEO/Text/anderen Büros gelesen werden. Es wird nicht automatisch veröffentlicht und nicht als zweite SEO-Datenbank benutzt.
+Fachwissen kann später von GLOSSAR, SEO/Text oder anderen Büros gelesen werden. Es wird nicht automatisch veröffentlicht und nicht als zweite SEO-Datenbank benutzt.
 
 Leitsatz:
 **SAMMELN IST FREI. RECHERCHIEREN ERST NACH PRÜFUNG. VERÖFFENTLICHEN ENTSCHEIDET DIE WISSENSDATENBANK NICHT.**
@@ -81,7 +81,8 @@ Leitsatz:
 2. vorhandenen Begriff nicht duplizieren;
 3. neuen Begriff nur mit belastbarer Quelle anlegen;
 4. Ober-/Unterbereich zuordnen;
-5. `seo_status` nur als Prüfhinweis setzen – niemals als Veröffentlichungsfreigabe.
+5. `seo_status` nur als Prüfhinweis setzen – niemals als Veröffentlichungsfreigabe;
+6. öffentliche Aufbereitung bei Bedarf an `../GLOSSAR/START_HERE.md` übergeben.
 
 ## Wenn eine neue große Themenidee auftaucht
 Nur in `THEMENPOOL.md` aufnehmen. Kein Aktenschrank, keine Fachdateien auf Vorrat.
@@ -102,7 +103,8 @@ Nur in `THEMENPOOL.md` aufnehmen. Kein Aktenschrank, keine Fachdateien auf Vorra
 - **Verbindliche Recherche-/Trust-Regeln:** `RECHERCHE_STANDARD.md`
 - **Tatsächlich angelegte Forschungsbereiche:** `AKTENSCHRAENKE/START_HERE.md`
 - **Pferderassen:** `AKTENSCHRAENKE/PFERDERASSEN/START_HERE.md`
-- **Glossar:** `AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
+- **Glossar-Fachdatenbank:** `AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
+- **Öffentliches Glossarbüro:** `../GLOSSAR/START_HERE.md`
 - **Glossar-Struktur:** `AKTENSCHRAENKE/GLOSSAR/GLOSSAR_STRUKTUR.md`
 - **Glossar-Begriffsregister:** `AKTENSCHRAENKE/GLOSSAR/GLOSSAR_REGISTER.md`
 - **Fehler:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → Originalquelle

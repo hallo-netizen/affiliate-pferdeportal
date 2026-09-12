@@ -1,6 +1,6 @@
 # ZENTRALES MODULREGISTER
 
-STAND: 2026-09-07
+STAND: 2026-09-12
 ZWECK: Der Nutzer muss sich NICHT merken, welche Grundmodule existieren, wo sie liegen oder ob sie projektübergreifend nutzbar sind.
 
 ## Rolle
@@ -148,7 +148,6 @@ Im Projekt bleiben nur:
 
 Der Nutzer muss diese Einordnung weder erinnern noch manuell vorgeben.
 
-
 ## MOD-003 – UNIVERSAL PORTAL DESIGN SUITE
 
 MODULKLASSE: ALLGEMEINGÜLTIG
@@ -205,7 +204,6 @@ separater Modul-Audit.
 REGEL:
 Nicht im Designmaster verlieren; keine Allgemeingültigkeit behaupten.
 
-
 ## MOD-005 – UNIVERSAL RESEARCH & FILL
 
 MODULKLASSE: ALLGEMEINGÜLTIG
@@ -222,10 +220,9 @@ NUTZENDES PROJEKT:
 PROJEKTBEZUG:
 `config/pferde-atelier.php`
 GITHUB-ABGLEICH:
-auf aktuellem `main` kein eigener URF-Dateistand unter den entsprechenden Namen/Pfaden gefunden.
+auf aktuellem `main` kein eigener URF-Dateistand unter diesem Namen gefunden.
 ARCHIV:
 `/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
-
 
 ## MOD-006 – PRODUKTVERGLEICHS-ENGINE
 
@@ -276,7 +273,6 @@ OFFEN:
 - Recherche-/Aktualisierungsadapter;
 - technischer Allgemeingültigkeitstest mit zweiter Projektkonfiguration.
 
-
 ## MOD-007 – UNIVERSAL PRODUKTWISSEN
 
 MODULKLASSE: UNGEKLÄRT
@@ -312,3 +308,40 @@ AKTUELLER VERTRAG:
 
 OFFEN:
 Allgemeingültigkeitsbeweis mit mindestens einer zweiten Projektkonfiguration sowie spätere produktive Release-/Liveprüfung.
+
+## MOD-008 – UNIVERSAL GLOSSAR ENGINE
+
+MODULKLASSE: UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG
+
+STATUS:
+V1-DATENVERTRAG DEFINIERT / isolierter 0.1.0-Prototyp vorhanden / PHP-Lint 8/8 PASS / statische Positiv-Negativprüfung 15/15 PASS / Runtime-Stub mit Pferde- und fachfremder Zweitkonfiguration PASS / echter WordPress-Smoke-Test noch offen.
+
+HAUPTORT:
+`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
+
+AKTUELL BELEGTER STAND:
+- Prototype 0.1.0;
+- Source-Manifest `SOURCE_SHA256.txt`;
+- lokaler ZIP SHA-256 `c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`.
+
+ZWECK:
+Projektunabhängiger WordPress-Glossarkern mit eigenem Backendbereich, Begriffsdaten, Oberbereichen, eigenen Zieladressen, SEO-Feldern, Suche/A–Z/Aufklapper sowie strukturiertem JSON-Import/Export.
+
+ABHÄNGIGKEITEN:
+- WordPress >= 6.4;
+- PHP >= 8.1;
+- Yoast optional, keine Pflichtabhängigkeit.
+
+NUTZENDE PROJEKTE:
+- PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/GLOSSAR/` als erste Anwendung.
+
+AUTORITATIVE QUELLE / BELEG:
+- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md`;
+- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/PROTOTYPE_QA_0.1.0.md`.
+
+OFFEN:
+- echter WordPress-Install-/Upgrade- und Permalinktest;
+- echter Yoast-/Astra-Test;
+- realer Wissensdatenbankimport;
+- größerer Bestands-/Performance-Test;
+- zweites echtes WordPress-Portal vor Hochstufung auf ALLGEMEINGÜLTIG.
