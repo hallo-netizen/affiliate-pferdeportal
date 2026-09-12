@@ -1,0 +1,171 @@
+{
+  "schema_version": "1",
+  "project_key": "pferde-atelier",
+  "source": "Produktvergleich_UEBERGABE_NACHBARCHAT_68_BEITRAEGE.xlsx / Freigegebene Kategorien",
+  "market_gate": {
+    "minimum_independent_dossiers": 4,
+    "exact_product_identity_required": true,
+    "official_manufacturer_sources_required": true,
+    "comparability_gate_required": true,
+    "rejected_candidate_signals_persisted": false
+  },
+  "groups": [
+    {
+      "product_group_key": "kameras-im-stall",
+      "product_page": "Kameras im Stall",
+      "category_path": "Stall > Stalltechnik > Kameras im Stall",
+      "level4_category": "Produktvergleiche Kameras im Stall",
+      "refresh_months": 6,
+      "release_status": "PASS_MIT_AKTUALISIERUNG",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "boxenmatten",
+      "product_page": "Boxenmatten",
+      "category_path": "Stall > Boxen & Türen > Boxenmatten",
+      "level4_category": "Produktvergleiche Boxenmatten",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "solar-weidezaungeraete",
+      "product_page": "Solar-Weidezaungeräte",
+      "category_path": "Weide > Zauntechnik > Solar-Weidezaungeräte",
+      "level4_category": "Produktvergleiche Solar-Weidezaungeräte",
+      "refresh_months": 12,
+      "release_status": "PASS_MIT_AKTUALISIERUNG",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "batterie-weidezaungeraete",
+      "product_page": "Batterie-Weidezaungeräte",
+      "category_path": "Weide > Zauntechnik > Batterie-Weidezaungeräte",
+      "level4_category": "Produktvergleiche Batterie-Weidezaungeräte",
+      "refresh_months": 12,
+      "release_status": "PASS_MIT_AKTUALISIERUNG",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "netzgeraete-fuer-weidezaeune",
+      "product_page": "Netzgeräte für Weidezäune",
+      "category_path": "Weide > Zauntechnik > Netzgeräte für Weidezäune",
+      "level4_category": "Produktvergleiche Netzgeräte für Weidezäune",
+      "refresh_months": 12,
+      "release_status": "PASS_MIT_AKTUALISIERUNG",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "zaunpruefer",
+      "product_page": "Zaunprüfer",
+      "category_path": "Weide > Zauntechnik > Zaunprüfer",
+      "level4_category": "Produktvergleiche Zaunprüfer",
+      "refresh_months": 12,
+      "release_status": "PASS_MIT_AKTUALISIERUNG",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "fliegenmasken",
+      "product_page": "Fliegenmasken",
+      "category_path": "Gesundheit > Insekten & Schutz > Fliegenmasken",
+      "level4_category": "Produktvergleiche Fliegenmasken",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "hufschuhe",
+      "product_page": "Hufschuhe",
+      "category_path": "Gesundheit > Hufe > Hufschuhe",
+      "level4_category": "Produktvergleiche Hufschuhe",
+      "refresh_months": 6,
+      "release_status": "PASS_MIT_ZUSATZVERTRAG",
+      "required_additional_contracts": [
+        "SAFETY_FIT_ADDITIONAL_CONTRACT"
+      ]
+    },
+    {
+      "product_group_key": "2er-pferdeanhaenger",
+      "product_page": "2er Pferdeanhänger",
+      "category_path": "Transport > Anhänger > 2er Pferdeanhänger",
+      "level4_category": "Produktvergleiche 2er Pferdeanhänger",
+      "refresh_months": 6,
+      "release_status": "PASS_MIT_AKTUALISIERUNG",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "regendecken",
+      "product_page": "Regendecken",
+      "category_path": "Ausrüstung > Decken > Regendecken",
+      "level4_category": "Produktvergleiche Regendecken",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "winterdecken",
+      "product_page": "Winterdecken",
+      "category_path": "Ausrüstung > Decken > Winterdecken",
+      "level4_category": "Produktvergleiche Winterdecken",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "uebergangsdecken",
+      "product_page": "Übergangsdecken",
+      "category_path": "Ausrüstung > Decken > Übergangsdecken",
+      "level4_category": "Produktvergleiche Übergangsdecken",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "thermotraenken",
+      "product_page": "Thermotränken",
+      "category_path": "Fütterung > Frostschutz > Thermotränken",
+      "level4_category": "Produktvergleiche Thermotränken",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "steigbuegel",
+      "product_page": "Steigbügel",
+      "category_path": "Ausrüstung > Sattel > Steigbügel",
+      "level4_category": "Produktvergleiche Steigbügel",
+      "refresh_months": 6,
+      "release_status": "PASS_MIT_ZUSATZVERTRAG",
+      "required_additional_contracts": [
+        "SAFETY_FIT_ADDITIONAL_CONTRACT"
+      ]
+    },
+    {
+      "product_group_key": "stalldecken",
+      "product_page": "Stalldecken",
+      "category_path": "Ausrüstung > Decken > Stalldecken",
+      "level4_category": "Produktvergleiche Stalldecken",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "schermaschinen",
+      "product_page": "Schermaschinen",
+      "category_path": "Ausrüstung > Pflegezubehör > Schermaschinen",
+      "level4_category": "Produktvergleiche Schermaschinen",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    },
+    {
+      "product_group_key": "unterdecken",
+      "product_page": "Unterdecken",
+      "category_path": "Ausrüstung > Decken > Unterdecken",
+      "level4_category": "Produktvergleiche Unterdecken",
+      "refresh_months": 12,
+      "release_status": "PASS",
+      "required_additional_contracts": []
+    }
+  ]
+}
