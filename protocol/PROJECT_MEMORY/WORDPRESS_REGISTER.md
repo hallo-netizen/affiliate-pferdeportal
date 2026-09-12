@@ -274,3 +274,40 @@ In Designmastern nachweisbar:
 
 Regel:
 nicht als bloße Design-Datei verschwinden lassen; eigener Modulstatus folgt nach separater Prüfung.
+
+### WP-009 – Universal Glossar Engine
+
+MOD-ID:
+MOD-008
+
+Plugin:
+`Universal Glossary Engine`
+
+Aktuell belegter Stand:
+**0.1.0-prototype**
+
+Prototyp-ZIP SHA-256:
+`c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
+
+Status:
+**LOCAL PROTOTYPE PASS / KEIN WORDPRESS-LIVE-PASS.**
+
+Belegt:
+- PHP-Lint 8/8 PASS;
+- statische Positiv-/Negativprüfung 15/15 PASS;
+- Runtime-Stub PASS;
+- Pferde-Profil + fachfremde Zweitkonfiguration ohne Coreänderung PASS;
+- strukturierter JSON-Import/Export; Import ausschließlich als Entwurf;
+- keine Yoast-Pflichtabhängigkeit und keine direkten Yoast-Metafeld-Writes.
+
+Hauptquelle:
+`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
+
+Erste Projektanwendung:
+`PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
+
+Modulklasse:
+`UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
+
+Offen:
+echter WordPress-Smoke-Test, Permalinktest neben vorhandener `/glossar/`-Seite, echter Yoast-/Astra-Test, realer Wissensdatenbankimport, größerer Performance-Test und zweites echtes WordPress-Portal.
