@@ -39,6 +39,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 - `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
 - `PRODUKTVERGLEICH/START_HERE.md` → Produktvergleichs-Konzept / Vergleichsdefinition / Faktendossier / Übergabe an TEXT
 - `WISSENSDATENBANK/START_HERE.md` → zentraler Themenpool, Recherche-Steuerung, Trust-Regeln und tatsächlich recherchierte Wissens-Aktenschränke
+- `GLOSSAR/START_HERE.md` → öffentliches Glossar: Struktur, Kurzfassungen, SEO-Felder, WordPress-/Design-Anbindung
 - `DESIGN/START_HERE.md` → Portaldesign
 - `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
