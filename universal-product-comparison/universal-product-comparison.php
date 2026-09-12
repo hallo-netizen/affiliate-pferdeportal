@@ -45,6 +45,10 @@ function upc_due_research_refresh_plan( $project_key = 'pferde-atelier', $as_of_
     return UPC_Research_Runtime::build_due_refresh_plan( $project_key, $as_of_utc, $limit_per_group );
 }
 
+function upc_apply_research_refresh_results( array $plan, array $results ) {
+    return UPC_Research_Runtime::apply_refresh_results( $plan, $results );
+}
+
 function upc_install_schema() {
     global $wpdb;
 
