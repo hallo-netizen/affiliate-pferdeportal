@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Comparison
  * Description: Minimal comparison core on top of Universal Product Knowledge.
- * Version: 0.2.4-prototype
+ * Version: 0.2.5-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: universal-product-knowledge
@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPC_VERSION', '0.2.4-prototype' );
-define( 'UPC_SCHEMA_VERSION', '2' );
+define( 'UPC_VERSION', '0.2.5-prototype' );
+define( 'UPC_SCHEMA_VERSION', '3' );
 define( 'UPC_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/src/class-upc-repository.php';
@@ -54,6 +54,7 @@ function upc_install_schema() {
         id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         comparison_key varchar(191) NOT NULL,
         comparison_type varchar(16) NOT NULL,
+        comparison_mode varchar(40) NOT NULL DEFAULT '',
         product_group_key varchar(191) NOT NULL,
         working_title text NOT NULL,
         decision_intent text NOT NULL,
