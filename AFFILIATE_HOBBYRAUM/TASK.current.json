@@ -1,33 +1,20 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "adcell-67219-merged-canonical-gates-20260912",
-  "goal": "Der zusammengefuehrte Affiliate-Zentrale-Stand 6.72.19 ist kanonisch auf affiliate-release-current gebunden: Pluginbuero-6.72.17 bleibt erhalten und der bereits gepruefte ADCELL-API-v2-Fix ist integriert. Jetzt ausschliesslich committed Gates auf exakt diesem kanonischen Stand ausfuehren, danach Fresh-Unpack und Source/ZIP-Byteidentitaet 26/26. Keine Fachlogik aendern. Live-PASS bleibt bis zum echten ADCELL API + WordPress/MariaDB E2E gesperrt.",
+  "task_id": "adcell-live-api-wordpress-e2e-20260912",
+  "goal": "Affiliate-Zentrale 6.72.19 ist kanonisch gebunden und hat die gebundenen lokalen/kanonischen ADCELL-, Awin/OTTO-, Banner-, PHP-, Release-Guard- und Fresh-Unpack/26-of-26-Identity-Gates bestanden. Keine weitere Sourcearbeit. Einziger verbleibender ADCELL-Schritt ist der reale Live-Nachweis: echte ADCELL API v2 gegen den freigeschalteten Account und danach echter WordPress/MariaDB E2E. Bis der ADCELL-Zugang wieder funktioniert, bleibt der Task BLOCKED und es darf kein Live-PASS behauptet werden.",
   "image": "php:8.2-cli",
-  "inputs": [
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php","dest":"pferdeportal-affiliate-router.php"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/readme.txt","dest":"readme.txt"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php","dest":"trait-ppar-provider-registry.php"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-intake.php","dest":"trait-ppar-provider-intake.php"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php","dest":"trait-ppar-automation-suite.php"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php","dest":"trait-ppar-network-sync.php"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php","dest":"trait-ppar-creative-library.php"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php","dest":"trait-ppar-output-objects.php"},
-    {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-control-contract.php","dest":"trait-ppar-control-contract.php"},
-    {"src":"test_adcell_api_v2_automation.php","dest":"test_adcell_api_v2_automation.php"},
-    {"src":"test_adcell_awin_otto_unchanged.php","dest":"test_adcell_awin_otto_unchanged.php"},
-    {"src":"test_banner_distribution_behavior.php","dest":"test_banner_distribution_behavior.php"}
-  ],
+  "inputs": [],
   "writable": [],
-  "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-provider-registry.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_adcell_awin_otto_unchanged.php && php -l test_banner_distribution_behavior.php",
+  "command": "NO_LOCAL_COMMAND_LIVE_ACCESS_REQUIRED",
   "tests": [
-    "Canonical version markers must all equal 6.72.19",
-    "php test_adcell_api_v2_automation.php",
-    "ADCELL runtime positive-negative contract harness on canonical 6.72.19",
-    "php test_adcell_awin_otto_unchanged.php",
-    "php test_banner_distribution_behavior.php",
-    "PHP lint 21/21",
-    "original release_guard.py governance-check, source-check, tree-check, start --branch affiliate-release-current",
-    "Fresh-Unpack + Source/ZIP byte identity 26/26"
+    "Real ADCELL API v2 token/program/promotion flow with the restored account",
+    "accepted + active + explicit programId allowlist positive path",
+    "non-allowlisted / inactive / non-accepted negative paths remain blocked",
+    "Real WordPress/MariaDB end-to-end import, persistence, readback and output path",
+    "No Awin fallthrough and no manual CSV normal-operation prerequisite"
   ],
+  "status": "BLOCKED",
+  "blocker": "ADCELL account access unavailable; password reset email not arriving",
+  "next_action": "When ADCELL account access is restored, run exactly the real ADCELL API v2 and WordPress/MariaDB E2E gates. Until then do not modify source and do not claim Live-PASS.",
   "timeout_seconds": 600
 }
