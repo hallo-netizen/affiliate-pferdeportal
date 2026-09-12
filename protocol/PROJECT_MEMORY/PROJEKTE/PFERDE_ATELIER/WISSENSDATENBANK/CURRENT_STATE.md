@@ -27,13 +27,13 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **90 reale Rassendatensätze** sind im zentralen Rassenregister geführt.
-- Spanien wurde gegen den amtlichen MAPA-Pferderassenkatalog breit abgearbeitet; Pottoka wird nicht doppelt zum vorhandenen Pottok angelegt.
-- Deutschland wurde um Deutsches Classic Pony, Deutsches Reitpony, Deutsches Part-Bred Shetland Pony, Edelbluthaflinger, Süddeutsches, Schleswiger, Schwarzwälder und Rheinisch-Deutsches Kaltblut sowie Lewitzer und Leonharder erweitert.
-- Großbritannien wurde u. a. um Suffolk Punch, Cleveland Bay, Clydesdale, Shire und British Spotted Pony erweitert.
-- Niederlande: Friese sowie KWPN ergänzt; die vier KWPN-Fokrichtungen werden nicht künstlich als vier Rassen dupliziert.
+- **96 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem letzten synchronisierten Stand hinzugekommen: Belgian Draught/Brabanter, American Miniature Horse, Konik polski, Bosnisches Gebirgspferd, Falabella und Basotho Pony.
+- American Miniature Horse und Falabella werden ausdrücklich als getrennte Rassen/Register geführt; Größe allein macht keinen Falabella.
+- Konik polski ist gegen das polnische Ursprungszuchtbuch gebunden.
+- Bosnisches Gebirgspferd und Basotho Pony wurden als quellengebundene Kernakten angelegt; formale Detailstandards bleiben dort sichtbar offen, wo sie noch nicht ausreichend belegt sind.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
-- Offene Detailfelder bleiben sichtbar offen; einige Kernakten tragen ausdrücklich `NACHRECHERCHE_DETAILSTANDARD`.
+- Offene Detailfelder bleiben sichtbar offen; einige Kernakten benötigen weitere Nachrecherche zum vollständigen Ursprungs-/Detailstandard.
 
 ## GLOSSAR – FORTSCHRITT
 
