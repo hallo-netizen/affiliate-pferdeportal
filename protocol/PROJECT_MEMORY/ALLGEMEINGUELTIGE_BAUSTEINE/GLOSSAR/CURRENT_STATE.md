@@ -1,7 +1,7 @@
 # UNIVERSAL GLOSSAR ENGINE – CURRENT_STATE
 
 STAND: 2026-09-12
-STATUS: V1-PROTOTYP LOKAL PASS / WORDPRESS-REALTEST OFFEN
+STATUS: V1-PROTOTYP / ECHTER WORDPRESS+MYSQL-SMOKE-TEST PASS / ASTRA+YOAST-REALTEST OFFEN
 
 ## Belastbarer Stand
 
@@ -16,7 +16,7 @@ STATUS: V1-PROTOTYP LOKAL PASS / WORDPRESS-REALTEST OFFEN
 - Vorhandene WordPress-Seite als Glossar-Hauptseite auswählbar.
 - Eigene Zieladresse je veröffentlichtem Begriff.
 - Eigene SEO-Titel-/Meta-Description-Werte; providerneutraler Core mit optionaler Yoast-Brücke.
-- Suchfeld, A–Z, Oberbereiche und Aufklapper im Frontend-Prototyp vorhanden.
+- Suchfeld, A–Z, Oberbereiche und Aufklapper vorhanden.
 - Kein Bildzwang.
 - Kein Auto-Publish.
 - JSON-Import/Export vorhanden; Import ausschließlich als Entwurf und nur für erlaubte Felder.
@@ -27,16 +27,39 @@ STATUS: V1-PROTOTYP LOKAL PASS / WORDPRESS-REALTEST OFFEN
 Autoritativ:
 `PROTOTYPE_QA_0.1.0.md`
 
-Aktuell belegt:
+Lokal belegt:
 - PHP-Lint 8/8 PASS;
 - statische Positiv-/Negativprüfung 15/15 PASS;
 - Runtime-Stub-Vertragstest PASS;
-- Pferde-Konfiguration PASS im lokalen Vertrags-/Stubtest;
+- Pferde-Konfiguration PASS;
 - fachfremde Zweitkonfiguration `Lexikon` PASS ohne Coreänderung;
 - ZIP-Struktur PASS.
 
-Prototyp-ZIP SHA-256:
+Echter WordPress/MySQL-Realtest:
+- GitHub Actions Run `34699122729` → GESAMT PASS;
+- Job `103567632899`: WordPress 6.9 / PHP 8.1.34 / MySQL 8.0 → PASS;
+- Job `103567633008`: WordPress 7.1 / PHP 8.3.33 / MySQL 8.0 → PASS;
+- Endmarker in beiden Jobs: `UGE_WORDPRESS_MYSQL_REAL_SMOKE_PASS`.
+
+Real bestätigt:
+- Plugin lässt sich aktivieren/deaktivieren/reaktivieren;
+- vorhandene Glossar-Hauptseite `/glossar/` und Begriffszieladresse `/glossar/kolik/` funktionieren gleichzeitig;
+- Suche, Oberbereich und veröffentlichter Begriff werden real ausgegeben;
+- Entwürfe erscheinen nicht im Frontend;
+- SEO-Titel, Meta-Description, Canonical und Noindex funktionieren ohne Yoast;
+- JSON-Import/Export funktioniert;
+- Import ignoriert unbekannte Felder;
+- Import bleibt trotz `status=publish` im Eingang immer Entwurf;
+- neues Feld über das erweiterbare Feldschema funktioniert ohne Coreänderung;
+- reale Zweitkonfiguration `Lexikon` mit anderer URL-Basis, Bezeichnungen und Designwerten funktioniert ohne Coreänderung;
+- Deaktivieren/Reaktivieren erhält Daten und Konfiguration;
+- Glossarbegriffe erzeugen keine normalen WordPress-Seiten.
+
+Prototyp-ZIP SHA-256 des lokal gebauten Vorläuferpakets:
 `c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
+
+Wichtig:
+Dieser Hash ist noch kein freigegebener Release-Installer. Vor Ausgabe wird ein finaler Kandidat neu paketiert und hashgebunden geprüft.
 
 ## Modulklasse
 
@@ -44,22 +67,21 @@ Formal weiterhin:
 `UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
 
 Grund:
-Der lokale Zweitkonfigurationsbeweis ist positiv, aber ein zweites echtes WordPress-Portal wurde noch nicht ausgeführt.
+Der Core hat nun auch einen echten WordPress-Zweitkonfigurationstest bestanden. Für die formale Hochstufung bleibt aber ein separates zweites reales Portal sowie der vollständige Release-/Integrationsnachweis offen.
 
 ## Kritische Entscheidung
 
 Keine parallele Pluginentwicklung.
 
-`Core + Projektkonfiguration` ist aktuell technisch tragfähig. Falls ein echter Zweitportaltest später eine unkonfigurierbare Projektspezifik beweist, wird nur ein kleiner Adapter ergänzt; kein vollständiger Fork.
+`Core + Projektkonfiguration` ist technisch bestätigt tragfähig. Falls ein späteres reales Zweitportal eine unkonfigurierbare Projektspezifik beweist, wird nur ein kleiner Adapter ergänzt; kein vollständiger Fork.
 
 ## Noch offen
 
-- echter WordPress-Install-/Upgrade-Test;
-- Permalink-Kollisionstest mit vorhandener `/glossar/`-Seite;
-- echter Yoast-Test;
-- echter Astra/Pferde-Frontendtest;
-- realer Import aus der Wissensdatenbank;
+- echter Astra+Yoast-Kombinationstest;
+- realer Import aus der Campus-Wissensdatenbank;
 - größerer Bestands-/Performance-Test;
-- zweites echtes WordPress-Portal.
+- finaler ZIP-Install-/Update-/Reinstall-Test des Release-Kandidaten;
+- separates zweites echtes WordPress-Portal;
+- Pferde-Atelier-LIVE-Installation.
 
-Keine Release-/LIVE-Freigabe vor diesen Prüfungen.
+Keine Release-/LIVE-Freigabe vor den für den Release-Kandidaten gebundenen Prüfungen.
