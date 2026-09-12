@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Stable semantic fingerprint for product knowledge.
  *
  * Verification timestamps are intentionally excluded: a periodic re-check with
- * unchanged facts must not trigger comparison/article work.
+ * unchanged facts/identifiers must not trigger comparison/article work.
  */
 class UPK_Change_Fingerprint {
     private $knowledge;
@@ -38,7 +38,7 @@ class UPK_Change_Fingerprint {
             ) ),
             'identifiers'  => $this->normalize_records(
                 isset( $bundle['identifiers'] ) ? $bundle['identifiers'] : array(),
-                array( 'identifier_type', 'identifier_value' )
+                array( 'identifier_type', 'identifier_value', 'source_url', 'source_type' )
             ),
             'facts'        => $this->normalize_records(
                 isset( $bundle['facts'] ) ? $bundle['facts'] : array(),
@@ -74,7 +74,7 @@ class UPK_Change_Fingerprint {
             ) ),
             'identifiers'  => $this->normalize_records(
                 isset( $bundle['identifiers'] ) ? $bundle['identifiers'] : array(),
-                array( 'identifier_type', 'identifier_value' )
+                array( 'identifier_type', 'identifier_value', 'source_url', 'source_type' )
             ),
             'facts'        => $this->normalize_records(
                 isset( $bundle['facts'] ) ? $bundle['facts'] : array(),
