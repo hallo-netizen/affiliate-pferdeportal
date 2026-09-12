@@ -15,6 +15,10 @@ trait PPAR_Network_Sync_Trait {
     }
 
     public function maybe_install_network_sync_schema() {
+        // AF-062: the legacy router still defines Basic-Auth ADCELL handlers for
+        // backwards source compatibility. Replace only their registered admin
+        // routes before any admin-post dispatch; Awin keeps the existing path.
+        $this->adcell_api_v2_bind_legacy_admin_routes();
         $installed = (string) get_option(self::OPTION_SYNC_SCHEMA_VERSION, '0');
         if ($installed === self::SYNC_SCHEMA_VERSION) {
             return;
@@ -89,6 +93,59 @@ trait PPAR_Network_Sync_Trait {
         update_option(self::OPTION_SYNC_SCHEMA_VERSION, self::SYNC_SCHEMA_VERSION, false);
     }
 
+    private function adcell_api_v2_bind_legacy_admin_routes() {
+        if (!function_exists('remove_action') || !function_exists('add_action')) { return; }
+        remove_action('admin_post_ppar_test_network', array($this, 'handle_test_network'));
+        remove_action('admin_post_ppar_save_network', array($this, 'handle_save_network'));
+        add_action('admin_post_ppar_test_network', array($this, 'handle_test_network_api_v2_safe'));
+        add_action('admin_post_ppar_save_network', array($this, 'handle_save_network_api_v2_safe'));
+    }
+
+    public function handle_test_network_api_v2_safe() {
+        $network = sanitize_key((string) ($_POST['network'] ?? ''));
+        if ($network !== 'adcell') {
+            return $this->handle_test_network();
+        }
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_test_network_adcell', 'ppar_network_test_nonce');
+        $result = $this->adcell_api_v2_test_connection();
+        $this->network_sync_update_connection_status('adcell', $result);
+        $settings = $this->network_settings('adcell');
+        wp_safe_redirect(add_query_arg(array(
+            'ppar_network_test'=>'adcell',
+            'ppar_network_status'=>(string) ($settings['last_status'] ?? '') === 'connected' ? 'connected' : 'failed',
+        ), admin_url('admin.php?page=affiliate-portal-networks')));
+        exit;
+    }
+
+    public function handle_save_network_api_v2_safe() {
+        $network = sanitize_key((string) ($_POST['network'] ?? ''));
+        if ($network !== 'adcell') {
+            return $this->handle_save_network();
+        }
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_save_network_adcell', 'ppar_network_nonce');
+        $posted = isset($_POST['ppar_network']['adcell']) && is_array($_POST['ppar_network']['adcell']) ? $_POST['ppar_network']['adcell'] : array();
+        $saved = $this->persist_network_settings('adcell', $posted);
+        $return_page = sanitize_key((string) ($_POST['return_page'] ?? 'affiliate-portal-networks'));
+        if (!in_array($return_page, array('affiliate-portal-networks','affiliate-portal-provider-adcell'), true)) { $return_page = 'affiliate-portal-networks'; }
+        $args = array('page'=>$return_page);
+        if (is_wp_error($saved)) {
+            $args['ppar_network_save_error'] = 'adcell';
+        } else {
+            $args['ppar_network_saved'] = 'adcell';
+            if (sanitize_key((string) ($_POST['ppar_network_action'] ?? 'save')) === 'save_test') {
+                $result = $this->adcell_api_v2_test_connection();
+                $this->network_sync_update_connection_status('adcell', $result);
+                $settings = $this->network_settings('adcell');
+                $args['ppar_network_test'] = 'adcell';
+                $args['ppar_network_status'] = (string) ($settings['last_status'] ?? '') === 'connected' ? 'connected' : 'failed';
+            }
+        }
+        wp_safe_redirect(add_query_arg($args, admin_url('admin.php')));
+        exit;
+    }
+
     private function network_sync_validate_feed_url($network, $url) {
         $url = trim((string) $url);
         if ($url === '' || !wp_http_validate_url($url)) {
@@ -151,10 +208,11 @@ trait PPAR_Network_Sync_Trait {
         if ($username === '' || $password === '') {
             return new WP_Error('adcell_credentials_missing', 'ADCELL API-Benutzername oder API-Passwort fehlt.');
         }
+        $token_path = '/user/getToken';
         $url = add_query_arg(array(
             'userName' => $username,
             'password' => $password,
-        ), $this->adcell_api_v2_base_url() . 'user/getToken');
+        ), $this->adcell_api_v2_base_url() . ltrim($token_path, '/'));
         $response = $this->api_response(wp_safe_remote_get($url, array(
             'timeout' => 20,
             'redirection' => 0,

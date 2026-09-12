@@ -30,7 +30,7 @@ trait PPAR_Provider_Registry_Trait {
                 'access_owner' => 'core',
                 'specialist_menu' => true,
                 'specialist_slug' => 'affiliate-portal-provider-adcell',
-                'capabilities' => array('credentials','connection_test','partners','product_feeds','synchronization','automation','creatives','outputs','veto'),
+                'capabilities' => array('credentials','connection_test','programmes','partners','product_feeds','synchronization','automation','creatives','outputs','veto'),
             ),
             'ebay' => array(
                 'label' => 'eBay',
@@ -391,7 +391,7 @@ trait PPAR_Provider_Registry_Trait {
             return (string)($result['status'] ?? '') === 'failed' ? new WP_Error('awin_connection_failed', (string)($result['message'] ?? 'Awin-Verbindungstest fehlgeschlagen.')) : $result;
         }
         if ($provider === 'adcell') {
-            $result = $this->test_adcell_connection();
+            $result = $this->adcell_api_v2_test_connection();
             $settings = $this->network_settings('adcell');
             $settings['last_status'] = (string)($result['status'] ?? 'failed');
             $settings['last_checked'] = time();
@@ -468,12 +468,11 @@ trait PPAR_Provider_Registry_Trait {
                     <p class="description">Für OTTO/Awin 14336 ist ein ungefilterter Vollfeed ab jetzt gesperrt. Die lokale Relevanzprüfung bleibt zusätzlich aktiv und verwirft fachfremde Zeilen vor der Speicherung.</p><?php submit_button('Awin-Betriebsprofil speichern','secondary'); ?></form>
                 </section>
                 <?php if (method_exists($this,'render_awin_programme_gate_section')) { $this->render_awin_programme_gate_section($awin_programmes); } ?>
-            <?php elseif ($provider === 'adcell') : $adcell_settings=$this->network_settings('adcell'); ?>
+            <?php elseif ($provider === 'adcell') : $adcell_catalog=method_exists($this,'adcell_api_v2_programme_catalog')?$this->adcell_api_v2_programme_catalog():array(); $adcell_allowlist=method_exists($this,'adcell_program_id_allowlist')?$this->adcell_program_id_allowlist():array(); ?>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
-                    <section class="postbox" style="padding:18px"><h2>Produktdaten</h2><p>ADCELL-CSV-Export und technische Synchronisierung.</p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-sync')); ?>">Synchronisierung öffnen</a></section>
-                    <section class="postbox" style="padding:18px"><h2>Automatisierung</h2><p>ADCELL-Daten in den zentralen Creative- und Ausgabeprozess überführen.</p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation&provider=adcell')); ?>">ADCELL-Automatisierung öffnen</a></section>
+                    <section class="postbox" style="padding:18px"><h2>API-v2 Programme</h2><p><strong>Zuletzt accepted + aktiv:</strong> <?php echo absint(count((array)$adcell_catalog)); ?><br><strong>programId-Allowlist:</strong> <?php echo $adcell_allowlist ? esc_html(implode(', ', $adcell_allowlist)) : 'leer – alles gesperrt'; ?></p><p>Programme und Allowlist werden zentral in der Provider-Synchronisierung geprüft. Es gibt keinen manuellen CSV-Pfad.</p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-sync')); ?>">Programme &amp; Allowlist öffnen</a></section>
+                    <section class="postbox" style="padding:18px"><h2>Automatisierung</h2><p>Nur freigegebene accepted+aktive programIds: API v2 → CSV/Banner/Deeplink → zentrale Creative-/Relevanz-/Veto-/Ausgabelogik.</p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation&provider=adcell')); ?>">ADCELL-Automatisierung öffnen</a></section>
                 </div>
-                <section class="postbox" style="padding:18px;margin-top:18px;max-width:900px"><h2>Produktfeed-Betriebsprofil</h2><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_save_network"><input type="hidden" name="network" value="adcell"><input type="hidden" name="ppar_network_action" value="save"><input type="hidden" name="return_page" value="affiliate-portal-provider-adcell"><?php wp_nonce_field('ppar_save_network_adcell','ppar_network_nonce'); ?><p><label>ADCELL-CSV-Export-URL (optional)<br><input class="large-text" type="url" name="ppar_network[adcell][csv_feed_url]" value="<?php echo esc_attr((string)($adcell_settings['csv_feed_url']??'')); ?>"></label></p><p class="description">Produktdatenquelle; sie ist bewusst von der zentralen API-Zugangsprüfung getrennt.</p><?php submit_button('ADCELL-Betriebsprofil speichern','secondary'); ?></form></section>
             <?php endif; ?>
             <?php do_action('ppar_affiliate_render_provider_specialist_' . $provider, $provider, $definition, self::PROVIDER_CONTRACT_VERSION); ?>
         </div>

@@ -22,7 +22,6 @@ $mustNotContain = static function ($key, $needle, $label) use (&$errors, &$src) 
     if (isset($src[$key]) && strpos($src[$key], $needle) !== false) { $errors[] = 'forbidden_contract:' . $label; }
 };
 
-// AF-060: official token contract is the only bound ADCELL runtime auth path.
 $mustContain('sync', 'https://api.adcell.org/api/v2/', 'official_api_host');
 $mustContain('sync', '/user/getToken', 'token_endpoint');
 $mustContain('sync', "'userName'", 'token_username_parameter');
@@ -34,8 +33,6 @@ $mustContain('sync', 'adcell_api_v2_test_connection', 'connection_test_helper');
 $mustNotContain('sync', "Authorization'=>'Basic", 'basic_auth_sync');
 $mustNotContain('registry', '$this->test_adcell_connection()', 'legacy_basic_test_route');
 $mustContain('registry', '$this->adcell_api_v2_test_connection()', 'official_test_route');
-
-// Official read-only/program/promotion API-v2 paths and exact program gate.
 $mustContain('sync', '/affiliate/program/export', 'program_export');
 $mustContain('sync', '/affiliate/promotion/getPromotionTypeCsv', 'promotion_csv');
 $mustContain('sync', '/affiliate/promotion/getPromotionTypeBanner', 'promotion_banner');
@@ -44,8 +41,6 @@ $mustContain('sync', 'program_id_allowlist', 'program_id_allowlist_setting');
 $mustContain('sync', 'affiliateStatus', 'accepted_status_gate');
 $mustContain('sync', 'isActive', 'active_program_gate');
 $mustContain('sync', 'adcell_api_v2_allowlisted_programmes', 'allowlisted_programmes_helper');
-
-// AF-059: normal automation is API-derived per program, never manual csv-feed routing.
 $mustContain('automation', 'automation_enqueue_adcell_program', 'per_program_queue');
 $mustContain('automation', 'adcell_api_v2_promotion_items', 'api_promotion_source');
 $mustContain('automation', 'automation_download_adcell_feed_url', 'api_csv_download');
@@ -54,10 +49,8 @@ $mustNotContain('automation', "partner_external_id' => 'csv-feed'", 'legacy_csv_
 $mustNotContain('automation', 'ADCELL-CSV-Lauf starten', 'legacy_csv_run_button');
 $mustNotContain('automation', 'Exakte CSV-Export-URL fehlt.', 'legacy_csv_missing_message');
 $mustNotContain('registry', 'ADCELL-CSV-Export-URL', 'legacy_csv_registry_field');
-
-// AF-058: ADCELL has its own page and its own dispatch before Awin-only rendering.
 $mustContain('automation', 'render_adcell_automation_page', 'adcell_specific_page');
-$mustContain('automation', "$requested_provider === 'adcell'", 'adcell_early_route');
+$mustContain('automation', '$requested_provider === \'adcell\'', 'adcell_early_route');
 $mustContain('automation', 'return $this->automation_enqueue_adcell_program', 'adcell_program_dispatch');
 $mustContain('automation', 'automation_adcell_banner_rows', 'banner_ingestion');
 $mustContain('automation', 'automation_adcell_deeplink_rows', 'deeplink_ingestion');

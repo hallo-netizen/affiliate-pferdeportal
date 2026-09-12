@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
  *
  * - eine Providerquelle je Auftrag, kleine wiederaufnehmbare Arbeitspakete,
  * - Awin: Programmdaten, Offers und Enhanced-/CSV-Produktfeed,
- * - ADCELL: exakt konfigurierte CSV-Export-URL, paketweise und fail-closed,
+ * - ADCELL: API v2 accepted+active+programId-Allowlist → CSV/Banner/Deeplink, paketweise und fail-closed,
  * - statische Creatives nur über offiziell dokumentierte Provider-API oder maschinenlesbaren Feed,
  * - many-to-many Zielkanten gegen den eingebetteten realen Portalbaum,
  * - automatische Slotvorschläge aus Typ und Abmessungen,
@@ -458,14 +458,18 @@ trait PPAR_Automation_Suite_Trait {
             }
         }
         $adcell = $this->network_settings('adcell');
-        if (!empty($adcell['enabled']) && trim((string) ($adcell['csv_feed_url'] ?? '')) !== '') {
-            $validated = $this->network_sync_validate_feed_url('adcell', (string) $adcell['csv_feed_url']);
-            if (!is_wp_error($validated)) {
-                $sources[] = array(
-                    'key' => 'adcell:csv-feed',
-                    'provider' => 'adcell',
-                    'partner_external_id' => 'csv-feed',
-                );
+        if (!empty($adcell['enabled'])) {
+            $programmes = $this->adcell_api_v2_allowlisted_programmes(true);
+            if (!is_wp_error($programmes)) {
+                foreach ((array) $programmes as $program_id => $programme) {
+                    $program_id = absint($program_id ?: ($programme['id'] ?? 0));
+                    if ($program_id <= 0) { continue; }
+                    $sources[] = array(
+                        'key' => 'adcell:' . $program_id,
+                        'provider' => 'adcell',
+                        'partner_external_id' => (string) $program_id,
+                    );
+                }
             }
         }
         $sources = apply_filters('ppar_affiliate_automation_scheduled_sources', $sources, $this->provider_registry(), self::PROVIDER_CONTRACT_VERSION);
@@ -542,7 +546,7 @@ trait PPAR_Automation_Suite_Trait {
             return $this->automation_enqueue_awin_partner(absint($partner_id));
         }
         if ($provider === 'adcell') {
-            return $this->automation_enqueue_adcell_feed();
+            return $this->automation_enqueue_adcell_program(absint($partner_id));
         }
         if ($provider === 'ebay' && method_exists($this, 'run_ebay_sync')) {
             $summary = $this->run_ebay_sync((bool) $manual);
@@ -823,20 +827,21 @@ trait PPAR_Automation_Suite_Trait {
         return array('job_id'=>absint($wpdb->insert_id), 'job_uuid'=>$job_uuid, 'run_uuid'=>$run_uuid);
     }
 
-    private function automation_enqueue_adcell_feed() {
-        $settings = $this->network_settings('adcell');
-        $url = trim((string) ($settings['csv_feed_url'] ?? ''));
-        $validated = $this->network_sync_validate_feed_url('adcell', $url);
-        if (is_wp_error($validated)) {
-            return new WP_Error('adcell_feed_not_configured', $validated->get_error_message());
+    private function automation_enqueue_adcell_program($program_id) {
+        $program_id = absint($program_id);
+        if ($program_id <= 0) {
+            return new WP_Error('adcell_program_invalid', 'Ungültige ADCELL-programId.');
         }
+        $programme = $this->adcell_api_v2_programme($program_id);
+        if (is_wp_error($programme)) { return $programme; }
         global $wpdb;
         $table = $this->automation_jobs_table();
-        $existing = $wpdb->get_var(
-            "SELECT id FROM {$table} WHERE provider='adcell' AND partner_external_id='csv-feed' AND status IN ('queued','running','retry') LIMIT 1"
-        );
+        $existing = $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM {$table} WHERE provider='adcell' AND partner_external_id=%s AND status IN ('queued','running','retry') LIMIT 1",
+            (string) $program_id
+        ));
         if ($existing) {
-            return new WP_Error('adcell_job_exists', 'Für den ADCELL-Produktfeed ist bereits ein Lauf vorgemerkt.');
+            return new WP_Error('adcell_job_exists', 'Für dieses ADCELL-Programm ist bereits ein Lauf vorgemerkt.');
         }
         $now = time();
         $job_uuid = $this->automation_uuid();
@@ -845,8 +850,8 @@ trait PPAR_Automation_Suite_Trait {
             'job_uuid'=>$job_uuid,
             'run_uuid'=>$run_uuid,
             'provider'=>'adcell',
-            'partner_external_id'=>'csv-feed',
-            'stage'=>'feed',
+            'partner_external_id'=>(string) $program_id,
+            'stage'=>'promotions',
             'status'=>'queued',
             'cursor_value'=>0,
             'offer_page'=>1,
@@ -856,16 +861,79 @@ trait PPAR_Automation_Suite_Trait {
             'lock_expires_at'=>0,
             'heartbeat_at'=>0,
             'counts'=>wp_json_encode($this->automation_empty_counts()),
-            'details'=>wp_json_encode(array('feed'=>'pending','feed_complete'=>false,'partners'=>array())),
-            'message'=>'ADCELL-Feedlauf vorgemerkt.',
+            'details'=>wp_json_encode(array(
+                'program_id'=>$program_id,
+                'partner_name'=>sanitize_text_field((string) ($programme['name'] ?? ('ADCELL ' . $program_id))),
+                'csv_available'=>false,
+                'feed_complete'=>false,
+                'banner_complete'=>false,
+                'deeplink_complete'=>false,
+            )),
+            'message'=>'ADCELL-Programmlauf vorgemerkt.',
             'created_at'=>$now,
             'updated_at'=>$now,
             'finished_at'=>0,
         ));
         if (!$ok) {
-            return new WP_Error('adcell_job_insert_failed', 'ADCELL-Feedlauf konnte nicht vorgemerkt werden.');
+            return new WP_Error('adcell_job_insert_failed', 'ADCELL-Programmlauf konnte nicht vorgemerkt werden.');
         }
         return array('job_id'=>absint($wpdb->insert_id), 'job_uuid'=>$job_uuid, 'run_uuid'=>$run_uuid);
+    }
+
+    private function automation_adcell_banner_rows($program_id, $program_name, $run_uuid) {
+        $items = $this->adcell_api_v2_promotion_items($program_id, 'banner');
+        if (is_wp_error($items)) { return $items; }
+        $rows = array();
+        $blocked = 0;
+        foreach ((array) $items as $item) {
+            if (!is_array($item) || absint($item['programId'] ?? 0) !== absint($program_id)) { $blocked++; continue; }
+            $promotion_id = absint($item['promotionId'] ?? 0);
+            $click = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['clickoutLink'] ?? ''));
+            $image = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['bannerUrl'] ?? ''));
+            if ($promotion_id <= 0 || $click === '' || $image === '') { $blocked++; continue; }
+            $rows[] = array(
+                'creative_id'=>'banner-' . $promotion_id,
+                'creative_type'=>'banner',
+                'creative_title'=>sanitize_text_field((string) $program_name . ' Banner ' . $promotion_id),
+                'creative_description'=>sanitize_textarea_field((string) ($item['information'] ?? '')),
+                'creative_tag'=>'ADCELL Banner',
+                'image_source'=>$image,
+                'destination_url'=>$click,
+                'tracking_url'=>$click,
+                'width'=>absint($item['width'] ?? 0),
+                'height'=>absint($item['height'] ?? 0),
+                'status'=>'active',
+                '_source_kind'=>'banner',
+                '_run_uuid'=>sanitize_text_field((string) $run_uuid),
+            );
+        }
+        return array('rows'=>$rows,'blocked'=>$blocked);
+    }
+
+    private function automation_adcell_deeplink_rows($program_id, $program_name, $run_uuid) {
+        $items = $this->adcell_api_v2_promotion_items($program_id, 'deeplink');
+        if (is_wp_error($items)) { return $items; }
+        $rows = array();
+        $blocked = 0;
+        foreach ((array) $items as $item) {
+            if (!is_array($item) || absint($item['programId'] ?? 0) !== absint($program_id)) { $blocked++; continue; }
+            $promotion_id = absint($item['promotionId'] ?? 0);
+            $click = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['clickoutLink'] ?? ''));
+            if ($promotion_id <= 0 || $click === '') { $blocked++; continue; }
+            $rows[] = array(
+                'creative_id'=>'deeplink-' . $promotion_id,
+                'creative_type'=>'text',
+                'creative_title'=>sanitize_text_field((string) $program_name . ' Deeplink ' . $promotion_id),
+                'creative_description'=>sanitize_textarea_field((string) ($item['information'] ?? '')),
+                'creative_tag'=>'ADCELL Deeplink',
+                'destination_url'=>$click,
+                'tracking_url'=>$click,
+                'status'=>'active',
+                '_source_kind'=>'deeplink',
+                '_run_uuid'=>sanitize_text_field((string) $run_uuid),
+            );
+        }
+        return array('rows'=>$rows,'blocked'=>$blocked);
     }
 
     private function automation_claim_next_job() {
@@ -976,7 +1044,7 @@ trait PPAR_Automation_Suite_Trait {
             (string) $job['run_uuid'],
             sanitize_key((string) ($job['provider'] ?? 'awin')),
             (string) $job['partner_external_id'],
-            sanitize_key((string) ($job['provider'] ?? 'awin')) === 'adcell' ? 'queued_feed_sync' : 'queued_partner_sync',
+            sanitize_key((string) ($job['provider'] ?? 'awin')) === 'adcell' ? 'queued_program_sync' : 'queued_partner_sync',
             'failed',
             absint($job['created_at'] ?? $now),
             $counts,
@@ -1007,7 +1075,7 @@ trait PPAR_Automation_Suite_Trait {
             (string) $job['run_uuid'],
             sanitize_key((string) ($job['provider'] ?? 'awin')),
             (string) $job['partner_external_id'],
-            sanitize_key((string) ($job['provider'] ?? 'awin')) === 'adcell' ? 'queued_feed_sync' : 'queued_partner_sync',
+            sanitize_key((string) ($job['provider'] ?? 'awin')) === 'adcell' ? 'queued_program_sync' : 'queued_partner_sync',
             sanitize_key($status),
             absint($job['created_at'] ?? $now),
             $counts,
@@ -1276,16 +1344,11 @@ trait PPAR_Automation_Suite_Trait {
         return array('file'=>$file,'format'=>$format,'headers'=>$headers_row,'delimiter'=>$delimiter,'cursor'=>$cursor,'feed_name'=>(string) ($feed['name'] ?? 'Awin-Produktfeed'));
     }
 
-    private function automation_download_adcell_feed($job_uuid) {
-        $settings = $this->network_settings('adcell');
-        $url = $this->network_sync_validate_feed_url('adcell', (string) ($settings['csv_feed_url'] ?? ''));
-        if (is_wp_error($url)) {
-            return new WP_Error('adcell_feed_not_configured', $url->get_error_message());
-        }
+    private function automation_download_adcell_feed_url($url, $job_uuid) {
+        $url = $this->adcell_api_v2_validate_csv_url($url);
+        if (is_wp_error($url)) { return $url; }
         $dir = $this->automation_private_feed_dir();
-        if (is_wp_error($dir)) {
-            return $dir;
-        }
+        if (is_wp_error($dir)) { return $dir; }
         $file = trailingslashit($dir) . 'feed-adcell-' . preg_replace('/[^a-z0-9-]/i', '', (string) $job_uuid) . '.dat';
         $automation = $this->automation_settings();
         $response = wp_safe_remote_get($url, array(
@@ -1296,67 +1359,30 @@ trait PPAR_Automation_Suite_Trait {
             'headers'=>array('Accept'=>'text/csv,text/plain,application/csv,application/octet-stream'),
             'limit_response_size'=>104857600,
         ));
-        if (is_wp_error($response)) {
-            @unlink($file);
-            return $response;
-        }
+        if (is_wp_error($response)) { @unlink($file); return $response; }
         $code = (int) wp_remote_retrieve_response_code($response);
-        if ($code !== 200) {
-            @unlink($file);
-            return new WP_Error('adcell_feed_http_' . $code, 'ADCELL Feed HTTP ' . $code . '.');
-        }
-        if (!is_readable($file) || filesize($file) <= 0) {
-            @unlink($file);
-            return new WP_Error('adcell_feed_empty_file', 'ADCELL lieferte keine lesbare Feeddatei.');
-        }
+        if ($code !== 200) { @unlink($file); return new WP_Error('adcell_feed_http_' . $code, 'ADCELL Feed HTTP ' . $code . '.'); }
+        if (!is_readable($file) || filesize($file) <= 0) { @unlink($file); return new WP_Error('adcell_feed_empty_file', 'ADCELL lieferte keine lesbare Feeddatei.'); }
         $file = $this->automation_decompress_if_needed($file);
-        if (is_wp_error($file)) {
-            return $file;
-        }
+        if (is_wp_error($file)) { return $file; }
         $handle = @fopen($file, 'rb');
-        if (!$handle) {
-            @unlink($file);
-            return new WP_Error('adcell_feed_open_failed', 'ADCELL-Feeddatei konnte nicht geöffnet werden.');
-        }
+        if (!$handle) { @unlink($file); return new WP_Error('adcell_feed_open_failed', 'ADCELL-Feeddatei konnte nicht geöffnet werden.'); }
         $first = '';
         while (($line = fgets($handle)) !== false) {
-            if (trim((string) $line) !== '') {
-                $first = preg_replace('/^\xEF\xBB\xBF/', '', (string) $line);
-                break;
-            }
+            if (trim((string) $line) !== '') { $first = preg_replace('/^\xEF\xBB\xBF/', '', (string) $line); break; }
         }
-        if ($first === '') {
-            fclose($handle);
-            @unlink($file);
-            return new WP_Error('adcell_feed_empty', 'ADCELL-Feed enthält keine Datenzeilen.');
-        }
+        if ($first === '') { fclose($handle); @unlink($file); return new WP_Error('adcell_feed_empty', 'ADCELL-Feed enthält keine Datenzeilen.'); }
         $delimiter = $this->network_sync_detect_delimiter($first);
         $headers = str_getcsv(rtrim($first, "\r\n"), $delimiter, '"', '\\');
         $headers = array_map('trim', (array) $headers);
-        if (count(array_filter($headers, 'strlen')) < 2) {
-            fclose($handle);
-            @unlink($file);
-            return new WP_Error('adcell_feed_header_invalid', 'ADCELL-Feed enthält keine brauchbare Kopfzeile.');
-        }
+        if (count(array_filter($headers, 'strlen')) < 2) { fclose($handle); @unlink($file); return new WP_Error('adcell_feed_header_invalid', 'ADCELL-Feed enthält keine brauchbare Kopfzeile.'); }
         $mapping = $this->network_sync_detect_mapping($headers);
         foreach (array('external_id','programme_external_id','title','image_url','tracking_url') as $required) {
-            if (empty($mapping[$required]['source'])) {
-                fclose($handle);
-                @unlink($file);
-                return new WP_Error('adcell_feed_mapping_incomplete', 'ADCELL-Feedspalte fehlt: ' . $required . '.');
-            }
+            if (empty($mapping[$required]['source'])) { fclose($handle); @unlink($file); return new WP_Error('adcell_feed_mapping_incomplete', 'ADCELL-Feedspalte fehlt: ' . $required . '.'); }
         }
         $cursor = ftell($handle);
         fclose($handle);
-        return array(
-            'file'=>$file,
-            'format'=>'csv',
-            'headers'=>$headers,
-            'mapping'=>$mapping,
-            'delimiter'=>$delimiter,
-            'cursor'=>$cursor,
-            'feed_name'=>'ADCELL-CSV-Export',
-        );
+        return array('file'=>$file,'format'=>'csv','headers'=>$headers,'mapping'=>$mapping,'delimiter'=>$delimiter,'cursor'=>$cursor,'feed_name'=>'ADCELL API-v2 CSV-Werbemittel');
     }
 
     private function automation_awin_offer_has_next($raw, $page, $page_size, $row_count) {
@@ -1549,12 +1575,13 @@ trait PPAR_Automation_Suite_Trait {
         );
     }
 
-    private function automation_process_adcell_product_batch($job, $details) {
+    private function automation_process_adcell_product_batch($job, $details, $program_id) {
         $file = (string) ($details['feed_file'] ?? '');
         $headers = is_array($details['feed_headers'] ?? null) ? $details['feed_headers'] : array();
         $mapping = is_array($details['feed_mapping'] ?? null) ? $details['feed_mapping'] : array();
         $delimiter = (string) ($details['feed_delimiter'] ?? ',');
-        if ($file === '' || !is_readable($file) || !$headers || !$mapping) {
+        $program_id = absint($program_id);
+        if ($program_id <= 0 || $file === '' || !is_readable($file) || !$headers || !$mapping) {
             return new WP_Error('adcell_feed_state_invalid', 'Gespeicherter ADCELL-Feed-Arbeitsstand ist ungültig.');
         }
         $handle = @fopen($file, 'rb');
@@ -1567,54 +1594,88 @@ trait PPAR_Automation_Suite_Trait {
         $deadline = microtime(true) + absint($settings['time_budget']);
         $counts = $this->automation_empty_counts();
         $processed = 0;
-        $partners = array();
         while ($processed < $limit && microtime(true) < $deadline) {
             $values = fgetcsv($handle, 0, $delimiter, '"', '\\');
-            if ($values === false) {
-                break;
-            }
-            if (!array_filter($values, static function ($value) { return trim((string) $value) !== ''; })) {
-                continue;
-            }
+            if ($values === false) { break; }
+            if (!array_filter($values, static function ($value) { return trim((string) $value) !== ''; })) { continue; }
             $row = array();
-            foreach ($headers as $index => $header) {
-                $row[(string) $header] = (string) ($values[$index] ?? '');
-            }
+            foreach ($headers as $index => $header) { $row[(string) $header] = (string) ($values[$index] ?? ''); }
             $normalized = $this->automation_adcell_product_row($row, $mapping, (string) $job['run_uuid']);
-            if (is_wp_error($normalized)) {
+            if (is_wp_error($normalized) || absint($normalized['_partner_external_id'] ?? 0) !== $program_id) {
                 $counts['blocked']++;
             } else {
-                $partner_id = (string) $normalized['_partner_external_id'];
-                $partner_name = (string) $normalized['_partner_name'];
                 unset($normalized['_partner_external_id'], $normalized['_partner_name']);
                 $context = array(
                     'provider'=>'adcell',
-                    'partner_external_id'=>$partner_id,
-                    'partner_name'=>$partner_name,
+                    'partner_external_id'=>(string) $program_id,
+                    'partner_name'=>sanitize_text_field((string) ($details['partner_name'] ?? ('ADCELL ' . $program_id))),
                     'source_kind'=>'product',
                     'run_uuid'=>(string) $job['run_uuid'],
                 );
                 $counts = $this->automation_merge_counts($counts, $this->automation_import_rows(array($normalized), $context));
-                $partners[$partner_id] = $partner_name;
             }
             $processed++;
-            if (($processed % 100) === 0) {
-                $this->automation_job_heartbeat(absint($job['id']), (string) $job['lock_token']);
-            }
+            if (($processed % 100) === 0) { $this->automation_job_heartbeat(absint($job['id']), (string) $job['lock_token']); }
         }
         $cursor = ftell($handle);
         $eof = feof($handle);
         fclose($handle);
-        return array('counts'=>$counts,'processed'=>$processed,'cursor'=>$cursor,'complete'=>$eof,'partners'=>$partners);
+        return array('counts'=>$counts,'processed'=>$processed,'cursor'=>$cursor,'complete'=>$eof);
     }
 
     private function automation_process_adcell_job($job, $counts, $details) {
-        $stage = sanitize_key((string) ($job['stage'] ?? 'feed'));
-        if ($stage === 'feed') {
-            $download = $this->automation_download_adcell_feed((string) $job['job_uuid']);
-            if (is_wp_error($download)) {
-                return $download;
+        $program_id = absint($job['partner_external_id'] ?? 0);
+        if ($program_id <= 0) { return new WP_Error('adcell_program_invalid', 'ADCELL-Auftrag besitzt keine gültige programId.'); }
+        $programme = $this->adcell_api_v2_programme($program_id);
+        if (is_wp_error($programme)) { return $programme; }
+        $details['program_id'] = $program_id;
+        $details['partner_name'] = sanitize_text_field((string) ($programme['name'] ?? ('ADCELL ' . $program_id)));
+        $stage = sanitize_key((string) ($job['stage'] ?? 'promotions'));
+
+        if ($stage === 'promotions') {
+            $csv_items = $this->adcell_api_v2_promotion_items($program_id, 'csv');
+            if (is_wp_error($csv_items)) { return $csv_items; }
+            $csv_urls = array();
+            foreach ((array) $csv_items as $item) {
+                if (!is_array($item) || absint($item['programId'] ?? 0) !== $program_id) { continue; }
+                $url = $this->adcell_api_v2_validate_csv_url((string) ($item['csvUrl'] ?? ''));
+                if (!is_wp_error($url)) { $csv_urls[$url] = $url; }
             }
+            if (count($csv_urls) > 1) {
+                return new WP_Error('adcell_csv_ambiguous', 'Mehrere unterschiedliche ADCELL-CSV-Werbemittel für dieselbe programId; keine Quelle wird geraten.');
+            }
+
+            $banner = $this->automation_adcell_banner_rows($program_id, $details['partner_name'], (string) $job['run_uuid']);
+            if (is_wp_error($banner)) { return $banner; }
+            $deeplink = $this->automation_adcell_deeplink_rows($program_id, $details['partner_name'], (string) $job['run_uuid']);
+            if (is_wp_error($deeplink)) { return $deeplink; }
+            $banner_counts = $this->automation_import_rows((array) ($banner['rows'] ?? array()), array(
+                'provider'=>'adcell','partner_external_id'=>(string)$program_id,'partner_name'=>$details['partner_name'],'source_kind'=>'banner','run_uuid'=>(string)$job['run_uuid'],
+            ));
+            $banner_counts['blocked'] = absint($banner_counts['blocked'] ?? 0) + absint($banner['blocked'] ?? 0);
+            $deeplink_counts = $this->automation_import_rows((array) ($deeplink['rows'] ?? array()), array(
+                'provider'=>'adcell','partner_external_id'=>(string)$program_id,'partner_name'=>$details['partner_name'],'source_kind'=>'deeplink','run_uuid'=>(string)$job['run_uuid'],
+            ));
+            $deeplink_counts['blocked'] = absint($deeplink_counts['blocked'] ?? 0) + absint($deeplink['blocked'] ?? 0);
+            $counts = $this->automation_merge_counts($counts, $banner_counts);
+            $counts = $this->automation_merge_counts($counts, $deeplink_counts);
+            $details['banner_complete'] = true;
+            $details['deeplink_complete'] = true;
+            $details['banner_rows'] = count((array) ($banner['rows'] ?? array()));
+            $details['deeplink_rows'] = count((array) ($deeplink['rows'] ?? array()));
+            $details['csv_available'] = count($csv_urls) === 1;
+            $details['csv_url'] = $details['csv_available'] ? (string) reset($csv_urls) : '';
+            if (!$details['csv_available']) {
+                $details['feed_complete'] = false;
+                $this->automation_release_job($job, 'reconcile', 0, 1, $counts, $details, 'ADCELL-Werbemittel verarbeitet; kein eindeutiges CSV-Werbemittel vorhanden. Abgleich folgt.');
+                return true;
+            }
+            $this->automation_release_job($job, 'feed', 0, 1, $counts, $details, 'ADCELL-Werbemittel verarbeitet. API-v2-CSV-Download folgt.');
+            return true;
+        }
+        if ($stage === 'feed') {
+            $download = $this->automation_download_adcell_feed_url((string) ($details['csv_url'] ?? ''), (string) $job['job_uuid']);
+            if (is_wp_error($download)) { return $download; }
             $details['feed'] = sanitize_text_field((string) $download['feed_name']);
             $details['feed_file'] = (string) $download['file'];
             $details['feed_format'] = 'csv';
@@ -1622,18 +1683,14 @@ trait PPAR_Automation_Suite_Trait {
             $details['feed_mapping'] = (array) $download['mapping'];
             $details['feed_delimiter'] = (string) $download['delimiter'];
             $details['products'] = 0;
-            $details['partners'] = array();
-            $this->automation_release_job($job, 'products', absint($download['cursor']), 1, $counts, $details, 'ADCELL-Feed gespeichert. Erstes Produktpaket folgt.');
+            $this->automation_release_job($job, 'products', absint($download['cursor']), 1, $counts, $details, 'ADCELL-CSV-Werbemittel gespeichert. Erstes Produktpaket folgt.');
             return true;
         }
         if ($stage === 'products') {
-            $result = $this->automation_process_adcell_product_batch($job, $details);
-            if (is_wp_error($result)) {
-                return $result;
-            }
+            $result = $this->automation_process_adcell_product_batch($job, $details, $program_id);
+            if (is_wp_error($result)) { return $result; }
             $counts = $this->automation_merge_counts($counts, $result['counts']);
             $details['products'] = absint($details['products'] ?? 0) + absint($result['processed']);
-            $details['partners'] = array_merge(is_array($details['partners'] ?? null) ? $details['partners'] : array(), (array) $result['partners']);
             if (!empty($result['complete'])) {
                 $details['feed_complete'] = true;
                 $this->automation_release_job($job, 'reconcile', 0, 1, $counts, $details, 'ADCELL-Produktfeed vollständig verarbeitet. Abgleich folgt.');
@@ -1643,22 +1700,17 @@ trait PPAR_Automation_Suite_Trait {
             return true;
         }
         if ($stage === 'reconcile') {
-            $partner_ids = array_keys(is_array($details['partners'] ?? null) ? $details['partners'] : array());
-            $cursor = max(0, (int) ($job['cursor_value'] ?? 0));
-            $deadline = microtime(true) + absint($this->automation_settings()['time_budget']);
-            $processed = 0;
-            while (isset($partner_ids[$cursor]) && $processed < 20 && microtime(true) < $deadline) {
-                $partner_id = sanitize_text_field((string) $partner_ids[$cursor]);
-                $this->automation_reconcile_partner_assets('adcell', $partner_id, 'product', (string) $job['run_uuid']);
-                $this->automation_rebuild_edges('adcell', $partner_id);
-                $cursor++;
-                $processed++;
+            $this->automation_reconcile_partner_assets('adcell', (string) $program_id, 'banner', (string) $job['run_uuid']);
+            $this->automation_reconcile_partner_assets('adcell', (string) $program_id, 'deeplink', (string) $job['run_uuid']);
+            if (!empty($details['feed_complete'])) {
+                $this->automation_reconcile_partner_assets('adcell', (string) $program_id, 'product', (string) $job['run_uuid']);
             }
-            if (isset($partner_ids[$cursor])) {
-                $this->automation_release_job($job, 'reconcile', $cursor, 1, $counts, $details, $processed . ' ADCELL-Partner abgeglichen; Fortsetzung vorgemerkt.');
-                return true;
-            }
-            $this->automation_complete_job($job, $counts, $details, 'success', 'ADCELL-Feed vollständig und paketweise abgeschlossen.');
+            $details['target_edges'] = $this->automation_rebuild_edges('adcell', (string) $program_id);
+            $status = !empty($details['feed_complete']) ? 'success' : 'partial';
+            $message = !empty($details['feed_complete'])
+                ? 'ADCELL-Programmlauf vollständig: CSV, Banner und Deeplink über API v2 verarbeitet.'
+                : 'ADCELL-Programmlauf abgeschlossen: Banner/Deeplink verarbeitet; kein eindeutiges CSV-Werbemittel verfügbar.';
+            $this->automation_complete_job($job, $counts, $details, $status, $message);
             return true;
         }
         return new WP_Error('adcell_stage_invalid', 'Unbekannte ADCELL-Automatisierungsstufe.');
@@ -2402,16 +2454,15 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     public function handle_automation_full_sync() {
-        if (!current_user_can('manage_options')) {
-            wp_die('Keine Berechtigung.');
-        }
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
         check_admin_referer('ppar_automation_full_sync', 'ppar_automation_nonce');
         $provider = sanitize_key((string) ($_POST['provider'] ?? ''));
         $partner_id = preg_replace('/[^0-9A-Za-z._-]/', '', (string) ($_POST['partner_external_id'] ?? ''));
         if ($provider === '') {
             $result = new WP_Error('automation_provider_missing', 'Provider fehlt.');
+        } elseif ($provider === 'adcell' && absint($partner_id) <= 0) {
+            $result = new WP_Error('adcell_program_invalid', 'Für ADCELL muss eine freigegebene programId gewählt werden.');
         } else {
-            if ($provider === 'adcell' && $partner_id === '') { $partner_id = 'csv-feed'; }
             if ($provider === 'ebay' && $partner_id === '') { $partner_id = 'provider'; }
             $result = $this->automation_dispatch_source(array(
                 'key'=>$provider . ':' . $partner_id,
@@ -2420,9 +2471,7 @@ trait PPAR_Automation_Suite_Trait {
             ), true);
         }
         $immediate = is_array($result) && !empty($result['immediate']);
-        if (!is_wp_error($result) && !$immediate) {
-            $this->run_automation_worker(true);
-        }
+        if (!is_wp_error($result) && !$immediate) { $this->run_automation_worker(true); }
         $status = is_wp_error($result) ? 'failed' : ($immediate ? 'completed' : 'progress');
         $message = is_wp_error($result)
             ? $result->get_error_message()
@@ -2622,9 +2671,38 @@ trait PPAR_Automation_Suite_Trait {
         return array();
     }
 
+    private function render_adcell_automation_page() {
+        $notice = sanitize_key((string) ($_GET['ppar_auto'] ?? ''));
+        $message = rawurldecode((string) ($_GET['ppar_message'] ?? ''));
+        $programmes = $this->adcell_api_v2_allowlisted_programmes(false);
+        $programmes = is_wp_error($programmes) ? array() : (array) $programmes;
+        $program_id = absint($_GET['partner_external_id'] ?? 0);
+        if ($program_id <= 0 && $programmes) { $program_id = absint(array_key_first($programmes)); }
+        ?>
+        <div class="wrap" style="max-width:1100px"><h1>ADCELL-Automatisierung</h1>
+        <p>Nur explizit freigegebene <code>programId</code>, die im letzten ADCELL-Programmkatalog zugleich <code>accepted</code> und aktiv sind. Beim Start wird der Status erneut live geprüft.</p>
+        <?php if ($notice && $message) : ?><div class="notice <?php echo $notice === 'failed' ? 'notice-error' : 'notice-success'; ?> inline"><p><?php echo esc_html($message); ?></p></div><?php endif; ?>
+        <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin:18px 0"><h2>Programmlauf starten</h2>
+        <?php if (!$programmes) : ?><p><strong>BLOCKED:</strong> Keine zwischengespeicherte accepted+aktive programId aus der expliziten Allowlist verfügbar. Zuerst auf der Provider-Synchronisierung Token + Programme prüfen und die Allowlist setzen.</p>
+        <?php else : ?><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_full_sync"><input type="hidden" name="provider" value="adcell"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?>
+        <p><label>ADCELL-Programm<br><select name="partner_external_id" required style="min-width:360px"><?php foreach ($programmes as $id=>$programme) : $id=absint($id ?: ($programme['id']??0)); if($id<=0){continue;} ?><option value="<?php echo esc_attr($id); ?>" <?php selected($program_id,$id); ?>><?php echo esc_html((string)($programme['name']??('ADCELL '.$id)).' · '.$id); ?></option><?php endforeach; ?></select></label></p>
+        <p class="description">Laufweg: programId → API-v2-Werbemittel CSV/Banner/Deeplink → bestehende Creative-Bibliothek → zentrale Relevanz/Slots/Veto/Ausgabe. Kein manueller CSV-Pfad.</p>
+        <?php submit_button('ADCELL-Programmlauf starten','primary'); ?></form><?php endif; ?></section>
+        <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-sync')); ?>">ADCELL Programme/Allowlist</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation')); ?>">Awin-Automatisierung</a></p>
+        </div><?php
+    }
+
     public function render_automation_page() {
         if (!current_user_can('manage_options')) {
             wp_die('Keine Berechtigung.');
+        }
+        $requested_provider = sanitize_key((string) ($_GET['provider'] ?? ''));
+        if ($requested_provider === 'adcell') {
+            $this->render_adcell_automation_page();
+            return;
+        }
+        if ($requested_provider !== '' && !in_array($requested_provider, array('awin','ebay'), true)) {
+            wp_die('Unbekannter Automatisierungsprovider.');
         }
         $snapshots = $this->partner_intake_snapshots();
         $allowed_snapshots = array_values(array_filter($snapshots, function ($snapshot) {
@@ -2647,8 +2725,6 @@ trait PPAR_Automation_Suite_Trait {
         $otto_cleanup = is_array($otto_cleanup) ? $otto_cleanup : array();
         $jobs = $this->automation_recent_jobs();
         $runs = $this->automation_recent_runs();
-        $adcell_settings = $this->network_settings('adcell');
-        $adcell_feed_ready = !is_wp_error($this->network_sync_validate_feed_url('adcell', (string) ($adcell_settings['csv_feed_url'] ?? '')));
         $selected_snapshot = array();
         foreach ($allowed_snapshots as $snapshot) {
             if (is_array($snapshot) && sanitize_key((string) ($snapshot['provider'] ?? '')) === 'awin' && (string) ($snapshot['external_id'] ?? '') === (string) $partner_id) {
@@ -2676,7 +2752,6 @@ trait PPAR_Automation_Suite_Trait {
         <p class="description"><strong>Eingangsweiche:</strong> Nur unter „Awin“ für dieses Portal aktive Partner erscheinen hier.</p>
         <p class="description"><strong>Produktfeed:</strong> <?php echo esc_html($awin_feed_message); ?> Angebote werden auch ohne Produktfeed verarbeitet.</p>
         <?php submit_button('Awin-Lauf starten','primary','submit',true,$this->automation_awin_start_button_attributes($selected_snapshot)); ?></form>
-        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:8px"><input type="hidden" name="action" value="ppar_automation_full_sync"><input type="hidden" name="provider" value="adcell"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?><button class="button" <?php disabled(!$adcell_feed_ready); ?>>ADCELL-CSV-Lauf starten</button><?php if(!$adcell_feed_ready): ?> <span class="description">Exakte CSV-Export-URL fehlt.</span><?php endif; ?></form>
         <?php $ebay_snapshot=$this->provider_access_snapshot('ebay'); $ebay_settings=method_exists($this,'ebay_settings')?$this->ebay_settings():array(); $ebay_ready=!empty($ebay_snapshot['configured'])&&!empty($ebay_settings['contract_confirmed'])&&!empty($ebay_settings['privacy_confirmed']); ?>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:8px"><input type="hidden" name="action" value="ppar_automation_full_sync"><input type="hidden" name="provider" value="ebay"><input type="hidden" name="partner_external_id" value="provider"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?><button class="button" <?php disabled(!$ebay_ready); ?>>eBay-Lauf starten</button><?php if(!$ebay_ready): ?> <span class="description">Zugang oder eBay-Vertrags-/Datenschutzbestätigung noch unvollständig.</span><?php endif; ?></form>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:8px"><input type="hidden" name="action" value="ppar_automation_process_next"><?php wp_nonce_field('ppar_automation_process_next','ppar_automation_process_nonce'); ?><?php submit_button('Nächstes Arbeitspaket verarbeiten','secondary', 'submit', false); ?></form></section>
