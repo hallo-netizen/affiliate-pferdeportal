@@ -1,47 +1,52 @@
 # WISSENSDATENBANK – CURRENT STATE
 
 STAND: 2026-09-12
-STATUS: EINGERICHTET / THEMENPOOL AKTIV / PFERDERASSEN IN RECHERCHE
+STATUS: THEMENPOOL AKTIV / PFERDERASSEN IN RECHERCHE / GLOSSAR STARTBEFÜLLT
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
-- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
+- aktuelle Hauptarbeit / NEXT ACTION → `HOBBYRAUM.md`
 - alle potentiellen Themen + Status → `THEMENPOOL.md`
 - Recherche-/Trust-Regeln → `RECHERCHE_STANDARD.md`
-- aktive Forschungsbereiche → `AKTENSCHRAENKE/`
+- Forschungsbereiche → `AKTENSCHRAENKE/`
 - Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
 - dauerhaftes WAS/WARUM → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 
 ## AKTUELLER BELASTBARER STAND
 
-- Zentrales Büro `WISSENSDATENBANK` eingerichtet.
-- Bürotür enthält Hausregeln, Konzept, Gebrauchsanweisung, Wegweiser und Trust-Kurzregel.
-- Zentraler Themenpool enthält 100 potentielle Oberthemen und darf organisch wachsen.
-- Für reine Ideen existieren keine Aktenschränke.
-- Aktenschrank wird erst beim tatsächlichen Recherchebeginn angelegt.
-- Aktuell existiert genau ein Forschungs-Aktenschrank: `PFERDERASSEN`.
-- Recherchewissen ist von SEO, Kategorien, Textproduktion und Veröffentlichung getrennt.
-- Trust-Regeln sind zentral verbindlich.
-- Alte Adresse `PFERDERASSEN/START_HERE.md` ist nur noch Weiterweiser; dort existiert keine zweite CURRENT-/HOBBY-/Faktenwahrheit.
+- Zentrales Büro `WISSENSDATENBANK` aktiv.
+- Bürotür enthält Hausregeln, Konzept, Gebrauchsanweisung, Wegweiser und Trust-Regeln.
+- Themenpool bleibt maximaler Sammelpunkt für potentielle Oberthemen.
+- Aktenschränke entstehen nicht auf Vorrat.
+- Aktuell existieren genau zwei Aktenschränke:
+  - `PFERDERASSEN` – aktive Hauptrecherche.
+  - `GLOSSAR` – startbefüllt und als organische Querschnittsbasis eingerichtet.
+- Recherchewissen bleibt von SEO, Kategorien, Textproduktion und Veröffentlichung getrennt.
+- Alte Adresse `PFERDERASSEN/START_HERE.md` bleibt nur Weiterweiser.
 
-## PFERDERASSEN – AKTUELLER FORTSCHRITT
+## PFERDERASSEN – FORTSCHRITT
 
-7 Datensätze angelegt und mit offiziellen Verbands-/Zuchtquellen geprüft:
-- Akhal-Teke / Achal-Tekkiner
-- American Quarter Horse
-- American Paint Horse
-- Appaloosa
-- Pura Raza Española (PRE)
-- Caspian Horse
-- American Cream Draft
+- 44 reale Rassendatensätze unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/` vorhanden.
+- Rassenregister auf diesen Bestand synchronisiert.
+- Internationale Masterliste weiterhin unvollständig; kein Vollständigkeits-PASS.
+- Offene Detailfelder bleiben sichtbar offen.
 
-Bei mehreren Datensätzen sind Detailfelder bewusst noch `nicht_recherchiert`; kein False-Vollständigkeits-PASS.
+## GLOSSAR – FORTSCHRITT
 
-## AKTIVE FORSCHUNG
+7 erste Begriffe quellengebunden angelegt:
+- Stockmaß
+- Widerrist
+- Ganasche
+- Röhrbein
+- Aalstrich
+- Kötenbehang
+- Zuchtbuch / Studbook
+
+Struktur: Oberbereich → optional Unterbereich → Einzelbegriff. Ein Begriff = ein Datensatz. `seo_status` ist nur Prüfhinweis und keine Veröffentlichungsfreigabe.
+
+## AKTIVE HAUPTFORSCHUNG
 
 - `PFERDERASSEN` → IN_RECHERCHE
 
-## NOCH NICHT ANGELEGT
-
-Alle anderen Themen aus `THEMENPOOL.md` bleiben reine Themenideen bzw. Prüfkandidaten, bis echte Recherche startet.
+Das Glossar darf während dieser Arbeit organisch um tatsächlich auftauchende, erklärungswürdige und belegte Fachbegriffe wachsen; es ist kein paralleler zweiter Hauptforschungsauftrag.
