@@ -116,30 +116,31 @@ jobs:
           NORMAL=$(docker exec wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Kolik normaler Beitrag' --post_content='NORMAL-CONTENT' --porcelain)
           test "$(docker exec wp wp post get $NORMAL --field=post_status --allow-root)" = publish
           docker exec wp wp rewrite flush --hard --allow-root
-          echo "$KOLIK" >/tmp/kolik-id
           echo UGE023_SAVE_POLICY_POSITIVE_NEGATIVE_PASS
       - name: Frontend exact category link search and noindex filters
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsS http://127.0.0.1:8080/glossar/begriff/kolik/ -o /tmp/term
-          grep -q 'KOLIK-CONTENT' /tmp/term
-          grep -q 'class="uge-primary-category"' /tmp/term
-          grep -q 'href="http://127.0.0.1:8080/gesundheit/"' /tmp/term
-          grep -q '>Gesundheit</a>' /tmp/term
-          ! grep -q '>Pferdegesundheit</a>' /tmp/term
-          ! grep -qi 'name=.robots.*noindex' /tmp/term
+          pass(){ echo "$1 PASS"; }
+          fail(){ echo "$1 FAIL"; exit 1; }
+          curl -fsS http://127.0.0.1:8080/glossar/begriff/kolik/ -o /tmp/term || fail TERM_HTTP
+          grep -q 'KOLIK-CONTENT' /tmp/term && pass TERM_CONTENT || fail TERM_CONTENT
+          grep -q 'class="uge-primary-category"' /tmp/term && pass CATEGORY_BLOCK || { grep -n -C2 'KOLIK-CONTENT' /tmp/term || true; fail CATEGORY_BLOCK; }
+          grep -q 'href="http://127.0.0.1:8080/gesundheit/"' /tmp/term && pass CATEGORY_HREF || fail CATEGORY_HREF
+          grep -q '>Gesundheit</a>' /tmp/term && pass CATEGORY_EXACT_ANCHOR || fail CATEGORY_EXACT_ANCHOR
+          if grep -q '>Pferdegesundheit</a>' /tmp/term; then fail CATEGORY_ARTIFICIAL_ANCHOR; else pass CATEGORY_ARTIFICIAL_ANCHOR_NEGATIVE; fi
+          if grep -qi 'name=.robots.*noindex' /tmp/term; then fail TERM_NOINDEX_NEGATIVE; else pass TERM_INDEX; fi
 
-          curl -fsS http://127.0.0.1:8080/glossar/gesundheit/ -o /tmp/group
-          grep -qi 'noindex' /tmp/group
+          curl -fsS http://127.0.0.1:8080/glossar/gesundheit/ -o /tmp/group || fail GROUP_HTTP
+          grep -qi 'noindex' /tmp/group && pass GROUP_NOINDEX || { grep -i -n 'robots' /tmp/group || true; fail GROUP_NOINDEX; }
 
-          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_s=Kolik' -o /tmp/search
-          grep -q '>Kolik<' /tmp/search
-          ! grep -q 'Kolik normaler Beitrag' /tmp/search
-          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
-          grep -q 'aria-label="Glossar A bis Z"' /tmp/home
-          grep -q 'aria-label="Glossar-Bereiche"' /tmp/home
-          grep -q '#35422A' /tmp/home
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_s=Kolik' -o /tmp/search || fail SEARCH_HTTP
+          grep -q '>Kolik<' /tmp/search && pass SEARCH_GLOSSARY_TERM || fail SEARCH_GLOSSARY_TERM
+          if grep -q 'Kolik normaler Beitrag' /tmp/search; then fail SEARCH_NORMAL_POST_NEGATIVE; else pass SEARCH_NORMAL_POST_NEGATIVE; fi
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home || fail HOME_HTTP
+          grep -q 'aria-label="Glossar A bis Z"' /tmp/home && pass HOME_AZ || fail HOME_AZ
+          grep -q 'aria-label="Glossar-Bereiche"' /tmp/home && pass HOME_GROUPS || fail HOME_GROUPS
+          grep -q '#35422A' /tmp/home && pass HOME_DESIGN || fail HOME_DESIGN
           echo UGE023_FRONTEND_SEMANTIC_LINK_FILTER_PASS
       - name: Package tested candidate
         if: success()
