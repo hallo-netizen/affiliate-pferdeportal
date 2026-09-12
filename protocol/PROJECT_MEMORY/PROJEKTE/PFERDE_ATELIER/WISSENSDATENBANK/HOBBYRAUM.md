@@ -24,15 +24,24 @@ parallel ein zweites Forschungsthema starten, neue Aktenschränke auf Vorrat anl
 
 THEMA: `PFERDERASSEN`
 STATUS: `IN_RECHERCHE`
-AUFTRAG: Internationale Pferde-, Pony- und Kleinpferderassen systematisch aufbauen; zuerst belastbare Masterliste und Synonyme/Dubletten klären, danach Einzeldatensätze quellengebunden recherchieren.
+AUFTRAG: Internationale Pferde-, Pony- und Kleinpferderassen systematisch aufbauen; belastbare Masterliste, formalen Status, Synonyme/Dubletten und anschließend Einzeldatensätze quellengebunden recherchieren.
 AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
+
+## BISHER ERLEDIGT
+
+- zentrale Rassenstruktur migriert;
+- Schema 1.1 mit formalem Status/anerkennender Quelle;
+- erste 7 Datensätze angelegt;
+- offizielle Verbands-/Zuchtquellen gebunden;
+- alte separate PFERDERASSEN-Steuerung entfernt.
 
 ## NEXT ACTION
 
-1. Aktenschrank PFERDERASSEN aus bestehender Vorarbeit übernehmen;
-2. internationale Kandidaten-/Masterliste aufbauen;
-3. formalen Status pro Kandidat prüfen: anerkannte Rasse / Zuchtpopulation / ferale Population / historische bzw. ausgestorbene Rasse / keine eigenständige Rasse;
-4. danach erste Rassen vollständig recherchieren.
+1. internationale Kandidatenliste weiter ausbauen;
+2. formalen Status der nächsten Kandidaten gegen autoritative Quellen prüfen;
+3. Synonyme/Dubletten bereinigen;
+4. danach weitere Einzeldatensätze anlegen;
+5. keine Vollständigkeit behaupten, bevor die Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
 ## KONTROLLPUNKTE
 
