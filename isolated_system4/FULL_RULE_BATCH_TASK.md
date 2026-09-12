@@ -33,16 +33,16 @@ Use exactly `isolated_system4/live_fixture/wordpress_snapshot.json` and all seve
 All seven article workspaces/states must exist in one temporary parent workspace in this SAME Codex task. Do not split the seven articles across tasks.
 
 The checker path is fixed:
-`controller.py ingress -> research -> facts -> context -> draft -> fullcheck -> [same-draft repair -> draft -> fullcheck]* -> OUTPUT_GATE_REQUIRED`
+`controller.py ingress -> research -> facts -> context -> draft -> fullcheck -> [same-article repair -> controller.py repair -> fullcheck]* -> OUTPUT_GATE_REQUIRED`
 
 Hard execution rules:
 - `controller.py fullcheck` is the ONLY checker orchestrator.
-- Do NOT call LanguageTool 6.8 directly.
+- Do NOT call LanguageTool 6.8 directly. The controller may internally use the exact hash-bound persistent LT 6.8 worker implemented by `production_checks`; this does not relax or duplicate the LT check.
 - Do NOT call PPM 6.7.9 directly.
 - Do NOT create or execute custom orchestration scripts/wrappers (including `/tmp/system4_run.py`) that preflight/check/abort outside the controller.
 - Do NOT add an LT/PPM precheck before production context or before `fullcheck`.
 - A normal LT/PPM/content finding must travel through the controller as `REPAIR_REQUIRED`; it must never become an ad-hoc `RuntimeError`, `raise`, `exit`, batch restart or terminal task failure.
-- On `REPAIR_REQUIRED`, edit only the SAME draft for the exact reported first defect, resubmit with `controller.py draft`, then rerun `controller.py fullcheck`.
+- On `REPAIR_REQUIRED`, edit only the SAME canonical article body for the exact reported first defect, submit the revised body only with `controller.py repair`, then rerun `controller.py fullcheck`. `controller.py draft` is forbidden in `REPAIR_REQUIRED`.
 - Do not restart already-passed articles.
 - Only a genuine non-repairable controller/tool/integrity blocker may terminate the batch.
 
@@ -54,7 +54,7 @@ For each exact snapshot item:
 4. generate a genuinely new German `Beratung` draft for exact title/target keyword;
 5. submit SAME draft and run controller FULL production check;
 6. all quality/safety checks remain mandatory and unchanged: current content/Textmaschine rules, actual PPM 6.7.9 content validator, current SEO/PSERC/PSTE bindings, mandatory table rule, exact internal-link rule, absolute external-link prohibition, real fail-closed LanguageTool 6.8, immutable metadata, publish safety and NO-LEGACY;
-7. repair only via controller `REPAIR_REQUIRED` loop above;
+7. repair only via the controller `REPAIR_REQUIRED -> controller.py repair -> fullcheck` loop above;
 8. passed state must remain `phase=OUTPUT_GATE_REQUIRED`, `checks.status=PASS`, `checks.mode=FULL_PRODUCTION`, `checks.checked_draft_sha256 == draft_sha256`, valid `production_context`, `released=false`, `release_prepared=null`, `publish_allowed=false`;
 9. BASIC checks never substitute FULL; never call per-article release/finalize.
 
