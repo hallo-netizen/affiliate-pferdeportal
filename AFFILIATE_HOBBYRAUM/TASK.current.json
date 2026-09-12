@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
   "task_id": "adcell-api-v2-routing-allowlist-fix-20260911",
-  "goal": "ADCELL API v2 aus kanonischem 6.72.8: Token-Auth, accepted+active+programId-Allowlist und automatische CSV/Banner/Deeplink-Verarbeitung; kein Awin-Fallthrough und keine manuelle CSV-URL als Normalbetrieb.",
+  "goal": "Der ADCELL API-v2 Kandidat ist lokal positiv/negativ und gegen Awin/OTTO-Funktionsidentitaet geprueft. Naechster Schritt ist ausschliesslich die bytegenaue Rueckbindung der drei freigegebenen Traits an affiliate-release-current; danach dieselben Gates auf dem committed Stand erneut ausfuehren. Kein manueller CSV-Normalweg, kein Awin-Fallthrough, kein Plugin vor Fresh-Unpack/Identity.",
   "image": "php:8.2-cli",
   "inputs": [
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php","dest":"pferdeportal-affiliate-router.php"},
@@ -13,7 +13,7 @@
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php","dest":"trait-ppar-output-objects.php"},
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-control-contract.php","dest":"trait-ppar-control-contract.php"},
     {"src":"test_adcell_api_v2_automation.php","dest":"test_adcell_api_v2_automation.php"},
-    {"src":"test_otto_automation.php","dest":"test_otto_automation.php"},
+    {"src":"test_adcell_awin_otto_unchanged.php","dest":"test_adcell_awin_otto_unchanged.php"},
     {"src":"test_banner_distribution_behavior.php","dest":"test_banner_distribution_behavior.php"}
   ],
   "writable": [
@@ -21,10 +21,10 @@
     "trait-ppar-network-sync.php",
     "trait-ppar-automation-suite.php"
   ],
-  "command": "php -l trait-ppar-provider-registry.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_otto_automation.php && php -l test_banner_distribution_behavior.php",
+  "command": "php -l trait-ppar-provider-registry.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_adcell_awin_otto_unchanged.php && php -l test_banner_distribution_behavior.php",
   "tests": [
     "php test_adcell_api_v2_automation.php",
-    "php test_otto_automation.php",
+    "php test_adcell_awin_otto_unchanged.php",
     "php test_banner_distribution_behavior.php"
   ],
   "timeout_seconds": 600
