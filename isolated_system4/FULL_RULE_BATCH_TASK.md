@@ -43,15 +43,37 @@ Hard execution rules:
 - Do NOT add an LT/PPM precheck before production context or before `fullcheck`.
 - A normal LT/PPM/content finding must travel through the controller as `REPAIR_REQUIRED`.
 - On `REPAIR_REQUIRED`, edit only the SAME canonical article body for the exact reported first defect, submit the revised body only with `controller.py repair`, then rerun `controller.py fullcheck`. `controller.py draft` is forbidden in `REPAIR_REQUIRED`.
+- A broad rewrite in `REPAIR_REQUIRED` is forbidden and is mechanically blocked by repair-continuity checks.
 - Do not restart already-passed articles.
 - Only a genuine non-repairable controller/tool/integrity blocker may terminate the batch.
+
+## Mandatory research/fact boundary — Codex does the work, controller decides progression
+For every article Codex still performs the complete fachliche chain itself. There is no Chat writer and no legacy research worker.
+
+### Research stage
+Create one JSON document with exactly the System-4 research evidence contract:
+- `contract = SYSTEM4_RESEARCH_EVIDENCE_V1`
+- `sources` contains the actual sources Codex researched for this article.
+- Every source contains a real `source_id`, meaningful `source_title`, HTTP(S) `source_url`, `retrieved_at`, the captured source `evidence` text and `snapshot_sha256 = SHA256(evidence)`.
+- Synthetic labels without an actual URL/evidence snapshot are forbidden.
+- Submit this document to `controller.py research`. Do not continue unless it passes.
+
+### Facts stage
+From only the accepted research document create:
+- `contract = SYSTEM4_FACTS_EVIDENCE_V1`
+- at least two distinct claims;
+- each claim has `fact_id`, an accepted research `source_id`, concrete `statement`, concrete `evidence_text`, and `evidence_text_sha256 = SHA256(evidence_text)`.
+Submit this document to `controller.py facts`. Do not continue unless it passes.
+
+### Production context stage
+Create the current `canonical_fact_pack_v1` and production-plan item using the unchanged current fachliche specifications. The fact pack must contain the same accepted source metadata and the same accepted core claims. `controller.py context` must bind it before any draft is accepted. A source-free/self-certified `SOURCE_VERIFIED_PRODUCTION_READY` pack is forbidden and blocks here.
 
 ## Per item — indexes 0..6
 For each exact snapshot item:
 1. indexed ingress for the exact item;
-2. FRESH research and FRESH facts in temporary workspace;
-3. bind current valid production context using only permitted authoritative/pure-tool data;
-4. generate a genuinely new German `Beratung` draft for exact title/target keyword;
+2. FRESH research and FRESH facts using the mandatory structured evidence contracts above;
+3. bind current valid production context from exactly those accepted research/facts and only permitted authoritative/pure-tool data;
+4. generate a genuinely new German `Beratung` draft for exact title/target keyword using the unchanged current Textmaschine/content rules; article fact traces must resolve to its bound fact pack;
 5. submit SAME draft and run controller FULL production check;
 6. all quality/safety checks remain mandatory and unchanged: current content/Textmaschine rules, actual PPM 6.7.9 content validator, current SEO/PSERC/PSTE bindings, mandatory table rule, exact internal-link rule, absolute external-link prohibition, real fail-closed LanguageTool 6.8, immutable metadata, publish safety and NO-LEGACY;
 7. repair only via the controller `REPAIR_REQUIRED -> controller.py repair -> fullcheck` loop above;
@@ -68,6 +90,7 @@ Required:
 - article_count = 7
 - batch SHA = `7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a`
 - `publish_allowed=false`
+- cross-article distinctness PASS; the known failure class of repeating one sentence/paragraph template across different topics is BLOCKED.
 
 Signing / ENDSTEMPEL are NOT executed for the current article output because the existing WordPress signature switch is temporarily OFF.
 
@@ -112,6 +135,8 @@ Each article row must contain exactly:
 - exact immutable `production_context` containing fact_pack + production_plan_item
 - real LanguageTool 6.8 PASS / zero unresolved findings
 - real PPM 6.7.9 technical/content-quality/aggregate PASS
+
+The final handoff validator re-runs the System-4 fact-pack/fact-trace and batch-distinctness guards. A bad source-free fact pack or a templated seven-article batch cannot be transported merely because hashes/checker status fields look valid.
 
 This exact file is the final current article output. The parent Chat exposes it unchanged as one download and the user uploads that same JSON unchanged to WordPress. No signature step and no second WordPress transformation occur in between. `publish_allowed=false` remains unchanged; upload is not auto-publish.
 
