@@ -16,8 +16,7 @@ class CodexEconomyContractTests(unittest.TestCase):
             '`controller.py repair`',
             '`controller.py draft` is forbidden in `REPAIR_REQUIRED`',
         ]
-        for value in required:
-            self.assertIn(value,task)
+        for value in required: self.assertIn(value,task)
         self.assertIn('publish_allowed=false',task)
         self.assertIn('actual PPM 6.7.9 content validator',task)
         self.assertIn('real fail-closed LanguageTool 6.8',task)
@@ -32,31 +31,30 @@ class CodexEconomyContractTests(unittest.TestCase):
             'The repair transition must not mutate the bound production context',
             'A Codex production run MUST NOT repeat that unchanged-head preflight.',
         ]
-        for value in required:
-            self.assertIn(value,agents)
+        for value in required: self.assertIn(value,agents)
 
     def test_parent_chat_handoff_is_hard_completion_gate(self):
         task=(ROOT/'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
         agents=(ROOT/'AGENTS.md').read_text(encoding='utf-8')
-        required_task=[
-            'directly downloadable file in the parent ChatGPT conversation',
-            'The parent Chat must recompute SHA256 from the received bytes',
-            '`SYSTEM4_HANDOFF_FAIL`',
-            '`sandbox:/mnt/data/...` that works only inside the Codex task',
-            'asking the user to manually download from Codex/GitHub and upload back into ChatGPT',
-            'ONLY after the exact final JSON bytes are directly downloadable in the parent ChatGPT conversation',
-        ]
-        for value in required_task:
-            self.assertIn(value,task)
-        required_agents=[
+        for value in [
+            'SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json',
+            'WORDPRESS_PREIMPORT_REVIEW',
+            'direct_wordpress_upload_ready=false',
+            'REQUIRES_PSERC_IMPORT_ENVELOPE_AND_SUPERVISOR_AUTHENTICITY',
+            'system4-parent-chat-handoff',
+            'handoff_transport.py pack',
+            'handoff_transport.py unpack',
+            'SYSTEM4_HANDOFF_FAIL',
+            'asking the user to manually download and re-upload',
+        ]: self.assertIn(value,task)
+        for value in [
             'PARENT-CHAT DOWNLOAD HANDOFF HARD RULE',
             'A real 7/7 production run is NOT complete',
-            'A Codex-task-local `sandbox:/mnt/data/...` link does NOT satisfy this requirement.',
-            'status is `SYSTEM4_HANDOFF_FAIL`',
-            'Do not require the user to open GitHub, open a Codex task, manually download from another UI, or re-upload the artifact into ChatGPT.',
-        ]
-        for value in required_agents:
-            self.assertIn(value,agents)
+            'Codex-task-local `sandbox:/mnt/data/...` link does NOT satisfy',
+            'system4-parent-chat-handoff',
+            'Portal SEO Editorial Plan Compiler 0.28.22 / PPM 6.7.9',
+            'Asking the user to manually download elsewhere and re-upload into ChatGPT is forbidden.',
+        ]: self.assertIn(value,agents)
 
     def test_known_bad_ad_hoc_abort_is_not_in_bound_task(self):
         task=(ROOT/'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
@@ -64,5 +62,4 @@ class CodexEconomyContractTests(unittest.TestCase):
         self.assertNotIn('LT_FINDINGS_PRE_CONTEXT',task)
         self.assertNotIn('raise RuntimeError',task)
 
-if __name__=='__main__':
-    unittest.main(verbosity=2)
+if __name__=='__main__': unittest.main(verbosity=2)
