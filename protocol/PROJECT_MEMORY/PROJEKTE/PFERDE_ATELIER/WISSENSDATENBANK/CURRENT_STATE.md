@@ -27,8 +27,10 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- 44 reale Rassendatensätze unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/` vorhanden.
-- Rassenregister auf diesen Bestand synchronisiert.
+- 66 reale Rassendatensätze unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/` im Register geführt.
+- Register und aktuelle Recherchecharge synchronisiert.
+- Neu hinzugekommen sind u. a. Irish Cob, Lipizzaner, Eriskay Pony, Hackney, Irish Draught, Irish Sport Horse, Irish Sport Pony, Kerry Bog Pony, Shagya-Araber, Australian Stock Horse, Curly Horse sowie mehrere amtlich geführte spanische Regionalrassen.
+- Dublettenregeln für Pottok/Pottoka, Hackney-Sektionen, Traditional Irish Horse und Welsh-Sektionen sind im Rassenregister dokumentiert.
 - Internationale Masterliste weiterhin unvollständig; kein Vollständigkeits-PASS.
 - Offene Detailfelder bleiben sichtbar offen.
 
