@@ -58,12 +58,9 @@ anitize_text_field(wp_unslash($_POST['q']))) : '';
                 : 'pferde_atelier';
         }
         $url = '';
-        if ($profile === 'pferde_atelier' && defined('WP_PLUGIN_DIR')) {
+        if ($profile === 'pferde_atelier') {
             $relative = 'affiliate-portal-template-kit/assets/startseite-hero-frau-pferd-clean-v150173.webp';
-            $file = trailingslashit(WP_PLUGIN_DIR) . $relative;
-            if (is_readable($file)) {
-                $url = content_url('/plugins/' . $relative);
-            }
+            $url = content_url('/plugins/' . $relative);
         }
         return (string)apply_filters('uge_hero_image_url', $url, (int)($cfg['main_page_id'] ?? 0), $profile);
     }
