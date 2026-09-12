@@ -30,20 +30,20 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Rassenstruktur migriert und Schema 1.1 aktiv;
-- 44 reale Rassendatensätze vorhanden;
-- Rassenregister auf den realen Bestand synchronisiert;
+- 66 reale Rassendatensätze im Rassenregister geführt;
 - europäische Pony-/Kaltblut-/Regionalrassen stark erweitert;
+- irische, britische, französische, spanische, australische und nordamerikanische Primärquellen genutzt;
 - offizielle Verbands-, Zuchtbuch-, staatliche und wissenschaftliche Quellen bevorzugt;
-- Glossar-Aktenschrank auf Nutzerauftrag eingerichtet;
-- Glossar mit 7 realen Begriffen startbefüllt;
+- Dubletten-/Sektionenlogik für Pottok/Pottoka, Hackney, Welsh und Traditional Irish Horse geklärt;
+- Glossar-Aktenschrank eingerichtet und mit 7 realen Begriffen startbefüllt;
 - Bürotür und zentrale Übersicht auf beide Aktenschränke aktualisiert.
 
 ## NEXT ACTION
 
 1. Rassenrecherche fortsetzen;
-2. nächsten internationalen Kandidatenblock gegen autoritative Quellen prüfen;
-3. formalen Status/Synonyme/Dubletten sauber klären;
-4. weitere Einzeldatensätze anlegen;
+2. offene internationale Kandidaten wie Belgian Draft/Brabanter, Barb/Berber, Bosnian Mountain Horse, Altai, Andravida, Anglo-Kabarda, Basotho Pony, Azteca und American Walking Pony gegen autoritative Quellen prüfen;
+3. neue Kandidatenblöcke aus nationalen/offiziellen Rassenkatalogen ergänzen;
+4. Synonyme/Dubletten weiterhin vor Datensatzanlage klären;
 5. auftauchende relevante Fachbegriffe bei Bedarf im Glossar ergänzen;
 6. keine Vollständigkeit behaupten, bevor die Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
