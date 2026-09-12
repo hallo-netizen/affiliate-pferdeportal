@@ -24,11 +24,16 @@ class UPC_Repository {
 
     public function create_comparison( array $data ) {
         $type = isset( $data['comparison_type'] ) ? strtoupper( sanitize_text_field( $data['comparison_type'] ) ) : '';
+        $mode = isset( $data['comparison_mode'] ) ? strtoupper( sanitize_text_field( $data['comparison_mode'] ) ) : '';
         $key  = isset( $data['comparison_key'] ) ? sanitize_key( $data['comparison_key'] ) : '';
         $ids  = isset( $data['subject_ids'] ) && is_array( $data['subject_ids'] ) ? array_values( array_map( 'absint', $data['subject_ids'] ) ) : array();
 
         if ( ! in_array( $type, array( self::TYPE_PRODUCT, self::TYPE_VARIANT ), true ) ) {
             return new WP_Error( 'UPC_INVALID_COMPARISON_TYPE', 'Comparison type is invalid.' );
+        }
+
+        if ( '' !== $mode && ( strlen( $mode ) > 40 || ! preg_match( '/^[A-Z0-9_]+$/', $mode ) ) ) {
+            return new WP_Error( 'UPC_INVALID_COMPARISON_MODE', 'Comparison mode is invalid.' );
         }
 
         if ( '' === $key ) {
@@ -68,6 +73,7 @@ class UPC_Repository {
             array(
                 'comparison_key'    => $key,
                 'comparison_type'   => $type,
+                'comparison_mode'   => $mode,
                 'product_group_key' => $validated['product_group_key'],
                 'working_title'     => isset( $data['working_title'] ) ? sanitize_text_field( $data['working_title'] ) : '',
                 'decision_intent'   => isset( $data['decision_intent'] ) ? sanitize_textarea_field( $data['decision_intent'] ) : '',
@@ -76,7 +82,7 @@ class UPC_Repository {
                 'created_at'        => $now,
                 'updated_at'        => $now,
             ),
-            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
+            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
         );
 
         if ( false === $inserted ) {
@@ -427,6 +433,7 @@ class UPC_Repository {
                 'comparison_uid'    => $bundle['comparison_uid'],
                 'comparison_key'    => $bundle['comparison_key'],
                 'comparison_type'   => $bundle['comparison_type'],
+                'comparison_mode'   => isset( $bundle['comparison_mode'] ) ? $bundle['comparison_mode'] : '',
                 'product_group_key' => $bundle['product_group_key'],
                 'working_title'     => $bundle['working_title'],
                 'decision_intent'   => $bundle['decision_intent'],
@@ -445,7 +452,6 @@ class UPC_Repository {
     }
 
     private function validate_products( array $ids ) {
-        $manufacturers = array();
         $group_key = null;
 
         foreach ( $ids as $id ) {
@@ -459,12 +465,6 @@ class UPC_Repository {
             } elseif ( $group_key !== $product['product_group_key'] ) {
                 return new WP_Error( 'UPC_PRODUCT_GROUP_MISMATCH', 'Product comparisons require the same product group.' );
             }
-
-            $manufacturers[] = strtolower( remove_accents( trim( $product['manufacturer'] ) ) );
-        }
-
-        if ( count( array_unique( $manufacturers ) ) < 2 ) {
-            return new WP_Error( 'UPC_MIN_TWO_MANUFACTURERS', 'Product comparisons require at least two manufacturers.' );
         }
 
         return array( 'product_group_key' => $group_key );

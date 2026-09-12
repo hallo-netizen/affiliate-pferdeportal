@@ -4,6 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+require_once __DIR__ . '/class-upc-affiliate-identifier-coverage.php';
+
 /**
  * Read-only bridge from a bound Product Comparison post to Affiliate.
  *
@@ -12,6 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * No Affiliate table is read or written here.
  */
 class UPC_Affiliate_Bridge {
+
+    public static function missing_identifier_products( $limit = 500, $product_group_key = '' ) {
+        global $wpdb;
+        $coverage = new UPC_Affiliate_Identifier_Coverage( $wpdb );
+        return $coverage->missing_products( $limit, $product_group_key );
+    }
 
     public static function register() {
         add_filter(
@@ -52,8 +60,8 @@ class UPC_Affiliate_Bridge {
 
             $identifiers = self::exact_identifiers( $item['knowledge'] );
             if ( empty( $identifiers ) ) {
-                // Fail closed: a comparison subject without a stable Affiliate-
-                // exact identifier must not receive a fuzzy or SKU substitute.
+                // Fail closed: a comparison subject without a stable, source-
+                // bound Affiliate exact identifier gets no fuzzy/SKU substitute.
                 continue;
             }
 
@@ -97,6 +105,7 @@ class UPC_Affiliate_Bridge {
         // not an automatic commerce match key. This prevents merchant SKU /
         // manufacturer article-number confusion from producing substitutions.
         $allowed = array( 'GTIN', 'EAN', 'MPN' );
+        $official_sources = array( 'MANUFACTURER', 'OFFICIAL_DOCUMENTATION' );
 
         foreach ( (array) ( $knowledge['identifiers'] ?? array() ) as $identifier ) {
             if ( ! is_array( $identifier ) ) {
@@ -109,8 +118,17 @@ class UPC_Affiliate_Bridge {
             $value = trim( sanitize_text_field(
                 (string) ( $identifier['identifier_value'] ?? $identifier['value'] ?? '' )
             ) );
+            $source_url = esc_url_raw( (string) ( $identifier['source_url'] ?? '' ) );
+            $source_type = strtoupper( sanitize_text_field( (string) ( $identifier['source_type'] ?? '' ) ) );
+            $verified_at = trim( sanitize_text_field( (string) ( $identifier['verified_at'] ?? '' ) ) );
 
-            if ( '' === $value || ! in_array( $type, $allowed, true ) ) {
+            if ( '' === $value
+                || ! in_array( $type, $allowed, true )
+                || '' === $source_url
+                || ! in_array( $source_type, $official_sources, true )
+                || '' === $verified_at
+                || false === strtotime( $verified_at )
+            ) {
                 continue;
             }
 

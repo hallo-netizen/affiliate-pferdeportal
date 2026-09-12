@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Knowledge
  * Description: Internal, source-bound product knowledge store for comparisons, advisory content and exact affiliate matching.
- * Version: 0.1.0-prototype
+ * Version: 0.1.2-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  */
@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPK_VERSION', '0.1.0-prototype' );
-define( 'UPK_SCHEMA_VERSION', '1' );
+define( 'UPK_VERSION', '0.1.2-prototype' );
+define( 'UPK_SCHEMA_VERSION', '3' );
 define( 'UPK_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/src/class-upk-repository.php';
@@ -68,6 +68,9 @@ function upk_install_schema() {
         subject_id bigint(20) unsigned NOT NULL,
         identifier_type varchar(40) NOT NULL,
         identifier_value varchar(191) NOT NULL,
+        source_url text NULL,
+        source_type varchar(32) NOT NULL DEFAULT '',
+        verified_at datetime NULL,
         created_at datetime NOT NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY identifier_unique (identifier_type, identifier_value),
@@ -80,6 +83,7 @@ function upk_install_schema() {
         subject_id bigint(20) unsigned NOT NULL,
         fact_key varchar(191) NOT NULL,
         fact_value longtext NOT NULL,
+        fact_note text NOT NULL,
         unit varchar(64) NOT NULL DEFAULT '',
         source_url text NOT NULL,
         source_type varchar(32) NOT NULL,
@@ -100,6 +104,13 @@ function upk_install_schema() {
     update_option( 'upk_schema_version', UPK_SCHEMA_VERSION, false );
 }
 register_activation_hook( __FILE__, 'upk_install_schema' );
+
+function upk_maybe_upgrade_schema() {
+    if ( (string) get_option( 'upk_schema_version', '' ) !== (string) UPK_SCHEMA_VERSION ) {
+        upk_install_schema();
+    }
+}
+add_action( 'plugins_loaded', 'upk_maybe_upgrade_schema', 20 );
 
 /**
  * Shared repository instance for other plugins/modules.

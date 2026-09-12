@@ -130,7 +130,7 @@ class UPK_Repository {
         return (int) $this->wpdb->insert_id;
     }
 
-    public function add_identifier( $subject_type, $subject_id, $identifier_type, $identifier_value ) {
+    public function add_identifier( $subject_type, $subject_id, $identifier_type, $identifier_value, array $evidence = array() ) {
         $subject_type     = sanitize_key( $subject_type );
         $subject_id       = absint( $subject_id );
         $identifier_type  = strtoupper( sanitize_text_field( $identifier_type ) );
@@ -145,6 +145,21 @@ class UPK_Repository {
             return new WP_Error( 'UPK_INVALID_IDENTIFIER', 'Identifier is invalid.' );
         }
 
+        $source_url  = '';
+        $source_type = '';
+        $verified_at = null;
+        if ( ! empty( $evidence ) ) {
+            $source_url  = isset( $evidence['source_url'] ) ? esc_url_raw( $evidence['source_url'] ) : '';
+            $source_type = isset( $evidence['source_type'] ) ? strtoupper( sanitize_text_field( $evidence['source_type'] ) ) : '';
+            if ( '' === $source_url || ! in_array( $source_type, self::source_types(), true ) || empty( $evidence['verified_at'] ) ) {
+                return new WP_Error( 'UPK_IDENTIFIER_EVIDENCE_INCOMPLETE', 'Identifier evidence is incomplete.' );
+            }
+            $verified_at = $this->normalize_datetime( $evidence['verified_at'] );
+            if ( is_wp_error( $verified_at ) ) {
+                return $verified_at;
+            }
+        }
+
         $existing = $this->wpdb->get_row(
             $this->wpdb->prepare(
                 "SELECT id, subject_type, subject_id FROM {$this->identifiers} WHERE identifier_type = %s AND identifier_value = %s LIMIT 1",
@@ -156,6 +171,22 @@ class UPK_Repository {
 
         if ( $existing ) {
             if ( $existing['subject_type'] === $subject_type && (int) $existing['subject_id'] === $subject_id ) {
+                if ( ! empty( $evidence ) ) {
+                    $updated = $this->wpdb->update(
+                        $this->identifiers,
+                        array(
+                            'source_url'  => $source_url,
+                            'source_type' => $source_type,
+                            'verified_at' => $verified_at,
+                        ),
+                        array( 'id' => (int) $existing['id'] ),
+                        array( '%s', '%s', '%s' ),
+                        array( '%d' )
+                    );
+                    if ( false === $updated ) {
+                        return new WP_Error( 'UPK_IDENTIFIER_UPDATE_FAILED', $this->wpdb->last_error ? $this->wpdb->last_error : 'Identifier evidence update failed.' );
+                    }
+                }
                 return (int) $existing['id'];
             }
             return new WP_Error( 'UPK_IDENTIFIER_CONFLICT', 'Identifier already belongs to a different product or variant.' );
@@ -168,9 +199,12 @@ class UPK_Repository {
                 'subject_id'       => $subject_id,
                 'identifier_type'  => $identifier_type,
                 'identifier_value' => $identifier_value,
+                'source_url'       => $source_url,
+                'source_type'      => $source_type,
+                'verified_at'      => $verified_at,
                 'created_at'       => current_time( 'mysql', true ),
             ),
-            array( '%s', '%d', '%s', '%s', '%s' )
+            array( '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
         );
 
         if ( false === $inserted ) {
@@ -191,6 +225,7 @@ class UPK_Repository {
 
         $fact_key    = isset( $data['fact_key'] ) ? sanitize_key( $data['fact_key'] ) : '';
         $fact_value  = isset( $data['fact_value'] ) ? sanitize_textarea_field( $data['fact_value'] ) : '';
+        $fact_note   = isset( $data['fact_note'] ) ? sanitize_textarea_field( $data['fact_note'] ) : '';
         $source_url  = isset( $data['source_url'] ) ? esc_url_raw( $data['source_url'] ) : '';
         $source_type = isset( $data['source_type'] ) ? strtoupper( sanitize_text_field( $data['source_type'] ) ) : '';
         $fact_status = isset( $data['fact_status'] ) ? strtoupper( sanitize_text_field( $data['fact_status'] ) ) : '';
@@ -221,6 +256,7 @@ class UPK_Repository {
 
         $payload = array(
             'fact_value'  => $fact_value,
+            'fact_note'   => $fact_note,
             'unit'        => isset( $data['unit'] ) ? sanitize_text_field( $data['unit'] ) : '',
             'source_url'  => $source_url,
             'source_type' => $source_type,
@@ -234,7 +270,7 @@ class UPK_Repository {
                 $this->facts,
                 $payload,
                 array( 'id' => $existing_id ),
-                array( '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
+                array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
                 array( '%d' )
             );
             if ( false === $updated ) {
@@ -251,7 +287,7 @@ class UPK_Repository {
         $inserted = $this->wpdb->insert(
             $this->facts,
             $payload,
-            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s' )
+            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' )
         );
 
         if ( false === $inserted ) {
@@ -317,7 +353,7 @@ class UPK_Repository {
     private function get_subject_identifiers( $subject_type, $subject_id ) {
         return $this->wpdb->get_results(
             $this->wpdb->prepare(
-                "SELECT identifier_type, identifier_value FROM {$this->identifiers} WHERE subject_type = %s AND subject_id = %d ORDER BY identifier_type, id",
+                "SELECT identifier_type, identifier_value, source_url, source_type, verified_at FROM {$this->identifiers} WHERE subject_type = %s AND subject_id = %d ORDER BY identifier_type, id",
                 $subject_type,
                 $subject_id
             ),
@@ -328,7 +364,7 @@ class UPK_Repository {
     private function get_subject_facts( $subject_type, $subject_id ) {
         return $this->wpdb->get_results(
             $this->wpdb->prepare(
-                "SELECT fact_key, fact_value, unit, source_url, source_type, verified_at, fact_status FROM {$this->facts} WHERE subject_type = %s AND subject_id = %d ORDER BY fact_key, id",
+                "SELECT fact_key, fact_value, fact_note, unit, source_url, source_type, verified_at, fact_status FROM {$this->facts} WHERE subject_type = %s AND subject_id = %d ORDER BY fact_key, id",
                 $subject_type,
                 $subject_id
             ),
