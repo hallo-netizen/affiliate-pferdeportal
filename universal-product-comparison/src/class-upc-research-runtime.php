@@ -16,12 +16,18 @@ if ( ! class_exists( 'UPC_Maintenance' ) ) {
 if ( ! class_exists( 'UPC_Research_Refresh_Planner' ) ) {
     require_once __DIR__ . '/class-upc-research-refresh-planner.php';
 }
+if ( ! class_exists( 'UPC_Research_Refresh_Result_Validator' ) ) {
+    require_once __DIR__ . '/class-upc-research-refresh-result-validator.php';
+}
+if ( ! class_exists( 'UPC_Research_Refresh_Applier' ) ) {
+    require_once __DIR__ . '/class-upc-research-refresh-applier.php';
+}
 
 /**
- * Explicit runtime bridge for bound research bootstrap and refresh planning.
+ * Explicit runtime bridge for bound research bootstrap and refresh maintenance.
  *
  * Nothing is scheduled or executed automatically. A caller must invoke these
- * methods deliberately. Import stays fail-closed; refresh planning is read-only.
+ * methods deliberately. Import/apply stay fail-closed; planning is read-only.
  */
 class UPC_Research_Runtime {
     public static function import_bound_plan( $project_key = 'pferde-atelier' ) {
@@ -102,6 +108,42 @@ class UPC_Research_Runtime {
         return $planner->build( $project_key, $as_of_utc, $limit_per_group );
     }
 
+    public static function apply_refresh_results( array $plan, array $results ) {
+        $dependency = self::ensure_product_refresh_apply_support();
+        if ( is_wp_error( $dependency ) ) {
+            return $dependency;
+        }
+        if ( ! function_exists( 'upk_repository' )
+            || ! class_exists( 'UPC_Maintenance' )
+            || ! class_exists( 'UPC_Research_Refresh_Result_Validator' )
+            || ! class_exists( 'UPC_Research_Refresh_Applier' )
+        ) {
+            return new WP_Error( 'UPC_REFRESH_RUNTIME_DEPENDENCY_MISSING', 'Refresh apply runtime dependency is missing.' );
+        }
+
+        $knowledge = upk_repository();
+        if ( is_wp_error( $knowledge ) ) {
+            return $knowledge;
+        }
+
+        global $wpdb;
+        $product_maintenance = new UPK_Maintenance( $wpdb );
+        $comparison_maintenance = new UPC_Maintenance( $wpdb );
+        $fact_snapshot = new UPK_Fact_Snapshot( $wpdb, $knowledge );
+        $fingerprint = new UPK_Change_Fingerprint( $knowledge );
+        $validator = new UPC_Research_Refresh_Result_Validator( $knowledge );
+        $applier = new UPC_Research_Refresh_Applier(
+            $wpdb,
+            $validator,
+            $product_maintenance,
+            $fact_snapshot,
+            $fingerprint,
+            $comparison_maintenance
+        );
+
+        return $applier->apply( $plan, $results );
+    }
+
     private static function ensure_product_maintenance() {
         if ( class_exists( 'UPK_Maintenance' ) ) {
             return true;
@@ -117,5 +159,38 @@ class UPC_Research_Runtime {
         return class_exists( 'UPK_Maintenance' )
             ? true
             : new WP_Error( 'UPC_RESEARCH_RUNTIME_DEPENDENCY_MISSING', 'Product knowledge maintenance class did not load.' );
+    }
+
+    private static function ensure_product_refresh_apply_support() {
+        $maintenance = self::ensure_product_maintenance();
+        if ( is_wp_error( $maintenance ) ) {
+            return $maintenance;
+        }
+        if ( class_exists( 'UPK_Fact_Snapshot' ) && class_exists( 'UPK_Change_Fingerprint' ) ) {
+            return true;
+        }
+        if ( ! defined( 'UPK_PLUGIN_FILE' ) ) {
+            return new WP_Error( 'UPC_REFRESH_RUNTIME_DEPENDENCY_MISSING', 'Universal Product Knowledge plugin path is not bound.' );
+        }
+
+        $base = dirname( UPK_PLUGIN_FILE ) . '/src/';
+        $required = array(
+            'UPK_Fact_Snapshot' => 'class-upk-fact-snapshot.php',
+            'UPK_Change_Fingerprint' => 'class-upk-change-fingerprint.php',
+        );
+        foreach ( $required as $class => $file ) {
+            if ( class_exists( $class ) ) {
+                continue;
+            }
+            $path = $base . $file;
+            if ( ! is_file( $path ) ) {
+                return new WP_Error( 'UPC_REFRESH_RUNTIME_DEPENDENCY_MISSING', 'Product knowledge refresh support is missing.' );
+            }
+            require_once $path;
+            if ( ! class_exists( $class ) ) {
+                return new WP_Error( 'UPC_REFRESH_RUNTIME_DEPENDENCY_MISSING', 'Product knowledge refresh support did not load.' );
+            }
+        }
+        return true;
     }
 }
