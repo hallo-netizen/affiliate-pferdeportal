@@ -1,0 +1,99 @@
+name: Glossar 0.2.1 Final Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-021-hardtest-final]
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge021-patch-part*.b64'
+      - '.github/workflows/glossar-021-final-hardtest.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact candidate
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp
+          mkdir -p /tmp/u
+          cat $T/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          test "$(sha256sum /tmp/base.zip|cut -d' ' -f1)" = b20fc92e106989d96e701ca3cc2c4091096e8e8cdb207f63a958b411a0c6aaa7
+          unzip -q /tmp/base.zip -d /tmp/u
+          cat $T/uge021-patch-part{1,2,3,4,5}.b64 | base64 -d | gzip -d >/tmp/p.patch
+          patch -d /tmp/u/universal-glossary-engine -p1 </tmp/p.patch
+          grep -q 'Version: 0.2.1' /tmp/u/universal-glossary-engine/universal-glossary-engine.php
+          find /tmp/u/universal-glossary-engine -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Real WordPress
+        run: |
+          set -euo pipefail
+          docker network create n
+          docker run -d --name db --network n -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=3s --health-retries=30 mysql:8.0
+          for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
+          docker run -d --name wp --network n -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/u/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro wordpress:php8.1-apache
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp wp:/usr/local/bin/wp; docker exec wp chmod +x /usr/local/bin/wp
+          docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title=x --admin_user=admin --admin_password=x123456789 --admin_email=x@example.test --skip-email
+          docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root
+          docker exec wp wp plugin activate universal-glossary-engine --allow-root
+          P=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Glossar --post_name=glossar --post_excerpt='Pferdebegriffe verständlich erklärt.' --porcelain)
+          docker exec wp wp eval --allow-root "\$c=UGE_Config::get();\$c['main_page_id']=$P;\$c['rewrite_base']='glossar';\$c['term_segment']='begriff';\$c['design_profile']='pferde_atelier';update_option(UGE_Config::OPTION,UGE_Config::sanitize(\$c));UGE_Core::register_content();flush_rewrite_rules();"
+          docker exec wp mkdir -p /var/www/html/wp-content/plugins/affiliate-portal-template-kit/assets
+          docker exec wp sh -c ': >/var/www/html/wp-content/plugins/affiliate-portal-template-kit/assets/startseite-hero-frau-pferd-clean-v150173.webp'
+          docker exec wp wp term create uge_group Training --slug=training --allow-root
+          docker exec wp wp term create uge_group Zucht --slug=zucht --allow-root
+          docker exec wp wp term create uge_group Farben --slug=farben --allow-root
+          A=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Aalstrich --post_name=aalstrich --post_content=A-CONTENT --porcelain)
+          D=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Dressurbegriff --post_name=dressurbegriff --post_content=D-CONTENT --porcelain)
+          Z=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Zuchtbuch --post_name=zuchtbuch --post_content=Z-CONTENT --porcelain)
+          docker exec wp wp post term add $A uge_group Farben --allow-root
+          docker exec wp wp post term add $D uge_group Training --allow-root
+          docker exec wp wp post term add $Z uge_group Zucht --allow-root
+          Q=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Vorschau Begriff' --post_name=vorschau-begriff --post_content=PREVIEW-CONTENT --porcelain)
+          docker exec wp wp eval --allow-root "\$u=get_preview_post_link($Q);if(!\$u){exit(9);}echo \$u;" >/tmp/preview-url
+      - name: Positive negative output
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
+          grep -q 'startseite-hero-frau-pferd-clean-v150173.webp' /tmp/home
+          grep -q 'data-uge-ad-slot="home_banner"' /tmp/home
+          grep -q 'glossar_letter=A' /tmp/home
+          grep -q 'glossar_letter=Z' /tmp/home
+          ! grep -q 'Neue und überarbeitete Begriffe aus dem Pferde-Atelier.' /tmp/home
+          ! grep -q '#uge-group-' /tmp/home
+          ! grep -q 'Vorschau Begriff' /tmp/home
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/home').read()
+          assert len(re.findall(r'<h1(?:\s|>)',s,re.I))==1
+          p=[s.index(x) for x in ['class="uge-hero','class="uge-tools','class="uge-nav','class="uge-home-banner-slot','class="uge-home-latest']]
+          assert p==sorted(p)
+          PY
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_letter=A' -o /tmp/a
+          grep -q '>Aalstrich<' /tmp/a; ! grep -q '>Dressurbegriff<' /tmp/a; ! grep -q '>Zuchtbuch<' /tmp/a
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_letter=D' -o /tmp/d
+          grep -q '>Dressurbegriff<' /tmp/d; ! grep -q '>Aalstrich<' /tmp/d; ! grep -q '>Zuchtbuch<' /tmp/d
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_letter=Z' -o /tmp/z
+          grep -q '>Zuchtbuch<' /tmp/z; ! grep -q '>Dressurbegriff<' /tmp/z
+          curl -fsS http://127.0.0.1:8080/glossar/farben/ -o /tmp/cat
+          grep -q '/glossar/begriff/aalstrich/' /tmp/cat
+          curl -fsS http://127.0.0.1:8080/glossar/begriff/aalstrich/ -o /tmp/term
+          grep -q A-CONTENT /tmp/term
+          code=$(curl -sS -o /tmp/legacy -w '%{http_code}' http://127.0.0.1:8080/glossar/aalstrich/)
+          test "$code" = 301
+          grep -qi 'location:.*glossar/begriff/aalstrich' <(curl -sSI http://127.0.0.1:8080/glossar/aalstrich/)
+          echo UGE021_FRONTEND_LINK_AZ_PASS
+      - name: Cannibalization
+        run: |
+          set -euo pipefail
+          docker exec wp wp term create uge_group Gesundheit --slug=gesundheit --allow-root
+          G=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Gesundheit --post_name=gesundheit --porcelain)
+          test "$(docker exec wp wp post get $G --field=post_status --allow-root)" = draft
+          F=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Fütterung --post_name=fuetterung --porcelain)
+          docker exec wp wp term create category Fütterung --slug=fuetterung --allow-root
+          test "$(docker exec wp wp post get $F --field=post_status --allow-root)" = draft
+          echo UGE021_CANNIBALIZATION_PASS
+      - name: Final
+        run: echo UGE021_REAL_POSITIVE_NEGATIVE_PASS
