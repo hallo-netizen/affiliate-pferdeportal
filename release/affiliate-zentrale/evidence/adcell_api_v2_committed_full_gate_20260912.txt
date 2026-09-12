@@ -1,0 +1,78 @@
+PFERDE ATELIER – AFFILIATE-ZENTRALE
+ADCELL API v2 – COMMITTED FULL GATE / VERSION BOUNDARY EVIDENCE
+Date: 2026-09-12
+
+CANONICAL BRANCH
+affiliate-release-current
+
+CANONICAL COMMIT
+99bcc5796226254f7e190f40397210fca96e7d0b
+
+CANONICAL VERSION
+6.72.8
+
+CANONICAL 26-FILE SOURCE MANIFEST SHA256
+74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5
+
+BOUND ADCELL SOURCE CHANGES
+- includes/trait-ppar-provider-registry.php
+- includes/trait-ppar-network-sync.php
+- includes/trait-ppar-automation-suite.php
+
+COMMITTED GATES ACTUALLY EXECUTED AFTER CANONICAL REBIND
+PASS – committed source/blob readback matched the prepared candidate
+PASS – ADCELL API-v2 static gate
+PASS – ADCELL runtime positive/negative gate
+PASS – official token/getToken + request token contract; no Legacy Basic fallback in ADCELL-v2 runtime
+PASS – accepted + active + explicit programId allowlist positive path
+PASS – non-allowlisted / inactive / not accepted / malformed / wrong host / ambiguous CSV fail-closed paths
+PASS – ADCELL provider route does not fall through into Awin
+PASS – Awin/OTTO function identity regression 18/18 unchanged
+PASS – banner distribution regression
+PASS – PHP lint 21/21
+PASS – original unchanged release_guard.py governance/source/tree/start against the committed state
+PASS – Fresh-Unpack on the committed 6.72.8 source candidate
+PASS – Source/Unpack byte identity 26/26
+
+ERROR RESOLUTION RELEVANT TO THIS MILESTONE
+AF-023 – resolved for current canonical source/manifest/governance binding
+AF-058 – resolved in canonical source and committed positive/negative gate
+AF-059 – resolved in canonical source and committed positive/negative gate
+AF-060 – auth-documentation blocker resolved by official ADCELL API-v2 documentation evidence
+AF-062 – resolved in canonical source; ADCELL-v2 connection path no longer uses Legacy Basic Auth
+
+LOCAL VERSION-BOUNDARY PREPARATION – NOT CANONICAL
+A version-only 6.72.9 candidate was prepared from the committed 6.72.8 ADCELL source.
+Exactly three version markers changed:
+- WordPress plugin header: 6.72.8 -> 6.72.9
+- const VERSION: 6.72.8 -> 6.72.9
+- readme Stable tag: 6.72.8 -> 6.72.9
+
+No functional ADCELL/Awin/OTTO source logic was changed for this version boundary.
+
+LOCAL 6.72.9 26-FILE MANIFEST SHA256
+83c75bf1359aa989313416c9f9c7d1d4193bfe44a15bef08a83ac45580911bc8
+
+LOCAL 6.72.9 GATES ACTUALLY EXECUTED
+PASS – version diff exactly three marker lines
+PASS – PHP lint 21/21
+PASS – ADCELL static gate
+PASS – ADCELL runtime positive/negative gate
+PASS – Awin/OTTO function identity 18/18
+PASS – banner regression
+PASS – Fresh-Unpack
+PASS – Source/Unpack byte identity 26/26
+
+IMPORTANT BOUNDARY
+6.72.9 is NOT canonical and NOT a live/release PASS.
+The large main plugin file must not be rewritten through an unproven/truncating transfer path. No approximate or reconstructed content may become release authority.
+
+LIVE BLOCKER
+Real ADCELL account access is still unavailable because the password/reset-mail problem is unresolved.
+Therefore no real ADCELL API request and no real WordPress/MariaDB/API E2E PASS has been executed.
+
+NEXT ACTION
+1. Canonicalize the already locally proven version-only 6.72.9 boundary only through a byte-exact file-transfer path.
+2. Rebind the new 26-file manifest/governance and rerun the same bound gates on committed bytes.
+3. Only after restored ADCELL account access run the real ADCELL API + WordPress/MariaDB E2E.
+4. No live/final PASS before step 3.
