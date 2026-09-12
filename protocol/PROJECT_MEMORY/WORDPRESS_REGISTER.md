@@ -1,6 +1,6 @@
 # WORDPRESS-REGISTER
 
-STAND: 2026-09-05
+STAND: 2026-09-12
 STATUS: CAMPUSWEITER TECHNOLOGIE-INDEX
 
 ## 1-KLICK-ÜBERSICHT
@@ -156,33 +156,35 @@ UNGEKLÄRT.
 
 ### WP-005 – Affiliate-Zentrale
 
-MOD-ID:
-noch nicht vergeben
+PB-ONE-Plugin-ID:
+`PBO-PLUGIN-001`
 
-Aktuellster belegter WordPress-Live-Installer:
-`affiliate-zentrale_v6.72.2_LIVE_CANDIDATE_26FILE.zip`
+Pluginname:
+`Affiliate-Zentrale (Portal-kompatibel)`
 
-Live-Version:
-**6.72.2**
+Technische Hauptquelle:
+- Branch `affiliate-release-current`
+- `release/affiliate-zentrale/current/affiliate-portal-router/`
+- zuständiges Fachbüro `PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
 
-Installer SHA-256:
-`789c7859cd9b5390bc561d6a564c2680125bcd453673cf9c6f18285c1103ba2d`
+Kanonischer technischer Kandidat:
+**6.72.19**
 
-GitHub kanonischer Release-Branch:
-`affiliate-release-current`
+Kanonisches 26-Dateien-Manifest:
+`694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b`
 
-GitHub HEAD:
-`355a40ebbeceec0a4b90158db9f197b8f6e2ee7b`
-
-GitHub active candidate:
-**6.72.1**
+Kanonischer Testartefakt-Nachweis:
+- Run `34692865477` / Job `103551115066` PASS
+- Test-ZIP SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`
 
 Wichtig:
-GitHub-Kandidat und WordPress-Live-Version sind aktuell nicht identisch.
-Das Register dokumentiert nur diese belegte Differenz.
+**6.72.19 ist hier kein behaupteter WordPress-LIVE-PASS.**
+Die in diesem Chat zuletzt frisch belegte technische Source-/Artefaktversion ist 6.72.19; der reale WordPress-/ADCELL-Live-Preflight AF-066 ist im zuständigen Affiliate-Fachbüro weiterhin offen.
 
-Hauptquelle:
-`PROJEKTE/PFERDE_ATELIER/AFFILIATE/` + technische Release-Governance.
+Ältere Live-/Installationsbelege bleiben historische Evidenz an der technischen Fachquelle und werden hier nicht als aktuelle WordPress-Live-Wahrheit hochgestuft.
+
+Plugin-Kontrollvorgang:
+`PB_ONE/AKTENSCHRANK/PLUGINS/UPDATEPROTOKOLL.md` → `PU-20260912-001`.
 
 Allgemeiner Gesamtmaster:
 `ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/MASTERDATEIEN_INVENTAR.md`
@@ -257,7 +259,6 @@ Bei jedem neuen Plugin-/Masterdatei-Eingang:
 
 **Ein Plugin kann in mehreren Projekten genutzt werden, aber es hat nur eine Hauptwahrheit.  
 Dieses Register zeigt nur den Weg dorthin.**
-
 
 ### WP-008 – HivePress-Anzeigensuche
 
