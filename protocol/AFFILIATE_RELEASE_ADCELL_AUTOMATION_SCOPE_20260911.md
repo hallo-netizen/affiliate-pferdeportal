@@ -1,7 +1,7 @@
 # AFFILIATE RELEASE – ADCELL API-V2 AUTOMATISIERUNG – SCOPE 2026-09-11
 
 STAND: 2026-09-12
-STATUS: AKTIV / AUTH BELEGT / LOKALER SOURCE-KANDIDAT POSITIV-NEGATIV GEPRÜFT / KANONISCHE RÜCKBINDUNG BLOCKED / LIVE-ZUGANG BLOCKED
+STATUS: AKTIV / AUTH BELEGT / KANONISCHER SOURCE-FIX COMMITTED + FULL GATE + FRESH-UNPACK/IDENTITY PASS / 6.72.9-VERSIONSBINDUNG OFFEN / LIVE-ZUGANG BLOCKED
 
 ## VERBINDLICHES ZIEL
 
@@ -41,71 +41,83 @@ Der frühere 6.72.18-Scratch bleibt verworfen und ist keine Source-Autorität.
 Branch: `affiliate-release-current`
 Source: `release/affiliate-zentrale/current/affiliate-portal-router/`
 Version: `6.72.8`
-
-AF-023 wurde am 12.09.2026 behoben und mit dem originalen unveränderten Release-Guard real geprüft. Der committed Sourcebaum bleibt aktuell noch auf dem partiellen ADCELL-Stand mit Manifest:
-`40dc3d56eba71a53edc87e425e8dc04416568365ee4b9e3d48320c3e25fff049`
-
-Protokoll-/Evidence-/Hobbyraum-Commits ändern diesen 26-Dateien-Sourcebaum nicht.
-
-## LOKALER GEPRÜFTER KANDIDAT – NOCH NICHT KANONISCH
-
-Vollständiger Nachweis:
-`release/affiliate-zentrale/evidence/adcell_api_v2_local_full_gate_20260912.txt`
-
-Exakt drei freigegebene Traits geändert:
-- `trait-ppar-automation-suite.php` – SHA256 `529c1da3cf943885094f7c7eed53c61caa3b11cf7c8eafbb766b77ddadfd4b4b` – Git blob Soll `e2dfa0734363a3c645c8e714edeb6e6ac7fa3e5e`
-- `trait-ppar-network-sync.php` – SHA256 `a7183a025ccc55f756b15867ca2598963ea987f6b6baedef7c95078001d4ed12` – Git blob Soll `1bdcc564fe82e1d486523799211c3786c859b758`
-- `trait-ppar-provider-registry.php` – SHA256 `87572d4bf2bcc2400fb3fa2cfd02050261c97555ce340f7981f1afbcd6a9e9ae` – Git blob Soll `82241b6451160d02caa92db3c053e96d5263bfb7`
-
-Lokales finales 26-Dateien-Manifest:
+ADCELL-Source-Commit: `99bcc5796226254f7e190f40397210fca96e7d0b`
+Aktuelles 26-Dateien-Manifest:
 `74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5`
 
-Tatsächlich ausgeführt:
-- PHP-Lint 21/21 PASS;
-- ADCELL Static Gate PASS;
-- ADCELL Runtime Positiv/Negativ PASS;
-- AF-062 Hook-Runtime PASS;
-- Banner-Regression PASS;
-- exakt 3 erlaubte Source-Dateien geändert, außerhalb 0;
-- 18/18 Awin-/OTTO-Funktionsblöcke byteidentisch zum kanonischen 6.72.8 – PASS über `AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php`;
-- originaler unveränderter `release_guard.py`: governance/source/tree/start jeweils PASS auf dem finalen lokalen Sourcebaum.
+Der kanonische ADCELL-Fix ist damit nicht mehr lokal/ungebunden. Die drei gebundenen Source-Dateien sind committed und Manifest/Governance wurden an denselben Sourcezustand gebunden.
 
-Der alte `test_otto_automation.php` ist bereits gegen unverändertes 6.72.8 stale/widersprüchlich. Diese AF-057-Ausprägung ist im aktuellen `TASK.current.json` durch den 18/18-Funktionshash-Test ersetzt. OTTO-Source wurde nicht verändert.
+## COMMITTED FULL GATE
+
+Dauerhafter Nachweis:
+`release/affiliate-zentrale/evidence/adcell_api_v2_committed_full_gate_20260912.txt`
+
+Nach kanonischer Rückbindung tatsächlich ausgeführt und bestanden:
+- committed Blob-/Source-Readback;
+- ADCELL API-v2 Static Gate;
+- ADCELL Runtime Positiv/Negativ;
+- AF-062: kein Legacy-Basic-Auth-Runtimeweg für ADCELL-v2;
+- accepted + active + programId-Allowlist positiv;
+- non-allowlisted / inactive / not accepted / malformed / falscher Host / mehrdeutige CSV-Lage fail-closed;
+- kein Awin-Fallthrough für `provider=adcell`;
+- Awin/OTTO-Funktionsblock-Regression 18/18 byteidentisch;
+- Banner-Regression;
+- PHP-Lint 21/21;
+- originaler unveränderter `release_guard.py`: Governance/Source/Tree/Start PASS;
+- Fresh-Unpack PASS;
+- Source/Unpack-Byte-Identity 26/26 PASS.
 
 ## FEHLERSTATUS
 
 Detailautorität bleibt ausschließlich:
 `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md`
 
-Aktuell relevant:
-- AF-023: BEHOBEN für den derzeit committed partiellen Source-Stand; Source/Manifest/Governance wurden atomar gebunden und Guard real PASS.
-- AF-057: aktueller Hobbyraum-Task wurde auf den realen ADCELL-Rückbindungsweg nachgezogen; stale OTTO-Mischtest ist nicht mehr aktuelles Gate.
-- AF-058 / AF-059 / AF-062: im lokalen Kandidaten positiv/negativ repariert, aber im kanonisch committed Sourcebaum noch NICHT geschlossen. Kein kanonischer PASS bis bytegenauer Rückbindung und erneutem committed Gate.
-- AF-060: Auth-Dokumentationsblocker geschlossen; historische Gegenregel bleibt erhalten.
+Für den aktuellen kanonischen Stand:
+- AF-023: geschlossen;
+- AF-058: geschlossen;
+- AF-059: geschlossen;
+- AF-060: Auth-Dokumentationsblocker geschlossen;
+- AF-062: geschlossen;
+- AF-026/AF-027 bleiben als Versionsgrenzen aktiv und verhindern eine neue Test-/Live-ZIP mit erneutem internen Stand 6.72.8.
 
-## AKTUELLER BLOCKER
+## 6.72.9 – VERSIONSSCHRITT
 
-Nicht der ADCELL-Code, sondern die bytegenaue Rückbindung:
-Der in dieser Sitzung verfügbare GitHub-Schreibweg kann große lokale Dateien nicht direkt als Datei übernehmen. Manuell transportierte Großinhalte wurden an der Werkzeuggrenze gekürzt/verändert; die resultierenden Git-Blob-SHAs wichen vom lokalen Soll ab. Solche Blobs wurden verworfen und nie in den aktiven Sourcebaum committed.
+Für den nächsten installierbaren ADCELL-Testkandidaten ist deshalb der kleinste Versionsschritt `6.72.9` vorgesehen.
 
-Der aktive kanonische Sourcebaum darf deshalb nicht mit einem angenäherten oder rekonstruierten Inhalt überschrieben werden.
+Lokal aus dem kanonischen 6.72.8-Sourcebaum vorbereitet und geprüft:
+- exakt WordPress-Plugin-Header `6.72.8 -> 6.72.9`;
+- exakt `const VERSION` `6.72.8 -> 6.72.9`;
+- exakt readme `Stable tag` `6.72.8 -> 6.72.9`;
+- keine fachliche ADCELL/Awin/OTTO-Logik geändert.
+
+Lokales 6.72.9-Manifest:
+`83c75bf1359aa989313416c9f9c7d1d4193bfe44a15bef08a83ac45580911bc8`
+
+Auch auf diesem version-only Kandidaten ausgeführt PASS:
+- PHP-Lint 21/21;
+- ADCELL Static Gate;
+- ADCELL Runtime Positiv/Negativ;
+- Awin/OTTO-Identität 18/18;
+- Banner-Regression;
+- Fresh-Unpack;
+- Source/Unpack-Identity 26/26.
+
+WICHTIG: 6.72.9 ist noch **nicht kanonisch committed**. Der große Hauptplugin-Blob darf nur über einen bytegenau nachgewiesenen Transportweg geschrieben werden. Kein angenäherter, gekürzter oder rekonstruierter Großinhalt wird Release-Autorität.
 
 ## VERBINDLICHE NEXT ACTION
 
 GENAU EIN ARBEITSSTRANG:
 
-1. Die drei oben gebundenen lokalen Source-Dateien bytegenau in GitHub-Blobs übertragen; jede Datei nur akzeptieren, wenn der Git-Blob-SHA exakt dem Soll entspricht.
-2. Korrigierten ADCELL-Test, finales Manifest und die vollständige aktuelle Governance in denselben atomaren Tree/Commit binden.
-3. Governance gemäß bereits vorgebundener `next_state_binding` auf Sequence 7 fortschreiben; Guard-Enum und erlaubte Prefixe unverändert lassen.
-4. Commit gegen den vorherigen Head diffen und ausschließlich erwartete Dateien zulassen.
-5. `affiliate-release-current` nur per Fast-Forward auf diesen geprüften Commit setzen.
-6. Committed Stand frisch zurücklesen und dieselben ADCELL-, Awin/OTTO-Hash-, Banner- und Release-Guard-Gates erneut real ausführen.
-7. Danach Fresh-Unpack + Source/ZIP Byte-Identity; erst danach Test-Plugin.
-8. Live-PASS weiterhin erst nach wiederhergestelltem ADCELL-Zugang und echtem WordPress/MariaDB/API-E2E.
+1. Den bereits lokal geprüften reinen Versionsschritt 6.72.8 -> 6.72.9 bytegenau auf `affiliate-release-current` binden.
+2. Neues 26-Dateien-Manifest + Governance an exakt diesen committed Sourcezustand binden.
+3. Dieselben ADCELL-, Awin/OTTO-, Banner-, PHP- und Release-Guard-Gates auf den committed 6.72.9-Bytes erneut real ausführen.
+4. Fresh-Unpack + Source/ZIP-Identity für den committed 6.72.9-Testkandidaten wiederholen.
+5. Erst danach darf ein 6.72.9-Test-Plugin ausgegeben/installiert werden.
+6. LIVE-PASS erst nach wiederhergestelltem ADCELL-Zugang und echtem ADCELL-API + WordPress/MariaDB-E2E.
 
 ## LIVE-BLOCKER
 
-Der ADCELL-Kontozugang ist weiterhin blockiert, weil Passwort-Wiederherstellung/Reset-Mail nicht funktioniert. Deshalb:
+Der ADCELL-Kontozugang ist weiterhin blockiert, weil Passwort-Wiederherstellung/Reset-Mail nicht funktioniert. Deshalb aktuell:
 - kein echter ADCELL-Live-API-Request;
 - kein WordPress/MariaDB/API-Live-E2E;
 - kein LIVE PASS.
@@ -119,5 +131,5 @@ Der ADCELL-Kontozugang ist weiterhin blockiert, weil Passwort-Wiederherstellung/
 - neue Providerarchitektur / separates ADCELL-Plugin;
 - manuelle CSV-Import-/Exportlösung als Ersatz;
 - neue Workflow-/Runner-Dateien;
-- Plugin-/ZIP-Ausgabe vor den gebundenen Gates;
-- Codex.
+- Codex;
+- Plugin-/ZIP-Ausgabe vor gebundener 6.72.9 + committed Gates + Fresh-Unpack/Identity.
