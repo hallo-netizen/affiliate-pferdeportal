@@ -4,6 +4,13 @@ code=$(curl -sS -o /tmp/home -w '%{http_code}' http://127.0.0.1:8080/glossar/); 
 python3 - <<'PY'
 import re
 s=open('/tmp/home',encoding='utf8').read()
+print('DIAG_HOME_LEN',len(s))
+print('DIAG_HAS_UGE', 'class="uge"' in s)
+print('DIAG_HAS_HERO_CLASS', 'class="uge-hero' in s)
+print('DIAG_HAS_EMBEDDED_HERO', 'glossar-hero-books-stall.webp' in s)
+print('DIAG_H1_COUNT',len(re.findall(r'<h1(?:\s|>)',s,re.I)))
+for needle in ['uge-hero','glossar-hero-books-stall.webp','uge-tools','uge-topic-grid']:
+    i=s.find(needle); print('DIAG_POS',needle,i, s[max(0,i-180):i+280] if i>=0 else '')
 assert len(re.findall(r'<h1(?:\s|>)',s,re.I)) == 1
 assert 'glossar-hero-books-stall.webp' in s
 assert 'site-content .ast-container{padding-top:0' not in s
