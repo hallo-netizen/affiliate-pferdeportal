@@ -31,17 +31,19 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 
 - zentrale Rassenstruktur migriert;
 - Schema 1.1 mit formalem Status/anerkennender Quelle;
-- erste 7 Datensätze angelegt;
+- 11 Datensätze angelegt;
+- zweite Recherchewelle ergänzt: Arabisches Vollblut, Islandpferd, Haflinger, Fjordpferd;
 - offizielle Verbands-/Zuchtquellen gebunden;
 - alte separate PFERDERASSEN-Steuerung entfernt.
 
 ## NEXT ACTION
 
-1. internationale Kandidatenliste weiter ausbauen;
-2. formalen Status der nächsten Kandidaten gegen autoritative Quellen prüfen;
+1. nächsten Kandidatenblock aus `RASSEN_REGISTER.md` prüfen;
+2. formalen Status gegen autoritative Quellen bestätigen;
 3. Synonyme/Dubletten bereinigen;
-4. danach weitere Einzeldatensätze anlegen;
-5. keine Vollständigkeit behaupten, bevor die Masterliste gegen mehrere autoritative Quellen geprüft ist.
+4. weitere Einzeldatensätze anlegen;
+5. offene Felder später gezielt nachrecherchieren, niemals raten;
+6. keine Vollständigkeit behaupten, bevor die Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
 ## KONTROLLPUNKTE
 
