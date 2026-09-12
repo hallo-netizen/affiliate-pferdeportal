@@ -15,6 +15,7 @@ final class UGE_Admin {
         add_submenu_page('uge-glossary', 'Alle Begriffe', 'Alle Begriffe', 'edit_posts', 'edit.php?post_type=' . UGE_Core::POST_TYPE);
         add_submenu_page('uge-glossary', 'Neuer Begriff', 'Neuer Begriff', 'edit_posts', 'post-new.php?post_type=' . UGE_Core::POST_TYPE);
         add_submenu_page('uge-glossary', 'Oberbereiche', 'Oberbereiche', 'manage_categories', 'edit-tags.php?taxonomy=' . UGE_Core::TAXONOMY . '&post_type=' . UGE_Core::POST_TYPE);
+        add_submenu_page('uge-glossary', 'Import / Export', 'Import / Export', 'manage_options', 'uge-transfer', [UGE_Transfer::class, 'page']);
         add_submenu_page('uge-glossary', 'Einstellungen', 'Einstellungen', 'manage_options', 'uge-settings', [__CLASS__, 'settings_page']);
     }
 
