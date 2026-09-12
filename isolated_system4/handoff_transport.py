@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-import argparse, base64, hashlib, json, re
+import argparse, base64, hashlib, json, lzma, re
 from pathlib import Path
 
 HANDOFF_CONTRACT='SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1'
-TRANSPORT_CONTRACT='SYSTEM4_PARENT_CHAT_TRANSPORT_V1'
+INLINE_CONTRACT='SYSTEM4_PARENT_CHAT_INLINE_V1'
 HANDOFF_FILENAME='SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json'
-TRANSPORT_FILENAME='SYSTEM4_PARENT_CHAT_TRANSPORT_V1.json'
+INLINE_FILENAME='SYSTEM4_PARENT_CHAT_INLINE_V1.txt'
+INLINE_BEGIN='SYSTEM4_PARENT_CHAT_INLINE_V1_BEGIN'
+INLINE_END='SYSTEM4_PARENT_CHAT_INLINE_V1_END'
+INLINE_MAX_CHARS=60000
 SHA_RE=re.compile(r'^[0-9a-f]{64}$')
 
 class HandoffError(RuntimeError):
@@ -71,64 +74,100 @@ def read_validate_handoff(path: Path) -> tuple[dict,bytes]:
     validate_handoff(payload)
     return payload,raw
 
-def pack(input_path: Path, output_path: Path) -> dict:
-    _,raw=read_validate_handoff(input_path)
+def canonicalize_handoff(input_path: Path, output_path: Path) -> bytes:
+    payload,_=read_validate_handoff(input_path)
+    raw=(json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf-8')
+    output_path.write_bytes(raw)
+    _require(sha256_bytes(output_path.read_bytes())==sha256_bytes(raw),'HANDOFF_CANONICAL_WRITE_MISMATCH')
+    return raw
+
+def inline_pack(input_path: Path, output_path: Path) -> dict:
+    payload,_=read_validate_handoff(input_path)
+    raw=(json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf-8')
+    compressed=lzma.compress(raw,format=lzma.FORMAT_XZ,preset=9|lzma.PRESET_EXTREME)
     env={
-        'contract':TRANSPORT_CONTRACT,
+        'contract':INLINE_CONTRACT,
         'filename':HANDOFF_FILENAME,
         'mime_type':'application/json',
+        'compression':'xz-lzma2-preset9e',
+        'encoding':'base64',
         'byte_length':len(raw),
         'plaintext_sha256':sha256_bytes(raw),
-        'payload_base64':base64.b64encode(raw).decode('ascii'),
+        'payload_base64':base64.b64encode(compressed).decode('ascii'),
         'publish_allowed':False,
     }
-    output_path.write_text(json.dumps(env,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n',encoding='utf-8')
+    body=json.dumps(env,ensure_ascii=False,sort_keys=True,separators=(',',':'))
+    text=INLINE_BEGIN+'\n'+body+'\n'+INLINE_END+'\n'
+    _require(len(text)<=INLINE_MAX_CHARS,'INLINE_ENVELOPE_TOO_LARGE')
+    output_path.write_text(text,encoding='utf-8')
     return env
 
-def unpack(transport_path: Path, output_dir: Path) -> Path:
+def _parse_inline_text(text: str) -> dict:
+    begin=text.find(INLINE_BEGIN)
+    _require(begin>=0,'INLINE_BEGIN_MISSING')
+    start=begin+len(INLINE_BEGIN)
+    end=text.find(INLINE_END,start)
+    _require(end>=0,'INLINE_END_MISSING')
+    between=text[start:end].strip()
+    _require(between!='','INLINE_BODY_MISSING')
     try:
-        env=json.loads(transport_path.read_text(encoding='utf-8'))
+        env=json.loads(between)
     except Exception as exc:
-        raise HandoffError('TRANSPORT_JSON_INVALID') from exc
-    _require(isinstance(env,dict),'TRANSPORT_NOT_OBJECT')
-    required={'contract','filename','mime_type','byte_length','plaintext_sha256','payload_base64','publish_allowed'}
-    _require(set(env)==required,'TRANSPORT_SCHEMA_INVALID')
-    _require(env['contract']==TRANSPORT_CONTRACT,'TRANSPORT_CONTRACT_INVALID')
-    _require(env['filename']==HANDOFF_FILENAME and env['mime_type']=='application/json','TRANSPORT_TARGET_INVALID')
-    _require(env['publish_allowed'] is False,'TRANSPORT_PUBLISH_MUST_BE_FALSE')
-    _require(isinstance(env['byte_length'],int) and env['byte_length']>0,'TRANSPORT_LENGTH_INVALID')
-    _require(isinstance(env['plaintext_sha256'],str) and SHA_RE.fullmatch(env['plaintext_sha256']) is not None,'TRANSPORT_SHA_INVALID')
+        raise HandoffError('INLINE_JSON_INVALID') from exc
+    return env
+
+def inline_unpack(inline_path: Path, output_dir: Path) -> Path:
+    text=inline_path.read_text(encoding='utf-8')
+    env=_parse_inline_text(text)
+    _require(isinstance(env,dict),'INLINE_NOT_OBJECT')
+    required={'contract','filename','mime_type','compression','encoding','byte_length','plaintext_sha256','payload_base64','publish_allowed'}
+    _require(set(env)==required,'INLINE_SCHEMA_INVALID')
+    _require(env['contract']==INLINE_CONTRACT,'INLINE_CONTRACT_INVALID')
+    _require(env['filename']==HANDOFF_FILENAME and env['mime_type']=='application/json','INLINE_TARGET_INVALID')
+    _require(env['compression']=='xz-lzma2-preset9e' and env['encoding']=='base64','INLINE_CODEC_INVALID')
+    _require(env['publish_allowed'] is False,'INLINE_PUBLISH_MUST_BE_FALSE')
+    _require(isinstance(env['byte_length'],int) and env['byte_length']>0,'INLINE_LENGTH_INVALID')
+    _require(isinstance(env['plaintext_sha256'],str) and SHA_RE.fullmatch(env['plaintext_sha256']) is not None,'INLINE_SHA_INVALID')
     try:
-        raw=base64.b64decode(env['payload_base64'],validate=True)
+        compressed=base64.b64decode(env['payload_base64'],validate=True)
     except Exception as exc:
-        raise HandoffError('TRANSPORT_BASE64_INVALID') from exc
-    _require(len(raw)==env['byte_length'],'TRANSPORT_LENGTH_MISMATCH')
-    _require(sha256_bytes(raw)==env['plaintext_sha256'],'TRANSPORT_SHA_MISMATCH')
+        raise HandoffError('INLINE_BASE64_INVALID') from exc
+    try:
+        raw=lzma.decompress(compressed,format=lzma.FORMAT_XZ)
+    except Exception as exc:
+        raise HandoffError('INLINE_XZ_INVALID') from exc
+    _require(len(raw)==env['byte_length'],'INLINE_LENGTH_MISMATCH')
+    _require(sha256_bytes(raw)==env['plaintext_sha256'],'INLINE_SHA_MISMATCH')
     try:
         payload=json.loads(raw.decode('utf-8'))
     except Exception as exc:
-        raise HandoffError('TRANSPORT_PAYLOAD_JSON_INVALID') from exc
+        raise HandoffError('INLINE_PAYLOAD_JSON_INVALID') from exc
     validate_handoff(payload)
+    canonical=(json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf-8')
+    _require(raw==canonical,'INLINE_PAYLOAD_NOT_CANONICAL')
     output_dir.mkdir(parents=True,exist_ok=True)
     out=output_dir/HANDOFF_FILENAME
     out.write_bytes(raw)
-    _require(sha256_bytes(out.read_bytes())==env['plaintext_sha256'],'TRANSPORT_WRITTEN_SHA_MISMATCH')
+    _require(sha256_bytes(out.read_bytes())==env['plaintext_sha256'],'INLINE_WRITTEN_SHA_MISMATCH')
     return out
 
 def main(argv=None):
     p=argparse.ArgumentParser()
     sp=p.add_subparsers(dest='cmd',required=True)
     a=sp.add_parser('validate'); a.add_argument('handoff')
-    a=sp.add_parser('pack'); a.add_argument('handoff'); a.add_argument('transport')
-    a=sp.add_parser('unpack'); a.add_argument('transport'); a.add_argument('output_dir')
+    a=sp.add_parser('canonicalize'); a.add_argument('handoff'); a.add_argument('output')
+    a=sp.add_parser('inline-pack'); a.add_argument('handoff'); a.add_argument('inline_output')
+    a=sp.add_parser('inline-unpack'); a.add_argument('inline_input'); a.add_argument('output_dir')
     ns=p.parse_args(argv)
     try:
         if ns.cmd=='validate':
             _,raw=read_validate_handoff(Path(ns.handoff)); print(json.dumps({'status':'SYSTEM4_HANDOFF_VALIDATE_PASS','sha256':sha256_bytes(raw)},separators=(',',':')))
-        elif ns.cmd=='pack':
-            env=pack(Path(ns.handoff),Path(ns.transport)); print(json.dumps({'status':'SYSTEM4_HANDOFF_PACK_PASS','sha256':env['plaintext_sha256'],'bytes':env['byte_length']},separators=(',',':')))
+        elif ns.cmd=='canonicalize':
+            raw=canonicalize_handoff(Path(ns.handoff),Path(ns.output)); print(json.dumps({'status':'SYSTEM4_HANDOFF_CANONICALIZE_PASS','sha256':sha256_bytes(raw),'bytes':len(raw)},separators=(',',':')))
+        elif ns.cmd=='inline-pack':
+            env=inline_pack(Path(ns.handoff),Path(ns.inline_output)); print(json.dumps({'status':'SYSTEM4_INLINE_PACK_PASS','sha256':env['plaintext_sha256'],'bytes':env['byte_length']},separators=(',',':')))
         else:
-            out=unpack(Path(ns.transport),Path(ns.output_dir)); print(json.dumps({'status':'SYSTEM4_HANDOFF_UNPACK_PASS','file':str(out),'sha256':sha256_bytes(out.read_bytes())},separators=(',',':')))
+            out=inline_unpack(Path(ns.inline_input),Path(ns.output_dir)); print(json.dumps({'status':'SYSTEM4_INLINE_UNPACK_PASS','file':str(out),'sha256':sha256_bytes(out.read_bytes())},separators=(',',':')))
         return 0
     except HandoffError as exc:
         print('SYSTEM4_HANDOFF_BLOCK:'+str(exc))
