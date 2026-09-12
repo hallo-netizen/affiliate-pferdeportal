@@ -6,16 +6,16 @@ STATUS: EINGANG AKTIV
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das Steuerungsbüro für das öffentliche Pferde-Atelier-Glossar: Struktur, kurze Glossartexte, SEO-Felder, WordPress-Konzept, Navigation und Übergaben an Design/Technik.
+Das Steuerungsbüro für das öffentliche Pferde-Atelier-Glossar: Struktur, kurze Glossartexte, SEO-Felder, WordPress-Konfiguration, Navigation und Abnahme.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du das öffentliche Glossar planst, einen recherchierten Begriff für die Veröffentlichung aufbereitest, Oberbegriffe/Navigation festlegst oder die WordPress-/Design-Anbindung prüfst.
+du das öffentliche Glossar planst, einen recherchierten Begriff für die Veröffentlichung aufbereitest, Oberbegriffe/Navigation festlegst oder die Pferde-Anwendung des allgemeinen Glossarmoduls prüfst.
 
 **DU DARFST …**  
-quellengebundene Glossarfakten aus der Wissensdatenbank lesen, daraus kurze Veröffentlichungsfassungen ableiten, SEO-/Strukturbedarf definieren und im gebundenen Hobbyraum technische Kandidaten prüfen.
+quellengebundene Glossarfakten aus der Wissensdatenbank lesen, daraus kurze Veröffentlichungsfassungen ableiten, Pferde-Konfiguration/SEO-/Strukturbedarf definieren und im gebundenen Hobbyraum technische Kandidaten prüfen.
 
 **DU DARFST NICHT …**  
-eine zweite Glossar-Faktendatenbank aufbauen, ungeprüfte Fachfakten erfinden, normale Beiträge/Seiten pro Begriff erzwingen, die große Textmaschine ohne belegten Bedarf anbinden oder DESIGN/TEXT/WISSENSDATENBANK ungefragt überschreiben.
+eine zweite Glossar-Faktendatenbank aufbauen, ungeprüfte Fachfakten erfinden, normale Beiträge/Seiten pro Begriff erzwingen, Pferde-Fachlogik in den Universal-Core schreiben, die große Textmaschine ohne belegten Bedarf anbinden oder DESIGN/TEXT/WISSENSDATENBANK ungefragt überschreiben.
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `HOBBYRAUM.md` → benötigtes Nachbarbüro.
@@ -32,40 +32,59 @@ Dort bleiben Begriff, Definition/Fakten, Quellen, Synonyme, fachliche Einordnung
 
 ### Öffentliche Glossarlogik
 Dieses Büro ist zuständig für:
-- Oberbegriffe und Navigationskonzept;
+- Pferde-Oberbegriffe und Navigationskonzept;
 - Veröffentlichungsfassung eines Begriffs;
-- benötigte Felder für SEO und Frontend;
-- WordPress-Backend-Konzept;
+- Pferde-spezifische SEO-/Feld-/Designkonfiguration;
+- Abnahme der WordPress-Ausgabe;
 - Regeln für Aufklapper/A–Z/Verlinkung;
-- Übergabe an DESIGN bzw. TEXT/SEO;
-- Abnahme der Glossar-spezifischen Funktion.
+- Übergabe an DESIGN bzw. TEXT/SEO nur bei echtem Fachbedarf.
+
+### Allgemeiner technischer Kern
+Autoritativ:
+`../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+
+Modul:
+`MOD-008 – Universal Glossar Engine`.
+
+Der allgemeine Core verwaltet:
+- eigenen Glossar-Inhaltstyp;
+- eigene hierarchische Oberbereiche;
+- auswählbare vorhandene Hauptseite;
+- eigene Begriffszieladressen;
+- erweiterbares Feldschema;
+- Suche / A–Z / Aufklapper;
+- providerneutrale SEO-Felder;
+- strukturierten JSON-Import/Export.
+
+Pferde-spezifische Inhalte und Gestaltung werden konfiguriert, nicht im Core fest verdrahtet.
 
 ### WordPress
 Vom Nutzer bestätigt: Die WordPress-Seite `Glossar` ist bereits angelegt und verlinkt.
 
 Für einzelne Glossarbegriffe gilt:
 - nicht als normale Beiträge ausgeben;
-- nicht als normale Seiten pro Begriff pflegen;
+- nicht als normale Seiten pro Begriff manuell pflegen;
 - kein Bildzwang;
 - keine normalen Beitragskarten im Portal;
-- eigene SEO-Angaben je veröffentlichbarem Begriff ermöglichen.
+- eigene SEO-Angaben je veröffentlichtem Begriff;
+- Import niemals automatisch veröffentlichen.
 
-Die exakte Speicherung/URL-Logik wird erst nach Prüfung des bestehenden Designplugins verbindlich festgelegt.
-
-**Kein zweites CMS im Plugin bauen.**
+**Der Nutzer muss aktuell keine weiteren WordPress-Seiten, Kategorien oder Beiträge anlegen.**
 
 ### SEO-Meta
-Gewünschter KISS-Weg:
-- SEO-Titel und Meta-Description je Begriff nach festem Schema;
-- keine manuelle Yoast-Pflege je Begriff;
+Gebundener KISS-Weg:
+- SEO-Titel und Meta-Description je Begriff nach konfigurierbarem Schema;
+- individuelle Überschreibung je Begriff möglich;
+- keine manuelle Yoast-Pflege nötig;
 - keine direkten Writes in interne Yoast-Datenbankfelder;
-- vorhandene Yoast-Ausgabe nur über offizielle Schnittstellen überschreiben, sofern die installierte Version nach frischer Prüfung kompatibel ist.
+- Core funktioniert ohne Yoast;
+- bei Yoast Nutzung nur über dessen Schnittstellen.
 
 ### Textproduktion
 Aktuell **keine eigene große Textmaschine** und keine automatische Anbindung an die bestehende Artikel-Textmaschine.
 
 KISS-Weg:
-Fachfakten lesen → kurze standardisierte Veröffentlichungsfassung → SEO-/Qualitätsprüfung → WordPress.
+Fachfakten lesen → kurze standardisierte Veröffentlichungsfassung → SEO-/Qualitätsprüfung → WordPress-Entwurf → manuelle Freigabe.
 
 Der Kurztextstandard darf sich an den bewährten strengen Regeln der Kategorietexte orientieren, ohne deren Technik blind zu kopieren.
 
@@ -75,7 +94,7 @@ Der Kurztextstandard darf sich an den bewährten strengen Regeln der Kategoriete
 `../WISSENSDATENBANK/START_HERE.md`
 `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
 
-### DESIGN – Pflicht bei Darstellung/Plugin
+### DESIGN – Referenz für Gestaltung, nicht Glossar-Engine
 `../DESIGN/START_HERE.md`
 
 ### TEXT/SEO – bei Suchintention/Kannibalisierung/SEO-Regeln
@@ -88,26 +107,32 @@ Der Kurztextstandard darf sich an den bewährten strengen Regeln der Kategoriete
 
 1. KISS: kleinste tragfähige Erweiterung; keine Plugin-Orgie.
 2. Backend und Frontend getrennt denken.
-3. Kein Grafikzwang.
-4. Keine normalen Beitragskarten für Glossarbegriffe.
-5. Eigene Meta-Angaben je Begriff brauchen eine technisch auflösbare eigene Zieladresse.
-6. Fachwahrheit bleibt in WISSENSDATENBANK.
-7. Vor Änderung aktuellen DESIGN-/WordPress-Bestand frisch prüfen.
-8. Vor Plugin-Ausgabe positiv und negativ testen.
-9. `main` nicht für Experimente verändern.
-10. Keine automatische Veröffentlichung.
+3. Flexibel/erweiterbar: keine festen Pferde-Oberbereiche/Felder/SEO-Schemata im Core.
+4. Kein Grafikzwang.
+5. Keine normalen Beitragskarten für Glossarbegriffe.
+6. Eigene Meta-Angaben je Begriff brauchen eine technisch auflösbare eigene Zieladresse.
+7. Fachwahrheit bleibt in WISSENSDATENBANK.
+8. Bestehendes Designplugin bleibt unverändert; nur Gestaltungswerte dienen als Pferde-Profil.
+9. Vor Plugin-Ausgabe positiv und negativ testen.
+10. `main` nicht für Experimente verändern.
+11. Keine automatische Veröffentlichung.
+12. Kein Release-/LIVE-PASS aus lokalen Stubtests ableiten.
 
 ## SCHNELLWEGWEISER
 
 - **Aktueller Bürostand:** `CURRENT_STATE.md`
 - **Aktuelle Arbeit / NEXT ACTION:** `HOBBYRAUM.md`
+- **Seitenkonzept:** `SEITENKONZEPT_V1.md`
+- **Allgemeiner Glossar-Core:** `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+- **Dauerhafte WAS/WARUM-Entscheidung:** `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/ENTSCHEIDUNG_20260912.md`
+- **Bau-/Testprotokoll:** `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/BAUPROTOKOLL_20260912.md`
 - **Fachdatenbank:** `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
 - **Design:** `../DESIGN/START_HERE.md`
 - **TEXT/SEO:** `../TEXT/START_HERE.md`
 - **WordPress-Werkzeugbestand:** `../../../WORDPRESS_REGISTER.md`
 - **Handlungsverzeichnis:** `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
 - **Fehler:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
-- **Warum geändert:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **Zentrales Warum-Register:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 - **Ziel:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
 
 ## HARTE FEHLERABGLEICH-SPERRE
