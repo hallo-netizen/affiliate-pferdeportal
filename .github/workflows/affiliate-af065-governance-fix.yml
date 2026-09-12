@@ -17,25 +17,21 @@ jobs:
         with:
           ref: affiliate-release-current
           fetch-depth: 0
-      - name: Repair only AF-065 and retrigger same gate
+      - name: Repair only AF-065
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          import json
           gp=Path('control/release-governance/CURRENT_RELEASE.json')
-          g=json.loads(gp.read_text())
-          if g.get('generation') != 54:
-              raise SystemExit(f'unexpected generation {g.get("generation")}')
-          oc=g.get('objective_control') or {}
-          expected='FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE'
-          if oc.get('new_version_policy') == expected:
-              raise SystemExit('AF-065 already absent; refusing unrelated rewrite')
-          oc['new_version_policy']=expected
-          g['objective_control']=oc
-          g['generation']=55
-          gp.write_text(json.dumps(g,ensure_ascii=False,indent=2)+'\n')
+          s=gp.read_text()
+          old='"new_version_policy": "CURRENT_BOUND_PLUGINBUERO_67217_PLUS_ADCELL_67219_ONLY"'
+          new='"new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE"'
+          if old not in s: raise SystemExit('expected AF-065 policy value missing')
+          s=s.replace(old,new,1)
+          if '"generation": 54' not in s: raise SystemExit('unexpected governance generation')
+          s=s.replace('"generation": 54','"generation": 55',1)
+          gp.write_text(s)
 
           mp=Path('AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md')
           m=mp.read_text()
@@ -48,17 +44,10 @@ jobs:
           if '- AF-065:' not in m:
               m += '\n- AF-065: BEHOBEN – `new_version_policy` auf den unveränderlichen Guard-Vertragswert zurückgesetzt; derselbe kanonische Gate-Lauf wird erneut ausgeführt.\n'
           mp.write_text(m)
-
-          wp=Path('.github/workflows/affiliate-67219-canonical-gates.yml')
-          w=wp.read_text()
-          if '# AF-065 retry' not in w:
-              w += '\n# AF-065 retry\n'
-          wp.write_text(w)
           PY
-          rm '.github/workflows/affiliate-af065-governance-fix.yml'
-          git add control/release-governance/CURRENT_RELEASE.json AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md .github/workflows/affiliate-67219-canonical-gates.yml .github/workflows/affiliate-af065-governance-fix.yml
-          git diff --cached --name-only
+          git add control/release-governance/CURRENT_RELEASE.json AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md
+          test "$(git diff --cached --name-only | wc -l)" -eq 2
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Affiliate ADCELL: repair AF-065 governance contract and rerun gates [skip ci]'
+          git commit -m 'Affiliate ADCELL: repair AF-065 governance contract [skip ci]'
           git push origin HEAD:affiliate-release-current
