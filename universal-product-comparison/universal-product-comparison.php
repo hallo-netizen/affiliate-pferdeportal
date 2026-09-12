@@ -31,9 +31,14 @@ require_once __DIR__ . '/src/class-upc-comparison-graphic.php';
 require_once __DIR__ . '/src/class-upc-article-finalizer.php';
 require_once __DIR__ . '/src/class-upc-first-draft-test.php';
 require_once __DIR__ . '/src/class-upc-archive.php';
+require_once __DIR__ . '/src/class-upc-research-runtime.php';
 
 function upc_dependency_ready() {
     return function_exists( 'upk_repository' ) && class_exists( 'UPK_Repository' );
+}
+
+function upc_import_bound_research( $project_key = 'pferde-atelier' ) {
+    return UPC_Research_Runtime::import_bound_plan( $project_key );
 }
 
 function upc_install_schema() {
