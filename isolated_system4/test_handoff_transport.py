@@ -7,12 +7,12 @@ def sha(value): return hashlib.sha256(value.encode('utf-8')).hexdigest()
 class HandoffTransportTests(unittest.TestCase):
     def fact_pack(self,i):
         source_id=f'src-{i}'
-        source_snapshot=sha(f'Quellensnapshot {i} mit ausreichend langem konkretem Inhalt für die lokale Prüfung der Handoff-Bindung.')
         e1=f'Konkreter Beleg A für den Handoff-Testartikel {i} und seine fachliche Aussage.'
         e2=f'Konkreter Beleg B für den Handoff-Testartikel {i} und seine zweite fachliche Aussage.'
+        source_evidence=e1+'\n'+e2+'\n'+f'Zusätzlicher gesicherter Quellenkontext für Handoff-Testartikel {i}.'
         return {
             'contract':'canonical_fact_pack_v1','status':'SOURCE_VERIFIED_PRODUCTION_READY',
-            'sources':[{'source_id':source_id,'source_title':f'Fachquelle Handoff {i}','source_url':f'https://example.org/handoff-{i}','retrieved_at':'2026-09-12T20:00:00Z','snapshot_sha256':source_snapshot}],
+            'sources':[{'source_id':source_id,'source_title':f'Fachquelle Handoff {i}','source_url':f'https://example.org/handoff-{i}','retrieved_at':'2026-09-12T20:00:00Z','snapshot_sha256':sha(source_evidence),'evidence':source_evidence}],
             'claims':[
                 {'fact_id':f'fact-{i}-a','source_id':source_id,'statement':f'Konkrete Aussage A für Handoff {i}.','evidence_text':e1,'evidence_text_sha256':sha(e1)},
                 {'fact_id':f'fact-{i}-b','source_id':source_id,'statement':f'Konkrete Aussage B für Handoff {i}.','evidence_text':e2,'evidence_text_sha256':sha(e2)},
@@ -72,6 +72,9 @@ class HandoffTransportTests(unittest.TestCase):
     def test_negative_missing_fact_sources(self):
         p=self.payload(); p['articles'][0]['production_context']['fact_pack'].pop('sources')
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_CONTENT_GUARD:0:FACT_PACK_SOURCES_MISSING'): ht.validate_handoff(p)
+    def test_negative_claim_not_in_source_evidence(self):
+        p=self.payload(); row=p['articles'][0]; invented='Ein erfundener Beleg, der nicht im gespeicherten Quellenausschnitt steht.'; row['production_context']['fact_pack']['claims'][0]['evidence_text']=invented; row['production_context']['fact_pack']['claims'][0]['evidence_text_sha256']=sha(invented)
+        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_CONTENT_GUARD:0:FACT_EVIDENCE_NOT_IN_SOURCE'): ht.validate_handoff(p)
     def test_negative_design_drift(self):
         p=self.payload(); row=p['articles'][0]; row['body']=row['body'].replace('system-129-table comparison-table','comparison-table'); row['final_draft_sha256']=sha(row['body']); row['ppm679']['content_sha256']=row['final_draft_sha256']
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_DESIGN_GUARD:0:DESIGN_TABLE_SYSTEM129_CLASS_MISSING'): ht.validate_handoff(p)
