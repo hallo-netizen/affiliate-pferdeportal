@@ -32,8 +32,8 @@ Pluginbüro-Stand 6.72.17 und der geprüfte ADCELL-API-v2-Fix wurden konfliktfre
 Kanonischer Source-Bind-Commit:
 `df3e97119fe44ac864701d8de6b946c7c6c3416c`
 
-Aktueller technischer Branch-Head nach Status-/Workflow-Cleanup:
-`58cc8c7e62c0a1651823a6a654dcbfd5256bbae4`
+Aktueller technischer Branch-Head nach Scope-Cleanup:
+`75a2368cfe1efbfb623aa263da16a9ee7ab96462`
 
 Kanonische Version:
 `6.72.19`
