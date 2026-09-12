@@ -1,175 +1,123 @@
 # AFFILIATE RELEASE – ADCELL API-V2 AUTOMATISIERUNG – SCOPE 2026-09-11
 
-STAND: 2026-09-11
-STATUS: AKTIV / AUTH-VERTRAG BELEGT / LIVE-ZUGANG BLOCKED / KANONISCHER SOURCE-FIX OFFEN
+STAND: 2026-09-12
+STATUS: AKTIV / AUTH BELEGT / LOKALER SOURCE-KANDIDAT POSITIV-NEGATIV GEPRÜFT / KANONISCHE RÜCKBINDUNG BLOCKED / LIVE-ZUGANG BLOCKED
 
-## AUSLÖSER
-
-Explizite Nutzerentscheidung am 11.09.2026:
-- Digistore24 bleibt nicht erledigt und zurückgestellt;
-- aktuelle Arbeit wechselt zu ADCELL;
-- ADCELL soll im Normalbetrieb vollautomatisch eingelesen werden;
-- kein manueller Import/Export als Betriebsweg;
-- vor jeder Pluginabnahme harte lokale Positiv-/Negativprüfung gegen den Gesamtworkflow.
-
-OTTO/Awin bleibt fachlich ungelöst/pausiert und wird durch diesen Auftrag weder als erfüllt noch als abgelöst erklärt.
-
-## KANONISCHE BASIS
-
-Technische Release-Autorität:
-- Branch `affiliate-release-current`
-- Source `release/affiliate-zentrale/current/affiliate-portal-router/`
-- Kandidat vor ADCELL-Änderung: `6.72.8`
-- Source-Manifest SHA-256: `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`
-
-Release-scoped Änderungen dürfen gemäß Release-Governance nicht über einen parallelen Side-Branch zur zweiten Standwahrheit werden.
-
-## LIVE / DOKUMENTATION HART BELEGT
-
-Autoritativer Auth-Beleg:
-`release/affiliate-zentrale/evidence/adcell_api_v2_auth_contract_20260911.txt`
-
-Aus der offiziellen, vom Nutzer am 11.09.2026 geöffneten ADCELL-API-v2-Dokumentation ist jetzt technisch belegt:
-- API-Basis: `https://api.adcell.org/api/v2/`;
-- Token-Verfahren;
-- Token-Erzeugung über `/user/getToken` mit `userName` und `password`;
-- dokumentierte Standardgültigkeit des Tokens: 15 Minuten;
-- jeder weitere API-v2-Request benötigt den Parameter `token`;
-- kein Basic-Auth- oder Bearer-Auth-Vertrag für diesen belegten API-v2-Weg.
-
-Programme:
-- GET `https://api.adcell.org/api/v2/affiliate/program/export`;
-- angenommene Programme können über `affiliateStatus=accepted` gefiltert werden;
-- Ergebnis enthält u. a. `programId`, `programName`, `isActive`, `affiliateStatus`.
-
-Werbemittel:
-- GET `https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeCsv`;
-- GET `https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeBanner`;
-- GET `https://api.adcell.org/api/v2/affiliate/promotion/getPromotionTypeDeeplink`.
-
-Belegt ist außerdem:
-- CSV-Werbemittel liefern eine `csvUrl`;
-- Banner liefern programmspezifische IDs/Status, Ziel-/Trackingdaten, Maße und `bannerUrl`;
-- Deeplinks sind programmspezifisch und besitzen eine eigene `promotionId`.
-
-Damit ist der frühere Auth-Beleg-Blocker geschlossen. Der 6.72.18-Scratch bleibt trotzdem verworfen und wird nicht übernommen.
-
-## VERBINDLICHER ZIELWEG
+## VERBINDLICHES ZIEL
 
 Normalbetrieb:
 
-`ADCELL API v2 -> accepted + active Programme -> interne explizite programId-Allowlist -> CSV/Banner/Deeplink API -> bestehende zentrale Creative-/Output-/Veto-/Relevanzlogik`
+`ADCELL API v2 -> accepted + active Programme -> explizite programId-Allowlist -> CSV/Banner/Deeplink API -> bestehende zentrale Creative-/Relevanz-/Asset-/Output-/Pause-/Veto-Logik`
 
-Pflichtregeln:
-1. Provider-spezifische ADCELL-Automatisierung; kein Fallthrough in den Awin-Adapter.
-2. Allowlist ausschließlich über explizit freigegebene ADCELL-`programId`s; Namen sind keine Freigabeautorität.
-3. Fail closed: nicht freigegebene, inaktive oder nicht mehr `accepted` Programme werden nicht importiert/materialisiert.
-4. Alte angenommene, fachfremde Programme bleiben dadurch intern gesperrt, auch wenn sie im ADCELL-Konto weiter vorhanden sind.
-5. `getPromotionTypeCsv`: Feed-URL automatisch aus API beziehen; keine manuell eingetragene ADCELL-CSV-Export-URL als Normalbetrieb.
-6. `getPromotionTypeBanner`: reale Banner automatisiert beziehen; Maße/Quelle/Tracking weiter durch bestehende Prüfungen.
-7. `getPromotionTypeDeeplink`: programmspezifische Deeplink-Erzeugung/Übernahme nur aus dokumentiertem API-Weg.
-8. Keine automatische Veröffentlichung ohne bestehende zentrale Relevanz-, Creative-, Output- und Veto-Prüfungen.
-9. Provider-Pause/Veto bleibt zentrale Laufzeitsperre und darf durch ADCELL nicht umgangen werden.
+Pflicht:
+- kein Awin-Fallthrough für `provider=adcell`;
+- keine manuelle ADCELL-CSV-URL als Normalbetrieb;
+- nur explizit allowlisted `programId` und gleichzeitig aktuell `affiliateStatus=accepted` + `isActive=1`;
+- nicht allowlisted / inactive / nicht accepted / malformed / falscher Host / mehrdeutige CSV-Lage fail-closed;
+- keine neue Providerarchitektur und kein separates ADCELL-Plugin;
+- keine automatische Veröffentlichung außerhalb der bestehenden zentralen Sicherheitslogik.
 
-## AKTUELL ENTDECKTE FEHLER
+Digistore24 bleibt DEFERRED. OTTO/Awin bleibt PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED.
+
+## AUTORITATIVE API-V2-FAKTEN
+
+Evidence:
+`release/affiliate-zentrale/evidence/adcell_api_v2_auth_contract_20260911.txt`
+
+Belegt:
+- API-Basis `https://api.adcell.org/api/v2/`;
+- Token über `/user/getToken` mit `userName` + `password`;
+- weitere Requests mit Parameter `token`; kein belegter Basic-/Bearer-Vertrag für diesen v2-Weg;
+- Programme: `/affiliate/program/export`, u. a. `programId`, `programName`, `isActive`, `affiliateStatus`;
+- Promotionen: `getPromotionTypeCsv`, `getPromotionTypeBanner`, `getPromotionTypeDeeplink`;
+- CSV liefert `csvUrl`;
+- Banner liefert u. a. `promotionId`, `programId`, `clickoutLink`, `trackViewLink`, `width`, `height`, `bannerUrl`;
+- Deeplink ist programmspezifisch und liefert u. a. `promotionId`, `programId`, `clickoutLink`.
+
+Der frühere 6.72.18-Scratch bleibt verworfen und ist keine Source-Autorität.
+
+## KANONISCHE SOURCE-AUTORITÄT
+
+Branch: `affiliate-release-current`
+Source: `release/affiliate-zentrale/current/affiliate-portal-router/`
+Version: `6.72.8`
+
+AF-023 wurde am 12.09.2026 behoben und mit dem originalen unveränderten Release-Guard real geprüft. Der committed Sourcebaum bleibt aktuell noch auf dem partiellen ADCELL-Stand mit Manifest:
+`40dc3d56eba71a53edc87e425e8dc04416568365ee4b9e3d48320c3e25fff049`
+
+Protokoll-/Evidence-/Hobbyraum-Commits ändern diesen 26-Dateien-Sourcebaum nicht.
+
+## LOKALER GEPRÜFTER KANDIDAT – NOCH NICHT KANONISCH
+
+Vollständiger Nachweis:
+`release/affiliate-zentrale/evidence/adcell_api_v2_local_full_gate_20260912.txt`
+
+Exakt drei freigegebene Traits geändert:
+- `trait-ppar-automation-suite.php` – SHA256 `529c1da3cf943885094f7c7eed53c61caa3b11cf7c8eafbb766b77ddadfd4b4b` – Git blob Soll `e2dfa0734363a3c645c8e714edeb6e6ac7fa3e5e`
+- `trait-ppar-network-sync.php` – SHA256 `a7183a025ccc55f756b15867ca2598963ea987f6b6baedef7c95078001d4ed12` – Git blob Soll `1bdcc564fe82e1d486523799211c3786c859b758`
+- `trait-ppar-provider-registry.php` – SHA256 `87572d4bf2bcc2400fb3fa2cfd02050261c97555ce340f7981f1afbcd6a9e9ae` – Git blob Soll `82241b6451160d02caa92db3c053e96d5263bfb7`
+
+Lokales finales 26-Dateien-Manifest:
+`74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5`
+
+Tatsächlich ausgeführt:
+- PHP-Lint 21/21 PASS;
+- ADCELL Static Gate PASS;
+- ADCELL Runtime Positiv/Negativ PASS;
+- AF-062 Hook-Runtime PASS;
+- Banner-Regression PASS;
+- exakt 3 erlaubte Source-Dateien geändert, außerhalb 0;
+- 18/18 Awin-/OTTO-Funktionsblöcke byteidentisch zum kanonischen 6.72.8 – PASS über `AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php`;
+- originaler unveränderter `release_guard.py`: governance/source/tree/start jeweils PASS auf dem finalen lokalen Sourcebaum.
+
+Der alte `test_otto_automation.php` ist bereits gegen unverändertes 6.72.8 stale/widersprüchlich. Diese AF-057-Ausprägung ist im aktuellen `TASK.current.json` durch den 18/18-Funktionshash-Test ersetzt. OTTO-Source wurde nicht verändert.
+
+## FEHLERSTATUS
 
 Detailautorität bleibt ausschließlich:
 `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md`
 
-Dort gebunden:
-- AF-058: ADCELL-Automatisierungsbutton fällt in den vorhandenen Awin-orientierten Automationspfad;
-- AF-059: ADCELL-Automation ist im kanonischen Stand noch an eine manuell konfigurierte CSV-Export-URL gebunden statt an den bestätigten API-v2-Weg;
-- AF-060: historische falsche Auth-Annahme; durch den oben gebundenen offiziellen Auth-Beleg fachlich geschlossen, darf aber als Gegenregel nicht entfernt werden.
+Aktuell relevant:
+- AF-023: BEHOBEN für den derzeit committed partiellen Source-Stand; Source/Manifest/Governance wurden atomar gebunden und Guard real PASS.
+- AF-057: aktueller Hobbyraum-Task wurde auf den realen ADCELL-Rückbindungsweg nachgezogen; stale OTTO-Mischtest ist nicht mehr aktuelles Gate.
+- AF-058 / AF-059 / AF-062: im lokalen Kandidaten positiv/negativ repariert, aber im kanonisch committed Sourcebaum noch NICHT geschlossen. Kein kanonischer PASS bis bytegenauer Rückbindung und erneutem committed Gate.
+- AF-060: Auth-Dokumentationsblocker geschlossen; historische Gegenregel bleibt erhalten.
+
+## AKTUELLER BLOCKER
+
+Nicht der ADCELL-Code, sondern die bytegenaue Rückbindung:
+Der in dieser Sitzung verfügbare GitHub-Schreibweg kann große lokale Dateien nicht direkt als Datei übernehmen. Manuell transportierte Großinhalte wurden an der Werkzeuggrenze gekürzt/verändert; die resultierenden Git-Blob-SHAs wichen vom lokalen Soll ab. Solche Blobs wurden verworfen und nie in den aktiven Sourcebaum committed.
+
+Der aktive kanonische Sourcebaum darf deshalb nicht mit einem angenäherten oder rekonstruierten Inhalt überschrieben werden.
+
+## VERBINDLICHE NEXT ACTION
+
+GENAU EIN ARBEITSSTRANG:
+
+1. Die drei oben gebundenen lokalen Source-Dateien bytegenau in GitHub-Blobs übertragen; jede Datei nur akzeptieren, wenn der Git-Blob-SHA exakt dem Soll entspricht.
+2. Korrigierten ADCELL-Test, finales Manifest und die vollständige aktuelle Governance in denselben atomaren Tree/Commit binden.
+3. Governance gemäß bereits vorgebundener `next_state_binding` auf Sequence 7 fortschreiben; Guard-Enum und erlaubte Prefixe unverändert lassen.
+4. Commit gegen den vorherigen Head diffen und ausschließlich erwartete Dateien zulassen.
+5. `affiliate-release-current` nur per Fast-Forward auf diesen geprüften Commit setzen.
+6. Committed Stand frisch zurücklesen und dieselben ADCELL-, Awin/OTTO-Hash-, Banner- und Release-Guard-Gates erneut real ausführen.
+7. Danach Fresh-Unpack + Source/ZIP Byte-Identity; erst danach Test-Plugin.
+8. Live-PASS weiterhin erst nach wiederhergestelltem ADCELL-Zugang und echtem WordPress/MariaDB/API-E2E.
 
 ## LIVE-BLOCKER
 
-Der Nutzer kann sich aktuell nicht wieder in sein ADCELL-Konto einloggen; das versehentlich überschriebene Passwort ist nicht verfügbar und der Passwort-Zurücksetzen-Mailweg funktioniert aktuell nicht.
-
-Folge:
-- kein echter ADCELL-Live-API-Request möglich;
-- kein Live-PASS behaupten;
-- lokaler/kanonischer Source-Fix und harte Tests dürfen jetzt auf dem belegten Auth-Vertrag aufgebaut werden;
-- Live-Abnahme bleibt bis zur Wiederherstellung des Zugangs gesperrt.
-
-## NEXT ACTION
-
-**GENAU EIN ARBEITSSTRANG:**
-Aus der kanonischen Basis `6.72.8` den kleinsten ADCELL-Provider-Routing-/API-v2-Fix bauen und danach den gebundenen Positiv-/Negativ-/Gesamtworkflow ausführen.
-
-## VERWORFENER SCRATCH-STAND
-
-Ein lokaler, nicht kanonischer Scratch-Prototyp mit Versionslinie `6.72.18` wurde geprüft, aber ausdrücklich NICHT übernommen:
-- falsche Basis: aus der nicht abgenommenen 6.72.17-Testlinie statt aus kanonischem 6.72.8;
-- Authentifizierungsannahmen widersprachen sich zwischen Prototyp-Test und Implementierung;
-- daher kein Kandidat, kein Plugin-PASS, keine Release-Quelle.
-
-Aus dem Scratch dürfen nur Konzepte erneut aus der kanonischen 6.72.8-Basis entwickelt werden; keine Dateiübernahme ohne Neuprüfung.
-
-## TESTVERTRAG VOR JEGLICHER PLUGINABNAHME
-
-Pflicht auf kanonischer Basis:
-- PHP-Syntax aller betroffenen Dateien;
-- POSITIV: Token wird ausschließlich über den belegten `user/getToken`-Weg erzeugt und als Parameter `token` weitergereicht;
-- NEGATIV: kein Basic-/Bearer-Fallback und kein Request an einen unbelegten API-v2-Host;
-- POSITIV: ADCELL-Route bleibt ADCELL; accepted+active+allowlisted Programm wird verarbeitet;
-- NEGATIV: ADCELL zeigt/benutzt keine Awin-Partnerlogik;
-- NEGATIV: altes/fachfremdes accepted Programm ohne Allowlist wird blockiert;
-- NEGATIV: pending/inactive/nicht accepted wird blockiert;
-- NEGATIV: leere Allowlist blockiert vollständig;
-- NEGATIV: falsche API-/Feed-Hosts, malformed response, uneindeutige Feedlage blockieren;
-- Regression: Awin/OTTO, Provider-Pause/Veto, Creative-/Output-Sicherheitsregeln unverändert;
-- Full bound workflow;
-- Fresh-Unpack;
-- Source/ZIP byte identity;
-- erst danach Test-ZIP.
-
-Live-PASS zusätzlich erst nach wiederhergestelltem ADCELL-Zugang und echtem WordPress/MariaDB-End-to-End-Lauf.
+Der ADCELL-Kontozugang ist weiterhin blockiert, weil Passwort-Wiederherstellung/Reset-Mail nicht funktioniert. Deshalb:
+- kein echter ADCELL-Live-API-Request;
+- kein WordPress/MariaDB/API-Live-E2E;
+- kein LIVE PASS.
 
 ## NICHT ANFASSEN
 
-- Digistore24-Blocker nicht nebenbei reparieren;
-- OTTO/Awin-FeedScope-Aufgabe nicht parallel fortsetzen;
-- keine neue Providerarchitektur oder separates ADCELL-Plugin;
-- keine Pluginversionskette vor vollständigem kanonischem Test;
-- keine manuelle CSV-Import/Export-Lösung als Ersatz für die geforderte Automatik;
-- keine vom offiziellen v2-Beleg abweichende API-Authentifizierung.
-
-## ABSCHLUSS-/NACHHOLPRÜFUNG DIESES CHATS – 2026-09-11
-
-Frisch gegen den tatsächlichen Branchzustand geprüft:
-- `affiliate-release-current` stand vor diesem Abschlussblock auf `9815caaa24a6d2587da8890fb24773b2e67e76d8` und enthält einen **partiellen** kanonischen ADCELL-Sourceeingriff in `trait-ppar-network-sync.php`;
-- dort sind offizieller API-v2-Host, `/user/getToken`, Query-`token`, accepted+active-Prüfung, `programId`-Allowlist sowie gebundene Program-/Promotion-Hilfsfunktionen eingeführt;
-- `trait-ppar-automation-suite.php` ist dagegen weiterhin am alten `csv-feed`-/manuellen CSV-Normalweg gebunden; AF-058/AF-059 sind deshalb offen;
-- `trait-ppar-provider-registry.php` ruft weiterhin `test_adcell_connection()` auf; der kanonische Router verwendet dort noch `Authorization: Basic ...`. Dieser neu erkannte aktive Altpfad ist als **AF-062** in der autoritativen Fehlermatrix nachgetragen;
-- AF-060 ist nur hinsichtlich der früher fehlenden **Dokumentationswahrheit** geschlossen: der offizielle Auth-Vertrag ist belegt. Die Runtime darf trotzdem erst als korrigiert gelten, wenn AF-062 beseitigt und negativ getestet ist.
-
-Zusätzlich ist **AF-023 aktuell offen**:
-- Commit `9815caaa...` änderte kanonische Source (`trait-ppar-network-sync.php`), ohne `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` und dessen Governance-Bindung nachzuziehen;
-- `CURRENT_RELEASE.json` bindet weiterhin das vor der ADCELL-Sourceänderung gültige Manifest `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`;
-- deshalb darf kein Release-Guard-/Source-PASS behauptet werden.
-
-Tatsächlich in diesem Chat dauerhaft ausgeführt:
-- offizieller ADCELL-v2-Auth-/Endpoint-Beleg in Release-Evidence gebunden;
-- Hobbyraum-Task/Testvertrag auf den dreiteiligen ADCELL-Fix vorbereitet;
-- partieller Network-Sync-Sourcefix auf den offiziellen Token-/Allowlist-Weg committed;
-- AF-062 nach Abschlussprüfung in der Fehlerautorität ergänzt.
-
-Nicht ausgeführt bzw. nicht bestanden:
-- kein vollständiger kanonischer ADCELL-Hobbyraumlauf;
-- kein Positiv-/Negativ-Runtime-PASS des aktuellen Heads;
-- kein Awin/OTTO-/Veto-/Pause-Gesamtworkflow-PASS nach ADCELL-Änderung;
-- kein sauberer Release-Source-Guard nach `9815caaa...`;
-- kein Fresh-Unpack, keine Source/ZIP-Identity, keine Test-ZIP;
-- kein echter ADCELL-Live-API-/WordPress-/MariaDB-E2E.
-
-### VERBINDLICHE NEXT ACTION NACH DIESEM ABSCHLUSS
-
-**Zuerst AF-023 beheben, bevor irgendein weiterer Sourcefix oder Testlauf beginnt:**
-aktuellen 26-Dateien-Sourcebaum neu hashen, `CURRENT_SOURCE_SHA256.txt` und die zugehörige Governance-Bindung atomar auf denselben Iststand setzen und danach den gebundenen Release-Source-/Governance-Guard tatsächlich ausführen.
-
-Erst wenn diese Bindung wieder sauber ist:
-1. AF-062: Provider-Registry ausschließlich auf `adcell_api_v2_test_connection()` umstellen und Legacy-Basic-Auth aus dem ADCELL-v2-Runtimeweg entfernen;
-2. AF-058/AF-059 im kanonischen Automationskern fertigstellen;
-3. gebundene Positiv-/Negativ-/Gesamtworkflow-Prüfung;
-4. Fresh-Unpack/Identity;
-5. erst danach Test-Plugin; Live-PASS weiterhin erst nach echtem ADCELL-Zugang.
+- Digistore24;
+- OTTO/Awin-FeedScope-Weiterentwicklung;
+- STARTMASTER/Textmaschine;
+- 6.72.18-Scratch;
+- neue Providerarchitektur / separates ADCELL-Plugin;
+- manuelle CSV-Import-/Exportlösung als Ersatz;
+- neue Workflow-/Runner-Dateien;
+- Plugin-/ZIP-Ausgabe vor den gebundenen Gates;
+- Codex.
