@@ -29,23 +29,22 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 
 ## BISHER ERLEDIGT
 
-- Rassenstruktur migriert und Schema 1.1 aktiv;
-- 66 reale Rassendatensätze im Rassenregister geführt;
-- europäische Pony-/Kaltblut-/Regionalrassen stark erweitert;
-- irische, britische, französische, spanische, australische und nordamerikanische Primärquellen genutzt;
+- Schema 1.1 aktiv;
+- **90 reale Rassendatensätze** im Register geführt;
+- Spanien gegen amtlichen MAPA-Katalog breit abgearbeitet;
+- deutsche Pony-/Kaltblutblöcke und britische Mother-Studbook-Rassen erweitert;
+- Friese und KWPN ergänzt; Fokrichtungs-/Sektionen-Dubletten werden vermieden;
 - offizielle Verbands-, Zuchtbuch-, staatliche und wissenschaftliche Quellen bevorzugt;
-- Dubletten-/Sektionenlogik für Pottok/Pottoka, Hackney, Welsh und Traditional Irish Horse geklärt;
-- Glossar-Aktenschrank eingerichtet und mit 7 realen Begriffen startbefüllt;
-- Bürotür und zentrale Übersicht auf beide Aktenschränke aktualisiert.
+- Glossar-Aktenschrank eingerichtet und mit 7 realen Begriffen startbefüllt.
 
 ## NEXT ACTION
 
-1. Rassenrecherche fortsetzen;
-2. offene internationale Kandidaten wie Belgian Draft/Brabanter, Barb/Berber, Bosnian Mountain Horse, Altai, Andravida, Anglo-Kabarda, Basotho Pony, Azteca und American Walking Pony gegen autoritative Quellen prüfen;
-3. neue Kandidatenblöcke aus nationalen/offiziellen Rassenkatalogen ergänzen;
-4. Synonyme/Dubletten weiterhin vor Datensatzanlage klären;
-5. auftauchende relevante Fachbegriffe bei Bedarf im Glossar ergänzen;
-6. keine Vollständigkeit behaupten, bevor die Masterliste gegen mehrere autoritative Quellen geprüft ist.
+1. Rassenrecherche ohne Themenwechsel fortsetzen;
+2. nächste belastbare Länder-/Studbook-Blöcke prüfen;
+3. offene Kandidaten wie Belgian Draft/Brabanter, Barb/Berber, Bosnian Mountain Horse, Altai, Andravida, Anglo-Kabarda, Basotho Pony, Azteca, American Walking Pony, Huzule, Konik und Falabella nur nach autoritativer Statusprüfung anlegen;
+4. Synonyme, Sektionen und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
+5. relevante Fachbegriffe bei Bedarf im Glossar ergänzen;
+6. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
 ## KONTROLLPUNKTE
 
