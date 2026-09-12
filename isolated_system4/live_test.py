@@ -2,10 +2,10 @@ from pathlib import Path
 import hashlib, json, subprocess, tempfile, sys
 ROOT=Path(__file__).parent
 SNAP=Path(sys.argv[1]) if len(sys.argv)>1 else ROOT/'live_fixture'/'wordpress_snapshot.json'
-_RESEARCH_EVIDENCE='Architekturtest-Quelle: Hindernisstangen werden als gebundener Testgegenstand verwendet; der Inhalt dient ausschließlich dem isolierten Zustandsübergang und nicht als Produktionsquelle.'
-RESEARCH=json.dumps({'contract':'SYSTEM4_RESEARCH_EVIDENCE_V1','sources':[{'source_id':'src-system4-live-architecture','source_title':'System 4 Architekturtest – lokale Testquelle','source_url':'https://example.org/system4-architecture-test','retrieved_at':'2026-09-13T00:00:00Z','snapshot_sha256':hashlib.sha256(_RESEARCH_EVIDENCE.encode()).hexdigest(),'evidence':_RESEARCH_EVIDENCE}]},ensure_ascii=False)
 _FACT_EVIDENCE_1='Im Architekturtest müssen Titel, Zielkeyword, Kategorie, Beitragsart und Plan-Slot aus dem gebundenen Snapshot erhalten bleiben.'
 _FACT_EVIDENCE_2='Der Architekturtest darf den Publish-Status nicht freigeben; die lokale Testausgabe bleibt auf WordPress-Status draft beschränkt.'
+_RESEARCH_EVIDENCE=_FACT_EVIDENCE_1+'\n'+_FACT_EVIDENCE_2+'\nArchitekturtest-Quelle nur für den isolierten Zustandsübergang, nicht als Produktionsquelle.'
+RESEARCH=json.dumps({'contract':'SYSTEM4_RESEARCH_EVIDENCE_V1','sources':[{'source_id':'src-system4-live-architecture','source_title':'System 4 Architekturtest – lokale Testquelle','source_url':'https://example.org/system4-architecture-test','retrieved_at':'2026-09-13T00:00:00Z','snapshot_sha256':hashlib.sha256(_RESEARCH_EVIDENCE.encode()).hexdigest(),'evidence':_RESEARCH_EVIDENCE}]},ensure_ascii=False)
 FACTS=json.dumps({'contract':'SYSTEM4_FACTS_EVIDENCE_V1','claims':[{'fact_id':'fact-system4-live-binding','source_id':'src-system4-live-architecture','statement':'Die gebundenen Metadaten bleiben im Architekturtest unverändert.','evidence_text':_FACT_EVIDENCE_1,'evidence_text_sha256':hashlib.sha256(_FACT_EVIDENCE_1.encode()).hexdigest()},{'fact_id':'fact-system4-live-publish','source_id':'src-system4-live-architecture','statement':'Der Architekturtest erteilt niemals eine Veröffentlichungsfreigabe.','evidence_text':_FACT_EVIDENCE_2,'evidence_text_sha256':hashlib.sha256(_FACT_EVIDENCE_2.encode()).hexdigest()}]},ensure_ascii=False)
 BAD='# Falscher Titel\n\nKurzer Testtext.'
 GOOD='''# Das Wichtigste über Hindernisstangen für Pferde
