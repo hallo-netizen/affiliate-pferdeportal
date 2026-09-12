@@ -35,7 +35,7 @@ Campus-Basis:
 `hobbyroom/project-memory-campus-v1-20260905`
 
 Isolierter Glossar-Hobbyraum-Branch:
-`hobbyroom/glossar-office-20260912-v2`
+`hobbyroom/glossar-v1-current-20260912`
 
 `main` bleibt unangetastet.
 
