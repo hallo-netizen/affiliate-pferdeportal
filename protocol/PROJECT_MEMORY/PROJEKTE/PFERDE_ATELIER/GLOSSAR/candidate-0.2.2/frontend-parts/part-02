@@ -1,0 +1,109 @@
+anitize_text_field(wp_unslash($_POST['q']))) : '';
+        if ($query === '') {
+            wp_send_json_success(['html' => '', 'count' => 0]);
+        }
+        $posts = self::search_posts($query, 12);
+        $headline = 'Suchergebnisse für „' . esc_html($query) . '“';
+        $html = '<section class="uge-section uge-ajax-results"><header class="uge-section-head"><h2>' . $headline . '</h2></header>' . self::render_cards($posts) . (!$posts ? '<p>Keine passenden Glossarbegriffe gefunden.</p>' : '') . '</section>';
+        wp_send_json_success(['html' => $html, 'count' => count($posts)]);
+    }
+
+    private static function search_posts(string $query, int $limit): array {
+        $common = [
+            'post_type' => UGE_Core::POST_TYPE,
+            'post_status' => 'publish',
+            'posts_per_page' => $limit,
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'no_found_rows' => true,
+        ];
+        $posts = get_posts(array_merge($common, ['s' => $query]));
+        $meta = get_posts(array_merge($common, [
+            'meta_query' => [
+                'relation' => 'OR',
+                ['key' => UGE_Core::meta_key('short_definition'), 'value' => $query, 'compare' => 'LIKE'],
+                ['key' => UGE_Core::meta_key('synonyms'), 'value' => $query, 'compare' => 'LIKE'],
+            ],
+        ]));
+        $by_id = [];
+        foreach (array_merge($posts, $meta) as $post) {
+            if ($post instanceof WP_Post) { $by_id[(int)$post->ID] = $post; }
+        }
+        $posts = array_values($by_id);
+        usort($posts, static fn($a, $b) => strnatcasecmp((string)$a->post_title, (string)$b->post_title));
+        return array_slice($posts, 0, $limit);
+    }
+
+    private static function render_hero(string $page_content): string {
+        $cfg = UGE_Config::get();
+        $page_id = (int)$cfg['main_page_id'];
+        $title = $page_id > 0 ? get_the_title($page_id) : $cfg['label'];
+        $excerpt = $page_id > 0 ? trim((string)get_post_field('post_excerpt', $page_id)) : '';
+        if ($excerpt === '') {
+            $plain = trim(wp_strip_all_tags(strip_shortcodes($page_content)));
+            $excerpt = $plain !== '' ? wp_trim_words($plain, 28, '…') : 'Begriffe schnell finden, fachlich einordnen und verständlich nachschlagen.';
+        }
+        $image = $page_id > 0 ? get_the_post_thumbnail_url($page_id, 'full') : '';
+        if ($image === '') { $image = self::hero_fallback_url(); }
+        $image_html = $image !== '' ? sprintf('<img class="uge-hero-image" src="%s" alt="%s" fetchpriority="high">', esc_url($image), esc_attr($title)) : '';
+        return '<section class="uge-hero' . ($image === '' ? ' uge-hero-no-image' : '') . '">' . $image_html . '<div class="uge-hero-copy"><span>' . esc_html($cfg['label']) . '</span><h1>' . esc_html($title) . '</h1><p>' . esc_html($excerpt) . '</p></div><i aria-hidden="true"></i></section>';
+    }
+
+    private static function hero_fallback_url(): string {
+        $cfg = UGE_Config::get();
+        $profile = (string)($cfg['design_profile'] ?? 'auto');
+        if ($profile === 'auto' && class_exists('Pferde_Template_Kit')) {
+            $profile = method_exists('Pferde_Template_Kit', 'design_profile')
+                ? (string)Pferde_Template_Kit::design_profile()
+                : 'pferde_atelier';
+        }
+        $url = '';
+        if ($profile === 'pferde_atelier' && defined('WP_PLUGIN_DIR')) {
+            $relative = 'affiliate-portal-template-kit/assets/startseite-hero-frau-pferd-clean-v150173.webp';
+            $file = trailingslashit(WP_PLUGIN_DIR) . $relative;
+            if (is_readable($file)) {
+                $url = content_url('/plugins/' . $relative);
+            }
+        }
+        return (string)apply_filters('uge_hero_image_url', $url, (int)($cfg['main_page_id'] ?? 0), $profile);
+    }
+
+    private static function render_home_banner(): string {
+        $page_id = (int)(UGE_Config::get()['main_page_id'] ?? 0);
+        ob_start();
+        do_action('uge_ad_slot', 'home_banner', $page_id);
+        $content = trim((string)ob_get_clean());
+        return '<div class="uge-home-banner-slot" data-uge-ad-slot="home_banner">' . $content . '</div>';
+    }
+
+    private static function render_filtered_results(string $query, string $letter): string {
+        $cfg = UGE_Config::get();
+        $args = [
+            'post_type' => UGE_Core::POST_TYPE,
+            'post_status' => 'publish',
+            'posts_per_page' => (int)$cfg['category_per_page'],
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'no_found_rows' => true,
+        ];
+        if ($query !== '') {
+            $posts = self::search_posts($query, (int)$cfg['category_per_page']);
+            $headline = 'Suchergebnisse für „' . esc_html($query) . '“';
+            return '<section class="uge-section"><header class="uge-section-head"><h2>' . $headline . '</h2></header>' . self::render_cards($posts) . (!$posts ? '<p>Keine passenden Glossarbegriffe gefunden.</p>' : '') . '</section>';
+        }
+        if ($letter !== '' && preg_match('/^[A-Z]$/', $letter)) {
+            self::$title_initial = $letter;
+            $args['suppress_filters'] = false;
+            add_filter('posts_where', [__CLASS__, 'posts_where_initial'], 20, 2);
+        }
+        $posts = get_posts($args);
+        if (self::$title_initial !== '') {
+            remove_filter('posts_where', [__CLASS__, 'posts_where_initial'], 20);
+            self::$title_initial = '';
+        }
+        $headline = $query !== '' ? 'Suchergebnisse für „' . esc_html($query) . '“' : 'Begriffe mit ' . esc_html($letter);
+        return '<section class="uge-section"><header class="uge-section-head"><h2>' . $headline . '</h2></header>' . self::render_cards($posts) . (!$posts ? '<p>Keine passenden Glossarbegriffe gefunden.</p>' : '') . '</section>';
+    }
+
+    public static function posts_where_initial(string $where, WP_Query $query): string {
+        if (self::$title_initia
