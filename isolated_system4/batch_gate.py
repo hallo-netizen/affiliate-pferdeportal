@@ -3,6 +3,7 @@ import hashlib,json,re,sys
 from pathlib import Path
 from typing import Any,Mapping,Sequence
 import content_guard
+import design_guard
 STATE_CONTRACT='SYSTEM4_CANONICAL_ARTICLE_STATE_V1'; BATCH_EVIDENCE_CONTRACT='SYSTEM4_FULL_PASS_BATCH_EVIDENCE_V1'; ALLOWED_ITEM_KEYS={'title','target_keyword','category','article_type','plan_slot'}; SHA_RE=re.compile(r'^[0-9a-f]{64}$')
 class BatchGateError(RuntimeError): pass
 def canonical(value:Any)->bytes: return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
@@ -77,7 +78,9 @@ def validate_state(state,expected_article,source_snapshot_sha256,batch_sha256):
     if stable_hash({'fact_pack':context['fact_pack'],'production_plan_item':context['production_plan_item']})!=context.get('sha256'): raise BatchGateError('PRODUCTION_CONTEXT_HASH_INVALID')
     try: content_guard.validate_single_article(draft,context['fact_pack'])
     except content_guard.ContentGuardError as exc: raise BatchGateError('CONTENT_GUARD_NOT_PASS:'+str(exc)) from exc
-    return {'plan_slot':expected_article['plan_slot'],'draft':draft,'draft_sha256':draft_sha,'state_sha256':stable_hash(dict(state)),'production_context_sha256':context['sha256'],'check_evidence_sha256':stable_hash(checks),'revision':int(state.get('revision') or 0),'quality_summary':quality_summary}
+    try: design_summary=design_guard.validate_design_neutrality(draft,expected_article['article_type'])
+    except design_guard.DesignGuardError as exc: raise BatchGateError('DESIGN_GUARD_NOT_PASS:'+str(exc)) from exc
+    return {'plan_slot':expected_article['plan_slot'],'draft':draft,'draft_sha256':draft_sha,'state_sha256':stable_hash(dict(state)),'production_context_sha256':context['sha256'],'check_evidence_sha256':stable_hash(checks),'revision':int(state.get('revision') or 0),'quality_summary':quality_summary,'design_summary':design_summary}
 def collect_batch(snapshot_path:Path,state_paths:Sequence[Path],out_dir:Path):
     source_snapshot_sha,batch_sha,items=load_snapshot(Path(snapshot_path))
     if len(state_paths)!=len(items): raise BatchGateError('STATE_COUNT_MISMATCH')
@@ -93,13 +96,13 @@ def collect_batch(snapshot_path:Path,state_paths:Sequence[Path],out_dir:Path):
     for item in items:
         validated=validate_state(states_by_slot[item['plan_slot']],item,source_snapshot_sha,batch_sha); name='ARTICLE_'+item['plan_slot']+'.md'; article_path=out_dir/name; article_path.write_bytes(validated['draft'].encode('utf-8'))
         if file_sha256(article_path)!=validated['draft_sha256']: raise BatchGateError('ARTICLE_OUTPUT_BYTES_CHANGED')
-        article_rows.append({'name':name,'plan_slot':item['plan_slot'],'sha256':validated['draft_sha256'],'byte_length':article_path.stat().st_size,'content_utf8':validated['draft'],'revision':validated['revision'],'quality':validated['quality_summary']})
+        article_rows.append({'name':name,'plan_slot':item['plan_slot'],'sha256':validated['draft_sha256'],'byte_length':article_path.stat().st_size,'content_utf8':validated['draft'],'revision':validated['revision'],'quality':validated['quality_summary'],'design':validated['design_summary']})
         state_rows.append({'plan_slot':item['plan_slot'],'state_sha256':validated['state_sha256'],'production_context_sha256':validated['production_context_sha256'],'check_evidence_sha256':validated['check_evidence_sha256']})
     try: diversity=content_guard.validate_batch_distinctness([row['content_utf8'] for row in article_rows])
     except content_guard.ContentGuardError as exc: raise BatchGateError(str(exc)) from exc
     actual_article_names=sorted(path.name for path in out_dir.glob('ARTICLE_*.md') if path.is_file()); expected_article_names=sorted(row['name'] for row in article_rows)
     if actual_article_names!=expected_article_names: raise BatchGateError('ARTICLE_OUTPUT_SET_MISMATCH')
-    evidence={'contract':BATCH_EVIDENCE_CONTRACT,'status':'FULL_PASS_BATCH_COLLECTED','source_snapshot_sha256':source_snapshot_sha,'batch_sha256':batch_sha,'article_count':len(article_rows),'articles':article_rows,'state_evidence':state_rows,'batch_distinctness':diversity,'publish_allowed':False,'content_mutation_performed':False,'next_required':'SIGNED_WORKFLOW_RELEASE'}
+    evidence={'contract':BATCH_EVIDENCE_CONTRACT,'status':'FULL_PASS_BATCH_COLLECTED','source_snapshot_sha256':source_snapshot_sha,'batch_sha256':batch_sha,'article_count':len(article_rows),'articles':article_rows,'state_evidence':state_rows,'batch_distinctness':diversity,'publish_allowed':False,'content_mutation_performed':False,'design_mutation_performed':False,'next_required':'SIGNED_WORKFLOW_RELEASE'}
     evidence['batch_evidence_sha256']=stable_hash(evidence); evidence_path=out_dir/'system4_batch_evidence.json'; evidence_path.write_text(json.dumps(evidence,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
     return {'status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','batch_sha256':batch_sha,'article_count':len(article_rows),'batch_evidence_path':str(evidence_path),'batch_evidence_sha256':file_sha256(evidence_path),'next_required':'SIGNED_WORKFLOW_RELEASE','publish_allowed':False}
 
