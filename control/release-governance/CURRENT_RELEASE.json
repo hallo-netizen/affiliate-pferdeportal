@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 55,
+  "generation": 56,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,7 +58,7 @@
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md",
     "current_focus_reason": "EXPLICIT_USER_DECISION_20260911",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "ACTIVE_CANONICAL_67219_MERGE_BOUND_GATES_PENDING_LIVE_BLOCKED",
+    "adcell_work_status": "CANONICAL_67219_GATES_FRESH_UNPACK_IDENTITY_PASS_LIVE_BLOCKED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -131,11 +131,11 @@
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "ADCELL_CURRENT; DIGISTORE24_DEFERRED; OTTO_PAUSED; AUTH_PROVEN; PLUGINBUERO_67217_PLUS_ADCELL_MERGED_67219_BOUND; COMMITTED_GATES_PENDING; LIVE_E2E_BLOCKED",
+    "bound_user_scope_action": "ADCELL_CURRENT; DIGISTORE24_DEFERRED; OTTO_PAUSED; 6.72.19_CANONICAL_GATES_FRESH_UNPACK_IDENTITY_PASS; LIVE_API_WP_MARIADB_E2E_BLOCKED_BY_ADCELL_ACCOUNT_ACCESS",
     "completion_condition": "ADCELL_AUTH_CONTRACT_PROVEN_AND_CANONICAL_POS_NEG_FULL_WORKFLOW_FRESH_UNPACK_IDENTITY_PASS_AND_REAL_ADCELL_WORDPRESS_MARIADB_E2E_PASS",
     "after_completion_action": "RETURN_TO_EXPLICIT_USER_NEXT_SCOPE_NOT_FINALIZE_RELEASE_WHILE_OTHER_ACTIVE_TARGETS_REMAIN_OPEN",
     "no_optional_detours": true,
-    "sequence": 8,
+    "sequence": 9,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -144,7 +144,7 @@
       "protocol/AFFILIATE_RELEASE_"
     ],
     "next_state_binding": {
-      "sequence": 9,
+      "sequence": 10,
       "state": "RUNNING_BOUND_RELEASE_GATES",
       "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
       "authorized_change_prefixes": [
@@ -285,14 +285,14 @@
       "conclusion": "No separate Pferde/Tierbedarf/Schuhe feed is present in the supplied current Awin feed list."
     },
     "adcell_api_v2_automation": {
-      "status": "CANONICAL_67219_MERGE_BOUND_GATES_PENDING_LIVE_BLOCKED",
+      "status": "CANONICAL_67219_GATES_FRESH_UNPACK_IDENTITY_PASS_LIVE_BLOCKED",
       "checked_at": "2026-09-12",
       "scope_ref": "protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md",
-      "evidence_ref": "release/affiliate-zentrale/evidence/adcell_api_v2_committed_full_gate_20260912.txt",
+      "evidence_ref": "release/affiliate-zentrale/evidence/adcell_67219_canonical_full_gate_20260912.txt",
       "auth_evidence_ref": "release/affiliate-zentrale/evidence/adcell_api_v2_auth_contract_20260911.txt",
-      "source_commit": "99bcc5796226254f7e190f40397210fca96e7d0b",
-      "source_manifest_sha256": "74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5",
-      "committed_gate": "ADCELL_POS_NEG_AWIN_OTTO_18_OF_18_BANNER_PHP_21_OF_21_RELEASE_GUARD_FRESH_UNPACK_IDENTITY_PASS",
+      "source_commit": "df3e97119fe44ac864701d8de6b946c7c6c3416c",
+      "source_manifest_sha256": "694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b",
+      "committed_gate": "CANONICAL_67219_FULL_GATE_PASS_RUN_34690118524_JOB_103543774405",
       "confirmed_program_path": "Affiliate/Program/export",
       "confirmed_promotion_paths": [
         "getPromotionTypeCsv",
@@ -305,19 +305,19 @@
       "auth_status": "PROVEN_OFFICIAL_TOKEN_GETTOKEN_USERNAME_PASSWORD_QUERY_TOKEN",
       "live_account_status": "BLOCKED_PASSWORD_RESET_EMAIL_NOT_WORKING",
       "scratch_67218": "DISCARDED_WRONG_BASE_AND_CONTRADICTORY_UNPROVEN_AUTH_ASSUMPTIONS",
-      "plugin_acceptance": "FORBIDDEN_UNTIL_67219_COMMITTED_GATES_FRESH_UNPACK_IDENTITY_PASS",
+      "plugin_acceptance": "CANONICAL_LOCAL_ACCEPTANCE_PASS_LIVE_ACCEPTANCE_FORBIDDEN_UNTIL_REAL_ADCELL_API_AND_WORDPRESS_MARIADB_E2E",
       "live_pass": "FORBIDDEN_UNTIL_REAL_ADCELL_API_AND_WORDPRESS_MARIADB_E2E",
       "version_67219_manifest_sha256": "694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b",
-      "version_67219_status": "CANONICAL_BOUND_GATES_PENDING"
+      "version_67219_status": "CANONICAL_GATES_FRESH_UNPACK_IDENTITY_PASS_LIVE_BLOCKED"
     },
     "current_protocol_ref": "protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md",
     "hobbyroom_current": {
-      "status": "ACTIVE",
+      "status": "BLOCKED",
       "task_ref": "AFFILIATE_HOBBYRAUM/TASK.current.json",
-      "task_id": "adcell-67219-merged-canonical-gates-20260912",
-      "next_action": "Run the bound committed gates on canonical 6.72.19; then Fresh-Unpack/source identity. Live PASS remains blocked until real ADCELL API + WordPress/MariaDB E2E.",
+      "task_id": "adcell-live-api-wordpress-e2e-20260912",
+      "next_action": "Wait for restored ADCELL account access; then run exactly the real ADCELL API v2 and WordPress/MariaDB E2E gates. No source changes before that.",
       "branch": "affiliate-release-current",
-      "return_path": "Canonical 6.72.19 only; no provider side work. Live PASS only after real ADCELL API + WordPress/MariaDB E2E.",
+      "return_path": "Real ADCELL API v2 -> real WordPress/MariaDB E2E -> only then Live-PASS. OTTO stays paused; Digistore24 deferred.",
       "no_parallel_workstream": true
     }
   },
@@ -665,7 +665,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "ADCELL_API_V2_67219_MERGED_CANONICAL_GATES_AND_LIVE_E2E",
+    "current_milestone": "ADCELL_REAL_LIVE_API_AND_WORDPRESS_MARIADB_E2E_BLOCKED_BY_ACCOUNT_ACCESS",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",

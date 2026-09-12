@@ -124,3 +124,14 @@ Der ADCELL-Kontozugang ist weiterhin blockiert, weil Passwort-Wiederherstellung/
 - neue Workflow-/Runner-Dateien;
 - Fachlogik beim 6.72.9-Versionsbind;
 - Codex.
+
+
+## CANONICAL 6.72.19 CLOSEOUT – 2026-09-12
+
+- Pluginbüro-Stand 6.72.17 und der geprüfte ADCELL-API-v2-Fix wurden konfliktfrei als 6.72.19 zusammengeführt und kanonisch gebunden.
+- Source-Manifest SHA-256: `694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b`.
+- Kanonischer Full-Gate-Lauf `34690118524`, Job `103543774405`: PASS.
+- PASS: ADCELL static, hash-identischer Runtime-Positiv/Negativ-Nachweis, Awin/OTTO 18/18, Banner Positiv/Negativ, PHP 21/21, Release-Guard governance/source/tree/start, Fresh-Unpack + Source-Identity 26/26, Version 6.72.19.
+- Evidence: `release/affiliate-zentrale/evidence/adcell_67219_canonical_full_gate_20260912.txt`.
+- **Kein Live-PASS:** echter ADCELL-API-Lauf und echter WordPress/MariaDB-E2E bleiben blockiert, solange der ADCELL-Accountzugang/Passwort-Reset nicht funktioniert.
+- Bis dahin: keine weitere Sourcearbeit; OTTO/Awin bleibt pausiert, Digistore24 deferred.
