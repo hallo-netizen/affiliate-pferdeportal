@@ -13,7 +13,7 @@ Scope: System 4 implementation only under `isolated_system4/**`.
   3. first full-rule article test exactly per `FULL_RULE_ARTICLE_TASK.md`;
   4. full real 7/7 batch exactly per `FULL_RULE_BATCH_TASK.md`.
 - For tasks 3 and 4 only, repository files outside `isolated_system4/**` may be read solely to identify current authoritative rule/specification content and pure tool/checker inputs. They may not be modified or used as old orchestration/runtime dependencies.
-- For generated articles, the writer may create research/facts/draft only in the temporary workspace and may repair only the same draft when the controller returns a repairable FAIL.
+- For generated articles, the writer may create research/facts/draft only in the temporary workspace and may repair only the same canonical article body via `controller.py repair` when the controller returns `REPAIR_REQUIRED`.
 - The writer may not alter immutable metadata, choose a free route, enable publish, bypass a required checker, or create a per-article FULL production release.
 - Task 4 must keep all seven article states alive within one task until the System-4 batch gate has accepted the complete set.
 
@@ -22,7 +22,10 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - LanguageTool 6.8 and PPM 6.7.9 must be invoked only through that bound `fullcheck` path via `production_checks.run_all`.
 - Do NOT run LanguageTool or PPM directly before/after `fullcheck`.
 - Do NOT create or execute custom Python/shell orchestration wrappers such as `/tmp/system4_run.py` for checker sequencing.
-- A repairable LanguageTool/PPM/content finding is NOT a terminal process error. The controller must return `REPAIR_REQUIRED`; repair only the same draft, resubmit it, and rerun `fullcheck`.
+- A repairable LanguageTool/PPM/content finding is NOT a terminal process error. The controller must return `REPAIR_REQUIRED`; repair only the same canonical article via `controller.py repair`, then rerun `fullcheck`.
+- `controller.py draft` is forbidden once a state is in `REPAIR_REQUIRED`; only `controller.py repair` may accept revised body bytes for that same bound article.
+- The repair transition must not mutate the bound production context, metadata, research or facts. Draft-dependent LT/PPM evidence is regenerated/rebound only inside the next `fullcheck`.
+- The internal hash-bound persistent LanguageTool 6.8 worker is permitted solely as an implementation detail of `production_checks.run_all`; it must use the exact pinned LT 6.8 distribution and fail closed/fallback to the exact pinned CLI. It is not a second checker/orchestrator and may not disable or bypass any rule.
 - `raise`, `exit`, task abort or batch restart for a repairable finding is forbidden.
 - Only a genuine `FULL_CHECK_HARD_BLOCK`, tool/runtime failure, integrity failure or other non-repairable controller/batch-gate blocker may terminate the run.
 
