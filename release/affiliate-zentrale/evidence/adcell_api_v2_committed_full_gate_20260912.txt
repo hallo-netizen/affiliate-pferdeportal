@@ -40,6 +40,7 @@ AF-058 – resolved in canonical source and committed positive/negative gate
 AF-059 – resolved in canonical source and committed positive/negative gate
 AF-060 – auth-documentation blocker resolved by official ADCELL API-v2 documentation evidence
 AF-062 – resolved in canonical source; ADCELL-v2 connection path no longer uses Legacy Basic Auth
+AF-063 – detected 2026-09-12: the previously written local 6.72.9 manifest string `83c75bf1359...` was a transcription error and is not authoritative.
 
 LOCAL VERSION-BOUNDARY PREPARATION – NOT CANONICAL
 A version-only 6.72.9 candidate was prepared from the committed 6.72.8 ADCELL source.
@@ -50,8 +51,16 @@ Exactly three version markers changed:
 
 No functional ADCELL/Awin/OTTO source logic was changed for this version boundary.
 
-LOCAL 6.72.9 26-FILE MANIFEST SHA256
-83c75bf1359aa989313416c9f9c7d1d4193bfe44a15bef08a83ac45580911bc8
+EXACTLY REVERIFIED LOCAL 6.72.9 26-FILE MANIFEST SHA256
+83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e
+
+AF-063 COUNTERCHECK ACTUALLY EXECUTED
+PASS – saved manifest file SHA256 is exactly 83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e
+PASS – all 26 manifest entries match the actual local 6.72.9 source tree
+PASS – manifest regenerated in the authoritative file order is byte-identical to the saved manifest file
+PASS – Fresh-Unpack contains the same 26 file names
+PASS – Fresh-Unpack byte identity 26/26
+PASS – internal gate ZIP SHA256 03271c48076ef142b12a6fcdb0e03433daeeaf51cde2b5010f0a904e7dea6cd4
 
 LOCAL 6.72.9 GATES ACTUALLY EXECUTED
 PASS – version diff exactly three marker lines
@@ -72,7 +81,8 @@ Real ADCELL account access is still unavailable because the password/reset-mail 
 Therefore no real ADCELL API request and no real WordPress/MariaDB/API E2E PASS has been executed.
 
 NEXT ACTION
-1. Canonicalize the already locally proven version-only 6.72.9 boundary only through a byte-exact file-transfer path.
-2. Rebind the new 26-file manifest/governance and rerun the same bound gates on committed bytes.
-3. Only after restored ADCELL account access run the real ADCELL API + WordPress/MariaDB E2E.
-4. No live/final PASS before step 3.
+1. Use only the reverified 6.72.9 manifest SHA256 83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e.
+2. Canonicalize the already locally proven version-only 6.72.9 boundary only through a byte-exact file-transfer path.
+3. Rebind the new 26-file manifest/governance and rerun the same bound gates on committed bytes.
+4. Only after restored ADCELL account access run the real ADCELL API + WordPress/MariaDB E2E.
+5. No live/final PASS before step 4.
