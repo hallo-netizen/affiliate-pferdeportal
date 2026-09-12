@@ -1,0 +1,175 @@
+name: TEMP Affiliate ADCELL closeout protocol sync
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-adcell-closeout-protocol.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  closeout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Sync authoritative closeout state and verify guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA="$(git rev-parse HEAD^)"
+          git worktree add /tmp/affiliate-closeout-base "$BASE_SHA"
+          python3 - <<'PY'
+          import json, pathlib, re
+
+          root = pathlib.Path('.')
+
+          # 1) Error authority: AF-067 resolved; AF-066 remains active.
+          p = root / 'AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md'
+          s = p.read_text(encoding='utf-8')
+          old = '- AF-067: AKTIV – fehlerhaftes lokales ZIP gesperrt; kanonischer 26/26-Neubau noch auszuführen.'
+          new = '- AF-067: BEHOBEN – kanonischer 6.72.19-Artefaktneubau direkt aus `affiliate-release-current` ausgeführt; Run `34692865477` / Job `103551115066` PASS; Manifest/Fresh-Unpack 26/26, PHP 21/21 und Versionsmarker PASS; Test-ZIP SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`. Das falsche Vor-Bind-ZIP bleibt gesperrt.'
+          if old not in s:
+              raise SystemExit('AF067_STATUS_ANCHOR_MISSING')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+
+          # 2) Current task: first live gate is read-only API preflight using saved WP credentials.
+          p = root / 'AFFILIATE_HOBBYRAUM/TASK.current.json'
+          d = json.loads(p.read_text(encoding='utf-8'))
+          d['task_id'] = 'adcell-readonly-live-api-preflight-20260912'
+          d['goal'] = ('Affiliate-Zentrale 6.72.19 ist kanonisch gebunden; Full-Gates und der neu aus der kanonischen Source gebaute '
+                       '26/26-Testartefakt-Nachweis sind PASS. Keine Sourcearbeit. Aktuell ist ausschließlich AF-066 offen: im echten '
+                       'WordPress zuerst den read-only ADCELL-Test `Token + Programme prüfen` mit den bereits gespeicherten API-Zugangsdaten '
+                       'ausführen. Erst dessen Ergebnis entscheidet, ob Credential-Recovery nötig ist oder direkt programId-Allowlist + E2E folgen.')
+          d['inputs'] = []
+          d['writable'] = []
+          d['command'] = 'NO_LOCAL_COMMAND_REAL_WORDPRESS_RUNTIME_REQUIRED'
+          d['tests'] = [
+              'Canonical 6.72.19 installed/read back in the real WordPress runtime',
+              'Read-only ADCELL Token + Programme prüfen using already stored API credentials',
+              'If API preflight passes: choose an existing accepted+active programId and explicitly allowlist it',
+              'Then real ADCELL promotion/API flow and WordPress/MariaDB import-persistence-readback-output E2E',
+              'Negative paths remain fail-closed: non-allowlisted / inactive / non-accepted; no Awin fallthrough; no manual CSV normal path'
+          ]
+          d['status'] = 'BLOCKED'
+          d['blocker'] = ('No connected real WordPress runtime is available in this chat, so AF-066 read-only API preflight has not been executed. '
+                          'ADCELL web-login/password-reset is not yet proven to be the blocker.')
+          d['next_action'] = ('On the real WordPress site, use canonical 6.72.19 and run the read-only ADCELL `Token + Programme prüfen` test with '
+                              'the already stored API credentials. If token/programmes pass, explicitly allowlist one existing accepted+active programId '
+                              'and continue the real E2E. Only missing/invalid saved API credentials make credential recovery the next blocker.')
+          p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # 3) Scope: remove stale web-login blocker and bind AF-066/067 truth.
+          p = root / 'protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md'
+          s = p.read_text(encoding='utf-8')
+          s = s.replace(
+              'STATUS: AKTIV / 6.72.19 KANONISCH GEBUNDEN + FULL GATE + FRESH-UNPACK/IDENTITY PASS / NUR LIVE-E2E BLOCKED',
+              'STATUS: AKTIV / 6.72.19 KANONISCH + FULL GATE + KANONISCHER ARTEFAKT-26/26-PASS / AF-066 READ-ONLY LIVE-API-PREFLIGHT OFFEN',
+              1
+          )
+          anchor = '- AF-065 Governance-Vertragswert `new_version_policy`.\n'
+          if anchor not in s:
+              raise SystemExit('SCOPE_AF065_ANCHOR_MISSING')
+          s = s.replace(anchor, anchor + '- AF-067 falsches Vor-Bind-ZIP; kanonischer Artefaktneubau Run `34692865477` PASS.\n\nAktiv:\n- AF-066 read-only Live-API-Preflight im echten WordPress noch nicht ausgeführt.\n', 1)
+          replacement = '''## AKTUELLER TASK
+
+Autorität:
+`AFFILIATE_HOBBYRAUM/TASK.current.json`
+
+Status: `BLOCKED`
+
+Keine weitere Sourcearbeit. AF-067 ist geschlossen: aus der kanonischen 6.72.19-Source wurde ein neues Testartefakt gebaut und 26/26 gegengeprüft.
+
+Artefakt-Nachweis:
+- Run `34692865477` / Job `103551115066` → PASS;
+- Test-ZIP SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`;
+- GitHub-Actions-Artefakt-ID `10297556084` (temporärer Übergabe-/Testbeleg, keine finale Releasefreigabe).
+
+PLUGIN-KONTROLLREF: `PU-20260912-001` im Campus-PLUGINS-Updateprotokoll. Fach-/Release-/LIVE-Wahrheit bleibt hier.
+
+## LIVE-PREFLIGHT / VERBINDLICHE NEXT ACTION
+
+AF-066 korrigiert den früher zu früh angenommenen Weblogin-Blocker.
+
+Nächster echter Gate:
+1. im realen WordPress den kanonischen 6.72.19-Stand verwenden/readbacken;
+2. dort read-only **`Token + Programme prüfen`** mit den bereits gespeicherten ADCELL-API-Zugangsdaten ausführen;
+3. bei PASS einen vorhandenen `accepted` + aktiven `programId` explizit allowlisten und direkt den realen ADCELL-/WordPress-/MariaDB-E2E fortsetzen;
+4. nur wenn gespeicherte API-Zugangsdaten fehlen/ungültig sind, wird Credential-Recovery zum echten Blocker.
+
+Bis zum realen Ergebnis:
+- kein Live-PASS;
+- `release_allowed=false`;
+- Zielvertrag bleibt AKTIV;
+- keine weitere ADCELL-Sourceänderung;
+- keine neue Versionskette.
+
+'''
+          ns, n = re.subn(r'## AKTUELLER TASK\n.*?(?=## NICHT ANFASSEN)', replacement, s, flags=re.S)
+          if n != 1:
+              raise SystemExit(f'SCOPE_TASK_BLOCK_REPLACE_COUNT={n}')
+          p.write_text(ns, encoding='utf-8')
+
+          # 4) Governance: transition exactly to pre-bound sequence 10; immutable guard enums untouched.
+          p = root / 'control/release-governance/CURRENT_RELEASE.json'
+          g = json.loads(p.read_text(encoding='utf-8'))
+          if g['execution_state']['sequence'] != 9 or g['execution_state']['next_state_binding']['sequence'] != 10:
+              raise SystemExit('GOVERNANCE_PREBOUND_SEQUENCE_UNEXPECTED')
+          g['generation'] = max(int(g.get('generation', 0)) + 1, 57)
+          g['user_scope_lock']['adcell_work_status'] = 'CANONICAL_67219_GATES_AND_CANONICAL_ARTIFACT_26_OF_26_PASS_AF066_LIVE_API_PREFLIGHT_PENDING'
+          es = g['execution_state']
+          bound = es['next_state_binding']
+          es['sequence'] = bound['sequence']
+          es['state'] = bound['state']
+          es['authorized_next_action'] = bound['authorized_next_action']
+          es['authorized_change_prefixes'] = bound['authorized_change_prefixes']
+          es['bound_user_scope_action'] = ('ADCELL_CURRENT; DIGISTORE24_DEFERRED; OTTO_PAUSED; '
+                                            '6.72.19_CANONICAL_GATES_AND_CANONICAL_ARTIFACT_26_OF_26_PASS; '
+                                            'AF066_READ_ONLY_LIVE_API_PREFLIGHT_PENDING; REAL_WORDPRESS_MARIADB_E2E_PENDING')
+          es['next_state_binding'] = {
+              'sequence': es['sequence'] + 1,
+              'state': 'RUNNING_BOUND_RELEASE_GATES',
+              'authorized_next_action': 'RUN_BOUND_RELEASE_GATES',
+              'authorized_change_prefixes': list(es['authorized_change_prefixes'])
+          }
+          ac = es['adcell_api_v2_automation']
+          ac['status'] = 'CANONICAL_67219_GATES_AND_CANONICAL_ARTIFACT_26_OF_26_PASS_AF066_PENDING'
+          ac['live_account_status'] = 'AF066_READ_ONLY_API_PREFLIGHT_PENDING_WEBLOGIN_NOT_YET_PROVEN_BLOCKER'
+          ac['canonical_test_artifact_run'] = '34692865477'
+          ac['canonical_test_artifact_job'] = '103551115066'
+          ac['canonical_test_artifact_sha256'] = '72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f'
+          ac['canonical_test_artifact_id'] = 10297556084
+          ac['version_67219_status'] = 'CANONICAL_GATES_AND_CANONICAL_ARTIFACT_26_OF_26_PASS_AF066_LIVE_API_PREFLIGHT_PENDING'
+          hc = es['hobbyroom_current']
+          hc['status'] = 'BLOCKED'
+          hc['task_id'] = 'adcell-readonly-live-api-preflight-20260912'
+          hc['next_action'] = ('Run the read-only ADCELL Token + Programme preflight in the real WordPress runtime using already stored API credentials. '
+                               'If it passes, allowlist one existing accepted+active programId and continue the real E2E; only missing/invalid credentials '
+                               'make credential recovery the blocker.')
+          hc['return_path'] = 'Read-only ADCELL API preflight -> accepted+active explicit programId -> real WordPress/MariaDB E2E -> only then Live-PASS.'
+          g['objective_control']['current_milestone'] = 'ADCELL_AF066_READ_ONLY_LIVE_API_PREFLIGHT_PENDING_CANONICAL_ARTIFACT_PASS'
+          p.write_text(json.dumps(g, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # 5) Durable factual closeout evidence; error detail authority remains the matrix.
+          ev = root / 'release/affiliate-zentrale/evidence/adcell_67219_af066_af067_closeout_20260912.txt'
+          ev.write_text('''AFFILIATE-ZENTRALE 6.72.19 – AF-066 / AF-067 CLOSEOUT\nDate: 2026-09-12\nBranch: affiliate-release-current\nSource manifest SHA-256: 694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b\n\nAF-067 CANONICAL ARTIFACT PROOF:\nRun 34692865477 / Job 103551115066: SUCCESS\n- canonical manifest: 26/26 PASS\n- PHP lint: 21/21 PASS\n- version markers: 6.72.19 PASS\n- fresh-unpack/source identity: 26/26 PASS\n- canonical test ZIP SHA-256: 72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f\n- GitHub Actions artifact ID: 10297556084\nThe earlier local pre-bind ZIP is not an allowed handoff artifact.\n\nAF-066 CURRENT OPEN LIVE GATE:\nWeb-login/password-reset is not yet proven to be the blocker. First run the canonical read-only WordPress ADCELL `Token + Programme prüfen` test using already stored API credentials. If it succeeds, bind an existing accepted+active programId and continue real E2E. If stored API credentials are missing/invalid, credential recovery becomes the blocker.\n\nNO LIVE PASS. release_allowed remains false.\nPLUGIN CONTROL REF: PU-20260912-001 (Campus PLUGINS update protocol).\n''', encoding='utf-8')
+          PY
+
+          rm -f .github/workflows/tmp-affiliate-adcell-closeout-protocol.yml
+          python3 -m json.tool AFFILIATE_HOBBYRAUM/TASK.current.json >/dev/null
+          python3 -m json.tool control/release-governance/CURRENT_RELEASE.json >/dev/null
+          python3 control/release-governance/release_guard.py governance-check
+          python3 control/release-governance/release_guard.py source-check
+          python3 control/release-governance/release_guard.py tree-check
+          python3 control/release-governance/release_guard.py start --branch affiliate-release-current
+          python3 control/release-governance/release_guard.py pr-check --base /tmp/affiliate-closeout-base --head . --head-ref affiliate-release-current --base-sha "$BASE_SHA"
+
+          git config user.name 'hallo-netizen'
+          git config user.email 'hallo@oliver-beil.de'
+          git add -A
+          git diff --cached --exit-code && { echo 'NO_CLOSEOUT_CHANGES'; exit 1; } || true
+          git commit -m 'Affiliate ADCELL: close AF-067 and bind AF-066 live preflight'
+          git push origin HEAD:affiliate-release-current
