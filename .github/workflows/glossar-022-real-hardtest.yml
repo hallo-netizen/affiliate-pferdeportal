@@ -1,0 +1,204 @@
+name: Glossar 0.2.2 Real Hardtest
+
+on:
+  push:
+    branches: [hobbyroom/glossar-022-ajax-hardtest]
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge022-full.patch.gz.b64'
+      - '.github/workflows/glossar-022-real-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hardtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build exact 0.2.2 candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          T='protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp'
+          mkdir -p /tmp/uge022
+          cat "$T"/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          test "$(sha256sum /tmp/base.zip | cut -d' ' -f1)" = 'b20fc92e106989d96e701ca3cc2c4091096e8e8cdb207f63a958b411a0c6aaa7'
+          unzip -q /tmp/base.zip -d /tmp/uge022
+          base64 -d "$T/uge022-full.patch.gz.b64" | gzip -d >/tmp/uge022.patch
+          patch -d /tmp/uge022/universal-glossary-engine -p4 </tmp/uge022.patch
+          P=/tmp/uge022/universal-glossary-engine
+          grep -q 'Version: 0.2.2' "$P/universal-glossary-engine.php"
+          test "$(sha256sum "$P/universal-glossary-engine.php"|cut -d' ' -f1)" = '32630ba67a4ddf5fac4a6cbac578535157daee3d98d35ece00258ee267f3f6ea'
+          test "$(sha256sum "$P/includes/class-uge-frontend.php"|cut -d' ' -f1)" = 'b7b452a9cfe9ba27050998122c4d5fe3c6ff2f681d7269c815ab0e09caf91663'
+          test "$(sha256sum "$P/includes/class-uge-config.php"|cut -d' ' -f1)" = 'e4d3d7cf936c163ac682bd866fe1c826a9fe16d6f6f1b42367a0e0fc58e5789b'
+          test "$(sha256sum "$P/includes/class-uge-core.php"|cut -d' ' -f1)" = 'f7d7b9066a176c501272e17904b6d3b1d6c6ed195bc85c893dd334f762a9543a'
+          find "$P" -name '*.php' -print0 | xargs -0 -n1 php -l
+          echo UGE022_EXACT_BUILD_LINT_PASS
+
+      - name: Start WordPress MySQL Astra and current-design stub
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker network create uge022-net
+          docker run -d --name uge022-db --network uge022-net \
+            -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp \
+            --health-cmd='mysqladmin ping -h localhost -uroot -proot' --health-interval=3s --health-timeout=3s --health-retries=30 mysql:8.0
+          for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' uge022-db)" = healthy && break; sleep 2; done
+          test "$(docker inspect -f '{{.State.Health.Status}}' uge022-db)" = healthy
+          docker run -d --name uge022-wp --network uge022-net -p 8080:80 \
+            -e WORDPRESS_DB_HOST=uge022-db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp \
+            -v /tmp/uge022/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro \
+            wordpress:php8.1-apache
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp uge022-wp:/usr/local/bin/wp
+          docker exec uge022-wp chmod +x /usr/local/bin/wp
+          docker exec uge022-wp wp core install --allow-root --url=http://127.0.0.1:8080 --title='UGE Hardtest' --admin_user=admin --admin_password='UGE-test-123456' --admin_email=x@example.test --skip-email
+          docker exec uge022-wp wp rewrite structure '/%postname%/' --hard --allow-root
+          docker exec uge022-wp wp theme install astra --activate --allow-root
+          docker exec uge022-wp mkdir -p /var/www/html/wp-content/plugins/affiliate-portal-template-kit/assets
+          cat >/tmp/designstub.php <<'PHP'
+          <?php
+          /* Plugin Name: Pferde Atelier Design Test Stub */
+          final class Pferde_Template_Kit {
+              public static function affiliate_page_type($id) {
+                  return get_post_meta((int)$id, '_uge_test_portal_category', true) === '1' ? 'category' : '';
+              }
+          }
+          add_action('uge_ad_slot', static function($slot){ echo '<span class="test-ad">AD-' . esc_html($slot) . '</span>'; }, 10, 1);
+          PHP
+          docker cp /tmp/designstub.php uge022-wp:/var/www/html/wp-content/plugins/affiliate-portal-template-kit/affiliate-portal-template-kit.php
+          docker exec uge022-wp sh -c ': > /var/www/html/wp-content/plugins/affiliate-portal-template-kit/assets/startseite-hero-frau-pferd-clean-v150173.webp'
+          docker exec uge022-wp wp plugin activate affiliate-portal-template-kit universal-glossary-engine --allow-root
+          test "$(docker exec uge022-wp wp plugin get universal-glossary-engine --field=version --allow-root)" = '0.2.2'
+
+      - name: Seed deterministic glossary
+        shell: bash
+        run: |
+          set -euo pipefail
+          P=$(docker exec uge022-wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Glossar --post_name=glossar --post_excerpt='Pferdebegriffe verständlich erklärt.' --porcelain)
+          docker exec uge022-wp wp eval --allow-root "\$c=UGE_Config::get();\$c['main_page_id']=$P;\$c['rewrite_base']='glossar';\$c['term_segment']='begriff';\$c['design_profile']='auto';\$c['home_term_count']=6;update_option(UGE_Config::OPTION,UGE_Config::sanitize(\$c));UGE_Core::register_content();flush_rewrite_rules();"
+          for pair in 'Farben:farben' 'Training:training' 'Zucht:zucht'; do n=${pair%%:*}; s=${pair##*:}; docker exec uge022-wp wp term create uge_group "$n" --slug="$s" --allow-root; done
+          A=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Aalstrich --post_name=aalstrich --post_content=A-CONTENT --porcelain)
+          D=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Dressurbegriff --post_name=dressurbegriff --post_content=D-CONTENT --porcelain)
+          Z=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Zuchtbuch --post_name=zuchtbuch --post_content=Z-CONTENT --porcelain)
+          docker exec uge022-wp wp post term add "$A" uge_group Farben --allow-root
+          docker exec uge022-wp wp post term add "$D" uge_group Training --allow-root
+          docker exec uge022-wp wp post term add "$Z" uge_group Zucht --allow-root
+          docker exec uge022-wp wp post meta update "$A" _uge_short_definition 'Dunkler Streifen entlang des Pferderückens.' --allow-root
+          docker exec uge022-wp wp post meta update "$A" _uge_synonyms 'dorsaler Streifen' --allow-root
+          Q=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Vorschau Begriff' --post_name=vorschau-begriff --post_content=PREVIEW-CONTENT --porcelain)
+          NORMAL=$(docker exec uge022-wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Aalstrich normaler Beitrag' --post_content='Aalstrich nur normaler Beitrag' --porcelain)
+          echo "$Q" >/tmp/draft-id
+          docker exec uge022-wp wp rewrite flush --hard --allow-root
+
+      - name: Positive negative homepage A-Z routes and design
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/home',encoding='utf-8').read()
+          assert len(re.findall(r'<h1(?:\s|>)',s,re.I)) == 1
+          order=[s.index(x) for x in ['class="uge-hero','class="uge-tools','class="uge-nav','class="uge-home-banner-slot','id="uge-live-results']]
+          assert order == sorted(order)
+          az=re.search(r'<nav class="uge-az"[^>]*>(.*?)</nav>',s,re.S).group(1)
+          letters=re.findall(r'<a[^>]*>([A-Z])</a>',az)
+          assert letters == list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), letters
+          assert 'startseite-hero-frau-pferd-clean-v150173.webp' in s
+          assert '#35422A' in s and '#C89214' in s and '#F7F2E8' in s
+          assert 'Neue und überarbeitete Begriffe aus dem Pferde-Atelier.' not in s
+          assert '#uge-group-' not in s
+          assert 'Vorschau Begriff' not in s
+          assert 'AD-home_banner' in s
+          assert s.count('aria-label="Glossar-Bereiche"') == 1
+          assert 'data-uge-slide="prev"' not in s or s.index('uge-slider-controls') > s.index('uge-latest-title')
+          print('UGE022_HOME_DESIGN_STRUCTURE_PASS')
+          PY
+          for L in A D Z; do curl -fsS "http://127.0.0.1:8080/glossar/?glossar_letter=$L" -o "/tmp/$L"; done
+          grep -q '>Aalstrich<' /tmp/A; ! grep -q '>Dressurbegriff<' /tmp/A; ! grep -q '>Zuchtbuch<' /tmp/A
+          grep -q '>Dressurbegriff<' /tmp/D; ! grep -q '>Aalstrich<' /tmp/D; ! grep -q '>Zuchtbuch<' /tmp/D
+          grep -q '>Zuchtbuch<' /tmp/Z; ! grep -q '>Aalstrich<' /tmp/Z; ! grep -q '>Dressurbegriff<' /tmp/Z
+          curl -fsS http://127.0.0.1:8080/glossar/farben/ -o /tmp/cat
+          grep -q '/glossar/begriff/aalstrich/' /tmp/cat
+          ! grep -q '>Dressurbegriff<' /tmp/cat
+          curl -fsS http://127.0.0.1:8080/glossar/begriff/aalstrich/ -o /tmp/term
+          grep -q A-CONTENT /tmp/term
+          grep -q AD-top /tmp/term; grep -q AD-inline /tmp/term; grep -q AD-bottom /tmp/term
+          code=$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/glossar/aalstrich/)
+          test "$code" = 301
+          curl -sSI http://127.0.0.1:8080/glossar/aalstrich/ | grep -qi 'location:.*glossar/begriff/aalstrich/'
+          echo UGE022_AZ_CATEGORY_TERM_LINKS_PASS
+
+      - name: Positive negative AJAX search and fallback
+        shell: bash
+        run: |
+          set -euo pipefail
+          nonce=$(python3 - <<'PY'
+          import re
+          s=open('/tmp/home').read()
+          print(re.search(r'data-uge-nonce="([^"]+)"',s).group(1))
+          PY
+          )
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data-urlencode action=uge_search --data-urlencode nonce="$nonce" --data-urlencode q=Aal -o /tmp/ajax-aal.json
+          grep -q '"success":true' /tmp/ajax-aal.json; grep -q Aalstrich /tmp/ajax-aal.json; ! grep -q 'normaler Beitrag' /tmp/ajax-aal.json; ! grep -q 'Vorschau Begriff' /tmp/ajax-aal.json
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data-urlencode action=uge_search --data-urlencode nonce="$nonce" --data-urlencode q=dorsaler -o /tmp/ajax-syn.json
+          grep -q Aalstrich /tmp/ajax-syn.json
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data-urlencode action=uge_search --data-urlencode nonce="$nonce" --data-urlencode q=zzzznotfound -o /tmp/ajax-none.json
+          grep -q '"count":0' /tmp/ajax-none.json; ! grep -q 'Vorschau Begriff' /tmp/ajax-none.json
+          bad=$(curl -sS -o /tmp/ajax-bad -w '%{http_code}' -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data nonce=bad --data q=Aal)
+          test "$bad" != 200
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_s=Aal' -o /tmp/fallback
+          grep -q '>Aalstrich<' /tmp/fallback; ! grep -q 'normaler Beitrag' /tmp/fallback
+          echo UGE022_AJAX_POSITIVE_NEGATIVE_PASS
+
+      - name: Positive negative draft preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          Q=$(cat /tmp/draft-id)
+          public=$(curl -sS -o /tmp/public-draft -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/vorschau-begriff/)
+          test "$public" != 200
+          ! grep -q PREVIEW-CONTENT /tmp/public-draft
+          curl -sS -c /tmp/cookies -d 'log=admin&pwd=UGE-test-123456&wp-submit=Log+In&redirect_to=http%3A%2F%2F127.0.0.1%3A8080%2Fwp-admin%2F' http://127.0.0.1:8080/wp-login.php >/dev/null
+          preview=$(docker exec uge022-wp wp eval --allow-root "echo get_preview_post_link($Q);")
+          curl -fsS -b /tmp/cookies "$preview" -o /tmp/preview
+          grep -q 'Vorschau Begriff' /tmp/preview; grep -q PREVIEW-CONTENT /tmp/preview
+          echo UGE022_DRAFT_PREVIEW_PASS
+
+      - name: Positive negative cannibalization
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker exec uge022-wp wp term create uge_group Gesundheit --slug=gesundheit --allow-root
+          G=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Gesundheit --post_name=gesundheit --porcelain)
+          test "$(docker exec uge022-wp wp post get "$G" --field=post_status --allow-root)" = draft
+          docker exec uge022-wp wp term create category Ausrüstung --slug=ausruestung --allow-root
+          X=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Ausrüstung --post_name=ausruestung --porcelain)
+          test "$(docker exec uge022-wp wp post get "$X" --field=post_status --allow-root)" = draft
+          F=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Fütterung --post_name=fuetterung --porcelain)
+          test "$(docker exec uge022-wp wp post get "$F" --field=post_status --allow-root)" = publish
+          docker exec uge022-wp wp term create category Fütterung --slug=fuetterung --allow-root
+          test "$(docker exec uge022-wp wp post get "$F" --field=post_status --allow-root)" = draft
+          P=$(docker exec uge022-wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Transportwissen --post_name=transportwissen --porcelain)
+          docker exec uge022-wp wp post meta update "$P" _uge_test_portal_category 1 --allow-root
+          T=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Transportwissen --post_name=transportwissen --porcelain)
+          test "$(docker exec uge022-wp wp post get "$T" --field=post_status --allow-root)" = draft
+          R=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Reitplatzwissen --post_name=reitplatzwissen --porcelain)
+          RP=$(docker exec uge022-wp wp post create --allow-root --post_type=page --post_status=draft --post_title=Reitplatzwissen --post_name=reitplatzwissen --porcelain)
+          docker exec uge022-wp wp post meta update "$RP" _uge_test_portal_category 1 --allow-root
+          docker exec uge022-wp wp post update "$RP" --post_status=publish --allow-root
+          test "$(docker exec uge022-wp wp post get "$R" --field=post_status --allow-root)" = draft
+          N=$(docker exec uge022-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Kappzaumwissen --post_name=kappzaumwissen --porcelain)
+          test "$(docker exec uge022-wp wp post get "$N" --field=post_status --allow-root)" = publish
+          echo UGE022_CANNIBALIZATION_BIDIRECTIONAL_PASS
+
+      - name: Final proof
+        run: |
+          echo UGE022_REAL_WORDPRESS_ASTRA_POSITIVE_NEGATIVE_PASS
+          docker exec uge022-wp wp core version --allow-root
+          docker exec uge022-wp php -r 'echo PHP_VERSION, PHP_EOL;'
