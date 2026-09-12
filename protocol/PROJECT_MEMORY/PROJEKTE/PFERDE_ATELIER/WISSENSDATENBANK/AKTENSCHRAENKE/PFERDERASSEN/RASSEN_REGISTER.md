@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-12
-STATUS: MASTERLISTE IM AUFBAU / 7 DATENSÄTZE ANGELEGT
+STATUS: MASTERLISTE IM AUFBAU / 11 DATENSÄTZE ANGELEGT
 
 ## STATUSWERTE
 
@@ -17,7 +17,7 @@ STATUS: MASTERLISTE IM AUFBAU / 7 DATENSÄTZE ANGELEGT
 
 Die internationale Masterliste wird aufgebaut. Noch kein Anspruch auf Vollständigkeit.
 
-## ERSTE RECHERCHIERTE RASSEN
+## RECHERCHIERTE RASSEN
 
 | ID | Name | Status | Datensatz |
 |---|---|---|---|
@@ -28,11 +28,14 @@ Die internationale Masterliste wird aufgebaut. Noch kein Anspruch auf Vollständ
 | breed-pura-raza-espanola | Pura Raza Española (PRE) | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-pura-raza-espanola.json` |
 | breed-caspian | Caspian Horse | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-caspian.json` |
 | breed-american-cream-draft | American Cream Draft | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-american-cream-draft.json` |
+| breed-arabian | Arabisches Vollblut / Arabian | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-arabian.json` |
+| breed-icelandic-horse | Islandpferd | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-icelandic-horse.json` |
+| breed-haflinger | Haflinger | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-haflinger.json` |
+| breed-norwegian-fjord-horse | Fjordpferd | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-norwegian-fjord-horse.json` |
 
 ## NÄCHSTER MASTERLISTEN-BLOCK
 
 Kandidaten für die nächste Statusprüfung, noch nicht als Rasse bestätigt:
-- Arabian / Arabisches Vollblut
 - Ardenner
 - Altai
 - American Walking Pony
@@ -52,15 +55,20 @@ Kandidaten für die nächste Statusprüfung, noch nicht als Rasse bestätigt:
 - Connemara Pony
 - Dartmoor Pony
 - Dülmener
-- Fjordpferd
-- Haflinger
 - Highland Pony
-- Islandpferd
 - New Forest Pony
 - Shetland Pony
 - Welsh Pony / Cob
 
-Diese Liste ist nur Recherchekandidat. Vor Datensatzanlage muss der formale Status gegen autoritative Quellen geprüft werden.
+## OFFENE NACHRECHERCHE BEI BEREITS ANGELEGTEN DATENSÄTZEN
+
+Offene Felder sind gewollt sichtbar und werden nicht geraten. Häufig offen sind:
+- exakte Gewichte;
+- Lebenserwartung;
+- belastbare Gesundheits-/Genetikdaten;
+- Haltung/Fütterung nur bei rassespezifisch belegter Besonderheit;
+- internationaler Gefährdungsstatus gegen FAO DAD-IS;
+- einzelne Detailmaße oder Farbvorgaben, wenn die offizielle Quelle sie noch nicht belastbar liefert.
 
 ## REGELN
 
