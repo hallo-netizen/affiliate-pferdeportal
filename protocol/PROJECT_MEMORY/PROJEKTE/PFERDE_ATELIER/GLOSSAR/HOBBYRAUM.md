@@ -1,7 +1,7 @@
 # GLOSSAR – HOBBYRAUM
 
 STAND: 2026-09-12
-STATUS: AKTIV / MOD-008 V1-PROTOTYP LOKAL PASS
+STATUS: AKTIV / MOD-008 ECHTER WORDPRESS+MYSQL-SMOKE-TEST PASS
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -15,14 +15,14 @@ die Pferde-Atelier-Anwendung des allgemeinen Glossar-Cores vorbereitet oder gepr
 die Pferde-Konfiguration definieren, Fachquellen aus der Wissensdatenbank binden und den allgemeinen Glossar-Core isoliert gegen das Pferde-Atelier testen.
 
 **DU DARFST NICHT …**  
-`main` verändern, eine zweite Glossar-Faktendatenbank bauen, normale Beiträge/Seiten pro Begriff erzwingen, Pferde-Fachlogik in den allgemeinen Core schreiben, das bestehende Designplugin zur Glossar-Engine umbauen oder vor echtem WordPress-PASS ein Release behaupten.
+`main` verändern, eine zweite Glossar-Faktendatenbank bauen, normale Beiträge/Seiten pro Begriff erzwingen, Pferde-Fachlogik in den allgemeinen Core schreiben, das bestehende Designplugin zur Glossar-Engine umbauen oder vor Release-/LIVE-Nachweis einen Release behaupten.
 
 **ALS NÄCHSTES …**  
-den lokal grünen 0.1.0-Kandidaten in einem echten isolierten WordPress-System testen.
+den unveränderten 0.1.0-Core mit Astra + Yoast im echten isolierten WordPress-System prüfen.
 
 ## AKTUELLER AUFTRAG
 
-Pferde Atelier als erste reale Anwendung von `MOD-008 – Universal Glossar Engine` bis zum WordPress-Smoke-Test bringen.
+Pferde Atelier als erste reale Anwendung von `MOD-008 – Universal Glossar Engine` nach bestandenem WordPress/MySQL-Smoke-Test bis zum Astra+Yoast-PASS und anschließend zum realen Wissensdatenbankimport bringen.
 
 Bestätigter Live-Ausgangspunkt:
 - Seite `Glossar` ist angelegt;
@@ -52,17 +52,19 @@ Quellstand:
 QA:
 `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/PROTOTYPE_QA_0.1.0.md`
 
-Kandidaten-Hash:
+Früher lokal gebauter Prototyp-ZIP-Hash:
 `c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
+
+Dieser Hash ist kein finaler Installer.
 
 ## PFERDE-KONFIGURATION
 
 - vorhandene Seite `Glossar` als Hauptseite;
-- URL-Basis zunächst `glossar`, Realtest muss Kollision ausschließen;
+- URL-Basis `glossar` im echten WordPress-Test kollisionsfrei bestätigt;
 - Oberbereiche nicht im Core fest verdrahten;
 - SEO-Schema konfigurierbar, je Begriff überschreibbar;
 - Designprofil übernimmt nur tatsächliche Pferde-Designwerte;
-- Fachimport später aus `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`;
+- Fachimport aus `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`;
 - Import immer als Entwurf, Veröffentlichung manuell.
 
 ## DESIGNBINDUNG
@@ -80,30 +82,46 @@ Pferde-Profil im Glossar-Prototyp orientiert sich an:
 - 16px Grundschrift / 1.55 Zeilenhöhe;
 - kompakte Karten-/Akzentlogik.
 
-## LOKALER PRÜFSTAND
+## PRÜFSTAND
 
+Lokal:
 - PHP-Lint 8/8 PASS;
 - Positiv/Negativ 15/15 PASS;
 - Runtime-Stub PASS;
 - Pferde-Profil PASS;
 - fachfremdes Zweitprofil PASS ohne Coreänderung;
-- Import/Export sicherheitsgebunden;
-- Import niemals Auto-Publish;
 - ZIP-Struktur PASS.
 
-## NEXT ACTION – ECHTER WORDPRESS-REALTEST
+Echter WordPress/MySQL-Realtest:
+- Run `34699122729` → GESAMT PASS;
+- WordPress 6.9 / PHP 8.1.34 / MySQL 8.0 → PASS;
+- WordPress 7.1 / PHP 8.3.33 / MySQL 8.0 → PASS;
+- `/glossar/` + `/glossar/kolik/` → PASS;
+- Entwurfssperre → PASS;
+- SEO ohne Yoast → PASS;
+- JSON Import/Export → PASS;
+- Zusatzfeld ohne Coreänderung → PASS;
+- reale `Lexikon`-Zweitkonfiguration → PASS;
+- Persistenz nach Deaktivieren/Reaktivieren → PASS;
+- keine normalen WordPress-Seiten pro Begriff → PASS.
 
-1. exakt hashgebundenen 0.1.0-Kandidaten installieren;
-2. vorhandene Seite `Glossar` als Hauptseite auswählen;
-3. zwei Test-Oberbereiche + drei Testbegriffe anlegen;
-4. prüfen: Begriffe nur im Glossarbereich, nicht normale Beiträge/Seiten;
-5. Hauptseite: Suche, A–Z, Oberbereiche, Aufklapper;
-6. Einzelbegriff: eigene URL, vollständiger Text;
-7. SEO-Titel + Meta-Description mit Yoast aktiv/inaktiv;
-8. keine doppelten Meta-/Canonical-/Robots-Ausgaben;
-9. JSON-Export → Reimport ausschließlich als Entwurf;
-10. normale Beiträge, normale Seiten und bestehendes Designplugin negativ unverändert prüfen;
-11. erst bei Gesamt-PASS einen installierbaren Kandidaten freigeben.
+## NEXT ACTION – ASTRA + YOAST
+
+1. Astra aus offiziellem WordPress-Verzeichnis installieren/aktivieren;
+2. Yoast SEO aus offiziellem WordPress-Verzeichnis installieren/aktivieren;
+3. vorhandene Glossar-Seite + Begriffszieladresse real laden;
+4. SEO-Titel + Meta-Description + Canonical + Robots prüfen;
+5. negativ: keine doppelten Description-/Canonical-/Robots-Ausgaben;
+6. Astra darf Glossarindex und Einzelansicht nicht zerstören;
+7. normale WordPress-Seite/Beitrag negativ unverändert;
+8. danach realen Campus-Glossarimport prüfen.
+
+## DANACH OFFEN
+
+- realer Campus-Wissensdatenbankimport;
+- größerer Bestand/Performance;
+- finaler ZIP Install-/Update-/Reinstall-Test;
+- Pferde-Atelier-LIVE-Installation.
 
 ## PARALLELENTWICKLUNG
 
@@ -114,7 +132,7 @@ Core + kleiner Adapter. Kein zweiter Plugin-Fork.
 
 ## HARTE REGEL
 
-**Noch kein Plugin an WordPress ausgeben, solange der echte WordPress-Smoke-Test fehlt.**
+**WordPress-Smoke-PASS ist noch kein Pferde-Atelier-LIVE-PASS.**
 
 ## VERWEISE
 
