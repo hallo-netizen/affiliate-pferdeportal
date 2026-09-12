@@ -17,33 +17,29 @@ den gebundenen Rechercheauftrag nach Bürotür und Recherche-Standard ausführen
 **DU DARFST NICHT …**  
 parallel ein zweites großes Forschungsthema starten, neue Aktenschränke auf Vorrat anlegen oder aus Recherche automatisch Contentproduktion starten.
 
-**ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `THEMENPOOL.md` → `RECHERCHE_STANDARD.md` → gebundener Aktenschrank.
-
 ## AKTUELLE ARBEITSBINDUNG
 
 THEMA: `PFERDERASSEN`
 STATUS: `IN_RECHERCHE`
-AUFTRAG: Internationale Pferde-, Pony- und Kleinpferderassen systematisch aufbauen; belastbare Masterliste, formalen Status, Synonyme/Dubletten und anschließend Einzeldatensätze quellengebunden recherchieren.
+AUFTRAG: Internationale Pferde-, Pony- und Kleinpferderassen systematisch aufbauen; formalen Status, Synonyme/Dubletten und Einzeldatensätze quellengebunden recherchieren.
 AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **96 reale Rassendatensätze** unter `DATEN/` vorhanden;
-- Spanien, Deutschland, Frankreich, Großbritannien, Irland und Niederlande breit gegen amtliche/ursprüngliche Register bearbeitet;
-- zusätzliche internationale Kernakten u. a. für Belgian Draught, American Miniature Horse, Konik polski, Bosnisches Gebirgspferd, Falabella und Basotho Pony angelegt;
-- Falabella ≠ American Miniature Horse als feste Dubletten-/Abgrenzungsregel geklärt;
-- offizielle Verbands-, Zuchtbuch-, staatliche und wissenschaftliche Quellen bevorzugt;
-- Glossar-Aktenschrank eingerichtet und mit 7 realen Begriffen startbefüllt.
+- **108 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- zahlreiche nationale/ursprüngliche Zuchtbücher und offizielle Verbände eingebunden;
+- neu seit 96: Aegidienberger, Huzule, Berber/Barb, Azteca, Morgan, Rocky Mountain Horse, Missouri Fox Trotter, Lusitano, Tennessee Walking Horse, Paso Fino, Peruanisches Pferd und Standardbred;
+- schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
+- Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
 ## NEXT ACTION
 
 1. Rassenrecherche ohne Themenwechsel fortsetzen;
-2. nächste belastbare Länder-/Studbook-Blöcke prüfen;
-3. offene Kandidaten wie Altai, American Walking Pony, Andravida, Anglo-Kabarda, Aegidienberger, Azteca, Barb/Berber und Huzule nur nach autoritativer Statusprüfung anlegen;
-4. Synonyme, Sektionen und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
-5. relevante Fachbegriffe bei Bedarf im Glossar ergänzen;
+2. nächste belastbare nationale/ursprüngliche Registerblöcke prüfen;
+3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
+4. weitere internationale Rassen aus anerkannten Studbooks ergänzen;
+5. Synonyme, Sektionen und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
 6. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
 ## KONTROLLPUNKTE
