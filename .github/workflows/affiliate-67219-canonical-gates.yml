@@ -41,3 +41,5 @@ jobs:
           python3 control/release-governance/release_guard.py source-check
           python3 control/release-governance/release_guard.py tree-check
           python3 control/release-governance/release_guard.py start --branch affiliate-release-current
+
+# AF-065 corrected: rerun exact same gates
