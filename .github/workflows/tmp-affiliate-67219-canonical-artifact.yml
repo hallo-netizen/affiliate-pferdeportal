@@ -1,0 +1,51 @@
+name: TEMP Affiliate 6.72.19 canonical artifact proof
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-67219-canonical-artifact.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  canonical-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify canonical manifest and build artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXPECTED_MANIFEST='694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b'
+          BASE='release/affiliate-zentrale'
+          ROOT="$BASE/current/affiliate-portal-router"
+          MANIFEST="$BASE/CURRENT_SOURCE_SHA256.txt"
+          test "$(sha256sum "$MANIFEST" | awk '{print $1}')" = "$EXPECTED_MANIFEST"
+          test "$(wc -l < "$MANIFEST")" -eq 26
+          (cd "$BASE/current" && sha256sum -c ../CURRENT_SOURCE_SHA256.txt)
+          test "$(find "$ROOT" -type f | wc -l)" -eq 26
+          test "$(find "$ROOT" -type f -name '*.php' | wc -l)" -eq 21
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find "$ROOT" -type f -name '*.php' | sort)
+          grep -q 'Version: 6.72.19' "$ROOT/pferdeportal-affiliate-router.php"
+          grep -q "const VERSION = '6.72.19'" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -q 'Stable tag: 6.72.19' "$ROOT/readme.txt"
+          rm -f Affiliate-Zentrale_6.72.19_CANONICAL_TEST.zip
+          (cd "$BASE/current" && zip -qr "$GITHUB_WORKSPACE/Affiliate-Zentrale_6.72.19_CANONICAL_TEST.zip" affiliate-portal-router)
+          rm -rf /tmp/affiliate-67219-unpack && mkdir -p /tmp/affiliate-67219-unpack
+          unzip -q Affiliate-Zentrale_6.72.19_CANONICAL_TEST.zip -d /tmp/affiliate-67219-unpack
+          test "$(find /tmp/affiliate-67219-unpack/affiliate-portal-router -type f | wc -l)" -eq 26
+          diff -qr "$ROOT" /tmp/affiliate-67219-unpack/affiliate-portal-router
+          (cd /tmp/affiliate-67219-unpack && find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum) > /tmp/unpacked.sha256
+          diff -u "$MANIFEST" /tmp/unpacked.sha256
+          sha256sum Affiliate-Zentrale_6.72.19_CANONICAL_TEST.zip | tee Affiliate-Zentrale_6.72.19_CANONICAL_TEST.zip.sha256
+          echo 'AF067_CANONICAL_ARTIFACT_26_OF_26_PASS'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-zentrale-67219-canonical-test
+          path: |
+            Affiliate-Zentrale_6.72.19_CANONICAL_TEST.zip
+            Affiliate-Zentrale_6.72.19_CANONICAL_TEST.zip.sha256
+          if-no-files-found: error
+          retention-days: 7
