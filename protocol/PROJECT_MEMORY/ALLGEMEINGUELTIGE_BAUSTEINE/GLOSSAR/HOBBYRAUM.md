@@ -27,7 +27,7 @@ den lokal grünen 0.1.0-Prototyp in einem echten WordPress-Testsystem installier
 ## ARBEITSORT
 
 Isolierter Branch:
-`hobbyroom/glossar-office-20260912-v2`
+`hobbyroom/glossar-v1-current-20260912`
 
 Quellstand:
 `prototype/0.1.0/universal-glossary-engine/`
