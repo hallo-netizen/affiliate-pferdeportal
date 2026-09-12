@@ -4,6 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+if ( ! class_exists( 'UPC_Feature_Key_Catalog' ) ) {
+    require_once __DIR__ . '/class-upc-feature-key-catalog.php';
+}
+if ( ! class_exists( 'UPC_Research_Importer' ) ) {
+    require_once __DIR__ . '/class-upc-research-importer.php';
+}
+
 /**
  * Explicit runtime bridge for the bound research bootstrap.
  *
@@ -15,6 +22,13 @@ class UPC_Research_Runtime {
         $project_key = sanitize_key( $project_key );
         if ( '' === $project_key ) {
             return new WP_Error( 'UPC_RESEARCH_PROJECT_KEY_MISSING', 'Project key is required.' );
+        }
+
+        if ( ! class_exists( 'UPK_Maintenance' ) && defined( 'UPK_PLUGIN_FILE' ) ) {
+            $maintenance_path = dirname( UPK_PLUGIN_FILE ) . '/src/class-upk-maintenance.php';
+            if ( is_file( $maintenance_path ) ) {
+                require_once $maintenance_path;
+            }
         }
 
         if ( ! function_exists( 'upk_repository' )
