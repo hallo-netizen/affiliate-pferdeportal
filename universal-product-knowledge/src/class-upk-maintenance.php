@@ -140,6 +140,40 @@ class UPK_Maintenance {
         return $variant_id;
     }
 
+    public function find_product_id_by_identity( array $data ) {
+        $manufacturer = isset( $data['manufacturer'] ) ? sanitize_text_field( $data['manufacturer'] ) : '';
+        $model_name   = isset( $data['model_name'] ) ? sanitize_text_field( $data['model_name'] ) : '';
+        $group_key    = isset( $data['product_group_key'] ) ? sanitize_key( $data['product_group_key'] ) : '';
+        $generation   = isset( $data['generation'] ) ? sanitize_text_field( $data['generation'] ) : '';
+
+        if ( '' === $manufacturer || '' === $model_name || '' === $group_key ) {
+            return new WP_Error( 'UPK_PRODUCT_IDENTITY_INCOMPLETE', 'Product identity is incomplete.' );
+        }
+
+        $ids = $this->wpdb->get_col(
+            $this->wpdb->prepare(
+                "SELECT id FROM {$this->products}
+                 WHERE manufacturer = %s
+                   AND model_name = %s
+                   AND product_group_key = %s
+                   AND generation = %s
+                 ORDER BY id ASC
+                 LIMIT 2",
+                $manufacturer,
+                $model_name,
+                $group_key,
+                $generation
+            )
+        );
+
+        $ids = array_values( array_map( 'intval', is_array( $ids ) ? $ids : array() ) );
+        if ( count( $ids ) > 1 ) {
+            return new WP_Error( 'UPK_DUPLICATE_PRODUCT_IDENTITY', 'More than one product matches the exact product identity.' );
+        }
+
+        return empty( $ids ) ? 0 : (int) $ids[0];
+    }
+
     public function products_due_for_review( $verified_before, $limit = 100 ) {
         return $this->select_due_products( '', $verified_before, $limit );
     }
