@@ -1,24 +1,25 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-12
-STATUS: KONZEPT GEBUNDEN / TECHNISCHE UMSETZUNG NOCH OFFEN
+STATUS: BÜRO EINGERICHTET / TECHNISCHE UMSETZUNG NOCH OFFEN
 
 ## Belastbarer aktueller Stand
 
-- Eigenes Büro `GLOSSAR` wird als Steuerungsbüro eingerichtet.
+- Eigenes Büro `GLOSSAR` ist als Steuerungsbüro eingerichtet.
 - Die fachliche Glossar-Datenbank bleibt autoritativ in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
 - Keine zweite Fachbegriffs-Datenbank im Büro GLOSSAR.
 - Vom Nutzer im WordPress-Live-Backend bestätigt: Seite `Glossar` ist angelegt und verlinkt.
+- Keine WordPress-Seite pro Glossarbegriff vorgesehen.
 - Ziel im Frontend: Glossar-Startseite mit Navigation zu Oberbegriffen; darunter mehrere Glossarbegriffe ohne Grafikzwang, bevorzugt kompakt/aufklappbar.
 - Glossarbegriffe sollen nicht wie normale Beiträge/Karten in bestehenden Pferde-Atelier-Kategorien erscheinen.
-- Jeder veröffentlichte Glossarbegriff soll eigene SEO-Angaben wie Titel und Meta-Description erhalten können.
-- Die genaue WordPress-Speicherung, URL-Logik und technische Einbindung in das bestehende Designplugin ist noch nicht entschieden.
+- Jeder veröffentlichte Glossarbegriff soll eigene SEO-Angaben erhalten können.
+- Gewünschter SEO-Weg: SEO-Titel und Meta-Description nach festem Glossar-Schema; keine manuelle Yoast-Pflege je Begriff und keine direkten Writes in interne Yoast-Datenbankfelder. Vor Umsetzung ist die installierte Yoast-/Designplugin-Kompatibilität frisch zu prüfen.
 - Vor technischer Festlegung muss der aktuelle Designplugin-/Kategorietext-Bestand geprüft werden.
 - Aktuell ist keine neue große Glossar-Textmaschine vorgesehen. Für kurze Glossartexte soll ein kleiner standardisierter Schreib-/Prüfweg reichen.
 
 ## Noch offen – nicht als beschlossen behandeln
 
-- exakter WordPress-Inhaltstyp bzw. Speicherweg;
+- exakter WordPress-Inhaltstyp bzw. Speicherweg der Glossardatensätze;
 - exakte Datenbank-/Metafeld-Implementierung;
 - exakte URL-Struktur je Begriff;
 - ob Oberbegriffe eigene technische Zielseiten erhalten;
