@@ -33,6 +33,28 @@ class CodexEconomyContractTests(unittest.TestCase):
         ]
         for value in required: self.assertIn(value,agents)
 
+    def test_textmaschine_and_design_are_hard_read_only(self):
+        task=(ROOT/'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
+        agents=(ROOT/'AGENTS.md').read_text(encoding='utf-8')
+        for value in [
+            'TEXTMASCHINE + DESIGN ARE IMMUTABLE',
+            'Textmaschine/content-rule authority is READ-ONLY.',
+            'PPM 6.7.9 package/rules, current table contract, PSERC/PSTE rule inputs, WordPress plugin, theme/CSS and design selectors are READ-ONLY.',
+            '`design_guard.py` performs PASS/BLOCK only and ZERO mutation.',
+            'BLOCKED_TEXTMASCHINE_OR_DESIGN_IMMUTABLE',
+            'No Textmaschine-rule changes. No design changes.',
+        ]:
+            self.assertIn(value,task)
+        for value in [
+            'TEXTMASCHINE + DESIGN IMMUTABILITY HARD RULE',
+            'The existing Textmaschine/content-rule authority is READ-ONLY.',
+            'Existing design is equally immutable.',
+            '`design_guard.py` is validation-only.',
+            'It performs ZERO mutation.',
+            'BLOCKED_TEXTMASCHINE_OR_DESIGN_IMMUTABLE',
+        ]:
+            self.assertIn(value,agents)
+
     def test_parent_chat_handoff_is_direct_inline_and_wordpress_ready(self):
         task=(ROOT/'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
         agents=(ROOT/'AGENTS.md').read_text(encoding='utf-8')
@@ -46,7 +68,7 @@ class CodexEconomyContractTests(unittest.TestCase):
             'inline-unpack',
             'SYSTEM4_PARENT_CHAT_INLINE_V1',
             'The parent Chat exposes it unchanged as one download',
-            'No signature step and no second WordPress transformation occur in between.',
+            'No signature step, no design transformation and no second WordPress transformation occur in between.',
         ]: self.assertIn(value,task)
         for forbidden in [
             'system4-parent-chat-handoff',
