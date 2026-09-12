@@ -1,7 +1,7 @@
 # GLOSSAR – HOBBYRAUM
 
 STAND: 2026-09-12
-STATUS: AKTIV / MOD-008 V1-PROTOTYP LOKAL PASS
+STATUS: AKTIV / FRONTEND-PROTOTYP MUSS KORRIGIERT WERDEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -15,19 +15,30 @@ die Pferde-Atelier-Anwendung des allgemeinen Glossar-Cores vorbereitet oder gepr
 die Pferde-Konfiguration definieren, Fachquellen aus der Wissensdatenbank binden und den allgemeinen Glossar-Core isoliert gegen das Pferde-Atelier testen.
 
 **DU DARFST NICHT …**  
-`main` verändern, eine zweite Glossar-Faktendatenbank bauen, normale Beiträge/Seiten pro Begriff erzwingen, Pferde-Fachlogik in den allgemeinen Core schreiben, das bestehende Designplugin zur Glossar-Engine umbauen oder vor echtem WordPress-PASS ein Release behaupten.
+`main` verändern, eine zweite Glossar-Faktendatenbank bauen, normale Beiträge/Seiten pro Begriff erzwingen, Pferde-Fachlogik in den allgemeinen Core schreiben, den verworfenen HTML-Anker-/Alles-auf-einer-Seite-Ansatz weiterverwenden oder vor echtem WordPress-PASS ein Release behaupten.
 
 **ALS NÄCHSTES …**  
-den lokal grünen 0.1.0-Kandidaten in einem echten isolierten WordPress-System testen.
+den Frontend-Prototyp auf echte Glossar-Kategorieseiten und die bestehende Pferde-Atelier-Designlogik umbauen und danach lokal erneut positiv/negativ prüfen.
 
 ## AKTUELLER AUFTRAG
 
-Pferde Atelier als erste reale Anwendung von `MOD-008 – Universal Glossar Engine` bis zum WordPress-Smoke-Test bringen.
+Pferde Atelier als erste reale Anwendung von `MOD-008 – Universal Glossar Engine` auf das korrigierte öffentliche Seitenmodell bringen.
 
 Bestätigter Live-Ausgangspunkt:
 - Seite `Glossar` ist angelegt;
 - Seite ist verlinkt;
 - Nutzer muss aktuell nichts Weiteres manuell anlegen.
+
+Verbindliches Frontendmodell:
+- Startseite = begrenzter Einstieg, nicht Gesamtverzeichnis;
+- passendes Foto/Hero oben, optisch am Pferde-Atelier orientiert;
+- waagerechte Glossar-Navigation auf jeder Glossarseite;
+- jede Glossar-Kategorie = eigene öffentliche Seite/URL;
+- keine HTML-Anker als Kategorienavigation;
+- Kategorien nicht doppelt als große Blöcke auf der Startseite;
+- Startseite zeigt stattdessen eine kleine wechselnde Auswahl von Glossarbegriffen analog zur Beitragsvorschau;
+- einzelne Begriffe behalten eigene Zieladressen;
+- kein Pflichtbild pro Begriff.
 
 ## ARBEITSORT
 
@@ -46,75 +57,52 @@ Autorität:
 → `CURRENT_STATE.md`
 → `HOBBYRAUM.md`
 
-Quellstand:
+Bisheriger Quellstand:
 `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/0.1.0/universal-glossary-engine/`
 
-QA:
-`../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/PROTOTYPE_QA_0.1.0.md`
-
-Kandidaten-Hash:
-`c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
+Wichtig:
+Der bisherige Frontendteil von 0.1.0 ist nicht mehr freigabefähig, weil er Kategorien per HTML-Anker innerhalb der Hauptseite ansteuert und alle veröffentlichten Begriffe gleichzeitig lädt.
 
 ## PFERDE-KONFIGURATION
 
 - vorhandene Seite `Glossar` als Hauptseite;
-- URL-Basis zunächst `glossar`, Realtest muss Kollision ausschließen;
-- Oberbereiche nicht im Core fest verdrahten;
+- echte Glossar-Kategorie-URLs unterhalb des Glossars;
+- gemeinsame waagerechte Navigation zentral erzeugen;
+- URL-Basis `glossar`, Realtest muss Permalink-Kollisionen ausschließen;
+- Kategorien nicht im Core fest verdrahten;
 - SEO-Schema konfigurierbar, je Begriff überschreibbar;
-- Designprofil übernimmt nur tatsächliche Pferde-Designwerte;
 - Fachimport später aus `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`;
 - Import immer als Entwurf, Veröffentlichung manuell.
 
 ## DESIGNBINDUNG
 
-Bestehendes Designplugin wird nicht geändert.
+Kein eigenes Glossar-Sonderdesign erfinden.
 
-Pferde-Profil im Glossar-Prototyp orientiert sich an:
-- Grün `#27a653`;
-- Blau `#37abf2`;
-- Text `#172018`;
-- Sekundärtext `#5e665f`;
-- Linie `#e7ebe7`;
-- Weiß;
-- 22px Rundung;
-- 16px Grundschrift / 1.55 Zeilenhöhe;
-- kompakte Karten-/Akzentlogik.
+Autoritativer aktueller Pferde-Designstand laut `../DESIGN/CURRENT_STATE.md`:
+`Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002`.
 
-## LOKALER PRÜFSTAND
+Vor Frontend-Code müssen aus dem tatsächlichen Designplugin die relevanten Muster für Hero/Bild, Typografie, Abstände, Karten-/Beitragsvorschau und responsive Verhalten übernommen werden. Nur Farben und Radiuswerte reichen nicht.
 
-- PHP-Lint 8/8 PASS;
-- Positiv/Negativ 15/15 PASS;
-- Runtime-Stub PASS;
-- Pferde-Profil PASS;
-- fachfremdes Zweitprofil PASS ohne Coreänderung;
-- Import/Export sicherheitsgebunden;
-- Import niemals Auto-Publish;
-- ZIP-Struktur PASS.
+## NEXT ACTION – FRONTEND VOR REALTEST KORRIGIEREN
 
-## NEXT ACTION – ECHTER WORDPRESS-REALTEST
-
-1. exakt hashgebundenen 0.1.0-Kandidaten installieren;
-2. vorhandene Seite `Glossar` als Hauptseite auswählen;
-3. zwei Test-Oberbereiche + drei Testbegriffe anlegen;
-4. prüfen: Begriffe nur im Glossarbereich, nicht normale Beiträge/Seiten;
-5. Hauptseite: Suche, A–Z, Oberbereiche, Aufklapper;
-6. Einzelbegriff: eigene URL, vollständiger Text;
-7. SEO-Titel + Meta-Description mit Yoast aktiv/inaktiv;
-8. keine doppelten Meta-/Canonical-/Robots-Ausgaben;
-9. JSON-Export → Reimport ausschließlich als Entwurf;
-10. normale Beiträge, normale Seiten und bestehendes Designplugin negativ unverändert prüfen;
-11. erst bei Gesamt-PASS einen installierbaren Kandidaten freigeben.
+1. aktuellen Frontend-Prototyp isoliert umbauen;
+2. `numberposts = -1` auf der Hauptseite entfernen;
+3. HTML-Anker-Navigation der Kategorien vollständig entfernen;
+4. echte Kategorie-Routen/-seiten erzeugen;
+5. dieselbe waagerechte Glossar-Navigation auf Start-, Kategorie- und Begriffsseiten erzeugen;
+6. Startseite nur mit begrenzter wechselnder Begriffsauswahl aufbauen;
+7. Hero-/Foto-Bereich und Teaserlogik am realen Pferde-Designplugin ausrichten;
+8. große Kategorien mit Pagination statt Vollausgabe behandeln;
+9. lokal Positiv/Negativ einschließlich großer Begriffsmenge prüfen;
+10. erst danach echter WordPress-Smoke-Test.
 
 ## PARALLELENTWICKLUNG
 
 Aktuell NICHT erforderlich.
 
-Nur bei echtem unkonfigurierbarem Zweitportalproblem:
-Core + kleiner Adapter. Kein zweiter Plugin-Fork.
-
 ## HARTE REGEL
 
-**Noch kein Plugin an WordPress ausgeben, solange der echte WordPress-Smoke-Test fehlt.**
+**Noch kein Plugin an WordPress ausgeben, solange das korrigierte Frontend nicht lokal PASS und anschließend im echten WordPress-Smoke-Test geprüft ist.**
 
 ## VERWEISE
 
