@@ -17,11 +17,21 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - The writer may not alter immutable metadata, choose a free route, enable publish, bypass a required checker, or create a per-article FULL production release.
 - Task 4 must keep all seven article states alive within one task until the System-4 batch gate has accepted the complete set.
 
+## SINGLE CHECKER ORCHESTRATOR HARD RULE
+- `isolated_system4/controller.py fullcheck` is the ONLY production checker orchestrator.
+- LanguageTool 6.8 and PPM 6.7.9 must be invoked only through that bound `fullcheck` path via `production_checks.run_all`.
+- Do NOT run LanguageTool or PPM directly before/after `fullcheck`.
+- Do NOT create or execute custom Python/shell orchestration wrappers such as `/tmp/system4_run.py` for checker sequencing.
+- A repairable LanguageTool/PPM/content finding is NOT a terminal process error. The controller must return `REPAIR_REQUIRED`; repair only the same draft, resubmit it, and rerun `fullcheck`.
+- `raise`, `exit`, task abort or batch restart for a repairable finding is forbidden.
+- Only a genuine `FULL_CHECK_HARD_BLOCK`, tool/runtime failure, integrity failure or other non-repairable controller/batch-gate blocker may terminate the run.
+
 ## CODEX ECONOMY HARD RULE
 - Codex quota is a scarce production resource.
 - Do NOT invoke Codex for diagnostics, read-only inspection, architecture work, preflight repair, test-only proof, GitHub persistence experiments, signing experiments or WordPress work.
 - Perform such work without Codex whenever technically possible.
-- Before any Codex production invocation, the caller must already have verified the current System-4 entry/preflight without Codex.
+- Before any Codex production invocation, the caller must already have verified the current System-4 entry/test suite/NO-LEGACY preflight without Codex and bound that PASS to the exact PR head SHA.
+- A Codex production run MUST NOT repeat that unchanged-head preflight. If the head changes, the caller must re-run the preflight without Codex before another production invocation.
 - A Codex invocation is permitted only for a REAL bound article-production run.
 - Before starting that run, the caller must also have a confirmed mechanism that returns ONE real retrievable output file/artifact containing the completed batch. If that file handoff is not confirmed, DO NOT START CODEX.
 - Never require seven full article bodies to be pasted into a PR comment as the production handoff.
