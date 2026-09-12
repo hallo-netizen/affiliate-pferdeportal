@@ -6,7 +6,7 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - Do not import/copy/wrap runtime, workers, gates, handoffs, signers, contracts or state machines from concepts 1–3.
 - Historical systems may be read only as inspiration/negative evidence.
 - No merge, no production publish.
-- Runtime workspaces and generated article/output files must live outside the repository except for the narrow parent-chat transport exception defined below.
+- Runtime workspaces and generated article/output files must live outside the repository.
 - Allowed tasks:
   1. architecture live test via `live_test.py`;
   2. first generated article test exactly per `FIRST_ARTICLE_TASK.md`;
@@ -29,12 +29,11 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - `raise`, `exit`, task abort or batch restart for a repairable finding is forbidden.
 - Only a genuine `FULL_CHECK_HARD_BLOCK`, tool/runtime failure, integrity failure or other non-repairable controller/batch-gate blocker may terminate the run.
 
-## PARENT-CHAT DOWNLOAD HANDOFF HARD RULE
-- A real 7/7 production run is NOT complete and MUST NOT be reported as `SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS` until the exact final `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` bytes are directly downloadable in the parent ChatGPT conversation.
-- A Codex-task-local `sandbox:/mnt/data/...` link does NOT satisfy this requirement.
-- A `View task` link does NOT satisfy this requirement.
-- A PR comment containing only a filename, SHA256 or task link does NOT satisfy this requirement.
-- Asking the user to manually download elsewhere and re-upload into ChatGPT is forbidden.
+## DIRECT PARENT-CHAT FILE HANDOFF HARD RULE
+- A real 7/7 production run is NOT complete until the parent ChatGPT conversation can reconstruct and expose the exact final `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` as a normal chat download.
+- The user must never be asked to download anything from GitHub or from the Codex task UI.
+- No repository branch, commit, push, artifact, PR-file or external storage is part of the file handoff.
+- `git push`, a temporary handoff branch, repository persistence of article/output bytes, and a Codex-local `sandbox:/mnt/data/...` link are forbidden as handoff mechanisms.
 - The final file MUST be valid UTF-8 JSON with contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1` and MUST pass `handoff_transport.py validate`.
 - It MUST contain the exact seven checked bodies, immutable WordPress metadata, `production_context` for each article, real LT 6.8 PASS evidence and real PPM 6.7.9 PASS evidence.
 - The existing WordPress signature switch is currently OFF for this production path. System 4 therefore performs no signing and no ENDSTEMPEL step for the current articles.
@@ -42,24 +41,21 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - `publish_allowed=false` remains mandatory. Direct upload must not be confused with automatic publish.
 - System 4 MUST NOT modify the WordPress plugin or its signature switch.
 
-### Narrow transport exception
-- After the seven-article batch has passed, Codex may create exactly one transport envelope with `handoff_transport.py pack`.
-- The transport envelope may be persisted ONLY on the dedicated temporary branch `system4-parent-chat-handoff`, only at `isolated_system4/.handoff/SYSTEM4_PARENT_CHAT_TRANSPORT_V1.json`.
-- The production PR branch MUST NOT receive article/output transport content and MUST NOT change because of handoff transport.
-- The transport branch must contain only Base64 transport data plus exact plaintext SHA/length/filename metadata; no second workflow truth, no publish flag, no source-code changes.
-- Codex must report the exact transport commit SHA and plaintext SHA256.
-- The parent Chat fetches that exact commit/path, unpacks with `handoff_transport.py unpack`, recomputes SHA256 from the resulting bytes, and exposes that exact file as the direct parent-chat download.
-- After successful parent-chat readback, the transport branch must be force-reset to the production source head so the transport payload is no longer reachable from the branch tip.
-- Any transport SHA/length/schema mismatch is `SYSTEM4_HANDOFF_FAIL`.
-- This transport path must be positively and negatively regression-tested without Codex before another real production run.
+### Bound inline relay
+- After the seven-article batch has passed, create the final JSON in canonical compact UTF-8 form and validate it.
+- Run `handoff_transport.py inline-pack` to create exactly one `SYSTEM4_PARENT_CHAT_INLINE_V1` text envelope using XZ/LZMA2 + Base64.
+- The envelope is returned only in the normal terminal Codex completion response between the exact BEGIN/END markers. It is not written to or pushed into any repository location.
+- The inline envelope must be at most 60000 characters or the handoff fails closed with `INLINE_ENVELOPE_TOO_LARGE`.
+- The parent Chat extracts that inline envelope from the completed task result, runs `handoff_transport.py inline-unpack` locally, validates schema/SHA/length/canonical bytes, and exposes the resulting `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` directly in this chat.
+- Any Base64/XZ/SHA/length/schema/canonical mismatch is `SYSTEM4_HANDOFF_FAIL`.
+- No second WordPress transformation occurs after reconstruction; the reconstructed exact JSON is the file the user uploads unchanged.
 
 ## CODEX ECONOMY HARD RULE
 - Codex quota is a scarce production resource.
-- Do NOT invoke Codex for diagnostics, read-only inspection, architecture work, preflight repair, test-only proof, GitHub persistence experiments, signing experiments or WordPress work.
+- Do NOT invoke Codex for diagnostics, read-only inspection, architecture work, preflight repair, handoff experiments, signing experiments or WordPress work.
 - Perform such work without Codex whenever technically possible.
 - Before any Codex production invocation, the caller must already have verified the current System-4 entry/test suite/NO-LEGACY preflight without Codex and bound that PASS to the exact PR head SHA.
 - A Codex production run MUST NOT repeat that unchanged-head preflight. If the head changes, the caller must re-run the preflight without Codex before another production invocation.
-- A Codex invocation is permitted only for a REAL bound article-production run.
-- Before starting that run, the complete parent-chat transport route above must have passed a real dummy roundtrip without Codex.
-- Never require seven full article bodies to be pasted into a PR comment as the production handoff.
-- Signing/ENDSTEMPEL remain disabled for the current article output. After 7/7 PASS, transport the exact direct WordPress JSON to the parent chat without another transformation.
+- A Codex invocation is permitted only for a REAL bound article-production run and only after explicit user approval for that new production run.
+- Never require seven full article bodies to be pasted manually, downloaded by the user, or moved through a repository branch.
+- Signing/ENDSTEMPEL remain disabled for the current article output. After 7/7 PASS, relay only the compact inline envelope so the parent chat can reconstruct the exact direct WordPress JSON.
