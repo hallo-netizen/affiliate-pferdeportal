@@ -1,9 +1,12 @@
 from pathlib import Path
-import json, subprocess, tempfile, sys
+import hashlib, json, subprocess, tempfile, sys
 ROOT=Path(__file__).parent
 SNAP=Path(sys.argv[1]) if len(sys.argv)>1 else ROOT/'live_fixture'/'wordpress_snapshot.json'
-RESEARCH='''Live test research. Hindernisstangen werden in Bodenarbeit, Cavaletti- und Springtraining verwendet. Für die Auswahl sind Einsatzzweck, Material, Gewicht, Sichtbarkeit, Lagerung und sichere Handhabung relevant. Diese Recherche ist nur Testinhalt für den isolierten Workflow.'''
-FACTS='''Live test facts. Titel, Zielkeyword, Kategorie, Beitragsart und Plan-Slot stammen ausschließlich aus dem WordPress-Snapshot. Externe Daten dürfen weder Route noch Publish-Status verändern. Die Ausgabe muss WordPress-Status draft behalten.'''
+_RESEARCH_EVIDENCE='Architekturtest-Quelle: Hindernisstangen werden als gebundener Testgegenstand verwendet; der Inhalt dient ausschließlich dem isolierten Zustandsübergang und nicht als Produktionsquelle.'
+RESEARCH=json.dumps({'contract':'SYSTEM4_RESEARCH_EVIDENCE_V1','sources':[{'source_id':'src-system4-live-architecture','source_title':'System 4 Architekturtest – lokale Testquelle','source_url':'https://example.org/system4-architecture-test','retrieved_at':'2026-09-13T00:00:00Z','snapshot_sha256':hashlib.sha256(_RESEARCH_EVIDENCE.encode()).hexdigest(),'evidence':_RESEARCH_EVIDENCE}]},ensure_ascii=False)
+_FACT_EVIDENCE_1='Im Architekturtest müssen Titel, Zielkeyword, Kategorie, Beitragsart und Plan-Slot aus dem gebundenen Snapshot erhalten bleiben.'
+_FACT_EVIDENCE_2='Der Architekturtest darf den Publish-Status nicht freigeben; die lokale Testausgabe bleibt auf WordPress-Status draft beschränkt.'
+FACTS=json.dumps({'contract':'SYSTEM4_FACTS_EVIDENCE_V1','claims':[{'fact_id':'fact-system4-live-binding','source_id':'src-system4-live-architecture','statement':'Die gebundenen Metadaten bleiben im Architekturtest unverändert.','evidence_text':_FACT_EVIDENCE_1,'evidence_text_sha256':hashlib.sha256(_FACT_EVIDENCE_1.encode()).hexdigest()},{'fact_id':'fact-system4-live-publish','source_id':'src-system4-live-architecture','statement':'Der Architekturtest erteilt niemals eine Veröffentlichungsfreigabe.','evidence_text':_FACT_EVIDENCE_2,'evidence_text_sha256':hashlib.sha256(_FACT_EVIDENCE_2.encode()).hexdigest()}]},ensure_ascii=False)
 BAD='# Falscher Titel\n\nKurzer Testtext.'
 GOOD='''# Das Wichtigste über Hindernisstangen für Pferde
 
@@ -35,7 +38,7 @@ def run(cmd, expect=(0,)):
  if p.returncode not in expect: raise SystemExit('UNEXPECTED_RC:'+str(p.returncode)+' '+p.stderr)
  return p
 with tempfile.TemporaryDirectory() as td:
- td=Path(td); w=td/'room'; out=td/'out'; r=td/'research.txt'; f=td/'facts.txt'; b=td/'bad.md'; g=td/'good.md'
+ td=Path(td); w=td/'room'; out=td/'out'; r=td/'research.json'; f=td/'facts.json'; b=td/'bad.md'; g=td/'good.md'
  r.write_text(RESEARCH); f.write_text(FACTS); b.write_text(BAD); g.write_text(GOOD)
  run([sys.executable,str(ROOT/'codex_entry.py'),'start',str(SNAP),str(w)])
  run([sys.executable,str(ROOT/'controller.py'),'research',str(w),str(r)])
@@ -44,7 +47,7 @@ with tempfile.TemporaryDirectory() as td:
  run([sys.executable,str(ROOT/'controller.py'),'check',str(w)],expect=(3,))
  s=json.loads((w/'state.json').read_text()); assert s['phase']=='REPAIR_REQUIRED' and s['last_error']=='TITLE_BINDING_FAIL'
  run([sys.executable,str(ROOT/'codex_entry.py'),'next',str(w)])
- run([sys.executable,str(ROOT/'controller.py'),'draft',str(w),str(g)])
+ run([sys.executable,str(ROOT/'controller.py'),'repair',str(w),str(g)])
  run([sys.executable,str(ROOT/'controller.py'),'check',str(w)])
  run([sys.executable,str(ROOT/'controller.py'),'release',str(w),str(out)])
  s=json.loads((w/'state.json').read_text()); assert s['phase']=='RELEASED' and s['released'] is True and s['revision']==2
