@@ -21,8 +21,8 @@ Kanonische Version:
 Kanonischer Source-Bind-Commit:
 `df3e97119fe44ac864701d8de6b946c7c6c3416c`
 
-Aktueller technischer Branch-Head nach Cleanup:
-`58cc8c7e62c0a1651823a6a654dcbfd5256bbae4`
+Aktueller technischer Branch-Head nach Scope-Cleanup:
+`75a2368cfe1efbfb623aa263da16a9ee7ab96462`
 
 Kanonisches 26-Dateien-Manifest:
 `694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b`
