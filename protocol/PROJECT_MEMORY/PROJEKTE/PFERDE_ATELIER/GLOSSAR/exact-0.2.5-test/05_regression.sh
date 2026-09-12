@@ -21,6 +21,7 @@ docker exec wp wp post meta update "$DUP" _uge_primary_category_id "$HEALTH" --a
 docker exec wp wp post update "$DUP" --post_status=publish --allow-root >/dev/null
 test "$(docker exec wp wp post get "$DUP" --field=post_status --allow-root)" = draft
 echo REG_DUPLICATE_PASS
-test "$(docker exec wp wp post list --allow-root --post_type=post --post_status=publish --search='Huf normaler Beitrag' --format=count)" = 1
+# Normal WordPress posts must remain untouched by glossary guards.
+test "$(docker exec wp wp eval --allow-root '$p=get_page_by_path("huf-normaler-beitrag",OBJECT,"post"); echo ($p instanceof WP_Post && $p->post_status==="publish") ? "1" : "0";')" = 1
 echo REG_NORMAL_POST_PASS
 echo UGE025_REGRESSION_PASS
