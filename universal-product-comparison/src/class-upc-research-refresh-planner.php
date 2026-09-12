@@ -98,7 +98,7 @@ class UPC_Research_Refresh_Planner {
                     'refresh_months' => $months,
                     'required_additional_contracts' => array_values( (array) ( $group['required_additional_contracts'] ?? array() ) ),
                 );
-                $task['task_binding_sha256'] = $this->task_binding_sha256( $task, $policy_sha256 );
+                $task['task_binding_sha256'] = self::task_binding_sha256( $task, $policy_sha256 );
                 $task['affected_comparison_ids'] = array_values( array_map( 'intval', (array) $affected ) );
                 $tasks[] = $task;
                 $group_due++;
@@ -133,7 +133,7 @@ class UPC_Research_Refresh_Planner {
         );
     }
 
-    private function task_binding_sha256( array $task, $policy_sha256 ) {
+    public static function task_binding_sha256( array $task, $policy_sha256 ) {
         $payload = array(
             'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_TASK_V1',
             'maintenance_policy_sha256' => (string) $policy_sha256,
