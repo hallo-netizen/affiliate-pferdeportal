@@ -33,7 +33,7 @@ class CodexEconomyContractTests(unittest.TestCase):
         ]
         for value in required: self.assertIn(value,agents)
 
-    def test_parent_chat_handoff_is_hard_completion_gate_and_direct_wordpress_file(self):
+    def test_parent_chat_handoff_is_direct_inline_and_wordpress_ready(self):
         task=(ROOT/'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
         agents=(ROOT/'AGENTS.md').read_text(encoding='utf-8')
         for value in [
@@ -42,23 +42,26 @@ class CodexEconomyContractTests(unittest.TestCase):
             'direct_wordpress_upload_ready=true',
             'direct_upload_block_reason=null',
             'required_downstream_components=[]',
-            'system4-parent-chat-handoff',
-            'handoff_transport.py pack',
-            'handoff_transport.py unpack',
-            'SYSTEM4_HANDOFF_FAIL',
-            'asking the user to manually download and re-upload',
+            'inline-pack',
+            'inline-unpack',
+            'SYSTEM4_PARENT_CHAT_INLINE_V1',
             'The parent Chat exposes it unchanged as one download',
-            'No signature step and no second transformation occur in between.',
+            'No signature step and no second WordPress transformation occur in between.',
         ]: self.assertIn(value,task)
-        self.assertNotIn('REQUIRES_PSERC_IMPORT_ENVELOPE_AND_SUPERVISOR_AUTHENTICITY',task)
-        for value in [
-            'PARENT-CHAT DOWNLOAD HANDOFF HARD RULE',
-            'A real 7/7 production run is NOT complete',
-            'Codex-task-local `sandbox:/mnt/data/...` link does NOT satisfy',
+        for forbidden in [
             'system4-parent-chat-handoff',
+            'git push',
+            'transport branch',
+            'write ONLY `isolated_system4/.handoff/',
+        ]: self.assertNotIn(forbidden,task)
+        for value in [
+            'DIRECT PARENT-CHAT FILE HANDOFF HARD RULE',
+            'No repository branch, commit, push, artifact, PR-file or external storage is part of the file handoff.',
+            'inline-pack',
+            'inline-unpack',
             'WORDPRESS_DIRECT_IMPORT',
             'direct_wordpress_upload_ready=true',
-            'Asking the user to manually download elsewhere and re-upload into ChatGPT is forbidden.',
+            'The user must never be asked to download anything from GitHub or from the Codex task UI.',
             'System 4 MUST NOT modify the WordPress plugin or its signature switch.',
         ]: self.assertIn(value,agents)
 
