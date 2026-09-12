@@ -52,8 +52,8 @@ class UPC_Affiliate_Bridge {
 
             $identifiers = self::exact_identifiers( $item['knowledge'] );
             if ( empty( $identifiers ) ) {
-                // Fail closed: a comparison subject without a stable Affiliate-
-                // exact identifier must not receive a fuzzy or SKU substitute.
+                // Fail closed: a comparison subject without a stable, source-
+                // bound Affiliate exact identifier gets no fuzzy/SKU substitute.
                 continue;
             }
 
@@ -97,6 +97,7 @@ class UPC_Affiliate_Bridge {
         // not an automatic commerce match key. This prevents merchant SKU /
         // manufacturer article-number confusion from producing substitutions.
         $allowed = array( 'GTIN', 'EAN', 'MPN' );
+        $official_sources = array( 'MANUFACTURER', 'OFFICIAL_DOCUMENTATION' );
 
         foreach ( (array) ( $knowledge['identifiers'] ?? array() ) as $identifier ) {
             if ( ! is_array( $identifier ) ) {
@@ -109,8 +110,17 @@ class UPC_Affiliate_Bridge {
             $value = trim( sanitize_text_field(
                 (string) ( $identifier['identifier_value'] ?? $identifier['value'] ?? '' )
             ) );
+            $source_url = esc_url_raw( (string) ( $identifier['source_url'] ?? '' ) );
+            $source_type = strtoupper( sanitize_text_field( (string) ( $identifier['source_type'] ?? '' ) ) );
+            $verified_at = trim( sanitize_text_field( (string) ( $identifier['verified_at'] ?? '' ) ) );
 
-            if ( '' === $value || ! in_array( $type, $allowed, true ) ) {
+            if ( '' === $value
+                || ! in_array( $type, $allowed, true )
+                || '' === $source_url
+                || ! in_array( $source_type, $official_sources, true )
+                || '' === $verified_at
+                || false === strtotime( $verified_at )
+            ) {
                 continue;
             }
 
