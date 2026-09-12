@@ -61,7 +61,7 @@ class RepairContinuityTests(unittest.TestCase):
                 self.assertEqual(state["revision"], 1)
 
                 draft.write_text("# Test\n\nKorrigierter Entwurf", encoding="utf-8")
-                controller.cmd_draft(workspace, draft)
+                controller.cmd_repair(workspace, draft)
                 self.assertEqual(controller.cmd_fullcheck(workspace), 0)
                 state = json.loads((workspace / "state.json").read_text(encoding="utf-8"))
                 self.assertEqual(state["phase"], "OUTPUT_GATE_REQUIRED")
@@ -106,7 +106,26 @@ class RepairContinuityTests(unittest.TestCase):
                         "languagetool",
                         [{"error_code": "LANGUAGETOOL_FINDING", "rule_id": "GERMAN_SPELLER_RULE"}],
                     )
-                return {"contract": "SYSTEM4_FULL_PRODUCTION_CHECK_V1", "status": "PASS"}
+                draft_sha = state["draft_sha256"]
+                return {
+                    "contract": "SYSTEM4_FULL_PRODUCTION_CHECK_V1",
+                    "status": "PASS",
+                    "checked_draft_sha256": draft_sha,
+                    "publish_allowed": False,
+                    "evidence": {
+                        "no_legacy": {"status": "PASS", "legacy_import_count": 0},
+                        "no_external_links": {"status": "PASS", "external_link_count": 0},
+                        "languagetool": {"status": "PASS", "engine": "LanguageTool 6.8 / Bestand 43", "finding_count": 0},
+                        "ppm679": {
+                            "status": "PASS", "ppm_version": "6.7.9",
+                            "technical_status": "TECHNICAL_CHECK_OK",
+                            "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+                            "fail_closed_aggregate_status": "PASS",
+                            "content_sha256": draft_sha,
+                            "language_evidence_source": "REAL_LT68_FULLCHECK_REUSED",
+                        },
+                    },
+                }
 
             with mock.patch.object(controller.production_checks, "run_all", side_effect=fake_run_all) as run_all:
                 for index in range(7):
@@ -126,7 +145,7 @@ class RepairContinuityTests(unittest.TestCase):
                     result = controller.cmd_fullcheck(workspace)
                     if result == 3:
                         draft.write_text(f"# Artikel {index}\n\nKorrigierter Entwurf {index}", encoding="utf-8")
-                        controller.cmd_draft(workspace, draft)
+                        controller.cmd_repair(workspace, draft)
                         self.assertEqual(controller.cmd_fullcheck(workspace), 0)
                     else:
                         self.assertEqual(result, 0)
