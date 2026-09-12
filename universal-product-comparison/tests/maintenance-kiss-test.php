@@ -80,6 +80,18 @@ class Maintenance_Fake_WPDB {
     public function get_col( $prepared ) {
         $this->last_get_col_prepared = $prepared;
         $query = $prepared['query'];
+        $args = $prepared['args'];
+
+        if ( false !== strpos( $query, 'manufacturer = %s' ) && false !== strpos( $query, 'model_name = %s' ) ) {
+            if ( isset( $args[0] ) && 'Maker A' === $args[0] ) {
+                return array( '1' );
+            }
+            if ( isset( $args[0] ) && 'Duplicate Maker' === $args[0] ) {
+                return array( '1', '2' );
+            }
+            return array();
+        }
+
         if ( false !== strpos( $query, 'SELECT id FROM wp_upk_products' ) ) {
             if ( false !== strpos( $query, 'product_group_key = %s' ) ) {
                 return array( '1' );
@@ -147,6 +159,39 @@ maintenance_assert( 'TEMPORARILY_UNAVAILABLE' === $wpdb->last_update['data']['li
 
 $result = $upk->update_variant( 999, array( 'lifecycle_status' => 'ACTIVE' ) );
 maintenance_assert( is_wp_error( $result ) && 'UPK_VARIANT_NOT_FOUND' === $result->get_error_code(), 'negative unknown variant blocked' );
+
+$existing = $upk->find_product_id_by_identity( array(
+    'manufacturer' => 'Maker A',
+    'model_name' => 'Model Alpha',
+    'product_group_key' => 'test-group',
+    'generation' => '',
+) );
+maintenance_assert( 1 === $existing, 'existing exact product identity is reused' );
+maintenance_assert( 'Maker A' === $wpdb->last_get_col_prepared['args'][0], 'manufacturer bound into identity lookup' );
+maintenance_assert( 'Model Alpha' === $wpdb->last_get_col_prepared['args'][1], 'model bound into identity lookup' );
+maintenance_assert( 'test-group' === $wpdb->last_get_col_prepared['args'][2], 'group bound into identity lookup' );
+maintenance_assert( '' === $wpdb->last_get_col_prepared['args'][3], 'generation bound into identity lookup' );
+
+$missing = $upk->find_product_id_by_identity( array(
+    'manufacturer' => 'New Maker',
+    'model_name' => 'New Model',
+    'product_group_key' => 'test-group',
+) );
+maintenance_assert( 0 === $missing, 'new exact product identity remains eligible for one creation' );
+
+$duplicate = $upk->find_product_id_by_identity( array(
+    'manufacturer' => 'Duplicate Maker',
+    'model_name' => 'Duplicate Model',
+    'product_group_key' => 'test-group',
+) );
+maintenance_assert( is_wp_error( $duplicate ) && 'UPK_DUPLICATE_PRODUCT_IDENTITY' === $duplicate->get_error_code(), 'duplicate exact product identity blocks fail closed' );
+
+$incomplete = $upk->find_product_id_by_identity( array(
+    'manufacturer' => 'Maker A',
+    'model_name' => '',
+    'product_group_key' => 'test-group',
+) );
+maintenance_assert( is_wp_error( $incomplete ) && 'UPK_PRODUCT_IDENTITY_INCOMPLETE' === $incomplete->get_error_code(), 'incomplete candidate identity blocked' );
 
 $due = $upk->products_due_for_review( '2026-03-12 00:00:00', 999 );
 maintenance_assert( array( 2, 1 ) === $due, 'positive due-product selection' );
