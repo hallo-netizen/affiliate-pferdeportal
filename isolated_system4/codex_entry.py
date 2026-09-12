@@ -5,12 +5,13 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 CONTROLLER=ROOT/'controller.py'
 ALLOWED={
- 'RESEARCH_REQUIRED':'Writer may create/update research only; then controller research.',
- 'FACT_CHECK_REQUIRED':'Writer may create/update facts only; then controller facts.',
- 'DRAFT_REQUIRED':'Writer may create/update draft only; then controller draft.',
- 'CHECK_REQUIRED':'Run controller check. Writer may not choose routing.',
- 'REPAIR_REQUIRED':'Writer may edit only the same draft field to fix last_error; then resubmit and recheck.',
- 'OUTPUT_GATE_REQUIRED':'Run controller release. No content mutation allowed.',
+ 'RESEARCH_REQUIRED':'Create only SYSTEM4_RESEARCH_EVIDENCE_V1 JSON with real source title/url/retrieved_at/evidence and snapshot_sha256=SHA256(evidence); then controller research.',
+ 'FACT_CHECK_REQUIRED':'Create only SYSTEM4_FACTS_EVIDENCE_V1 JSON with claims bound to the accepted research source_ids and evidence_text hashes; then controller facts.',
+ 'DRAFT_REQUIRED':'Bind production context from exactly the accepted research/facts first if not already bound; then write only the same article body using the unchanged current Textmaschine/content rules.',
+ 'CHECK_REQUIRED':'Run controller fullcheck. Writer may not choose routing.',
+ 'REPAIR_REQUIRED':'Edit only the same draft body for the exact reported first defect; controller repair rejects broad rewrites; then rerun fullcheck.',
+ 'OUTPUT_GATE_REQUIRED':'Article passed. Do not mutate content. For batch work keep the state unchanged until batch_gate collect.',
+ 'SIGNATURE_REQUIRED':'STOP. Signing is not part of the current unsigned System-4 article path.',
  'RELEASED':'STOP. Return release paths and hashes only.'}
 
 def show(workspace: Path) -> int:
