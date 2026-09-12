@@ -18,6 +18,18 @@ If the production head changes after preflight: re-run the preflight WITHOUT COD
 ### Codex economy consequence
 The production Codex task MUST NOT rerun the unchanged-head unittest/NO-LEGACY preflight, perform architecture diagnostics, experiment with handoff transport, signing, ENDSTEMPEL or WordPress-plugin work.
 
+## TEXTMASCHINE + DESIGN ARE IMMUTABLE
+This task is NOT authorization to change the existing Textmaschine or design.
+
+Hard rules:
+- Textmaschine/content-rule authority is READ-ONLY. Do not edit, relax, extend, reinterpret, normalize, replace or shadow any current Textmaschine rule.
+- PPM 6.7.9 package/rules, current table contract, PSERC/PSTE rule inputs, WordPress plugin, theme/CSS and design selectors are READ-ONLY.
+- Do not add a substitute authoring rule because a checker rejects a draft. Repair only the exact defect inside the same article while remaining under the unchanged current rules.
+- Do not create CSS, inline styles, new design classes, alternate heading hierarchy, alternate table classes, theme/plugin changes or any downstream HTML normalization.
+- Existing production markup is mandatory exactly because the importer writes the checked body unchanged. For `Beratung`, the body must remain inside the already-established production shell `ppm-generated ppm-type-beratung` with matching `data-article-type="Beratung"`; existing table markup must retain `system-129-table comparison-table`; the documented Beratung section-heading level remains H2.
+- `design_guard.py` performs PASS/BLOCK only and ZERO mutation. It must never repair or restyle the article.
+- If satisfying System 4 would require any Textmaschine-rule or design change, terminate with `BLOCKED_TEXTMASCHINE_OR_DESIGN_IMMUTABLE` instead of changing anything.
+
 ## Fixed input
 Use exactly `isolated_system4/live_fixture/wordpress_snapshot.json` and all seven real `Beratung` items in existing order/index 0..6.
 
@@ -66,16 +78,16 @@ From only the accepted research document create:
 Submit this document to `controller.py facts`. Do not continue unless it passes.
 
 ### Production context stage
-Create the current `canonical_fact_pack_v1` and production-plan item using the unchanged current fachliche specifications. The fact pack must contain the same accepted source metadata and the same accepted core claims. `controller.py context` must bind it before any draft is accepted. A source-free/self-certified `SOURCE_VERIFIED_PRODUCTION_READY` pack is forbidden and blocks here.
+Create the current `canonical_fact_pack_v1` and production-plan item using the unchanged current fachliche specifications. The fact pack must contain the same accepted source metadata and the same accepted core claims. `controller.py context` must bind it before any FULL-production draft can pass. A source-free/self-certified `SOURCE_VERIFIED_PRODUCTION_READY` pack is forbidden and blocks here.
 
 ## Per item — indexes 0..6
 For each exact snapshot item:
 1. indexed ingress for the exact item;
 2. FRESH research and FRESH facts using the mandatory structured evidence contracts above;
 3. bind current valid production context from exactly those accepted research/facts and only permitted authoritative/pure-tool data;
-4. generate a genuinely new German `Beratung` draft for exact title/target keyword using the unchanged current Textmaschine/content rules; article fact traces must resolve to its bound fact pack;
+4. generate a genuinely new German `Beratung` draft for exact title/target keyword using the unchanged current Textmaschine/content rules; article fact traces must resolve to its bound fact pack; existing production HTML/design contract must remain unchanged;
 5. submit SAME draft and run controller FULL production check;
-6. all quality/safety checks remain mandatory and unchanged: current content/Textmaschine rules, actual PPM 6.7.9 content validator, current SEO/PSERC/PSTE bindings, mandatory table rule, exact internal-link rule, absolute external-link prohibition, real fail-closed LanguageTool 6.8, immutable metadata, publish safety and NO-LEGACY;
+6. all quality/safety checks remain mandatory and unchanged: current content/Textmaschine rules, actual PPM 6.7.9 content validator, current SEO/PSERC/PSTE bindings, mandatory table rule, exact internal-link rule, absolute external-link prohibition, real fail-closed LanguageTool 6.8, immutable metadata, unchanged design contract, publish safety and NO-LEGACY;
 7. repair only via the controller `REPAIR_REQUIRED -> controller.py repair -> fullcheck` loop above;
 8. passed state must remain `phase=OUTPUT_GATE_REQUIRED`, `checks.status=PASS`, `checks.mode=FULL_PRODUCTION`, `checks.checked_draft_sha256 == draft_sha256`, valid `production_context`, `released=false`, `release_prepared=null`, `publish_allowed=false`;
 9. BASIC checks never substitute FULL; never call per-article release/finalize.
@@ -90,6 +102,7 @@ Required:
 - article_count = 7
 - batch SHA = `7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a`
 - `publish_allowed=false`
+- unchanged-design guard PASS on every article, with `design_mutation_performed=false`
 - cross-article distinctness PASS; the known failure class of repeating one sentence/paragraph template across different topics is BLOCKED.
 
 Signing / ENDSTEMPEL are NOT executed for the current article output because the existing WordPress signature switch is temporarily OFF.
@@ -136,9 +149,9 @@ Each article row must contain exactly:
 - real LanguageTool 6.8 PASS / zero unresolved findings
 - real PPM 6.7.9 technical/content-quality/aggregate PASS
 
-The final handoff validator re-runs the System-4 fact-pack/fact-trace and batch-distinctness guards. A bad source-free fact pack or a templated seven-article batch cannot be transported merely because hashes/checker status fields look valid.
+The final handoff validator re-runs the System-4 fact-pack/fact-trace, unchanged-design and batch-distinctness guards. A bad source-free fact pack, design-drifted body or templated seven-article batch cannot be transported merely because hashes/checker status fields look valid.
 
-This exact file is the final current article output. The parent Chat exposes it unchanged as one download and the user uploads that same JSON unchanged to WordPress. No signature step and no second WordPress transformation occur in between. `publish_allowed=false` remains unchanged; upload is not auto-publish.
+This exact file is the final current article output. The parent Chat exposes it unchanged as one download and the user uploads that same JSON unchanged to WordPress. No signature step, no design transformation and no second WordPress transformation occur in between. `publish_allowed=false` remains unchanged; upload is not auto-publish.
 
 ## Mandatory direct parent-chat inline relay — NO REPOSITORY HANDOFF
 After the final JSON validates:
@@ -156,6 +169,7 @@ Invalid handoffs:
 - filename/SHA/task-link only;
 - asking the user to manually download and re-upload;
 - any Base64/XZ/SHA/length/schema/canonical mismatch;
+- any content/design normalization between FULL PASS and WordPress;
 - `WORDPRESS_PREIMPORT_REVIEW`;
 - `direct_wordpress_upload_ready=false`;
 - adding signing/ENDSTEMPEL as a current-output dependency.
@@ -170,4 +184,4 @@ or `SYSTEM4_HANDOFF_FAIL` if article/batch production succeeded but canonicaliza
 
 or the FIRST genuine non-repairable current System-4 controller/checker/tool/integrity blocker with exact stage, status/error and source.
 
-No commentary stops. No repairable-finding stops. No signing. No ENDSTEMPEL. No plugin changes. No merge. No publish. No repository handoff.
+No commentary stops. No repairable-finding stops. No signing. No ENDSTEMPEL. No plugin changes. No Textmaschine-rule changes. No design changes. No merge. No publish. No repository handoff.
