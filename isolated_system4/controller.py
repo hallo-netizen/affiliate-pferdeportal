@@ -64,21 +64,14 @@ def extract_ready(snapshot,item_index=0):
     if not re.fullmatch(r'[0-9a-f]{64}',batch_sha): raise Fail('WORDPRESS_BATCH_SHA_FAIL')
     return dict(item),batch_sha
 
-def extract_first_ready(snapshot):
-    return extract_ready(snapshot,0)
+def extract_first_ready(snapshot): return extract_ready(snapshot,0)
 
 def cmd_ingress(snapshot_path, workspace, item_index=0):
     p=Path(snapshot_path); w=Path(workspace); w.mkdir(parents=True,exist_ok=True)
     if p.suffix.lower()!='.json': raise Fail('WORDPRESS_INPUT_FORMAT_FAIL')
     snap=json.loads(p.read_text(encoding='utf-8'))
     article,batch_sha=extract_ready(snap,item_index)
-    state={
-      'contract':CONTRACT,'source_snapshot_sha256':file_sha(p),'batch_sha256':batch_sha,'article':article,
-      'immutable_core_sha256':'','publish_allowed':False,'phase':'RESEARCH_REQUIRED',
-      'revision':0,'research':None,'facts':None,'production_context':None,
-      'draft_markdown':None,'draft_sha256':None,'checks':{},'last_error':None,
-      'release_prepared':None,'released':False
-    }
+    state={'contract':CONTRACT,'source_snapshot_sha256':file_sha(p),'batch_sha256':batch_sha,'article':article,'immutable_core_sha256':'','publish_allowed':False,'phase':'RESEARCH_REQUIRED','revision':0,'research':None,'facts':None,'production_context':None,'draft_markdown':None,'draft_sha256':None,'checks':{},'last_error':None,'release_prepared':None,'released':False}
     state['immutable_core_sha256']=sha(immutable_core(state))
     (w/'state.json').write_text(json.dumps(state,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
     print('SYSTEM4_INGRESS_PASS:RESEARCH_REQUIRED')
@@ -106,13 +99,17 @@ def cmd_facts(workspace,facts_path):
     s['facts']={'text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}; s['phase']='DRAFT_REQUIRED'; save(s,p)
     print('SYSTEM4_FACTS_PASS:DRAFT_REQUIRED')
 
+def _read_context_files(fact_pack_path,plan_item_path):
+    fact=json.loads(Path(fact_pack_path).read_text(encoding='utf-8'))
+    plan=json.loads(Path(plan_item_path).read_text(encoding='utf-8'))
+    if not isinstance(fact,dict) or not isinstance(plan,dict): raise Fail('PRODUCTION_CONTEXT_OBJECT_REQUIRED')
+    return fact,plan
+
 def cmd_context(workspace,fact_pack_path,plan_item_path):
     s,p=load(workspace)
     if s['phase']!='DRAFT_REQUIRED': raise Fail('PHASE_FAIL:CONTEXT')
     if s.get('production_context') is not None: raise Fail('PRODUCTION_CONTEXT_ALREADY_BOUND')
-    fact=json.loads(Path(fact_pack_path).read_text(encoding='utf-8'))
-    plan=json.loads(Path(plan_item_path).read_text(encoding='utf-8'))
-    if not isinstance(fact,dict) or not isinstance(plan,dict): raise Fail('PRODUCTION_CONTEXT_OBJECT_REQUIRED')
+    fact,plan=_read_context_files(fact_pack_path,plan_item_path)
     try: production_checks.validate_bound_context(s,fact,plan)
     except production_checks.ProductionCheckError as e: raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
     s['production_context']={'fact_pack':fact,'production_plan_item':plan,'sha256':sha({'fact_pack':fact,'production_plan_item':plan})}
@@ -121,12 +118,26 @@ def cmd_context(workspace,fact_pack_path,plan_item_path):
 
 def cmd_draft(workspace,draft_path):
     s,p=load(workspace)
-    if s['phase'] not in ('DRAFT_REQUIRED','REPAIR_REQUIRED'): raise Fail('PHASE_FAIL:DRAFT')
+    if s['phase']!='DRAFT_REQUIRED': raise Fail('PHASE_FAIL:DRAFT')
     text=Path(draft_path).read_text(encoding='utf-8').strip()
     if not text: raise Fail('DRAFT_EMPTY')
     s['draft_markdown']=text; s['draft_sha256']=hashlib.sha256(text.encode()).hexdigest(); s['revision']+=1
     s['checks']={}; s['last_error']=None; s['release_prepared']=None; s['phase']='CHECK_REQUIRED'; save(s,p)
     print(f"SYSTEM4_DRAFT_ACCEPTED:REVISION={s['revision']}:CHECK_REQUIRED")
+
+def cmd_repair(workspace,draft_path):
+    s,p=load(workspace)
+    if s['phase']!='REPAIR_REQUIRED': raise Fail('PHASE_FAIL:REPAIR')
+    old_context=json.loads(json.dumps(s.get('production_context'),ensure_ascii=False))
+    if not isinstance(old_context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
+    text=Path(draft_path).read_text(encoding='utf-8').strip()
+    if not text: raise Fail('DRAFT_EMPTY')
+    if text==s.get('draft_markdown'): raise Fail('REPAIR_DRAFT_UNCHANGED')
+    s['draft_markdown']=text; s['draft_sha256']=hashlib.sha256(text.encode()).hexdigest(); s['revision']+=1
+    s['checks']={}; s['last_error']=None; s['release_prepared']=None; s['phase']='CHECK_REQUIRED'
+    if s.get('production_context')!=old_context: raise Fail('REPAIR_CONTEXT_MUTATION_FORBIDDEN')
+    save(s,p)
+    print(f"SYSTEM4_REPAIR_ACCEPTED:REVISION={s['revision']}:CHECK_REQUIRED")
 
 def run_checks(s):
     text=s.get('draft_markdown') or ''; a=s['article']; errors=[]
@@ -170,8 +181,7 @@ def cmd_fullcheck(workspace):
     print('SYSTEM4_FULL_CHECK_PASS:OUTPUT_GATE_REQUIRED'); return 0
 
 def slugify(s):
-    s=s.casefold().replace('ä','ae').replace('ö','oe').replace('ü','ue').replace('ß','ss')
-    s=re.sub(r'[^a-z0-9]+','-',s).strip('-'); return s[:180] or 'artikel'
+    s=s.casefold().replace('ä','ae').replace('ö','oe').replace('ü','ue').replace('ß','ss'); s=re.sub(r'[^a-z0-9]+','-',s).strip('-'); return s[:180] or 'artikel'
 
 def md_to_html(md):
     out=[]
@@ -188,15 +198,11 @@ def cmd_release(workspace,out_dir):
     if s['phase']!='OUTPUT_GATE_REQUIRED': raise Fail('OUTPUT_GATE_CLOSED')
     if s.get('checks',{}).get('mode')!='BASIC_ARCHITECTURE': raise Fail('BASIC_RELEASE_FOR_FULL_PRODUCTION_FORBIDDEN')
     if s.get('checks',{}).get('status')!='PASS' or s['checks'].get('checked_draft_sha256')!=s.get('draft_sha256'): raise Fail('CHECK_BINDING_FAIL')
-    out=Path(out_dir); out.mkdir(parents=True,exist_ok=True)
-    a=s['article']; html=md_to_html(s['draft_markdown'])
+    out=Path(out_dir); out.mkdir(parents=True,exist_ok=True); a=s['article']; html=md_to_html(s['draft_markdown'])
     wxr=f'''<?xml version="1.0" encoding="UTF-8" ?>\n<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wp="http://wordpress.org/export/1.2/">\n<channel><title>System 4 Draft Export</title><wp:wxr_version>1.2</wp:wxr_version>\n<item><title>{escape(a['title'])}</title><content:encoded><![CDATA[{html}]]></content:encoded><wp:post_name>{slugify(a['title'])}</wp:post_name><wp:status>draft</wp:status><wp:post_type>post</wp:post_type><category domain="category" nicename="{escape(a['category'])}"><![CDATA[{a['category']}]]></category></item>\n</channel></rss>\n'''
     wxr_path=out/'wordpress_draft.xml'; wxr_path.write_text(wxr,encoding='utf-8')
-    release={'contract':'SYSTEM4_RELEASE_V1','article':a,'draft_sha256':s['draft_sha256'],'state_immutable_core_sha256':s['immutable_core_sha256'],'wordpress_wxr_sha256':file_sha(wxr_path),'publish_allowed':False,'wordpress_status':'draft'}
-    release['release_sha256']=sha(release)
-    (out/'release.json').write_text(json.dumps(release,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
-    s['phase']='RELEASED'; s['released']=True; save(s,p)
-    print('SYSTEM4_RELEASE_PASS:'+release['wordpress_wxr_sha256'])
+    release={'contract':'SYSTEM4_RELEASE_V1','article':a,'draft_sha256':s['draft_sha256'],'state_immutable_core_sha256':s['immutable_core_sha256'],'wordpress_wxr_sha256':file_sha(wxr_path),'publish_allowed':False,'wordpress_status':'draft'}; release['release_sha256']=sha(release)
+    (out/'release.json').write_text(json.dumps(release,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8'); s['phase']='RELEASED'; s['released']=True; save(s,p); print('SYSTEM4_RELEASE_PASS:'+release['wordpress_wxr_sha256'])
 
 def cmd_prepare_release(workspace,out_dir):
     s,p=load(workspace)
@@ -204,8 +210,7 @@ def cmd_prepare_release(workspace,out_dir):
     if s.get('checks',{}).get('mode')!='FULL_PRODUCTION': raise Fail('FULL_PRODUCTION_CHECK_PASS_REQUIRED')
     try: prepared=release_adapter.build_unsigned(s,Path(out_dir))
     except release_adapter.ReleaseError as e: raise Fail('ENDSTEMPEL_PREPARE_FAIL:'+str(e)) from e
-    s['release_prepared']=prepared; s['phase']='SIGNATURE_REQUIRED'; save(s,p)
-    print('SYSTEM4_ENDSTEMPEL_SIGNATURE_REQUIRED:'+prepared['manifest_sha256'])
+    s['release_prepared']=prepared; s['phase']='SIGNATURE_REQUIRED'; save(s,p); print('SYSTEM4_ENDSTEMPEL_SIGNATURE_REQUIRED:'+prepared['manifest_sha256'])
 
 def cmd_finalize_signed(workspace,signature_path,final_path):
     s,p=load(workspace)
@@ -214,8 +219,7 @@ def cmd_finalize_signed(workspace,signature_path,final_path):
     if not isinstance(signature,dict): raise Fail('SIGNATURE_OBJECT_REQUIRED')
     try: result=release_adapter.finalize_signed(s['release_prepared'],signature,Path(final_path))
     except release_adapter.ReleaseError as e: raise Fail('ENDSTEMPEL_FINALIZE_FAIL:'+str(e)) from e
-    s['phase']='RELEASED'; s['released']=True; s['release_final']=result; save(s,p)
-    print('SYSTEM4_WORDPRESS_SIGNED_JSON_READY:'+result['final_sha256'])
+    s['phase']='RELEASED'; s['released']=True; s['release_final']=result; save(s,p); print('SYSTEM4_WORDPRESS_SIGNED_JSON_READY:'+result['final_sha256'])
 
 def main(argv):
     try:
@@ -225,6 +229,7 @@ def main(argv):
       elif cmd=='facts': cmd_facts(argv[2],argv[3])
       elif cmd=='context': cmd_context(argv[2],argv[3],argv[4])
       elif cmd=='draft': cmd_draft(argv[2],argv[3])
+      elif cmd=='repair': cmd_repair(argv[2],argv[3])
       elif cmd=='check': return cmd_check(argv[2])
       elif cmd=='fullcheck': return cmd_fullcheck(argv[2])
       elif cmd=='release': cmd_release(argv[2],argv[3])
