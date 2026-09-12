@@ -17,6 +17,18 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - The writer may not alter immutable metadata, choose a free route, enable publish, bypass a required checker, or create a per-article FULL production release.
 - Task 4 must keep all seven article states alive within one task until the System-4 batch gate has accepted the complete set.
 
+## RESEARCH -> FACTS -> ARTICLE HARD BOUNDARY
+- Codex remains the single fachliche worker: it researches, creates the facts/fact pack, writes the article and performs controller-requested same-article repairs.
+- No independent Chat writer or legacy worker is reintroduced.
+- `RESEARCH_REQUIRED` accepts only `SYSTEM4_RESEARCH_EVIDENCE_V1`: real source title, HTTP(S) URL, retrieval time, captured evidence text and `snapshot_sha256=SHA256(evidence)`.
+- `FACT_CHECK_REQUIRED` accepts only `SYSTEM4_FACTS_EVIDENCE_V1`: at least two distinct claims, each bound to an accepted research `source_id` and an exact `evidence_text_sha256`.
+- The production `canonical_fact_pack_v1` must contain the same accepted source metadata and the same accepted core claims. Codex may not self-certify a source-free `SOURCE_VERIFIED_PRODUCTION_READY` fact pack.
+- The production context must be bound before the draft body is accepted.
+- Every article must carry fact traces that resolve to its bound fact pack. Unknown or missing fact IDs are BLOCKED.
+- These guards do not replace or rewrite the existing Textmaschine/content rules, LanguageTool 6.8 or PPM 6.7.9; they only prevent unproven research/facts from reaching those unchanged checks.
+- A batch must additionally pass the System-4 cross-article distinctness check. The known 7er failure class — one reusable sentence/paragraph template across different topics — is BLOCKED before collection/handoff.
+- A repair may correct only the same article and must remain close to the previously checked body; a broad rewrite in `REPAIR_REQUIRED` is BLOCKED.
+
 ## SINGLE CHECKER ORCHESTRATOR HARD RULE
 - `isolated_system4/controller.py fullcheck` is the ONLY production checker orchestrator.
 - LanguageTool 6.8 and PPM 6.7.9 must be invoked only through that bound `fullcheck` path via `production_checks.run_all`.
@@ -36,6 +48,7 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - `git push`, a temporary handoff branch, repository persistence of article/output bytes, and a Codex-local `sandbox:/mnt/data/...` link are forbidden as handoff mechanisms.
 - The final file MUST be valid UTF-8 JSON with contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1` and MUST pass `handoff_transport.py validate`.
 - It MUST contain the exact seven checked bodies, immutable WordPress metadata, `production_context` for each article, real LT 6.8 PASS evidence and real PPM 6.7.9 PASS evidence.
+- The final handoff validator rechecks the bound fact packs/fact traces and cross-article distinctness; a previously seen source-free or template-reuse batch cannot become a valid Chat/WordPress file merely because transport hashes are correct.
 - The existing WordPress signature switch is currently OFF for this production path. System 4 therefore performs no signing and no ENDSTEMPEL step for the current articles.
 - The exact parent-chat file is the direct WordPress upload file. It MUST state `WORDPRESS_DIRECT_IMPORT`, `direct_wordpress_upload_ready=true`, no direct-upload block reason and no downstream signing/release components.
 - `publish_allowed=false` remains mandatory. Direct upload must not be confused with automatic publish.
