@@ -35,9 +35,12 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - A `View task` link does NOT satisfy this requirement.
 - A PR comment containing only a filename, SHA256 or task link does NOT satisfy this requirement.
 - Asking the user to manually download elsewhere and re-upload into ChatGPT is forbidden.
-- The final handoff file MUST be valid UTF-8 JSON with contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1` and MUST pass `handoff_transport.py validate`.
-- It MUST contain the exact seven checked bodies, immutable WordPress metadata, `production_context` for each article, real LT 6.8 PASS evidence, real PPM 6.7.9 PASS evidence, and the `wordpress_review` block required for the later WordPress pre-import review.
-- The handoff file MUST NOT falsely claim direct WordPress-upload readiness. The current verified next step is WordPress PREIMPORT review against Portal SEO Editorial Plan Compiler 0.28.22 / PPM 6.7.9; direct import still requires a valid PSERC import envelope and Supervisor authenticity.
+- The final file MUST be valid UTF-8 JSON with contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1` and MUST pass `handoff_transport.py validate`.
+- It MUST contain the exact seven checked bodies, immutable WordPress metadata, `production_context` for each article, real LT 6.8 PASS evidence and real PPM 6.7.9 PASS evidence.
+- The existing WordPress signature switch is currently OFF for this production path. System 4 therefore performs no signing and no ENDSTEMPEL step for the current articles.
+- The exact parent-chat file is the direct WordPress upload file. It MUST state `WORDPRESS_DIRECT_IMPORT`, `direct_wordpress_upload_ready=true`, no direct-upload block reason and no downstream signing/release components.
+- `publish_allowed=false` remains mandatory. Direct upload must not be confused with automatic publish.
+- System 4 MUST NOT modify the WordPress plugin or its signature switch.
 
 ### Narrow transport exception
 - After the seven-article batch has passed, Codex may create exactly one transport envelope with `handoff_transport.py pack`.
@@ -59,4 +62,4 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - A Codex invocation is permitted only for a REAL bound article-production run.
 - Before starting that run, the complete parent-chat transport route above must have passed a real dummy roundtrip without Codex.
 - Never require seven full article bodies to be pasted into a PR comment as the production handoff.
-- Signing/ENDSTEMPEL/WordPress are deferred until after a real 7/7 article batch exists and the parent-chat file handoff has passed.
+- Signing/ENDSTEMPEL remain disabled for the current article output. After 7/7 PASS, transport the exact direct WordPress JSON to the parent chat without another transformation.
