@@ -83,8 +83,12 @@ class RuntimeDraftRebindTests(unittest.TestCase):
         self.assertEqual(rebound["canonical_article"]["body_html_sha256"], production_checks.text_sha256(new_body))
         self.assertEqual(rebound["canonical_article"]["body_text"], production_checks._canonical_body_text(new_body))
         self.assertEqual(rebound["quality_binding"]["language_evidence"], fresh_evidence)
-        self.assertEqual(rebound["quality_binding"]["table_value_statement"], original["quality_binding"]["table_value_statement"])
+        self.assertEqual(
+            rebound["quality_binding"]["table_value_statement"],
+            original["quality_binding"]["table_value_statement"],
+        )
         self.assertEqual(rebound["quality_binding_hash"], production_checks.stable_hash(rebound["quality_binding"]))
+
 
     def test_same_exact_lt_checked_text_is_reused_for_ppm_without_second_lt(self):
         body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
@@ -129,7 +133,10 @@ class RuntimeDraftRebindTests(unittest.TestCase):
 
     def test_ppm_visible_text_contract_excludes_h3_but_keeps_bound_visible_units(self):
         body = "<article><h3>Nicht im PPM-Sprachbeleg</h3><h2>Auswahl</h2><p>Hallo <strong>Welt</strong> !</p><td>Wert ; gut</td></article>"
-        self.assertEqual(production_checks._ppm_visible_language_text(body), "Auswahl\n\nHallo Welt!\n\nWert; gut")
+        self.assertEqual(
+            production_checks._ppm_visible_language_text(body),
+            "Auswahl\n\nHallo Welt!\n\nWert; gut",
+        )
 
     def test_explicit_lt_path_fails_closed_instead_of_falling_back(self):
         with tempfile.TemporaryDirectory() as td:
