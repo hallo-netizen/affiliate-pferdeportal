@@ -3,6 +3,7 @@ import argparse, base64, hashlib, json, lzma, re
 from pathlib import Path
 
 import content_guard
+import design_guard
 
 HANDOFF_CONTRACT='SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1'
 INLINE_CONTRACT='SYSTEM4_PARENT_CHAT_INLINE_V1'
@@ -67,6 +68,10 @@ def validate_handoff(payload: dict) -> dict:
             content_guard.validate_single_article(body,pc['fact_pack'])
         except content_guard.ContentGuardError as exc:
             raise HandoffError(f'HANDOFF_CONTENT_GUARD:{i}:'+str(exc)) from exc
+        try:
+            design_guard.validate_design_neutrality(body,row['article_type'])
+        except design_guard.DesignGuardError as exc:
+            raise HandoffError(f'HANDOFF_DESIGN_GUARD:{i}:'+str(exc)) from exc
         lt=row['languagetool']; _require(isinstance(lt,dict) and lt.get('status')=='PASS' and lt.get('finding_count')==0 and lt.get('engine')=='LanguageTool 6.8 / Bestand 43',f'HANDOFF_LT_NOT_PASS:{i}')
         ppm=row['ppm679']; _require(isinstance(ppm,dict) and ppm.get('status')=='PASS' and ppm.get('ppm_version')=='6.7.9' and ppm.get('technical_status')=='TECHNICAL_CHECK_OK' and ppm.get('content_quality_status')=='CONTENT_QUALITY_CHECK_OK' and ppm.get('fail_closed_aggregate_status')=='PASS' and ppm.get('content_sha256')==body_sha,f'HANDOFF_PPM_NOT_PASS:{i}')
         bodies.append(body)
