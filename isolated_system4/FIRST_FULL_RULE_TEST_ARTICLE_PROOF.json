@@ -1,0 +1,82 @@
+{
+  "contract": "SYSTEM4_FIRST_FULL_RULE_TEST_ARTICLE_PROOF_V1",
+  "status": "PASS",
+  "scope": "TEST_ONLY_NO_MERGE_NO_PUBLISH",
+  "article": {
+    "article_type": "Beratung",
+    "title": "Das Wichtigste über Hindernisstangen für Pferde",
+    "target_keyword": "Hindernisstangen für Pferde",
+    "category": "hindernisstangen-beratung",
+    "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+    "final_content_sha256": "9a8e848f6ac2ecad0dbfb8ed669f3703cc1f3a1b31adec14b576c3a047d2fdcc"
+  },
+  "authoritative_tool_bindings": {
+    "ppm": {
+      "version": "6.7.9",
+      "package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+      "article_type_rules_sha256": "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f",
+      "execution": "PPM679_Content_Validator::check against fresh System4 article"
+    },
+    "pserc": {
+      "package_sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314",
+      "role": "current metadata/output contract source only; no legacy orchestration executed"
+    },
+    "languagetool": {
+      "engine": "LanguageTool 6.8 / Bestand 43",
+      "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+      "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+      "commandline_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+      "checked_text_sha256": "a8daa164b91a416949d035cc96ce2cb07552716feb0fb56147a367352b04b8af",
+      "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+      "return_code": 0,
+      "raw_finding_count": 0,
+      "unresolved_finding_count": 0
+    }
+  },
+  "positive_test": {
+    "ppm_report_sha256": "b820dff5d145fbf4c4fc1bf0331dad02c4389cef298694f2d335456ee16aeefc",
+    "technical_status": "TECHNICAL_CHECK_OK",
+    "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+    "fail_closed_aggregate_status": "PASS",
+    "errors": [],
+    "mandatory_table": "PASS",
+    "internal_links_exact_three": "PASS",
+    "external_links": 0,
+    "languagetool_zero_findings": "PASS"
+  },
+  "negative_tests": {
+    "mandatory_table_removed": {
+      "status": "BLOCKED",
+      "report_sha256": "f30aec64c329852ddeb4b64af3106fb8439a11e3c4ab56d1bc0de01df1a6f0e0",
+      "required_error_codes_present": [
+        "BLOCKED_CONTENT_TABLE_COUNT",
+        "BLOCKED_CONTENT_TABLE_ROW_FLOOR",
+        "BLOCKED_WAVE2_TABLE_VALUE"
+      ]
+    },
+    "required_internal_link_replaced_by_external_url": {
+      "status": "BLOCKED",
+      "report_sha256": "8351d42a65471c654817e08f87ed4b11701a80498851c387d656e5f2dbbf246e",
+      "required_error_codes_present": [
+        "BLOCKED_CONTENT_INTERNAL_LINK_ROLE",
+        "BLOCKED_KNOWN_INTERNAL_LINK_INVALID",
+        "BLOCKED_WAVE2_BOUND_LINK_MISSING"
+      ]
+    }
+  },
+  "legacy_isolation": {
+    "old_orchestration_imported": false,
+    "old_orchestration_executed": false,
+    "old_article_or_recovery_content_reused": false,
+    "pure_authoritative_binaries_used_by_exact_hash_only": true,
+    "static_ppm_release_governor_field_used_as_article_type_gate": false
+  },
+  "wordpress_output_boundary": {
+    "wxr_is_current_output": false,
+    "current_manual_input_family": "JSON production package / signed ENDSTEMPEL JSON",
+    "single_article_endstempel_forged": false,
+    "reason": "The current live 7-item batch binds all seven plan slots and WordPress verifies trusted ED25519 signing before first write. A one-article test must not fabricate a seven-article signed release.",
+    "publish_allowed": false,
+    "production_release_claimed": false
+  }
+}
