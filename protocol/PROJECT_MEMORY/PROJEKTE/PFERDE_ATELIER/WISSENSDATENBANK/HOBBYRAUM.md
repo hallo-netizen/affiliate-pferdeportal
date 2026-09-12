@@ -12,10 +12,10 @@ Der einzige aktuelle Arbeitsraum des Büros WISSENSDATENBANK.
 ein konkretes Recherchethema tatsächlich bearbeitet wird.
 
 **DU DARFST …**  
-den gebundenen Rechercheauftrag nach Bürotür und Recherche-Standard ausführen und den zugehörigen Aktenschrank pflegen.
+den gebundenen Rechercheauftrag nach Bürotür und Recherche-Standard ausführen und den zugehörigen Aktenschrank pflegen. Relevante Fachbegriffe dürfen parallel im bestehenden Glossar quellengebunden abgelegt werden, ohne daraus einen zweiten Hauptauftrag zu machen.
 
 **DU DARFST NICHT …**  
-parallel ein zweites Forschungsthema starten, neue Aktenschränke auf Vorrat anlegen oder aus Recherche automatisch Contentproduktion starten.
+parallel ein zweites großes Forschungsthema starten, neue Aktenschränke auf Vorrat anlegen oder aus Recherche automatisch Contentproduktion starten.
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `THEMENPOOL.md` → `RECHERCHE_STANDARD.md` → gebundener Aktenschrank.
@@ -29,20 +29,22 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 
 ## BISHER ERLEDIGT
 
-- zentrale Rassenstruktur migriert;
-- Schema 1.1 mit formalem Status/anerkennender Quelle;
-- 11 Datensätze angelegt;
-- zweite Recherchewelle ergänzt: Arabisches Vollblut, Islandpferd, Haflinger, Fjordpferd;
-- offizielle Verbands-/Zuchtquellen gebunden;
-- alte separate PFERDERASSEN-Steuerung entfernt.
+- Rassenstruktur migriert und Schema 1.1 aktiv;
+- 44 reale Rassendatensätze vorhanden;
+- Rassenregister auf den realen Bestand synchronisiert;
+- europäische Pony-/Kaltblut-/Regionalrassen stark erweitert;
+- offizielle Verbands-, Zuchtbuch-, staatliche und wissenschaftliche Quellen bevorzugt;
+- Glossar-Aktenschrank auf Nutzerauftrag eingerichtet;
+- Glossar mit 7 realen Begriffen startbefüllt;
+- Bürotür und zentrale Übersicht auf beide Aktenschränke aktualisiert.
 
 ## NEXT ACTION
 
-1. nächsten Kandidatenblock aus `RASSEN_REGISTER.md` prüfen;
-2. formalen Status gegen autoritative Quellen bestätigen;
-3. Synonyme/Dubletten bereinigen;
+1. Rassenrecherche fortsetzen;
+2. nächsten internationalen Kandidatenblock gegen autoritative Quellen prüfen;
+3. formalen Status/Synonyme/Dubletten sauber klären;
 4. weitere Einzeldatensätze anlegen;
-5. offene Felder später gezielt nachrecherchieren, niemals raten;
+5. auftauchende relevante Fachbegriffe bei Bedarf im Glossar ergänzen;
 6. keine Vollständigkeit behaupten, bevor die Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
 ## KONTROLLPUNKTE
@@ -50,6 +52,7 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 - aktueller Stand → `CURRENT_STATE.md`
 - Themenstatus → `THEMENPOOL.md`
 - Trust/Recherche → `RECHERCHE_STANDARD.md`
-- Fachakten → `AKTENSCHRAENKE/PFERDERASSEN/`
+- Rassen → `AKTENSCHRAENKE/PFERDERASSEN/`
+- Glossar → `AKTENSCHRAENKE/GLOSSAR/`
 
 Keine zweite Fach-, Fehler-, Ziel- oder Produktionswahrheit hier pflegen.
