@@ -1,7 +1,7 @@
 # AFFILIATE – CURRENT STATE
 
 STAND: 2026-09-12
-STATUS: ADCELL API-V2-SOURCEFIX KANONISCH COMMITTED + FULL GATE + FRESH-UNPACK/IDENTITY PASS / AF-063 HASHKORREKTUR AKTIV / 6.72.9-VERSIONSBINDUNG OFFEN / LIVE-E2E BLOCKED
+STATUS: ADCELL 6.72.19 KANONISCH GEBUNDEN + VOLLE KANONISCHE GATES/FRESH-UNPACK PASS / LIVE-E2E BLOCKED
 
 ## AUTORITÄT
 
@@ -23,69 +23,64 @@ Kein Awin-Fallthrough. Kein manueller CSV-Import/Export als Normalbetrieb. Nicht
 
 OTTO/Awin bleibt pausiert und ungelöst. Digistore24 bleibt zurückgestellt. Kein paralleler Provider-Arbeitsstrang.
 
+Der Zielvertrag bleibt **AKTIV**: der technische/kannonische Teil ist grün, der reale ADCELL-Live-API- und WordPress/MariaDB-E2E-Nachweis fehlt noch.
+
 ## BELASTBARER TECHNISCHER STAND
 
-Der ADCELL-Sourcefix ist kanonisch auf `affiliate-release-current` committed.
+Pluginbüro-Stand 6.72.17 und der geprüfte ADCELL-API-v2-Fix wurden konfliktfrei zusammengeführt und als **6.72.19** kanonisch gebunden.
 
-Source-Commit:
-`99bcc5796226254f7e190f40397210fca96e7d0b`
+Kanonischer Source-Bind-Commit:
+`df3e97119fe44ac864701d8de6b946c7c6c3416c`
+
+Aktueller technischer Branch-Head nach Status-/Workflow-Cleanup:
+`58cc8c7e62c0a1651823a6a654dcbfd5256bbae4`
 
 Kanonische Version:
-`6.72.8`
+`6.72.19`
 
 Kanonisches 26-Dateien-Manifest:
-`74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5`
+`694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b`
 
-Nach der kanonischen Rückbindung tatsächlich ausgeführt PASS:
+Kanonischer Full-Gate-Lauf:
+- Run `34690118524`
+- Job `103543774405`
+- Ergebnis: PASS
+
+Tatsächlich belegt PASS:
 - ADCELL API-v2 Static Gate;
-- ADCELL Runtime Positiv/Negativ;
-- offizieller Tokenweg; kein Legacy-Basic-Auth-Runtimeweg für ADCELL-v2;
+- ADCELL Runtime Positiv/Negativ über exakt hash-identische kanonische ADCELL-Dateien;
+- offizieller Tokenweg; kein Legacy-Basic-Auth-Runtimeweg;
 - accepted + active + programId-Allowlist positiv;
-- non-allowlisted / inactive / not accepted / malformed / falscher Host / mehrdeutige CSV-Lage fail-closed;
+- non-allowlisted / inactive / not accepted / falscher Host / mehrdeutige CSV-Lage fail-closed;
 - kein Awin-Fallthrough;
-- Awin/OTTO-Funktionsblock-Regression 18/18 byteidentisch;
-- Banner-Regression;
-- PHP-Lint 21/21;
+- Awin/OTTO-Funktionsblock-Regression 18/18 PASS;
+- Banner Positiv/Negativ PASS;
+- PHP-Lint 21/21 PASS;
 - originaler Release-Guard Governance/Source/Tree/Start PASS;
 - Fresh-Unpack PASS;
-- Source/Unpack-Byte-Identity 26/26 PASS.
+- Source/ZIP-Byte-Identity 26/26 PASS;
+- Plugin-Header / const VERSION / Stable tag = 6.72.19 PASS.
 
 Dauerhafter Nachweis:
-`release/affiliate-zentrale/evidence/adcell_api_v2_committed_full_gate_20260912.txt`
+`release/affiliate-zentrale/evidence/adcell_67219_canonical_full_gate_20260912.txt`
 
-Damit sind für den aktuellen kanonischen Stand AF-023, AF-058, AF-059, AF-060 und AF-062 geschlossen. AF-026/AF-027 bleiben als Versionsgrenze aktiv.
+Status-Closeout wurde danach erneut durch den Release-Guard geprüft: Run `34690263204`, Job `103544153132` → Governance/Source/Tree/Start PASS.
 
-## 6.72.9 – NÄCHSTER INSTALLIERBARER TESTKANDIDAT
+AF-064 ist geschlossen: vor Versionswahl wird der echte Pluginbüro-Stand geprüft; 6.72.17 war die richtige Integrationsbasis.
+AF-065 ist geschlossen: der unveränderliche Governance-Wert `new_version_policy` wurde wieder exakt auf den Guard-Vertragswert gesetzt und derselbe Gate-Lauf danach erfolgreich wiederholt.
 
-Ein reiner Versionsschritt wurde lokal bereits vorbereitet und vollständig gegen denselben Fachworkflow geprüft:
-- Plugin-Header `6.72.8 -> 6.72.9`;
-- `const VERSION` `6.72.8 -> 6.72.9`;
-- readme `Stable tag` `6.72.8 -> 6.72.9`;
-- keine fachliche Sourceänderung.
-
-Exakt neu verifiziertes lokales 6.72.9-Manifest:
-`83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e`
-
-Gegenprüfung:
-- gespeicherte Manifestdatei und aus dem tatsächlichen 26-Dateien-Baum regeneriertes Manifest sind byteidentisch;
-- 26/26 Manifestzeilen stimmen;
-- Fresh-Unpack 26/26 byteidentisch;
-- internes Gate-ZIP SHA256 `03271c48076ef142b12a6fcdb0e03433daeeaf51cde2b5010f0a904e7dea6cd4`.
-
-Die zuvor dokumentierte Zeichenfolge `83c75bf1359...` war falsch transkribiert und ist als AF-063 gebunden. Sie ist keine Autorität.
-
-Auch der 6.72.9-Fachworkflow bleibt PASS: PHP 21/21, ADCELL Static, ADCELL Positiv/Negativ, Awin/OTTO 18/18, Banner, Fresh-Unpack und 26/26 Identity.
-
-6.72.9 ist **noch nicht kanonisch committed**. Die große Hauptplugin-Datei darf nur über einen nachgewiesen bytegenauen Transferweg geschrieben werden; kein gekürzter oder rekonstruierter Inhalt.
+Temporäre ADCELL-Transport-/Gate-Workflows wurden nach dem PASS wieder entfernt. Kein zusätzlicher dauerhafter Runner bleibt zurück.
 
 ## LIVE-BLOCKER
 
-Der ADCELL-Kontozugang ist weiterhin nicht wiederhergestellt. Deshalb ist echter ADCELL-Live-API-/WordPress-/MariaDB-E2E-PASS noch gesperrt.
+Der ADCELL-Kontozugang ist weiterhin nicht wiederhergestellt; Passwort-Reset-Mail kommt nicht an.
+
+Deshalb weiterhin **kein Live-PASS** und `release_allowed=false`:
+- echter ADCELL API-v2-Lauf fehlt;
+- echter WordPress/MariaDB-E2E fehlt.
 
 ## NEXT ACTION
 
 Exakt aus `HOBBYRAUM.md`:
 
-**AF-063 vollständig auf den korrekten 6.72.9-Manifesthash nachziehen; danach ausschließlich den bereits lokal geprüften version-only Schritt 6.72.8 -> 6.72.9 bytegenau kanonisieren, Manifest/Governance binden und dieselben committed Gates + Fresh-Unpack/Identity erneut ausführen.**
-
-Erst danach Test-Plugin. LIVE-PASS erst nach echtem ADCELL-Zugang und realem API/WordPress/MariaDB-E2E.
+**Keine weitere Sourcearbeit. Sobald der ADCELL-Kontozugang wieder funktioniert: genau den echten ADCELL-API-v2-Lauf ausführen und danach den echten WordPress/MariaDB-E2E. Erst bei deren PASS darf der ADCELL-Zielvertrag als erfüllt/LIVE-PASS behandelt werden.**
