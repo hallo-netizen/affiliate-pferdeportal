@@ -3,17 +3,15 @@
 No merge. No publish. No signing in this run.
 
 ## PRECONDITION — COMPLETED WITHOUT CODEX
-This file describes a REAL production run, not a diagnostic/test-only Codex task.
-
 Before Codex is invoked, the caller must have already verified on the exact current PR head SHA:
 1. `python3 -m unittest discover -s isolated_system4 -p 'test_*.py' -v` = PASS;
 2. existing NO-LEGACY machine proof = PASS;
 3. System-4 entry/current snapshot = clean;
-4. the exact handoff transport has been end-to-end proven WITHOUT Codex by delivering a real dummy file into the parent ChatGPT conversation and making its bytes directly downloadable there;
-5. the seven article bodies will not be pasted into a PR comment and will not be persisted as ordinary repository article content.
+4. the exact parent-chat transport has passed a real positive and negative dummy roundtrip WITHOUT Codex;
+5. the WordPress handoff schema is current for Portal SEO Editorial Plan Compiler 0.28.22 / PPM 6.7.9 pre-import review;
+6. the seven article bodies will not be pasted into a PR comment and will not be persisted on the production PR branch.
 
-A Codex-task-local `sandbox:/mnt/data/...` link, a `View task` link, a filename-only PR comment or a SHA-only PR comment is NOT proof of a retrievable parent-chat handoff.
-
+A Codex-task-local `sandbox:/mnt/data/...` link, a `View task` link, a filename-only PR comment or a SHA-only PR comment is NOT a parent-chat handoff.
 If any precondition is unproven: DO NOT START CODEX.
 If the PR head changes after preflight: re-run the preflight WITHOUT CODEX before any new production run.
 
@@ -28,7 +26,7 @@ Use exactly `isolated_system4/live_fixture/wordpress_snapshot.json` and all seve
 - Do not import/copy/wrap/call/exec or runtime-depend on STARTMASTER, H7/H8/Single-Door, ACM, System3, legacy handoffs, runtime bridges, gates, state machines, receipt/proof/package chains, repair routes or old signers.
 - Files outside `isolated_system4/**` are READ-ONLY and only for current authoritative rule/specification or pure-tool inputs permitted by System 4.
 - Do not reuse old article bodies, recovery articles, old fact packs, old research, old stage proofs or old production artifacts as content sources.
-- Do not modify repository files during the production run.
+- Do not modify the production PR branch during the production run. The only repository write allowed is the post-batch temporary transport exception defined below on `system4-parent-chat-handoff`.
 - `publish_allowed=false` always.
 
 ## Execution path — NO CUSTOM ORCHESTRATOR
@@ -39,11 +37,11 @@ The checker path is fixed:
 
 Hard execution rules:
 - `controller.py fullcheck` is the ONLY checker orchestrator.
-- Do NOT call LanguageTool 6.8 directly. The controller may internally use the exact hash-bound persistent LT 6.8 worker implemented by `production_checks`; this does not relax or duplicate the LT check.
+- Do NOT call LanguageTool 6.8 directly.
 - Do NOT call PPM 6.7.9 directly.
-- Do NOT create or execute custom orchestration scripts/wrappers (including `/tmp/system4_run.py`) that preflight/check/abort outside the controller.
+- Do NOT create or execute custom orchestration scripts/wrappers.
 - Do NOT add an LT/PPM precheck before production context or before `fullcheck`.
-- A normal LT/PPM/content finding must travel through the controller as `REPAIR_REQUIRED`; it must never become an ad-hoc `RuntimeError`, `raise`, `exit`, batch restart or terminal task failure.
+- A normal LT/PPM/content finding must travel through the controller as `REPAIR_REQUIRED`.
 - On `REPAIR_REQUIRED`, edit only the SAME canonical article body for the exact reported first defect, submit the revised body only with `controller.py repair`, then rerun `controller.py fullcheck`. `controller.py draft` is forbidden in `REPAIR_REQUIRED`.
 - Do not restart already-passed articles.
 - Only a genuine non-repairable controller/tool/integrity blocker may terminate the batch.
@@ -73,42 +71,75 @@ Required:
 
 Signing / ENDSTEMPEL / WordPress release is DEFERRED.
 
-## Mandatory handoff to parent ChatGPT conversation — ONE REAL FILE
-Create exactly one file/artifact named:
+## Mandatory handoff file — exact JSON for Chat + WordPress PREIMPORT review
+Create exactly one plaintext file:
 `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json`
 
-It must contain:
-- contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1`;
-- batch_sha256;
-- publish_allowed=false;
-- signing_deferred=true;
-- batch_gate_status;
-- no_legacy_status from the head-bound preflight;
-- test_suite_status from the head-bound preflight;
-- exactly seven rows in snapshot order, each with index, title, target_keyword, category, article_type, plan_slot, final_draft_sha256, revision_count, exact final checked body, real LanguageTool 6.8 PASS/zero unresolved findings, and real PPM 6.7.9 technical/content-quality/aggregate PASS.
+It must pass:
+`python3 isolated_system4/handoff_transport.py validate SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json`
 
-The workflow is NOT complete when Codex merely creates that file in its own sandbox.
-The exact final bytes must be transferred into the parent ChatGPT conversation as a directly downloadable file without requiring the user to open GitHub/Codex, manually download elsewhere, or re-upload anything.
-The parent Chat must recompute SHA256 from the received bytes and compare it to the Codex-produced SHA256.
-Only after that equality check may final workflow PASS be reported.
+Exact top-level contract:
+- `contract = SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1`
+- `batch_sha256`
+- `publish_allowed=false`
+- `signing_deferred=true`
+- `batch_gate_status=SYSTEM4_BATCH_FULL_PASS_COLLECTED`
+- `no_legacy_status=PASS`
+- `test_suite_status=PASS`
+- `wordpress_review`
+- exactly seven `articles` in snapshot order
 
-The following are explicitly INVALID handoffs:
-- `sandbox:/mnt/data/...` that works only inside the Codex task;
+`wordpress_review` must state:
+- JSON / `application/json`
+- intended next step `WORDPRESS_PREIMPORT_REVIEW`
+- plugin `Portal SEO Editorial Plan Compiler`
+- plugin version verified against `0.28.22`
+- PPM version verified against `6.7.9`
+- `direct_wordpress_upload_ready=false`
+- block reason `REQUIRES_PSERC_IMPORT_ENVELOPE_AND_SUPERVISOR_AUTHENTICITY`
+- downstream components `[fact_pack_bundle, production_plan, workflow_release]`
+
+Each article row must contain exactly:
+- index
+- title
+- target_keyword
+- category
+- article_type
+- plan_slot
+- final_draft_sha256
+- revision_count
+- exact final checked `body`
+- exact immutable `production_context` containing fact_pack + production_plan_item
+- real LanguageTool 6.8 PASS / zero unresolved findings
+- real PPM 6.7.9 technical/content-quality/aggregate PASS
+
+This handoff is the complete source for the following WordPress pre-import review. It is deliberately NOT falsely labelled as a direct WordPress upload package; PSERC import-envelope/Supervisor authenticity is checked/built after the parent-chat handoff.
+
+## Mandatory parent-chat transport
+After the plaintext handoff validates:
+1. run `python3 isolated_system4/handoff_transport.py pack SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json SYSTEM4_PARENT_CHAT_TRANSPORT_V1.json`;
+2. create/update ONLY the dedicated temporary branch `system4-parent-chat-handoff` from the exact production source head;
+3. write ONLY `isolated_system4/.handoff/SYSTEM4_PARENT_CHAT_TRANSPORT_V1.json` on that branch;
+4. push that transport branch; do NOT change the production PR branch;
+5. report the exact transport commit SHA, exact path, plaintext SHA256, byte length and production source head.
+
+The parent Chat will fetch exactly that commit/path, unpack it with `handoff_transport.py unpack`, recompute the resulting plaintext SHA256, and only then expose the resulting `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` as the direct ChatGPT download. After readback, the parent Chat force-resets `system4-parent-chat-handoff` to the production source head.
+
+Invalid handoffs:
+- Codex-only `sandbox:/mnt/data/...`;
 - `View task` links;
-- PR comments containing only filename/SHA/task link;
-- asking the user to manually download from Codex/GitHub and upload back into ChatGPT.
-
-If exact produced bytes cannot be delivered to the parent ChatGPT conversation, terminal status is:
-`SYSTEM4_HANDOFF_FAIL`
-Article-generation or batch-gate PASS must not be promoted to final workflow PASS.
+- filename/SHA/task-link only;
+- asking the user to manually download and re-upload;
+- writing article/output transport content to the production PR branch;
+- any SHA/length/schema mismatch.
 
 ## Terminal return
 Return exactly one of:
 
 `SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS`
-ONLY after the exact final JSON bytes are directly downloadable in the parent ChatGPT conversation and parent-chat SHA256 verification matches;
+ONLY if the seven articles and batch passed AND the transport branch push succeeded. Include transport commit SHA/path, plaintext SHA256, byte length and production source head. Parent-chat delivery is still independently verified by the caller before the overall workflow is declared complete.
 
-or `SYSTEM4_HANDOFF_FAIL` if article/batch production succeeded but parent-chat delivery did not;
+or `SYSTEM4_HANDOFF_FAIL` if article/batch production succeeded but transport creation/push failed;
 
 or the FIRST genuine non-repairable current System-4 controller/checker/tool/integrity blocker with exact stage, status/error and source.
 
