@@ -27,16 +27,30 @@ class HandoffTransportTests(unittest.TestCase):
         }
     def write(self,p,obj):
         p.write_text(json.dumps(obj,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
-    def test_positive_pack_unpack_exact_bytes(self):
+
+    def test_positive_inline_roundtrip_exact_canonical_bytes(self):
         with tempfile.TemporaryDirectory() as td:
-            td=Path(td); src=td/ht.HANDOFF_FILENAME; tr=td/ht.TRANSPORT_FILENAME; out=td/'out'
-            self.write(src,self.payload()); raw=src.read_bytes(); env=ht.pack(src,tr); dst=ht.unpack(tr,out)
-            self.assertEqual(raw,dst.read_bytes()); self.assertEqual(env['plaintext_sha256'],hashlib.sha256(raw).hexdigest())
-    def test_negative_transport_tamper(self):
+            td=Path(td); src=td/'source.json'; canonical=td/ht.HANDOFF_FILENAME; inline=td/ht.INLINE_FILENAME; out=td/'out'
+            self.write(src,self.payload())
+            expected=ht.canonicalize_handoff(src,canonical)
+            env=ht.inline_pack(canonical,inline)
+            dst=ht.inline_unpack(inline,out)
+            self.assertEqual(expected,dst.read_bytes())
+            self.assertEqual(env['plaintext_sha256'],hashlib.sha256(expected).hexdigest())
+            self.assertLessEqual(len(inline.read_text(encoding='utf-8')),ht.INLINE_MAX_CHARS)
+
+    def test_negative_inline_tamper(self):
         with tempfile.TemporaryDirectory() as td:
-            td=Path(td); src=td/ht.HANDOFF_FILENAME; tr=td/ht.TRANSPORT_FILENAME
-            self.write(src,self.payload()); ht.pack(src,tr); env=json.loads(tr.read_text()); raw=base64.b64decode(env['payload_base64']); raw=raw+b'X'; env['payload_base64']=base64.b64encode(raw).decode(); tr.write_text(json.dumps(env))
-            with self.assertRaisesRegex(ht.HandoffError,'TRANSPORT_LENGTH_MISMATCH'): ht.unpack(tr,td/'out')
+            td=Path(td); src=td/'source.json'; canonical=td/ht.HANDOFF_FILENAME; inline=td/ht.INLINE_FILENAME
+            self.write(src,self.payload()); ht.canonicalize_handoff(src,canonical); ht.inline_pack(canonical,inline)
+            text=inline.read_text(encoding='utf-8')
+            start=text.index(ht.INLINE_BEGIN)+len(ht.INLINE_BEGIN)
+            end=text.index(ht.INLINE_END,start)
+            env=json.loads(text[start:end].strip())
+            raw=base64.b64decode(env['payload_base64']); env['payload_base64']=base64.b64encode(raw+b'X').decode()
+            inline.write_text(ht.INLINE_BEGIN+'\n'+json.dumps(env,separators=(',',':'))+'\n'+ht.INLINE_END+'\n',encoding='utf-8')
+            with self.assertRaisesRegex(ht.HandoffError,'INLINE_XZ_INVALID'): ht.inline_unpack(inline,td/'out')
+
     def test_negative_body_hash(self):
         p=self.payload(); p['articles'][0]['body']+='x'
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_BODY_SHA_MISMATCH:0'): ht.validate_handoff(p)
@@ -58,5 +72,9 @@ class HandoffTransportTests(unittest.TestCase):
     def test_negative_article_count(self):
         p=self.payload(); p['articles'].pop()
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_ARTICLE_COUNT_INVALID'): ht.validate_handoff(p)
+    def test_negative_missing_inline_end_marker(self):
+        with tempfile.TemporaryDirectory() as td:
+            td=Path(td); p=td/'bad.txt'; p.write_text(ht.INLINE_BEGIN+'\n{}\n',encoding='utf-8')
+            with self.assertRaisesRegex(ht.HandoffError,'INLINE_END_MISSING'): ht.inline_unpack(p,td/'out')
 
 if __name__=='__main__': unittest.main(verbosity=2)
