@@ -30,12 +30,16 @@ class ProofPersistenceGuardTest(unittest.TestCase):
             'publish_allowed':False,
             'next_required':'SIGNED_WORKFLOW_RELEASE',
             'batch_sha256':guard.BATCH_SHA,
-            'articles':[{'plan_slot':slot} for slot in guard.PLAN_SLOTS],
+            'articles':[
+                {
+                    'plan_slot':slot,
+                    'final_draft_sha256':'a'*64,
+                    'check_evidence_sha256':'b'*64,
+                }
+                for slot in guard.PLAN_SLOTS
+            ],
         }
         (proof_dir/'SYSTEM4_7_7_FULL_BATCH_PROOF.json').write_text(json.dumps(proof),encoding='utf-8')
-        (proof_dir/'system4_batch_evidence.json').write_text('{}',encoding='utf-8')
-        for slot in guard.PLAN_SLOTS:
-            (proof_dir/f'ARTICLE_{slot}.md').write_text('# test',encoding='utf-8')
         git(self.repo,'add','.')
         git(self.repo,'commit','-m','proof')
 
@@ -55,8 +59,8 @@ class ProofPersistenceGuardTest(unittest.TestCase):
 
     def test_blocks_unpushed_followup_commit(self):
         git(self.repo,'push','-u','origin','hobbyroom/system4-true-single-room-v1')
-        article=self.repo/guard.PROOF_REL/f'ARTICLE_{guard.PLAN_SLOTS[0]}.md'
-        article.write_text('# locally changed',encoding='utf-8')
+        proof_file=self.repo/guard.PROOF_REL/guard.PROOF_NAME
+        proof_file.write_text(proof_file.read_text(encoding='utf-8')+'\n',encoding='utf-8')
         git(self.repo,'add','.')
         git(self.repo,'commit','-m','local-only-followup')
         with self.assertRaisesRegex(guard.GuardFail,'REMOTE_HEAD_MISMATCH'):
@@ -64,7 +68,7 @@ class ProofPersistenceGuardTest(unittest.TestCase):
 
     def test_blocks_missing_proof_file(self):
         git(self.repo,'push','-u','origin','hobbyroom/system4-true-single-room-v1')
-        (self.repo/guard.PROOF_REL/'system4_batch_evidence.json').unlink()
+        (self.repo/guard.PROOF_REL/guard.PROOF_NAME).unlink()
         with self.assertRaisesRegex(guard.GuardFail,'PROOF_FILE_MISSING'):
             guard.verify(self.repo,'hobbyroom/system4-true-single-room-v1')
 
