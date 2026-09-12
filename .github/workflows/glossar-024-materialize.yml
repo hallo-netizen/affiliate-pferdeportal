@@ -1,0 +1,50 @@
+name: Glossar 0.2.4 Materialize
+on:
+  push:
+    branches: [hobbyroom/glossar-025-hardfix-source]
+    paths: ['.github/workflows/glossar-024-materialize.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build and commit exact 0.2.4 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp
+          C22=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.2
+          C23=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3
+          OUT=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/materialized-0.2.4
+          rm -rf /tmp/u "$OUT"; mkdir -p /tmp/u
+          cat "$T"/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          test "$(sha256sum /tmp/base.zip|cut -d' ' -f1)" = b20fc92e106989d96e701ca3cc2c4091096e8e8cdb207f63a958b411a0c6aaa7
+          unzip -q /tmp/base.zip -d /tmp/u
+          P=/tmp/u/universal-glossary-engine
+          cp "$C22/universal-glossary-engine.php" "$P/"
+          cp "$C22/includes/class-uge-config.php" "$P/includes/"
+          cp "$C22/includes/class-uge-core.php" "$P/includes/"
+          cp "$C22/includes/class-uge-seo.php" "$P/includes/"
+          cat "$C22"/frontend-parts/part-* > "$P/includes/class-uge-frontend.php"
+          cp "$C23/universal-glossary-engine.php" "$P/"
+          cp "$C23/includes/class-uge-config.php" "$P/includes/"
+          cp "$C23/includes/class-uge-core.php" "$P/includes/"
+          cp "$C23/includes/class-uge-seo.php" "$P/includes/"
+          cp "$C23/includes/class-uge-policy.php" "$P/includes/"
+          base64 -d "$T/uge024.patch.gz.b64" | gzip -d >/tmp/024.patch
+          patch -d "$P" -p3 </tmp/024.patch
+          grep -q 'Version: 0.2.4' "$P/universal-glossary-engine.php"
+          find "$P" -name '*.php' -print0 | xargs -0 -n1 php -l
+          mkdir -p "$OUT"
+          cp -a "$P"/. "$OUT"/
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add "$OUT"
+          git diff --cached --quiet && exit 0
+          git commit -m 'Materialize exact glossary 0.2.4 source'
+          git push origin HEAD:hobbyroom/glossar-025-hardfix-source
