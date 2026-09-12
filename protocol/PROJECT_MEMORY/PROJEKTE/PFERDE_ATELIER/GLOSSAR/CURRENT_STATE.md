@@ -1,53 +1,50 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-12
-STATUS: KONZEPT GEBUNDEN / UNIVERSALER CORE FESTGELEGT / TECHNISCHE UMSETZUNG OFFEN
+STATUS: BÜRO EINGERICHTET / MOD-008 V1-PROTOTYP LOKAL PASS / WORDPRESS-REALTEST OFFEN
 
 ## Belastbarer aktueller Stand
 
 - Eigenes Büro `GLOSSAR` ist die Projekt-Steuerstelle für das öffentliche Pferde-Atelier-Glossar.
-- Die fachliche Glossar-Datenbank bleibt autoritativ in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
+- Fachliche Glossar-Datenbank bleibt autoritativ in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
 - Keine zweite Fachbegriffs-Datenbank im Büro GLOSSAR.
 - Vom Nutzer im WordPress-Live-Backend bestätigt: Seite `Glossar` ist angelegt und verlinkt.
-- Keine WordPress-Seite pro Glossarbegriff vorgesehen.
-- Das bestehende Pferde-Designplugin wird **nicht** zur Glossar-Engine erweitert.
-- Der Glossar-Kern wird separat und von Anfang an projektunabhängig als `MOD-008 – Universal Glossar Engine` konzipiert.
-- Allgemeiner Hauptort: `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`.
-- Pferde Atelier ist die erste Projektanwendung und liefert nur Projektkonfiguration/Fachdaten.
-- Ziel im Frontend: Glossar-Startseite mit Navigation zu Oberbegriffen und A–Z; darunter mehrere Glossarbegriffe ohne Grafikzwang, bevorzugt kompakt/aufklappbar.
-- Glossarbegriffe sollen nicht wie normale Beiträge/Karten in bestehenden Pferde-Atelier-Kategorien erscheinen.
-- Jeder veröffentlichte Glossarbegriff soll eine eigene technisch auflösbare Zieladresse und eigene SEO-Angaben erhalten können.
-- SEO-Titel und Meta-Description sollen nach festem Pferde-Glossar-Schema erzeugt werden können; keine manuelle Yoast-Pflege je Begriff.
-- Der universale Core darf nicht von Yoast abhängig sein; bei vorhandenem Yoast wird nur dessen offizielle Filter-/Metadatenschnittstelle genutzt.
-- Aktuell ist keine neue große Glossar-Textmaschine vorgesehen. Für kurze Glossartexte reicht ein kleiner standardisierter Schreib-/Prüfweg.
+- Keine weiteren WordPress-Seiten und keine normalen Beiträge pro Glossarbegriff anlegen.
+- Das bestehende Pferde-Designplugin bleibt unangetastet.
+- Technischer Kern ist `MOD-008 – Universal Glossar Engine` unter `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`.
+- V1-Prototyp 0.1.0 ist isoliert gebaut und lokal positiv/negativ geprüft.
+- PHP-Lint 8/8 PASS; statische Prüfmatrix 15/15 PASS; Runtime-Stub PASS.
+- Fachfremde Zweitkonfiguration `Lexikon` funktioniert im lokalen Vertrags-/Stubtest ohne Coreänderung.
+- JSON-Import/Export vorhanden; Import nur als Entwurf, kein Auto-Publish.
+- Feldschema, Oberbereiche, URL-Basis, SEO-Schemata und Designwerte sind erweiterbar/änderbar.
+- Pferde-Designprofil orientiert sich an den tatsächlichen Designplugin-Werten: Grün `#27a653`, Blau `#37abf2`, Text `#172018`, Sekundärtext `#5e665f`, Linie `#e7ebe7`, 22px Rundung, 16px/1.55.
+- Frontend-Prototyp: vorhandene Glossar-Seite → Suche → A–Z → Oberbereiche → Aufklapper → eigene Begriffszieladresse.
+- Eigene SEO-Titel-/Meta-Description-Werte je Begriff; keine direkten Yoast-Datenbankwrites; Core funktioniert ohne Yoast.
+- Aktueller lokaler Kandidaten-Hash: `c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`.
 
-## Projektkonfiguration Pferde Atelier
+## Pferde-spezifische Konfiguration
 
-Muss außerhalb des universalen Core liegen:
-- Glossar-Hauptseite / Seiten-ID;
+Bleibt außerhalb des neutralen Fachkerns bzw. wird nur konfiguriert:
+- bereits vorhandene Glossar-Hauptseite;
 - URL-Basis;
-- Pferde-Oberbegriffe;
-- Pferde-SEO-Titel-Schema;
-- Pferde-Meta-Description-Schema;
+- Pferde-Oberbereiche;
+- Pferde-SEO-Schemata;
 - Text-/Pflichtfeldregeln;
-- Designklassen;
-- Importquelle aus der Wissensdatenbank.
+- Designprofil;
+- Importquelle Wissensdatenbank.
 
-## Noch offen – nicht als beschlossen behandeln
+## Noch NICHT bewiesen
 
-- exakte V1-Feldnamen im WordPress-Backend;
-- endgültige URL-Struktur je Begriff;
-- ob Oberbegriffe zusätzlich eigene öffentliche Zieladressen bekommen;
-- konkrete Import-/Synchronisationsautomatik zwischen Campus-Wissensbasis und WordPress;
-- Pluginname/Version des ersten technischen Kandidaten;
-- endgültige allgemeingültige Modulfreigabe: erst nach Zweitportaltest.
+- echter WordPress-Install-/Upgrade-Test;
+- reale Permalink-Auflösung neben der vorhandenen Seite `/glossar/`;
+- echter Yoast-Test im Zielsystem;
+- echte Astra/Pferde-Frontenddarstellung;
+- realer Import aus der Campus-Wissensdatenbank;
+- Performance mit größerem echten Begriffsbestand;
+- zweites echtes WordPress-Portal.
 
-## Allgemeingültigkeitsregel
+Daher aktuell kein Release-/LIVE-PASS.
 
-Ein Core, zwei Konfigurationen:
-1. Pferde Atelier real;
-2. fachlich neutrale Testkonfiguration.
+## Nächster belastbarer Schritt
 
-Nur wenn beide ohne Core-Codeänderung funktionieren, darf MOD-008 als technisch ALLGEMEINGÜLTIG gelten.
-
-Aktuelle Arbeitsbindung steht ausschließlich in `HOBBYRAUM.md`.
+Exakt den lokal grünen 0.1.0-Prototyp in einem echten isolierten WordPress-System testen. Aktuelle Arbeitsbindung ausschließlich in `HOBBYRAUM.md`.
