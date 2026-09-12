@@ -30,10 +30,10 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **90 reale Rassendatensätze** im Register geführt;
-- Spanien gegen amtlichen MAPA-Katalog breit abgearbeitet;
-- deutsche Pony-/Kaltblutblöcke und britische Mother-Studbook-Rassen erweitert;
-- Friese und KWPN ergänzt; Fokrichtungs-/Sektionen-Dubletten werden vermieden;
+- **96 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- Spanien, Deutschland, Frankreich, Großbritannien, Irland und Niederlande breit gegen amtliche/ursprüngliche Register bearbeitet;
+- zusätzliche internationale Kernakten u. a. für Belgian Draught, American Miniature Horse, Konik polski, Bosnisches Gebirgspferd, Falabella und Basotho Pony angelegt;
+- Falabella ≠ American Miniature Horse als feste Dubletten-/Abgrenzungsregel geklärt;
 - offizielle Verbands-, Zuchtbuch-, staatliche und wissenschaftliche Quellen bevorzugt;
 - Glossar-Aktenschrank eingerichtet und mit 7 realen Begriffen startbefüllt.
 
@@ -41,7 +41,7 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 
 1. Rassenrecherche ohne Themenwechsel fortsetzen;
 2. nächste belastbare Länder-/Studbook-Blöcke prüfen;
-3. offene Kandidaten wie Belgian Draft/Brabanter, Barb/Berber, Bosnian Mountain Horse, Altai, Andravida, Anglo-Kabarda, Basotho Pony, Azteca, American Walking Pony, Huzule, Konik und Falabella nur nach autoritativer Statusprüfung anlegen;
+3. offene Kandidaten wie Altai, American Walking Pony, Andravida, Anglo-Kabarda, Aegidienberger, Azteca, Barb/Berber und Huzule nur nach autoritativer Statusprüfung anlegen;
 4. Synonyme, Sektionen und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
 5. relevante Fachbegriffe bei Bedarf im Glossar ergänzen;
 6. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
