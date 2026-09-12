@@ -85,4 +85,4 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 - AF-059: BEHOBEN – manueller CSV-Normalweg entfernt; API-v2/programId-Allowlist ist kanonischer Normalweg; committed Positiv/Negativ-Gate PASS.
 - AF-060: BEHOBEN – offizieller ADCELL-v2-Tokenvertrag autoritativ belegt; keine Auth-Annahme mehr.
 - AF-062: BEHOBEN – ADCELL-v2-Runtimeweg nutzt Token-Test; Legacy-Basic-Auth-Hooks werden ersetzt; Hook-Runtime-Gate PASS.
-- AF-063: AKTIV – falscher 6.72.9-Manifesthash in Status/Evidence erkannt; korrekter Hash ist aus exakter Manifestdatei und Fresh-Unpack neu zu binden, bevor 6.72.9 kanonisiert werden darf.
+- AF-063: BEHOBEN – gespeicherte Manifestdatei, regenerierter 26-Dateien-Baum und Fresh-Unpack ergeben bytegenau `83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e`; falsche Status-/Evidence-/Governance-/Campus-Referenzen wurden korrigiert.
