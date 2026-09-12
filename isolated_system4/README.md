@@ -2,7 +2,7 @@
 
 Status: **BLOCKED / isolated prototype / test only.** No merge, no production, no publish.
 
-Block reason at this closeout: **no new Codex invocation is allowed until a real retrievable one-file batch handoff is confirmed before launch.** The already accepted Codex request from this chat has no terminal PASS/BLOCK result and is not proof.
+Block reason at this closeout: **no new Codex invocation is allowed until a real retrievable one-file batch handoff is confirmed before launch.** The last real 7/7 Codex request ended externally with `Codex couldn't complete this request. Try again later.` and produced neither a System-4 checker blocker nor a 7/7 batch result. It is not proof and must not be retried as another diagnostic/test run.
 
 No runtime, handoff, gate, state machine, signer or worker contract from concepts 1–3 is imported as System-4 orchestration. Existing domain tools may be used only as hash-bound pure validators/rule inputs.
 
