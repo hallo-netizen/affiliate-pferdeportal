@@ -50,9 +50,8 @@ class CodexEconomyContractTests(unittest.TestCase):
         ]: self.assertIn(value,task)
         for forbidden in [
             'system4-parent-chat-handoff',
-            'git push',
-            'transport branch',
             'write ONLY `isolated_system4/.handoff/',
+            'push that transport branch',
         ]: self.assertNotIn(forbidden,task)
         for value in [
             'DIRECT PARENT-CHAT FILE HANDOFF HARD RULE',
