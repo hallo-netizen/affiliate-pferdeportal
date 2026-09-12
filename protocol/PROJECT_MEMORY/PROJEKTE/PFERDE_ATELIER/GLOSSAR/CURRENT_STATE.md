@@ -1,33 +1,53 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-12
-STATUS: BÜRO EINGERICHTET / TECHNISCHE UMSETZUNG NOCH OFFEN
+STATUS: KONZEPT GEBUNDEN / UNIVERSALER CORE FESTGELEGT / TECHNISCHE UMSETZUNG OFFEN
 
 ## Belastbarer aktueller Stand
 
-- Eigenes Büro `GLOSSAR` ist als Steuerungsbüro eingerichtet.
+- Eigenes Büro `GLOSSAR` ist die Projekt-Steuerstelle für das öffentliche Pferde-Atelier-Glossar.
 - Die fachliche Glossar-Datenbank bleibt autoritativ in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
 - Keine zweite Fachbegriffs-Datenbank im Büro GLOSSAR.
 - Vom Nutzer im WordPress-Live-Backend bestätigt: Seite `Glossar` ist angelegt und verlinkt.
 - Keine WordPress-Seite pro Glossarbegriff vorgesehen.
-- Ziel im Frontend: Glossar-Startseite mit Navigation zu Oberbegriffen; darunter mehrere Glossarbegriffe ohne Grafikzwang, bevorzugt kompakt/aufklappbar.
+- Das bestehende Pferde-Designplugin wird **nicht** zur Glossar-Engine erweitert.
+- Der Glossar-Kern wird separat und von Anfang an projektunabhängig als `MOD-008 – Universal Glossar Engine` konzipiert.
+- Allgemeiner Hauptort: `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`.
+- Pferde Atelier ist die erste Projektanwendung und liefert nur Projektkonfiguration/Fachdaten.
+- Ziel im Frontend: Glossar-Startseite mit Navigation zu Oberbegriffen und A–Z; darunter mehrere Glossarbegriffe ohne Grafikzwang, bevorzugt kompakt/aufklappbar.
 - Glossarbegriffe sollen nicht wie normale Beiträge/Karten in bestehenden Pferde-Atelier-Kategorien erscheinen.
-- Jeder veröffentlichte Glossarbegriff soll eigene SEO-Angaben erhalten können.
-- Gewünschter SEO-Weg: SEO-Titel und Meta-Description nach festem Glossar-Schema; keine manuelle Yoast-Pflege je Begriff und keine direkten Writes in interne Yoast-Datenbankfelder. Vor Umsetzung ist die installierte Yoast-/Designplugin-Kompatibilität frisch zu prüfen.
-- Vor technischer Festlegung muss der aktuelle Designplugin-/Kategorietext-Bestand geprüft werden.
-- Aktuell ist keine neue große Glossar-Textmaschine vorgesehen. Für kurze Glossartexte soll ein kleiner standardisierter Schreib-/Prüfweg reichen.
+- Jeder veröffentlichte Glossarbegriff soll eine eigene technisch auflösbare Zieladresse und eigene SEO-Angaben erhalten können.
+- SEO-Titel und Meta-Description sollen nach festem Pferde-Glossar-Schema erzeugt werden können; keine manuelle Yoast-Pflege je Begriff.
+- Der universale Core darf nicht von Yoast abhängig sein; bei vorhandenem Yoast wird nur dessen offizielle Filter-/Metadatenschnittstelle genutzt.
+- Aktuell ist keine neue große Glossar-Textmaschine vorgesehen. Für kurze Glossartexte reicht ein kleiner standardisierter Schreib-/Prüfweg.
+
+## Projektkonfiguration Pferde Atelier
+
+Muss außerhalb des universalen Core liegen:
+- Glossar-Hauptseite / Seiten-ID;
+- URL-Basis;
+- Pferde-Oberbegriffe;
+- Pferde-SEO-Titel-Schema;
+- Pferde-Meta-Description-Schema;
+- Text-/Pflichtfeldregeln;
+- Designklassen;
+- Importquelle aus der Wissensdatenbank.
 
 ## Noch offen – nicht als beschlossen behandeln
 
-- exakter WordPress-Inhaltstyp bzw. Speicherweg der Glossardatensätze;
-- exakte Datenbank-/Metafeld-Implementierung;
-- exakte URL-Struktur je Begriff;
-- ob Oberbegriffe eigene technische Zielseiten erhalten;
-- Import-/Synchronisationsautomatik zwischen Campus-Wissensbasis und WordPress;
-- konkrete Plugin-Version für die Glossar-Erweiterung.
+- exakte V1-Feldnamen im WordPress-Backend;
+- endgültige URL-Struktur je Begriff;
+- ob Oberbegriffe zusätzlich eigene öffentliche Zieladressen bekommen;
+- konkrete Import-/Synchronisationsautomatik zwischen Campus-Wissensbasis und WordPress;
+- Pluginname/Version des ersten technischen Kandidaten;
+- endgültige allgemeingültige Modulfreigabe: erst nach Zweitportaltest.
 
-## Nächster belastbarer Prüfgegenstand
+## Allgemeingültigkeitsregel
 
-Bestehendes Pferde-Atelier-Designplugin und insbesondere die Kategorietext-Mechanik prüfen. Danach kleinstmögliche Backend-/Frontend-Architektur für das Glossar festlegen.
+Ein Core, zwei Konfigurationen:
+1. Pferde Atelier real;
+2. fachlich neutrale Testkonfiguration.
+
+Nur wenn beide ohne Core-Codeänderung funktionieren, darf MOD-008 als technisch ALLGEMEINGÜLTIG gelten.
 
 Aktuelle Arbeitsbindung steht ausschließlich in `HOBBYRAUM.md`.
