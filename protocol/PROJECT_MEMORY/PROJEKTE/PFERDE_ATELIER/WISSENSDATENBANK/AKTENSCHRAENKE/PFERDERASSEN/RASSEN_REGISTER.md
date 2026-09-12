@@ -1,74 +1,89 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-12
-STATUS: MASTERLISTE IM AUFBAU / 11 DATENSÄTZE ANGELEGT
+STATUS: MASTERLISTE IM AUFBAU / 44 DATENSÄTZE VORHANDEN
 
-## STATUSWERTE
+## WICHTIGE AUTORITÄTSREGEL
 
-- `KANDIDAT` – Name aufgenommen, formaler Status noch ungeprüft
-- `STATUS_GEPRUEFT` – Rasse/Population/sonstiger Status belastbar geklärt
-- `IN_RECHERCHE` – Einzeldatensatz wird recherchiert
-- `GEPRUEFT` – Kernfelder und Quellen geprüft
-- `GEPRUEFT_MIT_OFFENEN_FELDERN` – belastbare Kernbasis vorhanden, einzelne Felder bewusst offen
-- `NACHRECHERCHE` – neue Felder oder Konflikte offen
-- `BEITRAG_BEREIT` – Faktenbasis fachlich ausreichend
+Dieses Register ist nur Wegweiser und Bestandsübersicht. Der **fachliche Recherche-/Prüfstatus** steht ausschließlich im jeweiligen Datensatz unter `DATEN/`. Dadurch entsteht hier keine zweite Statuswahrheit.
 
-## REGISTER
+## BESTAND – 44 DATENSÄTZE
 
-Die internationale Masterliste wird aufgebaut. Noch kein Anspruch auf Vollständigkeit.
+| ID | Name | Datensatz |
+|---|---|---|
+| breed-akhal-teke | Akhal-Teke / Achal-Tekkiner | `DATEN/breed-akhal-teke.json` |
+| breed-american-cream-draft | American Cream Draft | `DATEN/breed-american-cream-draft.json` |
+| breed-american-paint-horse | American Paint Horse | `DATEN/breed-american-paint-horse.json` |
+| breed-american-quarter-horse | American Quarter Horse | `DATEN/breed-american-quarter-horse.json` |
+| breed-appaloosa | Appaloosa | `DATEN/breed-appaloosa.json` |
+| breed-arabian | Arabisches Vollblut / Arabian | `DATEN/breed-arabian.json` |
+| breed-ardennais | Ardennais / Ardenner | `DATEN/breed-ardennais.json` |
+| breed-boulonnais | Boulonnais | `DATEN/breed-boulonnais.json` |
+| breed-breton | Breton | `DATEN/breed-breton.json` |
+| breed-camargue | Camargue | `DATEN/breed-camargue.json` |
+| breed-caspian | Caspian Horse | `DATEN/breed-caspian.json` |
+| breed-castillonnais | Castillonnais | `DATEN/breed-castillonnais.json` |
+| breed-cheval-auvergne | Cheval d'Auvergne | `DATEN/breed-cheval-auvergne.json` |
+| breed-cheval-corse | Cheval Corse | `DATEN/breed-cheval-corse.json` |
+| breed-cob-normand | Cob Normand | `DATEN/breed-cob-normand.json` |
+| breed-comtois | Comtois | `DATEN/breed-comtois.json` |
+| breed-connemara-pony | Connemara Pony | `DATEN/breed-connemara-pony.json` |
+| breed-criollo | Criollo | `DATEN/breed-criollo.json` |
+| breed-dales-pony | Dales Pony | `DATEN/breed-dales-pony.json` |
+| breed-dartmoor-pony | Dartmoor Pony | `DATEN/breed-dartmoor-pony.json` |
+| breed-duelmener | Dülmener | `DATEN/breed-duelmener.json` |
+| breed-exmoor-pony | Exmoor Pony | `DATEN/breed-exmoor-pony.json` |
+| breed-fell-pony | Fell Pony | `DATEN/breed-fell-pony.json` |
+| breed-franches-montagnes | Franches-Montagnes / Freiberger | `DATEN/breed-franches-montagnes.json` |
+| breed-haflinger | Haflinger | `DATEN/breed-haflinger.json` |
+| breed-henson | Henson | `DATEN/breed-henson.json` |
+| breed-highland-pony | Highland Pony | `DATEN/breed-highland-pony.json` |
+| breed-icelandic-horse | Islandpferd | `DATEN/breed-icelandic-horse.json` |
+| breed-merens | Mérens | `DATEN/breed-merens.json` |
+| breed-new-forest-pony | New Forest Pony | `DATEN/breed-new-forest-pony.json` |
+| breed-norwegian-fjord-horse | Fjordpferd | `DATEN/breed-norwegian-fjord-horse.json` |
+| breed-percheron | Percheron | `DATEN/breed-percheron.json` |
+| breed-poney-landais | Poney Landais | `DATEN/breed-poney-landais.json` |
+| breed-pottok | Pottok | `DATEN/breed-pottok.json` |
+| breed-pura-raza-espanola | Pura Raza Española (PRE) | `DATEN/breed-pura-raza-espanola.json` |
+| breed-shetland-pony | Shetland Pony | `DATEN/breed-shetland-pony.json` |
+| breed-trait-auxois | Trait Auxois | `DATEN/breed-trait-auxois.json` |
+| breed-trait-du-nord | Trait du Nord | `DATEN/breed-trait-du-nord.json` |
+| breed-trait-poitevin-mulassier | Trait Poitevin Mulassier | `DATEN/breed-trait-poitevin-mulassier.json` |
+| breed-vercors-de-barraquand | Vercors de Barraquand | `DATEN/breed-vercors-de-barraquand.json` |
+| breed-welsh-mountain-pony-section-a | Welsh Mountain Pony – Section A | `DATEN/breed-welsh-mountain-pony-section-a.json` |
+| breed-welsh-pony-section-b | Welsh Pony – Section B | `DATEN/breed-welsh-pony-section-b.json` |
+| breed-welsh-pony-cob-type-section-c | Welsh Pony of Cob Type – Section C | `DATEN/breed-welsh-pony-cob-type-section-c.json` |
+| breed-welsh-cob-section-d | Welsh Cob – Section D | `DATEN/breed-welsh-cob-section-d.json` |
 
-## RECHERCHIERTE RASSEN
+## NÄCHSTE KANDIDATEN – NOCH NICHT ALS FERTIGE RASSE AKTEN BEHANDELN
 
-| ID | Name | Status | Datensatz |
-|---|---|---|---|
-| breed-akhal-teke | Akhal-Teke / Achal-Tekkiner | GEPRUEFT | `DATEN/breed-akhal-teke.json` |
-| breed-american-quarter-horse | American Quarter Horse | GEPRUEFT | `DATEN/breed-american-quarter-horse.json` |
-| breed-american-paint-horse | American Paint Horse | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-american-paint-horse.json` |
-| breed-appaloosa | Appaloosa | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-appaloosa.json` |
-| breed-pura-raza-espanola | Pura Raza Española (PRE) | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-pura-raza-espanola.json` |
-| breed-caspian | Caspian Horse | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-caspian.json` |
-| breed-american-cream-draft | American Cream Draft | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-american-cream-draft.json` |
-| breed-arabian | Arabisches Vollblut / Arabian | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-arabian.json` |
-| breed-icelandic-horse | Islandpferd | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-icelandic-horse.json` |
-| breed-haflinger | Haflinger | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-haflinger.json` |
-| breed-norwegian-fjord-horse | Fjordpferd | GEPRUEFT_MIT_OFFENEN_FELDERN | `DATEN/breed-norwegian-fjord-horse.json` |
-
-## NÄCHSTER MASTERLISTEN-BLOCK
-
-Kandidaten für die nächste Statusprüfung, noch nicht als Rasse bestätigt:
-- Ardenner
 - Altai
 - American Walking Pony
 - Andravida
 - Anglo-Kabarda
-- Argentine Criollo
 - Asturcón
 - Australian Stock Horse
 - Azteca
 - Barb / Berber
 - Bashkir Curly
 - Basotho Pony
-- Belgian Draft
+- Belgian Draft / Brabanter
 - Bosnian Mountain Horse
-- Breton
-- Camargue
-- Connemara Pony
-- Dartmoor Pony
-- Dülmener
-- Highland Pony
-- New Forest Pony
-- Shetland Pony
-- Welsh Pony / Cob
+- Irish Cob
+- Shagya-Araber
+- Lipizzaner
+- weitere internationale Rassen nach Masterlistenabgleich
 
-## OFFENE NACHRECHERCHE BEI BEREITS ANGELEGTEN DATENSÄTZEN
+## OFFENE NACHRECHERCHE
 
-Offene Felder sind gewollt sichtbar und werden nicht geraten. Häufig offen sind:
+Offene Felder sind gewollt sichtbar und werden nicht geraten. Typisch offen:
 - exakte Gewichte;
 - Lebenserwartung;
 - belastbare Gesundheits-/Genetikdaten;
 - Haltung/Fütterung nur bei rassespezifisch belegter Besonderheit;
 - internationaler Gefährdungsstatus gegen FAO DAD-IS;
-- einzelne Detailmaße oder Farbvorgaben, wenn die offizielle Quelle sie noch nicht belastbar liefert.
+- Detailmaße/Farben, wenn die autoritative Quelle sie noch nicht belastbar liefert.
 
 ## REGELN
 
