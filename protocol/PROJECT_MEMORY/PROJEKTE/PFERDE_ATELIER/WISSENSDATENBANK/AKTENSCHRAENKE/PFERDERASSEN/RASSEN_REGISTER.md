@@ -1,19 +1,20 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-12
-STATUS: MASTERLISTE IM AUFBAU / 90 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 96 DATENSÄTZE VORHANDEN
 
 ## WICHTIGE AUTORITÄTSREGEL
 
 Dieses Register ist nur Wegweiser und Bestandsübersicht. Der **fachliche Recherche-/Prüfstatus** steht ausschließlich im jeweiligen Datensatz unter `DATEN/`. Dadurch entsteht hier keine zweite Statuswahrheit.
 
-## BESTAND – 90 DATENSÄTZE
+## BESTAND – 96 DATENSÄTZE
 
 | ID | Name | Datensatz |
 |---|---|---|
 | breed-akhal-teke | Akhal-Teke / Achal-Tekkiner | `DATEN/breed-akhal-teke.json` |
 | breed-american-bashkir-curly | American Bashkir Curly / Curly Horse | `DATEN/breed-american-bashkir-curly.json` |
 | breed-american-cream-draft | American Cream Draft | `DATEN/breed-american-cream-draft.json` |
+| breed-american-miniature-horse | American Miniature Horse | `DATEN/breed-american-miniature-horse.json` |
 | breed-american-paint-horse | American Paint Horse | `DATEN/breed-american-paint-horse.json` |
 | breed-american-quarter-horse | American Quarter Horse | `DATEN/breed-american-quarter-horse.json` |
 | breed-anglo-arabian | Anglo-Araber | `DATEN/breed-anglo-arabian.json` |
@@ -22,6 +23,9 @@ Dieses Register ist nur Wegweiser und Bestandsübersicht. Der **fachliche Recher
 | breed-ardennais | Ardennais / Ardenner | `DATEN/breed-ardennais.json` |
 | breed-asturcon | Asturcón | `DATEN/breed-asturcon.json` |
 | breed-australian-stock-horse | Australian Stock Horse | `DATEN/breed-australian-stock-horse.json` |
+| breed-basotho-pony | Basotho Pony | `DATEN/breed-basotho-pony.json` |
+| breed-belgian-draught | Belgian Draught / Belgisches Kaltblut | `DATEN/breed-belgian-draught.json` |
+| breed-bosnian-mountain-horse | Bosnisches Gebirgspferd | `DATEN/breed-bosnian-mountain-horse.json` |
 | breed-boulonnais | Boulonnais | `DATEN/breed-boulonnais.json` |
 | breed-breton | Breton | `DATEN/breed-breton.json` |
 | breed-british-spotted-pony | British Spotted Pony | `DATEN/breed-british-spotted-pony.json` |
@@ -52,6 +56,7 @@ Dieses Register ist nur Wegweiser und Bestandsübersicht. Der **fachliche Recher
 | breed-english-thoroughbred | Englisches Vollblut | `DATEN/breed-english-thoroughbred.json` |
 | breed-eriskay-pony | Eriskay Pony | `DATEN/breed-eriskay-pony.json` |
 | breed-exmoor-pony | Exmoor Pony | `DATEN/breed-exmoor-pony.json` |
+| breed-falabella | Falabella | `DATEN/breed-falabella.json` |
 | breed-fell-pony | Fell Pony | `DATEN/breed-fell-pony.json` |
 | breed-franches-montagnes | Franches-Montagnes / Freiberger | `DATEN/breed-franches-montagnes.json` |
 | breed-friesian | Friese / Friesian | `DATEN/breed-friesian.json` |
@@ -68,6 +73,7 @@ Dieses Register ist nur Wegweiser und Bestandsübersicht. Der **fachliche Recher
 | breed-irish-sport-pony | Irish Sport Pony | `DATEN/breed-irish-sport-pony.json` |
 | breed-jaca-navarra | Jaca Navarra | `DATEN/breed-jaca-navarra.json` |
 | breed-kerry-bog-pony | Kerry Bog Pony | `DATEN/breed-kerry-bog-pony.json` |
+| breed-konik-polski | Konik polski | `DATEN/breed-konik-polski.json` |
 | breed-kwpn | KWPN / Niederländisches Warmblut | `DATEN/breed-kwpn.json` |
 | breed-leonharder | Leonharder | `DATEN/breed-leonharder.json` |
 | breed-lewitzer | Lewitzer | `DATEN/breed-lewitzer.json` |
@@ -106,18 +112,12 @@ Dieses Register ist nur Wegweiser und Bestandsübersicht. Der **fachliche Recher
 
 - Altai
 - American Walking Pony
-- American Miniature Horse
 - Andravida
 - Anglo-Kabarda
 - Aegidienberger
 - Azteca
 - Barb / Berber
-- Basotho Pony
-- Belgian Draft / Brabanter
-- Bosnian Mountain Horse
-- Caballo Falabella
 - Huzule
-- Konik
 - weitere internationale Rassen aus nationalen/ursprünglichen Studbooks
 
 ## DUBLETTEN-/ABGRENZUNGSREGELN AUS DER LAUFENDEN RECHERCHE
@@ -128,6 +128,8 @@ Dieses Register ist nur Wegweiser und Bestandsübersicht. Der **fachliche Recher
 - Welsh A/B/C/D bleiben getrennte Datensätze, weil das offizielle Stud Book vier eigenständige Sektionen mit unterschiedlichen Standards führt.
 - KWPN-Dressur, -Springen, Tuigpaard und Gelders paard sind vier Fokrichtungen innerhalb des KWPN und werden nicht automatisch als vier Rassen dupliziert.
 - Britischer Percheron wird nicht zusätzlich angelegt; Percheron existiert bereits als Rassedatensatz.
+- Belgian Draught/Belgisches Kaltblut wird nicht noch einmal als separater `Brabanter`-Datensatz dupliziert; Brabant/Brabanter wird als historische/regionale Bezeichnung geführt.
+- Falabella und American Miniature Horse sind getrennte Rassen/Register; Miniaturgröße allein macht kein Falabella.
 
 ## OFFENE NACHRECHERCHE
 
