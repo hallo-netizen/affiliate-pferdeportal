@@ -22,6 +22,9 @@ if ( ! class_exists( 'UPC_Research_Refresh_Result_Validator' ) ) {
 if ( ! class_exists( 'UPC_Research_Refresh_Applier' ) ) {
     require_once __DIR__ . '/class-upc-research-refresh-applier.php';
 }
+if ( ! class_exists( 'UPC_Candidate_Gate' ) ) {
+    require_once __DIR__ . '/class-upc-candidate-gate.php';
+}
 
 /**
  * Explicit runtime bridge for bound research bootstrap and refresh maintenance.
@@ -142,6 +145,36 @@ class UPC_Research_Runtime {
         );
 
         return $applier->apply( $plan, $results );
+    }
+
+    public static function evaluate_candidate( array $candidate, $project_key = 'pferde-atelier' ) {
+        $project_key = sanitize_key( $project_key );
+        if ( '' === $project_key ) {
+            return new WP_Error( 'UPC_CANDIDATE_PROJECT_KEY_MISSING', 'Project key is required.' );
+        }
+
+        $dependency = self::ensure_product_maintenance();
+        if ( is_wp_error( $dependency ) ) {
+            return $dependency;
+        }
+        if ( ! class_exists( 'UPC_Feature_Key_Catalog' ) || ! class_exists( 'UPC_Candidate_Gate' ) ) {
+            return new WP_Error( 'UPC_CANDIDATE_RUNTIME_DEPENDENCY_MISSING', 'Candidate runtime dependency is missing.' );
+        }
+
+        global $wpdb;
+        $maintenance = new UPK_Maintenance( $wpdb );
+        $base = dirname( __DIR__ ) . '/config/' . $project_key . '/';
+        $catalog = UPC_Feature_Key_Catalog::load( $base . 'feature-key-catalog.json' );
+        if ( is_wp_error( $catalog ) ) {
+            return $catalog;
+        }
+        $policy = UPC_Candidate_Gate::load_policy( $base . 'maintenance-groups.json' );
+        if ( is_wp_error( $policy ) ) {
+            return $policy;
+        }
+
+        $gate = new UPC_Candidate_Gate( $maintenance, $catalog, $policy );
+        return $gate->evaluate( $candidate );
     }
 
     private static function ensure_product_maintenance() {
