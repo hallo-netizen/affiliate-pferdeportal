@@ -1,0 +1,39 @@
+AFFILIATE-ZENTRALE 6.72.19 – ADCELL API V2 CANONICAL FULL GATE
+Date: 2026-09-12
+Branch: affiliate-release-current
+Canonical merged source: Pluginbuero 6.72.17 + tested ADCELL API-v2 integration
+Current source manifest SHA-256: 694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b
+
+Canonical full gate run:
+- GitHub Actions run: 34690118524
+- Job: 103543774405
+- Head: d929fa7dd601e5235674f58e244e30de0cbc3cb6
+- Overall: SUCCESS
+
+Executed PASS evidence:
+- AFFILIATE_RELEASE_GOVERNANCE_PASS
+- ADCELL_API_V2_GATE_PASS
+- ADCELL_RUNTIME_POS_NEG_HASH_IDENTICAL_REUSE_PASS
+  * trait-ppar-network-sync.php SHA-256 a7183a025ccc55f756b15867ca2598963ea987f6b6baedef7c95078001d4ed12
+  * trait-ppar-provider-registry.php SHA-256 00cb273992a9288978bb06274e131a857c394944e8ee1c0f249846d118cbe9a6
+  * trait-ppar-automation-suite.php SHA-256 c976abdda10b602d2c5afe188297a5e9b111068cab090004cf081fa549d5aa09
+  These three canonical bytes are hash-identical to the previously executed ADCELL runtime positive/negative candidate; governance permits reuse of hash-identical PASS evidence.
+- ALL 18 AWIN/OTTO FUNCTION HASHES PASS
+- ALL WEIGHTED BANNER BEHAVIOR TESTS PASS
+- PHP_LINT_21_OF_21_PASS
+- AFFILIATE_RELEASE_SOURCE_PASS
+- AFFILIATE_RELEASE_TREE_PASS
+- AFFILIATE_RELEASE_START_PASS
+- FRESH_UNPACK_SOURCE_IDENTITY_26_OF_26_PASS
+- FRESH_UNPACK_PHP_21_OF_21_PASS
+- FRESH_UNPACK_VERSION_67219_PASS
+
+Ephemeral Fresh-Unpack test ZIP SHA-256:
+418e3c10f1042d16a0a7751cc007d7b6d95b6161ef48aba4b0ba7150448af415
+This runner-temp ZIP is test evidence only, not a released/live installer.
+
+AF-065:
+Initial canonical gate run 34689810939 correctly blocked on OBJECTIVE_CONTROL_WEAKENED:new_version_policy. The immutable guard value was restored. Repair run 34689963844 succeeded. The same canonical gates were rerun and passed before the final full gate above.
+
+LIVE STATUS:
+NO LIVE PASS. Real ADCELL API and real WordPress/MariaDB E2E remain blocked because ADCELL account access/password reset is unavailable. release_allowed remains false.
