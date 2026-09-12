@@ -1,0 +1,84 @@
+PFERDE ATELIER – AFFILIATE-ZENTRALE – ADCELL API V2 LOCAL FULL GATE
+Datum: 2026-09-12
+Status: LOCAL_CANDIDATE_PASS_NOT_CANONICALLY_BOUND_LIVE_E2E_BLOCKED
+
+Autoritative technische Basis vor Rueckbindung:
+- Branch: affiliate-release-current
+- canonical head at gate start: 1f765bd6571af6435986fa027b1de32d2db4887e
+- Version: 6.72.8
+- committed source manifest before local candidate: 40dc3d56eba71a53edc87e425e8dc04416568365ee4b9e3d48320c3e25fff049
+
+Lokaler Kandidat – exakt drei freigegebene Source-Dateien geaendert:
+1. includes/trait-ppar-automation-suite.php
+   SHA256: 529c1da3cf943885094f7c7eed53c61caa3b11cf7c8eafbb766b77ddadfd4b4b
+   Git blob SHA: e2dfa0734363a3c645c8e714edeb6e6ac7fa3e5e
+2. includes/trait-ppar-network-sync.php
+   SHA256: a7183a025ccc55f756b15867ca2598963ea987f6b6baedef7c95078001d4ed12
+   Git blob SHA: 1bdcc564fe82e1d486523799211c3786c859b758
+3. includes/trait-ppar-provider-registry.php
+   SHA256: 87572d4bf2bcc2400fb3fa2cfd02050261c97555ce340f7981f1afbcd6a9e9ae
+   Git blob SHA: 82241b6451160d02caa92db3c053e96d5263bfb7
+
+Korrigierter gebundener ADCELL-Hobbyraumtest – lokaler Kandidat:
+- test_adcell_api_v2_automation.php
+- SHA256: 44f1aa850b2221fa9ae5b0ef3daabe31d674a1f2abdc5f357e832dc44d91d4ea
+- Git blob SHA: 01a8acbfedf4d170b8868fd64cb7afaa56b31c2d
+
+Finales lokales 26-Dateien-Source-Manifest:
+- CURRENT_SOURCE_SHA256.txt SHA256: 74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5
+- Git blob SHA: 08d4a78b3b3a7db874bab797485eeb15bcffd932
+
+Implementierter lokaler Fachstand:
+- ADCELL-Quellen werden pro explizit freigegebener programId geplant; kein adcell:csv-feed Normalweg.
+- Vor Lauf: programId-Allowlist + affiliateStatus=accepted + isActive fail-closed.
+- API-v2-CSV URL ausschliesslich aus getPromotionTypeCsv; mehrere unterschiedliche CSV-URLs => ambiguous/fail-closed.
+- Banner/Deeplink ausschliesslich aus dokumentierten ADCELL-v2-Feldern.
+- ADCELL bleibt ADCELL und benutzt keine Awin-Partnerauswahl/-Route.
+- Bestehende zentrale Creative-, Relevanz-, Asset-, Output-, Pause- und Veto-Logik bleibt der downstream Pfad.
+- Provider-Registry nutzt adcell_api_v2_test_connection().
+- Zwei aktive Legacy-Admin-Einstiege des alten ADCELL Basic-Auth-Tests werden auf admin_init durch sichere ADCELL-v2-Wrapper ersetzt; Awin delegiert unveraendert.
+- Alte Basic-Auth-Implementierung kann als tote Altdefinition im Router verbleiben, ist fuer die beiden real registrierten ADCELL-Einstiege nicht mehr erreichbar.
+
+Tatsaechlich ausgefuehrte lokale Gates nach finalem AF-062-Stand:
+- PHP lint release source: 21/21 PASS.
+- ADCELL static contract gate: PASS.
+- ADCELL WordPress-stub Runtime positiv/negativ: PASS; 14/14 Kernfaelle, danach Banner/Deeplink positive paths zusaetzlich PASS.
+- NEGATIV: leere Allowlist blockiert.
+- NEGATIV: nicht allowlisted programId blockiert.
+- NEGATIV: inactive/not accepted blockiert.
+- NEGATIV: falscher CSV/Asset Host blockiert.
+- NEGATIV: cross-program CSV blockiert.
+- NEGATIV: mehrere verschiedene CSV URLs blockieren als ambiguous.
+- NEGATIV: kein Basic-/Bearer-Fallback im neuen v2-Pfad.
+- AF-062 Hook-Runtime-Test: PASS; alte zwei ADCELL Router callbacks vor Bindung registriert, nach admin_init entfernt und durch v2-Wrapper ersetzt.
+- Banner-Regressionstest test_banner_distribution_behavior.php: PASS.
+- Scope-Diff: genau 3 erlaubte Traits geaendert; ausserhalb 0 Source-Dateien; kein Awin-/OTTO-Funktionsblock geaendert.
+- Originaler unveraenderter control/release-governance/release_guard.py auf dem finalen lokalen 26-Dateien-Baum: governance-check PASS, source-check PASS, tree-check PASS, start PASS.
+
+OTTO-Teststatus:
+- test_otto_automation.php ist bereits auf unveraendertem kanonischem 6.72.8 widerspruechlich/stale: er verlangt gleichzeitig historische 6.72.7 Marker (u.a. v6727 / target 4.1.2 / row-count-exceeds-imported) und 6.72.8 Marker.
+- Das ist AF-057/Teststand-Drift und KEIN ADCELL-Regressionsergebnis.
+- OTTO-Source wurde deshalb nicht geaendert und OTTO bleibt PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED.
+
+NICHT ausgefuehrt / NICHT als PASS zu werten:
+- Der lokale Source-Kandidat ist wegen fehlender bytegenauer Local-File->GitHub-Blob-Schreibschnittstelle dieser Sitzung noch NICHT auf affiliate-release-current gebunden.
+- Kein Fresh-Unpack eines aus dem kanonisch committed Kandidaten erzeugten neuen ZIP.
+- Keine Source<->ZIP Byte-Identity fuer einen neuen ADCELL-Testkandidaten.
+- Kein Test-Plugin ausgegeben.
+- Kein echter ADCELL-Live-API-Request.
+- Kein realer ADCELL WordPress/MariaDB/API End-to-End-Lauf.
+- Kein LIVE PASS.
+
+Rueckbindungsblocker dieser Sitzung:
+Der vorhandene GitHub-Connector kann Git-Blobs aus vollstaendigem Textinhalt erzeugen, uebernimmt aber keine lokale Datei direkt. Grosse manuell transportierte Inhalte wurden an der Werkzeuggrenze gekuerzt/veraendert; deren Git-Blob-SHA wich vom lokalen Soll-SHA ab. Solche Blobs wurden NICHT referenziert und NICHT committed. Der aktive Source-Branch wurde dadurch nicht beschaedigt.
+
+Verbindliche naechste Aktion:
+1. Exakte drei lokale Source-Dateien bytegenau in GitHub-Blobs uebertragen; nur akzeptieren, wenn die oben gebundenen Git-Blob-SHAs exakt stimmen.
+2. Korrigierten ADCELL-Test + Manifest + vollstaendige aktuelle Governance in denselben atomaren Tree/Commit binden; Governance ueber prebound sequence 7 fortschreiben.
+3. Commit gegen vorherigen Head diffen; nur erwartete Dateien zulassen.
+4. affiliate-release-current fast-forward auf den geprueften Commit.
+5. committed Stand frisch zuruecklesen und originalen Guard erneut ausfuehren.
+6. Danach Fresh-Unpack + Source/ZIP byte identity; erst danach Test-Plugin.
+7. Live-PASS weiterhin erst nach wiederhergestelltem ADCELL-Kontozugang und echtem WordPress/MariaDB/API-E2E.
+
+Kein Codex verwendet.
