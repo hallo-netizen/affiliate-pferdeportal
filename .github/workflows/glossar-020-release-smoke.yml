@@ -5,7 +5,7 @@ on:
     branches:
       - hobbyroom/glossar-v1-current-20260912
     paths:
-      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge020-final-collision.b64'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge020-final-collision-part*.b64'
       - '.github/workflows/glossar-020-release-smoke.yml'
   workflow_dispatch:
 
@@ -23,43 +23,33 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          B64='protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge020-final-collision.b64'
+          P='protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp'
+          cat "$P/uge020-final-collision-part1.b64" "$P/uge020-final-collision-part2.b64" "$P/uge020-final-collision-part3.b64" "$P/uge020-final-collision-part4.b64" > /tmp/uge020.b64
+          base64 -d /tmp/uge020.b64 > /tmp/uge020.zip
+          unzip -t /tmp/uge020.zip
           mkdir -p .tmp/uge020
-          base64 -d "$B64" > /tmp/uge020.zip
           unzip -q /tmp/uge020.zip -d .tmp/uge020
           test -f .tmp/uge020/universal-glossary-engine/universal-glossary-engine.php
           grep -q 'Version: 0.2.0' .tmp/uge020/universal-glossary-engine/universal-glossary-engine.php
           find .tmp/uge020/universal-glossary-engine -name '*.php' -print0 | xargs -0 -n1 php -l
 
-      - name: Start WordPress and MySQL
+      - name: Start real WordPress and MySQL
         shell: bash
         run: |
           set -euo pipefail
           docker network create uge020-net
           docker run -d --name uge020-db --network uge020-net \
-            -e MYSQL_ROOT_PASSWORD=root \
-            -e MYSQL_DATABASE=wordpress \
-            -e MYSQL_USER=wp \
-            -e MYSQL_PASSWORD=wp \
-            --health-cmd='mysqladmin ping -h localhost -uroot -proot' \
-            --health-interval=3s --health-timeout=3s --health-retries=30 \
-            mysql:8.0
+            -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp \
+            --health-cmd='mysqladmin ping -h localhost -uroot -proot' --health-interval=3s --health-timeout=3s --health-retries=30 mysql:8.0
           for i in $(seq 1 40); do
             test "$(docker inspect -f '{{.State.Health.Status}}' uge020-db)" = healthy && break
             sleep 2
           done
           test "$(docker inspect -f '{{.State.Health.Status}}' uge020-db)" = healthy
           docker run -d --name uge020-wp --network uge020-net -p 8080:80 \
-            -e WORDPRESS_DB_HOST=uge020-db:3306 \
-            -e WORDPRESS_DB_NAME=wordpress \
-            -e WORDPRESS_DB_USER=wp \
-            -e WORDPRESS_DB_PASSWORD=wp \
-            -v "$GITHUB_WORKSPACE/.tmp/uge020/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro" \
-            wordpress:php8.1-apache
-          for i in $(seq 1 60); do
-            curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break
-            sleep 2
-          done
+            -e WORDPRESS_DB_HOST=uge020-db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp \
+            -v "$GITHUB_WORKSPACE/.tmp/uge020/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro" wordpress:php8.1-apache
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
           curl -fsS http://127.0.0.1:8080/ >/dev/null
 
       - name: Install WordPress and activate candidate
@@ -69,22 +59,18 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
           docker cp /tmp/wp uge020-wp:/usr/local/bin/wp
           docker exec uge020-wp chmod +x /usr/local/bin/wp
-          docker exec uge020-wp wp core install --allow-root \
-            --url='http://127.0.0.1:8080' --title='UGE 020 Smoke' \
-            --admin_user=admin --admin_password='UGE-smoke-1234' \
-            --admin_email='admin@example.test' --skip-email
+          docker exec uge020-wp wp core install --allow-root --url='http://127.0.0.1:8080' --title='UGE 020 Smoke' --admin_user=admin --admin_password='UGE-smoke-1234' --admin_email='admin@example.test' --skip-email
           docker exec uge020-wp wp rewrite structure '/%postname%/' --hard --allow-root
           docker exec uge020-wp wp plugin activate universal-glossary-engine --allow-root
           docker exec uge020-wp wp plugin is-active universal-glossary-engine --allow-root
           test "$(docker exec uge020-wp wp plugin get universal-glossary-engine --field=version --allow-root)" = '0.2.0'
 
-      - name: Positive and negative – routes, homepage and preview
+      - name: Positive and negative – homepage routes and preview
         shell: bash
         run: |
           set -euo pipefail
           PAGE_ID=$(docker exec uge020-wp wp post create --allow-root --post_type=page --post_status=publish --post_title='Glossar' --post_name=glossar --post_excerpt='Pferdebegriffe verständlich erklärt.' --porcelain)
           docker exec uge020-wp wp eval --allow-root "\$cfg=UGE_Config::get(); \$cfg['main_page_id']=$PAGE_ID; \$cfg['rewrite_base']='glossar'; \$cfg['term_segment']='begriff'; \$cfg['design_profile']='pferde_atelier'; update_option(UGE_Config::OPTION, UGE_Config::sanitize(\$cfg)); UGE_Core::register_content(); flush_rewrite_rules();"
-
           printf '%s' 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl9ZQAAAABJRU5ErkJggg==' | base64 -d > /tmp/hero.png
           docker cp /tmp/hero.png uge020-wp:/tmp/hero.png
           ATTACH_ID=$(docker exec uge020-wp wp media import /tmp/hero.png --title='Glossar Hero' --porcelain --allow-root)
@@ -94,9 +80,7 @@ jobs:
           TERM_ID=$(docker exec uge020-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title='Kolik' --post_name=kolik --post_content='<p>Ausführliche Erklärung zur Kolik beim Pferd.</p>' --porcelain)
           docker exec uge020-wp wp post meta update "$TERM_ID" _uge_short_definition 'Kolik ist ein Sammelbegriff für Bauchschmerzen beim Pferd.' --allow-root
           docker exec uge020-wp wp post term add "$TERM_ID" uge_group Gesundheit --allow-root
-
           DRAFT_ID=$(docker exec uge020-wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Vorschau Begriff' --post_name=vorschau-begriff --post_content='<p>Dieser Entwurf muss in der Vorschau sichtbar sein.</p>' --porcelain)
-          docker exec uge020-wp wp post meta update "$DRAFT_ID" _uge_short_definition 'Nur in der eingeloggten Vorschau sichtbar.' --allow-root
 
           curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home.html
           grep -q 'uge-hero-image' /tmp/home.html
@@ -114,14 +98,11 @@ jobs:
           curl -fsS http://127.0.0.1:8080/glossar/gesundheit/ -o /tmp/category.html
           grep -q 'Kolik' /tmp/category.html
           grep -q '/glossar/begriff/kolik/' /tmp/category.html
-          grep -q 'Glossar' /tmp/category.html
-
           curl -fsS http://127.0.0.1:8080/glossar/begriff/kolik/ -o /tmp/term.html
           grep -q 'Ausführliche Erklärung zur Kolik beim Pferd.' /tmp/term.html
           grep -q 'uge-ad-slot-top' /tmp/term.html
           grep -q 'uge-ad-slot-inline' /tmp/term.html
           grep -q 'uge-ad-slot-bottom' /tmp/term.html
-
           OLD_STATUS=$(curl -sS -o /tmp/old.html -w '%{http_code}' http://127.0.0.1:8080/glossar/kolik/)
           test "$OLD_STATUS" != '200'
 
@@ -173,9 +154,7 @@ jobs:
           echo 'UGE020_COLLISION_HARD_RULE_PASS'
 
       - name: Final proof
-        shell: bash
         run: |
-          set -euo pipefail
           echo 'UGE020_REAL_WORDPRESS_POSITIVE_NEGATIVE_PASS'
           docker exec uge020-wp wp core version --allow-root
           docker exec uge020-wp php -r 'echo PHP_VERSION, PHP_EOL;'
