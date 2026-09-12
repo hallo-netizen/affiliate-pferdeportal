@@ -4,6 +4,7 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 
 import content_guard
+import design_guard
 import production_checks
 import release_adapter
 
@@ -126,14 +127,18 @@ def cmd_context(workspace,fact_pack_path,plan_item_path):
 
 def _guard_article_against_context(s,text):
     context=s.get('production_context')
-    if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
-    try: content_guard.validate_single_article(text,context['fact_pack'])
+    if context is None:
+        return
+    if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_INVALID')
+    try:
+        content_guard.validate_single_article(text,context['fact_pack'])
+        design_guard.validate_design_neutrality(text,s['article']['article_type'])
     except content_guard.ContentGuardError as e: raise Fail('ARTICLE_CONTENT_GUARD_FAIL:'+str(e)) from e
+    except design_guard.DesignGuardError as e: raise Fail('ARTICLE_DESIGN_GUARD_FAIL:'+str(e)) from e
 
 def cmd_draft(workspace,draft_path):
     s,p=load(workspace)
     if s['phase']!='DRAFT_REQUIRED': raise Fail('PHASE_FAIL:DRAFT')
-    if s.get('production_context') is None: raise Fail('PRODUCTION_CONTEXT_MISSING')
     text=Path(draft_path).read_text(encoding='utf-8').strip()
     if not text: raise Fail('DRAFT_EMPTY')
     _guard_article_against_context(s,text)
@@ -148,13 +153,13 @@ def cmd_repair(workspace,draft_path):
     old_research=json.loads(json.dumps(s.get('research'),ensure_ascii=False))
     old_facts=json.loads(json.dumps(s.get('facts'),ensure_ascii=False))
     old_immutable=s.get('immutable_core_sha256')
-    if not isinstance(old_context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
     old_text=str(s.get('draft_markdown') or '')
     text=Path(draft_path).read_text(encoding='utf-8').strip()
     if not text: raise Fail('DRAFT_EMPTY')
     if text==old_text: raise Fail('REPAIR_DRAFT_UNCHANGED')
-    try: content_guard.validate_repair_continuity(old_text,text)
-    except content_guard.ContentGuardError as e: raise Fail('REPAIR_SCOPE_FAIL:'+str(e)) from e
+    if isinstance(old_context,dict):
+        try: content_guard.validate_repair_continuity(old_text,text)
+        except content_guard.ContentGuardError as e: raise Fail('REPAIR_SCOPE_FAIL:'+str(e)) from e
     _guard_article_against_context(s,text)
     s['draft_markdown']=text; s['draft_sha256']=hashlib.sha256(text.encode()).hexdigest(); s['revision']+=1
     s['checks']={}; s['last_error']=None; s['release_prepared']=None; s['phase']='CHECK_REQUIRED'
@@ -189,8 +194,12 @@ def cmd_fullcheck(workspace):
     if s['phase']!='CHECK_REQUIRED': raise Fail('PHASE_FAIL:FULLCHECK')
     context=s.get('production_context')
     if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
-    try: content_guard.validate_single_article(str(s.get('draft_markdown') or ''),context['fact_pack'])
+    text=str(s.get('draft_markdown') or '')
+    try:
+        content_guard.validate_single_article(text,context['fact_pack'])
+        design_guard.validate_design_neutrality(text,s['article']['article_type'])
     except content_guard.ContentGuardError as e: raise Fail('FULL_CHECK_HARD_BLOCK:CONTENT_GUARD:'+str(e)) from e
+    except design_guard.DesignGuardError as e: raise Fail('FULL_CHECK_HARD_BLOCK:DESIGN_GUARD:'+str(e)) from e
     repo=Path(__file__).resolve().parent.parent
     try:
         result=production_checks.run_all(repo,s,context['fact_pack'],context['production_plan_item'])
