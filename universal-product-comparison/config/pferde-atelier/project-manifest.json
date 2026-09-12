@@ -4,5 +4,11 @@
   "publishing": {
     "file": "publishing.json",
     "sha256": "c88b0ac4cdc69978970a0b5b1c9666c492c4ae19cbb06e3eed8436fbfbe76b68"
+  },
+  "research_import": {
+    "file": "research-import-plan.json.gz",
+    "sha256": "8cc68d68f04cc5de7dc8cc99f15d3effe7d039a0415fd349c688f2e0ca252b83",
+    "content_sha256": "3b087445abdccc9e00829df8b23ba0e16bf287898fae3bfdc6771c6e64fbeeff",
+    "compression": "gzip"
   }
 }
