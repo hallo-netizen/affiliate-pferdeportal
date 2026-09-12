@@ -149,7 +149,7 @@ class UPC_Research_Refresh_Result_Validator {
                 $status = strtoupper( sanitize_text_field( (string) ( $fact['fact_status'] ?? '' ) ) );
                 $value = sanitize_textarea_field( (string) ( $fact['fact_value'] ?? '' ) );
                 if ( '' === $source_url
-                    || ! in_array( $source_type, UPK_Repository::source_types(), true )
+                    || ! in_array( $source_type, array( 'MANUFACTURER', 'OFFICIAL_DOCUMENTATION' ), true )
                     || ! in_array( $status, UPK_Repository::fact_statuses(), true )
                     || ( 'VERIFIED' === $status && '' === $value )
                 ) {
