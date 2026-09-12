@@ -123,6 +123,22 @@ class UPC_Candidate_Gate {
             );
         }
 
+        $verified_at = isset( $candidate['verified_at'] ) ? trim( (string) $candidate['verified_at'] ) : '';
+        $verified_ts = '' === $verified_at ? false : strtotime( $verified_at );
+        if ( false === $verified_ts ) {
+            return new WP_Error( 'UPC_CANDIDATE_VERIFIED_AT_INVALID', 'Completed candidate research requires a valid verification timestamp.' );
+        }
+        $verified_at = gmdate( 'Y-m-d H:i:s', $verified_ts );
+        foreach ( $normalized_facts as &$normalized_fact ) {
+            $fact_ts = '' === $normalized_fact['verified_at'] ? false : strtotime( $normalized_fact['verified_at'] );
+            if ( false === $fact_ts ) {
+                unset( $normalized_fact );
+                return new WP_Error( 'UPC_CANDIDATE_FACT_VERIFIED_AT_INVALID', 'Candidate fact verification timestamp is invalid.' );
+            }
+            $normalized_fact['verified_at'] = gmdate( 'Y-m-d H:i:s', $fact_ts );
+        }
+        unset( $normalized_fact );
+
         $required = array_values( $group['required_additional_contracts'] ?? array() );
         $completed = isset( $candidate['completed_contracts'] ) && is_array( $candidate['completed_contracts'] ) ? array_values( array_unique( array_map( 'sanitize_text_field', $candidate['completed_contracts'] ) ) ) : array();
         $missing_contracts = array_values( array_diff( $required, $completed ) );
@@ -137,6 +153,7 @@ class UPC_Candidate_Gate {
             'automatic_comparison_created' => false,
             'identity' => $identity,
             'manufacturer_product_url' => $url,
+            'verified_at' => $verified_at,
             'facts' => $normalized_facts,
             'product_group_key' => $identity['product_group_key'],
             'required_additional_contracts' => $required,
