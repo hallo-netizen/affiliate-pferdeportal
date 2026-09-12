@@ -1,6 +1,6 @@
 # PROJEKTGEBÄUDE – PFERDE-ATELIER
 
-STAND: 2026-09-05
+STAND: 2026-09-12
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -44,6 +44,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
 - `HIVEPRESS/START_HERE.md` → Anzeigenmarkt / HivePress
 - `GEMEINSAM/START_HERE.md` → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
+- `PLUGINS/START_HERE.md` → installierter Pluginbestand / Eigenentwicklungs-Zuordnung / betriebliche Bewertung / zentrale Plugin-Updatechronik; Fach-/Release-/LIVE-Wahrheit bleibt im zuständigen Fachbüro
 
 ## Gemeinsame Regeln
 
@@ -72,4 +73,3 @@ Parallel arbeitende Chats/Worker werden ausschließlich im zuständigen Büro/Ho
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
