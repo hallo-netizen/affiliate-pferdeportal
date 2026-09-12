@@ -21,7 +21,7 @@ class HandoffTransportTests(unittest.TestCase):
         rows=[]
         for i in range(7):
             unique=' '.join(f'eigen{i}_{n}' for n in range(70))
-            body=f'<article><p data-fact-ids="fact-{i}-a fact-{i}-b">Artikel {i} {unique}</p></article>'
+            body=f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Abschnitt {i}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">Artikel {i} {unique}</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>{i}</td><td>Wert</td></tr></table></article>'
             body_sha=hashlib.sha256(body.encode()).hexdigest()
             rows.append({
                 'index':i,'title':f'Titel {i}','target_keyword':f'Keyword {i}','category':f'cat-{i}','article_type':'Beratung','plan_slot':hashlib.sha256(f'slot-{i}'.encode()).hexdigest(),
@@ -72,9 +72,12 @@ class HandoffTransportTests(unittest.TestCase):
     def test_negative_missing_fact_sources(self):
         p=self.payload(); p['articles'][0]['production_context']['fact_pack'].pop('sources')
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_CONTENT_GUARD:0:FACT_PACK_SOURCES_MISSING'): ht.validate_handoff(p)
+    def test_negative_design_drift(self):
+        p=self.payload(); row=p['articles'][0]; row['body']=row['body'].replace('system-129-table comparison-table','comparison-table'); row['final_draft_sha256']=sha(row['body']); row['ppm679']['content_sha256']=row['final_draft_sha256']
+        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_DESIGN_GUARD:0:DESIGN_TABLE_SYSTEM129_CLASS_MISSING'): ht.validate_handoff(p)
     def test_negative_template_reuse(self):
         p=self.payload()
-        common='<article><p data-fact-ids="fact-{i}-a fact-{i}-b">Eine gute Entscheidung beginnt mit einer Bestandsaufnahme. Notiere wie häufig die Lösung gebraucht wird und welche Bedingungen bestehen. Eine gute Entscheidung beginnt mit einer Bestandsaufnahme. Notiere wie häufig die Lösung gebraucht wird und welche Bedingungen bestehen. Artikel {i}</p></article>'
+        common='<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Auswahl</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">Eine gute Entscheidung beginnt mit einer Bestandsaufnahme. Notiere wie häufig die Lösung gebraucht wird und welche Bedingungen bestehen. Eine gute Entscheidung beginnt mit einer Bestandsaufnahme. Notiere wie häufig die Lösung gebraucht wird und welche Bedingungen bestehen. Artikel {i}</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>X</td><td>Y</td></tr></table></article>'
         for i,row in enumerate(p['articles']):
             row['body']=common.format(i=i); row['final_draft_sha256']=sha(row['body']); row['ppm679']['content_sha256']=row['final_draft_sha256']
         with self.assertRaisesRegex(ht.HandoffError,'BATCH_TEMPLATE_REUSE_BLOCKED'): ht.validate_handoff(p)
