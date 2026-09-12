@@ -41,7 +41,7 @@ Dieses Büro ist zuständig für:
 
 ### Allgemeiner technischer Kern
 Autoritativ:
-`../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
 
 Modul:
 `MOD-008 – Universal Glossar Engine`.
@@ -123,9 +123,9 @@ Der Kurztextstandard darf sich an den bewährten strengen Regeln der Kategoriete
 - **Aktueller Bürostand:** `CURRENT_STATE.md`
 - **Aktuelle Arbeit / NEXT ACTION:** `HOBBYRAUM.md`
 - **Seitenkonzept:** `SEITENKONZEPT_V1.md`
-- **Allgemeiner Glossar-Core:** `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
-- **Dauerhafte WAS/WARUM-Entscheidung:** `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/ENTSCHEIDUNG_20260912.md`
-- **Bau-/Testprotokoll:** `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/BAUPROTOKOLL_20260912.md`
+- **Allgemeiner Glossar-Core:** `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+- **Dauerhafte WAS/WARUM-Entscheidung:** `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/ENTSCHEIDUNG_20260912.md`
+- **Bau-/Testprotokoll:** `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/BAUPROTOKOLL_20260912.md`
 - **Fachdatenbank:** `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
 - **Design:** `../DESIGN/START_HERE.md`
 - **TEXT/SEO:** `../TEXT/START_HERE.md`
