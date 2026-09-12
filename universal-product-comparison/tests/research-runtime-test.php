@@ -17,6 +17,7 @@ $GLOBALS['import_result'] = array( 'status' => 'RESEARCH_IMPORT_PASS' );
 $GLOBALS['refresh_result'] = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_PLAN_V1' );
 $GLOBALS['apply_result'] = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_APPLY_V1', 'changed_product_count' => 1 );
 $GLOBALS['candidate_result'] = array( 'status' => 'RESEARCH_REQUIRED', 'persisted' => false );
+$GLOBALS['candidate_apply_result'] = array( 'status' => 'NEW_PRODUCT_ACCEPTED', 'automatic_comparison_created' => false );
 
 function upk_repository() { return $GLOBALS['knowledge']; }
 function upc_repository() { return $GLOBALS['comparisons']; }
@@ -31,6 +32,10 @@ class UPC_Candidate_Gate {
     public static function load_policy( $path ) { $GLOBALS['seen']['candidate_policy_path'] = $path; return array( 'schema_version' => '1', 'market_gate' => array(), 'groups' => array( array( 'product_group_key' => 'regendecken' ) ) ); }
     public function __construct( $maintenance, $catalog, $policy ) { $GLOBALS['seen']['candidate_ctor'] = array( $maintenance, $catalog, $policy ); }
     public function evaluate( $candidate ) { $GLOBALS['seen']['candidate_input'] = $candidate; return $GLOBALS['candidate_result']; }
+}
+class UPC_Candidate_Applier {
+    public function __construct( $wpdb, $knowledge, $maintenance ) { $GLOBALS['seen']['candidate_applier_ctor'] = array( $wpdb, $knowledge, $maintenance ); }
+    public function apply( $candidate, $release ) { $GLOBALS['seen']['candidate_apply_args'] = array( $candidate, $release ); return $GLOBALS['candidate_apply_result']; }
 }
 class UPC_Research_Importer {
     public static function load_bound_plan( $project_key ) { $GLOBALS['seen']['import_project'] = $project_key; return array( 'project_key' => $project_key ); }
@@ -86,6 +91,12 @@ runtime_assert( false !== strpos( $GLOBALS['seen']['candidate_policy_path'], '/c
 $r = UPC_Research_Runtime::evaluate_candidate( $candidate, '' );
 runtime_assert( is_wp_error( $r ) && 'UPC_CANDIDATE_PROJECT_KEY_MISSING' === $r->get_error_code(), 'candidate empty project blocked' );
 
+$release = array( 'seo_status' => 'PASS', 'comparability_status' => 'PASS' );
+$r = UPC_Research_Runtime::accept_candidate( $candidate, $release );
+runtime_assert( ! is_wp_error( $r ) && 'NEW_PRODUCT_ACCEPTED' === $r['status'] && false === $r['automatic_comparison_created'], 'candidate acceptance runtime positive' );
+runtime_assert( array( $candidate, $release ) === $GLOBALS['seen']['candidate_apply_args'], 'candidate acceptance inputs delegated unchanged' );
+runtime_assert( $GLOBALS['seen']['candidate_applier_ctor'][0] === $GLOBALS['wpdb'] && $GLOBALS['seen']['candidate_applier_ctor'][1] === $GLOBALS['knowledge'], 'candidate applier bound to shared product state' );
+
 $runtime_source = file_get_contents( dirname( __DIR__ ) . '/src/class-upc-research-runtime.php' );
 runtime_assert( false === stripos( $runtime_source, 'add_action' ), 'runtime registers no automatic hook' );
 runtime_assert( false === stripos( $runtime_source, 'wp_schedule' ), 'runtime registers no scheduler' );
@@ -94,8 +105,10 @@ runtime_assert( false === stripos( $runtime_source, 'wp_insert_post' ) && false 
 $plugin_source = file_get_contents( dirname( __DIR__ ) . '/universal-product-comparison.php' );
 runtime_assert( false !== strpos( $plugin_source, 'function upc_apply_research_refresh_results' ), 'main plugin exposes explicit apply function' );
 runtime_assert( false !== strpos( $plugin_source, 'function upc_evaluate_product_candidate' ), 'main plugin exposes explicit candidate function' );
+runtime_assert( false !== strpos( $plugin_source, 'function upc_accept_product_candidate' ), 'main plugin exposes explicit candidate accept function' );
 runtime_assert( 0 === preg_match( '/add_action\s*\([^\n]*upc_apply_research_refresh_results/i', $plugin_source ), 'apply function is not hook-driven' );
 runtime_assert( 0 === preg_match( '/add_action\s*\([^\n]*upc_evaluate_product_candidate/i', $plugin_source ), 'candidate function is not hook-driven' );
+runtime_assert( 0 === preg_match( '/add_action\s*\([^\n]*upc_accept_product_candidate/i', $plugin_source ), 'candidate accept function is not hook-driven' );
 runtime_assert( false === stripos( $plugin_source, 'wp_schedule_event' ), 'main plugin adds no refresh scheduler' );
 
 fwrite( STDOUT, "UPC_RESEARCH_RUNTIME_GESAMT_PASS\n" );
