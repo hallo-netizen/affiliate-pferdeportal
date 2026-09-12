@@ -6,10 +6,10 @@ STATUS: LOCAL PROTOTYPE PASS / KEIN WORDPRESS-LIVE-PASS
 ## Geprüft
 
 PHP-Lint:
-- 7/7 PHP-Dateien PASS.
+- 8/8 PHP-Dateien PASS.
 
 Statische Positiv-/Negativprüfung:
-- 13/13 PASS.
+- 15/15 PASS.
 - keine Pferde-Fachbegriffe im Core;
 - kein Auto-Publish;
 - eigener Inhaltstyp;
@@ -22,7 +22,9 @@ Statische Positiv-/Negativprüfung:
 - Hauptseite konfigurierbar;
 - URL-Basis konfigurierbar;
 - SEO-Schemata konfigurierbar;
-- kein Beitragsbild-Support.
+- kein Beitragsbild-Support;
+- strukturierter JSON-Import/Export vorhanden;
+- Import übernimmt nur erlaubte Felder und legt Begriffe ausschließlich als Entwurf an.
 
 Runtime-Stub-Vertragstest:
 PASS.
@@ -32,12 +34,13 @@ Geprüft wurden zwei Konfigurationen mit demselben Core:
 2. fachfremdes Testportal `Lexikon` mit anderer URL-Basis, anderem SEO-Schema, anderer Farbe/Rundung und zusätzlichem Feld `Quellenhinweis`.
 
 Ergebnis:
-zweite Portalnutzung ohne Coreänderung PASS.
+zweite Portalnutzung ohne Coreänderung im lokalen Vertrags-/Stubtest PASS.
 
-Zusätzliche Konfliktprüfung nach Erstlauf:
+Zusätzliche Konfliktprüfung:
 - kein doppeltes Canonical durch eigene Ausgabe;
 - Robots über WordPress-/Yoast-Schnittstellen statt zweitem Meta-Tag;
-- keine doppelte Glossarausgabe bei bewusst gesetztem Shortcode.
+- keine doppelte Glossarausgabe bei bewusst gesetztem Shortcode;
+- Import niemals Auto-Publish.
 
 ZIP-Struktur:
 - Single-Root PASS;
@@ -45,7 +48,7 @@ ZIP-Struktur:
 - Pluginheader PASS.
 
 Aktueller Prototyp-ZIP SHA-256:
-`1405e0cd5b0c9a3db113e69c75ca478fc0b367e163d9eb7bd7c2f33eb7c74ab5`
+`c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
 
 ## Noch NICHT bewiesen
 
@@ -53,7 +56,8 @@ Aktueller Prototyp-ZIP SHA-256:
 - echte Permalink-Auflösung `/glossar/<begriff>/` neben vorhandener Seite `/glossar/`;
 - echtes Backend mit Yoast in der Zielinstallation;
 - echte Frontenddarstellung mit Astra/Pferde-Live-Theme;
-- Datenimport aus Campus-Wissensdatenbank;
-- Performance mit realem größeren Begriffsbestand.
+- realer Import aus Campus-Wissensdatenbank;
+- Performance mit realem größeren Begriffsbestand;
+- zweites echtes WordPress-Portal statt Stub-Konfiguration.
 
-Daher keine Release-/LIVE-Freigabe.
+Daher keine Release-/LIVE-Freigabe und Modulklasse bleibt formal UNGEKLÄRT / Ziel ALLGEMEINGÜLTIG.
