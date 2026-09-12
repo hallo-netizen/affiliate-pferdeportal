@@ -20,7 +20,6 @@ am Gebäudeeingang quer durch mehrere Büros ändern, Fachgrenzen ignorieren ode
 **ALS NÄCHSTES …**  
 das zuständige Büro auswählen und dessen `START_HERE.md` öffnen.
 
-
 ## AUTORITÄTSPLAN – NICHT DOPPELN
 
 Für jedes Büro gilt genau eine Quelle pro Frage:
@@ -39,12 +38,14 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 
 - `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
 - `PRODUKTVERGLEICH/START_HERE.md` → Produktvergleichs-Konzept / Vergleichsdefinition / Faktendossier / Übergabe an TEXT
-- `PFERDERASSEN/START_HERE.md` → zentrale quellengebundene Pferde-/Pony-/Kleinpferde-Rassenbasis / Recherchegrundlage
+- `WISSENSDATENBANK/START_HERE.md` → zentraler Themenpool, Recherche-Steuerung, Trust-Regeln und tatsächlich recherchierte Wissens-Aktenschränke
 - `DESIGN/START_HERE.md` → Portaldesign
 - `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
 - `HIVEPRESS/START_HERE.md` → Anzeigenmarkt / HivePress
 - `GEMEINSAM/START_HERE.md` → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
+
+Historische Adresse `PFERDERASSEN/START_HERE.md` bleibt als Weiterweiser zum Aktenschrank `WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/` bestehen.
 
 ## Gemeinsame Regeln
 
@@ -73,4 +74,3 @@ Parallel arbeitende Chats/Worker werden ausschließlich im zuständigen Büro/Ho
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
