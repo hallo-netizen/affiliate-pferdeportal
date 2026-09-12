@@ -33,27 +33,33 @@ class CodexEconomyContractTests(unittest.TestCase):
         ]
         for value in required: self.assertIn(value,agents)
 
-    def test_parent_chat_handoff_is_hard_completion_gate(self):
+    def test_parent_chat_handoff_is_hard_completion_gate_and_direct_wordpress_file(self):
         task=(ROOT/'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
         agents=(ROOT/'AGENTS.md').read_text(encoding='utf-8')
         for value in [
             'SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json',
-            'WORDPRESS_PREIMPORT_REVIEW',
-            'direct_wordpress_upload_ready=false',
-            'REQUIRES_PSERC_IMPORT_ENVELOPE_AND_SUPERVISOR_AUTHENTICITY',
+            'WORDPRESS_DIRECT_IMPORT',
+            'direct_wordpress_upload_ready=true',
+            'direct_upload_block_reason=null',
+            'required_downstream_components=[]',
             'system4-parent-chat-handoff',
             'handoff_transport.py pack',
             'handoff_transport.py unpack',
             'SYSTEM4_HANDOFF_FAIL',
             'asking the user to manually download and re-upload',
+            'The parent Chat exposes it unchanged as one download',
+            'No signature step and no second transformation occur in between.',
         ]: self.assertIn(value,task)
+        self.assertNotIn('REQUIRES_PSERC_IMPORT_ENVELOPE_AND_SUPERVISOR_AUTHENTICITY',task)
         for value in [
             'PARENT-CHAT DOWNLOAD HANDOFF HARD RULE',
             'A real 7/7 production run is NOT complete',
             'Codex-task-local `sandbox:/mnt/data/...` link does NOT satisfy',
             'system4-parent-chat-handoff',
-            'Portal SEO Editorial Plan Compiler 0.28.22 / PPM 6.7.9',
+            'WORDPRESS_DIRECT_IMPORT',
+            'direct_wordpress_upload_ready=true',
             'Asking the user to manually download elsewhere and re-upload into ChatGPT is forbidden.',
+            'System 4 MUST NOT modify the WordPress plugin or its signature switch.',
         ]: self.assertIn(value,agents)
 
     def test_known_bad_ad_hoc_abort_is_not_in_bound_task(self):
