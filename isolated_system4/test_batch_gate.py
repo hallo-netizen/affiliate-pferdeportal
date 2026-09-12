@@ -34,7 +34,7 @@ def make_fixture(root,count=7):
     snap=root/'snapshot.json'; snap.write_text(json.dumps(snapshot,ensure_ascii=False),encoding='utf-8'); snap_sha=hashlib.sha256(snap.read_bytes()).hexdigest(); batch_sha=snapshot['next_textmachine_metadata_batch']['batch_sha256']; paths=[]
     for i,item in enumerate(items):
         unique=' '.join(f'eigen{i}_{n}' for n in range(90))
-        draft=f'<article><h2>{item["title"]}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">{item["target_keyword"]} {unique}</p></article>'
+        draft=f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>{item["title"]}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">{item["target_keyword"]} {unique}</p><table class="system-129-table comparison-table"><tr><th>Kriterium</th><th>Wert</th></tr><tr><td>A</td><td>B</td></tr></table></article>'
         fact=valid_fact_pack(i); plan={'canonical_article':{'body_html':draft}}; context={'fact_pack':fact,'production_plan_item':plan}
         state={'contract':batch_gate.STATE_CONTRACT,'source_snapshot_sha256':snap_sha,'batch_sha256':batch_sha,'article':item,'immutable_core_sha256':'','publish_allowed':False,'phase':'OUTPUT_GATE_REQUIRED','revision':1,'research':{'text':'research','sha256':sha_text('research')},'facts':{'text':'facts','sha256':sha_text('facts')},'production_context':{'fact_pack':fact,'production_plan_item':plan,'sha256':batch_gate.stable_hash(context)},'draft_markdown':draft,'draft_sha256':sha_text(draft),'checks':{'status':'PASS','mode':'FULL_PRODUCTION','errors':[],'checked_draft_sha256':sha_text(draft),'production_evidence':production_evidence(draft)},'last_error':None,'release_prepared':None,'released':False}
         state['immutable_core_sha256']=batch_gate.stable_hash(batch_gate.immutable_core(state)); p=root/f'state-{i}.json'; p.write_text(json.dumps(state,ensure_ascii=False),encoding='utf-8'); paths.append(p)
@@ -53,7 +53,7 @@ class BatchGateTests(unittest.TestCase):
         td,result,out,paths,snap=self.run_collect()
         try:
             self.assertEqual(result['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED'); self.assertEqual(result['article_count'],7); self.assertEqual(result['next_required'],'SIGNED_WORKFLOW_RELEASE'); self.assertFalse(result['publish_allowed']); self.assertEqual(len(list(out.glob('ARTICLE_*.md'))),7)
-            evidence=json.loads((out/'system4_batch_evidence.json').read_text()); self.assertEqual(evidence['article_count'],7); self.assertTrue(all(row['quality']['languagetool']['status']=='PASS' for row in evidence['articles'])); self.assertEqual(evidence['batch_distinctness']['status'],'PASS')
+            evidence=json.loads((out/'system4_batch_evidence.json').read_text()); self.assertEqual(evidence['article_count'],7); self.assertTrue(all(row['quality']['languagetool']['status']=='PASS' for row in evidence['articles'])); self.assertTrue(all(row['design']['status']=='PASS' for row in evidence['articles'])); self.assertFalse(evidence['design_mutation_performed']); self.assertEqual(evidence['batch_distinctness']['status'],'PASS')
         finally: td.cleanup()
     def test_missing_state(self): self.assert_blocked('STATE_COUNT_MISMATCH',path_count=6)
     def test_basic_check_blocked(self):
@@ -95,4 +95,8 @@ class BatchGateTests(unittest.TestCase):
     def test_missing_production_evidence_blocked(self):
         def m(r,s,p): x=json.loads(p[2].read_text()); x['checks'].pop('production_evidence'); p[2].write_text(json.dumps(x))
         self.assert_blocked('FULL_PRODUCTION_EVIDENCE_MISSING',m)
+    def test_design_drift_is_blocked_even_after_full_pass(self):
+        def m(r,s,p):
+            x=json.loads(p[2].read_text()); old=x['draft_markdown']; new=old.replace('system-129-table comparison-table','comparison-table'); x['draft_markdown']=new; x['draft_sha256']=sha_text(new); x['checks']['checked_draft_sha256']=sha_text(new); x['checks']['production_evidence']=production_evidence(new); x['production_context']['production_plan_item']['canonical_article']['body_html']=new; x['production_context']['sha256']=batch_gate.stable_hash({'fact_pack':x['production_context']['fact_pack'],'production_plan_item':x['production_context']['production_plan_item']}); p[2].write_text(json.dumps(x))
+        self.assert_blocked('DESIGN_GUARD_NOT_PASS:DESIGN_TABLE_SYSTEM129_CLASS_MISSING',m)
 if __name__=='__main__': unittest.main(verbosity=2)
