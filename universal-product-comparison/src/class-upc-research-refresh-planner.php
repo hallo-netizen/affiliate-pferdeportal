@@ -32,6 +32,10 @@ class UPC_Research_Refresh_Planner {
         if ( is_wp_error( $policy ) ) {
             return $policy;
         }
+        $policy_sha256 = hash_file( 'sha256', $policy_path );
+        if ( ! is_string( $policy_sha256 ) || 64 !== strlen( $policy_sha256 ) ) {
+            return new WP_Error( 'UPC_MAINTENANCE_POLICY_HASH_FAILED', 'Maintenance policy hash could not be calculated.' );
+        }
 
         $as_of = $this->normalize_datetime( '' === trim( (string) $as_of_utc ) ? gmdate( 'Y-m-d H:i:s' ) : $as_of_utc );
         if ( is_wp_error( $as_of ) ) {
@@ -80,7 +84,7 @@ class UPC_Research_Refresh_Planner {
                     return $affected;
                 }
 
-                $tasks[] = array(
+                $task = array(
                     'task_type' => 'PRODUCT_REVERIFY',
                     'product_id' => $product_id,
                     'product_group_key' => $key,
@@ -93,8 +97,10 @@ class UPC_Research_Refresh_Planner {
                     'due_cutoff_utc' => $cutoff,
                     'refresh_months' => $months,
                     'required_additional_contracts' => array_values( (array) ( $group['required_additional_contracts'] ?? array() ) ),
-                    'affected_comparison_ids' => array_values( array_map( 'intval', (array) $affected ) ),
                 );
+                $task['task_binding_sha256'] = $this->task_binding_sha256( $task, $policy_sha256 );
+                $task['affected_comparison_ids'] = array_values( array_map( 'intval', (array) $affected ) );
+                $tasks[] = $task;
                 $group_due++;
             }
 
@@ -117,7 +123,7 @@ class UPC_Research_Refresh_Planner {
             'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_PLAN_V1',
             'project_key' => $project_key,
             'as_of_utc' => $as_of,
-            'maintenance_policy_sha256' => hash_file( 'sha256', $policy_path ),
+            'maintenance_policy_sha256' => $policy_sha256,
             'market_gate' => $policy['market_gate'],
             'limit_per_group' => $limit_per_group,
             'group_count' => count( $policy['groups'] ),
@@ -125,6 +131,25 @@ class UPC_Research_Refresh_Planner {
             'groups' => $group_summaries,
             'tasks' => $tasks,
         );
+    }
+
+    private function task_binding_sha256( array $task, $policy_sha256 ) {
+        $payload = array(
+            'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_TASK_V1',
+            'maintenance_policy_sha256' => (string) $policy_sha256,
+            'product_id' => (int) $task['product_id'],
+            'product_group_key' => (string) $task['product_group_key'],
+            'manufacturer' => (string) $task['manufacturer'],
+            'model_name' => (string) $task['model_name'],
+            'generation' => (string) $task['generation'],
+            'lifecycle_status' => (string) $task['lifecycle_status'],
+            'manufacturer_product_url' => (string) $task['manufacturer_product_url'],
+            'last_verified_at' => (string) $task['last_verified_at'],
+            'due_cutoff_utc' => (string) $task['due_cutoff_utc'],
+            'refresh_months' => (int) $task['refresh_months'],
+            'required_additional_contracts' => array_values( (array) $task['required_additional_contracts'] ),
+        );
+        return hash( 'sha256', json_encode( $payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) );
     }
 
     private function load_policy( $path, $project_key ) {
