@@ -1,7 +1,7 @@
 # GLOSSAR – HOBBYRAUM
 
 STAND: 2026-09-12
-STATUS: AKTIV
+STATUS: AKTIV / UNIVERSAL-CORE-KONZEPT
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,20 +9,20 @@ STATUS: AKTIV
 Der einzige aktuelle Arbeitsraum des Büros GLOSSAR.
 
 **HIER BIST DU RICHTIG, WENN …**  
-die öffentliche Glossarstruktur, das WordPress-Backend oder die Glossar-Ausgabe im bestehenden Pferde-Atelier-Design vorbereitet oder geprüft wird.
+die Pferde-Atelier-Anwendung des allgemeinen Glossar-Cores vorbereitet oder geprüft wird.
 
 **DU DARFST …**  
-den aktuellen Design-/WordPress-Bestand lesen, die kleinstmögliche Glossar-Erweiterung definieren und isoliert auf diesem Hobbyraum-Branch vorbereiten.
+die Pferde-Konfiguration definieren, Fachquellen aus der Wissensdatenbank binden und den allgemeinen Glossar-Core isoliert gegen das Pferde-Atelier testen.
 
 **DU DARFST NICHT …**  
-`main` verändern, eine zweite Glossar-Faktendatenbank bauen, normale Beiträge/Seiten pro Begriff erzwingen, ungeprüft in DESIGN/TEXT/AFFILIATE schreiben oder vor Positiv-/Negativprüfung ein Plugin ausgeben.
+`main` verändern, eine zweite Glossar-Faktendatenbank bauen, normale Beiträge/Seiten pro Begriff erzwingen, Pferde-Fachlogik in den allgemeinen Core schreiben, das bestehende Designplugin zur Glossar-Engine umbauen oder vor Positiv-/Negativprüfung ein Plugin ausgeben.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` lesen → relevanten DESIGN-/WordPress-Bestand frisch prüfen → kleinste Backend-/Frontend-Erweiterung festlegen.
+allgemeinen Core-Vertrag lesen → Pferde-Konfiguration festlegen → V1-Prototyp isoliert bauen und testen.
 
 ## AKTUELLER AUFTRAG
 
-Das neue Büro GLOSSAR vollständig einrichten und danach die technisch kleinste WordPress-Umsetzung vorbereiten.
+Das Pferde Atelier als erste reale Anwendung von `MOD-008 – Universal Glossar Engine` vorbereiten.
 
 Bestätigter Live-Ausgangspunkt:
 - WordPress-Seite `Glossar` ist vom Nutzer angelegt;
@@ -39,56 +39,86 @@ Isolierter Glossar-Hobbyraum-Branch:
 
 `main` bleibt unangetastet.
 
+## ALLGEMEINER CORE
+
+Autorität:
+`../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+→ `CURRENT_STATE.md`
+→ `HOBBYRAUM.md`
+
+Kern bleibt neutral.
+
+## PFERDE-KONFIGURATION
+
+Nur hier bzw. in einer späteren separaten Projektkonfigurationsdatei:
+- Glossar-Hauptseite;
+- URL-Basis;
+- Pferde-Oberbegriffe;
+- SEO-Titel-Schema;
+- Meta-Description-Schema;
+- Text-/Pflichtfeldregeln;
+- Designklassen;
+- Importquelle Wissensdatenbank.
+
 ## GEBUNDENE FACHGRENZEN
 
 - Fachbegriffe/Fakten/Quellen: `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`
-- Darstellung/Designplugin: `../DESIGN/`
+- Darstellung: Glossar-Core + projektspezifische Designklassen; bestehendes DESIGN-Plugin bleibt unangetastet
 - SEO-/Kannibalisierungsregeln bei Bedarf: `../TEXT/`
-- Glossarbüro: öffentliche Struktur, Kurzfassung, SEO-Felder, WordPress-Konzept und Abnahme.
+- Glossarbüro: öffentliche Struktur, Kurzfassung, SEO-Schema, Pferde-Konfiguration und Abnahme.
 
 ## SEO-ENTSCHEIDUNG
 
-Gewünschter KISS-Weg:
 - eigener SEO-Titel je Glossarbegriff;
 - eigene Meta-Description je Glossarbegriff;
-- Erzeugung nach festem Glossar-Schema;
+- Erzeugung nach festem Pferde-Glossar-Schema;
 - keine manuelle Yoast-Pflege pro Begriff;
 - keine direkten Writes in Yoast-interne Datenbankfelder;
-- vorhandene Yoast-Ausgabe soll nur über offiziell vorgesehene Schnittstellen überschrieben werden, sofern die installierte Yoast-Version dies nach frischer Prüfung unterstützt.
-
-Die konkrete technische Bindung ist vor Umsetzung gegen den installierten Bestand zu prüfen.
+- Core funktioniert auch ohne Yoast;
+- bei aktivem Yoast nur offizielle Filter/Schnittstellen verwenden;
+- keine doppelten Meta-Tags.
 
 ## NEXT ACTION
 
-1. aktuellen DESIGN-Stand und vorhandenes Designplugin lesen;
-2. vorhandene Kategorietext-Speicherung/-Ausgabe prüfen;
-3. daraus die kleinstmögliche Glossar-Backendstruktur ableiten;
-4. separat Frontend-Ausgabe definieren: Glossar-Start → Oberbegriffe → aufklappbare Begriffe, kein Bildzwang;
-5. Positiv-/Negativtests festlegen;
-6. erst danach technischen Kandidaten bauen.
+1. V1-Datenvertrag des allgemeinen Core technisch festlegen;
+2. Pferde-Konfiguration als separate Konfigurationsschicht definieren;
+3. neutralen Zweitportal-Testdatensatz definieren;
+4. V1-Prototyp isoliert bauen;
+5. positiv/negativ prüfen;
+6. erst bei Gesamt-PASS einen installierbaren Kandidaten erzeugen.
+
+## PARALLELENTWICKLUNG
+
+Aktuell NICHT erforderlich.
+
+Wenn der Zweitportaltest eine echte unkonfigurierbare Projektspezifik beweist:
+Core beibehalten + kleiner Projektadapter.
+Kein zweiter vollständiger Plugin-Fork.
 
 ## HARTE REGEL
 
 **Noch kein Plugin ausgeben.**
 
-Erst Bestand prüfen, dann genau einen KISS-Kandidaten. Keine Plugin-Serie.
+Erst Core + Pferde-Konfiguration + neutrale Zweitkonfiguration testen. Keine Plugin-Serie.
 
 ## RÜCKGABEWEG
 
-Bei belastbarer Architektur:
-- `CURRENT_STATE.md` nachziehen;
-- betroffene Nachbarbüros nur über klaren Integrationsauftrag anfassen;
-- technischer Kandidat bleibt isoliert bis Positiv-/Negativprüfung.
+Bei PASS:
+- Projekt-CURRENT_STATE nachziehen;
+- MOD-008-Prüfgrad nachziehen;
+- erst dann einen einzigen installierbaren Kandidaten bereitstellen.
 
-Bei Konflikt mit bestehendem Designplugin:
-- STOP;
-- keine Ersatzarchitektur erfinden;
-- kleinsten Konflikt gegen DESIGN-Originalquellen klären.
+Bei FAIL:
+- erster echter Fehler;
+- kein Parallelplugin;
+- kleinster KISS-Fix;
+- komplette Positiv-/Negativprüfung wiederholen.
 
 ## VERWEISE
 
 - Bürostand: `CURRENT_STATE.md`
 - Bürotür: `START_HERE.md`
+- Allgemeiner Core: `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
 - Fachdatenbank: `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
 - DESIGN: `../DESIGN/START_HERE.md`
 - TEXT/SEO: `../TEXT/START_HERE.md`
