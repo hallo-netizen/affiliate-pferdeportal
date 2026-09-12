@@ -1,0 +1,124 @@
+<?php
+if (!defined('ABSPATH')) { exit; }
+
+final class UGE_Frontend {
+    private static string $title_initial = '';
+    public static function init(): void {
+        add_shortcode('universal_glossary', [__CLASS__, 'shortcode']);
+        add_filter('the_content', [__CLASS__, 'inject_main_page'], 20);
+        add_filter('template_include', [__CLASS__, 'template'], 99);
+        add_action('wp_enqueue_scripts', [__CLASS__, 'assets']);
+        add_filter('body_class', [__CLASS__, 'body_class']);
+        add_filter('astra_post_featured_image_condition', [__CLASS__, 'astra_featured_image'], 999);
+        add_filter('astra_featured_image_enabled', [__CLASS__, 'astra_featured_image'], 999);
+        add_filter('astra_the_title_enabled', [__CLASS__, 'astra_title_enabled'], 999);
+        add_action('wp_footer', [__CLASS__, 'home_interactions'], 60);
+        add_action('wp_ajax_uge_search', [__CLASS__, 'ajax_search']);
+        add_action('wp_ajax_nopriv_uge_search', [__CLASS__, 'ajax_search']);
+    }
+
+    public static function is_home_page(): bool {
+        $cfg = UGE_Config::get();
+        return (int)$cfg['main_page_id'] > 0 && is_page((int)$cfg['main_page_id']);
+    }
+
+    public static function is_glossary_view(): bool {
+        return self::is_home_page() || is_tax(UGE_Core::TAXONOMY) || is_singular(UGE_Core::POST_TYPE);
+    }
+
+    public static function astra_featured_image($enabled) {
+        return self::is_home_page() ? false : $enabled;
+    }
+
+    public static function astra_title_enabled($enabled) {
+        return self::is_home_page() ? false : $enabled;
+    }
+
+    public static function body_class(array $classes): array {
+        if (self::is_home_page()) { $classes[] = 'uge-glossary-home'; }
+        if (is_tax(UGE_Core::TAXONOMY)) { $classes[] = 'uge-glossary-category'; }
+        if (is_singular(UGE_Core::POST_TYPE)) { $classes[] = 'uge-glossary-term'; }
+        return $classes;
+    }
+
+    public static function inject_main_page(string $content): string {
+        if (!is_singular('page') || !in_the_loop() || !is_main_query() || !self::is_home_page()) { return $content; }
+        if (function_exists('has_shortcode') && has_shortcode($content, 'universal_glossary')) { return $content; }
+        return self::render_home($content);
+    }
+
+    public static function shortcode(): string {
+        return self::render_home('');
+    }
+
+    public static function template(string $template): string {
+        if (is_singular(UGE_Core::POST_TYPE)) {
+            $candidate = UGE_DIR . 'templates/single-uge-term.php';
+            return is_readable($candidate) ? $candidate : $template;
+        }
+        if (is_tax(UGE_Core::TAXONOMY)) {
+            $candidate = UGE_DIR . 'templates/taxonomy-uge-group.php';
+            return is_readable($candidate) ? $candidate : $template;
+        }
+        return $template;
+    }
+
+    public static function assets(): void {
+        if (!self::is_glossary_view()) { return; }
+        wp_register_style('uge', false, [], UGE_VERSION);
+        wp_enqueue_style('uge');
+        wp_add_inline_style('uge', self::css());
+    }
+
+    public static function home_url(): string {
+        $page_id = (int)UGE_Config::get()['main_page_id'];
+        return $page_id > 0 ? (string)get_permalink($page_id) : home_url('/' . trim((string)UGE_Config::get()['rewrite_base'], '/') . '/');
+    }
+
+    public static function render_navigation(): string {
+        $cfg = UGE_Config::get();
+        if (empty($cfg['show_groups'])) { return ''; }
+        $groups = get_terms([
+            'taxonomy' => UGE_Core::TAXONOMY,
+            'hide_empty' => true,
+            'parent' => 0,
+            'orderby' => 'name',
+            'order' => 'ASC',
+        ]);
+        if (is_wp_error($groups)) { $groups = []; }
+        $current = is_tax(UGE_Core::TAXONOMY) ? get_queried_object_id() : 0;
+        ob_start();
+        echo '<nav class="uge-nav" aria-label="Glossar-Bereiche"><div class="uge-nav-scroll">';
+        printf('<a class="%s" href="%s">%s</a>', $current === 0 && self::is_home_page() ? 'is-active' : '', esc_url(self::home_url()), esc_html($cfg['label']));
+        foreach ($groups as $group) {
+            $url = get_term_link($group, UGE_Core::TAXONOMY);
+            if (is_wp_error($url)) { continue; }
+            printf('<a class="%s" href="%s">%s</a>', $current === (int)$group->term_id ? 'is-active' : '', esc_url($url), esc_html($group->name));
+        }
+        echo '</div></nav>';
+        return (string)ob_get_clean();
+    }
+
+    public static function render_search_tools(): string {
+        $cfg = UGE_Config::get();
+        if (empty($cfg['show_search']) && empty($cfg['show_az'])) { return ''; }
+        ob_start();
+        echo '<div class="uge-tools">';
+        if (!empty($cfg['show_search'])) {
+            $value = isset($_GET['glossar_s']) ? sanitize_text_field(wp_unslash($_GET['glossar_s'])) : '';
+            printf('<form class="uge-search-form" method="get" action="%s" data-uge-ajax-url="%s" data-uge-nonce="%s"><label class="screen-reader-text" for="uge-search">Glossar durchsuchen</label><input id="uge-search" name="glossar_s" type="search" value="%s" placeholder="Begriff suchen …" autocomplete="off"><button type="submit">Suchen</button><span class="uge-search-status" role="status" aria-live="polite"></span></form>', esc_url(self::home_url()), esc_url(admin_url('admin-ajax.php')), esc_attr(wp_create_nonce('uge_search')), esc_attr($value));
+        }
+        if (!empty($cfg['show_az'])) {
+            echo '<nav class="uge-az" aria-label="Glossar A bis Z">';
+            foreach (range('A', 'Z') as $letter) {
+                $url = add_query_arg('glossar_letter', $letter, self::home_url());
+                printf('<a href="%s">%s</a>', esc_url($url), esc_html($letter));
+            }
+            echo '</nav>';
+        }
+        echo '</div>';
+        return (string)ob_get_clean();
+    }
+
+    private static function render_home(string $page_content): string {
+        $cfg = UGE_Config::get();
