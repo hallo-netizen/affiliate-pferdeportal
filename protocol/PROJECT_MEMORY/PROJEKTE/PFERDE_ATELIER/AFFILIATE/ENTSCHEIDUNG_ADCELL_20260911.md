@@ -1,73 +1,90 @@
-# AFFILIATE – WAS/WARUM – ADCELL 2026-09-11
+# AFFILIATE – WAS/WARUM – ADCELL
 
-STAND: 2026-09-11
-ROLLE: DAUERHAFTER ENTSCHEIDUNGSBELEG FÜR DEN AKTUELLEN ADCELL-AUFTRAG
+STAND: 2026-09-12
+ROLLE: DAUERHAFTER ENTSCHEIDUNGSBELEG; KEINE CURRENT-/LIVE-WAHRHEIT
 
-## WAS
+## WAS – FACHLICHES ZIEL
 
-Der aktuelle Affiliate-Arbeitsfokus wurde durch ausdrückliche Nutzerentscheidung auf ADCELL umgestellt.
+ADCELL wird in der bestehenden Affiliate-Zentrale vollautomatisch über den belegten API-v2-Weg betrieben:
 
-Verbindlicher Zielweg:
-- ADCELL automatisiert über API v2;
-- Programme automatisch lesen;
-- nur `accepted` + aktiv + explizit freigegebene `programId` verarbeiten;
-- Produkt-CSV, Banner und Deeplinks automatisch über dokumentierte API-Wege beziehen;
-- kein manueller Import/Export und keine manuell konfigurierte CSV-URL als Normalbetrieb;
-- alte/fachfremde accepted Partnerschaften bleiben intern fail-closed ausgeschlossen;
-- bestehende zentrale Relevanz-, Creative-, Output-, Veto- und Pause-Logik bleibt erhalten.
+`accepted + active Programme -> explizite programId-Allowlist -> CSV/Banner/Deeplink -> bestehende zentrale Creative-/Relevanz-/Asset-/Output-/Pause-/Veto-Logik`
 
-Digistore24 bleibt BLOCKED/zurückgestellt. OTTO/Awin bleibt ungelöst und wird für diesen Auftrag pausiert, nicht als erledigt erklärt.
+Verbindlich:
+- kein Awin-Fallthrough für ADCELL;
+- keine manuell konfigurierte CSV-URL als Normalbetrieb;
+- nur explizit freigegebene `programId` und zugleich aktuell `accepted` + aktiv;
+- alle Gegenfälle fail-closed;
+- keine zweite Providerarchitektur und kein separates ADCELL-Plugin.
+
+OTTO/Awin bleibt pausiert/unaufgelöst; Digistore24 zurückgestellt.
 
 ## WARUM
 
-Der Nutzer will einen wartungsarmen, zentralen Affiliate-Betrieb ohne wiederkehrenden Handimport. Die vom Nutzer geöffnete ADCELL-API-v2-Dokumentation belegt eigene Programme-, CSV-, Banner- und Deeplink-Wege, sodass ein manueller Export/Import als Hauptworkflow fachlich nicht erforderlich ist.
+Der Affiliate-Betrieb soll ohne wiederkehrenden Handimport arbeiten. Die offizielle ADCELL-API-v2-Dokumentation belegt Programme sowie CSV-, Banner- und Deeplink-Wege. Gleichzeitig dürfen ältere/fachfremde akzeptierte Partnerschaften nicht allein wegen `accepted` ins Pferdeportal gelangen; deshalb ist die explizite `programId`-Allowlist Pflicht.
 
-Gleichzeitig enthält das ADCELL-Konto ältere, fachfremde angenommene Partnerschaften. Eine explizite `programId`-Allowlist verhindert, dass deren Daten allein wegen des Status `accepted` in das Pferdeportal gelangen.
+## VERBINDLICHE INTEGRATIONSLINIE
 
-## FEHLERFOLGE
+Die frühere Richtung `6.72.8 -> 6.72.9` ist historisch überholt.
 
-Die Prüfung des kanonischen Standes zeigte:
-- der ADCELL-Automatisierungsbutton fällt derzeit in den Awin-orientierten Automationspfad;
-- die bestehende ADCELL-Automation ist auf eine manuell konfigurierte CSV-Export-URL ausgerichtet;
-- ein lokaler Scratch nahm die API-Authentifizierung widersprüchlich und ohne autoritativen Beleg an.
+Vor der finalen Versionswahl wurde das PLUGINS-/Pluginbüro frisch geprüft. Dort lag bereits die vollständig geprüfte Affiliate-Zentrale-Linie bis **6.72.17**. Deshalb wurde der getestete ADCELL-v2-Fix konfliktfrei auf **6.72.17** integriert und als **6.72.19** kanonisch gebunden.
 
-Die Fehlerdetails bleiben ausschließlich in der technischen autoritativen Fehlermatrix auf `affiliate-release-current`.
+WARUM:
+Eine ältere Kandidatenlinie hätte neuere, bereits geprüfte Pluginänderungen überschrieben oder zurückgesetzt. Seit AF-064 gilt deshalb dauerhaft: **Vor jeder neuen Affiliate-Kandidatenversion zuerst den jüngsten vollständig geprüften Pluginbüro-Stand bestimmen; Fachänderungen auf diesen Stand integrieren und beide Seiten regressieren.**
 
-## ENTSCHEIDUNG ZUM SCRATCH
+## ARTEFAKTREGEL
 
-Der lokale 6.72.18-Scratch wird nicht übernommen:
-- falsche Basis aus der nicht abgenommenen 6.72.17-Testlinie;
-- widersprüchliche, unbestätigte Auth-Annahme;
-- kein kanonischer WordPress/MariaDB-E2E.
+Ein installierbares Plugin darf ausschließlich **aus der aktuell kanonischen Source** gebaut werden und muss unmittelbar vor Übergabe vollständig gegen deren Manifest geprüft werden.
 
-Neuaufbau ausschließlich aus kanonischem 6.72.8 nach belegtem API-v2-Authentifizierungsvertrag.
+AF-067 zeigte den Grund: Ein lokal vor der finalen Bindung gebautes 6.72.19-ZIP wich in einer Datei von der kanonischen Source ab und wurde deshalb gesperrt.
+
+Der anschließende Neubau direkt aus `affiliate-release-current` bestand:
+- Run `34692865477`, Job `103551115066`;
+- Source/Manifest 26/26;
+- PHP 21/21;
+- Fresh-Unpack 26/26;
+- Version 6.72.19;
+- Test-ZIP SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`.
+
+Dauerregel: **Kein altes/pre-bind ZIP durch Dateinamen oder Version als aktuell behandeln. Kanonische Source -> Neubau -> Byte-Identität -> erst dann Übergabe.**
+
+## LIVE-PREFLIGHT-REGEL
+
+Der fehlende ADCELL-Weblogin bzw. eine nicht eintreffende Passwort-Reset-Mail ist **nicht automatisch Beweis**, dass die API nicht nutzbar ist.
+
+Die kanonische 6.72.19 besitzt den read-only Test **`Token + Programme prüfen`**, der die bereits in WordPress gespeicherten API-Zugangsdaten verwendet.
+
+Seit AF-066 gilt deshalb:
+1. zuerst diesen read-only API-Preflight im echten WordPress ausführen;
+2. bei PASS vorhandenen `accepted` + aktiven `programId` explizit allowlisten und E2E fortsetzen;
+3. nur wenn gespeicherte API-Credentials fehlen/ungültig sind, wird Credential-Recovery zum echten Blocker.
+
+WARUM:
+Weblogin und API-Credentials sind unterschiedliche technische Nachweise. Ein nicht funktionierender Weblogin darf einen möglicherweise bereits funktionsfähigen API-Weg nicht unnötig blockieren.
 
 ## TEST-/ABNAHMEREGEL
 
-Kein Plugin vor:
-- kanonischer Positivprüfung;
-- kanonischer Negativprüfung;
-- Regression gegen bestehenden Gesamtworkflow;
-- Fresh-Unpack;
-- Source/ZIP-Byte-Identity.
+Technisch/kanonisch belegt PASS für 6.72.19:
+- ADCELL Static + Runtime Positiv/Negativ;
+- Allowlist/Gegenfälle;
+- kein Awin-Fallthrough;
+- Awin/OTTO 18/18;
+- Banner Positiv/Negativ;
+- PHP 21/21;
+- Release-Guard Governance/Source/Tree/Start;
+- Fresh-Unpack + Source/ZIP-Identity 26/26;
+- kanonischer Artefaktneubau 26/26.
 
-Kein Live-PASS ohne echten ADCELL-Zugang und WordPress/MariaDB-End-to-End.
+Kein LIVE-PASS ohne:
+- echten read-only ADCELL-API-Preflight im realen WordPress;
+- danach realen ADCELL-/WordPress-/MariaDB-E2E.
 
-## NACHHOLSTAND NACH AUTORITATIVER ABSCHLUSSPRÜFUNG
+## AKTUELLE AUTORITÄTEN
 
-Der Authentifizierungsvertrag ist inzwischen **belegt**: offizieller ADCELL-v2-Tokenweg über `/user/getToken` mit `userName` + `password`, danach Query-Parameter `token`.
+Dynamischer Stand und NEXT ACTION werden **nicht** hier gepflegt:
+- Campus: `CURRENT_STATE.md` + `HOBBYRAUM.md`;
+- technische Fehler: `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md` auf `affiliate-release-current`;
+- technischer Scope: `protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md`;
+- Ziel: `ZV-AFFILIATE-ADCELL-001`;
+- Plugin-Kontrollvorgang: `PU-20260912-001`.
 
-Daraufhin wurde kanonisch bereits ein **partieller** Sourcefix in `trait-ppar-network-sync.php` begonnen. Dieser Schritt war sinnvoll, weil er die neue Implementierung an den belegten statt an einen geratenen Auth-Vertrag bindet.
-
-Die Abschlussprüfung zeigte jedoch zwei zwingende Korrekturen des Arbeitsstands:
-
-1. **AF-023 offen:** Die Sourceänderung wurde nicht atomar mit `CURRENT_SOURCE_SHA256.txt` und der Governance-Manifestbindung nachgezogen. Deshalb muss die Source-/Manifest-/Governance-Identität vor jeder weiteren Entwicklungsarbeit wiederhergestellt werden.
-
-2. **AF-062 neu:** Die Provider-Registry ruft weiterhin den alten `test_adcell_connection()` auf; der kanonische Router sendet dort noch Basic Auth. Der belegte Tokenvertrag ist also dokumentarisch geklärt, aber im Runtime-Verbindungstest noch nicht vollständig durchgesetzt.
-
-WARUM diese Reihenfolge jetzt verbindlich ist:
-- Ohne korrekte Source-/Manifest-Bindung wäre jeder weitere Test gegen eine nicht eindeutig gebundene Sourcebasis und damit kein belastbarer PASS.
-- Erst danach darf der aktive Legacy-Basic-Auth-Pfad entfernt werden.
-- Erst anschließend dürfen Routing und Automation (AF-058/059) fertiggestellt und der Gesamtworkflow geprüft werden.
-
-Der Zielvertrag selbst ändert sich dadurch **nicht**. Es ändert sich nur der belastbare aktuelle Reparaturweg.
+Kein Codex. Kein Side-Branch als Release-Autorität. Keine zweite aktuelle Wahrheit.
