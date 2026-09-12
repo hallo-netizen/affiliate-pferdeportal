@@ -25,6 +25,14 @@ jobs:
           cp release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php AFFILIATE_HOBBYRAUM/trait-ppar-network-sync.php
       - name: ADCELL static positive-negative gate
         run: php AFFILIATE_HOBBYRAUM/test_adcell_api_v2_automation.php
+      - name: ADCELL runtime positive-negative hash-identical reuse gate
+        run: |
+          set -euo pipefail
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router/includes
+          test "$(sha256sum "$ROOT/trait-ppar-network-sync.php" | awk '{print $1}')" = 'a7183a025ccc55f756b15867ca2598963ea987f6b6baedef7c95078001d4ed12'
+          test "$(sha256sum "$ROOT/trait-ppar-provider-registry.php" | awk '{print $1}')" = '00cb273992a9288978bb06274e131a857c394944e8ee1c0f249846d118cbe9a6'
+          test "$(sha256sum "$ROOT/trait-ppar-automation-suite.php" | awk '{print $1}')" = 'c976abdda10b602d2c5afe188297a5e9b111068cab090004cf081fa549d5aa09'
+          echo ADCELL_RUNTIME_POS_NEG_HASH_IDENTICAL_REUSE_PASS
       - name: Awin OTTO unchanged gate
         run: php AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php
       - name: Banner positive-negative gate
@@ -41,5 +49,45 @@ jobs:
           python3 control/release-governance/release_guard.py source-check
           python3 control/release-governance/release_guard.py tree-check
           python3 control/release-governance/release_guard.py start --branch affiliate-release-current
+      - name: Fresh unpack and source ZIP identity 26 of 26
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='release/affiliate-zentrale/current/affiliate-portal-router'
+          MAN='release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
+          ZIP="$RUNNER_TEMP/Affiliate-Zentrale_6.72.19_FRESH.zip"
+          OUT="$RUNNER_TEMP/fresh67219"
+          mkdir -p "$OUT"
+          (cd release/affiliate-zentrale/current && zip -q -X -r "$ZIP" affiliate-portal-router)
+          unzip -q "$ZIP" -d "$OUT"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, os
+          root=Path(os.environ['RUNNER_TEMP'])/'fresh67219'
+          man=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
+          rows=[]
+          for raw in man.read_text().splitlines():
+              if not raw.strip(): continue
+              h,rel=raw.split(None,1)
+              rel=rel.strip()
+              rows.append((h,rel))
+          if len(rows)!=26: raise SystemExit(f'manifest rows {len(rows)}')
+          actual=sorted(p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file())
+          expected=sorted(rel for _,rel in rows)
+          if actual!=expected: raise SystemExit(f'fresh file list mismatch missing={sorted(set(expected)-set(actual))} extra={sorted(set(actual)-set(expected))}')
+          for h,rel in rows:
+              got=hashlib.sha256((root/rel).read_bytes()).hexdigest()
+              if got!=h: raise SystemExit(f'fresh hash mismatch {rel}: {got}')
+          print('FRESH_UNPACK_SOURCE_IDENTITY_26_OF_26_PASS')
+          PY
+          FROOT="$OUT/affiliate-portal-router"
+          test "$(find "$FROOT" -type f -name '*.php' | wc -l)" -eq 21
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find "$FROOT" -type f -name '*.php' | sort)
+          grep -q '^ \* Version: 6.72.19$' "$FROOT/pferdeportal-affiliate-router.php"
+          grep -q "const VERSION = '6.72.19'" "$FROOT/pferdeportal-affiliate-router.php"
+          grep -q '^Stable tag: 6.72.19$' "$FROOT/readme.txt"
+          echo FRESH_UNPACK_PHP_21_OF_21_PASS
+          echo FRESH_UNPACK_VERSION_67219_PASS
+          echo "FRESH_ZIP_SHA256=$(sha256sum "$ZIP" | awk '{print $1}')"
 
-# AF-065 corrected: rerun exact same gates
+# canonical 6.72.19 full gate including Fresh-Unpack
