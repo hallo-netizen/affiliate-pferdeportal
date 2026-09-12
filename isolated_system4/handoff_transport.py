@@ -34,13 +34,13 @@ def validate_handoff(payload: dict) -> dict:
     wr_required={'file_format','mime_type','intended_next_step','plugin_name','plugin_version_verified_against','ppm_version_verified_against','direct_wordpress_upload_ready','direct_upload_block_reason','required_downstream_components'}
     _require(set(wr)==wr_required,'HANDOFF_WORDPRESS_REVIEW_SCHEMA_INVALID')
     _require(wr['file_format']=='JSON' and wr['mime_type']=='application/json','HANDOFF_WORDPRESS_FORMAT_INVALID')
-    _require(wr['intended_next_step']=='WORDPRESS_PREIMPORT_REVIEW','HANDOFF_WORDPRESS_NEXT_STEP_INVALID')
+    _require(wr['intended_next_step']=='WORDPRESS_DIRECT_IMPORT','HANDOFF_WORDPRESS_NEXT_STEP_INVALID')
     _require(wr['plugin_name']=='Portal SEO Editorial Plan Compiler','HANDOFF_WORDPRESS_PLUGIN_INVALID')
     _require(wr['plugin_version_verified_against']=='0.28.22','HANDOFF_WORDPRESS_PLUGIN_VERSION_INVALID')
     _require(wr['ppm_version_verified_against']=='6.7.9','HANDOFF_WORDPRESS_PPM_VERSION_INVALID')
-    _require(wr['direct_wordpress_upload_ready'] is False,'HANDOFF_MUST_NOT_FALSELY_CLAIM_UPLOAD_READY')
-    _require(wr['direct_upload_block_reason']=='REQUIRES_PSERC_IMPORT_ENVELOPE_AND_SUPERVISOR_AUTHENTICITY','HANDOFF_WORDPRESS_BLOCK_REASON_INVALID')
-    _require(wr['required_downstream_components']==['fact_pack_bundle','production_plan','workflow_release'],'HANDOFF_WORDPRESS_COMPONENTS_INVALID')
+    _require(wr['direct_wordpress_upload_ready'] is True,'HANDOFF_WORDPRESS_DIRECT_UPLOAD_REQUIRED')
+    _require(wr['direct_upload_block_reason'] is None,'HANDOFF_WORDPRESS_BLOCK_REASON_MUST_BE_EMPTY')
+    _require(wr['required_downstream_components']==[],'HANDOFF_WORDPRESS_DOWNSTREAM_MUST_BE_EMPTY')
     rows=payload['articles']
     _require(isinstance(rows,list) and len(rows)==7,'HANDOFF_ARTICLE_COUNT_INVALID')
     seen=set()
