@@ -105,7 +105,7 @@ $repo->get_product_bundle( 1 );
 note_assert( false !== strpos( $wpdb->last_results_query, 'fact_note' ), 'fact readback query includes note' );
 
 $plugin_source = file_get_contents( dirname( __DIR__ ) . '/universal-product-knowledge.php' );
-note_assert( false !== strpos( $plugin_source, "UPK_SCHEMA_VERSION', '2" ), 'schema version upgraded' );
+note_assert( false !== strpos( $plugin_source, "UPK_SCHEMA_VERSION', '3" ), 'schema version upgraded' );
 note_assert( false !== strpos( $plugin_source, 'fact_note text NOT NULL' ), 'existing facts table receives note column' );
 note_assert( false !== strpos( $plugin_source, "add_action( 'plugins_loaded', 'upk_maybe_upgrade_schema'" ), 'active installs receive schema upgrade path' );
 
