@@ -148,6 +148,7 @@ Im Projekt bleiben nur:
 
 Der Nutzer muss diese Einordnung weder erinnern noch manuell vorgeben.
 
+
 ## MOD-003 – UNIVERSAL PORTAL DESIGN SUITE
 
 MODULKLASSE: ALLGEMEINGÜLTIG
@@ -204,6 +205,7 @@ separater Modul-Audit.
 REGEL:
 Nicht im Designmaster verlieren; keine Allgemeingültigkeit behaupten.
 
+
 ## MOD-005 – UNIVERSAL RESEARCH & FILL
 
 MODULKLASSE: ALLGEMEINGÜLTIG
@@ -220,9 +222,10 @@ NUTZENDES PROJEKT:
 PROJEKTBEZUG:
 `config/pferde-atelier.php`
 GITHUB-ABGLEICH:
-auf aktuellem `main` kein eigener URF-Dateistand unter diesem Namen gefunden.
+auf aktuellem `main` kein eigener URF-Dateistand unter den entsprechenden Namen/Pfaden gefunden.
 ARCHIV:
 `/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
+
 
 ## MOD-006 – PRODUKTVERGLEICHS-ENGINE
 
@@ -272,6 +275,7 @@ OFFEN:
 - optionale SEO-Priorisierung ohne Pflichtkopplung;
 - Recherche-/Aktualisierungsadapter;
 - technischer Allgemeingültigkeitstest mit zweiter Projektkonfiguration.
+
 
 ## MOD-007 – UNIVERSAL PRODUKTWISSEN
 
