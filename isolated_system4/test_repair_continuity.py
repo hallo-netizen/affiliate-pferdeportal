@@ -70,7 +70,7 @@ def prepare_workspace(root: Path, workspace: Path, index: int) -> dict:
 
 
 def draft_for(index: int, suffix: str = 'Erster Entwurf') -> str:
-    return f'<article><p data-fact-ids="fact-{index}-a fact-{index}-b">{suffix} für Artikel {index}.</p></article>'
+    return f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Prüfung</h2><p data-fact-ids="fact-{index}-a fact-{index}-b">{suffix} für Artikel {index}.</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>X</td><td>Y</td></tr></table></article>'
 
 
 class RepairContinuityTests(unittest.TestCase):
@@ -107,12 +107,12 @@ class RepairContinuityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td); workspace = root / 'item0'
             prepare_workspace(root, workspace, 0)
-            original = '<article><p data-fact-ids="fact-0-a fact-0-b">' + ('Konkreter Ausgangstext für denselben Artikel. ' * 25) + '</p></article>'
+            original = '<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Prüfung</h2><p data-fact-ids="fact-0-a fact-0-b">' + ('Konkreter Ausgangstext für denselben Artikel. ' * 25) + '</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>X</td><td>Y</td></tr></table></article>'
             draft = write_stage_file(root, 'draft.html', original)
             controller.cmd_draft(workspace, draft)
             state, path = controller.load(workspace)
             state['checks']={'status':'FAIL','mode':'FULL_PRODUCTION','checked_draft_sha256':state['draft_sha256']}; state['last_error']='FULL:languagetool:LANGUAGETOOL_FINDING'; state['phase']='REPAIR_REQUIRED'; controller.save(state,path)
-            draft.write_text('<article><p data-fact-ids="fact-0-a fact-0-b">' + ('Völlig neuer Ersatztext ohne Kontinuität. ' * 8) + '</p></article>', encoding='utf-8')
+            draft.write_text('<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Prüfung</h2><p data-fact-ids="fact-0-a fact-0-b">' + ('Völlig neuer Ersatztext ohne Kontinuität. ' * 8) + '</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>X</td><td>Y</td></tr></table></article>', encoding='utf-8')
             with self.assertRaisesRegex(controller.Fail, 'REPAIR_SCOPE_FAIL:REPAIR_SCOPE_TOO_LARGE'):
                 controller.cmd_repair(workspace, draft)
 
@@ -146,11 +146,11 @@ class RepairContinuityTests(unittest.TestCase):
                 for index in range(7):
                     workspace = root / f'item{index}'; prepare_workspace(root, workspace, index)
                     unique=' '.join(f'eigen{index}_{n}' for n in range(60))
-                    draft = write_stage_file(root, f'draft-{index}.html', f'<article><p data-fact-ids="fact-{index}-a fact-{index}-b">Artikel {index} {unique}</p></article>')
+                    draft = write_stage_file(root, f'draft-{index}.html', f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Prüfung {index}</h2><p data-fact-ids="fact-{index}-a fact-{index}-b">Artikel {index} {unique}</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>{index}</td><td>Y</td></tr></table></article>')
                     controller.cmd_draft(workspace, draft)
                     result = controller.cmd_fullcheck(workspace)
                     if result == 3:
-                        draft.write_text(f'<article><p data-fact-ids="fact-{index}-a fact-{index}-b">Artikel {index} korrigiert {unique}</p></article>', encoding='utf-8')
+                        draft.write_text(f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Prüfung {index}</h2><p data-fact-ids="fact-{index}-a fact-{index}-b">Artikel {index} korrigiert {unique}</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>{index}</td><td>Y</td></tr></table></article>', encoding='utf-8')
                         controller.cmd_repair(workspace, draft); self.assertEqual(controller.cmd_fullcheck(workspace), 0)
                     else: self.assertEqual(result, 0)
                     state_paths.append(workspace / 'state.json')
