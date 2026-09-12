@@ -1,0 +1,212 @@
+name: Glossar MOD-008 WordPress Smoke
+
+on:
+  push:
+    branches:
+      - hobbyroom/glossar-v1-current-20260912
+    paths:
+      - 'protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/**'
+      - '.github/workflows/glossar-v1-wordpress-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wordpress-smoke:
+    name: WordPress smoke (${{ matrix.wp_image }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        wp_image:
+          - wordpress:php8.1-apache
+          - wordpress:latest
+    env:
+      PLUGIN_DIR: protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/0.1.0/universal-glossary-engine
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start real MySQL and WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker network create uge-net
+          docker run -d --name uge-db --network uge-net \
+            -e MYSQL_ROOT_PASSWORD=root \
+            -e MYSQL_DATABASE=wordpress \
+            -e MYSQL_USER=wp \
+            -e MYSQL_PASSWORD=wp \
+            --health-cmd='mysqladmin ping -h localhost -uroot -proot' \
+            --health-interval=3s --health-timeout=3s --health-retries=30 \
+            mysql:8.0
+
+          for i in $(seq 1 40); do
+            if [ "$(docker inspect -f '{{.State.Health.Status}}' uge-db)" = healthy ]; then break; fi
+            sleep 2
+          done
+          test "$(docker inspect -f '{{.State.Health.Status}}' uge-db)" = healthy
+
+          docker run -d --name uge-wp --network uge-net -p 8080:80 \
+            -e WORDPRESS_DB_HOST=uge-db:3306 \
+            -e WORDPRESS_DB_NAME=wordpress \
+            -e WORDPRESS_DB_USER=wp \
+            -e WORDPRESS_DB_PASSWORD=wp \
+            -v "$GITHUB_WORKSPACE/$PLUGIN_DIR:/var/www/html/wp-content/plugins/universal-glossary-engine:ro" \
+            '${{ matrix.wp_image }}'
+
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1; then break; fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:8080/ >/dev/null
+
+      - name: Install WP-CLI and WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp uge-wp:/usr/local/bin/wp
+          docker exec uge-wp chmod +x /usr/local/bin/wp
+          docker exec uge-wp wp core install --allow-root \
+            --url='http://127.0.0.1:8080' \
+            --title='UGE Smoke' \
+            --admin_user=admin \
+            --admin_password='UGE-smoke-1234' \
+            --admin_email='admin@example.test' \
+            --skip-email
+          docker exec uge-wp wp rewrite structure '/%postname%/' --hard --allow-root
+          echo "WORDPRESS_VERSION=$(docker exec uge-wp wp core version --allow-root)"
+          echo "PHP_VERSION=$(docker exec uge-wp php -r 'echo PHP_VERSION;')"
+
+      - name: Positive – activate plugin and build Pferde glossary
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker exec uge-wp wp plugin activate universal-glossary-engine --allow-root
+          docker exec uge-wp wp plugin is-active universal-glossary-engine --allow-root
+
+          PAGE_ID=$(docker exec uge-wp wp post create --allow-root --post_type=page --post_status=publish --post_title='Glossar' --post_name=glossar --porcelain)
+          docker exec uge-wp wp eval --allow-root "\$cfg=UGE_Config::get(); \$cfg['main_page_id']=$PAGE_ID; \$cfg['rewrite_base']='glossar'; \$cfg['design_profile']='pferde_atelier'; update_option(UGE_Config::OPTION, UGE_Config::sanitize(\$cfg)); UGE_Core::register_content(); flush_rewrite_rules();"
+
+          GROUP_ID=$(docker exec uge-wp wp term create uge_group Gesundheit --slug=gesundheit --porcelain --allow-root)
+          TERM_ID=$(docker exec uge-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title='Kolik' --post_name=kolik --post_content='Ausführliche Erklärung zur Kolik.' --porcelain)
+          docker exec uge-wp wp post meta update "$TERM_ID" _uge_short_definition 'Kolik ist ein Sammelbegriff für Bauchschmerzen beim Pferd.' --allow-root
+          docker exec uge-wp wp post meta update "$TERM_ID" _uge_seo_title 'Kolik – Bedeutung und Erklärung' --allow-root
+          docker exec uge-wp wp post meta update "$TERM_ID" _uge_seo_description 'Kolik beim Pferd kurz und verständlich erklärt.' --allow-root
+          docker exec uge-wp wp post meta update "$TERM_ID" _uge_canonical 'https://example.test/glossar/kolik/' --allow-root
+          docker exec uge-wp wp post meta update "$TERM_ID" _uge_index_mode 'noindex' --allow-root
+          docker exec uge-wp wp post term add "$TERM_ID" uge_group Gesundheit --allow-root
+
+          DRAFT_ID=$(docker exec uge-wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Nicht veröffentlichen' --post_name=nicht-veroeffentlichen --porcelain)
+          docker exec uge-wp wp post meta update "$DRAFT_ID" _uge_short_definition 'Dieser Entwurf darf im Frontend nicht erscheinen.' --allow-root
+
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/glossar.html
+          grep -q 'data-uge-glossary' /tmp/glossar.html
+          grep -q 'data-uge-search' /tmp/glossar.html
+          grep -q 'Gesundheit' /tmp/glossar.html
+          grep -q 'Kolik' /tmp/glossar.html
+          ! grep -q 'Nicht veröffentlichen' /tmp/glossar.html
+
+          curl -fsS http://127.0.0.1:8080/glossar/kolik/ -o /tmp/kolik.html
+          grep -q 'Kolik – Bedeutung und Erklärung' /tmp/kolik.html
+          grep -q 'Kolik beim Pferd kurz und verständlich erklärt.' /tmp/kolik.html
+          grep -q 'https://example.test/glossar/kolik/' /tmp/kolik.html
+          grep -qi 'noindex' /tmp/kolik.html
+
+          docker exec uge-wp wp eval --allow-root "if(!post_type_exists('uge_term') || !taxonomy_exists('uge_group')){exit(2);} \$o=get_post_type_object('uge_term'); if(\$o->show_in_menu!=='uge-glossary'){exit(3);} echo 'PFERDE_RUNTIME_PASS';"
+
+      - name: Positive/negative – extensible schema and safe JSON import/export
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/uge-extension.php <<'PHP'
+          <?php
+          add_filter('uge_field_schema', static function(array $schema): array {
+              $schema['usage_note'] = ['label'=>'Hinweis','type'=>'text','required'=>false];
+              return $schema;
+          });
+          add_filter('uge_design_tokens', static function(array $tokens, string $profile): array {
+              if ($profile === 'second_portal') { $tokens['radius'] = '4px'; }
+              return $tokens;
+          }, 10, 2);
+          PHP
+          docker exec uge-wp mkdir -p /var/www/html/wp-content/mu-plugins
+          docker cp /tmp/uge-extension.php uge-wp:/var/www/html/wp-content/mu-plugins/uge-extension.php
+
+          docker exec uge-wp wp eval --allow-root "\$s=UGE_Config::field_schema(); if(!isset(\$s['usage_note'])){exit(4);} echo 'EXTENSION_SCHEMA_PASS';"
+
+          cat > /tmp/import.json <<'JSON'
+          {
+            "format":"uge-json-v1",
+            "items":[{
+              "external_id":"campus-test-1",
+              "title":"Importierter Begriff",
+              "slug":"importierter-begriff",
+              "status":"publish",
+              "content":"Importierter Erklärungstext.",
+              "groups":["Ausrüstung"],
+              "fields":{
+                "short_definition":"Importierte Kurzdefinition.",
+                "usage_note":"Zusatzfeld ohne Coreänderung.",
+                "not_allowed":"MUSS VERWORFEN WERDEN"
+              }
+            }]
+          }
+          JSON
+          docker cp /tmp/import.json uge-wp:/tmp/import.json
+          docker exec uge-wp wp eval --allow-root 'wp_set_current_user(1); $_FILES["uge_json"]=["tmp_name"=>"/tmp/import.json","size"=>filesize("/tmp/import.json")]; $_REQUEST["uge_transfer_nonce"]=wp_create_nonce("uge_import"); UGE_Transfer::import();' || true
+
+          IMPORT_ID=$(docker exec uge-wp wp post list --allow-root --post_type=uge_term --name=importierter-begriff --field=ID --format=ids)
+          test -n "$IMPORT_ID"
+          test "$(docker exec uge-wp wp post get "$IMPORT_ID" --field=post_status --allow-root)" = draft
+          test "$(docker exec uge-wp wp post meta get "$IMPORT_ID" _uge_usage_note --allow-root)" = 'Zusatzfeld ohne Coreänderung.'
+          if docker exec uge-wp wp post meta get "$IMPORT_ID" _uge_not_allowed --allow-root >/tmp/forbidden 2>/dev/null; then
+            test ! -s /tmp/forbidden
+          fi
+
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/glossar-after-import.html
+          ! grep -q 'Importierter Begriff' /tmp/glossar-after-import.html
+
+          docker exec uge-wp wp eval --allow-root 'wp_set_current_user(1); $_REQUEST["uge_transfer_nonce"]=wp_create_nonce("uge_export"); UGE_Transfer::export();' > /tmp/export.json
+          jq -e '.format == "uge-json-v1"' /tmp/export.json >/dev/null
+          jq -e '.items | map(select(.title == "Importierter Begriff")) | length == 1' /tmp/export.json >/dev/null
+          echo 'IMPORT_EXPORT_PASS'
+
+      - name: Positive – second portal without core change
+        shell: bash
+        run: |
+          set -euo pipefail
+          PAGE2_ID=$(docker exec uge-wp wp post create --allow-root --post_type=page --post_status=publish --post_title='Lexikon' --post_name=lexikon --porcelain)
+          docker exec uge-wp wp eval --allow-root "\$cfg=UGE_Config::get(); \$cfg['label']='Lexikon'; \$cfg['term_label']='Eintrag'; \$cfg['group_label']='Themen'; \$cfg['main_page_id']=$PAGE2_ID; \$cfg['rewrite_base']='lexikon'; \$cfg['design_profile']='second_portal'; update_option(UGE_Config::OPTION, UGE_Config::sanitize(\$cfg)); UGE_Core::register_content(); flush_rewrite_rules(); \$t=UGE_Config::design_tokens(); if(\$t['radius']!=='4px'){exit(5);} echo 'SECOND_PORTAL_CONFIG_PASS';"
+
+          SECOND_ID=$(docker exec uge-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title='Testwort' --post_name=testwort --porcelain)
+          docker exec uge-wp wp post meta update "$SECOND_ID" _uge_short_definition 'Definition im zweiten Portal.' --allow-root
+          curl -fsS http://127.0.0.1:8080/lexikon/ -o /tmp/lexikon.html
+          grep -q 'Testwort' /tmp/lexikon.html
+          curl -fsS http://127.0.0.1:8080/lexikon/testwort/ -o /tmp/testwort.html
+          grep -q 'Definition im zweiten Portal.' /tmp/testwort.html
+          docker exec uge-wp wp eval --allow-root "\$o=get_post_type_object('uge_term'); if(\$o->labels->name!=='Lexikon – Begriffe'){exit(6);} echo 'SECOND_PORTAL_RUNTIME_PASS';"
+
+      - name: Negative – deactivate/reactivate preserves data and configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          BEFORE=$(docker exec uge-wp wp post list --allow-root --post_type=uge_term --format=count --post_status=any)
+          docker exec uge-wp wp plugin deactivate universal-glossary-engine --allow-root
+          docker exec uge-wp wp plugin activate universal-glossary-engine --allow-root
+          AFTER=$(docker exec uge-wp wp post list --allow-root --post_type=uge_term --format=count --post_status=any)
+          test "$BEFORE" = "$AFTER"
+          test "$(docker exec uge-wp wp option get uge_settings_v1 --format=json --allow-root | jq -r '.label')" = 'Lexikon'
+          test "$(docker exec uge-wp wp post list --allow-root --post_type=page --format=count --post_status=publish)" -eq 2
+          docker exec uge-wp wp eval --allow-root "if(get_page_by_path('importierter-begriff', OBJECT, 'uge_term')->post_status!=='draft'){exit(7);} echo 'NO_AUTO_PUBLISH_PASS';"
+          echo 'PERSISTENCE_NEGATIVE_PASS'
+
+      - name: Final proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'UGE_WORDPRESS_MYSQL_REAL_SMOKE_PASS'
+          docker exec uge-wp wp core version --allow-root
+          docker exec uge-wp php -r 'echo PHP_VERSION, PHP_EOL;'
