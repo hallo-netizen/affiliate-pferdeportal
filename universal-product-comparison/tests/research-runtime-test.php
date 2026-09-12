@@ -16,6 +16,7 @@ $GLOBALS['runtime_plan_result'] = array( 'schema_version' => '1', 'project_key' 
 $GLOBALS['runtime_catalog_result'] = (object) array( 'marker' => 'catalog' );
 $GLOBALS['runtime_import_result'] = array( 'status' => 'RESEARCH_IMPORT_PASS' );
 $GLOBALS['runtime_refresh_result'] = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_PLAN_V1', 'due_product_count' => 3 );
+$GLOBALS['runtime_apply_result'] = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_APPLY_V1', 'changed_product_count' => 1 );
 $GLOBALS['runtime_seen'] = array();
 
 function upk_repository() { return $GLOBALS['runtime_knowledge']; }
@@ -26,6 +27,12 @@ class UPK_Maintenance {
 }
 class UPC_Maintenance {
     public function __construct( $wpdb ) { $GLOBALS['runtime_seen']['comparison_maintenance_wpdb'] = $wpdb; }
+}
+class UPK_Fact_Snapshot {
+    public function __construct( $wpdb, $knowledge ) { $GLOBALS['runtime_seen']['fact_snapshot'] = array( $wpdb, $knowledge ); }
+}
+class UPK_Change_Fingerprint {
+    public function __construct( $knowledge ) { $GLOBALS['runtime_seen']['fingerprint_knowledge'] = $knowledge; }
 }
 class UPC_Feature_Key_Catalog {
     public static function load( $path ) {
@@ -53,6 +60,18 @@ class UPC_Research_Refresh_Planner {
     public function build( $project_key, $as_of_utc, $limit_per_group ) {
         $GLOBALS['runtime_seen']['refresh_args'] = array( $project_key, $as_of_utc, $limit_per_group );
         return $GLOBALS['runtime_refresh_result'];
+    }
+}
+class UPC_Research_Refresh_Result_Validator {
+    public function __construct( $knowledge ) { $GLOBALS['runtime_seen']['result_validator_knowledge'] = $knowledge; }
+}
+class UPC_Research_Refresh_Applier {
+    public function __construct( $wpdb, $validator, $product_maintenance, $fact_snapshot, $fingerprint, $comparison_maintenance ) {
+        $GLOBALS['runtime_seen']['applier_constructor'] = array( $wpdb, $validator, $product_maintenance, $fact_snapshot, $fingerprint, $comparison_maintenance );
+    }
+    public function apply( $plan, $results ) {
+        $GLOBALS['runtime_seen']['apply_args'] = array( $plan, $results );
+        return $GLOBALS['runtime_apply_result'];
     }
 }
 
@@ -96,11 +115,31 @@ runtime_assert( is_wp_error( $result ) && 'UPC_REFRESH_PROJECT_KEY_MISSING' === 
 $GLOBALS['runtime_refresh_result'] = new WP_Error( 'UPC_REFRESH_PRODUCT_BINDING_INCOMPLETE', 'bad' );
 $result = UPC_Research_Runtime::build_due_refresh_plan( 'pferde-atelier', '2026-09-12 10:00:00', 500 );
 runtime_assert( is_wp_error( $result ) && 'UPC_REFRESH_PRODUCT_BINDING_INCOMPLETE' === $result->get_error_code(), 'refresh planner blocker propagates fail closed' );
+$GLOBALS['runtime_refresh_result'] = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_PLAN_V1', 'due_product_count' => 3 );
+
+$apply_plan = array( 'contract' => 'UPC_PRODUCT_RESEARCH_REFRESH_PLAN_V1', 'tasks' => array( array( 'product_id' => 11 ) ) );
+$apply_results = array( array( 'product_id' => 11, 'verified_at' => '2026-09-12 10:00:00' ) );
+$result = UPC_Research_Runtime::apply_refresh_results( $apply_plan, $apply_results );
+runtime_assert( ! is_wp_error( $result ) && 1 === $result['changed_product_count'], 'explicit apply runtime returns applier result' );
+runtime_assert( $GLOBALS['runtime_seen']['fact_snapshot'][0] === $GLOBALS['wpdb'] && $GLOBALS['runtime_seen']['fact_snapshot'][1] === $GLOBALS['runtime_knowledge'], 'apply fact snapshot receives shared wpdb and knowledge' );
+runtime_assert( $GLOBALS['runtime_seen']['fingerprint_knowledge'] === $GLOBALS['runtime_knowledge'], 'apply fingerprint receives shared product knowledge' );
+runtime_assert( $GLOBALS['runtime_seen']['result_validator_knowledge'] === $GLOBALS['runtime_knowledge'], 'apply validator receives shared product knowledge' );
+runtime_assert( $GLOBALS['runtime_seen']['applier_constructor'][0] === $GLOBALS['wpdb'], 'apply applier receives shared wpdb' );
+runtime_assert( array( $apply_plan, $apply_results ) === $GLOBALS['runtime_seen']['apply_args'], 'apply plan and results are delegated unchanged' );
+
+$GLOBALS['runtime_apply_result'] = new WP_Error( 'UPC_REFRESH_RESULT_TASK_STALE', 'stale' );
+$result = UPC_Research_Runtime::apply_refresh_results( $apply_plan, $apply_results );
+runtime_assert( is_wp_error( $result ) && 'UPC_REFRESH_RESULT_TASK_STALE' === $result->get_error_code(), 'apply blocker propagates fail closed' );
 
 $source = file_get_contents( dirname( __DIR__ ) . '/src/class-upc-research-runtime.php' );
 runtime_assert( false === stripos( $source, 'add_action' ), 'runtime registers no automatic hook' );
 runtime_assert( false === stripos( $source, 'wp_schedule' ), 'runtime registers no scheduler' );
 runtime_assert( false === stripos( $source, 'wp_insert_post' ), 'runtime contains no article insert' );
 runtime_assert( false === stripos( $source, 'wp_update_post' ), 'runtime contains no article update' );
+
+$plugin_source = file_get_contents( dirname( __DIR__ ) . '/universal-product-comparison.php' );
+runtime_assert( false !== strpos( $plugin_source, 'function upc_apply_research_refresh_results' ), 'main plugin exposes explicit refresh apply function' );
+runtime_assert( false === preg_match( '/add_action\s*\([^\n]*upc_apply_research_refresh_results/i', $plugin_source ), 'refresh apply function is not hook-driven' );
+runtime_assert( false === stripos( $plugin_source, 'wp_schedule_event' ), 'main plugin adds no refresh scheduler' );
 
 fwrite( STDOUT, "UPC_RESEARCH_RUNTIME_GESAMT_PASS\n" );
