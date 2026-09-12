@@ -1,0 +1,150 @@
+name: Glossar 0.2.5 Six Point Hardtest V2
+on:
+  push:
+    branches: [hobbyroom/glossar-025-hardtest-v2]
+    paths: ['.github/workflows/glossar-025-sixpoint-hardtest-v2.yml']
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  hardtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build 0.2.5 exact code
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp
+          C22=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.2
+          C23=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3
+          mkdir -p /tmp/u
+          cat "$T"/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          unzip -q /tmp/base.zip -d /tmp/u
+          P=/tmp/u/universal-glossary-engine
+          cp "$C22/universal-glossary-engine.php" "$P/"
+          cp "$C22/includes/class-uge-config.php" "$P/includes/"
+          cp "$C22/includes/class-uge-core.php" "$P/includes/"
+          cp "$C22/includes/class-uge-seo.php" "$P/includes/"
+          cat "$C22"/frontend-parts/part-* > "$P/includes/class-uge-frontend.php"
+          cp "$C23/universal-glossary-engine.php" "$P/"
+          cp "$C23/includes/class-uge-config.php" "$P/includes/"
+          cp "$C23/includes/class-uge-core.php" "$P/includes/"
+          cp "$C23/includes/class-uge-seo.php" "$P/includes/"
+          cp "$C23/includes/class-uge-policy.php" "$P/includes/"
+          cat "$T"/uge024-part{1,2,3,4}.b64 | base64 -d | gzip -d >/tmp/uge024.patch
+          patch -p4 -d "$P" </tmp/uge024.patch
+          curl -fsSL 'https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/89a15130698791b962526b58cae225366d880167/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge025.patch.gz.b64' | base64 -d | gzip -d >/tmp/uge025.patch
+          patch -p2 -d "$P" </tmp/uge025.patch
+          mkdir -p "$P/assets"
+          printf 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Z9JAAAAAASUVORK5CYII=' | base64 -d > "$P/assets/glossar-hero-books-stall.png"
+          grep -q 'Version: 0.2.5' "$P/universal-glossary-engine.php"
+          grep -q "REWRITE_SCHEMA_VERSION = '4'" "$P/includes/class-uge-core.php"
+          grep -q "assets/glossar-hero-books-stall.png" "$P/includes/class-uge-frontend.php"
+          find "$P" -name '*.php' -print0 | xargs -0 -n1 php -l
+          echo BUILD_PASS
+      - name: Start WordPress MySQL Astra
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker network create n >/dev/null
+          docker run -d --name db --network n -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=2s --health-retries=30 mysql:8.0 >/dev/null
+          for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
+          docker run -d --name wp --network n -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/u/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro wordpress:php8.1-apache >/dev/null
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp wp:/usr/local/bin/wp; docker exec wp chmod +x /usr/local/bin/wp
+          docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title=x --admin_user=a --admin_password='Test-123456!' --admin_email=x@example.test --skip-email >/dev/null
+          docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root >/dev/null
+          docker exec wp wp theme install astra --activate --allow-root >/dev/null
+          cat >/tmp/stub.php <<'PHP'
+          <?php /* Plugin Name: Design Stub */ final class Pferde_Template_Kit{public static function affiliate_page_type($id){return get_post_meta((int)$id,'_cat',true)==='1'?'category':'';} public static function design_profile(){return 'pferde_atelier';}}
+          PHP
+          docker exec wp mkdir -p /var/www/html/wp-content/plugins/design-stub
+          docker cp /tmp/stub.php wp:/var/www/html/wp-content/plugins/design-stub/design-stub.php
+          docker exec wp wp plugin activate design-stub universal-glossary-engine --allow-root >/dev/null
+          test "$(docker exec wp wp plugin get universal-glossary-engine --field=version --allow-root)" = 0.2.5
+      - name: Seed
+        shell: bash
+        run: |
+          set -euo pipefail
+          G=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Glossar --post_name=glossar --post_excerpt='Pferdebegriffe verständlich erklärt.' --porcelain)
+          C=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Gesundheit --post_name=gesundheit-portal --porcelain)
+          docker exec wp wp post meta update $C _cat 1 --allow-root >/dev/null
+          docker exec wp wp eval --allow-root "\$c=UGE_Config::get();\$c['main_page_id']=$G;\$c['home_term_count']=6;update_option(UGE_Config::OPTION,UGE_Config::sanitize(\$c));UGE_Core::register_content();UGE_Core::register_rewrite_rules();flush_rewrite_rules();" >/dev/null
+          docker exec wp wp term create uge_group 'Farben & Genetik' --slug=farben-genetik --allow-root >/dev/null || true
+          for spec in 'Widerrist:widerrist:Anatomie:WID-CONTENT-SECRET:WID-DEFINITION-SECRET' 'Aalstrich:aalstrich:Farben & Genetik:AAL-CONTENT:AAL-DEFINITION' 'Zuchtbuch:zuchtbuch:Rassen & Zucht:Z-CONTENT:Z-DEFINITION'; do
+            IFS=: read title slug group content def <<<"$spec"
+            P=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title="$title" --post_name="$slug" --post_content="$content" --porcelain)
+            docker exec wp wp post meta update $P _uge_primary_category_id $C --allow-root >/dev/null
+            docker exec wp wp post meta update $P _uge_short_definition "$def" --allow-root >/dev/null
+            docker exec wp wp post term add $P uge_group "$group" --allow-root >/dev/null
+            docker exec wp wp post update $P --post_status=publish --allow-root >/dev/null
+          done
+          docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Vorschau Begriff' --post_name=vorschau --post_content=DRAFT-SECRET >/dev/null
+          docker exec wp wp option delete uge_navigation_schema_version --allow-root >/dev/null || true
+          docker exec wp wp eval --allow-root 'UGE_Core::ensure_navigation_groups();UGE_Core::register_rewrite_rules();flush_rewrite_rules();' >/dev/null
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
+      - name: AJAX title only
+        shell: bash
+        run: |
+          set -euo pipefail
+          N=$(python3 - <<'PY'
+          import re
+          print(re.search(r'data-uge-nonce="([^"]+)"',open('/tmp/home').read()).group(1))
+          PY
+          )
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data-urlencode nonce="$N" --data q=Wi -o /tmp/ajax
+          grep -q 'Widerrist' /tmp/ajax; ! grep -q 'WID-CONTENT-SECRET' /tmp/ajax; ! grep -q 'WID-DEFINITION-SECRET' /tmp/ajax; ! grep -q 'Vorschau Begriff' /tmp/ajax
+          grep -q '"title"' /tmp/ajax; grep -q '"url"' /tmp/ajax; ! grep -q '"html"' /tmp/ajax
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data-urlencode nonce="$N" --data q=W -o /tmp/one; grep -q '"count":0' /tmp/one
+          echo AJAX_PASS
+      - name: Spacing hero nav icons
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'body.uge-glossary-home .entry-content{margin-top:0!important}' /tmp/home
+          grep -q 'margin:12px 0 28px' /tmp/home
+          grep -q 'glossar-hero-books-stall.png' /tmp/home
+          SRC=$(python3 - <<'PY'
+          import re,html
+          s=open('/tmp/home').read(); print(html.unescape(re.search(r'<img class="uge-hero-image" src="([^"]+)"',s).group(1)))
+          PY
+          )
+          test "$(curl -sS -o /tmp/img -w '%{http_code}' "$SRC")" = 200; test -s /tmp/img
+          python3 - <<'PY'
+          import re,html
+          s=open('/tmp/home',encoding='utf8').read(); nav=re.search(r'<nav class="uge-topic-grid"[^>]*>(.*?)</nav>',s,re.S).group(1); text=html.unescape(nav)
+          labels=['Rassen & Zucht','Anatomie','Gesundheit','Haltung & Fütterung','Verhalten','Reiten & Ausbildung','Pferdesport','Ausrüstung & Stall','Geschichte & Kultur','Kauf, Recht & Versicherung']
+          assert all('>'+x+'<' in text for x in labels); assert '>Glossar<' not in text; assert nav.count('uge-topic-icon')==10; assert nav.count('<svg ')==10; assert 'justify-content:center' in s
+          PY
+          echo SPACING_HERO_NAV_PASS
+      - name: Links breadcrumbs A-Z migration
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re,html
+          s=open('/tmp/home').read(); links=re.findall(r'<h3><a href="([^"]+)"',s)+re.findall(r'<a class="uge-topic[^"]*" href="([^"]+)"',s); open('/tmp/links','w').write('\n'.join(dict.fromkeys(map(html.unescape,links))))
+          PY
+          test -s /tmp/links
+          while read -r u; do test "$(curl -sS -o /tmp/linkbody -w '%{http_code}' "$u")" = 200; done </tmp/links
+          curl -fsS http://127.0.0.1:8080/glossar/begriff/widerrist/ -o /tmp/term; grep -q WID-CONTENT-SECRET /tmp/term
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/nicht-da/)" = 404
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/glossar/widerrist/)" = 301
+          curl -fsS http://127.0.0.1:8080/glossar/anatomie/ -o /tmp/cat
+          grep -q 'class="uge-breadcrumbs"' /tmp/cat; grep -q '>Startseite<' /tmp/cat; grep -q '>Glossar<' /tmp/cat; grep -q '>Anatomie<' /tmp/cat
+          grep -q 'class="uge-breadcrumbs"' /tmp/term; grep -q '>Startseite<' /tmp/term; grep -q '>Glossar<' /tmp/term; grep -q '>Anatomie<' /tmp/term; grep -q '>Widerrist<' /tmp/term
+          python3 - <<'PY'
+          import re,html
+          out=[]
+          for f in ['/tmp/cat','/tmp/term']:
+            b=re.search(r'<nav class="uge-breadcrumbs".*?</nav>',open(f).read(),re.S).group(0); out += [html.unescape(x) for x in re.findall(r'href="([^"]+)"',b)]
+          open('/tmp/bc','w').write('\n'.join(dict.fromkeys(out)))
+          PY
+          while read -r u; do test "$(curl -sS -o /dev/null -w '%{http_code}' "$u")" = 200; done </tmp/bc
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_letter=W' -o /tmp/W; grep -q '>Widerrist<' /tmp/W; ! grep -q '>Zuchtbuch<' /tmp/W; ! grep -q 'Vorschau Begriff' /tmp/W
+          curl -fsS http://127.0.0.1:8080/glossar/rassen-zucht/ -o /tmp/rz; grep -q '>Aalstrich<' /tmp/rz
+          echo LINKS_BREADCRUMBS_AZ_MIGRATION_PASS
+      - name: Final
+        run: echo UGE025_SIX_POINT_WORDPRESS_ASTRA_POSITIVE_NEGATIVE_PASS
