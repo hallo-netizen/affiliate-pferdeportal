@@ -3,6 +3,7 @@ import hashlib, json, re, sys
 from pathlib import Path
 from xml.sax.saxutils import escape
 
+import content_guard
 import production_checks
 import release_adapter
 
@@ -87,7 +88,8 @@ def cmd_research(workspace,research_path):
     s,p=load(workspace)
     if s['phase']!='RESEARCH_REQUIRED': raise Fail('PHASE_FAIL:RESEARCH')
     text=Path(research_path).read_text(encoding='utf-8').strip()
-    if len(text)<40: raise Fail('RESEARCH_TOO_THIN')
+    try: content_guard.validate_research_document(text)
+    except content_guard.ContentGuardError as e: raise Fail('RESEARCH_EVIDENCE_FAIL:'+str(e)) from e
     s['research']={'text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}; s['phase']='FACT_CHECK_REQUIRED'; save(s,p)
     print('SYSTEM4_RESEARCH_PASS:FACT_CHECK_REQUIRED')
 
@@ -95,7 +97,8 @@ def cmd_facts(workspace,facts_path):
     s,p=load(workspace)
     if s['phase']!='FACT_CHECK_REQUIRED': raise Fail('PHASE_FAIL:FACTS')
     text=Path(facts_path).read_text(encoding='utf-8').strip()
-    if len(text)<40: raise Fail('FACTS_TOO_THIN')
+    try: content_guard.validate_facts_document(text,s['research']['text'])
+    except content_guard.ContentGuardError as e: raise Fail('FACTS_EVIDENCE_FAIL:'+str(e)) from e
     s['facts']={'text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}; s['phase']='DRAFT_REQUIRED'; save(s,p)
     print('SYSTEM4_FACTS_PASS:DRAFT_REQUIRED')
 
@@ -110,17 +113,30 @@ def cmd_context(workspace,fact_pack_path,plan_item_path):
     if s['phase']!='DRAFT_REQUIRED': raise Fail('PHASE_FAIL:CONTEXT')
     if s.get('production_context') is not None: raise Fail('PRODUCTION_CONTEXT_ALREADY_BOUND')
     fact,plan=_read_context_files(fact_pack_path,plan_item_path)
-    try: production_checks.validate_bound_context(s,fact,plan)
-    except production_checks.ProductionCheckError as e: raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
+    try:
+        content_guard.validate_fact_pack(fact,s['research']['text'],s['facts']['text'])
+        production_checks.validate_bound_context(s,fact,plan)
+    except content_guard.ContentGuardError as e:
+        raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
+    except production_checks.ProductionCheckError as e:
+        raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
     s['production_context']={'fact_pack':fact,'production_plan_item':plan,'sha256':sha({'fact_pack':fact,'production_plan_item':plan})}
     save(s,p)
     print('SYSTEM4_PRODUCTION_CONTEXT_PASS:DRAFT_REQUIRED')
 
+def _guard_article_against_context(s,text):
+    context=s.get('production_context')
+    if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
+    try: content_guard.validate_single_article(text,context['fact_pack'])
+    except content_guard.ContentGuardError as e: raise Fail('ARTICLE_CONTENT_GUARD_FAIL:'+str(e)) from e
+
 def cmd_draft(workspace,draft_path):
     s,p=load(workspace)
     if s['phase']!='DRAFT_REQUIRED': raise Fail('PHASE_FAIL:DRAFT')
+    if s.get('production_context') is None: raise Fail('PRODUCTION_CONTEXT_MISSING')
     text=Path(draft_path).read_text(encoding='utf-8').strip()
     if not text: raise Fail('DRAFT_EMPTY')
+    _guard_article_against_context(s,text)
     s['draft_markdown']=text; s['draft_sha256']=hashlib.sha256(text.encode()).hexdigest(); s['revision']+=1
     s['checks']={}; s['last_error']=None; s['release_prepared']=None; s['phase']='CHECK_REQUIRED'; save(s,p)
     print(f"SYSTEM4_DRAFT_ACCEPTED:REVISION={s['revision']}:CHECK_REQUIRED")
@@ -129,13 +145,22 @@ def cmd_repair(workspace,draft_path):
     s,p=load(workspace)
     if s['phase']!='REPAIR_REQUIRED': raise Fail('PHASE_FAIL:REPAIR')
     old_context=json.loads(json.dumps(s.get('production_context'),ensure_ascii=False))
+    old_research=json.loads(json.dumps(s.get('research'),ensure_ascii=False))
+    old_facts=json.loads(json.dumps(s.get('facts'),ensure_ascii=False))
+    old_immutable=s.get('immutable_core_sha256')
     if not isinstance(old_context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
+    old_text=str(s.get('draft_markdown') or '')
     text=Path(draft_path).read_text(encoding='utf-8').strip()
     if not text: raise Fail('DRAFT_EMPTY')
-    if text==s.get('draft_markdown'): raise Fail('REPAIR_DRAFT_UNCHANGED')
+    if text==old_text: raise Fail('REPAIR_DRAFT_UNCHANGED')
+    try: content_guard.validate_repair_continuity(old_text,text)
+    except content_guard.ContentGuardError as e: raise Fail('REPAIR_SCOPE_FAIL:'+str(e)) from e
+    _guard_article_against_context(s,text)
     s['draft_markdown']=text; s['draft_sha256']=hashlib.sha256(text.encode()).hexdigest(); s['revision']+=1
     s['checks']={}; s['last_error']=None; s['release_prepared']=None; s['phase']='CHECK_REQUIRED'
     if s.get('production_context')!=old_context: raise Fail('REPAIR_CONTEXT_MUTATION_FORBIDDEN')
+    if s.get('research')!=old_research or s.get('facts')!=old_facts: raise Fail('REPAIR_EVIDENCE_MUTATION_FORBIDDEN')
+    if s.get('immutable_core_sha256')!=old_immutable: raise Fail('REPAIR_IMMUTABLE_CORE_MUTATION_FORBIDDEN')
     save(s,p)
     print(f"SYSTEM4_REPAIR_ACCEPTED:REVISION={s['revision']}:CHECK_REQUIRED")
 
@@ -164,6 +189,8 @@ def cmd_fullcheck(workspace):
     if s['phase']!='CHECK_REQUIRED': raise Fail('PHASE_FAIL:FULLCHECK')
     context=s.get('production_context')
     if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
+    try: content_guard.validate_single_article(str(s.get('draft_markdown') or ''),context['fact_pack'])
+    except content_guard.ContentGuardError as e: raise Fail('FULL_CHECK_HARD_BLOCK:CONTENT_GUARD:'+str(e)) from e
     repo=Path(__file__).resolve().parent.parent
     try:
         result=production_checks.run_all(repo,s,context['fact_pack'],context['production_plan_item'])
