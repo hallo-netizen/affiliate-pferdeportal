@@ -20,6 +20,7 @@ require_once UGE_DIR . 'includes/class-uge-core.php';
 require_once UGE_DIR . 'includes/class-uge-admin.php';
 require_once UGE_DIR . 'includes/class-uge-frontend.php';
 require_once UGE_DIR . 'includes/class-uge-seo.php';
+require_once UGE_DIR . 'includes/class-uge-transfer.php';
 
 register_activation_hook(__FILE__, ['UGE_Core', 'activate']);
 register_deactivation_hook(__FILE__, ['UGE_Core', 'deactivate']);
@@ -29,4 +30,5 @@ add_action('plugins_loaded', static function () {
     UGE_Admin::init();
     UGE_Frontend::init();
     UGE_SEO::init();
+    UGE_Transfer::init();
 });
