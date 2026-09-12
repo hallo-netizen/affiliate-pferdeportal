@@ -1,0 +1,39 @@
+name: Glossar 0.2.4 Link Diagnostic
+on:
+  push:
+    branches: [hobbyroom/glossar-024-ajax-nav-image-20260912]
+    paths: ['.github/workflows/glossar-024-link-diagnostic.yml']
+permissions: {contents: read}
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reproduce and print card links
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp; C22=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.2; C23=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3
+          mkdir -p /tmp/u; cat "$T"/uge020-final-collision-part{1,2,3,4}.b64|base64 -d>/tmp/b.zip; unzip -q /tmp/b.zip -d /tmp/u; P=/tmp/u/universal-glossary-engine
+          cp "$C22/universal-glossary-engine.php" "$P/"; cp "$C22/includes/class-uge-config.php" "$P/includes/"; cp "$C22/includes/class-uge-core.php" "$P/includes/"; cp "$C22/includes/class-uge-seo.php" "$P/includes/"; cat "$C22"/frontend-parts/part-* > "$P/includes/class-uge-frontend.php"; cp "$C23/universal-glossary-engine.php" "$P/"; cp "$C23/includes/class-uge-config.php" "$P/includes/"; cp "$C23/includes/class-uge-core.php" "$P/includes/"; cp "$C23/includes/class-uge-seo.php" "$P/includes/"; cp "$C23/includes/class-uge-policy.php" "$P/includes/"
+          cat "$T"/uge024-part{1,2,3,4}.b64|base64 -d|gzip -d>/tmp/p; patch -p4 -d "$P" </tmp/p >/dev/null; mkdir -p "$P/assets"; printf 'UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEAAUAmJaQAA3AA/v89WAAAAA=='|base64 -d>"$P/assets/glossar-hero-stall-lexika.webp"
+          docker network create n >/dev/null; docker run -d --name db --network n -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=2s --health-retries=30 mysql:8.0 >/dev/null; for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy&&break;sleep 2;done
+          docker run -d --name wp --network n -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/u/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro wordpress:php8.1-apache >/dev/null; for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1&&break;sleep 2;done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp; docker cp /tmp/wp wp:/usr/local/bin/wp; docker exec wp chmod +x /usr/local/bin/wp; docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title=x --admin_user=a --admin_password=x --admin_email=x@x.test --skip-email >/dev/null; docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root >/dev/null; docker exec wp wp theme install astra --activate --allow-root >/dev/null
+          cat >/tmp/s.php <<'PHP'
+          <?php /* Plugin Name: Stub */ final class Pferde_Template_Kit{public static function design_profile(){return 'pferde_atelier';} public static function affiliate_page_type($id){return get_post_meta((int)$id,'_cat',true)==='1'?'category':'';}}
+          PHP
+          docker exec wp mkdir -p /var/www/html/wp-content/plugins/stub; docker cp /tmp/s.php wp:/var/www/html/wp-content/plugins/stub/stub.php; docker exec wp wp plugin activate stub universal-glossary-engine --allow-root >/dev/null
+          G=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Glossar --post_name=glossar --porcelain); C=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Gesundheit --post_name=gesundheit --porcelain); docker exec wp wp post meta update $C _cat 1 --allow-root >/dev/null; docker exec wp wp eval --allow-root "\$c=UGE_Config::get();\$c['main_page_id']=$G;update_option(UGE_Config::OPTION,UGE_Config::sanitize(\$c));UGE_Core::register_content();flush_rewrite_rules();" >/dev/null
+          for x in Widerrist Zuchtbuch; do I=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=$x --post_name=$(echo $x|tr A-Z a-z) --post_content=$x-CONTENT --porcelain); docker exec wp wp post meta update $I _uge_primary_category_id $C --allow-root >/dev/null; docker exec wp wp post update $I --post_status=publish --allow-root >/dev/null; done
+          docker exec wp wp rewrite flush --hard --allow-root >/dev/null
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/h
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/h').read(); links=list(dict.fromkeys(re.findall(r'<h3><a href="([^"]+)">',s))); print('LINKS',links); open('/tmp/links','w').write('\n'.join(links))
+          PY
+          set +e
+          while IFS= read -r u || [ -n "$u" ]; do echo "CHECK=$u"; code=$(curl -sS -o /tmp/t -w '%{http_code}' "$u"); echo "HTTP=$code"; grep -o '<article class="[^"]*"' /tmp/t | head -5 || true; grep -n 'uge-single-wrap\|404\|Not Found' /tmp/t | head -10 || true; done </tmp/links
+          echo 'DIRECT'; for u in http://127.0.0.1:8080/glossar/begriff/widerrist/ http://127.0.0.1:8080/glossar/begriff/zuchtbuch/; do echo "$u $(curl -sS -o /tmp/d -w '%{http_code}' "$u")"; grep -n 'uge-single-wrap\|404\|Not Found' /tmp/d | head -5 || true; done
+          exit 1
