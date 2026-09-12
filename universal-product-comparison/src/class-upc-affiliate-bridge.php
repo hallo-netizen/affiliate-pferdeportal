@@ -4,6 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+require_once __DIR__ . '/class-upc-affiliate-identifier-coverage.php';
+
 /**
  * Read-only bridge from a bound Product Comparison post to Affiliate.
  *
@@ -12,6 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * No Affiliate table is read or written here.
  */
 class UPC_Affiliate_Bridge {
+
+    public static function missing_identifier_products( $limit = 500, $product_group_key = '' ) {
+        global $wpdb;
+        $coverage = new UPC_Affiliate_Identifier_Coverage( $wpdb );
+        return $coverage->missing_products( $limit, $product_group_key );
+    }
 
     public static function register() {
         add_filter(
