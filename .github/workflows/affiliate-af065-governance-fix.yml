@@ -1,0 +1,64 @@
+name: Affiliate AF-065 one-shot governance repair
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/affiliate-af065-governance-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: affiliate-release-current
+          fetch-depth: 0
+      - name: Repair only AF-065 and retrigger same gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          gp=Path('control/release-governance/CURRENT_RELEASE.json')
+          g=json.loads(gp.read_text())
+          if g.get('generation') != 54:
+              raise SystemExit(f'unexpected generation {g.get("generation")}')
+          oc=g.get('objective_control') or {}
+          expected='FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE'
+          if oc.get('new_version_policy') == expected:
+              raise SystemExit('AF-065 already absent; refusing unrelated rewrite')
+          oc['new_version_policy']=expected
+          g['objective_control']=oc
+          g['generation']=55
+          gp.write_text(json.dumps(g,ensure_ascii=False,indent=2)+'\n')
+
+          mp=Path('AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md')
+          m=mp.read_text()
+          af65='| AF-065 | 6.72.19-Bind schwächte versehentlich einen unveränderlichen Release-Guard-Vertragswert | Kanonischer Gate-Lauf 34689810939 blockiert exakt mit `OBJECTIVE_CONTROL_WEAKENED:new_version_policy` | `objective_control.new_version_policy` niemals für einen Meilenstein umbenennen; der Guard-Vertragswert bleibt exakt `FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE`. Fachlicher Versions-/Meilensteinstatus gehört ausschließlich in `current_milestone`, Task und Scope. |\n'
+          if 'AF-065' not in m:
+              marker='\n## AUFLÖSUNGSSTATUS 2026-09-12 – ADCELL API V2\n'
+              if marker not in m: raise SystemExit('resolution marker missing')
+              m=m.replace(marker,'\n'+af65+marker,1)
+          m=m.replace('- AF-064: OFFEN – jüngster vollständig geprüfter Pluginbüro-Stand 6.72.17 muss als neue Integrationsbasis gegen den kanonischen ADCELL-v2-Fix zusammengeführt und beidseitig regressiert werden.', '- AF-064: BEHOBEN – Pluginbüro-6.72.17 wurde konfliktfrei mit dem ADCELL-v2-Fix zusammengeführt; 6.72.19 ist kanonisch gebunden und die beidseitigen Regressionen sind gebunden.')
+          if '- AF-065:' not in m:
+              m += '\n- AF-065: BEHOBEN – `new_version_policy` auf den unveränderlichen Guard-Vertragswert zurückgesetzt; derselbe kanonische Gate-Lauf wird erneut ausgeführt.\n'
+          mp.write_text(m)
+
+          wp=Path('.github/workflows/affiliate-67219-canonical-gates.yml')
+          w=wp.read_text()
+          if '# AF-065 retry' not in w:
+              w += '\n# AF-065 retry\n'
+          wp.write_text(w)
+          PY
+          rm '.github/workflows/affiliate-af065-governance-fix.yml'
+          git add control/release-governance/CURRENT_RELEASE.json AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md .github/workflows/affiliate-67219-canonical-gates.yml .github/workflows/affiliate-af065-governance-fix.yml
+          git diff --cached --name-only
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Affiliate ADCELL: repair AF-065 governance contract and rerun gates [skip ci]'
+          git push origin HEAD:affiliate-release-current
