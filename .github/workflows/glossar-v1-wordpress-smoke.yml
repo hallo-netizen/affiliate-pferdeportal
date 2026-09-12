@@ -90,7 +90,7 @@ jobs:
           PAGE_ID=$(docker exec uge-wp wp post create --allow-root --post_type=page --post_status=publish --post_title='Glossar' --post_name=glossar --porcelain)
           docker exec uge-wp wp eval --allow-root "\$cfg=UGE_Config::get(); \$cfg['main_page_id']=$PAGE_ID; \$cfg['rewrite_base']='glossar'; \$cfg['design_profile']='pferde_atelier'; update_option(UGE_Config::OPTION, UGE_Config::sanitize(\$cfg)); UGE_Core::register_content(); flush_rewrite_rules();"
 
-          GROUP_ID=$(docker exec uge-wp wp term create uge_group Gesundheit --slug=gesundheit --porcelain --allow-root)
+          docker exec uge-wp wp term create uge_group Gesundheit --slug=gesundheit --allow-root
           TERM_ID=$(docker exec uge-wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title='Kolik' --post_name=kolik --post_content='Ausführliche Erklärung zur Kolik.' --porcelain)
           docker exec uge-wp wp post meta update "$TERM_ID" _uge_short_definition 'Kolik ist ein Sammelbegriff für Bauchschmerzen beim Pferd.' --allow-root
           docker exec uge-wp wp post meta update "$TERM_ID" _uge_seo_title 'Kolik – Bedeutung und Erklärung' --allow-root
@@ -174,6 +174,67 @@ jobs:
           jq -e '.items | map(select(.title == "Importierter Begriff")) | length == 1' /tmp/export.json >/dev/null
           echo 'IMPORT_EXPORT_PASS'
 
+      - name: Positive/negative – Astra and Yoast together
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker exec uge-wp wp theme install astra --activate --allow-root
+          docker exec uge-wp wp theme is-active astra --allow-root
+          docker exec uge-wp wp plugin install wordpress-seo --activate --allow-root
+          docker exec uge-wp wp plugin is-active wordpress-seo --allow-root
+          echo "ASTRA_VERSION=$(docker exec uge-wp wp theme get astra --field=version --allow-root)"
+          echo "YOAST_VERSION=$(docker exec uge-wp wp plugin get wordpress-seo --field=version --allow-root)"
+
+          NORMAL_PAGE_ID=$(docker exec uge-wp wp post create --allow-root --post_type=page --post_status=publish --post_title='Normale Testseite' --post_name=normale-testseite --post_content='Unveränderte normale Seite.' --porcelain)
+          NORMAL_POST_ID=$(docker exec uge-wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Normaler Testbeitrag' --post_name=normaler-testbeitrag --post_content='Unveränderter normaler Beitrag.' --porcelain)
+
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/glossar-astra-yoast.html
+          curl -fsS http://127.0.0.1:8080/glossar/kolik/ -o /tmp/kolik-astra-yoast.html
+          curl -fsS http://127.0.0.1:8080/normale-testseite/ -o /tmp/normal-page.html
+          curl -fsS http://127.0.0.1:8080/normaler-testbeitrag/ -o /tmp/normal-post.html
+
+          grep -q 'data-uge-glossary' /tmp/glossar-astra-yoast.html
+          grep -q 'uge-single-card' /tmp/kolik-astra-yoast.html
+          grep -q 'Kolik ist ein Sammelbegriff' /tmp/kolik-astra-yoast.html
+          grep -q 'Unveränderte normale Seite.' /tmp/normal-page.html
+          grep -q 'Unveränderter normaler Beitrag.' /tmp/normal-post.html
+          ! grep -q 'data-uge-glossary' /tmp/normal-page.html
+          ! grep -q 'uge-single-card' /tmp/normal-page.html
+          ! grep -q 'data-uge-glossary' /tmp/normal-post.html
+          ! grep -q 'uge-single-card' /tmp/normal-post.html
+
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from html import unescape
+
+          class HeadParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.metas=[]; self.links=[]; self.titles=[]; self._in_title=False; self._title=[]
+              def handle_starttag(self, tag, attrs):
+                  d={k.lower(): (v or '') for k,v in attrs}
+                  if tag.lower()=='meta': self.metas.append(d)
+                  if tag.lower()=='link': self.links.append(d)
+                  if tag.lower()=='title': self._in_title=True; self._title=[]
+              def handle_data(self, data):
+                  if self._in_title: self._title.append(data)
+              def handle_endtag(self, tag):
+                  if tag.lower()=='title' and self._in_title:
+                      self.titles.append(unescape(''.join(self._title)).strip()); self._in_title=False
+
+          html=open('/tmp/kolik-astra-yoast.html', encoding='utf-8').read()
+          p=HeadParser(); p.feed(html)
+          descriptions=[m.get('content','') for m in p.metas if m.get('name','').lower()=='description']
+          robots=[m.get('content','') for m in p.metas if m.get('name','').lower()=='robots']
+          canonicals=[l.get('href','') for l in p.links if 'canonical' in l.get('rel','').lower().split()]
+          assert descriptions == ['Kolik beim Pferd kurz und verständlich erklärt.'], descriptions
+          assert len(robots) == 1 and 'noindex' in robots[0].lower(), robots
+          assert canonicals == ['https://example.test/glossar/kolik/'], canonicals
+          assert len(p.titles) == 1 and 'Kolik – Bedeutung und Erklärung' in p.titles[0], p.titles
+          print('ASTRA_YOAST_META_SINGLETON_PASS')
+          PY
+          echo 'ASTRA_YOAST_REAL_PASS'
+
       - name: Positive – second portal without core change
         shell: bash
         run: |
@@ -213,6 +274,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo 'UGE_WORDPRESS_MYSQL_REAL_SMOKE_PASS'
+          echo 'UGE_WORDPRESS_MYSQL_ASTRA_YOAST_REAL_SMOKE_PASS'
           docker exec uge-wp wp core version --allow-root
           docker exec uge-wp php -r 'echo PHP_VERSION, PHP_EOL;'
