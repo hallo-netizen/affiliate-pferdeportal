@@ -25,6 +25,9 @@ if ( ! class_exists( 'UPC_Research_Refresh_Applier' ) ) {
 if ( ! class_exists( 'UPC_Candidate_Gate' ) ) {
     require_once __DIR__ . '/class-upc-candidate-gate.php';
 }
+if ( ! class_exists( 'UPC_Candidate_Applier' ) ) {
+    require_once __DIR__ . '/class-upc-candidate-applier.php';
+}
 
 /**
  * Explicit runtime bridge for bound research bootstrap and refresh maintenance.
@@ -175,6 +178,26 @@ class UPC_Research_Runtime {
 
         $gate = new UPC_Candidate_Gate( $maintenance, $catalog, $policy );
         return $gate->evaluate( $candidate );
+    }
+
+    public static function accept_candidate( array $candidate, array $release ) {
+        $dependency = self::ensure_product_maintenance();
+        if ( is_wp_error( $dependency ) ) {
+            return $dependency;
+        }
+        if ( ! function_exists( 'upk_repository' ) || ! class_exists( 'UPC_Candidate_Applier' ) ) {
+            return new WP_Error( 'UPC_CANDIDATE_RUNTIME_DEPENDENCY_MISSING', 'Candidate acceptance runtime dependency is missing.' );
+        }
+
+        $knowledge = upk_repository();
+        if ( is_wp_error( $knowledge ) ) {
+            return $knowledge;
+        }
+
+        global $wpdb;
+        $maintenance = new UPK_Maintenance( $wpdb );
+        $applier = new UPC_Candidate_Applier( $wpdb, $knowledge, $maintenance );
+        return $applier->apply( $candidate, $release );
     }
 
     private static function ensure_product_maintenance() {
