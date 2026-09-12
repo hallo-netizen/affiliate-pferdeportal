@@ -97,3 +97,18 @@ def collect_batch(snapshot_path:Path,state_paths:Sequence[Path],out_dir:Path):
     evidence={'contract':BATCH_EVIDENCE_CONTRACT,'status':'FULL_PASS_BATCH_COLLECTED','source_snapshot_sha256':source_snapshot_sha,'batch_sha256':batch_sha,'article_count':len(article_rows),'articles':article_rows,'state_evidence':state_rows,'publish_allowed':False,'content_mutation_performed':False,'next_required':'SIGNED_WORKFLOW_RELEASE'}
     evidence['batch_evidence_sha256']=stable_hash(evidence); evidence_path=out_dir/'system4_batch_evidence.json'; evidence_path.write_text(json.dumps(evidence,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
     return {'status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','batch_sha256':batch_sha,'article_count':len(article_rows),'batch_evidence_path':str(evidence_path),'batch_evidence_sha256':file_sha256(evidence_path),'next_required':'SIGNED_WORKFLOW_RELEASE','publish_allowed':False}
+
+
+def main(argv):
+    try:
+        if len(argv) < 5 or argv[1] != 'collect':
+            raise BatchGateError('USE: batch_gate.py collect SNAPSHOT OUT_DIR STATE_JSON...')
+        result = collect_batch(Path(argv[2]), [Path(value) for value in argv[4:]], Path(argv[3]))
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return 0
+    except (BatchGateError, json.JSONDecodeError) as exc:
+        print('SYSTEM4_BATCH_FAIL:' + str(exc))
+        return 2
+
+if __name__ == '__main__':
+    raise SystemExit(main(sys.argv))
