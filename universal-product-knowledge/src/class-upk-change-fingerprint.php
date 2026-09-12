@@ -42,7 +42,7 @@ class UPK_Change_Fingerprint {
             ),
             'facts'        => $this->normalize_records(
                 isset( $bundle['facts'] ) ? $bundle['facts'] : array(),
-                array( 'fact_key', 'fact_value', 'unit', 'source_url', 'source_type', 'fact_status' )
+                array( 'fact_key', 'fact_value', 'fact_note', 'unit', 'source_url', 'source_type', 'fact_status' )
             ),
         );
 
@@ -78,7 +78,7 @@ class UPK_Change_Fingerprint {
             ),
             'facts'        => $this->normalize_records(
                 isset( $bundle['facts'] ) ? $bundle['facts'] : array(),
-                array( 'fact_key', 'fact_value', 'unit', 'source_url', 'source_type', 'fact_status' )
+                array( 'fact_key', 'fact_value', 'fact_note', 'unit', 'source_url', 'source_type', 'fact_status' )
             ),
         );
 
