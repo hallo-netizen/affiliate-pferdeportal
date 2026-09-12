@@ -1,7 +1,7 @@
 # AFFILIATE RELEASE – ADCELL API-V2 AUTOMATISIERUNG – SCOPE 2026-09-11
 
 STAND: 2026-09-12
-STATUS: AKTIV / 6.72.19 KANONISCH GEBUNDEN + FULL GATE + FRESH-UNPACK/IDENTITY PASS / NUR LIVE-E2E BLOCKED
+STATUS: AKTIV / 6.72.19 KANONISCH + FULL GATE + KANONISCHER ARTEFAKT-26/26-PASS / AF-066 READ-ONLY LIVE-API-PREFLIGHT OFFEN
 
 ## VERBINDLICHES ZIEL
 
@@ -93,6 +93,10 @@ Für den aktuellen ADCELL-Meilenstein geschlossen:
 - AF-063 falsche 6.72.9-Hashtranskription;
 - AF-064 falsche Versionsbasis;
 - AF-065 Governance-Vertragswert `new_version_policy`.
+- AF-067 falsches Vor-Bind-ZIP; kanonischer Artefaktneubau Run `34692865477` PASS.
+
+Aktiv:
+- AF-066 read-only Live-API-Preflight im echten WordPress noch nicht ausgeführt.
 
 ## AKTUELLER TASK
 
@@ -101,32 +105,31 @@ Autorität:
 
 Status: `BLOCKED`
 
-Keine weitere Sourcearbeit. Der einzige verbleibende ADCELL-Schritt ist der reale Live-Nachweis.
+Keine weitere Sourcearbeit. AF-067 ist geschlossen: aus der kanonischen 6.72.19-Source wurde ein neues Testartefakt gebaut und 26/26 gegengeprüft.
 
-## LIVE-BLOCKER
+Artefakt-Nachweis:
+- Run `34692865477` / Job `103551115066` → PASS;
+- Test-ZIP SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`;
+- GitHub-Actions-Artefakt-ID `10297556084` (temporärer Übergabe-/Testbeleg, keine finale Releasefreigabe).
 
-Der ADCELL-Kontozugang ist weiterhin nicht wiederhergestellt; Passwort-Reset-Mail kommt nicht an.
+PLUGIN-KONTROLLREF: `PU-20260912-001` im Campus-PLUGINS-Updateprotokoll. Fach-/Release-/LIVE-Wahrheit bleibt hier.
 
-Deshalb fehlen noch genau:
-1. echter ADCELL API-v2-Lauf mit dem realen Account;
-2. echter WordPress/MariaDB-E2E gegen den kanonischen 6.72.19-Stand.
+## LIVE-PREFLIGHT / VERBINDLICHE NEXT ACTION
 
-Bis dahin:
+AF-066 korrigiert den früher zu früh angenommenen Weblogin-Blocker.
+
+Nächster echter Gate:
+1. im realen WordPress den kanonischen 6.72.19-Stand verwenden/readbacken;
+2. dort read-only **`Token + Programme prüfen`** mit den bereits gespeicherten ADCELL-API-Zugangsdaten ausführen;
+3. bei PASS einen vorhandenen `accepted` + aktiven `programId` explizit allowlisten und direkt den realen ADCELL-/WordPress-/MariaDB-E2E fortsetzen;
+4. nur wenn gespeicherte API-Zugangsdaten fehlen/ungültig sind, wird Credential-Recovery zum echten Blocker.
+
+Bis zum realen Ergebnis:
 - kein Live-PASS;
 - `release_allowed=false`;
 - Zielvertrag bleibt AKTIV;
 - keine weitere ADCELL-Sourceänderung;
-- kein neuer Plugin-Kandidat und keine neue Versionskette.
-
-## VERBINDLICHE NEXT ACTION
-
-Sobald der ADCELL-Kontozugang wieder funktioniert:
-
-1. realen ADCELL-API-v2-Token-/Programm-/Promotion-Lauf ausführen;
-2. accepted + active + explizite `programId`-Allowlist positiv belegen;
-3. non-allowlisted / inactive / non-accepted weiterhin fail-closed belegen;
-4. direkt danach realen WordPress/MariaDB-E2E für Import, Persistenz, Readback und Ausgabe ausführen;
-5. nur wenn beide Live-Gates PASS sind, Zielvertrag als erfüllt/LIVE-PASS behandeln.
+- keine neue Versionskette.
 
 ## NICHT ANFASSEN
 

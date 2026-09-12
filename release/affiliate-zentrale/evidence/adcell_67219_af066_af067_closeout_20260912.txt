@@ -1,0 +1,20 @@
+AFFILIATE-ZENTRALE 6.72.19 – AF-066 / AF-067 CLOSEOUT
+Date: 2026-09-12
+Branch: affiliate-release-current
+Source manifest SHA-256: 694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b
+
+AF-067 CANONICAL ARTIFACT PROOF:
+Run 34692865477 / Job 103551115066: SUCCESS
+- canonical manifest: 26/26 PASS
+- PHP lint: 21/21 PASS
+- version markers: 6.72.19 PASS
+- fresh-unpack/source identity: 26/26 PASS
+- canonical test ZIP SHA-256: 72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f
+- GitHub Actions artifact ID: 10297556084
+The earlier local pre-bind ZIP is not an allowed handoff artifact.
+
+AF-066 CURRENT OPEN LIVE GATE:
+Web-login/password-reset is not yet proven to be the blocker. First run the canonical read-only WordPress ADCELL `Token + Programme prüfen` test using already stored API credentials. If it succeeds, bind an existing accepted+active programId and continue real E2E. If stored API credentials are missing/invalid, credential recovery becomes the blocker.
+
+NO LIVE PASS. release_allowed remains false.
+PLUGIN CONTROL REF: PU-20260912-001 (Campus PLUGINS update protocol).

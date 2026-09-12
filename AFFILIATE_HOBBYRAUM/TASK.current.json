@@ -1,20 +1,20 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "adcell-live-api-wordpress-e2e-20260912",
-  "goal": "Affiliate-Zentrale 6.72.19 ist kanonisch gebunden und hat die gebundenen lokalen/kanonischen ADCELL-, Awin/OTTO-, Banner-, PHP-, Release-Guard- und Fresh-Unpack/26-of-26-Identity-Gates bestanden. Keine weitere Sourcearbeit. Einziger verbleibender ADCELL-Schritt ist der reale Live-Nachweis: echte ADCELL API v2 gegen den freigeschalteten Account und danach echter WordPress/MariaDB E2E. Bis der ADCELL-Zugang wieder funktioniert, bleibt der Task BLOCKED und es darf kein Live-PASS behauptet werden.",
+  "task_id": "adcell-readonly-live-api-preflight-20260912",
+  "goal": "Affiliate-Zentrale 6.72.19 ist kanonisch gebunden; Full-Gates und kanonischer 26/26-Artefaktneubau sind PASS. Keine Sourcearbeit. Ausschließlich AF-066 ist offen: im echten WordPress zuerst den read-only ADCELL-Test `Token + Programme prüfen` mit den bereits gespeicherten API-Zugangsdaten ausführen.",
   "image": "php:8.2-cli",
   "inputs": [],
   "writable": [],
-  "command": "NO_LOCAL_COMMAND_LIVE_ACCESS_REQUIRED",
+  "command": "NO_LOCAL_COMMAND_REAL_WORDPRESS_RUNTIME_REQUIRED",
   "tests": [
-    "Real ADCELL API v2 token/program/promotion flow with the restored account",
-    "accepted + active + explicit programId allowlist positive path",
-    "non-allowlisted / inactive / non-accepted negative paths remain blocked",
-    "Real WordPress/MariaDB end-to-end import, persistence, readback and output path",
-    "No Awin fallthrough and no manual CSV normal-operation prerequisite"
+    "Canonical 6.72.19 installed/read back in the real WordPress runtime",
+    "Read-only ADCELL Token + Programme prüfen using already stored API credentials",
+    "If API preflight passes: choose an existing accepted+active programId and explicitly allowlist it",
+    "Then real ADCELL promotion/API flow and WordPress/MariaDB import-persistence-readback-output E2E",
+    "Negative paths remain fail-closed: non-allowlisted / inactive / non-accepted; no Awin fallthrough; no manual CSV normal path"
   ],
   "status": "BLOCKED",
-  "blocker": "ADCELL account access unavailable; password reset email not arriving",
-  "next_action": "When ADCELL account access is restored, run exactly the real ADCELL API v2 and WordPress/MariaDB E2E gates. Until then do not modify source and do not claim Live-PASS.",
+  "blocker": "No connected real WordPress runtime is available in this chat, so AF-066 read-only API preflight has not been executed. ADCELL web-login/password-reset is not yet proven to be the blocker.",
+  "next_action": "On the real WordPress site, use canonical 6.72.19 and run the read-only ADCELL `Token + Programme prüfen` test with the already stored API credentials. If token/programmes pass, explicitly allowlist one existing accepted+active programId and continue the real E2E. Only missing/invalid saved API credentials make credential recovery the next blocker.",
   "timeout_seconds": 600
 }

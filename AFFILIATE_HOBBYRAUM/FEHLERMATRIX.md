@@ -91,6 +91,6 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 - AF-064: BEHOBEN – Pluginbüro-6.72.17 wurde konfliktfrei mit dem ADCELL-v2-Fix zusammengeführt; 6.72.19 ist kanonisch gebunden und die beidseitigen Regressionen sind gebunden.
 - AF-065: BEHOBEN – `new_version_policy` auf den unveränderlichen Guard-Vertragswert zurückgesetzt; derselbe kanonische Gate-Lauf wurde anschließend erfolgreich wiederholt.
 - AF-066: AKTIV – read-only Live-API-Preflight mit bereits gespeicherten ADCELL-Zugangsdaten und vorhandenem Partnerprogramm noch nicht ausgeführt.
-- AF-067: AKTIV – fehlerhaftes lokales ZIP gesperrt; kanonischer 26/26-Neubau noch auszuführen.
+- AF-067: BEHOBEN – kanonischer 6.72.19-Artefaktneubau direkt aus `affiliate-release-current` ausgeführt; Run `34692865477` / Job `103551115066` PASS; Manifest/Fresh-Unpack 26/26, PHP 21/21 und Versionsmarker PASS; Test-ZIP SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`. Das falsche Vor-Bind-ZIP bleibt gesperrt.
 
-- AF-068: AKTIV – korrigierter Closeout-Workflow ist noch nicht erfolgreich durchgelaufen.
+- AF-068: BEHOBEN – korrigierte Workflow-YAML vor Bind mit PyYAML validiert; der Nachhollauf hat Governance/Source/Tree/Start sowie PR-Transition erfolgreich geprüft.
