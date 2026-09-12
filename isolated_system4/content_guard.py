@@ -50,6 +50,10 @@ def _json_text(value: str, code: str) -> dict[str, Any]:
     return obj
 
 
+def _normalized_evidence(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip()
+
+
 def _source_metadata(source: Mapping[str, Any], index: int, prefix: str) -> dict[str, Any]:
     sid = _require_text(source.get("source_id"), f"{prefix}_SOURCE_ID_INVALID:{index}")
     title = _require_text(source.get("source_title"), f"{prefix}_SOURCE_TITLE_INVALID:{index}")
@@ -73,16 +77,16 @@ def _source_metadata(source: Mapping[str, Any], index: int, prefix: str) -> dict
     return out
 
 
-def _research_source(source: Mapping[str, Any], index: int) -> dict[str, Any]:
-    out = _source_metadata(source, index, "RESEARCH")
+def _research_source(source: Mapping[str, Any], index: int, prefix: str = "RESEARCH") -> dict[str, Any]:
+    out = _source_metadata(source, index, prefix)
     evidence = _require_text(
         source.get("evidence"),
-        f"RESEARCH_SOURCE_EVIDENCE_INVALID:{index}",
+        f"{prefix}_SOURCE_EVIDENCE_INVALID:{index}",
         MIN_SOURCE_EVIDENCE_CHARS,
     )
     _require(
         text_sha256(evidence) == out["snapshot_sha256"],
-        f"RESEARCH_SOURCE_HASH_MISMATCH:{index}",
+        f"{prefix}_SOURCE_HASH_MISMATCH:{index}",
     )
     out["evidence"] = evidence
     return out
@@ -108,7 +112,11 @@ def validate_research_document(value: str | Mapping[str, Any]) -> dict[str, Any]
     return {"contract": RESEARCH_CONTRACT, "sources": normalized}
 
 
-def _claim_core(claim: Mapping[str, Any], index: int, source_ids: set[str]) -> dict[str, Any]:
+def _claim_core(
+    claim: Mapping[str, Any],
+    index: int,
+    sources: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
     fact_id = _require_text(claim.get("fact_id"), f"FACT_ID_INVALID:{index}")
     source_id = _require_text(claim.get("source_id"), f"FACT_SOURCE_ID_INVALID:{index}")
     statement = _require_text(claim.get("statement"), f"FACT_STATEMENT_INVALID:{index}", MIN_CLAIM_TEXT_CHARS)
@@ -118,9 +126,15 @@ def _claim_core(claim: Mapping[str, Any], index: int, source_ids: set[str]) -> d
         MIN_CLAIM_TEXT_CHARS,
     )
     evidence_hash = _require_text(claim.get("evidence_text_sha256"), f"FACT_EVIDENCE_HASH_INVALID:{index}")
-    _require(source_id in source_ids, f"FACT_SOURCE_NOT_IN_RESEARCH:{index}")
+    _require(source_id in sources, f"FACT_SOURCE_NOT_IN_RESEARCH:{index}")
     _require(SHA_RE.fullmatch(evidence_hash) is not None, f"FACT_EVIDENCE_HASH_INVALID:{index}")
     _require(text_sha256(evidence_text) == evidence_hash, f"FACT_EVIDENCE_HASH_MISMATCH:{index}")
+    source_evidence = sources[source_id].get("evidence")
+    _require(isinstance(source_evidence, str) and source_evidence.strip(), f"FACT_SOURCE_EVIDENCE_MISSING:{index}")
+    _require(
+        _normalized_evidence(evidence_text) in _normalized_evidence(source_evidence),
+        f"FACT_EVIDENCE_NOT_IN_SOURCE:{index}",
+    )
     return {
         "fact_id": fact_id,
         "source_id": source_id,
@@ -135,7 +149,7 @@ def validate_facts_document(
     research: str | Mapping[str, Any],
 ) -> dict[str, Any]:
     research_obj = validate_research_document(research)
-    source_ids = {row["source_id"] for row in research_obj["sources"]}
+    sources = {row["source_id"]: row for row in research_obj["sources"]}
     obj = _json_text(value, "FACTS_JSON_INVALID") if isinstance(value, str) else dict(value)
     _require(obj.get("contract") == FACTS_CONTRACT, "FACTS_CONTRACT_INVALID")
     claims = obj.get("claims")
@@ -146,7 +160,7 @@ def validate_facts_document(
     statements: set[str] = set()
     for index, raw in enumerate(claims):
         _require(isinstance(raw, dict), f"FACT_OBJECT_REQUIRED:{index}")
-        claim = _claim_core(raw, index, source_ids)
+        claim = _claim_core(raw, index, sources)
         _require(claim["fact_id"] not in ids, f"FACT_ID_DUPLICATE:{index}")
         folded = re.sub(r"\s+", " ", claim["statement"].casefold()).strip()
         _require(folded not in statements, f"FACT_STATEMENT_DUPLICATE:{index}")
@@ -165,7 +179,7 @@ def _pack_sources(fact_pack: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
     out: dict[str, dict[str, Any]] = {}
     for index, raw in enumerate(raw_sources):
         _require(isinstance(raw, dict), f"FACT_PACK_SOURCE_OBJECT_REQUIRED:{index}")
-        meta = _source_metadata(raw, index, "FACT_PACK")
+        meta = _research_source(raw, index, "FACT_PACK")
         _require(meta["source_id"] not in out, f"FACT_PACK_SOURCE_ID_DUPLICATE:{index}")
         out[meta["source_id"]] = meta
     return out
@@ -173,7 +187,7 @@ def _pack_sources(fact_pack: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
 
 def _pack_claims(
     fact_pack: Mapping[str, Any],
-    source_ids: set[str],
+    sources: Mapping[str, Mapping[str, Any]],
 ) -> dict[str, dict[str, Any]]:
     raw_claims = fact_pack.get("claims")
     _require(
@@ -183,13 +197,13 @@ def _pack_claims(
     out: dict[str, dict[str, Any]] = {}
     for index, raw in enumerate(raw_claims):
         _require(isinstance(raw, dict), f"FACT_PACK_CLAIM_OBJECT_REQUIRED:{index}")
-        core = _claim_core(raw, index, source_ids)
+        core = _claim_core(raw, index, sources)
         _require(core["fact_id"] not in out, f"FACT_PACK_FACT_ID_DUPLICATE:{index}")
         source_url = raw.get("source_url")
         if source_url is not None:
             _require(
-                isinstance(source_url, str) and source_url.strip(),
-                f"FACT_PACK_CLAIM_SOURCE_URL_INVALID:{index}",
+                isinstance(source_url, str) and source_url.strip() == sources[core["source_id"]]["source_url"],
+                f"FACT_PACK_CLAIM_SOURCE_URL_MISMATCH:{index}",
             )
         out[core["fact_id"]] = core
     return out
@@ -206,21 +220,21 @@ def validate_fact_pack(
     _require(status == "SOURCE_VERIFIED_PRODUCTION_READY", "FACT_PACK_NOT_PRODUCTION_READY")
 
     pack_sources = _pack_sources(fact_pack)
-    pack_claims = _pack_claims(fact_pack, set(pack_sources))
+    pack_claims = _pack_claims(fact_pack, pack_sources)
 
     if research is not None:
         research_obj = validate_research_document(research)
         expected_sources = {
             row["source_id"]: {
                 key: row[key]
-                for key in ("source_id", "source_title", "source_url", "retrieved_at", "snapshot_sha256")
+                for key in ("source_id", "source_title", "source_url", "retrieved_at", "snapshot_sha256", "evidence")
             }
             for row in research_obj["sources"]
         }
         actual_sources = {
             source_id: {
                 key: meta[key]
-                for key in ("source_id", "source_title", "source_url", "retrieved_at", "snapshot_sha256")
+                for key in ("source_id", "source_title", "source_url", "retrieved_at", "snapshot_sha256", "evidence")
             }
             for source_id, meta in pack_sources.items()
         }
