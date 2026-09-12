@@ -53,6 +53,10 @@ function upc_evaluate_product_candidate( array $candidate, $project_key = 'pferd
     return UPC_Research_Runtime::evaluate_candidate( $candidate, $project_key );
 }
 
+function upc_accept_product_candidate( array $candidate, array $release ) {
+    return UPC_Research_Runtime::accept_candidate( $candidate, $release );
+}
+
 function upc_install_schema() {
     global $wpdb;
 
