@@ -1,0 +1,11 @@
+7f3301b50109fca4188c2c44e8232e1689f1d4731c41c8808f4f98975472c9e2  universal-glossary-engine/includes/class-uge-admin.php
+a193b54412db30bc2c68d0de60841f284b643c85fe37277daf90a865b083fa0a  universal-glossary-engine/includes/class-uge-config.php
+76ba8617558c1b6a97e27bbee072b0e1a2e698facbde8d37d7c08a3770fd7e8b  universal-glossary-engine/includes/class-uge-core.php
+aaff05e707665bd5a3f7fe14e9d1d3f6d88223202349e337196d96c914369aa5  universal-glossary-engine/includes/class-uge-frontend.php
+dd349f2b591d677462ea3dc6fe658159b7d3cfe25fb2f9ce02c862ba622e6365  universal-glossary-engine/includes/class-uge-seo.php
+2bd89be6a9af30c86ecd2fe3114e22860ae7af77e707125a3f3b4de3dbd6664f  universal-glossary-engine/includes/class-uge-transfer.php
+406f8cadc8776d79179358371008924c99b09e305a1bb111a07ab0a7c9095b85  universal-glossary-engine/templates/single-uge-term.php
+73ac8b523ffb34dd0de260263a70aa56690846f490a4417c888e4b576681ef83  universal-glossary-engine/universal-glossary-engine.php
+
+ZIP SHA-256:
+c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee  universal-glossary-engine-0.1.0-prototype.zip
