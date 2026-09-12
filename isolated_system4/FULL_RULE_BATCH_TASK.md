@@ -2,6 +2,16 @@
 
 No merge. No publish. No signing in this run.
 
+## PRECONDITION — BEFORE CODEX IS STARTED
+This file describes a REAL production run, not a diagnostic/test-only Codex task.
+
+The caller must verify BEFORE invoking Codex:
+1. current System-4 entry/preflight is clean without Codex;
+2. one supported, real, retrievable task file/artifact can be returned to Chat at the end;
+3. the seven article bodies will NOT be pasted into a PR comment and will NOT be persisted as repository article content.
+
+If the real-file/artifact handoff is not confirmed, DO NOT START CODEX. Do not spend Codex quota to discover or debug the handoff.
+
 ## Fixed input
 Use exactly `isolated_system4/live_fixture/wordpress_snapshot.json` and all seven real `Beratung` items in their existing order/index 0..6.
 
@@ -46,35 +56,27 @@ Required:
 
 Signing / ENDSTEMPEL / WordPress release is deliberately DEFERRED and must not be attempted in this run.
 
-## Mandatory handoff to Chat — real file source
-Do NOT commit article bodies or runtime files to GitHub.
-Return one complete compact JSON object, not seven prose sections and not truncated, with contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1` containing:
+## Mandatory handoff to Chat — ONE REAL FILE
+Create exactly one file/artifact named:
+`SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json`
+
+It must contain:
+- contract `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1`;
 - batch_sha256;
 - publish_allowed=false;
 - signing_deferred=true;
 - batch_gate_status;
 - no_legacy_status;
 - test_suite_status;
-- exactly seven article rows in snapshot order, each with:
-  - index;
-  - title;
-  - target_keyword;
-  - category;
-  - article_type;
-  - plan_slot;
-  - final_draft_sha256;
-  - revision_count;
-  - exact final checked article body verbatim in `body`;
-  - LanguageTool result showing real LT 6.8 PASS / zero unresolved findings;
-  - PPM result showing real PPM 6.7.9 technical PASS + content-quality PASS + aggregate PASS.
+- exactly seven article rows in snapshot order, each with index, title, target_keyword, category, article_type, plan_slot, final_draft_sha256, revision_count, exact final checked article body verbatim, real LanguageTool 6.8 PASS/zero unresolved findings, and real PPM 6.7.9 technical/content-quality/aggregate PASS.
 
-Keep the JSON compact enough for the task response. Do not include research prose, full fact packs, raw LT reports, raw PPM reports or unrelated diagnostics. The calling Chat will turn this exact JSON into the downloadable batch file without changing article bodies.
+Return the supported retrievable file/artifact reference plus its SHA256 only. Do NOT paste the seven full article bodies into the PR conversation. Do NOT commit the article bodies to the repository.
 
 ## Terminal return
 Return exactly one of:
 
 `SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS`
-followed immediately by the complete JSON object `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1`;
+with the retrievable `SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json` file/artifact reference and SHA256;
 
 or the FIRST genuine non-repairable current System-4 preflight/checker/tool blocker with exact stage, error/status and source.
 
