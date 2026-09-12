@@ -96,6 +96,23 @@ foreach ( $plan['tasks'] as $task ) { $by_id[ $task['product_id'] ] = $task; }
 refresh_assert( array( 5, 9 ) === $by_id[11]['affected_comparison_ids'], 'affected comparisons bound to due product' );
 refresh_assert( 'https://maker.example/cam' === $by_id[11]['manufacturer_product_url'], 'manufacturer source bound' );
 refresh_assert( array( 'SAFETY_FIT_ADDITIONAL_CONTRACT' ) === $by_id[33]['required_additional_contracts'], 'safety-fit contract preserved for hufschuhe' );
+refresh_assert( 64 === strlen( $by_id[11]['task_binding_sha256'] ), 'research task has stable binding hash' );
+$task_hash = $by_id[11]['task_binding_sha256'];
+
+$comparisons->affected[11] = array( 5, 9, 14 );
+$comparison_only_change = $planner->build( 'pferde-atelier', '2026-09-12 10:00:00', 500 );
+$comparison_only_by_id = array();
+foreach ( $comparison_only_change['tasks'] as $task ) { $comparison_only_by_id[ $task['product_id'] ] = $task; }
+refresh_assert( $task_hash === $comparison_only_by_id[11]['task_binding_sha256'], 'comparison attachment change does not invalidate product research task' );
+refresh_assert( array( 5, 9, 14 ) === $comparison_only_by_id[11]['affected_comparison_ids'], 'current affected comparisons still update in plan' );
+
+$knowledge->products[11]['lifecycle_status'] = 'ACTIVE';
+$product_state_change = $planner->build( 'pferde-atelier', '2026-09-12 10:00:00', 500 );
+$product_state_by_id = array();
+foreach ( $product_state_change['tasks'] as $task ) { $product_state_by_id[ $task['product_id'] ] = $task; }
+refresh_assert( $task_hash !== $product_state_by_id[11]['task_binding_sha256'], 'product state change invalidates old research task binding' );
+$knowledge->products[11]['lifecycle_status'] = 'UNKNOWN';
+$comparisons->affected[11] = array( 5, 9 );
 
 $end_month = $planner->build( 'pferde-atelier', '2026-08-31 10:00:00', 500 );
 refresh_assert( ! is_wp_error( $end_month ), 'end-of-month refresh plan builds' );
