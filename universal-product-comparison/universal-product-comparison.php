@@ -49,6 +49,10 @@ function upc_apply_research_refresh_results( array $plan, array $results ) {
     return UPC_Research_Runtime::apply_refresh_results( $plan, $results );
 }
 
+function upc_evaluate_product_candidate( array $candidate, $project_key = 'pferde-atelier' ) {
+    return UPC_Research_Runtime::evaluate_candidate( $candidate, $project_key );
+}
+
 function upc_install_schema() {
     global $wpdb;
 
