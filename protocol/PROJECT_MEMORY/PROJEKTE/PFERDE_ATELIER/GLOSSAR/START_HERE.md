@@ -41,9 +41,25 @@ Dieses Büro ist zuständig für:
 - Abnahme der Glossar-spezifischen Funktion.
 
 ### WordPress
-Glossarbegriffe sollen **nicht wie normale Beiträge** erscheinen und **keinen Bildzwang** haben. Jeder veröffentlichte Begriff soll technisch eigene SEO-Angaben erhalten können. Die exakte Speicherung/URL-Logik wird erst nach Prüfung des bestehenden Designplugins verbindlich festgelegt.
+Vom Nutzer bestätigt: Die WordPress-Seite `Glossar` ist bereits angelegt und verlinkt.
+
+Für einzelne Glossarbegriffe gilt:
+- nicht als normale Beiträge ausgeben;
+- nicht als normale Seiten pro Begriff pflegen;
+- kein Bildzwang;
+- keine normalen Beitragskarten im Portal;
+- eigene SEO-Angaben je veröffentlichbarem Begriff ermöglichen.
+
+Die exakte Speicherung/URL-Logik wird erst nach Prüfung des bestehenden Designplugins verbindlich festgelegt.
 
 **Kein zweites CMS im Plugin bauen.**
+
+### SEO-Meta
+Gewünschter KISS-Weg:
+- SEO-Titel und Meta-Description je Begriff nach festem Schema;
+- keine manuelle Yoast-Pflege je Begriff;
+- keine direkten Writes in interne Yoast-Datenbankfelder;
+- vorhandene Yoast-Ausgabe nur über offizielle Schnittstellen überschreiben, sofern die installierte Version nach frischer Prüfung kompatibel ist.
 
 ### Textproduktion
 Aktuell **keine eigene große Textmaschine** und keine automatische Anbindung an die bestehende Artikel-Textmaschine.
@@ -85,7 +101,6 @@ Der Kurztextstandard darf sich an den bewährten strengen Regeln der Kategoriete
 
 - **Aktueller Bürostand:** `CURRENT_STATE.md`
 - **Aktuelle Arbeit / NEXT ACTION:** `HOBBYRAUM.md`
-- **Vom Nutzer bestätigter WordPress-Ausgangspunkt:** `WORDPRESS_STATUS.md`
 - **Fachdatenbank:** `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
 - **Design:** `../DESIGN/START_HERE.md`
 - **TEXT/SEO:** `../TEXT/START_HERE.md`
