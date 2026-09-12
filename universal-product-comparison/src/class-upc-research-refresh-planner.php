@@ -180,7 +180,11 @@ class UPC_Research_Refresh_Planner {
                 $target_year--;
             }
 
-            $last_day = cal_days_in_month( CAL_GREGORIAN, $target_month, $target_year );
+            $month_start = new DateTimeImmutable(
+                sprintf( '%04d-%02d-01 00:00:00', $target_year, $target_month ),
+                new DateTimeZone( 'UTC' )
+            );
+            $last_day = (int) $month_start->format( 't' );
             $target_day = min( $day, $last_day );
 
             return $dt
