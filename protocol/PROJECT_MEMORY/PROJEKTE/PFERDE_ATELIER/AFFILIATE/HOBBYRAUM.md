@@ -1,7 +1,7 @@
 # AFFILIATE – HOBBYRAUM
 
 STAND: 2026-09-12
-STATUS: BLOCKED AUF BYTEGENAUE 6.72.9-VERSIONSBINDUNG + DANACH LIVE-E2E
+STATUS: BLOCKED AUF AF-063-HASHKORREKTUR + BYTEGENAUE 6.72.9-VERSIONSBINDUNG + DANACH LIVE-E2E
 
 ## AKTUELLER AUFTRAG
 
@@ -52,16 +52,18 @@ Dieser version-only Schritt wurde lokal bereits hart geprüft:
 - `const VERSION` 6.72.9;
 - readme Stable tag 6.72.9;
 - keine fachliche Sourceänderung;
-- lokales Manifest `83c75bf1359aa989313416c9f9c7d1d4193bfe44a15bef08a83ac45580911bc8`;
+- exakt verifiziertes lokales Manifest `83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e`;
 - PHP 21/21, ADCELL Static/Positiv/Negativ, Awin/OTTO 18/18, Banner, Fresh-Unpack und 26/26 Identity PASS.
 
-6.72.9 ist noch nicht kanonisch, weil die große Hauptplugin-Datei nur über einen nachgewiesen bytegenauen Transportweg geschrieben werden darf. Kein Chunking, keine Rekonstruktion, kein angenäherter Großinhalt.
+AF-063: Die zuvor in Status/Evidence transkribierte Zeichenfolge `83c75bf1359...` war falsch. Gegenbeweis ist ausgeführt: gespeichertes Manifest = regeneriertes 26-Dateien-Manifest; Fresh-Unpack 26/26 identisch. Nur `83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e` darf weitergebunden werden.
+
+6.72.9 ist noch nicht kanonisch, weil die große Hauptplugin-Datei nur über einen nachgewiesen bytegenauen Transportweg geschrieben werden darf. Kein Base64-Blocktransport, keine Rekonstruktion, kein angenäherter Großinhalt.
 
 Zusätzlich bleibt der echte ADCELL-Kontozugang blockiert. Deshalb ist LIVE-E2E noch nicht möglich.
 
 ## NEXT ACTION – GENAU EIN SCHRITT
 
-Den bereits lokal geprüften reinen Versionsschritt `6.72.8 -> 6.72.9` bytegenau auf `affiliate-release-current` binden.
+AF-063 vollständig schließen: Governance/Evidence ausschließlich auf den exakt verifizierten 6.72.9-Manifesthash nachziehen. Danach den bereits lokal geprüften reinen Versionsschritt `6.72.8 -> 6.72.9` bytegenau auf `affiliate-release-current` binden.
 
 Danach ohne fachlichen Sourceumbau:
 1. neues 26-Dateien-Manifest + Governance an exakt den committed 6.72.9-Stand binden;
