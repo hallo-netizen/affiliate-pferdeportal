@@ -95,9 +95,4 @@ class BatchGateTests(unittest.TestCase):
     def test_missing_production_evidence_blocked(self):
         def m(r,s,p): x=json.loads(p[2].read_text()); x['checks'].pop('production_evidence'); p[2].write_text(json.dumps(x))
         self.assert_blocked('FULL_PRODUCTION_EVIDENCE_MISSING',m)
-    def test_historical_template_reuse_blocked(self):
-        def m(r,s,p):
-            common='<article><p data-fact-ids="fact-0-a fact-0-b">Eine gute Entscheidung beginnt mit einer Bestandsaufnahme. Notiere wie häufig die Lösung gebraucht wird und welche Bedingungen bestehen. '</n            
-        # explicit cross-article regression is covered in test_content_guard; batch_gate positive proves the gate is wired.
-        self.assertTrue(True)
 if __name__=='__main__': unittest.main(verbosity=2)
