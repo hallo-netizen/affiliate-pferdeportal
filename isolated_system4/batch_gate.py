@@ -57,6 +57,12 @@ def validate_full_production_evidence(checks:Mapping[str,Any],draft_sha:str)->di
     if source not in ('BOUND_CURRENT_REUSED','REAL_LT68_FULLCHECK_REUSED','REAL_LT68_CURRENT_DRAFT_REFRESHED'): raise BatchGateError('PPM679_LANGUAGE_EVIDENCE_SOURCE_INVALID')
     return {'languagetool':{'engine':lt['engine'],'status':'PASS','finding_count':0},'ppm679':{'version':'6.7.9','status':'PASS','technical_status':ppm['technical_status'],'content_quality_status':ppm['content_quality_status'],'fail_closed_aggregate_status':ppm['fail_closed_aggregate_status'],'language_evidence_source':source},'no_legacy':'PASS','external_links':'PASS'}
 
+def _validated_stage_text(state:Mapping[str,Any],field:str)->str:
+    value=state.get(field)
+    if not isinstance(value,dict) or not isinstance(value.get('text'),str) or text_sha256(value['text'])!=value.get('sha256'):
+        raise BatchGateError('STATE_'+field.upper()+'_INTEGRITY_FAIL')
+    return value['text']
+
 def validate_state(state,expected_article,source_snapshot_sha256,batch_sha256):
     if state.get('contract')!=STATE_CONTRACT: raise BatchGateError('STATE_CONTRACT_INVALID')
     if stable_hash(immutable_core(state))!=state.get('immutable_core_sha256'): raise BatchGateError('STATE_IMMUTABLE_CORE_TAMPERED')
@@ -76,8 +82,11 @@ def validate_state(state,expected_article,source_snapshot_sha256,batch_sha256):
     context=state.get('production_context')
     if not isinstance(context,dict) or set(context)!={'fact_pack','production_plan_item','sha256'}: raise BatchGateError('PRODUCTION_CONTEXT_INVALID')
     if stable_hash({'fact_pack':context['fact_pack'],'production_plan_item':context['production_plan_item']})!=context.get('sha256'): raise BatchGateError('PRODUCTION_CONTEXT_HASH_INVALID')
-    try: content_guard.validate_single_article(draft,context['fact_pack'])
-    except content_guard.ContentGuardError as exc: raise BatchGateError('CONTENT_GUARD_NOT_PASS:'+str(exc)) from exc
+    research_text=_validated_stage_text(state,'research'); facts_text=_validated_stage_text(state,'facts')
+    try:
+        content_guard.validate_fact_pack(context['fact_pack'],research_text,facts_text)
+        content_guard.validate_article_fact_ids(draft,context['fact_pack'])
+    except content_guard.ContentGuardError as exc: raise BatchGateError('CONTENT_CONTEXT_NOT_PASS:'+str(exc)) from exc
     try: design_summary=design_guard.validate_design_neutrality(draft,expected_article['article_type'])
     except design_guard.DesignGuardError as exc: raise BatchGateError('DESIGN_GUARD_NOT_PASS:'+str(exc)) from exc
     return {'plan_slot':expected_article['plan_slot'],'draft':draft,'draft_sha256':draft_sha,'state_sha256':stable_hash(dict(state)),'production_context_sha256':context['sha256'],'check_evidence_sha256':stable_hash(checks),'revision':int(state.get('revision') or 0),'quality_summary':quality_summary,'design_summary':design_summary}
