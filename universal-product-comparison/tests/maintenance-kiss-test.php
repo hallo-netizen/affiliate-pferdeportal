@@ -18,6 +18,9 @@ function is_wp_error( $value ) {
 function absint( $value ) {
     return abs( (int) $value );
 }
+function sanitize_key( $value ) {
+    return strtolower( preg_replace( '/[^a-z0-9_\-]/', '', (string) $value ) );
+}
 function sanitize_text_field( $value ) {
     return trim( strip_tags( (string) $value ) );
 }
@@ -78,6 +81,9 @@ class Maintenance_Fake_WPDB {
         $this->last_get_col_prepared = $prepared;
         $query = $prepared['query'];
         if ( false !== strpos( $query, 'SELECT id FROM wp_upk_products' ) ) {
+            if ( false !== strpos( $query, 'product_group_key = %s' ) ) {
+                return array( '1' );
+            }
             return array( '2', '1' );
         }
         if ( false !== strpos( $query, 'SELECT DISTINCT i.comparison_id' ) ) {
@@ -146,6 +152,16 @@ $due = $upk->products_due_for_review( '2026-03-12 00:00:00', 999 );
 maintenance_assert( array( 2, 1 ) === $due, 'positive due-product selection' );
 maintenance_assert( 500 === $wpdb->last_get_col_prepared['args'][1], 'review batch hard capped at 500' );
 maintenance_assert( false !== strpos( $wpdb->last_get_col_prepared['query'], "lifecycle_status IN ('ACTIVE','TEMPORARILY_UNAVAILABLE','UNKNOWN')" ), 'discontinued products excluded from periodic queue' );
+
+$group_due = $upk->products_due_for_group_review( 'regendecken', '2025-09-12 00:00:00', 100 );
+maintenance_assert( array( 1 ) === $group_due, 'positive product-group due selection' );
+maintenance_assert( 'regendecken' === $wpdb->last_get_col_prepared['args'][0], 'product-group key bound into query' );
+maintenance_assert( '2025-09-12 00:00:00' === $wpdb->last_get_col_prepared['args'][1], 'product-group refresh cutoff bound into query' );
+maintenance_assert( 100 === $wpdb->last_get_col_prepared['args'][2], 'product-group review limit bound into query' );
+maintenance_assert( false !== strpos( $wpdb->last_get_col_prepared['query'], 'product_group_key = %s' ), 'group-specific refresh avoids global full scan' );
+
+$result = $upk->products_due_for_group_review( '', '2025-09-12 00:00:00', 100 );
+maintenance_assert( is_wp_error( $result ) && 'UPK_PRODUCT_GROUP_KEY_MISSING' === $result->get_error_code(), 'negative empty product-group blocked' );
 
 $result = $upk->products_due_for_review( 'definitely-not-a-date', 100 );
 maintenance_assert( is_wp_error( $result ) && 'UPK_INVALID_DATETIME' === $result->get_error_code(), 'negative invalid review cutoff blocked' );
