@@ -2,6 +2,8 @@
 import argparse, base64, hashlib, json, lzma, re
 from pathlib import Path
 
+import content_guard
+
 HANDOFF_CONTRACT='SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1'
 INLINE_CONTRACT='SYSTEM4_PARENT_CHAT_INLINE_V1'
 HANDOFF_FILENAME='SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1.json'
@@ -46,7 +48,7 @@ def validate_handoff(payload: dict) -> dict:
     _require(wr['required_downstream_components']==[],'HANDOFF_WORDPRESS_DOWNSTREAM_MUST_BE_EMPTY')
     rows=payload['articles']
     _require(isinstance(rows,list) and len(rows)==7,'HANDOFF_ARTICLE_COUNT_INVALID')
-    seen=set()
+    seen=set(); bodies=[]
     row_required={'index','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679'}
     for i,row in enumerate(rows):
         _require(isinstance(row,dict) and set(row)==row_required,f'HANDOFF_ARTICLE_SCHEMA_INVALID:{i}')
@@ -61,8 +63,17 @@ def validate_handoff(payload: dict) -> dict:
         _require(row['final_draft_sha256']==body_sha,f'HANDOFF_BODY_SHA_MISMATCH:{i}')
         _require(isinstance(row['revision_count'],int) and row['revision_count']>=1,f'HANDOFF_REVISION_INVALID:{i}')
         pc=row['production_context']; _require(isinstance(pc,dict) and isinstance(pc.get('fact_pack'),dict) and isinstance(pc.get('production_plan_item'),dict),f'HANDOFF_PRODUCTION_CONTEXT_INVALID:{i}')
+        try:
+            content_guard.validate_single_article(body,pc['fact_pack'])
+        except content_guard.ContentGuardError as exc:
+            raise HandoffError(f'HANDOFF_CONTENT_GUARD:{i}:'+str(exc)) from exc
         lt=row['languagetool']; _require(isinstance(lt,dict) and lt.get('status')=='PASS' and lt.get('finding_count')==0 and lt.get('engine')=='LanguageTool 6.8 / Bestand 43',f'HANDOFF_LT_NOT_PASS:{i}')
         ppm=row['ppm679']; _require(isinstance(ppm,dict) and ppm.get('status')=='PASS' and ppm.get('ppm_version')=='6.7.9' and ppm.get('technical_status')=='TECHNICAL_CHECK_OK' and ppm.get('content_quality_status')=='CONTENT_QUALITY_CHECK_OK' and ppm.get('fail_closed_aggregate_status')=='PASS' and ppm.get('content_sha256')==body_sha,f'HANDOFF_PPM_NOT_PASS:{i}')
+        bodies.append(body)
+    try:
+        content_guard.validate_batch_distinctness(bodies)
+    except content_guard.ContentGuardError as exc:
+        raise HandoffError('HANDOFF_CONTENT_GUARD:'+str(exc)) from exc
     return payload
 
 def read_validate_handoff(path: Path) -> tuple[dict,bytes]:
