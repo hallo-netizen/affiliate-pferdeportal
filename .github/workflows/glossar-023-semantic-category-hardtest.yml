@@ -1,0 +1,161 @@
+name: Glossar 0.2.3 Semantic Category Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-023-semantic-category-20260912]
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3/**'
+      - '.github/workflows/glossar-023-semantic-category-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hardtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build candidate from proven base
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp
+          C22=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.2
+          C23=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3
+          mkdir -p /tmp/u
+          cat "$T"/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          test "$(sha256sum /tmp/base.zip|cut -d' ' -f1)" = b20fc92e106989d96e701ca3cc2c4091096e8e8cdb207f63a958b411a0c6aaa7
+          unzip -q /tmp/base.zip -d /tmp/u
+          P=/tmp/u/universal-glossary-engine
+          cp "$C22/universal-glossary-engine.php" "$P/"
+          cp "$C22/includes/class-uge-config.php" "$P/includes/"
+          cp "$C22/includes/class-uge-core.php" "$P/includes/"
+          cp "$C22/includes/class-uge-seo.php" "$P/includes/"
+          cat "$C22"/frontend-parts/part-* > "$P/includes/class-uge-frontend.php"
+          cp "$C23/universal-glossary-engine.php" "$P/"
+          cp "$C23/includes/class-uge-config.php" "$P/includes/"
+          cp "$C23/includes/class-uge-core.php" "$P/includes/"
+          cp "$C23/includes/class-uge-seo.php" "$P/includes/"
+          cp "$C23/includes/class-uge-policy.php" "$P/includes/"
+          grep -q 'Version: 0.2.3' "$P/universal-glossary-engine.php"
+          grep -q "primary_category_id" "$P/includes/class-uge-config.php"
+          grep -q "uge-primary-category" "$P/includes/class-uge-policy.php"
+          find "$P" -name '*.php' -print0 | xargs -0 -n1 php -l
+          echo UGE023_BUILD_LINT_PASS
+      - name: Start real WordPress plus Astra
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker network create n
+          docker run -d --name db --network n -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=3s --health-retries=30 mysql:8.0
+          for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
+          docker run -d --name wp --network n -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/u/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro wordpress:php8.1-apache
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp wp:/usr/local/bin/wp
+          docker exec wp chmod +x /usr/local/bin/wp
+          docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title=x --admin_user=admin --admin_password='UGE-test-123456' --admin_email=x@example.test --skip-email
+          docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root
+          docker exec wp wp theme install astra --activate --allow-root
+          cat >/tmp/stub.php <<'PHP'
+          <?php
+          /* Plugin Name: Pferde Atelier Design Test Stub */
+          final class Pferde_Template_Kit {
+              public static function affiliate_page_type($id){ return get_post_meta((int)$id,'_uge_test_portal_category',true)==='1'?'category':''; }
+              public static function design_profile(){ return 'pferde_atelier'; }
+          }
+          add_action('uge_ad_slot',static function($slot){echo '<span>AD-'.esc_html($slot).'</span>';},10,1);
+          PHP
+          docker exec wp mkdir -p /var/www/html/wp-content/plugins/affiliate-portal-template-kit/assets
+          docker cp /tmp/stub.php wp:/var/www/html/wp-content/plugins/affiliate-portal-template-kit/affiliate-portal-template-kit.php
+          docker exec wp sh -c ': >/var/www/html/wp-content/plugins/affiliate-portal-template-kit/assets/startseite-hero-frau-pferd-clean-v150173.webp'
+          docker exec wp wp plugin activate affiliate-portal-template-kit universal-glossary-engine --allow-root
+          test "$(docker exec wp wp plugin get universal-glossary-engine --field=version --allow-root)" = 0.2.3
+      - name: Seed portal and test positive negative
+        shell: bash
+        run: |
+          set -euo pipefail
+          GLOSSAR=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Glossar --post_name=glossar --post_excerpt='Pferdebegriffe verständlich erklärt.' --porcelain)
+          HEALTH=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Gesundheit --post_name=gesundheit --porcelain)
+          FEED=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Fütterung --post_name=fuetterung --porcelain)
+          docker exec wp wp post meta update $HEALTH _uge_test_portal_category 1 --allow-root
+          docker exec wp wp post meta update $FEED _uge_test_portal_category 1 --allow-root
+          docker exec wp wp eval --allow-root "\$c=UGE_Config::get();\$c['main_page_id']=$GLOSSAR;\$c['rewrite_base']='glossar';\$c['term_segment']='begriff';\$c['design_profile']='auto';update_option(UGE_Config::OPTION,UGE_Config::sanitize(\$c));UGE_Core::register_content();flush_rewrite_rules();"
+          docker exec wp wp term create uge_group Gesundheit --slug=gesundheit --allow-root
+          docker exec wp wp term create category Fütterung --slug=fuetterung --allow-root
+
+          MISSING=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Ohne Kategorie' --post_name=ohne-kategorie --post_content='MISSING-CONTENT' --porcelain)
+          docker exec wp wp post update $MISSING --post_status=publish --allow-root >/dev/null
+          test "$(docker exec wp wp post get $MISSING --field=post_status --allow-root)" = draft
+
+          INVALID=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Falsches Ziel' --post_name=falsches-ziel --post_content='INVALID-CONTENT' --porcelain)
+          docker exec wp wp post meta update $INVALID _uge_primary_category_id 999999 --allow-root
+          docker exec wp wp post update $INVALID --post_status=publish --allow-root >/dev/null
+          test "$(docker exec wp wp post get $INVALID --field=post_status --allow-root)" = draft
+
+          KOLIK=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Kolik --post_name=kolik --post_content='KOLIK-CONTENT' --porcelain)
+          docker exec wp wp post meta update $KOLIK _uge_primary_category_id $HEALTH --allow-root
+          docker exec wp wp post meta update $KOLIK _uge_short_definition 'Sammelbegriff für schmerzhafte Vorgänge im Bauchraum.' --allow-root
+          docker exec wp wp post update $KOLIK --post_status=publish --allow-root >/dev/null
+          test "$(docker exec wp wp post get $KOLIK --field=post_status --allow-root)" = publish
+
+          SAME_GROUP=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Gesundheit --post_name=gesundheit --post_content='GROUP-OVERLAP' --porcelain)
+          docker exec wp wp post meta update $SAME_GROUP _uge_primary_category_id $HEALTH --allow-root
+          docker exec wp wp post update $SAME_GROUP --post_status=publish --allow-root >/dev/null
+          test "$(docker exec wp wp post get $SAME_GROUP --field=post_status --allow-root)" = publish
+
+          SAME_WP_CAT=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Fütterung --post_name=fuetterung --post_content='WP-CAT-OVERLAP' --porcelain)
+          docker exec wp wp post meta update $SAME_WP_CAT _uge_primary_category_id $FEED --allow-root
+          docker exec wp wp post update $SAME_WP_CAT --post_status=publish --allow-root >/dev/null
+          test "$(docker exec wp wp post get $SAME_WP_CAT --field=post_status --allow-root)" = publish
+
+          DUP=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Kolik --post_name=kolik-zwei --post_content='DUP-CONTENT' --porcelain)
+          docker exec wp wp post meta update $DUP _uge_primary_category_id $HEALTH --allow-root
+          docker exec wp wp post update $DUP --post_status=publish --allow-root >/dev/null
+          test "$(docker exec wp wp post get $DUP --field=post_status --allow-root)" = draft
+
+          NORMAL=$(docker exec wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Kolik normaler Beitrag' --post_content='NORMAL-CONTENT' --porcelain)
+          test "$(docker exec wp wp post get $NORMAL --field=post_status --allow-root)" = publish
+          docker exec wp wp rewrite flush --hard --allow-root
+          echo "$KOLIK" >/tmp/kolik-id
+          echo UGE023_SAVE_POLICY_POSITIVE_NEGATIVE_PASS
+      - name: Frontend exact category link search and noindex filters
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8080/glossar/begriff/kolik/ -o /tmp/term
+          grep -q 'KOLIK-CONTENT' /tmp/term
+          grep -q 'class="uge-primary-category"' /tmp/term
+          grep -q 'href="http://127.0.0.1:8080/gesundheit/"' /tmp/term
+          grep -q '>Gesundheit</a>' /tmp/term
+          ! grep -q '>Pferdegesundheit</a>' /tmp/term
+          ! grep -qi 'name=.robots.*noindex' /tmp/term
+
+          curl -fsS http://127.0.0.1:8080/glossar/gesundheit/ -o /tmp/group
+          grep -qi 'noindex' /tmp/group
+
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_s=Kolik' -o /tmp/search
+          grep -q '>Kolik<' /tmp/search
+          ! grep -q 'Kolik normaler Beitrag' /tmp/search
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
+          grep -q 'aria-label="Glossar A bis Z"' /tmp/home
+          grep -q 'aria-label="Glossar-Bereiche"' /tmp/home
+          grep -q '#35422A' /tmp/home
+          echo UGE023_FRONTEND_SEMANTIC_LINK_FILTER_PASS
+      - name: Package tested candidate
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/u
+          zip -qr /tmp/universal-glossary-engine-0.2.3.zip universal-glossary-engine
+          unzip -t /tmp/universal-glossary-engine-0.2.3.zip
+          sha256sum /tmp/universal-glossary-engine-0.2.3.zip | tee /tmp/SHA256.txt
+      - name: Upload tested plugin
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.3-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.3.zip
+            /tmp/SHA256.txt
+          if-no-files-found: error
