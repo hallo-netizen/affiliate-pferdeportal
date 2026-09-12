@@ -27,12 +27,13 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- 66 reale Rassendatensätze unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/` im Register geführt.
-- Register und aktuelle Recherchecharge synchronisiert.
-- Neu hinzugekommen sind u. a. Irish Cob, Lipizzaner, Eriskay Pony, Hackney, Irish Draught, Irish Sport Horse, Irish Sport Pony, Kerry Bog Pony, Shagya-Araber, Australian Stock Horse, Curly Horse sowie mehrere amtlich geführte spanische Regionalrassen.
-- Dublettenregeln für Pottok/Pottoka, Hackney-Sektionen, Traditional Irish Horse und Welsh-Sektionen sind im Rassenregister dokumentiert.
-- Internationale Masterliste weiterhin unvollständig; kein Vollständigkeits-PASS.
-- Offene Detailfelder bleiben sichtbar offen.
+- **90 reale Rassendatensätze** sind im zentralen Rassenregister geführt.
+- Spanien wurde gegen den amtlichen MAPA-Pferderassenkatalog breit abgearbeitet; Pottoka wird nicht doppelt zum vorhandenen Pottok angelegt.
+- Deutschland wurde um Deutsches Classic Pony, Deutsches Reitpony, Deutsches Part-Bred Shetland Pony, Edelbluthaflinger, Süddeutsches, Schleswiger, Schwarzwälder und Rheinisch-Deutsches Kaltblut sowie Lewitzer und Leonharder erweitert.
+- Großbritannien wurde u. a. um Suffolk Punch, Cleveland Bay, Clydesdale, Shire und British Spotted Pony erweitert.
+- Niederlande: Friese sowie KWPN ergänzt; die vier KWPN-Fokrichtungen werden nicht künstlich als vier Rassen dupliziert.
+- Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
+- Offene Detailfelder bleiben sichtbar offen; einige Kernakten tragen ausdrücklich `NACHRECHERCHE_DETAILSTANDARD`.
 
 ## GLOSSAR – FORTSCHRITT
 
