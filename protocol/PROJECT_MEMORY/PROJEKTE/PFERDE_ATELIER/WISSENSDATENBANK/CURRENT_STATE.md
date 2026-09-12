@@ -16,24 +16,19 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 ## AKTUELLER BELASTBARER STAND
 
 - Zentrales Büro `WISSENSDATENBANK` aktiv.
-- Bürotür enthält Hausregeln, Konzept, Gebrauchsanweisung, Wegweiser und Trust-Regeln.
-- Themenpool bleibt maximaler Sammelpunkt für potentielle Oberthemen.
-- Aktenschränke entstehen nicht auf Vorrat.
-- Aktuell existieren genau zwei Aktenschränke:
-  - `PFERDERASSEN` – aktive Hauptrecherche.
-  - `GLOSSAR` – startbefüllt und als organische Querschnittsbasis eingerichtet.
+- Aktuell existieren genau zwei Aktenschränke: `PFERDERASSEN` und `GLOSSAR`.
+- `PFERDERASSEN` bleibt aktive Hauptrecherche; Glossar wächst nur organisch mit.
 - Recherchewissen bleibt von SEO, Kategorien, Textproduktion und Veröffentlichung getrennt.
-- Alte Adresse `PFERDERASSEN/START_HERE.md` bleibt nur Weiterweiser.
+- Trust-Regeln bleiben verbindlich: Primär-/Verbands-/staatliche Quellen vor Sekundärquellen; Lücken bleiben offen.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **96 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem letzten synchronisierten Stand hinzugekommen: Belgian Draught/Brabanter, American Miniature Horse, Konik polski, Bosnisches Gebirgspferd, Falabella und Basotho Pony.
-- American Miniature Horse und Falabella werden ausdrücklich als getrennte Rassen/Register geführt; Größe allein macht keinen Falabella.
-- Konik polski ist gegen das polnische Ursprungszuchtbuch gebunden.
-- Bosnisches Gebirgspferd und Basotho Pony wurden als quellengebundene Kernakten angelegt; formale Detailstandards bleiben dort sichtbar offen, wo sie noch nicht ausreichend belegt sind.
+- **108 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 96er-Stand neu: Aegidienberger, Huzule, Berber/Barb, Azteca, Morgan, Rocky Mountain Horse, Missouri Fox Trotter, Lusitano, Tennessee Walking Horse, Paso Fino, Peruanisches Pferd und Standardbred.
+- Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben offen, weil Status/Detailstandard noch nicht stark genug aus Primärquellen gebunden sind.
+- Dubletten-/Sektionenlogik bleibt strikt; moderne Zucht- und Registerrassen werden nicht mit bloßen Typen oder Kreuzungen gleichgesetzt.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
-- Offene Detailfelder bleiben sichtbar offen; einige Kernakten benötigen weitere Nachrecherche zum vollständigen Ursprungs-/Detailstandard.
+- Offene Detailfelder und Kernakten mit `NACHRECHERCHE_DETAILSTANDARD` bleiben sichtbar offen.
 
 ## GLOSSAR – FORTSCHRITT
 
