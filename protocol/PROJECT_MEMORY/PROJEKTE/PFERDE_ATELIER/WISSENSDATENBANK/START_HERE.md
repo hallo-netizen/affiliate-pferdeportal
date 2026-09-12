@@ -9,10 +9,10 @@ STATUS: AKTIV
 Das zentrale Recherche- und Faktenbüro des Pferde-Ateliers. Hier werden mögliche Wissensgebiete gesammelt, vor Recherche kritisch geprüft und anschließend als quellengebundene Fachakten aufgebaut.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du wissen willst, welche Recherchethemen es gibt, was offen ist, was bereits recherchiert wurde, welches Thema als Nächstes sinnvoll ist oder belastbare Fachfakten für spätere Artikel aufgebaut werden sollen.
+du wissen willst, welche Recherchethemen es gibt, was offen ist, was bereits recherchiert wurde, welches Thema als Nächstes sinnvoll ist oder belastbare Fachfakten bzw. Fachbegriffe für spätere Inhalte aufgebaut werden sollen.
 
 **DU DARFST …**  
-neue Themenideen in den zentralen Themenpool aufnehmen, offene Themen prüfen, ein freigegebenes Thema recherchieren, dafür genau einen Aktenschrank anlegen und Fakten/Quellen strukturiert pflegen.
+neue Themenideen in den zentralen Themenpool aufnehmen, offene Themen prüfen, ein freigegebenes Thema recherchieren, dafür einen Aktenschrank anlegen und Fakten/Quellen strukturiert pflegen. Während laufender Recherche dürfen relevante Fachbegriffe organisch in den bestehenden Glossar-Aktenschrank aufgenommen werden.
 
 **DU DARFST NICHT …**  
 für bloße Ideen bereits Aktenschränke anlegen, aus Recherche automatisch Artikel/Kategorien/URLs erzeugen, vorhandene SEO-/Kategorie-/Textwahrheiten duplizieren, schwache Quellen zur Hauptquelle machen, Fakten erfinden oder aus diesem Büro ungefragt TEXT/SEO/WordPress/AFFILIATE verändern.
@@ -24,16 +24,17 @@ für bloße Ideen bereits Aktenschränke anlegen, aus Recherche automatisch Arti
 
 # HAUSREGELN
 
-1. **Themenpool groß, Struktur klein.** Alle sinnvollen Ideen dürfen gesammelt werden. Ein Aktenschrank entsteht erst, wenn das Thema tatsächlich recherchiert wird.
+1. **Themenpool groß, Struktur klein.** Alle sinnvollen Ideen dürfen gesammelt werden. Ein thematischer Aktenschrank entsteht erst, wenn das Thema tatsächlich recherchiert wird.
 2. **Rechercheobjekt ≠ Artikel ≠ Kategorie.** Dieses Büro erzeugt Wissen, nicht automatisch öffentlichen Content.
 3. **Eine Fachwahrheit.** Jeder recherchierte Gegenstand liegt genau einmal im zuständigen Aktenschrank. Wegweiser und Statuslisten enthalten keine zweite Faktenkopie.
 4. **Nicht raten.** Fehlende Information wird als offen markiert.
 5. **Trust vor Vollständigkeit.** Lieber ein Feld offen lassen als eine schwache Quelle als Tatsache übernehmen.
 6. **Vor jeder neuen Themenrecherche zuerst Strukturprüfung.** Bestehende Kategorien/Artikel/SEO-Bestände werden auf Überschneidung und Kannibalisierungsrisiko geprüft. Diese Prüfung entscheidet über Forschungsumfang, nicht automatisch über Veröffentlichung.
 7. **Aktenschrank erst bei echter Recherche.** Keine leeren Schranklandschaften.
-8. **Erweiterbar bleiben.** Ein später neu erkannter sinnvoller Punkt darf in einem Themenmodell ergänzt und bei bestehenden Datensätzen nachrecherchiert werden.
-9. **Quellen rückverfolgbar.** Jede belastbare Aussage muss auf eine Quelle bzw. einen Quellenverbund zurückführbar sein.
-10. **Veröffentlichen entscheidet dieses Büro niemals.** Veröffentlichung, URL, Kategorie, Keyword und Kannibalisierung bleiben nachgelagerten zuständigen Systemen vorbehalten.
+8. **Glossar wächst organisch.** Erklärungswürdige Fachbegriffe aus realer Recherche dürfen im bereits vorhandenen Glossar recherchiert und abgelegt werden; dafür entsteht kein neues Büro und kein neuer Aktenschrank pro Begriff.
+9. **Erweiterbar bleiben.** Ein später neu erkannter sinnvoller Punkt darf in einem Themenmodell ergänzt und bei bestehenden Datensätzen nachrecherchiert werden.
+10. **Quellen rückverfolgbar.** Jede belastbare Aussage muss auf eine Quelle bzw. einen Quellenverbund zurückführbar sein.
+11. **Veröffentlichen entscheidet dieses Büro niemals.** Veröffentlichung, URL, Kategorie, Keyword und Kannibalisierung bleiben nachgelagerten zuständigen Systemen vorbehalten.
 
 ---
 
@@ -47,8 +48,10 @@ Maximaler Sammelpunkt für alle möglichen Oberthemen der Pferdewelt. Eine Idee 
 **2. THEMENPRÜFUNG**  
 Unmittelbar bevor echte Recherche startet: Abgrenzung, vorhandene Portalabdeckung, mögliche Kannibalisierung, sinnvolle Unterstruktur, notwendige Quellenarten, besondere Risiken.
 
-**3. AKTENSCHRANK**  
-Erst nach Start der Recherche. Ein Thema = ein Aktenschrank. Dort liegen Datenmodell, Register, Einzeldatensätze und Quellenbelege.
+**3. AKTENSCHRÄNKE**  
+Erst nach Start echter Recherche. Ein größeres Forschungsthema = ein Aktenschrank. Dort liegen Datenmodell, Register, Einzeldatensätze und Quellenbelege. Aktuell vorhanden:
+- `PFERDERASSEN/` → eine Rasse = ein Datensatz; aktive Hauptrecherche.
+- `GLOSSAR/` → ein Fachbegriff = ein Datensatz; organische Querschnittsbasis.
 
 **4. SPÄTERE NUTZUNG**  
 Fachwissen kann später von SEO/Text/anderen Büros gelesen werden. Es wird nicht automatisch veröffentlicht und nicht als zweite SEO-Datenbank benutzt.
@@ -73,7 +76,14 @@ Leitsatz:
 5. erst dann Aktenschrank anlegen, falls noch keiner existiert;
 6. Recherche durchführen und Status zentral nachziehen.
 
-## Wenn eine neue Idee auftaucht
+## Wenn während Recherche ein erklärungswürdiger Fachbegriff auftaucht
+1. `AKTENSCHRAENKE/GLOSSAR/GLOSSAR_REGISTER.md` prüfen;
+2. vorhandenen Begriff nicht duplizieren;
+3. neuen Begriff nur mit belastbarer Quelle anlegen;
+4. Ober-/Unterbereich zuordnen;
+5. `seo_status` nur als Prüfhinweis setzen – niemals als Veröffentlichungsfreigabe.
+
+## Wenn eine neue große Themenidee auftaucht
 Nur in `THEMENPOOL.md` aufnehmen. Kein Aktenschrank, keine Fachdateien auf Vorrat.
 
 ## Wenn ein Thema fertig recherchiert ist
@@ -87,11 +97,14 @@ Nur in `THEMENPOOL.md` aufnehmen. Kein Aktenschrank, keine Fachdateien auf Vorra
 # WEGWEISER
 
 - **Aktueller Bürostand:** `CURRENT_STATE.md`
-- **Aktuelle Arbeit / NEXT ACTION:** `HOBBYRAUM.md`
+- **Aktuelle Hauptarbeit / NEXT ACTION:** `HOBBYRAUM.md`
 - **Alle potentiellen Oberthemen + Status:** `THEMENPOOL.md`
 - **Verbindliche Recherche-/Trust-Regeln:** `RECHERCHE_STANDARD.md`
 - **Tatsächlich angelegte Forschungsbereiche:** `AKTENSCHRAENKE/START_HERE.md`
-- **Erster Aktenschrank:** `AKTENSCHRAENKE/PFERDERASSEN/START_HERE.md`
+- **Pferderassen:** `AKTENSCHRAENKE/PFERDERASSEN/START_HERE.md`
+- **Glossar:** `AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
+- **Glossar-Struktur:** `AKTENSCHRAENKE/GLOSSAR/GLOSSAR_STRUKTUR.md`
+- **Glossar-Begriffsregister:** `AKTENSCHRAENKE/GLOSSAR/GLOSSAR_REGISTER.md`
 - **Fehler:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → Originalquelle
 - **Warum geändert:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 - **Ziel:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
