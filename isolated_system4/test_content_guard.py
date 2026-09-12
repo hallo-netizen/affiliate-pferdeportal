@@ -8,8 +8,12 @@ def sha(value: str) -> str:
     return hashlib.sha256(value.encode('utf-8')).hexdigest()
 
 
+E1 = 'Die konkrete Auswahl richtet sich nach dem tatsächlichen Einsatzzweck und der sicheren Handhabung.'
+E2 = 'Materialzustand und passende Nutzung müssen vor dem Einsatz konkret geprüft werden.'
+SOURCE_EVIDENCE = E1 + '\n' + E2 + '\nZusätzlicher Quellenkontext für den lokalen Nachweis.'
+
+
 def good_research():
-    evidence = 'Eine reale Quellensicherung enthält konkrete, fachlich nutzbare Aussagen zum gebundenen Thema.'
     return {
         'contract': content_guard.RESEARCH_CONTRACT,
         'sources': [{
@@ -17,20 +21,18 @@ def good_research():
             'source_title': 'Fachquelle – konkrete Anleitung',
             'source_url': 'https://example.org/fachquelle',
             'retrieved_at': '2026-09-12T20:00:00Z',
-            'snapshot_sha256': sha(evidence),
-            'evidence': evidence,
+            'snapshot_sha256': sha(SOURCE_EVIDENCE),
+            'evidence': SOURCE_EVIDENCE,
         }],
     }
 
 
 def good_facts():
-    e1 = 'Die konkrete Auswahl richtet sich nach dem tatsächlichen Einsatzzweck und der sicheren Handhabung.'
-    e2 = 'Materialzustand und passende Nutzung müssen vor dem Einsatz konkret geprüft werden.'
     return {
         'contract': content_guard.FACTS_CONTRACT,
         'claims': [
-            {'fact_id': 'fact-a', 'source_id': 'src-official-1', 'statement': 'Der Einsatzzweck ist ein konkretes Auswahlkriterium.', 'evidence_text': e1, 'evidence_text_sha256': sha(e1)},
-            {'fact_id': 'fact-b', 'source_id': 'src-official-1', 'statement': 'Der Materialzustand ist vor der Nutzung zu prüfen.', 'evidence_text': e2, 'evidence_text_sha256': sha(e2)},
+            {'fact_id': 'fact-a', 'source_id': 'src-official-1', 'statement': 'Der Einsatzzweck ist ein konkretes Auswahlkriterium.', 'evidence_text': E1, 'evidence_text_sha256': sha(E1)},
+            {'fact_id': 'fact-b', 'source_id': 'src-official-1', 'statement': 'Der Materialzustand ist vor der Nutzung zu prüfen.', 'evidence_text': E2, 'evidence_text_sha256': sha(E2)},
         ],
     }
 
@@ -40,7 +42,7 @@ def good_pack():
     return {
         'contract': 'canonical_fact_pack_v1',
         'status': 'SOURCE_VERIFIED_PRODUCTION_READY',
-        'sources': [{key: source[key] for key in ('source_id','source_title','source_url','retrieved_at','snapshot_sha256')}],
+        'sources': [dict(source)],
         'claims': list(facts['claims']),
     }
 
@@ -68,9 +70,19 @@ class ContentGuardTests(unittest.TestCase):
         with self.assertRaisesRegex(content_guard.ContentGuardError, 'FACT_SOURCE_NOT_IN_RESEARCH'):
             content_guard.validate_facts_document(facts, good_research())
 
+    def test_fact_text_not_present_in_captured_source_is_blocked(self):
+        facts = good_facts(); invented = 'Diese erfundene Belegbehauptung steht nicht im gesicherten Quellenausschnitt.'; facts['claims'][0]['evidence_text'] = invented; facts['claims'][0]['evidence_text_sha256'] = sha(invented)
+        with self.assertRaisesRegex(content_guard.ContentGuardError, 'FACT_EVIDENCE_NOT_IN_SOURCE:0'):
+            content_guard.validate_facts_document(facts, good_research())
+
     def test_historical_bad_fact_pack_without_sources_is_blocked(self):
         bad = {'contract': 'canonical_fact_pack_v1', 'status': 'SOURCE_VERIFIED_PRODUCTION_READY', 'claims': good_facts()['claims']}
         with self.assertRaisesRegex(content_guard.ContentGuardError, 'FACT_PACK_SOURCES_MISSING'):
+            content_guard.validate_fact_pack(bad)
+
+    def test_fact_pack_source_without_captured_evidence_is_blocked(self):
+        bad = good_pack(); bad['sources'][0].pop('evidence')
+        with self.assertRaisesRegex(content_guard.ContentGuardError, 'FACT_PACK_SOURCE_EVIDENCE_INVALID'):
             content_guard.validate_fact_pack(bad)
 
     def test_unknown_article_fact_id_is_blocked(self):
