@@ -1,0 +1,123 @@
+     $query = isset($_GET['glossar_s']) ? trim(sanitize_text_field(wp_unslash($_GET['glossar_s']))) : '';
+        $letter = isset($_GET['glossar_letter']) ? strtoupper(substr(sanitize_text_field(wp_unslash($_GET['glossar_letter'])), 0, 1)) : '';
+        $filtered = $query !== '' || preg_match('/^[A-Z]$/', $letter);
+
+        ob_start();
+        echo '<div class="uge">';
+        echo self::render_hero($page_content);
+        echo self::render_search_tools();
+        echo self::render_navigation();
+        echo self::render_home_banner();
+        echo '<div id="uge-live-results" class="uge-live-results" aria-live="polite">';
+
+        if ($filtered) {
+            echo self::render_filtered_results($query, $letter);
+        } else {
+            $terms = get_posts([
+                'post_type' => UGE_Core::POST_TYPE,
+                'post_status' => 'publish',
+                'posts_per_page' => (int)$cfg['home_term_count'],
+                'orderby' => 'modified',
+                'order' => 'DESC',
+                'no_found_rows' => true,
+            ]);
+            echo '<section class="uge-home-latest" aria-labelledby="uge-latest-title">';
+            echo '<div class="uge-latest-head"><div class="uge-section-head"><span>Aktuell im Glossar</span><h2 id="uge-latest-title">Pferdewissen zum Entdecken</h2></div>';
+            if (count($terms) > 3) {
+                echo '<div class="uge-slider-controls" aria-label="Glossarbegriffe durchblättern"><button type="button" data-uge-slide="prev" aria-label="Vorherige Begriffe">&#8592;</button><button type="button" data-uge-slide="next" aria-label="Nächste Begriffe">&#8594;</button></div>';
+            }
+            echo '</div>';
+            echo self::render_cards($terms, true);
+            if (!$terms) { echo '<p>Es sind noch keine Glossarbegriffe veröffentlicht.</p>'; }
+            echo '</section>';
+            echo self::render_home_copy($page_content);
+        }
+        echo '</div>';
+        echo '</div>';
+        return (string)ob_get_clean();
+    }
+
+    private static function render_home_copy(string $page_content): string {
+        $copy = trim($page_content);
+        if ($copy === '' || (function_exists('has_shortcode') && has_shortcode($copy, 'universal_glossary'))) { return ''; }
+        return '<section class="uge-home-copy">' . wp_kses_post($copy) . '</section>';
+    }
+
+    public static function home_interactions(): void {
+        if (!self::is_home_page()) { return; }
+        ?>
+        <script>
+        (function(){
+            document.addEventListener('click',function(e){
+                var button=e.target.closest('[data-uge-slide]');
+                if(!button)return;
+                var track=document.querySelector('[data-uge-slider]');
+                if(!track)return;
+                var card=track.querySelector('.uge-card');
+                if(!card)return;
+                var gap=parseFloat(getComputedStyle(track).gap)||16;
+                var amount=card.getBoundingClientRect().width+gap;
+                track.scrollBy({left:button.dataset.ugeSlide==='next'?amount:-amount,behavior:'smooth'});
+            });
+
+            var form=document.querySelector('.uge-search-form');
+            var target=document.getElementById('uge-live-results');
+            if(!form||!target||!window.fetch)return;
+            var input=form.querySelector('input[name="glossar_s"]');
+            var status=form.querySelector('.uge-search-status');
+            if(!input)return;
+            var initial=target.innerHTML;
+            var timer=null;
+            var controller=null;
+
+            function setStatus(text){ if(status){ status.textContent=text||''; } }
+            function restore(){
+                if(controller){controller.abort();controller=null;}
+                target.innerHTML=initial;
+                target.classList.remove('is-loading');
+                setStatus('');
+            }
+            function search(){
+                var q=input.value.trim();
+                if(!q){restore();return;}
+                if(controller){controller.abort();}
+                controller=new AbortController();
+                var body=new FormData();
+                body.append('action','uge_search');
+                body.append('nonce',form.dataset.ugeNonce||'');
+                body.append('q',q);
+                target.classList.add('is-loading');
+                setStatus('Suche läuft …');
+                fetch(form.dataset.ugeAjaxUrl,{method:'POST',credentials:'same-origin',body:body,signal:controller.signal})
+                    .then(function(r){if(!r.ok)throw new Error('http');return r.json();})
+                    .then(function(data){
+                        if(!data||!data.success||!data.data||typeof data.data.html!=='string')throw new Error('payload');
+                        target.innerHTML=data.data.html;
+                        target.classList.remove('is-loading');
+                        setStatus(data.data.count===1?'1 Treffer':String(data.data.count||0)+' Treffer');
+                    })
+                    .catch(function(err){
+                        if(err&&err.name==='AbortError')return;
+                        target.classList.remove('is-loading');
+                        setStatus('Suche nicht verfügbar – Enter lädt die normale Suche.');
+                    });
+            }
+            input.addEventListener('input',function(){
+                window.clearTimeout(timer);
+                if(!input.value.trim()){restore();return;}
+                timer=window.setTimeout(search,220);
+            });
+            form.addEventListener('submit',function(e){
+                if(!input.value.trim())return;
+                e.preventDefault();
+                window.clearTimeout(timer);
+                search();
+            });
+        })();
+        </script>
+        <?php
+    }
+
+    public static function ajax_search(): void {
+        check_ajax_referer('uge_search', 'nonce');
+        $query = isset($_POST['q']) ? trim(s
