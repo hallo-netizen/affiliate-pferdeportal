@@ -248,7 +248,7 @@ jobs:
           jq -e '.policy == "GEPRUEFT_ONLY_DRAFT_IMPORT"' /tmp/campus-uge.json >/dev/null
           jq -e '.items | length == 7' /tmp/campus-uge.json >/dev/null
           jq -e '.skipped_unverified | length == 0' /tmp/campus-uge.json >/dev/null
-          jq -e '[.items[].title] | sort == ["Aalstrich","Ganasche","Kötenbehang","Röhrbein","Stockmaß","Widerrist","Zuchtbuch"] | sort' /tmp/campus-uge.json >/dev/null
+          jq -e '([.items[].title] | sort) == (["Aalstrich","Ganasche","Kötenbehang","Röhrbein","Stockmaß","Widerrist","Zuchtbuch"] | sort)' /tmp/campus-uge.json >/dev/null
           ! grep -q '"quellen"' /tmp/campus-uge.json
           ! grep -q '"recherche_status"' /tmp/campus-uge.json
           ! grep -q '"seo_status"' /tmp/campus-uge.json
