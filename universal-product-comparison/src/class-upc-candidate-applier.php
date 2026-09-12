@@ -9,11 +9,16 @@ class UPC_Candidate_Applier {
     private $wpdb;
     private $knowledge;
     private $maintenance;
+    private $comparison_maintenance;
 
-    public function __construct( $wpdb, $knowledge, $maintenance ) {
+    public function __construct( $wpdb, $knowledge, $maintenance, $comparison_maintenance = null ) {
         $this->wpdb = $wpdb;
         $this->knowledge = $knowledge;
         $this->maintenance = $maintenance;
+        $this->comparison_maintenance = $comparison_maintenance;
+        if ( null === $this->comparison_maintenance && class_exists( 'UPC_Maintenance' ) ) {
+            $this->comparison_maintenance = new UPC_Maintenance( $wpdb );
+        }
     }
 
     public function apply( array $candidate, array $release ) {
@@ -25,6 +30,9 @@ class UPC_Candidate_Applier {
         }
         if ( 'PASS' !== strtoupper( sanitize_text_field( $release['comparability_status'] ?? '' ) ) ) {
             return new WP_Error( 'UPC_CANDIDATE_COMPARABILITY_NOT_PASS', 'Comparability release must be PASS before candidate acceptance.' );
+        }
+        if ( ! is_object( $this->comparison_maintenance ) || ! method_exists( $this->comparison_maintenance, 'reevaluation_scope_for_new_product' ) ) {
+            return new WP_Error( 'UPC_CANDIDATE_REEVALUATION_RUNTIME_MISSING', 'Candidate reevaluation scope runtime is missing.' );
         }
 
         $identity = isset( $candidate['identity'] ) && is_array( $candidate['identity'] ) ? $candidate['identity'] : array();
@@ -95,12 +103,19 @@ class UPC_Candidate_Applier {
             }
         }
 
+        $scope = $this->comparison_maintenance->reevaluation_scope_for_new_product( (int) $product_id );
+        if ( is_wp_error( $scope ) ) {
+            $this->wpdb->query( 'ROLLBACK' );
+            return $scope;
+        }
+
         $this->wpdb->query( 'COMMIT' );
         return array(
             'status' => 'NEW_PRODUCT_ACCEPTED',
             'product_id' => (int) $product_id,
             'product_group_key' => $group_key,
             'reevaluate_product_group' => true,
+            'reevaluation_scope' => $scope,
             'automatic_comparison_created' => false,
             'article_write' => false,
         );
