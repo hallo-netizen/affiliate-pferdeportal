@@ -141,23 +141,53 @@ class UPK_Maintenance {
     }
 
     public function products_due_for_review( $verified_before, $limit = 100 ) {
+        return $this->select_due_products( '', $verified_before, $limit );
+    }
+
+    public function products_due_for_group_review( $product_group_key, $verified_before, $limit = 100 ) {
+        $product_group_key = sanitize_key( $product_group_key );
+        if ( '' === $product_group_key ) {
+            return new WP_Error( 'UPK_PRODUCT_GROUP_KEY_MISSING', 'Product group key is required.' );
+        }
+
+        return $this->select_due_products( $product_group_key, $verified_before, $limit );
+    }
+
+    private function select_due_products( $product_group_key, $verified_before, $limit ) {
         $cutoff = $this->normalize_datetime( $verified_before );
         if ( is_wp_error( $cutoff ) ) {
             return $cutoff;
         }
 
         $limit = max( 1, min( 500, absint( $limit ) ) );
-        $ids = $this->wpdb->get_col(
-            $this->wpdb->prepare(
-                "SELECT id FROM {$this->products}
-                 WHERE last_verified_at <= %s
-                   AND lifecycle_status IN ('ACTIVE','TEMPORARILY_UNAVAILABLE','UNKNOWN')
-                 ORDER BY last_verified_at ASC, id ASC
-                 LIMIT %d",
-                $cutoff,
-                $limit
-            )
-        );
+
+        if ( '' !== $product_group_key ) {
+            $ids = $this->wpdb->get_col(
+                $this->wpdb->prepare(
+                    "SELECT id FROM {$this->products}
+                     WHERE product_group_key = %s
+                       AND last_verified_at <= %s
+                       AND lifecycle_status IN ('ACTIVE','TEMPORARILY_UNAVAILABLE','UNKNOWN')
+                     ORDER BY last_verified_at ASC, id ASC
+                     LIMIT %d",
+                    $product_group_key,
+                    $cutoff,
+                    $limit
+                )
+            );
+        } else {
+            $ids = $this->wpdb->get_col(
+                $this->wpdb->prepare(
+                    "SELECT id FROM {$this->products}
+                     WHERE last_verified_at <= %s
+                       AND lifecycle_status IN ('ACTIVE','TEMPORARILY_UNAVAILABLE','UNKNOWN')
+                     ORDER BY last_verified_at ASC, id ASC
+                     LIMIT %d",
+                    $cutoff,
+                    $limit
+                )
+            );
+        }
 
         return array_values( array_map( 'intval', is_array( $ids ) ? $ids : array() ) );
     }
