@@ -34,13 +34,18 @@ Geprüft wurden zwei Konfigurationen mit demselben Core:
 Ergebnis:
 zweite Portalnutzung ohne Coreänderung PASS.
 
+Zusätzliche Konfliktprüfung nach Erstlauf:
+- kein doppeltes Canonical durch eigene Ausgabe;
+- Robots über WordPress-/Yoast-Schnittstellen statt zweitem Meta-Tag;
+- keine doppelte Glossarausgabe bei bewusst gesetztem Shortcode.
+
 ZIP-Struktur:
 - Single-Root PASS;
 - Pflichtdateien PASS;
 - Pluginheader PASS.
 
-Prototyp-ZIP SHA-256:
-`e24b35c7bad06b4627138c248f47d0350bb024db9a4458901d803449d37b78df`
+Aktueller Prototyp-ZIP SHA-256:
+`1405e0cd5b0c9a3db113e69c75ca478fc0b367e163d9eb7bd7c2f33eb7c74ab5`
 
 ## Noch NICHT bewiesen
 
