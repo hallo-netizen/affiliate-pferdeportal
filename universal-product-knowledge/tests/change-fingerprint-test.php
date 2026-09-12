@@ -48,12 +48,12 @@ $knowledge->product_bundle = array(
     ),
     'facts' => array(
         array(
-            'fact_key' => 'denier', 'fact_value' => '1200', 'unit' => 'D',
+            'fact_key' => 'denier', 'fact_value' => '1200', 'fact_note' => '', 'unit' => 'D',
             'source_url' => 'https://maker.example/model-one', 'source_type' => 'MANUFACTURER',
             'verified_at' => '2026-09-01 10:00:00', 'fact_status' => 'VERIFIED',
         ),
         array(
-            'fact_key' => 'fill', 'fact_value' => '0', 'unit' => 'g',
+            'fact_key' => 'fill', 'fact_value' => '0', 'fact_note' => '', 'unit' => 'g',
             'source_url' => 'https://maker.example/model-one', 'source_type' => 'MANUFACTURER',
             'verified_at' => '2026-09-01 10:00:00', 'fact_status' => 'VERIFIED',
         ),
@@ -79,6 +79,11 @@ $hash_fact_changed = $fingerprint->product( 1 );
 fingerprint_assert( $hash_a !== $hash_fact_changed, 'fact value change triggers fingerprint change' );
 
 $knowledge->product_bundle['facts'][0]['fact_value'] = '0';
+$knowledge->product_bundle['facts'][0]['fact_note'] = 'Nicht glätten.';
+$hash_note_changed = $fingerprint->product( 1 );
+fingerprint_assert( $hash_a !== $hash_note_changed, 'fact note change triggers fingerprint change' );
+
+$knowledge->product_bundle['facts'][0]['fact_note'] = '';
 $knowledge->product_bundle['lifecycle_status'] = 'DISCONTINUED';
 $hash_lifecycle_changed = $fingerprint->product( 1 );
 fingerprint_assert( $hash_a !== $hash_lifecycle_changed, 'lifecycle change triggers fingerprint change' );
@@ -91,7 +96,7 @@ $knowledge->variant_bundle = array(
     'identifiers' => array( array( 'identifier_type' => 'EAN', 'identifier_value' => '4000000000018' ) ),
     'facts' => array(
         array(
-            'fact_key' => 'fill', 'fact_value' => '0', 'unit' => 'g',
+            'fact_key' => 'fill', 'fact_value' => '0', 'fact_note' => '', 'unit' => 'g',
             'source_url' => 'https://maker.example/model-one-0g', 'source_type' => 'MANUFACTURER',
             'verified_at' => '2026-09-01 10:00:00', 'fact_status' => 'VERIFIED',
         ),
