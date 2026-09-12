@@ -1,7 +1,7 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "adcell-6729-version-bind-20260912",
-  "goal": "Der kanonische ADCELL API-v2 Sourcefix auf 6.72.8 ist committed und hat Positiv/Negativ, Awin/OTTO-Identitaet, Banner, PHP, Release-Guard sowie Fresh-Unpack/Identity bestanden. Naechster technischer Schritt ist ausschliesslich der bereits lokal gepruefte version-only Sprung 6.72.8 -> 6.72.9: Plugin-Header, const VERSION und readme Stable tag. Keine Fachlogik aendern. Die grossen Sourcebytes nur ueber einen nachweislich bytegenauen Transportweg schreiben. Danach dieselben Gates auf dem committed 6.72.9-Stand erneut ausfuehren. Live-PASS bleibt bis zum echten ADCELL API + WordPress/MariaDB E2E gesperrt.",
+  "task_id": "adcell-67219-merged-canonical-gates-20260912",
+  "goal": "Der zusammengefuehrte Affiliate-Zentrale-Stand 6.72.19 ist kanonisch auf affiliate-release-current gebunden: Pluginbuero-6.72.17 bleibt erhalten und der bereits gepruefte ADCELL-API-v2-Fix ist integriert. Jetzt ausschliesslich committed Gates auf exakt diesem kanonischen Stand ausfuehren, danach Fresh-Unpack und Source/ZIP-Byteidentitaet 26/26. Keine Fachlogik aendern. Live-PASS bleibt bis zum echten ADCELL API + WordPress/MariaDB E2E gesperrt.",
   "image": "php:8.2-cli",
   "inputs": [
     {"src":"../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php","dest":"pferdeportal-affiliate-router.php"},
@@ -17,18 +17,17 @@
     {"src":"test_adcell_awin_otto_unchanged.php","dest":"test_adcell_awin_otto_unchanged.php"},
     {"src":"test_banner_distribution_behavior.php","dest":"test_banner_distribution_behavior.php"}
   ],
-  "writable": [
-    "pferdeportal-affiliate-router.php",
-    "readme.txt"
-  ],
+  "writable": [],
   "command": "php -l pferdeportal-affiliate-router.php && php -l trait-ppar-provider-registry.php && php -l trait-ppar-network-sync.php && php -l trait-ppar-automation-suite.php && php -l test_adcell_api_v2_automation.php && php -l test_adcell_awin_otto_unchanged.php && php -l test_banner_distribution_behavior.php",
   "tests": [
-    "Version diff must be exactly: plugin Header 6.72.8->6.72.9, const VERSION 6.72.8->6.72.9, readme Stable tag 6.72.8->6.72.9; no other source change",
+    "Canonical version markers must all equal 6.72.19",
     "php test_adcell_api_v2_automation.php",
+    "ADCELL runtime positive-negative contract harness on canonical 6.72.19",
     "php test_adcell_awin_otto_unchanged.php",
     "php test_banner_distribution_behavior.php",
-    "original release_guard.py governance/source/tree/start on committed 6.72.9",
-    "Fresh-Unpack + Source/Unpack byte identity 26/26"
+    "PHP lint 21/21",
+    "original release_guard.py governance-check, source-check, tree-check, start --branch affiliate-release-current",
+    "Fresh-Unpack + Source/ZIP byte identity 26/26"
   ],
   "timeout_seconds": 600
 }
