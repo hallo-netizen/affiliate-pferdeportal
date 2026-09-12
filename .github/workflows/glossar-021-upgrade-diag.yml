@@ -1,0 +1,58 @@
+name: Glossar 0.2.1 Upgrade Diagnostic
+
+on:
+  push:
+    branches: [hobbyroom/glossar-021-hardtest-final]
+    paths: ['.github/workflows/glossar-021-upgrade-diag.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          T='protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp'
+          mkdir -p .tmp/candidate .tmp/live
+          cat "$T/uge020-final-collision-part1.b64" "$T/uge020-final-collision-part2.b64" "$T/uge020-final-collision-part3.b64" "$T/uge020-final-collision-part4.b64" | base64 -d >/tmp/base.zip
+          unzip -q /tmp/base.zip -d .tmp/candidate
+          base64 -d "$T/uge021.patch.gz.b64" | gzip -d >/tmp/p.patch
+          patch -d .tmp/candidate/universal-glossary-engine -p1 </tmp/p.patch
+          cp -a protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/0.1.0/universal-glossary-engine .tmp/live/universal-glossary-engine
+      - name: Real old install then in-place update
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker network create dnet
+          docker run -d --name db --network dnet -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -proot' --health-interval=3s --health-timeout=3s --health-retries=30 mysql:8.0
+          for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
+          docker run -d --name wp --network dnet -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v "$GITHUB_WORKSPACE/.tmp/live/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine" wordpress:php8.1-apache
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp wp:/usr/local/bin/wp; docker exec wp chmod +x /usr/local/bin/wp
+          docker exec wp wp core install --allow-root --url='http://127.0.0.1:8080' --title=x --admin_user=admin --admin_password=x123456789 --admin_email=x@example.test --skip-email
+          docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root
+          docker exec wp wp plugin activate universal-glossary-engine --allow-root
+          ID=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=publish --post_title=Aalstrich --post_name=aalstrich --post_content='OLD-CONTENT' --porcelain)
+          docker exec wp wp rewrite flush --hard --allow-root
+          echo "OLD_STATUS=$(curl -sS -o /tmp/old -w '%{http_code}' http://127.0.0.1:8080/glossar/aalstrich/)"
+          grep -q OLD-CONTENT /tmp/old
+          rsync -a --delete .tmp/candidate/universal-glossary-engine/ .tmp/live/universal-glossary-engine/
+          echo "MAIN_HEADER=$(grep 'Version:' .tmp/live/universal-glossary-engine/universal-glossary-engine.php | head -1)"
+          echo "PLUGIN_VERSION=$(docker exec wp wp plugin get universal-glossary-engine --field=version --allow-root || true)"
+          echo "OPTION_BEFORE=$(docker exec wp wp option get uge_rewrite_schema_version --allow-root 2>&1 || true)"
+          docker exec wp wp eval --allow-root 'echo "LOADED_VERSION=".UGE_VERSION.PHP_EOL; echo "SCHEMA=".get_option(UGE_Core::REWRITE_SCHEMA_OPTION,"MISSING").PHP_EOL; echo "PERMALINK=".get_permalink(get_page_by_path("aalstrich",OBJECT,"uge_term")).PHP_EOL;'
+          echo "OPTION_AFTER=$(docker exec wp wp option get uge_rewrite_schema_version --allow-root 2>&1 || true)"
+          NEW_STATUS=$(curl -sS -o /tmp/new -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/aalstrich/)
+          echo "NEW_STATUS=$NEW_STATUS"
+          grep -o 'OLD-CONTENT' /tmp/new || true
+          OLD2=$(curl -sS -o /tmp/old2 -w '%{http_code}' http://127.0.0.1:8080/glossar/aalstrich/)
+          echo "OLD_AFTER=$OLD2"
+          test "$NEW_STATUS" = 200
+          grep -q OLD-CONTENT /tmp/new
