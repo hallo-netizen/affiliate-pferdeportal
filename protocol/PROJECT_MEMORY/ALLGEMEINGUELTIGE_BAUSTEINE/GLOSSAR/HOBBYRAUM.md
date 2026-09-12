@@ -104,7 +104,7 @@ neutraler Core + kleiner Adapter. Kein zweiter kompletter Plugin-Fork.
 ## RÜCKGABEWEG
 
 Projektanwendung Pferde Atelier:
-`../../../PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
+`../../PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
 
 Fachquelle Pferdebegriffe:
-`../../../PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`
+`../../PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`
