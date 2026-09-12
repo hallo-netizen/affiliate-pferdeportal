@@ -19,7 +19,6 @@ assert a.count('class="uge-topic-icon"') == 10
 assert 'justify-items:center' in s
 assert 'q.length<2' in s
 assert 'AD-home_banner' in s
-# Every rendered glossary-term and topic link on the home page must point to the expected glossary routes.
 links=sorted(set(re.findall(r'href="(http://127\.0\.0\.1:8080/glossar/begriff/[^\"]+/)"',s)))
 assert links, 'no glossary term links on home'
 open('/tmp/home-term-links','w').write('\n'.join(links)+'\n')
@@ -61,17 +60,26 @@ echo UGE025_AJAX_TERM_ONLY_POSITIVE_NEGATIVE_PASS
 test "$(curl -sS -o /tmp/term -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufbein/)" = 200
 grep -q FULL-HUFBEIN-SENTINEL /tmp/term
 python3 - <<'PY'
+import re
 s=open('/tmp/term',encoding='utf8').read()
-pos=[s.index(x) for x in ['>Startseite</a>','>Glossar</a>','>Gesundheit</a>','>Hufbein</span>']]
+b=re.search(r'<nav class="uge-breadcrumbs"[^>]*>(.*?)</nav>',s,re.S); assert b
+bc=b.group(1)
+pos=[bc.index(x) for x in ['>Startseite</a>','>Glossar</a>','>Gesundheit</a>','>Hufbein</span>']]
 assert pos==sorted(pos),pos
+# The semantic portal-category link is exactly the category label and points to the portal category, not a Glossar filter page.
+m=re.findall(r'<p class="uge-primary-category">Zum Themenbereich: <a href="([^"]+)">([^<]+)</a></p>',s)
+assert m==[('http://127.0.0.1:8080/gesundheit/','Gesundheit')],m
 PY
 grep -q 'AD-top' /tmp/term; grep -q 'AD-inline' /tmp/term; grep -q 'AD-bottom' /tmp/term
 test "$(curl -sS -o /tmp/missing -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/nicht-da/)" = 404
 test "$(curl -sS -o /tmp/old -w '%{http_code}' http://127.0.0.1:8080/glossar/hufbein/)" = 301
 test "$(curl -sS -o /tmp/cat -w '%{http_code}' http://127.0.0.1:8080/glossar/gesundheit/)" = 200
 python3 - <<'PY'
+import re
 s=open('/tmp/cat',encoding='utf8').read()
-pos=[s.index(x) for x in ['>Startseite</a>','>Glossar</a>','aria-current="page">Gesundheit</span>']]
+b=re.search(r'<nav class="uge-breadcrumbs"[^>]*>(.*?)</nav>',s,re.S); assert b
+bc=b.group(1)
+pos=[bc.index(x) for x in ['>Startseite</a>','>Glossar</a>','aria-current="page">Gesundheit</span>']]
 assert pos==sorted(pos),pos
 PY
 grep -q '/glossar/begriff/hufbein/' /tmp/cat
@@ -82,4 +90,5 @@ grep -q CATEGORY-OVERLAP-SENTINEL /tmp/same-term
 test "$(curl -sS -o /tmp/rassen -w '%{http_code}' http://127.0.0.1:8080/glossar/rassen-zucht/)" = 200
 grep -q Aalstrich /tmp/rassen
 echo UGE025_BREADCRUMB_ROUTE_COLLISION_PASS
+echo UGE025_PRIMARY_CATEGORY_EXACT_LINK_PASS
 echo UGE025_FRONTEND_POSITIVE_NEGATIVE_PASS
