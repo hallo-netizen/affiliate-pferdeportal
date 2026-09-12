@@ -256,12 +256,91 @@ trait PPAR_Provider_Registry_Trait {
         return '<span class="ppar-network-status ppar-network-neutral">Chefsteuerung: Automatik</span>';
     }
 
-    private function provider_control_url($provider) {
+    public function provider_control_url($provider) {
         return add_query_arg(array(
             'page' => 'affiliate-portal-control',
             'scope_type' => 'provider',
             'scope_key' => sanitize_key((string) $provider),
         ), admin_url('admin.php'));
+    }
+
+
+    /** Compact provider channel state used by the one-click pause/resume UI. */
+    private function provider_channel_state_all() {
+        $state = get_option(self::OPTION_PROVIDER_CHANNEL_STATE, array());
+        return is_array($state) ? $state : array();
+    }
+
+    public function provider_channel_snapshot($provider) {
+        $provider = sanitize_key((string) $provider);
+        $all = $this->provider_channel_state_all();
+        $stored = is_array($all[$provider] ?? null) ? $all[$provider] : array();
+        $control = $this->provider_control_snapshot($provider);
+        $control_status = sanitize_key((string) ($control['status'] ?? 'automatic'));
+        $paused = !empty($stored['paused']);
+        $status = $control_status === 'veto' ? 'veto' : ($paused ? 'paused' : $control_status);
+        return array(
+            'provider'=>$provider,
+            'status'=>$status,
+            'paused'=>$paused,
+            'veto'=>$control_status === 'veto',
+            'reason'=>$paused ? sanitize_text_field((string) ($stored['reason'] ?? '')) : sanitize_text_field((string) ($control['reason'] ?? '')),
+            'updated_at'=>absint($stored['updated_at'] ?? 0),
+        );
+    }
+
+    /**
+     * One-click channel switch. It stores only a reversible runtime pause flag;
+     * credentials, imported data, campaigns, provider settings and existing
+     * Chefentscheidungen stay untouched and reappear exactly after resume.
+     */
+    public function provider_channel_set_paused($provider, $paused, $reason = '') {
+        $provider = sanitize_key((string) $provider);
+        if (!$this->provider_exists($provider)) {
+            return new WP_Error('provider_channel_unknown', 'Unbekannter Affiliate-Kanal.');
+        }
+        $definition = $this->provider_definition($provider);
+        if (!is_array($definition) || sanitize_key((string) ($definition['state'] ?? '')) !== 'active') {
+            return new WP_Error('provider_channel_not_active', 'Affiliate-Kanal ist nicht produktiv registriert.');
+        }
+        $all = $this->provider_channel_state_all();
+        $old = is_array($all[$provider] ?? null) ? $all[$provider] : array();
+        $paused = (bool) $paused;
+        $reason = sanitize_text_field((string) $reason);
+        if ($paused && $reason === '') { $reason = 'Kanal per Schnellschalter pausiert.'; }
+        if (!$paused && $reason === '') { $reason = 'Kanal per Schnellschalter wieder aktiviert.'; }
+        $all[$provider] = array(
+            'paused'=>$paused ? 1 : 0,
+            'reason'=>$reason,
+            'updated_at'=>time(),
+            'updated_by'=>function_exists('get_current_user_id') ? absint(get_current_user_id()) : 0,
+        );
+        update_option(self::OPTION_PROVIDER_CHANNEL_STATE, $all, false);
+        if (method_exists($this, 'control_log_event') && method_exists($this, 'output_local_portal_key')) {
+            $portal_key = sanitize_key((string) $this->output_local_portal_key());
+            $this->control_log_event('provider_channel_toggle', $portal_key, 'provider', $provider, !empty($old['paused']) ? 'paused' : 'automatic', $paused ? 'paused' : 'automatic', $reason, array('provider'=>$provider));
+        }
+        return true;
+    }
+
+    /** Backend/public runtime pause gate independent from credentials/settings. */
+    public function provider_channel_pause_gate($provider) {
+        $provider = sanitize_key((string) $provider);
+        if ($provider === '' || !$this->provider_exists($provider)) {
+            return new WP_Error('provider_channel_unknown', 'Unbekannter Affiliate-Kanal.');
+        }
+        $all = $this->provider_channel_state_all();
+        $stored = is_array($all[$provider] ?? null) ? $all[$provider] : array();
+        if (!empty($stored['paused'])) {
+            return new WP_Error('provider_channel_paused', (string) (($stored['reason'] ?? '') ?: 'Affiliate-Kanal ist pausiert.'));
+        }
+        // A hard provider veto is stronger than the quick switch and must also
+        // keep backend provider work stopped until the veto itself is removed.
+        $control = $this->provider_control_snapshot($provider);
+        if (sanitize_key((string) ($control['status'] ?? 'automatic')) === 'veto') {
+            return new WP_Error('provider_channel_veto', (string) (($control['reason'] ?? '') ?: 'Affiliate-Kanal ist per Chef-Veto gesperrt.'));
+        }
+        return true;
     }
 
     /**

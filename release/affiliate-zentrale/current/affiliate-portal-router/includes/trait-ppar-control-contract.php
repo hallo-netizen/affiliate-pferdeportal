@@ -276,6 +276,10 @@ trait PPAR_Control_Contract_Trait {
         if ($provider === '' || $portal_key === '') {
             return new WP_Error('control_provider_context_missing', 'Provider- oder Portalkontext fehlt.');
         }
+        if (method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate($provider);
+            if (is_wp_error($channel_gate)) { return $channel_gate; }
+        }
         if (method_exists($this, 'provider_exists') && !$this->provider_exists($provider)) {
             return new WP_Error('control_provider_unknown', 'Provider ist nicht im zentralen Providerregister registriert.');
         }

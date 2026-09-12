@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.8
+ * Version: 6.72.19
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -45,7 +45,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.8';
+    const VERSION = '6.72.19';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -100,6 +100,7 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_CONTROL_SCHEMA_VERSION = 'ppar_control_schema_version';
     const OPTION_CONTROL_SETTINGS = 'ppar_control_settings_v1';
     const OPTION_PROVIDER_ACCESS_STATE = 'ppar_provider_access_state_v1';
+    const OPTION_PROVIDER_CHANNEL_STATE = 'ppar_provider_channel_state_v1';
     const OPTION_PORTAL_REGISTRY = 'ppar_portal_registry_v1';
     const OPTION_NETWORK_EBAY = 'ppar_network_ebay_v1';
     const OPTION_NETWORK_IDEALO = 'ppar_network_idealo_v1';
@@ -1858,6 +1859,22 @@ JS;
         return array('campaign'=>$campaign,'specificity'=>1000,'matches'=>1,'priority'=>1000,'reason'=>$reason);
     }
 
+    /**
+     * A fixed editorial assignment remains stored, but a deliberately paused
+     * provider may temporarily yield its slot to normal automatic selection.
+     * Any other fixed-assignment failure remains fail-closed.
+     */
+    private function fixed_campaign_provider_is_paused($post_id) {
+        $post_id = absint($post_id);
+        if ($post_id <= 0) { return false; }
+        $campaign = $this->campaign_from_post(get_post($post_id));
+        if (!is_array($campaign)) { return false; }
+        $provider = sanitize_key((string) ($campaign['network'] ?? ''));
+        if ($provider === '' || !method_exists($this, 'provider_channel_pause_gate')) { return false; }
+        $gate = $this->provider_channel_pause_gate($provider);
+        return is_wp_error($gate) && $gate->get_error_code() === 'provider_channel_paused';
+    }
+
     private function assignment_selection_for_slot($context, $slot_type) {
         $found = $this->assignment_for_context($context);
         if (!$found) { return array('handled'=>false); }
@@ -1871,7 +1888,10 @@ JS;
             $mode = sanitize_key((string)($data['banner_mode'] ?? 'automatic'));
             if ($mode === 'none') { return array('handled'=>true,'disabled'=>true,'reason'=>'Banner ausdrücklich deaktiviert (' . $suffix . ').'); }
             if ($mode === 'fixed') {
-                return array('handled'=>true,'selection'=>$this->fixed_campaign_selection(absint($data['banner_id'] ?? 0), $slot_type, 'Fest zugeordnet, ' . $suffix . '.'));
+                $fixed_id = absint($data['banner_id'] ?? 0);
+                $selection = $this->fixed_campaign_selection($fixed_id, $slot_type, 'Fest zugeordnet, ' . $suffix . '.');
+                if (!$selection && $this->fixed_campaign_provider_is_paused($fixed_id)) { return array('handled'=>false,'fallback_reason'=>'Fest zugeordneter Provider ist pausiert; Automatik übernimmt vorübergehend.'); }
+                return array('handled'=>true,'selection'=>$selection);
             }
         }
         if ($this->slot_required_creative_type($slot_type) === 'product') {
@@ -1891,7 +1911,9 @@ JS;
                     }
                 }
                 $id = $ids[$index-1] ?? 0;
-                return array('handled'=>true,'selection'=>$this->fixed_campaign_selection($id, $slot_type, 'Produktposition ' . $index . ' fest zugeordnet, ' . $suffix . '.'));
+                $selection = $this->fixed_campaign_selection($id, $slot_type, 'Produktposition ' . $index . ' fest zugeordnet, ' . $suffix . '.');
+                if (!$selection && $this->fixed_campaign_provider_is_paused($id)) { return array('handled'=>false,'fallback_reason'=>'Fest zugeordneter Provider ist pausiert; Automatik übernimmt diese Position vorübergehend.'); }
+                return array('handled'=>true,'selection'=>$selection);
             }
         }
         return array('handled'=>false);

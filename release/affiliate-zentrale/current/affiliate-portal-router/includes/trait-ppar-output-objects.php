@@ -1780,6 +1780,44 @@ trait PPAR_Output_Objects_Trait {
         return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->output_objects_table()} WHERE id=%d", absint($id)), ARRAY_A);
     }
 
+    /**
+     * Resolve the canonical Digistore24 Werbemittel entry from immutable creative
+     * bindings. Older live rows may have lost partner_external_id while their
+     * generated external_id still contains the exact entry number.
+     *
+     * Never "strip all digits" from arbitrary strings: Digistore24 itself contains
+     * the digits 24 and could silently turn a malformed id into the wrong entry.
+     */
+    private function output_digistore24_entry_id($row, $object = array()) {
+        $candidates = array();
+        $sources = array(
+            'creative_partner'=>(string) ($row['partner_external_id'] ?? ''),
+            'object_partner'=>(string) ($object['partner_external_id'] ?? ''),
+        );
+        foreach ($sources as $label=>$raw) {
+            $raw = trim($raw);
+            if ($raw === '') { continue; }
+            if (preg_match('/^entry-(\d+)$/', $raw, $m) || preg_match('/^(\d+)$/', $raw, $m)) {
+                $candidates[$label] = ltrim($m[1], '0');
+                if ($candidates[$label] === '') { $candidates[$label] = '0'; }
+            }
+        }
+        $external_id = trim((string) ($row['external_id'] ?? ''));
+        if ($external_id !== '' && preg_match('/^ds24-(\d+)-[a-f0-9]{24}$/i', $external_id, $m)) {
+            $candidates['creative_external'] = ltrim($m[1], '0');
+            if ($candidates['creative_external'] === '') { $candidates['creative_external'] = '0'; }
+        }
+        $candidates = array_filter($candidates, static function($value){ return ctype_digit((string)$value) && (int)$value > 0; });
+        if (!$candidates) {
+            return new WP_Error('output_digistore24_entry_binding_missing', 'Kanonische Digistore24-Werbemittel-ID fehlt am importierten Vendor-Banner.');
+        }
+        $unique = array_values(array_unique(array_values($candidates)));
+        if (count($unique) !== 1) {
+            return new WP_Error('output_digistore24_entry_binding_conflict', 'Digistore24-Werbemittelbindung ist widersprüchlich; Ausgabe bleibt gesperrt.');
+        }
+        return (string) $unique[0];
+    }
+
     private function output_object_revalidate($object) {
         if (!is_array($object)) { return new WP_Error('output_object_missing','Ausgabeobjekt fehlt.'); }
         if (method_exists($this, 'control_get_decision')) {
@@ -1800,17 +1838,42 @@ trait PPAR_Output_Objects_Trait {
                 || sanitize_key((string) ($object['output_type'] ?? '')) !== 'portal_banner') {
                 return new WP_Error('output_digistore24_source_invalid', 'Digistore24-Ausgabe ist nicht vollständig an ein echtes Vendor-Banner gebunden.');
             }
-            $entry_id = preg_replace('/[^0-9]/', '', preg_replace('/^entry-/', '', (string) ($row['partner_external_id'] ?? '')));
-            $entry = method_exists($this, 'digistore24_marketplace_item') ? $this->digistore24_marketplace_item($entry_id) : array();
-            $proof = method_exists($this, 'digistore24_affiliation_gate') ? $this->digistore24_affiliation_gate((string) ($entry['main_product_id'] ?? ''), false) : new WP_Error('output_digistore24_gate_missing', 'Digistore24-Schlussprüfung fehlt.');
+            $entry_id = $this->output_digistore24_entry_id($row, $object);
+            if (is_wp_error($entry_id)) { return $entry_id; }
+            $tracking_product_id = method_exists($this, 'digistore24_tracking_product_id') ? $this->digistore24_tracking_product_id((string) ($row['tracking_url'] ?? '')) : '';
+            $manual_proof = method_exists($this, 'digistore24_manual_csv_affiliation_gate')
+                ? $this->digistore24_manual_csv_affiliation_gate($entry_id, $tracking_product_id)
+                : new WP_Error('output_digistore24_manual_gate_missing', 'Digistore24-CSV-Schlussprüfung fehlt.');
+            $manual_source_bound = method_exists($this, 'digistore24_manual_csv_source_bound') && $this->digistore24_manual_csv_source_bound($entry_id);
+            if ($manual_source_bound) {
+                // A manual-CSV source must be decided by its bound CSV proof. Never
+                // replace that precise result with the generic API affiliation error.
+                if (is_wp_error($manual_proof)) { return $manual_proof; }
+                $proof = $manual_proof;
+            } elseif (!is_wp_error($manual_proof)) {
+                $proof = $manual_proof;
+            } else {
+                // Existing API path stays intact for genuinely API-derived sources.
+                $entry = method_exists($this, 'digistore24_marketplace_item') ? $this->digistore24_marketplace_item($entry_id) : array();
+                $proof = method_exists($this, 'digistore24_affiliation_gate') ? $this->digistore24_affiliation_gate((string) ($entry['main_product_id'] ?? ''), false) : new WP_Error('output_digistore24_gate_missing', 'Digistore24-Schlussprüfung fehlt.');
+                if (is_wp_error($proof) && $tracking_product_id !== '' && method_exists($this, 'digistore24_affiliation_gate')) {
+                    $proof = $this->digistore24_affiliation_gate($tracking_product_id, false);
+                }
+            }
             if (is_wp_error($proof)) { return $proof; }
-            if (!method_exists($this, 'digistore24_tracking_url_allowed') || !$this->digistore24_tracking_url_allowed((string) ($row['tracking_url'] ?? ''))) { return new WP_Error('output_digistore24_tracking_invalid', 'Digistore24-Trackinglink ist nicht mehr provisionssicher.'); }
+            $proof_source = sanitize_key((string) ($proof['source'] ?? ''));
+            $manual_affiliate = in_array($proof_source, array('manual_csv_inventory','manual_csv_partnership','manual_csv_marketplace'), true) ? (string) ($proof['affiliate_id'] ?? '') : '';
+            if (!method_exists($this, 'digistore24_tracking_url_allowed') || !$this->digistore24_tracking_url_allowed((string) ($row['tracking_url'] ?? ''), $manual_affiliate)) { return new WP_Error('output_digistore24_tracking_invalid', 'Digistore24-Trackinglink ist nicht mehr provisionssicher.'); }
         }
         if (method_exists($this, 'control_emergency_stop_active') && $this->control_emergency_stop_active()) {
             return new WP_Error('control_emergency_stop_active', 'Globale Affiliate-Notabschaltung ist aktiv.');
         }
         $portal_for_gate = $this->output_portal_by_key((string) ($object['portal_key'] ?? ''), true);
         if (is_wp_error($portal_for_gate)) { return $portal_for_gate; }
+        if (method_exists($this, 'control_provider_gate')) {
+            $provider_gate = $this->control_provider_gate(sanitize_key((string) ($row['provider'] ?? $object['provider'] ?? '')), sanitize_key((string) ($portal_for_gate['key'] ?? $object['portal_key'] ?? '')));
+            if (is_wp_error($provider_gate)) { return $provider_gate; }
+        }
         if (method_exists($this, 'control_partner_gate')) {
             $gate = $this->control_partner_gate($row, $portal_for_gate);
             if (is_wp_error($gate)) { return $gate; }
@@ -2066,12 +2129,12 @@ trait PPAR_Output_Objects_Trait {
                     <td><?php echo esc_html((string) $row['decision_reason']); ?><?php if (!empty($payload['preview_url'])) : ?><br><a href="<?php echo esc_url((string) $payload['preview_url']); ?>">Entwurfsvorschau öffnen</a><?php endif; ?></td>
                     <td>
                         <?php $status = (string) $row['status']; ?>
-                        <?php if ($status === 'draft') : ?>
+                        <?php if (in_array($status, array('draft','blocked_runtime'), true)) : ?>
                         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-bottom:8px">
                             <input type="hidden" name="action" value="ppar_output_object_action"><input type="hidden" name="output_id" value="<?php echo absint($row['id']); ?>">
                             <?php wp_nonce_field('ppar_output_object_action', 'ppar_output_nonce'); ?>
                             <?php if (in_array((string) $row['output_type'], array('hivepress_listing','portal_listing'), true)) : ?><button class="button button-primary" name="output_action" value="publish_listing">Listing veröffentlichen</button><?php endif; ?>
-                            <?php if (in_array((string) $row['output_type'], array('portal_banner','product_campaign'), true)) : ?><button class="button button-primary" name="output_action" value="activate_campaign"><?php echo (string) $row['output_type'] === 'product_campaign' ? 'Produktkampagne aktivieren' : 'Banner aktivieren'; ?></button><?php endif; ?>
+                            <?php if (in_array((string) $row['output_type'], array('portal_banner','product_campaign'), true)) : ?><button class="button button-primary" name="output_action" value="activate_campaign"><?php echo $status === 'blocked_runtime' ? 'Erneut prüfen & aktivieren' : ((string) $row['output_type'] === 'product_campaign' ? 'Produktkampagne aktivieren' : 'Banner aktivieren'); ?></button><?php endif; ?>
                         </form>
                         <?php elseif ($status === 'published') : ?>
                         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-bottom:8px"><input type="hidden" name="action" value="ppar_output_object_action"><input type="hidden" name="output_id" value="<?php echo absint($row['id']); ?>"><?php wp_nonce_field('ppar_output_object_action', 'ppar_output_nonce'); ?><input type="text" name="output_reason" required placeholder="Begründung für Pause" style="max-width:210px"> <button class="button" name="output_action" value="pause_output">Ausgabe pausieren</button></form>

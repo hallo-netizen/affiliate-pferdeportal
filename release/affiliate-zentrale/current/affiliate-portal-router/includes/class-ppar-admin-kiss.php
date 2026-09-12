@@ -10,6 +10,7 @@ final class PPAR_Affiliate_Admin_KISS {
     const IMPORT_NONCE_ACTION = 'ppar_universal_manual_import';
     const IMPORT_NONCE_FIELD = 'ppar_universal_import_nonce';
     const IMPORT_LAST_OPTION = 'ppar_universal_import_last_v1';
+    const CHANNEL_ACTION = 'ppar_provider_channel_toggle';
     const DS24_INVENTORY_OPTION = 'ppar_digistore24_manual_inventory_v1';
     const DS24_MARKETPLACE_OPTION = 'ppar_digistore24_marketplace_v1';
     const MAX_SAMPLE_BYTES = 1048576;
@@ -22,6 +23,7 @@ final class PPAR_Affiliate_Admin_KISS {
         add_action('admin_menu', array(__CLASS__, 'register_visible_navigation'), 10050);
         add_action('admin_head', array(__CLASS__, 'hide_legacy_navigation_css'), 10050);
         add_action('admin_post_' . self::IMPORT_ACTION, array(__CLASS__, 'handle_universal_import'));
+        add_action('admin_post_' . self::CHANNEL_ACTION, array(__CLASS__, 'handle_channel_toggle'));
         add_filter('pre_update_option_' . self::DS24_MARKETPLACE_OPTION, array(__CLASS__, 'preserve_manual_ds24_inventory'), 20, 3);
     }
 
@@ -133,6 +135,7 @@ final class PPAR_Affiliate_Admin_KISS {
 
     public static function render_providers() {
         self::header('Anbieter & APIs','Zugänge und technische Provider bleiben getrennt von der fachlichen Produkt-/Banner-Ausspielung.');
+        self::render_channel_switches();
         self::render_import_form();
         echo '<p style="display:flex;gap:8px;flex-wrap:wrap">';
         echo self::button('Netzwerke & API','affiliate-portal-networks',true);
@@ -145,6 +148,67 @@ final class PPAR_Affiliate_Admin_KISS {
         echo '</p>';
         echo '<p class="description">OTTO, Kelkoo, Kaufland, Amazon und ADCocktail erscheinen als vorbereitet, bis ein realer, dokumentierter Zugang vorhanden ist. Es werden keine Schnittstellen geraten.</p>';
         self::footer();
+    }
+
+
+    private static function render_channel_switches() {
+        if (!class_exists('Pferdeportal_Affiliate_Router')) { return; }
+        $router = Pferdeportal_Affiliate_Router::instance();
+        if (!is_object($router) || !method_exists($router, 'provider_registry') || !method_exists($router, 'provider_channel_snapshot')) { return; }
+        $notice = sanitize_key((string) ($_GET['ppar_channel'] ?? ''));
+        $message = rawurldecode((string) ($_GET['ppar_channel_message'] ?? ''));
+        if ($notice === 'success') { echo '<div class="notice notice-success inline"><p>'.esc_html($message).'</p></div>'; }
+        if ($notice === 'failed') { echo '<div class="notice notice-error inline"><p>'.esc_html($message).'</p></div>'; }
+        echo '<section class="postbox" style="padding:16px;margin:18px 0;max-width:900px"><h2 style="margin-top:0">Kanalsteuerung</h2>';
+        echo '<p>Ein Klick pausiert Frontend-Ausgabe und automatische Verarbeitung. Zugangsdaten, importierte Daten und Einstellungen bleiben erhalten.</p>';
+        echo '<table class="widefat striped"><thead><tr><th>Kanal</th><th>Status</th><th>Aktion</th></tr></thead><tbody>';
+        foreach ((array) $router->provider_registry() as $provider=>$definition) {
+            if (!is_array($definition) || sanitize_key((string) ($definition['state'] ?? '')) !== 'active') { continue; }
+            $state = $router->provider_channel_snapshot($provider);
+            $status = sanitize_key((string) ($state['status'] ?? 'automatic'));
+            echo '<tr><td><strong>'.esc_html((string) ($definition['label'] ?? strtoupper($provider))).'</strong></td><td>';
+            if ($status === 'paused') { echo '<strong>PAUSIERT</strong>'; }
+            elseif ($status === 'veto') { echo '<strong>VETO</strong>'; }
+            else { echo '<strong>AKTIV</strong>'; }
+            if (!empty($state['reason'])) { echo '<br><span class="description">'.esc_html((string) $state['reason']).'</span>'; }
+            echo '</td><td>';
+            if ($status === 'veto') {
+                echo '<a class="button" href="'.esc_url($router->provider_control_url($provider)).'">Chefsteuerung öffnen</a>';
+            } else {
+                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin:0">';
+                echo '<input type="hidden" name="action" value="'.esc_attr(self::CHANNEL_ACTION).'">';
+                echo '<input type="hidden" name="provider" value="'.esc_attr($provider).'">';
+                echo '<input type="hidden" name="mode" value="'.esc_attr($status === 'paused' ? 'resume' : 'pause').'">';
+                wp_nonce_field(self::CHANNEL_ACTION . '_' . $provider, 'ppar_channel_nonce');
+                echo '<button class="button '.($status === 'paused' ? 'button-primary' : '').'" type="submit">'.esc_html($status === 'paused' ? 'Aktivieren' : 'Pausieren').'</button>';
+                echo '</form>';
+            }
+            echo '</td></tr>';
+        }
+        echo '</tbody></table></section>';
+    }
+
+    public static function handle_channel_toggle() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        $provider = sanitize_key((string) ($_POST['provider'] ?? ''));
+        $mode = sanitize_key((string) ($_POST['mode'] ?? ''));
+        check_admin_referer(self::CHANNEL_ACTION . '_' . $provider, 'ppar_channel_nonce');
+        $router = class_exists('Pferdeportal_Affiliate_Router') ? Pferdeportal_Affiliate_Router::instance() : null;
+        if (!is_object($router) || !method_exists($router, 'provider_channel_set_paused') || !in_array($mode, array('pause','resume'), true)) {
+            $result = new WP_Error('provider_channel_action_invalid', 'Kanalaktion ist ungültig.');
+        } else {
+            $result = $router->provider_channel_set_paused($provider, $mode === 'pause', $mode === 'pause' ? 'Kanal per Schnellschalter pausiert.' : '');
+        }
+        $args = array('page'=>'affiliate-portal-kiss-providers');
+        if (is_wp_error($result)) {
+            $args['ppar_channel'] = 'failed';
+            $args['ppar_channel_message'] = rawurlencode($result->get_error_message());
+        } else {
+            $args['ppar_channel'] = 'success';
+            $args['ppar_channel_message'] = rawurlencode($mode === 'pause' ? 'Kanal pausiert. Daten und Einstellungen bleiben erhalten.' : 'Kanal wieder aktiviert.');
+        }
+        wp_safe_redirect(add_query_arg($args, admin_url('admin.php')));
+        exit;
     }
 
     public static function render_system() {
@@ -298,7 +362,7 @@ final class PPAR_Affiliate_Admin_KISS {
         return self::has_header($headers,array('vendor','vendorname','anbieter'))
             && self::has_header($headers,array('produkt-id','produkt_id','product_id','productid'))
             && self::has_header($headers,array('produkt','produktname','product','product_name'))
-            && self::has_header($headers,array('werbemittel-id','werbemittel_id','marketplace_entry_id','entry_id'))
+            && self::has_header($headers,array('werbemittel','werbemittel-id','werbemittel_id','marketplace_entry_id','entry_id'))
             && self::has_header($headers,array('status der partnerschaft','partnerschaftsstatus','status','approval_status'))
             && self::has_header($headers,array('provision','affiliate-provision','affiliate_provision','commission','commission_rate'));
     }
@@ -333,7 +397,7 @@ final class PPAR_Affiliate_Admin_KISS {
             'vendor'=>array('vendor','vendorname','anbieter'),
             'product_id'=>array('produkt-id','produkt_id','produktid','product-id','product_id','productid'),
             'product'=>array('produkt','produktname','product','product_name'),
-            'entry_id'=>array('werbemittel-id','werbemittel_id','werbemittelid','marketplace_entry_id','entry_id'),
+            'entry_id'=>array('werbemittel','werbemittel-id','werbemittel_id','werbemittelid','marketplace_entry_id','entry_id'),
             'status'=>array('status der partnerschaft','partnerschaftsstatus','status','approval_status'),
             'commission'=>array('provision','affiliate-provision','affiliate_provision','commission','commission_rate'),
             'support_url'=>array('werbemittelseite','werbemittel-seite','werbemittel_url','support_url','affiliate_support_url'),

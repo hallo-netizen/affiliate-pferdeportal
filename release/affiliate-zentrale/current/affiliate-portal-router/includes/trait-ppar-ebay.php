@@ -2186,6 +2186,10 @@ trait PPAR_Ebay_Trait {
     }
 
     private function ebay_access_token($settings, $force = false) {
+        if (method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate('ebay');
+            if (is_wp_error($channel_gate)) { return $channel_gate; }
+        }
         $cache_key = $this->ebay_token_cache_key($settings);
         if (!$force && function_exists('get_transient')) {
             $cached = get_transient($cache_key);
@@ -2468,6 +2472,10 @@ trait PPAR_Ebay_Trait {
         } else {
             $url = (string) $request['url'];
         }
+        if (method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate('ebay');
+            if (is_wp_error($channel_gate)) { return $channel_gate; }
+        }
         $response = wp_remote_get($url, array(
             'timeout'=>$request['timeout'],
             'redirection'=>$request['redirection'],
@@ -2547,6 +2555,10 @@ trait PPAR_Ebay_Trait {
      * WP_Error und führen ausdrücklich nicht zu einem destruktiven Statuswechsel.
      */
     private function ebay_fetch_item_for_refresh($row, $settings, $token) {
+        if (method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate('ebay');
+            if (is_wp_error($channel_gate)) { return $channel_gate; }
+        }
         $request = $this->ebay_build_item_refresh_request($row, $settings, $token);
         if (is_wp_error($request)) { return $request; }
         $response = wp_remote_get((string) $request['url'], array(
@@ -5299,6 +5311,10 @@ trait PPAR_Ebay_Trait {
         if ($portal_key === '') { return new WP_Error('ebay_control_portal_missing', 'Portalkontext für Chefsteuerung fehlt.'); }
         if (method_exists($this, 'control_emergency_stop_active') && $this->control_emergency_stop_active()) {
             return new WP_Error('ebay_control_emergency_stop', 'Globale Affiliate-Notabschaltung ist aktiv.');
+        }
+        if (method_exists($this, 'control_provider_gate')) {
+            $provider_gate = $this->control_provider_gate('ebay', $portal_key);
+            if (is_wp_error($provider_gate)) { return $provider_gate; }
         }
         $seller = preg_replace('/[^0-9A-Za-z._-]/', '', (string) $seller_username);
         if ($seller === '') { return new WP_Error('ebay_control_seller_missing', 'eBay-Verkäuferidentität für Chefsteuerung fehlt.'); }

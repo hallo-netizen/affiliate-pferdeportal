@@ -476,10 +476,12 @@ trait PPAR_Automation_Suite_Trait {
         $sources = array_values(array_filter((array) $sources, function ($source) {
             if (!is_array($source)) { return false; }
             $provider = sanitize_key((string) ($source['provider'] ?? ''));
-            return $provider !== ''
-                && $this->provider_exists($provider)
-                && $this->provider_supports($provider, 'automation')
-                && trim((string) ($source['partner_external_id'] ?? '')) !== '';
+            if ($provider === '' || !$this->provider_exists($provider) || !$this->provider_supports($provider, 'automation') || trim((string) ($source['partner_external_id'] ?? '')) === '') { return false; }
+            if (method_exists($this, 'provider_channel_pause_gate')) {
+                $channel_gate = $this->provider_channel_pause_gate($provider);
+                if (is_wp_error($channel_gate)) { return false; }
+            }
+            return true;
         }));
         usort($sources, static function ($a, $b) {
             return strcmp((string) ($a['key'] ?? ''), (string) ($b['key'] ?? ''));
@@ -541,6 +543,10 @@ trait PPAR_Automation_Suite_Trait {
         $partner_id = sanitize_text_field((string) ($source['partner_external_id'] ?? ''));
         if ($provider === '' || !$this->provider_exists($provider) || !$this->provider_supports($provider, 'automation')) {
             return new WP_Error('automation_provider_invalid', 'Provider ist nicht als Automatisierungsquelle registriert.');
+        }
+        if (method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate($provider);
+            if (is_wp_error($channel_gate)) { return $channel_gate; }
         }
         if ($provider === 'awin') {
             return $this->automation_enqueue_awin_partner(absint($partner_id));
@@ -2029,6 +2035,14 @@ trait PPAR_Automation_Suite_Trait {
         }
         $counts = $this->automation_decode_job_json($job['counts'] ?? '', $this->automation_empty_counts());
         $details = $this->automation_decode_job_json($job['details'] ?? '', array());
+        $job_provider = sanitize_key((string) ($job['provider'] ?? ''));
+        if ($job_provider !== '' && method_exists($this, 'provider_channel_pause_gate')) {
+            $channel_gate = $this->provider_channel_pause_gate($job_provider);
+            if (is_wp_error($channel_gate)) {
+                $this->automation_release_job($job, sanitize_key((string) ($job['stage'] ?? 'programme')), max(0, (int) ($job['cursor_value'] ?? 0)), max(1, absint($job['offer_page'] ?? 1)), $counts, $details, 'Kanal pausiert; Auftrag bleibt erhalten.', HOUR_IN_SECONDS);
+                return false;
+            }
+        }
         try {
             $result = $this->automation_process_claimed_job($job);
             if (is_wp_error($result)) {
