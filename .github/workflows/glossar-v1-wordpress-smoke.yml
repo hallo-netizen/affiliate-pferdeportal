@@ -194,13 +194,19 @@ jobs:
         run: |
           set -euo pipefail
           BEFORE=$(docker exec uge-wp wp post list --allow-root --post_type=uge_term --format=count --post_status=any)
+          PAGES_BEFORE=$(docker exec uge-wp wp post list --allow-root --post_type=page --format=count --post_status=any)
           docker exec uge-wp wp plugin deactivate universal-glossary-engine --allow-root
           docker exec uge-wp wp plugin activate universal-glossary-engine --allow-root
           AFTER=$(docker exec uge-wp wp post list --allow-root --post_type=uge_term --format=count --post_status=any)
+          PAGES_AFTER=$(docker exec uge-wp wp post list --allow-root --post_type=page --format=count --post_status=any)
           test "$BEFORE" = "$AFTER"
+          test "$PAGES_BEFORE" = "$PAGES_AFTER"
           test "$(docker exec uge-wp wp option get uge_settings_v1 --format=json --allow-root | jq -r '.label')" = 'Lexikon'
-          test "$(docker exec uge-wp wp post list --allow-root --post_type=page --format=count --post_status=publish)" -eq 2
-          docker exec uge-wp wp eval --allow-root "if(get_page_by_path('importierter-begriff', OBJECT, 'uge_term')->post_status!=='draft'){exit(7);} echo 'NO_AUTO_PUBLISH_PASS';"
+          GLOSSAR_PAGE_ID=$(docker exec uge-wp wp post list --allow-root --post_type=page --name=glossar --field=ID --format=ids)
+          LEXIKON_PAGE_ID=$(docker exec uge-wp wp post list --allow-root --post_type=page --name=lexikon --field=ID --format=ids)
+          test -n "$GLOSSAR_PAGE_ID"
+          test -n "$LEXIKON_PAGE_ID"
+          docker exec uge-wp wp eval --allow-root "\$p=get_page_by_path('importierter-begriff', OBJECT, 'uge_term'); if(!(\$p instanceof WP_Post) || \$p->post_status!=='draft' || \$p->post_type!=='uge_term'){exit(7);} if(get_page_by_path('importierter-begriff', OBJECT, 'page')){exit(8);} echo 'NO_AUTO_PUBLISH_AND_NO_PAGE_EXPLOSION_PASS';"
           echo 'PERSISTENCE_NEGATIVE_PASS'
 
       - name: Final proof
