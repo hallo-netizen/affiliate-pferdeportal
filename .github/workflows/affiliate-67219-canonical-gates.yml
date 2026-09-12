@@ -1,0 +1,43 @@
+name: Affiliate 6.72.19 canonical gates
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/affiliate-67219-canonical-gates.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: affiliate-release-current
+      - name: Release governance gate first
+        run: python3 control/release-governance/release_guard.py governance-check
+      - name: Prepare bound Hobbyraum inputs
+        run: |
+          cp release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php AFFILIATE_HOBBYRAUM/trait-ppar-provider-registry.php
+          cp release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php AFFILIATE_HOBBYRAUM/trait-ppar-automation-suite.php
+          cp release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php AFFILIATE_HOBBYRAUM/trait-ppar-network-sync.php
+      - name: ADCELL static positive-negative gate
+        run: php AFFILIATE_HOBBYRAUM/test_adcell_api_v2_automation.php
+      - name: Awin OTTO unchanged gate
+        run: php AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php
+      - name: Banner positive-negative gate
+        run: php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+      - name: PHP 21 of 21 lint
+        run: |
+          set -euo pipefail
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
+          test "$(find "$ROOT" -type f -name '*.php' | wc -l)" -eq 21
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find "$ROOT" -type f -name '*.php' | sort)
+          echo PHP_LINT_21_OF_21_PASS
+      - name: Release source tree start gates
+        run: |
+          python3 control/release-governance/release_guard.py source-check
+          python3 control/release-governance/release_guard.py tree-check
+          python3 control/release-governance/release_guard.py start --branch affiliate-release-current
