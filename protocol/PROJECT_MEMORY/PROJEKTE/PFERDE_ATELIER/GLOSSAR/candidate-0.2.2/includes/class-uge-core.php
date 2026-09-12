@@ -34,6 +34,7 @@ final class UGE_Core {
 
     public static function maybe_upgrade_rewrites(): void {
         if ((string)get_option(self::REWRITE_SCHEMA_OPTION, '') === self::REWRITE_SCHEMA_VERSION) { return; }
+        // register_content() already ran on init. Flush exactly once after an in-place plugin update.
         flush_rewrite_rules(false);
         update_option(self::REWRITE_SCHEMA_OPTION, self::REWRITE_SCHEMA_VERSION, false);
     }
@@ -111,6 +112,12 @@ final class UGE_Core {
         ]);
     }
 
+
+    /**
+     * SEO-Hardrule: Ein Glossarbegriff darf nicht denselben normalisierten Namen
+     * oder Slug wie eine Glossar-Kategorie, WordPress-Kategorie oder eine vom
+     * Portaldesign erkannte Kategorie-/Hub-Seite besitzen.
+     */
     public static function collision(string $title, string $slug = '', int $exclude_post_id = 0): array {
         $name_key = sanitize_title($title);
         $slug_key = sanitize_title($slug !== '' ? $slug : $title);
@@ -124,13 +131,25 @@ final class UGE_Core {
                 $term_name = sanitize_title((string)$term->name);
                 $term_slug = sanitize_title((string)$term->slug);
                 if (in_array($name_key, [$term_name, $term_slug], true) || in_array($slug_key, [$term_name, $term_slug], true)) {
-                    return ['type' => $taxonomy === self::TAXONOMY ? 'Glossar-Kategorie' : 'WordPress-Kategorie', 'label' => (string)$term->name, 'slug' => (string)$term->slug];
+                    return [
+                        'type' => $taxonomy === self::TAXONOMY ? 'Glossar-Kategorie' : 'WordPress-Kategorie',
+                        'label' => (string)$term->name,
+                        'slug' => (string)$term->slug,
+                    ];
                 }
             }
         }
 
+        // Pferde Atelier: obere Portal-Kategorien sind echte Seiten. Nur wenn
+        // das Designplugin sie ausdrücklich als Portalebene erkennt, zählen sie.
         if (class_exists('Pferde_Template_Kit') && method_exists('Pferde_Template_Kit', 'affiliate_page_type')) {
-            $page_ids = get_posts(['post_type' => 'page','post_status' => 'publish','numberposts' => -1,'fields' => 'ids','no_found_rows' => true]);
+            $page_ids = get_posts([
+                'post_type' => 'page',
+                'post_status' => 'publish',
+                'numberposts' => -1,
+                'fields' => 'ids',
+                'no_found_rows' => true,
+            ]);
             $main_page_id = (int)(UGE_Config::get()['main_page_id'] ?? 0);
             foreach ($page_ids as $page_id) {
                 $page_id = (int)$page_id;
@@ -147,7 +166,14 @@ final class UGE_Core {
             }
         }
 
-        $existing = get_posts(['post_type' => self::POST_TYPE,'post_status' => ['draft', 'pending', 'private', 'publish'],'numberposts' => -1,'exclude' => $exclude_post_id > 0 ? [$exclude_post_id] : [],'no_found_rows' => true]);
+        // Doppelte Glossarbegriffe selbst ebenfalls verhindern.
+        $existing = get_posts([
+            'post_type' => self::POST_TYPE,
+            'post_status' => ['draft', 'pending', 'private', 'publish'],
+            'numberposts' => -1,
+            'exclude' => $exclude_post_id > 0 ? [$exclude_post_id] : [],
+            'no_found_rows' => true,
+        ]);
         foreach ($existing as $post) {
             $post_name = sanitize_title((string)$post->post_title);
             $post_slug = sanitize_title((string)$post->post_name);
@@ -188,7 +214,12 @@ final class UGE_Core {
         $name_key = sanitize_title($name);
         $slug_key = sanitize_title($slug !== '' ? $slug : $name);
         if ($name_key === '' && $slug_key === '') { return; }
-        $posts = get_posts(['post_type' => self::POST_TYPE,'post_status' => ['publish', 'future', 'private', 'pending'],'numberposts' => -1,'no_found_rows' => true]);
+        $posts = get_posts([
+            'post_type' => self::POST_TYPE,
+            'post_status' => ['publish', 'future', 'private', 'pending'],
+            'numberposts' => -1,
+            'no_found_rows' => true,
+        ]);
         foreach ($posts as $post) {
             $post_name = sanitize_title((string)$post->post_title);
             $post_slug = sanitize_title((string)$post->post_name);
@@ -214,6 +245,11 @@ final class UGE_Core {
         return $value;
     }
 
-    public static function meta_key(string $field): string { return self::META_PREFIX . sanitize_key($field); }
-    public static function term_value(int $post_id, string $field): string { return (string)get_post_meta($post_id, self::meta_key($field), true); }
+    public static function meta_key(string $field): string {
+        return self::META_PREFIX . sanitize_key($field);
+    }
+
+    public static function term_value(int $post_id, string $field): string {
+        return (string) get_post_meta($post_id, self::meta_key($field), true);
+    }
 }
