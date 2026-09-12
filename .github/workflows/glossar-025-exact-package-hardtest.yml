@@ -1,0 +1,44 @@
+name: Glossar 0.2.5 Exact Package Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-025-hardfix-source]
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5/**'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/**'
+      - '.github/workflows/glossar-025-exact-package-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hardtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact build and lint
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/01_build.sh
+      - name: Real WordPress MySQL Astra
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/02_boot.sh
+      - name: Policy migration seed
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/03_seed.sh
+      - name: Frontend positive negative matrix
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/04_frontend.sh
+      - name: Regression preview duplicate normal WordPress
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/05_regression.sh
+      - name: Package tested candidate
+        run: |
+          set -euo pipefail
+          cd /tmp/u
+          zip -X -qr /tmp/universal-glossary-engine-0.2.5.zip universal-glossary-engine
+          unzip -t /tmp/universal-glossary-engine-0.2.5.zip | grep -q 'No errors detected'
+          sha256sum /tmp/universal-glossary-engine-0.2.5.zip | tee /tmp/SHA256.txt
+          echo UGE025_TESTED_PACKAGE_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.5-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.5.zip
+            /tmp/SHA256.txt
+          if-no-files-found: error
+      - name: Final
+        run: echo UGE025_EXACT_REAL_HARDTEST_PASS
