@@ -1,0 +1,120 @@
+name: Glossar 0.2.4 Real Hardtest V3
+on:
+  push:
+    branches: [hobbyroom/glossar-024-ajax-nav-image-20260912]
+    paths: ['.github/workflows/glossar-024-real-hardtest-v3.yml']
+permissions: {contents: read}
+jobs:
+  hardtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact 0.2.4
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp
+          C22=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.2
+          C23=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3
+          mkdir -p /tmp/u
+          cat "$T"/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          test "$(sha256sum /tmp/base.zip|cut -d' ' -f1)" = b20fc92e106989d96e701ca3cc2c4091096e8e8cdb207f63a958b411a0c6aaa7
+          unzip -q /tmp/base.zip -d /tmp/u
+          P=/tmp/u/universal-glossary-engine
+          cp "$C22/universal-glossary-engine.php" "$P/"
+          cp "$C22/includes/class-uge-config.php" "$P/includes/"
+          cp "$C22/includes/class-uge-core.php" "$P/includes/"
+          cp "$C22/includes/class-uge-seo.php" "$P/includes/"
+          cat "$C22"/frontend-parts/part-* > "$P/includes/class-uge-frontend.php"
+          cp "$C23/universal-glossary-engine.php" "$P/"
+          cp "$C23/includes/class-uge-config.php" "$P/includes/"
+          cp "$C23/includes/class-uge-core.php" "$P/includes/"
+          cp "$C23/includes/class-uge-seo.php" "$P/includes/"
+          cp "$C23/includes/class-uge-policy.php" "$P/includes/"
+          cat "$T"/uge024-part{1,2,3,4}.b64 | base64 -d | gzip -d >/tmp/uge024.patch
+          patch -p4 -d "$P" </tmp/uge024.patch
+          mkdir -p "$P/assets"
+          printf 'UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEAAUAmJaQAA3AA/v89WAAAAA==' | base64 -d > "$P/assets/glossar-hero-stall-lexika.webp"
+          grep -q 'Version: 0.2.4' "$P/universal-glossary-engine.php"
+          grep -q "if (!\$image)" "$P/includes/class-uge-frontend.php"
+          grep -q "plugins_url('assets/glossar-hero-stall-lexika.webp'" "$P/includes/class-uge-frontend.php"
+          grep -q "body.append('mode',mode)" "$P/includes/class-uge-frontend.php"
+          find "$P" -name '*.php' -print0 | xargs -0 -n1 php -l
+          echo UGE024_EXACT_BUILD_PASS
+      - name: Real WordPress Astra positive negative
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker network create n >/dev/null
+          docker run -d --name db --network n -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=2s --health-retries=30 mysql:8.0 >/dev/null
+          for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
+          docker run -d --name wp --network n -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/u/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine:ro wordpress:php8.1-apache >/dev/null
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          docker cp /tmp/wp wp:/usr/local/bin/wp; docker exec wp chmod +x /usr/local/bin/wp
+          docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title=x --admin_user=a --admin_password='Test-123456!' --admin_email=x@example.test --skip-email >/dev/null
+          docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root >/dev/null
+          docker exec wp wp theme install astra --activate --allow-root >/dev/null
+          cat >/tmp/stub.php <<'PHP'
+          <?php /* Plugin Name: Design Stub */ final class Pferde_Template_Kit{public static function affiliate_page_type($id){return get_post_meta((int)$id,'_cat',true)==='1'?'category':'';} public static function design_profile(){return 'pferde_atelier';}}
+          PHP
+          docker exec wp mkdir -p /var/www/html/wp-content/plugins/design-stub
+          docker cp /tmp/stub.php wp:/var/www/html/wp-content/plugins/design-stub/design-stub.php
+          docker exec wp wp plugin activate design-stub universal-glossary-engine --allow-root >/dev/null
+          test "$(docker exec wp wp plugin get universal-glossary-engine --field=version --allow-root)" = 0.2.4
+          G=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Glossar --post_name=glossar --post_excerpt='Pferdebegriffe verständlich erklärt.' --porcelain)
+          C=$(docker exec wp wp post create --allow-root --post_type=page --post_status=publish --post_title=Gesundheit --post_name=gesundheit --porcelain)
+          docker exec wp wp post meta update $C _cat 1 --allow-root >/dev/null
+          docker exec wp wp eval --allow-root "\$c=UGE_Config::get();\$c['main_page_id']=$G;\$c['home_term_count']=6;update_option(UGE_Config::OPTION,UGE_Config::sanitize(\$c));UGE_Core::register_content();flush_rewrite_rules();" >/dev/null
+          docker exec wp wp term create uge_group Anatomie --slug=anatomie --allow-root >/dev/null || true
+          W=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Widerrist --post_name=widerrist --post_content=WID-CONTENT --porcelain)
+          docker exec wp wp post meta update $W _uge_primary_category_id $C --allow-root >/dev/null
+          docker exec wp wp post meta update $W _uge_short_definition 'Höchster Abschnitt des vorderen Pferderückens.' --allow-root >/dev/null
+          docker exec wp wp post term add $W uge_group Anatomie --allow-root >/dev/null
+          docker exec wp wp post update $W --post_status=publish --allow-root >/dev/null
+          Z=$(docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title=Zuchtbuch --post_name=zuchtbuch --post_content=Z-CONTENT --porcelain)
+          docker exec wp wp post meta update $Z _uge_primary_category_id $C --allow-root >/dev/null
+          docker exec wp wp post update $Z --post_status=publish --allow-root >/dev/null
+          docker exec wp wp post create --allow-root --post_type=uge_term --post_status=draft --post_title='Vorschau Begriff' --post_name=vorschau --post_content=DRAFT >/dev/null
+          docker exec wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Widerrist normaler Beitrag' --post_content=NORMAL >/dev/null
+          docker exec wp wp option delete uge_group_schema_version --allow-root >/dev/null || true
+          docker exec wp wp eval --allow-root 'UGE_Core::maybe_upgrade_groups();' >/dev/null
+          docker exec wp wp rewrite flush --hard --allow-root >/dev/null
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
+          python3 - <<'PY'
+          import re,html
+          s=open('/tmp/home',encoding='utf8').read()
+          nav=re.search(r'<nav class="uge-nav"[^>]*>(.*?)</nav>',s,re.S).group(1)
+          assert '>Glossar<' not in nav
+          labels=['Pferderassen, Zucht & Genetik','Anatomie, Biologie & Entwicklung','Gesundheit, Huf & Medizin','Haltung, Fütterung & Pflege','Verhalten, Lernen & Pferd-Mensch','Reiten, Ausbildung & Pferdesport','Ausrüstung, Stall & Transport','Kauf, Recht, Versicherung & Wirtschaft','Geschichte, Arbeit & Gesellschaft','Kultur, Medien, Orte & Persönlichkeiten']
+          assert all(x in html.unescape(nav) for x in labels)
+          assert 'justify-content:center;flex-wrap:wrap' in s
+          assert 'padding:10px 28px 64px' in s
+          assert 'glossar-hero-stall-lexika.webp' in s
+          assert 'uge-search-suggestions' in s
+          assert 'Vorschau Begriff' not in s and 'Widerrist normaler Beitrag' not in s
+          links=list(dict.fromkeys(re.findall(r'<h3><a href="([^"]+)">',s)))
+          assert links
+          open('/tmp/links','w').write('\n'.join(links))
+          print('UGE024_HOME_NAV_HERO_PASS')
+          PY
+          while read -r u; do test "$(curl -sS -o /tmp/term -w '%{http_code}' "$u")" = 200; grep -q 'uge-single-wrap' /tmp/term; done </tmp/links
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/glossar/widerrist/)" = 301
+          curl -fsS http://127.0.0.1:8080/glossar/begriff/widerrist/ -o /tmp/wid; grep -q WID-CONTENT /tmp/wid
+          N=$(python3 - <<'PY'
+          import re
+          print(re.search(r'data-uge-nonce="([^"]+)"',open('/tmp/home').read()).group(1))
+          PY
+          )
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data-urlencode nonce="$N" --data mode=suggest --data q=Wid -o /tmp/suggest.json
+          grep -q '"success":true' /tmp/suggest.json; grep -q Widerrist /tmp/suggest.json; grep -q 'Höchster Abschnitt' /tmp/suggest.json
+          ! grep -q 'normaler Beitrag' /tmp/suggest.json; ! grep -q 'Vorschau Begriff' /tmp/suggest.json
+          curl -fsS -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data-urlencode nonce="$N" --data mode=suggest --data q=zzzznotfound -o /tmp/none.json; grep -q '"count":0' /tmp/none.json
+          test "$(curl -sS -o /tmp/bad -w '%{http_code}' -X POST http://127.0.0.1:8080/wp-admin/admin-ajax.php --data action=uge_search --data nonce=bad --data mode=suggest --data q=Wid)" != 200
+          curl -fsS 'http://127.0.0.1:8080/glossar/?glossar_letter=W' -o /tmp/W; grep -q '>Widerrist<' /tmp/W; ! grep -q '>Zuchtbuch<' /tmp/W; ! grep -q 'Vorschau Begriff' /tmp/W
+          S=$(docker exec wp wp term list uge_group --name='Anatomie, Biologie & Entwicklung' --field=slug --allow-root)
+          test -n "$S"
+          curl -fsS "http://127.0.0.1:8080/glossar/$S/" -o /tmp/group; grep -q '>Widerrist<' /tmp/group; grep -qi noindex /tmp/group
+          echo UGE024_AJAX_AZ_LINKS_GROUPS_POSITIVE_NEGATIVE_PASS
+          echo UGE024_REAL_WORDPRESS_ASTRA_POSITIVE_NEGATIVE_PASS
