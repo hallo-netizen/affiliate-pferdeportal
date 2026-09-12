@@ -20,8 +20,10 @@ $base=['manufacturer'=>'Acme','model_name'=>'Rain 1','product_group_key'=>'regen
 $r=$g->evaluate($base); ok($r['status']==='RESEARCH_REQUIRED' && $r['persisted']===false,'new signal stays read-only and requests research');
 $m->existing=42; $r=$g->evaluate($base); ok($r['status']==='EXISTING_PRODUCT' && $r['product_id']===42 && $r['action']==='USE_REFRESH_PATH','existing identity routes to refresh');
 $m->existing=0; $unknown=$base; $unknown['product_group_key']='neue-gruppe'; $r=$g->evaluate($unknown); ok($r['status']==='GROUP_MARKET_GATE_REQUIRED' && $r['minimum_independent_dossiers']===4,'unknown group routes to market gate');
-$ready=$base; $ready['facts']=[['label'=>'Material','fact_value'=>'600D','source_url'=>'https://manufacturer.example/rain1','source_type'=>'MANUFACTURER','fact_status'=>'VERIFIED','verified_at'=>'2026-09-12']];
+$ready=$base; $ready['verified_at']='2026-09-12'; $ready['facts']=[['label'=>'Material','fact_value'=>'600D','source_url'=>'https://manufacturer.example/rain1','source_type'=>'MANUFACTURER','fact_status'=>'VERIFIED','verified_at'=>'2026-09-12']];
 $r=$g->evaluate($ready); ok($r['status']==='CANDIDATE_RESEARCH_READY' && $r['facts'][0]['fact_key']==='material' && $r['automatic_comparison_created']===false,'official researched candidate is ready for SEO/comparability only');
+$bad=$ready; unset($bad['verified_at']); $r=$g->evaluate($bad); ok(is_wp_error($r) && $r->code==='UPC_CANDIDATE_VERIFIED_AT_INVALID','missing research verification time blocked');
+$bad=$ready; $bad['facts'][0]['verified_at']=''; $r=$g->evaluate($bad); ok(is_wp_error($r) && $r->code==='UPC_CANDIDATE_FACT_VERIFIED_AT_INVALID','missing fact verification time blocked');
 $bad=$ready; $bad['facts'][0]['source_type']='APPROVED_SECONDARY'; $r=$g->evaluate($bad); ok(is_wp_error($r) && $r->code==='UPC_CANDIDATE_SOURCE_NOT_OFFICIAL','secondary source blocked');
 $bad=$ready; $bad['facts'][0]['label']='Unbekannt'; $r=$g->evaluate($bad); ok(is_wp_error($r) && $r->code==='UPC_FEATURE_LABEL_UNKNOWN','unknown feature blocked');
 $hoof=$ready; $hoof['product_group_key']='hufschuhe'; $r=$g->evaluate($hoof); ok(is_wp_error($r) && $r->code==='UPC_CANDIDATE_ADDITIONAL_CONTRACT_MISSING','missing safety-fit contract blocked');
