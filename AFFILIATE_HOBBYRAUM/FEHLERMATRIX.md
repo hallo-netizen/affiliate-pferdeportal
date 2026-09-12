@@ -51,7 +51,6 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 
 | AF-037 | Preis/Bestand/Verkäufer ändert sich, Datensatz gilt trotzdem als unverändert | Produkt-Payload ändert sich, alter Source-Fingerprint betrachtet nur Kernfelder | Produkt-Fingerprint bindet deterministisch alle importierten skalaren Produktfelder; dadurch lösen Preis-, Bestands-, Verkäufer- und Metadatenänderungen Update + erneute Prüfung aus. Banner-Fingerprint bleibt unverändert |
 
-
 | AF-038 | OTTO wird nur über den Programmnamen erkannt | Umbenannter/abweichender Awin-Programmname kann OTTO übersehen oder fremdes Programm mit „OTTO“ im Namen falsch zuordnen | OTTO intern über die belegte Awin-Advertiser-ID `14336` identifizieren; Name nur Anzeige/sekundärer Beleg |
 | AF-039 | Exakte Produktkennung geht zwischen Awin-Feed und Kampagne verloren | GTIN/MPN liegt im importierten Produkt-Payload, die materialisierte Kampagne besitzt aber keine Exact-Match-Identität | Belastbare Feed-Identifier in die bestehenden Kampagnen-Identitätsfelder übernehmen; keine Händler-SKU als Hersteller-MPN erfinden |
 | AF-040 | Fachlich exakt gebundener Produktvergleich bekommt ein ähnlich passendes Ersatzprodukt | Artikel fordert Produkt A/B aus Produktwissen, generisches Themenranking setzt bei fehlendem Angebot ein anderes Modell ein | Exact-Product-Anforderung hat Vorrang; nur identifier-identische Kampagne zulassen, fehlender Match = Karte auslassen, niemals substituieren |
@@ -77,18 +76,13 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 | AF-060 | ADCELL-API-Authentifizierung wurde im Scratch aus unbestätigten Annahmen abgeleitet | lokaler Prototyp-Test nahm Query-`token` an, während die Scratch-Implementierung Basic Auth nutzte; beides war nicht aus der aktuell zugänglichen autoritativen ADCELL-Doku belegt | Vor kanonischem Source-Fix den exakten ADCELL-API-v2-Authentifizierungsvertrag autoritativ belegen. Kein Token-, Basic- oder anderer Auth-Weg wird geraten; bis dahin fail-closed und kein Plugin-PASS |
 | AF-061 | Freitext als `execution_state.authorized_next_action` verwendet, obwohl der immutable Release-Guard nur den Vertragsenum akzeptiert | `release_guard.py::governance_check()` erlaubt ausschließlich `COMMIT_EXACT_V6638_21_FILE_SOURCE_TO_CANONICAL_ROOT`, `RUN_BOUND_RELEASE_GATES` oder `FINALIZE_RELEASE`; ein fachlicher Detailtext dort macht den Governance-Check rot | `authorized_next_action` nur mit dem erlaubten Vertragswert führen. Den konkreten fachlichen NEXT ACTION ausschließlich in `bound_user_scope_action`, `hobbyroom_current.next_action`, Task und Scope-Protokoll binden; Guard nicht für den Einzelfall aufweichen |
 | AF-062 | Kanonischer ADCELL-Verbindungstest nutzt trotz belegtem API-v2-Tokenvertrag weiter den Legacy-Basic-Auth-Pfad | `trait-ppar-provider-registry.php` ruft für ADCELL weiterhin `test_adcell_connection()` auf; der kanonische Router sendet dort `Authorization: Basic ...`, obwohl der offizielle v2-Weg `user/getToken` + Query-Parameter `token` bindet | Provider-Registry muss ausschließlich `adcell_api_v2_test_connection()` verwenden; Legacy-Basic-Auth-Verbindungstest darf im ADCELL-v2-Runtimeweg weder gerendert noch ausgeführt werden. Positiv/Negativ-Gate muss diesen Altpfad ausdrücklich blockieren |
+| AF-063 | 6.72.9-Manifesthash wurde in Status/Evidence falsch transkribiert | Exakte 26-Dateien-Manifestdatei und frisch regeneriertes Manifest ergeben `83c75bf16578e986388d684fbd99b4ffff400a11b34aca1c74fd5eb41e6b2f3e`, während Status/Evidence abweichend `83c75bf1359...` festhielten | Kandidaten-Manifesthash ausschließlich aus der gespeicherten exakten Manifestdatei ableiten und vor jeder Status-/Governance-Bindung Manifestdatei ↔ regenerierter 26-Dateien-Baum ↔ Fresh-Unpack bytegenau gegentesten; abweichend transkribierte Hashes nie weiterbinden |
 
-## Aktueller Auflösungsstand – 2026-09-12
-
-Die Tabellenzeilen bleiben historische Fehler- und Gegenregelautorität. Der aktuelle Status des laufenden ADCELL-Arbeitsstrangs ist:
-
-- `AF-023`: **GESCHLOSSEN** – kanonischer ADCELL-Sourcezustand, Manifest und Governance sind auf Manifest `74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5` gebunden; originaler Release-Guard auf dem committed Stand PASS.
-- `AF-057`: **GESCHLOSSEN FÜR DEN AKTUELLEN MILESTONE** – `TASK.current.json` ist auf den version-only Schritt 6.72.8 -> 6.72.9 nachgezogen; kein erledigtes ADCELL-Sourcefix-Ziel bleibt als NEXT ACTION gebunden.
-- `AF-058`: **GESCHLOSSEN** – `provider=adcell` ist kanonisch vor Awin geroutet; committed Positiv/Negativ-Gate PASS.
-- `AF-059`: **GESCHLOSSEN** – ADCELL-Normalbetrieb ist kanonisch auf API v2 + accepted/active + explizite programId-Allowlist + CSV/Banner/Deeplink gebunden; manuelle CSV-URL ist keine Normalbetriebs-Voraussetzung mehr.
-- `AF-060`: **GESCHLOSSEN** – offizieller ADCELL-v2-Authvertrag ist belegt: `/user/getToken` mit `userName` + `password`, Folgerequests mit Parameter `token`.
-- `AF-061`: **NICHT AKTIV** – Governance führt weiterhin ausschließlich den erlaubten Enum `RUN_BOUND_RELEASE_GATES`; fachliche NEXT ACTION steht außerhalb dieses Enumfeldes.
-- `AF-062`: **GESCHLOSSEN** – ADCELL-v2-Verbindungspfad verwendet den belegten Tokenweg; Legacy Basic Auth ist im gebundenen ADCELL-v2-Runtimeweg positiv/negativ ausgeschlossen.
-- `AF-026` / `AF-027`: **AKTIVE GRENZREGEL** – ein neuer installierbarer ADCELL-Testkandidat darf nicht erneut intern 6.72.8 heißen; der kleinste geprüfte Versionsschritt ist 6.72.9.
-
-Kein neuer AF-Eintrag entsteht aus dem derzeit fehlenden ADCELL-Kontozugang. Das ist ein externer Live-E2E-Blocker, kein neu entdeckter Sourcefehler.
+## AUFLÖSUNGSSTATUS 2026-09-12 – ADCELL API V2
+- AF-023: BEHOBEN – Source/Manifest/Governance gebunden; originaler Release-Guard real PASS.
+- AF-057: BEHOBEN für aktuellen ADCELL-Meilenstein – Task nachgezogen; stale OTTO-Mischtest durch 18/18-Funktionshash-Regression ersetzt.
+- AF-058: BEHOBEN – ADCELL provider-spezifisch vor Awin geroutet; committed Positiv/Negativ-Gate PASS.
+- AF-059: BEHOBEN – manueller CSV-Normalweg entfernt; API-v2/programId-Allowlist ist kanonischer Normalweg; committed Positiv/Negativ-Gate PASS.
+- AF-060: BEHOBEN – offizieller ADCELL-v2-Tokenvertrag autoritativ belegt; keine Auth-Annahme mehr.
+- AF-062: BEHOBEN – ADCELL-v2-Runtimeweg nutzt Token-Test; Legacy-Basic-Auth-Hooks werden ersetzt; Hook-Runtime-Gate PASS.
+- AF-063: AKTIV – falscher 6.72.9-Manifesthash in Status/Evidence erkannt; korrekter Hash ist aus exakter Manifestdatei und Fresh-Unpack neu zu binden, bevor 6.72.9 kanonisiert werden darf.
