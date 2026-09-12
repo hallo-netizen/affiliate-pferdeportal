@@ -191,6 +191,7 @@ class UPK_Repository {
 
         $fact_key    = isset( $data['fact_key'] ) ? sanitize_key( $data['fact_key'] ) : '';
         $fact_value  = isset( $data['fact_value'] ) ? sanitize_textarea_field( $data['fact_value'] ) : '';
+        $fact_note   = isset( $data['fact_note'] ) ? sanitize_textarea_field( $data['fact_note'] ) : '';
         $source_url  = isset( $data['source_url'] ) ? esc_url_raw( $data['source_url'] ) : '';
         $source_type = isset( $data['source_type'] ) ? strtoupper( sanitize_text_field( $data['source_type'] ) ) : '';
         $fact_status = isset( $data['fact_status'] ) ? strtoupper( sanitize_text_field( $data['fact_status'] ) ) : '';
@@ -221,6 +222,7 @@ class UPK_Repository {
 
         $payload = array(
             'fact_value'  => $fact_value,
+            'fact_note'   => $fact_note,
             'unit'        => isset( $data['unit'] ) ? sanitize_text_field( $data['unit'] ) : '',
             'source_url'  => $source_url,
             'source_type' => $source_type,
@@ -234,7 +236,7 @@ class UPK_Repository {
                 $this->facts,
                 $payload,
                 array( 'id' => $existing_id ),
-                array( '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
+                array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ),
                 array( '%d' )
             );
             if ( false === $updated ) {
@@ -251,7 +253,7 @@ class UPK_Repository {
         $inserted = $this->wpdb->insert(
             $this->facts,
             $payload,
-            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s' )
+            array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' )
         );
 
         if ( false === $inserted ) {
@@ -328,7 +330,7 @@ class UPK_Repository {
     private function get_subject_facts( $subject_type, $subject_id ) {
         return $this->wpdb->get_results(
             $this->wpdb->prepare(
-                "SELECT fact_key, fact_value, unit, source_url, source_type, verified_at, fact_status FROM {$this->facts} WHERE subject_type = %s AND subject_id = %d ORDER BY fact_key, id",
+                "SELECT fact_key, fact_value, fact_note, unit, source_url, source_type, verified_at, fact_status FROM {$this->facts} WHERE subject_type = %s AND subject_id = %d ORDER BY fact_key, id",
                 $subject_type,
                 $subject_id
             ),
