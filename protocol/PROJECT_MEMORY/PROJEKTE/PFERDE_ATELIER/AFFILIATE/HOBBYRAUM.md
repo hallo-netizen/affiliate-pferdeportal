@@ -1,7 +1,7 @@
 # AFFILIATE – HOBBYRAUM
 
 STAND: 2026-09-12
-STATUS: BLOCKED AUF KANONISCHE BYTEGENAUE RÜCKBINDUNG
+STATUS: BLOCKED AUF BYTEGENAUE 6.72.9-VERSIONSBINDUNG + DANACH LIVE-E2E
 
 ## AKTUELLER AUFTRAG
 
@@ -13,48 +13,63 @@ Kein manueller CSV-Normalweg. Kein Awin-Fallthrough. Kein paralleler Provider-Ar
 
 ## BELASTBARER STAND
 
-Der ADCELL-Kandidat ist im isolierten Prüfraum aus der kanonischen 6.72.8-Basis fertig gebaut und lokal hart geprüft.
+Der fachliche ADCELL-Sourcefix ist fertig und kanonisch auf `affiliate-release-current` committed.
 
-Geänderte Source-Dateien genau:
-- `trait-ppar-provider-registry.php`
-- `trait-ppar-network-sync.php`
-- `trait-ppar-automation-suite.php`
+Source-Commit:
+`99bcc5796226254f7e190f40397210fca96e7d0b`
 
-Ausgeführt PASS:
-- ADCELL Static Gate;
-- ADCELL Runtime Positiv/Negativ;
-- AF-062 Legacy-Basic-Auth-Runtimeweg blockiert;
-- Awin/OTTO-Funktionsblock-Regression 18/18 byteidentisch;
-- Banner-Regression;
-- PHP-Lint 21/21;
-- originaler Release-Guard Governance/Source/Tree/Start PASS.
+Kanonische Version:
+`6.72.8`
 
-Lokales Kandidaten-Manifest:
+Kanonisches 26-Dateien-Manifest:
 `74a5d0d5e48028a9ddd82bcf7a32628dbeb42d0963c9ae431bfe8dee3e2c00e5`
 
+Nach kanonischer Rückbindung tatsächlich ausgeführt PASS:
+- ADCELL Static Gate;
+- ADCELL Runtime Positiv/Negativ;
+- offizieller Tokenweg / Legacy Basic für ADCELL-v2 blockiert;
+- accepted+active+programId-Allowlist positiv;
+- Gegenfälle fail-closed;
+- kein Awin-Fallthrough;
+- Awin/OTTO 18/18 byteidentisch;
+- Banner-Regression;
+- PHP-Lint 21/21;
+- originaler Release-Guard Governance/Source/Tree/Start PASS;
+- Fresh-Unpack;
+- Source/Unpack-Identity 26/26.
+
 Nachweis:
-`release/affiliate-zentrale/evidence/adcell_api_v2_local_full_gate_unbound_20260912.txt`
+`release/affiliate-zentrale/evidence/adcell_api_v2_committed_full_gate_20260912.txt`
 
 ## AKTUELLER BLOCKER
 
-Nicht der ADCELL-Code, sondern ausschließlich die **bytegenaue Rückbindung der drei bereits geprüften Dateien auf den kanonischen Branch**.
+Nicht mehr der ADCELL-Code.
 
-Ein GitHub-Blob mit abweichendem Hash darf niemals eingebunden werden. Fehlgeschlagene Transportblobs bleiben unreferenziert und sind keine Source.
+Vor einem neuen installierbaren Testkandidaten greifen AF-026/AF-027: Der neue ADCELL-Kandidat darf nicht erneut intern `6.72.8` heißen. Der kleinste zulässige Schritt ist `6.72.9`.
 
-Der kanonische Branch bleibt deshalb bis zur exakten Rückbindung die technische Autorität; lokaler PASS ist kein kanonischer PASS.
+Dieser version-only Schritt wurde lokal bereits hart geprüft:
+- Plugin-Header 6.72.9;
+- `const VERSION` 6.72.9;
+- readme Stable tag 6.72.9;
+- keine fachliche Sourceänderung;
+- lokales Manifest `83c75bf1359aa989313416c9f9c7d1d4193bfe44a15bef08a83ac45580911bc8`;
+- PHP 21/21, ADCELL Static/Positiv/Negativ, Awin/OTTO 18/18, Banner, Fresh-Unpack und 26/26 Identity PASS.
+
+6.72.9 ist noch nicht kanonisch, weil die große Hauptplugin-Datei nur über einen nachgewiesen bytegenauen Transportweg geschrieben werden darf. Kein Chunking, keine Rekonstruktion, kein angenäherter Großinhalt.
+
+Zusätzlich bleibt der echte ADCELL-Kontozugang blockiert. Deshalb ist LIVE-E2E noch nicht möglich.
 
 ## NEXT ACTION – GENAU EIN SCHRITT
 
-Die drei lokalen geprüften Source-Dateien bytegenau auf `affiliate-release-current` binden.
+Den bereits lokal geprüften reinen Versionsschritt `6.72.8 -> 6.72.9` bytegenau auf `affiliate-release-current` binden.
 
-Danach ohne neuen Sourceumbau:
-1. `CURRENT_SOURCE_SHA256.txt` + `CURRENT_RELEASE.json` atomar an den committed Sourcezustand binden;
-2. ADCELL Positiv/Negativ + Awin/OTTO-Regression + Banner-Regression + 21/21 PHP-Lint erneut auf dem committed Stand;
-3. originaler Release-Guard erneut;
-4. Fresh-Unpack + Source/ZIP-Identity;
-5. erst dann Test-Plugin.
-
-Live-PASS zusätzlich erst nach wiederhergestelltem ADCELL-Zugang und echtem WordPress/MariaDB-E2E.
+Danach ohne fachlichen Sourceumbau:
+1. neues 26-Dateien-Manifest + Governance an exakt den committed 6.72.9-Stand binden;
+2. ADCELL Positiv/Negativ + Awin/OTTO-Regression + Banner-Regression + PHP 21/21 erneut;
+3. originalen Release-Guard erneut;
+4. Fresh-Unpack + Source/Unpack-Identity erneut;
+5. erst dann 6.72.9-Test-Plugin;
+6. LIVE-PASS erst nach wiederhergestelltem ADCELL-Zugang und echtem API/WordPress/MariaDB-E2E.
 
 ## ARBEITSWEG
 
@@ -72,6 +87,6 @@ Live-PASS zusätzlich erst nach wiederhergestelltem ADCELL-Zugang und echtem Wor
 - Digistore24 nicht fortsetzen;
 - keine neue Providerarchitektur;
 - kein separates ADCELL-Plugin;
-- keine Pluginversionskette;
+- keine Pluginversionskette außerhalb exakt 6.72.9;
 - kein 6.72.18-Scratch;
 - keine manuelle CSV-Ersatzlösung.
