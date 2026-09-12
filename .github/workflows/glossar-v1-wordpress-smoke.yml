@@ -6,6 +6,8 @@ on:
       - hobbyroom/glossar-v1-current-20260912
     paths:
       - 'protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/**'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tools/**'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/DATEN/**'
       - '.github/workflows/glossar-v1-wordpress-smoke.yml'
   workflow_dispatch:
 
@@ -25,6 +27,8 @@ jobs:
           - wordpress:latest
     env:
       PLUGIN_DIR: protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/0.1.0/universal-glossary-engine
+      CAMPUS_GLOSSARY_DIR: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/DATEN
+      CAMPUS_ADAPTER: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tools/build_uge_import.py
     steps:
       - uses: actions/checkout@v4
 
@@ -185,8 +189,8 @@ jobs:
           echo "ASTRA_VERSION=$(docker exec uge-wp wp theme get astra --field=version --allow-root)"
           echo "YOAST_VERSION=$(docker exec uge-wp wp plugin get wordpress-seo --field=version --allow-root)"
 
-          NORMAL_PAGE_ID=$(docker exec uge-wp wp post create --allow-root --post_type=page --post_status=publish --post_title='Normale Testseite' --post_name=normale-testseite --post_content='Unveränderte normale Seite.' --porcelain)
-          NORMAL_POST_ID=$(docker exec uge-wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Normaler Testbeitrag' --post_name=normaler-testbeitrag --post_content='Unveränderter normaler Beitrag.' --porcelain)
+          docker exec uge-wp wp post create --allow-root --post_type=page --post_status=publish --post_title='Normale Testseite' --post_name=normale-testseite --post_content='Unveränderte normale Seite.'
+          docker exec uge-wp wp post create --allow-root --post_type=post --post_status=publish --post_title='Normaler Testbeitrag' --post_name=normaler-testbeitrag --post_content='Unveränderter normaler Beitrag.'
 
           curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/glossar-astra-yoast.html
           curl -fsS http://127.0.0.1:8080/glossar/kolik/ -o /tmp/kolik-astra-yoast.html
@@ -222,8 +226,8 @@ jobs:
                   if tag.lower()=='title' and self._in_title:
                       self.titles.append(unescape(''.join(self._title)).strip()); self._in_title=False
 
-          html=open('/tmp/kolik-astra-yoast.html', encoding='utf-8').read()
-          p=HeadParser(); p.feed(html)
+          raw=open('/tmp/kolik-astra-yoast.html', encoding='utf-8').read()
+          p=HeadParser(); p.feed(raw)
           descriptions=[m.get('content','') for m in p.metas if m.get('name','').lower()=='description']
           robots=[m.get('content','') for m in p.metas if m.get('name','').lower()=='robots']
           canonicals=[l.get('href','') for l in p.links if 'canonical' in l.get('rel','').lower().split()]
@@ -234,6 +238,72 @@ jobs:
           print('ASTRA_YOAST_META_SINGLETON_PASS')
           PY
           echo 'ASTRA_YOAST_REAL_PASS'
+
+      - name: Positive/negative – real Campus Wissensdatenbank import
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$CAMPUS_ADAPTER" "$CAMPUS_GLOSSARY_DIR" /tmp/campus-uge.json
+          jq -e '.format == "uge-json-v1"' /tmp/campus-uge.json >/dev/null
+          jq -e '.policy == "GEPRUEFT_ONLY_DRAFT_IMPORT"' /tmp/campus-uge.json >/dev/null
+          jq -e '.items | length == 7' /tmp/campus-uge.json >/dev/null
+          jq -e '.skipped_unverified | length == 0' /tmp/campus-uge.json >/dev/null
+          jq -e '[.items[].title] | sort == ["Aalstrich","Ganasche","Kötenbehang","Röhrbein","Stockmaß","Widerrist","Zuchtbuch"] | sort' /tmp/campus-uge.json >/dev/null
+          ! grep -q '"quellen"' /tmp/campus-uge.json
+          ! grep -q '"recherche_status"' /tmp/campus-uge.json
+          ! grep -q '"seo_status"' /tmp/campus-uge.json
+          ! grep -q '"unterbereich"' /tmp/campus-uge.json
+
+          rm -rf /tmp/campus-unverified /tmp/campus-invalid
+          cp -a "$CAMPUS_GLOSSARY_DIR" /tmp/campus-unverified
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/campus-unverified/term-aalstrich.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          d['recherche_status']='OFFEN'
+          p.write_text(json.dumps(d, ensure_ascii=False), encoding='utf-8')
+          PY
+          python3 "$CAMPUS_ADAPTER" /tmp/campus-unverified /tmp/campus-unverified.json
+          jq -e '.items | length == 6' /tmp/campus-unverified.json >/dev/null
+          jq -e '.skipped_unverified == ["term-aalstrich.json"]' /tmp/campus-unverified.json >/dev/null
+
+          cp -a "$CAMPUS_GLOSSARY_DIR" /tmp/campus-invalid
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/campus-invalid/term-aalstrich.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          d.pop('begriff', None)
+          p.write_text(json.dumps(d, ensure_ascii=False), encoding='utf-8')
+          PY
+          if python3 "$CAMPUS_ADAPTER" /tmp/campus-invalid /tmp/campus-invalid.json 2>/tmp/campus-invalid.err; then
+            echo 'Invalid record was wrongly accepted' >&2
+            exit 20
+          fi
+          grep -q 'Pflichtfelder fehlen' /tmp/campus-invalid.err
+
+          docker cp /tmp/campus-uge.json uge-wp:/tmp/campus-uge.json
+          docker exec uge-wp wp eval --allow-root 'wp_set_current_user(1); $_FILES["uge_json"]=["tmp_name"=>"/tmp/campus-uge.json","size"=>filesize("/tmp/campus-uge.json")]; $_REQUEST["uge_transfer_nonce"]=wp_create_nonce("uge_import"); UGE_Transfer::import();' || true
+
+          for slug in aalstrich ganasche koetenbehang roehrbein stockmass widerrist zuchtbuch; do
+            ID=$(docker exec uge-wp wp post list --allow-root --post_type=uge_term --name="$slug" --field=ID --format=ids)
+            test -n "$ID"
+            test "$(docker exec uge-wp wp post get "$ID" --field=post_status --allow-root)" = draft
+          done
+
+          AAL_ID=$(docker exec uge-wp wp post list --allow-root --post_type=uge_term --name=aalstrich --field=ID --format=ids)
+          test "$(docker exec uge-wp wp post meta get "$AAL_ID" _uge_short_definition --allow-root)" = 'Dunkler längs verlaufender Streifen entlang der Rückenmittellinie bis in Richtung Schweif.'
+          test "$(docker exec uge-wp wp post meta get "$AAL_ID" _uge_synonyms --allow-root)" = 'dorsaler Streifen'
+          test "$(docker exec uge-wp wp post meta get "$AAL_ID" _uge_related_terms --allow-root)" = 'Falbe, Wildzeichnung, Zebrierung'
+          docker exec uge-wp wp post get "$AAL_ID" --field=post_content --allow-root | grep -q 'Abgrenzung:'
+          docker exec uge-wp wp post term list "$AAL_ID" uge_group --field=name --allow-root | grep -Fxq 'Farben & Genetik'
+
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/glossar-after-campus.html
+          for title in Aalstrich Ganasche Kötenbehang Röhrbein Stockmaß Widerrist Zuchtbuch; do
+            ! grep -q "$title" /tmp/glossar-after-campus.html
+          done
+          echo 'CAMPUS_WISSENSDATENBANK_REAL_IMPORT_PASS'
 
       - name: Positive – second portal without core change
         shell: bash
@@ -274,6 +344,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo 'UGE_WORDPRESS_MYSQL_ASTRA_YOAST_REAL_SMOKE_PASS'
+          echo 'UGE_WORDPRESS_MYSQL_ASTRA_YOAST_CAMPUS_IMPORT_REAL_SMOKE_PASS'
           docker exec uge-wp wp core version --allow-root
           docker exec uge-wp php -r 'echo PHP_VERSION, PHP_EOL;'
