@@ -21,7 +21,7 @@ class UPC_Research_Refresh_Planner {
         $this->comparison_maintenance = $comparison_maintenance;
     }
 
-    public function build( $project_key = 'pferde-atelier', $as_of_utc = '', $limit_per_group = 100 ) {
+    public function build( $project_key = 'pferde-atelier', $as_of_utc = '', $limit_per_group = 500 ) {
         $project_key = sanitize_key( $project_key );
         if ( '' === $project_key ) {
             return new WP_Error( 'UPC_REFRESH_PROJECT_KEY_MISSING', 'Project key is required.' );
@@ -45,7 +45,7 @@ class UPC_Research_Refresh_Planner {
         foreach ( $policy['groups'] as $group ) {
             $key = (string) $group['product_group_key'];
             $months = (int) $group['refresh_months'];
-            $cutoff = $this->subtract_months( $as_of, $months );
+            $cutoff = $this->subtract_calendar_months( $as_of, $months );
             if ( is_wp_error( $cutoff ) ) {
                 return $cutoff;
             }
@@ -55,9 +55,9 @@ class UPC_Research_Refresh_Planner {
                 return $ids;
             }
 
+            $ids = array_values( array_map( 'absint', (array) $ids ) );
             $group_due = 0;
             foreach ( $ids as $product_id ) {
-                $product_id = absint( $product_id );
                 $bundle = $this->knowledge->get_product_bundle( $product_id );
                 if ( is_wp_error( $bundle ) ) {
                     return $bundle;
@@ -103,6 +103,7 @@ class UPC_Research_Refresh_Planner {
                 'refresh_months' => $months,
                 'due_cutoff_utc' => $cutoff,
                 'due_product_count' => $group_due,
+                'possibly_truncated' => count( $ids ) >= $limit_per_group,
             );
         }
 
@@ -118,6 +119,7 @@ class UPC_Research_Refresh_Planner {
             'as_of_utc' => $as_of,
             'maintenance_policy_sha256' => hash_file( 'sha256', $policy_path ),
             'market_gate' => $policy['market_gate'],
+            'limit_per_group' => $limit_per_group,
             'group_count' => count( $policy['groups'] ),
             'due_product_count' => count( $tasks ),
             'groups' => $group_summaries,
@@ -162,10 +164,28 @@ class UPC_Research_Refresh_Planner {
         return gmdate( 'Y-m-d H:i:s', $timestamp );
     }
 
-    private function subtract_months( $datetime, $months ) {
+    private function subtract_calendar_months( $datetime, $months ) {
         try {
             $dt = new DateTimeImmutable( $datetime, new DateTimeZone( 'UTC' ) );
-            return $dt->modify( '-' . absint( $months ) . ' months' )->format( 'Y-m-d H:i:s' );
+            $months = absint( $months );
+            $year = (int) $dt->format( 'Y' );
+            $month = (int) $dt->format( 'n' );
+            $day = (int) $dt->format( 'j' );
+
+            $index = ( $year * 12 + ( $month - 1 ) ) - $months;
+            $target_year = (int) floor( $index / 12 );
+            $target_month = ( $index % 12 ) + 1;
+            if ( $target_month <= 0 ) {
+                $target_month += 12;
+                $target_year--;
+            }
+
+            $last_day = cal_days_in_month( CAL_GREGORIAN, $target_month, $target_year );
+            $target_day = min( $day, $last_day );
+
+            return $dt
+                ->setDate( $target_year, $target_month, $target_day )
+                ->format( 'Y-m-d H:i:s' );
         } catch ( Exception $e ) {
             return new WP_Error( 'UPC_REFRESH_DATETIME_INVALID', 'Refresh cutoff could not be calculated.' );
         }
