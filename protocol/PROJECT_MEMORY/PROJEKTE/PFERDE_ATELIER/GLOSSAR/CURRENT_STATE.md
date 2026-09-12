@@ -11,7 +11,7 @@ STATUS: BÜRO EINGERICHTET / MOD-008 V1-PROTOTYP LOKAL PASS / WORDPRESS-REALTEST
 - Vom Nutzer im WordPress-Live-Backend bestätigt: Seite `Glossar` ist angelegt und verlinkt.
 - Keine weiteren WordPress-Seiten und keine normalen Beiträge pro Glossarbegriff anlegen.
 - Das bestehende Pferde-Designplugin bleibt unangetastet.
-- Technischer Kern ist `MOD-008 – Universal Glossar Engine` unter `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`.
+- Technischer Kern ist `MOD-008 – Universal Glossar Engine` unter `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`.
 - V1-Prototyp 0.1.0 ist isoliert gebaut und lokal positiv/negativ geprüft.
 - PHP-Lint 8/8 PASS; statische Prüfmatrix 15/15 PASS; Runtime-Stub PASS.
 - Fachfremde Zweitkonfiguration `Lexikon` funktioniert im lokalen Vertrags-/Stubtest ohne Coreänderung.
