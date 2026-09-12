@@ -14,15 +14,15 @@ class DB {
  function get_results($prepared,$format=null){ return $this->rows; }
 }
 function ok($c,$m){ if(!$c){fwrite(STDERR,"FAIL:$m\n");exit(1);} echo "PASS:$m\n"; }
-require dirname( __DIR__ ) . '/src/class-upc-affiliate-identifier-coverage.php';
+require dirname( __DIR__ ) . '/src/class-upc-affiliate-bridge.php';
 
 $db=new DB();
+$GLOBALS['wpdb']=$db;
 $db->rows=[
  ['id'=>2,'manufacturer'=>'Maker B','model_name'=>'Model B','product_group_key'=>'regendecken','manufacturer_product_url'=>'https://maker.example/b','last_verified_at'=>'2026-09-01'],
  ['id'=>5,'manufacturer'=>'Maker C','model_name'=>'Model C','product_group_key'=>'winterdecken','manufacturer_product_url'=>'https://maker.example/c','last_verified_at'=>'2026-08-01'],
 ];
-$c=new UPC_Affiliate_Identifier_Coverage($db);
-$r=$c->missing_products(999);
+$r=UPC_Affiliate_Bridge::missing_identifier_products(999);
 ok($r['status']==='AFFILIATE_IDENTIFIER_RESEARCH_REQUIRED' && $r['count']===2,'coverage positive');
 ok($r['products'][0]['requested_identifier_types']===['GTIN','EAN','MPN'],'requests exact identifier types only');
 ok($db->last['args'][6]===500,'coverage limit hard capped');
@@ -33,13 +33,13 @@ ok(false!==strpos($q,"i.source_url <> ''") && false!==strpos($q,'i.verified_at I
 ok(false!==strpos($q,"lifecycle_status IN ('ACTIVE','TEMPORARILY_UNAVAILABLE','UNKNOWN')"),'discontinued products excluded');
 
 $db->rows=[];
-$r=$c->missing_products(100,'Regendecken');
+$r=UPC_Affiliate_Bridge::missing_identifier_products(100,'Regendecken');
 ok($r['count']===0,'covered group may return empty');
 ok(false!==strpos($db->last['query'],'p.product_group_key = %s') && $db->last['args'][0]==='regendecken','optional group filter bound');
 ok($db->last['args'][7]===100,'group query limit bound');
 
 $db->rows=[['id'=>9,'manufacturer'=>'','model_name'=>'Broken','product_group_key'=>'regendecken','manufacturer_product_url'=>'https://maker.example/broken']];
-$r=$c->missing_products();
+$r=UPC_Affiliate_Bridge::missing_identifier_products();
 ok(is_wp_error($r) && $r->get_error_code()==='UPC_IDENTIFIER_COVERAGE_PRODUCT_INVALID','incomplete row blocks fail closed');
 
 $src=file_get_contents(dirname( __DIR__ ) . '/src/class-upc-affiliate-identifier-coverage.php');
