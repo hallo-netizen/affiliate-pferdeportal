@@ -91,4 +91,11 @@ runtime_assert( false === stripos( $runtime_source, 'add_action' ), 'runtime reg
 runtime_assert( false === stripos( $runtime_source, 'wp_schedule' ), 'runtime registers no scheduler' );
 runtime_assert( false === stripos( $runtime_source, 'wp_insert_post' ) && false === stripos( $runtime_source, 'wp_update_post' ), 'runtime writes no article' );
 
+$plugin_source = file_get_contents( dirname( __DIR__ ) . '/universal-product-comparison.php' );
+runtime_assert( false !== strpos( $plugin_source, 'function upc_apply_research_refresh_results' ), 'main plugin exposes explicit apply function' );
+runtime_assert( false !== strpos( $plugin_source, 'function upc_evaluate_product_candidate' ), 'main plugin exposes explicit candidate function' );
+runtime_assert( 0 === preg_match( '/add_action\s*\([^\n]*upc_apply_research_refresh_results/i', $plugin_source ), 'apply function is not hook-driven' );
+runtime_assert( 0 === preg_match( '/add_action\s*\([^\n]*upc_evaluate_product_candidate/i', $plugin_source ), 'candidate function is not hook-driven' );
+runtime_assert( false === stripos( $plugin_source, 'wp_schedule_event' ), 'main plugin adds no refresh scheduler' );
+
 fwrite( STDOUT, "UPC_RESEARCH_RUNTIME_GESAMT_PASS\n" );
