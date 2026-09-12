@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Universal Product Knowledge
  * Description: Internal, source-bound product knowledge store for comparisons, advisory content and exact affiliate matching.
- * Version: 0.1.1-prototype
+ * Version: 0.1.2-prototype
  * Requires at least: 6.4
  * Requires PHP: 7.4
  */
@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'UPK_VERSION', '0.1.1-prototype' );
-define( 'UPK_SCHEMA_VERSION', '2' );
+define( 'UPK_VERSION', '0.1.2-prototype' );
+define( 'UPK_SCHEMA_VERSION', '3' );
 define( 'UPK_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/src/class-upk-repository.php';
@@ -68,6 +68,9 @@ function upk_install_schema() {
         subject_id bigint(20) unsigned NOT NULL,
         identifier_type varchar(40) NOT NULL,
         identifier_value varchar(191) NOT NULL,
+        source_url text NULL,
+        source_type varchar(32) NOT NULL DEFAULT '',
+        verified_at datetime NULL,
         created_at datetime NOT NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY identifier_unique (identifier_type, identifier_value),
