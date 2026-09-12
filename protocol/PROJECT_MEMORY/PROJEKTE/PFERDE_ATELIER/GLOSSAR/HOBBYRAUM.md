@@ -42,15 +42,15 @@ Isolierter Glossar-Hobbyraum-Branch:
 ## ALLGEMEINER CORE
 
 Autorität:
-`../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
 → `CURRENT_STATE.md`
 → `HOBBYRAUM.md`
 
 Quellstand:
-`../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/0.1.0/universal-glossary-engine/`
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/prototype/0.1.0/universal-glossary-engine/`
 
 QA:
-`../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/PROTOTYPE_QA_0.1.0.md`
+`../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/PROTOTYPE_QA_0.1.0.md`
 
 Kandidaten-Hash:
 `c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
@@ -121,7 +121,7 @@ Core + kleiner Adapter. Kein zweiter Plugin-Fork.
 - Bürostand: `CURRENT_STATE.md`
 - Bürotür: `START_HERE.md`
 - Seitenkonzept: `SEITENKONZEPT_V1.md`
-- Allgemeiner Core: `../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+- Allgemeiner Core: `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
 - Fachdatenbank: `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
 - DESIGN: `../DESIGN/START_HERE.md`
 - TEXT/SEO: `../TEXT/START_HERE.md`
