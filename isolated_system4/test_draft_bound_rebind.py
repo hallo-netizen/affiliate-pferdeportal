@@ -1,5 +1,6 @@
 import copy
-import hashlib
+import json
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -7,104 +8,137 @@ from unittest import mock
 import production_checks
 
 
-def sha(value: str) -> str:
-    return hashlib.sha256(value.encode('utf-8')).hexdigest()
-
-
-def bound_item():
+def current_language_evidence(body: str) -> dict:
+    checked = production_checks._ppm_visible_language_text(body)
+    raw = '{"matches":[]}'
+    checked_hash = production_checks.text_sha256(checked)
+    raw_hash = production_checks.text_sha256(raw)
     return {
-        'article_type': 'Beratung',
-        'target_keyword': 'Testkeyword',
-        'topic': 'Testtitel',
-        'canonical_article_id': 'article:test',
-        'plan_item_key': 'test-key',
-        'canonical_article': {
-            'title': 'Testtitel',
-            'body_html': '<p>ALT</p>',
-            'body_html_sha256': sha('<p>ALT</p>'),
-            'body_text': 'ALT',
-        },
-        'quality_binding': {
-            'contract': 'content_structure_language_binding_v2',
-            'language_review_status': 'LANGUAGETOOL_EVIDENCE_BOUND',
-            'language_evidence': {
-                'checked_text': 'ALT',
-                'checked_text_sha256': sha('ALT'),
-                'content_hash': sha('<p>ALT</p>'),
-                'engine': production_checks.LT_ENGINE,
-                'execution_record': {'input_sha256': sha('ALT'), 'raw_stdout_sha256': 'old', 'return_code': 0},
-                'raw_finding_count': 0,
-                'raw_report_json': '{"matches":[]}',
-                'raw_report_sha256': sha('{"matches":[]}'),
-                'return_code': 0,
-                'unresolved_finding_count': 0,
-            },
+        "engine": production_checks.LT_ENGINE,
+        "outer_dependency_sha256": production_checks.LT_OUTER_DEPENDENCY_SHA256,
+        "inner_dependency_sha256": production_checks.LT_INNER_DEPENDENCY_SHA256,
+        "content_hash": production_checks.text_sha256(body),
+        "checked_text": checked,
+        "checked_text_sha256": checked_hash,
+        "raw_report_json": raw,
+        "raw_report_sha256": raw_hash,
+        "raw_finding_count": 0,
+        "unresolved_finding_count": 0,
+        "return_code": 0,
+        "approved_exceptions": [],
+        "execution_record": {
+            "input_sha256": checked_hash,
+            "raw_stdout_sha256": raw_hash,
+            "return_code": 0,
         },
     }
 
 
-class DraftBoundRebindTests(unittest.TestCase):
-    def test_rebind_updates_every_draft_bound_hash_without_mutating_bound_input(self):
-        item = bound_item()
-        item['quality_binding_hash'] = production_checks._canonical_sha(item['quality_binding'])
-        original = copy.deepcopy(item)
-        body = '<p>NEUER geprüfter Text</p>'
-        checked = 'NEUER geprüfter Text'
-        lt = {
-            'status': 'PASS',
-            'engine': production_checks.LT_ENGINE,
-            'finding_count': 0,
-            'checked_text': checked,
-            'checked_text_sha256': sha(checked),
-            'raw_report_json': '{"matches":[]}',
-            'raw_report_sha256': sha('{"matches":[]}'),
-            'return_code': 0,
+def plan_for(body: str) -> dict:
+    quality = {
+        "contract": "content_structure_language_binding_v2",
+        "wordpress_category": {"slug": "test-beratung"},
+        "table_value_statement": "Unveränderte fachliche Tabellenbindung bleibt bestehen.",
+        "language_evidence": current_language_evidence(body),
+    }
+    return {
+        "article_type": "Beratung",
+        "topic": "Testberatung auswählen",
+        "target_keyword": "Testberatung",
+        "canonical_article": {
+            "title": "Testberatung auswählen",
+            "body_html": body,
+            "body_html_sha256": production_checks.text_sha256(body),
+            "body_text": production_checks._canonical_body_text(body),
+        },
+        "quality_binding": quality,
+        "quality_binding_hash": production_checks.stable_hash(quality),
+    }
+
+
+class RuntimeDraftRebindTests(unittest.TestCase):
+    def test_current_bound_language_evidence_is_reused_without_extra_lt(self):
+        body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
+        plan = plan_for(body)
+        original = copy.deepcopy(plan)
+        with mock.patch.object(production_checks, "_fresh_ppm_language_evidence") as fresh:
+            rebound, source = production_checks._runtime_rebound_plan(Path("."), body, plan)
+        fresh.assert_not_called()
+        self.assertEqual(source, "BOUND_CURRENT_REUSED")
+        self.assertEqual(plan, original)
+        self.assertEqual(rebound["quality_binding_hash"], production_checks.stable_hash(rebound["quality_binding"]))
+
+    def test_repaired_draft_refreshes_only_draft_derived_fields(self):
+        old_body = "<article><p>Alter Text.</p><h2>Prüfung</h2><p>Bindung.</p></article>"
+        new_body = "<article><p>Neuer Text.</p><h2>Prüfung</h2><p>Bindung.</p></article>"
+        plan = plan_for(old_body)
+        original = copy.deepcopy(plan)
+        fresh_evidence = current_language_evidence(new_body)
+        with mock.patch.object(production_checks, "_fresh_ppm_language_evidence", return_value=(fresh_evidence, "REAL_LT68_CURRENT_DRAFT_REFRESHED")) as fresh:
+            rebound, source = production_checks._runtime_rebound_plan(Path("."), new_body, plan)
+        fresh.assert_called_once()
+        self.assertEqual(source, "REAL_LT68_CURRENT_DRAFT_REFRESHED")
+        self.assertEqual(plan, original, "bound production context must remain immutable")
+        self.assertEqual(rebound["canonical_article"]["body_html"], new_body)
+        self.assertEqual(rebound["canonical_article"]["body_html_sha256"], production_checks.text_sha256(new_body))
+        self.assertEqual(rebound["canonical_article"]["body_text"], production_checks._canonical_body_text(new_body))
+        self.assertEqual(rebound["quality_binding"]["language_evidence"], fresh_evidence)
+        self.assertEqual(rebound["quality_binding"]["table_value_statement"], original["quality_binding"]["table_value_statement"])
+        self.assertEqual(rebound["quality_binding_hash"], production_checks.stable_hash(rebound["quality_binding"]))
+
+    def test_same_exact_lt_checked_text_is_reused_for_ppm_without_second_lt(self):
+        body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
+        checked = production_checks._plain_text(body).rstrip("\n")
+        self.assertEqual(checked, production_checks._ppm_visible_language_text(body))
+        raw = '{"matches":[]}'
+        lt_pass = {
+            "status": "PASS", "engine": production_checks.LT_ENGINE, "finding_count": 0,
+            "_checked_text": checked, "_raw_report_json": raw, "_return_code": 0,
         }
-        rebound = production_checks._rebind_plan_to_checked_draft(item, body, lt)
-        self.assertEqual(item, original)
-        self.assertEqual(rebound['canonical_article']['body_html'], body)
-        self.assertEqual(rebound['canonical_article']['body_html_sha256'], sha(body))
-        self.assertEqual(rebound['canonical_article']['body_text'], checked)
-        ev = rebound['quality_binding']['language_evidence']
-        self.assertEqual(ev['checked_text'], checked)
-        self.assertEqual(ev['checked_text_sha256'], sha(checked))
-        self.assertEqual(ev['content_hash'], sha(body))
-        self.assertEqual(ev['execution_record']['input_sha256'], sha(checked))
-        self.assertEqual(ev['raw_finding_count'], 0)
-        self.assertEqual(ev['unresolved_finding_count'], 0)
-        self.assertEqual(rebound['quality_binding_hash'], production_checks._canonical_sha(rebound['quality_binding']))
-        for key in ('article_type', 'target_keyword', 'topic', 'canonical_article_id', 'plan_item_key'):
-            self.assertEqual(rebound[key], original[key])
+        with mock.patch.object(production_checks, "_run_languagetool_text") as second:
+            evidence, source = production_checks._fresh_ppm_language_evidence(Path("."), body, lt_pass)
+        second.assert_not_called()
+        self.assertEqual(source, "REAL_LT68_FULLCHECK_REUSED")
+        self.assertEqual(evidence["checked_text"], checked)
+        self.assertEqual(evidence["raw_report_json"], raw)
+        self.assertEqual(evidence["unresolved_finding_count"], 0)
 
-    def test_run_all_runs_lt_once_and_passes_exact_pass_evidence_to_ppm(self):
-        body = '<p>Sauberer Text</p>'
-        state = {'draft_markdown': body, 'draft_sha256': sha(body)}
-        lt = {'status': 'PASS', 'finding_count': 0, 'checked_text': 'Sauberer Text', 'checked_text_sha256': sha('Sauberer Text'), 'raw_report_json': '{"matches":[]}', 'raw_report_sha256': sha('{"matches":[]}'), 'return_code': 0}
-        ppm = {'status': 'PASS'}
-        with mock.patch.object(production_checks, 'validate_bound_context'), \
-             mock.patch.object(production_checks, 'no_legacy_runtime_dependencies', return_value={'status': 'PASS'}), \
-             mock.patch.object(production_checks, 'no_external_links', return_value={'status': 'PASS'}), \
-             mock.patch.object(production_checks, 'run_languagetool', return_value=lt) as run_lt, \
-             mock.patch.object(production_checks, 'run_ppm_content_validator', return_value=ppm) as run_ppm:
-            result = production_checks.run_all(Path('.'), state, {}, bound_item())
-        self.assertEqual(result['status'], 'PASS')
-        self.assertEqual(run_lt.call_count, 1)
-        self.assertEqual(run_ppm.call_count, 1)
-        self.assertIs(run_ppm.call_args.args[4], lt)
+    def test_different_lt_checked_text_must_run_second_real_check(self):
+        body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
+        lt_pass = {"_checked_text": "NICHT IDENTISCH", "_raw_report_json": '{"matches":[]}', "_return_code": 0}
+        with mock.patch.object(production_checks, "_run_languagetool_text", return_value=({"matches": []}, '{"matches":[]}', 0)) as second:
+            evidence, source = production_checks._fresh_ppm_language_evidence(Path("."), body, lt_pass)
+        second.assert_called_once()
+        self.assertEqual(source, "REAL_LT68_CURRENT_DRAFT_REFRESHED")
+        self.assertEqual(evidence["unresolved_finding_count"], 0)
 
-    def test_repairable_lt_finding_short_circuits_ppm(self):
-        body = '<p>Fehler</p>'
-        state = {'draft_markdown': body, 'draft_sha256': sha(body)}
-        repair = production_checks.RepairRequired('languagetool', [{'error_code': 'LANGUAGETOOL_FINDING'}])
-        with mock.patch.object(production_checks, 'validate_bound_context'), \
-             mock.patch.object(production_checks, 'no_legacy_runtime_dependencies', return_value={'status': 'PASS'}), \
-             mock.patch.object(production_checks, 'no_external_links', return_value={'status': 'PASS'}), \
-             mock.patch.object(production_checks, 'run_languagetool', side_effect=repair), \
-             mock.patch.object(production_checks, 'run_ppm_content_validator') as run_ppm:
-            with self.assertRaises(production_checks.RepairRequired):
-                production_checks.run_all(Path('.'), state, {}, bound_item())
-        run_ppm.assert_not_called()
+    def test_tampered_bound_quality_hash_is_not_normalized(self):
+        body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
+        plan = plan_for(body)
+        plan["quality_binding_hash"] = "0" * 64
+        with self.assertRaisesRegex(production_checks.ProductionCheckError, "PPM679_BOUND_QUALITY_BINDING_HASH_INVALID"):
+            production_checks._runtime_rebound_plan(Path("."), body, plan)
+
+    def test_wrong_quality_contract_is_not_synthesized(self):
+        body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
+        plan = plan_for(body)
+        plan["quality_binding"]["contract"] = "wrong"
+        plan["quality_binding_hash"] = production_checks.stable_hash(plan["quality_binding"])
+        with self.assertRaisesRegex(production_checks.ProductionCheckError, "PPM679_QUALITY_BINDING_MISSING"):
+            production_checks._runtime_rebound_plan(Path("."), body, plan)
+
+    def test_ppm_visible_text_contract_excludes_h3_but_keeps_bound_visible_units(self):
+        body = "<article><h3>Nicht im PPM-Sprachbeleg</h3><h2>Auswahl</h2><p>Hallo <strong>Welt</strong> !</p><td>Wert ; gut</td></article>"
+        self.assertEqual(production_checks._ppm_visible_language_text(body), "Auswahl\n\nHallo Welt!\n\nWert; gut")
+
+    def test_explicit_lt_path_fails_closed_instead_of_falling_back(self):
+        with tempfile.TemporaryDirectory() as td:
+            fake = Path(td) / "languagetool-commandline.jar"
+            fake.write_bytes(b"not-the-bound-jar")
+            with mock.patch.dict("os.environ", {"SYSTEM4_LANGUAGETOOL_JAR": str(fake)}, clear=False):
+                with self.assertRaisesRegex(production_checks.ProductionCheckError, "LANGUAGETOOL_6_8_EXPLICIT_JAR_INVALID"):
+                    production_checks._find_languagetool_jar(Path(td))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main(verbosity=2)
