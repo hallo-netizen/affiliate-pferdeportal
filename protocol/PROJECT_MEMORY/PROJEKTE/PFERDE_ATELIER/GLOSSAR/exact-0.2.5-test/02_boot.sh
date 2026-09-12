@@ -28,6 +28,6 @@ PHP
 docker exec wp mkdir -p /var/www/html/wp-content/plugins/affiliate-portal-template-kit
 docker cp /tmp/stub.php wp:/var/www/html/wp-content/plugins/affiliate-portal-template-kit/affiliate-portal-template-kit.php
 docker exec wp wp plugin activate affiliate-portal-template-kit universal-glossary-engine --allow-root
-test "$(docker exec wp wp plugin get universal-glossary-engine --field=version --allow-root)" = 0.2.5
-test "$(docker exec wp wp theme status astra --field=status --allow-root)" = active
+test "$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)" = 0.2.5
+test "$(docker exec wp wp theme list --name=astra --field=status --allow-root)" = active
 echo UGE025_REAL_WP_ASTRA_BOOT_PASS
