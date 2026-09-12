@@ -1,48 +1,65 @@
 # UNIVERSAL GLOSSAR ENGINE – CURRENT_STATE
 
 STAND: 2026-09-12
-STATUS: KONZEPT GEBUNDEN / PROTOTYP NOCH NICHT GEBAUT
+STATUS: V1-PROTOTYP LOKAL PASS / WORDPRESS-REALTEST OFFEN
 
 ## Belastbarer Stand
 
-- Geplanter Modulname: `MOD-008 – Universal Glossar Engine`.
+- Modulname: `MOD-008 – Universal Glossar Engine`.
 - Ziel: ein einziger projektunabhängiger WordPress-Core für mehrere Portale.
 - Erste Projektanwendung: Pferde Atelier.
-- Pferde-spezifische Begriffe, Oberbereiche, Texte, URL-Basis und SEO-Schemata dürfen nicht im Core hart verdrahtet werden.
-- Projektkonfiguration liegt außerhalb des Core.
-- Ein eigener WordPress-Backendbereich `Glossar` ist vorgesehen.
-- Glossarbegriffe sollen als eigener WordPress-Inhalt verwaltet werden, aber nicht als normale Beiträge oder Seiten erscheinen.
-- Oberbegriffe sollen getrennt von normalen WordPress-Kategorien verwaltet werden.
-- Eine vorhandene WordPress-Seite kann als Glossar-Hauptseite ausgewählt werden.
-- Jeder veröffentlichte Begriff soll eine eigene Zieladresse sowie eigene SEO-Titel-/Meta-Description-Werte erhalten können.
-- SEO-Ausgabe soll providerneutral bleiben; Yoast kann über offizielle Filter integriert werden, darf aber keine Pflichtabhängigkeit des Core werden.
+- Pferde-spezifische Begriffe, Oberbereiche, Texte, URL-Basis und SEO-Schemata sind nicht im Core hart verdrahtet.
+- Projektkonfiguration liegt außerhalb des Fachkerns bzw. wird ausschließlich über Konfiguration/Filter gebunden.
+- Eigener WordPress-Backendbereich `Glossar`.
+- Glossarbegriffe als eigener Inhaltstyp, getrennt von normalen Beiträgen/Seiten.
+- Oberbereiche getrennt von normalen WordPress-Kategorien und hierarchisch erweiterbar.
+- Vorhandene WordPress-Seite als Glossar-Hauptseite auswählbar.
+- Eigene Zieladresse je veröffentlichtem Begriff.
+- Eigene SEO-Titel-/Meta-Description-Werte; providerneutraler Core mit optionaler Yoast-Brücke.
+- Suchfeld, A–Z, Oberbereiche und Aufklapper im Frontend-Prototyp vorhanden.
 - Kein Bildzwang.
 - Kein Auto-Publish.
-- Keine große Textmaschine im Core.
+- JSON-Import/Export vorhanden; Import ausschließlich als Entwurf und nur für erlaubte Felder.
+- Feldschema erweiterbar, ohne bestehende Begriffe umzuschreiben.
+
+## Prüfstand
+
+Autoritativ:
+`PROTOTYPE_QA_0.1.0.md`
+
+Aktuell belegt:
+- PHP-Lint 8/8 PASS;
+- statische Positiv-/Negativprüfung 15/15 PASS;
+- Runtime-Stub-Vertragstest PASS;
+- Pferde-Konfiguration PASS im lokalen Vertrags-/Stubtest;
+- fachfremde Zweitkonfiguration `Lexikon` PASS ohne Coreänderung;
+- ZIP-Struktur PASS.
+
+Prototyp-ZIP SHA-256:
+`c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
 
 ## Modulklasse
 
-Formal noch `UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
+Formal weiterhin:
+`UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
 
 Grund:
-Allgemeingültigkeit ist erst bewiesen, wenn derselbe Core ohne Codeänderung mit mindestens einer zweiten fachlich anderen Projektkonfiguration funktioniert.
+Der lokale Zweitkonfigurationsbeweis ist positiv, aber ein zweites echtes WordPress-Portal wurde noch nicht ausgeführt.
 
 ## Kritische Entscheidung
 
-Aktuell **keine parallele Pluginentwicklung**.
+Keine parallele Pluginentwicklung.
 
-Begründung:
-Die Trennung `Core + Projektkonfiguration` reicht konzeptionell aus. Eine zweite Codebasis würde unnötige Wartung und Versionsdrift erzeugen.
+`Core + Projektkonfiguration` ist aktuell technisch tragfähig. Falls ein echter Zweitportaltest später eine unkonfigurierbare Projektspezifik beweist, wird nur ein kleiner Adapter ergänzt; kein vollständiger Fork.
 
-Falls eine spätere zweite Portalprüfung echte unkonfigurierbare Fachabhängigkeiten zeigt:
-- Core bleibt neutral;
-- projektspezifischer Adapter wird separat ergänzt;
-- kein Fork des gesamten Plugins.
+## Noch offen
 
-## Nächster technischer Schritt
+- echter WordPress-Install-/Upgrade-Test;
+- Permalink-Kollisionstest mit vorhandener `/glossar/`-Seite;
+- echter Yoast-Test;
+- echter Astra/Pferde-Frontendtest;
+- realer Import aus der Wissensdatenbank;
+- größerer Bestands-/Performance-Test;
+- zweites echtes WordPress-Portal.
 
-Minimalen V1-Prototyp des neutralen Core definieren und isoliert gegen zwei Konfigurationen testen:
-1. Pferde Atelier real;
-2. fachlich neutrale Testkonfiguration ohne Pferdebegriffe.
-
-Erst bei beiden PASS darf die Modulklasse auf ALLGEMEINGÜLTIG hochgestuft werden.
+Keine Release-/LIVE-Freigabe vor diesen Prüfungen.
