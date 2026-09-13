@@ -7,7 +7,9 @@ ROLLE: ZENTRALES INVENTAR-/ARTEFAKTREGISTER, KEINE FACH-/LIVE-WAHRHEIT
 
 `ARTEFAKT_SYNC`: PASS / BLOCKED / NICHT_ERFORDERLICH / UNGEKLÄRT
 
-PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS/<PLUGIN-ID>/CURRENT.zip` liegt und ihr Hash gegen die autoritative Quelle geprüft wurde.
+PASS nur wenn die isolierte aktuelle Datei tatsächlich unter
+`/Campus-Plugins/PFERDE_ATELIER/<PLUGIN-ID>/CURRENT.zip`
+liegt und aus der persistenten Ablage erneut gelesen, als ZIP geprüft und per SHA-256 gegen den belegten Quellstand verglichen wurde.
 
 ## PPA-001 – Affiliate-Zentrale (Portal-kompatibel)
 
@@ -18,8 +20,9 @@ PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS
 - AKTUELL BELEGTER TECHNISCHER KANDIDAT: 6.72.19
 - KANONISCHES 26-DATEIEN-MANIFEST: `694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b`
 - KANONISCHER TESTARTEFAKT-HASH: `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`
+- QUELLBELEG: Run `34692865477`, Artifact `10297556084`, Head `60a174accd71941ebad42501a9d9bd9edc5b6e8a`
 - LIVE-GRENZE: AF-066 noch offen; 6.72.19 hier nicht als WordPress-LIVE-PASS hochstufen
-- ARTEFAKT_SYNC: BLOCKED – aktuelle isolierte ZIP noch nicht in diesem Büro abgelegt
+- ARTEFAKT_SYNC: PASS
 
 ## PPA-002 – Pferde Atelier Design
 
@@ -30,7 +33,7 @@ PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS
 - AKTUELL BELEGTER LIVE-STAND: 1.50.472 / Contract V104
 - FINALER INSTALLERNAME: `PFERDE_ATELIER_DESIGN_V1.50.472_CONTRACT_V104_KATEGORIETEXTE_79_NUR_FAILS_FINAL_INSTALLIEREN.zip`
 - INSTALLER SHA-256: `ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9`
-- ARTEFAKT_SYNC: BLOCKED – Installername/Hash sind belegt, die Binärdatei liegt aber nicht im aktuellen Campus-/Fachbranch als direkt kopierbare Datei
+- ARTEFAKT_SYNC: BLOCKED – Installername/Hash sind belegt, die Binärdatei ist aktuell nicht direkt erreichbar
 
 ## PPA-003 – Bildzentrale
 
@@ -41,7 +44,7 @@ PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS
 - AKTUELL BELEGTER PFERDE-/PLUGINSTAND: 2.6.9
 - INSTALLER: `ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
 - SHA-256: `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
-- ARTEFAKT_SYNC: BLOCKED – exakter Dateibeleg vorhanden, Binärdatei nicht im Campus-Branch
+- ARTEFAKT_SYNC: PASS
 
 ## PPA-004 – Universal Research & Fill
 
@@ -52,7 +55,7 @@ PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS
 - AKTUELL BELEGTER STAND: 1.9.9
 - INSTALLER: `universal-research-fill-v1.9.9.zip`
 - SHA-256: `154102215a0ef4bf7de3362dbf835f05dc5c10b870e3507dbf173c62fb7079e0`
-- ARTEFAKT_SYNC: BLOCKED – exakter Dateibeleg vorhanden, Binärdatei nicht im Campus-Branch
+- ARTEFAKT_SYNC: PASS
 
 ## PPA-005 – Portal SEO Topic Engine (PSTE)
 
@@ -63,7 +66,7 @@ PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS
 - AKTUELL BELEGTER INSTALLERSTAND: 0.56.25
 - INSTALLER: `portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip`
 - SHA-256: `8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95`
-- ARTEFAKT_SYNC: BLOCKED – Installer ist hashbelegt, aber nicht als aktuelle Binärdatei im Campus-Branch vorhanden
+- ARTEFAKT_SYNC: PASS
 
 ## PPA-006 – Portal SEO Editorial Plan Compiler
 
@@ -73,17 +76,20 @@ PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS
 - AUTORITATIVE TECHNISCHE QUELLE: aktueller STARTMASTER0107-/TEXT-Weg
 - STATUS DER VERSIONSBINDUNG: BLOCKED
 - BEFUND: Campus-Technologieindex führt 0.28.16; historische spätere Übergaben belegen 0.28.17. Historische Übergaben sind keine CURRENT-Autorität.
-- REGEL: keine Version in diesem Büro festschreiben, bis die aktuelle technische TEXT-/Releasequelle die tatsächlich gültige Installer-Version eindeutig bindet.
+- PHYSISCHE REFERENZ: `/Campus-Plugins/PFERDE_ATELIER/PPA-006/REFERENCE_0.28.16.zip`
+- REGEL: keine `CURRENT.zip`, bis die aktuelle technische TEXT-/Releasequelle die tatsächlich gültige Installer-Version eindeutig bindet.
 - ARTEFAKT_SYNC: BLOCKED
 
-## PPA-007 – HivePress Anzeigensuche
+## PPA-007 – Pferde Atelier HivePress Anzeigensuche
 
 - HERKUNFT: EIGENENTWICKLUNG / genauer Modulstatus noch ungeklärt
 - KLASSE: MOD-004 UNGEKLÄRT
 - FACHBÜRO: `../HIVEPRESS/`
 - AKTUELL BELEGTER STAND: v2.1.5
 - PFERDE-ARTEFAKT: `PFERDE_ATELIER_HIVEPRESS_ANZEIGENSUCHE_v2.1.5_AJAX_ANZEIGENKATEGORIEN_INSTALLIEREN.zip`
-- ARTEFAKT_SYNC: BLOCKED – separater Modul-Audit und Binärübernahme offen
+- SHA-256: `5879bb257026ec72fa83fc817994a4764009a7c1fde75a13fcec129eae45d0c3`
+- KONTINUITÄT: Pferde-Design V1.50.472 `MASTER_STATUS.md` belegt Search-Plugin-Quelle byte-identisch PASS
+- ARTEFAKT_SYNC: PASS
 
 ## PPA-008 – Universal Product Comparison
 
@@ -94,7 +100,7 @@ PASS nur wenn die isolierte aktuelle Datei tatsächlich unter `ISOLIERTE_PLUGINS
 - ZIP: `universal-product-comparison-0.8.0-prototype.zip`
 - SHA-256: `c9eec5b4c7faafa23af6bd5c554d85c2c4d1763e4c618fbd49c3e04dd45abb66`
 - WICHTIG: älterer Technikbranch enthält ausdrücklich nicht den vollständigen 0.8.0-Quellstand; die hashgebundene ZIP ist derzeit der Prüfgegenstand
-- ARTEFAKT_SYNC: BLOCKED – exakt diese aktuelle ZIP muss übernommen werden; keine Rekonstruktion aus dem älteren Technikbranch
+- ARTEFAKT_SYNC: BLOCKED – exakt diese aktuelle ZIP ist aktuell nicht erreichbar; keine Rekonstruktion aus dem älteren Technikbranch
 
 ## PPA-009 – Universal Product Knowledge
 
