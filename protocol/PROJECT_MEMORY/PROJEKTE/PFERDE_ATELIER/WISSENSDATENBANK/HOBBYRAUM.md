@@ -27,10 +27,10 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **138 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- **140 reale Rassendatensätze** unter `DATEN/` vorhanden;
 - größere Rechercheblöcke sind zulässig, solange jede Rasse einzeln auf formalen Status und Dubletten geprüft wird;
-- neu seit 126: Finnhorse, Latvian Warmblood, sieben PZHK-Rassen sowie die vier nationalen norwegischen Rassen;
-- Australian Stock Horse und Konik polski wurden im aktuellen Block als bereits vorhanden erkannt und nicht dupliziert;
+- neu seit 138: British Riding Pony und International Miniature Pony;
+- mehrere weitere britische Native Breeds wurden im aktuellen Block als bereits vorhanden erkannt und nicht dupliziert;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
