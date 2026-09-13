@@ -6,180 +6,129 @@ Diese Datei ist die eine aktuelle 4A-Statuswahrheit.
 
 ## Zweck
 
-4A ist **keine neue Textmaschine**.
+4A ist keine neue Textmaschine. Einziger Unterschied zu System 4 ist die Autoritätsgrenze:
 
-Einzige Existenzfrage:
+- äußerer Supervisor besitzt Workflow-State, Route, Kontrollbindung und PASS-Verwendung;
+- Worker/Codex liefert ausschließlich Fachinhalt;
+- System-4-Prüfer, Design-, Qualitäts- und WordPress-Regeln bleiben unverändert;
+- FAIL bleibt derselbe Artikel;
+- Ausgang bleibt `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` plus Parent-Chat-Readback.
 
-> Kann exakt die fachliche, Design-, Qualitäts- und WordPress-Kette von System 4 laufen, während Workflow-State, Route, Kontrollbindung und PASS-Verwendung technisch außerhalb der Worker-/Codex-Autorität bleiben?
-
-Wenn nein oder nur mit neuer Signer-/Token-/Room-/Receipt-/Package-Kaskade: 4A stoppen.
+Wenn diese Trennung nur mit neuer Signer-/Token-/Room-/Receipt-/Package-Kaskade möglich wäre, 4A stoppen.
 
 ## Aktuelle Vergleichsbasis
 
-System 4 PR #238: `edfe6049768db68f85bf3babedce3199538217ef`.
+System 4 PR #238 Head: `89b2e8eeb928f744e8814b2c79966672db2e308a`.
 
-Der Vergleich System 4 -> 4A enthält ausschließlich `isolated_system4a/**`. System-4-Dateien werden durch 4A nicht verändert.
+Die fünf Änderungen seit `edfe6049768db68f85bf3babedce3199538217ef` betreffen nur zusätzliche System-4-Transportdateien. Der für den lokalen Realtest verwendete Fach-/Design-/LT-/PPM-Prüfercode blieb unverändert.
 
-Der im Nachbarweg vorbereitete/applizierte Word-Floor-Follow-up ist noch nicht auf PR #238 angekommen und wird deshalb noch nicht als aktuelle System-4-Basis behandelt.
+4A liegt direkt auf diesem Head. Der Vergleich System 4 -> 4A enthält ausschließlich `isolated_system4a/**`.
 
-Nicht als 4A-Vorteil gewertet:
-- Artikelzahl / 1..N;
-- Beitragsart;
-- Fach-/Textregeln;
-- Design;
-- LT / PPM;
-- WordPress-/V2-Handoff.
+Nicht als 4A-Vorteil gewertet: Artikelzahl, Beitragsart, Fach-/Textregeln, Design, LT, PPM oder WordPress-Handoff.
 
-4A muss diese Punkte mindestens gleich zu System 4 beweisen.
+## Lokaler Gesamtstand
 
-## Verbleibender struktureller Unterschied
+### Architektur / Eingang / Ausgang / Skalierung
 
-4A entfernt ausschließlich Steuerautorität aus dem Worker:
+Frisch lokal mit Warnings als Fehler:
 
-- äußerer Supervisor = einzige Workflow-Autorität;
-- externer Fachinput enthält nur Fach-/Metadaten, keine Route/PASS/Kontrollbindung;
-- `system4_root_manifest_sha256` wird vom Supervisor selbst aus den gebundenen System-4-Bytes erzeugt;
-- Worker besitzt keinen Workflow-State, Authority-Key, PASS oder Publish-Recht;
-- Prüfer sind read-only;
-- FAIL bleibt derselbe Artikel / dieselbe Kapsel;
-- Supervisor-State ist dauerhaft und HMAC-gebunden;
-- Ausgang bleibt `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` -> Parent-Chat-Readback.
+**41/41 PASS**.
 
-## Workergrenzen
+Enthalten:
 
-Zwei technisch getrennte Wege existieren:
-
-1. **Cross-UID-Prozessworker** außerhalb des Repositorys.
-2. **Repo-loser Managed-Agent-Worker** mit genau einer persistenten Session je Artikel.
-
-Für Managed Agents gilt zusätzlich:
-- generische/self-certified Transports dürfen im Testmodus verwendet werden, aber **nicht** als Produktionsgrenze;
-- Produktionsweg akzeptiert nur den strikt gebundenen Managed-Agent-Transport;
-- offizielle Basis-URL ist gebunden;
-- Session muss serverseitig `environment.type = none` zeigen;
-- keine Vaults;
-- keine Required Actions;
-- Multi-Agent deaktiviert;
-- exakt Websuche als Werkzeug;
-- dieselbe Sessionkonfiguration wird vor weiteren Turns erneut geprüft.
-
-## Frischer lokaler Vollkettennachweis
-
-**Kein Codex-Lauf.**
-
-Aktuell frisch lokal ausgeführt, mit `PYTHONWARNINGS=error`:
-
-### Kompletter Kapsel-/Eintritt-/Ausgangsweg
-
-**34/34 PASS**.
-
-Positiv enthalten:
-- 1 Artikel -> kompletter Weg -> Parent-Chat-Datei;
-- 3 Artikel;
-- 25 Artikel;
-- 1000 Artikel;
-- gemischte/neue Beitragsarten;
+- kompletter Einstieg -> Parent-Chat-Ausgang;
 - Same-Article-Repair;
-- repo-loser persistenter Managed Worker;
-- roher externer Fachinput ohne Kontrollmanifest;
-- Supervisor bindet Kontrollidentität selbst;
-- V2-WordPress-Handoff;
-- Parent-Chat-Rekonstruktion byteidentisch.
+- 1 / 3 / 25 / 1000 Artikel;
+- neue/gemischte Beitragsarten;
+- Managed-Session-Grenze;
+- Cross-UID-Prozessgrenze;
+- State-/PASS-/Manifest-/Publish-Injektionen BLOCK;
+- Research/Facts/Context/Design/Checker/Repair/Batch BLOCK;
+- JSON-/Inline-Tamper BLOCK;
+- privates Codex-artiges `0700`-Worker-Quellverzeichnis;
+- Supervisor-Staging dieses privaten Bundles;
+- `state.json`, Authority-Dateien und Symlinks im Worker-Bundle BLOCK;
+- Worker-Absturz liefert Exit-Code + `stderr` statt stummem `WORKER_EXITED_WITHOUT_RESPONSE`.
 
-Negativ enthalten:
-- Publish am Eingang;
-- zusätzliches Steuerfeld im Artikel;
-- zusätzliches Top-Level-Steuerfeld;
-- extern eingespeistes Manifest;
-- Worker-PASS/Phase-Injektion;
-- Research-Fail;
-- Facts-Fail;
-- Context-Fail;
-- Draft/Design-Fail;
-- Checker-Hash-Mismatch;
-- unzulässige Repair-Kontinuität;
-- Batch-Fail;
-- JSON-Ausgangsmanipulation;
-- Parent-Chat-Inline-Manipulation;
-- nicht isolierter Managed Transport;
-- self-certified Fake-Transport als Produktionsgrenze;
-- falsche Managed-Session-Umgebung;
-- Vault-Zugriff;
-- Multi-Agent;
-- zusätzliche Tools;
-- nicht offizielle Managed-Agent-Basis-URL.
+### Echter lokaler Produktionslauf
 
-### Zusätzliche lokale Regressionen
+Echte, hashgebundene Abhängigkeiten:
 
-Separat frisch ausgeführt:
-- Managed Worker: **5/5 PASS**;
-- strikter Produktions-Ingress: **8/8 PASS**;
-- persistenter Supervisor-State: **3/3 PASS**;
-- Managed-/Cross-UID-Host + Ingress: **8/8 PASS**.
+- LanguageTool 6.8 JAR SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`;
+- PPM 6.7.9 Paket SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`;
+- mocks=false.
 
-Summe dieses Zusatzsatzes: **24/24 PASS**.
+Kompletter 4A-Produktions-Acceptance-Lauf mit Supervisor-eigenem Staging eines privaten `0700`-Worker-Bundles:
 
-### OS-Autoritätsgrenze
+**10/10 PASS**.
 
-Lokaler Cross-UID-Test:
-- erlaubter Fachkanal: PASS;
-- Authority-Key lesen: BLOCK;
-- Supervisor-State lesen: BLOCK;
-- Authority-Key schreiben: BLOCK;
-- Supervisor-State schreiben: BLOCK;
-- Fake-`state.json` im Authority-Bereich erzeugen: BLOCK;
-- Supervisorprozess durch Worker terminieren: BLOCK;
-- Authority-Bytes nach Angriffen unverändert: PASS.
+Positiv:
 
-## Beweisgrenze
+`Fachinput -> Supervisor-Ingress -> Cross-UID-Worker -> Research -> Facts -> Context -> Draft -> echter LT-Fail -> Same-Article-Repair -> echter LT-PASS -> echter PPM-PASS -> Batch -> V2 -> Parent-Chat byteidentisch`
 
-Die 34/34- und 24/24-Ergebnisse sind **Architektur-/Autoritäts-/Transport-Evidenz**.
+Negativ korrekt geblockt:
 
-Sie sind **kein Produktions-PASS für Inhalt/Design/Qualität**, weil der komplette positive lokale Lauf mit den echten hashgebundenen LT-/PPM-Abhängigkeiten noch fehlt.
+1. Same-UID-Produktion;
+2. externes Kontrollmanifest;
+3. direkter ungestagter Cross-UID-Worker unter privatem Pfad;
+4. Worker-PASS-/Phase-Injektion;
+5. Fake-`state.json`;
+6. ungültige Research-Evidence;
+7. ungültige Facts-Evidence;
+8. Design-Drift;
+9. Parent-Chat-Payload-Tamper.
 
-Inhalt, Design und Qualität werden in 4A nicht neu definiert oder verändert. Der Produktionsadapter verweist weiterhin read-only auf die bestehenden System-4-Prüfer.
+Finaler positive Test-Handoff:
 
-## Echter lokaler Produktionsblocker
+- Größe: **66.753 Byte**;
+- SHA256: `4f3c3585d1b42f3ca53f1f65bb4bca728a6426527c7eec75c45e2622dd7220ae`;
+- Revision: **2**;
+- `publish_allowed=false`.
 
-System 4 verlangt exakt:
+Der positive System-4- und System-4A-Realtest erzeugen weiterhin byteidentischen Output.
 
-`LanguageTool 6.8 / Bestand 43`
+## Erkenntnis aus dem freigegebenen Codex-Probelauf
 
-Hashgebundener JAR-SHA256:
+Der einmal ausdrücklich freigegebene Codex-Probelauf mit dem Titel `Pferdeanhänger im Herbst sicher vorbereiten` erreichte:
 
-`2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
+`ROOT_ENTRY_PASS -> PRODUCTION_INGRESS_BOUND -> RESEARCH_REQUEST`
 
-Dieser exakte JAR ist im aktuellen lokalen Modell-Hobbyraum nicht vorhanden.
+und stoppte bei:
 
-Daher aktuell korrekt:
+`WORKER_EXITED_WITHOUT_RESPONSE`.
 
-`FULL_CHAIN_LOCAL_PRODUCTION_REAL_LT_PPM_OVER_4A_HOST = BLOCKED:LANGUAGETOOL_6_8_HASH_BOUND_JAR_MISSING`
+Lokale Reproduktion ergab die konkrete Ursache: Der Codex-artige Worker lag in einem `0700 root`-Tempverzeichnis und war für `nobody` nicht les-/traversierbar. Der damalige Host verwarf zusätzlich `stderr`.
 
-Kein Ersatz-JAR, kein Mock-PASS, keine synthetische LT-/PPM-Evidence.
+Diese Lücke ist lokal geschlossen:
+
+- Supervisor staged private Worker-Bundles selbst in einen kontrollierten read-only Bereich;
+- Cross-UID-Zugänglichkeit wird vor Start geprüft;
+- Worker-`stderr` und Exit-Code werden bei Absturz ausgegeben;
+- der komplette echte LT/PPM-Produktionslauf bleibt danach 10/10 PASS.
+
+Kein zweiter Codex-Lauf wurde gestartet.
 
 ## Codex-Regel
 
 **Kein Codex-Lauf ohne ausdrückliche vorherige Freigabe des Users.**
 
-Ein unmittelbar vor dieser User-Regel bereits geposteter Verifikationsauftrag wurde ausdrücklich als `CANCELLED BY USER` markiert und wird nicht als 4A-Beweis verwendet.
-
 Aktuell:
 
-`REAL_CODEX_4A_RUN = NOT AUTHORIZED`
+`REAL_CODEX_4A_RETEST = NOT AUTHORIZED`
 
-## NEXT ACTION / HOBBYRAUM
+## Beweisgrenze / NEXT ACTION
 
-1. Ausschließlich lokal weiterarbeiten.
-2. Exakt den gebundenen LanguageTool-6.8-JAR und die gebundene PPM-6.7.9-Abhängigkeit lokal materialisieren und Hash prüfen.
-3. Danach dieselbe **komplette** Kette lokal mit echten Prüfern positiv und negativ ausführen:
+Lokal ist die vollständige Produktionskette inklusive realem LT/PPM und realitätsgleichem privaten Worker-Staging bewiesen.
 
-`Fachinput -> Supervisor-Ingress -> Worker -> Research -> Facts -> Context -> Draft -> echter LT/PPM-FULLCHECK -> Same-Article-Repair -> erneuter echter FULLCHECK -> Batch -> V2 -> Parent-Chat byteidentisch`
+Noch offen ist ausschließlich der operative Wiederholungsbeweis mit einem echten Codex-/Managed-Agent-Worker auf dieser korrigierten Grenze.
 
-4. Erst wenn dieser lokale Realtest vollständig PASS ist, darf ein weiterer Schritt diskutiert werden.
-5. Kein Codex-Auftrag ohne vorherige ausdrückliche User-Freigabe.
+Bis zu einer ausdrücklichen User-Freigabe:
+
+1. kein Codex-Lauf;
+2. nur lokale Positiv-/Negativtests und Synchronisierung mit System 4;
+3. keine Änderung an Fach-, Design-, LT-, PPM- oder WordPress-Regeln;
+4. kein Merge, kein Publish.
 
 ## Abbruchregel
 
 Wenn System 4 State/Route/PASS ebenfalls technisch aus der Worker-Autorität entfernt, verliert 4A seinen einzigen strukturellen Vorteil und wird als eigenes Konzept beendet.
-
-Wenn 4A dafür wieder zusätzliche Übergabe-/Signer-/Token-/Receipt-Komplexität benötigt, ebenfalls stoppen.
