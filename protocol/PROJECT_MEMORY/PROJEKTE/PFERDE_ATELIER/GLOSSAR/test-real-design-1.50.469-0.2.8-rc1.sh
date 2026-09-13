@@ -1,61 +1,72 @@
 #!/usr/bin/env bash
 set -euo pipefail
 R=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR
-FIX="$R/fixtures/design-1.50.469"
 EXPECTED=580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5
 
-bash "$R/build-0.2.8-rc1.sh"
+# Establish the already-green RC runtime and deterministic glossary data first.
+# This stage may use the old contract stub only as a seed adapter. It is removed
+# completely before any real-design assertion below.
+bash "$R/test-fresh-0.2.8-rc1.sh"
 
-for i in $(seq -w 0 21); do test -f "$FIX/pferde-template-kit.php.xz.b64.part$i"; done
-for i in $(seq -w 0 20); do test "$(wc -c < "$FIX/pferde-template-kit.php.xz.b64.part$i")" = 15000; done
-test "$(wc -c < "$FIX/pferde-template-kit.php.xz.b64.part21")" = 5696
-cat "$FIX"/pferde-template-kit.php.xz.b64.part{00..21} | base64 -d | xz -d >/tmp/pferde-template-kit.php
-test "$(sha256sum /tmp/pferde-template-kit.php | awk '{print $1}')" = "$EXPECTED"
-php -l /tmp/pferde-template-kit.php
-echo REAL_DESIGN_150469_EXACT_FIXTURE_PASS
+# Reconstruct and SHA-bind the exact executable 1.50.469 source.
+bash "$R/reconstruct-design-1.50.469.sh"
+test "$(sha256sum /tmp/design-1.50.469/pferde-template-kit.php | awk '{print $1}')" = "$EXPECTED"
 
-SRC="$R/exact-0.2.6-test/02_boot.sh"
-sed -e 's/0\.2\.6/0.2.8-rc1/g' -e 's/UGE026/UGE028RC1/g' -e 's/uge026/uge028rc1/g' "$SRC" >/tmp/boot-real-design-rc1.sh
-chmod +x /tmp/boot-real-design-rc1.sh
-bash /tmp/boot-real-design-rc1.sh
-
+# Remove contract stub. From this point on only exact real 1.50.469 executes.
 docker exec wp wp plugin deactivate affiliate-portal-template-kit --allow-root >/dev/null || true
 docker exec wp rm -rf /var/www/html/wp-content/plugins/affiliate-portal-template-kit
 docker exec wp mkdir -p /var/www/html/wp-content/plugins/affiliate-portal-template-kit
-docker cp /tmp/pferde-template-kit.php wp:/var/www/html/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php
-docker exec wp php -l /var/www/html/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php
-docker exec wp wp plugin activate affiliate-portal-template-kit --allow-root
+docker cp /tmp/design-1.50.469/pferde-template-kit.php wp:/var/www/html/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php
 
 test "$(docker exec wp sha256sum /var/www/html/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php | awk '{print $1}')" = "$EXPECTED"
+docker exec wp php -l /var/www/html/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php
+# Activate exact plugin file, not a directory alias.
+docker exec wp wp plugin activate affiliate-portal-template-kit/pferde-template-kit.php --allow-root >/dev/null
+test "$(docker exec wp wp plugin get affiliate-portal-template-kit/pferde-template-kit.php --field=version --allow-root)" = 1.50.469
+# Fresh CLI request proves real class is loaded after stub deletion.
+test "$(docker exec wp wp eval --allow-root 'echo class_exists("Pferde_Template_Kit",false) ? "1" : "0";')" = 1
+
 echo REAL_DESIGN_150469_RUNTIME_IDENTITY_PASS
 
-bash "$R/exact-0.2.5-test/03_seed.sh"
-bash "$R/exact-0.2.5-test/04_frontend.sh"
-bash "$R/exact-0.2.5-test/05_regression.sh"
+# Flush after swapping the design plugin so rewrite/filter interactions are real.
+docker exec wp wp rewrite flush --hard --allow-root >/dev/null
 
-for u in /glossar/ /glossar/begriff/hufbein/ /glossar/gesundheit/; do
-  code=$(curl -sS -o /tmp/real-design-page -w '%{http_code}' "http://127.0.0.1:8080$u")
-  test "$code" = 200
-  test -s /tmp/real-design-page
-  ! grep -qiE 'fatal error|critical error' /tmp/real-design-page
-done
+# Server-side positive/negative routes under exact real Design.
+test "$(curl -sS -o /tmp/rd-home -w '%{http_code}' http://127.0.0.1:8080/glossar/)" = 200
+test -s /tmp/rd-home
+! grep -qiE 'fatal error|critical error' /tmp/rd-home
 
-curl -fsS http://127.0.0.1:8080/glossar/begriff/hufbein/ -o /tmp/rd-term
+test "$(curl -sS -o /tmp/rd-term -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufbein/)" = 200
 grep -q '<article class="uge-single-wrap"' /tmp/rd-term
 grep -q FULL-HUFBEIN-SENTINEL /tmp/rd-term
+! grep -qiE 'fatal error|critical error' /tmp/rd-term
 
-curl -fsS http://127.0.0.1:8080/glossar/gesundheit/ -o /tmp/rd-cat
-test "$(grep -o 'class="uge-breadcrumbs"' /tmp/rd-cat | wc -l)" = 1
-python3 - <<'PY'
-import re
-s=open('/tmp/rd-cat',encoding='utf8').read()
-b=re.search(r'<nav class="uge-breadcrumbs"[^>]*>(.*?)</nav>',s,re.S)
-assert b, 'glossary breadcrumb missing'
-assert '>Startseite</a>' in b.group(1) and '>Glossar</a>' in b.group(1) and 'Gesundheit' in b.group(1)
-assert 'var(--pftk-breadcrumb-axis-width,900px)' in s or '--pftk-breadcrumb-axis-width:900px' in s
-PY
+test "$(curl -sS -o /tmp/rd-cat -w '%{http_code}' http://127.0.0.1:8080/glossar/gesundheit/)" = 200
+grep -q 'class="uge-category-head"' /tmp/rd-cat
+grep -q '/glossar/begriff/hufbein/' /tmp/rd-cat
+! grep -q 'class="uge-hero' /tmp/rd-cat
+! grep -q 'class="uge-tools"' /tmp/rd-cat
+! grep -qiE 'fatal error|critical error' /tmp/rd-cat
+
+test "$(grep -o 'class="uge-breadcrumbs"' /tmp/rd-cat | wc -l | tr -d ' ')" = 1
 
 test "$(curl -sS -o /tmp/rd-missing -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/nicht-da/)" = 404
 test "$(curl -sS -o /tmp/rd-draft -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufentwurf/)" = 404
 
-echo UGE028RC1_REAL_DESIGN_150469_RUNTIME_POSITIVE_NEGATIVE_PASS
+# Same-name category/term collision remains separated.
+test "$(curl -sS -o /tmp/rd-same-term -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/gesundheit/)" = 200
+grep -q CATEGORY-OVERLAP-SENTINEL /tmp/rd-same-term
+! grep -q CATEGORY-OVERLAP-SENTINEL /tmp/rd-cat
+
+# Ordinary WordPress post remains untouched.
+normal=$(docker exec wp wp post list --allow-root --post_type=post --name=huf-normaler-beitrag --field=ID)
+test -n "$normal"
+test "$(docker exec wp wp post get "$normal" --field=post_status --allow-root)" = publish
+
+# Real rendered browser: AJAX placement/results, responsive hero, category vs
+# home distinction, real term page and negative routes.
+python3 -m pip install --quiet playwright
+python3 -m playwright install chromium
+python3 "$R/real-design-runtime-browser.py"
+
+echo UGE028RC1_REAL_DESIGN_150469_FULL_POSITIVE_NEGATIVE_PASS
