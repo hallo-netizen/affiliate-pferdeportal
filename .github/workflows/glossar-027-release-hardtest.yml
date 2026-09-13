@@ -71,6 +71,18 @@ jobs:
             sed -e 's/0\.2\.6/0.2.7/g' -e 's/UGE026/UGE027/g' -e 's/uge026/uge027/g' "$SRC/$f" > "$DST/$f"
             chmod +x "$DST/$f"
           done
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/uge027-tests/04_upgrade_apply.sh')
+          s=p.read_text()
+          old='''# First normal web request under the installed 0.2.7 must migrate 4 -> 5.\ncurl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/post-upgrade-home\nSCHEMA=$(docker exec db mysql -uroot -pr wordpress -Nse "SELECT option_value FROM wp_options WHERE option_name=\'uge_rewrite_schema_version\'")\necho "UGE027_SCHEMA_POST_REQUEST=$SCHEMA"\ntest "$SCHEMA" = 5\n'''
+          new='''# Immediate request may still execute cached pre-update PHP bytecode. Record it, do not hide it.\ncurl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/post-upgrade-home-immediate\nIMMEDIATE=$(docker exec db mysql -uroot -pr wordpress -Nse "SELECT option_value FROM wp_options WHERE option_name=\'uge_rewrite_schema_version\'")\necho "UGE027_SCHEMA_IMMEDIATE_POST_REQUEST=$IMMEDIATE"\ntest "$IMMEDIATE" = 4 || test "$IMMEDIATE" = 5\n\n# After the normal OPcache timestamp revalidation window, the new 0.2.7 code MUST be active.\nsleep 3\ncurl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/post-upgrade-home\nSCHEMA=$(docker exec db mysql -uroot -pr wordpress -Nse "SELECT option_value FROM wp_options WHERE option_name=\'uge_rewrite_schema_version\'")\necho "UGE027_SCHEMA_POST_REVALIDATION_REQUEST=$SCHEMA"\ntest "$SCHEMA" = 5\n'''
+          if old not in s:
+              raise SystemExit('expected 0.2.7 migration block not found')
+          p.write_text(s.replace(old,new,1))
+          PY
+          grep -q 'UGE027_SCHEMA_IMMEDIATE_POST_REQUEST' "$DST/04_upgrade_apply.sh"
+          grep -q 'UGE027_SCHEMA_POST_REVALIDATION_REQUEST' "$DST/04_upgrade_apply.sh"
           ! grep -R '0\.2\.6\|UGE026\|uge026' "$DST"
           echo UGE027_TEST_HARNESS_UNIQUE_VERSION_PASS
       - name: Build exact 0.2.5 and unique candidate 0.2.7
