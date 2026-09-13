@@ -27,9 +27,10 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **114 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- **118 reale Rassendatensätze** unter `DATEN/` vorhanden;
 - zahlreiche nationale/ursprüngliche Zuchtbücher und offizielle Verbände eingebunden;
-- neu seit 108: Selle Français, Poney Français de Selle, Trotteur Français, Cheval Miniature Français, Cheval de Sport Anglo-Normand und Cheval Crème;
+- neu seit 114: Mangalarga Marchador, Kathiawari, Marwari und Campolina;
+- Criollo/Crioulo-Dublettenregel für Brasilien geprüft und keine zweite Akte angelegt;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
@@ -38,7 +39,7 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 1. Rassenrecherche ohne Themenwechsel fortsetzen;
 2. nächste belastbare nationale/ursprüngliche Registerblöcke prüfen;
 3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
-4. weitere internationale Rassen aus anerkannten Studbooks ergänzen;
+4. Mangalarga Paulista und Pantaneiro gegen offizielle brasilianische Register prüfen;
 5. Synonyme, Sektionen, Labels und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
 6. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
