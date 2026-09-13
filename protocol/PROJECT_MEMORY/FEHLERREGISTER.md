@@ -1,6 +1,6 @@
 # ZENTRALES FEHLERREGISTER
 
-STAND: 2026-09-09
+STAND: 2026-09-13
 ROLLE: **REINER FEHLER-WEGWEISER**
 
 ## EINE FEHLERWAHRHEIT
@@ -99,6 +99,13 @@ Status: **CLOSED / LIVE PASS**
 Autoritative Fehlerquelle:
 `PROJEKTE/PFERDE_ATELIER/DESIGN/FEHLERQUELLEN.md`
 
+## GLOSSAR-FRONTEND-20260913
+
+Bereich: GLOSSAR / MOD-008 / PFERDE ATELIER  
+Status: 0.2.6 TECHNISCHER KANDIDAT HARDTEST PASS / LIVE-READBACK OFFEN
+
+Autoritative Fehlerquelle:
+`PROJEKTE/PFERDE_ATELIER/GLOSSAR/FEHLERQUELLEN.md`
 
 ## Regel für neue Fehler
 
@@ -109,7 +116,6 @@ Neue reale Fehler erhalten:
 4. genau einen autoritativen Hauptort bzw. klar benannte technische Originalquellen.
 
 Keine ausführliche Fehlerwahrheit an zwei Orten.
-
 
 ## TRESOR-AUTOMATIK
 
@@ -123,7 +129,6 @@ Architektur-/Fehlerhistorie:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
 
 Keine Blocker-Details hier duplizieren.
-
 
 ## PRODUKTVERGLEICH-LIVE
 
