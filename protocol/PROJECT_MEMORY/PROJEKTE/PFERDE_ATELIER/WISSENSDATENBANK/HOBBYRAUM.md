@@ -27,21 +27,21 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **140 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- **145 reale Rassendatensätze** unter `DATEN/` vorhanden;
 - größere Rechercheblöcke sind zulässig, solange jede Rasse einzeln auf formalen Status und Dubletten geprüft wird;
-- neu seit 138: British Riding Pony und International Miniature Pony;
-- mehrere weitere britische Native Breeds wurden im aktuellen Block als bereits vorhanden erkannt und nicht dupliziert;
+- neu seit 140: Estonian Native Horse, Tori Horse, Estonian Heavy Draught, Bohemian-Moravian Belgian Horse und Silesian Noriker;
+- Estonian Arden als historische Bezeichnung erkannt und nicht dupliziert;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
 ## NEXT ACTION
 
 1. Rassenrecherche in größeren belastbaren Länder-/Registerblöcken fortsetzen;
-2. nächste nationale/ursprüngliche Registerblöcke prüfen;
+2. Baltikum/Osteuropa weiter gegen staatliche Register prüfen;
 3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
 4. Mangalarga Paulista und Pantaneiro gegen offizielle brasilianische Register prüfen;
 5. Latvian Heavy Warmblood als getrennten staatlich geführten Kandidaten prüfen;
-6. Synonyme, Sektionen, Labels und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
+6. Synonyme, Sektionen, Labels und Zuchtrichtungen vor Datensatzanlage auf Dubletten prüfen;
 7. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
 ## KONTROLLPUNKTE
