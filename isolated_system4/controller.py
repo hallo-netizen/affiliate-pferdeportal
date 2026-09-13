@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib, json, re, sys
+import hashlib, json, re, sys, zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -114,6 +114,47 @@ def _read_context_files(fact_pack_path,plan_item_path):
     if not isinstance(fact,dict) or not isinstance(plan,dict): raise Fail('PRODUCTION_CONTEXT_OBJECT_REQUIRED')
     return fact,plan
 
+def _guard_ppm_validation_contract(plan):
+    package=(Path(__file__).resolve().parent.parent/production_checks.PPM_PACKAGE_REL).resolve()
+    if not package.is_file() or production_checks.file_sha256(package)!=production_checks.PPM_PACKAGE_SHA256:
+        raise Fail('PRODUCTION_CONTEXT_FAIL:PPM_PACKAGE_HASH_MISMATCH')
+    try:
+        with zipfile.ZipFile(package) as archive:
+            validator=archive.read('portal-production-machine/includes/content-validator.php').decode('utf-8')
+    except Exception as exc:
+        raise Fail('PRODUCTION_CONTEXT_FAIL:PPM_VALIDATION_AUTHORITY_READ_FAILED') from exc
+    match=re.search(r"const\s+VALIDATION_CONTRACT_V5\s*=\s*['\"]([^'\"]+)['\"]\s*;",validator)
+    if not match:
+        raise Fail('PRODUCTION_CONTEXT_FAIL:PPM_VALIDATION_CONTRACT_VERSION_MISSING')
+    supported=match.group(1)
+    version=str(plan.get('validation_contract_version') or '').strip()
+    if version not in ('',supported):
+        raise Fail('PRODUCTION_CONTEXT_FAIL:VALIDATION_CONTRACT_VERSION_UNKNOWN:'+version)
+    canonical=plan.get('canonical_article') if isinstance(plan.get('canonical_article'),dict) else {}
+    requirements=plan.get('section_requirements')
+    requirements_hash=str(plan.get('section_requirements_hash') or '').lower().strip()
+    canonical_version=str(canonical.get('validation_contract_version') or '').strip()
+    canonical_hash=str(canonical.get('section_requirements_hash') or '').lower().strip()
+    if version==supported:
+        if not isinstance(requirements,dict) or str(requirements.get('contract') or '')!=supported or not isinstance(requirements.get('sections'),list) or not requirements.get('sections'):
+            raise Fail('PRODUCTION_CONTEXT_FAIL:V5_SECTION_REQUIREMENTS_INVALID')
+        actual=production_checks.stable_hash(dict(requirements))
+        if not re.fullmatch(r'[0-9a-f]{64}',requirements_hash) or requirements_hash!=actual:
+            raise Fail('PRODUCTION_CONTEXT_FAIL:V5_SECTION_REQUIREMENTS_HASH_MISMATCH')
+        if canonical_version!=supported:
+            raise Fail('PRODUCTION_CONTEXT_FAIL:V5_CANONICAL_VALIDATION_CONTRACT_MISMATCH')
+        if canonical_hash!=requirements_hash:
+            raise Fail('PRODUCTION_CONTEXT_FAIL:V5_CANONICAL_SECTION_REQUIREMENTS_HASH_MISMATCH')
+    else:
+        if isinstance(requirements,dict) and requirements:
+            raise Fail('PRODUCTION_CONTEXT_FAIL:LEGACY_SECTION_REQUIREMENTS_FORBIDDEN')
+        if requirements_hash:
+            raise Fail('PRODUCTION_CONTEXT_FAIL:LEGACY_SECTION_REQUIREMENTS_HASH_FORBIDDEN')
+        if canonical_version:
+            raise Fail('PRODUCTION_CONTEXT_FAIL:LEGACY_CANONICAL_VALIDATION_CONTRACT_FORBIDDEN')
+        if canonical_hash:
+            raise Fail('PRODUCTION_CONTEXT_FAIL:LEGACY_CANONICAL_SECTION_REQUIREMENTS_HASH_FORBIDDEN')
+
 def cmd_context(workspace,fact_pack_path,plan_item_path):
     s,p=load(workspace)
     if s['phase']!='CONTEXT_REQUIRED': raise Fail('PHASE_FAIL:CONTEXT')
@@ -122,6 +163,7 @@ def cmd_context(workspace,fact_pack_path,plan_item_path):
     try:
         content_guard.validate_fact_pack(fact,s['research']['text'],s['facts']['text'])
         production_checks.validate_bound_context(s,fact,plan)
+        _guard_ppm_validation_contract(plan)
     except content_guard.ContentGuardError as e:
         raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
     except production_checks.ProductionCheckError as e:

@@ -212,7 +212,7 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
     if len(state_paths) != len(items):
         raise BatchGateError('STATE_COUNT_MISMATCH')
     states_by_slot = {}
-    for path in state_paths:
+    for index, path in enumerate(state_paths):
         state = load_json(Path(path))
         article = state.get('article')
         slot = str(article.get('plan_slot') or '') if isinstance(article, dict) else ''
@@ -220,6 +220,9 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
             raise BatchGateError('STATE_PLAN_SLOT_INVALID')
         if slot in states_by_slot:
             raise BatchGateError('STATE_PLAN_SLOT_DUPLICATE')
+        expected_slot = items[index]['plan_slot']
+        if slot != expected_slot:
+            raise BatchGateError(f'STATE_ORDER_MISMATCH:{index}')
         states_by_slot[slot] = state
     expected_slots = {item['plan_slot'] for item in items}
     if set(states_by_slot) != expected_slots:
