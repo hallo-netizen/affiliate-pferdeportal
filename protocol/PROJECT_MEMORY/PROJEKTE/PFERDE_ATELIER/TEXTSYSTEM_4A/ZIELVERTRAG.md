@@ -1,55 +1,77 @@
 # TEXTSYSTEM 4A – ZIELVERTRAG
 
 STAND: 2026-09-13
-STATUS: VERBINDLICH FÜR DEN ISOLIERTEN 4A-PROTOTYP
+STATUS: VERBINDLICHER HÄRTUNGSMASSSTAB FÜR KONZEPT 4
 
 ## Ziel
 
-Konzept 4a soll denselben fachlichen Qualitätsstandard wie die bestehende Pferde-Atelier-Produktion mit einer universellen, möglichst kleinen Laufzeitarchitektur ausführen.
+`4a` bezeichnet ab jetzt **keine zweite Textmaschine**, sondern den Prüfmaßstab, mit dem Konzept 4 auf die kleinste robuste Laufzeitarchitektur reduziert wird.
+
+Inhalt, Design und Qualität bleiben vollständig unangetastet.
 
 ## Unveränderlich
 
-- Inhaltliche Regeln bleiben unverändert.
-- Design bleibt unverändert.
-- Qualitätsprüfer bleiben unverändert und alleinige PASS-Autorität.
+- Inhaltliche/Textmaschinen-Regeln bleiben unverändert.
+- Design, Theme/CSS und Produktionsmarkup bleiben unverändert.
+- Echte Qualitätsprüfer bleiben unverändert und alleinige PASS-Autorität.
 - Kein Auto-Publish.
 - Kein Einfluss von außen auf Route, Regeln, nächsten Schritt oder Toolchain.
-- Kein zweiter Workflow-Besitzer neben dem 4a-Controller.
+- Kein zweiter Workflow-Besitzer neben dem einen Produktionscontroller.
 
 ## Architekturziel
 
-`1 Controller + N unabhängige Artikelkapseln + bestehende reale Prüfer als reine Aufrufe + 1 finaler Ausgang`
+`1 Produktionscontroller + N unabhängige Artikelzustände + bestehende reale Prüfer als interne Aufrufe + 1 finaler Ausgang`
 
-Eine Kapsel enthält dauerhaft die Identität und den belegten Zustand genau eines Artikels. Prüfer dürfen Ergebnisse liefern, aber weder Kapselzustand noch Route selbst verändern.
+Ein Artikelzustand enthält dauerhaft Identität und belegten Stand genau eines Artikels. Prüfer liefern PASS oder konkrete Findings, verändern aber weder Route noch Zustand selbst.
+
+**Mehrere Dateien/Module sind erlaubt. Mehrere Laufzeitautoritäten oder frei wählbare Produktionsstraßen sind nicht erlaubt.**
 
 ## Flexibilitätsziel
 
-Der Controller darf weder konkrete Artikelzahl noch Beitragsart hardcoden. Neue freigegebene Beitragsarten werden ausschließlich durch bestehende autoritative Beitragsart-/PPM-/Textregeln erkannt. Fehlt eine autoritative Freigabe, wird fail-closed blockiert.
+Der Produktionscontroller darf weder konkrete Artikelzahl noch Beitragsart hardcoden. Neue freigegebene Beitragsarten werden ausschließlich durch die bestehenden autoritativen SEO-/PPM-/Textmaschinenregeln zugelassen. Fehlt die Freigabe, wird fail-closed blockiert.
+
+Die aktuell noch vorhandene 7er-/`Beratung`-Bindung in System 4 ist separat zu entfernen und zählt nicht als Argument für 4a.
 
 ## Automatisierungsziel
 
 Nach gültigem Produktionsanstoß läuft die Kette ohne manuelle Chatnavigation bis entweder:
 - konkretes fail-closed BLOCK/FAIL mit erster Ursache, oder
-- finale geprüfte WordPress-Importdatei.
+- finale geprüfte WordPress-Importdatei im Elternchat.
 
-Reparaturen bleiben innerhalb derselben Artikelkapsel. Kein Neustart des Gesamtworkflows wegen eines reparierbaren Einzelartikelfehlers.
+Reparaturen bleiben beim selben Artikel. Kein Gesamtneustart wegen eines reparierbaren Einzelartikelfehlers.
+
+## Verbindlicher Gesamtworkflow
+
+`gebundener SEO/WordPress-Metadatenbatch`
+→ `kanonischer Artikelzustand`
+→ `Codex-Recherche + reale Evidence`
+→ `Fakten + Fact-Pack`
+→ `Text unter unveränderter Textmaschine`
+→ `FULL-Prüfung mit echten unveränderten Prüfern`
+→ bei Finding `Same-Article-Repair → FULL-Prüfung`
+→ `Artikelbytes einfrieren`
+→ `artikelübergreifende Prüfung`
+→ `SYSTEM4_WORDPRESS_HANDOFF_V1.json`
+→ `bytegleich in den Elternchat`
+→ `Portal SEO Editorial Plan Compiler 0.28.23`
+→ `WordPress-Entwürfe / publish_allowed=false`.
 
 ## Skalierungsziel
 
-Architektonisch identischer Weg für 1, 3, 25, 1000 und darüber hinaus. Batch ist nur eine Sammlung unabhängiger Kapseln, keine gemeinsame fachliche Zustandsmaschine.
+Architektonisch identischer Weg für 1, 3, 25, 1000 und darüber hinaus. Ein Batch ist nur die Menge der gebundenen Artikelzustände plus notwendige Querschnittsprüfung, keine zweite Fach-Zustandsmaschine.
 
 ## Finaler Dateivertrag
 
-Die finale Datei muss mindestens enthalten bzw. nachweisbar binden:
+Die finale Datei bindet mindestens:
 - Batch-/Snapshot-Identität;
 - `publish_allowed=false`;
-- WordPress-Direct-Import-Ziel und verifizierte Importer-Version;
-- pro Artikel: `title`, `target_keyword`, `category`, `article_type`, `plan_slot`, finaler Body, Body-Hash, Revision, gebundener Produktionskontext/Fact-Pack und echte Prüfnachweise;
-- artikelübergreifende Freigabe;
+- Direct-Import-Bereitschaft;
+- pro Artikel `title`, `target_keyword`, `category`, `article_type`, `plan_slot`, finalen Body und Body-Hash, Revision, Produktionskontext/Fact-Pack und echte LT-/PPM-/weitere Prüfnachweise;
+- artikelübergreifenden PASS;
 - exakt dieselben final geprüften Artikelbytes.
 
-Kein fester Artikelcount und keine feste Beitragsart im Schema.
+## Abbruchkriterium für ein eigenständiges 4a-System
 
-## Abbruchkriterium
+Ein separates 4a-System wird **nicht gebaut**, solange Konzept 4 durch Entfernen seiner Parallelwege auf dieses Ziel gebracht werden kann.
 
-4a wird verworfen, wenn es gegenüber dem aktuellen System 4 keine nachweisbare Reduktion echter Laufzeitgrenzen bringt oder dafür vorhandene Fach-/Design-/Qualitätsautoritäten duplizieren müsste.
+Nur wenn nach dieser Bereinigung ein irreduzibler, nachweisbarer struktureller Nachteil von Konzept 4 verbleibt, darf ein eigenständiger 4a-Prototyp erneut geprüft werden.
