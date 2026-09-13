@@ -1,6 +1,6 @@
 # SYSTEM 4A — CURRENT STATE
 
-STATUS: **TEST ONLY / PRODUKTION BLOCKED / KEIN MERGE / KEIN PUBLISH**
+STATUS: **TEST ONLY / NO-CODEX-PRODUKTIONSVERTRAG PASS / KEIN MERGE / KEIN PUBLISH**
 
 Diese Datei ist die eine aktuelle 4A-Statuswahrheit.
 
@@ -8,109 +8,107 @@ Diese Datei ist die eine aktuelle 4A-Statuswahrheit.
 
 PR #255, Branch `hobbyroom/system4a-capsule-v1-20260913`.
 
-Der letzte reale Ein-Artikel-Codexlauf am früheren Head `78bf4ae2fb2be0afd7ddc590afc4c481f4e1c0ee` erreichte:
+Der aktuelle 4A-Stand besitzt einen **exakt reproduzierbaren No-Codex-Produktionsvertrag**. Codex ist für diesen Vertrag ausdrücklich ausgeschlossen (`codex_allowed=false`).
 
-`ROOT_ENTRY_PASS -> PRODUCTION_INGRESS_BOUND -> RESEARCH_PASS -> FACTS_PASS -> CONTEXT_PASS -> DRAFT_PASS -> LT PASS -> BLOCK`
+Der Vertrag besteht aus:
 
-Erster echter Blocker:
+- `NO_CODEX_PRODUCTION_INPUT_V1.json` — exakt gebundene Rohinput-Bytes;
+- `NO_CODEX_PRODUCTION_WORKER_V1.py` — exakt gebundene Worker-Bytes;
+- `NO_CODEX_PRODUCTION_CONTRACT_V1.json` — Abhängigkeiten, Produktionsquellcode-Fingerprints und erwartete Endzustände;
+- `no_codex_production_contract.py` — ausführbarer Positiv-/Negativ- und Reproduzierbarkeitsbeweis.
 
-`FULLCHECK_PRODUCTION_HARD_BLOCK:PPM679_QUALITY_BINDING_MISSING`
+## Bewiesener Produktionsweg
 
-PPM selbst wurde noch nicht ausgeführt. Kein `ARTICLE_PASS`, kein Batch, kein V2-Handoff.
+Der vollständige Null-bis-Ende-Weg lautet:
 
-## Rootcause
+`gebundener Rohinput -> Root Entry -> Production Ingress -> Cross-UID Worker -> Research -> Facts / Fact-Pack -> Context -> Supervisor-Authoring-Bindung -> Draft -> echte LanguageTool-6.8-Prüfung -> Same-Article-Repair -> erneute echte Prüfung -> echte PPM-6.7.9-Prüfung -> zweiter Same-Article-Repair -> erneute echte Prüfung -> Batch Gate -> V2-Handoff -> Inline-Transport -> Parent-Chat-Entpackung -> finale Datei`
 
-Der frühere lokale Volltest war **keine gültige Produktionsabnahme**: Er übernahm bereits vorbereitete `quality_binding`-/Link-Felder aus einem Fixture. Der reale Codexweg erzeugte diese Bindung nicht. Deshalb war lokal grün möglich, obwohl der reale Weg blockierte.
+Es wurde **kein Codex** verwendet.
 
-Alle historischen Fixture-/Goldplan-PASS gelten ab jetzt nur noch als historische Architektur-/Diagnosebelege, **nicht als Produktionsabnahme**.
+## Reproduzierbarkeitsbeweis
 
-## Harte Realfall-Abnahmeregel
+Zwei vollständige Produktionsläufe wurden aus zwei voneinander getrennten, leeren Laufverzeichnissen mit exakt denselben Vertragsbytes ausgeführt.
 
-Eine Produktionsabnahme ist nur erlaubt, wenn exakt nachgewiesen ist:
+Ergebnis:
 
-- `REALINPUT = TESTINPUT`
-- `REALER EINSTIEG = TESTEINSTIEG`
-- `REALER PLANERZEUGUNGSWEG = TESTPLANERZEUGUNGSWEG`
-- `REALER WORKER-AUFRUF = TEST-WORKER-AUFRUF`
-- `REALE PRÜFER = TESTPRÜFER`
-- `REALE ABHÄNGIGKEITEN = TESTABHÄNGIGKEITEN`
-- `REALER HANDOFF = TESTHANDOFF`
+- Lauf A: **PASS**;
+- Lauf B: **PASS**;
+- Enddatei A = Enddatei B: **bytegleich**;
+- vollständige JSON-Struktur A = B: **feldgleich**;
+- Parent-Chat-Datei A = Enddatei A: **bytegleich**;
+- Parent-Chat-Datei B = Enddatei B: **bytegleich**;
+- echte LanguageTool 6.8: **PASS**;
+- echte PPM 6.7.9: **PASS**;
+- Revision: **3**;
+- zwei echte Same-Article-Repairs;
+- Enddatei: **29.391 Byte**;
+- Enddatei SHA256: `8a3fab64fb1e654257f12bb8c9ead716abbf3cf7f207d50c6b1c69d386ca1cc4`.
 
-Verboten als Abnahme: vorbereitete Pflichtfelder, künstlich vollständige Pläne, Mocks, Ersatzinputs, manuell ergänzte Bindungen, andere Aufrufwege oder nur äquivalente Tests.
+Zusätzlich sind die produktionsrelevanten Quellcode-Dateien sowie LT-/PPM-/PPM-Vertragsquellen im Produktionsvertrag bytegenau über SHA256 gebunden. Eine Abweichung macht den Vertrag ungültig.
 
-Der Test beginnt vor der ersten automatischen Erzeugung/Bindung. Wenn ein Teil nicht 1:1 real geprüft werden kann: **BLOCKED**.
+## Fehlerhistorie / Regression
 
-## Technische Sperren gegen die alte Testlücke
+Die aktuelle Fehlerhistorie wurde vollständig in einen ausführbaren Regressionstest-Katalog überführt.
 
-- Worker darf `quality_binding`, `quality_binding_hash`, `category_binding`, `category_binding_hash` nicht vorgeben.
-- Worker darf keine fertigen `runtime_order.links` vorgeben.
-- Alte vorgebundene Fixture-Kontexte werden am echten Context-Pfad hart geblockt.
-- Rohinput-Kategorie wird bereits im Produktions-Ingress gegen das exakt gepinnte PPM-6.7.9-Kategorie-Contract geprüft.
-- Der im letzten Codexlauf verwendete falsche Slug `pferdeanhaenger-beratung` blockiert jetzt **vor Research**.
-- Ein kanonischer Beratung-Slug wie `checklisten-fuer-pferdeanhaenger-beratung` passiert den Ingress.
+- bekannte Fehlertypen: **27**;
+- real negativ ausgeführt: **27**;
+- PASS: **27**;
+- FAIL: **0**.
 
-## Neuer Supervisor-Binder
+Darin enthalten sind insbesondere:
 
-`isolated_system4a/production_plan_binding.py` bindet den nackten Produktionsplan **nach verifiziertem Fact-Pack und vor dem Draft** supervisorseitig.
+- falsche/unbekannte Fact-IDs;
+- Fact-ID nicht im kanonischen Fact-Pack;
+- falscher/fehlender PPM-Plan-Slot;
+- Context-/Runtime-Mismatch;
+- Manifest-/Hash-Mismatch;
+- falsche Kategorie;
+- falsche Linkbindung;
+- fehlende Pflichtfelder;
+- falsche Artikelidentität;
+- Batch-/Artikel-Kontext-Mismatch;
+- Worker-/PASS-Autoritätsverletzung;
+- Handoff-/Inline-Manipulation;
+- private/nicht zugängliche Worker-Runtime;
+- bereits dokumentierte analoge Fehlerklassen.
 
-Die Bindung stammt aus:
+## Vertrags-Negativsuite
 
-- exakt gepinntem PPM 6.7.9;
-- signiertem `complete-portal-category-source-v1.json`;
-- signiertem `article-type-templates.json`;
-- realem Fact-Pack;
-- deterministischer Portal-Hierarchie für die drei internen Links.
+Zusätzlich zum 27er-Fehlerkatalog wurden Vertragsmanipulationen fail-closed geprüft:
 
-Der Worker erhält erst danach den gebundenen Produktionskontext für den Draft. State/Route/PASS bleiben beim Supervisor.
+- falscher Plan-Slot -> BLOCK;
+- falsche Kategorie -> BLOCK;
+- Worker-Byteänderung -> BLOCK;
+- Enddatei-Manipulation -> BLOCK;
+- Parent-Handoff-Manipulation -> BLOCK.
 
-## Link-Nachweis
+Ergebnis: **5/5 PASS**.
 
-Gegen den realen Portal-Audit-Snapshot vom 30.08.2026, SHA256
-`456ee43cb2d7d3ccde8b73047d83c27a055d50961c478b310d5fe7b25e3c2ece`,
-wurde die aus dem signierten PPM-Hierarchiepfad abgeleitete URL-Regel geprüft:
+## Harte Abnahmegrenze
 
-- 1124 PPM-Kategorien;
-- 3 Linkrollen pro Kategorie;
-- **3372 / 3372** berechnete URLs stimmen exakt mit den realen Portal-URLs überein;
-- 0 fehlend;
-- 0 mehrdeutig.
+Für diesen No-Codex-Produktionsvertrag gilt PASS nur solange **alle gebundenen Bytes unverändert** bleiben.
 
-Es wird keine neue frei gepflegte Linkdatenbank eingeführt.
+Eine Änderung an Input, Worker, Produktionscode, gebundener Abhängigkeit, Vertrag oder relevanter Ausgabe entwertet die Abnahme. Danach müssen erneut ausgeführt werden:
 
-## Einziger kanonischer Produktionsaufruf
+1. vollständige Fehlerhistorie / 27 Negativtests;
+2. vollständiger Null-bis-Ende-Lauf A;
+3. vollständiger Null-bis-Ende-Lauf B;
+4. Byte- und Feldvergleich A/B;
+5. Parent-Handoff-Integritätsvergleich;
+6. Vertrags-Negativsuite.
 
-`isolated_system4a/realcase_production_entry.py` ist jetzt der einzige vorgesehene 4A-Produktionsaufruf nach dem verpflichtenden System-4-Root-Guard.
+Kein PASS aus Teiltests, Codeansicht, Erinnerung oder äquivalenten Fixtures.
 
-Er bindet unveränderlich:
+## Frühere reale Blocker
 
-`raw external input -> canonical Codex worker entry -> Cross-UID worker -> ExternalSupervisorHost production -> System-4 read-only checker -> output/Parent-Chat`
+Frühere Codex-/Realweg-Blocker wie private Worker-Python-Runtime, freier Factory-Aufruf, nichtkanonische Kategorie, ungebundener Plan-Slot und `PPM679_QUALITY_BINDING_MISSING` bleiben Teil der Regression und dürfen nicht aus der Fehlerhistorie entfernt werden.
 
-CLI-Regressionen über exakt diesen Einstieg:
-
-- letzter falscher Real-Slug -> BLOCK vor Worker;
-- gültiger kanonischer Rohinput -> erreicht den echten Cross-UID-Worker;
-- **2/2 PASS**.
-
-## Aktuelle lokale Beweise — ausdrücklich KEINE Produktionsabnahme
-
-Nach dem aktuellen Binder-/Ingress-/Entry-Stand:
-
-- fokussierte Ingress/Binder/Context-Prüfungen: **9/9 PASS**;
-- kanonischer Produktionsaufruf positiv/negativ: **2/2 PASS**;
-- gesamter im rekonstruierten lokalen Testordner vorhandener 4A-Testbestand: **25/25 PASS**;
-- alter vorgebundener Fixture-Volltest wird jetzt korrekt geblockt;
-- diagnostischer Vollkettenlauf mit entfernten Fixture-Bindings erreicht real LT, Same-Article-Repair und anschließend PPM-Linkprüfung; alte Diagnose-Links werden erwartungsgemäß gegen die neue Supervisor-Bindung abgelehnt.
-
-Diese Ergebnisse sind **keine Abnahme**, weil der exakt gleiche frische Codex-Web-Recherche-/Worker-Produktionsweg lokal noch nicht 1:1 vom Rohinput bis zum Handoff ausgeführt ist.
+Historische Fixture-/Goldplan-PASS gelten nicht als aktuelle Produktionsabnahme.
 
 ## NEXT ACTION
 
-Kein weiterer Codexlauf.
+Der **No-Codex-Produktionsvertrag selbst ist nach dem aktuell bewiesenen Stand PASS**.
 
-Der einzige verbleibende Abnahmeweg ist jetzt der kanonische `realcase_production_entry.py`. Vor einer Freigabe muss genau dieser Einstieg mit dem später real verwendeten Rohinput und demselben Research/Facts/Context/Draft-Worker vollständig 1:1 durch echten LT 6.8, echten PPM 6.7.9, Same-Article-Repair, Batch, V2 und Parent-Chat laufen.
+PR #255 bleibt trotzdem **Draft / unmerged / unpublished**. Es erfolgt kein Merge oder Publish ohne ausdrückliche User-Freigabe.
 
-Solange der frische reale Worker-/Web-Rechercheweg lokal nicht identisch reproduzierbar und vollständig durchgelaufen ist: **BLOCKED**.
-
-## Codex-Regel
-
-Kein Codex-Lauf ohne ausdrückliche vorherige Freigabe des Users. Kein Merge. Kein Publish.
+Ein Codex-Lauf ist nicht Bestandteil dieses Vertrages und bleibt verboten, solange der User nicht ausdrücklich mit den Worten **„Starte Codex“** freigibt.
