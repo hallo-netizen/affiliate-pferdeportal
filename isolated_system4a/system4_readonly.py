@@ -153,6 +153,7 @@ class System4ReadOnlyChecks:
             "draft_sha256": draft_sha,
         }
         try:
+            # Same fail-closed preconditions used by current System 4.
             self.content_guard.validate_single_article(draft, fact_pack)
             self.design_guard.validate_design_neutrality(draft, str(article["article_type"]))
             evidence = self.production_checks.run_all(
