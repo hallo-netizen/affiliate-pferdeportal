@@ -10,13 +10,25 @@ STATUS: AKTIV / PROTOTYP NICHT PRODUKTIONSFREIGEGEBEN
 - Der aktuelle System-4-Einzelartikelkern ist bereits deutlich verbessert: kanonischer Zustand, feste Phasen, Same-Article-Repair, interne Content-/Designprüfungen und ein zentraler Fullcheck.
 - Deshalb ist 4a **keine neue Textmaschine** und kein Ersatz der vorhandenen Qualitätslogik.
 
-## Nachgewiesene Restprobleme / 4a-Anlass
+## Entscheidungsmaßstab 4 vs. 4a
 
-1. Der aktuelle System-4-Handoff validiert exakt `len(articles)==7`.
-2. Derselbe Handoff akzeptiert aktuell ausschließlich `article_type == Beratung`.
-3. `batch_gate.py` schreibt als nächsten Schritt weiterhin `SIGNED_WORKFLOW_RELEASE`, obwohl der aktuelle System-4-Zielweg mit deaktivierter Signaturprüfung und direktem WordPress-Import arbeitet.
-4. Damit ist der Ausgangsweg noch nicht universell für 1–∞ Artikel und neue Beitragsarten.
-5. Historisch sind gerade Übergabe-, Signer-, Receipt-, Package- und Zustandsgrenzen wiederholt zu Hauptfehlerquellen geworden.
+Die aktuell noch vorhandene feste 7er- bzw. `Beratung`-Bindung in System 4 wird als **behebbarer Implementierungsfehler** behandelt und ist ausdrücklich **kein Entscheidungskriterium für 4a**.
+
+4a muss gegen ein entsprechend bereinigtes Konzept 4 bestehen. Entscheidend sind ausschließlich:
+1. Zahl echter Laufzeit-/Zustandsautoritäten und Übergabegrenzen;
+2. Schutz vor externer Workflow-Freiheit;
+3. unveränderte Fach-, Design- und Qualitätsautorität;
+4. vollständiger Weg vom Produktionsanstoß bis zur korrekten WordPress-Datei im Elternchat;
+5. Offenheit für neue autoritativ definierte Beitragsarten ohne neue Controllerlogik;
+6. Automatisierbarkeit und robuste Same-Article-Reparatur.
+
+## Separat zu reparierende System-4-Punkte
+
+- feste Artikelzahl im aktuellen Handoff entfernen;
+- feste `Beratung`-Bindung im Handoff entfernen;
+- Signing-/Direct-Import-Endpfad eindeutig machen.
+
+Diese Punkte werden **nicht** als Vorteil von 4a gewertet.
 
 ## Unverändert / unangetastet
 
@@ -31,9 +43,10 @@ STATUS: AKTIV / PROTOTYP NICHT PRODUKTIONSFREIGEGEBEN
 
 ## 4a-Status
 
-Büro angelegt. Architekturentscheidung getroffen: 4a wird ausschließlich als isolierter Universalitäts-/Vereinfachungsprototyp aufgebaut.
+Büro angelegt. Architekturprüfung läuft gegen **bereinigtes Konzept 4**, nicht gegen dessen aktuelle Stückzahl-/Artikeltyp-Hardcodes.
 
 Noch NICHT bewiesen:
+- dass 4a tatsächlich weniger echte Übergaben/Zustandsautoritäten besitzt als bereinigtes Konzept 4;
 - realer vollständiger Validatoranschluss;
 - echter positiver End-to-End-Lauf;
 - 1/3/25/1000;
