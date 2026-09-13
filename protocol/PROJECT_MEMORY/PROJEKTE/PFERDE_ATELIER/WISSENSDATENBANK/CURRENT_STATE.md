@@ -23,13 +23,13 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **118 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 114er-Stand neu: Mangalarga Marchador, Kathiawari, Marwari und Campolina.
-- Mangalarga Marchador ist über ABCCMM/MAPA mit offiziellem genealogischem Register und aktuellem Rassestandard gebunden.
-- Marwari und Kathiawari besitzen eigene indische Studbook-Strukturen; Detailstandardfelder bleiben dort sichtbar offen, wo sie noch nicht ausreichend gebunden sind.
-- Campolina wurde als brasilianische Gangpferderasse mit eigenem Verband/Register als Kernakte angelegt.
-- Brasilianischer Crioulo wird nicht künstlich als zweiter Datensatz angelegt, weil der vorhandene Criollo-Datensatz den südamerikanischen Ursprungsverbund einschließlich Brasilien bereits abdeckt.
+- **122 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 118er-Stand neu: Swedish Warmblood, Oldenburger, Marsh Tacky und Newfoundland Pony.
+- SWB ist über den offiziellen schwedischen Zuchtverband mit eigenem Studbook/Registersystem gebunden; Registerklassen werden nicht als eigene Rassen dupliziert.
+- Oldenburger ist über das Ursprungsstutbuch des Oldenburger Pferdezuchtverbands gebunden.
+- Marsh Tacky besitzt eine eigenständige Pedigree-Registry; Newfoundland Pony wird als eigenständige kanadische Ponyrasse geführt.
 - Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben offen, weil Status/Detailstandard noch nicht stark genug aus Primärquellen gebunden sind.
+- Mangalarga Paulista und Pantaneiro bleiben offene brasilianische Kandidaten.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
