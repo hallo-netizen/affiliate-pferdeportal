@@ -17,7 +17,10 @@ end=src.index("';\n    }\n}",start)
 css='.uge{--uge-olive:#35422A;--uge-olive2:#4F5C43;--uge-ochre:#9A6400;--uge-paper:#F9F7F2;--uge-text:#172018;--uge-muted:#5e665f;--uge-line:#e7ebe7;--uge-surface:#fff;'+src[start:end]
 
 # Use the candidate's actual search DOM literal instead of inventing a fixed test DOM.
-m=re.search(r"printf\('(<form class=\"uge-search-form\".*?uge-search-suggestions.*?</div>)',\s*esc_url\(self::home_url\(\)\)",src,re.S)
+# This deliberately accepts BOTH structures:
+#   rejected baseline: </form><div class="uge-search-suggestions" ...></div>
+#   repaired candidate: <div class="uge-search-suggestions" ...></div></form>
+m=re.search(r"printf\('(<form class=\"uge-search-form\".*?</form>(?:<div class=\"uge-search-suggestions\" hidden></div>)?)',\s*esc_url\(self::home_url\(\)\)",src,re.S)
 if not m:
     raise SystemExit('ACCEPT_BROWSER_SOURCE_PARSE_FAIL:SEARCH_DOM')
 search_html=m.group(1)
