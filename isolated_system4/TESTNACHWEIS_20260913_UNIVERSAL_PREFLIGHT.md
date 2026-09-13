@@ -80,9 +80,30 @@ Separat ausgeführt:
 Ergebnis:
 - **5/5 PASS**.
 
-Enthalten sind:
-- realer PPM-/Textmaschinen-Bindungsnachweis: PASS;
-- positiver Weg vom System-4-/Codex-Einstieg bis zur exakten V2-Elternchat-Rekonstruktion: PASS;
+### Wichtige Beweisgrenze dieses E2E-Tests
+
+Dieser Test bildet **nur die interne `isolated_system4`-Kette** nach. Er startet **nicht** am echten repositoryweiten Codex-Cloud-Eingang.
+
+Konkret:
+- `codex_entry.py` wird im Test direkt aufgerufen;
+- die Research-Evidence wird aus lokalen Testdaten mit `example.org` erzeugt und ist keine echte Webrecherche;
+- im positiven Hauptpfad wird `production_checks.run_all` gemockt und mit einer synthetischen PASS-Evidence ersetzt;
+- Root-`AGENTS.md`, `control/output-quarantine/runtime_entry_gate.py`, `worker_freshness_guard.py` und der reale Codex-Cloud-Start werden in diesem E2E-Test **nicht ausgeführt**.
+
+Deshalb darf `5/5 PASS` nur so interpretiert werden:
+**interner System-4-Pfad vom direkten System-4-Einstieg bis zur exakten V2-Elternchat-Rekonstruktion PASS**.
+
+Es beweist ausdrücklich **nicht**:
+- dass Codex Cloud den System-4-Einstieg überhaupt erreicht;
+- dass die repositoryweite Root-Instruktion System 4 nicht vorher abfängt;
+- dass echte Webrecherche im Codex-Lauf erfolgt;
+- dass der reale Codex-Produktionslauf vom Repository-Eingang bis zur Chat-Datei funktioniert.
+
+Der zusätzlich enthaltene Test `test_authoritative_textmachine_bindings_are_unchanged_from_proven_full_rule_pass` prüft zwar die reale PPM-Paketbindung und LT-/PPM-Identitäten, schließt diese Codex-Cloud-Eingangslücke aber nicht.
+
+Enthalten sind damit korrekt beschrieben:
+- reale PPM-/Textmaschinen-Bindungsidentität: PASS;
+- interner positiver System-4-Weg ab direktem System-4-Einstieg bis zur exakten V2-Elternchat-Rekonstruktion: PASS;
 - Fake-Fact-Negativtest: BLOCKED/PASS;
 - Design-Drift-Negativtest: BLOCKED/PASS;
 - historische artikelübergreifende Template-Wiederholung: BLOCKED/PASS.
@@ -103,12 +124,12 @@ Lokal nachgewiesen:
 - universeller nichtleerer Batch `1..N` ohne künstliche System-4-Obergrenze: PASS;
 - keine System-4-Beitragsart-Whitelist: PASS;
 - kompletter aktueller Unittestbestand: **87/87 PASS**;
-- lokaler E2E: **5/5 PASS**;
-- NO-LEGACY: PASS;
+- lokaler interner E2E ab direktem System-4-Einstieg: **5/5 PASS**;
+- NO-LEGACY innerhalb des System-4-Laufzeitcodes: PASS;
 - reale gebundene PPM-6.7.9-ZIP: Hash-/Blob-/ZIP-Integrität PASS.
 
-Der frühere Materialisierungsblocker ist **geschlossen**. Aktuell ist kein offener System-4-Code-/lokaler-Preflight-Blocker bekannt.
+Nicht durch diesen lokalen Preflight bewiesen wurde der **echte repositoryweite Codex-Cloud-Einstieg vor `isolated_system4`**.
 
-Nicht behauptet wird ein bereits ausgeführter realer Codex-Produktionsnachweis. **Kein Codex-Produktionslauf wurde gestartet.** Kein Merge. Kein Publish. Textmaschine, PPM, PSERC/PSTE, WordPress-Plugin und Design wurden nicht verändert.
+Diese Lücke wurde im ersten realen 1-Artikel-Codex-Lauf am 2026-09-13 tatsächlich sichtbar: Codex wurde vor System-4-ingress durch die repositoryweite offizielle Runtime-Eingangsstrecke mit `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING` blockiert. Siehe `PROTOKOLL_REALRUN_20260913_SINGLE_ARTICLE_ENTRY_BLOCKER_SPEED.md` und die aktuelle Statuswahrheit `README.md`.
 
-Nächste zulässige Stufe ist ausschließlich nach ausdrücklicher Nutzerfreigabe: **ein echter Codex-Lauf des konkret gebundenen Input-Batches** durch dieselbe fail-closed System-4-Kette.
+Kein Merge. Kein Publish. Textmaschine, PPM, PSERC/PSTE, WordPress-Plugin und Design wurden nicht verändert.
