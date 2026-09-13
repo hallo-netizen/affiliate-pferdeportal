@@ -1,7 +1,7 @@
 # UNIVERSAL GLOSSAR ENGINE – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCH PASS / PFERDE-LIVE-READBACK OFFEN
+STATUS: NEUTRALER CORE 0.2.9 GEBUNDEN / PFERDE-0.2.10-rc7 NICHT ALS UNIVERSAL-CORE FREIGEGEBEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,21 +9,30 @@ STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCH PASS / PFERDE-LIVE-READBACK OFFEN
 Der isolierte Arbeitsraum für den allgemeinen Glossar-Core.
 
 **DU DARFST …**  
-den neutralen Core und seine gebundenen Positiv-/Negativtests pflegen sowie exakt 0.2.9 für den Pferde-Live-Readback verwenden.
+den neutralen Core und seine gebundenen Positiv-/Negativtests pflegen sowie eine saubere konfigurierbare Grenze für projektspezifische Content-Packs entwickeln und prüfen.
 
 **DU DARFST NICHT …**  
-Pferde-Fachlogik in den neutralen Core schreiben, `main` verändern, 0.2.6/0.2.7/0.2.8 erneut ausgeben, unterschiedliche Paketbytes unter derselben Version erzeugen oder die verworfene Kategorie-Acceptance wiederverwenden.
+Pferde-Fachlogik als allgemeinen Core ausgeben, `main` verändern, 0.2.6/0.2.7/0.2.8 erneut ausgeben, unterschiedliche Paketbytes unter derselben Version erzeugen oder einen Pferde-Projekt-PASS als Allgemeingültigkeitsbeweis behandeln.
 
 **ALS NÄCHSTES …**  
-exakt 0.2.9 auf Pferde Atelier installieren und real zurücklesen.
+wenn am allgemeinen Modul weitergearbeitet wird: die Adapter-/Projektkonfigurationsgrenze für Content-Packs explizit trennen und mit einer zweiten Projektkonfiguration beweisen. Die aktuelle Pferde-Live-Abnahme läuft ausschließlich im Projektbüro.
 
-## GEBUNDENER TECHNISCHER KANDIDAT
+## GEBUNDENER NEUTRALER KERN
 
-Version: `0.2.9`
-Rewrite-Schema: `7`
-Branch: `hobbyroom/glossar-livefail-red-green-20260913`
-Head: `f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
-Run: `34757795593`
+Letzter allgemeiner Kandidat:
+`0.2.9`
+
+Rewrite-Schema:
+`7`
+
+Branch:
+`hobbyroom/glossar-livefail-red-green-20260913`
+
+Getesteter neutraler Head:
+`f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
+
+Run:
+`34757795593`
 
 PASS:
 - Build `103725094481`
@@ -32,41 +41,17 @@ PASS:
 - Real Design 1.50.469/Browser/Null-Rewrite `103725094378`
 - gated package `103725295224`
 
-ZIP SHA-256:
-`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
+## PFERDE-PROJEKTLINIE
 
-Actions-Artefakt-ID:
-`10317444708`
+Die Projektlinie `0.2.10-rc7` ist technisch im Pferde-Fachbüro geprüft und paketiert, enthält aber ausdrücklich projektspezifische Content-Pack-Logik (`class-uge-pferde-content-pack.php`).
 
-## WARUM 0.2.9 NÖTIG WAR
+Sie ist deshalb **keine automatische neue Universal-Core-Version**.
 
-Realer 0.2.8-Readback:
-- Hero nicht responsive;
-- Kategorien nicht wie Glossar-Startseite gestaltet;
-- Einzelartikel-Links laufen ins Leere.
-
-Zusätzlich war die 0.2.8-Kategorie-Acceptance selbst falsch: sie verlangte das Fehlen von Hero/Tools statt des vollständigen Glossar-Rahmens.
-
-## NEUE HARTE SCHRANKEN
-
-- echtes Bild selbst muss bei 1200/900/720/500 proportional skalieren;
-- Kategorie muss Hero + Suche/A–Z + Icon-Navigation + eigenen Kategorieinhalt besitzen;
-- Browser muss einen real gerenderten Begriff-Link tatsächlich anklicken;
-- Kategorie-/Begriff-Routing muss selbst nach Löschung **aller** gespeicherten Glossar-Rewrite-Regeln bei bereits aktuellem Schema weiter funktionieren;
-- WordPress-Draft-Preview muss weiterhin funktionieren;
-- unbekannter Begriff und öffentlicher Draft bleiben 404;
-- alte Regressionen bleiben grün.
-
-## EXAKTE ÜBERGABE
-
-Nur:
-`universal-glossary-engine-0.2.9.zip`
-
-SHA-256:
-`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
-
-Materielle Änderung danach → mindestens Version 0.2.10.
+Aktueller Projekt-/Paket-/LIVE-Status:
+`PROJEKTE/PFERDE_ATELIER/GLOSSAR/CURRENT_STATE.md`
 
 ## HARTE GRENZE
 
-0.2.9 ist technisch PASS, aber **noch kein Pferde-LIVE-PASS**. Nur der reale Nutzer-Readback kann die aktuellen Live-Fehler schließen.
+- Neutraler Core und projektspezifische Content-Packs dürfen nicht zu einer zweiten unklaren Modulwahrheit verschmelzen.
+- Allgemeingültigkeit erst nach neutraler Adaptergrenze + zweiter Projektkonfiguration.
+- Pferde-LIVE-PASS ausschließlich durch realen Nutzer-Readback im Pferde-Fachbüro.
