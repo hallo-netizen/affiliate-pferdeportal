@@ -1,14 +1,17 @@
 from __future__ import annotations
-import subprocess, sys
+import json, subprocess, sys
 from pathlib import Path
 
-SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V1'
+SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V2'
 BRANCH = 'hobbyroom/system4-true-single-room-v1'
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 CODEX_ENTRY = HERE / 'codex_entry.py'
 ROOT_AGENTS = REPO / 'AGENTS.md'
-MARKER = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V1'
+MARKER = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V2'
+ROOT_COMMAND_FILE = 'python3 isolated_system4/root_entry.py start'
+ROOT_COMMAND_STDIN = 'python3 isolated_system4/root_entry.py start-stdin'
+OLD_ENTRY_EXCLUSION = 'SYSTEM4 branch: DO NOT run control/cloud-entry-gate/cloud_entry.py before or instead of the System-4 root entry.'
 
 class EntryFail(RuntimeError):
     pass
@@ -23,7 +26,7 @@ def _branch() -> str:
     except Exception as exc:
         raise EntryFail('ROOT_ENTRY_BRANCH_UNAVAILABLE') from exc
 
-def verify_root_contract(snapshot: Path, workspace: Path) -> None:
+def _verify_common(workspace: Path) -> None:
     if _branch() != BRANCH:
         raise EntryFail('ROOT_ENTRY_BRANCH_NOT_SYSTEM4')
     if not ROOT_AGENTS.is_file():
@@ -31,28 +34,67 @@ def verify_root_contract(snapshot: Path, workspace: Path) -> None:
     text = ROOT_AGENTS.read_text(encoding='utf-8')
     if MARKER not in text:
         raise EntryFail('ROOT_AGENTS_SYSTEM4_ROUTE_MISSING')
-    if 'python3 isolated_system4/root_entry.py start' not in text:
+    if ROOT_COMMAND_FILE not in text or ROOT_COMMAND_STDIN not in text:
         raise EntryFail('ROOT_AGENTS_SYSTEM4_COMMAND_MISSING')
-    if 'SYSTEM4 task: DO NOT run control/cloud-entry-gate/cloud_entry.py' not in text:
+    if OLD_ENTRY_EXCLUSION not in text:
         raise EntryFail('ROOT_AGENTS_OLD_ENTRY_EXCLUSION_MISSING')
+    if _within(workspace, REPO):
+        raise EntryFail('ROOT_ENTRY_WORKSPACE_MUST_BE_OUTSIDE_REPO')
+
+def _validate_snapshot_file(snapshot: Path) -> None:
     if not snapshot.is_file() or snapshot.suffix.lower() != '.json':
         raise EntryFail('ROOT_ENTRY_SNAPSHOT_INVALID')
     if _within(snapshot, REPO):
         raise EntryFail('ROOT_ENTRY_SNAPSHOT_MUST_BE_OUTSIDE_REPO')
-    if _within(workspace, REPO):
-        raise EntryFail('ROOT_ENTRY_WORKSPACE_MUST_BE_OUTSIDE_REPO')
+    try:
+        value=json.loads(snapshot.read_text(encoding='utf-8'))
+    except Exception as exc:
+        raise EntryFail('ROOT_ENTRY_SNAPSHOT_JSON_INVALID') from exc
+    if not isinstance(value,dict):
+        raise EntryFail('ROOT_ENTRY_SNAPSHOT_OBJECT_REQUIRED')
+
+def _materialize_stdin_snapshot(workspace: Path) -> Path:
+    raw=sys.stdin.buffer.read()
+    if not raw:
+        raise EntryFail('ROOT_ENTRY_STDIN_SNAPSHOT_MISSING')
+    try:
+        value=json.loads(raw.decode('utf-8'))
+    except Exception as exc:
+        raise EntryFail('ROOT_ENTRY_STDIN_SNAPSHOT_JSON_INVALID') from exc
+    if not isinstance(value,dict):
+        raise EntryFail('ROOT_ENTRY_STDIN_SNAPSHOT_OBJECT_REQUIRED')
+    workspace.mkdir(parents=True,exist_ok=True)
+    snapshot=workspace/'bound_snapshot.json'
+    snapshot.write_bytes(raw)
+    _validate_snapshot_file(snapshot)
+    return snapshot
+
+def _start(snapshot: Path, workspace: Path) -> int:
+    p = subprocess.run([sys.executable, str(CODEX_ENTRY), 'start', str(snapshot), str(workspace)], text=True)
+    if p.returncode:
+        return p.returncode
+    print('SYSTEM4_ROOT_ENTRY_PASS:RESEARCH_REQUIRED')
+    return 0
 
 def main(argv: list[str]) -> int:
     try:
-        if len(argv) != 4 or argv[1] != 'start':
+        if len(argv) < 2:
             raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
-        snapshot = Path(argv[2]); workspace = Path(argv[3])
-        verify_root_contract(snapshot, workspace)
-        p = subprocess.run([sys.executable, str(CODEX_ENTRY), 'start', str(snapshot), str(workspace)], text=True)
-        if p.returncode:
-            return p.returncode
-        print('SYSTEM4_ROOT_ENTRY_PASS:RESEARCH_REQUIRED')
-        return 0
+        command=argv[1]
+        if command=='start':
+            if len(argv)!=4:
+                raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
+            snapshot=Path(argv[2]); workspace=Path(argv[3])
+            _verify_common(workspace); _validate_snapshot_file(snapshot)
+            return _start(snapshot,workspace)
+        if command=='start-stdin':
+            if len(argv)!=3:
+                raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
+            workspace=Path(argv[2])
+            _verify_common(workspace)
+            snapshot=_materialize_stdin_snapshot(workspace)
+            return _start(snapshot,workspace)
+        raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
     except EntryFail as exc:
         print('SYSTEM4_ROOT_ENTRY_FAIL:' + str(exc))
         return 2
