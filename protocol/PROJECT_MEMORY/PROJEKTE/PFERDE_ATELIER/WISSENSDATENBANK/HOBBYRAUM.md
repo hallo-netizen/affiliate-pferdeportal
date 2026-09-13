@@ -1,6 +1,6 @@
 # WISSENSDATENBANK – HOBBYRAUM
 
-STAND: 2026-09-12
+STAND: 2026-09-13
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -27,9 +27,9 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **108 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- **114 reale Rassendatensätze** unter `DATEN/` vorhanden;
 - zahlreiche nationale/ursprüngliche Zuchtbücher und offizielle Verbände eingebunden;
-- neu seit 96: Aegidienberger, Huzule, Berber/Barb, Azteca, Morgan, Rocky Mountain Horse, Missouri Fox Trotter, Lusitano, Tennessee Walking Horse, Paso Fino, Peruanisches Pferd und Standardbred;
+- neu seit 108: Selle Français, Poney Français de Selle, Trotteur Français, Cheval Miniature Français, Cheval de Sport Anglo-Normand und Cheval Crème;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
@@ -39,7 +39,7 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 2. nächste belastbare nationale/ursprüngliche Registerblöcke prüfen;
 3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
 4. weitere internationale Rassen aus anerkannten Studbooks ergänzen;
-5. Synonyme, Sektionen und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
+5. Synonyme, Sektionen, Labels und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
 6. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
 ## KONTROLLPUNKTE
