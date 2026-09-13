@@ -47,14 +47,28 @@ def good_pack():
     }
 
 
+def good_article() -> str:
+    return (
+        '<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung">'
+        '<section data-block="intro"><p data-fact-ids="fact-a fact-b">Konkreter Artikelinhalt mit belegten Aussagen.</p></section>'
+        '<section data-block="criteria"><h2>Auswahlkriterien</h2><p data-fact-id="fact-a">Konkrete Auswahl.</p>'
+        '<table class="system-129-table comparison-table"><tr><th>Kriterium</th><th>Prüfung</th></tr><tr><td>A</td><td>B</td></tr></table>'
+        '</section></article>'
+    )
+
+
 class ContentGuardTests(unittest.TestCase):
-    def test_positive_research_facts_pack_and_article(self):
-        research = good_research(); facts = good_facts(); pack = good_pack()
+    def test_positive_research_facts_pack_article_and_design(self):
+        research = good_research(); facts = good_facts(); pack = good_pack(); article = good_article()
         content_guard.validate_research_document(research)
         content_guard.validate_facts_document(facts, research)
         content_guard.validate_fact_pack(pack, research, facts)
-        article = '<article><p data-fact-ids="fact-a fact-b">Konkreter Artikelinhalt mit belegten Aussagen.</p></article>'
-        self.assertEqual(content_guard.validate_single_article(article, pack)['status'], 'PASS')
+        result = content_guard.validate_single_article(article, pack)
+        self.assertEqual(result['status'], 'PASS')
+        self.assertEqual(result['design']['status'], 'PASS')
+        self.assertFalse(result['design']['content_mutation_performed'])
+        self.assertFalse(result['design']['design_mutation_performed'])
+        self.assertEqual(article, good_article())
 
     def test_historical_plain_research_text_is_blocked(self):
         with self.assertRaisesRegex(content_guard.ContentGuardError, 'RESEARCH_JSON_INVALID'):
@@ -86,8 +100,29 @@ class ContentGuardTests(unittest.TestCase):
             content_guard.validate_fact_pack(bad)
 
     def test_unknown_article_fact_id_is_blocked(self):
+        bad = good_article().replace('fact-a fact-b', 'fact-invented fact-b', 1)
         with self.assertRaisesRegex(content_guard.ContentGuardError, 'ARTICLE_UNKNOWN_FACT_ID'):
-            content_guard.validate_single_article('<p data-fact-id="fact-invented">Text</p>', good_pack())
+            content_guard.validate_single_article(bad, good_pack())
+
+    def test_historical_missing_design_classes_is_blocked_through_main_guard(self):
+        bad = good_article().replace(' class="ppm-generated ppm-type-beratung"', '')
+        with self.assertRaisesRegex(content_guard.ContentGuardError, 'ARTICLE_DESIGN_GUARD:DESIGN_PPM_GENERATED_CLASS_MISSING'):
+            content_guard.validate_single_article(bad, good_pack())
+
+    def test_historical_table_design_drift_is_blocked_through_main_guard(self):
+        bad = good_article().replace('system-129-table comparison-table', 'comparison-table')
+        with self.assertRaisesRegex(content_guard.ContentGuardError, 'ARTICLE_DESIGN_GUARD:DESIGN_TABLE_SYSTEM129_CLASS_MISSING'):
+            content_guard.validate_single_article(bad, good_pack())
+
+    def test_historical_h3_design_drift_is_blocked_through_main_guard(self):
+        bad = good_article().replace('<h2>Auswahlkriterien</h2>', '<h3>Auswahlkriterien</h3>')
+        with self.assertRaisesRegex(content_guard.ContentGuardError, 'ARTICLE_DESIGN_GUARD:DESIGN_BERATUNG_HEADING_LEVEL_FORBIDDEN'):
+            content_guard.validate_single_article(bad, good_pack())
+
+    def test_inline_style_is_blocked_through_main_guard(self):
+        bad = good_article().replace('<p data-fact-id="fact-a">', '<p data-fact-id="fact-a" style="color:red">')
+        with self.assertRaisesRegex(content_guard.ContentGuardError, 'ARTICLE_DESIGN_GUARD:DESIGN_INLINE_STYLE_FORBIDDEN'):
+            content_guard.validate_single_article(bad, good_pack())
 
     def test_good_batch_is_distinct(self):
         bodies = [f'<article><p data-fact-id="fact-a">Thema {i} mit eigener Formulierung ' + ' '.join(f'eigen{i}_{n}' for n in range(80)) + '</p></article>' for i in range(7)]
