@@ -23,13 +23,13 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **126 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 122er-Stand neu: Canadian Horse, Florida Cracker Horse, Gotlandsruss und Nordsvensk brukshäst.
-- Canadian Horse ist über CHBA/CLRC und den kanadischen Animal Pedigree Act sauber gebunden.
-- Florida Cracker Horse besitzt eigenes Register, staatlich gestütztes Erhaltungsprogramm und ist offizielles State Horse of Florida.
-- Gotlandsruss und Nordsvensk brukshäst besitzen schwedische Originalstutbücher.
+- **138 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 126er-Stand neu: Finnhorse, Latvian Warmblood, Wielkopolski, Małopolski, Polish Sport Horse, Silesian Horse, Polish Coldblood, Polish Ardennes, Dølahest, Fjordhest, Nordlandshest/Lyngshest und Norsk kaldblodstraver.
+- PZHK ist vom polnischen Landwirtschaftsministerium zur Führung der eigenen polnischen Zuchtbücher autorisiert; sieben aktuell fehlende polnische Rassen wurden darüber ergänzt.
+- Die vier nationalen norwegischen Rassen sind über Norsk Hestesenter bzw. Det Norske Travselskap gebunden; Dølahest, Fjordhest und Nordlandshest/Lyngshest werden national als kritisch bedroht, Kaldblodstraver als bedroht geführt.
+- Australian Stock Horse und Konik polski waren bereits vorhanden und wurden nicht dupliziert.
 - Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben offen, weil Status/Detailstandard noch nicht stark genug aus Primärquellen gebunden sind.
-- Mangalarga Paulista und Pantaneiro bleiben offene brasilianische Kandidaten.
+- Mangalarga Paulista, Pantaneiro und Latvian Heavy Warmblood bleiben offene Kandidaten.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
