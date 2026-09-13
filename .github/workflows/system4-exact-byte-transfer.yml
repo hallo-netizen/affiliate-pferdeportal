@@ -1,0 +1,31 @@
+name: System4 Exact Byte Transfer
+on:
+  push:
+    branches:
+      - hobbyroom/system4-true-single-room-v1
+permissions:
+  contents: write
+jobs:
+  transfer:
+    if: "${{ contains(github.event.head_commit.message, 'System4 transport: stage transfer workflow v2') }}"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Apply exact tested patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git apply --check isolated_system4/.system4_exact_transport.patch
+          git apply isolated_system4/.system4_exact_transport.patch
+          test "$(git hash-object isolated_system4/controller.py)" = "fe904b29f9d047fb1839c4169a3359d6e4bfc3f6"
+          test "$(git hash-object isolated_system4/batch_gate.py)" = "0b883efe9d3d5396975f7799984473c5ddb62773"
+          test "$(git hash-object isolated_system4/LIVE_BOUND_INPUT_ONE_ARTICLE.json)" = "21dc52de06b296c3e12f893bb7ae38fd8a3fd1ba"
+          rm isolated_system4/.system4_exact_transport.patch
+          rm .github/workflows/system4-exact-byte-transfer.yml
+          git config user.name "system4-byte-transfer"
+          git config user.email "system4-byte-transfer@users.noreply.github.com"
+          git add -A
+          git commit -m "System4: bind tested stage2 candidate byte-exact"
+          git push origin HEAD:hobbyroom/system4-true-single-room-v1
