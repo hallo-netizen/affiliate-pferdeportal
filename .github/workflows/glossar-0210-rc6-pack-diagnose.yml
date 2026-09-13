@@ -1,0 +1,16 @@
+name: Glossar 0.2.10-rc6 Pack Diagnose
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-0210-rc6-pack-diagnose.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/diagnose-0.2.10-rc6-pack.sh'
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/diagnose-0.2.10-rc6-pack.sh
