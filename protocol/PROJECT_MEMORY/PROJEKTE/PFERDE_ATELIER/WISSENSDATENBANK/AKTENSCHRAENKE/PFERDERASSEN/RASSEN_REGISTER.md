@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 114 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 118 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,20 +10,20 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **114 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **118 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 108er-Stand neu angelegt:
+Seit dem synchronisierten 114er-Stand neu angelegt:
 
-- Selle Français
-- Poney Français de Selle
-- Trotteur Français / Französischer Traber
-- Cheval Miniature Français
-- Cheval de Sport Anglo-Normand
-- Cheval Crème
+- Mangalarga Marchador
+- Kathiawari
+- Marwari
+- Campolina
 
-Alle sechs werden von IFCE über eigene Zuchtprogramme bzw. Livres Généalogiques geführt.
+Wichtige Abgrenzung:
+- Crioulo/Criollo Brasilien wird nicht als zweiter Datensatz dupliziert; der vorhandene Criollo-Datensatz umfasst bereits den südamerikanischen Ursprungsverbund einschließlich Brasilien.
+- Mangalarga Marchador und Mangalarga Paulista sind nicht synonym; Paulista bleibt eigener Kandidat bis zur starken Registerbindung.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -31,6 +31,8 @@ Alle sechs werden von IFCE über eigene Zuchtprogramme bzw. Livres Généalogiqu
 - American Walking Pony
 - Andravida
 - Anglo-Kabarda
+- Mangalarga Paulista
+- Pantaneiro
 - weitere internationale Rassen aus anerkannten nationalen/ursprünglichen Studbooks
 
 Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über ausreichend starke Primär-/Verbands-/staatliche Quellen gebunden sind.
@@ -49,6 +51,7 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Barbe ≠ Arabe-Barbe; getrennte Studbook-Sektionen, nicht synonym.
 - Azteca → registrierte Abstammung entscheidend; nicht jedes passende Kreuzungsprodukt ist automatisch Azteca.
 - Selle Français Originel → Label innerhalb des Selle-Français-Studbooks, keine zweite Rasse.
+- Crioulo Brasilien → Bestandteil des vorhandenen Criollo-Datensatzes, solange die internationalen Ursprungsregister keine belastbare fachliche Trennung als eigene Rasse verlangen.
 
 ## OFFENE NACHRECHERCHE
 
