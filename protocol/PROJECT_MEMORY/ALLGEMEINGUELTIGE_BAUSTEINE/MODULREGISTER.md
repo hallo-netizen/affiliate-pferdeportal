@@ -318,21 +318,21 @@ Allgemeingültigkeitsbeweis mit mindestens einer zweiten Projektkonfiguration so
 MODULKLASSE: UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG
 
 STATUS:
-0.2.8 technischer Kandidat HARDTEST PASS; Pferde-Atelier ist erste Projektanwendung; realer Pferde-LIVE-Readback 0.2.8 noch offen. 0.2.7 ist historischer LIVE FAIL und nicht zu verwenden.
+0.2.9 technischer Kandidat HARDTEST PASS; Pferde-Live-Readback 0.2.9 offen. 0.2.8 ist realer LIVE FAIL und nicht zu verwenden.
 
 HAUPTORT:
 `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
 
 AKTUELL BELEGTER STAND:
-- Plugin 0.2.8
-- Rewrite-Schema 6
-- finaler Run `34755984363`
-- getesteter Head `d14f6bff7f660cc6461208e8153fbdf237f0d609`
-- ZIP SHA-256 `9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
-- Actions-Artefakt-ID `10318015702`
+- Plugin 0.2.9
+- Rewrite-Schema 7
+- finaler Run `34757795593`
+- getesteter Produkt-Head `f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
+- ZIP SHA-256 `864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
+- Actions-Artefakt-ID `10317444708`
 
 ZWECK:
-Projektunabhängiger Glossar-Core mit eigenem Begriffstyp, hierarchischen Oberbereichen, Suche, A–Z, eigener Begriff-URL, SEO-Feldern und JSON-Transfer ohne Bildzwang und ohne Auto-Publish.
+Projektunabhängiger Glossar-Core mit Begriffstyp, hierarchischen Oberbereichen, Suche, A–Z, eigenen Begriff-URLs, SEO-Feldern und JSON-Transfer.
 
 ABHÄNGIGKEITEN:
 WordPress; projektspezifisches Design bleibt außerhalb des neutralen Cores.
@@ -342,15 +342,15 @@ NUTZENDE PROJEKTE:
 
 AUTORITATIVE QUELLE / BELEG:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md`
-- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.8_20260913.md`
-- finaler Hardtest Run `34755984363`
+- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.9_20260913.md`
+- finaler Hardtest Run `34757795593`
 
 PRÜFGRAD:
-Fresh WordPress/MySQL/Astra PASS; Browser-AJAX/Responsive PASS; echte Kategorie-/Einzelrenderer PASS; Negativmatrix PASS; Updates aus 0.2.6 und 0.2.7 mit beschädigtem Rewritezustand PASS; echter Pferde-Designcode 1.50.469 Runtime PASS; gated package und exakter lokaler Artefaktcheck PASS.
+Fresh/Regression PASS; echtes responsives Bild im Browser PASS; Kategorie-Vollrahmen PASS; real gerenderter Begriff-Link angeklickt PASS; Routing bei vollständig gelöschten gespeicherten Glossar-Rewrite-Regeln PASS; Update 0.2.8 → 0.2.9 PASS; echter Pferde-Designcode 1.50.469 Runtime PASS; gated package und lokaler exakter Artefaktcheck PASS.
 
 OFFENE PUNKTE:
-- Pferde-Atelier-LIVE-Readback des exakten 0.2.8-ZIPs;
-- zweites reales Portal für formale Allgemeingültigkeit;
-- realer Wissensdatenbankimport;
-- größerer Performance-Test;
-- Yoast-Kombinationstest soweit release-relevant.
+- Pferde-LIVE-Readback 0.2.9;
+- zweites reales Portal;
+- Wissensdatenbankimport;
+- Performance-Test;
+- Yoast-Kombination soweit release-relevant.

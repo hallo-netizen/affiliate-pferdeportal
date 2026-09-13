@@ -284,37 +284,36 @@ Plugin:
 `Universal Glossary Engine`
 
 Aktuellster technisch gebundener Kandidat:
-**0.2.8**
+**0.2.9**
 
 Rewrite-Schema:
-**6**
+**7**
 
 Innerer Plugin-ZIP SHA-256:
-`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
+`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
 
 Autoritativer finaler Hardtest:
-- Run `34755984363`
-- Browser Job `103720316319` PASS
-- Fresh Job `103720316220` PASS
-- Update 0.2.6 → 0.2.8 Job `103720316226` PASS
-- Update 0.2.7 → 0.2.8 Job `103720316230` PASS
-- echter Design-1.50.469-Runtime Job `103720316084` PASS
-- gated Package Job `103720510869` PASS
-- Actions-Artefakt-ID `10318015702`
+- Run `34757795593`
+- Build `103725094481` PASS
+- Fresh/Regression/Null-Rewrite `103725094537` PASS
+- Update 0.2.8 → 0.2.9 + erneuter Null-Rewrite `103725094620` PASS
+- echter Design-1.50.469-Runtime + Browser + Null-Rewrite `103725094378` PASS
+- gated Package `103725295224` PASS
+- Actions-Artefakt-ID `10317444708`
 
 Status:
 **TECHNISCHER KANDIDAT HARDTEST PASS / KEIN PFERDE-LIVE-PASS.**
 
 Wichtige Korrektur:
-0.2.7 wurde durch realen Pferde-Readback als LIVE FAIL widerlegt. 0.2.6 ist historische Zwischenversion. Beide nicht verwenden.
+0.2.8 wurde durch realen Pferde-Readback als LIVE FAIL widerlegt: Hero nicht real responsive, Kategorien nicht mit vollständigem Glossar-Startseitenrahmen, Einzelbegriff-Links laufen ins Leere. 0.2.6/0.2.7/0.2.8 nicht verwenden.
 
-Der 0.2.8-Hardtest schließt die frühere Testlücke: echter Pferde-Designcode 1.50.469 mit SHA `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`, echte Browsergeometrie, reale AJAX-UI, echte Kategorie-/Einzelrenderer sowie Upgradepfade 0.2.6 und 0.2.7 aus gezielt beschädigtem Rewritezustand.
+0.2.9 prüft echtes responsives Bild, Kategorie-Vollrahmen, tatsächlich angeklickten Begriff-Link sowie Kategorie-/Begriff-Routing selbst bei vollständig gelöschten gespeicherten Glossar-Rewrite-Regeln und bereits aktuellem Schema 7. Draft-Preview bleibt Regression-PASS.
 
 Hauptquelle:
 `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
 
 Technisches Protokoll:
-`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.8_20260913.md`
+`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.9_20260913.md`
 
 Erste Projektanwendung:
 `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
@@ -323,4 +322,4 @@ Modulklasse:
 `UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
 
 Offen:
-Pferde-Atelier-Live-Readback des exakt hashgebundenen 0.2.8-Kandidaten; realer Wissensdatenbankimport; größerer Performance-Test; zweites echtes WordPress-Portal; Yoast-Kombinationstest soweit release-relevant.
+Pferde-Atelier-Live-Readback des exakt hashgebundenen 0.2.9-Kandidaten; Wissensdatenbankimport; Performance-Test; zweites reales Portal; Yoast-Kombination soweit release-relevant.
