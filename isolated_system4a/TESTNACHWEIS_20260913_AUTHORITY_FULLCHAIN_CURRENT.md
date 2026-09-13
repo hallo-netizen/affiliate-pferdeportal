@@ -2,90 +2,113 @@
 
 Belegdatei, keine zweite CURRENT_STATE. **Aktueller Status steht ausschließlich in `README.md`.**
 
-## Letzter vollständiger lokaler Beweis vor dem aktuellen Runtime-Rootfix
+## Aktueller No-Codex-Produktionsvertrag
 
-Am Stand `56ace832c78e3683306c44ae187b4c7d0eb46755` waren lokal bewiesen:
+Der aktuelle 4A-Stand besitzt einen exakt reproduzierbaren, Codex-freien Produktionsvertrag:
 
-- Architektur-/Grenztests: **41/41 PASS**;
-- echter Produktions-Acceptance-Lauf mit LanguageTool 6.8 und PPM 6.7.9: **10/10 PASS**;
-- Same-Article-Repair, 1 / 3 / 25 / 1000 Artikel, Cross-UID-Grenze und Parent-Chat-Readback.
+- `NO_CODEX_PRODUCTION_INPUT_V1.json`
+- `NO_CODEX_PRODUCTION_WORKER_V1.py`
+- `NO_CODEX_PRODUCTION_CONTRACT_V1.json`
+- `no_codex_production_contract.py`
 
-Gebundene reale Abhängigkeiten dieses historischen Volltests:
+Der Vertrag bindet:
 
-- LanguageTool 6.8 JAR SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`;
-- PPM 6.7.9 Paket SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`;
-- `mocks_used=false`.
+- Rohinput bytegenau;
+- Worker bytegenau;
+- produktionsrelevante Quellcode-Dateien über SHA256;
+- LanguageTool 6.8;
+- PPM 6.7.9;
+- PPM Editorial Plan;
+- PPM Kategoriequelle;
+- PPM Artikeltyp-Templates;
+- gepinnten WordPress-Snapshot;
+- erwartete Artikelidentität, Plan-/Quality-Binding-Fingerprints und Handoff-Enddatei.
 
-Historischer positiver Pfad:
+`codex_allowed=false`.
 
-`Fachinput -> Supervisor-Ingress -> privates 0700-Worker-Bundle -> Supervisor-Staging -> Cross-UID-Worker -> Research -> Facts -> Context -> Draft -> real LT -> Same-Article-Repair -> real LT PASS -> real PPM PASS -> Batch -> V2 -> Parent-Chat byteidentisch`
+## Fehlerhistorie / Regression
 
-Historischer positiver Handoff:
+Die Fehlerhistorie wurde vor der Abnahme vollständig geprüft und als ausführbarer Katalog erneut negativ ausgeführt.
 
-- 66.753 Byte;
-- SHA256 `4f3c3585d1b42f3ca53f1f65bb4bca728a6426527c7eec75c45e2622dd7220ae`;
-- Revision 2;
+- bekannte Fehlertypen: **27**;
+- negativ ausgeführt: **27**;
+- PASS: **27**;
+- FAIL: **0**.
+
+Die geprüften Klassen umfassen u. a. Fact-ID-/Fact-Pack-Abweichungen, Plan-Slot-Fehler, Context-/Runtime-Mismatch, Hash-/Manifest-Mismatch, Kategorie-/Linkbindung, Pflichtfeld-/Artikelidentitätsfehler, Batch-Kontext-Mismatch, Worker-/PASS-Autoritätsverletzungen, private Worker-Runtime und Handoff-/Inline-Manipulationen.
+
+## Null-bis-Ende-Lauf
+
+Der vollständige Produktionsweg wurde mit echten Prüfern ausgeführt:
+
+`Schritt 0 / gebundener Input -> Root Entry -> Research -> Facts / Fact-Pack -> Context -> Authoring-Bindung -> Draft -> LanguageTool 6.8 -> Same-Article-Repair -> erneute Prüfung -> PPM 6.7.9 -> Same-Article-Repair -> erneute Prüfung -> Batch Gate -> Handoff-Erstellung -> Inline-Transport -> Parent-Chat-Entpackung -> finale Datei`
+
+Ergebnis Lauf A:
+
+- Root / Ingress: PASS
+- Research: PASS
+- Facts / Fact-Pack: PASS
+- Context: PASS
+- Supervisor-Authoring-Bindung: PASS
+- Draft: PASS
+- LanguageTool 6.8 echt: PASS nach Repair
+- PPM 6.7.9 echt: PASS nach weiterem Same-Article-Repair
+- Batch: PASS
+- Handoff: PASS
+- Parent-Chat-Integrität: PASS
+- Revision: 3
+
+Ergebnis Lauf B aus einem zweiten leeren Laufverzeichnis: identisch PASS.
+
+## Reproduzierbarkeit
+
+Die beiden vollständigen Läufe wurden aus getrennten leeren Laufverzeichnissen mit denselben Vertragsbytes erzeugt.
+
+Bewiesen:
+
+- Enddatei A = Enddatei B bytegleich;
+- vollständige JSON-Felder A = B feldgleich;
+- Parent-Chat A = Enddatei A bytegleich;
+- Parent-Chat B = Enddatei B bytegleich;
+- Enddateigröße jeweils **29.391 Byte**;
+- Enddatei SHA256 jeweils `8a3fab64fb1e654257f12bb8c9ead716abbf3cf7f207d50c6b1c69d386ca1cc4`;
 - `publish_allowed=false`.
 
-## Danach gefundener realer Runtime-Fehler
+## Vertrags-Negativsuite
 
-Ein späterer freigegebener Codex-Lauf erreichte:
+Zusätzlich wurde der gebundene Produktionsvertrag gezielt manipuliert:
 
-`ROOT_ENTRY_PASS -> PRODUCTION_INGRESS_BOUND -> RESEARCH_REQUEST -> BLOCK`
+1. falscher Plan-Slot -> korrekt BLOCK;
+2. falsche Kategorie -> korrekt BLOCK;
+3. Worker-Byteänderung -> korrekt BLOCK;
+4. Enddatei-Manipulation -> korrekt BLOCK;
+5. Parent-Handoff-Manipulation -> korrekt BLOCK.
 
-Blocker:
+**5/5 PASS.**
 
-`WORKER_COMMAND_PATH_NOT_ACCESSIBLE:/root/.pyenv/versions/3.11.12/bin/python3`
+## Abnahmegrenze
 
-Damit war bewiesen, dass der frühere 41/41-/10/10-Test die reale private Interpretergrenze nicht abdeckte.
+Dieser Nachweis gilt nur für exakt die gebundenen Vertrags- und Produktionsbytes.
 
-Rootcause:
+Jede Änderung entwertet den PASS und verlangt erneut:
 
-- Worker-Bundle war korrekt gestaged;
-- `from_python_bundle()` übernahm aber weiterhin das Supervisor-`sys.executable`;
-- im echten Codex lag dieses unter privatem `/root/.pyenv/...`;
-- zusätzlich erbte der Worker den Supervisor-`PATH`.
+- 27/27 Fehlerhistorien-Negativtests;
+- Null-bis-Ende A;
+- Null-bis-Ende B;
+- Byte-/Feldvergleich;
+- Parent-Handoff-Integritätsvergleich;
+- 5/5 Vertrags-Negativsuite.
 
-## Aktueller Rootfix
+Kein Teiltest, Fixture, Codeblick oder äquivalenter Ersatzweg darf als Produktionsabnahme gelten.
 
-Der aktuelle 4A-Stand trennt nun auch die Runtime-Umwelt:
+## Historische Befunde
 
-- kein Supervisor-`sys.executable` für Cross-UID-Worker;
-- kein geerbter Supervisor-`PATH` für Cross-UID-Worker;
-- Worker-Python nur aus festem Systempfad;
-- echter Start-Probeversuch als Ziel-UID vor Verwendung;
-- kein brauchbarer System-Interpreter = harter `WORKER_PYTHON_RUNTIME_UNAVAILABLE`-BLOCK;
-- `runuser` ebenfalls aus festem Supervisor-Systempfad aufgelöst.
+Frühere grüne Fixture-/Goldplan-Läufe bleiben historische Architektur-/Diagnosebelege und sind keine aktuelle Produktionsabnahme.
 
-Neue Regressionen decken insbesondere ab:
+Frühere reale Blocker — private Worker-Python-Runtime, freier Factory-Aufruf, nichtkanonische Kategorie, ungebundener Plan-Slot und `PPM679_QUALITY_BINDING_MISSING` — bleiben als Regressionen erhalten.
 
-- privater Interpreter + zugänglicher Worker -> BLOCK;
-- zugänglicher System-Interpreter + zugänglicher Worker -> PASS;
-- Supervisor-PATH mit `/root/.pyenv` -> kein Worker-PATH-Leak;
-- kein zugänglicher System-Python -> BLOCK;
-- privater Workerpfad -> weiterhin BLOCK;
-- Worker-Crash -> weiterhin Exit-Code + stderr.
+## Aktueller Nachweisstatus
 
-## Aktuell lokal tatsächlich ausgeführt
+**NO-CODEX-PRODUKTIONSVERTRAG: PASS.**
 
-Gezielter Root-/Cross-UID-Harness im aktuellen lokalen Testcontainer:
-
-- System-Python `/usr/bin/python3.13` als `nobody` startfähig -> **PASS**;
-- privater Interpreter unter `0700` -> **NEGATIV PASS / geblockt**;
-- kein System-Runtimepfad -> **NEGATIV PASS / geblockt**;
-- privates Supervisor-Python wird nicht übernommen -> **PASS**;
-- Supervisor-PATH wird nicht in den Worker übernommen -> **PASS**.
-
-## Noch nicht neu ausgeführt
-
-Nach dem Rootfix wurden **noch nicht** erneut ausgeführt:
-
-- vollständiger 4A-Sammellauf;
-- echter kompletter LanguageTool-/PPM-Produktions-Acceptance-Lauf;
-- erneuter Codex-Lauf.
-
-Der aktuelle lokale Ausführungscontainer kann den Branch wegen DNS nicht auschecken und enthält die gebundenen LT-/PPM-Binärabhängigkeiten nicht. Deshalb werden die historischen 41/41 und 10/10 ausdrücklich **nicht** auf den neuen Rootfix-Stand übertragen.
-
-Zusätzlich ist vor einer neuen Gesamtfreigabe dieselbe `sys.executable`-Kopplung in den Cross-UID-Testhilfen (`os_boundary_acceptance.py` sowie der alte Workerpfad-Negativfall im Produktions-Acceptance-Test) zu bereinigen, damit die Tests Ursache und Symptom sauber trennen.
-
-**Aktuell: BLOCKED / kein Merge / kein Publish / kein Codex ohne ausdrückliche User-Freigabe.**
+PR #255 bleibt **Draft / unmerged / unpublished**. Kein Codex ohne ausdrückliche User-Freigabe **„Starte Codex“**.
