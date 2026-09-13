@@ -1,6 +1,6 @@
 # PROJEKTGEBÄUDE – PFERDE-ATELIER
 
-STAND: 2026-09-12
+STAND: 2026-09-13
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -37,6 +37,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 ## Büroplan
 
 - `TEXT/START_HERE.md` → Textmaschine / Artikelproduktion
+- `TEXTSYSTEM_4A/START_HERE.md` → isolierter Universalitäts-/Vereinfachungsprototyp für den vollständigen Artikelworkflow; keine eigene Fach-/Design-/Qualitätsautorität
 - `PRODUKTVERGLEICH/START_HERE.md` → Produktvergleichs-Konzept / Vergleichsdefinition / Faktendossier / Übergabe an TEXT
 - `WISSENSDATENBANK/START_HERE.md` → zentraler Themenpool, Recherche-Steuerung, Trust-Regeln und tatsächlich recherchierte Wissens-Aktenschränke
 - `DESIGN/START_HERE.md` → Portaldesign
