@@ -1,7 +1,7 @@
 # GLOSSAR – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: AKTIV / 0.2.10-rc7 TECHNISCH + PAKET PASS / LIVE-READBACK OFFEN
+STATUS: AKTIV / 0.2.10-rc11-native-single KUBIO-INTEGRATION + PAKET PASS / LIVE-READBACK OFFEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,21 +9,21 @@ STATUS: AKTIV / 0.2.10-rc7 TECHNISCH + PAKET PASS / LIVE-READBACK OFFEN
 Der einzige aktuelle Arbeitsraum des Büros GLOSSAR.
 
 **DU DARFST …**  
-den exakt getesteten und hashgebunden paketierten 0.2.10-rc7-Kandidaten für den realen Pferde-Readback verwenden und danach nur anhand des tatsächlichen Live-Ergebnisses weiterarbeiten.
+nur den exakt aus Run `34766187415` paketierten und hashgebundenen `0.2.10-rc11-native-single`-Kandidaten für den realen Pferde-Readback verwenden.
 
 **DU DARFST NICHT …**  
-`main` verändern, 0.2.6/0.2.7/0.2.8 erneut ausgeben, 0.2.9 als aktuellen Entwicklungsstand behandeln, unterschiedliche Paketbytes unter derselben Version erzeugen, aus CI einen Pferde-LIVE-PASS ableiten oder den Altbestand automatisch löschen.
+`main` oder das Pferde-Designplugin verändern, rc8/rc10 aus dem Chat verwenden, aus CI einen Pferde-LIVE-PASS ableiten, weitere Fehler gleichzeitig reparieren oder Altbestand löschen.
 
 **ALS NÄCHSTES …**  
-das exakt hashgebundene `0.2.10-rc7`-Paket installieren und den realen Pferde-Live-Readback durchführen. Erst danach Live-Fehler schließen oder den Altbestand löschen.
+das exakte rc11-Paket installieren und **nur einen realen Glossar-Einzelartikel** aufrufen. Erst anhand dieses Live-Ergebnisses weiterarbeiten.
 
 ## ARBEITSORT
 
 Branch:
 `hobbyroom/glossar-livefail-red-green-20260913`
 
-Exakt getesteter Plugin-Quell-Commit:
-`1e74b7454e84f97182dbb185614371a48157bc21`
+Aktueller getesteter Workflow-Head:
+`b0b6fb786bcafe37819700df019ec31a92a2dc30`
 
 Autoritative Fehlerquelle:
 `FEHLERQUELLEN.md`
@@ -31,75 +31,61 @@ Autoritative Fehlerquelle:
 Autoritativer Stand:
 `CURRENT_STATE.md`
 
-Produktionswahrheit Begriffe:
-`BEGRIFFSREGISTER.md`
-
 ## VERBRAUCHTE / ABGELÖSTE VERSIONEN
 
-- 0.2.6: historisch / nicht verwenden.
-- 0.2.7: LIVE FAIL / nicht verwenden.
-- 0.2.8: LIVE FAIL / nicht verwenden.
-- 0.2.9: früherer gated technischer Kandidat; durch 0.2.10-Entwicklung als CURRENT/NEXT ACTION abgelöst; kein bestätigter Pferde-LIVE-PASS.
-- 0.2.10-rc1 bis rc6: Entwicklungs-/Diagnosestufen, nicht ausgeben.
+- 0.2.6 / 0.2.7 / 0.2.8: historisch bzw. LIVE FAIL; nicht verwenden.
+- 0.2.9: früherer technischer Kandidat; nicht CURRENT.
+- 0.2.10-rc1 bis rc6: Entwicklungs-/Diagnosestufen.
+- 0.2.10-rc7: technisch grün, aber durch echten Nutzer-Readback beim Single-Rendering widerlegt.
+- rc8 / rc10: Chat-Zwischenstände ohne ausreichenden echten Integrationsbeweis; nicht verwenden.
 
-## 0.2.10-rc7 TECHNISCHER STAND
+## AKTUELL: 0.2.10-rc11-native-single
 
-Hardtest Run `34762048546` → SUCCESS.
+Realer Befund, der repariert wird:
+zweite `<!DOCTYPE html>/<html>/<head>`-Hülle innerhalb der bereits laufenden Kubio-Dokumenthülle.
+
+Fixgrenze:
+- UGE wählt für `uge_term` keine eigene klassische Full-Document-Single-PHP mehr;
+- WordPress/Kubio rendert den Einzelbegriff nativ;
+- Kategorie-/Taxonomie-Rendering bleibt unverändert.
+
+Hardtest Run `34766187415` → SUCCESS.
 
 Jobs:
-- Build `103736483729` PASS
-- Fresh/Positiv/Negativ/Regression `103736483608` PASS
-- echtes Design 1.50.469 + Browser-Klickkette + Loop-Poison `103736483696` PASS
-- no-package-gate `103736720142` PASS
+- `103747455702` Kubio/WordPress Positiv + Negativ + Regression → PASS
+- `103747644208` exaktes Paket → PASS
 
-Der Browser hat tatsächlich geklickt:
-`Gesundheit → Hufbein` sowie `Gesundheit → Hufrehe → Strahlfäule → Hufabszess → Gesundheit`.
+Harte Marker:
+- `UGE0210RC11_KUBIO_PUBLISHED_SINGLE_VISIBLE_PASS`
+- `UGE0210RC11_KUBIO_SINGLE_DOCUMENT_SHELL_EXACTLY_ONCE_PASS`
+- `UGE0210RC11_DRAFT_AND_MISSING_NEGATIVE_PASS`
+- `UGE0210RC11_UNRELATED_POST_REGRESSION_PASS`
+- `UGE0210RC11_TAXONOMY_UNCHANGED_PASS`
 
-Marker:
-- `UGE0210_EXISTING_SINGLE_CLICK_PASS`
-- `UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS`
-- `UGE0210_SINGLE_SURVIVES_EMPTY_MAIN_LOOP_PASS`
-- `UGE0210_PFERDE_BREADCRUMB_AXIS_PASS`
+## EXAKTES PAKET
 
-## PAKETSTATUS
-
-Closeout Run `34764046870`, Job `103741741909` → SUCCESS.
-
-Installierbares Paket:
-`universal-glossary-engine-0.2.10-rc7.zip`
+`universal-glossary-engine-0.2.10-rc11-native-single.zip`
 
 SHA-256:
-`3611229aa33ca50a00ec88be87e6ef92592e87d313c152f05d0c7a31ab281152`
+`45c8f4d2a01883b6bb548c8db2db8bf9b19f5ddc80cb346b647d992fca7f748f`
 
 Actions-Artefakt-ID:
-`10319439428`
+`10320871739`
 
 Outer artifact SHA-256:
-`cbf72dc81229adf33febca085c43d70a12188880cd62c7aafd3f687cb62f2bab`
-
-Paketbeweise:
-- aus exakt getestetem Commit gebaut;
-- `unzip -t` PASS;
-- Source-vs-Unpack `diff -qr` PASS;
-- Version PASS;
-- PHP-Lint PASS;
-- SHA PASS;
-- `CURRENT.zip` + `MANIFEST.md` im PLUGINS-Büro synchronisiert.
+`8ced9d219a6a38d81ab9be50fe146dc8a5acfa6a8e58a0154f5e84410d450434`
 
 ## NÄCHSTE HARTE REIHENFOLGE
 
-1. exakt dieses hashgebundene Paket verwenden;
-2. reale Pferde-Installation/Readback durchführen;
-3. bestehenden `Hufbein`-Weg und neue Clusterbegriffe im echten Frontend anklicken;
-4. responsive Hero, Kategorie-Vollrahmen, AJAX und obere Abstände real mitprüfen;
-5. erst bei realem PASS Fehlerstatus schließen;
-6. Altbestand nur nach Nutzerentscheidung löschen;
-7. bei materiellem FAIL neue Version bauen und volle Teststrecke wiederholen.
+1. exakt rc11 installieren;
+2. einen realen Glossar-Einzelartikel anklicken;
+3. wenn Inhalt sichtbar und keine leere Seite: Livebefund dokumentieren;
+4. wenn weiter FAIL: exakt diesen Live-HTML-Befund aufnehmen und nur Single weiter reparieren;
+5. keine Arbeit an Abständen/Hero/Kategorien, bis der Single-Fehler erledigt ist.
 
 ## NICHT ANFASSEN
 
-- `main`.
-- Pferde-Designplugin.
-- vorhandene Live-Glossarbeiträge bis zur Nutzerentscheidung.
-- Pferderassen: gehören nicht ins Glossar.
-- Zielvertrag V1: unverändert aktiv.
+- `main`;
+- Pferde-Designplugin;
+- bestehende Live-Inhalte;
+- andere Glossar-Fehler während dieser Single-Reparatur.
