@@ -1,70 +1,111 @@
 # TEXTSYSTEM 4A – CURRENT STATE
 
 STAND: 2026-09-13
-STATUS: AKTIV / AUDIT- UND HÄRTUNGSBÜRO
+STATUS: AKTIV / ISOLIERTER GEGENPROTOTYP / NICHT PRODUKTIONSFREIGEGEBEN
 
-## Gesicherter Ausgangsbefund
+## Gesicherte Vergleichsbasis
 
-- System 4 läuft isoliert in PR #238, Branch `hobbyroom/system4-true-single-room-v1`, geprüfter Head bei dieser Architekturprüfung: `77c02a9df1745a28157fcc27f65f74e9c4fb1153`.
-- System 4 ist weiterhin nicht als Gesamtproduktion freigegeben; für den aktuellen Head fehlt der vollständige aktuelle Unittest-/E2E-Beweis.
-- Der System-4-Kern besitzt bereits: kanonischen Artikelzustand, gebundene Phasen, Research/Facts/Context, Same-Article-Repair, interne Content-/Designprüfungen und zentralen FULL-Production-Check.
+### System 4
+- PR #238
+- Branch `hobbyroom/system4-true-single-room-v1`
+- frisch geprüfter Head: `623510bf7a7c968ae24fcb9003cf2f5d12c75bcc`
+- weiterhin isolierter Teststand; kein Produktions-PASS aus dieser Prüfung.
 
-## Entscheidung 4 vs. 4a
+### System 4A
+- PR #255
+- Branch `hobbyroom/system4a-capsule-v1-20260913`
+- direkt auf den aktuellen System-4-Branch aufgesetzt;
+- isolierter Gegenprototyp, kein Merge/Publish.
 
-**Ein eigenständiges 4a-Laufzeitsystem wird derzeit nicht gebaut.**
+## Entscheidung 4 vs. 4A – korrigierter Stand
 
-Grund: Nach Bereinigung behebbarer Hardcodes bleibt kein ausreichender struktureller Unterschied übrig, der eine zweite Text-/Workflowarchitektur rechtfertigt. Die gewünschte 4a-Zielform ist im Wesentlichen die konsequente Härtung von Konzept 4 selbst.
+Die vorherige Entscheidung **`4A_STANDALONE_VORERST_VERWORFEN`** ist durch neue technische Evidenz überholt.
 
-Die feste 7er- bzw. `Beratung`-Bindung ist ausdrücklich **kein Entscheidungskriterium**. Sie wird separat aus Konzept 4 entfernt.
+4A bleibt **offen**, aber nur wegen genau eines möglichen irreduziblen Unterschieds:
 
-## Nachgewiesener struktureller Härtungspunkt in Konzept 4
+> **Wer besitzt den laufenden Workflow-State?**
 
-Der aktuelle `controller.py` bietet technisch mehrere Wege an:
-- `check` → BASIC_ARCHITECTURE → `release`;
-- `fullcheck` → produktionsnaher FULL-Pfad;
-- `prepare-release` → `SIGNATURE_REQUIRED` → `finalize-signed`.
+Der aktuelle reale System-4-Auftrag lässt Codex im selben Task die Artikel-Workspaces/`state.json`-Dateien führen und die einzelnen Controller-Kommandos selbst aufrufen. `controller.py` liest diesen persistierten State bei jedem Schritt erneut. Der normale Hash schützt nur den `immutable_core` (`contract`, Snapshot, Batch, Artikel); der mutable Gesamtzustand ist kein ausschließlich von einem außerhalb des Workers liegenden Wächter authentifizierter Zustand.
 
-Der aktuelle System-4-Zielvertrag verlangt dagegen nur den FULL-Pfad mit anschließendem Batch-/Direct-Import-Handoff und ausdrücklich keinen Signaturweg.
+Das ist ausdrücklich **kein bewiesener kompletter Release-Bypass**. Es ist eine reale äußere Einflussfläche auf den Workflow-State und damit für die Zielanforderung „eine Tür, ein Wächter“ relevant.
 
-Damit besteht noch technische Wahlfreiheit, obwohl fachlich nur eine Straße erlaubt sein soll.
+## 4A-Prototyp – aktueller Architekturbeweis
 
-## Richtige Zielarchitektur
+Der Gegenprototyp besitzt einen einzigen internen `CapsuleController`:
+- echter Workflow-State bleibt innerhalb des Supervisors;
+- außen existieren nur `capsule_id`, enger Arbeitsauftrag und read-only Status;
+- Worker/Codex darf ausschließlich Arbeitsinhalt zurückgeben;
+- Steuerfelder wie `phase`, `publish_allowed`, Route oder PASS sind keine zulässige Worker-Rückgabe;
+- Prüfer geben nur PASS/FAIL + Hash/Findings zurück;
+- FAIL öffnet ausschließlich Same-Article-Repair;
+- Crash-/Resume-Checkpoint ist HMAC-authentifiziert;
+- veränderter Checkpoint blockiert;
+- `publish_allowed=false` besitzt keine externe Eingabefläche.
 
-`1 Produktionscontroller + N unabhängige Artikelzustände + bestehende reale Prüfer als interne Aufrufe + 1 finaler Ausgang`
+Lokal auf dem Prototyp ausgeführt:
+- **13/13 Architekturtests PASS**;
+- automatische Supervisorfolge `research → facts → draft → fullcheck`;
+- Worker-Steuerfeld-Injektion BLOCK;
+- Same-Article-Repair PASS;
+- manipulierter Checkpoint BLOCK;
+- falscher Prüfer-Hash BLOCK;
+- 1.000 unabhängige Mock-Kapseln ohne Zustandsvermischung PASS.
 
-Keine zweite Textmaschine. Keine zweite State Machine. Keine neue Prüferautorität.
+Diese Tests beweisen **nur die Architektur**, nicht Inhalt, Design, PPM/LT oder Produktionsreife.
 
-## WordPress frisch geprüft
+## Kein 4A-Entscheidungskriterium
 
-Reale Library-ZIP geprüft:
-`portal-seo-editorial-plan-compiler_0.28.23_SYSTEM4_DIRECT_IMPORT.zip`
-SHA-256: `22a8459b64db488852841d894d887ec51e531a0872ee5f33afdd64e43a8a8c7f`
+Ausdrücklich **nicht** als Vorteil von 4A gewertet:
+- frühere feste 7er-Bindung;
+- frühere feste `Beratung`-Bindung;
+- WordPress-Handoff.
 
-Der Importer 0.28.23 unterstützt bereits den generischen Vertrag `SYSTEM4_WORDPRESS_HANDOFF_V1`, mindestens 1 Artikel ohne feste Obergrenze im Importcode und frei gebundene `article_type`-Werte. Er erstellt ausschließlich WordPress-Entwürfe, prüft Kategorie/Slug/Kollisionen vollständig vor dem ersten Write, validiert nach dem Schreiben per Readback und rollt bei Fehlern bereits erzeugte Posts zurück.
+Diese Punkte sind/werden in System 4 selbst bereinigt.
 
-Der vorgelagerte Metadatenvertrag erlaubt exakt fünf skalare Felder pro Artikel:
-`title`, `target_keyword`, `category`, `article_type`, `plan_slot`.
-Inhalts-, Design- und Promptfelder sind dort ausdrücklich verboten; `maximum_articles=0` und `maximum_articles_per_type=0` bedeuten unbegrenzt.
+## WordPress – bereits frisch geklärt
 
-Details: `WORDPRESS_HANDOFF.md`.
+Der reale Importer `Portal SEO Editorial Plan Compiler 0.28.23` besitzt bereits den generischen Zielvertrag `SYSTEM4_WORDPRESS_HANDOFF_V1`:
+- mindestens 1 Artikel, keine feste Import-Obergrenze;
+- `article_type` nicht auf `Beratung` festgelegt;
+- alle Artikel vor dem ersten Write vollständig preflight-geprüft;
+- Draft-only;
+- Readback nach Write;
+- Rollback bei Abweichung;
+- `publish_allowed=false`.
 
-## Unverändert / unangetastet
+Quelle/Details: `WORDPRESS_HANDOFF.md`.
 
-- bestehende Textmaschine und Fachregeln;
+4A baut **keine neue WordPress-Schnittstelle**.
+
+## Inhalt / Design / Qualität – unverändert
+
+4A darf ausschließlich dieselben vorhandenen Autoritäten READ-ONLY verwenden:
+- bestehende Textmaschine/Fachregeln;
+- `content_guard`;
+- `design_guard`;
 - PPM 6.7.9;
 - LanguageTool 6.8 / Bestand 43;
 - PSERC/PSTE/SEO-/Link-/Tabellen-/Metadatenregeln;
-- Design, Theme/CSS, WordPress-Plugin;
-- offizieller STARTMASTER/CURRENT_STATE;
-- System 4 / PR #238;
-- `publish_allowed=false`.
+- vorhandene Querschnitts-/Wiederholungsprüfung;
+- WordPress-Plugin 0.28.23.
 
-## Offene Arbeit
+Wenn 4A dafür neue Fach-/Design-/Qualitätsregeln oder Ersatzprüfer benötigt: **4A verwerfen**.
 
-1. Konzept 4 auf genau eine technisch erreichbare Produktionsstraße reduzieren;
-2. 7er-/`Beratung`-Hardcodes separat entfernen;
-3. finalen generischen Handoff auf `SYSTEM4_WORDPRESS_HANDOFF_V1` vereinheitlichen;
-4. danach harte Positiv-/Negativtests inklusive 1/3/25/1000 und mehrerer bereits freigegebener Beitragsarten;
-5. erst bei realem E2E-PASS Produktionsfreigabe neu bewerten.
+## Nächster Entscheidungsbeweis
 
-Kein PASS wird aus dieser Architekturprüfung abgeleitet.
+Noch offen und jetzt ausschließlich relevant:
+1. 4A direkt gegen den aktuellen System-4-Head betreiben;
+2. vorhandene echte System-4-Prüfer unverändert READ-ONLY in den Supervisor einbinden;
+3. Supervisor-Autorität real vom Codex/Worker trennen;
+4. Research → Facts → Production Context → Draft → FULL-Check → Same-Article-Repair mit demselben Fach-/Design-/Qualitätsniveau beweisen;
+5. vorhandene Querschnittsprüfung einbinden;
+6. exakt `SYSTEM4_WORDPRESS_HANDOFF_V1` erzeugen;
+7. danach real 1/3/25/1000 und mehrere bereits freigegebene Beitragsarten positiv/negativ prüfen.
+
+## Abbruchschwelle
+
+Wenn die reale Trennung Supervisor ↔ Codex nur durch neue Signer-, Token-, Room-, Receipt- oder Package-Kaskaden möglich wäre, wird 4A **sofort beendet**.
+
+Dann wird die brauchbare Härtungsidee in Konzept 4 übernommen statt ein fünftes System zu bauen.
+
+Kein Produktions-PASS ableiten.
