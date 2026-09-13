@@ -2161,3 +2161,21 @@ DAUERHAFTE REGEL:
 
 UNVERÄNDERT:
 SEO-5-Felder-Handoff, Textmaschine/Fachregeln, PPM/PSERC/PSTE, Tabellen-/Link-/LanguageTool-/Designregeln, Single Door und Publish-Sperre.
+
+
+## GLOSSAR-001 – Geschlossene Glossarcluster und hashgebundene Plugin-Ausgabe
+
+WAS:
+Neue kurze Pferde-Glossarbegriffe werden als geschlossene verwandte Cluster produziert: alle Mitglieder zuerst als Entwurf, anschließend Inhalte, Meta, primäre Portal-Kategorie, Beziehungen und echte Linkziele vollständig setzen und prüfen; erst danach den vollständigen Cluster gemeinsam veröffentlichen. Pferde-/Ponyrassen bleiben ausgeschlossen. Nach tatsächlicher Pluginentwicklung wird die geprüfte Pferde-Ausgabekopie zusätzlich hashgebunden im PLUGINS-Büro als `CURRENT.zip` + `MANIFEST.md` geführt.
+
+WARUM:
+Tote `Verwandte Begriffe`, halbfertige Cluster, nicht auflösbare Linkziele und nicht reproduzierbare Pluginstände sollen fail-closed verhindert werden. Fach-/Release-/LIVE-Wahrheit bleibt trotzdem ausschließlich im Glossar-Fachbüro; die Plugin-Kopie ist nur abgeleitete Ausgabe.
+
+ARCHITEKTURGRENZE:
+Die Pferde-Projektlinie 0.2.10-rc7 enthält projektspezifische Content-Pack-Logik und ist deshalb nicht automatisch als neuer allgemeingültiger Universal-Core freigegeben. Allgemeingültigkeit verlangt weiterhin eine saubere Adapter-/Projektkonfigurationsgrenze und einen zweiten Projektbeweis.
+
+BELEG:
+- `PROJEKTE/PFERDE_ATELIER/GLOSSAR/PRODUKTIONSREGELN.md`
+- `PROJEKTE/PFERDE_ATELIER/GLOSSAR/PROTOKOLL_0.2.10_RC7_20260913.md`
+- `PROJEKTE/PFERDE_ATELIER/PLUGINS/UPDATEPROTOKOLL.md` → `PU-20260913-001`
+- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md`

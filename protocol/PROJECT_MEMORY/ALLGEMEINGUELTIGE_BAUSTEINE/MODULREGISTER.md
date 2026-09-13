@@ -318,39 +318,22 @@ Allgemeingültigkeitsbeweis mit mindestens einer zweiten Projektkonfiguration so
 MODULKLASSE: UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG
 
 STATUS:
-0.2.9 technischer Kandidat HARDTEST PASS; Pferde-Live-Readback 0.2.9 offen. 0.2.8 ist realer LIVE FAIL und nicht zu verwenden.
+Aktive Entwicklung vorhanden. Kein dynamischer Projekt-/Paket-/LIVE-Status wird hier dupliziert.
 
 HAUPTORT:
 `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
 
-AKTUELL BELEGTER STAND:
-- Plugin 0.2.9
-- Rewrite-Schema 7
-- finaler Run `34757795593`
-- getesteter Produkt-Head `f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
-- ZIP SHA-256 `864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
-- Actions-Artefakt-ID `10317444708`
+ERSTE PROJEKTANWENDUNG:
+`PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
 
-ZWECK:
-Projektunabhängiger Glossar-Core mit Begriffstyp, hierarchischen Oberbereichen, Suche, A–Z, eigenen Begriff-URLs, SEO-Feldern und JSON-Transfer.
+AKTUELLER PROJEKT-/TEST-/PAKET-/LIVE-STATUS:
+immer frisch aus `PROJEKTE/PFERDE_ATELIER/GLOSSAR/CURRENT_STATE.md` lesen.
 
-ABHÄNGIGKEITEN:
-WordPress; projektspezifisches Design bleibt außerhalb des neutralen Cores.
+ALLGEMEINER CORE-STATUS:
+immer frisch aus `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md` lesen.
 
-NUTZENDE PROJEKTE:
-- PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
+PLUGIN-AUSGABEPULT PFERDE:
+`PROJEKTE/PFERDE_ATELIER/PLUGINS/`
 
-AUTORITATIVE QUELLE / BELEG:
-- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md`
-- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.9_20260913.md`
-- finaler Hardtest Run `34757795593`
-
-PRÜFGRAD:
-Fresh/Regression PASS; echtes responsives Bild im Browser PASS; Kategorie-Vollrahmen PASS; real gerenderter Begriff-Link angeklickt PASS; Routing bei vollständig gelöschten gespeicherten Glossar-Rewrite-Regeln PASS; Update 0.2.8 → 0.2.9 PASS; echter Pferde-Designcode 1.50.469 Runtime PASS; gated package und lokaler exakter Artefaktcheck PASS.
-
-OFFENE PUNKTE:
-- Pferde-LIVE-Readback 0.2.9;
-- zweites reales Portal;
-- Wissensdatenbankimport;
-- Performance-Test;
-- Yoast-Kombination soweit release-relevant.
+REGEL:
+Modulregister bleibt reiner Wegweiser; keine zweite technische Wahrheit.
