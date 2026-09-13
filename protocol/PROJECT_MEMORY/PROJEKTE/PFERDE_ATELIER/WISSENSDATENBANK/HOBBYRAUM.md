@@ -27,20 +27,20 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **126 reale Rassendatensätze** unter `DATEN/` vorhanden;
-- zahlreiche nationale/ursprüngliche Zuchtbücher und offizielle Verbände eingebunden;
-- neu seit 122: Canadian Horse, Florida Cracker Horse, Gotlandsruss und Nordsvensk brukshäst;
-- Marshtackie wird als Synonym des Florida Cracker Horse behandelt und nicht dupliziert;
+- **138 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- größere Rechercheblöcke sind zulässig, solange jede Rasse einzeln auf formalen Status und Dubletten geprüft wird;
+- neu seit 126: Finnhorse, Latvian Warmblood, sieben PZHK-Rassen sowie die vier nationalen norwegischen Rassen;
+- Australian Stock Horse und Konik polski wurden im aktuellen Block als bereits vorhanden erkannt und nicht dupliziert;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
 ## NEXT ACTION
 
-1. Rassenrecherche ohne Themenwechsel fortsetzen;
-2. nächste belastbare nationale/ursprüngliche Registerblöcke prüfen;
+1. Rassenrecherche in größeren belastbaren Länder-/Registerblöcken fortsetzen;
+2. nächste nationale/ursprüngliche Registerblöcke prüfen;
 3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
 4. Mangalarga Paulista und Pantaneiro gegen offizielle brasilianische Register prüfen;
-5. weitere internationale Rassen aus anerkannten Studbooks ergänzen;
+5. Latvian Heavy Warmblood als getrennten staatlich geführten Kandidaten prüfen;
 6. Synonyme, Sektionen, Labels und Fokrichtungen vor Datensatzanlage auf Dubletten prüfen;
 7. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
 
