@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+R=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR
+SRC="$R/test-real-design-1.50.469-0.2.9-rc2.sh"
+sed \
+  -e 's/test-fresh-0\.2\.9-rc2\.sh/test-fresh-0.2.9.sh/g' \
+  -e 's/0\.2\.9-rc2/0.2.9/g' \
+  -e 's/UGE029RC2/UGE029FINAL/g' \
+  "$SRC" > /tmp/test-real-design-029-final.sh
+chmod +x /tmp/test-real-design-029-final.sh
+! grep -q '0\.2\.9-rc2' /tmp/test-real-design-029-final.sh
+bash /tmp/test-real-design-029-final.sh
