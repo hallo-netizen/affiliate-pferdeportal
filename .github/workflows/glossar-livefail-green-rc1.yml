@@ -1,0 +1,42 @@
+name: Glossar 0.2.8-rc1 GREEN Matrix
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-livefail-green-rc1.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.8-rc1.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.8-rc1.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8-rc1.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/acceptance-live-frontend-browser.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-green:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.8-rc1.sh
+      - run: python3 -m pip install --quiet playwright && python3 -m playwright install chromium
+      - run: python3 protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/acceptance-live-frontend-browser.py /tmp/uge028rc1/universal-glossary-engine/includes/class-uge-frontend.php
+  fresh-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.8-rc1.sh
+  update-schema5:
+    strategy:
+      fail-fast: false
+      matrix:
+        base: ['0.2.6','0.2.7']
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8-rc1.sh ${{ matrix.base }}
+  no-package-gate:
+    needs: [browser-green,fresh-regression,update-schema5]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo UGE028RC1_CORE_RED_TO_GREEN_PASS_NO_RELEASE_PACKAGE
