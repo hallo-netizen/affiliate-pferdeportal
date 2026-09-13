@@ -1,6 +1,6 @@
 # ZENTRALES MODULREGISTER
 
-STAND: 2026-09-12
+STAND: 2026-09-13
 ZWECK: Der Nutzer muss sich NICHT merken, welche Grundmodule existieren, wo sie liegen oder ob sie projektübergreifend nutzbar sind.
 
 ## Rolle
@@ -318,34 +318,39 @@ Allgemeingültigkeitsbeweis mit mindestens einer zweiten Projektkonfiguration so
 MODULKLASSE: UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG
 
 STATUS:
-V1-DATENVERTRAG DEFINIERT / isolierter 0.1.0-Prototyp vorhanden / PHP-Lint 8/8 PASS / statische Positiv-Negativprüfung 15/15 PASS / Runtime-Stub mit Pferde- und fachfremder Zweitkonfiguration PASS / echter WordPress-Smoke-Test noch offen.
+0.2.8 technischer Kandidat HARDTEST PASS; Pferde-Atelier ist erste Projektanwendung; realer Pferde-LIVE-Readback 0.2.8 noch offen. 0.2.7 ist historischer LIVE FAIL und nicht zu verwenden.
 
 HAUPTORT:
 `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
 
 AKTUELL BELEGTER STAND:
-- Prototype 0.1.0;
-- Source-Manifest `SOURCE_SHA256.txt`;
-- lokaler ZIP SHA-256 `c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`.
+- Plugin 0.2.8
+- Rewrite-Schema 6
+- finaler Run `34755984363`
+- getesteter Head `d14f6bff7f660cc6461208e8153fbdf237f0d609`
+- ZIP SHA-256 `9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
+- Actions-Artefakt-ID `10318015702`
 
 ZWECK:
-Projektunabhängiger WordPress-Glossarkern mit eigenem Backendbereich, Begriffsdaten, Oberbereichen, eigenen Zieladressen, SEO-Feldern, Suche/A–Z/Aufklapper sowie strukturiertem JSON-Import/Export.
+Projektunabhängiger Glossar-Core mit eigenem Begriffstyp, hierarchischen Oberbereichen, Suche, A–Z, eigener Begriff-URL, SEO-Feldern und JSON-Transfer ohne Bildzwang und ohne Auto-Publish.
 
 ABHÄNGIGKEITEN:
-- WordPress >= 6.4;
-- PHP >= 8.1;
-- Yoast optional, keine Pflichtabhängigkeit.
+WordPress; projektspezifisches Design bleibt außerhalb des neutralen Cores.
 
 NUTZENDE PROJEKTE:
-- PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/GLOSSAR/` als erste Anwendung.
+- PFERDE_ATELIER → `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
 
 AUTORITATIVE QUELLE / BELEG:
-- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md`;
-- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/PROTOTYPE_QA_0.1.0.md`.
+- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md`
+- `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.8_20260913.md`
+- finaler Hardtest Run `34755984363`
 
-OFFEN:
-- echter WordPress-Install-/Upgrade- und Permalinktest;
-- echter Yoast-/Astra-Test;
+PRÜFGRAD:
+Fresh WordPress/MySQL/Astra PASS; Browser-AJAX/Responsive PASS; echte Kategorie-/Einzelrenderer PASS; Negativmatrix PASS; Updates aus 0.2.6 und 0.2.7 mit beschädigtem Rewritezustand PASS; echter Pferde-Designcode 1.50.469 Runtime PASS; gated package und exakter lokaler Artefaktcheck PASS.
+
+OFFENE PUNKTE:
+- Pferde-Atelier-LIVE-Readback des exakten 0.2.8-ZIPs;
+- zweites reales Portal für formale Allgemeingültigkeit;
 - realer Wissensdatenbankimport;
-- größerer Bestands-/Performance-Test;
-- zweites echtes WordPress-Portal vor Hochstufung auf ALLGEMEINGÜLTIG.
+- größerer Performance-Test;
+- Yoast-Kombinationstest soweit release-relevant.

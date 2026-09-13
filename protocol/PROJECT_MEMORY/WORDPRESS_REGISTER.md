@@ -284,35 +284,37 @@ Plugin:
 `Universal Glossary Engine`
 
 Aktuellster technisch gebundener Kandidat:
-**0.2.6**
+**0.2.8**
 
 Rewrite-Schema:
-**5**
+**6**
 
 Innerer Plugin-ZIP SHA-256:
-`e0717db3aa247edc30b0fe84a261aa59037050d593e3432a6fb460f6d96f3b09`
+`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
 
-Autoritativer Hardtest:
-- Run `34748541630`
-- Fresh-Install Job `103700782149` PASS
-- echter WordPress-In-place-Update Job `103700782306` PASS
-- gated Package Job `103700913568` PASS
-- Actions-Artefakt-ID `10314822840`
+Autoritativer finaler Hardtest:
+- Run `34755984363`
+- Browser Job `103720316319` PASS
+- Fresh Job `103720316220` PASS
+- Update 0.2.6 → 0.2.8 Job `103720316226` PASS
+- Update 0.2.7 → 0.2.8 Job `103720316230` PASS
+- echter Design-1.50.469-Runtime Job `103720316084` PASS
+- gated Package Job `103720510869` PASS
+- Actions-Artefakt-ID `10318015702`
 
 Status:
-**TECHNISCHER KANDIDAT FRESH + UPDATE POSITIV/NEGATIV PASS / KEIN PFERDE-LIVE-PASS.**
+**TECHNISCHER KANDIDAT HARDTEST PASS / KEIN PFERDE-LIVE-PASS.**
 
-Zusätzlich lokal am exakt erzeugten Actions-Artefakt belegt:
-- ZIP-/Hashbindung PASS;
-- 0.2.5↔0.2.6-Delta exakt zwei erlaubte Dateien;
-- alte Version/Altschema/alte CSS-Hacks negativ nicht enthalten;
-- PHP-Lint aller 10 PHP-Dateien PASS.
+Wichtige Korrektur:
+0.2.7 wurde durch realen Pferde-Readback als LIVE FAIL widerlegt. 0.2.6 ist historische Zwischenversion. Beide nicht verwenden.
+
+Der 0.2.8-Hardtest schließt die frühere Testlücke: echter Pferde-Designcode 1.50.469 mit SHA `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`, echte Browsergeometrie, reale AJAX-UI, echte Kategorie-/Einzelrenderer sowie Upgradepfade 0.2.6 und 0.2.7 aus gezielt beschädigtem Rewritezustand.
 
 Hauptquelle:
 `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
 
 Technisches Protokoll:
-`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.6_20260913.md`
+`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.8_20260913.md`
 
 Erste Projektanwendung:
 `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
@@ -321,4 +323,4 @@ Modulklasse:
 `UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
 
 Offen:
-Pferde-Atelier-Readback des exakt hashgebundenen Kandidaten, aktueller Yoast-Kombinationstest soweit release-relevant, realer Wissensdatenbankimport, größerer Performance-Test und zweites echtes WordPress-Portal.
+Pferde-Atelier-Live-Readback des exakt hashgebundenen 0.2.8-Kandidaten; realer Wissensdatenbankimport; größerer Performance-Test; zweites echtes WordPress-Portal; Yoast-Kombinationstest soweit release-relevant.
