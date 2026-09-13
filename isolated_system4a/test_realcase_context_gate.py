@@ -30,13 +30,25 @@ class RealcaseContextGateTests(unittest.TestCase):
         return obj
 
     def test_positive_unbound_context_reaches_normal_validation(self):
+        article = {
+            "title": "Checklisten für Pferdeanhänger auswählen die wichtigsten Entscheidungskriterien",
+            "target_keyword": "Checklisten für Pferdeanhänger",
+            "category": "checklisten-fuer-pferdeanhaenger-beratung",
+            "article_type": "Beratung",
+            "plan_slot": "a" * 64,
+        }
         payload = {
             "fact_pack": {"contract": "canonical_fact_pack_v1"},
-            "production_plan_item": {"article_type": "Beratung"},
+            "production_plan_item": {
+                "article_type": article["article_type"],
+                "target_keyword": article["target_keyword"],
+                "topic": article["title"],
+                "runtime_order": {},
+            },
         }
         out = self.checks().context(
             json.dumps(payload),
-            article={"article_type": "Beratung"},
+            article=article,
             source_snapshot_sha256="a" * 64,
             research_text="{}",
             facts_text="{}",
