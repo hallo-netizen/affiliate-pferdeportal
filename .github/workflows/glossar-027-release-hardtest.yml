@@ -1,0 +1,127 @@
+name: Glossar 0.2.7 Release Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-027-release-hardtest-20260913]
+    paths:
+      - '.github/workflows/glossar-027-release-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  fresh-install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare exact 0.2.7 test scripts from proven 0.2.6 harness
+        run: |
+          set -euo pipefail
+          SRC=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test
+          DST=/tmp/uge027-tests
+          rm -rf "$DST" && mkdir -p "$DST"
+          for f in 01_build.sh 02_boot.sh 03_upgrade_prepare.sh 04_upgrade_apply.sh 05_upgrade_matrix.sh 06_upgrade_persistence_frontend.sh; do
+            sed -e 's/0\.2\.6/0.2.7/g' -e 's/UGE026/UGE027/g' -e 's/uge026/uge027/g' "$SRC/$f" > "$DST/$f"
+            chmod +x "$DST/$f"
+          done
+          grep -q 'Version: 0.2.7' "$DST/01_build.sh"
+          grep -q "define('UGE_VERSION', '0.2.7');" "$DST/01_build.sh"
+          grep -q "const REWRITE_SCHEMA_VERSION = '5';" "$DST/01_build.sh"
+          ! grep -R '0\.2\.6\|UGE026\|uge026' "$DST"
+          echo UGE027_TEST_HARNESS_UNIQUE_VERSION_PASS
+      - name: Build unique 0.2.7 candidate
+        run: bash /tmp/uge027-tests/01_build.sh
+      - name: Bind fresh candidate
+        run: |
+          rm -rf /tmp/u
+          mkdir -p /tmp/u
+          cp -a /tmp/uge027/universal-glossary-engine /tmp/u/
+      - name: Fresh WordPress MySQL Astra boot
+        run: bash /tmp/uge027-tests/02_boot.sh
+      - name: Positive negative policy seed
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/03_seed.sh
+      - name: Existing frontend positive negative matrix
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/04_frontend.sh
+      - name: Existing normal WordPress regressions
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/05_regression.sh
+      - name: Frontend acceptance gaps
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/06_frontend_acceptance.sh
+      - name: Fresh 0.2.7 version and schema
+        run: |
+          VERSION=$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)
+          SCHEMA=$(docker exec db mysql -uroot -pr wordpress -Nse "SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'")
+          echo "UGE027_FRESH_VERSION=$VERSION"
+          echo "UGE027_FRESH_SCHEMA=$SCHEMA"
+          test "$VERSION" = 0.2.7
+          test "$SCHEMA" = 5
+          echo UGE027_FRESH_INSTALL_POSITIVE_NEGATIVE_PASS
+
+  inplace-upgrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare exact 0.2.7 test scripts from proven 0.2.6 harness
+        run: |
+          set -euo pipefail
+          SRC=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test
+          DST=/tmp/uge027-tests
+          rm -rf "$DST" && mkdir -p "$DST"
+          for f in 01_build.sh 02_boot.sh 03_upgrade_prepare.sh 04_upgrade_apply.sh 05_upgrade_matrix.sh 06_upgrade_persistence_frontend.sh; do
+            sed -e 's/0\.2\.6/0.2.7/g' -e 's/UGE026/UGE027/g' -e 's/uge026/uge027/g' "$SRC/$f" > "$DST/$f"
+            chmod +x "$DST/$f"
+          done
+          ! grep -R '0\.2\.6\|UGE026\|uge026' "$DST"
+          echo UGE027_TEST_HARNESS_UNIQUE_VERSION_PASS
+      - name: Build exact 0.2.5 and unique candidate 0.2.7
+        run: bash /tmp/uge027-tests/01_build.sh
+      - name: Prepare 0.2.5 and prove poisoned rewrite negative state
+        run: bash /tmp/uge027-tests/03_upgrade_prepare.sh
+      - name: Apply 0.2.7 through WordPress updater and prove automatic migration
+        run: bash /tmp/uge027-tests/04_upgrade_apply.sh
+      - name: Post-upgrade routing policy positive negative matrix
+        run: bash /tmp/uge027-tests/05_upgrade_matrix.sh
+      - name: Persistence frontend and reactivation regressions
+        run: bash /tmp/uge027-tests/06_upgrade_persistence_frontend.sh
+      - name: Re-run full legacy frontend and regression matrix on upgraded runtime
+        run: |
+          rm -rf /tmp/u
+          mkdir -p /tmp/u
+          cp -a /tmp/uge027/universal-glossary-engine /tmp/u/
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/04_frontend.sh
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/05_regression.sh
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/06_frontend_acceptance.sh
+          test "$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)" = 0.2.7
+          echo UGE027_UPGRADED_FULL_MATRIX_PASS
+
+  tested-package:
+    needs: [fresh-install, inplace-upgrade]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare exact 0.2.7 builder
+        run: |
+          set -euo pipefail
+          SRC=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/01_build.sh
+          sed -e 's/0\.2\.6/0.2.7/g' -e 's/UGE026/UGE027/g' -e 's/uge026/uge027/g' "$SRC" > /tmp/uge027-build.sh
+          chmod +x /tmp/uge027-build.sh
+          ! grep -E '0\.2\.6|UGE026|uge026' /tmp/uge027-build.sh
+      - name: Rebuild exact gated 0.2.7 candidate
+        run: bash /tmp/uge027-build.sh
+      - name: Package only after both hardtests
+        run: |
+          cd /tmp/uge027
+          zip -X -qr /tmp/universal-glossary-engine-0.2.7.zip universal-glossary-engine
+          unzip -t /tmp/universal-glossary-engine-0.2.7.zip | grep -q 'No errors detected'
+          unzip -p /tmp/universal-glossary-engine-0.2.7.zip universal-glossary-engine/universal-glossary-engine.php | grep -q 'Version: 0.2.7'
+          ! unzip -p /tmp/universal-glossary-engine-0.2.7.zip universal-glossary-engine/universal-glossary-engine.php | grep -q 'Version: 0.2.6'
+          unzip -p /tmp/universal-glossary-engine-0.2.7.zip universal-glossary-engine/includes/class-uge-core.php | grep -q "const REWRITE_SCHEMA_VERSION = '5';"
+          sha256sum /tmp/universal-glossary-engine-0.2.7.zip | tee /tmp/SHA256.txt
+          echo UGE027_GATED_PACKAGE_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.7-gated-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.7.zip
+            /tmp/SHA256.txt
+          if-no-files-found: error
