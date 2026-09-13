@@ -43,12 +43,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/find-real-design-source.sh
   no-package-gate:
-    needs: [browser-green,fresh-regression,update-schema5,real-design-source-discovery]
-    if: ${{ always() }}
+    needs: [browser-green,fresh-regression,update-schema5]
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          test '${{ needs.browser-green.result }}' = success
-          test '${{ needs.fresh-regression.result }}' = success
-          test '${{ needs.update-schema5.result }}' = success
-          echo UGE028RC1_CORE_PASS_REAL_DESIGN_RUNTIME_STILL_REQUIRED_NO_RELEASE_PACKAGE
+      - run: echo UGE028RC1_CORE_RED_TO_GREEN_PASS_REAL_DESIGN_RUNTIME_NOT_YET_PROVEN_NO_RELEASE_PACKAGE
