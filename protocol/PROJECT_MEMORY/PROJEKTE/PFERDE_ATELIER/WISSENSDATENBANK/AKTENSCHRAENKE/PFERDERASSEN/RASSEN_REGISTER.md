@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 122 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 126 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,22 +10,22 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **122 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **126 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 118er-Stand neu angelegt:
+Seit dem synchronisierten 122er-Stand neu angelegt:
 
-- Swedish Warmblood / Schwedisches Warmblut
-- Oldenburger
-- Marsh Tacky
-- Newfoundland Pony
+- Canadian Horse / Cheval Canadien
+- Florida Cracker Horse
+- Gotlandsruss / Gotland Pony
+- Nordsvensk brukshäst
 
 Wichtige Abgrenzung:
-- SWB-Buch-/Registerklassen sind keine getrennten Rassen.
-- Oldenburger bleibt ein eigener Ursprungsstutbuch-Datensatz.
-- Marsh Tacky besitzt eine eigenständige Pedigree-Registry.
-- Newfoundland Pony wird als eigenständige kanadische Ponyrasse geführt.
+- Canadian Horse wird über CHBA/CLRC innerhalb des kanadischen Animal Pedigree Act geführt.
+- Florida Cracker Horse besitzt ein eigenes Register und staatlich gestütztes Erhaltungsprogramm; Marshtackie ist Synonym, kein zweiter Datensatz.
+- Gotlandsruss hat ein schwedisches Originalstutbuch.
+- Nordsvensk brukshäst hat ebenfalls ein schwedisches Originalstutbuch; Dølahest ist im schwedischen Programm als einzige fremde Rasse zugelassen und wird dadurch nicht synonym.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -55,6 +55,7 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Selle Français Originel → Label innerhalb des Selle-Français-Studbooks, keine zweite Rasse.
 - Crioulo Brasilien → Bestandteil des vorhandenen Criollo-Datensatzes, solange die internationalen Ursprungsregister keine belastbare fachliche Trennung als eigene Rasse verlangen.
 - SWB Book I–IV/Register A–C → Registerklassen, keine getrennten Rassen.
+- Marshtackie → Synonym des Florida Cracker Horse, kein zweiter Datensatz.
 
 ## OFFENE NACHRECHERCHE
 
