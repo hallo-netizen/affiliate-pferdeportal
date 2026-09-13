@@ -2,16 +2,17 @@ from __future__ import annotations
 import json, subprocess, sys
 from pathlib import Path
 
-SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V2'
+SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 BRANCH = 'hobbyroom/system4-true-single-room-v1'
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 CODEX_ENTRY = HERE / 'codex_entry.py'
 ROOT_AGENTS = REPO / 'AGENTS.md'
-MARKER = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V2'
+ROOT_OVERRIDE = REPO / 'AGENTS.override.md'
+MARKER = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 ROOT_COMMAND_FILE = 'python3 isolated_system4/root_entry.py start'
 ROOT_COMMAND_STDIN = 'python3 isolated_system4/root_entry.py start-stdin'
-OLD_ENTRY_EXCLUSION = 'SYSTEM4 branch: DO NOT run control/cloud-entry-gate/cloud_entry.py before or instead of the System-4 root entry.'
+OLD_ENTRY_EXCLUSION = 'SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 root entry.'
 
 class EntryFail(RuntimeError):
     pass
@@ -31,13 +32,18 @@ def _verify_common(workspace: Path) -> None:
         raise EntryFail('ROOT_ENTRY_BRANCH_NOT_SYSTEM4')
     if not ROOT_AGENTS.is_file():
         raise EntryFail('ROOT_AGENTS_MISSING')
-    text = ROOT_AGENTS.read_text(encoding='utf-8')
+    if not ROOT_OVERRIDE.is_file():
+        raise EntryFail('ROOT_OVERRIDE_MISSING')
+    base = ROOT_AGENTS.read_text(encoding='utf-8')
+    text = ROOT_OVERRIDE.read_text(encoding='utf-8')
+    if 'python3 control/cloud-entry-gate/cloud_entry.py start' not in base:
+        raise EntryFail('ROOT_AGENTS_IMMUTABLE_GATE_MISSING')
     if MARKER not in text:
-        raise EntryFail('ROOT_AGENTS_SYSTEM4_ROUTE_MISSING')
+        raise EntryFail('ROOT_OVERRIDE_SYSTEM4_ROUTE_MISSING')
     if ROOT_COMMAND_FILE not in text or ROOT_COMMAND_STDIN not in text:
-        raise EntryFail('ROOT_AGENTS_SYSTEM4_COMMAND_MISSING')
+        raise EntryFail('ROOT_OVERRIDE_SYSTEM4_COMMAND_MISSING')
     if OLD_ENTRY_EXCLUSION not in text:
-        raise EntryFail('ROOT_AGENTS_OLD_ENTRY_EXCLUSION_MISSING')
+        raise EntryFail('ROOT_OVERRIDE_OLD_ENTRY_EXCLUSION_MISSING')
     if _within(workspace, REPO):
         raise EntryFail('ROOT_ENTRY_WORKSPACE_MUST_BE_OUTSIDE_REPO')
 
