@@ -44,6 +44,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
 - `HIVEPRESS/START_HERE.md` → Anzeigenmarkt / HivePress
 - `GEMEINSAM/START_HERE.md` → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
+- `PLUGINS/START_HERE.md` → installierter Pluginbestand / Eigenentwicklungs-Zuordnung / betriebliche Bewertung / zentrale Plugin-Updatechronik; Fach-/Release-/LIVE-Wahrheit bleibt im zuständigen Fachbüro
 
 Historische Adresse `PFERDERASSEN/START_HERE.md` bleibt als Weiterweiser zum Aktenschrank `WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/` bestehen.
 
