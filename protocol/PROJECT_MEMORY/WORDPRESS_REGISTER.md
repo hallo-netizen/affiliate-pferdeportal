@@ -1,6 +1,6 @@
 # WORDPRESS-REGISTER
 
-STAND: 2026-09-12
+STAND: 2026-09-13
 STATUS: CAMPUSWEITER TECHNOLOGIE-INDEX
 
 ## 1-KLICK-ÜBERSICHT
@@ -283,25 +283,36 @@ MOD-008
 Plugin:
 `Universal Glossary Engine`
 
-Aktuell belegter Stand:
-**0.1.0-prototype**
+Aktuellster technisch gebundener Kandidat:
+**0.2.6**
 
-Prototyp-ZIP SHA-256:
-`c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
+Rewrite-Schema:
+**5**
+
+Innerer Plugin-ZIP SHA-256:
+`e0717db3aa247edc30b0fe84a261aa59037050d593e3432a6fb460f6d96f3b09`
+
+Autoritativer Hardtest:
+- Run `34748541630`
+- Fresh-Install Job `103700782149` PASS
+- echter WordPress-In-place-Update Job `103700782306` PASS
+- gated Package Job `103700913568` PASS
+- Actions-Artefakt-ID `10314822840`
 
 Status:
-**LOCAL PROTOTYPE PASS / KEIN WORDPRESS-LIVE-PASS.**
+**TECHNISCHER KANDIDAT FRESH + UPDATE POSITIV/NEGATIV PASS / KEIN PFERDE-LIVE-PASS.**
 
-Belegt:
-- PHP-Lint 8/8 PASS;
-- statische Positiv-/Negativprüfung 15/15 PASS;
-- Runtime-Stub PASS;
-- Pferde-Profil + fachfremde Zweitkonfiguration ohne Coreänderung PASS;
-- strukturierter JSON-Import/Export; Import ausschließlich als Entwurf;
-- keine Yoast-Pflichtabhängigkeit und keine direkten Yoast-Metafeld-Writes.
+Zusätzlich lokal am exakt erzeugten Actions-Artefakt belegt:
+- ZIP-/Hashbindung PASS;
+- 0.2.5↔0.2.6-Delta exakt zwei erlaubte Dateien;
+- alte Version/Altschema/alte CSS-Hacks negativ nicht enthalten;
+- PHP-Lint aller 10 PHP-Dateien PASS.
 
 Hauptquelle:
 `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
+
+Technisches Protokoll:
+`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.6_20260913.md`
 
 Erste Projektanwendung:
 `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
@@ -310,4 +321,4 @@ Modulklasse:
 `UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
 
 Offen:
-echter WordPress-Smoke-Test, Permalinktest neben vorhandener `/glossar/`-Seite, echter Yoast-/Astra-Test, realer Wissensdatenbankimport, größerer Performance-Test und zweites echtes WordPress-Portal.
+Pferde-Atelier-Readback des exakt hashgebundenen Kandidaten, aktueller Yoast-Kombinationstest soweit release-relevant, realer Wissensdatenbankimport, größerer Performance-Test und zweites echtes WordPress-Portal.
