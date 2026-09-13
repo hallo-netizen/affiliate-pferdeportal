@@ -6,6 +6,7 @@ from xml.sax.saxutils import escape
 import content_guard
 import design_guard
 import production_checks
+import authoring_contract
 import release_adapter
 
 CONTRACT='SYSTEM4_CANONICAL_ARTICLE_STATE_V1'
@@ -40,10 +41,14 @@ def verify_state(state):
         if sha({'fact_pack':context['fact_pack'],'production_plan_item':context['production_plan_item']})!=context.get('sha256'):
             raise Fail('PRODUCTION_CONTEXT_INTEGRITY_FAIL')
     phase=state.get('phase')
-    allowed={'RESEARCH_REQUIRED','FACT_CHECK_REQUIRED','DRAFT_REQUIRED','CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','SIGNATURE_REQUIRED','RELEASED'}
+    allowed={'RESEARCH_REQUIRED','FACT_CHECK_REQUIRED','CONTEXT_REQUIRED','DRAFT_REQUIRED','CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','SIGNATURE_REQUIRED','RELEASED'}
     if phase not in allowed: raise Fail('PHASE_INVALID')
     if phase=='FACT_CHECK_REQUIRED' and state.get('research') is None: raise Fail('PHASE_STATE_MISMATCH')
-    if phase in {'DRAFT_REQUIRED','CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','SIGNATURE_REQUIRED','RELEASED'} and (state.get('research') is None or state.get('facts') is None): raise Fail('PHASE_STATE_MISMATCH')
+    if phase in {'CONTEXT_REQUIRED','DRAFT_REQUIRED','CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','SIGNATURE_REQUIRED','RELEASED'} and (state.get('research') is None or state.get('facts') is None): raise Fail('PHASE_STATE_MISMATCH')
+    if phase in {'DRAFT_REQUIRED','CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','SIGNATURE_REQUIRED','RELEASED'}:
+        if state.get('production_context') is None or not isinstance(state.get('authoring_contract'),dict): raise Fail('PHASE_STATE_MISMATCH')
+        try: authoring_contract.validate_bound(Path(__file__).resolve().parent.parent,state)
+        except authoring_contract.AuthoringContractError as e: raise Fail('AUTHORING_CONTRACT_FAIL:'+str(e)) from e
     if phase in {'CHECK_REQUIRED','REPAIR_REQUIRED','OUTPUT_GATE_REQUIRED','SIGNATURE_REQUIRED','RELEASED'} and not draft: raise Fail('PHASE_STATE_MISMATCH')
     if phase=='REPAIR_REQUIRED' and (state.get('checks',{}).get('status')!='FAIL' or not state.get('last_error')): raise Fail('PHASE_STATE_MISMATCH')
     if phase in {'OUTPUT_GATE_REQUIRED','SIGNATURE_REQUIRED','RELEASED'} and (state.get('checks',{}).get('status')!='PASS' or state.get('checks',{}).get('checked_draft_sha256')!=state.get('draft_sha256')): raise Fail('PHASE_STATE_MISMATCH')
@@ -73,7 +78,7 @@ def cmd_ingress(snapshot_path, workspace, item_index=0):
     if p.suffix.lower()!='.json': raise Fail('WORDPRESS_INPUT_FORMAT_FAIL')
     snap=json.loads(p.read_text(encoding='utf-8'))
     article,batch_sha=extract_ready(snap,item_index)
-    state={'contract':CONTRACT,'source_snapshot_sha256':file_sha(p),'batch_sha256':batch_sha,'article':article,'immutable_core_sha256':'','publish_allowed':False,'phase':'RESEARCH_REQUIRED','revision':0,'research':None,'facts':None,'production_context':None,'draft_markdown':None,'draft_sha256':None,'checks':{},'last_error':None,'release_prepared':None,'released':False}
+    state={'contract':CONTRACT,'source_snapshot_sha256':file_sha(p),'batch_sha256':batch_sha,'article':article,'immutable_core_sha256':'','publish_allowed':False,'phase':'RESEARCH_REQUIRED','revision':0,'research':None,'facts':None,'production_context':None,'authoring_contract':None,'draft_markdown':None,'draft_sha256':None,'checks':{},'last_error':None,'release_prepared':None,'released':False}
     state['immutable_core_sha256']=sha(immutable_core(state))
     (w/'state.json').write_text(json.dumps(state,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
     print('SYSTEM4_INGRESS_PASS:RESEARCH_REQUIRED')
@@ -100,8 +105,8 @@ def cmd_facts(workspace,facts_path):
     text=Path(facts_path).read_text(encoding='utf-8').strip()
     try: content_guard.validate_facts_document(text,s['research']['text'])
     except content_guard.ContentGuardError as e: raise Fail('FACTS_EVIDENCE_FAIL:'+str(e)) from e
-    s['facts']={'text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}; s['phase']='DRAFT_REQUIRED'; save(s,p)
-    print('SYSTEM4_FACTS_PASS:DRAFT_REQUIRED')
+    s['facts']={'text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}; s['phase']='CONTEXT_REQUIRED'; save(s,p)
+    print('SYSTEM4_FACTS_PASS:CONTEXT_REQUIRED')
 
 def _read_context_files(fact_pack_path,plan_item_path):
     fact=json.loads(Path(fact_pack_path).read_text(encoding='utf-8'))
@@ -111,7 +116,7 @@ def _read_context_files(fact_pack_path,plan_item_path):
 
 def cmd_context(workspace,fact_pack_path,plan_item_path):
     s,p=load(workspace)
-    if s['phase']!='DRAFT_REQUIRED': raise Fail('PHASE_FAIL:CONTEXT')
+    if s['phase']!='CONTEXT_REQUIRED': raise Fail('PHASE_FAIL:CONTEXT')
     if s.get('production_context') is not None: raise Fail('PRODUCTION_CONTEXT_ALREADY_BOUND')
     fact,plan=_read_context_files(fact_pack_path,plan_item_path)
     try:
@@ -122,17 +127,20 @@ def cmd_context(workspace,fact_pack_path,plan_item_path):
     except production_checks.ProductionCheckError as e:
         raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
     s['production_context']={'fact_pack':fact,'production_plan_item':plan,'sha256':sha({'fact_pack':fact,'production_plan_item':plan})}
-    save(s,p)
+    try: s['authoring_contract']=authoring_contract.build(Path(__file__).resolve().parent.parent,s,fact,plan)
+    except authoring_contract.AuthoringContractError as e: raise Fail('AUTHORING_CONTRACT_FAIL:'+str(e)) from e
+    s['phase']='DRAFT_REQUIRED'; save(s,p)
     print('SYSTEM4_PRODUCTION_CONTEXT_PASS:DRAFT_REQUIRED')
 
 def _guard_article_against_context(s,text):
     context=s.get('production_context')
-    if context is None:
-        return
-    if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_INVALID')
+    if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
     try:
+        contract=authoring_contract.validate_bound(Path(__file__).resolve().parent.parent,s)
+        authoring_contract.validate_candidate(text,contract)
         content_guard.validate_single_article(text,context['fact_pack'])
         design_guard.validate_design_neutrality(text,s['article']['article_type'])
+    except authoring_contract.AuthoringContractError as e: raise Fail('ARTICLE_AUTHORING_CONTRACT_FAIL:'+str(e)) from e
     except content_guard.ContentGuardError as e: raise Fail('ARTICLE_CONTENT_GUARD_FAIL:'+str(e)) from e
     except design_guard.DesignGuardError as e: raise Fail('ARTICLE_DESIGN_GUARD_FAIL:'+str(e)) from e
 
@@ -153,6 +161,7 @@ def cmd_repair(workspace,draft_path):
     old_research=json.loads(json.dumps(s.get('research'),ensure_ascii=False))
     old_facts=json.loads(json.dumps(s.get('facts'),ensure_ascii=False))
     old_immutable=s.get('immutable_core_sha256')
+    old_authoring=json.loads(json.dumps(s.get('authoring_contract'),ensure_ascii=False))
     old_text=str(s.get('draft_markdown') or '')
     text=Path(draft_path).read_text(encoding='utf-8').strip()
     if not text: raise Fail('DRAFT_EMPTY')
@@ -166,6 +175,7 @@ def cmd_repair(workspace,draft_path):
     if s.get('production_context')!=old_context: raise Fail('REPAIR_CONTEXT_MUTATION_FORBIDDEN')
     if s.get('research')!=old_research or s.get('facts')!=old_facts: raise Fail('REPAIR_EVIDENCE_MUTATION_FORBIDDEN')
     if s.get('immutable_core_sha256')!=old_immutable: raise Fail('REPAIR_IMMUTABLE_CORE_MUTATION_FORBIDDEN')
+    if s.get('authoring_contract')!=old_authoring: raise Fail('REPAIR_AUTHORING_CONTRACT_MUTATION_FORBIDDEN')
     save(s,p)
     print(f"SYSTEM4_REPAIR_ACCEPTED:REVISION={s['revision']}:CHECK_REQUIRED")
 
@@ -194,6 +204,8 @@ def cmd_fullcheck(workspace):
     if s['phase']!='CHECK_REQUIRED': raise Fail('PHASE_FAIL:FULLCHECK')
     context=s.get('production_context')
     if not isinstance(context,dict): raise Fail('PRODUCTION_CONTEXT_MISSING')
+    try: authoring_contract.validate_bound(Path(__file__).resolve().parent.parent,s)
+    except authoring_contract.AuthoringContractError as e: raise Fail('AUTHORING_CONTRACT_FAIL:'+str(e)) from e
     text=str(s.get('draft_markdown') or '')
     try:
         content_guard.validate_single_article(text,context['fact_pack'])
