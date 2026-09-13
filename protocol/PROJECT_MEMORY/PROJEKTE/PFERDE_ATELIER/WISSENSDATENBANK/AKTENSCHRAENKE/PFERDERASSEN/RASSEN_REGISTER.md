@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
-STAND: 2026-09-12
-STATUS: MASTERLISTE IM AUFBAU / 108 DATENSÄTZE VORHANDEN
+STAND: 2026-09-13
+STATUS: MASTERLISTE IM AUFBAU / 114 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,24 +10,20 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **108 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **114 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 96er-Stand neu angelegt:
+Seit dem synchronisierten 108er-Stand neu angelegt:
 
-- Aegidienberger
-- Huzule / Hucul
-- Berber / Barb
-- Azteca
-- Morgan
-- Rocky Mountain Horse
-- Missouri Fox Trotter
-- Lusitano
-- Tennessee Walking Horse
-- Paso Fino
-- Peruanisches Pferd / Peruvian Horse
-- Standardbred
+- Selle Français
+- Poney Français de Selle
+- Trotteur Français / Französischer Traber
+- Cheval Miniature Français
+- Cheval de Sport Anglo-Normand
+- Cheval Crème
+
+Alle sechs werden von IFCE über eigene Zuchtprogramme bzw. Livres Généalogiques geführt.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -49,8 +45,10 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Percheron → kein zweiter britischer Datensatz.
 - Belgian Draught/Brabanter → ein Datensatz; Brabant/Brabanter historische/regionale Bezeichnung.
 - Falabella ≠ American Miniature Horse.
+- Cheval Miniature Français ≠ automatisch American Miniature Horse oder Falabella.
 - Barbe ≠ Arabe-Barbe; getrennte Studbook-Sektionen, nicht synonym.
 - Azteca → registrierte Abstammung entscheidend; nicht jedes passende Kreuzungsprodukt ist automatisch Azteca.
+- Selle Français Originel → Label innerhalb des Selle-Français-Studbooks, keine zweite Rasse.
 
 ## OFFENE NACHRECHERCHE
 
