@@ -1,11 +1,13 @@
 # SYSTEM 4A — SYSTEM-4 PASS-AUTHENTIZITÄTSBEFUND
 
-STATUS: NACH AKTUELLEM CODE GEPRÜFT / SYSTEM 4 UNVERÄNDERT
+STATUS: **HISTORISCHER URSACHENBEFUND / KEINE CURRENT_STATE**
 DATE: 2026-09-13
+
+Die einzige aktuelle 4A-Statuswahrheit steht in `isolated_system4a/README.md`.
 
 ## Befund
 
-Im aktuellen System 4 liegt `state.json` im Codex-Arbeitsbereich. `batch_gate.py` prüft bei FULL-PASS-Evidence Form und erwartete Werte, führt LanguageTool/PPM an dieser Grenze aber nicht erneut aus und besitzt keine ausschließlich vom echten Prüfer erzeugte Attestation.
+Im unveränderten System 4 liegt `state.json` im ausführenden Arbeitsbereich. `batch_gate.py` prüft bei FULL-PASS-Evidence Form und erwartete Werte, führt LanguageTool/PPM an dieser Grenze aber nicht erneut aus und besitzt keine ausschließlich vom echten Prüfer erzeugte Attestation.
 
 Der finale `handoff_transport.py` prüft Fact-Trace, Design und Batchregeln erneut real. LT-/PPM-Daten werden dagegen auf PASS-Werte, Versionen und Content-Hash geprüft, nicht erneut ausgeführt.
 
@@ -24,12 +26,12 @@ Der finale `handoff_transport.py` prüft Fact-Trace, Design und Batchregeln erne
 
 Damit kann das Batch-Gate einen formal passenden State mit synthetischer LT-/PPM-PASS-Evidence nicht von einem State unterscheiden, dessen Evidence tatsächlich aus `production_checks.run_all()` stammt.
 
-Das beweist keinen praktischen externen Angriff. Es beweist aber eine Herkunftslücke, sobald der ausführende Worker den kanonischen State selbst schreiben kann.
+Das beweist keinen praktischen externen Angriff. Es beweist aber die damalige Herkunftslücke, wenn derselbe ausführende Worker den kanonischen State selbst schreiben könnte.
 
-## Bedeutung für 4A
+## Folgerung für 4A
 
-Keine neue Prüflogik bauen. Die vorhandenen echten Prüfer bleiben unverändert.
+Aus diesem Befund wurde **keine neue Prüflogik** gebaut. Die vorhandenen echten System-4-Prüfer bleiben read-only und unverändert.
 
-4A muss nur verhindern, dass der Worker den kanonischen PASS-State erzeugen kann: Der äußere Supervisor nimmt das echte Prüfergebnis direkt in seinen internen State auf. Worker/Codex erhält keine State-/PASS-Schreibautorität.
+4A schließt die Herkunftslücke durch den äußeren Supervisor: Der Worker kann den kanonischen PASS-State nicht erzeugen; der Supervisor übernimmt das echte Prüfergebnis direkt in seinen eigenen State. Worker besitzt keine State-/PASS-/Publish-Schreibautorität.
 
-Kein Produktions-PASS aus diesem Befund ableiten.
+Diese Folgerung ist inzwischen Bestandteil des nachgewiesenen No-Codex-Produktionsvertrags. Der aktuelle PASS wird ausschließlich durch den vollständigen Null-bis-Ende-Nachweis in `README.md` und `TESTNACHWEIS_20260913_AUTHORITY_FULLCHAIN_CURRENT.md` getragen — **nicht durch dieses historische Befunddokument**.
