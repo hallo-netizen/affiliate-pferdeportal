@@ -8,6 +8,7 @@ on:
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.8-rc1.sh'
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8-rc1.sh'
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/acceptance-live-frontend-browser.py'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/find-real-design-source.sh'
   workflow_dispatch:
 permissions:
   contents: read
@@ -35,8 +36,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8-rc1.sh ${{ matrix.base }}
+  real-design-source-discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/find-real-design-source.sh
   no-package-gate:
-    needs: [browser-green,fresh-regression,update-schema5]
+    needs: [browser-green,fresh-regression,update-schema5,real-design-source-discovery]
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo UGE028RC1_CORE_RED_TO_GREEN_PASS_NO_RELEASE_PACKAGE
+      - run: |
+          test '${{ needs.browser-green.result }}' = success
+          test '${{ needs.fresh-regression.result }}' = success
+          test '${{ needs.update-schema5.result }}' = success
+          echo UGE028RC1_CORE_PASS_REAL_DESIGN_RUNTIME_STILL_REQUIRED_NO_RELEASE_PACKAGE
