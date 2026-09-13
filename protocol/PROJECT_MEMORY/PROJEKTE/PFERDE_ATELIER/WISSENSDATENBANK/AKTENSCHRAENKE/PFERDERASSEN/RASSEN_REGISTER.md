@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 140 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 145 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,19 +10,23 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **140 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **145 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 138er-Stand neu angelegt:
+Seit dem synchronisierten 140er-Stand neu angelegt:
 
-- British Riding Pony
-- International Miniature Pony
+- Estnisches einheimisches Pferd / Eesti hobune / Estonian Native Horse
+- Tori-Pferd / Tori hobune
+- Estnisches Kaltblut / Eesti raskeveohobune / Estonian Heavy Draught
+- Böhmisch-Mährisches Belgisches Pferd / Českomoravský belgický kůň
+- Schlesischer Noriker / Slezský norik
 
 Wichtige Abgrenzung:
-- Beide werden in der aktuellen GOV.UK-Liste als eigene Breed Studbooks mit Ursprungsstutbuch geführt.
-- Cleveland Bay, Dales Pony, Fell Pony, Highland Pony, New Forest Pony und Eriskay Pony waren bereits vorhanden und wurden nicht dupliziert.
-- International Miniature Pony wird nicht mit American Miniature Horse, Falabella oder Cheval Miniature Français zusammengelegt; getrennte Register-/Rasseführung bleibt maßgeblich.
+- Estonian Arden ist die historische Bezeichnung des heutigen Estonian Heavy Draught und kein zweiter Datensatz.
+- Tori-Zuchtrichtungen bleiben innerhalb der Tori-Rasse und werden nicht künstlich getrennt.
+- Silesian Noriker wird im tschechischen nationalen Genressourcenprogramm getrennt vom allgemeinen Noriker geführt und deshalb als eigener Datensatz behandelt.
+- Bohemian-Moravian Belgian Horse ist eine eigenständig geführte tschechische Kaltblutpopulation.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -56,6 +60,7 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - SWB Book I–IV/Register A–C → Registerklassen, keine getrennten Rassen.
 - Marshtackie → Synonym des Florida Cracker Horse, kein zweiter Datensatz.
 - Polish Halfbred Horse → ältere/englische Benennung im PZHK-Kontext des Polish Sport Horse, kein zweiter Datensatz.
+- Estonian Arden → historische Bezeichnung des Estonian Heavy Draught, kein zweiter Datensatz.
 
 ## OFFENE NACHRECHERCHE
 
