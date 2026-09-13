@@ -1,6 +1,6 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **LOCAL PREFLIGHT PASS / isolated prototype / test only / USER APPROVAL REQUIRED BEFORE CODEX.** Kein Merge, kein Produktions-Publish. Ein echter Codex-Produktionslauf wurde noch nicht gestartet.
+Status: **BLOCKED BEFORE SYSTEM-4 INGRESS / isolated prototype / test only.** Kein Merge, kein Produktions-Publish, kein weiterer Codex-Produktionslauf bis zur belastbaren Eintrittsisolation.
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit** innerhalb des isolierten Prototyps. Der offizielle Projekt-/Campus-Stand bleibt davon getrennt in `control/startmaster0107/CURRENT_STATE.json` und wird durch System 4 nicht überschrieben.
 
@@ -47,62 +47,107 @@ System 4 ersetzt diese Autoritäten nicht:
 - bestehende Textmaschine-/Artikeltyp-/Tabellen-/Link-/SEO-/PSERC-/PSTE-/Metadatenregeln;
 - `publish_allowed=false`.
 
-## Frischer finaler lokaler Preflight 2026-09-13
+## Lokaler Preflight 2026-09-13
 Belegdatei, ausdrücklich **keine zweite CURRENT_STATE**:
 `isolated_system4/TESTNACHWEIS_20260913_UNIVERSAL_PREFLIGHT.md`
 
-Die zuvor lokal fehlende PPM-6.7.9-ZIP wurde **nicht nachgebaut und nicht verändert**. Die historischen Original-Zwischendateien `ppm.00.b64` bis `ppm.06.b64` wurden aus der vorhandenen Dateibibliothek materialisiert, decodiert und gegen die historischen Git-Blob-SHAs der sieben Repo-Chunks geprüft. Alle sieben Chunk-Blob-SHAs stimmen exakt.
-
-Das zusammengesetzte Paket ist exakt:
-- Datei: `control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`
-- Größe: `1614485` Bytes;
-- Git-Blob: `151e9d6f908453dfc5b4acb497c4927a3f03c940`;
-- SHA256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`;
-- ZIP-Integrität: PASS.
-
-Danach frisch ausgeführt:
+Vor dem echten Codex-Lauf wurden auf dem System-4-Code vollständig ausgeführt:
 - kompletter aktueller Unittestbestand: **87/87 PASS**;
 - lokaler E2E `test_local_end_to_end_chat_handoff.py`: **5/5 PASS**;
-- NO-LEGACY über `production_checks.no_legacy_runtime_dependencies(...)`: **PASS**, `legacy_import_count=0`;
-- Universalität 1 / 3 / 7 / 25 / 1000, gemischte/neue Beitragsarten und 0-Artikel-Negativfall bleiben PASS.
+- NO-LEGACY: **PASS**, `legacy_import_count=0`;
+- Universalität 1 / 3 / 7 / 25 / 1000, gemischte/neue Beitragsarten und 0-Artikel-Negativfall: PASS;
+- PPM 6.7.9 exakt gebunden: Größe `1614485`, Git-Blob `151e9d6f908453dfc5b4acb497c4927a3f03c940`, SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`, ZIP-Integrität PASS.
 
-Der frühere lokale PPM-Materialisierungsblocker ist damit **geschlossen**. Es besteht aktuell **kein bekannter offener System-4-Code-/Preflight-Blocker**.
+Damit bleibt bewiesen: Der **lokale System-4-Kern und seine komplette simulierte Eingang-bis-Handoff-Kette sind grün**. Dieser Beweis ersetzt aber keinen echten Codex-Produktionslauf.
 
-Beweisgrenze: Dies ist ein vollständiger **lokaler Preflight-PASS**, aber noch **kein echter Codex-Produktionsnachweis**. Ein realer Codex-Lauf darf erst nach ausdrücklicher Nutzerfreigabe gestartet werden.
+## Erster echter 1-Artikel-Codex-Lauf — 2026-09-13
+Beleg-/Optimierungsprotokoll:
+`isolated_system4/PROTOKOLL_REALRUN_20260913_SINGLE_ARTICLE_ENTRY_BLOCKER_SPEED.md`
+
+Gebundener Testartikel:
+- `Beratung`;
+- Titel `Putzbox für Pferde richtig auswählen`;
+- Keyword `Putzbox für Pferde`;
+- exakt 1 Item;
+- `publish_allowed=false`.
+
+Der Nutzer gab diesen echten Produktionsversuch ausdrücklich frei. Der Codex-Auftrag verlangte die vollständige System-4-Kette bis zum exakten V2-Elternchat-/WordPress-Handoff und verbot Legacy-Orchestrierung.
+
+Tatsächliches Ergebnis:
+- **BLOCKED BEFORE SYSTEM-4 INGRESS**;
+- Codex stoppte bei `OFFICIAL_RUNTIME_ENTRY` mit `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`;
+- ausgeführte fremde Eintrittsstrecke: `control/output-quarantine/runtime_entry_gate.py`;
+- Codex bestätigt: keine Artikelrecherche und kein Draft gestartet;
+- deshalb kein Research-Evidence, Fact-Pack, Draft, LT/PPM-Fullcheck, Batch-Gate, V2-Handoff und keine WordPress-Datei.
+
+Gemessene Zeit vom Codex-Auftrag bis zur terminalen Blockermeldung: **281 Sekunden / 4:41 Minuten**.
+
+## Aktueller echte Blocker: S4-BLOCK-REAL-ENTRY
+Die repositoryweite Root-`AGENTS.md` gilt für Codex Cloud **vor** der verschachtelten System-4-Anweisung und erzwingt die offizielle Cloud-/Runtime-Eingangstür.
+
+Diese Strecke verlangt über `worker_freshness_guard.py` die Datei `.pferde-environment/CODEX_PRODUCTION_PREFLIGHT.json`. Der zugehörige Producer verlangt seinerseits, dass der lokale Checkout-HEAD exakt dem autoritativen aktuellen `main` entspricht.
+
+Damit kollidieren zwei Bedingungen:
+1. System 4 muss auf seinem isolierten, hashgebundenen PR-Head laufen und darf keine Legacy-/STARTMASTER-Orchestrierung als Laufzeitabhängigkeit übernehmen.
+2. Die repositoryweite Codex-Root-Anweisung zieht den Worker vor System 4 in eine offizielle Produktionsstrecke, deren Environment-Proof auf exakt `main` gebunden ist.
+
+Folge: **Die gewünschte echte „eine Tür / ein Wächter“-Isolation ist im realen Codex-Betrieb noch nicht erreicht**, obwohl der lokale System-4-Kern grün ist.
+
+Nicht als Lösung zulässig:
+- Environment-Proof fälschen;
+- offiziellen Freshness-/Runtime-Guard umgehen oder abschwächen;
+- System 4 an STARTMASTER koppeln;
+- offiziellen CURRENT_STATE für System 4 ändern;
+- den Blocker als PASS behandeln.
+
+## Geschwindigkeitsbefund ohne Qualitätsverlust
+Der erste reale Befund ist eindeutig: **4:41 Minuten wurden vor dem System-4-ingress verbraucht, ohne einen einzigen fachlichen Qualitätsnachweis zu erzeugen.** Die wichtigste Optimierung ist deshalb nicht ein schnellerer Text oder weniger Prüfung, sondern ein eigener echter System-4-Codex-Einstieg ohne fremde Orchestrierungsrunde.
+
+Weitere Optimierungen bleiben nur unter unveränderter Qualitätskette zulässig:
+- PPM/LT nur hashgebunden cachen/wiederverwenden;
+- den bereits caller-seitig bewiesenen unveränderten Head nicht erneut komplett innerhalb Codex preflighten;
+- persistenten LT-Worker innerhalb `production_checks.run_all` nutzen;
+- Reparaturen nur erster konkreter Defekt / gleicher Artikel statt Komplettneuschreibung;
+- bei Multi-Artikel-Batches nur voneinander unabhängige Recherche/Artikel begrenzt parallelisieren;
+- Handoff einmal kanonisieren/packen und im Parent Chat nur entpacken + erneut validieren.
+
+**Niemals** zur Beschleunigung entfallen oder gelockert werden dürfen Recherche, Fact-Bindung, Textmaschine/Design, LT 6.8, PPM 6.7.9, Same-Article-Repair, Batch-Gate, V2-Handoff oder Parent-Chat-Validierung.
 
 ## Reale Infrastrukturgrenze
 System 4 enthält keine künstliche Artikelzahl-Obergrenze. Reale Laufzeit-, Speicher- und Chat-Ausgabelimits bleiben physische Infrastrukturgrenzen. Der V2-Handoff teilt große Daten in geordnete Transportteile. Bei einem realen Ressourcenblock muss der Lauf fail-closed mit dem konkreten Infrastrukturblocker stoppen; die gebundene Artikelmenge darf nicht willkürlich gekürzt werden.
 
 ## WordPress-/Handoff-Grenze
-Der aktuelle direkte Importvertrag ist:
+Der Zielvertrag bleibt:
 - `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`;
 - JSON / `application/json`;
 - `WORDPRESS_DIRECT_IMPORT`;
 - `Portal SEO Editorial Plan Compiler 0.28.23`;
 - PPM 6.7.9;
-- `direct_wordpress_upload_ready=true` nur nach allen System-4-PASS-Prüfungen;
+- `direct_wordpress_upload_ready=true` nur nach allen realen System-4-PASS-Prüfungen;
 - `publish_allowed=false`.
 
-Die bestehende Signaturprüfung ist für diesen aktuellen Pfad ausgeschaltet. Deshalb kein Signing/ENDSTEMPEL in System 4. System 4 verändert weder Plugin noch Signaturschalter.
+Die bestehende Signaturprüfung ist für diesen Pfad ausgeschaltet. Deshalb kein Signing/ENDSTEMPEL in System 4.
 
 ## HOBBYRAUM / NEXT ACTION
-System-4-Arbeitsraum: **LOCAL PREFLIGHT PASS / wartet auf Nutzerfreigabe.**
+System-4-Arbeitsraum: **BLOCKED am echten Codex-Einstieg.**
 
 Exakter nächster Arbeitsschritt:
-1. **kein weiterer Umbau und kein Codex ohne Nutzerfreigabe**;
-2. Nutzerfreigabe für **einen echten Codex-Lauf des konkret gebundenen Input-Batches** einholen;
-3. Anzahl und Beitragsarten ausschließlich aus diesem gebundenen Input übernehmen;
-4. Lauf fail-closed durch dieselbe System-4-Kette bis zum V2-Elternchat-/WordPress-Handoff führen;
-5. weiterhin kein Merge und kein Publish ohne gesonderte Freigabe.
+1. keinen zweiten Codex-Produktionslauf starten;
+2. die Codex-Eintrittsarchitektur so isolieren, dass der System-4-Worker tatsächlich zuerst und ausschließlich seine System-4-Tür sieht, ohne das alte Produktionssystem zu verändern oder dessen Schutzregeln abzuschwächen;
+3. Lösung hart positiv/negativ lokal prüfen;
+4. danach vollständigen parent-seitigen Preflight auf dem dann aktuellen Head erneut ausführen;
+5. erst dann nach den geltenden Freigaberegeln einen weiteren echten Codex-Produktionslauf ausführen;
+6. Ziel bleibt die komplette Kette bis zur bytegenau validierten `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json` hier im Chat.
 
 ## Nicht anfassen
 - `control/startmaster0107/**` und offizieller CURRENT_STATE;
+- repositoryweite alte Produktionsschutzlogik als Scheinlösung lockern;
 - Textmaschine-/Content-Regelquellen;
 - PPM-6.7.9-Paket und dessen Fachregeln;
 - PSERC/PSTE-Fachregeln;
 - WordPress-Plugin/Signaturschalter;
 - Theme/CSS/Designplugin/Designselektoren;
-- historische Konzepte 1–3 als Laufzeitabhängigkeit;
+- historische Konzepte 1–3 als System-4-Laufzeitabhängigkeit;
 - Main/Merge/Publish.
 
 ## Historie
