@@ -1,129 +1,101 @@
-# SYSTEM 4A — ISOLIERTER KAPSEL-/AUTORITÄTS-PROTOTYP
+# SYSTEM 4A — CURRENT STATE
 
 STATUS: **TEST ONLY / PRODUKTION BLOCKED / KEIN MERGE / KEIN PUBLISH**
 
 Diese Datei ist die eine aktuelle 4A-Statuswahrheit.
 
-## Zweck
+## Aktueller Remote-Stand
 
-4A ist keine neue Textmaschine. Einziger Unterschied zu System 4 ist die Autoritätsgrenze:
+PR #255, Branch `hobbyroom/system4a-capsule-v1-20260913`.
 
-- äußerer Supervisor besitzt Workflow-State, Route, Kontrollbindung und PASS-Verwendung;
-- Worker/Codex liefert ausschließlich Fachinhalt;
-- System-4-Prüfer, Design-, Qualitäts- und WordPress-Regeln bleiben unverändert;
-- FAIL bleibt derselbe Artikel;
-- Ausgang bleibt `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` plus Parent-Chat-Readback.
+Der letzte reale Ein-Artikel-Codexlauf am früheren Head `78bf4ae2fb2be0afd7ddc590afc4c481f4e1c0ee` erreichte:
 
-Wenn diese Trennung nur mit neuer Signer-/Token-/Room-/Receipt-/Package-Kaskade möglich wäre, 4A stoppen.
+`ROOT_ENTRY_PASS -> PRODUCTION_INGRESS_BOUND -> RESEARCH_PASS -> FACTS_PASS -> CONTEXT_PASS -> DRAFT_PASS -> LT PASS -> BLOCK`
 
-## Letzter vollständig lokal bewiesener Stand vor dem aktuellen Runtime-Rootfix
+Erster echter Blocker:
 
-Historischer sicherer 4A-Stand am Commit `56ace832c78e3683306c44ae187b4c7d0eb46755`:
+`FULLCHECK_PRODUCTION_HARD_BLOCK:PPM679_QUALITY_BINDING_MISSING`
 
-- Architektur / Eingang / Ausgang / Skalierung: **41/41 PASS**;
-- echter lokaler Produktions-Acceptance-Lauf mit LanguageTool 6.8 und PPM 6.7.9: **10/10 PASS**;
-- 1 / 3 / 25 / 1000 Artikel, Same-Article-Repair, Cross-UID-Grenze, Parent-Chat-Readback und die damaligen Negativfälle waren lokal grün.
+PPM selbst wurde noch nicht ausgeführt. Kein `ARTICLE_PASS`, kein Batch, kein V2-Handoff.
 
-Diese PASS-Zahlen gelten **nicht automatisch** für den danach geänderten Rootfix-Stand. Nach jeder Änderung muss der komplette lokale Workflow neu bewiesen werden.
+## Rootcause
 
-## Neuer realer Codex-Befund
+Der frühere lokale Volltest war **keine gültige Produktionsabnahme**: Er übernahm bereits vorbereitete `quality_binding`-/Link-Felder aus einem Fixture. Der reale Codexweg erzeugte diese Bindung nicht. Deshalb war lokal grün möglich, obwohl der reale Weg blockierte.
 
-Ein späterer ausdrücklich freigegebener Ein-Artikel-Codex-Lauf erreichte:
+Alle historischen Fixture-/Goldplan-PASS gelten ab jetzt nur noch als historische Architektur-/Diagnosebelege, **nicht als Produktionsabnahme**.
 
-`ROOT_ENTRY_PASS -> PRODUCTION_INGRESS_BOUND -> RESEARCH_REQUEST -> BLOCK`
+## Harte Realfall-Abnahmeregel
 
-Blocker:
+Eine Produktionsabnahme ist nur erlaubt, wenn exakt nachgewiesen ist:
 
-`WORKER_COMMAND_PATH_NOT_ACCESSIBLE:/root/.pyenv/versions/3.11.12/bin/python3`
+- `REALINPUT = TESTINPUT`
+- `REALER EINSTIEG = TESTEINSTIEG`
+- `REALER PLANERZEUGUNGSWEG = TESTPLANERZEUGUNGSWEG`
+- `REALER WORKER-AUFRUF = TEST-WORKER-AUFRUF`
+- `REALE PRÜFER = TESTPRÜFER`
+- `REALE ABHÄNGIGKEITEN = TESTABHÄNGIGKEITEN`
+- `REALER HANDOFF = TESTHANDOFF`
 
-Kein LT, kein PPM, kein `ARTICLE_PASS`, kein Batch und keine Enddatei wurden erreicht.
+Verboten als Abnahme: vorbereitete Pflichtfelder, künstlich vollständige Pläne, Mocks, Ersatzinputs, manuell ergänzte Bindungen, andere Aufrufwege oder nur äquivalente Tests.
 
-### Rootcause
+Der Test beginnt vor der ersten automatischen Erzeugung/Bindung. Wenn ein Teil nicht 1:1 real geprüft werden kann: **BLOCKED**.
 
-Das frühere Worker-Staging löste nur den privaten Worker-Dateipfad. `from_python_bundle()` übernahm weiterhin `sys.executable` des Supervisors. Im realen Codex zeigte dieses auf ein privates `/root/.pyenv/.../python3`, das für den Cross-UID-Worker `nobody` nicht ausführbar war.
+## Technische Sperren gegen die alte Testlücke
 
-Zusätzlich erbte der Worker bisher den Supervisor-`PATH`; damit bestand dieselbe versteckte Umweltkopplung auch dort.
+- Worker darf `quality_binding`, `quality_binding_hash`, `category_binding`, `category_binding_hash` nicht vorgeben.
+- Worker darf keine fertigen `runtime_order.links` vorgeben.
+- Alte vorgebundene Fixture-Kontexte werden am echten Context-Pfad hart geblockt.
+- Rohinput-Kategorie wird bereits im Produktions-Ingress gegen das exakt gepinnte PPM-6.7.9-Kategorie-Contract geprüft.
+- Der im letzten Codexlauf verwendete falsche Slug `pferdeanhaenger-beratung` blockiert jetzt **vor Research**.
+- Ein kanonischer Beratung-Slug wie `checklisten-fuer-pferdeanhaenger-beratung` passiert den Ingress.
 
-Das war eine Testlücke: Der frühere positive lokale Runtime-Test verwendete ebenfalls das lokal zugängliche `sys.executable` und reproduzierte deshalb keinen privaten Interpreter bei gleichzeitig zugänglichem Worker.
+## Neuer Supervisor-Binder
 
-## Aktueller KISS-Rootfix
+`isolated_system4a/production_plan_binding.py` bindet den nackten Produktionsplan **nach verifiziertem Fact-Pack und vor dem Draft** supervisorseitig.
 
-Der Cross-UID-Worker übernimmt jetzt **weder `sys.executable` noch den Supervisor-`PATH`**.
+Die Bindung stammt aus:
 
-Eine kleine gemeinsame Runtime-Grenze gilt:
+- exakt gepinntem PPM 6.7.9;
+- signiertem `complete-portal-category-source-v1.json`;
+- signiertem `article-type-templates.json`;
+- realem Fact-Pack;
+- deterministischer Portal-Hierarchie für die drei internen Links.
 
-1. Supervisor-Werkzeuge werden nur aus einem festen Systempfad aufgelöst;
-2. Worker-Python wird nur aus `/usr/local/bin:/usr/bin:/bin` gewählt;
-3. der gefundene Interpreter wird vor Verwendung real als Ziel-UID gestartet und auf minimale Python-Lauffähigkeit geprüft;
-4. kein zugänglicher System-Interpreter = `WORKER_PYTHON_RUNTIME_UNAVAILABLE` und harter BLOCK;
-5. Cross-UID-Worker erhalten einen festen sauberen Worker-`PATH` statt des Supervisor-`PATH`;
-6. bestehende Pfad-Preflights, Worker-Staging, Authority-Isolation und `stderr`/Exit-Code-Behandlung bleiben bestehen.
+Der Worker erhält erst danach den gebundenen Produktionskontext für den Draft. State/Route/PASS bleiben beim Supervisor.
 
-Betroffene Implementierung:
+## Link-Nachweis
 
-- `isolated_system4a/external_host.py`
+Gegen den realen Portal-Audit-Snapshot vom 30.08.2026, SHA256
+`456ee43cb2d7d3ccde8b73047d83c27a055d50961c478b310d5fe7b25e3c2ece`,
+wurde die aus dem signierten PPM-Hierarchiepfad abgeleitete URL-Regel geprüft:
 
-Neue/verschärfte Regressionen:
+- 1124 PPM-Kategorien;
+- 3 Linkrollen pro Kategorie;
+- **3372 / 3372** berechnete URLs stimmen exakt mit den realen Portal-URLs überein;
+- 0 fehlend;
+- 0 mehrdeutig.
 
-- privater Workerpfad bleibt BLOCK;
-- **privater Interpreter + zugänglicher Worker** bleibt BLOCK;
-- zugänglicher System-Interpreter + zugänglicher Worker läuft positiv;
-- Supervisor-`PATH` mit `/root/.pyenv/...` darf nicht in den Worker gelangen;
-- kein zugänglicher System-Interpreter = fail-closed;
-- echter Worker-Absturz liefert weiterhin Exit-Code + `stderr`.
+Es wird keine neue frei gepflegte Linkdatenbank eingeführt.
 
-## Lokale Beweislage des aktuellen Rootfixes
+## Aktuelle lokale Beweise — ausdrücklich KEINE Produktionsabnahme
 
-Im aktuellen lokalen Root-/`runuser`-Testcontainer wurden gezielt ausgeführt:
+Nach dem aktuellen Binder-/Ingress-Stand:
 
-- System-Python für `nobody` aufgelöst: `/usr/bin/python3.13`;
-- Cross-UID-Ausführung mit diesem Interpreter: **PASS**;
-- privater Interpreter unter `0700`: **NEGATIV PASS / korrekt geblockt**;
-- kein zugänglicher Runtimepfad: **NEGATIV PASS / korrekt geblockt**;
-- Supervisor-PATH-Leck: **NEGATIV PASS / kein Leak**;
-- privates Supervisor-Python wird durch den Worker-Start nicht übernommen: **PASS**.
+- fokussierte Ingress/Binder/Context-Prüfungen: **9/9 PASS**;
+- gesamter im rekonstruierten lokalen Testordner vorhandener 4A-Testbestand: **23/23 PASS**;
+- alter vorgebundener Fixture-Volltest wird jetzt korrekt geblockt;
+- diagnostischer Vollkettenlauf mit entfernten Fixture-Bindings erreicht real LT, Same-Article-Repair und anschließend PPM-Linkprüfung; alte Diagnose-Links werden erwartungsgemäß gegen die neue Supervisor-Bindung abgelehnt.
 
-### Noch NICHT neu bewiesen
-
-Der komplette geänderte 4A-Stand wurde nach diesem Rootfix **noch nicht** erneut als Gesamtworkflow abgenommen.
-
-Grund im aktuellen lokalen Ausführungscontainer:
-
-- GitHub-Checkout ist wegen DNS-Auflösung nicht möglich;
-- die echten LanguageTool-6.8- und PPM-6.7.9-Binärabhängigkeiten sind dort nicht vorhanden.
-
-Daher aktuell ausdrücklich **kein** neues `41/41 PASS` und **kein** neues `10/10 PASS` für den Rootfix-Stand.
-
-## Andere Felder derselben Fehlerklasse
-
-Bei der Prüfung wurde außerdem gefunden:
-
-- `os_boundary_acceptance.py` verwendet im Cross-UID-Test noch das Supervisor-`sys.executable`;
-- dies ist Testcode, aber dieselbe Umweltkopplung und muss vor einer neuen Gesamtfreigabe ebenfalls auf die gemeinsame Cross-UID-Runtime-Regel umgestellt und mitgetestet werden.
-
-Same-UID-/Managed-Agent-Wege sowie Fach-, Design-, LT-, PPM-, Batch-, WordPress- und Handoff-Regeln wurden durch den Rootfix nicht fachlich verändert.
-
-## Codex-Regel
-
-**Kein Codex-Lauf ohne ausdrückliche vorherige Freigabe des Users.**
-
-Aktuell:
-
-`REAL_CODEX_4A_RETEST = NOT AUTHORIZED`
+Diese Ergebnisse sind **keine Abnahme**, weil der exakt gleiche frische Codex-Web-Recherche-/Worker-Produktionsweg lokal noch nicht 1:1 ausgeführt ist.
 
 ## NEXT ACTION
 
-Nur lokal:
+Kein weiterer Codexlauf.
 
-1. gleiche Runtime-Regel auch im Cross-UID-Pfad von `os_boundary_acceptance.py` verwenden;
-2. aktuellen Branch vollständig lokal verfügbar machen;
-3. alle 4A-Tests mit Positiv- und Negativfällen neu ausführen;
-4. echten vollständigen LT-/PPM-Produktions-Acceptance-Lauf neu ausführen;
-5. gesamte Kette `Fachinput -> Ingress -> Cross-UID Worker -> Research -> Facts -> Context -> Draft -> LT -> Same-Article-Repair -> PPM -> Batch -> V2 -> Parent-Chat` beweisen;
-6. erst bei vollständigem PASS den Rootfix als lokal abgenommen markieren.
+Zuerst muss ein **einziger kanonischer Realfall-Produktions-Einstieg** geschaffen werden, den lokaler Realtest und Codex unverändert gemeinsam benutzen. Erst wenn genau dieser Einstieg vom echten Rohinput über frische Research/Facts/Context/Draft, echten Cross-UID-Worker, echten LT 6.8, echten PPM 6.7.9, Same-Article-Repair, Batch, V2 und Parent-Chat vollständig 1:1 PASS ist, darf eine Produktionsabnahme oder ein weiterer Codexlauf erfolgen.
 
-Bis dahin: **BLOCKED / kein Codex / kein Merge / kein Publish**.
+Bis dahin: **BLOCKED**.
 
-## Abbruchregel
+## Codex-Regel
 
-Wenn System 4 State/Route/PASS ebenfalls technisch aus der Worker-Autorität entfernt, verliert 4A seinen einzigen strukturellen Vorteil und wird als eigenes Konzept beendet.
+Kein Codex-Lauf ohne ausdrückliche vorherige Freigabe des Users. Kein Merge. Kein Publish.
