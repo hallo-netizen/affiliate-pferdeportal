@@ -15,8 +15,6 @@ Separate Python-Module sind nicht automatisch echte Handoffs. `content_guard` un
 ### Korrektur nach Nutzerprüfung
 Die aktuell in System 4 noch vorhandene feste Bindung auf sieben Artikel und `Beratung` ist **kein Entscheidungskriterium für 4a**. Diese Bindungen werden in System 4 separat entfernt und dürfen daher nicht als struktureller Vorteil von 4a gewertet werden.
 
-Auch ein Signing-/Direct-Import-Widerspruch ist zunächst ein konkreter Anschlussfehler und kein Beweis dafür, dass die gesamte System-4-Architektur schlechter ist.
-
 ### Gültiger 4a-Prüfmaßstab
 4a muss gegen ein **bereinigtes System 4** bestehen. Maßgeblich sind nur:
 1. echte Laufzeit-/Zustandsautoritäten;
@@ -27,21 +25,53 @@ Auch ein Signing-/Direct-Import-Widerspruch ist zunächst ein konkreter Anschlus
 6. Flexibilität für neue Beitragsarten;
 7. Automatisierbarkeit und Wiederanlauf ohne Neustart des Gesamtprozesses.
 
-### Historische Sackgassen, die 4a nicht wiederholen darf
+### Historische Sackgassen, die nicht wiederholt werden dürfen
 1. H7/H8: starke Ein-Tür-Sicherheit, aber viele Räume/Tokens/Receipts/Packages und dadurch neue Übergabeprobleme.
 2. Signer-/Producer-Schleifen: derselbe fehlende Anschluss wurde unter neuen Namen wiederholt gesucht; Erklärung wurde mit Fortschritt verwechselt.
 3. Alte Workflowgenerationen: neue Runner/Gates/Signer als Reaktion auf einzelne Blocker führten zu Schutzarchitektur statt Produktion.
 4. Chat-Drift: textuelle Verbote reichten nicht; der ausführende Chat übernahm trotzdem Planungshoheit.
-5. System-4-schlechter 7er-Lauf: zu schwache Recherche-/Fact-Pack-Bindung plus artikelübergreifende Textschablonen; Einzelartikelprüfer allein reichten nicht.
+5. Schlechter früher System-4-7er-Lauf: zu schwache Recherche-/Fact-Pack-Bindung plus artikelübergreifende Textschablonen; Einzelartikelprüfer allein reichten nicht.
 6. Falsche Autoritätsinterpretation: statische Hinweise wurden zeitweise stärker gewichtet als der tatsächlich gebundene aktuelle Prüferzustand.
 
-### Konsequenz
-4a baut keine neue Fachmaschine. Es untersucht ausschließlich, ob der komplette identische Fachworkflow mit weniger echten Zustands-/Übergabegrenzen und stärkerer Außenabschottung ausgeführt werden kann als ein bereinigtes System 4.
+### Neuer struktureller Befund im aktuellen System-4-Controller
+Der Controller bietet technisch mehrere Produktions-/Ausgangswege an:
+- BASIC: `check` → `release`;
+- FULL: `fullcheck` → `OUTPUT_GATE_REQUIRED`;
+- SIGNED: `prepare-release` → `SIGNATURE_REQUIRED` → `finalize-signed`.
 
-### WordPress-/Ausgangsanforderung
-Aktuell verifizierter System-4-Zielvertrag nennt als direkten Ausgang JSON / `application/json`, `WORDPRESS_DIRECT_IMPORT`, `Portal SEO Editorial Plan Compiler 0.28.23`, PPM 6.7.9, `direct_wordpress_upload_ready=true` nach allen PASS-Prüfungen, keine erforderlichen Downstream-Komponenten und `publish_allowed=false`.
+Der verbindliche System-4-Zielvertrag beschreibt dagegen nur den FULL-Weg mit anschließendem Batch-/Direct-Import-Handoff und erklärt Signing für diesen Pfad ausdrücklich als ausgeschaltet.
 
-Die finale 4a-Struktur muss dieselben fachlich erforderlichen Artikel-/Prüfdaten erhalten. Universalität für Artikelzahl und Beitragsart ist Pflicht, aber kein Vergleichsvorteil gegenüber System 4, weil diese Hardcodes dort separat entfernt werden.
+**Folgerung:** Der relevante Härtungsbedarf ist nicht eine neue 4a-Maschine, sondern die Entfernung technisch erreichbarer Parallelstraßen aus Konzept 4.
+
+### WordPress-Importer 0.28.23 frisch geprüft
+Library-ZIP:
+`portal-seo-editorial-plan-compiler_0.28.23_SYSTEM4_DIRECT_IMPORT.zip`
+
+SHA-256:
+`22a8459b64db488852841d894d887ec51e531a0872ee5f33afdd64e43a8a8c7f`
+
+Ergebnis:
+- generischer Zielvertrag `SYSTEM4_WORDPRESS_HANDOFF_V1` bereits vorhanden;
+- Importer verlangt mindestens einen Artikel, keine feste 7er-Grenze;
+- `article_type` ist gebunden, aber nicht auf `Beratung` hardcodiert;
+- vor erstem Write werden Kategorie, Slug und Kollisionen aller Artikel geprüft;
+- nur WordPress-Drafts;
+- finaler Content-Hash und Metadaten werden per Readback kontrolliert;
+- bei Fehler werden bereits erzeugte Posts des Imports zurückgerollt;
+- Redaktionsplan wird weder gelesen noch beschrieben;
+- `publish_allowed=false`.
+
+Der vorgelagerte `PSERC_TEXTMACHINE_METADATA_BATCH_V2` übergibt exakt fünf skalare Felder (`title`, `target_keyword`, `category`, `article_type`, `plan_slot`), verbietet Inhalts-/Design-/Promptpayload und setzt Artikelgrenzen auf 0 = unbegrenzt.
+
+Details dauerhaft in `WORDPRESS_HANDOFF.md`.
+
+### Architekturentscheidung
+**Ein eigenständiges 4a-System wird aktuell verworfen.**
+
+Die 4a-Zielidee bleibt als Audit-/Härtungsmaßstab bestehen. Konzept 4 soll selbst auf folgende Form reduziert werden:
+`1 Controller + N Artikelzustände + unveränderte Prüfer als interne Aufrufe + 1 finaler generischer WordPress-Ausgang`.
+
+Das ist keine fünfte Textmaschine, sondern die Bereinigung des bereits weitgehend passenden Konzept 4.
 
 ### Teststatus
-Noch kein 4a-Code-PASS. Büro-/Ziel-/Hobbyraumstruktur ist Dokumentation und keine Produktionsfreigabe.
+Noch kein neuer System-4-Gesamt-PASS. Diese Architekturprüfung und die WordPress-Codeprüfung sind kein Produktionsfreigabenachweis.
