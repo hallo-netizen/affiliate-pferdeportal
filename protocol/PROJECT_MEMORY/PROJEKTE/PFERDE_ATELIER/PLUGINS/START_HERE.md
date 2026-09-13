@@ -1,0 +1,55 @@
+# PFERDE-ATELIER – BÜRO PLUGINS
+
+STAND: 2026-09-13
+STATUS: AKTIV / ERSTINVENTAR + ARTEFAKT-SYNC IM AUFBAU
+
+## 1-KLICK-ÜBERSICHT
+
+**WAS IST DAS?**  
+Das zentrale Plugin-Büro des Pferde-Ateliers. Es hält den Überblick über alle im Pferde-Atelier verwendeten/entwickelten Plugins und deren isolierte aktuelle Ausgabeartefakte.
+
+**HIER BIST DU RICHTIG, WENN …**  
+du ein Pferde-Atelier-Plugin finden, den aktuellen isolierten Pluginstand entnehmen oder nach einer echten Pluginentwicklung/-aktualisierung den Ausgabestand synchronisieren willst.
+
+**DU DARFST …**  
+die autoritative Fach-/Releasequelle frisch lesen, daraus ein isoliertes Pluginartefakt ableiten, hashen, prüfen und im Ausgabeschrank aktualisieren.
+
+**DU DARFST NICHT …**  
+hier Fach-/Release-/LIVE-Wahrheit neu erfinden, aus alten Mastern raten, allgemeingültige Module zu Pferde-spezifischen Modulen umklassifizieren oder Secrets speichern.
+
+**ALS NÄCHSTES …**  
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → `REGISTER.md` → bei Artefaktarbeit `SYNC_VERTRAG.md`.
+
+## Rolle
+
+Das PLUGINS-Büro ist Inventar-, Update- und Ausgabepult.
+
+Autoritative technische/Fach-/Release-/LIVE-Wahrheit bleibt immer im zuständigen Fachbüro bzw. an dessen gebundener technischer Hauptquelle.
+
+`ISOLIERTE_PLUGINS/<PLUGIN-ID>/CURRENT.zip` ist ausschließlich eine hashgebundene, abgeleitete Ausgabekopie dieses autoritativen Stands.
+
+## Klassengrenze
+
+Allgemeingültige Plugin-Kerne bleiben unter `ALLGEMEINGUELTIGE_BAUSTEINE/` autoritativ.
+Eine Kopie im Pferde-Atelier-PLUGINS-Büro bedeutet nur: dieses Plugin wird im Pferde-Atelier verwendet. Sie ändert die Modulklasse nicht.
+
+Pferde-spezifische Plugin-Kerne bleiben fachlich im jeweiligen Pferde-Atelier-Büro autoritativ.
+
+## Harte Vorsperre
+
+Vor jeder technischen Aktion:
+`protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → relevante autoritative Fehlerquelle frisch lesen.
+Treffer = bekannten Fehlerweg nicht wiederholen.
+
+## Zentrale Leitungen
+
+- Handlungsweg: `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
+- Fehlerwegweiser: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
+- Warum/Änderungen: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- Zielverträge: `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+
+## Abschlussregel
+
+Wenn ein Chat tatsächlich ein Plugin entwickelt oder aktualisiert hat, muss vor Abschluss geprüft werden, ob dessen isolierte `CURRENT.zip` + `MANIFEST.md` hier auf den neuen belegten Stand synchronisiert wurden.
+
+Kann der aktuelle Pluginstand nicht vollständig und eindeutig aus der autoritativen Quelle erzeugt/bezogen werden: nicht raten, bisherigen Stand nicht ersetzen, `Plugins: BLOCKED`.
