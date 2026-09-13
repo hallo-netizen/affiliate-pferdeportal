@@ -170,10 +170,61 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
     table_statement=str(quality.get('table_value_statement') or '').strip()
     table_min=int(static['derived_binding_requirements']['table_value_statement_minimum_words'])
     if len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',table_statement,re.UNICODE))<table_min: raise AuthoringContractError('TABLE_VALUE_STATEMENT_BINDING_INVALID')
+    # Validate immutable runtime/fact bindings against the same bound fact-pack authority
+    # before any draft may be accepted. These are not repairable by editing article text.
+    required_runtime_fields=('order_id','article_type','title','slug','subject_scope','subject_label','lead','conclusion','links','allowed_fact_ids')
+    for field in required_runtime_fields:
+        value=runtime.get(field)
+        if value is None or value=='' or value==[]:
+            raise AuthoringContractError('RUNTIME_ORDER_INCOMPLETE:'+field)
+    if str(runtime.get('article_type') or '')!=article_type:
+        raise AuthoringContractError('RUNTIME_ORDER_ARTICLE_TYPE_MISMATCH')
+    if str(runtime.get('title') or '')!=str(article.get('title') or ''):
+        raise AuthoringContractError('RUNTIME_ORDER_TITLE_MISMATCH')
+    if str(plan.get('source_snapshot_id') or '')!=str(fact_pack.get('source_snapshot_id') or ''):
+        raise AuthoringContractError('PLAN_FACT_PACK_SNAPSHOT_MISMATCH')
+
+    claims=fact_pack.get('claims') if isinstance(fact_pack.get('claims'),list) else []
+    if len(claims)<3:
+        raise AuthoringContractError('FACT_PACK_CLAIM_COUNT_INVALID')
+    claim_map={}
+    for i,claim in enumerate(claims):
+        if not isinstance(claim,Mapping):
+            raise AuthoringContractError(f'FACT_PACK_CLAIM_INVALID:{i}')
+        fact_id=str(claim.get('fact_id') or '').strip()
+        if not fact_id:
+            raise AuthoringContractError(f'FACT_PACK_FACT_ID_MISSING:{i}')
+        if fact_id in claim_map:
+            raise AuthoringContractError('FACT_PACK_FACT_ID_DUPLICATE:'+fact_id)
+        if str(claim.get('claim_status') or '')!='FULLY_SUPPORTED':
+            raise AuthoringContractError('FACT_PACK_CLAIM_NOT_SUPPORTED:'+fact_id)
+        article_types=claim.get('article_types') if isinstance(claim.get('article_types'),list) else []
+        if article_types and article_type not in [str(v) for v in article_types]:
+            raise AuthoringContractError('FACT_PACK_CLAIM_TYPE_MISMATCH:'+fact_id)
+        claim_snapshot=str(claim.get('snapshot_id') or '').strip()
+        if claim_snapshot and claim_snapshot!=str(fact_pack.get('source_snapshot_id') or ''):
+            raise AuthoringContractError('FACT_PACK_CLAIM_SNAPSHOT_MISMATCH:'+fact_id)
+        claim_map[fact_id]=claim
+
+    allowed_raw=runtime.get('allowed_fact_ids')
+    if not isinstance(allowed_raw,list) or not allowed_raw:
+        raise AuthoringContractError('RUNTIME_ALLOWED_FACT_IDS_MISSING')
+    allowed_fact_ids=[]
+    seen_allowed=set()
+    for raw in allowed_raw:
+        fact_id=str(raw or '').strip()
+        if not fact_id:
+            raise AuthoringContractError('RUNTIME_ALLOWED_FACT_ID_EMPTY')
+        if fact_id in seen_allowed:
+            raise AuthoringContractError('RUNTIME_ALLOWED_FACT_ID_DUPLICATE:'+fact_id)
+        if fact_id not in claim_map:
+            raise AuthoringContractError('RUNTIME_ALLOWED_FACT_ID_UNKNOWN:'+fact_id)
+        seen_allowed.add(fact_id)
+        allowed_fact_ids.append(fact_id)
+
     schema=type_def.get('type_meta_schema') if isinstance(type_def.get('type_meta_schema'),Mapping) else {}
     required_type_fields=schema.get('required') if isinstance(schema.get('required'),list) else []
     type_values={k:runtime.get(k) for k in required_type_fields if k in runtime}
-    allowed_fact_ids=runtime.get('allowed_fact_ids') if isinstance(runtime.get('allowed_fact_ids'),list) else [r.get('fact_id') for r in fact_pack.get('claims',[]) if isinstance(r,Mapping)]
     return {
       'contract':CONTRACT,
       'authority':{'source_mode':'READ_ONLY_BOUND_AUTHORITIES_ONLY','external_rule_injection_allowed':False,'ppm_version':production_checks.PPM_VERSION,'ppm_package_sha256':production_checks.PPM_PACKAGE_SHA256,'structure_contract_sha256':_stable(structure),'quality_binding_sha256':_stable(dict(quality))},
