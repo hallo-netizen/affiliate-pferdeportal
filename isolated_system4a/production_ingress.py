@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -48,6 +49,47 @@ BATCH_STATUS = 'READY_FOR_TEXTMACHINE_METADATA_INTAKE'
 ITEM_KEYS = {'title', 'target_keyword', 'category', 'article_type', 'plan_slot'}
 
 
+def _load_ppm_category_contract() -> tuple[dict[str, Any], str]:
+    path = REPO / 'isolated_system4' / 'production_checks.py'
+    _require(path.is_file(), 'SYSTEM4_PRODUCTION_CHECKS_MISSING')
+    spec = importlib.util.spec_from_file_location('_system4a_production_checks', path)
+    _require(spec is not None and spec.loader is not None, 'SYSTEM4_PRODUCTION_CHECKS_LOAD_FAILED')
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:
+        raise ProductionIngressError('SYSTEM4_PRODUCTION_CHECKS_LOAD_FAILED') from exc
+    package = REPO / str(module.PPM_PACKAGE_REL)
+    _require(package.is_file(), 'PPM679_PACKAGE_MISSING')
+    _require(module.file_sha256(package) == module.PPM_PACKAGE_SHA256, 'PPM679_PACKAGE_HASH_MISMATCH')
+    rel = 'portal-production-machine/contracts/complete-portal-category-source-v1.json'
+    try:
+        with zipfile.ZipFile(package) as zf:
+            raw = zf.read(rel)
+    except Exception as exc:
+        raise ProductionIngressError('PPM679_CATEGORY_CONTRACT_MISSING') from exc
+    try:
+        contract = json.loads(raw.decode('utf-8'))
+    except Exception as exc:
+        raise ProductionIngressError('PPM679_CATEGORY_CONTRACT_JSON_INVALID') from exc
+    _require(isinstance(contract, dict) and isinstance(contract.get('categories'), list), 'PPM679_CATEGORY_CONTRACT_INVALID')
+    declared = str(contract.get('contract_self_sha256') or '')
+    copy = dict(contract); copy.pop('contract_self_sha256', None)
+    actual = hashlib.sha256(json.dumps(copy, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+    _require(declared == actual, 'PPM679_CATEGORY_CONTRACT_SELF_HASH_MISMATCH')
+    return contract, hashlib.sha256(raw).hexdigest()
+
+
+def _validate_ppm_category(article: dict[str, Any]) -> None:
+    contract, _ = _load_ppm_category_contract()
+    slug = str(article.get('category') or '').strip()
+    article_type = str(article.get('article_type') or '').strip().lower()
+    matches = [c for c in contract['categories'] if isinstance(c, dict) and c.get('category_slug') == slug]
+    _require(len(matches) == 1, 'PPM679_CATEGORY_NOT_CANONICAL:' + slug)
+    category = matches[0]
+    _require(str(category.get('theme') or '').strip().lower() == article_type, 'PPM679_CATEGORY_ARTICLE_TYPE_MISMATCH:' + slug)
+
+
 def _validate_external_business_contract(value: dict[str, Any]) -> None:
     _require(set(value) == EXTERNAL_TOP_KEYS, 'EXTERNAL_SNAPSHOT_SCHEMA_INVALID')
     _require(value.get('contract') == EXTERNAL_CONTRACT, 'EXTERNAL_SNAPSHOT_CONTRACT_INVALID')
@@ -68,6 +110,7 @@ def _validate_external_business_contract(value: dict[str, Any]) -> None:
         slot = raw['plan_slot']
         _require(len(slot) == 64 and all(c in '0123456789abcdef' for c in slot), 'EXTERNAL_PLAN_SLOT_INVALID')
         _require(slot not in seen_slots, 'EXTERNAL_PLAN_SLOT_DUPLICATE')
+        _validate_ppm_category(raw)
         seen_slots.add(slot)
 
 
