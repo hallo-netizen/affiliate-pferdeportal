@@ -4,13 +4,12 @@ Status dieses Dokuments: **Belegdatei, keine zweite CURRENT_STATE**. Die aktuell
 
 ## Gebundener Prüfstand
 
-Ausgangspunkt des vollständigen Prüfversuchs war PR #238, Branch `hobbyroom/system4-true-single-room-v1`, Head `8da5a3f45ff42d3fae652d0a64071a9ea10770a4`.
+PR #238, Branch `hobbyroom/system4-true-single-room-v1`.
 
-Der ausführbare System-4-Kern und die aktuellen `test_*.py`-Dateien wurden gegen ihre GitHub-Blob-SHAs abgeglichen. Insbesondere wurde die zunächst lokal abweichende `batch_gate.py` anschließend bytegleich auf Blob `753dc105b0baacff21b67e0fb91826b5f0a7dcd4` rekonstruiert; `test_draft_bound_rebind.py` wurde bytegleich auf `f7f43264de3f50d90fb58558df00a6d590507771` nachgezogen.
+Der ausführbare System-4-Kern und die aktuellen `test_*.py`-Dateien wurden vor dem finalen Preflight gegen ihre GitHub-Blob-SHAs abgeglichen. Seit dem vollständig geprüften Code-Head wurden bis zur Auflösung des PPM-Blockers ausschließlich Status-/Belegdokumente verändert; kein System-4-Ausführungscode und kein Test wurde dafür umgeschrieben.
 
-## Tatsächlich ausgeführte Prüfungen
+## Universalitätsnachweis
 
-### Universalität
 Frisch positiv geprüft:
 - 1 Artikel;
 - 3 Artikel;
@@ -23,66 +22,93 @@ Frisch positiv geprüft:
 
 Damit ist die frühere feste Bindung auf `7` bzw. `Beratung` im aktuellen System-4-Laufzeit-/Handoffvertrag nicht mehr vorhanden. Die 7er-`Beratung`-Fixture bleibt ausschließlich Regressionsevidenz.
 
-### NO-LEGACY
-Frisch ausgeführt über `production_checks.no_legacy_runtime_dependencies(...)`:
-- `status = PASS`
-- `legacy_import_count = 0`
+## Historischer letzter Blocker und dessen reale Auflösung
 
-### Einzelne aktuelle Tests
-Vor dem Gesamtlauf wurden die aktuellen Teilstrecken separat ausgeführt, darunter:
-- Content-/Design-/Universal-/Codex-Economy-Tests;
-- Indexed Ingress;
-- Draft-Rebind;
-- Release Boundary;
-- Repair Continuity;
-- Batch Gate;
-- Handoff Transport;
-- lokaler positiver/negativer E2E.
+Der erste vollständige Gesamtlauf hatte **87 Tests, 86 PASS, 1 FAIL**. Der einzige FAIL war:
 
-Alle ausführbaren Logikpfade waren PASS.
+`test_authoritative_textmachine_bindings_are_unchanged_from_proven_full_rule_pass`
 
-### Vollständiger Testlauf
-Ausgeführt:
+Ursache war ausschließlich, dass die gebundene Binärdatei
+`control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`
+im lokalen Testcontainer physisch fehlte.
+
+Die Repo-Historie wurde anschließend geprüft:
+- Commit `63162490c344f056d033ec5e82cf94fdbddf204d` legte die **exakten PPM-6.7.9-Runtime-Chunks** `ppm.00` bis `ppm.06` an;
+- Commit `17f4c92fc00a7bb59c6169bb1a9fefbd9b7aa659` materialisierte daraus die gebundene ZIP und entfernte die Chunks;
+- Ziel-Git-Blob der fertigen ZIP: `151e9d6f908453dfc5b4acb497c4927a3f03c940`.
+
+In der vorhandenen Dateibibliothek wurden die historischen Original-Zwischendateien `ppm.00.b64` bis `ppm.06.b64` gefunden und lokal materialisiert. Es wurde **kein PPM-Inhalt erfunden, repariert oder verändert**.
+
+Nach Base64-Decodierung wurden alle sieben Chunks mit `git hash-object` gegen ihre historischen Repo-Blob-SHAs geprüft:
+- `ppm.00` -> `e8d476663493d7b8e008889641fcfe377c204b57` PASS;
+- `ppm.01` -> `298b49b36cb4602bf6162a198dcf6cde70fcd738` PASS;
+- `ppm.02` -> `b7050533358d07bc4b06582735fff220146cba54` PASS;
+- `ppm.03` -> `0acb16054565941d5c1ab935673ecd2aed1db25e` PASS;
+- `ppm.04` -> `fce1a3984fdad769c1bbc9d47bde9cf259940cb9` PASS;
+- `ppm.05` -> `7059c230dd6b2e65c4beb562eaa7cd7d892b0c1b` PASS;
+- `ppm.06` -> `cfdc5cf0a6fe9512932b6c1db128165b47e4e66e` PASS.
+
+Die unverändert zusammengesetzte PPM-ZIP ergibt:
+- Größe: `1614485` Bytes;
+- Git-Blob: `151e9d6f908453dfc5b4acb497c4927a3f03c940` PASS;
+- SHA256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1` PASS;
+- `unzip -t`: PASS, keine Fehler im komprimierten Inhalt.
+
+Damit ist nachgewiesen, dass lokal exakt die bereits gebundene PPM-6.7.9-Datei geprüft wurde.
+
+## Finaler vollständiger Testlauf
+
+Nach Einbringen ausschließlich dieser unveränderten, hashgleichen PPM-Datei in den lokalen Prüfpfad ausgeführt:
 
 `PYTHONPATH=isolated_system4 python3 -m unittest discover -s isolated_system4 -p 'test_*.py' -v`
 
 Ergebnis:
-- **87 Tests insgesamt**
-- **86 PASS**
-- **1 FAIL**
-- kein zweiter Fehler/Fail.
+- **87 Tests insgesamt**;
+- **87 PASS**;
+- **0 FAIL**;
+- **0 ERROR**.
 
-Einziger FAIL:
-`test_authoritative_textmachine_bindings_are_unchanged_from_proven_full_rule_pass`
+Der zuvor einzige PPM-Bindungstest ist dabei ausdrücklich PASS:
+`test_authoritative_textmachine_bindings_are_unchanged_from_proven_full_rule_pass`.
 
-Konkrete Ursache:
-`ppm_path.is_file() == False`
+## Finaler lokaler E2E
 
-Der Testcontainer enthält die gebundene Binärdatei
-`control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`
-nicht physisch.
+Separat ausgeführt:
 
-GitHub bestätigt die Datei im gebundenen Repository/Head als Blob `151e9d6f908453dfc5b4acb497c4927a3f03c940`. Der aktuelle System-4-Code bindet den erwarteten Paket-SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`. Der verfügbare GitHub-Connector kann die Binärbytes jedoch nicht in den lokalen Testcontainer materialisieren; `fetch_blob` endet beim Binärinhalt mit UTF-8-Decodierfehler. Auch im lokalen Arbeitsumfeld wurde keine vorhandene Kopie gefunden.
+`PYTHONPATH=isolated_system4 python3 -m unittest isolated_system4.test_local_end_to_end_chat_handoff -v`
 
-Das ist deshalb **kein behaupteter PPM-PASS und kein System-4-Gesamt-PASS**. Es ist ein konkreter lokaler Infrastruktur-/Materialisierungsblocker für genau einen Bindungsnachweis.
+Ergebnis:
+- **5/5 PASS**.
 
-## Lokaler E2E-Befund
-Der aktuelle `test_local_end_to_end_chat_handoff.py` wurde ausgeführt.
+Enthalten sind:
+- realer PPM-/Textmaschinen-Bindungsnachweis: PASS;
+- positiver Weg vom System-4-/Codex-Einstieg bis zur exakten V2-Elternchat-Rekonstruktion: PASS;
+- Fake-Fact-Negativtest: BLOCKED/PASS;
+- Design-Drift-Negativtest: BLOCKED/PASS;
+- historische artikelübergreifende Template-Wiederholung: BLOCKED/PASS.
 
-Ausführbare E2E-Logik:
-- positiver Weg vom Codex-Einstieg über gebundene Research/Facts/Context/Draft/Fullcheck-Mocks bis Batch-Gate und exakter V2-Elternchat-Rekonstruktion: PASS;
-- erfundener Fact: BLOCKED/PASS des Negativtests;
-- Design-Drift vor Fullcheck: BLOCKED/PASS des Negativtests;
-- historische artikelübergreifende Template-Wiederholung am finalen Handoff: BLOCKED/PASS des Negativtests.
+## Finaler NO-LEGACY-Nachweis
 
-Der fünfte E2E-Test ist ausschließlich an der fehlenden lokalen PPM-ZIP-Datei blockiert.
+Frisch ausgeführt über:
+`production_checks.no_legacy_runtime_dependencies(...)`
 
-## Beweisgrenze
-Daraus darf aktuell nur gefolgert werden:
-- Universalitätskorrektur 1..N: lokal bewiesen;
-- keine System-4-Beitragsart-Whitelist: lokal bewiesen;
-- aktuelle System-4-Logiktests: 86/86 ausführbare Tests PASS;
+Ergebnis:
+- `status = PASS`;
+- `legacy_import_count = 0`;
+- Allowlist ausschließlich gebundene PPM-ZIP und LanguageTool 6.8 commandline.jar nach exaktem SHA256.
+
+## Beweisgrenze / Schlussstatus
+
+Lokal nachgewiesen:
+- universeller nichtleerer Batch `1..N` ohne künstliche System-4-Obergrenze: PASS;
+- keine System-4-Beitragsart-Whitelist: PASS;
+- kompletter aktueller Unittestbestand: **87/87 PASS**;
+- lokaler E2E: **5/5 PASS**;
 - NO-LEGACY: PASS;
-- vollständiger Gesamt-PASS: **NEIN**, weil der reale lokale PPM-Paket-Bindungsnachweis in diesem Container mangels Binärdatei nicht ausgeführt werden konnte.
+- reale gebundene PPM-6.7.9-ZIP: Hash-/Blob-/ZIP-Integrität PASS.
 
-Kein Codex-Produktionslauf wurde gestartet. Kein Merge. Kein Publish. Textmaschine, PPM, PSERC/PSTE, WordPress-Plugin und Design wurden nicht verändert.
+Der frühere Materialisierungsblocker ist **geschlossen**. Aktuell ist kein offener System-4-Code-/lokaler-Preflight-Blocker bekannt.
+
+Nicht behauptet wird ein bereits ausgeführter realer Codex-Produktionsnachweis. **Kein Codex-Produktionslauf wurde gestartet.** Kein Merge. Kein Publish. Textmaschine, PPM, PSERC/PSTE, WordPress-Plugin und Design wurden nicht verändert.
+
+Nächste zulässige Stufe ist ausschließlich nach ausdrücklicher Nutzerfreigabe: **ein echter Codex-Lauf des konkret gebundenen Input-Batches** durch dieselbe fail-closed System-4-Kette.
