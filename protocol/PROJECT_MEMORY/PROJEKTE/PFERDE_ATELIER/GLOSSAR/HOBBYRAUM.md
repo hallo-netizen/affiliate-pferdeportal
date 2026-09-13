@@ -1,7 +1,7 @@
 # GLOSSAR – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCH PASS / LIVE-READBACK OFFEN
+STATUS: AKTIV / 0.2.10-rc7 TECHNISCH HARDTEST PASS / PAKET BLOCKED / LIVE OFFEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,18 +9,21 @@ STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCH PASS / LIVE-READBACK OFFEN
 Der einzige aktuelle Arbeitsraum des Büros GLOSSAR.
 
 **DU DARFST …**  
-den exakt getesteten 0.2.9-Kandidaten für den realen Pferde-Readback verwenden und danach nur anhand des tatsächlichen Live-Ergebnisses weiterarbeiten.
+auf dem gebundenen Branch ausschließlich vom frisch geprüften 0.2.10-rc7-Stand weiterarbeiten, zuerst die Paket-/Pluginbüro-Pflichten schließen und erst danach eine neue reale Pferde-Übergabe erzeugen.
 
 **DU DARFST NICHT …**  
-`main` verändern, 0.2.6/0.2.7/0.2.8 erneut ausgeben, unterschiedliche Paketbytes unter derselben Versionsnummer erzeugen, die alte falsche Kategorie-Acceptance wiederverwenden oder aus CI einen Pferde-LIVE-PASS ableiten.
+`main` verändern, 0.2.6/0.2.7/0.2.8 erneut ausgeben, 0.2.9 als aktuellen Entwicklungsstand behandeln, unterschiedliche Paketbytes unter derselben Version erzeugen, aus CI einen Pferde-LIVE-PASS ableiten oder den Altbestand automatisch löschen.
 
 **ALS NÄCHSTES …**  
-exakt das gated getestete 0.2.9-ZIP über WordPress installieren und real prüfen.
+aus dem exakt getesteten rc7-Stand einen regelkonformen gated Releasekandidaten bauen und prüfen; danach `PROJEKTE/PFERDE_ATELIER/PLUGINS/` samt hashgebundenem `CURRENT.zip` + `MANIFEST.md` synchronisieren; erst dann Nutzer-Live-Readback.
 
 ## ARBEITSORT
 
 Branch:
 `hobbyroom/glossar-livefail-red-green-20260913`
+
+Frisch geprüfter Head vor Closeout-Dokumentation:
+`1e74b7454e84f97182dbb185614371a48157bc21`
 
 Autoritative Fehlerquelle:
 `FEHLERQUELLEN.md`
@@ -28,86 +31,64 @@ Autoritative Fehlerquelle:
 Autoritativer Stand:
 `CURRENT_STATE.md`
 
-## HISTORIE / VERBRAUCHTE VERSIONEN
+Produktionswahrheit Begriffe:
+`BEGRIFFSREGISTER.md`
 
-- 0.2.6: historische Zwischenversion / nicht verwenden.
+## VERBRAUCHTE / ABGELÖSTE VERSIONEN
+
+- 0.2.6: historisch / nicht verwenden.
 - 0.2.7: LIVE FAIL / nicht verwenden.
-- 0.2.8: **LIVE FAIL / nicht verwenden.**
+- 0.2.8: LIVE FAIL / nicht verwenden.
+- 0.2.9: letzter vorhandener gated technischer Kandidat, aber durch aktive 0.2.10-Entwicklung als CURRENT/NEXT ACTION abgelöst; kein bestätigter Pferde-LIVE-PASS.
+- 0.2.10-rc1 bis rc6: Entwicklungs-/Diagnosestufen, nicht ausgeben.
 
-Realer 0.2.8-Readback:
-1. Bild höher, aber nicht responsive;
-2. Kategorien nicht dem Startseiten-Design angepasst;
-3. Einzelartikel laufen ins Leere.
+## 0.2.10-rc7 TECHNISCHER STAND
 
-## VERBINDLICHE KORREKTUR
+Run `34762048546` → SUCCESS.
 
-Der alte Kategorietest war falsch. Er verlangte `kein Hero / keine Tools` und prüfte damit das Gegenteil der Nutzeranforderung.
+Jobs:
+- Build `103736483729` PASS
+- Fresh/Positiv/Negativ/Regression `103736483608` PASS
+- echtes Design 1.50.469 + Browser-Klickkette + Loop-Poison `103736483696` PASS
+- no-package-gate `103736720142` PASS
 
-Ab 0.2.9 gilt hart:
-- Kategorie hat echten Kategorieinhalt;
-- **plus denselben vollständigen visuellen Glossar-Rahmen wie die Startseite**;
-- Hero + Suche/A–Z + Icon-Navigation sind Pflicht;
-- Hero-Kicker `WISSEN`;
-- ein gerenderter Begriff-Link muss im Browser tatsächlich geklickt werden und auf die echte Einzelbegriffseite führen.
+Der Browser hat nicht nur URLs geprüft, sondern tatsächlich geklickt:
+`Gesundheit → Hufbein`, danach den neuen Cluster `Hufrehe → Strahlfäule → Hufabszess → Gesundheit`.
 
-## 0.2.9 TECHNISCHER KANDIDAT
+Marker:
+- `UGE0210_EXISTING_SINGLE_CLICK_PASS`
+- `UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS`
+- `UGE0210_SINGLE_SURVIVES_EMPTY_MAIN_LOOP_PASS`
+- `UGE0210_PFERDE_BREADCRUMB_AXIS_PASS`
 
-Finaler Run:
-`34757795593`
+Damit ist der technische Klickbarkeitsbeweis erbracht. Die reale Pferde-Seite wurde damit nicht abgenommen.
 
-Head:
-`f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
+## AKTUELLER BLOCKER
 
-SUCCESS:
-- Build `103725094481`
-- Fresh + Regression + Null-Rewrite `103725094537`
-- Update 0.2.8 → 0.2.9 + erneuter Null-Rewrite `103725094620`
-- Real Design 1.50.469 + Browser + Null-Rewrite `103725094378`
-- Gated Package `103725295224`
+Der rc7-Hardtest endet ausdrücklich mit:
+`UGE0210RC7_HARD_GATES_PASS_NO_PACKAGE`.
 
-Real-Design Browser beweist:
-- AJAX sichtbar und korrekt positioniert;
-- echtes Bild responsive bei 1200/900/720/500;
-- Kategorie-Vollrahmen vorhanden;
-- tatsächlicher gerenderter Hufbein-Link wird angeklickt und liefert echtes `uge-single-wrap` + Inhalt;
-- Negativfälle PASS.
+Es gibt deshalb noch kein rc7-Installations-ZIP, keinen rc7-ZIP-SHA und keine zulässige `CURRENT.zip`-Synchronisierung.
 
-## ROUTING-HARDLOCK GEGEN TOTE EINZELLINKS
+Zusätzlich war beim Abschlusscheck der vom Nutzer vorgeschriebene Pfad
+`PROJEKTE/PFERDE_ATELIER/PLUGINS/`
+nicht vorhanden. Solange Paket und Pluginbüro nicht regelkonform hergestellt und geprüft sind, bleibt die Übergabe BLOCKED.
 
-0.2.9 verwendet Rewrite-Schema 7 und zusätzlich einen direkten Request-Binder für Glossar-Begriff und Glossar-Gruppe.
+## NÄCHSTE HARTE REIHENFOLGE
 
-Der Test löscht **alle** gespeicherten Glossar-Rewrite-Regeln, obwohl Schema 7 bereits aktuell ist. Danach müssen die URLs weiter funktionieren. Dadurch hängt die Einzelroute nicht mehr allein davon ab, ob WordPress/Cache die gespeicherte Rewrite-Tabelle korrekt aktualisiert hat.
+1. rc7-Bytes als Basis binden; bei materieller Änderung neue Version verwenden.
+2. finalen/gated Kandidaten bauen.
+3. ZIP-Lesetest, Struktur, Version und SHA prüfen.
+4. erforderliche Positiv-/Negativ-/Regressionstests auf exakt diesen Paketbytes ausführen.
+5. erst danach Projekt-PLUGINS-Büro und `ISOLIERTE_PLUGINS/<PLUGIN-ID>/CURRENT.zip` + `MANIFEST.md` synchronisieren.
+6. genau einen PU-Vorgang dokumentieren.
+7. dann Installations-ZIP an Nutzer geben.
+8. Nutzer prüft real; erst nach echtem Live-Readback Fehlerstatus ändern bzw. Altbestand löschen.
 
-Native authentifizierte Draft-Preview bleibt ausdrücklich ausgenommen und ist Regression-PASS.
+## NICHT ANFASSEN
 
-## EXAKTE ÜBERGABE
-
-Nur dieses Paket:
-`universal-glossary-engine-0.2.9.zip`
-
-SHA-256:
-`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
-
-Actions-Artefakt-ID:
-`10317444708`
-
-Outer artifact digest:
-`sha256:98513772d72fc65dc4d01520086b4c7e56e165cceeea1e31147a9d6cf830c6ff`
-
-## REALER LIVE-READBACK
-
-Positiv zwingend:
-1. Hero-Bild wird beim Verkleinern real kleiner;
-2. Kategorie `Gesundheit` hat Hero, Suche/A–Z, Icon-Navigation und eigenen Kategorieinhalt;
-3. Begriffskarte anklicken → echte Einzelbegriffseite mit Titel/Inhalt;
-4. AJAX funktioniert;
-5. oberer Abstand bleibt korrekt.
-
-Negativ zwingend:
-1. unbekannter Begriff 404;
-2. Draft nicht öffentlich;
-3. normale Beiträge unverändert;
-4. kein globaler Layoutshift;
-5. Draft-Preview für eingeloggten Bearbeiter funktioniert.
-
-Bei jedem realen FAIL: keine Schönrechnung, Fehlerquelle aktualisieren, Version 0.2.9 verbraucht; materielle Änderung benötigt 0.2.10+.
+- `main`.
+- Pferde-Designplugin.
+- vorhandene sechs Live-Glossarbeiträge bis zur Nutzerentscheidung.
+- Pferderassen: gehören nicht ins Glossar.
+- Zielvertrag V1: unverändert aktiv.
