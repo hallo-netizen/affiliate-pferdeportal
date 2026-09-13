@@ -39,8 +39,13 @@ jobs:
           mkdir -p "$P/assets"
           printf 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Z9JAAAAAASUVORK5CYII=' | base64 -d > "$P/assets/glossar-hero-books-stall.png"
           grep -q 'Version: 0.2.5' "$P/universal-glossary-engine.php"
-          cp -a "$P" /tmp/historical-025
-          sha256sum "$P"/universal-glossary-engine.php "$P"/includes/class-uge-core.php "$P"/includes/class-uge-frontend.php "$P"/templates/single-uge-term.php | tee /tmp/historical-hashes.txt
+          rm -rf /tmp/historical-025; cp -a "$P" /tmp/historical-025
+          echo '--- HISTORICAL FILE TREE ---'
+          find "$P" -maxdepth 3 -type f -printf '%P\n' | sort
+          : >/tmp/historical-hashes.txt
+          for f in universal-glossary-engine.php includes/class-uge-core.php includes/class-uge-frontend.php templates/single-uge-term.php templates/single-uge_term.php; do
+            if test -f "$P/$f"; then sha256sum "$P/$f" | tee -a /tmp/historical-hashes.txt; else echo "MISSING $f" | tee -a /tmp/historical-hashes.txt; fi
+          done
           echo HISTORICAL_025_REBUILT_PASS
       - name: Boot historical package in real WordPress Astra
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/02_boot.sh
@@ -75,14 +80,18 @@ jobs:
           bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/01_build.sh
           P=/tmp/u/universal-glossary-engine
           echo '--- CURRENT HASHES ---'
-          sha256sum "$P"/universal-glossary-engine.php "$P"/includes/class-uge-core.php "$P"/includes/class-uge-frontend.php "$P"/templates/single-uge-term.php
-          echo '--- HISTORICAL HASHES ---'
-          cat /tmp/historical-hashes.txt
+          for f in universal-glossary-engine.php includes/class-uge-core.php includes/class-uge-frontend.php templates/single-uge-term.php templates/single-uge_term.php; do
+            if test -f "$P/$f"; then sha256sum "$P/$f"; else echo "MISSING $f"; fi
+          done
+          echo '--- HISTORICAL HASHES ---'; cat /tmp/historical-hashes.txt
           echo '--- CRITICAL DIFF STAT ---'
           diff -u /tmp/historical-025/includes/class-uge-core.php "$P"/includes/class-uge-core.php >/tmp/core.diff || true
-          diff -u /tmp/historical-025/templates/single-uge-term.php "$P"/templates/single-uge-term.php >/tmp/single.diff || true
           diff -u /tmp/historical-025/includes/class-uge-frontend.php "$P"/includes/class-uge-frontend.php >/tmp/frontend.diff || true
+          : >/tmp/single.diff
+          for f in templates/single-uge-term.php templates/single-uge_term.php; do
+            if test -f "/tmp/historical-025/$f" && test -f "$P/$f"; then diff -u "/tmp/historical-025/$f" "$P/$f" >>/tmp/single.diff || true; fi
+          done
           wc -l /tmp/core.diff /tmp/single.diff /tmp/frontend.diff
           echo '--- ROUTING/TEMPLATE RELEVANT DIFF ---'
-          grep -Ei '^[+-].*(REWRITE_SCHEMA|add_rewrite_rule|template_include|single-uge-term|post_type_link|get_permalink|legacy|uge-single-wrap)' /tmp/core.diff /tmp/single.diff /tmp/frontend.diff || true
+          grep -Ei '^[+-].*(REWRITE_SCHEMA|add_rewrite_rule|template_include|single-uge|post_type_link|get_permalink|legacy|uge-single-wrap)' /tmp/core.diff /tmp/single.diff /tmp/frontend.diff || true
           echo OLD_CURRENT_025_COMPARE_PASS
