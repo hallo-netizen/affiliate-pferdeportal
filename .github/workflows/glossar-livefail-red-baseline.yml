@@ -1,0 +1,52 @@
+name: Glossar Live-Fail RED Baseline
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-livefail-red-baseline.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/acceptance-live-frontend-browser.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-red:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact rejected 0.2.7 baseline
+        run: |
+          set -euo pipefail
+          SRC=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/01_build.sh
+          sed -e 's/0\.2\.6/0.2.7/g' -e 's/UGE026/UGE027/g' -e 's/uge026/uge027/g' "$SRC" > /tmp/uge027-build.sh
+          chmod +x /tmp/uge027-build.sh
+          bash /tmp/uge027-build.sh
+          grep -q 'Version: 0.2.7' /tmp/uge027/universal-glossary-engine/universal-glossary-engine.php
+      - name: Install browser test runtime
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+      - name: Prove exact 0.2.7 fails visible browser acceptance
+        run: |
+          set +e
+          python3 protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/acceptance-live-frontend-browser.py /tmp/uge027/universal-glossary-engine/includes/class-uge-frontend.php | tee /tmp/browser-red.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          test "$rc" -ne 0
+          grep -q 'AJAX_POSITION_FAIL:' /tmp/browser-red.log
+          grep -q 'HERO_HEIGHT_RESPONSIVE_FAIL:' /tmp/browser-red.log
+          echo GLOSSAR_LIVE_BROWSER_RED_BASELINE_PASS
+
+  routing-red:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reproduce 0.2.6 to 0.2.7 unchanged-schema route failure
+        run: |
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/diagnose-026-027-livefail.sh | tee /tmp/route-red.log
+          grep -q 'UGE_CLEAN_CATEGORY_DISTINCT_PASS' /tmp/route-red.log
+          grep -q 'UGE_AJAX_OVERLAY_BUG_REPRODUCED' /tmp/route-red.log
+          grep -q 'UGE_RESPONSIVE_GAP_REPRODUCED' /tmp/route-red.log
+          grep -q 'UGE_026_TO_027_UNCHANGED_SCHEMA_BUG_REPRODUCED' /tmp/route-red.log
+          echo GLOSSAR_LIVE_ROUTING_RED_BASELINE_PASS
