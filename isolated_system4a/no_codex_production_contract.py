@@ -141,30 +141,35 @@ def run_once(contract: dict[str, Any], run_root: Path, *, lt_jar: Path, input_by
 def negative_suite(contract: dict[str, Any], base: Path, lt_jar: Path, proof_root: Path) -> list[dict[str, Any]]:
     rows=[]
     original=json.loads((REPO/contract['input']['path']).read_text(encoding='utf-8'))
+    # Full-path negative 1: valid shape, wrong canonical plan-slot binding.
     mutated=copy.deepcopy(original); mutated['next_textmachine_metadata_batch']['items'][0]['plan_slot']='0'*64
     try:
         run_once(contract, base/'neg-plan-slot', lt_jar=lt_jar, input_bytes=json.dumps(mutated,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
         raise ContractError('NEG_PLAN_SLOT_ACCEPTED')
     except Exception as exc:
         req('PPM679_PLAN_SLOT_HASH_MISMATCH' in str(exc), 'NEG_PLAN_SLOT_WRONG_BLOCKER:' + str(exc)); rows.append({'case':'NEG_PLAN_SLOT','status':'PASS'})
+    # Full-path negative 2: non-canonical category.
     mutated=copy.deepcopy(original); mutated['next_textmachine_metadata_batch']['items'][0]['category']='pferdeanhaenger-beratung'
     try:
         run_once(contract, base/'neg-category', lt_jar=lt_jar, input_bytes=json.dumps(mutated,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
         raise ContractError('NEG_CATEGORY_ACCEPTED')
     except Exception as exc:
         req('PPM679_CATEGORY_NOT_CANONICAL' in str(exc), 'NEG_CATEGORY_WRONG_BLOCKER:' + str(exc)); rows.append({'case':'NEG_CATEGORY','status':'PASS'})
+    # Step-0 source byte mutation must be rejected by the contract fingerprint.
     worker=(REPO/contract['worker']['path']).read_bytes(); req(sha256_bytes(worker)!=sha256_bytes(worker+b'\n#tamper\n'),'NEG_WORKER_MUTATION_INVALID')
     tampered=copy.deepcopy(contract); tampered['worker']['sha256']=sha256_bytes(worker+b'\n#tamper\n')
     try:
         verify_contract_sources(tampered,lt_jar=lt_jar); raise ContractError('NEG_WORKER_FINGERPRINT_ACCEPTED')
     except ContractError as exc:
         req(str(exc)=='WORKER_SHA_MISMATCH','NEG_WORKER_WRONG_BLOCKER:'+str(exc)); rows.append({'case':'NEG_WORKER_BYTES','status':'PASS'})
+    # Post-output tamper is applied to a completed full production proof.
     proof=base/'neg-output-tamper'; shutil.rmtree(proof, ignore_errors=True); shutil.copytree(proof_root, proof)
     p=proof/'output.json'; b=bytearray(p.read_bytes()); b[-2]=b[-2]^1; p.write_bytes(bytes(b))
     try:
         verify_output(contract,proof); raise ContractError('NEG_OUTPUT_TAMPER_ACCEPTED')
     except ContractError as exc:
         req(str(exc) in {'OUTPUT_SHA_MISMATCH','OUTPUT_BYTES_MISMATCH'},'NEG_OUTPUT_WRONG_BLOCKER:'+str(exc)); rows.append({'case':'NEG_OUTPUT_TAMPER','status':'PASS'})
+    # Parent tamper is applied to the same completed full production proof.
     proof=base/'neg-parent-tamper'; shutil.rmtree(proof, ignore_errors=True); shutil.copytree(proof_root, proof)
     p=proof/'parent-chat'/PARENT_NAME; p.write_bytes(p.read_bytes()+b' ')
     try:
