@@ -2,7 +2,7 @@
 
 ## Verbindliches Ziel
 
-System 4A existiert nur, wenn ein einziger produktiver Supervisor technisch außerhalb der Verfügungsgewalt des Codex-/Workers liegt.
+System 4A existiert nur, wenn ein einziger produktiver Supervisor technisch außerhalb der Verfügungsgewalt des Workers liegt.
 
 PASS-Kriterium:
 
@@ -16,11 +16,11 @@ Der Supervisor besitzt exklusiv:
 - PASS-Verwendung;
 - finalen Ausgang.
 
-Codex/Worker darf nur den jeweils erlaubten Fachauftrag sehen und ausschließlich Arbeitsinhalt zurückgeben.
+Der Worker darf nur den jeweils erlaubten Fachauftrag sehen und ausschließlich Arbeitsinhalt zurückgeben.
 
 ## Unzulässig
 
-- Supervisor im selben Codex-Task als normaler Kindprozess;
+- Supervisor im selben Workerraum als normaler Kindprozess;
 - produktiver In-Process-Worker-Callable;
 - Authority-Key im Worker-Workspace;
 - worker-schreibbare Phase/PASS/Publish-Felder;
@@ -33,44 +33,50 @@ Der direkte `FullChainSupervisor.run_full(..., worker_callable, ...)`-Weg ist de
 
 `PRODUCTION_REQUIRES_EXTERNAL_SUPERVISOR_HOST`
 
-## Lokaler Autoritätsbeweis 2026-09-13
+## Autoritätsbeweis
 
-`os_boundary_acceptance.py` wurde lokal unter getrennter OS-Benutzerkennung für Supervisor und Worker positiv/negativ ausgeführt.
+Die technische Grenze ist positiv und negativ nachgewiesen:
 
-Ergebnis:
+- Worker läuft als getrennte Cross-UID-Ausführung;
+- Supervisor-State und Authority-Key sind für den Worker nicht schreibbar;
+- Phase/PASS-/Publish-Injektion über Workerantwort wird blockiert;
+- direkte State-Manipulation wird blockiert;
+- HMAC-State bleibt nach Negativangriffen gültig.
 
-`SYSTEM4A_EXTERNAL_SUPERVISOR_OS_BOUNDARY_PASS: POSITIVE_ROUTE + 10_NEGATIVE_AUTHORITY_CHECKS`
+## Vollständiger Produktionsbeweis — NO CODEX
 
-Dabei nachgewiesen:
-- erlaubte Kommunikation ausschließlich über die enge Supervisor-Schnittstelle;
-- Worker kann Supervisor-State nicht lesen;
-- Worker kann Supervisor-State nicht schreiben;
-- Worker kann Authority-Key nicht lesen;
-- Worker kann Authority-Key nicht schreiben;
-- Worker kann Supervisorprozess nicht beenden;
-- Worker kann Supervisor-Environment nicht lesen;
-- Worker kann Supervisor-Socket nicht ersetzen;
-- Worker kann im privaten Supervisorbereich keinen Fake-State erzeugen;
-- Phase/PASS-Injektion über Workerantwort wird blockiert;
-- direkte `set_state`-Operation wird blockiert;
-- HMAC-State bleibt nach den Angriffen gültig.
+Der aktuelle No-Codex-Produktionsvertrag beweist die vollständige Kette:
 
-Dieser Beweis zeigt: **eine echte technische Autoritätsgrenze ist lokal möglich.** Er ist noch kein vollständiger Produktions-E2E mit realem Codex, LT und PPM.
+`gebundener Rohinput -> Root Entry -> External Supervisor -> Cross-UID Worker -> Research -> Facts / Fact-Pack -> Context -> Supervisor-Authoring-Bindung -> Draft -> echte LanguageTool-6.8-Prüfung -> Same-Article-Repair -> echte PPM-6.7.9-Prüfung -> weiterer Same-Article-Repair -> erneute echte Prüfung -> Batch Gate -> V2-Handoff -> Inline-Transport -> Parent-Chat-Entpackung -> finale Datei`
 
-## Vollketten-Beweis
+Der Beweis verwendet:
 
-Die Autoritätsgrenze gilt produktiv erst als vollständig bewiesen, wenn lokal positiv und negativ die komplette Kette geprüft ist:
+- keine Mocks;
+- keine vorbereitete `quality_binding`;
+- keine vorgegebenen Runtime-Links;
+- keine synthetischen LT-/PPM-PASS-Daten;
+- keinen Codex.
 
-`FIRST ENTRY -> EXTERNAL SUPERVISOR -> ISOLATED WORKER -> RESEARCH -> FACTS -> CONTEXT -> DRAFT -> REAL FULLCHECK -> REPAIR -> BATCH -> EXACT HANDOFF -> PARENT CHAT -> READBACK`
+Zwei getrennte Null-bis-Ende-Läufe erzeugen dieselbe Enddatei bytegleich und feldgleich. Parent-Chat-Rekonstruktion ist jeweils bytegleich zur Enddatei.
 
-Ein Test, der direkt innerhalb der Kette startet, echte Prüfer mockt oder nur Teilkomponenten prüft, ist kein Produktions-Vollkettenbeweis.
+Zusätzlich werden die bekannten Fehlerklassen negativ getestet; eine Mutation an Input, Worker, Produktionsquelle, Output oder Parent-Handoff macht die Abnahme ungültig.
 
 ## Produktions-E2E
 
 Produktions-E2E muss die real gebundenen System-4-Prüfer ausführen. Insbesondere dürfen `production_checks.run_all`, LanguageTool 6.8 und PPM 6.7.9 nicht gemockt oder durch synthetische PASS-Evidence ersetzt werden.
 
-Fehlende reale Abhängigkeit = BLOCKED.
+Fehlende oder abweichende reale Abhängigkeit = BLOCKED.
 
-## Abbruch
+Der aktuell bewiesene Einstieg ist ausschließlich der gebundene No-Codex-Vertrag über `realcase_production_entry.py` und `ExternalSupervisorHost(mode='production')`.
 
-Wenn diese Grenze nicht mit genau einem äußeren Supervisor realisierbar ist, 4A stoppen und nur die nachgewiesenen Härtungen in System 4 übernehmen.
+## Gültigkeitsgrenze
+
+Die Abnahme gilt nur für exakt gebundene Vertragsbytes und Produktionsquellcode-Fingerprints. Jede Änderung an einem gebundenen Produktionsbyte oder Pflichtfeld entwertet den PASS und erzwingt erneut:
+
+1. vollständigen Fehlerhistorien-Regressionslauf;
+2. Null-bis-Ende positiv;
+3. Null-bis-Ende negativ;
+4. zwei getrennte Reproduktionsläufe;
+5. Byte-/Feldgleichheitsbeweis bis zur finalen Datei.
+
+Kein Merge. Kein Publish. Kein Codex-Lauf ohne ausdrückliche User-Freigabe mit den Worten `Starte Codex`.
