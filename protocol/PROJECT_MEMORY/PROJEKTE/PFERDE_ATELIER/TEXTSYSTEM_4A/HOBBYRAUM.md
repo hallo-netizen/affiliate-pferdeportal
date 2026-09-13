@@ -1,83 +1,73 @@
 # TEXTSYSTEM 4A – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: AKTIV / ISOLIERTER GEGENPROTOTYP
+STATUS: BLOCKED / ENTSCHEIDUNGSBEWEIS EXTERNE WÄCHTERGRENZE
 
 ## AKTUELLE ARBEITSBINDUNG
 
-THEMA: `KONZEPT_4_GEGEN_4A_STATE_AUTHORITY`
-STATUS: `ENTSCHEIDUNGSBEWEIS_AKTIV`
+THEMA: `4A_EXTERNAL_SUPERVISOR_AUTHORITY`
+STATUS: `BLOCKED`
+BLOCKER: `EXTERNAL_SUPERVISOR_AUTHORITY_BOUNDARY_NOT_YET_PROVEN`
 
-AUFTRAG:
-Nicht eine neue Textmaschine bauen, sondern exakt einen strukturellen Punkt gegen das bereinigte Konzept 4 beweisen oder verwerfen:
+## BEREITS BEWIESEN
 
-**Kann ein außerhalb des Codex-Workers liegender Supervisor den kompletten Workflow-State allein besitzen, während Codex nur den jeweils erlaubten Fachauftrag ausführt und die vorhandenen realen Prüfer ausschließlich PASS/FAIL zurückgeben?**
+4A V3 Kapselkern lokal positiv/negativ: **16/16 PASS**.
 
-## FRISCHER SYSTEM-4-BEFUND
+Bewiesen:
+- Supervisor besitzt im Kapselkern Route/Phase;
+- Worker liefert ausschließlich Arbeitsinhalt;
+- State-/Publish-Injektion BLOCK;
+- Same-Article-Repair;
+- HMAC-Checkpoint + Tamper-BLOCK;
+- Resume am gebundenen Schritt;
+- 1.000 isolierte Kapseln;
+- Batch nur aus ARTICLE_PASS.
 
-Aktueller Vergleichshead:
-`623510bf7a7c968ae24fcb9003cf2f5d12c75bcc`
+Vorhandene System-4-Prüfer werden über einen dünnen Read-only-Adapter direkt aufgerufen; keine neue Fach-/Text-/Design-/Qualitätsregel wurde gebaut.
 
-Im realen System-4-Produktionsauftrag gilt weiterhin:
-- alle Artikel-Workspaces/States liegen im selben Codex-Task;
-- Codex ruft `controller.py ingress/research/facts/context/draft/fullcheck/repair` selbst auf;
-- `state.json` wird zwischen diesen Aufrufen persistiert und wieder eingelesen;
-- der Batch-Gate erhält am Ende diese State-Dateien.
+## FRISCHER SYSTEM-4-VERGLEICH
 
-Damit ist die State-/Workflow-Autorität noch nicht vollständig außerhalb des ausführenden Workers gekapselt.
+PR #238 / Head bei diesem Stand:
+`8da5a3f45ff42d3fae652d0a64071a9ea10770a4`
 
-## 4A-GEGENPROTOTYP
+System 4 ist inzwischen universell für 1..N und gebundene Beitragsarten ausgelegt. Diese Punkte und der WordPress-Handoff sind kein 4A-Vorteil.
 
-PR #255
-Branch `hobbyroom/system4a-capsule-v1-20260913`
+Der relevante Unterschied bleibt: System 4 lässt Codex weiterhin die persistierten Artikel-`state.json`-Workspaces im eigenen Task führen und die Controller-Schritte selbst aufrufen.
 
-Aktueller Architekturstand:
-- interner `CapsuleController` ist einziger State-Besitzer;
-- Worker sieht keinen echten State;
-- Worker erhält nur den gerade erlaubten Arbeitsauftrag;
-- Worker-Rückgabe erlaubt ausschließlich Arbeitsinhalt;
-- Route/PASS/Phase/Publish sind nicht worker-setzbar;
-- FAIL → automatisch Same-Article-Repair → erneuter Fullcheck;
-- HMAC-Checkpoint für Resume.
+## ENTSCHEIDEND GEFUNDENE GRENZE
 
-Lokaler Architekturbeweis: **13/13 PASS**, inklusive 1000 unabhängiger Mock-Kapseln.
+Ein im selben Codex-Task gestarteter 4A-Supervisor ist **kein unabhängiger Wächter**.
 
-Kein fachlicher Produktions-PASS daraus ableiten.
+Wenn Codex den Supervisor starten/ersetzen oder den Authority-Key wählen/lesen kann, besitzt Codex wieder die Workflow-Autorität. Dann ist 4A nur zusätzliche Verpackung und wird verworfen.
+
+Verbindliches PASS-Kriterium:
+
+`SUPERVISOR_OUTSIDE_WORKER_AUTHORITY`
+
+Der produktive Supervisor muss außerhalb der Codex-/Agent-Sandbox liegen und exklusiv State, Key, Phase, PASS, Route und Resume-Wahrheit besitzen.
 
 ## JETZT VERBINDLICHE NEXT ACTION
 
-1. 4A auf exakt aktuellen System-4-Head halten;
-2. **keinen neuen Prüfer bauen**;
-3. vorhandene System-4-Funktionen READ-ONLY anbinden:
-   - Research-Evidence-Guard;
-   - Facts-Evidence-Guard;
-   - Fact-Pack-/Production-Context-Bindung;
-   - Content-/Design-Guard;
-   - realer FULL-Production-Check mit PPM/LT;
-   - Repair-Continuity;
-   - Batch-Distinctness/Repetition;
-4. Prozessstufe `Production Context` in die Kapsel aufnehmen;
-5. Worker darf weiterhin nur Arbeitsinhalt liefern und keine State-/Routefelder;
-6. positiver Einzelartikel-E2E mit exakt denselben bestehenden Prüfern;
-7. negativer Test: Worker versucht State-/Route-/PASS-Manipulation;
-8. negativer Test: manipuliertes Research/Facts/Context/Draft;
-9. nur wenn dieser Beweis grün ist: generischen vorhandenen `SYSTEM4_WORDPRESS_HANDOFF_V1` als finalen Ausgang anschließen;
-10. danach 1/3/25/1000 und mehrere bereits freigegebene Beitragsarten.
+Nur diesen Punkt prüfen/bauen:
 
-## WORDPRESS
+1. minimalen äußeren Supervisor-Betriebsweg definieren;
+2. keine neue Produktionsstufe und keine neue Fachregel;
+3. ein persistenter Codex-/Agent-Arbeiter darf nur enge Arbeitsaufträge erhalten;
+4. State/Key dürfen dem Agenten niemals als Datei/Eingabe zugänglich sein;
+5. vorhandene System-4-Prüfer müssen in vertrauenswürdiger read-only Umgebung unverändert laufen;
+6. FAIL muss denselben Artikel im Supervisor halten und nur `repair` öffnen;
+7. Resume darf nur über authentifizierten Supervisor-Checkpoint erfolgen;
+8. finaler Ausgang bleibt der vorhandene universelle WordPress-Handoff.
 
-Keine neue Schnittstelle bauen.
-
-Autoritative Prüfung: `WORDPRESS_HANDOFF.md`.
-Der vorhandene Importer 0.28.23 kann den generischen `SYSTEM4_WORDPRESS_HANDOFF_V1` bereits verarbeiten.
+Erst wenn diese äußere Grenze praktisch ohne neue Kaskade beweisbar ist, weiter zu realem LT/PPM-E2E.
 
 ## STOPPREGELN
 
+- Keine neue Textmaschine.
 - Keine neue Fach-/Text-/Design-/Qualitätsregel.
 - Kein Ersatzprüfer.
 - Keine neue WordPress-Schnittstelle.
-- Keine Bewertung über 7er-/`Beratung`-Hardcodes.
-- Kein zweiter Signer/Receipt-/Room-/Package-Weg.
-- Keine zweite CURRENT_STATE-/Fehler-/Zielwahrheit.
-- Kein Merge/Publish/Pluginbau aus diesem Büro.
-- Wenn echte Supervisor-Trennung nur mit neuer Übergabekomplexität möglich ist: **4A STOPPEN und die Härtung in System 4 übernehmen.**
+- Kein weiterer Signer/Receipt-/Room-/Package-Weg.
+- Keine Agent-zu-Agent-Freitextübergaben als Workflowsteuerung.
+- Kein Merge/Publish.
+- Wenn echte äußere Wächtertrennung wieder eine Sicherheitskaskade erzeugt: **4A STOPPEN und Härtung in System 4 übernehmen.**
