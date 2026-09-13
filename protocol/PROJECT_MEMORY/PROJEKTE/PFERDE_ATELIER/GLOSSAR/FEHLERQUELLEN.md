@@ -96,24 +96,43 @@ RC7-Browsergeometrie unter echtem Design 1.50.469 weist für Startseite, Kategor
 Beleg Job `103736483696`:
 `UGE0210_PFERDE_BREADCRUMB_AXIS_PASS`.
 
-## GLOSSAR-PKG-010 – Aktueller RC7 hat kein gated Übergabepaket
-STATUS: OFFEN / BLOCKER
+## GLOSSAR-PKG-010 – Gated Übergabepaket / isoliertes Pluginartefakt
+STATUS: TECHNISCH PASS
 
-Der erfolgreiche Workflow `34762048546` endet absichtlich mit:
-`UGE0210RC7_HARD_GATES_PASS_NO_PACKAGE`.
+Der Hardtest `34762048546` erzeugte absichtlich noch kein Paket. In der Abschlussprüfung wurde deshalb der Pluginbaum **neu aus exakt dem getesteten Quell-Commit `1e74b7454e84f97182dbb185614371a48157bc21` gebaut** und anschließend paketiert.
 
-Daher existieren für 0.2.10-rc7 noch **kein freigegebenes Installations-ZIP und kein Paket-SHA**. Es darf kein rc7-Paket aus einem ungebundenen Nebenbau ausgegeben oder als `CURRENT.zip` synchronisiert werden.
+Closeout-Run `34764046870`, Job `103741741909` → SUCCESS.
+
+Innerer Plugin-ZIP SHA-256:
+`3611229aa33ca50a00ec88be87e6ef92592e87d313c152f05d0c7a31ab281152`
+
+Actions-Artefakt-ID `10319439428`; outer artifact SHA-256 `cbf72dc81229adf33febca085c43d70a12188880cd62c7aafd3f687cb62f2bab`.
+
+Paketprüfung:
+- `unzip -t` PASS;
+- Source-vs-Unpack `diff -qr` PASS;
+- Versionsprüfung PASS;
+- PHP-Lint PASS;
+- SHA-256 PASS;
+- `RC7_EXACT_TESTED_SOURCE_PACKAGE_PASS`;
+- `GLOSSAR_RC7_ARTIFACT_SYNC_PASS`.
+
+Isolierte Ausgabekopie + Manifest:
+`PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS/MOD-008/`.
+
+Dies ist technischer Paket-PASS, **kein Pferde-LIVE-PASS**.
 
 ## ÜBERGREIFENDER STATUS
 
 - 0.2.6: historisch / nicht verwenden.
 - 0.2.7: LIVE FAIL / nicht verwenden.
 - 0.2.8: LIVE FAIL / nicht verwenden.
-- 0.2.9: letzter vorhandener gated technischer Kandidat, aber als CURRENT/NEXT ACTION durch aktive 0.2.10-Entwicklung abgelöst; kein bestätigter Pferde-LIVE-PASS.
+- 0.2.9: früherer gated technischer Kandidat, aber als CURRENT/NEXT ACTION durch aktive 0.2.10-Entwicklung abgelöst; kein bestätigter Pferde-LIVE-PASS.
 - 0.2.10-rc1 bis rc6: Entwicklungs-/Diagnosestufen, nicht ausgeben.
-- 0.2.10-rc7: **TECHNISCHE HARDTESTS PASS / NO PACKAGE / PFERDE-LIVE OFFEN.**
+- 0.2.10-rc7: **TECHNISCHE HARDTESTS + PAKET/ARTEFAKT PASS / PFERDE-LIVE OFFEN.**
 
-Run: `34762048546`
-Getesteter Head: `1e74b7454e84f97182dbb185614371a48157bc21`
+Hardtest Run: `34762048546`
+Exakt getesteter Plugin-Quell-Commit: `1e74b7454e84f97182dbb185614371a48157bc21`
+Paket-Closeout Run: `34764046870`
 
-Die realen Nutzerfehler FE-002, ROUTE-004 und ROUTE-005 werden erst durch einen realen Nutzer-Readback eines regelkonform paketierten neuen Stands geschlossen.
+Die realen Nutzerfehler FE-002, ROUTE-004 und ROUTE-005 werden erst durch einen realen Nutzer-Readback des exakt hashgebundenen neuen Stands geschlossen.
