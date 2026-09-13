@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 145 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 153 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,23 +10,25 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **145 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **153 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 140er-Stand neu angelegt:
+Seit dem synchronisierten 145er-Stand neu angelegt:
 
-- Estnisches einheimisches Pferd / Eesti hobune / Estonian Native Horse
-- Tori-Pferd / Tori hobune
-- Estnisches Kaltblut / Eesti raskeveohobune / Estonian Heavy Draught
-- Böhmisch-Mährisches Belgisches Pferd / Českomoravský belgický kůň
-- Schlesischer Noriker / Slezský norik
+- Žemaitukas
+- Großer Žemaitukas / Stambieji žemaitukai
+- Litauisches Kaltblut / Lietuvos sunkieji arkliai
+- Gidrán
+- Nóniusz
+- Kisbéri félvér
+- Furioso–North Star
+- Ungarisches Kaltblut / Magyar hidegvérű
 
 Wichtige Abgrenzung:
-- Estonian Arden ist die historische Bezeichnung des heutigen Estonian Heavy Draught und kein zweiter Datensatz.
-- Tori-Zuchtrichtungen bleiben innerhalb der Tori-Rasse und werden nicht künstlich getrennt.
-- Silesian Noriker wird im tschechischen nationalen Genressourcenprogramm getrennt vom allgemeinen Noriker geführt und deshalb als eigener Datensatz behandelt.
-- Bohemian-Moravian Belgian Horse ist eine eigenständig geführte tschechische Kaltblutpopulation.
+- Žemaitukas und Stambieji žemaitukai werden im aktuellen litauischen staatlichen Erhaltungsprogramm getrennt geführt und deshalb nicht zusammengelegt.
+- Gidrán, Nóniusz, Kisbéri félvér und Furioso–North Star werden von Nébih als getrennte Rassen mit eigenen zuständigen Zuchtorganisationen geführt.
+- Magyar hidegvérű wird ebenfalls als eigene ungarische Rasse geführt.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
