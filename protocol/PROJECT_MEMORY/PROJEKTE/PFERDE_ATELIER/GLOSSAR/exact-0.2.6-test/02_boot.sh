@@ -23,6 +23,7 @@ curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.
 docker cp /tmp/wp wp:/usr/local/bin/wp
 docker exec wp chmod +x /usr/local/bin/wp
 PASS=$(openssl rand -hex 16)
+printf '%s' "$PASS" >/tmp/uge-admin-pass
 docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title='UGE 026 Test' --admin_user=admin --admin_password="$PASS" --admin_email=x@example.test --skip-email >/dev/null
 docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root >/dev/null
 docker exec wp wp theme install astra --activate --allow-root >/dev/null
