@@ -1,0 +1,16 @@
+name: Glossar 0.2.9 Live Single Diagnose
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-029-live-single-diagnose.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/diagnose-live-single-029.sh'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/diagnose-live-single-029.sh
