@@ -23,11 +23,11 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **122 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 118er-Stand neu: Swedish Warmblood, Oldenburger, Marsh Tacky und Newfoundland Pony.
-- SWB ist über den offiziellen schwedischen Zuchtverband mit eigenem Studbook/Registersystem gebunden; Registerklassen werden nicht als eigene Rassen dupliziert.
-- Oldenburger ist über das Ursprungsstutbuch des Oldenburger Pferdezuchtverbands gebunden.
-- Marsh Tacky besitzt eine eigenständige Pedigree-Registry; Newfoundland Pony wird als eigenständige kanadische Ponyrasse geführt.
+- **126 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 122er-Stand neu: Canadian Horse, Florida Cracker Horse, Gotlandsruss und Nordsvensk brukshäst.
+- Canadian Horse ist über CHBA/CLRC und den kanadischen Animal Pedigree Act sauber gebunden.
+- Florida Cracker Horse besitzt eigenes Register, staatlich gestütztes Erhaltungsprogramm und ist offizielles State Horse of Florida.
+- Gotlandsruss und Nordsvensk brukshäst besitzen schwedische Originalstutbücher.
 - Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben offen, weil Status/Detailstandard noch nicht stark genug aus Primärquellen gebunden sind.
 - Mangalarga Paulista und Pantaneiro bleiben offene brasilianische Kandidaten.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
