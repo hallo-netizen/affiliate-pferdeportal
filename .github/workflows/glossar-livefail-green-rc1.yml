@@ -8,7 +8,10 @@ on:
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.8-rc1.sh'
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8-rc1.sh'
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/acceptance-live-frontend-browser.py'
-      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/find-real-design-source.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/reconstruct-design-1.50.469.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.8-rc1.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/real-design-runtime-browser.py'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/fixtures/design-1.50.469/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -36,14 +39,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8-rc1.sh ${{ matrix.base }}
-  real-design-source-discovery:
+  real-design-reconstruction:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/find-real-design-source.sh
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/reconstruct-design-1.50.469.sh
+  real-design-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.8-rc1.sh
   no-package-gate:
-    needs: [browser-green,fresh-regression,update-schema5]
+    needs: [browser-green,fresh-regression,update-schema5,real-design-reconstruction,real-design-runtime]
     runs-on: ubuntu-latest
     steps:
-      - run: echo UGE028RC1_CORE_RED_TO_GREEN_PASS_REAL_DESIGN_RUNTIME_NOT_YET_PROVEN_NO_RELEASE_PACKAGE
+      - run: echo UGE028RC1_ALL_HARD_GATES_PASS_RELEASE_VERSION_AND_PACKAGE_NOT_YET_BUILT
