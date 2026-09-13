@@ -1,46 +1,57 @@
 # TEXTSYSTEM 4A – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: AKTIV
+STATUS: AKTIV / AUDIT- UND HÄRTUNGSRAUM
 
 ## AKTUELLE ARBEITSBINDUNG
 
-THEMA: `KONZEPT_4A_UNIVERSELLE_ARTIKELKAPSEL`
-STATUS: `PROTOTYP_AUFBAU`
+THEMA: `KONZEPT_4_GEGEN_4A_HARTAUSWERTUNG`
+STATUS: `4A_STANDALONE_VORERST_VERWORFEN`
 
 AUFTRAG:
-Einen minimalen, isolierten 4a-Kern beweisen, der den vollständigen Ablauf vom gebundenen Produktionsanstoß bis zur finalen WordPress-JSON technisch führen kann, ohne Fach-, Design- oder Qualitätsregeln selbst zu besitzen oder zu verändern.
+Konzept 4 gegen die ursprünglich gedachte 4a-Zielarchitektur hart prüfen und nur die nachweislich sinnvollen Vereinfachungen in einen Härtungsplan für Konzept 4 überführen. **Keine zweite Textmaschine und keine zweite Laufzeitarchitektur bauen**, solange kein irreduzibler Vorteil eines eigenständigen 4a bewiesen ist.
 
-## VERBINDLICHER PROZESS
+## ERGEBNIS DER KRITISCHEN PRÜFUNG
 
-1. **Ingress:** ausschließlich gebundene Metadaten (`title`, `target_keyword`, `category`, `article_type`, `plan_slot`) plus Batch-/Snapshot-Identität.
-2. **Kapsel anlegen:** eine unveränderliche Artikelidentität; `publish_allowed=false`.
-3. **Recherche:** Codex recherchiert; reale Quelle/Evidence/Hash erforderlich.
-4. **Rechercheprüfung:** kein Fortschritt ohne gültige Evidence.
-5. **Fakten/Fact-Pack:** aus akzeptierter Recherche; keine selbstzertifizierten Fakten.
-6. **Faktenprüfung:** kein Fortschritt ohne gebundenes Pack.
-7. **Text:** bestehende Textmaschine/Fachregeln READ-ONLY.
-8. **Fullcheck:** echte bestehende Prüfer; 4a erzeugt kein eigenes Qualitäts-PASS.
-9. **Repair:** nur derselbe Artikel und nur konkrete Findings; Recherche/Fakten/Metadaten bleiben gebunden.
-10. **Artikel-PASS:** Artikelbytes einfrieren.
-11. **Querschnitt:** Dubletten/Kannibalisierung/Schablonenwiederholung über alle fertigen Kapseln.
-12. **Finalisierung:** universelle 1–∞-JSON; keine feste Beitragsart im Controller.
-13. **WordPress-Handoff:** exakt eine kanonische Datei; `publish_allowed=false`; bytegleich in den Elternchat.
+Der aktuelle System-4-Kern erfüllt bereits fast alle wesentlichen 4a-Ziele:
+- ein kanonischer Artikelzustand;
+- Codex als ein fachlicher Arbeiter;
+- Recherche → Fakten → gebundener Produktionskontext → Text;
+- echte unveränderte Prüfer;
+- Same-Article-Repair;
+- artikelübergreifende Prüfung;
+- finaler WordPress-Handoff.
 
-## AKTUELLE NEXT ACTION
+Separate Guard-/Prüfermodule sind **keine echten Handoffs**, solange derselbe Controller sie intern aufruft und allein die Phase verändert.
 
-1. isolierten GitHub-Hobbyraum `hobbyroom/system4a-capsule-v1-20260913` von aktuellem `main` anlegen;
-2. minimalen Controller/Kapselvertrag bauen – noch ohne Ersatzprüfer;
-3. harte Negativtests zuerst: Außensteuerung, State-Sprung, Publish-Manipulation, Artikelzahl-Hardcode, Beitragsart-Hardcode, fremde Artikelmutation;
-4. danach vorhandene reale Prüfer READ-ONLY anbinden;
-5. erst dann positiver Einzelartikel-E2E;
-6. danach 1/3/25/1000 und mindestens zwei tatsächlich freigegebene Beitragsarten;
-7. finalen JSON-/Chat-/WordPress-Weg positiv und negativ testen.
+Die feste 7er-/`Beratung`-Bindung ist ein behebbarer Implementierungsfehler und ausdrücklich **kein 4a-Entscheidungskriterium**.
+
+## ECHTER HÄRTUNGSPUNKT IN KONZEPT 4
+
+Der aktuelle `controller.py` bietet neben dem verbindlichen FULL-Pfad technisch weitere erreichbare Wege (`check`/BASIC-Release sowie Signaturpfad). Der System-4-Zielvertrag verlangt dagegen den einen FULL-Produktion-→-Batch-→-Direct-Import-Weg.
+
+Damit lautet die richtige Härtung:
+**eine technisch erreichbare Produktionsstraße statt mehrerer auswählbarer Controllerpfade.**
+
+## VERBINDLICHER ZIELPROZESS
+
+`WordPress/SEO-Metadatenbatch -> kanonischer Artikelzustand -> Codex-Recherche -> gebundene Evidence -> Fakten/Fact-Pack -> Text unter unveränderter Textmaschine -> FULL-Prüfer -> Same-Article-Repair bei Finding -> Artikelbytes einfrieren -> artikelübergreifende Prüfung -> genau eine SYSTEM4_WORDPRESS_HANDOFF_V1.json -> Elternchat -> WordPress-Direct-Importer 0.28.23 -> Entwürfe`
+
+## NEXT ACTION
+
+1. keinen 4a-Controller bauen;
+2. Konzept 4 auf **genau eine technisch mögliche Produktionsstraße** auditieren;
+3. BASIC-Release und alten Signaturpfad aus der Produktionsoberfläche/-CLI entfernen oder technisch unerreichbar machen;
+4. 7er-/`Beratung`-Hardcodes separat entfernen, ohne sie als 4a-Vorteil zu werten;
+5. vorhandene FULL-Prüfer, Content-/Designregeln und Same-Article-Repair unverändert lassen;
+6. finalen Handoff exakt gegen den realen WordPress-Importer 0.28.23 prüfen;
+7. erst danach vollständige Positiv-/Negativtests 1/3/25/1000 und mehrere bereits freigegebene Beitragsarten.
 
 ## STOPPREGELN
 
-- Wenn 4a einen neuen fachlichen Prüfer benötigt: STOPP.
-- Wenn 4a Text-/Designregeln kopieren oder verändern müsste: STOPP.
-- Wenn 4a mehr Laufzeitautoritäten/Übergaben als System 4 erzeugt: STOPP und Konzept verwerfen.
-- Wenn eine neue Beitragsart nur durch Controller-Umbau möglich wäre: Architekturziel verfehlt.
-- Kein Merge/Publish/Pluginbau aus diesem Hobbyraum.
+- Keine neue Fach-/Text-/Design-/Qualitätsregel.
+- Kein Ersatzprüfer.
+- Kein zweiter Controller/Workflow-Besitzer.
+- Kein neuer Signer/Receipt-/Room-/Package-Weg.
+- Kein Merge/Publish/Pluginbau aus diesem Büro.
+- Falls nach Bereinigung von Konzept 4 kein struktureller 4a-Vorteil übrig bleibt, bleibt 4a dauerhaft ein Auditbegriff und wird nicht als fünftes System gebaut.
