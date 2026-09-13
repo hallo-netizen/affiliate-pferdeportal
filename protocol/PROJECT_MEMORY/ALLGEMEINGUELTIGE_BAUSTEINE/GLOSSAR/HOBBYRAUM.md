@@ -1,160 +1,105 @@
 # UNIVERSAL GLOSSAR ENGINE – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: AKTIV / 0.2.6 FRESH + IN-PLACE HARDTEST PASS / LIVE-READBACK OFFEN
+STATUS: AKTIV / 0.2.7 FRESH + IN-PLACE HARDTEST PASS / LIVE-READBACK OFFEN
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
 Der isolierte Arbeitsraum für den allgemeinen Glossar-Core.
 
-**HIER BIST DU RICHTIG, WENN …**  
-der projektunabhängige WordPress-Kern des Glossars gebaut, geprüft oder über einen gebundenen Updateweg weitergeführt wird.
-
 **DU DARFST …**  
-den neutralen Core, Datenvertrag, Projektkonfiguration und harte Positiv-/Negativtests entwickeln.
+den neutralen Core und seine gebundenen Positiv-/Negativtests pflegen.
 
 **DU DARFST NICHT …**  
-Pferde-Fachlogik in den Core schreiben, `main` verändern, das bestehende Designplugin als Glossar-Engine umbauen, unterschiedliche Pakete unter derselben Versionsnummer erzeugen oder vor realem Nachweis einen LIVE-PASS behaupten.
+Pferde-Fachlogik in den Core schreiben, `main` verändern, unterschiedliche Paketbytes unter derselben Versionsnummer erzeugen oder vor realem Nachweis einen LIVE-PASS behaupten.
 
 **ALS NÄCHSTES …**  
-den exakt hashgebundenen 0.2.6-Kandidaten nur über den geprüften WordPress-Updateweg in der Pferde-Anwendung testen und danach echten Readback der gemeldeten Frontendfehler durchführen.
+den exakt hashgebundenen 0.2.7-Kandidaten in der Pferde-Anwendung über den geprüften WordPress-Updateweg installieren und real zurücklesen.
 
-## AKTUELLER AUFTRAG
+## GEBUNDENER TECHNISCHER KANDIDAT
 
-`MOD-008 – Universal Glossar Engine` ist technisch bis zum 0.2.6-Fresh-/Upgrade-Hardtest geführt.
+Version:
+`0.2.7`
 
-Aktuell keine neue Funktion bauen.
+Rewrite-Schema:
+`5`
 
-Nächste Arbeit ist Integrations-/Readback-Prüfung des exakt getesteten Kandidaten in der ersten realen Projektanwendung Pferde Atelier.
+Branch:
+`hobbyroom/glossar-027-release-hardtest-20260913`
 
-## ARBEITSORT
+Getesteter Commit:
+`7191f15358cc73a78231652e9479f3a9fb5a9c37`
 
-Isolierter Branch:
-`hobbyroom/glossar-026-upgrade-hardtest-20260913`
+Run:
+`34749231699`
 
-Technisch getesteter Commit:
-`e5f8c8ce1839a69f3e6fb712bd4a3d4a3e8ad059`
+Fresh Job:
+`103702569466` → PASS
 
-Autoritativer Testlauf:
-`34748541630`
+Update Job 0.2.5 → 0.2.7:
+`103702569602` → PASS
 
-Technischer Kandidat:
-`0.2.6`
+Gated Package Job:
+`103702749853` → PASS
 
-Innerer Plugin-ZIP SHA-256:
-`e0717db3aa247edc30b0fe84a261aa59037050d593e3432a6fb460f6d96f3b09`
+Innerer ZIP-SHA-256:
+`e9c32fc64db3c64c3b85e0d2692ff200e8f6d60e5827d7ab514657adff2ae831`
 
 Actions-Artefakt-ID:
-`10314822840`
+`10315142446`
 
 Testdetails:
-`TESTPROTOKOLL_0.2.6_20260913.md`
-
-## HARTE KANDIDATENBINDUNG
-
-0.2.6 wird deterministisch aus dem bereits geprüften 0.2.5-Kandidaten gebaut.
-
-Erlaubtes Delta exakt:
-1. Hauptplugin-Version 0.2.5 → 0.2.6;
-2. Rewrite-Schema 4 → 5.
-
-Kein weiteres verstecktes Delta zulässig.
-
-Keine neue Ausgabe als 0.2.6 nach Codeänderung ohne neuen vollständigen Hardtest und neuen Hash.
-
-## TESTSTAND
-
-### Fresh-Install
-
-Run `34748541630`, Job `103700782149` → PASS.
-
-Positiv/negativ unter WordPress + MySQL + Astra:
-- Plugin 0.2.6 / Schema 5;
-- Startseite, Navigation, A–Z;
-- alle Kartenlinks;
-- echte Einzelbegriffsseite statt bloß HTTP 200;
-- Draft/404/Preview;
-- AJAX gültig/ungültig;
-- Kategorie-/Begriffskollision;
-- normaler WordPress-Beitrag unverändert;
-- Hero-Abstand;
-- responsive Hero-Darstellung;
-- Breadcrumb-Achse;
-- alte Regressionen erneut PASS.
-
-### In-place-Upgrade 0.2.5 → 0.2.6
-
-Run `34748541630`, Job `103700782306` → PASS.
-
-Negativer Vorzustand:
-- Einzelbegriff-Rewrite-Regel unter aktivem 0.2.5 gezielt entfernt;
-- bekannter Einzelbegriff danach 404;
-- Schema bleibt 4.
-
-Echter WordPress-Updater:
-- 0.2.5 mit 0.2.6 überschrieben;
-- erster neuer Request migriert Schema 4 → 5;
-- Regel wird wieder aufgebaut;
-- bekannter Einzelbegriff wieder echte 200-Artikelseite.
-
-Danach vollständige Positiv-/Negativmatrix erneut PASS einschließlich Daten-/Konfigurationspersistenz und Reaktivierung.
-
-### Gated Package
-
-Job `103700913568` → PASS.
-
-Paket wurde erst nach beiden grünen Jobs gebaut.
-
-### Lokaler exakter Artefaktcheck
-
-PASS:
-- Hashbindung;
-- ZIP-Struktur;
-- keine Traversal-/Symlink-Pfade;
-- lokaler 0.2.5↔0.2.6-Dateivergleich exakt zwei erlaubte Dateien;
-- positive Version-/Schema-/Frontendregeln;
-- negative Altversion-/Altschema-/alte CSS-Hacks;
-- PHP-Lint aller 10 PHP-Dateien.
+`TESTPROTOKOLL_0.2.7_20260913.md`
 
 ## VERSIONIERUNGSREGEL
 
-Dauerhaft:
-`ENTSCHEIDUNG_20260912.md`
+0.2.6 bleibt reine Entwicklungs-/Testhistorie und wird nicht mehr übergeben.
 
-Keine materiell unterschiedlichen Pakete mehr unter derselben Versionsnummer.
+Aktueller Kandidat ausschließlich 0.2.7.
+
+Dauerhaft:
+**Unterschiedliche Paketbytes = unterschiedliche Pluginversion.**
+
+Jede materielle Änderung nach 0.2.7 benötigt eine neue Versionsnummer und erneut:
+Fresh-Install + echter In-place-Updateweg + Positiv/Negativ + gebundener Paketjob + lokaler exakter Artefaktcheck.
+
+## TESTSTAND
+
+PASS:
+- Fresh WordPress/MySQL/Astra;
+- Version 0.2.7 / Schema 5;
+- absichtlich defekter 0.2.5-Rewritezustand;
+- echter WordPress-Updater 0.2.5 → 0.2.7;
+- nach OPcache-Revalidierung Schema 4 → 5;
+- echte Einzelbegriffsseite statt nur HTTP 200;
+- Draft/404/Legacy/AJAX-Negativfälle;
+- Kategorie-/Begriffskollision;
+- normale Beiträge unverändert;
+- Daten-/Konfigurationspersistenz;
+- Reaktivierung;
+- Hero-Abstand;
+- responsive Hero-Darstellung;
+- Breadcrumb-Achse;
+- komplette alte Regressionen erneut PASS;
+- exakt erzeugtes ZIP lokal Hash-/Struktur-/Version-/Schema-geprüft.
 
 ## NEXT ACTION
 
-1. Keine weitere technische Änderung am Kandidaten.
-2. Exakt den hashgebundenen 0.2.6-ZIP verwenden.
-3. In Pferde Atelier als Update über den WordPress-Pluginweg installieren.
-4. Direkt danach Readback der vier gemeldeten Punkte:
+1. Keine weitere Codeänderung am Kandidaten.
+2. Exakt das hashgebundene 0.2.7-ZIP verwenden.
+3. Pferde Atelier über den WordPress-Pluginupdateweg aktualisieren.
+4. Real prüfen:
    - Hero-Abstand;
-   - Responsive Hero;
-   - alle Einzelbegriff-Links inklusive echtem Seiteninhalt;
+   - responsive Hero-Darstellung;
+   - alle Einzelbegriff-Links mit sichtbarem Titel/Inhalt;
    - Kategorie-Breadcrumb Position/Darstellung.
-5. Negativ zusätzlich normale Beiträge, 404, Draft und Kategorie/gleichnamiger Begriff prüfen.
-6. Nur bei realem PASS darf Pferde-Anwendung hochgestuft werden.
-7. Bei FAIL: erster exakter Fehler zurück in `PROJEKTE/PFERDE_ATELIER/GLOSSAR/FEHLERQUELLEN.md`; kein neues Paket ohne erneute harte Prüfung.
-
-## DANACH OFFEN
-
-- aktueller Astra+Yoast-Kombinationstest, soweit für endgültigen Release gebunden;
-- realer Campus-Wissensdatenbankimport;
-- größerer Bestand/Performance;
-- separates zweites reales Portal.
+5. Negativ zusätzlich normale Beiträge, unbekannten Begriff, Draft und Kategorie/gleichnamigen Begriff prüfen.
+6. Erst nach realem PASS Projektstatus hochstufen.
+7. Bei FAIL: erster exakter Fehler in der Pferde-Fehlerquelle; neues Paket nur mit neuer Version und kompletter neuer Hardtestkette.
 
 ## HARTE REGEL
 
 **Technischer Kandidaten-PASS ist kein Pferde-Atelier-LIVE-PASS.**
 
 `main` und bestehendes Designplugin bleiben unangetastet.
-
-## RÜCKGABEWEG
-
-Projektanwendung Pferde Atelier:
-`../../PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
-
-Fachquelle Pferdebegriffe:
-`../../PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`
