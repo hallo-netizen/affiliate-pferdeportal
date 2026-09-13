@@ -6,7 +6,7 @@ STATUS: AKTIV / ISOLIERTER GEGENPROTOTYP
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das isolierte Architektur- und Testbüro für **Konzept 4a – Universelle Artikelkapsel**. Es prüft, ob der komplette Pferde-Atelier-Artikelworkflow mit weniger Laufzeitgrenzen als System 4 umgesetzt werden kann, ohne Inhalt, Design oder Qualitätsregeln anzutasten.
+Das isolierte Architektur- und Testbüro für **Konzept 4a – Universelle Artikelkapsel**. Es prüft, ob der komplette Pferde-Atelier-Artikelworkflow mit weniger echten Laufzeit-/Zustandsgrenzen als ein **bereinigtes Konzept 4** umgesetzt werden kann, ohne Inhalt, Design oder Qualitätsregeln anzutasten.
 
 **HIER BIST DU RICHTIG, WENN …**  
 der Weg vom gebundenen WordPress-/SEO-Produktionsanstoß bis zur fertigen, direkt importierbaren JSON-Datei im Elternchat untersucht, gebaut oder hart getestet wird.
@@ -43,15 +43,18 @@ Zielkette:
 
 ## ABGRENZUNG ZU SYSTEM 4
 
-System 4 ist kein Gegner und wird nicht ersetzt. 4a übernimmt nur bewährte Erkenntnisse: kanonischer Artikelzustand, Codex als ein fachlicher Worker, Same-Article-Repair, echte Prüfer, Research-/Fact-Evidence und Batch-Distinctness.
+System 4 ist kein Gegner und wird nicht ersetzt. 4a übernimmt bewährte Erkenntnisse: kanonischer Artikelzustand, Codex als ein fachlicher Worker, Same-Article-Repair, echte Prüfer, Research-/Fact-Evidence und artikelübergreifende Prüfung.
 
-4a muss zusätzlich beweisen:
-- keine feste `7`-Bindung;
-- keine feste `Beratung`-Bindung im Transport/Controller;
-- kein widersprüchlicher Signing-/Direct-Import-Endpfad;
-- kein neuer Workflow-Besitzer zwischen Artikel-PASS und finaler Datei;
-- neue Beitragsarten ohne Umbau des Controllers.
+Die aktuell noch vorhandene feste 7er-/`Beratung`-Bindung in System 4 gilt als separat zu behebender Implementierungsfehler. **Sie zählt weder als Argument für 4a noch als Nachteil von Konzept 4 in der Architekturentscheidung.**
+
+4a muss stattdessen gegen ein bereinigtes Konzept 4 beweisen:
+- weniger echte Zustands-/Übergabegrenzen;
+- keine zusätzliche Workflow-Autorität;
+- stärkere Außenabschottung;
+- gleicher vollständiger End-to-End-Workflow;
+- gleiche Flexibilität für neue Beitragsarten;
+- bessere oder mindestens gleich gute Automatisierbarkeit.
 
 ## ERFOLGSKRITERIUM
 
-4a hat nur dann eine Existenzberechtigung, wenn es bei identischer Fach-/Design-/Qualitätsautorität **weniger echte Zustands-/Übergabegrenzen** als System 4 besitzt und 1/3/25/1000 Artikel sowie unterschiedliche freigegebene Beitragsarten positiv und negativ nachweisbar verarbeitet.
+4a hat nur dann eine Existenzberechtigung, wenn es bei identischer Fach-/Design-/Qualitätsautorität **nachweisbar weniger echte Laufzeit-/Zustandsgrenzen als das bereinigte Konzept 4** besitzt und den kompletten Workflow mindestens gleich robust automatisiert. Stückzahl- oder Beitragsart-Hardcodes von System 4 werden dabei nicht mitbewertet.
