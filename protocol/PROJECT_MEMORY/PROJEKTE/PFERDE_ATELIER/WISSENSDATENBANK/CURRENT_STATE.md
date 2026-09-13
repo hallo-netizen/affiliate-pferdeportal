@@ -23,13 +23,11 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **140 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 138er-Stand neu: British Riding Pony und International Miniature Pony.
-- Beide sind über die aktuelle GOV.UK-Liste als eigene Breed Studbooks mit Ursprungsstutbuch gebunden.
-- Cleveland Bay, Dales Pony, Fell Pony, Highland Pony, New Forest Pony und Eriskay Pony waren bereits vorhanden und wurden nicht dupliziert.
-- International Miniature Pony bleibt getrennt von American Miniature Horse, Falabella und Cheval Miniature Français.
-- Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben offen, weil Status/Detailstandard noch nicht stark genug aus Primärquellen gebunden sind.
-- Mangalarga Paulista, Pantaneiro und Latvian Heavy Warmblood bleiben offene Kandidaten.
+- **145 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 140er-Stand neu: Estonian Native Horse, Tori Horse, Estonian Heavy Draught, Bohemian-Moravian Belgian Horse und Silesian Noriker.
+- Die drei estnischen Rassen sind über die staatliche estnische Fachbehörde mit genehmigten Zuchtprogrammen gebunden; sie werden national als eigenständige Rassen geführt.
+- Bohemian-Moravian Belgian Horse und Silesian Noriker sind über das tschechische Landwirtschaftsministerium als eigene Pferderassen/nationale genetische Ressourcen gebunden.
+- Estonian Arden wird als historische Bezeichnung des Estonian Heavy Draught geführt und nicht dupliziert.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
