@@ -1,0 +1,74 @@
+name: Glossar 0.2.8 FINAL Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-028-final-hardtest.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.8.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.8.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.8.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/reconstruct-design-1.50.469.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/real-design-runtime-browser.py'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/fixtures/design-1.50.469/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-final:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.8.sh
+      - run: python3 -m pip install --quiet playwright && python3 -m playwright install chromium
+      - run: python3 protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/acceptance-live-frontend-browser.py /tmp/uge028/universal-glossary-engine/includes/class-uge-frontend.php
+  fresh-final:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.8.sh
+  update-final:
+    strategy:
+      fail-fast: false
+      matrix:
+        base: ['0.2.6','0.2.7']
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-to-0.2.8.sh ${{ matrix.base }}
+  real-design-final:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.8.sh
+  gated-package:
+    needs: [browser-final,fresh-final,update-final,real-design-final]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.8.sh
+      - name: Build and verify exact final ZIP
+        run: |
+          set -euo pipefail
+          cd /tmp/uge028
+          zip -X -qr /tmp/universal-glossary-engine-0.2.8.zip universal-glossary-engine
+          unzip -t /tmp/universal-glossary-engine-0.2.8.zip
+          sha256sum /tmp/universal-glossary-engine-0.2.8.zip | tee /tmp/SHA256.txt
+          rm -rf /tmp/verify028 && mkdir /tmp/verify028
+          unzip -q /tmp/universal-glossary-engine-0.2.8.zip -d /tmp/verify028
+          grep -q 'Version: 0.2.8' /tmp/verify028/universal-glossary-engine/universal-glossary-engine.php
+          grep -q "define('UGE_VERSION', '0.2.8');" /tmp/verify028/universal-glossary-engine/universal-glossary-engine.php
+          grep -q "const REWRITE_SCHEMA_VERSION = '6';" /tmp/verify028/universal-glossary-engine/includes/class-uge-core.php
+          ! grep -q '0.2.8-rc1' /tmp/verify028/universal-glossary-engine/universal-glossary-engine.php
+          find /tmp/verify028/universal-glossary-engine -name '*.php' -print0 | xargs -0 -n1 php -l
+          echo UGE028_FINAL_EXACT_ZIP_LOCAL_VERIFY_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.8-gated-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.8.zip
+            /tmp/SHA256.txt
+          if-no-files-found: error
