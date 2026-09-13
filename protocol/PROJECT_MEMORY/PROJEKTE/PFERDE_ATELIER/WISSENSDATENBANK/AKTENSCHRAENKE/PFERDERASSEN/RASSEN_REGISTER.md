@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 138 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 140 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,31 +10,19 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **138 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **140 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 126er-Stand neu angelegt:
+Seit dem synchronisierten 138er-Stand neu angelegt:
 
-- Finnhorse / Suomenhevonen
-- Latvian Warmblood / Latvijas siltasinis
-- Wielkopolski / Wielkopolska Horse
-- Małopolski / Malopolska Horse
-- Polish Sport Horse / Polski koń sportowy
-- Silesian Horse / Koń śląski
-- Polish Coldblood / Polski koń zimnokrwisty
-- Polish Ardennes / Arden polski
-- Dølahest
-- Fjordhest / Fjordpferd
-- Nordlandshest/Lyngshest
-- Norsk kaldblodstraver / Norwegian Coldblood Trotter
+- British Riding Pony
+- International Miniature Pony
 
 Wichtige Abgrenzung:
-- Australian Stock Horse und Konik polski waren bereits vorhanden und wurden nicht dupliziert.
-- Polish Sport Horse wird als eigenes PZHK-Zuchtbuch geführt; ältere englische Bezeichnung `Polish Halfbred Horse` ist kein zweiter Datensatz.
-- Dølahest, Fjordhest und Nordlandshest/Lyngshest besitzen eigene norwegische Stambücher.
-- Norsk kaldblodstraver stammt historisch von der Dølahest ab, ist aber eine eigenständig geführte nationale Rasse und keine Dublette.
-- Latvian Warmblood und Latvian Heavy Warmblood werden im lettischen Staatsregister getrennt geführt; Heavy Warmblood bleibt vorerst separater Kandidat.
+- Beide werden in der aktuellen GOV.UK-Liste als eigene Breed Studbooks mit Ursprungsstutbuch geführt.
+- Cleveland Bay, Dales Pony, Fell Pony, Highland Pony, New Forest Pony und Eriskay Pony waren bereits vorhanden und wurden nicht dupliziert.
+- International Miniature Pony wird nicht mit American Miniature Horse, Falabella oder Cheval Miniature Français zusammengelegt; getrennte Register-/Rasseführung bleibt maßgeblich.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -60,6 +48,7 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Belgian Draught/Brabanter → ein Datensatz; Brabant/Brabanter historische/regionale Bezeichnung.
 - Falabella ≠ American Miniature Horse.
 - Cheval Miniature Français ≠ automatisch American Miniature Horse oder Falabella.
+- International Miniature Pony ≠ automatisch American Miniature Horse, Falabella oder Cheval Miniature Français.
 - Barbe ≠ Arabe-Barbe; getrennte Studbook-Sektionen, nicht synonym.
 - Azteca → registrierte Abstammung entscheidend; nicht jedes passende Kreuzungsprodukt ist automatisch Azteca.
 - Selle Français Originel → Label innerhalb des Selle-Français-Studbooks, keine zweite Rasse.
