@@ -21,11 +21,11 @@ Es ersetzt weder die Wissensdatenbank noch den Themenpool noch WordPress als Inh
 ## Harte Regeln
 
 1. Bereits vorhandene Glossarbeiträge werden **nicht gelöscht**, nur weil neue Produktionsregeln eingeführt wurden.
-2. Die aktuell vorhandenen sechs Live-Glossarbeiträge bleiben ausdrücklich bestehen, bis technisch nachgewiesen ist, dass Glossarbeiträge im realen Frontend anklickbar sind und eine echte Einzelansicht mit Titel und Inhalt öffnen.
-3. Erst nach diesem Klickbarkeitsnachweis entscheidet der Nutzer über den geplanten Neustart bei null und löscht den Altbestand selbst. Das Plugin löscht oder überschreibt diese sechs Beiträge nicht automatisch.
-4. Bestehende Beiträge werden bis dahin auf `NACHPRÜFUNG` geführt.
+2. Die vorhandenen Live-Glossarbeiträge bleiben bestehen, bis der Nutzer nach technischem Klickbarkeitsnachweis selbst entschieden und real geprüft hat, ob der Altbestand gelöscht wird.
+3. Das Plugin löscht oder überschreibt diese Altbeiträge nicht automatisch.
+4. Bestehende Beiträge werden bis zur fachlichen Nachprüfung auf `NACHPRÜFUNG` geführt.
 5. Bei der Nachprüfung werden fehlende verwandte Begriffe als geschlossener Cluster im selben Produktionslauf ergänzt.
-6. Ein bestehender Artikel wird nur ersetzt/gelöscht, wenn er ein echter Dublette-, Fehl- oder Testdatensatz ist und dies vorher nachgewiesen wurde.
+6. Ein bestehender Artikel wird nur ersetzt/gelöscht, wenn er ein echter Dublette-, Fehl- oder Testdatensatz ist und dies vorher nachgewiesen ist.
 7. Pferde- und Ponyrassen sind `GESPERRT` und gehören ausschließlich in das separate Pferderassen-System.
 8. `FERTIG` darf nur gesetzt werden, wenn alle Links tatsächlich auflösbar sind; reine Textnennungen zählen nicht.
 
@@ -45,26 +45,45 @@ Es ersetzt weder die Wissensdatenbank noch den Themenpool noch WordPress als Inh
 
 ## Aktueller Bestand
 
-Der vollständige Live-Bestand ist noch nicht autoritativ eingelesen. Deshalb werden hier keine weiteren vorhandenen Begriffe geraten.
+Der vollständige reale Live-Bestand ist noch nicht autoritativ eingelesen. Deshalb werden keine weiteren vorhandenen Begriffe geraten.
 
-Bereits im Arbeitsverlauf ausdrücklich bekannte vorhandene Glossarbeiträge müssen beim nächsten Live-Bestandseinzug übernommen und zunächst auf `NACHPRÜFUNG` gesetzt werden, sofern nicht bereits ein vollständiger Nachweis nach aktueller Regel existiert.
+Bereits bekannte vorhandene Glossarbeiträge müssen beim nächsten realen Bestandseinzug übernommen und zunächst auf `NACHPRÜFUNG` gesetzt werden, sofern nicht bereits ein vollständiger Nachweis nach aktueller Regel existiert.
 
 ### Bekannter Prüfauftrag
 
 | Begriff | Slug | Status | Hinweis |
 |---|---|---|---|
-| Aalstrich | aalstrich | NACHPRÜFUNG | bereits vorhanden; verwandte Begriffe müssen als echte Beiträge existieren und direkt verlinkt sein |
+| Aalstrich | aalstrich | NACHPRÜFUNG | bereits vorhanden; fachliche/Meta-/Link-Nachprüfung noch offen |
 
 ## Neue Cluster
 
-Neue Begriffe werden nicht einzeln als `FERTIG` markiert. Zuerst wird der gesamte verwandte Cluster geschlossen, danach werden alle Cluster-Mitglieder gemeinsam auf `FERTIG` gesetzt.
+Neue Begriffe werden nicht einzeln als `FERTIG` markiert. Zuerst wird der gesamte verwandte Cluster geschlossen, danach werden alle Cluster-Mitglieder gemeinsam bewertet.
 
-## Aktuelle Freigabeschranke
+Aktueller technischer Testcluster in 0.2.10-rc7:
+- Hufrehe
+- Strahlfäule
+- Hufabszess
 
-**Kein Löschen des Altbestands vor Klickbarkeitsnachweis.**
+Dieser Cluster ist **technisch im Testsystem grün**, aber nicht als realer Pferde-Live-Bestand in diesem Register auf `FERTIG` hochzustufen.
 
-Der aktuelle technische Nachweis muss mindestens belegen:
+## Klickbarkeitsnachweis – technisch erbracht
+
+Die bisherige technische Freigabeschranke verlangte mindestens:
 - Klick auf einen gerenderten bestehenden Glossarbegriff aus einer Glossarübersicht → echte Einzelansicht;
 - Klick auf einen gerenderten neuen Cluster-Begriff → echte Einzelansicht;
 - Klick auf `Verwandte Begriffe` → echte verwandte Einzelansicht;
 - Klick auf den Kategorienlink → echte Glossar-Kategorie.
+
+**Diese technische Schranke ist mit 0.2.10-rc7 im Testsystem erfüllt.**
+
+Beleg:
+- Run `34762048546`
+- Real-Design-Job `103736483696`
+- `UGE0210_EXISTING_SINGLE_CLICK_PASS`
+- `UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS`
+- `UGE0210_SINGLE_SURVIVES_EMPTY_MAIN_LOOP_PASS`
+
+Reale Browserklicks:
+`Gesundheit → Hufbein` sowie `Gesundheit → Hufrehe → Strahlfäule → Hufabszess → Gesundheit`.
+
+**Grenze:** Dies ist kein Pferde-LIVE-Readback. Der Nutzer hat angekündigt, den Altbestand erst nach eigenem realen Prüfzugriff zu löschen. Diese Entscheidung bleibt ausdrücklich beim Nutzer; keine automatische Löschung.
