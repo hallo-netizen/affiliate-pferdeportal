@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from realcase_acceptance_gate import assert_no_prebound_production_fields, RealcaseAcceptanceError
+from production_plan_binding import bind_production_plan, ProductionPlanBindingError
 
 
 class System4ReadOnlyError(RuntimeError):
@@ -86,6 +87,10 @@ class System4ReadOnlyChecks:
             assert_no_prebound_production_fields(payload)
         except RealcaseAcceptanceError as exc:
             raise System4ReadOnlyError("CONTEXT_REALCASE_BLOCK:" + str(exc)) from exc
+        try:
+            production_plan_item = bind_production_plan(article, production_plan_item, fact_pack)
+        except ProductionPlanBindingError as exc:
+            raise System4ReadOnlyError("CONTEXT_BINDING_BLOCK:" + str(exc)) from exc
         state_view = {
             "article": dict(article),
             "source_snapshot_sha256": source_snapshot_sha256,
