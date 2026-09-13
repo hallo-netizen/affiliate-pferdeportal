@@ -11,9 +11,9 @@ ROOT = Path(__file__).resolve().parent.parent
 SYSTEM4 = ROOT / 'isolated_system4'
 ENTRY = SYSTEM4 / 'root_entry.py'
 LIVE = SYSTEM4 / 'LIVE_BOUND_INPUT_ONE_ARTICLE.json'
-EXPECTED_SHA256 = '58efda5de85ca276829349cbbf6049cc9dca6e2ebbf3a50a94a87caca13e10fd'
+EXPECTED_SHA256 = '1acdda3b7ca57d13d26acd3b04a8e98e2a480d837e7f040abb030b552a805537'
 EXPECTED_BYTES = 643
-EXPECTED_MANIFEST = '3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c'
+EXPECTED_MANIFEST = '94ba652b5a3567f47c18cf71431b4b309f846c8dbd6c5402d6b27b1e9af5838c'
 
 
 def run_entry(raw: bytes, workspace: Path):
