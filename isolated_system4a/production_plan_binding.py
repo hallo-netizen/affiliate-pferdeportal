@@ -239,6 +239,7 @@ def bind_production_plan(article: Mapping[str, Any], bare_plan: Mapping[str, Any
     main = _page_for_expected(complete_row.get('main_hub_page_id_historical'), str(complete_row.get('main_hub_slug') or ''), pages)
     section = _page_for_expected(complete_row.get('section_hub_page_id_historical'), str(complete_row.get('section_hub_slug') or ''), pages)
     product = _page_for_expected(complete_row.get('product_page_id_historical'), str(complete_row.get('product_slug') or ''), pages)
+    # Require the exact published hierarchy asserted by the category contract.
     _require(int(section.get('post_parent') or 0) == int(main['ID']), 'PORTAL_LINK_SECTION_PARENT_MISMATCH')
     _require(int(product.get('post_parent') or 0) == int(section['ID']), 'PORTAL_LINK_PRODUCT_PARENT_MISMATCH')
     snapshot_sha = hashlib.sha256(wp_raw).hexdigest()
