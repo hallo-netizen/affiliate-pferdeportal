@@ -1,88 +1,88 @@
 # PROTOKOLL / ÜBERGABE — SYSTEM 4 — FINAL CLOSEOUT 2026-09-13
 
-Dieses Dokument ist das **aktuelle Abschluss-/Übergabeprotokoll**. Es ist kein CURRENT_STATE. Aktuelle System-4-Statuswahrheit bleibt ausschließlich `isolated_system4/README.md`; offizieller Campus-/Projekt-CURRENT bleibt ausschließlich `control/startmaster0107/CURRENT_STATE.json`.
+Dieses Dokument ist das aktuelle Abschluss-/Übergabeprotokoll. Es ist **kein CURRENT_STATE**. Aktuelle System-4-Statuswahrheit bleibt ausschließlich `isolated_system4/README.md`; offizieller Campus-/Projekt-CURRENT bleibt ausschließlich `control/startmaster0107/CURRENT_STATE.json`.
 
-## AKTUELLER STAND
-- PR #238 bleibt isolierter Draft-PR, unmerged, unpublished.
-- Der ausführbare Remote-System-4-Codebaum ist nach dem Transport-Cleanup weiterhin bytegleich zu `edfe6049768db68f85bf3babedce3199538217ef`; danach erfolgten ausschließlich Dokumentations-/Wegweiseränderungen.
-- Der lokal vollständig getestete Cause-Fix ist **noch nicht auf dem Remote-PR gebunden**.
-- Aktueller Remote-Live-Input bleibt die ältere 643-Byte-Datei mit Manifest `3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c` und Git-Blob `212d062eef9895cf67299f7ae6fcceee760cc2ed`.
-- `authoring_contract.py` und `full_workflow_fault_matrix.py` gehören zum getesteten Cause-Fix, sind aber im Remote-Code noch nicht gebunden.
+## AKTUELLER REMOTE-STAND
 
-## LETZTER SICHERER REALBEFUND
-Der reale Ein-Artikel-Codex-Lauf für `Putzbox für Pferde richtig auswählen` erreichte:
-`Root -> Research -> Facts -> Context -> Draft -> real PPM 6.7.9`.
+PR #238 bleibt isolierter Draft-PR, unmerged und unpublished.
 
-PPM blockierte mit `FULL:ppm679:BLOCKED_CONTENT_WORD_FLOOR` bei 448 statt mindestens 750 Wörtern. Die notwendige starke Verlängerung wurde anschließend durch `REPAIR_SCOPE_FAIL:REPAIR_SCOPE_TOO_LARGE:LENGTH:0.7680` blockiert.
+Branch: `hobbyroom/system4-true-single-room-v1`.
 
-Ursache: Eine bereits vor dem Schreiben bekannte Pflicht war nicht früh genug maschinell an den Autorweg gebunden.
+Der korrigierte Cause-Fix und der erweiterte Fehlerhistorien-Regressionsweg sind jetzt remote gebunden.
 
-## VERBINDLICHE URSACHENLÖSUNG
-Nicht die Repair-Grenze für Wortzahl aufweichen.
+Gebundene Zielblobs:
 
-Zielweg:
-`Research -> Facts -> CONTEXT_REQUIRED -> gebundener Production-Context -> hashgebundener Authoring Contract aus denselben unveränderten Autoritäten -> DRAFT_REQUIRED -> Draft -> unveränderte echte Prüfer`.
+- `authoring_contract.py` -> `bab5c3bbb6e1440b3d2e8a52e0ee4fe6f5fd7ae4`
+- `full_local_acceptance.py` -> `738f83748b6ead75a9079b8c89eccf2ee9c43515`
+- `LIVE_BOUND_INPUT_ONE_ARTICLE.json` -> `7c5fffa20a5ef29e9f793903f70259dcfac22a25`
 
-Kein Chat, Codex, Nutzertext oder anderer externer Input darf Regeln ergänzen, lockern oder überschreiben.
+Root-Manifest des gebundenen Live-Inputs:
 
-Textmaschine, PPM 6.7.9, PSERC/PSTE, LanguageTool 6.8, Design, WordPress-Plugin und Theme/CSS bleiben READ-ONLY.
+`63d124c6c83ce6a68368123e55a7b7be61804f870c40f9606c315280c2aa2623`
 
-## TESTREGEL
-Jeder bekannte Workflow-Schritt muss positiv und negativ gegen den vollständigen Gesamtworkflow geprüft werden. Isolierte Einzeltests zählen nicht als Gesamtworkflow-Beweis.
+## URSACHE / REPARATUR
 
-Auf den lokal exakt gebundenen Cause-Fix-Bytes tatsächlich terminal ausgeführt:
-- 121/121 Unittests PASS;
-- 15/15 Workflow-Stationen positiv und negativ;
-- 39 Gesamtworkflow-Szenarien PASS;
-- 10/10 Root->Datei-Acceptance PASS;
-- reales LT 6.8;
-- reales PPM 6.7.9;
-- finale Testdatei 66753 Bytes;
-- SHA256 `f6b08cdede6dedef329ca20dde3b648f77cd6f8b6342ee2407cc3441953a7c75`.
+Die wiederkehrende Fehlerklasse war eine unvollständige Autoritätsprüfung an Übergaben: Werte konnten vor Draft als gebunden gelten, obwohl sie nicht gegen dieselbe autoritative Quelle geprüft wurden, die der spätere echte PPM verwendet.
 
-Diese Belege gelten ausdrücklich nur für die getesteten Cause-Fix-Bytes, **nicht** für den aktuellen Remote-PR-Head.
+Der aktuelle Fix bindet die bekannten nicht reparierbaren Vorbedingungen vor Draft gegen ihre autoritativen Quellen. Dazu gehören insbesondere Runtime-Fact-IDs, Runtime-Linkwerte, Runtime-Pflichtfelder, Artikelidentität, Plan-/Fact-Pack-Snapshot, interner Marker, Fact-Referenzen und Source-Traces.
 
-## OFFENE FEHLER / BLOCKER
-1. `S4-BLOCK-CAUSEFIX-NOT-REMOTE`: Die 13 getesteten Cause-Fix-Dateibytes sind noch nicht vollständig auf PR #238 gebunden.
-2. `S4-BLOCK-REMOTE-REPROOF`: Nach Übertragung müssen 121/121, Matrix 15/15 + 39 und Acceptance 10/10 auf exakt dem dann aktuellen Remote-Head ohne Codex erneut terminal laufen; danach Hardlock auf exakt diesem Head.
-3. `S4-CLEANUP-TMP-BRANCH`: `tmp-should-not-use` wurde versehentlich angelegt. Er wird bis zur möglichen Löschung stets auf denselben Stand wie der Arbeitsbranch gehalten und darf niemals als Arbeits-/CURRENT-/Produktionsbranch verwendet werden.
+Keine Änderung an Textmaschine, PPM 6.7.9, PSERC/PSTE, LanguageTool-Regeln, Design, WordPress-Plugin oder Theme/CSS.
+
+## TATSÄCHLICH AUSGEFÜHRTE TESTS
+
+Auf den jetzt remote bytegleich gebundenen Produktions-/Testbytes wurden ohne Codex ausgeführt:
+
+- vollständiger positiver Weg `Root -> Research -> Facts -> Context -> Draft -> echtes LT -> echtes PPM -> Repair -> Batch -> Handoff -> Unpack`: PASS;
+- bestehender Root->Datei-Acceptance-Satz: 10/10 PASS;
+- zusätzlicher Fehlerhistorien-Negativkatalog: 14/14 PASS;
+- zusätzlicher Batch-/Kontext-Negativnachweis: PASS;
+- Summe: 25/25 PASS.
+
+Unter den aktiv provozierten historischen Fehlerklassen: unbekannte Fact-ID, Fact-Pack-Mismatch, interner Marker, Runtime-Felder/-Titel/-Links, Context/Snapshot, fehlende Fact-Refs, fehlende/falsche Source-Traces, Word-Floor, fehlender gebundener Link, Plan-Slot, Manifest, Handoff-Tamper und Batch-State-Tamper.
+
+Echte Prüfer:
+
+- LanguageTool 6.8 SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
+- PPM 6.7.9 SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
+
+`mocks_used=false` für den Produktionsbeweis.
+
+## REMOTE-HARDLOCK
+
+Auf Code-/Live-Input-Head `8bfe1fbb62be3df43651c20e816fed86b58ea1d7` war der `Pferde Atelier Immutable Base Hardlock` SUCCESS, Run `34774857418`.
+
+Nach den reinen Dokumentationsnachzügen ist der Hardlock auf dem finalen Head erneut frisch zu prüfen. Erst dieser finale Head ist der Abschlussreferenzpunkt.
 
 ## CODEX
-Verbindlich: Codex **nur** für konkrete real gebundene Artikel-/Batch-Produktion und nur nach ausdrücklicher Nutzerfreigabe.
 
-Kein Codex für Diagnose, Architektur, Code/Patch, Commit/Push, Preflight, Regressionstests, Dokumentation oder WordPress-/Handoff-Experimente.
+In dieser Reparatur-/Remote-Übertragung wurde **kein weiterer Codex-Lauf gestartet**.
 
-Die Nutzung von Codex für einen Patch-/Push-Auftrag in diesem Chat war ein Regelverstoß; sie aktualisierte den Remote-PR nicht.
+Verbindlich bleibt:
 
-## NEXT ACTION
-Ohne Codex:
-1. exakt die 13 im Detailprotokoll `PROTOKOLL_HANDOVER_20260913_CAUSEFIX_CLOSEOUT.md` gebundenen Cause-Fix-Dateibytes auf `hobbyroom/system4-true-single-room-v1` übertragen;
-2. alle 13 Remote-Blobs exakt prüfen;
-3. Manifest `8789f0af37183e9988e0b90f9bb5ea2d3e0537c4b43e849d4e34a37fb1a904ff` nachweisen;
-4. 121/121 + Matrix 15/15/39 + Acceptance 10/10 mit realem LT/PPM auf exakt dem aktuellen Head terminal ausführen;
-5. Immutable Base Hardlock prüfen;
-6. erst danach und nur nach ausdrücklicher Freigabe genau einen konkreten Codex-Artikeltest.
+**Kein Codex ohne ausdrückliche Nutzerfreigabe mit den Worten `Starte Codex`.**
 
-## NICHT ANFASSEN
-- Textmaschine / Fachregeln
-- PPM 6.7.9
-- PSERC/PSTE
-- LanguageTool-Version/Regeln
-- Design / Theme / CSS
-- WordPress-Plugin
-- offizieller STARTMASTER0107/CURRENT_STATE
-- kein Merge / kein Publish
+`Weiter`, `testen`, `komplett prüfen`, `Null bis Ende` oder ähnliche Formulierungen sind keine Codex-Freigabe.
 
-## CAMPUS-/ARCHITEKTURFOLGE
-Die Prinzipien „bekannte Prüferpflichten vor dem Schreiben aus denselben Autoritäten binden“ und „jeden bekannten Fehler positiv/negativ im Gesamtworkflow prüfen“ sind grundsätzlich allgemein sinnvoll. Sie werden noch **nicht** in globale Campus-/Neubauvorlagen übernommen, solange der Cause-Fix nicht auf dem Remote-System-4-Head gebunden und dort vollständig reproduziert ist.
+## STATUS / NEXT ACTION
 
-## PLUGINS
-**NICHT BETROFFEN.** In diesem Chat wurde kein Plugin entwickelt, technisch verändert oder auf eine neue Version aktualisiert. Keine Änderung im PLUGINS-Büro, keine CURRENT.zip, kein PU-Vorgang.
+System 4 bleibt **BLOCKED FÜR PRODUKTION**, weil der reale Ein-Artikel-Codex-Produktionslauf nach diesem Fix nicht freigegeben und nicht ausgeführt wurde.
+
+Nächste Produktionsaktion nur nach ausdrücklicher Nutzerfreigabe `Starte Codex`:
+
+- exakt ein real gebundener Artikel;
+- kompletter System-4-Weg;
+- kein automatischer zweiter Versuch;
+- kein Merge;
+- kein Publish.
 
 ## EINE WAHRHEIT
-- Campus CURRENT: `control/startmaster0107/CURRENT_STATE.json`
-- System-4 CURRENT: `isolated_system4/README.md`
-- System-4 Ziel: `isolated_system4/ZIELVERTRAG_SYSTEM4_CODEX_STRICT_PIPELINE_20260913.md`
-- aktuelles Übergabeprotokoll: diese Datei
-- PR-Text: ausschließlich Wegweiser
-- ältere Protokolle: Historie/Beleg, keine CURRENT-Wahrheit
+
+- offizieller Campus-/Projekt-CURRENT: `control/startmaster0107/CURRENT_STATE.json`
+- System-4-CURRENT: `isolated_system4/README.md`
+- System-4-Ziel: `isolated_system4/ZIELVERTRAG_SYSTEM4_CODEX_STRICT_PIPELINE_20260913.md`
+- dieses Dokument: Abschluss-/Übergabeprotokoll, keine zweite CURRENT-Wahrheit
+- PR-Text: nur Wegweiser
+
+## PLUGINS
+
+NICHT BETROFFEN.
