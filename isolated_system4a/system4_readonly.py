@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from realcase_acceptance_gate import assert_no_prebound_production_fields, RealcaseAcceptanceError
+
 
 class System4ReadOnlyError(RuntimeError):
     pass
@@ -80,6 +82,10 @@ class System4ReadOnlyChecks:
         production_plan_item = payload["production_plan_item"]
         if not isinstance(fact_pack, dict) or not isinstance(production_plan_item, dict):
             raise System4ReadOnlyError("CONTEXT_OBJECT_REQUIRED")
+        try:
+            assert_no_prebound_production_fields(payload)
+        except RealcaseAcceptanceError as exc:
+            raise System4ReadOnlyError("CONTEXT_REALCASE_BLOCK:" + str(exc)) from exc
         state_view = {
             "article": dict(article),
             "source_snapshot_sha256": source_snapshot_sha256,
@@ -142,7 +148,6 @@ class System4ReadOnlyChecks:
             "draft_sha256": draft_sha,
         }
         try:
-            # Same fail-closed preconditions used by current System 4.
             self.content_guard.validate_single_article(draft, fact_pack)
             self.design_guard.validate_design_neutrality(draft, str(article["article_type"]))
             evidence = self.production_checks.run_all(
