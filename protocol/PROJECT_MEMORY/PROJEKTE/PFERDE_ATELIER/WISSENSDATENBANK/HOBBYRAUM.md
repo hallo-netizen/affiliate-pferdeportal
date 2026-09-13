@@ -27,10 +27,10 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **122 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- **126 reale Rassendatensätze** unter `DATEN/` vorhanden;
 - zahlreiche nationale/ursprüngliche Zuchtbücher und offizielle Verbände eingebunden;
-- neu seit 118: Swedish Warmblood, Oldenburger, Marsh Tacky und Newfoundland Pony;
-- SWB-Registerklassen werden nicht als getrennte Rassen dupliziert;
+- neu seit 122: Canadian Horse, Florida Cracker Horse, Gotlandsruss und Nordsvensk brukshäst;
+- Marshtackie wird als Synonym des Florida Cracker Horse behandelt und nicht dupliziert;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
