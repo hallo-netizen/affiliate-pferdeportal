@@ -102,7 +102,7 @@ Autoritative Fehlerquelle:
 ## GLOSSAR-FRONTEND-20260913
 
 Bereich: GLOSSAR / MOD-008 / PFERDE ATELIER  
-Status: 0.2.6 TECHNISCHER KANDIDAT HARDTEST PASS / LIVE-READBACK OFFEN
+Status: AKTIV / aktueller technischer, Paket- und Live-Status ausschließlich aus der autoritativen Fehlerquelle
 
 Autoritative Fehlerquelle:
 `PROJEKTE/PFERDE_ATELIER/GLOSSAR/FEHLERQUELLEN.md`
