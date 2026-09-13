@@ -1,0 +1,88 @@
+name: Glossar Closeout Governance Sync
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-closeout-governance-sync.yml'
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync wayfinder and why register
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          mod = Path('protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md')
+          s = mod.read_text()
+          block = '''## MOD-008 – UNIVERSAL GLOSSAR ENGINE
+
+          MODULKLASSE: UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG
+
+          STATUS:
+          Aktive Entwicklung vorhanden. Kein dynamischer Projekt-/Paket-/LIVE-Status wird hier dupliziert.
+
+          HAUPTORT:
+          `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
+
+          ERSTE PROJEKTANWENDUNG:
+          `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
+
+          AKTUELLER PROJEKT-/TEST-/PAKET-/LIVE-STATUS:
+          immer frisch aus `PROJEKTE/PFERDE_ATELIER/GLOSSAR/CURRENT_STATE.md` lesen.
+
+          ALLGEMEINER CORE-STATUS:
+          immer frisch aus `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md` lesen.
+
+          PLUGIN-AUSGABEPULT PFERDE:
+          `PROJEKTE/PFERDE_ATELIER/PLUGINS/`
+
+          REGEL:
+          Modulregister bleibt reiner Wegweiser; keine zweite technische Wahrheit.
+          '''
+          block = '\n'.join(line[10:] if line.startswith('          ') else line for line in block.splitlines()) + '\n'
+          m = re.search(r'## MOD-008 – UNIVERSAL GLOSSAR ENGINE\n.*?(?=\n## MOD-|\Z)', s, flags=re.S)
+          if not m:
+              raise SystemExit('MOD008_SECTION_NOT_FOUND')
+          s = s[:m.start()] + block + s[m.end():]
+          mod.write_text(s)
+
+          ar = Path('protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md')
+          s = ar.read_text()
+          marker = '## GLOSSAR-001 – Geschlossene Glossarcluster und hashgebundene Plugin-Ausgabe'
+          if marker not in s:
+              s += '''
+
+          ## GLOSSAR-001 – Geschlossene Glossarcluster und hashgebundene Plugin-Ausgabe
+
+          WAS:
+          Neue kurze Pferde-Glossarbegriffe werden als geschlossene verwandte Cluster produziert: alle Mitglieder zuerst als Entwurf, anschließend Inhalte, Meta, primäre Portal-Kategorie, Beziehungen und echte Linkziele vollständig setzen und prüfen; erst danach den vollständigen Cluster gemeinsam veröffentlichen. Pferde-/Ponyrassen bleiben ausgeschlossen. Nach tatsächlicher Pluginentwicklung wird die geprüfte Pferde-Ausgabekopie zusätzlich hashgebunden im PLUGINS-Büro als `CURRENT.zip` + `MANIFEST.md` geführt.
+
+          WARUM:
+          Tote `Verwandte Begriffe`, halbfertige Cluster, nicht auflösbare Linkziele und nicht reproduzierbare Pluginstände sollen fail-closed verhindert werden. Fach-/Release-/LIVE-Wahrheit bleibt trotzdem ausschließlich im Glossar-Fachbüro; die Plugin-Kopie ist nur abgeleitete Ausgabe.
+
+          ARCHITEKTURGRENZE:
+          Die Pferde-Projektlinie 0.2.10-rc7 enthält projektspezifische Content-Pack-Logik und ist deshalb nicht automatisch als neuer allgemeingültiger Universal-Core freigegeben. Allgemeingültigkeit verlangt weiterhin eine saubere Adapter-/Projektkonfigurationsgrenze und einen zweiten Projektbeweis.
+
+          BELEG:
+          - `PROJEKTE/PFERDE_ATELIER/GLOSSAR/PRODUKTIONSREGELN.md`
+          - `PROJEKTE/PFERDE_ATELIER/GLOSSAR/PROTOKOLL_0.2.10_RC7_20260913.md`
+          - `PROJEKTE/PFERDE_ATELIER/PLUGINS/UPDATEPROTOKOLL.md` → `PU-20260913-001`
+          - `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/CURRENT_STATE.md`
+          '''
+          s = '\n'.join(line[10:] if line.startswith('          ') else line for line in s.splitlines()) + '\n'
+          ar.write_text(s)
+          PY
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
+          git commit -m 'Sync Glossar module wayfinder and decision record'
+          git push origin HEAD:hobbyroom/glossar-livefail-red-green-20260913
+          echo GLOSSAR_GOVERNANCE_CLOSEOUT_SYNC_PASS
