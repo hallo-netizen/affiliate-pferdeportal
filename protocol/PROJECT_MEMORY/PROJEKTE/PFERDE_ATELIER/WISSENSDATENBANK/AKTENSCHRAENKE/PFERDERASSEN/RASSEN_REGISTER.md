@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 153 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 157 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,25 +10,21 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **153 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **157 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 145er-Stand neu angelegt:
+Seit dem synchronisierten 153er-Stand neu angelegt:
 
-- Žemaitukas
-- Großer Žemaitukas / Stambieji žemaitukai
-- Litauisches Kaltblut / Lietuvos sunkieji arkliai
-- Gidrán
-- Nóniusz
-- Kisbéri félvér
-- Furioso–North Star
-- Ungarisches Kaltblut / Magyar hidegvérű
+- Slowenisches Kaltblut / Slovenski hladnokrvni konj
+- Posavje-Pferd / Posavski konj
+- Ljutomer-Traber / Ljutomerski kasač
+- Slowenisches Warmblut / Slovenski toplokrvni konj
 
 Wichtige Abgrenzung:
-- Žemaitukas und Stambieji žemaitukai werden im aktuellen litauischen staatlichen Erhaltungsprogramm getrennt geführt und deshalb nicht zusammengelegt.
-- Gidrán, Nóniusz, Kisbéri félvér und Furioso–North Star werden von Nébih als getrennte Rassen mit eigenen zuständigen Zuchtorganisationen geführt.
-- Magyar hidegvérű wird ebenfalls als eigene ungarische Rasse geführt.
+- Bosnisches Gebirgspferd war bereits vorhanden und wurde nicht dupliziert.
+- Posavje Horse wird in Slowenien als eigenständige indigene Rasse geführt; verwandte/benachbarte kroatische Posavina-Bestände werden separat geprüft.
+- Ljutomer Trotter wird als eigene slowenische Traberpopulation geführt und nicht mit allgemeinem Standardbred/Trotter-Bestand zusammengelegt.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
