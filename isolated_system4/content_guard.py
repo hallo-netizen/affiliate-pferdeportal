@@ -8,6 +8,8 @@ from difflib import SequenceMatcher
 from typing import Any, Mapping, Sequence
 from urllib.parse import urlparse
 
+import design_guard
+
 RESEARCH_CONTRACT = "SYSTEM4_RESEARCH_EVIDENCE_V1"
 FACTS_CONTRACT = "SYSTEM4_FACTS_EVIDENCE_V1"
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -337,7 +339,24 @@ def validate_article_fact_ids(article: str, fact_pack: Mapping[str, Any]) -> dic
     return {"status": "PASS", "referenced_fact_count": len(referenced)}
 
 
+def _article_type_from_markup(article: str) -> str:
+    root = re.match(r"(?is)^\s*<article\b([^>]*)>", article)
+    _require(root is not None, "ARTICLE_CANONICAL_ROOT_MISSING")
+    attr = re.search(r"(?is)\bdata-article-type\s*=\s*([\"'])(.*?)\1", root.group(1))
+    _require(attr is not None and attr.group(2).strip(), "ARTICLE_TYPE_TRACE_MISSING")
+    return attr.group(2).strip()
+
+
 def validate_single_article(article: str, fact_pack: Mapping[str, Any]) -> dict[str, Any]:
     validate_fact_pack(fact_pack)
     trace = validate_article_fact_ids(article, fact_pack)
-    return {"status": "PASS", "trace": trace}
+    article_type = _article_type_from_markup(article)
+    before = text_sha256(article)
+    try:
+        design = design_guard.validate_design_neutrality(article, article_type)
+    except design_guard.DesignGuardError as exc:
+        raise ContentGuardError("ARTICLE_DESIGN_GUARD:" + str(exc)) from exc
+    _require(text_sha256(article) == before, "ARTICLE_DESIGN_GUARD_MUTATED_BODY")
+    _require(design.get("design_mutation_performed") is False, "ARTICLE_DESIGN_MUTATION_FORBIDDEN")
+    _require(design.get("content_mutation_performed") is False, "ARTICLE_CONTENT_MUTATION_FORBIDDEN")
+    return {"status": "PASS", "trace": trace, "design": design}
