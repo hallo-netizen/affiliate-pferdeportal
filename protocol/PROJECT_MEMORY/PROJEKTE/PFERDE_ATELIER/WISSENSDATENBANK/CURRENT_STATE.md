@@ -23,13 +23,14 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **114 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 108er-Stand neu: Selle Français, Poney Français de Selle, Trotteur Français, Cheval Miniature Français, Cheval de Sport Anglo-Normand und Cheval Crème.
-- Diese sechs werden von IFCE über eigene Zuchtprogramme/Livres Généalogiques geführt.
+- **118 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 114er-Stand neu: Mangalarga Marchador, Kathiawari, Marwari und Campolina.
+- Mangalarga Marchador ist über ABCCMM/MAPA mit offiziellem genealogischem Register und aktuellem Rassestandard gebunden.
+- Marwari und Kathiawari besitzen eigene indische Studbook-Strukturen; Detailstandardfelder bleiben dort sichtbar offen, wo sie noch nicht ausreichend gebunden sind.
+- Campolina wurde als brasilianische Gangpferderasse mit eigenem Verband/Register als Kernakte angelegt.
+- Brasilianischer Crioulo wird nicht künstlich als zweiter Datensatz angelegt, weil der vorhandene Criollo-Datensatz den südamerikanischen Ursprungsverbund einschließlich Brasilien bereits abdeckt.
 - Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben offen, weil Status/Detailstandard noch nicht stark genug aus Primärquellen gebunden sind.
-- Dubletten-/Sektionenlogik bleibt strikt; Labels, Fokrichtungen und bloße Farb-/Typbezeichnungen werden nicht automatisch als eigene Rassen behandelt.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
-- Offene Detailfelder und Kernakten mit `NACHRECHERCHE_DETAILSTANDARD` bleiben sichtbar offen.
 
 ## GLOSSAR – FORTSCHRITT
 
