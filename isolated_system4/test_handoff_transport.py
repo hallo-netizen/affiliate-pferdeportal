@@ -1,5 +1,6 @@
 import base64, hashlib, json, tempfile, unittest
 from pathlib import Path
+import design_guard
 import handoff_transport as ht
 
 def sha(value): return hashlib.sha256(value.encode('utf-8')).hexdigest()
@@ -17,21 +18,23 @@ class HandoffTransportTests(unittest.TestCase):
                 {'fact_id':f'fact-{i}-a','source_id':source_id,'statement':f'Konkrete Aussage A für Handoff {i}.','evidence_text':e1,'evidence_text_sha256':sha(e1)},
                 {'fact_id':f'fact-{i}-b','source_id':source_id,'statement':f'Konkrete Aussage B für Handoff {i}.','evidence_text':e2,'evidence_text_sha256':sha(e2)},
             ]}
-    def payload(self):
-        rows=[]
-        for i in range(7):
+    def payload(self,count=7,types=None):
+        rows=[]; types=types or ['Beratung']
+        for i in range(count):
+            article_type=types[i%len(types)]
+            type_class=design_guard.article_type_class(article_type)
             unique=' '.join(f'eigen{i}_{n}' for n in range(70))
-            body=f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Abschnitt {i}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">Artikel {i} {unique}</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>{i}</td><td>Wert</td></tr></table></article>'
+            body=f'<article class="ppm-generated {type_class}" data-article-type="{article_type}"><h2>Abschnitt {i}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">Artikel {i} {unique}</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>{i}</td><td>Wert</td></tr></table></article>'
             body_sha=hashlib.sha256(body.encode()).hexdigest()
             rows.append({
-                'index':i,'title':f'Titel {i}','target_keyword':f'Keyword {i}','category':f'cat-{i}','article_type':'Beratung','plan_slot':hashlib.sha256(f'slot-{i}'.encode()).hexdigest(),
+                'index':i,'title':f'Titel {i}','target_keyword':f'Keyword {i}','category':f'cat-{i}','article_type':article_type,'plan_slot':hashlib.sha256(f'slot-{i}'.encode()).hexdigest(),
                 'final_draft_sha256':body_sha,'revision_count':1,'body':body,
                 'production_context':{'fact_pack':self.fact_pack(i),'production_plan_item':{'contract':'production_plan_v4'}},
                 'languagetool':{'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'},
                 'ppm679':{'status':'PASS','ppm_version':'6.7.9','technical_status':'TECHNICAL_CHECK_OK','content_quality_status':'CONTENT_QUALITY_CHECK_OK','fail_closed_aggregate_status':'PASS','content_sha256':body_sha},
             })
         return {
-            'contract':ht.HANDOFF_CONTRACT,'batch_sha256':hashlib.sha256(b'batch').hexdigest(),'publish_allowed':False,'signing_deferred':True,
+            'contract':ht.HANDOFF_CONTRACT,'batch_sha256':hashlib.sha256(f'batch-{count}'.encode()).hexdigest(),'publish_allowed':False,'signing_deferred':True,
             'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS',
             'wordpress_review':{
                 'file_format':'JSON','mime_type':'application/json','intended_next_step':'WORDPRESS_DIRECT_IMPORT','plugin_name':'Portal SEO Editorial Plan Compiler',
@@ -52,19 +55,24 @@ class HandoffTransportTests(unittest.TestCase):
             dst=ht.inline_unpack(inline,out)
             self.assertEqual(expected,dst.read_bytes())
             self.assertEqual(env['plaintext_sha256'],hashlib.sha256(expected).hexdigest())
-            self.assertLessEqual(len(inline.read_text(encoding='utf-8')),ht.INLINE_MAX_CHARS)
+            self.assertGreaterEqual(env['part_count'],1)
+
+    def test_positive_one_article_and_mixed_types(self):
+        self.assertEqual(len(ht.validate_handoff(self.payload(1))['articles']),1)
+        types=['Beratung','Produktvergleich','Pferderasse','Glossar Begriff']
+        p=self.payload(len(types),types)
+        ht.validate_handoff(p)
+        self.assertEqual([row['article_type'] for row in p['articles']],types)
 
     def test_negative_inline_tamper(self):
         with tempfile.TemporaryDirectory() as td:
             td=Path(td); src=td/'source.json'; canonical=td/ht.HANDOFF_FILENAME; inline=td/ht.INLINE_FILENAME
             self.write(src,self.payload()); ht.canonicalize_handoff(src,canonical); ht.inline_pack(canonical,inline)
             text=inline.read_text(encoding='utf-8')
-            start=text.index(ht.INLINE_BEGIN)+len(ht.INLINE_BEGIN)
-            end=text.index(ht.INLINE_END,start)
-            env=json.loads(text[start:end].strip())
-            raw=base64.b64decode(env['payload_base64']); env['payload_base64']=base64.b64encode(raw+b'X').decode()
-            inline.write_text(ht.INLINE_BEGIN+'\n'+json.dumps(env,separators=(',',':'))+'\n'+ht.INLINE_END+'\n',encoding='utf-8')
-            with self.assertRaisesRegex(ht.HandoffError,'INLINE_XZ_INVALID'): ht.inline_unpack(inline,td/'out')
+            envs=ht._parse_inline_text(text)
+            envs[0]['payload_base64']=envs[0]['payload_base64'][:-1] + ('A' if envs[0]['payload_base64'][-1:]!='A' else 'B')
+            inline.write_text(ht.INLINE_BEGIN+'\n'+'\n'.join(json.dumps(env,separators=(',',':')) for env in envs)+'\n'+ht.INLINE_END+'\n',encoding='utf-8')
+            with self.assertRaisesRegex(ht.HandoffError,'INLINE_(BASE64_INVALID|COMPRESSED_SHA_MISMATCH|XZ_INVALID)'): ht.inline_unpack(inline,td/'out')
 
     def test_negative_body_hash(self):
         p=self.payload(); p['articles'][0]['body']+='x'
@@ -99,8 +107,8 @@ class HandoffTransportTests(unittest.TestCase):
     def test_negative_downstream_components_present(self):
         p=self.payload(); p['wordpress_review']['required_downstream_components']=['workflow_release']
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_DOWNSTREAM_MUST_BE_EMPTY'): ht.validate_handoff(p)
-    def test_negative_article_count(self):
-        p=self.payload(); p['articles'].pop()
+    def test_negative_zero_article_count(self):
+        p=self.payload(1); p['articles']=[]
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_ARTICLE_COUNT_INVALID'): ht.validate_handoff(p)
     def test_negative_missing_inline_end_marker(self):
         with tempfile.TemporaryDirectory() as td:
