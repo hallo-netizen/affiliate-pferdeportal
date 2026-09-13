@@ -1,7 +1,7 @@
 # GLOSSAR – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: TECHNISCH PASS / LIVE-READBACK 0.2.8 OFFEN
+STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCH PASS / LIVE-READBACK OFFEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,106 +9,105 @@ STATUS: TECHNISCH PASS / LIVE-READBACK 0.2.8 OFFEN
 Der einzige aktuelle Arbeitsraum des Büros GLOSSAR.
 
 **DU DARFST …**  
-den exakt getesteten 0.2.8-Kandidaten für den realen Pferde-Readback verwenden und danach ausschließlich nach tatsächlichem Live-Ergebnis weiterarbeiten.
+den exakt getesteten 0.2.9-Kandidaten für den realen Pferde-Readback verwenden und danach nur anhand des tatsächlichen Live-Ergebnisses weiterarbeiten.
 
 **DU DARFST NICHT …**  
-`main` verändern, 0.2.6 oder 0.2.7 erneut ausgeben, ein materiell anderes Paket erneut 0.2.8 nennen, aus technischem CI-PASS einen Pferde-LIVE-PASS ableiten oder einen Live-Fehler ohne realen Nutzer-Readback schließen.
+`main` verändern, 0.2.6/0.2.7/0.2.8 erneut ausgeben, unterschiedliche Paketbytes unter derselben Versionsnummer erzeugen, die alte falsche Kategorie-Acceptance wiederverwenden oder aus CI einen Pferde-LIVE-PASS ableiten.
 
 **ALS NÄCHSTES …**  
-exakt das gated getestete 0.2.8-ZIP über den normalen WordPress-Update/Überschreiben-Weg installieren und die reale Frontend-Checkliste abarbeiten.
+exakt das gated getestete 0.2.9-ZIP über WordPress installieren und real prüfen.
 
 ## ARBEITSORT
 
 Branch:
 `hobbyroom/glossar-livefail-red-green-20260913`
 
-`main` bleibt unangetastet.
-
 Autoritative Fehlerquelle:
 `FEHLERQUELLEN.md`
 
-Autoritativer aktueller Stand:
+Autoritativer Stand:
 `CURRENT_STATE.md`
 
-Testprotokoll:
-`../../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.8_20260913.md`
+## HISTORIE / VERBRAUCHTE VERSIONEN
 
-## HISTORIE
+- 0.2.6: historische Zwischenversion / nicht verwenden.
+- 0.2.7: LIVE FAIL / nicht verwenden.
+- 0.2.8: **LIVE FAIL / nicht verwenden.**
 
-0.2.6: historische Zwischenversion / nicht verwenden.
+Realer 0.2.8-Readback:
+1. Bild höher, aber nicht responsive;
+2. Kategorien nicht dem Startseiten-Design angepasst;
+3. Einzelartikel laufen ins Leere.
 
-0.2.7: **LIVE FAIL / BLOCKED / nicht verwenden.**
+## VERBINDLICHE KORREKTUR
 
-Die durch 0.2.7 sichtbar gewordenen Testlücken sind nicht mehr Teil der aktuellen Abnahme:
-- echter Designcode statt Stub;
-- echte Browsergeometrie statt CSS-Grep;
-- sichtbare AJAX-Position statt nur JSON;
-- Kategorie- und Einzelrenderer statt nur HTTP-Status;
-- Updatepfade 0.2.6 und 0.2.7;
-- gezielt zerstörter Rewritezustand als Negativfall.
+Der alte Kategorietest war falsch. Er verlangte `kein Hero / keine Tools` und prüfte damit das Gegenteil der Nutzeranforderung.
 
-## 0.2.8 TECHNISCHER KANDIDAT
+Ab 0.2.9 gilt hart:
+- Kategorie hat echten Kategorieinhalt;
+- **plus denselben vollständigen visuellen Glossar-Rahmen wie die Startseite**;
+- Hero + Suche/A–Z + Icon-Navigation sind Pflicht;
+- Hero-Kicker `WISSEN`;
+- ein gerenderter Begriff-Link muss im Browser tatsächlich geklickt werden und auf die echte Einzelbegriffseite führen.
 
-Finaler Hardtest:
-- Run `34755984363`
-- Head `d14f6bff7f660cc6461208e8153fbdf237f0d609`
-- Browser final `103720316319` SUCCESS
-- Fresh final `103720316220` SUCCESS
-- Update 0.2.6 → 0.2.8 `103720316226` SUCCESS
-- Update 0.2.7 → 0.2.8 `103720316230` SUCCESS
-- Real Design 1.50.469 `103720316084` SUCCESS
-- Gated Package `103720510869` SUCCESS
+## 0.2.9 TECHNISCHER KANDIDAT
 
-Echter Design-Hauptcode:
-SHA-256 `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`.
+Finaler Run:
+`34757795593`
+
+Head:
+`f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
+
+SUCCESS:
+- Build `103725094481`
+- Fresh + Regression + Null-Rewrite `103725094537`
+- Update 0.2.8 → 0.2.9 + erneuter Null-Rewrite `103725094620`
+- Real Design 1.50.469 + Browser + Null-Rewrite `103725094378`
+- Gated Package `103725295224`
+
+Real-Design Browser beweist:
+- AJAX sichtbar und korrekt positioniert;
+- echtes Bild responsive bei 1200/900/720/500;
+- Kategorie-Vollrahmen vorhanden;
+- tatsächlicher gerenderter Hufbein-Link wird angeklickt und liefert echtes `uge-single-wrap` + Inhalt;
+- Negativfälle PASS.
+
+## ROUTING-HARDLOCK GEGEN TOTE EINZELLINKS
+
+0.2.9 verwendet Rewrite-Schema 7 und zusätzlich einen direkten Request-Binder für Glossar-Begriff und Glossar-Gruppe.
+
+Der Test löscht **alle** gespeicherten Glossar-Rewrite-Regeln, obwohl Schema 7 bereits aktuell ist. Danach müssen die URLs weiter funktionieren. Dadurch hängt die Einzelroute nicht mehr allein davon ab, ob WordPress/Cache die gespeicherte Rewrite-Tabelle korrekt aktualisiert hat.
+
+Native authentifizierte Draft-Preview bleibt ausdrücklich ausgenommen und ist Regression-PASS.
 
 ## EXAKTE ÜBERGABE
 
-Nur dieses Paket verwenden:
-`universal-glossary-engine-0.2.8.zip`
+Nur dieses Paket:
+`universal-glossary-engine-0.2.9.zip`
 
 SHA-256:
-`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
+`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
 
-Actions-Artefakt:
-ID `10318015702`
+Actions-Artefakt-ID:
+`10317444708`
 
 Outer artifact digest:
-`sha256:d404bd537f53bffb5a4a894c5ad4758ac5723524323638a6dd1e1b5fbb061b68`
-
-Regel:
-Wenn sich Pluginbytes nochmals materiell ändern, ist **0.2.8 verbraucht**. Nächste Produktversion dann mindestens 0.2.9 und vollständige Hardtest-Kette erneut.
+`sha256:98513772d72fc65dc4d01520086b4c7e56e165cceeea1e31147a9d6cf830c6ff`
 
 ## REALER LIVE-READBACK
 
-Nach Installation zwingend prüfen:
+Positiv zwingend:
+1. Hero-Bild wird beim Verkleinern real kleiner;
+2. Kategorie `Gesundheit` hat Hero, Suche/A–Z, Icon-Navigation und eigenen Kategorieinhalt;
+3. Begriffskarte anklicken → echte Einzelbegriffseite mit Titel/Inhalt;
+4. AJAX funktioniert;
+5. oberer Abstand bleibt korrekt.
 
-### Positiv
-1. Abstand oberhalb Hero bleibt korrekt.
-2. Hero/Bild reagiert auf Desktop/Tablet/Mobil real proportional.
-3. AJAX-Suche liefert reale Treffer und Trefferbox sitzt direkt unter dem Suchfeld.
-4. `/glossar/gesundheit/` ist echte Kategorieansicht mit Kategorie-Kopf/Begriffen und keine Startseitenkopie.
-5. Alle getesteten Einzelbegriffe zeigen echte Glossarseite mit Titel und Inhalt.
-6. Breadcrumb genau einmal und korrekt positioniert.
-
-### Negativ
-1. unbekannter Begriff → 404;
+Negativ zwingend:
+1. unbekannter Begriff 404;
 2. Draft nicht öffentlich;
-3. normale WordPress-Beiträge unverändert;
-4. gleichnamige Kategorie und gleichnamiger Begriff bleiben getrennt;
-5. Kategorie enthält keinen Home-Hero und keine Home-Tools;
-6. kein globaler Layoutshift außerhalb Glossar.
+3. normale Beiträge unverändert;
+4. kein globaler Layoutshift;
+5. Draft-Preview für eingeloggten Bearbeiter funktioniert.
 
-## ABSCHLUSSLOGIK
-
-Bei realem PASS:
-- betroffene Live-Fehler in `FEHLERQUELLEN.md` auf LIVE PASS/CLOSED setzen;
-- `CURRENT_STATE.md` auf LIVE PASS aktualisieren;
-- erst dann nächste Glossar-Integration starten.
-
-Bei realem FAIL:
-- exakten ersten Fehler in `FEHLERQUELLEN.md` dokumentieren;
-- 0.2.8 live BLOCKED lassen;
-- minimalen Fix bauen;
-- **neue Version 0.2.9+**;
-- RED→GREEN, Fresh, beide Updatepfade, echter Designruntime, Positiv/Negativ und gated package vollständig erneut.
+Bei jedem realen FAIL: keine Schönrechnung, Fehlerquelle aktualisieren, Version 0.2.9 verbraucht; materielle Änderung benötigt 0.2.10+.
