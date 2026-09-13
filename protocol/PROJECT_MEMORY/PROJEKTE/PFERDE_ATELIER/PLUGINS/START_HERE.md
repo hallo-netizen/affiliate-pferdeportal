@@ -38,4 +38,9 @@ Zu jedem real vorhandenen `CURRENT.zip` gehört ein `MANIFEST.md` mit Plugin-ID,
 
 Universal Glossary Engine / `MOD-008` → Fachbüro `../GLOSSAR/`.
 
-Aktuell ist der Artefaktexport BLOCKED, weil der technisch grüne 0.2.10-rc7-Hardtest ausdrücklich **kein Paket** erzeugt hat. Siehe `UPDATEPROTOKOLL.md` → `PU-20260913-001`.
+Der technisch geprüfte Stand `0.2.10-rc7` ist als hashgebundene Ausgabekopie synchronisiert:
+- `ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip`
+- `ISOLIERTE_PLUGINS/MOD-008/MANIFEST.md`
+- SHA-256 `3611229aa33ca50a00ec88be87e6ef92592e87d313c152f05d0c7a31ab281152`
+
+Technischer Paket-/Artefaktstatus: PASS. Pferde-LIVE-Readback bleibt ausschließlich im Fachbüro offen. Zentraler Vorgang: `UPDATEPROTOKOLL.md` → `PU-20260913-001`.
