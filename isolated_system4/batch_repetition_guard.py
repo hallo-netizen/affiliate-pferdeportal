@@ -39,7 +39,7 @@ def _normalized_sentences(article: str) -> set[str]:
 
 
 def validate_batch_repetition(bodies: Sequence[str]) -> dict[str, Any]:
-    _require(isinstance(bodies, Sequence) and len(bodies) >= 2, "BATCH_REPETITION_INPUT_INVALID")
+    _require(isinstance(bodies, Sequence) and len(bodies) >= 1, "BATCH_REPETITION_INPUT_INVALID")
     occurrences: dict[str, list[int]] = defaultdict(list)
     for index, body in enumerate(bodies):
         _require(isinstance(body, str) and body.strip(), f"BATCH_REPETITION_BODY_INVALID:{index}")
@@ -59,6 +59,7 @@ def validate_batch_repetition(bodies: Sequence[str]) -> dict[str, Any]:
     )
     return {
         "status": "PASS",
+        "article_count": len(bodies),
         "minimum_sentence_words": MIN_SENTENCE_WORDS,
         "minimum_articles_per_repeat": MIN_ARTICLES_PER_REPEAT,
         "majority_repeated_sentence_count": count,
