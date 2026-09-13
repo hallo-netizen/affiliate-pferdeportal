@@ -1,6 +1,6 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **BLOCKED / isolated prototype / test only.** Kein Merge, kein Produktions-Publish, kein neuer Codex-Produktionslauf.
+Status: **LOCAL PREFLIGHT PASS / isolated prototype / test only / USER APPROVAL REQUIRED BEFORE CODEX.** Kein Merge, kein Produktions-Publish. Ein echter Codex-Produktionslauf wurde noch nicht gestartet.
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit** innerhalb des isolierten Prototyps. Der offizielle Projekt-/Campus-Stand bleibt davon getrennt in `control/startmaster0107/CURRENT_STATE.json` und wird durch System 4 nicht überschrieben.
 
@@ -12,10 +12,8 @@ Kurzform:
 
 Codex bleibt der eine fachliche Worker. System 4 übernimmt **nicht** die alte Legacy-Orchestrierung.
 
-## Neue universelle Produktionsgrenze
-Der frühere aktuelle Zustand „genau sieben `Beratung`-Artikel“ ist **entfernt**.
-
-Verbindlich gilt jetzt:
+## Universelle Produktionsgrenze
+Verbindlich gilt:
 - Produktionsmenge = exakt die nichtleere Item-Menge des gebundenen Snapshots;
 - **1..N ohne künstliche System-4-Obergrenze**;
 - 1 / 7 / 25 / 1000 sind ausschließlich Regressionstestgrößen;
@@ -31,9 +29,9 @@ Die bestehende Textmaschine und ihre Regeln sind READ-ONLY. System 4 darf sie we
 ### Design
 PPM 6.7.9, bestehender Artikel-/Tabellenvertrag, WordPress-Plugin, Theme/CSS und vorhandene Designselektoren sind READ-ONLY. System 4 darf weder direkt noch indirekt CSS, Inline-Styles, Klassen, Überschriftenhierarchie, Tabellenformatierung oder Theme-/Plugin-Dateien verändern. Nach dem geprüften Artikel ist keinerlei HTML-/Designtransformation erlaubt.
 
-`design_guard.py` ist ausschließlich PASS/BLOCK und verändert keine Bytes. Die `ppm-type-*`-Bindung wird aus dem gebundenen `article_type` generisch abgeleitet. Bekannte typspezifische Regeln (z. B. Beratung-H2) bleiben nur für ihren Typ aktiv und sind keine Zulassungsliste.
+`design_guard.py` ist ausschließlich PASS/BLOCK und verändert keine Bytes. Die `ppm-type-*`-Bindung wird aus dem gebundenen `article_type` generisch abgeleitet. Bekannte typspezifische Regeln bleiben nur für ihren Typ aktiv und sind keine Zulassungsliste.
 
-## Aktuell umgesetzte System-4-Schutzkette
+## System-4-Schutzkette
 1. `content_guard.py`: Research-/Fact-Bindung, Fact-Traces, Repair-Kontinuität, skalierte Batch-Distinctness; Einzelbatch ist gültig.
 2. `controller.py`: feste Stufen `research -> facts -> context -> draft -> fullcheck -> repair`; Same-Article-Repair.
 3. `design_guard.py`: generischer Beitragsart-Design-Hardlock ohne Beitragsart-Whitelist; keine Mutation.
@@ -49,40 +47,31 @@ System 4 ersetzt diese Autoritäten nicht:
 - bestehende Textmaschine-/Artikeltyp-/Tabellen-/Link-/SEO-/PSERC-/PSTE-/Metadatenregeln;
 - `publish_allowed=false`.
 
-## Frischer Teststand 2026-09-13
+## Frischer finaler lokaler Preflight 2026-09-13
 Belegdatei, ausdrücklich **keine zweite CURRENT_STATE**:
 `isolated_system4/TESTNACHWEIS_20260913_UNIVERSAL_PREFLIGHT.md`
 
-Auf dem vor diesem reinen Dokumentationsnachtrag geprüften System-4-Code wurden frisch ausgeführt:
-- Universaltests 1 / 3 / 7 / 25 / 1000 Artikel einschließlich gemischter und neuer Beitragsarten: PASS;
-- 0-Artikel-Negativfall: PASS/fail-closed;
-- NO-LEGACY: PASS, `legacy_import_count=0`;
-- kompletter aktueller Unittestbestand: **87 Tests, 86 PASS, 1 FAIL**;
-- lokaler E2E: alle ausführbaren positiven/negativen Logikwege PASS.
+Die zuvor lokal fehlende PPM-6.7.9-ZIP wurde **nicht nachgebaut und nicht verändert**. Die historischen Original-Zwischendateien `ppm.00.b64` bis `ppm.06.b64` wurden aus der vorhandenen Dateibibliothek materialisiert, decodiert und gegen die historischen Git-Blob-SHAs der sieben Repo-Chunks geprüft. Alle sieben Chunk-Blob-SHAs stimmen exakt.
 
-Der einzige verbleibende FAIL ist **kein festgestellter System-4-Codefehler**, sondern der lokale Bindungsnachweis für das echte PPM-6.7.9-Paket:
-`test_authoritative_textmachine_bindings_are_unchanged_from_proven_full_rule_pass`
-stoppt bei `ppm_path.is_file() == False`.
+Das zusammengesetzte Paket ist exakt:
+- Datei: `control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`
+- Größe: `1614485` Bytes;
+- Git-Blob: `151e9d6f908453dfc5b4acb497c4927a3f03c940`;
+- SHA256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`;
+- ZIP-Integrität: PASS.
 
-Die gebundene PPM-ZIP existiert im Repository, kann über den verfügbaren GitHub-Connector in diesem Arbeitscontainer aber nicht als Binärdatei materialisiert werden. Der Connector sieht den Blob, scheitert beim Binärinhalt jedoch an UTF-8-Decodierung. Eine lokale Kopie ist nicht vorhanden.
+Danach frisch ausgeführt:
+- kompletter aktueller Unittestbestand: **87/87 PASS**;
+- lokaler E2E `test_local_end_to_end_chat_handoff.py`: **5/5 PASS**;
+- NO-LEGACY über `production_checks.no_legacy_runtime_dependencies(...)`: **PASS**, `legacy_import_count=0`;
+- Universalität 1 / 3 / 7 / 25 / 1000, gemischte/neue Beitragsarten und 0-Artikel-Negativfall bleiben PASS.
 
-Folge: **System-4-Gesamt-PASS bleibt OFFEN.** Es wird ausdrücklich weder ein PPM-PASS aus der Dateiansicht abgeleitet noch der eine fehlende Test übersprungen.
+Der frühere lokale PPM-Materialisierungsblocker ist damit **geschlossen**. Es besteht aktuell **kein bekannter offener System-4-Code-/Preflight-Blocker**.
 
-## Aktuelle Fehler / Blocker
-### S4-BLOCK-01 — realer lokaler PPM-Paket-Bindungsnachweis nicht ausführbar
-Für den vollständigen letzten Test fehlt im aktuellen Testcontainer ausschließlich die Binärdatei
-`control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`.
+Beweisgrenze: Dies ist ein vollständiger **lokaler Preflight-PASS**, aber noch **kein echter Codex-Produktionsnachweis**. Ein realer Codex-Lauf darf erst nach ausdrücklicher Nutzerfreigabe gestartet werden.
 
-Erwarteter gebundener SHA256 laut aktuellem System-4-Code/Proof:
-`acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`.
-
-Solange diese exakten Bytes lokal nicht verfügbar und geprüft sind, bleibt der Gesamtstatus BLOCKED.
-
-### S4-BLOCK-02 — vollständiger lokaler E2E nur um denselben Binary-Bindungstest unvollständig
-Der aktuelle E2E wurde frisch ausgeführt. Positiver Gesamtweg bis zum exakten V2-Elternchat-/WordPress-Handoff sowie die Negativfälle für Fake-Fact, Design-Drift und artikelübergreifende Template-Wiederholung sind PASS. Offen ist ausschließlich derselbe PPM-Dateibindungstest aus S4-BLOCK-01.
-
-### S4-BLOCK-03 — Transportressourcen sind real endlich
-System 4 enthält keine künstliche Artikelzahl-Obergrenze. Reale Laufzeit-, Speicher- und Chat-Ausgabelimits bleiben physische Infrastrukturgrenzen. Der V2-Handoff teilt große Daten in geordnete Transportteile, damit keine feste einzelne 60k-Gesamtgrenze mehr die Produktionsmenge definiert. Ein tatsächlicher Produktionslauf darf deshalb nie aus einer willkürlichen System-4-Zahl heraus gekürzt werden; bei realem Ressourcenblock muss er fail-closed mit dem konkreten Infrastrukturblocker stoppen.
+## Reale Infrastrukturgrenze
+System 4 enthält keine künstliche Artikelzahl-Obergrenze. Reale Laufzeit-, Speicher- und Chat-Ausgabelimits bleiben physische Infrastrukturgrenzen. Der V2-Handoff teilt große Daten in geordnete Transportteile. Bei einem realen Ressourcenblock muss der Lauf fail-closed mit dem konkreten Infrastrukturblocker stoppen; die gebundene Artikelmenge darf nicht willkürlich gekürzt werden.
 
 ## WordPress-/Handoff-Grenze
 Der aktuelle direkte Importvertrag ist:
@@ -97,15 +86,14 @@ Der aktuelle direkte Importvertrag ist:
 Die bestehende Signaturprüfung ist für diesen aktuellen Pfad ausgeschaltet. Deshalb kein Signing/ENDSTEMPEL in System 4. System 4 verändert weder Plugin noch Signaturschalter.
 
 ## HOBBYRAUM / NEXT ACTION
-System-4-Arbeitsraum: **BLOCKED ausschließlich bis zum realen PPM-Paket-Bindungsnachweis.**
+System-4-Arbeitsraum: **LOCAL PREFLIGHT PASS / wartet auf Nutzerfreigabe.**
 
 Exakter nächster Arbeitsschritt:
-1. **kein Codex**;
-2. exakt die gebundene PPM-6.7.9-ZIP im lokalen Testarbeitsraum verfügbar machen, ohne sie oder ihre Fachregeln zu verändern;
-3. SHA256 gegen `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1` prüfen;
-4. den kompletten Unittestbestand + NO-LEGACY + lokalen E2E auf dem dann gebundenen finalen Head erneut ausführen;
-5. nur bei vollständigem PASS README/Protokoll auf PASS aktualisieren;
-6. erst danach Nutzerfreigabe für **einen echten Codex-Lauf des konkret gebundenen Input-Batches** einholen. Anzahl und Beitragsarten kommen ausschließlich aus diesem Input.
+1. **kein weiterer Umbau und kein Codex ohne Nutzerfreigabe**;
+2. Nutzerfreigabe für **einen echten Codex-Lauf des konkret gebundenen Input-Batches** einholen;
+3. Anzahl und Beitragsarten ausschließlich aus diesem gebundenen Input übernehmen;
+4. Lauf fail-closed durch dieselbe System-4-Kette bis zum V2-Elternchat-/WordPress-Handoff führen;
+5. weiterhin kein Merge und kein Publish ohne gesonderte Freigabe.
 
 ## Nicht anfassen
 - `control/startmaster0107/**` und offizieller CURRENT_STATE;
