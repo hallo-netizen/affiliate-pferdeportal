@@ -1,7 +1,7 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-13
-STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCHER KANDIDAT HARDTEST PASS / LIVE-READBACK 0.2.9 OFFEN
+STATUS: 0.2.8 LIVE FAIL / 0.2.10-rc7 TECHNISCHER HARDTEST PASS / KEIN PAKET / PFERDE-LIVE OFFEN
 
 ## Belastbarer aktueller Stand
 
@@ -9,102 +9,75 @@ STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCHER KANDIDAT HARDTEST PASS / LIVE-READBA
 - Fachwahrheit bleibt in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
 - Vorhandene WordPress-Seite `Glossar` bleibt Hauptseite.
 - Das bestehende Pferde-Designplugin und `main` bleiben unangetastet.
+- Aktueller Arbeitsbranch: `hobbyroom/glossar-livefail-red-green-20260913`.
 
-## Reale Nutzerwahrheit 0.2.8
+## Letzter real widerlegter Stand
 
-Der Nutzer-Readback 2026-09-13 widerlegt die technische 0.2.8-Abnahme:
-- Hero/Bild: höher geworden, aber real weiterhin nicht responsive;
-- Kategorien: weiterhin nicht wie die Glossar-Startseite gestaltet;
-- Einzelartikel: Links laufen weiterhin ins Leere.
+0.2.8 bleibt **LIVE FAIL / BLOCKED / NICHT VERWENDEN**. Nutzer-Readback:
+1. Hero/Bild real nicht responsive;
+2. Kategorien nicht wie die Glossar-Startseite gestaltet;
+3. Einzelartikel-Links laufen ins Leere.
 
-Damit ist **0.2.8 LIVE FAIL / BLOCKED / NICHT VERWENDEN**.
-0.2.7 und 0.2.6 bleiben ebenfalls historische Fehl-/Zwischenstände und werden nicht mehr ausgegeben.
+0.2.6/0.2.7 bleiben historische Zwischen-/Fehlstände und werden nicht mehr ausgegeben.
 
-## Wesentliche Korrektur der Acceptance
+## Letzter paketierter technischer Kandidat
 
-Die frühere Kategorie-Acceptance war fachlich falsch: sie verlangte ausdrücklich, dass Kategorien **keinen** Hero und **keine** Tools enthalten. Das war das Gegenteil der Nutzer-Vorgabe.
+0.2.9 war ein gated, technisch geprüfter Kandidat. Er wurde jedoch in diesem Chat durch die aktive 0.2.10-Entwicklung abgelöst und ist **nicht mehr CURRENT/NEXT ACTION**. Ein Pferde-LIVE-PASS für 0.2.9 wurde nicht festgestellt.
 
-Verbindlich ist jetzt:
-- jede Glossar-Kategorie besitzt ihren eigenen Kategorieinhalt;
-- zugleich verwendet sie den vollständigen visuellen Glossar-Rahmen der Startseite: Hero, Suche/A–Z, Icon-Navigation;
-- Hero-Kicker lautet `WISSEN`;
-- Begriffskarten müssen per echtem Browserklick auf eine echte Einzelbegriffseite führen.
+## Aktueller technischer Kandidat 0.2.10-rc7
 
-## Technischer Kandidat 0.2.9
-
-Version: `0.2.9`
+Version: `0.2.10-rc7`
 Rewrite-Schema: `7`
-Branch: `hobbyroom/glossar-livefail-red-green-20260913`
+Getesteter Head: `1e74b7454e84f97182dbb185614371a48157bc21`
+Workflow: `.github/workflows/glossar-0210-rc7-hardtest.yml`
+Run: `34762048546` → SUCCESS
 
-Finaler Workflow:
-`.github/workflows/glossar-029-final-hardtest.yml`
+Jobs:
+- Build `103736483729` → SUCCESS
+- Fresh inkl. bestehender Positiv-/Negativ-/Regressionstests `103736483608` → SUCCESS
+- Real Design 1.50.469 + echter Browserklick + Loop-Poison `103736483696` → SUCCESS
+- `no-package-gate` `103736720142` → SUCCESS
 
-Finaler Run:
-`34757795593`
+**Wichtig:** Der Workflow endet absichtlich mit `UGE0210RC7_HARD_GATES_PASS_NO_PACKAGE`. Für rc7 existiert noch kein gated Übergabe-ZIP und daher kein rc7-Paket-SHA.
 
-Getesteter Head:
-`f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
+## Neu technisch bewiesen
 
-Alle Produkt-/Release-Gates SUCCESS:
-- Build `103725094481`
-- Fresh inkl. komplette alte Regression + zerstörter Rewritezustand `103725094537`
-- Update vom real ausgegebenen 0.2.8-Stand → 0.2.9, anschließend Rewrite erneut zerstört `103725094620`
-- echter Design-1.50.469-Runtime + Browser + Null-Rewrite `103725094378`
-- gated Package `103725295224`
+### Klickbarkeit bestehender und neuer Glossarbegriffe
+Unter dem rekonstruierten echten Design-Hauptcode 1.50.469 (SHA-256 `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`) wurde im echten Browser geklickt:
+1. Kategorie → vorhandener `Hufbein`-Link → echte Einzelansicht mit H1 und Sentinel-Inhalt;
+2. Kategorie → `Hufrehe`;
+3. `Hufrehe` → sichtbarer Link unter `Verwandte Begriffe` → `Strahlfäule`;
+4. `Strahlfäule` → sichtbarer Link → `Hufabszess`;
+5. `Hufabszess` → sichtbarer Kategorienlink → zurück zu `Gesundheit`.
 
-## Was jetzt härter bewiesen ist
+Belege im Job `103736483696`:
+- `UGE0210_EXISTING_SINGLE_CLICK_PASS`
+- `UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS`
+- `UGE0210_SINGLE_SURVIVES_EMPTY_MAIN_LOOP_PASS`
+- `UGE0210_PFERDE_BREADCRUMB_AXIS_PASS`
+- `UGE0210RC7_REAL_DESIGN_CLICKABILITY_BREADCRUMB_LOOP_POISON_PASS`
 
-### Hero
-Der Browser misst das **echte `<img>`** bei 1200 / 900 / 720 / 500 px. Das Bild ist selbst der Größenanker: `width:100%`, `height:auto`, keine künstliche feste Bildhöhe und kein erzwungener 5:2-Container. Gemessene Bildgrößen unter echtem Design:
-- 1096 × 438.39
-- 796 × 318.39
-- 664 × 265.59
-- 444 × 177.59
+Damit ist die **technische Klickbarkeits-Freigabeschranke** aus `BEGRIFFSREGISTER.md` im Testsystem erbracht. Das ist ausdrücklich **kein Pferde-LIVE-Readback** und keine automatische Löschfreigabe; der Nutzer entscheidet über den Altbestand erst nach eigener Prüfung.
 
-Das entspricht dem echten Bildverhältnis 1400 × 560 und skaliert mit der Viewportbreite.
+### Cluster-Produktion
+Die neue Pferde-Clusterproduktion erzeugt `Hufrehe`, `Strahlfäule` und `Hufabszess` als zusammenhängenden Satz. Verwandte Begriffe werden als echte Links ausgegeben; Pferderassen bleiben ausgeschlossen; kurze Beiträge erhalten keine erzwungenen Zwischenüberschriften.
 
-### Kategorien
-`/glossar/gesundheit/` muss gleichzeitig enthalten:
-- `.uge-category-head` + H1 `Gesundheit`;
-- `.uge-hero`;
-- `.uge-tools`;
-- `.uge-topic-nav`;
-- echten Link auf `/glossar/begriff/hufbein/`.
+### Gefundener RC6-Fehler und RC7-Reparatur
+RC6 erzeugte die drei Pack-Begriffe als eigene Entwürfe, scheiterte aber an der Veröffentlichung, weil die bestehende UGE-Publikationspolicy eine gültige primäre Portal-Kategorie verlangt und diese Bindung fehlte.
 
-### Einzelbegriffe / tote Links
-0.2.9 besitzt zusätzlich einen direkten Request-Binder. Selbst wenn **alle gespeicherten Glossar-Rewrite-Regeln entfernt werden und Schema 7 bereits als aktuell gespeichert ist**, müssen Kategorie- und Einzelbegriff-URLs weiter funktionieren.
+RC7 stellt vor Erzeugung/Publikation die reale Portal-Kategorie `Gesundheit` fest und setzt `primary_category_id`. Die normale Publikationspolicy wird nicht umgangen.
 
-Der Real-Design-Browsertest klickt den tatsächlich gerenderten Hufbein-Link auf der Kategorie und verlangt danach:
-- Ziel-URL `/glossar/begriff/hufbein/`;
-- genau ein `article.uge-single-wrap`;
-- realen Sentinel-Inhalt.
+## Offene Grenzen
 
-### Regression / Negativ
-- Draft öffentlich: 404;
-- authentifizierte WordPress-Draft-Preview: PASS;
-- unbekannter Begriff: 404;
-- A–Z, Duplicate Guard, normale Beiträge: PASS;
-- AJAX reale UI/Position: PASS.
-
-## Exakter Übergabekandidat
-
-Actions-Artefakt-ID: `10317444708`
-
-Installierbares ZIP:
-`universal-glossary-engine-0.2.9.zip`
-
-SHA-256:
-`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
-
-Outer Actions artifact digest:
-`sha256:98513772d72fc65dc4d01520086b4c7e56e165cceeea1e31147a9d6cf830c6ff`
-
-Das heruntergeladene Artefakt wurde lokal erneut auf ZIP-Integrität, Version 0.2.9, Schema 7, direkten Request-Binder, Kategorie-Vollrahmen und Abwesenheit einer RC-Kennung geprüft.
+- Kein rc7-Übergabe-ZIP / kein rc7-Paket-SHA.
+- Kein Pferde-LIVE-PASS für 0.2.10-rc7.
+- Die bekannten realen Live-Fehler bleiben bis zum realen Nutzer-Readback offen.
+- Das vorgeschriebene Projektbüro `PROJEKTE/PFERDE_ATELIER/PLUGINS/` existierte beim Abschlusscheck nicht; der Plugin-Artefaktexport ist deshalb zusätzlich BLOCKED, bis Büro + gated Paket regelkonform vorliegen.
 
 ## PASS-Grenze
 
-**0.2.9 technischer Kandidat: PASS.**
+**0.2.10-rc7 technische Hardtests: PASS.**
 
-**Pferde-LIVE-PASS 0.2.9: noch NEIN.**
+**Übergabe-/Paketstatus: BLOCKED.**
 
-Nur der reale Nutzer-Readback des exakt hashgebundenen 0.2.9-ZIPs kann die drei aktuellen Live-Fehler schließen.
+**Pferde-LIVE-PASS: NEIN / OFFEN.**
