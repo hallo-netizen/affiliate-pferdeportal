@@ -31,7 +31,8 @@ echo UGE026_FRONTEND_ACCEPTANCE_PASS
 # Deactivate/reactivate is a regression guard, not the migration mechanism.
 docker exec wp wp plugin deactivate universal-glossary-engine --allow-root >/dev/null
 docker exec wp wp plugin activate universal-glossary-engine --allow-root >/dev/null
-SCHEMA=$(docker exec db mysql -uwp -pwp wordpress -Nse "SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'")
+SCHEMA=$(docker exec db mysql -uroot -pr wordpress -Nse "SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'")
+echo "UGE026_SCHEMA_AFTER_REACTIVATION=$SCHEMA"
 test "$SCHEMA" = 5
 test "$(curl -sS -o /tmp/react-term -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufbein/)" = 200
 grep -q FULL-HUFBEIN-SENTINEL /tmp/react-term
