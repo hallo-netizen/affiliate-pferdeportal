@@ -6,13 +6,13 @@ from pathlib import Path
 import batch_gate
 import handoff_transport
 import production_checks
+import root_entry
 
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
 ROOT_ENTRY=HERE/'root_entry.py'
 CONTROLLER=HERE/'controller.py'
 PPM=REPO/production_checks.PPM_PACKAGE_REL
-EXPECTED_BRANCH='hobbyroom/system4-true-single-room-v1'
 G9_MEMBER='portal-production-machine/contracts/g9-single-faq-approved-candidate-v1.json'
 
 SOURCES={
@@ -60,7 +60,7 @@ def build_fixture(root:Path):
         body=body.replace(f'data-source-hash="{old}"',f'data-source-hash="{new}"')
     final=body.replace('Weichen Unterlagen voneinander ab, kläre die Angaben vor der Abfahrt.','Wenn Unterlagen voneinander abweichen, kläre die Angaben vor der Abfahrt.')
     bad=final.replace('Eine einzelne bestandene Kontrolle reicht nicht aus','Eine einzelne bestandene Kontrollee reicht nicht aus',1)
-    snapshot={'contract':'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1','next_textmachine_metadata_batch':{
+    snapshot={'contract':'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1','system4_root_manifest_sha256':root_entry._critical_manifest_sha256(),'next_textmachine_metadata_batch':{
       'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE',
       'batch_sha256':shabytes(b'system4-full-local-root-to-file-v2'),'item_count':1,
       'items':[{'article_type':'FAQ','category':'checklisten-fuer-pferdeanhaenger-faq','plan_slot':shabytes(b'system4-full-local-faq-slot-v2'),'target_keyword':'Pferdeanhänger','title':'Was muss vor einer Fahrt mit Pferdeanhänger geprüft werden?'}],
@@ -114,7 +114,6 @@ def main():
     jar=os.environ.get('SYSTEM4_LANGUAGETOOL_JAR','')
     if not jar or not Path(jar).is_file() or production_checks.file_sha256(Path(jar))!=production_checks.LT_JAR_SHA256: raise SystemExit('LT JAR missing/wrong')
     assert production_checks.file_sha256(PPM)==production_checks.PPM_PACKAGE_SHA256
-    assert cmd(['git','branch','--show-current']).stdout.decode().strip()==EXPECTED_BRANCH
     env=os.environ.copy(); env['SYSTEM4_LANGUAGETOOL_JAR']=jar; env.setdefault('TERM','xterm')
     base=Path(tempfile.mkdtemp(prefix='system4-full-local-v2-')); f=build_fixture(base/'fixture')
 
@@ -132,6 +131,10 @@ def main():
     results.append(('POS_ROOT_STDIN_TO_FILE',{'sha256':shabytes(final.read_bytes()),'bytes':final.stat().st_size,'parts':envelope['part_count'],'revision':s['revision'],'article_count':col['article_count']}))
 
     n=base/'n1'; cp=cmd([sys.executable,str(ROOT_ENTRY),'start-stdin',str(n/'w')],2,env,b'{bad-json'); assert b'ROOT_ENTRY_STDIN_SNAPSHOT_JSON_INVALID' in cp.stdout and not (n/'w'/'state.json').exists(); results.append(('NEG_ROOT_BAD_STDIN',{}))
+
+    n=base/'n_manifest_missing'; missing=json.loads(f['snapshot'].read_text()); missing.pop('system4_root_manifest_sha256',None); raw=json.dumps(missing,separators=(',',':')).encode(); cp=cmd([sys.executable,str(ROOT_ENTRY),'start-stdin',str(n/'w')],2,env,raw); assert b'ROOT_ENTRY_MANIFEST_BINDING_MISSING' in cp.stdout; results.append(('NEG_ROOT_MANIFEST_MISSING',{}))
+
+    n=base/'n_manifest_wrong'; wrong=json.loads(f['snapshot'].read_text()); wrong['system4_root_manifest_sha256']='0'*64; raw=json.dumps(wrong,separators=(',',':')).encode(); cp=cmd([sys.executable,str(ROOT_ENTRY),'start-stdin',str(n/'w')],2,env,raw); assert b'ROOT_ENTRY_MANIFEST_MISMATCH' in cp.stdout; results.append(('NEG_ROOT_MANIFEST_MISMATCH',{}))
 
     n=base/'n2'; bad=json.loads(f['snapshot'].read_text()); bad['next_textmachine_metadata_batch']['publish_allowed']=True; raw=json.dumps(bad,separators=(',',':')).encode(); cp=cmd([sys.executable,str(ROOT_ENTRY),'start-stdin',str(n/'w')],2,env,raw); assert b'WORDPRESS_PUBLISH_AUTHORITY_FAIL' in cp.stdout; results.append(('NEG_PUBLISH_AUTHORITY',{}))
 
