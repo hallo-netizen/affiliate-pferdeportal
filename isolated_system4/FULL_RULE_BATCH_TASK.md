@@ -129,7 +129,7 @@ Exact top-level contract:
 - JSON / `application/json`
 - `intended_next_step=WORDPRESS_DIRECT_IMPORT`
 - plugin `Portal SEO Editorial Plan Compiler`
-- plugin version verified against `0.28.22`
+- plugin version verified against `0.28.23`
 - PPM version verified against `6.7.9`
 - `direct_wordpress_upload_ready=true`
 - `direct_upload_block_reason=null`
