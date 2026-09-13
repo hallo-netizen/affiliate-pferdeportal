@@ -34,8 +34,12 @@ jobs:
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/06_frontend_acceptance.sh
       - name: Fresh schema and version
         run: |
-          test "$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)" = 0.2.6
-          test "$(docker exec db mysql -uwp -pwp wordpress -Nse \"SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'\")" = 5
+          VERSION=$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)
+          SCHEMA=$(docker exec db mysql -uroot -pr wordpress -Nse "SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'")
+          echo "UGE026_FRESH_VERSION=$VERSION"
+          echo "UGE026_FRESH_SCHEMA=$SCHEMA"
+          test "$VERSION" = 0.2.6
+          test "$SCHEMA" = 5
           echo UGE026_FRESH_INSTALL_POSITIVE_NEGATIVE_PASS
 
   inplace-upgrade:
@@ -47,7 +51,7 @@ jobs:
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/01_build.sh
       - name: Prepare 0.2.5 and prove poisoned rewrite negative state
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/03_upgrade_prepare.sh
-      - name: Apply 0.2.6 in place and prove automatic migration
+      - name: Apply 0.2.6 through WordPress updater and prove automatic migration
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/04_upgrade_apply.sh
       - name: Post-upgrade routing policy positive negative matrix
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/05_upgrade_matrix.sh
