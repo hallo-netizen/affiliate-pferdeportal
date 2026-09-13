@@ -1,6 +1,6 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **LOKALER ROOT-TO-FILE-PFAD INKL. DETACHED HEAD POSITIV/NEGATIV BEWIESEN / REALER CODEX-WIEDERHOLUNGSLAUF NOCH NICHT AUSGEFÜHRT / isolated prototype / test only.** Kein Merge, kein Publish.
+Status: **REALER CODEX-LAUF ERREICHT SYSTEM-4-ROOT / FAIL-CLOSED AN FEHLENDER LIVE-SNAPSHOT-MANIFESTBINDUNG / isolated prototype / test only.** Kein Merge, kein Publish.
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Campus-/Projektstand in `control/startmaster0107/CURRENT_STATE.json` bleibt getrennt und unverändert.
 
@@ -12,65 +12,153 @@ Codex bleibt der eine fachliche Worker. System 4 übernimmt keine alte Legacy-Or
 
 ## Aktueller Root-Einstieg
 
-Der reale Ein-Artikel-Lauf vom 2026-09-13 erreichte System 4, stoppte aber vor Recherche mit:
+Der frühere reale Ein-Artikel-Lauf stoppte mit:
 
 `ROOT_ENTRY_BRANCH_NOT_SYSTEM4`
 
-Damit war nachgewiesen, dass die damalige Root-Identitätsprüfung falsch war: sie verlangte den symbolischen lokalen Branch-Namen `hobbyroom/system4-true-single-room-v1`. Dieser reale Fehler ist im Protokoll festgehalten:
+Dieser Branchnamensfehler wurde beseitigt. Die Root-Prüfung bindet jetzt **nicht mehr den symbolischen Branchnamen**, sondern den tatsächlich geladenen kritischen System-4-Inhalt über das Pflichtfeld:
 
-`PROTOKOLL_REALRUN_20260913_ONE_ARTICLE_BRANCH_IDENTITY_BLOCKER.md`
+`system4_root_manifest_sha256`
 
-Die Root-Prüfung wurde anschließend geändert. Sie bindet jetzt **nicht mehr den Branchnamen**, sondern den tatsächlich geladenen kritischen System-4-Inhalt über `system4_root_manifest_sha256`.
-
-Geprüfter Manifestwert:
+Aktueller gebundener Manifestwert:
 
 `3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c`
 
 Die Prüfung ist fail-closed: fehlende/abweichende Bindung, manipulierte kritische Dateien, fehlende getrackte Dateien, falscher Git-Root oder dirty kritische Dateien blockieren.
 
-## Aktueller Testnachweis
+## Lokaler Testnachweis vor dem aktuellen Real-Lauf
 
-Autoritativer Beleg für diese Korrektur:
+Autoritativer Beleg für die Checkout-Identity-Korrektur:
 
 `TESTNACHWEIS_20260913_CHECKOUT_IDENTITY_MANIFEST.md`
 
-Ausgeführt ohne Codex:
+Unmittelbar vor dem aktuellen Codex-Lauf erneut ohne Codex ausgeführt:
 
-- Root-Eingangstests: **14/14 PASS**;
-- übrige Regressionen: **87/87 PASS**;
-- Gesamt: **101/101 PASS**;
-- vollständiger Root-bis-Datei-Acceptance-Lauf mit sichtbarem Branchnamen: **10/10 PASS**;
-- vollständiger Root-bis-Datei-Acceptance-Lauf unter **detached HEAD / leerem Branchnamen: 10/10 PASS**;
-- echter LanguageTool-6.8-Pfad im Acceptance-Lauf;
-- echter PPM-6.7.9-Pfad im Acceptance-Lauf;
+- Gesamt-Unittests: **101/101 PASS**;
+- kompletter Root-bis-Datei-Acceptance-Lauf: **10/10 PASS**;
+- echter LanguageTool-6.8-Pfad;
+- echter PPM-6.7.9-Pfad;
 - Same-Article-Repair;
 - Batch-Gate;
 - `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`;
 - Inline-Pack / Inline-Unpack;
-- bytegenaue WordPress-Datei.
+- bytegenaue WordPress-Datei;
+- `mocks_used=false`;
+- `codex_used=false` im Preflight;
+- `merge_or_publish=false`.
 
-Enddatei beider kompletten Acceptance-Läufe:
+Lokale Acceptance-Enddatei:
 
 - 1 Artikel;
 - Revision 2;
 - 66753 Bytes;
 - SHA256 `4f3c3585d1b42f3ca53f1f65bb4bca728a6426527c7eec75c45e2622dd7220ae`.
 
-Geprüfte Code-Blobs:
+Echte Prüfer:
 
-- `root_entry.py` -> `7624a851432f7e0a8575a8421e33cfabfe29794d`
-- `test_root_entry.py` -> `593a39d78b396515e72015d85ac7488637073d5b`
-- `full_local_acceptance.py` -> `0fe61d04c8656c87727862d5b587530696d1bf50`
+- LanguageTool 6.8 SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
+- PPM 6.7.9 SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
 
-Code-Head `18f16610e72e9d32f46827cd0c801786f79a0320`: Immutable Base Hardlock **SUCCESS**, Run `34752658005`.
+## Aktueller realer Codex-Lauf — 1 Artikel
+
+Gründliches Laufprotokoll:
+
+`PROTOKOLL_REALRUN_20260913_ONE_ARTICLE_MANIFEST_BINDING_BLOCKER.md`
+
+Getesteter Head bei Start und terminalem Abschluss:
+
+`6e35f359e3bb654396e9791dffd5942c1c1ad176`
+
+Gebundener Artikel:
+
+- `Beratung`;
+- Kategorie `putzbox-beratung`;
+- Titel `Putzbox für Pferde richtig auswählen`;
+- Keyword `Putzbox für Pferde`;
+- Plan-Slot `88043c35da332d4b2a500d1b61919721aefadf894bc923c841cc849a132c63b5`;
+- Batch `7b471ee2acef71531b067d2a8324a72580f4d9c8bc8d67412d021c1facf2e6e3`;
+- exakt 1 Item;
+- `publish_allowed=false`.
+
+Codex-Auftrag:
+
+`issuecomment-5652822158` — `2026-09-13T10:53:31Z`
+
+Terminale Codex-Antwort:
+
+`issuecomment-5652827317` — `2026-09-13T10:54:40Z`
+
+Laufdauer zwischen Auftrag und terminaler Antwort:
+
+**69 Sekunden**.
+
+Tatsächlich ausgeführte erste System-4-Tür:
+
+`python3 isolated_system4/root_entry.py start-stdin /tmp/system4-one-article-production`
+
+Terminaler Befund:
+
+`SYSTEM4_HARD_BLOCKER:ROOT_ENTRY_MANIFEST_BINDING_MISSING`
+
+- stage=`SYSTEM4_ROOT_ENTRY`
+- status=`SYSTEM4_ROOT_ENTRY_FAIL`
+- error=`ROOT_ENTRY_MANIFEST_BINDING_MISSING`
+
+## Konkrete Ursache des aktuellen Real-Blockers
+
+Der von Chat für den realen Codex-Aufruf erzeugte gebundene JSON-Snapshot enthielt **nicht** das neue Pflichtfeld:
+
+`system4_root_manifest_sha256`
+
+Der erforderliche Wert wäre gewesen:
+
+`3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c`
+
+Das ist **kein unbekannter neuer Root-/Codex-Fehler**. Der vorhandene Negativtest `NEG_ROOT_MANIFEST_MISSING` prüft genau diesen Fall und erwartet genau diesen fail-closed Blocker.
+
+Damit gilt für diesen Lauf:
+
+- die neue Root-Prüfung hat sich wie spezifiziert verhalten;
+- der frühere Branchnamensfehler trat nicht erneut auf;
+- der Live-Auftrag war unvollständig konstruiert;
+- Fehlerursache liegt beim aufrufenden Chat/Payload, nicht bei LT, PPM, Textmaschine, Batch-Gate, Handoff, WordPress oder Design.
+
+## Nicht ausgeführte Produktionsstufen
+
+Nach dem Root-Blocker wurden nicht gestartet:
+
+- Recherche;
+- Research Evidence;
+- Facts;
+- Fact-Pack/Context;
+- Draft;
+- LanguageTool im Codex-Lauf;
+- PPM im Codex-Lauf;
+- Repair;
+- Batch-Gate;
+- V2-Handoff;
+- Inline-Relay;
+- Parent-Chat-Rekonstruktion;
+- WordPress-Datei.
+
+Deshalb gibt es aus diesem Lauf ausdrücklich **keinen REAL-CODEX-PASS** und keinen Artikeloutput.
 
 ## Beweisgrenze
 
-**Bewiesen:** der technische Root-Einstieg und die komplette lokale Root→Datei-Kette funktionieren sowohl mit beliebigem symbolischem Branchnamen als auch mit detached HEAD, solange exakt die gebundenen kritischen System-4-Bytes geladen sind. Falsche/fehlende/manipulierte Bindungen blockieren.
+**Bewiesen:**
 
-**Nicht bewiesen:** ein neuer realer Codex-Artikel-Lauf nach dieser Korrektur. Seit dem Branch-Identity-Blocker wurde kein weiterer Codex-Lauf gestartet.
+- Codex erreicht real die System-4-Root-Tür;
+- der frühere symbolische Branchname ist nicht mehr der Blocker;
+- die Manifest-Prüfung ist im echten Codex-Lauf aktiv;
+- fehlende Manifestbindung wird real fail-closed blockiert;
+- kein Legacy-Fallback wurde genommen;
+- kein zweiter Lauf wurde gestartet.
 
-Deshalb gibt es ausdrücklich noch **keinen REAL-CODEX-PASS**.
+**Nicht bewiesen:**
+
+`Root PASS -> Research -> Facts -> Context -> Draft -> real LT/PPM -> Repair falls nötig -> Batch -> V2-Handoff -> WordPress-Datei`
+
+Diese Strecke wurde im aktuellen Real-Lauf wegen des fehlenden Pflichtfelds nicht begonnen.
 
 ## Universelle Produktionsgrenze
 
@@ -95,8 +183,16 @@ Deshalb gibt es ausdrücklich noch **keinen REAL-CODEX-PASS**.
 
 ## HOBBYRAUM / NEXT ACTION
 
-Status: **LOKAL GRÜN / REAL-CODEX-NACHWEIS AUSSTEHEND.**
+Status: **BLOCKED — REALER LIVE-SNAPSHOT OHNE PFLICHT-MANIFESTBINDUNG.**
 
-Nächster Schritt ist ausschließlich ein neuer **einzelner realer gebundener Artikel-Testlauf**, aber nur nach ausdrücklicher Nutzerfreigabe. Dieser Lauf muss mit dem aktuellen `system4_root_manifest_sha256` starten und entweder die komplette Kette bis zur bytegenau rekonstruierten WordPress-Datei durchlaufen oder am ersten realen Blocker fail-closed stoppen.
+Kein weiterer Codex-Lauf ohne erneute ausdrückliche Nutzerfreigabe.
 
-Bis dahin: kein weiterer Codex-Lauf, kein Merge, kein Publish.
+Vor einem möglichen weiteren Real-Lauf muss der vollständige gebundene Snapshot bereits **vor** Codex inklusive
+
+`system4_root_manifest_sha256 = 3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c`
+
+feststehen und exakt so per stdin an die System-4-Root-Tür übergeben werden.
+
+Aus diesem Fehler folgt **kein Architekturumbau** und keine Änderung an Textmaschine, LT, PPM, Batch-Gate, Handoff, WordPress oder Design.
+
+Kein Merge. Kein Publish.
