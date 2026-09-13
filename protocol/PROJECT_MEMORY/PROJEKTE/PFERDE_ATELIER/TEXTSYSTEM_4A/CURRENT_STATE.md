@@ -14,7 +14,6 @@ STATUS: BLOCKED / EXTERNE WÄCHTERGRENZE NOCH NICHT BEWIESEN
 ### System 4A
 - PR #255
 - Branch `hobbyroom/system4a-capsule-v1-20260913`
-- aktueller 4A-Head bei diesem Stand: `a740d24f3e69270ec732f45d6448eb609e2a50ee`
 - direkt auf System 4 aufgesetzt; kein Merge/Publish.
 
 ## Einziger legitimer Unterschied 4A
@@ -56,6 +55,26 @@ Bewiesen im V3-Kern:
 
 Kein Produktions-PASS daraus ableiten.
 
+## Konkreter System-4-PASS-Herkunftsbefund
+
+Die State-Frage ist nicht mehr nur theoretisch.
+
+Im aktuellen `batch_gate.py` werden gespeicherte FULL-/LT-/PPM-Evidence-Felder auf erwartete Werte und Hashbezüge geprüft; LT und PPM werden dort nicht erneut ausgeführt und es gibt keine ausschließlich vom echten Prüfer erzeugte Attestation.
+
+Der vorhandene System-4-Test `test_batch_gate.py` belegt diese Eigenschaft selbst:
+- `production_evidence(draft)` erzeugt LT-/PPM-PASS-Evidence synthetisch im Testcode;
+- `make_fixture()` schreibt diese Werte direkt in `state['checks']['production_evidence']`;
+- der positive Test erwartet danach von `batch_gate.collect_batch(...)` `SYSTEM4_BATCH_FULL_PASS_COLLECTED`.
+
+Der finale `handoff_transport.py` prüft Fact-Trace, Design und Batchregeln erneut real, übernimmt LT-/PPM-PASS aber ebenfalls als strukturierte Evidence ohne erneute LT-/PPM-Ausführung.
+
+Damit kann die aktuelle Grenze die **Herkunft** eines formal passenden LT-/PPM-PASS nicht allein aus dem vom Worker schreibbaren State beweisen.
+
+Das beweist keinen praktischen externen Angriff. Es beweist aber exakt die für die Projektanforderung relevante Herkunftslücke: Worker-State und Prüfer-PASS sind noch nicht technisch vollständig voneinander getrennt.
+
+4A-Beleg im PR:
+`isolated_system4a/SYSTEM4_STATE_AUTHORITY_GAP.md`.
+
 ## Vorhandene Prüfer
 
 4A besitzt einen dünnen Read-only-Adapter, der keine eigene Fach-/Design-/Qualitätsregel enthält und direkt die vorhandenen System-4-Module aufruft:
@@ -66,7 +85,7 @@ Kein Produktions-PASS daraus ableiten.
 
 Der komplette reale LT/PPM-E2E über diesen Adapter ist noch nicht bewiesen.
 
-## Entscheidend neu gefundene Grenze
+## Entscheidend gefundene Grenze
 
 Ein HMAC im selben Codex-Arbeitsbereich ist **kein unabhängiger Wächter**.
 
