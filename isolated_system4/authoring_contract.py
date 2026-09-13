@@ -14,6 +14,7 @@ STRUCTURE_MEMBER = 'portal-production-machine/contracts/content-structure-langua
 TYPE_TEMPLATES_MEMBER = 'portal-production-machine/contracts/article-type-templates.json'
 TYPE_EXTENSION_MANIFEST_MEMBER = 'portal-production-machine/contracts/article-type-extension-manifest-v1.json'
 VALIDATOR_MEMBER = 'portal-production-machine/includes/content-validator.php'
+STRUCTURE_GATE_MEMBER = 'portal-production-machine/includes/content-structure-language-gate.php'
 STATIC_CONSTANTS = (
     'MIN_WORDS', 'MIN_PARAGRAPHS', 'MIN_H2', 'MIN_TABLE_BODY_ROWS',
     'MIN_FACT_PACK_COVERAGE_RATIO', 'MIN_TRACE_LEXICAL_SUPPORT_RATIO',
@@ -41,6 +42,7 @@ def _static_ppm_rules(package: Path) -> dict[str, Any]:
         with zipfile.ZipFile(package) as archive:
             structure = json.loads(archive.read(STRUCTURE_MEMBER).decode('utf-8'))
             validator = archive.read(VALIDATOR_MEMBER).decode('utf-8')
+            structure_gate = archive.read(STRUCTURE_GATE_MEMBER).decode('utf-8')
     except Exception as exc:
         raise AuthoringContractError('PPM_AUTHORING_SOURCE_READ_FAILED') from exc
     if not isinstance(structure,dict) or structure.get('contract')!='content_structure_language_gate_v2':
@@ -55,7 +57,10 @@ def _static_ppm_rules(package: Path) -> dict[str, Any]:
         elif re.fullmatch(r'[0-9]+\.[0-9]+',raw): value=float(raw)
         else: raise AuthoringContractError('PPM_CONSTANT_INVALID:'+name)
         constants[name.lower()]=value
-    return {'constants':constants,'structure':structure}
+    table_value_match=re.search(r'self::word_count\(\$statement\)\s*<\s*([0-9]+)',structure_gate)
+    if not table_value_match:
+        raise AuthoringContractError('PPM_TABLE_VALUE_MINIMUM_MISSING')
+    return {'constants':constants,'structure':structure,'derived_binding_requirements':{'table_value_statement_minimum_words':int(table_value_match.group(1))}}
 
 def _type_definition(package: Path, article_type: str) -> dict[str, Any]:
     """Read existing static PPM type authority without executing PPM before fullcheck."""
@@ -105,16 +110,66 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
         raise AuthoringContractError('QUALITY_BINDING_HASH_INVALID')
     article_type=str(article.get('article_type') or '')
     static=_static_ppm_rules(package); structure=static['structure']; type_def=_type_definition(package,article_type)
+    marker=str(quality.get('internal_test_marker') or '').strip()
+    marker_regex=str(structure.get('visible_test_marker_regex') or '')
+    try: marker_valid=bool(marker and marker_regex and re.fullmatch(marker_regex,'['+marker+']'))
+    except re.error as exc: raise AuthoringContractError('PPM_MARKER_REGEX_INVALID') from exc
+    if not marker_valid: raise AuthoringContractError('INTERNAL_TEST_MARKER_INVALID')
+
+    registry=quality.get('portal_link_registry')
+    registry_hash=str(quality.get('portal_link_registry_hash') or '').lower().strip()
+    if not isinstance(registry,Mapping) or not re.fullmatch(r'[0-9a-f]{64}',registry_hash) or registry_hash!=_stable(dict(registry)):
+        raise AuthoringContractError('PORTAL_LINK_REGISTRY_HASH_INVALID')
+    registry_entries=registry.get('entries') if isinstance(registry.get('entries'),list) else []
+
     raw_links=quality.get('link_bindings')
     if not isinstance(raw_links,list): raise AuthoringContractError('LINK_BINDINGS_MISSING')
     links=[]
     for i,raw in enumerate(raw_links):
         if not isinstance(raw,Mapping): raise AuthoringContractError(f'LINK_BINDING_INVALID:{i}')
-        row={k:raw.get(k) for k in ('role','section_id','anchor','href','active')}
+        row={k:raw.get(k) for k in ('role','section_id','anchor','href','active','reason')}
         href=str(row.get('href') or '')
         if not href.startswith('/') or href.startswith('//') or re.match(r'^[a-z]+:',href,re.I): raise AuthoringContractError(f'LINK_TARGET_INVALID:{i}')
         links.append(row)
+    link_cfg=structure.get('links') if isinstance(structure.get('links'),Mapping) else {}
+    required_roles=[str(v) for v in link_cfg.get('required_roles',[]) if isinstance(v,str) and v]
     runtime=plan.get('runtime_order') if isinstance(plan.get('runtime_order'),Mapping) else {}
+    runtime_links=runtime.get('links') if isinstance(runtime.get('links'),list) else []
+    for role in required_roles:
+        bound_rows=[r for r in links if str(r.get('role') or '')==role]
+        runtime_rows=[r for r in runtime_links if isinstance(r,Mapping) and str(r.get('role') or '')==role]
+        if len(bound_rows)!=1: raise AuthoringContractError('REQUIRED_LINK_ROLE_BINDING_INVALID:'+role)
+        if len(runtime_rows)!=1: raise AuthoringContractError('RUNTIME_LINK_ROLE_BINDING_INVALID:'+role)
+        row=bound_rows[0]
+        matching_registry=[e for e in registry_entries if isinstance(e,Mapping) and str(e.get('href') or '')==str(row.get('href') or '')]
+        if len(matching_registry)!=1: raise AuthoringContractError('LINK_REGISTRY_ENTRY_INVALID:'+role)
+        reg=matching_registry[0]
+        for field in ('role','href','anchor','reason','section_id'):
+            if str(reg.get(field) or '')!=str(row.get(field) or ''): raise AuthoringContractError('LINK_REGISTRY_BINDING_MISMATCH:'+role+':'+field)
+
+    category=quality.get('wordpress_category')
+    wp_cfg=structure.get('wordpress_binding') if isinstance(structure.get('wordpress_binding'),Mapping) else {}
+    if not isinstance(category,Mapping): raise AuthoringContractError('WORDPRESS_CATEGORY_BINDING_INVALID')
+    slug=str(category.get('slug') or '').strip().casefold(); name=str(category.get('name') or '').strip()
+    forbidden={str(v).strip().casefold() for v in wp_cfg.get('forbidden_category_slugs',[]) if isinstance(v,str)}
+    legacy_valid=int(category.get('id') or 0)>=int(wp_cfg.get('category_id_minimum') or 1) and bool(slug) and bool(name) and slug not in forbidden
+    semantic_valid=bool(slug and name and str(category.get('hierarchy_path') or '').strip() and str(category.get('taxonomy') or '')=='category' and re.fullmatch(r'[a-f0-9]{64}',str(category.get('category_source_snapshot_hash') or '')) and category.get('semantic_binding_not_numeric_identity') is True and slug not in forbidden)
+    if not (legacy_valid or semantic_valid): raise AuthoringContractError('WORDPRESS_CATEGORY_BINDING_INVALID')
+
+    intent_terms=[str(v).strip() for v in quality.get('intent_terms',[]) if isinstance(v,str) and str(v).strip()]
+    if int(static['constants'].get('min_h2') or 0)>len(structure.get('headings',{}).get('reserved_headings',[]) if isinstance(structure.get('headings'),Mapping) else []) and not intent_terms:
+        raise AuthoringContractError('INTENT_TERMS_BINDING_MISSING')
+
+    faq_answer=quality.get('faq_direct_answer') if article_type=='FAQ' else None
+    if article_type=='FAQ':
+        faq_cfg=structure.get('faq') if isinstance(structure.get('faq'),Mapping) else {}
+        minimum=int(faq_cfg.get('direct_answer_minimum_words') or 0)
+        answer=str(faq_answer or '').strip()
+        if len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',answer,re.UNICODE))<minimum: raise AuthoringContractError('FAQ_DIRECT_ANSWER_BINDING_INVALID')
+
+    table_statement=str(quality.get('table_value_statement') or '').strip()
+    table_min=int(static['derived_binding_requirements']['table_value_statement_minimum_words'])
+    if len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',table_statement,re.UNICODE))<table_min: raise AuthoringContractError('TABLE_VALUE_STATEMENT_BINDING_INVALID')
     schema=type_def.get('type_meta_schema') if isinstance(type_def.get('type_meta_schema'),Mapping) else {}
     required_type_fields=schema.get('required') if isinstance(schema.get('required'),list) else []
     type_values={k:runtime.get(k) for k in required_type_fields if k in runtime}
@@ -126,7 +181,7 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
       'global_requirements':static['constants'],
       'structure_requirements':structure,
       'type_requirements':{k:type_def.get(k) for k in ('table','table_count_exact','table_fact_trace_required','required_link_roles','visible_links_exact','fact_trace_required','all_factual_blocks_require_trace','title_contract','required_blocks','required_lists','fact_trace_required_blocks','conclusion_min_ratio','type_meta_schema','structure_profile','purpose','search_intent')},
-      'bound_requirements':{'intent_terms':list(quality.get('intent_terms') or []),'faq_direct_answer':quality.get('faq_direct_answer') if article_type=='FAQ' else None,'table_value_statement':quality.get('table_value_statement'),'link_bindings':links,'type_bound_values':type_values,'allowed_fact_ids':allowed_fact_ids},
+      'bound_requirements':{'internal_test_marker':marker,'intent_terms':intent_terms,'faq_direct_answer':faq_answer,'table_value_statement':table_statement,'table_value_statement_minimum_words':table_min,'link_bindings':links,'required_link_roles':required_roles,'portal_link_registry_hash':registry_hash,'wordpress_category':dict(category),'type_bound_values':type_values,'allowed_fact_ids':allowed_fact_ids},
       'system4_guards':{'external_links_forbidden':True,'design':{'required_root_classes':['ppm-generated',_type_class(article_type)],'required_table_classes':['system-129-table','comparison-table'],'inline_style_forbidden':True,'active_html_forbidden':True,'beratung_only_h2_headings':article_type.casefold()=='beratung'}},
     }
 
@@ -197,6 +252,12 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
             between=_plain(article_html[left[1]:right[0]])
             between_words=len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',between,re.UNICODE))
             if between_words<min_between: raise AuthoringContractError(f'PREWRITE_HEADING_DISTANCE:{between_words}:{min_between}')
+
+    marker_regex=str(structure.get('visible_test_marker_regex') or '')
+    if marker_regex:
+        try:
+            if re.search(marker_regex,str(identity.get('title') or '')) or re.search(marker_regex,article_html): raise AuthoringContractError('PREWRITE_VISIBLE_TEST_MARKER')
+        except re.error as exc: raise AuthoringContractError('PREWRITE_MARKER_REGEX_INVALID') from exc
 
     allowed={str(v) for v in bound.get('allowed_fact_ids',[]) if isinstance(v,str)}
     if allowed:
