@@ -22,6 +22,7 @@ curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.
 docker cp /tmp/wp wp:/usr/local/bin/wp
 docker exec wp chmod +x /usr/local/bin/wp
 PASS=$(openssl rand -hex 16)
+printf '%s' "$PASS" >/tmp/uge-admin-pass
 docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title='UGE Upgrade Test' --admin_user=admin --admin_password="$PASS" --admin_email=x@example.test --skip-email >/dev/null
 docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root >/dev/null
 docker exec wp wp theme install astra --activate --allow-root >/dev/null
@@ -48,7 +49,9 @@ test "$(docker exec wp wp plugin list --name=universal-glossary-engine --field=v
 
 bash "$ROOT/exact-0.2.5-test/03_seed.sh"
 
-test "$(docker exec db mysql -uwp -pwp wordpress -Nse \"SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'\")" = 4
+SCHEMA=$(docker exec wp wp eval --allow-root 'echo get_option(UGE_Core::REWRITE_SCHEMA_OPTION,"");')
+echo "UGE025_SCHEMA_BEFORE=$SCHEMA"
+test "$SCHEMA" = 4
 docker exec wp wp post list --allow-root --post_type=uge_term --post_status=any --format=count >/tmp/term-count-before
 docker exec wp wp eval --allow-root 'echo md5(wp_json_encode(UGE_Config::get()));' >/tmp/config-before
 
@@ -59,6 +62,8 @@ grep -q FULL-HUFBEIN-SENTINEL /tmp/pre-term
 docker exec wp wp eval --allow-root '$r=get_option("rewrite_rules",[]);foreach(array_keys((array)$r) as $k){if(strpos((string)$k,"glossar/begriff")!==false)unset($r[$k]);}update_option("rewrite_rules",$r,false);' >/dev/null
 
 test "$(curl -sS -o /tmp/broken-term -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufbein/)" = 404
-test "$(docker exec db mysql -uwp -pwp wordpress -Nse \"SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'\")" = 4
+SCHEMA=$(docker exec wp wp eval --allow-root 'echo get_option(UGE_Core::REWRITE_SCHEMA_OPTION,"");')
+echo "UGE025_SCHEMA_AFTER_POISON=$SCHEMA"
+test "$SCHEMA" = 4
 
 echo UGE025_POISONED_REWRITE_NEGATIVE_PASS
