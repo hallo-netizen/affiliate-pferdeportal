@@ -1,6 +1,6 @@
 # WISSENSDATENBANK – CURRENT STATE
 
-STAND: 2026-09-12
+STAND: 2026-09-13
 STATUS: THEMENPOOL AKTIV / PFERDERASSEN IN RECHERCHE / GLOSSAR STARTBEFÜLLT
 
 ## AUTORITÄT
@@ -23,10 +23,11 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **108 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 96er-Stand neu: Aegidienberger, Huzule, Berber/Barb, Azteca, Morgan, Rocky Mountain Horse, Missouri Fox Trotter, Lusitano, Tennessee Walking Horse, Paso Fino, Peruanisches Pferd und Standardbred.
+- **114 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 108er-Stand neu: Selle Français, Poney Français de Selle, Trotteur Français, Cheval Miniature Français, Cheval de Sport Anglo-Normand und Cheval Crème.
+- Diese sechs werden von IFCE über eigene Zuchtprogramme/Livres Généalogiques geführt.
 - Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben offen, weil Status/Detailstandard noch nicht stark genug aus Primärquellen gebunden sind.
-- Dubletten-/Sektionenlogik bleibt strikt; moderne Zucht- und Registerrassen werden nicht mit bloßen Typen oder Kreuzungen gleichgesetzt.
+- Dubletten-/Sektionenlogik bleibt strikt; Labels, Fokrichtungen und bloße Farb-/Typbezeichnungen werden nicht automatisch als eigene Rassen behandelt.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 - Offene Detailfelder und Kernakten mit `NACHRECHERCHE_DETAILSTANDARD` bleiben sichtbar offen.
 
