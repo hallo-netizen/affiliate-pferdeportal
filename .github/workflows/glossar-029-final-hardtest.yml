@@ -1,0 +1,67 @@
+name: Glossar 0.2.9 FINAL Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-029-final-hardtest.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.9.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.9.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-0.2.8-to-0.2.9.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.9.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/real-design-runtime-browser-029.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.9.sh
+  fresh-zero-rewrite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.9.sh
+  update-from-live-028:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-0.2.8-to-0.2.9.sh
+  real-design-zero-rewrite-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.9.sh
+  gated-package:
+    needs: [build,fresh-zero-rewrite,update-from-live-028,real-design-zero-rewrite-browser]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.9.sh
+      - name: Build and verify exact final ZIP
+        run: |
+          rm -f /tmp/universal-glossary-engine-0.2.9.zip
+          (cd /tmp/uge029 && zip -X -qr /tmp/universal-glossary-engine-0.2.9.zip universal-glossary-engine)
+          unzip -t /tmp/universal-glossary-engine-0.2.9.zip
+          rm -rf /tmp/verify029 && mkdir -p /tmp/verify029
+          unzip -q /tmp/universal-glossary-engine-0.2.9.zip -d /tmp/verify029
+          grep -q 'Version: 0.2.9' /tmp/verify029/universal-glossary-engine/universal-glossary-engine.php
+          grep -q "define('UGE_VERSION', '0.2.9');" /tmp/verify029/universal-glossary-engine/universal-glossary-engine.php
+          grep -q "const REWRITE_SCHEMA_VERSION = '7';" /tmp/verify029/universal-glossary-engine/includes/class-uge-core.php
+          grep -q "add_action('parse_request', \[__CLASS__, 'bind_explicit_request'\], 1);" /tmp/verify029/universal-glossary-engine/includes/class-uge-core.php
+          grep -q 'echo self::render_hero($page_content);' /tmp/verify029/universal-glossary-engine/includes/class-uge-frontend.php
+          grep -q 'echo self::render_search_tools();' /tmp/verify029/universal-glossary-engine/includes/class-uge-frontend.php
+          grep -q 'echo self::render_navigation(true);' /tmp/verify029/universal-glossary-engine/includes/class-uge-frontend.php
+          ! grep -q '0.2.9-rc' /tmp/verify029/universal-glossary-engine/universal-glossary-engine.php
+          sha256sum /tmp/universal-glossary-engine-0.2.9.zip | tee /tmp/uge029.sha256
+          echo UGE029_FINAL_PACKAGE_VERIFIED
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.9-gated-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.9.zip
+            /tmp/uge029.sha256
