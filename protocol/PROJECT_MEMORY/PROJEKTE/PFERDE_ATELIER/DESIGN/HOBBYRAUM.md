@@ -1,147 +1,95 @@
 # DESIGN – HOBBYRAUM
 
-STAND: 2026-09-07
-STATUS: FREI / SCRIPT-ONLY-STANDARD
+STAND: 2026-09-13
+STATUS: AKTIV / JOURNAL V1.50.477 TECHNISCHER KANDIDAT PASS / LIVE-READBACK OFFEN
 
-## HARTE OBERREGEL
+## AKTUELLER AUFTRAG
 
-**Im DESIGN-Hobbyraum werden Miniänderungen nicht mehr manuell gebaut.**
+Die Journal-Startseite wird nach dem vom Nutzer freigegebenen Entwurf neu gegliedert:
 
-Bei Elementtausch, Verschiebung oder vergleichbaren lokalen Änderungen ist ausschließlich dieser Runner zulässig:
+1. normale redaktionelle Journal-Themen oben;
+2. eigener Abschnitt `Wissen & Nachschlagen`;
+3. dort zwei breite Einstiege `Glossar` und `Pferderassen`;
+4. danach `Neu im Journal`;
+5. Glossar- und Pferderassen-Beiträge dürfen in `Neu im Journal` und `Besonders lesenswert` nicht erscheinen.
 
-`MINIMAL_PATCH_RUNNER.py`
+## EXAKTE ARBEITSBASIS
 
-Letzter abgeschlossener Job:
+Nicht `main` und nicht ein älterer Versionszweig.
 
-`MINIMAL_PATCH_JOB_CURRENT.json`
-
-Letzter echter Prüfbeleg:
-
-`MINIMAL_PATCH_LAST_RECEIPT.json`
-
-## WAS DER RUNNER ERZWINGT
-
-Der Runner darf in V1 ausschließlich:
-
-**zwei direkt aufeinanderfolgende vollständige Codebereiche in genau einer Datei vertauschen.**
-
-Er darf ausdrücklich NICHT:
-- Artikel zerlegen;
-- Markup neu bauen;
-- Texte umschreiben;
-- CSS ändern;
-- weitere Dateien ändern;
-- zusätzliche Logik ergänzen;
-- selbst eine neue Pluginversion erzeugen;
-- einen anderen Ausgangsstand verwenden.
-
-## FAIL-CLOSED
-
-Vor jedem Kandidaten erzwingt das Script:
-
-1. exakter Baseline-SHA;
-2. ZIP-Integrität;
-3. identische Archivstruktur;
-4. genau eine geänderte Paketdatei;
-5. exakt nur den definierten Tausch;
-6. beide verschobenen Bereiche byte-identisch;
-7. beide Bereiche exakt einmal vorhanden;
-8. Rücktausch ergibt byte-identisch den Vorgänger.
-
-Danach laufen automatisch Negativtests:
-
-- unveränderte/falsche Reihenfolge → BLOCKED;
-- Bereich dupliziert → BLOCKED;
-- Bereich verändert → BLOCKED;
-- irgendeine andere Datei verändert → BLOCKED.
-
-**Ein Kandidat darf nur bei Gesamt-PASS ausgegeben werden.**
-
-## KEINE PLUGIN-SERIE MEHR
-
-Im Hobbyraum wird immer nur eine Datei erzeugt:
-
+Exakte aktuelle LIVE-Basis aus dem gebundenen Design-Hobbyraum-Artefakt:
 `DESIGN_HOBBYRAUM_CANDIDATE.zip`
 
-Fehlversuch:
-Kandidat verwerfen/überschreiben.
+SHA-256:
+`11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`
 
-**Keine neue Versionsnummer pro Versuch.**
+Diese Bytes entsprechen dem im `CURRENT_STATE.md` dokumentierten LIVE-Stand `1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002`.
 
-Erst nach echtem Nutzer-LIVE-PASS darf aus dem Kandidaten einmalig ein neuer Release gebaut werden.
+## WARUM DER MINI-PATCH-RUNNER HIER NICHT GILT
 
-## LETZTER ABGESCHLOSSENER AUFTRAG
+Der bestehende `MINIMAL_PATCH_RUNNER.py` darf ausschließlich zwei direkt aufeinanderfolgende Codebereiche vertauschen. Der aktuelle Auftrag ist ausdrücklich kein Elementtausch, sondern eine neue Journal-Struktur mit zusätzlicher Kategorieauflösung, eigenem Wissensbereich, responsiver Darstellung und Query-Ausschlussregeln. Der Mini-Patch-Runner bleibt für künftige echte Miniänderungen unverändert verbindlich, ist für diesen Auftrag aber fachlich nicht anwendbar.
 
-Exakte Basis:
-V1.50.472 / Contract V104
+## TECHNISCHER KANDIDAT
+
+Version:
+`1.50.477`
+
+Plugin-Identität bleibt unverändert:
+`affiliate-portal-template-kit/pferde-template-kit.php`
+
+Geändert wurde ausschließlich diese eine Plugin-Datei. Die übrigen 497 Paketdateien sind gegenüber der exakten LIVE-Basis unverändert.
+
+Umsetzung:
+- Pferderassen-Kategorie `1482` wird aus dem normalen Themenraster in `Wissen & Nachschlagen` verschoben;
+- neue WordPress-Kategorie `Glossar` wird fail-closed exakt über Slug `glossar`, ersatzweise exakten Namen `Glossar`, aufgelöst;
+- oberes Themenraster enthält acht redaktionelle Bereiche;
+- Wissensbereich enthält genau `Glossar` und `Pferderassen`;
+- Reihenfolge: `Themen im Pferde Journal → Wissen & Nachschlagen → Neu im Journal`;
+- vorhandene Kategorie-Thumbnails werden nur als kleine `medium_large`-Lazy-Images genutzt; fehlt ein Bild, bleibt die bisherige Icon-Karte erhalten;
+- Glossar erhält A–Z-/Lexikon-Visual;
+- Pferderassen erhält Rassen-Visual bzw. vorhandenes Kategorienbild;
+- Desktop: zwei breite Wissenskarten nebeneinander; Tablet/Mobil responsiv untereinander;
+- `category__not_in` schließt Glossar und Pferderassen hart aus `Neu im Journal` und `Besonders lesenswert` aus, auch bei Mehrfachkategorisierung.
+
+## TECHNISCHE PRÜFUNGEN
+
+Lokaler/exakter Paket-Gate auf den gebundenen Bytes:
+- PHP-Lint aller 4 PHP-Dateien: PASS;
+- Konfigurationsvertrag: 10 Kategorien = 8 redaktionell + 2 Wissen/Nachschlagen: PASS;
+- Glossar + Pferderassen Rollenbindung: PASS;
+- Abschnittsreihenfolge: PASS;
+- harte Query-Ausschlüsse in beiden Beitragsabfragen: PASS;
+- exakte Glossar-Auflösung positiv: PASS;
+- fehlendes Glossar erzeugt keine erfundene Ersatzkategorie: FAIL-CLOSED / PASS;
+- gegenüber LIVE-Basis genau 1 Paketdatei verändert: PASS;
+- Paketstruktur 498/498 identisch: PASS;
+- Source ↔ entpacktes Übergabepaket: byte-identisch PASS;
+- ZIP-Integrität und PHP-Lint nach Entpacken: PASS.
+
+Wichtig: Das ist ein technischer Kandidaten-PASS, kein Pferde-LIVE-PASS.
+
+## EXAKTES ÜBERGABEPAKET
+
+`PFERDE_ATELIER_DESIGN_V1.50.477_CONTRACT_V104_JOURNAL_WISSEN_NACHSCHLAGEN_INSTALLIEREN.zip`
 
 SHA-256:
-`ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9`
-
-Erlaubte Transformation:
-nur
-
-**Affiliate-PRODUKTE / Produktvorschläge (pa266-products) ↔ Beitragsvorschau (pa297-popular)**
-
-Ziel:
-**Produktvorschläge stehen direkt über der Beitragsvorschau.**
-
-Der Affiliate-Banner bleibt exakt an seiner bisherigen V1.50.472-Position.
-Artikel, Verweise und jeder andere Block bleiben exakt wie V1.50.472.
-
-Kein anderer Block darf bewegt werden.
-
-## LETZTER SCRIPT-LAUF
-
-Aktueller Job **DESIGN-ORDER-SWAP-002** gegen exakte V1.50.472-Basis: **PASS**
-
-Ziel eindeutig:
-**Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.**
-
-Ergebnis:
-- Affiliate-Banner bleibt exakt an seiner V1.50.472-Position: PASS;
-- Affiliate-Produkte vor Beitragsvorschau: PASS;
-- Artikel-/Verweisstruktur unverändert: PASS;
-- genau eine Paketdatei verändert: PASS;
-- exakter Zwei-Bereich-Tausch: PASS;
-- Byteidentität/Reversibilität: PASS;
-- vier Negativtests BLOCKED/PASS;
-- Kandidaten-SHA: `11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`.
-
-Der Nutzer hat den Kandidaten am 2026-09-07 real geprüft und mit **PASS** bestätigt. LIVE-Beleg: `LIVE_PASS_DESIGN_ORDER_SWAP_002.md`.
-
-## ABSCHLUSS
-
-Aktueller Auftrag DESIGN-ORDER-SWAP-002: **CLOSED / LIVE PASS**.
-
-Der Hobbyraum ist wieder FREI. Der SCRIPT-ONLY-Standard bleibt für künftige Miniänderungen verbindlich.
+`5fe869e076bf3c30f34889cd6a887c23eb46a81b5502f49a859abffb380db458`
 
 ## NEXT ACTION
 
-**Keine offene DESIGN-Arbeit.**
+1. exakt dieses Paket in WordPress über das vorhandene Designplugin installieren/ersetzen;
+2. reale Journal-Startseite prüfen;
+3. prüfen: acht normale Themen oben;
+4. prüfen: `Glossar` und `Pferderassen` gemeinsam im eigenen Wissensbereich;
+5. prüfen: `Neu im Journal` enthält keine Glossar-/Rassenbeiträge;
+6. Desktop + Mobil real ansehen;
+7. erst nach Nutzer-Readback LIVE-Status ändern.
 
-Der Hobbyraum ist FREI.
-Bei einem neuen lokalen Miniänderungsauftrag wird zuerst ein neuer hashgebundener Job definiert und danach ausschließlich der Runner verwendet.
+## NICHT ANFASSEN
 
-## VERBINDLICHER ABLAUF FÜR JEDEN WEITEREN CHAT
-
-1. `CURRENT_STATE.md` lesen.
-2. diese `HOBBYRAUM.md` lesen.
-3. `MINIMAL_PATCH_JOB_CURRENT.json` lesen.
-4. Runner-Selbsttest ausführen.
-5. exakte Baseline anhand SHA binden.
-6. ausschließlich `MINIMAL_PATCH_RUNNER.py build ...` ausführen.
-7. nur bei Gesamt-PASS den einen `DESIGN_HOBBYRAUM_CANDIDATE.zip` verwenden.
-8. bei FAIL: STOPP. Keine manuelle Reparatur und kein Ersatzweg.
-
-## HARTE GRENZE
-
-V1.50.473, V1.50.474, V1.50.475 und V1.50.476 sind keine Arbeitsbasis für diesen Auftrag.
-
-Es gibt keinen manuellen Nebenweg.
-
-## VERWEISE
-
-- Bürostand: `CURRENT_STATE.md`
-- Fehler: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
-- Warum: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- `main`;
+- Glossar-Plugin;
+- Textmaschine;
+- Affiliate-Zentrale;
+- Kategorieinhalte selbst;
+- bestehende DESIGN-LIVE-Wahrheit vor Nutzer-Readback.
