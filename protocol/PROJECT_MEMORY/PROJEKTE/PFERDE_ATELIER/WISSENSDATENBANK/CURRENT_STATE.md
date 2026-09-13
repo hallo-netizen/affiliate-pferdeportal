@@ -23,10 +23,10 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **153 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 145er-Stand neu: Žemaitukas, Großer Žemaitukas, Litauisches Kaltblut, Gidrán, Nóniusz, Kisbéri félvér, Furioso–North Star und Ungarisches Kaltblut.
-- Litauen führt Žemaitukas, Stambieji žemaitukai und Lietuvos sunkieji arkliai im aktuellen staatlichen Erhaltungsprogramm als getrennte alte Rassen.
-- Nébih führt Gidrán, Nóniusz, Kisbéri félvér, Furioso–North Star und Magyar hidegvérű als getrennte Rassen mit jeweils zuständiger Zuchtorganisation.
+- **157 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 153er-Stand neu: Slowenisches Kaltblut, Posavje-Pferd, Ljutomer-Traber und Slowenisches Warmblut.
+- Die vier neuen slowenischen Rassen sind über die slowenische Regierung als Rassen mit anerkannten Zuchtprogrammen gebunden.
+- Das Bosnische Gebirgspferd war bereits vorhanden und wurde nicht dupliziert.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
