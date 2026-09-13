@@ -26,7 +26,13 @@ Das PLUGINS-Büro ist Inventar-, Update- und Ausgabepult.
 
 Autoritative technische/Fach-/Release-/LIVE-Wahrheit bleibt immer im zuständigen Fachbüro bzw. an dessen gebundener technischer Hauptquelle.
 
-`ISOLIERTE_PLUGINS/<PLUGIN-ID>/CURRENT.zip` ist ausschließlich eine hashgebundene, abgeleitete Ausgabekopie dieses autoritativen Stands.
+Die physischen Plugin-ZIPs liegen persistent im zentralen Ausgabeschrank:
+`/Campus-Plugins/PFERDE_ATELIER/<PLUGIN-ID>/CURRENT.zip`
+
+Dazu liegt jeweils:
+`/Campus-Plugins/PFERDE_ATELIER/<PLUGIN-ID>/MANIFEST.md`
+
+Diese Dateien sind ausschließlich hashgebundene, abgeleitete Ausgabekopien des autoritativen Stands.
 
 ## Klassengrenze
 
@@ -50,6 +56,6 @@ Treffer = bekannten Fehlerweg nicht wiederholen.
 
 ## Abschlussregel
 
-Wenn ein Chat tatsächlich ein Plugin entwickelt oder aktualisiert hat, muss vor Abschluss geprüft werden, ob dessen isolierte `CURRENT.zip` + `MANIFEST.md` hier auf den neuen belegten Stand synchronisiert wurden.
+Wenn ein Chat tatsächlich ein Plugin entwickelt oder aktualisiert hat, muss vor Abschluss geprüft werden, ob dessen isolierte `CURRENT.zip` + `MANIFEST.md` im zentralen Ausgabeschrank auf den neuen belegten Stand synchronisiert wurden.
 
 Kann der aktuelle Pluginstand nicht vollständig und eindeutig aus der autoritativen Quelle erzeugt/bezogen werden: nicht raten, bisherigen Stand nicht ersetzen, `Plugins: BLOCKED`.
