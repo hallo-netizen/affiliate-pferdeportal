@@ -1,7 +1,7 @@
 # UNIVERSAL GLOSSAR ENGINE – HOBBYRAUM
 
-STAND: 2026-09-12
-STATUS: AKTIV / ECHTER WORDPRESS+MYSQL-SMOKE-TEST PASS
+STAND: 2026-09-13
+STATUS: AKTIV / 0.2.6 FRESH + IN-PLACE HARDTEST PASS / LIVE-READBACK OFFEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,110 +9,145 @@ STATUS: AKTIV / ECHTER WORDPRESS+MYSQL-SMOKE-TEST PASS
 Der isolierte Arbeitsraum für den allgemeinen Glossar-Core.
 
 **HIER BIST DU RICHTIG, WENN …**  
-der projektunabhängige WordPress-Kern des Glossars gebaut oder getestet wird.
+der projektunabhängige WordPress-Kern des Glossars gebaut, geprüft oder über einen gebundenen Updateweg weitergeführt wird.
 
 **DU DARFST …**  
-den neutralen Core, Datenvertrag, Projektkonfiguration und Positiv-/Negativtests entwickeln.
+den neutralen Core, Datenvertrag, Projektkonfiguration und harte Positiv-/Negativtests entwickeln.
 
 **DU DARFST NICHT …**  
-Pferde-Fachlogik in den Core schreiben, `main` verändern, das bestehende Designplugin als Glossar-Engine umbauen oder vor Release-/LIVE-Nachweis einen Release/LIVE-PASS behaupten.
+Pferde-Fachlogik in den Core schreiben, `main` verändern, das bestehende Designplugin als Glossar-Engine umbauen, unterschiedliche Pakete unter derselben Versionsnummer erzeugen oder vor realem Nachweis einen LIVE-PASS behaupten.
 
 **ALS NÄCHSTES …**  
-den unveränderten 0.1.0-Core real mit Astra + Yoast prüfen.
+den exakt hashgebundenen 0.2.6-Kandidaten nur über den geprüften WordPress-Updateweg in der Pferde-Anwendung testen und danach echten Readback der gemeldeten Frontendfehler durchführen.
 
 ## AKTUELLER AUFTRAG
 
-`MOD-008 – Universal Glossar Engine` nach bestandenem WordPress/MySQL-Smoke-Test gegen die reale Zielkombination Astra + Yoast prüfen; danach realen Wissensdatenbankimport binden.
+`MOD-008 – Universal Glossar Engine` ist technisch bis zum 0.2.6-Fresh-/Upgrade-Hardtest geführt.
+
+Aktuell keine neue Funktion bauen.
+
+Nächste Arbeit ist Integrations-/Readback-Prüfung des exakt getesteten Kandidaten in der ersten realen Projektanwendung Pferde Atelier.
 
 ## ARBEITSORT
 
 Isolierter Branch:
-`hobbyroom/glossar-v1-current-20260912`
+`hobbyroom/glossar-026-upgrade-hardtest-20260913`
 
-Quellstand:
-`prototype/0.1.0/universal-glossary-engine/`
+Technisch getesteter Commit:
+`e5f8c8ce1839a69f3e6fb712bd4a3d4a3e8ad059`
 
-QA:
-`PROTOTYPE_QA_0.1.0.md`
+Autoritativer Testlauf:
+`34748541630`
 
-Früher lokal gebauter Prototyp-ZIP-Hash:
-`c8f58f0b144d286567a269d3fc26f09db36cb94446619528ff8b896d6b8682ee`
+Technischer Kandidat:
+`0.2.6`
 
-Dieser Hash ist kein finaler Release-Installer.
+Innerer Plugin-ZIP SHA-256:
+`e0717db3aa247edc30b0fe84a261aa59037050d593e3432a6fb460f6d96f3b09`
 
-## V1-KERN
+Actions-Artefakt-ID:
+`10314822840`
 
-- eigener Backend-Menübereich;
-- eigener Glossarbegriff-Inhaltstyp;
-- eigene hierarchische Glossar-Oberbereiche;
-- eigene Zieladresse je veröffentlichtem Begriff;
-- eigene SEO-Titel-/Meta-Description-Felder;
-- auswählbare vorhandene Glossar-Hauptseite;
-- A–Z + Suche + Oberbereiche + Aufklapper;
-- kein Bildzwang;
-- kein normales Beitragsarchiv;
-- kein Auto-Publish;
-- JSON-Import/Export;
-- Import ausschließlich als Entwurf;
-- keine Yoast-Pflichtabhängigkeit;
-- keine Fachbegriffe im Core;
-- erweiterbares Feldschema;
-- konfigurierbare Designwerte.
+Testdetails:
+`TESTPROTOKOLL_0.2.6_20260913.md`
+
+## HARTE KANDIDATENBINDUNG
+
+0.2.6 wird deterministisch aus dem bereits geprüften 0.2.5-Kandidaten gebaut.
+
+Erlaubtes Delta exakt:
+1. Hauptplugin-Version 0.2.5 → 0.2.6;
+2. Rewrite-Schema 4 → 5.
+
+Kein weiteres verstecktes Delta zulässig.
+
+Keine neue Ausgabe als 0.2.6 nach Codeänderung ohne neuen vollständigen Hardtest und neuen Hash.
 
 ## TESTSTAND
 
-Lokal:
-- PHP-Lint 8/8 PASS;
-- statisch positiv/negativ 15/15 PASS;
-- Runtime-Stub PASS;
-- Pferde-Profil PASS;
-- fachfremdes `Lexikon`-Profil PASS ohne Coreänderung;
-- ZIP-Struktur PASS.
+### Fresh-Install
 
-Echter WordPress/MySQL-Test:
-- Run `34699122729` → PASS;
-- WordPress 6.9 / PHP 8.1.34 / MySQL 8.0 → PASS;
-- WordPress 7.1 / PHP 8.3.33 / MySQL 8.0 → PASS;
-- `/glossar/` + `/glossar/kolik/` parallel → PASS;
-- SEO ohne Yoast → PASS;
-- JSON Import/Export → PASS;
-- Import bleibt Entwurf → PASS;
-- unbekanntes Importfeld wird verworfen → PASS;
-- Zusatzfeld ohne Coreänderung → PASS;
-- reale `Lexikon`-Zweitkonfiguration → PASS;
-- Deaktivieren/Reaktivieren ohne Daten-/Seitenverlust → PASS;
-- keine normalen Seiten pro Glossarbegriff → PASS.
+Run `34748541630`, Job `103700782149` → PASS.
 
-## NEXT ACTION – ASTRA + YOAST
+Positiv/negativ unter WordPress + MySQL + Astra:
+- Plugin 0.2.6 / Schema 5;
+- Startseite, Navigation, A–Z;
+- alle Kartenlinks;
+- echte Einzelbegriffsseite statt bloß HTTP 200;
+- Draft/404/Preview;
+- AJAX gültig/ungültig;
+- Kategorie-/Begriffskollision;
+- normaler WordPress-Beitrag unverändert;
+- Hero-Abstand;
+- responsive Hero-Darstellung;
+- Breadcrumb-Achse;
+- alte Regressionen erneut PASS.
 
-1. unveränderten 0.1.0-Core in isoliertem WordPress installieren;
-2. Astra aus dem offiziellen WordPress-Verzeichnis installieren und aktivieren;
-3. Yoast SEO aus dem offiziellen WordPress-Verzeichnis installieren und aktivieren;
-4. `/glossar/` und Begriffszieladresse real laden;
-5. eigenen SEO-Titel/Description/Canonical/Robots prüfen;
-6. negativ prüfen: keine doppelte Description/Canonical/Robots-Ausgabe;
-7. Astra-Darstellung darf Glossarindex und Einzelansicht nicht zerstören;
-8. normalen Beitrag/normale Seite negativ unverändert prüfen;
-9. danach realen Campus-Wissensdatenbankimport als nächsten einzigen offenen Integrationsschritt binden.
+### In-place-Upgrade 0.2.5 → 0.2.6
+
+Run `34748541630`, Job `103700782306` → PASS.
+
+Negativer Vorzustand:
+- Einzelbegriff-Rewrite-Regel unter aktivem 0.2.5 gezielt entfernt;
+- bekannter Einzelbegriff danach 404;
+- Schema bleibt 4.
+
+Echter WordPress-Updater:
+- 0.2.5 mit 0.2.6 überschrieben;
+- erster neuer Request migriert Schema 4 → 5;
+- Regel wird wieder aufgebaut;
+- bekannter Einzelbegriff wieder echte 200-Artikelseite.
+
+Danach vollständige Positiv-/Negativmatrix erneut PASS einschließlich Daten-/Konfigurationspersistenz und Reaktivierung.
+
+### Gated Package
+
+Job `103700913568` → PASS.
+
+Paket wurde erst nach beiden grünen Jobs gebaut.
+
+### Lokaler exakter Artefaktcheck
+
+PASS:
+- Hashbindung;
+- ZIP-Struktur;
+- keine Traversal-/Symlink-Pfade;
+- lokaler 0.2.5↔0.2.6-Dateivergleich exakt zwei erlaubte Dateien;
+- positive Version-/Schema-/Frontendregeln;
+- negative Altversion-/Altschema-/alte CSS-Hacks;
+- PHP-Lint aller 10 PHP-Dateien.
+
+## VERSIONIERUNGSREGEL
+
+Dauerhaft:
+`ENTSCHEIDUNG_20260912.md`
+
+Keine materiell unterschiedlichen Pakete mehr unter derselben Versionsnummer.
+
+## NEXT ACTION
+
+1. Keine weitere technische Änderung am Kandidaten.
+2. Exakt den hashgebundenen 0.2.6-ZIP verwenden.
+3. In Pferde Atelier als Update über den WordPress-Pluginweg installieren.
+4. Direkt danach Readback der vier gemeldeten Punkte:
+   - Hero-Abstand;
+   - Responsive Hero;
+   - alle Einzelbegriff-Links inklusive echtem Seiteninhalt;
+   - Kategorie-Breadcrumb Position/Darstellung.
+5. Negativ zusätzlich normale Beiträge, 404, Draft und Kategorie/gleichnamiger Begriff prüfen.
+6. Nur bei realem PASS darf Pferde-Anwendung hochgestuft werden.
+7. Bei FAIL: erster exakter Fehler zurück in `PROJEKTE/PFERDE_ATELIER/GLOSSAR/FEHLERQUELLEN.md`; kein neues Paket ohne erneute harte Prüfung.
 
 ## DANACH OFFEN
 
+- aktueller Astra+Yoast-Kombinationstest, soweit für endgültigen Release gebunden;
 - realer Campus-Wissensdatenbankimport;
 - größerer Bestand/Performance;
-- finaler ZIP-Install-/Update-/Reinstall-Test;
-- separates zweites reales Portal;
-- Pferde-Atelier-LIVE-Installation.
-
-## PARALLELENTWICKLUNG
-
-Aktuell NICHT erforderlich.
-
-Nur bei echtem unkonfigurierbarem Zweitportalproblem:
-neutraler Core + kleiner Adapter. Kein zweiter kompletter Plugin-Fork.
+- separates zweites reales Portal.
 
 ## HARTE REGEL
 
-**WordPress-Smoke-PASS ist kein Pferde-Atelier-LIVE-PASS.**
+**Technischer Kandidaten-PASS ist kein Pferde-Atelier-LIVE-PASS.**
 
 `main` und bestehendes Designplugin bleiben unangetastet.
 
