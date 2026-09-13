@@ -2,6 +2,7 @@
 import argparse, base64, hashlib, json, lzma, re
 from pathlib import Path
 
+import batch_repetition_guard
 import content_guard
 import design_guard
 
@@ -12,6 +13,7 @@ INLINE_FILENAME='SYSTEM4_PARENT_CHAT_INLINE_V1.txt'
 INLINE_BEGIN='SYSTEM4_PARENT_CHAT_INLINE_V1_BEGIN'
 INLINE_END='SYSTEM4_PARENT_CHAT_INLINE_V1_END'
 INLINE_MAX_CHARS=60000
+DIRECT_IMPORT_PLUGIN_VERSION='0.28.23'
 SHA_RE=re.compile(r'^[0-9a-f]{64}$')
 
 class HandoffError(RuntimeError):
@@ -42,7 +44,7 @@ def validate_handoff(payload: dict) -> dict:
     _require(wr['file_format']=='JSON' and wr['mime_type']=='application/json','HANDOFF_WORDPRESS_FORMAT_INVALID')
     _require(wr['intended_next_step']=='WORDPRESS_DIRECT_IMPORT','HANDOFF_WORDPRESS_NEXT_STEP_INVALID')
     _require(wr['plugin_name']=='Portal SEO Editorial Plan Compiler','HANDOFF_WORDPRESS_PLUGIN_INVALID')
-    _require(wr['plugin_version_verified_against']=='0.28.22','HANDOFF_WORDPRESS_PLUGIN_VERSION_INVALID')
+    _require(wr['plugin_version_verified_against']==DIRECT_IMPORT_PLUGIN_VERSION,'HANDOFF_WORDPRESS_PLUGIN_VERSION_INVALID')
     _require(wr['ppm_version_verified_against']=='6.7.9','HANDOFF_WORDPRESS_PPM_VERSION_INVALID')
     _require(wr['direct_wordpress_upload_ready'] is True,'HANDOFF_WORDPRESS_DIRECT_UPLOAD_REQUIRED')
     _require(wr['direct_upload_block_reason'] is None,'HANDOFF_WORDPRESS_BLOCK_REASON_MUST_BE_EMPTY')
@@ -79,6 +81,10 @@ def validate_handoff(payload: dict) -> dict:
         content_guard.validate_batch_distinctness(bodies)
     except content_guard.ContentGuardError as exc:
         raise HandoffError('HANDOFF_CONTENT_GUARD:'+str(exc)) from exc
+    try:
+        batch_repetition_guard.validate_batch_repetition(bodies)
+    except batch_repetition_guard.BatchRepetitionError as exc:
+        raise HandoffError('HANDOFF_REPETITION_GUARD:'+str(exc)) from exc
     return payload
 
 def read_validate_handoff(path: Path) -> tuple[dict,bytes]:
