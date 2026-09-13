@@ -1,0 +1,88 @@
+name: Glossar 0.2.5 Old vs Current Diagnostic
+on:
+  push:
+    branches: [hobbyroom/glossar-025-frontend-acceptance-20260913]
+    paths: ['.github/workflows/glossar-025-old-vs-current-diagnostic.yml']
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild historical 0.2.5 exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp
+          C22=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.2
+          C23=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/candidate-0.2.3
+          mkdir -p /tmp/u
+          cat "$T"/uge020-final-collision-part{1,2,3,4}.b64 | base64 -d >/tmp/base.zip
+          unzip -q /tmp/base.zip -d /tmp/u
+          P=/tmp/u/universal-glossary-engine
+          cp "$C22/universal-glossary-engine.php" "$P/"
+          cp "$C22/includes/class-uge-config.php" "$P/includes/"
+          cp "$C22/includes/class-uge-core.php" "$P/includes/"
+          cp "$C22/includes/class-uge-seo.php" "$P/includes/"
+          cat "$C22"/frontend-parts/part-* > "$P/includes/class-uge-frontend.php"
+          cp "$C23/universal-glossary-engine.php" "$P/"
+          cp "$C23/includes/class-uge-config.php" "$P/includes/"
+          cp "$C23/includes/class-uge-core.php" "$P/includes/"
+          cp "$C23/includes/class-uge-seo.php" "$P/includes/"
+          cp "$C23/includes/class-uge-policy.php" "$P/includes/"
+          cat "$T"/uge024-part{1,2,3,4}.b64 | base64 -d | gzip -d >/tmp/uge024.patch
+          patch -p4 -d "$P" </tmp/uge024.patch >/dev/null
+          curl -fsSL 'https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/89a15130698791b962526b58cae225366d880167/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/tmp/uge025.patch.gz.b64' | base64 -d | gzip -d >/tmp/uge025.patch
+          patch -p2 -d "$P" </tmp/uge025.patch >/dev/null
+          mkdir -p "$P/assets"
+          printf 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Z9JAAAAAASUVORK5CYII=' | base64 -d > "$P/assets/glossar-hero-books-stall.png"
+          grep -q 'Version: 0.2.5' "$P/universal-glossary-engine.php"
+          cp -a "$P" /tmp/historical-025
+          sha256sum "$P"/universal-glossary-engine.php "$P"/includes/class-uge-core.php "$P"/includes/class-uge-frontend.php "$P"/templates/single-uge-term.php | tee /tmp/historical-hashes.txt
+          echo HISTORICAL_025_REBUILT_PASS
+      - name: Boot historical package in real WordPress Astra
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/02_boot.sh
+      - name: Seed historical package
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/03_seed.sh
+      - name: Prove historical card links render real term pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/old-home
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/old-home',encoding='utf8').read()
+          links=sorted(set(re.findall(r'href="(http://127\.0\.0\.1:8080/glossar/begriff/[^\"]+/)"',s)))
+          assert links, 'historical 0.2.5 rendered no term links'
+          open('/tmp/old-links','w').write('\n'.join(links)+'\n')
+          PY
+          while IFS= read -r u; do
+            code=$(curl -sS -o /tmp/old-term -w '%{http_code}' "$u")
+            test "$code" = 200
+            grep -q '<article class="uge-single-wrap"' /tmp/old-term
+            grep -q '<h1' /tmp/old-term
+            ! grep -qiE 'fatal error|critical error' /tmp/old-term
+          done </tmp/old-links
+          echo HISTORICAL_025_REAL_TERM_LINKS_PASS
+      - name: Rebuild current tested 0.2.5 and compare critical source
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker rm -f wp db >/dev/null 2>&1 || true
+          docker network rm n >/dev/null 2>&1 || true
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/01_build.sh
+          P=/tmp/u/universal-glossary-engine
+          echo '--- CURRENT HASHES ---'
+          sha256sum "$P"/universal-glossary-engine.php "$P"/includes/class-uge-core.php "$P"/includes/class-uge-frontend.php "$P"/templates/single-uge-term.php
+          echo '--- HISTORICAL HASHES ---'
+          cat /tmp/historical-hashes.txt
+          echo '--- CRITICAL DIFF STAT ---'
+          diff -u /tmp/historical-025/includes/class-uge-core.php "$P"/includes/class-uge-core.php >/tmp/core.diff || true
+          diff -u /tmp/historical-025/templates/single-uge-term.php "$P"/templates/single-uge-term.php >/tmp/single.diff || true
+          diff -u /tmp/historical-025/includes/class-uge-frontend.php "$P"/includes/class-uge-frontend.php >/tmp/frontend.diff || true
+          wc -l /tmp/core.diff /tmp/single.diff /tmp/frontend.diff
+          echo '--- ROUTING/TEMPLATE RELEVANT DIFF ---'
+          grep -Ei '^[+-].*(REWRITE_SCHEMA|add_rewrite_rule|template_include|single-uge-term|post_type_link|get_permalink|legacy|uge-single-wrap)' /tmp/core.diff /tmp/single.diff /tmp/frontend.diff || true
+          echo OLD_CURRENT_025_COMPARE_PASS
