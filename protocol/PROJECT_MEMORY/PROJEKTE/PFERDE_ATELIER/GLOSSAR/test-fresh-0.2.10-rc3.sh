@@ -1,32 +1,59 @@
 #!/usr/bin/env bash
 set -euo pipefail
 R=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR
-SRC="$R/test-fresh-0.2.10-rc2.sh"
-sed \
-  -e 's/build-0\.2\.10-rc2\.sh/build-0.2.10-rc3.sh/g' \
-  -e 's/uge0210rc2/uge0210rc3/g' \
-  -e 's/0\.2\.10-rc2/0.2.10-rc3/g' \
-  -e 's/UGE0210RC2/UGE0210RC3/g' \
-  "$SRC" > /tmp/test-fresh-0210-rc3.sh
-# Harness-only diagnostic inserted immediately before the first content-pack
-# assertion. Product bytes remain exactly rc3.
-python3 - <<'PY'
-from pathlib import Path
-p=Path('/tmp/test-fresh-0210-rc3.sh')
-s=p.read_text()
-needle='for slug in hufrehe strahlfaeule hufabszess; do\n'
-assert needle in s
-probe=r'''echo "CONTENT_PACK_CLASS=$(docker exec wp wp eval --allow-root 'echo class_exists("UGE_Pferde_Content_Pack",false)?"1":"0";')"
-echo "PFERDE_DESIGN_CLASS=$(docker exec wp wp eval --allow-root 'echo class_exists("Pferde_Template_Kit",false)?"1":"0";')"
-echo "PACK_OPTION=$(docker exec wp wp option get uge_pferde_content_pack_0210 --allow-root 2>/dev/null || echo MISSING)"
-echo "GESUNDHEIT_PAGE=$(docker exec wp wp post list --allow-root --post_type=page --name=gesundheit --fields=ID,post_status,post_title --format=json)"
-echo "NEW_PACK_POSTS_BEFORE=$(docker exec wp wp post list --allow-root --post_type=uge_term --post_status=any --fields=ID,post_name,post_status,post_title --format=json | grep -E "hufrehe|strahlfaeule|hufabszess" || true)"
-docker exec wp wp eval --allow-root 'UGE_Pferde_Content_Pack::maybe_install(); echo "PACK_MANUAL_TRIGGER_DONE\n";'
-echo "PACK_OPTION_AFTER_MANUAL=$(docker exec wp wp option get uge_pferde_content_pack_0210 --allow-root 2>/dev/null || echo MISSING)"
-echo "NEW_PACK_POSTS_AFTER=$(docker exec wp wp post list --allow-root --post_type=uge_term --post_status=any --fields=ID,post_name,post_status,post_title --format=json | grep -E "hufrehe|strahlfaeule|hufabszess" || true)"
-'''
-s=s.replace(needle,probe+needle,1)
-p.write_text(s)
-PY
-chmod +x /tmp/test-fresh-0210-rc3.sh
-bash /tmp/test-fresh-0210-rc3.sh
+bash "$R/build-0.2.10-rc4.sh"
+rm -rf /tmp/uge0210rc4boot
+cp -a /tmp/uge0210rc4 /tmp/uge0210rc4boot
+SRC="$R/exact-0.2.6-test/02_boot.sh"
+sed -e 's#/tmp/uge026#/tmp/uge0210rc4boot#g' -e 's/0\.2\.6/0.2.10-rc4/g' -e 's/UGE026/UGE0210RC4/g' -e 's/uge026/uge0210rc4/g' "$SRC" > /tmp/boot-0210-rc4.sh
+chmod +x /tmp/boot-0210-rc4.sh
+bash /tmp/boot-0210-rc4.sh
+bash "$R/exact-0.2.5-test/03_seed.sh"
+bash "$R/exact-0.2.5-test/04_frontend.sh"
+bash "$R/exact-0.2.5-test/05_regression.sh"
+
+test "$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)" = 0.2.10-rc4
+
+# Trigger pack only after seed has marked Gesundheit as a real portal category.
+docker exec wp wp option delete uge_pferde_content_pack_0210 --allow-root >/dev/null 2>&1 || true
+docker exec wp wp eval --allow-root 'UGE_Pferde_Content_Pack::maybe_install();'
+test "$(docker exec wp wp option get uge_pferde_content_pack_0210 --allow-root)" = done
+
+# Every related term in the pack exists now, is published now, and each article
+# has direct inline links to BOTH related terms plus the category.
+for slug in hufrehe strahlfaeule hufabszess; do
+  ID=$(docker exec wp wp post list --allow-root --post_type=uge_term --name="$slug" --post_status=publish --field=ID)
+  test -n "$ID"
+  HTML=$(docker exec wp wp post get "$ID" --allow-root --field=post_content)
+  printf '%s' "$HTML" | grep -q '/glossar/gesundheit/'
+  if printf '%s' "$HTML" | grep -Eqi '<h[2-6][ >]'; then echo UNNEEDED_SUBHEADING_FOUND:$slug >&2; exit 1; fi
+  REL=$(docker exec wp wp eval --allow-root "echo UGE_Core::term_value($ID,'related_terms');")
+  test -n "$REL"
+  case "$slug" in
+    hufrehe) A=strahlfaeule; B=hufabszess;;
+    strahlfaeule) A=hufrehe; B=hufabszess;;
+    hufabszess) A=hufrehe; B=strahlfaeule;;
+  esac
+  printf '%s' "$HTML" | grep -q "/glossar/begriff/$A/"
+  printf '%s' "$HTML" | grep -q "/glossar/begriff/$B/"
+  test "$(curl -sS -o /tmp/$slug -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/$slug/)" = 200
+  grep -q 'class="uge-primary-category"' /tmp/$slug
+  grep -q '<strong>Verwandte Begriffe:</strong>' /tmp/$slug
+  grep -q "/glossar/begriff/$A/" /tmp/$slug
+  grep -q "/glossar/begriff/$B/" /tmp/$slug
+done
+
+# Pferderassen remain forbidden in Glossar content packs.
+PACK=$(docker exec wp wp post list --allow-root --post_type=uge_term --post_status=publish --fields=post_title,post_content --format=json)
+if printf '%s' "$PACK" | grep -Eqi 'haflinger|friese|hannoveraner|trakehner|isländer|islaender|fjordpferd|quarter horse'; then
+  echo HORSE_BREED_LEAK_IN_GLOSSARY >&2; exit 1
+fi
+
+# Old rejected fallback text stays absent.
+curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/home
+! grep -Fq 'Begriffe schnell finden, fachlich einordnen und verständlich nachschlagen.' /tmp/home
+
+echo UGE0210RC4_RELATED_CLUSTER_ATOMIC_PASS
+echo UGE0210RC4_RELATED_LINKS_AND_CATEGORY_LINK_PASS
+echo UGE0210RC4_NO_UNNEEDED_SUBHEADINGS_PASS
+echo UGE0210RC4_NO_HORSE_BREEDS_PASS
