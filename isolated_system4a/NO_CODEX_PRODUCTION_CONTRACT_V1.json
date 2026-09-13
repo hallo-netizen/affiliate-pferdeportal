@@ -1,0 +1,64 @@
+{
+  "codex_allowed": false,
+  "contract": "SYSTEM4A_NO_CODEX_PRODUCTION_CONTRACT_V1",
+  "dependencies": {
+    "languagetool_6_8_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+    "ppm_6_7_9_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+    "ppm_article_type_templates_sha256": "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f",
+    "ppm_category_source_sha256": "316135b57b9c6edbd620250cd88adfbe46d9060fbdaf1e38130933f985b10fbd",
+    "ppm_editorial_plan_sha256": "85e223c7c82c02aae0853526b9521c38113311a21e8c4cd1cdb88fa9b5df0b44",
+    "ppm_wp_snapshot_sha256": "2c634d59285b3b2dc1ceb9daf70f496f7848dde8e47e5b0e217fb8d235270de6"
+  },
+  "expected": {
+    "article_identity": {
+      "article_type": "Beratung",
+      "category": "checklisten-fuer-pferdeanhaenger-beratung",
+      "plan_slot": "f6e9c54000eedddfaf8427c83ec99c3e40d5d2d91bcc6f84f86f165964c5dcb8",
+      "target_keyword": "Checklisten für Pferdeanhänger",
+      "title": "Welche Variante von Checklisten für Pferdeanhänger passt zu welchem Bedarf?"
+    },
+    "batch_sha256": "a9d4b49c2a696bdb8fee887837c7c466aa9d6d7bead18c01ba5bcc489ad13e4f",
+    "fact_pack_stable_sha256": "d67f71c2efd6818ea8416759d25b39cf2d8bb2f4575d09a2decc18900767091a",
+    "inline_sha256": "b9c437da7c8ba2b468e4f74b821df4d6458c6bf455514e246c79704e1a872237",
+    "lt_status": "PASS",
+    "output_bytes": 29391,
+    "output_sha256": "8a3fab64fb1e654257f12bb8c9ead716abbf3cf7f207d50c6b1c69d386ca1cc4",
+    "ppm_status": "PASS",
+    "production_plan_stable_sha256": "5810401e69a0a8441224270e4fb5209cfd0bef9d9bd674087ca00e5a16444c53",
+    "quality_binding_sha256": "7f458ab613f372e7e8f11da058e9a8624fe78818a76356b14dd953d80a66834b",
+    "revision_count": 3
+  },
+  "input": {
+    "bytes": 621,
+    "path": "isolated_system4a/NO_CODEX_PRODUCTION_INPUT_V1.json",
+    "sha256": "27c180df492298a8c12510a4f08ce7b4f337018b7e067b083954007788b393d7"
+  },
+  "production_entry": "isolated_system4a.realcase_production_entry.run_realcase",
+  "production_source_sha256": {
+    "isolated_system4/LT68Worker.java": "f2487a84b9fc4424e6207a26d8278d31207a7746e7cd504800faa22652876503",
+    "isolated_system4/batch_repetition_guard.py": "2977fa76c7d7b49ae99b0f473140cadf38269dbde6fa91482c2fb029190fa8a7",
+    "isolated_system4/content_guard.py": "ac918c33be12854a08c29584029ea7ec1bac20179168ad31a1c3b9fdec833ddc",
+    "isolated_system4/design_guard.py": "b9add3747de8c6e41400ede243064594fef663aaa27cec2491837a580439b9ba",
+    "isolated_system4/handoff_transport.py": "54eeb900114a0d9af9c33ea7347b016a8c7db62016d08be0fae361e2cbdc7c1b",
+    "isolated_system4/production_checks.py": "3d196689d7efa3476f39bc9506d911ea5c1123f9ed013040b669f7c8a9fc67fb",
+    "isolated_system4a/authority_store.py": "41c9d5a2b81a4118fb1e8393875d6a5999e3480a26becb1adf8d2f5db6d7bb0a",
+    "isolated_system4a/capsule.py": "99e36cce38820fd8bf739eedaf07537bce04694ce5d85d70c1dceeda5784211a",
+    "isolated_system4a/codex_worker_entry.py": "9118569385b6ba2156c331bc1a677c8f6e0b1fde2687fcba727bbfb5047be1f7",
+    "isolated_system4a/external_host.py": "652dd9c34e65fa3341d9e8ee18005bfa057c220632fab1646afff7ee3417e510",
+    "isolated_system4a/full_chain.py": "b869af4ee9d1ccb536d7ab88ffc635fc21f0eed19ba9886b932e48406183ef60",
+    "isolated_system4a/persistent_capsule.py": "18c0ab62acc3333ba5d0ca512ed6e7adbb877db3efe872b8c5c7bb6ea5b5eefe",
+    "isolated_system4a/persistent_full_chain.py": "e3cdc90d9384658d5898d66c2152c131fdd9e54d9dab725e8b1ff4465c36a603",
+    "isolated_system4a/production_ingress.py": "bc3e4a79ba73509645ab22d878d8095ce79e27a0908d73336d0583fbc12617a2",
+    "isolated_system4a/production_plan_binding.py": "96d3ece076bd13061846bfdd1f23c6278e26592b1558a986c5dc6c0000a9debd",
+    "isolated_system4a/realcase_acceptance_gate.py": "bb90c473f334ce06bf72942f24bbe1501086bbbc5aa193bc4d02a73f39ffecb8",
+    "isolated_system4a/realcase_production_entry.py": "828e9bc2a7db2568162518ba5120decabd34b5f6fc06f8f7c293d54c1f95a144",
+    "isolated_system4a/system4_readonly.py": "6d8c414176b271dad5eb6b30c588ee59fc00b5f30f7eeed365b032bb3a851de8"
+  },
+  "status": "BOUND_REPRODUCIBLE_PRODUCTION_PROOF",
+  "worker": {
+    "bytes": 19687,
+    "path": "isolated_system4a/NO_CODEX_PRODUCTION_WORKER_V1.py",
+    "sha256": "cd59bedfa1467c719b1844a19fc7a64d9a2617cae721fd1247bfe96d6ecaa091"
+  },
+  "worker_entry": "isolated_system4a.codex_worker_entry.build_codex_production_worker_pool"
+}
