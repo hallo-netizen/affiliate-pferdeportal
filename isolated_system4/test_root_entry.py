@@ -22,14 +22,16 @@ class RootEntryTests(unittest.TestCase):
             check=False,
         )
 
-    def test_root_agents_keeps_old_route_and_binds_system4_route(self):
-        text=(ROOT/'AGENTS.md').read_text(encoding='utf-8')
-        self.assertIn('SYSTEM4_ISOLATED_ROOT_ENTRY_V2', text)
-        self.assertIn('python3 isolated_system4/root_entry.py start-stdin', text)
-        self.assertIn('SYSTEM4 branch: DO NOT run control/cloud-entry-gate/cloud_entry.py before or instead of the System-4 root entry.', text)
-        self.assertIn('python3 control/cloud-entry-gate/cloud_entry.py start', text)
-        self.assertIn('python3 control/cloud-entry-gate/cloud_entry.py complete .pferde-capsule/RECEIPT.json', text)
-        self.assertIn('python3 control/cloud-entry-gate/cloud_entry.py verify', text)
+    def test_root_override_binds_system4_without_mutating_base_agents(self):
+        base=(ROOT/'AGENTS.md').read_text(encoding='utf-8')
+        override=(ROOT/'AGENTS.override.md').read_text(encoding='utf-8')
+        self.assertNotIn('SYSTEM4_ISOLATED_ROOT_ENTRY_V3', base)
+        self.assertIn('python3 control/cloud-entry-gate/cloud_entry.py start', base)
+        self.assertIn('python3 control/cloud-entry-gate/cloud_entry.py complete .pferde-capsule/RECEIPT.json', base)
+        self.assertIn('python3 control/cloud-entry-gate/cloud_entry.py verify', base)
+        self.assertIn('SYSTEM4_ISOLATED_ROOT_ENTRY_V3', override)
+        self.assertIn('python3 isolated_system4/root_entry.py start-stdin', override)
+        self.assertIn('SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 root entry.', override)
 
     def test_positive_file_entry_from_outside_repo(self):
         raw=FIXTURE.read_bytes()
