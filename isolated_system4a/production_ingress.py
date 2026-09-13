@@ -80,6 +80,56 @@ def _load_ppm_category_contract() -> tuple[dict[str, Any], str]:
     return contract, hashlib.sha256(raw).hexdigest()
 
 
+def _stable_hash(value: Any) -> str:
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+
+
+def _load_ppm_editorial_plan() -> dict[str, Any]:
+    path = REPO / 'isolated_system4' / 'production_checks.py'
+    _require(path.is_file(), 'SYSTEM4_PRODUCTION_CHECKS_MISSING')
+    spec = importlib.util.spec_from_file_location('_system4a_plan_checks', path)
+    _require(spec is not None and spec.loader is not None, 'SYSTEM4_PRODUCTION_CHECKS_LOAD_FAILED')
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:
+        raise ProductionIngressError('SYSTEM4_PRODUCTION_CHECKS_LOAD_FAILED') from exc
+    package = REPO / str(module.PPM_PACKAGE_REL)
+    _require(package.is_file(), 'PPM679_PACKAGE_MISSING')
+    _require(module.file_sha256(package) == module.PPM_PACKAGE_SHA256, 'PPM679_PACKAGE_HASH_MISMATCH')
+    rel = 'portal-production-machine/contracts/canonical-complete-editorial-plan-v1.json'
+    try:
+        with zipfile.ZipFile(package) as zf:
+            raw = zf.read(rel)
+    except Exception as exc:
+        raise ProductionIngressError('PPM679_EDITORIAL_PLAN_MISSING') from exc
+    try:
+        plan = json.loads(raw.decode('utf-8'))
+    except Exception as exc:
+        raise ProductionIngressError('PPM679_EDITORIAL_PLAN_JSON_INVALID') from exc
+    _require(isinstance(plan, dict) and isinstance(plan.get('slots'), list), 'PPM679_EDITORIAL_PLAN_INVALID')
+    claimed = str(plan.get('contract_self_sha256') or '')
+    if claimed:
+        copy = dict(plan); copy.pop('contract_self_sha256', None)
+        _require(claimed == _stable_hash(copy), 'PPM679_EDITORIAL_PLAN_SELF_HASH_MISMATCH')
+    return plan
+
+
+def _validate_ppm_plan_slot(article: dict[str, Any]) -> None:
+    plan = _load_ppm_editorial_plan()
+    category = str(article.get('category') or '').strip()
+    article_type = str(article.get('article_type') or '').strip().lower()
+    title = str(article.get('title') or '').strip()
+    matches = [s for s in plan['slots'] if isinstance(s, dict) and str(s.get('category_slug') or '') == category and str(s.get('article_type') or '').strip().lower() == article_type and str(s.get('working_title') or '').strip() == title]
+    _require(len(matches) == 1, 'PPM679_CANONICAL_PLAN_SLOT_NOT_UNIQUE:' + category + ':' + title)
+    slot = matches[0]
+    _require(slot.get('draft_generation_allowed') is True, 'PPM679_CANONICAL_PLAN_SLOT_DRAFT_BLOCKED:' + str(slot.get('canonical_article_id') or ''))
+    _require(slot.get('publish_allowed') is False, 'PPM679_CANONICAL_PLAN_SLOT_PUBLISH_INVALID:' + str(slot.get('canonical_article_id') or ''))
+    expected = _stable_hash(slot)
+    actual = str(article.get('plan_slot') or '').strip().lower()
+    _require(actual == expected, 'PPM679_PLAN_SLOT_HASH_MISMATCH:' + expected + ':' + actual)
+
+
 def _validate_ppm_category(article: dict[str, Any]) -> None:
     contract, _ = _load_ppm_category_contract()
     slug = str(article.get('category') or '').strip()
@@ -111,6 +161,7 @@ def _validate_external_business_contract(value: dict[str, Any]) -> None:
         _require(len(slot) == 64 and all(c in '0123456789abcdef' for c in slot), 'EXTERNAL_PLAN_SLOT_INVALID')
         _require(slot not in seen_slots, 'EXTERNAL_PLAN_SLOT_DUPLICATE')
         _validate_ppm_category(raw)
+        _validate_ppm_plan_slot(raw)
         seen_slots.add(slot)
 
 
