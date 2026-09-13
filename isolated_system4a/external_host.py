@@ -7,7 +7,6 @@ import secrets
 import selectors
 import shutil
 import subprocess
-import sys
 import tempfile
 import threading
 from pathlib import Path
@@ -25,6 +24,8 @@ BOUNDARY_CONTRACT = "SYSTEM4A_EXTERNAL_WORKER_SESSION_V2"
 FORBIDDEN_WORKER_FILES = {"state.json", "authority.key", "AGENTS.md", ".git"}
 FORBIDDEN_REQUEST_KEYS = {"phase", "controller_seal", "authority_key", "publish_allowed", "checks", "production_evidence"}
 ALLOWED_TASKS = {"research", "facts", "context", "draft", "repair"}
+WORKER_PATH = "/usr/local/bin:/usr/bin:/bin"
+SUPERVISOR_TOOL_PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
 
 class ExternalHostError(RuntimeError): pass
 
@@ -39,6 +40,30 @@ def _assert_no_authority_files(root: Path) -> None:
     for path in root.rglob('*'):
         if path.name in FORBIDDEN_WORKER_FILES:
             raise ExternalHostError('WORKER_AUTHORITY_FILE_FORBIDDEN:'+path.name)
+
+def _resolve_runuser() -> str:
+    path=shutil.which('runuser',path=SUPERVISOR_TOOL_PATH)
+    _require(path is not None,'RUNUSER_UNAVAILABLE')
+    return str(Path(path).resolve())
+
+def _resolve_worker_python(run_as_user: str) -> str:
+    runuser=_resolve_runuser()
+    seen:set[str]=set()
+    for name in ('python3','python'):
+        candidate=shutil.which(name,path=WORKER_PATH)
+        if candidate is None:
+            continue
+        candidate=str(Path(candidate).resolve())
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        probe=subprocess.run(
+            [runuser,'-u',run_as_user,'--',candidate,'-c','import json,pathlib,sys'],
+            stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,
+        )
+        if probe.returncode==0:
+            return candidate
+    raise ExternalHostError('WORKER_PYTHON_RUNTIME_UNAVAILABLE')
 
 class PersistentArticleWorkerPool:
     """One logical worker/agent session per article over a bounded OS runtime pool."""
@@ -89,7 +114,8 @@ class PersistentArticleWorkerPool:
         os.chmod(bundle,0o755)
         entry=bundle/entrypoint
         _require(entry.is_file(),'WORKER_BUNDLE_ENTRYPOINT_MISSING')
-        pool=cls([sys.executable,str(entry)],staging/'runtimes',run_as_user=run_as_user,
+        worker_python=_resolve_worker_python(run_as_user)
+        pool=cls([worker_python,str(entry)],staging/'runtimes',run_as_user=run_as_user,
                  require_cross_uid=True,runtime_processes=runtime_processes,timeout_seconds=timeout_seconds)
         pool._owned_staging_root=staging
         return pool
@@ -112,7 +138,7 @@ class PersistentArticleWorkerPool:
         _assert_no_authority_files(workspace); return workspace
 
     def _minimal_env(self,workspace:Path)->dict[str,str]:
-        return {'PATH':os.environ.get('PATH','/usr/bin:/bin'),'HOME':str(workspace),'LANG':os.environ.get('LANG','C.UTF-8'),
+        return {'PATH':WORKER_PATH,'HOME':str(workspace),'LANG':os.environ.get('LANG','C.UTF-8'),
                 'PYTHONUNBUFFERED':'1','SYSTEM4A_WORKER_BOUNDARY':BOUNDARY_CONTRACT}
 
     @staticmethod
@@ -129,14 +155,14 @@ class PersistentArticleWorkerPool:
     def _cross_uid_path_preflight(self, workspace: Path) -> None:
         if self._run_as_user is None:
             return
-        _require(shutil.which('runuser') is not None,'RUNUSER_UNAVAILABLE')
+        runuser=_resolve_runuser()
         probes=[('-x',workspace)]
         for position,token in enumerate(self._command):
             candidate=Path(token)
             if candidate.is_absolute() and candidate.exists():
                 probes.append(('-x' if position==0 else '-r',candidate))
         for flag,path in probes:
-            rc=subprocess.run(['runuser','-u',self._run_as_user,'--','test',flag,str(path)],
+            rc=subprocess.run([runuser,'-u',self._run_as_user,'--','test',flag,str(path)],
                               stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode
             _require(rc==0,'WORKER_COMMAND_PATH_NOT_ACCESSIBLE:'+str(path))
 
@@ -144,7 +170,7 @@ class PersistentArticleWorkerPool:
         workspace=self._runtime_workspace(index); command=list(self._command)
         self._cross_uid_path_preflight(workspace)
         if self._run_as_user is not None:
-            command=['runuser','-u',self._run_as_user,'--']+command
+            command=[_resolve_runuser(),'-u',self._run_as_user,'--']+command
         stderr_file=tempfile.TemporaryFile(mode='w+t',encoding='utf-8')
         proc=subprocess.Popen(command,cwd=workspace,env=self._minimal_env(workspace),stdin=subprocess.PIPE,stdout=subprocess.PIPE,
                               stderr=stderr_file,text=True,bufsize=1)
