@@ -24,53 +24,45 @@ Architektur:
 
 ## WARUM
 
-Das bestehende Designplugin besitzt einen stabilen, bestätigten Pferde-Live-Stand und soll nicht mit Datenhaltung, URL-/SEO-Logik und Glossar-Backend belastet werden.
-
-Ein eigener neutraler Funktionskern trennt:
-- Fachwissen;
-- Veröffentlichungsdaten;
-- Design;
-- Portal-Konfiguration.
-
-Damit kann derselbe Kern später in anderen Portalen verwendet werden, ohne Pferde-Begriffe, Farben, Oberbereiche oder SEO-Schemata im Code fest zu verdrahten.
+Das bestehende Designplugin bleibt von Datenhaltung, URL-/SEO-Logik und Glossar-Backend getrennt. Der neutrale Core trennt Fachwissen, Veröffentlichungsdaten, Design und Portal-Konfiguration.
 
 ## VERSIONIERUNGS- UND UPDATE-REGEL AB 2026-09-13
 
 WAS:
-Materiell verschiedene Pluginpakete dürfen niemals wieder unter derselben Versionsnummer ausgegeben oder als gleichwertig behandelt werden.
+Materiell verschiedene Pluginpakete dürfen niemals unter derselben Versionsnummer ausgegeben oder als gleichwertig behandelt werden.
 
 WARUM:
-Bei 0.2.5 existierten im Entwicklungsverlauf unterschiedliche Paketinhalte unter derselben Versionsnummer. Dadurch war aus der Versionsnummer allein nicht mehr ableitbar, welcher Code tatsächlich installiert war. Das erschwerte insbesondere die Diagnose von Rewrite-/Routingproblemen.
+Bei 0.2.5 und anschließend während der 0.2.6-Entwicklung wurden Kandidatenstände unter bereits benutzten Versionskennungen erzeugt. Damit war die Versionsnummer allein nicht mehr ausreichend eindeutig.
+
+KORREKTUR:
+- 0.2.6 bleibt Entwicklungs-/Testhistorie und ist kein aktueller Übergabekandidat.
+- Der erste eindeutig gebundene Übergabekandidat ist `0.2.7`.
+- Unterschiedliche Paketbytes = unterschiedliche Pluginversion.
 
 REGEL:
 - Jede materielle Paketänderung erhält eine neue Pluginversion.
 - Rewrite-relevante Änderungen erhalten zusätzlich eine neue `REWRITE_SCHEMA_VERSION`.
-- Ein Release-/Testkandidat wird an exakten ZIP-SHA-256 gebunden.
-- Ein Updatekandidat muss vor Ausgabe sowohl Fresh-Install als auch echten WordPress-In-place-Updateweg positiv und negativ bestehen.
-- Reines HTTP 200 genügt für Einzelbegriffe nicht; echter Glossar-Artikelmarkup/Inhalt muss nachgewiesen werden.
+- Ein Kandidat wird an exakten ZIP-SHA-256 gebunden.
+- Vor Ausgabe zwingend Fresh-Install UND echter WordPress-In-place-Updateweg positiv/negativ.
+- Reines HTTP 200 reicht für Einzelbegriffe nicht; echter Glossar-Artikelinhalt muss nachgewiesen werden.
 - Der Paketjob darf erst nach den gebundenen Fresh-/Upgrade-Hardtests laufen.
+- Nach Paketbau wird das exakt erzeugte Actions-Artefakt nochmals lokal auf Hash, ZIP-Struktur, Version und Schema geprüft.
 
-BELEG:
-`TESTPROTOKOLL_0.2.6_20260913.md`
-Run `34748541630`.
-
-## PARALLELENTWICKLUNG
-
-Aktuell nicht erforderlich.
-
-Erst wenn ein echtes zweites WordPress-Portal eine nicht konfigurierbare Projektspezifik beweist, ist ein kleiner Adapter zulässig. Kein vollständiger Plugin-Fork.
+BELEG AKTUELL:
+`TESTPROTOKOLL_0.2.7_20260913.md`
+Run `34749231699`.
 
 ## PRÜFSTATUS
 
-Technischer Kandidat 0.2.6:
-- deterministischer Bau aus dem getesteten 0.2.5-Kandidaten;
-- erlaubtes Delta exakt zwei Dateien: Hauptplugin-Version + Core-Rewrite-Schema;
-- Fresh-Install WordPress/MySQL/Astra positiv/negativ PASS;
-- echter WordPress-In-place-Updateweg 0.2.5 → 0.2.6 positiv/negativ PASS;
-- gezielt defekte Einzelbegriff-Rewrite-Regel unter 0.2.5 reproduziert und durch Schema 4 → 5 nach echtem WordPress-Update wiederhergestellt;
-- komplette Frontend-/Regression-/Acceptance-Matrix nach Upgrade erneut PASS;
-- exaktes Actions-Artefakt zusätzlich lokal positiv/negativ geprüft;
-- innerer Plugin-ZIP SHA-256: `e0717db3aa247edc30b0fe84a261aa59037050d593e3432a6fb460f6d96f3b09`.
+Technischer Kandidat 0.2.7:
+- Fresh-Install PASS;
+- echter WordPress-In-place-Updateweg 0.2.5 → 0.2.7 PASS;
+- absichtlich defekter Rewritezustand unter 0.2.5 reproduziert;
+- nach Update und normaler OPcache-Revalidierung Schema 4 → 5 bewiesen;
+- komplette Frontend-/Regression-/Acceptance-Matrix erneut PASS;
+- gated Package PASS;
+- innerer Plugin-ZIP SHA-256: `e9c32fc64db3c64c3b85e0d2692ff200e8f6d60e5827d7ab514657adff2ae831`;
+- exaktes Actions-Artefakt lokal erneut geprüft.
 
 Kein Pferde-Atelier-LIVE-PASS behauptet.
 
