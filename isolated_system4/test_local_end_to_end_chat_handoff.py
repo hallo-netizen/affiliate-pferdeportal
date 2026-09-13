@@ -120,7 +120,7 @@ def handoff_from_states(states: list[dict]) -> dict:
             'mime_type': 'application/json',
             'intended_next_step': 'WORDPRESS_DIRECT_IMPORT',
             'plugin_name': 'Portal SEO Editorial Plan Compiler',
-            'plugin_version_verified_against': '0.28.22',
+            'plugin_version_verified_against': handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION,
             'ppm_version_verified_against': '6.7.9',
             'direct_wordpress_upload_ready': True,
             'direct_upload_block_reason': None,
@@ -265,7 +265,7 @@ class LocalEndToEndChatHandoffTests(unittest.TestCase):
         payload = {
             'contract': handoff_transport.HANDOFF_CONTRACT, 'batch_sha256': hashlib.sha256(b'batch').hexdigest(), 'publish_allowed': False, 'signing_deferred': True,
             'batch_gate_status': 'SYSTEM4_BATCH_FULL_PASS_COLLECTED', 'no_legacy_status': 'PASS', 'test_suite_status': 'PASS',
-            'wordpress_review': {'file_format': 'JSON', 'mime_type': 'application/json', 'intended_next_step': 'WORDPRESS_DIRECT_IMPORT', 'plugin_name': 'Portal SEO Editorial Plan Compiler', 'plugin_version_verified_against': '0.28.22', 'ppm_version_verified_against': '6.7.9', 'direct_wordpress_upload_ready': True, 'direct_upload_block_reason': None, 'required_downstream_components': []},
+            'wordpress_review': {'file_format': 'JSON', 'mime_type': 'application/json', 'intended_next_step': 'WORDPRESS_DIRECT_IMPORT', 'plugin_name': 'Portal SEO Editorial Plan Compiler', 'plugin_version_verified_against': handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION, 'ppm_version_verified_against': '6.7.9', 'direct_wordpress_upload_ready': True, 'direct_upload_block_reason': None, 'required_downstream_components': []},
             'articles': rows,
         }
         with self.assertRaisesRegex(handoff_transport.HandoffError, 'BATCH_TEMPLATE_REUSE_BLOCKED'):
