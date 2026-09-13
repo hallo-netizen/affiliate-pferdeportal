@@ -1,7 +1,7 @@
 # UNIVERSAL GLOSSAR ENGINE – CURRENT_STATE
 
 STAND: 2026-09-13
-STATUS: 0.2.7 TECHNISCHER KANDIDAT / FRESH + IN-PLACE HARDTEST PASS / LIVE-RELEASE OFFEN
+STATUS: 0.2.8 TECHNISCHER KANDIDAT HARDTEST PASS / PFERDE-LIVE-READBACK OFFEN
 
 ## Belastbarer Stand
 
@@ -13,87 +13,83 @@ STATUS: 0.2.7 TECHNISCHER KANDIDAT / FRESH + IN-PLACE HARDTEST PASS / LIVE-RELEA
 - Suche, A–Z, Oberbereiche, Karten/Aufklapper, SEO-Felder und JSON-Import/Export vorhanden.
 - Kein Bildzwang, kein Auto-Publish; Import bleibt Entwurf.
 
+## Korrektur des früheren 0.2.7-PASS
+
+0.2.7 wurde durch realen Pferde-Readback widerlegt und bleibt **LIVE FAIL / BLOCKED / NICHT VERWENDEN**.
+
+Die frühere Testkette hatte relevante Lücken: Design-Stub statt echtem Designplugin, CSS-Grep statt Browsergeometrie, AJAX-JSON statt sichtbarer UI und fehlender realer Upgradepfad 0.2.6 → 0.2.7.
+
+0.2.6 bleibt historische Zwischenversion / nicht verwenden.
+
 ## Aktueller technischer Kandidat
 
 Version:
-`0.2.7`
+`0.2.8`
 
 Rewrite-Schema:
-`5`
+`6`
 
 Branch:
-`hobbyroom/glossar-027-release-hardtest-20260913`
+`hobbyroom/glossar-livefail-red-green-20260913`
 
 Getesteter Commit:
-`7191f15358cc73a78231652e9479f3a9fb5a9c37`
+`d14f6bff7f660cc6461208e8153fbdf237f0d609`
 
-Autoritativer Run:
-`34749231699`
+Autoritativer finaler Run:
+`34755984363`
 
-Fresh-Install Job:
-`103702569466` → PASS
-
-Echter WordPress-In-place-Updateweg 0.2.5 → 0.2.7:
-`103702569602` → PASS
-
-Gated Package Job:
-`103702749853` → PASS
+Jobs – alle PASS:
+- Browser final `103720316319`
+- Fresh final `103720316220`
+- Update 0.2.6 → 0.2.8 `103720316226`
+- Update 0.2.7 → 0.2.8 `103720316230`
+- echter Design-1.50.469-Runtime `103720316084`
+- gated package `103720510869`
 
 Inneres Plugin-ZIP:
-`universal-glossary-engine-0.2.7.zip`
+`universal-glossary-engine-0.2.8.zip`
 
 SHA-256:
-`e9c32fc64db3c64c3b85e0d2692ff200e8f6d60e5827d7ab514657adff2ae831`
+`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
 
 Actions-Artefakt-ID:
-`10315142446`
+`10318015702`
 
 Äußerer Actions-Artefakt-Hash:
-`975cc771cc109b62b56abafddc9e05334a4fd6f8b26535655c3fee4d3e8ed174`
+`d404bd537f53bffb5a4a894c5ad4758ac5723524323638a6dd1e1b5fbb061b68`
 
 Details:
-`TESTPROTOKOLL_0.2.7_20260913.md`
+`TESTPROTOKOLL_0.2.8_20260913.md`
 
-## Versionsstatus
+## Echter Designnachweis
 
-0.2.6 bleibt Entwicklungs-/Testhistorie und ist **kein aktueller Übergabekandidat**.
+Der aktuelle Integrations-PASS verwendet den echten Pferde-Design-Hauptcode 1.50.469, nicht den früheren Stub.
 
-Grund:
-0.2.6 wurde im Entwicklungsverlauf mehrfach als Kandidatenkennung verwendet. Deshalb wurde der erste übergabefähige Stand neu als 0.2.7 gebaut und vollständig erneut geprüft.
+SHA-256 des ausgeführten Hauptcodes:
+`580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`
 
-Dauerregel:
-**Unterschiedliche Paketbytes = unterschiedliche Pluginversion.**
+Die Runtime rekonstruiert diesen Code deterministisch und bricht bei abweichendem SHA ab.
 
 ## Hart bewiesen
 
-Fresh-Install:
-- WordPress + MySQL + Astra;
-- Version 0.2.7 / Schema 5;
-- Policy-/Seed-Positiv-/Negativmatrix;
-- echte Einzelbegriffsseiten mit Artikelmarkup/Inhalt;
-- A–Z, Kartenlinks, Preview, Draft-/404-Sperren;
-- AJAX positiv/negativ;
-- Kategorie-/Begriffskollision;
+- Fresh WordPress + MySQL + Astra;
+- Version 0.2.8 / Schema 6;
+- reale Browsermessungen 1200 / 900 / 720 / 500 px;
+- Hero proportional responsiv;
+- AJAX reale Treffer + sichtbare korrekte Position;
+- echte Kategorieseite und negativer Ausschluss der Home-Marker;
+- echte Einzelbegriffseite mit Artikelmarkup/H1/Inhalt;
+- unbekannter Begriff 404;
+- Draft nicht öffentlich;
+- A–Z, Preview, Duplicate Guard und bestehende Regressionen;
+- Kategorie/gleichnamiger Begriff getrennt;
 - normale WordPress-Beiträge unverändert;
-- Hero-Abstand, responsive Hero-Darstellung, Breadcrumb-Achse.
-
-Upgrade 0.2.5 → 0.2.7:
-- Rewrite-Regel unter 0.2.5 absichtlich entfernt → bekannter Begriff 404 / Schema 4;
-- echter WordPress-Plugin-Updater installiert 0.2.7;
-- installierte Dateien zeigen Version 0.2.7 / Schema 5;
-- sofortiger Apache-Request wird wegen möglichem OPcache-Altbytecode sichtbar protokolliert und nicht als versteckter PASS gewertet;
-- nach normaler OPcache-Timestamp-Revalidierung zwingend Schema 4 → 5;
-- Rewrite-Regel wieder vorhanden;
-- bekannter Begriff wieder echte 200-Artikelseite;
-- danach komplette Positiv-/Negativ-/Regression-/Acceptance-Matrix erneut PASS.
-
-Exaktes erzeugtes Artefakt anschließend lokal erneut geprüft:
-- äußerer Hash PASS;
-- innerer ZIP-Hash PASS;
-- ZIP-Struktur PASS;
-- Version 0.2.7 PASS;
-- Rewrite-Schema 5 PASS;
-- negativ: Pluginheader enthält keine aktuelle Version 0.2.6.
+- echte WordPress-Updates aus 0.2.6 und 0.2.7;
+- beide Updatepfade zusätzlich aus gezielt beschädigtem Schema-5-Rewritezustand;
+- Schema 6 baut den Zustand neu auf;
+- echter Design-1.50.469-Runtime-Lauf;
+- gated package erst nach allen grünen Gates;
+- exakt heruntergeladenes ZIP lokal erneut Hash-/Struktur-/Version-/Schema-/PHP-Lint-geprüft.
 
 ## Modulklasse
 
@@ -104,12 +100,17 @@ Für formale Hochstufung fehlt weiterhin ein separates zweites reales Portal.
 
 ## Noch offen
 
-- Pferde-Atelier-Installation/Readback des exakt hashgebundenen 0.2.7-Kandidaten;
-- reale Sicht-/Funktionsabnahme der vier gemeldeten Pferde-Frontendpunkte;
-- exakte Live-Rootcause der zuvor weißen Einzelbegriffseite ist nicht behauptet;
+- Pferde-Atelier-Installation/Readback des exakt hashgebundenen 0.2.8-Kandidaten;
+- erst danach reale Schließung der in Pferde beobachteten Frontendfehler;
 - aktueller Astra+Yoast-Kombinationstest, soweit für endgültigen Release erforderlich;
 - realer Campus-Wissensdatenbankimport;
 - größerer Bestands-/Performance-Test;
 - separates zweites reales Portal.
 
-Kein Pferde-Atelier-LIVE-PASS und kein endgültiger allgemeiner Release-PASS vor den gebundenen Realprüfungen.
+## Dauerregeln
+
+**Unterschiedliche Paketbytes = unterschiedliche Pluginversion.**
+
+Jede materielle Produktänderung nach dem geprüften 0.2.8-Stand benötigt mindestens Version 0.2.9 und die vollständige Hardtest-Kette erneut.
+
+**Technischer Kandidaten-PASS ist kein Pferde-Atelier-LIVE-PASS.**
