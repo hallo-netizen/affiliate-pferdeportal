@@ -24,17 +24,18 @@ done </tmp/accept-term-links
 
 echo UGE025_ACCEPT_REAL_TERM_PAGE_PASS
 
-# 2) The glossary home owns removal of Astra's desktop #primary top margin.
-# This must be narrowly scoped to the glossary home only.
-grep -Fq 'body.uge-glossary-home.ast-plain-container.ast-no-sidebar #primary{margin-top:0!important' "$F"
+# 2) Remove Astra's desktop #primary top margin only on the glossary home.
+grep -Fq 'body.uge-glossary-home #primary{margin-top:0!important}' "$F"
+! grep -Fq 'body:not(.uge-glossary-home) #primary{margin-top:0!important}' "$F"
 
 # 3) Glossary breadcrumbs must follow the Pferde-Atelier breadcrumb axis/typography,
 # not the 1320px glossary content axis.
 grep -Fq 'width:min(calc(100vw - 32px),var(--pftk-breadcrumb-axis-width,900px))' "$F"
-grep -Fq 'font-size:14px' "$F"
+grep -Fq 'color:#72786F;font-size:14px;line-height:1.5' "$F"
+grep -Fq '.uge-breadcrumbs [aria-current="page"]{color:#4F5650;font-weight:500}' "$F"
 
 # 4) Mobile hero image must size from the viewport/container, not from a fixed 240px height.
 ! grep -Fq '.uge-hero-image{position:relative!important;order:1;height:240px!important' "$F"
-grep -Fq '.uge-hero-image{position:relative!important;order:1;width:100%!important;max-width:100%!important;height:auto!important;aspect-ratio:16/9' "$F"
+grep -Fq '.uge-hero-image{position:relative!important;order:1;width:100%!important;max-width:100%!important;height:auto!important;aspect-ratio:16/9!important' "$F"
 
 echo UGE025_FRONTEND_ACCEPTANCE_PASS
