@@ -35,7 +35,7 @@ class HandoffTransportTests(unittest.TestCase):
             'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS',
             'wordpress_review':{
                 'file_format':'JSON','mime_type':'application/json','intended_next_step':'WORDPRESS_DIRECT_IMPORT','plugin_name':'Portal SEO Editorial Plan Compiler',
-                'plugin_version_verified_against':'0.28.22','ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,
+                'plugin_version_verified_against':ht.DIRECT_IMPORT_PLUGIN_VERSION,'ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,
                 'direct_upload_block_reason':None,'required_downstream_components':[]
             },
             'articles':rows,
