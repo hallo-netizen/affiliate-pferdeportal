@@ -1,20 +1,38 @@
 # PFERDE-ATELIER – PLUGINS – CURRENT_STATE
 
 STAND: 2026-09-13
-STATUS: BLOCKED / BÜRO ANGELEGT, VOLLSTÄNDIGE ISOLIERTE ARTEFAKTABLAGE NOCH NICHT FÜR ALLE PLUGINS BEWIESEN
+STATUS: BLOCKED / 5 ISOLIERTE CURRENT-ARTEFAKTE REAL SYNCHRONISIERT, 4 AKTIVE EINTRÄGE OFFEN
 
 ## Belastbarer Stand
 
 Das zentrale PLUGINS-Büro ist angelegt.
 
-Bekannte Pluginbestände wurden frisch gegen Campus-/Fachquellen inventarisiert. Für mehrere Plugins ist der aktuelle belegte Versions-/Hashstand vorhanden; bei einzelnen liegt der aktuelle belastbare Pluginstand jedoch nur als externe/hashgebundene ZIP bzw. als Fach-/Releasequelle vor und nicht bereits als isolierte Datei im Campus-Branch.
+Physischer Plugin-Schrank:
+`/Campus-Plugins/PFERDE_ATELIER/`
 
-Darum gilt ausdrücklich:
+Real als isolierte `CURRENT.zip` synchronisiert und aus der persistenten Ablage erneut gelesen/geprüft:
+- PPA-001 Affiliate-Zentrale 6.72.19
+- PPA-003 Bildzentrale 2.6.9
+- PPA-004 Universal Research & Fill 1.9.9
+- PPA-005 Portal SEO Topic Engine 0.56.25
+- PPA-007 Pferde Atelier HivePress Anzeigensuche 2.1.5
+
+Jeweils vorhanden:
+`CURRENT.zip` + `MANIFEST.md`.
+
+Readback-Prüfung:
+- SHA-256 = autoritativer/belegter Quellhash PASS;
+- ZIP-Lesetest PASS.
+
+Negativtest:
+Eine absichtlich veränderte Kopie eines synchronisierten Artefakts erzeugte erwartungsgemäß Hash-Mismatch und wurde damit vom Sync-Vertrag blockiert.
+
+Darum gilt trotzdem ausdrücklich:
 **Noch kein `ALLE_PFERDE_PLUGINS_ISOLIERT_PASS`.**
 
 ## Aktuell belastbar identifizierte Pluginfamilien
 
-Siehe ausschließlich `REGISTER.md` für den Inventar-/Syncstatus.
+Siehe ausschließlich `REGISTER.md` für Inventar-/Syncstatus.
 
 Fach-/Release-/LIVE-Status niemals aus diesem CURRENT_STATE ableiten, sondern aus der dort je Plugin verlinkten autoritativen Quelle.
 
@@ -22,29 +40,26 @@ Fach-/Release-/LIVE-Status niemals aus diesem CURRENT_STATE ableiten, sondern au
 
 Für jedes tatsächlich im Pferde-Atelier geführte Plugin:
 
-`ISOLIERTE_PLUGINS/<PLUGIN-ID>/CURRENT.zip`
+`/Campus-Plugins/PFERDE_ATELIER/<PLUGIN-ID>/CURRENT.zip`
 +
-`ISOLIERTE_PLUGINS/<PLUGIN-ID>/MANIFEST.md`
+`/Campus-Plugins/PFERDE_ATELIER/<PLUGIN-ID>/MANIFEST.md`
 
 Nur nach belegter Quelle, Versionsprüfung, SHA-256 und erforderlichen Fach-/Regressionstests.
 
-## Erster Blocker
+## Offene aktive Einträge
 
-Nicht alle aktuellen Plugin-ZIPs sind aus dem Campus-Branch oder einer aktuell direkt abrufbaren technischen GitHub-Quelle als identisches Installationsartefakt verfügbar.
-
-Beispiele mit belegtem aktuellen Stand, aber noch fehlender isolierter Campus-Datei:
-- Pferde Atelier Design 1.50.472: finaler Installername + SHA-256 belegt, Installer selbst im aktuellen Branch nicht als Datei vorhanden;
-- Bildzentrale 2.6.9 / Universal Research & Fill 1.9.9: exakte Installer + Hashes belegt, aktuelle Binärdateien nicht im Campus-Branch vorhanden;
-- Universal Product Comparison 0.8.0-prototype: aktuelle hashgebundene ZIP ist Fachautorität, aktueller Technikbranch enthält ausdrücklich nicht den vollständigen 0.8.0-Quellstand.
+- PPA-002 Pferde Atelier Design 1.50.472: finaler Installername + SHA-256 belegt; Binärdatei aktuell nicht direkt erreichbar.
+- PPA-006 Portal SEO Editorial Plan Compiler: belegbare 0.28.16-Datei vorhanden, aber historische spätere 0.28.17 darf ohne frische CURRENT-Autorität nicht als aktuell behauptet werden. 0.28.16 liegt deshalb nur als `REFERENCE_0.28.16.zip`, nicht als `CURRENT.zip`.
+- PPA-008 Universal Product Comparison 0.8.0-prototype: aktuelle hashgebundene ZIP ist Fachautorität; Datei aktuell weder in Library noch im autoritativen Technikbranch erreichbar; älterer Branch ist ausdrücklich unvollständig.
+- PPA-009 Universal Product Knowledge: 0.5.0 ist als reale Abhängigkeit im aktuellen Produktvergleichstest belegt; exakte aktuelle Installer-ZIP + Hash sind aber noch nicht CURRENT-gebunden.
 
 Diese Lücken dürfen nicht durch Rekonstruktion aus alten Mastern oder Chat-Historie kaschiert werden.
 
 ## NEXT ACTION
 
-1. Pro Registereintrag die aktuelle autoritative Quelle frisch binden.
-2. Wo der aktuelle Source/Release vollständig GitHub-erreichbar ist: isoliertes `CURRENT.zip` reproduzierbar erzeugen und prüfen.
-3. Wo nur ein externes hashgebundenes Installationsartefakt autoritativ ist: genau dieses Artefakt einmal in die zentrale Plugin-Ablage übernehmen und Hash vergleichen.
-4. Erst wenn alle aktiven Einträge `ARTEFAKT_SYNC=PASS` haben: Gesamtstatus auf PASS setzen.
+Nur die vier offenen Einträge aus ihren autoritativen Fach-/Releasequellen vervollständigen.
+
+Erst wenn alle tatsächlich aktiven Pferde-Plugin-Einträge `ARTEFAKT_SYNC: PASS` oder belastbar `NICHT_ERFORDERLICH` sind, darf der Gesamtstatus PASS werden.
 
 ## Nicht anfassen
 
