@@ -11,9 +11,9 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 PPM_PACKAGE_REL = 'control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
 PPM_PACKAGE_SHA256 = 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
-PORTAL_AUDIT_SHA256 = '456ee43cb2d7d3ccde8b73047d83c27a055d50961c478b310d5fe7b25e3c2ece'
 QUALITY_CONTRACT = 'content_structure_language_binding_v2'
 FORBIDDEN_PREBOUND = {'quality_binding', 'quality_binding_hash', 'category_binding', 'category_binding_hash'}
+WP_EXPORT_MEMBER = 'portal-production-machine/fixtures/editorial-plan/portal-ist-export-20260710-read-only.json'
 
 
 class ProductionPlanBindingError(RuntimeError):
@@ -68,19 +68,15 @@ def _verify_contract_self(value: Mapping[str, Any], code: str) -> None:
     claimed = str(value.get('contract_self_sha256') or '')
     if not claimed:
         return
-    copy = dict(value)
-    copy.pop('contract_self_sha256', None)
+    copy = dict(value); copy.pop('contract_self_sha256', None)
     _require(claimed == stable_hash(copy), code)
 
 
-def _verify_hierarchy_snapshot(value: Mapping[str, Any]) -> None:
-    _verify_contract_self(value, 'PPM679_CATEGORY_HIERARCHY_SELF_HASH_INVALID')
-    claimed = str(value.get('snapshot_sha256') or '')
-    copy = dict(value)
-    copy.pop('snapshot_sha256', None)
-    copy.pop('contract_self_sha256', None)
-    _require(bool(re.fullmatch(r'[0-9a-f]{64}', claimed)), 'PPM679_CATEGORY_HIERARCHY_SNAPSHOT_HASH_MISSING')
-    _require(claimed == stable_hash(copy), 'PPM679_CATEGORY_HIERARCHY_SNAPSHOT_HASH_INVALID')
+def _verify_wp_export(value: Mapping[str, Any]) -> None:
+    claimed = str(value.get('export_hash_sha256') or '')
+    _require(bool(re.fullmatch(r'[0-9a-f]{64}', claimed)), 'PPM679_WP_EXPORT_HASH_MISSING')
+    copy = dict(value); copy.pop('export_hash_sha256', None)
+    _require(claimed == stable_hash(copy), 'PPM679_WP_EXPORT_HASH_INVALID')
 
 
 def _unique(rows: list[dict[str, Any]], key: str, value: str, code: str) -> dict[str, Any]:
@@ -97,17 +93,13 @@ def _intent_terms(article: Mapping[str, Any], category: Mapping[str, Any], fact_
         if isinstance(claim, Mapping):
             for key in ('display_label', 'subject_scope'):
                 value = str(claim.get(key) or '').strip()
-                if value:
-                    raw.append(value.replace('_', ' '))
+                if value: raw.append(value.replace('_', ' '))
     for text in raw:
         text = text.strip()
-        if text and text not in terms:
-            terms.append(text)
+        if text and text not in terms: terms.append(text)
         for token in re.findall(r'[A-Za-zÄÖÜäöüß0-9-]{4,}', text):
-            if token.lower() in {'eine','einer','eines','sicher','sichere','sicherer','wichtigsten','vorbereitung'}:
-                continue
-            if token not in terms:
-                terms.append(token)
+            if token.lower() in {'eine','einer','eines','sicher','sichere','sicherer','wichtigsten','vorbereitung'}: continue
+            if token not in terms: terms.append(token)
     _require(bool(terms), 'QUALITY_INTENT_TERMS_EMPTY')
     return terms[:24]
 
@@ -116,36 +108,107 @@ def _link_sections(template: Mapping[str, Any]) -> dict[str, str]:
     blocks = [str(x) for x in template.get('required_blocks', [])]
     content = [x for x in blocks if x not in {'intro', 'table', 'conclusion', 'further_information'}]
     _require(len(content) >= 2 and 'further_information' in blocks, 'ARTICLE_TYPE_LINK_SECTIONS_UNRESOLVED')
-    return {
-        'parent_category': content[0],
-        'semantic_related': content[1],
-        'further_information': 'further_information',
-    }
+    return {'parent_category': content[0], 'semantic_related': content[1], 'further_information': 'further_information'}
 
 
-def _make_link(role: str, section: str, href: str, anchor: str, hierarchy: str) -> dict[str, Any]:
-    href = str(href)
-    anchor = str(anchor).strip()
-    _require(href.startswith('/') and not href.startswith('//'), 'PORTAL_LINK_NOT_RELATIVE:' + role)
-    _require(bool(anchor), 'PORTAL_LINK_ANCHOR_EMPTY:' + role)
-    reason = {
-        'parent_category': 'Direkter interner Verweis auf die gebundene Themenkategorie.',
-        'semantic_related': 'Semantisch übergeordneter interner Verweis auf den gebundenen Fachbereich.',
-        'further_information': 'Weiterführender interner Verweis auf den gebundenen Hauptbereich.',
-    }[role]
+def _wp_pages(export: Mapping[str, Any]) -> tuple[list[dict[str, Any]], dict[int, dict[str, Any]]]:
+    content = export.get('content')
+    _require(isinstance(content, Mapping), 'PPM679_WP_EXPORT_CONTENT_INVALID')
+    pages = content.get('page')
+    _require(isinstance(pages, list), 'PPM679_WP_EXPORT_PAGES_INVALID')
+    rows = [p for p in pages if isinstance(p, dict)]
+    by_id = {int(p['ID']): p for p in rows if isinstance(p.get('ID'), int)}
+    return rows, by_id
+
+
+def _page_for_expected(page_id: Any, slug: str, pages: list[dict[str, Any]]) -> dict[str, Any]:
+    hits = [p for p in pages if int(p.get('ID') or 0) == int(page_id or 0) and str(p.get('post_name') or '') == slug]
+    _require(len(hits) == 1, 'PORTAL_LINK_SOURCE_PAGE_MISSING:' + slug)
+    page = hits[0]
+    _require(page.get('post_type') == 'page' and page.get('post_status') == 'publish', 'PORTAL_LINK_SOURCE_PAGE_NOT_PUBLISHED:' + slug)
+    return page
+
+
+def _page_href(page: Mapping[str, Any], by_id: Mapping[int, dict[str, Any]]) -> tuple[str, list[str], list[int]]:
+    slugs: list[str] = []
+    ids: list[int] = []
+    seen: set[int] = set()
+    current = dict(page)
+    while current:
+        pid = int(current.get('ID') or 0)
+        _require(pid > 0 and pid not in seen, 'PORTAL_LINK_PARENT_CHAIN_INVALID')
+        seen.add(pid); ids.append(pid)
+        _require(current.get('post_status') == 'publish' and current.get('post_type') == 'page', 'PORTAL_LINK_PARENT_NOT_PUBLISHED')
+        slug = str(current.get('post_name') or '').strip('/')
+        _require(bool(slug), 'PORTAL_LINK_PAGE_SLUG_MISSING')
+        slugs.append(slug)
+        parent = int(current.get('post_parent') or 0)
+        if parent == 0: break
+        _require(parent in by_id, 'PORTAL_LINK_PARENT_PAGE_MISSING:' + str(parent))
+        current = dict(by_id[parent])
+    slugs.reverse(); ids.reverse()
+    return '/' + '/'.join(slugs) + '/', slugs, ids
+
+
+def _category_term(export: Mapping[str, Any], slug: str, expected_id: Any) -> dict[str, Any]:
+    terms = export.get('terms')
+    _require(isinstance(terms, Mapping) and isinstance(terms.get('category'), list), 'PPM679_WP_CATEGORY_TERMS_INVALID')
+    hits = [t for t in terms['category'] if isinstance(t, dict) and t.get('slug') == slug]
+    _require(len(hits) == 1, 'PPM679_WP_CATEGORY_TERM_MISSING:' + slug)
+    term = hits[0]
+    _require(int(term.get('term_id') or 0) == int(expected_id or 0), 'PPM679_WP_CATEGORY_TERM_ID_MISMATCH:' + slug)
+    _require(term.get('taxonomy') == 'category', 'PPM679_WP_CATEGORY_TAXONOMY_MISMATCH:' + slug)
+    return term
+
+
+def _make_link(role: str, section: str, page: Mapping[str, Any], by_id: Mapping[int, dict[str, Any]], snapshot_sha: str, reason: str) -> dict[str, Any]:
+    href, chain_slugs, chain_ids = _page_href(page, by_id)
     return {
         'role': role,
         'href': href,
-        'anchor': anchor,
+        'anchor': str(page.get('post_title') or '').strip(),
         'section_id': section,
         'reason': reason,
         'active': True,
         'target_type': 'page',
         'target_status': 'publish',
-        'hierarchy_path': [part.strip() for part in hierarchy.split('>') if part.strip()],
-        'snapshot_contract': 'PFERDE_ATELIER_CATEGORYTEXT_AUDIT_20260830',
-        'snapshot_sha256': PORTAL_AUDIT_SHA256,
+        'target_id': int(page['ID']),
+        'target_slug': str(page['post_name']),
+        'parent_chain_slugs': chain_slugs,
+        'parent_chain_ids': chain_ids,
+        'snapshot_contract': 'PFERDE_ATELIER_PORTAL_IST_EXPORT_20260710_READ_ONLY',
+        'snapshot_sha256': snapshot_sha,
     }
+
+
+def validate_link_bindings_against_wp_snapshot(binding: Mapping[str, Any]) -> None:
+    package = _ppm_package()
+    with zipfile.ZipFile(package) as archive:
+        wp_raw, wp = _zip_raw_and_json(archive, 'portal-ist-export-20260710-read-only.json')
+    _verify_wp_export(wp)
+    pages, by_id = _wp_pages(wp)
+    bindings = binding.get('link_bindings')
+    _require(isinstance(bindings, list) and len(bindings) == 3, 'PORTAL_LINK_BINDING_COUNT_INVALID')
+    snapshot_sha = hashlib.sha256(wp_raw).hexdigest()
+    for row in bindings:
+        _require(isinstance(row, Mapping), 'PORTAL_LINK_BINDING_ROW_INVALID')
+        target_id = int(row.get('target_id') or 0)
+        page = by_id.get(target_id)
+        _require(page is not None, 'PORTAL_LINK_BINDING_TARGET_ID_UNKNOWN:' + str(target_id))
+        _require(page.get('post_status') == 'publish' and page.get('post_type') == 'page', 'PORTAL_LINK_BINDING_TARGET_NOT_PUBLISHED:' + str(target_id))
+        expected_href, chain_slugs, chain_ids = _page_href(page, by_id)
+        checks = [
+            str(row.get('href') or '') == expected_href,
+            str(row.get('anchor') or '') == str(page.get('post_title') or '').strip(),
+            str(row.get('target_slug') or '') == str(page.get('post_name') or ''),
+            list(row.get('parent_chain_slugs') or []) == chain_slugs,
+            [int(x) for x in (row.get('parent_chain_ids') or [])] == chain_ids,
+            str(row.get('snapshot_sha256') or '') == snapshot_sha,
+            row.get('active') is True,
+            row.get('target_type') == 'page',
+            row.get('target_status') == 'publish',
+        ]
+        _require(all(checks), 'PORTAL_LINK_BINDING_SOURCE_MISMATCH:' + str(row.get('role') or ''))
 
 
 def bind_production_plan(article: Mapping[str, Any], bare_plan: Mapping[str, Any], fact_pack: Mapping[str, Any]) -> dict[str, Any]:
@@ -160,45 +223,51 @@ def bind_production_plan(article: Mapping[str, Any], bare_plan: Mapping[str, Any
     with zipfile.ZipFile(package) as archive:
         complete_raw, complete = _zip_raw_and_json(archive, 'complete-portal-category-source-v1.json')
         templates = _zip_json(archive, 'article-type-templates.json')
+        wp_raw, wp = _zip_raw_and_json(archive, 'portal-ist-export-20260710-read-only.json')
     _verify_contract_self(complete, 'PPM679_CATEGORY_SOURCE_SELF_HASH_INVALID')
+    _verify_wp_export(wp)
 
     slug = str(article.get('category') or '').strip()
     article_type = str(article.get('article_type') or '').strip()
     complete_row = _unique(list(complete.get('categories') or []), 'category_slug', slug, 'PPM679_CATEGORY_NOT_UNIQUE')
     _require(str(complete_row.get('theme') or '') == article_type, 'PPM679_CATEGORY_ARTICLE_TYPE_MISMATCH')
-
     type_template = (templates.get('types') or {}).get(article_type)
     _require(isinstance(type_template, dict), 'PPM679_ARTICLE_TYPE_TEMPLATE_MISSING:' + article_type)
     sections = _link_sections(type_template)
 
-    main_slug = str(complete_row.get('main_hub_slug') or '')
-    section_slug = str(complete_row.get('section_hub_slug') or '')
-    product_slug = str(complete_row.get('product_slug') or '')
-    _require(all((main_slug, section_slug, product_slug)), 'PORTAL_LINK_HIERARCHY_SLUG_MISSING')
-    role_targets = {
-        'parent_category': (f'/{main_slug}/{section_slug}/{product_slug}/', str(complete_row.get('product') or '')),
-        'semantic_related': (f'/{main_slug}/{section_slug}/', str(complete_row.get('section_hub') or '')),
-        'further_information': (f'/{main_slug}/', str(complete_row.get('main_hub') or '')),
+    pages, by_id = _wp_pages(wp)
+    main = _page_for_expected(complete_row.get('main_hub_page_id_historical'), str(complete_row.get('main_hub_slug') or ''), pages)
+    section = _page_for_expected(complete_row.get('section_hub_page_id_historical'), str(complete_row.get('section_hub_slug') or ''), pages)
+    product = _page_for_expected(complete_row.get('product_page_id_historical'), str(complete_row.get('product_slug') or ''), pages)
+    _require(int(section.get('post_parent') or 0) == int(main['ID']), 'PORTAL_LINK_SECTION_PARENT_MISMATCH')
+    _require(int(product.get('post_parent') or 0) == int(section['ID']), 'PORTAL_LINK_PRODUCT_PARENT_MISMATCH')
+    snapshot_sha = hashlib.sha256(wp_raw).hexdigest()
+    reasons = {
+        'parent_category':'Direkter interner Verweis auf die gebundene Themenkategorie.',
+        'semantic_related':'Semantisch übergeordneter interner Verweis auf den gebundenen Fachbereich.',
+        'further_information':'Weiterführender interner Verweis auf den gebundenen Hauptbereich.',
     }
     link_bindings = [
-        _make_link(role, sections[role], role_targets[role][0], role_targets[role][1], str(complete_row.get('portal_path') or ''))
-        for role in ('parent_category', 'semantic_related', 'further_information')
+        _make_link('parent_category', sections['parent_category'], product, by_id, snapshot_sha, reasons['parent_category']),
+        _make_link('semantic_related', sections['semantic_related'], section, by_id, snapshot_sha, reasons['semantic_related']),
+        _make_link('further_information', sections['further_information'], main, by_id, snapshot_sha, reasons['further_information']),
     ]
     _require(len({x['href'] for x in link_bindings}) == 3, 'PORTAL_LINK_TARGETS_NOT_DISTINCT')
     _require(len({x['section_id'] for x in link_bindings}) == 3, 'PORTAL_LINK_SECTIONS_NOT_DISTINCT')
 
+    term = _category_term(wp, slug, complete_row.get('historical_term_id'))
     wordpress_category = {
-        'slug': str(complete_row['category_slug']),
-        'name': str(complete_row['category_name']),
+        'id': int(term['term_id']),
+        'slug': str(term['slug']),
+        'name': str(term['name']),
         'hierarchy_path': str(complete_row['portal_path']),
-        'taxonomy': str(complete_row['wp_taxonomy']),
-        'category_source_snapshot_hash': hashlib.sha256(complete_raw).hexdigest(),
-        'semantic_binding_not_numeric_identity': True,
+        'taxonomy': 'category',
+        'category_source_snapshot_hash': snapshot_sha,
     }
     registry = {
         'contract': 'portal_link_registry_snapshot_v2',
-        'source_contract': 'PFERDE_ATELIER_CATEGORYTEXT_AUDIT_20260830',
-        'source_snapshot_sha256': PORTAL_AUDIT_SHA256,
+        'source_contract': 'PFERDE_ATELIER_PORTAL_IST_EXPORT_20260710_READ_ONLY',
+        'source_snapshot_sha256': snapshot_sha,
         'entries': link_bindings,
     }
     marker_seed = str(article.get('plan_slot') or '') + '|' + str(article.get('target_keyword') or '')
@@ -214,6 +283,7 @@ def bind_production_plan(article: Mapping[str, Any], bare_plan: Mapping[str, Any
         'portal_link_registry_hash': stable_hash(registry),
         'language_evidence': {},
     }
+    validate_link_bindings_against_wp_snapshot(quality)
 
     out = json.loads(json.dumps(dict(bare_plan), ensure_ascii=False))
     out['quality_binding'] = quality
