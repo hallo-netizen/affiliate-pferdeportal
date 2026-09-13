@@ -9,6 +9,19 @@ async def geom(page):
       return {primary:b('#primary'),bc:b('.uge-breadcrumbs'),hero:b('.uge-hero')};
     }''')
 
+async def assert_term(page, slug, title, fail, marker=None):
+    if f'/glossar/begriff/{slug}/' not in page.url:
+        fail.append(f'{slug}:WRONG_URL:{page.url}')
+    if await page.locator('article.uge-single-wrap').count()!=1:
+        fail.append(f'{slug}:ARTICLE_MISSING')
+    h=page.locator('.uge-single-header h1')
+    if await h.count()!=1:
+        fail.append(f'{slug}:H1_MISSING')
+    elif await h.inner_text()!=title:
+        fail.append(f'{slug}:H1_WRONG:{await h.inner_text()}')
+    if marker and marker not in await page.content():
+        fail.append(f'{slug}:CONTENT_MARKER_MISSING')
+
 async def main():
     fail=[]; data={}
     async with async_playwright() as pw:
@@ -28,14 +41,11 @@ async def main():
         if not all(home.values()) or not all(cat.values()):
             fail.append('BREADCRUMB_GEOMETRY_MISSING')
         else:
-            # User screenshot: home spacing/breadcrumb is the baseline. Category
-            # must sit on exactly the same vertical axis beneath the same header.
             if abs(home['primary']['y']-cat['primary']['y'])>2:
                 fail.append(f'CATEGORY_PRIMARY_TOP_DIFF:{home["primary"]["y"]}:{cat["primary"]["y"]}')
             if abs(home['bc']['y']-cat['bc']['y'])>2:
                 fail.append(f'CATEGORY_BREADCRUMB_TOP_DIFF:{home["bc"]["y"]}:{cat["bc"]["y"]}')
-            home_gap=home['hero']['y']-home['bc']['b']
-            cat_gap=cat['hero']['y']-cat['bc']['b']
+            home_gap=home['hero']['y']-home['bc']['b']; cat_gap=cat['hero']['y']-cat['bc']['b']
             if abs(home_gap-cat_gap)>2:
                 fail.append(f'CATEGORY_BREADCRUMB_HERO_GAP_DIFF:{home_gap}:{cat_gap}')
         if await page.locator('.uge-breadcrumbs [aria-current="page"]').inner_text()!='Gesundheit':
@@ -44,21 +54,46 @@ async def main():
         if 'Begriffe schnell finden, fachlich einordnen und verständlich nachschlagen.' in ctext:
             fail.append('REJECTED_FALLBACK_TEXT_ON_CATEGORY')
 
-        # Click an actual rendered card after the main WP loop has deliberately
-        # been emptied by the test poison plugin. 0.2.9 produced a blank shell in
-        # exactly this failure class; 0.2.10 must render from the requested URL.
-        link=page.locator('a[href*="/glossar/begriff/hufbein/"]').first
-        if await link.count()!=1:
-            fail.append('TERM_LINK_MISSING')
+        # Existing test term: real rendered category link must be clickable and must
+        # survive the deliberately emptied WordPress main loop.
+        hufbein=page.locator('a[href*="/glossar/begriff/hufbein/"]').first
+        if await hufbein.count()!=1:
+            fail.append('HUFBEIN_LINK_MISSING')
         else:
-            await link.click(); await page.wait_for_load_state('networkidle')
-            if '/glossar/begriff/hufbein/' not in page.url: fail.append('TERM_CLICK_DESTINATION_WRONG')
-            if await page.locator('article.uge-single-wrap').count()!=1: fail.append('TERM_ARTICLE_MISSING_AFTER_LOOP_POISON')
-            if await page.locator('.uge-single-header h1').count()!=1: fail.append('TERM_H1_MISSING_AFTER_LOOP_POISON')
-            else:
-                if await page.locator('.uge-single-header h1').inner_text()!='Hufbein': fail.append('TERM_H1_WRONG')
-            if 'FULL-HUFBEIN-SENTINEL' not in await page.content(): fail.append('TERM_CONTENT_MISSING_AFTER_LOOP_POISON')
+            await hufbein.click(); await page.wait_for_load_state('networkidle')
+            await assert_term(page,'hufbein','Hufbein',fail,'FULL-HUFBEIN-SENTINEL')
             term=await geom(page); data['term']=term
+
+        # New cluster: click from category into Hufrehe, then only through visible
+        # "Verwandte Begriffe" links to Strahlfäule and Hufabszess, then back to
+        # the visible category link. This is the user-facing proof that the new
+        # articles are actually inspectable by clicking, not merely HTTP 200.
+        await page.goto(BASE+'/glossar/gesundheit/',wait_until='networkidle')
+        hufrehe=page.locator('a[href*="/glossar/begriff/hufrehe/"]').first
+        if await hufrehe.count()!=1:
+            fail.append('HUFREHE_CATEGORY_LINK_MISSING')
+        else:
+            await hufrehe.click(); await page.wait_for_load_state('networkidle')
+            await assert_term(page,'hufrehe','Hufrehe',fail)
+            rel=page.locator('p:has(strong:text("Verwandte Begriffe")) a[href*="/glossar/begriff/strahlfaeule/"]').first
+            if await rel.count()!=1:
+                fail.append('HUFREHE_TO_STRAHLFAEULE_RELATED_LINK_MISSING')
+            else:
+                await rel.click(); await page.wait_for_load_state('networkidle')
+                await assert_term(page,'strahlfaeule','Strahlfäule',fail)
+                rel2=page.locator('p:has(strong:text("Verwandte Begriffe")) a[href*="/glossar/begriff/hufabszess/"]').first
+                if await rel2.count()!=1:
+                    fail.append('STRAHLFAEULE_TO_HUFABSZESS_RELATED_LINK_MISSING')
+                else:
+                    await rel2.click(); await page.wait_for_load_state('networkidle')
+                    await assert_term(page,'hufabszess','Hufabszess',fail)
+                    catlink=page.locator('a[href*="/glossar/gesundheit/"]').first
+                    if await catlink.count()!=1:
+                        fail.append('HUFABSZESS_CATEGORY_LINK_MISSING')
+                    else:
+                        await catlink.click(); await page.wait_for_load_state('networkidle')
+                        if '/glossar/gesundheit/' not in page.url or await page.locator('.uge-category-head').count()!=1:
+                            fail.append('CATEGORY_RETURN_LINK_FAIL:'+page.url)
 
         await browser.close()
     print('UGE0210_BROWSER_GEOMETRY='+json.dumps(data,separators=(',',':')))
@@ -67,6 +102,8 @@ async def main():
         raise SystemExit(1)
     print('UGE0210_CATEGORY_BREADCRUMB_SPACING_MATCH_HOME_PASS')
     print('UGE0210_REJECTED_HERO_FALLBACK_ABSENT_PASS')
+    print('UGE0210_EXISTING_SINGLE_CLICK_PASS')
+    print('UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS')
     print('UGE0210_SINGLE_SURVIVES_EMPTY_MAIN_LOOP_PASS')
     print('UGE0210_BROWSER_PASS')
 
