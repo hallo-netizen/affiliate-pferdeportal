@@ -64,3 +64,25 @@ Eine H2/H3 ist nur zulässig, wenn der Inhalt fachlich tatsächlich mehrere klar
 ## 7. Paketregel
 
 Mit jedem neuen Pferde-Glossar-Pluginstand, der als reale neue Übergabe vorgesehen ist, werden zugleich neue Glossarbeiträge erzeugt. Diese neuen Beiträge unterliegen vollständig den Regeln dieses Dokuments.
+
+## 8. Bestehende Glossarbeiträge
+
+Bereits veröffentlichte oder angelegte Glossarbeiträge werden wegen neuer Regeln **nicht pauschal gelöscht**.
+
+Stattdessen gilt:
+1. vorhandenen Beitrag in `BEGRIFFSREGISTER.md` auf `NACHPRÜFUNG` setzen;
+2. Inhalt, Metaangaben, Glossar-Kategorie und vorhandene interne Links prüfen;
+3. genannte verwandte Begriffe vollständig auflösen;
+4. fehlende verwandte Beiträge im selben Cluster ergänzen;
+5. Fließtext-Link und Glossar-Kategorie-Link herstellen;
+6. erst danach den vorhandenen Beitrag auf `FERTIG` setzen.
+
+Löschen/Ersetzen ist nur zulässig, wenn ein echter Dublette-, Fehl- oder Testdatensatz nachgewiesen ist.
+
+## 9. Autoritatives Begriffsregister
+
+Die Produktionswahrheit `OFFEN / IN ARBEIT / NACHPRÜFUNG / FERTIG / GESPERRT` liegt ausschließlich in:
+
+`BEGRIFFSREGISTER.md`
+
+Kein zweites paralleles Erledigt-/Unerledigt-Register anlegen.
