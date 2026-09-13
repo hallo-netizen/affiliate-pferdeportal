@@ -49,16 +49,37 @@ System 4 ersetzt diese Autoritäten nicht:
 - bestehende Textmaschine-/Artikeltyp-/Tabellen-/Link-/SEO-/PSERC-/PSTE-/Metadatenregeln;
 - `publish_allowed=false`.
 
+## Frischer Teststand 2026-09-13
+Belegdatei, ausdrücklich **keine zweite CURRENT_STATE**:
+`isolated_system4/TESTNACHWEIS_20260913_UNIVERSAL_PREFLIGHT.md`
+
+Auf dem vor diesem reinen Dokumentationsnachtrag geprüften System-4-Code wurden frisch ausgeführt:
+- Universaltests 1 / 3 / 7 / 25 / 1000 Artikel einschließlich gemischter und neuer Beitragsarten: PASS;
+- 0-Artikel-Negativfall: PASS/fail-closed;
+- NO-LEGACY: PASS, `legacy_import_count=0`;
+- kompletter aktueller Unittestbestand: **87 Tests, 86 PASS, 1 FAIL**;
+- lokaler E2E: alle ausführbaren positiven/negativen Logikwege PASS.
+
+Der einzige verbleibende FAIL ist **kein festgestellter System-4-Codefehler**, sondern der lokale Bindungsnachweis für das echte PPM-6.7.9-Paket:
+`test_authoritative_textmachine_bindings_are_unchanged_from_proven_full_rule_pass`
+stoppt bei `ppm_path.is_file() == False`.
+
+Die gebundene PPM-ZIP existiert im Repository, kann über den verfügbaren GitHub-Connector in diesem Arbeitscontainer aber nicht als Binärdatei materialisiert werden. Der Connector sieht den Blob, scheitert beim Binärinhalt jedoch an UTF-8-Decodierung. Eine lokale Kopie ist nicht vorhanden.
+
+Folge: **System-4-Gesamt-PASS bleibt OFFEN.** Es wird ausdrücklich weder ein PPM-PASS aus der Dateiansicht abgeleitet noch der eine fehlende Test übersprungen.
+
 ## Aktuelle Fehler / Blocker
-### S4-BLOCK-01 — kompletter aktueller Testbestand auf finalem Head noch offen
-Die universelle Mengen-/Beitragsartkorrektur wurde lokal in Teil- und Skalierungstests positiv geprüft. Der vollständige Branch muss nach Abschluss aller Dokument-/Testbindungen erneut bytegenau lokal rekonstruiert und mit
-`python3 -m unittest discover -s isolated_system4 -p 'test_*.py' -v`
-auf dem **dann finalen Head** ausgeführt werden.
+### S4-BLOCK-01 — realer lokaler PPM-Paket-Bindungsnachweis nicht ausführbar
+Für den vollständigen letzten Test fehlt im aktuellen Testcontainer ausschließlich die Binärdatei
+`control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`.
 
-Folge: **System-4-Gesamt-PASS bleibt bis dahin OFFEN. Kein Codex-Produktionslauf.**
+Erwarteter gebundener SHA256 laut aktuellem System-4-Code/Proof:
+`acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`.
 
-### S4-BLOCK-02 — kompletter lokaler E2E auf finalem Head noch offen
-Der End-to-End-Test muss nach Abschluss der V2-/Universalbindung auf demselben finalen Head erneut positiv und negativ laufen, inklusive Elternchat-Handoff.
+Solange diese exakten Bytes lokal nicht verfügbar und geprüft sind, bleibt der Gesamtstatus BLOCKED.
+
+### S4-BLOCK-02 — vollständiger lokaler E2E nur um denselben Binary-Bindungstest unvollständig
+Der aktuelle E2E wurde frisch ausgeführt. Positiver Gesamtweg bis zum exakten V2-Elternchat-/WordPress-Handoff sowie die Negativfälle für Fake-Fact, Design-Drift und artikelübergreifende Template-Wiederholung sind PASS. Offen ist ausschließlich derselbe PPM-Dateibindungstest aus S4-BLOCK-01.
 
 ### S4-BLOCK-03 — Transportressourcen sind real endlich
 System 4 enthält keine künstliche Artikelzahl-Obergrenze. Reale Laufzeit-, Speicher- und Chat-Ausgabelimits bleiben physische Infrastrukturgrenzen. Der V2-Handoff teilt große Daten in geordnete Transportteile, damit keine feste einzelne 60k-Gesamtgrenze mehr die Produktionsmenge definiert. Ein tatsächlicher Produktionslauf darf deshalb nie aus einer willkürlichen System-4-Zahl heraus gekürzt werden; bei realem Ressourcenblock muss er fail-closed mit dem konkreten Infrastrukturblocker stoppen.
@@ -76,17 +97,15 @@ Der aktuelle direkte Importvertrag ist:
 Die bestehende Signaturprüfung ist für diesen aktuellen Pfad ausgeschaltet. Deshalb kein Signing/ENDSTEMPEL in System 4. System 4 verändert weder Plugin noch Signaturschalter.
 
 ## HOBBYRAUM / NEXT ACTION
-System-4-Arbeitsraum: **BLOCKED bis frischer Gesamt-Testnachweis**.
+System-4-Arbeitsraum: **BLOCKED ausschließlich bis zum realen PPM-Paket-Bindungsnachweis.**
 
 Exakter nächster Arbeitsschritt:
-1. aktuellen PR-Head nach den Universaländerungen binden;
-2. **kein Codex**;
-3. vollständigen aktuellen `isolated_system4/**`-Stand lokal bytegenau rekonstruieren;
-4. kompletten Unittestbestand + NO-LEGACY + lokalen E2E positiv/negativ auf exakt diesem Head ausführen;
-5. jeden tatsächlichen FAIL nur an seiner ersten Ursache im isolierten System-4-Code reparieren;
-6. nach jeder Änderung den gesamten Testbestand auf dem neuen Head wiederholen;
-7. erst bei vollständigem PASS README/Protokoll auf PASS aktualisieren;
-8. danach Nutzerfreigabe für **einen echten Codex-Lauf des konkret gebundenen Input-Batches** einholen. Anzahl und Beitragsarten kommen ausschließlich aus diesem Input.
+1. **kein Codex**;
+2. exakt die gebundene PPM-6.7.9-ZIP im lokalen Testarbeitsraum verfügbar machen, ohne sie oder ihre Fachregeln zu verändern;
+3. SHA256 gegen `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1` prüfen;
+4. den kompletten Unittestbestand + NO-LEGACY + lokalen E2E auf dem dann gebundenen finalen Head erneut ausführen;
+5. nur bei vollständigem PASS README/Protokoll auf PASS aktualisieren;
+6. erst danach Nutzerfreigabe für **einen echten Codex-Lauf des konkret gebundenen Input-Batches** einholen. Anzahl und Beitragsarten kommen ausschließlich aus diesem Input.
 
 ## Nicht anfassen
 - `control/startmaster0107/**` und offizieller CURRENT_STATE;
