@@ -4,7 +4,7 @@ STAND: 2026-09-13
 ROLLE: AUTORITATIVE FEHLERQUELLE FÜR DAS PFERDE-ATELIER-GLOSSAR
 
 ## GLOSSAR-FE-001 – Abstand oberhalb Hero zu groß
-STATUS: KANDIDAT 0.2.6 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
+STATUS: KANDIDAT 0.2.7 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
 
 BEFUND:
 Auf der Glossar-Startseite war zusätzlicher Astra-Desktopabstand oberhalb des Hero sichtbar.
@@ -13,10 +13,10 @@ KANDIDAT-FIX:
 Nur auf `body.uge-glossary-home` wird der zusätzliche `#primary`-Top-Margin entfernt. Keine globale Astra-Regel.
 
 NACHWEIS:
-GitHub Actions Run `34748541630` Fresh-Install + Upgrade PASS; lokaler exakter ZIP-Check bestätigt die eng begrenzte Regel und das Fehlen der früheren globalen Spacing-Hacks.
+Run `34749231699` Fresh + Update PASS; exakter 0.2.7-ZIP lokal erneut geprüft.
 
 ## GLOSSAR-FE-002 – Hero-Bild nicht responsive
-STATUS: KANDIDAT 0.2.6 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
+STATUS: KANDIDAT 0.2.7 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
 
 BEFUND:
 Mobile Hero-Darstellung arbeitete mit fester Höhe `240px`.
@@ -25,7 +25,7 @@ KANDIDAT-FIX:
 Responsive Regel mit `width:100%`, `max-width:100%`, `height:auto`, `aspect-ratio:16/9`, `object-fit:cover`.
 
 NACHWEIS:
-Run `34748541630` + lokaler exakter ZIP-Check; Negativprüfung bestätigt: `height:240px!important` ist im Kandidaten nicht vorhanden.
+Run `34749231699`; Negativprüfung bestätigt, dass die alte feste Mobile-Höhe im Kandidaten nicht mehr aktiv ist.
 
 ## GLOSSAR-ROUTE-003 – Einzelbegriffe/Artikel liefern weiße Seite
 STATUS: FEHLERKLASSE TECHNISCH ABGESICHERT / EXAKTE LIVE-URSACHE NICHT BEWIESEN / LIVE-SICHTPRÜFUNG OFFEN
@@ -34,25 +34,25 @@ BEFUND:
 Vom Nutzer beobachtet: Links auf einzelne Glossarbegriffe führten zu weißen Seiten.
 
 WICHTIG:
-Der konkrete Live-Zustand konnte nicht direkt ausgelesen werden. Deshalb keine behauptete Live-Rootcause.
+Der konkrete Live-Zustand wurde nicht direkt ausgelesen. Deshalb keine behauptete Live-Rootcause.
 
 HARTER REPRODUKTIONSNACHWEIS:
-Im Upgrade-Test wurde unter 0.2.5 gezielt die Einzelbegriff-Rewrite-Regel entfernt. Danach war der bekannte Begriff `/glossar/begriff/hufbein/` nachweislich 404, während Schema 4 gespeichert blieb.
+Im Upgrade-Test wurde unter 0.2.5 gezielt die Einzelbegriff-Rewrite-Regel entfernt. Danach war `/glossar/begriff/hufbein/` 404, während Schema 4 gespeichert blieb.
 
 REPARATURWEG:
-0.2.6 besitzt Rewrite-Schema 5. Der echte WordPress-Plugin-Updater überschreibt 0.2.5 mit 0.2.6; beim ersten normalen Request wird 4 → 5 migriert und die Regel neu aufgebaut.
+0.2.7 enthält Rewrite-Schema 5. Der echte WordPress-Plugin-Updater überschreibt 0.2.5 mit 0.2.7. Ein möglicher unmittelbar noch alter Apache-Opcode wird sichtbar protokolliert; nach normaler OPcache-Revalidierung muss Schema 4 → 5 wechseln und die Rewrite-Regel neu aufgebaut sein.
 
 POSITIV:
 Danach liefert der Einzelbegriff 200 + echtes `<article class="uge-single-wrap">` + erwarteten Begriffinhalt.
 
 NEGATIV:
-Nicht vorhandener Begriff = 404; Entwurf = 404; Legacy-URL = 301; normale WordPress-Beiträge bleiben normale Beiträge; Kartenlinks müssen echten Glossar-Artikelmarkup enthalten und dürfen nicht nur HTTP 200 liefern.
+Nicht vorhandener Begriff = 404; Entwurf = 404; Legacy-URL = 301; normale WordPress-Beiträge bleiben unverändert; Kartenlinks müssen echten Glossar-Artikelinhalt liefern und dürfen nicht nur HTTP 200 ergeben.
 
 NACHWEIS:
-Run `34748541630`, Job `103700782306`.
+Run `34749231699`, Job `103702569602`.
 
 ## GLOSSAR-FE-004 – Breadcrumb auf Kategorieseiten falsch positioniert/dargestellt
-STATUS: KANDIDAT 0.2.6 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
+STATUS: KANDIDAT 0.2.7 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
 
 BEFUND:
 Glossar-Breadcrumb lag auf der eigenen 1320px-Glossarachse und wich vom Pferde-Atelier-Standard ab.
@@ -64,13 +64,22 @@ DESIGN-ABGLEICH:
 Vollständiger Designstand 1.50.469 wurde lokal auf Glossar-relevantes Verhalten geprüft. Der dokumentierte Live-Stand 1.50.472 verändert gegenüber 1.50.469 laut Design-Master weder CSS noch Breadcrumb, Bild, Karten oder Publish-Verhalten.
 
 NACHWEIS:
-Run `34748541630` + lokaler exakter ZIP-Check.
+Run `34749231699` + lokaler exakter 0.2.7-ZIP-Check.
 
 ## ÜBERGREIFENDER STATUS
 
-Technischer Kandidat: `Universal Glossary Engine 0.2.6`.
-Branch: `hobbyroom/glossar-026-upgrade-hardtest-20260913`.
-Gebundener Run: `34748541630`.
-Innerer Plugin-ZIP SHA-256: `e0717db3aa247edc30b0fe84a261aa59037050d593e3432a6fb460f6d96f3b09`.
+Aktueller technischer Übergabekandidat:
+`Universal Glossary Engine 0.2.7`.
 
-Kein Pferde-Atelier-LIVE-PASS aus diesen isolierten Tests ableiten. Die vier Punkte benötigen nach Installation des exakt hashgebundenen Kandidaten noch die reale Sicht-/Funktionsprüfung im Pferde Atelier.
+0.2.6 ist Entwicklungs-/Testhistorie und kein aktueller Übergabekandidat.
+
+Branch:
+`hobbyroom/glossar-027-release-hardtest-20260913`.
+
+Gebundener Run:
+`34749231699`.
+
+Innerer Plugin-ZIP SHA-256:
+`e9c32fc64db3c64c3b85e0d2692ff200e8f6d60e5827d7ab514657adff2ae831`.
+
+Kein Pferde-Atelier-LIVE-PASS aus diesen isolierten Tests ableiten. Die vier Punkte benötigen nach Installation des exakt hashgebundenen 0.2.7-Kandidaten noch reale Sicht-/Funktionsprüfung im Pferde Atelier.
