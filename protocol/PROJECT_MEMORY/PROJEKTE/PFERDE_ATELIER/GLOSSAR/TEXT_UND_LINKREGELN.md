@@ -12,7 +12,8 @@ ROLLE: Verbindliche Produktionsregeln für alle Glossarbegriffe.
 5. Inhalt fachlich knapp, verständlich und eigenständig formulieren.
 6. Nur geprüfte Fakten aus der Wissensdatenbank verwenden; keine ungeprüften Ergänzungen erfinden.
 7. Pferderassen sind keine Glossarbegriffe.
-8. Verwandte Begriffe werden zusammen gedacht und, wenn sinnvoll, gegenseitig verlinkt.
+8. Verwandte Begriffe werden zusammen gedacht und technisch gegenseitig verknüpft.
+9. Die Kurzdefinition/Zusammenfassung ist ein eigenes Pflichtfeld und wird auf der Einzelansicht sichtbar ausgegeben.
 
 ## Linkregeln
 
@@ -23,11 +24,16 @@ ROLLE: Verbindliche Produktionsregeln für alle Glossarbegriffe.
 5. Linktexte müssen natürlich in den Satz eingebaut sein; keine wiederholenden Standardfloskeln zur Linkeinleitung.
 6. Ein gesetzter Link muss inhaltlich wirklich zum Begriff und zum jeweiligen Satz passen.
 7. Bereits vorhandene interne Links im selben Artikel sind vor einem neuen Link zu prüfen, damit keine doppelte Zielverlinkung entsteht.
+8. Verwandte Glossarbegriffe werden in der Einzelansicht im eigenen Block „Verwandte Begriffe“ als Links ausgegeben. Diese Links werden nicht zusätzlich im Fließtext wiederholt.
+9. Der Fließtext bleibt dadurch frei von redundanten Verwandt-Begriff-Links; dort bleibt vorrangig der passende Portal-Kategorielink.
 
 ## Produktionsprüfung vor Freigabe
 
 - Positiv prüfen: alle vorgesehenen Links führen auf unterschiedliche, passende Ziele und bevorzugen übergeordnete Portal-Kategorien.
+- Positiv prüfen: verwandte Begriffe erscheinen als echte Links im Block „Verwandte Begriffe“.
+- Positiv prüfen: Kurzdefinition/Zusammenfassung ist vorhanden und sichtbar.
 - Negativ prüfen: kein identisches Linkziel doppelt im selben Begriff.
+- Negativ prüfen: verwandte Begriffe werden nicht zugleich im Seitenblock und nochmals redundant im Fließtext verlinkt.
 - Negativ prüfen: keine Journal-Kategorie verlinkt, wenn eine passende übergeordnete Portal-Kategorie vorhanden ist.
 - Negativ prüfen: keine wiederholenden Floskeln/Schablonen zwischen Begriffen.
 - Kein PASS aus Codeansicht oder Annahme ableiten; die Regel muss am finalen erzeugten Begriff geprüft werden.
