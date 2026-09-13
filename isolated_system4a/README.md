@@ -77,24 +77,39 @@ wurde die aus dem signierten PPM-Hierarchiepfad abgeleitete URL-Regel geprüft:
 
 Es wird keine neue frei gepflegte Linkdatenbank eingeführt.
 
+## Einziger kanonischer Produktionsaufruf
+
+`isolated_system4a/realcase_production_entry.py` ist jetzt der einzige vorgesehene 4A-Produktionsaufruf nach dem verpflichtenden System-4-Root-Guard.
+
+Er bindet unveränderlich:
+
+`raw external input -> canonical Codex worker entry -> Cross-UID worker -> ExternalSupervisorHost production -> System-4 read-only checker -> output/Parent-Chat`
+
+CLI-Regressionen über exakt diesen Einstieg:
+
+- letzter falscher Real-Slug -> BLOCK vor Worker;
+- gültiger kanonischer Rohinput -> erreicht den echten Cross-UID-Worker;
+- **2/2 PASS**.
+
 ## Aktuelle lokale Beweise — ausdrücklich KEINE Produktionsabnahme
 
-Nach dem aktuellen Binder-/Ingress-Stand:
+Nach dem aktuellen Binder-/Ingress-/Entry-Stand:
 
 - fokussierte Ingress/Binder/Context-Prüfungen: **9/9 PASS**;
-- gesamter im rekonstruierten lokalen Testordner vorhandener 4A-Testbestand: **23/23 PASS**;
+- kanonischer Produktionsaufruf positiv/negativ: **2/2 PASS**;
+- gesamter im rekonstruierten lokalen Testordner vorhandener 4A-Testbestand: **25/25 PASS**;
 - alter vorgebundener Fixture-Volltest wird jetzt korrekt geblockt;
 - diagnostischer Vollkettenlauf mit entfernten Fixture-Bindings erreicht real LT, Same-Article-Repair und anschließend PPM-Linkprüfung; alte Diagnose-Links werden erwartungsgemäß gegen die neue Supervisor-Bindung abgelehnt.
 
-Diese Ergebnisse sind **keine Abnahme**, weil der exakt gleiche frische Codex-Web-Recherche-/Worker-Produktionsweg lokal noch nicht 1:1 ausgeführt ist.
+Diese Ergebnisse sind **keine Abnahme**, weil der exakt gleiche frische Codex-Web-Recherche-/Worker-Produktionsweg lokal noch nicht 1:1 vom Rohinput bis zum Handoff ausgeführt ist.
 
 ## NEXT ACTION
 
 Kein weiterer Codexlauf.
 
-Zuerst muss ein **einziger kanonischer Realfall-Produktions-Einstieg** geschaffen werden, den lokaler Realtest und Codex unverändert gemeinsam benutzen. Erst wenn genau dieser Einstieg vom echten Rohinput über frische Research/Facts/Context/Draft, echten Cross-UID-Worker, echten LT 6.8, echten PPM 6.7.9, Same-Article-Repair, Batch, V2 und Parent-Chat vollständig 1:1 PASS ist, darf eine Produktionsabnahme oder ein weiterer Codexlauf erfolgen.
+Der einzige verbleibende Abnahmeweg ist jetzt der kanonische `realcase_production_entry.py`. Vor einer Freigabe muss genau dieser Einstieg mit dem später real verwendeten Rohinput und demselben Research/Facts/Context/Draft-Worker vollständig 1:1 durch echten LT 6.8, echten PPM 6.7.9, Same-Article-Repair, Batch, V2 und Parent-Chat laufen.
 
-Bis dahin: **BLOCKED**.
+Solange der frische reale Worker-/Web-Rechercheweg lokal nicht identisch reproduzierbar und vollständig durchgelaufen ist: **BLOCKED**.
 
 ## Codex-Regel
 
