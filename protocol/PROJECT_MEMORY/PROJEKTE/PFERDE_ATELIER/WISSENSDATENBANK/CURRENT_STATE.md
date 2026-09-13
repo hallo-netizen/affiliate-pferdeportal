@@ -23,11 +23,10 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **145 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 140er-Stand neu: Estonian Native Horse, Tori Horse, Estonian Heavy Draught, Bohemian-Moravian Belgian Horse und Silesian Noriker.
-- Die drei estnischen Rassen sind über die staatliche estnische Fachbehörde mit genehmigten Zuchtprogrammen gebunden; sie werden national als eigenständige Rassen geführt.
-- Bohemian-Moravian Belgian Horse und Silesian Noriker sind über das tschechische Landwirtschaftsministerium als eigene Pferderassen/nationale genetische Ressourcen gebunden.
-- Estonian Arden wird als historische Bezeichnung des Estonian Heavy Draught geführt und nicht dupliziert.
+- **153 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 145er-Stand neu: Žemaitukas, Großer Žemaitukas, Litauisches Kaltblut, Gidrán, Nóniusz, Kisbéri félvér, Furioso–North Star und Ungarisches Kaltblut.
+- Litauen führt Žemaitukas, Stambieji žemaitukai und Lietuvos sunkieji arkliai im aktuellen staatlichen Erhaltungsprogramm als getrennte alte Rassen.
+- Nébih führt Gidrán, Nóniusz, Kisbéri félvér, Furioso–North Star und Magyar hidegvérű als getrennte Rassen mit jeweils zuständiger Zuchtorganisation.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
