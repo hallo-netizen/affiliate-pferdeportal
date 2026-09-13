@@ -1,6 +1,6 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **LOCAL COMPLETE ROOT-TO-FILE PASS / REAL CODEX-CLOUD PROOF PENDING / isolated prototype / test only.** Kein Merge, kein Publish.
+Status: **REAL CODEX REACHES SYSTEM-4 ROOT / BLOCKED AT CHECKOUT-BRANCH IDENTITY / isolated prototype / test only.** Kein Merge, kein Publish.
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Campus-/Projektstand in `control/startmaster0107/CURRENT_STATE.json` bleibt getrennt und unverändert.
 
@@ -10,61 +10,79 @@ Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Ca
 
 Codex bleibt der eine fachliche Worker. System 4 übernimmt keine Legacy-Orchestrierung. `publish_allowed=false`; Signing/ENDSTEMPEL bleiben für diesen Pfad aus.
 
-## Eintrittslösung
+## Eintrittsstatus
 
-Der frühere reale 1-Artikel-Codex-Lauf vom 13.09.2026 wurde vor System 4 durch die repositoryweite alte Cloud-Entry-Strecke mit `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING` blockiert. Dieser Lauf bleibt historische Fehler-/Geschwindigkeitsevidenz in:
+Historischer erster Real-Lauf:
 
-`PROTOKOLL_REALRUN_20260913_SINGLE_ARTICLE_ENTRY_BLOCKER_SPEED.md`
+`isolated_system4/PROTOKOLL_REALRUN_20260913_SINGLE_ARTICLE_ENTRY_BLOCKER_SPEED.md`
 
-Die erste Reparatur über eine Änderung der Root-`AGENTS.md` war technisch funktionsfähig, aber unzulässig: der `Pferde Atelier Immutable Base Hardlock` blockierte sie als `IMMUTABLE_BASE_CHANGE_DETECTED:AGENTS.md`. Diese Variante wurde deshalb wieder entfernt.
+Er wurde noch vor System 4 durch die alte Runtime-Entry-Strecke mit `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING` blockiert.
 
-Die aktuelle Lösung verändert die immutable Root-`AGENTS.md` **nicht**. Der System-4-Testbranch besitzt stattdessen die branchlokale Root-Datei:
+Daraufhin wurde die immutable Root-`AGENTS.md` **nicht** verändert. System 4 bekam stattdessen die branchlokale `AGENTS.override.md`, die Codex auf die System-4-Root-Tür bindet.
 
-`AGENTS.override.md`
-
-Sie bindet Codex auf diesem Branch auf genau eine erste System-4-Tür:
-
-`python3 isolated_system4/root_entry.py start-stdin <WORKSPACE_OUTSIDE_REPO>`
-
-`root_entry.py` prüft Branch, Override-Vertrag, unveränderte alte Root-AGENTS, Workspace-Grenze und Input fail-closed. Kein Legacy-Cloud-Entry-/STARTMASTER-Pfad gehört zur System-4-Laufzeit.
-
-## Vollständiger lokaler Nachweis
+### Zweiter realer 1-Artikel-Lauf
 
 Aktueller Beleg:
 
+`isolated_system4/PROTOKOLL_REALRUN_20260913_ONE_ARTICLE_BRANCH_IDENTITY_BLOCKER.md`
+
+Gebundener Artikel:
+
+- `Beratung`;
+- `putzbox-beratung`;
+- Titel `Putzbox für Pferde richtig auswählen`;
+- Keyword `Putzbox für Pferde`;
+- exakt 1 Item;
+- `publish_allowed=false`.
+
+Der reale Codex-Lauf erreichte diesmal tatsächlich:
+
+`SYSTEM4_ROOT_INDEXED_INGRESS`
+
+und führte aus:
+
+`python3 isolated_system4/root_entry.py start-stdin /tmp/system4-one-article-production`
+
+Terminaler Blocker:
+
+`SYSTEM4_HARD_BLOCKER:ROOT_ENTRY_BRANCH_NOT_SYSTEM4`
+
+Damit ist die frühere Legacy-Entry-Kollision für diesen Lauf **nicht** erneut aufgetreten. Codex kam bis zur System-4-Tür.
+
+Der aktuelle Fehler liegt in `root_entry.py`: Die Datei verlangt über `git branch --show-current` exakt den symbolischen Branch-Namen `hobbyroom/system4-true-single-room-v1`. Diese Bedingung war im realen Codex-Checkout nicht erfüllt.
+
+Nicht behauptet wird, welcher konkrete Branch-String geliefert wurde oder ob der Checkout detached war; dieser Wert wurde im Codex-Abschluss nicht ausgegeben.
+
+Nach dem Root-Blocker wurden korrekt **keine** Recherche, Facts, Drafts, LT-/PPM-Prüfungen, Batch-Gates oder Handoffs gestartet.
+
+## Vollständiger lokaler Nachweis — Beweisgrenze jetzt korrigiert
+
+Beleg:
+
 `isolated_system4/TESTNACHWEIS_20260913_ROOT_TO_FILE_FINAL.md`
 
-Auf den bytegleich zum PR gebundenen ausführbaren Dateien wurde **ohne Codex und ohne Mocks** ausgeführt:
+Auf den damaligen bytegleich zum PR gebundenen ausführbaren Dateien wurde **ohne Codex und ohne Mocks** ausgeführt:
 
 - kompletter System-4-Unittestbestand: **93/93 PASS**;
-- Root-Einstieg positive/negative Regression: enthalten und PASS;
 - kompletter `full_local_acceptance.py`: **8/8 PASS**;
-- echter LanguageTool-6.8-Lauf nach exaktem SHA256;
-- echter PPM-6.7.9-Validator nach exaktem SHA256;
-- absichtlich fehlerhafter Draft -> realer LT-Fund -> `REPAIR_REQUIRED` -> Same-Article-Repair -> erneuter `fullcheck` -> PASS;
-- Batch-Gate PASS;
-- `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` kanonisiert;
-- `SYSTEM4_PARENT_CHAT_INLINE_V2` gepackt und wieder entpackt;
-- rekonstruierte Datei byteidentisch mit der kanonischen WordPress-Datei;
-- finaler lokaler WordPress-JSON-SHA256: `997eb66e13ba9cb0f5387896486583b47da4a799e195cea3f98ae13b424cc58f`;
-- Dateigröße: `66753` Bytes;
+- echter LanguageTool-6.8-Lauf;
+- echter PPM-6.7.9-Lauf;
+- Same-Article-Repair;
+- Batch-Gate;
+- V2-Handoff;
+- bytegenaue WordPress-Dateirekonstruktion;
+- finaler lokaler WordPress-JSON-SHA256 `997eb66e13ba9cb0f5387896486583b47da4a799e195cea3f98ae13b424cc58f`;
 - `mocks_used=false`, `codex_used=false`, `merge_or_publish=false`.
 
-Negativ nachgewiesen:
+Dieser Nachweis bleibt für die **lokal getestete Checkout-Identität** gültig.
 
-- kaputter Root-stdin-Input -> BLOCK;
-- `publish_allowed=true` -> BLOCK;
-- erfundener Fact/Evidence -> BLOCK;
-- Design-/Tabellenklassendrift -> BLOCK;
-- manipulierter V2-Handoff -> BLOCK;
-- manipulierter geprüfter State vor Batch-Gate -> BLOCK;
-- Legacy-Runtime-Abhängigkeit -> nicht zugelassen / NO-LEGACY PASS.
+Die positive Root-Teststrecke lief jedoch im vorhandenen lokalen Checkout auf dem erwarteten symbolischen Branch. Sie enthielt keinen positiven Test für eine PR-/Cloud-Checkout-Semantik mit anderer oder fehlender symbolischer Branch-Bezeichnung. Deshalb war der bisherige Beweis für die äußere Cloud-Grenze zu breit interpretiert.
 
 ## Immutable Base
 
-Die alte Root-`AGENTS.md` bleibt bytegleich zur immutable Basis. Auf dem System-4-Head mit der neuen `AGENTS.override.md`-Lösung ist der GitHub-Workflow **Pferde Atelier Immutable Base Hardlock PASS**.
+Die alte Root-`AGENTS.md` bleibt unverändert. Die aktuelle System-4-Eingangslösung verändert weder diese Datei noch die alte Produktionsschutzlogik.
 
-Die bestehende Deterministic-Entrance-Gate-CI wurde nicht verändert und muss für diese Änderung nicht umgebaut werden; System 4 verändert keinen ihrer beobachteten Control-/Gate-Pfade.
+Textmaschine, LT, PPM, Batch-Gate, Handoff, WordPress und Design sind durch den neuen Real-Run-Blocker **nicht** als Fehlerursache betroffen.
 
 ## Universelle Produktionsgrenze
 
@@ -92,7 +110,7 @@ READ-ONLY bleiben:
 
 ## Handoff
 
-Zielvertrag:
+Zielvertrag bleibt unverändert:
 
 - `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`;
 - JSON / `application/json`;
@@ -102,25 +120,37 @@ Zielvertrag:
 - `direct_wordpress_upload_ready=true` erst nach vollständigem PASS;
 - `publish_allowed=false`.
 
-Nach dem geprüften Artikel findet keine zweite Text-/HTML-/Designtransformation statt.
+## Aktueller Blocker
 
-## Noch offene Beweisgrenze
+`S4-BLOCK-REAL-ROOT-BRANCH-IDENTITY`
 
-**Lokal ist der komplette technische Weg vom System-4-Root-Einstieg bis zur finalen Datei positiv und negativ bewiesen.**
+Nicht mehr aktueller Blocker:
 
-Nicht lokal beweisbar bleibt nur die äußere Produktgrenze: dass die reale Codex-Cloud-Ausführung auf diesem PR-Branch die bereitgestellte `AGENTS.override.md` tatsächlich lädt und deshalb als erste ausführbare Tür `isolated_system4/root_entry.py` benutzt.
+`CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING` — dieser trat im zweiten Real-Lauf nicht wieder auf.
 
-Dafür ist genau **ein realer Codex-Produktionslauf** der verbleibende Integrationsnachweis. Er darf gemäß `CODEX ECONOMY HARD RULE` erst nach ausdrücklicher Nutzerfreigabe gestartet werden. Bis dahin wird kein Codex-Token verbraucht.
+Der reale Lauf beweist jetzt:
+
+`Codex Cloud -> AGENTS.override -> System-4 root_entry.py`
+
+Der Lauf beweist **noch nicht**:
+
+`System-4 root_entry PASS -> Research -> Facts -> Draft -> LT/PPM -> Batch -> V2-Datei`
+
+weil die symbolische Branch-Namensprüfung vorher fail-closed stoppte.
 
 ## HOBBYRAUM / NEXT ACTION
 
-System-4-Arbeitsraum: **LOCAL PASS / LIVE PROOF PENDING**.
+System-4-Arbeitsraum: **BLOCKED — ROOT CHECKOUT IDENTITY**.
 
-Nächster zulässiger Schritt:
-1. keinen weiteren Architekturumbau;
-2. keinen weiteren lokalen Ersatzworkflow bauen;
-3. keine Textmaschine-/PPM-/WordPress-/Designänderung;
-4. bei ausdrücklicher Nutzerfreigabe genau einen realen 1-Artikel-Codex-Lauf auf dem dann unveränderten, lokal erneut gebundenen Head starten;
-5. dieser Lauf muss ohne Stop bis zum echten V2-Elternchat-Relay und zur bytegenau rekonstruierten WordPress-Datei laufen oder am ersten echten nicht reparierbaren Hard-Blocker stoppen.
+Verbindlicher nächster Schritt:
+
+1. **kein weiterer Codex-Lauf**;
+2. keine Änderung an Textmaschine, LT, PPM, Batch-Gate, Handoff, WordPress oder Design;
+3. symbolischen Branch-Namen nicht länger als alleinige System-4-Checkout-Identität verwenden;
+4. lokal eine fail-closed PR-/Cloud-taugliche Checkout-/Content-Identität bauen;
+5. positive und negative Tests ergänzen, die die reale Cloud-Checkout-Grenze abdecken;
+6. danach wieder den **kompletten Einstieg-bis-Datei-Lauf** lokal positiv und negativ ausführen;
+7. Immutable Base Hardlock erneut PASS;
+8. erst danach und nur nach erneuter ausdrücklicher Nutzerfreigabe darf ein weiterer realer 1-Artikel-Codex-Lauf stattfinden.
 
 Kein Merge. Kein Publish.
