@@ -1,7 +1,7 @@
 # GLOSSAR – HOBBYRAUM
 
 STAND: 2026-09-13
-STATUS: BLOCKED / LIVE FAIL / ROTER ACCEPTANCE-NEUBAU AKTIV
+STATUS: TECHNISCH PASS / LIVE-READBACK 0.2.8 OFFEN
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -9,121 +9,106 @@ STATUS: BLOCKED / LIVE FAIL / ROTER ACCEPTANCE-NEUBAU AKTIV
 Der einzige aktuelle Arbeitsraum des Büros GLOSSAR.
 
 **DU DARFST …**  
-die real beobachteten Fehler reproduzieren, die Testlücken schließen und danach ausschließlich minimal erforderliche Reparaturen prüfen.
+den exakt getesteten 0.2.8-Kandidaten für den realen Pferde-Readback verwenden und danach ausschließlich nach tatsächlichem Live-Ergebnis weiterarbeiten.
 
 **DU DARFST NICHT …**  
-`main` verändern, ein neues ZIP ausgeben, einen PASS aus Quelltext-Greps ableiten, das Pferde-Design durch einen Stub als Realtest ausgeben oder einen Fehler ohne echten Positiv-/Negativnachweis schließen.
+`main` verändern, 0.2.6 oder 0.2.7 erneut ausgeben, ein materiell anderes Paket erneut 0.2.8 nennen, aus technischem CI-PASS einen Pferde-LIVE-PASS ableiten oder einen Live-Fehler ohne realen Nutzer-Readback schließen.
 
 **ALS NÄCHSTES …**  
-neue Acceptance-Kette zuerst auf dem fehlerhaften Stand ROT beweisen.
-
-## AKTUELLER AUFTRAG
-
-Kein Pluginbau für Übergabe.
-
-Zuerst müssen die vier realen Fehler technisch so geprüft werden, dass der vorhandene fehlerhafte Stand zuverlässig durchfällt:
-1. Hero/Bild Responsivität;
-2. AJAX-Trefferposition;
-3. echte Kategorieausgabe;
-4. echte Einzelbegriffausgabe.
-
-Der obere Startseitenabstand ist im realen Readback PASS und bleibt Regressionstest.
+exakt das gated getestete 0.2.8-ZIP über den normalen WordPress-Update/Überschreiben-Weg installieren und die reale Frontend-Checkliste abarbeiten.
 
 ## ARBEITSORT
 
 Branch:
-`hobbyroom/glossar-027-release-hardtest-20260913`
+`hobbyroom/glossar-livefail-red-green-20260913`
 
 `main` bleibt unangetastet.
 
 Autoritative Fehlerquelle:
 `FEHLERQUELLEN.md`
 
-Aktueller Diagnosebeleg:
-Run `34749713877`, Job `103703878642`.
+Autoritativer aktueller Stand:
+`CURRENT_STATE.md`
 
-## 0.2.7 STATUS
+Testprotokoll:
+`../../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.8_20260913.md`
 
-**BLOCKED / NICHT VERWENDEN.**
+## HISTORIE
 
-Der frühere Run `34749231699` ist als isolierter technischer Test historischer Beleg, aber keine gültige reale Abnahme mehr.
+0.2.6: historische Zwischenversion / nicht verwenden.
 
-Grund:
-Realer Pferde-Readback widerlegt vier behauptete Frontendpunkte und die Testkette hatte nachgewiesene Lücken.
+0.2.7: **LIVE FAIL / BLOCKED / nicht verwenden.**
 
-## BEREITS HART REPRODUZIERT
+Die durch 0.2.7 sichtbar gewordenen Testlücken sind nicht mehr Teil der aktuellen Abnahme:
+- echter Designcode statt Stub;
+- echte Browsergeometrie statt CSS-Grep;
+- sichtbare AJAX-Position statt nur JSON;
+- Kategorie- und Einzelrenderer statt nur HTTP-Status;
+- Updatepfade 0.2.6 und 0.2.7;
+- gezielt zerstörter Rewritezustand als Negativfall.
 
-- AJAX: Vorschlagsliste absolut positioniert, aber nicht am Suchfeld verankert → sichtbarer Overlayfehler.
-- Responsive: Hero oberhalb 720px weiterhin feste 360px-/Absolute-Logik.
-- Kategorie: sauberer Renderer ist von Startseite verschieden; live identische Startseite bedeutet falscher Routing-/Querypfad.
-- Update: 0.2.6 → 0.2.7 behält Rewrite-Schema 5; beschädigter Schema-5-Zustand wird nicht neu aufgebaut.
-- Einzelbegriff: nach diesem Fehlerpfad ist HTTP 200 möglich, obwohl `uge-single-wrap` fehlt.
-- Kategorie: nach diesem Fehlerpfad ist HTTP 301 statt `.uge-category-head` reproduziert.
+## 0.2.8 TECHNISCHER KANDIDAT
 
-## VERBINDLICHE NEUE ACCEPTANCE-SCHRANKEN VOR JEDEM FIX
+Finaler Hardtest:
+- Run `34755984363`
+- Head `d14f6bff7f660cc6461208e8153fbdf237f0d609`
+- Browser final `103720316319` SUCCESS
+- Fresh final `103720316220` SUCCESS
+- Update 0.2.6 → 0.2.8 `103720316226` SUCCESS
+- Update 0.2.7 → 0.2.8 `103720316230` SUCCESS
+- Real Design 1.50.469 `103720316084` SUCCESS
+- Gated Package `103720510869` SUCCESS
 
-### A – echtes Design
-Tatsächliches Pferde-Designplugin in den Integrationslauf. Kein selbstgebauter `Pferde_Template_Kit`-Stub als Realnachweis.
+Echter Design-Hauptcode:
+SHA-256 `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`.
 
-### B – Browser statt Stringsuche
-Headless-Browserprüfung mindestens auf 1200 / 900 / 720 / 500 px.
+## EXAKTE ÜBERGABE
 
-Hero:
-- reale Breite/Höhe aus DOM messen;
-- Bild bleibt im Container;
-- keine starre Desktop-/Tablet-Höhe als angebliche Responsivität durchgehen lassen.
+Nur dieses Paket verwenden:
+`universal-glossary-engine-0.2.8.zip`
 
-AJAX:
-- Suchbegriff real eintippen;
-- Trefferliste muss unmittelbar unter Suchfeld liegen;
-- horizontale Breite an Suchbereich gebunden;
-- Treffer anklickbar;
-- ungültiger/kein Treffer als Negativfall.
+SHA-256:
+`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
 
-### C – Kategorie
-Eine Glossar-Kategorie muss:
-- `.uge-category-head` enthalten;
-- eigenen Kategorienamen enthalten;
-- passende Begriffskarten enthalten;
-- **nicht** `.uge-hero` enthalten;
-- **nicht** `.uge-tools` enthalten;
-- nicht auf Startseite oder fremde Seite umleiten.
+Actions-Artefakt:
+ID `10318015702`
 
-### D – Einzelbegriff
-Jeder getestete Begriff muss:
-- HTTP 200;
-- `<article class="uge-single-wrap">`;
-- genaues H1;
-- erwarteten Sentinel-Inhalt;
-- keine leere/weiße/fremde 200-Seite.
+Outer artifact digest:
+`sha256:d404bd537f53bffb5a4a894c5ad4758ac5723524323638a6dd1e1b5fbb061b68`
 
-Negativ:
-- unbekannter Begriff 404;
-- Draft 404.
+Regel:
+Wenn sich Pluginbytes nochmals materiell ändern, ist **0.2.8 verbraucht**. Nächste Produktversion dann mindestens 0.2.9 und vollständige Hardtest-Kette erneut.
 
-### E – Updatepfade
-Vor Ausgabe muss der neue Kandidat real per WordPress-Updater mindestens von:
-- 0.2.6 → neu;
-- 0.2.7 → neu
+## REALER LIVE-READBACK
 
-getestet werden, jeweils auch aus einem gezielt beschädigten Rewritezustand.
+Nach Installation zwingend prüfen:
 
-Die nächste routingrelevante Reparatur benötigt ein neues Rewrite-Schema gegenüber Schema 5, damit ein alter beschädigter Zustand zwangsweise neu aufgebaut wird.
+### Positiv
+1. Abstand oberhalb Hero bleibt korrekt.
+2. Hero/Bild reagiert auf Desktop/Tablet/Mobil real proportional.
+3. AJAX-Suche liefert reale Treffer und Trefferbox sitzt direkt unter dem Suchfeld.
+4. `/glossar/gesundheit/` ist echte Kategorieansicht mit Kategorie-Kopf/Begriffen und keine Startseitenkopie.
+5. Alle getesteten Einzelbegriffe zeigen echte Glossarseite mit Titel und Inhalt.
+6. Breadcrumb genau einmal und korrekt positioniert.
 
-### F – Regression
-- Startseitenabstand bleibt PASS;
-- normale Beiträge/Seiten unverändert;
-- kein globaler Layout-Hack;
-- Kategorie/gleichnamiger Begriff bleiben getrennt;
-- Legacy-Verhalten nur gemäß bestehendem Vertrag.
+### Negativ
+1. unbekannter Begriff → 404;
+2. Draft nicht öffentlich;
+3. normale WordPress-Beiträge unverändert;
+4. gleichnamige Kategorie und gleichnamiger Begriff bleiben getrennt;
+5. Kategorie enthält keinen Home-Hero und keine Home-Tools;
+6. kein globaler Layoutshift außerhalb Glossar.
 
-## ROT→GRÜN-REGEL
+## ABSCHLUSSLOGIK
 
-1. Neue Acceptance-Tests müssen auf 0.2.7 zuerst ROT sein.
-2. Erst danach darf Produktcode geändert werden.
-3. Minimaler Fix.
-4. Derselbe Test muss GRÜN werden.
-5. Vollständige alte Positiv-/Negativmatrix zusätzlich erneut GRÜN.
-6. Erst dann neuer Versionsname und Paketjob.
-7. Exaktes erzeugtes ZIP lokal nochmals prüfen.
-8. Vor diesen Punkten **keine Übergabe**.
+Bei realem PASS:
+- betroffene Live-Fehler in `FEHLERQUELLEN.md` auf LIVE PASS/CLOSED setzen;
+- `CURRENT_STATE.md` auf LIVE PASS aktualisieren;
+- erst dann nächste Glossar-Integration starten.
+
+Bei realem FAIL:
+- exakten ersten Fehler in `FEHLERQUELLEN.md` dokumentieren;
+- 0.2.8 live BLOCKED lassen;
+- minimalen Fix bauen;
+- **neue Version 0.2.9+**;
+- RED→GREEN, Fresh, beide Updatepfade, echter Designruntime, Positiv/Negativ und gated package vollständig erneut.
