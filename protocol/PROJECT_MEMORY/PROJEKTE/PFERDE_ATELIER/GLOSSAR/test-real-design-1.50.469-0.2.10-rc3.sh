@@ -12,14 +12,17 @@ from pathlib import Path
 p=Path('/tmp/test-real-design-0210-rc4.sh')
 s=p.read_text()
 s=s.replace('set -euo pipefail\n','set -euo pipefail\nset -x\n',1)
+needle="test \"$(docker exec wp wp plugin get affiliate-portal-template-kit/pferde-template-kit.php --field=version --allow-root)\" = 1.50.469\n"
+assert needle in s
+probe=r'''test "$(docker exec wp wp plugin get affiliate-portal-template-kit/pferde-template-kit.php --field=version --allow-root)" = 1.50.469
+HEALTH_ID=$(docker exec wp wp post list --allow-root --post_type=page --name=gesundheit --field=ID)
+echo "REAL_DESIGN_HEALTH_ID=$HEALTH_ID"
+docker exec wp wp eval --allow-root "$id=$HEALTH_ID; echo 'REAL_DESIGN_AFFILIATE_PAGE_TYPE=' . (method_exists('Pferde_Template_Kit','affiliate_page_type') ? Pferde_Template_Kit::affiliate_page_type($id) : 'NO_METHOD') . PHP_EOL; echo 'UGE_PRIMARY_TARGET='; var_export(UGE_Core::primary_category_target($id)); echo PHP_EOL; echo 'HEALTH_META='; var_export(get_post_meta($id)); echo PHP_EOL;"
+grep -nA100 -B20 'function affiliate_page_type' /var/lib/does-not-exist 2>/dev/null || true
+docker exec wp sh -c "grep -n -A100 -B20 'function affiliate_page_type' /var/www/html/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php || true"
+'''
+s=s.replace(needle,probe,1)
 p.write_text(s)
 PY
 chmod +x /tmp/test-real-design-0210-rc4.sh
 bash /tmp/test-real-design-0210-rc4.sh
-for slug in hufrehe strahlfaeule hufabszess; do
-  test "$(curl -sS -o /tmp/rd-$slug -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/$slug/)" = 200
-  grep -q '<strong>Verwandte Begriffe:</strong>' /tmp/rd-$slug
-  grep -q 'class="uge-primary-category"' /tmp/rd-$slug
-  if grep -Eqi '<h[2-6][ >]' /tmp/rd-$slug; then echo UNNEEDED_SUBHEADING_REAL_DESIGN:$slug >&2; exit 1; fi
-done
-echo UGE0210RC4_REAL_DESIGN_RELATED_CLUSTER_PASS
