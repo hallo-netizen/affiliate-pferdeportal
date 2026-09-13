@@ -10,6 +10,7 @@ from typing import Any, Mapping, Sequence
 import batch_repetition_guard
 import content_guard
 import design_guard
+import authoring_contract
 
 STATE_CONTRACT = 'SYSTEM4_CANONICAL_ARTICLE_STATE_V1'
 BATCH_EVIDENCE_CONTRACT = 'SYSTEM4_FULL_PASS_BATCH_EVIDENCE_V1'
@@ -178,6 +179,10 @@ def validate_state(state, expected_article, source_snapshot_sha256, batch_sha256
         raise BatchGateError('PRODUCTION_CONTEXT_INVALID')
     if stable_hash({'fact_pack': context['fact_pack'], 'production_plan_item': context['production_plan_item']}) != context.get('sha256'):
         raise BatchGateError('PRODUCTION_CONTEXT_HASH_INVALID')
+    try:
+        authoring_contract.validate_bound(Path(__file__).resolve().parent.parent, state)
+    except authoring_contract.AuthoringContractError as exc:
+        raise BatchGateError('AUTHORING_CONTRACT_NOT_PASS:' + str(exc)) from exc
     research_text = _validated_stage_text(state, 'research')
     facts_text = _validated_stage_text(state, 'facts')
     try:
