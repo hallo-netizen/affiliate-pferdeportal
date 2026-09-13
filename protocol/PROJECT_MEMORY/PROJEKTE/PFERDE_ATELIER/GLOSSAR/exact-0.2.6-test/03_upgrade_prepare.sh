@@ -9,25 +9,8 @@ grep -q 'Version: 0.2.5' "$P25/universal-glossary-engine.php"
 rm -rf /tmp/runtime-plugin
 mkdir -p /tmp/runtime-plugin
 cp -a "$P25" /tmp/runtime-plugin/universal-glossary-engine
-
-docker network create ugeup >/dev/null
-docker run -d --name db --network ugeup -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=3s --health-retries=30 mysql:8.0 >/dev/null
-for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
-test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy
-
-docker run -d --name wp --network ugeup -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/runtime-plugin/universal-glossary-engine:/var/www/html/wp-content/plugins/universal-glossary-engine wordpress:php8.1-apache >/dev/null
-for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
-
-curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
-docker cp /tmp/wp wp:/usr/local/bin/wp
-docker exec wp chmod +x /usr/local/bin/wp
-PASS=$(openssl rand -hex 16)
-printf '%s' "$PASS" >/tmp/uge-admin-pass
-docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title='UGE Upgrade Test' --admin_user=admin --admin_password="$PASS" --admin_email=x@example.test --skip-email >/dev/null
-docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root >/dev/null
-docker exec wp wp theme install astra --activate --allow-root >/dev/null
-
-cat >/tmp/design-contract.php <<'PHP'
+mkdir -p /tmp/runtime-plugin/affiliate-portal-template-kit
+cat >/tmp/runtime-plugin/affiliate-portal-template-kit/affiliate-portal-template-kit.php <<'PHP'
 <?php
 /* Plugin Name: Pferde Atelier Design 1.50.469 Glossar Contract */
 final class Pferde_Template_Kit {
@@ -42,8 +25,22 @@ add_action('wp_head',static function(){
 add_action('uge_ad_slot',static function($slot){echo '<span>AD-'.esc_html($slot).'</span>';},10,1);
 PHP
 
-docker exec wp mkdir -p /var/www/html/wp-content/plugins/affiliate-portal-template-kit
-docker cp /tmp/design-contract.php wp:/var/www/html/wp-content/plugins/affiliate-portal-template-kit/affiliate-portal-template-kit.php
+docker network create ugeup >/dev/null
+docker run -d --name db --network ugeup -e MYSQL_ROOT_PASSWORD=r -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wp -e MYSQL_PASSWORD=wp --health-cmd='mysqladmin ping -h localhost -uroot -pr' --health-interval=3s --health-retries=30 mysql:8.0 >/dev/null
+for i in $(seq 1 40); do test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy && break; sleep 2; done
+test "$(docker inspect -f '{{.State.Health.Status}}' db)" = healthy
+
+docker run -d --name wp --network ugeup -p 8080:80 -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wp -e WORDPRESS_DB_PASSWORD=wp -v /tmp/runtime-plugin:/var/www/html/wp-content/plugins wordpress:php8.1-apache >/dev/null
+for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1 && break; sleep 2; done
+
+curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+docker cp /tmp/wp wp:/usr/local/bin/wp
+docker exec wp chmod +x /usr/local/bin/wp
+PASS=$(openssl rand -hex 16)
+printf '%s' "$PASS" >/tmp/uge-admin-pass
+docker exec wp wp core install --allow-root --url=http://127.0.0.1:8080 --title='UGE Upgrade Test' --admin_user=admin --admin_password="$PASS" --admin_email=x@example.test --skip-email >/dev/null
+docker exec wp wp rewrite structure '/%postname%/' --hard --allow-root >/dev/null
+docker exec wp wp theme install astra --activate --allow-root >/dev/null
 docker exec wp wp plugin activate affiliate-portal-template-kit universal-glossary-engine --allow-root >/dev/null
 test "$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)" = 0.2.5
 
