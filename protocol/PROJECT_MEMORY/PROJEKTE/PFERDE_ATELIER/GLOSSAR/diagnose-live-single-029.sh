@@ -12,25 +12,25 @@ grep -nE "template_include|the_content|is_singular|render_single|single-wrap|get
 echo '=== CORE ROUTING / POST TYPE ==='
 grep -nE "register_post_type|rewrite|query_var|parse_request|bind_explicit_request|POST_TYPE" "$C" || true
 
-echo '=== FRONTEND AROUND SINGLE ==='
+echo '=== TEMPLATES EXACT ==='
+for t in "$P"/templates/*.php; do echo "--- $t ---"; nl -ba "$t"; done
+
+echo '=== FRONTEND SELECTED FUNCTIONS EXACT ==='
 python3 - "$F" <<'PY'
 from pathlib import Path
 import sys,re
-p=Path(sys.argv[1]); lines=p.read_text().splitlines()
-need=('render_single','uge-single-wrap','template_include','the_content')
-hits=sorted({i for i,l in enumerate(lines) if any(x in l for x in need)})
-seen=set()
-for i in hits:
-    a=max(0,i-35); b=min(len(lines),i+80)
-    key=(a,b)
-    if key in seen: continue
-    seen.add(key)
-    print(f'--- lines {a+1}-{b} ---')
-    for n in range(a,b): print(f'{n+1:04d}: {lines[n]}')
+p=Path(sys.argv[1]); s=p.read_text(); lines=s.splitlines()
+for name in ['render_breadcrumbs','render_single','render_hero','render_category_page']:
+    m=re.search(r'\n\s*(?:public|private) static function '+re.escape(name)+r'\b.*?(?=\n\s*(?:public|private) static function |\n\})',s,re.S)
+    print('\n=== '+name+' ===')
+    print(m.group(0) if m else 'NOT_FOUND')
 PY
 
 echo '=== HERO TEXT SOURCES ==='
 grep -RniF 'Begriffe schnell finden, fachlich einordnen und verständlich nachschlagen.' "$P" || true
 grep -RniE "post_content|render_hero|hero.*content|description" "$F" || true
+
+echo '=== BREADCRUMB AND SPACING CSS ==='
+grep -oE '\.uge-breadcrumbs\{[^}]*\}|body\.uge-glossary-(home|category|term)[^}]*\}|\.uge\{[^}]*\}|\.uge-single-wrap\{[^}]*\}' "$F" || true
 
 echo DIAGNOSE_LIVE_SINGLE_029_DONE
