@@ -19,6 +19,7 @@ CRITICAL_PATHS = (
     'isolated_system4/root_entry.py',
     'isolated_system4/codex_entry.py',
     'isolated_system4/controller.py',
+    'isolated_system4/authoring_contract.py',
     'isolated_system4/content_guard.py',
     'isolated_system4/design_guard.py',
     'isolated_system4/production_checks.py',
