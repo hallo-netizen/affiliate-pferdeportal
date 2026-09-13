@@ -1,0 +1,36 @@
+name: Glossar 0.2.10-rc3 Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-0210-rc3-hardtest.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.10-rc3.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.10-rc3.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.10-rc3.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/real-design-runtime-browser-0210.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.10-rc3.sh
+  fresh-content-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.10-rc3.sh
+  real-design-live-failure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.10-rc3.sh
+  no-package-gate:
+    needs: [build,fresh-content-pack,real-design-live-failure]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo UGE0210RC3_HARD_GATES_PASS_NO_PACKAGE
