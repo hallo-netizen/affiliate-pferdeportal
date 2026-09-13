@@ -60,7 +60,10 @@ def _static_ppm_rules(package: Path) -> dict[str, Any]:
     table_value_match=re.search(r'self::word_count\(\$statement\)\s*<\s*([0-9]+)',structure_gate)
     if not table_value_match:
         raise AuthoringContractError('PPM_TABLE_VALUE_MINIMUM_MISSING')
-    return {'constants':constants,'structure':structure,'derived_binding_requirements':{'table_value_statement_minimum_words':int(table_value_match.group(1))}}
+    source_trace_match=re.search(r'count\(\$trace_tags\)\s*<\s*([0-9]+)',validator)
+    if not source_trace_match:
+        raise AuthoringContractError('PPM_SOURCE_TRACE_MINIMUM_MISSING')
+    return {'constants':constants,'structure':structure,'derived_binding_requirements':{'table_value_statement_minimum_words':int(table_value_match.group(1)),'source_trace_minimum':int(source_trace_match.group(1))}}
 
 def _type_definition(package: Path, article_type: str) -> dict[str, Any]:
     """Read existing static PPM type authority without executing PPM before fullcheck."""
@@ -146,6 +149,10 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
         reg=matching_registry[0]
         for field in ('role','href','anchor','reason','section_id'):
             if str(reg.get(field) or '')!=str(row.get(field) or ''): raise AuthoringContractError('LINK_REGISTRY_BINDING_MISMATCH:'+role+':'+field)
+        runtime_row=runtime_rows[0]
+        for field in ('role','href','anchor','reason','section_id'):
+            if str(runtime_row.get(field) or '')!=str(row.get(field) or ''):
+                raise AuthoringContractError('RUNTIME_LINK_BINDING_MISMATCH:'+role+':'+field)
 
     category=quality.get('wordpress_category')
     wp_cfg=structure.get('wordpress_binding') if isinstance(structure.get('wordpress_binding'),Mapping) else {}
@@ -198,12 +205,6 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
             raise AuthoringContractError('FACT_PACK_FACT_ID_DUPLICATE:'+fact_id)
         if str(claim.get('claim_status') or '')!='FULLY_SUPPORTED':
             raise AuthoringContractError('FACT_PACK_CLAIM_NOT_SUPPORTED:'+fact_id)
-        article_types=claim.get('article_types') if isinstance(claim.get('article_types'),list) else []
-        if article_types and article_type not in [str(v) for v in article_types]:
-            raise AuthoringContractError('FACT_PACK_CLAIM_TYPE_MISMATCH:'+fact_id)
-        claim_snapshot=str(claim.get('snapshot_id') or '').strip()
-        if claim_snapshot and claim_snapshot!=str(fact_pack.get('source_snapshot_id') or ''):
-            raise AuthoringContractError('FACT_PACK_CLAIM_SNAPSHOT_MISMATCH:'+fact_id)
         claim_map[fact_id]=claim
 
     allowed_raw=runtime.get('allowed_fact_ids')
@@ -222,6 +223,15 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
         seen_allowed.add(fact_id)
         allowed_fact_ids.append(fact_id)
 
+    fact_authority={}
+    for fact_id,claim in claim_map.items():
+        fact_authority[fact_id]={
+            'source_id':str(claim.get('source_id') or ''),
+            'evidence_text_sha256':str(claim.get('evidence_text_sha256') or '').lower().strip(),
+            'claim_status':str(claim.get('claim_status') or ''),
+            'article_types':[str(v) for v in (claim.get('article_types') if isinstance(claim.get('article_types'),list) else [])],
+        }
+
     schema=type_def.get('type_meta_schema') if isinstance(type_def.get('type_meta_schema'),Mapping) else {}
     required_type_fields=schema.get('required') if isinstance(schema.get('required'),list) else []
     type_values={k:runtime.get(k) for k in required_type_fields if k in runtime}
@@ -232,7 +242,7 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
       'global_requirements':static['constants'],
       'structure_requirements':structure,
       'type_requirements':{k:type_def.get(k) for k in ('table','table_count_exact','table_fact_trace_required','required_link_roles','visible_links_exact','fact_trace_required','all_factual_blocks_require_trace','title_contract','required_blocks','required_lists','fact_trace_required_blocks','conclusion_min_ratio','type_meta_schema','structure_profile','purpose','search_intent')},
-      'bound_requirements':{'internal_test_marker':marker,'intent_terms':intent_terms,'faq_direct_answer':faq_answer,'table_value_statement':table_statement,'table_value_statement_minimum_words':table_min,'link_bindings':links,'required_link_roles':required_roles,'portal_link_registry_hash':registry_hash,'wordpress_category':dict(category),'type_bound_values':type_values,'allowed_fact_ids':allowed_fact_ids},
+      'bound_requirements':{'internal_test_marker':marker,'intent_terms':intent_terms,'faq_direct_answer':faq_answer,'table_value_statement':table_statement,'table_value_statement_minimum_words':table_min,'link_bindings':links,'required_link_roles':required_roles,'portal_link_registry_hash':registry_hash,'wordpress_category':dict(category),'type_bound_values':type_values,'allowed_fact_ids':allowed_fact_ids,'canonical_fact_ids':list(claim_map.keys()),'fact_authority':fact_authority,'source_trace_minimum':int(static['derived_binding_requirements']['source_trace_minimum']),'validation_contract_version':str(plan.get('validation_contract_version') or '')},
       'system4_guards':{'external_links_forbidden':True,'design':{'required_root_classes':['ppm-generated',_type_class(article_type)],'required_table_classes':['system-129-table','comparison-table'],'inline_style_forbidden':True,'active_html_forbidden':True,'beratung_only_h2_headings':article_type.casefold()=='beratung'}},
     }
 
@@ -286,17 +296,23 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
 
     # Only validate constraints already present in the bound, hash-checked authority bundle.
     heading_cfg=structure.get('headings') if isinstance(structure.get('headings'),Mapping) else {}
+    def _ppm_normalize(text: str) -> str:
+        value=_plain(text).casefold()
+        value=re.sub(r'[^a-z0-9äöüß]+',' ',value)
+        return re.sub(r'\s+',' ',value).strip()
     heading_rows=[]
-    for m in re.finditer(r'(?is)<h2\b[^>]*>(.*?)</h2>',article_html):
-        label=_plain(m.group(1)); heading_rows.append((m.start(),m.end(),label))
-        hw=len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',label,re.UNICODE))
+    reserved={_ppm_normalize(str(v)) for v in heading_cfg.get('reserved_headings',[]) if isinstance(v,str)}
+    generic={_ppm_normalize(str(v)) for v in heading_cfg.get('generic_or_technical_headings',[]) if isinstance(v,str)}
+    forbidden=[_ppm_normalize(str(v)) for v in heading_cfg.get('forbidden_fragments',[]) if isinstance(v,str)]
+    for m in re.finditer(r'(?is)<h([23])\b[^>]*>(.*?)</h\1>',article_html):
+        label=_plain(m.group(2)); heading_rows.append((m.start(),m.end(),label))
+        hw=len(re.findall(r"[\wÄÖÜäöüß]+(?:['’\-][\wÄÖÜäöüß]+)*",label,re.UNICODE))
         lo=int(heading_cfg.get('minimum_words') or 0); hi=int(heading_cfg.get('maximum_words') or 10**9)
-        if hw<lo or hw>hi: raise AuthoringContractError(f'PREWRITE_HEADING_WORD_RANGE:{hw}:{lo}:{hi}')
-        folded=label.casefold()
-        generic={str(v).casefold() for v in heading_cfg.get('generic_or_technical_headings',[]) if isinstance(v,str)}
-        if folded in generic: raise AuthoringContractError('PREWRITE_GENERIC_HEADING:'+label)
-        for fragment in heading_cfg.get('forbidden_fragments',[]) if isinstance(heading_cfg.get('forbidden_fragments'),list) else []:
-            if isinstance(fragment,str) and fragment.casefold() in folded: raise AuthoringContractError('PREWRITE_HEADING_FORBIDDEN_FRAGMENT:'+fragment)
+        normalized=_ppm_normalize(label)
+        if normalized not in reserved and (hw<lo or hw>hi): raise AuthoringContractError(f'PREWRITE_HEADING_WORD_RANGE:{hw}:{lo}:{hi}')
+        if normalized in generic: raise AuthoringContractError('PREWRITE_GENERIC_HEADING:'+label)
+        for fragment in forbidden:
+            if fragment and fragment in normalized: raise AuthoringContractError('PREWRITE_HEADING_FORBIDDEN_FRAGMENT:'+fragment)
     min_between=int(heading_cfg.get('minimum_words_between_headings') or 0)
     if min_between and len(heading_rows)>1:
         for left,right in zip(heading_rows,heading_rows[1:]):
@@ -311,9 +327,52 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
         except re.error as exc: raise AuthoringContractError('PREWRITE_MARKER_REGEX_INVALID') from exc
 
     allowed={str(v) for v in bound.get('allowed_fact_ids',[]) if isinstance(v,str)}
-    if allowed:
-        for m in re.finditer(r'(?is)\bdata-fact-ids\s*=\s*(["\'])(.*?)\1',article_html):
-            for fact_id in re.split(r'\s+',html.unescape(m.group(2)).strip()):
-                if fact_id and fact_id not in allowed: raise AuthoringContractError('PREWRITE_FACT_ID_UNKNOWN:'+fact_id)
+    canonical={str(v) for v in bound.get('canonical_fact_ids',[]) if isinstance(v,str)}
+    authority=bound.get('fact_authority') if isinstance(bound.get('fact_authority'),Mapping) else {}
+    used=set()
+    factual_units=[]
+    is_v5=str(bound.get('validation_contract_version') or '')=='SECTION_REQUIREMENTS_V1'
+    unit_tags='p|li|th|td' if is_v5 else 'p|li|td'
+    for m in re.finditer(r'(?is)<('+unit_tags+r')\b([^>]*)>(.*?)</\1>',article_html):
+        attrs=m.group(2); body=m.group(3); text=_plain(body)
+        if not text: continue
+        if re.search(r'(?is)\bclass\s*=\s*(["\'])[^"\']*\b(?:ppm|pm)-ai-disclosure\b[^"\']*\1',attrs): continue
+        if not is_v5 and m.group(1).casefold()=='p' and re.search(r'(?is)<a\b',body): continue
+        rm=re.search(r'(?is)\bdata-fact-ids\s*=\s*(["\'])(.*?)\1',attrs)
+        refs=[v for v in re.split(r'\s+',html.unescape(rm.group(2)).strip()) if v] if rm else []
+        factual_units.append((text,refs))
+        if not refs and type_req.get('all_factual_blocks_require_trace') is True:
+            raise AuthoringContractError('PREWRITE_FACT_REFS_MISSING')
+        for fact_id in refs:
+            if fact_id not in allowed or fact_id not in canonical:
+                raise AuthoringContractError('PREWRITE_FACT_ID_UNKNOWN:'+fact_id)
+            meta=authority.get(fact_id) if isinstance(authority.get(fact_id),Mapping) else {}
+            if str(meta.get('claim_status') or '')!='FULLY_SUPPORTED':
+                raise AuthoringContractError('PREWRITE_FACT_NOT_VERIFIED:'+fact_id)
+            article_types=meta.get('article_types') if isinstance(meta.get('article_types'),list) else []
+            if article_types and str(identity.get('article_type') or '') not in [str(v) for v in article_types]:
+                raise AuthoringContractError('PREWRITE_FACT_TYPE_MISMATCH:'+fact_id)
+            used.add(fact_id)
+    if canonical:
+        minimum_ratio=float(global_req.get('min_fact_pack_coverage_ratio') or 0)
+        if len(used.intersection(canonical))/len(canonical)<minimum_ratio:
+            raise AuthoringContractError('PREWRITE_FACT_PACK_COVERAGE')
 
-    return {'status':'PASS','word_count':words,'paragraph_count':paragraphs,'h2_count':h2s,'table_count':len(tables),'link_count':len(links)}
+    traces=[]
+    for m in re.finditer(r'(?is)<span\b([^>]*)\bclass\s*=\s*(["\'])[^"\']*\bppm-source-trace\b[^"\']*\2[^>]*>',article_html):
+        tag=m.group(0)
+        def attr(name: str) -> str:
+            am=re.search(r'(?is)\b'+re.escape(name)+r'\s*=\s*(["\'])(.*?)\1',tag)
+            return html.unescape(am.group(2)).strip() if am else ''
+        traces.append((attr('data-fact-id'),attr('data-source-title'),attr('data-source-hash').lower()))
+    trace_min=int(bound.get('source_trace_minimum') or 0)
+    if type_req.get('fact_trace_required') is True and len(traces)<trace_min:
+        raise AuthoringContractError(f'PREWRITE_SOURCE_TRACE_COUNT:{len(traces)}:{trace_min}')
+    for fact_id,title,source_hash in traces:
+        if fact_id not in canonical:
+            raise AuthoringContractError('PREWRITE_SOURCE_TRACE_FACT_UNKNOWN:'+fact_id)
+        meta=authority.get(fact_id) if isinstance(authority.get(fact_id),Mapping) else {}
+        if title!=str(meta.get('source_id') or '') or source_hash!=str(meta.get('evidence_text_sha256') or '').lower():
+            raise AuthoringContractError('PREWRITE_SOURCE_TRACE_MISMATCH:'+fact_id)
+
+    return {'status':'PASS','word_count':words,'paragraph_count':paragraphs,'h2_count':h2s,'table_count':len(tables),'link_count':len(links),'source_trace_count':len(traces),'used_fact_count':len(used)}
