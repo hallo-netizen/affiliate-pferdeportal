@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 126 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 138 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,22 +10,31 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **126 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **138 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 122er-Stand neu angelegt:
+Seit dem synchronisierten 126er-Stand neu angelegt:
 
-- Canadian Horse / Cheval Canadien
-- Florida Cracker Horse
-- Gotlandsruss / Gotland Pony
-- Nordsvensk brukshäst
+- Finnhorse / Suomenhevonen
+- Latvian Warmblood / Latvijas siltasinis
+- Wielkopolski / Wielkopolska Horse
+- Małopolski / Malopolska Horse
+- Polish Sport Horse / Polski koń sportowy
+- Silesian Horse / Koń śląski
+- Polish Coldblood / Polski koń zimnokrwisty
+- Polish Ardennes / Arden polski
+- Dølahest
+- Fjordhest / Fjordpferd
+- Nordlandshest/Lyngshest
+- Norsk kaldblodstraver / Norwegian Coldblood Trotter
 
 Wichtige Abgrenzung:
-- Canadian Horse wird über CHBA/CLRC innerhalb des kanadischen Animal Pedigree Act geführt.
-- Florida Cracker Horse besitzt ein eigenes Register und staatlich gestütztes Erhaltungsprogramm; Marshtackie ist Synonym, kein zweiter Datensatz.
-- Gotlandsruss hat ein schwedisches Originalstutbuch.
-- Nordsvensk brukshäst hat ebenfalls ein schwedisches Originalstutbuch; Dølahest ist im schwedischen Programm als einzige fremde Rasse zugelassen und wird dadurch nicht synonym.
+- Australian Stock Horse und Konik polski waren bereits vorhanden und wurden nicht dupliziert.
+- Polish Sport Horse wird als eigenes PZHK-Zuchtbuch geführt; ältere englische Bezeichnung `Polish Halfbred Horse` ist kein zweiter Datensatz.
+- Dølahest, Fjordhest und Nordlandshest/Lyngshest besitzen eigene norwegische Stambücher.
+- Norsk kaldblodstraver stammt historisch von der Dølahest ab, ist aber eine eigenständig geführte nationale Rasse und keine Dublette.
+- Latvian Warmblood und Latvian Heavy Warmblood werden im lettischen Staatsregister getrennt geführt; Heavy Warmblood bleibt vorerst separater Kandidat.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -35,6 +44,7 @@ Wichtige Abgrenzung:
 - Anglo-Kabarda
 - Mangalarga Paulista
 - Pantaneiro
+- Latvian Heavy Warmblood
 - weitere internationale Rassen aus anerkannten nationalen/ursprünglichen Studbooks
 
 Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über ausreichend starke Primär-/Verbands-/staatliche Quellen gebunden sind.
@@ -56,6 +66,7 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Crioulo Brasilien → Bestandteil des vorhandenen Criollo-Datensatzes, solange die internationalen Ursprungsregister keine belastbare fachliche Trennung als eigene Rasse verlangen.
 - SWB Book I–IV/Register A–C → Registerklassen, keine getrennten Rassen.
 - Marshtackie → Synonym des Florida Cracker Horse, kein zweiter Datensatz.
+- Polish Halfbred Horse → ältere/englische Benennung im PZHK-Kontext des Polish Sport Horse, kein zweiter Datensatz.
 
 ## OFFENE NACHRECHERCHE
 
