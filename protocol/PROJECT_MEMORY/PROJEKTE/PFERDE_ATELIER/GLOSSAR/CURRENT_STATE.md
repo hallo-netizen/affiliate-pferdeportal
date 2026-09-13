@@ -1,108 +1,66 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-13
-STATUS: 0.2.7 TECHNISCHER KANDIDAT HARDTEST PASS / PFERDE-LIVE-READBACK OFFEN
+STATUS: BLOCKED / 0.2.7 LIVE FAIL / TESTSYSTEM UNZUREICHEND
 
 ## Belastbarer aktueller Stand
 
 - Büro `GLOSSAR` steuert das öffentliche Pferde-Atelier-Glossar.
-- Fachliche Glossardaten bleiben ausschließlich in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
+- Fachwahrheit bleibt in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
 - Vorhandene WordPress-Seite `Glossar` bleibt Hauptseite.
-- Glossarbegriffe sind keine normalen Beiträge/Seiten.
 - Das bestehende Pferde-Designplugin bleibt unangetastet.
-- Technischer Kern: `MOD-008 – Universal Glossar Engine`.
+- `main` bleibt unangetastet.
 
-## Aktueller gebundener Kandidat
+## Realer Nutzer-Readback 2026-09-13
 
-Plugin:
-`Universal Glossary Engine 0.2.7`
+Installierter/prüfter Stand 0.2.7:
+- Abstand oberhalb Startseiten-Hero: **PASS**.
+- Hero/Bild responsive: **FAIL**.
+- AJAX-Suche sichtbare Darstellung: **FAIL**.
+- Kategorieseiten: **FAIL**, erscheinen real wie Startseite statt echter Kategorieansicht.
+- Links auf Einzelbegriffe: **FAIL**.
 
-Rewrite-Schema:
-`5`
+Damit ist 0.2.7 **BLOCKED und nicht abgenommen**.
 
-Branch:
-`hobbyroom/glossar-027-release-hardtest-20260913`
+## Warum der frühere technische PASS nicht gilt
 
-Getesteter Commit:
-`7191f15358cc73a78231652e9479f3a9fb5a9c37`
+Die frühere Hardtest-Kette war für die reale Abnahme unzureichend:
+- Pferde-Design wurde im WordPress-Runner nur durch einen kleinen Stub vertreten;
+- Responsivität wurde durch Quelltext-Grep statt reale Browserbreiten geprüft;
+- AJAX prüfte die JSON-Antwort, nicht die sichtbare Position der Trefferliste;
+- Kategorieprüfung bewies nur saubere isolierte Route, nicht den tatsächlichen Updatepfad aus allen ausgegebenen Vorgängerversionen;
+- der reale Übergabepfad 0.2.6 → 0.2.7 wurde nicht geprüft.
 
-Autoritativer Run:
-`34749231699`
+## Hart reproduzierte aktuelle Fehler
 
-Fresh-Install Job:
-`103702569466` → PASS
+Autoritative Details:
+`FEHLERQUELLEN.md`.
 
-Echter WordPress-Updateweg 0.2.5 → 0.2.7:
-`103702569602` → PASS
+Diagnose-Run:
+`34749713877`, Job `103703878642`.
 
-Gated Package Job:
-`103702749853` → PASS
+Bewiesen:
+- AJAX-Dropdown ist im ausgelieferten Code falsch verankert;
+- Hero bleibt oberhalb 720px in fester 360px-/Absolute-Layoutlogik;
+- saubere Kategorieansicht unterscheidet sich eindeutig von Startseite;
+- 0.2.6 und 0.2.7 besitzen beide Rewrite-Schema 5;
+- beschädigter Schema-5-Rewritezustand heilt beim echten WordPress-Update 0.2.6 → 0.2.7 nicht;
+- Einzelbegriff kann dabei HTTP 200 liefern, ohne echtes Glossar-Artikelmarkup;
+- Kategorie kann statt Kategorieausgabe auf 301 laufen.
 
-Innerer Plugin-ZIP SHA-256:
-`e9c32fc64db3c64c3b85e0d2692ff200e8f6d60e5827d7ab514657adff2ae831`
+## Kein aktueller Übergabekandidat
 
-Actions-Artefakt-ID:
-`10315142446`
+0.2.7: BLOCKED / nicht verwenden.
+0.2.6: historische Zwischenversion / nicht verwenden.
 
-Technisches Protokoll:
-`../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.7_20260913.md`
+Es existiert aktuell **kein freigegebener neuer ZIP-Kandidat**.
 
-## Versionsklarheit
+## Nächster belastbarer Schritt
 
-0.2.6 bleibt Entwicklungs-/Testhistorie und ist **kein aktueller Übergabekandidat**.
-
-Grund:
-Im Entwicklungsverlauf wurde 0.2.6 mehrfach als Kandidatenkennung benutzt. Für eindeutige Paketbindung wurde deshalb der erste übergabefähige Stand neu als 0.2.7 gebaut und vollständig neu geprüft.
-
-Dauerregel:
-Unterschiedliche Paketbytes = unterschiedliche Pluginversion.
-
-## Hart geprüft
-
-Positiv und negativ belegt:
-- Fresh-Install WordPress + MySQL + Astra;
-- echter WordPress-In-place-Updateweg von 0.2.5;
-- absichtlich zerstörte Einzelbegriff-Rewrite-Regel → 404;
-- Schema 4 → 5 nach Update und OPcache-Revalidierung;
-- echte Einzelbegriffsseiten mit Artikelmarkup/Inhalt;
-- unbekannter Begriff 404;
-- Draft 404;
-- Legacy 301;
-- AJAX gültig/ungültig;
-- Kategorie-/Begriffskollision;
-- normale WordPress-Beiträge unverändert;
-- Daten-/Konfigurationspersistenz;
-- Deaktivieren/Reaktivieren;
-- Hero-Abstand;
-- responsive Hero-Darstellung;
-- Breadcrumb-Achse;
-- komplette alte Regression-/Frontendmatrix erneut PASS;
-- exaktes erzeugtes ZIP lokal nochmals Hash-/Struktur-/Version-/Schema-negativ geprüft.
-
-## Vier reale Pferde-Frontendpunkte
-
-Autoritative Fehlerquelle:
-`FEHLERQUELLEN.md`
-
-1. Hero-Abstand oben.
-2. Hero-Bild responsive.
-3. Einzelbegriff-Links dürfen keine weiße Seite liefern; Titel/Inhalt müssen sichtbar sein.
-4. Kategorie-Breadcrumb Position/Darstellung.
-
-Technisch im 0.2.7-Kandidaten abgesichert, **reale Pferde-Sicht-/Funktionsprüfung noch offen**.
-
-## Noch NICHT bewiesen
-
-- Installation dieses exakt hashgebundenen 0.2.7-ZIPs im Pferde Atelier;
-- realer Readback der vier Punkte;
-- exakte Ursache der bisher beobachteten weißen Live-Seite;
-- aktueller Astra+Yoast-Kombinationstest, soweit für endgültigen Release erforderlich;
-- realer Wissensdatenbankimport;
-- größerer Bestands-/Performance-Test;
-- separates zweites reales Portal.
-
-Daher: technischer Kandidat PASS, **kein Pferde-LIVE-PASS**.
-
-## Nächster Schritt
-
-Ausschließlich `HOBBYRAUM.md` folgen: exakt hashgebundenes 0.2.7-ZIP über den geprüften WordPress-Updateweg installieren und danach die vier realen Punkte plus negative Regressionen zurücklesen.
+Ausschließlich `HOBBYRAUM.md` folgen:
+1. neue reale Acceptance-Schranken zuerst gegen den fehlerhaften Iststand ROT machen;
+2. echtes Pferde-Designplugin statt Stub einbinden;
+3. Browserbasierte AJAX-/Responsive-Prüfung;
+4. Routing-/Rendererprüfung aus 0.2.6 und 0.2.7;
+5. erst danach minimaler Fix;
+6. kein ZIP vor vollständigem ROT→GRÜN-Nachweis positiv und negativ.
