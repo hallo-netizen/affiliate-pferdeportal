@@ -1,0 +1,43 @@
+name: Glossar 0.2.10-rc11 Native Single Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-0210-rc11-native-single-hardtest.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.10-rc11-native-single.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-kubio-native-single-0.2.10-rc11.sh'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kubio-native-single:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hard positive negative integration test
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-kubio-native-single-0.2.10-rc11.sh
+  package:
+    needs: [kubio-native-single]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.10-rc11-native-single.sh
+      - name: Build exact tested package
+        run: |
+          rm -f /tmp/universal-glossary-engine-0.2.10-rc11-native-single.zip
+          (cd /tmp/uge0210rc11 && zip -X -qr /tmp/universal-glossary-engine-0.2.10-rc11-native-single.zip universal-glossary-engine)
+          unzip -t /tmp/universal-glossary-engine-0.2.10-rc11-native-single.zip
+          rm -rf /tmp/verify-rc11 && mkdir -p /tmp/verify-rc11
+          unzip -q /tmp/universal-glossary-engine-0.2.10-rc11-native-single.zip -d /tmp/verify-rc11
+          grep -q 'Version: 0.2.10-rc11-native-single' /tmp/verify-rc11/universal-glossary-engine/universal-glossary-engine.php
+          ! grep -q 'templates/single-uge-term.php' /tmp/verify-rc11/universal-glossary-engine/includes/class-uge-frontend.php
+          grep -q 'templates/taxonomy-uge-group.php' /tmp/verify-rc11/universal-glossary-engine/includes/class-uge-frontend.php
+          find /tmp/verify-rc11/universal-glossary-engine -name '*.php' -print0 | xargs -0 -n1 php -l
+          sha256sum /tmp/universal-glossary-engine-0.2.10-rc11-native-single.zip | tee /tmp/rc11.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.10-rc11-native-single-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.10-rc11-native-single.zip
+            /tmp/rc11.sha256
