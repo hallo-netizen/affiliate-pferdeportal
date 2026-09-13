@@ -1,118 +1,110 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-13
-STATUS: 0.2.8 TECHNISCHER KANDIDAT HARDTEST PASS / PFERDE-LIVE-READBACK OFFEN
+STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCHER KANDIDAT HARDTEST PASS / LIVE-READBACK 0.2.9 OFFEN
 
 ## Belastbarer aktueller Stand
 
 - Büro `GLOSSAR` steuert das öffentliche Pferde-Atelier-Glossar.
 - Fachwahrheit bleibt in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
 - Vorhandene WordPress-Seite `Glossar` bleibt Hauptseite.
-- Das bestehende Pferde-Designplugin bleibt unangetastet.
-- `main` bleibt unangetastet.
+- Das bestehende Pferde-Designplugin und `main` bleiben unangetastet.
 
-## Historischer Live-Fail 0.2.7
+## Reale Nutzerwahrheit 0.2.8
 
-Der reale Nutzer-Readback vom 2026-09-13 bleibt gültig:
-- Abstand oberhalb Startseiten-Hero: PASS;
-- Hero/Bild responsive: FAIL;
-- AJAX-Suche sichtbare Darstellung: FAIL;
-- Kategorieseiten: FAIL;
-- Links auf Einzelbegriffe: FAIL.
+Der Nutzer-Readback 2026-09-13 widerlegt die technische 0.2.8-Abnahme:
+- Hero/Bild: höher geworden, aber real weiterhin nicht responsive;
+- Kategorien: weiterhin nicht wie die Glossar-Startseite gestaltet;
+- Einzelartikel: Links laufen weiterhin ins Leere.
 
-0.2.7 bleibt deshalb **LIVE FAIL / BLOCKED / NICHT VERWENDEN**.
-0.2.6 bleibt historische Zwischenversion / nicht verwenden.
+Damit ist **0.2.8 LIVE FAIL / BLOCKED / NICHT VERWENDEN**.
+0.2.7 und 0.2.6 bleiben ebenfalls historische Fehl-/Zwischenstände und werden nicht mehr ausgegeben.
 
-## Neue technische Absicherung 0.2.8
+## Wesentliche Korrektur der Acceptance
 
-Die falsche frühere Abnahme wurde ersetzt durch eine RED→GREEN-Kette, die die realen Fehler zuerst reproduziert und anschließend denselben Vertrag gegen den minimal reparierten Kandidaten prüft.
+Die frühere Kategorie-Acceptance war fachlich falsch: sie verlangte ausdrücklich, dass Kategorien **keinen** Hero und **keine** Tools enthalten. Das war das Gegenteil der Nutzer-Vorgabe.
 
-0.2.8 enthält gegenüber dem verworfenen 0.2.7 nur die notwendigen Reparaturen:
-- AJAX-Treffercontainer korrekt an das Suchformular gebunden;
-- Hero/Bild proportional responsiv statt fester 360px-Desktop-/Tabletlogik;
-- Rewrite-Schema 5 → 6, damit beschädigte Schema-5-Zustände neu aufgebaut werden.
+Verbindlich ist jetzt:
+- jede Glossar-Kategorie besitzt ihren eigenen Kategorieinhalt;
+- zugleich verwendet sie den vollständigen visuellen Glossar-Rahmen der Startseite: Hero, Suche/A–Z, Icon-Navigation;
+- Hero-Kicker lautet `WISSEN`;
+- Begriffskarten müssen per echtem Browserklick auf eine echte Einzelbegriffseite führen.
 
-## Echter Design-Integrationsnachweis
+## Technischer Kandidat 0.2.9
 
-Der finale Lauf verwendet den **echten Pferde-Designcode 1.50.469**, nicht den früheren Stub.
+Version: `0.2.9`
+Rewrite-Schema: `7`
+Branch: `hobbyroom/glossar-livefail-red-green-20260913`
 
-Exakter Design-Hauptcode SHA-256:
-`580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`
+Finaler Workflow:
+`.github/workflows/glossar-029-final-hardtest.yml`
 
-## Finaler 0.2.8-Hardtest
-
-Workflow:
-`.github/workflows/glossar-028-final-hardtest.yml`
-
-Run:
-`34755984363`
+Finaler Run:
+`34757795593`
 
 Getesteter Head:
-`d14f6bff7f660cc6461208e8153fbdf237f0d609`
+`f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
 
-Alle Jobs SUCCESS:
-- Browser final `103720316319`
-- Fresh final `103720316220`
-- Update 0.2.6 → 0.2.8 `103720316226`
-- Update 0.2.7 → 0.2.8 `103720316230`
-- Real Design 1.50.469 final `103720316084`
-- Gated package `103720510869`
+Alle Produkt-/Release-Gates SUCCESS:
+- Build `103725094481`
+- Fresh inkl. komplette alte Regression + zerstörter Rewritezustand `103725094537`
+- Update vom real ausgegebenen 0.2.8-Stand → 0.2.9, anschließend Rewrite erneut zerstört `103725094620`
+- echter Design-1.50.469-Runtime + Browser + Null-Rewrite `103725094378`
+- gated Package `103725295224`
 
-Bewiesen sind u. a.:
-- Browser-AJAX inkl. sichtbarer Position und realen Treffern;
-- responsive Hero-Messung bei 1200 / 900 / 720 / 500 px;
-- echte Kategorieansicht und negativer Ausschluss von Home-Hero/Home-Tools;
-- echte Einzelbegriffseite mit Artikelmarkup und Inhalt;
-- unbekannter Begriff 404;
-- Draft 404;
-- normaler WP-Beitrag unverändert;
-- Kategorie/gleichnamiger Begriff getrennt;
-- gezielt beschädigte Rewritezustände aus 0.2.6 und 0.2.7 werden beim echten Update auf Schema 6 repariert;
-- echter Design-1.50.469-Runtime-Lauf PASS.
+## Was jetzt härter bewiesen ist
 
-Vollständiges Protokoll:
-`../../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.8_20260913.md`
+### Hero
+Der Browser misst das **echte `<img>`** bei 1200 / 900 / 720 / 500 px. Das Bild ist selbst der Größenanker: `width:100%`, `height:auto`, keine künstliche feste Bildhöhe und kein erzwungener 5:2-Container. Gemessene Bildgrößen unter echtem Design:
+- 1096 × 438.39
+- 796 × 318.39
+- 664 × 265.59
+- 444 × 177.59
+
+Das entspricht dem echten Bildverhältnis 1400 × 560 und skaliert mit der Viewportbreite.
+
+### Kategorien
+`/glossar/gesundheit/` muss gleichzeitig enthalten:
+- `.uge-category-head` + H1 `Gesundheit`;
+- `.uge-hero`;
+- `.uge-tools`;
+- `.uge-topic-nav`;
+- echten Link auf `/glossar/begriff/hufbein/`.
+
+### Einzelbegriffe / tote Links
+0.2.9 besitzt zusätzlich einen direkten Request-Binder. Selbst wenn **alle gespeicherten Glossar-Rewrite-Regeln entfernt werden und Schema 7 bereits als aktuell gespeichert ist**, müssen Kategorie- und Einzelbegriff-URLs weiter funktionieren.
+
+Der Real-Design-Browsertest klickt den tatsächlich gerenderten Hufbein-Link auf der Kategorie und verlangt danach:
+- Ziel-URL `/glossar/begriff/hufbein/`;
+- genau ein `article.uge-single-wrap`;
+- realen Sentinel-Inhalt.
+
+### Regression / Negativ
+- Draft öffentlich: 404;
+- authentifizierte WordPress-Draft-Preview: PASS;
+- unbekannter Begriff: 404;
+- A–Z, Duplicate Guard, normale Beiträge: PASS;
+- AJAX reale UI/Position: PASS.
 
 ## Exakter Übergabekandidat
 
-Actions-Artefakt ID:
-`10318015702`
+Actions-Artefakt-ID: `10317444708`
 
-Inneres installierbares ZIP:
-`universal-glossary-engine-0.2.8.zip`
+Installierbares ZIP:
+`universal-glossary-engine-0.2.9.zip`
 
 SHA-256:
-`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
+`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
 
-Outer artifact digest:
-`sha256:d404bd537f53bffb5a4a894c5ad4758ac5723524323638a6dd1e1b5fbb061b68`
+Outer Actions artifact digest:
+`sha256:98513772d72fc65dc4d01520086b4c7e56e165cceeea1e31147a9d6cf830c6ff`
 
-Das exakt heruntergeladene Artefakt wurde lokal nochmals auf ZIP-Integrität, Hash, Version 0.2.8, Rewrite-Schema 6 und PHP-Lint geprüft.
+Das heruntergeladene Artefakt wurde lokal erneut auf ZIP-Integrität, Version 0.2.9, Schema 7, direkten Request-Binder, Kategorie-Vollrahmen und Abwesenheit einer RC-Kennung geprüft.
 
 ## PASS-Grenze
 
-**Technischer Kandidat 0.2.8: PASS.**
+**0.2.9 technischer Kandidat: PASS.**
 
-**Pferde-LIVE-PASS: noch NEIN.**
+**Pferde-LIVE-PASS 0.2.9: noch NEIN.**
 
-Erst nach Installation exakt dieses ZIPs und realem Nutzer-Readback dürfen die Live-Fehler in `FEHLERQUELLEN.md` geschlossen werden.
-
-Die exakte historische Ursache der früheren weißen Live-Seite wird nicht rückwirkend behauptet; technisch reproduziert und abgesichert ist die Fehlerklasse inklusive der realen Vorgängerpfade 0.2.6 und 0.2.7.
-
-## NEXT ACTION
-
-Ausschließlich exakt `universal-glossary-engine-0.2.8.zip` mit SHA
-`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
-über den normalen WordPress-Update/Überschreiben-Weg installieren.
-
-Danach real prüfen:
-1. oberer Startseitenabstand bleibt korrekt;
-2. Hero/Bild responsive;
-3. AJAX-Trefferliste sitzt direkt am Suchfeld und liefert reale Treffer;
-4. Kategorieseite ist echte Kategorieansicht, nicht Startseite;
-5. alle Einzelbegriff-Links zeigen echten Titel/Inhalt;
-6. unbekannter Begriff 404;
-7. Draft nicht öffentlich;
-8. normaler WP-Beitrag unverändert;
-9. Kategorie und gleichnamiger Begriff getrennt;
-10. kein zweiter Breadcrumb / kein globaler Layoutshift.
+Nur der reale Nutzer-Readback des exakt hashgebundenen 0.2.9-ZIPs kann die drei aktuellen Live-Fehler schließen.
