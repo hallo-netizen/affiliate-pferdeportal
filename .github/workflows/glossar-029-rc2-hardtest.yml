@@ -1,0 +1,43 @@
+name: Glossar 0.2.9-rc2 Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-029-rc2-hardtest.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.9-rc2.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.9-rc2.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-0.2.8-to-0.2.9-rc2.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.9-rc2.sh'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/real-design-runtime-browser-029.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.9-rc2.sh
+  fresh-zero-rewrite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-fresh-0.2.9-rc2.sh
+  update-from-live-028:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-update-0.2.8-to-0.2.9-rc2.sh
+  real-design-zero-rewrite-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/test-real-design-1.50.469-0.2.9-rc2.sh
+  no-package-gate:
+    needs: [build,fresh-zero-rewrite,update-from-live-028,real-design-zero-rewrite-browser]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo UGE029RC2_HARD_GATES_PASS_NO_RELEASE_PACKAGE
