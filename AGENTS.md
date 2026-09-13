@@ -2,7 +2,30 @@
 
 Diese Datei gilt repositoryweit für Codex Cloud.
 
-## Zwingender Start
+## SYSTEM 4 – isolierte Draft-PR-Eingangstür (TEST ONLY)
+
+Marker: `SYSTEM4_ISOLATED_ROOT_ENTRY_V1`
+
+Diese Ausnahme gilt **nur**, wenn gleichzeitig:
+1. der aktuelle Branch exakt `hobbyroom/system4-true-single-room-v1` ist; und
+2. der gebundene Auftrag ausdrücklich ein isolierter System-4-Test-/Produktionsauftrag ist.
+
+Dann ist vor jeder weiteren System-4-Arbeit zwingend zuerst auszuführen:
+
+`python3 isolated_system4/root_entry.py start <BOUND_SNAPSHOT_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
+
+SYSTEM4 task: DO NOT run control/cloud-entry-gate/cloud_entry.py before or instead of the System-4 root entry.
+
+Für diesen isolierten System-4-Draft-PR gilt ausdrücklich:
+- keine alte STARTMASTER-/H7-/H8-/ACM-/System-3-Orchestrierung als Laufzeitpfad;
+- keine freie Alternativroute;
+- Snapshot und Runtime-Arbeitsraum liegen außerhalb des Repositorys;
+- kein Merge, kein Publish und keine Änderung des offiziellen STARTMASTER-State;
+- bei BLOCKED der System-4-Eingangstür sofort stoppen.
+
+**Für jeden anderen Auftrag gilt diese Ausnahme nicht.** Dann bleibt der nachfolgende bestehende repositoryweite Cloud-Einstieg unverändert zwingend.
+
+## Zwingender Start für alle Nicht-System-4-Aufträge
 Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
 
 `python3 control/cloud-entry-gate/cloud_entry.py start`
@@ -38,7 +61,7 @@ Ein Backup-PASS ist niemals ein Arbeits-PASS.
 
 ## Automatische Pflicht auf `paul/*`-Branches
 
-Die bestehende Cloud-Eingangstür bleibt die **einzige manuell aufzurufende Starttür**:
+Die bestehende Cloud-Eingangstür bleibt für Nicht-System-4-Aufträge die **einzige manuell aufzurufende Starttür**:
 
 `python3 control/cloud-entry-gate/cloud_entry.py start`
 
@@ -94,4 +117,4 @@ Wenn der aktuell gebundene Step einen Textbatch ausführt, gilt zusätzlich der 
 Die Eingangstür und Continuity-Schicht sind rein technisch. Fach-, Inhalts-, Qualitäts-, Titel-, Keyword-, Design- und sonstige Portalregeln liegen ausschließlich im nachgelagerten Workflow und dürfen hier weder ersetzt noch dupliziert werden.
 
 ## Definition of Done
-Vor einem terminalen Abschluss muss `python3 control/cloud-entry-gate/cloud_entry.py verify` PASS melden. Ein Ergebnis ohne gültigen Receipt-Abschluss ist nicht workflowgültig.
+Vor einem terminalen Abschluss eines Nicht-System-4-Auftrags muss `python3 control/cloud-entry-gate/cloud_entry.py verify` PASS melden. Ein Ergebnis ohne gültigen Receipt-Abschluss ist nicht workflowgültig.
