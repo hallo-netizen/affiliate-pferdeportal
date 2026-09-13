@@ -44,6 +44,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 - `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
 - `HIVEPRESS/START_HERE.md` → Anzeigenmarkt / HivePress
+- `PLUGINS/START_HERE.md` → zentraler Plugin-Bestand, Updatekontrolle und isolierte aktuelle Ausgabeartefakte
 - `GEMEINSAM/START_HERE.md` → echte projektübergreifende Regeln/Referenzen innerhalb des Pferde-Ateliers
 
 Historische Adresse `PFERDERASSEN/START_HERE.md` bleibt als Weiterweiser zum Aktenschrank `WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/` bestehen.
@@ -59,6 +60,13 @@ Historische Adresse `PFERDERASSEN/START_HERE.md` bleibt als Weiterweiser zum Akt
 - Fehler/Änderungen dauerhaft referenzieren;
 - Maschinenraum nur mit ausdrücklichem Fachauftrag;
 - Masterdateien vollständig verwerten und zuordnen.
+
+### Plugin-Pflicht bei echter Pluginänderung
+
+Wenn ein Chat im Pferde-Atelier tatsächlich ein Plugin entwickelt oder auf eine neue Version aktualisiert, muss er vor Abschluss zusätzlich `PLUGINS/START_HERE.md` lesen und den neuen belastbaren Stand nach `PLUGINS/SYNC_VERTRAG.md` synchronisieren.
+
+Keine Pluginänderung → PLUGINS-Büro nicht künstlich ändern.
+Fehlende/eindeutig nicht bindbare aktuelle ZIP → `Plugins: BLOCKED`, niemals raten.
 
 ## Dauerhafte Routingregel
 
