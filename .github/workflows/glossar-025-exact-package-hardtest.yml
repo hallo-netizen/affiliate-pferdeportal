@@ -1,7 +1,7 @@
 name: Glossar 0.2.5 Exact Package Hardtest
 on:
   push:
-    branches: [hobbyroom/glossar-025-hardfix-source]
+    branches: [hobbyroom/glossar-025-frontend-acceptance-20260913]
     paths:
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5/**'
       - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/**'
@@ -25,6 +25,8 @@ jobs:
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/04_frontend.sh
       - name: Regression preview duplicate normal WordPress
         run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/05_regression.sh
+      - name: Frontend acceptance gaps
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/06_frontend_acceptance.sh
       - name: Package tested candidate
         run: |
           set -euo pipefail
