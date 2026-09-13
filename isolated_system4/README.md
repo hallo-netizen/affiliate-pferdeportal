@@ -1,6 +1,6 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **BLOCKED — CAUSE-FIX LOKAL VOLLSTÄNDIG BEWIESEN, ABER NOCH NICHT AUF DEM AKTUELLEN PR-HEAD GEBUNDEN.** Isolierter Prototyp / Test only. Kein Merge, kein Publish.
+Status: **BLOCKED FÜR PRODUKTION — REMOTE CAUSE-FIX UND FEHLERHISTORIEN-REGRESSION SIND GEBUNDEN; EIN REALER CODEX-ARTIKELLAUF IST NICHT FREIGEGEBEN UND WURDE NICHT ERNEUT GESTARTET.**
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Campus-/Projektstand bleibt getrennt und ausschließlich in `control/startmaster0107/CURRENT_STATE.json`.
 
@@ -10,33 +10,21 @@ PR #238: `System 4 — true single-room article production`
 
 Branch: `hobbyroom/system4-true-single-room-v1`
 
-Der aktuelle Remote-Head nach Abschluss-/Cleanup-Dokumentation ist ein reiner Dokumentations-/Cleanup-Fortschritt auf dem unveränderten System-4-Codebaum; der getestete Cause-Fix ist **noch nicht** auf dem PR gebunden.
+Kein Merge. Kein Publish. `publish_allowed=false`.
 
-Der zuletzt frisch geprüfte Codebaum vor der aktuellen Dokumentationsnachholung ist bytegleich zu:
+Der korrigierte System-4-Ursachenstand ist jetzt auf dem Remote-Branch gebunden.
 
-`edfe6049768db68f85bf3babedce3199538217ef`
+Gebundene Kernblobs:
 
-Der aktuelle Remote-Live-Input ist weiterhin die ältere 643-Byte-Datei mit:
+- `isolated_system4/authoring_contract.py` -> `bab5c3bbb6e1440b3d2e8a52e0ee4fe6f5fd7ae4`
+- `isolated_system4/full_local_acceptance.py` -> `738f83748b6ead75a9079b8c89eccf2ee9c43515`
+- `isolated_system4/LIVE_BOUND_INPUT_ONE_ARTICLE.json` -> `7c5fffa20a5ef29e9f793903f70259dcfac22a25`
 
-`system4_root_manifest_sha256 = 3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c`
+Gebundener Root-Manifestwert im Live-Input:
 
-Git blob:
+`63d124c6c83ce6a68368123e55a7b7be61804f870c40f9606c315280c2aa2623`
 
-`212d062eef9895cf67299f7ae6fcceee760cc2ed`
-
-Die später lokal bewiesenen Cause-Fix-Dateien `authoring_contract.py` und `full_workflow_fault_matrix.py` sind im aktuellen Remote-Code noch nicht gebunden.
-
-## Offizieller Campusstand — getrennt
-
-`control/CURRENT_STARTMASTER.json` bindet weiterhin `STARTMASTER0107`.
-
-Der offizielle Projektstand bleibt `BLOCKED` bei `RUN_NEW_ARTICLE_BATCH_NO_STOP` / Sequenz `107007` mit `PPM679_REAL_EXECUTION_BLOCKED`; `hobbyroom_status=FREI`; `publish_allowed=false`.
-
-System 4 überschreibt diesen Campusstand nicht.
-
-## Letzter reale Artikeltest
-
-Gebundener Artikel:
+Der Live-Input bleibt exakt ein Artikel:
 
 - Typ `Beratung`
 - Kategorie `putzbox-beratung`
@@ -45,107 +33,84 @@ Gebundener Artikel:
 - Plan-Slot `88043c35da332d4b2a500d1b61919721aefadf894bc923c841cc849a132c63b5`
 - `publish_allowed=false`
 
-Der reale Codex-Lauf erreichte:
+## Ursache und Fix
 
-`Root -> Research -> Facts -> Context -> Draft -> FULL PPM`
+Wiederholt aufgetretene Fehlerklasse:
 
-PPM 6.7.9 blockierte den Draft mit:
+**Eine Übergabe wurde als gültig akzeptiert, obwohl ihr Wert nicht gegen dieselbe autoritative Quelle validiert war, die der spätere echte Prüfer verwendet.**
 
-`FULL:ppm679:BLOCKED_CONTENT_WORD_FLOOR`
+Der aktuelle Fix bindet deshalb vor Draft insbesondere:
 
-- Ist: 448 Wörter
-- Soll: mindestens 750 Wörter
+- Runtime-Fact-IDs gegen das tatsächlich gebundene kanonische Fact-Pack;
+- Runtime-Linkwerte gegen die gebundene Linkquelle;
+- erforderliche Runtime-Felder und Artikelidentität;
+- Plan-/Fact-Pack-Snapshot-Bindung;
+- internen PPM-Marker;
+- Fact-Referenzen und Source-Traces gegen die gebundene Fact-Autorität;
+- bereits vor Draft bekannte PPM-Strukturpflichten, ohne PPM-Fachregeln zu verändern.
 
-Die notwendige Verlängerung wurde danach durch den Same-Article-Repair-Guard blockiert:
+Textmaschine, PPM 6.7.9, PSERC/PSTE, LanguageTool 6.8, Design, WordPress-Plugin und Theme/CSS bleiben READ-ONLY.
 
-`REPAIR_SCOPE_FAIL:REPAIR_SCOPE_TOO_LARGE:LENGTH:0.7680`
+## Fehlerhistorie / Regression
 
-Damit ist die Ursache klar: **Eine bereits vor dem Schreiben bekannte Pflicht wurde nicht früh genug maschinell an den Autorweg gebunden.**
+Die bekannte Fehlerhistorie wurde als Negativkatalog gegen den Gesamtweg geprüft. Tatsächlich provoziert und fail-closed geprüft wurden unter anderem:
 
-## Verbindliche Ursachenlösung
+- unbekannte Fact-ID;
+- Fact-ID nicht im kanonischen Fact-Pack;
+- fehlender interner Marker;
+- Runtime-Titel-/Pflichtfeld-Mismatch;
+- Runtime-Link-Mismatch;
+- Plan-/Fact-Pack-Snapshot-Mismatch;
+- fehlende Fact-Referenzen;
+- fehlende Source-Traces;
+- falsche Source-Trace-Bindung;
+- Word-Floor;
+- fehlender gebundener Link;
+- fehlender Plan-Slot;
+- Manifest missing/mismatch;
+- Handoff-Tamper;
+- Batch-State-Tamper.
 
-Nicht die 30-%-Repair-Grenze wird für Wortzahl aufgeweicht.
+Beweis auf den jetzt remote bytegleich gebundenen Produktions-/Testbytes:
 
-Zielweg:
-
-`Ingress -> Research -> Facts -> CONTEXT_REQUIRED -> gebundener Authoring Contract aus unveränderten autoritativen Quellen -> DRAFT_REQUIRED -> Draft -> unveränderte echte Prüfer -> nur echte dynamische Same-Article-Reparatur -> Batch -> Handoff`
-
-Dabei gilt zwingend:
-
-- Textmaschine READ-ONLY;
-- PPM 6.7.9 READ-ONLY;
-- PSERC/PSTE READ-ONLY;
-- LanguageTool 6.8 unverändert;
-- Design, Theme/CSS und WordPress-Plugin READ-ONLY;
-- kein Chat/Codex/externer Input darf Schreibregeln ergänzen, lockern oder überschreiben;
-- bekannte bindbare Prüferpflichten müssen vor Draft-Annahme aus denselben unveränderten Autoritäten gebunden sein;
-- neue Drafts und Reparaturen müssen vor Annahme gegen diese bereits bekannten Pflichten laufen;
-- ein später auftauchender Fehler, der schon vor Draft bekannt/bindbar war, ist ein Vorab-Gate-/Invarianzfehler und kein normaler Repair-Erfolg.
-
-## Testregel
-
-**Kein Einzeltest zählt als Gesamtworkflow-Beweis.**
-
-Jeder bekannte Workflow-Schritt muss positiv und negativ gegen den vollständigen Root->Datei-Weg geprüft werden.
-
-Auf den lokal getesteten Cause-Fix-Bytes wurde tatsächlich terminal ausgeführt:
-
-- `121/121` Unittests PASS;
-- Gesamtworkflow-Matrix `15/15` Stationen positiv und negativ;
-- `39` Szenarien;
-- kompletter Root->Datei-Acceptance-Lauf `10/10` PASS;
+- kompletter positiver Root->Research->Facts->Context->Draft->echtes LT->echtes PPM->Repair->Batch->Handoff->Unpack-Weg: **PASS**;
+- bestehender Root->Datei-Acceptance-Satz: **10/10 PASS**;
+- zusätzlicher Fehlerhistorien-Katalog: **14/14 PASS**;
+- zusätzlicher Batch-/Kontext-Negativnachweis: **PASS**;
+- Summe dieser ausgeführten Nachweise: **25/25 PASS**;
 - echtes LanguageTool 6.8;
 - echtes PPM 6.7.9;
-- `mocks_used=false` für den Produktionsbeweis;
-- finale Testdatei: 66753 Bytes;
-- SHA256 `f6b08cdede6dedef329ca20dde3b648f77cd6f8b6342ee2407cc3441953a7c75`.
+- `mocks_used=false` für den Produktionsbeweis.
 
-**Beweisgrenze:** Diese PASS-Werte gelten für die getesteten lokalen Cause-Fix-Bytes. Sie sind ausdrücklich **kein PASS des aktuellen Remote-PR-Heads**, solange exakt diese Bytes dort nicht gebunden und erneut auf genau diesem Head geprüft wurden.
+PPM-6.7.9-SHA256:
+`acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
 
-## Getesteter Cause-Fix
+LanguageTool-6.8-SHA256:
+`2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
 
-Gebundener Cause-Fix-Manifestwert:
+## Remote-Hardlock
 
-`8789f0af37183e9988e0b90f9bb5ea2d3e0537c4b43e849d4e34a37fb1a904ff`
+Auf dem Code-/Live-Input-Head `8bfe1fbb62be3df43651c20e816fed86b58ea1d7` lief der Workflow `Pferde Atelier Immutable Base Hardlock` als **SUCCESS**, Run `34774857418`.
 
-Gebundener Cause-Fix-Live-Input:
-
-- 643 Bytes
-- SHA256 `9d843b3f77d4c7b4e1c85b59125cbdab5e5ae9277a941516ac2c54368d5f1b15`
-
-Die exakten 13 Ziel-Blob-Hashes und die vollständigen Testbelege stehen im aktuellen Protokoll:
-
-`PROTOKOLL_HANDOVER_20260913_CAUSEFIX_CLOSEOUT.md`
+Dokumentationsänderungen nach diesem Head verändern keine System-4-Kritikaldatei des Root-Manifests. Trotzdem muss der Hardlock auch auf dem finalen Dokumentations-Head erneut SUCCESS sein, bevor dieser Stand als sauber abgeschlossen gilt.
 
 ## Codex-Regel
 
-Codex wird **ausschließlich für einen konkreten real gebundenen Artikeltest/-produktionslauf** verwendet und nur nach ausdrücklicher Nutzerfreigabe.
+**Kein Codex ohne die ausdrückliche Nutzerfreigabe mit den Worten `Starte Codex`.**
 
-Kein Codex für:
+`Weiter`, `testen`, `komplett prüfen`, `Null bis Ende` oder ähnliche Formulierungen sind **keine** Codex-Freigabe.
 
-- Diagnose;
-- Architektur-/Codearbeit;
-- Patch/Commit/Push;
-- Preflight;
-- lokale Tests;
-- Dokumentation;
-- Handoff-/WordPress-Experimente.
-
-Ein Codex-Patch-/Push-Auftrag in diesem Chat war ein Regelverstoß und ist als Fehler protokolliert. Er hat den Remote-PR nicht aktualisiert.
+Codex wird ausschließlich für einen konkret gebundenen realen Artikel-/Batch-Produktionslauf verwendet, nicht für Diagnose, Architektur, Patch, Commit, Preflight, Regressionstests oder Dokumentation.
 
 ## HOBBYRAUM / NEXT ACTION
 
-Status: **BLOCKED**.
+Status: **BLOCKED FÜR PRODUKTION**.
 
-Ohne Codex:
+Technischer Remote-Cause-Fix und Regressionen sind gebunden. Nächste Produktionsaktion ist ausschließlich nach ausdrücklicher Nutzerfreigabe `Starte Codex`:
 
-1. Exakt die 13 im aktuellen Protokoll gebundenen Cause-Fix-Dateibytes auf `hobbyroom/system4-true-single-room-v1` übertragen.
-2. Alle 13 Remote-Git-Blobs exakt gegen die protokollierten Zielhashes prüfen.
-3. Cause-Fix-Manifest muss exakt `8789f0af37183e9988e0b90f9bb5ea2d3e0537c4b43e849d4e34a37fb1a904ff` ergeben.
-4. Auf dem danach aktuellen Remote-Head ohne Codex terminal ausführen: `121/121`, Matrix `15/15 + 39`, Acceptance `10/10` mit echtem LT 6.8 + PPM 6.7.9.
-5. Immutable Base Hardlock auf exakt diesem Head prüfen.
-6. Erst danach und nur nach ausdrücklicher Nutzerfreigabe: **genau ein konkreter realer Artikeltest mit Codex**.
+- genau ein real gebundener Artikeltest über den vollständigen System-4-Weg;
+- kein zweiter automatischer Versuch;
+- kein Merge;
+- kein Publish.
 
-Zusätzlicher Cleanup: Der versehentlich erzeugte Branch `tmp-should-not-use` ist auf denselben Stand wie der Arbeitsbranch fast-forward gesetzt und enthält keine abweichende aktuelle Wahrheit. Er muss gelöscht werden, sobald ein Branch-Delete-fähiger Weg verfügbar ist, und darf niemals als Arbeits-/CURRENT-/Produktionsbranch verwendet werden.
-
-Kein Merge. Kein Publish.
+Bis zu dieser ausdrücklichen Freigabe: **kein Codex-Aufruf.**
