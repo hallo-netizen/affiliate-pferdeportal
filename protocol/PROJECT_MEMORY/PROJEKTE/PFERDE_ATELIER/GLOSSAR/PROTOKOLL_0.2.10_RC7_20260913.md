@@ -78,16 +78,43 @@ PASS-Marker:
 - `UGE0210_BROWSER_PASS`
 - `UGE0210RC7_REAL_DESIGN_CLICKABILITY_BREADCRUMB_LOOP_POISON_PASS`
 
-## Was NICHT geprüft/freigegeben wurde
+## Paket-/Artefaktprüfung – nachgeholt
 
-- kein realer Pferde-LIVE-Readback;
-- kein rc7-Installationspaket;
-- kein rc7-ZIP-SHA;
-- kein gated Release-/Paketjob;
-- keine Synchronisierung als `PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS/.../CURRENT.zip`.
+Der eigentliche rc7-Hardtest endete absichtlich mit `UGE0210RC7_HARD_GATES_PASS_NO_PACKAGE`. In der Abschlussprüfung wurde deshalb anschließend **aus exakt dem getesteten Quell-Commit `1e74b7454e84f97182dbb185614371a48157bc21`** erneut gebaut und daraus das Installationspaket erzeugt.
 
-Der Workflow endet ausdrücklich mit:
-`UGE0210RC7_HARD_GATES_PASS_NO_PACKAGE`.
+Closeout-Run:
+`34764046870` → SUCCESS
+
+Job:
+`103741741909` → SUCCESS
+
+Installierbares ZIP:
+`universal-glossary-engine-0.2.10-rc7.zip`
+
+Innerer ZIP SHA-256:
+`3611229aa33ca50a00ec88be87e6ef92592e87d313c152f05d0c7a31ab281152`
+
+Actions-Artefakt:
+- ID `10319439428`
+- outer SHA-256 `cbf72dc81229adf33febca085c43d70a12188880cd62c7aafd3f687cb62f2bab`
+
+Tatsächlich ausgeführt:
+- `unzip -t` PASS;
+- Source-vs-Unpack `diff -qr` PASS;
+- Version 0.2.10-rc7 PASS;
+- PHP-Lint auf Source und entpacktem Paket PASS;
+- SHA-256 PASS;
+- `RC7_EXACT_TESTED_SOURCE_PACKAGE_PASS`;
+- `GLOSSAR_RC7_ARTIFACT_SYNC_PASS`.
+
+Isolierte Ausgabekopie:
+`PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip`
+mit `MANIFEST.md`.
+
+## Was weiterhin NICHT geprüft/freigegeben wurde
+
+- kein realer Pferde-LIVE-Readback von 0.2.10-rc7;
+- keine automatische Löschfreigabe für den Altbestand.
 
 ## Abschlussstatus
 
@@ -95,6 +122,6 @@ Der Workflow endet ausdrücklich mit:
 
 **Klickbarkeitsnachweis im Testsystem: PASS.**
 
-**Paket/Übergabe: BLOCKED bis gated Paket auf exakt gebundenen Bytes vorliegt.**
+**Paket-/Artefaktsynchronisierung: PASS.**
 
 **Pferde-LIVE: OFFEN.**
