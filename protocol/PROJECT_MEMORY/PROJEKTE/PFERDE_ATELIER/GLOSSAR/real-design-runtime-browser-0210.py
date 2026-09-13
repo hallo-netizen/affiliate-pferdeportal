@@ -6,7 +6,7 @@ BASE='http://127.0.0.1:8080'
 async def geom(page):
     return await page.evaluate('''() => {
       const b=s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height,b:r.bottom}};
-      return {primary:b('#primary'),bc:b('.uge-breadcrumbs'),hero:b('.uge-hero')};
+      return {primary:b('#primary'),wrap:b('.site-content > .pftk-breadcrumb-mounted'),bc:b('.site-content > .pftk-breadcrumb-mounted .pftk-content-breadcrumb'),hero:b('.uge-hero')};
     }''')
 
 async def assert_term(page, slug, title, fail, marker=None):
@@ -19,6 +19,10 @@ async def assert_term(page, slug, title, fail, marker=None):
         fail.append(f'{slug}:H1_MISSING')
     elif await h.inner_text()!=title:
         fail.append(f'{slug}:H1_WRONG:{await h.inner_text()}')
+    if await page.locator('.uge-breadcrumbs').count()!=0:
+        fail.append(f'{slug}:OLD_UGE_BREADCRUMB_STILL_PRESENT')
+    if await page.locator('.site-content > .pftk-breadcrumb-mounted').count()!=1:
+        fail.append(f'{slug}:PFERDE_BREADCRUMB_MOUNT_COUNT_WRONG')
     if marker and marker not in await page.content():
         fail.append(f'{slug}:CONTENT_MARKER_MISSING')
 
@@ -34,28 +38,32 @@ async def main():
         text=await page.locator('.uge-hero-copy').inner_text()
         if 'Begriffe schnell finden, fachlich einordnen und verständlich nachschlagen.' in text:
             fail.append('REJECTED_FALLBACK_TEXT_ON_HOME')
+        if not home['wrap'] or not home['bc']:
+            fail.append('HOME_REAL_DESIGN_BREADCRUMB_MISSING')
 
         r=await page.goto(BASE+'/glossar/gesundheit/',wait_until='networkidle')
         if r.status!=200: fail.append(f'CATEGORY_HTTP:{r.status}')
         cat=await geom(page); data['category']=cat
-        if not all(home.values()) or not all(cat.values()):
-            fail.append('BREADCRUMB_GEOMETRY_MISSING')
+        if await page.locator('.uge-breadcrumbs').count()!=0:
+            fail.append('CATEGORY_OLD_UGE_BREADCRUMB_PRESENT')
+        if await page.locator('.site-content > .pftk-breadcrumb-mounted').count()!=1:
+            fail.append('CATEGORY_PFERDE_BREADCRUMB_MOUNT_COUNT_WRONG')
+        if not home['wrap'] or not home['bc'] or not cat['wrap'] or not cat['bc']:
+            fail.append('PFERDE_BREADCRUMB_GEOMETRY_MISSING')
         else:
-            if abs(home['primary']['y']-cat['primary']['y'])>2:
-                fail.append(f'CATEGORY_PRIMARY_TOP_DIFF:{home["primary"]["y"]}:{cat["primary"]["y"]}')
-            if abs(home['bc']['y']-cat['bc']['y'])>2:
-                fail.append(f'CATEGORY_BREADCRUMB_TOP_DIFF:{home["bc"]["y"]}:{cat["bc"]["y"]}')
-            home_gap=home['hero']['y']-home['bc']['b']; cat_gap=cat['hero']['y']-cat['bc']['b']
-            if abs(home_gap-cat_gap)>2:
-                fail.append(f'CATEGORY_BREADCRUMB_HERO_GAP_DIFF:{home_gap}:{cat_gap}')
-        if await page.locator('.uge-breadcrumbs [aria-current="page"]').inner_text()!='Gesundheit':
+            # Exact locked Pferde Design axis: same x/width and same top position.
+            for key in ('x','w','y'):
+                if abs(home['wrap'][key]-cat['wrap'][key])>2:
+                    fail.append(f'CATEGORY_BREADCRUMB_AXIS_{key.upper()}_DIFF:{home["wrap"][key]}:{cat["wrap"][key]}')
+        current=page.locator('.site-content > .pftk-breadcrumb-mounted .pftk-content-breadcrumb-current')
+        if await current.count()!=1 or await current.inner_text()!='Gesundheit':
             fail.append('CATEGORY_BREADCRUMB_CURRENT_WRONG')
         ctext=await page.locator('.uge-hero-copy').inner_text()
         if 'Begriffe schnell finden, fachlich einordnen und verständlich nachschlagen.' in ctext:
             fail.append('REJECTED_FALLBACK_TEXT_ON_CATEGORY')
 
-        # Existing test term: real rendered category link must be clickable and must
-        # survive the deliberately emptied WordPress main loop.
+        # Existing term: real category card click must open a non-white single even
+        # when the normal WP main loop was deliberately emptied by the harness.
         hufbein=page.locator('a[href*="/glossar/begriff/hufbein/"]').first
         if await hufbein.count()!=1:
             fail.append('HUFBEIN_LINK_MISSING')
@@ -63,11 +71,12 @@ async def main():
             await hufbein.click(); await page.wait_for_load_state('networkidle')
             await assert_term(page,'hufbein','Hufbein',fail,'FULL-HUFBEIN-SENTINEL')
             term=await geom(page); data['term']=term
+            if home['wrap'] and term['wrap']:
+                if abs(home['wrap']['x']-term['wrap']['x'])>2 or abs(home['wrap']['w']-term['wrap']['w'])>2:
+                    fail.append('TERM_BREADCRUMB_AXIS_DIFF')
 
-        # New cluster: click from category into Hufrehe, then only through visible
-        # "Verwandte Begriffe" links to Strahlfäule and Hufabszess, then back to
-        # the visible category link. This is the user-facing proof that the new
-        # articles are actually inspectable by clicking, not merely HTTP 200.
+        # New closed cluster: category -> Hufrehe -> related Strahlfäule -> related
+        # Hufabszess -> Glossar category. Every transition is an actual browser click.
         await page.goto(BASE+'/glossar/gesundheit/',wait_until='networkidle')
         hufrehe=page.locator('a[href*="/glossar/begriff/hufrehe/"]').first
         if await hufrehe.count()!=1:
@@ -75,19 +84,19 @@ async def main():
         else:
             await hufrehe.click(); await page.wait_for_load_state('networkidle')
             await assert_term(page,'hufrehe','Hufrehe',fail)
-            rel=page.locator('p:has(strong:text("Verwandte Begriffe")) a[href*="/glossar/begriff/strahlfaeule/"]').first
+            rel=page.locator('.uge-related-links a[href*="/glossar/begriff/strahlfaeule/"]').first
             if await rel.count()!=1:
                 fail.append('HUFREHE_TO_STRAHLFAEULE_RELATED_LINK_MISSING')
             else:
                 await rel.click(); await page.wait_for_load_state('networkidle')
                 await assert_term(page,'strahlfaeule','Strahlfäule',fail)
-                rel2=page.locator('p:has(strong:text("Verwandte Begriffe")) a[href*="/glossar/begriff/hufabszess/"]').first
+                rel2=page.locator('.uge-related-links a[href*="/glossar/begriff/hufabszess/"]').first
                 if await rel2.count()!=1:
                     fail.append('STRAHLFAEULE_TO_HUFABSZESS_RELATED_LINK_MISSING')
                 else:
                     await rel2.click(); await page.wait_for_load_state('networkidle')
                     await assert_term(page,'hufabszess','Hufabszess',fail)
-                    catlink=page.locator('a[href*="/glossar/gesundheit/"]').first
+                    catlink=page.locator('.uge-glossary-category-link a[href*="/glossar/gesundheit/"]').first
                     if await catlink.count()!=1:
                         fail.append('HUFABSZESS_CATEGORY_LINK_MISSING')
                     else:
@@ -100,7 +109,7 @@ async def main():
     if fail:
         for f in fail: print(f)
         raise SystemExit(1)
-    print('UGE0210_CATEGORY_BREADCRUMB_SPACING_MATCH_HOME_PASS')
+    print('UGE0210_PFERDE_BREADCRUMB_AXIS_PASS')
     print('UGE0210_REJECTED_HERO_FALLBACK_ABSENT_PASS')
     print('UGE0210_EXISTING_SINGLE_CLICK_PASS')
     print('UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS')
