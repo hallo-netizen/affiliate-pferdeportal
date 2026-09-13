@@ -2,29 +2,6 @@
 
 Diese Datei gilt repositoryweit für Codex Cloud.
 
-## SYSTEM 4 – isolierte Draft-PR-Eingangstür (TEST ONLY)
-
-Marker: `SYSTEM4_ISOLATED_ROOT_ENTRY_V2`
-
-Auf dem Branch `hobbyroom/system4-true-single-room-v1` gibt es **keine freie Routenwahl**: Der erste ausführbare Befehl ist immer die System-4-Eingangstür.
-
-Lokaler/pregebundener Snapshot:
-`python3 isolated_system4/root_entry.py start <BOUND_SNAPSHOT_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
-
-Realer Codex-Produktionsauftrag: Die exakt gebundene Snapshot-JSON wird im selben ersten Shell-Befehl über stdin übergeben:
-`python3 isolated_system4/root_entry.py start-stdin <WORKSPACE_OUTSIDE_REPO>`
-
-SYSTEM4 branch: DO NOT run control/cloud-entry-gate/cloud_entry.py before or instead of the System-4 root entry.
-
-Für diesen isolierten System-4-Draft-PR gilt ausdrücklich:
-- keine alte STARTMASTER-/H7-/H8-/ACM-/System-3-Orchestrierung als Laufzeitpfad;
-- keine freie Alternativroute;
-- Runtime-Arbeitsraum und materialisierter Snapshot liegen außerhalb des Repositorys;
-- kein Merge, kein Publish und keine Änderung des offiziellen STARTMASTER-State;
-- bei BLOCKED der System-4-Eingangstür sofort stoppen.
-
-**Für jeden anderen Branch gilt diese Ausnahme nicht.** Dann bleibt der nachfolgende bestehende repositoryweite Cloud-Einstieg unverändert zwingend.
-
 ## Zwingender Start
 Vor jeder Suche, Analyse, Dateiöffnung oder Änderung im Projekt MUSS zuerst exakt dieser Befehl ausgeführt werden:
 
