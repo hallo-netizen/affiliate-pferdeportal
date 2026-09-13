@@ -1,110 +1,91 @@
-# SYSTEM 4A — AKTUELLER LOKALER TESTNACHWEIS 2026-09-13
+# SYSTEM 4A — TESTNACHWEIS 2026-09-13
 
-Belegdatei, keine zweite CURRENT_STATE.
+Belegdatei, keine zweite CURRENT_STATE. **Aktueller Status steht ausschließlich in `README.md`.**
 
-## Vergleichsbasis
+## Letzter vollständiger lokaler Beweis vor dem aktuellen Runtime-Rootfix
 
-System 4 PR #238 Head: `89b2e8eeb928f744e8814b2c79966672db2e308a`.
+Am Stand `56ace832c78e3683306c44ae187b4c7d0eb46755` waren lokal bewiesen:
 
-Seit dem vorherigen Prüferstand `edfe6049768db68f85bf3babedce3199538217ef` wurden in System 4 nur zusätzliche Transportdateien ergänzt; der im Realtest ausgeführte Fach-/Design-/LT-/PPM-Prüfercode blieb unverändert.
+- Architektur-/Grenztests: **41/41 PASS**;
+- echter Produktions-Acceptance-Lauf mit LanguageTool 6.8 und PPM 6.7.9: **10/10 PASS**;
+- Same-Article-Repair, 1 / 3 / 25 / 1000 Artikel, Cross-UID-Grenze und Parent-Chat-Readback.
 
-4A verändert ausschließlich `isolated_system4a/**`.
-
-## Lokale Architektur-/Grenztests
-
-Frischer Sammellauf mit Warnings als Fehler:
-
-**41/41 PASS**.
-
-Abgedeckt sind u. a.:
-
-- kompletter Einstieg bis Parent-Chat-Datei;
-- Same-Article-Repair;
-- 1 / 3 / 25 / 1000 Artikel;
-- neue/gemischte Beitragsarten;
-- Managed-Session- und Cross-UID-Grenze;
-- Worker-State-/PASS-/Manifest-/Publish-Injektion BLOCK;
-- Research/Facts/Context/Design/Checker/Repair/Batch BLOCK;
-- JSON-/Inline-Tamper BLOCK;
-- privates `0700 root`-Worker-Quellverzeichnis;
-- Supervisor-Staging dieses privaten Bundles;
-- Authority-Dateien/Symlinks im Worker-Bundle BLOCK;
-- echter Worker-Crash liefert Exit-Code + stderr.
-
-## Echter lokaler Produktions-Acceptance-Lauf
-
-Gebundene reale Abhängigkeiten:
+Gebundene reale Abhängigkeiten dieses historischen Volltests:
 
 - LanguageTool 6.8 JAR SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`;
 - PPM 6.7.9 Paket SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`;
 - `mocks_used=false`.
 
-Produktionslauf nach Worker-Staging-Härtung:
-
-**10/10 PASS**.
-
-Positiv:
+Historischer positiver Pfad:
 
 `Fachinput -> Supervisor-Ingress -> privates 0700-Worker-Bundle -> Supervisor-Staging -> Cross-UID-Worker -> Research -> Facts -> Context -> Draft -> real LT -> Same-Article-Repair -> real LT PASS -> real PPM PASS -> Batch -> V2 -> Parent-Chat byteidentisch`
 
-Negativ korrekt geblockt:
+Historischer positiver Handoff:
 
-1. Same-UID-Produktion;
-2. externes Kontrollmanifest;
-3. direkter ungestagter Cross-UID-Worker unter privatem Pfad;
-4. PASS-/Phase-Injektion;
-5. Fake-`state.json`;
-6. Research-Fail;
-7. Facts-Fail;
-8. Design-Fail;
-9. Parent-Chat-Payload-Tamper.
-
-Finaler positiver Handoff:
-
-- **66.753 Byte**;
+- 66.753 Byte;
 - SHA256 `4f3c3585d1b42f3ca53f1f65bb4bca728a6426527c7eec75c45e2622dd7220ae`;
-- Revision **2**;
+- Revision 2;
 - `publish_allowed=false`.
 
-## Freigegebener Codex-Probelauf und lokale Root-Cause
+## Danach gefundener realer Runtime-Fehler
 
-Einmaliger freigegebener Codex-Probelauf:
+Ein späterer freigegebener Codex-Lauf erreichte:
 
-- Titel: `Pferdeanhänger im Herbst sicher vorbereiten`;
-- Root Entry: PASS;
-- Production Ingress: PASS;
-- Blocker bei erstem Research-Request: `WORKER_EXITED_WITHOUT_RESPONSE`;
-- kein Handoff, kein Publish, kein zweiter Versuch.
+`ROOT_ENTRY_PASS -> PRODUCTION_INGRESS_BOUND -> RESEARCH_REQUEST -> BLOCK`
 
-Lokale Reproduktion:
+Blocker:
 
-- Ursache: Worker-Skript lag unter einem `0700 root`-Tempverzeichnis und war für `nobody` nicht zugänglich;
-- zusätzlich wurde Worker-stderr vom damaligen Host verworfen.
+`WORKER_COMMAND_PATH_NOT_ACCESSIBLE:/root/.pyenv/versions/3.11.12/bin/python3`
 
-Lokale Korrektur:
+Damit war bewiesen, dass der frühere 41/41-/10/10-Test die reale private Interpretergrenze nicht abdeckte.
 
-- Cross-UID-Pfadprüfung vor Workerstart;
-- Exit-Code + stderr bei Workerabbruch;
-- Supervisor-eigenes Staging eines privaten Worker-Bundles in einen kontrollierten read-only Bereich;
-- `state.json`, `authority.key`, `AGENTS.md`, `.git` und Symlinks im Bundle verboten;
-- Cleanup des Supervisor-Stagingbereichs nach Lauf.
+Rootcause:
 
-Diese Korrektur ist im vollständigen 41/41- und 10/10-Lauf enthalten.
+- Worker-Bundle war korrekt gestaged;
+- `from_python_bundle()` übernahm aber weiterhin das Supervisor-`sys.executable`;
+- im echten Codex lag dieses unter privatem `/root/.pyenv/...`;
+- zusätzlich erbte der Worker den Supervisor-`PATH`.
 
-## Beweisgrenze
+## Aktueller Rootfix
 
-Lokal real bewiesen:
+Der aktuelle 4A-Stand trennt nun auch die Runtime-Umwelt:
 
-- Workflow-/State-Autorität außerhalb des Cross-UID-Workers;
-- echte System-4-Prüfer unverändert über 4A;
-- echter LT-/PPM-Weg inklusive Same-Article-Repair;
-- V2-/Parent-Chat-Ausgang byteidentisch;
-- realistisches privates Worker-Staging funktioniert positiv und negativ.
+- kein Supervisor-`sys.executable` für Cross-UID-Worker;
+- kein geerbter Supervisor-`PATH` für Cross-UID-Worker;
+- Worker-Python nur aus festem Systempfad;
+- echter Start-Probeversuch als Ziel-UID vor Verwendung;
+- kein brauchbarer System-Interpreter = harter `WORKER_PYTHON_RUNTIME_UNAVAILABLE`-BLOCK;
+- `runuser` ebenfalls aus festem Supervisor-Systempfad aufgelöst.
 
-Noch offen:
+Neue Regressionen decken insbesondere ab:
 
-- erneuter operativer Codex-/Managed-Agent-Probelauf auf der korrigierten Grenze.
+- privater Interpreter + zugänglicher Worker -> BLOCK;
+- zugänglicher System-Interpreter + zugänglicher Worker -> PASS;
+- Supervisor-PATH mit `/root/.pyenv` -> kein Worker-PATH-Leak;
+- kein zugänglicher System-Python -> BLOCK;
+- privater Workerpfad -> weiterhin BLOCK;
+- Worker-Crash -> weiterhin Exit-Code + stderr.
 
-Dieser Lauf ist **nicht autorisiert**, solange der User ihn nicht ausdrücklich freigibt.
+## Aktuell lokal tatsächlich ausgeführt
 
-Kein Merge, kein Publish.
+Gezielter Root-/Cross-UID-Harness im aktuellen lokalen Testcontainer:
+
+- System-Python `/usr/bin/python3.13` als `nobody` startfähig -> **PASS**;
+- privater Interpreter unter `0700` -> **NEGATIV PASS / geblockt**;
+- kein System-Runtimepfad -> **NEGATIV PASS / geblockt**;
+- privates Supervisor-Python wird nicht übernommen -> **PASS**;
+- Supervisor-PATH wird nicht in den Worker übernommen -> **PASS**.
+
+## Noch nicht neu ausgeführt
+
+Nach dem Rootfix wurden **noch nicht** erneut ausgeführt:
+
+- vollständiger 4A-Sammellauf;
+- echter kompletter LanguageTool-/PPM-Produktions-Acceptance-Lauf;
+- erneuter Codex-Lauf.
+
+Der aktuelle lokale Ausführungscontainer kann den Branch wegen DNS nicht auschecken und enthält die gebundenen LT-/PPM-Binärabhängigkeiten nicht. Deshalb werden die historischen 41/41 und 10/10 ausdrücklich **nicht** auf den neuen Rootfix-Stand übertragen.
+
+Zusätzlich ist vor einer neuen Gesamtfreigabe dieselbe `sys.executable`-Kopplung in den Cross-UID-Testhilfen (`os_boundary_acceptance.py` sowie der alte Workerpfad-Negativfall im Produktions-Acceptance-Test) zu bereinigen, damit die Tests Ursache und Symptom sauber trennen.
+
+**Aktuell: BLOCKED / kein Merge / kein Publish / kein Codex ohne ausdrückliche User-Freigabe.**
