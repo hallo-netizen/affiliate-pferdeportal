@@ -25,39 +25,51 @@ Bewiesen:
 
 Vorhandene System-4-Prüfer werden über einen dünnen Read-only-Adapter direkt aufgerufen; keine neue Fach-/Text-/Design-/Qualitätsregel wurde gebaut.
 
-## FRISCHER SYSTEM-4-VERGLEICH
+## FRISCHER SYSTEM-4-REALRUN
 
-PR #238 / Head bei diesem Stand:
-`8da5a3f45ff42d3fae652d0a64071a9ea10770a4`
+PR #238 / aktueller geprüfter Head:
+`0b3d2acc17b2c32c6d12e677fe9026d3d8c7171a`
 
-System 4 ist inzwischen universell für 1..N und gebundene Beitragsarten ausgelegt. Diese Punkte und der WordPress-Handoff sind kein 4A-Vorteil.
+Erster echter 1-Artikel-Codex-Lauf:
+- Artikel `Putzbox für Pferde richtig auswählen`;
+- Ergebnis **BLOCKED BEFORE SYSTEM-4 INGRESS**;
+- Root-`AGENTS.md` zog Codex vor der System-4-Tür in die alte/offizielle Runtime-Eintrittsstrecke;
+- Blocker `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`;
+- keine fachliche Produktionsstufe gestartet;
+- Zeit bis Block: **281 Sekunden / 4:41 Minuten**.
 
-Der relevante Unterschied bleibt: System 4 lässt Codex weiterhin die persistierten Artikel-`state.json`-Workspaces im eigenen Task führen und die Controller-Schritte selbst aufrufen.
+Bewertung:
+- fail-closed von System 4 = positiv;
+- für `eine Tür / ein Wächter / keine äußere Einflussnahme` = klarer Negativbeweis des aktuellen realen Einstiegs.
+
+Zusätzlich bleibt die dokumentierte PASS-Herkunftslücke im worker-schreibbaren `state.json` relevant.
 
 ## ENTSCHEIDEND GEFUNDENE GRENZE
 
 Ein im selben Codex-Task gestarteter 4A-Supervisor ist **kein unabhängiger Wächter**.
 
-Wenn Codex den Supervisor starten/ersetzen oder den Authority-Key wählen/lesen kann, besitzt Codex wieder die Workflow-Autorität. Dann ist 4A nur zusätzliche Verpackung und wird verworfen.
-
-Verbindliches PASS-Kriterium:
+Verbindliche PASS-Kriterien:
 
 `SUPERVISOR_OUTSIDE_WORKER_AUTHORITY`
 
-Der produktive Supervisor muss außerhalb der Codex-/Agent-Sandbox liegen und exklusiv State, Key, Phase, PASS, Route und Resume-Wahrheit besitzen.
+und nach dem Realrun zusätzlich:
+
+`SUPERVISOR_IS_THE_FIRST_AND_ONLY_WORKFLOW_ENTRY`
+
+Der produktive Supervisor muss außerhalb der Codex-/Agent-Sandbox liegen und exklusiv State, Key, Phase, PASS, Route und Resume-Wahrheit besitzen. Repositoryweite/alte Produktionslogik darf den Worker nicht vor der 4A-Tür auf einen anderen Workflow ziehen.
 
 ## JETZT VERBINDLICHE NEXT ACTION
 
 Nur diesen Punkt prüfen/bauen:
-
 1. minimalen äußeren Supervisor-Betriebsweg definieren;
-2. keine neue Produktionsstufe und keine neue Fachregel;
-3. ein persistenter Codex-/Agent-Arbeiter darf nur enge Arbeitsaufträge erhalten;
-4. State/Key dürfen dem Agenten niemals als Datei/Eingabe zugänglich sein;
-5. vorhandene System-4-Prüfer müssen in vertrauenswürdiger read-only Umgebung unverändert laufen;
-6. FAIL muss denselben Artikel im Supervisor halten und nur `repair` öffnen;
-7. Resume darf nur über authentifizierten Supervisor-Checkpoint erfolgen;
-8. finaler Ausgang bleibt der vorhandene universelle WordPress-Handoff.
+2. Supervisor ist die erste und einzige Produktions-Eingangstür;
+3. keine neue Produktionsstufe und keine neue Fachregel;
+4. ein persistenter Codex-/Agent-Arbeiter darf nur enge Arbeitsaufträge erhalten;
+5. State/Key dürfen dem Agenten niemals als Datei/Eingabe zugänglich sein;
+6. vorhandene System-4-Prüfer müssen in vertrauenswürdiger read-only Umgebung unverändert laufen;
+7. FAIL hält denselben Artikel im Supervisor und öffnet nur `repair`;
+8. Resume nur über authentifizierten Supervisor-Checkpoint;
+9. finaler Ausgang bleibt vorhandener universeller WordPress-Handoff.
 
 Erst wenn diese äußere Grenze praktisch ohne neue Kaskade beweisbar ist, weiter zu realem LT/PPM-E2E.
 
