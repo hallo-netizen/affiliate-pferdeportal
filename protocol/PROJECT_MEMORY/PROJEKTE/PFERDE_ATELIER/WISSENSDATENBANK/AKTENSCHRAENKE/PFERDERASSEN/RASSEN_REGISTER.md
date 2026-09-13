@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 118 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 122 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,20 +10,22 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **118 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **122 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 114er-Stand neu angelegt:
+Seit dem synchronisierten 118er-Stand neu angelegt:
 
-- Mangalarga Marchador
-- Kathiawari
-- Marwari
-- Campolina
+- Swedish Warmblood / Schwedisches Warmblut
+- Oldenburger
+- Marsh Tacky
+- Newfoundland Pony
 
 Wichtige Abgrenzung:
-- Crioulo/Criollo Brasilien wird nicht als zweiter Datensatz dupliziert; der vorhandene Criollo-Datensatz umfasst bereits den südamerikanischen Ursprungsverbund einschließlich Brasilien.
-- Mangalarga Marchador und Mangalarga Paulista sind nicht synonym; Paulista bleibt eigener Kandidat bis zur starken Registerbindung.
+- SWB-Buch-/Registerklassen sind keine getrennten Rassen.
+- Oldenburger bleibt ein eigener Ursprungsstutbuch-Datensatz.
+- Marsh Tacky besitzt eine eigenständige Pedigree-Registry.
+- Newfoundland Pony wird als eigenständige kanadische Ponyrasse geführt.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -52,6 +54,7 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Azteca → registrierte Abstammung entscheidend; nicht jedes passende Kreuzungsprodukt ist automatisch Azteca.
 - Selle Français Originel → Label innerhalb des Selle-Français-Studbooks, keine zweite Rasse.
 - Crioulo Brasilien → Bestandteil des vorhandenen Criollo-Datensatzes, solange die internationalen Ursprungsregister keine belastbare fachliche Trennung als eigene Rasse verlangen.
+- SWB Book I–IV/Register A–C → Registerklassen, keine getrennten Rassen.
 
 ## OFFENE NACHRECHERCHE
 
