@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse, asyncio, json, sys
+import argparse, asyncio, json, os
 from playwright.async_api import async_playwright
 
 parser=argparse.ArgumentParser()
@@ -24,7 +24,10 @@ html,body{{margin:0;padding:0}}body{{font-family:Arial,sans-serif}}.site-content
 async def main():
     failures=[]; measurements={}
     async with async_playwright() as pw:
-        browser=await pw.chromium.launch(headless=True, executable_path='/usr/bin/chromium', args=['--no-sandbox'])
+        launch={'headless':True,'args':['--no-sandbox']}
+        if os.environ.get('CHROMIUM_PATH'):
+            launch['executable_path']=os.environ['CHROMIUM_PATH']
+        browser=await pw.chromium.launch(**launch)
         for width in (1200,900,720,500):
             page=await browser.new_page(viewport={'width':width,'height':1000})
             await page.set_content(html,wait_until='load')
