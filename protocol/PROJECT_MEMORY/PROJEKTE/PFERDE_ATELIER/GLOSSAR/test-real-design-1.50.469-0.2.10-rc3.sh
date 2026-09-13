@@ -17,8 +17,7 @@ assert needle in s
 probe=r'''test "$(docker exec wp wp plugin get affiliate-portal-template-kit/pferde-template-kit.php --field=version --allow-root)" = 1.50.469
 HEALTH_ID=$(docker exec wp wp post list --allow-root --post_type=page --name=gesundheit --field=ID)
 echo "REAL_DESIGN_HEALTH_ID=$HEALTH_ID"
-docker exec wp wp eval --allow-root "$id=$HEALTH_ID; echo 'REAL_DESIGN_AFFILIATE_PAGE_TYPE=' . (method_exists('Pferde_Template_Kit','affiliate_page_type') ? Pferde_Template_Kit::affiliate_page_type($id) : 'NO_METHOD') . PHP_EOL; echo 'UGE_PRIMARY_TARGET='; var_export(UGE_Core::primary_category_target($id)); echo PHP_EOL; echo 'HEALTH_META='; var_export(get_post_meta($id)); echo PHP_EOL;"
-grep -nA100 -B20 'function affiliate_page_type' /var/lib/does-not-exist 2>/dev/null || true
+docker exec wp wp eval --allow-root "\$id=$HEALTH_ID; echo 'REAL_DESIGN_AFFILIATE_PAGE_TYPE=' . (method_exists('Pferde_Template_Kit','affiliate_page_type') ? Pferde_Template_Kit::affiliate_page_type(\$id) : 'NO_METHOD') . PHP_EOL; echo 'UGE_PRIMARY_TARGET='; var_export(UGE_Core::primary_category_target(\$id)); echo PHP_EOL; echo 'HEALTH_META='; var_export(get_post_meta(\$id)); echo PHP_EOL;"
 docker exec wp sh -c "grep -n -A100 -B20 'function affiliate_page_type' /var/www/html/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php || true"
 '''
 s=s.replace(needle,probe,1)
