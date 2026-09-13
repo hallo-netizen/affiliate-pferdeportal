@@ -2,25 +2,25 @@
 
 ## Zweck
 
-Ein einziger äußerer Supervisor ist die einzige Laufzeitautorität. Codex/Worker besitzt weder State noch Route noch PASS.
+Ein einziger äußerer Supervisor ist die einzige Laufzeitautorität. Der Worker besitzt weder State noch Route noch PASS.
 
 ## Eine Tür
 
 Der produktive Einstieg darf **nicht** `FullChainSupervisor.run_full(..., worker_callable, ...)` sein.
 
-Dieser direkte Callable-Weg ist seit 2026-09-13 im Produktionsmodus fail-closed mit:
+Dieser direkte Callable-Weg ist im Produktionsmodus fail-closed mit:
 
 `PRODUCTION_REQUIRES_EXTERNAL_SUPERVISOR_HOST`
 
-Zulässiges Ziel ist ausschließlich:
+Der bewiesene Produktionsweg ist:
 
-`EXTERNAL HOST -> narrow worker transport -> isolated worker -> existing read-only checkers -> exact V2 handoff`
+`gebundener Rohinput -> realcase_production_entry.py -> ExternalSupervisorHost(mode='production') -> Cross-UID Worker -> vorhandene System-4-Prüfer -> exakter V2-Handoff -> Parent-Chat-Readback`
 
 Kein produktiver Aufrufer und kein Worker darf einzelne Phasen setzen oder finalisieren.
 
 ## Interner Ablauf
 
-`Snapshot prüfen -> Kapseln erzeugen -> Research -> Research-Guard -> Facts -> Facts-Guard -> Production Context -> Context-Bindung -> Draft -> Content/Design -> echter FULL-Check -> ggf. Same-Article-Repair -> FULL-Check -> Batch/Querschnitt -> exakter V2-Handoff -> Parent-Chat-Roundtrip -> Readback/Hash`
+`Snapshot prüfen -> Ingress binden -> Research -> Research-Guard -> Facts -> Facts-Guard -> Production Context -> Supervisor-Bindung -> Draft -> Content/Design -> echter FULL-Check -> Same-Article-Repair falls erforderlich -> erneuter FULL-Check -> Batch/Querschnitt -> exakter V2-Handoff -> Parent-Chat-Roundtrip -> Readback/Hash`
 
 ## Autoritäten
 
@@ -39,14 +39,12 @@ Prüfer bleiben die bestehenden System-4-Prüfer read-only.
 
 ## Technische Trennung
 
-Produktiv muss der Worker außerhalb der Supervisor-Autorität laufen. Mindestgrenze:
-- getrennte OS-/Service-Autorität oder gleichwertig harte externe Session-Grenze;
-- Supervisor-State und Authority-Key für Worker nicht lesbar und nicht schreibbar;
-- Worker kann Supervisorprozess/-service nicht ersetzen;
+Produktiv läuft der Worker außerhalb der Supervisor-Autorität:
+- Cross-UID-Prozess;
+- Supervisor-State und Authority-Key für Worker nicht schreibbar;
+- Worker kann keine Phase/PASS/Publish-Autorität zurückgeben;
 - Workerraum enthält keinen schreibbaren Supervisor-State und keine zweite Route;
-- Protokoll akzeptiert ausschließlich den erwarteten Arbeitsinhalt; Phase/PASS/Publish-Injektion wird blockiert.
-
-`os_boundary_acceptance.py` prüft diese Eigenschaft lokal als separaten Autoritätsbeweis. Er ersetzt nicht den vollständigen Produktions-E2E.
+- Protokoll akzeptiert ausschließlich den erwarteten Arbeitsinhalt.
 
 ## Produktionsmodus
 
@@ -55,9 +53,9 @@ Produktionsmodus akzeptiert ausschließlich den realen `System4ReadOnlyChecks`-B
 - LanguageTool 6.8;
 - PPM 6.7.9.
 
-Fehlt die exakte LT-/PPM-Abhängigkeit: fail-closed BLOCKED, niemals PASS.
+Fehlt eine exakte gebundene Abhängigkeit oder weicht ihr Hash ab: fail-closed BLOCKED.
 
-Bis der externe Host tatsächlich gebunden und vollständig geprüft ist, gibt es **keinen zulässigen produktiven 4A-Startweg**.
+Der externe Host ist im aktuellen No-Codex-Produktionsvertrag vollständig gebunden und zweimal Null-bis-Ende reproduziert worden. Beide Läufe erzeugen dieselbe finale Datei bytegleich und feldgleich; Parent-Chat-Rekonstruktion ist jeweils bytegleich zur Enddatei.
 
 ## Testmodus
 
@@ -72,6 +70,8 @@ Final ausschließlich:
 
 Der bestehende `handoff_transport` validiert und kanonisiert die Datei. Danach müssen Parent-Chat-Transport, Rekonstruktion, erneute Validierung und Byte-/SHA256-Readback dieselbe Datei bestätigen.
 
-## Abbruchregel
+## Gültigkeitsregel
 
-Wenn diese Form nicht mit genau einem äußeren Supervisor realisierbar ist oder neue Signer-/Token-/Room-/Receipt-/Package-Kaskaden braucht: 4A stoppen.
+Der aktuelle PASS gilt nur für exakt gebundene Vertrags- und Produktionsbytes. Jede Änderung erzwingt erneut den kompletten Fehlerhistorien-Regressionslauf, positiven und negativen Null-bis-Ende-Lauf sowie den Byte-/Feldgleichheitsbeweis.
+
+Kein Merge. Kein Publish. Kein Codex-Lauf ohne ausdrückliche User-Freigabe mit `Starte Codex`.
