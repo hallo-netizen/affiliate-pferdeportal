@@ -92,10 +92,11 @@ curl -fsS http://127.0.0.1:8080/glossar/ -o /tmp/rc-home
 
 VERSION=$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)
 SCHEMA=$(docker exec wp wp eval --allow-root 'echo get_option(UGE_Core::REWRITE_SCHEMA_OPTION,"");')
-echo "UGE028RC1_FROM_${BASE}_VERSION=$VERSION SCHEMA=$SCHEMA"
+RULE_COUNT=$(docker exec wp wp eval --allow-root '$r=(array)get_option("rewrite_rules",[]);$n=0;foreach(array_keys($r) as $k){if(strpos((string)$k,"glossar")!==false && strpos((string)$k,"begriff")!==false)$n++;}echo $n;')
+echo "UGE028RC1_FROM_${BASE}_VERSION=$VERSION SCHEMA=$SCHEMA TERM_RULES=$RULE_COUNT"
 test "$VERSION" = 0.2.8-rc1
 test "$SCHEMA" = 6
-docker exec wp wp option get rewrite_rules --format=json --allow-root | grep -q 'glossar/begriff'
+test "$RULE_COUNT" -ge 1
 
 # True term renderer, not foreign/blank HTTP 200.
 test "$(curl -sS -o /tmp/rc-term -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufbein/)" = 200
