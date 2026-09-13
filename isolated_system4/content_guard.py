@@ -4,6 +4,7 @@ import hashlib
 import html
 import json
 import re
+from collections import defaultdict
 from difflib import SequenceMatcher
 from typing import Any, Mapping, Sequence
 from urllib.parse import urlparse
@@ -280,23 +281,54 @@ def pairwise_shingle_jaccard(first: str, second: str) -> float:
 
 
 def validate_batch_distinctness(bodies: Sequence[str]) -> dict[str, Any]:
-    _require(isinstance(bodies, Sequence) and len(bodies) >= 2, "BATCH_DISTINCTNESS_INPUT_INVALID")
+    _require(isinstance(bodies, Sequence) and len(bodies) >= 1, "BATCH_DISTINCTNESS_INPUT_INVALID")
+
+    shingle_sets: list[set[tuple[str, ...]]] = []
+    visible_folded: list[str] = []
+    postings: dict[tuple[str, ...], list[int]] = defaultdict(list)
+    empty_groups: dict[str, list[int]] = defaultdict(list)
+
+    for index, body in enumerate(bodies):
+        _require(isinstance(body, str) and body.strip(), f"BATCH_BODY_INVALID:{index}")
+        visible = _visible_text(body).casefold()
+        shingles = _shingles(body)
+        visible_folded.append(visible)
+        shingle_sets.append(shingles)
+        if not shingles:
+            empty_groups[visible].append(index)
+        else:
+            for shingle in shingles:
+                postings[shingle].append(index)
+
+    # Short identical articles have no shingles but must still be rejected as duplicates.
+    for indexes in empty_groups.values():
+        if len(indexes) > 1:
+            raise ContentGuardError(f"BATCH_TEMPLATE_REUSE_BLOCKED:{indexes[0]}:{indexes[1]}:1.0000")
+
+    intersections: dict[tuple[int, int], int] = defaultdict(int)
     maximum = 0.0
     worst_pair: tuple[int, int] | None = None
-    for left in range(len(bodies)):
-        _require(isinstance(bodies[left], str) and bodies[left].strip(), f"BATCH_BODY_INVALID:{left}")
-        for right in range(left + 1, len(bodies)):
-            score = pairwise_shingle_jaccard(bodies[left], bodies[right])
-            if score > maximum:
-                maximum = score
-                worst_pair = (left, right)
-    _require(
-        maximum < MAX_PAIRWISE_SHINGLE_JACCARD,
-        "BATCH_TEMPLATE_REUSE_BLOCKED:"
-        + (f"{worst_pair[0]}:{worst_pair[1]}:{maximum:.4f}" if worst_pair else f"{maximum:.4f}"),
-    )
+    for indexes in postings.values():
+        if len(indexes) < 2:
+            continue
+        for pos, left in enumerate(indexes[:-1]):
+            for right in indexes[pos + 1:]:
+                pair = (left, right)
+                intersections[pair] += 1
+                intersection = intersections[pair]
+                union = len(shingle_sets[left]) + len(shingle_sets[right]) - intersection
+                score = intersection / union if union else 0.0
+                if score > maximum:
+                    maximum = score
+                    worst_pair = pair
+                if score >= MAX_PAIRWISE_SHINGLE_JACCARD:
+                    raise ContentGuardError(
+                        f"BATCH_TEMPLATE_REUSE_BLOCKED:{left}:{right}:{score:.4f}"
+                    )
+
     return {
         "status": "PASS",
+        "article_count": len(bodies),
         "max_pairwise_shingle_jaccard": round(maximum, 6),
         "threshold": MAX_PAIRWISE_SHINGLE_JACCARD,
     }
