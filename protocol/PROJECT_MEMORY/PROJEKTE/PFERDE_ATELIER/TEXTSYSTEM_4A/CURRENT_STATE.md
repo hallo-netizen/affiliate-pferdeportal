@@ -1,111 +1,104 @@
 # TEXTSYSTEM 4A – CURRENT STATE
 
 STAND: 2026-09-13
-STATUS: AKTIV / ISOLIERTER GEGENPROTOTYP / NICHT PRODUKTIONSFREIGEGEBEN
+STATUS: BLOCKED / EXTERNE WÄCHTERGRENZE NOCH NICHT BEWIESEN
 
-## Gesicherte Vergleichsbasis
+## Vergleichsbasis
 
 ### System 4
 - PR #238
 - Branch `hobbyroom/system4-true-single-room-v1`
-- frisch geprüfter Head: `623510bf7a7c968ae24fcb9003cf2f5d12c75bcc`
-- weiterhin isolierter Teststand; kein Produktions-PASS aus dieser Prüfung.
+- frisch geprüfter Head: `8da5a3f45ff42d3fae652d0a64071a9ea10770a4`
+- 1..N, freie gebundene Beitragsart und universeller WordPress-Handoff sind inzwischen System-4-Bestand und kein 4A-Vorteil.
 
 ### System 4A
 - PR #255
 - Branch `hobbyroom/system4a-capsule-v1-20260913`
-- direkt auf den aktuellen System-4-Branch aufgesetzt;
-- isolierter Gegenprototyp, kein Merge/Publish.
+- aktueller 4A-Head bei diesem Stand: `a740d24f3e69270ec732f45d6448eb609e2a50ee`
+- direkt auf System 4 aufgesetzt; kein Merge/Publish.
 
-## Entscheidung 4 vs. 4A – korrigierter Stand
+## Einziger legitimer Unterschied 4A
 
-Die vorherige Entscheidung **`4A_STANDALONE_VORERST_VERWORFEN`** ist durch neue technische Evidenz überholt.
+4A bleibt ausschließlich wegen dieser Frage offen:
 
-4A bleibt **offen**, aber nur wegen genau eines möglichen irreduziblen Unterschieds:
+> **Kann der Workflow-State technisch außerhalb der Verfügungsgewalt des Codex-/Workers liegen?**
 
-> **Wer besitzt den laufenden Workflow-State?**
+System 4 lässt Codex weiterhin im selben Task die `state.json`-Workspaces führen und die einzelnen Controller-Schritte aufrufen. Damit besitzt Codex die persistierten Workflow-State-Dateien mit.
 
-Der aktuelle reale System-4-Auftrag lässt Codex im selben Task die Artikel-Workspaces/`state.json`-Dateien führen und die einzelnen Controller-Kommandos selbst aufrufen. `controller.py` liest diesen persistierten State bei jedem Schritt erneut. Der normale Hash schützt nur den `immutable_core` (`contract`, Snapshot, Batch, Artikel); der mutable Gesamtzustand ist kein ausschließlich von einem außerhalb des Workers liegenden Wächter authentifizierter Zustand.
+4A versucht dagegen:
+- Supervisor besitzt State/Phase/Route/PASS allein;
+- Codex erhält nur den gerade erlaubten Fachauftrag;
+- Worker-Rückgabe erlaubt nur Arbeitsinhalt;
+- Prüfer entscheiden nur PASS/FAIL/Findings;
+- FAIL bleibt derselbe Artikel und öffnet ausschließlich Repair;
+- Checkpoint ist HMAC-authentifiziert.
 
-Das ist ausdrücklich **kein bewiesener kompletter Release-Bypass**. Es ist eine reale äußere Einflussfläche auf den Workflow-State und damit für die Zielanforderung „eine Tür, ein Wächter“ relevant.
+## V3-Kapselkern – realer lokaler Test
 
-## 4A-Prototyp – aktueller Architekturbeweis
+Erster V3-Lauf: **15/16 PASS**. Dabei wurde ein reiner Testfixture-Fehler gefunden; der Controller wurde nicht geändert.
 
-Der Gegenprototyp besitzt einen einzigen internen `CapsuleController`:
-- echter Workflow-State bleibt innerhalb des Supervisors;
-- außen existieren nur `capsule_id`, enger Arbeitsauftrag und read-only Status;
-- Worker/Codex darf ausschließlich Arbeitsinhalt zurückgeben;
-- Steuerfelder wie `phase`, `publish_allowed`, Route oder PASS sind keine zulässige Worker-Rückgabe;
-- Prüfer geben nur PASS/FAIL + Hash/Findings zurück;
-- FAIL öffnet ausschließlich Same-Article-Repair;
-- Crash-/Resume-Checkpoint ist HMAC-authentifiziert;
-- veränderter Checkpoint blockiert;
-- `publish_allowed=false` besitzt keine externe Eingabefläche.
+Nach ausschließlicher Korrektur des Tests: **16/16 PASS**.
 
-Lokal auf dem Prototyp ausgeführt:
-- **13/13 Architekturtests PASS**;
-- automatische Supervisorfolge `research → facts → draft → fullcheck`;
-- Worker-Steuerfeld-Injektion BLOCK;
-- Same-Article-Repair PASS;
+Bewiesen im V3-Kern:
+- Statuskopie verändert echten State nicht;
+- keine externe Publish-Eingabefläche;
+- keine Phasensprünge;
+- falscher Prüfer-Hash öffnet kein Gate;
 - manipulierter Checkpoint BLOCK;
-- falscher Prüfer-Hash BLOCK;
-- 1.000 unabhängige Mock-Kapseln ohne Zustandsvermischung PASS.
+- Resume exakt am gebundenen Schritt;
+- Same-Article-Repair;
+- Worker-Injektion von `phase`/`publish_allowed` BLOCK;
+- Supervisor führt Route automatisch;
+- Batch nur aus ARTICLE_PASS;
+- 1.000 unabhängige Kapseln ohne Zustandsvermischung.
 
-Diese Tests beweisen **nur die Architektur**, nicht Inhalt, Design, PPM/LT oder Produktionsreife.
+**4A V3 KAPSELKERN: PASS 16/16.**
 
-## Kein 4A-Entscheidungskriterium
+Kein Produktions-PASS daraus ableiten.
 
-Ausdrücklich **nicht** als Vorteil von 4A gewertet:
-- frühere feste 7er-Bindung;
-- frühere feste `Beratung`-Bindung;
-- WordPress-Handoff.
+## Vorhandene Prüfer
 
-Diese Punkte sind/werden in System 4 selbst bereinigt.
+4A besitzt einen dünnen Read-only-Adapter, der keine eigene Fach-/Design-/Qualitätsregel enthält und direkt die vorhandenen System-4-Module aufruft:
+- Research/Facts/Fact-Pack/Article/Repair/Batch aus `content_guard`;
+- Design aus `design_guard`;
+- Context/FULL aus `production_checks`;
+- Wiederholungsprüfung aus `batch_repetition_guard`.
 
-## WordPress – bereits frisch geklärt
+Der komplette reale LT/PPM-E2E über diesen Adapter ist noch nicht bewiesen.
 
-Der reale Importer `Portal SEO Editorial Plan Compiler 0.28.23` besitzt bereits den generischen Zielvertrag `SYSTEM4_WORDPRESS_HANDOFF_V1`:
-- mindestens 1 Artikel, keine feste Import-Obergrenze;
-- `article_type` nicht auf `Beratung` festgelegt;
-- alle Artikel vor dem ersten Write vollständig preflight-geprüft;
-- Draft-only;
-- Readback nach Write;
-- Rollback bei Abweichung;
-- `publish_allowed=false`.
+## Entscheidend neu gefundene Grenze
 
-Quelle/Details: `WORDPRESS_HANDOFF.md`.
+Ein HMAC im selben Codex-Arbeitsbereich ist **kein unabhängiger Wächter**.
 
-4A baut **keine neue WordPress-Schnittstelle**.
+Wenn Codex den produktiven Supervisor selbst starten, dessen Authority-Key wählen/lesen oder einen Ersatzcontroller starten kann, besitzt Codex faktisch wieder die Workflow-Autorität. Dann hat 4A keinen ausreichenden strukturellen Vorteil gegenüber System 4.
 
-## Inhalt / Design / Qualität – unverändert
+Darum ist für 4A verbindlich:
 
-4A darf ausschließlich dieselben vorhandenen Autoritäten READ-ONLY verwenden:
-- bestehende Textmaschine/Fachregeln;
-- `content_guard`;
-- `design_guard`;
-- PPM 6.7.9;
-- LanguageTool 6.8 / Bestand 43;
-- PSERC/PSTE/SEO-/Link-/Tabellen-/Metadatenregeln;
-- vorhandene Querschnitts-/Wiederholungsprüfung;
-- WordPress-Plugin 0.28.23.
+`SUPERVISOR_OUTSIDE_WORKER_AUTHORITY`
 
-Wenn 4A dafür neue Fach-/Design-/Qualitätsregeln oder Ersatzprüfer benötigt: **4A verwerfen**.
+Der produktive Supervisor muss außerhalb der Codex-/Agent-Sandbox laufen und exklusiv State, Key, Phase, PASS, Route und Resume-Wahrheit halten. Codex darf ausschließlich enge Fachaufträge erhalten und Arbeitsinhalt zurückgeben.
 
-## Nächster Entscheidungsbeweis
+Die harte Definition liegt in:
+`isolated_system4a/AUTHORITY_BOUNDARY.md` auf PR #255.
 
-Noch offen und jetzt ausschließlich relevant:
-1. 4A direkt gegen den aktuellen System-4-Head betreiben;
-2. vorhandene echte System-4-Prüfer unverändert READ-ONLY in den Supervisor einbinden;
-3. Supervisor-Autorität real vom Codex/Worker trennen;
-4. Research → Facts → Production Context → Draft → FULL-Check → Same-Article-Repair mit demselben Fach-/Design-/Qualitätsniveau beweisen;
-5. vorhandene Querschnittsprüfung einbinden;
-6. exakt `SYSTEM4_WORDPRESS_HANDOFF_V1` erzeugen;
-7. danach real 1/3/25/1000 und mehrere bereits freigegebene Beitragsarten positiv/negativ prüfen.
+## Aktueller Blocker
+
+`EXTERNAL_SUPERVISOR_AUTHORITY_BOUNDARY_NOT_YET_PROVEN`
+
+Bis dieser Punkt real bewiesen ist:
+- keine weitere Text-/Design-/Prüflogik bauen;
+- keinen neuen Handoff/Signer/Receipt/Room/Package-Weg bauen;
+- keinen WordPress-Umbau bauen;
+- keine Produktionsfreigabe.
+
+## Kritischer Preis von echtem 4A
+
+Echte Trennung benötigt einen äußeren Laufzeitbaustein, der Codex/Agent aufruft und State/Key selbst hält. Das erhöht Betriebs- und Wartungskomplexität gegenüber System 4.
+
+Der Vorteil wäre echte Workflow-Autorität außerhalb von Codex; der Nachteil ist dieser zusätzliche externe Runtime-Baustein.
 
 ## Abbruchschwelle
 
-Wenn die reale Trennung Supervisor ↔ Codex nur durch neue Signer-, Token-, Room-, Receipt- oder Package-Kaskaden möglich wäre, wird 4A **sofort beendet**.
+Wenn die äußere Supervisor-Grenze nur durch neue Signer-, Token-, Room-, Receipt- oder Package-Kaskaden erreichbar ist: **4A sofort stoppen.**
 
-Dann wird die brauchbare Härtungsidee in Konzept 4 übernommen statt ein fünftes System zu bauen.
-
-Kein Produktions-PASS ableiten.
+Dann werden die brauchbaren Härtungsideen in System 4 übernommen statt ein fünftes System zu bauen.
