@@ -20,13 +20,22 @@ def _class_tokens(attrs: str) -> set[str]:
     return {token for token in re.split(r'\s+', match.group(2).strip()) if token}
 
 
-def validate_design_neutrality(article_html: str, article_type: str) -> dict[str, Any]:
-    """Fail-closed guard for the already-existing Pferde-Atelier content/design contract.
+def article_type_class(article_type: str) -> str:
+    """Derive the existing ppm-type-* selector convention without an article-type allowlist."""
+    value = article_type.strip().casefold()
+    value = value.replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+    value = re.sub(r'[^a-z0-9]+', '-', value).strip('-')
+    _require(bool(value), 'DESIGN_ARTICLE_TYPE_TOKEN_INVALID')
+    return 'ppm-type-' + value
 
-    This function never rewrites HTML. It only blocks article HTML that would bypass the
-    already-bound production/design selectors. The rules mirror the existing PPM/table
-    contract and the documented August design failure: no inline/global styling payload,
-    canonical article classes, and canonical table selector classes.
+
+def validate_design_neutrality(article_html: str, article_type: str) -> dict[str, Any]:
+    """Fail-closed guard for the existing Pferde-Atelier content/design contract.
+
+    No article-type allowlist lives here. The authoritative PPM/content checks decide
+    whether a given article type is valid. This guard only verifies generic immutable
+    design boundaries and the deterministic ppm-type-* binding for the supplied type.
+    It never rewrites HTML.
     """
     _require(isinstance(article_html, str) and article_html.strip(), 'DESIGN_BODY_EMPTY')
     _require(isinstance(article_type, str) and article_type.strip(), 'DESIGN_ARTICLE_TYPE_MISSING')
@@ -42,7 +51,7 @@ def validate_design_neutrality(article_html: str, article_type: str) -> dict[str
     root_attrs = root.group(1)
     root_classes = _class_tokens(root_attrs)
     _require('ppm-generated' in root_classes, 'DESIGN_PPM_GENERATED_CLASS_MISSING')
-    expected_type_class = 'ppm-type-' + article_type.strip().casefold()
+    expected_type_class = article_type_class(article_type)
     _require(expected_type_class in root_classes, 'DESIGN_ARTICLE_TYPE_CLASS_MISSING:' + expected_type_class)
     type_attr = re.search(r'(?is)\bdata-article-type\s*=\s*(["\'])(.*?)\1', root_attrs)
     _require(type_attr is not None and type_attr.group(2).strip() == article_type.strip(), 'DESIGN_ARTICLE_TYPE_ATTRIBUTE_MISMATCH')
@@ -56,15 +65,15 @@ def validate_design_neutrality(article_html: str, article_type: str) -> dict[str
         _require('comparison-table' in classes, f'DESIGN_TABLE_COMPARISON_CLASS_MISSING:{table_count - 1}')
         _require(re.search(r'(?is)\bstyle\s*=', attrs) is None, f'DESIGN_TABLE_INLINE_STYLE_FORBIDDEN:{table_count - 1}')
 
-    # Documented existing Beratung design uses H2 for article section headings. The bad
-    # live run proved that additional H3 headings changed visible styling. Do not repair
-    # or restyle them here; block before WordPress instead.
+    # Known type-specific design constraints remain guards, not an allowlist.
+    # Unknown/new article types are not rejected here merely because System 4 has not seen them before.
     if article_type.strip().casefold() == 'beratung':
         _require(re.search(r'(?is)<h[13456]\b', article_html) is None, 'DESIGN_BERATUNG_HEADING_LEVEL_FORBIDDEN')
 
     return {
         'status': 'PASS',
         'article_type': article_type.strip(),
+        'article_type_class': expected_type_class,
         'table_count': table_count,
         'content_mutation_performed': False,
         'design_mutation_performed': False,
