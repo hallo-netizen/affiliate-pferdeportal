@@ -4,82 +4,100 @@ STAND: 2026-09-13
 ROLLE: AUTORITATIVE FEHLERQUELLE FÜR DAS PFERDE-ATELIER-GLOSSAR
 
 ## GLOSSAR-FE-001 – Abstand oberhalb Hero zu groß
-STATUS: KANDIDAT 0.2.7 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
+STATUS: LIVE PASS / 2026-09-13
 
-BEFUND:
-Auf der Glossar-Startseite war zusätzlicher Astra-Desktopabstand oberhalb des Hero sichtbar.
+NUTZER-READBACK:
+Abstand nach oben ist mit 0.2.7 korrekt.
 
-KANDIDAT-FIX:
-Nur auf `body.uge-glossary-home` wird der zusätzliche `#primary`-Top-Margin entfernt. Keine globale Astra-Regel.
-
-NACHWEIS:
-Run `34749231699` Fresh + Update PASS; exakter 0.2.7-ZIP lokal erneut geprüft.
+Keine weitere Änderung an diesem Punkt ohne neue Regression.
 
 ## GLOSSAR-FE-002 – Hero-Bild nicht responsive
-STATUS: KANDIDAT 0.2.7 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
+STATUS: LIVE FAIL / BLOCKER
+
+NUTZER-READBACK:
+0.2.7 ist real nicht responsiv.
+
+HART REPRODUZIERT:
+Der ausgelieferte Code hält oberhalb 720px den Hero auf `min-height:360px` und das Bild absolut auf `height:100%`. Erst unter 720px greift `height:auto`.
+
+Der frühere Acceptance-Test war unzureichend: Er prüfte nur CSS-Zeichenfolgen und keine realen Browsermaße.
+
+DIAGNOSE:
+Run `34749713877`, Job `103703878642` → Marker `UGE_RESPONSIVE_GAP_REPRODUCED`.
+
+## GLOSSAR-FE-003 – AJAX-Suche Frontenddarstellung kaputt
+STATUS: LIVE FAIL / ROOTCAUSE TECHNISCH REPRODUZIERT / BLOCKER
+
+NUTZER-READBACK:
+AJAX-Trefferliste liegt falsch über dem Hero statt direkt am Suchfeld.
+
+ROOTCAUSE:
+`render_search_tools()` gibt `.uge-search-suggestions` außerhalb des positionierten `.uge-search-form` aus. Gleichzeitig ist `.uge-search-suggestions` absolut positioniert, ohne einen passenden positionierten Container. Die JSON-Antwort kann korrekt sein, obwohl die sichtbare Suche kaputt ist.
+
+Der frühere AJAX-Test prüfte nur `admin-ajax.php`-JSON und nicht die sichtbare Browserposition.
+
+DIAGNOSE:
+Run `34749713877`, Job `103703878642` → Marker `UGE_AJAX_OVERLAY_BUG_REPRODUCED`.
+
+## GLOSSAR-ROUTE-004 – Einzelbegriffe liefern keine echte Glossarseite
+STATUS: LIVE FAIL / UPDATE-PFAD-FEHLER REPRODUZIERT / BLOCKER
+
+NUTZER-READBACK:
+Links auf Einzelartikel funktionieren nicht.
+
+HART REPRODUZIERT:
+Der bisherige Hardtest prüfte 0.2.5 → 0.2.7. Der reale, durch unsere Übergaben mögliche Pfad 0.2.6 → 0.2.7 wurde nicht geprüft.
+
+0.2.6 und 0.2.7 verwenden beide Rewrite-Schema `5`. Ist der Rewrite-Zustand unter 0.2.6 bereits falsch, erkennt 0.2.7 keinen Schemawechsel und führt keinen erzwungenen Rewrite-Neuaufbau aus.
+
+Im Diagnose-Run wurde unter 0.2.6 bei gespeichertem Schema 5 der Glossar-Rewritezustand gezielt beschädigt und danach über den echten WordPress-Updater auf 0.2.7 aktualisiert. Ergebnis: Schema bleibt 5 und heilt nicht. Der Einzelbegriff liefert danach zwar HTTP 200, aber **kein** `<article class="uge-single-wrap">` – damit ist der frühere reine HTTP-Status als falscher Sicherheitsbeleg widerlegt.
+
+DIAGNOSE:
+Run `34749713877`, Job `103703878642` → `UGE_027_AFTER_026_TERM_HTTP=200` + `UGE_026_TO_027_UNCHANGED_SCHEMA_BUG_REPRODUCED`.
+
+## GLOSSAR-ROUTE-005 – Kategorieseiten erreichen nicht den echten Kategorie-Renderer
+STATUS: LIVE FAIL / UPDATE-PFAD-FEHLER REPRODUZIERT / BLOCKER
+
+NUTZER-READBACK:
+Kategorieseiten erscheinen identisch zur Startseite.
+
+HARTER GEGENBELEG:
+Im sauberen Runtimezustand ist die Kategorieausgabe eindeutig verschieden von der Startseite: Kategorie enthält `.uge-category-head` und enthält weder `.uge-hero` noch `.uge-tools`.
+
+Wenn live die Startseite erscheint, erreicht der Request den Kategorie-Renderer nicht korrekt.
+
+Im reproduzierten 0.2.6-Schema-5-Fehlerzustand und anschließendem Update auf 0.2.7 heilt der Rewritezustand nicht; `/glossar/gesundheit/` liefert im Diagnosefall HTTP 301 statt der Kategorieausgabe.
+
+DIAGNOSE:
+Run `34749713877`, Job `103703878642` → Marker `UGE_CLEAN_CATEGORY_DISTINCT_PASS`, danach `UGE_027_AFTER_026_CAT_HTTP=301` und `UGE_026_TO_027_UNCHANGED_SCHEMA_BUG_REPRODUCED`.
+
+## GLOSSAR-FE-006 – Frühere Testumgebung war kein echter Design-Integrationstest
+STATUS: TESTLÜCKE BESTÄTIGT / MUSS VOR NÄCHSTER ABNAHME GESCHLOSSEN WERDEN
 
 BEFUND:
-Mobile Hero-Darstellung arbeitete mit fester Höhe `240px`.
+`exact-0.2.6-test/02_boot.sh` installierte real WordPress, MySQL und Astra, ersetzte das Pferde-Designplugin aber durch einen kleinen selbstgebauten `Pferde_Template_Kit`-Stub.
 
-KANDIDAT-FIX:
-Responsive Regel mit `width:100%`, `max-width:100%`, `height:auto`, `aspect-ratio:16/9`, `object-fit:cover`.
+Folge:
+Ein PASS dieses Runners darf nicht mehr als echter Pferde-Design-Integrations-PASS bezeichnet werden.
 
-NACHWEIS:
-Run `34749231699`; Negativprüfung bestätigt, dass die alte feste Mobile-Höhe im Kandidaten nicht mehr aktiv ist.
-
-## GLOSSAR-ROUTE-003 – Einzelbegriffe/Artikel liefern weiße Seite
-STATUS: FEHLERKLASSE TECHNISCH ABGESICHERT / EXAKTE LIVE-URSACHE NICHT BEWIESEN / LIVE-SICHTPRÜFUNG OFFEN
-
-BEFUND:
-Vom Nutzer beobachtet: Links auf einzelne Glossarbegriffe führten zu weißen Seiten.
-
-WICHTIG:
-Der konkrete Live-Zustand wurde nicht direkt ausgelesen. Deshalb keine behauptete Live-Rootcause.
-
-HARTER REPRODUKTIONSNACHWEIS:
-Im Upgrade-Test wurde unter 0.2.5 gezielt die Einzelbegriff-Rewrite-Regel entfernt. Danach war `/glossar/begriff/hufbein/` 404, während Schema 4 gespeichert blieb.
-
-REPARATURWEG:
-0.2.7 enthält Rewrite-Schema 5. Der echte WordPress-Plugin-Updater überschreibt 0.2.5 mit 0.2.7. Ein möglicher unmittelbar noch alter Apache-Opcode wird sichtbar protokolliert; nach normaler OPcache-Revalidierung muss Schema 4 → 5 wechseln und die Rewrite-Regel neu aufgebaut sein.
-
-POSITIV:
-Danach liefert der Einzelbegriff 200 + echtes `<article class="uge-single-wrap">` + erwarteten Begriffinhalt.
-
-NEGATIV:
-Nicht vorhandener Begriff = 404; Entwurf = 404; Legacy-URL = 301; normale WordPress-Beiträge bleiben unverändert; Kartenlinks müssen echten Glossar-Artikelinhalt liefern und dürfen nicht nur HTTP 200 ergeben.
-
-NACHWEIS:
-Run `34749231699`, Job `103702569602`.
-
-## GLOSSAR-FE-004 – Breadcrumb auf Kategorieseiten falsch positioniert/dargestellt
-STATUS: KANDIDAT 0.2.7 TECHNISCH PASS / LIVE-SICHTPRÜFUNG OFFEN
-
-BEFUND:
-Glossar-Breadcrumb lag auf der eigenen 1320px-Glossarachse und wich vom Pferde-Atelier-Standard ab.
-
-KANDIDAT-FIX:
-Breadcrumb folgt der Pferde-Atelier-Achse `--pftk-breadcrumb-axis-width` mit Fallback `900px` und der gebundenen Typografie.
-
-DESIGN-ABGLEICH:
-Vollständiger Designstand 1.50.469 wurde lokal auf Glossar-relevantes Verhalten geprüft. Der dokumentierte Live-Stand 1.50.472 verändert gegenüber 1.50.469 laut Design-Master weder CSS noch Breadcrumb, Bild, Karten oder Publish-Verhalten.
-
-NACHWEIS:
-Run `34749231699` + lokaler exakter 0.2.7-ZIP-Check.
+Pflicht vor nächster Plugin-Ausgabe:
+- tatsächliches Pferde-Designplugin in den Integrationslauf;
+- sichtbare Browserprüfung der AJAX-Position;
+- echte Browserbreiten für Hero-Responsivität;
+- Kategorie muss echten Kategorie-Renderer liefern und Startseitenmarker negativ ausschließen;
+- Einzelbegriff muss echtes Glossar-Artikelmarkup/Inhalt liefern;
+- Updatepfade von allen tatsächlich ausgegebenen Vorgängern, insbesondere 0.2.6 und 0.2.7, müssen geprüft werden.
 
 ## ÜBERGREIFENDER STATUS
 
-Aktueller technischer Übergabekandidat:
-`Universal Glossary Engine 0.2.7`.
+0.2.7: **BLOCKED / NICHT VERWENDEN / KEINE ABNAHME**.
 
-0.2.6 ist Entwicklungs-/Testhistorie und kein aktueller Übergabekandidat.
+0.2.6: historische Zwischenversion, ebenfalls nicht verwenden.
 
-Branch:
+Aktiver Diagnosebranch:
 `hobbyroom/glossar-027-release-hardtest-20260913`.
 
-Gebundener Run:
-`34749231699`.
+Autoritativer Live-Fail-Diagnoselauf:
+Run `34749713877`, Job `103703878642`.
 
-Innerer Plugin-ZIP SHA-256:
-`e9c32fc64db3c64c3b85e0d2692ff200e8f6d60e5827d7ab514657adff2ae831`.
-
-Kein Pferde-Atelier-LIVE-PASS aus diesen isolierten Tests ableiten. Die vier Punkte benötigen nach Installation des exakt hashgebundenen 0.2.7-Kandidaten noch reale Sicht-/Funktionsprüfung im Pferde Atelier.
+Kein neues Plugin ausgeben, bevor die vier realen FAILs im neuen Acceptance-System zuerst ROT reproduziert und anschließend mit minimalem Fix GRÜN bewiesen sind.
