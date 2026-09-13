@@ -7,117 +7,126 @@ ROLLE: AUTORITATIVE FEHLERQUELLE FÜR DAS PFERDE-ATELIER-GLOSSAR
 STATUS: LIVE PASS / 2026-09-13
 
 NUTZER-READBACK:
-Abstand nach oben war bereits mit 0.2.7 korrekt.
-
-0.2.8 enthält keinen neuen Eingriff in diesen Punkt; Regression ist im finalen Hardtest grün.
-
-Keine weitere Änderung ohne neuen realen Befund.
+Der obere Abstand ist korrekt. 0.2.9 verändert diesen Punkt nicht; Regression bleibt grün.
 
 ## GLOSSAR-FE-002 – Hero-Bild nicht responsive
-STATUS: 0.2.7 LIVE FAIL / 0.2.8 TECHNISCHER FIX PASS / LIVE-READBACK 0.2.8 OFFEN
+STATUS: 0.2.8 LIVE FAIL / 0.2.9 TECHNISCHER FIX PASS / LIVE-READBACK 0.2.9 OFFEN
 
-NUTZER-READBACK 0.2.7:
-real nicht responsiv.
+NUTZER-READBACK 0.2.8:
+„Bild höher geworden aber kein responsive.“
 
-ROOTCAUSE-KLASSE HART REPRODUZIERT:
-0.2.7 hielt oberhalb 720px den Hero auf fester 360px-/Absolute-Layoutlogik. Der frühere Acceptance-Test prüfte nur CSS-Zeichenfolgen und keine realen Browsermaße.
+KORREKTUR 0.2.9:
+Das Bild selbst ist der Größenanker: normale responsive Bildgeometrie mit `width:100%` und `height:auto`; keine künstliche feste Bildhöhe und kein erzwungener 5:2-Hero-Container.
 
-0.2.8 TECHNISCH:
-Hero/Bild auf proportionale Skalierung umgestellt. Browsermessung unter echtem Design 1.50.469 bei 1200 / 900 / 720 / 500 px PASS.
+Echter Browser unter realem Design 1.50.469 misst:
+- 1200px Viewport → Bild 1096 × 438.39
+- 900px → 796 × 318.39
+- 720px → 664 × 265.59
+- 500px → 444 × 177.59
 
-Finaler Beleg:
-Run `34755984363`, Browser `103720316319`, Real Design `103720316084`.
+Natural image: 1400 × 560. Gerendertes Verhältnis bleibt gleich.
 
-**Nicht geschlossen**, bis realer Pferde-Live-Readback mit exakt 0.2.8 PASS meldet.
+BELEG:
+Run `34757795593`, Real-Design Job `103725094378` → `REAL_DESIGN_029_TRUE_RESPONSIVE_IMAGE_PASS`.
 
-## GLOSSAR-FE-003 – AJAX-Suche Frontenddarstellung kaputt
-STATUS: 0.2.7 LIVE FAIL / 0.2.8 TECHNISCHER FIX PASS / LIVE-READBACK 0.2.8 OFFEN
+**Live nicht geschlossen**, bis Nutzer 0.2.9 real bestätigt.
 
-NUTZER-READBACK 0.2.7:
-AJAX-Trefferliste lag falsch über dem Hero statt direkt am Suchfeld.
+## GLOSSAR-FE-003 – AJAX-Suche Frontenddarstellung
+STATUS: 0.2.7 LIVE FAIL / 0.2.8 NUTZER HAT HIER KEINEN NEUEN FAIL GEMELDET / 0.2.9 REGRESSION PASS
 
-ROOTCAUSE HART REPRODUZIERT:
-`.uge-search-suggestions` lag außerhalb des positionierten `.uge-search-form`, obwohl die Trefferliste absolut positioniert war. Der alte Test bewies nur die JSON-Antwort.
+0.2.9 prüft weiterhin reale Eingabe, Treffer und sichtbare Geometrie auf 1200/900/720/500.
 
-0.2.8 TECHNISCH:
-Treffercontainer ist an das Suchformular gebunden. Der echte Browserlauf tippt eine reale Suche ein, prüft Trefferinhalt sowie x/y/Breite der sichtbaren Trefferbox auf 1200 / 900 / 720 / 500 px.
+BELEG:
+Run `34757795593`, Job `103725094378` → `REAL_DESIGN_029_AJAX_PASS`.
 
-Finaler Beleg:
-Run `34755984363`, Real Design `103720316084` → `REAL_DESIGN_AJAX_PASS`.
+## GLOSSAR-ROUTE-004 – Einzelbegriffe / Links laufen ins Leere
+STATUS: 0.2.8 LIVE FAIL / 0.2.9 ROUTING-HARDLOCK TECHNISCH PASS / LIVE-READBACK OFFEN
 
-**Nicht geschlossen**, bis realer Pferde-Live-Readback mit exakt 0.2.8 PASS meldet.
+NUTZER-READBACK 0.2.8:
+„Einzelartikel laufen immer noch ins Leere.“
 
-## GLOSSAR-ROUTE-004 – Einzelbegriffe liefern keine echte Glossarseite
-STATUS: 0.2.7 LIVE FAIL / 0.2.8 TECHNISCHE REPARATUR PASS / LIVE-READBACK 0.2.8 OFFEN
+ENTSCHEIDENDE NEUE ABSICHERUNG:
+Schema-Bump allein reicht nicht mehr als Beweis. 0.2.9 besitzt zusätzlich einen direkten `parse_request`-Binder für:
+- `/glossar/begriff/{slug}/`
+- `/glossar/{gruppe}/`
 
-NUTZER-READBACK 0.2.7:
-Links auf Einzelbegriffe funktionierten nicht.
+Der Hardtest löscht nach Installation **alle gespeicherten Glossar-Rewrite-Regeln**, während Schema 7 bereits als aktuell gespeichert bleibt. Damit kann kein weiterer Schema-Upgrade-Lauf den Test heimlich retten. Trotzdem müssen echte Kategorie- und Begriff-URLs funktionieren.
 
-FEHLERKLASSE HART REPRODUZIERT:
-Der frühere Hardtest hatte den real möglichen Pfad 0.2.6 → 0.2.7 ausgelassen. 0.2.6 und 0.2.7 verwenden beide Rewrite-Schema 5. Ein gezielt beschädigter Schema-5-Rewritezustand wurde beim Update auf 0.2.7 deshalb nicht zwingend neu aufgebaut. Außerdem wurde bewiesen, dass HTTP 200 allein kein gültiger Einzelbegriff-Nachweis ist.
+Zusätzlich klickt der Browser den tatsächlich gerenderten Hufbein-Link auf der Kategorie und verlangt anschließend:
+- richtige Ziel-URL;
+- genau ein `article.uge-single-wrap`;
+- echten Hufbein-Inhalt/Sentinel.
 
-0.2.8 TECHNISCH:
-Rewrite-Schema 6 erzwingt den nötigen Neuaufbau. Sowohl 0.2.6 → 0.2.8 als auch 0.2.7 → 0.2.8 wurden aus gezielt zerstörtem Rewritezustand über den WordPress-Updateweg geprüft. Die Einzelroute muss danach HTTP 200 **plus** `<article class="uge-single-wrap">`, korrektes H1 und erwarteten Inhalt liefern.
+Native eingeloggte Draft-Preview wird vom Direktbinder nicht übernommen und bleibt PASS.
 
-Finaler Beleg:
-Run `34755984363`:
-- 0.2.6 → 0.2.8 `103720316226` SUCCESS
-- 0.2.7 → 0.2.8 `103720316230` SUCCESS
-- Real Design `103720316084` SUCCESS.
+BELEG:
+Run `34757795593`:
+- Fresh/Null-Rewrite `103725094537` SUCCESS
+- 0.2.8 → 0.2.9 + erneuter Null-Rewrite `103725094620` SUCCESS
+- Real Design + Null-Rewrite + echter Linkklick `103725094378` SUCCESS → `REAL_DESIGN_029_CLICKED_TERM_LINK_PASS`.
 
-Die **exakte historische Live-Rootcause** der früheren weißen Seite wird nicht rückwirkend behauptet. Bewiesen und repariert ist die reproduzierbare Fehlerklasse.
+**Live nicht geschlossen**, bis Nutzer 0.2.9 real bestätigt.
 
-**Nicht geschlossen**, bis realer Pferde-Live-Readback mit exakt 0.2.8 PASS meldet.
+## GLOSSAR-ROUTE-005 – Kategorien nicht dem Glossar-Design angepasst
+STATUS: 0.2.8 LIVE FAIL / ALTE ACCEPTANCE FACHLICH FALSCH / 0.2.9 KORREKTUR TECHNISCH PASS / LIVE-READBACK OFFEN
 
-## GLOSSAR-ROUTE-005 – Kategorieseiten erreichen nicht den echten Kategorie-Renderer
-STATUS: 0.2.7 LIVE FAIL / 0.2.8 TECHNISCHE REPARATUR PASS / LIVE-READBACK 0.2.8 OFFEN
+NUTZER-READBACK 0.2.8:
+„Kategorien immer noch nicht dem Design angepasst.“
 
-NUTZER-READBACK 0.2.7:
-Kategorieseiten erschienen identisch zur Startseite.
+GEFUNDENER TESTFEHLER:
+Die 0.2.8-Acceptance verlangte ausdrücklich, dass Kategorien **keinen Hero und keine Tools** enthalten. Damit wurde genau das Gegenteil der Nutzeranforderung als PASS definiert.
 
-HART REPRODUZIERT:
-Saubere Kategorieausgabe ist eindeutig von der Startseite verschieden: `.uge-category-head` vorhanden; `.uge-hero` und `.uge-tools` fehlen. Unter beschädigtem Schema-5-Rewritezustand konnte der Kategoriepfad den echten Renderer verfehlen.
+VERBINDLICHE NUTZERANFORDERUNG:
+Eine Kategorie besitzt eigenen Kategorieinhalt, verwendet aber denselben vollständigen visuellen Glossar-Rahmen wie die Startseite.
 
-0.2.8 TECHNISCH:
-Schema 6 repariert die gezielt beschädigten Vorgängerzustände. Fresh, beide Upgradepfade und echter Design-Browser verlangen den echten Kategorie-Renderer und schließen Home-Hero/Home-Tools negativ aus.
+0.2.9 verlangt deshalb für `/glossar/gesundheit/` gleichzeitig:
+- `.uge-category-head` + H1 `Gesundheit`;
+- `.uge-hero`;
+- `.uge-tools`;
+- `.uge-topic-nav`;
+- echte Begriffskarte/Link.
 
-Finaler Beleg:
-Run `34755984363`, Jobs `103720316220`, `103720316226`, `103720316230`, `103720316084` SUCCESS.
+Hero-Kicker ist `WISSEN`.
 
-**Nicht geschlossen**, bis realer Pferde-Live-Readback mit exakt 0.2.8 PASS meldet.
+BELEG:
+Run `34757795593`, Job `103725094378` → `REAL_DESIGN_029_CATEGORY_FULL_SHELL_PASS`.
 
-## GLOSSAR-FE-006 – Frühere Testumgebung war kein echter Design-Integrationstest
-STATUS: TESTLÜCKE GESCHLOSSEN / 0.2.8 TECHNISCH PASS
+**Live nicht geschlossen**, bis Nutzer 0.2.9 real bestätigt.
 
-ALTER BEFUND:
-`exact-0.2.6-test/02_boot.sh` nutzte real WordPress, MySQL und Astra, aber nur einen selbstgebauten Pferde-Design-Stub. Dieser Runner darf weiterhin nicht als echter Design-Integrationsnachweis interpretiert werden.
+## GLOSSAR-FE-006 – Echter Design-Integrationstest
+STATUS: TECHNISCHE TESTLÜCKE GESCHLOSSEN
 
-NEUER HARTER NACHWEIS:
-Der 0.2.8-Endtest rekonstruiert und aktiviert den exakten realen Pferde-Design-Hauptcode 1.50.469 mit SHA-256:
-`580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`
+0.2.9 läuft weiterhin unter dem rekonstruierten echten Pferde-Design-Hauptcode 1.50.469, SHA-256:
+`580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`.
 
-Danach läuft die reale Browser-/Positiv-/Negativprüfung unter genau diesem Code.
+Der bekannte 1.50.472-Projektstand unterscheidet sich in der dokumentierten 31.08.-Änderung im Kategorie-Editorialtext; der hier relevante Glossar-Runtime-/Layoutvertrag wurde im echten 1.50.469-Code ausgeführt. Kein Stub gilt als Real-PASS.
 
-Beleg:
-Run `34755984363`, Job `103720316084` SUCCESS.
+## GLOSSAR-REG-007 – Direktrouting zerstörte Draft-Preview
+STATUS: RC1 ROT / RC2 REPARIERT / FINAL 0.2.9 PASS
+
+Beim ersten 0.2.9-RC fing der neue Direktbinder auch eine authentifizierte WordPress-Draft-Preview ab. Die vorhandene Regression erkannte dies korrekt als 404.
+
+RC2/final nimmt native Preview-Query-Parameter ausdrücklich vom Direktbinder aus. Danach:
+`REG_PREVIEW_PASS`.
+
+Dies ist ein echter RED→GREEN-Befund und wurde nicht übersprungen.
 
 ## ÜBERGREIFENDER STATUS
 
-0.2.6: historische Zwischenversion / **nicht verwenden**.
+- 0.2.6: historisch / nicht verwenden.
+- 0.2.7: LIVE FAIL / nicht verwenden.
+- 0.2.8: **LIVE FAIL / nicht verwenden.**
+- 0.2.9: **TECHNISCHER KANDIDAT HARDTEST PASS / PFERDE-LIVE-READBACK OFFEN.**
 
-0.2.7: **LIVE FAIL / BLOCKED / nicht verwenden**.
+Finaler Run: `34757795593`
+Head: `f2fa6f0c248acfa6978b5faec5daf42a40d0ba3b`
 
-0.2.8: **TECHNISCHER KANDIDAT HARDTEST PASS / PFERDE-LIVE-READBACK OFFEN**.
-
-Finaler technischer Lauf:
-`34755984363`, Head `d14f6bff7f660cc6461208e8153fbdf237f0d609`.
-
-Exaktes installierbares Paket:
-`universal-glossary-engine-0.2.8.zip`
+Installierbares ZIP:
+`universal-glossary-engine-0.2.9.zip`
 
 SHA-256:
-`9bdda56baccfb4f7af5ff512fe37cb23d6117eb9cc56bb3e5f059b168b4f1db1`
+`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
 
-Actions-Artefakt ID `10318015702`.
+Actions-Artefakt-ID: `10317444708`.
 
-Die Fehler FE-002, FE-003, ROUTE-004 und ROUTE-005 bleiben als **Live offen** geführt, bis der Nutzer exakt 0.2.8 auf Pferde Atelier real geprüft hat.
+Die aktuellen Live-Fehler FE-002, ROUTE-004 und ROUTE-005 bleiben offen, bis der reale Nutzer-Readback exakt 0.2.9 bestätigt.
