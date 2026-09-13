@@ -55,8 +55,8 @@ class BatchGateTests(unittest.TestCase):
     def test_positive(self):
         td,result,out,paths,snap=self.run_collect()
         try:
-            self.assertEqual(result['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED'); self.assertEqual(result['article_count'],7); self.assertEqual(result['next_required'],'SIGNED_WORKFLOW_RELEASE'); self.assertFalse(result['publish_allowed']); self.assertEqual(len(list(out.glob('ARTICLE_*.md'))),7)
-            evidence=json.loads((out/'system4_batch_evidence.json').read_text()); self.assertEqual(evidence['article_count'],7); self.assertTrue(all(row['quality']['languagetool']['status']=='PASS' for row in evidence['articles'])); self.assertTrue(all(row['design']['status']=='PASS' for row in evidence['articles'])); self.assertFalse(evidence['design_mutation_performed']); self.assertEqual(evidence['batch_distinctness']['status'],'PASS')
+            self.assertEqual(result['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED'); self.assertEqual(result['article_count'],7); self.assertEqual(result['next_required'],batch_gate.NEXT_REQUIRED); self.assertEqual(result['next_required'],'PARENT_CHAT_WORDPRESS_HANDOFF_REQUIRED'); self.assertFalse(result['publish_allowed']); self.assertEqual(len(list(out.glob('ARTICLE_*.md'))),7)
+            evidence=json.loads((out/'system4_batch_evidence.json').read_text()); self.assertEqual(evidence['article_count'],7); self.assertEqual(evidence['next_required'],batch_gate.NEXT_REQUIRED); self.assertTrue(all(row['quality']['languagetool']['status']=='PASS' for row in evidence['articles'])); self.assertTrue(all(row['design']['status']=='PASS' for row in evidence['articles'])); self.assertFalse(evidence['design_mutation_performed']); self.assertEqual(evidence['batch_distinctness']['status'],'PASS')
         finally: td.cleanup()
     def test_missing_state(self): self.assert_blocked('STATE_COUNT_MISMATCH',path_count=6)
     def test_basic_check_blocked(self):
