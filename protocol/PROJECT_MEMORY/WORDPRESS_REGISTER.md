@@ -33,14 +33,12 @@ Es entscheidet NICHT:
 
 ### WP-001 – Bildzentrale
 
-MOD-ID:
-MOD-002
+MOD-ID: `MOD-002`
 
 Aktuellster allgemeiner Plugin-Dateibeleg:
 `ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
 
-Version:
-**2.6.9**
+Version: **2.6.9**
 
 SHA-256:
 `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
@@ -51,16 +49,12 @@ Nullpunkt:
 Nullpunkt SHA-256:
 `4258ae194e681dcae2fa37467d1a430d48ef2ae7e2889e2f02939456bbb1d434`
 
-Byte-Abgleich:
-separater 2.6.9-Installer = im Nullpunkt eingebetteter 2.6.9-Installer.
+Byte-Abgleich: separater 2.6.9-Installer = im Nullpunkt eingebetteter 2.6.9-Installer.
 
 Pferde-Atelier:
-- WordPress-Live-Version 2.6.9 laut bestehender Nutzerbestätigung
-- historische Pferde-Dateien: Plugin 2.4.9 + Master 049
-- Projekt-Konfig/Migrationsakten separat erhalten
-
-GitHub:
-auf aktuellem `main` kein separater Bildzentrale-Dateistand unter diesen Namen gefunden.
+- WordPress-Live-Version 2.6.9 laut bestehender Nutzerbestätigung;
+- historische Pferde-Dateien: Plugin 2.4.9 + Master 049;
+- Projekt-Konfig/Migrationsakten separat erhalten.
 
 Hauptquellen:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
@@ -68,14 +62,12 @@ Hauptquellen:
 
 ### WP-002 – Universal Research & Fill
 
-MOD-ID:
-MOD-005
+MOD-ID: `MOD-005`
 
 Aktuellster direkt belegter Installer:
 `universal-research-fill-v1.9.9.zip`
 
-Dateibeleg:
-**1.9.9**
+Dateibeleg: **1.9.9**
 
 SHA-256:
 `154102215a0ef4bf7de3362dbf835f05dc5c10b870e3507dbf173c62fb7079e0`
@@ -86,14 +78,7 @@ Master:
 Master SHA-256:
 `452fe76c60f770fa95b9e10bcfa50e23f37efe8051a6c194700b7237d502dcbd`
 
-Byte-Abgleich:
-externer 1.9.9-Plugin-ZIP = eingebetteter CURRENT_PLUGIN-ZIP im Master.
-
-Historisch:
-1.9.5 Plugin + Master.
-
-Modulklasse:
-ALLGEMEINGÜLTIG.
+Modulklasse: ALLGEMEINGÜLTIG.
 
 Hauptquelle:
 `ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/`
@@ -101,74 +86,56 @@ Hauptquelle:
 Pferde-Anwendung:
 `PROJEKTE/PFERDE_ATELIER/HIVEPRESS/`
 
-GitHub:
-auf aktuellem `main` kein eigener URF-Dateistand unter diesem Namen gefunden.
-
 ### WP-003 – Portal SEO Topic Engine
 
-MOD-ID:
-noch nicht vergeben
+MOD-ID: noch nicht vergeben
 
 Aktuellster direkt belegter Installer:
 `portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip`
 
-Dateibeleg:
-0.56.25
+Dateibeleg: 0.56.25
 
 SHA-256:
 `8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95`
 
-Quelle:
-aktueller STARTMASTER0107-Master / `02_CURRENT_INSTALLERS/`
+Quelle: aktueller STARTMASTER0107-Master / `02_CURRENT_INSTALLERS/`
 
 Archiv:
 `/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/SEO/2026-09-05/`
 
-Ältere Installerstände bleiben historisch erhalten.
-
-Modulklasse:
-UNGEKLÄRT.
+Modulklasse: UNGEKLÄRT.
 
 ### WP-004 – Portal SEO Editorial Plan Compiler
 
-MOD-ID:
-noch nicht vergeben
+MOD-ID: noch nicht vergeben
 
 Aktuellster direkt belegter Installer:
 `portal-seo-editorial-plan-compiler_0.28.16_PRODUCTION_PACKAGE_UPLOAD_VISIBILITY.zip`
 
-Dateibeleg:
-0.28.16
+Dateibeleg: 0.28.16
 
 SHA-256:
-`3341805f277dfd77c985e6cfbbc2b57e4e0677bef8c59d8c2067f7f0b79be9bc`
+`3341805f277d77c985e6cfbbc2b57e4e0677bef8c59d8c2067f7f0b79be9bc`
 
-Quelle:
-aktueller STARTMASTER0107-Master / `02_CURRENT_INSTALLERS/`
+Quelle: aktueller STARTMASTER0107-Master / `02_CURRENT_INSTALLERS/`
 
 Archiv:
 `/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/SEO/2026-09-05/`
 
-Ältere Installerstände bleiben historisch erhalten.
-
-Modulklasse:
-UNGEKLÄRT.
+Modulklasse: UNGEKLÄRT.
 
 ### WP-005 – Affiliate-Zentrale
 
-PB-ONE-Plugin-ID:
-`PBO-PLUGIN-001`
+PB-ONE-Plugin-ID: `PBO-PLUGIN-001`
 
-Pluginname:
-`Affiliate-Zentrale (Portal-kompatibel)`
+Pluginname: `Affiliate-Zentrale (Portal-kompatibel)`
 
 Technische Hauptquelle:
 - Branch `affiliate-release-current`
 - `release/affiliate-zentrale/current/affiliate-portal-router/`
-- zuständiges Fachbüro `PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
+- Fachbüro `PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
 
-Kanonischer technischer Kandidat:
-**6.72.19**
+Kanonischer technischer Kandidat: **6.72.19**
 
 Kanonisches 26-Dateien-Manifest:
 `694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b`
@@ -177,28 +144,16 @@ Kanonischer Testartefakt-Nachweis:
 - Run `34692865477` / Job `103551115066` PASS
 - Test-ZIP SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`
 
-Wichtig:
-**6.72.19 ist hier kein behaupteter WordPress-LIVE-PASS.**
-Die in diesem Chat zuletzt frisch belegte technische Source-/Artefaktversion ist 6.72.19; der reale WordPress-/ADCELL-Live-Preflight AF-066 ist im zuständigen Affiliate-Fachbüro weiterhin offen.
-
-Ältere Live-/Installationsbelege bleiben historische Evidenz an der technischen Fachquelle und werden hier nicht als aktuelle WordPress-Live-Wahrheit hochgestuft.
+Wichtig: **6.72.19 ist hier kein behaupteter WordPress-LIVE-PASS.** Reale Live-Abnahme bleibt im Affiliate-Fachbüro.
 
 Plugin-Kontrollvorgang:
 `PB_ONE/AKTENSCHRANK/PLUGINS/UPDATEPROTOKOLL.md` → `PU-20260912-001`.
 
-Allgemeiner Gesamtmaster:
-`ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/MASTERDATEIEN_INVENTAR.md`
-
-Modulklasse:
-UNGEKLÄRT.
-
 ### WP-006 – Universal Portal Design Suite / Pferde-Designlinie
 
-MOD-ID:
-MOD-003
+MOD-ID: `MOD-003`
 
-ALLGEMEINER HAUPTKERN:
-**Universal Portal Design Suite 2.2.40 / Contract V104**
+ALLGEMEINER HAUPTKERN: **Universal Portal Design Suite 2.2.40 / Contract V104**
 
 Plugin SHA-256:
 `fbaf1e36fc814b88b952924b9cf2e71a14913864c226eeed46ed8cf03af8e765`
@@ -218,14 +173,11 @@ Hauptquellen:
 
 ### WP-007 – Kategoriemodell / Affiliate-Portal Kategorie-Workflow
 
-MOD-ID:
-MOD-001
+MOD-ID: `MOD-001`
 
-WordPress-Plugin:
-`Affiliate-Portal Kategorie-Workflow`
+WordPress-Plugin: `Affiliate-Portal Kategorie-Workflow`
 
-Aktuell belegte Version:
-**1.8.0**
+Aktuell belegte Version: **1.8.0**
 
 Installer SHA-256:
 `4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845`
@@ -236,90 +188,59 @@ Source SHA-256:
 Master SHA-256:
 `2e6990847c5bc32176f87c6f4b006ccdd0f3f57891c176ed5a6874edfdff942c`
 
-Modulklasse:
-ALLGEMEINGÜLTIG.
+Modulklasse: ALLGEMEINGÜLTIG.
 
 Hauptquelle:
 `ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/`
 
-Status:
-lokal/fresh stark geprüft; **kein bestätigter Live-WordPress-Deployment-PASS**.
-
-## Aufnahme neuer Plugins
-
-Bei jedem neuen Plugin-/Masterdatei-Eingang:
-
-1. Datei vollständig inventarisieren;
-2. prüfen, ob tatsächlich WordPress-Plugin/Installer;
-3. hier Dateibeleg ergänzen;
-4. Modulklasse nur im MODULREGISTER pflegen;
-5. Projekt-/Live-/Release-Status nur an der Fachquelle pflegen.
-
-## Grundsatz
-
-**Ein Plugin kann in mehreren Projekten genutzt werden, aber es hat nur eine Hauptwahrheit.  
-Dieses Register zeigt nur den Weg dorthin.**
+Status: lokal/fresh stark geprüft; **kein bestätigter Live-WordPress-Deployment-PASS**.
 
 ### WP-008 – HivePress-Anzeigensuche
 
-MOD-ID:
-MOD-004
+MOD-ID: `MOD-004`
 
-STATUS:
-UNGEKLÄRT / separater Audit ausstehend.
+STATUS: UNGEKLÄRT / separater Audit ausstehend.
 
 In Designmastern nachweisbar:
 - Universal HivePress Anzeigensuche v2.1.5
 - Pferde Atelier HivePress Anzeigensuche v2.1.5
 
-Regel:
-nicht als bloße Design-Datei verschwinden lassen; eigener Modulstatus folgt nach separater Prüfung.
+Regel: nicht als bloße Design-Datei verschwinden lassen; eigener Modulstatus folgt nach separater Prüfung.
 
 ### WP-009 – Universal Glossar Engine
 
-MOD-ID:
-MOD-008
+MOD-ID: `MOD-008`
 
-Plugin:
-`Universal Glossary Engine`
+Plugin: `Universal Glossary Engine`
 
-Aktuellster technisch gebundener Kandidat:
-**0.2.9**
+**Dieser Eintrag ist nur Wegweiser. Der aktuelle Entwicklungs-/Paket-/LIVE-Status wird hier nicht mehr dupliziert.**
 
-Rewrite-Schema:
-**7**
+Autoritative Projektquellen:
+- aktueller Stand: `PROJEKTE/PFERDE_ATELIER/GLOSSAR/CURRENT_STATE.md`
+- aktuelle Arbeit/NEXT ACTION: `PROJEKTE/PFERDE_ATELIER/GLOSSAR/HOBBYRAUM.md`
+- Fehler: `PROJEKTE/PFERDE_ATELIER/GLOSSAR/FEHLERQUELLEN.md`
+- technische Protokolle: `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
 
-Innerer Plugin-ZIP SHA-256:
-`864befa0d159577e418906e4de3052ad0127b7dbcdad80775ba7e8f734ed1173`
-
-Autoritativer finaler Hardtest:
-- Run `34757795593`
-- Build `103725094481` PASS
-- Fresh/Regression/Null-Rewrite `103725094537` PASS
-- Update 0.2.8 → 0.2.9 + erneuter Null-Rewrite `103725094620` PASS
-- echter Design-1.50.469-Runtime + Browser + Null-Rewrite `103725094378` PASS
-- gated Package `103725295224` PASS
-- Actions-Artefakt-ID `10317444708`
-
-Status:
-**TECHNISCHER KANDIDAT HARDTEST PASS / KEIN PFERDE-LIVE-PASS.**
-
-Wichtige Korrektur:
-0.2.8 wurde durch realen Pferde-Readback als LIVE FAIL widerlegt: Hero nicht real responsive, Kategorien nicht mit vollständigem Glossar-Startseitenrahmen, Einzelbegriff-Links laufen ins Leere. 0.2.6/0.2.7/0.2.8 nicht verwenden.
-
-0.2.9 prüft echtes responsives Bild, Kategorie-Vollrahmen, tatsächlich angeklickten Begriff-Link sowie Kategorie-/Begriff-Routing selbst bei vollständig gelöschten gespeicherten Glossar-Rewrite-Regeln und bereits aktuellem Schema 7. Draft-Preview bleibt Regression-PASS.
-
-Hauptquelle:
+Allgemeine Hauptquelle:
 `ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
 
-Technisches Protokoll:
-`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/TESTPROTOKOLL_0.2.9_20260913.md`
-
-Erste Projektanwendung:
+Projektanwendung:
 `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
 
-Modulklasse:
-`UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG`.
+Letzter beim Registerabgleich nachgewiesener Entwicklungszweig:
+`hobbyroom/glossar-livefail-red-green-20260913`
 
-Offen:
-Pferde-Atelier-Live-Readback des exakt hashgebundenen 0.2.9-Kandidaten; Wissensdatenbankimport; Performance-Test; zweites reales Portal; Yoast-Kombination soweit release-relevant.
+Für Version, Teststand, Paket-SHA und Live-Grenze **immer die oben genannten autoritativen Fachquellen frisch lesen**.
+
+## Aufnahme neuer Plugins
+
+Bei jedem neuen Plugin-/Masterdatei-Eingang:
+1. Datei vollständig inventarisieren;
+2. prüfen, ob tatsächlich WordPress-Plugin/Installer;
+3. hier nur den Technologie-Wegweiser ergänzen;
+4. Modulklasse nur im MODULREGISTER pflegen;
+5. Projekt-/Live-/Release-Status nur an der Fachquelle pflegen.
+
+## Grundsatz
+
+**Ein Plugin kann in mehreren Projekten genutzt werden, aber es hat nur eine Hauptwahrheit. Dieses Register zeigt nur den Weg dorthin.**
