@@ -5,15 +5,24 @@ Status: **BLOCKED / isolated prototype / test only.** Kein Merge, kein Produktio
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit** innerhalb des isolierten Prototyps. Der offizielle Projekt-/Campus-Stand bleibt davon getrennt in `control/startmaster0107/CURRENT_STATE.json` und wird durch System 4 nicht überschrieben.
 
 ## Verbindlicher Zielvertrag
-Aktueller System-4-Zielvertrag:
-
 `isolated_system4/ZIELVERTRAG_SYSTEM4_CODEX_STRICT_PIPELINE_20260913.md`
 
 Kurzform:
-
-`Thema/Metadaten -> Codex recherchiert -> Codex bildet Fakten/Fact-Pack -> Codex schreibt -> unveränderte echte Prüfer -> gezielte Same-Article-Reparatur -> Batch-/Wiederholungsprüfung -> exakter Chat-/WordPress-Handoff`
+`gebundene Metadaten -> Codex recherchiert -> Codex bildet Fakten/Fact-Pack -> Codex schreibt -> unveränderte echte Prüfer -> gezielte Same-Article-Reparatur -> Batch-/Wiederholungsprüfung -> exakter Chat-/WordPress-Handoff`
 
 Codex bleibt der eine fachliche Worker. System 4 übernimmt **nicht** die alte Legacy-Orchestrierung.
+
+## Neue universelle Produktionsgrenze
+Der frühere aktuelle Zustand „genau sieben `Beratung`-Artikel“ ist **entfernt**.
+
+Verbindlich gilt jetzt:
+- Produktionsmenge = exakt die nichtleere Item-Menge des gebundenen Snapshots;
+- **1..N ohne künstliche System-4-Obergrenze**;
+- 1 / 7 / 25 / 1000 sind ausschließlich Regressionstestgrößen;
+- `article_type` kommt aus den gebundenen Metadaten;
+- **keine System-4-Beitragsart-Whitelist**;
+- neue Beitragsarten laufen ohne Änderung an Controller, Batch-Gate oder Handoff durch denselben generischen Weg;
+- typspezifische fachliche/designseitige Zulässigkeit bleibt Sache der unveränderten autoritativen Textmaschine-/PPM-/Designregeln.
 
 ## Unverhandelbare Grenzen
 ### Textmaschine
@@ -22,43 +31,16 @@ Die bestehende Textmaschine und ihre Regeln sind READ-ONLY. System 4 darf sie we
 ### Design
 PPM 6.7.9, bestehender Artikel-/Tabellenvertrag, WordPress-Plugin, Theme/CSS und vorhandene Designselektoren sind READ-ONLY. System 4 darf weder direkt noch indirekt CSS, Inline-Styles, Klassen, Überschriftenhierarchie, Tabellenformatierung oder Theme-/Plugin-Dateien verändern. Nach dem geprüften Artikel ist keinerlei HTML-/Designtransformation erlaubt.
 
-`design_guard.py` ist ausschließlich ein PASS/BLOCK-Guard und verändert keine Bytes. Wenn ein Fix eine Textmaschinen- oder Designänderung voraussetzen würde, lautet der Status `BLOCKED_TEXTMASCHINE_OR_DESIGN_IMMUTABLE`.
+`design_guard.py` ist ausschließlich PASS/BLOCK und verändert keine Bytes. Die `ppm-type-*`-Bindung wird aus dem gebundenen `article_type` generisch abgeleitet. Bekannte typspezifische Regeln (z. B. Beratung-H2) bleiben nur für ihren Typ aktiv und sind keine Zulassungsliste.
 
 ## Aktuell umgesetzte System-4-Schutzkette
-Der frühere Stand „nur Handoff-Reparatur, Produktionskern unverändert“ ist überholt.
-
-Im isolierten System-4-Prototyp wurden nach der Ursachenanalyse zusätzliche **äußere Kontrollgrenzen** eingebaut, ohne die bestehende Textmaschine oder das Design zu verändern:
-
-1. `content_guard.py`
-   - strukturierte Research-Evidence;
-   - reale Quelle/URL/Evidence/Hash;
-   - Fact-Evidence muss tatsächlich im gespeicherten Quellenausschnitt vorkommen;
-   - Fact-Pack muss zu akzeptierter Recherche/Faktenbasis passen;
-   - Artikel-Fact-IDs müssen im gebundenen Pack existieren;
-   - Repair-Kontinuität;
-   - artikelübergreifende Distinctness.
-2. `controller.py`
-   - feste Stufen `research -> facts -> context -> draft -> fullcheck -> repair`;
-   - keine nächste Stufe bei ungültiger Evidence;
-   - Same-Article-Repair, keine breite Neufassung im Repair-Pfad;
-   - Design-/Content-Guard vor FULL-Produktion.
-3. `design_guard.py`
-   - validiert ausschließlich den bereits bestehenden Produktions-/Designvertrag;
-   - keine Mutation/kein Restyling.
-4. `batch_repetition_guard.py`
-   - erkennt lange identische Satzschablonen über mehrere Artikel;
-   - nur Batch-/Release-Integrität, keine neue Autorenregel.
-5. `batch_gate.py`
-   - übernimmt nur bereits FULL-geprüfte Artikel;
-   - prüft Fact-/Designbindung und artikelübergreifende Wiederholung erneut;
-   - schreibt die Artikelbytes unverändert.
-6. `handoff_transport.py`
-   - letzte fail-closed Wiederholungsprüfung von Fact-Pack, Design, Batch-Distinctness/Repetition, Hashes und WordPress-Handoff;
-   - kanonischer Inline-Transport zum Elternchat;
-   - direkter Importvertrag derzeit `Portal SEO Editorial Plan Compiler 0.28.23`.
-7. Tests
-   - Positiv-/Negativtests für Research/Facts, Design, Batch, Repair, Handoff und lokalen End-to-End-Weg sind im Repository angelegt/aktualisiert.
-   - alte 0.28.22-Testbindungen wurden auf die aktuelle Handoff-Autorität 0.28.23 nachgeführt.
+1. `content_guard.py`: Research-/Fact-Bindung, Fact-Traces, Repair-Kontinuität, skalierte Batch-Distinctness; Einzelbatch ist gültig.
+2. `controller.py`: feste Stufen `research -> facts -> context -> draft -> fullcheck -> repair`; Same-Article-Repair.
+3. `design_guard.py`: generischer Beitragsart-Design-Hardlock ohne Beitragsart-Whitelist; keine Mutation.
+4. `batch_repetition_guard.py`: Wiederholungsschutz für Multi-Artikel-Batches; Einzelbatch PASS ohne künstlichen Vergleich.
+5. `batch_gate.py`: akzeptiert exakt die gebundene Snapshot-Menge; keine feste Zahl, keine Beitragsartbindung; übernimmt nur FULL-geprüfte Bytes.
+6. `handoff_transport.py`: `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`; count `1..N`; keine Beitragsart-Whitelist; mehrteiliger V2-Inline-Transport statt festem Gesamt-60k-Umschlag.
+7. Regressionstests: 1, mehrere, 25, 1000 sowie gemischte Beitragsarten und 0-Artikel-Negativfall.
 
 ## Unveränderte Fach-/Toolautoritäten
 System 4 ersetzt diese Autoritäten nicht:
@@ -67,25 +49,23 @@ System 4 ersetzt diese Autoritäten nicht:
 - bestehende Textmaschine-/Artikeltyp-/Tabellen-/Link-/SEO-/PSERC-/PSTE-/Metadatenregeln;
 - `publish_allowed=false`.
 
-Der vorhandene erfolgreiche erste FULL-RULE-System-4-Einzelartikel bleibt historischer Beleg dafür, dass Codex im Einzelweg gute Texte unter diesen Regeln erzeugen kann. Er ist **kein Freigabenachweis** für den jetzt veränderten aktuellen Head.
-
 ## Aktuelle Fehler / Blocker
-### S4-BLOCK-01 — frischer kompletter System-4-Testlauf fehlt
-Nach den aktuellen Änderungen wurde in diesem Chat **kein kompletter lokaler**
-
+### S4-BLOCK-01 — kompletter aktueller Testbestand auf finalem Head noch offen
+Die universelle Mengen-/Beitragsartkorrektur wurde lokal in Teil- und Skalierungstests positiv geprüft. Der vollständige Branch muss nach Abschluss aller Dokument-/Testbindungen erneut bytegenau lokal rekonstruiert und mit
 `python3 -m unittest discover -s isolated_system4 -p 'test_*.py' -v`
+auf dem **dann finalen Head** ausgeführt werden.
 
-gegen den exakt aktuellen Branch-Head ausgeführt. Der Container konnte das GitHub-Repository wegen fehlender Netzauflösung nicht klonen. Der erfolgreiche GitHub-`hardlock-base`-Workflow prüft die allgemeine unveränderliche Basis, aber **nicht** den `isolated_system4`-Unittestbestand.
+Folge: **System-4-Gesamt-PASS bleibt bis dahin OFFEN. Kein Codex-Produktionslauf.**
 
-Folge: **System-4-Gesamt-PASS ist OFFEN.** Kein Codex-Produktionslauf erlaubt.
+### S4-BLOCK-02 — kompletter lokaler E2E auf finalem Head noch offen
+Der End-to-End-Test muss nach Abschluss der V2-/Universalbindung auf demselben finalen Head erneut positiv und negativ laufen, inklusive Elternchat-Handoff.
 
-### S4-BLOCK-02 — echter End-to-End-Produktionsweg noch nicht neu bewiesen
-Der lokale E2E-Test ist vorhanden, aber nach den aktuellen Guards/Bindungsänderungen noch nicht frisch ausgeführt. Insbesondere ist noch nicht neu bewiesen, dass der aktuelle Code auf einem vollständigen lokalen Checkout vom Codex-Einstieg bis zur bytegleichen rekonstruierten Elternchat-/WordPress-JSON positiv durchläuft und die relevanten Negativfälle blockiert.
-
-Folge: **Produktionsfreigabe bleibt BLOCKED.**
+### S4-BLOCK-03 — Transportressourcen sind real endlich
+System 4 enthält keine künstliche Artikelzahl-Obergrenze. Reale Laufzeit-, Speicher- und Chat-Ausgabelimits bleiben physische Infrastrukturgrenzen. Der V2-Handoff teilt große Daten in geordnete Transportteile, damit keine feste einzelne 60k-Gesamtgrenze mehr die Produktionsmenge definiert. Ein tatsächlicher Produktionslauf darf deshalb nie aus einer willkürlichen System-4-Zahl heraus gekürzt werden; bei realem Ressourcenblock muss er fail-closed mit dem konkreten Infrastrukturblocker stoppen.
 
 ## WordPress-/Handoff-Grenze
 Der aktuelle direkte Importvertrag ist:
+- `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`;
 - JSON / `application/json`;
 - `WORDPRESS_DIRECT_IMPORT`;
 - `Portal SEO Editorial Plan Compiler 0.28.23`;
@@ -96,20 +76,17 @@ Der aktuelle direkte Importvertrag ist:
 Die bestehende Signaturprüfung ist für diesen aktuellen Pfad ausgeschaltet. Deshalb kein Signing/ENDSTEMPEL in System 4. System 4 verändert weder Plugin noch Signaturschalter.
 
 ## HOBBYRAUM / NEXT ACTION
-System-4-Arbeitsraum: **BLOCKED bis frischer Testnachweis**.
+System-4-Arbeitsraum: **BLOCKED bis frischer Gesamt-Testnachweis**.
 
-Exakter nächster Arbeitsschritt im neuen Chat:
-1. PR #238 / Branch `hobbyroom/system4-true-single-room-v1` frisch lesen und aktuellen Head ermitteln.
-2. **Kein Codex.** Zuerst den vollständigen aktuellen Branch lokal verfügbar machen.
-3. Auf exakt diesem Head ausführen:
-   - kompletten `isolated_system4`-Unittestbestand;
-   - NO-LEGACY-Proof;
-   - `test_local_end_to_end_chat_handoff.py` positiv und negativ;
-   - relevante Guards separat nur zur Fehlerlokalisierung, falls der Gesamtlauf fehlschlägt.
-4. Jeden tatsächlichen FAIL auf seine erste Ursache zurückführen und nur im isolierten System-4-Code reparieren. Keine Textmaschinenregel und kein Design verändern.
-5. Nach jeder Änderung den **gesamten** System-4-Testbestand erneut auf dem neuen Head ausführen.
-6. Erst wenn alles auf demselben Head PASS ist, Tests/Status/Protokoll aktualisieren.
-7. Danach stoppen und Nutzerfreigabe für **einen** echten Codex-7/7-Produktionslauf einholen. Ohne diese ausdrückliche Freigabe keinen Codex-Lauf starten.
+Exakter nächster Arbeitsschritt:
+1. aktuellen PR-Head nach den Universaländerungen binden;
+2. **kein Codex**;
+3. vollständigen aktuellen `isolated_system4/**`-Stand lokal bytegenau rekonstruieren;
+4. kompletten Unittestbestand + NO-LEGACY + lokalen E2E positiv/negativ auf exakt diesem Head ausführen;
+5. jeden tatsächlichen FAIL nur an seiner ersten Ursache im isolierten System-4-Code reparieren;
+6. nach jeder Änderung den gesamten Testbestand auf dem neuen Head wiederholen;
+7. erst bei vollständigem PASS README/Protokoll auf PASS aktualisieren;
+8. danach Nutzerfreigabe für **einen echten Codex-Lauf des konkret gebundenen Input-Batches** einholen. Anzahl und Beitragsarten kommen ausschließlich aus diesem Input.
 
 ## Nicht anfassen
 - `control/startmaster0107/**` und offizieller CURRENT_STATE;
