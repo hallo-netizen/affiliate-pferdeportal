@@ -1,0 +1,86 @@
+name: Glossar 0.2.6 Fresh + Upgrade Hardtest
+on:
+  push:
+    branches: [hobbyroom/glossar-026-upgrade-hardtest-20260913]
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/**'
+      - '.github/workflows/glossar-026-upgrade-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  fresh-install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build 0.2.6 candidate from exact tested 0.2.5
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/01_build.sh
+      - name: Bind local acceptance source to 0.2.6
+        run: |
+          rm -rf /tmp/u
+          mkdir -p /tmp/u
+          cp -a /tmp/uge026/universal-glossary-engine /tmp/u/
+      - name: Fresh WordPress MySQL Astra boot
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/02_boot.sh
+      - name: Positive negative policy seed
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/03_seed.sh
+      - name: Existing frontend positive negative matrix
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/04_frontend.sh
+      - name: Existing normal WordPress regressions
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/05_regression.sh
+      - name: New frontend acceptance gaps
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/06_frontend_acceptance.sh
+      - name: Fresh schema and version
+        run: |
+          test "$(docker exec wp wp plugin list --name=universal-glossary-engine --field=version --allow-root)" = 0.2.6
+          test "$(docker exec db mysql -uwp -pwp wordpress -Nse \"SELECT option_value FROM wp_options WHERE option_name='uge_rewrite_schema_version'\")" = 5
+          echo UGE026_FRESH_INSTALL_POSITIVE_NEGATIVE_PASS
+
+  inplace-upgrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact 0.2.5 and candidate 0.2.6
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/01_build.sh
+      - name: Prepare 0.2.5 and prove poisoned rewrite negative state
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/03_upgrade_prepare.sh
+      - name: Apply 0.2.6 in place and prove automatic migration
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/04_upgrade_apply.sh
+      - name: Post-upgrade routing policy positive negative matrix
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/05_upgrade_matrix.sh
+      - name: Persistence frontend and reactivation regressions
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/06_upgrade_persistence_frontend.sh
+      - name: Re-run full legacy frontend and regression matrix on upgraded runtime
+        run: |
+          rm -rf /tmp/u
+          mkdir -p /tmp/u
+          cp -a /tmp/uge026/universal-glossary-engine /tmp/u/
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/04_frontend.sh
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/05_regression.sh
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.5-test/06_frontend_acceptance.sh
+          echo UGE026_UPGRADED_FULL_MATRIX_PASS
+
+  tested-package:
+    needs: [fresh-install, inplace-upgrade]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild exact gated candidate
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/exact-0.2.6-test/01_build.sh
+      - name: Package only after both hardtests
+        run: |
+          cd /tmp/uge026
+          zip -X -qr /tmp/universal-glossary-engine-0.2.6.zip universal-glossary-engine
+          unzip -t /tmp/universal-glossary-engine-0.2.6.zip | grep -q 'No errors detected'
+          sha256sum /tmp/universal-glossary-engine-0.2.6.zip | tee /tmp/SHA256.txt
+          echo UGE026_GATED_PACKAGE_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.6-gated-tested
+          path: |
+            /tmp/universal-glossary-engine-0.2.6.zip
+            /tmp/SHA256.txt
+          if-no-files-found: error
