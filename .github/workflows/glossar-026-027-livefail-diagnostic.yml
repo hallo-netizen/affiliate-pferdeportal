@@ -1,0 +1,17 @@
+name: Glossar 0.2.6 to 0.2.7 Live-Fail Diagnostic
+on:
+  push:
+    branches: [hobbyroom/glossar-027-release-hardtest-20260913]
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/diagnose-026-027-livefail.sh'
+      - '.github/workflows/glossar-026-027-livefail-diagnostic.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/diagnose-026-027-livefail.sh
