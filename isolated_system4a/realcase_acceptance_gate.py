@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Mapping
 
 REALCASE_CONTRACT = "SYSTEM4A_REALCASE_ACCEPTANCE_V1"
@@ -11,7 +13,6 @@ EXPECTED_CHECKER_ENTRY = "isolated_system4a.system4_readonly.System4ReadOnlyChec
 EXPECTED_HANDOFF = "SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2"
 LT_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
 PPM_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
-
 
 class RealcaseAcceptanceError(RuntimeError):
     pass
@@ -28,11 +29,14 @@ def canonical_sha(value: Mapping[str, Any]) -> str:
 
 
 def assert_no_prebound_production_fields(context: Mapping[str, Any]) -> None:
-    """Acceptance starts before production binding. Pre-bound PPM authority is forbidden."""
+    """Abnahme starts before production binding. Pre-bound PPM authority is forbidden."""
     _require(isinstance(context, Mapping), "REALCASE_CONTEXT_OBJECT_REQUIRED")
     plan = context.get("production_plan_item")
     _require(isinstance(plan, Mapping), "REALCASE_PLAN_OBJECT_REQUIRED")
-    forbidden = [key for key in ("quality_binding", "quality_binding_hash") if key in plan]
+    forbidden = []
+    for key in ("quality_binding", "quality_binding_hash"):
+        if key in plan:
+            forbidden.append(key)
     _require(not forbidden, "REALCASE_PREBOUND_PRODUCTION_FIELD_FORBIDDEN:" + ",".join(forbidden))
 
 
