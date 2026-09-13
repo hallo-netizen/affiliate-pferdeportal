@@ -1,0 +1,31 @@
+{
+  "id": "breed-selle-francais",
+  "schema_version": "1.1",
+  "rassename_de": "Selle Français",
+  "originalname": "Selle Français",
+  "synonyme": [],
+  "formaler_status": "eigenständige französische Sportpferderasse mit eigenem Zuchtprogramm und Livre Généalogique",
+  "anerkennungsquelle": "IFCE / Stud-Book Selle Français",
+  "typ": "Pferd",
+  "rassegruppen": ["Sportpferd", "Warmblut"],
+  "herkunft_land": "Frankreich",
+  "herkunft_region": "Frankreich",
+  "geschichte_entstehung": "Französische Sportpferderasse; der offizielle Stud-Book-Zuchtplan bewahrt zugleich historische Blutlinien des Selle Français Originel.",
+  "urspruenglicher_lebensraum": "nicht_recherchiert",
+  "urspruengliche_nutzung": ["Reit- und Sportpferd"],
+  "heutiger_einsatz": ["Springen", "Vielseitigkeit", "Dressur", "Sportpferdezucht"],
+  "stockmass": "nicht_recherchiert",
+  "gewicht": "nicht_recherchiert",
+  "exterieur_gesamt": "sportlicher, leistungsorientierter Reitpferdetyp; Detailstandard noch nachzurecherchieren",
+  "charakter_temperament": "nicht_recherchiert",
+  "gesundheit_genetik": "nicht_recherchiert",
+  "zucht_zuchtziel": "leistungsfähiges französisches Sportpferd; Erhalt historischer Blutlinien über Kennzeichnung Selle Français Originel",
+  "bestand_gefaehrdungsstatus": "nicht_recherchiert",
+  "besondere_fakten": ["Selle Français Originel ist ein Label innerhalb des Selle-Français-Studbooks und keine zweite Rasse."],
+  "quellen": [
+    {"organisation":"IFCE","titel":"Programmes de sélection et règlements des livres généalogiques – Selle Français","url":"https://www.ifce.fr/ifce/sire-demarches/reglementation/reglements-et-programmes-de-selection/","trust":"A","felder":["formaler_status","anerkennungsquelle","zucht_zuchtziel"]},
+    {"organisation":"Stud-Book Selle Français / IFCE","titel":"Programme de sélection Selle Français","url":"https://www.ifce.fr/wp-content/uploads/2021/12/SIRE-2024-SF-Programme-S%C3%A9lection.pdf","trust":"A","felder":["geschichte_entstehung","zucht_zuchtziel","besondere_fakten"]}
+  ],
+  "recherche_status": "GEPRUEFT_MIT_OFFENEN_FELDERN",
+  "letzte_pruefung": "2026-09-13"
+}
