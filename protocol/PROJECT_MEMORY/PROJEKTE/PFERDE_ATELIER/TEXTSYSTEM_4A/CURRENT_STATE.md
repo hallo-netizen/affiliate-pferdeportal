@@ -8,8 +8,8 @@ STATUS: BLOCKED / EXTERNE WÄCHTERGRENZE NOCH NICHT BEWIESEN
 ### System 4
 - PR #238
 - Branch `hobbyroom/system4-true-single-room-v1`
-- frisch geprüfter Head: `8da5a3f45ff42d3fae652d0a64071a9ea10770a4`
-- 1..N, freie gebundene Beitragsart und universeller WordPress-Handoff sind inzwischen System-4-Bestand und kein 4A-Vorteil.
+- aktueller geprüfter Head nach erstem Realrun: `0b3d2acc17b2c32c6d12e677fe9026d3d8c7171a`
+- 1..N, freie gebundene Beitragsart und universeller WordPress-Handoff sind System-4-Bestand und kein 4A-Vorteil.
 
 ### System 4A
 - PR #255
@@ -20,22 +20,37 @@ STATUS: BLOCKED / EXTERNE WÄCHTERGRENZE NOCH NICHT BEWIESEN
 
 4A bleibt ausschließlich wegen dieser Frage offen:
 
-> **Kann der Workflow-State technisch außerhalb der Verfügungsgewalt des Codex-/Workers liegen?**
+> **Kann der Workflow-State und die einzige technische Eingangstür außerhalb der Verfügungsgewalt des Codex-/Workers liegen?**
 
-System 4 lässt Codex weiterhin im selben Task die `state.json`-Workspaces führen und die einzelnen Controller-Schritte aufrufen. Damit besitzt Codex die persistierten Workflow-State-Dateien mit.
+System 4 lässt Codex weiterhin im selben Task die `state.json`-Workspaces führen und die einzelnen Controller-Schritte aufrufen. 4A versucht dagegen genau eine äußere Autorität: Supervisor besitzt State/Phase/Route/PASS; Codex erhält nur den gerade erlaubten Fachauftrag.
 
-4A versucht dagegen:
-- Supervisor besitzt State/Phase/Route/PASS allein;
-- Codex erhält nur den gerade erlaubten Fachauftrag;
-- Worker-Rückgabe erlaubt nur Arbeitsinhalt;
-- Prüfer entscheiden nur PASS/FAIL/Findings;
-- FAIL bleibt derselbe Artikel und öffnet ausschließlich Repair;
-- Checkpoint ist HMAC-authentifiziert.
+## Erster echter System-4-Lauf — realer neuer Befund
+
+Der erste echte 1-Artikel-Codex-Lauf von System 4 wurde am 2026-09-13 ausgeführt.
+
+Gebundener Artikel:
+- `Beratung`;
+- `Putzbox für Pferde richtig auswählen`;
+- Keyword `Putzbox für Pferde`;
+- 1 Item;
+- `publish_allowed=false`.
+
+Ergebnis:
+- **BLOCKED BEFORE SYSTEM-4 INGRESS**;
+- repositoryweite Root-`AGENTS.md` griff vor der System-4-Anweisung;
+- Codex wurde in die bestehende offizielle Runtime-Eintrittsstrecke gezogen;
+- Blocker `CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING`;
+- keine Recherche, Fakten, Fact-Pack, Draft, LT, PPM, Batch oder WordPress-Datei erzeugt;
+- Zeit bis zum Block: **281 Sekunden / 4:41 Minuten**.
+
+Bewertung:
+- System 4 verhielt sich korrekt fail-closed; kein Bypass, kein falsches PASS.
+- Gleichzeitig ist real bewiesen, dass eine äußere repositoryweite Steuerung den Worker **vor der System-4-Tür** umlenken kann.
+- Damit ist die Anforderung `keine Einflussmöglichkeit von außen / eine Tür – ein Wächter` in System 4 aktuell noch nicht erfüllt.
 
 ## V3-Kapselkern – realer lokaler Test
 
-Erster V3-Lauf: **15/16 PASS**. Dabei wurde ein reiner Testfixture-Fehler gefunden; der Controller wurde nicht geändert.
-
+Erster V3-Lauf: **15/16 PASS**; reiner Testfixture-Fehler gefunden, Controller unverändert.
 Nach ausschließlicher Korrektur des Tests: **16/16 PASS**.
 
 Bewiesen im V3-Kern:
@@ -57,20 +72,15 @@ Kein Produktions-PASS daraus ableiten.
 
 ## Konkreter System-4-PASS-Herkunftsbefund
 
-Die State-Frage ist nicht mehr nur theoretisch.
+Die State-Frage ist zusätzlich nicht nur theoretisch.
 
 Im aktuellen `batch_gate.py` werden gespeicherte FULL-/LT-/PPM-Evidence-Felder auf erwartete Werte und Hashbezüge geprüft; LT und PPM werden dort nicht erneut ausgeführt und es gibt keine ausschließlich vom echten Prüfer erzeugte Attestation.
 
-Der vorhandene System-4-Test `test_batch_gate.py` belegt diese Eigenschaft selbst:
-- `production_evidence(draft)` erzeugt LT-/PPM-PASS-Evidence synthetisch im Testcode;
-- `make_fixture()` schreibt diese Werte direkt in `state['checks']['production_evidence']`;
-- der positive Test erwartet danach von `batch_gate.collect_batch(...)` `SYSTEM4_BATCH_FULL_PASS_COLLECTED`.
+Der vorhandene System-4-Test `test_batch_gate.py` belegt diese Eigenschaft selbst: `production_evidence(draft)` erzeugt LT-/PPM-PASS-Evidence synthetisch im Testcode und der positive Test erwartet anschließend `SYSTEM4_BATCH_FULL_PASS_COLLECTED`.
 
 Der finale `handoff_transport.py` prüft Fact-Trace, Design und Batchregeln erneut real, übernimmt LT-/PPM-PASS aber ebenfalls als strukturierte Evidence ohne erneute LT-/PPM-Ausführung.
 
-Damit kann die aktuelle Grenze die **Herkunft** eines formal passenden LT-/PPM-PASS nicht allein aus dem vom Worker schreibbaren State beweisen.
-
-Das beweist keinen praktischen externen Angriff. Es beweist aber exakt die für die Projektanforderung relevante Herkunftslücke: Worker-State und Prüfer-PASS sind noch nicht technisch vollständig voneinander getrennt.
+Das beweist keinen praktischen externen Angriff. Es beweist aber die Herkunftslücke: Worker-State und Prüfer-PASS sind technisch noch nicht vollständig getrennt.
 
 4A-Beleg im PR:
 `isolated_system4a/SYSTEM4_STATE_AUTHORITY_GAP.md`.
@@ -89,13 +99,11 @@ Der komplette reale LT/PPM-E2E über diesen Adapter ist noch nicht bewiesen.
 
 Ein HMAC im selben Codex-Arbeitsbereich ist **kein unabhängiger Wächter**.
 
-Wenn Codex den produktiven Supervisor selbst starten, dessen Authority-Key wählen/lesen oder einen Ersatzcontroller starten kann, besitzt Codex faktisch wieder die Workflow-Autorität. Dann hat 4A keinen ausreichenden strukturellen Vorteil gegenüber System 4.
-
-Darum ist für 4A verbindlich:
+Verbindliches 4A-Kriterium:
 
 `SUPERVISOR_OUTSIDE_WORKER_AUTHORITY`
 
-Der produktive Supervisor muss außerhalb der Codex-/Agent-Sandbox laufen und exklusiv State, Key, Phase, PASS, Route und Resume-Wahrheit halten. Codex darf ausschließlich enge Fachaufträge erhalten und Arbeitsinhalt zurückgeben.
+Der produktive Supervisor muss außerhalb der Codex-/Agent-Sandbox laufen und exklusiv State, Key, Phase, PASS, Route und Resume-Wahrheit halten. Zusätzlich muss bewiesen werden, dass repositoryweite/alte Eintrittslogik den Worker nicht vor dieser 4A-Tür auf einen anderen Weg zwingen kann.
 
 Die harte Definition liegt in:
 `isolated_system4a/AUTHORITY_BOUNDARY.md` auf PR #255.
