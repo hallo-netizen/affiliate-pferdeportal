@@ -68,10 +68,12 @@ test "$(curl -sS -o /tmp/pre-cat -w '%{http_code}' http://127.0.0.1:8080/glossar
 grep -q 'class="uge-category-head"' /tmp/pre-cat
 ! grep -q 'class="uge-hero' /tmp/pre-cat
 
-# Poison *all* glossary rewrite rules while stored schema remains 5.
-docker exec wp wp eval --allow-root '$r=(array)get_option("rewrite_rules",[]);foreach(array_keys($r) as $k){if(strpos((string)$k,"glossar")===0)unset($r[$k]);}update_option("rewrite_rules",$r,false);'
+# Poison every stored glossary rewrite rule while stored schema remains 5.
+# Match "glossar" anywhere in the regex key so ^glossar/... is removed too.
+docker exec wp wp eval --allow-root '$r=(array)get_option("rewrite_rules",[]);foreach(array_keys($r) as $k){if(strpos((string)$k,"glossar")!==false)unset($r[$k]);}update_option("rewrite_rules",$r,false);'
 test "$(docker exec wp wp eval --allow-root 'echo get_option(UGE_Core::REWRITE_SCHEMA_OPTION,"");')" = 5
-! docker exec wp wp option get rewrite_rules --format=json --allow-root | grep -q 'glossar/begriff'
+RULES=$(docker exec wp wp option get rewrite_rules --format=json --allow-root)
+if printf '%s' "$RULES" | grep -q 'glossar'; then echo GLOSSAR_REWRITE_POISON_INCOMPLETE >&2; exit 1; fi
 TC=$(curl -sS -o /tmp/broken-term -w '%{http_code}' http://127.0.0.1:8080/glossar/begriff/hufbein/)
 CC=$(curl -sS -o /tmp/broken-cat -w '%{http_code}' http://127.0.0.1:8080/glossar/gesundheit/)
 if [ "$TC" = 200 ] && grep -q '<article class="uge-single-wrap"' /tmp/broken-term; then echo TERM_POISON_FAILED >&2; exit 1; fi
