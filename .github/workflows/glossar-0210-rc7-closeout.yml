@@ -1,0 +1,205 @@
+name: Glossar 0.2.10-rc7 Closeout Package
+on:
+  push:
+    branches: [hobbyroom/glossar-livefail-red-green-20260913]
+    paths:
+      - '.github/workflows/glossar-0210-rc7-closeout.yml'
+permissions:
+  contents: write
+jobs:
+  closeout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Bind exact tested source and build package
+        shell: bash
+        run: |
+          set -euo pipefail
+          TESTED=1e74b7454e84f97182dbb185614371a48157bc21
+          git cat-file -e "$TESTED^{commit}"
+          rm -rf /tmp/uge-tested-worktree /tmp/uge0210rc7 /tmp/uge0210rc7-package
+          git worktree add --detach /tmp/uge-tested-worktree "$TESTED"
+          cd /tmp/uge-tested-worktree
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/build-0.2.10-rc7.sh
+          P=/tmp/uge0210rc7/universal-glossary-engine
+          test -d "$P"
+          grep -q 'Version: 0.2.10-rc7' "$P/universal-glossary-engine.php"
+          grep -q "define('UGE_VERSION', '0.2.10-rc7');" "$P/universal-glossary-engine.php"
+          find "$P" -name '*.php' -print0 | xargs -0 -n1 php -l
+          mkdir -p /tmp/uge0210rc7-package
+          cd /tmp/uge0210rc7
+          zip -qr /tmp/uge0210rc7-package/universal-glossary-engine-0.2.10-rc7.zip universal-glossary-engine
+          unzip -t /tmp/uge0210rc7-package/universal-glossary-engine-0.2.10-rc7.zip
+          mkdir -p /tmp/uge0210rc7-package/unpack
+          unzip -q /tmp/uge0210rc7-package/universal-glossary-engine-0.2.10-rc7.zip -d /tmp/uge0210rc7-package/unpack
+          diff -qr "$P" /tmp/uge0210rc7-package/unpack/universal-glossary-engine
+          grep -q 'Version: 0.2.10-rc7' /tmp/uge0210rc7-package/unpack/universal-glossary-engine/universal-glossary-engine.php
+          find /tmp/uge0210rc7-package/unpack/universal-glossary-engine -name '*.php' -print0 | xargs -0 -n1 php -l
+          sha256sum /tmp/uge0210rc7-package/universal-glossary-engine-0.2.10-rc7.zip | tee /tmp/uge0210rc7-package/SHA256.txt
+          echo RC7_EXACT_TESTED_SOURCE_PACKAGE_PASS
+      - name: Synchronize plugin office and authoritative closeout docs
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE"
+          DEST=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS/MOD-008
+          mkdir -p "$DEST"
+          cp /tmp/uge0210rc7-package/universal-glossary-engine-0.2.10-rc7.zip "$DEST/CURRENT.zip"
+          SHA=$(sha256sum "$DEST/CURRENT.zip" | awk '{print $1}')
+          test "$SHA" = "$(awk '{print $1}' /tmp/uge0210rc7-package/SHA256.txt)"
+          NOW=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          cat > "$DEST/MANIFEST.md" <<EOF
+          # MOD-008 – CURRENT.zip MANIFEST
+
+          - Plugin-ID: MOD-008
+          - Name: Universal Glossary Engine
+          - Version: 0.2.10-rc7
+          - SHA-256: $SHA
+          - Autoritative Fachquelle: PROJEKTE/PFERDE_ATELIER/GLOSSAR/
+          - Allgemeiner Hauptort: ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/
+          - Quell-Branch: hobbyroom/glossar-livefail-red-green-20260913
+          - Exakt getesteter Quell-Commit: 1e74b7454e84f97182dbb185614371a48157bc21
+          - Hardtest-Run: 34762048546
+          - Fresh: 103736483608 SUCCESS
+          - Real-Design/Browser: 103736483696 SUCCESS
+          - Paketquelle: exakt aus Commit 1e74b7454e84f97182dbb185614371a48157bc21 neu gebaut
+          - Paketprüfung: unzip -t PASS; Source-vs-Unpack diff PASS; Version PASS; PHP-Lint PASS; SHA-256 PASS
+          - Erstellzeit: $NOW
+          - Prüfstatus: TECHNISCHER PAKET-/ARTEFAKT-PASS; PFERDE-LIVE-READBACK OFFEN
+
+          `CURRENT.zip` ist nur eine abgeleitete hashgebundene Ausgabekopie. Fach-/Release-/LIVE-Wahrheit bleibt im Glossar-Fachbüro.
+          EOF
+          rm -f "$DEST/BLOCKED.md"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          cur=Path('protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/CURRENT_STATE.md')
+          s=cur.read_text()
+          s=s.replace('STATUS: 0.2.8 LIVE FAIL / 0.2.10-rc7 TECHNISCHER HARDTEST PASS / KEIN PAKET / PFERDE-LIVE OFFEN','STATUS: 0.2.8 LIVE FAIL / 0.2.10-rc7 TECHNISCHER HARDTEST + GATED PAKET PASS / PFERDE-LIVE OFFEN')
+          s=re.sub(r'## Offene Grenzen\n.*?## PASS-Grenze\n\n\*\*0\.2\.10-rc7 technische Hardtests: PASS\.\*\*\n\n\*\*Übergabe-/Paketstatus: BLOCKED\.\*\*\n\n\*\*Pferde-LIVE-PASS: NEIN / OFFEN\.\*\*', '''## Paket-/Artefaktstatus nach Abschlussprüfung
+
+Aus dem exakt getesteten Quell-Commit `1e74b7454e84f97182dbb185614371a48157bc21` wurde nach den bereits bestandenen Hardtests ein installierbares ZIP gebaut.
+
+Prüfungen des Paketexports:
+- `unzip -t` PASS;
+- entpackte Paketdateien byte-/dateiidentisch zum aus dem getesteten Commit gebauten Pluginbaum (`diff -qr`) PASS;
+- Version `0.2.10-rc7` PASS;
+- PHP-Lint auf dem entpackten Paket PASS;
+- SHA-256 PASS;
+- isolierte Ausgabekopie unter `../PLUGINS/ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip` + `MANIFEST.md` synchronisiert.
+
+Der Paketexport verändert den getesteten Pluginbaum nicht. Pferde-LIVE bleibt offen.
+
+## Offene Grenzen
+
+- Kein Pferde-LIVE-PASS für 0.2.10-rc7.
+- Die bekannten realen Live-Fehler bleiben bis zum realen Nutzer-Readback offen.
+- Der Nutzer entscheidet über das Löschen des Altbestands erst nach eigener realer Prüfung.
+
+## PASS-Grenze
+
+**0.2.10-rc7 technische Hardtests: PASS.**
+
+**Paket-/Artefaktsynchronisierung: PASS.**
+
+**Pferde-LIVE-PASS: NEIN / OFFEN.**''', s, flags=re.S)
+          cur.write_text(s)
+
+          hob=Path('protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/HOBBYRAUM.md')
+          s=hob.read_text()
+          s=s.replace('STATUS: AKTIV / 0.2.10-rc7 TECHNISCH HARDTEST PASS / PAKET BLOCKED / LIVE OFFEN','STATUS: AKTIV / 0.2.10-rc7 TECHNISCH + PAKET PASS / LIVE-READBACK OFFEN')
+          s=s.replace('**ALS NÄCHSTES …**  \naus dem exakt getesteten rc7-Stand einen regelkonformen gated Releasekandidaten bauen und prüfen; danach `PROJEKTE/PFERDE_ATELIER/PLUGINS/` samt hashgebundenem `CURRENT.zip` + `MANIFEST.md` synchronisieren; erst dann Nutzer-Live-Readback.','**ALS NÄCHSTES …**  \ndas exakt hashgebundene `0.2.10-rc7`-Paket installieren und den realen Pferde-Live-Readback durchführen. Erst danach Live-Fehler schließen oder den Altbestand löschen.')
+          s=re.sub(r'## AKTUELLER BLOCKER\n.*?## NÄCHSTE HARTE REIHENFOLGE\n\n1\..*?8\. Nutzer prüft real; erst nach echtem Live-Readback Fehlerstatus ändern bzw\. Altbestand löschen\.', '''## PAKETSTATUS
+
+Der technisch geprüfte rc7-Stand wurde aus dem exakt getesteten Commit paketiert. `CURRENT.zip` + `MANIFEST.md` liegen im Projekt-PLUGINS-Büro; ZIP-Lesetest, Strukturidentität, Version, PHP-Lint und SHA-256 sind PASS.
+
+## NÄCHSTE HARTE REIHENFOLGE
+
+1. exakt dieses hashgebundene Paket verwenden;
+2. reale Pferde-Installation/Readback durchführen;
+3. bestehende und neue Glossarbegriffe im echten Frontend anklicken;
+4. erst bei realem PASS Fehlerstatus schließen;
+5. Altbestand nur nach Nutzerentscheidung löschen;
+6. bei materiellem FAIL neue Version bauen und volle Teststrecke wiederholen.''', s, flags=re.S)
+          hob.write_text(s)
+
+          err=Path('protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/FEHLERQUELLEN.md')
+          s=err.read_text()
+          s=s.replace('## GLOSSAR-PKG-010 – Aktueller RC7 hat kein gated Übergabepaket\nSTATUS: OFFEN / BLOCKER','## GLOSSAR-PKG-010 – Gated Übergabepaket / isoliertes Pluginartefakt\nSTATUS: TECHNISCH PASS')
+          s=re.sub(r'Der erfolgreiche Workflow `34762048546` endet absichtlich mit:\n`UGE0210RC7_HARD_GATES_PASS_NO_PACKAGE`\.\n\nDaher existieren für 0\.2\.10-rc7 noch \*\*kein freigegebenes Installations-ZIP und kein Paket-SHA\*\*\. Es darf kein rc7-Paket aus einem ungebundenen Nebenbau ausgegeben oder als `CURRENT\.zip` synchronisiert werden\.', '''Der Hardtest `34762048546` erzeugte absichtlich noch kein Paket. In der Abschlussprüfung wurde deshalb der Pluginbaum **neu aus exakt dem getesteten Quell-Commit `1e74b7454e84f97182dbb185614371a48157bc21` gebaut** und anschließend paketiert.
+
+Paketprüfung: `unzip -t`, Source-vs-Unpack `diff -qr`, Versionsprüfung, PHP-Lint und SHA-256 PASS. Isolierte Ausgabekopie + Manifest liegen unter `PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS/MOD-008/`.
+
+Dies ist technischer Paket-PASS, kein Pferde-LIVE-PASS.''', s)
+          s=s.replace('- 0.2.10-rc7: **TECHNISCHE HARDTESTS PASS / NO PACKAGE / PFERDE-LIVE OFFEN.**','- 0.2.10-rc7: **TECHNISCHE HARDTESTS + PAKET/ARTEFAKT PASS / PFERDE-LIVE OFFEN.**')
+          err.write_text(s)
+
+          preg=Path('protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/REGISTER.md')
+          s=preg.read_text().replace('BLOCKED – 0.2.10-rc7 technisch grün, aber kein gated Paket / keine CURRENT.zip','TECHNISCHER ARTEFAKT-PASS – CURRENT.zip + MANIFEST vorhanden; Pferde-LIVE offen')
+          preg.write_text(s)
+
+          upd=Path('protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/UPDATEPROTOKOLL.md')
+          s=upd.read_text()
+          s=s.replace('- **Paket-/Artefaktprüfung:** **NICHT AUSGEFÜHRT FÜR rc7.** Der Workflow endet absichtlich mit `UGE0210RC7_HARD_GATES_PASS_NO_PACKAGE`; deshalb kein rc7-Installations-ZIP, kein rc7-Paket-SHA und keine zulässige `CURRENT.zip`.','- **Paket-/Artefaktprüfung:** NACHGEHOLT aus exakt getestetem Quell-Commit `1e74b7454e84f97182dbb185614371a48157bc21`: `unzip -t` PASS; Source-vs-Unpack `diff -qr` PASS; Version 0.2.10-rc7 PASS; PHP-Lint PASS; SHA-256 PASS. Exakter SHA steht im `MANIFEST.md`.')
+          s=s.replace('- **isoliertes Artefakt:** noch nicht vorhanden; `ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip` darf erst nach einem gated Paketlauf auf exakt gebundenen Bytes angelegt werden.','- **isoliertes Artefakt:** `ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip` + `MANIFEST.md`; abgeleitete hashgebundene Ausgabekopie des exakt getesteten Quellstands.')
+          s=s.replace('- **ERGEBNIS:** `BLOCKED` für Paket/Übergabe/PLUGINS-Artefaktsynchronisierung. Technische rc7-Positiv-/Negativ-/Regressionstests PASS; Pferde-LIVE-Readback ebenfalls offen.','- **ERGEBNIS:** `PASS` für Entwicklung + technische Paket-/Artefaktsynchronisierung. Pferde-LIVE-Readback bleibt offen und wird nicht aus CI abgeleitet.')
+          upd.write_text(s)
+
+          mod=Path('protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md')
+          s=mod.read_text()
+          block='''## MOD-008 – UNIVERSAL GLOSSAR ENGINE
+
+MODULKLASSE: UNGEKLÄRT / ZIEL ALLGEMEINGÜLTIG
+
+STATUS:
+Aktive Entwicklung vorhanden. **Kein dynamischer Projekt-/Paket-/LIVE-Status wird hier dupliziert.**
+
+HAUPTORT:
+`ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/`
+
+ERSTE PROJEKTANWENDUNG:
+`PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
+
+AKTUELLER PROJEKT-/TEST-/PAKET-/LIVE-STATUS:
+immer frisch aus `PROJEKTE/PFERDE_ATELIER/GLOSSAR/CURRENT_STATE.md` lesen.
+
+PLUGIN-AUSGABEPULT PFERDE:
+`PROJEKTE/PFERDE_ATELIER/PLUGINS/`
+
+REGEL:
+Modulregister bleibt reiner Wegweiser; keine zweite technische Wahrheit.
+'''
+          m=re.search(r'## MOD-008 – UNIVERSAL GLOSSAR ENGINE\n.*?(?=\n## MOD-|\Z)',s,flags=re.S)
+          if not m: raise SystemExit('MOD008_SECTION_NOT_FOUND')
+          s=s[:m.start()]+block+s[m.end():]
+          mod.write_text(s)
+
+          ar=Path('protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md')
+          s=ar.read_text()
+          marker='## GLOSSAR-001 – Geschlossene Glossarcluster und hashgebundene Plugin-Ausgabe'
+          if marker not in s:
+              s += '''\n\n## GLOSSAR-001 – Geschlossene Glossarcluster und hashgebundene Plugin-Ausgabe\nWAS:\nNeue kurze Pferde-Glossarbegriffe werden als geschlossene verwandte Cluster produziert: zuerst alle Mitglieder als Entwurf, danach Inhalte/Meta/Kategorie/Beziehungen und echte Links vollständig setzen und prüfen, erst dann den vollständigen Cluster gemeinsam veröffentlichen. Pferde-/Ponyrassen bleiben ausgeschlossen. Nach tatsächlicher Pluginentwicklung wird die geprüfte Ausgabekopie zusätzlich im Pferde-PLUGINS-Büro hashgebunden als `CURRENT.zip` + `MANIFEST.md` geführt.\nWARUM:\nTote `Verwandte Begriffe`, halbfertige Cluster, unprüfbare Linkziele und nicht reproduzierbare Pluginstände sollen fail-closed verhindert werden. Fach-/Release-/LIVE-Wahrheit bleibt trotzdem ausschließlich im Glossar-Fachbüro; die Plugin-Kopie ist nur abgeleitete Ausgabe.\nBELEG:\n`PROJEKTE/PFERDE_ATELIER/GLOSSAR/PRODUKTIONSREGELN.md`; `PROJEKTE/PFERDE_ATELIER/GLOSSAR/PROTOKOLL_0.2.10_RC7_20260913.md`; Pluginvorgang `PROJEKTE/PFERDE_ATELIER/PLUGINS/UPDATEPROTOKOLL.md` → `PU-20260913-001`.\n'''
+          ar.write_text(s)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY
+          git diff --cached --check
+          test -f "$DEST/CURRENT.zip"
+          test -f "$DEST/MANIFEST.md"
+          test ! -f "$DEST/BLOCKED.md"
+          test "$(sha256sum "$DEST/CURRENT.zip" | awk '{print $1}')" = "$SHA"
+          git commit -m 'Close out Glossar rc7 package and plugin artifact'
+          git push origin HEAD:hobbyroom/glossar-livefail-red-green-20260913
+          echo "CURRENT_ZIP_SHA256=$SHA"
+          echo GLOSSAR_RC7_CLOSEOUT_SYNC_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universal-glossary-engine-0.2.10-rc7-tested
+          path: |
+            protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip
+            protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS/MOD-008/MANIFEST.md
+          if-no-files-found: error
