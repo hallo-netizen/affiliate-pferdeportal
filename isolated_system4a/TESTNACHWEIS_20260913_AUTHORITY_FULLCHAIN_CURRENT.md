@@ -4,138 +4,107 @@ Belegdatei, keine zweite CURRENT_STATE.
 
 ## Vergleichsbasis
 
-System 4 PR #238: Head `edfe6049768db68f85bf3babedce3199538217ef`.
-4A basiert direkt auf diesem Stand; fachliche, Design-, Qualitäts- und WordPress-Regeln bleiben System 4 und werden nicht kopiert.
+System 4 PR #238 Head: `89b2e8eeb928f744e8814b2c79966672db2e308a`.
 
-## Frischer lokaler 4A-Satz
+Seit dem vorherigen Prüferstand `edfe6049768db68f85bf3babedce3199538217ef` wurden in System 4 nur zusätzliche Transportdateien ergänzt; der im Realtest ausgeführte Fach-/Design-/LT-/PPM-Prüfercode blieb unverändert.
 
-Ausgeführt nach der Produktions-Autoritätshärtung:
+4A verändert ausschließlich `isolated_system4a/**`.
 
-- Python compile der geänderten 4A-Dateien: PASS.
-- Unittest-Satz: **31/31 PASS**, 0 Fehler, 0 Failures, Laufzeit **16,792 s**.
+## Lokale Architektur-/Grenztests
 
-Abgedeckt sind unter anderem:
-- kompletter positiver Einstieg bis Parent-Chat-Ausgang mit Same-Article-Repair;
-- Cross-UID-Supervisor/Worker-Grenze;
-- 1 / 3 / 25 externe Vollketten;
-- 1 / 3 / 25 / 1000 interne Architekturkette;
-- getrennte Worker-Prozesse und isolierte Worker-Räume;
-- gemischte/neue `article_type` ohne Controller-Whitelist;
-- Worker-State-/PASS-/LT-/PPM-/Production-Evidence-Injektion BLOCK;
-- Research/Facts/Context/Design/Checker-Hash/Repair/Batch BLOCK;
-- Output- und Parent-Chat-Tamper BLOCK;
-- direkter Produktions-Callable BLOCK vor Backend, Worker und Ingress;
-- Same-User-Produktion BLOCK vor realem Prüfer-Backend;
-- Produktions-Prüfer-Injektion BLOCK.
+Frischer Sammellauf mit Warnings als Fehler:
 
-## Frischer 1000er externer Skalierungslauf
+**41/41 PASS**.
 
-Ausgeführt auf derselben Autoritätsschicht:
+Abgedeckt sind u. a.:
 
-- Artikel: **1000**;
-- logisch getrennte Artikel-Sessions: **1000**;
-- Worker-Runtime-Prozesse: **2**;
-- kompletter Architekturweg bis `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` und Parent-Chat-Rekonstruktion: PASS;
-- Parent-Chat-Datei byteidentisch: PASS;
-- Ausgangsgröße: **3.550.796 Byte**;
-- Laufzeit: **7,324 s**.
-
-Dieser Lauf ist ARCHITEKTUR-E2E mit Test-Checkern und bleibt vom echten Produktionsnachweis getrennt.
+- kompletter Einstieg bis Parent-Chat-Datei;
+- Same-Article-Repair;
+- 1 / 3 / 25 / 1000 Artikel;
+- neue/gemischte Beitragsarten;
+- Managed-Session- und Cross-UID-Grenze;
+- Worker-State-/PASS-/Manifest-/Publish-Injektion BLOCK;
+- Research/Facts/Context/Design/Checker/Repair/Batch BLOCK;
+- JSON-/Inline-Tamper BLOCK;
+- privates `0700 root`-Worker-Quellverzeichnis;
+- Supervisor-Staging dieses privaten Bundles;
+- Authority-Dateien/Symlinks im Worker-Bundle BLOCK;
+- echter Worker-Crash liefert Exit-Code + stderr.
 
 ## Echter lokaler Produktions-Acceptance-Lauf
 
-Ausgeführt mit dem aktuellen 4A-Produktionsrunner und den unveränderten System-4-Prüfern.
+Gebundene reale Abhängigkeiten:
 
-Gebundene Abhängigkeiten:
+- LanguageTool 6.8 JAR SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`;
+- PPM 6.7.9 Paket SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`;
+- `mocks_used=false`.
 
-- System-4-Basis: `edfe6049768db68f85bf3babedce3199538217ef`;
-- System-4-Critical-Manifest: `3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c`;
-- LanguageTool 6.8 Commandline-JAR SHA256: `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`;
-- PPM 6.7.9 Paket SHA256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`;
-- echte System-4-Acceptance-Fixture: `isolated_system4/full_local_acceptance.py` Blob `0fe61d04c8656c87727862d5b587530696d1bf50`;
-- 4A-Read-only-Adapter Blob `5b75ab2f95d761595b9e7d7c5b4e7bd073206bed`.
+Produktionslauf nach Worker-Staging-Härtung:
 
-Ergebnis des vollständigen Laufs:
-
-**9/9 PASS**.
+**10/10 PASS**.
 
 Positiv:
 
-- externer Fachinput ohne Kontrollmanifest;
-- Supervisor bindet das System-4-Manifest selbst;
-- Worker läuft als andere UID (`nobody`) außerhalb der Supervisor-Autorität;
-- Research -> Facts -> Context -> Draft;
-- echter LanguageTool-6.8-Fund im ersten Draft;
-- Same-Article-Repair, finale Revision **2**;
-- erneuter echter LanguageTool-6.8-PASS;
-- echter PPM-6.7.9-PASS;
-- Batch-PASS;
-- `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` PASS;
-- Parent-Chat-Rekonstruktion byteidentisch PASS;
-- `publish_allowed=false`.
+`Fachinput -> Supervisor-Ingress -> privates 0700-Worker-Bundle -> Supervisor-Staging -> Cross-UID-Worker -> Research -> Facts -> Context -> Draft -> real LT -> Same-Article-Repair -> real LT PASS -> real PPM PASS -> Batch -> V2 -> Parent-Chat byteidentisch`
 
-Finaler Test-Handoff:
-
-- Größe: **66.753 Byte**;
-- SHA256: `4f3c3585d1b42f3ca53f1f65bb4bca728a6426527c7eec75c45e2622dd7220ae`.
-
-Negativ jeweils PASS durch korrektes Blockieren:
+Negativ korrekt geblockt:
 
 1. Same-UID-Produktion;
-2. extern eingespeistes Kontrollmanifest;
-3. Worker-PASS-/Phase-Injektion;
-4. Worker erzeugt Fake-`state.json`;
-5. ungültige Research-Evidence;
-6. ungültige Facts-Evidence;
-7. Design-Drift;
-8. Parent-Chat-Payload-Tamper.
+2. externes Kontrollmanifest;
+3. direkter ungestagter Cross-UID-Worker unter privatem Pfad;
+4. PASS-/Phase-Injektion;
+5. Fake-`state.json`;
+6. Research-Fail;
+7. Facts-Fail;
+8. Design-Fail;
+9. Parent-Chat-Payload-Tamper.
 
-`mocks_used=false`, `real_languagetool=true`, `real_ppm679=true`, `supervisor_owns_manifest_binding=true`.
+Finaler positiver Handoff:
 
-## Korrigierter Testfixture-Fehler
+- **66.753 Byte**;
+- SHA256 `4f3c3585d1b42f3ca53f1f65bb4bca728a6426527c7eec75c45e2622dd7220ae`;
+- Revision **2**;
+- `publish_allowed=false`.
 
-Der erste Lauf erreichte sämtliche realen Produktionsstufen und stoppte ausschließlich im letzten Parent-Chat-Negativtest. Ursache war ein Fehler im Test selbst: Der Test veränderte nur das letzte Newline hinter dem `INLINE_END`-Marker und damit keine geschützte Nutzlast.
+## Freigegebener Codex-Probelauf und lokale Root-Cause
 
-Der Test wurde ausschließlich so korrigiert, dass ein Zeichen innerhalb von `payload_base64` verändert wird. Danach blockierte der vorhandene Handoff-Prüfer korrekt und der vollständige Lauf erreichte **9/9 PASS**.
+Einmaliger freigegebener Codex-Probelauf:
 
-Korrektur-Commit auf PR #255:
+- Titel: `Pferdeanhänger im Herbst sicher vorbereiten`;
+- Root Entry: PASS;
+- Production Ingress: PASS;
+- Blocker bei erstem Research-Request: `WORKER_EXITED_WITHOUT_RESPONSE`;
+- kein Handoff, kein Publish, kein zweiter Versuch.
 
-`1e4571d8196df066a7e35378e62edb79816c10d0`
+Lokale Reproduktion:
 
-Korrigierter Runner-Blob:
+- Ursache: Worker-Skript lag unter einem `0700 root`-Tempverzeichnis und war für `nobody` nicht zugänglich;
+- zusätzlich wurde Worker-stderr vom damaligen Host verworfen.
 
-`7719c42b8779a4cdd26bf78ac5d28f9304cce9a6`
+Lokale Korrektur:
 
-Keine Fach-, Text-, Design-, LT-, PPM-, WordPress- oder Produktionsregel wurde dafür verändert.
+- Cross-UID-Pfadprüfung vor Workerstart;
+- Exit-Code + stderr bei Workerabbruch;
+- Supervisor-eigenes Staging eines privaten Worker-Bundles in einen kontrollierten read-only Bereich;
+- `state.json`, `authority.key`, `AGENTS.md`, `.git` und Symlinks im Bundle verboten;
+- Cleanup des Supervisor-Stagingbereichs nach Lauf.
 
-## Direkter Vergleich gegen System 4
-
-Danach wurde auf derselben lokalen Basis der unveränderte aktuelle System-4-Runner `isolated_system4/full_local_acceptance.py` gegen exakt dieselben echten LT-/PPM-Abhängigkeiten ausgeführt.
-
-Ergebnis System 4:
-
-**10/10 PASS**, `mocks_used=false`, `codex_used=false`.
-
-Positiver System-4-Ausgang:
-
-- Größe: **66.753 Byte**;
-- SHA256: `4f3c3585d1b42f3ca53f1f65bb4bca728a6426527c7eec75c45e2622dd7220ae`;
-- Revision: **2**;
-- Artikel: **1**.
-
-Damit sind positiver System-4- und positiver System-4A-Ausgang **byteidentisch**. 4A verändert weder Text, Reparaturergebnis, LT-/PPM-Evidence noch V2-Ausgang. Der nach diesem Vergleich verbleibende 4A-Unterschied ist ausschließlich die Lage der Workflow-/State-Autorität.
+Diese Korrektur ist im vollständigen 41/41- und 10/10-Lauf enthalten.
 
 ## Beweisgrenze
 
-Damit ist jetzt lokal real bewiesen:
+Lokal real bewiesen:
 
-- Supervisor-State und Workflow-Autorität liegen außerhalb des Cross-UID-Workers;
-- der Worker kann Route/PASS/State nicht setzen;
-- die unveränderten System-4-Prüfer laufen vollständig über 4A;
-- echter LT-/PPM-Produktionsweg inklusive Same-Article-Repair funktioniert;
-- V2-/Parent-Chat-Ausgang bleibt intakt;
-- System 4 und 4A erzeugen im identischen positiven Realtest byteidentischen Output.
+- Workflow-/State-Autorität außerhalb des Cross-UID-Workers;
+- echte System-4-Prüfer unverändert über 4A;
+- echter LT-/PPM-Weg inklusive Same-Article-Repair;
+- V2-/Parent-Chat-Ausgang byteidentisch;
+- realistisches privates Worker-Staging funktioniert positiv und negativ.
 
-Noch **nicht** bewiesen ist die operative Produktgrenze mit einem tatsächlich extern betriebenen Codex-/Managed-Agent-Worker. Der vorhandene Managed-Agent-Weg bleibt deshalb separat offen. Ebenfalls wurde kein echter WordPress-Import ausgeführt; WordPress ist kein eigener 4A-Vorteil und sein vorhandener Importvertrag bleibt unverändert.
+Noch offen:
 
-Kein Merge, kein Publish, kein Codex-Lauf aus diesem Nachweis.
+- erneuter operativer Codex-/Managed-Agent-Probelauf auf der korrigierten Grenze.
+
+Dieser Lauf ist **nicht autorisiert**, solange der User ihn nicht ausdrücklich freigibt.
+
+Kein Merge, kein Publish.
