@@ -1,11 +1,11 @@
 from __future__ import annotations
-import copy,hashlib,json
+import copy,hashlib,json,re
 from pathlib import Path
 
-import controller,point0_snapshot,root_entry,supervisor
+import authoring_contract,controller,point0_snapshot,root_entry,supervisor
 from live_route_test_support import LIVE,canon,head,write_json
 from new_topic_real_source_fixture import source_and_claims
-from real_route_test_support import valid_real_article
+from real_route_test_support import valid_real_article as _valid_real_article
 
 NEW_ITEMS=[
     {
@@ -117,3 +117,22 @@ def start_to_context_new_topic(base:Path,index:int):
     if state['phase']!='DRAFT_REQUIRED':
         raise AssertionError('NEW_TOPIC_DRAFT_REQUIRED_NOT_REACHED')
     return workspace,snapshot,state
+
+
+def valid_real_article(state:dict,index:int)->str:
+    article=_valid_real_article(state,index)
+    if index!=2:
+        return article
+    pattern=re.compile(r'(<section data-block="conclusion">.*?)(</section>)',re.S)
+    match=pattern.search(article)
+    if not match:
+        raise AssertionError('NEW_TOPIC_CONCLUSION_BLOCK_MISSING')
+    section=match.group(1)
+    addition=' Zusätzlich bleibt für Pellets aus Luzerne für Pferde der gebundene Quellenstand maßgeblich; weitergehende Tatsachen werden im Fazit ausdrücklich nicht ergänzt.'
+    last_p=section.rfind('</p>')
+    if last_p<0:
+        raise AssertionError('NEW_TOPIC_CONCLUSION_PARAGRAPH_MISSING')
+    section=section[:last_p]+addition+section[last_p:]
+    article=article[:match.start(1)]+section+article[match.end(1):]
+    authoring_contract.validate_candidate(article,state['authoring_contract'])
+    return article
