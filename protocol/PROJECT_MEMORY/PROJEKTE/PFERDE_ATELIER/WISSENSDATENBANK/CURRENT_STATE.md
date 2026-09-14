@@ -23,13 +23,11 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **168 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 162er-Stand neu: Pantaneiro, Mangalarga Paulista, Campeiro, Marajoara, Latgalischer Traber und Lettischer Ardenner.
-- Pantaneiro, Mangalarga Paulista und Campeiro sind über MAPA bzw. national registrierte Zuchtorganisationen gebunden.
-- Marajoara ist über Embrapa als eigenständiger brasilianischer Erhaltungsbestand/Rassekomplex mit Rassestandard und Erhaltungskern gebunden; aktueller MAPA-Registerstatus bleibt Detailoffenheit.
-- Latgales rikšotājs und Latvijas ardeņu zirgs sind über lettische staatliche Erhaltungsquellen gebunden.
-- Latvian Heavy Warmblood wird nicht separat angelegt: aktuelles staatliches Register führt ihn als Fahr-/schweren Typ innerhalb des Latvian Warmblood.
-- Puruca wird vorerst nicht separat angelegt, da aktuelle Embrapa-Fachliteratur ihn eng dem Marajoara-Komplex zuordnet.
+- **172 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 168er-Stand neu: Slowakisches Warmblut, Muráň-Noriker, Slowakisches Sportpony und Slowakischer Traber.
+- Die vier neuen slowakischen Datensätze sind über ZCHKS/Závodisko sowie staatliche bzw. anerkannte Registerquellen gebunden.
+- Norik muránskeho typu wird wegen eigener slowakischer Zuchtbuchführung getrennt vom allgemeinen Noriker geführt.
+- Slowakisches Sportpony wird als eigene Plemenná kniha geführt und nicht als reine Größenklasse behandelt.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
