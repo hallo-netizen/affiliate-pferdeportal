@@ -71,18 +71,23 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  other=[x for x in required if x!=intro_name]
  while len(other)<max(min_h2,2):other.append(f'content_{len(other)+1}')
  target_paras=max(min_paragraphs-1,len(other)*2,4);target_words=max(min_words-intro_words,400);paras_per=max(2,(target_paras+len(other)-1)//len(other));words_per=max(45,(target_words+len(other)*paras_per-1)//(len(other)*paras_per))
- link_rows=[row for row in b.get('link_bindings',[]) if isinstance(row,dict) and row.get('active') is not False];link_cursor=0
+ link_rows=[row for row in b.get('link_bindings',[]) if isinstance(row,dict) and row.get('active') is not False]
+ expected_link_blocks=[str(row.get('section_id') or '') for row in link_rows]
+ missing_link_blocks=[name for name in expected_link_blocks if name not in other]
+ if missing_link_blocks:raise AssertionError('BOUND_LINK_SECTION_MISSING:'+','.join(missing_link_blocks))
  article_word=word_token(index+8)
  heading_suffixes=('sicher auswählen','Material sinnvoll vergleichen','Nutzung praktisch einordnen','Pflege passend planen','Sicherheit gezielt prüfen','Entscheidung nachvollziehbar treffen','Eignung im Alltag bewerten','Anwendung sinnvoll abstimmen')
  for bi,name in enumerate(other):
   intent=intent_terms[bi%len(intent_terms)];heading=f'{intent} {heading_suffixes[bi%len(heading_suffixes)]}'
   parts=[f'<h2>{heading}</h2>']
+  section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
   for pi in range(paras_per):
    words=(filler+f' Abschnitt {word_token(bi)} Punkt {word_token(pi+4)} {article_word} ').split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
-   if link_cursor<len(link_rows):
-    row=link_rows[link_cursor];text+=f' <a href="{row["href"]}">{row["anchor"]}</a>';link_cursor+=1
+   if pi==0:
+    for row in section_links:text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
    parts.append(f'<p data-fact-ids="{allowed[(bi+pi)%len(allowed)]}">{text}</p>')
   blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
+ if sum(1 for name in other for row in link_rows if str(row.get('section_id') or '')==name)!=len(link_rows):raise AssertionError('BOUND_LINK_NOT_PLACED_EXACTLY_ONCE')
  if len(blocks)>1:
   required_list=(
    f'<ul>'
@@ -93,8 +98,6 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
    f'</ul>'
   )
   blocks[1]=blocks[1].replace('</section>',required_list+'</section>',1)
- while link_cursor<len(link_rows):
-  row=link_rows[link_cursor];blocks[-1]=blocks[-1].replace('</section>',f'<p data-fact-ids="{fid}"><a href="{row["href"]}">{row["anchor"]}</a></p></section>');link_cursor+=1
  table_count=int(t.get('table_count_exact') or 0);tables=''
  if table_count:
   rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {word_token(r)}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {article_word} {word_token(index+r+11)}</td></tr>' for r in range(rows));table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>';tables=table*table_count
