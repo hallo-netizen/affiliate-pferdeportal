@@ -1,0 +1,60 @@
+name: System 4A Real LT68 PPM679 Acceptance
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact head
+        run: git rev-parse HEAD
+      - name: Download hash-bound LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Run full real acceptance including known-regression repair to file
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
+        run: python3 isolated_system4/full_local_acceptance.py
+      - name: Verify regression proof in acceptance report
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/system4-acceptance-output/SYSTEM4_FULL_LOCAL_ACCEPTANCE_REPORT.json')
+          r=json.loads(p.read_text())
+          assert r['status']=='PASS'
+          rows={x['name']:x for x in r['tests']}
+          k='POS_REAL_PPM_KNOWN_REGRESSION_REPAIR_TO_FILE'
+          assert rows[k]['status']=='PASS'
+          assert rows[k]['detail']['ppm_error']=='BLOCKED_KNOWN_REGRESSION_PATTERN'
+          assert rows[k]['detail']['repair_owner']=='DRAFT_WORKER'
+          f=Path('/tmp/system4-acceptance-output/SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json')
+          assert f.is_file() and f.stat().st_size>0
+          print('SYSTEM4_REAL_PPM_KNOWN_REGRESSION_TO_FILE_PASS')
+          PY
+      - name: Upload acceptance proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-real-acceptance-${{ github.sha }}
+          path: /tmp/system4-acceptance-output/
+          if-no-files-found: error
+          retention-days: 1
