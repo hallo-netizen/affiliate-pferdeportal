@@ -11,7 +11,7 @@ def write_json(path:Path,value):
     path.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True),encoding='utf-8')
 
 def _balance_conclusion(body:str,state:dict)->str:
-    if state['article']['category'] not in {'pellets-beratung','fliegenmasken-beratung'}: return body
+    if state['article']['category'] not in {'pellets-beratung','fliegenmasken-beratung','pferdehaftpflicht-beratung'}: return body
     pattern=re.compile(r'(<section data-block="conclusion">.*?)(</section>)',re.S); match=pattern.search(body)
     if not match: raise RuntimeError('CONCLUSION_BLOCK_MISSING')
     section=match.group(1); last_p=section.rfind('</p>')
