@@ -1,33 +1,33 @@
 # GLOSSAR – BEGRIFFSREGISTER
 
-STAND: 2026-09-13
+STAND: 2026-09-14
 STATUS: AKTIV
 ROLLE: AUTORITATIVES PRODUKTIONSREGISTER FÜR GLOSSARBEGRIFFE
 
 ## Zweck
 
-Dieses Register beantwortet ausschließlich die Frage, welcher Glossarbegriff redaktionell/technisch bereits vollständig ist und welcher noch Arbeit benötigt.
-
-Es ersetzt weder die Wissensdatenbank noch den Themenpool noch WordPress als Inhaltsablage.
+Dieses Register beantwortet ausschließlich, welcher Glossarbegriff redaktionell/technisch bereits vollständig ist und welcher noch Arbeit benötigt. Es ersetzt weder Wissensdatenbank noch WordPress-Inhaltsablage.
 
 ## Verbindliche Statuswerte
 
 - `OFFEN` – Begriff vorgesehen, noch nicht als vollständiger Glossarbeitrag vorhanden.
-- `IN ARBEIT` – Beitrag/Cluster wird gerade erstellt oder repariert.
-- `NACHPRÜFUNG` – Beitrag existiert bereits, muss aber gegen die aktuellen Produktionsregeln geprüft werden.
-- `FERTIG` – Beitrag ist vollständig geprüft: Inhalt, Metaangaben, Glossar-Kategorie, mindestens ein sinnvoller interner Link zu einem verwandten Glossarbeitrag und funktionierende Verwandt-Verlinkung.
+- `IN ARBEIT` – Beitrag/Cluster wird erstellt oder repariert.
+- `NACHPRÜFUNG` – Beitrag existiert, aber mindestens eine aktuelle Inhalts-/Link-/Design-/Liveprüfung fehlt.
+- `FERTIG` – Beitrag ist gegen die aktuellen Regeln vollständig geprüft und real freigegeben.
 - `GESPERRT` – darf nicht als Glossarbeitrag erzeugt werden, z. B. Pferde- und Ponyrassen.
 
 ## Harte Regeln
 
-1. Bereits vorhandene Glossarbeiträge werden **nicht gelöscht**, nur weil neue Produktionsregeln eingeführt wurden.
-2. Die vorhandenen Live-Glossarbeiträge bleiben bestehen, bis der Nutzer nach technischem Klickbarkeitsnachweis selbst entschieden und real geprüft hat, ob der Altbestand gelöscht wird.
-3. Das Plugin löscht oder überschreibt diese Altbeiträge nicht automatisch.
-4. Bestehende Beiträge werden bis zur fachlichen Nachprüfung auf `NACHPRÜFUNG` geführt.
-5. Bei der Nachprüfung werden fehlende verwandte Begriffe als geschlossener Cluster im selben Produktionslauf ergänzt.
-6. Ein bestehender Artikel wird nur ersetzt/gelöscht, wenn er ein echter Dublette-, Fehl- oder Testdatensatz ist und dies vorher nachgewiesen ist.
-7. Pferde- und Ponyrassen sind `GESPERRT` und gehören ausschließlich in das separate Pferderassen-System.
-8. `FERTIG` darf nur gesetzt werden, wenn alle Links tatsächlich auflösbar sind; reine Textnennungen zählen nicht.
+1. Vorhandene Glossarbeiträge werden nicht pauschal gelöscht.
+2. Bestehende Begriffe dürfen anhand eindeutiger Slugs/IDs gezielt **überschrieben/aktualisiert** werden; ID und URL müssen erhalten bleiben.
+3. Keine automatische Löschung des Gesamtbestands für Regeländerungen.
+4. Echte Dubletten-/Test-/Fehldatensätze nur nach Nachweis entfernen.
+5. Neue Begriffe nur aus einer frisch nachgewiesenen `GEPRUEFT`-Quelle der Wissensdatenbank.
+6. Pferde- und Ponyrassen sind `GESPERRT` und gehören in das separate Pferderassen-System.
+7. `FERTIG` nur nach vollständiger Inhalts-, Link-, Meta-, Design- und erforderlicher Liveprüfung.
+8. Verwandte Begriffe werden technisch relationiert und als Links in der rechten Box ausgegeben; diese Ziele dürfen nicht redundant im Fließtext verlinkt sein.
+9. Dasselbe Linkziel darf in einem Glossarbegriff nicht doppelt gesetzt werden.
+10. Verbindliche Detailregeln: `TEXT_UND_LINKREGELN.md`.
 
 ## Pflichtfelder je Begriff
 
@@ -35,55 +35,58 @@ Es ersetzt weder die Wissensdatenbank noch den Themenpool noch WordPress als Inh
 |---|---|
 | Begriff | öffentlicher Glossarbegriff |
 | Slug | eindeutiger WordPress-Slug |
+| Kurzdefinition | sichtbare Zusammenfassung |
 | Glossar-Kategorie | zugeordneter Glossar-Bereich |
 | Status | OFFEN / IN ARBEIT / NACHPRÜFUNG / FERTIG / GESPERRT |
-| Verwandte Begriffe | nur echte bzw. im selben Cluster erzeugte Begriffe |
-| Interne Links geprüft | JA / NEIN |
-| Kategorie-Link geprüft | JA / NEIN |
+| Verwandte Begriffe | echte, auflösbare Relationen |
+| Fließtext-Link geprüft | genau einmaliges passendes Portal-Ziel |
+| Doppellink-Prüfung | kein Ziel doppelt |
 | Meta geprüft | JA / NEIN |
+| Design/Single geprüft | JA / NEIN |
 | Letzte Prüfung | Datum / Nachweis |
 
-## Aktueller Bestand
+## Aktueller belastbarer Produktionsstand
 
-Der vollständige reale Live-Bestand ist noch nicht autoritativ eingelesen. Deshalb werden keine weiteren vorhandenen Begriffe geraten.
+Der reale vollständige WordPress-Livebestand wurde in diesem Chat nicht automatisiert vollständig eingelesen. Deshalb wird keine vollständige Liveinventarliste erfunden.
 
-Bereits bekannte vorhandene Glossarbeiträge müssen beim nächsten realen Bestandseinzug übernommen und zunächst auf `NACHPRÜFUNG` gesetzt werden, sofern nicht bereits ein vollständiger Nachweis nach aktueller Regel existiert.
+Für den aktuellen lokalen Bestands-Update-Kandidaten `1.2.1` sind folgende 14 Slugs technisch enthalten und geprüft; wegen offenem autoritativen Release-/Livebeleg bleiben sie im Register auf `NACHPRÜFUNG`:
 
-### Bekannter Prüfauftrag
-
-| Begriff | Slug | Status | Hinweis |
+| Begriff | Slug | Status | lokaler Stand 2026-09-14 |
 |---|---|---|---|
-| Aalstrich | aalstrich | NACHPRÜFUNG | bereits vorhanden; fachliche/Meta-/Link-Nachprüfung noch offen |
+| Huf | huf | NACHPRÜFUNG | 150–200 Wörter, 1 Fließtext-Link, Related separat – lokal PASS |
+| Hufbein | hufbein | NACHPRÜFUNG | lokal PASS |
+| Strahlbein | strahlbein | NACHPRÜFUNG | lokal PASS |
+| Hufrolle | hufrolle | NACHPRÜFUNG | lokal PASS |
+| Widerrist | widerrist | NACHPRÜFUNG | lokal PASS |
+| Stockmaß | stockmass | NACHPRÜFUNG | lokal PASS; LIVE-Doppellinkfehler der vorherigen Fassung muss durch 1.2.1/1.50.489 real verschwinden |
+| Bandmaß | bandmass | NACHPRÜFUNG | lokal PASS; Referenzfall für finale Liveprüfung |
+| Ganasche | ganasche | NACHPRÜFUNG | lokal PASS |
+| Kehlgang | kehlgang | NACHPRÜFUNG | lokal PASS |
+| Röhrbein | roehrbein | NACHPRÜFUNG | lokal PASS |
+| Kötenbehang | koetenbehang | NACHPRÜFUNG | lokal PASS |
+| Hufrehe | hufrehe | NACHPRÜFUNG | lokal PASS |
+| Strahlfäule | strahlfaeule | NACHPRÜFUNG | lokal PASS |
+| Hufabszess | hufabszess | NACHPRÜFUNG | lokal PASS |
 
-## Neue Cluster
+### Weitere bekannte Begriffe
 
-Neue Begriffe werden nicht einzeln als `FERTIG` markiert. Zuerst wird der gesamte verwandte Cluster geschlossen, danach werden alle Cluster-Mitglieder gemeinsam bewertet.
+`Aalstrich` war bereits als vorhandener/Nachprüfungsbegriff dokumentiert. Sein heutiger realer WordPress-/WDB-Status wurde in diesem Chat nicht frisch belegt; deshalb keine Hochstufung oder Erzeugung.
 
-Aktueller technischer Testcluster in 0.2.10-rc7:
-- Hufrehe
-- Strahlfäule
-- Hufabszess
+## LIVE-Funktionsstand
 
-Dieser Cluster ist **technisch im Testsystem grün**, aber nicht als realer Pferde-Live-Bestand in diesem Register auf `FERTIG` hochzustufen.
+Nutzerreadback: **`artikelanzeige pass`**. Damit ist die generelle Öffnung von Glossar-Einzelartikeln LIVE bestätigt.
 
-## Klickbarkeitsnachweis – technisch erbracht
+Dies reicht nicht zur Hochstufung der obigen Begriffe auf `FERTIG`, weil die aktuelle Einzelansicht noch den Fehler `GLOSSAR-SINGLE-011` hat bzw. der lokale Fix 1.2.1/1.50.489 noch keinen Live-Readback besitzt.
 
-Die bisherige technische Freigabeschranke verlangte mindestens:
-- Klick auf einen gerenderten bestehenden Glossarbegriff aus einer Glossarübersicht → echte Einzelansicht;
-- Klick auf einen gerenderten neuen Cluster-Begriff → echte Einzelansicht;
-- Klick auf `Verwandte Begriffe` → echte verwandte Einzelansicht;
-- Klick auf den Kategorienlink → echte Glossar-Kategorie.
+## Nächste Freigabeschranke
 
-**Diese technische Schranke ist mit 0.2.10-rc7 im Testsystem erfüllt.**
+`Bandmaß` muss nach quellgebundener Installation real beweisen:
+- Breadcrumb korrekt;
+- Kurzdefinition sichtbar;
+- Icons sichtbar;
+- `Stockmaß` als verwandter Link im Fließtext 0×;
+- `Stockmaß` in der rechten Verwandt-Box exakt 1×;
+- Portal-Kategorielink im Fließtext exakt 1×;
+- normaler WordPress-Artikel unverändert.
 
-Beleg:
-- Run `34762048546`
-- Real-Design-Job `103736483696`
-- `UGE0210_EXISTING_SINGLE_CLICK_PASS`
-- `UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS`
-- `UGE0210_SINGLE_SURVIVES_EMPTY_MAIN_LOOP_PASS`
-
-Reale Browserklicks:
-`Gesundheit → Hufbein` sowie `Gesundheit → Hufrehe → Strahlfäule → Hufabszess → Gesundheit`.
-
-**Grenze:** Dies ist kein Pferde-LIVE-Readback. Der Nutzer hat angekündigt, den Altbestand erst nach eigenem realen Prüfzugriff zu löschen. Diese Entscheidung bleibt ausdrücklich beim Nutzer; keine automatische Löschung.
+Erst danach können betroffene Bestandsbegriffe auf `FERTIG` gesetzt werden.
