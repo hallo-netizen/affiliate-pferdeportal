@@ -1,6 +1,7 @@
 # ZIELVERTRAGSREGISTER
 
 STAND: 2026-09-14
+ROLLE: REINER ZIELVERTRAGS-WEGWEISER
 
 ## Pflichtfelder
 
@@ -26,9 +27,7 @@ Bei:
 
 soll ein Zielvertrag angelegt oder referenziert werden.
 
-## Noch aufzunehmende bestehende Verträge
-
-Bereits vorhandene historische Zielverträge aus Repository/Masterakten werden bei der Archiv-/Masterdatei-Aufnahme hier eingeordnet.
+**Dieses Register führt keine dynamischen Arbeits-, Release-, LIVE- oder Blockerstände.** Dafür ausschließlich die jeweilige Hauptquelle/CURRENT_STATE/Governance lesen.
 
 Nichts aus alten Zielverträgen still ersetzen.
 
@@ -56,10 +55,7 @@ VERANTWORTLICHER BEREICH:
 `ALLGEMEINGUELTIGE_BAUSTEINE/KATEGORIENMODELL/`
 
 PASS-BEDINGUNG:
-maßgeblich sind die im Master gebundenen 14 Stufen, Hardlocks, Research-/Coverage-/Affiliate-Gates und Post-FINAL-Deploymentbedingungen.
-
-BELEGSTATUS:
-lokal/fresh R10 stark PASS; echter Live-WordPress-Deploymentlauf noch offen.
+Maßgeblich ausschließlich aus der Hauptquelle lesen.
 
 ## ZV-MOD-003 – Designvertrag V104
 
@@ -78,11 +74,11 @@ V104 / Universal Plugin 2.2.40
 HAUPTQUELLE:
 Universal Master V2.2.40/V104 und GitHub Design-Baseline V104.
 
-PASS-BEDINGUNG:
-gebundene V104-Design-/QA-Regeln; keine stillen projektspezifischen Übernahmen.
+VERANTWORTLICHER BEREICH:
+`ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/`
 
-PFERDE-ANWENDUNG:
-aktueller Live-Stand 1.50.472 verwendet weiterhin Contract V104 unverändert.
+PASS-BEDINGUNG:
+Maßgeblich ausschließlich aus der Hauptquelle lesen.
 
 ## ZV-TEXT-001 – STARTMASTER0107 aktueller Produktionszielvertrag
 
@@ -133,9 +129,6 @@ VERANTWORTLICHER BEREICH:
 PASS-BEDINGUNG:
 Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen.
 
-HINWEIS:
-Die Produktionsarchitektur wurde am 14.09.2026 auf WDB -> Chat -> JSON -> Draft/Readback umgestellt; das fachliche Abdeckungsziel selbst bleibt unverändert.
-
 NACHFOLGER:
 keiner.
 
@@ -163,9 +156,6 @@ VERANTWORTLICHER BEREICH:
 PASS-BEDINGUNG:
 Nicht hier dupliziert. Vollständig aus der Hauptquelle und der gebundenen Release-Governance lesen.
 
-AKTUELLER ARBEITSSTATUS:
-Durch explizite Nutzerentscheidung vom 11.09.2026 pausiert zugunsten des ADCELL-Auftrags. Nicht erfüllt, nicht abgelöst, kein PASS.
-
 NACHFOLGER:
 keiner belegt.
 
@@ -191,14 +181,7 @@ VERANTWORTLICHER BEREICH:
 `PROJEKTE/PFERDE_ATELIER/AFFILIATE/`
 
 PASS-BEDINGUNG:
-- exakter ADCELL-API-v2-Authentifizierungsvertrag autoritativ belegt;
-- provider-spezifisches ADCELL-Routing ohne Awin-Fallthrough;
-- accepted+active Programme nur über explizite `programId`-Allowlist, fail-closed;
-- CSV/Banner/Deeplink automatisch über dokumentierte API-v2-Wege;
-- kein manueller Import/Export bzw. keine manuelle CSV-URL als Normalbetriebs-Voraussetzung;
-- kanonischer Positiv-/Negativ-/Gesamtworkflow-/Fresh-Unpack-/Source-ZIP-Identity-PASS;
-- echter ADCELL-Live-API- und WordPress/MariaDB-End-to-End-PASS;
-- alte/fachfremde accepted Partnerschaften ohne Freigabe bleiben gesperrt.
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen.
 
 NACHFOLGER:
 keiner belegt.
@@ -229,18 +212,7 @@ VERANTWORTLICHER BEREICH:
 `protocol/PROJECT_MEMORY/TRESOR/`
 
 PASS-BEDINGUNG:
-Git-/Ref-/Campus-Wiederherstellung real geprüft; automatische externe Tresorsicherung real geprüft; lokaler Backupstand real unabhängig geprüft; Providergrenzen ausdrücklich ausgewiesen.
-
-`GITHUB_KOMPLETT_PASS` erfordert zusätzlich einen realen end-to-end Neuaufbau der erforderlichen exportierbaren GitHub-Metadaten/Einstellungen in einem leeren Zielsystem und ist derzeit nicht belegt.
-
-SICHERUNGSWEGE:
-1. Tresor automatisch, wöchentlich und extern unter `/Campus-Tresor/`.
-2. Lokales Backup manuell per `GITHUB_BACKUP_STARTEN.command` auf dem Nutzer-Mac.
-
-Beide Wege sind unabhängig voneinander und sichern denselben GitHub-Projektbestand.
-
-NICHT IM SCOPE:
-WordPress / Website / Projektarchiv.
+Nicht hier dupliziert. Vollständig aus den Hauptquellen lesen.
 
 NACHFOLGER:
 keiner belegt.
