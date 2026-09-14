@@ -5,6 +5,7 @@ from pathlib import Path
 from controller_core import *  # noqa: F401,F403
 import controller_core as core
 import production_binding
+import production_checks
 import repair_router
 import supervisor
 
@@ -26,6 +27,44 @@ def _git_blob(path:Path)->str:
 def _verify_core()->None:
     _require(CORE.is_file(),'CONTROLLER_CORE_MISSING')
     _require(_git_blob(CORE)==CORE_GIT_BLOB,'CONTROLLER_CORE_IDENTITY_MISMATCH')
+
+# Preserve the real production checker. The wrapper below changes only error
+# classification, never validator execution or PASS authority.
+_ORIGINAL_RUN_ALL=production_checks.run_all
+
+def _run_all_with_validator_routing(*args,**kwargs):
+    """Turn completed content-validator rejections into structured repair findings.
+
+    A PPM679_VALIDATOR_BLOCKED result means the authoritative PPM validator ran
+    successfully and rejected article content/metadata. That is a production
+    validation finding, not an infrastructure/integrity failure. It therefore
+    must enter the stage-aware repair router even when PPM omitted field_path.
+
+    Execution, package, hash, result-schema and other technical failures remain
+    ProductionCheckError and fail closed.
+    """
+    try:
+        return _ORIGINAL_RUN_ALL(*args,**kwargs)
+    except production_checks.ProductionCheckError as exc:
+        message=str(exc)
+        prefix='PPM679_VALIDATOR_BLOCKED:'
+        if not message.startswith(prefix):
+            raise
+        code=message[len(prefix):].strip() or 'PPM679_BLOCKED'
+        finding={
+            'error_code':code,
+            'failed_rule':None,
+            'field':None,
+            'field_path':None,
+            'expected':None,
+            'actual':None,
+            'reason':'AUTHORITATIVE_CONTENT_VALIDATOR_REJECTION_WITHOUT_STRUCTURED_FIELD',
+            'validator_id':'PPM679_Content_Validator',
+        }
+        raise production_checks.RepairRequired('ppm679',[finding]) from exc
+
+# Bind classification centrally for every full production check.
+production_checks.run_all=_run_all_with_validator_routing
 
 def _guarded_ingress(argv:list[str])->int:
     _require(len(argv)>=4,'BAD_INGRESS_ARGS')
