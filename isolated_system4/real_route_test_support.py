@@ -188,7 +188,7 @@ def valid_real_article(state:dict,index:int)->str:
                 addon+=1
                 a=aspects[(seed+addon*4+index)%len(aspects)]
                 d=aspects[(seed+addon*7+11+index)%len(aspects)]
-                text=text.rstrip('.')+f'; im Bezug auf {a} und {d} dient derselbe Beleg lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
+                text=text.rstrip('.')+f'; in Bezug auf {a} und {d} dient derselbe Beleg lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
             if pi==0:
                 for row in section_links:
                     text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
