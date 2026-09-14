@@ -217,22 +217,36 @@ def valid_real_article(state:dict,index:int)->str:
         if len(table_positions)!=1:
             raise AssertionError('REAL_BOUND_TABLE_BLOCK_MISSING_OR_DUPLICATE')
         rows=max(int(g.get('min_table_body_rows') or 1),4)
+        cell_contexts=(
+            'Auswahlrahmen, Ausgangslage, Grundprüfung, Einsatzbereich, Materialbezug und Sicherheitsblick',
+            'Nutzungsprofil, Handhabung, Alltagstauglichkeit, Pflegeaufwand, Kontrollpunkt und Entscheidungsweg',
+            'Vergleichsbasis, Eignungsfrage, Praxisbezug, Randbedingung, Orientierung und Dokumentationsstand',
+            'Planungsansatz, Standortbezug, Aufbaufrage, Arbeitsablauf, Prüfintervall und Sicherheitsreserve',
+            'Materialzustand, Belastungsrahmen, Bedienbarkeit, Pflegezustand, Nutzungsdauer und Kontrollroutine',
+            'Einsatzplanung, Auswahlkriterium, Praxisprüfung, Anwendungsgrenze, Vergleichspunkt und Entscheidungsgrundlage',
+            'Umgebungsbezug, Flächennutzung, Ausstattungslage, Arbeitsbereich, Sicherheitsprüfung und Eignungsabgleich',
+            'Betriebsablauf, Kontrollbedarf, Pflegeplanung, Nutzungssituation, Prüfmerkmal und Auswahlentscheidung',
+            'Anwendungszweck, Vergleichsmaßstab, Sachprüfung, Dokumentationspunkt, Planungsbedarf und Praxiseinordnung',
+            'Ausgangskriterium, Materialprüfung, Nutzungskontrolle, Sicherheitsaspekt, Pflegebedarf und Eignungsrahmen',
+            'Entscheidungsfeld, Vergleichsachse, Prüfgrundlage, Praxismerkmal, Anwendungsrahmen und Orientierungspunkt',
+            'Abschlussprüfung, Auswahlbezug, Nutzungsrahmen, Kontrollschritt, Dokumentationslage und Entscheidungsbezug',
+        )
         cell_openers=(
-            'Belegt für {a} ist:', 'Dokumentiert zu {a} bleibt:', 'Als Quellenpunkt für {a} gilt:',
-            'Im Bereich {a} ist festgehalten:', 'Zur Einordnung von {a} dient:', 'Unter {a} bleibt gebunden:',
+            'Als belegter Tabellenpunkt gilt:', 'Der gebundene Quellenpunkt lautet:', 'Dokumentiert ist hier:',
+            'Für diese Tabellenposition ist belegt:', 'Die Quelle hält dazu fest:', 'Gebunden bleibt folgende Aussage:',
         )
         body=[]
         for r in range(rows):
             cells=[]
             for col in range(3):
+                pos=r*3+col
                 fact_id=allowed[(r+col)%len(allowed)]
                 fact=claim_map[fact_id]
-                a=aspects[(60+r*5+col*2+index)%len(aspects)]
-                d=aspects[(67+r*7+col*3+index)%len(aspects)]
-                opener=cell_openers[(r*3+col+index)%len(cell_openers)].format(a=a)
+                opener=cell_openers[(pos+index)%len(cell_openers)]
+                context=cell_contexts[pos%len(cell_contexts)]
                 cells.append(
-                    f'<td data-fact-ids="{fact_id}">{opener} {fact}; '
-                    f'{d} bezeichnet hier nur die sachliche Einordnung dieses Quellenpunkts.</td>'
+                    f'<td data-fact-ids="{fact_id}">{opener} {fact}. '
+                    f'Als reiner Prüfrahmen dieser Zelle dienen {context}; diese Begriffe ergänzen keine Tatsachen.</td>'
                 )
             body.append('<tr>'+''.join(cells)+'</tr>')
         table=(f'<table class="system-129-table comparison-table"><thead><tr>'
