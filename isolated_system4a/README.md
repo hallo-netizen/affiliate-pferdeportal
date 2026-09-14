@@ -4,95 +4,80 @@ STATUS: **TEST ONLY / BLOCKED / KEIN MERGE / KEIN PUBLISH**
 
 Diese Datei ist die **eine aktuelle 4A-Statuswahrheit**.
 
-## Aktueller Remote-Stand
+## Aktueller Stand
 
-PR #255, Branch `hobbyroom/system4a-capsule-v1-20260913`.
+PR #255, Branch `hobbyroom/system4a-capsule-v1-20260913`, basiert auf dem aktuellen Remote-System-4-Stand von PR #238 (`28b1bd82af5ccbe5869bf83318ae73d2191bd132`).
 
-4A wurde technisch auf den aktuellen Remote-Stand von System 4 PR #238, Head `28b1bd82af5ccbe5869bf83318ae73d2191bd132`, gezogen. Das beseitigt die alte 4A-Basisabweichung, ist aber **noch keine Abnahme**.
+Der frühere lokal vollständig grüne Punkt-0/Supervisor-Kandidat `cd6c134a3ee27f4535ea91bfe6cc223a34c9eb25` ist als Beweis historisch gültig: 40/40 gezielte Positiv-/Negativfälle, kompletter Null-bis-Datei-Lauf, echter LT 6.8, echter PPM 6.7.9, Batch, V2-Handoff und bytegleiche Parent-Chat-Rekonstruktion. Ein zusätzlicher kompletter 1-Artikel-Lauf ohne Codex war ebenfalls PASS.
 
-Der entscheidende Blocker liegt jetzt offen vor: Der lokal vollständig getestete System-4-Punkt-0/Supervisor-Kandidat `cd6c134a3ee27f4535ea91bfe6cc223a34c9eb25` ist weiterhin nicht vollständig atomar auf dem Remote-System-4-Codebaum gebunden. Insbesondere fehlen im aktuellen Remote-Codebaum bereits neue Runtime-Dateien wie `isolated_system4/point0_snapshot.py`; der vollständige getestete `controller.py`-Stand ist ebenfalls nicht durch einen aktuellen Runtime-Manifest gebunden.
+Aber: Der exakte finale `controller.py` dieses lokalen Kandidaten ist weder als Remote-Blob noch als Library-/Patch-Artefakt bytegenau wiederherstellbar. Sechs andere neue Runtime-Blobs sind vorhanden, reichen aber allein nicht für einen gültigen Runtime-Tree. Deshalb werden sie **nicht teilweise** an PR #238 gehängt.
 
-Deshalb ist jeder aktuelle Null-bis-Ende-PASS auf dem Remote-Stand verboten.
+Konsequenz: Der alte Kandidat wird nicht nachgebaut und anschließend fälschlich als bytegleich bezeichnet. Es wird ein **neuer Kandidat** erzeugt und vollständig neu bewiesen.
 
-## Neue verbindliche Teststrecke 2026-09-14
-
-Neu eingerichtet:
+## Verbindliche Teststrecke V3
 
 `isolated_system4a/chat_to_file_full_acceptance.py`
 
-Vertrag: `SYSTEM4A_CHAT_TO_FILE_FULL_ACCEPTANCE_V2`.
+Vertrag: `SYSTEM4A_CHAT_TO_FILE_FULL_ACCEPTANCE_V3`.
 
-Die Strecke beginnt ausdrücklich mit dem **Rohauftrag aus dem Parent-Chat**. Der Chat-Testinput darf nur Themenwünsche enthalten. Folgende Produktionsbindungen dürfen NICHT vorgegeben werden:
-- Titel;
-- Target Keyword;
-- Kategorie;
-- Plan-Slot;
-- interne Links;
-- Quality-/Textmaschinen-Bindung;
-- Prüfer-/PASS-Felder.
-
-Diese Werte müssen erst innerhalb der maschinellen Live-Strecke entstehen.
+Start ist ausschließlich der **Rohauftrag im Parent-Chat**. Der Testinput darf keine maschineneigenen Produktionsbindungen vorgeben: kein Titel, Target Keyword, Kategorie, Plan-Slot, Linkset, Quality Binding, Prüferfeld oder PASS.
 
 Verbindlicher Zielweg:
 
-`Parent-Chat-Rohauftrag -> Runtime-Identität -> Punkt 0 -> Root start-point0 -> Supervisor -> Worker-Dispatch -> Research -> Facts -> Context -> Maschinen-Bindung von Titel/Keyword/Kategorie/Slot/3 Links/Textmaschinenvertrag -> Draft -> echtes LT 6.8 -> Same-Article-Repair falls nötig -> echtes PPM 6.7.9 -> Same-Article-Repair falls nötig -> Artikel-PASS -> Batch -> SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2 -> Inline-Pack -> Parent-Chat-Unpack -> bytegleiche Datei im Parent-Chat`
+`Parent-Chat-Rohauftrag -> Runtime-Identität -> Punkt 0 -> Root start-point0 -> Supervisor -> Worker-Dispatch -> Research -> Facts -> Context -> Maschinen-Bindung Titel/Keyword/Kategorie/Slot/3 Links/Textmaschinenvertrag -> Draft -> echtes LT 6.8 -> Same-Article-Repair -> echtes PPM 6.7.9 -> Same-Article-Repair -> Artikel-PASS -> Batch -> SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2 -> Inline-Pack -> Parent-Chat-Unpack -> bytegleiche Datei im Parent-Chat`
 
-Kein Test-Ersatzweg darf diesen Pfad nachbilden. Der Gate akzeptiert nach der Runtime-Identitätsprüfung ausschließlich einen hashgebundenen `chat_to_file_entry`, der zugleich der spätere Live-Einstieg ist.
+Kein Ersatzweg darf diese Strecke simulieren.
+
+## Neue Freigaberegel
+
+V3 ist absichtlich **nicht mehr auf `cd6c134a…` festgenagelt**. Ein Kandidat wird nur akzeptiert, wenn `isolated_system4/CURRENT_PROVEN_RUNTIME_MANIFEST.json` mit Vertrag `SYSTEM4_PROVEN_RUNTIME_MANIFEST_V2` auf exakt demselben Head bindet:
+
+- alle kritischen Runtime-Dateien einschließlich `controller.py`, Punkt-0, Supervisor, Worker-Dispatch, Checker, Batch und Handoff;
+- vollständige historische Fehlermatrix mit mindestens allen 36 bekannten Live-Fluchtklassen, `passed == total`, `failed == 0`;
+- vollständiger Null-bis-Datei-PASS auf demselben Head;
+- echte LT-6.8-Ausführung;
+- echte PPM-6.7.9-Ausführung;
+- Batch PASS;
+- Inline-Unpack PASS;
+- bytegleiche Parent-Chat-Rekonstruktion;
+- genau ein hashgebundener `chat_to_file_entry`;
+- `simulation_and_live_same_entry=true`.
+
+Erst danach darf die 1–3-Artikel-Simulation starten.
 
 ## Historische Fehlerbindung
 
-Der neue Gate katalogisiert **36 Live-Fluchtklassen**, darunter insbesondere die Fehler, die frühere grüne Teststrecken nicht abgedeckt hatten:
-- falsche/partielle Runtime-Bytes;
-- Root-/Branch-/Manifest-Abweichungen;
-- Cross-UID-Workerpfad und privater Python-Interpreter;
-- Worker-Factory-Signaturdrift;
-- Worker beendet sich ohne Antwort;
-- vorgebundene `quality_binding` / Runtime-Links;
-- `PPM679_QUALITY_BINDING_MISSING`;
-- falsche/nichtkanonische Kategorie bzw. Plan-Slot;
-- fremde Fact-ID;
-- fehlende echte LT-/PPM-Ausführung;
-- synthetischer/vorgefertigter PASS;
-- Same-Article-Repair bricht Kontinuität;
-- Batch Drop/Duplikat/Reihenfolgefehler;
-- Handoff-/Inline-/Parent-Chat-Manipulation;
-- `publish_allowed != false`.
+Der Gate katalogisiert 36 Live-Fluchtklassen. Dazu gehören insbesondere frühere Lücken wie HTTP-401-Webruntime, Root-/Manifest-Abweichungen, Cross-UID-/Python-Pfad, Worker-Factory-Signaturdrift, Worker ohne Antwort, ungebundene Research-Evidence, vorgebundene Quality-/Link-Werte, `PPM679_QUALITY_BINDING_MISSING`, falscher Slot/Kategorie/Link, Fact-ID-/Trace-Probleme, fehlende echte LT-/PPM-Ausführung, Same-Article-Repair-Kontinuität, Batch-Reihenfolge sowie Handoff-/Inline-/Parent-Chat-Manipulation.
 
 ## 3-Artikel-Simulation ohne Codex
 
-Rohauftrag angelegt:
+Rohauftrag:
 
 `isolated_system4a/testdata/CHAT_TRIGGER_3_ARTICLES_NO_CODEX_20260914.json`
 
-Drei Themen:
 1. `Pferd im Regen sicher verladen`
 2. `Sattel nach der Winterpause sicher kontrollieren`
 3. `Putzzeug hygienisch und trocken lagern`
 
-Der Testinput enthält absichtlich **keine** fertigen Produktionsbindungen.
+Der Rohauftrag enthält keine fertigen Produktionsbindungen.
 
-### Tatsächlicher erster Testbefund
+Die Simulation bleibt aktuell korrekt BLOCKED, weil noch kein neuer vollständig bewiesener System-4-Runtime-Head mit `SYSTEM4_PROVEN_RUNTIME_MANIFEST_V2` existiert. Es wurden daher keine Artikel, LT-/PPM-Pässe oder Handoffs vorgetäuscht.
 
-Der Test stoppt korrekt **vor Punkt 0 und vor jeder Artikelarbeit**:
+## Prüfabhängigkeiten
 
-`SYSTEM4A_CHAT_TO_FILE_FULL_ACCEPTANCE_BLOCKED:CURRENT_RUNTIME_FILE_MISSING:point0_snapshot.py`
+Die echten Prüfer bleiben unverändert:
 
-Zusätzlich fehlt der zwingende `isolated_system4/CURRENT_PROVEN_RUNTIME_MANIFEST.json`, der insbesondere den vollständig getesteten `controller.py` und den identischen späteren `chat_to_file_entry` binden muss.
+- LanguageTool 6.8 SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`;
+- PPM 6.7.9 SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`.
 
-Das ist ein gewollter fail-closed Befund und **kein PASS**. Die drei Artikel wurden deshalb nicht erzeugt; LT, PPM, Batch und Handoff wurden nicht vorgetäuscht.
-
-## Bisheriger 4A-No-Codex-Beweis — nur historischer Altstand
-
-Für den früher exakt gebundenen 4A-No-Codex-Vertrag wurden 27/27 historische Negativtests, zwei Null-bis-Ende-Läufe, echte LT-6.8-/PPM-6.7.9-Prüfung, Same-Article-Repair, Batch, V2-Handoff und bytegleiche Parent-Chat-Rekonstruktion bewiesen.
-
-Diese Beweise bleiben gültige historische Nachweise ihrer damaligen Bytes. Sie sind **keine aktuelle Abnahme** für den Punkt-0/Supervisor-Zielstand.
+Das PPM-ZIP ist aus dem vorhandenen Library-Manifest und sieben hashgebundenen Teilen vollständig rekonstruierbar. Keine Ersatzprüfung ist zulässig.
 
 ## NEXT ACTION
 
-1. Den vollständig lokal getesteten System-4-Kandidaten inklusive des großen `controller.py` atomar und bytegleich auf PR #238 übertragen.
-2. Auf genau diesem Remote-Codebaum `CURRENT_PROVEN_RUNTIME_MANIFEST.json` aus den tatsächlich getesteten Git-Blobs erzeugen; nichts schätzen.
-3. Darin exakt einen `chat_to_file_entry` binden, der derselbe Einstieg für Simulation und späteren Live-Lauf ist.
-4. Danach denselben neuen 4A-Gate erneut ausführen: zuerst komplette historische Negativstrecke, danach die 3-Artikel-No-Codex-Simulation vollständig bis zur Parent-Chat-Datei.
-5. Erst wenn echte LT 6.8 + echte PPM 6.7.9 + Batch + V2 + Inline-Unpack + bytegleiche Parent-Chat-Datei auf denselben Bytes PASS sind, darf `TESTS: PASS` gesetzt werden.
+1. Neuen System-4-Kandidaten aus dem letzten exakt bekannten Controller-Stand plus den vorhandenen Punkt-0/Supervisor-Bausteinen erstellen — als **neuen** Kandidaten, nicht als vermeintliche Rekonstruktion von `cd6c134a…`.
+2. Lokal komplette historische Positiv-/Negativstrecke und Null-bis-Datei-Strecke mit echten LT-/PPM-Abhängigkeiten ausführen.
+3. Erst nach Gesamt-PASS die tatsächlich getesteten Bytes atomar an PR #238 binden und `CURRENT_PROVEN_RUNTIME_MANIFEST.json` aus exakt diesen Bytes erzeugen.
+4. Danach V3 auf genau diesem Remote-Head erneut vollständig ausführen.
+5. Danach die drei Rohartikel ohne Codex komplett bis zur bytegleichen Parent-Chat-Datei schicken.
 
 Kein Merge. Kein Publish. `publish_allowed=false`.
