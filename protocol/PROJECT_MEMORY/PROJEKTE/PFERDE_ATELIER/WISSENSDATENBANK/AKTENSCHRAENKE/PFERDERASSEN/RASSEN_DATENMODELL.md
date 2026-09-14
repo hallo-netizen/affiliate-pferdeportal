@@ -1,7 +1,7 @@
 # PFERDERASSEN – DATENMODELL
 
-STAND: 2026-09-12
-SCHEMA_VERSION: 1.1
+STAND: 2026-09-14
+SCHEMA_VERSION: 1.2
 STATUS: VERBINDLICH / ERWEITERBAR
 
 ## GRUNDREGEL
@@ -49,10 +49,38 @@ Ein Datensatz pro fachlich bestätigter Rasse bzw. ausdrücklich gekennzeichnete
 37. `zucht_zuchtziel`
 38. `bestand_gefaehrdungsstatus`
 39. `besondere_fakten`
-40. `quellen`
-41. `recherche_status`
-42. `letzte_pruefung`
-43. `zusatzfelder`
+40. `aehnliche_rassen` – kuratierte Liste stabiler `breed-*`-IDs fachlich ähnlicher/verwandter Rassen
+41. `quellen`
+42. `recherche_status`
+43. `letzte_pruefung`
+44. `zusatzfelder`
+
+## ÄHNLICHE RASSEN – HARTE REGEL
+
+`aehnliche_rassen` ist die einzige autoritative Quelle für einen Frontend-/Designblock „Ähnliche Rassen“.
+
+Zulässige Form:
+
+```json
+"aehnliche_rassen": [
+  "breed-beispiel-1",
+  "breed-beispiel-2"
+]
+```
+
+Regeln:
+- ausschließlich stabile vorhandene `breed-*`-IDs;
+- keine freien Namen, Slugs oder URLs;
+- keine automatische Ableitung allein aus derselben Importkategorie;
+- eine Rasse darf nur aufgenommen werden, wenn die Ähnlichkeit/Verwandtschaft durch vorhandene Fakten fachlich begründbar ist, z. B. gemeinsame dokumentierte Abstammung, gleiche klar belegte Untergruppe, vergleichbarer historischer Zuchtursprung oder ausdrücklich dokumentierte enge Typ-/Nutzungsverwandtschaft;
+- reine optische Ähnlichkeit, gleicher Kontinent oder bloß gleiche Obergruppe reichen nicht;
+- keine Selbstreferenz;
+- keine erfundenen oder vermuteten Beziehungen;
+- bevorzugt 2–4 Einträge, wenn belastbar vorhanden;
+- wenn nicht belastbar bestimmt: `"aehnliche_rassen": "nicht_recherchiert"`;
+- der Design-/Frontendcode darf bei `nicht_recherchiert` oder leerer Liste keinen Ähnliche-Rassen-Block erzwingen.
+
+Für spätere Korrekturen bleibt die Beziehung im jeweiligen Rassendatensatz gespeichert; das Design darf sie nicht selbst berechnen oder verändern.
 
 ## STATUS FÜR FEHLENDE INFORMATION
 
