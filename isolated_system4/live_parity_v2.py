@@ -83,10 +83,17 @@ def finalize(runroot:Path)->dict:
     run([sys.executable,HERE/'handoff_transport.py','validate',working],e); run([sys.executable,HERE/'handoff_transport.py','canonicalize',working,canonical],e); run([sys.executable,HERE/'handoff_transport.py','inline-pack',canonical,inline],e); run([sys.executable,HERE/'handoff_transport.py','inline-unpack',inline,unpack],e)
     rebuilt=unpack/'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json'
     if canonical.read_bytes()!=rebuilt.read_bytes(): fail('INLINE_RECONSTRUCTION_NOT_BYTE_EQUAL')
-    # Mandatory batch/handoff negatives.
-    cp=run([sys.executable,HERE/'batch_gate.py','collect',runroot/'snapshot.json',runroot/'neg-order',states[1],states[0],*states[2:]],e,check=False)
+    # Mandatory batch/handoff negatives. The 1-item live path must be first-class:
+    # reordering is impossible for N=1, so bind a wrong slot at the same position instead.
+    if len(states)>=2:
+        order_states=[states[1],states[0],*states[2:]]
+    else:
+        bad_state=load(states[0]); bad_state['article']=dict(bad_state['article']); bad_state['article']['plan_slot']='f'*64
+        bad_state_path=runroot/'neg-order-state.json'; writej(bad_state_path,bad_state); order_states=[bad_state_path]
+    cp=run([sys.executable,HERE/'batch_gate.py','collect',runroot/'snapshot.json',runroot/'neg-order',*order_states],e,check=False)
     if cp.returncode==0 or 'STATE_ORDER_MISMATCH' not in cp.stdout: fail('NEG_BATCH_REORDER_NOT_BLOCKED')
-    cp=run([sys.executable,HERE/'batch_gate.py','collect',runroot/'snapshot.json',runroot/'neg-count',*states[:-1]],e,check=False)
+    count_states=states[:-1] if len(states)>=2 else [states[0],states[0]]
+    cp=run([sys.executable,HERE/'batch_gate.py','collect',runroot/'snapshot.json',runroot/'neg-count',*count_states],e,check=False)
     if cp.returncode==0 or 'STATE_COUNT_MISMATCH' not in cp.stdout: fail('NEG_BATCH_COUNT_NOT_BLOCKED')
     bad=copy.deepcopy(payload); bad['articles'][0]['body']+='X'; badp=runroot/'bad-handoff.json'; writej(badp,bad); cp=run([sys.executable,HERE/'handoff_transport.py','validate',badp],e,check=False)
     if cp.returncode==0 or 'HANDOFF_BODY_SHA_MISMATCH' not in cp.stdout: fail('NEG_HANDOFF_TAMPER_NOT_BLOCKED')
