@@ -29,5 +29,8 @@ def verify_bundle(bundle:dict, *, actual_manifest:str, actual_head:str)->tuple[d
     if rr.get('root_manifest_sha256')!=actual_manifest or rr.get('head_sha')!=actual_head: raise WorkerDispatchError('DISPATCH_ROOT_RECEIPT_IDENTITY_MISMATCH')
     if rr.get('point0_sha256')!=sha(point0_snapshot.canon(p0)): raise WorkerDispatchError('DISPATCH_POINT0_RECEIPT_MISMATCH')
     if wc.get('contract')!='SYSTEM4_CODEX_WORKER_DISPATCH_V1' or wc.get('external_web_search_allowed') is not False or wc.get('publish_allowed') is not False: raise WorkerDispatchError('DISPATCH_WORKER_CONTRACT_INVALID')
-    if wc.get('point0_sha256')!=rr.get('point0_sha256') or wc.get('head_sha')!=actual_head or wc.get('root_receipt_sha256')!=rexp: raise WorkerDispatchError('DISPATCH_WORKER_BINDING_MISMATCH')
+    if wc.get('point0_sha256')!=rr.get('point0_sha256') or wc.get('head_sha')!=actual_head or wc.get('root_receipt_sha256')!=rexp or wc.get('article_index')!=rr.get('article_index'): raise WorkerDispatchError('DISPATCH_WORKER_BINDING_MISMATCH')
+    try:
+        snap=json.loads(raw.decode('utf-8')); items=snap['next_textmachine_metadata_batch']['items']; idx=wc['article_index']; assert isinstance(idx,int) and not isinstance(idx,bool) and 0<=idx<len(items)
+    except Exception as exc: raise WorkerDispatchError('DISPATCH_ARTICLE_INDEX_INVALID') from exc
     return wc,raw
