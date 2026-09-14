@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
-STAND: 2026-09-13
-STATUS: MASTERLISTE IM AUFBAU / 157 DATENSÄTZE VORHANDEN
+STAND: 2026-09-14
+STATUS: MASTERLISTE IM AUFBAU / 162 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,21 +10,23 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **157 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **162 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 153er-Stand neu angelegt:
+Seit dem synchronisierten 157er-Stand neu angelegt:
 
-- Slowenisches Kaltblut / Slovenski hladnokrvni konj
-- Posavje-Pferd / Posavski konj
-- Ljutomer-Traber / Ljutomerski kasač
-- Slowenisches Warmblut / Slovenski toplokrvni konj
+- Kroatisches Kaltblut / Hrvatski hladnokrvnjak
+- Kroatischer Posavac / Hrvatski posavac
+- Kroatisches Sportpferd / Hrvatski športski konj
+- Kroatisches Warmblut / Hrvatski toplokrvnjak
+- Međimurje-Pferd / Međimurski konj
 
 Wichtige Abgrenzung:
-- Bosnisches Gebirgspferd war bereits vorhanden und wurde nicht dupliziert.
-- Posavje Horse wird in Slowenien als eigenständige indigene Rasse geführt; verwandte/benachbarte kroatische Posavina-Bestände werden separat geprüft.
-- Ljutomer Trotter wird als eigene slowenische Traberpopulation geführt und nicht mit allgemeinem Standardbred/Trotter-Bestand zusammengelegt.
+- Hrvatski posavac wird als eigenständig genehmigte kroatische Rasse geführt und nicht mit dem slowenischen Posavje-Pferd zusammengelegt.
+- Hrvatski športski konj und Hrvatski toplokrvnjak besitzen getrennte kroatische Zuchtprogramme und werden deshalb nicht zusammengeführt.
+- Međimurski konj ist eine eigenständig beschriebene autochthone kroatische Kaltblutrasse.
+- Lipizzaner und Gidrán waren bereits vorhanden und wurden nicht dupliziert.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -59,6 +61,8 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Marshtackie → Synonym des Florida Cracker Horse, kein zweiter Datensatz.
 - Polish Halfbred Horse → ältere/englische Benennung im PZHK-Kontext des Polish Sport Horse, kein zweiter Datensatz.
 - Estonian Arden → historische Bezeichnung des Estonian Heavy Draught, kein zweiter Datensatz.
+- Hrvatski posavac ≠ Posavski konj/slowenisches Posavje-Pferd; getrennte staatliche Zuchtprogramme.
+- Hrvatski športski konj ≠ Hrvatski toplokrvnjak; getrennte kroatische Zuchtprogramme.
 
 ## OFFENE NACHRECHERCHE
 
