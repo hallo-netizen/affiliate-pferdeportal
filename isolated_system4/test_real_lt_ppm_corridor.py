@@ -2,8 +2,8 @@ import hashlib,json,os,tempfile,unittest
 from pathlib import Path
 
 import batch_gate,controller,handoff_transport,production_checks
-from live_route_test_support import REPO,valid_article,write_json
-from real_route_test_support import start_to_context_real
+from live_route_test_support import REPO,write_json
+from real_route_test_support import start_to_context_real,valid_real_article
 
 
 def handoff_from_states(states):
@@ -68,7 +68,7 @@ class RealLtPpmCorridorTests(unittest.TestCase):
                 self.assertTrue(source['source_url'].startswith('https://'))
                 self.assertNotIn('example.org',source['source_url'])
                 self.assertEqual(source['source_kind'],'PARENT_CHAT_REAL_WEB_SNAPSHOT')
-                body=valid_article(state,index,f'Praxis{index}')
+                body=valid_real_article(state,index)
                 try:
                     production_checks.run_languagetool(REPO,body)
                 except production_checks.RepairRequired as exc:
