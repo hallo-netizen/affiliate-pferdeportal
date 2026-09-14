@@ -3,86 +3,68 @@
 STAND: 2026-09-14
 STATUS: BLOCKED
 
-## 1-KLICK-ÜBERSICHT
+## AKTUELLER SICHERER BEFUND
 
-**AKTUELLER SICHERER BEFUND**  
-Einzelartikel öffnen real → **LIVE PASS**. Die Einzelansicht selbst ist weiter **LIVE FAIL**: Breadcrumb falsch/doppelt, Links im Fließtext, rechte Ockerlinie zu dick. Bestehende Begriffe müssen nach der neuen Regel überschrieben werden.
+LIVE PASS und **nicht mehr anfassen**:
+- Einzelartikel öffnen;
+- Glossar-Fließtext enthält 0 Links;
+- rechte Ockerlinie ist dünn.
 
-**VERBINDLICHE NEUE REGEL**  
-Glossar-Fließtext enthält **0 Links**. Links stehen nur rechts in `Verwandte Begriffe` und `Mehr zum Thema`.
-
-**DU DARFST …**  
-nur diese offene Single-/Bestandsreparatur fortsetzen und die neuen Pakete 1.2.2 / 1.50.490 real prüfen.
-
-**DU DARFST NICHT …**  
-den bestätigten Routingweg umbauen, normale WordPress-Posts verändern, bestehende Glossarbeiträge löschen statt aktualisieren oder lokale Tests als LIVE PASS ausgeben.
+LIVE offen:
+- Breadcrumb-Abstand nach oben auf allen Glossarseiten einheitlich verkleinern;
+- komplette Begriffskacheln anklickbar machen;
+- Glossar-Hero weiter herauszoomen / Motiv erkennbar machen.
 
 ## ARBEITSORT
 
-Branch:
-`hobbyroom/glossar-livefail-red-green-20260913`
+Branch: `hobbyroom/glossar-livefail-red-green-20260913`
 
-Autoritative Fehlerquelle:
-`FEHLERQUELLEN.md`
+Autorität:
+- `CURRENT_STATE.md`
+- `FEHLERQUELLEN.md`
+- `TEXT_UND_LINKREGELN.md`
+- Fachfakten ausschließlich WDB Glossar.
 
-Autoritativer Stand:
-`CURRENT_STATE.md`
+## LOKALE KANDIDATEN
 
-Verbindliche Text-/Linkregeln:
-`TEXT_UND_LINKREGELN.md`
+### Core 1.2.3
+`UNIVERSAL_GLOSSARY_ENGINE_1.2.3_NEUE_BEITRAEGE_INSTALLIEREN.zip`
 
-## LOKALER KANDIDAT
+SHA-256: `997cd888fe3ea1a102a8d5c9e614497404d5049e5c64086f330f0dc77c07049f`
 
-### Core 1.2.2
-`UNIVERSAL_GLOSSARY_ENGINE_1.2.2_ZERO_BODY_LINKS_BESTAND_UPDATE_INSTALLIEREN.zip`
+- 14 bisherige Bestandsbegriffe weiter im Updateweg;
+- `Aalstrich` zusätzlich aus WDB `GEPRUEFT` übernommen/überschrieben;
+- `Zuchtbuch` neu aus WDB `GEPRUEFT` ergänzt;
+- beide 150–200 Wörter und 0 Fließtextlinks;
+- State `1.2.3:16`;
+- lokale Syntax-/Vertrags-/ZIP-Prüfung PASS.
 
-SHA-256:
-`3d6ffc2cdfcc4872e49e97f4adc54de31d4ef2714b0af07e399a681f15d1f447`
+### Design 1.50.491
+`PFERDE_ATELIER_DESIGN_V1.50.491_GLOSSAR_NAV_HERO_FIX_INSTALLIEREN.zip`
 
-PASS lokal:
-- 14 gebundene Begriffe 150–200 Wörter;
-- 0 Links im Fließtext;
-- bestehende `uge_term` werden per gleicher ID aktualisiert;
-- normaler Post Negativtest unverändert;
-- ZIP/Version PASS.
+SHA-256: `e5913fd60b59ce6b49a354a98f0f2bd132df6356720ed8d5ee76309abd811d51`
 
-### Design 1.50.490
-`PFERDE_ATELIER_DESIGN_V1.50.490_GLOSSAR_BREADCRUMB_STRIPE_FIX_INSTALLIEREN.zip`
-
-SHA-256:
-`251e90a7c7115cd4ce166ddefb5f0918904f28b89d85f2a173c190201b454657`
-
-PASS lokal:
-- globaler Breadcrumb auf `uge_term` serverseitig ausgeschaltet + CSS-Failsafe;
-- eigener Breadcrumb `Startseite > Glossar > Oberbereich > Begriff`;
-- Fließtext-Renderendstufe entfernt Restlinks;
-- rechte Box-Oberkante 4 px → 2 px;
-- Scope ausschließlich `uge_term`;
-- ZIP/Version PASS.
-
-## WARUM BLOCKED
-
-Die Pakete sind **noch nicht live installiert/readback-bestätigt**. Deshalb bleibt `GLOSSAR-SINGLE-011` LIVE FAIL und kein LIVE-/Release-PASS wird behauptet.
+- einheitlicher Topabstand 18 px auf Glossar-Startseite, Gruppe und Single;
+- ganze Begriffskachel ist Link;
+- Hero zeigt mit `contain` und rechter Ausrichtung deutlich mehr vom Originalmotiv;
+- bestätigte 0-Link- und 2-px-Regeln bleiben bestehen;
+- lokale Syntax-/Vertrags-/ZIP-Prüfung PASS.
 
 ## NEXT ACTION – EXAKT
 
-1. Core `1.2.2` über den vorhandenen Glossar-Core installieren.
-2. Design `1.50.490` über das vorhandene Designplugin installieren.
-3. `Bandmaß` real neu laden.
-4. Prüfen:
-   - Breadcrumb exakt `Startseite > Glossar > Pferd & Biologie > Bandmaß`;
-   - Fließtext **0 Links**;
-   - `Stockmaß` rechts in `Verwandte Begriffe` als Link;
-   - Portalziel rechts in `Mehr zum Thema`;
-   - Ockerlinie rechts 2 px / sichtbar dünner;
-   - bestehende URL/ID erhalten.
-5. normalen WordPress-Beitrag negativ prüfen.
-6. Erst nach Nutzerreadback LIVE PASS und Plugin-Artefaktsync.
+1. Core `1.2.3` installieren.
+2. Design `1.50.491` installieren.
+3. LIVE prüfen: Startseite, eine Gruppe und `Bandmaß` auf identischem Breadcrumb-Topabstand.
+4. komplette Kachel `Bandmaß` außerhalb des CTA anklicken.
+5. Hero visuell prüfen: Bücher/Pferdelexikon müssen als Motiv verständlich sein.
+6. Regression: 0 Fließtextlinks und dünne Ockerlinie bleiben PASS.
+7. `Aalstrich` und `Zuchtbuch` öffnen und real prüfen.
+8. Erst danach LIVE PASS / Artefaktsync.
 
 ## NICHT ANFASSEN
 
-- funktionierenden Single-Routingweg;
-- normale WordPress-Posts/Seiten;
-- `main` als Experimentierfläche;
-- WDB-Fakten ohne `GEPRUEFT`;
-- Bestandsbegriffe nicht löschen.
+- funktionierenden Routingweg;
+- normale Posts/Seiten;
+- 0-Link-Regel;
+- dünne Ockerlinie;
+- ungeprüfte WDB-Begriffe.
