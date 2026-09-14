@@ -17,8 +17,15 @@ def word_token(n:int)->str:
  words=('Auswahl','Material','Nutzung','Pflege','Sicherheit','Komfort','Eignung','Praxis','Hinweis','Vergleich','Haltung','Training','Stall','Weide','Reitplatz','Pferd')
  return words[n%len(words)]
 
-def production_snapshot_bytes()->bytes:
- value=json.loads(LIVE.read_text(encoding='utf-8'));value['system4_root_manifest_sha256']=root_entry._critical_manifest_sha256();return canon(value)
+def production_snapshot_bytes(batch_size:int|None=None)->bytes:
+ value=json.loads(LIVE.read_text(encoding='utf-8'))
+ if batch_size is not None:
+  batch=value['next_textmachine_metadata_batch'];items=list(batch['items'])
+  if batch_size<1 or batch_size>len(items):raise AssertionError('TEST_BATCH_SIZE_INVALID')
+  batch['items']=items[:batch_size];batch['item_count']=batch_size
+  material={key:copy.deepcopy(val) for key,val in batch.items() if key!='batch_sha256'}
+  batch['batch_sha256']=hashlib.sha256(canon(material)).hexdigest()
+ value['system4_root_manifest_sha256']=root_entry._critical_manifest_sha256();return canon(value)
 
 def source_and_claims(index:int,target_keyword:str):
  shared=(f'{target_keyword} Auswahl Material Nutzung Pflege Sicherheit Komfort Eignung Praxis Vergleich Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Kriterium gebundener Wert Abschnitt Punkt Hinweis Haltung Training Stall Weide Reitplatz Pferd')
@@ -34,8 +41,8 @@ def source_and_claims(index:int,target_keyword:str):
   facts.append({'fact_id':f'fact-live-{index}-{n}','source_id':sid,'statement':text,'evidence_text':text,'evidence_text_sha256':h(text)})
  return src,facts
 
-def start_to_context(base:Path,index:int):
- raw=production_snapshot_bytes();snapshot=base/'production-snapshot.json';snapshot.write_bytes(raw)
+def start_to_context(base:Path,index:int,batch_size:int|None=None):
+ raw=production_snapshot_bytes(batch_size);snapshot=base/'production-snapshot.json';snapshot.write_bytes(raw)
  metadata=json.loads(raw.decode('utf-8'))['next_textmachine_metadata_batch']['items'][index]
  src,claims=source_and_claims(index,metadata['target_keyword'])
  p0=point0_snapshot.build(production_snapshot_bytes=raw,root_manifest_sha256=root_entry._critical_manifest_sha256(),head_sha=head(),research_provider='SYSTEM4_TEST_BOUND_SOURCE_PROVIDER',sources=[src])
