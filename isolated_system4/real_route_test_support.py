@@ -245,8 +245,8 @@ def valid_real_article(state:dict,index:int)->str:
                 opener=cell_openers[(pos+index)%len(cell_openers)]
                 context=cell_contexts[pos%len(cell_contexts)]
                 cells.append(
-                    f'<td data-fact-ids="{fact_id}">{opener} {fact}. '
-                    f'Als reiner Prüfrahmen dieser Zelle dienen {context}; diese Begriffe ergänzen keine Tatsachen.</td>'
+                    f'<td data-fact-ids="{fact_id}">{opener} {fact}; als reiner Prüfrahmen dieser Zelle dienen '
+                    f'{context}, wobei diese Begriffe keine zusätzlichen Tatsachen ergänzen.</td>'
                 )
             body.append('<tr>'+''.join(cells)+'</tr>')
         table=(f'<table class="system-129-table comparison-table"><thead><tr>'
