@@ -93,15 +93,18 @@ Die Produktionswahrheit `OFFEN / IN ARBEIT / NACHPRÜFUNG / FERTIG / GESPERRT` l
 
 Kein zweites paralleles Erledigt-/Unerledigt-Register anlegen.
 
-## 10. Portal-Kategorien haben SEO-Vorrang vor neuen Glossarbegriffen
+## 10. Portal-Kategorien und Portal-Landingpages haben SEO-Vorrang vor neuen Glossarbegriffen
 
 Für neue Glossarkandidaten gilt verbindlich:
 
-1. **zuerst gegen die echten WordPress-Portal-Kategorien prüfen**;
-2. stimmt der normalisierte Begriff mit einer Kategorie überein, einschließlich gebundener Singular/Plural-Normalisierung wie `Regendecke` ↔ `Regendecken`, wird **kein neuer Glossarbeitrag** erzeugt;
-3. Status des Kandidaten: `AUSGESCHLOSSEN_KATEGORIE`;
-4. danach keine Fachrecherche, kein Textpaket und keine Veröffentlichung für diesen Kandidaten;
-5. erst Kandidaten ohne Kategorie-Treffer laufen weiter in Glossar-Dublette und Artikel-/Seiten-Kannibalisierung;
-6. bestehende bereits geprüfte/veröffentlichte Glossarbeiträge werden durch diese neue Kandidatenregel **nicht pauschal gelöscht oder umgeschrieben**.
+1. **zuerst gegen echte WordPress-Kategorien UND gegen starke veröffentlichte Portal-Landingpages prüfen**;
+2. technisch sind Portal-Hauptseiten im Pferde Atelier nicht durchgehend WordPress-`category`, sondern teilweise normale hierarchische WordPress-Seiten (`post_type=page`);
+3. stimmt der normalisierte Glossarbegriff mit einer solchen Kategorie oder Portal-Landingpage überein, einschließlich gebundener Singular/Plural-Normalisierung wie `Regendecke` ↔ `Regendecken`, wird **kein neuer Glossarbeitrag** erzeugt;
+4. Status bei Taxonomie-Treffer: `AUSGESCHLOSSEN_KATEGORIE`;
+5. Status bei Portal-Landingpage-Treffer: `AUSGESCHLOSSEN_PORTALSEITE`;
+6. danach keine Fachrecherche, kein Textpaket und keine Veröffentlichung für diesen Kandidaten;
+7. erst Kandidaten ohne Kategorie-/Portalseiten-Treffer laufen weiter in Glossar-Dublette und sonstige Artikel-/Seiten-Kannibalisierung;
+8. normale Beiträge werden durch einen exakten Titel nicht als Portal-Landingpage behandelt; sie bleiben Teil der normalen Kannibalisierungsprüfung;
+9. bestehende bereits geprüfte/veröffentlichte Glossarbeiträge werden durch diese neue Kandidatenregel **nicht pauschal gelöscht oder umgeschrieben**.
 
-SEO-Grund: Die Portal-Kategorieseite ist in diesem Fall die bevorzugte Zielseite und soll nicht durch einen zusätzlich neu erzeugten Glossarbeitrag konkurrenziert werden.
+SEO-Grund: Die starke Portal-Zielseite ist in diesem Fall die bevorzugte Google-Zielseite und soll nicht durch einen zusätzlich neu erzeugten Glossarbeitrag konkurrenziert werden.
