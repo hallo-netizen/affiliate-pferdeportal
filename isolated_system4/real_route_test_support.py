@@ -8,7 +8,7 @@ from real_source_fixture import source_and_claims
 
 
 def start_to_context_real(base:Path,index:int):
-    raw=production_snapshot_bytes()
+    raw=production_snapshot_bytes(3)
     snapshot=base/'production-snapshot.json'
     snapshot.write_bytes(raw)
     metadata=json.loads(raw.decode('utf-8'))['next_textmachine_metadata_batch']['items'][index]
