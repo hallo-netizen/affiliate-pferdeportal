@@ -6,25 +6,33 @@ This file exists only for the dedicated System-4 test branch and intentionally r
 
 ## Mandatory first executable command
 
-There is exactly one production entrance.
+There is exactly one external production entrance.
 
-For every real System-4 production run the machine MUST first create a hash-bound `SYSTEM4_POINT0_SNAPSHOT_V1` containing the exact production snapshot and the verified research source pool. The only root command is:
+For every real System-4 production run the parent machine MUST begin from an outside-repository launch file with contract `SYSTEM4_PARENT_LAUNCH_V1`. That launch contains the already bound article metadata plus real HTTP(S) source URLs, but NO prepared Point-0 and NO source evidence/hashes. The machine itself must fetch/verify the sources, build the exact production snapshot, create the hash-bound `SYSTEM4_POINT0_SNAPSHOT_V1`, and only then open Root.
+
+The only external start command is:
+
+`python3 isolated_system4/parent_start.py start <PARENT_LAUNCH_OUTSIDE_REPO> <RUNTIME_ROOT_OUTSIDE_REPO>`
+
+`parent_start.py` MUST end with `SYSTEM4_PARENT_START_PASS:POINT0_ROOT_DISPATCH_READY` before Codex may act as worker.
+
+The internal Root command remains exclusively:
 
 `python3 isolated_system4/root_entry.py start-point0 <POINT0_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
 
-`start` and `start-stdin` are forbidden and must fail closed with `ROOT_POINT0_REQUIRED`.
+It is machine-internal after parent-start creation of Point-0. `root_entry.py start` and `start-stdin` remain forbidden and must fail closed with `ROOT_POINT0_REQUIRED`.
 
 Only after `SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY` may Codex be attached as worker via the generated supervisor dispatch. Codex free web search is forbidden; research may use only the bound Point-0 source pool.
 
-SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 root entry.
+SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 parent/root entry.
 
-Before the System-4 root entry, do not run searches, diagnostics, repository inspection, alternative gates, STARTMASTER/H7/H8/ACM/System3 routes, or repair commands.
+Before `parent_start.py`, do not run Codex research, diagnostics, alternative gates, STARTMASTER/H7/H8/ACM/System3 routes, or repair commands. The parent machine may only materialize the exact external launch file required by the one start command.
 
-If the root entry returns BLOCKED/FAIL, stop fail-closed. Do not choose another route.
+If parent-start or root-entry returns BLOCKED/FAIL, stop fail-closed. Do not choose another route.
 
 ## Isolation
 
-- Runtime workspaces, research, facts, drafts and generated output live outside the repository.
+- Parent launch, Point-0, runtime workspaces, research, facts, drafts and generated output live outside the repository.
 - Repository implementation changes, when explicitly authorized, are restricted to `isolated_system4/**`; this override itself is the sole root-level branch instruction artifact.
 - Do not modify `AGENTS.md`, `control/cloud-entry-gate/**`, STARTMASTER state, Textmaschine, PPM/PSERC/PSTE rules, WordPress plugin, theme/CSS or design authorities.
 - No legacy orchestration/runtime dependency is permitted in the System-4 execution path.
