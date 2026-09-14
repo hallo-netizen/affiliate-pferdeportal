@@ -1,7 +1,7 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497 LIVE FAIL / DESIGN 1.50.498 HART LOKAL POSITIV+NEGATIV RENDER-PASS / AUTOMATION CORE 1.3.0 LIVE-SANDBOXPRUEFUNG OFFEN
+STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497 LIVE FAIL / DESIGN 1.50.498 HART LOKAL POSITIV+NEGATIV RENDER-PASS / AUTOMATION CORE 1.3.0 SANDBOX LIVE PASS
 
 ## LIVE bestätigt – nicht regressieren
 
@@ -10,6 +10,8 @@ STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497
 - rechte Ocker-Oberkante: **dünn – PASS**.
 - Glossar-Breadcrumb Inhalt + Position/Abstand: **LIVE PASS**. Nicht mehr anfassen.
 - Glossar-Hero nach Design `1.50.494`: **LIVE PASS**. Breites Bild + weicher Übergang bestätigt.
+- Automation Core `1.3.0` Sandbox unter `Glossar -> Automation -> Sandbox hart testen`: **LIVE PASS 2026-09-14**.
+- Sandbox-Readback: `ok:true`; alle Tests `true`; `batch_upper_guard_100:true`; `production_write_performed:false`; Modus `SANDBOX`; Auto-Publish AUS; Produktion scharf AUS.
 
 ## Journal – Nutzerreadback nach 1.50.497
 
@@ -68,4 +70,4 @@ Marker: `JOURNAL_150498_RENDER_BOUNDING_BOX_POS_NEG_PASS`.
 
 ## Core 1.3.0 – Automation
 
-Unverändert. Automatische Veröffentlichung bleibt bis Abschluss der realen Sandboxprüfung gesperrt.
+Sandbox LIVE PASS. Nächster realer Schritt ist `Pool jetzt aktualisieren`. Produktion scharf und Auto-Publish bleiben AUS. Danach Pool-Inhalt und Kandidatenstatus prüfen; `Automatiklauf jetzt starten` erst nach diesem Readback.
