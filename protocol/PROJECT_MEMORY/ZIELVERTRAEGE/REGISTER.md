@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-09-11
+STAND: 2026-09-14
 
 ## Pflichtfelder
 
@@ -32,7 +32,6 @@ Bereits vorhandene historische Zielverträge aus Repository/Masterakten werden b
 
 Nichts aus alten Zielverträgen still ersetzen.
 
-
 ## ZV-MOD-001 – Allgemeingültiger Kategorie-Master 016
 
 TITEL:
@@ -62,7 +61,6 @@ maßgeblich sind die im Master gebundenen 14 Stufen, Hardlocks, Research-/Covera
 BELEGSTATUS:
 lokal/fresh R10 stark PASS; echter Live-WordPress-Deploymentlauf noch offen.
 
-
 ## ZV-MOD-003 – Designvertrag V104
 
 TITEL:
@@ -85,7 +83,6 @@ gebundene V104-Design-/QA-Regeln; keine stillen projektspezifischen Übernahmen.
 
 PFERDE-ANWENDUNG:
 aktueller Live-Stand 1.50.472 verwendet weiterhin Contract V104 unverändert.
-
 
 ## ZV-TEXT-001 – STARTMASTER0107 aktueller Produktionszielvertrag
 
@@ -113,6 +110,34 @@ Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
 NACHFOLGER:
 keiner belegt.
 
+## ZV-GLOSSAR-001 – Glossar-Abdeckung Pferde Atelier
+
+TITEL:
+PFERDE ATELIER – VOLLSTÄNDIGE THEMENABDECKUNG DURCH DAS GLOSSAR
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / GLOSSAR
+
+STATUS:
+AKTIV
+
+FASSUNG:
+V1
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/GLOSSAR/ZIELVERTRAG_GLOSSAR_ABDECKUNG_V1.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen.
+
+HINWEIS:
+Die Produktionsarchitektur wurde am 14.09.2026 auf WDB -> Chat -> JSON -> Draft/Readback umgestellt; das fachliche Abdeckungsziel selbst bleibt unverändert.
+
+NACHFOLGER:
+keiner.
 
 ## ZV-AFFILIATE-OTTO-001 – OTTO/Awin vollautomatische Produkt- und Bannerintegration
 
@@ -143,7 +168,6 @@ Durch explizite Nutzerentscheidung vom 11.09.2026 pausiert zugunsten des ADCELL-
 
 NACHFOLGER:
 keiner belegt.
-
 
 ## ZV-AFFILIATE-ADCELL-001 – ADCELL vollautomatische API-v2-Integration
 
@@ -178,7 +202,6 @@ PASS-BEDINGUNG:
 
 NACHFOLGER:
 keiner belegt.
-
 
 ## ZV-TRESOR-001 – GitHub-Komplettsicherung
 
