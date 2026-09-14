@@ -8,11 +8,7 @@ Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Ca
 
 Branch: `hobbyroom/system4-point0-supervisor-rebuild-v1`
 
-Letzter vollständig geprüfter Code-Head vor dieser reinen Statusdokumentation:
-`8e1a03361b8a59aa76f12e0a0ff985b3688e0cb5`
-
-GitHub Actions Run:
-`34865422904` → **SUCCESS**
+Der Status `PASS` gilt nur, wenn der **aktuelle Branch-Head** den vollständigen Workflow `.github/workflows/system4-point0-supervisor-candidate.yml` mit `conclusion=success` bestanden hat. Konkrete Head-/Run-Belege werden nicht zusätzlich als dynamische CURRENT-Wahrheit in dieser README dupliziert; sie liegen dauerhaft in GitHub Actions und im historischen Abschlussprotokoll.
 
 Kein Merge. Kein Publish. `publish_allowed=false`.
 
@@ -29,21 +25,21 @@ Codex/Worker besitzt weder Route noch Links noch Kategorie noch PASS. Freie Webs
 
 ## Hart bewiesene Grenzen
 
-Auf dem geprüften Remote-Code-Head tatsächlich ausgeführt:
+Der vollständige Remote-Workflow muss auf dem aktuellen Branch-Head tatsächlich ausführen und bestehen:
 
-- Point-0 PREPARED -> FINAL Quellenbindung: **PASS**;
-- Root / Supervisor / Worker-Dispatch / Artikelindex: **PASS**;
-- Maschinenbindung von Kategorie, drei internen Links und Quality-Binding: **PASS**;
-- Single-Button Negativstrecke: **PASS**;
-- verbotener externer SEO-Provider im vollständigen Testpfad: **HARD BLOCK / PASS**;
-- komplette bestehende System-4-Suite: **PASS**;
-- exakter LanguageTool-6.8-Bestand 43: **PASS**;
-- echter PPM 6.7.9: **PASS**;
-- bestehender Real-Korridor: **PASS**;
-- separater 3-Themen-Real-Korridor: **PASS**;
-- Single-Button: ein weiterer neuer Artikel bis Datei: **PASS**;
-- Single-Button: drei weitere neue Artikel bis Datei: **PASS**;
-- Batch / V2-Handoff / Inline-Unpack / SHA- und Bytegleichheit: **PASS**.
+- Point-0 PREPARED -> FINAL Quellenbindung;
+- Root / Supervisor / Worker-Dispatch / Artikelindex;
+- Maschinenbindung von Kategorie, drei internen Links und Quality-Binding;
+- Single-Button Positiv-/Negativstrecke;
+- Hard-Block verbotener Provider-Abhängigkeiten im ausgeführten Full-Route-Pfad;
+- komplette bestehende System-4-Suite;
+- exakter LanguageTool-6.8-Bestand 43;
+- echter PPM 6.7.9;
+- bestehender Real-Korridor;
+- separater 3-Themen-Real-Korridor;
+- Single-Button: ein weiterer neuer Artikel bis Datei;
+- Single-Button: drei weitere neue Artikel bis Datei;
+- Batch / V2-Handoff / Inline-Unpack / SHA- und Bytegleichheit.
 
 Die zuletzt zusätzlich getesteten Startknopf-Themen waren:
 
@@ -75,7 +71,9 @@ Der im letzten neuen Dreier-Test gefundene `BLOCKED_WAVE2_CONCLUSION_BALANCE` wa
 
 ## Was NICHT bewiesen wurde
 
-Der Single-Button-Test benutzt einen kontrollierten Test-Worker an exakt derselben gebundenen Worker-Schnittstelle. Ein **realer Codex-Produktionsarbeiter** wurde in diesem Abschlusslauf nicht ausgeführt. Deshalb ist ein echter Codex-Artikel weiterhin der nächste Produktionsbeweis und darf nicht aus dem Test-Worker-PASS abgeleitet werden.
+Der Single-Button-Abnahmetest benutzt einen kontrollierten Test-Worker an exakt derselben gebundenen Worker-Schnittstelle. Ein **realer Codex-Produktionsarbeiter** wurde in diesem Abschlusslauf nicht ausgeführt. Deshalb ist ein echter Codex-Artikel weiterhin der nächste Produktionsbeweis und darf nicht aus dem Test-Worker-PASS abgeleitet werden.
+
+Ein separater lokaler Container-/Arbeitsplatzlauf auf dem aktuellen Head ist in diesem Chat nicht ausgeführt worden; die vollständige Abnahme wurde remote auf GitHub Actions ausgeführt. Das ist kein Runtime-PASS für einen realen Codex-Produktionseinsatz.
 
 Der offizielle STARTMASTER0107-LIVE-`CURRENT_STATE` wurde nicht verändert. System 4 ist weiterhin ein isolierter Kandidat und keine gemergte Produktionswahrheit.
 
@@ -85,7 +83,7 @@ Status: **TESTKANDIDAT PASS / PRODUKTION NICHT FREIGEGEBEN**.
 
 NEXT ACTION:
 1. keine weitere Architektur- oder Teststreckenänderung;
-2. auf dem aktuell geprüften Remote-Kandidaten genau **einen real gebundenen Codex-Artikel** über denselben Single-Button-/Supervisor-/Worker-Pfad ausführen, nur nach ausdrücklicher Nutzerfreigabe;
+2. auf dem aktuell vollständig remote geprüften Kandidaten genau **einen real gebundenen Codex-Artikel** über denselben Single-Button-/Supervisor-/Worker-Pfad ausführen, nur nach ausdrücklicher Nutzerfreigabe;
 3. bei erstem echten Fehler fail-closed stoppen und ausschließlich denselben gebundenen Artikel reparieren, sofern der vorhandene Repair-Vertrag dies erlaubt;
 4. danach echten LT-6.8-/PPM-6.7.9-PASS, Handoff und Bytegleichheit nachweisen;
 5. weiterhin kein Merge und kein Publish ohne separate Nutzerfreigabe.
