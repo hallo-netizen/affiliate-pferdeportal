@@ -10,10 +10,16 @@ LIVE PASS und **nicht mehr anfassen**:
 - Glossar-Fließtext enthält 0 Links;
 - rechte Ockerlinie ist dünn.
 
-LIVE offen:
-- Breadcrumb-Abstand nach oben auf allen Glossarseiten einheitlich verkleinern;
-- komplette Begriffskacheln anklickbar machen;
-- Glossar-Hero weiter herauszoomen / Motiv erkennbar machen.
+LIVE offen nach Nutzerreadback 1.50.491:
+- Breadcrumb-Abstand nach oben weiterhin falsch/zu groß;
+- Hero-Übergang Fläche→Bild fehlt; noch weiter herauszoomen;
+- komplette Begriffskachel bleibt bis ausdrücklichem Nutzerreadback in Nachprüfung.
+
+## NACHGEWIESENE URSACHE BREADCRUMB
+
+1.50.491 hatte für die drei Glossar-Kontexte weiterhin eine feste Sonderregel `padding-top:18px`.
+Andere Seiten/Kategorien verwenden zentral `var(--pftk-navigation-content-gap)`.
+Damit konnte Glossar trotz gleichem Zahlenwert nicht verbindlich der realen Seitenkonfiguration folgen.
 
 ## ARBEITSORT
 
@@ -25,41 +31,45 @@ Autorität:
 - `TEXT_UND_LINKREGELN.md`
 - Fachfakten ausschließlich WDB Glossar.
 
-## LOKALE KANDIDATEN
+## LOKALER DESIGN-KANDIDAT 1.50.492
 
-### Core 1.2.3
-`UNIVERSAL_GLOSSARY_ENGINE_1.2.3_NEUE_BEITRAEGE_INSTALLIEREN.zip`
+`PFERDE_ATELIER_DESIGN_V1.50.492_GLOSSAR_SPACING_HERO_HARDFIX_INSTALLIEREN.zip`
 
-SHA-256: `997cd888fe3ea1a102a8d5c9e614497404d5049e5c64086f330f0dc77c07049f`
+SHA-256: `7a016fda183874160fc303e3c6279adc3fec6475cc60cd617159e20913c42161`
 
-- 14 bisherige Bestandsbegriffe weiter im Updateweg;
-- `Aalstrich` zusätzlich aus WDB `GEPRUEFT` übernommen/überschrieben;
-- `Zuchtbuch` neu aus WDB `GEPRUEFT` ergänzt;
-- beide 150–200 Wörter und 0 Fließtextlinks;
-- State `1.2.3:16`;
-- lokale Syntax-/Vertrags-/ZIP-Prüfung PASS.
+- Glossar übernimmt nun dieselbe zentrale Topabstandsvariable wie normale Seiten/Kategorien; keine 18-px-Sonderregel mehr.
+- Hero weiter herausgezoomt (`.86` Desktop / `.82` mobil) und kleinerer Bildbereich.
+- weicher Bildübergang per Maskenverlauf + Creme-Overlay.
+- ganze Begriffskachel bleibt vollständiger Link.
+- 0-Link-Regel und 2-px-Ockerlinie unverändert.
 
-### Design 1.50.491
-`PFERDE_ATELIER_DESIGN_V1.50.491_GLOSSAR_NAV_HERO_FIX_INSTALLIEREN.zip`
+## HARTE LOKALE PRÜFUNG
 
-SHA-256: `e5913fd60b59ce6b49a354a98f0f2bd132df6356720ed8d5ee76309abd811d51`
+PASS:
+- PHP-Lint.
+- Positiv: normale Seiten und alle Glossarkontexte nutzen dieselbe zentrale Abstandvariable.
+- Negativ: alte `18px`-Sonderregel absichtlich wieder eingesetzt → Test erkennt Fehler.
+- Positiv Hero: Zoom-out + Übergangsmaske vorhanden.
+- Negativ Hero: Maske absichtlich entfernt → Test erkennt Fehler.
+- Hero-Geometrie: vorher ca. 595×238 sichtbarer Bildkörper, Kandidat ca. 440×176.
+- Regression: ganze Kachel Anchor, 0-Link-Guard, 2-px-Ockerlinie.
+- ZIP-Lesetest und Version 1.50.492.
 
-- einheitlicher Topabstand 18 px auf Glossar-Startseite, Gruppe und Single;
-- ganze Begriffskachel ist Link;
-- Hero zeigt mit `contain` und rechter Ausrichtung deutlich mehr vom Originalmotiv;
-- bestätigte 0-Link- und 2-px-Regeln bleiben bestehen;
-- lokale Syntax-/Vertrags-/ZIP-Prüfung PASS.
+Marker: `DESIGN_150492_POS_NEG_PASS`.
+
+## CORE / BEITRÄGE
+
+Core 1.2.3 bleibt unverändert: `Aalstrich` WDB-geprüft aktualisieren, `Zuchtbuch` WDB-geprüft neu. Dieser Design-Fix erzeugt keine zusätzlichen Fachbegriffe.
 
 ## NEXT ACTION – EXAKT
 
-1. Core `1.2.3` installieren.
-2. Design `1.50.491` installieren.
-3. LIVE prüfen: Startseite, eine Gruppe und `Bandmaß` auf identischem Breadcrumb-Topabstand.
-4. komplette Kachel `Bandmaß` außerhalb des CTA anklicken.
-5. Hero visuell prüfen: Bücher/Pferdelexikon müssen als Motiv verständlich sein.
+1. Design `1.50.492` über 1.50.491 installieren.
+2. Glossar-Startseite direkt mit einer normalen Seite/Kategorie vergleichen: Abstand Navigationsunterkante → Breadcrumb muss identisch sein.
+3. eine Glossar-Gruppe und `Bandmaß` gegenprüfen: derselbe Abstand.
+4. Hero prüfen: weicher Übergang und klar weiter herausgezoomtes Motiv.
+5. Kachel außerhalb `Zum Begriff` klicken.
 6. Regression: 0 Fließtextlinks und dünne Ockerlinie bleiben PASS.
-7. `Aalstrich` und `Zuchtbuch` öffnen und real prüfen.
-8. Erst danach LIVE PASS / Artefaktsync.
+7. Erst nach Nutzerreadback LIVE PASS.
 
 ## NICHT ANFASSEN
 
