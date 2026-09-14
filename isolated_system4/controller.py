@@ -4,6 +4,7 @@ from pathlib import Path
 
 from controller_core import *  # noqa: F401,F403
 import controller_core as core
+import production_binding
 import supervisor
 
 HERE=Path(__file__).resolve().parent
@@ -49,16 +50,34 @@ def _guarded_research(argv:list[str])->int:
     print('SYSTEM4_BOUND_RESEARCH_POOL_PASS')
     return 0
 
+def _guarded_context(argv:list[str])->int:
+    _require(len(argv)==5,'BAD_CONTEXT_ARGS')
+    workspace=Path(argv[2]); fact_path=Path(argv[3]); plan_path=Path(argv[4])
+    supervisor.verify_controller_binding(workspace)
+    state,_=core.load(workspace)
+    _require(state.get('phase')=='CONTEXT_REQUIRED','PHASE_FAIL:CONTEXT')
+    fact=json.loads(fact_path.read_text(encoding='utf-8'))
+    incoming=json.loads(plan_path.read_text(encoding='utf-8'))
+    bound=production_binding.bind_plan(REPO,state,fact,incoming)
+    bound_path=workspace/'MACHINE_PRODUCTION_BINDING.json'
+    tmp=workspace/'.MACHINE_PRODUCTION_BINDING.tmp'
+    tmp.write_text(json.dumps(bound,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
+    tmp.replace(bound_path)
+    core.cmd_context(argv[2],argv[3],str(bound_path))
+    print('SYSTEM4_MACHINE_PRODUCTION_BINDING_PASS')
+    return 0
+
 def main(argv:list[str])->int:
     try:
         _verify_core()
         if len(argv)<2: raise SupervisedControllerFail('BAD_COMMAND')
         if argv[1]=='ingress': return _guarded_ingress(argv)
         if argv[1]=='research': return _guarded_research(argv)
+        if argv[1]=='context': return _guarded_context(argv)
         if len(argv)>=3:
             supervisor.verify_controller_binding(Path(argv[2]))
         return core.main(argv)
-    except (SupervisedControllerFail, supervisor.SupervisorError, json.JSONDecodeError, OSError, ValueError) as exc:
+    except (SupervisedControllerFail, supervisor.SupervisorError, production_binding.ProductionBindingError, json.JSONDecodeError, OSError, ValueError) as exc:
         print('SYSTEM4_FAIL:'+str(exc)); return 2
 
 if __name__=='__main__': raise SystemExit(main(sys.argv))
