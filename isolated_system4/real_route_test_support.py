@@ -111,61 +111,36 @@ def valid_real_article(state:dict,index:int)->str:
         other.append(f'content_{len(other)+1}')
 
     section_labels={
-        'intro':'Einleitung',
-        'criteria':'Auswahlkriterien',
-        'decision':'Entscheidung',
-        'table':'Vergleich',
-        'conclusion':'Fazit',
-        'further_information':'weitere Informationen',
+        'intro':'Einleitung','criteria':'Auswahlkriterien','decision':'Entscheidung',
+        'table':'Vergleich','conclusion':'Fazit','further_information':'weitere Informationen',
     }
-    roles=(
-        'Ausgangspunkt der Auswahl','Prüfmaßstab für die Nutzung','Bezugspunkt für den Vergleich',
-        'Kontrollpunkt für die Entscheidung','Orientierung für die praktische Einordnung',
-        'Grenze für die abschließende Bewertung','Grundlage für die sachliche Abwägung',
-        'Leitlinie für die konkrete Prüfung','Bezugsgröße für die Planung',
-        'Kriterium für die nachvollziehbare Auswahl','Prüfpunkt für die Alltagstauglichkeit',
-        'Maßstab für die abschließende Kontrolle',
-    )
-    perspectives=(
-        'ohne die Quellenaussage zu erweitern','mit direktem Bezug auf den gesicherten Quellenstand',
-        'ausschließlich innerhalb des belegten Aussageumfangs','als klar abgegrenzter Teil der Auswahlprüfung',
-        'für eine nachvollziehbare und an die Quelle gebundene Entscheidung',
-        'mit Trennung zwischen belegter Aussage und bloßer Vermutung','als fester Bezug für die weitere Einordnung',
-        'mit Konzentration auf den tatsächlich belegten Punkt','als überprüfbare Grundlage der Entscheidung',
-        'ohne zusätzliche fachliche Behauptung','mit eindeutiger Bindung an den realen Quellenstand',
-        'als dokumentierter Prüfpunkt im Artikel',
-    )
-    transitions=(
-        'Damit bleibt für diesen Abschnitt eindeutig, welcher Quellenpunkt die Bewertung trägt',
-        'So lässt sich die Entscheidung an einer nachprüfbaren Aussage ausrichten',
-        'Auf diese Weise bleibt die Einordnung eng am belegten Inhalt',
-        'Dadurch wird der Prüfschritt nicht durch unbelegte Zusatzannahmen erweitert',
-        'So bleibt die fachliche Grenze der belegten Aussage sichtbar',
-        'Damit ist die Grundlage der Auswahl für den Leser nachvollziehbar',
-        'Dadurch bleibt die Aussage auch bei der praktischen Einordnung überprüfbar',
-        'So wird der reale Quellenpunkt konsequent von allgemeinen Annahmen getrennt',
-        'Damit bleibt die Argumentation innerhalb des gebundenen Faktenrahmens',
-        'So kann der Abschnitt auf einem klar benannten Quellenpunkt aufbauen',
-        'Dadurch wird der belegte Inhalt nicht durch neue Tatsachen ersetzt',
-        'Damit bleibt die belegte Aussage in ihrer ursprünglichen Bedeutung erhalten',
+    aspects=(
+        'Auswahl','Material','Nutzung','Sicherheit','Pflege','Eignung','Praxis','Vergleich',
+        'Planung','Kontrolle','Entscheidung','Anwendung','Untergrund','Ausstattung','Haltung','Training',
+        'Stall','Weide','Reitplatz','Dokumentation','Einordnung','Prüfung','Abwägung','Orientierung',
     )
 
-    def display_section(section:str)->str:
+    def label(section:str)->str:
         return section_labels.get(section,'Sachprüfung')
 
-    def sentence(fact_id:str,seed:int,section:str)->str:
+    def paragraph(fact_id:str,seed:int,section:str)->str:
         fact=claim_map[fact_id]
-        role=roles[(seed+index*3)%len(roles)]
-        perspective=perspectives[(seed*2+index)%len(perspectives)]
-        transition=transitions[(seed*5+index)%len(transitions)]
-        return f'Bei „{display_section(section)}“ dient folgende belegte Aussage als {role}: {fact}; sie wird {perspective} verwendet. {transition}.'
+        a=aspects[(seed+index*3)%len(aspects)]
+        d=aspects[(seed*2+5+index)%len(aspects)]
+        e=aspects[(seed*3+9+index)%len(aspects)]
+        return (
+            f'Für den Abschnitt „{label(section)}“ ist belegt: {fact}; bei {identity["target_keyword"]} '
+            f'wird diese Aussage im Zusammenhang mit {a}, {d} und {e} eingeordnet, wobei ausschließlich der dokumentierte '
+            f'Quelleninhalt maßgeblich bleibt und unbelegte Ergänzungen ausdrücklich außerhalb der Bewertung bleiben.'
+        )
 
     fid=allowed[0]
-    intro_text=sentence(fid,1,'intro')
+    intro_text=paragraph(fid,1,'intro')
     if len(intro_text.split())<ilo:
-        intro_text+=' Der Einstieg benennt damit nur den belegten Ausgangspunkt und lässt weitergehende Annahmen bewusst außen vor.'
+        intro_text+=' Der Einstieg benennt damit nur den belegten Ausgangspunkt für die weitere sachliche Prüfung.'
     if len(intro_text.split())>ihi:
         intro_text=' '.join(intro_text.split()[:ihi]).rstrip(' ,;:')+'.'
+
     traces=''
     if t.get('fact_trace_required') is True:
         need=max(int(b.get('source_trace_minimum') or 0),1)
@@ -175,19 +150,18 @@ def valid_real_article(state:dict,index:int)->str:
     blocks=[f'<section data-block="{intro_name}"><p data-fact-ids="{fid}">{intro_text}{traces}</p></section>']
 
     link_rows=[row for row in b.get('link_bindings',[]) if isinstance(row,dict) and row.get('active') is not False]
-    expected_link_blocks=[str(row.get('section_id') or '') for row in link_rows]
-    missing_link_blocks=[name for name in expected_link_blocks if name not in other]
-    if missing_link_blocks:
-        raise AssertionError('REAL_BOUND_LINK_SECTION_MISSING:'+','.join(missing_link_blocks))
+    missing=[str(row.get('section_id') or '') for row in link_rows if str(row.get('section_id') or '') not in other]
+    if missing:
+        raise AssertionError('REAL_BOUND_LINK_SECTION_MISSING:'+','.join(missing))
 
-    heading_suffixes=(
-        'sachlich einordnen','gezielt prüfen','für die Auswahl bewerten','im Vergleich betrachten',
-        'für die Praxis abwägen','als Entscheidungspunkt nutzen','an der Quelle prüfen','nachvollziehbar zusammenführen',
-    )
     target_paras=max(min_paragraphs-1,len(other)*2,4)
     paras_per=max(2,(target_paras+len(other)-1)//len(other))
     target_words=max(min_words-len(intro_text.split()),500)
     words_per=max(48,(target_words+len(other)*paras_per-1)//(len(other)*paras_per))
+    heading_suffixes=(
+        'sachlich einordnen','gezielt prüfen','für die Auswahl bewerten','im Vergleich betrachten',
+        'für die Praxis abwägen','als Entscheidungspunkt nutzen','an der Quelle prüfen','nachvollziehbar zusammenführen',
+    )
 
     seed=10
     for bi,name in enumerate(other):
@@ -197,16 +171,13 @@ def valid_real_article(state:dict,index:int)->str:
         section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
         for pi in range(paras_per):
             fact_id=allowed[(bi+pi)%len(allowed)]
-            text=sentence(fact_id,seed,name)
+            text=paragraph(fact_id,seed,name)
             addon=0
             while len(text.split())<words_per:
                 addon+=1
-                extra_seed=seed+addon*7
-                extra_role=roles[extra_seed%len(roles)]
-                extra_perspective=perspectives[(extra_seed+3)%len(perspectives)]
-                starters=('Zusätzlich','Ergänzend','Daneben','Für die Auswahl','Bei der Prüfung','Im nächsten Schritt')
-                starter=starters[(extra_seed+index)%len(starters)]
-                text+=f' {starter} wird dieser Quellenpunkt bei {identity["target_keyword"]} als {extra_role} betrachtet, {extra_perspective}; maßgeblich bleibt dabei nur die bereits belegte Aussage.'
+                a=aspects[(seed+addon*4+index)%len(aspects)]
+                d=aspects[(seed+addon*7+11+index)%len(aspects)]
+                text=text.rstrip('.')+f'; für {a} und {d} dient derselbe Beleg lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
             if pi==0:
                 for row in section_links:
                     text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
@@ -215,17 +186,15 @@ def valid_real_article(state:dict,index:int)->str:
         blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
 
     if len(blocks)>1:
-        list_starts=(
-            'Die Grundprüfung hält fest:',
-            'Bei der Nutzungsprüfung gilt:',
-            'Im Vergleich wird beachtet:',
-            'Zum Abschluss wird geprüft:',
-        )
         list_rows=[]
         for n in range(4):
             fact_id=allowed[n%len(allowed)]
             fact=claim_map[fact_id]
-            list_rows.append(f'<li data-fact-ids="{fact_id}">{list_starts[n]} „{fact}“ bleibt als eigener belegter Prüfpunkt erhalten.</li>')
+            a=aspects[(40+n*3+index)%len(aspects)]
+            list_rows.append(
+                f'<li data-fact-ids="{fact_id}">Als {a} bleibt der reale Quellenpunkt gebunden: {fact}; '
+                f'die Liste übernimmt damit nur den belegten Inhalt für die weitere Auswahl.</li>'
+            )
         blocks[1]=blocks[1].replace('</section>','<ul>'+''.join(list_rows)+'</ul></section>',1)
 
     table_count=int(t.get('table_count_exact') or 0)
@@ -236,40 +205,23 @@ def valid_real_article(state:dict,index:int)->str:
         if len(table_positions)!=1:
             raise AssertionError('REAL_BOUND_TABLE_BLOCK_MISSING_OR_DUPLICATE')
         rows=max(int(g.get('min_table_body_rows') or 1),4)
-        table_labels=(
-            ('Quellenpunkt','Bedeutung für die Auswahl','Prüfschritt'),
-            ('Belegter Maßstab','Praktische Einordnung','Entscheidungsbezug'),
-            ('Gebundene Aussage','Kontrollperspektive','Abschlussprüfung'),
-            ('Faktenbasis','Vergleichsaspekt','Dokumentierter Bezug'),
-        )
-        cell_frames=(
-            'Als Quellenkern bleibt festgehalten: {fact}.',
-            'Für die sachliche Einordnung wird ausschließlich dieser belegte Punkt genutzt: {fact}.',
-            'Die Auswahlprüfung erhält damit einen klaren Bezug: {fact}.',
-            'Im Vergleich wird die folgende Aussage als abgegrenzter Maßstab geführt: {fact}.',
-            'Für die praktische Bewertung ist dieser Quellenpunkt dokumentiert: {fact}.',
-            'Die Entscheidung wird an dieser gebundenen Aussage gespiegelt: {fact}.',
-            'Als Kontrollgrundlage dient die belegte Aussage: {fact}.',
-            'Für die abschließende Prüfung bleibt dieser Beleg maßgeblich: {fact}.',
-            'Der Quellenstand liefert für diesen Tabellenpunkt folgende Aussage: {fact}.',
-            'Zur nachvollziehbaren Abwägung wird diese Quellenaussage getrennt ausgewiesen: {fact}.',
-            'Der Vergleich stützt sich an dieser Stelle auf den gebundenen Inhalt: {fact}.',
-            'Als dokumentierte Entscheidungsbasis gilt hier der Quellenpunkt: {fact}.',
-        )
         body=[]
         for r in range(rows):
             cells=[]
             for col in range(3):
                 fact_id=allowed[(r+col)%len(allowed)]
                 fact=claim_map[fact_id]
-                frame=cell_frames[(r*3+col)%len(cell_frames)]
-                cells.append(f'<td data-fact-ids="{fact_id}">{frame.format(fact=fact)}</td>')
+                a=aspects[(60+r*5+col*2+index)%len(aspects)]
+                d=aspects[(67+r*7+col*3+index)%len(aspects)]
+                cells.append(
+                    f'<td data-fact-ids="{fact_id}">Für {a} ist belegt: {fact}; '
+                    f'{d} bezeichnet hier nur die sachliche Einordnung dieses Quellenpunkts.</td>'
+                )
             body.append('<tr>'+''.join(cells)+'</tr>')
-        labels=table_labels[index%len(table_labels)]
         table=(f'<table class="system-129-table comparison-table"><thead><tr>'
-               f'<th data-fact-ids="{allowed[0]}">{identity["target_keyword"]}: {labels[0]}</th>'
-               f'<th data-fact-ids="{allowed[1%len(allowed)]}">{identity["target_keyword"]}: {labels[1]}</th>'
-               f'<th data-fact-ids="{allowed[2%len(allowed)]}">{identity["target_keyword"]}: {labels[2]}</th>'
+               f'<th data-fact-ids="{allowed[0]}">{identity["target_keyword"]}: Quellenpunkt</th>'
+               f'<th data-fact-ids="{allowed[1%len(allowed)]}">{identity["target_keyword"]}: Einordnung</th>'
+               f'<th data-fact-ids="{allowed[2%len(allowed)]}">{identity["target_keyword"]}: Prüfung</th>'
                f'</tr></thead><tbody>'+''.join(body)+'</tbody></table>')
         pos=table_positions[0]
         blocks[pos]=blocks[pos].replace('</section>',table+'</section>',1)
