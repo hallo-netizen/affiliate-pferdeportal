@@ -8,6 +8,7 @@ import design_guard
 import production_checks
 import authoring_contract
 import release_adapter
+import supervisor
 
 CONTRACT='SYSTEM4_CANONICAL_ARTICLE_STATE_V1'
 ALLOWED_ITEM_KEYS={'title','target_keyword','category','article_type','plan_slot'}
@@ -80,22 +81,38 @@ def cmd_ingress(snapshot_path, workspace, item_index=0):
     article,batch_sha=extract_ready(snap,item_index)
     state={'contract':CONTRACT,'source_snapshot_sha256':file_sha(p),'batch_sha256':batch_sha,'article':article,'immutable_core_sha256':'','publish_allowed':False,'phase':'RESEARCH_REQUIRED','revision':0,'research':None,'facts':None,'production_context':None,'authoring_contract':None,'draft_markdown':None,'draft_sha256':None,'checks':{},'last_error':None,'release_prepared':None,'released':False}
     state['immutable_core_sha256']=sha(immutable_core(state))
+    if (w/'supervisor_state.json').is_file():
+        try: supervisor.verify_controller_binding(w,state)
+        except supervisor.SupervisorError as e: raise Fail('SUPERVISOR_BINDING_FAIL:'+str(e)) from e
     (w/'state.json').write_text(json.dumps(state,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
     print('SYSTEM4_INGRESS_PASS:RESEARCH_REQUIRED')
 
 def load(workspace):
     p=Path(workspace)/'state.json'
     if not p.is_file(): raise Fail('STATE_MISSING')
-    s=json.loads(p.read_text(encoding='utf-8')); verify_state(s); return s,p
+    s=json.loads(p.read_text(encoding='utf-8')); verify_state(s)
+    if (p.parent/'supervisor_state.json').is_file():
+        try: supervisor.verify_controller_binding(p.parent,s)
+        except supervisor.SupervisorError as e: raise Fail('SUPERVISOR_BINDING_FAIL:'+str(e)) from e
+    return s,p
 
-def save(s,p): verify_state(s); p.write_text(json.dumps(s,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
+def save(s,p):
+    verify_state(s)
+    if (p.parent/'supervisor_state.json').is_file():
+        try: supervisor.verify_controller_binding(p.parent,s)
+        except supervisor.SupervisorError as e: raise Fail('SUPERVISOR_BINDING_FAIL:'+str(e)) from e
+    p.write_text(json.dumps(s,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
 
 def cmd_research(workspace,research_path):
     s,p=load(workspace)
     if s['phase']!='RESEARCH_REQUIRED': raise Fail('PHASE_FAIL:RESEARCH')
     text=Path(research_path).read_text(encoding='utf-8').strip()
-    try: content_guard.validate_research_document(text)
+    try:
+        submitted=content_guard.validate_research_document(text)
+        if (Path(workspace)/'supervisor_state.json').is_file():
+            supervisor.validate_research_submission(Path(workspace),submitted)
     except content_guard.ContentGuardError as e: raise Fail('RESEARCH_EVIDENCE_FAIL:'+str(e)) from e
+    except supervisor.SupervisorError as e: raise Fail('SUPERVISOR_RESEARCH_BINDING_FAIL:'+str(e)) from e
     s['research']={'text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}; s['phase']='FACT_CHECK_REQUIRED'; save(s,p)
     print('SYSTEM4_RESEARCH_PASS:FACT_CHECK_REQUIRED')
 

@@ -2,6 +2,8 @@ from __future__ import annotations
 import json, subprocess, sys
 from pathlib import Path
 
+import root_entry, worker_dispatch, supervisor
+
 ROOT=Path(__file__).resolve().parent
 CONTROLLER=ROOT/'controller.py'
 ALLOWED={
@@ -26,14 +28,30 @@ def show(workspace: Path) -> int:
  print('SYSTEM4_CODEX_ENTRY_PASS:'+phase)
  print(ALLOWED[phase]); return 0
 
+def _head()->str:
+ cp=subprocess.run(['git','rev-parse','--verify','HEAD'],cwd=ROOT.parent,text=True,capture_output=True,check=True)
+ return cp.stdout.strip()
+
+def worker_start(workspace:Path)->int:
+ bundle_path=workspace/'worker_dispatch.json'
+ if not bundle_path.is_file(): print('SYSTEM4_CODEX_ENTRY_FAIL:WORKER_DISPATCH_MISSING'); return 2
+ try:
+  bundle=json.loads(bundle_path.read_text(encoding='utf-8'))
+  manifest=root_entry._critical_manifest_sha256(); head=_head()
+  wc,_=worker_dispatch.verify_bundle(bundle,actual_manifest=manifest,actual_head=head)
+  supervisor.verify_controller_binding(workspace)
+  if wc.get('external_web_search_allowed') is not False: raise RuntimeError('FREE_WEB_NOT_BLOCKED')
+ except Exception as exc:
+  print('SYSTEM4_CODEX_ENTRY_FAIL:WORKER_DISPATCH_INVALID:'+str(exc)); return 2
+ return show(workspace)
+
 def main(argv):
- if len(argv)<3 or argv[1] not in {'start','next'}:
+ if len(argv)<3 or argv[1] not in {'start','next','worker-start'}:
   print('SYSTEM4_CODEX_ENTRY_FAIL:BAD_COMMAND'); return 2
+ if argv[1]=='worker-start':
+  if len(argv)!=3: print('SYSTEM4_CODEX_ENTRY_FAIL:BAD_WORKER_START_ARGS'); return 2
+  return worker_start(Path(argv[2]))
  if argv[1]=='start':
-  if len(argv)!=4: print('SYSTEM4_CODEX_ENTRY_FAIL:BAD_START_ARGS'); return 2
-  snapshot=Path(argv[2]); workspace=Path(argv[3])
-  p=subprocess.run([sys.executable,str(CONTROLLER),'ingress',str(snapshot),str(workspace)],text=True)
-  if p.returncode: return p.returncode
-  return show(workspace)
+  print('SYSTEM4_CODEX_ENTRY_FAIL:SUPERVISOR_DISPATCH_REQUIRED'); return 2
  return show(Path(argv[2]))
 if __name__=='__main__': raise SystemExit(main(sys.argv))
