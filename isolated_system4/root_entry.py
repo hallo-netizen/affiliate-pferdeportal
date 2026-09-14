@@ -57,13 +57,14 @@ def _verify_common(workspace:Path)->str:
  if _within(workspace,REPO):raise EntryFail('ROOT_ENTRY_WORKSPACE_MUST_BE_OUTSIDE_REPO')
  return _critical_manifest_sha256()
 
-def _start_point0(point0:Path,workspace:Path,actual_manifest:str)->int:
+def _start_point0(point0:Path,workspace:Path,actual_manifest:str,item_index:int=0)->int:
  if not point0.is_file() or _within(point0,REPO):raise EntryFail('ROOT_POINT0_FILE_INVALID')
+ if not isinstance(item_index,int) or isinstance(item_index,bool) or item_index<0: raise EntryFail('ROOT_ARTICLE_INDEX_INVALID')
  actual_head=_git('rev-parse','--verify','HEAD')
- try:receipt=root_supervisor_bridge.bind_point0(point0,workspace,actual_manifest=actual_manifest,actual_head=actual_head)
+ try:receipt=root_supervisor_bridge.bind_point0(point0,workspace,actual_manifest=actual_manifest,actual_head=actual_head,item_index=item_index)
  except Exception as exc:raise EntryFail('ROOT_POINT0_BIND_FAIL:'+str(exc)) from exc
  snapshot=workspace/'bound_snapshot.json'
- p=subprocess.run([sys.executable,str(CONTROLLER),'ingress',str(snapshot),str(workspace),'0'],text=True)
+ p=subprocess.run([sys.executable,str(CONTROLLER),'ingress',str(snapshot),str(workspace),str(item_index)],text=True)
  if p.returncode:return p.returncode
  try:
   point0_value=json.loads((workspace/'point0.json').read_text(encoding='utf-8'))
@@ -71,16 +72,16 @@ def _start_point0(point0:Path,workspace:Path,actual_manifest:str)->int:
   worker_dispatch.verify_bundle(bundle,actual_manifest=actual_manifest,actual_head=actual_head)
   (workspace/'worker_dispatch.json').write_bytes(worker_dispatch.canon(bundle))
  except Exception as exc:raise EntryFail('ROOT_WORKER_DISPATCH_BUILD_FAIL:'+str(exc)) from exc
- print('SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY'); return 0
+ print('SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY:ARTICLE_INDEX='+str(item_index)); return 0
 
 def main(argv:list[str])->int:
  try:
   if len(argv)<2:raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
   if argv[1] in {'start','start-stdin'}:raise EntryFail('ROOT_POINT0_REQUIRED')
-  if argv[1]!='start-point0' or len(argv)!=4:raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
-  point0=Path(argv[2]); workspace=Path(argv[3]); manifest=_verify_common(workspace)
-  return _start_point0(point0,workspace,manifest)
- except EntryFail as exc:
+  if argv[1]!='start-point0' or len(argv) not in (4,5):raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
+  point0=Path(argv[2]); workspace=Path(argv[3]); item_index=int(argv[4]) if len(argv)==5 else 0; manifest=_verify_common(workspace)
+  return _start_point0(point0,workspace,manifest,item_index)
+ except (EntryFail,ValueError) as exc:
   print('SYSTEM4_ROOT_ENTRY_FAIL:'+str(exc)); return 2
 
 if __name__=='__main__':raise SystemExit(main(sys.argv))
