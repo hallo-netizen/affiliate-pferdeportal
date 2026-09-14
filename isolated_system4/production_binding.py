@@ -86,6 +86,11 @@ def bind_plan_from_snapshot(
         raise ProductionBindingError('BINDING_INPUT_OBJECT_REQUIRED')
     if incoming_plan.get('quality_binding') is not None or incoming_plan.get('quality_binding_hash') is not None:
         raise ProductionBindingError('EXTERNAL_QUALITY_BINDING_FORBIDDEN')
+    runtime_in = incoming_plan.get('runtime_order')
+    if not isinstance(runtime_in, Mapping):
+        raise ProductionBindingError('RUNTIME_ORDER_MISSING_FOR_MACHINE_BINDING')
+    if runtime_in.get('links') not in (None, []):
+        raise ProductionBindingError('EXTERNAL_RUNTIME_LINK_BINDING_FORBIDDEN')
 
     try:
         structure = json.loads(snapshot_bytes.decode('utf-8'))
@@ -118,12 +123,12 @@ def bind_plan_from_snapshot(
 
     main = _one(
         nodes,
-        lambda n: n.get('node_type') == 'hauptbereich' and n.get('slug') == main_slug and int(n.get('level') or 0) == 1,
+        lambda n: n.get('node_type') == 'main_hub' and n.get('slug') == main_slug and int(n.get('level') or 0) == 1,
         'PORTAL_MAIN_HUB_NOT_UNIQUE',
     )
     hub = _one(
         nodes,
-        lambda n: n.get('node_type') == 'bereich' and n.get('slug') == hub_slug and int(n.get('level') or 0) == 2,
+        lambda n: n.get('node_type') == 'bereichs_hub' and n.get('slug') == hub_slug and int(n.get('level') or 0) == 2,
         'PORTAL_AREA_HUB_NOT_UNIQUE',
     )
     product = _one(
@@ -162,10 +167,7 @@ def bind_plan_from_snapshot(
             'section_id': ROLE_SECTIONS['further_information'],
         },
     ]
-    registry_entries = [
-        dict(row, active=True, target_type='portal_route', target_status='publish')
-        for row in links
-    ]
+    registry_entries = [dict(row, active=True, target_type='portal_route', target_status='publish') for row in links]
     registry = {
         'contract': REGISTRY_CONTRACT,
         'snapshot_source_sha256': snapshot_sha,
@@ -202,11 +204,7 @@ def bind_plan_from_snapshot(
     }
 
     plan = json.loads(json.dumps(dict(incoming_plan), ensure_ascii=False))
-    runtime = plan.get('runtime_order')
-    if not isinstance(runtime, dict):
-        raise ProductionBindingError('RUNTIME_ORDER_MISSING_FOR_MACHINE_BINDING')
-    if runtime.get('links') not in (None, []):
-        raise ProductionBindingError('EXTERNAL_RUNTIME_LINK_BINDING_FORBIDDEN')
+    runtime = plan['runtime_order']
     runtime['links'] = links
     plan['runtime_order'] = runtime
     plan['quality_binding'] = quality
