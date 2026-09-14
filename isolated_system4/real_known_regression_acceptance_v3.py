@@ -18,6 +18,7 @@ import point0_snapshot
 import production_checks
 import root_entry
 import source_acquisition
+import supervisor
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
@@ -124,7 +125,6 @@ def _prepare_point0(root: Path, files: dict) -> dict:
         'snapshot': snapshot_path,
         'pack': pack_path,
         'plan': plan_path,
-        'research': files['research'],
         'facts': files['facts'],
         'regression': files['regression'],
         'final': files['final'],
@@ -139,7 +139,7 @@ def _start_real_pipeline(files: dict, workspace: Path, env: dict) -> None:
     cp = run([sys.executable, str(ROOT_ENTRY), 'start-point0', str(files['point0']), str(workspace), '0'], 0, env)
     if 'SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY' not in cp.stdout:
         raise AssertionError('ROOT_POINT0_DISPATCH_MARKER_MISSING:' + cp.stdout)
-    for required in ('point0.json', 'bound_snapshot.json', 'supervisor_state.json', 'worker_dispatch.json', 'state.json'):
+    for required in ('point0.json', 'bound_snapshot.json', 'bound_research_sources.json', 'bound_machine_prewrite.json', 'supervisor_state.json', 'worker_dispatch.json', 'state.json'):
         if not (workspace / required).is_file():
             raise AssertionError('ROOT_DISPATCH_ARTIFACT_MISSING:' + required)
     cp = run([sys.executable, str(CODEX_ENTRY), 'worker-start', str(workspace)], 0, env)
@@ -149,7 +149,12 @@ def _start_real_pipeline(files: dict, workspace: Path, env: dict) -> None:
 
 def _stage_to_draft(files: dict, workspace: Path, env: dict) -> None:
     _start_real_pipeline(files, workspace, env)
-    run([sys.executable, str(CONTROLLER), 'research', str(workspace), str(files['research'])], 0, env)
+    # The real worker is allowed to research only inside the supervisor-bound source pool.
+    # Acceptance therefore submits the supervisor's own canonical expected document, not a
+    # pre-Point0 fixture that merely contains similar sources.
+    research = supervisor.expected_research_document(workspace)
+    research_path = write_json(workspace.parent / 'research.supervisor-bound.json', research)
+    run([sys.executable, str(CONTROLLER), 'research', str(workspace), str(research_path)], 0, env)
     run([sys.executable, str(CONTROLLER), 'facts', str(workspace), str(files['facts'])], 0, env)
     run([sys.executable, str(CONTROLLER), 'context', str(workspace), str(files['pack']), str(files['plan'])], 0, env)
 
