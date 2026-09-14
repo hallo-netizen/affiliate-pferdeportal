@@ -22,6 +22,7 @@ Belastbare, strukturierte Rassenfakten zentral recherchieren und pflegen. Diese 
 - Quellenstandard: `../../RECHERCHE_STANDARD.md`.
 
 ## WEGWEISER
+- **Produktionsworkflow für neue Chats:** `PRODUKTIONSWORKFLOW_PFERDERASSEN.md`
 - **verbindlicher Schreibvertrag für Rassenartikel:** `SCHREIBVERTRAG_PFERDERASSE.md`
 - gesicherte Beitragsstruktur/Entwurf: `BEITRAGSART_PFERDERASSE_ENTWURF.md`
 - Datenmodell: `RASSEN_DATENMODELL.md`
@@ -32,9 +33,10 @@ Belastbare, strukturierte Rassenfakten zentral recherchieren und pflegen. Diese 
 
 ## ARTIKELERSTELLUNG
 Vor jedem Rassenartikel zwingend in dieser Reihenfolge lesen:
-1. `SCHREIBVERTRAG_PFERDERASSE.md`;
-2. den konkreten `DATEN/breed-*.json`-Datensatz;
-3. eventuell vorgegebenes Keyword- und LINKPAKET.
+1. `PRODUKTIONSWORKFLOW_PFERDERASSEN.md`;
+2. `SCHREIBVERTRAG_PFERDERASSE.md`;
+3. den konkreten `DATEN/breed-*.json`-Datensatz;
+4. eventuell vorgegebenes Keyword- und LINKPAKET.
 
 Der Schreiber darf formulieren, aber nicht entscheiden. Was nicht im Datensatz oder in einem ausdrücklich gebundenen Input steht, darf nicht in den Artikel.
 
