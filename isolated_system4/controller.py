@@ -5,6 +5,7 @@ from pathlib import Path
 from controller_core import *  # noqa: F401,F403
 import controller_core as core
 import production_binding
+import repair_router
 import supervisor
 
 HERE=Path(__file__).resolve().parent
@@ -67,6 +68,22 @@ def _guarded_context(argv:list[str])->int:
     print('SYSTEM4_MACHINE_PRODUCTION_BINDING_PASS')
     return 0
 
+def _route_repair_after_fullcheck(workspace:Path,rc:int)->int:
+    if rc!=3:
+        return rc
+    result=repair_router.route(workspace)
+    status=str(result.get('status') or '')
+    if status=='SAME_ARTICLE_BODY_REPAIR':
+        print('SYSTEM4_MACHINE_REPAIR_ROUTE:DRAFT_BODY:SAME_ARTICLE_BODY_REPAIR')
+        return 3
+    if status=='RESTARTED':
+        print('SYSTEM4_MACHINE_REPAIR_ROUTE:PARENT_METADATA:RESTARTED:'+str(result['workspace']))
+        return 4
+    if status=='RETURN_TO_OWNER':
+        print('SYSTEM4_MACHINE_REPAIR_ROUTE:'+str(result.get('owner'))+':'+str(result.get('target'))+':RETURN_TO_OWNER')
+        return 4
+    raise SupervisedControllerFail('REPAIR_ROUTER_BAD_STATUS:'+status)
+
 def main(argv:list[str])->int:
     try:
         _verify_core()
@@ -76,8 +93,11 @@ def main(argv:list[str])->int:
         if argv[1]=='context': return _guarded_context(argv)
         if len(argv)>=3:
             supervisor.verify_controller_binding(Path(argv[2]))
-        return core.main(argv)
-    except (SupervisedControllerFail, supervisor.SupervisorError, production_binding.ProductionBindingError, json.JSONDecodeError, OSError, ValueError) as exc:
+        rc=core.main(argv)
+        if argv[1]=='fullcheck' and len(argv)==3:
+            return _route_repair_after_fullcheck(Path(argv[2]),rc)
+        return rc
+    except (SupervisedControllerFail, supervisor.SupervisorError, production_binding.ProductionBindingError, repair_router.RepairRouteError, json.JSONDecodeError, OSError, ValueError) as exc:
         print('SYSTEM4_FAIL:'+str(exc)); return 2
 
 if __name__=='__main__': raise SystemExit(main(sys.argv))
