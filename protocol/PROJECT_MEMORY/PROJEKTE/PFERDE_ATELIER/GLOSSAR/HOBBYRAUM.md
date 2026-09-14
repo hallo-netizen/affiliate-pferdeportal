@@ -5,17 +5,17 @@ STATUS: BLOCKED
 
 ## 1-KLICK-ÜBERSICHT
 
-**WAS IST DAS?**  
-Der einzige aktuelle Arbeitsraum des Büros GLOSSAR.
-
 **AKTUELLER SICHERER BEFUND**  
-Einzelartikel lassen sich im Pferde Atelier real öffnen → **LIVE PASS**. Offen sind ausschließlich die danach gemeldeten Fehler der Glossar-Einzelansicht: Breadcrumb, verwandte Linkbox, doppelte Linkziele/Stockmaß, fehlende Icons und saubere Trennung Fließtext ↔ Seitenbox.
+Einzelartikel öffnen real → **LIVE PASS**. Die Einzelansicht selbst ist weiter **LIVE FAIL**: Breadcrumb falsch/doppelt, Links im Fließtext, rechte Ockerlinie zu dick. Bestehende Begriffe müssen nach der neuen Regel überschrieben werden.
+
+**VERBINDLICHE NEUE REGEL**  
+Glossar-Fließtext enthält **0 Links**. Links stehen nur rechts in `Verwandte Begriffe` und `Mehr zum Thema`.
 
 **DU DARFST …**  
-nur an genau diesen offenen Single-Layout-/Linkpunkten weiterarbeiten und dabei `TEXT_UND_LINKREGELN.md` zwingend einhalten.
+nur diese offene Single-/Bestandsreparatur fortsetzen und die neuen Pakete 1.2.2 / 1.50.490 real prüfen.
 
 **DU DARFST NICHT …**  
-den bereits bestätigten Artikel-Routingweg wieder umbauen, normale WordPress-Artikel verändern, neue ungeprüfte Fachbegriffe erfinden, aus lokalen Tests LIVE PASS ableiten oder alte Pluginartefakte blind als CURRENT ersetzen.
+den bestätigten Routingweg umbauen, normale WordPress-Posts verändern, bestehende Glossarbeiträge löschen statt aktualisieren oder lokale Tests als LIVE PASS ausgeben.
 
 ## ARBEITSORT
 
@@ -31,84 +31,58 @@ Autoritativer Stand:
 Verbindliche Text-/Linkregeln:
 `TEXT_UND_LINKREGELN.md`
 
-## LETZTER LIVE SICHERER STAND
+## LOKALER KANDIDAT
 
-- Glossarbegriffe/Einzelartikel öffnen: **LIVE PASS** – Nutzerreadback dieses Chats: `artikelanzeige pass`.
-- Der frühere Single-Routingfehler `GLOSSAR-ROUTE-004` ist damit geschlossen.
-
-## AKTUELLER LIVE FAIL
-
-Auf der Begriffseinzelansicht wurden real gemeldet:
-
-- verwandte Begriffe noch im Fließtext verlinkt;
-- `Stockmaß` doppelt verlinkt;
-- rechte Box `Verwandte Begriffe` fehlt/ist nicht korrekt ausgegeben;
-- Icons fehlen;
-- Breadcrumbs stimmen nicht.
-
-Verbindliche Sollregel:
-**Verwandte Begriffe als Links ausschließlich in der rechten Box; im Fließtext 0× erneut als verwandte Links.**
-
-## LOKAL GEPRÜFTE, ABER NOCH NICHT RELEASEGEBUNDENE NACHBESSERUNG
-
-### Glossar Core / Engine 1.2.1
-Lokales Paket:
-`UNIVERSAL_GLOSSARY_ENGINE_1.2.1_GLOSSAR_ARTIKEL_UPDATE_INSTALLIEREN.zip`
+### Core 1.2.2
+`UNIVERSAL_GLOSSARY_ENGINE_1.2.2_ZERO_BODY_LINKS_BESTAND_UPDATE_INSTALLIEREN.zip`
 
 SHA-256:
-`f6788524f50413541ea40e33bc7005a4e936e2915e4465cf2e7a08e221c900e0`
+`3d6ffc2cdfcc4872e49e97f4adc54de31d4ef2714b0af07e399a681f15d1f447`
 
-Lokal erneut PASS:
-- 14 Bestandsbegriffe 150–200 Wörter;
-- genau 1 Fließtext-Link je Begriff;
-- verwandte Begriffe separat in Relation/Meta;
-- IDs bleiben beim Überschreiben erhalten;
-- Fremdkonflikt fail-closed;
-- normaler WordPress-Beitrag unverändert;
-- ZIP + Version 1.2.1 PASS.
+PASS lokal:
+- 14 gebundene Begriffe 150–200 Wörter;
+- 0 Links im Fließtext;
+- bestehende `uge_term` werden per gleicher ID aktualisiert;
+- normaler Post Negativtest unverändert;
+- ZIP/Version PASS.
 
-### Pferde Atelier Design 1.50.489
-Lokales Paket:
-`PFERDE_ATELIER_DESIGN_V1.50.489_GLOSSAR_EINZELANSICHT_FIX_INSTALLIEREN.zip`
+### Design 1.50.490
+`PFERDE_ATELIER_DESIGN_V1.50.490_GLOSSAR_BREADCRUMB_STRIPE_FIX_INSTALLIEREN.zip`
 
 SHA-256:
-`fc6bc67a827f314e37c597e4fbb764f616c86d97bfc6d621c238c813a64ab600`
+`251e90a7c7115cd4ce166ddefb5f0918904f28b89d85f2a173c190201b454657`
 
-Lokal bei 1200/900/720/500 px PASS:
-- Breadcrumb `Startseite > Glossar > Pferd & Biologie > Bandmaß`;
-- falscher globaler Breadcrumb auf Glossar-Single ausgeblendet;
-- Kurzdefinition + rechte Box bündig am Desktop;
-- Boxen `Verwandte Begriffe` + `Mehr zum Thema`;
-- Icons vorhanden;
-- kein Overflow;
-- Ausgabe hart auf `uge_term` begrenzt.
+PASS lokal:
+- globaler Breadcrumb auf `uge_term` serverseitig ausgeschaltet + CSS-Failsafe;
+- eigener Breadcrumb `Startseite > Glossar > Oberbereich > Begriff`;
+- Fließtext-Renderendstufe entfernt Restlinks;
+- rechte Box-Oberkante 4 px → 2 px;
+- Scope ausschließlich `uge_term`;
+- ZIP/Version PASS.
 
 ## WARUM BLOCKED
 
-Die lokalen finalen Kandidaten sind noch nicht als eindeutiger autoritativer GitHub-Quellstand/Release gebunden. Daher darf gemäß Plugin-Artefaktpflicht weder ein neues `CURRENT.zip` behauptet noch ein Release/LIVE-PASS daraus abgeleitet werden.
+Die Pakete sind **noch nicht live installiert/readback-bestätigt**. Deshalb bleibt `GLOSSAR-SINGLE-011` LIVE FAIL und kein LIVE-/Release-PASS wird behauptet.
 
 ## NEXT ACTION – EXAKT
 
-1. Quellstand von Core `1.2.1` und Design `1.50.489` in der autoritativen technischen Quelle/Branch binden.
-2. Paketbytes aus genau diesem Quellstand erzeugen oder Byte-Identität zu den oben genannten ZIPs beweisen.
-3. dieselben Positiv-/Negativ-/Regressionstests aus dem gebundenen Stand erneut ausführen.
-4. dann PLUGINS-Büro mit `CURRENT.zip` + `MANIFEST.md` synchronisieren.
-5. live installieren.
-6. **Bandmaß live prüfen:**
-   - Breadcrumb korrekt;
-   - Icons sichtbar;
-   - `Stockmaß` als verwandter Link im Fließtext **0×**;
-   - `Stockmaß` in rechter Box **exakt 1×**;
-   - Portal-Kategorielink im Fließtext **exakt 1×**;
-   - normale Artikel unverändert.
-7. Erst nach Nutzer-Readback LIVE PASS.
-8. Neue Begriffe erst aus frisch nachgewiesenen `GEPRUEFT`-WDB-Quellen.
+1. Core `1.2.2` über den vorhandenen Glossar-Core installieren.
+2. Design `1.50.490` über das vorhandene Designplugin installieren.
+3. `Bandmaß` real neu laden.
+4. Prüfen:
+   - Breadcrumb exakt `Startseite > Glossar > Pferd & Biologie > Bandmaß`;
+   - Fließtext **0 Links**;
+   - `Stockmaß` rechts in `Verwandte Begriffe` als Link;
+   - Portalziel rechts in `Mehr zum Thema`;
+   - Ockerlinie rechts 2 px / sichtbar dünner;
+   - bestehende URL/ID erhalten.
+5. normalen WordPress-Beitrag negativ prüfen.
+6. Erst nach Nutzerreadback LIVE PASS und Plugin-Artefaktsync.
 
 ## NICHT ANFASSEN
 
-- den bestätigten funktionierenden Single-Routingweg;
+- funktionierenden Single-Routingweg;
 - normale WordPress-Posts/Seiten;
 - `main` als Experimentierfläche;
-- bestehende Glossarbegriffe durch Löschen statt gezieltes Überschreiben;
-- Wissensdatenbank-Fakten ohne `GEPRUEFT`;
-- andere offene Glossarbereiche, bis die Single-Ansicht sauber geschlossen ist.
+- WDB-Fakten ohne `GEPRUEFT`;
+- Bestandsbegriffe nicht löschen.
