@@ -1,120 +1,86 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **TECHNISCHE TESTSTUFE 2 PASS — PRODUKTION WEITER BLOCKED BIS AUSDRÜCKLICHER CODEX-FREIGABE.**
+Status: **LOKALER PUNKT-0/SUPERVISOR-KANDIDAT VOLLSTÄNDIG GETESTET — PRODUKTION BLOCKED BIS BYTEGLEICHE REMOTE-ÜBERTRAGUNG + HARDLOCK.**
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Campus-/Projektstand bleibt getrennt und ausschließlich in `control/startmaster0107/CURRENT_STATE.json`.
 
 ## Aktueller Remote-Stand
 
-PR #238: `System 4 — true single-room article production`
-
-Branch: `hobbyroom/system4-true-single-room-v1`
+PR #238, Branch `hobbyroom/system4-true-single-room-v1`.
 
 Kein Merge. Kein Publish. `publish_allowed=false`.
 
-Die lokal vollständig geprüften Teststufe-2-Kritikalbytes sind bytegleich auf dem Remote-Branch gebunden.
+Der Remote-Branch enthält weiterhin den zuvor grünen Teststufe-2-Produktionskern. Der am 2026-09-14 lokal vollständig geprüfte neue Punkt-0/Supervisor-Code ist **noch nicht bytegleich remote gebunden**. Ein Versuch, den großen `root_entry.py`-Blob zu transportieren, ergab einen anderen Git-Blob als lokal; deshalb wurde der Branch bewusst nicht auf einen halbfertigen Code-Tree gesetzt.
 
-Gebundene Kernblobs:
+## Neuer realer Fehler und Architekturfolge
 
-- `isolated_system4/authoring_contract.py` -> `bab5c3bbb6e1440b3d2e8a52e0ee4fe6f5fd7ae4`
-- `isolated_system4/controller.py` -> `fe904b29f9d047fb1839c4169a3359d6e4bfc3f6`
-- `isolated_system4/batch_gate.py` -> `0b883efe9d3d5396975f7799984473c5ddb62773`
-- `isolated_system4/LIVE_BOUND_INPUT_ONE_ARTICLE.json` -> `21dc52de06b296c3e12f893bb7ae38fd8a3fd1ba`
+Der ausdrücklich freigegebene reale Ein-Artikel-Codex-Lauf blockierte bereits in `ARTICLE_RESEARCH` mit:
 
-Gebundener Root-Manifestwert im Live-Input:
+`SYSTEM4_HARD_BLOCKER:REAL_WEB_RESEARCH_RUNTIME_UNAVAILABLE`
 
-`38952850721801df0b932fdf7b82deb504c7272445e341b0e61b99ebbcec1f02`
+Ursache: `HTTP 401 Unauthorized` aus der Codex-Web-Research-Runtime. LT, PPM, Batch und Handoff wurden in diesem Lauf korrekt nicht erreicht.
 
-Der Live-Input bleibt exakt ein Artikel:
+Daraus folgt die neue verbindliche Zielarchitektur:
 
-- Typ `Beratung`
-- Kategorie `putzbox-beratung`
-- Titel `Putzbox für Pferde richtig auswählen`
-- Keyword `Putzbox für Pferde`
-- Plan-Slot `88043c35da332d4b2a500d1b61919721aefadf894bc923c841cc849a132c63b5`
-- `publish_allowed=false`
+`Maschine erzeugt Punkt-0 -> Maschine beschafft/verifiziert Quellen -> Root bindet -> Supervisor besitzt den Lauf -> Worker-Dispatch -> Facts -> Context -> Codex schreibt/repariert -> LT -> PPM -> Batch -> Handoff`
 
-## Ursache und Fix
+Codex darf keine freie Websuche mehr besitzen. `controller research` akzeptiert ausschließlich Evidence aus dem hashgebundenen Punkt-0-Research-Pool.
 
-Wiederholt aufgetretene Fehlerklasse:
+Verbindlicher Zielvertrag:
+`ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md`
 
-**Eine Übergabe wurde als gültig akzeptiert, obwohl ihr Wert nicht gegen dieselbe autoritative Quelle validiert war, die der spätere echte Prüfer verwendet.**
+## Lokaler exakt getesteter Kandidat
 
-Der reale Ein-Artikel-Lauf blockierte zuletzt mit:
+- lokaler Git-Head: `cd6c134a3ee27f4535ea91bfe6cc223a34c9eb25`
+- Root-Manifest: `98b4c1f3bad0334b8a89d5594a8282734c4b01fb907e92e239ee036601c8e457`
+- PPM 6.7.9 SHA256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
+- LanguageTool 6.8 SHA256: `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
 
-`PPM679_VALIDATOR_BLOCKED:BLOCKED_VALIDATION_CONTRACT_VERSION_UNKNOWN`
+### Neue/historische Negativmatrix
 
-Die Ursache wird jetzt am `Context`-Übergang geschlossen: `validation_contract_version` und die dazugehörigen V5-Section-Requirements werden vor Draft direkt gegen die unveränderte PPM-6.7.9-Autorität geprüft. Ein unbekannter Vertrag erreicht Authoring/Draft/LT/PPM nicht mehr.
+Auf genau diesem lokalen Kandidaten tatsächlich ausgeführt:
+- Punkt-0 / Root / Supervisor / Dispatch: **19/19 PASS**;
+- historische Context-/Draft-Fehlerklassen: **16/16 PASS**;
+- Route / Batch / Handoff: **5/5 PASS**;
+- Gesamt gezielte Matrix: **40/40 PASS**.
 
-Zusätzlich prüft das Batch-Gate die gebundene Input-Reihenfolge. Vertauschte Artikelzustände blockieren jetzt fail-closed mit `STATE_ORDER_MISMATCH:<index>`.
+Unter anderem fail-closed bewiesen: HTTP 401, falscher Source-Hash, leerer Source-Pool, Point-0-/Receipt-/Snapshot-/Research-Pool-Tamper, Head-/Manifest-Mismatch, Reaktivierung freier Websuche, ungebundene Research-Evidence, unbekannte Fact-ID, Runtime-/Link-/Snapshot-Mismatch, unbekannte Validation-Version, fehlende V5-Requirements, fehlende Fact-Refs/Source-Traces, Batch-State-Tamper, `STATE_ORDER_MISMATCH:0` und Handoff-Manipulation.
 
-Textmaschine, PPM 6.7.9, PSERC/PSTE, LanguageTool 6.8, Design, WordPress-Plugin und Theme/CSS bleiben READ-ONLY.
+### Integrierter Null-bis-Datei-Lauf
 
-## Teststufe 1 — exakter Produktions-Repro ohne Codex
+Auf demselben Kandidaten:
 
-Auf exakt den jetzt remote gebundenen Kritikalbytes erneut ausgeführt:
+`Punkt-0 -> Root -> Supervisor -> Worker -> reale gebundene Putzbox-Quellen -> Research -> Facts -> Context -> Draft -> Same-Article-Repair -> echtes LT 6.8 -> echter PPM 6.7.9 -> Batch -> V2-Handoff -> Inline-Unpack`
 
-- gebundener Putzbox-Input -> Root -> Research -> Facts -> Context -> Draft -> echtes LanguageTool 6.8 -> echter PPM 6.7.9 -> Batch -> V2-Handoff -> Unpack/WordPress-Datei: **PASS**;
-- Produktionskontext/Draft/Handoff-Bindungen byte-/feldgleich geprüft;
-- Codex: **nicht verwendet**.
+Ergebnis: **PASS**.
 
-## Teststufe 2 — Generalisierung ohne Codex
+Im produktionsnahen Lauf wurden zwei normale Repair-Befunde korrekt am selben Artikel behoben: LanguageTool-Finding `Hardcase-Putzbox`, danach PPM-Fazitanteil `9,476 % < 10 %`; Revision 3 anschließend FULL PASS.
 
-Zweiter anderer kanonischer Beratung-Slot:
+### Frischer kompletter Artikel OHNE CODEX
 
-- Titel: `Welche Putzbürste passt für welchen Zweck?`
-- Kategorie: `pferdebuersten-beratung`
-- `canonical_article_id=article:b7c557395d3d298f0193c6c5`
-- eigener kanonischer Source-Plan-Item: `beratung-putzbuersten-v4`
-
-Erneut auf exakt denselben remote gebundenen Kritikalbytes ausgeführt:
-
-- Artikel B allein kompletter Weg: **PASS**;
-- Artikel A + Artikel B gemeinsam als 2er-Batch: **PASS**;
-- echtes LanguageTool 6.8: **PASS**;
-- echter PPM 6.7.9: **PASS**;
-- Batch -> Handoff -> Unpack: **PASS**;
-- 2er-Handoff SHA256: `3baab5c4abc7fe3834c760ac69b2ae82bfafab2ae352671599e6604c6b6282f5`.
-
-Dabei wurde ein neuer realer Fehler entdeckt: Vertauschte Artikelzustände wurden zuvor akzeptiert. Nach Ursachenfix blockiert derselbe Negativfall mit `STATE_ORDER_MISMATCH:0`; der positive 2er-Batch bleibt PASS.
-
-## Fehlerhistorie / Regression
-
-Nach der Remote-Übertragung erneut gegen exakt dieselben Kritikalbytes ausgeführt:
-
-- Workflow-/Context-/Draft-/Batch-/Handoff-Negativfälle: **18/18 PASS**;
-- Root-/Manifest-/Publish-Negativfälle: **4/4 PASS**;
-- zusammen aktueller bekannter Negativkatalog: **22/22 PASS**.
-
-Unter anderem aktiv provoziert: unbekannte Fact-ID, fehlender Marker, Runtime-Titel/-Link/-Pflichtfeld-Mismatch, Snapshot-Mismatch, unbekannte Validation-Versionen, fehlende/fehlerhafte V5-Requirements, fehlende Fact-Refs/Source-Traces, Source-Trace-Mismatch, fehlender gebundener Link, fehlender Plan-Slot, Batch-State-Tamper, Handoff-Tamper, Manifest missing/mismatch und Publish-Authority-Verstoß.
-
-PPM-6.7.9-SHA256:
-`acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
-
-LanguageTool-6.8-SHA256:
-`2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
-
-## Remote-Hardlock
-
-Nach dieser reinen Statusdokumentation muss der reguläre Workflow `Pferde Atelier Immutable Base Hardlock` auf dem finalen Head erneut **SUCCESS** sein. Kein Hardlock-PASS wird aus einem älteren Head übernommen.
-
-## Codex-Regel
-
-**Kein Codex ohne die ausdrückliche Nutzerfreigabe mit den Worten `Starte Codex`.**
-
-`Weiter`, `testen`, `komplett prüfen`, `Null bis Ende` oder ähnliche Formulierungen sind **keine** Codex-Freigabe.
-
-Codex wird ausschließlich für einen konkret gebundenen realen Artikel-/Batch-Produktionslauf verwendet, nicht für Diagnose, Architektur, Patch, Commit, Preflight, Regressionstests oder Dokumentation.
+Zusätzlich auf frischem Workspace vollständig ausgeführt:
+- Artikel: `Putzbox für Pferde richtig auswählen`;
+- neuer Punkt-0 aus gebundenem Live-Input + 6 realen Research-Snapshots;
+- Root/Supervisor/Worker-Start PASS;
+- Research/Facts/Context/Draft PASS;
+- LT 6.8 PASS;
+- PPM 6.7.9 PASS;
+- Batch 1/1 PASS;
+- V2-Handoff / Inline-Unpack bytegleich PASS;
+- Handoff: `49.294` Bytes;
+- SHA256: `a1b13bb804c573be5d5c0bf17c9e320c09c87a264a283b0450d4306ed99f02`;
+- `codex_used=false`.
 
 ## HOBBYRAUM / NEXT ACTION
 
-Status: **BLOCKED FÜR PRODUKTION / TECHNISCHE TESTSTUFE 2 PASS**.
+Status: **BLOCKED FÜR PRODUKTION / LOKALER KANDIDAT PASS**.
 
-Nächste Produktionsaktion ausschließlich nach ausdrücklicher Nutzerfreigabe `Starte Codex`:
+NEXT ACTION:
+1. exakt getestete Punkt-0/Supervisor-Codebytes bytegleich auf PR #238 übertragen;
+2. jeden Remote-Git-Blob gegen lokalen `git hash-object` prüfen;
+3. keine Teilübertragung akzeptieren;
+4. auf dem finalen Remote-Head die vollständige Positiv-/Negativstrecke erneut ausführen;
+5. `Pferde Atelier Immutable Base Hardlock` muss auf genau diesem finalen Head SUCCESS sein;
+6. erst danach neuer realer Codex-Artikelversuch.
 
-- real gebundener Artikel-/Batch-Produktionslauf über den vollständigen System-4-Weg;
-- kein automatischer zweiter Versuch bei echtem Hardblocker;
-- kein Merge;
-- kein Publish.
-
-Bis zu dieser ausdrücklichen Freigabe: **kein Codex-Aufruf.**
+Kein Merge. Kein Publish. Kein weiterer Codex-Lauf vor diesem Remote-Nachweis.
