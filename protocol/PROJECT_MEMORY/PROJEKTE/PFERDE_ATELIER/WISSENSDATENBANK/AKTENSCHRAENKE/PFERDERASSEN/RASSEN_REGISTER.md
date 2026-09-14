@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-14
-STATUS: MASTERLISTE IM AUFBAU / 168 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 172 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,26 +10,22 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **168 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **172 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 162er-Stand neu angelegt:
+Seit dem synchronisierten 168er-Stand neu angelegt:
 
-- Pantaneiro / Cavalo Pantaneiro
-- Mangalarga Paulista / Mangalarga
-- Campeiro / Cavalo Campeiro
-- Marajoara / Cavalo Marajoara
-- Latgalischer Traber / Latgales rikšotājs
-- Lettischer Ardenner / Latvijas ardeņu zirgs
+- Slowakisches Warmblut / Slovenský teplokrvník
+- Muráň-Noriker / Norik muránskeho typu
+- Slowakisches Sportpony / Slovenský športový pony
+- Slowakischer Traber / Slovenský klusák
 
 Wichtige Abgrenzung:
-- Mangalarga Paulista und Mangalarga Marchador besitzen getrennte brasilianische Registerorganisationen und werden nicht zusammengelegt.
-- Pantaneiro und Campeiro besitzen eigene beim MAPA registrierte nationale Zuchtorganisationen.
-- Marajoara wird als brasilianische Erhaltungsrasse/-population mit eigenem Rassestandard und Embrapa-Erhaltungskern geführt; formaler aktueller MAPA-Registerstatus bleibt als Detail offen.
-- Puruca wird aufgrund der aktuellen Embrapa-Einordnung als sehr nahe bzw. kleinwüchsige Variante des Marajoara nicht automatisch als zweiter Rassendatensatz angelegt.
-- Latvian Heavy Warmblood / Latvijas siltasinis braucamais tips wird nach aktuellem lettischem Register als Fahr-/schwerer Typ innerhalb des Latvian Warmblood geführt und **nicht** als zweite Rasseakte dupliziert.
-- Latgales rikšotājs und Latvijas ardeņu zirgs werden als eigene lokale lettische Erhaltungsrassen geführt.
+- Norik muránskeho typu besitzt eigene slowakische Zuchtbuch-/Zuchtprogrammführung und wird nicht mit dem allgemeinen Noriker-Datensatz zusammengelegt.
+- Slovenský teplokrvník wird als eigene slowakische Warmblutzucht geführt.
+- Slovenský športový pony besitzt eine eigene ZCHKS-Plemenná kniha und ist nicht nur eine Größenklasse.
+- Slovenský klusák wird über Závodisko, š.p. als eigene slowakische Traber-Zuchtpopulation geführt und nicht automatisch dem allgemeinen Standardbred-Datensatz zugeschlagen.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -66,6 +62,7 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Mangalarga Paulista ≠ Mangalarga Marchador; getrennte nationale Registerorganisationen.
 - Latvian Heavy Warmblood → Fahr-/schwerer Typ des Latvian Warmblood, kein zweiter Datensatz.
 - Puruca → vorerst keine zweite Rasseakte; aktuelle Embrapa-Fachquelle beschreibt enge Zugehörigkeit/Variante zum Marajoara-Komplex.
+- Norik muránskeho typu ≠ allgemeiner Noriker; eigene slowakische Zuchtbuchführung.
 
 ## OFFENE NACHRECHERCHE
 
