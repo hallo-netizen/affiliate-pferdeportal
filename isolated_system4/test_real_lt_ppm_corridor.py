@@ -61,7 +61,7 @@ class RealLtPpmCorridorTests(unittest.TestCase):
             bodies=[]
             snapshot_path=None
             for index in range(3):
-                workspace,snapshot,state=start_to_context(root,index)
+                workspace,snapshot,state=start_to_context(root,index,batch_size=3)
                 snapshot_path=snapshot
                 body=valid_article(state,index,f'Praxis{index}')
                 try:
@@ -91,6 +91,7 @@ class RealLtPpmCorridorTests(unittest.TestCase):
                 bodies.append(body)
 
             self.assertIsNotNone(snapshot_path)
+            self.assertEqual(len({state['batch_sha256'] for state in states}),1)
             batch_out=root/'batch'
             collected=batch_gate.collect_batch(snapshot_path,state_paths,batch_out)
             self.assertEqual(collected['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED')
