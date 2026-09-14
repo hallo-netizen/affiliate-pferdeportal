@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGINS – UPDATEPROTOKOLL
 
-STAND: 2026-09-13
+STAND: 2026-09-14
 ROLLE: ZENTRALES PLUGIN-ÄNDERUNGSPROTOKOLL DES PFERDE-ATELIERS
 
 ## Grenze
@@ -13,20 +13,64 @@ Genau ein Vorgang je tatsächlicher Pluginentwicklung/-aktualisierung. Keine zwe
 - **ART:** ENTWICKLUNG
 - **Herkunft:** EIGENENTWICKLUNG
 - **zuständiges Fachbüro:** `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
-- **VON_VERSION:** `0.2.9` – früherer gated technischer Kandidat; kein bestätigter Pferde-LIVE-PASS
-- **AUF_VERSION:** `0.2.10-rc7` – aktueller technisch geprüfter und hashgebunden paketierter Kandidat; Pferde-LIVE offen
+- **VON_VERSION:** `0.2.9`
+- **AUF_VERSION:** `0.2.10-rc7`
 - **Quelle / Branch:** `hobbyroom/glossar-livefail-red-green-20260913`
 - **exakt getesteter Quell-Commit:** `1e74b7454e84f97182dbb185614371a48157bc21`
-- **WARUM:** reale Klickbarkeit von Glossarbegriffen härter beweisen; Einzelansichten auch gegen leeren normalen Main-Loop absichern; reale Design-Breadcrumb-Achse verwenden; verwandte Glossarbegriffe als geschlossenen, vollständig verlinkten Cluster erzeugen; tote `Verwandte Begriffe`-Textlisten verhindern; Publikationspolicy mit echter primärer Portal-Kategorie einhalten.
-- **Abhängigkeiten / Schnittstellen:** WordPress; Astra-Testumgebung; realer ausführbarer Hauptcode des Pferde-Designplugins 1.50.469 als Integrationsnachweis; `uge_term`; `uge_group`; bestehende UGE-Publikationspolicy; primäre Portal-Kategorie `Gesundheit`.
-- **relevante Fehlerquellen:** ausschließlich `../GLOSSAR/FEHLERQUELLEN.md`, insbesondere ROUTE-004, ROUTE-005, PROD-008, LAYOUT-009, PKG-010.
-- **Backup-/Rollback-Referenz:** 0.2.9 bleibt historischer früherer gated Paketstand; nicht als aktueller Entwicklungsstand oder bestätigter Pferde-LIVE-PASS behandeln. Git-Historie bindet die 0.2.10-RC-Stufen.
-- **Positivprüfung tatsächlich ausgeführt:** echter Browser klickt vorhandenen `Hufbein`-Link auf Einzelansicht; neuer Cluster `Hufrehe → Strahlfäule → Hufabszess`; Kategorienlink zurück zu `Gesundheit`; reale Design-Breadcrumb-Achse; Clusterpublikation; bestehende positive Regression. Hardtest Run `34762048546`, Jobs `103736483608` und `103736483696` SUCCESS.
-- **Negativprüfung tatsächlich ausgeführt:** Draft öffentlich 404; authentifizierte Draft-Preview bleibt funktionsfähig; unbekannte/Regressionfälle; Duplicate Guard; normale Posts unverändert; Pferderassen-Leak ausgeschlossen; Einzelansicht zusätzlich bei absichtlich geleertem WordPress-Main-Loop getestet. Run `34762048546` SUCCESS.
-- **Fach-/Regressionstest:** Fresh `103736483608` SUCCESS; Real Design/Browser/Loop-Poison `103736483696` SUCCESS; `UGE0210_EXISTING_SINGLE_CLICK_PASS`, `UGE0210_NEW_CLUSTER_CLICK_CHAIN_PASS`, `UGE0210_SINGLE_SURVIVES_EMPTY_MAIN_LOOP_PASS`, `UGE0210_PFERDE_BREADCRUMB_AXIS_PASS`.
-- **Paket-/Artefaktprüfung:** NACHGEHOLT aus exakt getestetem Quell-Commit `1e74b7454e84f97182dbb185614371a48157bc21`; Closeout Run `34764046870`, Job `103741741909` SUCCESS; `unzip -t` PASS; Source-vs-Unpack `diff -qr` PASS; Version `0.2.10-rc7` PASS; PHP-Lint PASS; SHA-256 PASS.
-- **isoliertes Artefakt:** `ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip` + `MANIFEST.md`; abgeleitete hashgebundene Ausgabekopie des exakt getesteten Quellstands.
-- **CURRENT.zip SHA-256:** `3611229aa33ca50a00ec88be87e6ef92592e87d313c152f05d0c7a31ab281152`
-- **Actions-Artefakt:** ID `10319439428`; outer artifact SHA-256 `cbf72dc81229adf33febca085c43d70a12188880cd62c7aafd3f687cb62f2bab`.
-- **ERGEBNIS:** `PASS` für Entwicklung + technische Paket-/Artefaktsynchronisierung. Pferde-LIVE-Readback bleibt offen und wird nicht aus CI abgeleitet.
-- **Fach-/Release-/LIVE-Autorität:** `../GLOSSAR/CURRENT_STATE.md`, `../GLOSSAR/HOBBYRAUM.md`, `../GLOSSAR/FEHLERQUELLEN.md`; dieses Protokoll ist nur Kontrollpult.
+- **WARUM:** damalige technische Reparatur und Härtung der Glossar-Einzelansicht / Clusterproduktion.
+- **Positiv-/Negativ-/Regressionstest:** Run `34762048546` und Closeout `34764046870` → PASS.
+- **isoliertes Artefakt:** `ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip` + `MANIFEST.md`.
+- **CURRENT.zip SHA-256:** `3611229aa33ca50a00ec88be87e6ef92592e87d313c152f05d0c7a31ab281152`.
+- **ERGEBNIS:** damaliger technischer Artefakt-PASS; nicht mit heutigem Glossarstand verwechseln.
+
+## PU-20260914-001 – Glossar Core / Universal Glossary Engine – Bestandsartikel + Linktrennung
+
+- **Plugin-ID / exakter Name:** `MOD-008` / aktuell lokal paketiert als `Universal Glossary Engine 1.2.1`.
+- **ART:** ENTWICKLUNG
+- **Herkunft:** EIGENENTWICKLUNG
+- **zuständiges Fachbüro:** `PROJEKTE/PFERDE_ATELIER/GLOSSAR/`
+- **VON_VERSION:** mehrere Chat-/Arbeitsstände nach rc11, zuletzt Bestandsupdate `1.2.0`.
+- **AUF_VERSION:** lokaler Kandidat `1.2.1`.
+- **Quelle / Branch / Releasequelle:** **BLOCKED** – finaler 1.2.1-Quellstand liegt in dieser Nachholprüfung nur im lokalen Arbeitscontainer vor und ist noch nicht als autoritativer GitHub-Quell-Commit/Release gebunden.
+- **lokales Paket:** `UNIVERSAL_GLOSSARY_ENGINE_1.2.1_GLOSSAR_ARTIKEL_UPDATE_INSTALLIEREN.zip`.
+- **SHA-256:** `f6788524f50413541ea40e33bc7005a4e936e2915e4465cf2e7a08e221c900e0`.
+- **WARUM:** vorhandene Glossarbegriffe ohne Löschen nach neuen Text-/Linkregeln überschreiben; verwandte Begriffe aus dem Fließtext entfernen und separat für die rechte Linkbox binden; doppelte Zielverlinkung verhindern; Kurzdefinitionen erhalten.
+- **Abhängigkeiten / Schnittstellen:** WordPress `uge_term`; Related-Slugs/Relation; primäre Portal-Kategorie; Design-Einzelansicht 1.50.489.
+- **relevante Fehlerquelle:** `../GLOSSAR/FEHLERQUELLEN.md` → `GLOSSAR-SINGLE-011`.
+- **Rollback:** vorhandene Bestands-IDs bleiben beim Update erhalten; Löschen des Bestands ist ausdrücklich nicht vorgesehen.
+- **Positivprüfung tatsächlich ausgeführt 2026-09-14:** 14 Begriffe, 150–200 Wörter; genau 1 Fließtext-Link; Related separat; IDs beim Überschreiben erhalten → PASS.
+- **Negativprüfung tatsächlich ausgeführt:** Fremd-Slug-Konflikt fail-closed; normaler WordPress-Post unverändert → PASS.
+- **Marker:** `CORE_121_POS_NEG_PASS`, `CORE_121_EXISTING_IDS_OVERWRITE_POS_NEG_PASS`, `CORE_121_FOREIGN_FAILCLOSED_AND_NORMAL_POST_NEG_PASS`.
+- **ZIP/Version:** ZIP-Lesetest PASS; Version `1.2.1` PASS.
+- **isoliertes Artefakt:** **NICHT ERSETZT**. Bestehendes `MOD-008/CURRENT.zip` bleibt unangetastet, weil der neue Quell-/Releasebeleg fehlt.
+- **ERGEBNIS:** `BLOCKED` für Plugin-Artefaktsynchronisierung/Release; lokaler technischer Teststand PASS, kein LIVE-PASS.
+
+## PU-20260914-002 – Pferde Atelier Design / affiliate-portal-template-kit – Glossar-Einzelansicht
+
+- **Plugin-ID / exakter Name:** Pluginordner `affiliate-portal-template-kit`, Hauptdatei `pferde-template-kit.php`; **keine eindeutige Plugin-ID im aktuell gelesenen PLUGINS-REGISTER vorhanden**.
+- **ART:** ENTWICKLUNG
+- **Herkunft:** EIGENENTWICKLUNG
+- **zuständiges Fachbüro:** `PROJEKTE/PFERDE_ATELIER/GLOSSAR/` fachlich; Designintegration über `PROJEKTE/PFERDE_ATELIER/DESIGN/`.
+- **VON_VERSION:** Arbeitsfolge bis `1.50.488`.
+- **AUF_VERSION:** lokaler Kandidat `1.50.489`.
+- **Quelle / Branch / Releasequelle:** **BLOCKED** – finaler 1.50.489-Quellstand liegt in dieser Nachholprüfung nur im lokalen Arbeitscontainer vor und ist noch nicht als autoritativer GitHub-Quell-Commit/Release gebunden.
+- **lokales Paket:** `PFERDE_ATELIER_DESIGN_V1.50.489_GLOSSAR_EINZELANSICHT_FIX_INSTALLIEREN.zip`.
+- **SHA-256:** `fc6bc67a827f314e37c597e4fbb764f616c86d97bfc6d621c238c813a64ab600`.
+- **WARUM:** Glossar-Einzelansicht an Pferde-Atelier-Design anpassen; Autor/User entfernen; korrekten Glossar-Breadcrumb ausgeben; Kurzdefinition, Icons, rechte Boxen `Verwandte Begriffe`/`Mehr zum Thema`; harte Begrenzung auf `uge_term`.
+- **Abhängigkeiten / Schnittstellen:** WordPress/Kubio; `uge_term`; `uge_group`; Related-Meta des Glossar-Core; primäre Portal-Kategorie.
+- **relevante Fehlerquelle:** `../GLOSSAR/FEHLERQUELLEN.md` → `GLOSSAR-SINGLE-011`.
+- **Positivprüfung tatsächlich ausgeführt 2026-09-14:** Browser 1200/900/720/500; Breadcrumb korrekt; 2 Sideboxen; mindestens 3 Icons; Desktop-Oberkante bündig; kein Overflow → PASS.
+- **Negativ-/Regressionstest tatsächlich ausgeführt:** globaler/falscher Breadcrumb auf Glossar-Single verborgen; Designcode hart auf `uge_term` begrenzt; normale Beiträge sollen nicht betroffen sein → technischer PASS im lokalen Testfixture.
+- **Marker:** `DESIGN_150489_POS_NEG_PASS`.
+- **ZIP/Version:** ZIP-Lesetest PASS; PHP-Lint PASS; Version `1.50.489` PASS.
+- **isoliertes Artefakt:** **NICHT ANGELEGT/ERSETZT**, weil Plugin-ID und autoritativer Quell-/Releasebeleg fehlen.
+- **ERGEBNIS:** `BLOCKED` für Plugin-Artefaktsynchronisierung/Release; lokaler technischer Teststand PASS, kein LIVE-PASS.
+
+## Aktuelle Fach-/Release-/LIVE-Autorität
+
+Ausschließlich:
+- `../GLOSSAR/CURRENT_STATE.md`
+- `../GLOSSAR/HOBBYRAUM.md`
+- `../GLOSSAR/FEHLERQUELLEN.md`
+
+Dieses Protokoll bleibt Kontrollpult und erzeugt keine zweite Fachwahrheit.
