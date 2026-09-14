@@ -11,8 +11,8 @@ Ein Glossar-Produktionslauf gilt erst als vollständig, wenn:
 - jeder als verwandt ausgewiesene Begriff als echter Glossarbeitrag existiert;
 - die Beziehungen technisch auflösbar sind;
 - die Box `Verwandte Begriffe` nur echte veröffentlichte Glossarbeiträge verlinkt;
-- kein verwandter Begriff zusätzlich redundant im Fließtext verlinkt wird;
-- jeder Begriff genau einen passenden Fließtext-Link zur primären Portal-Kategorie besitzt;
+- der gesamte Fließtext **0 Links** enthält;
+- die passende Portal-Kategorie ausschließlich rechts in `Mehr zum Thema` verlinkt wird;
 - kein Linkziel doppelt gesetzt ist.
 
 ## 2. Veröffentlichungsreihenfolge
@@ -28,12 +28,13 @@ Damit kann kein halber Cluster öffentlich werden.
 ## 3. Interne Links
 
 Verbindlich je Begriff:
-- im Fließtext genau ein sinnvoller Link zur passenden übergeordneten Portal-Kategorie;
-- Journal-Bereich/Kategorie nur ersatzweise, wenn kein passendes Portal-Ziel existiert;
-- verwandte Glossarbegriffe ausschließlich als Links in der eigenen Box `Verwandte Begriffe`;
-- dasselbe Ziel niemals doppelt im selben Begriff.
+- im Fließtext **kein Link**;
+- verwandte Glossarbegriffe ausschließlich als Links in der rechten Box `Verwandte Begriffe`;
+- Portal-Kategorie ausschließlich als Link in der rechten Box `Mehr zum Thema`;
+- Journal-Bereich/Kategorie dort nur ersatzweise, wenn kein passendes Portal-Ziel existiert;
+- dasselbe Ziel niemals doppelt auf derselben Einzelansicht.
 
-Details und Formulierungsregeln ausschließlich in `TEXT_UND_LINKREGELN.md`.
+Details ausschließlich in `TEXT_UND_LINKREGELN.md`.
 
 ## 4. Verwandte Begriffe
 
@@ -59,8 +60,8 @@ Standard und Pflicht für Glossarbeiträge:
 - ca. 150–200 Wörter;
 - wenige natürliche Absätze;
 - **keine Zwischenüberschriften**;
-- genau ein Fließtext-Link gemäß Abschnitt 3;
-- verwandte Links ausschließlich in der Seitenbox.
+- **0 Links im Fließtext**;
+- verwandte und thematische Links ausschließlich in den rechten Seitenboxen.
 
 Keine H2/H3 im Begriffstext aus SEO-, Schema- oder Gestaltungsmotiven.
 
@@ -75,11 +76,12 @@ Bereits veröffentlichte oder angelegte Glossarbeiträge werden wegen neuer Rege
 Stattdessen gilt:
 1. vorhandenen Beitrag eindeutig per Slug/ID bestimmen;
 2. in `BEGRIFFSREGISTER.md` auf `NACHPRÜFUNG` führen;
-3. bestehenden Datensatz gezielt überschreiben/aktualisieren, ID und URL erhalten;
-4. Inhalt, Kurzdefinition, Metaangaben, Portalbindung, Relationsdaten und Links prüfen;
-5. verwandte Links aus dem Fließtext entfernen und in die rechte Relationsbox verlagern;
-6. Doppellinks negativ prüfen;
-7. erst nach vollständiger technischer und erforderlicher Liveprüfung auf `FERTIG` setzen.
+3. bestehenden Datensatz gezielt **überschreiben/aktualisieren**, ID und URL erhalten;
+4. Inhalt, Kurzdefinition, Metaangaben, Portalbindung und Relationsdaten prüfen;
+5. **sämtliche Links aus dem Fließtext entfernen**, Linktext als normalen Text erhalten;
+6. verwandte Links ausschließlich rechts in `Verwandte Begriffe`, Portalziel ausschließlich rechts in `Mehr zum Thema` ausgeben;
+7. normale WordPress-Beiträge negativ gegen Veränderung prüfen;
+8. erst nach vollständiger technischer und erforderlicher Liveprüfung auf `FERTIG` setzen.
 
 Löschen ist nur zulässig, wenn ein echter Dublette-, Fehl- oder Testdatensatz nachgewiesen ist.
 
