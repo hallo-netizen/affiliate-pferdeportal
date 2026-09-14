@@ -1,13 +1,13 @@
 # AKTENSCHRANK PFERDERASSEN
 
-STAND: 2026-09-12
-STATUS: IN_RECHERCHE
+STAND: 2026-09-14
+STATUS: BASISBESTAND_ABGESCHLOSSEN / ARTIKELREGELN GEBUNDEN
 
 ## WAS IST DAS?
 Der Forschungsbestand für Pferde-, Pony- und Kleinpferderassen innerhalb der WISSENSDATENBANK.
 
 ## ZWECK
-Belastbare, strukturierte Rassenfakten zentral recherchieren und pflegen. Diese Daten sind Recherchegrundlage, keine fertigen Artikel.
+Belastbare, strukturierte Rassenfakten zentral recherchieren und pflegen. Diese Daten sind Recherchegrundlage. Für die Artikelerstellung gilt ein eigener harter Schreibvertrag.
 
 ## REGELN
 - Pferde, Ponys und Kleinpferde in EINER gemeinsamen Datenbasis;
@@ -22,16 +22,21 @@ Belastbare, strukturierte Rassenfakten zentral recherchieren und pflegen. Diese 
 - Quellenstandard: `../../RECHERCHE_STANDARD.md`.
 
 ## WEGWEISER
+- **verbindlicher Schreibvertrag für Rassenartikel:** `SCHREIBVERTRAG_PFERDERASSE.md`
+- gesicherte Beitragsstruktur/Entwurf: `BEITRAGSART_PFERDERASSE_ENTWURF.md`
 - Datenmodell: `RASSEN_DATENMODELL.md`
 - Rassen-/Kandidatenregister: `RASSEN_REGISTER.md`
 - Einzelakten: `DATEN/`
 - Arbeitssteuerung: `../../HOBBYRAUM.md`
 - Gesamtstatus: `../../CURRENT_STATE.md`
 
-## RECHERCHE-REIHENFOLGE
-1. internationale Kandidaten-/Masterliste;
-2. formalen Status jedes Kandidaten prüfen;
-3. Synonyme/Dubletten zusammenführen;
-4. priorisierte Einzelrassen recherchieren;
-5. Quellen/Faktenstatus sichtbar pflegen;
-6. erst bei ausreichender Faktenbasis `BEITRAG_BEREIT` setzen.
+## ARTIKELERSTELLUNG
+Vor jedem Rassenartikel zwingend in dieser Reihenfolge lesen:
+1. `SCHREIBVERTRAG_PFERDERASSE.md`;
+2. den konkreten `DATEN/breed-*.json`-Datensatz;
+3. eventuell vorgegebenes Keyword- und LINKPAKET.
+
+Der Schreiber darf formulieren, aber nicht entscheiden. Was nicht im Datensatz oder in einem ausdrücklich gebundenen Input steht, darf nicht in den Artikel.
+
+## RECHERCHE-STATUS
+Der internationale Basisbestand ist abgeschlossen. Offene Detailfelder bleiben bewusst offen und werden nur gezielt nachrecherchiert. Neue Rassen werden nur bei belastbarer späterer Ergänzung aufgenommen.
