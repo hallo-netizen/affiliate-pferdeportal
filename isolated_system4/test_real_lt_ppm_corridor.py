@@ -2,7 +2,8 @@ import hashlib,json,os,tempfile,unittest
 from pathlib import Path
 
 import batch_gate,controller,handoff_transport,production_checks
-from live_route_test_support import REPO,start_to_context,valid_article,write_json
+from live_route_test_support import REPO,valid_article,write_json
+from real_route_test_support import start_to_context_real
 
 
 def handoff_from_states(states):
@@ -51,7 +52,7 @@ def handoff_from_states(states):
 
 @unittest.skipUnless(os.environ.get('SYSTEM4_REAL_TOOL_CORRIDOR')=='1','real tool corridor is an explicit CI stage')
 class RealLtPpmCorridorTests(unittest.TestCase):
-    def test_three_articles_real_lt68_ppm679_batch_handoff_byte_equal(self):
+    def test_three_articles_real_sources_lt68_ppm679_batch_handoff_byte_equal(self):
         jar=Path(os.environ.get('SYSTEM4_LANGUAGETOOL_JAR',''))
         self.assertTrue(jar.is_file(),'exact LanguageTool jar missing')
         with tempfile.TemporaryDirectory(prefix='system4-real-tools-') as td:
@@ -61,8 +62,12 @@ class RealLtPpmCorridorTests(unittest.TestCase):
             bodies=[]
             snapshot_path=None
             for index in range(3):
-                workspace,snapshot,state=start_to_context(root,index,batch_size=3)
+                workspace,snapshot,state=start_to_context_real(root,index)
                 snapshot_path=snapshot
+                source=state['production_context']['fact_pack']['sources'][0]
+                self.assertTrue(source['source_url'].startswith('https://'))
+                self.assertNotIn('example.org',source['source_url'])
+                self.assertEqual(source['source_kind'],'PARENT_CHAT_REAL_WEB_SNAPSHOT')
                 body=valid_article(state,index,f'Praxis{index}')
                 try:
                     production_checks.run_languagetool(REPO,body)
