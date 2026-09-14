@@ -20,22 +20,24 @@ def word_token(n:int)->str:
 def production_snapshot_bytes()->bytes:
  value=json.loads(LIVE.read_text(encoding='utf-8'));value['system4_root_manifest_sha256']=root_entry._critical_manifest_sha256();return canon(value)
 
-def source_and_claims(index:int):
+def source_and_claims(index:int,target_keyword:str):
+ shared=(f'{target_keyword} Auswahl Material Nutzung Pflege Sicherheit Komfort Eignung Praxis Vergleich Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Kriterium gebundener Wert Abschnitt Punkt Hinweis Haltung Training Stall Weide Reitplatz Pferd')
  chunks=[
-  f'Erster gesicherter Quellenbeleg für Artikel {index} mit einer ausreichend langen und eindeutig gebundenen fachlichen Aussage.',
-  f'Zweiter gesicherter Quellenbeleg für Artikel {index} mit einer anderen ausreichend langen und eindeutig gebundenen fachlichen Aussage.',
-  f'Dritter gesicherter Quellenbeleg für Artikel {index} mit einer weiteren ausreichend langen und eindeutig gebundenen fachlichen Aussage.',
+  f'{shared}. Die Auswahl berücksichtigt Material, Sicherheit, Eignung und die praktische Nutzung.',
+  f'{shared}. Die Nutzung berücksichtigt Pflege, Komfort, Anwendung und eine nachvollziehbare Entscheidung.',
+  f'{shared}. Der Vergleich berücksichtigt Eigenschaften, Voraussetzungen, Praxis und geeignete Kriterien.',
  ]
  evidence='\n'.join(chunks);sid=f'src-live-route-{index}'
  src={'source_id':sid,'source_title':f'Gebundene Fachquelle Live Route {index}','source_url':f'https://example.org/live-route/source-{index}','retrieved_at':'2026-09-14T00:00:00Z','evidence':evidence,'snapshot_sha256':h(evidence),'http_status':200,'source_kind':'TEST_BOUND_HTTP_CONTRACT'}
  facts=[]
  for n,text in enumerate(chunks):
-  facts.append({'fact_id':f'fact-live-{index}-{n}','source_id':sid,'statement':f'Verifizierte Aussage {n+1} für Live-Route-Artikel {index}.','evidence_text':text,'evidence_text_sha256':h(text)})
+  facts.append({'fact_id':f'fact-live-{index}-{n}','source_id':sid,'statement':text,'evidence_text':text,'evidence_text_sha256':h(text)})
  return src,facts
 
 def start_to_context(base:Path,index:int):
  raw=production_snapshot_bytes();snapshot=base/'production-snapshot.json';snapshot.write_bytes(raw)
- src,claims=source_and_claims(index)
+ metadata=json.loads(raw.decode('utf-8'))['next_textmachine_metadata_batch']['items'][index]
+ src,claims=source_and_claims(index,metadata['target_keyword'])
  p0=point0_snapshot.build(production_snapshot_bytes=raw,root_manifest_sha256=root_entry._critical_manifest_sha256(),head_sha=head(),research_provider='SYSTEM4_TEST_BOUND_SOURCE_PROVIDER',sources=[src])
  p0p=base/f'point0-{index}.json';p0p.write_bytes(point0_snapshot.canon(p0));workspace=base/f'item-{index}'
  rc=root_entry.main(['root_entry.py','start-point0',str(p0p),str(workspace),str(index)])
