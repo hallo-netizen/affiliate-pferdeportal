@@ -27,24 +27,22 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **168 reale Rassendatensätze** unter `DATEN/` vorhanden;
-- größere Rechercheblöcke sind zulässig, solange jede Rasse einzeln auf formalen Status und Dubletten geprüft wird;
-- neu seit 162: Pantaneiro, Mangalarga Paulista, Campeiro, Marajoara, Latgalischer Traber und Lettischer Ardenner;
-- Mangalarga Paulista klar vom Mangalarga Marchador getrennt;
-- Latvian Heavy Warmblood als Typ innerhalb Latvian Warmblood erkannt und nicht dupliziert;
-- Puruca vorerst nicht als zweite Rasseakte angelegt;
-- schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
+- **175 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- größere Rechercheblöcke wurden genutzt, jede Neuanlage aber einzeln auf Status und Dubletten geprüft;
+- Slowakei neu ergänzt: Slowakisches Warmblut, Muráň-Noriker, Slowakisches Sportpony, Slowakischer Traber;
+- Rumänien neu ergänzt: Romanian Half Draft / Semigreu Românesc, Romanian Sport Horse und Bucovina Horse;
+- Bucovina Horse mit bewusst offenen Detailfeldern, weil Primärquellen dünner sind;
+- schwierige Kandidaten werden weiter offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
 ## NEXT ACTION
 
-1. noch 1–2 größere internationale Abschlussblöcke recherchieren;
-2. Rumänien/Slowakei und weitere süd-/osteuropäische Register gegen vorhandenen Bestand prüfen;
-3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
-4. danach internationale Masterlistenprüfung gegen mehrere autoritative Gesamtquellen durchführen;
-5. wenn diese Prüfung überwiegend Dubletten/Typen statt echter neuer Rassen liefert, aktive Grundrecherche beenden und nur noch bedarfsbezogen ergänzen;
-6. Synonyme, Sektionen, Labels und Zuchtrichtungen vor jeder Datensatzanlage weiter auf Dubletten prüfen;
-7. keinen Vollständigkeits-PASS ohne Abschlussprüfung behaupten.
+1. jetzt **internationale Masterlisten-Gegenprüfung** statt weiterer unsystematischer Länderblöcke;
+2. dabei FAO/DAD-IS sowie mehrere nationale/übernationale Gesamtlisten gegen die 175 vorhandenen Datensätze prüfen;
+3. Altai, American Walking Pony, Andravida und Anglo-Kabarda nur bei starker Primärquelle ergänzen;
+4. jeden Treffer als bereits vorhanden / Synonym / Typ-Zuchtrichtung / echte neue Rasse klassifizieren;
+5. wenn überwiegend Dubletten/Typen und nur noch wenige echte Neuzugänge entstehen, aktive Grundrecherche beenden;
+6. keinen Vollständigkeits-PASS ohne dokumentierte Abschlussprüfung behaupten.
 
 ## KONTROLLPUNKTE
 
