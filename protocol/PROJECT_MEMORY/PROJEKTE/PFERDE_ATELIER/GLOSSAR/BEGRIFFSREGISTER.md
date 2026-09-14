@@ -25,9 +25,11 @@ Dieses Register beantwortet ausschließlich, welcher Glossarbegriff redaktionell
 5. Neue Begriffe nur aus einer frisch nachgewiesenen `GEPRUEFT`-Quelle der Wissensdatenbank.
 6. Pferde- und Ponyrassen sind `GESPERRT` und gehören in das separate Pferderassen-System.
 7. `FERTIG` nur nach vollständiger Inhalts-, Link-, Meta-, Design- und erforderlicher Liveprüfung.
-8. Verwandte Begriffe werden technisch relationiert und als Links in der rechten Box ausgegeben; diese Ziele dürfen nicht redundant im Fließtext verlinkt sein.
-9. Dasselbe Linkziel darf in einem Glossarbegriff nicht doppelt gesetzt werden.
-10. Verbindliche Detailregeln: `TEXT_UND_LINKREGELN.md`.
+8. Verwandte Begriffe werden technisch relationiert und als Links ausschließlich in der rechten Box `Verwandte Begriffe` ausgegeben.
+9. Der gesamte Glossar-Fließtext enthält **0 Links**.
+10. Das Portalziel wird ausschließlich rechts in `Mehr zum Thema` verlinkt; Journal nur ersatzweise, wenn kein passendes Portalziel existiert.
+11. Dasselbe Linkziel darf auf einer Glossar-Einzelansicht nicht doppelt gesetzt werden.
+12. Verbindliche Detailregeln: `TEXT_UND_LINKREGELN.md`.
 
 ## Pflichtfelder je Begriff
 
@@ -39,8 +41,8 @@ Dieses Register beantwortet ausschließlich, welcher Glossarbegriff redaktionell
 | Glossar-Kategorie | zugeordneter Glossar-Bereich |
 | Status | OFFEN / IN ARBEIT / NACHPRÜFUNG / FERTIG / GESPERRT |
 | Verwandte Begriffe | echte, auflösbare Relationen |
-| Fließtext-Link geprüft | genau einmaliges passendes Portal-Ziel |
-| Doppellink-Prüfung | kein Ziel doppelt |
+| Fließtext-Linkprüfung | exakt 0 Links |
+| Seitenbox-Linkprüfung | Related- und Portalziel korrekt getrennt, kein Ziel doppelt |
 | Meta geprüft | JA / NEIN |
 | Design/Single geprüft | JA / NEIN |
 | Letzte Prüfung | Datum / Nachweis |
@@ -49,24 +51,24 @@ Dieses Register beantwortet ausschließlich, welcher Glossarbegriff redaktionell
 
 Der reale vollständige WordPress-Livebestand wurde in diesem Chat nicht automatisiert vollständig eingelesen. Deshalb wird keine vollständige Liveinventarliste erfunden.
 
-Für den aktuellen lokalen Bestands-Update-Kandidaten `1.2.1` sind folgende 14 Slugs technisch enthalten und geprüft; wegen offenem autoritativen Release-/Livebeleg bleiben sie im Register auf `NACHPRÜFUNG`:
+Für den aktuellen lokalen Bestands-Update-Kandidaten `1.2.2` sind folgende 14 Slugs technisch enthalten und geprüft; wegen offenem realem LIVE-Readback bleiben sie im Register auf `NACHPRÜFUNG`:
 
 | Begriff | Slug | Status | lokaler Stand 2026-09-14 |
 |---|---|---|---|
-| Huf | huf | NACHPRÜFUNG | 150–200 Wörter, 1 Fließtext-Link, Related separat – lokal PASS |
-| Hufbein | hufbein | NACHPRÜFUNG | lokal PASS |
-| Strahlbein | strahlbein | NACHPRÜFUNG | lokal PASS |
-| Hufrolle | hufrolle | NACHPRÜFUNG | lokal PASS |
-| Widerrist | widerrist | NACHPRÜFUNG | lokal PASS |
-| Stockmaß | stockmass | NACHPRÜFUNG | lokal PASS; LIVE-Doppellinkfehler der vorherigen Fassung muss durch 1.2.1/1.50.489 real verschwinden |
+| Huf | huf | NACHPRÜFUNG | 150–200 Wörter, 0 Fließtextlinks, Related separat – lokal PASS |
+| Hufbein | hufbein | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Strahlbein | strahlbein | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Hufrolle | hufrolle | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Widerrist | widerrist | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Stockmaß | stockmass | NACHPRÜFUNG | lokal PASS; alter LIVE-Doppellink-/Fließtextlinkfehler muss durch 1.2.2/1.50.490 real verschwinden |
 | Bandmaß | bandmass | NACHPRÜFUNG | lokal PASS; Referenzfall für finale Liveprüfung |
-| Ganasche | ganasche | NACHPRÜFUNG | lokal PASS |
-| Kehlgang | kehlgang | NACHPRÜFUNG | lokal PASS |
-| Röhrbein | roehrbein | NACHPRÜFUNG | lokal PASS |
-| Kötenbehang | koetenbehang | NACHPRÜFUNG | lokal PASS |
-| Hufrehe | hufrehe | NACHPRÜFUNG | lokal PASS |
-| Strahlfäule | strahlfaeule | NACHPRÜFUNG | lokal PASS |
-| Hufabszess | hufabszess | NACHPRÜFUNG | lokal PASS |
+| Ganasche | ganasche | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Kehlgang | kehlgang | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Röhrbein | roehrbein | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Kötenbehang | koetenbehang | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Hufrehe | hufrehe | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Strahlfäule | strahlfaeule | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
+| Hufabszess | hufabszess | NACHPRÜFUNG | 0 Fließtextlinks – lokal PASS |
 
 ### Weitere bekannte Begriffe
 
@@ -76,17 +78,19 @@ Für den aktuellen lokalen Bestands-Update-Kandidaten `1.2.1` sind folgende 14 S
 
 Nutzerreadback: **`artikelanzeige pass`**. Damit ist die generelle Öffnung von Glossar-Einzelartikeln LIVE bestätigt.
 
-Dies reicht nicht zur Hochstufung der obigen Begriffe auf `FERTIG`, weil die aktuelle Einzelansicht noch den Fehler `GLOSSAR-SINGLE-011` hat bzw. der lokale Fix 1.2.1/1.50.489 noch keinen Live-Readback besitzt.
+Dies reicht nicht zur Hochstufung der obigen Begriffe auf `FERTIG`, weil `GLOSSAR-SINGLE-011` aktuell weiterhin LIVE FAIL ist und 1.2.2/1.50.490 noch keinen realen Live-Readback besitzen.
 
 ## Nächste Freigabeschranke
 
-`Bandmaß` muss nach quellgebundener Installation real beweisen:
-- Breadcrumb korrekt;
+`Bandmaß` muss nach Installation der geprüften Kandidaten real beweisen:
+- Breadcrumb exakt `Startseite > Glossar > Pferd & Biologie > Bandmaß`;
 - Kurzdefinition sichtbar;
 - Icons sichtbar;
-- `Stockmaß` als verwandter Link im Fließtext 0×;
-- `Stockmaß` in der rechten Verwandt-Box exakt 1×;
-- Portal-Kategorielink im Fließtext exakt 1×;
+- Fließtext insgesamt **0 Links**;
+- `Stockmaß` in der rechten Verwandt-Box exakt 1× als Link;
+- Portalziel in `Mehr zum Thema` exakt 1× als Link;
+- obere Ockerlinie der rechten Boxen sichtbar dünner / 2 px;
+- bestehende ID und URL unverändert;
 - normaler WordPress-Artikel unverändert.
 
 Erst danach können betroffene Bestandsbegriffe auf `FERTIG` gesetzt werden.
