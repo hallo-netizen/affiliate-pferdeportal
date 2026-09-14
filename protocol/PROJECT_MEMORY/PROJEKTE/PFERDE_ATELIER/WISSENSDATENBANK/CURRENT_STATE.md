@@ -1,6 +1,6 @@
 # WISSENSDATENBANK – CURRENT STATE
 
-STAND: 2026-09-13
+STAND: 2026-09-14
 STATUS: THEMENPOOL AKTIV / PFERDERASSEN IN RECHERCHE / GLOSSAR STARTBEFÜLLT
 
 ## AUTORITÄT
@@ -23,10 +23,12 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **157 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 153er-Stand neu: Slowenisches Kaltblut, Posavje-Pferd, Ljutomer-Traber und Slowenisches Warmblut.
-- Die vier neuen slowenischen Rassen sind über die slowenische Regierung als Rassen mit anerkannten Zuchtprogrammen gebunden.
-- Das Bosnische Gebirgspferd war bereits vorhanden und wurde nicht dupliziert.
+- **162 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 157er-Stand neu: Kroatisches Kaltblut, Kroatischer Posavac, Kroatisches Sportpferd, Kroatisches Warmblut und Međimurje-Pferd.
+- Die fünf neuen kroatischen Rassen sind über das kroatische Landwirtschaftsministerium bzw. dessen aktuelle Liste anerkannter Zuchtorganisationen/Zuchtprogramme gebunden.
+- Hrvatski posavac und slowenisches Posavje-Pferd bleiben getrennt, weil sie separat staatlich geführte Zuchtprogramme besitzen.
+- Kroatisches Sportpferd und Kroatisches Warmblut werden ebenfalls getrennt geführt.
+- Lipizzaner und Gidrán waren bereits vorhanden und wurden nicht dupliziert.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
