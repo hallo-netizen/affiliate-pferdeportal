@@ -1,14 +1,22 @@
 # SCHREIBVERTRAG PFERDERASSE
 
 STAND: 2026-09-14
-STATUS: VERBINDLICH FÜR CHAT-ERSTELLUNG / KEINE TEXT-AUTORITÄT AUSSERHALB DIESER BEITRAGSART
+STATUS: VERBINDLICH FÜR CHAT-ERSTELLUNG / EIGENSTÄNDIGE BEITRAGSART
+
+## HARTE SYSTEMGRENZE
+Dieser Vertrag ist die einzige Textautorität für Pferderassen-Artikel.
+
+Es gilt ausschließlich:
+`freigegebener Rassendatensatz -> dieser Schreibvertrag -> Artikel`
+
+**TABU:** Regeln, Prompts, Keywordsysteme, Prüfungen oder Abläufe aus TEXT/Textmaschine, ACM, PPM, LT oder anderen Artikel-Workflows dürfen weder gelesen noch übernommen noch sinngemäß angewendet werden.
 
 ## ZWECK
-Dieser Vertrag bindet die Erstellung von Pferderassen-Artikeln im Chat so eng wie möglich. Der Schreiber darf formulieren, aber nicht entscheiden.
+Der Schreiber darf formulieren, aber nicht entscheiden.
 
 **Kernsatz 1:** Was nicht im freigegebenen Rassendatensatz steht, existiert für den Schreiber nicht.
 
-**Kernsatz 2:** Textfreiheit besteht ausschließlich in Satzbau, Rhythmus und Wortwahl. Fakten, Struktur, Reihenfolge, Abschnittszweck, Links und Pflichtangaben sind nicht frei.
+**Kernsatz 2:** Textfreiheit besteht ausschließlich in Satzbau, Rhythmus und Wortwahl. Fakten, Struktur, Reihenfolge und Abschnittszweck sind nicht frei.
 
 ## 1. EINZIGE FAKTENQUELLE
 - einzige Faktenquelle ist der freigegebene Datensatz unter `DATEN/breed-*.json`;
@@ -130,63 +138,20 @@ Keine subjektiven Scores.
 - Rassename muss enthalten sein;
 - `Pferd`/`Pferderasse` muss hier nicht zusätzlich erzwungen werden.
 
-## 11. KEYWORDS
-Es gibt genau zwei extern vorgegebene Keywords:
-- `KW1`
-- `KW2`
+## 11. INTERNE LINKS – NUR GEBUNDEN
+Interne Links sind optional und nie Voraussetzung für das Schreiben.
 
-Regeln:
-- der Schreiber wählt die Keywords niemals selbst;
-- beide müssen wortgleich verwendet werden;
-- KW1 steht in der H1, sofern KW1 der Rassename ist;
-- KW2 wird in dem vorgegebenen Zielabschnitt verwendet;
-- keine zusätzliche Keyword-Erfindung;
-- keine künstliche Keyword-Dichte;
-- ist ein Keyword grammatisch nicht sauber integrierbar: BLOCK statt eigenmächtiger Änderung.
+Wenn ein freigegebenes Linkpaket vorliegt:
+- nur diese Ziele verwenden;
+- keine Ziel-URL selbst recherchieren oder erfinden;
+- Glossarlink nur an der ersten natürlichen Nennung;
+- maximal 3 interne Links pro Artikel;
+- wenn kein Linkpaket vorliegt, wird der Artikel ohne interne Links geschrieben.
 
-## 12. INTERNE LINKS – NUR GEBUNDEN
-Der Schreiber sucht oder wählt keine Links selbst.
+## 12. PRODUKTIONSAUSGABE
+Die Textproduktion erzeugt den vollständigen Artikel. Technische Importfelder wie WordPress-Kategorie-Slugs gehören nicht zum Schreiben und dürfen die Texterstellung nicht blockieren.
 
-Vor Produktionsstart darf ein `LINKPAKET` übergeben werden. Nur Ziele daraus sind zulässig.
-
-### Glossarlinks
-- nur zu bereits freigegebenen Glossarbegriffen;
-- Ziel wird als freigegebener Glossar-Slug übergeben;
-- Link auf die erste fachlich sinnvolle Nennung des Begriffs;
-- denselben Glossarbegriff pro Artikel höchstens einmal verlinken;
-- keine künstliche Satzänderung nur um einen Link unterzubringen;
-- wenn Begriff nicht natürlich vorkommt: Link entfällt statt Text zu verbiegen.
-
-### Kategorie-/Bereichslinks
-- `rassengruppe_slug` bestimmt die echte WordPress-Unterkategorie und ist KEIN frei gewählter Textlink;
-- ein zusätzlicher Kategorie-/Bereichslink ist nur zulässig, wenn sein Ziel-Slug und Ankertext im LINKPAKET vorgegeben sind;
-- der Schreiber entscheidet niemals selbst, welche Kategorie oder A-Z-Seite verlinkt wird;
-- keine freie Suche nach verwandten Kategorien oder Artikeln.
-
-### URL-Regel
-- keine WordPress-URL raten oder hart erfinden;
-- vorzugsweise nur semantische Ziel-Slugs im JSON übergeben;
-- endgültige URL-Auflösung erfolgt im Import-/WordPress-Schritt;
-- dadurch bleiben Artikel unabhängig von späteren Permalink-Änderungen.
-
-### Menge
-- standardmäßig maximal 3 interne Links pro Rassenartikel;
-- davon bevorzugt 1–2 Glossarlinks und höchstens 1 Kategorie-/Bereichslink;
-- weniger ist ausdrücklich erlaubt;
-- kein Linkzwang, wenn kein natürlicher Platz existiert.
-
-## 13. LINK-BLOCKREGEL
-Fehlt ein benötigtes Ziel oder ist der Ziel-Slug nicht freigegeben:
-- keinen Platzhalter-Link erfinden;
-- keine URL raten;
-- Artikel entweder ohne diesen optionalen Link schreiben oder, wenn Link als Pflichtinput markiert ist, BLOCK melden.
-
-## 14. PRODUKTIONSAUSGABE – JSON-BATCH
-Die Artikel werden nicht als WordPress-XML und nicht direkt nach WordPress ausgegeben.
-
-Ausgabeform: eine maschinenlesbare JSON-Datei mit einem Array von Rassenartikeln.
-
-### Pflichtfelder je Rasse
+Für eine spätere technische Übergabe können zusätzlich separat erzeugt werden:
 - `rassename`
 - `slug`
 - `rassengruppe_slug`
@@ -196,76 +161,41 @@ Ausgabeform: eine maschinenlesbare JSON-Datei mit einem Array von Rassenartikeln
 - `meta_title`
 - `meta_description`
 
-### Bedeutung
-- `rassename`: kanonischer Rassename aus Datensatz;
-- `slug`: eindeutiger Artikel-Slug, nicht frei nachträglich variieren;
-- `rassengruppe_slug`: exakt die vorgesehene echte WordPress-Unterkategorie;
-- `titel`: H1 gemäß diesem Vertrag;
-- `artikeltext`: vollständiger Artikel mit verbindlicher Struktur;
-- `kurztext`: kurze sachliche Vorschau ohne neue Fakten;
-- `meta_title`: aus Artikelinhalt abgeleitet, keine neuen Fakten;
-- `meta_description`: aus Artikelinhalt abgeleitet, keine neuen Fakten.
+Dabei gilt: technische Felder dürfen nicht aus fremden Textworkflows abgeleitet werden.
 
-### Optionale gebundene Linkdaten
-Falls freigegeben, zusätzlich:
-`interne_links`: Array aus Objekten mit
-- `typ`: `glossar` oder `bereich`
-- `ziel_slug`
-- `ankertext`
-- `pflicht`: true/false
-
-Der Schreiber darf diese Objekte nicht selbst erfinden. Er übernimmt nur vorgegebene bzw. aus einem autoritativen Register eindeutig gebundene Ziele.
-
-## 15. PRODUKTIONSGRENZE
-- keine Veröffentlichung;
-- kein WordPress-Zugriff;
-- keine Kategorien in WordPress anlegen oder ändern;
-- keine Permalinks prüfen;
-- keine Drafts erzeugen;
-- nur JSON-Batch erzeugen.
-
-Der Import-Chat ist für technische Prüfung, Dubletten, Slugs, Kategorien, Pflichtfelder, WordPress-Drafts und Rückleseprüfung zuständig.
-
-## 16. ABSCHLUSSPRÜFUNG
+## 13. ABSCHLUSSPRÜFUNG
 Vor Ausgabe muss geprüft werden:
 - H1-Regel erfüllt;
 - `Pferderasse` mindestens einmal in den ersten 150 Fließtextwörtern;
 - alle 12 H2 vorhanden und in korrekter Reihenfolge;
-- beide vorgeschriebenen H3-Gruppen vollständig;
+- vorgeschriebene H3 vollständig;
 - keine zusätzliche H2;
 - kein unbelegter Fakt;
 - kein geschlossen dargestelltes offenes Feld;
 - Besonderheiten 3–6 und belegt;
 - Auf-einen-Blick-Reihenfolge korrekt;
 - Zusammenfassung ohne neue Fakten;
-- Keywords exakt erfüllt;
-- nur gebundene Linkziele verwendet;
-- Linkanzahl eingehalten;
-- keine unnötige Wiederholung von `Rasse`/`Pferderasse`;
-- alle JSON-Pflichtfelder vorhanden;
-- `rassengruppe_slug` nicht vom Schreiber geraten.
+- nur gebundene Links verwendet, falls Linkpaket vorhanden;
+- keine unnötige Wiederholung von `Rasse`/`Pferderasse`.
 
 Ein nicht rückführbarer Satz ist zu löschen oder zu reparieren.
 
-## 17. PASS-REGEL
+## 14. PASS-REGEL
 Der Autor darf sich nicht selbst fachlich freigeben.
 
 Autorenausgabe = `ENTWURF`.
 
-Ein separater Prüfschritt muss Datensatz + Schreibvertrag + fertigen Artikel + JSON-Pflichtfelder vergleichen und liefert nur:
+Ein separater Prüfschritt muss Datensatz + Schreibvertrag + fertigen Artikel vergleichen und liefert nur:
 - `PASS`
 oder
 - konkrete Reparaturpunkte.
 
 Ohne Prüfschritt kein Produktions-PASS.
 
-## 18. TESTBATCH
+## 15. TESTBATCH
 Erste Produktionsprüfung: exakt 5 Rassen.
 
 Ziel:
 - Textqualität prüfen;
 - Regelbindung prüfen;
-- JSON-Struktur prüfen;
-- Kategorienbindung über `rassengruppe_slug` prüfen;
-- Linkziele prüfen;
 - anschließend erst Serienproduktion freigeben.
