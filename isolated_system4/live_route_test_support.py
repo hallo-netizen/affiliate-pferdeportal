@@ -83,6 +83,9 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
     row=link_rows[link_cursor];text+=f' <a href="{row["href"]}">{row["anchor"]}</a>';link_cursor+=1
    parts.append(f'<p data-fact-ids="{allowed[(bi+pi)%len(allowed)]}">{text}</p>')
   blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
+ if len(blocks)>1:
+  required_list='<ul><li>Material und Eignung gemeinsam prüfen.</li><li>Nutzung und Sicherheit passend bewerten.</li><li>Pflege und Komfort praktisch einordnen.</li><li>Vergleich und Entscheidung nachvollziehbar verbinden.</li></ul>'
+  blocks[1]=blocks[1].replace('</section>',required_list+'</section>',1)
  while link_cursor<len(link_rows):
   row=link_rows[link_cursor];blocks[-1]=blocks[-1].replace('</section>',f'<p data-fact-ids="{fid}"><a href="{row["href"]}">{row["anchor"]}</a></p></section>');link_cursor+=1
  table_count=int(t.get('table_count_exact') or 0);tables=''
