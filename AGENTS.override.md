@@ -1,28 +1,20 @@
 # SYSTEM 4 — ISOLATED CODEX ROOT OVERRIDE — TEST ONLY
 
-Marker: `SYSTEM4_ISOLATED_ROOT_ENTRY_V3`
+Marker: `SYSTEM4_ISOLATED_ROOT_ENTRY_V4_POINT0_ONLY`
 
-This file exists only for the dedicated branch `hobbyroom/system4-true-single-room-v1` and intentionally replaces the repository-root `AGENTS.md` for Codex instruction discovery on this branch. The immutable repository `AGENTS.md` must remain unchanged.
+This file exists only for the dedicated System-4 test branch and intentionally replaces the repository-root `AGENTS.md` for Codex instruction discovery on this branch. The immutable repository `AGENTS.md` must remain unchanged.
 
 ## Mandatory first executable command
 
-There is no free route selection on this branch.
+There is exactly one production entrance.
 
-For every real System-4 production run the machine MUST first create a hash-bound `SYSTEM4_POINT0_SNAPSHOT_V1` containing the exact production snapshot and the verified research source pool. The only production root command is:
+For every real System-4 production run the machine MUST first create a hash-bound `SYSTEM4_POINT0_SNAPSHOT_V1` containing the exact production snapshot and the verified research source pool. The only root command is:
 
 `python3 isolated_system4/root_entry.py start-point0 <POINT0_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
 
+`start` and `start-stdin` are forbidden and must fail closed with `ROOT_POINT0_REQUIRED`.
+
 Only after `SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY` may Codex be attached as worker via the generated supervisor dispatch. Codex free web search is forbidden; research may use only the bound Point-0 source pool.
-
-The older `start` / `start-stdin` commands are local historical acceptance surfaces only and are not valid production starts.
-
-For a real bound System-4 production task, the FIRST shell command must pass the exact bound snapshot JSON through stdin to:
-
-`python3 isolated_system4/root_entry.py start-stdin <WORKSPACE_OUTSIDE_REPO>`
-
-For local/prebound acceptance only:
-
-`python3 isolated_system4/root_entry.py start <BOUND_SNAPSHOT_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
 
 SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 root entry.
 
