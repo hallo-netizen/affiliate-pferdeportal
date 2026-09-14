@@ -73,6 +73,15 @@ class RealLtPpmCorridorTests(unittest.TestCase):
                     production_checks.run_languagetool(REPO,body)
                 except production_checks.RepairRequired as exc:
                     self.fail(f'ARTICLE_{index}_REAL_LT68_FINDINGS:'+json.dumps(exc.findings,ensure_ascii=False,sort_keys=True))
+                try:
+                    production_checks.run_ppm_content_validator(
+                        REPO,
+                        body,
+                        state['production_context']['fact_pack'],
+                        state['production_context']['production_plan_item'],
+                    )
+                except production_checks.RepairRequired as exc:
+                    self.fail(f'ARTICLE_{index}_DIRECT_REAL_PPM_FINDINGS:'+json.dumps(exc.findings,ensure_ascii=False,sort_keys=True))
                 draft=root/f'article-{index}.html';draft.write_text(body,encoding='utf-8')
                 self.assertEqual(controller.main(['controller.py','draft',str(workspace),str(draft)]),0)
                 rc=controller.main(['controller.py','fullcheck',str(workspace)])
