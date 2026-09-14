@@ -69,10 +69,10 @@ Kernregeln:
 - keine wiederkehrenden Floskeln/Schablonen;
 - nur `GEPRUEFT`-WDB-Fakten;
 - Kurzdefinition/Zusammenfassung Pflicht;
-- dasselbe Linkziel nie zweimal;
-- Fließtext bevorzugt passende übergeordnete Portal-Kategorie;
-- Journal nur ersatzweise;
-- verwandte Glossarbegriffe als Links ausschließlich im Block `Verwandte Begriffe`, nicht zusätzlich im Fließtext.
+- **0 Links im Fließtext**;
+- verwandte Glossarbegriffe als Links ausschließlich rechts in `Verwandte Begriffe`;
+- Portalziel ausschließlich rechts in `Mehr zum Thema`;
+- bestehende Glossarbeiträge nach neuer Regel überschreiben/aktualisieren, ID/URL erhalten.
 
 Produktionsstatus ausschließlich in `BEGRIFFSREGISTER.md`.
 
