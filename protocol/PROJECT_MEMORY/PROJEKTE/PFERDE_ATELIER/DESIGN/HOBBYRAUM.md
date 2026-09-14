@@ -1,147 +1,74 @@
 # DESIGN – HOBBYRAUM
 
-STAND: 2026-09-07
-STATUS: FREI / SCRIPT-ONLY-STANDARD
+STAND: 2026-09-14
+STATUS: **AKTIV**
 
-## HARTE OBERREGEL
+## AKTUELLER AUFTRAG
 
-**Im DESIGN-Hobbyraum werden Miniänderungen nicht mehr manuell gebaut.**
+Pferderassen-Einzelansicht auf die reale breite Portal-Body-Achse bringen und den generischen Kurztext im Rassenhero entfernen.
 
-Bei Elementtausch, Verschiebung oder vergleichbaren lokalen Änderungen ist ausschließlich dieser Runner zulässig:
+## EXAKTE ARBEITSBASIS
 
-`MINIMAL_PATCH_RUNNER.py`
-
-Letzter abgeschlossener Job:
-
-`MINIMAL_PATCH_JOB_CURRENT.json`
-
-Letzter echter Prüfbeleg:
-
-`MINIMAL_PATCH_LAST_RECEIPT.json`
-
-## WAS DER RUNNER ERZWINGT
-
-Der Runner darf in V1 ausschließlich:
-
-**zwei direkt aufeinanderfolgende vollständige Codebereiche in genau einer Datei vertauschen.**
-
-Er darf ausdrücklich NICHT:
-- Artikel zerlegen;
-- Markup neu bauen;
-- Texte umschreiben;
-- CSS ändern;
-- weitere Dateien ändern;
-- zusätzliche Logik ergänzen;
-- selbst eine neue Pluginversion erzeugen;
-- einen anderen Ausgangsstand verwenden.
-
-## FAIL-CLOSED
-
-Vor jedem Kandidaten erzwingt das Script:
-
-1. exakter Baseline-SHA;
-2. ZIP-Integrität;
-3. identische Archivstruktur;
-4. genau eine geänderte Paketdatei;
-5. exakt nur den definierten Tausch;
-6. beide verschobenen Bereiche byte-identisch;
-7. beide Bereiche exakt einmal vorhanden;
-8. Rücktausch ergibt byte-identisch den Vorgänger.
-
-Danach laufen automatisch Negativtests:
-
-- unveränderte/falsche Reihenfolge → BLOCKED;
-- Bereich dupliziert → BLOCKED;
-- Bereich verändert → BLOCKED;
-- irgendeine andere Datei verändert → BLOCKED.
-
-**Ein Kandidat darf nur bei Gesamt-PASS ausgegeben werden.**
-
-## KEINE PLUGIN-SERIE MEHR
-
-Im Hobbyraum wird immer nur eine Datei erzeugt:
-
-`DESIGN_HOBBYRAUM_CANDIDATE.zip`
-
-Fehlversuch:
-Kandidat verwerfen/überschreiben.
-
-**Keine neue Versionsnummer pro Versuch.**
-
-Erst nach echtem Nutzer-LIVE-PASS darf aus dem Kandidaten einmalig ein neuer Release gebaut werden.
-
-## LETZTER ABGESCHLOSSENER AUFTRAG
-
-Exakte Basis:
-V1.50.472 / Contract V104
+Letzter installierter/getesteter Kandidat:
+`PFERDE_ATELIER_DESIGN_V1.50.507_AJAX_PAGINATION_BODYWIDTH_INSTALLIEREN.zip`
 
 SHA-256:
-`ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9`
+`b27898d26b32e9fe9910a2312b6bfbcec12c738f76290ed89304eca931353ec9`
 
-Erlaubte Transformation:
-nur
+Branch für Campus-/Fachdokumentation:
+`hobbyroom/glossar-livefail-red-green-20260913`
 
-**Affiliate-PRODUKTE / Produktvorschläge (pa266-products) ↔ Beitragsvorschau (pa297-popular)**
+## LIVE-BEFUND
 
-Ziel:
-**Produktvorschläge stehen direkt über der Beitragsvorschau.**
+Bereits real bestätigt und **nicht regressieren**:
+- Hauptsuche / Suchwelt Pferderassen: PASS;
+- Pferderassen-Hero Übersicht: PASS;
+- lokale Pferderassen-AJAX-Suche: PASS;
+- `Alle Rassen` Pagination: PASS.
 
-Der Affiliate-Banner bleibt exakt an seiner bisherigen V1.50.472-Position.
-Artikel, Verweise und jeder andere Block bleiben exakt wie V1.50.472.
+Aktiver Fehler:
+- Einzelrasse weiterhin zu schmal → LIVE FAIL.
 
-Kein anderer Block darf bewegt werden.
+## VERIFIZIERTE HISTORISCHE URSACHE / ARBEITSWEG
 
-## LETZTER SCRIPT-LAUF
+Die ältere funktionierende Portalbreiten-Lösung erweitert nicht nur einen inneren Wrapper. Sie setzt am tatsächlichen Body-/Astra-/Kubio-Containerpfad an und hebt dort die schmale Themeachse auf.
 
-Aktueller Job **DESIGN-ORDER-SWAP-002** gegen exakte V1.50.472-Basis: **PASS**
+Der 1.50.507-Test bewies nur die vorhandenen CSS-Regeln, nicht dass der Live-DOM denselben Containerpfad tatsächlich vollständig verlässt.
 
-Ziel eindeutig:
-**Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.**
-
-Ergebnis:
-- Affiliate-Banner bleibt exakt an seiner V1.50.472-Position: PASS;
-- Affiliate-Produkte vor Beitragsvorschau: PASS;
-- Artikel-/Verweisstruktur unverändert: PASS;
-- genau eine Paketdatei verändert: PASS;
-- exakter Zwei-Bereich-Tausch: PASS;
-- Byteidentität/Reversibilität: PASS;
-- vier Negativtests BLOCKED/PASS;
-- Kandidaten-SHA: `11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`.
-
-Der Nutzer hat den Kandidaten am 2026-09-07 real geprüft und mit **PASS** bestätigt. LIVE-Beleg: `LIVE_PASS_DESIGN_ORDER_SWAP_002.md`.
-
-## ABSCHLUSS
-
-Aktueller Auftrag DESIGN-ORDER-SWAP-002: **CLOSED / LIVE PASS**.
-
-Der Hobbyraum ist wieder FREI. Der SCRIPT-ONLY-Standard bleibt für künftige Miniänderungen verbindlich.
+Daher gilt:
+**kein weiterer isolierter `max-width`-Versuch.**
 
 ## NEXT ACTION
 
-**Keine offene DESIGN-Arbeit.**
+1. Exakten `single-pa_breed`-Body-/Astra-/Kubio-Containerpfad aus dem aktuellen Plugin gegen den historischen bewährten Portalbreitenweg prüfen.
+2. Nur für `single-pa_breed` denselben breiten Containermechanismus binden; keine fremden Seiten-/Hubdesigns übernehmen.
+3. Generischen Hero-Kurztext vollständig entfernen, z. B. `Burguete stammt aus Spanien. Der Datensatz dokumentiert ...`.
+4. Linke Icon-Spalte, Mitteltext, rechte Wissensspalte, Breadcrumb, Hero-Bild, AJAX und Pagination unverändert erhalten.
+5. Hart positiv + negativ + Regression testen.
+6. Fertige ZIP erneut exakt entpacken/testen.
+7. Danach echter Nutzer-Browser-Readback der Breite.
 
-Der Hobbyraum ist FREI.
-Bei einem neuen lokalen Miniänderungsauftrag wird zuerst ein neuer hashgebundener Job definiert und danach ausschließlich der Runner verwendet.
+## PASS-GRENZE
 
-## VERBINDLICHER ABLAUF FÜR JEDEN WEITEREN CHAT
+Kein Gesamt-PASS, solange die Einzelrasse live nicht sichtbar die normale breite Portal-Body-Achse nutzt.
 
-1. `CURRENT_STATE.md` lesen.
-2. diese `HOBBYRAUM.md` lesen.
-3. `MINIMAL_PATCH_JOB_CURRENT.json` lesen.
-4. Runner-Selbsttest ausführen.
-5. exakte Baseline anhand SHA binden.
-6. ausschließlich `MINIMAL_PATCH_RUNNER.py build ...` ausführen.
-7. nur bei Gesamt-PASS den einen `DESIGN_HOBBYRAUM_CANDIDATE.zip` verwenden.
-8. bei FAIL: STOPP. Keine manuelle Reparatur und kein Ersatzweg.
+## SCRIPT-ONLY-STANDARD
 
-## HARTE GRENZE
+Der historische `MINIMAL_PATCH_RUNNER.py` bleibt für reine Zwei-Block-Miniänderungen verbindlich. Der aktuelle Pferderassen-Layoutauftrag ist **kein** bloßer Zwei-Block-Tausch und darf deshalb nicht fälschlich durch diesen Runner gezwungen werden.
 
-V1.50.473, V1.50.474, V1.50.475 und V1.50.476 sind keine Arbeitsbasis für diesen Auftrag.
+## NICHT ANFASSEN
 
-Es gibt keinen manuellen Nebenweg.
+- normale WordPress-Beiträge;
+- bestätigte Glossar-Breadcrumb-/Hero-Geometrie;
+- Hauptsuche außer Regressionstest;
+- Pferderassen-AJAX-Transport;
+- 24er Pagination;
+- Startseitenlimit 8;
+- akzeptierte Grundstruktur links | Mitte | rechts.
 
 ## VERWEISE
 
-- Bürostand: `CURRENT_STATE.md`
-- Fehler: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
-- Warum: `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- Stand: `CURRENT_STATE.md`
+- Regeln: `PFERDERASSEN_DESIGN_RULES.md`
+- Fehler: `FEHLERQUELLEN.md`
+- Ausführungsprotokoll: `PROTOKOLL_20260914_PFERDERASSEN_DESIGN_CLOSEOUT.md`
