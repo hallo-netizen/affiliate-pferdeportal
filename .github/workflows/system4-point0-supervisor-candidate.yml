@@ -1,0 +1,29 @@
+name: System 4 Point0 Supervisor Candidate
+
+on:
+  push:
+    branches:
+      - hobbyroom/system4-point0-supervisor-rebuild-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Python syntax
+        run: |
+          python -m py_compile isolated_system4/controller.py isolated_system4/controller_core.py isolated_system4/point0_snapshot.py isolated_system4/supervisor.py isolated_system4/root_supervisor_bridge.py isolated_system4/worker_dispatch.py isolated_system4/root_entry.py isolated_system4/codex_entry.py
+      - name: Point0 supervisor controller hard boundary
+        run: python isolated_system4/test_point0_supervised_controller.py
+      - name: Existing System 4 tests
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m unittest discover -s isolated_system4 -p 'test_*.py' -v 2>&1 | tee /tmp/system4-tests.log
