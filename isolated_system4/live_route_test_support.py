@@ -84,7 +84,14 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
    parts.append(f'<p data-fact-ids="{allowed[(bi+pi)%len(allowed)]}">{text}</p>')
   blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
  if len(blocks)>1:
-  required_list='<ul><li>Material und Eignung gemeinsam prüfen.</li><li>Nutzung und Sicherheit passend bewerten.</li><li>Pflege und Komfort praktisch einordnen.</li><li>Vergleich und Entscheidung nachvollziehbar verbinden.</li></ul>'
+  required_list=(
+   f'<ul>'
+   f'<li data-fact-ids="{allowed[0%len(allowed)]}">Material und Eignung gemeinsam prüfen.</li>'
+   f'<li data-fact-ids="{allowed[1%len(allowed)]}">Nutzung und Sicherheit passend bewerten.</li>'
+   f'<li data-fact-ids="{allowed[2%len(allowed)]}">Pflege und Komfort praktisch einordnen.</li>'
+   f'<li data-fact-ids="{allowed[0%len(allowed)]}">Vergleich und Entscheidung nachvollziehbar verbinden.</li>'
+   f'</ul>'
+  )
   blocks[1]=blocks[1].replace('</section>',required_list+'</section>',1)
  while link_cursor<len(link_rows):
   row=link_rows[link_cursor];blocks[-1]=blocks[-1].replace('</section>',f'<p data-fact-ids="{fid}"><a href="{row["href"]}">{row["anchor"]}</a></p></section>');link_cursor+=1
