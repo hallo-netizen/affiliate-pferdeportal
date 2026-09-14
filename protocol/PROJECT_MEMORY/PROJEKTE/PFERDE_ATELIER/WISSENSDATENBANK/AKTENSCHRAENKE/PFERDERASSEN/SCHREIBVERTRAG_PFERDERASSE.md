@@ -148,10 +148,18 @@ Wenn ein freigegebenes Linkpaket vorliegt:
 - maximal 3 interne Links pro Artikel;
 - wenn kein Linkpaket vorliegt, wird der Artikel ohne interne Links geschrieben.
 
-## 12. PRODUKTIONSAUSGABE
-Die Textproduktion erzeugt den vollständigen Artikel. Technische Importfelder wie WordPress-Kategorie-Slugs gehören nicht zum Schreiben und dürfen die Texterstellung nicht blockieren.
+## 12. PRODUKTIONSAUSGABE – ZWINGEND DATEI
+Die Produktionsausgabe eines Test- oder Serienbatches ist **zwingend eine echte maschinenlesbare `.json`-Datei**.
 
-Für eine spätere technische Übergabe können zusätzlich separat erzeugt werden:
+**Nicht zulässig als Endausgabe:**
+- nur Chattext;
+- nur Markdown-/Writing-Block;
+- WordPress-XML;
+- direkte WordPress-Veröffentlichung.
+
+Die fertigen Artikel werden in einer JSON-Datei als Array übergeben. Chattext darf höchstens eine kurze Begleitmeldung enthalten.
+
+Pro Rasse müssen in der JSON-Datei mindestens diese Felder vorhanden sein:
 - `rassename`
 - `slug`
 - `rassengruppe_slug`
@@ -161,7 +169,7 @@ Für eine spätere technische Übergabe können zusätzlich separat erzeugt werd
 - `meta_title`
 - `meta_description`
 
-Dabei gilt: technische Felder dürfen nicht aus fremden Textworkflows abgeleitet werden.
+Technische Importfelder dürfen die Texterstellung nicht verändern. Nicht belegte technische Zuordnungen dürfen nicht geraten werden.
 
 ## 13. ABSCHLUSSPRÜFUNG
 Vor Ausgabe muss geprüft werden:
@@ -176,7 +184,9 @@ Vor Ausgabe muss geprüft werden:
 - Auf-einen-Blick-Reihenfolge korrekt;
 - Zusammenfassung ohne neue Fakten;
 - nur gebundene Links verwendet, falls Linkpaket vorhanden;
-- keine unnötige Wiederholung von `Rasse`/`Pferderasse`.
+- keine unnötige Wiederholung von `Rasse`/`Pferderasse`;
+- Ausgabe ist tatsächlich eine `.json`-Datei;
+- alle vorgeschriebenen JSON-Felder sind vorhanden.
 
 Ein nicht rückführbarer Satz ist zu löschen oder zu reparieren.
 
@@ -198,4 +208,5 @@ Erste Produktionsprüfung: exakt 5 Rassen.
 Ziel:
 - Textqualität prüfen;
 - Regelbindung prüfen;
+- JSON-Dateiausgabe prüfen;
 - anschließend erst Serienproduktion freigeben.
