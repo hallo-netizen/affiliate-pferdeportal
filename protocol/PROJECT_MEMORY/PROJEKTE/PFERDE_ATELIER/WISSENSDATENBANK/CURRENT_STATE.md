@@ -1,7 +1,7 @@
 # WISSENSDATENBANK – CURRENT STATE
 
 STAND: 2026-09-14
-STATUS: THEMENPOOL AKTIV / PFERDERASSEN IN ABSCHLUSS-GEGENPRÜFUNG / GLOSSAR STARTBEFÜLLT
+STATUS: THEMENPOOL AKTIV / PFERDERASSEN GRUNDRECHERCHE ABGESCHLOSSEN / GLOSSAR STARTBEFÜLLT
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
@@ -15,18 +15,18 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 - `WISSENSDATENBANK` aktiv.
 - Aktenschränke: `PFERDERASSEN`, `GLOSSAR`.
 - Recherchewissen bleibt von SEO, Kategorien, Textproduktion und Veröffentlichung getrennt.
-- Trust-Regeln bleiben verbindlich; Lücken bleiben offen.
+- Trust-Regeln bleiben verbindlich; offene Detailfelder bleiben offen.
 
 ## PFERDERASSEN – FORTSCHRITT
-- **187 reale Rassendatensätze** unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Großblock seit 175: Jutland Horse, Danish Warmblood, Danish Sport Pony, Knabstrupper, Frederiksborg Horse, Kinsky Horse, Pony of the Americas, Tersker, Leutstettener, German Classic Pony, Portuguese Sport Horse, Spanish Sport Horse.
-- Lewitzer und Menorquina Horse wurden als bereits vorhanden erkannt und nicht dupliziert.
-- Grundlage des Großblocks: aktuelle übernationale Liste anerkannter Equiden-Zuchtgesellschaften plus vorhandene Fachregeln.
-- Ab jetzt keine unsystematische Länderrecherche mehr; nächste Phase ist die dokumentierte internationale Masterlisten-Gegenprüfung.
-- **Kein Vollständigkeits-PASS** vor dieser Abschlussprüfung.
+- **200 reale Rassendatensätze** unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Internationale Gegenprüfung wurde über anerkannte europäische Studbook-Listen, nationale Register sowie nordamerikanische und australische Erhaltungs-/Zuchtregister ausgeweitet.
+- Abschlussblock seit 187: Colonial Spanish Horse, Galiceño, Mountain Pleasure Horse, Puerto Rican Paso Fino, Banker Horse, Australian Pony, Waler Horse, Auvergne-Pferd, Cheval Corse, Henson, Poney Landais, Vercors de Barraquand und Terceira-Pony.
+- Newfoundland Pony und Castillonnais waren bereits vorhanden und wurden nicht dupliziert.
+- Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben bewusst offene Grenzfälle bis zu einer starken Primärquelle.
+- **Aktive Grundrecherche beendet.** Weitere Rassen nur noch bedarfsbezogen oder bei belastbarem Neufund ergänzen.
 
 ## GLOSSAR – FORTSCHRITT
 7 erste Begriffe quellengebunden angelegt: Stockmaß, Widerrist, Ganasche, Röhrbein, Aalstrich, Kötenbehang, Zuchtbuch/Studbook.
 
 ## AKTIVE HAUPTFORSCHUNG
-- `PFERDERASSEN` → ABSCHLUSS-GEGENPRÜFUNG
+- `PFERDERASSEN` → BASISBESTAND ABGESCHLOSSEN
