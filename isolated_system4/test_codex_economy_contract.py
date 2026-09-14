@@ -62,7 +62,7 @@ class CodexEconomyContractTests(unittest.TestCase):
     def test_universal_batch_and_article_type_contract_is_hard_bound(self):
         task = (ROOT / 'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
         agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
-        target = (ROOT / 'ZIELVERTRAG_SYSTEM4_CODEX_STRICT_PIPELINE_20260913.md').read_text(encoding='utf-8')
+        target = (ROOT / 'ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md').read_text(encoding='utf-8')
         for text in (task, agents, target):
             self.assertNotIn('SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1', text)
             self.assertNotIn('SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS', text)
