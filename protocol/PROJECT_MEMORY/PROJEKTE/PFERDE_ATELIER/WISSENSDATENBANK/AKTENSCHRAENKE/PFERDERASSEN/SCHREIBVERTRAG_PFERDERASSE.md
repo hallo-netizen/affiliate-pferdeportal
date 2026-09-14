@@ -148,18 +148,31 @@ Wenn ein freigegebenes Linkpaket vorliegt:
 - maximal 3 interne Links pro Artikel;
 - wenn kein Linkpaket vorliegt, wird der Artikel ohne interne Links geschrieben.
 
-## 12. PRODUKTIONSAUSGABE – ZWINGEND DATEI
+## 12. PRODUKTIONSAUSGABE – ZWINGEND DATEI UND TOP-LEVEL-VERTRAG
 Die Produktionsausgabe eines Test- oder Serienbatches ist **zwingend eine echte maschinenlesbare `.json`-Datei**.
 
 **Nicht zulässig als Endausgabe:**
 - nur Chattext;
 - nur Markdown-/Writing-Block;
 - WordPress-XML;
-- direkte WordPress-Veröffentlichung.
+- direkte WordPress-Veröffentlichung;
+- ein nacktes JSON-Array auf Top-Level.
 
-Die fertigen Artikel werden in einer JSON-Datei als Array übergeben. Chattext darf höchstens eine kurze Begleitmeldung enthalten.
+Die JSON-Datei muss auf Top-Level **exakt ein Objekt** enthalten mit mindestens:
+- `batch_id`: nichtleere eindeutige Batch-Kennung;
+- `articles`: Array der Artikelobjekte.
 
-Pro Rasse müssen in der JSON-Datei mindestens diese Felder vorhanden sein:
+Schema:
+```json
+{
+  "batch_id": "pferderassen-testbatch-YYYYMMDD-01",
+  "articles": [
+    { "...": "..." }
+  ]
+}
+```
+
+Pro Artikel in `articles` müssen mindestens diese Felder vorhanden sein:
 - `rassename`
 - `slug`
 - `rassengruppe_slug`
@@ -186,7 +199,11 @@ Vor Ausgabe muss geprüft werden:
 - nur gebundene Links verwendet, falls Linkpaket vorhanden;
 - keine unnötige Wiederholung von `Rasse`/`Pferderasse`;
 - Ausgabe ist tatsächlich eine `.json`-Datei;
-- alle vorgeschriebenen JSON-Felder sind vorhanden.
+- Top-Level ist ein Objekt;
+- `batch_id` vorhanden und nicht leer;
+- `articles` vorhanden und Array;
+- bei Testbatch enthält `articles` exakt 5 Artikel;
+- alle vorgeschriebenen Artikelfelder sind vorhanden.
 
 Ein nicht rückführbarer Satz ist zu löschen oder zu reparieren.
 
@@ -208,5 +225,5 @@ Erste Produktionsprüfung: exakt 5 Rassen.
 Ziel:
 - Textqualität prüfen;
 - Regelbindung prüfen;
-- JSON-Dateiausgabe prüfen;
+- JSON-Dateiausgabe und Top-Level-Vertrag prüfen;
 - anschließend erst Serienproduktion freigeben.
