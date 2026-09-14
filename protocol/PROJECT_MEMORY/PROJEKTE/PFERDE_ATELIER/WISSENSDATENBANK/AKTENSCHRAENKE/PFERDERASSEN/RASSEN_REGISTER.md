@@ -1,78 +1,63 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-14
-STATUS: MASTERLISTE IM AUFBAU / 175 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 187 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
-
-Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrheit.
-
+Dieses Register ist Wegweiser und Bestandsübersicht, keine zweite Fachwahrheit.
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
-- fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
-- die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **175 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- fachlicher Status steht im jeweiligen JSON;
+- reale Dateiliste unter `DATEN/` ist technischer Bestandsnachweis;
+- Anzahl aktuell: **187 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
-## NEUESTER RECHERCHEBLOCK
+## NEUESTER GROSSBLOCK
+Seit 175 neu angelegt:
+- Jütländisches Pferd / Jutland Horse
+- Dänisches Warmblut / Danish Warmblood
+- Dänisches Sportpony / Danish Sport Pony
+- Knabstrupper
+- Frederiksborger / Frederiksborg Horse
+- Kinsky-Pferd / Kinsky Horse
+- Pony of the Americas
+- Tersker
+- Leutstettener
+- Deutsches Classic-Pony / German Classic Pony
+- Portugiesisches Sportpferd / Portuguese Sport Horse
+- Spanisches Sportpferd / Spanish Sport Horse
 
-Seit dem synchronisierten 172er-Stand neu angelegt:
+Dubletten sauber abgefangen:
+- Lewitzer war bereits vorhanden.
+- Menorquiner / Menorquina Horse war bereits vorhanden.
 
-- Rumänisches Halbblut-Kaltblut / Semigreu Românesc / Romanian Half Draft
-- Rumänisches Sportpferd / Cal de Sport Românesc / Romanian Sport Horse
-- Bucovina-Pferd / Cal de Bucovina / Bucovina Horse
-
-Wichtige Abgrenzung:
-- Romanian Half Draft wird als eigene rumänische Arbeits-/Zugpferderasse geführt und nicht mit Ardenner oder allgemeinen Kaltbluttypen zusammengelegt.
-- Romanian Sport Horse wird als eigene staatliche Sportpferderasse am Gestüt Jegălia geführt.
-- Bucovina Horse wird am staatlichen Gestüt Lucina separat vom Huzulen geführt; Detailstandard und Ursprungszuchtbuch bleiben nachzurecherchieren.
-- Norik muránskeho typu besitzt eigene slowakische Zuchtbuchführung und bleibt getrennt vom allgemeinen Noriker.
-- Latvian Heavy Warmblood bleibt Typ innerhalb Latvian Warmblood, kein zweiter Datensatz.
-
-## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
-
+## OFFENE KANDIDATEN
 - Altai
 - American Walking Pony
 - Andravida
 - Anglo-Kabarda
-- weitere internationale Rassen aus anerkannten nationalen/ursprünglichen Studbooks
+- weitere Treffer nur noch aus Abschluss-Gegenprüfung.
 
-Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über ausreichend starke Primär-/Verbands-/staatliche Quellen gebunden sind.
-
-## FESTE DUBLETTEN-/ABGRENZUNGSREGELN
-
-- Pottoka/Pottok → kein zweiter Datensatz ohne belastbare fachliche Trennung.
-- Hackney Horse/Hackney Pony → gemeinsamer Rassedatensatz mit Größen-Sektionen.
-- Traditional Irish Horse → Teilbestand des Irish Sport Horse, keine zweite Rasseakte.
-- Welsh A/B/C/D → getrennte Datensätze wegen eigenständiger offizieller Sektionen/Standards.
-- KWPN Dressur/Springen/Tuigpaard/Gelders paard → Zuchtrichtungen, keine künstlichen Rassenakten.
-- Percheron → kein zweiter britischer Datensatz.
+## FESTE ABGRENZUNGEN
+- Pottoka/Pottok → ein Datensatz ohne belastbare Trennung.
+- Hackney Horse/Hackney Pony → gemeinsamer Datensatz.
+- Traditional Irish Horse → Teilbestand Irish Sport Horse.
+- Welsh A/B/C/D → getrennte offizielle Sektionen.
+- KWPN-Richtungen → keine künstlichen Rassenakten.
 - Belgian Draught/Brabanter → ein Datensatz.
-- Falabella ≠ American Miniature Horse.
-- Cheval Miniature Français ≠ American Miniature Horse/Falabella.
-- International Miniature Pony ≠ American Miniature Horse/Falabella/Cheval Miniature Français.
-- Barbe ≠ Arabe-Barbe.
-- Azteca → registrierte Abstammung entscheidend.
+- Falabella ≠ American Miniature Horse ≠ Cheval Miniature Français ≠ International Miniature Pony.
 - Selle Français Originel → Label innerhalb Selle Français.
-- Crioulo Brasilien bleibt im vorhandenen Criollo-Datensatz, solange keine belastbare Trennung verlangt wird.
-- SWB Book/Registerklassen → keine getrennten Rassen.
 - Marshtackie → Synonym Florida Cracker Horse.
-- Polish Halfbred Horse → ältere/englische Benennung des Polish Sport Horse.
 - Estonian Arden → historische Bezeichnung Estonian Heavy Draught.
-- Hrvatski posavac ≠ slowenisches Posavje-Pferd.
-- Hrvatski športski konj ≠ Hrvatski toplokrvnjak.
 - Mangalarga Paulista ≠ Mangalarga Marchador.
 - Latvian Heavy Warmblood → Typ innerhalb Latvian Warmblood.
-- Puruca → vorerst keine zweite Rasseakte; Zugehörigkeit zum Marajoara-Komplex.
 - Norik muránskeho typu ≠ allgemeiner Noriker.
+- Lewitzer und Menorquiner im Großblock als bereits vorhanden erkannt.
 
 ## OFFENE NACHRECHERCHE
-
-Offene Felder bleiben sichtbar und werden nicht geraten. Typisch offen: Gewichte, Lebenserwartung, belastbare Gesundheits-/Genetikdaten, rassespezifische Haltung/Fütterung, Gefährdungsstatus und Detailstandards.
+Offene Felder bleiben sichtbar und werden nicht geraten. Typisch offen: Gewichte, Lebenserwartung, Gesundheit/Genetik, rassespezifische Haltung/Fütterung, Gefährdungsstatus und Detailstandards.
 
 ## REGELN
-
 - eine Rasse = ein Registerobjekt = ein Datensatz;
 - Synonyme erzeugen keinen zweiten Datensatz;
-- Ponys und Kleinpferde stehen im selben Bestand;
 - Farben, Typen, Registerklassen und Zuchtrichtungen werden nicht automatisch als Rasse behandelt;
 - ferale Populationen und Wild-Equiden ausdrücklich kennzeichnen;
-- **keinen Vollständigkeits-PASS**, bevor die internationale Masterliste gegen mehrere autoritative Gesamtquellen geprüft wurde.
+- **kein Vollständigkeits-PASS ohne dokumentierte internationale Masterlisten-Gegenprüfung**.
