@@ -1,127 +1,131 @@
 # GLOSSAR – FEHLERQUELLEN
 
-STAND: 2026-09-13
+STAND: 2026-09-14
 ROLLE: AUTORITATIVE FEHLERQUELLE FÜR DAS PFERDE-ATELIER-GLOSSAR
 
 ## GLOSSAR-FE-001 – Abstand oberhalb Hero zu groß
 STATUS: LIVE PASS / 2026-09-13
 
 NUTZER-READBACK:
-Der obere Abstand wurde real als korrekt bestätigt. Spätere technische Kandidaten dürfen diesen Punkt nicht regressieren.
+Der obere Abstand wurde real als korrekt bestätigt. Spätere Kandidaten dürfen diesen Punkt nicht regressieren.
 
 ## GLOSSAR-FE-002 – Hero-Bild nicht responsive
-STATUS: 0.2.8 LIVE FAIL / TECHNISCHE KORREKTUR AB 0.2.9 PASS / PFERDE-LIVE-READBACK NEUER STAND OFFEN
+STATUS: 0.2.8 LIVE FAIL / TECHNISCHE KORREKTUR SPÄTER PASS / PFERDE-LIVE-READBACK NEUER STAND OFFEN
 
-NUTZER-READBACK 0.2.8:
-„Bild höher geworden aber kein responsive.“
-
-TECHNISCHE ABSICHERUNG:
-Das Bild selbst ist Größenanker (`width:100%`, `height:auto`), ohne künstliche feste Bildhöhe. Der Browser unter Design 1.50.469 prüft responsive Geometrie.
-
-**Live nicht geschlossen.**
+Kein neuer Nutzer-Readback in diesem Chat. Nicht als LIVE PASS behaupten.
 
 ## GLOSSAR-FE-003 – AJAX-Suche Frontenddarstellung
-STATUS: 0.2.7 LIVE FAIL / SPÄTERE TECHNISCHE REGRESSION PASS / LIVE-NEUBEWERTUNG OFFEN
+STATUS: FRÜHER LIVE FAIL / SPÄTERE TECHNISCHE REGRESSION PASS / LIVE-NEUBEWERTUNG OFFEN
 
-AJAX-Eingabe, Treffer und Position wurden technisch grün gehalten. Kein neuer realer Nutzer-Fail hierzu dokumentiert.
+Kein neuer Nutzer-Readback in diesem Chat.
 
 ## GLOSSAR-ROUTE-004 – Einzelbegriffe / Einzelartikel öffnen leer
-STATUS: LIVE FAIL BESTÄTIGT / 0.2.10-rc11-native-single KUBIO-INTEGRATION PASS / PFERDE-LIVE-READBACK RC11 OFFEN
+STATUS: LIVE PASS / 2026-09-14
 
-### Echter Live-Befund nach rc7
+Historische Ursache:
+UGE hatte Singular-Requests über ein eigenes klassisches Full-Document-Single-Template gerendert und unter Kubio/FSE eine zweite Dokumenthülle erzeugt.
 
-Der Nutzer lieferte den echten HTML-Anfang einer leeren Einzelansicht. Darin begann innerhalb des bereits geöffneten Kubio-`<head>` eine zweite komplette Dokumenthülle:
+Technische Korrektur:
+Single-Template-Übernahme entfernen; `uge_term` nativ durch WordPress/Kubio rendern lassen.
 
-- erstes `<!DOCTYPE html>` / `<html id="kubio">` / `<head>`;
-- danach erneut `<!DOCTYPE html>` / `<html id="kubio">` / `<head>`.
+ENTSCHEIDENDER LIVE-BELEG:
+Nutzerreadback dieses Chats: **„artikelanzeige pass“**.
 
-Damit war der frühere rc7-Klickbarkeitsbeweis für den echten Pferde-Livefall widerlegt.
-
-### Root Cause
-
-UGE ersetzte Singular-Requests über `template_include` durch `templates/single-uge-term.php`. Dieses klassische PHP-Template erzeugte mit `get_header()` / `get_footer()` eine eigene Dokumenthülle. Unter Kubio/FSE existiert die äußere Seitenhülle bereits. Der alte rc7-Test prüfte Artikelinhalt und Klickbarkeit unter rekonstruiertem Design + Loop-Poison, aber nicht die Dokumenthülle auf exakt einmal `DOCTYPE/html/head`.
-
-### Korrektur rc11
-
-`0.2.10-rc11-native-single` entfernt ausschließlich die UGE-Single-Template-Übernahme. Öffentliche `uge_term`-Singles werden nativ durch WordPress/Kubio gerendert. Taxonomie-/Kategorie-Template, Routing und übrige rc7-Logik bleiben erhalten.
-
-Hardtest Run `34766187415` → SUCCESS.
-
-Job `103747455702`:
-- echtes WordPress-Docker;
-- Kubio-Theme aktiv;
-- Kubio-Plugin aktiv;
-- Pferde-Designplugin 1.50.469 rekonstruiert und aktiv;
-- veröffentlichter Hufbein-Testbegriff → HTTP 200 + Inhalt sichtbar;
-- exakt 1× DOCTYPE, 1× html, 1× head;
-- Draft → 404 und Inhalt nicht sichtbar;
-- unbekannter Begriff → 404;
-- normaler WordPress-Beitrag unverändert 200;
-- Glossar-Taxonomie unverändert 200.
-
-Marker:
-- `UGE0210RC11_KUBIO_PUBLISHED_SINGLE_VISIBLE_PASS`
-- `UGE0210RC11_KUBIO_SINGLE_DOCUMENT_SHELL_EXACTLY_ONCE_PASS`
-- `UGE0210RC11_DRAFT_AND_MISSING_NEGATIVE_PASS`
-- `UGE0210RC11_UNRELATED_POST_REGRESSION_PASS`
-- `UGE0210RC11_TAXONOMY_UNCHANGED_PASS`
-
-**Livefehler bleibt offen, bis genau rc11 real im Pferde Atelier installiert und angeklickt wurde.**
+Damit ist dieser Routing-/Öffnungsfehler real geschlossen. Den funktionierenden Single-Routingweg nicht erneut umbauen.
 
 ## GLOSSAR-ROUTE-005 – Kategorien nicht dem Glossar-Design angepasst
-STATUS: 0.2.8 LIVE FAIL / KORRIGIERTE ACCEPTANCE TECHNISCH PASS / PFERDE-LIVE OFFEN
+STATUS: FRÜHER LIVE FAIL / TECHNISCHE KORREKTUR VORHANDEN / PFERDE-LIVE OFFEN
 
-Verbindlich ist: eigener Kategorieinhalt plus vollständiger Glossar-Rahmen mit Hero, Suche/A–Z und Icon-Navigation. Während der aktuellen Single-Reparatur wird dieser Punkt nicht verändert.
+Verbindlich bleibt: eigener Kategorieinhalt plus vollständiger Glossar-Rahmen mit Hero, Suche/A–Z und Icon-Navigation. In diesem Chat kein neuer finaler Live-Readback.
 
 ## GLOSSAR-FE-006 – Echter Design-Integrationstest
-STATUS: RC7-TESTLÜCKE FÜR FSE-SINGLE ERKANNT / RC11 UM KUBIO/FSE-INTEGRATION ERWEITERT
+STATUS: TECHNISCHE TESTLÜCKE HISTORISCH ERKANNT / SINGLE-ROUTING LIVE PASS / NEUES SINGLE-DESIGN NOCH LIVE OFFEN
 
-Design-Hauptcode 1.50.469 SHA-256:
-`580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`.
-
-rc11 prüft zusätzlich echtes Kubio-Theme + Kubio-Plugin und die Dokumenthülle auf exakt einmal `DOCTYPE/html/head`.
+Lehre bleibt verbindlich: kein LIVE PASS aus Mock-/Stub-/lokaler Codeansicht ableiten.
 
 ## GLOSSAR-REG-007 – Direktrouting zerstörte Draft-Preview
-STATUS: 0.2.9 RC1 ROT / REPARIERT / REGRESSION PASS
+STATUS: REPARIERT / REGRESSION PASS
 
-Native Preview-Query-Parameter bleiben ausgenommen. rc11 ändert diesen Routingteil nicht.
+Kein neuer Fail in diesem Chat.
 
 ## GLOSSAR-PROD-008 – Cluster konnte nicht vollständig veröffentlichen
-STATUS: 0.2.10-rc6 FAIL / 0.2.10-rc7 REPARIERT / TECHNISCH PASS
+STATUS: REPARIERT / TECHNISCH PASS
 
-Die `primary_category_id`-Bindung vor Veröffentlichung bleibt in rc11 unverändert erhalten.
+Die primäre Portal-Kategorie muss vor Veröffentlichung gültig gebunden sein.
 
-## GLOSSAR-LAYOUT-009 – Breadcrumb-Achse im echten Design
-STATUS: RC7 TECHNISCH PASS / RC11 NICHT MATERIELL GEÄNDERT
+## GLOSSAR-LAYOUT-009 – Breadcrumb-Achse im Glossar
+STATUS: KATEGORIE-/LISTENSTÄNDE TEILWEISE PASS / SINGLE-BREADCRUMB AKTUELL LIVE FAIL SIEHE 011
 
-Die rc11-Reparatur betrifft ausschließlich die Single-Template-Übernahme.
+Der neue Single-Fehler wird nicht hier dupliziert; maßgeblich ist `GLOSSAR-SINGLE-011`.
 
 ## GLOSSAR-PKG-010 – Gated Übergabepaket
-STATUS: RC11 TECHNISCH PASS / LIVE OFFEN
+STATUS: ALTER RC-STAND HISTORISCH TECHNISCH PASS / AKTUELLE PLUGINARTEFAKT-SYNCHRONISIERUNG BLOCKED
 
-Run `34766187415`, Package Job `103747644208` → SUCCESS.
+Der alte isolierte MOD-008-Stand im PLUGINS-Büro darf nicht als heutiger Glossar-Release interpretiert werden. Aktuelle lokale Kandidaten 1.2.1 / 1.50.489 sind noch nicht autoritativ quell-/releasegebunden und dürfen deshalb `CURRENT.zip` noch nicht ersetzen.
 
-Installierbares Paket:
-`universal-glossary-engine-0.2.10-rc11-native-single.zip`
+## GLOSSAR-SINGLE-011 – Einzelansicht: Links, rechte Box, Icons, Breadcrumbs
+STATUS: LIVE FAIL / LOKALE NACHBESSERUNG TECHNISCH PASS / LIVE-READBACK OFFEN
 
-Innerer Plugin-ZIP SHA-256:
-`45c8f4d2a01883b6bb548c8db2db8bf9b19f5ddc80cb346b647d992fca7f748f`
+### Realer Nutzerbefund
 
-Actions-Artefakt-ID:
-`10320871739`
+Nach dem Single-Design-Umbau wurden real gemeldet:
 
-Outer artifact SHA-256:
-`8ced9d219a6a38d81ab9be50fe146dc8a5acfa6a8e58a0154f5e84410d450434`
+1. verwandte Begriffe sind noch als Links im Fließtext vorhanden;
+2. `Stockmaß` ist doppelt verlinkt;
+3. die rechte Box `Verwandte Begriffe` fehlt bzw. zeigt die Beziehungen nicht korrekt;
+4. die vorgesehenen Icons fehlen;
+5. die Breadcrumbs stimmen nicht.
 
-Nach Download wurde der innere ZIP erneut auf identischen SHA, ZIP-Lesbarkeit, Version und die beabsichtigte Single-/Taxonomie-Grenze geprüft → PASS.
+### Verbindliches Soll
+
+- Breadcrumb Single: `Startseite > Glossar > Oberbereich > Begriff`;
+- Design ausschließlich auf `uge_term`, normale Artikel unverändert;
+- Kurzdefinition sichtbar;
+- rechte Box oben auf Desktop bündig mit Kurzdefinitionsbalken;
+- Box `Verwandte Begriffe` mit echten Links und Icons;
+- Box `Mehr zum Thema` mit passender Portal-Kategorie und Icon;
+- verwandte Begriffe im Fließtext **nicht** zusätzlich verlinken;
+- dasselbe Linkziel im gesamten Begriff nicht doppelt setzen;
+- bevorzugter Fließtext-Link auf passende übergeordnete Portal-Kategorie, Journal nur ersatzweise.
+
+Verbindliche Produktionsquelle:
+`TEXT_UND_LINKREGELN.md`.
+
+### Lokaler Nachbesserungsstand
+
+Glossar Core / Engine `1.2.1`:
+- 14 Bestandsbegriffe 150–200 Wörter;
+- exakt 1 Fließtext-Link je Begriff;
+- verwandte Begriffe separat gespeichert;
+- IDs beim Überschreiben erhalten;
+- Fremdkonflikt fail-closed;
+- normaler Post unverändert;
+- Marker: `CORE_121_POS_NEG_PASS`, `CORE_121_EXISTING_IDS_OVERWRITE_POS_NEG_PASS`, `CORE_121_FOREIGN_FAILCLOSED_AND_NORMAL_POST_NEG_PASS`.
+
+Design `1.50.489`:
+- Browser 1200/900/720/500;
+- Breadcrumb korrekt;
+- falscher globaler Breadcrumb auf `uge_term` verborgen;
+- 2 Sideboxen + mindestens 3 Icons;
+- Desktop-Ausrichtung bündig;
+- kein Overflow;
+- Marker: `DESIGN_150489_POS_NEG_PASS`.
+
+### PASS-Grenze
+
+**Noch nicht LIVE PASS.**
+
+Live schließen erst, wenn exakt quellgebundene Paketbytes installiert wurden und real insbesondere `Bandmaß` beweist:
+- `Stockmaß` im Fließtext als verwandter Link 0×;
+- `Stockmaß` in der rechten Verwandt-Box exakt 1×;
+- Portal-Kategorielink exakt 1×;
+- Breadcrumb korrekt;
+- Icons sichtbar;
+- normaler Artikel unverändert.
 
 ## ÜBERGREIFENDER STATUS
 
-- 0.2.6 / 0.2.7 / 0.2.8: historisch bzw. LIVE FAIL; nicht verwenden.
-- 0.2.9: früherer technischer Kandidat; nicht CURRENT.
-- 0.2.10-rc1 bis rc6: Entwicklungs-/Diagnosestufen; nicht ausgeben.
-- 0.2.10-rc7: technisch grün, aber realer Single-Livefehler danach weiter vorhanden; als aktueller Kandidat abgelöst.
-- rc8 / rc10 aus dem Chat: keine autoritativen Übergabestände; nicht verwenden.
-- 0.2.10-rc11-native-single: **KUBIO/WORDPRESS POSITIV-/NEGATIV-/REGRESSION + PAKET PASS / PFERDE-LIVE OFFEN.**
-
-Die realen Nutzerfehler FE-002, ROUTE-004 und ROUTE-005 werden ausschließlich durch realen Nutzer-Readback geschlossen. Aktuell wird nur ROUTE-004 bearbeitet.
+- Einzelartikel öffnen: LIVE PASS.
+- Aktuelle aktive Fehlerarbeit: ausschließlich `GLOSSAR-SINGLE-011`.
+- Neue Begriffe erst aus frisch nachgewiesenen `GEPRUEFT`-WDB-Quellen.
+- Keine lokale/technische Prüfung als LIVE PASS ausgeben.
