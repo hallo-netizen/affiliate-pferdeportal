@@ -1,64 +1,97 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: EINZELARTIKEL LIVE PASS / 0 FLIESSTEXTLINKS LIVE PASS / DUENNE OCKERLINIE LIVE PASS / BREADCRUMB-TOPABSTAND + HERO-UEBERGANG/AUSSCHNITT LIVE FAIL / KACHELKLICK LIVE-NACHPRUEFUNG OFFEN / DESIGN 1.50.492 LOKAL POSITIV+NEGATIV PASS
+STATUS: LIVE TEILPASS / BREADCRUMB SINGLE LIVE FAIL / DESIGN 1.50.493 LOKAL HART PASS / AUTOMATION CORE 1.3.0 LOKAL HART PASS, SANDBOX
 
-## Belastbarer aktueller Stand
+## LIVE bestätigt – nicht regressieren
 
-- Arbeitsbranch: `hobbyroom/glossar-livefail-red-green-20260913`.
-- Einzelbegriffe öffnen real: **LIVE PASS**.
-- Glossar-Fließtext 0 Links: **LIVE PASS**.
-- rechte Ocker-Oberkante dünn: **LIVE PASS**.
-- Diese bestätigten PASS-Punkte nicht erneut verändern.
+- Einzelbegriffe öffnen: **PASS**.
+- Glossar-Fließtext: **0 Links – PASS**.
+- rechte Ocker-Oberkante: **dünn – PASS**.
+- Breadcrumb-Inhalt bei `Bandmaß`: korrekt `Startseite > Glossar > Pferd & Biologie > Bandmaß`; nur Position/Abstand ist LIVE noch falsch.
 
-## Aktuell offen – Nutzerreadback 2026-09-14 nach 1.50.491
+## Breadcrumb – tatsächliche Ursache
 
-1. Breadcrumb-Inhalt ist korrekt; **Abstand nach oben ist weiterhin falsch/zu groß**. Nutzerpflicht: an den anderen Seiten orientieren und auf allen Glossarseiten exakt dieselbe zentrale Abstandsteuerung verwenden.
-2. Hero: **weicher Übergang zwischen Fläche und Bild fehlt** und Motiv muss **noch weiter herausgezoomt** werden.
-3. Ganze Begriffskachel wurde in 1.50.491 technisch als Link umgesetzt, hat aber noch keinen ausdrücklichen LIVE-PASS des Nutzers und bleibt bis Readback in Nachprüfung.
+Die bisherigen 18-px-/Variable-Fixes griffen am falschen Punkt. Der Glossar-Single erzeugte seinen Breadcrumb **innerhalb des eigenen Content-/`.ast-container`-Pfads**, während normale Seiten den universellen Breadcrumb direkt unter `.site-content` mounten. Deshalb konnte der Single trotz gleicher CSS-Variable sichtbar einen anderen Abstand haben.
 
-## Nachgewiesene Ursache Breadcrumb-Abstand
+### Design-Kandidat 1.50.493
 
-Der Glossar-Code 1.50.491 enthielt weiterhin eine eigene feste Regel `padding-top:18px` für `category-glossar`, `tax-uge_group` und `single-uge_term`. Normale Seiten/Kategorien verwenden dagegen zentral `var(--pftk-navigation-content-gap)`. Dadurch konnte Glossar nicht garantiert exakt denselben real konfigurierten Abstand wie andere Seiten übernehmen.
+Paket: `PFERDE_ATELIER_DESIGN_V1.50.493_BREADCRUMB_SAME_PATH_INSTALLIEREN.zip`
 
-## Lokaler Design-Kandidat 1.50.492
+SHA-256: `067e11f7d7f54ce22206955297566fbb78fdc9abd464075ebee4b82e7aed2a5d`
 
-Paket: `PFERDE_ATELIER_DESIGN_V1.50.492_GLOSSAR_SPACING_HERO_HARDFIX_INSTALLIEREN.zip`
+Fix:
+- `uge_term` wird nicht mehr vom universellen Breadcrumb-Payload ausgeschlossen;
+- `uge_term` benutzt denselben universellen Breadcrumb-DOM-/CSS-Pfad wie normale Seiten/Kategorien;
+- eigener verschachtelter Single-Breadcrumb wird nicht mehr ausgegeben;
+- keine neue Glossar-Pixel-Sonderregel als Ersatz.
 
-SHA-256: `7a016fda183874160fc303e3c6279adc3fec6475cc60cd617159e20913c42161`
+Hart lokal:
+- PHP-Lint PASS;
+- gleicher `.site-content`-/Container-/Mounted-Reset-Pfad PASS;
+- Kette `Glossar > Oberbereich > Begriff` PASS;
+- NEGATIV: alten `uge_term`-Guard wieder eingebaut → Test rot PASS;
+- NEGATIV: verschachtelten Single-Breadcrumb wieder eingebaut → Test rot PASS;
+- Marker `DESIGN_150493_BREADCRUMB_SAME_PATH_POS_NEG_PASS`;
+- ZIP/Version PASS.
 
-Geändert:
-- Glossar-Startseite, `uge_group` und `uge_term` verwenden jetzt **dieselbe zentrale Variable `--pftk-navigation-content-gap` wie normale Seiten/Kategorien**; keine eigene 18-px-Sonderregel mehr.
-- Hero wird weiter herausgezoomt: Desktop-Skalierung `.86`, mobil `.82`, zusätzlich kleinerer Medienbereich.
-- weicher Bild/Fläche-Übergang über CSS-Maskenverlauf plus Creme-Overlay.
-- komplette Begriffskachel bleibt vollständiger `<a>`-Link.
-- 0-Link-Endschranke und 2-px-Ockerlinie bleiben unverändert.
+## Core 1.3.0 – dynamischer Glossarpool + dauerhafte Sandbox
 
-Hart lokal ausgeführt:
-- PHP-Lint → PASS.
-- Positivvertrag: zentrale Abstandvariable bei normalen Seiten **und** allen drei Glossarkontexten → PASS.
-- Negativvertrag: absichtlich alte `18px`-Sonderregel wieder eingesetzt → Test wird korrekt rot → PASS.
-- Hero-Positivvertrag: Zoom-out + Maskenverlauf vorhanden → PASS.
-- Hero-Negativvertrag: Maskenverlauf absichtlich entfernt → Test wird korrekt rot → PASS.
-- Geometriecheck Asset 1400×560: vorheriger Vollhöhen-Contain ca. 595×238; Kandidat ca. 440×176 → weiter herausgezoomt → PASS.
-- komplette Kachel als Anchor, 0-Link-Guard und 2-px-Ockerlinie als Regression geprüft → PASS.
-- ZIP-Lesetest → PASS; Version 1.50.492 → PASS.
+Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.0_AUTOMATION_SANDBOX_INSTALLIEREN.zip`
 
-Marker: `DESIGN_150492_POS_NEG_PASS`.
+SHA-256: `b408756c63ab719fcf82131a6dd297c261e36817d957c69ceb9644d7ed8fd2a4`
 
-## Core / neue Beiträge
+Enthalten:
+- persistenter Kandidatenpool;
+- bestehender PSTE-Retained-/Planning-Pool wird **lesend** und begrenzt eingelesen; keine zweite DataForSEO-Pipeline;
+- zusätzliche Artikel-Kandidaten über `_uge_glossary_candidates`;
+- Dubletten-/Synonymprüfung;
+- Kannibalisierungs-Quarantäne;
+- Quellen-Evidence über vorhandene `URF_Core::sources()` sofern konfiguriert;
+- Research-/Textpaket-Gate fail-closed;
+- neue und rückwirkende Relationen;
+- bestehende Glossarbeiträge werden per gleicher ID aktualisiert, nicht dupliziert;
+- Snapshot → Write → Readback → bei Fehler Quarantäne/Rollback;
+- dauerhafte WordPress-Sandbox unter `Glossar -> Automation`;
+- manuelle Aktionen: Pool aktualisieren / Sandbox testen / Automatiklauf;
+- WP-Cron: stündlich, 2× täglich oder täglich;
+- Standardbatch 25, technisch 1..100 pro Lauf;
+- automatische Veröffentlichung nur wenn **ARMED + Auto-Publish AN**; Standard ist SANDBOX/AUS;
+- REST-Status und Research-Package-Intake für einen externen Text-/Research-Worker.
 
-Core-Kandidat `1.2.3` mit `Aalstrich` (Bestand überschreiben) und `Zuchtbuch` (neu), beide aus WDB `GEPRUEFT`, bleibt unverändert. Kein neuer fachlicher Inhalt aus diesem Design-Fix ableiten.
+Hart lokal:
+- Core PHP-Lint PASS;
+- 16 gebundene Start-/Bestandsbegriffe: 150–200 Wörter, 0 Bodylinks, Relationsvertrag PASS;
+- bestehende Glossar-ID erhalten; normaler WP-Post im Negativtest unverändert;
+- Dublette, Synonym, Kannibalisierung, fehlende Quelle, Bodylink → korrekt blockiert;
+- Write-Failure → Quarantäne;
+- Readback-Korruption → Quarantäne + Rollback;
+- Sandbox schreibt nicht in Produktion;
+- Cron-Anlage PASS;
+- **50 gültige Glossarbeiträge in EINEM simulierten WordPress-Publish-Lauf: 50/50 PASS**.
+
+Marker:
+- `CORE_130_PACK16_POS_NEG_PASS`
+- `AUTOMATION_130_STATIC_POS_NEG_PASS`
+- `AUTOMATION_130_POS_NEG_PASS`
+- `AUTOMATION_130_BATCH50_PASS`
+
+## Automationsgrenze – nicht raten
+
+Kandidatenfindung, Pool, Gates, Relationen, WordPress-Write/Readback/Rollback und automatische Veröffentlichung sind implementiert und lokal testbar.
+
+Für **vollautomatische fachliche Recherche + Textformulierung** fehlt noch eine nachgewiesene direkt aufrufbare Verbindung vom WordPress-Glossar zur aktuellen externen Textmaschine/System-4/Codex-Laufzeit. Deshalb erfindet Core 1.3.0 hier keinen Worker: ohne gültiges Research-/Textpaket bleibt ein Kandidat fail-closed in Recherche/Wartezustand. Der Übergabepunkt ist vorbereitet (`uge_automation_research_package` bzw. REST `/wp-json/uge/v1/automation/package`).
 
 ## Harte Grenze
 
-**1.50.492 ist lokal geprüft, aber noch kein LIVE PASS.** Erst Installation und realer Readback dürfen Breadcrumb-Abstand/Hero schließen.
+**Kein LIVE-PASS für 1.3.0 oder 1.50.493 vor Installation und realem Readback.** Sandbox bleibt bis zur Abnahme unscharf; automatische Veröffentlichung nicht aktivieren.
 
-## Nächster Schritt
+## Nächster realer Readback
 
-1. Design `1.50.492` über 1.50.491 installieren.
-2. Glossar-Startseite gegen eine normale Seite/Kategorie vergleichen: Navigationsunterkante → Breadcrumb muss sichtbar denselben Abstand haben.
-3. zusätzlich `uge_group` und `Bandmaß` prüfen: derselbe Abstand.
-4. Hero prüfen: weicher Übergang links und deutlich mehr Gesamtmotiv.
-5. ganze Begriffskachel außerhalb von `Zum Begriff` anklicken.
-6. Regression: 0 Fließtextlinks und dünne Ockerlinie bleiben PASS.
+1. Core `1.3.0` installieren.
+2. Design `1.50.493` installieren.
+3. `Bandmaß` öffnen: Breadcrumb muss jetzt über denselben Seitenpfad wie normale Seiten stehen.
+4. `Glossar -> Automation` öffnen: Sandbox muss jederzeit erreichbar sein.
+5. `Sandbox hart testen` ausführen; `production_write_performed=false` muss bleiben.
+6. `Pool jetzt aktualisieren`: PSTE-/Artikel-Kandidaten sichtbar, keine Veröffentlichung.
+7. Erst nach realem PASS Produktionsmodus separat freigeben.
