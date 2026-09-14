@@ -2,7 +2,7 @@ from __future__ import annotations
 import hashlib, json, re, subprocess, sys
 from pathlib import Path
 
-import root_supervisor_bridge, worker_dispatch
+import chat_start_gate, root_supervisor_bridge, worker_dispatch
 
 SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 HERE = Path(__file__).resolve().parent
@@ -36,6 +36,7 @@ CRITICAL_PATHS = (
     'isolated_system4/root_supervisor_bridge.py',
     'isolated_system4/worker_dispatch.py',
     'isolated_system4/source_acquisition.py',
+    'isolated_system4/chat_start_gate.py',
     'isolated_system4/machine_point0.py',
 )
 
@@ -146,6 +147,14 @@ def _start_point0(point0: Path, workspace: Path, actual_manifest: str, item_inde
     actual_head=_git('rev-parse','--verify','HEAD')
     if not isinstance(item_index,int) or isinstance(item_index,bool) or item_index < 0:
         raise EntryFail('ROOT_POINT0_ITEM_INDEX_INVALID')
+    try:
+        point0_input=json.loads(point0.read_text(encoding='utf-8'))
+        if not isinstance(point0_input,dict): raise EntryFail('ROOT_POINT0_OBJECT_REQUIRED')
+        chat_start_gate.validate(point0_input.get('production_snapshot'))
+    except EntryFail:
+        raise
+    except Exception as exc:
+        raise EntryFail('ROOT_CHAT_START_BIND_FAIL:'+str(exc)) from exc
     try:
         receipt=root_supervisor_bridge.bind_point0(point0,workspace,actual_manifest=actual_manifest,actual_head=actual_head,item_index=item_index)
     except Exception as exc:
