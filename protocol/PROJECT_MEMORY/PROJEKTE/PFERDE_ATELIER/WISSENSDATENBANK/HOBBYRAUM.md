@@ -27,23 +27,24 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **162 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- **168 reale Rassendatensätze** unter `DATEN/` vorhanden;
 - größere Rechercheblöcke sind zulässig, solange jede Rasse einzeln auf formalen Status und Dubletten geprüft wird;
-- neu seit 157: Kroatisches Kaltblut, Kroatischer Posavac, Kroatisches Sportpferd, Kroatisches Warmblut und Međimurje-Pferd;
-- Lipizzaner und Gidrán als bereits vorhanden erkannt und nicht dupliziert;
-- staatliche kroatische Quellen als Primärbindung genutzt;
+- neu seit 162: Pantaneiro, Mangalarga Paulista, Campeiro, Marajoara, Latgalischer Traber und Lettischer Ardenner;
+- Mangalarga Paulista klar vom Mangalarga Marchador getrennt;
+- Latvian Heavy Warmblood als Typ innerhalb Latvian Warmblood erkannt und nicht dupliziert;
+- Puruca vorerst nicht als zweite Rasseakte angelegt;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
 ## NEXT ACTION
 
-1. Rassenrecherche in größeren belastbaren Länder-/Registerblöcken fortsetzen;
-2. Rumänien und Slowakei als nächste Blöcke prüfen;
+1. noch 1–2 größere internationale Abschlussblöcke recherchieren;
+2. Rumänien/Slowakei und weitere süd-/osteuropäische Register gegen vorhandenen Bestand prüfen;
 3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
-4. Mangalarga Paulista und Pantaneiro gegen offizielle brasilianische Register prüfen;
-5. Latvian Heavy Warmblood als getrennten staatlich geführten Kandidaten prüfen;
-6. Synonyme, Sektionen, Labels und Zuchtrichtungen vor Datensatzanlage auf Dubletten prüfen;
-7. keine Vollständigkeit behaupten, bevor die internationale Masterliste gegen mehrere autoritative Quellen geprüft ist.
+4. danach internationale Masterlistenprüfung gegen mehrere autoritative Gesamtquellen durchführen;
+5. wenn diese Prüfung überwiegend Dubletten/Typen statt echter neuer Rassen liefert, aktive Grundrecherche beenden und nur noch bedarfsbezogen ergänzen;
+6. Synonyme, Sektionen, Labels und Zuchtrichtungen vor jeder Datensatzanlage weiter auf Dubletten prüfen;
+7. keinen Vollständigkeits-PASS ohne Abschlussprüfung behaupten.
 
 ## KONTROLLPUNKTE
 
