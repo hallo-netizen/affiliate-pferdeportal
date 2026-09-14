@@ -92,3 +92,16 @@ Die Produktionswahrheit `OFFEN / IN ARBEIT / NACHPRÜFUNG / FERTIG / GESPERRT` l
 `BEGRIFFSREGISTER.md`
 
 Kein zweites paralleles Erledigt-/Unerledigt-Register anlegen.
+
+## 10. Portal-Kategorien haben SEO-Vorrang vor neuen Glossarbegriffen
+
+Für neue Glossarkandidaten gilt verbindlich:
+
+1. **zuerst gegen die echten WordPress-Portal-Kategorien prüfen**;
+2. stimmt der normalisierte Begriff mit einer Kategorie überein, einschließlich gebundener Singular/Plural-Normalisierung wie `Regendecke` ↔ `Regendecken`, wird **kein neuer Glossarbeitrag** erzeugt;
+3. Status des Kandidaten: `AUSGESCHLOSSEN_KATEGORIE`;
+4. danach keine Fachrecherche, kein Textpaket und keine Veröffentlichung für diesen Kandidaten;
+5. erst Kandidaten ohne Kategorie-Treffer laufen weiter in Glossar-Dublette und Artikel-/Seiten-Kannibalisierung;
+6. bestehende bereits geprüfte/veröffentlichte Glossarbeiträge werden durch diese neue Kandidatenregel **nicht pauschal gelöscht oder umgeschrieben**.
+
+SEO-Grund: Die Portal-Kategorieseite ist in diesem Fall die bevorzugte Zielseite und soll nicht durch einen zusätzlich neu erzeugten Glossarbeitrag konkurrenziert werden.
