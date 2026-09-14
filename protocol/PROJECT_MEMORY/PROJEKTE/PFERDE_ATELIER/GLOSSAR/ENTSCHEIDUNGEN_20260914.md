@@ -30,7 +30,7 @@ ROLLE: Dauerhafte lokale WAS/WARUM-Entscheidungen; keine zweite CURRENT-/Fehlerw
 
 ## GLOSSAR-DEC-005 – Öffnungs-/Routingweg nach LIVE PASS nicht erneut umbauen
 
-**WAS:** nachdem der Nutzer `artikelanzeige pass` bestätigt hat, gilt der Öffnungs-/Single-Routingweg als funktionierend und ist nicht Teil der aktuellen Layout-/Linkreparatur.
+**WAS:** nachdem der Nutzer `artikelanzeige pass` bestätigt hat, gilt der Öffnungs-/Single-Routingweg als funktionierend und ist nicht Teil unabhängiger Layout-/Inhaltsreparaturen.
 
 **WARUM:** bestätigten funktionierenden Bereich nicht bei einer unabhängigen Design-/Inhaltsreparatur erneut gefährden.
 
@@ -42,12 +42,38 @@ ROLLE: Dauerhafte lokale WAS/WARUM-Entscheidungen; keine zweite CURRENT-/Fehlerw
 
 ## GLOSSAR-DEC-007 – Single-Breadcrumb nur einmal erzeugen
 
-**WAS:** auf `uge_term` wird der globale Universal-Breadcrumb nicht erzeugt; die Single-Ansicht rendert genau ihre eigene Kette `Startseite > Glossar > Oberbereich > Begriff`.
+**WAS:** die Glossar-Singleansicht darf nur eine Breadcrumb-Kette ausgeben; finaler Pfad muss dem gebundenen Glossar-/Journal-Designvertrag entsprechen.
 
-**WARUM:** der reale Screenshot zeigte trotz früherem CSS-Ausblenden weiterhin eine falsche/doppelte Breadcrumb-Kette. Serverseitiges Nicht-Erzeugen ist robuster als bloßes Verstecken.
+**WARUM:** doppelte/verschachtelte Breadcrumbpfade waren real fehleranfällig. Serverseitig eindeutiger Pfad ist robuster als CSS-Verstecken.
 
 ## GLOSSAR-DEC-008 – Rechte Ocker-Oberkante dünner
 
 **WAS:** die obere Ockerlinie der rechten Single-Boxen wird von 4 px auf 2 px reduziert.
 
 **WARUM:** direkte Nutzerentscheidung 2026-09-14; sonstige Boxengeometrie bleibt unverändert.
+
+## GLOSSAR-DEC-009 – Automatischer Text-/Discovery-Produktionsweg wird abgelöst
+
+**WAS:** Der bisherige Versuch, Kandidatenfindung, Research/Textpaket, Worker-Kette und Veröffentlichung als vollautomatische Glossar-Produktion im Core zu betreiben, ist **nicht mehr der verbindliche Produktionsweg**.
+
+**NEUER WEG:**
+`geprüfter Glossar-Aktenschrank -> Chat erstellt fertige Glossartexte nach festen Regeln -> JSON-Batch -> Glossar-Importer prüft -> WordPress-Draft -> definierter Readback`.
+
+**WARUM:** Der bisherige Automationsbau wurde technisch komplex, ohne dass die eigentliche Texterstellung verlässlich als vollständig geschlossene Strecke eingebunden war. Damit entstand hoher Aufwand ohne den gewünschten einfachen Produktionsnutzen. Der bereits bewährte Pferderassen-Manager zeigt den einfacheren kontrollierbaren Weg.
+
+**GRENZE:** Die bisherigen 1.3.5–1.3.8 Automations-/Worker-Entwicklungen bleiben als technische Historie erhalten, sind aber keine aktive NEXT ACTION und keine aktuelle Produktionsautorität.
+
+## GLOSSAR-DEC-010 – Zentrale Glossar-Inhalte im WDB-Aktenschrank
+
+**WAS:** Fachbegriffe, Definitionen, Relationen und belegte Fachdaten bleiben zentral im bereits vorhandenen Aktenschrank
+`../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
+
+Die späteren WordPress-JSON-Batches sind Transport-/Produktionspakete, keine zweite Fachwahrheit.
+
+**WARUM:** analog zu den Pferderassen soll Inhalt zentral versionierbar und unabhängig von WordPress erhalten bleiben. WordPress ist Ausgabesystem, nicht einzige Wissensquelle.
+
+## GLOSSAR-DEC-011 – Glossar-Plugin wird importerorientiert wie der Pferderassen-Manager
+
+**WAS:** Der nächste Glossar-Pluginumbau soll sich konzeptionell am `Pferde Atelier – Pferderassen Manager 0.2.0` orientieren: eigener Bestand, JSON-Validierung, Draft-Write, Readback, Rollback/fail-closed; kein Auto-Publish als Normalweg.
+
+**WARUM:** ein klarer, kontrollierter JSON->Draft-Weg ist einfacher prüfbar, nachvollziehbarer und vermeidet die fehleranfällige Worker-/Cron-/Loopback-Komplexität für die eigentliche Textproduktion.
