@@ -19,6 +19,12 @@ Scope: System 4 implementation only under `isolated_system4/**`.
 - The writer may not alter immutable metadata, choose a free route, enable publish, bypass a required checker, or create a per-article FULL production release.
 - For a batch run, all input items must reach a terminal accepted state before `batch_gate` may collect the batch. Processing may be sequential or bounded internally; no item may be silently dropped, duplicated or replaced.
 
+## SINGLE-BUTTON START-TO-FILE ACCEPTANCE HARD RULE
+- A final System-4 acceptance test MUST begin at one external start command and run the same bound production road through Point-0, Root, Supervisor, `codex_entry.py worker-start`, phase-specific worker submissions, machine-bound Context/Authoring Contract, real LanguageTool 6.8, real PPM 6.7.9, Batch, V2 Handoff, inline unpack and byte-exact reconstruction.
+- A test that starts behind Root/Supervisor/Worker-Start, injects a prepared controller state, or skips any of those boundaries is a component/regression test only and MUST NOT be reported as complete start-to-file PASS.
+- A deterministic test worker may replace the live Codex model only at the already bound Worker interface. It MUST NOT replace Root, Supervisor, Controller, machine bindings, real LT/PPM, Batch or Handoff.
+- Every change to the critical System-4 runtime or its acceptance route MUST rerun the complete positive/negative protection ring and the full single-button real-tool corridor on the exact resulting remote head before the new head can be called PASS.
+
 ## TEXTMASCHINE + DESIGN IMMUTABILITY HARD RULE
 - The existing Textmaschine/content-rule authority is READ-ONLY. System 4 MUST NOT edit, relax, extend, reinterpret, normalize, replace or shadow Textmaschine rules, directly or indirectly.
 - The current PPM 6.7.9 production package, article-type/content rules, table contract, WordPress plugin, theme/CSS and existing design selectors are READ-ONLY. No change to them is authorized by System 4.
