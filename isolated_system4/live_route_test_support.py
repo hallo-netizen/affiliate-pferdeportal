@@ -83,7 +83,7 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   row=link_rows[link_cursor];blocks[-1]=blocks[-1].replace('</section>',f'<p data-fact-ids="{fid}"><a href="{row["href"]}">{row["anchor"]}</a></p></section>');link_cursor+=1
  table_count=int(t.get('table_count_exact') or 0);tables=''
  if table_count:
-  rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {word_token(r)}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {article_word} {word_token(r+6)}</td></tr>' for r in range(rows));table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>';tables=table*table_count
+  rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {word_token(r)}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {article_word} {word_token(index+r+11)}</td></tr>' for r in range(rows));table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>';tables=table*table_count
  traces=''
  if t.get('fact_trace_required') is True:
   need=max(int(b.get('source_trace_minimum') or 0),1)
