@@ -1,0 +1,21 @@
+name: System 4A Repair Owner Contract
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repair-owner-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact head
+        run: git rev-parse HEAD
+      - name: Run causal repair-owner regression contract
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_repair_owner_routing_contract.py
