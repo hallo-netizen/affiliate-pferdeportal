@@ -18,4 +18,7 @@ jobs:
         run: git rev-parse HEAD
       - name: Run causal repair-owner regression contract
         working-directory: isolated_system4
-        run: python3 -m unittest -v test_repair_owner_routing_contract.py
+        run: >-
+          python3 -m unittest -v
+          test_repair_owner_routing_contract.py
+          test_repair_owner_failclosed_contract.py
