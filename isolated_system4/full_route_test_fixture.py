@@ -9,32 +9,32 @@ from new_topic_real_source_fixture import source_and_claims
 SINGLE_ITEMS=[{
     'article_type':'Beratung',
     'category':'pferdehaftpflicht-beratung',
-    'plan_slot':'0063dc0f27259aa6a39a2fcdf1475a1617181286e2aeb4c30b96bb9f37ceec47',
-    'target_keyword':'Pferdehaftpflicht für Fremdreiter',
-    'title':'Pferdehaftpflicht für Fremdreiter richtig prüfen',
+    'plan_slot':'b016d8743a04a42fcc67e734400202051a2f1fc0efa04472b9ce0a190236fdf7',
+    'target_keyword':'Haftpflicht für Pferde bei Pflegebeteiligung',
+    'title':'Haftpflicht für Pferde bei Pflegebeteiligung richtig prüfen',
 }]
 
 THREE_ITEMS=[
     {
         'article_type':'Beratung',
         'category':'fliegenmasken-beratung',
-        'plan_slot':'65f2c06e7f246c49617b57bbc56cea940cb3bd566722bd423cfd433eb313a56e',
-        'target_keyword':'UV-Schutz bei Fliegenmasken',
-        'title':'UV-Schutz bei Fliegenmasken für Pferde prüfen',
+        'plan_slot':'992812013cee4eac3315ce699a1fe8f2ca901944b4d7b32adf40a825f8ebe373',
+        'target_keyword':'Fliegenmasken für Pferde an sonnigen Tagen',
+        'title':'Fliegenmasken für Pferde an sonnigen Tagen richtig auswählen',
     },
     {
         'article_type':'Beratung',
         'category':'pellets-beratung',
-        'plan_slot':'d524a4f24316bdd37a25341a3a4918681b598c9b676b09355ce8ca593ada305e',
-        'target_keyword':'Pellets aus Luzerne als Heuersatz',
-        'title':'Pellets aus Luzerne als Heuersatz für Pferde einordnen',
+        'plan_slot':'b96182343e8d14acecab1278046479b4edf8cfda5dcffe4fe1781443c3c7fc5b',
+        'target_keyword':'Pellets aus Luzerne für Pferde im Winter',
+        'title':'Pellets aus Luzerne für Pferde im Winter einordnen',
     },
     {
         'article_type':'Beratung',
         'category':'pferdehaftpflicht-beratung',
-        'plan_slot':'7d965ba06f9027a5497291a31345f7f78e166e1e9a2776ef17caeea0d02b5f0b',
-        'target_keyword':'Pferdehaftpflicht für Pferdehüter',
-        'title':'Pferdehaftpflicht für Pferdehüter richtig prüfen',
+        'plan_slot':'7b2ffe9557f23e6f290f7e3b22d39a76f893cc5961840c37391e05a87573b320',
+        'target_keyword':'Haftpflicht für Pferde bei Betreuung im Urlaub',
+        'title':'Haftpflicht für Pferde bei Betreuung im Urlaub richtig prüfen',
     },
 ]
 
