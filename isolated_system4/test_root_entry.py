@@ -47,7 +47,7 @@ class RootEntryV4Tests(unittest.TestCase):
  def test_dirty_critical_file_blocks(self):
   td,repo,p0=self.prep(); f=repo/'isolated_system4/controller.py'; f.write_text(f.read_text()+'\n# tamper\n'); cp=entry(repo,p0,Path(td.name)/'ws'); self.assertEqual(cp.returncode,2); self.assertIn('ROOT_ENTRY_CRITICAL_FILES_DIRTY',cp.stdout.decode())
  def test_point0_head_mismatch_blocks(self):
-  td,repo,p0=self.prep(); v=json.loads(p0.read_text()); v['head_sha']='0'*40; core=dict(v); core.pop('point0_core_sha256',None); v['point0_core_sha256']=hashlib.sha256((json.dumps(core,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()).hexdigest(); p0.write_text(json.dumps(v)); cp=entry(repo,p0,Path(td.name)/'ws'); self.assertEqual(cp.returncode,2); self.assertIn('POINT0_HEAD_MISMATCH',cp.stdout.decode())
+  td,repo,p0=self.prep(); v=json.loads(p0.read_text()); v['head_sha']='0'*40; core=dict(v); core.pop('point0_core_sha256',None); v['point0_core_sha256']=hashlib.sha256((json.dumps(core,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()).hexdigest(); p0.write_text(json.dumps(v)); cp=entry(repo,p0,Path(td.name)/'ws'); self.assertEqual(cp.returncode,2); self.assertIn('HEAD_SHA_MISMATCH',cp.stdout.decode())
  def test_point0_source_hash_tamper_blocks(self):
   td,repo,p0=self.prep(); v=json.loads(p0.read_text()); v['research_runtime']['sources'][0]['evidence']+=' TAMPER'; core=dict(v); core.pop('point0_core_sha256',None); v['point0_core_sha256']=hashlib.sha256((json.dumps(core,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()).hexdigest(); p0.write_text(json.dumps(v)); cp=entry(repo,p0,Path(td.name)/'ws'); self.assertEqual(cp.returncode,2); self.assertIn('RESEARCH_SOURCE_HASH_MISMATCH',cp.stdout.decode())
 
