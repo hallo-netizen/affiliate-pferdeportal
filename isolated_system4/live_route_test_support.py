@@ -76,7 +76,7 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  intent_terms=[str(x).strip() for x in b.get('intent_terms',[]) if str(x).strip()]
  if not intent_terms:raise AssertionError('BOUND_INTENT_TERMS_MISSING')
  required=list(t.get('required_blocks') or []);blocks=[]
- filler=(f'{identity["target_keyword"]} {variant} sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich ')
+ filler=(f'{identity["target_keyword"]} {variant} sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich. ')
  ilo=max(int(intro.get('minimum_words') or 1),20);ihi=int(intro.get('maximum_words') or max(ilo,200));intro_words=min(max(ilo,25),ihi);intro_base=fact_sentence(fid)+' '+filler;intro_text=' '.join((intro_base.split()*((intro_words//len(intro_base.split()))+2))[:intro_words])
  blocks.append(f'<section data-block="{intro_name}"><p data-fact-ids="{fid}">{intro_text}</p></section>')
  other=[x for x in required if x!=intro_name]
@@ -93,7 +93,7 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   parts=[f'<h2>{heading}</h2>']
   section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
   for pi in range(paras_per):
-   fact_id=allowed[(bi+pi)%len(allowed)];base=fact_sentence(fact_id)+' '+filler+f' Abschnitt {word_token(bi)} Punkt {word_token(pi+4)} {article_word} ';words=base.split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
+   fact_id=allowed[(bi+pi)%len(allowed)];base=fact_sentence(fact_id)+' '+filler+f'Abschnitt {word_token(bi)}, Punkt {word_token(pi+4)}, Hinweis {article_word}. ';words=base.split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
    if pi==0:
     for row in section_links:text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
    parts.append(f'<p data-fact-ids="{fact_id}">{text}</p>')
