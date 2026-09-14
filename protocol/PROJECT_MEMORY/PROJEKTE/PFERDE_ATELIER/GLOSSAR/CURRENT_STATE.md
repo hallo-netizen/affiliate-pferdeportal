@@ -1,7 +1,7 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: GLOSSAR HERO LIVE PASS / BREADCRUMB-ABSTAND LIVE PASS / DESIGN 1.50.499 LOKAL HART PASS, LIVE OFFEN / AUTOMATION-SANDBOX LIVE PASS / PORTALSEITEN-AUSSCHLUSS 1.3.4 LIVE PASS / CORE 1.3.5 LIVE FAIL / CORE 1.3.6 LOKAL HART POSITIV+NEGATIV+MUTATION PASS, LIVE OFFEN / AUTO-PUBLISH AUS
+STATUS: GLOSSAR HERO LIVE PASS / BREADCRUMB-ABSTAND LIVE PASS / DESIGN 1.50.499 LOKAL HART PASS, LIVE OFFEN / AUTOMATION-SANDBOX LIVE PASS / PORTALSEITEN-AUSSCHLUSS 1.3.4 LIVE PASS / CORE 1.3.5 LIVE FAIL / CORE 1.3.6 LIVE FAIL / CORE 1.3.7 LOKAL HART POSITIV+NEGATIV+MUTATION PASS, LIVE OFFEN / AUTO-PUBLISH AUS
 
 ## LIVE bestätigt – nicht regressieren
 
@@ -23,79 +23,114 @@ Design 1.50.499 ist lokal hart positiv/negativ geprüft; LIVE-Abnahme fehlt noch
 
 ## Core 1.3.5 – LIVE FAIL
 
+Realer Readback:
+
+`REFRESH_LIMIT_REACHED · lokal verarbeitet 400 · promotet 4 · geeignet 0`
+
+Das künstliche 400er-Limit war fachlich falsch und wurde verworfen.
+
+## Core 1.3.6 – LIVE FAIL
+
 Realer Nutzerreadback nach Installation:
 
-`PSTE-Rückstand: REFRESH_LIMIT_REACHED · lokal verarbeitet: 400 · promotet: 4 · Provider-Aufrufe: 0 · geeignet: 0`
+`PSTE-Rückstand: RUNNING · Phase: RETAINED · Cursor: 475 · lokal verarbeitet: 400 · promotet: 4 · Planning-Seiten: 0 · Provider-Aufrufe: 0 · geeignet: 0`
 
-Damit ist 1.3.5 ausdrücklich **nicht abgenommen**.
+Damit ist 1.3.6 ausdrücklich **nicht abgenommen**.
 
-Nachgewiesene Fehler:
-1. künstliches Gesamtlimit von 10 × 40 = 400 Retained-Datensätzen beendete den Refresh, obwohl der Backlog nicht vollständig verarbeitet war;
-2. Kandidatenleser las pro Refresh nur ein begrenztes Planning-Fenster und konnte spätere Themen verpassen;
-3. eine tiefe Verarbeitung im Browser-/PHP-Aufruf wäre wegen Timeout/502/504 nicht nachhaltig.
+### Reproduzierte Ursache
 
-## Core 1.3.6 – ASYNC RESUME HARDLOCK
+1. 1.3.6 führte einen Retained-Batch aus und versuchte Planning nur noch im verbleibenden Request-Zeitbudget.
+2. War der PSTE-Retained-Aufruf langsam, wurde Planning auf den nächsten Request verschoben.
+3. Der nächste Worker begann jedoch wieder mit Retained statt mit dem offenen Planning-Schritt.
+4. Ergebnis: Promotions konnten entstehen (`promotet: 4`), ohne je in den Glossarpool eingelesen zu werden (`Planning-Seiten: 0`, `geeignet: 0`).
+5. Zusätzlich ist `processed` kein verlässlicher Fortschrittsersatz für den Cursor: live lief der Cursor 400 -> 475, während `processed` bei 400 blieb.
 
-Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.6_ASYNC_RESUME_HARDLOCK_INSTALLIEREN.zip`
+## Core 1.3.7 – PLANNING HANDOFF HARDLOCK
 
-SHA-256: `d489d0cd7e9549c4dd868a8167d476b5eca2bb952be40e635bdb6bb1288fec5d`
+Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.7_PLANNING_HANDOFF_HARDLOCK_INSTALLIEREN.zip`
+
+SHA-256: `b2fdd472365d6ce2ed4dbdeb02f5ef46bf7eea4001f30b28d9c3adc458f350aa`
 
 ### Maschinenvertrag
 
-`Start/Refresh -> persistenter Discovery-Job -> viele kleine Worker-Schritte -> TARGET_REACHED oder echter BACKLOG_COMPLETE -> Research -> PRE-PUBLISH -> WordPress-Readback -> Publish`
+`Refresh -> persistenter Discovery-Job -> Retained ODER Planning je Worker -> TARGET_REACHED oder echter BACKLOG_COMPLETE -> Research -> PRE-PUBLISH -> WordPress-Readback -> Publish`
 
-- Browser-Klick startet nur den Job; 0 schwere Retained-Aufrufe im Browserrequest.
-- ein Worker verarbeitet maximal 1 Retained-Batch à 20 + höchstens 1 Planning-Seite à 25.
-- kein Gesamtlimit 400/500.
-- Cursor + Phase persistent.
-- 1.3.5-LIVE-Cursor 400 wird bei Upgrade übernommen; erster neuer Aufruf beginnt bei 400, nicht 0.
-- Recovery-Event wird vor schwerer Arbeit gesetzt.
-- 504/Exception -> `RETRY_WAIT`; gleicher Cursor wird wieder aufgenommen.
-- parallele Worker werden durch Lock geblockt.
-- Lock-TTL berücksichtigt PHP `max_execution_time`.
-- internes Request-Zeitbudget 12 Sekunden; zusätzliche Planning-Arbeit wird ggf. auf nächsten Worker verschoben.
-- bei echtem Backlog-Ende folgt ein finaler vollständiger Planning-Drain.
-- erst dann `BACKLOG_COMPLETE`, falls kein Zielkandidat gefunden wurde.
-- Discovery `RUNNING/RETRY_WAIT/BLOCKED` sperrt Research und Publish fail-closed.
-- Research-Intake und PRE-PUBLISH führen Kategorie-/Portalseiten-/Kannibalisierungs-Gates erneut aus.
-- nach Discovery-Abschluss wird die Kette über einen separaten Continue-Hook fortgesetzt; der reguläre Tages-Cron kann diesen Sofortimpuls nicht verschlucken.
+Harte Änderungen gegenüber 1.3.6:
 
-### Harte lokale Prüfung 1.3.6 – exakt gegen verpackte ZIP
+- Zustandsvertrag `UGE_PSTE_DISCOVERY_STATE_V3`.
+- Pro Worker exakt **eine schwere Einheit**: Retained-Batch **oder** Planning-Seite.
+- `promoted > 0` erzwingt sofort Phase `PLANNING`.
+- Planning muss vollständig abgearbeitet werden, bevor der nächste Retained-Batch laufen darf.
+- vorhandener 1.3.6-LIVE-Zustand mit `cursor=475 / processed=400 / promoted=4 / planning_pages=0` wird selbstheilend zuerst nach Planning migriert – auch wenn ein bereits geplanter Worker ohne neuen Buttonklick weiterläuft.
+- Cursor-Fortschritt wird separat als `traversed` / `Backlog durchlaufen` gespeichert und angezeigt; PSTE-`processed` bleibt nur Diagnosewert.
+- Timeout/502/504-Recovery, Lock, Provider-0-Vertrag, Research-Gate, PRE-PUBLISH-Gate und WordPress-Readback bleiben fail-closed.
 
-Positiv:
-- Kandidat an Planning-Position 675 gefunden; 700 Planning-Themen sichtbar verarbeitet – PASS.
-- Retained-Verarbeitung >400 ohne künstlichen Stopp – PASS.
-- alter LIVE-Cursor 400 migriert und exakt bei 400 fortgesetzt – PASS.
-- echter Backlog mit 620 Datensätzen vollständig verarbeitet + finaler Planning-Drain – PASS.
-- End-to-End Discovery -> Research -> SANDBOX -> ARMED -> WP-Readback -> Publish – PASS.
-- 50 simulierte WordPress-Beiträge: 50/50 PASS.
-- SANDBOX: 0 produktive Writes – PASS.
+### Harte lokale Positivprüfung – exakt gegen den LIVE-Fehler
 
-Negativ:
-- simulierter HTTP 504 bei Cursor 200 -> RETRY_WAIT, Cursor bleibt 200, Folgeworker setzt bei 200 fort – PASS.
-- Provider-Call im retained-local-Vertrag -> BLOCKED – PASS.
-- kein Fortschritt -> Retry, nach 5 Fehlern BLOCKED – PASS.
-- paralleler Worker -> LOCKED, kein zweiter PSTE-Aufruf – PASS.
-- unbekanntes/falsch gebundenes Research-Paket -> blockiert – PASS.
-- neue Portal-Seite nach Research, vor Publish -> 0 Writes – PASS.
-- Discovery noch RUNNING in ARMED+Auto-Publish -> Publish gesperrt – PASS.
-- WP-Readback kaputt -> QUARANTÄNE/Rollback – PASS.
+- 1.3.6-LIVE-Zustand `475 / 400 / 4 / 0` reproduziert – PASS.
+- Upgrade ohne neuen Browserklick auf V3 – PASS.
+- vor Planning **kein weiterer Retained-Aufruf** (`repo_calls=0`) – PASS.
+- bereits promotierter echter Begriff wird aus Planning übernommen – PASS.
+- `TARGET_REACHED` – PASS.
+- Bericht: `cursor=475`, `traversed=475`, `processed=400` – PASS.
+- API-Fall `cursor 400 -> 475`, `processed=0`, `promoted=4` – PASS; Planning erhält zwingend Vorrang.
+- mehrere Planning-Seiten laufen ohne Retained-Aufruf dazwischen – PASS.
+- dynamischer Kandidat erst hinter Planning-Position 675, erst nach Promotion erzeugt – gefunden; Scan >500 – PASS.
+- echter Backlog 620 vollständig + finaler Planning-Drain -> `BACKLOG_COMPLETE` – PASS.
+- HTTP 504 bei Cursor 200 -> `RETRY_WAIT`, danach wieder Cursor 200 -> Fortschritt – PASS.
+- paralleler Worker -> `LOCKED` – PASS.
+- Provider-Call im lokalen Backlog -> `BLOCKED` – PASS.
+- kein Fortschritt -> Retry-Limit -> `BLOCKED` – PASS.
 
-Mutationstest: **11/11** absichtlich gebrochene Sicherheitsmechanismen wurden erkannt und liefen ROT, darunter künstliches 400er-Limit, Browser-Schwerarbeit, fehlendes Timeout-Recovery, verlorener 1.3.5-Cursor, deaktivierter Provider-Vertrag, fehlender Lock, fehlende Research-/PRE-PUBLISH-Gates, Package-Injektion, fehlendes Discovery-Fail-Closed und umgangener WP-Readback.
+### End-to-End / Regression
 
-Verpackung:
-- 3 Plugin-Dateien wie 1.3.5.
-- `class-uge-pferde-content-pack.php` bytegleich zu 1.3.5.
-- PHP-Lint PASS.
-- ZIP-Lesetest PASS.
-- Update-Stamm `universal-glossary-engine/` PASS.
-- komplette Tests nach ZIP-Bau erneut gegen exakt extrahierte ZIP-Bytes PASS.
+- Discovery -> Research -> SANDBOX -> ARMED -> WP-Readback -> Publish – PASS.
+- späte Portalseiten-Kollision -> 0 Writes – PASS.
+- SANDBOX -> 0 produktive Writes – PASS.
+- ARMED ohne Auto-Publish -> 0 produktive Writes – PASS.
+- ARMED + Auto-Publish -> Publish erst nach allen Gates – PASS.
+- WP-Write-/Readback-Fehler -> Quarantäne/Rollback – PASS.
+- 50 simulierte WordPress-Beiträge -> **50/50 PASS**.
+- Extractor, Legacy-Migration, Kategorie-/Portalseiten-Gates, Paketvalidierung – Regression PASS.
+
+### Mutationstest
+
+7 kritische Mechanismen einzeln absichtlich gebrochen; alle 7 wurden vom LIVE-Repro-/Backlog-Test erkannt und liefen ROT:
+
+1. alte Promotions beim Upgrade nicht zuerst ins Planning;
+2. `promoted > 0` erzwingt kein Planning;
+3. Planning-Datensätze werden nicht in den Pool übernommen;
+4. Planning verliert Vorrang vor Retained;
+5. Cursor-Fortschritt wird nicht als `traversed` gespeichert;
+6. Provider-0-Vertrag deaktiviert;
+7. Parallelworker-Lock deaktiviert.
+
+Ergebnis: **7/7 Mutanten erkannt**.
+
+### Fertige ZIP geprüft
+
+Nach ZIP-Bau wurden alle Tests erneut gegen exakt aus der fertigen ZIP extrahierte Bytes ausgeführt:
+
+- Backlog/LIVE-Repro PASS
+- Cycle-Modi PASS
+- vollständige E2E-Automationskette PASS
+- Extractor PASS
+- Migration PASS
+- Research-/Publish-Gates PASS
+- Portalseiten-Gate PASS
+- Publish/Readback inkl. 50/50 PASS
+- Sandbox-Vertrag PASS
+- PHP-Lint aller 3 Plugin-Dateien PASS
+- ZIP-Lesetest PASS
+- Stamm `universal-glossary-engine/` PASS
+- Content-Pack bytegleich zu 1.3.6 PASS
 
 ## NEXT ACTION
 
-1. Core 1.3.6 über 1.3.5 installieren.
+1. Core `1.3.7` über `1.3.6` installieren.
 2. Produktion scharf und Auto-Publish bleiben AUS.
-3. `Pool jetzt aktualisieren` einmal klicken.
-4. Erwartung: Browser kehrt sofort zurück; Discovery-Zeile wechselt auf `RUNNING` und der Cursor läuft im Hintergrund vom übernommenen Stand weiter.
-5. Kein LIVE-PASS, bevor realer Readback zeigt, dass Cursor >400 weiterläuft bzw. ein echter Kandidat oder `BACKLOG_COMPLETE` erreicht wird.
-6. Design 1.50.499 separat per Screenshot prüfen.
+3. Kein Neustart bei 0: der vorhandene Live-Zustand muss übernommen werden.
+4. Erwartung zuerst: Phase `PLANNING`; `Planning-Seiten` muss steigen, bevor der Cursor erneut im Retained-Backlog weiterläuft.
+5. Danach entweder echter Kandidat oder sauberer Wechsel zurück zu `RETAINED`.
+6. Kein LIVE-PASS vor diesem realen Readback.
+7. Design 1.50.499 separat per Screenshot prüfen.
