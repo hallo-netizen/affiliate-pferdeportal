@@ -1,7 +1,7 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.496 LIVE FAIL / DESIGN 1.50.497 LOKAL HART POSITIV+NEGATIV BROWSER-PASS / AUTOMATION CORE 1.3.0 LIVE-SANDBOXPRUEFUNG OFFEN
+STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497 LIVE FAIL / DESIGN 1.50.498 HART LOKAL POSITIV+NEGATIV RENDER-PASS / AUTOMATION CORE 1.3.0 LIVE-SANDBOXPRUEFUNG OFFEN
 
 ## LIVE bestätigt – nicht regressieren
 
@@ -11,68 +11,61 @@ STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.496
 - Glossar-Breadcrumb Inhalt + Position/Abstand: **LIVE PASS**. Nicht mehr anfassen.
 - Glossar-Hero nach Design `1.50.494`: **LIVE PASS**. Breites Bild + weicher Übergang bestätigt.
 
-## Journal – Nutzerreadback nach 1.50.496
+## Journal – Nutzerreadback nach 1.50.497
 
-**LIVE FAIL.** Zwei konkrete Fehler:
+**LIVE FAIL.** Der Hero klebt sichtbar direkt unter dem Breadcrumb. Damit ist der behauptete lokale Sicht-PASS von 1.50.497 widerlegt.
 
-1. Abstand Breadcrumb → Journal-Hero weiterhin sichtbar größer als beim Glossar.
-2. Ockerfarbene Zeile wurde zu weit entfernt. Verbindlich soll nur `PFERDE ATELIER –` entfallen; `WISSEN & INSPIRATION` muss bleiben.
+Ursache der fehlerhaften Prüfung: 1.50.497 prüfte den beabsichtigten CSS-Abstand, aber nicht die tatsächlich gerenderte Bounding-Box-Distanz `hero.top - breadcrumb.bottom`. Zusätzlich existiert eine spezifischere Altregel:
 
-### Tatsächliche Ursache Abstand
+`body.pftk-journal-root-image-gap-v150422.pftk-has-leading-page-image-v150385 ... .ast-container { padding-top:20px!important; }`
 
-1.50.496 verglich nur Einzelwerte und neutralisierte nur den direkten `.ast-container`-Topabstand. Auf der realen Journalseite liegen zwischen Breadcrumb und Hero zusätzlich die Astra/WordPress-Wrapper:
+Sie konnte die weniger spezifische Reparaturregel überstimmen. Margin-basierter Abstand am Breadcrumb war dadurch nicht belastbar.
 
-`Breadcrumb -> ast-container -> content-area -> site-main -> article.page -> entry-content -> Journal -> Hero`
+## Design-Kandidat 1.50.498
 
-Diese komplette vertikale Kette wurde in 1.50.496 nicht als Einheit geprüft. Deshalb war der lokale PASS unzureichend und darf nicht als belastbarer Sicht-PASS gelten.
+Paket: `PFERDE_ATELIER_DESIGN_V1.50.498_JOURNAL_GAP_RENDERFIX_INSTALLIEREN.zip`
 
-## Design-Kandidat 1.50.497
-
-Paket: `PFERDE_ATELIER_DESIGN_V1.50.497_JOURNAL_GAP_KICKER_HARDFIX_INSTALLIEREN.zip`
-
-SHA-256: `47ffd7a4ba19ceabd882e108c854cdeae1de28e06729f01db16b22a557b10e0e`
+SHA-256: `798d4fbd0d6c5452c1ff6b402cdb9f356365cdca7b31549d1bc9132921758293`
 
 Umsetzung:
 - Journal-Claim bleibt exakt `Mehr wissen – besser verstehen` ohne Punkt.
-- Ockerfarbene Zeile ist wieder vorhanden und lautet exakt `WISSEN & INSPIRATION`.
-- nur `PFERDE ATELIER –` wurde entfernt.
-- vollständige Journal-Wrapperkette zwischen Breadcrumb und Hero wird auf `margin-top:0` / `padding-top:0` neutralisiert.
-- einzig verbleibender Abstand ist derselbe freigegebene Breadcrumb-Abstand wie beim Glossar: Desktop `34px`, mobil `24px`.
-- die Regel ist auf den Journal-Root-Scope begrenzt; Glossar-Breadcrumb/Hero werden nicht verändert.
-- breites Journalbild + weicher Creme→Bild-Verlauf bleiben unverändert.
+- Ockerfarbene Zeile bleibt exakt `WISSEN & INSPIRATION`.
+- nur `PFERDE ATELIER –` bleibt entfernt.
+- Breadcrumb selbst bekommt **keinen** Journal-Sondermargin mehr.
+- die spezifische alte 20px-`ast-container`-Regel wird im Journal-Root mit mindestens gleicher Spezifität auf `padding-top:0` überschrieben.
+- der sichtbare Abstand wird direkt am Journal-Wrapper erzwungen: Desktop `padding-top:34px`, mobil `24px`.
+- Padding statt Margin: kein Margin-Collapse möglich.
+- Glossar-Breadcrumb/Hero bleiben unverändert.
 
-## Harte lokale Prüfung 1.50.497
+## Harte lokale Positiv-/Negativprüfung 1.50.498
 
-Nicht nur String-/CSS-Wert-Test, sondern Headless-Chromium-Render mit real nachgebildeter Journal-Wrapperstruktur und absichtlich vorhandenen Theme-Zusatzabständen:
+Gemessen in Headless Chromium wird **nicht der CSS-Wert**, sondern die reale sichtbare Distanz:
 
-- Desktop Glossar sichtbarer Gap: `34px`.
-- Desktop Journal 1.50.497 sichtbarer Gap: `34px` -> PASS.
-- Mobil Glossar sichtbarer Gap: `24px`.
-- Mobil Journal 1.50.497 sichtbarer Gap: `24px` -> PASS.
-- NEGATIV mit altem 1.50.496-Mechanismus: Desktop Journal `80px`, mobil `70px` -> Fehler zuverlässig reproduziert.
-- `WISSEN & INSPIRATION` vorhanden -> PASS.
-- `PFERDE ATELIER – WISSEN & INSPIRATION` nicht vorhanden -> PASS.
-- Claim exakt und ohne Punkt -> PASS.
-- Glossar-Claim ohne Punkt Regression -> PASS.
-- PHP-Lint aller PHP-Dateien -> PASS.
-- exakt gleicher 500-Dateien-Bestand wie 1.50.496; nur `pferde-template-kit.php` geändert -> PASS.
-- ZIP-Stamm `affiliate-portal-template-kit/` -> PASS.
-- ZIP-Lesetest -> PASS.
-- Version `1.50.497` -> PASS.
+`gap = hero.getBoundingClientRect().top - breadcrumb.getBoundingClientRect().bottom`
 
-Marker: `JOURNAL_150497_FULL_WRAPPER_GAP_BROWSER_POS_NEG_PASS`.
+Positiv:
+- Desktop 1200px: Journal `34px`, Glossar `34px` -> **PASS**.
+- Mobil 500px: Journal `24px`, Glossar `24px` -> **PASS**.
 
-## Core 1.3.0 – Automation
+Negativ:
+- spezifische Override-Regel absichtlich entfernt -> Journal Desktop `54px`, mobil `44px` -> **Fehler erkannt / PASS**.
+- Journal-Padding absichtlich auf `0` gesetzt -> Desktop `0px`, mobil `0px` -> **angeklebter Hero erkannt / PASS**.
+- absichtlich falscher Abstand `40/30px` -> unterscheidet sich von Glossar `34/24px` -> **Fehler erkannt / PASS**.
 
-Core 1.3.0 bleibt unverändert. Die reale WordPress-Sandboxprüfung unter `Glossar -> Automation -> Sandbox hart testen` ist weiterhin offen.
+Regression/Verpackung:
+- PHP-Lint aller 5 PHP-Dateien -> **PASS**.
+- gleicher 500-Dateien-Bestand wie 1.50.497; nur `pferde-template-kit.php` geändert -> **PASS**.
+- Claim/Kicker-Vertrag -> **PASS**.
+- ZIP-Stamm `affiliate-portal-template-kit/` -> **PASS**.
+- ZIP-Lesetest -> **PASS**.
+- Version `1.50.498` -> **PASS**.
+
+Marker: `JOURNAL_150498_RENDER_BOUNDING_BOX_POS_NEG_PASS`.
 
 ## Harte Grenze
 
-**1.50.497 ist lokal mit Browser-Geometrie geprüft, aber noch kein LIVE PASS.** Erst Installation + Nutzerreadback schließen den Journal-Abstand und die Kickerzeile.
+**Keine LIVE-Abnahme ohne Nutzerreadback.** 1.50.498 ist hart lokal positiv/negativ geprüft, aber bleibt bis Installation + realem Screenshot **LIVE OFFEN**.
 
-## Nächster realer Schritt
+## Core 1.3.0 – Automation
 
-1. Design `1.50.497` über 1.50.496 installieren.
-2. `/journal/` prüfen: sichtbarer Breadcrumb→Hero-Abstand muss dem Glossar entsprechen; Kicker `WISSEN & INSPIRATION`; Claim `Mehr wissen – besser verstehen`.
-3. Glossar nur als Regression ansehen; dort nichts verändern.
-4. Danach `Glossar -> Automation -> Sandbox hart testen`.
+Unverändert. Automatische Veröffentlichung bleibt bis Abschluss der realen Sandboxprüfung gesperrt.
