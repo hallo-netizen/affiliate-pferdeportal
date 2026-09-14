@@ -1,24 +1,24 @@
 # BÜRO GLOSSAR – PFERDE-ATELIER
 
-STAND: 2026-09-13
+STAND: 2026-09-14
 STATUS: EINGANG AKTIV
 
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Das Steuerungsbüro für das öffentliche Pferde-Atelier-Glossar: Struktur, kurze Glossartexte, SEO-Felder, WordPress-Konfiguration, Navigation und Abnahme.
+Das Steuerungsbüro für das öffentliche Pferde-Atelier-Glossar: Struktur, kurze Glossartexte, SEO-Felder, WordPress-Konfiguration, Navigation, Einzelansicht und Abnahme.
 
 **HIER BIST DU RICHTIG, WENN …**  
-du das öffentliche Glossar planst, einen recherchierten Begriff für die Veröffentlichung aufbereitest, Oberbegriffe/Navigation festlegst oder die Pferde-Anwendung des allgemeinen Glossarmoduls prüfst.
+du das öffentliche Glossar planst, einen recherchierten Begriff für die Veröffentlichung aufbereitest, Oberbegriffe/Navigation festlegst, die Einzelansicht gestaltest oder die Pferde-Anwendung des Glossarmoduls prüfst.
 
 **DU DARFST …**  
-quellengebundene Glossarfakten aus der Wissensdatenbank lesen, daraus kurze Veröffentlichungsfassungen ableiten, Pferde-Konfiguration/SEO-/Strukturbedarf definieren und im gebundenen Hobbyraum technische Kandidaten prüfen.
+quellengebundene Glossarfakten aus der Wissensdatenbank lesen, daraus kurze Veröffentlichungsfassungen ableiten, Pferde-Konfiguration/SEO-/Struktur-/Designbedarf definieren und im gebundenen Hobbyraum technische Kandidaten prüfen.
 
 **DU DARFST NICHT …**  
-eine zweite Glossar-Faktendatenbank aufbauen, ungeprüfte Fachfakten erfinden, normale Beiträge/Seiten pro Begriff erzwingen, Pferde-Fachlogik unkontrolliert in den Universal-Core schreiben, die große Textmaschine ohne belegten Bedarf anbinden oder DESIGN/TEXT/WISSENSDATENBANK ungefragt überschreiben.
+eine zweite Glossar-Faktendatenbank aufbauen, ungeprüfte Fachfakten erfinden, normale Beiträge/Seiten pro Begriff erzwingen, bestätigte funktionierende Routingwege ohne Fehlerbeleg umbauen, normale WordPress-Artikel durch Glossar-Design verändern oder ungeprüft Pluginstände als LIVE/CURRENT behaupten.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `PRODUKTIONSREGELN.md` → benötigtes Nachbarbüro.
+`CURRENT_STATE.md` → `HOBBYRAUM.md` → `FEHLERQUELLEN.md` → `TEXT_UND_LINKREGELN.md` → `PRODUKTIONSREGELN.md`.
 
 ## EINE WAHRHEIT – HARTE TRENNUNG
 
@@ -36,7 +36,8 @@ Dieses Büro ist zuständig für:
 - Veröffentlichungsfassung eines Begriffs;
 - Pferde-spezifische SEO-/Feld-/Designkonfiguration;
 - Abnahme der WordPress-Ausgabe;
-- Regeln für A–Z/Verlinkung/Clusterproduktion;
+- Regeln für A–Z, Verlinkung und Clusterproduktion;
+- Gestaltung der Glossar-Einzelansicht;
 - Übergabe an DESIGN bzw. TEXT/SEO nur bei echtem Fachbedarf.
 
 ### Allgemeiner technischer Kern
@@ -46,110 +47,76 @@ Autoritativ:
 Modul:
 `MOD-008 – Universal Glossar Engine`.
 
-Der allgemeine Core verwaltet:
-- eigenen Glossar-Inhaltstyp;
-- eigene hierarchische Oberbereiche;
-- auswählbare vorhandene Hauptseite;
-- eigene Begriffszieladressen;
-- erweiterbares Feldschema;
-- Suche / A–Z;
-- providerneutrale SEO-Felder;
-- strukturierten JSON-Import/Export.
-
 Pferde-spezifische Inhalte und Gestaltung bleiben Projektanwendung; allgemeine Kernlogik und projektspezifische Inhaltsproduktion dürfen nicht als zweite Fachwahrheit vermischt werden.
 
 ### WordPress
-Vom Nutzer bestätigt: Die WordPress-Seite `Glossar` ist bereits angelegt und verlinkt.
-
 Für einzelne Glossarbegriffe gilt:
+- eigener Inhaltstyp `uge_term`;
 - nicht als normale Beiträge ausgeben;
 - nicht als normale Seiten pro Begriff manuell pflegen;
 - kein Bildzwang;
-- keine normalen Beitragskarten im Portal;
-- eigene SEO-Angaben je veröffentlichtem Begriff.
+- eigene SEO-Angaben je Begriff;
+- Glossar-Einzelansicht darf normale Posts/Seiten technisch und optisch nicht beeinflussen.
 
-**Importregel:** Ein generischer Datenimport veröffentlicht nicht ungeprüft automatisch.
+## VERBINDLICHE TEXTPRODUKTION
 
-**Clusterregel:** Für ausdrücklich gebundene maschinelle Pferde-Glossar-Produktionspakete gilt `PRODUKTIONSREGELN.md`: alle Cluster-Mitglieder zuerst als Entwurf anlegen, vollständig verbinden und prüfen; erst wenn der gesamte Cluster geschlossen ist, darf die gebundene Produktionsstrecke die vollständigen Cluster-Mitglieder gemeinsam veröffentlichen. Kein halber Cluster darf öffentlich werden.
+Pflichtquelle:
+`TEXT_UND_LINKREGELN.md`
 
-Der Nutzer muss dafür keine normalen WordPress-Seiten/Kategorien/Beiträge pro Begriff anlegen.
+Kernregeln:
+- ca. 150–200 Wörter;
+- keine Zwischenüberschriften im Begriffstext;
+- keine wiederkehrenden Floskeln/Schablonen;
+- nur `GEPRUEFT`-WDB-Fakten;
+- Kurzdefinition/Zusammenfassung Pflicht;
+- dasselbe Linkziel nie zweimal;
+- Fließtext bevorzugt passende übergeordnete Portal-Kategorie;
+- Journal nur ersatzweise;
+- verwandte Glossarbegriffe als Links ausschließlich im Block `Verwandte Begriffe`, nicht zusätzlich im Fließtext.
 
-### SEO-Meta
-Gebundener KISS-Weg:
-- SEO-Titel und Meta-Description je Begriff nach konfigurierbarem Schema;
-- individuelle Überschreibung je Begriff möglich;
-- keine manuelle Yoast-Pflege nötig;
-- keine direkten Writes in interne Yoast-Datenbankfelder;
-- Core funktioniert ohne Yoast;
-- bei Yoast Nutzung nur über dessen Schnittstellen.
+Produktionsstatus ausschließlich in `BEGRIFFSREGISTER.md`.
 
-### Textproduktion
-Aktuell keine eigene große Textmaschine und keine automatische Anbindung an die bestehende Artikel-Textmaschine.
-
-Verbindlicher Pferde-Arbeitsweg für neue kurze Glossarbeiträge:
-Fachfakten aus autoritativer Wissensquelle lesen → kurzen geschlossenen Themencluster bilden → alle Mitglieder als Entwurf anlegen → Inhalte/Meta/Kategorie/Beziehungen setzen → Links und Negativregeln prüfen → gesamten Cluster gemeinsam freigeben/veröffentlichen.
-
-Details ausschließlich in `PRODUKTIONSREGELN.md`; Produktionsstatus ausschließlich in `BEGRIFFSREGISTER.md`.
-
-Pferde-/Ponyrassen sind dort ausdrücklich ausgeschlossen und gehören in das separate Pferderassen-System.
+Pferde-/Ponyrassen sind ausdrücklich ausgeschlossen und gehören in das separate Pferderassen-System.
 
 ## BENÖTIGTE NACHBARBÜROS
 
-### WISSENSDATENBANK – Pflichtquelle Fachinhalt
-`../WISSENSDATENBANK/START_HERE.md`
-`../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
-
-### DESIGN – Referenz/Integration
-`../DESIGN/START_HERE.md`
-
-### TEXT/SEO – bei Suchintention/Kannibalisierung/SEO-Regeln
-`../TEXT/START_HERE.md`
-
-### PLUGINS – Inventar/Update/isolierte Ausgabekopie nach echter Pluginänderung
-`../PLUGINS/START_HERE.md`
-
-### WordPress-Werkzeugbestand
-`../../../WORDPRESS_REGISTER.md`
+- WISSENSDATENBANK: `../WISSENSDATENBANK/START_HERE.md`
+- DESIGN: `../DESIGN/START_HERE.md`
+- TEXT/SEO: `../TEXT/START_HERE.md`
+- PLUGINS: `../PLUGINS/START_HERE.md`
+- WordPress-Werkzeugbestand: `../../../WORDPRESS_REGISTER.md`
 
 ## ARBEITSREGELN
 
 1. KISS: kleinste tragfähige Erweiterung; keine Plugin-Orgie.
 2. Backend und Frontend getrennt denken.
-3. Flexibel/erweiterbar: allgemeine Kernfelder/-routen nicht unnötig projektspezifisch verdrahten.
-4. Kein Grafikzwang.
-5. Keine normalen Beitragskarten für Glossarbegriffe.
-6. Eigene Meta-Angaben je Begriff brauchen eine technisch auflösbare eigene Zieladresse.
-7. Fachwahrheit bleibt in WISSENSDATENBANK.
-8. Bestehendes Designplugin bleibt unverändert; Integration wird gegen realen Designcode geprüft.
-9. Vor Plugin-Ausgabe positiv und negativ testen.
-10. `main` nicht für Experimente verändern.
-11. Kein ungeprüftes automatisches Publizieren; gebundene Clusterpublikation nur nach vollständiger Closure gemäß `PRODUKTIONSREGELN.md`.
-12. Kein Release-/LIVE-PASS aus lokalen Stubtests ableiten.
-13. Unterschiedliche Paketbytes = unterschiedliche Pluginversion.
-14. Bei echter Pluginentwicklung/-aktualisierung `../PLUGINS/` nach Abschlussregel synchronisieren; `CURRENT.zip` ist nur abgeleitete hashgebundene Kopie.
+3. Kein Grafikzwang.
+4. Fachwahrheit bleibt in WISSENSDATENBANK.
+5. Vor jeder Plugin-Ausgabe positiv und negativ testen.
+6. `main` nicht als Experimentierfläche verwenden.
+7. Kein Release-/LIVE-PASS aus lokalen Stub-/Browser-/Codeprüfungen ableiten.
+8. Unterschiedliche Paketbytes = unterschiedliche Pluginversion bzw. eindeutig gebundener Buildstand.
+9. Bei echter Pluginentwicklung/-aktualisierung `../PLUGINS/` nach Abschlussregel synchronisieren; `CURRENT.zip` ist nur abgeleitete hashgebundene Kopie.
+10. Designänderungen an Glossar-Einzelansichten müssen hart auf `uge_term` begrenzt und gegen normale Posts negativ geprüft werden.
+11. Bekannten funktionierenden Routingweg nicht ohne neuen Fehlerbeleg umbauen.
+12. Neue Begriffe erst nach frisch belegtem `GEPRUEFT`-Status der WDB-Quelle.
 
 ## SCHNELLWEGWEISER
 
-- **Aktueller Bürostand:** `CURRENT_STATE.md`
-- **Aktuelle Arbeit / NEXT ACTION:** `HOBBYRAUM.md`
-- **Fehler:** `FEHLERQUELLEN.md`
-- **Produktionsregeln:** `PRODUKTIONSREGELN.md`
-- **Produktionsstatus Begriffe:** `BEGRIFFSREGISTER.md`
-- **Zielvertrag:** `ZIELVERTRAG_GLOSSAR_ABDECKUNG_V1.md`
-- **Seitenkonzept:** `SEITENKONZEPT_V1.md`
-- **Allgemeiner Glossar-Core:** `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
-- **Fachdatenbank:** `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
-- **Design:** `../DESIGN/START_HERE.md`
-- **TEXT/SEO:** `../TEXT/START_HERE.md`
-- **Plugins:** `../PLUGINS/START_HERE.md`
-- **WordPress-Werkzeugbestand:** `../../../WORDPRESS_REGISTER.md`
-- **Handlungsverzeichnis:** `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`
-- **Zentrales Fehler-Wegweiserregister:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
-- **Zentrales Warum-Register:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- **Zielregister:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`
+- Aktueller Bürostand: `CURRENT_STATE.md`
+- Aktuelle Arbeit / NEXT ACTION: `HOBBYRAUM.md`
+- Fehler: `FEHLERQUELLEN.md`
+- Text-/Linkregeln: `TEXT_UND_LINKREGELN.md`
+- Produktionsregeln: `PRODUKTIONSREGELN.md`
+- Produktionsstatus Begriffe: `BEGRIFFSREGISTER.md`
+- Zielvertrag: `ZIELVERTRAG_GLOSSAR_ABDECKUNG_V1.md`
+- Seitenkonzept: `SEITENKONZEPT_V1.md`
+- Allgemeiner Glossar-Core: `../../../ALLGEMEINGUELTIGE_BAUSTEINE/GLOSSAR/START_HERE.md`
+- Fachdatenbank: `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/START_HERE.md`
+- Plugins: `../PLUGINS/START_HERE.md`
 
 ## HARTE FEHLERABGLEICH-SPERRE
-Vor jeder technischen Aktion zuerst `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` und die relevante Originalquelle prüfen. Bekannten Fehlerweg nicht erneut ausprobieren.
+Vor jeder technischen Aktion zuerst die relevante Original-Fehlerquelle und `CURRENT_STATE.md` prüfen. Bekannten Fehlerweg nicht erneut ausprobieren.
 
 ## Globale Arbeitsort-Sperre
 Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.
