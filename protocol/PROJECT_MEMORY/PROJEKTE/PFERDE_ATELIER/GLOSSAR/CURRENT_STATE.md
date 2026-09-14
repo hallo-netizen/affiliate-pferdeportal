@@ -1,101 +1,61 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: EINZELARTIKELANZEIGE LIVE PASS / EINZELANSICHT + FLIESSTEXTLINKS LIVE FAIL / TECHNISCHE NACHBESSERUNG 1.2.2 + 1.50.490 LOKAL PASS, NICHT LIVE
+STATUS: EINZELARTIKEL LIVE PASS / 0 FLIESSTEXTLINKS LIVE PASS / DUENNE OCKERLINIE LIVE PASS / BREADCRUMB-ABSTAND + KACHELKLICK + HERO-AUSSCHNITT LIVE FAIL / KANDIDAT 1.2.3 + 1.50.491 LOKAL PASS, NICHT LIVE
 
 ## Belastbarer aktueller Stand
 
-- Büro `GLOSSAR` steuert das öffentliche Pferde-Atelier-Glossar.
-- Fachwahrheit bleibt ausschließlich in `../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
-- Öffentlicher Begriffstyp: `uge_term`; Glossar-Oberbereiche: `uge_group`.
 - Arbeitsbranch: `hobbyroom/glossar-livefail-red-green-20260913`.
-- Der funktionierende Single-Routingweg bleibt unangetastet.
+- Einzelbegriffe öffnen real: **LIVE PASS**.
+- Glossar-Fließtext 0 Links: **LIVE PASS**.
+- rechte Ocker-Oberkante dünn: **LIVE PASS**.
+- Diese beiden PASS-Punkte nicht erneut anfassen.
 
-## LIVE bestätigt
+## Aktuell offen – Nutzerreadback 2026-09-14
 
-Der Nutzer bestätigte `artikelanzeige pass`. `GLOSSAR-ROUTE-004` ist damit real geschlossen: Einzelbegriffe öffnen.
+1. Breadcrumb-Inhalt ist korrekt; **Abstand nach oben ist zu groß**. Er muss auf allen Glossarseiten einheitlich sein: Glossar-Startseite, `uge_group`-Kategorie und `uge_term`-Einzelansicht.
+2. Begriffskacheln müssen **komplett anklickbar** sein, nicht nur `Zum Begriff`.
+3. Glossar-Hero muss **weiter herausgezoomt / Motiv rechts vollständig erkennbar** sein.
 
-## Aktueller LIVE FAIL – Nutzerreadback 2026-09-14
+## Lokaler Design-Kandidat 1.50.491
 
-Am realen Glossar-Single ist weiterhin fehlerhaft:
+Paket: `PFERDE_ATELIER_DESIGN_V1.50.491_GLOSSAR_NAV_HERO_FIX_INSTALLIEREN.zip`
 
-1. Breadcrumbs stimmen nicht; im Screenshot erscheint die Oberbereichskette falsch/doppelt.
-2. Im Fließtext sind weiterhin Links sichtbar.
-3. Der ockerfarbene obere Strich der rechten Blöcke ist zu dick.
-4. Auch bereits vorhandene Glossarbeiträge müssen nach der neuen Regel gezielt überschrieben/aktualisiert werden.
+SHA-256: `e5913fd60b59ce6b49a354a98f0f2bd132df6356720ed8d5ee76309abd811d51`
 
-Verbindliche neue Regel: **Im Glossar-Fließtext exakt 0 Links.** Verwandte Begriffe werden ausschließlich rechts in `Verwandte Begriffe`, das Portalziel ausschließlich rechts in `Mehr zum Thema` verlinkt.
+Geändert und lokal geprüft:
+- einheitlicher Glossar-Topabstand über `.site-content`: 18 px für Startseite/Kategorie/Single;
+- Single-Innenpadding so angepasst, dass keine Doppeladdition entsteht;
+- komplette Begriffskachel ist ein Link;
+- Hero-Bild `object-fit: contain` + rechts ausgerichtet statt starkem `cover`-Beschnitt;
+- 0-Link-Endschranke im Fließtext bleibt unverändert;
+- 2-px-Ockerlinie bleibt unverändert;
+- PHP-Lint PASS, statischer Positiv-/Negativvertrag PASS, ZIP-Lesetest PASS.
 
-## Lokale technische Nachbesserung – noch kein LIVE-PASS
+## Lokaler Core-Kandidat 1.2.3
 
-### Glossar Core 1.2.2
+Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.2.3_NEUE_BEITRAEGE_INSTALLIEREN.zip`
 
-Paket:
-`UNIVERSAL_GLOSSARY_ENGINE_1.2.2_ZERO_BODY_LINKS_BESTAND_UPDATE_INSTALLIEREN.zip`
+SHA-256: `997cd888fe3ea1a102a8d5c9e614497404d5049e5c64086f330f0dc77c07049f`
 
-SHA-256:
-`3d6ffc2cdfcc4872e49e97f4adc54de31d4ef2714b0af07e399a681f15d1f447`
+Zusätzlich zum 14er Bestandsupdate:
+- `Aalstrich` wird aus frisch gelesenem WDB-Status `GEPRUEFT` übernommen/überschrieben;
+- `Zuchtbuch` wird als neuer Glossarbegriff aus frisch gelesenem WDB-Status `GEPRUEFT` ergänzt;
+- beide 150–200 Wörter, 0 Fließtextlinks;
+- State `1.2.3:16` erzwingt sauberen Update-Lauf;
+- Gruppe `Zucht & Genetik` wird technisch gebunden;
+- PHP-Lint PASS, beide neuen Texte Wortlänge PASS, 0 Links PASS, ZIP-Lesetest PASS.
 
-Geändert:
-- 14 gebundene Glossartexte werden mit 0 Fließtextlinks erzeugt;
-- bestehende `uge_term`-Datensätze werden zusätzlich linkfrei zurückgeschrieben, ID bleibt erhalten;
-- normale WordPress-Posts sind hart ausgeschlossen;
-- State auf `1.2.2:14`, damit ein vorhandener 1.2.1-Bestand erneut durch den Updateweg läuft.
-
-Lokal ausgeführt:
-- PHP-Lint Core-Dateien → PASS;
-- 14 Begriffe, jeweils 150–200 Wörter → PASS;
-- 0 `<a>`-Links in allen 14 Fließtexten → PASS;
-- Related-Relationen bleiben vorhanden → PASS;
-- bestehende ID `77` im positiven Update-Test erhalten → PASS;
-- absichtlich mitgelieferter normaler Post im Negativtest nicht verändert → PASS;
-- ZIP-Lesetest → PASS;
-- Version 1.2.2 aus ZIP → PASS.
-
-Marker:
-- `CORE_122_ZERO_BODY_LINKS_POS_NEG_PASS`
-- `CORE_122_EXISTING_ID_PRESERVE_AND_NORMAL_POST_NEG_PASS`
-
-### Pferde Atelier Design 1.50.490
-
-Paket:
-`PFERDE_ATELIER_DESIGN_V1.50.490_GLOSSAR_BREADCRUMB_STRIPE_FIX_INSTALLIEREN.zip`
-
-SHA-256:
-`251e90a7c7115cd4ce166ddefb5f0918904f28b89d85f2a173c190201b454657`
-
-Geändert:
-- globaler Universal-Breadcrumb wird auf `uge_term` bereits serverseitig gar nicht mehr erzeugt;
-- eigene Single-Kette bleibt `Startseite > Glossar > Oberbereich > Begriff`;
-- zusätzliche CSS-Sperre blendet jeden globalen Breadcrumb-Rest auf `uge_term` aus;
-- Render-Endschranke entfernt jeden eventuell verbliebenen Link aus dem Fließtext;
-- obere Ockerlinie der rechten Boxen von 4 px auf 2 px reduziert;
-- Scope ausschließlich `uge_term`, normale Posts bleiben außen vor.
-
-Lokal ausgeführt:
-- PHP-Lint → PASS;
-- Breadcrumb-/Scope-/0-Link-/2px-Vertrag positiv/negativ → PASS;
-- ZIP-Lesetest → PASS;
-- Version 1.50.490 aus ZIP → PASS.
-
-Marker:
-`DESIGN_150490_BREADCRUMB_ZERO_LINKS_THIN_STRIPE_POS_NEG_PASS`
+Fachquellen bleiben ausschließlich die WDB-Datensätze `term-aalstrich.json` und `term-zuchtbuch.json`; keine Fachwahrheit im Glossarbüro duplizieren.
 
 ## Harte Grenze
 
-**Noch kein LIVE PASS.** Die neuen Paketbytes sind lokal gebaut und geprüft, aber noch nicht im realen Pferde-Atelier installiert/readback-bestätigt. Die bisherige Plugin-Artefaktquelle im PLUGINS-Büro darf deshalb nicht als LIVE-Nachweis interpretiert werden.
+**Noch kein LIVE PASS für 1.2.3 / 1.50.491.** Erst Installation und realer Readback dürfen die offenen Punkte schließen.
 
-## Nächster belastbarer Schritt
+## Nächster Schritt
 
-1. Core `1.2.2` und Design `1.50.490` über die vorhandenen Pluginstände installieren.
-2. Bestehenden Begriff `Bandmaß` neu laden und real prüfen:
-   - Breadcrumb exakt `Startseite > Glossar > Pferd & Biologie > Bandmaß`;
-   - Fließtext 0 Links;
-   - `Stockmaß` rechts in `Verwandte Begriffe` als Link;
-   - Portalziel rechts in `Mehr zum Thema`;
-   - obere Ockerlinie der rechten Boxen sichtbar dünner;
-   - Bestands-ID/URL unverändert.
-3. normalen WordPress-Beitrag gegenprüfen.
-4. Erst nach realem Readback LIVE PASS setzen und danach Plugin-Artefaktpflicht final synchronisieren.
-
-Neue Glossarbegriffe weiterhin nur aus frisch nachgewiesenen `GEPRUEFT`-WDB-Quellen.
+1. Core `1.2.3` installieren.
+2. Design `1.50.491` installieren.
+3. real prüfen: Breadcrumb-Abstand auf Glossar-Startseite, Kategorie und Einzelbegriff einheitlich; komplette Kacheln klickbar; Hero-Motiv vollständig verständlich.
+4. prüfen: 0 Fließtextlinks und 2-px-Ockerlinie bleiben PASS.
+5. `Zuchtbuch` und `Aalstrich` real öffnen und Inhalts-/Darstellungsprüfung durchführen.
