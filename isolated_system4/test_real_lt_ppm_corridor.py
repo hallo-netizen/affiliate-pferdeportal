@@ -13,7 +13,7 @@ class RealLtPpmCorridorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix='system4-real-tools-') as td:
             root=Path(td)
             workspace,_,state=start_to_context(root,0)
-            body=valid_article(state,0,'realpruefung')
+            body=valid_article(state,0,'Praxis')
             try:
                 production_checks.run_languagetool(REPO,body)
             except production_checks.RepairRequired as exc:
