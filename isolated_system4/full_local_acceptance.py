@@ -60,6 +60,8 @@ def build_fixture(root:Path):
         body=body.replace(f'data-source-hash="{old}"',f'data-source-hash="{new}"')
     final=body.replace('Weichen Unterlagen voneinander ab, kläre die Angaben vor der Abfahrt.','Wenn Unterlagen voneinander abweichen, kläre die Angaben vor der Abfahrt.')
     bad=final.replace('Eine einzelne bestandene Kontrolle reicht nicht aus','Eine einzelne bestandene Kontrollee reicht nicht aus',1)
+    regression=final.replace('Entscheidend ist nicht','Als belastbares Ergebnis muss nicht',1)
+    if regression==final: raise AssertionError('PPM_KNOWN_REGRESSION_MUTATION_SOURCE_MISSING')
     snapshot={'contract':'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1','system4_root_manifest_sha256':root_entry._critical_manifest_sha256(),'next_textmachine_metadata_batch':{
       'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE',
       'batch_sha256':shabytes(b'system4-full-local-root-to-file-v2'),'item_count':1,
@@ -86,7 +88,7 @@ def build_fixture(root:Path):
     if isinstance(item.get('runtime_order'),dict): item['runtime_order']['fact_pack_hash']='SYSTEM4_RUNTIME_REBOUND_AT_VALIDATION'
     item['quality_binding_hash']=stable(item['quality_binding'])
     files={'snapshot':sp,'research':writej(root/'research.json',research),'facts':writej(root/'facts.json',facts),'pack':writej(root/'fact_pack.json',pack),'plan':writej(root/'plan_item.json',item)}
-    for n,t in [('bad',bad),('final',final)]:
+    for n,t in [('bad',bad),('regression',regression),('final',final)]:
         files[n]=root/f'article_{n}.html'; files[n].write_text(t,encoding='utf-8')
     return files
 
@@ -129,6 +131,23 @@ def main():
     output_root=Path(os.environ.get('SYSTEM4_ACCEPTANCE_OUTPUT_DIR','/tmp/system4-acceptance-output')); output_root.mkdir(parents=True,exist_ok=True)
     final=output_root/'SYSTEM4_FULL_LOCAL_ACCEPTANCE_WORDPRESS.json'; final.write_bytes(recon.read_bytes())
     results.append(('POS_ROOT_STDIN_TO_FILE',{'sha256':shabytes(final.read_bytes()),'bytes':final.stat().st_size,'parts':envelope['part_count'],'revision':s['revision'],'article_count':col['article_count']}))
+
+    # Permanent real-validator regression for the 2026-09-14 live failure.
+    # This must travel through the real controller -> real LT -> real PPM 6.7.9,
+    # return to DRAFT_WORKER, then rerun the same real validators and finish at file.
+    rw=base/'ppm_known_regression'/'item0'; rw.mkdir(parents=True); stage_to_context(f,rw,env)
+    cmd([sys.executable,str(CONTROLLER),'draft',str(rw),str(f['regression'])],0,env)
+    c=cmd([sys.executable,str(CONTROLLER),'fullcheck',str(rw)],3,env)
+    assert b'BLOCKED_KNOWN_REGRESSION_PATTERN' in c.stdout and b'REPAIR_OWNER=DRAFT_WORKER' in c.stdout
+    rs=json.loads((rw/'state.json').read_text()); assert rs['phase']=='REPAIR_REQUIRED' and rs['checks']['repair_owner']=='DRAFT_WORKER'
+    cmd([sys.executable,str(CONTROLLER),'repair',str(rw),str(f['final'])],0,env)
+    c=cmd([sys.executable,str(CONTROLLER),'fullcheck',str(rw)],0,env); assert b'SYSTEM4_FULL_CHECK_PASS:OUTPUT_GATE_REQUIRED' in c.stdout
+    rs=json.loads((rw/'state.json').read_text()); rev=rs['checks']['production_evidence']['evidence']
+    assert rev['languagetool']['status']=='PASS' and rev['ppm679']['status']=='PASS'
+    rout=base/'ppm_known_regression'/'output'; rout.mkdir(); rcol,renvelope,rrecon=handoff_from_state(f,rw/'state.json',rout)
+    rfinal=output_root/'SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json'; rfinal.write_bytes(rrecon.read_bytes())
+    assert rrecon.read_bytes()==rfinal.read_bytes()
+    results.append(('POS_REAL_PPM_KNOWN_REGRESSION_REPAIR_TO_FILE',{'sha256':shabytes(rfinal.read_bytes()),'bytes':rfinal.stat().st_size,'parts':renvelope['part_count'],'revision':rs['revision'],'article_count':rcol['article_count'],'ppm_error':'BLOCKED_KNOWN_REGRESSION_PATTERN','repair_owner':'DRAFT_WORKER'}))
 
     n=base/'n1'; cp=cmd([sys.executable,str(ROOT_ENTRY),'start-stdin',str(n/'w')],2,env,b'{bad-json'); assert b'ROOT_ENTRY_STDIN_SNAPSHOT_JSON_INVALID' in cp.stdout and not (n/'w'/'state.json').exists(); results.append(('NEG_ROOT_BAD_STDIN',{}))
 
