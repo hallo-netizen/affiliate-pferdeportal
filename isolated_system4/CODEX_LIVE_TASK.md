@@ -7,10 +7,9 @@ Sie ist **kein aktueller Arbeitsauftrag** und darf nicht mehr verwendet werden, 
 Aktuell verbindlich:
 
 - System-4-Status: `isolated_system4/README.md`
-- Zielvertrag: `isolated_system4/ZIELVERTRAG_SYSTEM4_CODEX_STRICT_PIPELINE_20260913.md`
+- Zielvertrag: `isolated_system4/ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md`
 - Hard Rules: `isolated_system4/AGENTS.md`
-- realer Produktionsauftrag: `isolated_system4/FULL_RULE_BATCH_TASK.md`
 
-Codex darf ausschließlich für einen **konkreten real gebundenen Artikel-/Batch-Produktionslauf** verwendet werden und nur nach ausdrücklicher Nutzerfreigabe.
+Ein realer Codex-Lauf darf ausschließlich über den in der aktuellen README beschriebenen gebundenen Single-Button-/Supervisor-/Worker-Pfad erfolgen, nur für einen konkret gebundenen Artikel-/Batch-Produktionslauf und nur nach ausdrücklicher Nutzerfreigabe.
 
 Der frühere Inhalt dieser Datei ist historisch abgelöst.
