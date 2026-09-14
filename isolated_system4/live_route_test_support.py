@@ -98,15 +98,37 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
    f'</ul>'
   )
   blocks[1]=blocks[1].replace('</section>',required_list+'</section>',1)
- table_count=int(t.get('table_count_exact') or 0);tables=''
+ table_count=int(t.get('table_count_exact') or 0)
  if table_count:
-  rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {word_token(r)}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {article_word} {word_token(index+r+11)}</td></tr>' for r in range(rows));table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>';tables=table*table_count
+  if table_count!=1:raise AssertionError('SYNTHETIC_TABLE_COUNT_NOT_SUPPORTED')
+  table_positions=[i for i,name in enumerate(other,start=1) if name=='table']
+  if len(table_positions)!=1:raise AssertionError('BOUND_TABLE_BLOCK_MISSING_OR_DUPLICATE')
+  rows=max(int(g.get('min_table_body_rows') or 1),4)
+  row_vocab=(
+   ('Materialwahl','Haltung und Training','Sicherheit und Eignung'),
+   ('Nutzungsprofil','Stall und Weide','Komfort und Anwendung'),
+   ('Pflegebedarf','Reitplatz und Praxis','Pflege und Vergleich'),
+   ('Entscheidungsweg','Pferd und Nutzung','Voraussetzung und Entscheidung'),
+   ('Praxisabgleich','Training und Haltung','Eigenschaft und Prüfung'),
+   ('Eignungscheck','Weide und Stall','Material und Komfort'),
+  )
+  body=[]
+  for r in range(rows):
+   a1,a2,a3=row_vocab[r%len(row_vocab)];fact=allowed[r%len(allowed)]
+   body.append(f'<tr><td data-fact-ids="{fact}">{a1}</td><td data-fact-ids="{fact}">{a2}</td><td data-fact-ids="{fact}">{a3}</td></tr>')
+  table=(f'<table class="system-129-table comparison-table"><thead><tr>'
+         f'<th data-fact-ids="{fid}">Auswahlmerkmal</th>'
+         f'<th data-fact-ids="{fid}">Praktische Einordnung</th>'
+         f'<th data-fact-ids="{fid}">Entscheidungshinweis</th>'
+         f'</tr></thead><tbody>'+''.join(body)+'</tbody></table>')
+  pos=table_positions[0]
+  blocks[pos]=blocks[pos].replace('</section>',table+'</section>',1)
  traces=''
  if t.get('fact_trace_required') is True:
   need=max(int(b.get('source_trace_minimum') or 0),1)
   for fact_id in allowed[:need]:
    meta=b['fact_authority'][fact_id];traces+=f'<span class="ppm-source-trace" data-fact-id="{fact_id}" data-source-title="{meta["source_id"]}" data-source-hash="{meta["evidence_text_sha256"]}"></span>'
   blocks[0]=blocks[0].replace('</p>',traces+'</p>',1)
- classes=' '.join(c['system4_guards']['design']['required_root_classes']);article=f'<article class="{classes}" data-article-type="{identity["article_type"]}">'+''.join(blocks)+tables+'</article>'
+ classes=' '.join(c['system4_guards']['design']['required_root_classes']);article=f'<article class="{classes}" data-article-type="{identity["article_type"]}">'+''.join(blocks)+'</article>'
  authoring_contract.validate_candidate(article,c)
  return article
