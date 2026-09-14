@@ -8,15 +8,15 @@ This file exists only for the dedicated System-4 test branch and intentionally r
 
 There is exactly one external production entrance.
 
-The parent Chat/machine binds one canonical `SYSTEM4_PARENT_LAUNCH_V1` object containing the already bound article metadata plus real HTTP(S) source URLs and `publish_allowed=false`. The parent Chat/machine writes those exact canonical bytes into a tracked capsule below `isolated_system4/bound_launches/` and binds their SHA256. Codex MUST NOT rebuild, reinterpret, copy, rewrite or materialize that launch object.
+Before Codex is invoked, the parent Chat/machine must technically acquire and verify every real source, freeze its evidence text together with source URL, retrieval time, HTTP status and evidence SHA256, and bind those snapshots into one canonical `SYSTEM4_PARENT_LAUNCH_V1` object with the already bound article metadata and `publish_allowed=false`. The parent Chat/machine writes those exact canonical bytes into a tracked capsule below `isolated_system4/bound_launches/` and binds their SHA256. Codex MUST NOT rebuild, reinterpret, copy, rewrite or materialize that launch object.
 
 The only external start command is:
 
 `python3 isolated_system4/parent_start.py start-bound <TRACKED_BOUND_CAPSULE_PATH> <BOUND_CAPSULE_SHA256> <RUNTIME_ROOT_OUTSIDE_REPO>`
 
-`parent_start.py` MUST verify that the capsule path is inside `isolated_system4/bound_launches/`, is tracked by Git, is clean, is canonical JSON and matches the exact parent-bound SHA256 before any source fetch. `start-b64`, `start` and all free launch-file routes are forbidden.
+`parent_start.py` MUST verify that the capsule path is inside `isolated_system4/bound_launches/`, is tracked by Git, is clean, is canonical JSON and matches the exact parent-bound SHA256. It MUST also verify every bound source snapshot and its evidence SHA256. It MUST NOT perform production HTTP source acquisition inside the Codex runtime. `start-b64`, `start`, free launch-file routes and `source_urls` network mode are forbidden.
 
-Only after a real `SYSTEM4_PARENT_START_PASS:POINT0_ROOT_DISPATCH_READY` may Codex act as worker. The parent machine itself fetches/verifies the bound sources, builds the production snapshot, creates the hash-bound `SYSTEM4_POINT0_SNAPSHOT_V1`, and only then opens Root.
+Only after a real `SYSTEM4_PARENT_START_PASS:POINT0_ROOT_DISPATCH_READY` may Codex act as worker. `parent_start.py` builds the production snapshot and hash-bound `SYSTEM4_POINT0_SNAPSHOT_V1` exclusively from the already parent-verified source snapshots, and only then opens Root.
 
 The internal Root command remains exclusively:
 
@@ -28,14 +28,14 @@ Only after `SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY` may Codex be attache
 
 SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 parent/root entry.
 
-Before `parent_start.py`, do not run Codex research, diagnostics, file-building helpers, alternative gates, STARTMASTER/H7/H8/ACM/System3 routes, or repair commands. The bound capsule is created by the parent Chat/machine before Codex is invoked; Codex must not edit it.
+Before `parent_start.py`, do not run Codex research, diagnostics, source acquisition, file-building helpers, alternative gates, STARTMASTER/H7/H8/ACM/System3 routes, or repair commands. The bound capsule is created by the parent Chat/machine before Codex is invoked; Codex must not edit it.
 
 If parent-start or root-entry returns BLOCKED/FAIL, stop fail-closed. Do not choose another route.
 
 ## Isolation
 
 - Runtime workspaces, Point-0, research, facts, drafts and generated output live outside the repository.
-- Bound launch capsules contain input metadata/source URLs only; they are parent-owned immutable inputs, never article/output artifacts.
+- Bound launch capsules contain parent-owned immutable input metadata plus verified source snapshots only; they are never article/output artifacts.
 - Repository implementation changes, when explicitly authorized, are restricted to `isolated_system4/**`; this override itself is the sole root-level branch instruction artifact.
 - Do not modify `AGENTS.md`, `control/cloud-entry-gate/**`, STARTMASTER state, Textmaschine, PPM/PSERC/PSTE rules, WordPress plugin, theme/CSS or design authorities.
 - No legacy orchestration/runtime dependency is permitted in the System-4 execution path.
