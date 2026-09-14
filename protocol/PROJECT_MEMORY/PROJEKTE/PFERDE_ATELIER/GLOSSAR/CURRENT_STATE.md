@@ -1,106 +1,100 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL DESIGN 1.50.498 LOKAL HART POSITIV+NEGATIV RENDER-PASS, LIVE OFFEN / AUTOMATION SANDBOX LIVE PASS / POOL-REFRESH TECHNISCH LIVE PASS / CORE 1.3.1 POOL-INHALT FACHLICH LIVE FAIL / CORE 1.3.2 TERM-EXTRACTOR LOKAL HART POSITIV+NEGATIV PASS
+STATUS: GLOSSAR BREADCRUMB/HERO LIVE PASS / AUTOMATION-SANDBOX LIVE PASS / TERM-EXTRACTOR LIVE PASS / PORTALSEITEN-AUSSCHLUSS 1.3.4 LOKAL HART PASS, LIVE OFFEN / AUTO-PUBLISH AUS
 
 ## LIVE bestätigt – nicht regressieren
 
 - Einzelbegriffe öffnen: **PASS**.
 - Glossar-Fließtext: **0 Links – PASS**.
 - rechte Ocker-Oberkante: **dünn – PASS**.
-- Glossar-Breadcrumb Inhalt + Position/Abstand: **LIVE PASS**. Nicht mehr anfassen.
-- Glossar-Hero nach Design `1.50.494`: **LIVE PASS**. Breites Bild + weicher Übergang bestätigt.
-- Automation-Sandbox: **LIVE PASS 2026-09-14**.
-- Sandbox-Readback: `ok:true`; alle Positiv-/Negativtests `true`; `batch_upper_guard_100:true`; `production_write_performed:false`; Modus `SANDBOX`; Auto-Publish AUS; Produktion scharf AUS.
-- `Pool jetzt aktualisieren`: **technisch LIVE PASS**. 14 Rohfundstellen wurden geladen; kein Produktionswrite.
+- Glossar-Breadcrumb Inhalt + Position/Abstand: **LIVE PASS**.
+- Glossar-Hero: breites Bild + weicher Übergang: **LIVE PASS**.
+- Automation-Sandbox: **LIVE PASS**; `ok:true`, alle Positiv-/Negativtests `true`, `production_write_performed:false`.
+- Produktion scharf: **AUS**.
+- Auto-Publish: **AUS**.
+- Pool-Refresh: **LIVE PASS technisch**.
+- Core 1.3.2/1.3.3 Term-Extractor: **LIVE PASS**; 14 PSTE-Rohfundstellen wurden auf 9 fachliche Kopfbegriffe reduziert, komplette Editorialtitel stehen nur noch als Rohfund.
 
-## Pool 1.3.1 – fachlicher LIVE FAIL
+## Aktueller LIVE-Pool nach Core 1.3.3
 
-Die neue Prüftabelle hat den tatsächlichen Fehler sichtbar gemacht: Core 1.3.1 übernimmt komplette PSTE-SEO-/Artikeltitel direkt als Glossar-Kandidaten. Beispiele aus dem Live-Readback:
+9 Begriffe:
+- Fliegenmaske
+- Hindernisstange
+- Huffett
+- Mistcontainer
+- Pellet
+- Pferdebürste
+- Pferdehaftpflicht
+- Regendecke
+- Reitplatzbeleuchtung
 
-- `Das Wichtigste über Hindernisstangen für Pferde`
-- `Die geeigneten Regendecken mit Abschwitzfunktion finden`
-- `Kosten für Reitplatzbeleuchtung`
-- `Mistcontainer mit Deckel wählen`
-- `Wie reinigt man Pferdebürsten?`
+Alle 9 stehen aktuell auf `QUARANTAENE`, `Dublette=NEIN`, `Kannibalisierung=JA`.
+Die reine WordPress-Taxonomieprüfung meldet `Kategorie-Treffer=NEIN`.
 
-Diese Zeilen sind **keine Glossarbegriffe**. Deshalb darf `Automatiklauf jetzt starten` nicht freigegeben werden.
+## Nachgewiesene Ursache
 
-## Core-Kandidat 1.3.2 – PSTE Term Extractor
+Die starke Portal-Struktur des Pferde Atelier besteht technisch nicht nur aus WordPress-`category`-Termen. Viele SEO-Hauptseiten sind normale veröffentlichte hierarchische WordPress-Seiten (`post_type=page`). Deshalb konnte Core 1.3.3 diese nicht als Kategorie erkennen; die nachgelagerte Seiten-Kannibalisierung fing sie dennoch ab.
 
-Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.2_TERM_EXTRACTOR_INSTALLIEREN.zip`
+Öffentlich nachgewiesene starke Portal-Hauptseiten existieren für alle 9 aktuellen Begriffe, u. a. Regendecken, Fliegenmasken, Huffett, Pferdebürsten, Pferdehaftpflicht, Reitplatzbeleuchtung, Mistcontainer, Hindernisstangen und Pellets.
 
-SHA-256: `a48fd1c821a3516bd0385e3337a425183768cd36206b7af189fdc1bba5fa3706`
+## Core-Kandidat 1.3.4 – Portal-Landingpage-Ausschluss
 
-### Umsetzung
+Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.4_PORTALSEITEN_AUSSCHLUSS_INSTALLIEREN.zip`
 
-- PSTE-Rohfundstellen werden nicht mehr direkt als Kandidatenlabel gespeichert.
-- deterministischer, konservativer Extractor erzeugt maximal einen fachlichen Kopfbegriff oder verwirft den Rohfund.
-- keine freie Umformulierung; keine erfundenen Synonyme.
-- alte ungeprüfte 1.3.0/1.3.1-PSTE-Titelkandidaten werden beim nächsten Pool-Refresh entfernt.
-- geschützte Zustände `GEPRUEFT`, `READY`, `PUBLISHED`, `BESTAND` bleiben erhalten.
-- gemischte Kandidaten mit zusätzlicher Nicht-PSTE-Quelle bleiben erhalten; nur die alte PSTE-Quelle wird entfernt.
-- Rohfund, PSTE-Referenz und verwendete Extraktionsregel bleiben am Begriff als Provenienz gespeichert.
-- Prüftabelle zeigt zusätzlich `Rohfund` und `Extraktion`.
+SHA-256: `175e2f1d641a0b46eb9fe0c9de12b721fe4481424572dfdca1d76dbecbe3b6bc`
 
-### Harte lokale Positivprüfung – exakt gegen die 14 Live-Rohfundstellen
+Neue Prüfreihenfolge:
 
-14/14 Rohfundstellen wurden deterministisch verarbeitet und zu 9 eindeutigen Begriffen dedupliziert:
+`WP-Kategorie -> Portal-Landingpage -> Glossar-Dublette/Synonym -> sonstige Artikel-/Seiten-Kannibalisierung`
 
-- `Hindernisstange`
-- `Regendecke`
-- `Reitplatzbeleuchtung`
-- `Mistcontainer`
-- `Pferdehaftpflicht`
-- `Huffett`
-- `Fliegenmaske`
-- `Pferdebürste`
-- `Pellet`
+Regel:
+- exakter bzw. gebundener Singular/Plural-Treffer gegen `post_type=page` -> `AUSGESCHLOSSEN_PORTALSEITE`;
+- keine Recherche, kein Text, keine Veröffentlichung;
+- normale Beiträge (`post`) werden nicht als Portal-Landingpage behandelt und bleiben normale Kannibalisierungsfälle;
+- Prüftabelle zeigt zusätzlich `Portal-Seite = JA/NEIN`.
 
-Weitere PASS-Nachweise:
-- kein kompletter Editorial-/Artikeltitel überlebt als Kandidatenlabel;
-- vier unterschiedliche Regendecken-Rohfundstellen -> genau ein Kandidat `Regendecke`, alle vier Rohfundstellen bleiben sichtbar;
-- Rohfund + Extraktionsregel in Prüfansicht sichtbar;
-- Legacy-Migration entfernt alle 14 alten ungeprüften PSTE-Titelkandidaten;
-- `GEPRUEFT` und Nicht-PSTE-Kandidaten bleiben erhalten;
-- gemischte Quellen bleiben erhalten.
+### Hart lokal positiv
 
-### Harte Negativprüfung
+Exakt gegen die 9 aktuellen LIVE-Begriffe mit den realen Portal-Seitentiteln geprüft:
+- Fliegenmaske ↔ Fliegenmasken -> PASS
+- Hindernisstange ↔ Hindernisstangen -> PASS
+- Huffett ↔ Huffett -> PASS
+- Mistcontainer ↔ Mistcontainer -> PASS
+- Pellet ↔ Pellets -> PASS
+- Pferdebürste ↔ Pferdebürsten -> PASS
+- Pferdehaftpflicht ↔ Pferdehaftpflicht -> PASS
+- Regendecke ↔ Regendecken -> PASS
+- Reitplatzbeleuchtung ↔ Reitplatzbeleuchtung -> PASS
 
-- Extraktionsregel `Die geeigneten ... mit ...` absichtlich entfernt -> Test ROT.
-- Singularisierung `Regendecken -> Regendecke` absichtlich gebrochen -> Test ROT.
-- Legacy-Cleanup absichtlich deaktiviert -> Test ROT.
-- bewusst unklare Editorial-Sätze wie `Welche Regendecke ist die beste für mein Pferd?`, `Warum ist mein Pferd heute so müde?`, `10 Tipps für den perfekten Pferdealltag`, `Pferd kaufen – kompletter Ratgeber` -> vollständig abgelehnt, kein Kandidat.
+Alle 9 -> `AUSGESCHLOSSEN_PORTALSEITE` im lokalen Prüffixture.
+`Widerrist` ohne Portalseite -> `KANDIDAT` PASS.
+Exakter normaler Artikel `Huffett` ohne Portalseite -> weiterhin `QUARANTAENE` PASS.
+Portalseiten-Ausschluss hat Vorrang vor generischer Kannibalisierung PASS.
 
-### Sicherheits-/Regressionstest
+### Hart lokal negativ
 
-Gegen 1.3.1 unverändert:
-- `publish_verified`
-- `run_cycle`
-- `cron_run`
-- `sandbox_test`
-- `admin_settings`
-- `accept_research_package`
-- `validate_package`
+- Portalseiten-Gate absichtlich entfernt -> Test ROT.
+- Singular/Plural-Familiennormalisierung absichtlich auf exakten Schlüssel reduziert -> Test ROT.
+- Page-Inventory-Sammlung absichtlich entfernt -> Vertragscheck ROT.
 
-Damit ändert 1.3.2 nur Kandidatengewinnung/Prüfbarkeit, nicht die bereits getestete Publish-/Sandbox-Sicherheitslogik.
+### Regression/Verpackung
 
-Verpackung:
 - PHP-Lint aller 3 PHP-Dateien PASS.
-- Dateibestand wie 1.3.1: 3 Dateien.
-- `class-uge-pferde-content-pack.php` bytegleich.
+- gleicher Dateibestand wie 1.3.3: 3 Dateien.
+- Content-Pack bytegleich.
 - ZIP-Stamm `universal-glossary-engine/` PASS.
 - ZIP-Lesetest PASS.
-- Version 1.3.2 PASS.
+- Version 1.3.4 PASS.
 
 ## Journal
 
-Design `1.50.498` bleibt lokal hart positiv/negativ geprüft, aber bis realem Nutzerreadback **LIVE OFFEN**. Gemessen wurde in Headless Chromium die gerenderte Bounding-Box-Distanz `hero.top - breadcrumb.bottom`: Desktop Journal 34 px = Glossar 34 px; mobil 24 px = 24 px. Negativfälle 0 px, 54/44 px und 40/30 px wurden zuverlässig rot erkannt.
+Design `1.50.498` ist lokal hart positiv/negativ gerendert geprüft; realer LIVE-Readback nach 1.50.498 steht noch aus. Kein LIVE-PASS behaupten.
 
-## Harte Grenze / NEXT ACTION
+## NEXT ACTION
 
-1. Core `1.3.2` über `1.3.1` installieren.
-2. `Glossar -> Automation -> Pool jetzt aktualisieren` erneut klicken.
-3. Prüftabelle kontrollieren: In `Begriff` dürfen keine kompletten SEO-/Artikeltitel mehr stehen; diese dürfen nur noch unter `Rohfund` erscheinen.
+1. Core `1.3.4` über `1.3.3` installieren.
+2. `Glossar -> Automation -> Pool jetzt aktualisieren`.
+3. Erwarteter realer Readback: die 9 aktuellen Begriffe wechseln von `QUARANTAENE` auf `AUSGESCHLOSSEN_PORTALSEITE`, sofern ihre Portal-Hauptseiten im WordPress-Inventar als veröffentlichte Seiten vorliegen.
 4. Produktion scharf und Auto-Publish bleiben AUS.
-5. Erst nach diesem LIVE-Readback darf der nächste Automatikschritt geprüft werden.
+5. Kein Automatiklauf vor diesem LIVE-Readback.
