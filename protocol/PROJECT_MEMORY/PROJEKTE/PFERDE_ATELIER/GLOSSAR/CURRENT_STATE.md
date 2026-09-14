@@ -1,45 +1,23 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: LIVE TEILPASS / BREADCRUMB SINGLE LIVE FAIL / DESIGN 1.50.493 LOKAL HART PASS / AUTOMATION CORE 1.3.0 LOKAL HART PASS, SANDBOX
+STATUS: LIVE TEILPASS / BREADCRUMB SINGLE LIVE PASS / DESIGN 1.50.493 LIVE PASS BREADCRUMB / AUTOMATION CORE 1.3.0 LOKAL HART PASS, LIVE-SANDBOXPRUEFUNG OFFEN
 
 ## LIVE bestätigt – nicht regressieren
 
 - Einzelbegriffe öffnen: **PASS**.
 - Glossar-Fließtext: **0 Links – PASS**.
 - rechte Ocker-Oberkante: **dünn – PASS**.
-- Breadcrumb-Inhalt bei `Bandmaß`: korrekt `Startseite > Glossar > Pferd & Biologie > Bandmaß`; nur Position/Abstand ist LIVE noch falsch.
+- Breadcrumb-Inhalt bei `Bandmaß`: korrekt `Startseite > Glossar > Pferd & Biologie > Bandmaß`.
+- Breadcrumb-Position/Abstand nach Design `1.50.493`: **LIVE PASS 2026-09-14**. Nicht mehr anfassen.
 
-## Breadcrumb – tatsächliche Ursache
+## Breadcrumb – geschlossene Ursache
 
-Die bisherigen 18-px-/Variable-Fixes griffen am falschen Punkt. Der Glossar-Single erzeugte seinen Breadcrumb **innerhalb des eigenen Content-/`.ast-container`-Pfads**, während normale Seiten den universellen Breadcrumb direkt unter `.site-content` mounten. Deshalb konnte der Single trotz gleicher CSS-Variable sichtbar einen anderen Abstand haben.
-
-### Design-Kandidat 1.50.493
-
-Paket: `PFERDE_ATELIER_DESIGN_V1.50.493_BREADCRUMB_SAME_PATH_INSTALLIEREN.zip`
-
-SHA-256: `067e11f7d7f54ce22206955297566fbb78fdc9abd464075ebee4b82e7aed2a5d`
-
-Fix:
-- `uge_term` wird nicht mehr vom universellen Breadcrumb-Payload ausgeschlossen;
-- `uge_term` benutzt denselben universellen Breadcrumb-DOM-/CSS-Pfad wie normale Seiten/Kategorien;
-- eigener verschachtelter Single-Breadcrumb wird nicht mehr ausgegeben;
-- keine neue Glossar-Pixel-Sonderregel als Ersatz.
-
-Hart lokal:
-- PHP-Lint PASS;
-- gleicher `.site-content`-/Container-/Mounted-Reset-Pfad PASS;
-- Kette `Glossar > Oberbereich > Begriff` PASS;
-- NEGATIV: alten `uge_term`-Guard wieder eingebaut → Test rot PASS;
-- NEGATIV: verschachtelten Single-Breadcrumb wieder eingebaut → Test rot PASS;
-- Marker `DESIGN_150493_BREADCRUMB_SAME_PATH_POS_NEG_PASS`;
-- ZIP/Version PASS.
+Die bisherigen 18-px-/Variable-Fixes griffen am falschen Punkt. Der Glossar-Single erzeugte seinen Breadcrumb **innerhalb des eigenen Content-/`.ast-container`-Pfads**, während normale Seiten den universellen Breadcrumb direkt unter `.site-content` mounten. Design `1.50.493` hat den Glossar-Single auf denselben universellen Breadcrumb-DOM-/CSS-Pfad umgestellt. Nutzerreadback 2026-09-14: **PASS**.
 
 ## Core 1.3.0 – dynamischer Glossarpool + dauerhafte Sandbox
 
-Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.0_AUTOMATION_SANDBOX_INSTALLIEREN.zip`
-
-SHA-256: `b408756c63ab719fcf82131a6dd297c261e36817d957c69ceb9644d7ed8fd2a4`
+Korrekt paketierter Installer: `UNIVERSAL_GLOSSARY_ENGINE_1.3.0_AUTOMATION_SANDBOX_INSTALLIEREN_KORREKT.zip`.
 
 Enthalten:
 - persistenter Kandidatenpool;
@@ -84,14 +62,12 @@ Für **vollautomatische fachliche Recherche + Textformulierung** fehlt noch eine
 
 ## Harte Grenze
 
-**Kein LIVE-PASS für 1.3.0 oder 1.50.493 vor Installation und realem Readback.** Sandbox bleibt bis zur Abnahme unscharf; automatische Veröffentlichung nicht aktivieren.
+Breadcrumb ist LIVE PASS. **Automation 1.3.0 bleibt bis zur realen WordPress-Sandboxprüfung nicht LIVE freigegeben.** Automatische Veröffentlichung nicht aktivieren.
 
-## Nächster realer Readback
+## Nächster realer Schritt
 
-1. Core `1.3.0` installieren.
-2. Design `1.50.493` installieren.
-3. `Bandmaß` öffnen: Breadcrumb muss jetzt über denselben Seitenpfad wie normale Seiten stehen.
-4. `Glossar -> Automation` öffnen: Sandbox muss jederzeit erreichbar sein.
-5. `Sandbox hart testen` ausführen; `production_write_performed=false` muss bleiben.
-6. `Pool jetzt aktualisieren`: PSTE-/Artikel-Kandidaten sichtbar, keine Veröffentlichung.
-7. Erst nach realem PASS Produktionsmodus separat freigeben.
+1. `Glossar -> Automation` öffnen.
+2. `Sandbox hart testen` ausführen. Erwartung: Test PASS und **kein Produktionswrite**.
+3. Danach `Pool jetzt aktualisieren` ausführen. Erwartung: Kandidaten sichtbar, keine Veröffentlichung.
+4. Danach genau einen echten Kandidaten End-to-End mit Produktionsmodus AUS durchlaufen lassen.
+5. Erst nach diesem Live-PASS Zeittrigger und Auto-Publish separat scharf schalten.
