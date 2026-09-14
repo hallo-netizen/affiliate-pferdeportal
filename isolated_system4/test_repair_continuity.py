@@ -34,7 +34,6 @@ class RepairContinuityTests(unittest.TestCase):
                 self.assertEqual(run_main(['controller.py','fullcheck',str(workspace)])[0],3)
                 current=json.loads((workspace/'state.json').read_text());self.assertEqual(current['phase'],'REPAIR_REQUIRED');self.assertEqual(current['revision'],1)
                 draft.write_text(valid_article(current,0,'korrigiert'),encoding='utf-8');self.assertEqual(run_main(['controller.py','repair',str(workspace),str(draft)])[0],0)
-                # second PASS must bind the repaired draft hash, so replace static result with current one
                 check.side_effect=[production_pass(json.loads((workspace/'state.json').read_text()))]
                 self.assertEqual(run_main(['controller.py','fullcheck',str(workspace)])[0],0)
             final=json.loads((workspace/'state.json').read_text());self.assertEqual(final['phase'],'OUTPUT_GATE_REQUIRED');self.assertEqual(final['revision'],2)
@@ -42,7 +41,7 @@ class RepairContinuityTests(unittest.TestCase):
     def test_broad_repair_is_blocked(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td);workspace,_,state=start_to_context(root,0);original=valid_article(state,0,'basis');draft=write_text(root/'draft.html',original);self.assertEqual(run_main(['controller.py','draft',str(workspace),str(draft)])[0],0);enter_repair(workspace)
-            broad=original.replace('sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich','vollkommen anderer neuer Ersatzinhalt Fremdthema Umbruch Wechsel Neufassung Austausch Distanz Abweichung Umschreibung Neubau Strukturtext')
+            broad=original+'<section><p>'+('Vollständig neuer Ersatzinhalt mit fremdem Aufbau und anderer Aussage. '*200)+'</p></section>'
             draft.write_text(broad,encoding='utf-8');rc,out=run_main(['controller.py','repair',str(workspace),str(draft)]);self.assertEqual(rc,2);self.assertIn('REPAIR_SCOPE_FAIL:REPAIR_SCOPE_TOO_LARGE',out)
 
     def test_design_change_in_repair_is_blocked_not_normalized(self):
