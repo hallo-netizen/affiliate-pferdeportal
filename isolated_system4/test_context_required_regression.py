@@ -2,7 +2,7 @@ import hashlib,json,subprocess,sys,tempfile,unittest
 from pathlib import Path
 
 HERE=Path(__file__).resolve().parent; ROOT=HERE.parent; CONTROLLER=HERE/'controller.py'; ROOT_ENTRY=HERE/'root_entry.py'; CODEX_ENTRY=HERE/'codex_entry.py'
-sys.path.insert(0,str(HERE)); import point0_snapshot,root_entry
+sys.path.insert(0,str(HERE)); import point0_snapshot,root_entry,supervisor
 
 def h(text): return hashlib.sha256(text.encode()).hexdigest()
 def run(argv): return subprocess.run(argv,cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=False)
@@ -17,7 +17,7 @@ class ContextRequiredRegressionTests(unittest.TestCase):
    src={'source_id':'src-1','source_title':'Reale Testquelle Kontextbindung','source_url':'https://example.org/system4/contextbindung','retrieved_at':'2026-09-14T00:00:00Z','snapshot_sha256':h(evidence),'evidence':evidence,'http_status':200,'source_kind':'WEB'}
    p0=point0_snapshot.build(production_snapshot_bytes=raw,root_manifest_sha256=root_entry._critical_manifest_sha256(),head_sha=head(),research_provider='BOUND_MACHINE_RESEARCH_RUNTIME',sources=[src]); p0p=td/'point0.json'; p0p.write_bytes(point0_snapshot.canon(p0))
    cp=run([sys.executable,str(ROOT_ENTRY),'start-point0',str(p0p),str(workspace)]); self.assertEqual(cp.returncode,0,cp.stdout.decode()+cp.stderr.decode())
-   research=td/'research.json'; research.write_text(json.dumps({'contract':'SYSTEM4_RESEARCH_EVIDENCE_V1','sources':[src]},ensure_ascii=False),encoding='utf-8')
+   research=td/'research.json'; research.write_text(json.dumps(supervisor.expected_research_document(workspace),ensure_ascii=False),encoding='utf-8')
    ev1='Diese reale Testquelle enthält genügend gebundenen Belegtext'; ev2='für zwei unterschiedliche, nachvollziehbare Aussagen im System-4-Test.'
    facts=td/'facts.json'; facts.write_text(json.dumps({'contract':'SYSTEM4_FACTS_EVIDENCE_V1','claims':[{'fact_id':'fact-1','source_id':'src-1','statement':'Der Kontext muss vor dem Schreiben verbindlich gebunden sein.','evidence_text':ev1,'evidence_text_sha256':h(ev1)},{'fact_id':'fact-2','source_id':'src-1','statement':'Eine spätere bekannte Pflicht darf nicht erst im Fullcheck auftauchen.','evidence_text':ev2,'evidence_text_sha256':h(ev2)}]},ensure_ascii=False),encoding='utf-8')
    for argv in ([sys.executable,str(CONTROLLER),'research',str(workspace),str(research)],[sys.executable,str(CONTROLLER),'facts',str(workspace),str(facts)]):
