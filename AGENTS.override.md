@@ -20,7 +20,7 @@ The internal Root command remains exclusively:
 
 `python3 isolated_system4/root_entry.py start-point0 <POINT0_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
 
-It is machine-internal after parent-start creation of Point-0. `root_entry.py start` and `start-stdin` remain forbidden and must fail closed with `ROOT_POINT0_REQUIRED`.
+It is machine-internal after parent-start creation of Point-0. At Root, `start` and `start-stdin` are forbidden and must fail closed with `ROOT_POINT0_REQUIRED`.
 
 Only after `SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY` may Codex be attached as worker via the generated supervisor dispatch. Codex free web search is forbidden; research may use only the bound Point-0 source pool.
 
