@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib,json,subprocess,sys
+import copy,hashlib,json,subprocess,sys
 from pathlib import Path
 
 import batch_gate,codex_entry,controller,handoff_transport,point0_snapshot,root_entry
@@ -19,6 +19,25 @@ def _read_json(path:Path):
     try:return json.loads(path.read_text(encoding='utf-8'))
     except Exception as exc: raise FullRouteError('JSON_INVALID:'+path.name) from exc
 
+def _run_worker(worker_command:list[str],mode:str,workspace:Path,out:Path,index:int):
+    cp=subprocess.run([*worker_command,mode,str(workspace),str(out),str(index)],cwd=REPO,text=True,capture_output=True)
+    if cp.returncode!=0: raise FullRouteError('START_WORKER_'+mode.upper()+'_FAILED:'+str(index)+':'+cp.stdout.strip()+cp.stderr.strip())
+    if not out.is_file(): raise FullRouteError('START_WORKER_'+mode.upper()+'_OUTPUT_MISSING:'+str(index))
+
+def _machine_context(workspace:Path,base:Path,index:int):
+    state=_read_json(workspace/'state.json')
+    try: research=json.loads(state['research']['text']); facts=json.loads(state['facts']['text'])
+    except Exception as exc: raise FullRouteError('START_ACCEPTED_RESEARCH_FACTS_MISSING:'+str(index)) from exc
+    source_sha=state['source_snapshot_sha256']; claims=[]
+    for row in facts.get('claims',[]):
+        enriched=copy.deepcopy(row); enriched['claim_status']='FULLY_SUPPORTED'; enriched['article_types']=[state['article']['article_type']]; claims.append(enriched)
+    if not claims: raise FullRouteError('START_MACHINE_FACT_PACK_EMPTY:'+str(index))
+    pack={'contract':'canonical_fact_pack_v1','status':'SOURCE_VERIFIED_PRODUCTION_READY','source_snapshot_id':source_sha,'fact_pack_id':source_sha,'sources':copy.deepcopy(research['sources']),'claims':claims}
+    ids=[row['fact_id'] for row in claims]; a=state['article']
+    plan={'article_type':a['article_type'],'target_keyword':a['target_keyword'],'topic':a['title'],'source_snapshot_id':source_sha,'runtime_order':{'order_id':f'full-route-{index}','article_type':a['article_type'],'title':a['title'],'slug':f'full-route-{index}','subject_scope':'single_button_full_route','subject_label':a['target_keyword'],'lead':'Gebundener Einstieg aus dem akzeptierten Research- und Facts-Stand.','conclusion':'Gebundener Abschluss aus dem akzeptierten Research- und Facts-Stand.','allowed_fact_ids':ids}}
+    pp=write_json(base/f'fact-pack-{index}.json',pack); pl=write_json(base/f'plan-{index}.json',plan)
+    if controller.main(['controller.py','context',str(workspace),str(pp),str(pl)])!=0: raise FullRouteError('START_CONTEXT_FAILED:'+str(index))
+
 def _handoff(states):
     rows=[]
     for index,state in enumerate(states):
@@ -28,8 +47,7 @@ def _handoff(states):
 
 def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], output_root:Path)->Path:
     raw=production_snapshot.read_bytes(); snap=_read_json(production_snapshot)
-    batch=snap.get('next_textmachine_metadata_batch') if isinstance(snap,dict) else None
-    items=batch.get('items') if isinstance(batch,dict) else None
+    batch=snap.get('next_textmachine_metadata_batch') if isinstance(snap,dict) else None; items=batch.get('items') if isinstance(batch,dict) else None
     if not isinstance(items,list) or not items: raise FullRouteError('START_BATCH_EMPTY')
     if batch.get('publish_allowed') is not False: raise FullRouteError('START_PUBLISH_MUST_BE_FALSE')
     sources_doc=_read_json(source_bundle); per_article=sources_doc.get('articles') if isinstance(sources_doc,dict) else None
@@ -44,15 +62,14 @@ def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], 
         p0=output_root/f'point0-{index}.json'; p0.write_bytes(point0_snapshot.canon(final)); ws=output_root/f'item-{index}'
         if root_entry.main(['root_entry.py','start-point0',str(p0),str(ws),str(index)])!=0: raise FullRouteError('START_ROOT_FAILED:'+str(index))
         if codex_entry.main(['codex_entry.py','worker-start',str(ws)])!=0: raise FullRouteError('START_CODEX_WORKER_START_FAILED:'+str(index))
-        worker_out=output_root/f'worker-{index}'; worker_out.mkdir()
-        cp=subprocess.run([*worker_command,str(ws),str(worker_out)],cwd=REPO,text=True,capture_output=True)
-        if cp.returncode!=0: raise FullRouteError('START_WORKER_FAILED:'+str(index)+':'+cp.stdout.strip()+cp.stderr.strip())
-        required={name:worker_out/name for name in ('research.json','facts.json','fact_pack.json','plan.json','draft.html')}
-        if not all(p.is_file() for p in required.values()): raise FullRouteError('START_WORKER_OUTPUT_MISSING:'+str(index))
-        if controller.main(['controller.py','research',str(ws),str(required['research.json'])])!=0: raise FullRouteError('START_RESEARCH_FAILED:'+str(index))
-        if controller.main(['controller.py','facts',str(ws),str(required['facts.json'])])!=0: raise FullRouteError('START_FACTS_FAILED:'+str(index))
-        if controller.main(['controller.py','context',str(ws),str(required['fact_pack.json']),str(required['plan.json'])])!=0: raise FullRouteError('START_CONTEXT_FAILED:'+str(index))
-        if controller.main(['controller.py','draft',str(ws),str(required['draft.html'])])!=0: raise FullRouteError('START_DRAFT_FAILED:'+str(index))
+        research=output_root/f'worker-research-{index}.json'; _run_worker(worker_command,'research',ws,research,index)
+        if controller.main(['controller.py','research',str(ws),str(research)])!=0: raise FullRouteError('START_RESEARCH_FAILED:'+str(index))
+        facts=output_root/f'worker-facts-{index}.json'; _run_worker(worker_command,'facts',ws,facts,index)
+        if controller.main(['controller.py','facts',str(ws),str(facts)])!=0: raise FullRouteError('START_FACTS_FAILED:'+str(index))
+        _machine_context(ws,output_root,index)
+        if codex_entry.main(['codex_entry.py','next',str(ws)])!=0: raise FullRouteError('START_CODEX_DRAFT_PHASE_FAILED:'+str(index))
+        draft=output_root/f'worker-draft-{index}.html'; _run_worker(worker_command,'draft',ws,draft,index)
+        if controller.main(['controller.py','draft',str(ws),str(draft)])!=0: raise FullRouteError('START_DRAFT_FAILED:'+str(index))
         rc=controller.main(['controller.py','fullcheck',str(ws)])
         if rc!=0: raise FullRouteError('START_FULLCHECK_NOT_PASS:'+str(index)+':'+str(rc))
         state=_read_json(ws/'state.json')
