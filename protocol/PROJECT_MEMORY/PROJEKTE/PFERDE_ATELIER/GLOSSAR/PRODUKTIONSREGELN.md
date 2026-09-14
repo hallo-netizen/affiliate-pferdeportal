@@ -3,58 +3,30 @@
 STAND: 2026-09-14
 STATUS: VERBINDLICH
 
-## 1. Themencluster statt isolierter Beziehungen
+## 1. Fachautorität
+
+Die fachliche Wahrheit liegt ausschließlich im zentralen WDB-Aktenschrank:
+`../WISSENSDATENBANK/AKTENSCHRAENKE/GLOSSAR/`.
+
+Ein Begriff = ein zentraler Datensatz. WordPress und JSON-Batches sind Ausgabe-/Transportwege und keine zweite Fachwahrheit.
+
+Neue Glossarinhalte dürfen nur aus frisch belegten, ausreichend geprüften WDB-Daten erstellt werden. Keine Ergänzung aus Chatwissen ohne Fachbeleg.
+
+## 2. Themencluster statt isolierter Beziehungen
 
 Sobald bei einem neuen Glossarbegriff fachlich sinnvolle verwandte Glossarbegriffe festgestellt werden, werden diese als technische Beziehungen mitgedacht und – nur bei frisch belegter `GEPRUEFT`-WDB-Quelle – im selben Produktionszusammenhang ergänzt.
 
 Ein Glossar-Produktionslauf gilt erst als vollständig, wenn:
-- jeder als verwandt ausgewiesene Begriff als echter Glossarbeitrag existiert;
+- jeder als verwandt ausgewiesene Begriff als echter Glossarbeitrag existiert oder die Relation bewusst offen bleibt;
 - die Beziehungen technisch auflösbar sind;
 - die Box `Verwandte Begriffe` nur echte veröffentlichte Glossarbeiträge verlinkt;
 - der gesamte Fließtext **0 Links** enthält;
 - die passende Portal-Kategorie ausschließlich rechts in `Mehr zum Thema` verlinkt wird;
 - kein Linkziel doppelt gesetzt ist.
 
-## 2. Veröffentlichungsreihenfolge
+## 3. Textaufbau
 
-Für maschinell erzeugte neue Cluster gilt:
-1. alle Cluster-Mitglieder zunächst als Entwurf anlegen;
-2. Inhalte, Kurzdefinition, Kategorie/Portalbindung, Metaangaben und Beziehungen für alle Mitglieder setzen;
-3. Text-/Linkregeln für sämtliche Mitglieder positiv und negativ prüfen;
-4. erst wenn der gesamte Cluster vollständig ist, alle Cluster-Mitglieder veröffentlichen.
-
-Damit kann kein halber Cluster öffentlich werden.
-
-## 3. Interne Links
-
-Verbindlich je Begriff:
-- im Fließtext **kein Link**;
-- verwandte Glossarbegriffe ausschließlich als Links in der rechten Box `Verwandte Begriffe`;
-- Portal-Kategorie ausschließlich als Link in der rechten Box `Mehr zum Thema`;
-- Journal-Bereich/Kategorie dort nur ersatzweise, wenn kein passendes Portal-Ziel existiert;
-- dasselbe Ziel niemals doppelt auf derselben Einzelansicht.
-
-Details ausschließlich in `TEXT_UND_LINKREGELN.md`.
-
-## 4. Verwandte Begriffe
-
-`Verwandte Begriffe` ist kein Freitext-Friedhof.
-
-Ein Begriff darf dort nur erscheinen, wenn:
-- ein veröffentlichter `uge_term` dazu existiert;
-- der Link auf diesen echten Glossarbeitrag auflösbar ist.
-
-Fehlt der verwandte Begriff, darf er nur erzeugt werden, wenn seine WDB-Quelle frisch als `GEPRUEFT` belegt ist. Keine Erzeugung aus Chatwissen oder Alt-Paketen ohne Fachbeleg.
-
-## 5. Pferderassen
-
-**Pferderassen und Ponyrassen sind im Glossar tabu.**
-
-Sie gehören ausschließlich in das separate Pferderassen-System/Büro und werden weder als Glossarbeitrag noch als automatisch nachgezogener verwandter Begriff erzeugt.
-
-## 6. Textaufbau
-
-Standard und Pflicht für Glossarbeiträge:
+Pflicht für Glossarbeiträge:
 - Titel;
 - sichtbare Kurzdefinition/Zusammenfassung;
 - ca. 150–200 Wörter;
@@ -65,110 +37,125 @@ Standard und Pflicht für Glossarbeiträge:
 
 Keine H2/H3 im Begriffstext aus SEO-, Schema- oder Gestaltungsmotiven.
 
-## 7. Paketregel
+## 4. Interne Links
 
-Ein neuer Pluginstand erzwingt **nicht automatisch** neue Glossarbegriffe. Neue Begriffe werden nur erzeugt, wenn die fachliche WDB-Grundlage `GEPRUEFT` vorliegt und der Produktionsauftrag dies tatsächlich umfasst.
+Verbindlich je Begriff:
+- im Fließtext **kein Link**;
+- verwandte Glossarbegriffe ausschließlich als Links in der rechten Box `Verwandte Begriffe`;
+- Portal-Kategorie ausschließlich als Link in der rechten Box `Mehr zum Thema`;
+- Journal dort nur ersatzweise, wenn kein passendes Portal-Ziel existiert;
+- dasselbe Ziel niemals doppelt auf derselben Einzelansicht.
 
-## 8. Bestehende Glossarbeiträge
+Details ausschließlich in `TEXT_UND_LINKREGELN.md`.
+
+## 5. Verwandte Begriffe
+
+`Verwandte Begriffe` ist kein Freitext-Friedhof.
+
+Ein Begriff darf dort nur als Link erscheinen, wenn ein echter `uge_term` dazu existiert und das Ziel technisch auflösbar ist.
+
+Fehlt der verwandte Begriff, darf er nur produziert werden, wenn seine WDB-Quelle frisch ausreichend belegt ist. Keine Erzeugung aus Chatwissen oder Alt-Paketen ohne Fachbeleg.
+
+## 6. Pferderassen
+
+**Pferderassen und Ponyrassen sind im Glossar tabu.**
+
+Sie gehören ausschließlich in das separate Pferderassen-System und werden weder als Glossarbeitrag noch als automatisch nachgezogener verwandter Begriff erzeugt.
+
+## 7. Bestehende Glossarbeiträge
 
 Bereits veröffentlichte oder angelegte Glossarbeiträge werden wegen neuer Regeln nicht pauschal gelöscht.
 
 Stattdessen gilt:
 1. vorhandenen Beitrag eindeutig per Slug/ID bestimmen;
-2. in `BEGRIFFSREGISTER.md` auf `NACHPRÜFUNG` führen;
-3. bestehenden Datensatz gezielt **überschreiben/aktualisieren**, ID und URL erhalten;
-4. Inhalt, Kurzdefinition, Metaangaben, Portalbindung und Relationsdaten prüfen;
-5. **sämtliche Links aus dem Fließtext entfernen**, Linktext als normalen Text erhalten;
-6. verwandte Links ausschließlich rechts in `Verwandte Begriffe`, Portalziel ausschließlich rechts in `Mehr zum Thema` ausgeben;
-7. normale WordPress-Beiträge negativ gegen Veränderung prüfen;
-8. erst nach vollständiger technischer und erforderlicher Liveprüfung auf `FERTIG` setzen.
+2. bestehenden Datensatz gezielt aktualisieren, ID und URL erhalten;
+3. Inhalt, Kurzdefinition, Metaangaben, Portalbindung und Relationsdaten prüfen;
+4. sämtliche Links aus dem Fließtext entfernen; Linktext als normalen Text erhalten;
+5. verwandte Links ausschließlich rechts in `Verwandte Begriffe`, Portalziel ausschließlich rechts in `Mehr zum Thema` ausgeben;
+6. normale WordPress-Beiträge negativ gegen Veränderung prüfen;
+7. erst nach vollständiger technischer und erforderlicher Liveprüfung auf `FERTIG` setzen.
 
 Löschen ist nur zulässig, wenn ein echter Dublette-, Fehl- oder Testdatensatz nachgewiesen ist.
 
-## 9. Autoritatives Begriffsregister
+## 8. Portal-/SEO-Gates
 
-Die Produktionswahrheit `OFFEN / IN ARBEIT / NACHPRÜFUNG / FERTIG / GESPERRT` liegt ausschließlich in:
+Für neue Glossarkandidaten gilt vor Produktion:
 
-`BEGRIFFSREGISTER.md`
+1. gegen echte WordPress-Kategorien und starke veröffentlichte Portal-Landingpages prüfen;
+2. Portal-Hauptseiten können normale hierarchische WordPress-Seiten (`post_type=page`) sein;
+3. bei echter Kategorie-/Portal-Kollision keinen konkurrierenden Glossarbeitrag produzieren;
+4. normale Beiträge bleiben Teil der Kannibalisierungsprüfung, sind aber nicht automatisch Portal-Landingpages;
+5. bestehende veröffentlichte Glossarbeiträge werden durch neue Kandidatenregeln nicht pauschal gelöscht.
 
-Kein zweites paralleles Erledigt-/Unerledigt-Register anlegen.
+## 9. Neuer verbindlicher Produktionsweg – JSON statt autonome Textautomation
 
-## 10. Portal-Kategorien und Portal-Landingpages haben SEO-Vorrang vor neuen Glossarbegriffen
+Der Produktionsweg ist ab jetzt:
 
-Für neue Glossarkandidaten gilt verbindlich:
-
-1. **zuerst gegen echte WordPress-Kategorien UND gegen starke veröffentlichte Portal-Landingpages prüfen**;
-2. technisch sind Portal-Hauptseiten im Pferde Atelier nicht durchgehend WordPress-`category`, sondern teilweise normale hierarchische WordPress-Seiten (`post_type=page`);
-3. stimmt der normalisierte Glossarbegriff mit einer solchen Kategorie oder Portal-Landingpage überein, einschließlich gebundener Singular/Plural-Normalisierung wie `Regendecke` ↔ `Regendecken`, wird **kein neuer Glossarbeitrag** erzeugt;
-4. Status bei Taxonomie-Treffer: `AUSGESCHLOSSEN_KATEGORIE`;
-5. Status bei Portal-Landingpage-Treffer: `AUSGESCHLOSSEN_PORTALSEITE`;
-6. danach keine Fachrecherche, kein Textpaket und keine Veröffentlichung für diesen Kandidaten;
-7. erst Kandidaten ohne Kategorie-/Portalseiten-Treffer laufen weiter in Glossar-Dublette und sonstige Artikel-/Seiten-Kannibalisierung;
-8. normale Beiträge werden durch einen exakten Titel nicht als Portal-Landingpage behandelt; sie bleiben Teil der normalen Kannibalisierungsprüfung;
-9. bestehende bereits geprüfte/veröffentlichte Glossarbeiträge werden durch diese neue Kandidatenregel **nicht pauschal gelöscht oder umgeschrieben**.
-
-SEO-Grund: Die starke Portal-Zielseite ist in diesem Fall die bevorzugte Google-Zielseite und soll nicht durch einen zusätzlich neu erzeugten Glossarbeitrag konkurrenziert werden.
-
-## 11. Gate-Hardlock über die komplette Automationskette
-
-Die Ausschluss-/Sicherheitsprüfung darf **nicht nur bei der Kandidatenfindung** stattfinden.
-
-Verbindliche Prüfpunkte:
-
-`Discovery -> Kategorie/Portalseite/Dublette/Kannibalisierung -> Research-Paket-Eingang -> PRE-PUBLISH -> WordPress-Readback`
-
-Harte Regeln:
-
-1. Ein Kandidat, der bei Discovery an Kategorie, Portal-Landingpage oder Kannibalisierung scheitert, darf nicht weiterverarbeitet werden.
-2. Am Research-Paket-Eingang werden dieselben Bestands-/SEO-Gates **erneut** gegen den aktuellen WordPress-Bestand ausgeführt.
-3. Ein Research-Paket darf keinen neuen Kandidaten aus dem Nichts erzeugen. Neue Begriffe müssen vorher im autorisierten Kandidatenpool existieren; nur ein bereits real vorhandener Glossarbeitrag (`BESTAND`) darf direkt an seine bestehende ID gebunden werden.
-4. Ein Research-Paket für Kandidat A muss maschinenfest auch Kandidat A enthalten. Abweichendes Ziel -> `RESEARCH_PACKAGE_TARGET_MISMATCH` und keine Übernahme.
-5. Unmittelbar vor jedem WordPress-Write wird der aktuelle Bestand erneut gelesen und dieselbe Kategorie-/Portalseiten-/Kannibalisierungsprüfung ausgeführt.
-6. Entsteht zwischen Research und Publish eine neue konkurrierende Portal-/Kategorieseite, muss der Publish dadurch noch gestoppt werden.
-7. Neue Beiträge werden zuerst als Draft geschrieben, danach müssen definierte Felder aus WordPress real zurückgelesen werden. Erst bei identischem Readback darf veröffentlicht werden.
-8. Bei Update eines bestehenden Glossarbeitrags ist vor dem Write ein Snapshot zu sichern; bei Readback-/Publishfehler wird zurückgerollt.
-9. `SANDBOX` darf unabhängig vom Auto-Publish-Häkchen niemals produktiv schreiben. Realer Write ist nur zulässig bei `mode=ARMED` **und** `auto_publish=true`.
-10. Der lokale PSTE-Rückstand darf zur Kandidatengewinnung vertieft werden, aber ausschließlich mit `provider_calls=0`. Jede Provider-Anforderung im Backlog-Scan -> `BLOCKED`.
-11. Discovery muss vollständig fail-closed vor Research/Publish liegen. Solange Discovery `RUNNING`, `RETRY_WAIT` oder `BLOCKED` ist, dürfen Research und Publish nicht starten.
-
-## 12. Asynchroner, wiederaufnehmbarer PSTE-Rückstand mit Planning-Vorrang
-
-Ein kompletter PSTE-Rückstand darf **niemals** in einem einzigen Browser-/PHP-Aufruf abgearbeitet werden.
+`WDB-Aktenschrank -> Chat-Texterstellung nach festen Regeln -> JSON-Batch -> Glossar-Importer -> WordPress-Draft -> Readback -> manuelle/gesonderte Freigabe`
 
 Verbindlich:
+- das Plugin schreibt den Text nicht frei selbst;
+- Chat liefert fertige Glossarbeiträge als JSON-Datei;
+- Plugin validiert Vertrag, WDB-ID/Begriff, Slug, Textregeln, Relationen und Metadaten;
+- Write zunächst ausschließlich als Draft;
+- definierte Felder werden nach WordPress-Write real zurückgelesen;
+- Readback-Mismatch muss fail-closed enden und neu angelegte Batchwrites zurückrollen;
+- kein Auto-Publish als Normalweg;
+- normale WordPress-Posts/-Pages dürfen durch den Import nicht verändert werden;
+- Batchgröße wird im neuen Importvertrag hart begrenzt und getestet;
+- Reimport/Dublette muss blockiert oder kontrolliert als Bestandsupdate behandelt werden.
 
-1. `Pool jetzt aktualisieren` startet/resumiert nur einen persistenten Discovery-Job; der Browserrequest führt **keine schwere Retained-Schleife** aus.
-2. Ein Worker verarbeitet exakt **eine schwere Einheit**: entweder einen Retained-Backlog-Batch **oder** eine Planning-Seite. Nicht beides in demselben Request.
-3. Aktueller gebundener Stand: Retained-Batch 20, Planning-Seite 25.
-4. Cursor, Phase und Fortschritt werden nach jedem sicheren Teilstück dauerhaft gespeichert.
-5. Es gibt **kein künstliches Gesamtlimit 400/500**. Die Discovery endet nur bei:
-   - `TARGET_REACHED`,
-   - echtem `BACKLOG_COMPLETE` nach finalem Planning-Drain,
-   - oder hartem Fehler.
-6. Liefert ein Retained-Batch `promoted > 0`, muss die Phase zwingend auf `PLANNING` wechseln.
-7. Ein offener Planning-Pass hat Vorrang: **kein weiterer Retained-Batch**, bevor dieser Planning-Pass vollständig beendet wurde.
-8. Ein alter Zustand mit bereits vorhandenen Promotions, aber noch nicht verarbeitetem Planning, muss beim Upgrade zuerst in `PLANNING` überführt werden. Das gilt auch bei einem bereits geplanten Worker ohne erneuten Nutzerklick.
-9. Ein alter, bereits real erreichter Cursor muss bei Upgrade übernommen werden; kein Neustart bei 0 ohne fachlichen Grund.
-10. Cursor-Fortschritt und PSTE-`processed` sind getrennte Größen. Für den realen Backlog-Fortschritt ist zusätzlich `traversed` / `Backlog durchlaufen` zu führen; `processed` darf nicht allein als Fortschrittswahrheit dargestellt werden.
-11. Vor schwerer Worker-Arbeit muss bereits ein Recovery-Event geplant sein. Stirbt PHP/Proxy hart, setzt ein späterer Worker am letzten sicheren Checkpoint fort.
-12. 502/504/Exception dürfen keinen Cursor überspringen. Fehler -> `RETRY_WAIT`; Wiederholung startet am selben Cursor.
-13. Parallelworker sind durch einen Lock zu verhindern. Lock-TTL muss die PHP-Ausführungsgrenze berücksichtigen.
-14. Nach echtem Ende des Retained-Backlogs ist ein **frischer vollständiger Planning-Drain** Pflicht, damit zwischenzeitlich promotete Themen nicht verloren gehen.
-15. Nach Discovery-Abschluss wird die normale Automationskette über einen separaten Continue-Hook fortgesetzt; der reguläre Tages-/Halbtages-Cron darf die Sofortfortsetzung nicht blockieren.
+Konzeptionelle Referenz:
+`Pferde Atelier – Pferderassen Manager 0.2.0`.
 
-## 13. Worker-Antrieb darf nicht allein von WP-Cron abhängen
+## 10. JSON-Batch – Zielvertrag für den Umbau
 
-Für einen bereits laufenden Discovery-Job ist WP-Cron **nur Recovery-Fallback**, nicht der einzige Motor.
+Der neue Glossar-Importer erhält einen eigenen festen Batchvertrag. Mindestens je Begriff vorgesehen:
+- stabile WDB-`source_id` / `term-*`;
+- `begriff`;
+- `slug`;
+- `oberbereich`;
+- optional `unterbereich`;
+- `titel`;
+- `kurzdefinition`;
+- `artikeltext`;
+- `verwandte_source_ids`;
+- primäres Portalziel / gebundene Ziel-ID;
+- `meta_title`;
+- `meta_description`.
 
-Verbindlich:
+Der exakte JSON-Vertrag wird beim Pluginumbau versioniert festgelegt und positiv/negativ getestet. Bis dahin keine JSON-Datei als Produktionsfreigabe behaupten.
 
-1. Nach jedem erfolgreichen bounded Worker-Schritt mit Status `RUNNING` muss der nächste Worker **selbst** über einen internen, nicht blockierenden Loopback gestartet werden.
-2. Der Loopback darf den aufrufenden Request nicht festhalten (`blocking=false`) und muss ein enges Transport-Timeout besitzen.
-3. Der interne Worker-Endpunkt muss mit einem nicht öffentlichen Secret geschützt und mit konstantzeitlicher Prüfung (`hash_equals`) validiert werden.
-4. Ein Watchdog muss einen `RUNNING`-Job erneut anstoßen, wenn längere Zeit kein Dispatch/Checkpoint erfolgt ist.
-5. Ein Loopback-Transportfehler darf keinen Fortschritt vortäuschen; Fehler muss dauerhaft sichtbar gespeichert werden.
-6. Bei Loopback-Fehler muss der geplante WP-Cron-Recovery-Weg bestehen bleiben.
-7. `RETRY_WAIT` nach Timeout/502/504 darf nicht durch eine schnelle rekursive Loopback-Schleife gehämmert werden.
-8. Die Admin-Prüfansicht muss mindestens den Loopback-Dispatch-Zähler und einen möglichen Worker-Fehler sichtbar machen.
+## 11. Autoritatives Produktionsregister
 
-Kein PASS aus Codeansicht. Für Änderungen an diesen Gates/Worker-Regeln sind harte Positiv-/Negativtests erforderlich. Kritische Schutzregeln müssen zusätzlich durch absichtlich gebrochene Mutanten nachweislich ROT werden. Ein lokaler Test ist nur belastbar, wenn er den real beobachteten Zustandsübergang der Live-Strecke reproduziert.
+Die Produktionswahrheit `OFFEN / JSON_GEPRUEFT / DRAFT / DRAFT_READBACK_PASS / VEROEFFENTLICHT / GESPERRT` soll künftig aus zentralem WDB-Bestand plus realem WordPress-Bestand abgeleitet werden.
+
+`BEGRIFFSREGISTER.md` bleibt bis zur importergebundenen Migration bestehender Statusweg; keine zweite parallele Erledigt-Liste anlegen.
+
+## 12. Abgelöster Automationsweg – nur Historie
+
+Die frühere autonome Kette mit PSTE-Discovery, Retained/Planning, WP-Cron, Loopback-Worker, Research-Paket und Auto-Publish ist **abgelöst** und keine aktive Produktionsregel mehr.
+
+Historische technische Belege bleiben in:
+- `FEHLERQUELLEN.md`;
+- `CURRENT_STATE.md` nur als abgelöster Vorstand, falls nötig;
+- vorhandenen Testreports/Pluginpaketen 1.3.5–1.3.8.
+
+Insbesondere gilt nicht mehr als NEXT ACTION:
+- 1.3.8 installieren, um Loopback/Planning weiterzutesten;
+- Auto-Publish-Strecke fertigbauen;
+- Worker-/Cron-/Planning-System weiter ausbauen.
+
+## 13. PASS-GRENZE für den neuen Weg
+
+Kein Produktions-PASS, bevor der neue JSON-Importer real bewiesen hat:
+- gültiger Batch → Draft;
+- ungültiger Batch → BLOCK;
+- Dublette/Reimport → kontrolliert BLOCK/Update gemäß Vertrag;
+- 0 Bodylinks;
+- keine Pferderassen im Glossar;
+- Relation nur zu gültigen Begriffen;
+- WordPress-Readback vollständig;
+- absichtlich korrupter Readback → Rollback/BLOCK;
+- normale Posts/Pages unverändert;
+- exakte fertige ZIP positiv/negativ/regressiv geprüft.
