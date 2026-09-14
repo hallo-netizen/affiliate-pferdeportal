@@ -1,14 +1,25 @@
 from __future__ import annotations
-import json,sys
+import json,re,sys
 from pathlib import Path
 
-import supervisor
+import authoring_contract,supervisor
 from full_route_test_fixture import source_claims_for_article
 from real_route_test_support import valid_real_article
 
 
 def write_json(path:Path,value):
     path.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True),encoding='utf-8')
+
+def _balance_pellets_conclusion(body:str,state:dict)->str:
+    if state['article']['category']!='pellets-beratung': return body
+    pattern=re.compile(r'(<section data-block="conclusion">.*?)(</section>)',re.S); match=pattern.search(body)
+    if not match: raise RuntimeError('PELLETS_CONCLUSION_BLOCK_MISSING')
+    section=match.group(1); last_p=section.rfind('</p>')
+    if last_p<0: raise RuntimeError('PELLETS_CONCLUSION_PARAGRAPH_MISSING')
+    addition=' Zusätzlich bleibt für Pellets aus Luzerne als Heuersatz der gebundene Quellenstand maßgeblich; weitergehende Tatsachen werden im Fazit ausdrücklich nicht ergänzt.'
+    section=section[:last_p]+addition+section[last_p:]
+    result=body[:match.start(1)]+section+body[match.end(1):]
+    authoring_contract.validate_candidate(result,state['authoring_contract']); return result
 
 def main(argv):
     if len(argv)!=5:
@@ -26,7 +37,7 @@ def main(argv):
     if mode=='draft':
         if state.get('phase')!='DRAFT_REQUIRED':
             print('FULL_ROUTE_TEST_WORKER_FAIL:DRAFT_PHASE_REQUIRED'); return 2
-        body=valid_real_article(state,index)
+        body=_balance_pellets_conclusion(valid_real_article(state,index),state)
         out.write_text(body,encoding='utf-8'); return 0
     print('FULL_ROUTE_TEST_WORKER_FAIL:UNKNOWN_MODE'); return 2
 
