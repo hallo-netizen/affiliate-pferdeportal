@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import hashlib
 import html.parser
 import json
@@ -30,6 +31,24 @@ def canon(value) -> bytes:
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def encode_launch(value: dict) -> str:
+    return base64.urlsafe_b64encode(canon(value)).decode('ascii').rstrip('=')
+
+
+def decode_launch(token: str) -> dict:
+    if not isinstance(token, str) or not token or not re.fullmatch(r'[A-Za-z0-9_-]+', token):
+        raise ParentStartError('PARENT_LAUNCH_TOKEN_INVALID')
+    padded = token + '=' * ((4 - len(token) % 4) % 4)
+    try:
+        raw = base64.urlsafe_b64decode(padded.encode('ascii'))
+        value = json.loads(raw.decode('utf-8'))
+    except Exception as exc:
+        raise ParentStartError('PARENT_LAUNCH_TOKEN_DECODE_FAILED') from exc
+    if canon(value) != raw:
+        raise ParentStartError('PARENT_LAUNCH_TOKEN_NOT_CANONICAL')
+    return value
 
 
 class _TextExtractor(html.parser.HTMLParser):
@@ -160,15 +179,9 @@ def _build_production_snapshot(items: list[dict], manifest: str) -> bytes:
     return canon(value)
 
 
-def run(launch_path: Path, runtime_root: Path) -> list[Path]:
-    if not launch_path.is_file():
-        raise ParentStartError('PARENT_LAUNCH_FILE_MISSING')
-    if _within(launch_path, REPO) or _within(runtime_root, REPO):
+def run_launch(launch: dict, runtime_root: Path) -> list[Path]:
+    if _within(runtime_root, REPO):
         raise ParentStartError('PARENT_RUNTIME_MUST_BE_OUTSIDE_REPO')
-    try:
-        launch = json.loads(launch_path.read_text(encoding='utf-8'))
-    except Exception as exc:
-        raise ParentStartError('PARENT_LAUNCH_JSON_INVALID') from exc
     items, source_urls = _validate_launch(launch)
     manifest = root_entry._critical_manifest_sha256()
     head = root_entry._git('rev-parse', '--verify', 'HEAD')
@@ -206,11 +219,24 @@ def run(launch_path: Path, runtime_root: Path) -> list[Path]:
     return workspaces
 
 
+def run(launch_path: Path, runtime_root: Path) -> list[Path]:
+    if not launch_path.is_file():
+        raise ParentStartError('PARENT_LAUNCH_FILE_MISSING')
+    if _within(launch_path, REPO):
+        raise ParentStartError('PARENT_RUNTIME_MUST_BE_OUTSIDE_REPO')
+    try:
+        launch = json.loads(launch_path.read_text(encoding='utf-8'))
+    except Exception as exc:
+        raise ParentStartError('PARENT_LAUNCH_JSON_INVALID') from exc
+    return run_launch(launch, runtime_root)
+
+
 def main(argv: list[str]) -> int:
     try:
-        if len(argv) != 4 or argv[1] != 'start':
+        if len(argv) != 4 or argv[1] != 'start-b64':
             raise ParentStartError('PARENT_START_BAD_COMMAND')
-        workspaces = run(Path(argv[2]), Path(argv[3]))
+        launch = decode_launch(argv[2])
+        workspaces = run_launch(launch, Path(argv[3]))
         print('SYSTEM4_PARENT_START_PASS:POINT0_ROOT_DISPATCH_READY:ARTICLE_COUNT=' + str(len(workspaces)))
         for index, workspace in enumerate(workspaces):
             print('SYSTEM4_PARENT_WORKSPACE:' + str(index) + ':' + str(workspace))
