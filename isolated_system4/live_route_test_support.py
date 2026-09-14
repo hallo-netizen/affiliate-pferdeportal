@@ -91,6 +91,7 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   need=max(int(b.get('source_trace_minimum') or 0),1)
   for fact_id in allowed[:need]:
    meta=b['fact_authority'][fact_id];traces+=f'<span class="ppm-source-trace" data-fact-id="{fact_id}" data-source-title="{meta["source_id"]}" data-source-hash="{meta["evidence_text_sha256"]}"></span>'
- classes=' '.join(c['system4_guards']['design']['required_root_classes']);article=f'<article class="{classes}" data-article-type="{identity["article_type"]}">'+''.join(blocks)+tables+traces+'</article>'
+  blocks[0]=blocks[0].replace('</p>',traces+'</p>',1)
+ classes=' '.join(c['system4_guards']['design']['required_root_classes']);article=f'<article class="{classes}" data-article-type="{identity["article_type"]}">'+''.join(blocks)+tables+'</article>'
  authoring_contract.validate_candidate(article,c)
  return article
