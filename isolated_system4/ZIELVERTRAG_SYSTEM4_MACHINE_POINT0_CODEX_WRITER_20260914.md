@@ -8,6 +8,12 @@ Er ersetzt für System 4 die frühere Annahme „Codex recherchiert selbst“. S
 
 `gebundene Metadaten -> Maschine erzeugt Punkt-0 -> Maschine beschafft/verifiziert reale Quellen -> Root bindet Punkt-0 -> Supervisor besitzt den Lauf -> hashgebundener Worker-Dispatch -> Facts -> Context -> Codex schreibt -> echte LT/PPM-Prüfer -> Same-Article-Repair -> Batch -> V2-Handoff -> bytegleiche Rekonstruktion`
 
+## Universelle Mengen- und Beitragsartbindung
+
+System 4 hat **keine feste Artikelzahl**. Ein gebundener Lauf verarbeitet exakt den nichtleeren Input-Batch `1..N` **ohne künstliche System-4-Obergrenze**. Größen wie 1, 3, 7, 25 oder 1000 sind ausschließlich Regressionen und niemals ein Produktions-Hardlimit.
+
+System 4 hat **keine feste Beitragsart** und keine System-4-Whitelist für `Beratung` oder andere Typen. `article_type` kommt aus den gebundenen Metadaten; die unveränderten autoritativen Textmaschine-/PPM-/Designregeln entscheiden über PASS oder BLOCK.
+
 ## Verantwortungen
 
 Die Maschine ist Eigentümer von Start, Quellenbeschaffung, Quellenintegrität, Snapshot, Root-/Manifest-/Head-Bindung, Supervisor-State, Worker-Dispatch, Prüfern, Batch und Handoff.
@@ -46,4 +52,6 @@ Unverändert gelten:
 
 ## Testpflicht
 
-Jede Änderung muss lokal positiv und negativ gegen den Gesamtworkflow geprüft werden. Bekannte historische Fehler bleiben verpflichtende Regressionen. Ein Codex-Produktionslauf ist erst zulässig, wenn exakt der aktuelle Remote-Head diese Tests bestanden hat und der Hardlock auf genau diesem Head SUCCESS ist.
+Jede Änderung muss positiv und negativ gegen den Gesamtworkflow geprüft werden. Bekannte historische Fehler bleiben verpflichtende Regressionen. Ein finaler System-4-Abnahmetest gilt nur dann als Start-bis-Datei-Test, wenn **derselbe eine Startknopf** auch Point-0, Root, Supervisor, hashgebundenen Worker-/Codex-Start, phasengetrennte Worker-Artefakte, echte LT-/PPM-Prüfer, Batch, V2-Handoff und bytegleiche Rekonstruktion tatsächlich durchläuft. Ein Test, der erst hinter dem Worker-Start oder an einem vorbereiteten Zwischenzustand beginnt, ist nur ein Komponententest und kein Gesamt-PASS.
+
+Ein Codex-Produktionslauf ist erst zulässig, wenn exakt der aktuelle Remote-Head diese Tests bestanden hat und der Hardlock auf genau diesem Head SUCCESS ist.
