@@ -17,23 +17,23 @@ ROLLE: Verbindliche Produktionsregeln für alle Glossarbegriffe.
 
 ## Linkregeln
 
-1. Innerhalb eines Glossarbegriffs darf dasselbe Linkziel nicht mehrfach gesetzt werden.
-2. Bevorzugt wird aus dem Fließtext auf eine passende übergeordnete Portal-Kategorie verlinkt.
-3. Keine Verlinkung auf Journal-Kategorien, solange eine passende übergeordnete Portal-Kategorie existiert.
-4. Nur wenn keine passende übergeordnete Portal-Kategorie existiert, darf ersatzweise auf einen passenden Journal-Bereich bzw. eine Journal-Kategorie verlinkt werden.
-5. Linktexte müssen natürlich in den Satz eingebaut sein; keine wiederholenden Standardfloskeln zur Linkeinleitung.
-6. Ein gesetzter Link muss inhaltlich wirklich zum Begriff und zum jeweiligen Satz passen.
-7. Bereits vorhandene interne Links im selben Artikel sind vor einem neuen Link zu prüfen, damit keine doppelte Zielverlinkung entsteht.
-8. Verwandte Glossarbegriffe werden in der Einzelansicht im eigenen Block `Verwandte Begriffe` als Links ausgegeben. Diese Links werden nicht zusätzlich im Fließtext wiederholt.
-9. Der Fließtext bleibt dadurch frei von redundanten Verwandt-Begriff-Links; dort bleibt vorrangig der passende Portal-Kategorielink.
+1. Im Glossar-Fließtext stehen **keine Links**. Pflichtwert: **0 `<a>`-Links** im eigentlichen Begriffstext.
+2. Verwandte Glossarbegriffe werden ausschließlich im rechten Block `Verwandte Begriffe` als echte Links ausgegeben.
+3. Die passende übergeordnete Portal-Kategorie wird ausschließlich im rechten Block `Mehr zum Thema` verlinkt.
+4. Journal-Ziele dürfen nur außerhalb des Fließtexts als Ersatz für `Mehr zum Thema` verwendet werden, wenn kein passendes Portal-Ziel existiert.
+5. Dasselbe Linkziel darf innerhalb der gesamten Einzelansicht nicht doppelt gesetzt werden.
+6. Bestehende Glossarbeiträge werden bei Regeländerungen gezielt überschrieben/aktualisiert; ID und URL bleiben erhalten.
+7. Normale WordPress-Beiträge und Seiten sind von dieser Glossarregel nicht betroffen.
 
 ## Produktionsprüfung vor Freigabe
 
-- Positiv prüfen: alle vorgesehenen Links führen auf unterschiedliche, passende Ziele und bevorzugen übergeordnete Portal-Kategorien.
-- Positiv prüfen: verwandte Begriffe erscheinen als echte Links im Block `Verwandte Begriffe`.
+- Positiv prüfen: Fließtext enthält exakt **0 Links**.
+- Positiv prüfen: verwandte Begriffe erscheinen als echte Links ausschließlich im Block `Verwandte Begriffe`.
+- Positiv prüfen: die passende Portal-Kategorie erscheint als Link ausschließlich im Block `Mehr zum Thema`.
 - Positiv prüfen: Kurzdefinition/Zusammenfassung ist vorhanden und sichtbar.
-- Negativ prüfen: kein identisches Linkziel doppelt im selben Begriff.
-- Negativ prüfen: verwandte Begriffe werden nicht zugleich im Seitenblock und nochmals redundant im Fließtext verlinkt.
-- Negativ prüfen: keine Journal-Kategorie verlinkt, wenn eine passende übergeordnete Portal-Kategorie vorhanden ist.
+- Positiv prüfen: bestehende Begriffe werden per Update überschrieben, ohne ID/URL zu ändern.
+- Negativ prüfen: kein `<a>`-Element im Fließtext.
+- Negativ prüfen: kein Linkziel doppelt auf der Einzelansicht.
+- Negativ prüfen: normale WordPress-Beiträge bleiben unverändert.
 - Negativ prüfen: keine wiederholenden Floskeln/Schablonen zwischen Begriffen.
-- Kein PASS aus Codeansicht oder Annahme ableiten; die Regel muss am finalen erzeugten Begriff geprüft werden.
+- Kein PASS aus Codeansicht oder Annahme ableiten; die Regel muss am final erzeugten Begriff und für LIVE erst nach realem Readback geprüft werden.
