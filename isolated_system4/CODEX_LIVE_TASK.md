@@ -1,18 +1,16 @@
-# SYSTEM 4 — FIRST CODEX LIVE TEST
+# HISTORISCH — NICHT MEHR ALS CODEX-AUFTRAG VERWENDEN
 
-Run only the isolated System 4 test. No file changes unless required to make the command executable; if any change would be needed, STOP and report the first blocker instead.
+Diese Datei dokumentiert ausschließlich einen frühen Architektur-/Boundary-Test von System 4.
 
-Command:
-`python3 isolated_system4/live_test.py isolated_system4/live_fixture/wordpress_snapshot.json`
+Sie ist **kein aktueller Arbeitsauftrag** und darf nicht mehr verwendet werden, um Codex für Architektur-, Diagnose-, Preflight-, Patch-, Git- oder Testarbeit zu starten.
 
-Required positive proof:
-- Codex entry PASS
-- bad draft is blocked with `TITLE_BINDING_FAIL`
-- phase becomes `REPAIR_REQUIRED`
-- corrected draft passes
-- release produces WordPress WXR draft + release JSON
-- `publish_allowed=false`
-- immutable metadata tampering blocks release
-- terminal `SYSTEM4_FIRST_CODEX_BOUNDARY_LIVE_TEST_PASS`
+Aktuell verbindlich:
 
-This is architecture/boundary proof only, not production text-quality approval.
+- System-4-Status: `isolated_system4/README.md`
+- Zielvertrag: `isolated_system4/ZIELVERTRAG_SYSTEM4_CODEX_STRICT_PIPELINE_20260913.md`
+- Hard Rules: `isolated_system4/AGENTS.md`
+- realer Produktionsauftrag: `isolated_system4/FULL_RULE_BATCH_TASK.md`
+
+Codex darf ausschließlich für einen **konkreten real gebundenen Artikel-/Batch-Produktionslauf** verwendet werden und nur nach ausdrücklicher Nutzerfreigabe.
+
+Der frühere Inhalt dieser Datei ist historisch abgelöst.

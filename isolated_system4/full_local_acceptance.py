@@ -142,6 +142,31 @@ def main():
 
     n=base/'n4'; n.mkdir(); stage_to_context(f,n/'w',env); bad=f['final'].read_text().replace('system-129-table ','',1); dp=n/'bad-design.html'; dp.write_text(bad); cp=cmd([sys.executable,str(CONTROLLER),'draft',str(n/'w'),str(dp)],2,env); assert b'DESIGN_TABLE_SYSTEM129_CLASS_MISSING' in cp.stdout; results.append(('NEG_DESIGN_DRIFT',{}))
 
+    def context_negative(name, mutate, expected):
+        n=base/name; n.mkdir(); w=n/'w'; root_stdin(f['snapshot'],w,env); cmd([sys.executable,str(CONTROLLER),'research',str(w),str(f['research'])],0,env); cmd([sys.executable,str(CONTROLLER),'facts',str(w),str(f['facts'])],0,env)
+        plan=json.loads(f['plan'].read_text()); pack=json.loads(f['pack'].read_text()); mutate(plan,pack)
+        if isinstance(plan.get('quality_binding'),dict): plan['quality_binding_hash']=stable(plan['quality_binding'])
+        pp=writej(n/'plan.json',plan); fp=writej(n/'pack.json',pack); cp=cmd([sys.executable,str(CONTROLLER),'context',str(w),str(fp),str(pp)],2,env); assert expected.encode() in cp.stdout; results.append((name.upper(),{}))
+
+    context_negative('neg_runtime_unknown_fact',lambda p,k:p['runtime_order']['allowed_fact_ids'].append('fact-alien'),'RUNTIME_ALLOWED_FACT_ID_UNKNOWN')
+    context_negative('neg_internal_marker_missing',lambda p,k:p['quality_binding'].__setitem__('internal_test_marker',''),'INTERNAL_TEST_MARKER_INVALID')
+    context_negative('neg_runtime_title_mismatch',lambda p,k:p['runtime_order'].__setitem__('title','Alien title'),'RUNTIME_ORDER_TITLE_MISMATCH')
+    context_negative('neg_context_snapshot_mismatch',lambda p,k:p.__setitem__('source_snapshot_id','f'*64),'PLAN_FACT_PACK_SNAPSHOT_MISMATCH')
+    context_negative('neg_runtime_link_binding_mismatch',lambda p,k:p['runtime_order']['links'][0].__setitem__('href','/alien-link/'),'RUNTIME_LINK_BINDING_MISMATCH')
+    context_negative('neg_runtime_required_field_missing',lambda p,k:p['runtime_order'].__setitem__('slug',''),'RUNTIME_ORDER_INCOMPLETE')
+
+    def draft_negative(name, transform, expected):
+        n=base/name; n.mkdir(); w=n/'w'; stage_to_context(f,w,env); dp=n/'draft.html'; dp.write_text(transform(f['final'].read_text()),encoding='utf-8'); cp=cmd([sys.executable,str(CONTROLLER),'draft',str(w),str(dp)],2,env); assert expected.encode() in cp.stdout; results.append((name.upper(),{}))
+
+    draft_negative('neg_draft_unknown_fact',lambda h:h.replace('data-fact-ids="','data-fact-ids="fact-alien ',1),'PREWRITE_FACT_ID_UNKNOWN')
+    draft_negative('neg_draft_fact_refs_missing',lambda h:re.sub(r'\sdata-fact-ids="[^"]*"','',h),'PREWRITE_FACT_REFS_MISSING')
+    draft_negative('neg_draft_source_traces_missing',lambda h:h.replace('ppm-source-trace','ppm-source-disabled'),'PREWRITE_SOURCE_TRACE_COUNT')
+    draft_negative('neg_draft_source_trace_mismatch',lambda h:h.replace('data-source-title="src-adac-horse-trailer-2025"','data-source-title="src-alien"',1),'PREWRITE_SOURCE_TRACE_MISMATCH')
+    draft_negative('neg_draft_word_floor',lambda h:'<article data-article-type="FAQ"><section data-block="intro"><p>Zu kurz.</p></section></article>','PREWRITE_WORD_FLOOR')
+    draft_negative('neg_draft_bound_link_missing',lambda h:h.replace('/transport/','/falscher-link/',1),'PREWRITE_BOUND_LINK_MISSING')
+
+    n=base/'neg_plan_slot_missing'; bad=json.loads(f['snapshot'].read_text()); bad['next_textmachine_metadata_batch']['items'][0]['plan_slot']=''; raw=json.dumps(bad,separators=(',',':')).encode(); cp=cmd([sys.executable,str(ROOT_ENTRY),'start-stdin',str(n/'w')],2,env,raw); assert b'WORDPRESS_ITEM_VALUE_FAIL' in cp.stdout; results.append(('NEG_PLAN_SLOT_MISSING',{}))
+
     inline=out/handoff_transport.INLINE_FILENAME; lines=inline.read_text().splitlines(); row=json.loads(lines[1]); b64=row['payload_base64']; row['payload_base64']=('A' if b64[0]!='A' else 'B')+b64[1:]; lines[1]=json.dumps(row,separators=(',',':')); tam=base/'tampered-inline.txt'; tam.write_text('\n'.join(lines)+'\n'); target=base/'tampered-out'
     try:
         handoff_transport.inline_unpack(tam,target); raise AssertionError('tampered relay accepted')

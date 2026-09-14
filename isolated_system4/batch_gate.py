@@ -10,6 +10,7 @@ from typing import Any, Mapping, Sequence
 import batch_repetition_guard
 import content_guard
 import design_guard
+import authoring_contract
 
 STATE_CONTRACT = 'SYSTEM4_CANONICAL_ARTICLE_STATE_V1'
 BATCH_EVIDENCE_CONTRACT = 'SYSTEM4_FULL_PASS_BATCH_EVIDENCE_V1'
@@ -178,6 +179,10 @@ def validate_state(state, expected_article, source_snapshot_sha256, batch_sha256
         raise BatchGateError('PRODUCTION_CONTEXT_INVALID')
     if stable_hash({'fact_pack': context['fact_pack'], 'production_plan_item': context['production_plan_item']}) != context.get('sha256'):
         raise BatchGateError('PRODUCTION_CONTEXT_HASH_INVALID')
+    try:
+        authoring_contract.validate_bound(Path(__file__).resolve().parent.parent, state)
+    except authoring_contract.AuthoringContractError as exc:
+        raise BatchGateError('AUTHORING_CONTRACT_NOT_PASS:' + str(exc)) from exc
     research_text = _validated_stage_text(state, 'research')
     facts_text = _validated_stage_text(state, 'facts')
     try:
@@ -207,7 +212,7 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
     if len(state_paths) != len(items):
         raise BatchGateError('STATE_COUNT_MISMATCH')
     states_by_slot = {}
-    for path in state_paths:
+    for index, path in enumerate(state_paths):
         state = load_json(Path(path))
         article = state.get('article')
         slot = str(article.get('plan_slot') or '') if isinstance(article, dict) else ''
@@ -215,6 +220,9 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
             raise BatchGateError('STATE_PLAN_SLOT_INVALID')
         if slot in states_by_slot:
             raise BatchGateError('STATE_PLAN_SLOT_DUPLICATE')
+        expected_slot = items[index]['plan_slot']
+        if slot != expected_slot:
+            raise BatchGateError(f'STATE_ORDER_MISMATCH:{index}')
         states_by_slot[slot] = state
     expected_slots = {item['plan_slot'] for item in items}
     if set(states_by_slot) != expected_slots:
