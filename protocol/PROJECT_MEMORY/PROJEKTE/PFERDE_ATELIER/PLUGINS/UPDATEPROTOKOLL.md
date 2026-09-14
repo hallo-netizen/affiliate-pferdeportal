@@ -54,11 +54,35 @@ Genau ein Vorgang je tatsächlicher Pluginentwicklung/-aktualisierung. Keine zwe
 - **Quelle / Releasequelle:** **BLOCKED** – lokaler Pluginquellstand noch nicht als autoritative Plugin-Source/Release gebunden.
 - **LIVE:** OFFEN bis Installation/Readback.
 
+## PU-20260914-003 – Pferde Atelier – Pferderassen Manager 0.1.0
+
+- **Plugin-ID:** noch nicht zentral vergeben.
+- **exakter Name:** `Pferde Atelier – Pferderassen Manager`.
+- **ART:** NEUENTWICKLUNG.
+- **Zweck:** Pferderassen-Beiträge im WordPress-Backend von normalen Beiträgen trennen und einen einfachen kontrollierten JSON→Draft-Produktionsweg bereitstellen.
+- **Post Type:** `pa_breed`; normale WordPress-Beiträge bleiben getrennt.
+- **Kategorien:** vorhandene WordPress-Kategoriehierarchie unter Pferderassen-Hauptkategorie ID `1482` wird weiterverwendet; keine zweite Frontend-Kategorielogik, keine automatische Kategorienanlage.
+- **Produktionsregister:** gebündelter WDB-Katalog mit exakt `108` stabilen `breed-*`-IDs; technischer Quellen-Tree SHA `679b8a438f74954d39311c53b23aa526675593ac`.
+- **Batchvertrag:** `PA_BREED_BATCH_V1`; maximal 25 Artikel pro Datei.
+- **Pflichtfelder je Artikel:** `source_id`, `rassename`, `slug`, `rassengruppe_slug`, `titel`, `artikeltext`, `kurztext`, `meta_title`, `meta_description`.
+- **Sicherheit:** unbekannte WDB-ID, Dublette, bestehender Slug, fehlende Rassengruppe, unsicheres HTML oder technischer Minimalinhalt → BLOCKED.
+- **Write:** ausschließlich `post_status=draft`; kein Auto-Publish-Pfad.
+- **Readback:** Titel, Slug, Inhalt, Kurztext, Metaangaben, WDB-ID und Kategorie werden nach dem WordPress-Write real zurückgelesen; Mismatch → kompletter neu angelegter Batch Rollback.
+- **Produktionsstand:** `OFFEN / JSON_GEPRUEFT / DRAFT / DRAFT_READBACK_PASS / VEROEFFENTLICHT` wird aus Katalog + realem WordPress-Bestand abgeleitet.
+- **lokaler Test:** 30/30 Positiv-/Negativtests PASS; 5er-Draftbatch PASS; normale Posts unverändert; Reimport blockiert; Readback-Fehler rollt vollständig zurück.
+- **Mutationstest:** 7/7 absichtlich gebrochene Schutzvarianten wurden erkannt und liefen ROT (Publish statt Draft, WDB-Gate, Batch-Dublette, Gruppen-Gate, Readback-Gate, Batchlimit, HTML-Gate).
+- **fertige ZIP:** komplette 30/30 Tests erneut gegen aus der ZIP extrahierte Bytes PASS; PHP-Lint PASS; ZIP-Stamm PASS.
+- **Paket:** `PFERDE_ATELIER_PFERDERASSEN_MANAGER_0.1.0_INSTALLIEREN.zip`.
+- **SHA-256:** `9d17bc68b56cd99f2a55764721fce46e54884b9d1edf9119e7d5d3ffac70ae5b`.
+- **LIVE:** OFFEN. Installation, reale Gruppenauflösung und erster echter 5er-JSON-Batch müssen auf WordPress noch bewiesen werden.
+- **Releasebindung:** noch nicht als autoritative CURRENT-Pluginquelle gebunden.
+
 ## Aktuelle Fach-/Release-/LIVE-Autorität
 
 Ausschließlich:
 - `../GLOSSAR/CURRENT_STATE.md`
 - `../GLOSSAR/HOBBYRAUM.md`
 - `../GLOSSAR/FEHLERQUELLEN.md`
+- Pferderassen-Fachwahrheit: `../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/`
 
 Dieses Protokoll bleibt Kontrollpult und erzeugt keine zweite Fachwahrheit.
