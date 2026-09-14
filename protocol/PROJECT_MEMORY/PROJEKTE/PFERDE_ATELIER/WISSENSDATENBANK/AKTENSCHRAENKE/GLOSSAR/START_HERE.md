@@ -1,7 +1,7 @@
 # AKTENSCHRANK GLOSSAR
 
-STAND: 2026-09-12
-STATUS: ANGELEGT / STARTBEFÜLLT
+STAND: 2026-09-14
+STATUS: ANGELEGT / STARTBEFÜLLT / FACHQUELLE FÜR JSON-PRODUKTION
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -24,7 +24,20 @@ aus einem Glossarbegriff automatisch eine öffentliche URL oder einen Artikel er
 
 Ein Begriff = ein Datensatz.
 
-Das Glossar ist zunächst **interne Wissensbasis**. Ob ein Begriff später nur inline erklärt, als Glossarseite veröffentlicht oder in einen größeren Artikel integriert wird, entscheidet ausschließlich die spätere SEO-/Contentprüfung.
+Dieser Aktenschrank bleibt die **alleinige Fachwahrheit** für Begriff, Definition/Fakten, Quellen, Synonyme, Einordnung und fachliche Relationen.
+
+## PRODUKTIONSBRÜCKE
+
+Für die öffentliche Glossarproduktion darf ein fachlich ausreichend geprüfter Datensatz als Quelle für folgenden Weg dienen:
+
+`WDB-Datensatz -> Veröffentlichungsfassung im Chat -> JSON-Batch -> Glossar-Importer -> WordPress-Draft -> Readback`
+
+Dabei gilt:
+- der JSON-Batch ist nur Transport;
+- WordPress ist nur Ausgabesystem;
+- weder JSON noch WordPress dürfen hier gespeicherte Fachfakten still überschreiben;
+- neue Fakten werden zuerst hier quellengebunden ergänzt/geprüft;
+- ein Produktionsstatus in WordPress ist kein Recherche-/Fachstatus dieser WDB.
 
 ## ORGANISCHE ERWEITERUNG
 
