@@ -2,15 +2,19 @@ from __future__ import annotations
 import hashlib, json, re, subprocess, sys
 from pathlib import Path
 
+import root_supervisor_bridge, worker_dispatch
+
 SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
 CODEX_ENTRY = HERE / 'codex_entry.py'
+CONTROLLER = HERE / 'controller.py'
 ROOT_AGENTS = REPO / 'AGENTS.md'
 ROOT_OVERRIDE = REPO / 'AGENTS.override.md'
 MARKER = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 ROOT_COMMAND_FILE = 'python3 isolated_system4/root_entry.py start'
 ROOT_COMMAND_STDIN = 'python3 isolated_system4/root_entry.py start-stdin'
+ROOT_COMMAND_POINT0 = 'python3 isolated_system4/root_entry.py start-point0'
 OLD_ENTRY_EXCLUSION = 'SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 root entry.'
 MANIFEST_FIELD = 'system4_root_manifest_sha256'
 CRITICAL_PATHS = (
@@ -27,6 +31,10 @@ CRITICAL_PATHS = (
     'isolated_system4/batch_repetition_guard.py',
     'isolated_system4/handoff_transport.py',
     'isolated_system4/LT68Worker.java',
+    'isolated_system4/point0_snapshot.py',
+    'isolated_system4/supervisor.py',
+    'isolated_system4/root_supervisor_bridge.py',
+    'isolated_system4/worker_dispatch.py',
 )
 
 class EntryFail(RuntimeError):
@@ -75,7 +83,7 @@ def _verify_common(workspace: Path) -> str:
         raise EntryFail('ROOT_AGENTS_IMMUTABLE_GATE_MISSING')
     if MARKER not in text:
         raise EntryFail('ROOT_OVERRIDE_SYSTEM4_ROUTE_MISSING')
-    if ROOT_COMMAND_FILE not in text or ROOT_COMMAND_STDIN not in text:
+    if ROOT_COMMAND_FILE not in text or ROOT_COMMAND_STDIN not in text or ROOT_COMMAND_POINT0 not in text:
         raise EntryFail('ROOT_OVERRIDE_SYSTEM4_COMMAND_MISSING')
     if OLD_ENTRY_EXCLUSION not in text:
         raise EntryFail('ROOT_OVERRIDE_OLD_ENTRY_EXCLUSION_MISSING')
@@ -130,6 +138,29 @@ def _start(snapshot: Path, workspace: Path) -> int:
     print('SYSTEM4_ROOT_ENTRY_PASS:RESEARCH_REQUIRED')
     return 0
 
+def _start_point0(point0: Path, workspace: Path, actual_manifest: str) -> int:
+    if not point0.is_file() or _within(point0, REPO):
+        raise EntryFail('ROOT_POINT0_FILE_INVALID')
+    actual_head=_git('rev-parse','--verify','HEAD')
+    try:
+        receipt=root_supervisor_bridge.bind_point0(point0,workspace,actual_manifest=actual_manifest,actual_head=actual_head)
+    except Exception as exc:
+        raise EntryFail('ROOT_POINT0_BIND_FAIL:'+str(exc)) from exc
+    snapshot=workspace/'bound_snapshot.json'
+    p=subprocess.run([sys.executable,str(CONTROLLER),'ingress',str(snapshot),str(workspace),'0'],text=True)
+    if p.returncode:
+        return p.returncode
+    try:
+        point0_value=json.loads((workspace/'point0.json').read_text(encoding='utf-8'))
+        wc=root_supervisor_bridge.dispatch(workspace)
+        bundle=worker_dispatch.build_bundle(point0_value,receipt,wc)
+        worker_dispatch.verify_bundle(bundle,actual_manifest=actual_manifest,actual_head=actual_head)
+        (workspace/'worker_dispatch.json').write_bytes(worker_dispatch.canon(bundle))
+    except Exception as exc:
+        raise EntryFail('ROOT_WORKER_DISPATCH_BUILD_FAIL:'+str(exc)) from exc
+    print('SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY')
+    return 0
+
 def main(argv: list[str]) -> int:
     try:
         if len(argv) < 2:
@@ -148,6 +179,12 @@ def main(argv: list[str]) -> int:
             manifest=_verify_common(workspace)
             snapshot=_materialize_stdin_snapshot(workspace,manifest)
             return _start(snapshot,workspace)
+        if command=='start-point0':
+            if len(argv)!=4:
+                raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
+            point0=Path(argv[2]); workspace=Path(argv[3])
+            manifest=_verify_common(workspace)
+            return _start_point0(point0,workspace,manifest)
         raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
     except EntryFail as exc:
         print('SYSTEM4_ROOT_ENTRY_FAIL:' + str(exc))
