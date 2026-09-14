@@ -23,12 +23,12 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **172 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 168er-Stand neu: Slowakisches Warmblut, Muráň-Noriker, Slowakisches Sportpony und Slowakischer Traber.
-- Die vier neuen slowakischen Datensätze sind über ZCHKS/Závodisko sowie staatliche bzw. anerkannte Registerquellen gebunden.
-- Norik muránskeho typu wird wegen eigener slowakischer Zuchtbuchführung getrennt vom allgemeinen Noriker geführt.
-- Slowakisches Sportpony wird als eigene Plemenná kniha geführt und nicht als reine Größenklasse behandelt.
-- Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
+- **175 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 172er-Stand neu: Romanian Half Draft / Semigreu Românesc, Romanian Sport Horse und Bucovina Horse.
+- Romanian Half Draft und Romanian Sport Horse sind über die rumänische staatliche Gestütsstruktur klar als eigene Zuchtrassen gebunden.
+- Bucovina Horse wird staatlich separat vom Huzulen am Gestüt Lucina geführt; Detailstandard bleibt offen.
+- Die Slowakei ist mit Slovak Warmblood, Muráň-Noriker, Slovak Sport Pony und Slovak Trotter im aktuellen Block bereits ergänzt.
+- Internationale Masterliste weiterhin nicht abschließend gegengeprüft; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
 
@@ -47,4 +47,4 @@ Struktur: Oberbereich → optional Unterbereich → Einzelbegriff. Ein Begriff =
 
 - `PFERDERASSEN` → IN_RECHERCHE
 
-Das Glossar darf während dieser Arbeit organisch um tatsächlich auftauchende, erklärungswürdige und belegte Fachbegriffe wachsen; es ist kein paralleler zweiter Hauptforschungsauftrag.
+Nächster fachlich sinnvoller Schritt ist die internationale Masterlisten-Gegenprüfung statt weiterer unsystematischer Länderblöcke.
