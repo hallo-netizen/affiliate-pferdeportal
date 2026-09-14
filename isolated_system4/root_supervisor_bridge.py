@@ -8,10 +8,10 @@ class RootBridgeError(RuntimeError): pass
 def sha(b:bytes)->str: return hashlib.sha256(b).hexdigest()
 def canon(v)->bytes: return (json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()
 
-def bind_point0(point0_path:Path, workspace:Path, *, actual_manifest:str, actual_head:str)->dict:
+def bind_point0(point0_path:Path, workspace:Path, *, actual_manifest:str, actual_head:str, item_index:int)->dict:
     if workspace.exists() and any(workspace.iterdir()): raise RootBridgeError('WORKSPACE_NOT_EMPTY')
-    state=supervisor.arm(point0_path,workspace,actual_manifest=actual_manifest,actual_head=actual_head)
-    receipt={'contract':'SYSTEM4_ROOT_POINT0_RECEIPT_V1','point0_sha256':state['point0_sha256'],'production_snapshot_sha256':state['production_snapshot_sha256'],'research_pool_sha256':state['research_pool_sha256'],'root_manifest_sha256':actual_manifest,'head_sha':actual_head,'phase':'RESEARCH_REQUIRED','publish_allowed':False}
+    state=supervisor.arm(point0_path,workspace,actual_manifest=actual_manifest,actual_head=actual_head,item_index=item_index)
+    receipt={'contract':'SYSTEM4_ROOT_POINT0_RECEIPT_V2','item_index':state['item_index'],'plan_slot':state['plan_slot'],'point0_sha256':state['point0_sha256'],'production_snapshot_sha256':state['production_snapshot_sha256'],'research_pool_sha256':state['research_pool_sha256'],'machine_prewrite_sha256':state['machine_prewrite_sha256'],'root_manifest_sha256':actual_manifest,'head_sha':actual_head,'phase':'RESEARCH_REQUIRED','publish_allowed':False}
     receipt['receipt_sha256']=sha(canon(receipt))
     (workspace/'root_receipt.json').write_bytes(canon(receipt))
     return receipt
@@ -22,7 +22,7 @@ def dispatch(workspace:Path)->dict:
     r=json.loads(rp.read_text()); core=dict(r); expected=core.pop('receipt_sha256',None)
     if expected!=sha(canon(core)): raise RootBridgeError('ROOT_RECEIPT_TAMPERED')
     c=supervisor.worker_contract(workspace)
-    for k in ('point0_sha256','head_sha','publish_allowed'):
+    for k in ('item_index','plan_slot','point0_sha256','head_sha','publish_allowed'):
         if c[k]!=r[k]: raise RootBridgeError('ROOT_SUPERVISOR_BINDING_MISMATCH:'+k)
     c['root_receipt_sha256']=expected
     return c

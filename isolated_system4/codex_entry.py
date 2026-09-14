@@ -9,8 +9,8 @@ CONTROLLER=ROOT/'controller.py'
 ALLOWED={
  'RESEARCH_REQUIRED':'Create only SYSTEM4_RESEARCH_EVIDENCE_V1 JSON with real source title/url/retrieved_at/evidence and snapshot_sha256=SHA256(evidence); then controller research.',
  'FACT_CHECK_REQUIRED':'Create only SYSTEM4_FACTS_EVIDENCE_V1 JSON with claims bound to the accepted research source_ids and evidence_text hashes; then controller facts.',
- 'CONTEXT_REQUIRED':'Bind production context from exactly the accepted research/facts and derive the hash-bound authoring contract; then controller context.',
- 'DRAFT_REQUIRED':'Bind production context from exactly the accepted research/facts first if not already bound; then write only the same article body using the unchanged current Textmaschine/content rules AND unchanged existing production/design markup. Do not create CSS, inline styles, replacement classes or alternate heading/table design.',
+ 'CONTEXT_REQUIRED':'Use the immutable bound_machine_prewrite.json rails unchanged. Add only fact-dependent context support; category, links, quality binding and text-rule rails are machine-owned and immutable; then controller context.',
+ 'DRAFT_REQUIRED':'Write only the same article body under the already machine-bound prewrite/authoring contract. Do not alter category, links, quality binding, Textmaschine rules, CSS, classes, headings or table design.',
  'CHECK_REQUIRED':'Run controller fullcheck. Writer may not choose routing and may not alter Textmaschine/design authority.',
  'REPAIR_REQUIRED':'Edit only the same draft body for the exact reported first defect; controller repair rejects broad rewrites; never change Textmaschine rules or design to obtain PASS; then rerun fullcheck.',
  'OUTPUT_GATE_REQUIRED':'Article passed. Do not mutate content or design. For batch work keep the state unchanged until batch_gate collect.',

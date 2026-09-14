@@ -6,29 +6,38 @@ This file exists only for the dedicated branch `hobbyroom/system4-true-single-ro
 
 ## Mandatory first executable command
 
-There is no free route selection on this branch.
+There is no free route selection on this branch. The parent machine owns the complete pre-Codex entrance.
 
-For every real System-4 production run the machine MUST first create a hash-bound `SYSTEM4_POINT0_SNAPSHOT_V1` containing the exact production snapshot and the verified research source pool. The only production root command is:
+For every real System-4 production batch the machine MUST, before any Codex worker starts:
 
-`python3 isolated_system4/root_entry.py start-point0 <POINT0_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
+1. resolve the exact bound metadata batch;
+2. build one machine-owned source request pool per article;
+3. technically fetch/verify or otherwise machine-acquire the real source snapshots;
+4. bind the immutable prewrite rails per article (identity, slot, category, link/quality binding);
+5. create `SYSTEM4_POINT0_SNAPSHOT_V2` with `machine_point0.py`;
+6. start each article only through the root gate.
 
-Only after `SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY` may Codex be attached as worker via the generated supervisor dispatch. Codex free web search is forbidden; research may use only the bound Point-0 source pool.
+Production root for article index `N`:
 
-The older `start` / `start-stdin` commands are local historical acceptance surfaces only and are not valid production starts.
+`python3 isolated_system4/root_entry.py start-point0 <POINT0_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO> <N>`
 
-For a real bound System-4 production task, the FIRST shell command must pass the exact bound snapshot JSON through stdin to:
+Only after `SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY` may Codex be attached through:
 
-`python3 isolated_system4/root_entry.py start-stdin <WORKSPACE_OUTSIDE_REPO>`
+`python3 isolated_system4/codex_entry.py worker-start <WORKSPACE_OUTSIDE_REPO>`
 
-For local/prebound acceptance only:
+Codex free web search is forbidden. It receives only the article-specific Point-0 research pool and may not mutate machine prewrite rails. `external_web_search_allowed=false` and `machine_prewrite_mutation_allowed=false` are mandatory dispatch properties.
+
+The older `start` / `start-stdin` commands are historical acceptance surfaces only and are not valid production starts.
+
+Historical acceptance markers retained for root-integrity verification only:
 
 `python3 isolated_system4/root_entry.py start <BOUND_SNAPSHOT_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO>`
 
+`python3 isolated_system4/root_entry.py start-stdin <WORKSPACE_OUTSIDE_REPO>`
+
 SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 root entry.
 
-Before the System-4 root entry, do not run searches, diagnostics, repository inspection, alternative gates, STARTMASTER/H7/H8/ACM/System3 routes, or repair commands.
-
-If the root entry returns BLOCKED/FAIL, stop fail-closed. Do not choose another route.
+Before the System-4 root entry, Codex must not run searches, diagnostics, repository inspection, alternative gates, STARTMASTER/H7/H8/ACM/System3 routes, or repair commands. If the machine/root entry returns BLOCKED/FAIL, stop fail-closed.
 
 ## Isolation
 

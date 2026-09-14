@@ -28,6 +28,6 @@ def verify_bundle(bundle:dict, *, actual_manifest:str, actual_head:str)->tuple[d
     if rexp!=sha(canon(rcore)): raise WorkerDispatchError('DISPATCH_ROOT_RECEIPT_TAMPERED')
     if rr.get('root_manifest_sha256')!=actual_manifest or rr.get('head_sha')!=actual_head: raise WorkerDispatchError('DISPATCH_ROOT_RECEIPT_IDENTITY_MISMATCH')
     if rr.get('point0_sha256')!=sha(point0_snapshot.canon(p0)): raise WorkerDispatchError('DISPATCH_POINT0_RECEIPT_MISMATCH')
-    if wc.get('contract')!='SYSTEM4_CODEX_WORKER_DISPATCH_V1' or wc.get('external_web_search_allowed') is not False or wc.get('publish_allowed') is not False: raise WorkerDispatchError('DISPATCH_WORKER_CONTRACT_INVALID')
-    if wc.get('point0_sha256')!=rr.get('point0_sha256') or wc.get('head_sha')!=actual_head or wc.get('root_receipt_sha256')!=rexp: raise WorkerDispatchError('DISPATCH_WORKER_BINDING_MISMATCH')
+    if wc.get('contract')!='SYSTEM4_CODEX_WORKER_DISPATCH_V2' or wc.get('external_web_search_allowed') is not False or wc.get('publish_allowed') is not False or wc.get('machine_prewrite_mutation_allowed') is not False: raise WorkerDispatchError('DISPATCH_WORKER_CONTRACT_INVALID')
+    if wc.get('point0_sha256')!=rr.get('point0_sha256') or wc.get('head_sha')!=actual_head or wc.get('root_receipt_sha256')!=rexp or wc.get('item_index')!=rr.get('item_index') or wc.get('plan_slot')!=rr.get('plan_slot'): raise WorkerDispatchError('DISPATCH_WORKER_BINDING_MISMATCH')
     return wc,raw

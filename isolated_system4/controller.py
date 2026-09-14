@@ -179,11 +179,15 @@ def cmd_context(workspace,fact_pack_path,plan_item_path):
     fact,plan=_read_context_files(fact_pack_path,plan_item_path)
     try:
         content_guard.validate_fact_pack(fact,s['research']['text'],s['facts']['text'])
+        if (Path(workspace)/'supervisor_state.json').is_file():
+            supervisor.validate_production_plan_submission(Path(workspace),plan)
         production_checks.validate_bound_context(s,fact,plan)
         _guard_ppm_validation_contract(plan)
     except content_guard.ContentGuardError as e:
         raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
     except production_checks.ProductionCheckError as e:
+        raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
+    except supervisor.SupervisorError as e:
         raise Fail('PRODUCTION_CONTEXT_FAIL:'+str(e)) from e
     s['production_context']={'fact_pack':fact,'production_plan_item':plan,'sha256':sha({'fact_pack':fact,'production_plan_item':plan})}
     try: s['authoring_contract']=authoring_contract.build(Path(__file__).resolve().parent.parent,s,fact,plan)

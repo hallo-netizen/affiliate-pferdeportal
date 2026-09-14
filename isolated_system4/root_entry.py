@@ -35,6 +35,8 @@ CRITICAL_PATHS = (
     'isolated_system4/supervisor.py',
     'isolated_system4/root_supervisor_bridge.py',
     'isolated_system4/worker_dispatch.py',
+    'isolated_system4/source_acquisition.py',
+    'isolated_system4/machine_point0.py',
 )
 
 class EntryFail(RuntimeError):
@@ -142,13 +144,13 @@ def _start_point0(point0: Path, workspace: Path, actual_manifest: str, item_inde
     if not point0.is_file() or _within(point0, REPO):
         raise EntryFail('ROOT_POINT0_FILE_INVALID')
     actual_head=_git('rev-parse','--verify','HEAD')
+    if not isinstance(item_index,int) or isinstance(item_index,bool) or item_index < 0:
+        raise EntryFail('ROOT_POINT0_ITEM_INDEX_INVALID')
     try:
-        receipt=root_supervisor_bridge.bind_point0(point0,workspace,actual_manifest=actual_manifest,actual_head=actual_head)
+        receipt=root_supervisor_bridge.bind_point0(point0,workspace,actual_manifest=actual_manifest,actual_head=actual_head,item_index=item_index)
     except Exception as exc:
         raise EntryFail('ROOT_POINT0_BIND_FAIL:'+str(exc)) from exc
     snapshot=workspace/'bound_snapshot.json'
-    if not isinstance(item_index,int) or isinstance(item_index,bool) or item_index < 0:
-        raise EntryFail('ROOT_POINT0_ITEM_INDEX_INVALID')
     p=subprocess.run([sys.executable,str(CONTROLLER),'ingress',str(snapshot),str(workspace),str(item_index)],text=True)
     if p.returncode:
         return p.returncode

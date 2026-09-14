@@ -1,49 +1,55 @@
-# ZIELVERTRAG — SYSTEM 4 / MASCHINEN-PUNKT-0 + CODEX-WRITER
+# ZIELVERTRAG — SYSTEM 4 / POINT-0 V2 + CODEX-WRITER
 
-Status: **VERBINDLICHER AKTUELLER ZIELVERTRAG DES ISOLIERTEN SYSTEM-4-PROTOTYPS**
-
-Er ersetzt für System 4 die frühere Annahme „Codex recherchiert selbst“. STARTMASTER0107, Textmaschine, PPM 6.7.9, LanguageTool 6.8, Design, WordPress-Plugin und Theme bleiben unverändert/read-only.
+Status: **verbindliche aktuelle System-4-Architektur**.
 
 ## Zielkette
 
-`gebundene Metadaten -> Maschine erzeugt Punkt-0 -> Maschine beschafft/verifiziert reale Quellen -> Root bindet Punkt-0 -> Supervisor besitzt den Lauf -> hashgebundener Worker-Dispatch -> Facts -> Context -> Codex schreibt -> echte LT/PPM-Prüfer -> Same-Article-Repair -> Batch -> V2-Handoff -> bytegleiche Rekonstruktion`
+`Chat-Rohauftrag → Maschine bindet Metadaten/Slot/Kategorie/Links/Textschienen → Maschine beschafft/verifiziert je Artikel reale Quellen → Point-0 V2 → Root → Supervisor → hashgebundener Worker-Dispatch → Codex: fachliche Recherche aus genau diesem Pool → Facts → Context-Ergänzung ohne Schienenänderung → Codex-Text → echtes LT 6.8 → echter PPM 6.7.9 → Same-Article-Repair → Batch → V2-Handoff → bytegleiche Datei im Parent-Chat`
 
-## Verantwortungen
+## Alleinige Maschinenautorität vor Codex
 
-Die Maschine ist Eigentümer von Start, Quellenbeschaffung, Quellenintegrität, Snapshot, Root-/Manifest-/Head-Bindung, Supervisor-State, Worker-Dispatch, Prüfern, Batch und Handoff.
+Vor Worker-Start müssen für **jeden Artikel** bereits unveränderlich gebunden sein:
+- Titel, Target Keyword, Artikeltyp und `plan_slot`;
+- WordPress-Kategorie;
+- verbindliche interne Links einschließlich Rolle, Ziel, Anchor und Abschnitt;
+- `quality_binding` / Textmaschinen-Schienen;
+- eigener artikelbezogener Research-Pool;
+- Root-Manifest und Git-Head;
+- `publish_allowed=false`.
 
-Codex ist **nicht** Orchestrator und **nicht** Besitzer der Web-Runtime. Codex darf keine freie Websuche zur Laufzeit verwenden. Der Worker erhält ausschließlich den vom Supervisor gebundenen Research-Pool. `controller research` muss jede ungebundene URL/Evidence fail-closed blockieren.
+Point-0-Vertrag: `SYSTEM4_POINT0_SNAPSHOT_V2`.
 
-Codex wird im realen Lauf nur dort zugeschaltet, wo Sprach-/Denkleistung nötig ist: aus den gebundenen Quellen Fakten/Context unterstützen, den Artikel schreiben und denselben Artikel gezielt reparieren. Kein Restart bei Hardblocker.
+Jeder Artikel besitzt einen eigenen Quellenpool. Ein globaler Sammelpool für den ganzen Batch ist unzulässig. HTTP 401/403, leere Evidenz, falscher Hash, Pool-/Index-/Slot-Mismatch, Head-/Manifest-Mismatch oder Prewrite-Tamper blockieren **vor** Codex.
 
-## Punkt-0
+## Codex-Rolle
 
-Ein gültiger Punkt-0-Snapshot muss mindestens enthalten/binden:
-- exakt den Produktionssnapshot;
-- `publish_allowed=false`;
-- aktuellen Root-Manifest-Hash;
-- aktuellen Head;
-- reale Research-Quellen mit HTTP-Erfolg, URL, Titel, Retrieval-Zeit, Evidence und SHA-256;
-- Integritätshash des gesamten Punkt-0.
+Codex ist fachlicher Worker, nicht Orchestrator. Er darf:
+- den gebundenen artikelbezogenen Quellenpool fachlich auswerten;
+- daraus Facts bilden;
+- nur faktabhängige Context-Angaben ergänzen;
+- innerhalb des maschinengebundenen Schreibvertrags formulieren;
+- ausschließlich denselben Artikel nach einem konkreten Repair-Befund reparieren.
 
-HTTP 401/403, leere Quelle, falscher Source-Hash, Head-/Manifest-Mismatch oder Snapshot-Tamper müssen **vor Worker-Dispatch** blockieren.
+Codex darf **nicht** Route, Slot, Kategorie, Links, Quality-Binding, Prüfer, PASS, Publish-Status oder Research-Pool ändern und keine freie Websuche starten.
 
-## Root / Supervisor / Worker
+## Prüfer und Ausgang
 
-Root prüft und bindet Punkt-0. Der Supervisor erzeugt ein Root-Receipt und besitzt danach den gültigen Lauf. Erst daraus darf exakt ein hashgebundener Worker-Dispatch entstehen. Ohne gültiges Receipt/Dispatch darf weder Controller-Ingress noch Codex-Worker starten.
-
-## Prüf- und Handoffregeln
-
-Unverändert gelten:
-- echtes LanguageTool 6.8;
-- echter PPM 6.7.9;
-- bestehende Textmaschinen-/SEO-/PSERC-/PSTE-/Link-/Metadaten-/Designregeln;
-- Same-Article-Repair;
-- Batch-Gate in gebundener Input-Reihenfolge;
+Unverändert und allein entscheidend:
+- echtes LanguageTool 6.8, SHA-gebunden;
+- echter PPM 6.7.9, SHA-gebunden;
+- bestehender Authoring-/Content-/Design-Guard;
+- kompletter Batch-Gate in Input-Reihenfolge;
 - `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`;
-- Inline-Pack/Unpack mit SHA-/Schema-/Bytegleichheit;
-- kein Merge, kein Publish ohne separate Freigabe.
+- Canonicalize → Inline-Pack → Inline-Unpack → Bytegleichheit.
 
-## Testpflicht
+Kein Worker und kein Chat darf PASS behaupten; PASS entsteht nur aus den echten Prüfern/Gates. Kein Merge und kein Publish ohne separate Freigabe.
 
-Jede Änderung muss lokal positiv und negativ gegen den Gesamtworkflow geprüft werden. Bekannte historische Fehler bleiben verpflichtende Regressionen. Ein Codex-Produktionslauf ist erst zulässig, wenn exakt der aktuelle Remote-Head diese Tests bestanden hat und der Hardlock auf genau diesem Head SUCCESS ist.
+## 1..N
+
+Der Produktionssnapshot ist die einzige Batch-Wahrheit. Jeder endliche Batch `1..N` durchläuft denselben Root/Supervisor/Controller/Batch/Handoff-Pfad. Artikelindex, `plan_slot`, Quellenpool und Prewrite-Bindung müssen exakt zusammengehören. Kein Artikel darf fehlen, ersetzt, dupliziert oder umsortiert werden.
+
+## Verbindliche Testpflicht
+
+Die Abschlussstrecke muss den Liveweg verwenden, nicht eine vereinfachte Parallelstrecke. Nur Codex darf im Test durch einen deterministischen Testworker ersetzt werden; Root, Supervisor, Dispatch, Controller, echte LT-/PPM-Prüfer, Repair, Batch und Handoff bleiben identisch.
+
+Pflichtregressionen umfassen mindestens: Chat-/Manifest-Bindung, Head/Checkout, 401/403, Point-0-Tamper, Index/Slot/Pool-Verwechslung, Dispatch-Tamper, freie Webfreigabe, Prewrite-/Link-/Kategorie-Tamper, ungebundene Research/Facts, unbekannter PPM-Vertrag, Wortminimum, Design-/Link-/Fact-ID-Verstöße, zu großer Repair, Batch-Reihenfolge/-Vollständigkeit und Handoff-/Inline-Tamper.
