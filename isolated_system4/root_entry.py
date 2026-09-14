@@ -38,6 +38,7 @@ CRITICAL_PATHS = (
     'isolated_system4/source_acquisition.py',
     'isolated_system4/chat_start_gate.py',
     'isolated_system4/machine_point0.py',
+    'isolated_system4/parent_owner_repair.py',
 )
 
 class EntryFail(RuntimeError):
