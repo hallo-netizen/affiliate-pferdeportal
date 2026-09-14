@@ -25,9 +25,9 @@ NEW_ITEMS=[
     {
         'article_type':'Beratung',
         'category':'pellets-beratung',
-        'plan_slot':'e1b2ff18acb99bece8cdf5229265cbb0f2f08b80a23371147cb9571c2b41f7bc',
-        'target_keyword':'Alfalfa-Pellets für Pferde',
-        'title':'Alfalfa-Pellets für Pferde sinnvoll auswählen',
+        'plan_slot':'c1f48c8f76ba397cdecc3c542d79ecc4c9efd6e65e176ebe47b8123ced68a924',
+        'target_keyword':'Pellets aus Luzerne für Pferde',
+        'title':'Pellets aus Luzerne für Pferde sinnvoll auswählen',
     },
 ]
 
