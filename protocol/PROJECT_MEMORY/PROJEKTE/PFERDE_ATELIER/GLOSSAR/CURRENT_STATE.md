@@ -1,122 +1,101 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: GLOSSAR HERO LIVE PASS / GLOSSAR BREADCRUMB ABSTAND LIVE PASS, INHALTSKETTE LIVE FAIL (JOURNAL FEHLT) / DESIGN 1.50.499 LOKAL HART POSITIV+NEGATIV PASS, LIVE OFFEN / AUTOMATION-SANDBOX LIVE PASS / TERM-EXTRACTOR LIVE PASS / PORTALSEITEN-AUSSCHLUSS 1.3.4 LIVE PASS / CORE 1.3.5 LOKAL HART POSITIV+NEGATIV+MUTATION PASS, LIVE OFFEN / AUTO-PUBLISH AUS
+STATUS: GLOSSAR HERO LIVE PASS / BREADCRUMB-ABSTAND LIVE PASS / DESIGN 1.50.499 LOKAL HART PASS, LIVE OFFEN / AUTOMATION-SANDBOX LIVE PASS / PORTALSEITEN-AUSSCHLUSS 1.3.4 LIVE PASS / CORE 1.3.5 LIVE FAIL / CORE 1.3.6 LOKAL HART POSITIV+NEGATIV+MUTATION PASS, LIVE OFFEN / AUTO-PUBLISH AUS
 
 ## LIVE bestätigt – nicht regressieren
 
-- Einzelbegriffe öffnen: **PASS**.
-- Glossar-Fließtext: **0 Links – PASS**.
-- rechte Ocker-Oberkante: **dünn – PASS**.
-- Glossar-Breadcrumb Position/Abstand: **LIVE PASS**. Nicht verändern.
-- Glossar-Hero: breites Bild + weicher Übergang: **LIVE PASS**.
-- Automation-Sandbox: **LIVE PASS**; `ok:true`, alle Positiv-/Negativtests `true`, `production_write_performed:false`.
-- Produktion scharf: **AUS**.
-- Auto-Publish: **AUS**.
-- Pool-Refresh: **LIVE PASS technisch**.
-- Core 1.3.2/1.3.3 Term-Extractor: **LIVE PASS**; 14 PSTE-Rohfundstellen wurden auf 9 fachliche Kopfbegriffe reduziert.
-- Core 1.3.4 Portalseiten-Ausschluss: **LIVE PASS**. Nutzer-Screenshot: Pool 9, alle 9 `AUSGESCHLOSSEN_PORTALSEITE`, `Portal-Seite=JA`, `Kannibalisierung=NEIN`.
+- Glossar-Einzelbegriffe öffnen: PASS.
+- Fließtext: 0 Links – PASS.
+- rechte Ocker-Oberkante dünn – PASS.
+- Glossar-Breadcrumb Abstand – LIVE PASS; nicht verändern.
+- Glossar-Hero – LIVE PASS.
+- Automation-Sandbox – LIVE PASS; `production_write_performed:false`.
+- Core 1.3.4 Portalseiten-Ausschluss – LIVE PASS: 9/9 aktuelle Begriffe `AUSGESCHLOSSEN_PORTALSEITE`.
+- Produktion scharf: AUS.
+- Auto-Publish: AUS.
 
-## Breadcrumb – Design 1.50.499
+## Design 1.50.499 – LIVE offen
 
-Aktueller LIVE-Fehler auf Glossar-Einzelbegriffen: `Pferde Journal` fehlt in der Breadcrumb-Kette. Korrekt ist:
+Fehler: Glossar-Einzelbreadcrumb unterschlägt `Pferde Journal`.
+Korrekt: `Startseite > Pferde Journal > Glossar > Bereich > Begriff`.
+Design 1.50.499 ist lokal hart positiv/negativ geprüft; LIVE-Abnahme fehlt noch.
 
-`Startseite > Pferde Journal > Glossar > Pferd & Biologie > Bandmaß`
+## Core 1.3.5 – LIVE FAIL
 
-Design `1.50.499` ist lokal hart positiv/negativ geprüft, aber bis Installation + Nutzer-Screenshot **LIVE OFFEN**. Der bereits live abgenommene Abstand wurde nicht verändert.
+Realer Nutzerreadback nach Installation:
 
-Paket: `PFERDE_ATELIER_DESIGN_V1.50.499_GLOSSAR_JOURNAL_BREADCRUMB_INSTALLIEREN.zip`
+`PSTE-Rückstand: REFRESH_LIMIT_REACHED · lokal verarbeitet: 400 · promotet: 4 · Provider-Aufrufe: 0 · geeignet: 0`
 
-SHA-256: `7167d1e6fe7a13e4967b08e367ce30305ff0cfe9faf73ef9846ac7106c58e982`
+Damit ist 1.3.5 ausdrücklich **nicht abgenommen**.
 
-## Core 1.3.5 – Retained-Backlog + Gate-Hardlock
+Nachgewiesene Fehler:
+1. künstliches Gesamtlimit von 10 × 40 = 400 Retained-Datensätzen beendete den Refresh, obwohl der Backlog nicht vollständig verarbeitet war;
+2. Kandidatenleser las pro Refresh nur ein begrenztes Planning-Fenster und konnte spätere Themen verpassen;
+3. eine tiefe Verarbeitung im Browser-/PHP-Aufruf wäre wegen Timeout/502/504 nicht nachhaltig.
 
-Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.5_BACKLOG_GATE_HARDLOCK_INSTALLIEREN.zip`
+## Core 1.3.6 – ASYNC RESUME HARDLOCK
 
-SHA-256: `09b56ab1027b5af50f37247f9f20260cc86d07d0edfc10bee4e2ae9d0ec3d78f`
+Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.6_ASYNC_RESUME_HARDLOCK_INSTALLIEREN.zip`
 
-### Zweck
+SHA-256: `d489d0cd7e9549c4dd868a8167d476b5eca2bb952be40e635bdb6bb1288fec5d`
 
-1. Nach ausgeschlossenen Portal-/Kategorie-Treffern im bereits gespeicherten PSTE-Rückstand weiter suchen, bis geeignete Glossarkandidaten gefunden sind oder der lokale Backlog endet.
-2. Dieselben SEO-/Bestands-Gates zwingend an **Discovery**, **Research-Paket-Eingang** und unmittelbar **PRE-PUBLISH** erneut ausführen.
-3. Ein Research-Paket darf weder einen neuen Kandidaten aus dem Nichts erzeugen noch Kandidat A durch ein Paket für Kandidat B ersetzen.
-4. SANDBOX darf niemals produktiv schreiben.
+### Maschinenvertrag
 
-### Retained-PSTE-Scanner
+`Start/Refresh -> persistenter Discovery-Job -> viele kleine Worker-Schritte -> TARGET_REACHED oder echter BACKLOG_COMPLETE -> Research -> PRE-PUBLISH -> WordPress-Readback -> Publish`
 
-- benutzt `PSTE_Repository::reanalyzeRetainedBacklogBatch()` ausschließlich lokal;
-- `provider_calls` muss exakt `0` sein, sonst `BLOCKED`;
-- Batchgröße 40;
-- maximal 10 Batches je Refresh = maximal 400 lokal geprüfte Backlog-Zeilen pro Refresh;
-- Cursor persistent und an Context-/Baseline-Fingerprint gebunden;
-- Cursor-Rücksprung, fehlender Context oder kein Fortschritt -> fail closed;
-- neue PSTE-Planungsthemen werden erneut extrahiert und vollständig gegen Kategorie/Portalseite/Dublette/Kannibalisierung geprüft;
-- ausgeschlossene Treffer zählen **nicht** zum Zielbestand geeigneter Kandidaten.
+- Browser-Klick startet nur den Job; 0 schwere Retained-Aufrufe im Browserrequest.
+- ein Worker verarbeitet maximal 1 Retained-Batch à 20 + höchstens 1 Planning-Seite à 25.
+- kein Gesamtlimit 400/500.
+- Cursor + Phase persistent.
+- 1.3.5-LIVE-Cursor 400 wird bei Upgrade übernommen; erster neuer Aufruf beginnt bei 400, nicht 0.
+- Recovery-Event wird vor schwerer Arbeit gesetzt.
+- 504/Exception -> `RETRY_WAIT`; gleicher Cursor wird wieder aufgenommen.
+- parallele Worker werden durch Lock geblockt.
+- Lock-TTL berücksichtigt PHP `max_execution_time`.
+- internes Request-Zeitbudget 12 Sekunden; zusätzliche Planning-Arbeit wird ggf. auf nächsten Worker verschoben.
+- bei echtem Backlog-Ende folgt ein finaler vollständiger Planning-Drain.
+- erst dann `BACKLOG_COMPLETE`, falls kein Zielkandidat gefunden wurde.
+- Discovery `RUNNING/RETRY_WAIT/BLOCKED` sperrt Research und Publish fail-closed.
+- Research-Intake und PRE-PUBLISH führen Kategorie-/Portalseiten-/Kannibalisierungs-Gates erneut aus.
+- nach Discovery-Abschluss wird die Kette über einen separaten Continue-Hook fortgesetzt; der reguläre Tages-Cron kann diesen Sofortimpuls nicht verschlucken.
 
-### Research- und Publish-Hardlock
+### Harte lokale Prüfung 1.3.6 – exakt gegen verpackte ZIP
 
-- Research-Paket für unbekannten/nicht gebundenen Kandidaten -> `TARGET_NOT_IN_POOL`;
-- Research-Provider-Paket muss exakt zum aktuell bearbeiteten Kandidaten passen, sonst `RESEARCH_PACKAGE_TARGET_MISMATCH`;
-- Kategorie-/Portalseiten-/Kannibalisierungs-Gate wird beim Research-Paket-Eingang erneut ausgeführt;
-- derselbe Gate-Check läuft unmittelbar vor jedem WordPress-Write erneut;
-- eine Portal-/Kategorieseite, die **erst nach Research und vor Publish** entsteht, blockiert dadurch noch den Publish;
-- bestehende Glossarbeiträge bleiben als `BESTAND` gezielt updatefähig und behalten ihre ID.
+Positiv:
+- Kandidat an Planning-Position 675 gefunden; 700 Planning-Themen sichtbar verarbeitet – PASS.
+- Retained-Verarbeitung >400 ohne künstlichen Stopp – PASS.
+- alter LIVE-Cursor 400 migriert und exakt bei 400 fortgesetzt – PASS.
+- echter Backlog mit 620 Datensätzen vollständig verarbeitet + finaler Planning-Drain – PASS.
+- End-to-End Discovery -> Research -> SANDBOX -> ARMED -> WP-Readback -> Publish – PASS.
+- 50 simulierte WordPress-Beiträge: 50/50 PASS.
+- SANDBOX: 0 produktive Writes – PASS.
 
-### Harte lokale Positiv-/Negativprüfung
+Negativ:
+- simulierter HTTP 504 bei Cursor 200 -> RETRY_WAIT, Cursor bleibt 200, Folgeworker setzt bei 200 fort – PASS.
+- Provider-Call im retained-local-Vertrag -> BLOCKED – PASS.
+- kein Fortschritt -> Retry, nach 5 Fehlern BLOCKED – PASS.
+- paralleler Worker -> LOCKED, kein zweiter PSTE-Aufruf – PASS.
+- unbekanntes/falsch gebundenes Research-Paket -> blockiert – PASS.
+- neue Portal-Seite nach Research, vor Publish -> 0 Writes – PASS.
+- Discovery noch RUNNING in ARMED+Auto-Publish -> Publish gesperrt – PASS.
+- WP-Readback kaputt -> QUARANTÄNE/Rollback – PASS.
 
-Exakt gegen die **verpackte ZIP** erneut ausgeführt:
+Mutationstest: **11/11** absichtlich gebrochene Sicherheitsmechanismen wurden erkannt und liefen ROT, darunter künstliches 400er-Limit, Browser-Schwerarbeit, fehlendes Timeout-Recovery, verlorener 1.3.5-Cursor, deaktivierter Provider-Vertrag, fehlender Lock, fehlende Research-/PRE-PUBLISH-Gates, Package-Injektion, fehlendes Discovery-Fail-Closed und umgangener WP-Readback.
 
-- 14 bekannte LIVE-Rohfundstellen -> 9 Kopfbegriffe PASS;
-- Kategorie- und Portalseiten-Gates PASS;
-- Retained-PSTE: erster Portal-Treffer wird ausgeschlossen, Scanner findet später echte Kandidaten PASS;
-- Provider-Call-Verstoß -> BLOCKED PASS;
-- Context unvollständig -> kein Repository-Aufruf PASS;
-- Cursor-Regressionsschutz PASS;
-- kein Fortschritt -> BLOCKED PASS;
-- 10-Batch-/400-Zeilen-Sicherheitsgrenze PASS;
-- unbekanntes Research-Paket -> keine Pool-Injektion PASS;
-- Research-Paket-Zielwechsel -> QUARANTÄNE PASS;
-- Portal-/Artikelkollision am Research-Eingang -> blockiert PASS;
-- stale `GEPRUEFT` + Portal-Kollision PRE-PUBLISH -> blockiert PASS;
-- neue Portalseite nach Research/vor Publish -> **0 Writes**, blockiert PASS;
-- SANDBOX + Auto-Publish -> **0 Writes** PASS;
-- ARMED ohne Auto-Publish -> **0 Writes** PASS;
-- ARMED + Auto-Publish -> Write erst nach allen Gates PASS;
-- WP-Write-Fehler -> QUARANTÄNE PASS;
-- korrupter Readback bestehender Beitrag -> Rollback Titel/Inhalt/Meta PASS;
-- 50 Beiträge in einem simulierten WordPress-Lauf -> **50/50 PASS**;
-- vollständige End-to-End-Kette Discovery -> Research -> SANDBOX -> ARMED Publish PASS.
+Verpackung:
+- 3 Plugin-Dateien wie 1.3.5.
+- `class-uge-pferde-content-pack.php` bytegleich zu 1.3.5.
+- PHP-Lint PASS.
+- ZIP-Lesetest PASS.
+- Update-Stamm `universal-glossary-engine/` PASS.
+- komplette Tests nach ZIP-Bau erneut gegen exakt extrahierte ZIP-Bytes PASS.
 
-### Mutationstest
+## NEXT ACTION
 
-8 kritische Schutzmechanismen wurden jeweils absichtlich entfernt/gebrochen. Alle 8 Mutanten wurden vom Test erkannt und liefen **ROT**:
-
-1. Research-Intake-Gate entfernt;
-2. PRE-PUBLISH-Gate entfernt;
-3. unbekannte Research-Pakete dürfen Kandidaten erzeugen;
-4. Research-Zielbindung entfernt;
-5. spezifischer Sperrstatus wird überschrieben;
-6. PSTE-Provider-Call-Vertrag deaktiviert;
-7. WP-Readback-Prüfung deaktiviert;
-8. SANDBOX darf durch Auto-Publish scharf werden.
-
-Ergebnis: **8/8 Sicherheitsmutanten erkannt**.
-
-### Regression / Verpackung
-
-- PHP-Lint aller 3 Plugin-PHP-Dateien PASS;
-- ZIP-Lesetest PASS;
-- ZIP-Stamm `universal-glossary-engine/` PASS;
-- Dateibestand wie 1.3.4: 3 Dateien;
-- `class-uge-pferde-content-pack.php` gegenüber 1.3.4 bytegleich;
-- Tests nach ZIP-Bau erneut gegen exakt aus ZIP extrahierte Bytes PASS.
-
-## Harte Grenze / NEXT ACTION
-
-1. Design `1.50.499` bleibt bis LIVE-Screenshot offen.
-2. Core `1.3.5` ist **lokal hart PASS**, aber noch **kein LIVE-PASS**.
-3. Core `1.3.5` über `1.3.4` installieren.
-4. Produktion scharf und Auto-Publish bleiben **AUS**.
-5. `Pool jetzt aktualisieren` ausführen. Erwartung: die 9 ausgeschlossenen Portalseiten bleiben ausgeschlossen und der Retained-PSTE-Scanner sucht dahinter weiter.
-6. Prüftabelle + Discovery-Zeile real lesen. Erst danach echten Kandidaten durch Research/SANDBOX weiterführen.
-7. Kein automatischer Publish bis zum vollständigen realen End-to-End-Beweis.
+1. Core 1.3.6 über 1.3.5 installieren.
+2. Produktion scharf und Auto-Publish bleiben AUS.
+3. `Pool jetzt aktualisieren` einmal klicken.
+4. Erwartung: Browser kehrt sofort zurück; Discovery-Zeile wechselt auf `RUNNING` und der Cursor läuft im Hintergrund vom übernommenen Stand weiter.
+5. Kein LIVE-PASS, bevor realer Readback zeigt, dass Cursor >400 weiterläuft bzw. ein echter Kandidat oder `BACKLOG_COMPLETE` erreicht wird.
+6. Design 1.50.499 separat per Screenshot prüfen.
