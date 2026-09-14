@@ -131,26 +131,29 @@ Harte Regeln:
 10. Der lokale PSTE-Rückstand darf zur Kandidatengewinnung vertieft werden, aber ausschließlich mit `provider_calls=0`. Jede Provider-Anforderung im Backlog-Scan -> `BLOCKED`.
 11. Discovery muss vollständig fail-closed vor Research/Publish liegen. Solange Discovery `RUNNING`, `RETRY_WAIT` oder `BLOCKED` ist, dürfen Research und Publish nicht starten.
 
-## 12. Asynchroner, wiederaufnehmbarer PSTE-Rückstand
+## 12. Asynchroner, wiederaufnehmbarer PSTE-Rückstand mit Planning-Vorrang
 
 Ein kompletter PSTE-Rückstand darf **niemals** in einem einzigen Browser-/PHP-Aufruf abgearbeitet werden.
 
 Verbindlich:
 
 1. `Pool jetzt aktualisieren` startet/resumiert nur einen persistenten Discovery-Job; der Browserrequest führt **keine schwere Retained-Schleife** aus.
-2. Ein Worker-Schritt verarbeitet höchstens **einen** Retained-Backlog-Batch und höchstens **eine** kleine Planning-Seite.
+2. Ein Worker verarbeitet exakt **eine schwere Einheit**: entweder einen Retained-Backlog-Batch **oder** eine Planning-Seite. Nicht beides in demselben Request.
 3. Aktueller gebundener Stand: Retained-Batch 20, Planning-Seite 25.
-4. Cursor und Phase werden nach jedem sicheren Teilstück dauerhaft gespeichert.
+4. Cursor, Phase und Fortschritt werden nach jedem sicheren Teilstück dauerhaft gespeichert.
 5. Es gibt **kein künstliches Gesamtlimit 400/500**. Die Discovery endet nur bei:
    - `TARGET_REACHED`,
    - echtem `BACKLOG_COMPLETE` nach finalem Planning-Drain,
    - oder hartem Fehler.
-6. Ein alter, bereits real erreichter Cursor muss bei Upgrade übernommen werden; kein Neustart bei 0 ohne fachlichen Grund.
-7. Vor schwerer Worker-Arbeit muss bereits ein Recovery-Event geplant sein. Stirbt PHP/Proxy hart, setzt ein späterer Worker am letzten sicheren Checkpoint fort.
-8. 502/504/Exception dürfen keinen Cursor überspringen. Fehler -> `RETRY_WAIT`; Wiederholung startet am selben Cursor.
-9. Parallelworker sind durch einen Lock zu verhindern. Lock-TTL muss die PHP-Ausführungsgrenze berücksichtigen.
-10. Ein Request-Zeitbudget begrenzt zusätzliche Arbeit. Nach einem langsamen Retained-Teilstück wird Planning auf den nächsten Request verschoben.
-11. Nach echtem Ende des Retained-Backlogs ist ein **frischer vollständiger Planning-Drain** Pflicht, damit zwischenzeitlich promotete Themen nicht verloren gehen.
-12. Nach Discovery-Abschluss wird die normale Automationskette über einen separaten Continue-Hook fortgesetzt; der reguläre Tages-/Halbtages-Cron darf die Sofortfortsetzung nicht blockieren.
+6. Liefert ein Retained-Batch `promoted > 0`, muss die Phase zwingend auf `PLANNING` wechseln.
+7. Ein offener Planning-Pass hat Vorrang: **kein weiterer Retained-Batch**, bevor dieser Planning-Pass vollständig beendet wurde.
+8. Ein alter Zustand mit bereits vorhandenen Promotions, aber noch nicht verarbeitetem Planning, muss beim Upgrade zuerst in `PLANNING` überführt werden. Das gilt auch bei einem bereits geplanten Worker ohne erneuten Nutzerklick.
+9. Ein alter, bereits real erreichter Cursor muss bei Upgrade übernommen werden; kein Neustart bei 0 ohne fachlichen Grund.
+10. Cursor-Fortschritt und PSTE-`processed` sind getrennte Größen. Für den realen Backlog-Fortschritt ist zusätzlich `traversed` / `Backlog durchlaufen` zu führen; `processed` darf nicht allein als Fortschrittswahrheit dargestellt werden.
+11. Vor schwerer Worker-Arbeit muss bereits ein Recovery-Event geplant sein. Stirbt PHP/Proxy hart, setzt ein späterer Worker am letzten sicheren Checkpoint fort.
+12. 502/504/Exception dürfen keinen Cursor überspringen. Fehler -> `RETRY_WAIT`; Wiederholung startet am selben Cursor.
+13. Parallelworker sind durch einen Lock zu verhindern. Lock-TTL muss die PHP-Ausführungsgrenze berücksichtigen.
+14. Nach echtem Ende des Retained-Backlogs ist ein **frischer vollständiger Planning-Drain** Pflicht, damit zwischenzeitlich promotete Themen nicht verloren gehen.
+15. Nach Discovery-Abschluss wird die normale Automationskette über einen separaten Continue-Hook fortgesetzt; der reguläre Tages-/Halbtages-Cron darf die Sofortfortsetzung nicht blockieren.
 
-Kein PASS aus Codeansicht. Für Änderungen an diesen Gates/Worker-Regeln sind harte Positiv-/Negativtests erforderlich. Kritische Schutzregeln müssen zusätzlich durch absichtlich gebrochene Mutanten nachweislich ROT werden.
+Kein PASS aus Codeansicht. Für Änderungen an diesen Gates/Worker-Regeln sind harte Positiv-/Negativtests erforderlich. Kritische Schutzregeln müssen zusätzlich durch absichtlich gebrochene Mutanten nachweislich ROT werden. Ein lokaler Test ist nur belastbar, wenn er den real beobachteten Zustandsübergang der Live-Strecke reproduziert.
