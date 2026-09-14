@@ -1,7 +1,7 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497 LIVE FAIL / DESIGN 1.50.498 HART LOKAL POSITIV+NEGATIV RENDER-PASS / AUTOMATION CORE 1.3.0 SANDBOX LIVE PASS / POOL-REFRESH LIVE PASS / CORE 1.3.1 PRUEFANSICHT LOKAL HART PASS
+STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL DESIGN 1.50.498 LOKAL HART POSITIV+NEGATIV RENDER-PASS, LIVE OFFEN / AUTOMATION SANDBOX LIVE PASS / POOL-REFRESH TECHNISCH LIVE PASS / CORE 1.3.1 POOL-INHALT FACHLICH LIVE FAIL / CORE 1.3.2 TERM-EXTRACTOR LOKAL HART POSITIV+NEGATIV PASS
 
 ## LIVE bestätigt – nicht regressieren
 
@@ -10,102 +10,97 @@ STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497
 - rechte Ocker-Oberkante: **dünn – PASS**.
 - Glossar-Breadcrumb Inhalt + Position/Abstand: **LIVE PASS**. Nicht mehr anfassen.
 - Glossar-Hero nach Design `1.50.494`: **LIVE PASS**. Breites Bild + weicher Übergang bestätigt.
-- Automation Core `1.3.0` Sandbox unter `Glossar -> Automation -> Sandbox hart testen`: **LIVE PASS 2026-09-14**.
-- Sandbox-Readback: `ok:true`; alle Tests `true`; `batch_upper_guard_100:true`; `production_write_performed:false`; Modus `SANDBOX`; Auto-Publish AUS; Produktion scharf AUS.
-- `Pool jetzt aktualisieren`: **LIVE PASS technisch**. Readback: Pool `14`, davon `13 KANDIDAT`, `1 QUARANTAENE`. Keine Produktion ausgelöst.
+- Automation-Sandbox: **LIVE PASS 2026-09-14**.
+- Sandbox-Readback: `ok:true`; alle Positiv-/Negativtests `true`; `batch_upper_guard_100:true`; `production_write_performed:false`; Modus `SANDBOX`; Auto-Publish AUS; Produktion scharf AUS.
+- `Pool jetzt aktualisieren`: **technisch LIVE PASS**. 14 Rohfundstellen wurden geladen; kein Produktionswrite.
 
-## Pool-Prüfbarkeit – erkannte Lücke
+## Pool 1.3.1 – fachlicher LIVE FAIL
 
-Der Live-Poolrefresh funktioniert, aber Core 1.3.0 zeigt in der Oberfläche nur Summen. Für die verbindlich geforderte jederzeitige Prüfbarkeit reicht das nicht: vor einem Automatiklauf müssen die einzelnen Begriffe, Quellen und Sperrgründe sichtbar sein.
+Die neue Prüftabelle hat den tatsächlichen Fehler sichtbar gemacht: Core 1.3.1 übernimmt komplette PSTE-SEO-/Artikeltitel direkt als Glossar-Kandidaten. Beispiele aus dem Live-Readback:
 
-### Core-Kandidat 1.3.1 – reine Prüfansicht
+- `Das Wichtigste über Hindernisstangen für Pferde`
+- `Die geeigneten Regendecken mit Abschwitzfunktion finden`
+- `Kosten für Reitplatzbeleuchtung`
+- `Mistcontainer mit Deckel wählen`
+- `Wie reinigt man Pferdebürsten?`
 
-Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.1_POOL_PRUEFANSICHT_INSTALLIEREN.zip`
+Diese Zeilen sind **keine Glossarbegriffe**. Deshalb darf `Automatiklauf jetzt starten` nicht freigegeben werden.
 
-SHA-256: `1e50306f5bac5bf355a46e039bb5e5266296cdd496a3e6e4c5014963b734dbee`
+## Core-Kandidat 1.3.2 – PSTE Term Extractor
 
-Neu unter `Glossar -> Automation`:
+Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.2_TERM_EXTRACTOR_INSTALLIEREN.zip`
 
-`Begriff | Quelle | Status | Dublette | Kannibalisierung | Quarantäne-Grund | letzte Prüfung`
+SHA-256: `a48fd1c821a3516bd0385e3337a425183768cd36206b7af189fdc1bba5fa3706`
 
-Die Tabelle ist read-only und verändert den Pool nicht. Keine Produktionslogik, Recherchelogik oder Publish-Logik wurde erweitert.
+### Umsetzung
 
-Harte lokale Positivtests:
-- PHP-Lint aller drei Plugin-PHP-Dateien PASS.
-- Fixture: exakte Dublette -> `Dublette JA` PASS.
-- Fixture: Synonym-Dublette -> `Dublette JA` PASS.
-- Fixture: Kannibalisierung -> `Kannibalisierung JA` + Quarantäne-Grund sichtbar PASS.
-- sauberer Kandidat -> Dublette/Kannibalisierung `NEIN` PASS.
-- Quellenherkunft und `updated_at` sichtbar PASS.
-- Renderer ist read-only; kein Pool-Write im Prüftabellenpfad PASS.
-- bestehende Sicherheit unverändert: Auto-Publish nur mit ARMED; Sandbox `production_write_performed=false` unverändert PASS.
+- PSTE-Rohfundstellen werden nicht mehr direkt als Kandidatenlabel gespeichert.
+- deterministischer, konservativer Extractor erzeugt maximal einen fachlichen Kopfbegriff oder verwirft den Rohfund.
+- keine freie Umformulierung; keine erfundenen Synonyme.
+- alte ungeprüfte 1.3.0/1.3.1-PSTE-Titelkandidaten werden beim nächsten Pool-Refresh entfernt.
+- geschützte Zustände `GEPRUEFT`, `READY`, `PUBLISHED`, `BESTAND` bleiben erhalten.
+- gemischte Kandidaten mit zusätzlicher Nicht-PSTE-Quelle bleiben erhalten; nur die alte PSTE-Quelle wird entfernt.
+- Rohfund, PSTE-Referenz und verwendete Extraktionsregel bleiben am Begriff als Provenienz gespeichert.
+- Prüftabelle zeigt zusätzlich `Rohfund` und `Extraktion`.
 
-Harte Negativtests:
-- Dubletten-Erkennung absichtlich gebrochen -> Test ROT.
-- Kannibalisierungs-Erkennung absichtlich gebrochen -> Test ROT.
-- Quellenanzeige absichtlich entfernt -> Test ROT.
+### Harte lokale Positivprüfung – exakt gegen die 14 Live-Rohfundstellen
 
-Regression/Verpackung:
-- Dateibestand 1.3.0 vs 1.3.1 identisch: 3 Dateien.
-- geändert nur `universal-glossary-engine.php` (Version) und `includes/class-uge-automation.php` (Prüftabelle).
-- `includes/class-uge-pferde-content-pack.php` bytegleich.
+14/14 Rohfundstellen wurden deterministisch verarbeitet und zu 9 eindeutigen Begriffen dedupliziert:
+
+- `Hindernisstange`
+- `Regendecke`
+- `Reitplatzbeleuchtung`
+- `Mistcontainer`
+- `Pferdehaftpflicht`
+- `Huffett`
+- `Fliegenmaske`
+- `Pferdebürste`
+- `Pellet`
+
+Weitere PASS-Nachweise:
+- kein kompletter Editorial-/Artikeltitel überlebt als Kandidatenlabel;
+- vier unterschiedliche Regendecken-Rohfundstellen -> genau ein Kandidat `Regendecke`, alle vier Rohfundstellen bleiben sichtbar;
+- Rohfund + Extraktionsregel in Prüfansicht sichtbar;
+- Legacy-Migration entfernt alle 14 alten ungeprüften PSTE-Titelkandidaten;
+- `GEPRUEFT` und Nicht-PSTE-Kandidaten bleiben erhalten;
+- gemischte Quellen bleiben erhalten.
+
+### Harte Negativprüfung
+
+- Extraktionsregel `Die geeigneten ... mit ...` absichtlich entfernt -> Test ROT.
+- Singularisierung `Regendecken -> Regendecke` absichtlich gebrochen -> Test ROT.
+- Legacy-Cleanup absichtlich deaktiviert -> Test ROT.
+- bewusst unklare Editorial-Sätze wie `Welche Regendecke ist die beste für mein Pferd?`, `Warum ist mein Pferd heute so müde?`, `10 Tipps für den perfekten Pferdealltag`, `Pferd kaufen – kompletter Ratgeber` -> vollständig abgelehnt, kein Kandidat.
+
+### Sicherheits-/Regressionstest
+
+Gegen 1.3.1 unverändert:
+- `publish_verified`
+- `run_cycle`
+- `cron_run`
+- `sandbox_test`
+- `admin_settings`
+- `accept_research_package`
+- `validate_package`
+
+Damit ändert 1.3.2 nur Kandidatengewinnung/Prüfbarkeit, nicht die bereits getestete Publish-/Sandbox-Sicherheitslogik.
+
+Verpackung:
+- PHP-Lint aller 3 PHP-Dateien PASS.
+- Dateibestand wie 1.3.1: 3 Dateien.
+- `class-uge-pferde-content-pack.php` bytegleich.
 - ZIP-Stamm `universal-glossary-engine/` PASS.
 - ZIP-Lesetest PASS.
-- Version 1.3.1 aus ZIP PASS.
+- Version 1.3.2 PASS.
 
-## Journal – Nutzerreadback nach 1.50.497
+## Journal
 
-**LIVE FAIL.** Der Hero klebt sichtbar direkt unter dem Breadcrumb. Damit ist der behauptete lokale Sicht-PASS von 1.50.497 widerlegt.
+Design `1.50.498` bleibt lokal hart positiv/negativ geprüft, aber bis realem Nutzerreadback **LIVE OFFEN**. Gemessen wurde in Headless Chromium die gerenderte Bounding-Box-Distanz `hero.top - breadcrumb.bottom`: Desktop Journal 34 px = Glossar 34 px; mobil 24 px = 24 px. Negativfälle 0 px, 54/44 px und 40/30 px wurden zuverlässig rot erkannt.
 
-Ursache der fehlerhaften Prüfung: 1.50.497 prüfte den beabsichtigten CSS-Abstand, aber nicht die tatsächlich gerenderte Bounding-Box-Distanz `hero.top - breadcrumb.bottom`. Zusätzlich existiert eine spezifischere Altregel:
+## Harte Grenze / NEXT ACTION
 
-`body.pftk-journal-root-image-gap-v150422.pftk-has-leading-page-image-v150385 ... .ast-container { padding-top:20px!important; }`
-
-Sie konnte die weniger spezifische Reparaturregel überstimmen. Margin-basierter Abstand am Breadcrumb war dadurch nicht belastbar.
-
-## Design-Kandidat 1.50.498
-
-Paket: `PFERDE_ATELIER_DESIGN_V1.50.498_JOURNAL_GAP_RENDERFIX_INSTALLIEREN.zip`
-
-SHA-256: `798d4fbd0d6c5452c1ff6b402cdb9f356365cdca7b31549d1bc9132921758293`
-
-Umsetzung:
-- Journal-Claim bleibt exakt `Mehr wissen – besser verstehen` ohne Punkt.
-- Ockerfarbene Zeile bleibt exakt `WISSEN & INSPIRATION`.
-- nur `PFERDE ATELIER –` bleibt entfernt.
-- Breadcrumb selbst bekommt **keinen** Journal-Sondermargin mehr.
-- die spezifische alte 20px-`ast-container`-Regel wird im Journal-Root mit mindestens gleicher Spezifität auf `padding-top:0` überschrieben.
-- der sichtbare Abstand wird direkt am Journal-Wrapper erzwungen: Desktop `padding-top:34px`, mobil `24px`.
-- Padding statt Margin: kein Margin-Collapse möglich.
-- Glossar-Breadcrumb/Hero bleiben unverändert.
-
-## Harte lokale Positiv-/Negativprüfung 1.50.498
-
-Gemessen in Headless Chromium wird **nicht der CSS-Wert**, sondern die reale sichtbare Distanz:
-
-`gap = hero.getBoundingClientRect().top - breadcrumb.getBoundingClientRect().bottom`
-
-Positiv:
-- Desktop 1200px: Journal `34px`, Glossar `34px` -> **PASS**.
-- Mobil 500px: Journal `24px`, Glossar `24px` -> **PASS**.
-
-Negativ:
-- spezifische Override-Regel absichtlich entfernt -> Journal Desktop `54px`, mobil `44px` -> **Fehler erkannt / PASS**.
-- Journal-Padding absichtlich auf `0` gesetzt -> Desktop `0px`, mobil `0px` -> **angeklebter Hero erkannt / PASS**.
-- absichtlich falscher Abstand `40/30px` -> unterscheidet sich von Glossar `34/24px` -> **Fehler erkannt / PASS**.
-
-Regression/Verpackung:
-- PHP-Lint aller 5 PHP-Dateien -> **PASS**.
-- gleicher 500-Dateien-Bestand wie 1.50.497; nur `pferde-template-kit.php` geändert -> **PASS**.
-- Claim/Kicker-Vertrag -> **PASS**.
-- ZIP-Stamm `affiliate-portal-template-kit/` -> **PASS**.
-- ZIP-Lesetest -> **PASS**.
-- Version `1.50.498` -> **PASS**.
-
-Marker: `JOURNAL_150498_RENDER_BOUNDING_BOX_POS_NEG_PASS`.
-
-## Harte Grenze
-
-- Design 1.50.498: keine LIVE-Abnahme ohne Nutzerreadback.
-- Core 1.3.1: keine LIVE-Abnahme ohne Installation und Screenshot der vollständigen Kandidatentabelle.
-- `Automatiklauf jetzt starten`, Produktion scharf und Auto-Publish bleiben bis zur Pool-Inhaltsprüfung **AUS**.
+1. Core `1.3.2` über `1.3.1` installieren.
+2. `Glossar -> Automation -> Pool jetzt aktualisieren` erneut klicken.
+3. Prüftabelle kontrollieren: In `Begriff` dürfen keine kompletten SEO-/Artikeltitel mehr stehen; diese dürfen nur noch unter `Rohfund` erscheinen.
+4. Produktion scharf und Auto-Publish bleiben AUS.
+5. Erst nach diesem LIVE-Readback darf der nächste Automatikschritt geprüft werden.
