@@ -28,28 +28,28 @@ jobs:
           unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
           test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
-      - name: Run full real acceptance including known-regression repair to file
+      - name: Run Point0 Supervisor Worker real regression acceptance
         env:
           PYTHONPATH: isolated_system4
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/full_local_acceptance.py
-      - name: Verify regression proof in acceptance report
+        run: python3 isolated_system4/real_known_regression_acceptance_v3.py
+      - name: Verify exact V3 proof and final file
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
-          p=Path('/tmp/system4-acceptance-output/SYSTEM4_FULL_LOCAL_ACCEPTANCE_REPORT.json')
+          p=Path('/tmp/system4-acceptance-output/SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json')
           r=json.loads(p.read_text())
           assert r['status']=='PASS'
-          rows={x['name']:x for x in r['tests']}
-          k='POS_REAL_PPM_KNOWN_REGRESSION_REPAIR_TO_FILE'
-          assert rows[k]['status']=='PASS'
-          assert rows[k]['detail']['ppm_error']=='BLOCKED_KNOWN_REGRESSION_PATTERN'
-          assert rows[k]['detail']['repair_owner']=='DRAFT_WORKER'
+          assert r['ppm_error']=='BLOCKED_KNOWN_REGRESSION_PATTERN'
+          assert r['repair_owner']=='DRAFT_WORKER'
+          assert r['start_path']=='CHAT_START->POINT0->ROOT->SUPERVISOR->WORKER_DISPATCH->CODEX_WORKER_START'
+          assert r['inline_byte_equal'] is True
+          assert r['publish_allowed'] is False
           f=Path('/tmp/system4-acceptance-output/SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json')
           assert f.is_file() and f.stat().st_size>0
-          print('SYSTEM4_REAL_PPM_KNOWN_REGRESSION_TO_FILE_PASS')
+          print('SYSTEM4_REAL_PPM_KNOWN_REGRESSION_V3_TO_FILE_PASS')
           PY
       - name: Upload acceptance proof
         uses: actions/upload-artifact@v4
