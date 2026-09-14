@@ -156,4 +156,19 @@ Verbindlich:
 14. Nach echtem Ende des Retained-Backlogs ist ein **frischer vollständiger Planning-Drain** Pflicht, damit zwischenzeitlich promotete Themen nicht verloren gehen.
 15. Nach Discovery-Abschluss wird die normale Automationskette über einen separaten Continue-Hook fortgesetzt; der reguläre Tages-/Halbtages-Cron darf die Sofortfortsetzung nicht blockieren.
 
+## 13. Worker-Antrieb darf nicht allein von WP-Cron abhängen
+
+Für einen bereits laufenden Discovery-Job ist WP-Cron **nur Recovery-Fallback**, nicht der einzige Motor.
+
+Verbindlich:
+
+1. Nach jedem erfolgreichen bounded Worker-Schritt mit Status `RUNNING` muss der nächste Worker **selbst** über einen internen, nicht blockierenden Loopback gestartet werden.
+2. Der Loopback darf den aufrufenden Request nicht festhalten (`blocking=false`) und muss ein enges Transport-Timeout besitzen.
+3. Der interne Worker-Endpunkt muss mit einem nicht öffentlichen Secret geschützt und mit konstantzeitlicher Prüfung (`hash_equals`) validiert werden.
+4. Ein Watchdog muss einen `RUNNING`-Job erneut anstoßen, wenn längere Zeit kein Dispatch/Checkpoint erfolgt ist.
+5. Ein Loopback-Transportfehler darf keinen Fortschritt vortäuschen; Fehler muss dauerhaft sichtbar gespeichert werden.
+6. Bei Loopback-Fehler muss der geplante WP-Cron-Recovery-Weg bestehen bleiben.
+7. `RETRY_WAIT` nach Timeout/502/504 darf nicht durch eine schnelle rekursive Loopback-Schleife gehämmert werden.
+8. Die Admin-Prüfansicht muss mindestens den Loopback-Dispatch-Zähler und einen möglichen Worker-Fehler sichtbar machen.
+
 Kein PASS aus Codeansicht. Für Änderungen an diesen Gates/Worker-Regeln sind harte Positiv-/Negativtests erforderlich. Kritische Schutzregeln müssen zusätzlich durch absichtlich gebrochene Mutanten nachweislich ROT werden. Ein lokaler Test ist nur belastbar, wenn er den real beobachteten Zustandsübergang der Live-Strecke reproduziert.
