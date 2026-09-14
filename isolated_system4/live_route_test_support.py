@@ -62,7 +62,8 @@ def start_to_context(base:Path,index:int):
 def valid_article(state:dict,index:int,variant:str='basis')->str:
  c=state['authoring_contract'];identity=c['article_identity'];g=c['global_requirements'];s=c['structure_requirements'];t=c['type_requirements'];b=c['bound_requirements'];allowed=list(b['allowed_fact_ids']);fid=allowed[0]
  min_words=int(g.get('min_words') or 0);min_paragraphs=int(g.get('min_paragraphs') or 0);min_h2=int(g.get('min_h2') or 0);intro=s.get('intro') if isinstance(s.get('intro'),dict) else {};intro_name=str(intro.get('required_block') or 'intro')
- headings=s.get('headings') if isinstance(s.get('headings'),dict) else {};allowed_heads=[str(x) for x in headings.get('allowed_labels',[]) if str(x).strip()]
+ intent_terms=[str(x).strip() for x in b.get('intent_terms',[]) if str(x).strip()]
+ if not intent_terms:raise AssertionError('BOUND_INTENT_TERMS_MISSING')
  required=list(t.get('required_blocks') or []);blocks=[]
  filler=(f'{identity["target_keyword"]} {variant} sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich ')
  ilo=max(int(intro.get('minimum_words') or 1),20);ihi=int(intro.get('maximum_words') or max(ilo,200));intro_words=min(max(ilo,25),ihi);intro_text=' '.join((filler.split()*((intro_words//len(filler.split()))+2))[:intro_words])
@@ -72,8 +73,9 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  target_paras=max(min_paragraphs-1,len(other)*2,4);target_words=max(min_words-intro_words,400);paras_per=max(2,(target_paras+len(other)-1)//len(other));words_per=max(45,(target_words+len(other)*paras_per-1)//(len(other)*paras_per))
  link_rows=[row for row in b.get('link_bindings',[]) if isinstance(row,dict) and row.get('active') is not False];link_cursor=0
  article_word=word_token(index+8)
+ heading_suffixes=('sicher auswählen','Material sinnvoll vergleichen','Nutzung praktisch einordnen','Pflege passend planen','Sicherheit gezielt prüfen','Entscheidung nachvollziehbar treffen','Eignung im Alltag bewerten','Anwendung sinnvoll abstimmen')
  for bi,name in enumerate(other):
-  heading=allowed_heads[bi%len(allowed_heads)] if allowed_heads else 'Kriterien für die passende Auswahl'
+  intent=intent_terms[bi%len(intent_terms)];heading=f'{intent} {heading_suffixes[bi%len(heading_suffixes)]}'
   parts=[f'<h2>{heading}</h2>']
   for pi in range(paras_per):
    words=(filler+f' Abschnitt {word_token(bi)} Punkt {word_token(pi+4)} {article_word} ').split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
