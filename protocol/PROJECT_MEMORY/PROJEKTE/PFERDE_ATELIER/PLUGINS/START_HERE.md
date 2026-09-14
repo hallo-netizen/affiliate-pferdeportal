@@ -1,6 +1,6 @@
 # BÜRO PLUGINS – PFERDE-ATELIER
 
-STAND: 2026-09-13
+STAND: 2026-09-14
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -9,7 +9,7 @@ STATUS: AKTIV
 Inventar-, Update- und Ausgabepult für tatsächlich im Pferde-Atelier entwickelte oder aktualisierte Plugins.
 
 **HIER BIST DU RICHTIG, WENN …**  
-ein Plugin technisch geändert/aktualisiert wurde und der belastbare aktuelle Pluginstand für das Pferde-Atelier nachvollziehbar inventarisiert bzw. als isolierte Ausgabekopie synchronisiert werden muss.
+ein Plugin technisch geändert/aktualisiert wurde und der belastbare Pluginstand nachvollziehbar inventarisiert bzw. – nur bei erfüllter Artefaktpflicht – als isolierte Ausgabekopie synchronisiert werden muss.
 
 **DU DARFST …**  
 Pluginvorgänge dokumentieren, auf das zuständige Fachbüro verweisen und nach vollständig bestandenen Prüfungen eine hashgebundene `CURRENT.zip`-Ausgabekopie führen.
@@ -23,9 +23,10 @@ eine zweite Fach-/Release-/LIVE-Wahrheit erzeugen, ungeprüfte ZIPs als CURRENT 
 ## Autoritätsgrenze
 
 - Fach-/Release-/LIVE-Wahrheit bleibt im zuständigen Fachbüro.
-- Dieses Büro führt nur Inventar, genau einen zentralen Pluginvorgang je Entwicklung/Update und die daraus abgeleitete isolierte Ausgabekopie.
-- `CURRENT.zip` darf nur nach ZIP-Lesetest, Struktur-, Versions- und SHA-256-Prüfung sowie den fachlich erforderlichen Positiv-/Negativ-/Regressionstests ersetzt oder angelegt werden.
-- Unterschiedliche Paketbytes benötigen unterschiedliche Pluginversionen.
+- `REGISTER.md` ist Inventar/Wegweiser, kein CURRENT_STATE.
+- `UPDATEPROTOKOLL.md` führt genau einen zentralen Vorgang je realer Entwicklung/Update.
+- `CURRENT.zip` ist nur eine abgeleitete Ausgabekopie.
+- Unterschiedliche Paketbytes benötigen unterschiedliche Pluginversionen bzw. einen eindeutig gebundenen Buildstand.
 - Kein `CURRENT.zip` aus Erinnerungsstand, altem Master oder ungebundenem Nebenbau.
 
 ## Artefaktpfad
@@ -34,13 +35,20 @@ eine zweite Fach-/Release-/LIVE-Wahrheit erzeugen, ungeprüfte ZIPs als CURRENT 
 
 Zu jedem real vorhandenen `CURRENT.zip` gehört ein `MANIFEST.md` mit Plugin-ID, Name, Version, SHA-256, autoritativer Quelle, Quell-Ref/Commit, Erstellzeit und Prüfstatus.
 
-## Aktueller erster Vorgang
+## Artefakt-Gate
 
-Universal Glossary Engine / `MOD-008` → Fachbüro `../GLOSSAR/`.
+`CURRENT.zip` darf nur angelegt/ersetzt werden, wenn gleichzeitig belegt sind:
+- exakte autoritative Quelle / Quell-Ref / Releasequelle;
+- ZIP-Lesetest und Strukturprüfung;
+- Versionsprüfung;
+- SHA-256-Prüfung;
+- erforderliche Positivprüfung;
+- erforderliche Negativ-/Mutationprüfung;
+- Fach-/Regressionstest;
+- kein aktuell bekannter blockierender LIVE-/Releasefehler, soweit für den Stand erforderlich.
 
-Der technisch geprüfte Stand `0.2.10-rc7` ist als hashgebundene Ausgabekopie synchronisiert:
-- `ISOLIERTE_PLUGINS/MOD-008/CURRENT.zip`
-- `ISOLIERTE_PLUGINS/MOD-008/MANIFEST.md`
-- SHA-256 `3611229aa33ca50a00ec88be87e6ef92592e87d313c152f05d0c7a31ab281152`
+Fehlt einer dieser Belege, bleibt die bestehende Ausgabekopie unverändert und der Vorgang wird `BLOCKED` dokumentiert.
 
-Technischer Paket-/Artefaktstatus: PASS. Pferde-LIVE-Readback bleibt ausschließlich im Fachbüro offen. Zentraler Vorgang: `UPDATEPROTOKOLL.md` → `PU-20260913-001`.
+## Eine Wahrheit
+
+Dynamische Pluginstände stehen ausschließlich in `REGISTER.md`/`UPDATEPROTOKOLL.md` und den dort verlinkten Fachquellen. Diese Eingangstür kopiert bewusst keine aktuelle Version, keinen aktuellen Head und keinen aktuellen Blocker.
