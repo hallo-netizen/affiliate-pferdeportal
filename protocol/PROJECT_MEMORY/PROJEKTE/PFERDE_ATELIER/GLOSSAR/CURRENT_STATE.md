@@ -1,7 +1,7 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: EINZELARTIKEL LIVE PASS / 0 FLIESSTEXTLINKS LIVE PASS / DUENNE OCKERLINIE LIVE PASS / BREADCRUMB-ABSTAND + KACHELKLICK + HERO-AUSSCHNITT LIVE FAIL / KANDIDAT 1.2.3 + 1.50.491 LOKAL PASS, NICHT LIVE
+STATUS: EINZELARTIKEL LIVE PASS / 0 FLIESSTEXTLINKS LIVE PASS / DUENNE OCKERLINIE LIVE PASS / BREADCRUMB-TOPABSTAND + HERO-UEBERGANG/AUSSCHNITT LIVE FAIL / KACHELKLICK LIVE-NACHPRUEFUNG OFFEN / DESIGN 1.50.492 LOKAL POSITIV+NEGATIV PASS
 
 ## Belastbarer aktueller Stand
 
@@ -9,53 +9,56 @@ STATUS: EINZELARTIKEL LIVE PASS / 0 FLIESSTEXTLINKS LIVE PASS / DUENNE OCKERLINI
 - Einzelbegriffe öffnen real: **LIVE PASS**.
 - Glossar-Fließtext 0 Links: **LIVE PASS**.
 - rechte Ocker-Oberkante dünn: **LIVE PASS**.
-- Diese beiden PASS-Punkte nicht erneut anfassen.
+- Diese bestätigten PASS-Punkte nicht erneut verändern.
 
-## Aktuell offen – Nutzerreadback 2026-09-14
+## Aktuell offen – Nutzerreadback 2026-09-14 nach 1.50.491
 
-1. Breadcrumb-Inhalt ist korrekt; **Abstand nach oben ist zu groß**. Er muss auf allen Glossarseiten einheitlich sein: Glossar-Startseite, `uge_group`-Kategorie und `uge_term`-Einzelansicht.
-2. Begriffskacheln müssen **komplett anklickbar** sein, nicht nur `Zum Begriff`.
-3. Glossar-Hero muss **weiter herausgezoomt / Motiv rechts vollständig erkennbar** sein.
+1. Breadcrumb-Inhalt ist korrekt; **Abstand nach oben ist weiterhin falsch/zu groß**. Nutzerpflicht: an den anderen Seiten orientieren und auf allen Glossarseiten exakt dieselbe zentrale Abstandsteuerung verwenden.
+2. Hero: **weicher Übergang zwischen Fläche und Bild fehlt** und Motiv muss **noch weiter herausgezoomt** werden.
+3. Ganze Begriffskachel wurde in 1.50.491 technisch als Link umgesetzt, hat aber noch keinen ausdrücklichen LIVE-PASS des Nutzers und bleibt bis Readback in Nachprüfung.
 
-## Lokaler Design-Kandidat 1.50.491
+## Nachgewiesene Ursache Breadcrumb-Abstand
 
-Paket: `PFERDE_ATELIER_DESIGN_V1.50.491_GLOSSAR_NAV_HERO_FIX_INSTALLIEREN.zip`
+Der Glossar-Code 1.50.491 enthielt weiterhin eine eigene feste Regel `padding-top:18px` für `category-glossar`, `tax-uge_group` und `single-uge_term`. Normale Seiten/Kategorien verwenden dagegen zentral `var(--pftk-navigation-content-gap)`. Dadurch konnte Glossar nicht garantiert exakt denselben real konfigurierten Abstand wie andere Seiten übernehmen.
 
-SHA-256: `e5913fd60b59ce6b49a354a98f0f2bd132df6356720ed8d5ee76309abd811d51`
+## Lokaler Design-Kandidat 1.50.492
 
-Geändert und lokal geprüft:
-- einheitlicher Glossar-Topabstand über `.site-content`: 18 px für Startseite/Kategorie/Single;
-- Single-Innenpadding so angepasst, dass keine Doppeladdition entsteht;
-- komplette Begriffskachel ist ein Link;
-- Hero-Bild `object-fit: contain` + rechts ausgerichtet statt starkem `cover`-Beschnitt;
-- 0-Link-Endschranke im Fließtext bleibt unverändert;
-- 2-px-Ockerlinie bleibt unverändert;
-- PHP-Lint PASS, statischer Positiv-/Negativvertrag PASS, ZIP-Lesetest PASS.
+Paket: `PFERDE_ATELIER_DESIGN_V1.50.492_GLOSSAR_SPACING_HERO_HARDFIX_INSTALLIEREN.zip`
 
-## Lokaler Core-Kandidat 1.2.3
+SHA-256: `7a016fda183874160fc303e3c6279adc3fec6475cc60cd617159e20913c42161`
 
-Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.2.3_NEUE_BEITRAEGE_INSTALLIEREN.zip`
+Geändert:
+- Glossar-Startseite, `uge_group` und `uge_term` verwenden jetzt **dieselbe zentrale Variable `--pftk-navigation-content-gap` wie normale Seiten/Kategorien**; keine eigene 18-px-Sonderregel mehr.
+- Hero wird weiter herausgezoomt: Desktop-Skalierung `.86`, mobil `.82`, zusätzlich kleinerer Medienbereich.
+- weicher Bild/Fläche-Übergang über CSS-Maskenverlauf plus Creme-Overlay.
+- komplette Begriffskachel bleibt vollständiger `<a>`-Link.
+- 0-Link-Endschranke und 2-px-Ockerlinie bleiben unverändert.
 
-SHA-256: `997cd888fe3ea1a102a8d5c9e614497404d5049e5c64086f330f0dc77c07049f`
+Hart lokal ausgeführt:
+- PHP-Lint → PASS.
+- Positivvertrag: zentrale Abstandvariable bei normalen Seiten **und** allen drei Glossarkontexten → PASS.
+- Negativvertrag: absichtlich alte `18px`-Sonderregel wieder eingesetzt → Test wird korrekt rot → PASS.
+- Hero-Positivvertrag: Zoom-out + Maskenverlauf vorhanden → PASS.
+- Hero-Negativvertrag: Maskenverlauf absichtlich entfernt → Test wird korrekt rot → PASS.
+- Geometriecheck Asset 1400×560: vorheriger Vollhöhen-Contain ca. 595×238; Kandidat ca. 440×176 → weiter herausgezoomt → PASS.
+- komplette Kachel als Anchor, 0-Link-Guard und 2-px-Ockerlinie als Regression geprüft → PASS.
+- ZIP-Lesetest → PASS; Version 1.50.492 → PASS.
 
-Zusätzlich zum 14er Bestandsupdate:
-- `Aalstrich` wird aus frisch gelesenem WDB-Status `GEPRUEFT` übernommen/überschrieben;
-- `Zuchtbuch` wird als neuer Glossarbegriff aus frisch gelesenem WDB-Status `GEPRUEFT` ergänzt;
-- beide 150–200 Wörter, 0 Fließtextlinks;
-- State `1.2.3:16` erzwingt sauberen Update-Lauf;
-- Gruppe `Zucht & Genetik` wird technisch gebunden;
-- PHP-Lint PASS, beide neuen Texte Wortlänge PASS, 0 Links PASS, ZIP-Lesetest PASS.
+Marker: `DESIGN_150492_POS_NEG_PASS`.
 
-Fachquellen bleiben ausschließlich die WDB-Datensätze `term-aalstrich.json` und `term-zuchtbuch.json`; keine Fachwahrheit im Glossarbüro duplizieren.
+## Core / neue Beiträge
+
+Core-Kandidat `1.2.3` mit `Aalstrich` (Bestand überschreiben) und `Zuchtbuch` (neu), beide aus WDB `GEPRUEFT`, bleibt unverändert. Kein neuer fachlicher Inhalt aus diesem Design-Fix ableiten.
 
 ## Harte Grenze
 
-**Noch kein LIVE PASS für 1.2.3 / 1.50.491.** Erst Installation und realer Readback dürfen die offenen Punkte schließen.
+**1.50.492 ist lokal geprüft, aber noch kein LIVE PASS.** Erst Installation und realer Readback dürfen Breadcrumb-Abstand/Hero schließen.
 
 ## Nächster Schritt
 
-1. Core `1.2.3` installieren.
-2. Design `1.50.491` installieren.
-3. real prüfen: Breadcrumb-Abstand auf Glossar-Startseite, Kategorie und Einzelbegriff einheitlich; komplette Kacheln klickbar; Hero-Motiv vollständig verständlich.
-4. prüfen: 0 Fließtextlinks und 2-px-Ockerlinie bleiben PASS.
-5. `Zuchtbuch` und `Aalstrich` real öffnen und Inhalts-/Darstellungsprüfung durchführen.
+1. Design `1.50.492` über 1.50.491 installieren.
+2. Glossar-Startseite gegen eine normale Seite/Kategorie vergleichen: Navigationsunterkante → Breadcrumb muss sichtbar denselben Abstand haben.
+3. zusätzlich `uge_group` und `Bandmaß` prüfen: derselbe Abstand.
+4. Hero prüfen: weicher Übergang links und deutlich mehr Gesamtmotiv.
+5. ganze Begriffskachel außerhalb von `Zum Begriff` anklicken.
+6. Regression: 0 Fließtextlinks und dünne Ockerlinie bleiben PASS.
