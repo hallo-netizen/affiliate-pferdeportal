@@ -119,6 +119,16 @@ def valid_real_article(state:dict,index:int)->str:
         'Planung','Kontrolle','Entscheidung','Anwendung','Untergrund','Ausstattung','Haltung','Training',
         'Stall','Weide','Reitplatz','Dokumentation','Einordnung','Prüfung','Abwägung','Orientierung',
     )
+    openers=(
+        'Im Abschnitt „{section}“ ist belegt:',
+        'Beim Abschnitt „{section}“ gilt als Beleg:',
+        'Aus dem Quellenstand für „{section}“ folgt:',
+        'Für „{section}“ ist dokumentiert:',
+        'Innerhalb von „{section}“ bleibt festgehalten:',
+        'Zur Prüfung in „{section}“ ist gebunden:',
+        'Als Grundlage für „{section}“ dient:',
+        'Unter „{section}“ wird als Quellenpunkt geführt:',
+    )
 
     def label(section:str)->str:
         return section_labels.get(section,'Sachprüfung')
@@ -128,10 +138,11 @@ def valid_real_article(state:dict,index:int)->str:
         a=aspects[(seed+index*3)%len(aspects)]
         d=aspects[(seed*2+5+index)%len(aspects)]
         e=aspects[(seed*3+9+index)%len(aspects)]
+        opener=openers[(seed+index)%len(openers)].format(section=label(section))
         return (
-            f'Für den Abschnitt „{label(section)}“ ist belegt: {fact}; bei {identity["target_keyword"]} '
-            f'wird diese Aussage im Zusammenhang mit {a}, {d} und {e} eingeordnet, wobei ausschließlich der dokumentierte '
-            f'Quelleninhalt maßgeblich bleibt und unbelegte Ergänzungen ausdrücklich außerhalb der Bewertung bleiben.'
+            f'{opener} {fact}; bei {identity["target_keyword"]} wird diese Aussage im Zusammenhang mit {a}, {d} und {e} '
+            f'eingeordnet, wobei ausschließlich der dokumentierte Quelleninhalt maßgeblich bleibt und unbelegte Ergänzungen '
+            f'ausdrücklich außerhalb der Bewertung bleiben.'
         )
 
     fid=allowed[0]
@@ -177,7 +188,7 @@ def valid_real_article(state:dict,index:int)->str:
                 addon+=1
                 a=aspects[(seed+addon*4+index)%len(aspects)]
                 d=aspects[(seed+addon*7+11+index)%len(aspects)]
-                text=text.rstrip('.')+f'; für {a} und {d} dient derselbe Beleg lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
+                text=text.rstrip('.')+f'; im Bezug auf {a} und {d} dient derselbe Beleg lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
             if pi==0:
                 for row in section_links:
                     text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
@@ -186,13 +197,14 @@ def valid_real_article(state:dict,index:int)->str:
         blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
 
     if len(blocks)>1:
+        list_openers=('Festgehalten bleibt','Dokumentiert ist','Als Prüfpunkt gilt','Gebunden bleibt')
         list_rows=[]
         for n in range(4):
             fact_id=allowed[n%len(allowed)]
             fact=claim_map[fact_id]
             a=aspects[(40+n*3+index)%len(aspects)]
             list_rows.append(
-                f'<li data-fact-ids="{fact_id}">Als {a} bleibt der reale Quellenpunkt gebunden: {fact}; '
+                f'<li data-fact-ids="{fact_id}">{list_openers[n]} für {a}: {fact}; '
                 f'die Liste übernimmt damit nur den belegten Inhalt für die weitere Auswahl.</li>'
             )
         blocks[1]=blocks[1].replace('</section>','<ul>'+''.join(list_rows)+'</ul></section>',1)
@@ -205,6 +217,10 @@ def valid_real_article(state:dict,index:int)->str:
         if len(table_positions)!=1:
             raise AssertionError('REAL_BOUND_TABLE_BLOCK_MISSING_OR_DUPLICATE')
         rows=max(int(g.get('min_table_body_rows') or 1),4)
+        cell_openers=(
+            'Belegt für {a} ist:', 'Dokumentiert zu {a} bleibt:', 'Als Quellenpunkt für {a} gilt:',
+            'Im Bereich {a} ist festgehalten:', 'Zur Einordnung von {a} dient:', 'Unter {a} bleibt gebunden:',
+        )
         body=[]
         for r in range(rows):
             cells=[]
@@ -213,8 +229,9 @@ def valid_real_article(state:dict,index:int)->str:
                 fact=claim_map[fact_id]
                 a=aspects[(60+r*5+col*2+index)%len(aspects)]
                 d=aspects[(67+r*7+col*3+index)%len(aspects)]
+                opener=cell_openers[(r*3+col+index)%len(cell_openers)].format(a=a)
                 cells.append(
-                    f'<td data-fact-ids="{fact_id}">Für {a} ist belegt: {fact}; '
+                    f'<td data-fact-ids="{fact_id}">{opener} {fact}; '
                     f'{d} bezeichnet hier nur die sachliche Einordnung dieses Quellenpunkts.</td>'
                 )
             body.append('<tr>'+''.join(cells)+'</tr>')
