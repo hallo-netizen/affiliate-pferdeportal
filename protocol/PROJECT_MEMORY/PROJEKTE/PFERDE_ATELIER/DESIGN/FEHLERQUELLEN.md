@@ -22,7 +22,6 @@ Aktueller Endbeleg:
 Wichtig:
 Diese spätere Kette ändert laut MASTER_STATUS keine allgemeine Designregel, sondern nur Pferde-spezifische redaktionelle Kategorietexte/Loader.
 
-
 ## Kategorie-Reihenfolge 2026-09-07
 
 STATUS:
@@ -61,3 +60,34 @@ TECHNISCHE ORIGINALBELEGE:
 
 LEHRE:
 **Bei Miniänderungen keine Interpretation: nur die ausdrücklich gebundene Transformation ausführen.**
+
+## DESIGN-RASSEN-20260914 – Einzelrassenbreite
+
+STATUS: **AKTIV / LIVE FAIL**
+
+BETROFFEN:
+`pa_breed` Einzelrasse, Design 1.50.507.
+
+REELER LIVE-READBACK 2026-09-14:
+- `Alle Rassen` Pagination → PASS;
+- lokale Pferderassen-AJAX-Suche → PASS;
+- Einzelrasse bleibt sichtbar zu schmal → FAIL.
+
+LOKALER KANDIDAT 1.50.507:
+- Contract 28/28 PASS;
+- Runtime 28/28 PASS;
+- 11/11 Mutationen erkannt/ROT;
+- ZIP-/PHP-/Strukturprüfung PASS.
+
+WICHTIGER BEFUND:
+Der lokale Test prüfte die beabsichtigten Breitenregeln, bewies aber nicht den tatsächlichen Live-Containerpfad. Die historische Portalbreiten-Lösung setzt auf der realen Body-/Astra-/Kubio-Containerachse an. Ein innerer `max-width`-Fix ist deshalb nicht ausreichend.
+
+VERBINDLICHER NEXT FIX:
+- `single-pa_breed` an denselben bewährten breiten Portal-Containerpfad anbinden;
+- keine fremden Portal-Seitendesigns mitziehen;
+- realen Browser-Readback messen/prüfen;
+- im selben Minimalpatch den generischen Hero-Kurztext entfernen;
+- AJAX und Pagination als bereits LIVE bestätigte Bereiche regressionsgeschützt lassen.
+
+REGELQUELLE:
+`PFERDERASSEN_DESIGN_RULES.md`.
