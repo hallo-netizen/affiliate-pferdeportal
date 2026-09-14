@@ -19,13 +19,15 @@ jobs:
           fetch-depth: 0
       - name: Python syntax
         run: |
-          python -m py_compile isolated_system4/controller.py isolated_system4/controller_core.py isolated_system4/production_binding.py isolated_system4/point0_snapshot.py isolated_system4/supervisor.py isolated_system4/root_supervisor_bridge.py isolated_system4/worker_dispatch.py isolated_system4/root_entry.py isolated_system4/codex_entry.py isolated_system4/new_topic_real_source_fixture.py isolated_system4/new_topic_real_route_test_support.py isolated_system4/test_new_topics_real_corridor.py
+          python -m py_compile isolated_system4/controller.py isolated_system4/controller_core.py isolated_system4/production_binding.py isolated_system4/point0_snapshot.py isolated_system4/supervisor.py isolated_system4/root_supervisor_bridge.py isolated_system4/worker_dispatch.py isolated_system4/root_entry.py isolated_system4/codex_entry.py isolated_system4/full_route_start.py isolated_system4/full_route_test_fixture.py isolated_system4/full_route_test_worker.py isolated_system4/full_route_bad_worker.py isolated_system4/test_full_route_start_boundary.py isolated_system4/test_full_route_start_real.py isolated_system4/new_topic_real_source_fixture.py isolated_system4/new_topic_real_route_test_support.py isolated_system4/test_new_topics_real_corridor.py
       - name: Point0 prepared to finalized source-bound lifecycle
         run: python isolated_system4/test_point0_prepare_finalize.py
       - name: Point0 supervisor controller hard boundary
         run: python isolated_system4/test_point0_supervised_controller.py
       - name: Machine production binding hard boundary
         run: python isolated_system4/test_production_binding.py
+      - name: Single-button hard negative boundary
+        run: python isolated_system4/test_full_route_start_boundary.py -v
       - name: Existing System 4 tests
         shell: bash
         run: |
@@ -77,3 +79,7 @@ jobs:
         env:
           SYSTEM4_REAL_TOOL_CORRIDOR: '1'
         run: python isolated_system4/test_new_topics_real_corridor.py -v
+      - name: Single-button one and three new articles full real corridor
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+        run: python isolated_system4/test_full_route_start_real.py -v
