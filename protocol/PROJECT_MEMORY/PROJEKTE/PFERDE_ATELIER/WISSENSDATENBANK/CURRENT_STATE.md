@@ -23,12 +23,13 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
 ## PFERDERASSEN – FORTSCHRITT
 
-- **162 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
-- Seit dem 157er-Stand neu: Kroatisches Kaltblut, Kroatischer Posavac, Kroatisches Sportpferd, Kroatisches Warmblut und Međimurje-Pferd.
-- Die fünf neuen kroatischen Rassen sind über das kroatische Landwirtschaftsministerium bzw. dessen aktuelle Liste anerkannter Zuchtorganisationen/Zuchtprogramme gebunden.
-- Hrvatski posavac und slowenisches Posavje-Pferd bleiben getrennt, weil sie separat staatlich geführte Zuchtprogramme besitzen.
-- Kroatisches Sportpferd und Kroatisches Warmblut werden ebenfalls getrennt geführt.
-- Lipizzaner und Gidrán waren bereits vorhanden und wurden nicht dupliziert.
+- **168 reale Rassendatensätze** liegen unter `AKTENSCHRAENKE/PFERDERASSEN/DATEN/`.
+- Seit dem 162er-Stand neu: Pantaneiro, Mangalarga Paulista, Campeiro, Marajoara, Latgalischer Traber und Lettischer Ardenner.
+- Pantaneiro, Mangalarga Paulista und Campeiro sind über MAPA bzw. national registrierte Zuchtorganisationen gebunden.
+- Marajoara ist über Embrapa als eigenständiger brasilianischer Erhaltungsbestand/Rassekomplex mit Rassestandard und Erhaltungskern gebunden; aktueller MAPA-Registerstatus bleibt Detailoffenheit.
+- Latgales rikšotājs und Latvijas ardeņu zirgs sind über lettische staatliche Erhaltungsquellen gebunden.
+- Latvian Heavy Warmblood wird nicht separat angelegt: aktuelles staatliches Register führt ihn als Fahr-/schweren Typ innerhalb des Latvian Warmblood.
+- Puruca wird vorerst nicht separat angelegt, da aktuelle Embrapa-Fachliteratur ihn eng dem Marajoara-Komplex zuordnet.
 - Internationale Masterliste weiterhin unvollständig; **kein Vollständigkeits-PASS**.
 
 ## GLOSSAR – FORTSCHRITT
