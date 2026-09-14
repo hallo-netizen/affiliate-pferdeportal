@@ -27,12 +27,17 @@ def prepare(runroot:Path)->dict:
     sys.path.insert(0,str(HERE)); import root_entry, machine_point0, point0_snapshot
     if runroot.exists() and any(runroot.iterdir()): fail('RUNROOT_NOT_EMPTY')
     runroot.mkdir(parents=True,exist_ok=True)
+    start_file=FIX/'start_button.json'
+    if not start_file.is_file(): fail('SYSTEM4_CHAT_START_BUTTON_FIXTURE_REQUIRED')
     manifest=root_entry._critical_manifest_sha256(); head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip()
-    snap=load(FIX/'snapshot.template.json'); snap['system4_root_manifest_sha256']=manifest
+    snap=load(FIX/'snapshot.template.json')
+    snap=machine_point0.bind_chat_start(snap,load(start_file))
+    snap['system4_root_manifest_sha256']=manifest
     raw=(json.dumps(snap,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()
     p0=machine_point0.build_from_acquired(snapshot_bytes=raw,acquired_batch=load(FIX/'acquired.json'),prewrite_plan_batch=load(FIX/'plans.json'),provider='SYSTEM4_LIVE_PARITY_V2_CAPTURED_REAL_SOURCES',manifest=manifest,head=head)
     (runroot/'snapshot.json').write_bytes(raw); (runroot/'point0.json').write_bytes(point0_snapshot.canon(p0))
-    meta={'head':head,'manifest':manifest,'article_count':len(snap['next_textmachine_metadata_batch']['items']),'point0_sha256':p0['point0_core_sha256']}; writej(runroot/'run_meta.json',meta)
+    receipt=snap['system4_chat_start']
+    meta={'head':head,'manifest':manifest,'article_count':len(snap['next_textmachine_metadata_batch']['items']),'point0_sha256':p0['point0_core_sha256'],'chat_start_receipt_sha256':receipt['receipt_sha256']}; writej(runroot/'run_meta.json',meta)
     return meta
 
 def item(runroot:Path,i:int)->dict:
@@ -97,7 +102,7 @@ def finalize(runroot:Path)->dict:
     if cp.returncode==0 or 'STATE_COUNT_MISMATCH' not in cp.stdout: fail('NEG_BATCH_COUNT_NOT_BLOCKED')
     bad=copy.deepcopy(payload); bad['articles'][0]['body']+='X'; badp=runroot/'bad-handoff.json'; writej(badp,bad); cp=run([sys.executable,HERE/'handoff_transport.py','validate',badp],e,check=False)
     if cp.returncode==0 or 'HANDOFF_BODY_SHA_MISMATCH' not in cp.stdout: fail('NEG_HANDOFF_TAMPER_NOT_BLOCKED')
-    proof={'status':'SYSTEM4_LIVE_PARITY_V2_PASS','head':meta['head'],'manifest':meta['manifest'],'article_count':len(rows),'batch_sha256':payload['batch_sha256'],'batch_evidence_sha256':bout['batch_evidence_sha256'],'handoff_sha256':hashlib.sha256(canonical.read_bytes()).hexdigest(),'handoff_bytes':len(canonical.read_bytes()),'inline_byte_equal':True,'revisions':[r['revision_count'] for r in rows],'lt':[r['languagetool']['status'] for r in rows],'ppm':[r['ppm679']['status'] for r in rows]}
+    proof={'status':'SYSTEM4_LIVE_PARITY_V2_PASS','head':meta['head'],'manifest':meta['manifest'],'article_count':len(rows),'chat_start_receipt_sha256':meta['chat_start_receipt_sha256'],'batch_sha256':payload['batch_sha256'],'batch_evidence_sha256':bout['batch_evidence_sha256'],'handoff_sha256':hashlib.sha256(canonical.read_bytes()).hexdigest(),'handoff_bytes':len(canonical.read_bytes()),'inline_byte_equal':True,'revisions':[r['revision_count'] for r in rows],'lt':[r['languagetool']['status'] for r in rows],'ppm':[r['ppm679']['status'] for r in rows]}
     writej(runroot/'LIVE_PARITY_V2_PROOF.json',proof); out=os.environ.get('SYSTEM4_LIVE_PARITY_PROOF','').strip();
     if out: writej(Path(out),proof)
     return proof
