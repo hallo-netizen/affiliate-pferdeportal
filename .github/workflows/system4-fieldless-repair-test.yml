@@ -21,11 +21,11 @@ jobs:
         run: |
           python -m py_compile isolated_system4/*.py
       - name: Fieldless validator repair routing positive negative
-        run: python -m unittest isolated_system4/test_fieldless_validator_repair_routing.py -v
+        run: python isolated_system4/test_fieldless_validator_repair_routing.py -v
       - name: Stage-aware repair router
-        run: python -m unittest isolated_system4/test_stage_aware_repair_router.py -v
+        run: python isolated_system4/test_stage_aware_repair_router.py -v
       - name: Repair continuity
-        run: python -m unittest isolated_system4/test_repair_continuity.py -v
+        run: python isolated_system4/test_repair_continuity.py -v
       - name: Existing System 4 tests
         shell: bash
         run: |
