@@ -1,6 +1,6 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **LOKALER PUNKT-0/SUPERVISOR-KANDIDAT VOLLSTÄNDIG GETESTET — PRODUKTION BLOCKED BIS BYTEGLEICHE REMOTE-ÜBERTRAGUNG + HARDLOCK.**
+Status: **LOKALER PUNKT-0/SUPERVISOR-KANDIDAT VOLLSTÄNDIG GETESTET — PRODUKTION BLOCKED BIS BYTEGLEICHE REMOTE-ÜBERTRAGUNG + REMOTE-RETEST.**
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Campus-/Projektstand bleibt getrennt und ausschließlich in `control/startmaster0107/CURRENT_STATE.json`.
 
@@ -10,7 +10,7 @@ PR #238, Branch `hobbyroom/system4-true-single-room-v1`.
 
 Kein Merge. Kein Publish. `publish_allowed=false`.
 
-Der Remote-Branch enthält weiterhin den zuvor grünen Teststufe-2-Produktionskern. Der am 2026-09-14 lokal vollständig geprüfte neue Punkt-0/Supervisor-Code ist **noch nicht bytegleich remote gebunden**. Ein Versuch, den großen `root_entry.py`-Blob zu transportieren, ergab einen anderen Git-Blob als lokal; deshalb wurde der Branch bewusst nicht auf einen halbfertigen Code-Tree gesetzt.
+Der Remote-Branch enthält weiterhin den zuvor grünen Teststufe-2-Produktionskern. Der am 2026-09-14 lokal vollständig geprüfte neue Punkt-0/Supervisor-Code ist **noch nicht als kompletter Code-Tree remote gebunden**. Die neuen kleinen Kernblobs sowie `root_entry.py` konnten bereits bytegleich als Git-Objekte erzeugt werden; sie wurden bewusst **noch nicht** an den Branch gehängt. Verbleibender Transportblocker ist insbesondere der große geänderte `controller.py`-Blob. Der direkte lokale Git-Weg ist ebenfalls nicht verfügbar (`Could not resolve host: github.com`). Deshalb gibt es keine halbfertige Remote-Codeversion.
 
 ## Neuer realer Fehler und Architekturfolge
 
@@ -68,19 +68,29 @@ Zusätzlich auf frischem Workspace vollständig ausgeführt:
 - Batch 1/1 PASS;
 - V2-Handoff / Inline-Unpack bytegleich PASS;
 - Handoff: `49.294` Bytes;
-- SHA256: `a1b13bb804c573be5d5c0bf17c9e320c09c87a264a283b0450d4306ed99f02`;
+- SHA256: `a1b13bb804c573be5d5c0bf17c9e320c09c87a264a283b0450d4306ed99f02da`;
 - `codex_used=false`.
+
+## Remote-Git-Objekte des lokalen Kandidaten
+
+Bereits bytegleich in GitHub als **unreferenzierte Blobs** vorhanden, aber noch nicht an den Branch gehängt:
+- `point0_snapshot.py` -> `4dab3cc58da04cf2d5d53f22bc7e837b3cca7c88`;
+- `supervisor.py` -> `0afb25204fe8cac1dc24912f638451842a68399b`;
+- `root_supervisor_bridge.py` -> `2c9e0ce6e22efee20ceedfef5e3ba37c044eeb2f`;
+- `worker_dispatch.py` -> `608627f4d9d1b09758e42fd7ece4690fe9761575`;
+- `codex_entry.py` -> `c74044a85e9da6de3e9af6472555306e8f6fb28c`;
+- `root_entry.py` -> `b533e8223351ef291be6b624bb803b9f888d5268`.
 
 ## HOBBYRAUM / NEXT ACTION
 
 Status: **BLOCKED FÜR PRODUKTION / LOKALER KANDIDAT PASS**.
 
 NEXT ACTION:
-1. exakt getestete Punkt-0/Supervisor-Codebytes bytegleich auf PR #238 übertragen;
+1. verbliebene getestete Codebytes, insbesondere `controller.py`, bytegleich als Git-Blobs übertragen;
 2. jeden Remote-Git-Blob gegen lokalen `git hash-object` prüfen;
-3. keine Teilübertragung akzeptieren;
-4. auf dem finalen Remote-Head die vollständige Positiv-/Negativstrecke erneut ausführen;
-5. `Pferde Atelier Immutable Base Hardlock` muss auf genau diesem finalen Head SUCCESS sein;
+3. erst wenn **alle** Blobs stimmen, einen einzigen atomaren Code-Tree/Commit auf PR #238 setzen;
+4. auf exakt diesem finalen Remote-Code-Head die vollständige Positiv-/Negativstrecke erneut ausführen;
+5. `Pferde Atelier Immutable Base Hardlock` muss auf genau diesem finalen Code-Head SUCCESS sein;
 6. erst danach neuer realer Codex-Artikelversuch.
 
 Kein Merge. Kein Publish. Kein weiterer Codex-Lauf vor diesem Remote-Nachweis.
