@@ -57,8 +57,9 @@ def start_to_context(base:Path,index:int):
 def valid_article(state:dict,index:int,variant:str='basis')->str:
  c=state['authoring_contract'];identity=c['article_identity'];g=c['global_requirements'];s=c['structure_requirements'];t=c['type_requirements'];b=c['bound_requirements'];allowed=list(b['allowed_fact_ids']);fid=allowed[0]
  min_words=int(g.get('min_words') or 0);min_paragraphs=int(g.get('min_paragraphs') or 0);min_h2=int(g.get('min_h2') or 0);intro=s.get('intro') if isinstance(s.get('intro'),dict) else {};intro_name=str(intro.get('required_block') or 'intro')
+ headings=s.get('headings') if isinstance(s.get('headings'),dict) else {};allowed_heads=[str(x) for x in headings.get('allowed_labels',[]) if str(x).strip()]
  required=list(t.get('required_blocks') or []);blocks=[]
- filler=(f'{identity["target_keyword"]} {variant} sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich ') 
+ filler=(f'{identity["target_keyword"]} {variant} sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich ')
  ilo=max(int(intro.get('minimum_words') or 1),20);ihi=int(intro.get('maximum_words') or max(ilo,200));intro_words=min(max(ilo,25),ihi);intro_text=' '.join((filler.split()*((intro_words//len(filler.split()))+2))[:intro_words])
  blocks.append(f'<section data-block="{intro_name}"><p data-fact-ids="{fid}">{intro_text}</p></section>')
  other=[x for x in required if x!=intro_name]
@@ -66,7 +67,8 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  target_paras=max(min_paragraphs-1,len(other)*2,4);target_words=max(min_words-intro_words,400);paras_per=max(2,(target_paras+len(other)-1)//len(other));words_per=max(45,(target_words+len(other)*paras_per-1)//(len(other)*paras_per))
  link_rows=[row for row in b.get('link_bindings',[]) if isinstance(row,dict) and row.get('active') is not False];link_cursor=0
  for bi,name in enumerate(other):
-  parts=[f'<h2>Wichtige Auswahlpunkte im Überblick {bi+1}</h2>']
+  heading=allowed_heads[bi%len(allowed_heads)] if allowed_heads else 'Kriterien für die passende Auswahl'
+  parts=[f'<h2>{heading}</h2>']
   for pi in range(paras_per):
    words=(filler+f' Abschnitt {bi+1} Punkt {pi+1} eigen{index}_{bi}_{pi} ').split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
    if link_cursor<len(link_rows):
@@ -75,12 +77,9 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
  while link_cursor<len(link_rows):
   row=link_rows[link_cursor];blocks[-1]=blocks[-1].replace('</section>',f'<p data-fact-ids="{fid}"><a href="{row["href"]}">{row["anchor"]}</a></p></section>');link_cursor+=1
- table_count=int(t.get('table_count_exact') or 0)
- tables=''
+ table_count=int(t.get('table_count_exact') or 0);tables=''
  if table_count:
-  rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {r+1}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {index}-{r+1}</td></tr>' for r in range(rows))
-  table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>'
-  tables=table*table_count
+  rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {r+1}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {index}-{r+1}</td></tr>' for r in range(rows));table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>';tables=table*table_count
  traces=''
  if t.get('fact_trace_required') is True:
   need=max(int(b.get('source_trace_minimum') or 0),1)
