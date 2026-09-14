@@ -1,8 +1,8 @@
 import json,os,tempfile,unittest
 from pathlib import Path
 
-import controller
-from live_route_test_support import start_to_context,valid_article
+import controller,production_checks
+from live_route_test_support import REPO,start_to_context,valid_article
 
 
 @unittest.skipUnless(os.environ.get('SYSTEM4_REAL_TOOL_CORRIDOR')=='1','real tool corridor is an explicit CI stage')
@@ -14,6 +14,10 @@ class RealLtPpmCorridorTests(unittest.TestCase):
             root=Path(td)
             workspace,_,state=start_to_context(root,0)
             body=valid_article(state,0,'realpruefung')
+            try:
+                production_checks.run_languagetool(REPO,body)
+            except production_checks.RepairRequired as exc:
+                self.fail('REAL_LT68_FINDINGS:'+json.dumps(exc.findings,ensure_ascii=False,sort_keys=True))
             draft=root/'article.html'; draft.write_text(body,encoding='utf-8')
             self.assertEqual(controller.main(['controller.py','draft',str(workspace),str(draft)]),0)
             rc=controller.main(['controller.py','fullcheck',str(workspace)])
