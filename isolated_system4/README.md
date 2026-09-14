@@ -1,6 +1,6 @@
 # SYSTEM 4 — TRUE SINGLE ROOM
 
-Status: **REMOTE-TESTKANDIDAT VOLLSTÄNDIG PASS — REALER CODEX-PRODUKTIONSLAUF / MERGE / PUBLISH NICHT AUSGEFÜHRT.**
+Status: **REMOTE-TESTKANDIDAT VOLLSTÄNDIG PASS — SEPARATER LOKALER NACHWEIS OFFEN — REALER CODEX-PRODUKTIONSLAUF / MERGE / PUBLISH NICHT AUSGEFÜHRT.**
 
 Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Campus-/Projektstand bleibt getrennt und ausschließlich in `control/startmaster0107/CURRENT_STATE.json`.
 
@@ -8,7 +8,7 @@ Diese Datei ist die **eine aktuelle System-4-Statuswahrheit**. Der offizielle Ca
 
 Branch: `hobbyroom/system4-point0-supervisor-rebuild-v1`
 
-Der Status `PASS` gilt nur, wenn der **aktuelle Branch-Head** den vollständigen Workflow `.github/workflows/system4-point0-supervisor-candidate.yml` mit `conclusion=success` bestanden hat. Konkrete Head-/Run-Belege werden nicht zusätzlich als dynamische CURRENT-Wahrheit in dieser README dupliziert; sie liegen dauerhaft in GitHub Actions und im historischen Abschlussprotokoll.
+Der Status `REMOTE PASS` gilt nur, wenn der **aktuelle Branch-Head** den vollständigen Workflow `.github/workflows/system4-point0-supervisor-candidate.yml` mit `conclusion=success` bestanden hat. Konkrete Head-/Run-Belege werden nicht zusätzlich als dynamische CURRENT-Wahrheit in dieser README dupliziert; sie liegen dauerhaft in GitHub Actions und im historischen Abschlussprotokoll.
 
 Kein Merge. Kein Publish. `publish_allowed=false`.
 
@@ -71,22 +71,23 @@ Der im letzten neuen Dreier-Test gefundene `BLOCKED_WAVE2_CONCLUSION_BALANCE` wa
 
 ## Was NICHT bewiesen wurde
 
-Der Single-Button-Abnahmetest benutzt einen kontrollierten Test-Worker an exakt derselben gebundenen Worker-Schnittstelle. Ein **realer Codex-Produktionsarbeiter** wurde in diesem Abschlusslauf nicht ausgeführt. Deshalb ist ein echter Codex-Artikel weiterhin der nächste Produktionsbeweis und darf nicht aus dem Test-Worker-PASS abgeleitet werden.
+Der Single-Button-Abnahmetest benutzt einen kontrollierten Test-Worker an exakt derselben gebundenen Worker-Schnittstelle. Ein **realer Codex-Produktionsarbeiter** wurde in diesem Abschlusslauf nicht ausgeführt.
 
-Ein separater lokaler Container-/Arbeitsplatzlauf auf dem aktuellen Head ist in diesem Chat nicht ausgeführt worden; die vollständige Abnahme wurde remote auf GitHub Actions ausgeführt. Das ist kein Runtime-PASS für einen realen Codex-Produktionseinsatz.
+Ein separater lokaler Container-/Arbeitsplatzlauf auf dem aktuellen Head ist in diesem Chat **nicht ausgeführt worden**. Der Versuch, den Branch in die verfügbare lokale Containerumgebung zu klonen, scheiterte bereits am fehlenden DNS-/Netzzugriff zu GitHub. Deshalb darf aus dem vollständigen Remote-PASS kein separater lokaler PASS abgeleitet werden.
 
 Der offizielle STARTMASTER0107-LIVE-`CURRENT_STATE` wurde nicht verändert. System 4 ist weiterhin ein isolierter Kandidat und keine gemergte Produktionswahrheit.
 
 ## HOBBYRAUM / NEXT ACTION
 
-Status: **TESTKANDIDAT PASS / PRODUKTION NICHT FREIGEGEBEN**.
+Status: **REMOTE-TESTKANDIDAT PASS / LOKALER NACHWEIS OFFEN / PRODUKTION NICHT FREIGEGEBEN**.
 
 NEXT ACTION:
 1. keine weitere Architektur- oder Teststreckenänderung;
-2. auf dem aktuell vollständig remote geprüften Kandidaten genau **einen real gebundenen Codex-Artikel** über denselben Single-Button-/Supervisor-/Worker-Pfad ausführen, nur nach ausdrücklicher Nutzerfreigabe;
-3. bei erstem echten Fehler fail-closed stoppen und ausschließlich denselben gebundenen Artikel reparieren, sofern der vorhandene Repair-Vertrag dies erlaubt;
-4. danach echten LT-6.8-/PPM-6.7.9-PASS, Handoff und Bytegleichheit nachweisen;
-5. weiterhin kein Merge und kein Publish ohne separate Nutzerfreigabe.
+2. auf exakt dem unveränderten Remote-PASS-Head den ausdrücklich verlangten lokalen Positiv-/Negativ- und Start-bis-Datei-Nachweis in einer Umgebung mit Zugriff auf den Branch ausführen;
+3. erst wenn dieser lokale Nachweis ebenfalls PASS ist: genau **einen real gebundenen Codex-Artikel** über denselben Single-Button-/Supervisor-/Worker-Pfad ausführen, nur nach ausdrücklicher Nutzerfreigabe;
+4. bei erstem echten Fehler fail-closed stoppen und ausschließlich denselben gebundenen Artikel reparieren, sofern der vorhandene Repair-Vertrag dies erlaubt;
+5. danach echten LT-6.8-/PPM-6.7.9-PASS, Handoff und Bytegleichheit nachweisen;
+6. weiterhin kein Merge und kein Publish ohne separate Nutzerfreigabe.
 
 NICHT ANFASSEN:
 - STARTMASTER0107-LIVE-Wahrheit;
