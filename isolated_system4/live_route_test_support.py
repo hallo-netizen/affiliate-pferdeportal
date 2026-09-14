@@ -14,7 +14,7 @@ def canon(v)->bytes:return json.dumps(v,ensure_ascii=False,sort_keys=True,separa
 def write_json(path:Path,value:dict)->Path:path.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True),encoding='utf-8');return path
 def head()->str:return subprocess.run(['git','rev-parse','HEAD'],cwd=REPO,text=True,capture_output=True,check=True).stdout.strip()
 def word_token(n:int)->str:
- words=('Auswahl','Material','Nutzung','Pflege','Sicherheit','Komfort','Eignung','Praxis','Hinweis','Vergleich','Haltung','Training','Stall','Weide','Reitplatz','Pferd')
+ words=('Auswahl','Material','Nutzung','Pflege','Sicherheit','Komfort','Eignung','Praxis','Vergleich','Haltung','Training','Stall','Weide','Reitplatz','Pferd','Anwendung')
  return words[n%len(words)]
 
 def production_snapshot_bytes(batch_size:int|None=None)->bytes:
@@ -28,7 +28,7 @@ def production_snapshot_bytes(batch_size:int|None=None)->bytes:
  value['system4_root_manifest_sha256']=root_entry._critical_manifest_sha256();return canon(value)
 
 def source_and_claims(index:int,target_keyword:str):
- shared=(f'{target_keyword} Auswahl Material Nutzung Pflege Sicherheit Komfort Eignung Praxis Vergleich Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Kriterium gebundener Wert Abschnitt Punkt Hinweis Haltung Training Stall Weide Reitplatz Pferd')
+ shared=(f'{target_keyword} Auswahl Material Nutzung Pflege Sicherheit Komfort Eignung Praxis Vergleich Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Kriterium gebundener Wert Abschnitt Haltung Training Stall Weide Reitplatz Pferd')
  chunks=[
   f'{shared}. Die Auswahl berücksichtigt Material, Sicherheit, Eignung und die praktische Nutzung.',
   f'{shared}. Die Nutzung berücksichtigt Pflege, Komfort, Anwendung und eine nachvollziehbare Entscheidung.',
@@ -71,17 +71,22 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  claims=state.get('production_context',{}).get('fact_pack',{}).get('claims',[])
  claim_map={str(row.get('fact_id') or ''):str(row.get('statement') or '').strip() for row in claims if isinstance(row,dict)}
  if any(not claim_map.get(fact_id) for fact_id in allowed):raise AssertionError('BOUND_FACT_STATEMENT_MISSING')
- def fact_sentence(fact_id:str)->str:return claim_map[fact_id]
+ def fact_stem(fact_id:str)->str:return claim_map[fact_id].rstrip(' .!?')
+ def bound_sentence(fact_id:str,seed:int)->str:
+  a=word_token(seed);d=word_token(seed+5)
+  return f'Nach der gebundenen Quelle gilt: {fact_stem(fact_id)}; diese Aussage wird für {a} und {d} im Zusammenhang mit {identity["target_keyword"]} eingeordnet.'
  min_words=int(g.get('min_words') or 0);min_paragraphs=int(g.get('min_paragraphs') or 0);min_h2=int(g.get('min_h2') or 0);intro=s.get('intro') if isinstance(s.get('intro'),dict) else {};intro_name=str(intro.get('required_block') or 'intro')
  intent_terms=[str(x).strip() for x in b.get('intent_terms',[]) if str(x).strip()]
  if not intent_terms:raise AssertionError('BOUND_INTENT_TERMS_MISSING')
  required=list(t.get('required_blocks') or []);blocks=[]
- filler=(f'{identity["target_keyword"]} {variant} sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich. ')
- ilo=max(int(intro.get('minimum_words') or 1),20);ihi=int(intro.get('maximum_words') or max(ilo,200));intro_words=min(max(ilo,25),ihi);intro_base=fact_sentence(fid)+' '+filler;intro_text=' '.join((intro_base.split()*((intro_words//len(intro_base.split()))+2))[:intro_words])
+ ilo=max(int(intro.get('minimum_words') or 1),20);ihi=int(intro.get('maximum_words') or max(ilo,200));intro_text=bound_sentence(fid,1)
+ intro_words=intro_text.split()
+ if len(intro_words)<ilo:intro_text+=' '+f'{identity["target_keyword"]} wird dabei nach Auswahl, Material, Nutzung, Sicherheit, Pflege und Eignung sachlich eingeordnet.'
+ if len(intro_text.split())>ihi:intro_text=' '.join(intro_text.split()[:ihi])
  blocks.append(f'<section data-block="{intro_name}"><p data-fact-ids="{fid}">{intro_text}</p></section>')
  other=[x for x in required if x!=intro_name]
  while len(other)<max(min_h2,2):other.append(f'content_{len(other)+1}')
- target_paras=max(min_paragraphs-1,len(other)*2,4);target_words=max(min_words-intro_words,400);paras_per=max(2,(target_paras+len(other)-1)//len(other));words_per=max(45,(target_words+len(other)*paras_per-1)//(len(other)*paras_per))
+ target_paras=max(min_paragraphs-1,len(other)*2,4);target_words=max(min_words-len(intro_text.split()),400);paras_per=max(2,(target_paras+len(other)-1)//len(other));words_per=max(45,(target_words+len(other)*paras_per-1)//(len(other)*paras_per))
  link_rows=[row for row in b.get('link_bindings',[]) if isinstance(row,dict) and row.get('active') is not False]
  expected_link_blocks=[str(row.get('section_id') or '') for row in link_rows]
  missing_link_blocks=[name for name in expected_link_blocks if name not in other]
@@ -92,7 +97,10 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   parts=[f'<h2>{heading}</h2>']
   section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
   for pi in range(paras_per):
-   fact_id=allowed[(bi+pi)%len(allowed)];base=fact_sentence(fact_id)+' '+filler;words=base.split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
+   fact_id=allowed[(bi+pi)%len(allowed)];seed=10+bi*paras_per+pi;text=bound_sentence(fact_id,seed)
+   extra_seed=seed+7
+   while len(text.split())<words_per:
+    text+=f' Für {word_token(extra_seed)} und {word_token(extra_seed+3)} bleibt die gebundene Aussage maßgeblich, ohne ihren Inhalt zu erweitern.';extra_seed+=2
    if pi==0:
     for row in section_links:text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
    parts.append(f'<p data-fact-ids="{fact_id}">{text}</p>')
@@ -101,7 +109,7 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  if len(blocks)>1:
   list_rows=[]
   for n in range(4):
-   fact_id=allowed[n%len(allowed)];list_rows.append(f'<li data-fact-ids="{fact_id}">{fact_sentence(fact_id)} Praktische Einordnung für die Auswahl.</li>')
+   fact_id=allowed[n%len(allowed)];list_rows.append(f'<li data-fact-ids="{fact_id}">{bound_sentence(fact_id,40+n)}</li>')
   blocks[1]=blocks[1].replace('</section>','<ul>'+''.join(list_rows)+'</ul></section>',1)
  table_count=int(t.get('table_count_exact') or 0)
  if table_count:
@@ -110,12 +118,12 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   if len(table_positions)!=1:raise AssertionError('BOUND_TABLE_BLOCK_MISSING_OR_DUPLICATE')
   rows=max(int(g.get('min_table_body_rows') or 1),4);body=[]
   for r in range(rows):
-   fact=allowed[r%len(allowed)];statement=fact_sentence(fact)
-   body.append(f'<tr><td data-fact-ids="{fact}">{statement}</td><td data-fact-ids="{fact}">{statement} Praktische Einordnung.</td><td data-fact-ids="{fact}">{statement} Entscheidungshinweis.</td></tr>')
+   fact=allowed[r%len(allowed)]
+   body.append(f'<tr><td data-fact-ids="{fact}">{bound_sentence(fact,60+r*3)}</td><td data-fact-ids="{fact}">{bound_sentence(fact,61+r*3)}</td><td data-fact-ids="{fact}">{bound_sentence(fact,62+r*3)}</td></tr>')
   table=(f'<table class="system-129-table comparison-table"><thead><tr>'
-         f'<th data-fact-ids="{fid}">{fact_sentence(fid)} Auswahlmerkmal</th>'
-         f'<th data-fact-ids="{fid}">{fact_sentence(fid)} Praktische Einordnung</th>'
-         f'<th data-fact-ids="{fid}">{fact_sentence(fid)} Entscheidungshinweis</th>'
+         f'<th data-fact-ids="{fid}">{identity["target_keyword"]} Auswahlmerkmal</th>'
+         f'<th data-fact-ids="{fid}">{identity["target_keyword"]} praktische Einordnung</th>'
+         f'<th data-fact-ids="{fid}">{identity["target_keyword"]} Entscheidungshinweis</th>'
          f'</tr></thead><tbody>'+''.join(body)+'</tbody></table>')
   pos=table_positions[0];blocks[pos]=blocks[pos].replace('</section>',table+'</section>',1)
  traces=''
