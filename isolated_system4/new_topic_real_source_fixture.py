@@ -16,7 +16,7 @@ def source_and_claims(index:int,target_keyword:str):
             'evidence':'Wichtige Punkte bei der Pferdehalterhaftpflicht sind der Verstoß von Halterpflichten, der Schutz für Pferdehüter, Flurschäden sowie Deckschäden. Pferdebesitzer sollten zudem auf die Mitversicherung bei Reitbeteiligung achten. Umfang und Preis variieren von Versicherer zu Versicherer. Gleiches gilt für die Ausschlüsse. Wichtig ist daher immer ein genauer Blick in den konkreten Vertrag und die darin enthaltenen Versicherungsbedingungen.',
             'claims':[
                 'Bei einer Pferdehaftpflicht sollte die Mitversicherung einer Reitbeteiligung geprüft werden.',
-                'Auch der Schutz für Pferdehüter ist ein wichtiger Punkt der Pferdehalterhaftpflicht.',
+                'Auch der Schutz für Pferdehüter ist ein wichtiger Punkt der Haftpflichtversicherung für Pferde.',
                 'Der konkrete Versicherungsumfang und mögliche Ausschlüsse sollten vor Vertragsabschluss geprüft werden.',
             ],
         },
