@@ -2,7 +2,7 @@ from __future__ import annotations
 import hashlib,json,os,sys,tempfile,unittest
 from pathlib import Path
 
-import full_route_start
+import full_route_start,handoff_transport
 from full_route_test_fixture import SINGLE_ITEMS,THREE_ITEMS,write_start_fixture
 
 HERE=Path(__file__).resolve().parent
@@ -28,7 +28,7 @@ class FullRouteStartRealTests(unittest.TestCase):
                 self.assertEqual(row['ppm679']['content_quality_status'],'CONTENT_QUALITY_CHECK_OK')
                 self.assertEqual(row['ppm679']['fail_closed_aggregate_status'],'PASS')
                 self.assertEqual(row['final_draft_sha256'],hashlib.sha256(row['body'].encode('utf-8')).hexdigest())
-            canonical=(out/'SYSTEM4_WORDPRESS_DIRECT_IMPORT_V2.json').read_bytes()
+            canonical=(out/handoff_transport.HANDOFF_FILENAME).read_bytes()
             self.assertEqual(final.read_bytes(),canonical)
             self.assertTrue((out/'batch/system4_batch_evidence.json').is_file())
             return payload
