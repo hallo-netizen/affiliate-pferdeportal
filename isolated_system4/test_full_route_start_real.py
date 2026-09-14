@@ -34,13 +34,13 @@ class FullRouteStartRealTests(unittest.TestCase):
             return payload
 
     def test_one_genuinely_new_article_from_single_start_button_to_file(self):
-        self.assertEqual(SINGLE_ITEMS[0]['target_keyword'],'Pferdehaftpflicht für Fremdreiter')
-        self._run(SINGLE_ITEMS,'s4-start-one-new-')
+        self.assertEqual(SINGLE_ITEMS[0]['target_keyword'],'Haftpflicht für Pferde bei Pflegebeteiligung')
+        self._run(SINGLE_ITEMS,'s4-start-one-fresh-')
 
     def test_three_genuinely_new_articles_from_single_start_button_to_file(self):
-        expected=['UV-Schutz bei Fliegenmasken','Pellets aus Luzerne als Heuersatz','Pferdehaftpflicht für Pferdehüter']
+        expected=['Fliegenmasken für Pferde an sonnigen Tagen','Pellets aus Luzerne für Pferde im Winter','Haftpflicht für Pferde bei Betreuung im Urlaub']
         self.assertEqual([x['target_keyword'] for x in THREE_ITEMS],expected)
         self.assertEqual(len({x['plan_slot'] for x in THREE_ITEMS}),3)
-        self._run(THREE_ITEMS,'s4-start-three-new-')
+        self._run(THREE_ITEMS,'s4-start-three-fresh-')
 
 if __name__=='__main__':unittest.main(verbosity=2)
