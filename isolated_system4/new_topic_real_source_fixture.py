@@ -39,7 +39,7 @@ def source_and_claims(index:int,target_keyword:str):
             'retrieved_at':'2026-09-14T16:30:00+02:00',
             'evidence':'Alfalfa pellets: Nutritional content is similar to hay. High in fiber. May have less dust and waste than hay. You can use it as a total replacement. Horses spend less time eating. Horses may overeat.',
             'claims':[
-                'Pellets aus Luzerne liefern eine faserreiche Futterquelle mit einem Nährstoffprofil, das Heu ähneln kann.',
+                'Pellets aus Luzerne enthalten viele Fasern und können beim Nährwert Heu ähneln.',
                 'Pellets aus Luzerne können weniger Staub und Futterverluste verursachen als Heu.',
                 'Pferde können Pellets schneller aufnehmen und dadurch eher zum Überfressen neigen.',
             ],
