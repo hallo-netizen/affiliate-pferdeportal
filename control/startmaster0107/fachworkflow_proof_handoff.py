@@ -95,40 +95,6 @@ def _ppm_repair_findings(value: Any) -> list[dict]:
             seen.add(key); unique.append(item)
     return unique
 
-_PPM_BLOCK_STATUS_MARKERS=("BLOCK","FAIL","ERROR","INVALID","MISMATCH","MISSING","DENIED","REJECT")
-
-def _ppm_first_block_reason(value: Any) -> str:
-    codes=[]; reasons=[]; statuses=[]
-    def add(bucket: list[str], raw: Any) -> None:
-        text=str(raw or "").strip()
-        if not text or text in {"PPM679_REAL_EXECUTION_BLOCKED","PSERC_PPM_INTAKE_BRIDGE_EXECUTED"}: return
-        if text not in bucket: bucket.append(text)
-    def walk(node: Any) -> None:
-        if isinstance(node,dict):
-            for child in node.values(): walk(child)
-            add(codes,node.get("error_code"))
-            for key in ("reason_codes","errors"):
-                values=node.get(key)
-                if isinstance(values,list):
-                    for raw in values:
-                        if isinstance(raw,str): add(codes,raw)
-            add(reasons,node.get("reason"))
-            status=str(node.get("status") or "").strip()
-            if status and any(marker in status.upper() for marker in _PPM_BLOCK_STATUS_MARKERS): add(statuses,status)
-        elif isinstance(node,list):
-            for child in node: walk(child)
-    walk(value)
-    for bucket in (codes,reasons,statuses):
-        if bucket: return bucket[0]
-    return ""
-
-def _raise_ppm_bridge_failure(bridge: Mapping[str, Any]) -> None:
-    repair=_ppm_repair_findings(bridge)
-    if repair: raise RepairRequired("ppm_content_quality",repair)
-    reason=_ppm_first_block_reason(bridge)
-    if reason: raise Blocked("PPM679_REAL_EXECUTION_BLOCKED:"+reason)
-    raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")
-
 def _load(path: Path) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict): raise Blocked("JSON_OBJECT_REQUIRED")
@@ -209,10 +175,10 @@ def _bound_item(ctx: Mapping[str, Any], canonical_id: str, slot: str) -> tuple[d
     return meta,rel
 
 def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], meta: Mapping[str, Any], release_item: Mapping[str, Any]) -> dict:
-    fact_pack=request.get("fact_pack"); item=request.get("production_plan_item"); header=request.get("production_plan_header")
+    fact_pack=request.get("fact_pack"); item=request.get("production_plan_item")
     if not isinstance(fact_pack,dict) or not fact_pack: raise Blocked("BOUND_FACT_PACK_MISSING")
     if not isinstance(item,dict) or not item: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISSING")
-    if not isinstance(header,dict) or not header or header.get("contract")!="production_plan_v4" or "items" in header: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
+    if request.get("production_plan_header")!=ctx["plan_header"]: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
     if request.get("workflow_release_item")!=release_item: raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_MISMATCH")
     if request.get("workflow_release_metadata")!=ctx["release_metadata"]: raise Blocked("BOUND_WORKFLOW_RELEASE_METADATA_MISMATCH")
     if str(release_item.get('plan_slot') or '')!=str(request.get('plan_slot') or ''): raise Blocked('BOUND_RELEASE_PLAN_SLOT_MISMATCH')
@@ -338,7 +304,9 @@ $runtime=nd_runtime($plan,'startmaster107007-'.substr(hash('sha256',$cid.'|'.$pa
     except json.JSONDecodeError as exc: raise Blocked("PPM679_REAL_EXECUTION_OUTPUT_INVALID") from exc
     if not isinstance(bridge,dict): raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")
     if bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
-        _raise_ppm_bridge_failure(bridge)
+        repair=_ppm_repair_findings(bridge)
+        if repair: raise RepairRequired("ppm_content_quality",repair)
+        raise Blocked("PPM679_REAL_EXECUTION_BLOCKED")
     ppm_result=bridge.get("ppm_result"); artifact=ppm_result.get("artifact") if isinstance(ppm_result,dict) else None
     if not isinstance(artifact,dict) or artifact.get("contract")!="ppm_action_report_v1" or artifact.get("version")!=PPM679_VERSION: raise Blocked("PPM679_REAL_REPORT_IDENTITY_INVALID")
     artifact_status=artifact.get("status")
