@@ -50,62 +50,74 @@ class ParentStartTests(unittest.TestCase):
         cls.server.server_close()
         cls.thread.join(timeout=2)
 
-    def _write_launch(self, root: Path, urls, *, publish=False):
-        path = root / 'launch.json'
-        value = {
+    def _launch_value(self, urls, *, publish=False):
+        return {
             'contract': parent_start.CONTRACT,
             'publish_allowed': publish,
             'items': [ITEM],
             'source_urls': [urls],
         }
-        path.write_text(json.dumps(value, ensure_ascii=False), encoding='utf-8')
-        return path
 
-    def test_positive_external_launch_creates_point0_and_root_dispatch(self):
-        with tempfile.TemporaryDirectory(prefix='s4-parent-launch-') as td:
+    def test_positive_exact_external_command_token_creates_point0_and_root_dispatch(self):
+        with tempfile.TemporaryDirectory(prefix='s4-parent-token-') as td:
             root = Path(td)
-            launch = self._write_launch(root, [self.base + '/ok'])
             runtime = root / 'runtime'
-            workspaces = parent_start.run(launch, runtime)
-            self.assertEqual(len(workspaces), 1)
+            token = parent_start.encode_launch(self._launch_value([self.base + '/ok']))
+            rc = parent_start.main(['parent_start.py', 'start-b64', token, str(runtime)])
+            self.assertEqual(rc, 0)
+            workspace = runtime / 'item-0'
             self.assertTrue((runtime / 'point0-0.json').is_file())
             self.assertTrue((runtime / 'parent_start_receipt.json').is_file())
-            self.assertTrue((workspaces[0] / 'point0.json').is_file())
-            self.assertTrue((workspaces[0] / 'supervisor_state.json').is_file())
-            self.assertTrue((workspaces[0] / 'root_receipt.json').is_file())
-            self.assertTrue((workspaces[0] / 'worker_dispatch.json').is_file())
+            self.assertTrue((workspace / 'point0.json').is_file())
+            self.assertTrue((workspace / 'supervisor_state.json').is_file())
+            self.assertTrue((workspace / 'root_receipt.json').is_file())
+            self.assertTrue((workspace / 'worker_dispatch.json').is_file())
             point0 = json.loads((runtime / 'point0-0.json').read_text(encoding='utf-8'))
             self.assertEqual(point0['contract'], 'SYSTEM4_POINT0_SNAPSHOT_V1')
             self.assertEqual(point0['research_runtime']['status'], 'PASS')
             self.assertEqual(point0['research_runtime']['source_count'], 1)
             self.assertEqual(point0['research_runtime']['sources'][0]['http_status'], 200)
 
+    def test_negative_noncanonical_or_malformed_token_blocks_before_runtime(self):
+        with tempfile.TemporaryDirectory(prefix='s4-parent-bad-token-') as td:
+            runtime = Path(td) / 'runtime'
+            rc = parent_start.main(['parent_start.py', 'start-b64', 'not_valid!*', str(runtime)])
+            self.assertEqual(rc, 2)
+            self.assertFalse(runtime.exists())
+
+    def test_negative_old_file_cli_is_not_an_external_entry(self):
+        with tempfile.TemporaryDirectory(prefix='s4-parent-old-entry-') as td:
+            root = Path(td)
+            launch = root / 'launch.json'
+            launch.write_text(json.dumps(self._launch_value([self.base + '/ok']), ensure_ascii=False), encoding='utf-8')
+            runtime = root / 'runtime'
+            rc = parent_start.main(['parent_start.py', 'start', str(launch), str(runtime)])
+            self.assertEqual(rc, 2)
+            self.assertFalse(runtime.exists())
+
     def test_negative_missing_source_urls_blocks_before_runtime_creation(self):
         with tempfile.TemporaryDirectory(prefix='s4-parent-missing-') as td:
-            root = Path(td)
-            launch = self._write_launch(root, [])
-            runtime = root / 'runtime'
-            with self.assertRaisesRegex(parent_start.ParentStartError, 'PARENT_LAUNCH_SOURCE_URLS_EMPTY'):
-                parent_start.run(launch, runtime)
+            runtime = Path(td) / 'runtime'
+            token = parent_start.encode_launch(self._launch_value([]))
+            rc = parent_start.main(['parent_start.py', 'start-b64', token, str(runtime)])
+            self.assertEqual(rc, 2)
             self.assertFalse(runtime.exists())
 
     def test_negative_http_403_blocks_before_root_workspace(self):
         with tempfile.TemporaryDirectory(prefix='s4-parent-403-') as td:
-            root = Path(td)
-            launch = self._write_launch(root, [self.base + '/forbidden'])
-            runtime = root / 'runtime'
-            with self.assertRaisesRegex(parent_start.ParentStartError, 'PARENT_SOURCE_FETCH_FAILED'):
-                parent_start.run(launch, runtime)
+            runtime = Path(td) / 'runtime'
+            token = parent_start.encode_launch(self._launch_value([self.base + '/forbidden']))
+            rc = parent_start.main(['parent_start.py', 'start-b64', token, str(runtime)])
+            self.assertEqual(rc, 2)
             self.assertTrue(runtime.exists())
             self.assertFalse((runtime / 'item-0').exists())
 
     def test_negative_publish_true_blocks_before_runtime_creation(self):
         with tempfile.TemporaryDirectory(prefix='s4-parent-publish-') as td:
-            root = Path(td)
-            launch = self._write_launch(root, [self.base + '/ok'], publish=True)
-            runtime = root / 'runtime'
-            with self.assertRaisesRegex(parent_start.ParentStartError, 'PARENT_LAUNCH_PUBLISH_MUST_BE_FALSE'):
-                parent_start.run(launch, runtime)
+            runtime = Path(td) / 'runtime'
+            token = parent_start.encode_launch(self._launch_value([self.base + '/ok'], publish=True))
+            rc = parent_start.main(['parent_start.py', 'start-b64', token, str(runtime)])
+            self.assertEqual(rc, 2)
             self.assertFalse(runtime.exists())
 
 
