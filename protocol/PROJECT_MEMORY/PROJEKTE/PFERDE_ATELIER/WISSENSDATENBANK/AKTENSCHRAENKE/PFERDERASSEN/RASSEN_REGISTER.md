@@ -1,7 +1,7 @@
 # PFERDERASSEN – REGISTER
 
 STAND: 2026-09-14
-STATUS: MASTERLISTE IM AUFBAU / 162 DATENSÄTZE VORHANDEN
+STATUS: MASTERLISTE IM AUFBAU / 168 DATENSÄTZE VORHANDEN
 
 ## AUTORITÄTSREGEL
 
@@ -10,23 +10,26 @@ Dieses Register ist **Wegweiser und Bestandsübersicht**, keine zweite Fachwahrh
 - ein Rassendatensatz = eine Datei unter `DATEN/`;
 - fachlicher Recherche-/Prüfstatus steht ausschließlich im jeweiligen JSON-Datensatz;
 - die reale Dateiliste unter `DATEN/` ist der technische Bestandsnachweis;
-- Anzahl aktuell: **162 Rassendatensätze** plus `DATEN/START_HERE.md`.
+- Anzahl aktuell: **168 Rassendatensätze** plus `DATEN/START_HERE.md`.
 
 ## NEUESTER RECHERCHEBLOCK
 
-Seit dem synchronisierten 157er-Stand neu angelegt:
+Seit dem synchronisierten 162er-Stand neu angelegt:
 
-- Kroatisches Kaltblut / Hrvatski hladnokrvnjak
-- Kroatischer Posavac / Hrvatski posavac
-- Kroatisches Sportpferd / Hrvatski športski konj
-- Kroatisches Warmblut / Hrvatski toplokrvnjak
-- Međimurje-Pferd / Međimurski konj
+- Pantaneiro / Cavalo Pantaneiro
+- Mangalarga Paulista / Mangalarga
+- Campeiro / Cavalo Campeiro
+- Marajoara / Cavalo Marajoara
+- Latgalischer Traber / Latgales rikšotājs
+- Lettischer Ardenner / Latvijas ardeņu zirgs
 
 Wichtige Abgrenzung:
-- Hrvatski posavac wird als eigenständig genehmigte kroatische Rasse geführt und nicht mit dem slowenischen Posavje-Pferd zusammengelegt.
-- Hrvatski športski konj und Hrvatski toplokrvnjak besitzen getrennte kroatische Zuchtprogramme und werden deshalb nicht zusammengeführt.
-- Međimurski konj ist eine eigenständig beschriebene autochthone kroatische Kaltblutrasse.
-- Lipizzaner und Gidrán waren bereits vorhanden und wurden nicht dupliziert.
+- Mangalarga Paulista und Mangalarga Marchador besitzen getrennte brasilianische Registerorganisationen und werden nicht zusammengelegt.
+- Pantaneiro und Campeiro besitzen eigene beim MAPA registrierte nationale Zuchtorganisationen.
+- Marajoara wird als brasilianische Erhaltungsrasse/-population mit eigenem Rassestandard und Embrapa-Erhaltungskern geführt; formaler aktueller MAPA-Registerstatus bleibt als Detail offen.
+- Puruca wird aufgrund der aktuellen Embrapa-Einordnung als sehr nahe bzw. kleinwüchsige Variante des Marajoara nicht automatisch als zweiter Rassendatensatz angelegt.
+- Latvian Heavy Warmblood / Latvijas siltasinis braucamais tips wird nach aktuellem lettischem Register als Fahr-/schwerer Typ innerhalb des Latvian Warmblood geführt und **nicht** als zweite Rasseakte dupliziert.
+- Latgales rikšotājs und Latvijas ardeņu zirgs werden als eigene lokale lettische Erhaltungsrassen geführt.
 
 ## OFFENE KANDIDATEN – NOCH KEINE RASSEAKTEN
 
@@ -34,9 +37,6 @@ Wichtige Abgrenzung:
 - American Walking Pony
 - Andravida
 - Anglo-Kabarda
-- Mangalarga Paulista
-- Pantaneiro
-- Latvian Heavy Warmblood
 - weitere internationale Rassen aus anerkannten nationalen/ursprünglichen Studbooks
 
 Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über ausreichend starke Primär-/Verbands-/staatliche Quellen gebunden sind.
@@ -63,6 +63,9 @@ Diese Kandidaten werden erst angelegt, wenn formaler Status und Kernfakten über
 - Estonian Arden → historische Bezeichnung des Estonian Heavy Draught, kein zweiter Datensatz.
 - Hrvatski posavac ≠ Posavski konj/slowenisches Posavje-Pferd; getrennte staatliche Zuchtprogramme.
 - Hrvatski športski konj ≠ Hrvatski toplokrvnjak; getrennte kroatische Zuchtprogramme.
+- Mangalarga Paulista ≠ Mangalarga Marchador; getrennte nationale Registerorganisationen.
+- Latvian Heavy Warmblood → Fahr-/schwerer Typ des Latvian Warmblood, kein zweiter Datensatz.
+- Puruca → vorerst keine zweite Rasseakte; aktuelle Embrapa-Fachquelle beschreibt enge Zugehörigkeit/Variante zum Marajoara-Komplex.
 
 ## OFFENE NACHRECHERCHE
 
