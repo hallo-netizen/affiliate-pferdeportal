@@ -80,6 +80,14 @@ def _prepare_point0(root: Path, files: dict) -> dict:
 
     plan = json.loads(files['plan'].read_text(encoding='utf-8'))
     plan['source_snapshot_id'] = snapshot_sha
+    quality = plan.get('quality_binding') if isinstance(plan.get('quality_binding'), dict) else None
+    runtime = plan.get('runtime_order') if isinstance(plan.get('runtime_order'), dict) else None
+    links = quality.get('link_bindings') if isinstance(quality, dict) else None
+    if not isinstance(runtime, dict) or not isinstance(links, list) or not links:
+        raise AssertionError('CURRENT_PREWRITE_RUNTIME_LINK_INPUT_MISSING')
+    # Current live contract: runtime links are not independently authored. They are the
+    # exact machine-bound quality link bindings, and this identity is sealed at Point-0.
+    runtime['links'] = copy.deepcopy(links)
     plan_path = write_json(root / 'plan_item.bound.json', plan)
 
     research = json.loads(files['research'].read_text(encoding='utf-8'))
@@ -149,9 +157,6 @@ def _start_real_pipeline(files: dict, workspace: Path, env: dict) -> None:
 
 def _stage_to_draft(files: dict, workspace: Path, env: dict) -> None:
     _start_real_pipeline(files, workspace, env)
-    # The real worker is allowed to research only inside the supervisor-bound source pool.
-    # Acceptance therefore submits the supervisor's own canonical expected document, not a
-    # pre-Point0 fixture that merely contains similar sources.
     research = supervisor.expected_research_document(workspace)
     research_path = write_json(workspace.parent / 'research.supervisor-bound.json', research)
     run([sys.executable, str(CONTROLLER), 'research', str(workspace), str(research_path)], 0, env)
