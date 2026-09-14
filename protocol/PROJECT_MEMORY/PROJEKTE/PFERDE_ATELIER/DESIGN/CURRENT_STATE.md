@@ -1,7 +1,6 @@
 # DESIGN – CURRENT STATE
 
-STAND: 2026-09-07
-
+STAND: 2026-09-14
 
 ## AUTORITÄT DIESER DATEI
 
@@ -13,101 +12,70 @@ Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros
 - Änderungsgrund → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 - Historie → `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 
-Technische/Fachwahrheit bleibt an den in dieser Datei verlinkten Originalquellen.
-Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
+Technische/Fachwahrheit bleibt an den verlinkten Originalquellen. Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
 
-## Aktueller LIVE-Stand
+## Aktueller belastbarer LIVE-Stand
 
-**Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002**
+### Allgemeines bestätigtes Design
 
-Basis-Live:
-GitHub Branch:
-`fix/category-intro-targeted-79-v150472-20260831`
+Historische bestätigte Basis bleibt:
+- Pferde Atelier Design 1.50.472 / Contract V104;
+- Kategorie-Reihenfolge `DESIGN-ORDER-SWAP-002` LIVE PASS.
 
-Commit:
-`f1e074b2e6dae9bec76ee8ab3f177080f69d2d41`
+Diese bestätigten Bereiche dürfen durch die aktuelle Pferderassen-Arbeit nicht regressieren.
 
-Basis-Live-Beleg:
-`design-baseline/2026-08-31/v150472-category-intro-79/LIVE_PASS.md`
+### Pferderassen – aktueller realer Stand
 
-Zusätzlicher aktuell bestätigter Live-Patch:
-**Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.**
-Affiliate-Banner sowie Artikel-/Verweisstruktur bleiben unverändert.
+Installierter/getesteter Kandidat:
+`PFERDE_ATELIER_DESIGN_V1.50.507_AJAX_PAGINATION_BODYWIDTH_INSTALLIEREN.zip`
 
-Live-Patch-Beleg:
-`LIVE_PASS_DESIGN_ORDER_SWAP_002.md`
+SHA-256:
+`b27898d26b32e9fe9910a2312b6bfbcec12c738f76290ed89304eca931353ec9`
 
-Candidate SHA-256:
-`11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`
+Lokale exakte ZIP-Prüfung:
+- Contract 28/28 PASS;
+- Runtime 28/28 PASS;
+- PHP-Lint PASS;
+- ZIP-/Strukturprüfung PASS;
+- 11/11 absichtlich gebrochene Varianten ROT.
 
-Hinweis:
-Der Pluginheader bleibt bewusst 1.50.472; der aktuelle Livezustand wird deshalb durch Basisversion + Job-ID + Candidate-SHA eindeutig bestimmt.
+Realer Nutzer-Readback 2026-09-14:
+- Hauptsuche mit eigener Welt `Pferderassen`: LIVE PASS;
+- Pferderassen-Hero: LIVE PASS;
+- lokale Pferderassen-AJAX-Suche: LIVE PASS;
+- `Alle Rassen` Pagination 24/Seite: LIVE PASS;
+- Einzelrassenbreite: **LIVE FAIL** – trotz lokalem Breitenvertrag bleibt die reale Seite zu schmal.
 
-## Wichtige Abweichung zu main
+Damit ist **Design 1.50.507 kein Gesamt-LIVE-PASS**.
 
-Aktuelles `main` enthält weiterhin:
-`pferde-template-kit_V1.50.421.php`
-mit Pluginversion 1.50.421.
+## Verbindliche Pferderassen-Regeln
 
-Daraus folgt:
-**main ist für den aktuellen Pferde-Design-Live-Stand nicht die führende Release-Wahrheit.**
+Hauptquelle:
+`PFERDERASSEN_DESIGN_RULES.md`
 
-Nicht automatisch mergen oder main verändern.
+Besonders bindend:
+- Startseite max. 8 Vorschauen;
+- `Alle Rassen` paginiert 24/Seite;
+- Hero Übersicht: `PFERDE IM PORTRÄT / Pferderassen / Charakter, Herkunft & Besonderheiten`;
+- Einzelrasse: Breadcrumb nach Glossar-Geometrie, kein Autor;
+- Beitragsbild = Heroquelle = Vorschaubild;
+- links Icon-Steckbrief, Mitte Factsheet-Text, rechts Wissens-/Relationsspalte;
+- generischer Kurztext unter dem Rassentitel entfällt;
+- normale WordPress-Beiträge bleiben unberührt.
 
-## Übergebene Masterbasis
+## Aktueller Fehler
 
-Vom Nutzer übergeben und vollständig archiviert:
-- Plugin 1.50.469 / Contract V104;
-- vollständiger Master 1.50.469 / Contract V104.
+Autoritative Detailquelle:
+`FEHLERQUELLEN.md` → `DESIGN-RASSEN-20260914`.
 
-Diese beiden Dateien sind vollständige historische Basis für die spätere GitHub-Kette 1.50.470→1.50.472.
+Kurz: Der tatsächliche Astra/Kubio-/Body-Container hält `single-pa_breed` weiterhin schmal. Der nächste Fix muss am bewährten Portal-Containerpfad ansetzen; kein weiterer innerer `max-width`-Versuch.
 
-## Spätere GitHub-Kette
+## Quell-/Releasegrenze
 
-1.50.470:
-gezielte 45 Kategorietextkorrekturen.
+Die Pferderassen-Designstände 1.50.500–1.50.507 wurden in diesem Chat als installierbare lokale Pluginpakete erzeugt und geprüft, sind aber **nicht als autoritative Plugin-Source/Releasekette im Repository gebunden**.
 
-1.50.471:
-gezielte Erweiterung auf 70.
+Daher darf im PLUGINS-Büro kein isoliertes `CURRENT.zip` aus diesem Stand behauptet werden.
 
-1.50.472:
-final 79/79 Audit-Scope.
+## NEXT ACTION
 
-MASTER_STATUS V1.50.472 sagt:
-- vollständiger Master basiert ausdrücklich auf dem vollständigen 1.50.469/V104-Master;
-- CURRENT_PLUGIN_SOURCE auf 1.50.472 aktualisiert;
-- Installer 1.50.470/.471/.472 ergänzt;
-- 388 Seitentexte + 1052 Leaftexte = 1440;
-- allgemeiner und Pferde-V104-Vertrag byte-identisch zu 1.50.469;
-- keine CSS/JS/Journal/Tabellen/Affiliate/Such/Breadcrumb/Bild/Karten/Publish-Änderung.
-
-## QA V1.50.472
-
-- Source ↔ finaler Installer: 498/498 PASS;
-- 309/309 alte Seitentexte wertidentisch;
-- 1052/1052 Leaftexte wertidentisch;
-- 79/79 neue auditgebundene Seitentexte PASS;
-- Search-Plugin-Quelle byte-identisch PASS;
-- allgemeiner V104-Vertrag byte-identisch PASS;
-- Pferde-V104-Vertrag byte-identisch PASS;
-- Manifest-Readback/ZIP-Integrität PASS;
-- LIVE PASS nach Nutzerbestätigung dokumentiert.
-
-## Aktuelle Designregel
-
-V104 bleibt unverändert.
-
-Zusätzlich LIVE bestätigt: Auf der zentralen Kategorieebene stehen Affiliate-Produkte / Produktvorschläge vor der Beitragsvorschau; der Affiliate-Banner bleibt unverändert an seiner bisherigen Position.
-
-1.50.469→1.50.472 ist ausschließlich Pferde-spezifische redaktionelle Kategorietext-/Loader-Entwicklung.
-
-## Offene Archivlücke
-
-Die exakten V1.50.472 Plugin-/Master-ZIPs liegen derzeit NICHT als vom Nutzer übergebene Rohdateien in der ChatGPT-Library.
-
-Vorhanden:
-- GitHub Status/QA/Live-Pass/Hashes;
-- vollständige Rohbasis 1.50.469.
-
-Daher:
-aktueller Live-Stand bekannt, aber Roharchiv des finalen 1.50.472-Artefakts noch nicht vollständig.
+Siehe ausschließlich `HOBBYRAUM.md`.
