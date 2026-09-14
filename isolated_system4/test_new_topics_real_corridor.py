@@ -58,7 +58,7 @@ class NewTopicsRealCorridorTests(unittest.TestCase):
         expected_keywords=[
             'Pferdehaftpflicht bei Reitbeteiligung',
             'Fliegenmaske mit UV-Schutz',
-            'Alfalfa-Pellets für Pferde',
+            'Pellets aus Luzerne für Pferde',
         ]
         self.assertEqual([row['target_keyword'] for row in NEW_ITEMS],expected_keywords)
         self.assertEqual(len({row['plan_slot'] for row in NEW_ITEMS}),3)
