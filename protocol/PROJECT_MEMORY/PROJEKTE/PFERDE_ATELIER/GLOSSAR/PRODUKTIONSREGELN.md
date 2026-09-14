@@ -108,3 +108,27 @@ Für neue Glossarkandidaten gilt verbindlich:
 9. bestehende bereits geprüfte/veröffentlichte Glossarbeiträge werden durch diese neue Kandidatenregel **nicht pauschal gelöscht oder umgeschrieben**.
 
 SEO-Grund: Die starke Portal-Zielseite ist in diesem Fall die bevorzugte Google-Zielseite und soll nicht durch einen zusätzlich neu erzeugten Glossarbeitrag konkurrenziert werden.
+
+## 11. Gate-Hardlock über die komplette Automationskette
+
+Die Ausschluss-/Sicherheitsprüfung darf **nicht nur bei der Kandidatenfindung** stattfinden.
+
+Verbindliche Prüfpunkte:
+
+`Discovery -> Kategorie/Portalseite/Dublette/Kannibalisierung -> Research-Paket-Eingang -> PRE-PUBLISH -> WordPress-Readback`
+
+Harte Regeln:
+
+1. Ein Kandidat, der bei Discovery an Kategorie, Portal-Landingpage oder Kannibalisierung scheitert, darf nicht weiterverarbeitet werden.
+2. Am Research-Paket-Eingang werden dieselben Bestands-/SEO-Gates **erneut** gegen den aktuellen WordPress-Bestand ausgeführt.
+3. Ein Research-Paket darf keinen neuen Kandidaten aus dem Nichts erzeugen. Neue Begriffe müssen vorher im autorisierten Kandidatenpool existieren; nur ein bereits real vorhandener Glossarbeitrag (`BESTAND`) darf direkt an seine bestehende ID gebunden werden.
+4. Ein Research-Paket für Kandidat A muss maschinenfest auch Kandidat A enthalten. Abweichendes Ziel -> `RESEARCH_PACKAGE_TARGET_MISMATCH` und keine Übernahme.
+5. Unmittelbar vor jedem WordPress-Write wird der aktuelle Bestand erneut gelesen und dieselbe Kategorie-/Portalseiten-/Kannibalisierungsprüfung ausgeführt.
+6. Entsteht zwischen Research und Publish eine neue konkurrierende Portal-/Kategorieseite, muss der Publish dadurch noch gestoppt werden.
+7. Neue Beiträge werden zuerst als Draft geschrieben, danach müssen definierte Felder aus WordPress real zurückgelesen werden. Erst bei identischem Readback darf veröffentlicht werden.
+8. Bei Update eines bestehenden Glossarbeitrags ist vor dem Write ein Snapshot zu sichern; bei Readback-/Publishfehler wird zurückgerollt.
+9. `SANDBOX` darf unabhängig vom Auto-Publish-Häkchen niemals produktiv schreiben. Realer Write ist nur zulässig bei `mode=ARMED` **und** `auto_publish=true`.
+10. Der lokale PSTE-Rückstand darf zur Kandidatengewinnung vertieft werden, aber ausschließlich mit `provider_calls=0`. Jede Provider-Anforderung im Backlog-Scan -> `BLOCKED`.
+11. Ein Refresh verarbeitet höchstens 10 lokale Backlog-Batches zu je 40 Zeilen. Danach sauberer Zwischenstand statt Endlosschleife.
+
+Kein PASS aus Codeansicht. Für Änderungen an diesen Gates sind harte Positiv-/Negativtests erforderlich; kritische Schutzregeln müssen zusätzlich durch absichtlich gebrochene Negativvarianten nachweislich ROT werden.
