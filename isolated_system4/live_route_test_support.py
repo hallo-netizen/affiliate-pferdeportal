@@ -86,14 +86,13 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  expected_link_blocks=[str(row.get('section_id') or '') for row in link_rows]
  missing_link_blocks=[name for name in expected_link_blocks if name not in other]
  if missing_link_blocks:raise AssertionError('BOUND_LINK_SECTION_MISSING:'+','.join(missing_link_blocks))
- article_word=word_token(index+8)
  heading_suffixes=('sicher auswählen','Material sinnvoll vergleichen','Nutzung praktisch einordnen','Pflege passend planen','Sicherheit gezielt prüfen','Entscheidung nachvollziehbar treffen','Eignung im Alltag bewerten','Anwendung sinnvoll abstimmen')
  for bi,name in enumerate(other):
   intent=intent_terms[bi%len(intent_terms)];heading=f'{intent} {heading_suffixes[bi%len(heading_suffixes)]}'
   parts=[f'<h2>{heading}</h2>']
   section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
   for pi in range(paras_per):
-   fact_id=allowed[(bi+pi)%len(allowed)];base=fact_sentence(fact_id)+' '+filler+f'Abschnitt {word_token(bi)}, Punkt {word_token(pi+4)}, Hinweis {article_word}. ';words=base.split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
+   fact_id=allowed[(bi+pi)%len(allowed)];base=fact_sentence(fact_id)+' '+filler;words=base.split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
    if pi==0:
     for row in section_links:text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
    parts.append(f'<p data-fact-ids="{fact_id}">{text}</p>')
