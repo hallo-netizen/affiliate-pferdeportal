@@ -1,7 +1,7 @@
 # BÜRO GLOSSAR – CURRENT_STATE
 
 STAND: 2026-09-14
-STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497 LIVE FAIL / DESIGN 1.50.498 HART LOKAL POSITIV+NEGATIV RENDER-PASS / AUTOMATION CORE 1.3.0 SANDBOX LIVE PASS
+STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497 LIVE FAIL / DESIGN 1.50.498 HART LOKAL POSITIV+NEGATIV RENDER-PASS / AUTOMATION CORE 1.3.0 SANDBOX LIVE PASS / POOL-REFRESH LIVE PASS / CORE 1.3.1 PRUEFANSICHT LOKAL HART PASS
 
 ## LIVE bestätigt – nicht regressieren
 
@@ -12,6 +12,46 @@ STATUS: GLOSSAR BREADCRUMB LIVE PASS / GLOSSAR HERO LIVE PASS / JOURNAL 1.50.497
 - Glossar-Hero nach Design `1.50.494`: **LIVE PASS**. Breites Bild + weicher Übergang bestätigt.
 - Automation Core `1.3.0` Sandbox unter `Glossar -> Automation -> Sandbox hart testen`: **LIVE PASS 2026-09-14**.
 - Sandbox-Readback: `ok:true`; alle Tests `true`; `batch_upper_guard_100:true`; `production_write_performed:false`; Modus `SANDBOX`; Auto-Publish AUS; Produktion scharf AUS.
+- `Pool jetzt aktualisieren`: **LIVE PASS technisch**. Readback: Pool `14`, davon `13 KANDIDAT`, `1 QUARANTAENE`. Keine Produktion ausgelöst.
+
+## Pool-Prüfbarkeit – erkannte Lücke
+
+Der Live-Poolrefresh funktioniert, aber Core 1.3.0 zeigt in der Oberfläche nur Summen. Für die verbindlich geforderte jederzeitige Prüfbarkeit reicht das nicht: vor einem Automatiklauf müssen die einzelnen Begriffe, Quellen und Sperrgründe sichtbar sein.
+
+### Core-Kandidat 1.3.1 – reine Prüfansicht
+
+Paket: `UNIVERSAL_GLOSSARY_ENGINE_1.3.1_POOL_PRUEFANSICHT_INSTALLIEREN.zip`
+
+SHA-256: `1e50306f5bac5bf355a46e039bb5e5266296cdd496a3e6e4c5014963b734dbee`
+
+Neu unter `Glossar -> Automation`:
+
+`Begriff | Quelle | Status | Dublette | Kannibalisierung | Quarantäne-Grund | letzte Prüfung`
+
+Die Tabelle ist read-only und verändert den Pool nicht. Keine Produktionslogik, Recherchelogik oder Publish-Logik wurde erweitert.
+
+Harte lokale Positivtests:
+- PHP-Lint aller drei Plugin-PHP-Dateien PASS.
+- Fixture: exakte Dublette -> `Dublette JA` PASS.
+- Fixture: Synonym-Dublette -> `Dublette JA` PASS.
+- Fixture: Kannibalisierung -> `Kannibalisierung JA` + Quarantäne-Grund sichtbar PASS.
+- sauberer Kandidat -> Dublette/Kannibalisierung `NEIN` PASS.
+- Quellenherkunft und `updated_at` sichtbar PASS.
+- Renderer ist read-only; kein Pool-Write im Prüftabellenpfad PASS.
+- bestehende Sicherheit unverändert: Auto-Publish nur mit ARMED; Sandbox `production_write_performed=false` unverändert PASS.
+
+Harte Negativtests:
+- Dubletten-Erkennung absichtlich gebrochen -> Test ROT.
+- Kannibalisierungs-Erkennung absichtlich gebrochen -> Test ROT.
+- Quellenanzeige absichtlich entfernt -> Test ROT.
+
+Regression/Verpackung:
+- Dateibestand 1.3.0 vs 1.3.1 identisch: 3 Dateien.
+- geändert nur `universal-glossary-engine.php` (Version) und `includes/class-uge-automation.php` (Prüftabelle).
+- `includes/class-uge-pferde-content-pack.php` bytegleich.
+- ZIP-Stamm `universal-glossary-engine/` PASS.
+- ZIP-Lesetest PASS.
+- Version 1.3.1 aus ZIP PASS.
 
 ## Journal – Nutzerreadback nach 1.50.497
 
@@ -66,8 +106,6 @@ Marker: `JOURNAL_150498_RENDER_BOUNDING_BOX_POS_NEG_PASS`.
 
 ## Harte Grenze
 
-**Keine LIVE-Abnahme ohne Nutzerreadback.** 1.50.498 ist hart lokal positiv/negativ geprüft, aber bleibt bis Installation + realem Screenshot **LIVE OFFEN**.
-
-## Core 1.3.0 – Automation
-
-Sandbox LIVE PASS. Nächster realer Schritt ist `Pool jetzt aktualisieren`. Produktion scharf und Auto-Publish bleiben AUS. Danach Pool-Inhalt und Kandidatenstatus prüfen; `Automatiklauf jetzt starten` erst nach diesem Readback.
+- Design 1.50.498: keine LIVE-Abnahme ohne Nutzerreadback.
+- Core 1.3.1: keine LIVE-Abnahme ohne Installation und Screenshot der vollständigen Kandidatentabelle.
+- `Automatiklauf jetzt starten`, Produktion scharf und Auto-Publish bleiben bis zur Pool-Inhaltsprüfung **AUS**.
