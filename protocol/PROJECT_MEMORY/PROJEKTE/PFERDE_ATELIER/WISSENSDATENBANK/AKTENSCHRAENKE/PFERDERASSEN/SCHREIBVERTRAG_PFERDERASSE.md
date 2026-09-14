@@ -100,14 +100,36 @@ Der Schreiber darf nicht:
 - aus fehlenden Risiken `keine Risiken bekannt` machen;
 - klassische Fazit-, Kaufberatungs-, Vor-/Nachteils- oder Werbesprache einbauen.
 
-## 7. BESONDERHEITEN
+## 7. VERBINDLICHE SPRACHQUALITÄT / FLIESSTEXT
+Der Artikel ist ein redaktioneller Lesetext und **keine verbalisierte Datenbank**.
+
+Harte Regeln:
+- Abschnitte werden als natürlicher, zusammenhängender Fließtext geschrieben;
+- Datensatzfelder dürfen nicht mechanisch Feld für Feld in Einzelsätze übersetzt werden;
+- mehrere zusammengehörige Fakten werden sinnvoll zu einem Gedankengang verbunden;
+- Satzlängen und Satzanfänge müssen variieren;
+- technische Formulierungen wie `Heutige Verbreitung:`, `Gewicht:`, `Gefährdungsstatus:` oder ähnliche Feldetiketten sind im Fließtext verboten;
+- Formulierungen wie `nicht dokumentiert`, `nicht recherchiert`, `nicht belegt` dürfen nicht abschnittsweise wiederholt werden;
+- offene Daten werden nur erwähnt, wenn das Fehlen für den Leser im jeweiligen Abschnitt fachlich relevant ist;
+- bei fehlenden Daten darf ein Abschnitt kurz bleiben, muss aber sprachlich natürlich formuliert sein;
+- Listen sind im Fließtext grundsätzlich zu vermeiden und regulär nur in `Besonderheiten der Rasse` und `[Rassename] auf einen Blick` vorgesehen;
+- `Ursprüngliche Nutzung` und `Heutige Nutzung` werden als Sätze beziehungsweise kurze Absätze geschrieben, nicht als Stichpunktlisten;
+- `Zucht und Verbreitung`, `Status der Population`, `Haltung` und `Gesundheit` müssen wie normale redaktionelle Abschnitte lesbar sein und dürfen nicht wie Statusmeldungen wirken;
+- kein Abschnitt darf aus einer Kette kurzer Hauptsätze bestehen, die lediglich Datenpunkte abhaken.
+
+Qualitätsmaßstab:
+Der Text muss sich sprachlich an den freigegebenen ersten 5er-Testartikeln orientieren: ruhig, sachlich, flüssig, lesbar und ohne technische Datenbank-Anmutung.
+
+Ein technisch korrekter Artikel, der sich wie Stichpunkte oder eine Feldliste liest, ist **NICHT PASS-fähig**.
+
+## 8. BESONDERHEITEN
 - 3–6 Punkte;
 - nur belegte Besonderheiten;
 - keine Auffüllung auf sechs Punkte;
 - nicht bloß vorherige Sätze wortgleich wiederholen;
 - jeder Punkt muss auf ein Datenfeld zurückführbar sein.
 
-## 8. AUF EINEN BLICK
+## 9. AUF EINEN BLICK
 Feste Reihenfolge:
 - Herkunft
 - Region
@@ -125,12 +147,12 @@ Feste Reihenfolge:
 
 Keine subjektiven Scores.
 
-## 9. ABGRENZUNG
+## 10. ABGRENZUNG
 - konkrete Vergleichsrasse nur nennen, wenn Datensatz oder gebundene Fachbasis die Abgrenzung trägt;
 - keine künstlichen Vergleiche;
 - wenn keine belastbare Vergleichsrasse vorliegt: knapp sagen, dass keine belastbare konkrete Abgrenzung dokumentiert ist.
 
-## 10. ZUSAMMENFASSUNG
+## 11. ZUSAMMENFASSUNG
 - letzter Hauptabschnitt lautet immer exakt `Zusammenfassung`;
 - ca. 70–120 Wörter;
 - nur bereits im Artikel belegte Kernpunkte;
@@ -138,7 +160,7 @@ Keine subjektiven Scores.
 - kein Fazitston, keine Wertung, keine Kaufempfehlung;
 - Rassename muss enthalten sein.
 
-## 11. INTERNE LINKS – NUR GEBUNDEN
+## 12. INTERNE LINKS – NUR GEBUNDEN
 Interne Links sind optional und nie Voraussetzung für das Schreiben.
 
 Wenn ein freigegebenes Linkpaket vorliegt:
@@ -148,7 +170,7 @@ Wenn ein freigegebenes Linkpaket vorliegt:
 - maximal 3 interne Links pro Artikel;
 - wenn kein Linkpaket vorliegt, wird der Artikel ohne interne Links geschrieben.
 
-## 12. VERBINDLICHER MANAGER-0.2.0-JSON-VERTRAG
+## 13. VERBINDLICHER MANAGER-0.2.0-JSON-VERTRAG
 Die Produktionsausgabe eines Test- oder Serienbatches ist zwingend eine echte maschinenlesbare `.json`-Datei. Chattext, Markdown-Datei, WordPress-XML oder ein nacktes JSON-Array sind keine gültige Übergabe.
 
 Top-Level muss exakt die technische Form des Pferderassen-Managers 0.2.0 erfüllen:
@@ -208,7 +230,7 @@ Die Zuordnung darf nur erfolgen, wenn der freigegebene Rassendatensatz sie über
 - maximal 25 Artikel pro Batch;
 - Testbatch: exakt 5 Artikel.
 
-## 13. ABSCHLUSSPRÜFUNG VOR DATEIAUSGABE
+## 14. ABSCHLUSSPRÜFUNG VOR DATEIAUSGABE
 Vor Ausgabe muss der komplette Batch einmal gegen den gesamten Vertrag geprüft werden. Keine schrittweise Fehlerbehebung nach Importer-Rückmeldungen.
 
 Textprüfung je Artikel:
@@ -223,7 +245,12 @@ Textprüfung je Artikel:
 - Auf-einen-Blick-Reihenfolge korrekt;
 - Zusammenfassung ohne neue Fakten;
 - nur gebundene Links verwendet, falls Linkpaket vorhanden;
-- keine unnötige Wiederholung von `Rasse`/`Pferderasse`.
+- keine unnötige Wiederholung von `Rasse`/`Pferderasse`;
+- Ursprüngliche und heutige Nutzung als Fließtext, nicht als Stichpunktliste;
+- keine technischen Feldetiketten im Fließtext;
+- keine Kaskaden aus `nicht dokumentiert` / `nicht recherchiert`;
+- Zucht, Verbreitung, Status, Haltung und Gesundheit als natürlicher redaktioneller Text;
+- Gesamttext liest sich zusammenhängend und nicht wie eine verbalisierte Datenbank.
 
 Technische Prüfung des gesamten JSON:
 - echte `.json`-Datei;
@@ -244,7 +271,7 @@ Technische Prüfung des gesamten JSON:
 
 Erst nach dieser Gesamtprüfung darf die Datei ausgegeben werden.
 
-## 14. PASS-REGEL
+## 15. PASS-REGEL
 Der Autor darf sich nicht selbst fachlich freigeben.
 
 Autorenausgabe = `ENTWURF`.
@@ -256,7 +283,7 @@ oder
 
 Ohne Prüfschritt kein fachlicher Produktions-PASS.
 
-## 15. TESTBATCH
+## 16. TESTBATCH
 Erste Produktionsprüfung: exakt 5 Rassen.
 
 Für den Testbatch sind bevorzugt fünf Rassen zu wählen, die zugleich:
