@@ -22,3 +22,4 @@ jobs:
           python3 -m unittest -v
           test_repair_owner_routing_contract.py
           test_repair_owner_failclosed_contract.py
+          test_parent_title_repair_contract.py
