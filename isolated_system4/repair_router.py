@@ -80,7 +80,15 @@ def _rebuild_batch(prod:dict[str,Any],index:int,new_item:dict[str,Any])->bytes:
 def _next_workspace(runtime_root:Path,index:int,cycle:int)->Path:
     return runtime_root/f'item-{index}-repair-{cycle}'
 
+def _return_to_owner(workspace:Path,state:Mapping[str,Any],route:Mapping[str,Any],reason:str='AUTHORITATIVE_REBIND_REQUIRED')->dict[str,Any]:
+    article=state.get('article') if isinstance(state.get('article'),Mapping) else {}
+    request={'contract':CONTRACT,'status':'RETURN_TO_OWNER','owner':route['owner'],'target':route['target'],'reason':reason,'finding':route['finding'],'article':dict(article),'workspace':str(workspace)}
+    (workspace/'machine_repair_request.json').write_bytes(canon(request))
+    return request
+
 def _restart_parent_metadata(workspace:Path,state:dict[str,Any],route:dict[str,Any])->dict[str,Any]:
+    if route['target']!='TITLE_BINDING':
+        return _return_to_owner(workspace,state,route)
     runtime_root=workspace.parent
     m=re.fullmatch(r'item-(\d+)(?:-repair-\d+)?',workspace.name)
     if not m: raise RepairRouteError('REPAIR_WORKSPACE_NAME_INVALID')
@@ -99,17 +107,10 @@ def _restart_parent_metadata(workspace:Path,state:dict[str,Any],route:dict[str,A
     item=copy.deepcopy(items[index])
     original=copy.deepcopy(item)
     finding=route['finding']
-    if route['target']=='TITLE_BINDING':
-        candidate=_punctuation_repairs(str(item.get('title') or ''),finding)
-        if not candidate or candidate==item.get('title'):
-            request={'contract':CONTRACT,'status':'RETURN_TO_OWNER','owner':'PARENT_METADATA','target':'TITLE_BINDING','reason':'NO_DETERMINISTIC_MACHINE_TITLE_REPAIR','finding':finding,'article':item}
-            (workspace/'machine_repair_request.json').write_bytes(canon(request))
-            return request
-        item['title']=candidate
-    else:
-        request={'contract':CONTRACT,'status':'RETURN_TO_OWNER','owner':'PARENT_METADATA','target':route['target'],'reason':'AUTHORITATIVE_REBIND_REQUIRED','finding':finding,'article':item}
-        (workspace/'machine_repair_request.json').write_bytes(canon(request))
-        return request
+    candidate=_punctuation_repairs(str(item.get('title') or ''),finding)
+    if not candidate or candidate==item.get('title'):
+        return _return_to_owner(workspace,state,route,'NO_DETERMINISTIC_MACHINE_TITLE_REPAIR')
+    item['title']=candidate
     new_raw=_rebuild_batch(prod,index,item)
     manifest=root_entry._critical_manifest_sha256(); head=root_entry._git('rev-parse','--verify','HEAD')
     prepared=point0_snapshot.prepare(production_snapshot_bytes=new_raw,root_manifest_sha256=manifest,head_sha=head)
@@ -135,6 +136,4 @@ def route(workspace:Path)->dict[str,Any]:
         return {'contract':CONTRACT,'status':'SAME_ARTICLE_BODY_REPAIR','owner':'DRAFT_BODY','target':'SAME_ARTICLE_BODY','finding':route['finding']}
     if route['owner']=='PARENT_METADATA':
         return _restart_parent_metadata(workspace,state,route)
-    request={'contract':CONTRACT,'status':'RETURN_TO_OWNER','owner':route['owner'],'target':route['target'],'reason':'AUTHORITATIVE_REBIND_REQUIRED','finding':route['finding'],'workspace':str(workspace)}
-    (workspace/'machine_repair_request.json').write_bytes(canon(request))
-    return request
+    return _return_to_owner(workspace,state,route)
