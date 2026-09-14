@@ -2,7 +2,7 @@ from __future__ import annotations
 import hashlib, json, re, subprocess, sys
 from pathlib import Path
 
-import chat_start_gate, root_supervisor_bridge, worker_dispatch
+import chat_start_gate, point0_snapshot, root_supervisor_bridge, worker_dispatch
 
 SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 HERE = Path(__file__).resolve().parent
@@ -150,7 +150,9 @@ def _start_point0(point0: Path, workspace: Path, actual_manifest: str, item_inde
     try:
         point0_input=json.loads(point0.read_text(encoding='utf-8'))
         if not isinstance(point0_input,dict): raise EntryFail('ROOT_POINT0_OBJECT_REQUIRED')
-        chat_start_gate.validate(point0_input.get('production_snapshot'))
+        production_raw=point0_snapshot.verify(point0_input)
+        production_snapshot=json.loads(production_raw.decode('utf-8'))
+        chat_start_gate.validate(production_snapshot)
     except EntryFail:
         raise
     except Exception as exc:
