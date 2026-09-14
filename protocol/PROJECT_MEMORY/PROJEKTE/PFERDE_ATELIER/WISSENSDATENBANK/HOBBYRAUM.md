@@ -1,6 +1,6 @@
 # WISSENSDATENBANK – HOBBYRAUM
 
-STAND: 2026-09-13
+STAND: 2026-09-14
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -27,18 +27,18 @@ AKTENSCHRANK: `AKTENSCHRAENKE/PFERDERASSEN/`
 ## BISHER ERLEDIGT
 
 - Schema 1.1 aktiv;
-- **157 reale Rassendatensätze** unter `DATEN/` vorhanden;
+- **162 reale Rassendatensätze** unter `DATEN/` vorhanden;
 - größere Rechercheblöcke sind zulässig, solange jede Rasse einzeln auf formalen Status und Dubletten geprüft wird;
-- neu seit 153: Slowenisches Kaltblut, Posavje-Pferd, Ljutomer-Traber und Slowenisches Warmblut;
-- Bosnisches Gebirgspferd als bereits vorhanden erkannt und nicht dupliziert;
-- staatliche slowenische Quellen als Primärbindung genutzt;
+- neu seit 157: Kroatisches Kaltblut, Kroatischer Posavac, Kroatisches Sportpferd, Kroatisches Warmblut und Međimurje-Pferd;
+- Lipizzaner und Gidrán als bereits vorhanden erkannt und nicht dupliziert;
+- staatliche kroatische Quellen als Primärbindung genutzt;
 - schwierige Kandidaten werden bewusst offen gelassen statt über schwache Quellen erzwungen;
 - Glossar bleibt organische Nebenbasis, keine zweite Hauptrecherche.
 
 ## NEXT ACTION
 
 1. Rassenrecherche in größeren belastbaren Länder-/Registerblöcken fortsetzen;
-2. Kroatien, Slowakei, Rumänien und weitere Balkan-/Osteuropa-Register prüfen;
+2. Rumänien und Slowakei als nächste Blöcke prüfen;
 3. offene Kandidaten Altai, American Walking Pony, Andravida und Anglo-Kabarda nur nach starker Primärquelle anlegen;
 4. Mangalarga Paulista und Pantaneiro gegen offizielle brasilianische Register prüfen;
 5. Latvian Heavy Warmblood als getrennten staatlich geführten Kandidaten prüfen;
