@@ -67,8 +67,8 @@ def start_to_context_real(base:Path,index:int):
             'slug':f'real-route-{index}',
             'subject_scope':'real_source_corridor',
             'subject_label':a['target_keyword'],
-            'lead':'Gebundener Einstieg ausschließlich aus dem realen Quellensnapshot.',
-            'conclusion':'Gebundener Abschluss ausschließlich aus dem realen Quellensnapshot.',
+            'lead':'Gebundener Einstieg ausschließlich aus dem realen Quellenstand.',
+            'conclusion':'Gebundener Abschluss ausschließlich aus dem realen Quellenstand.',
             'allowed_fact_ids':ids,
         },
     }
@@ -110,32 +110,29 @@ def valid_real_article(state:dict,index:int)->str:
     while len(other)<max(min_h2,2):
         other.append(f'content_{len(other)+1}')
 
+    section_labels={
+        'intro':'Einleitung',
+        'criteria':'Auswahlkriterien',
+        'decision':'Entscheidung',
+        'table':'Vergleich',
+        'conclusion':'Fazit',
+        'further_information':'weitere Informationen',
+    }
     roles=(
-        'Ausgangspunkt der Auswahl',
-        'Prüfmaßstab für die Nutzung',
-        'Bezugspunkt für den Vergleich',
-        'Kontrollpunkt für die Entscheidung',
-        'Orientierung für die praktische Einordnung',
-        'Grenze für die abschließende Bewertung',
-        'Grundlage für die sachliche Abwägung',
-        'Leitlinie für die konkrete Prüfung',
-        'Bezugsgröße für die Planung',
-        'Kriterium für die nachvollziehbare Auswahl',
-        'Prüfpunkt für die Alltagstauglichkeit',
+        'Ausgangspunkt der Auswahl','Prüfmaßstab für die Nutzung','Bezugspunkt für den Vergleich',
+        'Kontrollpunkt für die Entscheidung','Orientierung für die praktische Einordnung',
+        'Grenze für die abschließende Bewertung','Grundlage für die sachliche Abwägung',
+        'Leitlinie für die konkrete Prüfung','Bezugsgröße für die Planung',
+        'Kriterium für die nachvollziehbare Auswahl','Prüfpunkt für die Alltagstauglichkeit',
         'Maßstab für die abschließende Kontrolle',
     )
     perspectives=(
-        'ohne die Quellenaussage zu erweitern',
-        'mit direktem Bezug auf den versiegelten Quellenstand',
-        'ausschließlich innerhalb des belegten Aussageumfangs',
-        'als klar abgegrenzter Teil der Auswahlprüfung',
-        'für eine nachvollziehbare und quellengebundene Entscheidung',
-        'mit Trennung zwischen belegter Aussage und bloßer Vermutung',
-        'als fester Bezug für die weitere Einordnung',
-        'mit Konzentration auf den tatsächlich belegten Punkt',
-        'als überprüfbare Grundlage der Entscheidung',
-        'ohne zusätzliche fachliche Behauptung',
-        'mit eindeutiger Bindung an den realen Quellensnapshot',
+        'ohne die Quellenaussage zu erweitern','mit direktem Bezug auf den gesicherten Quellenstand',
+        'ausschließlich innerhalb des belegten Aussageumfangs','als klar abgegrenzter Teil der Auswahlprüfung',
+        'für eine nachvollziehbare und an die Quelle gebundene Entscheidung',
+        'mit Trennung zwischen belegter Aussage und bloßer Vermutung','als fester Bezug für die weitere Einordnung',
+        'mit Konzentration auf den tatsächlich belegten Punkt','als überprüfbare Grundlage der Entscheidung',
+        'ohne zusätzliche fachliche Behauptung','mit eindeutiger Bindung an den realen Quellenstand',
         'als dokumentierter Prüfpunkt im Artikel',
     )
     transitions=(
@@ -143,25 +140,28 @@ def valid_real_article(state:dict,index:int)->str:
         'So lässt sich die Entscheidung an einer nachprüfbaren Aussage ausrichten',
         'Auf diese Weise bleibt die Einordnung eng am belegten Inhalt',
         'Dadurch wird der Prüfschritt nicht durch unbelegte Zusatzannahmen erweitert',
-        'So bleibt die fachliche Grenze des verwendeten Facts sichtbar',
+        'So bleibt die fachliche Grenze der belegten Aussage sichtbar',
         'Damit ist die Grundlage der Auswahl für den Leser nachvollziehbar',
         'Dadurch bleibt die Aussage auch bei der praktischen Einordnung überprüfbar',
         'So wird der reale Quellenpunkt konsequent von allgemeinen Annahmen getrennt',
         'Damit bleibt die Argumentation innerhalb des gebundenen Faktenrahmens',
         'So kann der Abschnitt auf einem klar benannten Quellenpunkt aufbauen',
         'Dadurch wird der belegte Inhalt nicht durch neue Tatsachen ersetzt',
-        'Damit bleibt der verwendete Fact in seiner ursprünglichen Bedeutung erhalten',
+        'Damit bleibt die belegte Aussage in ihrer ursprünglichen Bedeutung erhalten',
     )
+
+    def display_section(section:str)->str:
+        return section_labels.get(section,'Sachprüfung')
 
     def sentence(fact_id:str,seed:int,section:str)->str:
         fact=claim_map[fact_id]
         role=roles[(seed+index*3)%len(roles)]
         perspective=perspectives[(seed*2+index)%len(perspectives)]
         transition=transitions[(seed*5+index)%len(transitions)]
-        return f'Im Abschnitt „{section}“ dient folgende gebundene Aussage als {role}: {fact}; sie wird {perspective} verwendet. {transition}.'
+        return f'Bei „{display_section(section)}“ dient folgende belegte Aussage als {role}: {fact}; sie wird {perspective} verwendet. {transition}.'
 
     fid=allowed[0]
-    intro_text=sentence(fid,1,identity['target_keyword'])
+    intro_text=sentence(fid,1,'intro')
     if len(intro_text.split())<ilo:
         intro_text+=' Der Einstieg benennt damit nur den belegten Ausgangspunkt und lässt weitergehende Annahmen bewusst außen vor.'
     if len(intro_text.split())>ihi:
@@ -182,7 +182,7 @@ def valid_real_article(state:dict,index:int)->str:
 
     heading_suffixes=(
         'sachlich einordnen','gezielt prüfen','für die Auswahl bewerten','im Vergleich betrachten',
-        'für die Praxis abwägen','als Entscheidungspunkt nutzen','quellengebunden kontrollieren','nachvollziehbar zusammenführen',
+        'für die Praxis abwägen','als Entscheidungspunkt nutzen','an der Quelle prüfen','nachvollziehbar zusammenführen',
     )
     target_paras=max(min_paragraphs-1,len(other)*2,4)
     paras_per=max(2,(target_paras+len(other)-1)//len(other))
@@ -204,7 +204,9 @@ def valid_real_article(state:dict,index:int)->str:
                 extra_seed=seed+addon*7
                 extra_role=roles[extra_seed%len(roles)]
                 extra_perspective=perspectives[(extra_seed+3)%len(perspectives)]
-                text+=f' Für {identity["target_keyword"]} wird dieser Quellenpunkt zusätzlich als {extra_role} gelesen, {extra_perspective}; dabei bleibt ausschließlich die bereits gebundene Aussage maßgeblich.'
+                starters=('Zusätzlich','Ergänzend','Daneben','Für die Auswahl','Bei der Prüfung','Im nächsten Schritt')
+                starter=starters[(extra_seed+index)%len(starters)]
+                text+=f' {starter} wird dieser Quellenpunkt bei {identity["target_keyword"]} als {extra_role} betrachtet, {extra_perspective}; maßgeblich bleibt dabei nur die bereits belegte Aussage.'
             if pi==0:
                 for row in section_links:
                     text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
@@ -213,12 +215,17 @@ def valid_real_article(state:dict,index:int)->str:
         blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
 
     if len(blocks)>1:
+        list_starts=(
+            'Die Grundprüfung hält fest:',
+            'Bei der Nutzungsprüfung gilt:',
+            'Im Vergleich wird beachtet:',
+            'Zum Abschluss wird geprüft:',
+        )
         list_rows=[]
-        list_roles=('Grundprüfung','Nutzungsprüfung','Vergleichsprüfung','Abschlussprüfung')
         for n in range(4):
             fact_id=allowed[n%len(allowed)]
             fact=claim_map[fact_id]
-            list_rows.append(f'<li data-fact-ids="{fact_id}">Für die {list_roles[n]} wird der gebundene Quellenpunkt „{fact}“ als eigener Prüfschritt festgehalten.</li>')
+            list_rows.append(f'<li data-fact-ids="{fact_id}">{list_starts[n]} „{fact}“ bleibt als eigener belegter Prüfpunkt erhalten.</li>')
         blocks[1]=blocks[1].replace('</section>','<ul>'+''.join(list_rows)+'</ul></section>',1)
 
     table_count=int(t.get('table_count_exact') or 0)
@@ -242,10 +249,10 @@ def valid_real_article(state:dict,index:int)->str:
             'Im Vergleich wird die folgende Aussage als abgegrenzter Maßstab geführt: {fact}.',
             'Für die praktische Bewertung ist dieser Quellenpunkt dokumentiert: {fact}.',
             'Die Entscheidung wird an dieser gebundenen Aussage gespiegelt: {fact}.',
-            'Als Kontrollgrundlage dient der reale Fact: {fact}.',
+            'Als Kontrollgrundlage dient die belegte Aussage: {fact}.',
             'Für die abschließende Prüfung bleibt dieser Beleg maßgeblich: {fact}.',
             'Der Quellenstand liefert für diesen Tabellenpunkt folgende Aussage: {fact}.',
-            'Zur nachvollziehbaren Abwägung wird dieser Fact getrennt ausgewiesen: {fact}.',
+            'Zur nachvollziehbaren Abwägung wird diese Quellenaussage getrennt ausgewiesen: {fact}.',
             'Der Vergleich stützt sich an dieser Stelle auf den gebundenen Inhalt: {fact}.',
             'Als dokumentierte Entscheidungsbasis gilt hier der Quellenpunkt: {fact}.',
         )
