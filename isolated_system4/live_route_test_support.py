@@ -13,6 +13,9 @@ def h(text:str)->str:return hashlib.sha256(text.encode()).hexdigest()
 def canon(v)->bytes:return json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
 def write_json(path:Path,value:dict)->Path:path.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True),encoding='utf-8');return path
 def head()->str:return subprocess.run(['git','rev-parse','HEAD'],cwd=REPO,text=True,capture_output=True,check=True).stdout.strip()
+def word_token(n:int)->str:
+ words=('Auswahl','Material','Nutzung','Pflege','Sicherheit','Komfort','Eignung','Praxis','Bedarf','Vergleich','Haltung','Training','Stall','Weide','Reitplatz','Pferd')
+ return words[n%len(words)]
 
 def production_snapshot_bytes()->bytes:
  value=json.loads(LIVE.read_text(encoding='utf-8'));value['system4_root_manifest_sha256']=root_entry._critical_manifest_sha256();return canon(value)
@@ -66,11 +69,12 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  while len(other)<max(min_h2,2):other.append(f'content_{len(other)+1}')
  target_paras=max(min_paragraphs-1,len(other)*2,4);target_words=max(min_words-intro_words,400);paras_per=max(2,(target_paras+len(other)-1)//len(other));words_per=max(45,(target_words+len(other)*paras_per-1)//(len(other)*paras_per))
  link_rows=[row for row in b.get('link_bindings',[]) if isinstance(row,dict) and row.get('active') is not False];link_cursor=0
+ article_word=word_token(index+8)
  for bi,name in enumerate(other):
   heading=allowed_heads[bi%len(allowed_heads)] if allowed_heads else 'Kriterien für die passende Auswahl'
   parts=[f'<h2>{heading}</h2>']
   for pi in range(paras_per):
-   words=(filler+f' Abschnitt {bi+1} Punkt {pi+1} eigen{index}_{bi}_{pi} ').split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
+   words=(filler+f' Abschnitt {word_token(bi)} Punkt {word_token(pi+4)} {article_word} ').split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
    if link_cursor<len(link_rows):
     row=link_rows[link_cursor];text+=f' <a href="{row["href"]}">{row["anchor"]}</a>';link_cursor+=1
    parts.append(f'<p data-fact-ids="{allowed[(bi+pi)%len(allowed)]}">{text}</p>')
@@ -79,7 +83,7 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   row=link_rows[link_cursor];blocks[-1]=blocks[-1].replace('</section>',f'<p data-fact-ids="{fid}"><a href="{row["href"]}">{row["anchor"]}</a></p></section>');link_cursor+=1
  table_count=int(t.get('table_count_exact') or 0);tables=''
  if table_count:
-  rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {r+1}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {index}-{r+1}</td></tr>' for r in range(rows));table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>';tables=table*table_count
+  rows=max(int(g.get('min_table_body_rows') or 1),1);tbody=''.join(f'<tr><td data-fact-ids="{fid}">Kriterium {word_token(r)}</td><td data-fact-ids="{allowed[r%len(allowed)]}">Gebundener Wert {article_word} {word_token(r+6)}</td></tr>' for r in range(rows));table=f'<table class="system-129-table comparison-table"><thead><tr><th data-fact-ids="{fid}">Kriterium</th><th data-fact-ids="{fid}">Bewertung</th></tr></thead><tbody>{tbody}</tbody></table>';tables=table*table_count
  traces=''
  if t.get('fact_trace_required') is True:
   need=max(int(b.get('source_trace_minimum') or 0),1)
