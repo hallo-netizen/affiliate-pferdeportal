@@ -148,7 +148,7 @@ def valid_real_article(state:dict,index:int)->str:
     fid=allowed[0]
     intro_text=paragraph(fid,1,'intro')
     if len(intro_text.split())<ilo:
-        intro_text+=' Der Einstieg benennt damit nur den belegten Ausgangspunkt für die weitere sachliche Prüfung.'
+        intro_text+=f' Der Einstieg zu {identity["target_keyword"]} benennt damit nur den belegten Ausgangspunkt für die weitere sachliche Prüfung.'
     if len(intro_text.split())>ihi:
         intro_text=' '.join(intro_text.split()[:ihi]).rstrip(' ,;:')+'.'
 
@@ -188,7 +188,7 @@ def valid_real_article(state:dict,index:int)->str:
                 addon+=1
                 a=aspects[(seed+addon*4+index)%len(aspects)]
                 d=aspects[(seed+addon*7+11+index)%len(aspects)]
-                text=text.rstrip('.')+f'; in Bezug auf {a} und {d} dient derselbe Beleg lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
+                text=text.rstrip('.')+f'; bei {identity["target_keyword"]} dient der Beleg in Bezug auf {a} und {d} lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
             if pi==0:
                 for row in section_links:
                     text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
@@ -204,8 +204,8 @@ def valid_real_article(state:dict,index:int)->str:
             fact=claim_map[fact_id]
             a=aspects[(40+n*3+index)%len(aspects)]
             list_rows.append(
-                f'<li data-fact-ids="{fact_id}">{list_openers[n]} für {a}: {fact}; '
-                f'die Liste übernimmt damit nur den belegten Inhalt für die weitere Auswahl.</li>'
+                f'<li data-fact-ids="{fact_id}">{list_openers[n]} für {identity["target_keyword"]} im Bereich {a}: {fact}; '
+                f'die Liste zu {identity["target_keyword"]} übernimmt damit nur den belegten Inhalt für die weitere Auswahl.</li>'
             )
         blocks[1]=blocks[1].replace('</section>','<ul>'+''.join(list_rows)+'</ul></section>',1)
 
@@ -243,10 +243,10 @@ def valid_real_article(state:dict,index:int)->str:
                 fact_id=allowed[(r+col)%len(allowed)]
                 fact=claim_map[fact_id]
                 opener=cell_openers[(pos+index)%len(cell_openers)]
-                context=cell_contexts[pos%len(cell_contexts)]
+                context=cell_contexts[(pos+index*4)%len(cell_contexts)]
                 cells.append(
-                    f'<td data-fact-ids="{fact_id}">{opener} {fact}; als reiner Prüfrahmen dieser Zelle dienen '
-                    f'{context}, wobei diese Begriffe keine zusätzlichen Tatsachen ergänzen.</td>'
+                    f'<td data-fact-ids="{fact_id}">{opener} Bei {identity["target_keyword"]} ist gebunden: {fact}; '
+                    f'als reiner Prüfrahmen für {identity["target_keyword"]} dienen {context}, wobei diese Begriffe keine zusätzlichen Tatsachen ergänzen.</td>'
                 )
             body.append('<tr>'+''.join(cells)+'</tr>')
         table=(f'<table class="system-129-table comparison-table"><thead><tr>'
