@@ -14,7 +14,7 @@ MARKER='SYSTEM4_ISOLATED_ROOT_ENTRY_V4_POINT0_ONLY'
 ROOT_COMMAND_POINT0='python3 isolated_system4/root_entry.py start-point0'
 OLD_ENTRY_EXCLUSION='SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` before or instead of the System-4 root entry.'
 CRITICAL_PATHS=(
- 'AGENTS.md','AGENTS.override.md','isolated_system4/root_entry.py','isolated_system4/codex_entry.py',
+ 'AGENTS.md','AGENTS.override.md','isolated_system4/root_entry.py','isolated_system4/codex_entry.py','isolated_system4/full_route_start.py',
  'isolated_system4/controller.py','isolated_system4/controller_core.py','isolated_system4/production_binding.py','isolated_system4/authoring_contract.py',
  'isolated_system4/content_guard.py','isolated_system4/design_guard.py','isolated_system4/production_checks.py',
  'isolated_system4/batch_gate.py','isolated_system4/batch_repetition_guard.py','isolated_system4/handoff_transport.py',
