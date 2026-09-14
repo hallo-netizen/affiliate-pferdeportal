@@ -68,12 +68,16 @@ def start_to_context(base:Path,index:int,batch_size:int|None=None):
 
 def valid_article(state:dict,index:int,variant:str='basis')->str:
  c=state['authoring_contract'];identity=c['article_identity'];g=c['global_requirements'];s=c['structure_requirements'];t=c['type_requirements'];b=c['bound_requirements'];allowed=list(b['allowed_fact_ids']);fid=allowed[0]
+ claims=state.get('production_context',{}).get('fact_pack',{}).get('claims',[])
+ claim_map={str(row.get('fact_id') or ''):str(row.get('statement') or '').strip() for row in claims if isinstance(row,dict)}
+ if any(not claim_map.get(fact_id) for fact_id in allowed):raise AssertionError('BOUND_FACT_STATEMENT_MISSING')
+ def fact_sentence(fact_id:str)->str:return claim_map[fact_id]
  min_words=int(g.get('min_words') or 0);min_paragraphs=int(g.get('min_paragraphs') or 0);min_h2=int(g.get('min_h2') or 0);intro=s.get('intro') if isinstance(s.get('intro'),dict) else {};intro_name=str(intro.get('required_block') or 'intro')
  intent_terms=[str(x).strip() for x in b.get('intent_terms',[]) if str(x).strip()]
  if not intent_terms:raise AssertionError('BOUND_INTENT_TERMS_MISSING')
  required=list(t.get('required_blocks') or []);blocks=[]
  filler=(f'{identity["target_keyword"]} {variant} sachlich gebundene Information Auswahl Nutzung Prüfung Eigenschaft Voraussetzung Entscheidung Anwendung Sicherheit Komfort Material Pflege Vergleich ')
- ilo=max(int(intro.get('minimum_words') or 1),20);ihi=int(intro.get('maximum_words') or max(ilo,200));intro_words=min(max(ilo,25),ihi);intro_text=' '.join((filler.split()*((intro_words//len(filler.split()))+2))[:intro_words])
+ ilo=max(int(intro.get('minimum_words') or 1),20);ihi=int(intro.get('maximum_words') or max(ilo,200));intro_words=min(max(ilo,25),ihi);intro_base=fact_sentence(fid)+' '+filler;intro_text=' '.join((intro_base.split()*((intro_words//len(intro_base.split()))+2))[:intro_words])
  blocks.append(f'<section data-block="{intro_name}"><p data-fact-ids="{fid}">{intro_text}</p></section>')
  other=[x for x in required if x!=intro_name]
  while len(other)<max(min_h2,2):other.append(f'content_{len(other)+1}')
@@ -89,47 +93,32 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
   parts=[f'<h2>{heading}</h2>']
   section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
   for pi in range(paras_per):
-   words=(filler+f' Abschnitt {word_token(bi)} Punkt {word_token(pi+4)} {article_word} ').split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
+   fact_id=allowed[(bi+pi)%len(allowed)];base=fact_sentence(fact_id)+' '+filler+f' Abschnitt {word_token(bi)} Punkt {word_token(pi+4)} {article_word} ';words=base.split();text=' '.join((words*((words_per//len(words))+2))[:words_per])
    if pi==0:
     for row in section_links:text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
-   parts.append(f'<p data-fact-ids="{allowed[(bi+pi)%len(allowed)]}">{text}</p>')
+   parts.append(f'<p data-fact-ids="{fact_id}">{text}</p>')
   blocks.append(f'<section data-block="{name}">'+''.join(parts)+'</section>')
  if sum(1 for name in other for row in link_rows if str(row.get('section_id') or '')==name)!=len(link_rows):raise AssertionError('BOUND_LINK_NOT_PLACED_EXACTLY_ONCE')
  if len(blocks)>1:
-  required_list=(
-   f'<ul>'
-   f'<li data-fact-ids="{allowed[0%len(allowed)]}">Material und Eignung gemeinsam prüfen.</li>'
-   f'<li data-fact-ids="{allowed[1%len(allowed)]}">Nutzung und Sicherheit passend bewerten.</li>'
-   f'<li data-fact-ids="{allowed[2%len(allowed)]}">Pflege und Komfort praktisch einordnen.</li>'
-   f'<li data-fact-ids="{allowed[0%len(allowed)]}">Vergleich und Entscheidung nachvollziehbar verbinden.</li>'
-   f'</ul>'
-  )
-  blocks[1]=blocks[1].replace('</section>',required_list+'</section>',1)
+  list_rows=[]
+  for n in range(4):
+   fact_id=allowed[n%len(allowed)];list_rows.append(f'<li data-fact-ids="{fact_id}">{fact_sentence(fact_id)} Praktische Einordnung für die Auswahl.</li>')
+  blocks[1]=blocks[1].replace('</section>','<ul>'+''.join(list_rows)+'</ul></section>',1)
  table_count=int(t.get('table_count_exact') or 0)
  if table_count:
   if table_count!=1:raise AssertionError('SYNTHETIC_TABLE_COUNT_NOT_SUPPORTED')
   table_positions=[i for i,name in enumerate(other,start=1) if name=='table']
   if len(table_positions)!=1:raise AssertionError('BOUND_TABLE_BLOCK_MISSING_OR_DUPLICATE')
-  rows=max(int(g.get('min_table_body_rows') or 1),4)
-  row_vocab=(
-   ('Materialwahl','Haltung und Training','Sicherheit und Eignung'),
-   ('Nutzungsprofil','Stall und Weide','Komfort und Anwendung'),
-   ('Pflegebedarf','Reitplatz und Praxis','Pflege und Vergleich'),
-   ('Entscheidungsweg','Pferd und Nutzung','Voraussetzung und Entscheidung'),
-   ('Praxisabgleich','Training und Haltung','Eigenschaft und Prüfung'),
-   ('Eignungscheck','Weide und Stall','Material und Komfort'),
-  )
-  body=[]
+  rows=max(int(g.get('min_table_body_rows') or 1),4);body=[]
   for r in range(rows):
-   a1,a2,a3=row_vocab[r%len(row_vocab)];fact=allowed[r%len(allowed)]
-   body.append(f'<tr><td data-fact-ids="{fact}">{a1}</td><td data-fact-ids="{fact}">{a2}</td><td data-fact-ids="{fact}">{a3}</td></tr>')
+   fact=allowed[r%len(allowed)];statement=fact_sentence(fact)
+   body.append(f'<tr><td data-fact-ids="{fact}">{statement}</td><td data-fact-ids="{fact}">{statement} Praktische Einordnung.</td><td data-fact-ids="{fact}">{statement} Entscheidungshinweis.</td></tr>')
   table=(f'<table class="system-129-table comparison-table"><thead><tr>'
-         f'<th data-fact-ids="{fid}">Auswahlmerkmal</th>'
-         f'<th data-fact-ids="{fid}">Praktische Einordnung</th>'
-         f'<th data-fact-ids="{fid}">Entscheidungshinweis</th>'
+         f'<th data-fact-ids="{fid}">{fact_sentence(fid)} Auswahlmerkmal</th>'
+         f'<th data-fact-ids="{fid}">{fact_sentence(fid)} Praktische Einordnung</th>'
+         f'<th data-fact-ids="{fid}">{fact_sentence(fid)} Entscheidungshinweis</th>'
          f'</tr></thead><tbody>'+''.join(body)+'</tbody></table>')
-  pos=table_positions[0]
-  blocks[pos]=blocks[pos].replace('</section>',table+'</section>',1)
+  pos=table_positions[0];blocks[pos]=blocks[pos].replace('</section>',table+'</section>',1)
  traces=''
  if t.get('fact_trace_required') is True:
   need=max(int(b.get('source_trace_minimum') or 0),1)
