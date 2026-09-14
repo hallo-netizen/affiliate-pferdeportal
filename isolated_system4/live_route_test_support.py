@@ -14,7 +14,7 @@ def canon(v)->bytes:return json.dumps(v,ensure_ascii=False,sort_keys=True,separa
 def write_json(path:Path,value:dict)->Path:path.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True),encoding='utf-8');return path
 def head()->str:return subprocess.run(['git','rev-parse','HEAD'],cwd=REPO,text=True,capture_output=True,check=True).stdout.strip()
 def word_token(n:int)->str:
- words=('Auswahl','Material','Nutzung','Pflege','Sicherheit','Komfort','Eignung','Praxis','Bedarf','Vergleich','Haltung','Training','Stall','Weide','Reitplatz','Pferd')
+ words=('Auswahl','Material','Nutzung','Pflege','Sicherheit','Komfort','Eignung','Praxis','Hinweis','Vergleich','Haltung','Training','Stall','Weide','Reitplatz','Pferd')
  return words[n%len(words)]
 
 def production_snapshot_bytes()->bytes:
