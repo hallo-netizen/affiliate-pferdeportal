@@ -7,6 +7,7 @@ import controller_core as core
 import production_binding
 import production_checks
 import repair_router
+import source_bound_lt_policy
 import supervisor
 
 HERE=Path(__file__).resolve().parent
@@ -27,6 +28,11 @@ def _git_blob(path:Path)->str:
 def _verify_core()->None:
     _require(CORE.is_file(),'CONTROLLER_CORE_MISSING')
     _require(_git_blob(CORE)==CORE_GIT_BLOB,'CONTROLLER_CORE_IDENTITY_MISMATCH')
+
+# Bind the source-backed LT policy before the central validator-routing wrapper.
+# It only accepts dictionary-only speller findings with no replacement when the
+# exact token is present in the already sealed research evidence.
+source_bound_lt_policy.install(production_checks)
 
 # Preserve the real production checker. The wrapper below changes only error
 # classification, never validator execution or PASS authority.
