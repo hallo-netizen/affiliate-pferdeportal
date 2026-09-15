@@ -29,6 +29,7 @@ DRAFT_STAGE = 'DRAFT_STAGE'
 RESEARCH_STAGE = 'RESEARCH_STAGE'
 FACTS_STAGE = 'FACTS_STAGE'
 CONTEXT_STAGE = 'CONTEXT_STAGE'
+MULTI_OWNER_RETURN = 'MULTI_OWNER_RETURN'
 
 _MACHINE_ROUTE_FILES = (
     'point0.json',
@@ -82,17 +83,27 @@ def _machine_route_lock(command: str, workspace: str) -> None:
         raise Fail('MACHINE_ROUTE_BLOCK:WORKER_DISPATCH_INVALID:' + str(exc)) from exc
 
 
-def _repair_owner(e):
+def _repair_owners(e) -> tuple[str, ...]:
+    """Return every safely classified repair owner.
+
+    Historical failure mode: two simultaneously repairable findings with different
+    owners were converted into ``REPAIR_OWNER_CONFLICT`` and the route stopped. That is
+    forbidden. Multiple repairable owners are an upstream-return condition, not an
+    integrity failure. Unknown/unclassified findings still fail closed.
+    """
     findings = e.findings if isinstance(getattr(e, 'findings', None), list) else []
     owners = {str(row.get('repair_owner') or '').strip() for row in findings if isinstance(row, dict) and str(row.get('repair_owner') or '').strip()}
     checker = str(getattr(e, 'checker', '') or '')
     if not owners and checker in {'languagetool', 'no_external_links'}:
-        return DRAFT_WORKER
+        owners = {DRAFT_WORKER}
     if not owners:
         raise Fail('REPAIR_OWNER_MISSING:'+checker)
-    if len(owners) != 1:
-        raise Fail('REPAIR_OWNER_CONFLICT:'+','.join(sorted(owners)))
-    return next(iter(owners))
+    return tuple(sorted(owners))
+
+
+def _repair_owner(e):
+    owners = _repair_owners(e)
+    return owners[0] if len(owners) == 1 else MULTI_OWNER_RETURN
 
 
 def _stage_owner_route(command: str, message: str):
@@ -180,17 +191,21 @@ def cmd_fullcheck(workspace):
     except production_checks.RepairRequired as e:
         findings=e.findings
         code=str(findings[0].get('error_code') or e.checker) if findings else e.checker
-        owner=_repair_owner(e)
+        owners=_repair_owners(e)
         error='FULL:'+e.checker+':'+code
-        s['checks']={'status':'FAIL','mode':'FULL_PRODUCTION','errors':[error],'findings':findings,'checker':e.checker,'checked_draft_sha256':s['draft_sha256'],'repair_owner':owner}
+        owner_value=owners[0] if len(owners)==1 else MULTI_OWNER_RETURN
+        s['checks']={'status':'FAIL','mode':'FULL_PRODUCTION','errors':[error],'findings':findings,'checker':e.checker,'checked_draft_sha256':s['draft_sha256'],'repair_owner':owner_value,'repair_owners':list(owners)}
         s['last_error']=error
-        if owner==DRAFT_WORKER:
+        if owners==(DRAFT_WORKER,):
             s['phase']='REPAIR_REQUIRED'; save(s,p)
             print('SYSTEM4_FULL_CHECK_FAIL:'+error+':REPAIR_OWNER=DRAFT_WORKER:REPAIR_REQUIRED'); return 3
+        # Any repairable upstream/mixed-owner set MUST be returned. It must never become
+        # a terminal conflict. The upstream launch receives every owner/finding and may
+        # only use the real producing authority for repair/rebuild.
         s['checks']['return_required']=True
         s['checks']['return_route']=PARENT_LAUNCH
         s['phase']='CHECK_REQUIRED'; save(s,p)
-        print('SYSTEM4_REPAIR_OWNER_RETURN:'+owner+':'+PARENT_LAUNCH+':'+error); return 4
+        print('SYSTEM4_REPAIR_OWNER_RETURN:'+','.join(owners)+':'+PARENT_LAUNCH+':'+error); return 4
     except production_checks.ProductionCheckError as e:
         raise Fail('FULL_CHECK_HARD_BLOCK:'+str(e)) from e
     s['checks']={'status':'PASS','mode':'FULL_PRODUCTION','errors':[],'checked_draft_sha256':s['draft_sha256'],'production_evidence':result}
