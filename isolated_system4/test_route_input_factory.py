@@ -3,11 +3,13 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
+import re
+import sys
 import threading
 import zipfile
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
-import sys
 
 import chat_start_gate
 import production_checks
@@ -22,15 +24,27 @@ CATEGORY_HIERARCHY = 'portal-production-machine/contracts/category-hierarchy-sna
 LINK_SOURCE = 'portal-production-machine/contracts/wordpress-link-target-snapshot-v1.json'
 TYPE_SOURCE = 'portal-production-machine/contracts/article-type-templates.json'
 STRUCTURE_SOURCE = 'portal-production-machine/contracts/content-structure-language-gate-v2.json'
+FRESH_TOKEN_ENV = 'SYSTEM4_FRESH_RUN_TOKEN'
 
 
 def stable(value) -> str:
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 
+def sha_text(value: str) -> str:
+    return hashlib.sha256(value.encode('utf-8')).hexdigest()
+
+
 def writej(path: Path, value) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+
+
+def _fresh_token() -> str:
+    token = str(os.environ.get(FRESH_TOKEN_ENV) or '').strip()
+    if len(token) < 16:
+        raise RuntimeError('SYSTEM4_FRESH_RUN_TOKEN_REQUIRED')
+    return token
 
 
 class Quiet(SimpleHTTPRequestHandler):
@@ -155,7 +169,6 @@ def _parent_authorities() -> dict:
 
     marker = 'LT2-FAQ-001'
     marker_regex = str(structure_source.get('visible_test_marker_regex') or '')
-    import re
     if not marker_regex or not re.fullmatch(marker_regex, '[' + marker + ']'):
         raise RuntimeError('PPM679_PARENT_INTERNAL_MARKER_CONTRACT_CHANGED')
 
@@ -195,160 +208,191 @@ def _evidence(topic: str, parts: list[str]) -> str:
     return ' '.join(rows)
 
 
-SCENARIOS = [
+BASE_SCENARIOS = [
     {
-        'title': 'Warum sollte der Reifendruck am Pferdeanhänger vor der Fahrt geprüft werden?',
-        'keyword': 'Reifendruck am Pferdeanhänger',
-        'intent_terms': ['Reifendruck', 'Reifen', 'Pferdeanhänger', 'Fahrt', 'Kontrolle'],
-        'direct_answer': 'Der Reifendruck am Pferdeanhänger sollte vor der Fahrt kontrolliert werden, weil der passende Druck und ein unbeschädigter Reifen für einen verlässlichen Zustand des Anhängers wichtig sind. Zusätzlich werden Ventile, Laufflächen und Seitenwände sichtbar geprüft.',
-        'table_value': 'Die Tabelle verbindet Reifenzustand, erkennbare Beobachtung und die daraus folgende konkrete Kontrolle vor der Fahrt.',
+        'keyword': 'Verschlusskontrolle am Pferdeanhänger',
+        'intent_terms': ['Verschluss', 'Klappe', 'Tür', 'Pferdeanhänger', 'Kontrolle'],
+        'direct_answer': 'Die Verschlusskontrolle am Pferdeanhänger prüft Türen, Klappen und Verriegelungen einzeln auf vollständigen Sitz und erkennbare Beschädigungen. Auffällige Verschlüsse werden vor der Abfahrt geklärt und anschließend erneut kontrolliert.',
+        'table_value': 'Die Tabelle ordnet Verschluss, sichtbaren Zustand und notwendige Nachkontrolle eindeutig ein.',
         'sources': [
-            ('Reifendruck und Reifenbelastung', _evidence('Reifendruck', [
-                'Der Sollwert für den Reifendruck richtet sich nach dem montierten Reifen und den Vorgaben für den Anhänger',
-                'Gemessen wird möglichst am kalten Reifen, damit Erwärmung während der Fahrt den Ausgangswert nicht verfälscht',
-                'Ein deutlich zu niedriger Druck vergrößert die Verformung des Reifens unter Last',
-                'Stärkere Verformung kann die Erwärmung des Reifens während der Fahrt erhöhen',
-                'Linke und rechte Anhängerseite werden unter vergleichbaren Bedingungen gemessen',
-                'Ein auffälliger Druckunterschied zwischen den Seiten wird vor der Abfahrt geklärt',
-                'Nach einer Korrektur wird der eingestellte Wert erneut mit der Sollvorgabe verglichen',
-                'Der Ventilbereich wird nach der Druckkontrolle auf sichtbare Beschädigungen betrachtet',
-                'Nach längerer Standzeit wird ein früherer Messwert nicht ungeprüft übernommen',
-                'Die aktuelle Messung entscheidet über den heutigen Zustand des Reifens',
-                'Die Herstellerangabe bleibt während der Kontrolle die maßgebliche Referenz',
-                'Ein geschätzter Druck ersetzt keine Messung am jeweiligen Reifen',
+            ('Verriegelungen und Klappen', _evidence('Verschlusskontrolle', [
+                'Jede Tür und jede Klappe wird einzeln bis in die vorgesehene Endstellung geschlossen',
+                'Verriegelungen werden auf vollständigen Eingriff der vorgesehenen Sicherung geprüft',
+                'Ein nur teilweise eingerasteter Verschluss gilt nicht als abgeschlossene Kontrolle',
+                'Scharniere werden auf sichtbare Lockerung und ungewöhnliches Spiel betrachtet',
+                'Beschädigte oder verbogene Bauteile werden vor der Fahrt fachlich geklärt',
+                'Lose Zusatzteile dürfen einen Verschluss nicht am vollständigen Schließen hindern',
+                'Nach einer Korrektur wird derselbe Verschluss erneut geöffnet und geschlossen',
+                'Die Kontrolle umfasst auch kleinere Serviceklappen und vorhandene Außenfächer',
+                'Eine zweite Sichtprüfung bestätigt die Endstellung nach dem ersten Schließen',
+                'Der Kontrollgang wird in einer festen Reihenfolge durchgeführt, damit kein Verschluss ausgelassen wird',
+                'Die Prüfung endet erst nach eindeutiger Bestätigung aller vorgesehenen Sicherungen',
+                'Der aktuelle Sichtbefund entscheidet über die Freigabe des jeweiligen Verschlusses',
             ])),
-            ('Sichtkontrolle der Anhängerreifen', _evidence('Reifensichtkontrolle', [
-                'Lauffläche und Seitenwand werden vor der Fahrt auf Schnitte und auffällige Risse geprüft',
-                'Beulen oder sichtbare Verformungen werden als eigene Auffälligkeit behandelt',
-                'Fremdkörper in der Lauffläche werden nicht durch eine reine Druckmessung ausgeschlossen',
-                'Das Profil wird an mehreren Stellen betrachtet, weil Abrieb ungleichmäßig auftreten kann',
-                'Innen- und Außenseite eines Reifens können unterschiedliche Verschleißbilder zeigen',
-                'Ventilkappen und Ventile werden auf festen Sitz und erkennbare Schäden kontrolliert',
-                'Ein Reifen mit sichtbarer Beschädigung wird nicht allein durch Nachfüllen als unauffällig bewertet',
-                'Das Reserverad wird einbezogen, wenn es für den Anhänger vorgesehen und einsatzbereit sein soll',
-                'Jede Reifenposition wird im Kontrollgang einzeln betrachtet',
-                'Die Prüfung wird erst abgeschlossen, wenn keine Position ausgelassen wurde',
-                'Eine erkennbare Auffälligkeit wird vor dem Losfahren fachlich geklärt',
-                'Der aktuelle Sichtbefund ergänzt die Druckmessung und ersetzt sie nicht',
+            ('Abschlusskontrolle der Öffnungen', _evidence('Abschlusskontrolle', [
+                'Der abschließende Rundgang beginnt an einer festgelegten Seite des Anhängers',
+                'Jede zuvor geprüfte Öffnung wird im Rundgang erneut sichtbar zugeordnet',
+                'Überstehende Griffe oder nicht angelegte Sicherungen werden vor der Fahrt korrigiert',
+                'Gummidichtungen dürfen den Verriegelungsweg nicht sichtbar behindern',
+                'Eine unklare Endstellung wird nicht durch Gewohnheit als ausreichend bewertet',
+                'Nach jedem Eingriff wird die betroffene Sicherung erneut vollständig geprüft',
+                'Der Rundgang verbindet einzelne Verschlussprüfungen zu einer letzten Gesamtprüfung',
+                'Auch von außen schlecht sichtbare Sicherungspunkte werden gezielt betrachtet',
+                'Bewegliche Teile werden so gesichert, dass sie während der Fahrt nicht frei aufschwingen können',
+                'Die Kontrollreihenfolge bleibt bis zum Ende gleich und nachvollziehbar',
+                'Ein festgestellter Mangel führt zurück zum betroffenen Verschluss und nicht zum Überspringen des Punkts',
+                'Erst ein eindeutiger Abschlussbefund beendet die Verschlusskontrolle',
             ])),
         ],
     },
     {
-        'title': 'Warum muss die Beleuchtung am Pferdeanhänger vor der Fahrt kontrolliert werden?',
-        'keyword': 'Beleuchtung am Pferdeanhänger',
-        'intent_terms': ['Beleuchtung', 'Pferdeanhänger', 'Rücklicht', 'Blinker', 'Kontrolle'],
-        'direct_answer': 'Die Beleuchtung am Pferdeanhänger wird vor der Fahrt geprüft, damit Rücklicht, Bremslicht, Blinker und Kennzeichenbeleuchtung zuverlässig funktionieren. Dabei werden auch Stecker, Kabel und Leuchten auf erkennbare Auffälligkeiten kontrolliert.',
-        'table_value': 'Die Tabelle ordnet jede Lichtfunktion einer sichtbaren Kontrolle und einer eindeutigen Reaktion bei festgestellten Auffälligkeiten zu.',
+        'keyword': 'Bodenprüfung am Pferdeanhänger',
+        'intent_terms': ['Boden', 'Pferdeanhänger', 'Oberfläche', 'Feuchtigkeit', 'Kontrolle'],
+        'direct_answer': 'Die Bodenprüfung am Pferdeanhänger kontrolliert die sichtbare Oberfläche, Übergänge und zugängliche Randbereiche auf Feuchtigkeit, Beschädigungen und auffällige Verformungen. Unklare Stellen werden vor der Nutzung näher geprüft.',
+        'table_value': 'Die Tabelle verbindet sichtbaren Bodenbefund, mögliche Auffälligkeit und die daraus folgende Kontrolle vor der Nutzung.',
         'sources': [
-            ('Funktionen der Anhängerbeleuchtung', _evidence('Beleuchtung', [
-                'Bremsleuchten müssen beim Betätigen der Bremse eindeutig aufleuchten',
-                'Der linke Fahrtrichtungsanzeiger wird getrennt vom rechten Fahrtrichtungsanzeiger geprüft',
-                'Rückleuchten kennzeichnen den Anhänger bei eingeschaltetem Fahrlicht nach hinten',
-                'Die Kennzeichenbeleuchtung wird als eigene Lichtfunktion kontrolliert',
-                'Warnblinklicht kann einen gemeinsamen Blinktest ergänzen',
-                'Der gemeinsame Blinktest ersetzt die getrennte Prüfung beider Fahrtrichtungsanzeiger nicht',
-                'Beide Rückleuchten werden auf Funktion und auffällige Helligkeitsunterschiede betrachtet',
-                'Ein vollständiger Ausfall einer Lichtfunktion wird vor der Fahrt behoben',
-                'Nach einer Korrektur wird die betroffene Lichtfunktion erneut geschaltet',
-                'Die Funktionskontrolle umfasst mehrere Schaltzustände und nicht nur eine einzelne Lampe',
-                'Eine dunkle Kennzeichenleuchte kann trotz funktionierender Rückleuchten auftreten',
-                'Der Kontrollgang endet erst nach einer erneuten Prüfung der zuvor auffälligen Funktion',
+            ('Sichtprüfung der Bodenfläche', _evidence('Bodenprüfung', [
+                'Die zugängliche Bodenfläche wird vollständig und nicht nur im mittleren Laufbereich betrachtet',
+                'Übergänge zu Wänden und Rampen werden als eigene Kontrollbereiche einbezogen',
+                'Feuchte Stellen werden von trockenen Bereichen unterschieden und gezielt nachverfolgt',
+                'Abhebungen oder erkennbare Verformungen werden nicht durch eine oberflächliche Reinigung verdeckt',
+                'Lose Beläge werden auf ihre Befestigung und den darunter sichtbaren Zustand geprüft',
+                'Ein auffälliger Geruch kann Anlass für eine genauere Kontrolle verdeckter Feuchtigkeit sein',
+                'Beschädigte Kanten werden vor der Nutzung auf ihre Ursache und Auswirkung bewertet',
+                'Nach einer Reinigung wird die zuvor auffällige Stelle erneut betrachtet',
+                'Die Kontrolle folgt einer festen Richtung, damit Randbereiche nicht ausgelassen werden',
+                'Zugängliche Befestigungspunkte werden auf sichtbare Lockerung oder Korrosion geprüft',
+                'Eine unklare Stelle wird nicht allein wegen trockener Oberfläche als unauffällig bewertet',
+                'Der aktuelle Gesamtzustand ergibt sich aus Fläche, Übergängen und Randbereichen gemeinsam',
             ])),
-            ('Stecker Kabel und Leuchten', _evidence('Elektrische Verbindung', [
-                'Der Anhängerstecker wird vollständig in die vorgesehene Steckverbindung eingesetzt',
-                'Eine vorhandene Verriegelung des Steckers muss in der vorgesehenen Stellung sitzen',
-                'Sichtbare Kabelabschnitte werden auf Quetschungen und Scheuerstellen geprüft',
-                'Das Kabel darf zwischen Zugfahrzeug und Anhänger nicht über den Boden schleifen',
-                'Lose Kabelführung kann beim Rangieren oder Lenken zu einer ungünstigen Belastung führen',
-                'Feuchtigkeit im Leuchtengehäuse wird als erkennbare Auffälligkeit behandelt',
-                'Flackerndes Licht kann auf eine instabile elektrische Verbindung hinweisen',
-                'Sichtbare Korrosion an Kontakten wird vor dem Einsatz bewertet',
-                'Beschädigte Kabelisolierung bleibt auch bei aktuell leuchtender Lampe eine Auffälligkeit',
-                'Die Steckverbindung wird nach einer Korrektur erneut auf festen Sitz kontrolliert',
-                'Die Leitung wird abschließend auf freie Führung im Bewegungsbereich geprüft',
-                'Alle elektrischen Auffälligkeiten werden vor der Abfahrt geklärt',
+            ('Nachkontrolle auffälliger Stellen', _evidence('Bodennachkontrolle', [
+                'Eine markierte Auffälligkeit wird nach dem ersten Rundgang gezielt erneut aufgesucht',
+                'Die Nachkontrolle vergleicht die Stelle mit unmittelbar angrenzenden unauffälligen Bereichen',
+                'Veränderungen nach Belastung oder Reinigung werden getrennt dokumentiert',
+                'Eine weiche oder nachgiebige Stelle verlangt eine genauere fachliche Bewertung',
+                'Sichtbare Risse werden in Verlauf und Ausdehnung betrachtet statt nur punktuell bewertet',
+                'Feuchtigkeit an Übergängen wird auf mögliche Eintrittswege hin kontrolliert',
+                'Lose Verbindungsteile werden vor einer erneuten Nutzung fachgerecht geklärt',
+                'Nach einer Reparatur wird die betroffene Zone erneut im vollständigen Kontrollgang geprüft',
+                'Der Vergleich mit dem Ausgangsbefund verhindert das Übersehen einer unveränderten Auffälligkeit',
+                'Die Nachkontrolle ersetzt nicht die vollständige Prüfung der übrigen Bodenbereiche',
+                'Alle markierten Stellen müssen vor Abschluss des Rundgangs eindeutig bewertet sein',
+                'Erst danach wird der Bodenabschnitt als kontrolliert abgeschlossen',
             ])),
         ],
     },
     {
-        'title': 'Warum sollte die Anhängerkupplung vor dem Losfahren geprüft werden?',
-        'keyword': 'Anhängerkupplung',
-        'intent_terms': ['Anhängerkupplung', 'Kupplung', 'Pferdeanhänger', 'Sicherung', 'Kontrolle'],
-        'direct_answer': 'Die Anhängerkupplung wird vor dem Losfahren kontrolliert, damit der Pferdeanhänger korrekt verbunden und die vorgesehene Sicherung vollständig hergestellt ist. Dazu gehören Verriegelung, Sicherungseinrichtungen, Stützrad und ein abschließender Kontrollgang.',
-        'table_value': 'Die Tabelle verbindet Kupplung, Sicherung und Kontrollgang mit dem jeweils sichtbaren Zustand und der notwendigen Handlung vor der Abfahrt.',
+        'keyword': 'Lüftungskontrolle am Pferdeanhänger',
+        'intent_terms': ['Lüftung', 'Öffnung', 'Pferdeanhänger', 'Luftweg', 'Kontrolle'],
+        'direct_answer': 'Die Lüftungskontrolle am Pferdeanhänger prüft vorhandene Öffnungen, Schieber und Luftwege auf freie Funktion, sicheren Sitz und erkennbare Blockaden. Veränderungen werden vor der Fahrt beseitigt und danach erneut geprüft.',
+        'table_value': 'Die Tabelle ordnet Lüftungselement, sichtbaren Zustand und die erforderliche Funktionskontrolle vor der Fahrt zu.',
         'sources': [
-            ('Kupplung vor der Abfahrt', _evidence('Kupplung', [
-                'Die Kupplung des Pferdeanhängers muss vollständig auf dem Kugelkopf sitzen',
-                'Der vorgesehene Verriegelungsmechanismus wird bis in seine Endstellung gebracht',
-                'Eine vorhandene Sicherheitsanzeige wird direkt am Kupplungskopf abgelesen',
-                'Eine nur scheinbar geschlossene Verbindung gilt nicht als ausreichende Kontrolle',
-                'Das Abreißseil wird an der dafür vorgesehenen Stelle befestigt',
-                'Die Sicherung wird nicht lose über ungeeignete Bauteile gelegt',
-                'Das Stützrad wird vollständig in die vorgesehene Fahrstellung gebracht',
-                'Die Klemmung des Stützrads wird gegen unbeabsichtigtes Absenken gesichert',
-                'Der Kupplungsgriff wird nach dem Schließen in seiner Endstellung betrachtet',
-                'Eine erkennbare Zwischenstellung verlangt eine erneute Kontrolle der Verriegelung',
-                'Die Deichsel bleibt während der Prüfung kontrolliert abgestützt',
-                'Erst nach diesen Einzelkontrollen gilt der Kupplungsvorgang als abgeschlossen',
+            ('Lüftungsöffnungen und Schieber', _evidence('Lüftungskontrolle', [
+                'Vorhandene Lüftungsöffnungen werden einzeln auf freie Durchgänge und sichtbare Blockaden betrachtet',
+                'Schieber und Klappen werden in den vorgesehenen Stellungen auf Beweglichkeit geprüft',
+                'Lose Abdeckungen dürfen nicht in einen Luftweg hineinragen',
+                'Verschmutzungen an Gittern werden als eigene Auffälligkeit behandelt',
+                'Beschädigte Gitter oder Halterungen werden vor der Fahrt fachlich geklärt',
+                'Ein schwergängiger Schieber wird nicht mit Gewalt in eine scheinbare Endstellung gedrückt',
+                'Nach einer Reinigung wird die Beweglichkeit des betroffenen Elements erneut geprüft',
+                'Die Kontrollreihenfolge umfasst alle vorhandenen Öffnungen auf beiden Seiten',
+                'Ein nur teilweise freier Luftweg wird nicht als vollständig kontrolliert bewertet',
+                'Die vorgesehene Fahrstellung jedes verstellbaren Elements wird sichtbar bestätigt',
+                'Auffällige Geräusche oder Spiel an beweglichen Teilen führen zu einer Nachkontrolle',
+                'Der aktuelle Zustand wird unmittelbar vor der Nutzung erneut bestätigt',
             ])),
-            ('Kontrollgang nach dem Ankuppeln', _evidence('Kontrollgang', [
-                'Der abschließende Rundgang beginnt erneut an der Deichsel des Anhängers',
-                'Kupplung und Sicherung werden aus einer zweiten Blickrichtung kontrolliert',
-                'Die elektrische Steckverbindung wird auf festen Sitz betrachtet',
-                'Das Stützrad wird auf eingezogene Position und sichere Klemmung geprüft',
-                'Der Abstand des Stützrads zum Boden muss für die Fahrt ausreichend sein',
-                'Lose Sicherungsteile dürfen nicht im Bewegungsbereich zwischen Fahrzeug und Anhänger liegen',
-                'Auch das Anschlusskabel darf im Bewegungsbereich nicht ungünstig eingeklemmt werden',
-                'Auffälliges Spiel an der Verbindung führt zurück zur Kupplungskontrolle',
-                'Eine unklare Anzeige wird nicht durch Gewohnheit als ausreichend bewertet',
-                'Nach einer Korrektur wird der betroffene Punkt erneut geprüft',
-                'Der Kontrollgang verbindet die zuvor getrennten Handgriffe zu einer letzten Gesamtprüfung',
-                'Erst ein eindeutig bestätigter Zustand beendet den Kupplungsabschnitt',
+            ('Abschlussprüfung der Luftwege', _evidence('Luftwegprüfung', [
+                'Der Abschlussrundgang ordnet jede Öffnung erneut ihrer vorgesehenen Funktion zu',
+                'Gegenstände im Innenraum dürfen vorgesehene Luftwege nicht sichtbar verdecken',
+                'Bewegliche Abdeckungen werden auf sicheren Sitz in der gewählten Stellung geprüft',
+                'Eine zuvor gereinigte Öffnung wird auf verbliebene Blockaden kontrolliert',
+                'Beschlag oder Feuchtigkeit an einer Öffnung wird als Hinweis für eine zusätzliche Sichtprüfung genutzt',
+                'Die Nachkontrolle prüft nicht nur Beweglichkeit, sondern auch die tatsächliche freie Öffnung',
+                'Lose Befestigungen werden vor Fahrtbeginn geklärt',
+                'Eine unklare Stellung führt zurück zur Bedienung des betroffenen Elements',
+                'Alle Öffnungen werden in derselben Reihenfolge wie bei der Erstprüfung erneut betrachtet',
+                'Der Kontrollgang endet nicht, solange ein Luftweg ungeklärt bleibt',
+                'Nach einem Eingriff wird die betroffene Stelle erneut in den Gesamtgang einbezogen',
+                'Erst danach gilt die Lüftungskontrolle als abgeschlossen',
             ])),
         ],
     },
 ]
 
+CONDITIONS = [
+    'nach längerer Standzeit',
+    'vor einer frühen Abfahrt',
+    'nach einer gründlichen Reinigung',
+    'nach einem starken Wetterwechsel',
+    'vor einer längeren Strecke',
+    'nach einer Wartung',
+    'vor der ersten Fahrt des Tages',
+    'nach einer Fahrtpause',
+    'bei wechselnder Außentemperatur',
+    'nach sichtbarer Verschmutzung',
+    'nach einem Beladungswechsel',
+    'vor einer erneuten Nutzung',
+]
 
-def _dynamic_scenario(index: int) -> dict:
-    n = index + 1
-    topic = f'Kontrollpunkt {n} am Pferdeanhänger'
-    statements_a = [f'{topic} erhält vor der Fahrt eine aktuelle Beobachtung mit der laufenden Position {k}' for k in range(1, 13)]
-    statements_b = [f'Nach einer Änderung an {topic} wird die Wirkung in einem getrennten Nachkontrollschritt {k} bestätigt' for k in range(13, 25)]
-    return {
-        'title': f'Warum sollte {topic} vor der Fahrt geprüft werden?',
-        'keyword': topic,
-        'intent_terms': ['Kontrollpunkt', 'Pferdeanhänger', 'Fahrt', 'Prüfung', topic],
-        'direct_answer': f'{topic} wird vor der Fahrt geprüft, damit sein aktueller Zustand eindeutig festgestellt wird. Eine erkennbare Abweichung wird am betroffenen Kontrollpunkt geklärt und danach erneut kontrolliert.',
-        'table_value': f'Die Tabelle verbindet die Beobachtungen zu {topic} mit eindeutigen Handlungen und einer abschließenden Nachkontrolle vor der Fahrt.',
+
+def _freshen(base: dict, index: int, token: str) -> dict:
+    seed = sha_text(token + '|' + str(index) + '|' + str(base['keyword']))
+    condition = CONDITIONS[int(seed[:8], 16) % len(CONDITIONS)]
+    keyword = str(base['keyword'])
+    scenario = copy.deepcopy(base)
+    scenario['title'] = f'Wie wird {keyword} {condition} richtig durchgeführt?'
+    scenario['direct_answer'] = str(base['direct_answer']).rstrip() + f' Der konkrete Kontrollfall betrachtet die Prüfung {condition}.'
+    scenario['table_value'] = str(base['table_value']).rstrip() + f' Der Vergleich gilt für die Situation {condition}.'
+    scenario['fresh_seed_sha256'] = seed
+    scenario['condition'] = condition
+    return scenario
+
+
+def _dynamic_scenario(index: int, token: str) -> dict:
+    seed = sha_text(token + '|dynamic|' + str(index))
+    n = int(seed[:8], 16) % 9000 + 1000
+    keyword = f'Kontrollfolge {n} am Pferdeanhänger'
+    statements_a = [f'Die {keyword} ordnet vor der Fahrt den Kontrollschritt {k} einem eindeutig sichtbaren Zustand zu' for k in range(1, 13)]
+    statements_b = [f'Nach einer Änderung in der {keyword} wird der betroffene Zustand in einem getrennten Nachkontrollschritt {k} erneut bestätigt' for k in range(13, 25)]
+    return _freshen({
+        'keyword': keyword,
+        'intent_terms': ['Kontrollfolge', 'Pferdeanhänger', 'Fahrt', 'Prüfung', keyword],
+        'direct_answer': f'Die {keyword} strukturiert die Kontrolle vor der Fahrt in klar getrennte Punkte. Eine erkennbare Abweichung wird am betroffenen Kontrollpunkt geklärt und danach erneut kontrolliert.',
+        'table_value': f'Die Tabelle verbindet die Beobachtungen der {keyword} mit eindeutigen Handlungen und einer abschließenden Nachkontrolle.',
         'sources': [
-            (f'Grundlage {topic}', _evidence(topic, statements_a)),
-            (f'Nachkontrolle {topic}', _evidence(topic, statements_b)),
+            (f'Grundlage der {keyword}', _evidence(keyword, statements_a)),
+            (f'Nachkontrolle der {keyword}', _evidence(keyword, statements_b)),
         ],
-    }
+    }, index, token)
 
 
-def _scenarios(count: int) -> list[dict]:
+def _scenarios(count: int, token: str) -> list[dict]:
     if count < 1:
         raise RuntimeError('TEST_ROUTE_COUNT_MUST_BE_POSITIVE')
-    rows = [copy.deepcopy(v) for v in SCENARIOS[:min(count, len(SCENARIOS))]]
+    rows = [_freshen(copy.deepcopy(v), i, token) for i, v in enumerate(BASE_SCENARIOS[:min(count, len(BASE_SCENARIOS))])]
     for index in range(len(rows), count):
-        rows.append(_dynamic_scenario(index))
+        rows.append(_dynamic_scenario(index, token))
+    titles = [row['title'] for row in rows]
+    if len(titles) != len(set(titles)):
+        raise RuntimeError('SYSTEM4_FRESH_TOPIC_COLLISION')
     return rows
 
 
-def _serve_sources(root: Path, scenarios: list[dict]):
+def _serve_sources(root: Path, scenarios: list[dict], fresh_token_sha256: str):
     requests = {}
     for i, scenario in enumerate(scenarios):
         rows = []
         for j, (title, evidence) in enumerate(scenario['sources']):
             name = f'item-{i}-source-{j}.html'
+            source_freshness = sha_text(fresh_token_sha256 + '|' + str(i) + '|' + str(j) + '|' + title)
             (root / name).write_text(
-                f'<!doctype html><html><head><title>{title}</title></head><body><article><h1>{title}</h1><p>{evidence}</p></article></body></html>',
+                '<!doctype html><html><head>'
+                f'<title>{title}</title><meta name="system4-source-snapshot" content="{source_freshness}">'
+                f'</head><body><!--system4-source-snapshot:{source_freshness}--><article><h1>{title}</h1><p>{evidence}</p></article></body></html>',
                 encoding='utf-8',
             )
-            source_id = 'src-' + hashlib.sha256((title + '\n' + evidence).encode()).hexdigest()[:32]
-            rows.append({'source_id': source_id, 'source_title': title, 'path': name})
+            source_id = 'src-' + sha_text(fresh_token_sha256 + '\n' + title + '\n' + evidence)[:32]
+            rows.append({'source_id': source_id, 'source_title': title, 'path': name, 'freshness_sha256': source_freshness})
         requests[i] = rows
     handler = lambda *args, **kwargs: Quiet(*args, directory=str(root), **kwargs)
     server = ThreadingHTTPServer(('127.0.0.1', 0), handler)
@@ -357,7 +401,9 @@ def _serve_sources(root: Path, scenarios: list[dict]):
 
 
 def create(out: Path, count: int) -> dict:
-    scenarios = _scenarios(count)
+    token = _fresh_token()
+    token_sha = sha_text(token)
+    scenarios = _scenarios(count, token)
     if out.exists() and any(out.iterdir()):
         raise RuntimeError('TEST_FIXTURE_DIR_NOT_EMPTY')
     out.mkdir(parents=True, exist_ok=True)
@@ -367,7 +413,7 @@ def create(out: Path, count: int) -> dict:
     items = []
     plan_rows = []
     for i, scenario in enumerate(scenarios):
-        slot = hashlib.sha256(f'system4a-live-parity-fresh-{count}-{i}-{scenario["title"]}'.encode()).hexdigest()
+        slot = sha_text(f'system4a-fresh|{token_sha}|{count}|{i}|{scenario["title"]}')
         items.append({
             'title': scenario['title'],
             'target_keyword': scenario['keyword'],
@@ -399,7 +445,7 @@ def create(out: Path, count: int) -> dict:
         }
         plan_rows.append({'item_index': i, 'plan_slot': slot, 'production_plan_item': plan})
 
-    batch_sha = stable({'count': count, 'items': items})
+    batch_sha = stable({'fresh_run_token_sha256': token_sha, 'count': count, 'items': items})
     snapshot = {
         'contract': 'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1',
         'next_textmachine_metadata_batch': {
@@ -432,7 +478,7 @@ def create(out: Path, count: int) -> dict:
 
     source_root = out / 'source-pages'
     source_root.mkdir()
-    server, request_rows = _serve_sources(source_root, scenarios)
+    server, request_rows = _serve_sources(source_root, scenarios, token_sha)
     try:
         _, port = server.server_address
         source_items = []
@@ -454,8 +500,24 @@ def create(out: Path, count: int) -> dict:
 
     writej(out / 'acquired.json', acquired)
     writej(out / 'source_requests.json', request_batch)
+    freshness = {
+        'contract': 'SYSTEM4_FRESH_ARTICLE_INPUT_V1',
+        'fresh_run_token_sha256': token_sha,
+        'article_count': count,
+        'titles': [row['title'] for row in scenarios],
+        'title_sha256': [sha_text(row['title']) for row in scenarios],
+        'scenario_seed_sha256': [row['fresh_seed_sha256'] for row in scenarios],
+        'plan_slots': [row['plan_slot'] for row in items],
+        'source_ids': [[s['source_id'] for s in row['sources']] for row in acquired['items']],
+        'pre_point0_article_body_count': 0,
+        'article_body_source_allowed': False,
+        'old_article_fixture_allowed': False,
+        'recovery_article_allowed': False,
+        'ppm_candidate_article_allowed': False,
+    }
+    writej(out / 'freshness.json', freshness)
     proof = {
-        'contract': 'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V4',
+        'contract': 'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V5',
         'article_count': count,
         'batch_sha256': batch_sha,
         'pre_point0_article_body_count': 0,
@@ -463,6 +525,9 @@ def create(out: Path, count: int) -> dict:
         'source_count': sum(len(row['sources']) for row in acquired['items']),
         'count_domain': '1..N',
         'g9_candidate_used': False,
+        'old_article_body_used': False,
+        'freshness_required': True,
+        'fresh_run_token_sha256': token_sha,
         'prewrite_authority': 'PPM679_COMPOSED_FROM_NON_CANDIDATE_AUTHORITIES',
         'prewrite_authority_components': authority['proof'],
     }
