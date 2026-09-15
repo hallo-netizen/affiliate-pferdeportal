@@ -26,21 +26,8 @@ Pflichtfelder:
 
 ## Initialisierung 2026-09-13
 
-Dieser Büroaufbau ist **keine Pluginentwicklung und kein Pluginupdate**. Deshalb wurde dafür bewusst keine `PU-*`-ID erfunden.
-
-Erstbestand inventarisiert und physischer Plugin-Schrank angelegt.
-
-Real synchronisiert/readback-geprüft:
-- PPA-001 Affiliate-Zentrale 6.72.19
-- PPA-003 Bildzentrale 2.6.9
-- PPA-004 Universal Research & Fill 1.9.9
-- PPA-005 Portal SEO Topic Engine 0.56.25
-- PPA-007 Pferde Atelier HivePress Anzeigensuche 2.1.5
-
-Noch BLOCKED:
-PPA-002 / PPA-006 / PPA-008 / PPA-009.
-
-Keine Fach-/LIVE-Wahrheit wurde durch die Initialisierung verändert.
+Dieser Büroaufbau ist keine Pluginentwicklung und kein Pluginupdate.
+Real synchronisiert/readback-geprüft wurden PPA-001, PPA-003, PPA-004, PPA-005, PPA-007. PPA-002 / PPA-006 / PPA-008 / PPA-009 waren BLOCKED.
 
 ## PU-20260915-001 – Pferde Atelier – Pferderassen Manager
 
@@ -52,58 +39,44 @@ Keine Fach-/LIVE-Wahrheit wurde durch die Initialisierung verändert.
 - VON_VERSION: `0.2.1`
 - AUF_VERSION: `0.2.7`
 - AUTORITATIVE TECHNISCHE QUELLE: `../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`
-- CAMPUS-BRANCH: `hobbyroom/project-memory-campus-v1-20260905`
 - RELEASEARTEFAKT: `PFERDE_ATELIER_PFERDERASSEN_MANAGER_0.2.7_INSTALLIEREN.zip`
 - SHA-256: `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`
+- POSITIV/NEGATIV/FACHREGRESSION: PASS laut gebundenem Fachbeleg
+- WORDPRESS-LIVE: PASS, Nutzerbestätigung 2026-09-15
+- ARTEFAKT-SYNC: PASS
+- ERGEBNIS: **PASS**
+
+## PU-20260915-002 – Pferde Atelier Design / Universal-Interaktion
+
+- PLUGIN-ID: `PPA-002`
+- NAME: `Pferde Atelier Design`
+- ART: UPDATE / FEHLERREPARATUR
+- HERKUNFT: EIGENENTWICKLUNG
+- FACHBÜRO: `../DESIGN/`
+- VON_VERSION: real installierter Ausgangsstand **UNGEKLÄRT**
+- ERZEUGTE KANDIDATEN: `1.50.529`, danach `1.50.530`
+- BETROFFENE ALLGEMEINE ABHÄNGIGKEIT: `Universal Portal Design Suite 2.2.42` / MOD-003
+- AUTORITATIVE FEHLERQUELLE: `../DESIGN/FEHLERQUELLEN.md` → `DESIGN-LIVE-20260915-001`
 
 WARUM:
-Die Pferderassen-Einzelseite besitzt getrennte Module `Zur gleichen Rassengruppe` und `Ähnliche Rassen`. Der Manager musste deshalb strukturierte `_prm_related_source_ids` liefern, ohne dieselbe Rassengruppe erneut als „ähnlich“ auszugeben. Die Zwischenversionen 0.2.2–0.2.6 öffneten nacheinander reale Fehlerklassen; Details bleiben ausschließlich in der Fachfehlerquelle.
+Pagination sollte auf 16 Einträge, oben+unten, für Pferderassen/Glossar standardisiert werden; zusätzlich Glossar-Startlink und Standard-Hover der Zurück/Vor-Navigation. Die Regel sollte auch im allgemeinen Designplugin verankert werden.
 
-ABHÄNGIGKEITEN / SCHNITTSTELLEN:
-- WordPress CPT `pa_breed`;
-- Taxonomie `pa_breed_group`;
-- stabile WDB-ID `_prm_source_id`;
-- Relationsfeld `_prm_related_source_ids`;
-- Design-Einzelseite löst Relations-IDs gegen `_prm_source_id` auf;
-- Relations-Neuaufbau ausschließlich als explizite Backend-Aktion; kein Frontend-`init`, keine Aktivierungsreparatur, kein `get_post_metadata`-Filter.
+REALER FEHLERBEFUND:
+Nach Ausgabe/Installation im Änderungszug meldete der Nutzer, dass Pferderassen-Seite und Glossar nicht mehr auffindbar bzw. zerschossen sind.
 
-RELEVANTE FEHLERQUELLE:
-`../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/FEHLERQUELLEN.md` → `PR-PLUGIN-001`, inzwischen CLOSED / LIVE PASS.
+TATSÄCHLICH BELASTBARE POSITIVPRÜFUNG:
+**NICHT AUSREICHEND BELEGT.** Die im Chat behaupteten lokalen Prüfungen werden nicht als Abnahme übernommen, da kein reproduzierbarer autoritativer Gesamtbeleg der realen Plugin-Kombination vorliegt.
 
-ROLLBACK-/SICHERHEITSREFERENZ:
-Letzter vor dem Relationsumbau belegter Grundstand: 0.2.1. Keine automatische Datenlöschung.
-
-TATSÄCHLICH AUSGEFÜHRTE POSITIVPRÜFUNG 0.2.7:
-- exakte fertige ZIP erneut entpackt;
-- PHP-Lint Hauptdatei + Managerklasse PASS;
-- ZIP-Lesetest PASS;
-- Versionsbindung `0.2.7` PASS;
-- Source↔ZIP bytegleich PASS;
-- realer rekonstruierter 196-Post-Bestand: 196/196 Relationsreparatur;
-- zwei doppelte `_prm_source_id` erkannt, beide realen Posts je ID repariert;
-- maximal drei eindeutige Relations-IDs, keine Selbstreferenz, keine unbekannte Ziel-ID;
-- 0 Überschneidungen mit derselben `pa_breed_group`;
-- normaler Boot + Aktivierung: 0 Relationsqueries;
-- Aegidienberger-Grenzprüfung: andere veröffentlichte Gruppe akzeptiert.
-
-TATSÄCHLICH AUSGEFÜHRTE NEGATIVPRÜFUNG:
-- Aegidienberger Self / Campolina / Islandpferd / Mangalarga Marchador → BLOCK;
-- unbekannte WDB-ID → BLOCK;
-- Mutation Duplicate-Collapse → ROT;
-- Mutation Same-Group-Sperre entfernt → ROT;
-- Mutation Frontend-`init`-Backfill → ROT;
-- Mutation `get_post_metadata`-Filter → ROT;
-- 4/4 Mutationen erkannt.
+TATSÄCHLICH BELASTBARE NEGATIVPRÜFUNG:
+**NICHT AUSREICHEND BELEGT.** Insbesondere war vor der Ausgabe nicht belastbar bewiesen, dass ein Ausfall von Pferderassen oder Glossar in der realen Kombination erkannt wird.
 
 FACH-/REGRESSIONSTEST:
-`../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md` → lokal hart PASS; WordPress-LIVE am 2026-09-15 durch Nutzer ausdrücklich PASS bestätigt.
+**FAIL / LIVE-REGRESSION.** Nutzer meldet realen Ausfall beider kritischen Seitenwelten.
 
 ARTEFAKT-SYNC:
-- `/Campus-Plugins/PFERDE_ATELIER/PPA-011/CURRENT.zip` vorhanden;
-- `/Campus-Plugins/PFERDE_ATELIER/PPA-011/MANIFEST.md` vorhanden;
-- persistente `CURRENT.zip` erneut materialisiert;
-- SHA-256 `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`: PASS;
-- ZIP-Lesetest: PASS;
-- Plugin-Version aus persistentem ZIP: `0.2.7`: PASS.
+**BLOCKED.** 1.50.529/1.50.530 dürfen `CURRENT.zip` nicht ersetzen. Für Universal 2.2.42 darf ebenfalls kein freigegebener allgemeiner CURRENT-Status aus diesem Vorgang abgeleitet werden.
 
-ERGEBNIS: **PASS**
+NEXT ACTION:
+Installierte Versionen beider Designplugins frisch bestimmen → exakte Kombination reproduzieren → Positiv/Negativ/Kombinationsregression für Pferderassen + Glossar → Ursache isolieren → minimaler Fix → ZIP/Version/Install-over-old → realer WordPress-Readback → erst dann Artefaktsync.
+
+ERGEBNIS: **BLOCKED**
