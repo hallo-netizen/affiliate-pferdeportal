@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGINS – HOBBYRAUM
 
-STAND: 2026-09-13
+STAND: 2026-09-15
 STATUS: BLOCKED
 
 ## 1-KLICK-ÜBERSICHT
@@ -22,7 +22,7 @@ aus Altmastern raten, Fachstatus überschreiben oder einen fehlenden aktuellen I
 
 ## AKTUELLER AUFTRAG
 
-Erstbefüllung des zentralen isolierten Pluginbestands abschließen.
+Plugin-Artefaktsync bleibt BLOCKED. Neu hinzugekommen ist PPA-011 `Pferde Atelier – Pferderassen Manager`.
 
 ## BEREITS REAL SYNCHRONISIERT
 
@@ -43,12 +43,18 @@ Zu jedem synchronisierten Stand liegt dort `MANIFEST.md`.
 - PPA-006 Editorial Plan Compiler: 0.28.16 ist als Datei belegbar, historische spätere 0.28.17 ist aber keine CURRENT-Autorität; deshalb keine CURRENT.zip.
 - PPA-008 Universal Product Comparison 0.8.0-prototype: hashgebundene aktuelle ZIP ist Fachautorität, Datei aktuell nicht in Library/GitHub erreichbar.
 - PPA-009 Universal Product Knowledge: 0.5.0 ist als reale 0.8-Abhängigkeit belegt, exakte aktuelle Installer-ZIP + Hash noch nicht CURRENT-gebunden.
+- PPA-011 Pferderassen Manager 0.2.7: fertige ZIP + Hash + lokale Positiv-/Negativtests sind gebunden, aber vorgeschriebener WordPress-LIVE-/Backfill-/Overlap-Test fehlt. Deshalb keine isolierte CURRENT.zip.
 
 PPA-010 allgemeines Kategoriemodell 1.8.0 wird hier erst gespiegelt, wenn eine aktive Pferde-Projektanwendung frisch belegt ist.
 
 ## NEXT ACTION
 
-Nur die vier BLOCKED-Einträge aus ihren autoritativen Fach-/Releasequellen vervollständigen. Kein neuer Pluginstand und keine Rekonstruktion aus Historie.
+Für PPA-011 ausschließlich auf das Fachbüro zurückgehen:
+`../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/`
+
+Dort den gebundenen WordPress-LIVE-Test vollständig durchführen. Nur bei LIVE-PASS darf der exakt hashgebundene 0.2.7-Stand anschließend als `/Campus-Plugins/PFERDE_ATELIER/PPA-011/CURRENT.zip` + `MANIFEST.md` synchronisiert und readback-geprüft werden.
+
+Die übrigen BLOCKED-Einträge bleiben danach unverändert aus ihren autoritativen Quellen zu vervollständigen.
 
 ## RÜCKGABEWEG
 
