@@ -29,11 +29,13 @@ liegt und aus der persistenten Ablage erneut gelesen, als ZIP geprüft und per S
 - HERKUNFT: EIGENENTWICKLUNG / PFERDE-PROJEKTLINIE
 - KLASSE: PFERDE-SPEZIFISCH; allgemeiner Designkern separat MOD-003
 - FACHBÜRO: `../DESIGN/`
-- AUTORITATIVE QUELLE: Branch `fix/category-intro-targeted-79-v150472-20260831` + dortige Design-Baseline/Live-Belege
-- AKTUELL BELEGTER LIVE-STAND: 1.50.472 / Contract V104
-- FINALER INSTALLERNAME: `PFERDE_ATELIER_DESIGN_V1.50.472_CONTRACT_V104_KATEGORIETEXTE_79_NUR_FAILS_FINAL_INSTALLIEREN.zip`
-- INSTALLER SHA-256: `ae59699c2de750e5ebda14096109e60ddfdac55f32e9ffe848305e4dc2e035b9`
-- ARTEFAKT_SYNC: BLOCKED – Installername/Hash sind belegt, die Binärdatei ist aktuell nicht direkt erreichbar
+- AUTORITATIVE CURRENT-/FEHLERQUELLE: `../DESIGN/CURRENT_STATE.md` + `../DESIGN/FEHLERQUELLEN.md`
+- LETZTER IM CAMPUS AUTORITATIV BELEGTER LIVE-PASS: 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002
+- 1.50.529: REALER LIVE-FAIL laut Nutzer; Pferderassen + Glossar nicht mehr auffindbar/zerschossen
+- 1.50.530: NUR FIXKANDIDAT; keine Abnahme, kein LIVE-PASS, kein CURRENT
+- AKTUELL INSTALLIERTE WORDPRESS-VERSION: UNGEKLÄRT – vor jeder weiteren Reparatur frisch bestimmen
+- UPDATEVORGANG: `PU-20260915-002`
+- ARTEFAKT_SYNC: **BLOCKED** – kein Kandidat aus diesem Fehlerzug darf CURRENT ersetzen, bis Positiv-/Negativ-/Kombinationsprüfung + LIVE-Readback PASS sind
 
 ## PPA-003 – Bildzentrale
 
