@@ -57,6 +57,13 @@ Pflicht. Mindestens ein direkter fachlicher Bezug. Existiert der verwandte Gloss
 ### Passende Hauptseite
 Optional. Genau eine starke vorhandene WordPress-Seite oder Kategorie, wenn sie die fachliche Hauptheimat des Begriffs bildet. Keine beliebige Artikellinkliste.
 
+Verbindliche Zielpriorität für `primary_target`:
+1. passende **obere/starke Affiliate-Portal-Kategorie oder Portal-Hauptseite**;
+2. nur wenn dort keine fachlich passende starke Zielseite existiert, ausnahmsweise passende **Pferde-Journal-Kategorie/-Hauptseite**;
+3. andernfalls kein `primary_target` statt einer schwachen oder künstlichen Verlinkung.
+
+Das Glossar unterstützt damit vorrangig die Affiliate-Portalstruktur; Journal-Ziele sind nur Fallback.
+
 ## RECHERCHESTATUS
 
 - `KANDIDAT`
