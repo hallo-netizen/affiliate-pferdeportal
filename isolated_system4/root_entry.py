@@ -16,7 +16,7 @@ OLD_ENTRY_EXCLUSION='SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_
 CRITICAL_PATHS=(
  'AGENTS.md','AGENTS.override.md','isolated_system4/parent_start.py','isolated_system4/root_entry.py','isolated_system4/codex_entry.py','isolated_system4/full_route_start.py',
  'isolated_system4/controller.py','isolated_system4/controller_core.py','isolated_system4/production_binding.py','isolated_system4/repair_router.py','isolated_system4/authoring_contract.py',
- 'isolated_system4/content_guard.py','isolated_system4/design_guard.py','isolated_system4/production_checks.py',
+ 'isolated_system4/content_guard.py','isolated_system4/design_guard.py','isolated_system4/production_checks.py','isolated_system4/source_bound_lt_policy.py',
  'isolated_system4/batch_gate.py','isolated_system4/batch_repetition_guard.py','isolated_system4/handoff_transport.py','isolated_system4/chat_delivery_gate.py',
  'isolated_system4/LT68Worker.java','isolated_system4/point0_snapshot.py','isolated_system4/supervisor.py',
  'isolated_system4/root_supervisor_bridge.py','isolated_system4/worker_dispatch.py',
