@@ -91,7 +91,13 @@ jobs:
           SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-3
           SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
           SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_3_PROOF.json
-        run: python3 isolated_system4/live_parity_v2.py all
+        run: |
+          set -euo pipefail
+          python3 isolated_system4/live_parity_v2.py all | tee /tmp/system4-three-route.log
+          test "$(grep -c '^SYSTEM4_TESTWORKER_REPAIR_REQUEST:' /tmp/system4-three-route.log)" -eq 1
+          grep -F '"article_index": 1' /tmp/system4-three-route.log
+          grep -F 'BLOCKED_KNOWN_REGRESSION_PATTERN' /tmp/system4-three-route.log
+          echo 'SYSTEM4_THREE_ARTICLE_EXACT_REPAIR_EVENT_PASS'
       - name: Run permanent owner and source negative contracts
         working-directory: isolated_system4
         run: >-
@@ -117,7 +123,8 @@ jobs:
           assert one['inline_byte_equal'] is True and three['inline_byte_equal'] is True
           assert one['lt']==['PASS'] and one['ppm']==['PASS']
           assert three['lt']==['PASS','PASS','PASS'] and three['ppm']==['PASS','PASS','PASS']
-          assert max(three['revisions'])>=2, three['revisions']
+          assert one['revisions']==[1], one['revisions']
+          assert three['revisions']==[1,2,1], three['revisions']
           print('SYSTEM4_FRESH_1_AND_3_ROUTE_PASS_PENDING_WORDPRESS_CHAT')
           PY
       - name: Upload current test route candidate
@@ -127,5 +134,6 @@ jobs:
           path: |
             /tmp/system4-acceptance-output/
             /tmp/system4-wordpress-import-contract.txt
+            /tmp/system4-three-route.log
           if-no-files-found: error
           retention-days: 1
