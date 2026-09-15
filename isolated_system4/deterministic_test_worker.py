@@ -134,7 +134,6 @@ def context(workspace: Path, pack_out: Path, plan_out: Path) -> dict:
         claim = dict(row)
         source = source_by_id[row['source_id']]
         claim['source_url'] = source['source_url']
-        claim['source_title'] = source['source_title']
         claim['claim_status'] = 'FULLY_SUPPORTED'
         claim['article_types'] = [state['article']['article_type']]
         pack_claims.append(claim)
@@ -187,10 +186,10 @@ def _plain_claim(statement: str) -> str:
 
 def _trace(fact_id: str, authority: dict) -> str:
     meta = authority[fact_id]
-    source_title = html.escape(str(meta.get('source_title') or ''), quote=True)
+    trace_source_title = html.escape(str(meta.get('trace_source_title') or meta.get('source_id') or ''), quote=True)
     source_hash = html.escape(str(meta.get('evidence_text_sha256') or ''), quote=True)
     fact = html.escape(fact_id, quote=True)
-    return f'<span class="ppm-source-trace" data-fact-id="{fact}" data-source-title="{source_title}" data-source-hash="{source_hash}"></span>'
+    return f'<span class="ppm-source-trace" data-fact-id="{fact}" data-source-title="{trace_source_title}" data-source-hash="{source_hash}"></span>'
 
 
 def _p(fact_id: str, text: str, authority: dict) -> str:
@@ -293,8 +292,8 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
     claims = {row['fact_id']: row for row in state['production_context']['fact_pack']['claims']}
     if len(ids) < 4:
         raise RuntimeError('TESTWORKER_FACTS_TOO_LOW_FOR_DRAFT')
-    if any(not str(authority[fid].get('source_title') or '').strip() for fid in ids):
-        raise RuntimeError('TESTWORKER_SOURCE_TITLE_AUTHORITY_MISSING')
+    if any(not str(authority[fid].get('trace_source_title') or authority[fid].get('source_id') or '').strip() for fid in ids):
+        raise RuntimeError('TESTWORKER_TRACE_SOURCE_AUTHORITY_MISSING')
 
     intro_name = str((structure.get('intro') or {}).get('required_block') or 'intro')
     direct = html.escape(str(bound.get('faq_direct_answer') or '').strip())
@@ -310,7 +309,9 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         section_id = str(row.get('section_id') or '').strip()
         if section_id and section_id not in required_blocks:
             required_blocks.append(section_id)
-    for name in ('answer', 'details', 'further_information', 'comparison', 'conclusion'):
+    table_cfg = structure.get('table') if isinstance(structure.get('table'), dict) else {}
+    table_block = str(table_cfg.get('required_block') or 'table')
+    for name in ('answer', 'details', 'further_information', table_block, 'conclusion'):
         if name not in required_blocks:
             required_blocks.append(name)
 
@@ -342,7 +343,7 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
     sections[list_block].append('<ul>' + ''.join(list_items) + '</ul>')
     cursor += 4
 
-    min_rows = max(4, int(req.get('min_table_body_rows') or 0))
+    min_rows = max(4, int(table_cfg.get('minimum_body_rows') or req.get('min_table_body_rows') or 0))
     row_labels = ['Ausgangslage', 'Sichtprüfung', 'Funktionsprüfung', 'Abschlusskontrolle', 'Nachkontrolle', 'Freigabeprüfung']
     table_rows = []
     for row_index in range(min_rows):
@@ -363,11 +364,9 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         + '<thead><tr><th>Prüfbereich</th><th>Beobachtung</th><th>Handlung</th></tr></thead>'
         + '<tbody>' + ''.join(table_rows) + '</tbody></table>'
     )
-    sections['comparison'].append(table)
+    sections[table_block].append(table)
     cursor += min_rows * 2 + 1
 
-    # Keep the conclusion safely above the PPM ratio floor with additional unique,
-    # source-bound paragraphs instead of generic padding.
     for _ in range(2):
         fact_id = ids[cursor % len(ids)]
         sections['conclusion'].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
