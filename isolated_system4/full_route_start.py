@@ -2,7 +2,7 @@ from __future__ import annotations
 import copy,hashlib,json,subprocess,sys
 from pathlib import Path
 
-import batch_gate,codex_entry,controller,handoff_transport,point0_snapshot,root_entry
+import batch_gate,controller,handoff_transport,point0_snapshot,root_entry
 
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
@@ -61,13 +61,11 @@ def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], 
         final=point0_snapshot.finalize(prepared,research_provider='BOUND_PARENT_START_SOURCE',sources=sources)
         p0=output_root/f'point0-{index}.json'; p0.write_bytes(point0_snapshot.canon(final)); ws=output_root/f'item-{index}'
         if root_entry.main(['root_entry.py','start-point0',str(p0),str(ws),str(index)])!=0: raise FullRouteError('START_ROOT_FAILED:'+str(index))
-        if codex_entry.main(['codex_entry.py','worker-start',str(ws)])!=0: raise FullRouteError('START_CODEX_WORKER_START_FAILED:'+str(index))
         research=output_root/f'worker-research-{index}.json'; _run_worker(worker_command,'research',ws,research,index)
         if controller.main(['controller.py','research',str(ws),str(research)])!=0: raise FullRouteError('START_RESEARCH_FAILED:'+str(index))
         facts=output_root/f'worker-facts-{index}.json'; _run_worker(worker_command,'facts',ws,facts,index)
         if controller.main(['controller.py','facts',str(ws),str(facts)])!=0: raise FullRouteError('START_FACTS_FAILED:'+str(index))
         _machine_context(ws,output_root,index)
-        if codex_entry.main(['codex_entry.py','next',str(ws)])!=0: raise FullRouteError('START_CODEX_DRAFT_PHASE_FAILED:'+str(index))
         draft=output_root/f'worker-draft-{index}.html'; _run_worker(worker_command,'draft',ws,draft,index)
         if controller.main(['controller.py','draft',str(ws),str(draft)])!=0: raise FullRouteError('START_DRAFT_FAILED:'+str(index))
         rc=controller.main(['controller.py','fullcheck',str(ws)])
