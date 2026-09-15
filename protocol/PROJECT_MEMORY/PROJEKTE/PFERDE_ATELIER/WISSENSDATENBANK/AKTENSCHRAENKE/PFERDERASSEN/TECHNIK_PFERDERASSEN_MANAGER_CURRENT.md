@@ -1,7 +1,7 @@
 # TECHNISCHE HAUPTQUELLE – PFERDERASSEN MANAGER
 
 STAND: 2026-09-15
-STATUS: 0.2.7 / LOKAL HART PASS / WORDPRESS-LIVE PASS
+STATUS: 0.2.7 / LOKAL HART PASS / WORDPRESS-LIVE PASS / ARTEFAKT-SYNC PASS
 
 ## Identität
 
@@ -19,15 +19,20 @@ Die ZIP ist der exakt lokal getestete technische Stand und wurde am 2026-09-15 v
 
 ## Isolierte Plugin-Ablage
 
-Der zuvor als Kandidat abgelegte Stand liegt zusätzlich unter:
-
-`/Campus-Plugins/PFERDE_ATELIER/PPA-011/CANDIDATE_0.2.7.zip`
-
-Nach bestätigtem LIVE PASS ist derselbe hashgebundene Stand als isolierte aktuelle Ausgabekopie unter
+Der exakt hashgebundene LIVE-PASS-Stand ist im zentralen Plugin-Schrank als aktuelle abgeleitete Ausgabekopie synchronisiert:
 
 `/Campus-Plugins/PFERDE_ATELIER/PPA-011/CURRENT.zip`
 
-mit zugehörigem `MANIFEST.md` zu synchronisieren. Diese Kopie bleibt abgeleitet; Fach-/Technikwahrheit bleibt diese Datei.
+Dazu:
+
+`/Campus-Plugins/PFERDE_ATELIER/PPA-011/MANIFEST.md`
+
+Readback der persistenten Kopie:
+- SHA-256 `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`: PASS;
+- ZIP-Lesetest: PASS;
+- Plugin-Version aus `CURRENT.zip`: 0.2.7 PASS.
+
+Die vorherigen `CANDIDATE_*`-Dateien wurden nach erfolgreichem CURRENT-Sync aus dem aktiven Pluginordner entfernt, damit dort keine zweite Statuswahrheit verbleibt.
 
 ## Inhaltshashes der getesteten ZIP
 
@@ -46,4 +51,4 @@ mit zugehörigem `MANIFEST.md` zu synchronisieren. Diese Kopie bleibt abgeleitet
 - WordPress-LIVE-Test: **PASS**, Nutzerbestätigung 2026-09-15;
 - Relations-Neuaufbau bleibt ausschließlich Backend-Aktion;
 - Same-Group/Self/Unknown-Hardlocks bleiben verbindlich;
-- Artefaktsync im PLUGINS-Büro ist nach Live-PASS zulässig.
+- PLUGINS-Artefaktsync: **PASS**.
