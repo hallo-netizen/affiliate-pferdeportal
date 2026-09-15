@@ -1,5 +1,5 @@
 from __future__ import annotations
-import json,sys,tempfile,unittest
+import json,subprocess,sys,tempfile,unittest
 from pathlib import Path
 
 import full_route_start
@@ -18,6 +18,19 @@ class FullRouteStartBoundaryTests(unittest.TestCase):
             with self.assertRaisesRegex(full_route_start.FullRouteError,'START_SOURCE_COUNT_MISMATCH'):
                 full_route_start.run(snap,sources,WORKER,out)
             self.assertFalse(out.exists())
+
+    def test_negative_testworker_before_point0_dispatch_cannot_read_or_generate(self):
+        with tempfile.TemporaryDirectory(prefix='s4-testworker-before-point0-') as td:
+            root=Path(td); workspace=root/'not-armed'; workspace.mkdir(); out=root/'forbidden.json'
+            cp=subprocess.run([*WORKER,'research',str(workspace),str(out),'0'],cwd=HERE.parent,text=True,capture_output=True,check=False)
+            self.assertNotEqual(cp.returncode,0)
+            self.assertIn('FULL_ROUTE_TEST_WORKER_FAIL:DISPATCH_REQUIRED',cp.stdout)
+            self.assertFalse(out.exists())
+
+    def test_executed_test_route_contains_no_codex_entry(self):
+        for name in ('full_route_start.py','full_route_test_worker.py','test_local_end_to_end_chat_handoff.py'):
+            text=(HERE/name).read_text(encoding='utf-8')
+            self.assertNotIn('codex_entry',text,name)
 
     def test_negative_unbound_worker_research_blocks_after_real_worker_start(self):
         with tempfile.TemporaryDirectory(prefix='s4-full-start-neg-research-') as td:
