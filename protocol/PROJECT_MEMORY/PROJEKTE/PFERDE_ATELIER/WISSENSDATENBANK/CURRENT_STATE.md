@@ -1,7 +1,7 @@
 # WISSENSDATENBANK – CURRENT STATE
 
 STAND: 2026-09-15
-STATUS: THEMENPOOL AKTIV / PFERDERASSEN GRUNDRECHERCHE ABGESCHLOSSEN / PFERDERASSEN WORDPRESS-INTEGRATION BLOCKED / GLOSSAR STARTBEFÜLLT
+STATUS: THEMENPOOL AKTIV / PFERDERASSEN GRUNDRECHERCHE ABGESCHLOSSEN / MANAGER 0.2.7 LIVE PASS / PFERDERASSEN ARTIKELINTEGRITÄT BLOCKED / GLOSSAR STARTBEFÜLLT
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
@@ -23,16 +23,21 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 - Altai, American Walking Pony, Andravida und Anglo-Kabarda bleiben bewusste Grenzfälle bis zu starker Primärquelle.
 - Keine neue allgemeine Rassensuche.
 
-## PFERDERASSEN – ARTIKEL / WORDPRESS-INTEGRATION
+## PFERDERASSEN – MANAGER / RELATIONEN
 
-Aktuell **BLOCKED**; Details ausschließlich in `AKTENSCHRAENKE/PFERDERASSEN/FEHLERQUELLEN.md`.
+- `Pferde Atelier – Pferderassen Manager` Version **0.2.7**: lokale Positiv-/Negativ-/Mutationstests PASS.
+- WordPress-LIVE: **PASS**, Nutzerbestätigung 2026-09-15.
+- `Ähnliche Rassen` und `Zur gleichen Rassengruppe` bleiben fachlich getrennt; Same-Group/Self/Unknown-Hardlocks verbindlich.
+- Plugin-Artefakt darf nach dem PLUGINS-Sync-Vertrag als isolierte `CURRENT.zip` synchronisiert werden.
 
-Belastbare Punkte:
+## PFERDERASSEN – ARTIKEL / BESTANDSINTEGRITÄT
+
+Weiterhin **BLOCKED**; Details ausschließlich in `AKTENSCHRAENKE/PFERDERASSEN/FEHLERQUELLEN.md`.
+
+Belastbare offene Punkte:
 - Rekonstruktion aus WordPress-Export + den danach veröffentlichten Batches: 196 veröffentlichte `pa_breed`-Posts, aber 194 eindeutige `_prm_source_id`;
 - doppelte IDs in dieser Rekonstruktion: `breed-pantaneiro`, `breed-posavje-horse`; direkter aktueller WordPress-Readback noch offen;
-- letzter 13er-Artikelbatch ist **nicht Schreibvertrags-PASS**, weil die gewählten sechs Managergruppen durch die jeweiligen WDB-Felder `typ`/`rassegruppen` nicht eindeutig getragen sind;
-- aktueller technischer Manager-Kandidat: **0.2.7**, lokal gegen den 196-Post-Bestand hart positiv/negativ geprüft;
-- WordPress-LIVE-PASS für 0.2.7 ist noch offen.
+- letzter 13er-Artikelbatch ist **nicht Schreibvertrags-PASS**, weil die gewählten sechs Managergruppen durch die jeweiligen WDB-Felder `typ`/`rassegruppen` nicht eindeutig getragen sind.
 
 ## GLOSSAR – FORTSCHRITT
 7 erste Begriffe quellengebunden angelegt: Stockmaß, Widerrist, Ganasche, Röhrbein, Aalstrich, Kötenbehang, Zuchtbuch/Studbook.
