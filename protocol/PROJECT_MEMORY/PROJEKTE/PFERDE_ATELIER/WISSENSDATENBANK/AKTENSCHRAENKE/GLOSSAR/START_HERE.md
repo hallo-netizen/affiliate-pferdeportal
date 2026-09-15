@@ -1,54 +1,64 @@
 # AKTENSCHRANK GLOSSAR
 
 STAND: 2026-09-15
-STATUS: AKTIV / MASSENAUFBAU-VERTRAG
+STATUS: AKTIV / FACHWÖRTERBUCH-MODELL
 
-## 1-KLICK-ÜBERSICHT
+## WAS IST DAS?
 
-**WAS IST DAS?**  
 Die zentrale quellengebundene Fachbegriffs-Datenbasis des Pferde-Ateliers.
 
-**UMFANG**  
-Aufgenommen wird grundsätzlich jeder sinnvoll erklärbare Begriff, der im weitesten fachlichen Sinn mit Pferden, Pferdehaltung, Reiten, Pferdesport, Medizin, Zucht, Ausrüstung, Geschichte, Kultur, Recht, Wirtschaft oder dem Leben mit Pferden zusammenhängt.
+Das öffentliche Glossar ist **kein zweites Pferde-Atelier in klein**, sondern ein Fachwörterbuch.
 
-**EINZIGER FACHLICHER AUSSCHLUSS**  
-Ein neuer Glossarbegriff wird nicht angelegt, wenn sein technisch normalisierter sichtbarer Begriff **identisch mit einem vorhandenen WordPress-Kategorienamen** ist. Keine Singular/Plural-Gleichsetzung, keine Portal-Seiten-Sperre, keine Artikel-/Kannibalisierungssperre, keine Keyword- oder Suchvolumen-Sperre.
+## BEGRIFFSGRENZE
 
-Bestehende Glossarbegriffe und Synonyme werden weiterhin dedupliziert: Ein Begriff = ein Datensatz; Synonyme sind Aliase und keine neuen Datensätze.
+Ein Begriff gehört als eigene Glossarseite hierher, wenn sein Hauptzweck die Erklärung eines Fachworts ist und die wesentliche Nutzerfrage mit einer kompakten Definition/Einordnung beantwortet werden kann.
 
-## RECHERCHE UND TEXT
+Nicht als eigene Glossarseite anlegen, wenn der Begriff selbst bereits ein größeres Themenfeld, eine starke Portal-/Kategorie-/Rassengruppenseite oder einen eigenständigen Ratgebergegenstand bildet. Dann bleibt die Erklärung auf dieser Hauptseite; das Glossar darf später als Wegweiser dorthin verweisen.
 
-Ein dedizierter **Glossar-Worker** übernimmt pro Begriff Recherche **und** Kurztext in demselben Arbeitsschritt. Es gibt keine separate Übergabe Recherche → Texter.
+Beispiel: `Warmblüter` → keine zusätzliche Glossarseite; Erklärung auf der Rassengruppenseite Warmblüter.
 
-Recherche folgt verbindlich `../../RECHERCHE_STANDARD.md`:
-- bevorzugt eine autoritative Primärquelle;
-- wenn keine geeignete Primärquelle existiert, zwei voneinander unabhängige hochwertige Quellen;
-- Medizin, Recht, aktuelle Regeln und andere Hochrisikothemen nur nach den dort strengeren Fachregeln;
-- unzureichend belegte Begriffe bleiben `NACHRECHERCHE` und werden nicht erfunden.
+## PFLICHTBEZIEHUNGEN
 
-Die Maschine besitzt Workflow und Schutzregeln. Der Worker recherchiert und formuliert, darf aber Kandidatenidentität, Kategorien-Ausschluss, Validierung, WordPress-Write oder Readback nicht umgehen.
+Jeder öffentliche Glossarbegriff besitzt:
+- genau eine primäre **Themenwelt** (`uge_group`);
+- mindestens einen **verwandten Begriff**;
+- optional genau eine **passende Hauptseite** (WordPress-Seite oder Kategorie), wenn eine starke thematische Heimat existiert.
 
-## MASSENWEG
+Synonyme sind Aliase und keine zweiten Datensätze.
 
-`Begriffspool → exakter Kategorienamen-Check → Glossar-Worker (Recherche + Text) → Validator → uge-json-v1/Research-Paket → WordPress → Readback`
+## RECHERCHE + TEXT
 
-Der Pool darf in großen Batches wachsen. Dubletten- und Kategorienamenprüfung müssen mengenfähig über Schlüssel/Indizes erfolgen; keine paarweisen Vollvergleiche des gesamten Bestands.
+Ein Glossar-Worker recherchiert und formuliert denselben Begriff in einem Arbeitsschritt. Verbindlich ist `../../RECHERCHE_STANDARD.md`.
 
-## TEXTVERTRAG – KURZ
-
+Kurzvertrag:
 - 150–200 Wörter;
-- individueller Einstieg je Begriff;
-- fachlich erklären und sauber abgrenzen;
-- Hauptbegriff und Pferdekontext natürlich verwenden;
+- individueller Einstieg;
+- Begriff fachlich erklären und sauber abgrenzen;
 - keine Generator-/Schablonenphrasen;
 - kein Keyword-Stuffing;
 - 0 Bodylinks;
 - individuelle SEO-Titel und Meta-Description;
-- Quellen bleiben am Datensatz/Research-Paket gebunden.
+- Quellen bleiben gebunden;
+- unsichere Fakten → `NACHRECHERCHE`, niemals raten.
 
-## STRUKTUR
+## PRODUKTIONSWEG
 
-Ein Begriff = ein Datensatz. Verbindliche Felder und Oberbereiche stehen in `GLOSSAR_STRUKTUR.md`.
+`Begriffspool → Begriffsabgrenzung → Recherche + Text → Campus-Datensatz → PA_GLOSSARY_BATCH_V2 → Glossar-Manager → WordPress-Draft → Readback → Freigabe`
 
-**ALS NÄCHSTES**  
-`GLOSSAR_STRUKTUR.md` → `GLOSSAR_REGISTER.md` → `DATEN/START_HERE.md`.
+Die alte autonome Discovery-/Cron-/Loopback-Automation ist **nicht mehr Produktionsweg**. Technische Wahrheit dazu: `TECHNIK_GLOSSAR_MANAGER_CURRENT.md`.
+
+## AKTUALISIERUNG
+
+Jeder Begriff führt `last_verified_at` und ein Prüfintervall:
+- 6 Monate: Medizin/Gesundheit sowie andere zeit- oder risikosensitive Fachthemen;
+- 12 Monate: normale Fachbegriffe;
+- 24 Monate nur für ausdrücklich stabile historische/terminologische Inhalte.
+
+`Glossar → Prüfbedarf` zeigt fällige Begriffe. Die Prüfungsliste ändert keine Inhalte automatisch; jede Aktualisierung läuft wieder durch Recherche, Validator und Readback.
+
+## ABLAGE
+
+- Strukturvertrag: `GLOSSAR_STRUKTUR.md`
+- Register: `GLOSSAR_REGISTER.md`
+- Datensätze: `DATEN/`
+- Technik/WordPress: `TECHNIK_GLOSSAR_MANAGER_CURRENT.md`
