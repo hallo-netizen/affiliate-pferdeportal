@@ -31,6 +31,29 @@ def _replace_last_literal(body: str, target: str, replacement: str) -> str:
     raise NoCodexRepairError('LT_MATCH_NOT_FOUND_IN_HTML:' + target[:120])
 
 
+def _lt_finding_detail(raw: dict, plain: str) -> str:
+    offset = raw.get('offset')
+    length = raw.get('length')
+    rule = raw.get('rule') if isinstance(raw.get('rule'), dict) else {}
+    context = raw.get('context') if isinstance(raw.get('context'), dict) else {}
+    target = ''
+    if isinstance(offset, int) and isinstance(length, int) and offset >= 0 and length > 0:
+        target = plain[offset:offset + length]
+    detail = {
+        'rule_id': str(rule.get('id') or ''),
+        'category': str((rule.get('category') or {}).get('id') if isinstance(rule.get('category'), dict) else ''),
+        'message': str(raw.get('message') or ''),
+        'short_message': str(raw.get('shortMessage') or ''),
+        'target': target,
+        'context': str(context.get('text') or ''),
+        'context_offset': context.get('offset'),
+        'context_length': context.get('length'),
+        'offset': offset,
+        'length': length,
+    }
+    return json.dumps(detail, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+
+
 def repair_languagetool(repo: Path, workspace: Path) -> str:
     state = _state(workspace)
     body = str(state.get('draft_markdown') or '')
@@ -48,15 +71,15 @@ def repair_languagetool(repo: Path, workspace: Path) -> str:
         offset = raw.get('offset'); length = raw.get('length')
         replacements = raw.get('replacements')
         if not isinstance(offset, int) or not isinstance(length, int) or length <= 0:
-            raise NoCodexRepairError('LT_REPAIR_RANGE_INVALID')
+            raise NoCodexRepairError('LT_REPAIR_RANGE_INVALID:' + _lt_finding_detail(raw, plain))
         if not isinstance(replacements, list) or not replacements:
-            raise NoCodexRepairError('LT_REPAIR_NO_SUGGESTION')
+            raise NoCodexRepairError('LT_REPAIR_NO_SUGGESTION:' + _lt_finding_detail(raw, plain))
         replacement = replacements[0].get('value') if isinstance(replacements[0], dict) else None
         if not isinstance(replacement, str) or not replacement.strip():
-            raise NoCodexRepairError('LT_REPAIR_SUGGESTION_INVALID')
+            raise NoCodexRepairError('LT_REPAIR_SUGGESTION_INVALID:' + _lt_finding_detail(raw, plain))
         target = plain[offset:offset + length]
         if not target:
-            raise NoCodexRepairError('LT_REPAIR_TARGET_EMPTY')
+            raise NoCodexRepairError('LT_REPAIR_TARGET_EMPTY:' + _lt_finding_detail(raw, plain))
         normalized.append((offset, target, replacement))
     repaired = body
     for _, target, replacement in sorted(normalized, key=lambda row: row[0], reverse=True):
