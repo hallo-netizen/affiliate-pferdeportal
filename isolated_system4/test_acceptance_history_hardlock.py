@@ -124,7 +124,7 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
         required_tests = (
             'test_acceptance_history_hardlock.py',
             'test_machine_route_lock_contract.py',
-            'test_point0_v2.py',
+            'test_point0_v2.Point0V2Tests.',
             'test_root_entry.py',
             'test_source_acquisition_owner_contract.py',
             'test_indexed_ingress.py',
@@ -144,6 +144,15 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
         )
         for required in required_tests:
             self.assertIn(required, workflow, required + ' missing from permanent acceptance matrix')
+
+        point0_methods = (
+            'test_source_acquisition_200_401_403',
+            'test_chat_start_required_tamper_and_dataforseo_blocked',
+            'test_point0_and_prewrite_tamper_fail_closed',
+        )
+        for method in point0_methods:
+            exact = 'test_point0_v2.Point0V2Tests.' + method
+            self.assertIn(exact, workflow, exact + ' missing from permanent Point0 matrix')
 
     def test_historical_regression_contract_remains_bound(self):
         protocol = text(HERE / 'PROTOKOLL_TESTSTRECKE_V2_20260914.md')
