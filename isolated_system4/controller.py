@@ -22,6 +22,7 @@ RESEARCH_WORKER = 'RESEARCH_WORKER'
 FACTS_WORKER = 'FACTS_WORKER'
 CONTEXT_WORKER = 'CONTEXT_WORKER'
 PARENT_LAUNCH = 'PARENT_LAUNCH'
+DRAFT_STAGE = 'DRAFT_STAGE'
 RESEARCH_STAGE = 'RESEARCH_STAGE'
 FACTS_STAGE = 'FACTS_STAGE'
 CONTEXT_STAGE = 'CONTEXT_STAGE'
@@ -41,11 +42,11 @@ def _repair_owner(e):
 
 
 def _stage_owner_route(command: str, message: str):
-    """Return only safely reparable same-stage producer errors.
+    """Return only safely reparable producer-stage errors.
 
     Binding/integrity/tamper failures intentionally return None and remain hard blocks.
-    Context routing is deliberately restricted to fact-pack production defects; machine
-    prewrite/PPM/binding errors are not context-worker repairs.
+    Draft routing is limited to defects created in the candidate article itself after
+    valid machine bindings already exist. It must never repair the bindings.
     """
     command = str(command or '').strip().casefold()
     message = str(message or '').strip()
@@ -65,10 +66,23 @@ def _stage_owner_route(command: str, message: str):
         if not message.startswith(prefix):
             return None
         inner = message[len(prefix):]
-        # These originate from content_guard.validate_fact_pack. They are defects in the
-        # context/fact-pack artifact itself, not in machine-bound plan rails or runtime state.
         if inner.startswith(('FACT_PACK_', 'FACT_ID_', 'FACT_SOURCE_', 'FACT_STATEMENT_', 'FACT_EVIDENCE_')):
             return CONTEXT_WORKER, CONTEXT_STAGE
+        return None
+
+    if command == 'draft':
+        prefix = 'ARTICLE_AUTHORING_CONTRACT_FAIL:'
+        if not message.startswith(prefix):
+            return None
+        inner = message[len(prefix):]
+        # These are candidate-realization defects. The bound link registry/plan remains
+        # untouched; only the draft worker may rewrite the current article candidate.
+        if inner.startswith((
+            'PREWRITE_BOUND_LINK_MISSING:',
+            'PREWRITE_EXTERNAL_LINK_FORBIDDEN',
+            'PREWRITE_LINK_COUNT:',
+        )):
+            return DRAFT_WORKER, DRAFT_STAGE
         return None
 
     return None
@@ -146,6 +160,9 @@ def main(argv):
             if cmd == 'context':
                 if len(argv) != 5: raise Fail('BAD_COMMAND')
                 return _stage_owner_call('context', _engine.cmd_context, argv[2], argv[3], argv[4])
+            if cmd == 'draft':
+                if len(argv) != 4: raise Fail('BAD_COMMAND')
+                return _stage_owner_call('draft', _engine.cmd_draft, argv[2], argv[3])
         return _engine.main(argv)
     except (Fail, KeyError, IndexError, ValueError, json.JSONDecodeError) as exc:
         print('SYSTEM4_FAIL:' + str(exc))
