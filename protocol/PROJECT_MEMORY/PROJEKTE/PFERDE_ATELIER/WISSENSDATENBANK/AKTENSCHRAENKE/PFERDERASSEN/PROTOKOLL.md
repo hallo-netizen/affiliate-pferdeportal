@@ -69,3 +69,16 @@ OFFEN:
 - direkter WordPress-Readback und Bereinigung der zwei Doppel-IDs;
 - autoritative Sechs-Gruppen-Zuordnung der 13 letzten Identitäten;
 - WordPress-LIVE-Test des Manager 0.2.7. Kein LIVE-PASS vor diesem Test.
+
+## 2026-09-15 – Plugin-Kandidat dauerhaft im Plugin-Schrank abgelegt
+
+AUSGEFÜHRT:
+- `/Campus-Plugins/PFERDE_ATELIER/PPA-011/` angelegt;
+- geprüfte ZIP als `CANDIDATE_0.2.7.zip` abgelegt;
+- `CANDIDATE_MANIFEST.md` mit Version, SHA-256, technischer Hauptquelle und Prüfgrenze abgelegt;
+- Library-Readback bestätigt beide Dateien am Zielpfad.
+
+WICHTIG:
+- bewusst **keine** `CURRENT.zip` und kein finales `MANIFEST.md` erzeugt;
+- Grund: WordPress-LIVE-Test bleibt offen;
+- Fach-/Technikwahrheit bleibt `TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`, nicht der Plugin-Schrank.
