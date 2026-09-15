@@ -78,16 +78,21 @@ jobs:
           path: /tmp/system4-ppm-prewrite-authorities.txt
           if-no-files-found: error
           retention-days: 1
-
       - name: Run immutable Textmaschine and historical negative matrix — history hardlock
         working-directory: isolated_system4
         run: python3 -m unittest -v test_acceptance_history_hardlock.py
       - name: Textmaschine matrix — machine route lock
         working-directory: isolated_system4
         run: python3 -m unittest -v test_machine_route_lock_contract.py
-      - name: Textmaschine matrix — Point0 V2
+      - name: Point0 — source acquisition 200 401 403
         working-directory: isolated_system4
-        run: python3 -m unittest -v test_point0_v2.py
+        run: python3 -m unittest -v test_point0_v2.Point0V2Tests.test_source_acquisition_200_401_403
+      - name: Point0 — chat start tamper and DataForSEO block
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_point0_v2.Point0V2Tests.test_chat_start_required_tamper_and_dataforseo_blocked
+      - name: Point0 — snapshot and prewrite tamper fail closed
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_point0_v2.Point0V2Tests.test_point0_and_prewrite_tamper_fail_closed
       - name: Textmaschine matrix — Root entry
         working-directory: isolated_system4
         run: python3 -m unittest -v test_root_entry.py
@@ -126,7 +131,6 @@ jobs:
           test_batch_gate.py
           test_universal_batch_gate.py
           test_handoff_transport.py
-
       - name: Build fresh machine inputs for one article
         env:
           PYTHONPATH: isolated_system4
