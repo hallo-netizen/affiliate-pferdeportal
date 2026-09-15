@@ -1,113 +1,39 @@
 # DESIGN – CURRENT STATE
 
-STAND: 2026-09-07
+STAND: 2026-09-15
+STATUS: BLOCKED / LIVE-REGRESSION OFFEN
 
+## AUTORITÄT
+Diese Datei ist die einzige aktuelle Standzusammenfassung des DESIGN-Büros.
 
-## AUTORITÄT DIESER DATEI
+## AKTUELLER BELASTBARER STAND
+Der Nutzer meldet nach der in diesem Chat erzeugten Design-Pluginfolge einen realen LIVE-Ausfall:
+- Pferderassen-Seite nicht mehr auffindbar / zerschossen;
+- Glossar nicht mehr auffindbar.
 
-Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros**.
+Damit ist jede Freigabe der in diesem Chat erzeugten Pferde-Design-Kandidaten bis zur echten Ursachenklärung gesperrt.
 
-- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
-- Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Fehlerquelle
-- Zielvertrag → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
-- Änderungsgrund → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- Historie → `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+Insbesondere gelten **1.50.529** und **1.50.530** NICHT als freigegebener CURRENT- oder LIVE-Stand.
+Die im Chat behaupteten lokalen Kombinations-/Regressionstests werden nicht als belastbarer Abnahmebeleg übernommen, weil dafür in der Abschlussprüfung kein reproduzierbarer autoritativer Testbeleg vorliegt.
 
-Technische/Fachwahrheit bleibt an den in dieser Datei verlinkten Originalquellen.
-Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
+## LETZTER SICHERER BELEG
+Der letzte im Campus autoritativ dokumentierte LIVE-PASS bleibt:
+**Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002**.
 
-## Aktueller LIVE-Stand
+Das ist ein historisch belegter sicherer Referenzstand, nicht die Behauptung, dass er aktuell installiert ist.
+Der aktuell tatsächlich installierte WordPress-Stand ist vor jeder weiteren Reparatur frisch zu ermitteln.
 
-**Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002**
+## OFFENER FEHLER
+Autoritative Fehlerquelle: `FEHLERQUELLEN.md` → `DESIGN-LIVE-20260915-001`.
 
-Basis-Live:
-GitHub Branch:
-`fix/category-intro-targeted-79-v150472-20260831`
+## VERBINDLICHE GRENZE
+Kein weiteres Pferde-Designplugin darf als Abnahme-/Installationspaket ausgegeben oder als CURRENT synchronisiert werden, bevor:
+1. der real installierte Pferde-Designstand und der real installierte allgemeine Designstand bestimmt sind;
+2. der Ausfall lokal gegen genau diese Kombination reproduziert wurde;
+3. Positiv- und Negativtests beide Bereiche abdecken: Pferderassen + Glossar;
+4. die Interaktion beider Designplugins gemeinsam geprüft ist;
+5. erst danach ein minimaler Fix gebaut wird;
+6. LIVE-Readback bestätigt ist.
 
-Commit:
-`f1e074b2e6dae9bec76ee8ab3f177080f69d2d41`
-
-Basis-Live-Beleg:
-`design-baseline/2026-08-31/v150472-category-intro-79/LIVE_PASS.md`
-
-Zusätzlicher aktuell bestätigter Live-Patch:
-**Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.**
-Affiliate-Banner sowie Artikel-/Verweisstruktur bleiben unverändert.
-
-Live-Patch-Beleg:
-`LIVE_PASS_DESIGN_ORDER_SWAP_002.md`
-
-Candidate SHA-256:
-`11b664a10d4ef0ec82f0011436eb92715d9efd14474893fecddcb64e91e6fe0b`
-
-Hinweis:
-Der Pluginheader bleibt bewusst 1.50.472; der aktuelle Livezustand wird deshalb durch Basisversion + Job-ID + Candidate-SHA eindeutig bestimmt.
-
-## Wichtige Abweichung zu main
-
-Aktuelles `main` enthält weiterhin:
-`pferde-template-kit_V1.50.421.php`
-mit Pluginversion 1.50.421.
-
-Daraus folgt:
-**main ist für den aktuellen Pferde-Design-Live-Stand nicht die führende Release-Wahrheit.**
-
-Nicht automatisch mergen oder main verändern.
-
-## Übergebene Masterbasis
-
-Vom Nutzer übergeben und vollständig archiviert:
-- Plugin 1.50.469 / Contract V104;
-- vollständiger Master 1.50.469 / Contract V104.
-
-Diese beiden Dateien sind vollständige historische Basis für die spätere GitHub-Kette 1.50.470→1.50.472.
-
-## Spätere GitHub-Kette
-
-1.50.470:
-gezielte 45 Kategorietextkorrekturen.
-
-1.50.471:
-gezielte Erweiterung auf 70.
-
-1.50.472:
-final 79/79 Audit-Scope.
-
-MASTER_STATUS V1.50.472 sagt:
-- vollständiger Master basiert ausdrücklich auf dem vollständigen 1.50.469/V104-Master;
-- CURRENT_PLUGIN_SOURCE auf 1.50.472 aktualisiert;
-- Installer 1.50.470/.471/.472 ergänzt;
-- 388 Seitentexte + 1052 Leaftexte = 1440;
-- allgemeiner und Pferde-V104-Vertrag byte-identisch zu 1.50.469;
-- keine CSS/JS/Journal/Tabellen/Affiliate/Such/Breadcrumb/Bild/Karten/Publish-Änderung.
-
-## QA V1.50.472
-
-- Source ↔ finaler Installer: 498/498 PASS;
-- 309/309 alte Seitentexte wertidentisch;
-- 1052/1052 Leaftexte wertidentisch;
-- 79/79 neue auditgebundene Seitentexte PASS;
-- Search-Plugin-Quelle byte-identisch PASS;
-- allgemeiner V104-Vertrag byte-identisch PASS;
-- Pferde-V104-Vertrag byte-identisch PASS;
-- Manifest-Readback/ZIP-Integrität PASS;
-- LIVE PASS nach Nutzerbestätigung dokumentiert.
-
-## Aktuelle Designregel
-
-V104 bleibt unverändert.
-
-Zusätzlich LIVE bestätigt: Auf der zentralen Kategorieebene stehen Affiliate-Produkte / Produktvorschläge vor der Beitragsvorschau; der Affiliate-Banner bleibt unverändert an seiner bisherigen Position.
-
-1.50.469→1.50.472 ist ausschließlich Pferde-spezifische redaktionelle Kategorietext-/Loader-Entwicklung.
-
-## Offene Archivlücke
-
-Die exakten V1.50.472 Plugin-/Master-ZIPs liegen derzeit NICHT als vom Nutzer übergebene Rohdateien in der ChatGPT-Library.
-
-Vorhanden:
-- GitHub Status/QA/Live-Pass/Hashes;
-- vollständige Rohbasis 1.50.469.
-
-Daher:
-aktueller Live-Stand bekannt, aber Roharchiv des finalen 1.50.472-Artefakts noch nicht vollständig.
+## NEXT ACTION
+Siehe `HOBBYRAUM.md`.
