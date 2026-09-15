@@ -60,20 +60,11 @@ def _project_checked_text(body: str, ppm_visible: bool) -> str:
     return production_checks._plain_text(body)
 
 
-def _validated_hyphen_replacement(repo: Path, state: dict, body: str, target: str, ppm_visible: bool) -> tuple[str, str]:
-    if not re.fullmatch(r'[A-Za-zÄÖÜäöüß]{8,}', target):
-        raise NoCodexRepairError('LT_NO_SUGGESTION_NOT_COMPOUND:' + target[:120])
-    baseline_text = _project_checked_text(body, ppm_visible)
-    baseline_report, _, _ = production_checks._run_languagetool_text(Path(repo), baseline_text)
-    baseline_matches = baseline_report.get('matches') if isinstance(baseline_report, dict) else None
-    if not isinstance(baseline_matches, list) or not baseline_matches:
-        raise NoCodexRepairError('LT_NO_SUGGESTION_BASELINE_INVALID')
-    baseline_count = len(baseline_matches)
-
-    # Pure orthographic repair only: try a German compound hyphen at every
-    # deterministic internal boundary. The real bound LT 6.8 is the sole
-    # authority: a candidate is usable only if it strictly reduces findings.
+def _compound_candidates(target: str) -> list[str]:
     candidates: list[str] = []
+
+    # First try a single visible hyphen. This is the smallest possible
+    # orthographic change and leaves the factual wording untouched.
     for split in range(len(target) - 3, 2, -1):
         left = target[:split]
         right = target[split:]
@@ -84,7 +75,44 @@ def _validated_hyphen_replacement(repo: Path, state: dict, body: str, target: st
             if candidate not in candidates:
                 candidates.append(candidate)
 
-    for candidate in candidates:
+    # If one hyphen is insufficient, try exactly three visible components.
+    # Candidates are ordered by balanced component lengths, then by later
+    # split points. No vocabulary or article-specific special case exists.
+    triples: list[tuple[tuple[int, int, int], str]] = []
+    n = len(target)
+    for first in range(3, n - 5):
+        for second in range(first + 3, n - 2):
+            parts = [target[:first], target[first:second], target[second:]]
+            if any(len(part) < 3 for part in parts):
+                continue
+            titled = [parts[0]] + [part[0].upper() + part[1:] for part in parts[1:]]
+            plain = parts
+            lengths = [len(part) for part in parts]
+            balance = max(lengths) - min(lengths)
+            distance = sum(abs(length - 7) for length in lengths)
+            order_key = (balance, distance, -(first + second))
+            triples.append((order_key, '-'.join(titled)))
+            triples.append((order_key, '-'.join(plain)))
+    for _, candidate in sorted(triples, key=lambda row: (row[0], row[1])):
+        if candidate not in candidates:
+            candidates.append(candidate)
+    return candidates
+
+
+def _validated_hyphen_replacement(repo: Path, state: dict, body: str, target: str, ppm_visible: bool) -> tuple[str, str]:
+    if not re.fullmatch(r'[A-Za-zÄÖÜäöüß]{8,}', target):
+        raise NoCodexRepairError('LT_NO_SUGGESTION_NOT_COMPOUND:' + target[:120])
+    baseline_text = _project_checked_text(body, ppm_visible)
+    baseline_report, _, _ = production_checks._run_languagetool_text(Path(repo), baseline_text)
+    baseline_matches = baseline_report.get('matches') if isinstance(baseline_report, dict) else None
+    if not isinstance(baseline_matches, list) or not baseline_matches:
+        raise NoCodexRepairError('LT_NO_SUGGESTION_BASELINE_INVALID')
+    baseline_count = len(baseline_matches)
+
+    # Pure orthographic repair only. The real bound LT 6.8 is the sole
+    # authority. A candidate is usable only when the complete article has
+    # strictly fewer LT findings afterwards.
+    for candidate in _compound_candidates(target):
         try:
             candidate_body = _replace_last_literal(body, target, candidate)
         except NoCodexRepairError:
@@ -98,7 +126,7 @@ def _validated_hyphen_replacement(repo: Path, state: dict, body: str, target: st
             continue
         authoring_contract.validate_candidate(candidate_body, state['authoring_contract'])
         return candidate_body, candidate
-    raise NoCodexRepairError('LT_NO_SUGGESTION_NO_LT_VALIDATED_HYPHEN_REPAIR:' + target[:120])
+    raise NoCodexRepairError('LT_NO_SUGGESTION_NO_LT_VALIDATED_COMPOUND_REPAIR:' + target[:120])
 
 
 def _repair_from_exact_lt_text(repo: Path, state: dict, body: str, checked_text: str, prefix: str, ppm_visible: bool) -> str:
