@@ -26,5 +26,46 @@ EINE WAHRHEIT:
 - Rassenfakten nur in diesem Aktenschrank;
 - alte Adresse `PFERDERASSEN/START_HERE.md` bleibt lediglich als Weiterweiser.
 
-AKTUELL:
-Masterliste wird aufgebaut; erste sieben bereits vorrecherchierte Rassen sind im Register vorgemerkt.
+## 2026-09-15 – Artikelserie und WordPress-Manager nachgeprüft
+
+AUSGEFÜHRT:
+- WordPress-Export mit 109 veröffentlichten `pa_breed` gegen die danach veröffentlichten 25er-, 25er-, 24er- und 13er-Batches rekonstruiert;
+- Ergebnis: 196 veröffentlichte Posts / 194 eindeutige `_prm_source_id`;
+- doppelte IDs entdeckt: `breed-pantaneiro`, `breed-posavje-horse`;
+- den letzten 13er-Batch erneut gegen den verbindlichen Schreibvertrag und die aktuellen WDB-Datensätze geprüft;
+- Ergebnis: alle 13 `rassengruppe_slug`-Zuordnungen sind durch `typ`/`rassegruppen` nicht eindeutig als eine der sechs Managergruppen getragen; daher kein Schreibvertrags-PASS;
+- Relationsschnittstelle des Designs bestätigt: `_prm_related_source_ids` wird gegen `_prm_source_id` aufgelöst;
+- Manager-Versionen 0.2.2 bis 0.2.6 gebaut/repariert; reale Fehler 0.2.4/0.2.5 wurden durch Nutzer-Livebefund sichtbar;
+- Abschlussprüfung entdeckte zusätzlich den Duplicate-Collapse-Fehler in 0.2.6;
+- Manager 0.2.7 als neuer lokaler Kandidat gebaut und exakt gegen die fertige ZIP geprüft.
+
+WICHTIGE FEHLERKETTE:
+- 0.2.2: ähnliche Rassen = gleiche Gruppe; fachlich falsch;
+- 0.2.3: vorhandene alte Relationen nicht zuverlässig ersetzt;
+- 0.2.4: rekursiver `get_post_metadata`-Pfad → Frontend-Endlosladen;
+- 0.2.5: Vollbackfill auf `init`/Aktivierung → Frontend-Endlosladen;
+- 0.2.6: Frontendlast entfernt, aber doppelte `_prm_source_id` wurden im Snapshot kollabiert;
+- 0.2.7: jeder reale Post bleibt separat; Doppel-IDs werden gewarnt; Backfill nur Backend; Same-Group/Self-Hardlock aktiv.
+
+HARTE LOKALE PRÜFUNG 0.2.7:
+- reale 196-Post-Rekonstruktion;
+- bei allen 196 absichtlich falsche Same-Group-Relation vorab gesetzt;
+- 196/196 repariert;
+- 2 Doppel-IDs erkannt;
+- 1 `get_posts()`-Snapshot für Gesamtbackfill;
+- 0 Same-Group-Überschneidungen nach Backfill;
+- Aegidienberger-Grenztest: Self/Campolina/Islandpferd/Mangalarga BLOCK, Dales Pony andere Gruppe akzeptiert, unbekannte ID BLOCK;
+- Frontend-Boot und Aktivierung: 0 Relationsqueries;
+- vier Negativ-/Mutationstests: 4/4 ROT;
+- PHP-Lint, ZIP-Lesetest, Version, kompletter Pluginbaum, Source↔ZIP-Bytes: PASS.
+
+BELEGE:
+- `FEHLERQUELLEN.md`
+- `ZIELVERTRAG_RELATIONEN.md`
+- `TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`
+- `TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md`
+
+OFFEN:
+- direkter WordPress-Readback und Bereinigung der zwei Doppel-IDs;
+- autoritative Sechs-Gruppen-Zuordnung der 13 letzten Identitäten;
+- WordPress-LIVE-Test des Manager 0.2.7. Kein LIVE-PASS vor diesem Test.
