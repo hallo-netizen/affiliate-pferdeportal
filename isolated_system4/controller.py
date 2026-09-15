@@ -10,6 +10,9 @@ stage returns. Unknown, binding, integrity and tamper failures remain fail-close
 import json
 from pathlib import Path
 import controller_engine as _engine
+import root_entry
+import root_supervisor_bridge
+import worker_dispatch
 
 # Re-export the existing controller API first so existing callers/tests keep the same surface.
 for _name in dir(_engine):
@@ -26,6 +29,57 @@ DRAFT_STAGE = 'DRAFT_STAGE'
 RESEARCH_STAGE = 'RESEARCH_STAGE'
 FACTS_STAGE = 'FACTS_STAGE'
 CONTEXT_STAGE = 'CONTEXT_STAGE'
+
+_MACHINE_ROUTE_FILES = (
+    'point0.json',
+    'root_receipt.json',
+    'supervisor_state.json',
+    'bound_snapshot.json',
+)
+_POST_INGRESS_COMMANDS = {
+    'research','facts','context','draft','repair','check','fullcheck',
+    'release','prepare-release','finalize-signed','verify',
+}
+
+
+def _machine_route_lock(command: str, workspace: str) -> None:
+    """Fail closed unless the existing Root -> Supervisor route owns this workspace.
+
+    This is deliberately not another workflow. It only prevents callers from bypassing
+    the already existing workflow by invoking controller stages directly.
+    """
+    command = str(command or '').strip()
+    w = Path(workspace)
+    if not w.is_dir():
+        raise Fail('MACHINE_ROUTE_BLOCK:WORKSPACE_MISSING')
+    for name in _MACHINE_ROUTE_FILES:
+        if not (w / name).is_file():
+            raise Fail('MACHINE_ROUTE_BLOCK:' + name.upper().replace('.', '_') + '_MISSING')
+
+    if command == 'ingress':
+        if (w / 'state.json').exists():
+            raise Fail('MACHINE_ROUTE_BLOCK:INGRESS_STATE_ALREADY_EXISTS')
+        try:
+            root_supervisor_bridge.dispatch(w)
+        except Exception as exc:
+            raise Fail('MACHINE_ROUTE_BLOCK:ROOT_SUPERVISOR_BINDING_INVALID:' + str(exc)) from exc
+        return
+
+    if command not in _POST_INGRESS_COMMANDS:
+        raise Fail('MACHINE_ROUTE_BLOCK:COMMAND_NOT_ALLOWED:' + command)
+    if not (w / 'state.json').is_file():
+        raise Fail('MACHINE_ROUTE_BLOCK:STATE_MISSING')
+    bundle_path = w / 'worker_dispatch.json'
+    if not bundle_path.is_file():
+        raise Fail('MACHINE_ROUTE_BLOCK:WORKER_DISPATCH_MISSING')
+    try:
+        bundle = json.loads(bundle_path.read_text(encoding='utf-8'))
+        actual_manifest = root_entry._critical_manifest_sha256()
+        actual_head = root_entry._git('rev-parse', '--verify', 'HEAD')
+        worker_dispatch.verify_bundle(bundle, actual_manifest=actual_manifest, actual_head=actual_head)
+        supervisor.verify_controller_binding(w)
+    except Exception as exc:
+        raise Fail('MACHINE_ROUTE_BLOCK:WORKER_DISPATCH_INVALID:' + str(exc)) from exc
 
 
 def _repair_owner(e):
@@ -149,8 +203,17 @@ _engine.cmd_fullcheck = cmd_fullcheck
 
 def main(argv):
     try:
+        if len(argv) < 2:
+            raise Fail('BAD_COMMAND')
+        cmd = argv[1]
+        if cmd == 'ingress':
+            if len(argv) not in (4,5): raise Fail('BAD_COMMAND')
+            _machine_route_lock(cmd, argv[3])
+        elif cmd in _POST_INGRESS_COMMANDS:
+            if len(argv) < 3: raise Fail('BAD_COMMAND')
+            _machine_route_lock(cmd, argv[2])
+
         if len(argv) >= 2:
-            cmd = argv[1]
             if cmd == 'research':
                 if len(argv) != 4: raise Fail('BAD_COMMAND')
                 return _stage_owner_call('research', _engine.cmd_research, argv[2], argv[3])
