@@ -1,7 +1,7 @@
 # PFERDE-ATELIER – PLUGINS – CURRENT_STATE
 
-STAND: 2026-09-13
-STATUS: BLOCKED / 5 ISOLIERTE CURRENT-ARTEFAKTE REAL SYNCHRONISIERT, 4 AKTIVE EINTRÄGE OFFEN
+STAND: 2026-09-15
+STATUS: BLOCKED / 5 ISOLIERTE CURRENT-ARTEFAKTE REAL SYNCHRONISIERT, 5 AKTIVE EINTRÄGE OFFEN
 
 ## Belastbarer Stand
 
@@ -52,12 +52,15 @@ Nur nach belegter Quelle, Versionsprüfung, SHA-256 und erforderlichen Fach-/Reg
 - PPA-006 Portal SEO Editorial Plan Compiler: belegbare 0.28.16-Datei vorhanden, aber historische spätere 0.28.17 darf ohne frische CURRENT-Autorität nicht als aktuell behauptet werden. 0.28.16 liegt deshalb nur als `REFERENCE_0.28.16.zip`, nicht als `CURRENT.zip`.
 - PPA-008 Universal Product Comparison 0.8.0-prototype: aktuelle hashgebundene ZIP ist Fachautorität; Datei aktuell weder in Library noch im autoritativen Technikbranch erreichbar; älterer Branch ist ausdrücklich unvollständig.
 - PPA-009 Universal Product Knowledge: 0.5.0 ist als reale Abhängigkeit im aktuellen Produktvergleichstest belegt; exakte aktuelle Installer-ZIP + Hash sind aber noch nicht CURRENT-gebunden.
+- PPA-011 Pferde Atelier – Pferderassen Manager: 0.2.7 ist lokal gegen die fertige ZIP hart positiv/negativ geprüft; WordPress-LIVE-/Backfill-/Overlap-Pflichtprüfung fehlt noch. Deshalb ausdrücklich keine `CURRENT.zip` und kein `MANIFEST.md`.
 
 Diese Lücken dürfen nicht durch Rekonstruktion aus alten Mastern oder Chat-Historie kaschiert werden.
 
 ## NEXT ACTION
 
-Nur die vier offenen Einträge aus ihren autoritativen Fach-/Releasequellen vervollständigen.
+PPA-011 erst nach dem Fach-LIVE-Test synchronisieren: normale Einzelrasse lädt, manueller Relations-Neuaufbau beendet sich, Aegidienberger hat keine Überschneidung der beiden Kartenblöcke, zweite Rasse als Gegenprobe.
+
+Die übrigen vier offenen Einträge bleiben unverändert aus ihren autoritativen Fach-/Releasequellen zu vervollständigen.
 
 Erst wenn alle tatsächlich aktiven Pferde-Plugin-Einträge `ARTEFAKT_SYNC: PASS` oder belastbar `NICHT_ERFORDERLICH` sind, darf der Gesamtstatus PASS werden.
 
@@ -66,4 +69,5 @@ Erst wenn alle tatsächlich aktiven Pferde-Plugin-Einträge `ARTEFAKT_SYNC: PASS
 - keine Pluginversion nur wegen eines älteren Masters hoch-/herabstufen;
 - keine Fach-/LIVE-Wahrheit hierher verlagern;
 - keinen allgemeinen Modul-Kern als Pferde-spezifisch umklassifizieren;
+- PPA-011 nicht vor LIVE-PASS als isolierte `CURRENT.zip` synchronisieren;
 - keine Secrets.
