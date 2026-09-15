@@ -40,7 +40,13 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
         run: python3 isolated_system4/real_parent_title_repair_acceptance_v1.py
-      - name: Verify exact V3 proof and final file
+      - name: Run real facts owner same-stage acceptance
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
+        run: python3 isolated_system4/real_facts_owner_acceptance_v1.py
+      - name: Verify exact real proofs and final files
         run: |
           python3 - <<'PY'
           import json
@@ -69,7 +75,19 @@ jobs:
           assert tr['publish_allowed'] is False
           tf=root/'SYSTEM4_PARENT_TITLE_REPAIRED_WORDPRESS.json'
           assert tf.is_file() and tf.stat().st_size>0
-          print('SYSTEM4_REAL_DRAFT_AND_PARENT_TITLE_REPAIR_TO_FILE_PASS')
+
+          q=root/'SYSTEM4_REAL_FACTS_OWNER_ACCEPTANCE_V1.json'
+          qr=json.loads(q.read_text())
+          assert qr['status']=='PASS'
+          assert qr['initial_error']=='FACT_EVIDENCE_NOT_IN_SOURCE:0'
+          assert qr['repair_owner']=='FACTS_WORKER'
+          assert qr['return_route']=='FACTS_STAGE'
+          assert qr['state_frozen_on_return'] is True
+          assert qr['inline_byte_equal'] is True
+          assert qr['publish_allowed'] is False
+          qf=root/'SYSTEM4_FACTS_OWNER_REPAIRED_WORDPRESS.json'
+          assert qf.is_file() and qf.stat().st_size>0
+          print('SYSTEM4_REAL_DRAFT_TITLE_FACTS_OWNER_TO_FILE_PASS')
           PY
       - name: Upload acceptance proof
         uses: actions/upload-artifact@v4
