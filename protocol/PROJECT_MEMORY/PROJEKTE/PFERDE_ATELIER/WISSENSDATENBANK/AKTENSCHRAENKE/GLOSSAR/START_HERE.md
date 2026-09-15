@@ -24,6 +24,14 @@ Jeder öffentliche Glossarbegriff besitzt:
 - mindestens einen **verwandten Begriff**;
 - optional genau eine **passende Hauptseite** (WordPress-Seite oder Kategorie), wenn eine starke thematische Heimat existiert.
 
+### Priorität der passenden Hauptseite
+Das Pferde-Atelier bleibt in erster Linie Affiliateportal. Deshalb gilt für `primary_target` verbindlich:
+1. zuerst eine passende **obere/starke Affiliate-Portal-Kategorie oder Portal-Hauptseite**;
+2. nur wenn dort keine fachlich passende starke Zielseite existiert, ausnahmsweise eine passende **Pferde-Journal-Kategorie/-Hauptseite**;
+3. wenn beides nicht sinnvoll passt: **kein Link**, statt einen schwachen Zielort zu erzwingen.
+
+Keine beliebige Artikellinkliste und keine künstliche Journal-Verlinkung, wenn eine passende Affiliate-Portal-Heimat existiert.
+
 Synonyme sind Aliase und keine zweiten Datensätze.
 
 ## RECHERCHE + TEXT
