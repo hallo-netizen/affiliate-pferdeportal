@@ -35,8 +35,10 @@ class Point0V2Tests(unittest.TestCase):
         p0=fixture(); snap=verified_snapshot(p0); receipt=chat_start_gate.validate(snap); self.assertEqual(receipt['contract'],chat_start_gate.START_RECEIPT_CONTRACT)
         missing=copy.deepcopy(snap); missing.pop('system4_chat_start')
         with self.assertRaisesRegex(chat_start_gate.ChatStartError,'CHAT_START_RECEIPT_REQUIRED'): chat_start_gate.validate(missing)
-        tampered=copy.deepcopy(snap); tampered['system4_chat_start']['batch_sha256']='f'*64
-        with self.assertRaisesRegex(chat_start_gate.ChatStartError,'CHAT_START_RECEIPT_INTEGRITY_FAIL'): chat_start_gate.validate(tampered)
+        binding_tamper=copy.deepcopy(snap); binding_tamper['system4_chat_start']['batch_sha256']='f'*64
+        with self.assertRaisesRegex(chat_start_gate.ChatStartError,'CHAT_START_RECEIPT_BINDING_FAIL:batch_sha256'): chat_start_gate.validate(binding_tamper)
+        integrity_tamper=copy.deepcopy(snap); integrity_tamper['system4_chat_start']['receipt_sha256']='f'*64
+        with self.assertRaisesRegex(chat_start_gate.ChatStartError,'CHAT_START_RECEIPT_INTEGRITY_FAIL'): chat_start_gate.validate(integrity_tamper)
         poisoned=copy.deepcopy(snap); poisoned['research_provider']='DataForSEO'
         with self.assertRaisesRegex(chat_start_gate.ChatStartError,'DATAFORSEO_FORBIDDEN_IN_SYSTEM4A'): chat_start_gate.validate(poisoned)
         with self.assertRaisesRegex(chat_start_gate.ChatStartError,'DATAFORSEO_FORBIDDEN_IN_SYSTEM4A'): chat_start_gate.forbid_dataforseo({'source_url':'https://api.dataforseo.com/v3/test'})
