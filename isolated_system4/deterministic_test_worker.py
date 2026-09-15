@@ -132,7 +132,9 @@ def context(workspace: Path, pack_out: Path, plan_out: Path) -> dict:
     pack_claims = []
     for row in facts_obj['claims']:
         claim = dict(row)
-        claim['source_url'] = source_by_id[row['source_id']]['source_url']
+        source = source_by_id[row['source_id']]
+        claim['source_url'] = source['source_url']
+        claim['source_title'] = source['source_title']
         claim['claim_status'] = 'FULLY_SUPPORTED'
         claim['article_types'] = [state['article']['article_type']]
         pack_claims.append(claim)
@@ -325,17 +327,14 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
             sections[block].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
             cursor += 1
 
-    # Bound links are realised exactly in their immutable bound section, never clustered.
     for row in links:
         section_id = str(row.get('section_id') or '').strip()
         if not section_id:
             raise RuntimeError('TESTWORKER_LINK_SECTION_ID_MISSING')
         sections[section_id].append(_link_paragraph(row))
 
-    # Required list: use a bound block when declared, otherwise details. Every item is
-    # sourced and unique; no visible numeric labels are invented.
     list_blocks = _required_list_blocks(type_req)
-    list_block = next((b for b in list_blocks if b in sections), 'details')
+    list_block = next((block for block in list_blocks if block in sections), 'details')
     list_items = []
     for offset in range(4):
         fact_id = ids[(cursor + offset) % len(ids)]
@@ -343,9 +342,6 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
     sections[list_block].append('<ul>' + ''.join(list_items) + '</ul>')
     cursor += 4
 
-    # The current PPM contract requires one useful three-column table with at least the
-    # global row floor. Use words rather than artificial row numbers to avoid unsupported
-    # numeric claims.
     min_rows = max(4, int(req.get('min_table_body_rows') or 0))
     row_labels = ['Ausgangslage', 'Sichtprüfung', 'Funktionsprüfung', 'Abschlusskontrolle', 'Nachkontrolle', 'Freigabeprüfung']
     table_rows = []
@@ -370,9 +366,13 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
     sections['comparison'].append(table)
     cursor += min_rows * 2 + 1
 
-    # Grow only with fresh, source-bound paragraphs until every global floor is safely
-    # above its threshold. Generated sentences remain unique by cycling both facts and
-    # distinct phrasing positions.
+    # Keep the conclusion safely above the PPM ratio floor with additional unique,
+    # source-bound paragraphs instead of generic padding.
+    for _ in range(2):
+        fact_id = ids[cursor % len(ids)]
+        sections['conclusion'].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
+        cursor += 1
+
     def render() -> str:
         body = ''.join(f'<section data-block="{html.escape(name, quote=True)}">{"".join(sections[name])}</section>' for name in order)
         return '<article class="ppm-generated ppm-type-faq" data-article-type="FAQ">' + body + '</article>'
@@ -398,8 +398,6 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         if extra_index > 80:
             raise RuntimeError('TESTWORKER_GLOBAL_FLOOR_UNREACHABLE')
 
-    # One deliberate content regression in the middle article proves real same-article
-    # repair isolation. Repair regeneration changes only this sentence.
     if not repair and identity['title'].startswith('Warum muss die Beleuchtung'):
         marker = ' Als belastbares Ergebnis muss dieser Prüfschritt dokumentiert bleiben.'
         body = body.replace('</p>', marker + '</p>', 1)
