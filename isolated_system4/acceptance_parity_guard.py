@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import subprocess
 import zipfile
 from pathlib import Path
 from typing import Any, Mapping
@@ -9,6 +11,8 @@ from typing import Any, Mapping
 import production_checks
 
 CONTRACT='SYSTEM4_FRESH_GENERATION_PROOF_V1'
+TEST_RUN_NONCE_ENV='SYSTEM4_TEST_RUN_NONCE'
+FRESH_LEDGER_ENV='SYSTEM4_FRESH_ARTICLE_LEDGER'
 FORBIDDEN_ACCEPTANCE_SOURCE_TOKENS=(
     'full_local_acceptance',
     'build_fixture(',
@@ -17,6 +21,7 @@ FORBIDDEN_ACCEPTANCE_SOURCE_TOKENS=(
     'legacy.build_fixture',
 )
 G9_MEMBER='portal-production-machine/contracts/g9-single-faq-approved-candidate-v1.json'
+ARTICLE_BODY_KEYS=frozenset({'body','content_html','draft_markdown','article_body','final_body','final_html'})
 
 class AcceptanceParityError(RuntimeError):
     pass
@@ -26,6 +31,12 @@ def _canon(value: Any) -> bytes:
 
 def _sha_text(value: str) -> str:
     return hashlib.sha256(value.encode('utf-8')).hexdigest()
+
+def _run_nonce(explicit: str|None=None) -> str:
+    value=(explicit if explicit is not None else os.environ.get(TEST_RUN_NONCE_ENV,'')).strip()
+    if len(value)<12:
+        raise AcceptanceParityError('FRESH_AUTHOR_TEST_RUN_NONCE_REQUIRED')
+    return value
 
 def reject_forbidden_acceptance_source(source_text: str) -> None:
     folded=source_text.casefold()
@@ -55,8 +66,49 @@ def verify_pre_author_state(state: Mapping[str,Any]) -> None:
     if not isinstance(state.get('production_context'),Mapping) or not isinstance(state.get('authoring_contract'),Mapping):
         raise AcceptanceParityError('FRESH_AUTHOR_CONTEXT_REQUIRED')
 
-def _known_prebuilt_article_hashes(repo: Path) -> set[str]:
+def _collect_json_article_bodies(value:Any,out:set[str])->None:
+    if isinstance(value,Mapping):
+        for key,item in value.items():
+            if str(key).casefold() in ARTICLE_BODY_KEYS and isinstance(item,str) and len(item.strip())>=300:
+                out.add(_sha_text(item))
+            _collect_json_article_bodies(item,out)
+    elif isinstance(value,list):
+        for item in value:
+            _collect_json_article_bodies(item,out)
+
+def _tracked_article_hashes(repo:Path)->set[str]:
     hashes:set[str]=set()
+    cp=subprocess.run(['git','ls-files'],cwd=repo,text=True,capture_output=True,check=False)
+    if cp.returncode!=0:
+        raise AcceptanceParityError('FRESH_AUTHOR_TRACKED_HISTORY_UNAVAILABLE')
+    for rel in cp.stdout.splitlines():
+        if not rel or rel.startswith('.git/'):
+            continue
+        path=repo/rel
+        try:
+            if not path.is_file() or path.stat().st_size>4_000_000:
+                continue
+            suffix=path.suffix.casefold()
+            if suffix=='.json':
+                try:
+                    value=json.loads(path.read_text(encoding='utf-8'))
+                except Exception:
+                    continue
+                _collect_json_article_bodies(value,hashes)
+            elif suffix in {'.html','.htm'} and path.stat().st_size>=700:
+                text=path.read_text(encoding='utf-8',errors='ignore').strip()
+                if text:
+                    hashes.add(_sha_text(text))
+            elif suffix=='.md' and ('article' in path.name.casefold() or 'artikel' in path.name.casefold()) and path.stat().st_size>=700:
+                text=path.read_text(encoding='utf-8',errors='ignore').strip()
+                if text:
+                    hashes.add(_sha_text(text))
+        except OSError:
+            continue
+    return hashes
+
+def _known_prebuilt_article_hashes(repo: Path) -> set[str]:
+    hashes=_tracked_article_hashes(Path(repo))
     ppm=Path(repo)/production_checks.PPM_PACKAGE_REL
     if not ppm.is_file() or production_checks.file_sha256(ppm)!=production_checks.PPM_PACKAGE_SHA256:
         raise AcceptanceParityError('FRESH_AUTHOR_PPM_PACKAGE_IDENTITY_INVALID')
@@ -80,19 +132,57 @@ def _known_prebuilt_article_hashes(repo: Path) -> set[str]:
                 hashes.add(_sha_text(text))
     return hashes
 
-def build_fresh_generation_receipt(repo: Path,state: Mapping[str,Any],body: str) -> dict[str,Any]:
+def _ledger_path(explicit:Path|None=None)->Path|None:
+    if explicit is not None:
+        return Path(explicit)
+    raw=os.environ.get(FRESH_LEDGER_ENV,'').strip()
+    return Path(raw) if raw else None
+
+def _claim_fresh_body(body_sha:str,article_fingerprint:str,ledger:Path|None)->None:
+    if ledger is None:
+        return
+    ledger.parent.mkdir(parents=True,exist_ok=True)
+    seen_body:set[str]=set(); seen_article:set[str]=set()
+    if ledger.is_file():
+        for line in ledger.read_text(encoding='utf-8').splitlines():
+            if not line.strip(): continue
+            try: row=json.loads(line)
+            except Exception: raise AcceptanceParityError('FRESH_AUTHOR_LEDGER_INVALID')
+            if isinstance(row,Mapping):
+                seen_body.add(str(row.get('body_sha256') or ''))
+                seen_article.add(str(row.get('article_fingerprint') or ''))
+    if body_sha in seen_body:
+        raise AcceptanceParityError('FRESH_AUTHOR_BODY_ALREADY_USED_IN_THIS_RUN')
+    if article_fingerprint in seen_article:
+        raise AcceptanceParityError('FRESH_AUTHOR_ARTICLE_ALREADY_USED_IN_THIS_RUN')
+    with ledger.open('a',encoding='utf-8') as f:
+        f.write(json.dumps({'body_sha256':body_sha,'article_fingerprint':article_fingerprint},ensure_ascii=False,sort_keys=True)+'\n')
+
+def build_fresh_generation_receipt(repo: Path,state: Mapping[str,Any],body: str,*,run_nonce:str|None=None,ledger_path:Path|None=None) -> dict[str,Any]:
     verify_pre_author_state(state)
+    nonce=_run_nonce(run_nonce)
     if not isinstance(body,str) or not body.strip():
         raise AcceptanceParityError('FRESH_AUTHOR_BODY_REQUIRED')
     body_sha=_sha_text(body)
     if body_sha in _known_prebuilt_article_hashes(Path(repo)):
         raise AcceptanceParityError('FRESH_AUTHOR_BODY_MATCHES_PREBUILT_ARTICLE')
     research=state['research'];facts=state['facts'];contract=state['authoring_contract']
+    identity=state.get('article') if isinstance(state.get('article'),Mapping) else {}
+    article_fingerprint=hashlib.sha256(_canon({
+        'run_nonce_sha256':_sha_text(nonce),
+        'article':identity,
+        'research_sha256':str(research.get('sha256') or ''),
+        'facts_sha256':str(facts.get('sha256') or ''),
+        'body_sha256':body_sha,
+    })).hexdigest()
+    _claim_fresh_body(body_sha,article_fingerprint,_ledger_path(ledger_path))
     receipt={
         'contract':CONTRACT,
         'generator':'NO_CODEX_FRESH_AUTHOR_V1',
         'generated_in_current_run':True,
         'prebuilt_article_input_used':False,
+        'run_nonce_sha256':_sha_text(nonce),
+        'article_fingerprint':article_fingerprint,
         'research_sha256':str(research.get('sha256') or ''),
         'facts_sha256':str(facts.get('sha256') or ''),
         'authoring_contract_sha256':hashlib.sha256(_canon(contract)).hexdigest(),
@@ -101,11 +191,14 @@ def build_fresh_generation_receipt(repo: Path,state: Mapping[str,Any],body: str)
     receipt['receipt_sha256']=hashlib.sha256(_canon(receipt)).hexdigest()
     return receipt
 
-def verify_fresh_generation_receipt(state: Mapping[str,Any],body: str,receipt: Mapping[str,Any]) -> None:
+def verify_fresh_generation_receipt(state: Mapping[str,Any],body: str,receipt: Mapping[str,Any],*,run_nonce:str|None=None) -> None:
+    nonce=_run_nonce(run_nonce)
     if receipt.get('contract')!=CONTRACT or receipt.get('generator')!='NO_CODEX_FRESH_AUTHOR_V1':
         raise AcceptanceParityError('FRESH_AUTHOR_RECEIPT_IDENTITY_INVALID')
     if receipt.get('generated_in_current_run') is not True or receipt.get('prebuilt_article_input_used') is not False:
         raise AcceptanceParityError('FRESH_AUTHOR_RECEIPT_PROVENANCE_INVALID')
+    if receipt.get('run_nonce_sha256')!=_sha_text(nonce):
+        raise AcceptanceParityError('FRESH_AUTHOR_RECEIPT_RUN_MISMATCH')
     if receipt.get('body_sha256')!=_sha_text(body):
         raise AcceptanceParityError('FRESH_AUTHOR_RECEIPT_BODY_MISMATCH')
     expected=dict(receipt); actual=expected.pop('receipt_sha256',None)
