@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-13
+STAND: 2026-09-15
 ROLLE: ZENTRALES INVENTAR-/ARTEFAKTREGISTER, KEINE FACH-/LIVE-WAHRHEIT
 
 ## Statuswerte
@@ -120,6 +120,20 @@ liegt und aus der persistenten Ablage erneut gelesen, als ZIP geprüft und per S
 - INSTALLER SHA-256: `4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845`
 - PFERDE-NUTZUNG: in diesem Erstinventar nicht separat als aktuelle Projektanwendung bewiesen
 - ARTEFAKT_SYNC: NICHT_ERFORDERLICH, solange keine aktive Pferde-Projektanwendung frisch belegt ist; allgemeiner Hauptstand bleibt MOD-001
+
+## PPA-011 – Pferde Atelier – Pferderassen Manager
+
+- HERKUNFT: EIGENENTWICKLUNG
+- KLASSE: PFERDE-ATELIER / WISSENSDATENBANK / PFERDERASSEN
+- FACHBÜRO: `../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/`
+- AUTORITATIVE TECHNISCHE QUELLE: `../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`
+- LETZTER BELEGTER GRUNDSTAND VOR RELATIONSUMBAU: 0.2.1
+- AKTUELLER LOKAL HART GEPRÜFTER KANDIDAT: 0.2.7
+- KANDIDATENARTEFAKT: `PFERDE_ATELIER_PFERDERASSEN_MANAGER_0.2.7_INSTALLIEREN.zip`
+- SHA-256: `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`
+- WORDPRESS-LIVE: OFFEN; keine Aussage aus diesem Register ableiten, welche Version aktuell auf dem Server installiert ist
+- UPDATEVORGANG: `PU-20260915-001`
+- ARTEFAKT_SYNC: BLOCKED – vorgeschriebener WordPress-LIVE-/Backfill-/Overlap-Test fehlt; deshalb keine isolierte `CURRENT.zip` / kein `MANIFEST.md`
 
 ## Harte Regel für neue Einträge
 
