@@ -2,7 +2,7 @@ from __future__ import annotations
 import json,re,sys
 from pathlib import Path
 
-import authoring_contract,supervisor
+import authoring_contract,root_entry,supervisor,worker_dispatch
 from full_route_test_fixture import source_claims_for_article
 from real_route_test_support import valid_real_article
 
@@ -27,6 +27,13 @@ def main(argv):
     if len(argv)!=5:
         print('FULL_ROUTE_TEST_WORKER_FAIL:BAD_ARGS'); return 2
     mode=argv[1]; workspace=Path(argv[2]); out=Path(argv[3]); index=int(argv[4])
+    try:
+        manifest=root_entry._critical_manifest_sha256()
+        head=root_entry._git('rev-parse','--verify','HEAD')
+        wc,_=worker_dispatch.verify_workspace_dispatch(workspace,actual_manifest=manifest,actual_head=head)
+        if wc.get('article_index')!=index: raise worker_dispatch.WorkerDispatchError('DISPATCH_TESTWORKER_INDEX_MISMATCH')
+    except Exception as exc:
+        print('FULL_ROUTE_TEST_WORKER_FAIL:DISPATCH_REQUIRED:'+str(exc)); return 2
     state_path=workspace/'state.json'
     if not state_path.is_file():
         print('FULL_ROUTE_TEST_WORKER_FAIL:STATE_MISSING'); return 2
