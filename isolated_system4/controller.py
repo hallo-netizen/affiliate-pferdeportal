@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-"""System 4 controller with owner-aware repair return routing.
+"""System 4 controller with owner-aware repair and stage-return routing.
 
-The previous controller is retained byte-identically in controller_engine.py.  This
-public module changes only the fullcheck repair-routing seam: DRAFT_WORKER keeps the
-existing same-article repair path; parent/machine owners return RC=4 without mutating
-the bound article or draft. Unknown/missing/conflicting owner data remains fail-closed.
+The previous controller is retained byte-identically in controller_engine.py. This
+public module owns only routing seams: fullcheck repair owners and repairable producer
+stage returns. Unknown, binding, integrity and tamper failures remain fail-closed.
 """
 
+import json
+from pathlib import Path
 import controller_engine as _engine
 
 # Re-export the existing controller API first so existing callers/tests keep the same surface.
@@ -17,14 +18,19 @@ for _name in dir(_engine):
 
 
 DRAFT_WORKER = 'DRAFT_WORKER'
+RESEARCH_WORKER = 'RESEARCH_WORKER'
+FACTS_WORKER = 'FACTS_WORKER'
+CONTEXT_WORKER = 'CONTEXT_WORKER'
 PARENT_LAUNCH = 'PARENT_LAUNCH'
+RESEARCH_STAGE = 'RESEARCH_STAGE'
+FACTS_STAGE = 'FACTS_STAGE'
+CONTEXT_STAGE = 'CONTEXT_STAGE'
 
 
 def _repair_owner(e):
     findings = e.findings if isinstance(getattr(e, 'findings', None), list) else []
     owners = {str(row.get('repair_owner') or '').strip() for row in findings if isinstance(row, dict) and str(row.get('repair_owner') or '').strip()}
     checker = str(getattr(e, 'checker', '') or '')
-    # LT and the explicit external-link checker operate on the current article draft.
     if not owners and checker in {'languagetool', 'no_external_links'}:
         return DRAFT_WORKER
     if not owners:
@@ -32,6 +38,59 @@ def _repair_owner(e):
     if len(owners) != 1:
         raise Fail('REPAIR_OWNER_CONFLICT:'+','.join(sorted(owners)))
     return next(iter(owners))
+
+
+def _stage_owner_route(command: str, message: str):
+    """Return only safely reparable same-stage producer errors.
+
+    Binding/integrity/tamper failures intentionally return None and remain hard blocks.
+    Context routing is deliberately restricted to fact-pack production defects; machine
+    prewrite/PPM/binding errors are not context-worker repairs.
+    """
+    command = str(command or '').strip().casefold()
+    message = str(message or '').strip()
+
+    if command == 'research':
+        if message.startswith('RESEARCH_EVIDENCE_FAIL:'):
+            return RESEARCH_WORKER, RESEARCH_STAGE
+        return None
+
+    if command == 'facts':
+        if message.startswith('FACTS_EVIDENCE_FAIL:'):
+            return FACTS_WORKER, FACTS_STAGE
+        return None
+
+    if command == 'context':
+        prefix = 'PRODUCTION_CONTEXT_FAIL:'
+        if not message.startswith(prefix):
+            return None
+        inner = message[len(prefix):]
+        # These originate from content_guard.validate_fact_pack. They are defects in the
+        # context/fact-pack artifact itself, not in machine-bound plan rails or runtime state.
+        if inner.startswith(('FACT_PACK_', 'FACT_ID_', 'FACT_SOURCE_', 'FACT_STATEMENT_', 'FACT_EVIDENCE_')):
+            return CONTEXT_WORKER, CONTEXT_STAGE
+        return None
+
+    return None
+
+
+def _stage_owner_call(command: str, fn, workspace: str, *args: str) -> int:
+    state_path = Path(workspace) / 'state.json'
+    before = state_path.read_bytes() if state_path.is_file() else None
+    try:
+        fn(workspace, *args)
+        return 0
+    except _engine.Fail as exc:
+        message = str(exc)
+        routed = _stage_owner_route(command, message)
+        if routed is None:
+            raise
+        after = state_path.read_bytes() if state_path.is_file() else None
+        if before is None or after != before:
+            raise Fail('STAGE_OWNER_RETURN_STATE_MUTATED:' + command) from exc
+        owner, route = routed
+        print('SYSTEM4_STAGE_OWNER_RETURN:' + owner + ':' + route + ':' + message)
+        return 4
 
 
 def cmd_fullcheck(workspace):
@@ -60,8 +119,6 @@ def cmd_fullcheck(workspace):
         if owner==DRAFT_WORKER:
             s['phase']='REPAIR_REQUIRED'; save(s,p)
             print('SYSTEM4_FULL_CHECK_FAIL:'+error+':REPAIR_OWNER=DRAFT_WORKER:REPAIR_REQUIRED'); return 3
-        # Parent/machine return is not PASS and not a draft repair. Keep CHECK_REQUIRED so
-        # the exact same bound draft remains frozen until the owning upstream stage repairs.
         s['checks']['return_required']=True
         s['checks']['return_route']=PARENT_LAUNCH
         s['phase']='CHECK_REQUIRED'; save(s,p)
@@ -73,12 +130,26 @@ def cmd_fullcheck(workspace):
     print('SYSTEM4_FULL_CHECK_PASS:OUTPUT_GATE_REQUIRED'); return 0
 
 
-# The preserved engine's main resolves cmd_fullcheck from its own module globals.
 _engine.cmd_fullcheck = cmd_fullcheck
 
 
 def main(argv):
-    return _engine.main(argv)
+    try:
+        if len(argv) >= 2:
+            cmd = argv[1]
+            if cmd == 'research':
+                if len(argv) != 4: raise Fail('BAD_COMMAND')
+                return _stage_owner_call('research', _engine.cmd_research, argv[2], argv[3])
+            if cmd == 'facts':
+                if len(argv) != 4: raise Fail('BAD_COMMAND')
+                return _stage_owner_call('facts', _engine.cmd_facts, argv[2], argv[3])
+            if cmd == 'context':
+                if len(argv) != 5: raise Fail('BAD_COMMAND')
+                return _stage_owner_call('context', _engine.cmd_context, argv[2], argv[3], argv[4])
+        return _engine.main(argv)
+    except (Fail, KeyError, IndexError, ValueError, json.JSONDecodeError) as exc:
+        print('SYSTEM4_FAIL:' + str(exc))
+        return 2
 
 
 if __name__=='__main__':
