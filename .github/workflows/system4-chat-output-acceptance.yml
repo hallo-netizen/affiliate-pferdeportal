@@ -29,36 +29,58 @@ jobs:
           set -o pipefail
           python -m unittest discover -s isolated_system4 -p 'test_*.py' -v 2>&1 | tee /tmp/system4-unit-negative.log
 
-      - name: Inspect exact PPM 6.7.9 internal tests before full binding
+      - name: Full exact PPM 6.7.9 internal positive-negative suite
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import hashlib, shutil, zipfile
+          import hashlib, shutil, subprocess, zipfile
           package=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
           expected='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
           actual=hashlib.sha256(package.read_bytes()).hexdigest()
           if actual!=expected: raise SystemExit('PPM679_PACKAGE_HASH_MISMATCH')
-          root=Path('/tmp/system4-ppm679-audit'); shutil.rmtree(root,ignore_errors=True); root.mkdir()
+          root=Path('/tmp/system4-ppm679-full-suite'); shutil.rmtree(root,ignore_errors=True); root.mkdir()
           with zipfile.ZipFile(package) as zf: zf.extractall(root)
           ppm=root/'portal-production-machine'
           if not ppm.is_dir(): raise SystemExit('PPM679_ROOT_MISSING')
-          selected=[
-            'tests/test-mainblock1-hard-rule-coverage.php',
-            'tests/test-wave2-content-structure-language-gate.php',
-            'tests/test-positive-pipeline.php',
-            'tests/three-type-live-test-release/test-01-release-positive.php',
-          ]
-          danger=('http://','https://','curl_','wp_remote_','shell_exec','passthru','system(','exec(','wp_insert_post','mysqli','PDO(')
-          for rel in selected:
-              p=ppm/rel
-              if not p.is_file(): raise SystemExit('PPM679_SELECTED_TEST_MISSING:'+rel)
-              text=p.read_text(encoding='utf-8')
-              print('PPM679_SELECTED_TEST_BEGIN='+rel)
-              for i,line in enumerate(text.splitlines()[:180],1): print(f'{i:04d}:{line}')
-              hits=[f'{i}:{line.strip()}' for i,line in enumerate(text.splitlines(),1) if any(token in line for token in danger)]
-              print('PPM679_DANGER_HITS='+(' || '.join(hits) if hits else 'NONE'))
-              print('PPM679_SELECTED_TEST_END='+rel)
+          tests=sorted(p for p in (ppm/'tests').rglob('test-*.php') if p.is_file())
+          if len(tests)<100: raise SystemExit('PPM679_INTERNAL_TEST_SET_INCOMPLETE:'+str(len(tests)))
+          required={
+              'tests/test-mainblock1-hard-rule-coverage.php',
+              'tests/test-mainblock1-link-targets.php',
+              'tests/test-mainblock1-table-hard-rules.php',
+              'tests/test-historical-regressions.php',
+              'tests/test-positive-pipeline.php',
+              'tests/test-runtime-safety.php',
+              'tests/test-wave1-known-error-mutations.php',
+              'tests/test-wave2-content-mutations.php',
+              'tests/test-wave2-content-structure-language-gate.php',
+              'tests/test-wave2-wordpress-binding.php',
+          }
+          rels={p.relative_to(ppm).as_posix() for p in tests}
+          missing=sorted(required-rels)
+          if missing: raise SystemExit('PPM679_REQUIRED_INTERNAL_TEST_MISSING:'+missing[0])
+          failures=[]
+          for i,test in enumerate(tests,1):
+              rel=test.relative_to(ppm).as_posix()
+              try:
+                  cp=subprocess.run(['php',str(test)],cwd=ppm,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120,check=False)
+              except subprocess.TimeoutExpired:
+                  print(f'PPM679_INTERNAL_TEST_BLOCK:{i}/{len(tests)}:{rel}:TIMEOUT')
+                  failures.append((rel,'TIMEOUT',''))
+                  continue
+              if cp.returncode!=0:
+                  print(f'PPM679_INTERNAL_TEST_BLOCK:{i}/{len(tests)}:{rel}:RC={cp.returncode}')
+                  failures.append((rel,cp.stdout,cp.stderr))
+              else:
+                  print(f'PPM679_INTERNAL_TEST_PASS:{i}/{len(tests)}:{rel}')
+          if failures:
+              rel,out,err=failures[0]
+              print('PPM679_FIRST_FAILURE='+rel)
+              print('PPM679_FIRST_FAILURE_STDOUT='+str(out)[-4000:])
+              print('PPM679_FIRST_FAILURE_STDERR='+str(err)[-4000:])
+              raise SystemExit('PPM679_INTERNAL_SUITE_FAILED:'+str(len(failures)))
+          print('PPM679_FULL_INTERNAL_SUITE_PASS:COUNT='+str(len(tests)))
           PY
 
       - name: Explicit stage-aware repair regression suite
