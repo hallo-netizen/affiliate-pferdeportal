@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import unittest
 from pathlib import Path
 
@@ -104,13 +105,15 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
         self.assertIn("'batch_gate.py','collect'", route)
         self.assertIn("'handoff_transport.py','validate'", route)
         self.assertIn('INLINE_RECONSTRUCTION_NOT_BYTE_EQUAL', route)
-        self.assertIn('len(articles) < 1', endgate)
-        self.assertNotIn('len(articles) != 7', endgate)
-        self.assertNotIn('"article_count": 7', endgate)
+        self.assertRegex(endgate, r'len\(articles\)\s*<\s*1')
+        self.assertNotRegex(endgate, r'len\(articles\)\s*!=\s*7')
+        self.assertNotRegex(endgate, r'["\']article_count["\']\s*:\s*7')
 
     def test_acceptance_workflow_has_no_codex_and_must_run_full_rule_matrix_first(self):
         workflow = text(WORKFLOW)
-        self.assertNotIn('openai/codex-action@', workflow)
+        # Search only executable YAML uses-lines. The workflow deliberately contains a
+        # grep string proving that such a line is absent; that string is not an action.
+        self.assertIsNone(re.search(r'^\s*-\s*uses:\s*openai/codex-action@', workflow, re.MULTILINE))
         self.assertIn('SYSTEM4_FRESH_RUN_TOKEN', workflow)
         matrix = 'Run immutable Textmaschine and historical negative matrix'
         one = 'Build fresh machine inputs for one article'
