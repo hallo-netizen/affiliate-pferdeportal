@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import tempfile
 import unittest
@@ -11,7 +12,7 @@ import repair_router
 
 
 def state_for(finding:dict)->dict:
-    return {'phase':'REPAIR_REQUIRED','checks':{'status':'FAIL','findings':[finding]},'last_error':str(finding.get('error_code') or 'FAIL')}
+    return {'phase':'REPAIR_REQUIRED','checks':{'status':'FAIL','findings':[finding]},'last_error':str(finding.get('error_code') or 'FAIL'),'machine_repair_cycle':0,'article':{'title':'Testartikel','target_keyword':'Test'}}
 
 
 class StageAwareRepairRouterTests(unittest.TestCase):
@@ -28,6 +29,48 @@ class StageAwareRepairRouterTests(unittest.TestCase):
             with self.subTest(finding=finding):
                 route=repair_router.classify(state_for(finding))
                 self.assertEqual((route['owner'],route['target']),expected)
+
+    def test_every_repairable_owner_emits_nonterminal_verified_continuation(self):
+        cases=[
+            ({'error_code':'CATEGORY_INVALID','field':'content.category'},'PARENT_METADATA','CATEGORY_BINDING','RETURN_TO_OWNER'),
+            ({'error_code':'PLAN_SLOT_INVALID','field':'plan_slot'},'PARENT_METADATA','PLAN_SLOT_BINDING','RETURN_TO_OWNER'),
+            ({'error_code':'LINK_BINDING_INVALID','field':'links[0].href'},'CONTEXT_BINDING','LINK_BINDING','RETURN_TO_OWNER'),
+            ({'error_code':'FACT_NOT_SUPPORTED','field':'fact_pack.claims'},'RESEARCH_BINDING','RESEARCH_OR_FACT_BINDING','RETURN_TO_OWNER'),
+            ({'error_code':'LANGUAGETOOL_FINDING','field':'content.body'},'DRAFT_BODY','SAME_ARTICLE_BODY','SAME_ARTICLE_BODY_REPAIR'),
+            ({'error_code':'NEW_FUTURE_CHECKER_FINDING'},'DRAFT_BODY','SAME_ARTICLE_BODY','SAME_ARTICLE_BODY_REPAIR'),
+        ]
+        for finding,owner,target,status in cases:
+            with self.subTest(owner=owner,target=target), tempfile.TemporaryDirectory() as td:
+                workspace=Path(td)/'item-0'; workspace.mkdir()
+                (workspace/'state.json').write_text(json.dumps(state_for(finding)),encoding='utf-8')
+                result=repair_router.route(workspace)
+                verified=repair_router.verify_continuation_result(workspace,result)
+                self.assertEqual(verified['contract'],repair_router.RETURN_CONTRACT)
+                self.assertEqual(verified['status'],status)
+                self.assertEqual(verified['owner'],owner)
+                self.assertEqual(verified['target'],target)
+                self.assertTrue(verified['repairable'])
+                self.assertFalse(verified['terminal'])
+                self.assertTrue(verified['continuation_required'])
+                self.assertEqual(verified['cycle'],1)
+                request=json.loads((workspace/'machine_repair_request.json').read_text(encoding='utf-8'))
+                self.assertEqual(request,verified)
+
+    def test_tampered_or_missing_continuation_contract_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            workspace=Path(td)/'item-0'; workspace.mkdir()
+            finding={'error_code':'FACT_NOT_SUPPORTED','field':'fact_pack.claims'}
+            (workspace/'state.json').write_text(json.dumps(state_for(finding)),encoding='utf-8')
+            result=repair_router.route(workspace)
+            bad=copy.deepcopy(result); bad['terminal']=True
+            with self.assertRaisesRegex(repair_router.RepairRouteError,'MUST_BE_NONTERMINAL'):
+                repair_router.verify_continuation_result(workspace,bad)
+            bad=copy.deepcopy(result); bad['finding']['field']='tampered'
+            with self.assertRaisesRegex(repair_router.RepairRouteError,'FINDING_HASH_INVALID'):
+                repair_router.verify_continuation_result(workspace,bad)
+            bad=copy.deepcopy(result); bad.pop('contract')
+            with self.assertRaisesRegex(repair_router.RepairRouteError,'CONTRACT_INVALID'):
+                repair_router.verify_continuation_result(workspace,bad)
 
     def test_unknown_repairable_finding_defaults_to_same_article_body_not_terminal(self):
         route=repair_router.classify(state_for({'error_code':'NEW_FUTURE_CHECKER_FINDING'}))
@@ -54,34 +97,15 @@ class StageAwareRepairRouterTests(unittest.TestCase):
                 result=repair_router.route(workspace)
             self.assertEqual(result['status'],'RESTARTED')
             self.assertEqual(result['owner'],'PARENT_METADATA')
+            self.assertFalse(result['terminal'])
+            self.assertTrue(result['continuation_required'])
+            repair_router.verify_continuation_result(workspace,result)
             self.assertNotIn(':',result['to_article']['title'])
             self.assertTrue(Path(result['workspace']).name.startswith('item-0-repair-1'))
             new_point=json.loads(Path(result['point0']).read_text(encoding='utf-8'))
             new_raw=point0_snapshot.verify(new_point)
             new_prod=json.loads(new_raw.decode('utf-8'))
             self.assertNotIn(':',new_prod['next_textmachine_metadata_batch']['items'][0]['title'])
-
-    def test_metadata_without_deterministic_adapter_is_returned_to_owner_not_hard_blocked(self):
-        with tempfile.TemporaryDirectory() as td:
-            workspace=Path(td)/'item-0'; workspace.mkdir()
-            finding={'error_code':'CATEGORY_INVALID','field':'content.category'}
-            (workspace/'state.json').write_text(json.dumps(state_for(finding)),encoding='utf-8')
-            result=repair_router.route(workspace)
-            self.assertEqual(result['status'],'RETURN_TO_OWNER')
-            self.assertEqual(result['owner'],'PARENT_METADATA')
-            self.assertEqual(result['target'],'CATEGORY_BINDING')
-            self.assertTrue((workspace/'machine_repair_request.json').is_file())
-
-    def test_context_and_research_findings_are_returned_to_their_owner_not_terminal(self):
-        for finding,owner in [
-            ({'error_code':'LINK_BINDING_INVALID','field':'links[0].href'},'CONTEXT_BINDING'),
-            ({'error_code':'FACT_NOT_SUPPORTED','field':'fact_pack.claims'},'RESEARCH_BINDING'),
-        ]:
-            with self.subTest(owner=owner), tempfile.TemporaryDirectory() as td:
-                workspace=Path(td)/'item-0'; workspace.mkdir(); (workspace/'state.json').write_text(json.dumps(state_for(finding)),encoding='utf-8')
-                result=repair_router.route(workspace)
-                self.assertEqual(result['status'],'RETURN_TO_OWNER')
-                self.assertEqual(result['owner'],owner)
 
     def test_wrong_phase_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:
