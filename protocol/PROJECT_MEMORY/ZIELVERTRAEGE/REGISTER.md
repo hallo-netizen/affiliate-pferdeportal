@@ -248,3 +248,30 @@ Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Den dynamischen F
 
 NACHFOLGER:
 keiner belegt.
+
+
+## ZV-DESIGN-20260915-001 – Pferde Design Pagination/Glossar/Linkhover Reparatur
+
+TITEL:
+PFERDE ATELIER DESIGN – FUNKTIONIERENDE ROUTEN + PAGINATION 16 + GLOSSAR-ZIEL + LINKHOVER
+
+GELTUNGSBEREICH:
+PFERDE_ATELIER / DESIGN + MOD-003-INTERAKTION
+
+STATUS:
+AKTIV
+
+FASSUNG:
+1.0 / 2026-09-15
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/DESIGN/ZIELVERTRAG_DESIGN_20260915.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/DESIGN/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen; insbesondere exakte installierte Plugin-Kombination, Positiv-/Negativ-/Kombinationsprüfung und realer WordPress-Readback.
+
+NACHFOLGER:
+keiner belegt.
