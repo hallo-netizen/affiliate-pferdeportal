@@ -6,6 +6,7 @@ from pathlib import Path
 from unittest import mock
 
 import production_checks
+import production_checks_engine
 
 
 def current_language_evidence(body: str) -> dict:
@@ -61,7 +62,7 @@ class RuntimeDraftRebindTests(unittest.TestCase):
         body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
         plan = plan_for(body)
         original = copy.deepcopy(plan)
-        with mock.patch.object(production_checks, "_fresh_ppm_language_evidence") as fresh:
+        with mock.patch.object(production_checks_engine, "_fresh_ppm_language_evidence") as fresh:
             rebound, source = production_checks._runtime_rebound_plan(Path("."), body, plan)
         fresh.assert_not_called()
         self.assertEqual(source, "BOUND_CURRENT_REUSED")
@@ -74,7 +75,7 @@ class RuntimeDraftRebindTests(unittest.TestCase):
         plan = plan_for(old_body)
         original = copy.deepcopy(plan)
         fresh_evidence = current_language_evidence(new_body)
-        with mock.patch.object(production_checks, "_fresh_ppm_language_evidence", return_value=(fresh_evidence, "REAL_LT68_CURRENT_DRAFT_REFRESHED")) as fresh:
+        with mock.patch.object(production_checks_engine, "_fresh_ppm_language_evidence", return_value=(fresh_evidence, "REAL_LT68_CURRENT_DRAFT_REFRESHED")) as fresh:
             rebound, source = production_checks._runtime_rebound_plan(Path("."), new_body, plan)
         fresh.assert_called_once()
         self.assertEqual(source, "REAL_LT68_CURRENT_DRAFT_REFRESHED")
@@ -89,7 +90,6 @@ class RuntimeDraftRebindTests(unittest.TestCase):
         )
         self.assertEqual(rebound["quality_binding_hash"], production_checks.stable_hash(rebound["quality_binding"]))
 
-
     def test_same_exact_lt_checked_text_is_reused_for_ppm_without_second_lt(self):
         body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
         checked = production_checks._plain_text(body).rstrip("\n")
@@ -99,7 +99,7 @@ class RuntimeDraftRebindTests(unittest.TestCase):
             "status": "PASS", "engine": production_checks.LT_ENGINE, "finding_count": 0,
             "_checked_text": checked, "_raw_report_json": raw, "_return_code": 0,
         }
-        with mock.patch.object(production_checks, "_run_languagetool_text") as second:
+        with mock.patch.object(production_checks_engine, "_run_languagetool_text") as second:
             evidence, source = production_checks._fresh_ppm_language_evidence(Path("."), body, lt_pass)
         second.assert_not_called()
         self.assertEqual(source, "REAL_LT68_FULLCHECK_REUSED")
@@ -110,7 +110,7 @@ class RuntimeDraftRebindTests(unittest.TestCase):
     def test_different_lt_checked_text_must_run_second_real_check(self):
         body = "<article><p>Sauberer Text.</p><h2>Prüfung</h2><p>Weiterer Text.</p></article>"
         lt_pass = {"_checked_text": "NICHT IDENTISCH", "_raw_report_json": '{"matches":[]}', "_return_code": 0}
-        with mock.patch.object(production_checks, "_run_languagetool_text", return_value=({"matches": []}, '{"matches":[]}', 0)) as second:
+        with mock.patch.object(production_checks_engine, "_run_languagetool_text", return_value=({"matches": []}, '{"matches":[]}', 0)) as second:
             evidence, source = production_checks._fresh_ppm_language_evidence(Path("."), body, lt_pass)
         second.assert_called_once()
         self.assertEqual(source, "REAL_LT68_CURRENT_DRAFT_REFRESHED")
