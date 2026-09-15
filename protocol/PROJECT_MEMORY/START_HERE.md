@@ -36,6 +36,19 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 
 Der Nutzer muss keine Dateipfade oder Fachbegriffe auswendig kennen.
 
+## Wichtiger Wegweiser – allgemeingültige Plugins / Bausteine
+
+Allgemeingültige, projektübergreifende Bausteine liegen hier:
+`protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/`
+
+Das allgemeingültige Design-Plugin / die Portal-Design-Engine liegt hier:
+`protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/`
+
+Pferde-Atelier-spezifische Plugin-Ausgabekopien liegen zusätzlich im Projekt unter:
+`protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/`
+
+Wichtig: Bei allgemeingültigen Plugins bleibt die Hauptquelle unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; die Projektkopie ist nur die isolierte Ausgabekopie.
+
 ## Aktueller technischer Hinweis
 
 Der Campus-Prototyp liegt noch NICHT auf `main`.
