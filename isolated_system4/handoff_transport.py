@@ -6,14 +6,18 @@ import batch_repetition_guard
 import content_guard
 import design_guard
 
-HANDOFF_CONTRACT='SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2'
+# This is the actual generic contract accepted by PSERC 0.28.23.
+# The chat inline V2 envelope is transport only and must never become the
+# WordPress payload contract.
+HANDOFF_CONTRACT='SYSTEM4_WORDPRESS_HANDOFF_V1'
 INLINE_CONTRACT='SYSTEM4_PARENT_CHAT_INLINE_V2'
-HANDOFF_FILENAME='SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json'
+HANDOFF_FILENAME='SYSTEM4_WORDPRESS_HANDOFF_V1.json'
 INLINE_FILENAME='SYSTEM4_PARENT_CHAT_INLINE_V2.txt'
 INLINE_BEGIN='SYSTEM4_PARENT_CHAT_INLINE_V2_BEGIN'
 INLINE_END='SYSTEM4_PARENT_CHAT_INLINE_V2_END'
 INLINE_PART_MAX_B64_CHARS=48000
 DIRECT_IMPORT_PLUGIN_VERSION='0.28.23'
+DIRECT_IMPORT_PLUGIN_SHA256='22a8459b64db488852841d894d887ec51e531a0872ee5f33afdd64e43a8a8c7f'
 SHA_RE=re.compile(r'^[0-9a-f]{64}$')
 
 class HandoffError(RuntimeError):
@@ -46,6 +50,8 @@ def validate_handoff(payload: dict) -> dict:
     _require(wr['plugin_name']=='Portal SEO Editorial Plan Compiler','HANDOFF_WORDPRESS_PLUGIN_INVALID')
     _require(wr['plugin_version_verified_against']==DIRECT_IMPORT_PLUGIN_VERSION,'HANDOFF_WORDPRESS_PLUGIN_VERSION_INVALID')
     _require(wr['ppm_version_verified_against']=='6.7.9','HANDOFF_WORDPRESS_PPM_VERSION_INVALID')
+    # This is only an input declaration required by the real importer schema.
+    # It is NOT accepted as evidence that WordPress import succeeded.
     _require(wr['direct_wordpress_upload_ready'] is True,'HANDOFF_WORDPRESS_DIRECT_UPLOAD_REQUIRED')
     _require(wr['direct_upload_block_reason'] is None,'HANDOFF_WORDPRESS_BLOCK_REASON_MUST_BE_EMPTY')
     _require(wr['required_downstream_components']==[],'HANDOFF_WORDPRESS_DOWNSTREAM_MUST_BE_EMPTY')
