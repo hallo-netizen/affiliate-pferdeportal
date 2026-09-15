@@ -5,6 +5,9 @@ import chat_start_gate, point0_snapshot, root_entry, source_acquisition
 
 class MachinePoint0Error(RuntimeError): pass
 
+SOURCE_ACQUISITION_MACHINE='SOURCE_ACQUISITION_MACHINE'
+SOURCE_ACQUISITION_STAGE='SOURCE_ACQUISITION_STAGE'
+
 def _head(repo:Path)->str:
     return subprocess.check_output(['git','rev-parse','--verify','HEAD'],cwd=repo,text=True).strip()
 
@@ -15,6 +18,21 @@ def bind_chat_start(snapshot:dict,event:dict)->dict:
 def validate_chat_start(snapshot:dict)->dict:
     try: return chat_start_gate.validate(snapshot)
     except Exception as exc: raise MachinePoint0Error(str(exc)) from exc
+
+def _source_owner_route(message:str):
+    message=str(message or '').strip()
+    # These failures belong to the source-loading/acquisition stage itself. They may be
+    # retried/reacquired, but Point-0 must not be created from the failed acquisition.
+    if message.startswith((
+        'SOURCE_HTTP_FAIL:',
+        'SOURCE_FETCH_RUNTIME_FAIL:',
+        'SOURCE_EVIDENCE_EMPTY:',
+        'SOURCE_TITLE_MISSING:',
+        'SOURCE_TOO_LARGE:',
+    )):
+        return SOURCE_ACQUISITION_MACHINE,SOURCE_ACQUISITION_STAGE
+    # Malformed/unbound requests and unknown failures are not softened into a retry.
+    return None
 
 def build_from_acquired(*, snapshot_bytes:bytes, acquired_batch:dict, prewrite_plan_batch:dict, provider:str, manifest:str, head:str)->dict:
     prod=point0_snapshot._validate_prod(snapshot_bytes); validate_chat_start(prod)
@@ -47,9 +65,17 @@ def main(argv:list[str])->int:
         repo=Path(__file__).resolve().parent.parent; manifest=root_entry._critical_manifest_sha256(); head=_head(repo); raw=snapshot.read_bytes()
         source_value=json.loads(sources.read_text(encoding='utf-8'))
         if argv[1]=='build-fetch':
-            try: chat_start_gate.forbid_dataforseo(source_value)
-            except Exception as exc: raise MachinePoint0Error(str(exc)) from exc
-            source_value=source_acquisition.acquire_batch(source_value)
+            try:
+                chat_start_gate.forbid_dataforseo(source_value)
+                source_value=source_acquisition.acquire_batch(source_value)
+            except source_acquisition.SourceAcquisitionError as exc:
+                routed=_source_owner_route(str(exc))
+                if routed is None:
+                    raise
+                owner,route=routed
+                if out.exists():
+                    raise MachinePoint0Error('SOURCE_OWNER_RETURN_POINT0_ALREADY_EXISTS') from exc
+                print('SYSTEM4_SOURCE_OWNER_RETURN:'+owner+':'+route+':'+str(exc)); return 4
         plan_value=json.loads(plans.read_text(encoding='utf-8'))
         value=build_from_acquired(snapshot_bytes=raw,acquired_batch=source_value,prewrite_plan_batch=plan_value,provider=provider,manifest=manifest,head=head)
         out.write_bytes(point0_snapshot.canon(value)); print('SYSTEM4_MACHINE_POINT0_PASS:'+value['point0_core_sha256']); return 0
