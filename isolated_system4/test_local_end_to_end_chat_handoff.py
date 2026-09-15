@@ -4,7 +4,8 @@ import copy
 import hashlib
 import json
 import os
-import re
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,20 +13,19 @@ from pathlib import Path
 import acceptance_parity_guard
 import batch_gate
 import chat_delivery_gate
-import codex_entry
 import controller
 import full_route_start
 import handoff_transport
 import no_codex_test_repair
 import parent_start
 import repair_router
-import supervisor
-from real_route_test_support import valid_real_article
 
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
-BOUND_REL='isolated_system4/bound_launches/real_article_pferdeanhaenger_beladen_20260914.json'
-BOUND_SHA256='d081ee92694fd9f5dfed9b74f8bf05966250f20b53768b92a10fa78915aa5a01'
+BOUND_REL='isolated_system4/bound_launches/fresh_flugmaske_lichtempfindliche_augen_20260915.json'
+BOUND_SHA256='fe84ba315f73253dff3fc06fe2ed8e90380f209ec775dd241664cf32605de076'
+EXPECTED_KEYWORD='Fliegenmaske für Pferde mit lichtempfindlichen Augen'
+TESTWORKER=[sys.executable,str(HERE/'full_route_test_worker.py')]
 
 def canon(value):
     return (json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf-8')
@@ -33,24 +33,12 @@ def canon(value):
 def write_json(path:Path,value):
     path.write_bytes(canon(value)); return path
 
-def _evidence_claims(research:dict)->list[dict]:
-    claims=[]
-    for index,source in enumerate(research['sources']):
-        evidence=str(source['evidence']).strip()
-        match=re.match(r'^(.{20,}?[.!?])(?:\s|$)',evidence,re.S)
-        excerpt=(match.group(1) if match else evidence[:180]).strip()
-        if len(excerpt)<20:
-            continue
-        claims.append({
-            'fact_id':f'bound-chat-fact-{index+1}',
-            'source_id':source['source_id'],
-            'statement':excerpt,
-            'evidence_text':excerpt,
-            'evidence_text_sha256':hashlib.sha256(excerpt.encode('utf-8')).hexdigest(),
-        })
-    if len(claims)<2:
-        raise AssertionError('CHAT_TEST_NEEDS_AT_LEAST_TWO_BOUND_CLAIMS')
-    return claims
+def _run_testworker(mode:str,workspace:Path,out:Path,index:int=0)->None:
+    cp=subprocess.run([*TESTWORKER,mode,str(workspace),str(out),str(index)],cwd=REPO,text=True,capture_output=True,check=False)
+    if cp.returncode!=0:
+        raise AssertionError('CHAT_START_TESTWORKER_'+mode.upper()+'_FAILED:'+cp.stdout.strip()+cp.stderr.strip())
+    if not out.is_file():
+        raise AssertionError('CHAT_START_TESTWORKER_'+mode.upper()+'_OUTPUT_MISSING')
 
 def _fullcheck_until_pass_without_codex(workspace:Path,runtime:Path)->dict:
     for cycle in range(repair_router.MAX_MACHINE_REPAIR_CYCLES+1):
@@ -87,31 +75,29 @@ def _run_parent_bound_without_codex(runtime:Path)->Path:
     if receipt['article_count']!=1 or receipt['publish_allowed'] is not False:
         raise AssertionError('CHAT_START_PARENT_RECEIPT_INVALID')
     workspace=Path(receipt['workspaces'][0])
+    state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+    if state['article']['target_keyword']!=EXPECTED_KEYWORD:
+        raise AssertionError('CHAT_START_NOT_FRESH_TOPIC')
 
-    # Product worker-dispatch gate only. No model or network author is invoked in this acceptance test.
-    if codex_entry.main(['codex_entry.py','worker-start',str(workspace)])!=0:
-        raise AssertionError('CHAT_START_WORKER_GATE_FAILED')
-
-    research=supervisor.expected_research_document(workspace)
-    research_path=write_json(runtime/'deterministic-research.json',research)
+    research_path=runtime/'testworker-research.json'
+    _run_testworker('research',workspace,research_path)
     if controller.main(['controller.py','research',str(workspace),str(research_path)])!=0:
         raise AssertionError('CHAT_START_RESEARCH_FAILED')
 
-    facts={'contract':'SYSTEM4_FACTS_EVIDENCE_V1','claims':_evidence_claims(research)}
-    facts_path=write_json(runtime/'deterministic-facts.json',facts)
+    facts_path=runtime/'testworker-facts.json'
+    _run_testworker('facts',workspace,facts_path)
     if controller.main(['controller.py','facts',str(workspace),str(facts_path)])!=0:
         raise AssertionError('CHAT_START_FACTS_FAILED')
 
     full_route_start._machine_context(workspace,runtime,0)
-    if codex_entry.main(['codex_entry.py','next',str(workspace)])!=0:
-        raise AssertionError('CHAT_START_DRAFT_GATE_FAILED')
     pre_author_state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
     acceptance_parity_guard.verify_pre_author_state(pre_author_state)
-    draft=valid_real_article(pre_author_state,0)
+
+    draft_path=runtime/'testworker-fresh-generated-draft.html'
+    _run_testworker('draft',workspace,draft_path)
+    draft=draft_path.read_text(encoding='utf-8')
     generation_receipt=acceptance_parity_guard.build_fresh_generation_receipt(REPO,pre_author_state,draft)
     write_json(runtime/'fresh-generation-receipt.json',generation_receipt)
-    draft_path=runtime/'fresh-generated-draft.html'
-    draft_path.write_text(draft,encoding='utf-8')
     if controller.main(['controller.py','draft',str(workspace),str(draft_path)])!=0:
         raise AssertionError('CHAT_START_DRAFT_FAILED')
     after_draft=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
@@ -160,6 +146,7 @@ class LocalEndToEndChatHandoffRealTests(unittest.TestCase):
             self.assertEqual(payload['contract'],'SYSTEM4_WORDPRESS_HANDOFF_V1')
             self.assertFalse(payload['publish_allowed'])
             self.assertEqual(len(payload['articles']),1)
+            self.assertEqual(payload['articles'][0]['target_keyword'],EXPECTED_KEYWORD)
             wr=payload['wordpress_review']
             self.assertEqual(wr['file_format'],'JSON')
             self.assertEqual(wr['mime_type'],'application/json')
@@ -179,12 +166,10 @@ class LocalEndToEndChatHandoffRealTests(unittest.TestCase):
             self.assertEqual(row['ppm679']['status'],'PASS')
             self.assertEqual(row['ppm679']['content_sha256'],row['final_draft_sha256'])
 
-            # NEGATIVE: production authorization may never arrive as true.
             bad=copy.deepcopy(payload); bad['publish_allowed']=True
             with self.assertRaisesRegex(handoff_transport.HandoffError,'HANDOFF_PUBLISH_MUST_BE_FALSE'):
                 handoff_transport.read_validate_handoff(_write_mutation(Path(td),bad,'bad-publish.json'))
 
-            # NEGATIVE: WordPress import contract/version must be exact.
             bad=copy.deepcopy(payload); bad['wordpress_review']['plugin_version_verified_against']='0.28.22'
             with self.assertRaisesRegex(handoff_transport.HandoffError,'HANDOFF_WORDPRESS_PLUGIN_VERSION_INVALID'):
                 handoff_transport.read_validate_handoff(_write_mutation(Path(td),bad,'bad-plugin-version.json'))
@@ -192,7 +177,6 @@ class LocalEndToEndChatHandoffRealTests(unittest.TestCase):
             with self.assertRaisesRegex(handoff_transport.HandoffError,'HANDOFF_WORDPRESS_REVIEW_SCHEMA_INVALID'):
                 handoff_transport.read_validate_handoff(_write_mutation(Path(td),bad,'bad-wp-schema.json'))
 
-            # NEGATIVE: article identity and exact bytes are mandatory.
             bad=copy.deepcopy(payload); bad['articles'][0]['title']=''
             with self.assertRaisesRegex(handoff_transport.HandoffError,'HANDOFF_ARTICLE_FIELD_INVALID:0:title'):
                 handoff_transport.read_validate_handoff(_write_mutation(Path(td),bad,'bad-title.json'))
@@ -206,7 +190,6 @@ class LocalEndToEndChatHandoffRealTests(unittest.TestCase):
             self.assertEqual(staged['overall_acceptance_status'],'PENDING_CHAT_ATTACHMENT')
             self.assertEqual(staged['chat_surface_requirement'],'MUST_BE_ATTACHED_IN_REQUESTING_CHAT_BEFORE_OVERALL_PASS')
 
-            # NEGATIVE: an internal PASS/file path is insufficient if the actual artifact is absent or changed.
             with self.assertRaisesRegex(chat_delivery_gate.ChatDeliveryError,'CHAT_ARTIFACT_MISSING'):
                 chat_delivery_gate.verify(output_dir/'does-not-exist.json',receipt)
             original=artifact.read_bytes()
