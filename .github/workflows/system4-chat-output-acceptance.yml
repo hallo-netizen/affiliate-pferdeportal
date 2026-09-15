@@ -13,6 +13,9 @@ jobs:
   chat-output-acceptance:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      SYSTEM4_TEST_RUN_NONCE: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
+      SYSTEM4_FRESH_ARTICLE_LEDGER: ${{ runner.temp }}/system4-fresh-article-ledger.jsonl
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,7 +37,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          import hashlib, shutil, subprocess, zipfile
+          import hashlib, json, shutil, subprocess, zipfile
           package=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
           expected='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
           actual=hashlib.sha256(package.read_bytes()).hexdigest()
@@ -44,6 +47,26 @@ jobs:
           with zipfile.ZipFile(package) as zf: zf.extractall(seed)
           seed_ppm=seed/'portal-production-machine'
           if not seed_ppm.is_dir(): raise SystemExit('PPM679_ROOT_MISSING')
+          registry_path=seed_ppm/'contracts/hard-rule-registry-v1.json'
+          matrix_path=seed_ppm/'contracts/hard-rule-coverage-matrix-v1.json'
+          if not registry_path.is_file() or not matrix_path.is_file(): raise SystemExit('PPM679_HARD_RULE_AUTHORITY_MISSING')
+          registry=json.loads(registry_path.read_text(encoding='utf-8'))
+          matrix=json.loads(matrix_path.read_text(encoding='utf-8'))
+          rules=registry.get('rules') if isinstance(registry,dict) else None
+          rows=matrix.get('rows') if isinstance(matrix,dict) else None
+          if not isinstance(rules,list) or not rules: raise SystemExit('PPM679_HARD_RULE_REGISTRY_INVALID')
+          if not isinstance(rows,list) or not rows: raise SystemExit('PPM679_HARD_RULE_MATRIX_INVALID')
+          print('PPM679_RULE_REGISTRY_COUNT='+str(len(rules)))
+          print('PPM679_RULE_MATRIX_COUNT='+str(len(rows)))
+          print('PPM679_RULE_REGISTRY_KEYS='+','.join(sorted(str(k) for k in rules[0].keys())))
+          print('PPM679_RULE_MATRIX_KEYS='+','.join(sorted(str(k) for k in rows[0].keys())))
+          print('PPM679_RULE_REGISTRY_SAMPLE='+json.dumps(rules[0],ensure_ascii=False,sort_keys=True))
+          print('PPM679_RULE_MATRIX_SAMPLE='+json.dumps(rows[0],ensure_ascii=False,sort_keys=True))
+          bad_states=[]
+          for i,row in enumerate(rows):
+              state=str(row.get('current_state') or '').upper() if isinstance(row,dict) else ''
+              if state in {'','UNKNOWN','UNMAPPED','UNTESTED'}: bad_states.append(i)
+          if bad_states: raise SystemExit('PPM679_HARD_RULE_MATRIX_UNTESTED:'+','.join(map(str,bad_states[:20])))
           tests=sorted(p.relative_to(seed_ppm).as_posix() for p in (seed_ppm/'tests').rglob('test-*.php') if p.is_file())
           if len(tests)<100: raise SystemExit('PPM679_INTERNAL_TEST_SET_INCOMPLETE:'+str(len(tests)))
           required={
