@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 45
     env:
       SYSTEM4_TEST_RUN_NONCE: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
-      SYSTEM4_FRESH_ARTICLE_LEDGER: ${{ runner.temp }}/system4-fresh-article-ledger.jsonl
+      SYSTEM4_FRESH_ARTICLE_LEDGER: /tmp/system4-fresh-article-ledger-${{ github.run_id }}-${{ github.run_attempt }}.jsonl
     steps:
       - uses: actions/checkout@v4
         with:
