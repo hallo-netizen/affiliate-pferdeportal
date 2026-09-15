@@ -1,196 +1,481 @@
 from __future__ import annotations
-import copy, hashlib, json, threading, zipfile
+
+import copy
+import hashlib
+import json
+import threading
+import zipfile
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 import sys
 
-import chat_start_gate, production_checks, source_acquisition
+import chat_start_gate
+import production_checks
+import source_acquisition
 
-HERE=Path(__file__).resolve().parent
-REPO=HERE.parent
-PPM=REPO/production_checks.PPM_PACKAGE_REL
-TARGET_CATEGORY='checklisten-fuer-pferdeanhaenger-faq'
-FORBIDDEN_TEMPLATE_TOKENS=('candidate','approved-candidate','golden-candidate','fixture')
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parent
+PPM = REPO / production_checks.PPM_PACKAGE_REL
+TARGET_CATEGORY = 'checklisten-fuer-pferdeanhaenger-faq'
+CATEGORY_SOURCE = 'portal-production-machine/contracts/complete-portal-category-source-v1.json'
+CATEGORY_HIERARCHY = 'portal-production-machine/contracts/category-hierarchy-snapshot-v1.json'
+LINK_SOURCE = 'portal-production-machine/contracts/wordpress-link-target-snapshot-v1.json'
+TYPE_SOURCE = 'portal-production-machine/contracts/article-type-templates.json'
+STRUCTURE_SOURCE = 'portal-production-machine/contracts/content-structure-language-gate-v2.json'
 
-SCENARIOS=[
- {
-  'title':'Warum sollte der Reifendruck am Pferdeanhänger vor der Fahrt geprüft werden?',
-  'keyword':'Reifendruck am Pferdeanhänger',
-  'slug':'reifendruck-pferdeanhaenger',
-  'intent_terms':['Reifendruck','Reifen','Pferdeanhänger','Fahrt','Kontrolle'],
-  'direct_answer':'Der Reifendruck am Pferdeanhänger sollte vor der Fahrt kontrolliert werden, weil nur passend befüllte und unbeschädigte Reifen ihre Aufgabe zuverlässig erfüllen. Maßgeblich sind die Vorgaben für Reifen und Anhänger; zusätzlich gehört eine Sichtkontrolle der Reifen und Ventile vor dem Losfahren dazu.',
-  'table_value':'Die Tabelle ordnet die einzelnen Reifenkontrollen nach Prüfpunkt, erkennbarem Zustand und sinnvoller Handlung vor der Fahrt.',
-  'sources':[
-   ('Reifendruck und Belastung','Der vorgeschriebene Reifendruck bestimmt, wie sich die Aufstandsfläche eines Anhängerreifens unter Last verhält und wie gleichmäßig die Karkasse arbeitet. Ein deutlich zu niedriger Druck vergrößert die Verformung des Reifens, erhöht seine Erwärmung und verändert das Fahrverhalten. Für die Kontrolle zählt deshalb der zum montierten Reifen und Anhänger passende Sollwert des Herstellers, nicht ein pauschaler Wert aus Erinnerung. Gemessen wird möglichst am kalten Reifen, damit Erwärmung während der Fahrt das Ergebnis nicht verfälscht und beide Seiten unter vergleichbaren Bedingungen beurteilt werden können. Ein Druckvergleich zwischen linker und rechter Anhängerseite kann auffällige Unterschiede sichtbar machen, die anschließend anhand der Herstellervorgaben eingeordnet werden. Nach einer Druckkorrektur wird der Ventilbereich nochmals betrachtet, damit ein schief sitzendes oder erkennbar beschädigtes Ventil nicht übersehen wird. Bei längeren Standzeiten wird der aktuelle Reifendruck vor der nächsten Fahrt neu gemessen, weil ein früherer Messwert keine Aussage über den heutigen Zustand liefert. Die dokumentierte Sollvorgabe bleibt während der Prüfung griffbereit, sodass Abweichungen nicht aus dem Gedächtnis geschätzt, sondern direkt mit dem vorgesehenen Wert verglichen werden.'),
-   ('Sichtkontrolle der Anhängerreifen','Eine Reifenprüfung am Pferdeanhänger umfasst mehr als das Ablesen eines Druckmessers, weil sichtbare Schäden unabhängig vom Luftdruck auftreten können. An Lauffläche und Seitenwand werden Schnitte, Beulen, Fremdkörper und auffällige Risse gesucht, während zugleich Profil und gleichmäßiger Abrieb betrachtet werden. Ventile und Ventilkappen werden auf festen Sitz und erkennbare Beschädigungen geprüft, damit ein schleichender Druckverlust nicht unbemerkt bleibt. Zeigt ein Reifen eine ungewöhnliche Form oder einen klaren Schaden, wird die Ursache vor der Abfahrt geklärt und der betroffene Reifen nicht einfach durch Nachfüllen als unauffällig bewertet. Unterschiedlicher Abrieb auf Innen- und Außenseite liefert einen eigenen Sichtbefund und wird deshalb getrennt von der reinen Druckmessung betrachtet. Ein eingedrungener Fremdkörper wird nicht vorschnell entfernt, wenn dadurch ein bestehender Luftverlust verstärkt werden könnte, sondern zunächst als konkrete Auffälligkeit bewertet. Auch das Reserverad gehört zur vorbereitenden Kontrolle, sofern es für den Anhänger vorgesehen ist und im Bedarfsfall tatsächlich genutzt werden soll. Nach Abschluss der Runde werden alle Reifenpositionen noch einmal gedanklich abgeglichen, damit keine Seite des Anhängers aus dem Kontrollablauf herausfällt.')
-  ]
- },
- {
-  'title':'Warum muss die Beleuchtung am Pferdeanhänger vor der Fahrt kontrolliert werden?',
-  'keyword':'Beleuchtung am Pferdeanhänger',
-  'slug':'beleuchtung-pferdeanhaenger',
-  'intent_terms':['Beleuchtung','Pferdeanhänger','Rücklicht','Blinker','Kontrolle'],
-  'direct_answer':'Die Beleuchtung am Pferdeanhänger sollte vor jeder Fahrt geprüft werden, damit Bremslicht, Rücklicht, Blinker und Kennzeichenbeleuchtung zuverlässig funktionieren. Die Kontrolle zeigt außerdem früh, ob Stecker, Kabel oder Leuchten auffällig sind und vor dem Losfahren überprüft werden müssen.',
-  'table_value':'Die Tabelle verbindet jede wichtige Leuchtenfunktion mit einer einfachen Sichtprüfung und der passenden Reaktion bei einer festgestellten Auffälligkeit.',
-  'sources':[
-   ('Funktionen der Anhängerbeleuchtung','Bremsleuchten machen eine Verzögerung des Zugfahrzeugs für nachfolgenden Verkehr sichtbar und müssen deshalb beim Betätigen der Bremse eindeutig aufleuchten. Fahrtrichtungsanzeiger zeigen den geplanten Richtungswechsel rechts oder links an und werden getrennt geprüft, damit ein einseitiger Ausfall erkannt wird. Rückleuchten kennzeichnen den Anhänger bei Dunkelheit dauerhaft nach hinten, während die Kennzeichenbeleuchtung das amtliche Kennzeichen erkennbar hält. Eine gemeinsame Funktionskontrolle umfasst daher verschiedene Schaltzustände und nicht nur den kurzen Blick auf eine einzelne Lampe. Warnblinklicht lässt sich als zusätzlicher gemeinsamer Blinktest nutzen, ersetzt aber nicht die getrennte Prüfung der Fahrtrichtungsanzeiger für beide Seiten. Bei eingeschaltetem Stand- oder Fahrlicht werden beide Rückleuchten gleichzeitig betrachtet, damit ein Helligkeitsunterschied oder ein vollständiger Ausfall auffällt. Die Kennzeichenleuchte wird gesondert geprüft, weil sie trotz funktionierender Rückleuchten ausfallen kann und im normalen Blickwinkel leicht übersehen wird. Nach jeder festgestellten Störung wird die betroffene Lichtfunktion erneut geschaltet, nachdem die Ursache behoben wurde, damit die Korrektur unmittelbar bestätigt ist.'),
-   ('Stecker Kabel und Leuchten prüfen','Die elektrische Verbindung zwischen Zugfahrzeug und Pferdeanhänger beginnt am korrekt eingesetzten Stecker, dessen fester Sitz vor der Abfahrt kontrolliert wird. Anschließend werden sichtbare Kabelabschnitte auf Quetschungen, Scheuerstellen oder lose Führung betrachtet, bevor die einzelnen Leuchten gemeinsam mit einer zweiten Person oder durch einen geeigneten Kontrollablauf geprüft werden. Feuchtigkeit im Leuchtengehäuse, flackerndes Licht oder eine vollständig dunkle Funktion sind konkrete Auffälligkeiten und verlangen eine Ursachenklärung. Erst wenn Rücklicht, Bremslicht, Blinker und Kennzeichenbeleuchtung nachvollziehbar funktionieren, ist dieser elektrische Kontrollabschnitt abgeschlossen. Der Stecker wird so eingesetzt, dass seine vorgesehene Verriegelung greift und das Kabel weder am Boden schleift noch unter Zug zwischen Fahrzeug und Anhänger hängt. Sichtbare Korrosion oder verschmutzte Kontakte werden als eigener Befund behandelt, weil eine instabile Verbindung mehrere Lichtfunktionen gleichzeitig beeinflussen kann. Eine beschädigte Kabelisolierung wird nicht allein durch funktionierende Lampen entkräftet, sondern bleibt eine erkennbare elektrische Auffälligkeit, die vor dem Einsatz geklärt wird. Zum Abschluss wird die Leitung vom Stecker bis zum Anhänger noch einmal auf freie Führung kontrolliert, damit sie beim Rangieren oder Lenken nicht an einer ungünstigen Stelle eingeklemmt wird.')
-  ]
- },
- {
-  'title':'Warum sollte die Anhängerkupplung vor dem Losfahren geprüft werden?',
-  'keyword':'Anhängerkupplung',
-  'slug':'anhaengerkupplung-pferdeanhaenger',
-  'intent_terms':['Anhängerkupplung','Kupplung','Pferdeanhänger','Sicherung','Kontrolle'],
-  'direct_answer':'Die Anhängerkupplung sollte vor dem Losfahren kontrolliert werden, damit der Pferdeanhänger korrekt verbunden und die vorgesehene Sicherung vollständig hergestellt ist. Zur Prüfung gehören der erkennbare Kupplungszustand, die Sicherungseinrichtungen und ein kurzer Kontrollgang vor der Abfahrt.',
-  'table_value':'Die Tabelle fasst Kupplung, Sicherung und Kontrollgang so zusammen, dass jeder Prüfpunkt vor der Abfahrt eindeutig abgearbeitet werden kann.',
-  'sources':[
-   ('Kupplung vor der Abfahrt','Beim Ankuppeln muss die Kupplung des Pferdeanhängers vollständig auf dem Kugelkopf sitzen und nach dem vorgesehenen Mechanismus verriegelt sein. Eine vorhandene Sicherheits- oder Verschleißanzeige wird direkt am Kupplungskopf abgelesen, weil eine nur scheinbar geschlossene Verbindung nicht als ausreichende Kontrolle gilt. Das Abreißseil oder die für das jeweilige System vorgesehene Sicherung wird an der dafür bestimmten Stelle befestigt und darf nicht lose über ungeeignete Bauteile gelegt werden. Das Stützrad wird nach dem Anheben vollständig in Fahrstellung gebracht und so gesichert, dass es sich während der Fahrt nicht absenken kann. Ein kurzer mechanischer Kontrollzug am gekuppelten Anhänger kann ergänzen, was die Verriegelungsanzeige sichtbar bestätigt, ohne die vorgesehene Bedienung der Kupplung zu ersetzen. Der Handgriff der Kupplung wird nach dem Schließen in seiner vorgesehenen Endstellung betrachtet, weil eine Zwischenstellung auf einen nicht abgeschlossenen Kupplungsvorgang hinweisen kann. Die Deichsel bleibt während dieser Prüfung ruhig abgestützt, damit ein unbeabsichtigtes Wegrollen oder Absenken nicht mit dem eigentlichen Verriegelungstest verwechselt wird. Erst nach diesen einzelnen Kontrollen wird das Ankuppeln als abgeschlossen betrachtet und der Blick auf die weiteren Sicherungs- und Anschlussarbeiten gerichtet.'),
-   ('Kontrollgang nach dem Ankuppeln','Ein abschließender Rundgang nach dem Ankuppeln verbindet mehrere zuvor getrennte Handgriffe zu einer letzten Plausibilitätskontrolle am stehenden Gespann. Dabei werden Verriegelung der Kupplung, Lage der Sicherung, elektrische Steckverbindung und die hochgestellte Position des Stützrads nacheinander betrachtet, ohne einen Punkt aus Gewohnheit zu überspringen. Auffälliges Spiel, eine unklare Anzeige oder eine nicht eindeutig befestigte Sicherung führen zurück zum jeweiligen Bauteil und werden vor dem Start geklärt. Erst der erneut bestätigte Zustand beendet den Kupplungsabschnitt und erlaubt den Übergang zur nächsten Vorbereitung des Gespanns. Der Kontrollgang beginnt bewusst wieder an der Deichsel, damit Kupplung und Sicherung aus einer neuen Blickrichtung geprüft werden und ein zuvor verdeckter Fehler auffallen kann. Danach wird die Steckverbindung auf festen Sitz betrachtet, ohne sie für den bloßen Kontrollgang unnötig zu lösen und damit einen neuen Fehler einzubauen. Am Stützrad werden eingezogene Position, Klemmung und ausreichender Abstand zum Boden als getrennte sichtbare Merkmale beurteilt. Abschließend wird geprüft, ob kein loses Sicherungsteil oder Kabel im Bewegungsbereich zwischen Zugfahrzeug und Anhänger liegt, bevor der Kontrollgang als vollständig beendet gilt.')
-  ]
- },
-]
 
-def stable(v)->str:
-    return hashlib.sha256(json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def stable(value) -> str:
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
-def writej(path:Path,v)->None:
-    path.write_text(json.dumps(v,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+
+def writej(path: Path, value) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+
 
 class Quiet(SimpleHTTPRequestHandler):
-    def log_message(self, format, *args): pass
+    def log_message(self, format, *args):
+        pass
 
-def _walk_dicts(value):
-    if isinstance(value,dict):
-        yield value
-        for child in value.values():
-            yield from _walk_dicts(child)
-    elif isinstance(value,list):
-        for child in value:
-            yield from _walk_dicts(child)
 
-def _authoritative_quality_binding()->tuple[dict,str]:
-    candidates={}
-    with zipfile.ZipFile(PPM) as z:
-        for name in z.namelist():
-            low=name.casefold()
-            if not name.endswith('.json') or any(token in low for token in FORBIDDEN_TEMPLATE_TOKENS):
-                continue
-            try:
-                value=json.loads(z.read(name).decode('utf-8'))
-            except Exception:
-                continue
-            for node in _walk_dicts(value):
-                if node.get('contract')!='content_structure_language_binding_v2':
-                    continue
-                wp=node.get('wordpress_category')
-                if not isinstance(wp,dict) or str(wp.get('slug') or '')!=TARGET_CATEGORY:
-                    continue
-                links=node.get('link_bindings')
-                registry=node.get('portal_link_registry')
-                if not isinstance(links,list) or len(links)<3 or not isinstance(registry,dict):
-                    continue
-                if str(node.get('portal_link_registry_hash') or '')!=stable(registry):
-                    continue
-                digest=stable(node)
-                candidates.setdefault(digest,[]).append((name,copy.deepcopy(node)))
-    if not candidates:
-        raise RuntimeError('PPM679_PARENT_PREWRITE_AUTHORITY_NOT_FOUND_OUTSIDE_CANDIDATES')
-    if len(candidates)!=1:
-        raise RuntimeError('PPM679_PARENT_PREWRITE_AUTHORITY_AMBIGUOUS:'+','.join(sorted(candidates)))
-    digest=next(iter(candidates))
-    rows=candidates[digest]
-    source=sorted(name for name,_ in rows)[0]
-    return copy.deepcopy(rows[0][1]),source
+def _ppm_json(archive: zipfile.ZipFile, member: str) -> dict:
+    try:
+        value = json.loads(archive.read(member).decode('utf-8'))
+    except Exception as exc:
+        raise RuntimeError('PPM679_PARENT_AUTHORITY_READ_FAILED:' + member) from exc
+    if not isinstance(value, dict):
+        raise RuntimeError('PPM679_PARENT_AUTHORITY_OBJECT_REQUIRED:' + member)
+    return value
 
-def _dynamic_scenario(index:int)->dict:
-    n=index+1
-    phrase=f'Kontrollpunkt {n} am Pferdeanhänger'
+
+def _one(rows: list[dict], label: str) -> dict:
+    if len(rows) != 1:
+        raise RuntimeError('PPM679_PARENT_AUTHORITY_' + label + '_COUNT:' + str(len(rows)))
+    return copy.deepcopy(rows[0])
+
+
+def _parent_authorities() -> dict:
+    with zipfile.ZipFile(PPM) as archive:
+        category_source = _ppm_json(archive, CATEGORY_SOURCE)
+        hierarchy_source = _ppm_json(archive, CATEGORY_HIERARCHY)
+        link_source = _ppm_json(archive, LINK_SOURCE)
+        type_source = _ppm_json(archive, TYPE_SOURCE)
+        structure_source = _ppm_json(archive, STRUCTURE_SOURCE)
+
+    if structure_source.get('contract') != 'content_structure_language_gate_v2':
+        raise RuntimeError('PPM679_STRUCTURE_AUTHORITY_INVALID')
+    if link_source.get('contract') != 'WORDPRESS_LINK_TARGET_SNAPSHOT_V1':
+        raise RuntimeError('PPM679_LINK_AUTHORITY_INVALID')
+    faq = (type_source.get('types') or {}).get('FAQ')
+    if not isinstance(faq, dict):
+        raise RuntimeError('PPM679_FAQ_TYPE_AUTHORITY_MISSING')
+
+    source_category = _one([
+        row for row in (category_source.get('categories') or [])
+        if isinstance(row, dict) and row.get('category_slug') == TARGET_CATEGORY
+    ], 'CATEGORY_SOURCE')
+    hierarchy_category = _one([
+        row for row in (hierarchy_source.get('categories') or [])
+        if isinstance(row, dict) and row.get('slug') == TARGET_CATEGORY
+    ], 'CATEGORY_HIERARCHY')
+
+    if source_category.get('category_name') != hierarchy_category.get('name'):
+        raise RuntimeError('PPM679_PARENT_CATEGORY_NAME_MISMATCH')
+    if source_category.get('wp_taxonomy') != 'category' or hierarchy_category.get('taxonomy') != 'category':
+        raise RuntimeError('PPM679_PARENT_CATEGORY_TAXONOMY_MISMATCH')
+    if hierarchy_category.get('assignable') is not True or 'FAQ' not in (hierarchy_category.get('allowed_article_types') or []):
+        raise RuntimeError('PPM679_PARENT_CATEGORY_NOT_ASSIGNABLE_FOR_FAQ')
+
+    required_roles = [str(v) for v in (faq.get('required_link_roles') or [])]
+    if required_roles != ['parent_category', 'semantic_related', 'further_information']:
+        raise RuntimeError('PPM679_PARENT_REQUIRED_LINK_ROLES_CHANGED')
+    targets = link_source.get('targets') if isinstance(link_source.get('targets'), list) else []
+    by_role = {str(row.get('role')): row for row in targets if isinstance(row, dict)}
+    if set(by_role) != set(required_roles):
+        raise RuntimeError('PPM679_PARENT_LINK_TARGET_SET_INVALID')
+
+    sections = {
+        'parent_category': 'answer',
+        'semantic_related': 'details',
+        'further_information': 'further_information',
+    }
+    reasons = {
+        'parent_category': 'Übergeordneter Bereich für die grundlegenden Transportthemen.',
+        'semantic_related': 'Passender interner Verweis auf das Zugfahrzeug im selben Themenbereich.',
+        'further_information': 'Weiterführender interner Verweis auf Pferdeanhänger im Themenbereich Transport.',
+    }
+    links = []
+    for role in required_roles:
+        target = by_role[role]
+        if target.get('status') != 'publish' or target.get('declared_object_type') != 'page':
+            raise RuntimeError('PPM679_PARENT_LINK_TARGET_NOT_PUBLISHED_PAGE:' + role)
+        href = str(target.get('relative_url') or '')
+        if not href.startswith('/') or href.startswith('//'):
+            raise RuntimeError('PPM679_PARENT_LINK_TARGET_NOT_RELATIVE:' + role)
+        title = str(target.get('title') or '').strip()
+        links.append({
+            'active': True,
+            'anchor': ('Bereich ' + title) if role == 'parent_category' else title,
+            'hierarchy_path': list(target.get('hierarchy_path') or []),
+            'href': href,
+            'reason': reasons[role],
+            'role': role,
+            'section_id': sections[role],
+            'snapshot_contract': link_source['contract'],
+            'target_status': target['status'],
+            'target_type': target['declared_object_type'],
+        })
+
+    registry = {
+        'contract': 'portal_link_registry_snapshot_v2',
+        'entries': copy.deepcopy(links),
+        'source_snapshot_contract': link_source['contract'],
+        'source_snapshot_sha256': str(link_source.get('contract_self_sha256') or stable(link_source)),
+    }
+    category_binding = {
+        'article_type': 'FAQ',
+        'category_source_snapshot_hash': stable(category_source),
+        'expected_wp_parent_slugs': list(hierarchy_category.get('expected_wp_parent_slugs') or []),
+        'expected_wp_taxonomy_depth': int(hierarchy_category.get('expected_wp_taxonomy_depth') or 0),
+        'hierarchy_path': str(hierarchy_category.get('hierarchy_path') or hierarchy_category.get('portal_path') or ''),
+        'name': str(hierarchy_category.get('name') or ''),
+        'portal_level': int(hierarchy_category.get('portal_level') or hierarchy_category.get('level') or 0),
+        'portal_node_types': list(hierarchy_category.get('portal_node_types') or []),
+        'portal_path': str(hierarchy_category.get('portal_path') or ''),
+        'portal_structure_snapshot_hash': str(hierarchy_category.get('portal_structure_snapshot_hash') or ''),
+        'slug': TARGET_CATEGORY,
+        'taxonomy': 'category',
+        'wp_parent_chain_required': bool(hierarchy_category.get('wp_parent_chain_required')),
+        'wp_taxonomy_contract_hash': str(hierarchy_category.get('wp_taxonomy_contract_hash') or ''),
+        'wp_taxonomy_snapshot_hash': str(hierarchy_category.get('wp_taxonomy_snapshot_hash') or ''),
+    }
+    wordpress_category = copy.deepcopy(category_binding)
+    wordpress_category.pop('article_type', None)
+    wordpress_category['semantic_binding_not_numeric_identity'] = True
+
+    marker = 'LT2-FAQ-001'
+    marker_regex = str(structure_source.get('visible_test_marker_regex') or '')
+    import re
+    if not marker_regex or not re.fullmatch(marker_regex, '[' + marker + ']'):
+        raise RuntimeError('PPM679_PARENT_INTERNAL_MARKER_CONTRACT_CHANGED')
+
+    cert = faq.get('certification_evidence') if isinstance(faq.get('certification_evidence'), dict) else {}
     return {
-      'title':f'Warum sollte {phrase} vor der Fahrt geprüft werden?',
-      'keyword':phrase,
-      'slug':f'kontrollpunkt-{n}-pferdeanhaenger',
-      'intent_terms':['Kontrollpunkt','Pferdeanhänger','Fahrt','Prüfung',f'Kontrollpunkt {n}'],
-      'direct_answer':f'{phrase} wird vor der Fahrt geprüft, damit sein aktueller Zustand für diesen Artikel eindeutig festgestellt wird. Eine erkennbare Abweichung wird am betroffenen Kontrollpunkt geklärt, bevor der Ablauf fortgesetzt und der Zustand erneut bestätigt wird.',
-      'table_value':f'Die Tabelle ordnet die gebundenen Aussagen zu Kontrollpunkt {n} nach Ausgangslage, Beobachtung und eindeutiger Handlung vor der Fahrt.',
-      'sources':[
-        (f'Grundlage zu Kontrollpunkt {n}',f'Kontrollpunkt {n} wird unmittelbar vor der Fahrt anhand seines aktuellen Zustands beurteilt. Ein früheres Ergebnis ersetzt die heutige Kontrolle nicht. Die Beobachtung wird eindeutig beschrieben, bevor eine Handlung abgeleitet wird. Eine erkennbare Abweichung führt zurück zu diesem Kontrollpunkt. Nach einer Korrektur wird der Zustand erneut geprüft. Die Freigabe erfolgt erst nach einem eindeutigen Ergebnis. Benachbarte Prüfpunkte werden getrennt bewertet. Der aktuelle Befund wird nicht aus einem früheren Durchlauf übernommen.'),
-        (f'Ablauf zu Kontrollpunkt {n}',f'Für Kontrollpunkt {n} folgt die Kontrolle einer festen Reihenfolge aus Beobachtung, Bewertung und Nachkontrolle. Eine unklare Beobachtung beendet den Abschnitt nicht. Die notwendige Handlung richtet sich nach dem tatsächlich festgestellten Zustand. Nach einer Änderung wird die Wirkung erneut kontrolliert. Erst ein bestätigtes Ergebnis schließt den Abschnitt ab. Der Prüfpunkt bleibt von anderen Positionen des Kontrollgangs getrennt. Die Reihenfolge verhindert, dass eine Abweichung nur durch Gewohnheit übersehen wird. Vor dem Übergang wird der Zustand noch einmal nachvollziehbar bestätigt.')
-      ]
+        'category_binding': category_binding,
+        'wordpress_category': wordpress_category,
+        'links': links,
+        'registry': registry,
+        'marker': marker,
+        'search_intent': str(faq.get('search_intent') or ''),
+        'gold_core_binding': cert.get('gold_core_binding'),
+        'proof': {
+            'category_source': CATEGORY_SOURCE,
+            'category_source_sha256': stable(category_source),
+            'category_hierarchy_source': CATEGORY_HIERARCHY,
+            'category_hierarchy_sha256': stable(hierarchy_source),
+            'link_source': LINK_SOURCE,
+            'link_source_sha256': str(link_source.get('contract_self_sha256') or stable(link_source)),
+            'type_source': TYPE_SOURCE,
+            'type_source_sha256': stable(type_source),
+            'structure_source': STRUCTURE_SOURCE,
+            'structure_source_sha256': stable(structure_source),
+        },
     }
 
-def _scenarios(count:int)->list[dict]:
-    if count<1: raise RuntimeError('TEST_ROUTE_COUNT_MUST_BE_POSITIVE')
-    rows=[copy.deepcopy(v) for v in SCENARIOS[:min(count,len(SCENARIOS))]]
-    for index in range(len(rows),count): rows.append(_dynamic_scenario(index))
+
+def _evidence(topic: str, parts: list[str]) -> str:
+    rows = []
+    for part in parts:
+        value = ' '.join(part.split()).strip()
+        if value and value[-1] not in '.!?':
+            value += '.'
+        rows.append(value)
+    if len(rows) < 10:
+        raise RuntimeError('SCENARIO_SOURCE_TOO_THIN:' + topic)
+    return ' '.join(rows)
+
+
+SCENARIOS = [
+    {
+        'title': 'Warum sollte der Reifendruck am Pferdeanhänger vor der Fahrt geprüft werden?',
+        'keyword': 'Reifendruck am Pferdeanhänger',
+        'intent_terms': ['Reifendruck', 'Reifen', 'Pferdeanhänger', 'Fahrt', 'Kontrolle'],
+        'direct_answer': 'Der Reifendruck am Pferdeanhänger sollte vor der Fahrt kontrolliert werden, weil der passende Druck und ein unbeschädigter Reifen für einen verlässlichen Zustand des Anhängers wichtig sind. Zusätzlich werden Ventile, Laufflächen und Seitenwände sichtbar geprüft.',
+        'table_value': 'Die Tabelle verbindet Reifenzustand, erkennbare Beobachtung und die daraus folgende konkrete Kontrolle vor der Fahrt.',
+        'sources': [
+            ('Reifendruck und Reifenbelastung', _evidence('Reifendruck', [
+                'Der Sollwert für den Reifendruck richtet sich nach dem montierten Reifen und den Vorgaben für den Anhänger',
+                'Gemessen wird möglichst am kalten Reifen, damit Erwärmung während der Fahrt den Ausgangswert nicht verfälscht',
+                'Ein deutlich zu niedriger Druck vergrößert die Verformung des Reifens unter Last',
+                'Stärkere Verformung kann die Erwärmung des Reifens während der Fahrt erhöhen',
+                'Linke und rechte Anhängerseite werden unter vergleichbaren Bedingungen gemessen',
+                'Ein auffälliger Druckunterschied zwischen den Seiten wird vor der Abfahrt geklärt',
+                'Nach einer Korrektur wird der eingestellte Wert erneut mit der Sollvorgabe verglichen',
+                'Der Ventilbereich wird nach der Druckkontrolle auf sichtbare Beschädigungen betrachtet',
+                'Nach längerer Standzeit wird ein früherer Messwert nicht ungeprüft übernommen',
+                'Die aktuelle Messung entscheidet über den heutigen Zustand des Reifens',
+                'Die Herstellerangabe bleibt während der Kontrolle die maßgebliche Referenz',
+                'Ein geschätzter Druck ersetzt keine Messung am jeweiligen Reifen',
+            ])),
+            ('Sichtkontrolle der Anhängerreifen', _evidence('Reifensichtkontrolle', [
+                'Lauffläche und Seitenwand werden vor der Fahrt auf Schnitte und auffällige Risse geprüft',
+                'Beulen oder sichtbare Verformungen werden als eigene Auffälligkeit behandelt',
+                'Fremdkörper in der Lauffläche werden nicht durch eine reine Druckmessung ausgeschlossen',
+                'Das Profil wird an mehreren Stellen betrachtet, weil Abrieb ungleichmäßig auftreten kann',
+                'Innen- und Außenseite eines Reifens können unterschiedliche Verschleißbilder zeigen',
+                'Ventilkappen und Ventile werden auf festen Sitz und erkennbare Schäden kontrolliert',
+                'Ein Reifen mit sichtbarer Beschädigung wird nicht allein durch Nachfüllen als unauffällig bewertet',
+                'Das Reserverad wird einbezogen, wenn es für den Anhänger vorgesehen und einsatzbereit sein soll',
+                'Jede Reifenposition wird im Kontrollgang einzeln betrachtet',
+                'Die Prüfung wird erst abgeschlossen, wenn keine Position ausgelassen wurde',
+                'Eine erkennbare Auffälligkeit wird vor dem Losfahren fachlich geklärt',
+                'Der aktuelle Sichtbefund ergänzt die Druckmessung und ersetzt sie nicht',
+            ])),
+        ],
+    },
+    {
+        'title': 'Warum muss die Beleuchtung am Pferdeanhänger vor der Fahrt kontrolliert werden?',
+        'keyword': 'Beleuchtung am Pferdeanhänger',
+        'intent_terms': ['Beleuchtung', 'Pferdeanhänger', 'Rücklicht', 'Blinker', 'Kontrolle'],
+        'direct_answer': 'Die Beleuchtung am Pferdeanhänger wird vor der Fahrt geprüft, damit Rücklicht, Bremslicht, Blinker und Kennzeichenbeleuchtung zuverlässig funktionieren. Dabei werden auch Stecker, Kabel und Leuchten auf erkennbare Auffälligkeiten kontrolliert.',
+        'table_value': 'Die Tabelle ordnet jede Lichtfunktion einer sichtbaren Kontrolle und einer eindeutigen Reaktion bei festgestellten Auffälligkeiten zu.',
+        'sources': [
+            ('Funktionen der Anhängerbeleuchtung', _evidence('Beleuchtung', [
+                'Bremsleuchten müssen beim Betätigen der Bremse eindeutig aufleuchten',
+                'Der linke Fahrtrichtungsanzeiger wird getrennt vom rechten Fahrtrichtungsanzeiger geprüft',
+                'Rückleuchten kennzeichnen den Anhänger bei eingeschaltetem Fahrlicht nach hinten',
+                'Die Kennzeichenbeleuchtung wird als eigene Lichtfunktion kontrolliert',
+                'Warnblinklicht kann einen gemeinsamen Blinktest ergänzen',
+                'Der gemeinsame Blinktest ersetzt die getrennte Prüfung beider Fahrtrichtungsanzeiger nicht',
+                'Beide Rückleuchten werden auf Funktion und auffällige Helligkeitsunterschiede betrachtet',
+                'Ein vollständiger Ausfall einer Lichtfunktion wird vor der Fahrt behoben',
+                'Nach einer Korrektur wird die betroffene Lichtfunktion erneut geschaltet',
+                'Die Funktionskontrolle umfasst mehrere Schaltzustände und nicht nur eine einzelne Lampe',
+                'Eine dunkle Kennzeichenleuchte kann trotz funktionierender Rückleuchten auftreten',
+                'Der Kontrollgang endet erst nach einer erneuten Prüfung der zuvor auffälligen Funktion',
+            ])),
+            ('Stecker Kabel und Leuchten', _evidence('Elektrische Verbindung', [
+                'Der Anhängerstecker wird vollständig in die vorgesehene Steckverbindung eingesetzt',
+                'Eine vorhandene Verriegelung des Steckers muss in der vorgesehenen Stellung sitzen',
+                'Sichtbare Kabelabschnitte werden auf Quetschungen und Scheuerstellen geprüft',
+                'Das Kabel darf zwischen Zugfahrzeug und Anhänger nicht über den Boden schleifen',
+                'Lose Kabelführung kann beim Rangieren oder Lenken zu einer ungünstigen Belastung führen',
+                'Feuchtigkeit im Leuchtengehäuse wird als erkennbare Auffälligkeit behandelt',
+                'Flackerndes Licht kann auf eine instabile elektrische Verbindung hinweisen',
+                'Sichtbare Korrosion an Kontakten wird vor dem Einsatz bewertet',
+                'Beschädigte Kabelisolierung bleibt auch bei aktuell leuchtender Lampe eine Auffälligkeit',
+                'Die Steckverbindung wird nach einer Korrektur erneut auf festen Sitz kontrolliert',
+                'Die Leitung wird abschließend auf freie Führung im Bewegungsbereich geprüft',
+                'Alle elektrischen Auffälligkeiten werden vor der Abfahrt geklärt',
+            ])),
+        ],
+    },
+    {
+        'title': 'Warum sollte die Anhängerkupplung vor dem Losfahren geprüft werden?',
+        'keyword': 'Anhängerkupplung',
+        'intent_terms': ['Anhängerkupplung', 'Kupplung', 'Pferdeanhänger', 'Sicherung', 'Kontrolle'],
+        'direct_answer': 'Die Anhängerkupplung wird vor dem Losfahren kontrolliert, damit der Pferdeanhänger korrekt verbunden und die vorgesehene Sicherung vollständig hergestellt ist. Dazu gehören Verriegelung, Sicherungseinrichtungen, Stützrad und ein abschließender Kontrollgang.',
+        'table_value': 'Die Tabelle verbindet Kupplung, Sicherung und Kontrollgang mit dem jeweils sichtbaren Zustand und der notwendigen Handlung vor der Abfahrt.',
+        'sources': [
+            ('Kupplung vor der Abfahrt', _evidence('Kupplung', [
+                'Die Kupplung des Pferdeanhängers muss vollständig auf dem Kugelkopf sitzen',
+                'Der vorgesehene Verriegelungsmechanismus wird bis in seine Endstellung gebracht',
+                'Eine vorhandene Sicherheitsanzeige wird direkt am Kupplungskopf abgelesen',
+                'Eine nur scheinbar geschlossene Verbindung gilt nicht als ausreichende Kontrolle',
+                'Das Abreißseil wird an der dafür vorgesehenen Stelle befestigt',
+                'Die Sicherung wird nicht lose über ungeeignete Bauteile gelegt',
+                'Das Stützrad wird vollständig in die vorgesehene Fahrstellung gebracht',
+                'Die Klemmung des Stützrads wird gegen unbeabsichtigtes Absenken gesichert',
+                'Der Kupplungsgriff wird nach dem Schließen in seiner Endstellung betrachtet',
+                'Eine erkennbare Zwischenstellung verlangt eine erneute Kontrolle der Verriegelung',
+                'Die Deichsel bleibt während der Prüfung kontrolliert abgestützt',
+                'Erst nach diesen Einzelkontrollen gilt der Kupplungsvorgang als abgeschlossen',
+            ])),
+            ('Kontrollgang nach dem Ankuppeln', _evidence('Kontrollgang', [
+                'Der abschließende Rundgang beginnt erneut an der Deichsel des Anhängers',
+                'Kupplung und Sicherung werden aus einer zweiten Blickrichtung kontrolliert',
+                'Die elektrische Steckverbindung wird auf festen Sitz betrachtet',
+                'Das Stützrad wird auf eingezogene Position und sichere Klemmung geprüft',
+                'Der Abstand des Stützrads zum Boden muss für die Fahrt ausreichend sein',
+                'Lose Sicherungsteile dürfen nicht im Bewegungsbereich zwischen Fahrzeug und Anhänger liegen',
+                'Auch das Anschlusskabel darf im Bewegungsbereich nicht ungünstig eingeklemmt werden',
+                'Auffälliges Spiel an der Verbindung führt zurück zur Kupplungskontrolle',
+                'Eine unklare Anzeige wird nicht durch Gewohnheit als ausreichend bewertet',
+                'Nach einer Korrektur wird der betroffene Punkt erneut geprüft',
+                'Der Kontrollgang verbindet die zuvor getrennten Handgriffe zu einer letzten Gesamtprüfung',
+                'Erst ein eindeutig bestätigter Zustand beendet den Kupplungsabschnitt',
+            ])),
+        ],
+    },
+]
+
+
+def _dynamic_scenario(index: int) -> dict:
+    n = index + 1
+    topic = f'Kontrollpunkt {n} am Pferdeanhänger'
+    statements_a = [f'{topic} erhält vor der Fahrt eine aktuelle Beobachtung mit der laufenden Position {k}' for k in range(1, 13)]
+    statements_b = [f'Nach einer Änderung an {topic} wird die Wirkung in einem getrennten Nachkontrollschritt {k} bestätigt' for k in range(13, 25)]
+    return {
+        'title': f'Warum sollte {topic} vor der Fahrt geprüft werden?',
+        'keyword': topic,
+        'intent_terms': ['Kontrollpunkt', 'Pferdeanhänger', 'Fahrt', 'Prüfung', topic],
+        'direct_answer': f'{topic} wird vor der Fahrt geprüft, damit sein aktueller Zustand eindeutig festgestellt wird. Eine erkennbare Abweichung wird am betroffenen Kontrollpunkt geklärt und danach erneut kontrolliert.',
+        'table_value': f'Die Tabelle verbindet die Beobachtungen zu {topic} mit eindeutigen Handlungen und einer abschließenden Nachkontrolle vor der Fahrt.',
+        'sources': [
+            (f'Grundlage {topic}', _evidence(topic, statements_a)),
+            (f'Nachkontrolle {topic}', _evidence(topic, statements_b)),
+        ],
+    }
+
+
+def _scenarios(count: int) -> list[dict]:
+    if count < 1:
+        raise RuntimeError('TEST_ROUTE_COUNT_MUST_BE_POSITIVE')
+    rows = [copy.deepcopy(v) for v in SCENARIOS[:min(count, len(SCENARIOS))]]
+    for index in range(len(rows), count):
+        rows.append(_dynamic_scenario(index))
     return rows
 
-def _serve_sources(root:Path, scenarios:list[dict]):
-    requests={}
-    for i,sc in enumerate(scenarios):
-        rows=[]
-        for j,(title,evidence) in enumerate(sc['sources']):
-            name=f'item-{i}-source-{j}.html'
-            (root/name).write_text(f'<!doctype html><html><head><title>{title}</title></head><body><article><h1>{title}</h1><p>{evidence}</p></article></body></html>',encoding='utf-8')
-            source_id='src-'+hashlib.sha256((title+'\n'+evidence).encode('utf-8')).hexdigest()[:32]
-            rows.append({'source_id':source_id,'source_title':title,'path':name})
-        requests[i]=rows
-    handler=lambda *a,**kw: Quiet(*a,directory=str(root),**kw)
-    server=ThreadingHTTPServer(('127.0.0.1',0),handler)
-    threading.Thread(target=server.serve_forever,daemon=True).start()
-    return server,requests
 
-def create(out:Path,count:int)->dict:
-    scenarios=_scenarios(count)
-    if out.exists() and any(out.iterdir()): raise RuntimeError('TEST_FIXTURE_DIR_NOT_EMPTY')
-    out.mkdir(parents=True,exist_ok=True)
-    quality0,authority_source=_authoritative_quality_binding()
-    category=(quality0.get('wordpress_category') or {}).get('slug')
-    if category!=TARGET_CATEGORY: raise RuntimeError('AUTHORITATIVE_CATEGORY_MISMATCH')
-    items=[]; plan_rows=[]
-    for i,sc in enumerate(scenarios):
-        slot=hashlib.sha256(f'system4a-live-parity-fresh-{count}-{i}-{sc["title"]}'.encode()).hexdigest()
-        items.append({'title':sc['title'],'target_keyword':sc['keyword'],'category':category,'article_type':'FAQ','plan_slot':slot})
-        q=copy.deepcopy(quality0)
-        q['intent_terms']=list(sc['intent_terms']); q['faq_direct_answer']=sc['direct_answer']; q['table_value_statement']=sc['table_value']
-        plan={
-          'article_type':'FAQ',
-          'target_keyword':sc['keyword'],
-          'topic':sc['title'],
-          'search_intent':'informational',
-          'gold_core_binding':None,
-          'category_binding':{'slug':category},
-          'quality_binding':q,
-          'quality_binding_hash':stable(q),
-          'canonical_article':{'title':sc['title'],'article_type':'FAQ'},
+def _serve_sources(root: Path, scenarios: list[dict]):
+    requests = {}
+    for i, scenario in enumerate(scenarios):
+        rows = []
+        for j, (title, evidence) in enumerate(scenario['sources']):
+            name = f'item-{i}-source-{j}.html'
+            (root / name).write_text(
+                f'<!doctype html><html><head><title>{title}</title></head><body><article><h1>{title}</h1><p>{evidence}</p></article></body></html>',
+                encoding='utf-8',
+            )
+            source_id = 'src-' + hashlib.sha256((title + '\n' + evidence).encode()).hexdigest()[:32]
+            rows.append({'source_id': source_id, 'source_title': title, 'path': name})
+        requests[i] = rows
+    handler = lambda *args, **kwargs: Quiet(*args, directory=str(root), **kwargs)
+    server = ThreadingHTTPServer(('127.0.0.1', 0), handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    return server, requests
+
+
+def create(out: Path, count: int) -> dict:
+    scenarios = _scenarios(count)
+    if out.exists() and any(out.iterdir()):
+        raise RuntimeError('TEST_FIXTURE_DIR_NOT_EMPTY')
+    out.mkdir(parents=True, exist_ok=True)
+    authority = _parent_authorities()
+    category = authority['category_binding']['slug']
+
+    items = []
+    plan_rows = []
+    for i, scenario in enumerate(scenarios):
+        slot = hashlib.sha256(f'system4a-live-parity-fresh-{count}-{i}-{scenario["title"]}'.encode()).hexdigest()
+        items.append({
+            'title': scenario['title'],
+            'target_keyword': scenario['keyword'],
+            'category': category,
+            'article_type': 'FAQ',
+            'plan_slot': slot,
+        })
+        quality = {
+            'contract': 'content_structure_language_binding_v2',
+            'internal_test_marker': authority['marker'],
+            'wordpress_category': copy.deepcopy(authority['wordpress_category']),
+            'portal_link_registry': copy.deepcopy(authority['registry']),
+            'portal_link_registry_hash': stable(authority['registry']),
+            'link_bindings': copy.deepcopy(authority['links']),
+            'intent_terms': list(scenario['intent_terms']),
+            'faq_direct_answer': scenario['direct_answer'],
+            'table_value_statement': scenario['table_value'],
         }
-        plan_rows.append({'item_index':i,'plan_slot':slot,'production_plan_item':plan})
-    batch_sha=stable({'count':count,'items':items})
-    snapshot={'contract':'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1','next_textmachine_metadata_batch':{'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE','batch_sha256':batch_sha,'item_count':count,'items':items,'publish_allowed':False}}
-    event={'contract':chat_start_gate.START_EVENT_CONTRACT,'button_id':chat_start_gate.START_BUTTON_ID,'action':chat_start_gate.START_ACTION,'route':chat_start_gate.START_ROUTE,'article_count':count,'batch_sha256':batch_sha,'publish_allowed':False}
-    writej(out/'snapshot.template.json',snapshot); writej(out/'start_button.json',event)
-    writej(out/'plans.json',{'contract':'SYSTEM4_MACHINE_PREWRITE_PLAN_BATCH_V1','item_count':count,'authority':'PPM679_NON_CANDIDATE_QUALITY_BINDING','authority_source':authority_source,'authority_sha256':stable(quality0),'items':plan_rows})
-    source_root=out/'source-pages'; source_root.mkdir()
-    server,request_rows=_serve_sources(source_root,scenarios)
+        plan = {
+            'article_type': 'FAQ',
+            'target_keyword': scenario['keyword'],
+            'topic': scenario['title'],
+            'search_intent': authority['search_intent'],
+            'gold_core_binding': authority['gold_core_binding'],
+            'category_binding': copy.deepcopy(authority['category_binding']),
+            'quality_binding': quality,
+            'quality_binding_hash': stable(quality),
+            'canonical_article': {'title': scenario['title'], 'article_type': 'FAQ'},
+        }
+        plan_rows.append({'item_index': i, 'plan_slot': slot, 'production_plan_item': plan})
+
+    batch_sha = stable({'count': count, 'items': items})
+    snapshot = {
+        'contract': 'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1',
+        'next_textmachine_metadata_batch': {
+            'contract': 'PSERC_TEXTMACHINE_METADATA_BATCH_V2',
+            'status': 'READY_FOR_TEXTMACHINE_METADATA_INTAKE',
+            'batch_sha256': batch_sha,
+            'item_count': count,
+            'items': items,
+            'publish_allowed': False,
+        },
+    }
+    event = {
+        'contract': chat_start_gate.START_EVENT_CONTRACT,
+        'button_id': chat_start_gate.START_BUTTON_ID,
+        'action': chat_start_gate.START_ACTION,
+        'route': chat_start_gate.START_ROUTE,
+        'article_count': count,
+        'batch_sha256': batch_sha,
+        'publish_allowed': False,
+    }
+    writej(out / 'snapshot.template.json', snapshot)
+    writej(out / 'start_button.json', event)
+    writej(out / 'plans.json', {
+        'contract': 'SYSTEM4_MACHINE_PREWRITE_PLAN_BATCH_V1',
+        'item_count': count,
+        'authority': 'PPM679_COMPOSED_FROM_NON_CANDIDATE_AUTHORITIES',
+        'authority_components': authority['proof'],
+        'items': plan_rows,
+    })
+
+    source_root = out / 'source-pages'
+    source_root.mkdir()
+    server, request_rows = _serve_sources(source_root, scenarios)
     try:
-        _,port=server.server_address
-        source_items=[]
-        for i,item in enumerate(items):
-            rows=[]
+        _, port = server.server_address
+        source_items = []
+        for i, item in enumerate(items):
+            rows = []
             for row in request_rows[i]:
-                rows.append({'source_id':row['source_id'],'source_title':row['source_title'],'source_url':f'http://127.0.0.1:{port}/{row["path"]}','source_kind':'LOCAL_HASH_BOUND_SOURCE'})
-            source_items.append({'item_index':i,'plan_slot':item['plan_slot'],'sources':rows})
-        request_batch={'contract':source_acquisition.CONTRACT,'item_count':count,'items':source_items}
-        acquired=source_acquisition.acquire_batch(request_batch,retrieved_at='2026-09-15T08:30:00+00:00')
+                rows.append({
+                    'source_id': row['source_id'],
+                    'source_title': row['source_title'],
+                    'source_url': f'http://127.0.0.1:{port}/{row["path"]}',
+                    'source_kind': 'LOCAL_HASH_BOUND_SOURCE',
+                })
+            source_items.append({'item_index': i, 'plan_slot': item['plan_slot'], 'sources': rows})
+        request_batch = {'contract': source_acquisition.CONTRACT, 'item_count': count, 'items': source_items}
+        acquired = source_acquisition.acquire_batch(request_batch, retrieved_at='2026-09-15T08:30:00+00:00')
     finally:
-        server.shutdown(); server.server_close()
-    writej(out/'acquired.json',acquired); writej(out/'source_requests.json',request_batch)
-    proof={'contract':'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V3','article_count':count,'batch_sha256':batch_sha,'pre_point0_article_body_count':0,'source_acquisition_contract':acquired['contract'],'source_count':sum(len(x['sources']) for x in acquired['items']),'count_domain':'1..N','g9_candidate_used':False,'prewrite_authority_source':authority_source,'prewrite_authority_sha256':stable(quality0)}
-    writej(out/'input_factory_proof.json',proof)
+        server.shutdown()
+        server.server_close()
+
+    writej(out / 'acquired.json', acquired)
+    writej(out / 'source_requests.json', request_batch)
+    proof = {
+        'contract': 'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V4',
+        'article_count': count,
+        'batch_sha256': batch_sha,
+        'pre_point0_article_body_count': 0,
+        'source_acquisition_contract': acquired['contract'],
+        'source_count': sum(len(row['sources']) for row in acquired['items']),
+        'count_domain': '1..N',
+        'g9_candidate_used': False,
+        'prewrite_authority': 'PPM679_COMPOSED_FROM_NON_CANDIDATE_AUTHORITIES',
+        'prewrite_authority_components': authority['proof'],
+    }
+    writej(out / 'input_factory_proof.json', proof)
     return proof
 
-def main(argv:list[str])->int:
-    if len(argv)!=3: raise SystemExit('usage: test_route_input_factory.py <out-dir> <positive-count>')
-    print(json.dumps(create(Path(argv[1]),int(argv[2])),ensure_ascii=False,sort_keys=True)); return 0
 
-if __name__=='__main__': raise SystemExit(main(sys.argv))
+def main(argv: list[str]) -> int:
+    if len(argv) != 3:
+        raise SystemExit('usage: test_route_input_factory.py <out-dir> <positive-count>')
+    print(json.dumps(create(Path(argv[1]), int(argv[2])), ensure_ascii=False, sort_keys=True))
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main(sys.argv))
