@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGINS – SYNC-VERTRAG
 
-STAND: 2026-09-13
+STAND: 2026-09-15
 STATUS: VERBINDLICH
 
 ## Zweck
@@ -34,15 +34,19 @@ Nach jeder tatsächlichen Pluginentwicklung oder jedem tatsächlichen Pluginupda
 5. Version/Pluginidentität prüfen;
 6. SHA-256 bilden und gegen Release-/Fachbeleg vergleichen, soweit vorhanden;
 7. erforderliche Positiv-/Negativ-/Regressionstests müssen tatsächlich PASS sein;
-8. erst danach `CURRENT.zip` ersetzen;
-9. `MANIFEST.md` aktualisieren;
-10. persistente Kopie erneut lesen und Hash/ZIP prüfen;
-11. `REGISTER.md` + `UPDATEPROTOKOLL.md` nachziehen.
+8. bei Laufzeitänderungen zusätzlich den **normalen unveränderten Frontend-/Read-Pfad negativ gegen unerwünschte Wartungsarbeit prüfen**: kein Vollbestands-Backfill, keine Migration oder rekursive Metadatenlogik auf normalen Requests, sofern dies nicht ausdrücklich Fachvertrag ist;
+9. verwendet ein Plugin externe/stabile Identitäten, muss die Negativprüfung – soweit im realen Bestand möglich – **Doppel-/Kollisionsfälle** einschließen; kein stilles Zusammenklappen realer Datensätze;
+10. erforderliche LIVE-/E2E-Prüfungen dürfen nicht durch lokale Code-/Harness-PASS ersetzt werden;
+11. erst danach `CURRENT.zip` ersetzen;
+12. `MANIFEST.md` aktualisieren;
+13. persistente Kopie erneut lesen und Hash/ZIP prüfen;
+14. `REGISTER.md` + `UPDATEPROTOKOLL.md` nachziehen.
 
 ## Fail closed
 
-Bei fehlender/mehrdeutiger Quelle, Versionskonflikt, Hashabweichung, defekter ZIP oder fehlendem erforderlichem Test:
+Bei fehlender/mehrdeutiger Quelle, Versionskonflikt, Hashabweichung, defekter ZIP, fehlendem erforderlichem Test oder noch offenem verpflichtendem LIVE-/E2E-Beleg:
 - alte gültige `CURRENT.zip` nicht ersetzen;
+- bei einem neuen Plugin keine vorläufige `CURRENT.zip` erzeugen;
 - keinen historischen Stand hochstufen;
 - `ARTEFAKT_SYNC: BLOCKED`;
 - ersten konkreten Blocker dokumentieren.
