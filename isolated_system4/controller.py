@@ -29,26 +29,11 @@ def _verify_core()->None:
     _require(CORE.is_file(),'CONTROLLER_CORE_MISSING')
     _require(_git_blob(CORE)==CORE_GIT_BLOB,'CONTROLLER_CORE_IDENTITY_MISMATCH')
 
-# Bind the source-backed LT policy before the central validator-routing wrapper.
-# It only accepts dictionary-only speller findings with no replacement when the
-# exact token is present in the already sealed research evidence.
 source_bound_lt_policy.install(production_checks)
 
-# Preserve the real production checker. The wrapper below changes only error
-# classification, never validator execution or PASS authority.
 _ORIGINAL_RUN_ALL=production_checks.run_all
 
 def _run_all_with_validator_routing(*args,**kwargs):
-    """Turn completed content-validator rejections into structured repair findings.
-
-    A PPM679_VALIDATOR_BLOCKED result means the authoritative PPM validator ran
-    successfully and rejected article content/metadata. That is a production
-    validation finding, not an infrastructure/integrity failure. It therefore
-    must enter the stage-aware repair router even when PPM omitted field_path.
-
-    Execution, package, hash, result-schema and other technical failures remain
-    ProductionCheckError and fail closed.
-    """
     try:
         return _ORIGINAL_RUN_ALL(*args,**kwargs)
     except production_checks.ProductionCheckError as exc:
@@ -69,7 +54,6 @@ def _run_all_with_validator_routing(*args,**kwargs):
         }
         raise production_checks.RepairRequired('ppm679',[finding]) from exc
 
-# Bind classification centrally for every full production check.
 production_checks.run_all=_run_all_with_validator_routing
 
 def _guarded_ingress(argv:list[str])->int:
@@ -117,15 +101,16 @@ def _route_repair_after_fullcheck(workspace:Path,rc:int)->int:
     if rc!=3:
         return rc
     result=repair_router.route(workspace)
+    repair_router.verify_continuation_result(workspace,result)
     status=str(result.get('status') or '')
     if status=='SAME_ARTICLE_BODY_REPAIR':
-        print('SYSTEM4_MACHINE_REPAIR_ROUTE:DRAFT_BODY:SAME_ARTICLE_BODY_REPAIR')
+        print('SYSTEM4_MACHINE_REPAIR_ROUTE:DRAFT_BODY:SAME_ARTICLE_BODY_REPAIR:CONTINUATION_REQUIRED')
         return 3
     if status=='RESTARTED':
-        print('SYSTEM4_MACHINE_REPAIR_ROUTE:PARENT_METADATA:RESTARTED:'+str(result['workspace']))
+        print('SYSTEM4_MACHINE_REPAIR_ROUTE:PARENT_METADATA:RESTARTED:'+str(result['workspace'])+':CONTINUATION_REQUIRED')
         return 4
     if status=='RETURN_TO_OWNER':
-        print('SYSTEM4_MACHINE_REPAIR_ROUTE:'+str(result.get('owner'))+':'+str(result.get('target'))+':RETURN_TO_OWNER')
+        print('SYSTEM4_MACHINE_REPAIR_ROUTE:'+str(result.get('owner'))+':'+str(result.get('target'))+':RETURN_TO_OWNER:CONTINUATION_REQUIRED')
         return 4
     raise SupervisedControllerFail('REPAIR_ROUTER_BAD_STATUS:'+status)
 
