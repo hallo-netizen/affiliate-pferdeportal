@@ -102,16 +102,26 @@ jobs:
       - name: Textmaschine matrix — indexed ingress
         working-directory: isolated_system4
         run: python3 -m unittest -v test_indexed_ingress.py
-      - name: Textmaschine matrix — content context design draft
+      - name: Textmaschine matrix — content guard
         working-directory: isolated_system4
         env:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-        run: >-
-          python3 -m unittest -v
-          test_content_guard.py
-          test_context_required_regression.py
-          test_design_guard.py
-          test_draft_bound_rebind.py
+        run: python3 -m unittest -v test_content_guard.py
+      - name: Textmaschine matrix — context required regressions
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_context_required_regression.py
+      - name: Textmaschine matrix — design guard
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_design_guard.py
+      - name: Textmaschine matrix — draft and LanguageTool rebind
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_draft_bound_rebind.py
       - name: Textmaschine matrix — repair return and recheck
         working-directory: isolated_system4
         env:
