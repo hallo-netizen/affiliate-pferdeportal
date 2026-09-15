@@ -1,6 +1,6 @@
 # BÜRO WISSENSDATENBANK
 
-STAND: 2026-09-12
+STAND: 2026-09-15
 STATUS: AKTIV
 
 ## 1-KLICK-ÜBERSICHT
@@ -12,10 +12,10 @@ Das zentrale Recherche- und Faktenbüro des Pferde-Ateliers. Hier werden möglic
 du wissen willst, welche Recherchethemen es gibt, was offen ist, was bereits recherchiert wurde, welches Thema als Nächstes sinnvoll ist oder belastbare Fachfakten bzw. Fachbegriffe für spätere Inhalte aufgebaut werden sollen.
 
 **DU DARFST …**  
-neue Themenideen in den zentralen Themenpool aufnehmen, offene Themen prüfen, ein freigegebenes Thema recherchieren, dafür einen Aktenschrank anlegen und Fakten/Quellen strukturiert pflegen. Während laufender Recherche dürfen relevante Fachbegriffe organisch in den bestehenden Glossar-Aktenschrank aufgenommen werden.
+neue Themenideen in den zentralen Themenpool aufnehmen, offene Themen prüfen, ein freigegebenes Thema recherchieren, dafür einen Aktenschrank anlegen und Fakten/Quellen strukturiert pflegen. Der vorhandene Glossar-Aktenschrank darf zusätzlich aktiv und massenfähig mit pferdebezogenen Begriffen aufgebaut werden; dafür gilt sein eigener verbindlicher Vertrag.
 
 **DU DARFST NICHT …**  
-für bloße Ideen bereits Aktenschränke anlegen, aus Recherche automatisch Artikel/Kategorien/URLs erzeugen, vorhandene SEO-/Kategorie-/Textwahrheiten duplizieren, schwache Quellen zur Hauptquelle machen, Fakten erfinden oder aus diesem Büro ungefragt TEXT/SEO/WordPress/AFFILIATE verändern.
+für bloße Ideen bereits Aktenschränke anlegen, vorhandene SEO-/Kategorie-/Textwahrheiten duplizieren, schwache Quellen zur Hauptquelle machen, Fakten erfinden oder aus diesem Büro ungefragt andere Fachbüros verändern.
 
 **ALS NÄCHSTES …**  
 `CURRENT_STATE.md` → `HOBBYRAUM.md` → `THEMENPOOL.md` → bei Recherche `RECHERCHE_STANDARD.md` → zuständiger Aktenschrank.
@@ -25,16 +25,16 @@ für bloße Ideen bereits Aktenschränke anlegen, aus Recherche automatisch Arti
 # HAUSREGELN
 
 1. **Themenpool groß, Struktur klein.** Alle sinnvollen Ideen dürfen gesammelt werden. Ein thematischer Aktenschrank entsteht erst, wenn das Thema tatsächlich recherchiert wird.
-2. **Rechercheobjekt ≠ Artikel ≠ Kategorie.** Dieses Büro erzeugt Wissen, nicht automatisch öffentlichen Content.
+2. **Rechercheobjekt ≠ Artikel ≠ Kategorie.** Dieses Büro erzeugt Wissen; öffentliche Verarbeitung bleibt an den jeweils gebundenen technischen Vertrag gekoppelt.
 3. **Eine Fachwahrheit.** Jeder recherchierte Gegenstand liegt genau einmal im zuständigen Aktenschrank. Wegweiser und Statuslisten enthalten keine zweite Faktenkopie.
 4. **Nicht raten.** Fehlende Information wird als offen markiert.
 5. **Trust vor Vollständigkeit.** Lieber ein Feld offen lassen als eine schwache Quelle als Tatsache übernehmen.
-6. **Vor jeder neuen Themenrecherche zuerst Strukturprüfung.** Bestehende Kategorien/Artikel/SEO-Bestände werden auf Überschneidung und Kannibalisierungsrisiko geprüft. Diese Prüfung entscheidet über Forschungsumfang, nicht automatisch über Veröffentlichung.
+6. **Vor jeder neuen großen Themenrecherche zuerst Strukturprüfung.** Bestehende Kategorien/Artikel/SEO-Bestände werden auf Überschneidung sichtbar gemacht. Für den Glossar-Aktenschrank gilt davon abweichend ausdrücklich sein eigener Mengenvertrag: vorhandene Artikel/Seiten sind kein Ausschlussgrund.
 7. **Aktenschrank erst bei echter Recherche.** Keine leeren Schranklandschaften.
-8. **Glossar wächst organisch.** Erklärungswürdige Fachbegriffe aus realer Recherche dürfen im bereits vorhandenen Glossar recherchiert und abgelegt werden; dafür entsteht kein neues Büro und kein neuer Aktenschrank pro Begriff.
+8. **Glossar wächst aktiv und breit.** Grundsätzlich darf jeder sinnvoll erklärbare Begriff mit Pferdebezug recherchiert und abgelegt werden. Einziger fachlicher Ausschluss für einen neuen Begriff: identischer vorhandener WordPress-Kategoriename. Details ausschließlich im `GLOSSAR/START_HERE.md`.
 9. **Erweiterbar bleiben.** Ein später neu erkannter sinnvoller Punkt darf in einem Themenmodell ergänzt und bei bestehenden Datensätzen nachrecherchiert werden.
 10. **Quellen rückverfolgbar.** Jede belastbare Aussage muss auf eine Quelle bzw. einen Quellenverbund zurückführbar sein.
-11. **Veröffentlichen entscheidet dieses Büro niemals.** Veröffentlichung, URL, Kategorie, Keyword und Kannibalisierung bleiben nachgelagerten zuständigen Systemen vorbehalten.
+11. **Keine Doppelwahrheit.** Glossar-Scope, Textvertrag und Mengenlogik stehen nur im Glossar-Aktenschrank; andere Bürodateien verweisen dorthin.
 
 ---
 
@@ -46,18 +46,18 @@ Das Büro arbeitet in vier Ebenen:
 Maximaler Sammelpunkt für alle möglichen Oberthemen der Pferdewelt. Eine Idee darf jahrelang nur Idee bleiben.
 
 **2. THEMENPRÜFUNG**  
-Unmittelbar bevor echte Recherche startet: Abgrenzung, vorhandene Portalabdeckung, mögliche Kannibalisierung, sinnvolle Unterstruktur, notwendige Quellenarten, besondere Risiken.
+Unmittelbar bevor echte größere Recherche startet: Abgrenzung, vorhandene Portalabdeckung, mögliche Überschneidung, sinnvolle Unterstruktur, notwendige Quellenarten, besondere Risiken.
 
 **3. AKTENSCHRÄNKE**  
 Erst nach Start echter Recherche. Ein größeres Forschungsthema = ein Aktenschrank. Dort liegen Datenmodell, Register, Einzeldatensätze und Quellenbelege. Aktuell vorhanden:
-- `PFERDERASSEN/` → eine Rasse = ein Datensatz; aktive Hauptrecherche.
-- `GLOSSAR/` → ein Fachbegriff = ein Datensatz; organische Querschnittsbasis.
+- `PFERDERASSEN/` → eine Rasse = ein Datensatz.
+- `GLOSSAR/` → ein Begriff = ein Datensatz; aktive, massenfähige Querschnittsbasis mit eigenem Scope-/Worker-/Textvertrag.
 
 **4. SPÄTERE NUTZUNG**  
-Fachwissen kann später von SEO/Text/anderen Büros gelesen werden. Es wird nicht automatisch veröffentlicht und nicht als zweite SEO-Datenbank benutzt.
+Fachwissen kann von SEO/Text/WordPress/anderen Büros gelesen werden. Die Nutzung ändert die Forschungswahrheit nicht.
 
 Leitsatz:
-**SAMMELN IST FREI. RECHERCHIEREN ERST NACH PRÜFUNG. VERÖFFENTLICHEN ENTSCHEIDET DIE WISSENSDATENBANK NICHT.**
+**SAMMELN IST FREI. RECHERCHIEREN QUELLENGEBUNDEN. NICHT RATEN.**
 
 ---
 
@@ -76,12 +76,12 @@ Leitsatz:
 5. erst dann Aktenschrank anlegen, falls noch keiner existiert;
 6. Recherche durchführen und Status zentral nachziehen.
 
-## Wenn während Recherche ein erklärungswürdiger Fachbegriff auftaucht
-1. `AKTENSCHRAENKE/GLOSSAR/GLOSSAR_REGISTER.md` prüfen;
-2. vorhandenen Begriff nicht duplizieren;
-3. neuen Begriff nur mit belastbarer Quelle anlegen;
-4. Ober-/Unterbereich zuordnen;
-5. `seo_status` nur als Prüfhinweis setzen – niemals als Veröffentlichungsfreigabe.
+## Wenn am Glossar gearbeitet wird
+1. `AKTENSCHRAENKE/GLOSSAR/START_HERE.md` lesen;
+2. `GLOSSAR_REGISTER.md` auf Bestand/Synonym prüfen;
+3. exakten vorhandenen Kategorienamen prüfen;
+4. Begriff nach `RECHERCHE_STANDARD.md` recherchieren;
+5. Ober-/Unterbereich zuordnen und Datensatz/Research-Paket nach Glossarvertrag erzeugen.
 
 ## Wenn eine neue große Themenidee auftaucht
 Nur in `THEMENPOOL.md` aufnehmen. Kein Aktenschrank, keine Fachdateien auf Vorrat.
@@ -89,8 +89,7 @@ Nur in `THEMENPOOL.md` aufnehmen. Kein Aktenschrank, keine Fachdateien auf Vorra
 ## Wenn ein Thema fertig recherchiert ist
 - Themenstatus aktualisieren;
 - Aktenschrankregister aktualisieren;
-- offene Felder/Widersprüche sichtbar lassen;
-- keine Artikelproduktion automatisch starten.
+- offene Felder/Widersprüche sichtbar lassen.
 
 ---
 
