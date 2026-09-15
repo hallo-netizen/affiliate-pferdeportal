@@ -23,6 +23,8 @@ def _apply_title(files: dict, title: str) -> None:
     plan['topic'] = title
     if isinstance(plan.get('canonical_article'), dict):
         plan['canonical_article']['title'] = title
+    if isinstance(plan.get('runtime_order'), dict):
+        plan['runtime_order']['title'] = title
     if isinstance(plan.get('quality_binding'), dict):
         plan['quality_binding_hash'] = v3.stable(plan['quality_binding'])
     v3.write_json(files['plan'], plan)
