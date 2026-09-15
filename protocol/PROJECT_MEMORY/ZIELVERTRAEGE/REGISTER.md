@@ -84,7 +84,7 @@ PASS-BEDINGUNG:
 gebundene V104-Design-/QA-Regeln; keine stillen projektspezifischen Übernahmen.
 
 PFERDE-ANWENDUNG:
-aktueller Live-Stand 1.50.472 verwendet weiterhin Contract V104 unverändert.
+Dieses Register führt **keinen dynamischen LIVE-Stand**. Der historisch belegte Referenz-LIVE-PASS 1.50.472 / V104 bleibt Beleg; den aktuellen belastbaren Projektstand ausschließlich aus `PROJEKTE/PFERDE_ATELIER/DESIGN/CURRENT_STATE.md` lesen.
 
 
 ## ZV-TEXT-001 – STARTMASTER0107 aktueller Produktionszielvertrag
@@ -244,7 +244,7 @@ VERANTWORTLICHER BEREICH:
 `PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/`
 
 PASS-BEDINGUNG:
-Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. WordPress-LIVE-PASS ist derzeit noch offen.
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Den dynamischen Fach-/LIVE-Status ausschließlich aus der zuständigen WISSENSDATENBANK-/Fachquelle lesen.
 
 NACHFOLGER:
 keiner belegt.
