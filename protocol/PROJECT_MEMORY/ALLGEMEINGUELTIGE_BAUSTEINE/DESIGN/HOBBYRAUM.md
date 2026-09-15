@@ -1,19 +1,25 @@
 # ALLGEMEINES DESIGN – HOBBYRAUM
 
 STATUS: FREI
-STAND: 2026-09-05
+STAND: 2026-09-15
 
 Letzte Arbeit:
-- Universal Plugin 2.2.40 geprüft;
-- Universal Master V104 geprüft;
-- Plugin ↔ eingebetteter Installer byte-identisch;
-- CURRENT_PLUGIN_SOURCE inhaltlich identisch;
-- 298/298 Mastermanifest OK;
-- spätere GitHub-Historie bis Pferde 1.50.472 abgeglichen;
-- Universal 2.2.40/V104 dabei ausdrücklich als unverändert aktuell bestätigt;
-- persistente Archivkopien angelegt.
+- Universal Plugin 2.2.40 als autoritativen Ausgangsstand frisch gelesen;
+- ausschließlich Breadcrumb→erster sichtbarer Inhalt zentralisiert;
+- globale Regel 15 px Desktop / 10 px mobil bis 544 px;
+- individuelle `breadcrumb_gap`-Einstellung vollständig entfernt;
+- seitentyp-/Leading-Image-spezifische Breadcrumb-Abstandautoritäten entfernt;
+- sonstige Design-/Funktionslogik unverändert;
+- Universal Plugin auf 2.2.41 gebaut;
+- harte Chromium-Positiv-/Negativprüfung gegen exakte ZIP-Bytes PASS;
+- PHP-Lint, JS-Syntax, ZIP-Readback und Overwrite 2.2.40→2.2.41 PASS;
+- Universal Master aktualisiert, Manifest 301/301 PASS;
+- Plugin, Master und Testreport persistent unter `/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-15/` abgelegt.
 
-Keine neue Facharbeit ohne konkreten Auftrag.
+Status der Änderung:
+**LOKAL HART PASS / LIVE OFFEN.**
+
+Keine weitere Facharbeit ohne konkreten Auftrag.
 
 ## Globale Arbeitsort-Sperre
 
@@ -21,4 +27,3 @@ Keine neue Facharbeit ohne konkreten Auftrag.
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
