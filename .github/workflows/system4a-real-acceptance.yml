@@ -40,6 +40,12 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
         run: python3 isolated_system4/real_parent_title_repair_acceptance_v1.py
+      - name: Run real source acquisition owner restart acceptance
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
+        run: python3 isolated_system4/real_source_acquisition_owner_acceptance_v1.py
       - name: Run real research owner same-stage acceptance
         env:
           PYTHONPATH: isolated_system4
@@ -77,6 +83,15 @@ jobs:
           assert tr['inline_byte_equal'] is True and tr['publish_allowed'] is False
           assert (root/'SYSTEM4_PARENT_TITLE_REPAIRED_WORDPRESS.json').is_file()
 
+          sr=json.loads((root/'SYSTEM4_REAL_SOURCE_ACQUISITION_OWNER_ACCEPTANCE_V1.json').read_text())
+          assert sr['status']=='PASS' and sr['initial_error']=='SOURCE_HTTP_FAIL:0:0:403'
+          assert sr['repair_owner']=='SOURCE_ACQUISITION_MACHINE' and sr['return_route']=='SOURCE_ACQUISITION_STAGE'
+          assert sr['point0_absent_after_failure'] is True
+          assert sr['point0_created_only_after_successful_reacquisition'] is True
+          assert sr['source_transport']=='REAL_LOCAL_HTTP_403_THEN_200'
+          assert sr['inline_byte_equal'] is True and sr['publish_allowed'] is False
+          assert (root/'SYSTEM4_SOURCE_ACQUISITION_REPAIRED_WORDPRESS.json').is_file()
+
           rr=json.loads((root/'SYSTEM4_REAL_RESEARCH_OWNER_ACCEPTANCE_V1.json').read_text())
           assert rr['status']=='PASS' and rr['initial_error']=='RESEARCH_SOURCE_HASH_MISMATCH:0'
           assert rr['repair_owner']=='RESEARCH_WORKER' and rr['return_route']=='RESEARCH_STAGE'
@@ -97,7 +112,7 @@ jobs:
           assert cr['state_frozen_on_return'] is True and cr['inline_byte_equal'] is True
           assert cr['publish_allowed'] is False
           assert (root/'SYSTEM4_CONTEXT_OWNER_REPAIRED_WORDPRESS.json').is_file()
-          print('SYSTEM4_REAL_DRAFT_TITLE_RESEARCH_FACTS_CONTEXT_OWNER_TO_FILE_PASS')
+          print('SYSTEM4_REAL_SOURCE_DRAFT_TITLE_RESEARCH_FACTS_CONTEXT_OWNER_TO_FILE_PASS')
           PY
       - name: Upload acceptance proof
         uses: actions/upload-artifact@v4
