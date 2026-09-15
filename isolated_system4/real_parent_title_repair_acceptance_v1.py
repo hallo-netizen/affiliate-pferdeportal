@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import json
 import os
+import sys
 import tempfile
 from pathlib import Path
 
@@ -22,7 +23,6 @@ def _apply_title(files: dict, title: str) -> None:
     plan['topic'] = title
     if isinstance(plan.get('canonical_article'), dict):
         plan['canonical_article']['title'] = title
-    # quality_binding may cover fields changed above; recompute only its own canonical hash.
     if isinstance(plan.get('quality_binding'), dict):
         plan['quality_binding_hash'] = v3.stable(plan['quality_binding'])
     v3.write_json(files['plan'], plan)
@@ -61,15 +61,16 @@ def main() -> int:
     env['PYTHONDONTWRITEBYTECODE'] = '1'
     runtime = Path(tempfile.mkdtemp(prefix='system4-real-parent-title-v1-'))
 
-    # FIRST GENERATION: intentionally invalid title is machine-bound before Point-0.
     bad_raw = legacy.build_fixture(runtime / 'bad-fixture')
     bad_title = 'Was muss vor einer Fahrt mit Pferdeanhänger geprüft werden: Checkliste?'
     _apply_title(bad_raw, bad_title)
-    bad_files = v3._prepare_point0(runtime / 'bad-generation', bad_raw)
-    bad_workspace = runtime / 'bad-generation' / 'item-0'
+    bad_generation = runtime / 'bad-generation'
+    bad_generation.mkdir()
+    bad_files = v3._prepare_point0(bad_generation, bad_raw)
+    bad_workspace = bad_generation / 'item-0'
     v3._stage_to_draft(bad_files, bad_workspace, env)
-    v3.run([os.sys.executable, str(v3.CONTROLLER), 'draft', str(bad_workspace), str(bad_files['final'])], 0, env)
-    first = v3.run([os.sys.executable, str(v3.CONTROLLER), 'fullcheck', str(bad_workspace)], 4, env)
+    v3.run([sys.executable, str(v3.CONTROLLER), 'draft', str(bad_workspace), str(bad_files['final'])], 0, env)
+    first = v3.run([sys.executable, str(v3.CONTROLLER), 'fullcheck', str(bad_workspace)], 4, env)
     if 'PARENT_TITLE_MACHINE' not in first.stdout or 'PARENT_LAUNCH' not in first.stdout:
         raise AssertionError('REAL_PARENT_TITLE_OWNER_RETURN_NOT_OBSERVED:' + first.stdout)
     finding = _finding_from_state(bad_workspace)
@@ -84,11 +85,12 @@ def main() -> int:
     if ':' in repaired_title or repaired_title == bad_title:
         raise AssertionError('PARENT_TITLE_MACHINE_DID_NOT_REPAIR_TITLE')
 
-    # SECOND GENERATION: rebuild from fresh machine input; never mutate sealed Point-0 in place.
     good_raw = legacy.build_fixture(runtime / 'repaired-fixture')
     _apply_title(good_raw, repaired_title)
-    good_files = v3._prepare_point0(runtime / 'repaired-generation', good_raw)
-    good_workspace = runtime / 'repaired-generation' / 'item-0'
+    repaired_generation = runtime / 'repaired-generation'
+    repaired_generation.mkdir()
+    good_files = v3._prepare_point0(repaired_generation, good_raw)
+    good_workspace = repaired_generation / 'item-0'
 
     if bad_files['point0'].read_bytes() != old_point0:
         raise AssertionError('SEALED_OLD_POINT0_MUTATED')
@@ -98,8 +100,8 @@ def main() -> int:
         raise AssertionError('REPAIRED_GENERATION_MUST_CREATE_NEW_POINT0')
 
     v3._stage_to_draft(good_files, good_workspace, env)
-    v3.run([os.sys.executable, str(v3.CONTROLLER), 'draft', str(good_workspace), str(good_files['final'])], 0, env)
-    second = v3.run([os.sys.executable, str(v3.CONTROLLER), 'fullcheck', str(good_workspace)], 0, env)
+    v3.run([sys.executable, str(v3.CONTROLLER), 'draft', str(good_workspace), str(good_files['final'])], 0, env)
+    second = v3.run([sys.executable, str(v3.CONTROLLER), 'fullcheck', str(good_workspace)], 0, env)
     if 'SYSTEM4_FULL_CHECK_PASS:OUTPUT_GATE_REQUIRED' not in second.stdout:
         raise AssertionError('REAL_PARENT_TITLE_RECHECK_NOT_PASS:' + second.stdout)
     state = json.loads((good_workspace / 'state.json').read_text(encoding='utf-8'))
@@ -107,7 +109,7 @@ def main() -> int:
     if evidence['languagetool']['status'] != 'PASS' or evidence['ppm679']['status'] != 'PASS':
         raise AssertionError('REAL_VALIDATORS_NOT_PASS_AFTER_PARENT_TITLE_RESTART')
 
-    output = runtime / 'repaired-generation' / 'output'
+    output = repaired_generation / 'output'
     output.mkdir()
     collected, envelope, reconstructed = legacy.handoff_from_state(good_files, good_workspace / 'state.json', output)
     final_root = Path(os.environ.get('SYSTEM4_ACCEPTANCE_OUTPUT_DIR', '/tmp/system4-acceptance-output'))
