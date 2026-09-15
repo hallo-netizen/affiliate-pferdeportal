@@ -1,64 +1,74 @@
 # ALLGEMEINES DESIGN – CURRENT STATE
 
-STAND: 2026-09-05
+STAND: 2026-09-15
 
 ## Aktueller Stand
 
 Plugin:
-**Universal Portal Design Suite 2.2.40**
+**Universal Portal Design Suite 2.2.41**
 
 Contract:
 **V104**
 
-GitHub-Abgleich 2026-09-05:
-Der spätere Pferde-Designbranch V1.50.472 enthält ausdrücklich `UNIVERSAL_STATUS.md` mit:
-**Kein Update erforderlich. Universal 2.2.40 / V104 bleibt aktuell.**
+## Aktuelle Änderung
 
-Damit stimmen:
-- übergebener Universal-Plugin-ZIP;
-- übergebener Universal-Master;
-- spätere GitHub-Designhistorie
+Ausschließlich die Geometrie zwischen Breadcrumb-Unterkante und erstem sichtbaren Inhalts-/Hero-/Titelblock wurde zentralisiert.
 
-überein.
+Verbindlich:
+- Desktop: **15 px**
+- Mobil bis 544 px: **10 px**
+- keine individuelle `breadcrumb_gap`-Einstellung mehr
+- keine seitentyp-spezifischen Breadcrumb-Abstandswerte mehr
+- Strukturwrapper zwischen Breadcrumb und erstem sichtbaren Block werden zentral neutralisiert
+- interne Designabstände des sichtbaren Zielblocks bleiben erhalten
 
-## Zweck
+Nicht verändert:
+- Typografie
+- Farben
+- Breiten
+- Karten
+- Tabellenlogik
+- Suche
+- Affiliate
+- sonstige Design-/Funktionslogik
 
-Allgemeines Portaldesign für:
-- Startseite;
-- Hierarchieebenen;
-- Magazin/Journal;
-- HivePress-Anzeigenmarkt;
-- Affiliatezonen;
-- Breadcrumbs;
-- Kategoriearchive;
-- globale/gruppierte Suche.
+## V104 Bestandsschutz
 
-## V104
-
-Finaler DOM-Ursachenfix für generierte Tabellen:
+Der bestehende V104-DOM-Ursachenfix für generierte Tabellen bleibt unverändert erhalten:
 `comparison-table` / `system-129-table` + direkt folgender Absatz
 → reales nicht kollabierendes 28-px-Spacerelement.
 
-## Prüfstand
+## Prüfstand 2.2.41
 
-Belegt:
-- HARD LOCAL BROWSER QA V104: PASS;
-- Full real production-plan corpus: PASS;
-- 20/20 tabellenführende reale Produktionsartikel im Corpus PASS;
-- Mastermanifest: 298/298 OK;
-- externer V2.2.40-Installer = eingebetteter V2.2.40-Installer byte-identisch;
-- CURRENT_PLUGIN_SOURCE = Installer inhaltlich identisch.
+- Source-Audit alte Breadcrumb-Abstandautoritäten: PASS
+- Chromium Desktop 1440: 6/6 exakt 15 px PASS
+- Chromium Mobil 390: 6/6 exakt 10 px PASS
+- Negativmutation zentrale Autorität = 0: ROT wie erwartet
+- interne Hero-/Intro-Paddings unverändert: PASS
+- PHP-Lint 11/11: PASS
+- JS-Syntax: PASS
+- ZIP-Tree bytegleich zum geprüften Build: PASS
+- Overwrite 2.2.40 → 2.2.41: bytegleicher Zielbaum PASS
+- Mastermanifest 2.2.41: 301/301 PASS
 
 ## Beleggrenze
 
-Kein separater Universal-Live-PASS aus den Uploads behauptet.
-Spätere GitHub-Historie bestätigt nur:
-**kein allgemeines Update nach V2.2.40/V104 erforderlich.**
+**LOKAL HART PASS / LIVE OFFEN.**
+Kein Universal-Live-PASS ohne Installation und Sichtprüfung im realen Zielportal.
 
-## Hashes
+## Artefakte
 
 Plugin:
-`fbaf1e36fc814b88b952924b9cf2e71a14913864c226eeed46ed8cf03af8e765`
+`UNIVERSAL_PORTAL_DESIGN_SUITE_V2.2.41_GLOBAL_BREADCRUMB_GAP_15_10_INSTALLIEREN.zip`
+
+SHA-256:
+`2bc9e9327601f8e1f1cf2cb1d299f9ec120994e325abb5d676fd347005e55512`
 
 Master:
-`5d8ef907b671ea96ae02605466bccbad41c012cbd7b3aed9436f7725a02238d7`
+`MASTER_ALLGEMEINGUELTIG_DESIGN_V2_2_41_CONTRACT_V104_20260915.zip`
+
+SHA-256:
+`a6486b41e786ad53a90d5203720244f4055b52dd359779cd31b5a5444e380da3`
+
+Persistenter Artefaktort:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-15/`
