@@ -65,6 +65,10 @@ jobs:
           if found<1:
               raise SystemExit('PPM679_TABLE_AUTHORITY_NOT_FOUND')
           PY
+      - name: Inspect exact PPM 6.7.9 prewrite authorities
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/ppm_prewrite_contract_probe.py | tee /tmp/system4-ppm-prewrite-authorities.txt
       - name: Build fresh machine inputs for one article
         env:
           PYTHONPATH: isolated_system4
@@ -134,6 +138,7 @@ jobs:
           path: |
             /tmp/system4-acceptance-output/
             /tmp/system4-wordpress-import-contract.txt
+            /tmp/system4-ppm-prewrite-authorities.txt
             /tmp/system4-three-route.log
           if-no-files-found: error
           retention-days: 1
