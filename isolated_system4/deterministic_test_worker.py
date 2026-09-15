@@ -205,14 +205,14 @@ def _td(fact_id: str, text: str, authority: dict) -> str:
 
 
 TAILS = [
-    'Dieser Befund wird vorab geprüft',
-    'Die Abweichung wird vorher geklärt',
-    'Der Zustand wird aktuell bestätigt',
-    'Die Funktion wird gezielt kontrolliert',
-    'Das Ergebnis wird neu festgestellt',
-    'Der Prüfpunkt bleibt nachvollziehbar',
-    'Die Kontrolle erfolgt vor Fahrtbeginn',
-    'Die Beobachtung wird eindeutig bewertet',
+    'Befund wird vorab geprüft',
+    'Abweichung wird vorher geklärt',
+    'Zustand wird aktuell bestätigt',
+    'Funktion wird gezielt kontrolliert',
+    'Ergebnis wird neu festgestellt',
+    'Prüfpunkt bleibt nachvollziehbar',
+    'Kontrolle erfolgt vor Fahrtbeginn',
+    'Beobachtung wird eindeutig bewertet',
 ]
 
 
