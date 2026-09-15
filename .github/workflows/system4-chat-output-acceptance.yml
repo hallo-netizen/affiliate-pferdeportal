@@ -1,0 +1,122 @@
+name: System 4 Chat Output Acceptance
+
+on:
+  push:
+    branches:
+      - hobbyroom/system4-chat-output-acceptance-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chat-output-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Syntax and critical chat-delivery gate
+        run: |
+          python -m py_compile isolated_system4/*.py
+          python isolated_system4/chat_delivery_gate.py --help >/dev/null
+
+      - name: Complete existing System4 unit and negative suite
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m unittest discover -s isolated_system4 -p 'test_*.py' -v 2>&1 | tee /tmp/system4-unit-negative.log
+
+      - name: Explicit stage-aware repair regression suite
+        run: |
+          python isolated_system4/test_stage_aware_repair_router.py -v
+          python isolated_system4/test_repair_continuity.py -v
+          python isolated_system4/test_fieldless_validator_repair_routing.py -v
+
+      - name: Restore exact LanguageTool 6.8 Bestand 43 dependency
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, os, urllib.request, zipfile, shutil
+          url='https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip'
+          expected_size=258510816
+          expected_zip='6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d'
+          expected_jar='2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8'
+          cache=Path.home()/'.cache'/'pferde-atelier-languagetool'; cache.mkdir(parents=True,exist_ok=True)
+          archive=cache/'LanguageTool-6.8.zip'
+          def sha(path):
+              h=hashlib.sha256()
+              with path.open('rb') as f:
+                  for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
+              return h.hexdigest()
+          if not archive.is_file() or archive.stat().st_size!=expected_size or sha(archive)!=expected_zip:
+              tmp=archive.with_suffix('.zip.tmp'); tmp.unlink(missing_ok=True)
+              req=urllib.request.Request(url,headers={'User-Agent':'pferde-atelier-system4-ci'})
+              total=0; h=hashlib.sha256()
+              with urllib.request.urlopen(req,timeout=120) as r,tmp.open('wb') as out:
+                  while True:
+                      block=r.read(1024*1024)
+                      if not block:break
+                      total+=len(block)
+                      if total>expected_size:raise SystemExit('LANGUAGETOOL_DOWNLOAD_SIZE_OVERFLOW')
+                      h.update(block); out.write(block)
+              if total!=expected_size:raise SystemExit('LANGUAGETOOL_DOWNLOAD_SIZE_MISMATCH')
+              if h.hexdigest()!=expected_zip:raise SystemExit('LANGUAGETOOL_INNER_ZIP_HASH_MISMATCH')
+              tmp.replace(archive)
+          runtime=Path('/tmp/system4-lt68'); shutil.rmtree(runtime,ignore_errors=True); runtime.mkdir()
+          with zipfile.ZipFile(archive) as zf:zf.extractall(runtime)
+          jar=runtime/'LanguageTool-6.8'/'languagetool-commandline.jar'
+          if not jar.is_file() or sha(jar)!=expected_jar:raise SystemExit('LANGUAGETOOL_COMMANDLINE_JAR_HASH_MISMATCH')
+          with open(os.environ['GITHUB_ENV'],'a',encoding='utf-8') as f:f.write('SYSTEM4_LANGUAGETOOL_JAR='+str(jar)+'\n')
+          print('SYSTEM4_LANGUAGETOOL_DEPENDENCY_PASS')
+          PY
+
+      - name: Exact real LT 6.8 and PPM 6.7.9 corridor
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+        run: python isolated_system4/test_real_lt_ppm_corridor.py -v
+
+      - name: Existing one and three article real start-to-file corridor
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+        run: python isolated_system4/test_full_route_start_real.py -v
+
+      - name: CHAT START to real WordPress import artifact positive and negative WITHOUT Codex
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+          SYSTEM4_CHAT_ARTIFACT_DIR: ${{ runner.temp }}/system4-chat-output
+        run: python isolated_system4/test_local_end_to_end_chat_handoff.py -v
+
+      - name: Verify final artifact is only READY until attached in requesting chat
+        shell: bash
+        run: |
+          python isolated_system4/chat_delivery_gate.py verify \
+            "${RUNNER_TEMP}/system4-chat-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json" \
+            "${RUNNER_TEMP}/system4-chat-output/SYSTEM4_CHAT_DELIVERY_RECEIPT_V1.json"
+          python - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])/'system4-chat-output'
+          artifact=root/'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json'
+          receipt=json.loads((root/'SYSTEM4_CHAT_DELIVERY_RECEIPT_V1.json').read_text())
+          raw=artifact.read_bytes()
+          assert receipt['overall_acceptance_status']=='PENDING_CHAT_ATTACHMENT'
+          assert receipt['sha256']==hashlib.sha256(raw).hexdigest()
+          assert receipt['byte_length']==len(raw)
+          print('SYSTEM4_CHAT_OUTPUT_READY_NOT_YET_OVERALL_PASS')
+          print('SYSTEM4_CHAT_ARTIFACT_SHA256='+receipt['sha256'])
+          print('SYSTEM4_CHAT_ARTIFACT_BYTES='+str(receipt['byte_length']))
+          PY
+
+      - name: Upload exact WordPress import file for requesting chat
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-wordpress-import-chat-output
+          path: |
+            ${{ runner.temp }}/system4-chat-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
+            ${{ runner.temp }}/system4-chat-output/SYSTEM4_CHAT_DELIVERY_RECEIPT_V1.json
+          if-no-files-found: error
+          retention-days: 7
