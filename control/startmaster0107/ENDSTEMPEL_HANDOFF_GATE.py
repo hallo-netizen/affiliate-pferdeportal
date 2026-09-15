@@ -6,7 +6,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 REPO = Path(__file__).resolve().parents[2]
 LOCK_PATH = REPO / "control/startmaster0107/ENDSTEMPEL_HANDOFF_LOCK_V1.json"
@@ -40,10 +40,8 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def load_lock() -> dict[str, Any]:
-    if not LOCK_PATH.is_file():
-        raise Blocked("HANDOFF_LOCK_MISSING")
-    lock = load_json(LOCK_PATH)
+def validate_lock(lock: Mapping[str, Any]) -> dict[str, Any]:
+    lock = dict(lock)
     required = {
         "contract", "status", "scope", "batch_sha256", "source_receipt_ref",
         "expected_receipt_sha256", "expected_articles", "allowed_action",
@@ -67,7 +65,7 @@ def load_lock() -> dict[str, Any]:
     if not re.fullmatch(r"[0-9a-f]{64}", str(lock["expected_receipt_sha256"])):
         raise Blocked("HANDOFF_LOCK_RECEIPT_HASH_INVALID")
     articles = lock["expected_articles"]
-    if not isinstance(articles, list) or len(articles) != 7:
+    if not isinstance(articles, list) or len(articles) < 1:
         raise Blocked("HANDOFF_LOCK_ARTICLE_COUNT_INVALID")
     seen = set()
     for row in articles:
@@ -83,7 +81,14 @@ def load_lock() -> dict[str, Any]:
     return lock
 
 
-def verify_persisted_release(lock: dict[str, Any]) -> dict[str, Any]:
+def load_lock() -> dict[str, Any]:
+    if not LOCK_PATH.is_file():
+        raise Blocked("HANDOFF_LOCK_MISSING")
+    return validate_lock(load_json(LOCK_PATH))
+
+
+def verify_persisted_release(lock: Mapping[str, Any]) -> dict[str, Any]:
+    lock = validate_lock(lock)
     batch = lock["batch_sha256"]
     expected_receipt_ref = f".pferde-release/{batch}/RELEASE_RECEIPT.json"
     if lock["source_receipt_ref"] != expected_receipt_ref:
@@ -145,7 +150,7 @@ def verify_persisted_release(lock: dict[str, Any]) -> dict[str, Any]:
         "status": "ENDSTEMPEL_HANDOFF_PASS",
         "batch_sha256": batch,
         "receipt_sha256": actual_receipt_sha,
-        "article_count": 7,
+        "article_count": len(expected),
         "next_authorized_action": NEXT_ACTION,
         "publish_allowed": False,
         "content_mutation_performed": False,
@@ -165,6 +170,7 @@ def main() -> int:
                 "status": "ENDSTEMPEL_HANDOFF_LOCK_ACTIVE",
                 "scope": lock["scope"],
                 "batch_sha256": lock["batch_sha256"],
+                "article_count": len(lock["expected_articles"]),
                 "only_authorized_action": lock["allowed_action"],
                 "next_action_on_pass": lock["next_action_on_pass"],
                 "publish_allowed": False,
