@@ -29,7 +29,7 @@ jobs:
           set -o pipefail
           python -m unittest discover -s isolated_system4 -p 'test_*.py' -v 2>&1 | tee /tmp/system4-unit-negative.log
 
-      - name: Audit exact PPM 6.7.9 internal test runner
+      - name: Inspect exact PPM 6.7.9 internal tests before full binding
         shell: bash
         run: |
           python - <<'PY'
@@ -43,14 +43,22 @@ jobs:
           with zipfile.ZipFile(package) as zf: zf.extractall(root)
           ppm=root/'portal-production-machine'
           if not ppm.is_dir(): raise SystemExit('PPM679_ROOT_MISSING')
-          tests=sorted(p.relative_to(ppm).as_posix() for p in ppm.rglob('*') if p.is_file() and ('test' in {x.lower() for x in p.relative_to(ppm).parts} or p.name.lower().startswith('test')))
-          print('PPM679_INTERNAL_TEST_FILES_BEGIN')
-          for item in tests: print(item)
-          print('PPM679_INTERNAL_TEST_FILES_END')
-          runners=[]
-          for rel in ('tests/run.php','tests/run-tests.php','tests/run_all.php','tests/test.php','tests/bootstrap-test.php'):
-              if (ppm/rel).is_file(): runners.append(rel)
-          print('PPM679_RUNNER_CANDIDATES='+','.join(runners))
+          selected=[
+            'tests/test-mainblock1-hard-rule-coverage.php',
+            'tests/test-wave2-content-structure-language-gate.php',
+            'tests/test-positive-pipeline.php',
+            'tests/three-type-live-test-release/test-01-release-positive.php',
+          ]
+          danger=('http://','https://','curl_','wp_remote_','shell_exec','passthru','system(','exec(','wp_insert_post','mysqli','PDO(')
+          for rel in selected:
+              p=ppm/rel
+              if not p.is_file(): raise SystemExit('PPM679_SELECTED_TEST_MISSING:'+rel)
+              text=p.read_text(encoding='utf-8')
+              print('PPM679_SELECTED_TEST_BEGIN='+rel)
+              for i,line in enumerate(text.splitlines()[:180],1): print(f'{i:04d}:{line}')
+              hits=[f'{i}:{line.strip()}' for i,line in enumerate(text.splitlines(),1) if any(token in line for token in danger)]
+              print('PPM679_DANGER_HITS='+(' || '.join(hits) if hits else 'NONE'))
+              print('PPM679_SELECTED_TEST_END='+rel)
           PY
 
       - name: Explicit stage-aware repair regression suite
