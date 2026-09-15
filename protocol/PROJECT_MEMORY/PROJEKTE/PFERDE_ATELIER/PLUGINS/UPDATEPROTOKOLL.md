@@ -50,10 +50,10 @@ Keine Fach-/LIVE-Wahrheit wurde durch die Initialisierung verändert.
 - HERKUNFT: EIGENENTWICKLUNG
 - FACHBÜRO: `../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/`
 - VON_VERSION: `0.2.1`
-- AUF_VERSION: `0.2.7` – lokaler Kandidat, **kein WordPress-LIVE-PASS**
+- AUF_VERSION: `0.2.7`
 - AUTORITATIVE TECHNISCHE QUELLE: `../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`
 - CAMPUS-BRANCH: `hobbyroom/project-memory-campus-v1-20260905`
-- KANDIDATENARTEFAKT: `PFERDE_ATELIER_PFERDERASSEN_MANAGER_0.2.7_INSTALLIEREN.zip`
+- RELEASEARTEFAKT: `PFERDE_ATELIER_PFERDERASSEN_MANAGER_0.2.7_INSTALLIEREN.zip`
 - SHA-256: `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`
 
 WARUM:
@@ -68,10 +68,10 @@ ABHÄNGIGKEITEN / SCHNITTSTELLEN:
 - Relations-Neuaufbau ausschließlich als explizite Backend-Aktion; kein Frontend-`init`, keine Aktivierungsreparatur, kein `get_post_metadata`-Filter.
 
 RELEVANTE FEHLERQUELLE:
-`../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/FEHLERQUELLEN.md` → `PR-PLUGIN-001`.
+`../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/FEHLERQUELLEN.md` → `PR-PLUGIN-001`, inzwischen CLOSED / LIVE PASS.
 
 ROLLBACK-/SICHERHEITSREFERENZ:
-Letzter vor dem Relationsumbau belegter Grundstand: 0.2.1. Keine Aussage darüber, welche Version aktuell auf WordPress installiert ist. Bei Livefehler 0.2.7 deaktivieren; keine automatische Datenlöschung.
+Letzter vor dem Relationsumbau belegter Grundstand: 0.2.1. Keine automatische Datenlöschung.
 
 TATSÄCHLICH AUSGEFÜHRTE POSITIVPRÜFUNG 0.2.7:
 - exakte fertige ZIP erneut entpackt;
@@ -96,9 +96,14 @@ TATSÄCHLICH AUSGEFÜHRTE NEGATIVPRÜFUNG:
 - 4/4 Mutationen erkannt.
 
 FACH-/REGRESSIONSTEST:
-`../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md` → lokal hart PASS, WordPress-LIVE offen.
+`../WISSENSDATENBANK/AKTENSCHRAENKE/PFERDERASSEN/TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md` → lokal hart PASS; WordPress-LIVE am 2026-09-15 durch Nutzer ausdrücklich PASS bestätigt.
 
 ARTEFAKT-SYNC:
-**BLOCKED.** Keine `CURRENT.zip` / kein `MANIFEST.md` für PPA-011 erzeugen, solange der vorgeschriebene WordPress-LIVE-Test mit normal ladender Einzelseite, manuellem Neuaufbau, Aegidienberger ohne Überschneidung und zweiter Gegenprobe fehlt.
+- `/Campus-Plugins/PFERDE_ATELIER/PPA-011/CURRENT.zip` vorhanden;
+- `/Campus-Plugins/PFERDE_ATELIER/PPA-011/MANIFEST.md` vorhanden;
+- persistente `CURRENT.zip` erneut materialisiert;
+- SHA-256 `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`: PASS;
+- ZIP-Lesetest: PASS;
+- Plugin-Version aus persistentem ZIP: `0.2.7`: PASS.
 
-ERGEBNIS: **BLOCKED**
+ERGEBNIS: **PASS**
