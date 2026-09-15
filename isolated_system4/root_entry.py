@@ -182,19 +182,8 @@ def main(argv: list[str]) -> int:
         if len(argv) < 2:
             raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
         command=argv[1]
-        if command=='start':
-            if len(argv)!=4:
-                raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
-            snapshot=Path(argv[2]); workspace=Path(argv[3])
-            manifest=_verify_common(workspace); _validate_snapshot_file(snapshot,manifest)
-            return _start(snapshot,workspace)
-        if command=='start-stdin':
-            if len(argv)!=3:
-                raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
-            workspace=Path(argv[2])
-            manifest=_verify_common(workspace)
-            snapshot=_materialize_stdin_snapshot(workspace,manifest)
-            return _start(snapshot,workspace)
+        if command in {'start','start-stdin'}:
+            raise EntryFail('MACHINE_ROUTE_BLOCK:POINT0_REQUIRED')
         if command=='start-point0':
             if len(argv) not in (4,5):
                 raise EntryFail('ROOT_ENTRY_BAD_COMMAND')
