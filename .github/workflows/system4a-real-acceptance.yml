@@ -28,83 +28,17 @@ jobs:
           unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
           test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
-      - name: Prepare fresh off-domain article canary
-        env:
-          PYTHONPATH: isolated_system4
-        run: python3 isolated_system4/fresh_article_canary_v1.py prepare /tmp/system4-fresh-canary
-      - name: Machine-load and seal neutral canary sources
+      - name: Prove machine route lock before acceptance
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_machine_route_lock_contract.py
+      - name: Assert no Codex action exists before Point0
         run: |
           set -euo pipefail
-          mkdir -p /tmp/system4-fresh-canary/sources
-          curl --fail --location --retry 3 'https://www.umweltbundesamt.de/themen/gesundheit/umwelteinfluesse-auf-den-menschen/innenraumluft' -o /tmp/system4-fresh-canary/sources/uba-innenraumluft.html
-          curl --fail --location --retry 3 'https://www.umweltbundesamt.de/themen/gesundheit/umwelteinfluesse-auf-den-menschen/innenraumluft/infektioese-aerosole-in-innenraeumen' -o /tmp/system4-fresh-canary/sources/uba-luftfeuchte.html
-          curl --fail --location --retry 3 'https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/richtiges-heizen-schuetzt-das-klima-den-geldbeutel' -o /tmp/system4-fresh-canary/sources/uba-heizen-lueften.html
-          python3 - <<'PY'
-          import hashlib, json
-          from datetime import datetime, timezone
-          from pathlib import Path
-          root=Path('/tmp/system4-fresh-canary')
-          rows=[]
-          urls={
-            'uba-innenraumluft.html':'https://www.umweltbundesamt.de/themen/gesundheit/umwelteinfluesse-auf-den-menschen/innenraumluft',
-            'uba-luftfeuchte.html':'https://www.umweltbundesamt.de/themen/gesundheit/umwelteinfluesse-auf-den-menschen/innenraumluft/infektioese-aerosole-in-innenraeumen',
-            'uba-heizen-lueften.html':'https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/richtiges-heizen-schuetzt-das-klima-den-geldbeutel',
-          }
-          for i,(name,url) in enumerate(urls.items(),1):
-            raw=(root/'sources'/name).read_bytes()
-            rows.append({'source_id':f'canary-source-{i}','file':'sources/'+name,'source_url':url,'sha256':hashlib.sha256(raw).hexdigest(),'byte_length':len(raw)})
-          out={'contract':'SYSTEM4_CANARY_MACHINE_SOURCE_MANIFEST_V1','retrieved_at':datetime.now(timezone.utc).isoformat(),'sources':rows,'network_access_for_worker_required':False}
-          (root/'source_manifest.json').write_text(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
-          PY
-      - name: Require Codex API secret for live worker canary
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          if [ -z "${OPENAI_API_KEY:-}" ]; then
-            echo 'SYSTEM4_FRESH_ARTICLE_CANARY_BLOCKED:OPENAI_API_KEY_SECRET_MISSING'
-            exit 4
+          if grep -n 'openai/codex-action\|@codex' .github/workflows/system4a-real-acceptance.yml; then
+            echo 'SYSTEM4_MACHINE_ROUTE_BLOCK:CODEX_BEFORE_POINT0_FORBIDDEN'
+            exit 2
           fi
-      - name: Run isolated Codex live worker for fresh off-domain article
-        uses: openai/codex-action@v1
-        with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          permission-profile: ':workspace'
-          working-directory: /tmp/system4-fresh-canary
-          effort: high
-          prompt: |
-            You are the live writing worker for a fail-closed acceptance canary.
-            Work ONLY inside /tmp/system4-fresh-canary. Do not read the repository, do not reuse any prewritten article, and do not use web search.
-            Read challenge.json, source_manifest.json, and only the machine-loaded files under sources/.
-
-            The exact article topic is in challenge.json. It is intentionally unrelated to horses.
-            Produce FOUR new files in this workspace and nothing else:
-
-            1) research.json
-               contract = SYSTEM4_RESEARCH_EVIDENCE_V1
-               sources = a list based only on source_manifest.json and the captured source files. Each row needs source_id, source_title, source_url, retrieved_at, evidence, and snapshot_sha256 where snapshot_sha256 is SHA256 of the UTF-8 evidence string.
-
-            2) facts.json
-               contract = SYSTEM4_FACTS_EVIDENCE_V1
-               claims = at least 4 factual claims. Each claim needs fact_id, source_id, statement, evidence_text, and evidence_text_sha256. Every evidence_text must come from research.json and its hash must match.
-
-            3) article.html
-               Write a genuinely NEW German FAQ article answering exactly: "Warum beschlägt ein Badezimmerspiegel nach dem Duschen?"
-               Use the supplied evidence only. Explain the physical mechanism clearly and accurately. Include useful practical context about warm humid air, colder surfaces, saturation/condensation and ventilation. Aim for 900-1200 German words so this is a real writing sample, not a stub. Use clean semantic HTML with an article root, paragraphs, several H2 sections and one useful table. Do not include external links. Do not mention horses, horse trailers, towing, loading horses or any horse-domain subject. Do not copy any article body from elsewhere.
-
-            4) worker_provenance.json
-               contract = SYSTEM4_FRESH_WORKER_PROVENANCE_V1
-               challenge_nonce = exact nonce from challenge.json
-               generated_after_start_gate = true
-               prewritten_fixture_used = false
-               generation_mode = LIVE_WORKER_GENERATION
-               article_sha256 = SHA256 of article.html after decoding UTF-8 and applying Python .strip(), then re-encoding UTF-8.
-
-            Before finishing, independently reopen all four files and verify JSON syntax, hashes, the exact topic, and that article.html contains neither "Pferd" nor "Pferdeanhänger".
-            Do not modify challenge.json or source_manifest.json.
-      - name: Require genuinely new live-worker article before any acceptance PASS
-        env:
-          PYTHONPATH: isolated_system4
-        run: python3 isolated_system4/fresh_article_canary_v1.py verify /tmp/system4-fresh-canary
+          echo 'SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_BEFORE_POINT0'
       - name: Run Point0 Supervisor Worker real regression acceptance
         env:
           PYTHONPATH: isolated_system4
