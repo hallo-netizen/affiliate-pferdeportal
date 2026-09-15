@@ -1,0 +1,185 @@
+from __future__ import annotations
+
+import unittest
+from pathlib import Path
+
+
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parent
+WORKFLOW = REPO / '.github/workflows/system4a-real-acceptance.yml'
+
+
+def text(path: Path) -> str:
+    return path.read_text(encoding='utf-8')
+
+
+class AcceptanceHistoryHardlockTests(unittest.TestCase):
+    """Permanent machine assertions for failures that previously invalidated the test route.
+
+    This is not a second workflow. It only refuses to let the existing acceptance workflow
+    lose already-required stations, freshness, real checkers, repair returns, or 1..N output.
+    """
+
+    def test_no_old_article_or_candidate_can_feed_active_input_factory(self):
+        src = text(HERE / 'test_route_input_factory.py')
+        for forbidden in (
+            'g9-single-faq-approved-candidate-v1.json',
+            'full_local_acceptance',
+            'recovery_sources/',
+            'FIRST_FULL_RULE_TEST_ARTICLE_PROOF',
+            'LIVE_BOUND_INPUT_ONE_ARTICLE',
+        ):
+            self.assertNotIn(forbidden, src)
+        self.assertIn('SYSTEM4_FRESH_RUN_TOKEN_REQUIRED', src)
+        self.assertIn("'old_article_body_used': False", src)
+        self.assertIn("'g9_candidate_used': False", src)
+
+    def test_each_acceptance_run_is_machine_bound_to_new_article_sources(self):
+        factory = text(HERE / 'test_route_input_factory.py')
+        route = text(HERE / 'live_parity_v2.py')
+        for needle in (
+            'SYSTEM4_FRESH_RUN_TOKEN',
+            'fresh_run_token_sha256',
+            'SYSTEM4_FRESH_ARTICLE_INPUT_V1',
+            'source_freshness',
+        ):
+            self.assertIn(needle, factory)
+        for needle in (
+            'SYSTEM4_FRESH_RUN_TOKEN',
+            'SYSTEM4_HISTORICAL_ARTICLE_BODY_REUSED',
+            'SYSTEM4_HISTORICAL_VISIBLE_ARTICLE_REUSED',
+            'SYSTEM4_CURRENT_RUN_SOURCE_TRACE_MISSING',
+            'SYSTEM4_CURRENT_BATCH_DRAFT_HASH_COLLISION',
+            'SYSTEM4_CURRENT_BATCH_VISIBLE_ARTICLE_COLLISION',
+        ):
+            self.assertIn(needle, route)
+
+    def test_point0_root_supervisor_dispatch_cannot_be_skipped(self):
+        route = text(HERE / 'live_parity_v2.py')
+        controller = text(HERE / 'controller.py')
+        self.assertIn("'start-point0'", route)
+        self.assertIn("'worker_dispatch.json'", controller)
+        self.assertIn("'root_receipt.json'", controller)
+        self.assertIn("'supervisor_state.json'", controller)
+        self.assertIn('MACHINE_ROUTE_BLOCK', controller)
+        self.assertLess(route.index("'start-point0'"), route.index("'research'"))
+
+    def test_full_textmachine_components_are_not_optional_in_fullcheck(self):
+        controller = text(HERE / 'controller.py')
+        engine = text(HERE / 'production_checks_engine.py')
+        for needle in (
+            'authoring_contract.validate_bound',
+            'content_guard.validate_single_article',
+            'design_guard.validate_design_neutrality',
+            'production_checks.run_all',
+        ):
+            self.assertIn(needle, controller)
+        for needle in (
+            'LANGUAGETOOL',
+            'PPM679',
+        ):
+            self.assertIn(needle, engine)
+
+    def test_repairable_errors_must_return_to_owner_not_conflict_block(self):
+        controller = text(HERE / 'controller.py')
+        self.assertNotIn("raise Fail('REPAIR_OWNER_CONFLICT", controller)
+        self.assertIn('MULTI_OWNER_RETURN', controller)
+        self.assertIn("s['checks']['return_required']=True", controller)
+        self.assertIn("s['checks']['return_route']=PARENT_LAUNCH", controller)
+        self.assertIn('SYSTEM4_STAGE_OWNER_RETURN', controller)
+        self.assertIn('SYSTEM4_REPAIR_OWNER_RETURN', controller)
+
+    def test_same_checker_is_mandatory_after_draft_repair(self):
+        route = text(HERE / 'live_parity_v2.py')
+        engine = text(HERE / 'controller_engine.py')
+        self.assertIn("s['phase']='CHECK_REQUIRED'", engine)
+        self.assertIn("if phase=='CHECK_REQUIRED'", route)
+        self.assertIn("if phase=='REPAIR_REQUIRED'", route)
+        self.assertIn("'fullcheck'", route)
+        self.assertIn('REPAIR_DRAFT_UNCHANGED', engine)
+
+    def test_batch_handoff_and_output_remain_one_to_n(self):
+        route = text(HERE / 'live_parity_v2.py')
+        endgate = text(REPO / 'control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py')
+        self.assertIn("'batch_gate.py','collect'", route)
+        self.assertIn("'handoff_transport.py','validate'", route)
+        self.assertIn('INLINE_RECONSTRUCTION_NOT_BYTE_EQUAL', route)
+        self.assertIn('len(articles) < 1', endgate)
+        self.assertNotIn('len(articles) != 7', endgate)
+        self.assertNotIn('"article_count": 7', endgate)
+
+    def test_acceptance_workflow_has_no_codex_and_must_run_full_rule_matrix_first(self):
+        workflow = text(WORKFLOW)
+        self.assertNotIn('openai/codex-action@', workflow)
+        self.assertIn('SYSTEM4_FRESH_RUN_TOKEN', workflow)
+        matrix = 'Run immutable Textmaschine and historical negative matrix'
+        one = 'Build fresh machine inputs for one article'
+        self.assertIn(matrix, workflow)
+        self.assertIn(one, workflow)
+        self.assertLess(workflow.index(matrix), workflow.index(one))
+
+        required_tests = (
+            'test_acceptance_history_hardlock.py',
+            'test_machine_route_lock_contract.py',
+            'test_point0_v2.py',
+            'test_root_entry.py',
+            'test_source_acquisition_owner_contract.py',
+            'test_indexed_ingress.py',
+            'test_content_guard.py',
+            'test_context_required_regression.py',
+            'test_design_guard.py',
+            'test_draft_bound_rebind.py',
+            'test_repair_continuity.py',
+            'test_repair_owner_routing_contract.py',
+            'test_repair_owner_failclosed_contract.py',
+            'test_stage_owner_return_contract.py',
+            'test_parent_title_repair_contract.py',
+            'test_parent_metadata_owner_authority_contract.py',
+            'test_batch_gate.py',
+            'test_universal_batch_gate.py',
+            'test_handoff_transport.py',
+        )
+        for required in required_tests:
+            self.assertIn(required, workflow, required + ' missing from permanent acceptance matrix')
+
+    def test_historical_regression_contract_remains_bound(self):
+        protocol = text(HERE / 'PROTOKOLL_TESTSTRECKE_V2_20260914.md')
+        permanent = (
+            'fehlende Manifestbindung',
+            'leerer Quellenpool',
+            'falscher Source-Hash',
+            'HTTP 401',
+            'HTTP 403',
+            'falscher Head',
+            'Point-0-Tamper',
+            'Workspace im Repo',
+            'nichtleerer Workspace',
+            'fehlender Dispatch',
+            'Dispatch-Tamper',
+            'freie Webfreigabe',
+            'Änderung gebundener Quellenbytes',
+            'ungebundene Research-Daten',
+            'Fact-Quelle außerhalb Research',
+            'Evidenz nicht in Quelle',
+            'unbekannter PPM-Vertrag',
+            'Wortminimum',
+            'Inline-Designmutation',
+            'externer Link',
+            'unbekannte Fact-ID',
+            'zu großer Same-Article-Repair',
+            'Cross-Item-Research',
+            'Prewrite-Byte-Tamper',
+            'rehashter Linktausch',
+            'Runtime-Linktausch',
+            'Kategorieänderung',
+            'Artikelindex/Pool/Slot-Verwechslung',
+            'Source-Acquisition 200/401/403',
+            'Repair ohne erneuten echten Prüferlauf',
+            'Repair mit Überspringen eines späteren Prüfers',
+        )
+        for item in permanent:
+            self.assertIn(item, protocol)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
