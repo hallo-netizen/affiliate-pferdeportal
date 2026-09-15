@@ -40,10 +40,11 @@ jobs:
           actual=hashlib.sha256(package.read_bytes()).hexdigest()
           if actual!=expected: raise SystemExit('PPM679_PACKAGE_HASH_MISMATCH')
           root=Path('/tmp/system4-ppm679-full-suite'); shutil.rmtree(root,ignore_errors=True); root.mkdir()
-          with zipfile.ZipFile(package) as zf: zf.extractall(root)
-          ppm=root/'portal-production-machine'
-          if not ppm.is_dir(): raise SystemExit('PPM679_ROOT_MISSING')
-          tests=sorted(p for p in (ppm/'tests').rglob('test-*.php') if p.is_file())
+          seed=root/'seed'; seed.mkdir()
+          with zipfile.ZipFile(package) as zf: zf.extractall(seed)
+          seed_ppm=seed/'portal-production-machine'
+          if not seed_ppm.is_dir(): raise SystemExit('PPM679_ROOT_MISSING')
+          tests=sorted(p.relative_to(seed_ppm).as_posix() for p in (seed_ppm/'tests').rglob('test-*.php') if p.is_file())
           if len(tests)<100: raise SystemExit('PPM679_INTERNAL_TEST_SET_INCOMPLETE:'+str(len(tests)))
           required={
               'tests/test-mainblock1-hard-rule-coverage.php',
@@ -57,23 +58,29 @@ jobs:
               'tests/test-wave2-content-structure-language-gate.php',
               'tests/test-wave2-wordpress-binding.php',
           }
-          rels={p.relative_to(ppm).as_posix() for p in tests}
-          missing=sorted(required-rels)
+          missing=sorted(required-set(tests))
           if missing: raise SystemExit('PPM679_REQUIRED_INTERNAL_TEST_MISSING:'+missing[0])
+          shutil.rmtree(seed)
           failures=[]
-          for i,test in enumerate(tests,1):
-              rel=test.relative_to(ppm).as_posix()
+          for i,rel in enumerate(tests,1):
+              case=root/f'case-{i:03d}'
+              case.mkdir()
+              with zipfile.ZipFile(package) as zf: zf.extractall(case)
+              ppm=case/'portal-production-machine'
+              test=ppm/rel
+              if not test.is_file(): raise SystemExit('PPM679_TEST_DISAPPEARED:'+rel)
               try:
                   cp=subprocess.run(['php',str(test)],cwd=ppm,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120,check=False)
               except subprocess.TimeoutExpired as exc:
                   print(f'PPM679_INTERNAL_TEST_BLOCK:{i}/{len(tests)}:{rel}:TIMEOUT')
                   failures.append((rel,str(exc.stdout or ''),str(exc.stderr or '')))
-                  continue
-              if cp.returncode!=0:
-                  print(f'PPM679_INTERNAL_TEST_BLOCK:{i}/{len(tests)}:{rel}:RC={cp.returncode}')
-                  failures.append((rel,cp.stdout,cp.stderr))
               else:
-                  print(f'PPM679_INTERNAL_TEST_PASS:{i}/{len(tests)}:{rel}')
+                  if cp.returncode!=0:
+                      print(f'PPM679_INTERNAL_TEST_BLOCK:{i}/{len(tests)}:{rel}:RC={cp.returncode}')
+                      failures.append((rel,cp.stdout,cp.stderr))
+                  else:
+                      print(f'PPM679_INTERNAL_TEST_PASS:{i}/{len(tests)}:{rel}')
+              shutil.rmtree(case,ignore_errors=True)
           if failures:
               print('PPM679_FAILURE_COUNT='+str(len(failures)))
               for rel,out,err in failures:
