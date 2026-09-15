@@ -8,7 +8,6 @@ from pathlib import Path
 import authoring_contract
 import production_checks
 import repair_router
-import source_bound_lt_policy
 
 
 class NoCodexRepairError(RuntimeError):
@@ -55,20 +54,35 @@ def _lt_finding_detail(raw: dict, plain: str) -> str:
     return json.dumps(detail, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
 
 
-def _trusted_source_text(state: dict) -> str:
-    research = state.get('research') if isinstance(state.get('research'), dict) else {}
-    raw = research.get('text')
-    if not isinstance(raw, str) or not raw.strip():
-        return ''
-    try:
-        document = json.loads(raw)
-    except json.JSONDecodeError:
-        return raw
-    sources = document.get('sources') if isinstance(document, dict) else None
-    if not isinstance(sources, list):
-        return raw
-    evidence = [str(row.get('evidence') or '') for row in sources if isinstance(row, dict)]
-    return '\n'.join(value for value in evidence if value)
+def _repair_from_exact_lt_text(repo: Path, state: dict, body: str, checked_text: str, prefix: str) -> str:
+    report, _, _ = production_checks._run_languagetool_text(Path(repo), checked_text)
+    matches = report.get('matches') if isinstance(report, dict) else None
+    if not isinstance(matches, list) or not matches:
+        raise NoCodexRepairError(prefix + '_MATCHES_MISSING')
+    normalized = []
+    for raw in matches:
+        if not isinstance(raw, dict):
+            raise NoCodexRepairError(prefix + '_MATCH_INVALID')
+        offset = raw.get('offset'); length = raw.get('length')
+        replacements = raw.get('replacements')
+        if not isinstance(offset, int) or not isinstance(length, int) or length <= 0:
+            raise NoCodexRepairError(prefix + '_RANGE_INVALID:' + _lt_finding_detail(raw, checked_text))
+        if not isinstance(replacements, list) or not replacements:
+            raise NoCodexRepairError(prefix + '_NO_SUGGESTION:' + _lt_finding_detail(raw, checked_text))
+        replacement = replacements[0].get('value') if isinstance(replacements[0], dict) else None
+        if not isinstance(replacement, str) or not replacement.strip():
+            raise NoCodexRepairError(prefix + '_SUGGESTION_INVALID:' + _lt_finding_detail(raw, checked_text))
+        target = checked_text[offset:offset + length]
+        if not target:
+            raise NoCodexRepairError(prefix + '_TARGET_EMPTY:' + _lt_finding_detail(raw, checked_text))
+        normalized.append((offset, target, replacement))
+    repaired = body
+    for _, target, replacement in sorted(normalized, key=lambda row: row[0], reverse=True):
+        repaired = _replace_last_literal(repaired, target, replacement)
+    if repaired == body:
+        raise NoCodexRepairError(prefix + '_NO_CHANGE')
+    authoring_contract.validate_candidate(repaired, state['authoring_contract'])
+    return repaired
 
 
 def repair_languagetool(repo: Path, workspace: Path) -> str:
@@ -77,40 +91,16 @@ def repair_languagetool(repo: Path, workspace: Path) -> str:
     if not body:
         raise NoCodexRepairError('LT_REPAIR_DRAFT_MISSING')
     plain = production_checks._plain_text(body)
-    report, _, _ = production_checks._run_languagetool_text(Path(repo), plain)
-    matches = report.get('matches') if isinstance(report, dict) else None
-    if not isinstance(matches, list) or not matches:
-        raise NoCodexRepairError('LT_REPAIR_MATCHES_MISSING')
-    try:
-        unresolved, _approved = source_bound_lt_policy.classify_report(report, plain, _trusted_source_text(state))
-    except ValueError as exc:
-        raise NoCodexRepairError('LT_REPAIR_REPORT_INVALID') from exc
-    if not unresolved:
-        raise NoCodexRepairError('LT_REPAIR_NO_UNRESOLVED_FINDINGS')
-    normalized = []
-    for raw in unresolved:
-        if not isinstance(raw, dict):
-            raise NoCodexRepairError('LT_REPAIR_MATCH_INVALID')
-        offset = raw.get('offset'); length = raw.get('length')
-        replacements = raw.get('replacements')
-        if not isinstance(offset, int) or not isinstance(length, int) or length <= 0:
-            raise NoCodexRepairError('LT_REPAIR_RANGE_INVALID:' + _lt_finding_detail(raw, plain))
-        if not isinstance(replacements, list) or not replacements:
-            raise NoCodexRepairError('LT_REPAIR_NO_SUGGESTION:' + _lt_finding_detail(raw, plain))
-        replacement = replacements[0].get('value') if isinstance(replacements[0], dict) else None
-        if not isinstance(replacement, str) or not replacement.strip():
-            raise NoCodexRepairError('LT_REPAIR_SUGGESTION_INVALID:' + _lt_finding_detail(raw, plain))
-        target = plain[offset:offset + length]
-        if not target:
-            raise NoCodexRepairError('LT_REPAIR_TARGET_EMPTY:' + _lt_finding_detail(raw, plain))
-        normalized.append((offset, target, replacement))
-    repaired = body
-    for _, target, replacement in sorted(normalized, key=lambda row: row[0], reverse=True):
-        repaired = _replace_last_literal(repaired, target, replacement)
-    if repaired == body:
-        raise NoCodexRepairError('LT_REPAIR_NO_CHANGE')
-    authoring_contract.validate_candidate(repaired, state['authoring_contract'])
-    return repaired
+    return _repair_from_exact_lt_text(repo, state, body, plain, 'LT_REPAIR')
+
+
+def repair_ppm_language_evidence(repo: Path, workspace: Path) -> str:
+    state = _state(workspace)
+    body = str(state.get('draft_markdown') or '')
+    if not body:
+        raise NoCodexRepairError('PPM_LT_REPAIR_DRAFT_MISSING')
+    checked = production_checks._ppm_visible_language_text(body)
+    return _repair_from_exact_lt_text(repo, state, body, checked, 'PPM_LT_REPAIR')
 
 
 def repair_conclusion_balance(workspace: Path) -> str:
@@ -150,6 +140,8 @@ def candidate_for_current_failure(repo: Path, workspace: Path) -> str:
         raise NoCodexRepairError('NON_BODY_REPAIR_ROUTE:' + owner + ':' + target)
     if checker == 'languagetool' or any(code == 'LANGUAGETOOL_FINDING' for code in codes):
         return repair_languagetool(repo, workspace)
+    if any(code == 'BLOCKED_WAVE2_LANGUAGE_EVIDENCE' for code in codes):
+        return repair_ppm_language_evidence(repo, workspace)
     if any(code == 'BLOCKED_WAVE2_CONCLUSION_BALANCE' for code in codes):
         return repair_conclusion_balance(workspace)
     raise NoCodexRepairError('NO_DETERMINISTIC_REPAIR_ADAPTER:' + checker + ':' + ','.join(codes))
