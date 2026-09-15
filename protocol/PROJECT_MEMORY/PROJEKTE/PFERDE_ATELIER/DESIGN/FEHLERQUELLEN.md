@@ -2,62 +2,43 @@
 
 Keine zweite Fehlerwahrheit.
 
-## V104 Tabellenabstand
+## DESIGN-LIVE-20260915-001
 
-GitHub-Autorität:
-`design-baseline/2026-08-22/v101` bis `v104`
+STATUS: **AKTIV / BLOCKED**
 
-Lernkette:
-- V101/V102/V103 = Zwischenstände;
-- V104 = finaler nicht kollabierender Tabellenabstand-Fix mit HARD LOCAL QA/FULL CORPUS QA.
+SYMPTOM:
+Nach der in diesem Chat erzeugten Design-Pluginfolge meldet der Nutzer real LIVE:
+- Pferderassen-Seite nicht mehr auffindbar / zerschossen;
+- Glossar nicht mehr auffindbar.
 
-## Kategorietexte 1.50.470→1.50.472
+BETROFFENE KANDIDATEN:
+- Pferde Atelier Design 1.50.529: vom Nutzer real als fehlerhaft gemeldet;
+- Pferde Atelier Design 1.50.530: nur als nachträglicher lokaler Fixkandidat erzeugt, **keine Abnahme, kein LIVE-PASS**;
+- Universal Portal Design Suite 2.2.42: im selben Änderungszug erzeugt; Rolle im realen Fehler **UNGEKLÄRT**.
 
-GitHub:
-`design-baseline/2026-08-31/`
+FEHLER IN DIESEM CHAT:
+- Pluginänderungen wurden zu früh als lokal ausreichend geprüft dargestellt;
+- die Interaktion des allgemeinen und des Pferde-Designplugins war vor Ausgabe nicht belastbar reproduzierbar belegt;
+- ein realer LIVE-Ausfall widerlegt die vorherige Abnahmebehauptung;
+- danach wurden erneut Downloadpakete angeboten, bevor die tatsächlich installierte Plugin-Kombination frisch bestimmt war.
 
-Aktueller Endbeleg:
-`v150472-category-intro-79/`
+HARTE REGEL:
+Kein Designplugin-PASS mehr aus isolierter Prüfung. Bei Änderungen an gemeinsam wirksamen Designregeln muss die reale Plugin-Kombination positiv **und** negativ geprüft werden. Ein Kandidat darf bei ungeklärtem LIVE-Ausfall weder als CURRENT synchronisiert noch als abgenommen ausgegeben werden.
 
-Wichtig:
-Diese spätere Kette ändert laut MASTER_STATUS keine allgemeine Designregel, sondern nur Pferde-spezifische redaktionelle Kategorietexte/Loader.
+ERFORDERLICHE REPARATUR:
+1. installierte Versionen beider Designplugins frisch feststellen;
+2. Fehler exakt reproduzieren;
+3. Ursache zwischen allgemeinem Plugin, Pferde-Plugin oder Interaktion isolieren;
+4. Pferderassen + Glossar gemeinsam als Pflichtregression testen;
+5. erst dann minimaler Fix und WordPress-LIVE-Readback.
 
+## HISTORISCHE FEHLERKETTEN
 
-## Kategorie-Reihenfolge 2026-09-07
+### V104 Tabellenabstand
+GitHub-Autorität: `design-baseline/2026-08-22/v101` bis `v104`.
+V104 bleibt der historisch belegte nicht kollabierende Tabellenabstand-Fix.
 
-STATUS:
-**CLOSED / LIVE PASS**
-
-AUFTRAG:
-Auf der zentralen Kategorieebene sollten ausschließlich die **Affiliate-Produkte / Produktvorschläge** über die **Beitragsvorschau / Meistgelesen** gesetzt werden.
-
-FEHLVERSUCHE:
-- V1.50.473: REJECTED – Seitenstruktur unnötig umgebaut.
-- V1.50.474: REJECTED – Artikel intern aufgeteilt.
-- V1.50.475: REJECTED – falsche Elemente verschoben.
-- V1.50.476: REJECTED – Affiliate-Banner statt Affiliate-Produkte verschoben.
-
-URSACHE:
-Der Auftrag wurde mehrfach interpretiert und erweitert, statt zwei exakt benannte bestehende Blöcke zu tauschen.
-
-DAUERHAFTE REPARATUR DES ARBEITSWEGS:
-Für lokale DESIGN-Miniänderungen ist der manuelle Patchweg gesperrt.
-Verbindlich:
-`MINIMAL_PATCH_RUNNER.py` + hashgebundener Job + Positiv-/Negativprüfung + Reversibilität.
-
-FINALER JOB:
-`DESIGN-ORDER-SWAP-002`
-
-FINAL BESTÄTIGT:
-- Affiliate-Produkte / Produktvorschläge stehen über der Beitragsvorschau.
-- Affiliate-Banner bleibt unverändert.
-- Artikel-/Verweisstruktur bleibt unverändert.
-- Nutzer-LIVE-PASS auf „Gebisse“ am 2026-09-07.
-
-TECHNISCHE ORIGINALBELEGE:
-- `LIVE_PASS_DESIGN_ORDER_SWAP_002.md`
-- `MINIMAL_PATCH_LAST_RECEIPT.json`
-- historische Kandidatenbelege unter `design-baseline/2026-09-07/`
-
-LEHRE:
-**Bei Miniänderungen keine Interpretation: nur die ausdrücklich gebundene Transformation ausführen.**
+### Kategorie-Reihenfolge 2026-09-07
+STATUS: CLOSED / LIVE PASS.
+Finaler Job: `DESIGN-ORDER-SWAP-002`.
+Belege: `LIVE_PASS_DESIGN_ORDER_SWAP_002.md`, `MINIMAL_PATCH_LAST_RECEIPT.json`.
