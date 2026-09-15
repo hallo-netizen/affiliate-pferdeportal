@@ -205,33 +205,21 @@ def _td(fact_id: str, text: str, authority: dict) -> str:
 
 
 TAILS = [
-    'wird dieser Punkt vor dem Start bewusst kontrolliert und eine erkennbare Abweichung vor der Abfahrt geklärt',
-    'gehört diese Beobachtung in den festen Kontrollgang, damit der aktuelle Zustand und nicht eine frühere Annahme zählt',
-    'wird die Funktion gezielt geprüft, bevor die Vorbereitung mit dem nächsten gebundenen Schritt fortgesetzt wird',
-    'bleibt der Prüfschritt offen, bis der Zustand eindeutig beurteilt und eine mögliche Ursache geklärt ist',
-    'hilft eine feste Reihenfolge dabei, Veränderungen zuverlässig wahrzunehmen und keine Kontrolle auszulassen',
-    'wird das Ergebnis direkt eingeordnet, sodass eine auffällige Stelle noch vor dem Losfahren erneut betrachtet werden kann',
-    'ersetzt Routine die aktuelle Kontrolle nicht, sondern macht den wiederkehrenden Ablauf lediglich leichter nachvollziehbar',
-    'ist eine eindeutige Prüfung wichtiger als Tempo, weil nur der tatsächlich festgestellte Zustand die Vorbereitung abschließt',
-    'lässt sich der Arbeitsschritt auch bei wechselnden Personen nachvollziehbar durchführen und eindeutig abschließen',
-    'wird nicht aus einer früheren Fahrt auf den heutigen Zustand geschlossen, sondern unmittelbar vor der Abfahrt neu geprüft',
-    'führt eine unklare Beobachtung zurück zu genau diesem Prüfpunkt, statt die Unsicherheit in den nächsten Arbeitsschritt mitzunehmen',
-    'bleibt die gebundene Aussage die fachliche Grundlage und wird ohne zusätzliche Annahmen in eine konkrete Kontrolle übersetzt',
-    'wird die jeweilige Funktion oder Verbindung so lange betrachtet, bis der vorgesehene Zustand nachvollziehbar bestätigt ist',
-    'macht die wiederholte Kontrolle kleine Veränderungen leichter sichtbar und hält den Ablauf auch bei vertrauter Ausrüstung verlässlich',
-    'wird der einzelne Punkt erst dann abgeschlossen, wenn das aktuelle Ergebnis eindeutig ist und keine erkennbare Auffälligkeit offenbleibt',
-    'ordnet die Vorbereitung diese Beobachtung an der richtigen Stelle ein und verhindert dadurch einen unbemerkten Sprung im Kontrollablauf',
-    'bleibt genügend Zeit für eine Korrektur, weil die Prüfung bewusst vor der Abfahrt und nicht erst während der Nutzung stattfindet',
-    'wird nach einer Korrektur derselbe Punkt erneut geprüft, bevor der gebundene Ablauf an der vorgesehenen Stelle weitergeht',
-    'trennt der Ablauf Prüfen und Vermuten klar voneinander und verlangt für den Abschluss einen nachvollziehbaren aktuellen Zustand',
-    'entsteht ein reproduzierbarer Prüfschritt, der bei jeder neuen Fahrt erneut ausgeführt und nicht aus Gewohnheit übersprungen wird',
+    'Dieser Befund wird vorab geprüft',
+    'Die Abweichung wird vorher geklärt',
+    'Der Zustand wird aktuell bestätigt',
+    'Die Funktion wird gezielt kontrolliert',
+    'Das Ergebnis wird neu festgestellt',
+    'Der Prüfpunkt bleibt nachvollziehbar',
+    'Die Kontrolle erfolgt vor Fahrtbeginn',
+    'Die Beobachtung wird eindeutig bewertet',
 ]
 
 
 def _fact_sentence(fact_id: str, claims: dict, index: int) -> str:
     base = html.escape(_plain_claim(claims[fact_id]['statement']))
     tail = TAILS[index % len(TAILS)]
-    return f'{base}; deshalb {tail}.'
+    return f'{base}; {tail}.'
 
 
 def _heading(intent_terms: list[str], index: int) -> str:
@@ -323,6 +311,8 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         if block not in sections:
             sections[block] = [f'<h2>{_heading(intent_terms, len(order))}</h2>']
             order.append(block)
+        if block in {table_block, 'conclusion'}:
+            continue
         for _ in range(2):
             fact_id = ids[cursor % len(ids)]
             sections[block].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
@@ -345,18 +335,19 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
 
     min_rows = max(4, int(table_cfg.get('minimum_body_rows') or req.get('min_table_body_rows') or 0))
     row_labels = ['Ausgangslage', 'Sichtprüfung', 'Funktionsprüfung', 'Abschlusskontrolle', 'Nachkontrolle', 'Freigabeprüfung']
+    unused_tail = ids[cursor:] if cursor < len(ids) else []
+    table_pool = unused_tail if len(unused_tail) >= min_rows else ids
     table_rows = []
     for row_index in range(min_rows):
-        fact_a = ids[(cursor + row_index) % len(ids)]
-        fact_b = ids[(cursor + row_index + 1) % len(ids)]
+        fact_id = table_pool[row_index % len(table_pool)]
         table_rows.append(
             '<tr>'
-            + _td(fact_a, html.escape(row_labels[row_index % len(row_labels)]), authority)
-            + _td(fact_a, _fact_sentence(fact_a, claims, cursor + row_index), authority)
-            + _td(fact_b, _fact_sentence(fact_b, claims, cursor + row_index + min_rows), authority)
+            + _td(fact_id, html.escape(row_labels[row_index % len(row_labels)]), authority)
+            + _td(fact_id, _fact_sentence(fact_id, claims, cursor + row_index), authority)
+            + _td(fact_id, _fact_sentence(fact_id, claims, cursor + row_index + min_rows), authority)
             + '</tr>'
         )
-    statement_fact = ids[cursor % len(ids)]
+    statement_fact = table_pool[0]
     table_statement = html.escape(str(bound.get('table_value_statement') or '').strip())
     table = (
         _p(statement_fact, table_statement, authority)
@@ -365,7 +356,7 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         + '<tbody>' + ''.join(table_rows) + '</tbody></table>'
     )
     sections[table_block].append(table)
-    cursor += min_rows * 2 + 1
+    cursor += min_rows + 1
 
     for _ in range(2):
         fact_id = ids[cursor % len(ids)]
