@@ -1,36 +1,41 @@
 # ALLGEMEINES DESIGN – MASTERDATEIEN-INVENTAR
 
-STAND: 2026-09-05
+STAND: 2026-09-15
 
 ## DES-UNI-001 – Universal Plugin
 
 Datei:
-`UNIVERSAL_PORTAL_DESIGN_SUITE_V2.2.40_CONTRACT_V104_TABELLENABSTAND_HARD_RUNTIME_INSTALLIEREN.zip`
+`UNIVERSAL_PORTAL_DESIGN_SUITE_V2.2.41_GLOBAL_BREADCRUMB_GAP_15_10_INSTALLIEREN.zip`
 
 SHA-256:
-`fbaf1e36fc814b88b952924b9cf2e71a14913864c226eeed46ed8cf03af8e765`
+`2bc9e9327601f8e1f1cf2cb1d299f9ec120994e325abb5d676fd347005e55512`
 
 STATUS:
-AKTUELLER ALLGEMEINER PLUGIN-BELEG.
+AKTUELLER ALLGEMEINER PLUGIN-BELEG – LOKAL HART PASS / LIVE OFFEN.
+
+Änderung gegenüber 2.2.40 ausschließlich:
+- Breadcrumb-Unterkante → erster sichtbarer Inhalt zentral 15 px Desktop / 10 px mobil;
+- individuelle `breadcrumb_gap`-Einstellung entfernt;
+- seitentyp-/Leading-Image-spezifische Breadcrumb-Abstandautoritäten entfernt.
 
 ## DES-UNI-002 – Universal Master
 
 Datei:
-`MASTER_ALLGEMEINGUELTIG_DESIGN_V2_2_40_CONTRACT_V104_20260822.zip`
+`MASTER_ALLGEMEINGUELTIG_DESIGN_V2_2_41_CONTRACT_V104_20260915.zip`
 
 SHA-256:
-`5d8ef907b671ea96ae02605466bccbad41c012cbd7b3aed9436f7725a02238d7`
+`a6486b41e786ad53a90d5203720244f4055b52dd359779cd31b5a5444e380da3`
 
 Mastermanifest:
-**298/298 OK**
+**301/301 OK**
 
 STATUS:
-AKTUELLE ALLGEMEINE HAUPTAKTE.
+AKTUELLE ALLGEMEINE HAUPTAKTE – LOKAL HART PASS / LIVE OFFEN.
 
 Enthält:
-- CURRENT_PLUGIN_SOURCE;
-- Installer;
-- V104-Verträge;
+- CURRENT_PLUGIN_SOURCE 2.2.41;
+- Installer 2.2.41 plus Historie;
+- V104-Vertrag mit zentraler Breadcrumb-Abstandsregel;
 - vollständige Designhistorie;
 - QA/Evidenz;
 - Sucharchitektur;
@@ -38,28 +43,22 @@ Enthält:
 
 ## Plugin-/Master-Abgleich
 
-- externer V2.2.40-Plugin-ZIP = eingebetteter V2.2.40-Installer byte-identisch;
-- CURRENT_PLUGIN_SOURCE = Installer inhaltlich identisch.
-
-## Spätere GitHub-Bestätigung
-
-Branch/Commit:
-`fix/category-intro-targeted-79-v150472-20260831`
-`f1e074b2e6dae9bec76ee8ab3f177080f69d2d41`
-
-Datei:
-`design-baseline/2026-08-31/v150472-category-intro-79/UNIVERSAL_STATUS.md`
-
-Aussage:
-Universal Plugin/Master 2.2.40/V104 bleiben unverändert aktuell.
-Pferde 1.50.469→1.50.472 änderte nur Pferde-spezifische redaktionelle Kategorietexte/Loader.
+- externer V2.2.41-Plugin-ZIP = eingebetteter V2.2.41-Installer byte-identisch;
+- CURRENT_PLUGIN_SOURCE = Installer inhaltlich identisch;
+- Overwrite 2.2.40 → 2.2.41 ergibt bytegleichen Zielbaum.
 
 ## Persistentes Archiv
 
-`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-05/`
+Aktueller Stand:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-15/`
 
-Archivstatus:
-GELB – eine persistente Rohablage; zweite unabhängige Rohablage fehlt noch.
+Enthält:
+- Plugin-ZIP 2.2.41;
+- Master-ZIP 2.2.41/V104;
+- Testreport 2.2.41.
+
+Historischer Stand 2.2.40/V104 bleibt unverändert unter:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-05/`
 
 ## Nebenkomponente – nicht verlieren
 
