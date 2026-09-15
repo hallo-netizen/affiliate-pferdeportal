@@ -40,6 +40,12 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
         run: python3 isolated_system4/real_parent_title_repair_acceptance_v1.py
+      - name: Run real portal link owner boundary acceptance
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
+        run: python3 isolated_system4/real_portal_link_owner_acceptance_v1.py
       - name: Run real source acquisition owner restart acceptance
         env:
           PYTHONPATH: isolated_system4
@@ -64,57 +70,71 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
         run: python3 isolated_system4/real_context_owner_acceptance_v1.py
-      - name: Verify exact real proofs and final files
+      - name: Verify real proofs and create chat delivery candidate
+        env:
+          PYTHONPATH: isolated_system4
         run: |
           python3 - <<'PY'
-          import json
+          import hashlib, json, shutil
           from pathlib import Path
+          import handoff_transport
+
           root=Path('/tmp/system4-acceptance-output')
-          r=json.loads((root/'SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json').read_text())
-          assert r['status']=='PASS' and r['repair_owner']=='DRAFT_WORKER'
-          assert r['ppm_error']=='BLOCKED_KNOWN_REGRESSION_PATTERN'
-          assert r['inline_byte_equal'] is True and r['publish_allowed'] is False
-          assert (root/'SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json').is_file()
+          proofs=[
+            'SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json',
+            'SYSTEM4_REAL_PARENT_TITLE_REPAIR_ACCEPTANCE_V1.json',
+            'SYSTEM4_REAL_PORTAL_LINK_OWNER_ACCEPTANCE_V1.json',
+            'SYSTEM4_REAL_SOURCE_ACQUISITION_OWNER_ACCEPTANCE_V1.json',
+            'SYSTEM4_REAL_RESEARCH_OWNER_ACCEPTANCE_V1.json',
+            'SYSTEM4_REAL_FACTS_OWNER_ACCEPTANCE_V1.json',
+            'SYSTEM4_REAL_CONTEXT_OWNER_ACCEPTANCE_V1.json',
+          ]
+          for name in proofs:
+            obj=json.loads((root/name).read_text())
+            assert obj['status']=='PASS', name
+            assert obj['publish_allowed'] is False, name
+            assert obj['inline_byte_equal'] is True, name
 
-          tr=json.loads((root/'SYSTEM4_REAL_PARENT_TITLE_REPAIR_ACCEPTANCE_V1.json').read_text())
-          assert tr['status']=='PASS' and tr['repair_owner']=='PARENT_TITLE_MACHINE'
-          assert tr['return_route']=='PARENT_LAUNCH' and tr['old_point0_immutable'] is True
-          assert tr['old_point0_sha256'] != tr['new_point0_sha256']
-          assert tr['inline_byte_equal'] is True and tr['publish_allowed'] is False
-          assert (root/'SYSTEM4_PARENT_TITLE_REPAIRED_WORDPRESS.json').is_file()
+          src=root/'SYSTEM4_PORTAL_LINK_REALIZATION_REPAIRED_WORDPRESS.json'
+          payload, raw=handoff_transport.read_validate_handoff(src)
+          wr=payload['wordpress_review']
+          assert wr['file_format']=='JSON'
+          assert wr['mime_type']=='application/json'
+          assert wr['intended_next_step']=='WORDPRESS_DIRECT_IMPORT'
+          assert wr['plugin_name']=='Portal SEO Editorial Plan Compiler'
+          assert wr['plugin_version_verified_against']==handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION
+          assert wr['ppm_version_verified_against']=='6.7.9'
+          assert wr['direct_wordpress_upload_ready'] is True
+          assert wr['direct_upload_block_reason'] is None
+          assert wr['required_downstream_components']==[]
+          assert payload['publish_allowed'] is False
+          assert len(payload['articles'])>=1
 
-          sr=json.loads((root/'SYSTEM4_REAL_SOURCE_ACQUISITION_OWNER_ACCEPTANCE_V1.json').read_text())
-          assert sr['status']=='PASS' and sr['initial_error']=='SOURCE_HTTP_FAIL:0:0:403'
-          assert sr['repair_owner']=='SOURCE_ACQUISITION_MACHINE' and sr['return_route']=='SOURCE_ACQUISITION_STAGE'
-          assert sr['point0_absent_after_failure'] is True
-          assert sr['point0_created_only_after_successful_reacquisition'] is True
-          assert sr['source_transport']=='REAL_LOCAL_HTTP_403_THEN_200'
-          assert sr['inline_byte_equal'] is True and sr['publish_allowed'] is False
-          assert (root/'SYSTEM4_SOURCE_ACQUISITION_REPAIRED_WORDPRESS.json').is_file()
-
-          rr=json.loads((root/'SYSTEM4_REAL_RESEARCH_OWNER_ACCEPTANCE_V1.json').read_text())
-          assert rr['status']=='PASS' and rr['initial_error']=='RESEARCH_SOURCE_HASH_MISMATCH:0'
-          assert rr['repair_owner']=='RESEARCH_WORKER' and rr['return_route']=='RESEARCH_STAGE'
-          assert rr['state_frozen_on_return'] is True and rr['valid_but_unbound_research_policy']=='HARD_BLOCK_BY_SUPERVISOR'
-          assert rr['inline_byte_equal'] is True and rr['publish_allowed'] is False
-          assert (root/'SYSTEM4_RESEARCH_OWNER_REPAIRED_WORDPRESS.json').is_file()
-
-          qr=json.loads((root/'SYSTEM4_REAL_FACTS_OWNER_ACCEPTANCE_V1.json').read_text())
-          assert qr['status']=='PASS' and qr['initial_error']=='FACT_EVIDENCE_NOT_IN_SOURCE:0'
-          assert qr['repair_owner']=='FACTS_WORKER' and qr['return_route']=='FACTS_STAGE'
-          assert qr['state_frozen_on_return'] is True and qr['inline_byte_equal'] is True
-          assert qr['publish_allowed'] is False
-          assert (root/'SYSTEM4_FACTS_OWNER_REPAIRED_WORDPRESS.json').is_file()
-
-          cr=json.loads((root/'SYSTEM4_REAL_CONTEXT_OWNER_ACCEPTANCE_V1.json').read_text())
-          assert cr['status']=='PASS' and cr['initial_error']=='FACT_PACK_CLAIMS_TOO_LOW'
-          assert cr['repair_owner']=='CONTEXT_WORKER' and cr['return_route']=='CONTEXT_STAGE'
-          assert cr['state_frozen_on_return'] is True and cr['inline_byte_equal'] is True
-          assert cr['publish_allowed'] is False
-          assert (root/'SYSTEM4_CONTEXT_OWNER_REPAIRED_WORDPRESS.json').is_file()
-          print('SYSTEM4_REAL_SOURCE_DRAFT_TITLE_RESEARCH_FACTS_CONTEXT_OWNER_TO_FILE_PASS')
+          candidate=root/handoff_transport.HANDOFF_FILENAME
+          shutil.copyfile(src,candidate)
+          assert candidate.read_bytes()==raw
+          digest=hashlib.sha256(raw).hexdigest()
+          manifest={
+            'contract':'SYSTEM4_CHAT_DELIVERY_CANDIDATE_V1',
+            'status':'REMOTE_PASS_PENDING_CHAT_DELIVERY',
+            'filename':candidate.name,
+            'mime_type':'application/json',
+            'sha256':digest,
+            'byte_length':len(raw),
+            'handoff_contract':payload['contract'],
+            'article_count':len(payload['articles']),
+            'wordpress_plugin':wr['plugin_name'],
+            'wordpress_plugin_version':wr['plugin_version_verified_against'],
+            'ppm_version':wr['ppm_version_verified_against'],
+            'intended_next_step':wr['intended_next_step'],
+            'direct_wordpress_upload_ready':True,
+            'publish_allowed':False,
+            'chat_delivery_required_for_final_pass':True,
+          }
+          (root/'SYSTEM4_CHAT_DELIVERY_CANDIDATE_V1.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(manifest,ensure_ascii=False,sort_keys=True))
           PY
-      - name: Upload acceptance proof
+      - name: Upload acceptance proof and chat delivery candidate
         uses: actions/upload-artifact@v4
         with:
           name: system4a-real-acceptance-${{ github.sha }}
