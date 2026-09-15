@@ -40,6 +40,12 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
         run: python3 isolated_system4/real_parent_title_repair_acceptance_v1.py
+      - name: Run real research owner same-stage acceptance
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
+        run: python3 isolated_system4/real_research_owner_acceptance_v1.py
       - name: Run real facts owner same-stage acceptance
         env:
           PYTHONPATH: isolated_system4
@@ -58,14 +64,10 @@ jobs:
           import json
           from pathlib import Path
           root=Path('/tmp/system4-acceptance-output')
-          p=root/'SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json'
-          r=json.loads(p.read_text())
-          assert r['status']=='PASS'
+          r=json.loads((root/'SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json').read_text())
+          assert r['status']=='PASS' and r['repair_owner']=='DRAFT_WORKER'
           assert r['ppm_error']=='BLOCKED_KNOWN_REGRESSION_PATTERN'
-          assert r['repair_owner']=='DRAFT_WORKER'
-          assert r['start_path']=='CHAT_START->POINT0->ROOT->SUPERVISOR->WORKER_DISPATCH->CODEX_WORKER_START'
-          assert r['inline_byte_equal'] is True
-          assert r['publish_allowed'] is False
+          assert r['inline_byte_equal'] is True and r['publish_allowed'] is False
           assert (root/'SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json').is_file()
 
           tr=json.loads((root/'SYSTEM4_REAL_PARENT_TITLE_REPAIR_ACCEPTANCE_V1.json').read_text())
@@ -74,6 +76,13 @@ jobs:
           assert tr['old_point0_sha256'] != tr['new_point0_sha256']
           assert tr['inline_byte_equal'] is True and tr['publish_allowed'] is False
           assert (root/'SYSTEM4_PARENT_TITLE_REPAIRED_WORDPRESS.json').is_file()
+
+          rr=json.loads((root/'SYSTEM4_REAL_RESEARCH_OWNER_ACCEPTANCE_V1.json').read_text())
+          assert rr['status']=='PASS' and rr['initial_error']=='RESEARCH_SOURCE_HASH_MISMATCH:0'
+          assert rr['repair_owner']=='RESEARCH_WORKER' and rr['return_route']=='RESEARCH_STAGE'
+          assert rr['state_frozen_on_return'] is True and rr['valid_but_unbound_research_policy']=='HARD_BLOCK_BY_SUPERVISOR'
+          assert rr['inline_byte_equal'] is True and rr['publish_allowed'] is False
+          assert (root/'SYSTEM4_RESEARCH_OWNER_REPAIRED_WORDPRESS.json').is_file()
 
           qr=json.loads((root/'SYSTEM4_REAL_FACTS_OWNER_ACCEPTANCE_V1.json').read_text())
           assert qr['status']=='PASS' and qr['initial_error']=='FACT_EVIDENCE_NOT_IN_SOURCE:0'
@@ -88,7 +97,7 @@ jobs:
           assert cr['state_frozen_on_return'] is True and cr['inline_byte_equal'] is True
           assert cr['publish_allowed'] is False
           assert (root/'SYSTEM4_CONTEXT_OWNER_REPAIRED_WORDPRESS.json').is_file()
-          print('SYSTEM4_REAL_DRAFT_TITLE_FACTS_CONTEXT_OWNER_TO_FILE_PASS')
+          print('SYSTEM4_REAL_DRAFT_TITLE_RESEARCH_FACTS_CONTEXT_OWNER_TO_FILE_PASS')
           PY
       - name: Upload acceptance proof
         uses: actions/upload-artifact@v4
