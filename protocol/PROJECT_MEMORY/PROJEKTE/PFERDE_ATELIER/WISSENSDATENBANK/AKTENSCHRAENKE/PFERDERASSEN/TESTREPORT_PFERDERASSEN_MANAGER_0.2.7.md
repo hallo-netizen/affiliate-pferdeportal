@@ -1,7 +1,7 @@
 # TESTREPORT – Pferde Atelier – Pferderassen Manager 0.2.7
 
 STAND: 2026-09-15
-STATUS: LOKAL HART PASS / WORDPRESS-LIVE OFFEN
+STATUS: LOKAL HART PASS / WORDPRESS-LIVE PASS
 
 ## Prüfgegenstand
 
@@ -90,15 +90,8 @@ Ergebnis: **4/4 ROT**.
 - Builddateien ↔ erneut entpackte ZIP-Dateien bytegleich: PASS.
 - kompletter Plugin-Stamm vorhanden: PASS.
 
-## Offene Pflichtprüfung
+## WordPress-LIVE
 
-**WORDPRESS-LIVE OFFEN.**
+Am 2026-09-15 hat der Nutzer den gebundenen 0.2.7-Liveweg ausdrücklich mit **„live ist pass“** bestätigt.
 
-Wegen der real aufgetretenen Frontend-Endlosschleifen in 0.2.4/0.2.5 wird 0.2.7 ausdrücklich nicht als LIVE-PASS bezeichnet. Vor Freigabe sind mindestens erforderlich:
-1. Plugin in WordPress installieren;
-2. normale Pferderassen-Einzelseite laden – kein Endlosladen;
-3. Backend-Relations-Neuaufbau genau einmal manuell starten;
-4. Aegidienberger erneut laden;
-5. `Zur gleichen Rassengruppe` und `Ähnliche Rassen` dürfen keine gemeinsame Rasse enthalten;
-6. weitere Einzelrasse als Gegenprobe;
-7. erst dann LIVE-PASS und Artefakt-Sync.
+Damit ist die zuvor offene WordPress-LIVE-Pflichtprüfung geschlossen. Der 0.2.7-Stand darf als LIVE-PASS geführt und nach dem PLUGINS-Sync-Vertrag als isolierte `CURRENT.zip` synchronisiert werden.
