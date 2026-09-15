@@ -122,18 +122,36 @@ jobs:
         env:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
         run: python3 -m unittest -v test_draft_bound_rebind.py
-      - name: Textmaschine matrix — repair return and recheck
+      - name: Repair — same article continuity
         working-directory: isolated_system4
         env:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-        run: >-
-          python3 -m unittest -v
-          test_repair_continuity.py
-          test_repair_owner_routing_contract.py
-          test_repair_owner_failclosed_contract.py
-          test_stage_owner_return_contract.py
-          test_parent_title_repair_contract.py
-          test_parent_metadata_owner_authority_contract.py
+        run: python3 -m unittest -v test_repair_continuity.py
+      - name: Repair — semantic owner routing
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_repair_owner_routing_contract.py
+      - name: Repair — fail closed and multi owner return
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_repair_owner_failclosed_contract.py
+      - name: Repair — stage owner return
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_stage_owner_return_contract.py
+      - name: Repair — parent title return
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_parent_title_repair_contract.py
+      - name: Repair — parent metadata owner authority
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_parent_metadata_owner_authority_contract.py
       - name: Textmaschine matrix — batch handoff one-to-N
         working-directory: isolated_system4
         run: >-
