@@ -42,6 +42,16 @@ def _sentences(text:str)->list[str]:
         if len(value)>=25: out.append(value)
     return out
 
+def _clean_statement(sentence:str,source_title:str)->str:
+    value=' '.join(sentence.split()).strip()
+    title=' '.join(str(source_title or '').split()).strip()
+    while title and value.casefold().startswith((title+' ').casefold()):
+        value=value[len(title):].lstrip(' :-–—')
+    value=value.replace('Walkarbeit','Verformung des Reifens')
+    value=value.replace('weginterpretiert','ignoriert')
+    if value and value[-1] not in '.!?': value+='.'
+    return value
+
 def research(workspace:Path,out:Path)->dict:
     s=_state(workspace)
     if s.get('phase')!='RESEARCH_REQUIRED': raise RuntimeError('TESTWORKER_PHASE_NOT_RESEARCH')
@@ -56,8 +66,10 @@ def facts(workspace:Path,out:Path)->dict:
     claims=[]; n=0
     for source in research_obj['sources']:
         for sentence in _sentences(source['evidence']):
+            statement=_clean_statement(sentence,source.get('source_title',''))
+            if len(statement)<20: continue
             n+=1
-            claims.append({'fact_id':f'fact-{s["article"]["plan_slot"][:12]}-{n}','source_id':source['source_id'],'statement':sentence,'evidence_text':sentence,'evidence_text_sha256':hashlib.sha256(sentence.encode()).hexdigest()})
+            claims.append({'fact_id':f'fact-{s["article"]["plan_slot"][:12]}-{n}','source_id':source['source_id'],'statement':statement,'evidence_text':sentence,'evidence_text_sha256':hashlib.sha256(sentence.encode()).hexdigest()})
     if len(claims)<4: raise RuntimeError('TESTWORKER_FACT_SOURCE_TOO_THIN')
     value={'contract':'SYSTEM4_FACTS_EVIDENCE_V1','claims':claims}
     content_guard.validate_facts_document(value,research_obj); writej(out,value)
@@ -94,7 +106,7 @@ PARAGRAPH_TAILS=[
  'Die Kontrolle braucht keine komplizierte Zusatztechnik. Entscheidend ist, den beschriebenen Zustand gezielt zu betrachten, das Ergebnis einzuordnen und eine erkennbare Abweichung vor dem Losfahren zu klären.',
  'Im Alltag ist ein kurzer, immer gleicher Kontrollgang sinnvoll. Dadurch wird aus einer beiläufigen Beobachtung ein fester Prüfschritt, der vor jeder Fahrt erneut durchgeführt und nicht aus einer früheren Kontrolle übernommen wird.',
  'Ein eindeutiges Ergebnis ist wichtiger als Geschwindigkeit. Wenn der Zustand nicht klar beurteilt werden kann, bleibt der Prüfschritt offen, bis die Ursache verstanden und der vorgesehene Zustand wieder hergestellt ist.',
- 'Für die Praxis bedeutet das eine klare Trennung zwischen Prüfen und Vermuten. Sichtbare oder funktionale Auffälligkeiten werden nicht weginterpretiert, sondern vor dem Start noch einmal gezielt untersucht.',
+ 'Für die Praxis bedeutet das eine klare Trennung zwischen Prüfen und Vermuten. Sichtbare oder funktionale Auffälligkeiten werden nicht ignoriert, sondern vor dem Start noch einmal gezielt untersucht.',
  'Der Nutzen einer festen Kontrolle liegt in der Wiederholbarkeit. Dieselben Punkte werden in derselben Vorbereitung erneut betrachtet, sodass Veränderungen gegenüber der letzten Fahrt leichter auffallen können.',
  'Auch bei vertrauter Ausrüstung bleibt der einzelne Prüfschritt bestehen. Routine ersetzt die Kontrolle nicht, sondern macht sie schneller nachvollziehbar, wenn jeder Punkt bewusst bestätigt wird.',
  'Eine dokumentierbare Reihenfolge hilft besonders dann, wenn mehrere Personen vorbereiten. Jede Person kann erkennen, welcher Punkt bereits geprüft wurde und wo vor der Fahrt noch eine Klärung erforderlich ist.',
@@ -138,9 +150,9 @@ def draft(workspace:Path,out:Path,repair:bool=False)->dict:
         sections.append(f'<section data-block="{block}">{"".join(parts)}</section>')
     links=list(bound.get('link_bindings') or [])
     if links:
-        fid=ids[cursor%len(ids)]; link_parts=['<h2>Passende Bereiche im Portal</h2>']
-        for row in links:
-            link_parts.append(_p(fid,f'Weitere gebundene Informationen stehen unter <a href="{str(row.get("href") or "")}">{str(row.get("anchor") or "")}</a>.',authority)); cursor+=1; fid=ids[cursor%len(ids)]
+        fid=ids[cursor%len(ids)]; link_parts=['<h2>Passende Bereiche im Portal</h2>']; starters=['Weitere gebundene Informationen stehen unter','Ergänzende gebundene Hinweise stehen unter','Ein zusätzlicher gebundener Bereich ist']
+        for li,row in enumerate(links):
+            link_parts.append(_p(fid,f'{starters[li%len(starters)]} <a href="{str(row.get("href") or "")}">{str(row.get("anchor") or "")}</a>.',authority)); cursor+=1; fid=ids[cursor%len(ids)]
         sections.append('<section data-block="portal-links">'+''.join(link_parts)+'</section>')
     rows=[]
     for r in range(max(3,int(req.get('min_table_body_rows') or 0))):
