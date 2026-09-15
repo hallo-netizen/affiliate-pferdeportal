@@ -42,30 +42,28 @@ def main() -> int:
     broken_path = runtime / 'article_link_drift.html'
     broken_path.write_text(broken_html, encoding='utf-8')
 
-    v3.run([sys.executable, str(v3.CONTROLLER), 'draft', str(workspace), str(broken_path)], 0, env)
-    first = v3.run([sys.executable, str(v3.CONTROLLER), 'fullcheck', str(workspace)], {3, 4}, env)
-    state = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
-    findings = state.get('checks', {}).get('findings')
-    if not isinstance(findings, list) or not findings:
-        raise AssertionError('REAL_LINK_FINDING_MISSING:' + first.stdout)
-    owners = sorted({str(row.get('repair_owner') or '') for row in findings if isinstance(row, dict)})
-    codes = sorted({str(row.get('error_code') or '') for row in findings if isinstance(row, dict)})
-    fields = sorted({str(row.get('field_path') or '') for row in findings if isinstance(row, dict)})
+    state_path = workspace / 'state.json'
+    before = state_path.read_bytes()
+    first = v3.run([sys.executable, str(v3.CONTROLLER), 'draft', str(workspace), str(broken_path)], 4, env)
+    if 'SYSTEM4_STAGE_OWNER_RETURN:DRAFT_WORKER:DRAFT_STAGE:ARTICLE_AUTHORING_CONTRACT_FAIL:PREWRITE_BOUND_LINK_MISSING:' not in first.stdout:
+        raise AssertionError('LINK_REALIZATION_WRONG_DRAFT_OWNER_RETURN:' + first.stdout)
+    if state_path.read_bytes() != before:
+        raise AssertionError('LINK_REALIZATION_REJECT_MUTATED_STATE')
+    rejected_state = json.loads(state_path.read_text(encoding='utf-8'))
+    if rejected_state.get('phase') != 'DRAFT_REQUIRED' or rejected_state.get('draft_markdown') is not None:
+        raise AssertionError('LINK_REALIZATION_BAD_DRAFT_WAS_ACCEPTED')
 
-    # The machine-bound plan is unchanged and valid. The defect was introduced only in the
-    # written article, so the producing owner must be DRAFT_WORKER, not the portal-link planner.
-    if state.get('checks', {}).get('repair_owner') != 'DRAFT_WORKER' or first.returncode != 3:
-        raise AssertionError('LINK_REALIZATION_MUST_RETURN_DRAFT_WORKER:' + json.dumps({
-            'rc': first.returncode, 'owners': owners, 'codes': codes, 'fields': fields, 'stdout': first.stdout
-        }, ensure_ascii=False, sort_keys=True))
-
-    v3.run([sys.executable, str(v3.CONTROLLER), 'repair', str(workspace), str(files['final'])], 0, env)
+    # Same producing stage resubmits the corrected article. The invalid candidate was never
+    # accepted, therefore this is a fresh draft submission, not a same-article repair command.
+    accepted = v3.run([sys.executable, str(v3.CONTROLLER), 'draft', str(workspace), str(files['final'])], 0, env)
+    if 'SYSTEM4_DRAFT_ACCEPTED:REVISION=1:CHECK_REQUIRED' not in accepted.stdout:
+        raise AssertionError('LINK_REALIZATION_CORRECT_DRAFT_NOT_ACCEPTED:' + accepted.stdout)
     second = v3.run([sys.executable, str(v3.CONTROLLER), 'fullcheck', str(workspace)], 0, env)
     if 'SYSTEM4_FULL_CHECK_PASS:OUTPUT_GATE_REQUIRED' not in second.stdout:
-        raise AssertionError('LINK_REALIZATION_REPAIR_NOT_PASS:' + second.stdout)
+        raise AssertionError('LINK_REALIZATION_RECHECK_NOT_PASS:' + second.stdout)
 
     output = runtime / 'output'; output.mkdir()
-    collected, envelope, reconstructed = legacy.handoff_from_state(files, workspace / 'state.json', output)
+    collected, envelope, reconstructed = legacy.handoff_from_state(files, state_path, output)
     final_root = Path(os.environ.get('SYSTEM4_ACCEPTANCE_OUTPUT_DIR', '/tmp/system4-acceptance-output'))
     final_root.mkdir(parents=True, exist_ok=True)
     final_path = final_root / 'SYSTEM4_PORTAL_LINK_REALIZATION_REPAIRED_WORDPRESS.json'
@@ -73,15 +71,19 @@ def main() -> int:
     if final_path.read_bytes() != reconstructed.read_bytes():
         raise AssertionError('LINK_OWNER_FINAL_FILE_NOT_BYTE_EQUAL')
 
+    state = json.loads(state_path.read_text(encoding='utf-8'))
     proof = {
         'contract': 'SYSTEM4_REAL_PORTAL_LINK_OWNER_ACCEPTANCE_V1',
         'status': 'PASS',
         'head': files['head'],
         'defect_class': 'BOUND_LINK_REALIZATION_DRIFT_IN_DRAFT',
+        'detected_by': 'AUTHORING_CONTRACT_BEFORE_DRAFT_ACCEPTANCE',
         'repair_owner': 'DRAFT_WORKER',
+        'return_route': 'DRAFT_STAGE',
+        'invalid_draft_never_accepted': True,
+        'state_frozen_on_return': True,
         'portal_link_machine_policy': 'ONLY_BOUND_LINK_SELECTION_OR_UPSTREAM_PLAN_DEFECT',
-        'ppm_error_codes': codes,
-        'ppm_field_paths': fields,
+        'revision': state['revision'],
         'article_count': collected['article_count'],
         'handoff_parts': envelope['part_count'],
         'final_sha256': v3.sha_bytes(final_path.read_bytes()),
