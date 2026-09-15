@@ -69,9 +69,9 @@ BELEGE:
 
 AUSGEFÜHRT:
 - `/Campus-Plugins/PFERDE_ATELIER/PPA-011/` angelegt;
-- geprüfte ZIP als `CANDIDATE_0.2.7.zip` abgelegt;
+- geprüfte ZIP zunächst als `CANDIDATE_0.2.7.zip` abgelegt;
 - `CANDIDATE_MANIFEST.md` mit Version, SHA-256, technischer Hauptquelle und Prüfgrenze abgelegt;
-- Library-Readback bestätigt beide Dateien am Zielpfad.
+- Library-Readback bestätigte beide Dateien am Zielpfad.
 
 ## 2026-09-15 – WordPress-LIVE PASS 0.2.7
 
@@ -82,7 +82,10 @@ FOLGE:
 - `PR-PLUGIN-001` geschlossen;
 - technische Hauptquelle auf `WORDPRESS-LIVE PASS` gesetzt;
 - Testreport auf LIVE PASS nachgezogen;
-- der exakt hashgebundene 0.2.7-Stand darf nach `PLUGINS/SYNC_VERTRAG.md` als `PPA-011/CURRENT.zip` + `MANIFEST.md` synchronisiert werden;
+- der exakt hashgebundene 0.2.7-Stand nach `PLUGINS/SYNC_VERTRAG.md` als `PPA-011/CURRENT.zip` + `MANIFEST.md` synchronisiert;
+- persistente `CURRENT.zip` erneut materialisiert: SHA-256 PASS, ZIP-Lesetest PASS, Plugin-Version 0.2.7 PASS;
+- die vorherigen `CANDIDATE_*`-Dateien aus dem aktiven Pluginordner entfernt, damit dort keine zweite Statuswahrheit verbleibt;
+- `PPA-011` / `PU-20260915-001` im PLUGINS-Büro auf PASS gesetzt;
 - die Fachblocker `PR-BREED-001` (13er-Gruppenbindung) und `PR-BREED-002` (Doppel-ID-Readback) bleiben unabhängig davon offen.
 
 OFFEN:
