@@ -44,118 +44,156 @@ def manifest(repo:Path)->str:
     return cp.stdout.decode().strip()
 
 
-def bound_snapshot(repo:Path, *, manifest_value=None, include_manifest=True)->bytes:
-    raw=json.loads((repo/'isolated_system4'/'live_fixture'/'wordpress_snapshot.json').read_text(encoding='utf-8'))
-    if include_manifest:
-        raw['system4_root_manifest_sha256']=manifest_value or manifest(repo)
-    return json.dumps(raw,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
+def head(repo:Path)->str:
+    return run(['git','rev-parse','--verify','HEAD'],cwd=repo).stdout.decode().strip()
 
 
-def run_entry(repo:Path,args,*,stdin=None):
-    return run([sys.executable,str(repo/'isolated_system4'/'root_entry.py'),*args],cwd=repo,stdin=stdin,check=False)
+POINT0_BUILDER=r'''
+import json,sys
+from pathlib import Path
+sys.path.insert(0,'isolated_system4')
+import point0_snapshot,test_point0_v2
+out=Path(sys.argv[1]); manifest=sys.argv[2]; head=sys.argv[3]
+base=test_point0_v2.fixture()
+raw=point0_snapshot.verify(base)
+snap=json.loads(raw.decode('utf-8'))
+snap['system4_root_manifest_sha256']=manifest
+raw=(json.dumps(snap,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode('utf-8')
+source_pools=[row['sources'] for row in base['research_runtime']['item_pools']]
+prewrite=list(base['machine_prewrite']['items'])
+p0=point0_snapshot.build(production_snapshot_bytes=raw,root_manifest_sha256=manifest,head_sha=head,research_provider='TEST_ROOT_ENTRY',source_pools=source_pools,prewrite_bindings=prewrite)
+out.write_bytes(point0_snapshot.canon(p0))
+'''
+
+
+def make_point0(repo:Path, path:Path, *, manifest_value=None, head_value=None)->Path:
+    path.parent.mkdir(parents=True,exist_ok=True)
+    m=manifest_value or manifest(repo)
+    h=head_value or head(repo)
+    run([sys.executable,'-c',POINT0_BUILDER,str(path),m,h],cwd=repo)
+    return path
+
+
+def run_entry(repo:Path,args):
+    return run([sys.executable,str(repo/'isolated_system4'/'root_entry.py'),*args],cwd=repo,check=False)
 
 
 class RootEntryTests(unittest.TestCase):
-    def positive_stdin(self, *, branch='system4-sandbox', detached=False, extra_noncritical_commit=False):
+    def positive_point0(self, *, branch='system4-sandbox', detached=False, extra_noncritical_commit=False):
         td,repo=make_clean_repo(branch=branch,detached=detached,extra_noncritical_commit=extra_noncritical_commit)
         self.addCleanup(td.cleanup)
-        raw=bound_snapshot(repo)
+        point0=make_point0(repo,Path(td.name)/'point0.json')
         workspace=Path(td.name)/'runtime'
-        cp=run_entry(repo,['start-stdin',str(workspace)],stdin=raw)
+        cp=run_entry(repo,['start-point0',str(point0),str(workspace),'0'])
         self.assertEqual(cp.returncode,0,cp.stdout.decode()+cp.stderr.decode())
-        self.assertIn('SYSTEM4_ROOT_ENTRY_PASS:RESEARCH_REQUIRED',cp.stdout.decode())
-        self.assertEqual((workspace/'bound_snapshot.json').read_bytes(),raw)
+        self.assertIn('SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY',cp.stdout.decode())
+        for name in ('point0.json','root_receipt.json','supervisor_state.json','bound_snapshot.json','bound_research_sources.json','bound_machine_prewrite.json','worker_dispatch.json','state.json'):
+            self.assertTrue((workspace/name).is_file(),name)
         state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
         self.assertEqual(state['phase'],'RESEARCH_REQUIRED')
         return repo,workspace
 
-    def test_root_override_binds_system4_without_mutating_base_agents(self):
+    def test_root_override_binds_only_point0_as_executable_route(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
         base=(repo/'AGENTS.md').read_text(encoding='utf-8')
         override=(repo/'AGENTS.override.md').read_text(encoding='utf-8')
         self.assertNotIn('SYSTEM4_ISOLATED_ROOT_ENTRY_V3',base)
         self.assertIn('python3 control/cloud-entry-gate/cloud_entry.py start',base)
         self.assertIn('SYSTEM4_ISOLATED_ROOT_ENTRY_V3',override)
-        self.assertIn('python3 isolated_system4/root_entry.py start-stdin',override)
+        self.assertIn('python3 isolated_system4/root_entry.py start-point0',override)
 
-    def test_positive_canonical_named_branch(self):
-        self.positive_stdin(branch='hobbyroom/system4-true-single-room-v1')
+    def test_positive_point0_canonical_named_branch(self):
+        self.positive_point0(branch='hobbyroom/system4-true-single-room-v1')
 
-    def test_positive_arbitrary_symbolic_branch_same_critical_content(self):
-        self.positive_stdin(branch='codex/pr-238-checkout')
+    def test_positive_point0_arbitrary_symbolic_branch_same_critical_content(self):
+        self.positive_point0(branch='codex/pr-238-checkout')
 
-    def test_positive_detached_head_same_critical_content(self):
-        repo,_=self.positive_stdin(detached=True)
-        current=run(['git','branch','--show-current'],cwd=repo).stdout.decode().strip()
-        self.assertEqual(current,'')
+    def test_positive_point0_detached_head_same_critical_content(self):
+        repo,_=self.positive_point0(detached=True)
+        self.assertEqual(run(['git','branch','--show-current'],cwd=repo).stdout.decode().strip(),'')
 
-    def test_positive_different_commit_same_critical_content(self):
-        self.positive_stdin(branch='codex/synthetic',extra_noncritical_commit=True)
+    def test_positive_point0_different_commit_same_critical_content(self):
+        self.positive_point0(branch='codex/synthetic',extra_noncritical_commit=True)
 
-    def test_positive_file_entry_from_outside_repo(self):
+    def test_negative_legacy_start_is_machine_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        runtime=Path(td.name)/'runtime'; runtime.mkdir()
-        snapshot=runtime/'snapshot.json'; snapshot.write_bytes(bound_snapshot(repo))
-        workspace=runtime/'workspace'
-        cp=run_entry(repo,['start',str(snapshot),str(workspace)])
-        self.assertEqual(cp.returncode,0,cp.stdout.decode()+cp.stderr.decode())
-        self.assertIn('SYSTEM4_ROOT_ENTRY_PASS:RESEARCH_REQUIRED',cp.stdout.decode())
-
-    def test_negative_manifest_missing(self):
-        td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        cp=run_entry(repo,['start-stdin',str(Path(td.name)/'runtime')],stdin=bound_snapshot(repo,include_manifest=False))
+        cp=run_entry(repo,['start','/tmp/input.json',str(Path(td.name)/'runtime')])
         self.assertEqual(cp.returncode,2)
-        self.assertIn('ROOT_ENTRY_MANIFEST_BINDING_MISSING',cp.stdout.decode())
+        self.assertIn('MACHINE_ROUTE_BLOCK:POINT0_REQUIRED',cp.stdout.decode())
 
-    def test_negative_manifest_mismatch(self):
+    def test_negative_legacy_start_stdin_is_machine_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        cp=run_entry(repo,['start-stdin',str(Path(td.name)/'runtime')],stdin=bound_snapshot(repo,manifest_value='0'*64))
+        cp=run_entry(repo,['start-stdin',str(Path(td.name)/'runtime')])
         self.assertEqual(cp.returncode,2)
-        self.assertIn('ROOT_ENTRY_MANIFEST_MISMATCH',cp.stdout.decode())
+        self.assertIn('MACHINE_ROUTE_BLOCK:POINT0_REQUIRED',cp.stdout.decode())
+
+    def test_negative_point0_manifest_mismatch(self):
+        td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
+        point0=make_point0(repo,Path(td.name)/'point0.json',manifest_value='0'*64)
+        cp=run_entry(repo,['start-point0',str(point0),str(Path(td.name)/'runtime'),'0'])
+        self.assertEqual(cp.returncode,2)
+        self.assertIn('ROOT_POINT0_BIND_FAIL:ROOT_MANIFEST_MISMATCH',cp.stdout.decode())
+
+    def test_negative_point0_head_mismatch(self):
+        td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
+        point0=make_point0(repo,Path(td.name)/'point0.json',head_value='0'*40)
+        cp=run_entry(repo,['start-point0',str(point0),str(Path(td.name)/'runtime'),'0'])
+        self.assertEqual(cp.returncode,2)
+        self.assertIn('ROOT_POINT0_BIND_FAIL:HEAD_SHA_MISMATCH',cp.stdout.decode())
 
     def test_negative_dirty_critical_override_is_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        old=manifest(repo)
-        (repo/'AGENTS.override.md').write_text((repo/'AGENTS.override.md').read_text(encoding='utf-8')+'\nTAMPER\n',encoding='utf-8')
-        cp=run_entry(repo,['start-stdin',str(Path(td.name)/'runtime')],stdin=bound_snapshot(repo,manifest_value=old))
+        point0=make_point0(repo,Path(td.name)/'point0.json')
+        p=repo/'AGENTS.override.md'; p.write_text(p.read_text(encoding='utf-8')+'\nTAMPER\n',encoding='utf-8')
+        cp=run_entry(repo,['start-point0',str(point0),str(Path(td.name)/'runtime'),'0'])
         self.assertEqual(cp.returncode,2)
         self.assertIn('ROOT_ENTRY_CRITICAL_FILES_DIRTY',cp.stdout.decode())
 
     def test_negative_dirty_controller_is_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        old=manifest(repo)
+        point0=make_point0(repo,Path(td.name)/'point0.json')
         p=repo/'isolated_system4'/'controller.py'; p.write_text(p.read_text(encoding='utf-8')+'\n# TAMPER\n',encoding='utf-8')
-        cp=run_entry(repo,['start-stdin',str(Path(td.name)/'runtime')],stdin=bound_snapshot(repo,manifest_value=old))
+        cp=run_entry(repo,['start-point0',str(point0),str(Path(td.name)/'runtime'),'0'])
         self.assertEqual(cp.returncode,2)
         self.assertIn('ROOT_ENTRY_CRITICAL_FILES_DIRTY',cp.stdout.decode())
 
     def test_negative_missing_override_is_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
+        point0=make_point0(repo,Path(td.name)/'point0.json')
         (repo/'AGENTS.override.md').unlink()
-        cp=run_entry(repo,['start-stdin',str(Path(td.name)/'runtime')],stdin=b'{}')
+        cp=run_entry(repo,['start-point0',str(point0),str(Path(td.name)/'runtime'),'0'])
         self.assertEqual(cp.returncode,2)
         self.assertIn('ROOT_OVERRIDE_MISSING',cp.stdout.decode())
 
-    def test_negative_repo_internal_snapshot_is_blocked(self):
+    def test_negative_repo_internal_point0_is_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        fixture=repo/'isolated_system4'/'live_fixture'/'wordpress_snapshot.json'
-        cp=run_entry(repo,['start',str(fixture),str(Path(td.name)/'runtime')])
+        point0=make_point0(repo,repo/'isolated_system4'/'_forbidden_point0.json')
+        cp=run_entry(repo,['start-point0',str(point0),str(Path(td.name)/'runtime'),'0'])
         self.assertEqual(cp.returncode,2)
-        self.assertIn('ROOT_ENTRY_SNAPSHOT_MUST_BE_OUTSIDE_REPO',cp.stdout.decode())
+        self.assertIn('ROOT_POINT0_FILE_INVALID',cp.stdout.decode())
 
     def test_negative_repo_internal_workspace_is_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        external=Path(td.name)/'snapshot.json'; external.write_bytes(bound_snapshot(repo))
-        cp=run_entry(repo,['start',str(external),str(repo/'isolated_system4'/'_forbidden_workspace')])
+        point0=make_point0(repo,Path(td.name)/'point0.json')
+        cp=run_entry(repo,['start-point0',str(point0),str(repo/'isolated_system4'/'_forbidden_workspace'),'0'])
         self.assertEqual(cp.returncode,2)
         self.assertIn('ROOT_ENTRY_WORKSPACE_MUST_BE_OUTSIDE_REPO',cp.stdout.decode())
 
-    def test_negative_invalid_stdin_is_blocked_without_state(self):
+    def test_negative_nonempty_workspace_is_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
-        workspace=Path(td.name)/'runtime'
-        cp=run_entry(repo,['start-stdin',str(workspace)],stdin=b'{not-json')
+        point0=make_point0(repo,Path(td.name)/'point0.json')
+        workspace=Path(td.name)/'runtime'; workspace.mkdir(); (workspace/'junk').write_text('x',encoding='utf-8')
+        cp=run_entry(repo,['start-point0',str(point0),str(workspace),'0'])
         self.assertEqual(cp.returncode,2)
-        self.assertIn('ROOT_ENTRY_STDIN_SNAPSHOT_JSON_INVALID',cp.stdout.decode())
+        self.assertIn('ROOT_POINT0_BIND_FAIL:WORKSPACE_NOT_EMPTY',cp.stdout.decode())
+
+    def test_negative_invalid_point0_is_blocked_without_state(self):
+        td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
+        point0=Path(td.name)/'point0.json'; point0.write_text('{not-json',encoding='utf-8')
+        workspace=Path(td.name)/'runtime'
+        cp=run_entry(repo,['start-point0',str(point0),str(workspace),'0'])
+        self.assertEqual(cp.returncode,2)
+        self.assertIn('ROOT_CHAT_START_BIND_FAIL:',cp.stdout.decode())
         self.assertFalse((workspace/'state.json').exists())
 
 
