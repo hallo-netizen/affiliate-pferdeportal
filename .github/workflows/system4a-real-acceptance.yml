@@ -78,31 +78,49 @@ jobs:
           path: /tmp/system4-ppm-prewrite-authorities.txt
           if-no-files-found: error
           retention-days: 1
-      - name: Run immutable Textmaschine and historical negative matrix
+
+      - name: Run immutable Textmaschine and historical negative matrix — history hardlock
         working-directory: isolated_system4
-        env:
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_acceptance_history_hardlock.py
+      - name: Textmaschine matrix — entrance Point0 source binding
+        working-directory: isolated_system4
         run: >-
           python3 -m unittest -v
-          test_acceptance_history_hardlock.py
           test_machine_route_lock_contract.py
           test_point0_v2.py
           test_root_entry.py
           test_source_acquisition_owner_contract.py
           test_indexed_ingress.py
+      - name: Textmaschine matrix — content context design draft
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: >-
+          python3 -m unittest -v
           test_content_guard.py
           test_context_required_regression.py
           test_design_guard.py
           test_draft_bound_rebind.py
+      - name: Textmaschine matrix — repair return and recheck
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: >-
+          python3 -m unittest -v
           test_repair_continuity.py
           test_repair_owner_routing_contract.py
           test_repair_owner_failclosed_contract.py
           test_stage_owner_return_contract.py
           test_parent_title_repair_contract.py
           test_parent_metadata_owner_authority_contract.py
+      - name: Textmaschine matrix — batch handoff one-to-N
+        working-directory: isolated_system4
+        run: >-
+          python3 -m unittest -v
           test_batch_gate.py
           test_universal_batch_gate.py
           test_handoff_transport.py
+
       - name: Build fresh machine inputs for one article
         env:
           PYTHONPATH: isolated_system4
