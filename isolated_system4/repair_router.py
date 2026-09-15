@@ -11,7 +11,9 @@ import point0_snapshot
 import root_entry
 
 CONTRACT='SYSTEM4_MACHINE_REPAIR_ROUTE_V1'
+RETURN_CONTRACT='SYSTEM4_REPAIR_RETURN_V2'
 MAX_MACHINE_REPAIR_CYCLES=8
+ALLOWED_OWNERS=frozenset({'PARENT_METADATA','CONTEXT_BINDING','RESEARCH_BINDING','DRAFT_BODY'})
 
 class RepairRouteError(RuntimeError):
     pass
@@ -80,10 +82,69 @@ def _rebuild_batch(prod:dict[str,Any],index:int,new_item:dict[str,Any])->bytes:
 def _next_workspace(runtime_root:Path,index:int,cycle:int)->Path:
     return runtime_root/f'item-{index}-repair-{cycle}'
 
-def _return_to_owner(workspace:Path,state:Mapping[str,Any],route:Mapping[str,Any],reason:str='AUTHORITATIVE_REBIND_REQUIRED')->dict[str,Any]:
+def _continuation_envelope(workspace:Path,state:Mapping[str,Any],route:Mapping[str,Any],status:str,reason:str)->dict[str,Any]:
     article=state.get('article') if isinstance(state.get('article'),Mapping) else {}
-    request={'contract':CONTRACT,'status':'RETURN_TO_OWNER','owner':route['owner'],'target':route['target'],'reason':reason,'finding':route['finding'],'article':dict(article),'workspace':str(workspace)}
-    (workspace/'machine_repair_request.json').write_bytes(canon(request))
+    cycle=int(state.get('machine_repair_cycle') or 0)+1
+    if cycle>MAX_MACHINE_REPAIR_CYCLES:
+        raise RepairRouteError('MACHINE_REPAIR_CYCLE_LIMIT')
+    finding=dict(route.get('finding') or {})
+    return {
+        'contract':RETURN_CONTRACT,
+        'router_contract':CONTRACT,
+        'status':status,
+        'repairable':True,
+        'terminal':False,
+        'continuation_required':True,
+        'owner':route['owner'],
+        'owner_stage':route['owner'],
+        'target':route['target'],
+        'repair_target':route['target'],
+        'reason':reason,
+        'finding':finding,
+        'finding_sha256':sha256(canon(finding)),
+        'cycle':cycle,
+        'max_cycles':MAX_MACHINE_REPAIR_CYCLES,
+        'article':dict(article),
+        'workspace':str(workspace),
+    }
+
+def verify_continuation_result(workspace:Path,result:Mapping[str,Any])->dict[str,Any]:
+    if result.get('contract')!=RETURN_CONTRACT:
+        raise RepairRouteError('REPAIR_RETURN_CONTRACT_INVALID')
+    if result.get('repairable') is not True or result.get('terminal') is not False or result.get('continuation_required') is not True:
+        raise RepairRouteError('REPAIR_RETURN_MUST_BE_NONTERMINAL')
+    owner=str(result.get('owner') or '')
+    if owner not in ALLOWED_OWNERS or result.get('owner_stage')!=owner:
+        raise RepairRouteError('REPAIR_RETURN_OWNER_INVALID')
+    target=str(result.get('target') or '')
+    if not target or result.get('repair_target')!=target:
+        raise RepairRouteError('REPAIR_RETURN_TARGET_INVALID')
+    finding=result.get('finding')
+    if not isinstance(finding,Mapping) or result.get('finding_sha256')!=sha256(canon(dict(finding))):
+        raise RepairRouteError('REPAIR_RETURN_FINDING_HASH_INVALID')
+    cycle=int(result.get('cycle') or 0)
+    if cycle<1 or cycle>MAX_MACHINE_REPAIR_CYCLES or int(result.get('max_cycles') or 0)!=MAX_MACHINE_REPAIR_CYCLES:
+        raise RepairRouteError('REPAIR_RETURN_CYCLE_INVALID')
+    status=str(result.get('status') or '')
+    if status not in {'SAME_ARTICLE_BODY_REPAIR','RETURN_TO_OWNER','RESTARTED'}:
+        raise RepairRouteError('REPAIR_RETURN_STATUS_INVALID')
+    if status!='RESTARTED' and Path(str(result.get('workspace') or ''))!=Path(workspace):
+        raise RepairRouteError('REPAIR_RETURN_WORKSPACE_INVALID')
+    return dict(result)
+
+def _write_request(workspace:Path,result:Mapping[str,Any])->None:
+    (workspace/'machine_repair_request.json').write_bytes(canon(dict(result)))
+
+def _return_to_owner(workspace:Path,state:Mapping[str,Any],route:Mapping[str,Any],reason:str='AUTHORITATIVE_REBIND_REQUIRED')->dict[str,Any]:
+    request=_continuation_envelope(workspace,state,route,'RETURN_TO_OWNER',reason)
+    _write_request(workspace,request)
+    verify_continuation_result(workspace,request)
+    return request
+
+def _same_article_body(workspace:Path,state:Mapping[str,Any],route:Mapping[str,Any])->dict[str,Any]:
+    request=_continuation_envelope(workspace,state,route,'SAME_ARTICLE_BODY_REPAIR','SAME_ARTICLE_REPAIR_REQUIRED')
+    _write_request(workspace,request)
+    verify_continuation_result(workspace,request)
     return request
 
 def _restart_parent_metadata(workspace:Path,state:dict[str,Any],route:dict[str,Any])->dict[str,Any]:
@@ -121,7 +182,9 @@ def _restart_parent_metadata(workspace:Path,state:dict[str,Any],route:dict[str,A
     rc=root_entry.main(['root_entry.py','start-point0',str(new_point0),str(new_workspace),str(index)])
     if rc!=0: raise RepairRouteError('REPAIR_ROOT_RESTART_FAILED:'+str(rc))
     new_state_path=new_workspace/'state.json'; new_state=json.loads(new_state_path.read_text(encoding='utf-8')); new_state['machine_repair_cycle']=cycle; new_state['machine_repair_lineage']={'owner':'PARENT_METADATA','target':route['target'],'from_article':original,'to_article':item,'finding':finding,'previous_workspace':str(workspace)}; new_state_path.write_text(json.dumps(new_state,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
-    result={'contract':CONTRACT,'status':'RESTARTED','owner':'PARENT_METADATA','target':route['target'],'cycle':cycle,'workspace':str(new_workspace),'point0':str(new_point0),'from_article':original,'to_article':item,'finding':finding}
+    result=_continuation_envelope(workspace,state,route,'RESTARTED','DETERMINISTIC_PARENT_METADATA_REPAIR_APPLIED')
+    result.update({'cycle':cycle,'workspace':str(new_workspace),'point0':str(new_point0),'from_article':original,'to_article':item})
+    verify_continuation_result(workspace,result)
     (workspace/'machine_repair_redirect.json').write_bytes(canon(result)); (runtime_root/f'machine_repair_redirect-{index}.json').write_bytes(canon(result))
     return result
 
@@ -133,7 +196,7 @@ def route(workspace:Path)->dict[str,Any]:
     if state.get('phase')!='REPAIR_REQUIRED': raise RepairRouteError('REPAIR_PHASE_REQUIRED')
     route=classify(state)
     if route['owner']=='DRAFT_BODY':
-        return {'contract':CONTRACT,'status':'SAME_ARTICLE_BODY_REPAIR','owner':'DRAFT_BODY','target':'SAME_ARTICLE_BODY','finding':route['finding']}
+        return _same_article_body(workspace,state,route)
     if route['owner']=='PARENT_METADATA':
         return _restart_parent_metadata(workspace,state,route)
     return _return_to_owner(workspace,state,route)
