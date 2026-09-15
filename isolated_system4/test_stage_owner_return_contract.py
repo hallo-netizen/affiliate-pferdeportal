@@ -57,11 +57,11 @@ def _write_workspace(root: Path, state: dict) -> Path:
 
 
 class StageOwnerReturnContractTests(unittest.TestCase):
-    def _run_main_and_freeze(self, workspace: Path, argv: list[str], expected_owner: str, expected_route: str) -> None:
+    def _run_stage_and_freeze(self, workspace: Path, command: str, fn, args: list[str], expected_owner: str, expected_route: str) -> None:
         before = (workspace / 'state.json').read_bytes()
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
-            rc = controller.main(argv)
+            rc = controller._stage_owner_call(command, fn, str(workspace), *args)
         self.assertEqual(rc, 4, out.getvalue())
         self.assertEqual((workspace / 'state.json').read_bytes(), before)
         self.assertIn('SYSTEM4_STAGE_OWNER_RETURN:' + expected_owner + ':' + expected_route, out.getvalue())
@@ -72,7 +72,7 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             ws = _write_workspace(root / 'ws', _base_state('RESEARCH_REQUIRED'))
             inp = root / 'research.json'; inp.write_text('{}', encoding='utf-8')
             with mock.patch.object(controller_engine.content_guard, 'validate_research_document', side_effect=content_guard.ContentGuardError('RESEARCH_SOURCE_EVIDENCE_INVALID:0')):
-                self._run_main_and_freeze(ws, ['controller.py', 'research', str(ws), str(inp)], 'RESEARCH_WORKER', 'RESEARCH_STAGE')
+                self._run_stage_and_freeze(ws, 'research', controller_engine.cmd_research, [str(inp)], 'RESEARCH_WORKER', 'RESEARCH_STAGE')
 
     def test_facts_content_failure_returns_facts_worker_same_stage(self):
         with tempfile.TemporaryDirectory() as td:
@@ -83,7 +83,7 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             ws = _write_workspace(root / 'ws', state)
             inp = root / 'facts.json'; inp.write_text('{}', encoding='utf-8')
             with mock.patch.object(controller_engine.content_guard, 'validate_facts_document', side_effect=content_guard.ContentGuardError('FACT_EVIDENCE_NOT_IN_SOURCE:0')):
-                self._run_main_and_freeze(ws, ['controller.py', 'facts', str(ws), str(inp)], 'FACTS_WORKER', 'FACTS_STAGE')
+                self._run_stage_and_freeze(ws, 'facts', controller_engine.cmd_facts, [str(inp)], 'FACTS_WORKER', 'FACTS_STAGE')
 
     def test_context_fact_pack_failure_returns_context_worker_same_stage(self):
         with tempfile.TemporaryDirectory() as td:
@@ -97,7 +97,7 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             fact = root / 'fact.json'; fact.write_text('{}', encoding='utf-8')
             plan = root / 'plan.json'; plan.write_text('{}', encoding='utf-8')
             with mock.patch.object(controller_engine.content_guard, 'validate_fact_pack', side_effect=content_guard.ContentGuardError('FACT_PACK_CLAIMS_TOO_LOW')):
-                self._run_main_and_freeze(ws, ['controller.py', 'context', str(ws), str(fact), str(plan)], 'CONTEXT_WORKER', 'CONTEXT_STAGE')
+                self._run_stage_and_freeze(ws, 'context', controller_engine.cmd_context, [str(fact), str(plan)], 'CONTEXT_WORKER', 'CONTEXT_STAGE')
 
     def test_draft_missing_bound_link_returns_draft_worker_same_stage(self):
         self.assertEqual(
