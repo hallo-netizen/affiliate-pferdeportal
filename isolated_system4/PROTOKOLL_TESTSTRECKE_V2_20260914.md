@@ -1,11 +1,30 @@
 # PROTOKOLL — SYSTEM 4 TESTSTRECKE V2
 
-Ziel: **derselbe technische Weg wie Produktion vom Point-0 bis zur Parent-Chat-Datei.** Nur die fachliche Codex-Arbeit wird in der Teststrecke durch deterministische externe Research/Facts/Text/Repair-Eingaben ersetzt. Diese Fixtures liegen wie Live-Inputs außerhalb des Repositories und werden für eine reale Abnahme frisch erzeugt. Root, Supervisor, Worker-Dispatch, Controller, LT 6.8, PPM 6.7.9, Repair-Übergang, Batch und Handoff sind dieselben Produktionskomponenten.
+Ziel: **derselbe technische Weg wie Produktion vom Point-0 bis zur tatsächlich im Parent-Chat ausgegebenen WordPress-Importdatei.** Nur die fachliche Codex-Arbeit wird in der Teststrecke durch deterministische externe Research/Facts/Text/Repair-Eingaben ersetzt. Diese Fixtures liegen wie Live-Inputs außerhalb des Repositories und werden für eine reale Abnahme frisch erzeugt. Root, Supervisor, Worker-Dispatch, Controller, LT 6.8, PPM 6.7.9, Repair-Übergang, Batch und Handoff sind dieselben Produktionskomponenten.
+
+## Harte Abschlussbedingung — KEIN PASS OHNE CHAT-DATEI
+
+Ein GitHub-Run, lokaler Lauf, Batch-/Handoff-PASS, Inline-Unpack oder eine bytegleiche Datei in `/tmp`, in einem Artifact oder im Repository ist **noch kein bestandener Gesamttest**. Solche Ergebnisse sind ausschließlich **TESTKANDIDAT / REMOTE_PASS_PENDING_CHAT_DELIVERY**.
+
+Der Gesamttest ist erst **PASS**, wenn **dieselbe finale Datei tatsächlich im Parent-Chat als herunterladbare Datei ausgegeben wurde** und unmittelbar davor maschinell geprüft wurde, dass sie das korrekte WordPress-Importformat und alle für den direkten WordPress-Import erforderlichen Informationen enthält.
+
+Verbindliche letzte Strecke:
+`... → Batch → Handoff → canonicalize → inline-pack → inline-unpack → Bytegleichheit → WordPress-Importformat-Prüfung → Chat-Datei-Ausgabe → Chat-Datei identisch zur geprüften Finaldatei → PASS`.
+
+Pflichtbedingungen der Chat-Datei:
+- echte finale Importdatei, keine Proof-/Log-/Wrapper-Datei und kein ZIP als Ersatz;
+- MIME/Dateiformat gemäß realem WordPress-Importvertrag;
+- vollständiger Import-Payload einschließlich aller vom WordPress-Importer verlangten Artikel-, Identitäts-, Metadaten-, Produktionskontext- und Prüf-/Versionsinformationen;
+- `publish_allowed=false` bleibt unverändert;
+- Dateibytes bzw. SHA-256 müssen mit der unmittelbar zuvor geprüften Finaldatei übereinstimmen;
+- die Chat-Antwort muss die Datei als tatsächlichen Download/Attachment bereitstellen. Ein Pfad, Dateiname, GitHub-Artifact oder behaupteter PASS genügt nicht.
+
+Fehlt irgendeiner dieser Punkte, lautet der Status zwingend **NICHT BESTANDEN / CHAT_DELIVERY_PENDING**. Kein Worker, GitHub-Workflow, Testskript oder Nachbarchat darf vorher `PASS` für den Gesamttest behaupten.
 
 ## Positivstrecke
 
 Pflichtreihenfolge:
-`Machine Point-0 V2 → Root(index) → Supervisor → Worker-Dispatch → Research → Facts → Context → Draft → echtes LT/PPM → Same-Article-Repair → OUTPUT_GATE_REQUIRED → echter batch_gate collect → Handoff validate → canonicalize → inline-pack → inline-unpack → Bytegleichheit`.
+`Machine Point-0 V2 → Root(index) → Supervisor → Worker-Dispatch → Research → Facts → Context → Draft → echtes LT/PPM → Same-Article-Repair → OUTPUT_GATE_REQUIRED → echter batch_gate collect → Handoff validate → canonicalize → inline-pack → inline-unpack → Bytegleichheit → WordPress-Importformat-Prüfung → Ausgabe derselben Datei im Parent-Chat → PASS`.
 
 Der positive Batch-Gate-Aufruf ist zwingend und darf nicht durch den Handoff-Validator ersetzt oder übersprungen werden.
 
@@ -14,7 +33,7 @@ Der positive Batch-Gate-Aufruf ist zwingend und darf nicht durch den Handoff-Val
 Ein Befund eines echten späteren Prüfers darf **nicht allein wegen eines unbekannten oder nicht gelisteten Fehlercodes** terminal werden. Die Teststrecke muss zuerst die Fehlerklasse bestimmen und den Befund an den Besitzer der fehlererzeugenden Stufe zurückgeben.
 
 Verbindlicher Ablauf für jeden fachlich bzw. inhaltlich reparierbaren Befund:
-`echter Prüfer findet Fehler → Fehlerklasse bestimmen → Repair-Owner bestimmen → reale Erzeugerautorität dieses Owners nachweisen → exakt zur Erzeugerstufe zurück → dort reparieren/neuerzeugen → dieselben echten nachgelagerten Prüfer erneut ausführen → erst nach PASS weiter bis Batch/Handoff/bytegleicher Datei`.
+`echter Prüfer findet Fehler → Fehlerklasse bestimmen → Repair-Owner bestimmen → reale Erzeugerautorität dieses Owners nachweisen → exakt zur Erzeugerstufe zurück → dort reparieren/neuerzeugen → dieselben echten nachgelagerten Prüfer erneut ausführen → erst nach PASS der Prüfer weiter bis Batch/Handoff/bytegleicher Datei → WordPress-Importformat-Prüfung → Chat-Datei-Ausgabe`.
 
 **Owner bedeutet nicht automatisch reparierbar.** Ein Owner-Name ohne verfügbare reale Erzeugerautorität ist kein PASS. Fehlt die Autorität oder kann die gebundene Quelle den Fehler nicht selbst beheben, muss die Strecke zur nächsthöheren autoritativen Quelle zurück oder fail-closed blockieren. Ein Validator darf niemals durch sein Feld `expected`, einen Fehlertext oder einen historischen Code zum Erzeuger des Ersatzwerts werden.
 
@@ -23,7 +42,7 @@ Die Zuordnung darf **nicht** als Sammlung einzelner historischer Symptommuster i
 Mindestens folgende Owner-Klassen müssen positiv und negativ bewiesen werden:
 `PARENT_TITLE_MACHINE`, `PARENT_CATEGORY_MACHINE`, `PARENT_ARTICLE_TYPE_MACHINE`, `PARENT_KEYWORD_MACHINE`, `PARENT_SLOT_MACHINE`, `SOURCE_ACQUISITION_MACHINE`, `PORTAL_LINK_MACHINE`, `RESEARCH_WORKER`, `FACTS_WORKER`, `CONTEXT_WORKER`, `DRAFT_WORKER` und `HARD_BLOCK`.
 
-Für **jede tatsächlich reparierbare** Owner-Klasse ist Pflicht: absichtlicher Realfehler → echter Prüfer erkennt ihn → richtige Owner-Rückgabe → Reparatur durch die reale Erzeugerautorität → erneute Prüfung durch denselben echten Prüfer → vollständiger Lauf bis zur finalen bytegleichen Datei. Ein Test, der nur den Rückgabecode prüft, genügt nicht.
+Für **jede tatsächlich reparierbare** Owner-Klasse ist Pflicht: absichtlicher Realfehler → echter Prüfer erkennt ihn → richtige Owner-Rückgabe → Reparatur durch die reale Erzeugerautorität → erneute Prüfung durch denselben echten Prüfer → vollständiger Lauf bis zur finalen bytegleichen Datei → WordPress-Importformat-Prüfung → Ausgabe derselben Datei im Parent-Chat. Ein Test, der nur den Rückgabecode oder nur eine Remote-Datei prüft, genügt nicht.
 
 Für Parent-Metadaten gilt zusätzlich die jetzt bewiesene Quellenhierarchie:
 - `PARENT_TITLE_MACHINE`: nur deterministische Regelreparatur aus bereits gebundenem Titel/Keyword/Artikeltyp; keine freie Neuformulierung.
@@ -35,7 +54,7 @@ Für Parent-Metadaten gilt zusätzlich die jetzt bewiesene Quellenhierarchie:
 
 Pflichtregression aus Realrun 2026-09-14: `PPM679_VALIDATOR_BLOCKED:BLOCKED_KNOWN_REGRESSION_PATTERN` nach zulässigen Same-Article-Reparaturen. Dieser konkrete Code ist nur ein Testvektor. Bewiesen werden muss ursächlich, dass ein reparierbarer PPM-Befund am Artikeltext zum `DRAFT_WORKER` zurückkehrt und danach derselbe echte PPM 6.7.9 erneut läuft. Ein bloßes Whitelisting dieses Codes ist ausdrücklich kein PASS.
 
-Pflichtregression Parent-Titel: konsistent vor Point-0 gebundener Doppelpunkt-Titel → echter PPM 6.7.9 → `PARENT_TITLE_MACHINE`/`PARENT_LAUNCH` → deterministische Titelreparatur → alter versiegelter Point-0 bleibt unverändert → komplett neuer Point-0 → kompletter realer Weg erneut bis LT/PPM PASS, Batch, Handoff und bytegleicher Datei.
+Pflichtregression Parent-Titel: konsistent vor Point-0 gebundener Doppelpunkt-Titel → echter PPM 6.7.9 → `PARENT_TITLE_MACHINE`/`PARENT_LAUNCH` → deterministische Titelreparatur → alter versiegelter Point-0 bleibt unverändert → komplett neuer Point-0 → kompletter realer Weg erneut bis LT/PPM PASS, Batch, Handoff und bytegleicher Datei → WordPress-Importformat-Prüfung → Chat-Datei-Ausgabe.
 
 ## Historische Pflichtregressionen
 
@@ -49,6 +68,6 @@ Zusätzlich dauerhaft: reparierbarer PPM-Befund ohne bisher bekannten Prefix; fa
 
 ## Batch/Handoff negativ
 
-Mindestens: vertauschte States, fehlender State, Body-Tamper, `publish_allowed=true`, Direct-Upload-Flag aus, Inline-Payload-Tamper.
+Mindestens: vertauschte States, fehlender State, Body-Tamper, `publish_allowed=true`, Direct-Upload-Flag aus, Inline-Payload-Tamper, falsches/mangelhaftes WordPress-Importformat, fehlende Importpflichtfelder sowie Chat-Ausgabe einer Datei mit abweichenden Bytes/SHA-256.
 
-Kein einzelner Teiltest ersetzt die Gesamtstrecke. Nach jeder Änderung am kritischen Manifest muss die komplette Positiv- und Negativstrecke erneut auf exakt dem aktuellen Remote-Head laufen.
+Kein einzelner Teiltest ersetzt die Gesamtstrecke. Nach jeder Änderung am kritischen Manifest muss die komplette Positiv- und Negativstrecke erneut auf exakt dem aktuellen Remote-Head laufen. **Auch ein vollständig grüner Remote-Lauf bleibt bis zur geprüften Dateiausgabe im Parent-Chat lediglich TESTKANDIDAT.**
