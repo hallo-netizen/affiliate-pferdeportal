@@ -93,7 +93,8 @@ def _serve_sources(root:Path, scenarios:list[dict]):
         for j,(title,evidence) in enumerate(sc['sources']):
             name=f'item-{i}-source-{j}.html'
             (root/name).write_text(f'<!doctype html><html><head><title>{title}</title></head><body><article><h1>{title}</h1><p>{evidence}</p></article></body></html>',encoding='utf-8')
-            rows.append({'source_id':f'test-{i}-source-{j}','source_title':title,'path':name})
+            source_id='src-'+hashlib.sha256((title+'\n'+evidence).encode('utf-8')).hexdigest()[:32]
+            rows.append({'source_id':source_id,'source_title':title,'path':name})
         requests[i]=rows
     handler=lambda *a,**kw: Quiet(*a,directory=str(root),**kw)
     server=ThreadingHTTPServer(('127.0.0.1',0),handler)
