@@ -34,7 +34,7 @@ jobs:
       - name: Assert no Codex action exists before Point0
         run: |
           set -euo pipefail
-          if grep -n 'openai/codex-action\|@codex' .github/workflows/system4a-real-acceptance.yml; then
+          if grep -En '^[[:space:]]*-[[:space:]]*uses:[[:space:]]*openai/codex-action@' .github/workflows/system4a-real-acceptance.yml; then
             echo 'SYSTEM4_MACHINE_ROUTE_BLOCK:CODEX_BEFORE_POINT0_FORBIDDEN'
             exit 2
           fi
