@@ -14,18 +14,28 @@ Der positive Batch-Gate-Aufruf ist zwingend und darf nicht durch den Handoff-Val
 Ein Befund eines echten späteren Prüfers darf **nicht allein wegen eines unbekannten oder nicht gelisteten Fehlercodes** terminal werden. Die Teststrecke muss zuerst die Fehlerklasse bestimmen und den Befund an den Besitzer der fehlererzeugenden Stufe zurückgeben.
 
 Verbindlicher Ablauf für jeden fachlich bzw. inhaltlich reparierbaren Befund:
-`echter Prüfer findet Fehler → Fehlerklasse bestimmen → Repair-Owner bestimmen → exakt zur Erzeugerstufe zurück → dort reparieren → dieselben echten nachgelagerten Prüfer erneut ausführen → erst nach PASS weiter bis Batch/Handoff/bytegleicher Datei`.
+`echter Prüfer findet Fehler → Fehlerklasse bestimmen → Repair-Owner bestimmen → reale Erzeugerautorität dieses Owners nachweisen → exakt zur Erzeugerstufe zurück → dort reparieren/neuerzeugen → dieselben echten nachgelagerten Prüfer erneut ausführen → erst nach PASS weiter bis Batch/Handoff/bytegleicher Datei`.
+
+**Owner bedeutet nicht automatisch reparierbar.** Ein Owner-Name ohne verfügbare reale Erzeugerautorität ist kein PASS. Fehlt die Autorität oder kann die gebundene Quelle den Fehler nicht selbst beheben, muss die Strecke zur nächsthöheren autoritativen Quelle zurück oder fail-closed blockieren. Ein Validator darf niemals durch sein Feld `expected`, einen Fehlertext oder einen historischen Code zum Erzeuger des Ersatzwerts werden.
 
 Die Zuordnung darf **nicht** als Sammlung einzelner historischer Symptommuster implementiert oder getestet werden. Historische Codes dienen als Testvektoren; die Produktionsentscheidung muss aus Fehlerklasse, Feld/Artefakt und Besitzer folgen.
 
 Mindestens folgende Owner-Klassen müssen positiv und negativ bewiesen werden:
 `PARENT_TITLE_MACHINE`, `PARENT_CATEGORY_MACHINE`, `PARENT_ARTICLE_TYPE_MACHINE`, `PARENT_KEYWORD_MACHINE`, `PARENT_SLOT_MACHINE`, `SOURCE_ACQUISITION_MACHINE`, `PORTAL_LINK_MACHINE`, `RESEARCH_WORKER`, `FACTS_WORKER`, `CONTEXT_WORKER`, `DRAFT_WORKER` und `HARD_BLOCK`.
 
-Für **jede** reparierbare Owner-Klasse ist Pflicht: absichtlicher Realfehler → echter Prüfer erkennt ihn → richtige Owner-Rückgabe → Reparatur → erneute Prüfung durch denselben echten Prüfer → vollständiger Lauf bis zur finalen bytegleichen Datei. Ein Test, der nur den Rückgabecode prüft, genügt nicht.
+Für **jede tatsächlich reparierbare** Owner-Klasse ist Pflicht: absichtlicher Realfehler → echter Prüfer erkennt ihn → richtige Owner-Rückgabe → Reparatur durch die reale Erzeugerautorität → erneute Prüfung durch denselben echten Prüfer → vollständiger Lauf bis zur finalen bytegleichen Datei. Ein Test, der nur den Rückgabecode prüft, genügt nicht.
 
-`HARD_BLOCK` bleibt ausschließlich für Manipulation/Tamper, Hash-/Manifest-/Integritätsfehler, ungebundene Daten, Sicherheitsverletzungen, echte Tool-/Validator-Ausführungsfehler sowie unbekannte/nicht sicher klassifizierbare Fehler. Diese Klassen dürfen niemals in einen inhaltlichen Repair umgedeutet werden.
+Für Parent-Metadaten gilt zusätzlich die jetzt bewiesene Quellenhierarchie:
+- `PARENT_TITLE_MACHINE`: nur deterministische Regelreparatur aus bereits gebundenem Titel/Keyword/Artikeltyp; keine freie Neuformulierung.
+- `PARENT_CATEGORY_MACHINE`, `PARENT_ARTICLE_TYPE_MACHINE`, `PARENT_KEYWORD_MACHINE`, `PARENT_SLOT_MACHINE`: ein späterer Drift darf ausschließlich aus der **hashgebundenen Upstream-Metadaten-Projection** wiederhergestellt werden.
+- Ist der vom echten Prüfer beanstandete Wert bereits byte-/wertgleich in dieser Upstream-Projection enthalten, kann die Projection sich nicht selbst korrigieren. Dann ist verbindlich `UPSTREAM_METADATA_SOURCE_REBUILD_REQUIRED` und der Rücksprung muss bis zum echten Redaktionsplan-/Fachworkflow-Producer gehen. Kein Chat-, Codex-, Validator-`expected`- oder Rekonstruktionsersatz.
+- Die historische STARTMASTER0107-Herkunft belegt diese Trennung: Runtime-Snapshot = Projection mit `source_snapshot_filename`/`source_snapshot_sha256`; H8 Producer/Signer = Herkunfts-/Integritätsautorität, ausdrücklich keine Fach-/Qualitätsautorität.
+
+`HARD_BLOCK` bleibt für Manipulation/Tamper, Hash-/Manifest-/Integritätsfehler, ungebundene Daten, Sicherheitsverletzungen, echte Tool-/Validator-Ausführungsfehler sowie unbekannte/nicht sicher klassifizierbare Fehler. Diese Klassen dürfen niemals in einen inhaltlichen Repair umgedeutet werden. Ebenso fail-closed: ein fachlich ungültiger Upstream-Metadatenwert, solange die echte weiter vorgelagerte Producer-Autorität nicht verfügbar ist.
 
 Pflichtregression aus Realrun 2026-09-14: `PPM679_VALIDATOR_BLOCKED:BLOCKED_KNOWN_REGRESSION_PATTERN` nach zulässigen Same-Article-Reparaturen. Dieser konkrete Code ist nur ein Testvektor. Bewiesen werden muss ursächlich, dass ein reparierbarer PPM-Befund am Artikeltext zum `DRAFT_WORKER` zurückkehrt und danach derselbe echte PPM 6.7.9 erneut läuft. Ein bloßes Whitelisting dieses Codes ist ausdrücklich kein PASS.
+
+Pflichtregression Parent-Titel: konsistent vor Point-0 gebundener Doppelpunkt-Titel → echter PPM 6.7.9 → `PARENT_TITLE_MACHINE`/`PARENT_LAUNCH` → deterministische Titelreparatur → alter versiegelter Point-0 bleibt unverändert → komplett neuer Point-0 → kompletter realer Weg erneut bis LT/PPM PASS, Batch, Handoff und bytegleicher Datei.
 
 ## Historische Pflichtregressionen
 
@@ -35,7 +45,7 @@ Mindestens 22 Klassen bleiben dauerhaft Pflicht: fehlende Manifestbindung, leere
 
 Zusätzlich: Cross-Item-Research, Prewrite-Byte-Tamper, rehashter Linktausch, Runtime-Linktausch, Kategorieänderung, Artikelindex/Pool/Slot-Verwechslung sowie Source-Acquisition 200/401/403.
 
-Zusätzlich dauerhaft: reparierbarer PPM-Befund ohne bisher bekannten Prefix; falscher Repair-Owner; fehlender Owner; Repair ohne erneuten echten Prüferlauf; Repair mit Überspringen eines späteren Prüfers; unbekannter PPM-Code muss fail-closed bleiben; Integritäts-/Ausführungsfehler dürfen nicht als Content-Repair klassifiziert werden.
+Zusätzlich dauerhaft: reparierbarer PPM-Befund ohne bisher bekannten Prefix; falscher Repair-Owner; fehlender Owner; Repair ohne erneuten echten Prüferlauf; Repair mit Überspringen eines späteren Prüfers; unbekannter PPM-Code muss fail-closed bleiben; Integritäts-/Ausführungsfehler dürfen nicht als Content-Repair klassifiziert werden; Parent-Metadaten-Drift darf nur aus hashgebundener Upstream-Projection restauriert werden; falscher Projection-Hash blockiert; Non-Owner-Metadatenänderung blockiert; bereits in der Projection falscher Parent-Metadatenwert erzwingt Upstream-Producer-Rebuild.
 
 ## Batch/Handoff negativ
 
