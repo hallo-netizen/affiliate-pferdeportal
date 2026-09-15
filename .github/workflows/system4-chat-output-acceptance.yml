@@ -65,9 +65,9 @@ jobs:
               rel=test.relative_to(ppm).as_posix()
               try:
                   cp=subprocess.run(['php',str(test)],cwd=ppm,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120,check=False)
-              except subprocess.TimeoutExpired:
+              except subprocess.TimeoutExpired as exc:
                   print(f'PPM679_INTERNAL_TEST_BLOCK:{i}/{len(tests)}:{rel}:TIMEOUT')
-                  failures.append((rel,'TIMEOUT',''))
+                  failures.append((rel,str(exc.stdout or ''),str(exc.stderr or '')))
                   continue
               if cp.returncode!=0:
                   print(f'PPM679_INTERNAL_TEST_BLOCK:{i}/{len(tests)}:{rel}:RC={cp.returncode}')
@@ -75,10 +75,12 @@ jobs:
               else:
                   print(f'PPM679_INTERNAL_TEST_PASS:{i}/{len(tests)}:{rel}')
           if failures:
-              rel,out,err=failures[0]
-              print('PPM679_FIRST_FAILURE='+rel)
-              print('PPM679_FIRST_FAILURE_STDOUT='+str(out)[-4000:])
-              print('PPM679_FIRST_FAILURE_STDERR='+str(err)[-4000:])
+              print('PPM679_FAILURE_COUNT='+str(len(failures)))
+              for rel,out,err in failures:
+                  print('PPM679_FAILURE_DETAIL_BEGIN='+rel)
+                  print('PPM679_FAILURE_STDOUT='+str(out)[-3000:].replace('\n','\\n'))
+                  print('PPM679_FAILURE_STDERR='+str(err)[-3000:].replace('\n','\\n'))
+                  print('PPM679_FAILURE_DETAIL_END='+rel)
               raise SystemExit('PPM679_INTERNAL_SUITE_FAILED:'+str(len(failures)))
           print('PPM679_FULL_INTERNAL_SUITE_PASS:COUNT='+str(len(tests)))
           PY
