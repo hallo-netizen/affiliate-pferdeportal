@@ -44,6 +44,19 @@ def _worker_generate(e,workspace:Path,generated:Path,stage:str,*outs:Path):
     generated.mkdir(parents=True,exist_ok=True)
     return run([sys.executable,TESTWORKER,stage,workspace,*outs],e)
 
+def _diagnose_fullcheck(state:dict,index:int)->None:
+    sys.path.insert(0,str(HERE)); import production_checks
+    ctx=state.get('production_context')
+    if not isinstance(ctx,dict):
+        print('SYSTEM4_FULLCHECK_DIAGNOSTIC:PRODUCTION_CONTEXT_MISSING',flush=True); return
+    try:
+        production_checks.run_all(REPO,state,ctx['fact_pack'],ctx['production_plan_item'])
+        print('SYSTEM4_FULLCHECK_DIAGNOSTIC:NO_REPAIR_REPRODUCED',flush=True)
+    except production_checks.RepairRequired as exc:
+        print('SYSTEM4_FULLCHECK_DIAGNOSTIC:'+json.dumps({'article_index':index,'checker':exc.checker,'findings':exc.findings},ensure_ascii=False,sort_keys=True,default=str),flush=True)
+    except Exception as exc:
+        print('SYSTEM4_FULLCHECK_DIAGNOSTIC_ERROR:'+type(exc).__name__+':'+str(exc),flush=True)
+
 def item(runroot:Path,i:int)->dict:
     e=env(); snap=load(runroot/'snapshot.json'); count=len(snap['next_textmachine_metadata_batch']['items'])
     if i<0 or i>=count: fail('ITEM_INDEX_INVALID')
@@ -67,7 +80,9 @@ def item(runroot:Path,i:int)->dict:
             cp=run([sys.executable,HERE/'controller.py','fullcheck',w],e,check=False)
             if cp.returncode==0: continue
             s=load(w/'state.json')
-            if s.get('phase')!='REPAIR_REQUIRED': fail('UNEXPECTED_FULLCHECK_BLOCK:'+cp.stdout.strip()+':'+cp.stderr.strip())
+            if s.get('phase')!='REPAIR_REQUIRED':
+                if 'REPAIR_OWNER_CONFLICT:' in cp.stdout: _diagnose_fullcheck(s,i)
+                fail('UNEXPECTED_FULLCHECK_BLOCK:'+cp.stdout.strip()+':'+cp.stderr.strip())
             repair_events.append(cp.stdout.strip()); continue
         if phase=='REPAIR_REQUIRED':
             print('SYSTEM4_TESTWORKER_REPAIR_REQUEST:'+json.dumps({'article_index':i,'last_error':s.get('last_error'),'checks':s.get('checks')},ensure_ascii=False,sort_keys=True),flush=True)
