@@ -10,13 +10,16 @@ Symptome laut Nutzer:
 - Pferderassen-Seite nicht mehr auffindbar / zerschossen;
 - Glossar nicht mehr auffindbar.
 
+Verbindliches Ziel:
+`ZIELVERTRAG_DESIGN_20260915.md`
+
 ## HARTE SPERRE
 Keine weitere Plugin-Ausgabe und keine Abnahme aus isolierter Codeansicht.
 Kein Raten über die Ursache.
 
 ## NEXT ACTION
 1. real installierte Version des **Pferde Atelier Designplugins** frisch bestimmen;
-2. real installierte Version des **Universal Portal Design Suite** frisch bestimmen;
+2. real installierte Version der **Universal Portal Design Suite** frisch bestimmen;
 3. exakt diese Kombination als lokale Ausgangsbasis reproduzieren;
 4. Pferderassen-Route/Template und Glossar-Route/Template jeweils positiv prüfen;
 5. Negativtests erzwingen, die einen Ausfall einer der beiden Welten erkennen;
@@ -30,6 +33,7 @@ Kein Raten über die Ursache.
 Branch: `hobbyroom/project-memory-campus-v1-20260905`
 
 Fehlerautorität: `FEHLERQUELLEN.md` → `DESIGN-LIVE-20260915-001`.
+Zielautorität: `ZIELVERTRAG_DESIGN_20260915.md`.
 Bürostand: `CURRENT_STATE.md`.
 Plugin-Sync erst nach Fach-PASS über `../PLUGINS/`.
 
