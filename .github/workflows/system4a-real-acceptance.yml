@@ -41,6 +41,30 @@ jobs:
           echo 'SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_IN_TEST'
       - name: Inspect real WordPress importer contract
         run: python3 isolated_system4/wordpress_import_contract_probe.py | tee /tmp/system4-wordpress-import-contract.txt
+      - name: Inspect exact PPM 6.7.9 table authority
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          package=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
+          marker='BLOCKED_WAVE2_TABLE_VALUE'
+          found=0
+          with zipfile.ZipFile(package) as z:
+              for name in z.namelist():
+                  if not name.endswith('.php'):
+                      continue
+                  text=z.read(name).decode('utf-8','replace')
+                  lines=text.splitlines()
+                  for i,line in enumerate(lines):
+                      if marker in line:
+                          found+=1
+                          print('PPM679_TABLE_AUTHORITY_FILE='+name)
+                          lo=max(0,i-90); hi=min(len(lines),i+50)
+                          for n in range(lo,hi):
+                              print(f'{n+1}: {lines[n]}')
+          if found<1:
+              raise SystemExit('PPM679_TABLE_AUTHORITY_NOT_FOUND')
+          PY
       - name: Build fresh machine inputs for one article
         env:
           PYTHONPATH: isolated_system4
