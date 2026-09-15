@@ -14,9 +14,20 @@ Version: `0.2.7`
 
 Datei: `PFERDE_ATELIER_PFERDERASSEN_MANAGER_0.2.7_INSTALLIEREN.zip`
 SHA-256: `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`
-ChatGPT-Library-Dateireferenz zum Zeitpunkt der Bindung: `file_0000000096f081f5bfb8ffabe3c35e1d`
 
 Die ZIP ist der exakt lokal getestete technische Kandidat. Sie ist **noch kein LIVE-PASS** und darf deshalb noch nicht als isolierte `CURRENT.zip` im PLUGINS-Büro hochgestuft werden.
+
+## Isolierte Plugin-Ablage
+
+Der geprüfte Kandidat ist zusätzlich dauerhaft im zentralen Plugin-Schrank abgelegt:
+
+`/Campus-Plugins/PFERDE_ATELIER/PPA-011/CANDIDATE_0.2.7.zip`
+
+Dazu:
+
+`/Campus-Plugins/PFERDE_ATELIER/PPA-011/CANDIDATE_MANIFEST.md`
+
+Diese Ablage ist ausdrücklich **nur der Testkandidat**. `CURRENT.zip` + `MANIFEST.md` dürfen erst nach bestandenem WordPress-LIVE-Test erzeugt werden.
 
 ## Inhaltshashes der getesteten ZIP
 
