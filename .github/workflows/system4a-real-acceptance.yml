@@ -69,6 +69,13 @@ jobs:
         env:
           PYTHONPATH: isolated_system4
         run: python3 isolated_system4/ppm_prewrite_contract_probe.py | tee /tmp/system4-ppm-prewrite-authorities.txt
+      - name: Preserve PPM prewrite authority evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-prewrite-authorities-${{ github.sha }}
+          path: /tmp/system4-ppm-prewrite-authorities.txt
+          if-no-files-found: error
+          retention-days: 1
       - name: Build fresh machine inputs for one article
         env:
           PYTHONPATH: isolated_system4
