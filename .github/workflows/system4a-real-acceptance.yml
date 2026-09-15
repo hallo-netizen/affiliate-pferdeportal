@@ -34,12 +34,19 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
         run: python3 isolated_system4/real_known_regression_acceptance_v3.py
+      - name: Run real parent title owner restart acceptance
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
+        run: python3 isolated_system4/real_parent_title_repair_acceptance_v1.py
       - name: Verify exact V3 proof and final file
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
-          p=Path('/tmp/system4-acceptance-output/SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json')
+          root=Path('/tmp/system4-acceptance-output')
+          p=root/'SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json'
           r=json.loads(p.read_text())
           assert r['status']=='PASS'
           assert r['ppm_error']=='BLOCKED_KNOWN_REGRESSION_PATTERN'
@@ -47,9 +54,22 @@ jobs:
           assert r['start_path']=='CHAT_START->POINT0->ROOT->SUPERVISOR->WORKER_DISPATCH->CODEX_WORKER_START'
           assert r['inline_byte_equal'] is True
           assert r['publish_allowed'] is False
-          f=Path('/tmp/system4-acceptance-output/SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json')
+          f=root/'SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json'
           assert f.is_file() and f.stat().st_size>0
-          print('SYSTEM4_REAL_PPM_KNOWN_REGRESSION_V3_TO_FILE_PASS')
+
+          t=root/'SYSTEM4_REAL_PARENT_TITLE_REPAIR_ACCEPTANCE_V1.json'
+          tr=json.loads(t.read_text())
+          assert tr['status']=='PASS'
+          assert tr['initial_error']=='BLOCKED_CONTENT_TITLE_COLON'
+          assert tr['repair_owner']=='PARENT_TITLE_MACHINE'
+          assert tr['return_route']=='PARENT_LAUNCH'
+          assert tr['old_point0_immutable'] is True
+          assert tr['old_point0_sha256'] != tr['new_point0_sha256']
+          assert tr['inline_byte_equal'] is True
+          assert tr['publish_allowed'] is False
+          tf=root/'SYSTEM4_PARENT_TITLE_REPAIRED_WORDPRESS.json'
+          assert tf.is_file() and tf.stat().st_size>0
+          print('SYSTEM4_REAL_DRAFT_AND_PARENT_TITLE_REPAIR_TO_FILE_PASS')
           PY
       - name: Upload acceptance proof
         uses: actions/upload-artifact@v4
