@@ -42,6 +42,7 @@ class RepairOwnerFailClosedContractTests(unittest.TestCase):
         self.assertEqual(rc, 4)
         self.assertEqual(after['phase'], 'CHECK_REQUIRED')
         self.assertEqual(after['checks']['repair_owner'], 'PARENT_TITLE_MACHINE')
+        self.assertEqual(after['checks']['repair_owners'], ['PARENT_TITLE_MACHINE'])
         self.assertEqual(after['checks']['return_route'], 'PARENT_LAUNCH')
         self.assertIs(after['checks']['return_required'], True)
         self.assertEqual(after['draft_markdown'], before['draft_markdown'])
@@ -53,18 +54,27 @@ class RepairOwnerFailClosedContractTests(unittest.TestCase):
         with self.assertRaisesRegex(controller.Fail, 'REPAIR_OWNER_MISSING:ppm679'):
             self._run([{'error_code': 'BLOCKED_CONTENT_SOMETHING'}])
 
-    def test_conflicting_owners_are_fail_closed(self):
-        with self.assertRaisesRegex(controller.Fail, 'REPAIR_OWNER_CONFLICT'):
-            self._run([
-                {'error_code': 'BLOCKED_CONTENT_TITLE_INVALID', 'repair_owner': 'PARENT_TITLE_MACHINE'},
-                {'error_code': 'BLOCKED_CONTENT_BODY_INVALID', 'repair_owner': 'DRAFT_WORKER'},
-            ])
+    def test_multiple_repairable_owners_must_return_not_block(self):
+        rc, before, after = self._run([
+            {'error_code': 'BLOCKED_CONTENT_TITLE_INVALID', 'repair_owner': 'PARENT_TITLE_MACHINE'},
+            {'error_code': 'BLOCKED_CONTENT_BODY_INVALID', 'repair_owner': 'DRAFT_WORKER'},
+        ])
+        self.assertEqual(rc, 4)
+        self.assertEqual(after['phase'], 'CHECK_REQUIRED')
+        self.assertEqual(after['checks']['repair_owner'], 'MULTI_OWNER_RETURN')
+        self.assertEqual(after['checks']['repair_owners'], ['DRAFT_WORKER', 'PARENT_TITLE_MACHINE'])
+        self.assertIs(after['checks']['return_required'], True)
+        self.assertEqual(after['checks']['return_route'], 'PARENT_LAUNCH')
+        self.assertEqual(after['draft_markdown'], before['draft_markdown'])
+        self.assertEqual(after['article'], before['article'])
+        self.assertEqual(after['production_context'], before['production_context'])
 
     def test_languagetool_without_explicit_owner_remains_draft_repair(self):
         rc, _, after = self._run([{'error_code': 'LANGUAGETOOL_FINDING'}], checker='languagetool')
         self.assertEqual(rc, 3)
         self.assertEqual(after['phase'], 'REPAIR_REQUIRED')
         self.assertEqual(after['checks']['repair_owner'], 'DRAFT_WORKER')
+        self.assertEqual(after['checks']['repair_owners'], ['DRAFT_WORKER'])
 
 
 if __name__ == '__main__':
