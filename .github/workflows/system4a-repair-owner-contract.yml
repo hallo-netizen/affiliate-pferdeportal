@@ -24,3 +24,4 @@ jobs:
           test_repair_owner_failclosed_contract.py
           test_parent_title_repair_contract.py
           test_parent_metadata_owner_authority_contract.py
+          test_stage_owner_return_contract.py
