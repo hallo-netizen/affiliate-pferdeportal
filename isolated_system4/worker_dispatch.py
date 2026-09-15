@@ -34,3 +34,19 @@ def verify_bundle(bundle:dict, *, actual_manifest:str, actual_head:str)->tuple[d
         snap=json.loads(raw.decode('utf-8')); items=snap['next_textmachine_metadata_batch']['items']; idx=wc['article_index']; assert isinstance(idx,int) and not isinstance(idx,bool) and 0<=idx<len(items)
     except Exception as exc: raise WorkerDispatchError('DISPATCH_ARTICLE_INDEX_INVALID') from exc
     return wc,raw
+
+def verify_workspace_dispatch(workspace:Path, *, actual_manifest:str, actual_head:str)->tuple[dict,bytes]:
+    workspace=Path(workspace)
+    dispatch=workspace/'worker_dispatch.json'
+    if not dispatch.is_file(): raise WorkerDispatchError('DISPATCH_ARTIFACT_MISSING')
+    try: bundle=json.loads(dispatch.read_text(encoding='utf-8'))
+    except Exception as exc: raise WorkerDispatchError('DISPATCH_JSON_INVALID') from exc
+    wc,raw=verify_bundle(bundle,actual_manifest=actual_manifest,actual_head=actual_head)
+    state_path=workspace/'state.json'
+    if not state_path.is_file(): raise WorkerDispatchError('DISPATCH_CONTROLLER_STATE_MISSING')
+    try: state=json.loads(state_path.read_text(encoding='utf-8'))
+    except Exception as exc: raise WorkerDispatchError('DISPATCH_CONTROLLER_STATE_INVALID') from exc
+    supervisor.verify_controller_binding(workspace,state)
+    if wc.get('external_web_search_allowed') is not False or wc.get('publish_allowed') is not False:
+        raise WorkerDispatchError('DISPATCH_WORKER_AUTHORITY_INVALID')
+    return wc,raw
