@@ -1,6 +1,6 @@
 # AKTENSCHRANK PFERDERASSEN
 
-STAND: 2026-09-14
+STAND: 2026-09-15
 STATUS: BASISBESTAND_ABGESCHLOSSEN / ARTIKELREGELN GEBUNDEN
 
 ## WAS IST DAS?
@@ -24,6 +24,10 @@ Belastbare, strukturierte Rassenfakten zentral recherchieren und pflegen. Diese 
 ## WEGWEISER
 - **Produktionsworkflow für neue Chats:** `PRODUKTIONSWORKFLOW_PFERDERASSEN.md`
 - **verbindlicher Schreibvertrag für Rassenartikel:** `SCHREIBVERTRAG_PFERDERASSE.md`
+- **aktuelle ausführliche Fachfehler:** `FEHLERQUELLEN.md`
+- **Zielvertrag Rassengruppe / ähnliche Rassen:** `ZIELVERTRAG_RELATIONEN.md`
+- **technischer Manager-Kandidat:** `TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`
+- **Manager-Testbeleg:** `TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md`
 - gesicherte Beitragsstruktur/Entwurf: `BEITRAGSART_PFERDERASSE_ENTWURF.md`
 - Datenmodell: `RASSEN_DATENMODELL.md`
 - Rassen-/Kandidatenregister: `RASSEN_REGISTER.md`
@@ -42,3 +46,5 @@ Der Schreiber darf formulieren, aber nicht entscheiden. Was nicht im Datensatz o
 
 ## RECHERCHE-STATUS
 Der internationale Basisbestand ist abgeschlossen. Offene Detailfelder bleiben bewusst offen und werden nur gezielt nachrecherchiert. Neue Rassen werden nur bei belastbarer späterer Ergänzung aufgenommen.
+
+Aktuelle Produktions-/WordPress-Arbeit wird **nicht hier** als zweite Standwahrheit geführt, sondern ausschließlich in `../../CURRENT_STATE.md`, `../../HOBBYRAUM.md` und der verlinkten Fachfehlerquelle.
