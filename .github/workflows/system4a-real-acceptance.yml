@@ -31,124 +31,77 @@ jobs:
       - name: Prove machine route lock before acceptance
         working-directory: isolated_system4
         run: python3 -m unittest -v test_machine_route_lock_contract.py
-      - name: Assert no Codex action exists before Point0
+      - name: Assert no Codex action exists in acceptance
         run: |
           set -euo pipefail
           if grep -En '^[[:space:]]*-[[:space:]]*uses:[[:space:]]*openai/codex-action@' .github/workflows/system4a-real-acceptance.yml; then
-            echo 'SYSTEM4_MACHINE_ROUTE_BLOCK:CODEX_BEFORE_POINT0_FORBIDDEN'
+            echo 'SYSTEM4_MACHINE_ROUTE_BLOCK:CODEX_FORBIDDEN_IN_TEST'
             exit 2
           fi
-          echo 'SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_BEFORE_POINT0'
-      - name: Run Point0 Supervisor Worker real regression acceptance
+          echo 'SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_IN_TEST'
+      - name: Inspect real WordPress importer contract
+        run: python3 isolated_system4/wordpress_import_contract_probe.py | tee /tmp/system4-wordpress-import-contract.txt
+      - name: Build fresh machine inputs for one article
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-1 1
+      - name: Run complete one article route
         env:
           PYTHONPATH: isolated_system4
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/real_known_regression_acceptance_v3.py
-      - name: Run real parent title owner restart acceptance
-        env:
-          PYTHONPATH: isolated_system4
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/real_parent_title_repair_acceptance_v1.py
-      - name: Run real portal link owner boundary acceptance
-        env:
-          PYTHONPATH: isolated_system4
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/real_portal_link_owner_acceptance_v1.py
-      - name: Run real source acquisition owner restart acceptance
-        env:
-          PYTHONPATH: isolated_system4
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/real_source_acquisition_owner_acceptance_v1.py
-      - name: Run real research owner same-stage acceptance
-        env:
-          PYTHONPATH: isolated_system4
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/real_research_owner_acceptance_v1.py
-      - name: Run real facts owner same-stage acceptance
-        env:
-          PYTHONPATH: isolated_system4
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/real_facts_owner_acceptance_v1.py
-      - name: Run real context owner same-stage acceptance
-        env:
-          PYTHONPATH: isolated_system4
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
-        run: python3 isolated_system4/real_context_owner_acceptance_v1.py
-      - name: Verify real proofs and create chat delivery candidate
-        env:
-          PYTHONPATH: isolated_system4
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-1
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_1_PROOF.json
         run: |
+          set -euo pipefail
+          python3 isolated_system4/live_parity_v2.py all
+          cp /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2_1_ARTICLE.json
+      - name: Build fresh machine inputs for three articles
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-3 3
+      - name: Run complete three article route with repair isolation
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-3
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_3_PROOF.json
+        run: python3 isolated_system4/live_parity_v2.py all
+      - name: Run permanent owner and source negative contracts
+        working-directory: isolated_system4
+        run: >-
+          python3 -m unittest -v
+          test_repair_owner_routing_contract.py
+          test_repair_owner_failclosed_contract.py
+          test_parent_title_repair_contract.py
+          test_parent_metadata_owner_authority_contract.py
+          test_stage_owner_return_contract.py
+          test_source_acquisition_owner_contract.py
+          test_machine_route_lock_contract.py
+      - name: Verify fresh-route evidence
+        run: |
+          set -euo pipefail
           python3 - <<'PY'
-          import hashlib, json, shutil
+          import json
           from pathlib import Path
-          import handoff_transport
-
           root=Path('/tmp/system4-acceptance-output')
-          proofs=[
-            'SYSTEM4_REAL_KNOWN_REGRESSION_ACCEPTANCE_V3.json',
-            'SYSTEM4_REAL_PARENT_TITLE_REPAIR_ACCEPTANCE_V1.json',
-            'SYSTEM4_REAL_PORTAL_LINK_OWNER_ACCEPTANCE_V1.json',
-            'SYSTEM4_REAL_SOURCE_ACQUISITION_OWNER_ACCEPTANCE_V1.json',
-            'SYSTEM4_REAL_RESEARCH_OWNER_ACCEPTANCE_V1.json',
-            'SYSTEM4_REAL_FACTS_OWNER_ACCEPTANCE_V1.json',
-            'SYSTEM4_REAL_CONTEXT_OWNER_ACCEPTANCE_V1.json',
-          ]
-          for name in proofs:
-            obj=json.loads((root/name).read_text())
-            assert obj['status']=='PASS', name
-            assert obj['publish_allowed'] is False, name
-            assert obj['inline_byte_equal'] is True, name
-
-          src=root/'SYSTEM4_PORTAL_LINK_REALIZATION_REPAIRED_WORDPRESS.json'
-          payload, raw=handoff_transport.read_validate_handoff(src)
-          wr=payload['wordpress_review']
-          assert wr['file_format']=='JSON'
-          assert wr['mime_type']=='application/json'
-          assert wr['intended_next_step']=='WORDPRESS_DIRECT_IMPORT'
-          assert wr['plugin_name']=='Portal SEO Editorial Plan Compiler'
-          assert wr['plugin_version_verified_against']==handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION
-          assert wr['ppm_version_verified_against']=='6.7.9'
-          assert wr['direct_wordpress_upload_ready'] is True
-          assert wr['direct_upload_block_reason'] is None
-          assert wr['required_downstream_components']==[]
-          assert payload['publish_allowed'] is False
-          assert len(payload['articles'])>=1
-
-          candidate=root/handoff_transport.HANDOFF_FILENAME
-          shutil.copyfile(src,candidate)
-          assert candidate.read_bytes()==raw
-          digest=hashlib.sha256(raw).hexdigest()
-          manifest={
-            'contract':'SYSTEM4_CHAT_DELIVERY_CANDIDATE_V1',
-            'status':'REMOTE_PASS_PENDING_CHAT_DELIVERY',
-            'filename':candidate.name,
-            'mime_type':'application/json',
-            'sha256':digest,
-            'byte_length':len(raw),
-            'handoff_contract':payload['contract'],
-            'article_count':len(payload['articles']),
-            'wordpress_plugin':wr['plugin_name'],
-            'wordpress_plugin_version':wr['plugin_version_verified_against'],
-            'ppm_version':wr['ppm_version_verified_against'],
-            'intended_next_step':wr['intended_next_step'],
-            'direct_wordpress_upload_ready':True,
-            'publish_allowed':False,
-            'chat_delivery_required_for_final_pass':True,
-          }
-          (root/'SYSTEM4_CHAT_DELIVERY_CANDIDATE_V1.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
-          print(json.dumps(manifest,ensure_ascii=False,sort_keys=True))
+          one=json.loads((root/'LIVE_PARITY_V2_1_PROOF.json').read_text())
+          three=json.loads((root/'LIVE_PARITY_V2_3_PROOF.json').read_text())
+          assert one['article_count']==1 and three['article_count']==3
+          assert one['pre_point0_article_body_count']==0 and three['pre_point0_article_body_count']==0
+          assert one['inline_byte_equal'] is True and three['inline_byte_equal'] is True
+          assert one['lt']==['PASS'] and one['ppm']==['PASS']
+          assert three['lt']==['PASS','PASS','PASS'] and three['ppm']==['PASS','PASS','PASS']
+          assert max(three['revisions'])>=2, three['revisions']
+          print('SYSTEM4_FRESH_1_AND_3_ROUTE_PASS_PENDING_WORDPRESS_CHAT')
           PY
-      - name: Upload acceptance proof and chat delivery candidate
+      - name: Upload current test route candidate
         uses: actions/upload-artifact@v4
         with:
           name: system4a-real-acceptance-${{ github.sha }}
-          path: /tmp/system4-acceptance-output/
+          path: |
+            /tmp/system4-acceptance-output/
+            /tmp/system4-wordpress-import-contract.txt
           if-no-files-found: error
           retention-days: 1
