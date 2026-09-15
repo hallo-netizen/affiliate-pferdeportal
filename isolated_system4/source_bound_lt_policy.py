@@ -7,11 +7,8 @@ from typing import Any, Mapping
 
 CONTRACT = 'SYSTEM4_SOURCE_BOUND_LT_EXCEPTION_V1'
 SPELLER_RULE = 'GERMAN_SPELLER_RULE'
+LT_WORKER_SOURCE_SHA256 = 'd04b0bb920325b17d6277b7bb85937d3ef4eb32aa37970bb131f5ebb92f5b814'
 _TOKEN_RE = re.compile(r'^[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß-]{3,}$')
-
-
-def _canon(value: Any) -> str:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
 
 
 def _target(checked_text: str, match: Mapping[str, Any]) -> str:
@@ -38,6 +35,28 @@ def _whole_token_present(source_text: str, token: str) -> bool:
     if not source_text or not token:
         return False
     return re.search(r'(?<!\w)' + re.escape(token) + r'(?!\w)', source_text, flags=re.IGNORECASE | re.UNICODE) is not None
+
+
+def _sealed_evidence_text(state: Mapping[str, Any]) -> str:
+    research = state.get('research') if isinstance(state, Mapping) else None
+    raw = research.get('text') if isinstance(research, Mapping) else None
+    if not isinstance(raw, str) or not raw.strip():
+        return ''
+    try:
+        document = json.loads(raw)
+    except json.JSONDecodeError:
+        return ''
+    sources = document.get('sources') if isinstance(document, Mapping) else None
+    if not isinstance(sources, list):
+        return ''
+    rows = []
+    for source in sources:
+        if not isinstance(source, Mapping):
+            continue
+        evidence = source.get('evidence')
+        if isinstance(evidence, str) and evidence.strip():
+            rows.append(evidence)
+    return '\n'.join(rows)
 
 
 def classify_report(report: Mapping[str, Any], checked_text: str, trusted_source_text: str) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -73,25 +92,45 @@ def classify_report(report: Mapping[str, Any], checked_text: str, trusted_source
 def install(pc: Any) -> None:
     if getattr(pc, '_SYSTEM4_SOURCE_BOUND_LT_POLICY_INSTALLED', False):
         return
+
+    # This is the central System-4 LT adapter installed before every production fullcheck.
+    # The worker source is still exact-hash bound; only its report schema now retains LT suggestions.
+    pc.LT_WORKER_SOURCE_SHA256 = LT_WORKER_SOURCE_SHA256
+
     original_run_all = pc.run_all
-    original_run_lt = pc.run_languagetool
-    original_fresh = pc._fresh_ppm_language_evidence
-    original_valid = pc._language_evidence_valid_for
     active = {'source_text': ''}
 
-    def source_text_from_state(state: Mapping[str, Any]) -> str:
-        research = state.get('research') if isinstance(state, Mapping) else None
-        if not isinstance(research, Mapping):
-            return ''
-        value = research.get('text')
-        return value if isinstance(value, str) else ''
+    def repair_findings_from_lt(report: Mapping[str, Any]) -> list[dict[str, Any]]:
+        findings: list[dict[str, Any]] = []
+        for raw in report.get('matches', []):
+            match = raw if isinstance(raw, Mapping) else {}
+            rule = match.get('rule') if isinstance(match.get('rule'), Mapping) else {}
+            context = match.get('context') if isinstance(match.get('context'), Mapping) else {}
+            replacements = match.get('replacements') if isinstance(match.get('replacements'), list) else []
+            findings.append({
+                'error_code': 'LANGUAGETOOL_FINDING',
+                'rule_id': str(rule.get('id') or ''),
+                'message': str(match.get('message') or ''),
+                'short_message': str(match.get('shortMessage') or ''),
+                'offset': match.get('offset'),
+                'length': match.get('length'),
+                'context': str(context.get('text') or ''),
+                'context_offset': context.get('offset'),
+                'context_length': context.get('length'),
+                'replacements': [
+                    str(row.get('value') or '')
+                    for row in replacements
+                    if isinstance(row, Mapping) and str(row.get('value') or '').strip()
+                ][:10],
+            })
+        return findings
 
     def run_languagetool(repo, article_html):
         plain = pc._plain_text(article_html)
         report, raw, return_code = pc._run_languagetool_text(repo, plain)
         unresolved, approved = classify_report(report, plain, active['source_text'])
         if unresolved:
-            raise pc.RepairRequired('languagetool', pc._repair_findings_from_lt({'matches': unresolved}))
+            raise pc.RepairRequired('languagetool', repair_findings_from_lt({'matches': unresolved}))
         return {
             'status': 'PASS',
             'engine': pc.LT_ENGINE,
@@ -120,7 +159,7 @@ def install(pc: Any) -> None:
             source = 'REAL_LT68_CURRENT_DRAFT_REFRESHED'
         unresolved, approved = classify_report(report, checked, active['source_text'])
         if unresolved:
-            raise pc.RepairRequired('languagetool', pc._repair_findings_from_lt({'matches': unresolved}))
+            raise pc.RepairRequired('languagetool', repair_findings_from_lt({'matches': unresolved}))
         checked_hash = pc.text_sha256(checked)
         raw_hash = pc.text_sha256(raw)
         evidence = {
@@ -182,12 +221,13 @@ def install(pc: Any) -> None:
 
     def run_all(repo, state, fact_pack, production_plan_item):
         previous = active['source_text']
-        active['source_text'] = source_text_from_state(state)
+        active['source_text'] = _sealed_evidence_text(state)
         try:
             return original_run_all(repo, state, fact_pack, production_plan_item)
         finally:
             active['source_text'] = previous
 
+    pc._repair_findings_from_lt = repair_findings_from_lt
     pc.run_languagetool = run_languagetool
     pc._fresh_ppm_language_evidence = fresh_ppm_language_evidence
     pc._language_evidence_valid_for = language_evidence_valid_for
