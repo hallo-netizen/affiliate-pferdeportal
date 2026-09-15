@@ -82,15 +82,21 @@ jobs:
       - name: Run immutable Textmaschine and historical negative matrix — history hardlock
         working-directory: isolated_system4
         run: python3 -m unittest -v test_acceptance_history_hardlock.py
-      - name: Textmaschine matrix — entrance Point0 source binding
+      - name: Textmaschine matrix — machine route lock
         working-directory: isolated_system4
-        run: >-
-          python3 -m unittest -v
-          test_machine_route_lock_contract.py
-          test_point0_v2.py
-          test_root_entry.py
-          test_source_acquisition_owner_contract.py
-          test_indexed_ingress.py
+        run: python3 -m unittest -v test_machine_route_lock_contract.py
+      - name: Textmaschine matrix — Point0 V2
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_point0_v2.py
+      - name: Textmaschine matrix — Root entry
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_root_entry.py
+      - name: Textmaschine matrix — source acquisition owner
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_source_acquisition_owner_contract.py
+      - name: Textmaschine matrix — indexed ingress
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_indexed_ingress.py
       - name: Textmaschine matrix — content context design draft
         working-directory: isolated_system4
         env:
