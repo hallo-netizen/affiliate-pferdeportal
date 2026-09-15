@@ -91,7 +91,6 @@ def _type_definition(package: Path, article_type: str) -> dict[str, Any]:
                     return dict(definition) if isinstance(definition,dict) else {}
     except Exception as exc:
         raise AuthoringContractError('PPM_TYPE_SOURCE_READ_FAILED') from exc
-    # Unknown/new types are not rejected by System 4; unchanged fullcheck authority decides later.
     return {}
 
 def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan: Mapping[str,Any]) -> dict[str,Any]:
@@ -177,8 +176,6 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
     table_statement=str(quality.get('table_value_statement') or '').strip()
     table_min=int(static['derived_binding_requirements']['table_value_statement_minimum_words'])
     if len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',table_statement,re.UNICODE))<table_min: raise AuthoringContractError('TABLE_VALUE_STATEMENT_BINDING_INVALID')
-    # Validate immutable runtime/fact bindings against the same bound fact-pack authority
-    # before any draft may be accepted. These are not repairable by editing article text.
     required_runtime_fields=('order_id','article_type','title','slug','subject_scope','subject_label','lead','conclusion','links','allowed_fact_ids')
     for field in required_runtime_fields:
         value=runtime.get(field)
@@ -207,6 +204,19 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
             raise AuthoringContractError('FACT_PACK_CLAIM_NOT_SUPPORTED:'+fact_id)
         claim_map[fact_id]=claim
 
+    source_title_by_id={}
+    sources=fact_pack.get('sources') if isinstance(fact_pack.get('sources'),list) else []
+    for i,source in enumerate(sources):
+        if not isinstance(source,Mapping):
+            raise AuthoringContractError(f'FACT_PACK_SOURCE_INVALID:{i}')
+        source_id=str(source.get('source_id') or '').strip()
+        source_title=str(source.get('source_title') or '').strip()
+        if not source_id or not source_title:
+            raise AuthoringContractError(f'FACT_PACK_SOURCE_ID_OR_TITLE_MISSING:{i}')
+        if source_id in source_title_by_id:
+            raise AuthoringContractError('FACT_PACK_SOURCE_ID_DUPLICATE:'+source_id)
+        source_title_by_id[source_id]=source_title
+
     allowed_raw=runtime.get('allowed_fact_ids')
     if not isinstance(allowed_raw,list) or not allowed_raw:
         raise AuthoringContractError('RUNTIME_ALLOWED_FACT_IDS_MISSING')
@@ -225,8 +235,12 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
 
     fact_authority={}
     for fact_id,claim in claim_map.items():
+        source_id=str(claim.get('source_id') or '').strip()
+        if source_id not in source_title_by_id:
+            raise AuthoringContractError('FACT_PACK_CLAIM_SOURCE_UNKNOWN:'+fact_id)
         fact_authority[fact_id]={
-            'source_id':str(claim.get('source_id') or ''),
+            'source_id':source_id,
+            'source_title':source_title_by_id[source_id],
             'evidence_text_sha256':str(claim.get('evidence_text_sha256') or '').lower().strip(),
             'claim_status':str(claim.get('claim_status') or ''),
             'article_types':[str(v) for v in (claim.get('article_types') if isinstance(claim.get('article_types'),list) else [])],
@@ -294,7 +308,6 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
     for row in (bound.get('link_bindings') if isinstance(bound.get('link_bindings'),list) else []):
         if isinstance(row,Mapping) and row.get('active') is not False and (str(row.get('href') or ''),str(row.get('anchor') or '')) not in links: raise AuthoringContractError('PREWRITE_BOUND_LINK_MISSING:'+str(row.get('role') or 'unknown'))
 
-    # Only validate constraints already present in the bound, hash-checked authority bundle.
     heading_cfg=structure.get('headings') if isinstance(structure.get('headings'),Mapping) else {}
     def _ppm_normalize(text: str) -> str:
         value=_plain(text).casefold()
@@ -372,7 +385,7 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
         if fact_id not in canonical:
             raise AuthoringContractError('PREWRITE_SOURCE_TRACE_FACT_UNKNOWN:'+fact_id)
         meta=authority.get(fact_id) if isinstance(authority.get(fact_id),Mapping) else {}
-        if title!=str(meta.get('source_id') or '') or source_hash!=str(meta.get('evidence_text_sha256') or '').lower():
+        if title!=str(meta.get('source_title') or '') or source_hash!=str(meta.get('evidence_text_sha256') or '').lower():
             raise AuthoringContractError('PREWRITE_SOURCE_TRACE_MISMATCH:'+fact_id)
 
     return {'status':'PASS','word_count':words,'paragraph_count':paragraphs,'h2_count':h2s,'table_count':len(tables),'link_count':len(links),'source_trace_count':len(traces),'used_fact_count':len(used)}
