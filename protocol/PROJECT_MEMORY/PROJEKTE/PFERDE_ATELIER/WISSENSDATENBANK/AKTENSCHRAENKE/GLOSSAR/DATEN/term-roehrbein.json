@@ -1,0 +1,15 @@
+{
+  "id":"term-roehrbein",
+  "begriff":"Röhrbein",
+  "synonyme":["Röhre"],
+  "oberbereich":"Huf & Gliedmaßen",
+  "unterbereich":"Fundament",
+  "kurzdefinition":"Der lange Mittelfußknochenabschnitt zwischen Vorderfuß-/Sprunggelenk und Fesselgelenk.",
+  "facherklaerung":"Im Exterieur wird unter anderem Länge und Stärke des Röhrbeins beurteilt. Der Röhrbeinumfang dient außerdem als Körpermaß.",
+  "abgrenzung":"Nicht mit Fesselbein oder Unterarm verwechseln.",
+  "verwandte_begriffe":["Fesselgelenk","Fesselbein","Fundament"],
+  "seo_status":"NICHT_GEPRUEFT",
+  "quellen":[{"organisation":"Deutsche Reiterliche Vereinigung (FN)","titel":"Fjordpferd – Zuchtziel","url":"https://app.pferd-aktuell.de/pferdezucht/ponys/ponyrassen/fjordpferd","trust":"A","beleg":"Röhrbein als Bestandteil des Fundamentstandards"},{"organisation":"Stiftung Tierärztliche Hochschule Hannover","titel":"Radiologische Dissertation zum distalen Pferdebein","url":"https://elib.tiho-hannover.de/servlets/MCRFileNodeServlet/etd_derivate_00001996/haasef_ws06.pdf","trust":"A","beleg":"Anatomische Einordnung des Röhrbeins und Fesselgelenks"}],
+  "recherche_status":"GEPRUEFT",
+  "letzte_pruefung":"2026-09-12"
+}
