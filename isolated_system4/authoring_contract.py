@@ -66,7 +66,6 @@ def _static_ppm_rules(package: Path) -> dict[str, Any]:
     return {'constants':constants,'structure':structure,'derived_binding_requirements':{'table_value_statement_minimum_words':int(table_value_match.group(1)),'source_trace_minimum':int(source_trace_match.group(1))}}
 
 def _type_definition(package: Path, article_type: str) -> dict[str, Any]:
-    """Read existing static PPM type authority without executing PPM before fullcheck."""
     try:
         with zipfile.ZipFile(package) as archive:
             templates=json.loads(archive.read(TYPE_TEMPLATES_MEMBER).decode('utf-8'))
@@ -204,18 +203,17 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
             raise AuthoringContractError('FACT_PACK_CLAIM_NOT_SUPPORTED:'+fact_id)
         claim_map[fact_id]=claim
 
-    source_title_by_id={}
+    source_ids=set()
     sources=fact_pack.get('sources') if isinstance(fact_pack.get('sources'),list) else []
     for i,source in enumerate(sources):
         if not isinstance(source,Mapping):
             raise AuthoringContractError(f'FACT_PACK_SOURCE_INVALID:{i}')
         source_id=str(source.get('source_id') or '').strip()
-        source_title=str(source.get('source_title') or '').strip()
-        if not source_id or not source_title:
-            raise AuthoringContractError(f'FACT_PACK_SOURCE_ID_OR_TITLE_MISSING:{i}')
-        if source_id in source_title_by_id:
+        if not source_id:
+            raise AuthoringContractError(f'FACT_PACK_SOURCE_ID_MISSING:{i}')
+        if source_id in source_ids:
             raise AuthoringContractError('FACT_PACK_SOURCE_ID_DUPLICATE:'+source_id)
-        source_title_by_id[source_id]=source_title
+        source_ids.add(source_id)
 
     allowed_raw=runtime.get('allowed_fact_ids')
     if not isinstance(allowed_raw,list) or not allowed_raw:
@@ -236,11 +234,11 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
     fact_authority={}
     for fact_id,claim in claim_map.items():
         source_id=str(claim.get('source_id') or '').strip()
-        if source_id not in source_title_by_id:
+        if source_id not in source_ids:
             raise AuthoringContractError('FACT_PACK_CLAIM_SOURCE_UNKNOWN:'+fact_id)
         fact_authority[fact_id]={
             'source_id':source_id,
-            'source_title':source_title_by_id[source_id],
+            'trace_source_title':source_id,
             'evidence_text_sha256':str(claim.get('evidence_text_sha256') or '').lower().strip(),
             'claim_status':str(claim.get('claim_status') or ''),
             'article_types':[str(v) for v in (claim.get('article_types') if isinstance(claim.get('article_types'),list) else [])],
@@ -343,7 +341,6 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
     canonical={str(v) for v in bound.get('canonical_fact_ids',[]) if isinstance(v,str)}
     authority=bound.get('fact_authority') if isinstance(bound.get('fact_authority'),Mapping) else {}
     used=set()
-    factual_units=[]
     is_v5=str(bound.get('validation_contract_version') or '')=='SECTION_REQUIREMENTS_V1'
     unit_tags='p|li|th|td' if is_v5 else 'p|li|td'
     for m in re.finditer(r'(?is)<('+unit_tags+r')\b([^>]*)>(.*?)</\1>',article_html):
@@ -353,7 +350,6 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
         if not is_v5 and m.group(1).casefold()=='p' and re.search(r'(?is)<a\b',body): continue
         rm=re.search(r'(?is)\bdata-fact-ids\s*=\s*(["\'])(.*?)\1',attrs)
         refs=[v for v in re.split(r'\s+',html.unescape(rm.group(2)).strip()) if v] if rm else []
-        factual_units.append((text,refs))
         if not refs and type_req.get('all_factual_blocks_require_trace') is True:
             raise AuthoringContractError('PREWRITE_FACT_REFS_MISSING')
         for fact_id in refs:
@@ -385,7 +381,7 @@ def validate_candidate(article_html: str, contract: Mapping[str,Any]) -> dict[st
         if fact_id not in canonical:
             raise AuthoringContractError('PREWRITE_SOURCE_TRACE_FACT_UNKNOWN:'+fact_id)
         meta=authority.get(fact_id) if isinstance(authority.get(fact_id),Mapping) else {}
-        if title!=str(meta.get('source_title') or '') or source_hash!=str(meta.get('evidence_text_sha256') or '').lower():
+        if title!=str(meta.get('trace_source_title') or '') or source_hash!=str(meta.get('evidence_text_sha256') or '').lower():
             raise AuthoringContractError('PREWRITE_SOURCE_TRACE_MISMATCH:'+fact_id)
 
     return {'status':'PASS','word_count':words,'paragraph_count':paragraphs,'h2_count':h2s,'table_count':len(tables),'link_count':len(links),'source_trace_count':len(traces),'used_fact_count':len(used)}
