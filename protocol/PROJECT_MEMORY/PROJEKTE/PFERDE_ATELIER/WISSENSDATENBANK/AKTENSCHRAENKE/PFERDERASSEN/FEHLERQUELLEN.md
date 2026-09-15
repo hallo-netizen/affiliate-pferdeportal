@@ -45,7 +45,7 @@ Direkt in WordPress beide IDs auslesen, beide Posts/Slugs/Inhalte/Batches vergle
 
 ## PR-PLUGIN-001 – Relationslogik / Frontend-Regressionskette
 
-STATUS: 0.2.7 LOKALER KANDIDAT / LIVE OFFEN
+STATUS: CLOSED / 0.2.7 WORDPRESS-LIVE PASS
 
 Historische Fehler dieses Chats:
 - 0.2.2: `Ähnliche Rassen` wurden lediglich aus derselben Rassengruppe befüllt; dadurch semantisch identisch mit `Zur gleichen Rassengruppe`.
@@ -54,14 +54,15 @@ Historische Fehler dieses Chats:
 - 0.2.5: Rekursionsfilter entfernt, aber kompletter Relations-Neuaufbau blieb an `init`/Aktivierung gebunden → teurer Vollbestandlauf im Frontend / erneutes Endlosladen.
 - 0.2.6: Frontendarbeit entfernt und ein Snapshot eingeführt; Abschlussprüfung entdeckte jedoch, dass Snapshot-Zeilen nach `source_id` kollabierten. Bei den real vorhandenen Doppel-IDs wurde je ein Post nicht repariert, obwohl `ok=true` zurückkam.
 
-Aktueller Kandidat 0.2.7:
+Fix 0.2.7:
 - jeder veröffentlichte Post bleibt separat nach `post_id` im Reparaturlauf;
 - Relationskandidaten bleiben als eindeutige WDB-Identitäten geführt;
 - Doppel-IDs werden gewarnt, nicht verschluckt;
 - Same-Group- und Self-Hardlock bleiben;
 - Backfill nur explizite Backend-Aktion;
 - kein `get_post_metadata`-Filter;
-- lokale 196-Post-Positiv-/Negativ-/Mutationstests PASS.
+- lokale 196-Post-Positiv-/Negativ-/Mutationstests PASS;
+- WordPress-LIVE am 2026-09-15 vom Nutzer ausdrücklich als PASS bestätigt.
 
-OFFEN:
-WordPress-LIVE-Test nach Installation 0.2.7. Bis dahin kein LIVE-PASS und kein Plugin-CURRENT-Sync.
+ERGEBNIS:
+Plugin-Fehlerweg geschlossen. 0.2.7 ist der aktuelle LIVE-PASS-Stand der Relationsfunktion. Die weiterhin offenen Fachblocker `PR-BREED-001` und `PR-BREED-002` werden dadurch nicht geschlossen.
