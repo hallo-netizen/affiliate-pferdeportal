@@ -94,13 +94,13 @@ jobs:
         shell: bash
         run: |
           python isolated_system4/chat_delivery_gate.py verify \
-            "${RUNNER_TEMP}/system4-chat-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json" \
+            "${RUNNER_TEMP}/system4-chat-output/SYSTEM4_WORDPRESS_HANDOFF_V1.json" \
             "${RUNNER_TEMP}/system4-chat-output/SYSTEM4_CHAT_DELIVERY_RECEIPT_V1.json"
           python - <<'PY'
           import hashlib,json,os
           from pathlib import Path
           root=Path(os.environ['RUNNER_TEMP'])/'system4-chat-output'
-          artifact=root/'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json'
+          artifact=root/'SYSTEM4_WORDPRESS_HANDOFF_V1.json'
           receipt=json.loads((root/'SYSTEM4_CHAT_DELIVERY_RECEIPT_V1.json').read_text())
           raw=artifact.read_bytes()
           assert receipt['overall_acceptance_status']=='PENDING_CHAT_ATTACHMENT'
@@ -116,7 +116,7 @@ jobs:
         with:
           name: system4-wordpress-import-chat-output
           path: |
-            ${{ runner.temp }}/system4-chat-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
+            ${{ runner.temp }}/system4-chat-output/SYSTEM4_WORDPRESS_HANDOFF_V1.json
             ${{ runner.temp }}/system4-chat-output/SYSTEM4_CHAT_DELIVERY_RECEIPT_V1.json
           if-no-files-found: error
           retention-days: 7
