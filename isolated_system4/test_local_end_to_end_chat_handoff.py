@@ -9,6 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import acceptance_parity_guard
 import batch_gate
 import chat_delivery_gate
 import codex_entry
@@ -75,6 +76,7 @@ def _fullcheck_until_pass_without_codex(workspace:Path,runtime:Path)->dict:
     raise AssertionError('CHAT_START_REPAIR_LOOP_UNREACHABLE')
 
 def _run_parent_bound_without_codex(runtime:Path)->Path:
+    acceptance_parity_guard.verify_acceptance_sources(REPO)
     capsule=REPO/BOUND_REL
     if hashlib.sha256(capsule.read_bytes()).hexdigest()!=BOUND_SHA256:
         raise AssertionError('CHAT_START_BOUND_CAPSULE_SHA_MISMATCH')
@@ -86,7 +88,7 @@ def _run_parent_bound_without_codex(runtime:Path)->Path:
         raise AssertionError('CHAT_START_PARENT_RECEIPT_INVALID')
     workspace=Path(receipt['workspaces'][0])
 
-    # This is only the bound worker-dispatch gate in the product code. It does not call a Codex model or Codex network service.
+    # Product worker-dispatch gate only. No model or network author is invoked in this acceptance test.
     if codex_entry.main(['codex_entry.py','worker-start',str(workspace)])!=0:
         raise AssertionError('CHAT_START_WORKER_GATE_FAILED')
 
@@ -103,12 +105,17 @@ def _run_parent_bound_without_codex(runtime:Path)->Path:
     full_route_start._machine_context(workspace,runtime,0)
     if codex_entry.main(['codex_entry.py','next',str(workspace)])!=0:
         raise AssertionError('CHAT_START_DRAFT_GATE_FAILED')
-    state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
-    draft=valid_real_article(state,0)
-    draft_path=runtime/'deterministic-draft.html'
+    pre_author_state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+    acceptance_parity_guard.verify_pre_author_state(pre_author_state)
+    draft=valid_real_article(pre_author_state,0)
+    generation_receipt=acceptance_parity_guard.build_fresh_generation_receipt(REPO,pre_author_state,draft)
+    write_json(runtime/'fresh-generation-receipt.json',generation_receipt)
+    draft_path=runtime/'fresh-generated-draft.html'
     draft_path.write_text(draft,encoding='utf-8')
     if controller.main(['controller.py','draft',str(workspace),str(draft_path)])!=0:
         raise AssertionError('CHAT_START_DRAFT_FAILED')
+    after_draft=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+    acceptance_parity_guard.verify_fresh_generation_receipt(after_draft,draft,generation_receipt)
 
     state=_fullcheck_until_pass_without_codex(workspace,runtime)
     state_path=workspace/'state.json'
@@ -150,7 +157,7 @@ class LocalEndToEndChatHandoffRealTests(unittest.TestCase):
             final=_run_parent_bound_without_codex(runtime)
             payload,raw=handoff_transport.read_validate_handoff(final)
 
-            self.assertEqual(payload['contract'],'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2')
+            self.assertEqual(payload['contract'],'SYSTEM4_WORDPRESS_HANDOFF_V1')
             self.assertFalse(payload['publish_allowed'])
             self.assertEqual(len(payload['articles']),1)
             wr=payload['wordpress_review']
