@@ -97,9 +97,11 @@ def candidate_for_current_failure(repo: Path, workspace: Path) -> str:
     checker = str(checks.get('checker') or '')
     findings = checks.get('findings') if isinstance(checks.get('findings'), list) else []
     codes = [str(row.get('error_code') or '') for row in findings if isinstance(row, dict)]
-    route = repair_router.classify_findings(findings, checker=checker)
-    if route.owner != 'DRAFT_BODY' or route.target != 'SAME_ARTICLE_BODY':
-        raise NoCodexRepairError('NON_BODY_REPAIR_ROUTE:' + route.owner + ':' + route.target)
+    route = repair_router.classify(state)
+    owner = str(route.get('owner') or '')
+    target = str(route.get('target') or '')
+    if owner != 'DRAFT_BODY' or target != 'SAME_ARTICLE_BODY':
+        raise NoCodexRepairError('NON_BODY_REPAIR_ROUTE:' + owner + ':' + target)
     if checker == 'languagetool' or any(code == 'LANGUAGETOOL_FINDING' for code in codes):
         return repair_languagetool(repo, workspace)
     if any(code == 'BLOCKED_WAVE2_CONCLUSION_BALANCE' for code in codes):
