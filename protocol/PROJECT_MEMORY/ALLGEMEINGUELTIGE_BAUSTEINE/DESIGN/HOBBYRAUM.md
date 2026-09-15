@@ -1,29 +1,23 @@
 # ALLGEMEINES DESIGN – HOBBYRAUM
 
-STATUS: FREI
+STATUS: BLOCKED
 STAND: 2026-09-15
 
-Letzte Arbeit:
-- Universal Plugin 2.2.40 als autoritativen Ausgangsstand frisch gelesen;
-- ausschließlich Breadcrumb→erster sichtbarer Inhalt zentralisiert;
-- globale Regel 15 px Desktop / 10 px mobil bis 544 px;
-- individuelle `breadcrumb_gap`-Einstellung vollständig entfernt;
-- seitentyp-/Leading-Image-spezifische Breadcrumb-Abstandautoritäten entfernt;
-- sonstige Design-/Funktionslogik unverändert;
-- Universal Plugin auf 2.2.41 gebaut;
-- harte Chromium-Positiv-/Negativprüfung gegen exakte ZIP-Bytes PASS;
-- PHP-Lint, JS-Syntax, ZIP-Readback und Overwrite 2.2.40→2.2.41 PASS;
-- Universal Master aktualisiert, Manifest 301/301 PASS;
-- Plugin, Master und Testreport persistent unter `/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/2026-09-15/` abgelegt.
+## AKTUELLE ARBEIT
+Ursachenklärung des LIVE-Ausfalls von Pferderassen + Glossar nach gemeinsamem Design-Änderungszug.
 
-Status der Änderung:
-**LOKAL HART PASS / LIVE OFFEN.**
+## NEXT ACTION
+- reale installierte Universal-Version feststellen;
+- reale installierte Pferde-Design-Version feststellen;
+- Kombination lokal reproduzieren;
+- Universal isoliert positiv/negativ testen;
+- Universal + Pferde gemeinsam positiv/negativ testen;
+- erst danach Ursache/Fix/Release.
 
-Keine weitere Facharbeit ohne konkreten Auftrag.
+## HARTE SPERRE
+Universal 2.2.42 ist **kein CURRENT und kein freigegebener Release**.
+Nicht behaupten, dass 2.2.42 unschuldig oder ursächlich ist, bevor die reale Kombination geprüft ist.
+Keine Synchronisierung in einen CURRENT-Ausgabestand vor Gesamt-PASS.
 
-## Globale Arbeitsort-Sperre
-
-**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
-
-Autorität:
-`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+## GLOBALE ARBEITSORT-SPERRE
+Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.
