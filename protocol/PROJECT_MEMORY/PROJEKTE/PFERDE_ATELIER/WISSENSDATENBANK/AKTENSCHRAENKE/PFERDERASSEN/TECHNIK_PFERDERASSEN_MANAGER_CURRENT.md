@@ -1,7 +1,7 @@
 # TECHNISCHE HAUPTQUELLE – PFERDERASSEN MANAGER
 
 STAND: 2026-09-15
-STATUS: KANDIDAT 0.2.7 / LOKAL HART PASS / WORDPRESS-LIVE OFFEN
+STATUS: 0.2.7 / LOKAL HART PASS / WORDPRESS-LIVE PASS
 
 ## Identität
 
@@ -15,19 +15,19 @@ Version: `0.2.7`
 Datei: `PFERDE_ATELIER_PFERDERASSEN_MANAGER_0.2.7_INSTALLIEREN.zip`
 SHA-256: `5f72308cb922756cac8ffa2a01a27bfc7f1f1cfbabf6fbf5b4a33728fc8e58f1`
 
-Die ZIP ist der exakt lokal getestete technische Kandidat. Sie ist **noch kein LIVE-PASS** und darf deshalb noch nicht als isolierte `CURRENT.zip` im PLUGINS-Büro hochgestuft werden.
+Die ZIP ist der exakt lokal getestete technische Stand und wurde am 2026-09-15 vom Nutzer im realen WordPress-Livebetrieb als **LIVE PASS** bestätigt.
 
 ## Isolierte Plugin-Ablage
 
-Der geprüfte Kandidat ist zusätzlich dauerhaft im zentralen Plugin-Schrank abgelegt:
+Der zuvor als Kandidat abgelegte Stand liegt zusätzlich unter:
 
 `/Campus-Plugins/PFERDE_ATELIER/PPA-011/CANDIDATE_0.2.7.zip`
 
-Dazu:
+Nach bestätigtem LIVE PASS ist derselbe hashgebundene Stand als isolierte aktuelle Ausgabekopie unter
 
-`/Campus-Plugins/PFERDE_ATELIER/PPA-011/CANDIDATE_MANIFEST.md`
+`/Campus-Plugins/PFERDE_ATELIER/PPA-011/CURRENT.zip`
 
-Diese Ablage ist ausdrücklich **nur der Testkandidat**. `CURRENT.zip` + `MANIFEST.md` dürfen erst nach bestandenem WordPress-LIVE-Test erzeugt werden.
+mit zugehörigem `MANIFEST.md` zu synchronisieren. Diese Kopie bleibt abgeleitet; Fach-/Technikwahrheit bleibt diese Datei.
 
 ## Inhaltshashes der getesteten ZIP
 
@@ -40,6 +40,10 @@ Diese Ablage ist ausdrücklich **nur der Testkandidat**. `CURRENT.zip` + `MANIFE
 
 `TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md`
 
-## Freigabegrenze
+## Freigabestatus
 
-Technischer Kandidat darf erst auf LIVE/PASS und anschließend im PLUGINS-Büro auf `CURRENT.zip` synchronisiert werden, wenn der WordPress-Frontend-/Backfill-/Overlap-Test gemäß `ZIELVERTRAG_RELATIONEN.md` tatsächlich bestanden ist.
+- lokale Positiv-/Negativ-/Mutationstests: PASS;
+- WordPress-LIVE-Test: **PASS**, Nutzerbestätigung 2026-09-15;
+- Relations-Neuaufbau bleibt ausschließlich Backend-Aktion;
+- Same-Group/Self/Unknown-Hardlocks bleiben verbindlich;
+- Artefaktsync im PLUGINS-Büro ist nach Live-PASS zulässig.
