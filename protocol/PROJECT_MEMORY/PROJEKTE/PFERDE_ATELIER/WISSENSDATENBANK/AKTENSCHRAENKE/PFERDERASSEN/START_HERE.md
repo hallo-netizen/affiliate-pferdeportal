@@ -25,6 +25,7 @@ Belastbare, strukturierte Rassenfakten zentral recherchieren und pflegen. Diese 
 - **Produktionsworkflow für neue Chats:** `PRODUKTIONSWORKFLOW_PFERDERASSEN.md`
 - **verbindlicher Schreibvertrag für Rassenartikel:** `SCHREIBVERTRAG_PFERDERASSE.md`
 - **aktuelle ausführliche Fachfehler:** `FEHLERQUELLEN.md`
+- **dauerhafte WAS/WARUM-Entscheidungen:** `ENTSCHEIDUNGEN.md`
 - **Zielvertrag Rassengruppe / ähnliche Rassen:** `ZIELVERTRAG_RELATIONEN.md`
 - **technischer Manager-Kandidat:** `TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`
 - **Manager-Testbeleg:** `TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md`
