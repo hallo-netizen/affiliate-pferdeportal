@@ -18,4 +18,19 @@ Auftrag:
 - vor Änderung reale WordPress-/Plugin-Quelle bestimmen;
 - danach Positiv-/Negativprüfung und WordPress-Readback.
 
-Hinweis: Dieser Punkt ist bewusst geparkt und unterbricht die aktuelle Glossar-Konzeptarbeit nicht.
+## GLOSSAR
+
+### Erster maximaler Importbatch
+Status: OFFEN / NOCH NICHT ERSTELLT
+
+Auftrag:
+- maximaler technisch zulässiger Batch: **25 neue Glossarbegriffe**;
+- jeden Begriff nach `RECHERCHE_STANDARD.md` recherchieren;
+- harte Fachwort-Abgrenzung gegen Portal-/Kategorie-/Ratgeberthemen;
+- vollständiger Datensatz nach `AKTENSCHRAENKE/GLOSSAR/GLOSSAR_STRUKTUR.md`;
+- `primary_target` bevorzugt starke obere Affiliate-Portal-Kategorie/-Hauptseite; Journal nur Fallback;
+- Importpaket nach `PA_GLOSSARY_BATCH_V2`;
+- kein Auto-Publish; WordPress-Draft + Readback erforderlich.
+
+Hinweis:
+Dieser Batch wurde in diesem Chat angefordert, aber wegen des aktiven Design-LIVE-Fehlers **noch nicht erstellt oder importiert**. Kein PASS behaupten.
