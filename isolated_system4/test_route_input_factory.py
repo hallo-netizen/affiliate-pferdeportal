@@ -14,7 +14,7 @@ G9_MEMBER='portal-production-machine/contracts/g9-single-faq-approved-candidate-
 SCENARIOS=[
  {
   'title':'Warum sollte der Reifendruck am Pferdeanhänger vor der Fahrt geprüft werden?',
-  'keyword':'Reifendruck Pferdeanhänger',
+  'keyword':'Reifendruck am Pferdeanhänger',
   'slug':'reifendruck-pferdeanhaenger',
   'intent_terms':['Reifendruck','Reifen','Pferdeanhänger','Fahrt','Kontrolle'],
   'direct_answer':'Der Reifendruck am Pferdeanhänger sollte vor der Fahrt kontrolliert werden, weil nur passend befüllte und unbeschädigte Reifen ihre Aufgabe zuverlässig erfüllen. Maßgeblich sind die Vorgaben für Reifen und Anhänger; zusätzlich gehört eine Sichtkontrolle der Reifen und Ventile vor dem Losfahren dazu.',
@@ -26,7 +26,7 @@ SCENARIOS=[
  },
  {
   'title':'Warum muss die Beleuchtung am Pferdeanhänger vor der Fahrt kontrolliert werden?',
-  'keyword':'Beleuchtung Pferdeanhänger',
+  'keyword':'Beleuchtung am Pferdeanhänger',
   'slug':'beleuchtung-pferdeanhaenger',
   'intent_terms':['Beleuchtung','Pferdeanhänger','Rücklicht','Blinker','Kontrolle'],
   'direct_answer':'Die Beleuchtung am Pferdeanhänger sollte vor jeder Fahrt geprüft werden, damit Bremslicht, Rücklicht, Blinker und Kennzeichenbeleuchtung zuverlässig funktionieren. Die Kontrolle zeigt außerdem früh, ob Stecker, Kabel oder Leuchten auffällig sind und vor dem Losfahren überprüft werden müssen.',
@@ -38,7 +38,7 @@ SCENARIOS=[
  },
  {
   'title':'Warum sollte die Anhängerkupplung vor dem Losfahren geprüft werden?',
-  'keyword':'Anhängerkupplung Pferdeanhänger',
+  'keyword':'Anhängerkupplung',
   'slug':'anhaengerkupplung-pferdeanhaenger',
   'intent_terms':['Anhängerkupplung','Kupplung','Pferdeanhänger','Sicherung','Kontrolle'],
   'direct_answer':'Die Anhängerkupplung sollte vor dem Losfahren kontrolliert werden, damit der Pferdeanhänger korrekt verbunden und die vorgesehene Sicherung vollständig hergestellt ist. Zur Prüfung gehören der erkennbare Kupplungszustand, die Sicherungseinrichtungen und ein kurzer Kontrollgang vor der Abfahrt.',
@@ -64,6 +64,28 @@ def _template_item()->dict:
         g9=json.loads(z.read(G9_MEMBER).decode('utf-8'))
     return copy.deepcopy(g9['item'])
 
+def _dynamic_scenario(index:int)->dict:
+    n=index+1
+    phrase=f'Kontrollpunkt {n} am Pferdeanhänger'
+    return {
+      'title':f'Warum sollte {phrase} vor der Fahrt geprüft werden?',
+      'keyword':phrase,
+      'slug':f'kontrollpunkt-{n}-pferdeanhaenger',
+      'intent_terms':['Kontrollpunkt','Pferdeanhänger','Fahrt','Prüfung',f'Kontrollpunkt {n}'],
+      'direct_answer':f'{phrase} wird in diesem deterministischen Skalierungstest vor der Fahrt geprüft, damit der gebundene Ablauf für einen zusätzlichen Artikel denselben technischen Weg durchläuft. Der Testinhalt stammt vollständig aus den hierfür bereitgestellten Quellen und erzeugt keinen vorgefertigten Artikeltext.',
+      'table_value':f'Die Tabelle ordnet die gebundenen Aussagen zu Kontrollpunkt {n} nach Ausgangslage, Beobachtung und eindeutiger Handlung vor der Fahrt.',
+      'sources':[
+        (f'Quelle A zu Kontrollpunkt {n}',f'Kontrollpunkt {n} ist ein eigenständiger Prüfschritt dieses deterministischen Skalierungstests. Die Prüfung wird vor der Fahrt durchgeführt. Eine erkennbare Abweichung wird vor dem nächsten Schritt geklärt. Das Ergebnis wird für den aktuellen Durchlauf neu festgestellt.'),
+        (f'Quelle B zu Kontrollpunkt {n}',f'Für Kontrollpunkt {n} gilt im Test eine feste Reihenfolge aus Beobachtung, Bewertung und erneuter Kontrolle bei einer Abweichung. Ein früheres Ergebnis ersetzt die aktuelle Prüfung nicht. Erst ein eindeutiger Zustand schließt diesen Testschritt ab.'),
+      ]
+    }
+
+def _scenarios(count:int)->list[dict]:
+    if count<1: raise RuntimeError('TEST_ROUTE_COUNT_MUST_BE_POSITIVE')
+    rows=[copy.deepcopy(v) for v in SCENARIOS[:min(count,len(SCENARIOS))]]
+    for index in range(len(rows),count): rows.append(_dynamic_scenario(index))
+    return rows
+
 def _serve_sources(root:Path, scenarios:list[dict]):
     requests={}
     for i,sc in enumerate(scenarios):
@@ -79,10 +101,9 @@ def _serve_sources(root:Path, scenarios:list[dict]):
     return server,requests
 
 def create(out:Path,count:int)->dict:
-    if count not in (1,3): raise RuntimeError('TEST_ROUTE_COUNT_MUST_BE_1_OR_3')
+    scenarios=_scenarios(count)
     if out.exists() and any(out.iterdir()): raise RuntimeError('TEST_FIXTURE_DIR_NOT_EMPTY')
     out.mkdir(parents=True,exist_ok=True)
-    scenarios=SCENARIOS[:count]
     template=_template_item()
     quality0=copy.deepcopy(template['quality_binding'])
     category=(template.get('category_binding') or {}).get('slug') or (quality0.get('wordpress_category') or {}).get('slug')
@@ -121,12 +142,12 @@ def create(out:Path,count:int)->dict:
     finally:
         server.shutdown(); server.server_close()
     writej(out/'acquired.json',acquired); writej(out/'source_requests.json',request_batch)
-    proof={'contract':'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V1','article_count':count,'batch_sha256':batch_sha,'pre_point0_article_body_count':0,'source_acquisition_contract':acquired['contract'],'source_count':sum(len(x['sources']) for x in acquired['items'])}
+    proof={'contract':'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V2','article_count':count,'batch_sha256':batch_sha,'pre_point0_article_body_count':0,'source_acquisition_contract':acquired['contract'],'source_count':sum(len(x['sources']) for x in acquired['items']),'count_domain':'1..N'}
     writej(out/'input_factory_proof.json',proof)
     return proof
 
 def main(argv:list[str])->int:
-    if len(argv)!=3: raise SystemExit('usage: test_route_input_factory.py <out-dir> <1|3>')
+    if len(argv)!=3: raise SystemExit('usage: test_route_input_factory.py <out-dir> <positive-count>')
     print(json.dumps(create(Path(argv[1]),int(argv[2])),ensure_ascii=False,sort_keys=True)); return 0
 
 if __name__=='__main__': raise SystemExit(main(sys.argv))
