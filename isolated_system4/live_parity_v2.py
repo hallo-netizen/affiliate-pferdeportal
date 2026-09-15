@@ -70,6 +70,7 @@ def item(runroot:Path,i:int)->dict:
             if s.get('phase')!='REPAIR_REQUIRED': fail('UNEXPECTED_FULLCHECK_BLOCK:'+cp.stdout.strip()+':'+cp.stderr.strip())
             repair_events.append(cp.stdout.strip()); continue
         if phase=='REPAIR_REQUIRED':
+            print('SYSTEM4_TESTWORKER_REPAIR_REQUEST:'+json.dumps({'article_index':i,'last_error':s.get('last_error'),'checks':s.get('checks')},ensure_ascii=False,sort_keys=True),flush=True)
             rp=generated/f'repair-{s["revision"]}.html'; _worker_generate(e,w,generated,'repair',rp); run([sys.executable,HERE/'controller.py','repair',w,rp],e); continue
         if phase=='OUTPUT_GATE_REQUIRED':
             if s.get('checks',{}).get('status')!='PASS': fail('OUTPUT_GATE_WITHOUT_PASS')
