@@ -65,11 +65,6 @@ BELEGE:
 - `TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`
 - `TESTREPORT_PFERDERASSEN_MANAGER_0.2.7.md`
 
-OFFEN:
-- direkter WordPress-Readback und Bereinigung der zwei Doppel-IDs;
-- autoritative Sechs-Gruppen-Zuordnung der 13 letzten Identitäten;
-- WordPress-LIVE-Test des Manager 0.2.7. Kein LIVE-PASS vor diesem Test.
-
 ## 2026-09-15 – Plugin-Kandidat dauerhaft im Plugin-Schrank abgelegt
 
 AUSGEFÜHRT:
@@ -78,7 +73,18 @@ AUSGEFÜHRT:
 - `CANDIDATE_MANIFEST.md` mit Version, SHA-256, technischer Hauptquelle und Prüfgrenze abgelegt;
 - Library-Readback bestätigt beide Dateien am Zielpfad.
 
-WICHTIG:
-- bewusst **keine** `CURRENT.zip` und kein finales `MANIFEST.md` erzeugt;
-- Grund: WordPress-LIVE-Test bleibt offen;
-- Fach-/Technikwahrheit bleibt `TECHNIK_PFERDERASSEN_MANAGER_CURRENT.md`, nicht der Plugin-Schrank.
+## 2026-09-15 – WordPress-LIVE PASS 0.2.7
+
+LIVE-BEFUND:
+Der Nutzer bestätigte den gebundenen WordPress-Liveweg für Version 0.2.7 ausdrücklich mit `live ist pass`.
+
+FOLGE:
+- `PR-PLUGIN-001` geschlossen;
+- technische Hauptquelle auf `WORDPRESS-LIVE PASS` gesetzt;
+- Testreport auf LIVE PASS nachgezogen;
+- der exakt hashgebundene 0.2.7-Stand darf nach `PLUGINS/SYNC_VERTRAG.md` als `PPA-011/CURRENT.zip` + `MANIFEST.md` synchronisiert werden;
+- die Fachblocker `PR-BREED-001` (13er-Gruppenbindung) und `PR-BREED-002` (Doppel-ID-Readback) bleiben unabhängig davon offen.
+
+OFFEN:
+- direkter WordPress-Readback und Bereinigung der zwei Doppel-IDs;
+- autoritative Sechs-Gruppen-Zuordnung der 13 letzten Identitäten.
