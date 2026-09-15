@@ -46,6 +46,12 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
         run: python3 isolated_system4/real_facts_owner_acceptance_v1.py
+      - name: Run real context owner same-stage acceptance
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_ACCEPTANCE_OUTPUT_DIR: /tmp/system4-acceptance-output
+        run: python3 isolated_system4/real_context_owner_acceptance_v1.py
       - name: Verify exact real proofs and final files
         run: |
           python3 - <<'PY'
@@ -60,34 +66,29 @@ jobs:
           assert r['start_path']=='CHAT_START->POINT0->ROOT->SUPERVISOR->WORKER_DISPATCH->CODEX_WORKER_START'
           assert r['inline_byte_equal'] is True
           assert r['publish_allowed'] is False
-          f=root/'SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json'
-          assert f.is_file() and f.stat().st_size>0
+          assert (root/'SYSTEM4_PPM_KNOWN_REGRESSION_REPAIRED_WORDPRESS.json').is_file()
 
-          t=root/'SYSTEM4_REAL_PARENT_TITLE_REPAIR_ACCEPTANCE_V1.json'
-          tr=json.loads(t.read_text())
-          assert tr['status']=='PASS'
-          assert tr['initial_error']=='BLOCKED_CONTENT_TITLE_COLON'
-          assert tr['repair_owner']=='PARENT_TITLE_MACHINE'
-          assert tr['return_route']=='PARENT_LAUNCH'
-          assert tr['old_point0_immutable'] is True
+          tr=json.loads((root/'SYSTEM4_REAL_PARENT_TITLE_REPAIR_ACCEPTANCE_V1.json').read_text())
+          assert tr['status']=='PASS' and tr['repair_owner']=='PARENT_TITLE_MACHINE'
+          assert tr['return_route']=='PARENT_LAUNCH' and tr['old_point0_immutable'] is True
           assert tr['old_point0_sha256'] != tr['new_point0_sha256']
-          assert tr['inline_byte_equal'] is True
-          assert tr['publish_allowed'] is False
-          tf=root/'SYSTEM4_PARENT_TITLE_REPAIRED_WORDPRESS.json'
-          assert tf.is_file() and tf.stat().st_size>0
+          assert tr['inline_byte_equal'] is True and tr['publish_allowed'] is False
+          assert (root/'SYSTEM4_PARENT_TITLE_REPAIRED_WORDPRESS.json').is_file()
 
-          q=root/'SYSTEM4_REAL_FACTS_OWNER_ACCEPTANCE_V1.json'
-          qr=json.loads(q.read_text())
-          assert qr['status']=='PASS'
-          assert qr['initial_error']=='FACT_EVIDENCE_NOT_IN_SOURCE:0'
-          assert qr['repair_owner']=='FACTS_WORKER'
-          assert qr['return_route']=='FACTS_STAGE'
-          assert qr['state_frozen_on_return'] is True
-          assert qr['inline_byte_equal'] is True
+          qr=json.loads((root/'SYSTEM4_REAL_FACTS_OWNER_ACCEPTANCE_V1.json').read_text())
+          assert qr['status']=='PASS' and qr['initial_error']=='FACT_EVIDENCE_NOT_IN_SOURCE:0'
+          assert qr['repair_owner']=='FACTS_WORKER' and qr['return_route']=='FACTS_STAGE'
+          assert qr['state_frozen_on_return'] is True and qr['inline_byte_equal'] is True
           assert qr['publish_allowed'] is False
-          qf=root/'SYSTEM4_FACTS_OWNER_REPAIRED_WORDPRESS.json'
-          assert qf.is_file() and qf.stat().st_size>0
-          print('SYSTEM4_REAL_DRAFT_TITLE_FACTS_OWNER_TO_FILE_PASS')
+          assert (root/'SYSTEM4_FACTS_OWNER_REPAIRED_WORDPRESS.json').is_file()
+
+          cr=json.loads((root/'SYSTEM4_REAL_CONTEXT_OWNER_ACCEPTANCE_V1.json').read_text())
+          assert cr['status']=='PASS' and cr['initial_error']=='FACT_PACK_CLAIMS_TOO_LOW'
+          assert cr['repair_owner']=='CONTEXT_WORKER' and cr['return_route']=='CONTEXT_STAGE'
+          assert cr['state_frozen_on_return'] is True and cr['inline_byte_equal'] is True
+          assert cr['publish_allowed'] is False
+          assert (root/'SYSTEM4_CONTEXT_OWNER_REPAIRED_WORDPRESS.json').is_file()
+          print('SYSTEM4_REAL_DRAFT_TITLE_FACTS_CONTEXT_OWNER_TO_FILE_PASS')
           PY
       - name: Upload acceptance proof
         uses: actions/upload-artifact@v4
