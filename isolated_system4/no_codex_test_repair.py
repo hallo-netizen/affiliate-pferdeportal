@@ -8,6 +8,7 @@ from pathlib import Path
 import authoring_contract
 import production_checks
 import repair_router
+import source_bound_lt_policy
 
 
 class NoCodexRepairError(RuntimeError):
@@ -54,6 +55,22 @@ def _lt_finding_detail(raw: dict, plain: str) -> str:
     return json.dumps(detail, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
 
 
+def _trusted_source_text(state: dict) -> str:
+    research = state.get('research') if isinstance(state.get('research'), dict) else {}
+    raw = research.get('text')
+    if not isinstance(raw, str) or not raw.strip():
+        return ''
+    try:
+        document = json.loads(raw)
+    except json.JSONDecodeError:
+        return raw
+    sources = document.get('sources') if isinstance(document, dict) else None
+    if not isinstance(sources, list):
+        return raw
+    evidence = [str(row.get('evidence') or '') for row in sources if isinstance(row, dict)]
+    return '\n'.join(value for value in evidence if value)
+
+
 def repair_languagetool(repo: Path, workspace: Path) -> str:
     state = _state(workspace)
     body = str(state.get('draft_markdown') or '')
@@ -64,8 +81,14 @@ def repair_languagetool(repo: Path, workspace: Path) -> str:
     matches = report.get('matches') if isinstance(report, dict) else None
     if not isinstance(matches, list) or not matches:
         raise NoCodexRepairError('LT_REPAIR_MATCHES_MISSING')
+    try:
+        unresolved, _approved = source_bound_lt_policy.classify_report(report, plain, _trusted_source_text(state))
+    except ValueError as exc:
+        raise NoCodexRepairError('LT_REPAIR_REPORT_INVALID') from exc
+    if not unresolved:
+        raise NoCodexRepairError('LT_REPAIR_NO_UNRESOLVED_FINDINGS')
     normalized = []
-    for raw in matches:
+    for raw in unresolved:
         if not isinstance(raw, dict):
             raise NoCodexRepairError('LT_REPAIR_MATCH_INVALID')
         offset = raw.get('offset'); length = raw.get('length')
