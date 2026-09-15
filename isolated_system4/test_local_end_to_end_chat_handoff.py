@@ -15,7 +15,9 @@ import codex_entry
 import controller
 import full_route_start
 import handoff_transport
+import no_codex_test_repair
 import parent_start
+import repair_router
 import supervisor
 from real_route_test_support import valid_real_article
 
@@ -49,6 +51,29 @@ def _evidence_claims(research:dict)->list[dict]:
         raise AssertionError('CHAT_TEST_NEEDS_AT_LEAST_TWO_BOUND_CLAIMS')
     return claims
 
+def _fullcheck_until_pass_without_codex(workspace:Path,runtime:Path)->dict:
+    for cycle in range(repair_router.MAX_MACHINE_REPAIR_CYCLES+1):
+        full_rc=controller.main(['controller.py','fullcheck',str(workspace)])
+        state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+        if full_rc==0:
+            if state.get('phase')!='OUTPUT_GATE_REQUIRED':
+                raise AssertionError('CHAT_START_OUTPUT_GATE_NOT_REACHED')
+            return state
+        if full_rc!=3:
+            raise AssertionError('CHAT_START_NONREPAIRABLE_FULLCHECK:'+str(full_rc)+':'+str(state.get('last_error')))
+        if cycle>=repair_router.MAX_MACHINE_REPAIR_CYCLES:
+            raise AssertionError('CHAT_START_REPAIR_LIMIT_EXCEEDED')
+        checks=state.get('checks') if isinstance(state.get('checks'),dict) else {}
+        codes=[str(row.get('error_code') or '') for row in checks.get('findings',[]) if isinstance(row,dict)]
+        print('SYSTEM4_CHAT_TEST_REPAIR_CYCLE:'+str(cycle+1)+':'+str(checks.get('checker'))+':'+','.join(codes))
+        candidate=no_codex_test_repair.candidate_for_current_failure(REPO,workspace)
+        candidate_path=runtime/f'deterministic-repair-{cycle+1}.html'
+        candidate_path.write_text(candidate,encoding='utf-8')
+        repair_rc=controller.main(['controller.py','repair',str(workspace),str(candidate_path)])
+        if repair_rc!=0:
+            raise AssertionError('CHAT_START_REPAIR_SUBMISSION_FAILED:'+str(repair_rc))
+    raise AssertionError('CHAT_START_REPAIR_LOOP_UNREACHABLE')
+
 def _run_parent_bound_without_codex(runtime:Path)->Path:
     capsule=REPO/BOUND_REL
     if hashlib.sha256(capsule.read_bytes()).hexdigest()!=BOUND_SHA256:
@@ -61,7 +86,7 @@ def _run_parent_bound_without_codex(runtime:Path)->Path:
         raise AssertionError('CHAT_START_PARENT_RECEIPT_INVALID')
     workspace=Path(receipt['workspaces'][0])
 
-    # This invokes only the machine worker-dispatch gate. No Codex model/network call is made.
+    # This is only the bound worker-dispatch gate in the product code. It does not call a Codex model or Codex network service.
     if codex_entry.main(['codex_entry.py','worker-start',str(workspace)])!=0:
         raise AssertionError('CHAT_START_WORKER_GATE_FAILED')
 
@@ -84,14 +109,9 @@ def _run_parent_bound_without_codex(runtime:Path)->Path:
     draft_path.write_text(draft,encoding='utf-8')
     if controller.main(['controller.py','draft',str(workspace),str(draft_path)])!=0:
         raise AssertionError('CHAT_START_DRAFT_FAILED')
-    full_rc=controller.main(['controller.py','fullcheck',str(workspace)])
-    if full_rc!=0:
-        raise AssertionError('CHAT_START_REAL_FULLCHECK_NOT_PASS:'+str(full_rc))
 
+    state=_fullcheck_until_pass_without_codex(workspace,runtime)
     state_path=workspace/'state.json'
-    state=json.loads(state_path.read_text(encoding='utf-8'))
-    if state.get('phase')!='OUTPUT_GATE_REQUIRED':
-        raise AssertionError('CHAT_START_OUTPUT_GATE_NOT_REACHED')
     if state['checks']['production_evidence']['evidence']['languagetool']['engine']!='LanguageTool 6.8 / Bestand 43':
         raise AssertionError('CHAT_START_REAL_LT_BINDING_MISSING')
     if state['checks']['production_evidence']['evidence']['ppm679']['ppm_version']!='6.7.9':
