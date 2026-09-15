@@ -17,7 +17,9 @@ def run(args,e,check=True):
     if check and cp.returncode: fail('COMMAND_FAIL:'+cp.stdout.strip()+':'+cp.stderr.strip())
     return cp
 def load(p): return json.loads(Path(p).read_text(encoding='utf-8'))
-def writej(p,v): Path(p).write_text(json.dumps(v,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+def writej(p,v):
+    p=Path(p); p.parent.mkdir(parents=True,exist_ok=True)
+    p.write_text(json.dumps(v,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
 
 def _fixture()->Path:
     if not str(FIX) or str(FIX)=='.' or not FIX.is_dir(): fail('SYSTEM4_LIVE_PARITY_FIXTURE_REQUIRED')
