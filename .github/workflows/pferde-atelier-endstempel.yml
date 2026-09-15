@@ -90,7 +90,8 @@ jobs:
           if not isinstance(req,dict) or set(req)!=required or req.get('contract')!=CONTRACT or req.get('algorithm')!='ED25519': raise SystemExit('SIGN_REQUEST_FIELDS_INVALID')
           for field in ('manifest_sha256','batch_sha256','source_manifest_sha256'):
               if not re.fullmatch(r'[0-9a-f]{64}',str(req.get(field) or '')): raise SystemExit('SIGN_REQUEST_HASH_INVALID')
-          if req.get('article_count')!=7: raise SystemExit('SIGN_REQUEST_COUNT_INVALID')
+          count=req.get('article_count')
+          if not isinstance(count,int) or isinstance(count,bool) or count<1: raise SystemExit('SIGN_REQUEST_COUNT_INVALID')
           out=dict(ident); out['signature_b64']=base64.b64encode(key.sign(req['manifest_sha256'].encode('ascii'))).decode('ascii')
           print(json.dumps(out,separators=(',',':')))
           PY
@@ -109,7 +110,9 @@ jobs:
           if not p.is_file(): raise SystemExit('FINAL_FILE_MISSING')
           h=hashlib.sha256(p.read_bytes()).hexdigest()
           if h!=x.get('final_sha256'): raise SystemExit('FINAL_FILE_HASH_MISMATCH')
-          print('final_ref='+x['final_ref']); print('final_filename='+p.name); print('final_sha256='+h); print('batch_sha256='+x['batch_sha256']); print('article_count='+str(x['article_count']))
+          count=x.get('article_count')
+          if not isinstance(count,int) or isinstance(count,bool) or count<1: raise SystemExit('FINAL_ARTICLE_COUNT_INVALID')
+          print('final_ref='+x['final_ref']); print('final_filename='+p.name); print('final_sha256='+h); print('batch_sha256='+x['batch_sha256']); print('article_count='+str(count))
           PY
           echo "key_id=$ENDSTEMPEL_TRUSTED_KEY_ID" >> "$GITHUB_OUTPUT"
           echo "public_sha256=$ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256" >> "$GITHUB_OUTPUT"
@@ -135,11 +138,13 @@ jobs:
           payload=dict(x); ph=payload.pop('package_payload_sha256',None)
           if ph!=h(payload): raise SystemExit('FINAL_PAYLOAD_HASH_INVALID')
           m=x.get('article_manifest') or {}
-          if m.get('article_count')!=7 or len(m.get('articles') or [])!=7: raise SystemExit('FINAL_ARTICLE_COUNT_INVALID')
+          articles=m.get('articles') or []
+          count=m.get('article_count')
+          if not isinstance(count,int) or isinstance(count,bool) or count<1 or not isinstance(articles,list) or len(articles)!=count: raise SystemExit('FINAL_ARTICLE_COUNT_INVALID')
           mh=h(m)
           if mh!=x.get('article_manifest_sha256'): raise SystemExit('FINAL_MANIFEST_HASH_INVALID')
           seen=set()
-          for row in m['articles']:
+          for row in articles:
               name=row.get('name',''); slot=row.get('plan_slot',''); content=row.get('content_utf8')
               if not re.fullmatch(r'ARTICLE_[0-9a-f]{64}\.md',name) or name!='ARTICLE_'+slot+'.md' or name in seen or not isinstance(content,str): raise SystemExit('FINAL_ARTICLE_ID_INVALID')
               raw=content.encode('utf-8')
