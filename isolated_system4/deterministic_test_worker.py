@@ -1,185 +1,442 @@
 from __future__ import annotations
-import hashlib, json, re, subprocess, sys
+
+import hashlib
+import html
+import json
+import re
+import subprocess
+import sys
 from pathlib import Path
 
-import content_guard, root_entry, supervisor, worker_dispatch
+import content_guard
+import root_entry
+import supervisor
+import worker_dispatch
 
-HERE=Path(__file__).resolve().parent
-REPO=HERE.parent
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parent
 
-def canon(v)->bytes:
-    return (json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()
 
-def writej(p:Path,v)->Path:
-    p.parent.mkdir(parents=True,exist_ok=True)
-    p.write_text(json.dumps(v,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
-    return p
+def canon(value) -> bytes:
+    return (json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')) + '\n').encode()
 
-def _head()->str:
-    return subprocess.check_output(['git','rev-parse','--verify','HEAD'],cwd=REPO,text=True).strip()
 
-def _gate(workspace:Path)->dict:
-    bundle_path=workspace/'worker_dispatch.json'
-    if not bundle_path.is_file(): raise RuntimeError('TESTWORKER_DISPATCH_MISSING')
-    bundle=json.loads(bundle_path.read_text(encoding='utf-8'))
-    manifest=root_entry._critical_manifest_sha256(); head=_head()
-    wc,_=worker_dispatch.verify_bundle(bundle,actual_manifest=manifest,actual_head=head)
+def writej(path: Path, value) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+    return path
+
+
+def _head() -> str:
+    return subprocess.check_output(['git', 'rev-parse', '--verify', 'HEAD'], cwd=REPO, text=True).strip()
+
+
+def _gate(workspace: Path) -> dict:
+    bundle_path = workspace / 'worker_dispatch.json'
+    if not bundle_path.is_file():
+        raise RuntimeError('TESTWORKER_DISPATCH_MISSING')
+    bundle = json.loads(bundle_path.read_text(encoding='utf-8'))
+    manifest = root_entry._critical_manifest_sha256()
+    head = _head()
+    worker_contract, _ = worker_dispatch.verify_bundle(bundle, actual_manifest=manifest, actual_head=head)
     supervisor.verify_controller_binding(workspace)
-    if wc.get('external_web_search_allowed') is not False: raise RuntimeError('TESTWORKER_FREE_WEB_NOT_BLOCKED')
-    if wc.get('machine_prewrite_mutation_allowed') is not False: raise RuntimeError('TESTWORKER_PREWRITE_MUTATION_NOT_BLOCKED')
-    return wc
+    if worker_contract.get('external_web_search_allowed') is not False:
+        raise RuntimeError('TESTWORKER_FREE_WEB_NOT_BLOCKED')
+    if worker_contract.get('machine_prewrite_mutation_allowed') is not False:
+        raise RuntimeError('TESTWORKER_PREWRITE_MUTATION_NOT_BLOCKED')
+    return worker_contract
 
-def _state(workspace:Path)->dict:
+
+def _state(workspace: Path) -> dict:
     _gate(workspace)
-    p=workspace/'state.json'
-    if not p.is_file(): raise RuntimeError('TESTWORKER_STATE_MISSING')
-    return json.loads(p.read_text(encoding='utf-8'))
+    path = workspace / 'state.json'
+    if not path.is_file():
+        raise RuntimeError('TESTWORKER_STATE_MISSING')
+    return json.loads(path.read_text(encoding='utf-8'))
 
-def _sentences(text:str)->list[str]:
-    out=[]
-    for raw in re.split(r'(?<=[.!?])\s+',text.strip()):
-        value=' '.join(raw.split()).strip()
-        if len(value)>=25: out.append(value)
-    return out
 
-def _clean_statement(sentence:str,source_title:str)->str:
-    value=' '.join(sentence.split()).strip()
-    title=' '.join(str(source_title or '').split()).strip()
-    while title and value.casefold().startswith((title+' ').casefold()):
-        value=value[len(title):].lstrip(' :-–—')
-    value=value.replace('Walkarbeit','Verformung des Reifens')
-    value=value.replace('weginterpretiert','ignoriert')
-    if value and value[-1] not in '.!?': value+='.'
+def _sentences(text: str) -> list[str]:
+    rows = []
+    for raw in re.split(r'(?<=[.!?])\s+', text.strip()):
+        value = ' '.join(raw.split()).strip()
+        if len(value) >= 25:
+            rows.append(value)
+    return rows
+
+
+def _clean_statement(sentence: str, source_title: str) -> str:
+    value = ' '.join(sentence.split()).strip()
+    title = ' '.join(str(source_title or '').split()).strip()
+    while title and value.casefold().startswith((title + ' ').casefold()):
+        value = value[len(title):].lstrip(' :-–—')
+    value = value.replace('Walkarbeit', 'Verformung des Reifens')
+    value = value.replace('weginterpretiert', 'ignoriert')
+    if value and value[-1] not in '.!?':
+        value += '.'
     return value
 
-def research(workspace:Path,out:Path)->dict:
-    s=_state(workspace)
-    if s.get('phase')!='RESEARCH_REQUIRED': raise RuntimeError('TESTWORKER_PHASE_NOT_RESEARCH')
-    value=supervisor.expected_research_document(workspace)
-    content_guard.validate_research_document(value); writej(out,value)
-    return {'status':'PASS','stage':'RESEARCH','sha256':hashlib.sha256(canon(value)).hexdigest()}
 
-def facts(workspace:Path,out:Path)->dict:
-    s=_state(workspace)
-    if s.get('phase')!='FACT_CHECK_REQUIRED': raise RuntimeError('TESTWORKER_PHASE_NOT_FACTS')
-    research_obj=content_guard.validate_research_document(s['research']['text'])
-    claims=[]; n=0
+def research(workspace: Path, out: Path) -> dict:
+    state = _state(workspace)
+    if state.get('phase') != 'RESEARCH_REQUIRED':
+        raise RuntimeError('TESTWORKER_PHASE_NOT_RESEARCH')
+    value = supervisor.expected_research_document(workspace)
+    content_guard.validate_research_document(value)
+    writej(out, value)
+    return {'status': 'PASS', 'stage': 'RESEARCH', 'sha256': hashlib.sha256(canon(value)).hexdigest()}
+
+
+def facts(workspace: Path, out: Path) -> dict:
+    state = _state(workspace)
+    if state.get('phase') != 'FACT_CHECK_REQUIRED':
+        raise RuntimeError('TESTWORKER_PHASE_NOT_FACTS')
+    research_obj = content_guard.validate_research_document(state['research']['text'])
+    claims = []
+    number = 0
     for source in research_obj['sources']:
         for sentence in _sentences(source['evidence']):
-            statement=_clean_statement(sentence,source.get('source_title',''))
-            if len(statement)<20: continue
-            n+=1
-            claims.append({'fact_id':f'fact-{s["article"]["plan_slot"][:12]}-{n}','source_id':source['source_id'],'statement':statement,'evidence_text':sentence,'evidence_text_sha256':hashlib.sha256(sentence.encode()).hexdigest()})
-    if len(claims)<4: raise RuntimeError('TESTWORKER_FACT_SOURCE_TOO_THIN')
-    value={'contract':'SYSTEM4_FACTS_EVIDENCE_V1','claims':claims}
-    content_guard.validate_facts_document(value,research_obj); writej(out,value)
-    return {'status':'PASS','stage':'FACTS','claim_count':len(claims),'sha256':hashlib.sha256(canon(value)).hexdigest()}
+            statement = _clean_statement(sentence, source.get('source_title', ''))
+            if len(statement) < 20:
+                continue
+            number += 1
+            claims.append({
+                'fact_id': f'fact-{state["article"]["plan_slot"][:12]}-{number}',
+                'source_id': source['source_id'],
+                'statement': statement,
+                'evidence_text': sentence,
+                'evidence_text_sha256': hashlib.sha256(sentence.encode()).hexdigest(),
+            })
+    if len(claims) < 4:
+        raise RuntimeError('TESTWORKER_FACT_SOURCE_TOO_THIN')
+    value = {'contract': 'SYSTEM4_FACTS_EVIDENCE_V1', 'claims': claims}
+    content_guard.validate_facts_document(value, research_obj)
+    writej(out, value)
+    return {'status': 'PASS', 'stage': 'FACTS', 'claim_count': len(claims), 'sha256': hashlib.sha256(canon(value)).hexdigest()}
 
-def _slug(text:str)->str:
-    value=text.casefold().replace('ä','ae').replace('ö','oe').replace('ü','ue').replace('ß','ss')
-    return re.sub(r'[^a-z0-9]+','-',value).strip('-')[:160] or 'system4-testartikel'
 
-def context(workspace:Path,pack_out:Path,plan_out:Path)->dict:
-    s=_state(workspace)
-    if s.get('phase')!='CONTEXT_REQUIRED': raise RuntimeError('TESTWORKER_PHASE_NOT_CONTEXT')
-    research_obj=content_guard.validate_research_document(s['research']['text'])
-    facts_obj=content_guard.validate_facts_document(s['facts']['text'],research_obj)
-    pre=json.loads((workspace/'bound_machine_prewrite.json').read_text(encoding='utf-8'))
-    rails=json.loads(json.dumps(pre['production_plan_rails'],ensure_ascii=False))
-    snapshot_sha=hashlib.sha256((workspace/'bound_snapshot.json').read_bytes()).hexdigest()
-    source_by_id={r['source_id']:r for r in research_obj['sources']}
-    pack_claims=[]
+def _slug(text: str) -> str:
+    value = text.casefold().replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+    return re.sub(r'[^a-z0-9]+', '-', value).strip('-')[:160] or 'system4-testartikel'
+
+
+def context(workspace: Path, pack_out: Path, plan_out: Path) -> dict:
+    state = _state(workspace)
+    if state.get('phase') != 'CONTEXT_REQUIRED':
+        raise RuntimeError('TESTWORKER_PHASE_NOT_CONTEXT')
+    research_obj = content_guard.validate_research_document(state['research']['text'])
+    facts_obj = content_guard.validate_facts_document(state['facts']['text'], research_obj)
+    prewrite = json.loads((workspace / 'bound_machine_prewrite.json').read_text(encoding='utf-8'))
+    rails = json.loads(json.dumps(prewrite['production_plan_rails'], ensure_ascii=False))
+    snapshot_sha = hashlib.sha256((workspace / 'bound_snapshot.json').read_bytes()).hexdigest()
+    source_by_id = {row['source_id']: row for row in research_obj['sources']}
+    pack_claims = []
     for row in facts_obj['claims']:
-        c=dict(row); c['source_url']=source_by_id[row['source_id']]['source_url']; c['claim_status']='FULLY_SUPPORTED'; c['article_types']=[s['article']['article_type']]; pack_claims.append(c)
-    pack={'contract':'canonical_fact_pack_v1','status':'SOURCE_VERIFIED_PRODUCTION_READY','source_snapshot_id':snapshot_sha,'fact_pack_id':snapshot_sha,'sources':research_obj['sources'],'claims':pack_claims}
-    quality=rails['quality_binding']; allowed=[c['fact_id'] for c in pack_claims]
-    direct=str(quality.get('faq_direct_answer') or '').strip(); links=quality.get('link_bindings') if isinstance(quality.get('link_bindings'),list) else []
-    title=s['article']['title']; keyword=s['article']['target_keyword']; article_type=s['article']['article_type']
-    runtime={'order_id':'system4-test-'+s['article']['plan_slot'][:16],'article_type':article_type,'title':title,'slug':_slug(title),'subject_scope':title,'subject_label':keyword,'lead':direct or title,'conclusion':'Die gebundenen Prüfpunkte werden vor der Fahrt vollständig kontrolliert und erkennbare Abweichungen vor dem Start geklärt.','links':links,'allowed_fact_ids':allowed,'question':title,'answer':direct or title,'faq_question':title,'faq_answer':direct or title,'summary':direct or title,'search_intent':rails.get('search_intent') or 'informational'}
-    plan=dict(rails); plan['source_snapshot_id']=snapshot_sha; plan['runtime_order']=runtime; plan['canonical_article']={'title':title,'article_type':article_type,'slug':runtime['slug']}; plan['source_hashes']=[row['snapshot_sha256'] for row in research_obj['sources']]
-    writej(pack_out,pack); writej(plan_out,plan)
-    return {'status':'PASS','stage':'CONTEXT','fact_pack_claims':len(pack_claims),'allowed_fact_ids':len(allowed)}
+        claim = dict(row)
+        claim['source_url'] = source_by_id[row['source_id']]['source_url']
+        claim['claim_status'] = 'FULLY_SUPPORTED'
+        claim['article_types'] = [state['article']['article_type']]
+        pack_claims.append(claim)
+    pack = {
+        'contract': 'canonical_fact_pack_v1',
+        'status': 'SOURCE_VERIFIED_PRODUCTION_READY',
+        'source_snapshot_id': snapshot_sha,
+        'fact_pack_id': snapshot_sha,
+        'sources': research_obj['sources'],
+        'claims': pack_claims,
+    }
+    quality = rails['quality_binding']
+    allowed = [claim['fact_id'] for claim in pack_claims]
+    direct = str(quality.get('faq_direct_answer') or '').strip()
+    links = quality.get('link_bindings') if isinstance(quality.get('link_bindings'), list) else []
+    title = state['article']['title']
+    keyword = state['article']['target_keyword']
+    article_type = state['article']['article_type']
+    runtime = {
+        'order_id': 'system4-test-' + state['article']['plan_slot'][:16],
+        'article_type': article_type,
+        'title': title,
+        'slug': _slug(title),
+        'subject_scope': title,
+        'subject_label': keyword,
+        'lead': direct or title,
+        'conclusion': 'Die gebundenen Prüfpunkte werden vor der Fahrt vollständig kontrolliert und erkennbare Abweichungen vor dem Start geklärt.',
+        'links': links,
+        'allowed_fact_ids': allowed,
+        'question': title,
+        'answer': direct or title,
+        'faq_question': title,
+        'faq_answer': direct or title,
+        'summary': direct or title,
+        'search_intent': rails.get('search_intent') or 'informational',
+    }
+    plan = dict(rails)
+    plan['source_snapshot_id'] = snapshot_sha
+    plan['runtime_order'] = runtime
+    plan['canonical_article'] = {'title': title, 'article_type': article_type, 'slug': runtime['slug']}
+    plan['source_hashes'] = [row['snapshot_sha256'] for row in research_obj['sources']]
+    writej(pack_out, pack)
+    writej(plan_out, plan)
+    return {'status': 'PASS', 'stage': 'CONTEXT', 'fact_pack_claims': len(pack_claims), 'allowed_fact_ids': len(allowed)}
 
-PARAGRAPH_TAILS=[
- 'Für den Ablauf vor der Abfahrt ist dieser Hinweis praktisch: Der Punkt wird bewusst angesehen und nicht nur vorausgesetzt. Eine Auffälligkeit führt deshalb zu einer erneuten Prüfung, bevor die Fahrt beginnt.',
- 'Bei der Vorbereitung hilft eine feste Reihenfolge. So bleibt nachvollziehbar, welcher Zustand bereits kontrolliert wurde und welcher Punkt noch offen ist. Das verhindert, dass ein sichtbarer Hinweis zwischen anderen Handgriffen verloren geht.',
- 'Die Kontrolle braucht keine komplizierte Zusatztechnik. Entscheidend ist, den beschriebenen Zustand gezielt zu betrachten, das Ergebnis einzuordnen und eine erkennbare Abweichung vor dem Losfahren zu klären.',
- 'Im Alltag ist ein kurzer, immer gleicher Kontrollgang sinnvoll. Dadurch wird aus einer beiläufigen Beobachtung ein fester Prüfschritt, der vor jeder Fahrt erneut durchgeführt und nicht aus einer früheren Kontrolle übernommen wird.',
- 'Ein eindeutiges Ergebnis ist wichtiger als Geschwindigkeit. Wenn der Zustand nicht klar beurteilt werden kann, bleibt der Prüfschritt offen, bis die Ursache verstanden und der vorgesehene Zustand wieder hergestellt ist.',
- 'Für die Praxis bedeutet das eine klare Trennung zwischen Prüfen und Vermuten. Sichtbare oder funktionale Auffälligkeiten werden nicht ignoriert, sondern vor dem Start noch einmal gezielt untersucht.',
- 'Der Nutzen einer festen Kontrolle liegt in der Wiederholbarkeit. Dieselben Punkte werden in derselben Vorbereitung erneut betrachtet, sodass Veränderungen gegenüber der letzten Fahrt leichter auffallen können.',
- 'Auch bei vertrauter Ausrüstung bleibt der einzelne Prüfschritt bestehen. Routine ersetzt die Kontrolle nicht, sondern macht sie schneller nachvollziehbar, wenn jeder Punkt bewusst bestätigt wird.',
- 'Eine dokumentierbare Reihenfolge hilft besonders dann, wenn mehrere Personen vorbereiten. Jede Person kann erkennen, welcher Punkt bereits geprüft wurde und wo vor der Fahrt noch eine Klärung erforderlich ist.',
- 'Der Prüfschritt gehört zeitlich vor die Abfahrt. Dadurch bleibt genug Raum, eine Auffälligkeit zu beheben, statt sie erst während der Fahrt oder nach einer weiteren Belastung zu bemerken.',
- 'Bei einer Abweichung wird nicht der gesamte Ablauf verworfen. Der betroffene Punkt wird gezielt geklärt und anschließend erneut kontrolliert; erst danach geht die Vorbereitung an der vorgesehenen Stelle weiter.',
- 'Die Aussage der Quelle wird damit in eine konkrete Handlung übersetzt. Prüfen, Ergebnis bewerten und bei Unklarheit nacharbeiten bilden einen nachvollziehbaren Ablauf ohne zusätzliche Annahmen.',
- 'Für einen sicheren Arbeitsablauf wird der Zustand nicht nur aus der Entfernung betrachtet. Die jeweilige Funktion oder Verbindung wird so kontrolliert, wie es der gebundene Prüfpunkt verlangt, bevor der nächste Schritt folgt.',
- 'Der gleiche Prüfpunkt kann bei jeder Fahrt erneut relevant sein. Deshalb wird ein früheres positives Ergebnis nicht als dauerhafte Freigabe behandelt, sondern der aktuelle Zustand vor dem Start neu betrachtet.',
- 'Eine klare Reihenfolge reduziert Auslassungen. Wer jeden Punkt nacheinander prüft, kann die Vorbereitung abschließen, ohne zwischen mehreren offenen Beobachtungen hin und her zu springen.',
- 'Am Ende zählt ein nachvollziehbarer Ist-Zustand. Erst wenn der jeweilige Punkt eindeutig kontrolliert ist, wird er als erledigt betrachtet und die Vorbereitung mit dem nächsten gebundenen Prüfschritt fortgesetzt.',
+
+def _plain_claim(statement: str) -> str:
+    return ' '.join(str(statement or '').strip().rstrip('.!?').split())
+
+
+def _trace(fact_id: str, authority: dict) -> str:
+    meta = authority[fact_id]
+    source_title = html.escape(str(meta.get('source_title') or ''), quote=True)
+    source_hash = html.escape(str(meta.get('evidence_text_sha256') or ''), quote=True)
+    fact = html.escape(fact_id, quote=True)
+    return f'<span class="ppm-source-trace" data-fact-id="{fact}" data-source-title="{source_title}" data-source-hash="{source_hash}"></span>'
+
+
+def _p(fact_id: str, text: str, authority: dict) -> str:
+    return f'<p data-fact-ids="{html.escape(fact_id, quote=True)}">{text}{_trace(fact_id, authority)}</p>'
+
+
+def _li(fact_id: str, text: str, authority: dict) -> str:
+    return f'<li data-fact-ids="{html.escape(fact_id, quote=True)}">{text}{_trace(fact_id, authority)}</li>'
+
+
+def _td(fact_id: str, text: str, authority: dict) -> str:
+    return f'<td data-fact-ids="{html.escape(fact_id, quote=True)}">{text}{_trace(fact_id, authority)}</td>'
+
+
+TAILS = [
+    'wird dieser Punkt vor dem Start bewusst kontrolliert und eine erkennbare Abweichung vor der Abfahrt geklärt',
+    'gehört diese Beobachtung in den festen Kontrollgang, damit der aktuelle Zustand und nicht eine frühere Annahme zählt',
+    'wird die Funktion gezielt geprüft, bevor die Vorbereitung mit dem nächsten gebundenen Schritt fortgesetzt wird',
+    'bleibt der Prüfschritt offen, bis der Zustand eindeutig beurteilt und eine mögliche Ursache geklärt ist',
+    'hilft eine feste Reihenfolge dabei, Veränderungen zuverlässig wahrzunehmen und keine Kontrolle auszulassen',
+    'wird das Ergebnis direkt eingeordnet, sodass eine auffällige Stelle noch vor dem Losfahren erneut betrachtet werden kann',
+    'ersetzt Routine die aktuelle Kontrolle nicht, sondern macht den wiederkehrenden Ablauf lediglich leichter nachvollziehbar',
+    'ist eine eindeutige Prüfung wichtiger als Tempo, weil nur der tatsächlich festgestellte Zustand die Vorbereitung abschließt',
+    'lässt sich der Arbeitsschritt auch bei wechselnden Personen nachvollziehbar durchführen und eindeutig abschließen',
+    'wird nicht aus einer früheren Fahrt auf den heutigen Zustand geschlossen, sondern unmittelbar vor der Abfahrt neu geprüft',
+    'führt eine unklare Beobachtung zurück zu genau diesem Prüfpunkt, statt die Unsicherheit in den nächsten Arbeitsschritt mitzunehmen',
+    'bleibt die gebundene Aussage die fachliche Grundlage und wird ohne zusätzliche Annahmen in eine konkrete Kontrolle übersetzt',
+    'wird die jeweilige Funktion oder Verbindung so lange betrachtet, bis der vorgesehene Zustand nachvollziehbar bestätigt ist',
+    'macht die wiederholte Kontrolle kleine Veränderungen leichter sichtbar und hält den Ablauf auch bei vertrauter Ausrüstung verlässlich',
+    'wird der einzelne Punkt erst dann abgeschlossen, wenn das aktuelle Ergebnis eindeutig ist und keine erkennbare Auffälligkeit offenbleibt',
+    'ordnet die Vorbereitung diese Beobachtung an der richtigen Stelle ein und verhindert dadurch einen unbemerkten Sprung im Kontrollablauf',
+    'bleibt genügend Zeit für eine Korrektur, weil die Prüfung bewusst vor der Abfahrt und nicht erst während der Nutzung stattfindet',
+    'wird nach einer Korrektur derselbe Punkt erneut geprüft, bevor der gebundene Ablauf an der vorgesehenen Stelle weitergeht',
+    'trennt der Ablauf Prüfen und Vermuten klar voneinander und verlangt für den Abschluss einen nachvollziehbaren aktuellen Zustand',
+    'entsteht ein reproduzierbarer Prüfschritt, der bei jeder neuen Fahrt erneut ausgeführt und nicht aus Gewohnheit übersprungen wird',
 ]
 
-def _trace(fact_id:str,authority:dict)->str:
-    meta=authority[fact_id]
-    return f'<span class="ppm-source-trace" data-fact-id="{fact_id}" data-source-title="{meta["source_id"]}" data-source-hash="{meta["evidence_text_sha256"]}"></span>'
 
-def _p(fact_id:str,text:str,authority:dict)->str:
-    return f'<p data-fact-ids="{fact_id}">{text}{_trace(fact_id,authority)}</p>'
+def _fact_sentence(fact_id: str, claims: dict, index: int) -> str:
+    base = html.escape(_plain_claim(claims[fact_id]['statement']))
+    tail = TAILS[index % len(TAILS)]
+    return f'{base}; deshalb {tail}.'
 
-def draft(workspace:Path,out:Path,repair:bool=False)->dict:
-    s=_state(workspace); expected='REPAIR_REQUIRED' if repair else 'DRAFT_REQUIRED'
-    if s.get('phase')!=expected: raise RuntimeError('TESTWORKER_PHASE_NOT_'+expected)
-    c=s.get('authoring_contract')
-    if not isinstance(c,dict): raise RuntimeError('TESTWORKER_AUTHORING_CONTRACT_MISSING')
-    identity=c['article_identity']; bound=c['bound_requirements']; req=c['global_requirements']; type_req=c['type_requirements']; structure=c['structure_requirements']
-    ids=list(bound['canonical_fact_ids']); authority=bound['fact_authority']; claims={row['fact_id']:row for row in s['production_context']['fact_pack']['claims']}
-    if len(ids)<4: raise RuntimeError('TESTWORKER_FACTS_TOO_LOW_FOR_DRAFT')
-    intro_name=str((structure.get('intro') or {}).get('required_block') or 'intro'); direct=str(bound.get('faq_direct_answer') or '').strip()
-    sections=[f'<section data-block="{intro_name}">{_p(ids[0],direct,authority)}</section>']
-    required=list(type_req.get('required_blocks') or []); non_intro=[str(x) for x in required if str(x)!=intro_name]
-    labels=['Welche Kontrolle zuerst wichtig ist','Was der sichtbare Zustand zeigt','Wie die Prüfung praktisch abläuft','Wann eine Abweichung geklärt wird','Was vor dem Start noch zählt','Wie der Kontrollgang abgeschlossen wird']
-    section_count=max(len(non_intro),max(0,int(req.get('min_h2') or 0)),4); used_blocks=list(non_intro)
-    while len(used_blocks)<section_count: used_blocks.append('system4-section-'+str(len(used_blocks)+1))
-    para_target=max(int(req.get('min_paragraphs') or 0)+3,14); cursor=0
-    for si,block in enumerate(used_blocks):
-        parts=[f'<h2>{labels[si%len(labels)]}</h2>']; per=max(2,(para_target-1+len(used_blocks)-1)//len(used_blocks))
-        for _ in range(per):
-            fid=ids[cursor%len(ids)]; text=claims[fid]['statement']+' '+PARAGRAPH_TAILS[cursor%len(PARAGRAPH_TAILS)]
-            if not repair and identity['title'].startswith('Warum muss die Beleuchtung') and cursor==1: text+=' Als belastbares Ergebnis muss dieser Prüfschritt dokumentiert bleiben.'
-            parts.append(_p(fid,text,authority)); cursor+=1
-        sections.append(f'<section data-block="{block}">{"".join(parts)}</section>')
-    links=list(bound.get('link_bindings') or [])
-    if links:
-        fid=ids[cursor%len(ids)]; link_parts=['<h2>Passende Bereiche im Portal</h2>']; starters=['Weitere gebundene Informationen stehen unter','Ergänzende gebundene Hinweise stehen unter','Ein zusätzlicher gebundener Bereich ist']
-        for li,row in enumerate(links):
-            link_parts.append(_p(fid,f'{starters[li%len(starters)]} <a href="{str(row.get("href") or "")}">{str(row.get("anchor") or "")}</a>.',authority)); cursor+=1; fid=ids[cursor%len(ids)]
-        sections.append('<section data-block="portal-links">'+''.join(link_parts)+'</section>')
-    rows=[]
-    for r in range(max(3,int(req.get('min_table_body_rows') or 0))):
-        fid=ids[r%len(ids)]; statement=claims[fid]['statement']; rows.append(f'<tr><td data-fact-ids="{fid}">Prüfpunkt {r+1}{_trace(fid,authority)}</td><td data-fact-ids="{fid}">{statement}{_trace(fid,authority)}</td></tr>')
-    tfid=ids[0]; table=_p(tfid,str(bound.get('table_value_statement') or '').strip(),authority)+'<table class="system-129-table comparison-table"><thead><tr><th>Prüfpunkt</th><th>Gebundene Aussage</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table>'
-    sections.append('<section data-block="comparison">'+table+'</section>')
-    cfid=ids[-1]; conclusion=claims[cfid]['statement']+' Vor der Abfahrt werden deshalb alle gebundenen Punkte in einer festen Reihenfolge geprüft. Bleibt eine Beobachtung unklar, wird genau dieser Punkt erneut kontrolliert, bevor die Vorbereitung abgeschlossen wird. So endet der Ablauf mit einem aktuellen Prüfergebnis statt mit einer Annahme aus einer früheren Fahrt.'
-    sections.append('<section data-block="conclusion"><h2>Was vor der Abfahrt zählt</h2>'+_p(cfid,conclusion,authority)+'</section>')
-    body='<article class="ppm-generated ppm-type-faq" data-article-type="FAQ">'+''.join(sections)+'</article>'
-    def wc(v:str)->int: return len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',re.sub(r'<[^>]+>',' ',v),re.UNICODE))
-    extra_index=0; min_words=int(req.get('min_words') or 0)
-    while wc(body)<min_words+80:
-        fid=ids[extra_index%len(ids)]; addition='<section data-block="detail-'+str(extra_index+1)+'"><h2>'+labels[(extra_index+2)%len(labels)]+'</h2>'+_p(fid,claims[fid]['statement']+' '+PARAGRAPH_TAILS[(extra_index+7)%len(PARAGRAPH_TAILS)],authority)+'</section>'; body=body.replace('</article>',addition+'</article>'); extra_index+=1
-        if extra_index>20: raise RuntimeError('TESTWORKER_WORD_FLOOR_UNREACHABLE')
-    out.write_text(body,encoding='utf-8')
-    return {'status':'PASS','stage':'REPAIR' if repair else 'DRAFT','word_count':wc(body),'sha256':hashlib.sha256(body.encode()).hexdigest()}
 
-def main(argv:list[str])->int:
-    if len(argv)<3: raise SystemExit('usage: deterministic_test_worker.py <gate|research|facts|context|draft|repair> <workspace> [outputs...]')
-    cmd=argv[1]; w=Path(argv[2])
-    if cmd=='gate': wc=_gate(w); print(json.dumps({'status':'PASS','stage':'GATE','item_index':wc['item_index']},sort_keys=True)); return 0
-    if cmd=='research' and len(argv)==4: result=research(w,Path(argv[3]))
-    elif cmd=='facts' and len(argv)==4: result=facts(w,Path(argv[3]))
-    elif cmd=='context' and len(argv)==5: result=context(w,Path(argv[3]),Path(argv[4]))
-    elif cmd=='draft' and len(argv)==4: result=draft(w,Path(argv[3]),False)
-    elif cmd=='repair' and len(argv)==4: result=draft(w,Path(argv[3]),True)
-    else: raise SystemExit('TESTWORKER_BAD_COMMAND')
-    print(json.dumps(result,ensure_ascii=False,sort_keys=True)); return 0
+def _heading(intent_terms: list[str], index: int) -> str:
+    term = html.escape(intent_terms[index % len(intent_terms)] if intent_terms else 'Kontrolle')
+    endings = [
+        'vor der Fahrt gezielt kontrollieren',
+        'im festen Kontrollgang richtig einordnen',
+        'bei der Vorbereitung zuverlässig prüfen',
+        'vor dem Losfahren eindeutig beurteilen',
+        'als aktuellen Zustand sicher feststellen',
+        'bei jeder Fahrt erneut kontrollieren',
+    ]
+    return f'{term} {endings[index % len(endings)]}'
 
-if __name__=='__main__': raise SystemExit(main(sys.argv))
+
+def _link_paragraph(row: dict) -> str:
+    href = html.escape(str(row.get('href') or ''), quote=True)
+    anchor = html.escape(str(row.get('anchor') or ''))
+    role = str(row.get('role') or '')
+    introductions = {
+        'parent_category': 'Zum übergeordneten Themenbereich gehört',
+        'semantic_related': 'Inhaltlich passend ergänzt',
+        'further_information': 'Weiterführende Informationen bietet',
+    }
+    intro = introductions.get(role, 'Ergänzend führt der gebundene interne Verweis zu')
+    return f'<p>{intro} <a href="{href}">{anchor}</a>.</p>'
+
+
+def _required_list_blocks(type_req: dict) -> list[str]:
+    raw = type_req.get('required_lists')
+    if isinstance(raw, list):
+        return [str(v) for v in raw if isinstance(v, str) and v]
+    if isinstance(raw, dict):
+        values = []
+        for key, value in raw.items():
+            if value is True or isinstance(value, (dict, list)):
+                values.append(str(key))
+        return values
+    return []
+
+
+def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
+    state = _state(workspace)
+    expected = 'REPAIR_REQUIRED' if repair else 'DRAFT_REQUIRED'
+    if state.get('phase') != expected:
+        raise RuntimeError('TESTWORKER_PHASE_NOT_' + expected)
+    contract = state.get('authoring_contract')
+    if not isinstance(contract, dict):
+        raise RuntimeError('TESTWORKER_AUTHORING_CONTRACT_MISSING')
+
+    identity = contract['article_identity']
+    bound = contract['bound_requirements']
+    req = contract['global_requirements']
+    type_req = contract['type_requirements']
+    structure = contract['structure_requirements']
+    ids = list(bound['canonical_fact_ids'])
+    authority = bound['fact_authority']
+    claims = {row['fact_id']: row for row in state['production_context']['fact_pack']['claims']}
+    if len(ids) < 4:
+        raise RuntimeError('TESTWORKER_FACTS_TOO_LOW_FOR_DRAFT')
+    if any(not str(authority[fid].get('source_title') or '').strip() for fid in ids):
+        raise RuntimeError('TESTWORKER_SOURCE_TITLE_AUTHORITY_MISSING')
+
+    intro_name = str((structure.get('intro') or {}).get('required_block') or 'intro')
+    direct = html.escape(str(bound.get('faq_direct_answer') or '').strip())
+    intro_fact = ids[0]
+    sections: dict[str, list[str]] = {
+        intro_name: [_p(intro_fact, direct, authority)]
+    }
+    order = [intro_name]
+
+    required_blocks = [str(v) for v in (type_req.get('required_blocks') or []) if str(v)]
+    links = [row for row in (bound.get('link_bindings') or []) if isinstance(row, dict) and row.get('active') is not False]
+    for row in links:
+        section_id = str(row.get('section_id') or '').strip()
+        if section_id and section_id not in required_blocks:
+            required_blocks.append(section_id)
+    for name in ('answer', 'details', 'further_information', 'comparison', 'conclusion'):
+        if name not in required_blocks:
+            required_blocks.append(name)
+
+    cursor = 0
+    intent_terms = [str(v) for v in bound.get('intent_terms', []) if str(v).strip()]
+    for block in required_blocks:
+        if block == intro_name:
+            continue
+        if block not in sections:
+            sections[block] = [f'<h2>{_heading(intent_terms, len(order))}</h2>']
+            order.append(block)
+        for _ in range(2):
+            fact_id = ids[cursor % len(ids)]
+            sections[block].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
+            cursor += 1
+
+    # Bound links are realised exactly in their immutable bound section, never clustered.
+    for row in links:
+        section_id = str(row.get('section_id') or '').strip()
+        if not section_id:
+            raise RuntimeError('TESTWORKER_LINK_SECTION_ID_MISSING')
+        sections[section_id].append(_link_paragraph(row))
+
+    # Required list: use a bound block when declared, otherwise details. Every item is
+    # sourced and unique; no visible numeric labels are invented.
+    list_blocks = _required_list_blocks(type_req)
+    list_block = next((b for b in list_blocks if b in sections), 'details')
+    list_items = []
+    for offset in range(4):
+        fact_id = ids[(cursor + offset) % len(ids)]
+        list_items.append(_li(fact_id, _fact_sentence(fact_id, claims, cursor + offset), authority))
+    sections[list_block].append('<ul>' + ''.join(list_items) + '</ul>')
+    cursor += 4
+
+    # The current PPM contract requires one useful three-column table with at least the
+    # global row floor. Use words rather than artificial row numbers to avoid unsupported
+    # numeric claims.
+    min_rows = max(4, int(req.get('min_table_body_rows') or 0))
+    row_labels = ['Ausgangslage', 'Sichtprüfung', 'Funktionsprüfung', 'Abschlusskontrolle', 'Nachkontrolle', 'Freigabeprüfung']
+    table_rows = []
+    for row_index in range(min_rows):
+        fact_a = ids[(cursor + row_index) % len(ids)]
+        fact_b = ids[(cursor + row_index + 1) % len(ids)]
+        table_rows.append(
+            '<tr>'
+            + _td(fact_a, html.escape(row_labels[row_index % len(row_labels)]), authority)
+            + _td(fact_a, _fact_sentence(fact_a, claims, cursor + row_index), authority)
+            + _td(fact_b, _fact_sentence(fact_b, claims, cursor + row_index + min_rows), authority)
+            + '</tr>'
+        )
+    statement_fact = ids[cursor % len(ids)]
+    table_statement = html.escape(str(bound.get('table_value_statement') or '').strip())
+    table = (
+        _p(statement_fact, table_statement, authority)
+        + '<table class="system-129-table comparison-table">'
+        + '<thead><tr><th>Prüfbereich</th><th>Beobachtung</th><th>Handlung</th></tr></thead>'
+        + '<tbody>' + ''.join(table_rows) + '</tbody></table>'
+    )
+    sections['comparison'].append(table)
+    cursor += min_rows * 2 + 1
+
+    # Grow only with fresh, source-bound paragraphs until every global floor is safely
+    # above its threshold. Generated sentences remain unique by cycling both facts and
+    # distinct phrasing positions.
+    def render() -> str:
+        body = ''.join(f'<section data-block="{html.escape(name, quote=True)}">{"".join(sections[name])}</section>' for name in order)
+        return '<article class="ppm-generated ppm-type-faq" data-article-type="FAQ">' + body + '</article>'
+
+    def word_count(value: str) -> int:
+        return len(re.findall(r'\b[\wÄÖÜäöüß-]+\b', re.sub(r'<[^>]+>', ' ', value), re.UNICODE))
+
+    target_words = int(req.get('min_words') or 0) + 100
+    paragraph_target = int(req.get('min_paragraphs') or 0) + 2
+    h2_target = int(req.get('min_h2') or 0)
+    extra_index = 0
+    while True:
+        body = render()
+        paragraphs = len(re.findall(r'(?is)<p\b', body))
+        h2_count = len(re.findall(r'(?is)<h2\b', body))
+        if word_count(body) >= target_words and paragraphs >= paragraph_target and h2_count >= h2_target:
+            break
+        block = 'details' if extra_index % 2 == 0 else 'further_information'
+        fact_id = ids[cursor % len(ids)]
+        sections[block].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
+        cursor += 1
+        extra_index += 1
+        if extra_index > 80:
+            raise RuntimeError('TESTWORKER_GLOBAL_FLOOR_UNREACHABLE')
+
+    # One deliberate content regression in the middle article proves real same-article
+    # repair isolation. Repair regeneration changes only this sentence.
+    if not repair and identity['title'].startswith('Warum muss die Beleuchtung'):
+        marker = ' Als belastbares Ergebnis muss dieser Prüfschritt dokumentiert bleiben.'
+        body = body.replace('</p>', marker + '</p>', 1)
+
+    out.write_text(body, encoding='utf-8')
+    return {
+        'status': 'PASS',
+        'stage': 'REPAIR' if repair else 'DRAFT',
+        'word_count': word_count(body),
+        'sha256': hashlib.sha256(body.encode()).hexdigest(),
+    }
+
+
+def main(argv: list[str]) -> int:
+    if len(argv) < 3:
+        raise SystemExit('usage: deterministic_test_worker.py <gate|research|facts|context|draft|repair> <workspace> [outputs...]')
+    cmd = argv[1]
+    workspace = Path(argv[2])
+    if cmd == 'gate':
+        worker_contract = _gate(workspace)
+        print(json.dumps({'status': 'PASS', 'stage': 'GATE', 'item_index': worker_contract['item_index']}, sort_keys=True))
+        return 0
+    if cmd == 'research' and len(argv) == 4:
+        result = research(workspace, Path(argv[3]))
+    elif cmd == 'facts' and len(argv) == 4:
+        result = facts(workspace, Path(argv[3]))
+    elif cmd == 'context' and len(argv) == 5:
+        result = context(workspace, Path(argv[3]), Path(argv[4]))
+    elif cmd == 'draft' and len(argv) == 4:
+        result = draft(workspace, Path(argv[3]), False)
+    elif cmd == 'repair' and len(argv) == 4:
+        result = draft(workspace, Path(argv[3]), True)
+    else:
+        raise SystemExit('TESTWORKER_BAD_COMMAND')
+    print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main(sys.argv))
