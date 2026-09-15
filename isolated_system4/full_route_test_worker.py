@@ -1,10 +1,12 @@
 from __future__ import annotations
-import json,re,sys
+import hashlib,json,os,re,sys
 from pathlib import Path
 
 import authoring_contract,root_entry,supervisor,worker_dispatch
 from full_route_test_fixture import source_claims_for_article
 from real_route_test_support import valid_real_article
+
+RUN_NONCE_ENV='SYSTEM4_TEST_RUN_NONCE'
 
 
 def write_json(path:Path,value):
@@ -22,6 +24,13 @@ def _balance_conclusion(body:str,state:dict)->str:
     section=section[:last_p]+addition+section[last_p:]
     result=body[:match.start(1)]+section+body[match.end(1):]
     authoring_contract.validate_candidate(result,state['authoring_contract']); return result
+
+def _fresh_variation_index(index:int)->int:
+    nonce=os.environ.get(RUN_NONCE_ENV,'').strip()
+    if len(nonce)<12:
+        raise RuntimeError('TEST_RUN_NONCE_REQUIRED')
+    digest=hashlib.sha256((nonce+':'+str(index)).encode('utf-8')).hexdigest()
+    return index+31+(int(digest[:8],16)%100003)
 
 def main(argv):
     if len(argv)!=5:
@@ -46,7 +55,11 @@ def main(argv):
     if mode=='draft':
         if state.get('phase')!='DRAFT_REQUIRED':
             print('FULL_ROUTE_TEST_WORKER_FAIL:DRAFT_PHASE_REQUIRED'); return 2
-        body=_balance_conclusion(valid_real_article(state,index),state)
+        try:
+            variation_index=_fresh_variation_index(index)
+        except RuntimeError as exc:
+            print('FULL_ROUTE_TEST_WORKER_FAIL:'+str(exc)); return 2
+        body=_balance_conclusion(valid_real_article(state,variation_index),state)
         out.write_text(body,encoding='utf-8'); return 0
     print('FULL_ROUTE_TEST_WORKER_FAIL:UNKNOWN_MODE'); return 2
 
