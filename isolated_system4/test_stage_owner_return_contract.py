@@ -99,6 +99,22 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             with mock.patch.object(controller_engine.content_guard, 'validate_fact_pack', side_effect=content_guard.ContentGuardError('FACT_PACK_CLAIMS_TOO_LOW')):
                 self._run_main_and_freeze(ws, ['controller.py', 'context', str(ws), str(fact), str(plan)], 'CONTEXT_WORKER', 'CONTEXT_STAGE')
 
+    def test_draft_missing_bound_link_returns_draft_worker_same_stage(self):
+        self.assertEqual(
+            controller._stage_owner_route('draft', 'ARTICLE_AUTHORING_CONTRACT_FAIL:PREWRITE_BOUND_LINK_MISSING:parent_category'),
+            ('DRAFT_WORKER', 'DRAFT_STAGE'),
+        )
+
+    def test_draft_external_link_violation_returns_draft_worker_same_stage(self):
+        self.assertEqual(
+            controller._stage_owner_route('draft', 'ARTICLE_AUTHORING_CONTRACT_FAIL:PREWRITE_EXTERNAL_LINK_FORBIDDEN'),
+            ('DRAFT_WORKER', 'DRAFT_STAGE'),
+        )
+
+    def test_draft_binding_or_integrity_failure_remains_hard_block(self):
+        self.assertIsNone(controller._stage_owner_route('draft', 'ARTICLE_AUTHORING_CONTRACT_FAIL:QUALITY_BINDING_HASH_INVALID'))
+        self.assertIsNone(controller._stage_owner_route('draft', 'DRAFT_INTEGRITY_FAIL'))
+
     def test_supervisor_research_binding_failure_remains_hard_block(self):
         self.assertIsNone(controller._stage_owner_route('research', 'SUPERVISOR_RESEARCH_BINDING_FAIL:UNBOUND_RESEARCH_SUBMISSION_BLOCKED'))
 
