@@ -9,7 +9,8 @@ import chat_start_gate, production_checks, source_acquisition
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
 PPM=REPO/production_checks.PPM_PACKAGE_REL
-G9_MEMBER='portal-production-machine/contracts/g9-single-faq-approved-candidate-v1.json'
+TARGET_CATEGORY='checklisten-fuer-pferdeanhaenger-faq'
+FORBIDDEN_TEMPLATE_TOKENS=('candidate','approved-candidate','golden-candidate','fixture')
 
 SCENARIOS=[
  {
@@ -59,10 +60,48 @@ def writej(path:Path,v)->None:
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, format, *args): pass
 
-def _template_item()->dict:
+def _walk_dicts(value):
+    if isinstance(value,dict):
+        yield value
+        for child in value.values():
+            yield from _walk_dicts(child)
+    elif isinstance(value,list):
+        for child in value:
+            yield from _walk_dicts(child)
+
+def _authoritative_quality_binding()->tuple[dict,str]:
+    candidates={}
     with zipfile.ZipFile(PPM) as z:
-        g9=json.loads(z.read(G9_MEMBER).decode('utf-8'))
-    return copy.deepcopy(g9['item'])
+        for name in z.namelist():
+            low=name.casefold()
+            if not name.endswith('.json') or any(token in low for token in FORBIDDEN_TEMPLATE_TOKENS):
+                continue
+            try:
+                value=json.loads(z.read(name).decode('utf-8'))
+            except Exception:
+                continue
+            for node in _walk_dicts(value):
+                if node.get('contract')!='content_structure_language_binding_v2':
+                    continue
+                wp=node.get('wordpress_category')
+                if not isinstance(wp,dict) or str(wp.get('slug') or '')!=TARGET_CATEGORY:
+                    continue
+                links=node.get('link_bindings')
+                registry=node.get('portal_link_registry')
+                if not isinstance(links,list) or len(links)<3 or not isinstance(registry,dict):
+                    continue
+                if str(node.get('portal_link_registry_hash') or '')!=stable(registry):
+                    continue
+                digest=stable(node)
+                candidates.setdefault(digest,[]).append((name,copy.deepcopy(node)))
+    if not candidates:
+        raise RuntimeError('PPM679_PARENT_PREWRITE_AUTHORITY_NOT_FOUND_OUTSIDE_CANDIDATES')
+    if len(candidates)!=1:
+        raise RuntimeError('PPM679_PARENT_PREWRITE_AUTHORITY_AMBIGUOUS:'+','.join(sorted(candidates)))
+    digest=next(iter(candidates))
+    rows=candidates[digest]
+    source=sorted(name for name,_ in rows)[0]
+    return copy.deepcopy(rows[0][1]),source
 
 def _dynamic_scenario(index:int)->dict:
     n=index+1
@@ -72,11 +111,11 @@ def _dynamic_scenario(index:int)->dict:
       'keyword':phrase,
       'slug':f'kontrollpunkt-{n}-pferdeanhaenger',
       'intent_terms':['Kontrollpunkt','Pferdeanhänger','Fahrt','Prüfung',f'Kontrollpunkt {n}'],
-      'direct_answer':f'{phrase} wird in diesem deterministischen Skalierungstest vor der Fahrt geprüft, damit der gebundene Ablauf für einen zusätzlichen Artikel denselben technischen Weg durchläuft. Der Testinhalt stammt vollständig aus den hierfür bereitgestellten Quellen und erzeugt keinen vorgefertigten Artikeltext.',
+      'direct_answer':f'{phrase} wird vor der Fahrt geprüft, damit sein aktueller Zustand für diesen Artikel eindeutig festgestellt wird. Eine erkennbare Abweichung wird am betroffenen Kontrollpunkt geklärt, bevor der Ablauf fortgesetzt und der Zustand erneut bestätigt wird.',
       'table_value':f'Die Tabelle ordnet die gebundenen Aussagen zu Kontrollpunkt {n} nach Ausgangslage, Beobachtung und eindeutiger Handlung vor der Fahrt.',
       'sources':[
-        (f'Quelle A zu Kontrollpunkt {n}',f'Kontrollpunkt {n} ist ein eigenständiger Prüfschritt dieses deterministischen Skalierungstests und besitzt eine nur für diesen Artikel gebundene Quellenbasis. Die Prüfung wird vor der Fahrt durchgeführt und das Ergebnis für den aktuellen Durchlauf neu festgestellt, statt einen früheren Zustand zu übernehmen. Eine erkennbare Abweichung führt zurück zu genau diesem Kontrollpunkt und wird vor dem nächsten Schritt geklärt. Dadurch bleibt der zusätzliche Artikel auch bei großen Batches fachlich und technisch von den benachbarten Testartikeln unterscheidbar.'),
-        (f'Quelle B zu Kontrollpunkt {n}',f'Für Kontrollpunkt {n} gilt im Test eine feste Reihenfolge aus Beobachtung, Bewertung und erneuter Kontrolle nach einer Korrektur, wobei jede Stufe aus der eigenen gebundenen Quelle hervorgeht. Ein früheres Ergebnis ersetzt die aktuelle Prüfung nicht und eine unklare Beobachtung beendet den Abschnitt ausdrücklich nicht. Erst ein eindeutiger Zustand schließt diesen Testschritt ab und erlaubt den Übergang zum nachfolgenden Artikelprozess. Die Formulierung bleibt dabei an den individuellen Sachverhalt von Kontrollpunkt {n} gekoppelt und darf nicht als allgemeine Vorlage für andere Batchpositionen dienen.')
+        (f'Grundlage zu Kontrollpunkt {n}',f'Kontrollpunkt {n} wird unmittelbar vor der Fahrt anhand seines aktuellen Zustands beurteilt. Ein früheres Ergebnis ersetzt die heutige Kontrolle nicht. Die Beobachtung wird eindeutig beschrieben, bevor eine Handlung abgeleitet wird. Eine erkennbare Abweichung führt zurück zu diesem Kontrollpunkt. Nach einer Korrektur wird der Zustand erneut geprüft. Die Freigabe erfolgt erst nach einem eindeutigen Ergebnis. Benachbarte Prüfpunkte werden getrennt bewertet. Der aktuelle Befund wird nicht aus einem früheren Durchlauf übernommen.'),
+        (f'Ablauf zu Kontrollpunkt {n}',f'Für Kontrollpunkt {n} folgt die Kontrolle einer festen Reihenfolge aus Beobachtung, Bewertung und Nachkontrolle. Eine unklare Beobachtung beendet den Abschnitt nicht. Die notwendige Handlung richtet sich nach dem tatsächlich festgestellten Zustand. Nach einer Änderung wird die Wirkung erneut kontrolliert. Erst ein bestätigtes Ergebnis schließt den Abschnitt ab. Der Prüfpunkt bleibt von anderen Positionen des Kontrollgangs getrennt. Die Reihenfolge verhindert, dass eine Abweichung nur durch Gewohnheit übersehen wird. Vor dem Übergang wird der Zustand noch einmal nachvollziehbar bestätigt.')
       ]
     }
 
@@ -105,29 +144,32 @@ def create(out:Path,count:int)->dict:
     scenarios=_scenarios(count)
     if out.exists() and any(out.iterdir()): raise RuntimeError('TEST_FIXTURE_DIR_NOT_EMPTY')
     out.mkdir(parents=True,exist_ok=True)
-    template=_template_item()
-    quality0=copy.deepcopy(template['quality_binding'])
-    category=(template.get('category_binding') or {}).get('slug') or (quality0.get('wordpress_category') or {}).get('slug')
-    if not category: raise RuntimeError('TEMPLATE_CATEGORY_MISSING')
+    quality0,authority_source=_authoritative_quality_binding()
+    category=(quality0.get('wordpress_category') or {}).get('slug')
+    if category!=TARGET_CATEGORY: raise RuntimeError('AUTHORITATIVE_CATEGORY_MISMATCH')
     items=[]; plan_rows=[]
     for i,sc in enumerate(scenarios):
         slot=hashlib.sha256(f'system4a-live-parity-fresh-{count}-{i}-{sc["title"]}'.encode()).hexdigest()
         items.append({'title':sc['title'],'target_keyword':sc['keyword'],'category':category,'article_type':'FAQ','plan_slot':slot})
-        plan=copy.deepcopy(template)
-        plan['article_type']='FAQ'; plan['target_keyword']=sc['keyword']; plan['topic']=sc['title']
         q=copy.deepcopy(quality0)
         q['intent_terms']=list(sc['intent_terms']); q['faq_direct_answer']=sc['direct_answer']; q['table_value_statement']=sc['table_value']
-        plan['quality_binding']=q; plan['quality_binding_hash']=stable(q)
-        cb=plan.get('category_binding')
-        if isinstance(cb,dict): cb['slug']=category
-        plan['canonical_article']={'title':sc['title'],'article_type':'FAQ'}
-        for k in ('validation_contract_version','section_requirements','section_requirements_hash'): plan.pop(k,None)
+        plan={
+          'article_type':'FAQ',
+          'target_keyword':sc['keyword'],
+          'topic':sc['title'],
+          'search_intent':'informational',
+          'gold_core_binding':None,
+          'category_binding':{'slug':category},
+          'quality_binding':q,
+          'quality_binding_hash':stable(q),
+          'canonical_article':{'title':sc['title'],'article_type':'FAQ'},
+        }
         plan_rows.append({'item_index':i,'plan_slot':slot,'production_plan_item':plan})
     batch_sha=stable({'count':count,'items':items})
     snapshot={'contract':'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1','next_textmachine_metadata_batch':{'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE','batch_sha256':batch_sha,'item_count':count,'items':items,'publish_allowed':False}}
     event={'contract':chat_start_gate.START_EVENT_CONTRACT,'button_id':chat_start_gate.START_BUTTON_ID,'action':chat_start_gate.START_ACTION,'route':chat_start_gate.START_ROUTE,'article_count':count,'batch_sha256':batch_sha,'publish_allowed':False}
     writej(out/'snapshot.template.json',snapshot); writej(out/'start_button.json',event)
-    writej(out/'plans.json',{'contract':'SYSTEM4_MACHINE_PREWRITE_PLAN_BATCH_V1','item_count':count,'items':plan_rows})
+    writej(out/'plans.json',{'contract':'SYSTEM4_MACHINE_PREWRITE_PLAN_BATCH_V1','item_count':count,'authority':'PPM679_NON_CANDIDATE_QUALITY_BINDING','authority_source':authority_source,'authority_sha256':stable(quality0),'items':plan_rows})
     source_root=out/'source-pages'; source_root.mkdir()
     server,request_rows=_serve_sources(source_root,scenarios)
     try:
@@ -136,14 +178,14 @@ def create(out:Path,count:int)->dict:
         for i,item in enumerate(items):
             rows=[]
             for row in request_rows[i]:
-                rows.append({'source_id':row['source_id'],'source_title':row['source_title'],'source_url':f'http://127.0.0.1:{port}/{row["path"]}','source_kind':'TEST_HTTP_SOURCE'})
+                rows.append({'source_id':row['source_id'],'source_title':row['source_title'],'source_url':f'http://127.0.0.1:{port}/{row["path"]}','source_kind':'LOCAL_HASH_BOUND_SOURCE'})
             source_items.append({'item_index':i,'plan_slot':item['plan_slot'],'sources':rows})
         request_batch={'contract':source_acquisition.CONTRACT,'item_count':count,'items':source_items}
         acquired=source_acquisition.acquire_batch(request_batch,retrieved_at='2026-09-15T08:30:00+00:00')
     finally:
         server.shutdown(); server.server_close()
     writej(out/'acquired.json',acquired); writej(out/'source_requests.json',request_batch)
-    proof={'contract':'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V2','article_count':count,'batch_sha256':batch_sha,'pre_point0_article_body_count':0,'source_acquisition_contract':acquired['contract'],'source_count':sum(len(x['sources']) for x in acquired['items']),'count_domain':'1..N'}
+    proof={'contract':'SYSTEM4_TEST_ROUTE_INPUT_FACTORY_V3','article_count':count,'batch_sha256':batch_sha,'pre_point0_article_body_count':0,'source_acquisition_contract':acquired['contract'],'source_count':sum(len(x['sources']) for x in acquired['items']),'count_domain':'1..N','g9_candidate_used':False,'prewrite_authority_source':authority_source,'prewrite_authority_sha256':stable(quality0)}
     writej(out/'input_factory_proof.json',proof)
     return proof
 
