@@ -44,6 +44,14 @@ public final class LT68Worker {
                .append("\"offset\":").append(from).append(',')
                .append("\"length\":").append(to - from).append(',')
                .append("\"context\":{\"text\":\"").append(esc(ctx)).append("\"},")
+               .append("\"replacements\":[");
+            boolean firstReplacement = true;
+            for (String replacement : m.getSuggestedReplacements()) {
+                if (!firstReplacement) out.append(',');
+                firstReplacement = false;
+                out.append("{\"value\":\"").append(esc(replacement)).append("\"}");
+            }
+            out.append("],")
                .append("\"rule\":{\"id\":\"").append(esc(m.getRule().getId())).append("\"}}");
         }
         out.append("]}");
