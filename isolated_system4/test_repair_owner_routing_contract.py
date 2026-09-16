@@ -117,7 +117,7 @@ class RepairOwnerRoutingContractTests(unittest.TestCase):
              mock.patch.object(controller.content_guard, 'validate_single_article', return_value=None), \
              mock.patch.object(controller.design_guard, 'validate_design_neutrality', return_value=None), \
              mock.patch.object(controller.production_checks, 'run_all', side_effect=repair), \
-             mock.patch.object(controller, 'save', return_value=None):
+             mock.patch.object(controller._engine, 'save', return_value=None):
             rc = controller.cmd_fullcheck('/tmp/irrelevant')
         return rc, state
 
