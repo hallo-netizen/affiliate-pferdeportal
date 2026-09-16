@@ -25,6 +25,17 @@ jobs:
           echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
           unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Run root entry and capture exact traceback
+        id: root
+        working-directory: isolated_system4
+        continue-on-error: true
+        run: |
+          set +e
+          python3 -m unittest -v test_root_entry.py > /tmp/system4-root-entry.log 2>&1
+          rc=$?
+          echo "$rc" > /tmp/system4-root-entry.rc
+          cat /tmp/system4-root-entry.log
+          exit "$rc"
       - name: Run repair continuity and capture exact traceback
         id: repair
         working-directory: isolated_system4
@@ -38,17 +49,38 @@ jobs:
           echo "$rc" > /tmp/system4-repair-continuity.rc
           cat /tmp/system4-repair-continuity.log
           exit "$rc"
+      - name: Preserve real baseline draft shape
+        if: always()
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import shutil
+          import tempfile
+          from pathlib import Path
+          import test_repair_continuity
+          with tempfile.TemporaryDirectory(prefix='system4-diagnostic-draft-') as td:
+              root = Path(td)
+              _, rows = test_repair_continuity._prepare_batch(root, 1)
+              shutil.copy2(rows[0][2], '/tmp/system4-baseline-draft.html')
+          PY
       - name: Upload exact diagnostic
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: system4a-repair-continuity-diagnostic-${{ github.sha }}
           path: |
+            /tmp/system4-root-entry.log
+            /tmp/system4-root-entry.rc
             /tmp/system4-repair-continuity.log
             /tmp/system4-repair-continuity.rc
-          if-no-files-found: error
+            /tmp/system4-baseline-draft.html
+          if-no-files-found: warn
           retention-days: 1
       - name: Preserve failing status
         if: always()
         run: |
+          test "$(cat /tmp/system4-root-entry.rc)" -eq 0
           test "$(cat /tmp/system4-repair-continuity.rc)" -eq 0
