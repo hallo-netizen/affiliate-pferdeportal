@@ -2,12 +2,13 @@ from __future__ import annotations
 import copy,hashlib,json,subprocess,sys
 from pathlib import Path
 
-import batch_gate,controller,handoff_transport,point0_snapshot,root_entry
+import batch_gate,controller,handoff_transport,point0_snapshot,repair_router,root_entry
 
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
 
 class FullRouteError(RuntimeError): pass
+class FullRouteContinuation(RuntimeError): pass
 
 def canon(v): return (json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n').encode()
 def write_json(path:Path,value): path.write_bytes(canon(value)); return path
@@ -37,6 +38,53 @@ def _machine_context(workspace:Path,base:Path,index:int):
     plan={'article_type':a['article_type'],'target_keyword':a['target_keyword'],'topic':a['title'],'source_snapshot_id':source_sha,'runtime_order':{'order_id':f'full-route-{index}','article_type':a['article_type'],'title':a['title'],'slug':f'full-route-{index}','subject_scope':'single_button_full_route','subject_label':a['target_keyword'],'lead':'Gebundener Einstieg aus dem akzeptierten Research- und Facts-Stand.','conclusion':'Gebundener Abschluss aus dem akzeptierten Research- und Facts-Stand.','allowed_fact_ids':ids}}
     pp=write_json(base/f'fact-pack-{index}.json',pack); pl=write_json(base/f'plan-{index}.json',plan)
     if controller.main(['controller.py','context',str(workspace),str(pp),str(pl)])!=0: raise FullRouteError('START_CONTEXT_FAILED:'+str(index))
+
+def _verify_full_textmachine_pass(state:dict,index:int)->None:
+    checks=state.get('checks') if isinstance(state.get('checks'),dict) else {}
+    if state.get('phase')!='OUTPUT_GATE_REQUIRED': raise FullRouteError('START_OUTPUT_GATE_NOT_REACHED:'+str(index))
+    if checks.get('status')!='PASS' or checks.get('mode')!='FULL_PRODUCTION': raise FullRouteError('START_FULL_TEXTMACHINE_PASS_MISSING:'+str(index))
+    if checks.get('checked_draft_sha256')!=state.get('draft_sha256'): raise FullRouteError('START_FULL_TEXTMACHINE_DRAFT_BINDING_MISMATCH:'+str(index))
+    prod=checks.get('production_evidence') if isinstance(checks.get('production_evidence'),dict) else {}
+    if prod.get('contract')!='SYSTEM4_FULL_PRODUCTION_CHECK_V1' or prod.get('status')!='PASS': raise FullRouteError('START_FULL_PRODUCTION_EVIDENCE_INVALID:'+str(index))
+    if prod.get('checked_draft_sha256')!=state.get('draft_sha256') or prod.get('publish_allowed') is not False: raise FullRouteError('START_FULL_PRODUCTION_EVIDENCE_BINDING_INVALID:'+str(index))
+    evidence=prod.get('evidence') if isinstance(prod.get('evidence'),dict) else {}
+    required={'no_legacy','no_external_links','languagetool','ppm679'}
+    if not required.issubset(evidence): raise FullRouteError('START_TEXTMACHINE_INDIVIDUAL_EVIDENCE_MISSING:'+str(index))
+    if (evidence['no_legacy'].get('status')!='PASS' or evidence['no_legacy'].get('legacy_import_count')!=0): raise FullRouteError('START_NO_LEGACY_NOT_PASS:'+str(index))
+    if (evidence['no_external_links'].get('status')!='PASS' or evidence['no_external_links'].get('external_link_count')!=0): raise FullRouteError('START_EXTERNAL_LINK_CHECK_NOT_PASS:'+str(index))
+    lt=evidence['languagetool']; ppm=evidence['ppm679']
+    if lt.get('status')!='PASS' or lt.get('engine')!='LanguageTool 6.8 / Bestand 43' or lt.get('finding_count')!=0: raise FullRouteError('START_LANGUAGETOOL_NOT_PASS:'+str(index))
+    if ppm.get('status')!='PASS' or ppm.get('ppm_version')!='6.7.9' or ppm.get('technical_status')!='TECHNICAL_CHECK_OK' or ppm.get('content_quality_status')!='CONTENT_QUALITY_CHECK_OK' or ppm.get('fail_closed_aggregate_status')!='PASS': raise FullRouteError('START_PPM679_NOT_PASS:'+str(index))
+
+def _continuation_result(workspace:Path)->dict:
+    for name in ('machine_repair_redirect.json','machine_repair_request.json'):
+        path=workspace/name
+        if path.is_file():
+            result=_read_json(path)
+            repair_router.verify_continuation_result(workspace,result)
+            return result
+    raise FullRouteError('START_REPAIR_CONTINUATION_EVIDENCE_MISSING')
+
+def _fullcheck_with_existing_repair_loop(worker_command:list[str],workspace:Path,base:Path,index:int)->dict:
+    for attempt in range(repair_router.MAX_MACHINE_REPAIR_CYCLES+1):
+        rc=controller.main(['controller.py','fullcheck',str(workspace)])
+        if rc==0:
+            state=_read_json(workspace/'state.json')
+            _verify_full_textmachine_pass(state,index)
+            return state
+        if rc==3:
+            result=_continuation_result(workspace)
+            if result.get('status')!='SAME_ARTICLE_BODY_REPAIR' or result.get('owner')!='DRAFT_BODY' or result.get('target')!='SAME_ARTICLE_BODY':
+                raise FullRouteError('START_REPAIR_ROUTE_MISMATCH:'+str(index))
+            repair=base/f'worker-repair-{index}-{attempt+1}.html'
+            _run_worker(worker_command,'repair',workspace,repair,index)
+            if controller.main(['controller.py','repair',str(workspace),str(repair)])!=0: raise FullRouteError('START_REPAIR_FAILED:'+str(index))
+            continue
+        if rc==4:
+            result=_continuation_result(workspace)
+            raise FullRouteContinuation('START_CONTINUATION_REQUIRED:'+str(index)+':'+str(result.get('owner'))+':'+str(result.get('target'))+':'+str(result.get('status')))
+        raise FullRouteError('START_FULLCHECK_NOT_PASS:'+str(index)+':'+str(rc))
+    raise FullRouteError('START_REPAIR_CYCLE_LIMIT:'+str(index))
 
 def _handoff(states):
     rows=[]
@@ -68,10 +116,7 @@ def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], 
         _machine_context(ws,output_root,index)
         draft=output_root/f'worker-draft-{index}.html'; _run_worker(worker_command,'draft',ws,draft,index)
         if controller.main(['controller.py','draft',str(ws),str(draft)])!=0: raise FullRouteError('START_DRAFT_FAILED:'+str(index))
-        rc=controller.main(['controller.py','fullcheck',str(ws)])
-        if rc!=0: raise FullRouteError('START_FULLCHECK_NOT_PASS:'+str(index)+':'+str(rc))
-        state=_read_json(ws/'state.json')
-        if state.get('phase')!='OUTPUT_GATE_REQUIRED': raise FullRouteError('START_OUTPUT_GATE_NOT_REACHED:'+str(index))
+        state=_fullcheck_with_existing_repair_loop(worker_command,ws,output_root,index)
         state_paths.append(ws/'state.json'); states.append(state)
     batch_out=output_root/'batch'; collected=batch_gate.collect_batch(production_snapshot,state_paths,batch_out)
     if collected.get('status')!='SYSTEM4_BATCH_FULL_PASS_COLLECTED': raise FullRouteError('START_BATCH_NOT_PASS')
@@ -86,6 +131,8 @@ def main(argv):
     try:
         if len(argv)<6 or argv[1]!='start': raise FullRouteError('BAD_COMMAND')
         out=run(Path(argv[2]),Path(argv[3]),argv[5:],Path(argv[4])); print('SYSTEM4_FULL_ROUTE_PASS:'+str(out)); return 0
+    except FullRouteContinuation as exc:
+        print('SYSTEM4_FULL_ROUTE_CONTINUATION:'+str(exc)); return 4
     except Exception as exc:
         print('SYSTEM4_FULL_ROUTE_FAIL:'+str(exc)); return 2
 
