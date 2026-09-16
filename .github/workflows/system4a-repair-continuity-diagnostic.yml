@@ -12,30 +12,58 @@ permissions:
 jobs:
   diagnose:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
+    env:
+      SYSTEM4_FRESH_RUN_TOKEN: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
-      - name: Run batch handoff one-to-N and capture exact traceback
-        id: batch
-        working-directory: isolated_system4
+      - name: Exact head
+        run: git rev-parse HEAD
+      - name: Download hash-bound LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Build fresh machine inputs for one article
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-1 1
+      - name: Run exact one article route and capture traceback
+        id: one
         continue-on-error: true
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-1
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_1_PROOF.json
         run: |
           set +e
-          python3 -m unittest -v test_batch_gate.py test_universal_batch_gate.py test_handoff_transport.py > /tmp/system4-batch-handoff.log 2>&1
+          python3 isolated_system4/live_parity_v2.py all > /tmp/system4-one-route.log 2>&1
           rc=$?
-          echo "$rc" > /tmp/system4-batch-handoff.rc
-          cat /tmp/system4-batch-handoff.log
+          echo "$rc" > /tmp/system4-one-route.rc
+          cat /tmp/system4-one-route.log
+          if test "$rc" -eq 0; then
+            cp /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2_1_ARTICLE.json
+          fi
           exit "$rc"
       - name: Upload exact diagnostic
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: system4a-acceptance-diagnostic-${{ github.sha }}
+          name: system4a-one-route-diagnostic-${{ github.sha }}
           path: |
-            /tmp/system4-batch-handoff.log
-            /tmp/system4-batch-handoff.rc
-          if-no-files-found: error
+            /tmp/system4-one-route.log
+            /tmp/system4-one-route.rc
+            /tmp/system4-acceptance-output/
+          if-no-files-found: warn
           retention-days: 1
       - name: Preserve failing status
         if: always()
-        run: test "$(cat /tmp/system4-batch-handoff.rc)" -eq 0
+        run: test "$(cat /tmp/system4-one-route.rc)" -eq 0
