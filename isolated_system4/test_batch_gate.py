@@ -1,6 +1,10 @@
 import hashlib,json,tempfile,unittest
 from pathlib import Path
+import authoring_contract
 import batch_gate
+import production_checks
+
+REPO=Path(__file__).resolve().parent.parent
 
 def sha_text(value): return hashlib.sha256(value.encode('utf-8')).hexdigest()
 def production_evidence(draft):
@@ -17,17 +21,59 @@ def production_evidence(draft):
 def evidence_payloads(i):
     e1=f'Erster konkreter Beleg für Testartikel {i} mit fachlicher Aussage und eindeutiger Bindung.'
     e2=f'Zweiter konkreter Beleg für Testartikel {i} mit einer davon verschiedenen fachlichen Aussage.'
-    evidence=e1+'\n'+e2+'\n'+f'Zusätzlicher gesicherter Quellenkontext für Testartikel {i}.'
+    e3=f'Dritter konkreter Beleg für Testartikel {i} bestätigt einen weiteren eigenständigen fachlichen Prüfpunkt.'
+    evidence=e1+'\n'+e2+'\n'+e3+'\n'+f'Zusätzlicher gesicherter Quellenkontext für Testartikel {i}.'
     source_id=f'src-test-{i}'
     source={'source_id':source_id,'source_title':f'Fachquelle Test {i}','source_url':f'https://example.org/source-{i}','retrieved_at':'2026-09-12T20:00:00Z','snapshot_sha256':sha_text(evidence),'evidence':evidence}
     claims=[
         {'fact_id':f'fact-{i}-a','source_id':source_id,'statement':f'Konkrete erste Aussage für Artikel {i}.','evidence_text':e1,'evidence_text_sha256':sha_text(e1)},
         {'fact_id':f'fact-{i}-b','source_id':source_id,'statement':f'Konkrete zweite Aussage für Artikel {i}.','evidence_text':e2,'evidence_text_sha256':sha_text(e2)},
+        {'fact_id':f'fact-{i}-c','source_id':source_id,'statement':f'Konkrete dritte Aussage für Artikel {i}.','evidence_text':e3,'evidence_text_sha256':sha_text(e3)},
     ]
     research={'contract':'SYSTEM4_RESEARCH_EVIDENCE_V1','sources':[dict(source)]}
     facts={'contract':'SYSTEM4_FACTS_EVIDENCE_V1','claims':claims}
-    pack={'contract':'canonical_fact_pack_v1','status':'SOURCE_VERIFIED_PRODUCTION_READY','sources':[dict(source)],'claims':claims}
+    pack={'contract':'canonical_fact_pack_v1','status':'SOURCE_VERIFIED_PRODUCTION_READY','sources':[dict(source)],'claims':[dict(row) for row in claims]}
     return research,facts,pack
+
+def bind_authoring_contract(state):
+    article=state['article']; context=state['production_context']; pack=context['fact_pack']; source=state['source_snapshot_sha256']
+    pack['source_snapshot_id']=source; pack['fact_pack_id']=source
+    for claim in pack['claims']:
+        claim['claim_status']='FULLY_SUPPORTED'; claim['article_types']=[article['article_type']]
+    package=(REPO/production_checks.PPM_PACKAGE_REL).resolve()
+    static=authoring_contract._static_ppm_rules(package); structure=static['structure']
+    required_roles=[str(v) for v in ((structure.get('links') or {}).get('required_roles') or []) if isinstance(v,str) and v]
+    links=[]
+    for index,role in enumerate(required_roles):
+        links.append({'role':role,'section_id':f'test-section-{index}','anchor':f'Interner Testverweis {index+1}','href':f'/system4-test-{article["plan_slot"][:8]}-{index+1}/','active':True,'reason':f'Gebundener interner Testverweis für Rolle {role}.'})
+    registry={'contract':'SYSTEM4_TEST_LINK_REGISTRY_V1','entries':[dict(row) for row in links]}
+    quality={
+        'contract':'content_structure_language_binding_v2',
+        'internal_test_marker':'LT2-FAQ-001',
+        'portal_link_registry':registry,
+        'portal_link_registry_hash':authoring_contract._stable(registry),
+        'link_bindings':[dict(row) for row in links],
+        'wordpress_category':{'id':1000,'slug':article['category'],'name':'Testkategorie '+article['category']},
+        'intent_terms':[article['target_keyword'],article['title'],'Kontrolle'],
+        'table_value_statement':'Diese Tabelle ordnet den Prüfpunkt, den sichtbaren Zustand und die daraus folgende notwendige Kontrolle vor der Nutzung eindeutig und nachvollziehbar ein.',
+    }
+    allowed=[row['fact_id'] for row in pack['claims']]
+    plan={
+        'article_type':article['article_type'],'target_keyword':article['target_keyword'],'topic':article['title'],
+        'source_snapshot_id':source,'quality_binding':quality,'quality_binding_hash':authoring_contract._stable(quality),
+        'runtime_order':{
+            'order_id':'system4-batch-test-'+article['plan_slot'][:12],'article_type':article['article_type'],'title':article['title'],
+            'slug':'system4-test-'+article['plan_slot'][:12],'subject_scope':article['title'],'subject_label':article['target_keyword'],
+            'lead':'Gebundener Testeinleitungssatz für den Batch-Gate-Vertrag.','conclusion':'Gebundener Testabschlusssatz für den Batch-Gate-Vertrag.',
+            'links':[dict(row) for row in links],'allowed_fact_ids':allowed,
+        },
+        'canonical_article':{'title':article['title'],'article_type':article['article_type'],'slug':'system4-test-'+article['plan_slot'][:12]},
+        'validation_contract_version':'system4-test-fixture-v1',
+    }
+    context['fact_pack']=pack; context['production_plan_item']=plan; context['sha256']=batch_gate.stable_hash({'fact_pack':pack,'production_plan_item':plan})
+    state['authoring_contract']=authoring_contract.build(REPO,state,pack,plan)
+    return state
+
 def make_fixture(root,count=7):
     items=[]
     for i in range(count):
@@ -36,10 +82,11 @@ def make_fixture(root,count=7):
     snap=root/'snapshot.json'; snap.write_text(json.dumps(snapshot,ensure_ascii=False),encoding='utf-8'); snap_sha=hashlib.sha256(snap.read_bytes()).hexdigest(); batch_sha=snapshot['next_textmachine_metadata_batch']['batch_sha256']; paths=[]
     for i,item in enumerate(items):
         unique=' '.join(f'eigen{i}_{n}' for n in range(90))
-        draft=f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>{item["title"]}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">{item["target_keyword"]} {unique}</p><table class="system-129-table comparison-table"><tr><th>Kriterium</th><th>Wert</th></tr><tr><td>A</td><td>B</td></tr></table></article>'
+        draft=f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>{item["title"]}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b fact-{i}-c">{item["target_keyword"]} {unique}</p><table class="system-129-table comparison-table"><tr><th>Kriterium</th><th>Wert</th></tr><tr><td>A</td><td>B</td></tr></table></article>'
         research,facts,fact=evidence_payloads(i); plan={'canonical_article':{'body_html':draft}}; context={'fact_pack':fact,'production_plan_item':plan}
         research_text=json.dumps(research,ensure_ascii=False,sort_keys=True); facts_text=json.dumps(facts,ensure_ascii=False,sort_keys=True)
         state={'contract':batch_gate.STATE_CONTRACT,'source_snapshot_sha256':snap_sha,'batch_sha256':batch_sha,'article':item,'immutable_core_sha256':'','publish_allowed':False,'phase':'OUTPUT_GATE_REQUIRED','revision':1,'research':{'text':research_text,'sha256':sha_text(research_text)},'facts':{'text':facts_text,'sha256':sha_text(facts_text)},'production_context':{'fact_pack':fact,'production_plan_item':plan,'sha256':batch_gate.stable_hash(context)},'draft_markdown':draft,'draft_sha256':sha_text(draft),'checks':{'status':'PASS','mode':'FULL_PRODUCTION','errors':[],'checked_draft_sha256':sha_text(draft),'production_evidence':production_evidence(draft)},'last_error':None,'release_prepared':None,'released':False}
+        bind_authoring_contract(state)
         state['immutable_core_sha256']=batch_gate.stable_hash(batch_gate.immutable_core(state)); p=root/f'state-{i}.json'; p.write_text(json.dumps(state,ensure_ascii=False),encoding='utf-8'); paths.append(p)
     return snap,paths
 class BatchGateTests(unittest.TestCase):
@@ -101,8 +148,11 @@ class BatchGateTests(unittest.TestCase):
     def test_missing_production_evidence_blocked(self):
         def m(r,s,p): x=json.loads(p[2].read_text()); x['checks'].pop('production_evidence'); p[2].write_text(json.dumps(x))
         self.assert_blocked('FULL_PRODUCTION_EVIDENCE_MISSING',m)
+    def test_authoring_contract_missing_blocked(self):
+        def m(r,s,p): x=json.loads(p[2].read_text()); x.pop('authoring_contract'); p[2].write_text(json.dumps(x))
+        self.assert_blocked('AUTHORING_CONTRACT_NOT_PASS:AUTHORING_CONTRACT_MISSING',m)
     def test_design_drift_is_blocked_even_after_full_pass(self):
         def m(r,s,p):
-            x=json.loads(p[2].read_text()); old=x['draft_markdown']; new=old.replace('system-129-table comparison-table','comparison-table'); x['draft_markdown']=new; x['draft_sha256']=sha_text(new); x['checks']['checked_draft_sha256']=sha_text(new); x['checks']['production_evidence']=production_evidence(new); x['production_context']['production_plan_item']['canonical_article']['body_html']=new; x['production_context']['sha256']=batch_gate.stable_hash({'fact_pack':x['production_context']['fact_pack'],'production_plan_item':x['production_context']['production_plan_item']}); p[2].write_text(json.dumps(x))
+            x=json.loads(p[2].read_text()); old=x['draft_markdown']; new=old.replace('system-129-table comparison-table','comparison-table'); x['draft_markdown']=new; x['draft_sha256']=sha_text(new); x['checks']['checked_draft_sha256']=sha_text(new); x['checks']['production_evidence']=production_evidence(new); p[2].write_text(json.dumps(x))
         self.assert_blocked('DESIGN_GUARD_NOT_PASS:DESIGN_TABLE_SYSTEM129_CLASS_MISSING',m)
 if __name__=='__main__': unittest.main(verbosity=2)
