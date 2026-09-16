@@ -142,9 +142,9 @@ def valid_real_article(state:dict,index:int)->str:
         e=aspects[(seed*3+9+index+style_index*5)%len(aspects)]
         opener=openers[(seed+index+style_index)%len(openers)].format(section=label(section))
         return (
-            f'{opener} {fact}. Für {identity["target_keyword"]} verbindet die Prüfung {a} mit {d}; '
-            f'{e} bleibt dabei ein reiner Ordnungsbegriff. Der gebundene Quellenstand zu {identity["target_keyword"]} '
-            f'bleibt maßgeblich; unbelegte Ergänzungen fließen nicht ein.'
+            f'{opener} {fact}; bei {identity["target_keyword"]} wird diese Aussage im Zusammenhang mit {a}, {d} und {e} '
+            f'eingeordnet, wobei ausschließlich der dokumentierte Quelleninhalt maßgeblich bleibt und unbelegte Ergänzungen '
+            f'ausdrücklich außerhalb der Bewertung bleiben.'
         )
 
     fid=allowed[0]
@@ -191,7 +191,7 @@ def valid_real_article(state:dict,index:int)->str:
                 addon+=1
                 a=aspects[(seed+addon*4+index+style_index)%len(aspects)]
                 d=aspects[(seed+addon*7+11+index+style_index*2)%len(aspects)]
-                text=text.rstrip('.')+f'; bei {identity["target_keyword"]} verbindet der Prüfrahmen {a} mit {d}. Für {identity["target_keyword"]} werden dabei keine neuen Tatsachen ergänzt.'
+                text=text.rstrip('.')+f'; bei {identity["target_keyword"]} dient der Beleg in Bezug auf {a} und {d} lediglich als nachvollziehbarer Prüfrahmen ohne neue Tatsachen.'
             if pi==0:
                 for row in section_links:
                     text+=f' <a href="{row["href"]}">{row["anchor"]}</a>'
@@ -247,14 +247,9 @@ def valid_real_article(state:dict,index:int)->str:
                 fact=claim_map[fact_id]
                 opener=cell_openers[(pos+index+style_index)%len(cell_openers)]
                 context=cell_contexts[(pos+index*4+style_index)%len(cell_contexts)]
-                context_parts=[part.strip() for part in context.replace(' und ', ', ').split(',') if part.strip()]
-                first=', '.join(context_parts[:3])
-                second=', '.join(context_parts[3:])
-                a=aspects[(pos+style_index+index)%len(aspects)]
                 cells.append(
-                    f'<td data-fact-ids="{fact_id}">{opener} Für {identity["target_keyword"]} ist gebunden: {fact}. '
-                    f'{first} werden über {a} eingeordnet; {second} bleiben bei {identity["target_keyword"]} reiner Prüfrahmen. '
-                    f'Neue Tatsachen zu {identity["target_keyword"]} werden nicht ergänzt.</td>'
+                    f'<td data-fact-ids="{fact_id}">{opener} Bei {identity["target_keyword"]} ist gebunden: {fact}; '
+                    f'als reiner Prüfrahmen für {identity["target_keyword"]} dienen {context}, wobei diese Begriffe keine zusätzlichen Tatsachen ergänzen.</td>'
                 )
             body.append('<tr>'+''.join(cells)+'</tr>')
         table=(f'<table class="system-129-table comparison-table"><thead><tr>'
