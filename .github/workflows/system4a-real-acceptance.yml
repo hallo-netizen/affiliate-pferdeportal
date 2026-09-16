@@ -43,6 +43,36 @@ jobs:
           echo 'SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_IN_TEST'
       - name: Inspect real WordPress importer contract
         run: python3 isolated_system4/wordpress_import_contract_probe.py | tee /tmp/system4-wordpress-import-contract.txt
+      - name: Prove production output quarantine positive and negative boundaries
+        run: python3 control/output-quarantine/test_output_quarantine.py
+      - name: Assert canonical downstream closeout contract
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          target = Path('isolated_system4/ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md').read_text(encoding='utf-8')
+          protocol = Path('isolated_system4/PROTOKOLL_TESTSTRECKE_V2_20260914.md').read_text(encoding='utf-8')
+          release = Path('control/output-quarantine/output_release_gate.py').read_text(encoding='utf-8')
+          finalizer = Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py').read_text(encoding='utf-8')
+          wp_lock = Path('protocol/WORDPRESS_SIGNATURE_ENTRY_LOCK_V1.json').read_text(encoding='utf-8')
+          required = (
+              '107008 Final Review/Output Release',
+              'PSERC',
+              'ENDSTEMPEL',
+              'WordPress-Importformat-Prüfung',
+              'Parent-Chat',
+          )
+          for token in required:
+              assert token in target, ('TARGET_CLOSEOUT_TOKEN_MISSING', token)
+              assert token in protocol, ('PROTOCOL_CLOSEOUT_TOKEN_MISSING', token)
+          assert 'def require_current_main()' in release
+          assert 'CURRENT_BATCH_BINDING_MISMATCH' in release
+          assert 'TEST_SIGNER_FORBIDDEN_IN_PRODUCTION' in finalizer
+          assert 'PSERC_SIGNER_CMD' in finalizer
+          assert '"private_key_location": "GITHUB_ONLY"' in wp_lock
+          assert 'BRANCH_PREQUALIFICATION_PASS_PENDING_CANONICAL_107008_ENDSTEMPEL_CHAT' in protocol
+          print('SYSTEM4_CANONICAL_DOWNSTREAM_CLOSEOUT_CONTRACT_PASS')
+          PY
       - name: Inspect exact PPM 6.7.9 table authority
         run: |
           python3 - <<'PY'
@@ -216,7 +246,7 @@ jobs:
               assert proof['unique_draft_hashes'] is True
               assert proof['unique_visible_articles'] is True
               assert proof['fresh_run_token_sha256']
-          print('SYSTEM4_FRESH_1_AND_3_ROUTE_PASS_PENDING_WORDPRESS_CHAT')
+          print('SYSTEM4_BRANCH_PREQUALIFICATION_PASS_PENDING_CANONICAL_107008_ENDSTEMPEL_CHAT')
           PY
       - name: Upload current test route candidate
         uses: actions/upload-artifact@v4
