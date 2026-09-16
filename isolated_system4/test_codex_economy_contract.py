@@ -28,7 +28,7 @@ class CodexEconomyContractTests(unittest.TestCase):
         agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
         required = [
             '`isolated_system4/controller.py fullcheck` is the ONLY production checker orchestrator.',
-            'Do NOT run LanguageTool or PPM directly before/after `fullcheck`.',
+            'LanguageTool 6.8 and PPM 6.7.9 must be invoked only through that bound `fullcheck` path via `production_checks.run_all` for the real article corridor.',
             'A repairable LanguageTool/PPM/content finding is NOT a terminal process error.',
             'controller.py repair',
             'The repair transition must not mutate the bound production context',
@@ -54,7 +54,7 @@ class CodexEconomyContractTests(unittest.TestCase):
             'The existing Textmaschine/content-rule authority is READ-ONLY.',
             'Existing design is equally immutable.',
             '`design_guard.py` is validation-only.',
-            'ZERO mutation',
+            'System 4 MUST NOT write CSS',
             'BLOCKED_TEXTMASCHINE_OR_DESIGN_IMMUTABLE',
         ]:
             self.assertIn(value, agents)
@@ -62,7 +62,7 @@ class CodexEconomyContractTests(unittest.TestCase):
     def test_universal_batch_and_article_type_contract_is_hard_bound(self):
         task = (ROOT / 'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
         agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
-        target = (ROOT / 'ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md').read_text(encoding='utf-8')
+        target = (ROOT / 'ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_WORKER_DISPATCH_20260916.md').read_text(encoding='utf-8')
         for text in (task, agents, target):
             self.assertNotIn('SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1', text)
             self.assertNotIn('SYSTEM4_7_7_REAL_ARTICLE_BATCH_PASS', text)
@@ -71,15 +71,35 @@ class CodexEconomyContractTests(unittest.TestCase):
         self.assertIn('NO `Beratung` allowlist', task)
         self.assertIn('NO fixed article count', agents)
         self.assertIn('NO artificial maximum count', agents)
-        self.assertIn('keine feste Artikelzahl', target)
+        self.assertIn('1..N', target)
         self.assertIn('ohne künstliche System-4-Obergrenze', target)
-        self.assertIn('keine feste Beitragsart', target)
+        self.assertIn('keine System-4-Whitelist', target)
+
+    def test_current_handoff_contract_has_one_truth(self):
+        task = (ROOT / 'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
+        agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
+        target = (ROOT / 'ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_WORKER_DISPATCH_20260916.md').read_text(encoding='utf-8')
+        transport = (ROOT / 'handoff_transport.py').read_text(encoding='utf-8')
+
+        for text in (task, agents, target):
+            self.assertIn('SYSTEM4_WORDPRESS_HANDOFF_V1', text)
+            self.assertIn('SYSTEM4_WORDPRESS_HANDOFF_V1.json', text)
+            self.assertIn('SYSTEM4_PARENT_CHAT_INLINE_V2', text)
+
+        self.assertNotIn('SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2', task)
+        self.assertNotIn('SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2', target)
+        self.assertIn("HANDOFF_CONTRACT='SYSTEM4_WORDPRESS_HANDOFF_V1'", transport)
+        self.assertIn("INLINE_CONTRACT='SYSTEM4_PARENT_CHAT_INLINE_V2'", transport)
+        self.assertIn("HANDOFF_FILENAME='SYSTEM4_WORDPRESS_HANDOFF_V1.json'", transport)
+        self.assertIn('transport only', transport)
+        self.assertIn('nicht der finale WordPress-Dateivertrag', target)
+        self.assertIn('transport only and is not the final WordPress file contract', agents)
 
     def test_parent_chat_handoff_is_direct_inline_and_wordpress_ready(self):
         task = (ROOT / 'FULL_RULE_BATCH_TASK.md').read_text(encoding='utf-8')
         agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
         for value in [
-            'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json',
+            'SYSTEM4_WORDPRESS_HANDOFF_V1.json',
             'WORDPRESS_DIRECT_IMPORT',
             'direct_wordpress_upload_ready=true',
             'direct_upload_block_reason=null',
@@ -92,6 +112,7 @@ class CodexEconomyContractTests(unittest.TestCase):
         ]:
             self.assertIn(value, task)
         for forbidden in [
+            'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2',
             'system4-parent-chat-handoff',
             'write ONLY `isolated_system4/.handoff/',
             'push that transport branch',
@@ -99,13 +120,13 @@ class CodexEconomyContractTests(unittest.TestCase):
             self.assertNotIn(forbidden, task)
         for value in [
             'DIRECT PARENT-CHAT FILE HANDOFF HARD RULE',
-            'No repository branch, commit, push, artifact, PR-file or external storage is part of the file handoff.',
+            'No repository branch, commit, push, artifact, PR-file or external storage by itself satisfies the terminal file-handoff criterion.',
             'inline-pack',
             'inline-unpack',
-            'WORDPRESS_DIRECT_IMPORT',
-            'direct_wordpress_upload_ready=true',
-            'The user must never be asked to download anything from GitHub or from the Codex task UI.',
-            'System 4 MUST NOT modify the WordPress plugin or its signature switch.',
+            'SYSTEM4_WORDPRESS_HANDOFF_V1',
+            'direct_wordpress_upload_ready',
+            'The user must never be asked to treat a GitHub Actions artifact, repository file, internal temp path or hash as the completed parent-chat delivery.',
+            'System 4 MUST NOT modify the WordPress plugin or its signature switch as part of acceptance.',
         ]:
             self.assertIn(value, agents)
 
