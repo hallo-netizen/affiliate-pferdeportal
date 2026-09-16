@@ -1,0 +1,69 @@
+name: System 4A One Route Diagnostic
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  one-route-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SYSTEM4_FRESH_RUN_TOKEN: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact head
+        run: git rev-parse HEAD
+      - name: Download hash-bound LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Build fresh machine inputs for one article
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-1 1
+      - name: Run exact one article route and capture output
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-1
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_1_PROOF.json
+        run: |
+          set +e
+          set -o pipefail
+          python3 isolated_system4/live_parity_v2.py all 2>&1 | tee /tmp/system4-one-route.log
+          rc=${PIPESTATUS[0]}
+          printf '%s\n' "$rc" > /tmp/system4-one-route.rc
+          echo "SYSTEM4_ONE_ROUTE_DIAGNOSTIC_RC=$rc"
+          exit 0
+      - name: Preserve exact one-route diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-one-route-diagnostic-${{ github.sha }}
+          path: |
+            /tmp/system4-one-route.log
+            /tmp/system4-one-route.rc
+            /tmp/system4-acceptance-output/
+            /tmp/system4-fixture-1/
+          if-no-files-found: warn
+          retention-days: 1
+      - name: Propagate exact route result
+        if: always()
+        run: |
+          set -euo pipefail
+          rc="$(cat /tmp/system4-one-route.rc)"
+          test "$rc" -eq 0
