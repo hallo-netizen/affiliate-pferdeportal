@@ -248,7 +248,7 @@ Aktuelle Arbeit muss eindeutig gebunden sein, ohne Scheinsicherheit durch ein Ge
 BELEG:
 `BAUCONTAINER/HOBBYRAUM_STANDARD.md`
 
-## ARCH-034 – Pferde-Atelier TECHNIK-Büro
+## ARCH-044 – Pferde-Atelier TECHNIK-Büro
 WAS:
 `PROJEKTE/PFERDE_ATELIER/TECHNIK/` als eigenes Betriebs-/Diagnosebüro für WordPress-/Hosting-Speicher, Backups und sichere technische Wartung; dazu campusweites Routing und klare Trennung zum PLUGINS-Büro.
 WARUM:
