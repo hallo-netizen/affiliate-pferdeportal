@@ -1,6 +1,6 @@
 # BILD – MASTERDATEIEN-INVENTAR
 
-STAND: 2026-09-05
+STAND: 2026-09-16
 REGEL: Kein Bestandteil einer Masterdatei wird still verworfen.
 
 ## Quelle BILD-MASTER-001
@@ -142,11 +142,10 @@ Beschreibung:
 Allgemeingültige Bildzentrale für Beiträge, WordPress-Taxonomien und optionale HivePress-Taxonomien mit Pixabay, Pexels und Magnific, sicheren Profilen, Export/Import und Readback-Fallback.
 
 Zuordnung:
-AKTUELLER PRODUKTIVER LIVE-STAND.
+**LETZTER SICHERER PRODUKTIVER LIVE-STAND.**
 
 Beleggrenze:
-Version und Beschreibung sind belastbar.
-Die exakten 2.6.9-Pluginbytes wurden noch nicht als Datei übergeben.
+Version/LIVE-Bestätigung und der spätere exakte 2.6.9-Dateibeleg sind vorhanden. Neuere Dateikandidaten dürfen daraus nicht als LIVE abgeleitet werden.
 
 ## Nichts-verloren-Regel
 
@@ -157,7 +156,6 @@ Wenn weitere Masterdateien eintreffen:
 - aktive Wahrheit, Historie, Fehlerbeleg, Testbeleg, Datenbeleg, Architekturbeleg oder UNGEKLÄRT zuweisen;
 - nichts löschen, solange die Zuordnung nicht abgeschlossen ist.
 
-
 ## Quelle BILD-ALLGEMEIN-006
 
 Datei:
@@ -167,7 +165,7 @@ SHA-256:
 `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
 
 Zuordnung:
-AKTUELLER ALLGEMEINER PLUGIN-DATEIBELEG / MOD-002.
+HISTORISCHER ALLGEMEINER PLUGIN-DATEIBELEG / letzter sicherer WordPress-LIVE-Stand im Pferde Atelier.
 
 ## Quelle BILD-ALLGEMEIN-007
 
@@ -178,9 +176,41 @@ SHA-256:
 `4258ae194e681dcae2fa37467d1a430d48ef2ae7e2889e2f02939456bbb1d434`
 
 Zuordnung:
-AKTUELLER ALLGEMEINER NULLPUNKT-/MASTERBELEG.
+ALLGEMEINER 2.6.9-NULLPUNKT-/MASTERBELEG.
 
 Der darin enthaltene 2.6.9-Installer ist byte-identisch mit BILD-ALLGEMEIN-006.
+
+## Quelle BILD-ALLGEMEIN-008
+
+Datei:
+`ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`
+
+SHA-256:
+`8403bf1ad06be7c6102c37c53648826663fdcbebbe73d27e011364fab51dc5e4`
+
+Zuordnung:
+**HISTORISCHER FEHLER-/VORVERSIONSBELEG – WORDPRESS LIVE FAIL.**
+
+Realer Befund:
+`Post-Type-Hero` sichtbar, aber nicht anklickbar. Root Cause war das fehlende `cpt`-Mapping im JavaScript-Tabregister. Nicht als aktuellen Kandidaten verwenden.
+
+## Quelle BILD-ALLGEMEIN-009
+
+Datei:
+`ALLGEMEINE_BILDZENTRALE_2.7.1_POST_TYPE_HERO_TAB_FIX_INSTALLIEREN.zip`
+
+SHA-256:
+`4453a39dfda7adc7a849428eca41c8ee0d2410a705011c7c254616a789ad0d21`
+
+Zuordnung:
+**AKTUELLER ALLGEMEINER PLUGIN-DATEIBELEG / LOCAL HARD PASS / WORDPRESS-LIVE-RETEST OFFEN.**
+
+Persistente Belege:
+- allgemeines `BILDZENTRALE/CURRENT.zip` byte-identisch;
+- PPA-003 `CURRENT.zip` byte-identisch;
+- Testreport `TESTREPORT_BILDZENTRALE_2.7.1_POST_TYPE_HERO_TAB_FIX_20260916.md`.
+
+Aktuellen Status ausschließlich aus `CURRENT_STATE.md` lesen.
 
 ## Dubletten 2026-09-05
 
