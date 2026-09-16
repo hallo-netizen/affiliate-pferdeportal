@@ -74,6 +74,21 @@ class PreNormalDraftCompactionGateTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.tmp.cleanup()
 
+    def assert_current_category_report(self, report: dict) -> None:
+        self.assertEqual(report.get("status"), "PASS_COMPLETE_1124_CATEGORY_SOURCE_AND_THREE_TYPE_DERIVATION")
+        self.assertEqual(report.get("source_count"), 1124)
+        self.assertEqual(report.get("assignable_count"), 779)
+        expected = {
+            "Beratung": "checklisten-fuer-pferdeanhaenger-beratung",
+            "Vergleich": "checklisten-fuer-pferdeanhaenger-vergleich",
+            "Pflege": "gebisse-pflege",
+        }
+        results = report.get("results", {})
+        self.assertEqual(set(results), set(expected))
+        for article_type, slug in expected.items():
+            self.assertEqual(results[article_type].get("slug"), slug)
+            self.assertGreaterEqual(int(results[article_type].get("margin", 0)), 12)
+
     def test_old_shells_are_unbound_and_current_replacements_exist(self) -> None:
         tests = {p.relative_to(self.ppm).as_posix() for p in (self.ppm / "tests").rglob("test-*.php")}
         self.assertTrue(OLD_PRE_NORMAL_DRAFT_TESTS.issubset(tests))
@@ -86,7 +101,22 @@ class PreNormalDraftCompactionGateTests(unittest.TestCase):
         current = self.ppm / "tests/three-type-bundled-local/test-complete-category-source.php"
         cp = subprocess.run(["php", str(current)], cwd=self.ppm, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False)
         self.assertEqual(cp.returncode, 0, msg=f"STDOUT:\n{cp.stdout}\nSTDERR:\n{cp.stderr}")
-        self.assertIn("TEST_OK|complete-category-source", cp.stdout)
+        report = json.loads(cp.stdout)
+        self.assert_current_category_report(report)
+
+    def test_current_category_policy_rejects_incomplete_proof(self) -> None:
+        bad = {
+            "status": "PASS_COMPLETE_1124_CATEGORY_SOURCE_AND_THREE_TYPE_DERIVATION",
+            "source_count": 1124,
+            "assignable_count": 778,
+            "results": {
+                "Beratung": {"slug": "checklisten-fuer-pferdeanhaenger-beratung", "margin": 64},
+                "Vergleich": {"slug": "checklisten-fuer-pferdeanhaenger-vergleich", "margin": 50},
+                "Pflege": {"slug": "gebisse-pflege", "margin": 43},
+            },
+        }
+        with self.assertRaises(AssertionError):
+            self.assert_current_category_report(bad)
 
     def test_current_normal_draft_runtime_replaces_the_old_safety_intent(self) -> None:
         probe = self.ppm / "__system4-pre-normal-compaction.php"
