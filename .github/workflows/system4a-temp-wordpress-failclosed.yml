@@ -30,56 +30,33 @@ jobs:
           from pathlib import Path
           p=Path('isolated_system4/test_local_end_to_end_chat_handoff.py')
           t=p.read_text(encoding='utf-8')
-
           old="'wordpress_review': {'file_format': 'JSON', 'mime_type': 'application/json', 'intended_next_step': 'WORDPRESS_DIRECT_IMPORT', 'plugin_name': 'Portal SEO Editorial Plan Compiler', 'plugin_version_verified_against': handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION, 'ppm_version_verified_against': '6.7.9', 'direct_wordpress_upload_ready': True, 'direct_upload_block_reason': None, 'required_downstream_components': []},"
-          if t.count(old)!=1:
-              raise SystemExit(f'NEGATIVE_FIXTURE_WORDPRESS_REVIEW_MATCHES:{t.count(old)}')
+          if t.count(old)!=1: raise SystemExit(f'NEGATIVE_FIXTURE_WORDPRESS_REVIEW_MATCHES:{t.count(old)}')
           t=t.replace(old,"'wordpress_review': handoff_transport.wordpress_review(),",1)
-
           old="            self.assertEqual(codex_entry.main(['codex_entry.py', 'start', str(SNAPSHOT), str(first_workspace)]), 0)"
-          if t.count(old)!=1:
-              raise SystemExit(f'STALE_CODEX_START_MATCHES:{t.count(old)}')
+          if t.count(old)!=1: raise SystemExit(f'STALE_CODEX_START_MATCHES:{t.count(old)}')
           t=t.replace(old,"            controller.cmd_ingress(SNAPSHOT, first_workspace, 0)",1)
-
           old="            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None), mock.patch.object(\n"
           new="            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None), mock.patch.object(controller.authoring_contract, 'build', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}), mock.patch.object(controller.authoring_contract, 'validate_bound', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}), mock.patch.object(controller.authoring_contract, 'validate_candidate', return_value=None), mock.patch.object(\n"
-          if t.count(old)!=1:
-              raise SystemExit(f'POSITIVE_AUTHORING_MOCK_ANCHOR_MATCHES:{t.count(old)}')
+          if t.count(old)!=1: raise SystemExit(f'POSITIVE_AUTHORING_MOCK_ANCHOR_MATCHES:{t.count(old)}')
           t=t.replace(old,new,1)
-
           old="            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None):\n                controller.cmd_context(workspace, write_json(root / 'pack.json', pack), write_json(root / 'plan.json', plan))"
           new="            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None), mock.patch.object(controller.authoring_contract, 'build', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}):\n                controller.cmd_context(workspace, write_json(root / 'pack.json', pack), write_json(root / 'plan.json', plan))"
-          if t.count(old)!=1:
-              raise SystemExit(f'NEGATIVE_CONTEXT_MOCK_ANCHOR_MATCHES:{t.count(old)}')
+          if t.count(old)!=1: raise SystemExit(f'NEGATIVE_CONTEXT_MOCK_ANCHOR_MATCHES:{t.count(old)}')
           t=t.replace(old,new,1)
-
           old="            with self.assertRaisesRegex(controller.Fail, 'ARTICLE_DESIGN_GUARD_FAIL:DESIGN_TABLE_SYSTEM129_CLASS_MISSING'):\n                controller.cmd_draft(workspace, bad_path)"
           new="            with mock.patch.object(controller.authoring_contract, 'validate_bound', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}), mock.patch.object(controller.authoring_contract, 'validate_candidate', return_value=None), self.assertRaisesRegex(controller.Fail, 'ARTICLE_DESIGN_GUARD_FAIL:DESIGN_TABLE_SYSTEM129_CLASS_MISSING'):\n                controller.cmd_draft(workspace, bad_path)"
-          if t.count(old)!=1:
-              raise SystemExit(f'NEGATIVE_DRAFT_MOCK_ANCHOR_MATCHES:{t.count(old)}')
+          if t.count(old)!=1: raise SystemExit(f'NEGATIVE_DRAFT_MOCK_ANCHOR_MATCHES:{t.count(old)}')
           t=t.replace(old,new,1)
-
           old="            collected = batch_gate.collect_batch(SNAPSHOT, state_paths, batch_out)"
           new="            with mock.patch.object(batch_gate.authoring_contract, 'validate_bound', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}):\n                collected = batch_gate.collect_batch(SNAPSHOT, state_paths, batch_out)"
-          if t.count(old)!=1:
-              raise SystemExit(f'BATCH_AUTHORING_MOCK_ANCHOR_MATCHES:{t.count(old)}')
+          if t.count(old)!=1: raise SystemExit(f'BATCH_AUTHORING_MOCK_ANCHOR_MATCHES:{t.count(old)}')
           t=t.replace(old,new,1)
-
           p.write_text(t,encoding='utf-8')
-          for path in [
-              Path('isolated_system4/handoff_transport.py'),
-              Path('isolated_system4/live_parity_v2.py'),
-              Path('isolated_system4/full_local_acceptance.py'),
-              Path('isolated_system4/test_local_end_to_end_chat_handoff.py'),
-              Path('isolated_system4/test_handoff_transport.py'),
-          ]:
+          for path in [Path('isolated_system4/handoff_transport.py'),Path('isolated_system4/live_parity_v2.py'),Path('isolated_system4/full_local_acceptance.py'),Path('isolated_system4/test_local_end_to_end_chat_handoff.py'),Path('isolated_system4/test_handoff_transport.py')]:
               text=path.read_text(encoding='utf-8')
-              if 'DIRECT_IMPORT_PLUGIN_VERSION' in text:
-                  raise SystemExit(f'STALE_DIRECT_IMPORT_VERSION:{path}')
-              if "'direct_wordpress_upload_ready':True" in text or "'direct_wordpress_upload_ready': True" in text:
-                  raise SystemExit(f'STALE_DIRECT_IMPORT_READY:{path}')
-          if "codex_entry.main(['codex_entry.py', 'start'" in p.read_text(encoding='utf-8'):
-              raise SystemExit('STALE_DIRECT_CODEX_START')
+              if 'DIRECT_IMPORT_PLUGIN_VERSION' in text: raise SystemExit(f'STALE_DIRECT_IMPORT_VERSION:{path}')
+              if "'direct_wordpress_upload_ready':True" in text or "'direct_wordpress_upload_ready': True" in text: raise SystemExit(f'STALE_DIRECT_IMPORT_READY:{path}')
           print('SYSTEM4_WORDPRESS_FAILCLOSED_NO_STALE_BINDING_PASS')
           PY
       - name: Check diff
@@ -92,11 +69,12 @@ jobs:
           python3 -m unittest -v test_handoff_transport.py
           python3 -m unittest -v test_local_end_to_end_chat_handoff.py
           python3 -m unittest -v test_machine_route_lock_contract.py
-      - name: Commit patch and remove helpers
+      - name: Commit tested non-workflow patch
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm -f isolated_system4/_temp_wordpress_failclosed_patch.py .github/workflows/system4a-temp-wordpress-failclosed.yml
-          git add isolated_system4/handoff_transport.py isolated_system4/live_parity_v2.py isolated_system4/full_local_acceptance.py isolated_system4/test_local_end_to_end_chat_handoff.py isolated_system4/test_handoff_transport.py .github/workflows/system4a-real-acceptance.yml
+          git rm -f isolated_system4/_temp_wordpress_failclosed_patch.py
+          git add isolated_system4/handoff_transport.py isolated_system4/live_parity_v2.py isolated_system4/full_local_acceptance.py isolated_system4/test_local_end_to_end_chat_handoff.py isolated_system4/test_handoff_transport.py
           git commit -m 'fix(system4a): fail closed on unproven WordPress direct import'
           git push origin HEAD:hobbyroom/system4a-startgate-test-20260914
