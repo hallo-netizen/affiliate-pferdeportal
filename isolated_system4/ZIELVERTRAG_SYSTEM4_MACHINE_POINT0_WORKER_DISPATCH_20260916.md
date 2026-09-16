@@ -52,6 +52,23 @@ Frische ist eine maschinelle Eigenschaft des aktuellen Runs, keine Bezeichnung i
 
 ## Vollständige Textmaschine
 
+Die **vollständige Textmaschine ist fester Bestandteil jedes einzelnen Artikelwegs**. Es ist nicht zulässig, nur LanguageTool oder nur einen PPM-Sammelstatus aufzurufen und dies als Textmaschinen-PASS zu behandeln.
+
+Für jeden Artikel müssen in der vorhandenen autoritativen Kette mindestens vollständig durchlaufen und an exakt den aktuell geprüften Draft gebunden sein:
+
+1. Authoring-Contract-Bindung und Candidate-Prüfung;
+2. Content-Guard einschließlich Fakten-/Repair-Continuity-Grenzen;
+3. Design-Guard;
+4. Draft-SHA- und Production-Context-Bindung;
+5. No-Legacy-Runtime-Prüfung;
+6. No-External-Links-Prüfung;
+7. echtes SHA-gebundenes LanguageTool 6.8 mit null ungelösten Findings;
+8. echter PPM-6.7.9-Content-Validator aus exakt dem gebundenen Paket;
+9. PPM Technical Status, Content Quality Status und Fail-Closed-Status;
+10. sämtliche für den Artikel anwendbaren PPM-Regeln und Pflichtnachweise aus Registry/Coverage und dem aktuellen Pflichtgate.
+
+`SYSTEM4_FULL_PRODUCTION_CHECK_V1` darf nur für den **aktuellen `draft_sha256`** gelten. Die Full-Route muss die vorhandenen Einzelnachweise (`no_legacy`, `no_external_links`, `languagetool`, `ppm679`) einzeln vor dem Weitergang verlangen; ein fehlender Einzelbeleg = FAIL.
+
 Unverändert verpflichtend sind die echten autoritativen Prüfer und Regeln, insbesondere LanguageTool 6.8 und PPM 6.7.9 sowie die bestehenden Textmaschinen-/SEO-/Link-/Metadaten-/Design-/WordPress-Grenzen.
 
 Für die PPM-Detailabnahme gilt fail-closed:
@@ -77,11 +94,16 @@ Jeder reparierbare Fehler muss:
 1. zum autoritativen Owner zurückgegeben werden;
 2. denselben gebundenen Artikel/dasselbe Work-Item behalten;
 3. einen maschinell prüfbaren Continuation-Beleg tragen, mindestens Fehleridentität/-hash, Owner/Ziel, Reparaturzyklus, `terminal=false`, `continuation_required=true`;
-4. nach der Reparatur wieder dem Controller übergeben werden, der den nächsten Schritt bestimmt.
+4. nach der Reparatur wieder dem Controller übergeben werden, der den nächsten Schritt bestimmt;
+5. danach **erneut durch die vollständige Textmaschine mit allen oben genannten Einzelprüfungen laufen**. Es reicht ausdrücklich nicht, nur den zuvor roten Einzelprüfer nachzuprüfen.
+
+Für `DRAFT_BODY / SAME_ARTICLE_BODY` ist die bereits vorhandene Reparaturschleife verbindlich: derselbe gebundene Worker erhält den gleichen Artikel mit dem konkreten Finding, liefert nur die zulässige Reparatur zurück, `controller repair` prüft die Repair-Grenzen, anschließend startet `fullcheck` für den reparierten Draft erneut vollständig.
+
+Eine bestehende Reparaturschleife darf in einer übergeordneten Route nicht dadurch neutralisiert werden, dass deren nichtterminaler Fortsetzungscode wie ein terminaler Fehler behandelt wird.
 
 Fehlender, stale, falscher oder manipulierter Rückgabe-Beleg = FAIL.
 
-Terminal blockieren dürfen nur echte nicht reparierbare technische, Integritäts-, Sicherheits-, Identitäts-, Binding-/Hash- oder verbotene Publish-Fehler.
+Terminal blockieren dürfen nur echte nicht reparierbare technische, Integritäts-, Sicherheits-, Identitäts-, Binding-/Hash- oder verbotene Publish-Fehler. Eine Rückgabe an einen anderen autoritativen Owner bleibt eine Continuation und darf nicht als fachlicher Endfehler umgedeutet werden.
 
 ## Batch
 
@@ -109,12 +131,13 @@ GitHub-Artefakt, Repository-Datei, interner Temp-Pfad oder Hash allein erfüllen
 
 Gesamt-PASS ist erst erlaubt, wenn im selben vollständigen Acceptance-Lauf tatsächlich erfolgreich durchlaufen wurden:
 
-`Parent/Chat → Point-0 → Root → Supervisor → Worker-Dispatch → Research → Facts → Context → Draft → vollständige Textmaschine → erforderliche Same-Article-Repairs → Batch → Handoff → exakte Datei im Parent-Chat`
+`Parent/Chat → Point-0 → Root → Supervisor → Worker-Dispatch → Research → Facts → Context → Draft → vollständige Textmaschine → erforderliche Same-Article-Repairs → vollständige Textmaschine erneut → Batch → Handoff → exakte Datei im Parent-Chat`
 
 und dabei:
 - ein neuer Artikel dieses Runs verwendet wurde;
 - kein Codex im Acceptance-Test lief;
 - alle verpflichtenden positiven und negativen Prüfungen bestanden wurden;
+- nach jeder Reparatur sämtliche anwendbaren Einzelprüfungen erneut gegen den finalen Draft gelaufen sind;
 - kein Pflichtprüfer und keine Schutz-/Nachweisfunktion übersprungen wurde; eine alte Testhülle gilt nur bei zuvor hart bestandenem 1:1-Ersatzgate als abgelöst;
 - die exakte `SYSTEM4_WORDPRESS_HANDOFF_V1.json` tatsächlich im Parent-Chat verfügbar ist.
 
