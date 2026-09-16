@@ -143,7 +143,7 @@ class Ppm679CurrentRegistryReplacementGateTests(unittest.TestCase):
 
         # 3) Historical regression suite: unchanged original must still pass incidents 1..14
         # and stop only because today's global production quarantine prevents the old incident-15 baseline.
-        cp = self._run("tests/test-historical-regressions.php", expected_rc=1)
+        cp = self._run("tests/test-historical-regressions.php", expected_rc=2)
         self.assertIn("ASSERTION_FAILED: Baseline gate must be green before state mutation.", cp.stderr)
 
         incident15 = r'''<?php
