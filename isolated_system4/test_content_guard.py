@@ -1,5 +1,10 @@
 import hashlib
+import json
+import subprocess
+import tempfile
 import unittest
+import zipfile
+from pathlib import Path
 
 import content_guard
 
@@ -106,6 +111,96 @@ class ContentGuardTests(unittest.TestCase):
         replacement = '<article><p>' + ('Völlig anderer Inhalt ohne Bezug. ' * 12) + '</p></article>'
         with self.assertRaisesRegex(content_guard.ContentGuardError, 'REPAIR_SCOPE_TOO_LARGE'):
             content_guard.validate_repair_continuity(old, replacement)
+
+    def test_hr_cont_002_sections_order_word_list_conclusion_are_individually_effective(self):
+        'HR-CONT-002 required sections/order/word floor/list/conclusion must each be effect-sensitive.'
+        package = Path(__file__).resolve().parent.parent / 'control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+        self.assertTrue(package.is_file())
+        with tempfile.TemporaryDirectory(prefix='system4-hr-cont-002-') as td:
+            root = Path(td)
+            with zipfile.ZipFile(package) as zf:
+                zf.extractall(root)
+            ppm = root / 'portal-production-machine'
+
+            def run(rel: str) -> subprocess.CompletedProcess[str]:
+                return subprocess.run(
+                    ['php', str(ppm / rel)], cwd=ppm, text=True,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False,
+                )
+
+            positive = run('tests/test-g8-targeted-repair-faq-chain.php')
+            self.assertEqual(positive.returncode, 0, positive.stderr)
+            self.assertEqual(json.loads(positive.stdout).get('status'), 'PASS')
+
+            word_probe = ppm / 'tests/__system4_hr_cont_002_word.php'
+            word_probe.write_text(r'''<?php
+require __DIR__.'/bootstrap-test.php';
+$html='<p>Kurz und absichtlich deutlich unter dem verbindlichen Mindestumfang.</p>';
+$r=PPM679_Content_Validator::check_gold_reference(array('title'=>'Kurzer Kontrolltext','article_type'=>'FAQ','content_html'=>$html,'content_hash'=>hash('sha256',$html)),'hr_cont_002_word','local',array('article_type'=>'FAQ'));
+$codes=array_values(array_unique(array_map(fn($e)=>(string)($e['error_code']??''),(array)($r['errors']??array()))));
+ppm_test_assert(in_array('BLOCKED_CONTENT_WORD_FLOOR',$codes,true),'word-floor mutation must expose BLOCKED_CONTENT_WORD_FLOOR');
+echo json_encode(array('status'=>'PASS_HR_CONT_002_WORD','codes'=>$codes),JSON_UNESCAPED_SLASHES)."\n";
+?>''', encoding='utf-8')
+            baseline = run('tests/__system4_hr_cont_002_word.php')
+            self.assertEqual(baseline.returncode, 0, baseline.stderr)
+            cv = ppm / 'includes/content-validator.php'
+            original_cv = cv.read_text(encoding='utf-8')
+            word_branch = 'if ($word_count<self::MIN_WORDS) {'
+            self.assertEqual(original_cv.count(word_branch), 1, word_branch)
+            cv.write_text(original_cv.replace(word_branch, 'if (false) {', 1), encoding='utf-8')
+            killed = run('tests/__system4_hr_cont_002_word.php')
+            self.assertNotEqual(killed.returncode, 0, 'HR-CONT-002 word-floor mutation survived')
+            cv.write_text(original_cv, encoding='utf-8')
+
+            section_probe = ppm / 'tests/__system4_hr_cont_002_sections.php'
+            section_probe.write_text(r'''<?php
+require __DIR__.'/bootstrap-test.php';
+function s4_quality($html,$sections){
+  $req=array('contract'=>'SECTION_REQUIREMENTS_V1','sections'=>$sections);
+  $item=array('article_type'=>'FAQ','section_requirements'=>$req,'source_snapshot_id'=>'','runtime_order'=>array('allowed_fact_ids'=>array(),'links'=>array()));
+  $generated=array('article_type'=>'FAQ','title'=>'Welche Prüfung ist erforderlich?','content_html'=>$html,'content_hash'=>hash('sha256',$html));
+  $rm=new ReflectionMethod(PPM679_Content_Validator::class,'quality_check_v5'); $rm->setAccessible(true);
+  return $rm->invoke(null,$generated,$item,PPM679_Article_Type_Validator::type_definition('FAQ'),'hr_cont_002_sections','local',hash('sha256',$html));
+}
+function s4_codes($r){return array_values(array_unique(array_map(fn($e)=>(string)($e['error_code']??''),(array)($r['errors']??array()))));}
+$sections=array(
+ array('section_id'=>'a','order'=>1,'required_concepts'=>array(),'content_obligations'=>array('heading_required'=>false,'paragraph_required'=>false,'list_roles'=>array(),'link_roles'=>array(),'table_policy'=>'FORBIDDEN')),
+ array('section_id'=>'b','order'=>2,'required_concepts'=>array(),'content_obligations'=>array('heading_required'=>false,'paragraph_required'=>false,'list_roles'=>array(),'link_roles'=>array(),'table_policy'=>'FORBIDDEN'))
+);
+$missing=s4_codes(s4_quality('<section data-section-id="a"></section>',$sections));
+ppm_test_assert(in_array('BLOCKED_CONTENT_REQUIRED_SECTION_MISSING',$missing,true),'missing section must expose exact blocker');
+$reversed=s4_codes(s4_quality('<section data-section-id="b"></section><section data-section-id="a"></section>',$sections));
+ppm_test_assert(in_array('BLOCKED_CONTENT_SECTION_ORDER',$reversed,true),'reversed sections must expose exact order blocker');
+echo json_encode(array('status'=>'PASS_HR_CONT_002_SECTIONS','missing'=>$missing,'reversed'=>$reversed),JSON_UNESCAPED_SLASHES)."\n";
+?>''', encoding='utf-8')
+            baseline = run('tests/__system4_hr_cont_002_sections.php')
+            self.assertEqual(baseline.returncode, 0, baseline.stderr)
+            missing_branch = "if ($id==='' || !in_array($id,$actual_ids,true)) {"
+            order_branch = 'if ($expected_ids!==$actual_ids) {'
+            self.assertEqual(original_cv.count(missing_branch), 1, missing_branch)
+            self.assertEqual(original_cv.count(order_branch), 1, order_branch)
+            cv.write_text(original_cv.replace(missing_branch, 'if (false) {', 1), encoding='utf-8')
+            killed = run('tests/__system4_hr_cont_002_sections.php')
+            self.assertNotEqual(killed.returncode, 0, 'HR-CONT-002 required-section mutation survived')
+            cv.write_text(original_cv.replace(order_branch, 'if (false) {', 1), encoding='utf-8')
+            killed = run('tests/__system4_hr_cont_002_sections.php')
+            self.assertNotEqual(killed.returncode, 0, 'HR-CONT-002 section-order mutation survived')
+            cv.write_text(original_cv, encoding='utf-8')
+
+            wave2 = run('tests/test-wave2-content-mutations.php')
+            self.assertEqual(wave2.returncode, 0, wave2.stderr)
+            gate = ppm / 'includes/content-structure-language-gate.php'
+            original_gate = gate.read_text(encoding='utf-8')
+            branches = (
+                ("if (count($counts)<(int)($contract['lists']['minimum_lists']??1) || $max<$required) {", 'HR-CONT-002 list mutation survived'),
+                ('if ($body===null || $ratio<$min || $paragraphs<$min_p) {', 'HR-CONT-002 conclusion mutation survived'),
+            )
+            for old, message in branches:
+                self.assertEqual(original_gate.count(old), 1, old)
+                gate.write_text(original_gate.replace(old, 'if (false) {', 1), encoding='utf-8')
+                killed = run('tests/test-wave2-content-mutations.php')
+                self.assertNotEqual(killed.returncode, 0, message)
+                gate.write_text(original_gate, encoding='utf-8')
 
 
 if __name__ == '__main__':
