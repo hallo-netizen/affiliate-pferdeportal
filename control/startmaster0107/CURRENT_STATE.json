@@ -36,8 +36,9 @@
     "PR230_FACT_PACK_SOURCE_ID_BINDING_MERGED",
     "SYSTEM4_ACCEPTANCE_RUN_35146953351_PASS"
   ],
-  "next_allowed_step": "RECONCILE_107007_WITH_PROVEN_SYSTEM4_ROUTE",
+  "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
+    "RECONCILE_107007_WITH_PROVEN_SYSTEM4_ROUTE",
     "RUN_REAL_107007_PRODUCTION_TO_WORDPRESS_IMPORT",
     "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH"
   ],
@@ -155,9 +156,9 @@
   "active_work_context": "SYSTEM4_PRODUCTION_107007_RECONCILIATION",
   "active_acceptance_work": {
     "branch": "hobbyroom/system4-chat-output-acceptance-v1",
-    "last_completed_tested_head": "7ac8e365b39652aa78597c8b00096f91549e04bf",
-    "last_completed_run_id": 35146953351,
-    "last_completed_job_id": 104965363191,
+    "last_completed_tested_head": "72cc44924c19ea6f08f09d2f9285401430ac968f",
+    "last_completed_run_id": 35149269659,
+    "last_completed_job_id": 0,
     "last_completed_run_result": "PASS",
     "tests_status": "PASS",
     "first_blocked_gate": null,
@@ -173,8 +174,7 @@
     "terminal_pass_requires_parent_chat_file": true,
     "final_handoff_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
     "proof": {
-      "workflow_run": 35146953351,
-      "workflow_job": 104965363191,
+      "workflow_run": 35149269659,
       "result": "SUCCESS",
       "ppm679_original_positive_negative": "PASS",
       "repair_regression": "PASS",
@@ -191,9 +191,9 @@
     "code": "SYSTEM4_PRODUCTION_107007_ROUTE_NOT_RECONCILED",
     "scope": "SYSTEM4_PRODUCTION_107007_RECONCILIATION",
     "branch": "hobbyroom/system4-chat-output-acceptance-v1",
-    "tested_head": "7ac8e365b39652aa78597c8b00096f91549e04bf",
-    "acceptance_run_id": 35146953351,
-    "acceptance_job_id": 104965363191,
+    "tested_head": "72cc44924c19ea6f08f09d2f9285401430ac968f",
+    "acceptance_run_id": 35149269659,
+    "acceptance_job_id": 0,
     "gate": "PRODUCTION_107007_MUST_USE_PROVEN_SYSTEM4_FULL_ROUTE",
     "root_cause": "107007 remains bound to the older fachworkflow_handoff production path; the proven System4 full route is not yet the production execution path.",
     "resolved": false,
@@ -208,21 +208,21 @@
     ]
   },
   "last_safe_main_sha": "66c4224d68532307f6c7f69aff81d1da04cae4e7",
-  "last_safe_change": "System4 acceptance is fully green on 7ac8e365b39652aa78597c8b00096f91549e04bf / run 35146953351. Production 107007 remains blocked until it is reconciled with that proven route and a real production run passes.",
+  "last_safe_change": "System4 acceptance is fully green through run 35149269659. Production 107007 remains blocked until it is reconciled with that proven route and a real production run passes.",
   "hobbyroom_status": "AKTIV_BLOCKED_ON_107007_RECONCILIATION",
   "hobbyroom": {
     "status": "AKTIV_BLOCKED_ON_107007_RECONCILIATION",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
     "current_focus": "SYSTEM4_PRODUCTION_107007_RECONCILIATION",
     "branch": "hobbyroom/system4-chat-output-acceptance-v1",
-    "last_completed_tested_head": "7ac8e365b39652aa78597c8b00096f91549e04bf",
+    "last_completed_tested_head": "72cc44924c19ea6f08f09d2f9285401430ac968f",
     "return_path": "SAME_ARTICLE_EXISTING_REPAIR_ROUTE_THEN_COMPLETE_TEXTMACHINE_RECHECK",
     "terminal_block_policy": "ONLY_NONREPAIRABLE_TECHNICAL_INTEGRITY_SECURITY_IDENTITY_BINDING_HASH_OR_FORBIDDEN_PUBLISH_FAILURE",
     "next_action": "Bind production 107007 to the already proven System4 full route without introducing a second route or changing any checker."
   },
   "next_action": {
     "goal": "Make the existing 107007 production start use the already proven System4 route, then prove a real production start-to-WordPress-import run.",
-    "first_step": "Reconcile only the 107007 execution binding with isolated_system4/full_route_start.py and its existing repair loop.",
+    "first_step": "Reconcile only the 107007 execution binding with isolated_system4/parent_start.py -> root/supervisor/worker_dispatch/codex_entry/full_route_start existing chain.",
     "after_first_step": "Run the real production path positively and negatively and require the exact WordPress import artifact, SHA/bytes, requesting-chat binding and fail-closed negatives.",
     "terminal_acceptance": "Only after real production PASS may CURRENT_STATE be set to final complete and the entrance door reduced to navigation-only truth.",
     "forbidden": [
