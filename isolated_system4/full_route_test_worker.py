@@ -19,8 +19,9 @@ def _balance_conclusion(body:str,state:dict)->str:
     section=match.group(1); last_p=section.rfind('</p>')
     if last_p<0: raise RuntimeError('CONCLUSION_PARAGRAPH_MISSING')
     keyword=state['article']['target_keyword']
-    addition=(f' Für {keyword} bleibt deshalb die Auswahl an den bereits gebundenen Kriterien auszurichten.'
-              ' Der gebundene Quellenstand setzt zugleich die Grenze für das Fazit; zusätzliche Tatsachen werden ausdrücklich nicht ergänzt.')
+    addition=(f' Für {keyword} bleibt die Auswahl an den gebundenen Kriterien auszurichten.'
+              f' Beim Fazit zu {keyword} setzt der Quellenstand die Grenze.'
+              f' Zusätzliche Tatsachen zu {keyword} werden nicht ergänzt.')
     section=section[:last_p]+addition+section[last_p:]
     result=body[:match.start(1)]+section+body[match.end(1):]
     authoring_contract.validate_candidate(result,state['authoring_contract']); return result
