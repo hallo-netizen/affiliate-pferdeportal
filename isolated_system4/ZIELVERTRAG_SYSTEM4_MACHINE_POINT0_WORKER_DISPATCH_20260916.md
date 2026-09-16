@@ -58,12 +58,16 @@ Für die PPM-Detailabnahme gilt fail-closed:
 - exakt das SHA-gebundene PPM-6.7.9-Paket ist Regel-/Testautorität;
 - Registry und Coverage-Matrix müssen exakt übereinstimmen;
 - aktuell: 557 registrierte Regeln / 557 Coverage-Zuordnungen;
-- jede registrierte Regel muss ihren vorgesehenen positiven **und** negativen Originaltest binden und beide müssen tatsächlich PASS sein;
-- `UNKNOWN`, `UNMAPPED`, `UNTESTED`, fehlender, übersprungener oder roter Originaltest = FAIL;
-- jeder Originaltest läuft in einer frischen bytegleichen Paketkopie;
-- erforderlicher Original-Runner-/Bootstrap-/Baseline-/Signatur-Kontext wird reproduziert, niemals die Regel oder der Test passend gemacht.
+- **unveränderlich ist die Schutz-/Nachweisfunktion jeder Regel, nicht eine historisch gewordene Testhülle**;
+- eine historische oder durch einen neueren PPM-Vertrag überholte Original-Testdatei darf das aktuelle Pflichtgate nur verlassen, wenn ihr Original unverändert im signierten PPM-Paket erhalten bleibt und ihre Überholung gegen die aktuellen PPM-Verträge hart nachgewiesen ist;
+- für jede solche Testhülle müssen sämtliche bisherigen Schutzfunktionen, Registry-Bindungen und relevanten Fehlercodes 1:1 an aktuelle, mindestens gleich starke positive und negative Nachweise gebunden sein;
+- dieser Ersatznachweis muss vor dem PPM-Pflichtgate gegen exakt dasselbe SHA-gebundene Paket mandatory und fail-closed PASS sein; fehlender, roter oder gedrifteter Ersatznachweis = FAIL;
+- gibt es keinen vollständig bewiesenen Ersatz, bleibt der betreffende Originaltest verpflichtender Bestandteil des aktuellen Gates;
+- alle nicht ersetzten aktuellen Originaltests laufen weiterhin in frischen bytegleichen Paketkopien und müssen PASS sein;
+- `UNKNOWN`, `UNMAPPED`, `UNTESTED`, fehlender oder roter aktueller Pflichtnachweis = FAIL;
+- erforderlicher aktueller Runner-/Bootstrap-/Baseline-/Signatur-Kontext wird reproduziert; Regel, Schutzfunktion und Fehlergrenze werden niemals passend gemacht oder abgeschwächt.
 
-Ein Sammel-PASS oder die bloße Anzahl grüner Testdateien ersetzt diesen Einzelnachweis nicht.
+Ein Sammel-PASS oder die bloße Anzahl grüner Testdateien ersetzt diesen Einzelnachweis nicht. Ebenso ist das bloße Entfernen, Überspringen oder Umbenennen eines roten Tests ohne vollständigen Ersatznachweis verboten.
 
 ## Repair / verpflichtende Rückgabe
 
@@ -111,7 +115,7 @@ und dabei:
 - ein neuer Artikel dieses Runs verwendet wurde;
 - kein Codex im Acceptance-Test lief;
 - alle verpflichtenden positiven und negativen Prüfungen bestanden wurden;
-- kein Pflichtprüfer/Originaltest übersprungen wurde;
+- kein Pflichtprüfer und keine Schutz-/Nachweisfunktion übersprungen wurde; eine alte Testhülle gilt nur bei zuvor hart bestandenem 1:1-Ersatzgate als abgelöst;
 - die exakte `SYSTEM4_WORDPRESS_HANDOFF_V1.json` tatsächlich im Parent-Chat verfügbar ist.
 
 Ein interner oder GitHub-seitiger PASS ohne diese letzte Dateiübergabe ist kein terminaler Gesamt-PASS.
