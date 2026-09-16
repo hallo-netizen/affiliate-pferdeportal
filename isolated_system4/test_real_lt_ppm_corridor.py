@@ -103,6 +103,9 @@ class RealLtPpmCorridorTests(unittest.TestCase):
                 self.assertNotIn('example.org',source['source_url'])
                 self.assertEqual(source['source_kind'],'PARENT_CHAT_REAL_WEB_SNAPSHOT')
                 body=valid_real_article(state,index)
+                if index==0:
+                    self.assertIn('ausschließlich',body,'REAL_LT_REPAIR_FIXTURE_SENTINEL_MISSING')
+                    body=body.replace('ausschließlich','ausschlieslich',1)
                 draft=root/f'article-{index}.html';draft.write_text(body,encoding='utf-8')
                 self.assertEqual(controller.main(['controller.py','draft',str(workspace),str(draft)]),0)
                 final,repairs=self._fullcheck_with_existing_same_article_repair(root,workspace,index)
