@@ -14,7 +14,40 @@ jobs:
           ref: hobbyroom/system4a-startgate-test-20260914
           fetch-depth: 0
       - name: Apply exact patch
-        run: python3 isolated_system4/_temp_wordpress_failclosed_patch.py
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('isolated_system4/_temp_wordpress_failclosed_patch.py')
+          t=p.read_text(encoding='utf-8')
+          old="Path('isolated_system4/full_local_acceptance.py'),Path('isolated_system4/test_local_end_to_end_chat_handoff.py')"
+          if t.count(old)!=1:
+              raise SystemExit('TEMP_PATCH_GUARD_LOCATION_MISMATCH')
+          p.write_text(t.replace(old,"Path('isolated_system4/full_local_acceptance.py')",1),encoding='utf-8')
+          PY
+          python3 isolated_system4/_temp_wordpress_failclosed_patch.py
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('isolated_system4/test_local_end_to_end_chat_handoff.py')
+          t=p.read_text(encoding='utf-8')
+          old="'wordpress_review': {'file_format': 'JSON', 'mime_type': 'application/json', 'intended_next_step': 'WORDPRESS_DIRECT_IMPORT', 'plugin_name': 'Portal SEO Editorial Plan Compiler', 'plugin_version_verified_against': handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION, 'ppm_version_verified_against': '6.7.9', 'direct_wordpress_upload_ready': True, 'direct_upload_block_reason': None, 'required_downstream_components': []},"
+          if t.count(old)!=1:
+              raise SystemExit(f'NEGATIVE_FIXTURE_WORDPRESS_REVIEW_MATCHES:{t.count(old)}')
+          p.write_text(t.replace(old,"'wordpress_review': handoff_transport.wordpress_review(),",1),encoding='utf-8')
+          for path in [
+              Path('isolated_system4/handoff_transport.py'),
+              Path('isolated_system4/live_parity_v2.py'),
+              Path('isolated_system4/full_local_acceptance.py'),
+              Path('isolated_system4/test_local_end_to_end_chat_handoff.py'),
+              Path('isolated_system4/test_handoff_transport.py'),
+          ]:
+              text=path.read_text(encoding='utf-8')
+              if 'DIRECT_IMPORT_PLUGIN_VERSION' in text:
+                  raise SystemExit(f'STALE_DIRECT_IMPORT_VERSION:{path}')
+              if "'direct_wordpress_upload_ready':True" in text or "'direct_wordpress_upload_ready': True" in text:
+                  raise SystemExit(f'STALE_DIRECT_IMPORT_READY:{path}')
+          print('SYSTEM4_WORDPRESS_FAILCLOSED_NO_STALE_BINDING_PASS')
+          PY
       - name: Check diff
         run: |
           git diff --check
