@@ -1,6 +1,6 @@
 # WORDPRESS-REGISTER
 
-STAND: 2026-09-12
+STAND: 2026-09-16
 STATUS: CAMPUSWEITER TECHNOLOGIE-INDEX
 
 ## 1-KLICK-ÜBERSICHT
@@ -37,30 +37,38 @@ MOD-ID:
 MOD-002
 
 Aktuellster allgemeiner Plugin-Dateibeleg:
-`ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
+`ALLGEMEINE_BILDZENTRALE_2.7.1_POST_TYPE_HERO_TAB_FIX_INSTALLIEREN.zip`
 
 Version:
-**2.6.9**
+**2.7.1**
 
 SHA-256:
-`748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
+`4453a39dfda7adc7a849428eca41c8ee0d2410a705011c7c254616a789ad0d21`
 
-Nullpunkt:
+Persistente technische Ablage:
+`/Campus-Plugins/ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
+
+Pferde-Ausgabekopie:
+`/Campus-Plugins/PFERDE_ATELIER/PPA-003/CURRENT.zip`
+
+Byte-Abgleich 2026-09-16:
+Release 2.7.1 = allgemeines `CURRENT.zip` = PPA-003 `CURRENT.zip`.
+
+Wichtig zur Statusgrenze:
+- letzter sicherer WordPress-LIVE-Stand bleibt **2.6.9**;
+- 2.7.0 ist realer WordPress-LIVE-FAIL am nicht anklickbaren `Post-Type-Hero`-Tab;
+- 2.7.1 ist **LOCAL HARD PASS / WordPress-LIVE-Retest offen**;
+- aktuellen Projekt-/LIVE-Status ausschließlich aus `PROJEKTE/PFERDE_ATELIER/BILD/CURRENT_STATE.md` lesen.
+
+Historische allgemeine Dateibelege:
+- 2.7.0 `ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`, SHA-256 `8403bf1ad06be7c6102c37c53648826663fdcbebbe73d27e011364fab51dc5e4` – LIVE FAIL;
+- 2.6.9 `ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`, SHA-256 `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e` – letzter sicherer LIVE-Stand.
+
+Nullpunkt 2.6.9:
 `NULLPUNKT_BILDSYSTEM_NEU_069_PROMPTGRENZE_REPARIERT.zip`
 
 Nullpunkt SHA-256:
 `4258ae194e681dcae2fa37467d1a430d48ef2ae7e2889e2f02939456bbb1d434`
-
-Byte-Abgleich:
-separater 2.6.9-Installer = im Nullpunkt eingebetteter 2.6.9-Installer.
-
-Pferde-Atelier:
-- WordPress-Live-Version 2.6.9 laut bestehender Nutzerbestätigung
-- historische Pferde-Dateien: Plugin 2.4.9 + Master 049
-- Projekt-Konfig/Migrationsakten separat erhalten
-
-GitHub:
-auf aktuellem `main` kein separater Bildzentrale-Dateistand unter diesen Namen gefunden.
 
 Hauptquellen:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
