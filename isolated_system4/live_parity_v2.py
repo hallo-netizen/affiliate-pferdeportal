@@ -2,6 +2,8 @@ from __future__ import annotations
 import copy, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 
+import handoff_transport
+
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
 FIX=Path(os.environ.get('SYSTEM4_LIVE_PARITY_FIXTURE','')).expanduser()
@@ -212,7 +214,7 @@ def _handoff_payload(states:list[dict],items:list[dict],batch_sha:str)->dict:
     for i,(s,itemrow) in enumerate(zip(states,items)):
         ev=s['checks']['production_evidence']['evidence']
         rows.append({'index':i,'title':itemrow['title'],'target_keyword':itemrow['target_keyword'],'category':itemrow['category'],'article_type':itemrow['article_type'],'plan_slot':itemrow['plan_slot'],'final_draft_sha256':s['draft_sha256'],'revision_count':s['revision'],'body':s['draft_markdown'],'production_context':s['production_context'],'languagetool':ev['languagetool'],'ppm679':ev['ppm679']})
-    return {'contract':'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2','batch_sha256':batch_sha,'publish_allowed':False,'signing_deferred':True,'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS','wordpress_review':{'file_format':'JSON','mime_type':'application/json','intended_next_step':'WORDPRESS_DIRECT_IMPORT','plugin_name':'Portal SEO Editorial Plan Compiler','plugin_version_verified_against':'0.28.23','ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,'direct_upload_block_reason':None,'required_downstream_components':[]},'articles':rows}
+    return {'contract':'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2','batch_sha256':batch_sha,'publish_allowed':False,'signing_deferred':True,'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS','wordpress_review':handoff_transport.wordpress_review(),'articles':rows}
 
 def _assert_fresh_final_states(runroot:Path,state_values:list[dict],meta:dict)->dict:
     if meta.get('freshness_verified') is not True or meta.get('fresh_run_token_sha256')!=_fresh_token_sha():

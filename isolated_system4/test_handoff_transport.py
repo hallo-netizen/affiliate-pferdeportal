@@ -36,11 +36,7 @@ class HandoffTransportTests(unittest.TestCase):
         return {
             'contract':ht.HANDOFF_CONTRACT,'batch_sha256':hashlib.sha256(f'batch-{count}'.encode()).hexdigest(),'publish_allowed':False,'signing_deferred':True,
             'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS',
-            'wordpress_review':{
-                'file_format':'JSON','mime_type':'application/json','intended_next_step':'WORDPRESS_DIRECT_IMPORT','plugin_name':'Portal SEO Editorial Plan Compiler',
-                'plugin_version_verified_against':ht.DIRECT_IMPORT_PLUGIN_VERSION,'ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,
-                'direct_upload_block_reason':None,'required_downstream_components':[]
-            },
+            'wordpress_review':ht.wordpress_review(),
             'articles':rows,
         }
     def write(self,p,obj):
@@ -95,18 +91,21 @@ class HandoffTransportTests(unittest.TestCase):
     def test_negative_wordpress_review_missing(self):
         p=self.payload(); del p['wordpress_review']
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_SCHEMA_INVALID'): ht.validate_handoff(p)
-    def test_negative_direct_upload_not_ready(self):
-        p=self.payload(); p['wordpress_review']['direct_wordpress_upload_ready']=False
-        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_DIRECT_UPLOAD_REQUIRED'): ht.validate_handoff(p)
-    def test_negative_preimport_route(self):
-        p=self.payload(); p['wordpress_review']['intended_next_step']='WORDPRESS_PREIMPORT_REVIEW'
+    def test_negative_false_direct_upload_ready(self):
+        p=self.payload(); p['wordpress_review']['direct_wordpress_upload_ready']=True
+        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_DIRECT_UPLOAD_MUST_BE_BLOCKED'): ht.validate_handoff(p)
+    def test_negative_direct_import_route(self):
+        p=self.payload(); p['wordpress_review']['intended_next_step']='WORDPRESS_DIRECT_IMPORT'
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_NEXT_STEP_INVALID'): ht.validate_handoff(p)
-    def test_negative_block_reason_present(self):
-        p=self.payload(); p['wordpress_review']['direct_upload_block_reason']='ANY_BLOCK'
-        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_BLOCK_REASON_MUST_BE_EMPTY'): ht.validate_handoff(p)
-    def test_negative_downstream_components_present(self):
-        p=self.payload(); p['wordpress_review']['required_downstream_components']=['workflow_release']
-        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_DOWNSTREAM_MUST_BE_EMPTY'): ht.validate_handoff(p)
+    def test_negative_block_reason_missing(self):
+        p=self.payload(); p['wordpress_review']['direct_upload_block_reason']=None
+        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_BLOCK_REASON_INVALID'): ht.validate_handoff(p)
+    def test_negative_downstream_components_missing(self):
+        p=self.payload(); p['wordpress_review']['required_downstream_components']=[]
+        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_DOWNSTREAM_INVALID'): ht.validate_handoff(p)
+    def test_negative_fake_direct_import_plugin_version(self):
+        p=self.payload(); p['wordpress_review']['plugin_version_verified_against']='0.28.23'
+        with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_WORDPRESS_PLUGIN_VERSION_INVALID'): ht.validate_handoff(p)
     def test_negative_zero_article_count(self):
         p=self.payload(1); p['articles']=[]
         with self.assertRaisesRegex(ht.HandoffError,'HANDOFF_ARTICLE_COUNT_INVALID'): ht.validate_handoff(p)

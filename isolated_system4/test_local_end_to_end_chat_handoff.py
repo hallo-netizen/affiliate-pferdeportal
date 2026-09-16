@@ -115,17 +115,7 @@ def handoff_from_states(states: list[dict]) -> dict:
         'batch_gate_status': 'SYSTEM4_BATCH_FULL_PASS_COLLECTED',
         'no_legacy_status': 'PASS',
         'test_suite_status': 'PASS',
-        'wordpress_review': {
-            'file_format': 'JSON',
-            'mime_type': 'application/json',
-            'intended_next_step': 'WORDPRESS_DIRECT_IMPORT',
-            'plugin_name': 'Portal SEO Editorial Plan Compiler',
-            'plugin_version_verified_against': handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION,
-            'ppm_version_verified_against': '6.7.9',
-            'direct_wordpress_upload_ready': True,
-            'direct_upload_block_reason': None,
-            'required_downstream_components': [],
-        },
+        'wordpress_review': handoff_transport.wordpress_review(),
         'articles': rows,
     }
 
@@ -150,9 +140,9 @@ class LocalEndToEndChatHandoffTests(unittest.TestCase):
             expected_bodies = []
 
             first_workspace = root / 'item-0'
-            self.assertEqual(codex_entry.main(['codex_entry.py', 'start', str(SNAPSHOT), str(first_workspace)]), 0)
+            controller.cmd_ingress(SNAPSHOT, first_workspace, 0)
 
-            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None), mock.patch.object(
+            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None), mock.patch.object(controller.authoring_contract, 'build', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}), mock.patch.object(controller.authoring_contract, 'validate_bound', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}), mock.patch.object(controller.authoring_contract, 'validate_candidate', return_value=None), mock.patch.object(
                 controller.production_checks,
                 'run_all',
                 side_effect=lambda repo, state, fact_pack, plan: production_pass(state['draft_markdown']),
@@ -185,7 +175,8 @@ class LocalEndToEndChatHandoffTests(unittest.TestCase):
                     expected_bodies.append(body)
 
             batch_out = root / 'batch'
-            collected = batch_gate.collect_batch(SNAPSHOT, state_paths, batch_out)
+            with mock.patch.object(batch_gate.authoring_contract, 'validate_bound', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}):
+                collected = batch_gate.collect_batch(SNAPSHOT, state_paths, batch_out)
             self.assertEqual(collected['status'], 'SYSTEM4_BATCH_FULL_PASS_COLLECTED')
             self.assertEqual(collected['article_count'], 7)
             batch_evidence = json.loads((batch_out / 'system4_batch_evidence.json').read_text(encoding='utf-8'))
@@ -206,7 +197,9 @@ class LocalEndToEndChatHandoffTests(unittest.TestCase):
             self.assertEqual(envelope['plaintext_sha256'], hashlib.sha256(canonical_bytes).hexdigest())
             final_payload = json.loads(reconstructed.read_text(encoding='utf-8'))
             self.assertFalse(final_payload['publish_allowed'])
-            self.assertTrue(final_payload['wordpress_review']['direct_wordpress_upload_ready'])
+            self.assertFalse(final_payload['wordpress_review']['direct_wordpress_upload_ready'])
+            self.assertEqual(final_payload['wordpress_review']['intended_next_step'], 'WORDPRESS_PREIMPORT_REVIEW')
+            self.assertEqual(final_payload['wordpress_review']['direct_upload_block_reason'], handoff_transport.WORDPRESS_DIRECT_BLOCK_REASON)
             self.assertEqual([row['body'] for row in final_payload['articles']], expected_bodies)
             self.assertEqual([row['final_draft_sha256'] for row in final_payload['articles']], [sha_text(body) for body in expected_bodies])
 
@@ -233,11 +226,11 @@ class LocalEndToEndChatHandoffTests(unittest.TestCase):
             research, facts, pack = stage_payloads(0); body = article_body(item, 0)
             plan = {'contract': 'SYSTEM4_LOCAL_E2E_PLAN_V1', 'canonical_article': {'body_html': body}}
             controller.cmd_research(workspace, write_json(root / 'research.json', research)); controller.cmd_facts(workspace, write_json(root / 'facts.json', facts))
-            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None):
+            with mock.patch.object(controller.production_checks, 'validate_bound_context', return_value=None), mock.patch.object(controller.authoring_contract, 'build', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}):
                 controller.cmd_context(workspace, write_json(root / 'pack.json', pack), write_json(root / 'plan.json', plan))
             bad = body.replace('system-129-table comparison-table', 'comparison-table')
             bad_path = root / 'bad.html'; bad_path.write_text(bad, encoding='utf-8')
-            with self.assertRaisesRegex(controller.Fail, 'ARTICLE_DESIGN_GUARD_FAIL:DESIGN_TABLE_SYSTEM129_CLASS_MISSING'):
+            with mock.patch.object(controller.authoring_contract, 'validate_bound', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}), mock.patch.object(controller.authoring_contract, 'validate_candidate', return_value=None), self.assertRaisesRegex(controller.Fail, 'ARTICLE_DESIGN_GUARD_FAIL:DESIGN_TABLE_SYSTEM129_CLASS_MISSING'):
                 controller.cmd_draft(workspace, bad_path)
             state = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
             self.assertEqual(state['phase'], 'DRAFT_REQUIRED')
@@ -265,7 +258,7 @@ class LocalEndToEndChatHandoffTests(unittest.TestCase):
         payload = {
             'contract': handoff_transport.HANDOFF_CONTRACT, 'batch_sha256': hashlib.sha256(b'batch').hexdigest(), 'publish_allowed': False, 'signing_deferred': True,
             'batch_gate_status': 'SYSTEM4_BATCH_FULL_PASS_COLLECTED', 'no_legacy_status': 'PASS', 'test_suite_status': 'PASS',
-            'wordpress_review': {'file_format': 'JSON', 'mime_type': 'application/json', 'intended_next_step': 'WORDPRESS_DIRECT_IMPORT', 'plugin_name': 'Portal SEO Editorial Plan Compiler', 'plugin_version_verified_against': handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION, 'ppm_version_verified_against': '6.7.9', 'direct_wordpress_upload_ready': True, 'direct_upload_block_reason': None, 'required_downstream_components': []},
+            'wordpress_review': handoff_transport.wordpress_review(),
             'articles': rows,
         }
         with self.assertRaisesRegex(handoff_transport.HandoffError, 'BATCH_TEMPLATE_REUSE_BLOCKED'):
