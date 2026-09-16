@@ -75,7 +75,7 @@ Ergebnis:
 - Diagnose-Run `35080032743`: PASS.
 - Kanonischer Real-Acceptance-Lauf `35080032773`: Schritt 29 `Textmaschine matrix — batch handoff one-to-N` PASS.
 
-### 5. Aktueller erster realer Acceptance-Blocker — 1-Artikel-Live-Parity
+### 5. Zwischenbefund 1-Artikel-Live-Parity — anschließend korrigiert
 
 Im kanonischen Run `35080032773` auf Head `493d1395cbffc2616df2f5fac206419c621d4677` waren die Schritte 1–30 erfolgreich. Der erste rote Schritt war:
 
@@ -85,18 +85,128 @@ Zur Ursachenfeststellung wurde ein temporärer Diagnoseworkflow auf Head `61927b
 
 Diagnose-Run: `35080766923`.
 
-Exakter Befund:
+Der erste Diagnosebericht ordnete den LT-Befund fälschlich `Gummidichtungen` zu. Eine anschließende hash-gebundene LT-6.8-Kandidatenprüfung korrigierte das: Der tatsächliche beanstandete Ausdruck war **`Verriegelungsweg`**.
 
-- LanguageTool 6.8 meldet im frischen Testartikel dreimal `GERMAN_SPELLER_RULE` für die Formulierung `Gummidichtungen`.
-- Repair-Owner ist korrekt `DRAFT_WORKER`.
-- Der deterministische Testworker erzeugt im `repair`-Aufruf für diesen LT-Befund jedoch denselben Draft erneut.
-- Der Controller blockiert deshalb korrekt mit:
+Belegt wurden unter anderem:
 
-`REPAIR_DRAFT_UNCHANGED`
+- `Dichtungen dürfen den Verriegelungsweg nicht sichtbar behindern.` → 1 LT-Finding.
+- `Dichtungen dürfen die Verriegelung nicht sichtbar behindern.` → 0 LT-Findings.
 
-WARUM dieses Verhalten aktuell BLOCKED bleibt: Die Same-Article-/Unchanged-Schranke ist korrekt und darf nicht gelockert werden. Zu reparieren ist ausschließlich die deterministische Testworker-/Fixture-Seite für den konkret gebundenen LT-Befund; bis ein neuer echter Run die Änderung beweist, bleibt Real Acceptance rot.
+Änderung: ausschließlich die deterministische Testworker-Formulierung `den Verriegelungsweg` → `die Verriegelung` normalisiert. Eine zuvor versuchte, sachlich falsche `Gummidichtungen`-Normalisierung wurde entfernt.
 
-### 6. Zielvertrags-Wegweiser korrigiert
+WARUM: Die reale LT-6.8-Regel bleibt unverändert; nur die exakt nachgewiesene synthetische Testformulierungsursache wurde repariert.
+
+### 6. PPM-6.7.9-Strukturfehler im synthetischen Frischartikel
+
+Nach dem LT-Fix erreichte der echte 1-Artikel-Weg PPM 6.7.9. Dort wurden nacheinander reale Strukturfehler sichtbar:
+
+- wiederholte Sätze / Known-Regression-Muster,
+- zu geringer Conclusion-Anteil,
+- zu geringer Tabellen-Unique-Token-Anteil.
+
+Die erzeugte Draft-Evidence zeigte als Ursache mehrfach wiederverwendete Fact-Sätze in Details, Tabelle, Further Information und Conclusion.
+
+Änderungen ausschließlich im deterministischen Testworker:
+
+- Fact-Sentence-Tails zyklisch variiert,
+- Beobachtung und Handlung in Tabellen auf unterschiedliche Fact-IDs gebunden,
+- Conclusion deterministisch bis oberhalb des bestehenden Mindestanteils verlängert,
+- in Tabellen verwendete Fact-IDs für nachfolgende Abschnitte reserviert, damit die Tabelle reale exklusive Evidence behält.
+
+Keine PPM-Schwelle, kein Checker und kein Gate wurde verändert.
+
+Ergebnis auf Head `6ba6466b6ec96d77814d4094eb123536b1e8ffed`:
+
+- Exact Head Bundle `35085131506`: SUCCESS.
+- Repair Owner Contract `35085131493`: SUCCESS.
+- One-Route-Diagnostic `35085131432`: SUCCESS.
+- 1-Artikel-Proof: Revision `[1]`, LT PASS, PPM PASS, Freshness PASS, keine historische Wiederverwendung.
+
+### 7. Schritt 33 — 3-Artikel-Repair-Isolation
+
+Im kanonischen Run `35085131467` waren Schritte 1–32 PASS. Erster roter Schritt war:
+
+`33 — Run complete three article route with repair isolation`
+
+Exakte Reproduktion ergab:
+
+- alle drei Artikel LT PASS und PPM PASS,
+- aber **kein Repair-Ereignis**,
+- Revisionen `[1,1,1]` statt vertraglich erwarteter `[1,2,1]`.
+
+Ursache: Der deterministische Negativtest selektierte Artikel 1 noch über einen alten Titelanfang `Warum muss die Beleuchtung...`. Nach der Freshness-Umstellung hieß Artikel 1 anders; der Negativfehler wurde deshalb nicht mehr injiziert.
+
+Änderung: Der Testselektor wurde minimal auf die bereits maschinengebundene Artikelidentität `target_keyword = Bodenprüfung am Pferdeanhänger` umgestellt. Marker, Repair-Loop, Prüfer und Schwellen blieben unverändert.
+
+Ergebnis auf sauberem Head `64a4cb416bc89968748f010710024ddcbc4af712`:
+
+- Exact Head Bundle: SUCCESS.
+- Repair Owner Contract: SUCCESS.
+- Real LT68 PPM679 Acceptance: SUCCESS bis einschließlich Schritt 35.
+- 1 Artikel: Revision `[1]`.
+- 3 Artikel: Revisionen `[1,2,1]`.
+- exakt ein Repair auf Artikel 1 mit `BLOCKED_KNOWN_REGRESSION_PATTERN`.
+- LT und PPM für alle finalen Artikel PASS.
+- Inline-Transport byte-identisch.
+
+Damit ist die eigentliche System-4A-Artikelroute bis zum V2-Handoff technisch grün belegt.
+
+### 8. Neuer echter Fehler — unbewiesene WordPress-Direct-Import-Behauptung
+
+Nach dem grünen Artikelweg wurde die Übergabestrecke gegen den tatsächlich vorhandenen WordPress-Importer geprüft.
+
+Befund:
+
+- `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` deklarierte zuletzt selbst `WORDPRESS_DIRECT_IMPORT`, `direct_wordpress_upload_ready=true` und Pluginversion `0.28.23`.
+- Die Handoff-Tests bestätigten diese Werte nur gegen dieselben hart codierten Werte; das war kein realer Importer-Nachweis.
+- Historische System-4-Evidence hatte die Datei dagegen ausdrücklich als PREIMPORT mit notwendigem PSERC-/ENDSTEMPEL-Schritt beschrieben.
+- Der echte Repository-Probe `wordpress_import_contract_probe.py` liest `control/startmaster0107/runtime_packages/PSERC-FIX.zip`.
+- Der dort tatsächlich gebundene Importer ist `0.28.18-endstempel-import-envelope-binding-ppm679`.
+- Dieser bindet `PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1`; ein direkter Eingang `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` ist dort nicht vorhanden.
+
+Entscheidung: fail-closed. Kein erfundener Direct-Import-PASS.
+
+Dauerhafte Änderung:
+
+- eine zentrale `wordpress_review()`-Wahrheit in `handoff_transport.py`;
+- `intended_next_step = WORDPRESS_PREIMPORT_REVIEW`;
+- `direct_wordpress_upload_ready = false`;
+- Blockgrund `REQUIRES_SIGNED_ENDSTEMPEL_PACKAGE_AND_PSERC_IMPORT_ENVELOPE`;
+- erforderliche Downstream-Komponenten: `PSERC_APPROVED_PRODUCTION_PACKAGE_V1` und `PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1`;
+- real gebundener Importer-Build `0.28.18-endstempel-import-envelope-binding-ppm679`;
+- alle aktuellen Handoff-Erzeuger beziehen diese zentrale Wahrheit statt eigener hart codierter Direct-Import-Angaben.
+
+Negativtests blockieren jetzt ausdrücklich:
+
+- `direct_wordpress_upload_ready=true`,
+- `WORDPRESS_DIRECT_IMPORT`,
+- fehlenden Blockgrund,
+- fehlende Downstream-Komponenten,
+- die unbewiesene Versionsangabe `0.28.23`.
+
+Der fokussierte Patch wurde vor Persistierung wiederholt geprüft:
+
+- `test_handoff_transport.py`: 16/16 PASS,
+- `test_local_end_to_end_chat_handoff.py`: 5/5 PASS,
+- `test_machine_route_lock_contract.py`: 6/6 PASS,
+- zusammen 27/27 PASS.
+
+Persistierter Python-Patch: Commit `7fb9b4bd1ca6ccaa07c954652404784c29d58061`.
+
+Zusätzlich wurde `wordpress_import_contract_probe.py` fail-closed verschärft: Er verlangt den realen Importer-Build und den ENDSTEMPEL-Vertrag und blockiert, falls der rohe V2-Handoff wider Erwarten als direkter Importvertrag auftaucht. Dadurch prüft der bereits vorhandene Real-Acceptance-Schritt die reale WordPress-Grenze selbst, ohne einen zweiten Workflow-Wahrheitsweg einzuführen.
+
+### 9. Temporäre Diagnose-/Patchwege entfernt
+
+Die nur zur Ursachenfindung bzw. Patch-Persistierung angelegten Workflows wurden nach Gebrauch entfernt:
+
+- `.github/workflows/system4a-temp-wordpress-failclosed.yml`
+- `.github/workflows/system4a-one-route-diagnostic.yml`
+
+Der temporäre Python-Patchhelper `_temp_wordpress_failclosed_patch.py` wurde ebenfalls entfernt.
+
+WARUM: Der finale Acceptance-Head darf keine Hilfsdiagnose als parallele Test-/Statuswahrheit enthalten.
+
+### 10. Zielvertrags-Wegweiser korrigiert
 
 `CODEX_LIVE_TASK.md` ist ausdrücklich historisch. Seine Liste „Aktuell verbindlich“ zeigte trotzdem noch auf den älteren Zielvertrag vom 13.09.
 
@@ -130,11 +240,15 @@ Entscheidung: **Keine direkte Chat-/Branch-Umschreibung der Campus-CURRENT_STATE
 - keine Bürotür mit dynamischer Branch-/Head-/Run-Wahrheit angereichert;
 - kein Publish und kein Merge freigegeben.
 
-## Prüfstatus dieser Nachholung
+## Fortgeschriebener Prüfstatus
 
-- Dokumentation der tatsächlich ausgeführten Reparaturen/Befunde: nachgeholt.
-- WAS/WARUM für dauerhafte Änderungen: nachgeholt.
-- Aktueller System-4A-Gesamt-PASS: **nicht erteilt**.
-- Real Acceptance: **BLOCKED** am exakt diagnostizierten 1-Artikel-Repair-Fall `REPAIR_DRAFT_UNCHANGED` nach realem LT-Finding.
-- Campus-CURRENT_STATE-Synchronisation: **BLOCKED** durch fehlende vorgebundene State-Owner-/Entrance-Gate-Bindung für diesen System-4A-Arbeitsstand.
-- Parent-Chat-Endnachweis: nicht erreicht; gemäß `PROTOKOLL_TESTSTRECKE_V2_20260914.md` entsteht kein Gesamt-PASS allein aus einem Remote-Run.
+Dieser Abschnitt ersetzt den früheren Zwischenstand, in dem Schritt 31 noch rot war.
+
+- System-4A-Artikelroute bis V2-Handoff: auf Head `64a4cb416bc89968748f010710024ddcbc4af712` vollständig remote grün bewiesen, einschließlich 1 Artikel `[1]`, 3 Artikel `[1,2,1]`, realem LT 6.8, realem PPM 6.7.9 und exakt einem gebundenen Repair.
+- WordPress-Direct-Import: **BLOCKED / nicht bewiesen**. Die frühere `0.28.23`-/Direct-Ready-Selbstdeklaration wurde fail-closed korrigiert.
+- Reale WordPress-Grenze: vorhandener Importer `0.28.18-endstempel-import-envelope-binding-ppm679`; erforderlich sind signierter ENDSTEMPEL-/PSERC-Importweg und dessen echter Importnachweis.
+- Focused Fail-Closed-Tests: 27/27 PASS vor Persistierung.
+- Temporäre Diagnose-/Patchwege: entfernt.
+- Finaler Same-Head-Gesamtlauf nach letzter Dokumentations-/Cleanup-Änderung: **noch auszuführen**; daher aus diesem Dokument kein neuer Gesamt-PASS.
+- Campus-CURRENT_STATE-Synchronisation: weiterhin BLOCKED durch fehlende vorgebundene State-Owner-/Entrance-Gate-Bindung für diesen System-4A-Arbeitsstand.
+- Parent-Chat-Endnachweis: Gesamt-PASS weiterhin nicht erteilt; gemäß `PROTOKOLL_TESTSTRECKE_V2_20260914.md` genügt kein Remote-Run allein.
