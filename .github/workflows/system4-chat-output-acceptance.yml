@@ -32,6 +32,15 @@ jobs:
           set -o pipefail
           python -m unittest discover -s isolated_system4 -p 'test_*.py' -v 2>&1 | tee /tmp/system4-unit-negative.log
 
+      - name: Preserve unit-negative failure log
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-unit-negative-failure-log
+          path: /tmp/system4-unit-negative.log
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Full exact PPM 6.7.9 internal positive-negative suite
         shell: bash
         run: |
