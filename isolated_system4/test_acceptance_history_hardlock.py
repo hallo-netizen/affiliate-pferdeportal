@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import json
 import re
+import subprocess
+import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 
@@ -208,6 +212,72 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
         )
         for item in permanent:
             self.assertIn(item, protocol)
+
+    def test_hr_proc_002_g9_write_authorization_is_individually_effective(self):
+        'HR-PROC-002 explicit G9 write authorization must be effect-sensitive.'
+        package = REPO / 'control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+        self.assertTrue(package.is_file())
+        with tempfile.TemporaryDirectory(prefix='system4-hr-proc-002-') as td:
+            root = Path(td)
+            with zipfile.ZipFile(package) as zf:
+                zf.extractall(root)
+            ppm = root / 'portal-production-machine'
+            source = ppm / 'includes/g9-single-faq-entrypoint.php'
+            original = source.read_text(encoding='utf-8')
+
+            def run(rel: str) -> subprocess.CompletedProcess[str]:
+                return subprocess.run(
+                    ['php', str(ppm / rel)], cwd=ppm, text=True,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False,
+                )
+
+            positive = run('tests/g9-single-faq-entrypoint/test-g9-entrypoint-positive.php')
+            self.assertEqual(positive.returncode, 0, positive.stderr)
+            self.assertEqual(json.loads(positive.stdout).get('status'), 'PASS')
+
+            probe = ppm / 'tests/__system4_hr_proc_002.php'
+            probe.write_text(r'''<?php
+require_once __DIR__.'/bootstrap-test.php';
+function s4_run($name,$override,$expected_status){
+  PPM679_WP::reset_test_state(); PPM679_Storage::reset_test_state();
+  $base=array(
+    'user_triggered'=>true,
+    'nonce_verified'=>true,
+    'current_user_can_manage'=>true,
+    'declared_contract'=>PPM679_G9_Single_FAQ_Entrypoint::CONTRACT,
+    'declared_plan_item_key'=>PPM679_G9_Single_FAQ_Entrypoint::PLAN_ITEM_KEY,
+    'simulation_only'=>true,
+    'evidence_class'=>'LOCAL_EXECUTED_TEST'
+  );
+  $r=PPM679_G9_Single_FAQ_Entrypoint::execute(array_merge($base,$override));
+  ppm_test_assert(empty($r['ok']),$name.' must block');
+  ppm_test_assert((string)$r['status']===$expected_status,$name.' must return exact '.$expected_status);
+  ppm_test_assert(count(PPM679_WP::test_posts())===0,$name.' must create zero drafts');
+  return (string)$r['status'];
+}
+$out=array();
+$out['missing_user_trigger']=s4_run('missing_user_trigger',array('user_triggered'=>false),'BLOCKED_G9_NOT_USER_TRIGGERED');
+$out['missing_nonce']=s4_run('missing_nonce',array('nonce_verified'=>false),'BLOCKED_G9_NONCE');
+$out['missing_capability']=s4_run('missing_capability',array('current_user_can_manage'=>false),'BLOCKED_G9_CAPABILITY');
+$out['wrong_entry_binding']=s4_run('wrong_entry_binding',array('declared_plan_item_key'=>'other'),'BLOCKED_G9_EXACT_ENTRY_BINDING');
+echo json_encode(array('status'=>'PASS_HR_PROC_002','cases'=>$out,'drafts_created'=>0),JSON_UNESCAPED_SLASHES)."\n";
+?>''', encoding='utf-8')
+            baseline = run('tests/__system4_hr_proc_002.php')
+            self.assertEqual(baseline.returncode, 0, baseline.stderr)
+            self.assertEqual(json.loads(baseline.stdout).get('status'), 'PASS_HR_PROC_002')
+
+            mutations = (
+                ("if (($context['user_triggered']??false)!==true) {", "if (false) {"),
+                ("if (($context['nonce_verified']??false)!==true) {", "if (false) {"),
+                ("if (($context['current_user_can_manage']??false)!==true) {", "if (false) {"),
+                ("if (($context['declared_contract']??self::CONTRACT)!==self::CONTRACT || ($context['declared_plan_item_key']??self::PLAN_ITEM_KEY)!==self::PLAN_ITEM_KEY) {", "if (false) {"),
+            )
+            for old, new in mutations:
+                self.assertEqual(original.count(old), 1, old)
+                source.write_text(original.replace(old, new, 1), encoding='utf-8')
+                killed = run('tests/__system4_hr_proc_002.php')
+                self.assertNotEqual(killed.returncode, 0, 'HR-PROC-002 mutation survived: ' + old)
+                source.write_text(original, encoding='utf-8')
 
 
 if __name__ == '__main__':
