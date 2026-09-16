@@ -1,7 +1,6 @@
 # BÜRO BILD
 
-STAND: 2026-09-05
-STATUS: AKTIV
+ROLLE: **WEGWEISER / ORIENTIERUNG**
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -18,19 +17,20 @@ die projektspezifischen BILD-Akten bearbeiten, wenn der BILD-Hobbyraum den Auftr
 den allgemeinen Plugin-Kern als zweite Wahrheit kopieren, Secrets veröffentlichen oder Versionslücken durch Raten schließen.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `MASTERDATEIEN_INVENTAR.md` → `HOBBYRAUM.md`.
-
+`CURRENT_STATE.md` → Frischecheck → `HOBBYRAUM.md`.
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
 
 - **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
 - **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **BACKLOG / TODO:** `TODO.md` – keine CURRENT-/NEXT-ACTION-Wahrheit
+- **MASTER-/ALTBELEGE:** `MASTERDATEIEN_INVENTAR.md`
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
 - **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
 - **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 - **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
 
-**Regel:** Diese Bürotür wiederholt keinen aktuellen Blocker, keine aktuelle Version und keinen Zielinhalt als zweite Wahrheit.
+**Regel:** Diese Bürotür enthält selbst keinen aktuellen Pluginstand, Branch/Head, Teststand, Blocker oder eigene NEXT ACTION.
 
 ## Allgemeiner Modul-Kern
 
@@ -41,10 +41,9 @@ Hauptort:
 Modulklasse:
 ALLGEMEINGÜLTIG.
 
-
 ## Sicherheit
 
-Historische Exporte enthalten Zugangsdaten.
+Historische Exporte können Zugangsdaten enthalten.
 
 Keine Secrets ins öffentliche Repository.
 Existenz/Funktion/Herkunft bleiben inventarisiert.
@@ -54,13 +53,13 @@ Existenz/Funktion/Herkunft bleiben inventarisiert.
 Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
 
 Vor jeder Änderung:
-1. `CURRENT_STATE.md`;
-2. `HOBBYRAUM.md`;
+1. `CURRENT_STATE.md` frisch prüfen;
+2. `HOBBYRAUM.md` lesen;
 3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
 4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
 5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
 6. aktiven Zielvertrag über `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`;
-7. erst danach gebundene Arbeitsrolle/Branch.
+7. erst danach gebundene Arbeitsrolle/Quelle.
 
 Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
 
@@ -70,4 +69,3 @@ Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
