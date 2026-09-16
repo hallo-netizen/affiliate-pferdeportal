@@ -1,17 +1,21 @@
 # PFERDERASSEN – AUTORITATIVE FEHLERQUELLE
 
-STAND: 2026-09-15
-STATUS: AKTIV / BLOCKED
+STAND: 2026-09-16
+STATUS: **HISTORISCHE OFFENE BEFUNDE / NICHT AKTIVE NEXT ACTION**
 
-Diese Datei ist die einzige ausführliche aktuelle Fehlerquelle für den Pferderassen-Aktenschrank. Das zentrale `FEHLERREGISTER.md` bleibt nur Wegweiser.
+Diese Datei ist die einzige ausführliche Fehlerquelle für den Pferderassen-Aktenschrank. Das zentrale `FEHLERREGISTER.md` bleibt nur Wegweiser. Den aktuellen Arbeitsauftrag ausschließlich aus `../../HOBBYRAUM.md` lesen.
+
+## Nutzerentscheidung 2026-09-16
+
+Der Nutzer hat ausdrücklich entschieden, die beiden Punkte `PR-BREED-001` und `PR-BREED-002` aus der aktiven Aufgabenliste zu streichen. Das bedeutet **nicht**, dass ihre technischen/fachlichen Befunde nachträglich als gelöst gelten. Sie bleiben hier historisch korrekt dokumentiert, sind aber keine aktuelle NEXT ACTION und blockieren den vom Nutzer gewählten nächsten Auftrag nicht.
 
 ## PR-BREED-001 – Letzter 13er-Artikelbatch: Rassengruppen nicht autoritativ getragen
 
-STATUS: OFFEN / BLOCKIERT ARTIKEL-PASS
+STATUS: **OFFEN / VOM NUTZER AUS AKTIVER ARBEIT GENOMMEN 2026-09-16**
 
 Der Schreibvertrag erlaubt `rassengruppe_slug` nur, wenn `typ`/`rassegruppen` des gebundenen WDB-Datensatzes eine der sechs Managergruppen eindeutig trägt. Bei Mehrdeutigkeit darf nicht geraten werden.
 
-Der im Chat erzeugte Batch `pferderassen_FINAL_13_manager022.json` enthält für alle 13 Artikel eine manuell abgeleitete Sechs-Gruppen-Zuordnung, obwohl die frisch gelesenen Datensätze diese Zuordnung nicht eindeutig als eine der sechs Managergruppen ausweisen:
+Der erzeugte Batch `pferderassen_FINAL_13_manager022.json` enthielt manuell abgeleitete Sechs-Gruppen-Zuordnungen, obwohl die WDB-Datensätze diese Zuordnung nicht eindeutig tragen:
 - `breed-akhal-teke` → ausgegeben `vollblueter`; Datensatz: orientalisches Reitpferd / Ausdauerpferd;
 - `breed-anglo-arabian` → `vollblueter`; Datensatz: Sportpferd / arabisch-vollblütige Kreuzungsrasse;
 - `breed-caballo-deporte-espanol` → `warmblueter`; Datensatz: Sportpferd;
@@ -26,43 +30,31 @@ Der im Chat erzeugte Batch `pferderassen_FINAL_13_manager022.json` enthält für
 - `breed-trotteur-francais` → `vollblueter`; Datensatz: Traber / Rennpferd;
 - `breed-waler-horse` → `robust-landrassen`; Datensatz: Arbeitspferd / Heritage breed / Reit- und Fahrpferd.
 
-FOLGE:
-Der 13er-Batch ist trotz technischer JSON-/Strukturprüfung **nicht als Schreibvertrags-PASS** gültig. Vor einer fachlichen Freigabe muss für diese Identitäten eine autoritative Zuordnung zu den sechs Managergruppen ergänzt oder das Sechs-Gruppen-Modell verbindlich erweitert werden. Keine erneute Ratzuordnung.
+Falls dieser Punkt später wieder aufgenommen wird: autoritative Zuordnung ergänzen oder Gruppenmodell verbindlich ändern; keine Ratzuordnung.
 
 ## PR-BREED-002 – Veröffentlichungsbestand enthält doppelte WDB-IDs
 
-STATUS: OFFEN / WORDPRESS-DIREKTREADBACK ERFORDERLICH
+STATUS: **OFFEN / VOM NUTZER AUS AKTIVER ARBEIT GENOMMEN 2026-09-16**
 
-Rekonstruktion aus dem WordPress-Export vom 15.09.2026 plus den danach veröffentlichten Batchdateien ergibt:
+Rekonstruktion aus WordPress-Export 15.09.2026 plus danach veröffentlichten Batches ergab:
 - 196 veröffentlichte `pa_breed`-Posts;
 - 194 eindeutige `_prm_source_id`;
 - doppelt: `breed-pantaneiro` und `breed-posavje-horse`, jeweils zweimal.
 
-Die Rekonstruktion ist ein harter Dateibeleg, aber noch kein direkter aktueller WordPress-Datenbank-Readback. Deshalb keine automatische Löschung und keine Behauptung, welcher Doppelpost kanonisch bleiben soll.
+Das ist ein Dateibeleg, kein kanonischer aktueller DB-Readback. Deshalb weiterhin keine automatische Löschung und keine Behauptung, welcher Doppelpost kanonisch wäre.
 
-NEXT:
-Direkt in WordPress beide IDs auslesen, beide Posts/Slugs/Inhalte/Batches vergleichen und erst dann den nichtkanonischen Doppelpost kontrolliert bereinigen.
+Falls dieser Punkt später wieder aufgenommen wird: beide IDs direkt in WordPress auslesen, Posts/Slugs/Inhalte/Batches vergleichen und erst dann entscheiden.
 
 ## PR-PLUGIN-001 – Relationslogik / Frontend-Regressionskette
 
-STATUS: CLOSED / 0.2.7 WORDPRESS-LIVE PASS
+STATUS: **CLOSED / 0.2.7 WORDPRESS-LIVE PASS**
 
-Historische Fehler dieses Chats:
-- 0.2.2: `Ähnliche Rassen` wurden lediglich aus derselben Rassengruppe befüllt; dadurch semantisch identisch mit `Zur gleichen Rassengruppe`.
-- 0.2.3: Same-Group-Ausschluss eingeführt, vorhandene alte Relationen aber nicht zuverlässig ersetzt; Frontend zeigte weiter identische Karten.
-- 0.2.4: `get_post_metadata`-Filter rief innerhalb des Filters erneut `get_post_meta()` auf dasselbe Feld auf → echte Rekursion / Frontend-Endlosladen.
-- 0.2.5: Rekursionsfilter entfernt, aber kompletter Relations-Neuaufbau blieb an `init`/Aktivierung gebunden → teurer Vollbestandlauf im Frontend / erneutes Endlosladen.
-- 0.2.6: Frontendarbeit entfernt und ein Snapshot eingeführt; Abschlussprüfung entdeckte jedoch, dass Snapshot-Zeilen nach `source_id` kollabierten. Bei den real vorhandenen Doppel-IDs wurde je ein Post nicht repariert, obwohl `ok=true` zurückkam.
+Historische Fehlerkette:
+- 0.2.2: `Ähnliche Rassen` = gleiche Gruppe;
+- 0.2.3: vorhandene alte Relationen nicht zuverlässig ersetzt;
+- 0.2.4: rekursiver `get_post_metadata`-Pfad → Frontend-Endlosladen;
+- 0.2.5: Vollbackfill auf `init`/Aktivierung → Frontend-Endlosladen;
+- 0.2.6: Doppel-IDs im Snapshot kollabiert;
+- 0.2.7: jeder reale Post separat, Doppel-IDs gewarnt, Same-Group/Self-Hardlock, Backfill nur Backend, kein `get_post_metadata`-Filter.
 
-Fix 0.2.7:
-- jeder veröffentlichte Post bleibt separat nach `post_id` im Reparaturlauf;
-- Relationskandidaten bleiben als eindeutige WDB-Identitäten geführt;
-- Doppel-IDs werden gewarnt, nicht verschluckt;
-- Same-Group- und Self-Hardlock bleiben;
-- Backfill nur explizite Backend-Aktion;
-- kein `get_post_metadata`-Filter;
-- lokale 196-Post-Positiv-/Negativ-/Mutationstests PASS;
-- WordPress-LIVE am 2026-09-15 vom Nutzer ausdrücklich als PASS bestätigt.
-
-ERGEBNIS:
-Plugin-Fehlerweg geschlossen. 0.2.7 ist der aktuelle LIVE-PASS-Stand der Relationsfunktion. Die weiterhin offenen Fachblocker `PR-BREED-001` und `PR-BREED-002` werden dadurch nicht geschlossen.
+Lokale 196-Post-Positiv-/Negativ-/Mutationstests PASS; WordPress-LIVE am 2026-09-15 vom Nutzer PASS bestätigt.
