@@ -92,7 +92,7 @@ class CodexEconomyContractTests(unittest.TestCase):
         self.assertIn("INLINE_CONTRACT='SYSTEM4_PARENT_CHAT_INLINE_V2'", transport)
         self.assertIn("HANDOFF_FILENAME='SYSTEM4_WORDPRESS_HANDOFF_V1.json'", transport)
         self.assertIn('transport only', transport)
-        self.assertIn('nicht der finale WordPress-Dateivertrag', target)
+        self.assertIn('er ist **nicht** der finale WordPress-Dateivertrag', target)
         self.assertIn('transport only and is not the final WordPress file contract', agents)
 
     def test_parent_chat_handoff_is_direct_inline_and_wordpress_ready(self):
@@ -124,7 +124,7 @@ class CodexEconomyContractTests(unittest.TestCase):
             'inline-pack',
             'inline-unpack',
             'SYSTEM4_WORDPRESS_HANDOFF_V1',
-            'direct_wordpress_upload_ready',
+            'Direct WordPress upload readiness MUST NOT be confused with automatic publish or with successful parent-chat delivery.',
             'The user must never be asked to treat a GitHub Actions artifact, repository file, internal temp path or hash as the completed parent-chat delivery.',
             'System 4 MUST NOT modify the WordPress plugin or its signature switch as part of acceptance.',
         ]:
