@@ -96,6 +96,7 @@ jobs:
             /tmp/system4-one-route.rc
             /tmp/system4-acceptance-output/
             /tmp/system4-fixture-1/
+            /tmp/system4-live-parity-v2-all-*/
           if-no-files-found: warn
           retention-days: 1
       - name: Propagate exact route result
