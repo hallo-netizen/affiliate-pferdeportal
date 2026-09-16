@@ -42,9 +42,11 @@ jobs:
           retention-days: 7
 
       - name: Full exact PPM 6.7.9 internal positive-negative suite
+        id: ppm_original
         shell: bash
         run: |
-          python - <<'PY'
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee /tmp/system4-ppm679-original.log
           from pathlib import Path
           import hashlib, json, shutil, subprocess, zipfile
           package=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
@@ -123,6 +125,15 @@ jobs:
               raise SystemExit('PPM679_INTERNAL_SUITE_FAILED:'+str(len(failures)))
           print('PPM679_FULL_INTERNAL_SUITE_PASS:COUNT='+str(len(tests)))
           PY
+
+      - name: Preserve PPM 6.7.9 original-suite failure log
+        if: ${{ steps.ppm_original.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-ppm679-original-failure-log
+          path: /tmp/system4-ppm679-original.log
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Explicit stage-aware repair regression suite
         run: |
