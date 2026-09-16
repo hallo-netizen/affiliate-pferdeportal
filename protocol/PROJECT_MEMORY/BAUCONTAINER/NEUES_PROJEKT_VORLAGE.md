@@ -74,6 +74,17 @@ Jedes neue Projektbüro führt vor echter Arbeit sichtbar über:
 6. Zielvertragsregister;
 7. gebundenen Arbeitsweg.
 
+**KISS-Einstieg für jedes neue Büro:**
+- `START_HERE.md` ist nur Wegweiser und zeigt auf genau eine zuständige `CURRENT_STATE`;
+- `CURRENT_STATE` wird vor Weiterarbeit und Übergabe gegen den tatsächlich neuesten autoritativen Arbeits-/Teststand frisch geprüft;
+- bei Abweichung wird zuerst `CURRENT_STATE` nachgezogen, sonst `BLOCKED`;
+- weitergearbeitet wird erst ab der aktuellen `NEXT ACTION`/Arbeitsbindung;
+- keine dynamischen Branch-/Head-/Run-/Blocker-/NEXT-ACTION-Kopien in der Bürotür;
+- keine zweite CURRENT_STATE anlegen, wenn bereits eine zuständige Standwahrheit existiert.
+
+Pflichtfolge:
+**BÜROTÜR → eine CURRENT_STATE → FRISCHECHECK → NEXT ACTION.**
+
 **Vor jeder technischen Aktion zusätzlich zwingend:**
 Fehlerregister → relevante autoritative Fehlerquelle → geplante Aktion gegen bekannte Fehler/Wiederholungsfehler/Testgrenzen abgleichen.
 
@@ -98,6 +109,12 @@ positive und negative Architekturprüfung gegen
 `BAUCONTAINER/EINGANGSSTANDARD.md`
 und
 `BAUCONTAINER/HOBBYRAUM_STANDARD.md`.
+
+Zusätzlich positiv und negativ prüfen:
+- genau eine zuständige `CURRENT_STATE` je Bürotür;
+- Frischecheck ist Pflicht vor `NEXT ACTION`;
+- keine dynamische Fach-/Arbeitswahrheit in der Tür;
+- kein Weiterarbeiten auf veralteter `CURRENT_STATE`.
 
 
 ## Informationsrollen für neue Büros
