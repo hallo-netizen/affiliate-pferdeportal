@@ -1,8 +1,9 @@
 from __future__ import annotations
 import hashlib,json,os,sys,tempfile,unittest
 from pathlib import Path
+from unittest import mock
 
-import full_route_start,handoff_transport
+import full_route_start,handoff_transport,production_checks
 from full_route_test_fixture import SINGLE_ITEMS,THREE_ITEMS,write_start_fixture
 
 HERE=Path(__file__).resolve().parent
@@ -42,5 +43,23 @@ class FullRouteStartRealTests(unittest.TestCase):
         self.assertEqual([x['target_keyword'] for x in THREE_ITEMS],expected)
         self.assertEqual(len({x['plan_slot'] for x in THREE_ITEMS}),3)
         self._run(THREE_ITEMS,'s4-start-three-fresh-')
+
+    def test_repairable_languagetool_finding_returns_same_article_to_worker_then_passes(self):
+        old=os.environ.get('SYSTEM4_TEST_FORCE_REPAIR_INDEX')
+        os.environ['SYSTEM4_TEST_FORCE_REPAIR_INDEX']='0'
+        try:
+            payload=self._run(SINGLE_ITEMS,'s4-start-real-repair-')
+        finally:
+            if old is None: os.environ.pop('SYSTEM4_TEST_FORCE_REPAIR_INDEX',None)
+            else: os.environ['SYSTEM4_TEST_FORCE_REPAIR_INDEX']=old
+        self.assertGreaterEqual(payload['articles'][0]['revision_count'],2)
+
+    def test_true_languagetool_execution_failure_stays_terminal_and_never_invokes_repair_worker(self):
+        with tempfile.TemporaryDirectory(prefix='s4-start-lt-hard-fail-') as td:
+            root=Path(td);snap,sources=write_start_fixture(root,SINGLE_ITEMS);out=root/'out'
+            with mock.patch.object(production_checks,'_run_languagetool_text',side_effect=production_checks.ProductionCheckError('LANGUAGETOOL_REAL_EXECUTION_FAILED:TEST')):
+                with self.assertRaisesRegex(full_route_start.FullRouteError,'START_FULLCHECK_NOT_PASS:0:2'):
+                    full_route_start.run(snap,sources,WORKER,out)
+            self.assertEqual(list(out.glob('worker-repair-*.html')),[])
 
 if __name__=='__main__':unittest.main(verbosity=2)
