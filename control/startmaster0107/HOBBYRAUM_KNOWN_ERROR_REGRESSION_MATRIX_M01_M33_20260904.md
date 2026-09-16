@@ -1,6 +1,6 @@
-# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M36
+# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M37
 
-Stand: 2026-09-10
+Stand: 2026-09-11
 
 ## HARD RULE
 
@@ -158,8 +158,18 @@ M36 – Persisted H8 legacy-binding compatibility after provenance migration
 - Keine interne Signaturpflicht wird wieder eingeführt; externe Release-Signaturprüfung M23 bleibt unverändert separat.
 - Keine Mutation oder Neusignierung des persistierten Produktionspakets; nur Lesekompatibilität im bestehenden Provenance-Guard.
 
+M37 – Non-repairable PPM/PSERC inner reason visibility
+- Realer Live-Fehler: Der erste frisch recherchierte und erzeugte Artikel erreichte den echten PPM-6.7.9-/PSERC-Handoff, aber der äußere Handoff reduzierte einen vorhandenen nicht-reparierbaren inneren Bridge-Fehler auf den Sammelcode `PPM679_REAL_EXECUTION_BLOCKED`; nach Ablauf des ursprünglichen Codex-Task-Workspaces war der konkrete innere Grund nicht mehr rekonstruierbar.
+- `fachworkflow_proof_handoff.py` muss bei einem realen Bridge-FAIL weiterhin fail-closed BLOCKED bleiben, aber den bereits von PSERC/PPM gelieferten ersten konkreten inneren Grund sichtbar erhalten, statt ihn zu verwerfen.
+- Bestehende reparierbare PPM-Inhaltsbefunde (`BLOCKED_CONTENT_*`, `BLOCKED_WAVE2_*`, `BLOCKED_CANONICAL_RUNTIME_LINK_*`) bleiben unverändert `FACHWORKFLOW_REPAIR_REQUIRED`; M37 darf sie nicht in einen technischen BLOCKED umklassifizieren.
+- Der Sichtbarkeitsweg darf nur bereits vorhandene Bridge-Felder lesen (`error_code`, `reason_codes`, `errors`, `reason`, ersatzweise `status`); keine erfundenen Fehlercodes, keine neue Fachlogik und keine Änderung von PPM, PSERC, PSTE, Textmaschine, Recherche, Inhalt, SEO, Links, Tabellen, Design oder Publish.
+- Positiv: verschachtelter nicht-reparierbarer `error_code` bzw. vorhandener Reason-Code bleibt im BLOCKED-Fehler sichtbar.
+- Negativ: enthält der Bridge-Payload keinen konkreteren Grund, bleibt ausschließlich der bestehende Sammelcode sichtbar; es darf kein Grund erfunden werden.
+- Negativ: ein reparierbarer Content-Code muss weiterhin über den bestehenden RepairRequired-Weg laufen.
+- Der Test wird ausschließlich in den bestehenden Hobbyraum-Runner aufgenommen; kein neuer Runner/Gate/Controller/Sidecar.
+
 ## Abschlussregel
 
-HOBBYRAUM PASS nur wenn M01–M36 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
+HOBBYRAUM PASS nur wenn M01–M37 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
 
 Danach erst Merge-Kandidat und danach kompletter frischer 7/7-E2E. Keine Reparatur während des Produktionslaufs.
