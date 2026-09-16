@@ -9,56 +9,30 @@ permissions:
   contents: read
 
 jobs:
-  inventory-ppm-tests:
+  inspect-signed-ppm:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Inventory exact signed PPM test bindings and remaining shells
+      - name: Inspect exact signed PPM WP test interface
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import hashlib, json, re, zipfile
-          package=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
-          expected='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
-          assert hashlib.sha256(package.read_bytes()).hexdigest()==expected
-          with zipfile.ZipFile(package) as zf:
-              names=set(zf.namelist())
-              prefix='portal-production-machine/'
-              tests=sorted(n[len(prefix):] for n in names if n.startswith(prefix+'tests/') and n.endswith('.php') and '/test-' in n)
-              registry=json.loads(zf.read(prefix+'contracts/hard-rule-registry-v1.json').decode())
-              strings=[]
-              def walk(x):
-                  if isinstance(x,dict):
-                      for v in x.values(): walk(v)
-                  elif isinstance(x,list):
-                      for v in x: walk(v)
-                  elif isinstance(x,str): strings.append(x)
-              walk(registry)
-              refs=set()
-              for s in strings:
-                  for m in re.findall(r'(?:tests/)?[^\s\"\']*test-[^\s\"\']*\.php',s):
-                      m=m.lstrip('./')
-                      if not m.startswith('tests/'): m='tests/'+m
-                      refs.add(m)
-              replaced={
-                  'tests/test-canonical-runtime-binding.php','tests/test-g9-faq-only-live-state-integration.php','tests/test-historical-regressions.php','tests/test-positive-pipeline.php','tests/test-wave1-unsigned-quarantine-blocked.php',
-                  'tests/three-type-bundled-local/test-beratung-positive.php','tests/three-type-bundled-local/test-bundled-overall-and-no-live.php','tests/three-type-bundled-local/test-pflege-positive.php','tests/three-type-bundled-local/test-release-gate-positive.php','tests/three-type-bundled-local/test-signed-integration-traceability.php','tests/three-type-bundled-local/test-signed-quarantine-boundaries.php','tests/three-type-bundled-local/test-v38-baseline-byte-identity.php','tests/three-type-bundled-local/test-vergleich-positive.php',
-                  'tests/three-type-live-test-release/test-01-release-positive.php','tests/three-type-live-test-release/test-02-release-negative.php','tests/three-type-live-test-release/test-03-inventory-exact.php','tests/three-type-live-test-release/test-04-inventory-mismatch-blocks.php','tests/three-type-live-test-release/test-05-category-resolution.php','tests/three-type-live-test-release/test-06-category-negative.php','tests/three-type-live-test-release/test-07-bundled-simulation-success.php','tests/three-type-live-test-release/test-08-authorization-one-use.php','tests/three-type-live-test-release/test-09-foreign-collision-blocks-all.php','tests/three-type-live-test-release/test-10-partial-session-rollback.php','tests/three-type-live-test-release/test-11-entrypoint-authorization-negative.php','tests/three-type-live-test-release/test-12-static-boundaries.php','tests/three-type-live-test-release/test-13-readback-negative.php','tests/three-type-live-test-release/test-14-live-state-scope-routing.php','tests/three-type-live-test-release/test-15-inventory-lost-ids-not-current.php','tests/three-type-live-test-release/test-16-plan-fingerprint-negative.php'
-              }
-              active=[t for t in tests if t not in replaced]
-              unbound=[t for t in active if t not in refs]
-              print('TOTAL_TESTS',len(tests))
-              print('REGISTRY_REFERENCED_TESTS',len(set(tests)&refs))
-              print('CURRENT_ACTIVE',len(active))
-              print('CURRENT_UNBOUND',len(unbound))
-              for t in unbound:
-                  print('UNBOUND',t)
-                  raw=zf.read(prefix+t).decode('utf-8','replace')
-                  markers=[]
-                  for needle in ['histor','obsolete','supersed','abgel','ueberg','überg','handoff','v3.7','normal-draft','current','production']:
-                      if needle.lower() in raw.lower(): markers.append(needle)
-                  print('MARKERS',','.join(markers))
-                  print('HEAD',raw[:500].replace('\n','\\n'))
+          import hashlib, zipfile
+          p=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
+          out=Path('/tmp/ppm679inspect'); out.mkdir(exist_ok=True)
+          with zipfile.ZipFile(p) as z: z.extractall(out)
           PY
+          ROOT=/tmp/ppm679inspect/portal-production-machine
+          echo '=== PPM679_WP class location ==='
+          grep -R -n 'class PPM679_WP' "$ROOT" || true
+          echo '=== PPM679_WP public/static functions ==='
+          FILE=$(grep -R -l 'class PPM679_WP' "$ROOT" | head -1)
+          test -n "$FILE"
+          grep -nE 'function [A-Za-z0-9_]+' "$FILE" || true
+          echo '=== normal draft fixture builder ==='
+          sed -n '1,260p' "$ROOT/tests/normal-draft-production/fixture-builder.php"
+          echo '=== current normal draft tests: state/write/readback APIs ==='
+          grep -R -nE 'reset|posts|insert_draft|get_post_snapshot|readback|journal|created|post_id' "$ROOT/tests/normal-draft-production" | head -300
