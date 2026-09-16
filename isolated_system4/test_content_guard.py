@@ -202,6 +202,67 @@ echo json_encode(array('status'=>'PASS_HR_CONT_002_SECTIONS','missing'=>$missing
                 self.assertNotEqual(killed.returncode, 0, message)
                 gate.write_text(original_gate, encoding='utf-8')
 
+    def test_hr_cont_003_ai_disclosure_exact_end_owner_and_recheck_are_individually_effective(self):
+        'HR-CONT-003 exact AI disclosure must block, route to DRAFT_WORKER, and pass after same-checker repair.'
+        import production_checks
+        package = Path(__file__).resolve().parent.parent / 'control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+        self.assertTrue(package.is_file())
+        with tempfile.TemporaryDirectory(prefix='system4-hr-cont-003-') as td:
+            root = Path(td)
+            with zipfile.ZipFile(package) as zf:
+                zf.extractall(root)
+            ppm = root / 'portal-production-machine'
+            probe = ppm / 'tests/__system4_hr_cont_003.php'
+            probe.write_text(r'''<?php
+require __DIR__.'/three-type-bundled-local/bootstrap-three-type.php';
+function s4_eval($html,$item,$pack){
+  $g=array('title'=>(string)$item['canonical_article']['title'],'article_type'=>(string)$item['article_type'],'content_html'=>$html,'content_hash'=>hash('sha256',$html));
+  return PPM679_Three_Type_Local_Content_Validator::evaluate($g,$item,$pack,'hr_cont_003');
+}
+list($item,$pack,$generated)=ppm_three_generated('Beratung');
+$original=(string)$generated['content_html'];
+$good=s4_eval($original,$item,$pack);
+ppm_test_assert(!empty($good['ok']),'original same article must pass exact disclosure checker');
+$required='Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.';
+$bad_text=str_replace($required,'Dieser Beitrag wurde mit KI erstellt.',$original);
+$r1=s4_eval($bad_text,$item,$pack); $c1=ppm_three_codes($r1['errors']??array());
+ppm_test_assert(empty($r1['ok'])&&in_array('BLOCKED_CONTENT_AI_DISCLOSURE',$c1,true),'altered disclosure must expose exact blocker');
+$needle='<p class="ppm-ai-disclosure">'.$required.'</p>';
+ppm_test_assert(substr_count($original,$needle)===1,'exact disclosure source must occur once');
+$bad_end=str_replace($needle,$needle.'<p>Nachgelagerter Inhalt.</p>',$original);
+$r2=s4_eval($bad_end,$item,$pack); $c2=ppm_three_codes($r2['errors']??array());
+ppm_test_assert(empty($r2['ok'])&&in_array('BLOCKED_CONTENT_AI_DISCLOSURE',$c2,true),'disclosure not at end must expose exact blocker');
+$repaired=s4_eval($original,$item,$pack);
+ppm_test_assert(!empty($repaired['ok']),'same article repaired disclosure must pass same checker again');
+echo json_encode(array('status'=>'PASS_HR_CONT_003','altered_codes'=>$c1,'position_codes'=>$c2,'recheck_status'=>$repaired['status']),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)."\n";
+?>''', encoding='utf-8')
+
+            def run() -> subprocess.CompletedProcess[str]:
+                return subprocess.run(
+                    ['php', str(probe)], cwd=ppm, text=True,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False,
+                )
+
+            baseline = run()
+            self.assertEqual(baseline.returncode, 0, baseline.stderr)
+            self.assertEqual(json.loads(baseline.stdout).get('status'), 'PASS_HR_CONT_003')
+
+            findings = production_checks._ppm_repair_findings({'errors': [{
+                'error_code': 'BLOCKED_CONTENT_AI_DISCLOSURE',
+                'failed_rule': 'EXACT_AI_DISCLOSURE_REQUIRED_AT_ARTICLE_END',
+                'field_path': 'content.ai_disclosure',
+            }]})
+            self.assertEqual(len(findings), 1)
+            self.assertEqual(findings[0]['repair_owner'], 'DRAFT_WORKER')
+
+            source = ppm / 'includes/three-type-local-content-validator.php'
+            original_source = source.read_text(encoding='utf-8')
+            branch = "if(!$ok) $errors[]=self::err('BLOCKED_CONTENT_AI_DISCLOSURE'"
+            self.assertEqual(original_source.count(branch), 1, branch)
+            source.write_text(original_source.replace(branch, "if(false) $errors[]=self::err('BLOCKED_CONTENT_AI_DISCLOSURE'", 1), encoding='utf-8')
+            killed = run()
+            self.assertNotEqual(killed.returncode, 0, 'HR-CONT-003 disclosure branch mutation survived')
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
