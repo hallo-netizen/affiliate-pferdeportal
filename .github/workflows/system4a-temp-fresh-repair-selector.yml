@@ -1,0 +1,45 @@
+name: TEMP System4A Fresh Repair Selector Patch
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/system4a-startgate-test-20260914
+          fetch-depth: 0
+      - name: Apply one exact selector replacement
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('isolated_system4/deterministic_test_worker.py')
+          text = path.read_text(encoding='utf-8')
+          old = "if not repair and identity['title'].startswith('Warum muss die Beleuchtung'):"
+          new = "if not repair and identity['target_keyword'] == 'Bodenprüfung am Pferdeanhänger':"
+          if text.count(old) != 1:
+              raise SystemExit('SYSTEM4_TEMP_PATCH_OLD_SELECTOR_COUNT=' + str(text.count(old)))
+          if new in text:
+              raise SystemExit('SYSTEM4_TEMP_PATCH_NEW_SELECTOR_ALREADY_PRESENT')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+          git diff --check
+          git diff -- isolated_system4/deterministic_test_worker.py
+          test "$(git diff --numstat -- isolated_system4/deterministic_test_worker.py | awk '{print $1+$2}')" -eq 2
+      - name: Commit exact patch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add isolated_system4/deterministic_test_worker.py
+          git commit -m 'fix(system4a): bind repair negative to fresh article identity'
+          git push origin HEAD:hobbyroom/system4a-startgate-test-20260914
