@@ -1,39 +1,45 @@
 # DESIGN – CURRENT STATE
 
-STAND: 2026-09-15
-STATUS: BLOCKED / LIVE-REGRESSION OFFEN
+STAND: 2026-09-16
+STATUS: **PFERDE ATELIER DESIGN 1.50.541 WORDPRESS-LIVE PASS**
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung des DESIGN-Büros.
 
+- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
+- Fehlerhistorie → `FEHLERQUELLEN.md`
+- verbindlicher Reparaturvertrag → `ZIELVERTRAG_DESIGN_20260915.md`
+- Ausführungsprotokoll dieses Stands → `PROTOKOLL_20260916.md`
+
 ## AKTUELLER BELASTBARER STAND
-Der Nutzer meldet nach der in diesem Chat erzeugten Design-Pluginfolge einen realen LIVE-Ausfall:
-- Pferderassen-Seite nicht mehr auffindbar / zerschossen;
-- Glossar nicht mehr auffindbar.
 
-Damit ist jede Freigabe der in diesem Chat erzeugten Pferde-Design-Kandidaten bis zur echten Ursachenklärung gesperrt.
+Aktueller Pferde-Designstand: **1.50.541**.
 
-Insbesondere gelten **1.50.529** und **1.50.530** NICHT als freigegebener CURRENT- oder LIVE-Stand.
-Die im Chat behaupteten lokalen Kombinations-/Regressionstests werden nicht als belastbarer Abnahmebeleg übernommen, weil dafür in der Abschlussprüfung kein reproduzierbarer autoritativer Testbeleg vorliegt.
+WordPress-LIVE vom Nutzer am 2026-09-16 bestätigt:
+- Rassen-Hero-Langtitel-Fix 1.50.539: PASS;
+- Journal-Startseite 1.50.540: Bildzoom/Bildfokus/linker Verlauf und Hauptkarten-Titel: PASS; nur `Glossar`/`Pferderassen` im Referenzraster waren noch nicht fett;
+- 1.50.541 ergänzt ausschließlich diesen letzten Journal-Startseiten-Fettfix: Nutzerbestätigung `ok pass`.
 
-## LETZTER SICHERER BELEG
-Der letzte im Campus autoritativ dokumentierte LIVE-PASS bleibt:
-**Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002**.
+Der Scope 1.50.541 ist ausschließlich die Journal-Startseite für die beiden Referenzkacheln `Glossar` und `Pferderassen`; der zuvor bestätigte Rest bleibt unverändert.
 
-Das ist ein historisch belegter sicherer Referenzstand, nicht die Behauptung, dass er aktuell installiert ist.
-Der aktuell tatsächlich installierte WordPress-Stand ist vor jeder weiteren Reparatur frisch zu ermitteln.
+## ARTEFAKT
 
-## OFFENER FEHLER
-Autoritative Fehlerquelle: `FEHLERQUELLEN.md` → `DESIGN-LIVE-20260915-001`.
+Kanonische Plugin-ID: `PPA-002`.
 
-## VERBINDLICHE GRENZE
-Kein weiteres Pferde-Designplugin darf als Abnahme-/Installationspaket ausgegeben oder als CURRENT synchronisiert werden, bevor:
-1. der real installierte Pferde-Designstand und der real installierte allgemeine Designstand bestimmt sind;
-2. der Ausfall lokal gegen genau diese Kombination reproduziert wurde;
-3. Positiv- und Negativtests beide Bereiche abdecken: Pferderassen + Glossar;
-4. die Interaktion beider Designplugins gemeinsam geprüft ist;
-5. erst danach ein minimaler Fix gebaut wird;
-6. LIVE-Readback bestätigt ist.
+Isolierter aktueller Stand:
+`/Campus-Plugins/PFERDE_ATELIER/PPA-002/CURRENT.zip`
+
+Version: **1.50.541**
+
+SHA-256:
+`f93870321df4a989e8ceeb71d6a9b4a0780831184f3b9a36f1e6e29b5e8a6ee6`
+
+Die zwischenzeitlich verwendete ID `PPA-013` war eine falsche zweite Design-ID und ist nicht mehr aktiv; die alte Ausgabekopie wurde in den Plugin-Archivbereich verschoben.
+
+## FEHLERGRENZE
+
+`DESIGN-LIVE-20260915-001` ist für den aktuellen Stand operational geschlossen. Der damalige LIVE-Ausfall 1.50.529/1.50.530 bleibt historisch dokumentiert; eine nachträgliche eindeutige Ursachenattribution wird nicht erfunden.
 
 ## NEXT ACTION
-Siehe `HOBBYRAUM.md`.
+
+Siehe `HOBBYRAUM.md`. Aktuell keine offene Designreparatur.
