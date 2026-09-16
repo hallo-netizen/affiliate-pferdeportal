@@ -2,11 +2,13 @@ from __future__ import annotations
 import hashlib,json,os,re,sys
 from pathlib import Path
 
-import authoring_contract,root_entry,supervisor,worker_dispatch
+import authoring_contract,no_codex_test_repair,root_entry,supervisor,worker_dispatch
 from full_route_test_fixture import source_claims_for_article
 from real_route_test_support import valid_real_article
 
 RUN_NONCE_ENV='SYSTEM4_TEST_RUN_NONCE'
+FORCE_REPAIR_INDEX_ENV='SYSTEM4_TEST_FORCE_REPAIR_INDEX'
+REPO=Path(__file__).resolve().parent.parent
 
 
 def write_json(path:Path,value):
@@ -33,6 +35,14 @@ def _fresh_variation_index(index:int)->int:
     digest=hashlib.sha256((nonce+':'+str(index)).encode('utf-8')).hexdigest()
     return index+31+(int(digest[:8],16)%100003)
 
+def _force_one_repairable_typo(body:str,index:int)->str:
+    if os.environ.get(FORCE_REPAIR_INDEX_ENV,'').strip()!=str(index): return body
+    replacements=((r'\bPrüfung\b','Prüfungg'),(r'\bEntscheidung\b','Entscheidungg'),(r'\bDokumentation\b','Dokumentationn'))
+    for pattern,replacement in replacements:
+        changed,count=re.subn(pattern,replacement,body,count=1)
+        if count==1: return changed
+    raise RuntimeError('FORCED_REPAIR_TOKEN_MISSING')
+
 def main(argv):
     if len(argv)!=5:
         print('FULL_ROUTE_TEST_WORKER_FAIL:BAD_ARGS'); return 2
@@ -58,10 +68,18 @@ def main(argv):
             print('FULL_ROUTE_TEST_WORKER_FAIL:DRAFT_PHASE_REQUIRED'); return 2
         try:
             variation_index=_fresh_variation_index(index)
+            body=_force_one_repairable_typo(_balance_conclusion(valid_real_article(state,variation_index),state),index)
         except RuntimeError as exc:
             print('FULL_ROUTE_TEST_WORKER_FAIL:'+str(exc)); return 2
-        body=_balance_conclusion(valid_real_article(state,variation_index),state)
         out.write_text(body,encoding='utf-8'); return 0
+    if mode=='repair':
+        if state.get('phase')!='REPAIR_REQUIRED':
+            print('FULL_ROUTE_TEST_WORKER_FAIL:REPAIR_PHASE_REQUIRED'); return 2
+        try:
+            repaired=no_codex_test_repair.candidate_for_current_failure(REPO,workspace)
+        except Exception as exc:
+            print('FULL_ROUTE_TEST_WORKER_FAIL:REPAIR_ADAPTER:'+str(exc)); return 2
+        out.write_text(repaired,encoding='utf-8'); return 0
     print('FULL_ROUTE_TEST_WORKER_FAIL:UNKNOWN_MODE'); return 2
 
 if __name__=='__main__': raise SystemExit(main(sys.argv))
