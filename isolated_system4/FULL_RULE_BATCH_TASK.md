@@ -7,7 +7,7 @@ Before Codex is invoked, the caller must have already verified on the exact curr
 1. `python3 -m unittest discover -s isolated_system4 -p 'test_*.py' -v` = PASS;
 2. existing NO-LEGACY machine proof = PASS;
 3. System-4 entry/current snapshot = clean;
-4. the direct parent-chat V2 handoff has passed positive and negative local tests WITHOUT Codex;
+4. the final `SYSTEM4_WORDPRESS_HANDOFF_V1` plus `SYSTEM4_PARENT_CHAT_INLINE_V2` relay have passed positive and negative local tests WITHOUT Codex;
 5. the final handoff schema is bound as the direct unsigned WordPress JSON while the existing WordPress signature switch is OFF;
 6. no repository branch/push/file persistence is used for article-output handoff.
 
@@ -119,15 +119,15 @@ Required:
 
 Signing / ENDSTEMPEL are NOT executed for the current article output because the existing WordPress signature switch is temporarily OFF.
 
-## Mandatory final file — exact JSON for Chat + direct WordPress upload
+## Mandatory final file — exact WordPress JSON for Chat + direct WordPress upload
 Create exactly one canonical compact UTF-8 JSON file:
-`SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json`
+`SYSTEM4_WORDPRESS_HANDOFF_V1.json`
 
 It must pass:
-`python3 isolated_system4/handoff_transport.py validate SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json`
+`python3 isolated_system4/handoff_transport.py validate SYSTEM4_WORDPRESS_HANDOFF_V1.json`
 
 Exact top-level contract:
-- `contract = SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`
+- `contract = SYSTEM4_WORDPRESS_HANDOFF_V1`
 - `batch_sha256`
 - `publish_allowed=false`
 - `signing_deferred=true`
@@ -163,18 +163,18 @@ Each article row must contain exactly:
 
 The final handoff validator re-runs System-4 fact-pack/fact-trace and unchanged-design guards for every row and the batch distinctness/repetition guards where applicable. A bad source-free fact pack, design-drifted body or templated multi-article batch cannot be transported merely because hashes/checker status fields look valid.
 
-This exact file is the final current batch output. The parent Chat exposes it unchanged as one download and the user uploads that same JSON unchanged to WordPress. No signature step, no design transformation and no second WordPress transformation occur in between. `publish_allowed=false` remains unchanged; upload is not auto-publish.
+This exact `SYSTEM4_WORDPRESS_HANDOFF_V1.json` is the final current batch output. The parent Chat exposes it unchanged as one download and the user uploads that same JSON unchanged to WordPress. No signature step, no design transformation and no second WordPress transformation occur in between. `publish_allowed=false` remains unchanged; upload is not auto-publish.
 
 ## Mandatory direct parent-chat inline relay — NO REPOSITORY HANDOFF
 After the final JSON validates:
-1. canonicalize it once with `python3 isolated_system4/handoff_transport.py canonicalize SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.canonical.json` and use that canonical file as the definitive WordPress file;
-2. run `python3 isolated_system4/handoff_transport.py inline-pack SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.canonical.json SYSTEM4_PARENT_CHAT_INLINE_V2.txt`;
-3. `inline-pack` may produce one or many ordered V2 JSON part rows between the V2 BEGIN/END markers. There is no production article-count limit tied to the number of relay parts;
+1. canonicalize it once with `python3 isolated_system4/handoff_transport.py canonicalize SYSTEM4_WORDPRESS_HANDOFF_V1.json SYSTEM4_WORDPRESS_HANDOFF_V1.canonical.json` and use that canonical V1 file as the definitive WordPress file;
+2. run `python3 isolated_system4/handoff_transport.py inline-pack SYSTEM4_WORDPRESS_HANDOFF_V1.canonical.json SYSTEM4_PARENT_CHAT_INLINE_V2.txt`;
+3. `inline-pack` produces the transport-only `SYSTEM4_PARENT_CHAT_INLINE_V2` envelope as one or many ordered JSON part rows between the V2 BEGIN/END markers. There is no production article-count limit tied to the number of relay parts;
 4. return the complete ordered contents of `SYSTEM4_PARENT_CHAT_INLINE_V2.txt` verbatim in the normal terminal Codex completion response;
 5. do not create any handoff branch, commit, push, repository file, artifact or external-storage copy;
 6. the user performs no intermediate download.
 
-The parent Chat extracts every V2 part, runs `handoff_transport.py inline-unpack`, verifies part count/order, compressed SHA, plaintext SHA, byte length, schema and canonical equality, and exposes exactly the reconstructed `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json` as the ChatGPT download.
+The parent Chat extracts every V2 relay part, runs `handoff_transport.py inline-unpack`, verifies part count/order, compressed SHA, plaintext SHA, byte length, schema and canonical equality, and exposes exactly the reconstructed `SYSTEM4_WORDPRESS_HANDOFF_V1.json` as the ChatGPT download. `SYSTEM4_PARENT_CHAT_INLINE_V2` is transport only; it is never the final WordPress payload contract.
 
 Invalid handoffs:
 - any `git push`, repository branch/commit/file transport, or external-storage handoff;
