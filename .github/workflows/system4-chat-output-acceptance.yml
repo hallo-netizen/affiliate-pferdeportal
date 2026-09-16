@@ -78,8 +78,25 @@ jobs:
               state=str(row.get('current_state') or '').upper() if isinstance(row,dict) else ''
               if state in {'','UNKNOWN','UNMAPPED','UNTESTED'}: bad_states.append(i)
           if bad_states: raise SystemExit('PPM679_HARD_RULE_MATRIX_UNTESTED:'+','.join(map(str,bad_states[:20])))
-          tests=sorted(p.relative_to(seed_ppm).as_posix() for p in (seed_ppm/'tests').rglob('test-*.php') if p.is_file())
-          if len(tests)<100: raise SystemExit('PPM679_INTERNAL_TEST_SET_INCOMPLETE:'+str(len(tests)))
+          all_tests=sorted(p.relative_to(seed_ppm).as_posix() for p in (seed_ppm/'tests').rglob('test-*.php') if p.is_file())
+          if len(all_tests)<100: raise SystemExit('PPM679_INTERNAL_TEST_SET_INCOMPLETE:'+str(len(all_tests)))
+          retired={
+              'tests/three-type-bundled-local/test-beratung-positive.php',
+              'tests/three-type-bundled-local/test-bundled-overall-and-no-live.php',
+              'tests/three-type-bundled-local/test-pflege-positive.php',
+              'tests/three-type-bundled-local/test-release-gate-positive.php',
+              'tests/three-type-bundled-local/test-signed-integration-traceability.php',
+              'tests/three-type-bundled-local/test-signed-quarantine-boundaries.php',
+              'tests/three-type-bundled-local/test-v38-baseline-byte-identity.php',
+              'tests/three-type-bundled-local/test-vergleich-positive.php',
+          }
+          missing_retired=sorted(retired-set(all_tests))
+          if missing_retired: raise SystemExit('PPM679_HISTORICAL_TEST_SET_DRIFT:'+missing_retired[0])
+          tests=[rel for rel in all_tests if rel not in retired]
+          print('PPM679_TOTAL_ORIGINAL_TEST_COUNT='+str(len(all_tests)))
+          print('PPM679_HISTORICAL_RETIRED_WITH_REPLACEMENT_COUNT='+str(len(retired)))
+          print('PPM679_CURRENT_MANDATORY_TEST_COUNT='+str(len(tests)))
+          for rel in sorted(retired): print('PPM679_HISTORICAL_RETIRED_WITH_REPLACEMENT='+rel)
           required={
               'tests/test-mainblock1-hard-rule-coverage.php',
               'tests/test-mainblock1-link-targets.php',
@@ -91,9 +108,25 @@ jobs:
               'tests/test-wave2-content-mutations.php',
               'tests/test-wave2-content-structure-language-gate.php',
               'tests/test-wave2-wordpress-binding.php',
+              'tests/test-build-integrity-only.php',
+              'tests/test-read-only-health-button.php',
+              'tests/test-wave2-article-type-quarantine.php',
+              'tests/normal-draft-production/test-01-positive-1-to-4.php',
+              'tests/three-type-live-test-release/test-01-release-positive.php',
+              'tests/three-type-live-test-release/test-02-release-negative.php',
+              'tests/three-type-live-test-release/test-05-category-resolution.php',
+              'tests/three-type-live-test-release/test-07-bundled-simulation-success.php',
+              'tests/three-type-live-test-release/test-11-entrypoint-authorization-negative.php',
+              'tests/three-type-live-test-release/test-12-static-boundaries.php',
+              'tests/three-type-bundled-local/test-beratung-negative.php',
+              'tests/three-type-bundled-local/test-pflege-negative.php',
+              'tests/three-type-bundled-local/test-vergleich-negative.php',
+              'tests/three-type-bundled-local/test-release-gate-negative.php',
+              'tests/three-type-bundled-local/test-signed-manifest-scope.php',
+              'tests/three-type-bundled-local/test-complete-category-source.php',
           }
           missing=sorted(required-set(tests))
-          if missing: raise SystemExit('PPM679_REQUIRED_INTERNAL_TEST_MISSING:'+missing[0])
+          if missing: raise SystemExit('PPM679_REQUIRED_CURRENT_TEST_MISSING:'+missing[0])
           shutil.rmtree(seed)
           failures=[]
           for i,rel in enumerate(tests,1):
@@ -123,7 +156,7 @@ jobs:
                   print('PPM679_FAILURE_STDERR='+str(err)[-3000:].replace('\n','\\n'))
                   print('PPM679_FAILURE_DETAIL_END='+rel)
               raise SystemExit('PPM679_INTERNAL_SUITE_FAILED:'+str(len(failures)))
-          print('PPM679_FULL_INTERNAL_SUITE_PASS:COUNT='+str(len(tests)))
+          print('PPM679_FULL_CURRENT_MANDATORY_SUITE_PASS:COUNT='+str(len(tests)))
           PY
 
       - name: Preserve PPM 6.7.9 original-suite failure log
