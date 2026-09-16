@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGINS – UPDATEPROTOKOLL
 
-STAND: 2026-09-15
+STAND: 2026-09-16
 ROLLE: ZENTRALES PLUGIN-ÄNDERUNGS-/SYNC-PROTOKOLL
 
 ## Regel
@@ -80,3 +80,25 @@ NEXT ACTION:
 Installierte Versionen beider Designplugins frisch bestimmen → exakte Kombination reproduzieren → Positiv/Negativ/Kombinationsregression für Pferderassen + Glossar → Ursache isolieren → minimaler Fix → ZIP/Version/Install-over-old → realer WordPress-Readback → erst dann Artefaktsync.
 
 ERGEBNIS: **BLOCKED**
+
+## PU-20260916-001 – WordPress Speicheranalyse
+
+- PLUGIN-ID: `PPA-014`
+- NAME: `WordPress Speicheranalyse`
+- ART: UPDATE
+- HERKUNFT: EIGENENTWICKLUNG; Ausgangsinstaller 1.0.1 vom Nutzer bereitgestellt
+- FACHBÜRO: `../TECHNIK/`
+- VON_VERSION: `1.0.1`
+- AUF_VERSION: `1.1.0`
+- AUTORITATIVE TECHNISCHE QUELLE: `../TECHNIK/CURRENT_STATE.md` + bereitgestellte 1.0.1-Basis + daraus erzeugter 1.1.0-Quellstand
+- WARUM: Der Speicher-Scan belegt rund 5,15 GB physische WPvivid-Backupdateien, von denen die WPvivid-Oberfläche nur einen Teil zeigt. Ohne FTP/SSH wird ein eng begrenzter, sichtbarer Löschweg im bestehenden Diagnoseplugin benötigt.
+- ABHÄNGIGKEIT/SCHNITTSTELLE: ausschließlich WordPress-Admin + `wp-content/wpvividbackups/`; keine WPvivid-API-Manipulation
+- FEHLER-/ROLLBACKGRENZE: kein Auto-Delete; bei WordPress-LIVE-Problem bleibt 1.0.1 die bekannte Ausgangsversion
+- POSITIVPRÜFUNG: reguläre Datei im erlaubten WPvivid-Ordner listen/löschen PASS
+- NEGATIVPRÜFUNG: Pfadtraversal PASS; Symlink PASS; Datei außerhalb des erlaubten Ordners PASS
+- FACH-/REGRESSIONSTEST: bestehende Analysefunktion im Quellstand unverändert fortgeführt; PHP-Syntax PASS; ZIP-Integrität PASS
+- ARTEFAKT: `/Campus-Plugins/PFERDE_ATELIER/PPA-014/CURRENT.zip`
+- SHA-256: `3acb62811ec8e7ea1940ec0968e5b51fc2cb0d1ae2f9e86eeeb6718c11873891`
+- ARTEFAKT-SYNC: PASS
+- WORDPRESS-LIVE: OFFEN – Installation/Bedienung und realer Re-Scan stehen aus
+- ERGEBNIS: **BLOCKED bis WordPress-LIVE-Readback**, lokaler Kandidat und Artefaktsync PASS
