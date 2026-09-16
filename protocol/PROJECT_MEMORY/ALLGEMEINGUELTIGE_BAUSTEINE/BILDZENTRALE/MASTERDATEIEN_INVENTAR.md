@@ -1,7 +1,44 @@
 # BILDZENTRALE – MASTERDATEIEN-INVENTAR
 
-STAND: 2026-09-05
-MODUS: SORTIERUNG / KEINE FACHINHALTSÄNDERUNG
+STAND: 2026-09-16
+MODUS: DATEIBELEGE / KEINE ZWEITE LIVE-WAHRHEIT
+
+## BILD-G-003 – Allgemeiner Plugin-Dateibeleg 2.7.1
+
+Datei:
+`ALLGEMEINE_BILDZENTRALE_2.7.1_POST_TYPE_HERO_TAB_FIX_INSTALLIEREN.zip`
+
+SHA-256:
+`4453a39dfda7adc7a849428eca41c8ee0d2410a705011c7c254616a789ad0d21`
+
+Größe:
+73.132 Bytes
+
+ZIP-Einträge:
+2
+
+Persistente Ablage:
+`/Campus-Plugins/ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
+
+STATUS:
+**AKTUELLER ALLGEMEINER PLUGIN-DATEIBELEG / LOCAL HARD PASS / WORDPRESS-LIVE-RETEST OFFEN.**
+
+Aktuellen LIVE-/Projektstatus nicht aus diesem Inventar ableiten, sondern aus:
+`PROJEKTE/PFERDE_ATELIER/BILD/CURRENT_STATE.md`.
+
+## BILD-G-002A – Vorversion 2.7.0
+
+Datei:
+`ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`
+
+SHA-256:
+`8403bf1ad06be7c6102c37c53648826663fdcbebbe73d27e011364fab51dc5e4`
+
+STATUS:
+**HISTORISCHER FEHLER-/VORVERSIONSBELEG – WORDPRESS LIVE FAIL.**
+
+Befund:
+`Post-Type-Hero` war sichtbar, aber wegen fehlendem `cpt`-Mapping im JavaScript-Tabregister nicht anklickbar. Repariert in 2.7.1.
 
 ## BILD-G-001 – Allgemeiner Pluginstand 2.6.9
 
@@ -18,7 +55,7 @@ ZIP-Einträge:
 2
 
 STATUS:
-AKTUELLER ALLGEMEINER PLUGIN-DATEIBELEG.
+HISTORISCHER ALLGEMEINER DATEIBELEG / **LETZTER SICHERER WORDPRESS-LIVE-STAND IM PFERDE ATELIER**.
 
 ## BILD-G-002 – Nullpunkt 069
 
@@ -35,9 +72,9 @@ ZIP-Einträge:
 84
 
 STATUS:
-AKTUELLER ALLGEMEINER NULLPUNKT-/MASTERBELEG.
+ALLGEMEINER 2.6.9-NULLPUNKT-/MASTERBELEG.
 
-## Plugin ↔ Nullpunkt
+## Plugin ↔ Nullpunkt 2.6.9
 
 Im Nullpunkt enthalten:
 `INSTALLATION/ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
@@ -47,7 +84,10 @@ byte-identisch zum separat übergebenen 2.6.9-Plugin-ZIP.
 
 ## Archiv
 
+Historische 2.6.9-Ablage:
 `/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/2026-09-05/`
+
+2.7.0 bleibt als Fehlerbeleg erhalten und wird nicht als aktueller Kandidat verwendet.
 
 LOKALE_KOPIE_ENTBEHRLICH:
 NEIN
