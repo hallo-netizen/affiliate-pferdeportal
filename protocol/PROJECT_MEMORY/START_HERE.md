@@ -1,6 +1,6 @@
 # CAMPUS – START_HERE
 
-STAND: 2026-09-05
+STAND: 2026-09-16
 STATUS: AKTIVER CAMPUS-EINGANG
 
 ## 1-KLICK-ÜBERSICHT
@@ -32,6 +32,8 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 - `Geh ins Pferde-Atelier.`
 - `Geh ins Pferde-Atelier, Büro TEXT/SEO.`
 - `Geh ins Pferde-Atelier, Büro PRODUKTVERGLEICH.`
+- `Geh ins Pferde-Atelier, Büro TECHNIK.`
+- `Prüfe im Pferde-Atelier WordPress-Speicher oder Backups.` → `PFERDE_ATELIER/TECHNIK/START_HERE.md`
 - `Geh in den Campus, Bürogebäude Pferde-Atelier, TEXT/SEO. Dort findest du alles für unsere Arbeit.`
 
 Der Nutzer muss keine Dateipfade oder Fachbegriffe auswendig kennen.
@@ -60,10 +62,9 @@ Aktueller Ort:
 
 Solange das so ist, ist für einen völlig neuen Chat ohne bekannten Repository-Kontext der robuste Einstieg:
 
-`Öffne im GitHub-Repo hallo-netizen/affiliate-pferdeportal den Branch hobbyroom/project-memory-campus-v1-20260905 und gehe zu protocol/PROJECT_MEMORY/START_HERE.md. Danach: Pferde-Atelier → TEXT/SEO.`
+`Öffne im GitHub-Repo hallo-netizen/affiliate-pferdeportal den Branch hobbyroom/project-memory-campus-v1-20260905 und gehe zu protocol/PROJECT_MEMORY/START_HERE.md. Danach: Pferde-Atelier → zuständiges Büro.`
 
 Nach späterer Verlagerung/Merge in den dauerhaften Campus-Hauptort reicht die Alltagssprache allein.
-
 
 ## HARD RULE – PROTOKOLLPFLICHT
 
@@ -79,4 +80,3 @@ aktuellen Campus-/Fachstand zuerst frisch lesen und nur tatsächlich betroffene 
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-
