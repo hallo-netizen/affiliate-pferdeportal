@@ -414,7 +414,7 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
             raise RuntimeError('TESTWORKER_CONCLUSION_BALANCE_UNREACHABLE')
 
     body = render()
-    if not repair and identity['title'].startswith('Warum muss die Beleuchtung'):
+    if not repair and identity['target_keyword'] == 'Bodenprüfung am Pferdeanhänger':
         marker = ' Als belastbares Ergebnis muss dieser Prüfschritt dokumentiert bleiben.'
         body = body.replace('</p>', marker + '</p>', 1)
 
