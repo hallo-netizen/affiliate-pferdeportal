@@ -279,6 +279,85 @@ echo json_encode(array('status'=>'PASS_HR_PROC_002','cases'=>$out,'drafts_create
                 self.assertNotEqual(killed.returncode, 0, 'HR-PROC-002 mutation survived: ' + old)
                 source.write_text(original, encoding='utf-8')
 
+    def test_hr_cont_001_faq_title_and_body_h1_are_individually_effective(self):
+        'HR-CONT-001 body-H1 and rendered single-title branches must be effect-sensitive.'
+        package = REPO / 'control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+        self.assertTrue(package.is_file())
+        with tempfile.TemporaryDirectory(prefix='system4-hr-cont-001-') as td:
+            root = Path(td)
+            with zipfile.ZipFile(package) as zf:
+                zf.extractall(root)
+            ppm = root / 'portal-production-machine'
+
+            def run(rel: str) -> subprocess.CompletedProcess[str]:
+                return subprocess.run(
+                    ['php', str(ppm / rel)], cwd=ppm, text=True,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False,
+                )
+
+            # Positive source and rendered controls.
+            for rel in (
+                'tests/test-g8-targeted-repair-faq-chain.php',
+                'tests/qf03-wordpress-draft-readback-dom/test-qf03-rendered-dom-positive.php',
+                'tests/test-wave1-known-error-mutations.php',
+                'tests/test-wave2-content-mutations.php',
+            ):
+                cp = run(rel)
+                self.assertEqual(cp.returncode, 0, rel + '\n' + cp.stderr)
+
+            # Existing source/body-H1 negatives must die when their exact real branch is disabled.
+            source_mutations = (
+                ('includes/known-error-gate.php', 'if ($h1_count>0) {', 'tests/test-wave1-known-error-mutations.php'),
+                ('includes/content-structure-language-gate.php', 'if ($h1!==0) {', 'tests/test-wave2-content-mutations.php'),
+            )
+            for rel_source, old, rel_test in source_mutations:
+                source = ppm / rel_source
+                original = source.read_text(encoding='utf-8')
+                self.assertEqual(original.count(old), 1, old)
+                source.write_text(original.replace(old, 'if (false) {', 1), encoding='utf-8')
+                killed = run(rel_test)
+                self.assertNotEqual(killed.returncode, 0, 'HR-CONT-001 source mutation survived: ' + rel_source)
+                source.write_text(original, encoding='utf-8')
+
+            # The historical rendered mutation test can stay green through redundant title checks.
+            # Bind the exact H1-count rule by requiring its own error code for zero and two H1s.
+            probe = ppm / 'tests/qf03-wordpress-draft-readback-dom/__system4_hr_cont_001.php'
+            probe.write_text(r'''<?php
+require_once dirname(__DIR__).'/bootstrap-test.php';
+require_once __DIR__.'/fixture-builder.php';
+$hash=hash('sha256',qf03_article_html());
+$expected=array('title'=>'Was muss vor einer Fahrt geprüft werden?','post_id'=>101,'readback_content_hash'=>$hash);
+$base_d=qf03_capture_fixture('desktop',101,$hash);
+$base_m=qf03_capture_fixture('mobile',101,$hash);
+function s4_h1_case($name,$d,$m,$expected){
+  $r=PPM679_Rendered_DOM_Validator::validate_pair($d,$m,$expected);
+  ppm_test_assert($r['ok']===false,$name.' must block');
+  $codes=array_values(array_unique(array_map(fn($e)=>(string)($e['error_code']??''),(array)($r['report']['errors']??array()))));
+  ppm_test_assert(in_array('BLOCKED_QF03_RENDERED_H1_COUNT',$codes,true),$name.' must expose exact H1-count blocker');
+  return $codes;
+}
+$zd=$base_d; $zm=$base_m;
+foreach(array(&$zd,&$zm) as &$x){$x['html']=str_replace('<h1>Was muss vor einer Fahrt geprüft werden?</h1>','',$x['html']);$x['html_sha256']=hash('sha256',$x['html']);}
+unset($x);
+$td=$base_d; $tm=$base_m;
+foreach(array(&$td,&$tm) as &$x){$x['html']=str_replace('</h1>','</h1><h1>Was muss vor einer Fahrt geprüft werden?</h1>',$x['html']);$x['html_sha256']=hash('sha256',$x['html']);}
+unset($x);
+$out=array('zero_h1'=>s4_h1_case('zero_h1',$zd,$zm,$expected),'two_h1'=>s4_h1_case('two_h1',$td,$tm,$expected));
+echo json_encode(array('status'=>'PASS_HR_CONT_001','cases'=>$out),JSON_UNESCAPED_SLASHES)."\n";
+?>''', encoding='utf-8')
+            baseline = run('tests/qf03-wordpress-draft-readback-dom/__system4_hr_cont_001.php')
+            self.assertEqual(baseline.returncode, 0, baseline.stderr)
+            self.assertEqual(json.loads(baseline.stdout).get('status'), 'PASS_HR_CONT_001')
+
+            rendered = ppm / 'includes/rendered-dom-validator.php'
+            original = rendered.read_text(encoding='utf-8')
+            old = "if ($analysis['visible_h1_count']!==1) {"
+            self.assertEqual(original.count(old), 1, old)
+            rendered.write_text(original.replace(old, 'if (false) {', 1), encoding='utf-8')
+            killed = run('tests/qf03-wordpress-draft-readback-dom/__system4_hr_cont_001.php')
+            self.assertNotEqual(killed.returncode, 0, 'HR-CONT-001 rendered H1-count mutation survived')
+            rendered.write_text(original, encoding='utf-8')
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
