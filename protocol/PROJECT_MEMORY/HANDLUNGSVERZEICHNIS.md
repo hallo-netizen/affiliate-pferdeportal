@@ -1,6 +1,6 @@
 # HANDLUNGSVERZEICHNIS
 
-STAND: 2026-09-09
+STAND: 2026-09-16
 
 HARD RULE:
 **Bekannte Aktion niemals erraten. Existiert ein definierter Workflow, darf kein Ersatzweg erfunden werden.**
@@ -48,6 +48,23 @@ Verbindlicher Weg:
 4. bei Installation/Release → dortige technische Originalquelle.
 
 Nie aus einem Dateinamen einen LIVE-/Release-Status ableiten.
+
+## Pferde-Atelier – WordPress-Speicher / Backups / technische Wartung
+
+Aktion:
+Speicherverbrauch, Backup-Reste, WordPress-Dateisystem-/Datenbankdiagnose oder sichere technische Wartungswerkzeuge des Pferde-Ateliers bearbeiten.
+
+Verbindlicher Weg:
+`PROJEKTE/PFERDE_ATELIER/TECHNIK/START_HERE.md`
+→ `CURRENT_STATE.md`
+→ `HOBBYRAUM.md`
+→ lokales `HANDLUNGSVERZEICHNIS.md`.
+
+Bei Pluginänderung zusätzlich:
+`PROJEKTE/PFERDE_ATELIER/PLUGINS/START_HERE.md` → `SYNC_VERTRAG.md`.
+
+Harte Grenze:
+Keine Fachinhalte, Upload-Inhalte, Kategorien, Design- oder Produktionslogik als Nebenwirkung einer Speicherbereinigung verändern. Vor Löschung messen; nach Löschung erneut messen.
 
 ## Neues Projekt beginnen
 
@@ -102,7 +119,6 @@ Autorität:
 **STOPP – nicht raten.**
 Erst Zuständigkeit und vorhandenen Arbeitsweg klären.
 
-
 ## Natürlicher Campus-Einstieg
 
 Aktion:
@@ -143,7 +159,6 @@ Harte Grenze:
 - Rückgabe als Lösungspaket an den zuständigen Arbeitschat;
 - derselbe technische Schreibbereich wird nicht parallel von Paul und Arbeitschat verändert.
 
-
 ## Hobbyraum betreten
 
 Aktion:
@@ -159,7 +174,6 @@ Wichtig:
 Kein Passwort und keine Schreibberechtigung.
 Befugnisse kommen ausschließlich aus Rolle + gebundenem Auftrag + Branch/Fachregeln.
 
-
 ## Tresor / Archiv / Git-Mirror
 
 Verbindlicher Weg:
@@ -171,7 +185,6 @@ Harte Grenze:
 Auch nicht als Ersatzroute bei BLOCKED.
 
 Nach Restore erst frischen offiziellen Arbeits-Worktree herstellen und dann den normalen definierten Arbeitsweg neu starten.
-
 
 ## Produktvergleich planen / entwickeln
 
@@ -194,7 +207,6 @@ Fachgrenzen:
 
 Keinen parallelen STARTMASTER-/TEXT-Umbau aus dem Produktvergleichsbüro beginnen.
 
-
 ## Externe READ-ONLY-Zweitprüfung
 
 Aktion:
@@ -215,7 +227,6 @@ Regel:
 
 Wenn die externe Umgebung auch öffentliche HTTPS-Links nicht öffnen kann:
 STOPP → genau eine automatisch erzeugte Prüfkapsel für den genannten Prüfgegenstand; keine manuelle Mehrdatei-Übergabe.
-
 
 ## PB ONE – Präsentation / Werbung / Angebot / Flyer erstellen
 
@@ -252,7 +263,6 @@ Nutzer und Paul haben in PB ONE dieselben redaktionellen Rechte.
 Keine Programmierung in PB ONE.
 Technische Umsetzung erst nach bewusster Übergabe an ein Projekt-/Fachbüro.
 
-
 ## PB ONE – Arbeitsdokument anlegen
 
 Aktion:
@@ -268,7 +278,6 @@ Regel:
 Eine laufende Unterlage = eine eigene Akte.
 Register enthalten nur Verweise, nicht den vollständigen Inhalt.
 Keine Programmierung.
-
 
 ## GitHub-Komplettsicherung / Backup
 
@@ -311,7 +320,6 @@ Weg:
 Regel:
 Kein zweiter Versions-/Release-/LIVE-Stand im PB-ONE-Pluginfach.
 
-
 ## PB ONE – Preise / Pakete / Baukasten
 
 Aktion:
@@ -322,7 +330,6 @@ Weg:
 
 Regel:
 Entwurfswerte sind nicht automatisch verbindliche Kundenpreise.
-
 
 ## PB ONE – Vertriebsabläufe / Lead-Management
 
@@ -337,7 +344,6 @@ Offene Punkte:
 
 Grenze:
 LeadScout als Produkt/Plugin bleibt im Plugin-Fach; Preislogik im Preis-Fach; Verkaufsunterlagen im Präsentations-/Werbebereich.
-
 
 ## DESIGN – lokale Miniänderung / Elementtausch
 
