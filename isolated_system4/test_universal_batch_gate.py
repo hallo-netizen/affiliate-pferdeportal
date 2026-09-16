@@ -6,6 +6,7 @@ from pathlib import Path
 
 import batch_gate
 import design_guard
+import test_batch_gate
 
 
 def sha_text(value: str) -> str:
@@ -19,15 +20,17 @@ class UniversalBatchGateTests(unittest.TestCase):
         source_id = f'src-{i}'
         e1 = f'Erster konkreter Beleg für Artikel {i} mit fachlicher Aussage und eindeutiger Bindung.'
         e2 = f'Zweiter konkreter Beleg für Artikel {i} mit einer davon verschiedenen fachlichen Aussage.'
-        evidence = e1 + '\n' + e2 + '\n' + f'Zusätzlicher gesicherter Quellenkontext für Artikel {i}.'
+        e3 = f'Dritter konkreter Beleg für Artikel {i} bestätigt einen weiteren eigenständigen fachlichen Prüfpunkt.'
+        evidence = e1 + '\n' + e2 + '\n' + e3 + '\n' + f'Zusätzlicher gesicherter Quellenkontext für Artikel {i}.'
         source = {'source_id': source_id, 'source_title': f'Fachquelle {i}', 'source_url': f'https://example.org/source-{i}', 'retrieved_at': '2026-09-13T08:00:00Z', 'snapshot_sha256': sha_text(evidence), 'evidence': evidence}
         claims = [
             {'fact_id': f'fact-{i}-a', 'source_id': source_id, 'statement': f'Konkrete erste Aussage für Artikel {i}.', 'evidence_text': e1, 'evidence_text_sha256': sha_text(e1)},
             {'fact_id': f'fact-{i}-b', 'source_id': source_id, 'statement': f'Konkrete zweite Aussage für Artikel {i}.', 'evidence_text': e2, 'evidence_text_sha256': sha_text(e2)},
+            {'fact_id': f'fact-{i}-c', 'source_id': source_id, 'statement': f'Konkrete dritte Aussage für Artikel {i}.', 'evidence_text': e3, 'evidence_text_sha256': sha_text(e3)},
         ]
         research = {'contract': 'SYSTEM4_RESEARCH_EVIDENCE_V1', 'sources': [dict(source)]}
         facts = {'contract': 'SYSTEM4_FACTS_EVIDENCE_V1', 'claims': claims}
-        pack = {'contract': 'canonical_fact_pack_v1', 'status': 'SOURCE_VERIFIED_PRODUCTION_READY', 'sources': [dict(source)], 'claims': claims}
+        pack = {'contract': 'canonical_fact_pack_v1', 'status': 'SOURCE_VERIFIED_PRODUCTION_READY', 'sources': [dict(source)], 'claims': [dict(row) for row in claims]}
         return research, facts, pack
 
     def production_evidence(self, draft: str):
@@ -57,7 +60,7 @@ class UniversalBatchGateTests(unittest.TestCase):
             article_type = item['article_type']
             type_class = design_guard.article_type_class(article_type)
             unique = ' '.join(f'eigen{i}_{n}' for n in range(40))
-            draft = f'<article class="ppm-generated {type_class}" data-article-type="{article_type}"><h2>{item["title"]}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b">{item["target_keyword"]} {unique}</p><table class="system-129-table comparison-table"><tr><th>Kriterium</th><th>Wert</th></tr><tr><td>{i}</td><td>{i}</td></tr></table></article>'
+            draft = f'<article class="ppm-generated {type_class}" data-article-type="{article_type}"><h2>{item["title"]}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b fact-{i}-c">{item["target_keyword"]} {unique}</p><table class="system-129-table comparison-table"><tr><th>Kriterium</th><th>Wert</th></tr><tr><td>{i}</td><td>{i}</td></tr></table></article>'
             research, facts, pack = self.evidence(i)
             plan = {'canonical_article': {'body_html': draft}}
             context_core = {'fact_pack': pack, 'production_plan_item': plan}
@@ -82,6 +85,7 @@ class UniversalBatchGateTests(unittest.TestCase):
                 'release_prepared': None,
                 'released': False,
             }
+            test_batch_gate.bind_authoring_contract(state)
             state['immutable_core_sha256'] = batch_gate.stable_hash(batch_gate.immutable_core(state))
             path = root / f'state-{i}.json'
             path.write_text(json.dumps(state, ensure_ascii=False), encoding='utf-8')
