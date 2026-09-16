@@ -1,6 +1,6 @@
 # HAUPTPFÖRTNER – CAMPUS-EINGANG
 
-STAND: 2026-09-05
+STAND: 2026-09-16
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -39,6 +39,8 @@ Jede klare natürliche Formulierung wie:
 - „geh ins Pferde-Atelier“
 - „geh ins Pferde-Atelier TEXT/SEO“
 - „geh ins Pferde-Atelier PRODUKTVERGLEICH“
+- „geh ins Pferde-Atelier TECHNIK“
+- „prüfe WordPress-Speicher / Backups im Pferde-Atelier“
 - „Campus → Pferde-Atelier → TEXT/SEO“
 - „Pferde-Atelier → TEXT → Hobbyraum“
 
@@ -124,7 +126,6 @@ Dann aktuellen `STATUS.md` prüfen.
 
 Nur einen ausdrücklich geprüften `TRESOR_PASS` als vollständige Wiederherstellungsquelle verwenden.
 
-
 ## Backup-/Tresor-Grenze
 
 Für normale Fach- oder Technikarbeit ist `TRESOR/` bzw. `ARCHIV/` **niemals ein Arbeitsweg**.
@@ -133,6 +134,13 @@ Dorthin wird nur geroutet für Backup/Inventarisierung, historische Belegsuche o
 
 Ein lokaler Mirror ist kein Ersatz für den aktuellen gebundenen Arbeitsweg.
 
+## Pferde-Atelier – Technikbetrieb
+
+Wenn der Nutzer WordPress-/Hosting-Betrieb, Speicherverbrauch, Backup-Reste, technische Wartung oder ein dafür gebautes Diagnose-/Cleanup-Werkzeug des Pferde-Ateliers bearbeiten will:
+
+`PROJEKTE/PFERDE_ATELIER/TECHNIK/START_HERE.md`
+
+Plugin-Artefakte bleiben zusätzlich im PLUGINS-Büro registriert. Das TECHNIK-Büro führt den Betriebs-/Diagnosestand; das PLUGINS-Büro führt Inventar und isolierte Installer.
 
 ## Produktvergleich – eindeutiges Routing
 
@@ -144,7 +152,6 @@ Wenn der Auftrag dagegen die eigentliche Textproduktion oder den STARTMASTER-/Te
 `PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md`
 
 Nicht vermischen.
-
 
 ## PB ONE – Agenturzentrale
 
