@@ -51,8 +51,6 @@ nd_reset();$p=nd_build_plan(1,'compact-hash');$keys=array_keys($p['contract_hash
 
 nd_reset();$c=json_decode((string)file_get_contents(PPM679_PLUGIN_DIR.'contracts/g9-single-faq-approved-candidate-v1.json'),true);$b=$c['item']['quality_binding'];$map=array('parent_category'=>array('id'=>101,'type'=>'page','status'=>'publish','parent_url'=>''),'semantic_related'=>array('id'=>102,'type'=>'page','status'=>'publish','parent_url'=>'https://pferde-atelier.de/transport/'),'further_information'=>array('id'=>103,'type'=>'page','status'=>'publish','parent_url'=>'https://pferde-atelier.de/transport/'));ppm_test_assert(!empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$map)['ok']),'valid link targets pass');$bad=$map;$bad['semantic_related']['type']='post';ppm_test_assert(empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$bad)['ok']),'post link target blocks');$bad=$map;$bad['semantic_related']['status']='draft';ppm_test_assert(empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$bad)['ok']),'non-published link target blocks');$bad=$map;$bad['further_information']['id']=0;ppm_test_assert(empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$bad)['ok']),'missing link target blocks');$out['link_target_type_status']=true;
 
-nd_reset();$p=nd_build_plan(1,'compact-category');$cat=$p['items'][0]['quality_binding']['wordpress_category'];ppm_test_assert(!empty(PPM679_WP::resolve_category_binding($cat)['ok']),'current bound category resolves');$bad=$cat;$bad['slug']='definitely-missing-category';ppm_test_assert(empty(PPM679_WP::resolve_category_binding($bad)['ok']),'missing category blocks');$out['category_resolution']=true;
-
 nd_reset();$p=nd_build_plan(1,'compact-auth');$item=$p['items'][0];$pack=PPM679_Storage::load_fact_pack($item['source_snapshot_id']);$g=PPM679_Content_Generator::generate($item,$pack);$ev=PPM679_Content_Validator::check($g,$item,'compact-auth','x');$prep=PPM679_Normal_Draft_Adapter::prepare($g,$item,['technical_status'=>$ev['technical_status'],'content_quality_status'=>$ev['content_quality_status'],'content_hash'=>$ev['content_hash']],nd_runtime($p,'compact-auth'),'run-x',PPM679_Diagnostic::stable_hash($p),'x');ppm_test_assert(!empty($prep['ok']),'prepare authorization');$a=PPM679_Normal_Draft_Adapter::issue_write_authorization($prep);$mut=$prep['payload'];$mut['title']=(string)$mut['title'].' tampered';ppm_test_assert(!PPM679_Normal_Draft_Adapter::verify_write_authorization($a['authorization'],$mut,true),'tampered payload rejected');ppm_test_assert(PPM679_Normal_Draft_Adapter::verify_write_authorization($a['authorization'],$prep['payload'],true),'original payload authorized once');ppm_test_assert(!PPM679_Normal_Draft_Adapter::verify_write_authorization($a['authorization'],$prep['payload'],true),'authorization replay rejected');ppm_test_assert(PPM679_WP::insert_draft('unauthorized','x','unauthorized',[],[],null)===0,'direct unauthorized write blocked');ppm_test_assert(count(PPM679_WP::test_posts())===0,'unauthorized write creates no post');$out['authorization_and_write_chokepoint']=true;
 
 $write=PPM679_Normal_Draft_Adapter::create_draft($prep);ppm_test_assert(!empty($write['ok']),'authorized current draft write passes');ppm_test_assert(count(PPM679_WP::test_posts())===1,'exactly one authorized draft exists');$snap=PPM679_WP::get_post_snapshot($write['post_id']);ppm_test_assert(($snap['post_status']??'')==='draft'&&($snap['post_type']??'')==='post','authorized object is a draft post');$bad=$snap;$bad['category_ids']=[999999];ppm_test_assert(empty(PPM679_Normal_Draft_Readback_Validator::validate_batch([$bad],[$prep['expected']],1)['ok']),'category readback mutation rejected');$bad=$snap;$bad['post_content'].=' MUTATION';ppm_test_assert(empty(PPM679_Normal_Draft_Readback_Validator::validate_batch([$bad],[$prep['expected']],1)['ok']),'content readback mutation rejected');$bad=$snap;$bad['post_status']='publish';ppm_test_assert(empty(PPM679_Normal_Draft_Readback_Validator::validate_batch([$bad],[$prep['expected']],1)['ok']),'status readback mutation rejected');$out['readback_category_content_status']=true;
@@ -84,6 +82,12 @@ class PreNormalDraftCompactionGateTests(unittest.TestCase):
         for rel in OLD_PRE_NORMAL_DRAFT_TESTS:
             self.assertNotIn(rel, registry, msg=f"legacy shell is still registry-bound: {rel}")
 
+    def test_current_category_policy_replaces_v34_shells(self) -> None:
+        current = self.ppm / "tests/three-type-bundled-local/test-complete-category-source.php"
+        cp = subprocess.run(["php", str(current)], cwd=self.ppm, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False)
+        self.assertEqual(cp.returncode, 0, msg=f"STDOUT:\n{cp.stdout}\nSTDERR:\n{cp.stderr}")
+        self.assertIn("TEST_OK|complete-category-source", cp.stdout)
+
     def test_current_normal_draft_runtime_replaces_the_old_safety_intent(self) -> None:
         probe = self.ppm / "__system4-pre-normal-compaction.php"
         probe.write_text(PHP_PROBE, encoding="utf-8")
@@ -93,7 +97,7 @@ class PreNormalDraftCompactionGateTests(unittest.TestCase):
         self.assertEqual(report.get("status"), "PASS_PRE_NORMAL_DRAFT_REPLACED_BY_CURRENT_PROTECTIONS")
         self.assertEqual(set(report.get("checks", {})), {
             "server_identity_prewrite", "cardinality_prewrite", "contract_hash_prewrite",
-            "link_target_type_status", "category_resolution", "authorization_and_write_chokepoint",
+            "link_target_type_status", "authorization_and_write_chokepoint",
             "readback_category_content_status",
         })
 
