@@ -96,7 +96,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm isolated_system4/_temp_wordpress_failclosed_patch.py .github/workflows/system4a-temp-wordpress-failclosed.yml
+          git rm -f isolated_system4/_temp_wordpress_failclosed_patch.py .github/workflows/system4a-temp-wordpress-failclosed.yml
           git add isolated_system4/handoff_transport.py isolated_system4/live_parity_v2.py isolated_system4/full_local_acceptance.py isolated_system4/test_local_end_to_end_chat_handoff.py isolated_system4/test_handoff_transport.py .github/workflows/system4a-real-acceptance.yml
           git commit -m 'fix(system4a): fail closed on unproven WordPress direct import'
           git push origin HEAD:hobbyroom/system4a-startgate-test-20260914
