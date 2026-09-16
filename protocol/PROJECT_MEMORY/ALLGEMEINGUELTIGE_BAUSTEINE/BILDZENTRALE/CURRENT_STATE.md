@@ -1,57 +1,53 @@
 # BILDZENTRALE – CURRENT STATE
 
-STAND: 2026-09-05
-STATUS: QUELLENSTAND KONSOLIDIERT / FACHINHALTE UNVERÄNDERT
+STAND: 2026-09-16
+STATUS: **2.7.0 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
-## Allgemeiner aktueller Dateibeleg
+## Aktueller technischer Release-Kandidat
 
 Plugin:
-`ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
+`ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`
 
 Version:
-**2.6.9**
+**2.7.0**
 
 SHA-256:
-`748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
+`8403bf1ad06be7c6102c37c53648826663fdcbebbe73d27e011364fab51dc5e4`
 
-Nullpunkt:
-`NULLPUNKT_BILDSYSTEM_NEU_069_PROMPTGRENZE_REPARIERT.zip`
+Ausgang:
+2.6.9 / SHA-256 `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
 
-SHA-256:
-`4258ae194e681dcae2fa37467d1a430d48ef2ae7e2889e2f02939456bbb1d434`
+## Änderung 2.7.0
 
-## Byte-Abgleich
+- generischer `post_type_hero`-Weg für öffentliche Custom Post Types mit Thumbnail-Support;
+- Ziel-Post-Type konfigurierbar, kein `pa_breed`-Hardcoding im allgemeinen Kern;
+- 3:1 / 1200×400 / WebP;
+- lokaler Medienimport;
+- Featured-Image-Zuordnung;
+- Readback und Dateiformatprüfung;
+- Rollback auf vorheriges Featured Image bei fehlgeschlagenem Readback/Formatcheck;
+- bestehende Artikel-, WordPress-Taxonomie- und HivePress-Wege bleiben im Regressionsscope.
 
-Der im Nullpunkt 069 enthaltene 2.6.9-Installer ist byte-identisch mit dem separat übergebenen 2.6.9-Installer.
+## Frische Prüfung
 
-## GitHub-Abgleich
+- finale ZIP: lesbar PASS;
+- Version 2.7.0: PASS;
+- SHA-256: PASS;
+- PHP-Lint: PASS;
+- Testharness: 28/28 PASS;
+- persistente `BILDZENTRALE/CURRENT.zip`: Readback Version/Hash PASS.
 
-Auf aktuellem Repository-`main` wurde kein separater Bildzentrale-Dateistand unter diesen Dateinamen/Pfaden gefunden.
+## LIVE-Grenze
 
-Daraus wird keine Fachbewertung abgeleitet.
+Kein WordPress-LIVE-PASS aus lokalen Tests.
 
-## Pferde-Atelier
+Pferde-Atelier-LIVE-Abnahme liegt im Projektbüro:
+`../../../PROJEKTE/PFERDE_ATELIER/BILD/CURRENT_STATE.md`
 
-Projektanwendung:
-`../../../PROJEKTE/PFERDE_ATELIER/BILD/`
+## Wasserzeichen
 
-Historische Pferde-Dateien:
-- Plugin 2.4.9
-- Master 049
+Nicht Bestandteil 2.7.0. Das Konzept bleibt separater Pferde-BILD-Backlog und wird erst mit eigener Ziel-/Rollback-/Idempotenzprüfung umgesetzt.
 
-Zusätzliche Pferde-Belege:
-- Einstellungs-Export 2.6.6
-- Vor-Migrations-Export 2026-08-05
+## Historie / Altbelege
 
-## Archiv
-
-Allgemein:
-`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/2026-09-05/`
-
-Pferde:
-`/Campus-Archiv/PROJEKTE/PFERDE_ATELIER/BILD/2026-09-05/`
-
-Archivampel:
-GELB.
-
-Keine Fachinhalte wurden geprüft oder verändert.
+Siehe `MASTERDATEIEN_INVENTAR.md` und Projekt-BILD-Masterinventar. Historische Exporte mit Secrets sind keine Arbeitsquelle und werden nicht in CURRENT dupliziert.
