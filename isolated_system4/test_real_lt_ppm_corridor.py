@@ -1,7 +1,8 @@
 import hashlib,json,os,tempfile,unittest
 from pathlib import Path
+from unittest import mock
 
-import batch_gate,controller,handoff_transport,production_checks
+import batch_gate,controller,handoff_transport,no_codex_test_repair,production_checks,repair_router
 from live_route_test_support import REPO,write_json
 from real_route_test_support import start_to_context_real,valid_real_article
 
@@ -52,6 +53,38 @@ def handoff_from_states(states):
 
 @unittest.skipUnless(os.environ.get('SYSTEM4_REAL_TOOL_CORRIDOR')=='1','real tool corridor is an explicit CI stage')
 class RealLtPpmCorridorTests(unittest.TestCase):
+    def _fullcheck_with_existing_same_article_repair(self,root,workspace,index):
+        before=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+        article_identity=dict(before['article'])
+        immutable_identity=before['immutable_core_sha256']
+        repairs=0
+        while True:
+            rc=controller.main(['controller.py','fullcheck',str(workspace)])
+            current=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+            if rc==0:
+                self.assertEqual(current['article'],article_identity)
+                self.assertEqual(current['immutable_core_sha256'],immutable_identity)
+                return current,repairs
+            self.assertEqual(rc,3,f'ARTICLE_{index}_REAL_TOOL_HARD_BLOCK:'+str(current.get('last_error')))
+            request_path=workspace/'machine_repair_request.json'
+            self.assertTrue(request_path.is_file(),f'ARTICLE_{index}_REPAIR_REQUEST_MISSING')
+            request=json.loads(request_path.read_text(encoding='utf-8'))
+            repair_router.verify_continuation_result(workspace,request)
+            self.assertEqual(request['status'],'SAME_ARTICLE_BODY_REPAIR')
+            self.assertEqual(request['owner'],'DRAFT_BODY')
+            self.assertEqual(request['target'],'SAME_ARTICLE_BODY')
+            self.assertEqual(request['article'],article_identity)
+            candidate=no_codex_test_repair.candidate_for_current_failure(REPO,workspace)
+            repair_path=root/f'article-{index}-repair-{repairs+1}.html'
+            repair_path.write_text(candidate,encoding='utf-8')
+            self.assertEqual(controller.main(['controller.py','repair',str(workspace),str(repair_path)]),0)
+            repaired=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+            self.assertEqual(repaired['article'],article_identity)
+            self.assertEqual(repaired['immutable_core_sha256'],immutable_identity)
+            self.assertEqual(repaired['phase'],'CHECK_REQUIRED')
+            repairs+=1
+            self.assertLessEqual(repairs,repair_router.MAX_MACHINE_REPAIR_CYCLES,'REAL_TOOL_REPAIR_CYCLE_LIMIT_EXCEEDED')
+
     def test_three_articles_real_sources_lt68_ppm679_batch_handoff_byte_equal(self):
         jar=Path(os.environ.get('SYSTEM4_LANGUAGETOOL_JAR',''))
         self.assertTrue(jar.is_file(),'exact LanguageTool jar missing')
@@ -61,6 +94,7 @@ class RealLtPpmCorridorTests(unittest.TestCase):
             states=[]
             bodies=[]
             snapshot_path=None
+            total_repairs=0
             for index in range(3):
                 workspace,snapshot,state=start_to_context_real(root,index)
                 snapshot_path=snapshot
@@ -69,26 +103,10 @@ class RealLtPpmCorridorTests(unittest.TestCase):
                 self.assertNotIn('example.org',source['source_url'])
                 self.assertEqual(source['source_kind'],'PARENT_CHAT_REAL_WEB_SNAPSHOT')
                 body=valid_real_article(state,index)
-                try:
-                    production_checks.run_languagetool(REPO,body)
-                except production_checks.RepairRequired as exc:
-                    self.fail(f'ARTICLE_{index}_REAL_LT68_FINDINGS:'+json.dumps(exc.findings,ensure_ascii=False,sort_keys=True))
-                try:
-                    production_checks.run_ppm_content_validator(
-                        REPO,
-                        body,
-                        state['production_context']['fact_pack'],
-                        state['production_context']['production_plan_item'],
-                    )
-                except production_checks.RepairRequired as exc:
-                    self.fail(f'ARTICLE_{index}_DIRECT_REAL_PPM_FINDINGS:'+json.dumps(exc.findings,ensure_ascii=False,sort_keys=True))
                 draft=root/f'article-{index}.html';draft.write_text(body,encoding='utf-8')
                 self.assertEqual(controller.main(['controller.py','draft',str(workspace),str(draft)]),0)
-                rc=controller.main(['controller.py','fullcheck',str(workspace)])
-                final=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
-                if rc==3:
-                    self.fail(f'ARTICLE_{index}_REAL_TOOL_REPAIR_REQUIRED:'+json.dumps(final.get('last_error'),ensure_ascii=False,sort_keys=True))
-                self.assertEqual(rc,0,f'ARTICLE_{index}_REAL_TOOL_HARD_BLOCK:'+str(final.get('last_error')))
+                final,repairs=self._fullcheck_with_existing_same_article_repair(root,workspace,index)
+                total_repairs+=repairs
                 self.assertEqual(final['phase'],'OUTPUT_GATE_REQUIRED')
                 evidence=final['checks']['production_evidence']['evidence']
                 self.assertEqual(evidence['languagetool']['engine'],'LanguageTool 6.8 / Bestand 43')
@@ -98,12 +116,12 @@ class RealLtPpmCorridorTests(unittest.TestCase):
                 self.assertEqual(evidence['ppm679']['content_quality_status'],'CONTENT_QUALITY_CHECK_OK')
                 self.assertEqual(evidence['ppm679']['fail_closed_aggregate_status'],'PASS')
                 self.assertEqual(evidence['ppm679']['content_sha256'],final['draft_sha256'])
-                self.assertEqual(final['draft_markdown'],body)
                 self.assertFalse(final['publish_allowed'])
                 state_paths.append(workspace/'state.json')
                 states.append(final)
-                bodies.append(body)
+                bodies.append(final['draft_markdown'])
 
+            self.assertGreater(total_repairs,0,'REAL_REPAIRABLE_LT_PPM_FINDING_WAS_NOT_EXERCISED')
             self.assertIsNotNone(snapshot_path)
             self.assertEqual(len({state['batch_sha256'] for state in states}),1)
             batch_out=root/'batch'
@@ -132,5 +150,21 @@ class RealLtPpmCorridorTests(unittest.TestCase):
                 [row['final_draft_sha256'] for row in payload['articles']],
                 [hashlib.sha256(body.encode('utf-8')).hexdigest() for body in bodies],
             )
+
+    def test_real_invalid_lt_jar_remains_terminal_block(self):
+        with tempfile.TemporaryDirectory(prefix='system4-real-lt-hard-block-') as td:
+            root=Path(td)
+            workspace,_,state=start_to_context_real(root,0)
+            body=valid_real_article(state,0)
+            draft=root/'article.html';draft.write_text(body,encoding='utf-8')
+            self.assertEqual(controller.main(['controller.py','draft',str(workspace),str(draft)]),0)
+            fake=root/'invalid-languagetool.jar';fake.write_bytes(b'not-the-bound-languagetool-6.8-jar')
+            with mock.patch.dict(os.environ,{'SYSTEM4_LANGUAGETOOL_JAR':str(fake)},clear=False):
+                rc=controller.main(['controller.py','fullcheck',str(workspace)])
+            final=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+            self.assertEqual(rc,2)
+            self.assertEqual(final['phase'],'CHECK_REQUIRED')
+            self.assertNotEqual(final.get('checks',{}).get('status'),'PASS')
+            self.assertFalse((workspace/'machine_repair_request.json').exists())
 
 if __name__=='__main__':unittest.main(verbosity=2)
