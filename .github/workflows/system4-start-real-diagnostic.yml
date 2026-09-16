@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect exact signed PPM WP test interface
+      - name: Inspect exact signed PPM test harness
         shell: bash
         run: |
           python - <<'PY'
@@ -26,13 +26,12 @@ jobs:
           with zipfile.ZipFile(p) as z: z.extractall(out)
           PY
           ROOT=/tmp/ppm679inspect/portal-production-machine
-          echo '=== PPM679_WP class location ==='
-          grep -R -n 'class PPM679_WP' "$ROOT" || true
-          echo '=== PPM679_WP public/static functions ==='
-          FILE=$(grep -R -l 'class PPM679_WP' "$ROOT" | head -1)
-          test -n "$FILE"
-          grep -nE 'function [A-Za-z0-9_]+' "$FILE" || true
-          echo '=== normal draft fixture builder ==='
-          sed -n '1,260p' "$ROOT/tests/normal-draft-production/fixture-builder.php"
-          echo '=== current normal draft tests: state/write/readback APIs ==='
-          grep -R -nE 'reset|posts|insert_draft|get_post_snapshot|readback|journal|created|post_id' "$ROOT/tests/normal-draft-production" | head -300
+          echo '=== ALL test_posts definitions/references ==='
+          grep -R -n 'test_posts' "$ROOT" | head -200 || true
+          echo '=== bootstrap-test.php ==='
+          sed -n '1,320p' "$ROOT/tests/bootstrap-test.php"
+          echo '=== wp-adapter.php ==='
+          sed -n '1,320p' "$ROOT/includes/wp-adapter.php"
+          echo '=== test runner candidates ==='
+          find "$ROOT/tests" -maxdepth 2 -type f \( -name 'run*.php' -o -name '*runner*.php' -o -name 'bootstrap*.php' \) -print
+          for F in "$ROOT/tests/run.php" "$ROOT/tests/run-all.php"; do if [ -f "$F" ]; then echo "=== $F ==="; sed -n '1,320p' "$F"; fi; done
