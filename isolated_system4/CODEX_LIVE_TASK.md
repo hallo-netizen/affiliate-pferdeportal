@@ -7,7 +7,7 @@ Sie ist **kein aktueller Arbeitsauftrag** und darf nicht mehr verwendet werden, 
 Aktuell verbindlich:
 
 - System-4-Status: `isolated_system4/README.md`
-- Zielvertrag: `isolated_system4/ZIELVERTRAG_SYSTEM4_CODEX_STRICT_PIPELINE_20260913.md`
+- Zielvertrag: `isolated_system4/ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md`
 - Hard Rules: `isolated_system4/AGENTS.md`
 - realer Produktionsauftrag: `isolated_system4/FULL_RULE_BATCH_TASK.md`
 
