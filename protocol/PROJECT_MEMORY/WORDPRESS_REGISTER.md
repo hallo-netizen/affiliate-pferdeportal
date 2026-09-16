@@ -253,21 +253,6 @@ Hauptquelle:
 Status:
 lokal/fresh stark geprüft; **kein bestätigter Live-WordPress-Deployment-PASS**.
 
-## Aufnahme neuer Plugins
-
-Bei jedem neuen Plugin-/Masterdatei-Eingang:
-
-1. Datei vollständig inventarisieren;
-2. prüfen, ob tatsächlich WordPress-Plugin/Installer;
-3. hier Dateibeleg ergänzen;
-4. Modulklasse nur im MODULREGISTER pflegen;
-5. Projekt-/Live-/Release-Status nur an der Fachquelle pflegen.
-
-## Grundsatz
-
-**Ein Plugin kann in mehreren Projekten genutzt werden, aber es hat nur eine Hauptwahrheit.  
-Dieses Register zeigt nur den Weg dorthin.**
-
 ### WP-008 – HivePress-Anzeigensuche
 
 MOD-ID:
@@ -282,3 +267,53 @@ In Designmastern nachweisbar:
 
 Regel:
 nicht als bloße Design-Datei verschwinden lassen; eigener Modulstatus folgt nach separater Prüfung.
+
+### WP-009 – WordPress Speicheranalyse
+
+Pferde-Plugin-ID:
+`PPA-014`
+
+Pluginname:
+`WordPress Speicheranalyse`
+
+Pluginpfad:
+`pa-speicheranalyse/pa-speicheranalyse.php`
+
+Vorheriger belegter/installierter Stand:
+**1.0.1**
+
+Aktueller Installationskandidat:
+**1.1.0**
+
+Isolierte Ablage:
+`/Campus-Plugins/PFERDE_ATELIER/PPA-014/CURRENT.zip`
+
+SHA-256:
+`3acb62811ec8e7ea1940ec0968e5b51fc2cb0d1ae2f9e86eeeb6718c11873891`
+
+Hauptquelle / Projektstatus:
+`PROJEKTE/PFERDE_ATELIER/TECHNIK/CURRENT_STATE.md`
+
+Plugin-Inventar:
+`PROJEKTE/PFERDE_ATELIER/PLUGINS/REGISTER.md` → `PPA-014`.
+
+Funktion 1.1.0:
+Read-only Speicheranalyse bleibt bestehen; ergänzt ist eine explizit bestätigte, selektive Löschfunktion ausschließlich für reguläre Dateien direkt in `wp-content/wpvividbackups/`.
+
+Statusgrenze:
+**LOCAL HARD PASS / WordPress-LIVE-Retest offen.**
+
+## Aufnahme neuer Plugins
+
+Bei jedem neuen Plugin-/Masterdatei-Eingang:
+
+1. Datei vollständig inventarisieren;
+2. prüfen, ob tatsächlich WordPress-Plugin/Installer;
+3. hier Dateibeleg ergänzen;
+4. Modulklasse nur im MODULREGISTER pflegen;
+5. Projekt-/Live-/Release-Status nur an der Fachquelle pflegen.
+
+## Grundsatz
+
+**Ein Plugin kann in mehreren Projekten genutzt werden, aber es hat nur eine Hauptwahrheit.  
+Dieses Register zeigt nur den Weg dorthin.**
