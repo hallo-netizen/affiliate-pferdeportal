@@ -9,29 +9,12 @@ permissions:
   contents: read
 
 jobs:
-  inspect-signed-ppm:
+  isolate-compaction-gate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect exact signed PPM test harness
+      - name: Run exact pre-normal compaction gate alone
         shell: bash
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import hashlib, zipfile
-          p=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
-          assert hashlib.sha256(p.read_bytes()).hexdigest()=='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
-          out=Path('/tmp/ppm679inspect'); out.mkdir(exist_ok=True)
-          with zipfile.ZipFile(p) as z: z.extractall(out)
-          PY
-          ROOT=/tmp/ppm679inspect/portal-production-machine
-          echo '=== ALL test_posts definitions/references ==='
-          grep -R -n 'test_posts' "$ROOT" | head -200 || true
-          echo '=== bootstrap-test.php ==='
-          sed -n '1,320p' "$ROOT/tests/bootstrap-test.php"
-          echo '=== wp-adapter.php ==='
-          sed -n '1,320p' "$ROOT/includes/wp-adapter.php"
-          echo '=== test runner candidates ==='
-          find "$ROOT/tests" -maxdepth 2 -type f \( -name 'run*.php' -o -name '*runner*.php' -o -name 'bootstrap*.php' \) -print
-          for F in "$ROOT/tests/run.php" "$ROOT/tests/run-all.php"; do if [ -f "$F" ]; then echo "=== $F ==="; sed -n '1,320p' "$F"; fi; done
+          python -m unittest isolated_system4.test_ppm679_pre_normal_draft_compaction_gate -v
