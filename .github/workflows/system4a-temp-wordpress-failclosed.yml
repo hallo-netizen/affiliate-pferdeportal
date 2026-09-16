@@ -1,0 +1,34 @@
+name: TEMP System4A WordPress Failclosed Patch
+on:
+  push:
+    branches: ['hobbyroom/system4a-startgate-test-20260914']
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/system4a-startgate-test-20260914
+          fetch-depth: 0
+      - name: Apply exact patch
+        run: python3 isolated_system4/_temp_wordpress_failclosed_patch.py
+      - name: Check diff
+        run: |
+          git diff --check
+          git diff --stat
+      - name: Focused tests
+        working-directory: isolated_system4
+        run: |
+          python3 -m unittest -v test_handoff_transport.py
+          python3 -m unittest -v test_local_end_to_end_chat_handoff.py
+      - name: Commit patch and remove helpers
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm isolated_system4/_temp_wordpress_failclosed_patch.py .github/workflows/system4a-temp-wordpress-failclosed.yml
+          git add isolated_system4/handoff_transport.py isolated_system4/live_parity_v2.py isolated_system4/full_local_acceptance.py isolated_system4/test_local_end_to_end_chat_handoff.py isolated_system4/test_handoff_transport.py .github/workflows/system4a-real-acceptance.yml
+          git commit -m 'fix(system4a): fail closed on unproven WordPress direct import'
+          git push origin HEAD:hobbyroom/system4a-startgate-test-20260914
