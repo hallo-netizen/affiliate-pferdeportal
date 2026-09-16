@@ -1,6 +1,6 @@
 # CAMPUS – EINGANGSSTANDARD
 
-STAND: 2026-09-05
+STAND: 2026-09-16
 REGEL: **Ein Klick = alles klar.**
 
 Jeder Campus-, Gebäude-, Büro- und besondere Arbeitseingang beginnt mit einer kurzen `1-KLICK-ÜBERSICHT`.
@@ -72,6 +72,30 @@ Jeder Projektbüro-Eingang muss im sichtbaren nächsten Schritt enthalten:
 `CURRENT_STATE.md` → `HOBBYRAUM.md`.
 
 Weitere Inventare/Quellen dürfen danach folgen.
+
+### KISS-Einstieg – eine Tür, eine CURRENT_STATE, Frischecheck
+
+Diese Regel gilt campusweit für **alle bestehenden und neuen Büros und Bürotüren**.
+
+Jede operative Bürotür führt auf **genau eine zuständige `CURRENT_STATE`**.
+
+Die Bürotür ist nur Wegweiser. Sie führt **keine eigene dynamische Fachwahrheit** und insbesondere keinen eigenen aktuellen Status, Versionsstand, Branch/Head, Test-/Run-Stand, Blocker oder eigene `NEXT ACTION`.
+
+Verbindliche Reihenfolge für einen neuen Chat und vor jeder Übergabe:
+1. Bürotür / `START_HERE.md` lesen.
+2. Die dort eindeutig benannte zuständige `CURRENT_STATE` lesen.
+3. Diese `CURRENT_STATE` gegen den **tatsächlich neuesten autoritativen Arbeits-/Teststand** des Büros frisch prüfen. Je nach Büro gehören dazu insbesondere relevanter Arbeits-Branch/Head, letzter echter Test-/Workflow-Lauf oder die sonstige zuständige operative Hauptquelle.
+4. Bei Abweichung: **zuerst `CURRENT_STATE` nachziehen**. Ist das nicht belastbar möglich: `BLOCKED`, nicht raten und nicht auf altem Stand weiterarbeiten.
+5. Erst danach ab der aktuellen `NEXT ACTION` bzw. der dazugehörigen Arbeitsbindung im `HOBBYRAUM` weiterarbeiten.
+
+Die `CURRENT_STATE` bleibt knapp und gegenwartsbezogen. Sie enthält nur, was für den unmittelbaren Wiedereinstieg nötig ist: aktueller belastbarer Stand, erster offener Blocker/Fehler, eindeutige `NEXT ACTION` und erforderliche Arbeitsbindung. Historie und ausführliche Begründungen gehören in Protokoll, Änderungsregister oder Archiv.
+
+Hat ein Büro ausnahmsweise keine eigene `CURRENT_STATE`, muss seine Tür ausdrücklich auf **die eine bereits zuständige bestehende `CURRENT_STATE`** verweisen. Es darf dafür keine zweite Standwahrheit angelegt werden.
+
+Campus-, Gebäude-, Flur- und sonstige Weiterweisertüren bleiben ebenfalls reine Navigation und speichern keinen dynamischen Fach-/Arbeitsstand.
+
+Leitsatz:
+**BÜROTÜR → eine CURRENT_STATE → FRISCHECHECK → NEXT ACTION.**
 
 ### Harte Fehlerabgleich-Sperre an Bürotüren
 
@@ -173,7 +197,8 @@ Vor `fertig`, `PASS` oder Übergabe:
 5. CURRENT_STATE nur bei geändertem belastbarem Stand;
 6. HOBBYRAUM/NEXT ACTION nur bei geändertem Auftrag/Arbeitsstand;
 7. Zielvertrag nur bei echter Zieländerung;
-8. negativ prüfen, dass keine zweite Wahrheit oder Historie als CURRENT entstanden ist.
+8. negativ prüfen, dass keine zweite Wahrheit oder Historie als CURRENT entstanden ist;
+9. bei Büroarbeit zusätzlich Bürotür → eine CURRENT_STATE → Frischecheck → NEXT ACTION positiv und negativ prüfen.
 
 Wenn ein Punkt nicht betroffen ist: **nicht künstlich ändern**.
 
