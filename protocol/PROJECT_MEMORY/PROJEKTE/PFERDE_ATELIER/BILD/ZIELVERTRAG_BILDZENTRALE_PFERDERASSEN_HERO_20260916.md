@@ -1,11 +1,11 @@
 # ZIELVERTRAG – BILDZENTRALE / PFERDERASSEN-HERO
 
 STAND: 2026-09-16
-STATUS: AKTIV / LOCAL HARD PASS, WORDPRESS-LIVE OFFEN
+STATUS: AKTIV
 
 ## Ziel
 
-Die allgemeingültige Bildzentrale wird von Version 2.6.9 auf einen generischen Custom-Post-Type-Hero-Weg erweitert. Im Pferde Atelier wird dieser Weg für den bestehenden Post Type `pa_breed` genutzt.
+Die allgemeingültige Bildzentrale wird um einen generischen Custom-Post-Type-Hero-Weg erweitert. Im Pferde Atelier wird dieser Weg für den bestehenden Post Type `pa_breed` genutzt.
 
 ## Verbindliche Grenzen
 
@@ -17,7 +17,7 @@ Die allgemeingültige Bildzentrale wird von Version 2.6.9 auf einen generischen 
 6. Nach Zuordnung sind Featured-Image-Readback und reale Dateiformatprüfung Pflicht.
 7. Bei Readback-/Formatfehler wird die vorherige Featured-Image-Zuordnung wiederhergestellt.
 8. Bestehende Beiträge-, WordPress-Taxonomie- und HivePress-Wege dürfen nicht regressieren.
-9. Das Pferde-Design wird nicht ohne nachgewiesenen Bedarf umgebaut. Die vorhandene Fallback-Logik nutzt zuerst das Featured Image und nur ohne dieses das Standardbild.
+9. Das Pferde-Design wird nicht ohne nachgewiesenen Bedarf umgebaut. Die vorhandene Fallback-Logik soll zuerst das Featured Image und nur ohne dieses das Standardbild verwenden.
 10. Das Wasserzeichen-Konzept ist ausdrücklich nicht Teil dieses Releases; siehe `TODO.md` → `TODO-BILD-WASSERZEICHEN-001`.
 
 ## Ausgangsquelle
@@ -30,8 +30,9 @@ SHA-256: `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
 ## Zielrelease
 
 Version 2.7.0  
-Datei: `ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`  
-SHA-256: `8403bf1ad06be7c6102c37c53648826663fdcbebbe73d27e011364fab51dc5e4`
+Datei: `ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`
+
+Der aktuelle Prüf-/LIVE-Stand wird hier bewusst nicht dupliziert. Dafür gelten ausschließlich `CURRENT_STATE.md`, `HOBBYRAUM.md` und der gebundene Testreport.
 
 ## PASS-Bedingung
 
