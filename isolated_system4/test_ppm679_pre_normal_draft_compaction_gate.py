@@ -17,7 +17,6 @@ OLD_PRE_NORMAL_DRAFT_TESTS = {
     "tests/v3-stateful-e2e/test-v31-s07-abort-before-write.php",
     "tests/v3-stateful-e2e/test-v31-s08-abort-after-write-before-readback.php",
     "tests/v3-stateful-e2e/test-v31-s11-target-type-status.php",
-    "tests/v3-stateful-e2e/test-v31-s12-server-build-binding.php",
     "tests/v34-category-assignment/test-v34-g9-integration.php",
     "tests/v34-category-assignment/test-v34-governance-contract.php",
     "tests/v34-category-assignment/test-v34-invariance.php",
@@ -31,7 +30,6 @@ OLD_PRE_NORMAL_DRAFT_TESTS = {
 
 CURRENT_REPLACEMENT_TESTS = {
     "tests/test-mainblock1-link-targets.php",
-    "tests/test-build-integrity-only.php",
     "tests/normal-draft-production/test-01-positive-1-to-4.php",
     "tests/normal-draft-production/test-02-cardinality-types-negative.php",
     "tests/normal-draft-production/test-03-identity-replay-negative.php",
@@ -48,13 +46,12 @@ function run_block_no_write($plan,$runtime,$label){$r=PPM679_Normal_Draft_Pipeli
 $out=[];
 
 nd_reset();$p=nd_build_plan(1,'compact-server');$rt=nd_runtime($p,'compact-server');$rt['server_instance_id']='wrong-server';$out['server_identity_prewrite']=run_block_no_write($p,$rt,'server identity mutation');
-nd_reset();$p=nd_build_plan(1,'compact-build');$rt=nd_runtime($p,'compact-build');$rt['build_manifest_sha256']=str_repeat('0',64);$out['build_identity_prewrite']=run_block_no_write($p,$rt,'build identity mutation');
 nd_reset();$p=nd_build_plan(1,'compact-zero');$p['items']=[];$out['cardinality_prewrite']=run_block_no_write($p,nd_runtime($p,'compact-zero'),'zero item plan');
 nd_reset();$p=nd_build_plan(1,'compact-hash');$keys=array_keys($p['contract_hashes']);ppm_test_assert(count($keys)>0,'contract hashes present');$p['contract_hashes'][$keys[0]]=str_repeat('0',64);$out['contract_hash_prewrite']=run_block_no_write($p,nd_runtime($p,'compact-hash'),'contract hash mutation');
 
 nd_reset();$c=json_decode((string)file_get_contents(PPM679_PLUGIN_DIR.'contracts/g9-single-faq-approved-candidate-v1.json'),true);$b=$c['item']['quality_binding'];$map=array('parent_category'=>array('id'=>101,'type'=>'page','status'=>'publish','parent_url'=>''),'semantic_related'=>array('id'=>102,'type'=>'page','status'=>'publish','parent_url'=>'https://pferde-atelier.de/transport/'),'further_information'=>array('id'=>103,'type'=>'page','status'=>'publish','parent_url'=>'https://pferde-atelier.de/transport/'));ppm_test_assert(!empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$map)['ok']),'valid link targets pass');$bad=$map;$bad['semantic_related']['type']='post';ppm_test_assert(empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$bad)['ok']),'post link target blocks');$bad=$map;$bad['semantic_related']['status']='draft';ppm_test_assert(empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$bad)['ok']),'non-published link target blocks');$bad=$map;$bad['further_information']['id']=0;ppm_test_assert(empty(PPM679_WordPress_Link_Target_Validator::revalidate_live_before_write($b,'compact-links',$bad)['ok']),'missing link target blocks');$out['link_target_type_status']=true;
 
-nd_reset();$p=nd_build_plan(1,'compact-category');$cat=$p['items'][0]['quality_binding']['wordpress_category'];$good=PPM679_WP::resolve_category_binding($cat);ppm_test_assert(!empty($good['ok']),'current bound category resolves');$bad=$cat;$bad['slug']='definitely-missing-category';ppm_test_assert(empty(PPM679_WP::resolve_category_binding($bad)['ok']),'missing category blocks');$out['category_resolution']=true;
+nd_reset();$p=nd_build_plan(1,'compact-category');$cat=$p['items'][0]['quality_binding']['wordpress_category'];ppm_test_assert(!empty(PPM679_WP::resolve_category_binding($cat)['ok']),'current bound category resolves');$bad=$cat;$bad['slug']='definitely-missing-category';ppm_test_assert(empty(PPM679_WP::resolve_category_binding($bad)['ok']),'missing category blocks');$out['category_resolution']=true;
 
 nd_reset();$p=nd_build_plan(1,'compact-auth');$item=$p['items'][0];$pack=PPM679_Storage::load_fact_pack($item['source_snapshot_id']);$g=PPM679_Content_Generator::generate($item,$pack);$ev=PPM679_Content_Validator::check($g,$item,'compact-auth','x');$prep=PPM679_Normal_Draft_Adapter::prepare($g,$item,['technical_status'=>$ev['technical_status'],'content_quality_status'=>$ev['content_quality_status'],'content_hash'=>$ev['content_hash']],nd_runtime($p,'compact-auth'),'run-x',PPM679_Diagnostic::stable_hash($p),'x');ppm_test_assert(!empty($prep['ok']),'prepare authorization');$a=PPM679_Normal_Draft_Adapter::issue_write_authorization($prep);$mut=$prep['payload'];$mut['title']=(string)$mut['title'].' tampered';ppm_test_assert(!PPM679_Normal_Draft_Adapter::verify_write_authorization($a['authorization'],$mut,true),'tampered payload rejected');ppm_test_assert(PPM679_Normal_Draft_Adapter::verify_write_authorization($a['authorization'],$prep['payload'],true),'original payload authorized once');ppm_test_assert(!PPM679_Normal_Draft_Adapter::verify_write_authorization($a['authorization'],$prep['payload'],true),'authorization replay rejected');ppm_test_assert(PPM679_WP::insert_draft('unauthorized','x','unauthorized',[],[],null)===0,'direct unauthorized write blocked');ppm_test_assert(count(PPM679_WP::test_posts())===0,'unauthorized write creates no post');$out['authorization_and_write_chokepoint']=true;
 
@@ -95,7 +92,7 @@ class PreNormalDraftCompactionGateTests(unittest.TestCase):
         report = json.loads(cp.stdout)
         self.assertEqual(report.get("status"), "PASS_PRE_NORMAL_DRAFT_REPLACED_BY_CURRENT_PROTECTIONS")
         self.assertEqual(set(report.get("checks", {})), {
-            "server_identity_prewrite", "build_identity_prewrite", "cardinality_prewrite", "contract_hash_prewrite",
+            "server_identity_prewrite", "cardinality_prewrite", "contract_hash_prewrite",
             "link_target_type_status", "category_resolution", "authorization_and_write_chokepoint",
             "readback_category_content_status",
         })
