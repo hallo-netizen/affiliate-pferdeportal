@@ -85,10 +85,27 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
         controller = text(HERE / 'controller.py')
         self.assertNotIn("raise Fail('REPAIR_OWNER_CONFLICT", controller)
         self.assertIn('MULTI_OWNER_RETURN', controller)
-        self.assertIn("s['checks']['return_required']=True", controller)
-        self.assertIn("s['checks']['return_route']=PARENT_LAUNCH", controller)
+        self.assertRegex(controller, r"s\['checks'\]\['return_required'\]\s*=\s*True")
+        self.assertRegex(controller, r"s\['checks'\]\['return_route'\]\s*=\s*PARENT_LAUNCH")
         self.assertIn('SYSTEM4_STAGE_OWNER_RETURN', controller)
         self.assertIn('SYSTEM4_REPAIR_OWNER_RETURN', controller)
+
+        # Worker-owned upstream findings must stay inside the same article/workspace:
+        # rollback to the earliest responsible producer, invalidate downstream proof,
+        # re-enter that phase, and fail closed after a bounded number of attempts.
+        for needle in (
+            "ROUTE_CONTRACT = 'SYSTEM4_CANONICAL_ARTICLE_ROUTE_V1'",
+            'ARTICLE_ROUTE = (',
+            'MAX_UPSTREAM_REPAIR_RETURNS = 2',
+            'def _rollback_upstream_worker(',
+            "raise Fail('REPAIR_RETURN_LIMIT_EXHAUSTED:' + target)",
+            "raise Fail('REPAIR_RETURN_SAME_ARTICLE_VIOLATION')",
+            "state['route_progress'] = list(CANONICAL_COMPLETION_TRACE[:target_index])",
+            "state['phase'] = target_phase",
+            'SYSTEM4_CONTROLLED_REPAIR_RETURN:',
+            'repaired_owner = _rollback_upstream_worker(s, p, owners, error)',
+        ):
+            self.assertIn(needle, controller)
 
     def test_same_checker_is_mandatory_after_draft_repair(self):
         route = text(HERE / 'live_parity_v2.py')
