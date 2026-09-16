@@ -1,0 +1,80 @@
+name: System 4A Step33 Diagnostic
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-step33-diag-35085131467'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  step33-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SYSTEM4_FRESH_RUN_TOKEN: 35085131467-1-6ba6466b6ec96d77814d4094eb123536b1e8ffed
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 6ba6466b6ec96d77814d4094eb123536b1e8ffed
+      - name: Exact original head
+        run: |
+          test "$(git rev-parse HEAD)" = "6ba6466b6ec96d77814d4094eb123536b1e8ffed"
+          git rev-parse HEAD
+      - name: Download hash-bound LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Build fresh machine inputs for one article
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-1 1
+      - name: Run complete one article route
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-1
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_1_PROOF.json
+        run: |
+          set -euo pipefail
+          python3 isolated_system4/live_parity_v2.py all 2>&1 | tee /tmp/system4-one-route.log
+          cp /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2_1_ARTICLE.json
+      - name: Build fresh machine inputs for three articles
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-3 3
+      - name: Run exact canonical step33 and capture stderr
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-3
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_3_PROOF.json
+        run: |
+          set -euo pipefail
+          python3 isolated_system4/live_parity_v2.py all 2>&1 | tee /tmp/system4-three-route.log
+          test "$(grep -c '^SYSTEM4_TESTWORKER_REPAIR_REQUEST:' /tmp/system4-three-route.log)" -eq 1
+          grep -F '"article_index": 1' /tmp/system4-three-route.log
+          grep -F 'BLOCKED_KNOWN_REGRESSION_PATTERN' /tmp/system4-three-route.log
+          echo 'SYSTEM4_THREE_ARTICLE_EXACT_REPAIR_EVENT_PASS'
+      - name: Preserve exact step33 diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-step33-diagnostic
+          path: |
+            /tmp/system4-one-route.log
+            /tmp/system4-three-route.log
+            /tmp/system4-acceptance-output/
+            /tmp/system4-fixture-3/
+          if-no-files-found: warn
+          retention-days: 1
