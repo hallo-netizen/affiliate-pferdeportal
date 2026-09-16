@@ -1,34 +1,32 @@
 # PFERDE-ATELIER – PLUGINS – HOBBYRAUM
 
-STAND: 2026-09-15
-STATUS: BLOCKED
+STAND: 2026-09-16
+STATUS: **FREI**
 
-## AKTUELLER VORRANG
-`PU-20260915-002` – PPA-002 Pferde Atelier Design.
+## AKTUELLER STAND
 
-Realer Nutzerbefund:
-- Pferderassen-Seite nicht mehr auffindbar / zerschossen;
-- Glossar nicht mehr auffindbar.
+Die in diesem Chat tatsächlich geänderten Pluginstände sind nachgeprüft und im Pluginbüro protokolliert/synchronisiert:
+- PPA-002 Design 1.50.541 → LIVE PASS;
+- PPA-003 Bildzentrale 2.7.6 → local hard PASS / Pferde-LIVE-Funktion PASS;
+- PPA-012 Universal Glossary Engine 1.4.7 → LIVE PASS;
+- PPA-015 Rassentexte Textpflege 1.1.0 → LIVE PASS / einmaliger Auftrag abgeschlossen.
 
-## HARTE SPERRE
-Kein Design-CURRENT-Sync und keine weitere Pluginabnahme, bevor die Fachseite `../DESIGN/` den real installierten Stand beider Designplugins bestimmt und die Ursache mit Positiv-/Negativ-/Kombinationstest reproduziert hat.
-
-## BEREITS REAL SYNCHRONISIERT
-- PPA-001 Affiliate-Zentrale 6.72.19
-- PPA-003 Bildzentrale 2.6.9
-- PPA-004 Universal Research & Fill 1.9.9
-- PPA-005 Portal SEO Topic Engine 0.56.25
-- PPA-007 Pferde Atelier HivePress Anzeigensuche 2.1.5
-- PPA-011 Pferde Atelier – Pferderassen Manager 0.2.7
-
-## BLOCKED
-- PPA-002 Design: aktiver LIVE-Fehlerzug, siehe `PU-20260915-002`.
-- PPA-006 Editorial Plan Compiler: Versionsbindung offen.
-- PPA-008 Universal Product Comparison: aktuelle ZIP nicht erreichbar.
-- PPA-009 Universal Product Knowledge: exakte CURRENT-Bindung offen.
+PPA-014 Speicheranalyse bleibt als separater bestehender LIVE-offener Vorgang sichtbar, ist aber nicht aktive Arbeit dieses Chats.
 
 ## NEXT ACTION
-Erst `PU-20260915-002` fachlich schließen. Danach Artefakt-Sync nach `SYNC_VERTRAG.md` nur bei vollständigem PASS.
+
+Keine Pluginbüro-Aktion aus diesem Chat offen.
+
+Bei neuer Pluginänderung:
+Fachbüro → lokale Positiv/Negativ/Regression → ggf. WordPress-LIVE → genau ein PU-Vorgang → CURRENT.zip + MANIFEST → Readback.
+
+## NICHT ANFASSEN
+
+- keine zweite Plugin-ID für ein bereits registriertes Plugin;
+- keine lokale Kandidatenversion als CURRENT ohne Fach-/Testbindung;
+- keine Fach-/LIVE-Wahrheit in dieses Inventarbüro kopieren;
+- PPA-013 nicht reaktivieren; kanonisches Pferde-Design ist PPA-002.
 
 ## RÜCKGABEWEG
-Ein Designstand darf erst `ARTEFAKT_SYNC: PASS` erhalten, wenn Fachquelle + ZIP + Version + SHA + Positivtest + Negativtest + Kombinationsregression + realer WordPress-Readback belegt sind.
+
+Neue Entwicklung immer aus der zuständigen Fachquelle starten und erst nach PASS hier synchronisieren.
