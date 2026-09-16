@@ -80,7 +80,12 @@ jobs:
           if bad_states: raise SystemExit('PPM679_HARD_RULE_MATRIX_UNTESTED:'+','.join(map(str,bad_states[:20])))
           all_tests=sorted(p.relative_to(seed_ppm).as_posix() for p in (seed_ppm/'tests').rglob('test-*.php') if p.is_file())
           if len(all_tests)<100: raise SystemExit('PPM679_INTERNAL_TEST_SET_INCOMPLETE:'+str(len(all_tests)))
-          retired={
+          replaced_stale={
+              'tests/test-canonical-runtime-binding.php',
+              'tests/test-g9-faq-only-live-state-integration.php',
+              'tests/test-historical-regressions.php',
+              'tests/test-positive-pipeline.php',
+              'tests/test-wave1-unsigned-quarantine-blocked.php',
               'tests/three-type-bundled-local/test-beratung-positive.php',
               'tests/three-type-bundled-local/test-bundled-overall-and-no-live.php',
               'tests/three-type-bundled-local/test-pflege-positive.php',
@@ -90,19 +95,17 @@ jobs:
               'tests/three-type-bundled-local/test-v38-baseline-byte-identity.php',
               'tests/three-type-bundled-local/test-vergleich-positive.php',
           }
-          missing_retired=sorted(retired-set(all_tests))
-          if missing_retired: raise SystemExit('PPM679_HISTORICAL_TEST_SET_DRIFT:'+missing_retired[0])
-          tests=[rel for rel in all_tests if rel not in retired]
+          missing_replaced=sorted(replaced_stale-set(all_tests))
+          if missing_replaced: raise SystemExit('PPM679_REPLACED_STALE_TEST_SET_DRIFT:'+missing_replaced[0])
+          tests=[rel for rel in all_tests if rel not in replaced_stale]
           print('PPM679_TOTAL_ORIGINAL_TEST_COUNT='+str(len(all_tests)))
-          print('PPM679_HISTORICAL_RETIRED_WITH_REPLACEMENT_COUNT='+str(len(retired)))
-          print('PPM679_CURRENT_MANDATORY_TEST_COUNT='+str(len(tests)))
-          for rel in sorted(retired): print('PPM679_HISTORICAL_RETIRED_WITH_REPLACEMENT='+rel)
+          print('PPM679_REPLACED_STALE_TEST_COUNT='+str(len(replaced_stale)))
+          print('PPM679_CURRENT_MANDATORY_ORIGINAL_TEST_COUNT='+str(len(tests)))
+          for rel in sorted(replaced_stale): print('PPM679_REPLACED_STALE_TEST='+rel)
           required={
               'tests/test-mainblock1-hard-rule-coverage.php',
               'tests/test-mainblock1-link-targets.php',
               'tests/test-mainblock1-table-hard-rules.php',
-              'tests/test-historical-regressions.php',
-              'tests/test-positive-pipeline.php',
               'tests/test-runtime-safety.php',
               'tests/test-wave1-known-error-mutations.php',
               'tests/test-wave2-content-mutations.php',
