@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-15
+STAND: 2026-09-16
 ROLLE: ZENTRALES INVENTAR-/ARTEFAKTREGISTER, KEINE FACH-/LIVE-WAHRHEIT
 
 ## Statuswerte
@@ -137,6 +137,23 @@ liegt und aus der persistenten Ablage erneut gelesen, als ZIP geprüft und per S
 - UPDATEVORGANG: `PU-20260915-001`
 - READBACK: ZIP erneut aus persistentem Plugin-Schrank gelesen; SHA-256 PASS; ZIP-Lesetest PASS; Plugin-Version 0.2.7 PASS.
 - ARTEFAKT_SYNC: **PASS**
+
+## PPA-014 – WordPress Speicheranalyse
+
+- HERKUNFT: EIGENENTWICKLUNG; Basis 1.0.1 vom Nutzer als Installer bereitgestellt
+- KLASSE: PFERDE-ATELIER / TECHNIK; Allgemeingültigkeit nicht bewertet
+- FACHBÜRO: `../TECHNIK/`
+- AUTORITATIVE TECHNISCHE QUELLE: `../TECHNIK/CURRENT_STATE.md` + aktueller 1.1.0-Quell-/Teststand
+- VORGÄNGER: 1.0.1
+- AKTUELLER INSTALLATIONSKANDIDAT: **1.1.0**
+- INSTALLER/ISOLIERTER STAND: `/Campus-Plugins/PFERDE_ATELIER/PPA-014/CURRENT.zip`
+- SHA-256: `3acb62811ec8e7ea1940ec0968e5b51fc2cb0d1ae2f9e86eeeb6718c11873891`
+- MANIFEST: `/Campus-Plugins/PFERDE_ATELIER/PPA-014/MANIFEST.md`
+- TESTNACHWEIS: `/Campus-Plugins/PFERDE_ATELIER/PPA-014/TESTS.md`
+- FUNKTIONSÄNDERUNG: bestehende read-only Analyse bleibt; zusätzlich selektive, explizit bestätigte Löschung ausschließlich regulärer Dateien direkt in `wp-content/wpvividbackups/`
+- LOCAL: PHP-Syntax + ZIP + Positiv-/Negativ-Hardlocktests PASS
+- WORDPRESS-LIVE: **OFFEN** – 1.1.0 noch nicht im echten Backend installiert/bedient
+- ARTEFAKT_SYNC: **PASS** – isolierte ZIP + Manifest + Tests persistent abgelegt; LIVE-Grenze bleibt separat offen
 
 ## Harte Regel für neue Einträge
 
