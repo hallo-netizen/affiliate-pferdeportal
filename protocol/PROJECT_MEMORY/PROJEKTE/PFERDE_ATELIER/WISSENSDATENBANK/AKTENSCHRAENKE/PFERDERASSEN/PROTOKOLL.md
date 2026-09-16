@@ -91,3 +91,36 @@ FOLGE:
 OFFEN:
 - direkter WordPress-Readback und Bereinigung der zwei Doppel-IDs;
 - autoritative Sechs-Gruppen-Zuordnung der 13 letzten Identitäten.
+
+## 2026-09-16 – Textpflege für 196 veröffentlichte Rassen LIVE abgeschlossen
+
+AUSLÖSER:
+Im veröffentlichten Rassenbestand wurden fremde Maßeinheiten, Rechtschreib-/Grammatikfehler sowie teilweise holprige oder stakkatoartige Fließtextpassagen festgestellt. Verbindliche Aufzählungen sollten ausdrücklich unangetastet bleiben.
+
+VERBINDLICHE ÄNDERUNGSGRENZE:
+- keine neuen Fachfakten;
+- keine Entfernung vorhandener Fakten;
+- Überschriften und Reihenfolge unverändert;
+- Aufzählungen bleiben Aufzählungen, Reihenfolge und Faktenpositionen unverändert;
+- Fremdmaße ausschließlich metrisch normalisieren;
+- Rechtschreibung/Grammatik korrigieren;
+- nur normalen Fließtext sprachlich glätten und lesbarer formulieren;
+- WordPress-Schreibscope ausschließlich `post_content`;
+- Titel, Slug, Status, Beitragsbild, Rassengruppe, Relationen und Post-Meta nicht verändern.
+
+PRÜFUNG VOR LIVE:
+- vollständiger 196er-Zielbestand gegen Ausgangsmaterial geprüft;
+- Listenanzahl und Listenpositionen erhalten;
+- Überschriften/Reihenfolge erhalten;
+- Fremdmaße im Zielbestand beseitigt;
+- Text-QA ohne erkannte Restabweichung;
+- einmaliger Updater mit Dry-Run, Readback, geschützten Feldern, Rollback und Mutationstests lokal geprüft.
+
+WORDPRESS-LIVE:
+1. erster Dry-Run: `PASS / LIVE veröffentlicht 196 / würde aktualisieren 196 / bereits Zielstand 0`;
+2. Update-Lauf: `PASS / final verifiziert 196`;
+3. nachgelagerter unabhängiger Dry-Run: `PASS / LIVE veröffentlicht 196 / würde aktualisieren 0 / bereits Zielstand 196`;
+4. Nutzer prüfte live exemplarisch American Cream Draft, American Bashkir Curly/Curly Horse und Shire Horse; Rechtschreibung/Fließtext, metrische Maße und unveränderte Aufzählungen wurden ausdrücklich als in Ordnung bestätigt.
+
+ERGEBNIS:
+Die 196er-Textpflege ist **LIVE PASS / ABGESCHLOSSEN**. Sie ist keine offene NEXT ACTION mehr. Die separaten Fachblocker `PR-BREED-001` und `PR-BREED-002` bleiben davon unberührt offen.
