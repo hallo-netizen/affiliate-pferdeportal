@@ -42,7 +42,6 @@ def build_fixture(root: Path, count: int) -> tuple[str, str, str, dict]:
     release_dir.mkdir(parents=True, exist_ok=True)
     source_dir.mkdir(parents=True, exist_ok=True)
 
-    articles = []
     release_items = []
     plan_items = []
     outputs = []
@@ -58,7 +57,6 @@ def build_fixture(root: Path, count: int) -> tuple[str, str, str, dict]:
         source_ref = f"control/startmaster0107/recovery_sources/{batch}/{name}"
         (release_dir / name).write_bytes(raw)
         (source_dir / name).write_bytes(raw)
-        articles.append({"name": name, "plan_slot": slot, "sha256": digest, "byte_length": len(raw), "content_utf8": body})
         release_items.append({"plan_slot": slot, "canonical_article_id": cid})
         plan_items.append({"canonical_article_id": cid, "canonical_article": {"body_html": body}})
         outputs.append({"source_ref": source_ref, "released_ref": released_ref, "sha256": digest})
@@ -154,10 +152,26 @@ def negative_source_count_mismatch() -> None:
         final = load_module(FINAL_PATH, "github_final_negative")
         final.REPO = root
         try:
-            final.load_source(source_ref)
+            final.snapshot(*final.load_source(source_ref))
         except Exception:
             return
         raise AssertionError("NEGATIVE_SOURCE_COUNT_MISMATCH_NOT_BLOCKED")
+
+
+def negative_zero_count() -> None:
+    with tempfile.TemporaryDirectory(prefix="system4a-downstream-zero-") as td:
+        root = Path(td)
+        _, _, source_ref, source = build_fixture(root, 1)
+        source["item_count"] = 0
+        p = root / source_ref
+        p.write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        final = load_module(FINAL_PATH, "github_final_zero")
+        final.REPO = root
+        try:
+            final.load_source(source_ref)
+        except Exception:
+            return
+        raise AssertionError("NEGATIVE_ZERO_COUNT_NOT_BLOCKED")
 
 
 def contract_source_guards() -> None:
@@ -176,10 +190,13 @@ def main() -> int:
     contract_source_guards()
     exercise_count(1)
     exercise_count(3)
+    exercise_count(25)
     negative_source_count_mismatch()
+    negative_zero_count()
     print("SYSTEM4A_DOWNSTREAM_1N_CONTRACT_PROBE_OK")
-    print("POSITIVE_COUNTS=1,3")
+    print("POSITIVE_COUNTS=1,3,25")
     print("NEGATIVE_COUNT_MISMATCH=BLOCKED")
+    print("NEGATIVE_ZERO_COUNT=BLOCKED")
     return 0
 
 
