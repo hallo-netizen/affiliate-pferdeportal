@@ -1,6 +1,7 @@
 from __future__ import annotations
 import io, re, zipfile
 from pathlib import Path
+import downstream_1n_contract_probe
 
 REPO=Path(__file__).resolve().parent.parent
 OUTER=REPO/'control/startmaster0107/runtime_packages/PSERC-FIX.zip'
@@ -46,6 +47,7 @@ def main()->int:
     print('SYSTEM4_WORDPRESS_IMPORTER_BUILD_BOUND='+EXPECTED_BUILD)
     print('SYSTEM4_WORDPRESS_ENDSTEMPEL_CONTRACT_BOUND='+EXPECTED_ENDSTAMP_CONTRACT)
     print('SYSTEM4_WORDPRESS_RAW_V2_DIRECT_IMPORT_BLOCK_PROVEN='+FORBIDDEN_DIRECT_HANDOFF_CONTRACT)
+    downstream_1n_contract_probe.main()
     return 0
 
 if __name__=='__main__': raise SystemExit(main())
