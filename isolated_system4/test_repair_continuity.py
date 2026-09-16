@@ -79,14 +79,14 @@ def _prepare_batch(root: Path, count: int):
 
 def _minor_repair(body: str) -> str:
     candidates = (
-        'Befund wird vorab geprüft',
-        'Abweichung wird vorher geklärt',
-        'Zustand wird aktuell bestätigt',
-        'Funktion wird gezielt kontrolliert',
-        'Ergebnis wird neu festgestellt',
-        'Prüfpunkt bleibt nachvollziehbar',
-        'Kontrolle erfolgt vor Fahrtbeginn',
-        'Beobachtung wird eindeutig bewertet',
+        'Befund wird vorab sorgfältig geprüft',
+        'Abweichung wird vorher eindeutig geklärt',
+        'Zustand wird aktuell erneut bestätigt',
+        'Funktion wird gezielt vollständig kontrolliert',
+        'Ergebnis wird neu eindeutig festgestellt',
+        'Prüfpunkt bleibt weiterhin klar nachvollziehbar',
+        'Kontrolle erfolgt direkt vor Fahrtbeginn',
+        'Beobachtung wird anschließend eindeutig bewertet',
     )
     for phrase in candidates:
         if phrase in body:
@@ -192,6 +192,7 @@ class RepairContinuityTests(unittest.TestCase):
                 'system-129-table comparison-table', 'comparison-table', 1,
             )
             self.assertNotIn('system-129-table comparison-table', changed)
+            changed = _minor_repair(changed)
             draft.write_text(changed, encoding='utf-8')
             with self.assertRaisesRegex(
                 controller.Fail,
