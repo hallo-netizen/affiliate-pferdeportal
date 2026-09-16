@@ -81,7 +81,7 @@ Installierte Versionen beider Designplugins frisch bestimmen → exakte Kombinat
 
 ERGEBNIS: **BLOCKED**
 
-## PU-20260916-001 – WordPress Speicheranalyse
+## PU-20260916-006 – WordPress Speicheranalyse
 
 - PLUGIN-ID: `PPA-014`
 - NAME: `WordPress Speicheranalyse`
