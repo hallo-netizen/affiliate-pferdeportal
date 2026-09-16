@@ -59,6 +59,12 @@ jobs:
               raise SystemExit(f'NEGATIVE_DRAFT_MOCK_ANCHOR_MATCHES:{t.count(old)}')
           t=t.replace(old,new,1)
 
+          old="            collected = batch_gate.collect_batch(SNAPSHOT, state_paths, batch_out)"
+          new="            with mock.patch.object(batch_gate.authoring_contract, 'validate_bound', return_value={'contract':'SYSTEM4_LOCAL_HANDOFF_TEST_AUTHORING_V1'}):\n                collected = batch_gate.collect_batch(SNAPSHOT, state_paths, batch_out)"
+          if t.count(old)!=1:
+              raise SystemExit(f'BATCH_AUTHORING_MOCK_ANCHOR_MATCHES:{t.count(old)}')
+          t=t.replace(old,new,1)
+
           p.write_text(t,encoding='utf-8')
           for path in [
               Path('isolated_system4/handoff_transport.py'),
