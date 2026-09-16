@@ -5,43 +5,47 @@ STATUS: AKTIV
 
 ## GEBUNDENER AUFTRAG
 
-Bildzentrale 2.6.9 kontrolliert auf **Pferderassen-Hero-Bilder** erweitern.
+Bildzentrale 2.7.0 – **Pferderassen-Hero über generischen Custom-Post-Type-Hero-Weg** bis zum echten WordPress-LIVE-PASS führen.
 
-KISS-Ziel:
-- der allgemeingültige Kern erhält einen generischen Hero-Bildweg für einen konfigurierten WordPress-Custom-Post-Type;
-- im Pferde Atelier wird damit `pa_breed` bedient;
-- das erzeugte Bild wird als Beitragsbild/Featured Image der Rasse gesetzt;
-- Pferde-Design 1.50.536 nutzt auf `pa_breed` bereits das Beitragsbild und fällt nur ohne Beitragsbild auf das gebündelte Standardbild zurück. Deshalb zunächst **kein Design-Umbau**; nur wenn ein realer Test diese vorhandene Logik widerlegt, geht ein separater Minimalpatch ins DESIGN-Büro.
+## AKTUELLER ARBEITSSTAND
 
-## ARBEITSBASIS
-
-Autoritativer Ausgangsbeleg:
-`ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/` → Bildzentrale 2.6.9.
-
-Gebundener Release-Ausgang:
-`ALLGEMEINE_BILDZENTRALE_2.6.9_PROMPTGRENZE_REPARIERT.zip`
-SHA-256: `748f77602bc3d4f64bd24a2f163c53829f0c1e8dc2102a82a642ceb4778e160e`
-
-WICHTIGER FRISCHER BEFUND:
-Die isolierte Plugin-Ausgabekopie `PPA-003/CURRENT.zip` stimmt aktuell nicht mit ihrem Manifest überein und darf **nicht** als Entwicklungsbasis verwendet werden. Vor Release der neuen Bildzentrale muss PPA-003 aus der geprüften autoritativen Bildzentrale neu synchronisiert werden.
-
-## NICHT IN DIESEM RELEASE
-
-Wasserzeichen-Konzept und späterer Mediathek-Nachhol-Lauf liegen ausschließlich als Backlog in `TODO.md` (`TODO-BILD-WASSERZEICHEN-001`). Keine Wasserzeichenlogik in den Pferderassen-Hero-Release mischen.
+- 2.7.0 gebaut.
+- LOCAL HARD PASS: 28/28 Positiv-/Negativ-/Regressionstests.
+- finale ZIP/Version/SHA-256/PHP-Lint frisch PASS.
+- allgemeines Bildzentrale-Artefakt und isolierte PPA-003-Ausgabekopie auf 2.7.0 synchronisiert und frisch gelesen.
+- Pferde-Design 1.50.536 benötigt nach statischem Codeabgleich derzeit **keinen Patch**: Featured Image hat Vorrang, Standardbild ist Fallback.
+- Wasserzeichen bleibt separater Backlog in `TODO.md` und wird nicht in diesen Release gemischt.
 
 ## NEXT ACTION
 
-1. Bildzentrale auf generischen Custom-Post-Type-Hero erweitern.
-2. `pa_breed`-Pfad positiv und fremden Post-Type negativ prüfen.
-3. Featured-Image-Readback + Rollback + Formatprüfung ausführen.
-4. Regression: Beiträge, WordPress-Taxonomien, HivePress unverändert.
-5. Design 1.50.536 gegen die bestehende Fallback-Logik prüfen.
-6. Erst bei vollständigem PASS neue Pluginversion/Artefakt synchronisieren und CURRENT_STATE nachziehen.
+1. Bildzentrale 2.7.0 in WordPress installieren.
+2. im Post-Type-Hero-Profil `pa_breed` speichern.
+3. eine reale Pferderasse auswählen und Hero erzeugen/zuordnen.
+4. WordPress-Featured-Image-Readback prüfen.
+5. Frontend positiv prüfen: spezifisches Bild sichtbar, Standardbild weg.
+6. Frontend negativ prüfen: Rasse ohne spezifisches Bild zeigt weiterhin Standard-Fallback.
+7. erst nach diesem echten LIVE-PASS `CURRENT_STATE.md` auf LIVE 2.7.0 setzen.
 
-## VERBINDLICHER RÜCKGABEWEG
+## VERBINDLICHER ARBEITSWEG
 
-Neue belastbare Version → allgemeine Bildzentrale als technische Hauptquelle → Pferde-BILD-CURRENT nur als Projektstatus → isolierte Plugin-Ausgabekopie PPA-003 mit Hash-/Versions-/ZIP-Readback.
+Technische Hauptquelle:
+`ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
 
-## GLOBALE ARBEITSORT-SPERRE
+Release:
+`ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`
 
-Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle. Ein verifiziertes Archivartefakt darf lediglich in eine neue Arbeitskopie wiederhergestellt werden; bearbeitet und getestet wird ausschließlich die Arbeitskopie.
+SHA-256:
+`8403bf1ad06be7c6102c37c53648826663fdcbebbe73d27e011364fab51dc5e4`
+
+Zielvertrag:
+`ZIELVERTRAG_BILDZENTRALE_PFERDERASSEN_HERO_20260916.md`
+
+Rückgabeweg:
+LIVE-Prüfung → BILD-CURRENT nachziehen → Pluginmanifest bleibt hashgebundene Ausgabekopie; keine zweite Fachwahrheit.
+
+## NICHT ANFASSEN
+
+- Wasserzeichenlogik in diesem Release;
+- bestehende Artikel-/Kategorie-/HivePress-Bildwege außerhalb notwendiger Regression;
+- Pferde-Design, solange der reale LIVE-Test die vorhandene Fallback-Logik nicht widerlegt;
+- Archiv/Tresor/Backup als Werkbank.
