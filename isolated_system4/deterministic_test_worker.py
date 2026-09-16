@@ -342,9 +342,11 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
     if len(table_pool) < 2:
         raise RuntimeError('TESTWORKER_TABLE_FACT_POOL_TOO_LOW')
     table_rows = []
+    table_fact_ids: set[str] = set()
     for row_index in range(min_rows):
         observation_fact = table_pool[(row_index * 2) % len(table_pool)]
         action_fact = table_pool[(row_index * 2 + 1) % len(table_pool)]
+        table_fact_ids.update((observation_fact, action_fact))
         table_rows.append(
             '<tr>'
             + _td(observation_fact, html.escape(row_labels[row_index % len(row_labels)]), authority)
@@ -363,8 +365,12 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
     sections[table_block].append(table)
     cursor += min_rows * 2 + 1
 
+    post_table_ids = [fact_id for fact_id in ids if fact_id not in table_fact_ids]
+    if not post_table_ids:
+        raise RuntimeError('TESTWORKER_POST_TABLE_FACT_POOL_EMPTY')
+
     for _ in range(2):
-        fact_id = ids[cursor % len(ids)]
+        fact_id = post_table_ids[cursor % len(post_table_ids)]
         sections['conclusion'].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
         cursor += 1
 
@@ -386,7 +392,7 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         if word_count(body) >= target_words and paragraphs >= paragraph_target and h2_count >= h2_target:
             break
         block = 'details' if extra_index % 2 == 0 else 'further_information'
-        fact_id = ids[cursor % len(ids)]
+        fact_id = post_table_ids[cursor % len(post_table_ids)]
         sections[block].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
         cursor += 1
         extra_index += 1
@@ -400,7 +406,7 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         conclusion_words = word_count(''.join(sections['conclusion']))
         if total_words > 0 and (conclusion_words / total_words) >= 0.09:
             break
-        fact_id = ids[cursor % len(ids)]
+        fact_id = post_table_ids[cursor % len(post_table_ids)]
         sections['conclusion'].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
         cursor += 1
         conclusion_attempts += 1
