@@ -127,7 +127,7 @@ jobs:
           PY
 
       - name: Preserve PPM 6.7.9 original-suite failure log
-        if: ${{ steps.ppm_original.outcome == 'failure' }}
+        if: ${{ failure() && steps.ppm_original.outcome == 'failure' }}
         uses: actions/upload-artifact@v4
         with:
           name: system4-ppm679-original-failure-log
