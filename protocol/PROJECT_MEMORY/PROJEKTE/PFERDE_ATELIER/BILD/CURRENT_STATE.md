@@ -1,132 +1,69 @@
 # BILD – CURRENT STATE
 
-STAND: 2026-09-05
-STATUS: LIVE 2.6.9 / MASTERAKTEN TEILWEISE HISTORISCH
+STAND: 2026-09-16
+STATUS: **BILDZENTRALE 2.7.0 LOCAL HARD PASS / WORDPRESS-LIVE OFFEN**
 
+## AUTORITÄT
 
-## AUTORITÄT DIESER DATEI
-
-Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros**.
+Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung des BILD-Büros**.
 
 - aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
-- Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Fehlerquelle
-- Zielvertrag → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
-- Änderungsgrund → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- Historie → `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+- verbindliches Ziel → `ZIELVERTRAG_BILDZENTRALE_PFERDERASSEN_HERO_20260916.md`
+- Wasserzeichen-Backlog → `TODO.md`
+- technische allgemeine Hauptquelle → `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
+- Fehlerindex → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
+- Historie/Altbelege → `MASTERDATEIEN_INVENTAR.md` und Archiv
 
-Technische/Fachwahrheit bleibt an den in dieser Datei verlinkten Originalquellen.
-Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
+## LETZTER SICHERER LIVE-STAND
 
-## Aktueller produktiver Stand
+WordPress LIVE bestätigt: **Bildzentrale 2.6.9**.
 
-LIVE in WordPress:
-**Pferde Atelier Bildzentrale 2.6.9**
+## AKTUELLER BELASTBARER RELEASE-KANDIDAT
 
-Vom Nutzer bestätigte Pluginbeschreibung:
-Allgemeingültige Bildzentrale für Beiträge, WordPress-Taxonomien und optionale HivePress-Taxonomien mit Pixabay, Pexels und Magnific, sicheren Profilen, Export/Import und Readback-Fallback.
+**Bildzentrale 2.7.0 – Custom-Post-Type-Hero**
 
-Das ist die aktuelle fachliche LIVE-Wahrheit.
+Release:
+`ALLGEMEINE_BILDZENTRALE_2.7.0_CUSTOM_POST_TYPE_HERO_INSTALLIEREN.zip`
 
-## Beleglage
+SHA-256:
+`8403bf1ad06be7c6102c37c53648826663fdcbebbe73d27e011364fab51dc5e4`
 
-### Code
-Historischer Pferde-spezifischer Plugin-Codebeleg:
-**2.4.9**
+Zweck:
+- generischer Hero-Weg für öffentliche Custom Post Types mit Thumbnail-Support;
+- Pferde Atelier nutzt ihn für `pa_breed`;
+- Hero wird als Featured Image gesetzt;
+- Ausgabe 3:1 / 1200×400 / WebP;
+- Readback-/Formatfehler führen zum Rollback der vorherigen Featured-Image-Zuordnung.
 
-Plugin-ZIP SHA-256:
-`265edaf3cee55b751b5f107e96c50dfcada99450bd94a07339e3234ae0bc47a1`
+## FRISCHECHECK 2026-09-16
 
-PHP SHA-256:
-`079fe4efc6fa53ffd09c3c7490f1873f249509df17548224ead42ba7389c71c2`
+- finale 2.7.0-ZIP frisch gelesen: SHA-256 PASS;
+- Version 2.7.0 aus finaler ZIP: PASS;
+- PHP-Lint aus finaler ZIP: PASS;
+- gebundener Testreport: **28/28 Positiv-/Negativ-/Regressionstests PASS**;
+- PPA-003 `CURRENT.zip` nach Synchronisierung frisch gelesen: Version 2.7.0 / SHA-256 PASS;
+- allgemeine `BILDZENTRALE/CURRENT.zip` nach Synchronisierung frisch gelesen: Version 2.7.0 / SHA-256 PASS;
+- Design 1.50.536: statischer Fallback-Abgleich PASS – vorhandenes Featured Image hat Vorrang vor dem Standard-Rassenbild; daher derzeit kein Designupdate erforderlich.
 
-### Konfiguration
-Späterer übergebener Einstellungs-Export:
-**2.6.6**, Export 2026-08-06.
+Dokumentationskorrektur:
+Eine zwischenzeitliche Behauptung, die bisherige PPA-003-Ausgabekopie 2.6.9 sei inkonsistent bzw. ein fremdes Plugin gewesen, war falsch. Frischer Readback bestätigte vor der 2.7.0-Synchronisierung korrekt Version 2.6.9 und den damaligen SHA-256. Die falsche Behauptung ist verworfen und im korrigierten Testreport/Pluginprotokoll berichtigt.
 
-### LIVE
-Aktuell eingesetzte Version:
-**2.6.9**.
+## ERSTER OFFENER ACCEPTANCE-PUNKT
 
-Der allgemeine 2.6.9-Installer liegt jetzt als exakter Dateibeleg vor und ist byte-identisch mit dem Installer im Nullpunkt 069.
+**WORDPRESS-LIVE-READBACK 2.7.0 ist offen.**
 
-## Belegtes Funktionsbild
+Noch erforderlich:
+- 2.7.0 in WordPress installieren;
+- `pa_breed` als Post-Type-Hero-Ziel speichern;
+- mindestens eine reale Pferderasse bebildern;
+- Featured-Image-Readback prüfen;
+- Frontend positiv prüfen: spezifisches Hero ersetzt Standardbild;
+- Frontend negativ prüfen: Rasse ohne spezifisches Bild behält Standard-Fallback.
 
-Aus 2.4.9-Code + 2.6.6-Konfiguration + LIVE-Beschreibung sind mindestens belegt:
+## WASSERZEICHEN
 
-- Beitragsbilder
-- WordPress-Taxonomiebilder
-- optionale HivePress-Taxonomiebilder
-- Pixabay
-- Pexels
-- Magnific
-- Provider-Verbindungstests
-- KI-Bildgenerierung
-- Einzel- und Batch-Verarbeitung
-- Promptanalyse
-- Motivcluster
-- benutzerdefinierte Motive
-- Variationsplanung gegen Wiederholungen
-- Variationshistorie
-- Medienimport
-- Bildzuordnung
-- Beitragsbild setzen / Undo
-- Inhaltsbild setzen / Undo
-- Readback lokaler Bilder
-- externer Fallback
-- Lizenzregister / Bildnachweise
-- Qualitätsdaten / Qualitätsaudit
-- Export / Import
-- sichere Profile
-- Taxonomie-Konfiguration
+Das allgemeine Wasserzeichen-/Mediathek-Konzept ist als separater Backlog in `TODO.md` erfasst und **nicht Teil von 2.7.0**.
 
-## Profile aus 2.6.6-Konfigurationsbeleg
+## BESTEHENDER OFFENER ALTPUNKT
 
-### Beitragsbilder
-- Ratio 3:2
-- 1500 × 1000
-- WebP 82
-- Zielgröße 350 KB
-
-### WordPress-Kategorien
-- gespeicherte Ausgabe: 3:1
-- 1200 × 400
-- WebP 76
-- Zielgröße 120 KB
-- Prompttext nennt zugleich 16:9 → UNGEKLÄRTER WIDERSPRUCH
-
-### HivePress-Kategorien
-- Ratio 3:2
-- 1500 × 1000
-- WebP 76
-- Zielgröße 120 KB
-
-Taxonomien:
-- WordPress: `category` / `thumbnail_id`
-- HivePress: `hp_listing_category` / `hp_image`
-
-## Historischer 2.4.9-Fix
-
-Belegter Fehler:
-Nach Import/Zuordnung verwendete die Sammelübersicht weiter die temporäre Magnific-Ergebnis-URL. Nach deren Ablauf blieb die Vorschau leer, obwohl das Bild bereits lokal vorhanden war.
-
-Fix:
-- lokale Attachment-Suche über `_pabz_asset_id`;
-- lokale WordPress-Bild-URL hat Vorrang;
-- externe Magnific-URL nur als Fallback;
-- globale automatische Verwaisten-Suche bleibt deaktiviert.
-
-Belegte Tests:
-- PHP-Syntax PASS
-- Version 2.4.9 PASS
-- lokale Attachment-Suche PASS
-- lokale URL vor externer URL PASS
-- externer Fallback PASS
-- Verwaisten-Fix aus 2.4.8 erhalten PASS
-
-## Offene Belegpunkte
-
-Bestehende fachliche offene Punkte bleiben unverändert in ihren Originalquellen.
-
-Dieser Sortierschritt löst keine Fachfrage.
-
-Keine Lücke durch Raten schließen.
+`BILD-OPEN-RATIO-001` bleibt unverändert ungeklärt: historischer Kategorie-Profil-Widerspruch 16:9 vs. gespeicherte 3:1-Ausgabe. Er ist nicht der Blocker des aktuellen Pferderassen-Hero-Releases.
