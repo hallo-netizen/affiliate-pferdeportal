@@ -1,20 +1,26 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "adcell-readonly-live-api-preflight-20260912",
-  "goal": "Affiliate-Zentrale 6.72.19 ist kanonisch gebunden; Full-Gates und kanonischer 26/26-Artefaktneubau sind PASS. Keine Sourcearbeit. Ausschließlich AF-066 ist offen: im echten WordPress zuerst den read-only ADCELL-Test `Token + Programme prüfen` mit den bereits gespeicherten API-Zugangsdaten ausführen.",
+  "task_id": "ebay-private-deactivation-checkpoint-live-proof-20260916",
+  "goal": "Keine weitere Pluginentwicklung. Der eBay-PRIVATE-Defektpfad ist in der kanonischen 6.72.19-Source und historisch mindestens seit V6.63.8 belegt: der Public-Checkpoint-Bootstrap bewertet PRIVATE-Listings über den Provider-Control-Gate und kann bei deaktiviertem eBay-Zugang einen formal sicheren leeren PRIVATE-Checkpoint speichern. Jetzt ausschließlich den aktuell produktiv gespeicherten Checkpoint read-only belegen und erst danach entscheiden, ob genau dieser Rootfix kanonisch gebaut werden darf.",
   "image": "php:8.2-cli",
-  "inputs": [],
+  "inputs": [
+    "release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php",
+    "release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-control-contract.php",
+    "protocol/AFFILIATE_RELEASE_EBAY_PRIVATE_DEACTIVATION_ROOTCAUSE_20260916.md",
+    "AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md"
+  ],
   "writable": [],
-  "command": "NO_LOCAL_COMMAND_REAL_WORDPRESS_RUNTIME_REQUIRED",
+  "command": "NO_LOCAL_COMMAND_REAL_WORDPRESS_READ_ONLY_CHECKPOINT_STATE_REQUIRED",
   "tests": [
-    "Canonical 6.72.19 installed/read back in the real WordPress runtime",
-    "Read-only ADCELL Token + Programme prüfen using already stored API credentials",
-    "If API preflight passes: choose an existing accepted+active programId and explicitly allowlist it",
-    "Then real ADCELL promotion/API flow and WordPress/MariaDB import-persistence-readback-output E2E",
-    "Negative paths remain fail-closed: non-allowlisted / inactive / non-accepted; no Awin fallthrough; no manual CSV normal path"
+    "Read-only live proof of current eBay public checkpoint: checkpoint_id, source, created_at, run_uuid and count/private_listing_ids without mutating posts, checkpoint or provider state",
+    "Confirm or refute whether the live checkpoint is an empty bootstrap_current_safe_public_subset created while eBay provider access was disabled",
+    "Preserve current failed canonical eBay run and all existing PRIVATE/BUSINESS posts during diagnosis",
+    "Do not install or promote any local 6.72.20-6.72.27 package as canonical evidence",
+    "If and only if live checkpoint state matches the proven defect path: derive one minimal fix from canonical 6.72.19 source and run required positive/negative/regression/fresh-unpack gates before any live installer"
   ],
   "status": "BLOCKED",
-  "blocker": "No connected real WordPress runtime is available in this chat, so AF-066 read-only API preflight has not been executed. ADCELL web-login/password-reset is not yet proven to be the blocker.",
-  "next_action": "On the real WordPress site, use canonical 6.72.19 and run the read-only ADCELL `Token + Programme prüfen` test with the already stored API credentials. If token/programmes pass, explicitly allowlist one existing accepted+active programId and continue the real E2E. Only missing/invalid saved API credentials make credential recovery the next blocker.",
+  "blocker": "The connected sources do not expose the current WordPress option/DB value of the persisted eBay public checkpoint. Code-path root cause is proven, but the live incident cannot yet be attributed to the empty-bootstrap checkpoint without that read-only state proof.",
+  "next_action": "Obtain a read-only live readback of the persisted eBay public checkpoint without changing provider state, posts or run state. Do not click Lauf neu starten, do not run cleanup, and do not install the local 6.72.27 test package. After the checkpoint readback, compare it to protocol/AFFILIATE_RELEASE_EBAY_PRIVATE_DEACTIVATION_ROOTCAUSE_20260916.md and only then authorize or reject the minimal canonical rootfix.",
   "timeout_seconds": 600
 }
