@@ -40,10 +40,10 @@ jobs:
           from pathlib import Path
           import production_checks_engine as engine
           candidates = [
-              'Gummidichtungen dürfen den Verriegelungsweg nicht sichtbar behindern.',
-              'Dichtungen aus Gummi dürfen den Verriegelungsweg nicht sichtbar behindern.',
               'Dichtungen dürfen den Verriegelungsweg nicht sichtbar behindern.',
-              'Die Dichtungen dürfen den Verriegelungsweg nicht sichtbar behindern.',
+              'Dichtungen dürfen die Verriegelung nicht sichtbar behindern.',
+              'Dichtungen dürfen das Schließen nicht sichtbar behindern.',
+              'Dichtungen dürfen den Weg der Verriegelung nicht sichtbar behindern.',
           ]
           rows = []
           for text in candidates:
