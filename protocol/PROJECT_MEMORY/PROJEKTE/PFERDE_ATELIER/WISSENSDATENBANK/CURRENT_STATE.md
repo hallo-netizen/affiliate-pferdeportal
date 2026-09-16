@@ -1,7 +1,7 @@
 # WISSENSDATENBANK – CURRENT STATE
 
 STAND: 2026-09-16
-STATUS: THEMENPOOL AKTIV / PFERDERASSEN GRUNDRECHERCHE ABGESCHLOSSEN / MANAGER 0.2.7 LIVE PASS / TEXTPFLEGE 196 LIVE PASS / PFERDERASSEN ARTIKELINTEGRITÄT WEITER BLOCKED / GLOSSAR STARTBEFÜLLT
+STATUS: THEMENPOOL AKTIV / PFERDERASSEN GRUNDRECHERCHE ABGESCHLOSSEN / MANAGER 0.2.7 LIVE PASS / TEXTPFLEGE 196 LIVE PASS / PFERDERASSEN META-TITEL OFFEN / GLOSSAR STARTBEFÜLLT
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
@@ -37,19 +37,19 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 - Verbindliche Listen bleiben Listen; Reihenfolge und Faktenpositionen bleiben erhalten. Fremdmaße wurden metrisch normalisiert; Rechtschreibung/Grammatik und holpriger Fließtext wurden geglättet, ohne neue Fachfakten einzuführen.
 - Dieser Textpflege-Auftrag ist **LIVE PASS / ABGESCHLOSSEN**.
 
-## PFERDERASSEN – ARTIKEL / BESTANDSINTEGRITÄT
-Weiterhin **BLOCKED**; die Textpflege schließt die beiden älteren Fachblocker nicht. Details ausschließlich in `AKTENSCHRAENKE/PFERDERASSEN/FEHLERQUELLEN.md`.
+## PFERDERASSEN – AKTIVE RESTAUFGABE
+Aktiv offen bleibt ausschließlich die Prüfung/Korrektur der **Seitentitel und Meta-Titles der Pferderassen-Einzelseiten und Rassengruppen**. Details stehen in `TODO.md`.
 
-Belastbare offene Punkte:
-- Rekonstruktion aus WordPress-Export + den danach veröffentlichten Batches: 196 veröffentlichte `pa_breed`-Posts, aber 194 eindeutige `_prm_source_id`;
-- doppelte IDs in dieser Rekonstruktion: `breed-pantaneiro`, `breed-posavje-horse`; direkter aktueller WordPress-Readback zur kanonischen Bereinigung weiterhin offen;
-- letzter 13er-Artikelbatch ist **nicht Schreibvertrags-PASS**, weil die gewählten sechs Managergruppen durch die jeweiligen WDB-Felder `typ`/`rassegruppen` nicht eindeutig getragen sind.
+Die zuvor geführten Punkte
+- Doppel-ID-Readback `breed-pantaneiro` / `breed-posavje-horse` und
+- autoritative Sechs-Gruppen-Bindung der letzten 13 Identitäten
+wurden am 2026-09-16 auf ausdrückliche Nutzerentscheidung aus der **aktiven Aufgabenliste gestrichen**. Das ist keine nachträgliche technische/fachliche Lösung dieser historischen Befunde; sie werden nur nicht weiter als offene Arbeitsaufgaben geführt.
 
 ## GLOSSAR – FORTSCHRITT
 7 erste Begriffe quellengebunden angelegt: Stockmaß, Widerrist, Ganasche, Röhrbein, Aalstrich, Kötenbehang, Zuchtbuch/Studbook.
 
 ## EINE WAHRHEIT
 - Forschungs-/Faktenwahrheit: dieser WISSENSDATENBANK-Bereich;
-- aktuelle Fehlerdetails Pferderassen: ausschließlich `AKTENSCHRAENKE/PFERDERASSEN/FEHLERQUELLEN.md`;
-- Arbeitsbindung / NEXT ACTION: ausschließlich `HOBBYRAUM.md`;
-- alter Pfad `../PFERDERASSEN/` bleibt nur Weiterweiser.
+- aktuelle Hauptarbeit / NEXT ACTION: ausschließlich `HOBBYRAUM.md`;
+- Aufgabenparkplatz: `TODO.md`;
+- alte Adresse `../PFERDERASSEN/` bleibt nur Weiterweiser.
