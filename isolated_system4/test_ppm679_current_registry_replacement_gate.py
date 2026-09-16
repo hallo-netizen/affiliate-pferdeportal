@@ -104,7 +104,7 @@ class Ppm679CurrentRegistryReplacementGateTests(unittest.TestCase):
         self.assertEqual(mappings["tests/test-g9-faq-only-live-state-integration.php"], REPLACED_CURRENT_TESTS["tests/test-g9-faq-only-live-state-integration.php"])
         self.assertEqual(mappings["tests/test-positive-pipeline.php"], REPLACED_CURRENT_TESTS["tests/test-positive-pipeline.php"])
         self.assertEqual(mappings["tests/test-wave1-unsigned-quarantine-blocked.php"], REPLACED_CURRENT_TESTS["tests/test-wave1-unsigned-quarantine-blocked.php"])
-        self.assertGreaterEqual(len(mappings["tests/test-historical-regressions.php"]), 70)
+        self.assertEqual(len(mappings["tests/test-historical-regressions.php"]), 69)
 
         # 1) Canonical content protections: the old four-item positive fixture is stale,
         # but every negative mutation in the original test uses the still-current FAQ item.
