@@ -10,7 +10,7 @@ from unittest import mock
 
 import batch_gate
 import controller
-import live_parity
+import live_parity_v2 as live_parity
 import test_route_input_factory
 
 HERE = Path(__file__).resolve().parent
