@@ -131,7 +131,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: system4-ppm679-original-failure-log
-          path: /tmp/system4-ppm679-original.log
+          path: |
+            /tmp/system4-ppm679-original.log
+            control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
           if-no-files-found: error
           retention-days: 7
 
