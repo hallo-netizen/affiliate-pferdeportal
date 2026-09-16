@@ -56,6 +56,12 @@ jobs:
           with open(os.environ['GITHUB_ENV'],'a',encoding='utf-8') as f:f.write('SYSTEM4_LANGUAGETOOL_JAR='+str(jar)+'\n')
           PY
 
+      - name: Run exact preceding real LT and PPM corridor
+        shell: bash
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+        run: python isolated_system4/test_real_lt_ppm_corridor.py -v
+
       - name: Run exact unchanged real start-to-file test and capture trace
         id: start_real
         shell: bash
