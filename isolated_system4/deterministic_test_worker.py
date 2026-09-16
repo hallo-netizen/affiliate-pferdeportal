@@ -71,6 +71,7 @@ def _clean_statement(sentence: str, source_title: str) -> str:
         value = value[len(title):].lstrip(' :-–—')
     value = value.replace('Walkarbeit', 'Verformung des Reifens')
     value = value.replace('weginterpretiert', 'ignoriert')
+    value = value.replace('Gummidichtungen', 'Dichtungen aus Gummi')
     if value and value[-1] not in '.!?':
         value += '.'
     return value
