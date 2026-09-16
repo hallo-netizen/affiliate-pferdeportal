@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-09-15
+STAND: 2026-09-16
 
 ## Pflichtfelder
 
@@ -214,7 +214,7 @@ SICHERUNGSWEGE:
 1. Tresor automatisch, wöchentlich und extern unter `/Campus-Tresor/`.
 2. Lokales Backup manuell per `GITHUB_BACKUP_STARTEN.command` auf dem Nutzer-Mac.
 
-Beide Wege sind unabhängig voneinander und sichern denselben GitHub-Projektbestand.
+Beide Wege sichern denselben GitHub-Projektbestand, sind aber unabhängig voneinander.
 
 NICHT IM SCOPE:
 WordPress / Website / Projektarchiv.
@@ -272,6 +272,33 @@ VERANTWORTLICHER BEREICH:
 
 PASS-BEDINGUNG:
 Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen; insbesondere exakte installierte Plugin-Kombination, Positiv-/Negativ-/Kombinationsprüfung und realer WordPress-Readback.
+
+NACHFOLGER:
+keiner belegt.
+
+
+## ZV-BILD-20260916-001 – Bildzentrale Custom-Post-Type-Hero / Pferderassen
+
+TITEL:
+BILDZENTRALE – GENERISCHER CUSTOM-POST-TYPE-HERO / PFERDERASSEN
+
+GELTUNGSBEREICH:
+MOD-002 BILDZENTRALE + PFERDE_ATELIER / BILD / `pa_breed`
+
+STATUS:
+AKTIV
+
+FASSUNG:
+1.0 / 2026-09-16
+
+HAUPTQUELLE:
+`PROJEKTE/PFERDE_ATELIER/BILD/ZIELVERTRAG_BILDZENTRALE_PFERDERASSEN_HERO_20260916.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/PFERDE_ATELIER/BILD/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Den aktuellen technischen/LIVE-Stand ausschließlich aus `PROJEKTE/PFERDE_ATELIER/BILD/CURRENT_STATE.md` lesen.
 
 NACHFOLGER:
 keiner belegt.
