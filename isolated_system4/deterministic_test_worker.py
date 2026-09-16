@@ -219,7 +219,8 @@ TAILS = [
 
 def _fact_sentence(fact_id: str, claims: dict, index: int) -> str:
     base = html.escape(_plain_claim(claims[fact_id]['statement']))
-    tail = TAILS[index % len(TAILS)]
+    tail_index = (index + index // len(TAILS)) % len(TAILS)
+    tail = TAILS[tail_index]
     return f'{base}; {tail}.'
 
 
@@ -337,15 +338,18 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
     min_rows = max(4, int(table_cfg.get('minimum_body_rows') or req.get('min_table_body_rows') or 0))
     row_labels = ['Ausgangslage', 'Sichtprüfung', 'Funktionsprüfung', 'Abschlusskontrolle', 'Nachkontrolle', 'Freigabeprüfung']
     unused_tail = ids[cursor:] if cursor < len(ids) else []
-    table_pool = unused_tail if len(unused_tail) >= min_rows else ids
+    table_pool = unused_tail if len(unused_tail) >= (min_rows * 2) else ids
+    if len(table_pool) < 2:
+        raise RuntimeError('TESTWORKER_TABLE_FACT_POOL_TOO_LOW')
     table_rows = []
     for row_index in range(min_rows):
-        fact_id = table_pool[row_index % len(table_pool)]
+        observation_fact = table_pool[(row_index * 2) % len(table_pool)]
+        action_fact = table_pool[(row_index * 2 + 1) % len(table_pool)]
         table_rows.append(
             '<tr>'
-            + _td(fact_id, html.escape(row_labels[row_index % len(row_labels)]), authority)
-            + _td(fact_id, _fact_sentence(fact_id, claims, cursor + row_index), authority)
-            + _td(fact_id, _fact_sentence(fact_id, claims, cursor + row_index + min_rows), authority)
+            + _td(observation_fact, html.escape(row_labels[row_index % len(row_labels)]), authority)
+            + _td(observation_fact, _fact_sentence(observation_fact, claims, cursor + row_index * 2), authority)
+            + _td(action_fact, _fact_sentence(action_fact, claims, cursor + row_index * 2 + 1), authority)
             + '</tr>'
         )
     statement_fact = table_pool[0]
@@ -357,7 +361,7 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         + '<tbody>' + ''.join(table_rows) + '</tbody></table>'
     )
     sections[table_block].append(table)
-    cursor += min_rows + 1
+    cursor += min_rows * 2 + 1
 
     for _ in range(2):
         fact_id = ids[cursor % len(ids)]
@@ -389,6 +393,21 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         if extra_index > 80:
             raise RuntimeError('TESTWORKER_GLOBAL_FLOOR_UNREACHABLE')
 
+    conclusion_attempts = 0
+    while True:
+        body = render()
+        total_words = word_count(body)
+        conclusion_words = word_count(''.join(sections['conclusion']))
+        if total_words > 0 and (conclusion_words / total_words) >= 0.09:
+            break
+        fact_id = ids[cursor % len(ids)]
+        sections['conclusion'].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
+        cursor += 1
+        conclusion_attempts += 1
+        if conclusion_attempts > 12:
+            raise RuntimeError('TESTWORKER_CONCLUSION_BALANCE_UNREACHABLE')
+
+    body = render()
     if not repair and identity['title'].startswith('Warum muss die Beleuchtung'):
         marker = ' Als belastbares Ergebnis muss dieser Prüfschritt dokumentiert bleiben.'
         body = body.replace('</p>', marker + '</p>', 1)
