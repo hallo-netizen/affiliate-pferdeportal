@@ -9,12 +9,26 @@ permissions:
   contents: read
 
 jobs:
-  isolate-compaction-gate:
+  inspect-category-proof:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Run exact pre-normal compaction gate alone
+      - name: Read exact current and legacy category tests from signed PPM
         shell: bash
         run: |
-          python -m unittest isolated_system4.test_ppm679_pre_normal_draft_compaction_gate -v
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile
+          p=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
+          out=Path('/tmp/ppmcat'); out.mkdir(exist_ok=True)
+          with zipfile.ZipFile(p) as z: z.extractall(out)
+          PY
+          ROOT=/tmp/ppmcat/portal-production-machine
+          echo '=== current complete category source ==='
+          cat "$ROOT/tests/three-type-bundled-local/test-complete-category-source.php"
+          echo '=== current normal draft positive ==='
+          cat "$ROOT/tests/normal-draft-production/test-01-positive-1-to-4.php"
+          echo '=== category-related current tests ==='
+          grep -R -nE 'category|taxonomy|fallback|too.narrow' "$ROOT/tests" | grep -v '/v34-category-assignment/' | head -300
