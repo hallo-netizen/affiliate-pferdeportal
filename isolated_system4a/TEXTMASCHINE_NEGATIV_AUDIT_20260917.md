@@ -2,28 +2,31 @@
 
 Stand: 17.09.2026
 Branch: `hobbyroom/system4a-textmachine-final-pass-20260916`
-Zweck: Punkt 3 des eingeschlossenen Hobbyraum-Arbeitsauftrags.
+Zweck: Punkt 3/7 des eingeschlossenen Hobbyraum-Arbeitsauftrags.
 
-## Ergebnis
+## Aktueller harter Stand
 
-Alle **152 im Fullcheck erreichbaren Projekt-Textmaschinenregeln** wurden gegen vorhandene Negativbelege geprüft.
+Erreichbare Projektregeln: **151**.
 
-Kriterium für `EXAKT_VORHANDEN`: der vorhandene Test/Mutationstest nennt bzw. erwartet den konkreten Fehlercode am echten Prüfer. Ein bloßer Registereintrag oder ein grüner Sammeltest reicht nicht.
+Nach dem initialen Audit und dem real ausgeführten Guard-/Design-/External-Gap-Test:
+- **102/151** besitzen jetzt einen exakten Negativbeweis am echten Prüfer/Fehlercode.
+- **49/151** sind noch offen.
+- Alle **49 offenen Regeln liegen ausschließlich im PPM-6.7.9-Anteil**.
 
-**Bestand:**
-- 65/152: exakter vorhandener Negativbeleg gefunden.
-- 87/152: kein ausreichend exakter Einzelregel-Negativbeleg gefunden -> echte Lücke für Punkt 7.
+Remote-Beleg für die 37 neu geschlossenen Nicht-PPM-Lücken und die korrigierte Erreichbarkeit:
+- Workflow `System 4A Repair Owner Contract`
+- Run `35195339914`
+- Head `50b4502159b08196494e7da9f69ece26e81e8d6b`
+- Ergebnis `SUCCESS`
 
-Damit ist Punkt 3 als **Audit** abgeschlossen, aber der Negativbeweis selbst noch nicht vollständig PASS. Punkt 7 muss genau die 87 Lücken schließen.
+Der vorherige rote Run `35195117339` bewies zusätzlich, dass `DESIGN_TABLE_INLINE_STYLE_FORBIDDEN` nicht als eigene Regel erreichbar ist; vorher greift `DESIGN_INLINE_STYLE_FORBIDDEN`. Daher lautet die echte Gesamtmenge 151 statt 152.
 
 ## A. PPM 6.7.9 — 104 Regeln
 
-### EXAKT_VORHANDEN: 55/104
-- 35 Regeln: Registry-Feld `direct_negative_test_mentions_error_code=true`; der gebundene Negativtest nennt den exakten Fehlercode.
-- 19 weitere Regeln: `tests/fixtures/wave2/mutations-index.json` bindet eine konkrete Mutation direkt an `expected_error_code`.
-- 1 weitere Regel: `BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING` wird in den realen Three-Type-Negativtests konkret erwartet.
+### Exakter Negativbeweis vorhanden: 55/104
+### Noch offen: 49/104
 
-### LÜCKE: 45 aktive Blocking-Regeln ohne ausreichend exakten Einzelregel-Negativbeleg
+45 aktive Blocking-Regeln:
 - `CODE::79ded7cc3da55813` — `BLOCKED_WAVE2_CONTRACT_MISSING`
 - `CODE::6b168e832adc1a68` — `BLOCKED_WAVE2_INTERNAL_MARKER_MISSING`
 - `CODE::0cc1b289fde9cc7c` — `BLOCKED_WAVE2_INTRO_NOT_FIRST`
@@ -70,60 +73,30 @@ Damit ist Punkt 3 als **Audit** abgeschlossen, aber der Negativbeweis selbst noc
 - `CODE::c64fe59d56bffb96` — `BLOCKED_KNOWN_ERROR_CONTRACT_MISSING`
 - `CODE::bf51d9f9d16bd30f` — `BLOCKED_KNOWN_DUPLICATE_HEADING`
 
-### LÜCKE: 4 WAVE4-Anforderungen ohne eigenen Einzel-Fehlercode
-Die vier Regeln sind an einen Sammel-Mutationstest gebunden, besitzen aber keinen eigenen `error_code`; damit fehlt nach dem harten Kriterium der individuelle Negativbeweis:
+4 WAVE4-Anforderungen:
 - `W4::R8-0786`
 - `W4::R8-0787`
 - `W4::R8-0788`
 - `W4::R8-0790`
 
-PPM gesamt: **55 exakt vorhanden / 49 Lücken**.
+## B. Content Guard — 30/30 exakt negativ bewiesen
+- 5 waren bereits vorhanden.
+- 25 fehlende Fälle wurden in `test_textmachine_negative_gap_guards.py` ergänzt und remote grün ausgeführt.
 
-## B. Content Guard — 30 erreichbare Regeln
+## C. Design Guard — 15/15 erreichbare Regeln exakt negativ bewiesen
+- 5 waren bereits vorhanden.
+- 10 fehlende erreichbare Fälle wurden ergänzt und remote grün ausgeführt.
+- `DESIGN_TABLE_INLINE_STYLE_FORBIDDEN` ist keine eigene erreichbare Regel und wurde korrekt aus dem Scope entfernt.
 
-Vorhandene konkrete Negativtests nennen fünf relevante Fehlercodes am echten Content Guard:
-- `FACT_SOURCE_NOT_IN_RESEARCH`
-- `FACT_EVIDENCE_NOT_IN_SOURCE`
-- `FACT_PACK_SOURCES_MISSING`
-- `FACT_PACK_SOURCE_EVIDENCE_INVALID`
-- `ARTICLE_UNKNOWN_FACT_ID`
-
-Damit: **5 exakt vorhanden / 25 Lücken**.
-
-Die 25 Lücken sind:
-`FACT_PACK_OBJECT_REQUIRED`, `FACT_PACK_CONTRACT_INVALID`, `FACT_PACK_NOT_PRODUCTION_READY`, `FACT_PACK_SOURCE_OBJECT_REQUIRED`, `FACT_PACK_SOURCE_ID_INVALID`, `FACT_PACK_SOURCE_TITLE_INVALID`, `FACT_PACK_SOURCE_URL_INVALID`, `FACT_PACK_SOURCE_RETRIEVED_AT_INVALID`, `FACT_PACK_SOURCE_HASH_INVALID`, `FACT_PACK_SOURCE_TITLE_SYNTHETIC`, `FACT_PACK_SOURCE_HASH_MISMATCH`, `FACT_PACK_SOURCE_ID_DUPLICATE`, `FACT_PACK_CLAIMS_TOO_LOW`, `FACT_PACK_CLAIM_OBJECT_REQUIRED`, `FACT_ID_INVALID`, `FACT_SOURCE_ID_INVALID`, `FACT_STATEMENT_INVALID`, `FACT_EVIDENCE_TEXT_INVALID`, `FACT_EVIDENCE_HASH_INVALID`, `FACT_EVIDENCE_HASH_MISMATCH`, `FACT_PACK_FACT_ID_DUPLICATE`, `FACT_PACK_CLAIM_SOURCE_URL_MISMATCH`, `ARTICLE_FACT_PACK_CLAIMS_MISSING`, `ARTICLE_FACT_IDS_MISSING`, `ARTICLE_FACT_TRACE_MISSING`.
-
-## C. Design Guard — 16 Regeln
-
-Vorhandene konkrete Negativtests:
-- `DESIGN_PPM_GENERATED_CLASS_MISSING`
-- `DESIGN_TABLE_SYSTEM129_CLASS_MISSING`
-- `DESIGN_BERATUNG_HEADING_LEVEL_FORBIDDEN`
-- `DESIGN_INLINE_STYLE_FORBIDDEN`
-- `DESIGN_ARTICLE_TYPE_CLASS_MISSING`
-
-Damit: **5 exakt vorhanden / 11 Lücken**.
-
-Lücken:
-`DESIGN_ARTICLE_TYPE_TOKEN_INVALID`, `DESIGN_BODY_EMPTY`, `DESIGN_ARTICLE_TYPE_MISSING`, `DESIGN_ACTIVE_OR_GLOBAL_HTML_FORBIDDEN`, `DESIGN_EVENT_HANDLER_FORBIDDEN`, `DESIGN_JAVASCRIPT_URL_FORBIDDEN`, `DESIGN_CANONICAL_ARTICLE_ROOT_MISSING`, `DESIGN_ARTICLE_TYPE_ATTRIBUTE_MISMATCH`, `DESIGN_NESTED_ARTICLE_FORBIDDEN`, `DESIGN_TABLE_COMPARISON_CLASS_MISSING`, `DESIGN_TABLE_INLINE_STYLE_FORBIDDEN`.
-
-## D. External-Link-Regeln — 2 Regeln
-
-Kein vorhandener Einzeltest gefunden, der die beiden Fehlercodes explizit am echten `no_external_links()` erwartet:
-- `EXTERNAL_LINK_FORBIDDEN`
-- `EXTERNAL_URL_FORBIDDEN`
-
-Damit: **0 exakt vorhanden / 2 Lücken**.
+## D. External Links — 2/2 exakt negativ bewiesen
+`EXTERNAL_LINK_FORBIDDEN` und `EXTERNAL_URL_FORBIDDEN` werden im echten `no_external_links()` gezielt ausgelöst und geprüft.
 
 ## Summen
-
-- PPM: 55 vorhanden / 49 Lücken
-- Content Guard: 5 vorhanden / 25 Lücken
-- Design Guard: 5 vorhanden / 11 Lücken
-- External Links: 0 vorhanden / 2 Lücken
-- **GESAMT: 65 vorhanden / 87 Lücken = 152 geprüft**
-
-LanguageTool 6.8 bleibt separater dynamischer Vendor-Prüfer: ein echtes Finding muss den Repair-Pfad auslösen; technische LT-Ausführungsfehler müssen HARD BLOCK bleiben. Dies wird in Punkt 4–6 separat klassifiziert/geprüft und nicht als zusätzliche Projektregel-ID gezählt.
+- PPM: 55 bewiesen / 49 offen
+- Content Guard: 30 bewiesen / 0 offen
+- Design Guard: 15 bewiesen / 0 offen
+- External Links: 2 bewiesen / 0 offen
+- **GESAMT: 102 bewiesen / 49 offen = 151**
 
 ## NEXT ACTION
-Punkt 4: alle 152 Regeln semantisch exakt in `REPAIR_REQUIRED` oder terminal `HARD BLOCK` klassifizieren. Punkt 7 schließt anschließend ausschließlich die hier festgestellten 87 Negativbeweis-Lücken.
+Punkt 7: ausschließlich die hier gelisteten **49 PPM-Lücken** mit echten PPM-6.7.9-Prüfern/exakten Fehlercodes schließen.
