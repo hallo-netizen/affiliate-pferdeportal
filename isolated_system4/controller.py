@@ -80,6 +80,33 @@ def _guarded_research(argv:list[str])->int:
     print('SYSTEM4_BOUND_RESEARCH_POOL_PASS')
     return 0
 
+def _return_claim_count_to_facts(workspace:Path,bound_path:Path,exc:Exception)->int:
+    message=str(exc)
+    if message!='AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID':
+        raise exc
+    state,state_path=core.load(workspace)
+    _require(state.get('phase')=='CONTEXT_REQUIRED','FACTS_RETURN_PHASE_MISMATCH')
+    immutable_before=state.get('immutable_core_sha256')
+    article_before=json.loads(json.dumps(state.get('article'),ensure_ascii=False))
+    research_before=json.loads(json.dumps(state.get('research'),ensure_ascii=False))
+    state['facts']=None
+    state['production_context']=None
+    state['authoring_contract']=None
+    state['draft_markdown']=None
+    state['draft_sha256']=None
+    state['checks']={}
+    state['last_error']=None
+    state['release_prepared']=None
+    state['released']=False
+    state['phase']='FACT_CHECK_REQUIRED'
+    core.save(state,state_path)
+    _require(state.get('immutable_core_sha256')==immutable_before,'FACTS_RETURN_IMMUTABLE_CORE_MUTATION')
+    _require(state.get('article')==article_before,'FACTS_RETURN_ARTICLE_MUTATION')
+    _require(state.get('research')==research_before,'FACTS_RETURN_RESEARCH_MUTATION')
+    bound_path.unlink(missing_ok=True)
+    print('SYSTEM4_STAGE_OWNER_RETURN:FACTS_WORKER:FACTS_STAGE:'+message+':CONTINUATION_REQUIRED')
+    return 4
+
 def _guarded_context(argv:list[str])->int:
     _require(len(argv)==5,'BAD_CONTEXT_ARGS')
     workspace=Path(argv[2]); fact_path=Path(argv[3]); plan_path=Path(argv[4])
@@ -93,7 +120,10 @@ def _guarded_context(argv:list[str])->int:
     tmp=workspace/'.MACHINE_PRODUCTION_BINDING.tmp'
     tmp.write_text(json.dumps(bound,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
     tmp.replace(bound_path)
-    core.cmd_context(argv[2],argv[3],str(bound_path))
+    try:
+        core.cmd_context(argv[2],argv[3],str(bound_path))
+    except core.Fail as exc:
+        return _return_claim_count_to_facts(workspace,bound_path,exc)
     print('SYSTEM4_MACHINE_PRODUCTION_BINDING_PASS')
     return 0
 
