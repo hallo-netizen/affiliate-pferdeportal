@@ -39,7 +39,11 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] **7. Nur tatsächlich fehlende Nachweise ergänzen.** Alle zuvor fehlenden Negativnachweise wurden geschlossen; keine neue Qualitätsregel und keine zweite Textmaschine eingeführt.
   - 37 Guard/Design/External-Lücken: Run `35195339914`, SUCCESS.
   - 49 PPM-Lücken: Run `35196161649`, SUCCESS.
-- [ ] **8. `TEXTMASCHINE_REGELN_FULL_PASS` beweisen.** Erst wenn 1–7 vollständig und maschinenfest abgeschlossen sind.
+- [x] **8. `TEXTMASCHINE_REGELN_FULL_PASS` bewiesen.** **151/151** im Scope gebunden; **102 Repair / 49 HARD_BLOCK**; Positiv-, Negativ-, Repair- und Fail-closed-Matrix gemeinsam im selben Workflow ausgeführt.
+  - Aggregattest: `isolated_system4/test_textmachine_rules_full_pass.py`
+  - Workflow: `System 4A Repair Owner Contract`
+  - Run `35197658651`, Head `e960f103a84065a64ca535ed0a3b0ffc30b9568b`, SUCCESS.
+  - Marker: `TEXTMASCHINE_REGELN_FULL_PASS:151/151:102_REPAIR:49_HARD_BLOCK`.
 
 ## B. System-4A-Gesamtstrecke auf demselben finalen Head erneut beweisen
 - [ ] **9. 1 Artikel komplett.** Chat -> Point 0 -> Root/Supervisor -> Worker -> Research -> Facts -> Draft -> Textmaschine -> ggf. Repair -> PASS -> Batch -> Handoff.
@@ -64,4 +68,4 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] Früherer 1..N-Handoff PASS.
 
 ## Aktueller Einstiegspunkt
-**NEXT ACTION = Punkt 8: `TEXTMASCHINE_REGELN_FULL_PASS` auf dem aktuellen finalen Hobbyraum-Head beweisen.**
+**NEXT ACTION = Punkt 9: 1 Artikel komplett auf dem finalen Hobbyraum-Head erneut beweisen.**
