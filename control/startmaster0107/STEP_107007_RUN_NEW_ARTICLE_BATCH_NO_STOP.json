@@ -1,5 +1,5 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V10_SYSTEM4_1N_BOUND",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V11_SYSTEM4_REPAIR_ONLY",
   "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "sequence": 107007,
   "worker_profile": "CLOUD_ARTICLE_BATCH_NO_STOP",
@@ -49,22 +49,6 @@
       "sha256": "3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837"
     },
     {
-      "ref": "control/single-door-boundary/codex_current_room_bridge.py",
-      "sha256": "8ec8a41ddbc148a949a19974fe6a548f741fd796dc6135640f7d0bc2fd27c795"
-    },
-    {
-      "ref": "control/single-door-boundary/codex_current_action.py",
-      "sha256": "3184f197159b1740f0aa5307a15552d22847cf9958185080270c82f0e9dee3e8"
-    },
-    {
-      "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
-      "sha256": "6d04edb9d9ce0711cdce2ff0c696026f865f728f30f54a691f83ca9129d01353"
-    },
-    {
-      "ref": "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
-      "sha256": "020e4f71c244110f637d72fbe722b4ce5cc0d8341f53c31e54b4377e89900e38"
-    },
-    {
       "ref": "control/startmaster0107/system4_107007_entry.py",
       "sha256": "619f6c972924027e11210fb4bf1c56ba71bedeae9c9631377556b36e172e53c5"
     },
@@ -73,7 +57,7 @@
       "sha256": "ab7bd8d610c564e61b4d2db00c30eda61ef38d478f784118b0f907ee54f671d8"
     }
   ],
-  "instruction": "107007 ist ausschließlich der produktive System-4-Lauf-Slot.\n\nHARD RULE — EINZIGER PRODUKTIVER 1..N-DURCHLAUF:\nVor jeder Artikelarbeit muss der bereits maschinell erzeugte SYSTEM4_POINT0_SNAPSHOT_V2 vorliegen. Der komplette Batch wird danach ausschließlich durch den maschineneigenen 1..N-Adapter gesteuert. Start exakt einmal mit:\n\npython3 control/startmaster0107/system4_107007_batch.py start <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\nDer Adapter bestimmt die Artikelanzahl ausschließlich aus dem aktuell hashgebundenen Runtime-Batch. Er startet ausschließlich Index 0. Nach PASS des aktuell gebundenen Artikels ausschließlich:\n\npython3 control/startmaster0107/system4_107007_batch.py advance <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\n`advance` darf keinen Index frei entgegennehmen. Die Maschine berechnet den nächsten Index selbst. Artikel N+1 darf erst gestartet werden, wenn Artikel N in seinem gebundenen Workspace phase=OUTPUT_GATE_REQUIRED und checks.status=PASS besitzt und plan_slot, canonical_article_id sowie target_keyword exakt dem aktuellen Runtime-Batch entsprechen. Kein Überspringen, kein freier Sprung, kein Wiederholen bereits abgeschlossener Items. Ein neuer Batch benötigt einen leeren neuen BATCH_ROOT und ist an Batch-Hash und Point-0-Hash gebunden. Runtime-/Point-0-/Count-Drift blockiert fail-closed.\n\nDer Batch-Adapter ruft für jeden neuen Index ausschließlich den bereits gebundenen Einzelstart control/startmaster0107/system4_107007_entry.py auf. Dieser führt zwingend root_entry.py start-point0 und danach codex_entry.py worker-start aus. cloud_entry.py und runtime_entry_gate.py start bleiben als Artikel-/Worker-Produktionsstart verboten.\n\nCodex arbeitet ausschließlich am von der Maschine ausgegebenen current item. Nach dessen echtem System-4-PASS wird wieder nur `advance` aufgerufen; Codex darf den nächsten Artikel weder auswählen noch selbst ableiten. Wenn `SYSTEM4_107007_BATCH_ITEMS_COMPLETE` gemeldet wird, sind exakt alle 1..N Artikel dieses Runtime-Batches einmal sequenziell bestanden. Dann stoppen; Batch-Abschluss über batch_gate.py collect wird im nächsten Hard-Rule-Punkt angebunden.\n\nNEW bleibt NEW; alte Artikel-/Recovery-Dateien sind keine Produktionsquelle. Kein Publish. Keine Parallelroute.",
+  "instruction": "107007 ist ausschließlich der produktive System-4-Lauf-Slot.\n\nHARD RULE — EINZIGER PRODUKTIVER 1..N-DURCHLAUF:\nVor jeder Artikelarbeit muss der bereits maschinell erzeugte SYSTEM4_POINT0_SNAPSHOT_V2 vorliegen. Der komplette Batch wird danach ausschließlich durch den maschineneigenen 1..N-Adapter gesteuert. Start exakt einmal mit:\n\npython3 control/startmaster0107/system4_107007_batch.py start <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\nDer Adapter bestimmt die Artikelanzahl ausschließlich aus dem aktuell hashgebundenen Runtime-Batch. Er startet ausschließlich Index 0. Nach PASS des aktuell gebundenen Artikels ausschließlich:\n\npython3 control/startmaster0107/system4_107007_batch.py advance <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\n`advance` darf keinen Index frei entgegennehmen. Die Maschine berechnet den nächsten Index selbst. Artikel N+1 darf erst gestartet werden, wenn Artikel N in seinem gebundenen Workspace phase=OUTPUT_GATE_REQUIRED und checks.status=PASS besitzt und plan_slot, canonical_article_id sowie target_keyword exakt dem aktuellen Runtime-Batch entsprechen. Kein Überspringen, kein freier Sprung, kein Wiederholen bereits abgeschlossener Items. Ein neuer Batch benötigt einen leeren neuen BATCH_ROOT und ist an Batch-Hash und Point-0-Hash gebunden. Runtime-/Point-0-/Count-Drift blockiert fail-closed.\n\nDer Batch-Adapter ruft für jeden neuen Index ausschließlich den bereits gebundenen Einzelstart control/startmaster0107/system4_107007_entry.py auf. Dieser führt zwingend root_entry.py start-point0 und danach codex_entry.py worker-start aus. cloud_entry.py und runtime_entry_gate.py start bleiben als Artikel-/Worker-Produktionsstart verboten.\n\nHARD RULE — REPAIR NUR SYSTEM 4:\nWenn der aktuelle System-4-Workspace phase=REPAIR_REQUIRED meldet, bleibt exakt derselbe Artikel im exakt selben Workspace gebunden. Reparatur ausschließlich über isolated_system4/controller.py repair <WORKSPACE> <REPAIR_DRAFT> und danach erneut isolated_system4/controller.py fullcheck <WORKSPACE>. Der 1..N-Adapter darf während REPAIR_REQUIRED niemals zum nächsten Artikel fortschalten; `advance` bleibt bis zum echten OUTPUT_GATE_REQUIRED/PASS gesperrt. Repair-Owner, Return-Route, Revision und Same-Article-Bindung werden ausschließlich vom System-4-Controller bestimmt.\n\nVERBOTEN für 107007-Repair und nicht mehr autorisiert: control/single-door-boundary/codex_current_room_bridge.py, control/single-door-boundary/codex_current_action.py, control/startmaster0107/fachworkflow_proof_handoff.py und control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py. FACHWORKFLOW_REPAIR_REQUIRED, submission_command oder irgendeine alte STARTMASTER-Repair-Rückgabe dürfen den aktuellen System-4-Artikel weder reparieren noch routen. Keine zweite Repair-Wahrheit.\n\nCodex arbeitet ausschließlich am von der Maschine ausgegebenen current item. In REPAIR_REQUIRED folgt Codex ausschließlich der in isolated_system4/codex_entry.py gebundenen Same-Article-Anweisung und ruft den System-4-Controller; es darf keinen Legacy-Handoff benutzen. Nach echtem System-4-PASS wird wieder nur `advance` aufgerufen; Codex darf den nächsten Artikel weder auswählen noch selbst ableiten. Wenn `SYSTEM4_107007_BATCH_ITEMS_COMPLETE` gemeldet wird, sind exakt alle 1..N Artikel dieses Runtime-Batches einmal sequenziell bestanden. Dann stoppen; Batch-Abschluss über batch_gate.py collect wird im nächsten Hard-Rule-Punkt angebunden.\n\nNEW bleibt NEW; alte Artikel-/Recovery-Dateien sind keine Produktionsquelle. Kein Publish. Keine Parallelroute.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
@@ -83,6 +67,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "82aca07bc39a3f0fa0e290bfc307b6c6e1c71e022c8aa4c7ea3dd740169beb52"
+    "bundle_sha256": "d47ce660973e18765ce65d33254ac573125e90ce701fad00136508d4377dd987"
   }
 }
