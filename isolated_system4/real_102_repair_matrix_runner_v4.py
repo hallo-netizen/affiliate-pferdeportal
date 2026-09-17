@@ -91,15 +91,28 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_FACT_PACK_COVERAGE', 'fact_pack_coverage')
 
     # The rule requires >=80% supported trace units. Break every trace-bearing factual unit,
-    # while leaving each trace tag and fact binding intact. Use ordinary, well-formed German
-    # sentences so LanguageTool stays green and PPM receives the intended lexical mutation.
+    # while leaving each trace tag and fact binding intact. These sentences are ordinary,
+    # LT-clean German, deliberately unrelated to the bound horse-trailer facts, and unique
+    # enough not to trip the duplicate-sentence gate first.
     trace_unit_pattern = r'(<p\b[^>]*data-fact-ids="[^"]+"[^>]*>)(.*?)(<span\b[^>]*class="ppm-source-trace"[^>]*>.*?</span>)(.*?</p>)'
-    lexical_words = ['Garten', 'Fenster', 'Lampe', 'Kissen', 'Regal', 'Tasse', 'Vorhang', 'Schrank', 'Teppich', 'Buch', 'Vase', 'Stuhl']
+    lexical_sentences = [
+        'Im Wohnzimmer steht ein kleiner Tisch neben dem Fenster.',
+        'Auf dem Regal liegt ein gebundenes Buch mit blauem Einband.',
+        'Eine helle Lampe beleuchtet am Abend den Schreibtisch.',
+        'Vor dem Fenster hängt ein schlichter Vorhang aus Baumwolle.',
+        'Auf dem Boden liegt ein weicher Teppich mit ruhigem Muster.',
+        'Neben der Tür steht eine hohe Vase auf einem schmalen Schrank.',
+        'In der Küche steht eine weiße Tasse neben einer kleinen Schale.',
+        'Der Stuhl am Tisch hat eine gerade Lehne aus hellem Holz.',
+        'Auf dem Sofa liegt ein weiches Kissen mit grauem Bezug.',
+        'An der Wand hängt ein gerahmtes Bild über einer niedrigen Kommode.',
+        'Im Flur steht ein schmaler Korb unter einer einfachen Garderobe.',
+        'Auf dem Fensterbrett steht eine kleine Pflanze in einem Tontopf.',
+    ]
     lexical_index = {'n': 0}
     def lexical(m):
-        word = lexical_words[lexical_index['n'] % len(lexical_words)]
+        sentence = lexical_sentences[lexical_index['n'] % len(lexical_sentences)]
         lexical_index['n'] += 1
-        sentence = 'Dieser bewusst sachfremde Beispielsatz beschreibt ausschließlich einen ruhigen ' + word + ' im Raum.'
         return m.group(1) + sentence + ' ' + m.group(3) + m.group(4)
     h, changed = re.subn(trace_unit_pattern, lexical, html, flags=re.I | re.S)
     if changed < 1:
