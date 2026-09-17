@@ -24,54 +24,26 @@ jobs:
         run: |
           set -euo pipefail
           for f in isolated_system4/real_102_repair_matrix_v1.py isolated_system4/real_102_repair_matrix_runner_v4.py; do
-            if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then
-              echo "REAL_102_MOCK_FORBIDDEN:$f"
-              exit 2
-            fi
+            if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then exit 2; fi
           done
           echo 'REAL_102_NO_MOCK_PASS'
-      - name: Inspect 22 stale-bound content authorities
+      - name: Inspect current Vergleich fixture
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm-authority && mkdir -p /tmp/ppm-authority
           unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-authority
           ROOT=/tmp/ppm-authority/portal-production-machine
-          for code in \
-            BLOCKED_CONTENT_BOUND_LINK_MISSING \
-            BLOCKED_CONTENT_DUMMY_SOURCE_HASH \
-            BLOCKED_CONTENT_FAQ_TITLE_QUESTION_MARK \
-            BLOCKED_CONTENT_FORBIDDEN_MACHINE_STATUS_WORD \
-            BLOCKED_CONTENT_FORBIDDEN_TABLE_PRESENT \
-            BLOCKED_CONTENT_PLACEHOLDER_SOURCE_TITLE \
-            BLOCKED_CONTENT_REQUIRED_BLOCK_EMPTY \
-            BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING \
-            BLOCKED_CONTENT_REQUIRED_SECTION_MISSING \
-            BLOCKED_CONTENT_REQUIRED_TABLE_MISSING \
-            BLOCKED_CONTENT_SECTION_DUPLICATE \
-            BLOCKED_CONTENT_SECTION_ORDER \
-            BLOCKED_CONTENT_SOURCE_LABEL_OPTION_MISMATCH \
-            BLOCKED_CONTENT_SOURCE_TRACE_COUNT \
-            BLOCKED_CONTENT_SOURCE_TRACE_FIELDS \
-            BLOCKED_CONTENT_TABLE_COUNT \
-            BLOCKED_CONTENT_TABLE_STRUCTURE \
-            BLOCKED_CONTENT_TARGET_KEYWORD_TITLE \
-            BLOCKED_CONTENT_TITLE_COLON \
-            BLOCKED_CONTENT_TRACE_FACT_BINDING \
-            BLOCKED_CONTENT_UNBOUND_INTERNAL_LINK \
-            BLOCKED_CONTENT_VISIBLE_LINK_COUNT; do
-              echo "=== $code ==="
-              grep -RFn "$code" "$ROOT/tests" "$ROOT/includes" || true
-          done
+          echo '=== VERGLEICH FILES ==='
+          grep -RFilE 'Produktvergleich|Vergleich' "$ROOT/tests" | head -80 || true
+          echo '=== SOURCE LABEL REFERENCES ==='
+          grep -RFn -B20 -A40 'source_label' "$ROOT/tests" "$ROOT/includes" | head -1200 || true
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
           mkdir -p /tmp/system4-lt68
-          curl --fail --location --retry 3 \
-            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
-            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/system4-lt68/LanguageTool-6.8.zip
           echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
           unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
-          test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
       - name: Execute real 102 of 102 repair roundtrip matrix
         env:
