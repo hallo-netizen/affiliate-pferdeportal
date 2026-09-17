@@ -1,50 +1,53 @@
 # SYSTEM 4A — PUNKT 5 REPAIR-RÜCKWEG
 
 Stand: 17.09.2026
-Branch: `hobbyroom/system4a-textmachine-final-pass-20260916`
+Aktiver Nachweisbranch: `hobbyroom/system4a-real-102-repair-matrix-clean-20260917`
 
-## Ergebnis
+## Aktueller Status
 
-**PUNKT 5 = PASS.**
+**PUNKT 5 = OFFEN unter dem verschärften HARD RULE.**
 
-Die in Punkt 4 bereits vollständig klassifizierten **102 reparierbaren Textmaschinenregeln** laufen über genau vier Owner-Routen:
+Der frühere Workflow `System 4A Repair Owner Contract`, Run `35197259525`, Head `475c57232b400a9f28523142863290866220a428`, SUCCESS, beweist die vollständige Regel->Owner-Zuordnung und die vier Owner-Routen. Er beweist jedoch **nicht**, dass jede der 102 reparierbaren Regeln einzeln real als Fehler ausgelöst, durch ihren Owner repariert und danach durch die komplette echte Textmaschine bis PASS geführt wurde.
+
+Die frühere Formulierung `PUNKT 5 = PASS` war deshalb für den neuen HARD RULE zu weit.
+
+## Unveränderte Klassifikation
+
+102 reparierbare Regeln:
 
 - 96 -> `DRAFT_WORKER`
 - 3 -> `PARENT_TITLE_MACHINE`
 - 2 -> `PORTAL_LINK_MACHINE`
 - 1 -> `PARENT_CATEGORY_MACHINE`
-- Kontrollsumme: **102**
 
-Die Regelabhängigkeit endet nach der hart bewiesenen Regel->Owner-Zuordnung aus Punkt 4. Der Rückweg selbst ist owner-gesteuert und für alle Regeln desselben Owners identisch. Deshalb wird der Rückweg nicht 102-mal künstlich dupliziert, sondern jede der vier tatsächlich verwendeten Owner-Routen hart geprüft.
+49 weitere erreichbare Regeln bleiben terminal `HARD_BLOCK`.
 
-## Bewiesene Rückweggrenze
+## Neuer harter Nachweis
 
-Test: `isolated_system4/test_textmachine_repair_roundtrip_matrix.py`
+Ziel pro reparierbarer Regel:
 
-Der Test beweist:
+`gezielter Fehler -> exakter Fehlercode -> richtiger Owner -> echte Reparatur -> vollständiger realer Fullcheck -> LT 6.8 PASS -> PPM 6.7.9 PASS -> erst dann Regel PASS`
 
-1. Kontrollsumme exakt 102 reparierbare Regeln.
-2. `DRAFT_WORKER` -> derselbe Artikel bleibt gebunden -> `REPAIR_REQUIRED`.
-3. `PARENT_TITLE_MACHINE` -> kontrollierter `PARENT_LAUNCH`, ohne stille Artikelmutation.
-4. `PORTAL_LINK_MACHINE` -> kontrollierter `PARENT_LAUNCH`, ohne stille Artikelmutation.
-5. `PARENT_CATEGORY_MACHINE` -> kontrollierter `PARENT_LAUNCH`, ohne stille Artikelmutation.
-6. Nach erfolgter Reparatur muss der Artikel erneut durch den vollständigen Fullcheck-Pfad: Authoring Contract -> Content Guard -> Design Guard -> Production Checks; erst danach `OUTPUT_GATE_REQUIRED`.
+Test-Harness:
+- `isolated_system4/real_102_repair_matrix_v1.py`
+- `isolated_system4/real_102_repair_matrix_runner_v4.py`
+- `.github/workflows/system4a-real-102-repair-matrix.yml`
 
-Die bereits vorhandenen realen Repair-Nachweise bleiben Bestandteil der Kette, insbesondere Same-Article-Repair, Parent-Title-Repair, Parent-Metadata-Authority und Guard-Repair.
+Mocks sind im Harness ausdrücklich verboten.
 
-## Remote-Ausführung
+## Tatsächlich gefundene Fehler während des neuen Nachweises
 
-Workflow: `System 4A Repair Owner Contract`
-Run: `35197259525`
-Head: `475c57232b400a9f28523142863290866220a428`
-Ergebnis: **SUCCESS**
+1. Drei W4-Heading-Regeln wurden im Produktionsrouter fälschlich als `HARD_BLOCK` behandelt, obwohl sie reparierbar klassifiziert sind. Im Testweg wurde die korrekte Route `DRAFT_WORKER` hergestellt und als Regression in den Workflow aufgenommen.
+2. Mehrere alte PPM-Testfixtures waren nicht mehr als heutige grüne Basis geeignet. Die 15 Canonical-PPM-Mutationen wurden deshalb auf den aktuell grünen System-4A-Artikel gebunden; 15/15 erreichen ihren exakten Ziel-Fehlercode.
+3. Die Registry bindet 22 Content-Regeln an `tests/test-historical-regressions.php`. Diese Datei enthält tatsächlich nur 16 alte Infrastruktur-Incidents und emittiert diese 22 Content-Codes nicht. Der letzte echte Run `35214897183`, Head `2eba56cda276c67721577f0104ad89b65a2af890`, ist deshalb FAIL.
+4. Der Inspektionsschritt desselben Runs fand im vorhandenen PHP-Testbestand für die 22 Codes nur für `BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING` direkte aktuelle Negative-Tests (`three-type-bundled-local/*-negative.php`). Für die übrigen 21 gab es dort keinen direkten Treffer.
 
-Der Run enthält zusätzlich weiterhin die komplette Negativ-/Hard-Block-Matrix einschließlich der 49 PPM-Gap-Nachweise.
+## NEXT ACTION
 
-## Harte Aussage
+Die 22 veralteten/falschen Registry-Testbindungen mit **echten gezielten aktuellen Mutationen** schließen. Kein Echo und kein künstlicher PASS. Danach den Workflow erneut ausführen, bis der harte Marker real erscheint:
 
-Für jede der **102 reparierbaren Regeln** ist über ihre bereits bewiesene Regel->Owner-Klassifikation und die vollständig bewiesene Owner-Rückwegmatrix gesichert:
+`TEXTMASCHINE_REAL_REPAIR_FULL_PASS:102/102`
 
-`Fehler -> richtiger Owner -> keine stille Artikelersetzung -> kontrollierter Repair-Rückweg -> erneuter vollständiger Fullcheck -> erst bei PASS weiter`.
+Erst danach darf Punkt 5 wieder als PASS markiert werden. Danach folgt der separate globale Audit:
 
-Terminale Regeln sind ausdrücklich nicht Bestandteil von Punkt 5; sie sind in Punkt 6 mit 49/49 fail-closed bewiesen.
+`Was behauptet jeder PASS – und was testet der Code wirklich?`
