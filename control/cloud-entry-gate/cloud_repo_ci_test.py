@@ -41,12 +41,7 @@ def copy_current_repo(td: Path):
             refs.append(row['ref'])
     nb = bundle.get('next_binding')
     if isinstance(nb, dict) and isinstance(nb.get('bundle_ref'), str):
-        next_rel = nb['bundle_ref']
-        refs.append(next_rel)
-        next_bundle = json.loads((REPO / next_rel).read_text())
-        for row in next_bundle.get('authorized_inputs') or []:
-            if isinstance(row, dict) and isinstance(row.get('ref'), str):
-                refs.append(row['ref'])
+        refs.append(nb['bundle_ref'])
     for rel in dict.fromkeys(refs):
         src, dst = REPO / rel, r / rel
         dst.parent.mkdir(parents=True, exist_ok=True)
