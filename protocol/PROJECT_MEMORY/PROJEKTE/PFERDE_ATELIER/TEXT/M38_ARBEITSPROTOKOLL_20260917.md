@@ -14,7 +14,7 @@ Der erste frische Artikel erreichte nach realer LanguageTool-Reparatur den reale
 ## GEBUNDENE HISTORY-BASIS
 
 Realtest-Baseline / current main:
-`f1d1605f18bd23d9189f89ad173598958718d08a`
+`7533d99e306bb016c87c7c63e2c6103bf1010476`
 
 Letzter belastbarer Recovery-Stand:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
@@ -30,7 +30,7 @@ Die bestehende Abschlusslogik bindet:
 - `plan_contract_version == "4.0.0"`
 - `required_plugin_version == "6.7.9"`
 
-History-Kandidat PR249 darf ausschließlich die bestehende Fehlermatrix und den bestehenden Regressionrunner ändern.
+History-Kandidat PR277 darf ausschließlich die bestehende Fehlermatrix und den bestehenden Regressionrunner ändern.
 
 ## MASCHINENBEWEIS VOR PRODUKTFIX
 
