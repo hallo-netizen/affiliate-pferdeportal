@@ -4,14 +4,14 @@ from pathlib import Path
 from unittest import mock
 
 import full_route_start,handoff_transport,production_checks
-from full_route_test_fixture import SINGLE_ITEMS,THREE_ITEMS,write_start_fixture
+from full_route_test_fixture import FOUR_ITEMS,SINGLE_ITEMS,THREE_ITEMS,write_start_fixture
 
 HERE=Path(__file__).resolve().parent
 WORKER=[sys.executable,str(HERE/'full_route_test_worker.py')]
 
 @unittest.skipUnless(os.environ.get('SYSTEM4_REAL_TOOL_CORRIDOR')=='1','real tool corridor is an explicit CI stage')
 class FullRouteStartRealTests(unittest.TestCase):
-    def _run(self,items,prefix):
+    def _run(self,items,prefix,expect_batch_workshop=False):
         with tempfile.TemporaryDirectory(prefix=prefix) as td:
             root=Path(td);snap,sources=write_start_fixture(root,items);out=root/'out'
             final=full_route_start.run(snap,sources,WORKER,out)
@@ -31,7 +31,21 @@ class FullRouteStartRealTests(unittest.TestCase):
                 self.assertEqual(row['final_draft_sha256'],hashlib.sha256(row['body'].encode('utf-8')).hexdigest())
             canonical=(out/handoff_transport.HANDOFF_FILENAME).read_bytes()
             self.assertEqual(final.read_bytes(),canonical)
-            self.assertTrue((out/'batch/system4_batch_evidence.json').is_file())
+            evidence_path=out/'batch/system4_batch_evidence.json'
+            self.assertTrue(evidence_path.is_file())
+            evidence=json.loads(evidence_path.read_text(encoding='utf-8'))
+            if expect_batch_workshop:
+                request_path=out/'batch/GLOBAL_WORKSHOP_REQUEST.json'
+                self.assertTrue(request_path.is_file())
+                request=json.loads(request_path.read_text(encoding='utf-8'))
+                self.assertTrue(request['repairable'])
+                self.assertEqual(request['origin_stage'],'BATCH')
+                self.assertTrue(str(request['error_code']).startswith('BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED:'))
+                self.assertGreaterEqual(request['finding_count'],7)
+                self.assertEqual(set(request['repair_targets']),{'3'})
+                self.assertTrue((out/'worker-batch-repair-3-1.html').is_file())
+                self.assertEqual(evidence['batch_repetition']['status'],'PASS')
+                self.assertLessEqual(evidence['batch_repetition']['majority_repeated_sentence_count'],6)
             return payload
 
     def test_one_genuinely_new_article_from_single_start_button_to_file(self):
@@ -53,6 +67,17 @@ class FullRouteStartRealTests(unittest.TestCase):
             if old is None: os.environ.pop('SYSTEM4_TEST_FORCE_REPAIR_INDEX',None)
             else: os.environ['SYSTEM4_TEST_FORCE_REPAIR_INDEX']=old
         self.assertGreaterEqual(payload['articles'][0]['revision_count'],2)
+
+    def test_four_article_batch_repetition_goes_workshop_repair_fullcheck_batch_pass(self):
+        old=os.environ.get('SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT')
+        os.environ['SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT']='4'
+        try:
+            payload=self._run(FOUR_ITEMS,'s4-start-four-batch-repair-',expect_batch_workshop=True)
+        finally:
+            if old is None: os.environ.pop('SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT',None)
+            else: os.environ['SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT']=old
+        self.assertEqual(len(payload['articles']),4)
+        self.assertGreaterEqual(payload['articles'][3]['revision_count'],2)
 
     def test_true_languagetool_execution_failure_stays_terminal_and_never_invokes_repair_worker(self):
         with tempfile.TemporaryDirectory(prefix='s4-start-lt-hard-fail-') as td:
