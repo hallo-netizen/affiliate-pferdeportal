@@ -1,0 +1,11 @@
+{
+  "RESEARCH": {"status": "PASS"},
+  "FACT_CHECK": {"status": "PASS"},
+  "DRAFT": {
+    "status": "PASS",
+    "article": "Eine passende Regendecke muss zum Pferd und zur konkreten Nutzung passen. Entscheidend ist im Testaufbau nicht eine einzelne Produkteigenschaft, sondern dass die fest vorgegebenen Produktions- und Prüfstationen vollständig durchlaufen werden. Dieser neu erzeugte Testtext dient ausschließlich dem isolierten System-3-Livegrenztest und wird nicht in WordPress geschrieben oder veröffentlicht."
+  },
+  "LANGUAGE": {"status": "PASS"},
+  "RULE_CHECK": {"status": "PASS", "all_rules_exact": true},
+  "QUALITY_CHECK": {"status": "PASS", "quality_floor_pass": true}
+}
