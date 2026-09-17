@@ -4,50 +4,30 @@ on:
     branches:
       - hobbyroom/system4a-remove-fixed-seven-20260917
 permissions:
-  contents: write
+  contents: read
 jobs:
-  propagate:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: hobbyroom/system4a-remove-fixed-seven-20260917
-      - name: Propagate exact 107008 and state hashes
+      - name: Verify entrance hash chain
+        run: |
+          python control/cloud-entry-gate/cloud_repo_ci_test.py
+          sha256sum control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
+          sha256sum control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
+          sha256sum control/startmaster0107/CURRENT_STATE.json
+      - name: Downstream 1..N contract
+        run: python3 isolated_system4/downstream_1n_contract_probe.py
+      - name: V2 to 107008 bridge
+        run: python3 -m unittest control.startmaster0107.test_system4_107008_handoff -v
+      - name: Handoff transport 1..N
+        run: PYTHONPATH=isolated_system4 python3 -m unittest isolated_system4.test_handoff_transport -v
+      - name: Source hardlock scan
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          import hashlib,json
-          step7=Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json')
-          state=Path('control/startmaster0107/CURRENT_STATE.json')
-          root=Path('control/startmaster0107/PFERDE_ATELIER_START_HERE.json')
-          new8='fca1e0217c44dc406f68ae8d43636420787d4915504376a275fbad205e4ee0c7'
-          old7='00109bdc51752c9c1118fe1340df986e10e1d9cc4015b17606622639baef9510'
-          oldstate='e43ca5f0499646c2e35957b86f43c9f4f5ffba21a0275589099f181d1008d13d'
-          obj=json.loads(step7.read_text(encoding='utf-8'))
-          if obj['next_binding']['bundle_sha256']!='af1c4515e70528a0ab8b2d21b3a7e696df8afc9e0d530f3a5bc03a3de52056aa':
-              raise SystemExit('UNEXPECTED_107008_BINDING')
-          obj['next_binding']['bundle_sha256']=new8
-          step7.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          new7=hashlib.sha256(step7.read_bytes()).hexdigest()
-          st=state.read_text(encoding='utf-8')
-          if st.count(old7)!=2: raise SystemExit('STATE_107007_HASH_COUNT:'+str(st.count(old7)))
-          state.write_text(st.replace(old7,new7),encoding='utf-8')
-          newstate=hashlib.sha256(state.read_bytes()).hexdigest()
-          rt=root.read_text(encoding='utf-8')
-          if hashlib.sha256(state.read_bytes()).hexdigest()!=newstate: raise SystemExit('STATE_HASH_INTERNAL')
-          if rt.count(oldstate)!=1: raise SystemExit('ROOT_STATE_HASH_COUNT:'+str(rt.count(oldstate)))
-          root.write_text(rt.replace(oldstate,newstate),encoding='utf-8')
-          print('NEW_107007_SHA256='+new7)
-          print('NEW_STATE_SHA256='+newstate)
-          print('NEW_ROOT_SHA256='+hashlib.sha256(root.read_bytes()).hexdigest())
-          PY
-          python control/cloud-entry-gate/cloud_repo_ci_test.py
-          git diff --check
-      - name: Commit propagated bindings
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json control/startmaster0107/CURRENT_STATE.json control/startmaster0107/PFERDE_ATELIER_START_HERE.json
-          git commit -m 'system4: bind 107007 to dynamic 1n 107008 bundle'
-          git push origin HEAD:hobbyroom/system4a-remove-fixed-seven-20260917
+          ! grep -nF 'article_count=7' control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
+          ! grep -nF "req.get('article_count')!=7" .github/workflows/pferde-atelier-endstempel.yml
+          ! grep -nF "m.get('article_count')!=7" .github/workflows/pferde-atelier-endstempel.yml
+          ! grep -nF 'len(articles) != 7' control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py
+          ! grep -nF '"article_count": 7' control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py
+          echo SYSTEM4_DOWNSTREAM_FIXED_SEVEN_REMOVED_PASS
