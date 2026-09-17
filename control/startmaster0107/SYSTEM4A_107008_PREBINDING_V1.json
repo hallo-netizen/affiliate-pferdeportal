@@ -1,0 +1,29 @@
+{
+  "contract": "SYSTEM4A_107008_PREBINDING_V1",
+  "status": "PREBOUND_TO_EXISTING_AUTHORIZED_107007_NEXT_BINDING",
+  "source_canonical_binding_ref": "control/startmaster0107/SYSTEM4A_CANONICAL_BINDING_V1.json",
+  "source_canonical_binding_sha256": "36762568b803a533e885b3db6b2cf9c06d6068b75c66e24c99d9a75c269331bc",
+  "source_tested_head_sha": "2e62f0c81abe16ed47c12ecc9df89a95942ad97d",
+  "canonical_main_sha_before_prebinding": "d434625da4817805fa95be0f766aa1b34ca6029a",
+  "from_step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+  "from_sequence": 107007,
+  "from_bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
+  "target_step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
+  "target_sequence": 107008,
+  "target_bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
+  "target_bundle_sha256": "82aca07bc39a3f0fa0e290bfc307b6c6e1c71e022c8aa4c7ea3dd740169beb52",
+  "binding_source": "STEP_107007.next_binding",
+  "activation_authority": "control/cloud-entry-gate/cloud_entry.py complete",
+  "state_write_authority": "ENTRANCE_GATE_ONLY",
+  "state_advance_performed": false,
+  "current_state_expected_sequence_before_activation": 107007,
+  "hardlock_prebinding_evidence": {
+    "canonical_bind_hardlock_run": 35201028052,
+    "canonical_bind_hardlock_status": "SUCCESS",
+    "canonical_bind_hardlock_base_run": 35201026166,
+    "canonical_bind_hardlock_base_status": "SUCCESS",
+    "monotonic_prebound_transition": "PASS"
+  },
+  "next_authorized_scope": "EXECUTE_107008_ONLY_AFTER_AUTHORIZED_107007_COMPLETION",
+  "publish_allowed": false
+}
