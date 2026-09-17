@@ -11,7 +11,9 @@ MAX_MAJORITY_REPEATED_SENTENCES = 6
 
 
 class BatchRepetitionError(RuntimeError):
-    pass
+    def __init__(self, code: str, findings: list[dict[str, Any]] | None = None):
+        super().__init__(code)
+        self.findings = [dict(row) for row in (findings or [])]
 
 
 def _require(condition: bool, code: str) -> None:
@@ -38,7 +40,7 @@ def _normalized_sentences(article: str) -> set[str]:
     return result
 
 
-def validate_batch_repetition(bodies: Sequence[str]) -> dict[str, Any]:
+def repeated_sentence_findings(bodies: Sequence[str]) -> list[dict[str, Any]]:
     _require(isinstance(bodies, Sequence) and len(bodies) >= 1, "BATCH_REPETITION_INPUT_INVALID")
     occurrences: dict[str, list[int]] = defaultdict(list)
     for index, body in enumerate(bodies):
@@ -52,11 +54,30 @@ def validate_batch_repetition(bodies: Sequence[str]) -> dict[str, Any]:
         if len(indexes) >= MIN_ARTICLES_PER_REPEAT
     ]
     majority_repeats.sort(key=lambda row: (-len(row[1]), -len(row[0].split()), row[0]))
-    count = len(majority_repeats)
-    _require(
-        count <= MAX_MAJORITY_REPEATED_SENTENCES,
-        f"BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED:{count}>{MAX_MAJORITY_REPEATED_SENTENCES}",
-    )
+    return [
+        {
+            "error_code": "BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED",
+            "failed_rule": "BATCH_MAJORITY_REPEATED_SENTENCE",
+            "sentence": sentence,
+            "article_indexes": list(indexes),
+            "occurrence_count": len(indexes),
+            "minimum_articles_per_repeat": MIN_ARTICLES_PER_REPEAT,
+            "maximum_allowed_majority_repeated_sentences": MAX_MAJORITY_REPEATED_SENTENCES,
+            "repair_owner": "DRAFT_BODY",
+            "repair_target": "SAME_ARTICLE_BODY",
+        }
+        for sentence, indexes in majority_repeats
+    ]
+
+
+def validate_batch_repetition(bodies: Sequence[str]) -> dict[str, Any]:
+    findings = repeated_sentence_findings(bodies)
+    count = len(findings)
+    if count > MAX_MAJORITY_REPEATED_SENTENCES:
+        raise BatchRepetitionError(
+            f"BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED:{count}>{MAX_MAJORITY_REPEATED_SENTENCES}",
+            findings=findings,
+        )
     return {
         "status": "PASS",
         "article_count": len(bodies),
