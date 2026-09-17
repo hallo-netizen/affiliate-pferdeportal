@@ -34,9 +34,9 @@ jobs:
           unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-authority
           ROOT=/tmp/ppm-authority/portal-production-machine
           echo '=== VERGLEICH FILES ==='
-          grep -RFilE 'Produktvergleich|Vergleich' "$ROOT/tests" | head -80 || true
+          grep -RIlE 'Produktvergleich|Vergleich' "$ROOT/tests" | head -80 || true
           echo '=== SOURCE LABEL REFERENCES ==='
-          grep -RFn -B20 -A40 'source_label' "$ROOT/tests" "$ROOT/includes" | head -1200 || true
+          grep -Rni -B20 -A40 -E 'source[_-]?label|OPTION_HEADING' "$ROOT/tests" "$ROOT/includes" | head -1200 || true
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
