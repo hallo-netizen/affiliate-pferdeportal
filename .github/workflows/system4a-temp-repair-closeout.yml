@@ -1,0 +1,65 @@
+name: System4A temp repair closeout
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-repair-only-20260917'
+permissions:
+  contents: write
+jobs:
+  closeout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove legacy repair from 107008 and refresh chain
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          cloud=Path('control/cloud-entry-gate/cloud_repo_ci_test.py')
+          text=cloud.read_text(encoding='utf-8')
+          new="""    nb = bundle.get('next_binding')\n    if isinstance(nb, dict) and isinstance(nb.get('bundle_ref'), str):\n        next_rel = nb['bundle_ref']\n        refs.append(next_rel)\n        next_bundle = json.loads((REPO / next_rel).read_text())\n        for row in next_bundle.get('authorized_inputs') or []:\n            if isinstance(row, dict) and isinstance(row.get('ref'), str):\n                refs.append(row['ref'])\n"""
+          old="""    nb = bundle.get('next_binding')\n    if isinstance(nb, dict) and isinstance(nb.get('bundle_ref'), str):\n        refs.append(nb['bundle_ref'])\n"""
+          if new not in text:
+              raise SystemExit('CLOUD_PATCH_NOT_FOUND')
+          cloud.write_text(text.replace(new,old,1),encoding='utf-8')
+
+          step8=Path('control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json')
+          s8=json.loads(step8.read_text(encoding='utf-8'))
+          legacy='control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py'
+          rows=s8.get('authorized_inputs') or []
+          s8['authorized_inputs']=[r for r in rows if not (isinstance(r,dict) and r.get('ref')==legacy)]
+          if len(s8['authorized_inputs']) != len(rows)-1:
+              raise SystemExit('STEP107008_LEGACY_REPAIR_REF_NOT_UNIQUE')
+          step8.write_text(json.dumps(s8,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          h=lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+          step8_sha=h(step8)
+
+          step7=Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json')
+          s7=json.loads(step7.read_text(encoding='utf-8'))
+          s7['next_binding']['bundle_sha256']=step8_sha
+          step7.write_text(json.dumps(s7,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          step7_sha=h(step7)
+
+          state=Path('control/startmaster0107/CURRENT_STATE.json')
+          st=json.loads(state.read_text(encoding='utf-8'))
+          st['execution_gate']['bundle_sha256']=step7_sha
+          st['execution_gate_rearm_target']['bundle_sha256']=step7_sha
+          state.write_text(json.dumps(st,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          state_sha=h(state)
+          root=Path('control/startmaster0107/PFERDE_ATELIER_START_HERE.json')
+          rt=json.loads(root.read_text(encoding='utf-8'))
+          rt['current_state_sha256']=state_sha
+          root.write_text(json.dumps(rt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('STEP107008_SHA256='+step8_sha)
+          print('STEP107007_SHA256='+step7_sha)
+          print('STATE_SHA256='+state_sha)
+          PY
+          python control/cloud-entry-gate/cloud_repo_ci_test.py
+          python3 control/startmaster0107/test_system4_107007_batch.py
+          python3 control/startmaster0107/test_system4_107007_repair_authority.py
+          git config user.name 'hallo-netizen'
+          git config user.email 'hallo@oliver-beil.de'
+          git add control/cloud-entry-gate/cloud_repo_ci_test.py control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json control/startmaster0107/CURRENT_STATE.json control/startmaster0107/PFERDE_ATELIER_START_HERE.json
+          git commit -m 'system4: remove legacy repair from downstream binding'
+          git push origin HEAD:hobbyroom/system4a-repair-only-20260917
