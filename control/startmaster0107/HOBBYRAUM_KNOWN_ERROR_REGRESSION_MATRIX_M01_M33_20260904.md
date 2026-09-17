@@ -1,6 +1,6 @@
 # STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M37
 
-Stand: 2026-09-11
+Stand: 2026-09-17
 
 ## HARD RULE
 
@@ -14,12 +14,13 @@ Verbindliche bekannte Fehler-/Regressionstestliste für den Hobbyraum.
 - Jeder einmal real aufgetretene, weiterhin relevante Workflowfehler bleibt dauerhaft in dieser Matrix.
 - main bleibt unangetastet, bis der aktive Fehler im Kandidaten behoben ist und derselbe Runner danach entweder Gesamt-PASS oder ausschließlich einen späteren bereits bekannten Fehler als ersten FAIL meldet.
 - publish_allowed=false bleibt unverändert.
+- Artikelmenge ist ausschließlich 1..N aus dem real gebundenen Batch; keine feste 7-Artikel-Mengenautorität.
 
 ## Bestehende Matrix M01–M25
 
 M01 – State-/Bundle-Hash chain: CURRENT_STATE -> 107007; START_HERE -> CURRENT_STATE; 107007 -> 107008; authorized_inputs exakt.
 
-M02 – Unique article files: exakt 7 ARTICLE_<plan_slot>.md; keine ARTICLE.md-Kollision.
+M02 – Unique article files: 1..N ARTICLE_<plan_slot>.md entsprechend dem gebundenen Batch; keine ARTICLE.md-Kollision.
 
 M03 – PREPARED Persist/Restore: 107007 persistiert; 107008 restauriert; keine PREPARED_BINDING_MISSING-Schleife.
 
@@ -67,7 +68,7 @@ M18 – ENDSTEMPEL constants: IMPORT_ENVELOPE_NAME / IMPORT_ENVELOPE_KEYS defini
 
 M19 – Merge trigger: GitHub-ENDSTEMPEL erkennt Merge-Commits korrekt.
 
-M20 – Delivery: 7 Artikel + Import-Envelope + Source-Manifest exakt hashgebunden.
+M20 – Delivery: 1..N Artikel entsprechend dem gebundenen Release-Set + Import-Envelope + Source-Manifest exakt hashgebunden; feste 7-Artikel-Annahme verboten.
 
 M21 – No auto-publish: publish_allowed=false in Runtime, Bundles, Delivery, ENDSTEMPEL und WP-Test.
 
@@ -127,7 +128,7 @@ M33 – GitHub ENDSTEMPEL must not depend on Codex git remote/auth
 - Historischer Fehler: Codex-Lauf erreichte 107008, konnte finale GitHub-Datei aber wegen fehlendem git remote / GH_TOKEN / gh auth nicht dauerhaft erzeugen.
 - Der vorgesehene ENDSTEMPEL-Weg muss aus dauerhaft auf GitHub vorhandener, hashgebundener Quelle arbeiten.
 - Kein Codex-Push als Voraussetzung für den finalen Produktionsendstempel.
-- Erfolg nur, wenn GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json dauerhaft entsteht; sonst BLOCKED.
+- Erfolg nur, wenn der historisch benannte Kompatibilitäts-Output `GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json` dauerhaft entsteht; der Dateiname ist ausdrücklich keine Mengenautorität.
 
 M34 – Reapplied legacy PPM handoff guards after B01
 - Historischer Live-Fehler: `PPM679_REAL_EXECUTION_FAILED:CANONICAL_SLOT_MISSING`.
@@ -172,4 +173,4 @@ M37 – Non-repairable PPM/PSERC inner reason visibility
 
 HOBBYRAUM PASS nur wenn M01–M37 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
 
-Danach erst Merge-Kandidat und danach kompletter frischer 7/7-E2E. Keine Reparatur während des Produktionslaufs.
+Danach erst Merge-Kandidat und danach kompletter frischer 1..N-E2E gegen die reale gebundene Batchgröße. Keine Reparatur während des Produktionslaufs.
