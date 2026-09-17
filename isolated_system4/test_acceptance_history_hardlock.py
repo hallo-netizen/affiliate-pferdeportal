@@ -122,13 +122,23 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
 
     def test_batch_handoff_and_output_remain_one_to_n(self):
         route = text(HERE / 'live_parity_v2.py')
-        endgate = text(REPO / 'control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py')
+        delivery = text(REPO / 'control/startmaster0107/chat_delivery_payload.py')
+        final_release = text(REPO / 'control/startmaster0107/GITHUB_FINAL_RELEASE.py')
         self.assertIn("'batch_gate.py','collect'", route)
         self.assertIn("'handoff_transport.py','validate'", route)
         self.assertIn('INLINE_RECONSTRUCTION_NOT_BYTE_EQUAL', route)
-        self.assertRegex(endgate, r'len\(articles\)\s*<\s*1')
-        self.assertNotRegex(endgate, r'len\(articles\)\s*!=\s*7')
-        self.assertNotRegex(endgate, r'["\']article_count["\']\s*:\s*7')
+        self.assertIn('count = len(articles)', delivery)
+        self.assertRegex(delivery, r'count\s*<\s*1')
+        self.assertIn('"item_count": count', delivery)
+        self.assertIn('"article_count": count', delivery)
+        for fixed in (
+            r'len\(articles\)\s*!=\s*7',
+            r'len\(articles\)\s*==\s*7',
+            r'["\']item_count["\']\s*:\s*7',
+            r'["\']article_count["\']\s*:\s*7',
+        ):
+            self.assertNotRegex(delivery, fixed)
+        self.assertIn('IMPORT_ENVELOPE', final_release)
 
     def test_acceptance_workflow_has_no_codex_and_must_run_full_rule_matrix_first(self):
         workflow = text(WORKFLOW)
