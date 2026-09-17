@@ -153,29 +153,43 @@ def _repair_from_exact_lt_text(repo: Path, state: dict, body: str, checked_text:
                 raise NoCodexRepairError(prefix + '_NO_SUGGESTION:' + _lt_finding_detail(raw, checked_text))
             no_suggestion.append({'raw': raw, 'target': target, 'offset': offset})
             continue
-        replacement = None
+        changing_replacements: list[str] = []
         for candidate in replacements:
             value = candidate.get('value') if isinstance(candidate, dict) else None
             if not isinstance(value, str) or not value.strip():
                 continue
-            if value == target:
+            try:
+                candidate_body = _replace_last_literal(body, target, value)
+            except NoCodexRepairError:
                 continue
-            replacement = value
-            break
-        if replacement is None:
+            if candidate_body == body:
+                continue
+            if value not in changing_replacements:
+                changing_replacements.append(value)
+        if not changing_replacements:
             raise NoCodexRepairError(prefix + '_NO_CHANGING_SUGGESTION:' + _lt_finding_detail(raw, checked_text))
-        normalized.append((offset, target, replacement))
+        normalized.append((offset, target, changing_replacements))
 
     repaired = body
-    for _, target, replacement in sorted(normalized, key=lambda row: row[0], reverse=True):
-        repaired = _replace_last_literal(repaired, target, replacement)
+    for _, target, replacements in sorted(normalized, key=lambda row: row[0], reverse=True):
+        for replacement in replacements:
+            try:
+                candidate_body = _replace_last_literal(repaired, target, replacement)
+            except NoCodexRepairError:
+                continue
+            if candidate_body == repaired or candidate_body == body:
+                continue
+            repaired = candidate_body
+            break
 
     chosen_by_target: dict[str, str] = {}
     for row in sorted(no_suggestion, key=lambda value: int(value['offset']), reverse=True):
         target = str(row['target'])
         chosen = chosen_by_target.get(target)
         if chosen is not None:
-            repaired = _replace_last_literal(repaired, target, chosen)
+            candidate_body = _replace_last_literal(repaired, target, chosen)
+            if candidate_body != repaired and candidate_body != body:
+                repaired = candidate_body
             continue
         repaired, chosen = _validated_hyphen_replacement(repo, state, repaired, target, ppm_visible)
         chosen_by_target[target] = chosen
