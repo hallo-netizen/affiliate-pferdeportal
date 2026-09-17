@@ -19,6 +19,8 @@ BATCH_REPEAT_SENTENCES=(
     'Die Auswahl wird anhand gebundener Kriterien ohne neue Informationen beschrieben.',
     'Alle Hinweise bleiben im bestätigten Quellenrahmen und verändern keine Tatsachen.',
 )
+BATCH_REPEAT_TOPICS=('Fliegenmasken','Pellets','Urlaubspläne','Nachbarschaftsabsprachen')
+BATCH_REPEAT_ORDINALS=('ersten','zweiten','dritten','vierten','fünften','sechsten')
 BATCH_REPEAT_TEXT=' '.join(BATCH_REPEAT_SENTENCES)
 
 
@@ -54,6 +56,17 @@ def _force_one_repairable_typo(body:str,index:int)->str:
         if count==1: return changed
     raise RuntimeError('FORCED_REPAIR_TOKEN_MISSING')
 
+def _forced_batch_repeat_text(index:int)->str:
+    if index<0 or index>=len(BATCH_REPEAT_TOPICS):
+        raise RuntimeError('FORCED_BATCH_REPETITION_TEST_INDEX_UNSUPPORTED:'+str(index))
+    topic=BATCH_REPEAT_TOPICS[index]
+    parts=[]
+    for pos,sentence in enumerate(BATCH_REPEAT_SENTENCES):
+        parts.append(sentence)
+        if pos<len(BATCH_REPEAT_SENTENCES)-1:
+            parts.append(f'{topic} markieren hier den {BATCH_REPEAT_ORDINALS[pos]} Prüfpunkt.')
+    return ' '.join(parts)
+
 def _force_batch_repetition(body:str,state:dict,index:int)->str:
     raw=os.environ.get(FORCE_BATCH_REPETITION_COUNT_ENV,'').strip()
     if not raw: return body
@@ -65,11 +78,12 @@ def _force_batch_repetition(body:str,state:dict,index:int)->str:
     if intro_end<0: raise RuntimeError('FORCED_BATCH_REPETITION_INTRO_END_MISSING')
     paragraph_end=body.find('</p>',intro_end+10)
     if paragraph_end<0: raise RuntimeError('FORCED_BATCH_REPETITION_CONTENT_PARAGRAPH_MISSING')
-    changed=body[:paragraph_end]+' '+BATCH_REPEAT_TEXT+body[paragraph_end:]
+    forced=_forced_batch_repeat_text(index)
+    changed=body[:paragraph_end]+' '+forced+body[paragraph_end:]
     authoring_contract.validate_candidate(changed,state['authoring_contract'])
     return changed
 
-def _repair_forced_batch_repetition(state:dict)->str|None:
+def _repair_forced_batch_repetition(state:dict,index:int)->str|None:
     raw=os.environ.get(FORCE_BATCH_REPETITION_COUNT_ENV,'').strip()
     if not raw: return None
     checks=state.get('checks') if isinstance(state.get('checks'),dict) else {}
@@ -78,9 +92,19 @@ def _repair_forced_batch_repetition(state:dict)->str|None:
     if checks.get('mode')!='GLOBAL_WORKSHOP' or checks.get('checker')!='BATCH' or len(relevant)<7:
         return None
     body=str(state.get('draft_markdown') or '')
-    if BATCH_REPEAT_TEXT not in body:
+    repaired=body
+    removed=0
+    for sentence in BATCH_REPEAT_SENTENCES:
+        if sentence in repaired:
+            repaired=repaired.replace(sentence,'',1); removed+=1
+    topic=BATCH_REPEAT_TOPICS[index] if 0<=index<len(BATCH_REPEAT_TOPICS) else None
+    if topic:
+        for ordinal in BATCH_REPEAT_ORDINALS:
+            separator=f'{topic} markieren hier den {ordinal} Prüfpunkt.'
+            repaired=repaired.replace(separator,'',1)
+    repaired=re.sub(r'\s{2,}',' ',repaired)
+    if removed<6 or repaired==body:
         raise RuntimeError('FORCED_BATCH_REPETITION_TEXT_MISSING')
-    repaired=body.replace(' '+BATCH_REPEAT_TEXT,'',1)
     authoring_contract.validate_candidate(repaired,state['authoring_contract'])
     return repaired
 
@@ -117,7 +141,7 @@ def main(argv):
         if state.get('phase')!='REPAIR_REQUIRED':
             print('FULL_ROUTE_TEST_WORKER_FAIL:REPAIR_PHASE_REQUIRED'); return 2
         try:
-            repaired=_repair_forced_batch_repetition(state)
+            repaired=_repair_forced_batch_repetition(state,index)
             if repaired is None:
                 repaired=no_codex_test_repair.candidate_for_current_failure(REPO,workspace)
         except Exception as exc:
