@@ -29,22 +29,16 @@ jobs:
           from collections import Counter
           from pathlib import Path
           root=Path('/tmp/ppm679/portal-production-machine')
-          p=root/'contracts/hard-rule-registry-v1.json'
-          d=json.loads(p.read_text())
-          print('TOP', type(d).__name__, list(d)[:20] if isinstance(d,dict) else len(d))
-          rows=d.get('rules') if isinstance(d,dict) else d
-          if not isinstance(rows,list):
-              for k,v in d.items():
-                  if isinstance(v,list) and v and isinstance(v[0],dict):
-                      print('LIST_CANDIDATE',k,len(v)); rows=v; break
-          print('ROW_COUNT',len(rows)); print('FIRST',json.dumps(rows[0],ensure_ascii=False,sort_keys=True))
-          keys=Counter()
-          for r in rows: keys.update(r.keys())
-          print('KEYS', sorted(keys))
-          for key in ['source','source_file','file','path','implementation','validator','source_ref']:
+          rows=json.loads((root/'contracts/hard-rule-registry-v1.json').read_text())['rules']
+          needles=['content-validator','content-structure-language-gate','known-error-gate','rendered-dom']
+          for key in ['source_path','source_reference','validation_layer','validator_or_reviewer']:
               vals=Counter(str(r.get(key) or '') for r in rows)
-              hits={k:v for k,v in vals.items() if any(n in k for n in ['content-validator','content-structure-language-gate','known-error-gate','rendered-dom'])}
-              if hits: print('SOURCEKEY',key,hits)
+              hits={k:v for k,v in vals.items() if any(n in k for n in needles)}
+              print('SOURCEKEY',key,json.dumps(hits,ensure_ascii=False,sort_keys=True))
+          scoped=[r for r in rows if any(n in (str(r.get('source_path') or '')+' '+str(r.get('source_reference') or '')) for n in needles)]
+          print('SCOPED_COUNT',len(scoped))
+          for r in scoped:
+              print('SCOPED',json.dumps({k:r.get(k) for k in ['rule_id','error_code','source_path','source_reference','positive_test','negative_test','validation_layer','validator_or_reviewer']},ensure_ascii=False,sort_keys=True))
           PY
       - name: Run exact PPM coverage authority
         run: php /tmp/ppm679/portal-production-machine/tests/test-mainblock1-hard-rule-coverage.php
