@@ -7,10 +7,11 @@ import sys
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+import authoring_contract
 import batch_repetition_guard
 import content_guard
 import design_guard
-import authoring_contract
+import global_workshop
 
 STATE_CONTRACT = 'SYSTEM4_CANONICAL_ARTICLE_STATE_V1'
 BATCH_EVIDENCE_CONTRACT = 'SYSTEM4_FULL_PASS_BATCH_EVIDENCE_V1'
@@ -20,7 +21,17 @@ SHA_RE = re.compile(r'^[0-9a-f]{64}$')
 
 
 class BatchGateError(RuntimeError):
-    pass
+    def __init__(self, code: str, findings: list[dict[str, Any]] | None = None):
+        super().__init__(code)
+        self.findings = [dict(row) for row in (findings or [])]
+
+
+class BatchGateWorkshop(BatchGateError):
+    def __init__(self, source: BaseException, request: dict[str, Any], request_path: Path | None, changed: list[int]):
+        super().__init__(str(source), findings=getattr(source, 'findings', None))
+        self.request = request
+        self.request_path = request_path
+        self.changed = list(changed)
 
 
 def canonical(value: Any) -> bytes:
@@ -207,7 +218,7 @@ def validate_state(state, expected_article, source_snapshot_sha256, batch_sha256
     }
 
 
-def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Path):
+def _collect_batch_impl(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Path):
     source_snapshot_sha, batch_sha, items = load_snapshot(Path(snapshot_path))
     if len(state_paths) != len(items):
         raise BatchGateError('STATE_COUNT_MISMATCH')
@@ -264,7 +275,7 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
     try:
         repetition = batch_repetition_guard.validate_batch_repetition(bodies)
     except batch_repetition_guard.BatchRepetitionError as exc:
-        raise BatchGateError(str(exc)) from exc
+        raise BatchGateError(str(exc), findings=exc.findings) from exc
 
     actual_article_names = sorted(path.name for path in out_dir.glob('ARTICLE_*.md') if path.is_file())
     expected_article_names = sorted(row['name'] for row in article_rows)
@@ -300,6 +311,27 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
     }
 
 
+def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Path):
+    try:
+        return _collect_batch_impl(Path(snapshot_path), [Path(value) for value in state_paths], Path(out_dir))
+    except BatchGateWorkshop:
+        raise
+    except Exception as exc:
+        request, request_path, changed = global_workshop.capture(
+            'BATCH',
+            exc,
+            output_dir=Path(out_dir),
+            findings=getattr(exc, 'findings', None),
+            context={
+                'snapshot_path': str(snapshot_path),
+                'state_count': len(state_paths),
+                'out_dir': str(out_dir),
+            },
+            state_paths=[Path(value) for value in state_paths],
+        )
+        raise BatchGateWorkshop(exc, request, request_path, changed) from exc
+
+
 def main(argv):
     try:
         if len(argv) < 5 or argv[1] != 'collect':
@@ -307,9 +339,23 @@ def main(argv):
         result = collect_batch(Path(argv[2]), [Path(value) for value in argv[4:]], Path(argv[3]))
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
+    except BatchGateWorkshop as exc:
+        payload = {
+            'status': 'SYSTEM4_WORKSHOP_REQUIRED' if exc.request.get('repairable') else 'SYSTEM4_WORKSHOP_BLOCKED',
+            'error_code': str(exc),
+            'workshop_request': str(exc.request_path) if exc.request_path is not None else None,
+            'repairable': bool(exc.request.get('repairable')),
+            'repair_article_indexes': exc.changed,
+            'finding_count': int(exc.request.get('finding_count') or 0),
+            'publish_allowed': False,
+        }
+        print(json.dumps(payload, ensure_ascii=False, sort_keys=True))
+        return 3 if exc.request.get('repairable') else 2
     except (BatchGateError, json.JSONDecodeError) as exc:
-        print('SYSTEM4_BATCH_FAIL:' + str(exc))
-        return 2
+        request, path, _ = global_workshop.capture('BATCH', exc, output_dir=Path(argv[3]) if len(argv) >= 4 else Path('.'))
+        status = 'SYSTEM4_WORKSHOP_REQUIRED' if request.get('repairable') else 'SYSTEM4_WORKSHOP_BLOCKED'
+        print(status + ':' + str(path) + ':' + str(exc))
+        return 3 if request.get('repairable') else 2
 
 
 if __name__ == '__main__':
