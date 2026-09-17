@@ -112,7 +112,7 @@
       "control/deterministic-entrance-gate/**",
       "control/production-continuity/**"
     ],
-    "transition_policy": "MONOTIC_PREBOUND_CHAIN_ONLY",
+    "transition_policy": "MONOTONIC_PREBOUND_CHAIN_ONLY",
     "manual_ruleset_binding_pending": false,
     "ruleset_id": 21788951,
     "required_status_checks": [
