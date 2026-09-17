@@ -1,0 +1,35 @@
+name: System4A temp fix cloud fixture
+on:
+  push:
+    branches:
+      - hobbyroom/system4a-v2-handoff-107008-20260917
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/system4a-v2-handoff-107008-20260917
+      - name: Patch generic next-step fixture
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('control/cloud-entry-gate/cloud_repo_ci_test.py')
+          s=p.read_text(encoding='utf-8')
+          old="""    nb = bundle.get('next_binding')\n    if isinstance(nb, dict) and isinstance(nb.get('bundle_ref'), str):\n        refs.append(nb['bundle_ref'])\n"""
+          new="""    nb = bundle.get('next_binding')\n    if isinstance(nb, dict) and isinstance(nb.get('bundle_ref'), str):\n        refs.append(nb['bundle_ref'])\n        next_bundle = json.loads((REPO / nb['bundle_ref']).read_text())\n        for row in next_bundle.get('authorized_inputs') or []:\n            if isinstance(row, dict) and isinstance(row.get('ref'), str):\n                refs.append(row['ref'])\n"""
+          if s.count(old)!=1:
+              raise SystemExit('EXPECTED_FIXTURE_SNIPPET_NOT_UNIQUE:'+str(s.count(old)))
+          p.write_text(s.replace(old,new),encoding='utf-8')
+          PY
+          python control/cloud-entry-gate/cloud_repo_ci_test.py
+          git diff --check
+      - name: Commit fixture repair
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add control/cloud-entry-gate/cloud_repo_ci_test.py
+          git commit -m 'test: copy next-step authorized inputs in cloud fixture'
+          git push origin HEAD:hobbyroom/system4a-v2-handoff-107008-20260917
