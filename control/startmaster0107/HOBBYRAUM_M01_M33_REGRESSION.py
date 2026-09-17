@@ -162,7 +162,15 @@ def m19():
     must("git diff-tree -m" in s,"M19_MERGE_TRIGGER")
 def m20():
     s=(REPO/"control/startmaster0107/chat_delivery_payload.py").read_text(encoding="utf-8")
-    must("EXACTLY_SEVEN_ARTICLES_REQUIRED" not in s,"M20_FIXED_SEVEN_STILL_ACTIVE")
+    for token in (
+        "len(articles) != 7",
+        "len(articles)!=7",
+        "len(articles) == 7",
+        "len(articles)==7",
+        '"item_count": 7',
+        '"article_count": 7',
+    ):
+        must(token not in s,"M20_FIXED_SEVEN_STILL_ACTIVE:"+token)
     must("count = len(articles)" in s and "count < 1" in s,"M20_1N_COUNT_BINDING_MISSING")
     must('len({a["name"] for a in articles}) != count' in s,"M20_1N_UNIQUENESS_BINDING_MISSING")
     must('"item_count": count' in s and '"article_count": count' in s,"M20_1N_COUNT_PROPAGATION_MISSING")
