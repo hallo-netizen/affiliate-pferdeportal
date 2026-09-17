@@ -49,7 +49,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "4193b85e86851402ac75b0c87ba34002f04a04448380504a695ed99d9f0c0a02",
+    "bundle_sha256": "0382982104cd4114416cff40a933c84d58f56a2cc79c6077fc2cf4bbd3b069db",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -112,17 +112,20 @@
       "control/deterministic-entrance-gate/**",
       "control/production-continuity/**"
     ],
-    "transition_policy": "MONOTONIC_PREBOUND_CHAIN_ONLY",
+    "transition_policy": "MONOTIC_PREBOUND_CHAIN_ONLY",
     "manual_ruleset_binding_pending": false,
     "ruleset_id": 21788951,
-    "required_status_checks": ["hardlock", "hardlock-base"]
+    "required_status_checks": [
+      "hardlock",
+      "hardlock-base"
+    ]
   },
   "execution_gate_rearm_target": {
     "startmaster": "STARTMASTER0107",
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "630ff7f55a836afd39dfc6612db833bc1c218529921ce114ec5912f3bb7d40d8"
+    "bundle_sha256": "0382982104cd4114416cff40a933c84d58f56a2cc79c6077fc2cf4bbd3b069db"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -140,14 +143,14 @@
     "publish_allowed": false
   },
   "production_execution_blocker": {
-    "code": "107007_NOT_YET_BOUND_TO_PROVEN_SYSTEM4_FULL_ROUTE",
+    "code": "107007_SYSTEM4_ROUTE_BOUND_AWAITING_MACHINE_BOUND_SOURCES",
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "evidence": "STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json still drives fachworkflow_handoff.command while proven acceptance route is isolated_system4/full_route_start.py",
-    "root_cause": "PRODUCTION_107007_AND_PROVEN_SYSTEM4_ACCEPTANCE_ROUTE_ARE_STILL_SEPARATE",
+    "evidence": "STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json no longer permits fachworkflow_handoff/codex_current_action fallback and is bound exclusively to the existing System4 route; required_bound_launch_ref/sha256 are intentionally unset until machine-bound sources exist.",
+    "root_cause": "CURRENT_107007_BATCH_HAS_NO_VALID_MACHINE_BOUND_SYSTEM4_SOURCE_LAUNCH",
     "resolved": false,
     "publish_allowed": false,
-    "scope": "PRODUCTION_ROUTE_RECONCILIATION",
+    "scope": "PRODUCTION_SOURCE_BINDING",
     "acceptance_branch": "hobbyroom/system4-chat-output-acceptance-v1",
     "acceptance_green_head": "7ac8e365b39652aa78597c8b00096f91549e04bf",
     "acceptance_green_run_id": 35146953351,
@@ -186,16 +189,16 @@
     },
     "protocol_ref": "protocol/STARTMASTER0107_SYSTEM4_ACCEPTANCE_HARDENING_CLOSEOUT_20260916.md"
   },
-  "current_work_status": "BLOCKED_ON_PRODUCTION_107007_RECONCILIATION",
+  "current_work_status": "BLOCKED_ON_107007_MACHINE_BOUND_SOURCES",
   "current_execution_blocker": {
-    "code": "SYSTEM4_PRODUCTION_107007_ROUTE_NOT_RECONCILED",
-    "scope": "SYSTEM4_PRODUCTION_107007_RECONCILIATION",
+    "code": "SYSTEM4_PRODUCTION_107007_BOUND_SOURCES_MISSING",
+    "scope": "PRODUCTION_SOURCE_BINDING",
     "branch": "hobbyroom/system4-chat-output-acceptance-v1",
     "tested_head": "72cc44924c19ea6f08f09d2f9285401430ac968f",
     "acceptance_run_id": 35149269659,
     "acceptance_job_id": 0,
-    "gate": "PRODUCTION_107007_MUST_USE_PROVEN_SYSTEM4_FULL_ROUTE",
-    "root_cause": "107007 remains bound to the older fachworkflow_handoff production path; the proven System4 full route is not yet the production execution path.",
+    "gate": "107007_REQUIRES_HASH_BOUND_SYSTEM4_PARENT_LAUNCH_WITH_SOURCES",
+    "root_cause": "107007 is now System4-only, but no canonical hash-bound SYSTEM4_PARENT_LAUNCH_V1 exists yet for the current production batch.",
     "resolved": false,
     "publish_allowed": false,
     "forbidden_resolution": [
@@ -208,21 +211,21 @@
     ]
   },
   "last_safe_main_sha": "66c4224d68532307f6c7f69aff81d1da04cae4e7",
-  "last_safe_change": "System4 acceptance is fully green through run 35149269659. Production 107007 remains blocked until it is reconciled with that proven route and a real production run passes.",
-  "hobbyroom_status": "AKTIV_BLOCKED_ON_107007_RECONCILIATION",
+  "last_safe_change": "107007 route binding changed to System4-only fail-closed; real production remains blocked until a valid machine-bound source launch is bound and acceptance re-proves the head.",
+  "hobbyroom_status": "AKTIV_BLOCKED_ON_107007_MACHINE_BOUND_SOURCES",
   "hobbyroom": {
-    "status": "AKTIV_BLOCKED_ON_107007_RECONCILIATION",
+    "status": "AKTIV_BLOCKED_ON_107007_MACHINE_BOUND_SOURCES",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
-    "current_focus": "SYSTEM4_PRODUCTION_107007_RECONCILIATION",
+    "current_focus": "SYSTEM4_PRODUCTION_107007_MACHINE_BOUND_SOURCE_BINDING",
     "branch": "hobbyroom/system4-chat-output-acceptance-v1",
     "last_completed_tested_head": "72cc44924c19ea6f08f09d2f9285401430ac968f",
     "return_path": "SAME_ARTICLE_EXISTING_REPAIR_ROUTE_THEN_COMPLETE_TEXTMACHINE_RECHECK",
     "terminal_block_policy": "ONLY_NONREPAIRABLE_TECHNICAL_INTEGRITY_SECURITY_IDENTITY_BINDING_HASH_OR_FORBIDDEN_PUBLISH_FAILURE",
-    "next_action": "Bind production 107007 to the already proven System4 full route without introducing a second route or changing any checker."
+    "next_action": "Bind valid machine-bound sources for the current production batch into SYSTEM4_PARENT_LAUNCH_V1, then run full Acceptance before real production."
   },
   "next_action": {
     "goal": "Make the existing 107007 production start use the already proven System4 route, then prove a real production start-to-WordPress-import run.",
-    "first_step": "Reconcile only the 107007 execution binding with isolated_system4/parent_start.py -> root/supervisor/worker_dispatch/codex_entry/full_route_start existing chain.",
+    "first_step": "Bind valid machine-bound sources for the current 107007 batch into a canonical hash-bound SYSTEM4_PARENT_LAUNCH_V1 under isolated_system4/bound_launches/; do not fall back to fachworkflow_handoff.",
     "after_first_step": "Run the real production path positively and negatively and require the exact WordPress import artifact, SHA/bytes, requesting-chat binding and fail-closed negatives.",
     "terminal_acceptance": "Only after real production PASS may CURRENT_STATE be set to final complete and the entrance door reduced to navigation-only truth.",
     "forbidden": [
