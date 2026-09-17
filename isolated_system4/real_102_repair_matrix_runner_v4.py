@@ -191,8 +191,8 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
 def current_historical_content_mutations(ppm_root: Path, rows: list[dict]) -> dict:
     bound = [r for r in rows if r['scope'] == 'PPM679' and r['negative_test'] == HISTORICAL]
     expected_codes = {str(r['error_code']) for r in bound}
-    if len(bound) != 22 or len(expected_codes) != 22:
-        raise AssertionError('HISTORICAL_EXPECTED_22_CHANGED:' + str(len(bound)) + ':' + str(len(expected_codes)))
+    if len(bound) != 26 or len(expected_codes) != 22:
+        raise AssertionError('HISTORICAL_EXPECTED_26_ROWS_22_CODES_CHANGED:' + str(len(bound)) + ':' + str(len(expected_codes)))
     probe = str(ppm_negative_gaps.PHP_PROBE)
     absent = sorted(code for code in expected_codes if code not in probe)
     if absent:
@@ -203,12 +203,12 @@ def current_historical_content_mutations(ppm_root: Path, rows: list[dict]) -> di
     combined = (cp.stdout or '') + '\n' + (cp.stderr or '')
     if cp.returncode != 0:
         raise AssertionError('HISTORICAL_REAL_PROBE_FAILED:RC=' + str(cp.returncode) + '\n' + combined[-12000:])
-    # PHP_PROBE's hit() fails closed unless each named validator mutation emits its exact code.
-    print('PPM_TARGETED_NEGATIVE_PASS:' + HISTORICAL + ':22', flush=True)
+    print('PPM_TARGETED_NEGATIVE_PASS:' + HISTORICAL + ':26_RULE_ROWS:22_CODES', flush=True)
     return {
         'path': HISTORICAL,
         'return_code': 0,
-        'bound_rule_count': 22,
+        'bound_rule_count': len(bound),
+        'unique_error_code_count': len(expected_codes),
         'compatibility': 'CURRENT_REAL_PPM_NEGATIVE_GAPS_PROBE',
     }
 
