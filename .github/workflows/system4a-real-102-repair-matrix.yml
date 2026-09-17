@@ -23,25 +23,13 @@ jobs:
       - name: Forbid mocks in real 102 harness
         run: |
           set -euo pipefail
-          if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' isolated_system4/real_102_repair_matrix_v1.py; then
-            echo 'REAL_102_MOCK_FORBIDDEN'
-            exit 2
-          fi
-          echo 'REAL_102_NO_MOCK_PASS'
-      - name: Inspect exact packaged targeted repair authorities
-        run: |
-          set -euo pipefail
-          rm -rf /tmp/ppm-inspect && mkdir -p /tmp/ppm-inspect
-          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-inspect
-          ROOT=/tmp/ppm-inspect/portal-production-machine
-          for f in \
-            tests/test-canonical-runtime-binding.php \
-            tests/test-g8-targeted-repair-faq-chain.php \
-            tests/test-g8-targeted-repair-gold-core-gate.php; do
-            echo "PPM_EXACT_FILE_BEGIN:$f"
-            cat "$ROOT/$f"
-            echo "PPM_EXACT_FILE_END:$f"
+          for f in isolated_system4/real_102_repair_matrix_v1.py isolated_system4/real_102_repair_matrix_runner_v2.py; do
+            if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then
+              echo "REAL_102_MOCK_FORBIDDEN:$f"
+              exit 2
+            fi
           done
+          echo 'REAL_102_NO_MOCK_PASS'
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
@@ -59,7 +47,7 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
         run: |
           set -euo pipefail
-          python3 isolated_system4/real_102_repair_matrix_v1.py | tee /tmp/system4-real-102.log
+          python3 isolated_system4/real_102_repair_matrix_runner_v2.py | tee /tmp/system4-real-102.log
           grep -Fx 'TEXTMASCHINE_REAL_REPAIR_FULL_PASS:102/102' /tmp/system4-real-102.log
           test -s /tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json
           python3 - <<'PY'
@@ -74,11 +62,20 @@ jobs:
           assert d['publish_allowed'] is False
           print('REAL_102_PROOF_FILE_PASS')
           PY
-      - name: Run hard-block regression after routing repair
+      - name: Run hard-block and W4 routing regression
         working-directory: isolated_system4
         env:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-        run: python3 -m unittest -v test_textmachine_hardblock_matrix.py test_repair_owner_routing_contract.py
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v test_textmachine_hardblock_matrix.py
+          python3 - <<'PY'
+          import production_checks
+          for code in ('BLOCKED_QF03_RENDERED_H1_COUNT','BLOCKED_QF03_RENDERED_DUPLICATE_HEADINGS','BLOCKED_QF03_RENDERED_ADJACENT_HEADINGS'):
+              assert production_checks._ppm_repair_owner({'error_code':code,'field_path':'content.heading'}) == 'DRAFT_WORKER', code
+          assert production_checks._ppm_repair_owner({'error_code':'W4_R8_0790_LOCAL_EXECUTED_TEST_EVIDENCE_MISSING','field_path':''}) == 'HARD_BLOCK'
+          print('REAL_102_W4_ROUTING_REGRESSION_PASS')
+          PY
       - name: Upload real 102 proof
         uses: actions/upload-artifact@v4
         with:
