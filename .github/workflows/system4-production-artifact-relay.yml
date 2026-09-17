@@ -1,0 +1,85 @@
+name: System 4 Production Artifact Relay
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  persist-production-handoff:
+    if: >-
+      github.event.issue.pull_request &&
+      (github.event.comment.user.login == 'chatgpt-codex-connector[bot]' || github.event.comment.user.login == 'hallo-netizen') &&
+      contains(github.event.comment.body, 'SYSTEM4_BOUND_BATCH_READY_FOR_ARTIFACT') &&
+      contains(github.event.comment.body, 'SYSTEM4_PARENT_CHAT_INLINE_V2_BEGIN')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/head
+          fetch-depth: 1
+
+      - name: Reconstruct exact production handoff from comment relay
+        run: |
+          python isolated_system4/production_artifact_relay.py from-event "$GITHUB_EVENT_PATH" "$RUNNER_TEMP/system4-production-artifact"
+
+      - name: Upload exact production WordPress handoff
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-production-wordpress-${{ github.event.comment.id }}
+          path: |
+            ${{ runner.temp }}/system4-production-artifact/SYSTEM4_WORDPRESS_HANDOFF_V1.json
+            ${{ runner.temp }}/system4-production-artifact/SYSTEM4_ACTIONS_ARTIFACT_RECEIPT_V1.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Download persisted artifact again
+        uses: actions/download-artifact@v4
+        with:
+          name: system4-production-wordpress-${{ github.event.comment.id }}
+          path: ${{ runner.temp }}/system4-production-artifact-download
+
+      - name: Verify downloaded artifact byte-for-byte
+        id: verify
+        shell: bash
+        run: |
+          set -o pipefail
+          python isolated_system4/production_artifact_relay.py verify \
+            "$RUNNER_TEMP/system4-production-artifact-download/SYSTEM4_WORDPRESS_HANDOFF_V1.json" \
+            "$RUNNER_TEMP/system4-production-artifact-download/SYSTEM4_ACTIONS_ARTIFACT_RECEIPT_V1.json" | tee /tmp/system4-artifact-verify.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])/'system4-production-artifact-download'/'SYSTEM4_ACTIONS_ARTIFACT_RECEIPT_V1.json'
+          r=json.loads(p.read_text(encoding='utf-8'))
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
+              f.write('sha256='+r['sha256']+'\n')
+              f.write('bytes='+str(r['byte_length'])+'\n')
+              f.write('articles='+str(r['article_count'])+'\n')
+          PY
+
+      - name: Record machine PASS only after persisted download verification
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = [
+              'SYSTEM4_BOUND_BATCH_PASS',
+              'SYSTEM4_ACTIONS_ARTIFACT_PERSISTENCE_VERIFY_PASS',
+              `SOURCE_COMMENT_ID:${context.payload.comment.id}`,
+              `ACTIONS_RUN_ID:${context.runId}`,
+              `ACTIONS_ARTIFACT_NAME:system4-production-wordpress-${context.payload.comment.id}`,
+              `SYSTEM4_WORDPRESS_HANDOFF_V1_SHA256:${{ steps.verify.outputs.sha256 }}`,
+              `SYSTEM4_WORDPRESS_HANDOFF_V1_BYTES:${{ steps.verify.outputs.bytes }}`,
+              `ARTICLE_COUNT:${{ steps.verify.outputs.articles }}`,
+              'publish_allowed=false'
+            ].join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
