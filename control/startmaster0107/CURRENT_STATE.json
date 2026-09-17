@@ -6,21 +6,13 @@
   "central_pointer_policy": "NAVIGATION_ONLY_NO_SECOND_DYNAMIC_STATE",
   "status": "BLOCKED_REAL_107007_CODEX_START_SURFACE_MISSING_IN_CURRENT_CHAT_RUNTIME",
   "publish_allowed": false,
-  "branch": "hobbyroom/system4-chat-output-acceptance-v1",
-  "branch_head": "c8fff2571eb8019b07ab4814a22b7bd0b3f58893",
-  "last_runtime_tested_head": "25f87b819a7d1b4a450565f0a46b1c07f6770802",
-  "head_delta_after_last_runtime_test": {
-    "runtime_change": false,
-    "only_change": "protocol/STARTMASTER0107_REAL_107007_CODEX_START_20260917.md",
-    "commit": "c8fff2571eb8019b07ab4814a22b7bd0b3f58893"
-  },
-  "latest_acceptance": {
-    "workflow": "System 4 Chat Output Acceptance",
-    "run_id": 35203980166,
-    "job_id": 105145172825,
-    "tested_head": "25f87b819a7d1b4a450565f0a46b1c07f6770802",
+  "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
+  "runtime_proof": {
+    "last_runtime_tested_head": "25f87b819a7d1b4a450565f0a46b1c07f6770802",
+    "acceptance_run_id": 35203980166,
+    "acceptance_job_id": 105145172825,
     "result": "SUCCESS",
-    "scope": [
+    "tested_scope": [
       "System4 unit and negative suite",
       "PPM 6.7.9 positive-negative suite",
       "stage-aware repair regression",
@@ -60,16 +52,19 @@
       "auto-publish"
     ]
   },
+  "freshness_rule": {
+    "before_any_execution": [
+      "read current working-branch head",
+      "compare all changes since last_runtime_tested_head",
+      "if any runtime/path/checker change exists, rerun full Acceptance before production",
+      "verify 107007 bound launch ref and SHA still match"
+    ],
+    "status_on_uncertainty": "BLOCKED"
+  },
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "freshness_check": [
-      "read branch head",
-      "compare branch head with last_runtime_tested_head",
-      "verify latest Acceptance result",
-      "verify 107007 bound launch ref and SHA"
-    ],
-    "next_action": "Restore or provide a real Codex execution/start surface reachable from the chat, then start the real 107007 production run against the exact bound SYSTEM4_PARENT_LAUNCH_V1 and continue only through the System4 controller path to SYSTEM4_WORDPRESS_HANDOFF_V1.json."
+    "next_action": "Restore or provide a real Codex execution/start surface reachable from the chat, then start the real 107007 production run against the exact bound SYSTEM4_PARENT_LAUNCH_V1."
   },
   "mandatory_execution_path": [
     "control/output-quarantine/runtime_entry_gate.py",
