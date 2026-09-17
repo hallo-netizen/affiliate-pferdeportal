@@ -6,6 +6,7 @@
   "central_pointer_policy": "NAVIGATION_ONLY_NO_SECOND_DYNAMIC_STATE",
   "status": "CODEX_107007_CORRECTED_START_REQUESTED",
   "publish_allowed": false,
+  "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
   "runtime_proof": {
     "last_runtime_tested_head": "25f87b819a7d1b4a450565f0a46b1c07f6770802",
