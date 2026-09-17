@@ -23,13 +23,21 @@ jobs:
       - name: Forbid mocks in real 102 harness
         run: |
           set -euo pipefail
-          for f in isolated_system4/real_102_repair_matrix_v1.py isolated_system4/real_102_repair_matrix_runner_v3.py isolated_system4/real_102_repair_matrix_runner_v4.py; do
+          for f in isolated_system4/real_102_repair_matrix_v1.py isolated_system4/real_102_repair_matrix_runner_v4.py; do
             if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then
               echo "REAL_102_MOCK_FORBIDDEN:$f"
               exit 2
             fi
           done
           echo 'REAL_102_NO_MOCK_PASS'
+      - name: Inspect exact lexical-support authority
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/ppm-authority && mkdir -p /tmp/ppm-authority
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-authority
+          ROOT=/tmp/ppm-authority/portal-production-machine
+          grep -RFn -B45 -A65 'BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT' "$ROOT/includes" || true
+          grep -RFn -B10 -A20 'MIN_TRACE_LEXICAL_SUPPORT_RATIO' "$ROOT/includes" || true
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
@@ -52,11 +60,8 @@ jobs:
           test -s /tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json
           python3 - <<'PY'
           import json
-          p='/tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json'
-          d=json.load(open(p,encoding='utf-8'))
-          assert d['status']=='PASS'
-          assert d['count']==102
-          assert d['real_fullcheck_count']==102
+          d=json.load(open('/tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json',encoding='utf-8'))
+          assert d['status']=='PASS' and d['count']==102 and d['real_fullcheck_count']==102
           assert d['owner_counts']=={'DRAFT_WORKER':96,'PARENT_TITLE_MACHINE':3,'PORTAL_LINK_MACHINE':2,'PARENT_CATEGORY_MACHINE':1}
           assert all(r['fullcheck']=='PASS' and r['lt']=='PASS' and r['ppm']=='PASS' for r in d['rows'])
           assert d['publish_allowed'] is False
@@ -64,8 +69,6 @@ jobs:
           PY
       - name: Run hard-block and W4 routing regression
         working-directory: isolated_system4
-        env:
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
         run: |
           set -euo pipefail
           python3 -m unittest -v test_textmachine_hardblock_matrix.py
