@@ -153,9 +153,17 @@ def _repair_from_exact_lt_text(repo: Path, state: dict, body: str, checked_text:
                 raise NoCodexRepairError(prefix + '_NO_SUGGESTION:' + _lt_finding_detail(raw, checked_text))
             no_suggestion.append({'raw': raw, 'target': target, 'offset': offset})
             continue
-        replacement = replacements[0].get('value') if isinstance(replacements[0], dict) else None
-        if not isinstance(replacement, str) or not replacement.strip():
-            raise NoCodexRepairError(prefix + '_SUGGESTION_INVALID:' + _lt_finding_detail(raw, checked_text))
+        replacement = None
+        for candidate in replacements:
+            value = candidate.get('value') if isinstance(candidate, dict) else None
+            if not isinstance(value, str) or not value.strip():
+                continue
+            if value == target:
+                continue
+            replacement = value
+            break
+        if replacement is None:
+            raise NoCodexRepairError(prefix + '_NO_CHANGING_SUGGESTION:' + _lt_finding_detail(raw, checked_text))
         normalized.append((offset, target, replacement))
 
     repaired = body
