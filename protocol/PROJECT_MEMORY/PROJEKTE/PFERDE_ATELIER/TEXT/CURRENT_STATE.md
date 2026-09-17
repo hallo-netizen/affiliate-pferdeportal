@@ -6,7 +6,7 @@ STATUS: BLOCKED / M38 HISTORY PROOF ON CURRENT MAIN
 ## EINE AKTUELLE WAHRHEIT
 
 Current technical main:
-`7533d99e306bb016c87c7c63e2c6103bf1010476`
+`54f0ee4efb91a50bbe05b5aafa4183cc1f526565`
 
 Letzter belastbarer Live-/Recovery-Baseline-Stand vor M37:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
@@ -30,7 +30,7 @@ Produktfix:
 - hardlock-base PASS;
 - integrierter M37-Stand `f1d1605f18bd23d9189f89ad173598958718d08a`.
 
-M01–M37 sind die integrierte bekannte Regression auf dem aktuellen technischen Main.
+M01–M37 sind die integrierte bekannte Regression auf dem aktuellen technischen Main. Der aktuelle Main enthält zusätzlich ausschließlich einen temporären, nicht-ausführbaren M20-Migrationstoken; die aktive Delivery-Mengenlogik bleibt 1..N.
 
 ## AKTUELLER REALBLOCKER / M38
 
@@ -42,7 +42,7 @@ M38 ist als History-Fall maschinell zu binden, bevor ein Produktfix integriert w
 
 ## NEXT ACTION
 
-M38-History auf aktuellem Main `7533d99e306bb016c87c7c63e2c6103bf1010476` mit dem bestehenden History-Maschinenweg/hardlock beweisen und erst danach den separaten kleinstmöglichen Produktfix prüfen.
+Kombinierten History-Kandidaten auf aktuellem Main `54f0ee4efb91a50bbe05b5aafa4183cc1f526565` mit dem bestehenden History-Maschinenweg/hardlock beweisen: veralteten M20-7er-Vertrag auf 1..N korrigieren und M38 als ersten neuen FAIL erhalten. Erst danach den separaten kleinstmöglichen Produktfix prüfen.
 
 ## HARTE GRENZEN
 
