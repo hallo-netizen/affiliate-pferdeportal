@@ -9,26 +9,26 @@ Nur Phase 1 des vorhandenen Maschinenwegs:
 M38 als reale fortlaufende History-Regression in die bestehende Matrix und den bestehenden Runner aufnehmen und maschinell beweisen.
 
 Aktueller technischer Main/Baseline:
-`f1d1605f18bd23d9189f89ad173598958718d08a`
+`7533d99e306bb016c87c7c63e2c6103bf1010476`
 
 Aktiver realer Blocker:
 `PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH`
 
 History-Kandidat:
-- PR249;
-- Branch: `hobbyroom/m38-plan-version-history-20260911`;
-- Head: `d2348bd1bcd2ea804dba3aef030923420ef67ec9`;
+- PR277;
+- Branch: `hobbyroom/m38-history-current-main-20260917`;
+- Head: `493dd666c6fc60305b50f1a9620fb336d50b99f4`;
 - erlaubt: ausschließlich bestehende Fehlermatrix + bestehender Regressionrunner;
 - erwartet: unveränderter Main M01–M37 PASS; History-Kandidat erster neuer FAIL exakt M38;
 - ausdrücklich kein Produktfix in dieser Phase.
 
-Die Versionswerte sind nicht aus PR249 erfunden, sondern gegen die vorhandene Abschlusslogik gebunden:
+Die Versionswerte sind nicht aus PR277 erfunden, sondern gegen die vorhandene Abschlusslogik gebunden:
 - `plan_contract_version == "4.0.0"`;
 - `required_plugin_version == "6.7.9"`.
 
 ## NEXT ACTION
 
-Bestehenden History-Maschinenbeweis / hardlock auf PR249 ausführen.
+Bestehenden History-Maschinenbeweis / hardlock auf PR277 ausführen.
 Nur bei `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M38` plus zugehörigem Hardlock-PASS darf Phase 2 PRODUCT_FIX M38 beginnen.
 
 Kein Codex-Testlauf. Für diese Arbeit ausschließlich bestehende GitHub-Actions-Maschinenprüfungen verwenden.
@@ -45,14 +45,14 @@ Kein Codex-Testlauf. Für diese Arbeit ausschließlich bestehende GitHub-Actions
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
-MAIN_SHA: f1d1605f18bd23d9189f89ad173598958718d08a
+MAIN_SHA: 7533d99e306bb016c87c7c63e2c6103bf1010476
 ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_BLOCKED
 PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
 RECOVERY_BASE_SHA: bb005a5324a0a6270aacb52b5927613bde1ab4bc
 ACTIVE_HISTORY_CASE: M38
 HISTORY_EXPECTED_FAIL: M38
-CANDIDATE_BRANCH: hobbyroom/m38-plan-version-history-20260911
-CANDIDATE_HEAD_SHA: d2348bd1bcd2ea804dba3aef030923420ef67ec9
+CANDIDATE_BRANCH: hobbyroom/m38-history-current-main-20260917
+CANDIDATE_HEAD_SHA: 493dd666c6fc60305b50f1a9620fb336d50b99f4
 TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
 ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
 CHECK_PAUL: PASS
