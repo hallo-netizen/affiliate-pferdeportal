@@ -1,0 +1,16 @@
+name: System4A temp state hash
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-single-production-street-20260917'
+permissions:
+  contents: read
+jobs:
+  hash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sha256sum control/startmaster0107/CURRENT_STATE.json
+          sha256sum control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
+          sha256sum control/startmaster0107/system4_107007_entry.py
