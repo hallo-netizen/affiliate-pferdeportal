@@ -30,7 +30,7 @@ jobs:
             fi
           done
           echo 'REAL_102_NO_MOCK_PASS'
-      - name: Inspect exact lexical-support authority
+      - name: Inspect exact PPM mutation authorities
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm-authority && mkdir -p /tmp/ppm-authority
@@ -38,6 +38,9 @@ jobs:
           ROOT=/tmp/ppm-authority/portal-production-machine
           grep -RFn -B45 -A65 'BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT' "$ROOT/includes" || true
           grep -RFn -B10 -A20 'MIN_TRACE_LEXICAL_SUPPORT_RATIO' "$ROOT/includes" || true
+          echo '=== HISTORICAL_REGRESSIONS_BEGIN ==='
+          sed -n '1,420p' "$ROOT/tests/test-historical-regressions.php"
+          echo '=== HISTORICAL_REGRESSIONS_END ==='
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
