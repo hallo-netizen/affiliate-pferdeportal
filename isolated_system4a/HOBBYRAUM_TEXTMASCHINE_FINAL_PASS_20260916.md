@@ -19,7 +19,10 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] **1. Exakte Textmaschinen-Regelmenge bestimmen.** Nicht pauschal alle 557 PPM-Regeln übernehmen. Maschinenfest getrennt: **153 diskrete Pferde-Atelier-Textmaschinenregeln** = 104 PPM + 31 Content Guard + 16 Design Guard + 2 External-Link-Regeln. LanguageTool 6.8 bleibt externer dynamischer Regelprüfer und wird nicht künstlich in Projektregel-IDs dupliziert. Technische Bindungs-/Integritätsregeln bleiben harte Voraussetzungen außerhalb dieser fachlichen Regelmenge.
   - Beleg: `isolated_system4a/TEXTMASCHINE_RULE_SCOPE_20260917.md`
   - Realer Fullcheck-Pfad: `controller.cmd_fullcheck()` -> `content_guard.validate_single_article()` -> `design_guard.validate_design_neutrality()` -> `production_checks.run_all()` -> External-Link-Prüfung + LT 6.8 + PPM 6.7.9.
-- [ ] **2. Für jede Textmaschinenregel Positivnachweis bestimmen.** Echter Prüfer, reale Ausführung, erwartetes PASS.
+- [x] **2. Für jede Textmaschinenregel Positivnachweis bestimmen.** Für 153/153 Projektregeln ist der gültige Positivpfad am echten Prüfer gebunden; LT 6.8 ist ebenfalls real mit 0 Findings PASS gelaufen.
+  - Beleg: `isolated_system4a/TEXTMASCHINE_POSITIVBEWEIS_20260917.md`
+  - Remote-Beleg: Workflow `System 4A Real LT68 PPM679 Acceptance`, Run `35137504179`, Head `73d791fd8d9a988c3119db4b3d822b38e54302dd`, `SUCCESS`.
+  - Seit diesem belegten Head sind die Positiv-Prüfengine, `content_guard.py`, `design_guard.py`, PPM-Paket und Acceptance-Workflow unverändert; geändert wurde nur die Fehlerklassifikation in `production_checks.py` plus Hobbyraum-Dokumentation.
 - [ ] **3. Für jede Textmaschinenregel gezielten Negativnachweis bestimmen.** Genau diese Regel verletzen; erwarteter Prüfer und Fehlercode müssen erscheinen.
 - [ ] **4. Für jede Textmaschinenregel Fehlerklasse festlegen.** `REPAIR_REQUIRED` oder terminaler `HARD BLOCK`.
 - [ ] **5. Für jede reparierbare Regel vollständigen Rückweg beweisen.** Richtiger Owner -> gleicher Artikel -> gezielte Reparatur -> vollständige Textmaschine erneut -> PASS.
@@ -57,6 +60,6 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 
 ## Aktueller Einstiegspunkt
 
-**NEXT ACTION = Punkt 2.**
+**NEXT ACTION = Punkt 3.**
 
-Für jede der 153 Textmaschinenregeln den bereits vorhandenen realen Positivnachweis bestimmen. Kein neuer Test, solange nicht bewiesen ist, dass der vorhandene Nachweis fehlt.
+Für jede der 153 Textmaschinenregeln prüfen, ob eine gezielte Negativmutation den erwarteten echten Prüfer und exakten Fehlercode auslöst. Registereintrag oder Testdatei allein reicht nicht.
