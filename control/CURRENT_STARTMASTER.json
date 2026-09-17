@@ -7,7 +7,7 @@
   "execution_entrance_gate_ref": "control/output-quarantine/runtime_entry_gate.py",
   "execution_entrance_gate_sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24",
   "visible_output_policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
-  "visible_output_policy_sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f",
+  "visible_output_policy_sha256": "4016b9339f042f5eb869a64dd2af81ba82f6156e2dca3be71b255401f1725d17",
   "visible_output_authority": "RELEASE_RECEIPT_ONLY",
   "h8_boundary_ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
   "h8_boundary_git_blob_sha1": "8441f130fe586629a631fbb175b28090f39806ae",
