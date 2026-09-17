@@ -2,7 +2,7 @@ from __future__ import annotations
 import copy,hashlib,json,subprocess,sys
 from pathlib import Path
 
-import batch_gate,controller,handoff_transport,point0_snapshot,repair_router,root_entry
+import batch_gate,controller,global_workshop,handoff_transport,point0_snapshot,repair_router,root_entry
 
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parent
@@ -86,6 +86,14 @@ def _fullcheck_with_existing_repair_loop(worker_command:list[str],workspace:Path
         raise FullRouteError('START_FULLCHECK_NOT_PASS:'+str(index)+':'+str(rc))
     raise FullRouteError('START_REPAIR_CYCLE_LIMIT:'+str(index))
 
+def _workshop_escalate(stage:str,exc:BaseException,output_dir:Path,state_paths:list[Path]|None=None,context:dict|None=None):
+    request,path,_=global_workshop.capture(stage,exc,output_dir=output_dir,findings=getattr(exc,'findings',None),context=context,state_paths=state_paths)
+    request_sha=str(request.get('request_sha256') or '')
+    request_path=str(path) if path is not None else 'INLINE'
+    if request.get('repairable') is True:
+        raise FullRouteContinuation('START_WORKSHOP_CONTINUATION_REQUIRED:'+stage+':'+request_sha+':'+request_path) from exc
+    raise FullRouteError('START_WORKSHOP_BLOCKED:'+stage+':'+str(request.get('error_code') or exc)) from exc
+
 def _batch_collect_with_workshop(worker_command:list[str],production_snapshot:Path,state_paths:list[Path],states:list[dict],base:Path)->dict:
     batch_out=base/'batch'
     for attempt in range(repair_router.MAX_MACHINE_REPAIR_CYCLES+1):
@@ -126,6 +134,20 @@ def _handoff(states):
         rows.append({'index':index,'title':state['article']['title'],'target_keyword':state['article']['target_keyword'],'category':state['article']['category'],'article_type':state['article']['article_type'],'plan_slot':state['article']['plan_slot'],'final_draft_sha256':state['draft_sha256'],'revision_count':state['revision'],'body':state['draft_markdown'],'production_context':{'fact_pack':state['production_context']['fact_pack'],'production_plan_item':state['production_context']['production_plan_item']},'languagetool':prod['languagetool'],'ppm679':prod['ppm679']})
     return {'contract':handoff_transport.HANDOFF_CONTRACT,'batch_sha256':states[0]['batch_sha256'],'publish_allowed':False,'signing_deferred':True,'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS','wordpress_review':{'file_format':'JSON','mime_type':'application/json','intended_next_step':'WORDPRESS_DIRECT_IMPORT','plugin_name':'Portal SEO Editorial Plan Compiler','plugin_version_verified_against':handoff_transport.DIRECT_IMPORT_PLUGIN_VERSION,'ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,'direct_upload_block_reason':None,'required_downstream_components':[]},'articles':rows}
 
+def _handoff_with_workshop(states:list[dict],state_paths:list[Path],base:Path)->Path:
+    try:
+        source=write_json(base/'handoff-source.json',_handoff(states)); canonical=base/handoff_transport.HANDOFF_FILENAME
+        canonical_bytes=handoff_transport.canonicalize_handoff(source,canonical); inline=base/handoff_transport.INLINE_FILENAME
+        envelope=handoff_transport.inline_pack(canonical,inline); reconstructed=handoff_transport.inline_unpack(inline,base/'parent-chat')
+        if reconstructed.read_bytes()!=canonical_bytes: raise FullRouteError('START_HANDOFF_BYTE_MISMATCH')
+        if envelope.get('plaintext_sha256')!=hashlib.sha256(canonical_bytes).hexdigest(): raise FullRouteError('START_HANDOFF_HASH_MISMATCH')
+        return reconstructed
+    except FullRouteContinuation:
+        raise
+    except Exception as exc:
+        _workshop_escalate('HANDOFF',exc,base/'handoff-workshop',state_paths=state_paths,context={'article_count':len(states)})
+        raise AssertionError('UNREACHABLE')
+
 def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], output_root:Path)->Path:
     raw=production_snapshot.read_bytes(); snap=_read_json(production_snapshot)
     batch=snap.get('next_textmachine_metadata_batch') if isinstance(snap,dict) else None; items=batch.get('items') if isinstance(batch,dict) else None
@@ -152,12 +174,7 @@ def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], 
         state=_fullcheck_with_existing_repair_loop(worker_command,ws,output_root,index)
         state_paths.append(ws/'state.json'); states.append(state)
     _batch_collect_with_workshop(worker_command,production_snapshot,state_paths,states,output_root)
-    source=write_json(output_root/'handoff-source.json',_handoff(states)); canonical=output_root/handoff_transport.HANDOFF_FILENAME
-    canonical_bytes=handoff_transport.canonicalize_handoff(source,canonical); inline=output_root/handoff_transport.INLINE_FILENAME
-    envelope=handoff_transport.inline_pack(canonical,inline); reconstructed=handoff_transport.inline_unpack(inline,output_root/'parent-chat')
-    if reconstructed.read_bytes()!=canonical_bytes: raise FullRouteError('START_HANDOFF_BYTE_MISMATCH')
-    if envelope.get('plaintext_sha256')!=hashlib.sha256(canonical_bytes).hexdigest(): raise FullRouteError('START_HANDOFF_HASH_MISMATCH')
-    return reconstructed
+    return _handoff_with_workshop(states,state_paths,output_root)
 
 def main(argv):
     try:
@@ -166,6 +183,13 @@ def main(argv):
     except FullRouteContinuation as exc:
         print('SYSTEM4_FULL_ROUTE_CONTINUATION:'+str(exc)); return 4
     except Exception as exc:
-        print('SYSTEM4_FULL_ROUTE_FAIL:'+str(exc)); return 2
+        try:
+            output_dir=Path(argv[4])/'top-level-workshop' if len(argv)>4 else HERE/'top-level-workshop'
+            request,path,_=global_workshop.capture('FULL_ROUTE_TOP_LEVEL',exc,output_dir=output_dir,findings=getattr(exc,'findings',None),context={'command':argv[1] if len(argv)>1 else None})
+            if request.get('repairable') is True:
+                print('SYSTEM4_FULL_ROUTE_CONTINUATION:START_TOP_LEVEL_WORKSHOP_CONTINUATION_REQUIRED:'+str(request.get('request_sha256') or '')+':'+str(path)); return 4
+            print('SYSTEM4_FULL_ROUTE_FAIL:START_TOP_LEVEL_WORKSHOP_BLOCKED:'+str(request.get('error_code') or exc)); return 2
+        except Exception as workshop_exc:
+            print('SYSTEM4_FULL_ROUTE_FAIL:TOP_LEVEL_WORKSHOP_CAPTURE_FAILED:'+str(exc)+':'+str(workshop_exc)); return 2
 
 if __name__=='__main__': raise SystemExit(main(sys.argv))
