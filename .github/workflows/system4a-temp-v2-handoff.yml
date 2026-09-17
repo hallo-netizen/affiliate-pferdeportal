@@ -13,6 +13,6 @@ jobs:
       - name: V2 handoff unit tests
         run: python3 -m unittest control.startmaster0107.test_system4_107008_handoff -v
       - name: Existing handoff transport tests
-        run: python3 -m unittest isolated_system4.test_handoff_transport -v
+        run: PYTHONPATH=isolated_system4 python3 -m unittest isolated_system4.test_handoff_transport -v
       - name: Print bridge SHA256
         run: sha256sum control/startmaster0107/system4_107008_handoff.py
