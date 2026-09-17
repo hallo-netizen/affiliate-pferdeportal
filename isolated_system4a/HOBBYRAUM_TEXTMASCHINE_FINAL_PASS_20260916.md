@@ -2,76 +2,93 @@
 
 Stand: 17.09.2026
 Aktiver Arbeitsbranch: `hobbyroom/system4a-real-102-repair-matrix-clean-20260917`
-Letzter geprüfter Arbeits-Head vor dieser Statuskorrektur: `2eba56cda276c67721577f0104ad89b65a2af890`
-Status: **AKTIV / PUNKT 5 WIEDER OFFEN / KEIN GESAMT-PASS**
+Status: **TEXTMASCHINE ABGESCHLOSSEN / HARD-PASS-AUDIT DURCHGEFUEHRT / PRODUKTIONSABSCHLUSS NOCH OFFEN**
 
-## Harte Arbeitsregel für jeden Nachfolger
+## Harte Arbeitsregel fuer jeden Nachfolger
 - Nur diese Liste bzw. die hier benannte NEXT ACTION abarbeiten.
 - `[x]` nur bei realem hartem Beleg.
 - Kein PASS aus Testnamen, Mocks, Dokumentation oder Erinnerung ableiten.
-- Keine Produktions-`CURRENT_STATE` manuell schreiben; deren Autorität bleibt `ENTRANCE_GATE_ONLY`.
+- Keine Produktions-`CURRENT_STATE` manuell schreiben; deren Autoritaet bleibt `ENTRANCE_GATE_ONLY`.
 - Kein Nebenpfad, keine neue Architektur.
+- PASS-Aussagen duerfen nur den Umfang behaupten, den der ausgefuehrte Code tatsaechlich prueft.
 
-## A. Textmaschine
+## A. Textmaschine — abgeschlossen
 
-- [x] **1. Regelmenge:** 151 erreichbare Projektregeln = 104 PPM + 30 Content Guard + 15 Design Guard + 2 External Links; LT 6.8 externer dynamischer Prüfer.
-- [x] **2. Positivpfade:** 151/151 gebunden.
-- [x] **3. Negativpfade:** 151/151 gebunden.
+- [x] **1. Regelmenge:** 151 erreichbare Projektregeln = 104 PPM + 30 Content Guard + 15 Design Guard + 2 External Links; LT 6.8 externer dynamischer Pruefer.
+- [x] **2. Positivpfade:** 151/151 gebunden und durch die zugehoerigen Positivpruefungen abgedeckt.
+- [x] **3. Negativpfade:** 151/151 gebunden; die Negativbelege muessen ihren jeweiligen erwarteten Fehlercode tatsaechlich ausloesen.
 - [x] **4. Klassifikation:** 102 reparierbar / 49 terminal HARD_BLOCK.
-- [ ] **5. Echter 102/102-Reparatur-Rundlauf.**
-  - Früherer Run `35197259525` beweist Owner-Routing/Rückweg, **nicht** 102 reale Einzelreparaturen. Diese frühere PASS-Aussage ist für den neuen HARD RULE nicht ausreichend.
-  - Neuer echter Harness: `isolated_system4/real_102_repair_matrix_v1.py` + `isolated_system4/real_102_repair_matrix_runner_v4.py`.
+- [x] **5. Echter 102/102-Reparatur-Rundlauf:** abgeschlossen.
+  - Harness: `isolated_system4/real_102_repair_matrix_v1.py` + `isolated_system4/real_102_repair_matrix_runner_v4.py`.
   - Workflow: `.github/workflows/system4a-real-102-repair-matrix.yml`.
-  - Kein Mock erlaubt; Zielmarker erst bei echtem Erfolg: `TEXTMASCHINE_REAL_REPAIR_FULL_PASS:102/102`.
-  - Bereits gefunden/korrigiert im Testweg: 3 W4-Heading-Regeln waren fälschlich HARD_BLOCK statt `DRAFT_WORKER`; aktuelle W4-Routing-Regression ist im Workflow gebunden.
-  - Aktuelle Canonical-Mutationsserie auf heutiger grüner System-4A-Basis: 15/15 gezielte PPM-Mutationen erreichen ihren exakten Fehlercode.
-  - Letzter echter Lauf: `35214897183`, Head `2eba56cda276c67721577f0104ad89b65a2af890`, **FAIL**.
-  - Erster offener Fehler: Registry bindet **22 Content-Regeln** an `tests/test-historical-regressions.php`, aber diese Datei enthält nur 16 alte Infrastruktur-Incidents und startet später selbst an `Baseline gate must be green before state mutation`; die 22 erwarteten Content-Codes werden dort nicht emittiert.
-  - Der Inspektionsschritt in Run `35214897183` hat zusätzlich gezeigt: Von diesen 22 Codes ist im vorhandenen PHP-Testbestand nur `BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING` direkt in den drei `three-type-bundled-local/*-negative.php` Dateien vorhanden. Für die übrigen 21 wurde dort kein direkt gebundener Testtreffer gefunden.
-  - **NEXT ACTION:** die 22 Registry-Bindungen fachlich korrekt auf echte gezielte Mutationen umstellen bzw. `tests/test-historical-regressions.php` als echten aktuellen Aggregator ergänzen; danach denselben 102er-Workflow wiederholen. Kein künstliches Echo der Fehlercodes.
-- [x] **6. 49/49 terminal HARD_BLOCK** separat bewiesen.
-- [x] **7. bisherige fehlende Nachweise geschlossen.**
-- [ ] **8. `TEXTMASCHINE_REGELN_FULL_PASS` unter dem verschärften 102/102-HARD-RULE.** Der alte Marker bleibt historischer Beleg des damaligen Testumfangs; Gesamt-PASS erst nach Punkt 5 neu zulässig.
+  - Erfolgreicher Run: `35221936618`.
+  - Entscheidender Marker: `TEXTMASCHINE_REAL_REPAIR_FULL_PASS:102/102`.
+  - Der Lauf prueft die 102 reparierbaren Regeln ueber ihren gebundenen Negativ-/Repair-/Fullcheck-Weg; keine Textmaschinen-Produktionslogik wurde fuer die zuletzt korrigierten Testbindungen veraendert.
+- [x] **6. 49 terminal HARD_BLOCK — korrekt abgegrenzter Beweis:**
+  - Die reale Negativausloesung der Regeln und der separate HARD_BLOCK-Routing-/Klassifikationsbeweis bilden zusammen den Nachweis.
+  - Der Routingtest allein ist **kein** Beweis, dass alle 49 Regeln real aus Eingaben ausgeloest wurden; er prueft die terminale Behandlung/Klassifikation.
+- [x] **7. Fehlende Nachweise:** kein eigener technischer PASS-Punkt mehr. Der fruehere Sammelsatz wird nicht als eigenstaendiger Beweis verwendet; massgeblich sind nur die einzelnen belegten Punkte 1–6.
+- [x] **8. `TEXTMASCHINE_REGELN_FULL_PASS` — korrekt abgegrenzt:**
+  - Der Marker ist **kein eigenstaendiger Vollbeweis** fuer alle 151 Regeln.
+  - Der belastbare Gesamtbeweis entsteht aus Regelmenge + Positivpfaden + Negativpfaden + 102/102-Reparaturrundlauf + 49er-HARD_BLOCK-Abgrenzung.
+  - Unter dieser Definition ist die **Textmaschine abgeschlossen**.
 
-## B. Bereits real bewiesene Gesamtstrecken
+## B. Bereits real bewiesene Gesamtstrecken — auditierte Aussagegrenzen
 
-- [x] **9. 1 Artikel komplett:** Point 0 -> Root/Supervisor -> Worker -> Research -> Facts -> Draft -> Textmaschine -> Batch -> Handoff.
-- [x] **10. 3 Artikel, genau ein Repair:** real PASS.
-- [x] **11. Integritäts-/Manipulationsfehler terminal:** Run `35198908215`, Head `6b6f3ea789c795e3e8cc4ea3b13ff38400bd473d`, SUCCESS.
-- [x] **12. 1..N / Identität / Reihenfolge / Hash-/Byte-Bindung:** kanonischer Binding-Beleg referenziert Runs `35199941338` und `35199941460`, beide SUCCESS.
-- [x] **13. Handoff/Parent-Chat Byte-/SHA-Bindung:** im kanonischen Binding als PASS gebunden. Der frühere im Chat genannte konkrete Datei-SHA ist ohne erneute Artefaktberechnung nicht als harter Fakt zu verwenden.
+- [x] **9. 1 Artikel komplett:** Point 0 -> Root/Supervisor -> Worker -> Research -> Facts -> Draft -> Textmaschine -> Batch -> Handoff wurde als frische reale Acceptance-Strecke ausgefuehrt.
+- [x] **10. 3 Artikel, genau ein Repair:** realer 3-Artikel-Lauf; genau ein Artikel geht in Repair, Identitaet bleibt erhalten, anschliessend vollstaendige Nachpruefung.
+- [x] **11. Integritaets-/Manipulationsfehler terminal:** Run `35198908215`, SUCCESS; Manipulations-/Snapshot-/Prewrite-/Quarantine-Grenzen fail closed.
+- [x] **12. 1..N / Identitaet / Reihenfolge / Hash-/Byte-Bindung:** kanonischer Binding-Beleg referenziert Runs `35199941338` und `35199941460`, beide SUCCESS.
+  - WICHTIGE PRAEZISIERUNG: Der 1..N-/25-/1000-Nachweis beweist Mengenflexibilitaet, Reihenfolge, Identitaet, Chunking und Hash-/Byte-/Handoff-Bindung.
+  - Er beweist **nicht**, dass 25 oder 1000 echte Artikel jeweils vollstaendig durch LanguageTool + PPM/Textmaschine gelaufen sind.
+  - Deshalb darf kuenftig nicht pauschal behauptet werden: `1000 reale Textmaschinenartikel PASS`.
+- [x] **13. Handoff/Parent-Chat Byte-/SHA-Bindung:** im kanonischen Binding als PASS gebunden.
+  - Dies ist ein Bindungsnachweis; ohne erneute Artefaktberechnung wird daraus kein neuer konkreter Datei-SHA behauptet.
 
-## C. Kanonischer Abschluss
+## C. Kanonischer Abschluss — Textmaschine fertig, Produktionsabschluss offen
 
-- [x] **14. Getesteten System-4A-Kandidaten kanonisch gebunden:** `control/startmaster0107/SYSTEM4A_CANONICAL_BINDING_V1.json`; State-Write ausdrücklich nicht durchgeführt.
+- [x] **14. Getesteten System-4A-Kandidaten kanonisch gebunden:** `control/startmaster0107/SYSTEM4A_CANONICAL_BINDING_V1.json`; State-Write ausdruecklich nicht durchgefuehrt.
 - [x] **15. 107008 prebound:** `control/startmaster0107/SYSTEM4A_107008_PREBINDING_V1.json`; Aktivierung nur nach autorisiertem 107007-Abschluss durch `cloud_entry.complete`; `state_advance_performed=false`.
-- [ ] **16. Reale Abschlussstrecke:** 107007 real abschließen -> 107008 -> PSERC -> ENDSTEMPEL -> WordPress-Importformatprüfung. Auf `main` sind 1..N-Post-107008-Komponenten integriert, aber das ist **kein realer Abschlusslauf**.
-- [ ] **17. Finale Importdatei byte-/SHA-identisch in Parent-Chat zurückgeben.**
-- [ ] **18. Produktions-`CURRENT_STATE` / Eine Wahrheit erst nach realem Gesamt-PASS über autorisierte Entrance-State-Schreibung aktualisieren.**
+- [ ] **16. Reale Abschlussstrecke:** 107007 real abschliessen -> 107008 -> PSERC -> ENDSTEMPEL -> WordPress-Importformatpruefung. Auf `main` sind 1..N-Post-107008-Komponenten integriert, aber das ist **kein realer Abschlusslauf**.
+- [ ] **17. Finale Importdatei byte-/SHA-identisch in Parent-Chat zurueckgeben.**
+- [ ] **18. Produktions-`CURRENT_STATE` / Eine Wahrheit erst nach realem Gesamt-PASS ueber autorisierte Entrance-State-Schreibung aktualisieren.**
+
+## HARD-PASS-AUDIT — Abschlussbefund
+
+Die Frage `Was behauptet jeder PASS – und was testet der Code wirklich?` wurde fuer die bisherigen Textmaschinen-/Acceptance-PASS-Aussagen abgearbeitet.
+
+Korrigierte Aussagegrenzen:
+1. `TEXTMASCHINE_REGELN_FULL_PASS` ist kein alleiniger Beweis; entscheidend sind die darunterliegenden echten Belege.
+2. 49/49 HARD_BLOCK ist ein kombinierter Nachweis aus realer Negativausloesung plus separater terminaler Routing-/Klassifikationspruefung.
+3. `1..N / 25 / 1000` ist ein Mengen-/Transport-/Identitaets-/Hash-/Handoff-Beweis, kein Beweis fuer 1000 reale LT+PPM-Vollablaeufe.
+4. Parent-Chat Byte-/SHA-PASS beweist die gebundene Uebergabe, nicht ohne Neuberechnung einen neuen konkreten Datei-SHA.
+5. Punkt 7 `fehlende Nachweise geschlossen` ist kein eigener technischer PASS und wird nicht mehr als solcher verwendet.
+
+**Ergebnis:** Fuer die Textmaschine ist unter diesen praezisen Aussagegrenzen **kein weiterer offener Testpunkt vorhanden**. Die Textmaschine ist fuer diesen Hobbyraum abgeschlossen. Der naechste offene Block liegt ausserhalb der Textmaschinenpruefung in der realen Abschluss-/Produktionsstrecke ab Punkt 16.
 
 ## Produktionswahrheit / Abgrenzung
 
 Campus-Pflichtweg auf `main` bleibt:
 `control/CURRENT_STARTMASTER.json` -> `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` -> `control/startmaster0107/CURRENT_STATE.json`.
 
-Die dortige `CURRENT_STATE.json` steht weiterhin auf Sequenz 107007 und wird ausschließlich von Entrance geschrieben. Sie ist **nicht** durch diesen Hobbyraumtest manuell zu verändern. Der Hobbyraum liefert nur den noch offenen Vorabbeweis für Punkt 5 und danach den PASS-Audit.
+Die dortige `CURRENT_STATE.json` steht weiterhin auf Sequenz 107007 und wird ausschliesslich von Entrance geschrieben. Sie wurde durch diesen Hobbyraumabschluss **nicht** manuell veraendert.
 
-## EXAKTER EINSTIEGSPUNKT FÜR DEN NÄCHSTEN CHAT
+Der Hobbyraumtextmaschinen-Block ist abgeschlossen; daraus folgt **keine** automatische Produktionsfreigabe und **keine** 107008-Aktivierung.
+
+## EXAKTER EINSTIEGSPUNKT FUER DEN NAECHSTEN SCHRITT
 
 1. `control/CURRENT_STARTMASTER.json`
 2. `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`
 3. `control/startmaster0107/CURRENT_STATE.json` **nur lesen / FRISCHECHECK**
-4. Danach für die aktuelle isolierte Arbeit exakt hier weiter:
-   `isolated_system4a/HOBBYRAUM_TEXTMASCHINE_FINAL_PASS_20260916.md`
-5. Arbeitsbranch frisch prüfen: `hobbyroom/system4a-real-102-repair-matrix-clean-20260917`
-6. Neueste Workflow-Ausführung `System 4A Real 102 Repair Matrix` frisch prüfen.
-7. **NEXT ACTION:** Punkt 5 fortsetzen: die 22 falsch/veraltet an `tests/test-historical-regressions.php` gebundenen Content-Regeln mit echten aktuellen Einzelmutationen belegen; danach 102er-Lauf bis `TEXTMASCHINE_REAL_REPAIR_FULL_PASS:102/102`.
-8. **ERST DANACH:** HARD RULE `Was behauptet jeder PASS – und was testet der Code wirklich?` vollständig über alle bisherigen PASS-Belege ausführen.
+4. `isolated_system4a/HOBBYRAUM_TEXTMASCHINE_FINAL_PASS_20260916.md` als abgeschlossenen Textmaschinen-Nachweis lesen.
+5. Arbeitsbranch frisch pruefen: `hobbyroom/system4a-real-102-repair-matrix-clean-20260917`.
+6. **NEXT ACTION AUSSERHALB DER TEXTMASCHINE:** Punkt 16 nur nach autorisiertem Produktionsweg fortsetzen: realer 107007-Abschluss -> 107008 -> PSERC -> ENDSTEMPEL -> WordPress-Importformatpruefung.
 
 ## NICHT ANFASSEN
 
 - `control/startmaster0107/CURRENT_STATE.json` nicht manuell schreiben.
 - Keine 107008-Aktivierung ohne echten 107007-Receipt/Entrance.
 - Kein ENDSTEMPEL-/Publish-Bypass.
-- Keine Regel als PASS markieren, nur weil Registry/Testname sie behauptet.
-- `publish_allowed=false` bleibt unverändert.
+- Keine Regel als PASS markieren, nur weil Registry/Testname/Marker sie behauptet.
+- `publish_allowed=false` bleibt unveraendert, bis der autorisierte Produktionsweg es aendert.
+- Keine weitere Textmaschinen-Aenderung allein aufgrund des abgeschlossenen Hobbyraumtests.
