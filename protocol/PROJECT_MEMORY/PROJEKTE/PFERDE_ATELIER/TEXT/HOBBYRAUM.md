@@ -1,110 +1,89 @@
 # PFERDE ATELIER – TEXT – HOBBYRAUM
 
-STAND: 2026-09-14
-STATUS: SYSTEM 4 – NEUER REALER CODEX-EIN-ARTIKEL-LAUF ANGENOMMEN – ENDERGEBNIS OFFEN
+STAND: 2026-09-17
+STATUS: AKTIV – M38 HISTORY_AUTHORITY_MAINTENANCE
 
-## ÄLTERER OFFIZIELLER STAND
+## AKTUELLE ARBEIT
 
-M37 / offizieller 107007-Stand vom 2026-09-11 bleibt historische Referenz und ist nicht mit dem isolierten System-4-Kandidaten gleichzusetzen.
+Nur Phase 1 des vorhandenen Maschinenwegs:
+M38 als reale fortlaufende History-Regression in die bestehende Matrix und den bestehenden Runner aufnehmen und maschinell beweisen.
 
-History:
-- PR248;
-- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
-- hardlock PASS;
-- hardlock-base PASS.
-
-Produktfix:
-- PR247;
-- Head `59ad44da3d89769c05f0725f9929135b0262f4dd`;
-- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
-- hardlock PASS;
-- hardlock-base PASS.
-
-Offizieller damaliger main:
+Aktueller technischer Main/Baseline:
 `f1d1605f18bd23d9189f89ad173598958718d08a`
 
-M01–M37 sind integriert.
+Aktiver realer Blocker:
+`PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH`
 
-## SYSTEM 4 – AKTUELLER HOBBYRAUMSTAND 2026-09-14
+History-Kandidat:
+- PR249;
+- Branch: `hobbyroom/m38-plan-version-history-20260911`;
+- Head: `d2348bd1bcd2ea804dba3aef030923420ef67ec9`;
+- erlaubt: ausschließlich bestehende Fehlermatrix + bestehender Regressionrunner;
+- erwartet: unveränderter Main M01–M37 PASS; History-Kandidat erster neuer FAIL exakt M38;
+- ausdrücklich kein Produktfix in dieser Phase.
 
-Ursächlich geschlossene Fehlerklasse:
-Ein späterer Prüfer beanstandet einen von einer früheren Maschinenstufe erzeugten/bindenden Wert. Reparierbare Fehler dürfen nicht pauschal terminal abbrechen.
-
-Zentrale Rückrouten:
-- Titel / Kategorie / Slot -> Parent-Maschine;
-- Links -> Context-Binder;
-- Quellen / Facts -> Research-Stufe;
-- Textkörper -> Same-Article-Repair.
-
-Frischer kompletter Positiv-/Negativ-Artikeltest:
-- Run `34882998263`;
-- neuer Job-Versuch `104108404452`;
-- Point0 positiv/negativ PASS;
-- Supervisor-Grenzen PASS;
-- Produktionsbindung PASS;
-- Single-Button-Negativgrenze PASS;
-- verbotener SEO-Provider PASS;
-- gesamte System-4-Suite PASS;
-- stage-aware Reparaturrouten positiv/negativ PASS;
-- echtes LanguageTool 6.8 PASS;
-- echter PPM 6.7.9 PASS;
-- drei neue Realthemen PASS;
-- 1 Artikel Start -> Datei/Handoff PASS;
-- 3 Artikel Start -> Datei/Handoff PASS.
-
-Sauberer Produktionsstand nach Router:
-`e4ef916c89cf681aa8a2c4c1e5ff0ef07fc88058`
-
-Immutable Base Hardlock:
-Run `34883319385` -> PASS.
-
-## AKTUELLER REALTEST
-
-Neuer Artikel:
-`Pferdeanhänger richtig beladen und Gewicht sicher verteilen`
-
-Target Keyword:
-`Pferdeanhänger richtig beladen`
-
-Quellen vor Codex gebunden:
-- FN Pferdetransport;
-- § 22 StVO;
-- § 34 StVZO;
-- § 44 StVZO.
-
-Ein falscher Snapshot-Hash wurde vor Codex beim Gegencheck erkannt und korrigiert; der fehlerhafte Stand wurde nicht gestartet.
-
-Aktueller Produktions-Head mit korrigierter Kapsel:
-`b66467468ca3f1cab9e3b86a5a96a7d7c1c70eaa`
-
-Hardlock auf diesem Head:
-Run `34884562137` -> PASS.
-
-Codex-Auftrag:
-PR #259, Kommentar `5669182565`.
-
-Status:
-Codex-Connector `eyes` -> Auftrag angenommen.
-Terminales Endergebnis derzeit OFFEN.
+Die Versionswerte sind nicht aus PR249 erfunden, sondern gegen die vorhandene Abschlusslogik gebunden:
+- `plan_contract_version == "4.0.0"`;
+- `required_plugin_version == "6.7.9"`.
 
 ## NEXT ACTION
 
-Nur den bereits angenommenen Codex-Lauf zu Kommentar `5669182565` auswerten.
+Bestehenden History-Maschinenbeweis / hardlock auf PR249 ausführen.
+Nur bei `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M38` plus zugehörigem Hardlock-PASS darf Phase 2 PRODUCT_FIX M38 beginnen.
 
-Keinen zweiten Artikel starten.
-Keinen Parallel-/Ausweichlauf starten.
-Kein Merge.
-Kein Publish.
-`publish_allowed=false`.
+Kein Codex-Testlauf. Für diese Arbeit ausschließlich bestehende GitHub-Actions-Maschinenprüfungen verwenden.
 
-Bei PASS vollständigen End-to-End-Nachweis bis Batch Gate, V2-Handoff, Inline-Pack/Unpack und bytegleicher Rekonstruktion dokumentieren.
+## VERBOTEN
 
-Bei Fehler exakt erste Fehlerstufe, Fehlercode, Feld, Ist/Soll und zuständige Reparaturroute dokumentieren.
+- History-Autorität und Produktfix in einem Kandidaten mischen;
+- neuer Runner/Gate/Controller/Sidecar für M38;
+- PPM/PSERC/PSTE/Textmaschine/Fachregeln/Recherche/SEO/Links/Tabellen/Design verändern;
+- 107008 vor erfolgreichem Produktionslauf;
+- WordPress-Write;
+- Publish.
+
+HOBBYROOM_WORK_LOCK_V1
+STATUS: FIX_ALLOWED_FOR_CODEX_TEST
+OFFICE: TEXT
+MAIN_SHA: f1d1605f18bd23d9189f89ad173598958718d08a
+ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_BLOCKED
+PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
+RECOVERY_BASE_SHA: bb005a5324a0a6270aacb52b5927613bde1ab4bc
+ACTIVE_HISTORY_CASE: M38
+HISTORY_EXPECTED_FAIL: M38
+CANDIDATE_BRANCH: hobbyroom/m38-plan-version-history-20260911
+CANDIDATE_HEAD_SHA: d2348bd1bcd2ea804dba3aef030923420ef67ec9
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+CHECK_PAUL: PASS
+CHECK_HISTORY: PASS
+CHECK_LAST_GOOD: PASS
+CHECK_NEIGHBORS: PASS
+CHECK_REPEAT_CLASS: PASS
+CHECK_POS_NEG: PASS
+CHECK_INVARIANTS: PASS
+HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
+HISTORY_SOURCE_BLOB_SHA: dbc77c1eb820bdc91918b81d290fc46016faecf6
+HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+HISTORY_PROOF_RUNNER_BLOB_SHA: ee1701de79a577c611c0e55a5b76fe6d7837441a
+PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
+PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
+ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md
+ERROR_SOURCE_BLOB_SHA: 3d2fc9281a8f7fda0f03f95b1f4a560120d8f403
+CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
+CURRENT_STATE_BLOB_SHA: b79498c9ab3053cc4f63b2a8b50529df757172df
+DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
+DECISION_SOURCE_BLOB_SHA: ed4c55a7a20343f2974f4b88e79a686671f7b397
+STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
+STANDARD_SOURCE_BLOB_SHA: 8c90de4920ec81e10f3952bbd52208fad5a42367
+PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/M38_ARBEITSPROTOKOLL_20260917.md
+PROTOCOL_SOURCE_BLOB_SHA: 0b5cbc43c4a97204bf4f859cb72c55259ef6f407
+INTEGRATION_ALLOWED: true
+END_HOBBYROOM_WORK_LOCK_V1
 
 ## VERWEISE
 
-- CURRENT: `CURRENT_STATE.md`
-- aktuelle Fehlerquelle des offiziellen 107007-Stands: `QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
-- M37-Protokoll: `M37_ARBEITSPROTOKOLL_20260911.md`
-- System-4-Protokoll 14.09.: `SYSTEM4_ARBEITSPROTOKOLL_20260914.md`
+- CURRENT: `CURRENT_STATE.md` (nicht manuell verändert)
+- aktuelle Fehlerquelle: `QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
+- M38-Protokoll: `M38_ARBEITSPROTOKOLL_20260917.md`
 - Standard: `protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md`
