@@ -24,13 +24,20 @@ def canon(value:Any)->bytes:
 def sha256(data:bytes)->str:
     return hashlib.sha256(data).hexdigest()
 
-def _first_finding(state:Mapping[str,Any])->dict[str,Any]:
+def _all_findings(state:Mapping[str,Any])->list[dict[str,Any]]:
     checks=state.get('checks') if isinstance(state.get('checks'),Mapping) else {}
-    findings=checks.get('findings') if isinstance(checks.get('findings'),list) else []
-    return dict(findings[0]) if findings and isinstance(findings[0],Mapping) else {}
+    raw=checks.get('findings') if isinstance(checks.get('findings'),list) else []
+    findings=[dict(row) for row in raw if isinstance(row,Mapping)]
+    if findings:
+        return findings
+    last=str(state.get('last_error') or '').strip()
+    return [{'error_code':last,'reason':last}] if last else []
 
-def classify(state:Mapping[str,Any])->dict[str,Any]:
-    finding=_first_finding(state)
+def _first_finding(state:Mapping[str,Any])->dict[str,Any]:
+    findings=_all_findings(state)
+    return dict(findings[0]) if findings else {}
+
+def _classify_finding(finding:Mapping[str,Any],state:Mapping[str,Any])->dict[str,Any]:
     code=str(finding.get('error_code') or state.get('last_error') or '').upper()
     field=str(finding.get('field') or '').strip().lower()
     rule=str(finding.get('failed_rule') or finding.get('rule_id') or '').upper()
@@ -47,7 +54,33 @@ def classify(state:Mapping[str,Any])->dict[str,Any]:
         owner='RESEARCH_BINDING'; target='RESEARCH_OR_FACT_BINDING'
     else:
         owner='DRAFT_BODY'; target='SAME_ARTICLE_BODY'
-    return {'contract':CONTRACT,'owner':owner,'target':target,'finding':finding,'error_code':code,'field':field,'rule':rule}
+    return {'owner':owner,'target':target,'error_code':code,'field':field,'rule':rule,'finding':dict(finding)}
+
+def classify(state:Mapping[str,Any])->dict[str,Any]:
+    findings=_all_findings(state)
+    if not findings:
+        findings=[{}]
+    classified=[_classify_finding(row,state) for row in findings]
+    first=classified[0]
+    groups=[]
+    seen=set()
+    for row in classified:
+        key=(row['owner'],row['target'])
+        if key not in seen:
+            seen.add(key)
+            groups.append({'owner':row['owner'],'target':row['target']})
+    return {
+        'contract':CONTRACT,
+        'owner':first['owner'],
+        'target':first['target'],
+        'finding':first['finding'],
+        'findings':findings,
+        'finding_count':len(findings),
+        'owner_target_groups':groups,
+        'error_code':first['error_code'],
+        'field':first['field'],
+        'rule':first['rule'],
+    }
 
 def _punctuation_repairs(title:str,finding:Mapping[str,Any])->str:
     expected=str(finding.get('expected') or '').casefold()
@@ -87,7 +120,13 @@ def _continuation_envelope(workspace:Path,state:Mapping[str,Any],route:Mapping[s
     cycle=int(state.get('machine_repair_cycle') or 0)+1
     if cycle>MAX_MACHINE_REPAIR_CYCLES:
         raise RepairRouteError('MACHINE_REPAIR_CYCLE_LIMIT')
-    finding=dict(route.get('finding') or {})
+    findings=[dict(row) for row in route.get('findings',[]) if isinstance(row,Mapping)]
+    if not findings:
+        finding=dict(route.get('finding') or {})
+        findings=[finding] if finding else []
+    if not findings:
+        raise RepairRouteError('REPAIR_FINDINGS_MISSING')
+    finding=dict(findings[0])
     return {
         'contract':RETURN_CONTRACT,
         'router_contract':CONTRACT,
@@ -102,6 +141,10 @@ def _continuation_envelope(workspace:Path,state:Mapping[str,Any],route:Mapping[s
         'reason':reason,
         'finding':finding,
         'finding_sha256':sha256(canon(finding)),
+        'findings':findings,
+        'finding_count':len(findings),
+        'findings_sha256':sha256(canon(findings)),
+        'owner_target_groups':list(route.get('owner_target_groups') or []),
         'cycle':cycle,
         'max_cycles':MAX_MACHINE_REPAIR_CYCLES,
         'article':dict(article),
@@ -122,6 +165,16 @@ def verify_continuation_result(workspace:Path,result:Mapping[str,Any])->dict[str
     finding=result.get('finding')
     if not isinstance(finding,Mapping) or result.get('finding_sha256')!=sha256(canon(dict(finding))):
         raise RepairRouteError('REPAIR_RETURN_FINDING_HASH_INVALID')
+    findings=result.get('findings')
+    if not isinstance(findings,list) or not findings or not all(isinstance(row,Mapping) for row in findings):
+        raise RepairRouteError('REPAIR_RETURN_FINDINGS_INVALID')
+    normalized=[dict(row) for row in findings]
+    if int(result.get('finding_count') or 0)!=len(normalized):
+        raise RepairRouteError('REPAIR_RETURN_FINDING_COUNT_INVALID')
+    if result.get('findings_sha256')!=sha256(canon(normalized)):
+        raise RepairRouteError('REPAIR_RETURN_FINDINGS_HASH_INVALID')
+    if dict(normalized[0])!=dict(finding):
+        raise RepairRouteError('REPAIR_RETURN_FIRST_FINDING_MISMATCH')
     cycle=int(result.get('cycle') or 0)
     if cycle<1 or cycle>MAX_MACHINE_REPAIR_CYCLES or int(result.get('max_cycles') or 0)!=MAX_MACHINE_REPAIR_CYCLES:
         raise RepairRouteError('REPAIR_RETURN_CYCLE_INVALID')
@@ -181,7 +234,7 @@ def _restart_parent_metadata(workspace:Path,state:dict[str,Any],route:dict[str,A
     new_workspace=_next_workspace(runtime_root,index,cycle)
     rc=root_entry.main(['root_entry.py','start-point0',str(new_point0),str(new_workspace),str(index)])
     if rc!=0: raise RepairRouteError('REPAIR_ROOT_RESTART_FAILED:'+str(rc))
-    new_state_path=new_workspace/'state.json'; new_state=json.loads(new_state_path.read_text(encoding='utf-8')); new_state['machine_repair_cycle']=cycle; new_state['machine_repair_lineage']={'owner':'PARENT_METADATA','target':route['target'],'from_article':original,'to_article':item,'finding':finding,'previous_workspace':str(workspace)}; new_state_path.write_text(json.dumps(new_state,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
+    new_state_path=new_workspace/'state.json'; new_state=json.loads(new_state_path.read_text(encoding='utf-8')); new_state['machine_repair_cycle']=cycle; new_state['machine_repair_lineage']={'owner':'PARENT_METADATA','target':route['target'],'from_article':original,'to_article':item,'finding':finding,'findings':list(route.get('findings') or []),'previous_workspace':str(workspace)}; new_state_path.write_text(json.dumps(new_state,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
     result=_continuation_envelope(workspace,state,route,'RESTARTED','DETERMINISTIC_PARENT_METADATA_REPAIR_APPLIED')
     result.update({'cycle':cycle,'workspace':str(new_workspace),'point0':str(new_point0),'from_article':original,'to_article':item})
     verify_continuation_result(workspace,result)
