@@ -58,6 +58,42 @@ class GlobalWorkshopTests(unittest.TestCase):
             untouched = json.loads(states[2].read_text(encoding="utf-8"))
             self.assertEqual(untouched["phase"], "OUTPUT_GATE_REQUIRED")
 
+    def test_pairwise_batch_template_reuse_routes_only_later_article_to_workshop(self):
+        error = RuntimeError("BATCH_TEMPLATE_REUSE_BLOCKED:2:3:0.2000")
+        request = global_workshop.build_request("BATCH", error)
+        self.assertTrue(request["workshop_required"])
+        self.assertTrue(request["repairable"])
+        self.assertFalse(request["terminal_at_origin"])
+        self.assertEqual(request["finding_count"], 1)
+        self.assertEqual(set(request["repair_targets"]), {"3"})
+        finding = request["findings"][0]
+        self.assertEqual(finding["error_code"], "BATCH_TEMPLATE_REUSE_BLOCKED")
+        self.assertEqual(finding["article_index"], 3)
+        self.assertEqual(finding["conflicting_article_index"], 2)
+        self.assertEqual(finding["pairwise_shingle_jaccard"], 0.2)
+        self.assertEqual(finding["repair_owner"], "DRAFT_BODY")
+        self.assertEqual(finding["repair_target"], "SAME_ARTICLE_BODY")
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            states = [self._state(root, i) for i in range(4)]
+            changed = global_workshop.route_article_states(request, states)
+            self.assertEqual(changed, [3])
+            routed = json.loads(states[3].read_text(encoding="utf-8"))
+            self.assertEqual(routed["phase"], "REPAIR_REQUIRED")
+            self.assertEqual(routed["checks"]["mode"], "GLOBAL_WORKSHOP")
+            self.assertEqual(routed["checks"]["checker"], "BATCH")
+            self.assertEqual(routed["checks"]["findings"][0]["error_code"], "BATCH_TEMPLATE_REUSE_BLOCKED")
+            for index in (0, 1, 2):
+                untouched = json.loads(states[index].read_text(encoding="utf-8"))
+                self.assertEqual(untouched["phase"], "OUTPUT_GATE_REQUIRED")
+
+    def test_malformed_pairwise_template_reuse_never_invents_article_target(self):
+        request = global_workshop.build_request("BATCH", RuntimeError("BATCH_TEMPLATE_REUSE_BLOCKED:INVALID"))
+        self.assertTrue(request["repairable"])
+        self.assertEqual(request["repair_targets"], {})
+        self.assertEqual(request["findings"][0]["error_code"], "BATCH_TEMPLATE_REUSE_BLOCKED:INVALID")
+
     def test_nonrepairable_error_still_enters_workshop_before_block(self):
         request = global_workshop.build_request("BATCH", RuntimeError("STATE_DRAFT_HASH_MISMATCH"))
         self.assertTrue(request["workshop_required"])
