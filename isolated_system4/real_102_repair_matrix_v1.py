@@ -79,7 +79,6 @@ def run(cmd, *, cwd=REPO, env=None) -> subprocess.CompletedProcess:
 
 
 def exact_call_fields(source: str, code: str) -> tuple[str, str]:
-    # PPM emits self::err/error(code, failed_rule/reason, field_path, ...).
     pat = re.compile(r"self::(?:err|error)\(\s*['\"]" + re.escape(code) + r"['\"]\s*,\s*['\"]([^'\"]*)['\"]\s*,\s*['\"]([^'\"]*)['\"]", re.S)
     m = pat.search(source)
     if m:
@@ -107,7 +106,6 @@ def build_matrix(ppm_root: Path) -> list[dict]:
         failed_rule, field_path = exact_call_fields(text, code)
         probe = {'error_code': code, 'failed_rule': failed_rule, 'field_path': field_path}
         owner = production_checks._ppm_repair_owner(probe)
-        # Fail hard if the real source diagnostic does not reproduce the expected artifact owner.
         if code in TITLE_CODES and owner != 'PARENT_TITLE_MACHINE':
             raise AssertionError('TITLE_OWNER_MISMATCH:' + code + ':' + field_path + ':' + owner)
         if code in CATEGORY_CODES and owner != 'PARENT_CATEGORY_MACHINE':
@@ -122,7 +120,6 @@ def build_matrix(ppm_root: Path) -> list[dict]:
             'negative_test': str(r.get('negative_test') or ''), 'positive_test': str(r.get('positive_test') or ''),
         })
 
-    # W4 rendered DOM: three content-realisation repairs; W4::R8-0790 evidence stays hard-blocked.
     reg_by_id = {str(r.get('rule_id')): r for r in registry}
     for rule_id, code in W4_REPAIR.items():
         r = reg_by_id.get(rule_id)
@@ -162,20 +159,33 @@ def run_ppm_targeted_authorities(ppm_root: Path, rows: list[dict]) -> dict:
     positive = sorted({r['positive_test'] for r in ppm_rows})
     if any(not p for p in negative + positive):
         raise AssertionError('PPM_RULE_TEST_BINDING_MISSING')
+
     executed_negative = []
-    executed_positive = []
+    negative_output: dict[str, str] = {}
     for rel in negative:
         path = ppm_root / rel
         if not path.is_file():
             raise AssertionError('PPM_NEGATIVE_TEST_MISSING:' + rel)
-        run(['php', path], cwd=ppm_root)
-        executed_negative.append(rel)
+        cp = subprocess.run(['php', str(path)], cwd=ppm_root, text=True, capture_output=True)
+        combined = (cp.stdout or '') + '\n' + (cp.stderr or '')
+        negative_output[rel] = combined
+        bound_rows = [r for r in ppm_rows if r['negative_test'] == rel]
+        missing = sorted({r['error_code'] for r in bound_rows if r['error_code'] not in combined})
+        if missing:
+            raise AssertionError('PPM_TARGET_ERROR_NOT_EMITTED:' + rel + ':' + ','.join(missing) + ':RC=' + str(cp.returncode))
+        executed_negative.append({'path': rel, 'return_code': cp.returncode, 'bound_rule_count': len(bound_rows)})
+        print('PPM_TARGETED_NEGATIVE_PASS:' + rel + ':' + str(len(bound_rows)), flush=True)
+
+    executed_positive = []
     for rel in positive:
         path = ppm_root / rel
         if not path.is_file():
             raise AssertionError('PPM_POSITIVE_TEST_MISSING:' + rel)
-        run(['php', path], cwd=ppm_root)
+        cp = subprocess.run(['php', str(path)], cwd=ppm_root, text=True, capture_output=True)
+        if cp.returncode != 0:
+            raise AssertionError('PPM_POSITIVE_TEST_FAILED:' + rel + ':RC=' + str(cp.returncode) + '\n' + cp.stdout + '\n' + cp.stderr)
         executed_positive.append(rel)
+        print('PPM_TARGETED_POSITIVE_PASS:' + rel, flush=True)
     return {'negative': executed_negative, 'positive': executed_positive}
 
 
@@ -184,7 +194,6 @@ def prove_non_ppm_targeted_negatives(env: dict) -> None:
 
 
 def prepare_real_draft_repair(root: Path) -> tuple[Path, Path, Path]:
-    # Item 1 is intentionally generated with the known real PPM regression marker.
     runroot, rows = test_repair_continuity._prepare_batch(root, 3)
     workspace, generated, _draft = rows[1]
     rc = controller.cmd_fullcheck(workspace)
@@ -262,9 +271,6 @@ def exercise_parent_authority(row: dict) -> None:
         return
 
     if row['owner'] == 'PORTAL_LINK_MACHINE':
-        # Portal-link repair is an upstream regeneration, never an in-place article edit.
-        # The matrix proves the target PPM error separately, then requires a newly generated
-        # Point-0/workspace with all three hash-bound portal link roles before recheck.
         return
     raise AssertionError('UNEXPECTED_PARENT_OWNER:' + row['owner'])
 
@@ -289,11 +295,9 @@ def main() -> int:
     ppm_tests = run_ppm_targeted_authorities(ppm_root, matrix)
     prove_non_ppm_targeted_negatives(env)
 
-    # Real same-article DRAFT_WORKER repair template, produced by the real controller + PPM.
     draft_root = runtime / 'draft-owner'
     draft_workspace, draft_generated, draft_backup = prepare_real_draft_repair(draft_root)
 
-    # Clean real one-article workspace for parent/upstream post-repair fullchecks.
     clean_root = runtime / 'clean-owner'
     _, clean_rows = test_repair_continuity._prepare_batch(clean_root, 1)
     clean_workspace, _clean_generated, _clean_draft = clean_rows[0]
@@ -316,8 +320,6 @@ def main() -> int:
             state = fullcheck_pass(clean_workspace)
             repair_mode = 'REAL_PARENT_AUTHORITY_REPAIR_THEN_REAL_FULLCHECK'
         elif owner == 'PORTAL_LINK_MACHINE':
-            # Real upstream regeneration: build a fresh Point-0/workspace from the bound
-            # portal-link producer input, then require the complete text-machine fullcheck.
             portal_root = runtime / ('portal-owner-%03d' % index)
             _, portal_rows = test_repair_continuity._prepare_batch(portal_root, 1)
             portal_workspace, _, _ = portal_rows[0]
