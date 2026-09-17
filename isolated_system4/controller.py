@@ -332,6 +332,27 @@ def _assert_fullcheck_route_complete(state: dict) -> None:
         raise Fail('ROUTE_COMPLETENESS_FAIL:EXPECTED_' + ','.join(expected) + ':GOT_' + ','.join(state.get('route_progress') or []))
 
 
+def _guard_repair_or_hard_block(state: dict, path: Path, checker: str, error_value: str) -> int:
+    finding = production_checks.guard_repair_finding(checker, error_value)
+    if finding is None:
+        raise Fail('FULL_CHECK_HARD_BLOCK:' + checker.upper() + ':' + error_value)
+    owner = str(finding.get('repair_owner') or '').strip()
+    if owner != DRAFT_WORKER:
+        raise Fail('GUARD_REPAIR_OWNER_INVALID:' + checker + ':' + owner)
+    error = 'FULL:' + checker + ':' + str(finding.get('error_code') or error_value)
+    state['checks'] = {
+        'status': 'FAIL', 'mode': 'FULL_PRODUCTION', 'errors': [error],
+        'findings': [finding], 'checker': checker,
+        'checked_draft_sha256': state['draft_sha256'],
+        'repair_owner': DRAFT_WORKER, 'repair_owners': [DRAFT_WORKER],
+    }
+    state['last_error'] = error
+    state['phase'] = 'REPAIR_REQUIRED'
+    _engine.save(state, path)
+    print('SYSTEM4_FULL_CHECK_FAIL:' + error + ':REPAIR_OWNER=DRAFT_WORKER:REPAIR_REQUIRED')
+    return 3
+
+
 def cmd_fullcheck(workspace):
     s, p = load(workspace)
     if s['phase'] != 'CHECK_REQUIRED':
@@ -349,9 +370,9 @@ def cmd_fullcheck(workspace):
         content_guard.validate_single_article(text, context['fact_pack'])
         design_guard.validate_design_neutrality(text, s['article']['article_type'])
     except content_guard.ContentGuardError as e:
-        raise Fail('FULL_CHECK_HARD_BLOCK:CONTENT_GUARD:' + str(e)) from e
+        return _guard_repair_or_hard_block(s, p, 'content_guard', str(e))
     except design_guard.DesignGuardError as e:
-        raise Fail('FULL_CHECK_HARD_BLOCK:DESIGN_GUARD:' + str(e)) from e
+        return _guard_repair_or_hard_block(s, p, 'design_guard', str(e))
     repo = Path(__file__).resolve().parent.parent
     try:
         result = production_checks.run_all(repo, s, context['fact_pack'], context['production_plan_item'])
