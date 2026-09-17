@@ -28,6 +28,18 @@ jobs:
             exit 2
           fi
           echo 'REAL_102_NO_MOCK_PASS'
+      - name: Inspect packaged PPM test runners
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/ppm-inspect && mkdir -p /tmp/ppm-inspect
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-inspect
+          ROOT=/tmp/ppm-inspect/portal-production-machine
+          echo 'PPM_TEST_RUNNER_CANDIDATES_BEGIN'
+          find "$ROOT/tests" -maxdepth 2 -type f | sort | grep -Ei '/(run|all|suite|test|bootstrap)[^/]*\.(php|sh)$' || true
+          echo 'PPM_TEST_RUNNER_CANDIDATES_END'
+          echo 'PPM_COMPOSER_BEGIN'
+          if test -f "$ROOT/composer.json"; then cat "$ROOT/composer.json"; else echo NO_COMPOSER; fi
+          echo 'PPM_COMPOSER_END'
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
