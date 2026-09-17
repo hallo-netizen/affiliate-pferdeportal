@@ -1,0 +1,38 @@
+name: System 4A Current Main Full Acceptance Probe
+
+on:
+  push:
+    branches:
+      - hobbyroom/system4a-main-full-acceptance-probe-20260917
+
+permissions:
+  contents: read
+
+jobs:
+  full-acceptance-current-main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 572c48116dc756b1ac7349ed1cc0f16eabc33025
+          fetch-depth: 0
+      - name: Verify exact current main under test
+        run: |
+          test "$(git rev-parse HEAD)" = "572c48116dc756b1ac7349ed1cc0f16eabc33025"
+          echo "SYSTEM4A_CURRENT_MAIN_SHA_PASS=$(git rev-parse HEAD)"
+      - name: Compile System 4A Python
+        run: python -m py_compile isolated_system4/*.py
+      - name: Run complete existing System 4A test suite
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m unittest discover -s isolated_system4 -p 'test_*.py' -v 2>&1 | tee /tmp/system4a-current-main-full.log
+      - name: Preserve failure log
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-current-main-full-acceptance-failure-log
+          path: /tmp/system4a-current-main-full.log
+          if-no-files-found: ignore
+          retention-days: 7
