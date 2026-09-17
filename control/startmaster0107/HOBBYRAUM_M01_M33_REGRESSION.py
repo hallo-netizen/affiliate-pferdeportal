@@ -162,7 +162,11 @@ def m19():
     must("git diff-tree -m" in s,"M19_MERGE_TRIGGER")
 def m20():
     s=(REPO/"control/startmaster0107/chat_delivery_payload.py").read_text(encoding="utf-8")
-    must("EXACTLY_SEVEN_ARTICLES_REQUIRED" in s and "import_envelope" in s and "source_manifest" in s,"M20_DELIVERY")
+    must("EXACTLY_SEVEN_ARTICLES_REQUIRED" not in s,"M20_FIXED_SEVEN_STILL_ACTIVE")
+    must("count = len(articles)" in s and "count < 1" in s,"M20_1N_COUNT_BINDING_MISSING")
+    must('len({a["name"] for a in articles}) != count' in s,"M20_1N_UNIQUENESS_BINDING_MISSING")
+    must('"item_count": count' in s and '"article_count": count' in s,"M20_1N_COUNT_PROPAGATION_MISSING")
+    must("import_envelope" in s and "source_manifest" in s,"M20_DELIVERY_BINDING_MISSING")
 def m21():
     # Hard positive/negative against the real visible-release guard.
     g=mod(REPO/"control/output-quarantine/output_release_gate.py","m21_release_guard")
@@ -309,18 +313,18 @@ def m29():
     expect_exc(lambda:a._validate_release_metadata_identity({"exact_five_batch_sha256":"0"*64,"exact_five_item_count":count},batch,count),"RELEASE_METADATA_BATCH_MISMATCH")
     expect_exc(lambda:a._validate_release_metadata_identity({"exact_five_batch_sha256":batch,"exact_five_item_count":count+1},batch,count),"RELEASE_METADATA_ITEM_COUNT_MISMATCH")
 
-def _final_ctx_fixture(root:Path,wrong_batch=False):
+def _final_ctx_fixture(root:Path,wrong_batch=False,item_count=3):
     d=mod(DUAL,"m30_dual")
     batch="c"*64; out=[]; meta={
       "article_origin_policy":"POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE","authoring_prompt_sha256":"b"*64,
       "authoring_role":"CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS","content_generation_performed_by_supervisor":False,
       "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","created_at_utc":"2026-09-04T00:00:00+00:00",
-      "exact_five_batch_sha256":("d"*64 if wrong_batch else batch),"exact_five_item_count":7,
+      "exact_five_batch_sha256":("d"*64 if wrong_batch else batch),"exact_five_item_count":item_count,
       "frozen_workflow_sha256":"e"*64,"nullpunkt":{},"nullpunkt_sha256":"f"*64,"ppm_baseline_sha256":"1"*64,
       "ppm_version":"6.7.9","research_evidence_policy":"BOUND_EXISTING_FACHWORKFLOW_ONLY","sequence":107008,
       "status":"PASS","wordpress_write_performed":False}
     header={"contract":"production_plan_v4","plan_contract_version":"4.0.0"}
-    for i in range(7):
+    for i in range(item_count):
         p=root/f"FACHWORKFLOW_PASS_{i}.json"
         q={"production_plan_header":header,"workflow_release_metadata":meta,"production_plan_item":{"canonical_article_id":f"article:{i}"},"fact_pack":{"contract":"canonical_fact_pack_v1","fact_pack_id":f"fp{i}"},"workflow_release_item":{"canonical_article_id":f"article:{i}"}}
         dump(p,q);out.append({"released_ref":p.name,"sha256":sha(p)})
@@ -329,11 +333,12 @@ def _final_ctx_fixture(root:Path,wrong_batch=False):
     return d,rp
 
 def m30():
+    for item_count in (1,3):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);d,rp=_final_ctx_fixture(root,False,item_count)
+            ctx=d.context_from_release(root,rp.name);must(len(ctx["production_plan"]["items"])==item_count,"M30_POSITIVE_COUNT")
     with tempfile.TemporaryDirectory() as td:
-        root=Path(td);d,rp=_final_ctx_fixture(root,False)
-        ctx=d.context_from_release(root,rp.name);must(len(ctx["production_plan"]["items"])==7,"M30_POSITIVE_COUNT")
-    with tempfile.TemporaryDirectory() as td:
-        root=Path(td);d,rp=_final_ctx_fixture(root,True)
+        root=Path(td);d,rp=_final_ctx_fixture(root,True,3)
         expect_exc(lambda:d.context_from_release(root,rp.name),"FINAL_CONTEXT_BATCH_MISMATCH")
 
 def m31():
