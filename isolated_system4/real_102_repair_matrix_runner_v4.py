@@ -11,8 +11,10 @@ from pathlib import Path
 import production_checks
 import real_102_repair_matrix_v1 as matrix
 import test_repair_continuity
+import test_textmachine_ppm_negative_gaps as ppm_negative_gaps
 
 CANONICAL = 'tests/test-canonical-runtime-binding.php'
+HISTORICAL = 'tests/test-historical-regressions.php'
 
 
 def _codes(exc: production_checks.RepairRequired) -> list[str]:
@@ -115,8 +117,6 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
         raise AssertionError('CURRENT_MUTATION_TRACE_UNITS_MISSING')
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT', 'trace_lexical_support')
 
-    # Exceed the 2% duplicate threshold with only a few exact duplicates and separate them
-    # with distinct, correct German sentences so LanguageTool does not become the first gate.
     duplicate = 'Die abschließende Sichtprüfung bestätigt den dokumentierten Kontrollpunkt.'
     spacer = [
         'Danach wird der nächste Abschnitt unabhängig davon betrachtet.',
@@ -188,6 +188,31 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
     return {'path': CANONICAL, 'return_code': 0, 'bound_rule_count': len(bound), 'compatibility': 'CURRENT_GREEN_SYSTEM4A_FAQ_MUTATIONS'}
 
 
+def current_historical_content_mutations(ppm_root: Path, rows: list[dict]) -> dict:
+    bound = [r for r in rows if r['scope'] == 'PPM679' and r['negative_test'] == HISTORICAL]
+    expected_codes = {str(r['error_code']) for r in bound}
+    if len(bound) != 22 or len(expected_codes) != 22:
+        raise AssertionError('HISTORICAL_EXPECTED_22_CHANGED:' + str(len(bound)) + ':' + str(len(expected_codes)))
+    probe = str(ppm_negative_gaps.PHP_PROBE)
+    absent = sorted(code for code in expected_codes if code not in probe)
+    if absent:
+        raise AssertionError('HISTORICAL_REAL_PROBE_BINDING_MISSING:' + ','.join(absent))
+    probe_path = ppm_root / 'tests' / 'system4-current-historical-regressions.php'
+    probe_path.write_text(probe, encoding='utf-8')
+    cp = subprocess.run(['php', str(probe_path)], cwd=ppm_root, text=True, capture_output=True)
+    combined = (cp.stdout or '') + '\n' + (cp.stderr or '')
+    if cp.returncode != 0:
+        raise AssertionError('HISTORICAL_REAL_PROBE_FAILED:RC=' + str(cp.returncode) + '\n' + combined[-12000:])
+    # PHP_PROBE's hit() fails closed unless each named validator mutation emits its exact code.
+    print('PPM_TARGETED_NEGATIVE_PASS:' + HISTORICAL + ':22', flush=True)
+    return {
+        'path': HISTORICAL,
+        'return_code': 0,
+        'bound_rule_count': 22,
+        'compatibility': 'CURRENT_REAL_PPM_NEGATIVE_GAPS_PROBE',
+    }
+
+
 def run_ppm_targeted_authorities(ppm_root: Path, rows: list[dict]) -> dict:
     ppm_rows = [r for r in rows if r['scope'] == 'PPM679']
     negative = sorted({r['negative_test'] for r in ppm_rows})
@@ -198,6 +223,9 @@ def run_ppm_targeted_authorities(ppm_root: Path, rows: list[dict]) -> dict:
     for rel in negative:
         if rel == CANONICAL:
             executed_negative.append(current_canonical_mutations(rows))
+            continue
+        if rel == HISTORICAL:
+            executed_negative.append(current_historical_content_mutations(ppm_root, rows))
             continue
         path = ppm_root / rel
         if not path.is_file():
