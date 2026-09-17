@@ -6,7 +6,7 @@
   "immutable_cloud_entry_delegate": "control/cloud-entry-gate/cloud_entry.py",
   "immutable_base_hardlock": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
   "production_continuity_guard": "control/production-continuity/production_continuity_guard.py",
-  "current_state_sha256": "5a7a363ce50f32f2ee0dbbf2f59aa9c75471610ded7922211f2ef419456ffc4b",
+  "current_state_sha256": "cc1519a0e5f74751d4f012c3f35da0e255f9ff323b796754b661575323317bb0",
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "visible_output_policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
   "visible_output_policy_sha256": "4016b9339f042f5eb869a64dd2af81ba82f6156e2dca3be71b255401f1725d17",
@@ -16,9 +16,9 @@
   "codex_start_surface": {
     "type": "GITHUB_PR_COMMENT_CODEX_MENTION",
     "repository": "hallo-netizen/affiliate-pferdeportal",
-    "pr_number": 238,
+    "pr_number": 275,
     "trigger": "@codex",
-    "hard_rule": "If GitHub top-level PR comment creation on PR #238 is available, Codex is startable from chat through that surface. Do not search for a separate Codex plugin and do not substitute GitHub Actions or legacy routes."
+    "hard_rule": "If GitHub top-level PR comment creation on PR #275 is available and PR #275 head is the current working branch, Codex is startable from chat through that surface. Do not search for a separate Codex plugin and do not substitute GitHub Actions or legacy routes."
   },
   "publish_allowed": false,
   "openai_api_required": false,
