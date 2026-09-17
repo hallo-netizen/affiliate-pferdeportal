@@ -55,6 +55,7 @@ def _ppm_repair_owner(node: Mapping[str, Any]) -> str:
         "BLOCKED_CONTENT_TYPE_DEFINITION_MISSING",
         "BLOCKED_CONTENT_HASH_MISMATCH",
         "BLOCKED_KNOWN_ERROR_CONTRACT_MISSING",
+        "BLOCKED_QF03_RENDERED_EVIDENCE_CLASS",
     }
     if code in hard_codes:
         return HARD_BLOCK
@@ -77,6 +78,16 @@ def _ppm_repair_owner(node: Mapping[str, Any]) -> str:
     }:
         return DRAFT_WORKER
     if field.startswith(("content.table.", "content.heading", "content.list", "content.body")):
+        return DRAFT_WORKER
+
+    # QF03 rendered heading defects are article-realisation defects. They do not carry
+    # the PPM content/wave2 prefixes, so bind the three reachable repairable codes
+    # explicitly. Evidence-class failure remains HARD_BLOCK above.
+    if code in {
+        "BLOCKED_QF03_RENDERED_H1_COUNT",
+        "BLOCKED_QF03_RENDERED_DUPLICATE_HEADINGS",
+        "BLOCKED_QF03_RENDERED_ADJACENT_HEADINGS",
+    }:
         return DRAFT_WORKER
 
     # 2. True parent-owned identity/prewrite artefacts. Match scoped fields, not loose
