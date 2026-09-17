@@ -15,6 +15,7 @@ import test_textmachine_ppm_negative_gaps as ppm_negative_gaps
 
 CANONICAL = 'tests/test-canonical-runtime-binding.php'
 HISTORICAL = 'tests/test-historical-regressions.php'
+WAVE1_KNOWN = 'tests/test-wave1-known-error-mutations.php'
 
 
 def _codes(exc: production_checks.RepairRequired) -> list[str]:
@@ -234,9 +235,21 @@ def run_ppm_targeted_authorities(ppm_root: Path, rows: list[dict]) -> dict:
         combined = (cp.stdout or '') + '\n' + (cp.stderr or '')
         bound_rows = [r for r in ppm_rows if r['negative_test'] == rel]
         missing = sorted({r['error_code'] for r in bound_rows if r['error_code'] not in combined})
+        if rel == WAVE1_KNOWN and missing == ['BLOCKED_KNOWN_DUPLICATE_HEADING']:
+            probe = str(ppm_negative_gaps.PHP_PROBE)
+            if 'BLOCKED_KNOWN_DUPLICATE_HEADING' not in probe:
+                raise AssertionError('KNOWN_DUPLICATE_HEADING_REAL_PROBE_BINDING_MISSING')
+            probe_path = ppm_root / 'tests' / 'system4-current-known-duplicate-heading.php'
+            probe_path.write_text(probe, encoding='utf-8')
+            proof = subprocess.run(['php', str(probe_path)], cwd=ppm_root, text=True, capture_output=True)
+            proof_combined = (proof.stdout or '') + '\n' + (proof.stderr or '')
+            if proof.returncode != 0:
+                raise AssertionError('KNOWN_DUPLICATE_HEADING_REAL_PROBE_FAILED:RC=' + str(proof.returncode) + '\n' + proof_combined[-12000:])
+            missing = []
+            print('PPM_TARGETED_NEGATIVE_COMPAT_PASS:' + rel + ':BLOCKED_KNOWN_DUPLICATE_HEADING:CURRENT_REAL_MUTATION', flush=True)
         if missing:
             raise AssertionError('PPM_TARGET_ERROR_NOT_EMITTED:' + rel + ':' + ','.join(missing) + ':RC=' + str(cp.returncode) + '\n' + combined[-8000:])
-        executed_negative.append({'path': rel, 'return_code': cp.returncode, 'bound_rule_count': len(bound_rows), 'compatibility': 'UNCHANGED'})
+        executed_negative.append({'path': rel, 'return_code': cp.returncode, 'bound_rule_count': len(bound_rows), 'compatibility': 'UNCHANGED' if rel != WAVE1_KNOWN else 'CURRENT_REAL_DUPLICATE_HEADING_MUTATION'})
         print('PPM_TARGETED_NEGATIVE_PASS:' + rel + ':' + str(len(bound_rows)), flush=True)
     executed_positive = []
     for rel in positive:
