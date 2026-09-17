@@ -10,8 +10,7 @@ Abgeschottete Test-Runtime für den historischen STARTMASTER0102-Workflow.
 - PSERC 0.28.14
 - PPM 6.7.9
 - LanguageTool 6.8
-- exakt 7 Artikel
-- Batch: `7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a`
+- Batchgröße: beliebig `1..N`
 
 ## Harte Grenze
 KONZEPT NULL endet zwingend `BEFORE_WORDPRESS`.
@@ -20,18 +19,20 @@ Es gibt keine Berechtigung für WordPress-Zugriff, Publish, Deploy, Merge, PR, m
 ## Start
 ```bash
 python3 konzept_null/konzept_null_runner.py preflight
-python3 konzept_null/konzept_null_runner.py init konzept_null/INPUT_7_ARTIKEL.json
+python3 konzept_null/konzept_null_runner.py init /pfad/zur/metadaten-batch.json
 ```
 
-Die Eingabedatei muss exakt 7 Artikel enthalten. Jeder Artikel muss exakt diese gebundenen Metadatenfelder besitzen:
+Die Eingabedatei darf jede Batchgröße ab 1 Artikel enthalten. Jeder Artikel muss diese Metadatenfelder besitzen:
 `title`, `target_keyword`, `category`, `article_type`, `plan_slot`.
 
 Danach werden ausschließlich in dieser Reihenfolge lokale Batch-Artefakte angenommen:
 `RESEARCH -> FACT_PACK -> TEXTMASCHINE -> LANGUAGETOOL_6_8 -> PPM_6_7_9 -> LOCAL_TEST_PACKAGE`.
 
-Alle 7 Artikel bleiben während des Laufs als ein gebundener Batch zusammen. Titel, Keywords, Kategorien, Artikeltypen und Planslots dürfen nicht geändert werden.
+Alle Artikel eines gestarteten Laufs bleiben während dieses Laufs als ein gebundener Batch zusammen. Titel, Keywords, Kategorien, Artikeltypen und Planslots dürfen innerhalb des Laufs nicht geändert werden.
 
-Jeder Reihenfolgefehler, falsche Branch, falsche Artikelzahl, doppelter Planslot, fehlende Bindung oder geöffnete Außenwirkung führt fail-closed zu `KONZEPT_NULL_BLOCKED:*`.
+`INPUT_7_ARTIKEL.json` ist nur ein vorhandenes Testbeispiel für einen 7er-Lauf und besitzt keinerlei Sonderstatus oder feste Systembindung.
+
+Jeder Reihenfolgefehler, falsche Branch, leere Batch, doppelter Planslot, fehlende Metadatenbindung oder geöffnete Außenwirkung führt fail-closed zu `KONZEPT_NULL_BLOCKED:*`.
 
 ## Selbsttests
 ```bash
@@ -39,4 +40,4 @@ cd konzept_null
 python3 -m unittest -v test_konzept_null_runner.py
 ```
 
-Erst nach `KONZEPT_NULL_PREFLIGHT_PASS` darf der 7er-Testlauf beginnen.
+Die Tests decken mindestens Batchgrößen 1, 7 und 25 sowie Negativfälle ab. Erst nach `KONZEPT_NULL_PREFLIGHT_PASS` darf ein Testlauf beginnen.
