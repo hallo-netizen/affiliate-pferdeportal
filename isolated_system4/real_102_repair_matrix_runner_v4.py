@@ -91,12 +91,16 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_FACT_PACK_COVERAGE', 'fact_pack_coverage')
 
     # The rule requires >=80% supported trace units. Break every trace-bearing factual unit,
-    # while leaving each trace tag and fact binding intact, so this exact ratio must fall.
+    # while leaving each trace tag and fact binding intact. Use ordinary, well-formed German
+    # sentences so LanguageTool stays green and PPM receives the intended lexical mutation.
     trace_unit_pattern = r'(<p\b[^>]*data-fact-ids="[^"]+"[^>]*>)(.*?)(<span\b[^>]*class="ppm-source-trace"[^>]*>.*?</span>)(.*?</p>)'
+    lexical_words = ['Garten', 'Fenster', 'Lampe', 'Kissen', 'Regal', 'Tasse', 'Vorhang', 'Schrank', 'Teppich', 'Buch', 'Vase', 'Stuhl']
     lexical_index = {'n': 0}
     def lexical(m):
+        word = lexical_words[lexical_index['n'] % len(lexical_words)]
         lexical_index['n'] += 1
-        return m.group(1) + 'Xylophon Quasar Nebel Vulkan Marmor Zirkus Phantom Nummer ' + str(lexical_index['n']) + '. ' + m.group(3) + m.group(4)
+        sentence = 'Dieser bewusst sachfremde Beispielsatz beschreibt ausschließlich einen ruhigen ' + word + ' im Raum.'
+        return m.group(1) + sentence + ' ' + m.group(3) + m.group(4)
     h, changed = re.subn(trace_unit_pattern, lexical, html, flags=re.I | re.S)
     if changed < 1:
         raise AssertionError('CURRENT_MUTATION_TRACE_UNITS_MISSING')
