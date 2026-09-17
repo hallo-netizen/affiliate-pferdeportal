@@ -120,7 +120,9 @@ class StageOwnerReturnContractTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
-            _, state_paths = test_batch_gate.make_fixture(root / 'fixture', count=1)
+            fixture_root = root / 'fixture'
+            fixture_root.mkdir()
+            _, state_paths = test_batch_gate.make_fixture(fixture_root, count=1)
             state = json.loads(state_paths[0].read_text(encoding='utf-8'))
             state['phase'] = 'DRAFT_REQUIRED'
             state['route_contract'] = controller.ROUTE_CONTRACT
