@@ -17,11 +17,9 @@ import root_entry
 import root_supervisor_bridge
 import worker_dispatch
 
-# Re-export the existing controller API first so existing callers/tests keep the same surface.
 for _name in dir(_engine):
     if not _name.startswith('__') and _name not in {'cmd_fullcheck', 'main', 'load'}:
         globals()[_name] = getattr(_engine, _name)
-
 
 DRAFT_WORKER = 'DRAFT_WORKER'
 RESEARCH_WORKER = 'RESEARCH_WORKER'
@@ -34,8 +32,6 @@ FACTS_STAGE = 'FACTS_STAGE'
 CONTEXT_STAGE = 'CONTEXT_STAGE'
 MULTI_OWNER_RETURN = 'MULTI_OWNER_RETURN'
 
-# ONE machine-readable truth for the article production route.  The same structure
-# drives route locking, completeness, and controlled repair rollback.
 ROUTE_CONTRACT = 'SYSTEM4_CANONICAL_ARTICLE_ROUTE_V1'
 ARTICLE_ROUTE = (
     ('RESEARCH', RESEARCH_WORKER, 'research', 'RESEARCH_REQUIRED'),
@@ -75,8 +71,6 @@ def _route_contract_digest() -> str:
 
 def _verify_route_state(state: dict) -> None:
     contract = state.get('route_contract')
-    # Direct low-level unit states created outside the production root remain readable;
-    # the real root always binds this contract at ingress and is strict from that point.
     if contract is None:
         return
     if contract != ROUTE_CONTRACT:
@@ -141,7 +135,6 @@ def _record_stage_success(workspace: str, command: str) -> None:
 
 
 def _machine_route_lock(command: str, workspace: str) -> None:
-    """Fail closed unless the existing Root -> Supervisor route owns this workspace."""
     command = str(command or '').strip()
     w = Path(workspace)
     if not w.is_dir():
@@ -149,7 +142,6 @@ def _machine_route_lock(command: str, workspace: str) -> None:
     for name in _MACHINE_ROUTE_FILES:
         if not (w / name).is_file():
             raise Fail('MACHINE_ROUTE_BLOCK:' + name.upper().replace('.', '_') + '_MISSING')
-
     if command == 'ingress':
         if (w / 'state.json').exists():
             raise Fail('MACHINE_ROUTE_BLOCK:INGRESS_STATE_ALREADY_EXISTS')
@@ -158,7 +150,6 @@ def _machine_route_lock(command: str, workspace: str) -> None:
         except Exception as exc:
             raise Fail('MACHINE_ROUTE_BLOCK:ROOT_SUPERVISOR_BINDING_INVALID:' + str(exc)) from exc
         return
-
     if command not in _POST_INGRESS_COMMANDS:
         raise Fail('MACHINE_ROUTE_BLOCK:COMMAND_NOT_ALLOWED:' + command)
     if not (w / 'state.json').is_file():
@@ -180,7 +171,6 @@ def _machine_route_lock(command: str, workspace: str) -> None:
 
 
 def _repair_owners(e) -> tuple[str, ...]:
-    """Return every safely classified repair owner; unknown findings fail closed."""
     findings = e.findings if isinstance(getattr(e, 'findings', None), list) else []
     owners = {str(row.get('repair_owner') or '').strip() for row in findings if isinstance(row, dict) and str(row.get('repair_owner') or '').strip()}
     checker = str(getattr(e, 'checker', '') or '')
@@ -197,20 +187,16 @@ def _repair_owner(e):
 
 
 def _stage_owner_route(command: str, message: str):
-    """Return only safely repairable producer-stage errors."""
     command = str(command or '').strip().casefold()
     message = str(message or '').strip()
-
     if command == 'research':
         if message.startswith('RESEARCH_EVIDENCE_FAIL:'):
             return RESEARCH_WORKER, RESEARCH_STAGE
         return None
-
     if command == 'facts':
         if message.startswith('FACTS_EVIDENCE_FAIL:'):
             return FACTS_WORKER, FACTS_STAGE
         return None
-
     if command == 'context':
         prefix = 'PRODUCTION_CONTEXT_FAIL:'
         if not message.startswith(prefix):
@@ -219,22 +205,20 @@ def _stage_owner_route(command: str, message: str):
         if inner.startswith(('FACT_PACK_', 'FACT_ID_', 'FACT_SOURCE_', 'FACT_STATEMENT_', 'FACT_EVIDENCE_')):
             return CONTEXT_WORKER, CONTEXT_STAGE
         return None
-
     if command == 'draft':
-        prefix = 'ARTICLE_AUTHORING_CONTRACT_FAIL:'
-        if not message.startswith(prefix):
+        real_prefix = 'AUTHORING_CONTRACT_FAIL:'
+        legacy_prefix = 'ARTICLE_AUTHORING_CONTRACT_FAIL:'
+        if message.startswith(real_prefix):
+            inner = message[len(real_prefix):]
+        elif message.startswith(legacy_prefix):
+            inner = message[len(legacy_prefix):]
+        else:
             return None
-        inner = message[len(prefix):]
         if inner == 'FACT_PACK_CLAIM_COUNT_INVALID':
             return CONTEXT_WORKER, CONTEXT_STAGE
-        if inner.startswith((
-            'PREWRITE_BOUND_LINK_MISSING:',
-            'PREWRITE_EXTERNAL_LINK_FORBIDDEN',
-            'PREWRITE_LINK_COUNT:',
-        )):
+        if inner.startswith(('PREWRITE_BOUND_LINK_MISSING:','PREWRITE_EXTERNAL_LINK_FORBIDDEN','PREWRITE_LINK_COUNT:')):
             return DRAFT_WORKER, DRAFT_STAGE
         return None
-
     return None
 
 
@@ -254,12 +238,7 @@ def _stage_owner_call(command: str, fn, workspace: str, *args: str) -> int:
         if before is None or after != before:
             raise Fail('STAGE_OWNER_RETURN_STATE_MUTATED:' + command) from exc
         owner, route = routed
-        current_owner = {
-            'research': RESEARCH_WORKER,
-            'facts': FACTS_WORKER,
-            'context': CONTEXT_WORKER,
-            'draft': DRAFT_WORKER,
-        }.get(command)
+        current_owner = {'research': RESEARCH_WORKER,'facts': FACTS_WORKER,'context': CONTEXT_WORKER,'draft': DRAFT_WORKER}.get(command)
         if owner != current_owner:
             state, path = load(workspace)
             repaired_owner = _rollback_upstream_worker(state, path, (owner,), message)
@@ -270,45 +249,27 @@ def _stage_owner_call(command: str, fn, workspace: str, *args: str) -> int:
 
 
 def _rollback_upstream_worker(state: dict, path: Path, owners: tuple[str, ...], error: str) -> str | None:
-    """Return the SAME article to the earliest responsible worker stage.
-
-    Parent/machine binding owners are deliberately not mutated here: changing sealed
-    metadata/links/Point-0 in an article repair would violate authority separation.
-    """
     worker_owners = [owner for owner in owners if owner in OWNER_TO_ROUTE]
     parent_owners = [owner for owner in owners if owner not in OWNER_TO_ROUTE]
     if parent_owners:
         return None
     if not worker_owners:
         return None
-
     order = {owner: index for index, (_, owner, _, _) in enumerate(ARTICLE_ROUTE)}
     target = min(worker_owners, key=lambda owner: order[owner])
     if target == DRAFT_WORKER and set(worker_owners) == {DRAFT_WORKER}:
         return None
-
     target_index = order[target]
     target_stage, _, _, target_phase = ARTICLE_ROUTE[target_index]
     counts = dict(state.get('repair_return_counts') or {})
     attempt = int(counts.get(target, 0)) + 1
     if attempt > MAX_UPSTREAM_REPAIR_RETURNS:
         raise Fail('REPAIR_RETURN_LIMIT_EXHAUSTED:' + target)
-
     immutable_before = state.get('immutable_core_sha256')
     article_before = json.loads(json.dumps(state.get('article'), ensure_ascii=False))
     counts[target] = attempt
     history = list(state.get('repair_history') or [])
-    history.append({
-        'error': error,
-        'owners': list(owners),
-        'return_owner': target,
-        'return_stage': target_stage,
-        'attempt': attempt,
-        'same_article': True,
-    })
-
-    # Invalidate the target producer and every downstream artifact.  No stale evidence
-    # may survive a repair return.
+    history.append({'error': error,'owners': list(owners),'return_owner': target,'return_stage': target_stage,'attempt': attempt,'same_article': True})
     if target_index <= 0:
         state['research'] = None
     if target_index <= 1:
@@ -327,7 +288,6 @@ def _rollback_upstream_worker(state: dict, path: Path, owners: tuple[str, ...], 
     state['repair_history'] = history
     state['route_progress'] = list(CANONICAL_COMPLETION_TRACE[:target_index])
     state['phase'] = target_phase
-
     if state.get('immutable_core_sha256') != immutable_before or state.get('article') != article_before:
         raise Fail('REPAIR_RETURN_SAME_ARTICLE_VIOLATION')
     _engine.save(state, path)
@@ -353,12 +313,7 @@ def _guard_repair_or_hard_block(state: dict, path: Path, checker: str, error_val
     if owner != DRAFT_WORKER:
         raise Fail('GUARD_REPAIR_OWNER_INVALID:' + checker + ':' + owner)
     error = 'FULL:' + checker + ':' + str(finding.get('error_code') or error_value)
-    state['checks'] = {
-        'status': 'FAIL', 'mode': 'FULL_PRODUCTION', 'errors': [error],
-        'findings': [finding], 'checker': checker,
-        'checked_draft_sha256': state['draft_sha256'],
-        'repair_owner': DRAFT_WORKER, 'repair_owners': [DRAFT_WORKER],
-    }
+    state['checks'] = {'status':'FAIL','mode':'FULL_PRODUCTION','errors':[error],'findings':[finding],'checker':checker,'checked_draft_sha256':state['draft_sha256'],'repair_owner':DRAFT_WORKER,'repair_owners':[DRAFT_WORKER]}
     state['last_error'] = error
     state['phase'] = 'REPAIR_REQUIRED'
     _engine.save(state, path)
@@ -395,25 +350,16 @@ def cmd_fullcheck(workspace):
         owners = _repair_owners(e)
         error = 'FULL:' + e.checker + ':' + code
         owner_value = owners[0] if len(owners) == 1 else MULTI_OWNER_RETURN
-        s['checks'] = {
-            'status': 'FAIL', 'mode': 'FULL_PRODUCTION', 'errors': [error],
-            'findings': findings, 'checker': e.checker,
-            'checked_draft_sha256': s['draft_sha256'],
-            'repair_owner': owner_value, 'repair_owners': list(owners),
-        }
+        s['checks'] = {'status':'FAIL','mode':'FULL_PRODUCTION','errors':[error],'findings':findings,'checker':e.checker,'checked_draft_sha256':s['draft_sha256'],'repair_owner':owner_value,'repair_owners':list(owners)}
         s['last_error'] = error
         if owners == (DRAFT_WORKER,):
             s['phase'] = 'REPAIR_REQUIRED'
             _engine.save(s, p)
             print('SYSTEM4_FULL_CHECK_FAIL:' + error + ':REPAIR_OWNER=DRAFT_WORKER:REPAIR_REQUIRED')
             return 3
-
-        # Root-cause fix: worker-owned upstream defects are repaired inside the same
-        # article/workspace.  Only parent/machine authority defects leave this route.
         repaired_owner = _rollback_upstream_worker(s, p, owners, error)
         if repaired_owner is not None:
             return 0
-
         s['checks']['return_required'] = True
         s['checks']['return_route'] = PARENT_LAUNCH
         s['phase'] = 'CHECK_REQUIRED'
@@ -422,11 +368,7 @@ def cmd_fullcheck(workspace):
         return 4
     except production_checks.ProductionCheckError as e:
         raise Fail('FULL_CHECK_HARD_BLOCK:' + str(e)) from e
-
-    s['checks'] = {
-        'status': 'PASS', 'mode': 'FULL_PRODUCTION', 'errors': [],
-        'checked_draft_sha256': s['draft_sha256'], 'production_evidence': result,
-    }
+    s['checks'] = {'status':'PASS','mode':'FULL_PRODUCTION','errors':[],'checked_draft_sha256':s['draft_sha256'],'production_evidence':result}
     s['last_error'] = None
     s['phase'] = 'OUTPUT_GATE_REQUIRED'
     if s.get('route_contract') is not None:
@@ -457,7 +399,6 @@ def main(argv):
             if len(argv) < 3:
                 raise Fail('BAD_COMMAND')
             _machine_route_lock(cmd, argv[2])
-
         if cmd == 'research':
             if len(argv) != 4: raise Fail('BAD_COMMAND')
             return _stage_owner_call('research', _engine.cmd_research, argv[2], argv[3])
