@@ -17,62 +17,29 @@ jobs:
       - uses: actions/checkout@v4
       - name: Exact head
         run: git rev-parse HEAD
-      - name: Derive exact scoped PPM owner partition from validator code
-        env:
-          PYTHONPATH: isolated_system4
+      - name: Inspect exact parent and portal PPM diagnostics
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm679
           mkdir -p /tmp/ppm679
           unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
-          python3 - <<'PY'
-          import json,re
-          from collections import Counter
-          from pathlib import Path
-          import production_checks
-          root=Path('/tmp/ppm679/portal-production-machine')
-          rows=json.loads((root/'contracts/hard-rule-registry-v1.json').read_text())['rules']
-          base=[r for r in rows if r.get('source_path') in {'includes/content-validator.php','includes/content-structure-language-gate.php','includes/known-error-gate.php'}]
-          hard_codes={
-            'BLOCKED_WAVE2_CONTRACT_MISSING','BLOCKED_WAVE2_QUALITY_BINDING_MISSING','BLOCKED_WAVE2_QUALITY_BINDING_HASH',
-            'BLOCKED_WAVE2_INTERNAL_MARKER_MISSING','BLOCKED_WAVE2_LINK_REGISTRY_HASH','BLOCKED_MAINBLOCK1_LANGUAGE_DELTA_EVIDENCE',
-            'BLOCKED_WAVE2_LANGUAGE_EVIDENCE','BLOCKED_VALIDATION_CONTRACT_VERSION_MISSING','BLOCKED_SECTION_REQUIREMENTS_HASH_MISMATCH',
-            'BLOCKED_VALIDATION_CONTRACT_VERSION_UNKNOWN','BLOCKED_CONTENT_TYPE_DEFINITION_MISSING','BLOCKED_CONTENT_HASH_MISMATCH',
-            'BLOCKED_KNOWN_ERROR_CONTRACT_MISSING'}
-          repair=[r for r in base if r.get('error_code') not in hard_codes]
-          rendered=[
-            {'rule_id':'W4::R8-0786','error_code':'BLOCKED_QF03_RENDERED_H1_COUNT','source_path':'includes/rendered-dom-validator.php'},
-            {'rule_id':'W4::R8-0787','error_code':'BLOCKED_QF03_RENDERED_DUPLICATE_HEADINGS','source_path':'includes/rendered-dom-validator.php'},
-            {'rule_id':'W4::R8-0788','error_code':'BLOCKED_QF03_RENDERED_ADJACENT_HEADINGS','source_path':'includes/rendered-dom-validator.php'},
-          ]
-          repair += rendered
-          assert len(base)==100, len(base)
-          assert len(repair)==89, len(repair)
-          owners=[]
-          for r in repair:
-            code=r['error_code']; text=(root/r['source_path']).read_text(errors='replace')
-            pos=text.find(code)
-            field=''
-            if pos>=0:
-              window=text[max(0,pos-1800):pos+1800]
-              # Prefer a field_path literal nearest the error code.
-              matches=list(re.finditer(r"['\"]field_path['\"]\s*=>\s*['\"]([^'\"]+)['\"]",window))
-              if matches:
-                center=1800 if pos>=1800 else pos
-                m=min(matches,key=lambda x:abs(x.start()-center)); field=m.group(1)
-            node={'error_code':code,'field_path':field}
-            owner=production_checks._ppm_repair_owner(node)
-            owners.append((r['rule_id'],code,field,owner))
-          c=Counter(x[3] for x in owners)
-          print('OWNER_COUNTS',dict(c))
-          for row in owners:
-            if row[3] != 'DRAFT_WORKER': print('NON_DRAFT',row)
-          PY
-      - name: Run exact PPM coverage authority
-        run: php /tmp/ppm679/portal-production-machine/tests/test-mainblock1-hard-rule-coverage.php
-      - name: Run current exact negative-gap PPM proof
+          ROOT=/tmp/ppm679/portal-production-machine
+          for code in \
+            BLOCKED_CONTENT_FAQ_TITLE_QUESTION_MARK \
+            BLOCKED_CONTENT_TITLE_COLON \
+            BLOCKED_CONTENT_TARGET_KEYWORD_TITLE \
+            BLOCKED_WAVE2_WORDPRESS_CATEGORY \
+            BLOCKED_WAVE2_RUNTIME_LINK_ROLE \
+            BLOCKED_WAVE2_INTERNAL_LINK_ROLE_MISSING \
+            BLOCKED_WAVE2_BOUND_LINK_MISSING \
+            BLOCKED_CONTENT_UNBOUND_INTERNAL_LINK \
+            BLOCKED_CONTENT_BOUND_LINK_MISSING; do
+            echo "===== $code ====="
+            grep -RFn -B18 -A28 "$code" "$ROOT/includes" || true
+          done
+      - name: Run exact PPM targeted negatives
         working-directory: isolated_system4
         run: python3 -m unittest -v test_textmachine_ppm_negative_gaps.py
-      - name: Run current guard negative proof
+      - name: Run exact guard targeted negatives
         working-directory: isolated_system4
         run: python3 -m unittest -v test_textmachine_negative_gap_guards.py
