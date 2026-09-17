@@ -27,7 +27,7 @@ jobs:
             if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then exit 2; fi
           done
           echo 'REAL_102_NO_MOCK_PASS'
-      - name: Map historical content regressions to real tests
+      - name: Inspect exact historical content rule conditions
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm-authority && mkdir -p /tmp/ppm-authority
@@ -57,7 +57,7 @@ jobs:
             BLOCKED_CONTENT_UNBOUND_INTERNAL_LINK \
             BLOCKED_CONTENT_VISIBLE_LINK_COUNT; do
               echo "=== $code ==="
-              grep -RFl --include='*.php' "$code" "$ROOT/tests" || true
+              grep -RFn -B8 -A10 "$code" "$ROOT/includes" || true
           done
       - name: Download hash-bound LanguageTool 6.8
         run: |
