@@ -4,89 +4,30 @@ on:
     branches:
       - hobbyroom/system4a-remove-fixed-seven-20260917
 permissions:
-  contents: write
+  contents: read
 jobs:
-  patch:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: hobbyroom/system4a-remove-fixed-seven-20260917
-          fetch-depth: 0
-      - name: Remove fixed seven and harden 1..N
+      - name: Exact head and binding hashes
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          def replace_once(path, old, new):
-              p=Path(path); s=p.read_text(encoding='utf-8'); n=s.count(old)
-              if n != 1:
-                  raise SystemExit(f'{path}:EXPECTED_ONCE:{n}:{old[:80]}')
-              p.write_text(s.replace(old,new),encoding='utf-8')
-
-          replace_once(
-              'control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json',
-              'Nur DELIVERY_HANDOFF_READY, article_count=7, encoding=gzip+base64 und publish_allowed=false ist zulässig. Das Delivery-Envelope transportiert byte-identisch die bereits freigegebenen Artikel, das PSERC_APPROVED_PRODUCTION_PACKAGE_V1 als import_envelope_json und das hashgebundene source_manifest. Die feste 7 wird im nächsten Hard-Rule-Punkt separat entfernt; sie ist nicht Teil dieser V2-Eingabebindung.',
-              'Nur DELIVERY_HANDOFF_READY, article_count>=1 und article_count exakt gleich der hashgebundenen SYSTEM4_107008_V2_INPUT_BINDING_V1-/Release-Menge, encoding=gzip+base64 und publish_allowed=false ist zulässig. Das Delivery-Envelope transportiert byte-identisch die bereits freigegebenen Artikel, das PSERC_APPROVED_PRODUCTION_PACKAGE_V1 als import_envelope_json und das hashgebundene source_manifest. Die Mengenautorität ist ausschließlich der gebundene 1..N-Batch; es gibt keine feste Artikelzahl.'
-          )
-
-          replace_once(
-              '.github/workflows/pferde-atelier-endstempel.yml',
-              "          if req.get('article_count')!=7: raise SystemExit('SIGN_REQUEST_COUNT_INVALID')",
-              "          count=req.get('article_count')\n          if isinstance(count,bool) or not isinstance(count,int) or count<1: raise SystemExit('SIGN_REQUEST_COUNT_INVALID')"
-          )
-          replace_once(
-              '.github/workflows/pferde-atelier-endstempel.yml',
-              "          if m.get('article_count')!=7 or len(m.get('articles') or [])!=7: raise SystemExit('FINAL_ARTICLE_COUNT_INVALID')",
-              "          count=m.get('article_count')\n          if isinstance(count,bool) or not isinstance(count,int) or count<1 or len(m.get('articles') or [])!=count: raise SystemExit('FINAL_ARTICLE_COUNT_INVALID')"
-          )
-
-          replace_once(
-              'control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py',
-              '    if not isinstance(articles, list) or len(articles) != 7:\n        raise Blocked("HANDOFF_LOCK_ARTICLE_COUNT_INVALID")',
-              '    if not isinstance(articles, list) or len(articles) < 1:\n        raise Blocked("HANDOFF_LOCK_ARTICLE_COUNT_INVALID")'
-          )
-          replace_once(
-              'control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py',
-              '        "article_count": 7,',
-              '        "article_count": len(expected),'
-          )
-
-          replace_once(
-              'isolated_system4/downstream_1n_contract_probe.py',
-              'STEP107008 = REPO / "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json"\n',
-              'STEP107008 = REPO / "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json"\nENDSTEMPEL_GATE = REPO / "control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py"\nENDSTEMPEL_WORKFLOW = REPO / ".github/workflows/pferde-atelier-endstempel.yml"\n'
-          )
-          replace_once(
-              'isolated_system4/downstream_1n_contract_probe.py',
-              '    final_text = FINAL_PATH.read_text(encoding="utf-8")\n',
-              '    gate_text = ENDSTEMPEL_GATE.read_text(encoding="utf-8")\n    workflow_text = ENDSTEMPEL_WORKFLOW.read_text(encoding="utf-8")\n    forbidden = (\n        "len(articles) != 7",\n        "\\\"article_count\\\": 7",\n        "req.get(\'article_count\')!=7",\n        "m.get(\'article_count\')!=7",\n        "len(m.get(\'articles\') or [])!=7",\n    )\n    for token in forbidden:\n        if token in gate_text or token in workflow_text:\n            raise AssertionError("DOWNSTREAM_FIXED_SEVEN_STILL_ACTIVE:" + token)\n\n    final_text = FINAL_PATH.read_text(encoding="utf-8")\n'
-          )
-          replace_once(
-              'isolated_system4/downstream_1n_contract_probe.py',
-              '    exercise_count(25)\n',
-              '    exercise_count(25)\n    exercise_count(1000)\n'
-          )
-          replace_once(
-              'isolated_system4/downstream_1n_contract_probe.py',
-              '    print("POSITIVE_COUNTS=1,3,25")\n',
-              '    print("POSITIVE_COUNTS=1,3,25,1000")\n'
-          )
-
-          replace_once(
-              '.github/workflows/system4a-real-acceptance.yml',
-              '      - name: Inspect real WordPress importer contract\n        run: python3 isolated_system4/wordpress_import_contract_probe.py | tee /tmp/system4-wordpress-import-contract.txt\n',
-              '      - name: Inspect real WordPress importer contract\n        run: python3 isolated_system4/wordpress_import_contract_probe.py | tee /tmp/system4-wordpress-import-contract.txt\n      - name: Prove downstream 1..N contract including ENDSTEMPEL\n        run: python3 isolated_system4/downstream_1n_contract_probe.py | tee /tmp/system4-downstream-1n-contract.txt\n'
-          )
-          PY
-          git diff --check
-          python3 isolated_system4/downstream_1n_contract_probe.py
-          python3 -m unittest control.startmaster0107.test_system4_107008_handoff -v
-          PYTHONPATH=isolated_system4 python3 -m unittest isolated_system4.test_handoff_transport -v
-      - name: Commit 1..N hard rule
+          git rev-parse HEAD
+          sha256sum control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
+          sha256sum control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
+          sha256sum control/startmaster0107/CURRENT_STATE.json
+      - name: Downstream 1..N contract
+        run: python3 isolated_system4/downstream_1n_contract_probe.py
+      - name: V2 to 107008 bridge
+        run: python3 -m unittest control.startmaster0107.test_system4_107008_handoff -v
+      - name: Handoff transport 1..N
+        run: PYTHONPATH=isolated_system4 python3 -m unittest isolated_system4.test_handoff_transport -v
+      - name: Source hardlock scan
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json .github/workflows/pferde-atelier-endstempel.yml control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py isolated_system4/downstream_1n_contract_probe.py .github/workflows/system4a-real-acceptance.yml
-          git commit -m 'system4: remove fixed seven from downstream production path'
-          git push origin HEAD:hobbyroom/system4a-remove-fixed-seven-20260917
+          set -euo pipefail
+          ! grep -nF 'article_count=7' control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
+          ! grep -nF "req.get('article_count')!=7" .github/workflows/pferde-atelier-endstempel.yml
+          ! grep -nF "m.get('article_count')!=7" .github/workflows/pferde-atelier-endstempel.yml
+          ! grep -nF 'len(articles) != 7' control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py
+          ! grep -nF '"article_count": 7' control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py
+          echo SYSTEM4_DOWNSTREAM_FIXED_SEVEN_REMOVED_PASS
