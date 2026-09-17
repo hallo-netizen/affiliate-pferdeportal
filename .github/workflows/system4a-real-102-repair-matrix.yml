@@ -82,11 +82,12 @@ jobs:
           assert d['publish_allowed'] is False
           print('REAL_102_PROOF_FILE_PASS')
           PY
-      - name: Run hard-block and W4 routing regression
+      - name: Run hard-block, stage-owner and W4 routing regression
         working-directory: isolated_system4
         run: |
           set -euo pipefail
           python3 -m unittest -v test_textmachine_hardblock_matrix.py
+          python3 -m unittest -v test_stage_owner_return_contract.py
           python3 - <<'PY'
           import production_checks
           for code in ('BLOCKED_QF03_RENDERED_H1_COUNT','BLOCKED_QF03_RENDERED_DUPLICATE_HEADINGS','BLOCKED_QF03_RENDERED_ADJACENT_HEADINGS'):
