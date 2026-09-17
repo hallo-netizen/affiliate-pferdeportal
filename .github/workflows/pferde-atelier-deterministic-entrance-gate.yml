@@ -29,6 +29,7 @@ on:
       - 'control/startmaster0107/**'
       - 'control/CURRENT_STARTMASTER.json'
       - 'protocol/**'
+      - 'isolated_system4/**'
       - '.github/workflows/**'
   workflow_dispatch:
 
