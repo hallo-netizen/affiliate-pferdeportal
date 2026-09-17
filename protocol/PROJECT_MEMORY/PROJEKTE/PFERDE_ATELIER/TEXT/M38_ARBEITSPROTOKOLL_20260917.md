@@ -11,6 +11,17 @@ Der erste frische Artikel erreichte nach realer LanguageTool-Reparatur den reale
 
 107008 wurde nicht erreicht. Kein WordPress-Write, kein Publish.
 
+## GEBUNDENE HISTORY-BASIS
+
+Realtest-Baseline / current main:
+`f1d1605f18bd23d9189f89ad173598958718d08a`
+
+Letzter belastbarer Recovery-Stand:
+`bb005a5324a0a6270aacb52b5927613bde1ab4bc`
+
+Maschinensoll: M01–M37 PASS, M38 erster neuer FAIL.
+Kein Publish.
+
 ## M38
 
 M38 registriert ausschließlich die Versionsbindung des current Fachworkflow-`production_plan_header` für `production_plan_v4`.
