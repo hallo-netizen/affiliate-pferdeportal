@@ -4,7 +4,7 @@
   "authoritative_current_state_path": "control/startmaster0107/CURRENT_STATE.json",
   "central_pointer_ref": "control/CURRENT_STARTMASTER.json",
   "central_pointer_policy": "NAVIGATION_ONLY_NO_SECOND_DYNAMIC_STATE",
-  "status": "READY_REAL_107007_CODEX_START_SURFACE_AVAILABLE",
+  "status": "CODEX_107007_START_REQUESTED_AWAITING_CONNECTOR_ACK",
   "publish_allowed": false,
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
   "runtime_proof": {
@@ -34,9 +34,11 @@
     "article_count": 7
   },
   "real_production_run": {
-    "status": "NOT_STARTED",
+    "status": "START_REQUESTED",
     "articles_produced": "0/7",
     "wordpress_handoff_present": false,
+    "codex_start_pr": 275,
+    "codex_start_comment_id": 5712686515,
     "start_attempt_protocol": "protocol/STARTMASTER0107_REAL_107007_CODEX_START_20260917.md"
   },
   "codex_start_surface": {
@@ -66,7 +68,7 @@
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "next_action": "Use the durable GitHub PR #275 @codex start surface and start the real 107007 production run against the exact bound SYSTEM4_PARENT_LAUNCH_V1."
+    "next_action": "Verify the Codex connector acknowledgement/result on PR #275 comment 5712686515, then follow the real 107007 run to SYSTEM4_WORDPRESS_HANDOFF_V1.json without substituting another route."
   },
   "mandatory_execution_path": [
     "control/output-quarantine/runtime_entry_gate.py",
@@ -87,7 +89,7 @@
     "SYSTEM4_WORDPRESS_HANDOFF_V1.json"
   ],
   "hobbyroom": {
-    "status": "READY_FOR_REAL_107007_CODEX_START",
+    "status": "CODEX_START_REQUESTED",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
     "completed": [
       1,
@@ -99,7 +101,7 @@
       5
     ],
     "current_focus": "REAL_107007_CODEX_PRODUCTION_START",
-    "next_action": "Trigger @codex on PR #275 with the exact bound 107007 System4 production task; then execute and prove the real 7-article production run.",
+    "next_action": "Verify the Codex task launched from PR #275 comment 5712686515 and follow the real 7-article production run to its machine result.",
     "return_path": "same article -> existing repair route -> complete text-machine recheck"
   }
 }
