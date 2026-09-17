@@ -4,7 +4,7 @@
   "authoritative_current_state_path": "control/startmaster0107/CURRENT_STATE.json",
   "central_pointer_ref": "control/CURRENT_STARTMASTER.json",
   "central_pointer_policy": "NAVIGATION_ONLY_NO_SECOND_DYNAMIC_STATE",
-  "status": "CODEX_107007_START_REQUESTED_AWAITING_CONNECTOR_ACK",
+  "status": "CODEX_107007_RESTART_READY_CORRECTED_BOUND_SHA",
   "publish_allowed": false,
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
   "runtime_proof": {
@@ -30,15 +30,20 @@
     "system4_only": true,
     "legacy_fachworkflow_fallback_allowed": false,
     "bound_launch_ref": "isolated_system4/bound_launches/production_107007_batch_7_20260917.json",
-    "bound_launch_sha256": "bf629ea68555f3a14166f1b10eb9ae5910a2e9ae06881aac48f9aa6a9f4f423e",
+    "bound_launch_sha256": "1bfefd0370251ca45ba5868e80a244182da76a865f7713e0b3bde6d5ff492d59",
+    "bound_launch_git_blob_sha": "7f4236359500cc6ed4bec5ec5f3aca737845a6da",
     "article_count": 7
   },
   "real_production_run": {
-    "status": "START_REQUESTED",
+    "status": "RESTART_READY_AFTER_CORRECTED_BOUND_SHA",
     "articles_produced": "0/7",
     "wordpress_handoff_present": false,
     "codex_start_pr": 275,
-    "codex_start_comment_id": 5712686515,
+    "failed_start_comment_ids": [
+      5712686515,
+      5712724029
+    ],
+    "last_failure": "PARENT_BOUND_CAPSULE_SHA_MISMATCH",
     "start_attempt_protocol": "protocol/STARTMASTER0107_REAL_107007_CODEX_START_20260917.md"
   },
   "codex_start_surface": {
@@ -48,11 +53,11 @@
     "pr_number": 275,
     "trigger": "@codex",
     "availability_test": "Chat must be able to create a top-level PR conversation comment on PR #275 via the connected GitHub tool.",
-    "proof": "PR #238 provides historical proof that @codex PR comments start chatgpt-codex-connector tasks; PR #275 is the durable start surface bound to the current working branch.",
+    "proof": "PR #238 proves @codex PR comments start chatgpt-codex-connector tasks; PR #275 is the durable start surface bound to the current working branch.",
     "hard_rule": [
       "Do not search for or require a separate Codex plugin when GitHub PR comment write access is available.",
-      "For a Codex NEXT ACTION, first verify PR #275 is open, its head is the current working branch, and GitHub top-level PR comment creation is available.",
-      "Then trigger Codex only by a top-level @codex comment on PR #275 containing the exact bound task.",
+      "For a Codex NEXT ACTION, verify PR #275 is open, its head is the current working branch, and GitHub top-level PR comment creation is available.",
+      "Trigger Codex only by a top-level @codex comment on PR #275 containing the exact bound first command.",
       "Do not substitute GitHub Actions, legacy fachworkflow_handoff, codex_current_action, worker-authored PASS, or auto-publish."
     ]
   },
@@ -68,10 +73,9 @@
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "next_action": "Verify the Codex connector acknowledgement/result on PR #275 comment 5712686515, then follow the real 107007 run to SYSTEM4_WORDPRESS_HANDOFF_V1.json without substituting another route."
+    "next_action": "Start 107007 on PR #275 using the exact first command with corrected bound launch SHA256 1bfefd0370251ca45ba5868e80a244182da76a865f7713e0b3bde6d5ff492d59 and an outside-repo runtime path."
   },
   "mandatory_execution_path": [
-    "control/output-quarantine/runtime_entry_gate.py",
     "isolated_system4/parent_start.py start-bound",
     "Point-0",
     "isolated_system4/root_entry.py",
@@ -89,7 +93,7 @@
     "SYSTEM4_WORDPRESS_HANDOFF_V1.json"
   ],
   "hobbyroom": {
-    "status": "CODEX_START_REQUESTED",
+    "status": "READY_FOR_CORRECTED_CODEX_START",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
     "completed": [
       1,
@@ -101,7 +105,7 @@
       5
     ],
     "current_focus": "REAL_107007_CODEX_PRODUCTION_START",
-    "next_action": "Verify the Codex task launched from PR #275 comment 5712686515 and follow the real 7-article production run to its machine result.",
+    "next_action": "Trigger corrected @codex start on PR #275 and follow the real 7-article production run to its machine result.",
     "return_path": "same article -> existing repair route -> complete text-machine recheck"
   }
 }
