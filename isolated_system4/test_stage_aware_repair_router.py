@@ -56,6 +56,28 @@ class StageAwareRepairRouterTests(unittest.TestCase):
                 request=json.loads((workspace/'machine_repair_request.json').read_text(encoding='utf-8'))
                 self.assertEqual(request,verified)
 
+    def test_mixed_owner_findings_are_grouped_before_routing(self):
+        body={'error_code':'LANGUAGETOOL_FINDING','field':'content.body','rule_id':'GERMAN_SPELLER_RULE'}
+        link={'error_code':'LINK_BINDING_INVALID','field':'links[0].href'}
+        state=state_for(body); state['checks']['findings']=[body,link]
+        route=repair_router.classify(state)
+        self.assertEqual((route['owner'],route['target']),('CONTEXT_BINDING','LINK_BINDING'))
+        self.assertEqual(route['findings'],[link])
+        self.assertEqual(route['all_findings'],[body,link])
+        self.assertEqual(route['finding_count'],1)
+        self.assertEqual(route['all_finding_count'],2)
+        self.assertEqual(route['pending_owner_target_groups'][0]['owner'],'DRAFT_BODY')
+        with tempfile.TemporaryDirectory() as td:
+            workspace=Path(td)/'item-0'; workspace.mkdir(); (workspace/'state.json').write_text(json.dumps(state),encoding='utf-8')
+            result=repair_router.route(workspace)
+            verified=repair_router.verify_continuation_result(workspace,result)
+            self.assertEqual(verified['status'],'RETURN_TO_OWNER')
+            self.assertEqual(verified['owner'],'CONTEXT_BINDING')
+            self.assertEqual(verified['target'],'LINK_BINDING')
+            self.assertEqual(verified['findings'],[link])
+            self.assertEqual(verified['all_findings'],[body,link])
+            self.assertEqual(verified['pending_owner_target_groups'][0]['owner'],'DRAFT_BODY')
+
     def test_tampered_or_missing_continuation_contract_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:
             workspace=Path(td)/'item-0'; workspace.mkdir()
