@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Exact head
         run: git rev-parse HEAD
-      - name: Inspect scoped PPM registry mapping
+      - name: Inspect scoped PPM mutation authorities
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm679
@@ -26,19 +26,26 @@ jobs:
           ROOT=/tmp/ppm679/portal-production-machine
           python3 - <<'PY'
           import json
-          from collections import Counter
           from pathlib import Path
           root=Path('/tmp/ppm679/portal-production-machine')
           rows=json.loads((root/'contracts/hard-rule-registry-v1.json').read_text())['rules']
-          needles=['content-validator','content-structure-language-gate','known-error-gate','rendered-dom']
-          for key in ['source_path','source_reference','validation_layer','validator_or_reviewer']:
-              vals=Counter(str(r.get(key) or '') for r in rows)
-              hits={k:v for k,v in vals.items() if any(n in k for n in needles)}
-              print('SOURCEKEY',key,json.dumps(hits,ensure_ascii=False,sort_keys=True))
-          scoped=[r for r in rows if any(n in (str(r.get('source_path') or '')+' '+str(r.get('source_reference') or '')) for n in needles)]
-          print('SCOPED_COUNT',len(scoped))
-          for r in scoped:
-              print('SCOPED',json.dumps({k:r.get(k) for k in ['rule_id','error_code','source_path','source_reference','positive_test','negative_test','validation_layer','validator_or_reviewer']},ensure_ascii=False,sort_keys=True))
+          base=[r for r in rows if r.get('source_path') in {'includes/content-validator.php','includes/content-structure-language-gate.php','includes/known-error-gate.php'}]
+          wave4={'W4::R8-0786':'BLOCKED_QF03_RENDERED_H1_COUNT','W4::R8-0787':'BLOCKED_QF03_RENDERED_DUPLICATE_HEADINGS','W4::R8-0788':'BLOCKED_QF03_RENDERED_ADJACENT_HEADINGS','W4::R8-0790':'BLOCKED_QF03_RENDERED_EVIDENCE_CLASS'}
+          rendered=[r for r in rows if r.get('error_code') in set(wave4.values())]
+          scoped=base+rendered
+          print('SCOPE_COUNTS',len(base),len(rendered),len(scoped))
+          hard={
+          'BLOCKED_WAVE2_CONTRACT_MISSING','BLOCKED_WAVE2_QUALITY_BINDING_MISSING','BLOCKED_WAVE2_QUALITY_BINDING_HASH','BLOCKED_WAVE2_INTERNAL_MARKER_MISSING','BLOCKED_WAVE2_LINK_REGISTRY_HASH','BLOCKED_MAINBLOCK1_LANGUAGE_DELTA_EVIDENCE','BLOCKED_WAVE2_LANGUAGE_EVIDENCE','BLOCKED_VALIDATION_CONTRACT_VERSION_MISSING','BLOCKED_SECTION_REQUIREMENTS_HASH_MISMATCH','BLOCKED_VALIDATION_CONTRACT_VERSION_UNKNOWN','BLOCKED_CONTENT_TYPE_DEFINITION_MISSING','BLOCKED_CONTENT_HASH_MISMATCH','BLOCKED_KNOWN_ERROR_CONTRACT_MISSING','W4_R8_0790_LOCAL_EXECUTED_TEST_EVIDENCE_MISSING'}
+          repair=[r for r in scoped if r.get('error_code') not in hard]
+          # duplicate UNKNOWN is two rule IDs and counts twice; W4 local executed evidence is a requirement-ID hard rule, not the rendered evidence-class content rule.
+          print('REPAIR_PRELIM',len(repair))
+          from collections import Counter
+          print('NEGATIVE_TESTS',json.dumps(Counter(r.get('negative_test') for r in repair),sort_keys=True))
+          print('POSITIVE_TESTS',json.dumps(Counter(r.get('positive_test') for r in repair),sort_keys=True))
+          print('MUTATION_FILES')
+          for p in sorted(root.rglob('*')):
+              if p.is_file() and ('mutat' in p.name.lower() or 'repair' in p.name.lower()):
+                  print(p.relative_to(root))
           PY
       - name: Run exact PPM coverage authority
         run: php /tmp/ppm679/portal-production-machine/tests/test-mainblock1-hard-rule-coverage.php
