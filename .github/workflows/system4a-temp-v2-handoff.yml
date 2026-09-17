@@ -25,9 +25,12 @@ jobs:
           assert 'direkter Aufruf' in t and 'VERBOTEN' in t
           refs={x['ref']:x['sha256'] for x in p['authorized_inputs']}
           assert refs['control/startmaster0107/system4_107008_handoff.py']=='09654acf4aa5718769323315de29a6b286616391de378b9937108c219f02cf25'
+          p7=json.load(open('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json'))
+          assert p7['next_binding']['bundle_sha256']=='af1c4515e70528a0ab8b2d21b3a7e696df8afc9e0d530f3a5bc03a3de52056aa'
           print('SYSTEM4_107008_V2_ROUTE_LOCK_PASS')
           PY
       - name: Print binding SHA256
         run: |
           sha256sum control/startmaster0107/system4_107008_handoff.py
           sha256sum control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json
+          sha256sum control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json
