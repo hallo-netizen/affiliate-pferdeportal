@@ -1,0 +1,22 @@
+name: System4A temp clean pyc
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-batch-collect-20260917'
+permissions:
+  contents: write
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove temporary bytecode and self
+        run: |
+          set -euo pipefail
+          find control isolated_system4 -type f -name '*.pyc' -delete
+          rm .github/workflows/system4a-temp-clean-pyc.yml
+          git config user.name 'hallo-netizen'
+          git config user.email 'hallo@oliver-beil.de'
+          git add -A
+          git commit -m 'chore(system4): remove temporary test bytecode'
+          git push origin HEAD:hobbyroom/system4a-batch-collect-20260917
