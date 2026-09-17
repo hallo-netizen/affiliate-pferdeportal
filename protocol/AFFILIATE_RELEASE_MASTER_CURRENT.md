@@ -1,159 +1,90 @@
-# AFFILIATE-ZENTRALE — CURRENT MASTER / HANDOFF
+# AFFILIATE-ZENTRALE — CURRENT MASTER
 
-Stand: 2026-09-09
-Branch: `affiliate-release-current`
+Stand: 2026-09-17
 Workstream: `AFFILIATE_ZENTRALE`
-Governance: `PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4`
-Candidate: `6.72.8` / `LIVE_INSTALLED_ROOTFIX_PENDING` / `release_allowed=false`
+Status: `ACTIVE / RELEASE BLOCKED`
 
-## Autoritative Quelle
+## Eine Release-Wahrheit
 
-Nur `release/affiliate-zentrale/current/affiliate-portal-router/` plus `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt` ist aktuelle Release-Quelle. Historische ZIPs, alte Chatstände und Archive sind keine Navigations- oder Rekonstruktionsquelle. Bereits hash-identisch bestandene eBay-Gates werden nicht erneut ausgeführt.
+- Repository: `hallo-netizen/affiliate-pferdeportal`
+- Arbeitsbranch: `affiliate-release-current`
+- Kanonische Source: `release/affiliate-zentrale/current/affiliate-portal-router/`
+- Kanonisches Manifest: `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`
+- Release-Governance: `control/release-governance/CURRENT_RELEASE.json`
+- Kanonischer aktiver Kandidat bleibt **6.72.19**; `release_allowed=false`.
+- Pluginbuero `PPA-001/CURRENT.zip` bleibt **6.72.19**. Lokale hoehere Testlinien sind keine zweite Release-Wahrheit.
 
-## CURRENT-SCOPE OVERRIDE — 08.09.2026
+## Aktueller Fachstand
 
-Aktueller Nutzer-Scope ist **OTTO / Awin Advertiser 14336**. Digistore24 bleibt während dieses Scopes zurückgestellt; ältere DS24-Abschnitte in diesem Dokument sind nur Kontext und **keine aktuelle NEXT ACTION**.
+Verbindliches Fachregister fuer Werbeplaetze:
+`/Pferde-Atelier/Aktenschraenke/Affiliate/WERBEPLATZ_REGISTER.md`
 
-Aktuelle belastbare Basis:
-- live installierter Stand: **6.72.8**;
-- 6.72.8-Cleanup-Readback ist live sichtbar und blockierte korrekt fail-closed: `exact-import-count-mismatch:0/4500`; **0** Altprodukte gelöscht, **0** Ausgabeobjekte/Kanten verändert;
-- kein weiterer Cleanup-Fix: historischer Altbestand bleibt fail-closed und wird nur über den normalen Reconcile-Weg behandelt;
-- gefilterter Awin-Create-a-Feed wurde gebunden und ein vollständiger Live-Lauf abgeschlossen: **298 Feedzeilen**, **1 importiert**, **297 blockiert**, 0 aktualisiert;
-- direkte Prüfung der exakt verwendeten Datei `datafeed_2990695.csv.gz`: **298/298 fachfremd** — 211 Skincare/Gesichtspflege, 31 Cosmetics/Make-up, 28 Basketball, 22 Garden/Sonnenschutz, 6 Football;
-- der eine Import ist ein belegtes False Positive: `aw_product_id=45749237798`, WPC-Gartenzaun mit `Windschutz`; Ursache ist synthetisches `FeedScope=Pferdebedarf` als starkes Pferdesignal plus generisches Portal-Konzept `Windschutz für Pferde`;
-- direkte Prüfung der Awin-Feedliste `datafeeds.csv`: für OTTO DE / Advertiser 14336 sind aktuell exakt **3 aktive Feeds** sichtbar: `54165 Wohnen, Spielzeug und Baumarkt (317451)`, `54179 Technik und Sport (90547)`, `54183 Kategorien: Mode und Beauty (347642)`; kein separater Pferde-/Tierbedarf-/Schuhe-Feed ist in dieser Feedliste vorhanden;
-- automatische Synchronisierung bleibt **AUS**;
-- Produktionssource ist weiterhin unverändert **6.72.8**; Source-Manifest: `816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d`;
-- für den FeedScope-Rootfix wurde **noch kein neuer Plugin-Kandidat gebaut und noch kein Rootfix-Test ausgeführt**.
+Aktuell gebunden:
+- Kategorie-Querbanner zuerst vollstaendig fertigstellen.
+- Downscaling bevorzugt; Upscaling hoechstens +10 %; proportional, kein Crop, keine Verzerrung.
+- Providerneutraler Bestand/Matcher: Provideradapter duerfen nur beschaffen/importieren; technische Eignung, Themenmatch, Rotation und Ausspielung bleiben zentral.
+- Neue Partner/Werbemittel muessen nach Sync/Upsert erneut in die Zuordnung eingehen; neue Adapterprovider ohne Umbau des Matching-Kerns.
+- Backendfilter primaer nach **Werbeplatz** und aus derselben Slotmatrix/demselben Matcher wie die Ausspielung; keine zweite Pixel-/Providerlogik.
+- Keine Abnahme ohne ausgefuehrte harte lokale POSITIV-/NEGATIV-/Gesamtworkflowpruefung inklusive Regression, Fresh-Unpack und Mutation/Sabotage. Live-PASS ist danach separat.
 
-**NEXT ACTION:** Awin-Feed fachlich nur aus den real vorhandenen drei OTTO-Feeds neu eingrenzen **und** den OTTO-Relevanz-Gate minimal so reparieren, dass Feed-/Scope-Metadaten niemals selbst Pferde-Domain-Evidence erzeugen. Danach derselbe Kandidat vollständig POSITIV/NEGATIV/Gesamtworkflow prüfen; erst dann ist ein neuer TEST-Installer zulässig. Automatik bleibt AUS.
+Gebundener Repo-Auftrag:
+`protocol/AFFILIATE_RELEASE_CATEGORY_BANNER_WERBEPLATZ_FILTER_TASK_20260917.md`
 
-## VERBINDLICHES FEHLERREGISTER — PRESTEP-HARDLOCK
+## Lokale Testlinie — Diagnose/Testoracle, NICHT kanonisch
 
-Vor **jedem** Analyse-, Code-, GitHub-, Codex-, Test-, Build-, Installations-, Live- oder Release-Schritt ist zuerst `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md` zu lesen und gegen den geplanten Schritt zu prüfen.
+- 6.72.36: Fullchain lokal hart PASS; LIVE offen. SHA-256 `1cf141d4aae60d7b817bf503dd0e6328280b2527d1f2e219e4195a7a0fda07c0`.
+- 6.72.37: Kategorie/Provider lokal 29 PASS / 0 FAIL + Browser-Runtime; LIVE offen. SHA-256 `08f07a772a3ca29520ef86270ed7c32d624789160fd2b056dcaaf79589da74c6`.
+- 6.72.38: Werbeplatzfilter lokal Fresh-Unpack 39 PASS / 0 FAIL, Planer-Regression 1120/1120, kombinierter 1200-Zeilen-Filtertest und Mutationstests PASS; echter WordPress-Live-Readback offen. SHA-256 `3791eebbdfdcaafa6af265eb1ad6c47cefc715217f149dcdc94d5bc474556f9b`.
 
-Harte Regeln:
+Diese Linie verletzt als nichtkanonische Fortsetzung die bereits gebundene Nicht-Wiederholungsregel `AF-069`/`AFF-ERR-006` und darf deshalb **nicht** als Release, Pluginbuero-CURRENT oder Quelle weitergefuehrt werden. Ihre Tests duerfen nur als Oracle fuer den einen kanonischen Rootfix dienen.
 
-1. Kein technischer Arbeitsschritt ohne `ERROR-REGISTER PRECHECK`.
-2. Kein Fix, bevor ein neu gefundener Fehler mit Root Cause, gescheitertem Weg, Nicht-Wiederholungsregel sowie POSITIV-/NEGATIV-/Gesamtworkflow-Test im Register dokumentiert ist.
-3. Ein bereits dokumentierter falscher Lösungsweg darf nicht erneut ausgeführt werden. Treffer auf bekannte Fehler-ID = Plan zuerst korrigieren, sonst `FAIL_CLOSED`.
-4. Kein `PASS`, keine Abnahme und kein Release ohne `ERROR-REGISTER POSTCHECK` und Evidence, dass relevante bekannte Fehler nicht wiederholt wurden.
-5. Das Register gilt chatübergreifend und ist Bestandteil jeder neuen Übergabe.
-6. Für Bannerautomation ist insbesondere `AFF-ERR-009` bindend: Bannerformat und Bannerposition dürfen nicht hart im Provideradapter verdrahtet werden; Größen/Positionen müssen über eine flexible Slotdefinition austauschbar bleiben.
+## Live-Stand
 
-## WORKSTREAM-/THEMEN-HARDLOCK — VERBINDLICH
+- Die **exakt aktuell installierte WordPress-Pluginversion ist nicht autoritativ read-back-belegt**. Nicht raten.
+- Der letzte reale Backend-Screenshot `Import & Auswahl` zeigt **keinen Werbeplatzfilter**. Damit ist 6.72.38 im Live-System nicht nachgewiesen und fuer diese Funktion kein LIVE-PASS zulaessig.
+- Kein weiterer Installer und keine neue Versionsnummer, bevor die kanonische Sourcearbeit und die gebundenen lokalen Gates abgeschlossen sind. Vor Versionswahl muss die reale installierte WordPress-Version belegt werden (`AF-027`).
 
-Dieser Master gilt ausschließlich für `AFFILIATE_ZENTRALE`. Der aktive Chat bleibt auf diesem Workstream verriegelt, bis der Nutzer **ausdrücklich** einen Themen-/Workstream-Wechsel anordnet.
+## Erster offener Blocker
 
-1. **Ein einzelner fremder Fehlercode, Dateiname, Screenshot, Logtext oder Token ist KEIN Themenwechsel.** Beispiele wie `107007_*`, `STARTMASTER0107`, H8/H7, Textproduktion, Bildzentrale oder andere Projekt-Subsysteme dürfen in diesem Chat nicht automatisch die Navigation übernehmen.
-2. **Vor jeder Tool-Navigation muss geprüft werden:** Gehört die Nutzerfrage zum aktuell gebundenen Workstream `AFFILIATE_ZENTRALE`? Wenn nein oder zweifelhaft, darf nicht in fremde Master, States, Branches oder Workflows gesprungen werden.
-3. **Fremde Tokens innerhalb dieses Chats werden zunächst nur als übermittelter Text behandelt.** Sie dürfen nur dann als ausführbare Workflow-Navigation interpretiert werden, wenn der Nutzer ausdrücklich sagt, dass jetzt in diesen anderen Workstream gewechselt werden soll.
-4. **Keine automatische Suche in `STARTMASTER*`, Textproduktion, Bildzentrale oder anderen Workstreams**, nur weil ein dort typischer Code im Chat auftaucht.
-5. **Bei widersprüchlichem Kontext gewinnt der aktuelle Master/Workstream**, nicht das zuletzt genannte technische Schlagwort.
-6. **Vor jedem GitHub-/Codex-/Workflow-Schritt ist der Zielpfad gegen den Workstream zu prüfen.** Für diesen Master sind nur Affiliate-Zentrale-relevante Pfade/Tasks zulässig, soweit Governance sie erlaubt.
-7. **Ein Chatwechsel hebt den Workstream-Hardlock nicht auf.** Ein neuer Chat muss zuerst aktuellen Master + Governance lesen und daraus den Workstream bestimmen, bevor andere Repository-Bereiche navigiert werden.
-8. **Expliziter Themenwechsel erforderlich.** Zulässige Form ist sinngemäß: `Wechsle jetzt zu STARTMASTER0107/Textproduktion` oder `Neuer Workstream: ...`. Ohne eine solche klare Anweisung bleibt `AFFILIATE_ZENTRALE` aktiv.
-9. **Fehlerregel:** Wenn versehentlich in einen fremden Workstream navigiert wurde, keine weitere Aktion dort ausführen. Sofort zurück zu `AFFILIATE_ZENTRALE`, aktuellen Master/Governance neu lesen und nur den dort gebundenen nächsten Schritt fortsetzen.
+**Kanonische Source und aktueller Fach-/Teststand sind noch nicht zusammengefuehrt.** GitHub/Pluginbuero stehen belastbar auf 6.72.19; die Kategorie-/Werbeplatz-Arbeit existiert nur als nichtkanonische lokale Testlinie.
 
-Kurzregel: **WORKSTREAM VOR TOKEN. MASTER VOR SCHLAGWORT. KEIN THEMENWECHSEL OHNE EXPLIZITE NUTZERANWEISUNG.**
+## NEXT ACTION — exakt eine
 
-## Grundsätzlicher Arbeitsablauf für ChatGPT / GitHub / Codex — VERBINDLICH
+Fuehre **nur** `AFFILIATE_HOBBYRAUM/TASK.current.json` aus.
 
-Dieser Abschnitt ist für alle folgenden Arbeiten im Workstream verbindlich und soll in neuen Chats zuerst beachtet werden.
+Ziel dieses Schritts: die kanonische Source read-only gegen den gebundenen 2026-09-17-Auftrag pruefen und den exakten fehlenden Source-Delta belegen. **Kein Build, kein Installer, keine Versionswahl.**
 
-1. **GitHub ist Arbeits- und Übergabequelle.** Technische Aufträge, Zielverträge, Evidence und Master werden im Repository dokumentiert. Lokale Chat-Anhänge sind keine dauerhafte Workflow-Autorität.
-2. **Codex arbeitet repository-nativ.** Codex bekommt im Normalfall **keine hochzuladenden Dateien, keine ZIPs und keine riesigen Quelltext-Prompts**. Es arbeitet aus dem verbundenen GitHub-Repository.
-3. **Vor jedem Codex-Auftrag wird zuerst ein klarer Auftrag im Repo angelegt**, vorzugsweise unter `protocol/AFFILIATE_RELEASE_*.md`. Dieser Auftrag enthält Scope, Zielzustand, erlaubte Dateien/Pfade, Positiv-/Negativtests, Fail-closed-Regeln und erwartete Endausgabe.
-4. **Der Nutzer bekommt für Codex nur einen kurzen Startprompt**, der Repository, Branch und exakten Auftrags-Pfad nennt. Beispielprinzip: `Lies zuerst CURRENT_RELEASE.json und führe danach vollständig <TASK_REF> aus.`
-5. **Keine Datei-Upload-Anforderung an Codex erfinden.** Wenn Source bereits im Repo existiert oder dort reproduzierbar aus der aktuellen kanonischen Source implementiert werden kann, muss Codex direkt im Repo arbeiten.
-6. **Keine Riesen-Copy/Paste-Prompts mit vollständigen Dateien**, solange der Repo-native Weg möglich ist. Quelltext im Chat ist nur zulässig, wenn GitHub technisch wirklich nicht genutzt werden kann und dies vorher nachgewiesen wurde.
-7. **Vor jeder Arbeit zuerst Governance lesen:** `control/release-governance/CURRENT_RELEASE.json`. Danach ausschließlich den dort autorisierten Workstream, Branch, Scope und nächsten Schritt verwenden.
-8. **Keine Navigation aus alter Chat-Historie.** Alte Chats dienen höchstens als Kontext; autoritativ sind aktueller Master, Governance, aktuelle Source und gebundene Evidence im Repo.
-9. **Keine Wiederholung bestandener hash-identischer Gates.** Bereits bestandene eBay-/Release-Gates werden wiederverwendet und nicht vorsorglich neu ausgeführt.
-10. **Keine Nebenarchitektur, kein Side-Branch, keine Pluginorgie, kein Microfix ohne gebundenen Grund.** Änderungen werden soweit sinnvoll gebündelt und direkt gegen den Gesamtworkflow geprüft.
-11. **Vor jeder Behauptung `PASS`, `fertig`, `integriert` oder `auf GitHub` wird der tatsächliche Repository-Stand erneut gelesen.** Dokumentation allein gilt nicht als Source-Binding.
-12. **Source-Binding muss real im kanonischen Baum erfolgt sein.** Master/Evidence dürfen einen lokalen Kandidaten beschreiben, aber solange die Source-Dateien nicht im kanonischen GitHub-Baum liegen, darf kein Source-/Live-PASS behauptet werden.
-13. **Manifest und Governance werden erst nach tatsächlicher Source-Änderung neu gebunden**, nie vorzeitig und nie auf nur lokal vorhandene Kandidaten.
-14. **Wenn Codex einen Auftrag ablehnt**, zuerst die echte Ursache prüfen: Repo-Verbindung, Branch, Task-Scope, Promptgröße/Format oder Rechte. Nicht sofort neue ZIP-/Upload-/Copy-Paste-Routen erfinden.
-15. **Wenn ein GitHub-Connector die Änderung selbst sauber und vollständig ausführen kann**, darf die Änderung direkt über GitHub erfolgen; danach sind Source, Manifest, Governance und Master konsistent zu aktualisieren und erneut zu prüfen.
-16. **Der Nutzer soll nur dann eingreifen müssen, wenn eine echte externe Nutzerhandlung erforderlich ist** (z. B. Login/Freigabe/Live-Zugang, den die Werkzeuge nicht besitzen). Keine vermeidbaren Datei-Transfers oder manuellen Zwischenschritte.
-17. **Jede Übergabe dokumentiert:** Was geändert wurde, was nicht geändert wurde, welche Tests PASS/FAIL sind, welche Hashes/Commits gelten, was live noch offen ist und exakt welcher nächste gebundene Schritt folgt.
-18. **Vor jedem Schritt Fehlerregister prüfen.** `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md` ist verpflichtende Preflight-Quelle und darf nicht übersprungen werden.
+Erst danach darf aus der kanonischen Source genau **ein** Rootfix-Kandidat entstehen. Vor irgendeinem Installer muss derselbe Kandidat die im gebundenen Task verlangte harte lokale POSITIV-/NEGATIV-/Gesamtworkflowpruefung bestehen.
 
-### Standard-Codex-Startprompt
+## Verbindlicher Arbeitsweg
 
-Wenn ein im Repo gebundener Auftrag existiert, ist der Nutzerprompt grundsätzlich kurz zu halten:
+1. `AFFILIATE_HOBBYRAUM/START_HERE.txt`
+2. diese `protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md`
+3. Frischecheck: Branch + Governance + kanonisches Manifest + Fehlerregister
+4. `AFFILIATE_HOBBYRAUM/TASK.current.json`
+5. nach bestandenem Precheck: ein kanonischer Rootfix, keine Versionskaskade
+6. vollstaendige harte lokale Gates
+7. erst dann Live-Testinstaller; Live-PASS nur mit realem WordPress-Readback
 
-```text
-Arbeite im Repository hallo-netizen/affiliate-pferdeportal
-auf dem gebundenen Branch.
+## Nicht anfassen
 
-Lies zuerst control/release-governance/CURRENT_RELEASE.json.
-Lies danach protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md und führe den ERROR-REGISTER PRECHECK aus.
-Führe danach vollständig und ohne Scope-Erweiterung aus:
-<EXAKTER_TASK_REF_IM_REPOSITORY>
+- keine weiteren lokalen Versionsspruenge/Diagnose-ZIPs;
+- keine eBay-PRIVATE-/Checkpoint-Massenmutation;
+- keine OTTO-Cleanup-Neuarchitektur;
+- kein Designplugin fuer diese Facharbeit;
+- keine zweite Werbeplatz-/Pixel-/Provider-Wahrheit;
+- keine Backendpfade raten.
 
-Implementieren, lokal positiv/negativ testen, erforderliche Source-/Manifest-/Governance-Bindung durchführen und committen.
-Keine bereits hash-identisch bestandenen Gates wiederholen.
-Keinen bekannten Fehlerweg aus dem Fehlerregister wiederholen.
-```
+## Fehler-/Prozessbindung
 
-Abweichungen von diesem Ablauf müssen technisch begründet und im Master dokumentiert werden. Bequemlichkeit oder Chatwechsel sind kein Grund für eine neue Übergaberoute.
+Bindend mindestens:
+- `AFF-ERR-001`: kein Gesamt-/Release-PASS ohne echte Evidence;
+- `AFF-ERR-006`: keine Mini-Fix-/Versionskaskade;
+- `AFF-ERR-007`: Backendpfade nur real belegt;
+- `AFF-ERR-009`: Slot/Format nicht im Providercode hart verdrahten;
+- `AFF-ERR-010`: Re-evaluation bei wachsendem Portal/Bestand;
+- `AF-021`: `TASK.current.json` schemaexakt;
+- `AF-027`: reale installierte Version vor Versionswahl;
+- `AF-069`: nichtkanonische Folgepakete nicht als kanonisch behandeln.
 
-## Aktueller Funktionsstand
-
-- eBay: bestehender freigegebener/gebundener Stand bleibt unverändert; keine Wiederholung der bestandenen historischen Gates.
-- idealo: bestehende Produkt-/Vergleichsquelle bleibt unverändert.
-- Produkt-/Deal-Radar und Partner-Analytics: Bestandteil des V6.64.0-Kandidaten; gesamter Release-Gate weiterhin PENDING.
-- Lead Alliance: vom Nutzer am 31.08.2026 als bestätigt gemeldet. Für Kaufland ist der technische Zielweg `Lead Alliance / Kaufland Private Network` gebunden; keine ADCocktail-Ersatzroute. Diese Bestätigung wird nicht als erfundene Kaufland-Programm-/Feedfreigabe ausgelegt: konkrete Publisher-/Produktdaten werden erst aktiviert, wenn der reale Zugang dies bestätigt.
-- Kelkoo: noch nicht freigegeben; vorbereitet, nicht live verdrahtet.
-- Amazon: vorbereitet; kein erfundener Datenzugang.
-- Digistore24: bestehender read-only Provider wird im aktuellen Block weiter automatisiert; weiterhin Banner-only.
-
-## Digistore24 — gebundener Automatisierungsstand
-
-1. Der API-Zugang bleibt read-only. Neben `getUserInfo`, `listMarketplaceEntries` und `getMarketplaceEntry` ist `getAffiliateCommission` erlaubt.
-2. `getAffiliateCommission` darf nur die mit dem aktuell getesteten API-Key gebundene eigene Affiliate-ID und 1–50 kanonische numerische Produkt-IDs abfragen.
-3. Automatische Veröffentlichung erfordert einen frischen API-Nachweis `approval_status=approved` plus aktives Produkt. Pending, rejected, fehlende Zeile, Credential-Wechsel oder veralteter Nachweis bleiben fail-closed.
-4. Manuelle Partnerschaftsbestätigung bleibt nur Fallback für manuellen Import; sie kann die automatische Veröffentlichung nicht freischalten.
-5. Die Vendor-Support-/Werbemittelseite wird pro interessantem Marketplace-Eintrag einmal als validierte HTTPS-URL gespeichert. Danach darf der zentrale Automationslauf sie erneut verwenden.
-6. Importiert werden ausschließlich reale Banner mit provisionssicherem Digistore24-Trackinglink und gültiger HTTPS-Bildquelle. Keine Produkt-/Listing-Ausgabe für Digistore24.
-7. Ziel und Slot werden nicht in Digistore24 neu erfunden, sondern durch das bestehende zentrale Output-Modell klassifiziert.
-8. Vor automatischer Aktivierung wird das komplette Output-Objekt erneut geprüft. Ein neues Digistore24-Banner bleibt zunächst inaktiv/draft und darf Last-Known-Good nicht verdrängen.
-9. Erst nach erfolgreicher Revalidierung und persistierter `published`-Markierung wird ein Konfliktobjekt abgelöst. Bei Persistenzfehler wird die Kampagne zurückgerollt.
-10. Ein früherer generischer Banner-Aktivator kann den Digistore-Sicherheitsvertrag nicht umgehen: die spätere provider-spezifische Schlussprüfung rollt nicht freigegebene Kandidaten vor Request-Ende wieder auf inactive/draft zurück.
-
-## Testnachweis des lokalen Kandidaten
-
-Evidence: `release/affiliate-zentrale/evidence/digistore24_automatic_partner_banner_gate_v6640_static.txt`
-
-Lokal PASS: PHP-Lint beider Kandidaten-Traits; exakter GET-Request; fremde Affiliate-ID blockiert; >50 Produkt-IDs blockiert; approved positiv; pending negativ; stale negativ; atomare Aktivierung positiv; DB-Commit-Rollback negativ; Two-Phase-Supersede positiv; früher generisch aktivierter unapproved Kandidat wird zurückgerollt.
-
-Wichtig: Dieser Nachweis beschreibt den lokal getesteten Zielvertrag. Die beiden geänderten PHP-Dateien sind noch **nicht** Bestandteil der autoritativen GitHub-Source. Deshalb darf aus den Kandidaten-Hashes noch kein Release- oder Live-PASS abgeleitet werden.
-
-## Korrigierter Codex-/GitHub-Übergabeweg
-
-Der frühere Attachment-/Riesenprompt-Weg ist verworfen und im Repository ausdrücklich als `DEPRECATED` markiert.
-
-Verbindlicher repository-nativer Auftrag:
-
-`protocol/AFFILIATE_RELEASE_CODEX_DS24_IMPLEMENT_FROM_REPO_20260831.md`
-
-Codex benötigt dafür keine lokale Datei, kein ZIP und keinen eingefügten Quelltext. Es arbeitet aus dem verbundenen Repository, liest Governance, Master, Evidence, Fehlerregister und die aktuellen Source-Dateien und implementiert den gebundenen Digistore-Zielvertrag direkt im aktuellen Baum.
-
-## Noch offen vor Release
-
-- Repository-native Implementierung der Digistore24-Automatisierung in der kanonischen Source.
-- Neu berechnetes 25-Dateien-Source-Manifest und passende Governance-Bindung.
-- Danach echter Live-Nachweis mit dem realen Digistore24-Konto und der realen WordPress/MariaDB-Installation.
-
-Bis dahin bleibt `release_allowed=false` und der gebundene Gesamtgate `explicit_scope_product_deals_partner_analytics` PENDING. Keine finale Release-ZIP vor dem finalen Gate.
-
-## Aktuell autorisierter nächster Schritt
-
-**Kein Installationsschritt und keine Automatik.** 6.72.8 ist bereits live installiert.
-
-1. Awin-Feedwahl anhand der real belegten drei OTTO-Feeds fachlich korrigieren; keine erfundenen Zusatzfeeds.
-2. Kleinster Code-Rootfix: `FeedScope`/deklarierter Quellscope darf nur Source-Gate-Metadatum sein und niemals selbst Pferde-/Reitsportrelevanz beweisen.
-3. Vor jedem neuen Plugin: gebundener POSITIV-Test mit echtem Pferdeprodukt, NEGATIV-Test mit dem belegten WPC-`Windschutz`-Artikel und fachfremden Rows, danach kompletter OTTO/Awin-Gesamtworkflow + historische Regressionen + Manifest/Byte-Scope + Error-Register-Postcheck.
-4. Bis dahin: **Automatische Synchronisierung AUS.**
+Historie bleibt in Git-History/Protokollen. Dieses Dokument enthaelt nur den aktuellen belastbaren Stand und die eine NEXT ACTION.
