@@ -1,18 +1,18 @@
 {
-  "contract": "PFERDE_ATELIER_KONZEPT_NULL_START_HERE_V2",
+  "contract": "PFERDE_ATELIER_KONZEPT_NULL_START_HERE_V3",
   "name": "KONZEPT NULL",
   "navigation_authority": "konzept_null/CURRENT_STATE.json",
   "isolation_policy": "konzept_null/ISOLATION_POLICY.json",
   "runner": "konzept_null/konzept_null_runner.py",
-  "input": "konzept_null/INPUT_7_ARTIKEL.json",
   "historical_authority": {
     "startmaster": "STARTMASTER0102",
     "commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
     "prompt_ref": "protocol/STARTMASTER0102_ARTICLE_TEST_NO_STOP_HANDOFF_20260828.md"
   },
-  "next_allowed_step": "LOAD_EXACT_SEVEN_METADATA_ITEMS_READ_ONLY",
-  "article_count": 7,
-  "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "next_allowed_step": "LOAD_METADATA_BATCH_READ_ONLY",
+  "batch_mode": "VARIABLE_1_TO_N",
+  "minimum_article_count": 1,
+  "maximum_article_count": null,
   "wordpress_access_allowed": false,
   "external_write_allowed": false,
   "publish_allowed": false,
