@@ -11,7 +11,7 @@
   "target_step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
   "target_sequence": 107008,
   "target_bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-  "target_bundle_sha256": "82aca07bc39a3f0fa0e290bfc307b6c6e1c71e022c8aa4c7ea3dd740169beb52",
+  "target_bundle_sha256": "716737abfca984b7fe8531c202cdf884ee0710ea11e0d4fe8063b007ffd91359",
   "binding_source": "STEP_107007.next_binding",
   "activation_authority": "control/cloud-entry-gate/cloud_entry.py complete",
   "state_write_authority": "ENTRANCE_GATE_ONLY",
