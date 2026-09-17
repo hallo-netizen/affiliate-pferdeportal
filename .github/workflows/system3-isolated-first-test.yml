@@ -1,0 +1,31 @@
+name: System3 Isolated First Test
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'isolated_system3/**'
+      - '.github/workflows/system3-isolated-first-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  first-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prove isolation by import boundary
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          allowed = {Path('isolated_system3'), Path('.github/workflows/system3-isolated-first-test.yml')}
+          print('SYSTEM3_ISOLATION_SCOPE_PASS')
+          PY
+      - name: Run System 3 positive and negative tests
+        run: python -m unittest discover -s isolated_system3/tests -v
