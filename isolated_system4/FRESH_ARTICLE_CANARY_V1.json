@@ -1,0 +1,36 @@
+{
+  "contract": "SYSTEM4_FRESH_ARTICLE_CANARY_V1",
+  "purpose": "Prove that the acceptance path requires a genuinely newly generated article instead of a prepared PPM or horse-domain fixture.",
+  "topic": {
+    "title": "Warum beschlägt ein Badezimmerspiegel nach dem Duschen?",
+    "target_keyword": "Badezimmerspiegel beschlägt",
+    "article_type": "FAQ",
+    "category": "system4-canary-haushalt-faq",
+    "domain": "ALLTAGSPHYSIK_HAUSHALT",
+    "horse_domain_allowed": false
+  },
+  "freshness_requirements": {
+    "prewritten_article_body_allowed": false,
+    "repository_article_body_fixture_allowed": false,
+    "ppm_candidate_body_as_article_allowed": false,
+    "legacy_build_fixture_allowed": false,
+    "worker_generation_required": true,
+    "worker_generation_provenance_required": true,
+    "generation_must_happen_after_start_gate": true,
+    "article_body_hash_must_not_match_any_preexisting_candidate": true
+  },
+  "forbidden_fixture_markers": [
+    "g9-single-faq-approved-candidate-v1.json",
+    "legacy.build_fixture(",
+    "SYSTEM4_ACCEPTANCE_CAPTURED_REAL_SOURCES_V3"
+  ],
+  "forbidden_body_terms": [
+    "Pferd",
+    "Pferdeanhänger",
+    "Stützlast",
+    "Verladen",
+    "Zugfahrzeug"
+  ],
+  "required_final_state": "FRESH_WORKER_ARTICLE_AVAILABLE_FOR_REAL_TEXTMACHINE",
+  "publish_allowed": false
+}
