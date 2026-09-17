@@ -1,0 +1,23 @@
+{
+  "contract": "PFERDE_ATELIER_KONZEPT_NULL_ISOLATION_V1",
+  "name": "KONZEPT NULL",
+  "branch": "hobbyroom/konzept-null-startmaster0102-isolated",
+  "historical_startmaster": "STARTMASTER0102",
+  "historical_commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
+  "historical_prompt_ref": "protocol/STARTMASTER0102_ARTICLE_TEST_NO_STOP_HANDOFF_20260828.md",
+  "allow_main_write": false,
+  "allow_pull_request": false,
+  "allow_merge": false,
+  "allow_deploy": false,
+  "allow_wordpress_access": false,
+  "allow_wordpress_write": false,
+  "allow_publish": false,
+  "allow_external_write": false,
+  "allow_production_state_mutation": false,
+  "allow_startmaster0107_mutation": false,
+  "allow_current_startmaster_mutation": false,
+  "output_scope": "konzept_null/output_only",
+  "input_mode": "copy_read_only",
+  "production_authority": false,
+  "fail_closed": true
+}
