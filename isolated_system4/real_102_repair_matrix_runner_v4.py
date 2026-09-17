@@ -90,10 +90,6 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
     h = re.sub(r'data-fact-ids="[^"]+"', 'data-fact-ids="' + first_fact + '"', html)
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_FACT_PACK_COVERAGE', 'fact_pack_coverage')
 
-    # The rule requires >=80% supported trace units. Break every trace-bearing factual unit,
-    # while leaving each trace tag and fact binding intact. These sentences are ordinary,
-    # LT-clean German, deliberately unrelated to the bound horse-trailer facts, and unique
-    # enough not to trip the duplicate-sentence gate first.
     trace_unit_pattern = r'(<p\b[^>]*data-fact-ids="[^"]+"[^>]*>)(.*?)(<span\b[^>]*class="ppm-source-trace"[^>]*>.*?</span>)(.*?</p>)'
     lexical_sentences = [
         'Im Wohnzimmer steht ein kleiner Tisch neben dem Fenster.',
@@ -119,9 +115,17 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
         raise AssertionError('CURRENT_MUTATION_TRACE_UNITS_MISSING')
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT', 'trace_lexical_support')
 
-    sentence = 'Dieser sachliche Kontrollsatz wird ohne neuen Informationswert wiederholt.'
-    repeat = '<p data-fact-ids="' + first_fact + '">' + ' '.join([sentence] * 40) + '</p>'
-    h = sub1(r'(<section\b[^>]*data-block="intro"[^>]*>)', lambda m: m.group(1) + repeat, html, re.I)
+    # Exceed the 2% duplicate threshold with only a few exact duplicates and separate them
+    # with distinct, correct German sentences so LanguageTool does not become the first gate.
+    duplicate = 'Die abschließende Sichtprüfung bestätigt den dokumentierten Kontrollpunkt.'
+    spacer = [
+        'Danach wird der nächste Abschnitt unabhängig davon betrachtet.',
+        'Ein weiterer Absatz beschreibt einen getrennten Prüfschritt.',
+        'Anschließend folgt eine eigenständige Kontrolle des nächsten Bereichs.',
+        'Zum Schluss wird ein zusätzlicher Abschnitt separat gelesen.',
+    ]
+    repeat = ''.join('<p data-fact-ids="' + first_fact + '">' + duplicate + ' ' + s + '</p>' for s in spacer)
+    h = sub1(r'(<section\b[^>]*data-block="details"[^>]*>)', lambda m: m.group(1) + repeat, html, re.I)
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO', 'duplicate_sentence_ratio')
 
     intro = re.search(r'<section\b[^>]*data-block="intro"[^>]*>.*?(<p\b[^>]*>.*?</p>)', html, re.I | re.S)
