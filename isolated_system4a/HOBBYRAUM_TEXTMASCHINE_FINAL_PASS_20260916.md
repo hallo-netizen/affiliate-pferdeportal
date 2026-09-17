@@ -50,19 +50,31 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
   - Workflow: `System 4A Real LT68 PPM679 Acceptance`
   - Run `35197908873`, Head `6532feaf11de03b6cd09134e62281555bdc56de3`, SUCCESS.
   - Reale Schritte `Build fresh machine inputs for one article` und `Run complete one article route` beide SUCCESS; `Verify fresh-route evidence` und Artifact-Upload ebenfalls SUCCESS.
-  - Der gebundene Verifikationsschritt verlangt für den 1-Artikel-Beweis: `article_count=1`, `pre_point0_article_body_count=0`, `inline_byte_equal=true`, LT=`PASS`, PPM=`PASS`, `revisions=[1]`, `freshness_status=PASS`, historische Exact-/Visible-Body-Wiederverwendung blockiert, aktuelle Source-Trace gebunden und eindeutiger Draft/Artikel.
 - [x] **10. 3 Artikel mit absichtlich reparierbarem Fehler.** Genau ein Artikel zurück, gleiche Identität, Repair, vollständige Nachprüfung, PASS; andere unverändert.
   - Workflow: `System 4A Real LT68 PPM679 Acceptance`
   - Run `35198500052`, Head `2f0b56ee84992af52729815c1583983301b944aa`, SUCCESS.
-  - Remote-Schritt `Run complete three article route with repair isolation` verlangt exakt **ein** `SYSTEM4_TESTWORKER_REPAIR_REQUEST` und bindet ihn an `article_index=1` mit `BLOCKED_KNOWN_REGRESSION_PATTERN`.
-  - Remote-Artefakt `LIVE_PARITY_V2_3_PROOF.json`: `article_count=3`, `revisions=[1,2,1]`, LT=`PASS/PASS/PASS`, PPM=`PASS/PASS/PASS`, `freshness_status=PASS`, `inline_byte_equal=true`.
-  - Damit wurde nur Artikel 1 im selben indexgebundenen Workspace repariert und vollständig neu geprüft; Artikel 0 und 2 blieben Revision 1 ohne Repair.
-- [ ] **11. Technischer/Integritäts-/Manipulationsfehler.** Terminal BLOCK.
-- [ ] **12. 1..N / Batch / Identität / Reihenfolge / Hash-/Byte-Bindung.** PASS.
-- [ ] **13. Handoff/Parent-Chat.** Exakt dieselben Bytes/SHA zurück.
+  - Remote-Artefakt: `article_count=3`, `revisions=[1,2,1]`, LT=`PASS/PASS/PASS`, PPM=`PASS/PASS/PASS`.
+- [x] **11. Technischer/Integritäts-/Manipulationsfehler.** Terminal BLOCK bewiesen, kein Repair-Pfad.
+  - Run `35198908215`, Head `6b6f3ea789c795e3e8cc4ea3b13ff38400bd473d`.
+  - Manipulierte Start-Bindung, Receipt-/Point-0-/Prewrite-Integrität und unzulässige Daten werden fail-closed blockiert.
+- [x] **12. 1..N / Batch / Identität / Reihenfolge / Hash-/Byte-Bindung.** PASS.
+  - Finaler Test-Head `2e62f0c81abe16ed47c12ecc9df89a95942ad97d`.
+  - Real Acceptance Run `35199941338`: SUCCESS; Exact Head Bundle Run `35199941460`: SUCCESS.
+  - 1 / 3 / 25 / 1000; Reihenfolge, Identität, Hash und Bytegleichheit sowie Manipulationsblock bewiesen.
+- [x] **13. Handoff/Parent-Chat.** Exakt dieselben Bytes/SHA zurück.
+  - Remote-Artefakt aus Run `35199941338`; `inline_byte_equal=true`.
+  - 1-Artikel-Handoff im Parent-Chat als Datei ausgegeben; SHA-256 `28efb8c56b278c626c54897edb5d804dd9ba12fd0b55ee56385b432c4aee5842`.
+  - Dies ist der System-4A-Handoff-Beweis, noch nicht der spätere signierte ENDSTEMPEL-Gesamtabschluss.
 
 ## C. Kanonischer Abschluss
-- [ ] **14. Finalen getesteten 4A-Stand kanonisch binden.**
+- [x] **14. Finalen getesteten 4A-Stand kanonisch binden.**
+  - Getesteter Hobbyraum-Head: `2e62f0c81abe16ed47c12ecc9df89a95942ad97d`.
+  - Kanonischer Bindungs-Head: `13d7743580d660d46f72dc80db6e081056814360`.
+  - Bindungsartefakt: `control/startmaster0107/SYSTEM4A_CANONICAL_BINDING_V1.json`.
+  - Deterministic Entrance Gate Run `35201028052`: SUCCESS.
+  - Immutable Base Hardlock Run `35201026166`: SUCCESS.
+  - PR `#270` gemerged; neuer `main`: `d434625da4817805fa95be0f766aa1b34ca6029a`.
+  - Geschützte Workflow-/ENDSTEMPEL-Pfade und die Downstream-Dateien für Punkt 15/16 wurden bewusst nicht vorgezogen. `CURRENT_STATE` wurde nicht manuell überschrieben; `publish_allowed=false`.
 - [ ] **15. 107008 über autorisierten Entrance-/Prebinding-Weg binden.**
 - [ ] **16. Reale Abschlussstrecke ausführen.** 107008 -> PSERC -> ENDSTEMPEL -> WordPress-Importformatprüfung.
 - [ ] **17. Finale Importdatei byte-/SHA-identisch in den Parent-Chat zurückgeben.**
@@ -77,4 +89,4 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] Früherer 1..N-Handoff PASS.
 
 ## Aktueller Einstiegspunkt
-**NEXT ACTION = Punkt 11: technischen/Integritäts-/Manipulationsfehler als terminalen BLOCK auf dem finalen Hobbyraum-Stand hart beweisen.**
+**NEXT ACTION = Punkt 15: 107008 über den autorisierten Entrance-/Prebinding-Weg an den jetzt kanonisch gebundenen System-4A-Stand binden.**
