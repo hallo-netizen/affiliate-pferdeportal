@@ -23,7 +23,7 @@ jobs:
       - name: Forbid mocks in real 102 harness
         run: |
           set -euo pipefail
-          for f in isolated_system4/real_102_repair_matrix_v1.py isolated_system4/real_102_repair_matrix_runner_v3.py; do
+          for f in isolated_system4/real_102_repair_matrix_v1.py isolated_system4/real_102_repair_matrix_runner_v3.py isolated_system4/real_102_repair_matrix_runner_v4.py; do
             if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then
               echo "REAL_102_MOCK_FORBIDDEN:$f"
               exit 2
@@ -47,7 +47,7 @@ jobs:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
         run: |
           set -euo pipefail
-          python3 isolated_system4/real_102_repair_matrix_runner_v3.py | tee /tmp/system4-real-102.log
+          python3 isolated_system4/real_102_repair_matrix_runner_v4.py | tee /tmp/system4-real-102.log
           grep -Fx 'TEXTMASCHINE_REAL_REPAIR_FULL_PASS:102/102' /tmp/system4-real-102.log
           test -s /tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json
           python3 - <<'PY'
