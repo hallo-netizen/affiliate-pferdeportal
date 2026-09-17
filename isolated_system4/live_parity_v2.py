@@ -139,6 +139,12 @@ def _worker_generate(e,workspace:Path,generated:Path,stage:str,*outs:Path):
 def _stage_with_return(e,workspace:Path,generated:Path,stage:str,controller_args:list[Path|str],*outs:Path)->list[str]:
     """Execute one producer stage and honor rc=4 as a mandatory return, never a block."""
     events=[]
+    expected_phase={
+        'research':'RESEARCH_REQUIRED',
+        'facts':'FACT_CHECK_REQUIRED',
+        'context':'CONTEXT_REQUIRED',
+        'draft':'DRAFT_REQUIRED',
+    }[stage]
     for attempt in range(2):
         _worker_generate(e,workspace,generated,stage,*outs)
         cp=run([sys.executable,HERE/'controller.py',*controller_args],e,check=False)
@@ -146,9 +152,11 @@ def _stage_with_return(e,workspace:Path,generated:Path,stage:str,controller_args
         if cp.returncode==4 and 'SYSTEM4_STAGE_OWNER_RETURN:' in cp.stdout:
             events.append(cp.stdout.strip())
             print(cp.stdout.strip(),flush=True)
-            # State is guaranteed unchanged by controller. Re-run the real producer once.
-            # If the producer repeats the same invalid artifact, fail explicitly as a
-            # producer repair failure rather than silently converting return into BLOCK.
+            # Same-stage returns retry the same producer once. A controlled upstream
+            # return changes phase (for example DRAFT -> CONTEXT); hand control back to
+            # the outer article loop so the responsible producer is run next.
+            if load(workspace/'state.json').get('phase') != expected_phase:
+                return events
             continue
         fail('UNEXPECTED_STAGE_BLOCK:'+stage+':'+cp.stdout.strip()+':'+cp.stderr.strip())
     fail('STAGE_OWNER_RETURN_REPAIR_NOT_EFFECTIVE:'+stage+':'+('|'.join(events)))
