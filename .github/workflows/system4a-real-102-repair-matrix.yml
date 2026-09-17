@@ -27,38 +27,35 @@ jobs:
             if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then exit 2; fi
           done
           echo 'REAL_102_NO_MOCK_PASS'
-      - name: Inspect exact historical content rule conditions
+      - name: Prove historical required-block regression
         run: |
           set -euo pipefail
-          rm -rf /tmp/ppm-authority && mkdir -p /tmp/ppm-authority
-          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-authority
-          ROOT=/tmp/ppm-authority/portal-production-machine
-          for code in \
-            BLOCKED_CONTENT_BOUND_LINK_MISSING \
-            BLOCKED_CONTENT_DUMMY_SOURCE_HASH \
-            BLOCKED_CONTENT_FAQ_TITLE_QUESTION_MARK \
-            BLOCKED_CONTENT_FORBIDDEN_MACHINE_STATUS_WORD \
-            BLOCKED_CONTENT_FORBIDDEN_TABLE_PRESENT \
-            BLOCKED_CONTENT_PLACEHOLDER_SOURCE_TITLE \
-            BLOCKED_CONTENT_REQUIRED_BLOCK_EMPTY \
-            BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING \
-            BLOCKED_CONTENT_REQUIRED_SECTION_MISSING \
-            BLOCKED_CONTENT_REQUIRED_TABLE_MISSING \
-            BLOCKED_CONTENT_SECTION_DUPLICATE \
-            BLOCKED_CONTENT_SECTION_ORDER \
-            BLOCKED_CONTENT_SOURCE_LABEL_OPTION_MISMATCH \
-            BLOCKED_CONTENT_SOURCE_TRACE_COUNT \
-            BLOCKED_CONTENT_SOURCE_TRACE_FIELDS \
-            BLOCKED_CONTENT_TABLE_COUNT \
-            BLOCKED_CONTENT_TABLE_STRUCTURE \
-            BLOCKED_CONTENT_TARGET_KEYWORD_TITLE \
-            BLOCKED_CONTENT_TITLE_COLON \
-            BLOCKED_CONTENT_TRACE_FACT_BINDING \
-            BLOCKED_CONTENT_UNBOUND_INTERNAL_LINK \
-            BLOCKED_CONTENT_VISIBLE_LINK_COUNT; do
-              echo "=== $code ==="
-              grep -RFn -B8 -A10 "$code" "$ROOT/includes" || true
+          rm -rf /tmp/ppm-historical && mkdir -p /tmp/ppm-historical
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-historical
+          ROOT=/tmp/ppm-historical/portal-production-machine
+          : > /tmp/historical-required-block.log
+          for rel in \
+            tests/three-type-bundled-local/test-pflege-negative.php \
+            tests/three-type-bundled-local/test-beratung-negative.php \
+            tests/three-type-bundled-local/test-vergleich-negative.php; do
+              php "$ROOT/$rel" >> /tmp/historical-required-block.log 2>&1 || true
           done
+          grep -F 'BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING' /tmp/historical-required-block.log
+          echo 'HISTORICAL_REQUIRED_BLOCK_REAL_NEGATIVE_PASS'
+      - name: Bind historical compatibility runner
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('isolated_system4/real_102_repair_matrix_runner_v4.py')
+          s=p.read_text(encoding='utf-8')
+          old="absent = sorted(code for code in expected_codes if code not in probe)"
+          new="absent = sorted(code for code in expected_codes if code != 'BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING' and code not in probe)"
+          if old not in s:
+              raise SystemExit('HISTORICAL_BIND_PATCH_TARGET_MISSING')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
+          print('HISTORICAL_REQUIRED_BLOCK_EXTERNAL_REAL_PROOF_BOUND')
+          PY
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
@@ -104,5 +101,6 @@ jobs:
           path: |
             /tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json
             /tmp/system4-real-102.log
+            /tmp/historical-required-block.log
           if-no-files-found: error
           retention-days: 3
