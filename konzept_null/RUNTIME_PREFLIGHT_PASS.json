@@ -1,0 +1,32 @@
+{
+  "contract": "KONZEPT_NULL_RUNTIME_PREFLIGHT_V1",
+  "status": "PASS",
+  "scope": "ISOLATED_LOCAL_ONLY",
+  "batch_size": "1..N",
+  "historical_startmaster": "STARTMASTER0102",
+  "historical_commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
+  "execution_boundary": "PSERC_0.28.14_METADATA_OUTPUT_TO_BEFORE_WORDPRESS",
+  "reason_for_boundary": "The article test consumes the exact five-field metadata handoff; no WordPress/PSTE/PSERC write path is needed or allowed inside KONZEPT NULL.",
+  "exact_metadata_fields": ["title", "target_keyword", "category", "article_type", "plan_slot"],
+  "dependencies": {
+    "PSTE_0.56.25_sha256": "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95",
+    "PPM_6.7.9_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+    "PPM_main_file_sha256": "0874f26f21e471007922cf759ea5ad52bdc61a5975931898e83e9ff8f6418906",
+    "LanguageTool": "6.8"
+  },
+  "real_execution_proof": {
+    "LanguageTool_6.8": "PASS",
+    "PPM_6.7.9_normal_draft_test": "PASS_NORMAL_DRAFT_1_TO_4_END_TO_END"
+  },
+  "isolation": {
+    "wordpress_access": false,
+    "wordpress_write": false,
+    "publish": false,
+    "main_write": false,
+    "merge": false,
+    "pull_request": false,
+    "deploy": false,
+    "external_write": false,
+    "production_authority": false
+  }
+}
