@@ -90,9 +90,16 @@ def current_canonical_mutations(rows: list[dict]) -> dict:
     h = re.sub(r'data-fact-ids="[^"]+"', 'data-fact-ids="' + first_fact + '"', html)
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_FACT_PACK_COVERAGE', 'fact_pack_coverage')
 
+    # The rule requires >=80% supported trace units. Break every trace-bearing factual unit,
+    # while leaving each trace tag and fact binding intact, so this exact ratio must fall.
+    trace_unit_pattern = r'(<p\b[^>]*data-fact-ids="[^"]+"[^>]*>)(.*?)(<span\b[^>]*class="ppm-source-trace"[^>]*>.*?</span>)(.*?</p>)'
+    lexical_index = {'n': 0}
     def lexical(m):
-        return m.group(1) + 'Xylophon Quasar Nebel Vulkan Marmor Zirkus Phantom. ' + m.group(3) + m.group(4)
-    h = _replace_in_block(html, 'details', r'(<p\b[^>]*data-fact-ids="[^"]+"[^>]*>)(.*?)(<span\b[^>]*class="ppm-source-trace"[^>]*>.*?</span>)(.*?</p>)', lexical)
+        lexical_index['n'] += 1
+        return m.group(1) + 'Xylophon Quasar Nebel Vulkan Marmor Zirkus Phantom Nummer ' + str(lexical_index['n']) + '. ' + m.group(3) + m.group(4)
+    h, changed = re.subn(trace_unit_pattern, lexical, html, flags=re.I | re.S)
+    if changed < 1:
+        raise AssertionError('CURRENT_MUTATION_TRACE_UNITS_MISSING')
     _expect(matrix.REPO, h, pack, plan, 'BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT', 'trace_lexical_support')
 
     sentence = 'Dieser sachliche Kontrollsatz wird ohne neuen Informationswert wiederholt.'
