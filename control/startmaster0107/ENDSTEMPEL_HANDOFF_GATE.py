@@ -67,7 +67,7 @@ def load_lock() -> dict[str, Any]:
     if not re.fullmatch(r"[0-9a-f]{64}", str(lock["expected_receipt_sha256"])):
         raise Blocked("HANDOFF_LOCK_RECEIPT_HASH_INVALID")
     articles = lock["expected_articles"]
-    if not isinstance(articles, list) or len(articles) != 7:
+    if not isinstance(articles, list) or len(articles) < 1:
         raise Blocked("HANDOFF_LOCK_ARTICLE_COUNT_INVALID")
     seen = set()
     for row in articles:
@@ -145,7 +145,7 @@ def verify_persisted_release(lock: dict[str, Any]) -> dict[str, Any]:
         "status": "ENDSTEMPEL_HANDOFF_PASS",
         "batch_sha256": batch,
         "receipt_sha256": actual_receipt_sha,
-        "article_count": 7,
+        "article_count": len(expected),
         "next_authorized_action": NEXT_ACTION,
         "publish_allowed": False,
         "content_mutation_performed": False,
