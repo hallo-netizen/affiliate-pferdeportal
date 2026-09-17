@@ -51,7 +51,12 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
   - Run `35197908873`, Head `6532feaf11de03b6cd09134e62281555bdc56de3`, SUCCESS.
   - Reale Schritte `Build fresh machine inputs for one article` und `Run complete one article route` beide SUCCESS; `Verify fresh-route evidence` und Artifact-Upload ebenfalls SUCCESS.
   - Der gebundene Verifikationsschritt verlangt für den 1-Artikel-Beweis: `article_count=1`, `pre_point0_article_body_count=0`, `inline_byte_equal=true`, LT=`PASS`, PPM=`PASS`, `revisions=[1]`, `freshness_status=PASS`, historische Exact-/Visible-Body-Wiederverwendung blockiert, aktuelle Source-Trace gebunden und eindeutiger Draft/Artikel.
-- [ ] **10. 3 Artikel mit absichtlich reparierbarem Fehler.** Genau ein Artikel zurück, gleiche Identität, Repair, vollständige Nachprüfung, PASS; andere unverändert.
+- [x] **10. 3 Artikel mit absichtlich reparierbarem Fehler.** Genau ein Artikel zurück, gleiche Identität, Repair, vollständige Nachprüfung, PASS; andere unverändert.
+  - Workflow: `System 4A Real LT68 PPM679 Acceptance`
+  - Run `35198500052`, Head `2f0b56ee84992af52729815c1583983301b944aa`, SUCCESS.
+  - Remote-Schritt `Run complete three article route with repair isolation` verlangt exakt **ein** `SYSTEM4_TESTWORKER_REPAIR_REQUEST` und bindet ihn an `article_index=1` mit `BLOCKED_KNOWN_REGRESSION_PATTERN`.
+  - Remote-Artefakt `LIVE_PARITY_V2_3_PROOF.json`: `article_count=3`, `revisions=[1,2,1]`, LT=`PASS/PASS/PASS`, PPM=`PASS/PASS/PASS`, `freshness_status=PASS`, `inline_byte_equal=true`.
+  - Damit wurde nur Artikel 1 im selben indexgebundenen Workspace repariert und vollständig neu geprüft; Artikel 0 und 2 blieben Revision 1 ohne Repair.
 - [ ] **11. Technischer/Integritäts-/Manipulationsfehler.** Terminal BLOCK.
 - [ ] **12. 1..N / Batch / Identität / Reihenfolge / Hash-/Byte-Bindung.** PASS.
 - [ ] **13. Handoff/Parent-Chat.** Exakt dieselben Bytes/SHA zurück.
@@ -72,4 +77,4 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] Früherer 1..N-Handoff PASS.
 
 ## Aktueller Einstiegspunkt
-**NEXT ACTION = Punkt 10: 3 Artikel mit absichtlich reparierbarem Fehler auf dem finalen Hobbyraum-Stand hart beweisen.**
+**NEXT ACTION = Punkt 11: technischen/Integritäts-/Manipulationsfehler als terminalen BLOCK auf dem finalen Hobbyraum-Stand hart beweisen.**
