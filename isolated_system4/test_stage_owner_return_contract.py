@@ -111,6 +111,43 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             ('DRAFT_WORKER', 'DRAFT_STAGE'),
         )
 
+    def test_draft_fact_pack_claim_count_returns_context_worker_and_rolls_back_same_article(self):
+        self.assertEqual(
+            controller._stage_owner_route('draft', 'ARTICLE_AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID'),
+            ('CONTEXT_WORKER', 'CONTEXT_STAGE'),
+        )
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            state = _base_state('DRAFT_REQUIRED')
+            state['research'] = {'text': 'research', 'sha256': _sha_text('research')}
+            state['facts'] = {'text': 'facts', 'sha256': _sha_text('facts')}
+            state['production_context'] = {'sentinel': 'context'}
+            state['authoring_contract'] = {'sentinel': 'authoring'}
+            state['route_contract'] = controller.ROUTE_CONTRACT
+            state['route_contract_sha256'] = controller._route_contract_digest()
+            state['route_progress'] = ['RESEARCH', 'FACTS', 'CONTEXT']
+            state['repair_return_counts'] = {}
+            state['repair_history'] = []
+            original_article = json.loads(json.dumps(state['article']))
+            ws = _write_workspace(root / 'ws', state)
+
+            def fail_draft(*_args):
+                raise controller_engine.Fail('AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID')
+
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                rc = controller._stage_owner_call('draft', fail_draft, str(ws), str(root / 'draft.html'))
+            self.assertEqual(rc, 4, out.getvalue())
+            repaired = json.loads((ws / 'state.json').read_text(encoding='utf-8'))
+            self.assertEqual(repaired['phase'], 'CONTEXT_REQUIRED')
+            self.assertEqual(repaired['article'], original_article)
+            self.assertEqual(repaired['route_progress'], ['RESEARCH', 'FACTS'])
+            self.assertIsNone(repaired['production_context'])
+            self.assertIsNone(repaired['authoring_contract'])
+            self.assertEqual(repaired['repair_return_counts']['CONTEXT_WORKER'], 1)
+            self.assertEqual(repaired['repair_history'][-1]['return_owner'], 'CONTEXT_WORKER')
+            self.assertIn('SYSTEM4_STAGE_OWNER_RETURN:CONTEXT_WORKER:CONTEXT_STAGE:AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID', out.getvalue())
+
     def test_draft_binding_or_integrity_failure_remains_hard_block(self):
         self.assertIsNone(controller._stage_owner_route('draft', 'ARTICLE_AUTHORING_CONTRACT_FAIL:QUALITY_BINDING_HASH_INVALID'))
         self.assertIsNone(controller._stage_owner_route('draft', 'DRAFT_INTEGRITY_FAIL'))
