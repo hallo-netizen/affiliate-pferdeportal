@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# HARD RULE: the final article may complete only after batch_gate.py collect passes.
 import importlib.util
 import json
 import tempfile
