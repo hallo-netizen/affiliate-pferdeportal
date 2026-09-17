@@ -25,10 +25,14 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] **4. Für jede Textmaschinenregel Fehlerklasse festlegen.** **152/152 klassifiziert:** 102 reparierbar mit festem Owner, 50 terminal/fail-closed `HARD_BLOCK`. PPM-Verteilung korrigiert über reale Validator-`field_path`s: 83 Draft, 3 Parent-Title, 2 Portal-Link, 1 Parent-Category, 15 Hard. LanguageTool separat: echtes LT-Finding -> `DRAFT_WORKER`; LT-Hash-/Worker-/Execution-/Reportfehler -> `HARD_BLOCK`.
   - Beleg: `isolated_system4a/TEXTMASCHINE_FEHLERKLASSIFIKATION_20260917.md`
 - [ ] **5. Für jede reparierbare Regel vollständigen Rückweg beweisen.** Richtiger Owner -> gleicher Artikel -> gezielte Reparatur -> vollständige Textmaschine erneut -> PASS.
-  - Implementierungslücke gefunden und geschlossen: reparierbare `content_guard`-/`design_guard`-Befunde werden im `controller.cmd_fullcheck()` nicht mehr pauschal hart geblockt, sondern über `production_checks.guard_repair_finding()` an `DRAFT_WORKER -> REPAIR_REQUIRED` geroutet.
-  - Regressionstest angelegt: `isolated_system4/test_fullcheck_guard_repair_contract.py` (Repair-Route, gleiche Artikelidentität, Recheck-PASS, Hard-Block-Grenze).
-  - **Noch kein `[x]`:** auf dem aktuellen Hobbyraum-Head fehlt noch ein zulässiger Remote-Lauf dieses neuen Tests. Ein kurz geöffneter Draft-PR wurde wieder geschlossen; dessen generischer Entrance-Gate-Lauf scheiterte vor den Textmaschinentests an altem `NEXT_BUNDLE_HASH_MISMATCH` und ist kein Punkt-5-Beleg.
-- [ ] **6. Für jede nicht reparierbare Regel Hard Block beweisen.** Kein falscher Repair-Pfad; terminal/fail-closed.
+  - Implementierungslücke geschlossen: reparierbare `content_guard`-/`design_guard`-Befunde laufen über `production_checks.guard_repair_finding()` an `DRAFT_WORKER -> REPAIR_REQUIRED`.
+  - Neuer Regressionstest `isolated_system4/test_fullcheck_guard_repair_contract.py` lief remote zusammen mit den bestehenden Repair-Owner-Verträgen: Workflow `System 4A Repair Owner Contract`, Run `35194565815`, Head `66100241a2d90b09228ec004f7fa433502be152d`, SUCCESS.
+  - Dieser Run beweist den Guard-Rückweg, gleiche Artikelidentität und Recheck-PASS sowie die bestehenden Owner-Verträge. **Noch kein `[x]`**, solange die 102 reparierbaren Regeln nicht vollständig gegen ihre Owner-Klasse und den Rückweg gebunden sind; die 87 Negativlücken aus Punkt 3 verhindern noch den vollständigen Einzelregelbeweis.
+- [x] **6. Für jede nicht reparierbare Regel Hard Block beweisen.** **50/50 terminale Regeln** sind in `isolated_system4/test_textmachine_hardblock_matrix.py` einzeln an die echte Klassifikations-/Controller-Grenze gebunden und dürfen nicht in `REPAIR_REQUIRED` fallen.
+  - PPM: 15/15 terminale Regel-Einträge
+  - Content Guard: 28/28 terminale Regeln
+  - Design Guard: 7/7 terminale Regeln
+  - Remote-Beleg: Workflow `System 4A Repair Owner Contract`, Run `35194863123`, Head `e56ef98aa89a35a313014c416ef9d129eea89743`, SUCCESS.
 - [ ] **7. Nur tatsächlich fehlende Nachweise ergänzen.** Aktuell exakt **87 Negativbeweis-Lücken** aus Punkt 3. Keine neuen Qualitätsregeln, keine zweite Textmaschine, keine abgeschwächten Prüfer.
 - [ ] **8. `TEXTMASCHINE_REGELN_FULL_PASS` beweisen.** Erst wenn 1–7 vollständig und maschinenfest abgeschlossen sind.
 
@@ -55,6 +59,6 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] Früherer 1..N-Handoff PASS (ersetzt Punkt 12 nicht).
 
 ## Aktueller Einstiegspunkt
-**NEXT ACTION = Punkt 5.**
+**NEXT ACTION = Punkt 5 abschließen, technisch gebunden an Punkt 7.**
 
-Den neuen Guard-Rückweg zusammen mit den bereits vorhandenen PPM/LT/External-Link-/Parent-Owner-Routen auf demselben Hobbyraum-Head real ausführen; erst danach Punkt 5 abhaken. Danach Punkt 6.
+Die 102 reparierbaren Regeln sind klassifiziert und die Owner-Routen laufen remote. Jetzt ausschließlich die 87 echten Negativlücken aus Punkt 3 in Punkt 7 ergänzen; dadurch wird zugleich der noch fehlende Einzelregel-Rückweg für Punkt 5 geschlossen. Danach Punkt 5 und 7 abhaken und Punkt 8 ausführen.
