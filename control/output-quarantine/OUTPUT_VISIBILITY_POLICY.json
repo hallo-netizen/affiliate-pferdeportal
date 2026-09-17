@@ -4,6 +4,7 @@
   "chat_execution_authority": "NONE",
   "chat_output_authority": "NONE",
   "visible_project_result_authority": "RELEASE_RECEIPT_ONLY",
+  "visible_output_authority": "RELEASE_RECEIPT_ONLY",
   "bound_worker_origin": "BOUND_WORKER",
   "worker_quarantine_root": ".pferde-quarantine",
   "release_staging_root": ".pferde-release-staging",
