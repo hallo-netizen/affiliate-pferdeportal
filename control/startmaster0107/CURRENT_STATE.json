@@ -43,14 +43,14 @@
     "status": "AVAILABLE",
     "type": "GITHUB_PR_COMMENT_CODEX_MENTION",
     "repository": "hallo-netizen/affiliate-pferdeportal",
-    "pr_number": 238,
+    "pr_number": 275,
     "trigger": "@codex",
-    "availability_test": "Chat must be able to create a top-level PR conversation comment on PR #238 via the connected GitHub tool.",
-    "proof": "PR #238 contains prior @codex launches answered by chatgpt-codex-connector[bot] with View task links and System4 execution output.",
+    "availability_test": "Chat must be able to create a top-level PR conversation comment on PR #275 via the connected GitHub tool.",
+    "proof": "PR #238 provides historical proof that @codex PR comments start chatgpt-codex-connector tasks; PR #275 is the durable start surface bound to the current working branch.",
     "hard_rule": [
       "Do not search for or require a separate Codex plugin when GitHub PR comment write access is available.",
-      "For a Codex NEXT ACTION, first verify PR #238 exists and GitHub top-level PR comment creation is available.",
-      "Then trigger Codex only by a top-level @codex comment on PR #238 containing the exact bound task.",
+      "For a Codex NEXT ACTION, first verify PR #275 is open, its head is the current working branch, and GitHub top-level PR comment creation is available.",
+      "Then trigger Codex only by a top-level @codex comment on PR #275 containing the exact bound task.",
       "Do not substitute GitHub Actions, legacy fachworkflow_handoff, codex_current_action, worker-authored PASS, or auto-publish."
     ]
   },
@@ -66,7 +66,7 @@
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "next_action": "Use the durable GitHub PR #238 @codex start surface and start the real 107007 production run against the exact bound SYSTEM4_PARENT_LAUNCH_V1."
+    "next_action": "Use the durable GitHub PR #275 @codex start surface and start the real 107007 production run against the exact bound SYSTEM4_PARENT_LAUNCH_V1."
   },
   "mandatory_execution_path": [
     "control/output-quarantine/runtime_entry_gate.py",
@@ -99,7 +99,7 @@
       5
     ],
     "current_focus": "REAL_107007_CODEX_PRODUCTION_START",
-    "next_action": "Trigger @codex on PR #238 with the exact bound 107007 System4 production task; then execute and prove the real 7-article production run.",
+    "next_action": "Trigger @codex on PR #275 with the exact bound 107007 System4 production task; then execute and prove the real 7-article production run.",
     "return_path": "same article -> existing repair route -> complete text-machine recheck"
   }
 }
