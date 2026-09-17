@@ -6,38 +6,26 @@ Zweck: Punkt 1 des eingeschlossenen Hobbyraum-Arbeitsauftrags.
 
 ## Harte Abgrenzung
 
-Als **Textmaschinenregel** zählt hier nur eine fachliche/inhaltliche Regel, die im echten `controller.cmd_fullcheck()` auf dem Artikel bzw. seinem Fact-Pack ausgeführt wird.
+Als **Textmaschinenregel** zählt nur eine fachliche/inhaltliche Regel, die im echten `controller.cmd_fullcheck()` auf Artikel bzw. Fact-Pack tatsächlich erreichbar ausgeführt wird.
 
-Die reale Reihenfolge ist:
-
+Reale Reihenfolge:
 1. `content_guard.validate_single_article()`
 2. `design_guard.validate_design_neutrality()`
-3. `production_checks.run_all()` mit
-   - `no_external_links()`
-   - realem LanguageTool 6.8
-   - echtem PPM 6.7.9 Content Validator
+3. `production_checks.run_all()` mit External-Link-Prüfung, LanguageTool 6.8 und PPM 6.7.9 Content Validator.
 
-Nicht in die fachliche Textmaschinen-Regelmenge eingerechnet werden technische Bindungs-/Integritätsregeln wie Authoring-Contract-Bindung, Draft-SHA, Package-/Jar-Hash, Ausführungsfehler, Legacy-Runtime-Sperre, Route/State, Batch, Release, WordPress und Handoff. Diese bleiben weiterhin harte fail-closed Voraussetzungen, sind aber keine fachlichen Textregeln.
+Technische Bindungs-/Integritätsregeln (Authoring Contract, SHA/Hashes, Package/Jar, Execution, Route/State, Batch, Release, WordPress, Handoff) bleiben fail-closed Voraussetzungen außerhalb der fachlichen Textregelmenge.
 
-## Exakte diskrete Projektregelmenge
+## Exakte erreichbare Projektregelmenge
 
 ### A. PPM 6.7.9 — 104 aktive Regel-Einträge
-
-Aus dem unveränderten PPM-6.7.9-Register `contracts/hard-rule-registry-v1.json` gehören **104 aktive Einträge** direkt zu den im echten Content-Fullcheck verwendeten Validatoren:
-
 - `includes/content-validator.php`: 52
 - `includes/content-structure-language-gate.php`: 34
 - `includes/known-error-gate.php`: 14
-- kombiniert `includes/rendered-dom-validator.php; includes/content-structure-language-gate.php`: 4
+- `includes/rendered-dom-validator.php; includes/content-structure-language-gate.php`: 4
 
-Davon:
-- 100 = `ACTIVE_VALIDATOR_BLOCKING_RULE` mit konkretem Fehlercode
-- 4 = `WAVE4_EXACT_REQUIREMENT` ohne eigenen einzelnen Fehlercode, aber mit gebundenem Positiv-/Negativtest an denselben Textvalidatoren
+Davon 100 `ACTIVE_VALIDATOR_BLOCKING_RULE` mit Fehlercode und 4 `WAVE4_EXACT_REQUIREMENT` mit gebundenem Positiv-/Negativtest.
 
-### B. System-4 Content Guard — 31 diskrete Fullcheck-Fehlerregeln
-
-`validate_single_article()` ruft `validate_fact_pack()` und `validate_article_fact_ids()` auf. Im tatsächlich erreichbaren Fullcheck-Pfad ergeben sich **31 eindeutige Fehlercode-Basen**:
-
+### B. System-4 Content Guard — 30 im Fullcheck erreichbare Fehlerregeln
 1. `FACT_PACK_OBJECT_REQUIRED`
 2. `FACT_PACK_CONTRACT_INVALID`
 3. `FACT_PACK_NOT_PRODUCTION_READY`
@@ -61,19 +49,19 @@ Davon:
 21. `FACT_EVIDENCE_HASH_INVALID`
 22. `FACT_SOURCE_NOT_IN_RESEARCH`
 23. `FACT_EVIDENCE_HASH_MISMATCH`
-24. `FACT_SOURCE_EVIDENCE_MISSING`
-25. `FACT_EVIDENCE_NOT_IN_SOURCE`
-26. `FACT_PACK_FACT_ID_DUPLICATE`
-27. `FACT_PACK_CLAIM_SOURCE_URL_MISMATCH`
-28. `ARTICLE_FACT_PACK_CLAIMS_MISSING`
-29. `ARTICLE_FACT_IDS_MISSING`
-30. `ARTICLE_UNKNOWN_FACT_ID`
-31. `ARTICLE_FACT_TRACE_MISSING`
+24. `FACT_EVIDENCE_NOT_IN_SOURCE`
+25. `FACT_PACK_FACT_ID_DUPLICATE`
+26. `FACT_PACK_CLAIM_SOURCE_URL_MISMATCH`
+27. `ARTICLE_FACT_PACK_CLAIMS_MISSING`
+28. `ARTICLE_FACT_IDS_MISSING`
+29. `ARTICLE_UNKNOWN_FACT_ID`
+30. `ARTICLE_FACT_TRACE_MISSING`
 
-Die ersten 29 sind Fact-Pack-/Evidenz-Integrität und daher fail-closed. `ARTICLE_UNKNOWN_FACT_ID` und `ARTICLE_FACT_TRACE_MISSING` sind Draft-Realisation und damit writer-reparierbar.
+**Korrektur gegenüber dem ersten Snapshot:** `FACT_SOURCE_EVIDENCE_MISSING` ist zwar ein interner `_claim_core()`-Fehlercode, aber im echten `validate_single_article() -> validate_fact_pack() -> _pack_sources() -> _pack_claims()` nicht erreichbar. Fehlende Source-Evidence wird bereits vorher durch `_research_source()` als `FACT_PACK_SOURCE_EVIDENCE_INVALID` blockiert. Deshalb darf dieser Code nicht als eigenständige Fullcheck-Regel gezählt werden.
+
+Die ersten 28 sind Fact-Pack-/Evidenz-Integrität und fail-closed; `ARTICLE_UNKNOWN_FACT_ID` und `ARTICLE_FACT_TRACE_MISSING` sind Draft-Realisation und writer-reparierbar.
 
 ### C. System-4 Design Guard — 16 diskrete Regeln
-
 1. `DESIGN_ARTICLE_TYPE_TOKEN_INVALID`
 2. `DESIGN_BODY_EMPTY`
 3. `DESIGN_ARTICLE_TYPE_MISSING`
@@ -91,39 +79,28 @@ Die ersten 29 sind Fact-Pack-/Evidenz-Integrität und daher fail-closed. `ARTICL
 15. `DESIGN_TABLE_INLINE_STYLE_FORBIDDEN`
 16. `DESIGN_BERATUNG_HEADING_LEVEL_FORBIDDEN`
 
-Aktuell semantisch writer-reparierbar klassifiziert sind 9 davon: Body leer, Root fehlt, PPM-Klasse fehlt, Typklasse fehlt, Typattribut falsch, verschachteltes Article, beide Tabellenklassen sowie Beratung-Heading-Level. Die übrigen 7 bleiben Integritäts-/Sicherheits-Hard-Block.
-
 ### D. Externe Links — 2 diskrete Regeln
-
 - `EXTERNAL_LINK_FORBIDDEN`
 - `EXTERNAL_URL_FORBIDDEN`
 
-Beide sind Draft-Realisation und gehen an `DRAFT_WORKER`.
-
 ### E. LanguageTool 6.8
-
-LanguageTool ist ein **externer regelbasierter Prüfer mit dynamischen internen Rule-IDs**, kein Pferde-Atelier-Hard-Rule-Register. Deshalb werden seine internen Vendor-Regeln nicht künstlich als Projektregel-IDs dupliziert.
-
-Der Projektvertrag ist genau einheitlich:
-- 0 LT-Findings = PASS
-- >=1 echtes LT-Finding = `RepairRequired("languagetool", ...)` -> `DRAFT_WORKER`
-- LT/Jar/Worker/Execution-/Reportfehler = technischer HARD BLOCK, nicht Textreparatur
+Externer dynamischer Regelprüfer; Vendor-Rule-IDs werden nicht künstlich als Pferde-Atelier-Projektregeln dupliziert.
+- 0 Findings = PASS
+- >=1 Finding = Draft-Repair
+- Jar/Worker/Execution/Reportfehler = technischer HARD BLOCK
 
 ## Ergebnis Punkt 1
 
-**Exakte diskrete Pferde-Atelier-Textmaschinen-Regelmenge = 153 Regeln:**
-
+**Exakte im Fullcheck erreichbare diskrete Pferde-Atelier-Textmaschinen-Regelmenge = 152 Regeln:**
 - 104 PPM
-- 31 Content Guard
+- 30 Content Guard
 - 16 Design Guard
 - 2 External-Link-Regeln
 
-Zusätzlich ist LanguageTool 6.8 als externer dynamischer Regelprüfer vollständig im Fullcheck gebunden; seine Vendor-Rule-IDs sind nicht Teil der 153 Projektregeln.
+Zusätzlich: LanguageTool 6.8 als real gebundener dynamischer externer Regelprüfer.
 
 ## Bekannte Implementierungslücke für Punkt 4/5
-
-Die Klassifikation für reparierbare Content-/Design-Guard-Fehler existiert bereits in `production_checks.guard_repair_finding()`. Der aktuelle `controller.cmd_fullcheck()` fängt `ContentGuardError` und `DesignGuardError` jedoch noch pauschal als `FULL_CHECK_HARD_BLOCK` ab. Damit ist Punkt 4/5 **noch nicht PASS**: die vorhandene Repair-Klassifikation muss im Controller tatsächlich verwendet und negativ getestet werden.
+Die Klassifikation reparierbarer Content-/Design-Guard-Fehler existiert in `production_checks.guard_repair_finding()`, der aktuelle `controller.cmd_fullcheck()` behandelt `ContentGuardError` und `DesignGuardError` jedoch noch pauschal als `FULL_CHECK_HARD_BLOCK`. Diese Lücke muss in Punkt 7 minimal geschlossen werden.
 
 ## NEXT ACTION
-
-Punkt 2: Für alle 153 Projektregeln den vorhandenen realen Positivnachweis bestimmen. Parallel darf die oben dokumentierte Controller-Lücke erst in Punkt 7 minimal geschlossen werden; vorher keine vorgezogene Architekturänderung.
+Punkt 3: für alle 152 erreichbaren Projektregeln den gezielten Negativnachweis am echten Prüfer/exakten Fehlercode belegen; nur echte Lücken anschließend in Punkt 7 ergänzen.
