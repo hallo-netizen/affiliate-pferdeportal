@@ -162,7 +162,19 @@ def m19():
     must("git diff-tree -m" in s,"M19_MERGE_TRIGGER")
 def m20():
     s=(REPO/"control/startmaster0107/chat_delivery_payload.py").read_text(encoding="utf-8")
-    must("EXACTLY_SEVEN_ARTICLES_REQUIRED" in s and "import_envelope" in s and "source_manifest" in s,"M20_DELIVERY")
+    for token in (
+        "len(articles) != 7",
+        "len(articles)!=7",
+        "len(articles) == 7",
+        "len(articles)==7",
+        '"item_count": 7',
+        '"article_count": 7',
+    ):
+        must(token not in s,"M20_FIXED_SEVEN_STILL_ACTIVE:"+token)
+    must("count = len(articles)" in s and "count < 1" in s,"M20_1N_COUNT_BINDING_MISSING")
+    must('len({a["name"] for a in articles}) != count' in s,"M20_1N_UNIQUENESS_BINDING_MISSING")
+    must('"item_count": count' in s and '"article_count": count' in s,"M20_1N_COUNT_PROPAGATION_MISSING")
+    must("import_envelope" in s and "source_manifest" in s,"M20_DELIVERY_BINDING_MISSING")
 def m21():
     # Hard positive/negative against the real visible-release guard.
     g=mod(REPO/"control/output-quarantine/output_release_gate.py","m21_release_guard")
@@ -309,18 +321,18 @@ def m29():
     expect_exc(lambda:a._validate_release_metadata_identity({"exact_five_batch_sha256":"0"*64,"exact_five_item_count":count},batch,count),"RELEASE_METADATA_BATCH_MISMATCH")
     expect_exc(lambda:a._validate_release_metadata_identity({"exact_five_batch_sha256":batch,"exact_five_item_count":count+1},batch,count),"RELEASE_METADATA_ITEM_COUNT_MISMATCH")
 
-def _final_ctx_fixture(root:Path,wrong_batch=False):
+def _final_ctx_fixture(root:Path,wrong_batch=False,item_count=3):
     d=mod(DUAL,"m30_dual")
     batch="c"*64; out=[]; meta={
       "article_origin_policy":"POST_TEXT_SIGNED_0039_ORIGIN_AND_NO_REWRITE","authoring_prompt_sha256":"b"*64,
       "authoring_role":"CHAT_OR_APPROVED_RESEARCH_TEXT_PROCESS","content_generation_performed_by_supervisor":False,
       "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED","created_at_utc":"2026-09-04T00:00:00+00:00",
-      "exact_five_batch_sha256":("d"*64 if wrong_batch else batch),"exact_five_item_count":7,
+      "exact_five_batch_sha256":("d"*64 if wrong_batch else batch),"exact_five_item_count":item_count,
       "frozen_workflow_sha256":"e"*64,"nullpunkt":{},"nullpunkt_sha256":"f"*64,"ppm_baseline_sha256":"1"*64,
       "ppm_version":"6.7.9","research_evidence_policy":"BOUND_EXISTING_FACHWORKFLOW_ONLY","sequence":107008,
       "status":"PASS","wordpress_write_performed":False}
     header={"contract":"production_plan_v4","plan_contract_version":"4.0.0"}
-    for i in range(7):
+    for i in range(item_count):
         p=root/f"FACHWORKFLOW_PASS_{i}.json"
         q={"production_plan_header":header,"workflow_release_metadata":meta,"production_plan_item":{"canonical_article_id":f"article:{i}"},"fact_pack":{"contract":"canonical_fact_pack_v1","fact_pack_id":f"fp{i}"},"workflow_release_item":{"canonical_article_id":f"article:{i}"}}
         dump(p,q);out.append({"released_ref":p.name,"sha256":sha(p)})
@@ -329,11 +341,12 @@ def _final_ctx_fixture(root:Path,wrong_batch=False):
     return d,rp
 
 def m30():
+    for item_count in (1,3):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);d,rp=_final_ctx_fixture(root,False,item_count)
+            ctx=d.context_from_release(root,rp.name);must(len(ctx["production_plan"]["items"])==item_count,"M30_POSITIVE_COUNT")
     with tempfile.TemporaryDirectory() as td:
-        root=Path(td);d,rp=_final_ctx_fixture(root,False)
-        ctx=d.context_from_release(root,rp.name);must(len(ctx["production_plan"]["items"])==7,"M30_POSITIVE_COUNT")
-    with tempfile.TemporaryDirectory() as td:
-        root=Path(td);d,rp=_final_ctx_fixture(root,True)
+        root=Path(td);d,rp=_final_ctx_fixture(root,True,3)
         expect_exc(lambda:d.context_from_release(root,rp.name),"FINAL_CONTEXT_BATCH_MISMATCH")
 
 def m31():
@@ -472,6 +485,23 @@ def m37():
     else:
         raise Fail("M37_REPAIRABLE_NOT_REPAIR_REQUIRED")
 
+def _m38_authoritative_versions()->tuple[str,str]:
+    src=DUAL.read_text(encoding="utf-8")
+    must("'plan_contract_version':'4.0.0'" in src,"M38_PLAN_VERSION_AUTHORITY_MISSING")
+    must("'required_plugin_version':'6.7.9'" in src,"M38_PLUGIN_VERSION_AUTHORITY_MISSING")
+    return "4.0.0","6.7.9"
+
+def m38():
+    plan_version,plugin_version=_m38_authoritative_versions()
+    step=str(load(STEP7).get("instruction") or "")
+    handoff=HANDOFF.read_text(encoding="utf-8")
+    must("production_plan_header" in step,"M38_PLAN_HEADER_PRODUCER_BINDING_MISSING")
+    must("plan_contract_version" in step and plan_version in step,"M38_PLAN_CONTRACT_VERSION_NOT_BOUND")
+    must("required_plugin_version" in step and plugin_version in step,"M38_REQUIRED_PLUGIN_VERSION_NOT_BOUND")
+    must("BOUND_PRODUCTION_PLAN_VERSION_MISMATCH" in handoff,"M38_HANDOFF_PLAN_VERSION_GUARD_MISSING")
+    must("plan_contract_version" in handoff and plan_version in handoff,"M38_HANDOFF_PLAN_CONTRACT_VERSION_NOT_BOUND")
+    must("required_plugin_version" in handoff and plugin_version in handoff,"M38_HANDOFF_PLUGIN_VERSION_NOT_BOUND")
+
 def m35_machine_proof_selftest():
     good="""$imp=PPM679_Admin::import_fact_pack_bundle($bundle);
 $expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
@@ -490,7 +520,7 @@ CASES=[
 ("M01",m01),("M02",m02),("M03",m03),("M04",m04),("M05",m05),("M06",m06),("M07",m07),("M08",m08),("M09",m09),("M10",m10),
 ("M11",m11),("M12",m12),("M13",m13),("M14",m14),("M15",m15),("M16",m16),("M17",m17),("M18",m18),("M19",m19),("M20",m20),
 ("M21",m21),("M22",m22),("M23",m23),("M24",m24),("M25",m25),("M26",m26),("M27",m27),("M28",m28),("M29",m29),("M30",m30),
-("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36),("M37",m37)]
+("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36),("M37",m37),("M38",m38)]
 
 def _run_ordered(cases,phase):
     results=[]
@@ -530,14 +560,14 @@ def main(argv):
     if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only] | --case MXX | --proof-selftest M28|M35")
 
     # Repair phase: do not duplicate already-proven old positives while an open
-    # regression still fails. Once M26-M37 are resolved, automatically run the
-    # one required final M01-M37 suite on the same head.
+    # regression still fails. Once M26-M38 are resolved, automatically run the
+    # one required final M01-M38 suite on the same head.
     if open_only:
-        open_results=_run_ordered(CASES[25:],"OPEN_M26_M37")
+        open_results=_run_ordered(CASES[25:],"OPEN_M26_M38")
         if open_results is None:return 2
         print("OPEN_REGRESSIONS_PASS",flush=True)
 
-    results=_run_ordered(CASES,"FINAL_M01_M37")
+    results=_run_ordered(CASES,"FINAL_M01_M38")
     if results is None:return 2
 
     # Required final re-check against the last real production regression.
