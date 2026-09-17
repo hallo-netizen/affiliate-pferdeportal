@@ -12,6 +12,7 @@ from unittest import mock
 import content_guard
 import controller
 import controller_engine
+import test_batch_gate
 
 
 def _sha_text(value: str) -> str:
@@ -119,11 +120,9 @@ class StageOwnerReturnContractTests(unittest.TestCase):
         )
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
-            state = _base_state('DRAFT_REQUIRED')
-            state['research'] = {'text': 'research', 'sha256': _sha_text('research')}
-            state['facts'] = {'text': 'facts', 'sha256': _sha_text('facts')}
-            state['production_context'] = {'sentinel': 'context'}
-            state['authoring_contract'] = {'sentinel': 'authoring'}
+            _, state_paths = test_batch_gate.make_fixture(root / 'fixture', count=1)
+            state = json.loads(state_paths[0].read_text(encoding='utf-8'))
+            state['phase'] = 'DRAFT_REQUIRED'
             state['route_contract'] = controller.ROUTE_CONTRACT
             state['route_contract_sha256'] = controller._route_contract_digest()
             state['route_progress'] = ['RESEARCH', 'FACTS', 'CONTEXT']
@@ -131,6 +130,7 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             state['repair_history'] = []
             original_article = json.loads(json.dumps(state['article']))
             ws = _write_workspace(root / 'ws', state)
+            controller_engine.verify_state(state)
 
             def fail_draft(*_args):
                 raise controller_engine.Fail(real_error)
