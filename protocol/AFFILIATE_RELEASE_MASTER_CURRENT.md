@@ -46,17 +46,25 @@ Diese Linie verletzt als nichtkanonische Fortsetzung die bereits gebundene Nicht
 
 ## Frischecheck-Befund / erster offener Blocker
 
-`control/release-governance/CURRENT_RELEASE.json` ist fuer die **Release-Source** korrekt auf 6.72.19 gebunden, fuehrt aber im dynamischen `user_scope_lock.current_focus` und `execution_state.bound_user_scope_action` noch den vorherigen **ADCELL**-Fokus. Der aktuelle ausdrueckliche Nutzer-Scope ist inzwischen Kategorie-Querbanner + Werbeplatzfilter.
+Zwei bestehende dynamische Quellen tragen noch den alten Scope und widersprechen damit dem aktuellen ausdruecklichen Nutzer-Scope **Kategorie-Querbanner + Werbeplatzfilter**:
 
-Damit liegt aktuell eine **CURRENT-SCOPE-Drift** vor. Diese wird nicht durch Raten ueberschrieben. Solange Governance-Scope und CURRENT MASTER nicht atomar auf denselben Fachscope zeigen, bleibt der technische Einstieg BLOCKED.
+1. `control/release-governance/CURRENT_RELEASE.json`: Release-Source korrekt 6.72.19, aber `user_scope_lock.current_focus` und `execution_state.bound_user_scope_action` stehen noch auf **ADCELL**.
+2. `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md`: permanentes Fehlerregister ist fachlich weiter bindend, aber sein unterer Abschnitt **„Aktueller PRECHECK“** steht noch auf **OTTO/Awin 14336** und nennt eine alte NEXT ACTION.
+
+Damit liegt aktuell eine **CURRENT-SCOPE-Drift** vor (`AFF-ERR-025` / `AF-057`). Die permanente Fehlerhistorie bleibt gueltig; nur die veralteten dynamischen Scope-/PRECHECK-Bindungen muessen nachgezogen werden. Solange das nicht atomar geschehen ist, bleibt der technische Einstieg BLOCKED.
 
 ## NEXT ACTION — exakt eine
 
-**Governance-Scope atomar auf den bereits gebundenen 2026-09-17-Auftrag `protocol/AFFILIATE_RELEASE_CATEGORY_BANNER_WERBEPLATZ_FILTER_TASK_20260917.md` nachziehen, ohne die kanonische 6.72.19-Source, Manifestbindung oder `release_allowed=false` vorzeitig zu veraendern.**
+**Nur die veralteten dynamischen Scope-Bindungen in `CURRENT_RELEASE.json` und im Abschnitt `Aktueller PRECHECK` des Fehlerregisters atomar auf den bereits gebundenen 2026-09-17-Auftrag `protocol/AFFILIATE_RELEASE_CATEGORY_BANNER_WERBEPLATZ_FILTER_TASK_20260917.md` nachziehen.**
 
-Dabei muessen die bestehenden immutable Guard-Vertragswerte und der erlaubte `authorized_next_action`-Enum unveraendert respektiert werden. Kein Pluginbuild, kein Installer, keine Versionswahl.
+Dabei gilt:
+- kanonische 6.72.19-Source und Manifest unveraendert lassen;
+- `release_allowed=false` unveraendert lassen;
+- permanente Fehler-IDs/Regeln nicht umschreiben oder loeschen;
+- immutable Guard-Vertragswerte und den erlaubten `authorized_next_action`-Enum nicht schwaechen;
+- kein Pluginbuild, kein Installer, keine Versionswahl.
 
-**Erst nach diesem Governance-Frischecheck:** `AFFILIATE_HOBBYRAUM/TASK.current.json` ausfuehren. Das ist ein read-only kanonischer Delta-Precheck und darf ebenfalls keinen Build/Installer erzeugen.
+**Erst nach erneutem Frischecheck ohne Scope-Widerspruch:** `AFFILIATE_HOBBYRAUM/TASK.current.json` ausfuehren. Das ist ein read-only kanonischer Delta-Precheck und darf ebenfalls keinen Build/Installer erzeugen.
 
 Danach darf aus der kanonischen Source genau **ein** Rootfix-Kandidat entstehen. Vor irgendeinem Installer muss derselbe Kandidat die im gebundenen Task verlangte harte lokale POSITIV-/NEGATIV-/Gesamtworkflowpruefung bestehen.
 
@@ -65,11 +73,12 @@ Danach darf aus der kanonischen Source genau **ein** Rootfix-Kandidat entstehen.
 1. `AFFILIATE_HOBBYRAUM/START_HERE.txt`
 2. diese `protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md`
 3. Frischecheck: Branch + Governance + kanonisches Manifest + Fehlerregister
-4. zuerst den oben belegten Governance-Scope-Drift beheben
-5. dann `AFFILIATE_HOBBYRAUM/TASK.current.json`
-6. nach bestandenem Precheck: ein kanonischer Rootfix, keine Versionskaskade
-7. vollstaendige harte lokale Gates
-8. erst dann Live-Testinstaller; Live-PASS nur mit realem WordPress-Readback
+4. zuerst den oben belegten Scope-Drift in Governance + Fehlerregister-PRECHECK beheben
+5. Frischecheck wiederholen; nur bei Widerspruchsfreiheit weiter
+6. dann `AFFILIATE_HOBBYRAUM/TASK.current.json`
+7. nach bestandenem Precheck: ein kanonischer Rootfix, keine Versionskaskade
+8. vollstaendige harte lokale Gates
+9. erst dann Live-Testinstaller; Live-PASS nur mit realem WordPress-Readback
 
 ## Nicht anfassen
 
