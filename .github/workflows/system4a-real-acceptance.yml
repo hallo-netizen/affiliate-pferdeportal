@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'hobbyroom/system4a-startgate-test-20260914'
+      - 'hobbyroom/system4a-textmachine-final-pass-20260916'
   workflow_dispatch:
 
 permissions:
