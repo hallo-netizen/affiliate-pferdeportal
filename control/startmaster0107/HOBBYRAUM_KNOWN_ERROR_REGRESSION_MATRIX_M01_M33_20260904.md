@@ -1,4 +1,4 @@
-# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M37
+# STARTMASTER0107 – HOBBYRAUM-FEHLERMATRIX M01–M38
 
 Stand: 2026-09-17
 
@@ -169,8 +169,17 @@ M37 – Non-repairable PPM/PSERC inner reason visibility
 - Negativ: ein reparierbarer Content-Code muss weiterhin über den bestehenden RepairRequired-Weg laufen.
 - Der Test wird ausschließlich in den bestehenden Hobbyraum-Runner aufgenommen; kein neuer Runner/Gate/Controller/Sidecar.
 
+M38 – Current Fachworkflow production-plan version binding
+- Realer Live-Fehler: `PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH` beim ersten frischen Hindernisstangen-Artikel nach erfolgreicher LanguageTool-Reparatur und real erreichtem PPM-6.7.9-/PSERC-Handoff.
+- Die Versionswerte werden **nicht** aus PR249 abgeleitet. Die bestehende autorisierte Abschlusslogik `STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py` enthält für einen akzeptierten `production_plan_v4`-Header bereits die Bindungen `plan_contract_version == "4.0.0"` und `required_plugin_version == "6.7.9"`.
+- Der aktuelle Fachworkflow erzeugt `production_plan_header` selbst; H8 darf ihn nicht fachlich vorbefüllen.
+- Für `production_plan_v4` muss der real erzeugte Header deshalb diese beiden bereits gebundenen Versionsfelder exakt erhalten und der Handoff muss sie vor dem realen PSERC/PPM-Aufruf fail-closed prüfen.
+- Fehlendes oder abweichendes `plan_contract_version` bzw. `required_plugin_version` = BLOCKED; kein stilles Ergänzen durch H8, keinen Fake-PASS und keine Änderung von PPM/PSERC/PSTE/Textmaschine/Fachregeln.
+- History-Phase: aktuelles main muss M01–M37 PASS und M38 als ersten neuen FAIL liefern. In dieser Phase **kein Produktfix**.
+- Erst nach maschinellem History-Beweis darf ein separater kleinstmöglicher Produktfix genau diese Versionsbindung herstellen.
+
 ## Abschlussregel
 
-HOBBYRAUM PASS nur wenn M01–M37 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
+HOBBYRAUM PASS nur wenn M01–M38 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
 
 Danach erst Merge-Kandidat und danach kompletter frischer 1..N-E2E gegen die reale gebundene Batchgröße. Keine Reparatur während des Produktionslaufs.
