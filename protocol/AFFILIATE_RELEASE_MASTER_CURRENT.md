@@ -2,7 +2,7 @@
 
 Stand: 2026-09-17
 Workstream: `AFFILIATE_ZENTRALE`
-Status: `ACTIVE / RELEASE BLOCKED`
+Status: `BLOCKED / CURRENT-SCOPE RECONCILIATION REQUIRED`
 
 ## Eine Release-Wahrheit
 
@@ -44,27 +44,32 @@ Diese Linie verletzt als nichtkanonische Fortsetzung die bereits gebundene Nicht
 - Der letzte reale Backend-Screenshot `Import & Auswahl` zeigt **keinen Werbeplatzfilter**. Damit ist 6.72.38 im Live-System nicht nachgewiesen und fuer diese Funktion kein LIVE-PASS zulaessig.
 - Kein weiterer Installer und keine neue Versionsnummer, bevor die kanonische Sourcearbeit und die gebundenen lokalen Gates abgeschlossen sind. Vor Versionswahl muss die reale installierte WordPress-Version belegt werden (`AF-027`).
 
-## Erster offener Blocker
+## Frischecheck-Befund / erster offener Blocker
 
-**Kanonische Source und aktueller Fach-/Teststand sind noch nicht zusammengefuehrt.** GitHub/Pluginbuero stehen belastbar auf 6.72.19; die Kategorie-/Werbeplatz-Arbeit existiert nur als nichtkanonische lokale Testlinie.
+`control/release-governance/CURRENT_RELEASE.json` ist fuer die **Release-Source** korrekt auf 6.72.19 gebunden, fuehrt aber im dynamischen `user_scope_lock.current_focus` und `execution_state.bound_user_scope_action` noch den vorherigen **ADCELL**-Fokus. Der aktuelle ausdrueckliche Nutzer-Scope ist inzwischen Kategorie-Querbanner + Werbeplatzfilter.
+
+Damit liegt aktuell eine **CURRENT-SCOPE-Drift** vor. Diese wird nicht durch Raten ueberschrieben. Solange Governance-Scope und CURRENT MASTER nicht atomar auf denselben Fachscope zeigen, bleibt der technische Einstieg BLOCKED.
 
 ## NEXT ACTION — exakt eine
 
-Fuehre **nur** `AFFILIATE_HOBBYRAUM/TASK.current.json` aus.
+**Governance-Scope atomar auf den bereits gebundenen 2026-09-17-Auftrag `protocol/AFFILIATE_RELEASE_CATEGORY_BANNER_WERBEPLATZ_FILTER_TASK_20260917.md` nachziehen, ohne die kanonische 6.72.19-Source, Manifestbindung oder `release_allowed=false` vorzeitig zu veraendern.**
 
-Ziel dieses Schritts: die kanonische Source read-only gegen den gebundenen 2026-09-17-Auftrag pruefen und den exakten fehlenden Source-Delta belegen. **Kein Build, kein Installer, keine Versionswahl.**
+Dabei muessen die bestehenden immutable Guard-Vertragswerte und der erlaubte `authorized_next_action`-Enum unveraendert respektiert werden. Kein Pluginbuild, kein Installer, keine Versionswahl.
 
-Erst danach darf aus der kanonischen Source genau **ein** Rootfix-Kandidat entstehen. Vor irgendeinem Installer muss derselbe Kandidat die im gebundenen Task verlangte harte lokale POSITIV-/NEGATIV-/Gesamtworkflowpruefung bestehen.
+**Erst nach diesem Governance-Frischecheck:** `AFFILIATE_HOBBYRAUM/TASK.current.json` ausfuehren. Das ist ein read-only kanonischer Delta-Precheck und darf ebenfalls keinen Build/Installer erzeugen.
+
+Danach darf aus der kanonischen Source genau **ein** Rootfix-Kandidat entstehen. Vor irgendeinem Installer muss derselbe Kandidat die im gebundenen Task verlangte harte lokale POSITIV-/NEGATIV-/Gesamtworkflowpruefung bestehen.
 
 ## Verbindlicher Arbeitsweg
 
 1. `AFFILIATE_HOBBYRAUM/START_HERE.txt`
 2. diese `protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md`
 3. Frischecheck: Branch + Governance + kanonisches Manifest + Fehlerregister
-4. `AFFILIATE_HOBBYRAUM/TASK.current.json`
-5. nach bestandenem Precheck: ein kanonischer Rootfix, keine Versionskaskade
-6. vollstaendige harte lokale Gates
-7. erst dann Live-Testinstaller; Live-PASS nur mit realem WordPress-Readback
+4. zuerst den oben belegten Governance-Scope-Drift beheben
+5. dann `AFFILIATE_HOBBYRAUM/TASK.current.json`
+6. nach bestandenem Precheck: ein kanonischer Rootfix, keine Versionskaskade
+7. vollstaendige harte lokale Gates
+8. erst dann Live-Testinstaller; Live-PASS nur mit realem WordPress-Readback
 
 ## Nicht anfassen
 
@@ -83,8 +88,9 @@ Bindend mindestens:
 - `AFF-ERR-007`: Backendpfade nur real belegt;
 - `AFF-ERR-009`: Slot/Format nicht im Providercode hart verdrahten;
 - `AFF-ERR-010`: Re-evaluation bei wachsendem Portal/Bestand;
+- `AFF-ERR-025` / `AF-057`: CURRENT-/Task-Drift nach Scopewechsel verhindern;
 - `AF-021`: `TASK.current.json` schemaexakt;
 - `AF-027`: reale installierte Version vor Versionswahl;
 - `AF-069`: nichtkanonische Folgepakete nicht als kanonisch behandeln.
 
-Historie bleibt in Git-History/Protokollen. Dieses Dokument enthaelt nur den aktuellen belastbaren Stand und die eine NEXT ACTION.
+Historie bleibt in Git-History/Protokollen. Dieses Dokument enthaelt nur den aktuellen belastbaren Stand, den ersten offenen Blocker und die eine NEXT ACTION.
