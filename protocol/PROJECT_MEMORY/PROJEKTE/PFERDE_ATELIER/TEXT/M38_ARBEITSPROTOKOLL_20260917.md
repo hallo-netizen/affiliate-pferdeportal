@@ -14,12 +14,14 @@ Der erste frische Artikel erreichte nach realer LanguageTool-Reparatur den reale
 ## GEBUNDENE HISTORY-BASIS
 
 Realtest-Baseline / current main:
-`7533d99e306bb016c87c7c63e2c6103bf1010476`
+`54f0ee4efb91a50bbe05b5aafa4183cc1f526565`
 
 Letzter belastbarer Recovery-Stand:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
 
-Maschinensoll: M01–M37 PASS, M38 erster neuer FAIL.
+Der aktuelle Main enthält den bereits geprüften 1..N-Finalizer und ausschließlich einen temporären, nicht-ausführbaren M20-Migrationstoken. Die aktive Mengenlogik bleibt 1..N.
+
+Maschinensoll: Base M01–M37 PASS; kombinierter History-Kandidat korrigiert M20 auf 1..N und liefert M38 als ersten neuen FAIL.
 Kein Publish.
 
 ## M38
@@ -30,15 +32,16 @@ Die bestehende Abschlusslogik bindet:
 - `plan_contract_version == "4.0.0"`
 - `required_plugin_version == "6.7.9"`
 
-History-Kandidat PR277 darf ausschließlich die bestehende Fehlermatrix und den bestehenden Regressionrunner ändern.
+History-Kandidat PR280 / Branch `hobbyroom/m20-history-1n-20260917` darf ausschließlich die bestehende Fehlermatrix und den bestehenden Regressionrunner ändern. Head: `bf194a887871021e5e7b5dfdd76ecf4abd1ad3ac`.
 
 ## MASCHINENBEWEIS VOR PRODUKTFIX
 
 Erwartet:
 1. current main: M01–M37 PASS;
-2. M38: erster neuer FAIL;
-3. History-Kandidat: bestehender History-Maschinenbeweis/hardlocks;
-4. erst danach separater kleinstmöglicher Produktfix.
+2. Kandidat: M20 als 1..N-Regel, M01–M37 PASS;
+3. M38: erster neuer FAIL;
+4. History-Kandidat: bestehender History-Maschinenbeweis/hardlocks;
+5. erst danach separater kleinstmöglicher Produktfix.
 
 ## VERBOTEN
 
