@@ -62,4 +62,23 @@ class ParentStartTests(unittest.TestCase):
     def test_negative_publish_true_validation(self):
         with self.assertRaises(parent_start.ParentStartError): parent_start._validate_launch(self._launch(publish=True))
 
+    def test_all_repository_parent_launches_are_canonical_and_source_hash_valid(self):
+        launch_dir=parent_start.REPO/'isolated_system4'/'bound_launches'
+        checked=0
+        for path in sorted(launch_dir.glob('*.json')):
+            raw=path.read_bytes()
+            try:
+                value=parent_start.json.loads(raw.decode('utf-8'))
+            except Exception as exc:
+                self.fail(f'BOUND_LAUNCH_JSON_INVALID:{path.name}:{exc}')
+            if not isinstance(value,dict) or value.get('contract')!=parent_start.CONTRACT:
+                continue
+            self.assertEqual(raw,parent_start.canon(value),f'BOUND_LAUNCH_NOT_CANONICAL:{path.name}')
+            try:
+                parent_start._validate_launch(value)
+            except parent_start.ParentStartError as exc:
+                self.fail(f'BOUND_LAUNCH_PREFLIGHT_FAIL:{path.name}:{exc}')
+            checked+=1
+        self.assertGreater(checked,0,'NO_SYSTEM4_PARENT_LAUNCH_FOUND')
+
 if __name__=='__main__': unittest.main(verbosity=2)
