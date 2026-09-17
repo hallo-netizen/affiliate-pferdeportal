@@ -1,0 +1,62 @@
+name: System4A temp fix transition fixture
+on:
+  push:
+    branches:
+      - hobbyroom/system4a-v2-handoff-107008-20260917
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hobbyroom/system4a-v2-handoff-107008-20260917
+          fetch-depth: 0
+      - name: Restore immutable test and prebind next-step bridge
+        run: |
+          git checkout origin/main -- control/cloud-entry-gate/cloud_repo_ci_test.py
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          step=Path('control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json')
+          state=Path('control/startmaster0107/CURRENT_STATE.json')
+          root=Path('control/startmaster0107/PFERDE_ATELIER_START_HERE.json')
+          bridge_ref='control/startmaster0107/system4_107008_handoff.py'
+          bridge_sha='09654acf4aa5718769323315de29a6b286616391de378b9937108c219f02cf25'
+          old_bundle=hashlib.sha256(step.read_bytes()).hexdigest()
+          obj=json.loads(step.read_text(encoding='utf-8'))
+          refs=[x.get('ref') for x in obj.get('authorized_inputs',[]) if isinstance(x,dict)]
+          if bridge_ref not in refs:
+              obj['authorized_inputs'].append({'ref':bridge_ref,'sha256':bridge_sha})
+          else:
+              for x in obj['authorized_inputs']:
+                  if x.get('ref')==bridge_ref:
+                      x['sha256']=bridge_sha
+          step.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          new_bundle=hashlib.sha256(step.read_bytes()).hexdigest()
+          st=state.read_text(encoding='utf-8')
+          if st.count(old_bundle)!=2:
+              raise SystemExit('CURRENT_STATE_OLD_BUNDLE_COUNT:'+str(st.count(old_bundle)))
+          old_state=hashlib.sha256(state.read_bytes()).hexdigest()
+          state.write_text(st.replace(old_bundle,new_bundle),encoding='utf-8')
+          new_state=hashlib.sha256(state.read_bytes()).hexdigest()
+          rt=root.read_text(encoding='utf-8')
+          if rt.count(old_state)!=1:
+              raise SystemExit('START_HERE_OLD_STATE_COUNT:'+str(rt.count(old_state)))
+          root.write_text(rt.replace(old_state,new_state),encoding='utf-8')
+          print('OLD_BUNDLE='+old_bundle)
+          print('NEW_BUNDLE='+new_bundle)
+          print('OLD_STATE='+old_state)
+          print('NEW_STATE='+new_state)
+          print('NEW_ROOT='+hashlib.sha256(root.read_bytes()).hexdigest())
+          PY
+          python control/cloud-entry-gate/cloud_repo_ci_test.py
+          git diff --check
+      - name: Commit transition-safe binding
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add control/cloud-entry-gate/cloud_repo_ci_test.py control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json control/startmaster0107/CURRENT_STATE.json control/startmaster0107/PFERDE_ATELIER_START_HERE.json
+          git commit -m 'system4: prebind V2 bridge for 107007 to 107008 transition'
+          git push origin HEAD:hobbyroom/system4a-v2-handoff-107008-20260917
