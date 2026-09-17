@@ -27,16 +27,18 @@ jobs:
             if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then exit 2; fi
           done
           echo 'REAL_102_NO_MOCK_PASS'
-      - name: Inspect current Vergleich fixture
+      - name: Inspect exact Vergleich positive fixture
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm-authority && mkdir -p /tmp/ppm-authority
           unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-authority
           ROOT=/tmp/ppm-authority/portal-production-machine
-          echo '=== VERGLEICH FILES ==='
-          grep -RIlE 'Produktvergleich|Vergleich' "$ROOT/tests" | head -80 || true
-          echo '=== SOURCE LABEL REFERENCES ==='
-          grep -Rni -B20 -A40 -E 'source[_-]?label|OPTION_HEADING' "$ROOT/tests" "$ROOT/includes" | head -1200 || true
+          echo '=== VERGLEICH POSITIVE ==='
+          cat "$ROOT/tests/three-type-bundled-local/test-vergleich-positive.php"
+          echo '=== VERGLEICH NEGATIVE ==='
+          cat "$ROOT/tests/three-type-bundled-local/test-vergleich-negative.php"
+          echo '=== BUNDLED BOOTSTRAP REFS ==='
+          grep -Rni -B15 -A70 -E 'function.*vergleich|vergleich.*fixture|Produktvergleich|Vergleich' "$ROOT/tests/three-type-bundled-local" | head -1800 || true
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
