@@ -4,6 +4,7 @@ from pathlib import Path
 
 from controller_core import *  # noqa: F401,F403
 import controller_core as core
+import global_workshop
 import production_binding
 import production_checks
 import repair_router
@@ -144,6 +145,23 @@ def _route_repair_after_fullcheck(workspace:Path,rc:int)->int:
         return 4
     raise SupervisedControllerFail('REPAIR_ROUTER_BAD_STATUS:'+status)
 
+def _workshop_failure(argv:list[str],exc:BaseException)->int:
+    workspace=None
+    if len(argv)>=3:
+        candidate=Path(argv[2])
+        if candidate.is_dir():
+            workspace=candidate
+    request,path,_=global_workshop.capture(
+        'CONTROLLER',
+        exc,
+        output_dir=workspace,
+        findings=getattr(exc,'findings',None),
+        context={'command':argv[1] if len(argv)>1 else None,'workspace':str(workspace) if workspace else None},
+    )
+    status='SYSTEM4_WORKSHOP_REQUIRED' if request.get('repairable') else 'SYSTEM4_WORKSHOP_BLOCKED'
+    print(status+':'+(str(path) if path is not None else 'INLINE')+':'+str(exc))
+    return 4 if request.get('repairable') else 2
+
 def main(argv:list[str])->int:
     try:
         _verify_core()
@@ -157,7 +175,17 @@ def main(argv:list[str])->int:
         if argv[1]=='fullcheck' and len(argv)==3:
             return _route_repair_after_fullcheck(Path(argv[2]),rc)
         return rc
-    except (SupervisedControllerFail, supervisor.SupervisorError, production_binding.ProductionBindingError, repair_router.RepairRouteError, json.JSONDecodeError, OSError, ValueError) as exc:
-        print('SYSTEM4_FAIL:'+str(exc)); return 2
+    except (
+        SupervisedControllerFail,
+        supervisor.SupervisorError,
+        production_binding.ProductionBindingError,
+        repair_router.RepairRouteError,
+        json.JSONDecodeError,
+        OSError,
+        ValueError,
+        core.Fail,
+        production_checks.ProductionCheckError,
+    ) as exc:
+        return _workshop_failure(argv,exc)
 
 if __name__=='__main__': raise SystemExit(main(sys.argv))
