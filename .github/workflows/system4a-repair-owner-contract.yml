@@ -33,3 +33,4 @@ jobs:
           test_textmachine_negative_gap_guards.py
           test_textmachine_ppm_negative_gaps.py
           test_textmachine_repair_roundtrip_matrix.py
+          test_textmachine_rules_full_pass.py
