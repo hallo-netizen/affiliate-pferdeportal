@@ -15,14 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 572c48116dc756b1ac7349ed1cc0f16eabc33025
+          ref: ae32690550996fee4cc81a0026a74f348334419b
           fetch-depth: 0
-      - name: Verify exact current main under test
+      - name: Verify exact candidate under test
         run: |
-          test "$(git rev-parse HEAD)" = "572c48116dc756b1ac7349ed1cc0f16eabc33025"
-          echo "SYSTEM4A_CURRENT_MAIN_SHA_PASS=$(git rev-parse HEAD)"
+          test "$(git rev-parse HEAD)" = "ae32690550996fee4cc81a0026a74f348334419b"
+          echo "SYSTEM4A_CANDIDATE_SHA_PASS=$(git rev-parse HEAD)"
       - name: Compile System 4A Python
-        run: python -m py_compile isolated_system4/*.py
+        run: python -m py_compile isolated_system4/*.py control/startmaster0107/system4_v2_release_bridge.py
       - name: Run complete existing System 4A test suite
         shell: bash
         run: |
