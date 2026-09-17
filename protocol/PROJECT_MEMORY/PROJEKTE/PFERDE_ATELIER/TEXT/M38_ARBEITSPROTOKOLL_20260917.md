@@ -30,9 +30,9 @@ M38 registriert ausschließlich die Versionsbindung des current Fachworkflow-`pr
 
 Die bestehende Abschlusslogik bindet:
 - `plan_contract_version == "4.0.0"`
-- `required_plugin_version == "6.7.9"`
+- `required_plugin_version == "6.7.9"`.
 
-History-Kandidat PR280 / Branch `hobbyroom/m20-history-1n-20260917` darf ausschließlich die bestehende Fehlermatrix und den bestehenden Regressionrunner ändern. Head: `bf194a887871021e5e7b5dfdd76ecf4abd1ad3ac`.
+History-Kandidat PR280 / Branch `hobbyroom/m20-history-1n-20260917` darf ausschließlich die bestehende Fehlermatrix und den bestehenden Regressionrunner ändern. Head: `424a6c5b418541ca2bbe89ca5cbfe233fd706e96`.
 
 ## MASCHINENBEWEIS VOR PRODUKTFIX
 
