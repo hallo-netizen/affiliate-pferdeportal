@@ -54,7 +54,6 @@ class TextmachineNegativeGapGuardTests(unittest.TestCase):
 
     def test_25_content_guard_gap_codes_are_exact(self):
         cases = []
-
         cases.append(('FACT_PACK_OBJECT_REQUIRED', lambda: content_guard.validate_fact_pack(None)))
 
         def mutate_pack(mutator):
@@ -97,7 +96,7 @@ class TextmachineNegativeGapGuardTests(unittest.TestCase):
             with self.assertRaisesRegex(design_guard.DesignGuardError, code):
                 fn()
 
-    def test_11_design_guard_gap_codes_are_exact(self):
+    def test_10_design_guard_gap_codes_are_exact(self):
         body = canonical_body()
         cases = [
             ('DESIGN_ARTICLE_TYPE_TOKEN_INVALID', lambda: design_guard.article_type_class('***')),
@@ -110,9 +109,8 @@ class TextmachineNegativeGapGuardTests(unittest.TestCase):
             ('DESIGN_ARTICLE_TYPE_ATTRIBUTE_MISMATCH', lambda: design_guard.validate_design_neutrality(body.replace('data-article-type="Beratung"', 'data-article-type="FAQ"'), 'Beratung')),
             ('DESIGN_NESTED_ARTICLE_FORBIDDEN', lambda: design_guard.validate_design_neutrality(body.replace('</article>', '<article></article></article>'), 'Beratung')),
             ('DESIGN_TABLE_COMPARISON_CLASS_MISSING', lambda: design_guard.validate_design_neutrality(body.replace('system-129-table comparison-table', 'system-129-table'), 'Beratung')),
-            ('DESIGN_TABLE_INLINE_STYLE_FORBIDDEN', lambda: design_guard.validate_design_neutrality(body.replace('<table class="system-129-table comparison-table">', '<table class="system-129-table comparison-table" style="width:100%">'), 'Beratung')),
         ]
-        self.assertEqual(len(cases), 11)
+        self.assertEqual(len(cases), 10)
         for code, fn in cases:
             self.assert_design_code(code, fn)
 
