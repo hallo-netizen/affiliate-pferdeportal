@@ -38,6 +38,16 @@ THREE_ITEMS=[
     },
 ]
 
+FOUR_ITEMS=THREE_ITEMS+[
+    {
+        'article_type':'Beratung',
+        'category':'pferdehaftpflicht-beratung',
+        'plan_slot':'d4a3b7f55f37c81246a8abf2c5eb8b00fc8b0312625b842e79bb20fe9267f319',
+        'target_keyword':'Haftpflicht für Pferde bei Betreuung durch Nachbarn',
+        'title':'Haftpflicht für Pferde bei Betreuung durch Nachbarn richtig prüfen',
+    },
+]
+
 CATEGORY_SOURCE_INDEX={
     'pferdehaftpflicht-beratung':0,
     'fliegenmasken-beratung':1,
