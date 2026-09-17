@@ -7,12 +7,12 @@ import production_checks
 
 
 # Point 4 is already the machine-fixed per-rule classification authority for the
-# reachable text-machine scope.  Point 5 proves the return mechanism for every owner
-# class used by those 102 repairable rules.  Routing is owner-driven, not rule-driven:
+# reachable text-machine scope. Point 5 proves the return mechanism for every owner
+# class used by those 102 repairable rules. Routing is owner-driven, not rule-driven:
 # once a rule has been bound to an owner, every rule of that owner executes the same
 # controller transition.
 REPAIR_RULE_COUNTS = {
-    'DRAFT_WORKER': 96,          # 83 PPM + 2 ContentGuard + 9 DesignGuard + 2 external-link
+    'DRAFT_WORKER': 96,
     'PARENT_TITLE_MACHINE': 3,
     'PORTAL_LINK_MACHINE': 2,
     'PARENT_CATEGORY_MACHINE': 1,
@@ -98,9 +98,6 @@ class TextmachineRepairRoundtripMatrixTests(unittest.TestCase):
         self.assertEqual(state['checks']['return_route'], 'PARENT_LAUNCH')
 
     def test_recheck_after_repair_reenters_complete_fullcheck_and_passes(self):
-        # The rule-dependent routing is tested above.  This verifies the common second
-        # half of every repair path: after the responsible owner has corrected its
-        # artifact, the same article re-enters the COMPLETE fullcheck and only then PASSes.
         state = self.state()
         path = Path('/tmp/system4-repair-roundtrip-recheck.json')
         state['phase'] = 'CHECK_REQUIRED'
