@@ -49,10 +49,48 @@ Die bestehende autorisierte Abschlusslogik enthält für den akzeptierten `produ
 
 M38 prüft, ob der current Fachworkflow diese beiden gebundenen Versionsfelder im real erzeugten `production_plan_header` erhält und der Handoff sie fail-closed vor dem realen PPM/PSERC-Aufruf prüft.
 
-## VERBINDLICHE REGRESSION M01–M38
+## VERBINDLICHE HISTORISCHE REGRESSION M01–M38
 
-M01–M37: historisch / Regression / integriert.
-M38: current Fachworkflow production-plan version binding / **HISTORY_AUTHORITY_MAINTENANCE OFFEN**.
+| ID | Fehlerklasse | Aktueller Status |
+|---|---|---|
+| M01 | State-/Bundle-Hash chain | historisch / Regression |
+| M02 | Unique article files | historisch / Regression |
+| M03 | PREPARED Persist/Restore | historisch / Regression |
+| M04 | Finalize CLI | historisch / Regression |
+| M05 | Durable Release/Receipt | historisch / Regression |
+| M06 | No fake production contract | historisch / Regression |
+| M07 | Recovery not automatically final | historisch / Regression |
+| M08 | PPM ZIP available | historisch / Regression |
+| M09 | PSERC ZIP available | historisch / Regression |
+| M10 | Runtime toolbox / Preflight fail-closed | historisch / Regression |
+| M11 | Real PPM call | historisch / Regression |
+| M12 | Fake PPM blocked | historisch / Regression |
+| M13 | PPM content_hash parity | historisch / Regression |
+| M14 | Current Action Handoff | historisch / Regression |
+| M15 | 107007 Handoff instruction | historisch / Regression |
+| M16 | Signer boundary | historisch / Regression |
+| M17 | 107008 fail-closed | historisch / Regression |
+| M18 | ENDSTEMPEL constants | historisch / Regression |
+| M19 | Merge trigger | historisch / Regression |
+| M20 | Delivery | historisch / Regression |
+| M21 | No auto-publish | historisch / Regression |
+| M22 | H8 Provenance / Integrität | historisch / Regression |
+| M23 | Preproduction/Runtime Guards | historisch / Regression |
+| M24 | No H8 rollback | historisch / Regression |
+| M25 | Article prompt / Fachworkflow boundary | historisch / Regression |
+| M26 | Bound Fachworkflow production context | historisch / Regression |
+| M27 | Current-main / production environment identity | historisch / Regression |
+| M28 | Fachworkflow-Handoff request executable | historisch / Regression |
+| M29 | Release metadata current-batch identity | historisch / Regression |
+| M30 | Final context batch identity | historisch / Regression |
+| M31 | Codex-native bound action | historisch / Regression |
+| M32 | PPM package path binding | historisch / Regression |
+| M33 | GitHub ENDSTEMPEL ohne Codex git auth | historisch / Regression |
+| M34 | Legacy PPM handoff guards / canonical slot parity | historisch / Regression |
+| M35 | PPM Fact-Pack source-hash binding parity | historisch / Regression |
+| M36 | Persisted H8 legacy-binding compatibility | historisch / Regression |
+| M37 | `PPM679_REAL_EXECUTION_BLOCKED` – non-repairable PPM/PSERC inner reason visibility | **AKTIV / HISTORY-AUTORITÄT ZUERST** |
+| M38 | `PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH` – current Fachworkflow production-plan version binding | **HISTORY_AUTHORITY_MAINTENANCE OFFEN** |
 
 History-Kandidat:
 - PR249;
