@@ -1,0 +1,67 @@
+name: System 4 Production Artifact Relay Acceptance
+
+on:
+  push:
+    branches:
+      - hobbyroom/system4-chat-output-acceptance-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  artifact-relay-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Build valid synthetic completed production relay
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib,tempfile
+          from pathlib import Path
+          import sys
+          sys.path.insert(0,'isolated_system4')
+          import handoff_transport as ht
+          import production_artifact_relay as relay
+          from test_handoff_transport import HandoffTransportTests
+          root=Path('/tmp/system4-artifact-relay-source'); root.mkdir(parents=True,exist_ok=True)
+          helper=HandoffTransportTests(); payload=helper.payload(1)
+          src=root/'source.json'; helper.write(src,payload)
+          canonical=root/ht.HANDOFF_FILENAME; raw=ht.canonicalize_handoff(src,canonical)
+          inline=root/ht.INLINE_FILENAME; env=ht.inline_pack(canonical,inline)
+          text=(relay.READY_TOKEN+'\n'+relay.SHA_LABEL+':'+hashlib.sha256(raw).hexdigest()+'\n'+relay.BYTES_LABEL+':'+str(len(raw))+'\n'+relay.PARTS_LABEL+':'+str(env['part_count'])+'\n'+inline.read_text(encoding='utf-8'))
+          (root/'completion.txt').write_text(text,encoding='utf-8')
+          PY
+
+      - name: Reconstruct exact WordPress file from relay
+        run: python isolated_system4/production_artifact_relay.py from-comment /tmp/system4-artifact-relay-source/completion.txt "$RUNNER_TEMP/system4-production-artifact" --comment-id acceptance
+
+      - name: Upload production-shaped handoff as Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-production-artifact-relay-acceptance-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/system4-production-artifact/SYSTEM4_WORDPRESS_HANDOFF_V1.json
+            ${{ runner.temp }}/system4-production-artifact/SYSTEM4_ACTIONS_ARTIFACT_RECEIPT_V1.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Remove pre-upload runtime copy
+        run: rm -rf "$RUNNER_TEMP/system4-production-artifact"
+
+      - name: Download persisted Actions artifact into fresh directory
+        uses: actions/download-artifact@v4
+        with:
+          name: system4-production-artifact-relay-acceptance-${{ github.run_id }}
+          path: ${{ runner.temp }}/system4-production-artifact-download
+
+      - name: Verify artifact after runtime source deletion
+        run: |
+          python isolated_system4/production_artifact_relay.py verify \
+            "$RUNNER_TEMP/system4-production-artifact-download/SYSTEM4_WORDPRESS_HANDOFF_V1.json" \
+            "$RUNNER_TEMP/system4-production-artifact-download/SYSTEM4_ACTIONS_ARTIFACT_RECEIPT_V1.json"
