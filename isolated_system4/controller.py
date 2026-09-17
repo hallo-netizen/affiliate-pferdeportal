@@ -225,6 +225,8 @@ def _stage_owner_route(command: str, message: str):
         if not message.startswith(prefix):
             return None
         inner = message[len(prefix):]
+        if inner == 'FACT_PACK_CLAIM_COUNT_INVALID':
+            return CONTEXT_WORKER, CONTEXT_STAGE
         if inner.startswith((
             'PREWRITE_BOUND_LINK_MISSING:',
             'PREWRITE_EXTERNAL_LINK_FORBIDDEN',
@@ -252,6 +254,17 @@ def _stage_owner_call(command: str, fn, workspace: str, *args: str) -> int:
         if before is None or after != before:
             raise Fail('STAGE_OWNER_RETURN_STATE_MUTATED:' + command) from exc
         owner, route = routed
+        current_owner = {
+            'research': RESEARCH_WORKER,
+            'facts': FACTS_WORKER,
+            'context': CONTEXT_WORKER,
+            'draft': DRAFT_WORKER,
+        }.get(command)
+        if owner != current_owner:
+            state, path = load(workspace)
+            repaired_owner = _rollback_upstream_worker(state, path, (owner,), message)
+            if repaired_owner != owner:
+                raise Fail('STAGE_OWNER_UPSTREAM_RETURN_FAILED:' + command + ':' + owner) from exc
         print('SYSTEM4_STAGE_OWNER_RETURN:' + owner + ':' + route + ':' + message)
         return 4
 
