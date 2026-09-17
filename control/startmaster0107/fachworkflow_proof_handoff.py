@@ -17,6 +17,8 @@ PASS_CONTRACT = "PFERDE_ATELIER_FACHWORKFLOW_PASS_V1"
 AGGREGATE_CONTRACT = "PFERDE_ATELIER_EXISTING_VALIDATORS_AGGREGATE_V1"
 RECEIPT_CONTRACT = "PFERDE_ATELIER_BOUND_ITEM_EXECUTION_RECEIPT_V1"
 PPM679_VERSION = "6.7.9"
+PLAN_CONTRACT_VERSION = "4.0.0"
+REQUIRED_PLUGIN_VERSION = "6.7.9"
 PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
 PPM679_RULESET_SHA256 = "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f"
 PSERC_FIX_PACKAGE_SHA256 = "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
@@ -213,6 +215,7 @@ def _validate_raw_context(request: Mapping[str, Any], ctx: Mapping[str, Any], me
     if not isinstance(fact_pack,dict) or not fact_pack: raise Blocked("BOUND_FACT_PACK_MISSING")
     if not isinstance(item,dict) or not item: raise Blocked("BOUND_PRODUCTION_PLAN_ITEM_MISSING")
     if not isinstance(header,dict) or not header or header.get("contract")!="production_plan_v4" or "items" in header: raise Blocked("BOUND_PRODUCTION_PLAN_HEADER_MISMATCH")
+    if header.get("plan_contract_version") != PLAN_CONTRACT_VERSION or header.get("required_plugin_version") != REQUIRED_PLUGIN_VERSION: raise Blocked("BOUND_PRODUCTION_PLAN_VERSION_MISMATCH")
     if request.get("workflow_release_item")!=release_item: raise Blocked("BOUND_WORKFLOW_RELEASE_ITEM_MISMATCH")
     if request.get("workflow_release_metadata")!=ctx["release_metadata"]: raise Blocked("BOUND_WORKFLOW_RELEASE_METADATA_MISMATCH")
     if str(release_item.get('plan_slot') or '')!=str(request.get('plan_slot') or ''): raise Blocked('BOUND_RELEASE_PLAN_SLOT_MISMATCH')
