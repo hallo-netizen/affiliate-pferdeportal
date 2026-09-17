@@ -112,8 +112,9 @@ class StageOwnerReturnContractTests(unittest.TestCase):
         )
 
     def test_draft_fact_pack_claim_count_returns_context_worker_and_rolls_back_same_article(self):
+        real_error = 'AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID'
         self.assertEqual(
-            controller._stage_owner_route('draft', 'ARTICLE_AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID'),
+            controller._stage_owner_route('draft', real_error),
             ('CONTEXT_WORKER', 'CONTEXT_STAGE'),
         )
         with tempfile.TemporaryDirectory() as td:
@@ -132,7 +133,7 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             ws = _write_workspace(root / 'ws', state)
 
             def fail_draft(*_args):
-                raise controller_engine.Fail('AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID')
+                raise controller_engine.Fail(real_error)
 
             out = io.StringIO()
             with contextlib.redirect_stdout(out):
@@ -146,7 +147,7 @@ class StageOwnerReturnContractTests(unittest.TestCase):
             self.assertIsNone(repaired['authoring_contract'])
             self.assertEqual(repaired['repair_return_counts']['CONTEXT_WORKER'], 1)
             self.assertEqual(repaired['repair_history'][-1]['return_owner'], 'CONTEXT_WORKER')
-            self.assertIn('SYSTEM4_STAGE_OWNER_RETURN:CONTEXT_WORKER:CONTEXT_STAGE:AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID', out.getvalue())
+            self.assertIn('SYSTEM4_STAGE_OWNER_RETURN:CONTEXT_WORKER:CONTEXT_STAGE:' + real_error, out.getvalue())
 
     def test_draft_binding_or_integrity_failure_remains_hard_block(self):
         self.assertIsNone(controller._stage_owner_route('draft', 'ARTICLE_AUTHORING_CONTRACT_FAIL:QUALITY_BINDING_HASH_INVALID'))
