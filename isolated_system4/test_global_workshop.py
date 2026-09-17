@@ -65,6 +65,13 @@ class GlobalWorkshopTests(unittest.TestCase):
         self.assertFalse(request["repairable"])
         self.assertEqual(request["status"], "BLOCKED_NON_REPAIRABLE")
 
+    def test_unbound_research_authority_error_is_not_repairable(self):
+        request = global_workshop.build_request("CONTROLLER", RuntimeError("UNBOUND_RESEARCH_SUBMISSION_BLOCKED"))
+        self.assertTrue(request["workshop_required"])
+        self.assertFalse(request["terminal_at_origin"])
+        self.assertFalse(request["repairable"])
+        self.assertEqual(request["status"], "BLOCKED_NON_REPAIRABLE")
+
     def test_multiple_findings_are_never_reduced_to_first(self):
         findings = [
             {"error_code": "LANGUAGETOOL_FINDING", "article_index": 0, "rule_id": "A"},
