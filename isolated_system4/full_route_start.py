@@ -86,6 +86,39 @@ def _fullcheck_with_existing_repair_loop(worker_command:list[str],workspace:Path
         raise FullRouteError('START_FULLCHECK_NOT_PASS:'+str(index)+':'+str(rc))
     raise FullRouteError('START_REPAIR_CYCLE_LIMIT:'+str(index))
 
+def _batch_collect_with_workshop(worker_command:list[str],production_snapshot:Path,state_paths:list[Path],states:list[dict],base:Path)->dict:
+    batch_out=base/'batch'
+    for attempt in range(repair_router.MAX_MACHINE_REPAIR_CYCLES+1):
+        try:
+            collected=batch_gate.collect_batch(production_snapshot,state_paths,batch_out)
+        except batch_gate.BatchGateWorkshop as exc:
+            request=exc.request if isinstance(exc.request,dict) else {}
+            request_sha=str(request.get('request_sha256') or '')
+            request_path=str(exc.request_path) if exc.request_path is not None else 'INLINE'
+            if request.get('repairable') is not True:
+                raise FullRouteError('START_BATCH_WORKSHOP_BLOCKED:'+str(request.get('error_code') or exc)) from exc
+            if not exc.changed:
+                raise FullRouteContinuation('START_BATCH_WORKSHOP_CONTINUATION_REQUIRED:'+request_sha+':NO_ARTICLE_TARGET:'+request_path) from exc
+            for index in exc.changed:
+                if index<0 or index>=len(state_paths):
+                    raise FullRouteError('START_BATCH_WORKSHOP_TARGET_OUT_OF_RANGE:'+str(index)) from exc
+                workspace=state_paths[index].parent
+                result=repair_router.route(workspace)
+                repair_router.verify_continuation_result(workspace,result)
+                status=str(result.get('status') or '')
+                if status!='SAME_ARTICLE_BODY_REPAIR' or result.get('owner')!='DRAFT_BODY' or result.get('target')!='SAME_ARTICLE_BODY':
+                    raise FullRouteContinuation('START_BATCH_WORKSHOP_CONTINUATION_REQUIRED:'+str(index)+':'+str(result.get('owner'))+':'+str(result.get('target'))+':'+status+':'+request_sha+':'+request_path) from exc
+                repair=base/f'worker-batch-repair-{index}-{attempt+1}.html'
+                _run_worker(worker_command,'repair',workspace,repair,index)
+                if controller.main(['controller.py','repair',str(workspace),str(repair)])!=0:
+                    raise FullRouteError('START_BATCH_REPAIR_FAILED:'+str(index))
+                states[index]=_fullcheck_with_existing_repair_loop(worker_command,workspace,base,index)
+            continue
+        if collected.get('status')!='SYSTEM4_BATCH_FULL_PASS_COLLECTED':
+            raise FullRouteError('START_BATCH_NOT_PASS')
+        return collected
+    raise FullRouteError('START_BATCH_REPAIR_CYCLE_LIMIT')
+
 def _handoff(states):
     rows=[]
     for index,state in enumerate(states):
@@ -118,8 +151,7 @@ def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], 
         if controller.main(['controller.py','draft',str(ws),str(draft)])!=0: raise FullRouteError('START_DRAFT_FAILED:'+str(index))
         state=_fullcheck_with_existing_repair_loop(worker_command,ws,output_root,index)
         state_paths.append(ws/'state.json'); states.append(state)
-    batch_out=output_root/'batch'; collected=batch_gate.collect_batch(production_snapshot,state_paths,batch_out)
-    if collected.get('status')!='SYSTEM4_BATCH_FULL_PASS_COLLECTED': raise FullRouteError('START_BATCH_NOT_PASS')
+    _batch_collect_with_workshop(worker_command,production_snapshot,state_paths,states,output_root)
     source=write_json(output_root/'handoff-source.json',_handoff(states)); canonical=output_root/handoff_transport.HANDOFF_FILENAME
     canonical_bytes=handoff_transport.canonicalize_handoff(source,canonical); inline=output_root/handoff_transport.INLINE_FILENAME
     envelope=handoff_transport.inline_pack(canonical,inline); reconstructed=handoff_transport.inline_unpack(inline,output_root/'parent-chat')
