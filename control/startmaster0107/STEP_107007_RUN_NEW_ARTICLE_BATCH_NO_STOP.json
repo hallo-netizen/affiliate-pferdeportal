@@ -38,7 +38,7 @@
     },
     {
       "ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
-      "sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f"
+      "sha256": "4016b9339f042f5eb869a64dd2af81ba82f6156e2dca3be71b255401f1725d17"
     },
     {
       "ref": "control/startmaster0107/START_OPTIMIZATION_POLICY_20260831.json",
