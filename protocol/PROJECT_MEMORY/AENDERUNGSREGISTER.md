@@ -259,3 +259,14 @@ REGEL:
 Bürotür nur Navigation; CURRENT_STATE = eine aktuelle Technikstandwahrheit; HOBBYRAUM = eine aktuelle Arbeitsbindung. Pluginänderungen zusätzlich nach PLUGINS/SYNC_VERTRAG synchronisieren.
 BELEG:
 `PROJEKTE/PFERDE_ATELIER/TECHNIK/START_HERE.md`
+
+## TEXT-TECH-20260907-CORRIDOR – Anti-Minifix / echte Evidence-Autoritäten
+WIEDERHERGESTELLT AUS REGISTERSTAND 2026-09-09; keine neue Entscheidung.
+
+## TEXT-TECH-20260908-FROZEN-RECOVERY – Ein Reparaturalgorithmus, kein Konzeptwechsel
+WIEDERHERGESTELLT AUS REGISTERSTAND 2026-09-09; keine neue Entscheidung.
+REGEL:
+Kein zweites Reparaturkonzept, kein zweiter Kandidat zwischen Realtests, kein Fix auf einen fehlgeschlagenen Fix.
+
+## TEXT-TECH-20260908-HISTORY-MACHINE-PROOF – Eine maschinelle Reparaturstraße statt wiederholter Chat-Prüfung
+WIEDERHERGESTELLT AUS REGISTERSTAND 2026-09-09; keine neue Entscheidung.
