@@ -4,7 +4,7 @@
   "authoritative_current_state_path": "control/startmaster0107/CURRENT_STATE.json",
   "central_pointer_ref": "control/CURRENT_STARTMASTER.json",
   "central_pointer_policy": "NAVIGATION_ONLY_NO_SECOND_DYNAMIC_STATE",
-  "status": "CODEX_107007_RESTART_READY_CORRECTED_BOUND_SHA",
+  "status": "CODEX_107007_CORRECTED_START_REQUESTED",
   "publish_allowed": false,
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
   "runtime_proof": {
@@ -35,7 +35,7 @@
     "article_count": 7
   },
   "real_production_run": {
-    "status": "RESTART_READY_AFTER_CORRECTED_BOUND_SHA",
+    "status": "CORRECTED_START_REQUESTED",
     "articles_produced": "0/7",
     "wordpress_handoff_present": false,
     "codex_start_pr": 275,
@@ -44,7 +44,8 @@
       5712724029
     ],
     "last_failure": "PARENT_BOUND_CAPSULE_SHA_MISMATCH",
-    "start_attempt_protocol": "protocol/STARTMASTER0107_REAL_107007_CODEX_START_20260917.md"
+    "start_attempt_protocol": "protocol/STARTMASTER0107_REAL_107007_CODEX_START_20260917.md",
+    "codex_start_comment_id": 5712807650
   },
   "codex_start_surface": {
     "status": "AVAILABLE",
@@ -73,7 +74,7 @@
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "next_action": "Start 107007 on PR #275 using the exact first command with corrected bound launch SHA256 1bfefd0370251ca45ba5868e80a244182da76a865f7713e0b3bde6d5ff492d59 and an outside-repo runtime path."
+    "next_action": "Verify the Codex connector result for PR #275 comment 5712807650 and follow the real 107007 run to SYSTEM4_WORDPRESS_HANDOFF_V1.json. Do not substitute another route."
   },
   "mandatory_execution_path": [
     "isolated_system4/parent_start.py start-bound",
@@ -93,7 +94,7 @@
     "SYSTEM4_WORDPRESS_HANDOFF_V1.json"
   ],
   "hobbyroom": {
-    "status": "READY_FOR_CORRECTED_CODEX_START",
+    "status": "CODEX_CORRECTED_START_REQUESTED",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
     "completed": [
       1,
@@ -105,7 +106,7 @@
       5
     ],
     "current_focus": "REAL_107007_CODEX_PRODUCTION_START",
-    "next_action": "Trigger corrected @codex start on PR #275 and follow the real 7-article production run to its machine result.",
+    "next_action": "Verify the Codex task launched from PR #275 comment 5712807650 and follow the real 7-article production run to its machine result.",
     "return_path": "same article -> existing repair route -> complete text-machine recheck"
   }
 }
