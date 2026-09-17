@@ -106,6 +106,9 @@ class BatchGateTests(unittest.TestCase):
             evidence=json.loads((out/'system4_batch_evidence.json').read_text()); self.assertEqual(evidence['article_count'],7); self.assertEqual(evidence['next_required'],batch_gate.NEXT_REQUIRED); self.assertTrue(all(row['quality']['languagetool']['status']=='PASS' for row in evidence['articles'])); self.assertTrue(all(row['design']['status']=='PASS' for row in evidence['articles'])); self.assertFalse(evidence['design_mutation_performed']); self.assertEqual(evidence['batch_distinctness']['status'],'PASS')
         finally: td.cleanup()
     def test_missing_state(self): self.assert_blocked('STATE_COUNT_MISMATCH',path_count=6)
+    def test_order_mismatch_blocked(self):
+        def m(r,s,p): p[0],p[1]=p[1],p[0]
+        self.assert_blocked('STATE_ORDER_MISMATCH:0',m)
     def test_basic_check_blocked(self):
         def m(r,s,p): x=json.loads(p[2].read_text()); x['checks']['mode']='BASIC_ARCHITECTURE'; p[2].write_text(json.dumps(x))
         self.assert_blocked('FULL_PRODUCTION_PASS_REQUIRED',m)
