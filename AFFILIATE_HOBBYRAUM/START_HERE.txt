@@ -1,42 +1,31 @@
 AFFILIATE HOBBYRAUM V1
 
-DIESER RAUM GILT NUR FÜR:
+DIESER RAUM GILT NUR FUER:
 AFFILIATE_ZENTRALE
 
-STARTREGEL:
-Nutze ausschließlich die im TASK.current.json freigegebenen Dateien.
-Bearbeite genau die eine dort definierte Aufgabe.
-Keine Projekt-Gesamtsuche.
-Keine zusätzlichen Dateien.
-Keine neue Architektur.
-Keine alten PASS-Prüfungen wiederholen.
-Keine STARTMASTER-/Textmaschinen-Navigation.
-Keine Ersatzroute bei Fehlern.
+EINZIGER EINSTIEGSPUNKT:
+protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md
+
+PFLICHTWEG:
+START_HERE -> CURRENT MASTER -> FRISCHECHECK -> NEXT ACTION -> AFFILIATE_HOBBYRAUM/TASK.current.json
+
+Diese Datei ist nur Wegweiser.
+Sie enthaelt bewusst keinen eigenen Branch-/Head-/Live-/Test-/Blocker-Stand und keine eigene NEXT ACTION.
 
 FEHLERMATRIX:
 AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md
 
-Vor JEDEM Lauf:
-1. komplette Fehlermatrix gegen die Aufgabe prüfen,
-2. bekannte Fehler/Umwege ausschließen,
-3. erst dann die eine Aufgabe ausführen.
-
-Bei JEDEM neuen Fehler:
-1. Fehler zuerst mit neuer AF-ID in die Matrix eintragen,
-2. Gegenregel festlegen,
-3. erst danach einen einzigen neuen Versuch starten.
-
-Runner:
+RUNNER:
 python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json
+
+Vor JEDEM Lauf:
+1. aktuelle Fehlermatrix gegen die eine gebundene Aufgabe pruefen,
+2. bekannte Fehler/Umwege ausschliessen,
+3. erst dann die Aufgabe ausfuehren.
 
 Erlaubtes Ergebnis:
 PASS + Patch/Output
 oder
 BLOCKED + exakt ein belegter Fehler
 
-
-Direkter READ-ONLY-Prüfweg ohne Docker/Podman:
-bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh
-
-Dieser Direktweg darf nur lesen/prüfen.
-Er ersetzt keinen WordPress-/MariaDB-Livebeleg und keinen realen OTTO/Awin-Datenlauf.
+Der Hobbyraum ersetzt keinen WordPress-/MariaDB-Livebeleg.
