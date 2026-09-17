@@ -1,6 +1,6 @@
 # HOBBYRAUM — SYSTEM 4A TEXTMASCHINE FINAL PASS
 
-Stand: 16.09.2026
+Stand: 17.09.2026
 Branch: `hobbyroom/system4a-textmachine-final-pass-20260916`
 Basis-Head: `73d791fd8d9a988c3119db4b3d822b38e54302dd`
 Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD**
@@ -16,7 +16,9 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 
 ## A. Textmaschine vollständig beweisen
 
-- [ ] **1. Exakte Textmaschinen-Regelmenge bestimmen.** Nicht pauschal alle 557 PPM-Regeln übernehmen. Maschinenfest trennen: Textmaschine vs. Workflow/Persistenz/Release/sonstige technische Regeln.
+- [x] **1. Exakte Textmaschinen-Regelmenge bestimmen.** Nicht pauschal alle 557 PPM-Regeln übernehmen. Maschinenfest getrennt: **153 diskrete Pferde-Atelier-Textmaschinenregeln** = 104 PPM + 31 Content Guard + 16 Design Guard + 2 External-Link-Regeln. LanguageTool 6.8 bleibt externer dynamischer Regelprüfer und wird nicht künstlich in Projektregel-IDs dupliziert. Technische Bindungs-/Integritätsregeln bleiben harte Voraussetzungen außerhalb dieser fachlichen Regelmenge.
+  - Beleg: `isolated_system4a/TEXTMASCHINE_RULE_SCOPE_20260917.md`
+  - Realer Fullcheck-Pfad: `controller.cmd_fullcheck()` -> `content_guard.validate_single_article()` -> `design_guard.validate_design_neutrality()` -> `production_checks.run_all()` -> External-Link-Prüfung + LT 6.8 + PPM 6.7.9.
 - [ ] **2. Für jede Textmaschinenregel Positivnachweis bestimmen.** Echter Prüfer, reale Ausführung, erwartetes PASS.
 - [ ] **3. Für jede Textmaschinenregel gezielten Negativnachweis bestimmen.** Genau diese Regel verletzen; erwarteter Prüfer und Fehlercode müssen erscheinen.
 - [ ] **4. Für jede Textmaschinenregel Fehlerklasse festlegen.** `REPAIR_REQUIRED` oder terminaler `HARD BLOCK`.
@@ -55,6 +57,6 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 
 ## Aktueller Einstiegspunkt
 
-**NEXT ACTION = Punkt 1.**
+**NEXT ACTION = Punkt 2.**
 
-Exakte Menge der tatsächlich zur Textmaschine gehörenden Regeln aus den real gebundenen Prüfern, PPM-6.7.9-Registern und System-4A-Guards bestimmen. Ergebnis muss maschinenfest und nachvollziehbar sein. Erst danach Punkt 2.
+Für jede der 153 Textmaschinenregeln den bereits vorhandenen realen Positivnachweis bestimmen. Kein neuer Test, solange nicht bewiesen ist, dass der vorhandene Nachweis fehlt.
