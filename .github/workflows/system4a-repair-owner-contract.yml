@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'hobbyroom/system4a-startgate-test-20260914'
+      - 'hobbyroom/system4a-textmachine-final-pass-20260916'
   workflow_dispatch:
 
 permissions:
@@ -27,3 +28,4 @@ jobs:
           test_stage_owner_return_contract.py
           test_source_acquisition_owner_contract.py
           test_machine_route_lock_contract.py
+          test_fullcheck_guard_repair_contract.py
