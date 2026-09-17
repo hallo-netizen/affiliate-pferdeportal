@@ -17,18 +17,28 @@ jobs:
       - uses: actions/checkout@v4
       - name: Exact head
         run: git rev-parse HEAD
-      - name: Inspect exact PPM 6.7.9 negative test authorities
+      - name: Inspect exact PPM 6.7.9 hard-rule inventory and coverage authority
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm679
           mkdir -p /tmp/ppm679
           unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
-          echo '=== TEST FILES ==='
-          find /tmp/ppm679 -type f \( -name '*.php' -o -name '*.json' -o -name '*.html' \) | sort | grep '/test\|/tests' || true
-          echo '=== ERROR REFERENCES IN TESTS ==='
-          grep -RhoE 'BLOCKED_[A-Z0-9_]+' /tmp/ppm679 --include='*.php' --include='*.json' | sort | uniq -c || true
-          echo '=== CODE IDS IN TESTS ==='
-          grep -RhoE 'CODE::[A-Za-z0-9_-]+' /tmp/ppm679 --include='*.php' --include='*.json' | sort -u || true
+          ROOT=/tmp/ppm679/portal-production-machine
+          echo '=== RULE/COVERAGE FILES ==='
+          find "$ROOT" -type f | grep -Ei '(hard[-_]?rule|coverage|inventory)' | sort | head -80
+          echo '=== MAINBLOCK1 COVERAGE TEST ==='
+          sed -n '1,260p' "$ROOT/tests/test-mainblock1-hard-rule-coverage.php"
+          echo '=== CONTRACT CANDIDATES ==='
+          for f in $(find "$ROOT/contracts" -maxdepth 2 -type f -name '*.json' | sort); do
+            if grep -Eq 'rule_id|test_path|test_file|coverage|hard_rule|CODE::' "$f"; then
+              echo "--- $f"; sed -n '1,220p' "$f";
+            fi
+          done
+      - name: Run exact PPM coverage authority
+        run: |
+          set -euo pipefail
+          ROOT=/tmp/ppm679/portal-production-machine
+          php "$ROOT/tests/test-mainblock1-hard-rule-coverage.php"
       - name: Run current exact negative-gap PPM proof
         working-directory: isolated_system4
         run: python3 -m unittest -v test_textmachine_ppm_negative_gaps.py
