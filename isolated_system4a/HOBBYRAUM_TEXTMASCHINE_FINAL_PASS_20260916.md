@@ -22,9 +22,12 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
   - Remote: `System 4A Real LT68 PPM679 Acceptance`, Run `35137504179`, Head `73d791fd8d9a988c3119db4b3d822b38e54302dd`, SUCCESS.
 - [x] **3. Für jede Textmaschinenregel gezielten Negativnachweis prüfen.** Audit für 152/152 abgeschlossen. **65/152** besitzen bereits ausreichend exakten Negativbeleg; **87/152** sind echte Beweislücken und müssen ausschließlich in Punkt 7 ergänzt werden.
   - Beleg: `isolated_system4a/TEXTMASCHINE_NEGATIV_AUDIT_20260917.md`
-- [x] **4. Für jede Textmaschinenregel Fehlerklasse festlegen.** **152/152 klassifiziert:** 102 reparierbar mit festem Owner, 50 terminal/fail-closed `HARD_BLOCK`. LanguageTool separat: echtes LT-Finding -> `DRAFT_WORKER`; LT-Hash-/Worker-/Execution-/Reportfehler -> `HARD_BLOCK`.
+- [x] **4. Für jede Textmaschinenregel Fehlerklasse festlegen.** **152/152 klassifiziert:** 102 reparierbar mit festem Owner, 50 terminal/fail-closed `HARD_BLOCK`. PPM-Verteilung korrigiert über reale Validator-`field_path`s: 83 Draft, 3 Parent-Title, 2 Portal-Link, 1 Parent-Category, 15 Hard. LanguageTool separat: echtes LT-Finding -> `DRAFT_WORKER`; LT-Hash-/Worker-/Execution-/Reportfehler -> `HARD_BLOCK`.
   - Beleg: `isolated_system4a/TEXTMASCHINE_FEHLERKLASSIFIKATION_20260917.md`
 - [ ] **5. Für jede reparierbare Regel vollständigen Rückweg beweisen.** Richtiger Owner -> gleicher Artikel -> gezielte Reparatur -> vollständige Textmaschine erneut -> PASS.
+  - Implementierungslücke gefunden und geschlossen: reparierbare `content_guard`-/`design_guard`-Befunde werden im `controller.cmd_fullcheck()` nicht mehr pauschal hart geblockt, sondern über `production_checks.guard_repair_finding()` an `DRAFT_WORKER -> REPAIR_REQUIRED` geroutet.
+  - Regressionstest angelegt: `isolated_system4/test_fullcheck_guard_repair_contract.py` (Repair-Route, gleiche Artikelidentität, Recheck-PASS, Hard-Block-Grenze).
+  - **Noch kein `[x]`:** auf dem aktuellen Hobbyraum-Head fehlt noch ein zulässiger Remote-Lauf dieses neuen Tests. Ein kurz geöffneter Draft-PR wurde wieder geschlossen; dessen generischer Entrance-Gate-Lauf scheiterte vor den Textmaschinentests an altem `NEXT_BUNDLE_HASH_MISMATCH` und ist kein Punkt-5-Beleg.
 - [ ] **6. Für jede nicht reparierbare Regel Hard Block beweisen.** Kein falscher Repair-Pfad; terminal/fail-closed.
 - [ ] **7. Nur tatsächlich fehlende Nachweise ergänzen.** Aktuell exakt **87 Negativbeweis-Lücken** aus Punkt 3. Keine neuen Qualitätsregeln, keine zweite Textmaschine, keine abgeschwächten Prüfer.
 - [ ] **8. `TEXTMASCHINE_REGELN_FULL_PASS` beweisen.** Erst wenn 1–7 vollständig und maschinenfest abgeschlossen sind.
@@ -54,4 +57,4 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 ## Aktueller Einstiegspunkt
 **NEXT ACTION = Punkt 5.**
 
-Für alle 102 reparierbaren Regeln den vollständigen Rückweg hart beweisen: richtiger Owner -> identisches Artikel-/Artefaktobjekt -> gezielte Reparatur -> vollständiger Textmaschinen-Fullcheck erneut -> PASS.
+Den neuen Guard-Rückweg zusammen mit den bereits vorhandenen PPM/LT/External-Link-/Parent-Owner-Routen auf demselben Hobbyraum-Head real ausführen; erst danach Punkt 5 abhaken. Danach Punkt 6.
