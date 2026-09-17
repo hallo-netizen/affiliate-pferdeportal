@@ -11,13 +11,13 @@ FORCE_REPAIR_INDEX_ENV='SYSTEM4_TEST_FORCE_REPAIR_INDEX'
 FORCE_BATCH_REPETITION_COUNT_ENV='SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT'
 REPO=Path(__file__).resolve().parent.parent
 BATCH_REPEAT_SENTENCES=(
-    'Für diese Prüfung bleibt ausschließlich der gebundene Quellenstand maßgeblich und zusätzliche Tatsachen werden nicht ergänzt.',
-    'Die folgende Einordnung verwendet nur bereits gebundene Belege und führt keine neue Sachbehauptung ein.',
-    'Jeder Entscheidungspunkt wird an den dokumentierten Quellen geprüft und nicht durch ungebundene Angaben erweitert.',
-    'Die Darstellung beschränkt sich dabei auf nachgewiesene Inhalte und vermeidet zusätzliche Annahmen außerhalb des Vertrags.',
-    'Für die sachliche Bewertung gelten ausschließlich die vorhandenen Belege als Grundlage der weiteren Einordnung.',
-    'Die Auswahl wird deshalb nur anhand der gebundenen Kriterien beschrieben und nicht um neue Informationen ergänzt.',
-    'Alle weiteren Hinweise bleiben innerhalb des bestätigten Quellenrahmens und verändern keine gebundene Tatsachengrundlage.',
+    'Diese Prüfung nutzt nur gebundene Quellen und ergänzt keine Tatsachen.',
+    'Die Einordnung bleibt bei gebundenen Belegen und vermeidet zusätzliche Annahmen.',
+    'Jeder Entscheidungspunkt folgt dokumentierten Quellen und erhält keine neuen Behauptungen.',
+    'Die Darstellung verwendet bestätigte Inhalte und lässt unbelegte Ergänzungen vollständig aus.',
+    'Für die Bewertung gelten vorhandene Belege ohne weitere sachliche Erweiterungen.',
+    'Die Auswahl wird anhand gebundener Kriterien ohne neue Informationen beschrieben.',
+    'Alle Hinweise bleiben im bestätigten Quellenrahmen und verändern keine Tatsachen.',
 )
 BATCH_REPEAT_TEXT=' '.join(BATCH_REPEAT_SENTENCES)
 
