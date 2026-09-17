@@ -4,73 +4,28 @@
   "sequence": 107007,
   "worker_profile": "CLOUD_ARTICLE_BATCH_NO_STOP",
   "authorized_inputs": [
-    {
-      "ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
-      "sha256": "caed4231e905f1ff7ee1f0424a432b9a4f0a5d99ee8c2e828a0c3eb47d54e57d"
-    },
-    {
-      "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24"
-    },
-    {
-      "ref": "control/output-quarantine/worker_freshness_guard.py",
-      "sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84"
-    },
-    {
-      "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "d9393c50edc21dfae591012d5ea520249254c072879e0dbf26aa484031c1b9d8"
-    },
-    {
-      "ref": "control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json",
-      "sha256": "daee323ff219ba4918c40660b34ea39cb960f1664a0a0ac8d5e76c3ccc7296be"
-    },
-    {
-      "ref": "control/startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh",
-      "sha256": "c1b6d5c698a20a223656814dc5937b3a45baa96e984ba46586772c1576619db6"
-    },
-    {
-      "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"
-    },
-    {
-      "ref": "control/output-quarantine/final_review_visibility_guard.py",
-      "sha256": "c5f7284dc5d6a3bd69464162d18abed66e164ce8fd3bea05181f57fec2095913"
-    },
-    {
-      "ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
-      "sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f"
-    },
-    {
-      "ref": "control/startmaster0107/START_OPTIMIZATION_POLICY_20260831.json",
-      "sha256": "ff9b2b3d1ccd91ccaab6b536c072ae766ba56274515d774f1f377c3938fe54e0"
-    },
-    {
-      "ref": "control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py",
-      "sha256": "3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837"
-    },
-    {
-      "ref": "control/startmaster0107/system4_107007_entry.py",
-      "sha256": "619f6c972924027e11210fb4bf1c56ba71bedeae9c9631377556b36e172e53c5"
-    },
-    {
-      "ref": "control/startmaster0107/system4_107007_batch.py",
-      "sha256": "24e1c25298c9e7dd0f1a7766697c9da23815b8259f60d2a9df5aa93fb792ff27"
-    },
-    {
-      "ref": "isolated_system4/batch_gate.py",
-      "sha256": "95ee0af22ce54cfd472e8b910857279e5e09e8a1058f214d684b17e3f0f1dfa7"
-    }
+    {"ref":"control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json","sha256":"caed4231e905f1ff7ee1f0424a432b9a4f0a5d99ee8c2e828a0c3eb47d54e57d"},
+    {"ref":"control/output-quarantine/runtime_entry_gate.py","sha256":"c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24"},
+    {"ref":"control/output-quarantine/worker_freshness_guard.py","sha256":"6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84"},
+    {"ref":"control/startmaster0107/codex-production-runtime/codex_environment_preflight.py","sha256":"d9393c50edc21dfae591012d5ea520249254c072879e0dbf26aa484031c1b9d8"},
+    {"ref":"control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json","sha256":"daee323ff219ba4918c40660b34ea39cb960f1664a0a0ac8d5e76c3ccc7296be"},
+    {"ref":"control/startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh","sha256":"c1b6d5c698a20a223656814dc5937b3a45baa96e984ba46586772c1576619db6"},
+    {"ref":"control/output-quarantine/output_release_gate.py","sha256":"d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"},
+    {"ref":"control/output-quarantine/final_review_visibility_guard.py","sha256":"c5f7284dc5d6a3bd69464162d18abed66e164ce8fd3bea05181f57fec2095913"},
+    {"ref":"control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json","sha256":"b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f"},
+    {"ref":"control/startmaster0107/START_OPTIMIZATION_POLICY_20260831.json","sha256":"ff9b2b3d1ccd91ccaab6b536c072ae766ba56274515d774f1f377c3938fe54e0"},
+    {"ref":"control/startmaster0107/runtime_inbox/runtime_batch_slot_lifecycle.py","sha256":"3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837"},
+    {"ref":"control/startmaster0107/system4_107007_entry.py","sha256":"619f6c972924027e11210fb4bf1c56ba71bedeae9c9631377556b36e172e53c5"},
+    {"ref":"control/startmaster0107/system4_107007_batch.py","sha256":"24e1c25298c9e7dd0f1a7766697c9da23815b8259f60d2a9df5aa93fb792ff27"},
+    {"ref":"isolated_system4/batch_gate.py","sha256":"95ee0af22ce54cfd472e8b910857279e5e09e8a1058f214d684b17e3f0f1dfa7"}
   ],
   "instruction": "107007 ist ausschließlich der produktive System-4-Lauf-Slot.\n\nHARD RULE — EINZIGER PRODUKTIVER 1..N-DURCHLAUF:\nVor jeder Artikelarbeit muss der bereits maschinell erzeugte SYSTEM4_POINT0_SNAPSHOT_V2 vorliegen. Der komplette Batch wird danach ausschließlich durch den maschineneigenen 1..N-Adapter gesteuert. Start exakt einmal mit:\n\npython3 control/startmaster0107/system4_107007_batch.py start <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\nDer Adapter bestimmt die Artikelanzahl ausschließlich aus dem aktuell hashgebundenen Runtime-Batch. Er startet ausschließlich Index 0. Nach PASS des aktuell gebundenen Artikels ausschließlich:\n\npython3 control/startmaster0107/system4_107007_batch.py advance <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\n`advance` darf keinen Index frei entgegennehmen. Die Maschine berechnet den nächsten Index selbst. Artikel N+1 darf erst gestartet werden, wenn Artikel N in seinem gebundenen Workspace phase=OUTPUT_GATE_REQUIRED und checks.status=PASS besitzt und plan_slot, canonical_article_id sowie target_keyword exakt dem aktuellen Runtime-Batch entsprechen. Kein Überspringen, kein freier Sprung, kein Wiederholen bereits abgeschlossener Items. Ein neuer Batch benötigt einen leeren neuen BATCH_ROOT und ist an Batch-Hash und Point-0-Hash gebunden. Runtime-/Point-0-/Count-Drift blockiert fail-closed.\n\nDer Batch-Adapter ruft für jeden neuen Index ausschließlich den bereits gebundenen Einzelstart control/startmaster0107/system4_107007_entry.py auf. Dieser führt zwingend root_entry.py start-point0 und danach codex_entry.py worker-start aus. cloud_entry.py und runtime_entry_gate.py start bleiben als Artikel-/Worker-Produktionsstart verboten.\n\nHARD RULE — REPAIR NUR SYSTEM 4:\nWenn der aktuelle System-4-Workspace phase=REPAIR_REQUIRED meldet, bleibt exakt derselbe Artikel im exakt selben Workspace gebunden. Reparatur ausschließlich über isolated_system4/controller.py repair <WORKSPACE> <REPAIR_DRAFT> und danach erneut isolated_system4/controller.py fullcheck <WORKSPACE>. Der 1..N-Adapter darf während REPAIR_REQUIRED niemals zum nächsten Artikel fortschalten; `advance` bleibt bis zum echten OUTPUT_GATE_REQUIRED/PASS gesperrt. Repair-Owner, Return-Route, Revision und Same-Article-Bindung werden ausschließlich vom System-4-Controller bestimmt.\n\nVERBOTEN für 107007-Repair und nicht mehr autorisiert: control/single-door-boundary/codex_current_room_bridge.py, control/single-door-boundary/codex_current_action.py, control/startmaster0107/fachworkflow_proof_handoff.py und control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py. FACHWORKFLOW_REPAIR_REQUIRED, submission_command oder irgendeine alte STARTMASTER-Repair-Rückgabe dürfen den aktuellen System-4-Artikel weder reparieren noch routen. Keine zweite Repair-Wahrheit.\n\nCodex arbeitet ausschließlich am von der Maschine ausgegebenen current item. In REPAIR_REQUIRED folgt Codex ausschließlich der in isolated_system4/codex_entry.py gebundenen Same-Article-Anweisung und ruft den System-4-Controller; es darf keinen Legacy-Handoff benutzen. Nach echtem System-4-PASS wird wieder nur `advance` aufgerufen; Codex darf den nächsten Artikel weder auswählen noch selbst ableiten. HARD RULE — BATCH-COLLECT NACH DEM LETZTEN ARTIKEL: Wenn der letzte Artikel echten System-4-PASS erreicht, muss derselbe 1..N-Adapter zwingend isolated_system4/batch_gate.py collect mit dem hashgebundenen Source-Snapshot und exakt allen Workspace-state.json in Reihenfolge 0..N-1 ausführen. SYSTEM4_107007_BATCH_ITEMS_COMPLETE darf erst nach status=SYSTEM4_BATCH_FULL_PASS_COLLECTED, passender Batch-SHA, exakter Artikelanzahl und verifiziertem system4_batch_evidence.json gemeldet und persistiert werden. Schlägt collect fehl oder fehlt sein Evidence-Hash, bleibt 107007 BLOCKED und 107008 ist verboten.\n\nNEW bleibt NEW; alte Artikel-/Recovery-Dateien sind keine Produktionsquelle. Kein Publish. Keine Parallelroute.",
-  "limits": {
-    "reasoning_effort": "medium",
-    "parallel_workers": "AS_BOUND_BY_BATCH"
-  },
+  "limits": {"reasoning_effort":"medium","parallel_workers":"AS_BOUND_BY_BATCH"},
   "next_binding": {
-    "startmaster": "STARTMASTER0107",
-    "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
-    "sequence": 107008,
-    "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "d47ce660973e18765ce65d33254ac573125e90ce701fad00136508d4377dd987"
+    "startmaster":"STARTMASTER0107",
+    "step_id":"FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
+    "sequence":107008,
+    "bundle_ref":"control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
+    "bundle_sha256":"af1c4515e70528a0ab8b2d21b3a7e696df8afc9e0d530f3a5bc03a3de52056aa"
   }
 }
