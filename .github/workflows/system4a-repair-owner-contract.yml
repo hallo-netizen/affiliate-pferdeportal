@@ -29,3 +29,4 @@ jobs:
           test_source_acquisition_owner_contract.py
           test_machine_route_lock_contract.py
           test_fullcheck_guard_repair_contract.py
+          test_textmachine_hardblock_matrix.py
