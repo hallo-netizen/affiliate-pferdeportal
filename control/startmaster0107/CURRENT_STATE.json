@@ -4,7 +4,7 @@
   "authoritative_current_state_path": "control/startmaster0107/CURRENT_STATE.json",
   "central_pointer_ref": "control/CURRENT_STARTMASTER.json",
   "central_pointer_policy": "NAVIGATION_ONLY_NO_SECOND_DYNAMIC_STATE",
-  "status": "CODEX_107007_CORRECTED_START_REQUESTED",
+  "status": "BLOCKED_GLOBAL_WORKSHOP_INCOMPLETE_AND_CURRENT_HEAD_UNACCEPTED",
   "publish_allowed": false,
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
@@ -12,17 +12,9 @@
     "last_runtime_tested_head": "25f87b819a7d1b4a450565f0a46b1c07f6770802",
     "acceptance_run_id": 35203980166,
     "acceptance_job_id": 105145172825,
-    "result": "SUCCESS",
-    "tested_scope": [
-      "System4 unit and negative suite",
-      "PPM 6.7.9 positive-negative suite",
-      "stage-aware repair regression",
-      "LanguageTool 6.8",
-      "real LT/PPM corridor",
-      "1 and 3 article real start-to-file corridor",
-      "CHAT START to WordPress handoff positive and negative without Codex",
-      "READY/requesting-chat SHA and byte binding"
-    ]
+    "result": "SUCCESS_ON_OLDER_HEAD_ONLY",
+    "current_head_acceptance": "NOT_RUN",
+    "current_head_ci_runs": 0
   },
   "production_step": {
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
@@ -31,8 +23,10 @@
     "system4_only": true,
     "legacy_fachworkflow_fallback_allowed": false,
     "bound_launch_ref": "isolated_system4/bound_launches/production_107007_batch_7_20260917.json",
-    "bound_launch_sha256": "1bfefd0370251ca45ba5868e80a244182da76a865f7713e0b3bde6d5ff492d59",
-    "bound_launch_git_blob_sha": "7f4236359500cc6ed4bec5ec5f3aca737845a6da",
+    "actual_bound_launch_sha256": "bf629ea68555f3a14166f1b10eb9ae5910a2e9ae06881aac48f9aa6a9f4f423e",
+    "actual_bound_launch_git_blob_sha": "42708d99a094f61e10bab3dac0bdb38e4fd060af",
+    "step_declared_bound_launch_sha256": "1bfefd0370251ca45ba5868e80a244182da76a865f7713e0b3bde6d5ff492d59",
+    "binding_status": "BLOCKED_MISMATCH",
     "article_count": 7
   },
   "execution_gate": {
@@ -58,47 +52,67 @@
     "unbound_output_policy": "QUARANTINE_INVALID_NEVER_SURFACE_AS_PROJECT_RESULT",
     "domain_blind_output_guard": true
   },
-  "real_production_run": {
-    "status": "CORRECTED_START_REQUESTED",
-    "articles_produced": "0/7",
+  "latest_real_production_run": {
+    "start_comment_id": 5717159014,
+    "result_comment_id": 5717369546,
+    "parent_start_status": "PASS_ARTICLE_COUNT_7",
+    "individual_article_gate_status": "7_OF_7_REACHED_BATCH_INPUT",
+    "batch_status": "REPAIRABLE_FAIL",
+    "first_batch_error": "BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED:21>6",
     "wordpress_handoff_present": false,
-    "codex_start_pr": 275,
-    "failed_start_comment_ids": [
-      5712686515,
-      5712724029
-    ],
-    "last_failure": "PARENT_BOUND_CAPSULE_SHA_MISMATCH",
-    "start_attempt_protocol": "protocol/STARTMASTER0107_REAL_107007_CODEX_START_20260917.md",
-    "codex_start_comment_id": 5712807650
+    "publish_allowed": false
   },
-  "codex_start_surface": {
-    "status": "AVAILABLE",
-    "type": "GITHUB_PR_COMMENT_CODEX_MENTION",
-    "repository": "hallo-netizen/affiliate-pferdeportal",
-    "pr_number": 275,
-    "trigger": "@codex",
-    "availability_test": "Chat must be able to create a top-level PR conversation comment on PR #275 via the connected GitHub tool.",
-    "proof": "PR #238 proves @codex PR comments start chatgpt-codex-connector tasks; PR #275 is the durable start surface bound to the current working branch.",
-    "hard_rule": [
-      "Do not search for or require a separate Codex plugin when GitHub PR comment write access is available.",
-      "For a Codex NEXT ACTION, verify PR #275 is open, its head is the current working branch, and GitHub top-level PR comment creation is available.",
-      "Trigger Codex only by a top-level @codex comment on PR #275 containing the exact bound first command.",
-      "Do not substitute GitHub Actions, legacy fachworkflow_handoff, codex_current_action, worker-authored PASS, or auto-publish."
-    ]
+  "prior_real_production_evidence": {
+    "result_comment_id": 5715449596,
+    "status": "HISTORICAL_INTERNAL_SYSTEM4_PASS",
+    "article_count": 7,
+    "wordpress_handoff_sha256": "1a42251b9fe53b4679dbaf52f50afdb99929128d8ccc516c4958b9421276377e",
+    "wordpress_handoff_bytes": 195464,
+    "note": "Historical evidence only; the later fresh run exposed the batch repetition repair-gap and is the current operative production result."
   },
-  "freshness_rule": {
-    "before_any_execution": [
-      "read current working-branch head",
-      "compare all changes since last_runtime_tested_head",
-      "if any runtime/path/checker change exists, rerun full Acceptance before production",
-      "verify 107007 bound launch ref and SHA still match"
+  "global_workshop": {
+    "rule_ref": "isolated_system4/GLOBAL_WORKSHOP_RULE_20260917.md",
+    "implementation_status": "IN_PROGRESS_NOT_ACCEPTED",
+    "implemented": [
+      "structured batch repetition findings instead of count-only failure",
+      "global_workshop request contract and repair/nonrepairable classification",
+      "batch_gate workshop capture and targeted article REPAIR_REQUIRED state routing",
+      "controller and parent_start workshop capture",
+      "repair continuation receipts preserve all findings",
+      "writer repair instruction no longer says first finding only"
     ],
-    "status_on_uncertainty": "BLOCKED"
+    "open_blockers": [
+      "full_route_start.py still treats BatchGateWorkshop and other workshop continuations as terminal FullRouteError",
+      "repair_router.py still selects the first owner/target for mixed-owner finding sets instead of routing owner/target groups separately",
+      "handoff/top-level workshop coverage is not proven end-to-end",
+      "complete positive/negative protection ring and full real-tool corridor have not run on the current head",
+      "107007 STEP/CURRENT binding still disagrees with the actual bound launch SHA"
+    ],
+    "tests": {
+      "local_reconstructed_test_global_workshop": "PASS_3_OF_3",
+      "local_21_repeated_sentence_findings": "PASS_FINDINGS_21_REPAIRABLE_TARGET_3",
+      "local_nonrepairable_hash_case": "PASS_BLOCKED_NON_REPAIRABLE",
+      "full_workflow_acceptance_current_head": "NOT_RUN"
+    },
+    "runtime_logic_head": "5391f6915ad5674264304cb7e33774bd9e338b2c"
+  },
+  "codex_policy": {
+    "allowed": "REAL_BOUND_ARTICLE_PRODUCTION_ONLY_AFTER_EXPLICIT_USER_APPROVAL",
+    "forbidden": [
+      "implementation",
+      "tests",
+      "diagnostics",
+      "architecture work",
+      "preflight repair",
+      "handoff experiments"
+    ],
+    "authority_ref": "isolated_system4/AGENTS.md"
   },
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "next_action": "Verify the Codex connector result for PR #275 comment 5712807650 and follow the real 107007 run to SYSTEM4_WORDPRESS_HANDOFF_V1.json. Do not substitute another route."
+    "freshness_check": "Read PR #275 head. Compare all changes since runtime_logic_head_under_review. Documentation-only closeout commits do not change the runtime logic; any runtime change requires a new code/test review before continuing.",
+    "next_action": "NO CODEX. Complete the global workshop in full_route_start.py so every repairable error becomes continuation, split mixed-owner findings by owner/target in repair_router.py, cover handoff/top-level errors, add positive/negative regressions including a 4+ article batch repetition return, then run the complete acceptance/protection ring on the exact resulting head. Only after that repair the 107007 binding mismatch and consider a new real article run."
   },
   "mandatory_execution_path": [
     "isolated_system4/parent_start.py start-bound",
@@ -106,31 +120,23 @@
     "isolated_system4/root_entry.py",
     "isolated_system4/supervisor.py",
     "isolated_system4/worker_dispatch.py",
-    "isolated_system4/codex_entry.py",
     "Research",
     "Facts",
     "Context",
     "Draft",
     "controller.py fullcheck",
-    "same-article repair when repairable",
+    "GLOBAL WORKSHOP on any error",
+    "authoritative owner repair when repairable",
     "complete fullcheck rerun",
     "batch_gate",
     "SYSTEM4_WORDPRESS_HANDOFF_V1.json"
   ],
   "hobbyroom": {
-    "status": "CODEX_CORRECTED_START_REQUESTED",
+    "status": "BLOCKED",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
-    "completed": [
-      1,
-      2,
-      3
-    ],
-    "open": [
-      4,
-      5
-    ],
-    "current_focus": "REAL_107007_CODEX_PRODUCTION_START",
-    "next_action": "Verify the Codex task launched from PR #275 comment 5712807650 and follow the real 7-article production run to its machine result.",
-    "return_path": "same article -> existing repair route -> complete text-machine recheck"
-  }
+    "current_focus": "GLOBAL_WORKSHOP_INVARIANT_CLOSEOUT",
+    "next_action": "Complete and hard-test the global error-to-workshop continuation on the current branch without Codex.",
+    "return_path": "ERROR -> GLOBAL_WORKSHOP -> authoritative owner -> repair -> complete recheck -> normal route"
+  },
+  "runtime_logic_head_under_review": "5391f6915ad5674264304cb7e33774bd9e338b2c"
 }
