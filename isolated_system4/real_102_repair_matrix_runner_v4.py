@@ -16,6 +16,15 @@ import test_textmachine_ppm_negative_gaps as ppm_negative_gaps
 CANONICAL = 'tests/test-canonical-runtime-binding.php'
 HISTORICAL = 'tests/test-historical-regressions.php'
 WAVE1_KNOWN = 'tests/test-wave1-known-error-mutations.php'
+WAVE2_MUTATIONS = 'tests/test-wave2-content-mutations.php'
+WAVE2_REAL_COMPAT_CODES = {
+    'BLOCKED_WAVE2_BOUND_LINK_MISSING',
+    'BLOCKED_WAVE2_FURTHER_INFORMATION_LINK',
+    'BLOCKED_WAVE2_INTERNAL_LINK_COUNT',
+    'BLOCKED_WAVE2_INTERNAL_LINK_ROLE_MISSING',
+    'BLOCKED_WAVE2_INTERNAL_LINK_TARGET',
+    'BLOCKED_WAVE2_INTRO_NOT_FIRST',
+}
 
 
 def _codes(exc: production_checks.RepairRequired) -> list[str]:
@@ -247,9 +256,27 @@ def run_ppm_targeted_authorities(ppm_root: Path, rows: list[dict]) -> dict:
                 raise AssertionError('KNOWN_DUPLICATE_HEADING_REAL_PROBE_FAILED:RC=' + str(proof.returncode) + '\n' + proof_combined[-12000:])
             missing = []
             print('PPM_TARGETED_NEGATIVE_COMPAT_PASS:' + rel + ':BLOCKED_KNOWN_DUPLICATE_HEADING:CURRENT_REAL_MUTATION', flush=True)
+        if rel == WAVE2_MUTATIONS and set(missing) == WAVE2_REAL_COMPAT_CODES:
+            probe = str(ppm_negative_gaps.PHP_PROBE)
+            absent = sorted(code for code in WAVE2_REAL_COMPAT_CODES if code not in probe)
+            if absent:
+                raise AssertionError('WAVE2_REAL_PROBE_BINDING_MISSING:' + ','.join(absent))
+            probe_path = ppm_root / 'tests' / 'system4-current-wave2-six-bindings.php'
+            probe_path.write_text(probe, encoding='utf-8')
+            proof = subprocess.run(['php', str(probe_path)], cwd=ppm_root, text=True, capture_output=True)
+            proof_combined = (proof.stdout or '') + '\n' + (proof.stderr or '')
+            if proof.returncode != 0:
+                raise AssertionError('WAVE2_REAL_PROBE_FAILED:RC=' + str(proof.returncode) + '\n' + proof_combined[-12000:])
+            missing = []
+            print('PPM_TARGETED_NEGATIVE_COMPAT_PASS:' + rel + ':6_WAVE2_CODES:CURRENT_REAL_MUTATIONS', flush=True)
         if missing:
             raise AssertionError('PPM_TARGET_ERROR_NOT_EMITTED:' + rel + ':' + ','.join(missing) + ':RC=' + str(cp.returncode) + '\n' + combined[-8000:])
-        executed_negative.append({'path': rel, 'return_code': cp.returncode, 'bound_rule_count': len(bound_rows), 'compatibility': 'UNCHANGED' if rel != WAVE1_KNOWN else 'CURRENT_REAL_DUPLICATE_HEADING_MUTATION'})
+        compatibility = 'UNCHANGED'
+        if rel == WAVE1_KNOWN:
+            compatibility = 'CURRENT_REAL_DUPLICATE_HEADING_MUTATION'
+        elif rel == WAVE2_MUTATIONS:
+            compatibility = 'CURRENT_REAL_WAVE2_SIX_MUTATIONS'
+        executed_negative.append({'path': rel, 'return_code': cp.returncode, 'bound_rule_count': len(bound_rows), 'compatibility': compatibility})
         print('PPM_TARGETED_NEGATIVE_PASS:' + rel + ':' + str(len(bound_rows)), flush=True)
     executed_positive = []
     for rel in positive:
