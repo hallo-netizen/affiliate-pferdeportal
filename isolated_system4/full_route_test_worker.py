@@ -19,9 +19,13 @@ BATCH_REPEAT_SENTENCES=(
     'Die Auswahl wird anhand gebundener Kriterien ohne neue Informationen beschrieben.',
     'Alle Hinweise bleiben im bestätigten Quellenrahmen und verändern keine Tatsachen.',
 )
-BATCH_REPEAT_TOPICS=('Fliegenmasken','Pellets','Urlaubspläne','Nachbarschaftsabsprachen')
 BATCH_REPEAT_ORDINALS=('ersten','zweiten','dritten','vierten','fünften','sechsten')
-BATCH_REPEAT_TEXT=' '.join(BATCH_REPEAT_SENTENCES)
+BATCH_REPEAT_SEPARATOR_TEMPLATES=(
+    'Fliegenmasken markieren im {ordinal} Durchgang eine eigenständige Prüfspur für diesen Artikel ohne zusätzliche Sachangabe oder fremde Ableitung.',
+    'Luzernepellets erhalten beim {ordinal} Kontrollpunkt eine separate Testfolge innerhalb dieses Artikels; sie dient ausschließlich der technischen Abgrenzung.',
+    'Urlaubstestspur bezeichnet den {ordinal} Abschnitt dieser Prüfung und hält nur die künstliche Vergleichsmarkierung des betreffenden Artikels fest.',
+    'Nachbarschaftstestspur führt durch den {ordinal} Prüfabschnitt und kennzeichnet ausschließlich die eigene technische Testsequenz dieses Artikels.',
+)
 
 
 def write_json(path:Path,value):
@@ -56,15 +60,19 @@ def _force_one_repairable_typo(body:str,index:int)->str:
         if count==1: return changed
     raise RuntimeError('FORCED_REPAIR_TOKEN_MISSING')
 
-def _forced_batch_repeat_text(index:int)->str:
-    if index<0 or index>=len(BATCH_REPEAT_TOPICS):
+def _forced_batch_separator(index:int,pos:int)->str:
+    if index<0 or index>=len(BATCH_REPEAT_SEPARATOR_TEMPLATES):
         raise RuntimeError('FORCED_BATCH_REPETITION_TEST_INDEX_UNSUPPORTED:'+str(index))
-    topic=BATCH_REPEAT_TOPICS[index]
+    if pos<0 or pos>=len(BATCH_REPEAT_ORDINALS):
+        raise RuntimeError('FORCED_BATCH_REPETITION_SEPARATOR_INDEX_UNSUPPORTED:'+str(pos))
+    return BATCH_REPEAT_SEPARATOR_TEMPLATES[index].format(ordinal=BATCH_REPEAT_ORDINALS[pos])
+
+def _forced_batch_repeat_text(index:int)->str:
     parts=[]
     for pos,sentence in enumerate(BATCH_REPEAT_SENTENCES):
         parts.append(sentence)
         if pos<len(BATCH_REPEAT_SENTENCES)-1:
-            parts.append(f'{topic} markieren hier den {BATCH_REPEAT_ORDINALS[pos]} Prüfpunkt.')
+            parts.append(_forced_batch_separator(index,pos))
     return ' '.join(parts)
 
 def _force_batch_repetition(body:str,state:dict,index:int)->str:
@@ -83,6 +91,20 @@ def _force_batch_repetition(body:str,state:dict,index:int)->str:
     authoring_contract.validate_candidate(changed,state['authoring_contract'])
     return changed
 
+def _strip_forced_batch_repetition(body:str,index:int)->str:
+    repaired=body
+    removed=0
+    for sentence in BATCH_REPEAT_SENTENCES:
+        if sentence in repaired:
+            repaired=repaired.replace(sentence,'',1); removed+=1
+    for pos in range(len(BATCH_REPEAT_ORDINALS)):
+        separator=_forced_batch_separator(index,pos)
+        repaired=repaired.replace(separator,'',1)
+    repaired=re.sub(r'\s{2,}',' ',repaired)
+    if removed<6 or repaired==body:
+        raise RuntimeError('FORCED_BATCH_REPETITION_TEXT_MISSING')
+    return repaired
+
 def _repair_forced_batch_repetition(state:dict,index:int)->str|None:
     raw=os.environ.get(FORCE_BATCH_REPETITION_COUNT_ENV,'').strip()
     if not raw: return None
@@ -92,19 +114,7 @@ def _repair_forced_batch_repetition(state:dict,index:int)->str|None:
     if checks.get('mode')!='GLOBAL_WORKSHOP' or checks.get('checker')!='BATCH' or len(relevant)<7:
         return None
     body=str(state.get('draft_markdown') or '')
-    repaired=body
-    removed=0
-    for sentence in BATCH_REPEAT_SENTENCES:
-        if sentence in repaired:
-            repaired=repaired.replace(sentence,'',1); removed+=1
-    topic=BATCH_REPEAT_TOPICS[index] if 0<=index<len(BATCH_REPEAT_TOPICS) else None
-    if topic:
-        for ordinal in BATCH_REPEAT_ORDINALS:
-            separator=f'{topic} markieren hier den {ordinal} Prüfpunkt.'
-            repaired=repaired.replace(separator,'',1)
-    repaired=re.sub(r'\s{2,}',' ',repaired)
-    if removed<6 or repaired==body:
-        raise RuntimeError('FORCED_BATCH_REPETITION_TEXT_MISSING')
+    repaired=_strip_forced_batch_repetition(body,index)
     authoring_contract.validate_candidate(repaired,state['authoring_contract'])
     return repaired
 
