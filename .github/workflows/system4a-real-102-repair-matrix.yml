@@ -12,34 +12,65 @@ permissions:
 jobs:
   real-102-repair-matrix:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
+    env:
+      SYSTEM4_FRESH_RUN_TOKEN: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}-real-102
+      SYSTEM4_REAL_102_PROOF: /tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json
     steps:
       - uses: actions/checkout@v4
       - name: Exact head
         run: git rev-parse HEAD
-      - name: Inspect exact parent and portal PPM diagnostics
+      - name: Forbid mocks in real 102 harness
         run: |
           set -euo pipefail
-          rm -rf /tmp/ppm679
-          mkdir -p /tmp/ppm679
-          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
-          ROOT=/tmp/ppm679/portal-production-machine
-          for code in \
-            BLOCKED_CONTENT_FAQ_TITLE_QUESTION_MARK \
-            BLOCKED_CONTENT_TITLE_COLON \
-            BLOCKED_CONTENT_TARGET_KEYWORD_TITLE \
-            BLOCKED_WAVE2_WORDPRESS_CATEGORY \
-            BLOCKED_WAVE2_RUNTIME_LINK_ROLE \
-            BLOCKED_WAVE2_INTERNAL_LINK_ROLE_MISSING \
-            BLOCKED_WAVE2_BOUND_LINK_MISSING \
-            BLOCKED_CONTENT_UNBOUND_INTERNAL_LINK \
-            BLOCKED_CONTENT_BOUND_LINK_MISSING; do
-            echo "===== $code ====="
-            grep -RFn -B18 -A28 "$code" "$ROOT/includes" || true
-          done
-      - name: Run exact PPM targeted negatives
+          if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' isolated_system4/real_102_repair_matrix_v1.py; then
+            echo 'REAL_102_MOCK_FORBIDDEN'
+            exit 2
+          fi
+          echo 'REAL_102_NO_MOCK_PASS'
+      - name: Download hash-bound LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Execute real 102 of 102 repair roundtrip matrix
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: |
+          set -euo pipefail
+          python3 isolated_system4/real_102_repair_matrix_v1.py | tee /tmp/system4-real-102.log
+          grep -Fx 'TEXTMASCHINE_REAL_REPAIR_FULL_PASS:102/102' /tmp/system4-real-102.log
+          test -s /tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json
+          python3 - <<'PY'
+          import json
+          p='/tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json'
+          d=json.load(open(p,encoding='utf-8'))
+          assert d['status']=='PASS'
+          assert d['count']==102
+          assert d['real_fullcheck_count']==102
+          assert d['owner_counts']=={'DRAFT_WORKER':96,'PARENT_TITLE_MACHINE':3,'PORTAL_LINK_MACHINE':2,'PARENT_CATEGORY_MACHINE':1}
+          assert all(r['fullcheck']=='PASS' and r['lt']=='PASS' and r['ppm']=='PASS' for r in d['rows'])
+          assert d['publish_allowed'] is False
+          print('REAL_102_PROOF_FILE_PASS')
+          PY
+      - name: Run hard-block regression after routing repair
         working-directory: isolated_system4
-        run: python3 -m unittest -v test_textmachine_ppm_negative_gaps.py
-      - name: Run exact guard targeted negatives
-        working-directory: isolated_system4
-        run: python3 -m unittest -v test_textmachine_negative_gap_guards.py
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_textmachine_hardblock_matrix.py test_repair_owner_routing_contract.py
+      - name: Upload real 102 proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-real-102-repair-${{ github.sha }}
+          path: |
+            /tmp/SYSTEM4_REAL_102_REPAIR_MATRIX_V1.json
+            /tmp/system4-real-102.log
+          if-no-files-found: error
+          retention-days: 3
