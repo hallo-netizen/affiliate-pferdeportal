@@ -18,18 +18,9 @@ MANIFEST_CONTRACT = "PFERDE_ATELIER_ENDSTEMPEL_ARTICLE_MANIFEST_V1"
 PACKAGE_CONTRACT = "PSERC_APPROVED_PRODUCTION_PACKAGE_V1"
 ENDSTAMP_CONTRACT = "PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1"
 SIGN_REQUEST_CONTRACT = "PFERDE_ATELIER_GITHUB_FINAL_SIGN_REQUEST_V1"
-# Legacy filename retained for compatibility with the existing 107008 package route.
-# It is not an article-count contract.
 FINAL_FILENAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
 ARTICLE_RE = re.compile(r"^ARTICLE_[0-9a-f]{64}\.md$")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
-IMPORT_ENVELOPE_NAME = "PSERC_IMPORT_ENVELOPE.json"
-IMPORT_ENVELOPE_KEYS = {
-    "contract", "package_id", "package_payload_sha256", "source",
-    "fact_pack_bundle", "fact_pack_bundle_sha256",
-    "production_plan", "production_plan_sha256",
-    "workflow_release", "workflow_release_sha256",
-}
 
 class Blocked(RuntimeError):
     pass
@@ -65,12 +56,6 @@ def safe(ref: str) -> Path:
         raise Blocked("REF_ESCAPE")
     return out
 
-def source_item_count(src: dict[str, Any]) -> int:
-    count = src.get("item_count")
-    if isinstance(count, bool) or not isinstance(count, int) or count < 1:
-        raise Blocked("SOURCE_ITEM_COUNT_INVALID")
-    return count
-
 def load_source(ref: str) -> tuple[dict[str, Any], Path, str]:
     path = safe(ref)
     if not path.is_file():
@@ -84,8 +69,7 @@ def load_source(ref: str) -> tuple[dict[str, Any], Path, str]:
     expected = (REPO / "control/startmaster0107/recovery_sources" / batch / "MANIFEST.json").resolve()
     if path.resolve() != expected:
         raise Blocked("SOURCE_LOCATION_INVALID")
-    source_item_count(src)
-    if src.get("publish_allowed") is not False or src.get("content_mutation_performed") is not False:
+    if src.get("item_count") != 7 or src.get("publish_allowed") is not False or src.get("content_mutation_performed") is not False:
         raise Blocked("SOURCE_BINDING_INVALID")
     return src, path, batch
 
@@ -154,8 +138,7 @@ def validate_import_envelope_articles(envelope: dict[str, Any], articles: list[d
 
 def snapshot(src: dict[str, Any], source_path: Path, batch: str) -> list[dict[str, Any]]:
     rows = src.get("items")
-    count = source_item_count(src)
-    if not isinstance(rows, list) or len(rows) != count:
+    if not isinstance(rows, list) or len(rows) != 7:
         raise Blocked("SOURCE_ITEMS_INVALID")
     parent = source_path.parent.resolve()
     expected_names: set[str] = set()
@@ -230,13 +213,12 @@ def verify_sig(mhash: str, sig_b64: str, pub_b64: str) -> None:
 def finalize(source_ref: str) -> dict[str, Any]:
     src, source_path, batch = load_source(source_ref)
     before = snapshot(src, source_path, batch)
-    count = len(before)
     import_envelope, import_envelope_sha256 = load_import_envelope(src, source_path, batch)
     validate_import_envelope_articles(import_envelope, before)
-    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": count, "articles": before, "import_envelope_sha256": import_envelope_sha256, "publish_allowed": False, "content_mutation_performed": False}
+    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": 7, "articles": before, "import_envelope_sha256": import_envelope_sha256, "publish_allowed": False, "content_mutation_performed": False}
     mhash = stable_hash(manifest)
     trust = trusted_identity()
-    signed = call_signer(mhash, batch, manifest["source_manifest_sha256"], count)
+    signed = call_signer(mhash, batch, manifest["source_manifest_sha256"], 7)
     for field in ("signing_key_id", "signing_public_key_sha256", "public_key_b64"):
         if signed[field] != trust[field]:
             raise Blocked("SIGNER_IDENTITY_MISMATCH:" + field)
@@ -260,7 +242,7 @@ def finalize(source_ref: str) -> dict[str, Any]:
         tmp.unlink(missing_ok=True)
         out.unlink(missing_ok=True)
         raise
-    return {"ok": True, "status": "GITHUB_FINAL_RELEASE_PASS", "final_ref": str(out.relative_to(REPO)), "final_sha256": file_sha256(out), "batch_sha256": batch, "article_count": count, "publish_allowed": False, "content_mutation_performed": False}
+    return {"ok": True, "status": "GITHUB_FINAL_RELEASE_PASS", "final_ref": str(out.relative_to(REPO)), "final_sha256": file_sha256(out), "batch_sha256": batch, "article_count": 7, "publish_allowed": False, "content_mutation_performed": False}
 
 def main() -> int:
     try:

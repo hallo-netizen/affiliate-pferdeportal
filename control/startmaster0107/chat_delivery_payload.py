@@ -6,8 +6,6 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 ARTICLE_RE = re.compile(r"^ARTICLE_[0-9a-f]{64}\.md$")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
-# Legacy filename retained for compatibility with the existing 107008 package producer.
-# It is not an article-count contract.
 FINAL_NAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
 IMPORT_NAME = "PSERC_IMPORT_ENVELOPE.json"
 PACKAGE_KEYS = {
@@ -146,9 +144,8 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
                 "byte_length": len(raw),
                 "content_utf8": raw.decode("utf-8"),
             })
-    count = len(articles)
-    if count < 1 or len({a["name"] for a in articles}) != count:
-        raise Blocked("ARTICLE_SET_INVALID")
+    if len(articles) != 7 or len({a["name"] for a in articles}) != 7:
+        raise Blocked("EXACTLY_SEVEN_ARTICLES_REQUIRED")
     articles.sort(key=lambda x: x["name"])
 
     package = load_json(package_path)
@@ -160,7 +157,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
     source_manifest = {
         "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1",
         "batch_sha256": batch,
-        "item_count": count,
+        "item_count": 7,
         "import_envelope_ref": import_ref,
         "import_envelope_sha256": import_sha,
         "publish_allowed": False,
@@ -201,7 +198,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "gzip_sha256": sha256_bytes(packed),
         "encoding": "gzip+base64",
         "payload_b64": base64.b64encode(packed).decode("ascii"),
-        "article_count": count,
+        "article_count": 7,
         "import_envelope_sha256": import_sha,
         "publish_allowed": False,
         "content_mutation_performed": False,
