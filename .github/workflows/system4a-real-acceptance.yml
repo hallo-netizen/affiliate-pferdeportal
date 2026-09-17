@@ -1,0 +1,262 @@
+name: System 4A Real LT68 PPM679 Acceptance
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+      - 'hobbyroom/system4a-textmachine-final-pass-20260916'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SYSTEM4_FRESH_RUN_TOKEN: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact head
+        run: git rev-parse HEAD
+      - name: Download hash-bound LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Prove machine route lock before acceptance
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_machine_route_lock_contract.py
+      - name: Assert no Codex action exists in acceptance
+        run: |
+          set -euo pipefail
+          if grep -En '^[[:space:]]*-[[:space:]]*uses:[[:space:]]*openai/codex-action@' .github/workflows/system4a-real-acceptance.yml; then
+            echo 'SYSTEM4_MACHINE_ROUTE_BLOCK:CODEX_FORBIDDEN_IN_TEST'
+            exit 2
+          fi
+          echo 'SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_IN_TEST'
+      - name: Inspect real WordPress importer contract
+        run: python3 isolated_system4/wordpress_import_contract_probe.py | tee /tmp/system4-wordpress-import-contract.txt
+      - name: Prove production output quarantine positive and negative boundaries
+        run: python3 control/output-quarantine/test_output_quarantine.py
+      - name: Assert canonical downstream closeout contract
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          target = Path('isolated_system4/ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md').read_text(encoding='utf-8')
+          protocol = Path('isolated_system4/PROTOKOLL_TESTSTRECKE_V2_20260914.md').read_text(encoding='utf-8')
+          release = Path('control/output-quarantine/output_release_gate.py').read_text(encoding='utf-8')
+          finalizer = Path('control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py').read_text(encoding='utf-8')
+          wp_lock = Path('protocol/WORDPRESS_SIGNATURE_ENTRY_LOCK_V1.json').read_text(encoding='utf-8')
+          required = (
+              '107008 Final Review/Output Release',
+              'PSERC',
+              'ENDSTEMPEL',
+              'WordPress-Importformat-Prüfung',
+              'Parent-Chat',
+          )
+          for token in required:
+              assert token in target, ('TARGET_CLOSEOUT_TOKEN_MISSING', token)
+              assert token in protocol, ('PROTOCOL_CLOSEOUT_TOKEN_MISSING', token)
+          assert 'def require_current_main()' in release
+          assert 'CURRENT_BATCH_BINDING_MISMATCH' in release
+          assert 'TEST_SIGNER_FORBIDDEN_IN_PRODUCTION' in finalizer
+          assert 'PSERC_SIGNER_CMD' in finalizer
+          assert '"private_key_location": "GITHUB_ONLY"' in wp_lock
+          assert 'BRANCH_PREQUALIFICATION_PASS_PENDING_CANONICAL_107008_ENDSTEMPEL_CHAT' in protocol
+          print('SYSTEM4_CANONICAL_DOWNSTREAM_CLOSEOUT_CONTRACT_PASS')
+          PY
+      - name: Inspect exact PPM 6.7.9 table authority
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          package=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
+          marker='BLOCKED_WAVE2_TABLE_VALUE'
+          found=0
+          with zipfile.ZipFile(package) as z:
+              for name in z.namelist():
+                  if not name.endswith('.php'):
+                      continue
+                  text=z.read(name).decode('utf-8','replace')
+                  lines=text.splitlines()
+                  for i,line in enumerate(lines):
+                      if marker in line:
+                          found+=1
+                          print('PPM679_TABLE_AUTHORITY_FILE='+name)
+                          lo=max(0,i-90); hi=min(len(lines),i+50)
+                          for n in range(lo,hi):
+                              print(f'{n+1}: {lines[n]}')
+          if found<1:
+              raise SystemExit('PPM679_TABLE_AUTHORITY_NOT_FOUND')
+          PY
+      - name: Inspect exact PPM 6.7.9 prewrite authorities
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/ppm_prewrite_contract_probe.py | tee /tmp/system4-ppm-prewrite-authorities.txt
+      - name: Preserve PPM prewrite authority evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-prewrite-authorities-${{ github.sha }}
+          path: /tmp/system4-ppm-prewrite-authorities.txt
+          if-no-files-found: error
+          retention-days: 1
+      - name: Run immutable Textmaschine and historical negative matrix — history hardlock
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_acceptance_history_hardlock.py
+      - name: Textmaschine matrix — machine route lock
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_machine_route_lock_contract.py
+      - name: Point0 — source acquisition 200 401 403
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_point0_v2.Point0V2Tests.test_source_acquisition_200_401_403
+      - name: Point0 — chat start tamper and DataForSEO block
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_point0_v2.Point0V2Tests.test_chat_start_required_tamper_and_dataforseo_blocked
+      - name: Point0 — snapshot and prewrite tamper fail closed
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_point0_v2.Point0V2Tests.test_point0_and_prewrite_tamper_fail_closed
+      - name: Textmaschine matrix — Root entry
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_root_entry.py
+      - name: Textmaschine matrix — source acquisition owner
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_source_acquisition_owner_contract.py
+      - name: Textmaschine matrix — indexed ingress
+        working-directory: isolated_system4
+        run: python3 -m unittest -v test_indexed_ingress.py
+      - name: Textmaschine matrix — content guard
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_content_guard.py
+      - name: Textmaschine matrix — context required regressions
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_context_required_regression.py
+      - name: Textmaschine matrix — design guard
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_design_guard.py
+      - name: Textmaschine matrix — draft and LanguageTool rebind
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_draft_bound_rebind.py
+      - name: Repair — same article continuity
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_repair_continuity.py
+      - name: Repair — semantic owner routing
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_repair_owner_routing_contract.py
+      - name: Repair — fail closed and multi owner return
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_repair_owner_failclosed_contract.py
+      - name: Repair — stage owner return
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_stage_owner_return_contract.py
+      - name: Repair — parent title return
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_parent_title_repair_contract.py
+      - name: Repair — parent metadata owner authority
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 -m unittest -v test_parent_metadata_owner_authority_contract.py
+      - name: Textmaschine matrix — batch handoff one-to-N
+        working-directory: isolated_system4
+        run: >-
+          python3 -m unittest -v
+          test_batch_gate.py
+          test_universal_batch_gate.py
+          test_handoff_transport.py
+      - name: Build fresh machine inputs for one article
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-1 1
+      - name: Run complete one article route
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-1
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_1_PROOF.json
+        run: |
+          set -euo pipefail
+          python3 isolated_system4/live_parity_v2.py all
+          cp /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2_1_ARTICLE.json
+      - name: Build fresh machine inputs for three articles
+        env:
+          PYTHONPATH: isolated_system4
+        run: python3 isolated_system4/test_route_input_factory.py /tmp/system4-fixture-3 3
+      - name: Run complete three article route with repair isolation
+        env:
+          PYTHONPATH: isolated_system4
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          SYSTEM4_LIVE_PARITY_FIXTURE: /tmp/system4-fixture-3
+          SYSTEM4_LIVE_PARITY_OUTPUT_DIR: /tmp/system4-acceptance-output
+          SYSTEM4_LIVE_PARITY_PROOF: /tmp/system4-acceptance-output/LIVE_PARITY_V2_3_PROOF.json
+        run: |
+          set -euo pipefail
+          python3 isolated_system4/live_parity_v2.py all | tee /tmp/system4-three-route.log
+          test "$(grep -c '^SYSTEM4_TESTWORKER_REPAIR_REQUEST:' /tmp/system4-three-route.log)" -eq 1
+          grep -F '"article_index": 1' /tmp/system4-three-route.log
+          grep -F 'BLOCKED_KNOWN_REGRESSION_PATTERN' /tmp/system4-three-route.log
+          echo 'SYSTEM4_THREE_ARTICLE_EXACT_REPAIR_EVENT_PASS'
+      - name: Verify fresh-route evidence
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/system4-acceptance-output')
+          one=json.loads((root/'LIVE_PARITY_V2_1_PROOF.json').read_text())
+          three=json.loads((root/'LIVE_PARITY_V2_3_PROOF.json').read_text())
+          assert one['article_count']==1 and three['article_count']==3
+          assert one['pre_point0_article_body_count']==0 and three['pre_point0_article_body_count']==0
+          assert one['inline_byte_equal'] is True and three['inline_byte_equal'] is True
+          assert one['lt']==['PASS'] and one['ppm']==['PASS']
+          assert three['lt']==['PASS','PASS','PASS'] and three['ppm']==['PASS','PASS','PASS']
+          assert one['revisions']==[1], one['revisions']
+          assert three['revisions']==[1,2,1], three['revisions']
+          for proof in (one,three):
+              assert proof['freshness_status']=='PASS'
+              assert proof['historical_exact_body_reuse_blocked'] is True
+              assert proof['historical_visible_body_reuse_blocked'] is True
+              assert proof['current_source_trace_bound'] is True
+              assert proof['unique_draft_hashes'] is True
+              assert proof['unique_visible_articles'] is True
+              assert proof['fresh_run_token_sha256']
+          print('SYSTEM4_BRANCH_PREQUALIFICATION_PASS_PENDING_CANONICAL_107008_ENDSTEMPEL_CHAT')
+          PY
+      - name: Upload current test route candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4a-real-acceptance-${{ github.sha }}
+          path: |
+            /tmp/system4-acceptance-output/
+            /tmp/system4-wordpress-import-contract.txt
+            /tmp/system4-ppm-prewrite-authorities.txt
+            /tmp/system4-three-route.log
+          if-no-files-found: error
+          retention-days: 1
