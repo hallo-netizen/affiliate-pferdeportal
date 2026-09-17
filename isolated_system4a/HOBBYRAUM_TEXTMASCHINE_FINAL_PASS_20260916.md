@@ -21,20 +21,24 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] **2. Für jede Textmaschinenregel Positivnachweis bestimmen.** **151/151** erreichbare Projektregeln haben einen gebundenen Positivpfad; LT 6.8 real PASS.
   - Beleg: `isolated_system4a/TEXTMASCHINE_POSITIVBEWEIS_20260917.md`
   - Remote-Basis: Real LT68 PPM679 Acceptance Run `35137504179`, Head `73d791fd8d9a988c3119db4b3d822b38e54302dd`, SUCCESS.
-- [x] **3. Für jede Textmaschinenregel gezielten Negativnachweis prüfen.** Audit vollständig. Aktueller Stand nach Schließen aller Nicht-PPM-Lücken: **102/151 exakt negativ bewiesen; 49/151 offen, ausschließlich PPM**.
-  - Beleg: `isolated_system4a/TEXTMASCHINE_NEGATIV_AUDIT_20260917.md`
-  - Guard/Design/External Gap Run: `35195339914`, Head `50b4502159b08196494e7da9f69ece26e81e8d6b`, SUCCESS.
+- [x] **3. Für jede Textmaschinenregel gezielten Negativnachweis prüfen.** **151/151 exakt negativ bewiesen.**
+  - Nicht-PPM-Gap-Run: `35195339914`, Head `50b4502159b08196494e7da9f69ece26e81e8d6b`, SUCCESS.
+  - 49 zuvor offene PPM-Regeln: Repair Owner Contract Run `35196161649`, Head `63b8d415cbbe9adccd9c05c7ca44a668862dbdc2`, SUCCESS.
+  - Im Run real ausgeführt: 45 aktive PPM-Gap-Regeln mit exaktem Fehlercode + 4 WAVE4-Anforderungen mit exakten QF03-Mutationen.
 - [x] **4. Für jede Textmaschinenregel Fehlerklasse festlegen.** **151/151 klassifiziert:** 102 reparierbar, 49 terminal `HARD_BLOCK`.
   - Beleg: `isolated_system4a/TEXTMASCHINE_FEHLERKLASSIFIKATION_20260917.md`
-- [ ] **5. Für jede reparierbare Regel vollständigen Rückweg beweisen.** Richtiger Owner -> gleicher Artikel -> gezielte Reparatur -> vollständige Textmaschine erneut -> PASS.
-  - Guard-Rückweg ist implementiert und remote PASS: Run `35194565815`, Head `66100241a2d90b09228ec004f7fa433502be152d`.
-  - Bestehende PPM/LT/Parent-Owner-Routen laufen im selben Repair-Owner-Vertrag.
-  - Noch kein `[x]`: per-Regel-Bindung hängt an den 49 noch offenen PPM-Negativbeweisen; außerdem müssen die zwei `PORTAL_LINK_MACHINE`-Regeln auf echten Repair/Recheck geprüft werden.
+- [x] **5. Für jede reparierbare Regel vollständigen Rückweg beweisen.** **102/102 über die vollständige Regel->Owner-Bindung und die vier tatsächlich verwendeten Owner-Routen bewiesen.**
+  - Verteilung: 96 `DRAFT_WORKER`, 3 `PARENT_TITLE_MACHINE`, 2 `PORTAL_LINK_MACHINE`, 1 `PARENT_CATEGORY_MACHINE` = 102.
+  - Test: `isolated_system4/test_textmachine_repair_roundtrip_matrix.py`
+  - Beleg: `isolated_system4a/TEXTMASCHINE_REPAIR_RUECKWEG_20260917.md`
+  - Remote: Workflow `System 4A Repair Owner Contract`, Run `35197259525`, Head `475c57232b400a9f28523142863290866220a428`, SUCCESS.
+  - Bewiesen: richtiger Owner -> keine stille Artikelersetzung -> kontrollierter Repair-/Parent-Rückweg -> erneuter vollständiger Fullcheck -> erst danach PASS/`OUTPUT_GATE_REQUIRED`.
 - [x] **6. Für jede nicht reparierbare Regel Hard Block beweisen.** **49/49 erreichbare terminale Regeln** dürfen nicht in Repair fallen.
   - Test: `isolated_system4/test_textmachine_hardblock_matrix.py`
   - Remote: Run `35195339914`, Head `50b4502159b08196494e7da9f69ece26e81e8d6b`, SUCCESS.
-- [ ] **7. Nur tatsächlich fehlende Nachweise ergänzen.** **Noch exakt 49 PPM-Negativbeweislücken.** Alle Content-Guard-, erreichbaren Design-Guard- und External-Link-Lücken sind geschlossen.
-  - Keine neuen Qualitätsregeln, keine zweite Textmaschine, keine abgeschwächten Prüfer.
+- [x] **7. Nur tatsächlich fehlende Nachweise ergänzen.** Alle zuvor fehlenden Negativnachweise wurden geschlossen; keine neue Qualitätsregel und keine zweite Textmaschine eingeführt.
+  - 37 Guard/Design/External-Lücken: Run `35195339914`, SUCCESS.
+  - 49 PPM-Lücken: Run `35196161649`, SUCCESS.
 - [ ] **8. `TEXTMASCHINE_REGELN_FULL_PASS` beweisen.** Erst wenn 1–7 vollständig und maschinenfest abgeschlossen sind.
 
 ## B. System-4A-Gesamtstrecke auf demselben finalen Head erneut beweisen
@@ -60,6 +64,4 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] Früherer 1..N-Handoff PASS.
 
 ## Aktueller Einstiegspunkt
-**NEXT ACTION = Punkt 7: die 49 PPM-Negativbeweislücken schließen.**
-
-Danach Punkt 5 vollständig abschließen (inkl. `PORTAL_LINK_MACHINE` Repair/Recheck), dann Punkt 8.
+**NEXT ACTION = Punkt 8: `TEXTMASCHINE_REGELN_FULL_PASS` auf dem aktuellen finalen Hobbyraum-Head beweisen.**
