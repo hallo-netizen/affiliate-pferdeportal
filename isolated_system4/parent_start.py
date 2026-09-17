@@ -6,6 +6,7 @@ import re
 import sys
 from pathlib import Path
 
+import global_workshop
 import point0_snapshot
 import root_entry
 
@@ -110,6 +111,16 @@ def main(argv):
         for index,workspace in enumerate(workspaces): print('SYSTEM4_PARENT_WORKSPACE:'+str(index)+':'+str(workspace))
         return 0
     except Exception as exc:
-        print('SYSTEM4_PARENT_START_FAIL:'+str(exc)); return 2
+        request=global_workshop.build_request(
+            'PARENT_START',
+            exc,
+            context={
+                'bound_capsule_path':argv[2] if len(argv)>2 else None,
+                'runtime_root':argv[4] if len(argv)>4 else None,
+            },
+        )
+        status='SYSTEM4_WORKSHOP_REQUIRED' if request.get('repairable') else 'SYSTEM4_WORKSHOP_BLOCKED'
+        print(status+':'+json.dumps(request,ensure_ascii=False,sort_keys=True,separators=(',',':')))
+        return 3 if request.get('repairable') else 2
 
 if __name__=='__main__': raise SystemExit(main(sys.argv))
