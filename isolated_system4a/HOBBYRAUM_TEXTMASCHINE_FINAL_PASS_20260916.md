@@ -46,7 +46,11 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
   - Marker: `TEXTMASCHINE_REGELN_FULL_PASS:151/151:102_REPAIR:49_HARD_BLOCK`.
 
 ## B. System-4A-Gesamtstrecke auf demselben finalen Head erneut beweisen
-- [ ] **9. 1 Artikel komplett.** Chat -> Point 0 -> Root/Supervisor -> Worker -> Research -> Facts -> Draft -> Textmaschine -> ggf. Repair -> PASS -> Batch -> Handoff.
+- [x] **9. 1 Artikel komplett.** Point 0 -> Root/Supervisor -> Worker -> Research -> Facts -> Draft -> Textmaschine -> PASS -> Batch -> Handoff auf dem aktuellen Final-Pass-Hobbyraum erneut real ausgeführt.
+  - Workflow: `System 4A Real LT68 PPM679 Acceptance`
+  - Run `35197908873`, Head `6532feaf11de03b6cd09134e62281555bdc56de3`, SUCCESS.
+  - Reale Schritte `Build fresh machine inputs for one article` und `Run complete one article route` beide SUCCESS; `Verify fresh-route evidence` und Artifact-Upload ebenfalls SUCCESS.
+  - Der gebundene Verifikationsschritt verlangt für den 1-Artikel-Beweis: `article_count=1`, `pre_point0_article_body_count=0`, `inline_byte_equal=true`, LT=`PASS`, PPM=`PASS`, `revisions=[1]`, `freshness_status=PASS`, historische Exact-/Visible-Body-Wiederverwendung blockiert, aktuelle Source-Trace gebunden und eindeutiger Draft/Artikel.
 - [ ] **10. 3 Artikel mit absichtlich reparierbarem Fehler.** Genau ein Artikel zurück, gleiche Identität, Repair, vollständige Nachprüfung, PASS; andere unverändert.
 - [ ] **11. Technischer/Integritäts-/Manipulationsfehler.** Terminal BLOCK.
 - [ ] **12. 1..N / Batch / Identität / Reihenfolge / Hash-/Byte-Bindung.** PASS.
@@ -68,4 +72,4 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] Früherer 1..N-Handoff PASS.
 
 ## Aktueller Einstiegspunkt
-**NEXT ACTION = Punkt 9: 1 Artikel komplett auf dem finalen Hobbyraum-Head erneut beweisen.**
+**NEXT ACTION = Punkt 10: 3 Artikel mit absichtlich reparierbarem Fehler auf dem finalen Hobbyraum-Stand hart beweisen.**
