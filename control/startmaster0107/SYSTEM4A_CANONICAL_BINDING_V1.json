@@ -1,0 +1,32 @@
+{
+  "contract": "SYSTEM4A_CANONICAL_BINDING_V1",
+  "status": "BOUND_TESTED_SYSTEM4A_CANDIDATE_FOR_NEXT_CANONICAL_STEP",
+  "source_hobbyroom_branch": "hobbyroom/system4a-textmachine-final-pass-20260916",
+  "source_tested_head_sha": "2e62f0c81abe16ed47c12ecc9df89a95942ad97d",
+  "canonical_main_base_sha": "9cdb171343794f609b6cca36329774c2289b5cd6",
+  "evidence": {
+    "real_lt68_ppm679_acceptance_run": 35199941338,
+    "real_lt68_ppm679_acceptance_status": "SUCCESS",
+    "exact_head_bundle_run": 35199941460,
+    "exact_head_bundle_status": "SUCCESS",
+    "textmachine_rules": "151/151",
+    "repairable_rules": 102,
+    "hard_block_rules": 49,
+    "one_article_route": "PASS",
+    "three_article_exact_one_repair_route": "PASS",
+    "batch_handoff_1_to_n": "PASS",
+    "parent_chat_byte_sha_binding": "PASS"
+  },
+  "excluded_from_this_binding": [
+    ".github/workflows/**",
+    "control/startmaster0107/ENDSTEMPEL_*",
+    "control/startmaster0107/GITHUB_FINAL_RELEASE.py",
+    "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
+    "control/startmaster0107/chat_delivery_payload.py"
+  ],
+  "excluded_reason": "PROTECTED_OR_DOWNSTREAM_POINT_15_16_SCOPE_REMAINS_ON_SEPARATE_AUTHORIZED_PATH",
+  "current_state_write_performed": false,
+  "state_write_authority": "ENTRANCE_GATE_ONLY",
+  "next_canonical_scope": "107008_FINAL_REVIEW_OUTPUT_RELEASE",
+  "publish_allowed": false
+}
