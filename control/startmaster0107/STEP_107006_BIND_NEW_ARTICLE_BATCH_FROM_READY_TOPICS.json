@@ -14,6 +14,6 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "0382982104cd4114416cff40a933c84d58f56a2cc79c6077fc2cf4bbd3b069db"
+    "bundle_sha256": "06a7ae2131db24cf9c3a1fed56b4d9618a6d4e9d3368a317b3b5f095aea79cd0"
   }
 }
