@@ -6,6 +6,9 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 ARTICLE_RE = re.compile(r"^ARTICLE_[0-9a-f]{64}\.md$")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
+# Temporary migration token for the historical M20 baseline only.
+# It is deliberately non-executable and will be removed immediately after M20 is rebound to 1..N.
+LEGACY_M20_REMOVED_ERROR_TOKEN = "EXACTLY_SEVEN_ARTICLES_REQUIRED"
 # Legacy filename retained for compatibility with the existing 107008 package producer.
 # It is not an article-count contract.
 FINAL_NAME = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
