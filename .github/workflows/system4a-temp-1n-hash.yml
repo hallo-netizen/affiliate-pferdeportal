@@ -1,0 +1,14 @@
+name: System4A temp 1N hash
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-production-1n-20260917'
+permissions:
+  contents: read
+jobs:
+  hash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sha256sum control/startmaster0107/system4_107007_batch.py
