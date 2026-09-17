@@ -1,6 +1,7 @@
 from __future__ import annotations
 import json,subprocess,sys,tempfile,unittest
 from pathlib import Path
+from unittest import mock
 
 import full_route_start
 from full_route_test_fixture import SINGLE_ITEMS,write_start_fixture
@@ -48,5 +49,37 @@ class FullRouteStartBoundaryTests(unittest.TestCase):
             with self.assertRaises((FileNotFoundError,full_route_start.FullRouteError)):
                 full_route_start.run(snap,sources,['/definitely/not/a/worker'],out)
             self.assertTrue((out/'item-0/worker_dispatch.json').is_file())
+
+    def test_repairable_batch_workshop_repairs_rechecks_and_recollects(self):
+        with tempfile.TemporaryDirectory(prefix='s4-full-batch-workshop-') as td:
+            root=Path(td); workspace=root/'item-0'; workspace.mkdir(); state_path=workspace/'state.json'; state_path.write_text('{}',encoding='utf-8')
+            states=[{'old':True}]
+            request={'repairable':True,'request_sha256':'a'*64,'error_code':'BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED:7>6'}
+            workshop=full_route_start.batch_gate.BatchGateWorkshop(RuntimeError(request['error_code']),request,root/'batch/GLOBAL_WORKSHOP_REQUEST.json',[0])
+            route={'status':'SAME_ARTICLE_BODY_REPAIR','owner':'DRAFT_BODY','target':'SAME_ARTICLE_BODY'}
+            repaired={'phase':'OUTPUT_GATE_REQUIRED','checks':{'status':'PASS'}}
+            with mock.patch.object(full_route_start.batch_gate,'collect_batch',side_effect=[workshop,{'status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED'}]) as collect, \
+                 mock.patch.object(full_route_start.repair_router,'route',return_value=route) as routed, \
+                 mock.patch.object(full_route_start.repair_router,'verify_continuation_result'), \
+                 mock.patch.object(full_route_start,'_run_worker') as worker, \
+                 mock.patch.object(full_route_start.controller,'main',return_value=0) as controller_main, \
+                 mock.patch.object(full_route_start,'_fullcheck_with_existing_repair_loop',return_value=repaired) as fullcheck:
+                result=full_route_start._batch_collect_with_workshop(WORKER,root/'snapshot.json',[state_path],states,root)
+            self.assertEqual(result['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED')
+            self.assertEqual(states[0],repaired)
+            self.assertEqual(collect.call_count,2)
+            routed.assert_called_once_with(workspace)
+            worker.assert_called_once()
+            controller_main.assert_called_once()
+            fullcheck.assert_called_once()
+
+    def test_repairable_batch_workshop_without_article_target_is_continuation(self):
+        with tempfile.TemporaryDirectory(prefix='s4-full-batch-workshop-no-target-') as td:
+            root=Path(td)
+            request={'repairable':True,'request_sha256':'b'*64,'error_code':'REPAIR_REQUIRED'}
+            workshop=full_route_start.batch_gate.BatchGateWorkshop(RuntimeError('REPAIR_REQUIRED'),request,None,[])
+            with mock.patch.object(full_route_start.batch_gate,'collect_batch',side_effect=workshop):
+                with self.assertRaisesRegex(full_route_start.FullRouteContinuation,'START_BATCH_WORKSHOP_CONTINUATION_REQUIRED'):
+                    full_route_start._batch_collect_with_workshop(WORKER,root/'snapshot.json',[],[],root)
 
 if __name__=='__main__':unittest.main(verbosity=2)
