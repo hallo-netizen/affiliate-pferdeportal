@@ -8,7 +8,18 @@ from real_route_test_support import valid_real_article
 
 RUN_NONCE_ENV='SYSTEM4_TEST_RUN_NONCE'
 FORCE_REPAIR_INDEX_ENV='SYSTEM4_TEST_FORCE_REPAIR_INDEX'
+FORCE_BATCH_REPETITION_COUNT_ENV='SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT'
 REPO=Path(__file__).resolve().parent.parent
+BATCH_REPEAT_SENTENCES=(
+    'Für diese Prüfung bleibt ausschließlich der gebundene Quellenstand maßgeblich und zusätzliche Tatsachen werden nicht ergänzt.',
+    'Die folgende Einordnung verwendet nur bereits gebundene Belege und führt keine neue Sachbehauptung ein.',
+    'Jeder Entscheidungspunkt wird an den dokumentierten Quellen geprüft und nicht durch ungebundene Angaben erweitert.',
+    'Die Darstellung beschränkt sich dabei auf nachgewiesene Inhalte und vermeidet zusätzliche Annahmen außerhalb des Vertrags.',
+    'Für die sachliche Bewertung gelten ausschließlich die vorhandenen Belege als Grundlage der weiteren Einordnung.',
+    'Die Auswahl wird deshalb nur anhand der gebundenen Kriterien beschrieben und nicht um neue Informationen ergänzt.',
+    'Alle weiteren Hinweise bleiben innerhalb des bestätigten Quellenrahmens und verändern keine gebundene Tatsachengrundlage.',
+)
+BATCH_REPEAT_TEXT=' '.join(BATCH_REPEAT_SENTENCES)
 
 
 def write_json(path:Path,value):
@@ -43,6 +54,36 @@ def _force_one_repairable_typo(body:str,index:int)->str:
         if count==1: return changed
     raise RuntimeError('FORCED_REPAIR_TOKEN_MISSING')
 
+def _force_batch_repetition(body:str,state:dict,index:int)->str:
+    raw=os.environ.get(FORCE_BATCH_REPETITION_COUNT_ENV,'').strip()
+    if not raw: return body
+    try: count=int(raw)
+    except ValueError as exc: raise RuntimeError('FORCED_BATCH_REPETITION_COUNT_INVALID') from exc
+    if count<4: raise RuntimeError('FORCED_BATCH_REPETITION_COUNT_TOO_SMALL')
+    if index>=count: return body
+    intro_end=body.find('</section>')
+    if intro_end<0: raise RuntimeError('FORCED_BATCH_REPETITION_INTRO_END_MISSING')
+    paragraph_end=body.find('</p>',intro_end+10)
+    if paragraph_end<0: raise RuntimeError('FORCED_BATCH_REPETITION_CONTENT_PARAGRAPH_MISSING')
+    changed=body[:paragraph_end]+' '+BATCH_REPEAT_TEXT+body[paragraph_end:]
+    authoring_contract.validate_candidate(changed,state['authoring_contract'])
+    return changed
+
+def _repair_forced_batch_repetition(state:dict)->str|None:
+    raw=os.environ.get(FORCE_BATCH_REPETITION_COUNT_ENV,'').strip()
+    if not raw: return None
+    checks=state.get('checks') if isinstance(state.get('checks'),dict) else {}
+    findings=checks.get('findings') if isinstance(checks.get('findings'),list) else []
+    relevant=[row for row in findings if isinstance(row,dict) and row.get('error_code')=='BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED']
+    if checks.get('mode')!='GLOBAL_WORKSHOP' or checks.get('checker')!='BATCH' or len(relevant)<7:
+        return None
+    body=str(state.get('draft_markdown') or '')
+    if BATCH_REPEAT_TEXT not in body:
+        raise RuntimeError('FORCED_BATCH_REPETITION_TEXT_MISSING')
+    repaired=body.replace(' '+BATCH_REPEAT_TEXT,'',1)
+    authoring_contract.validate_candidate(repaired,state['authoring_contract'])
+    return repaired
+
 def main(argv):
     if len(argv)!=5:
         print('FULL_ROUTE_TEST_WORKER_FAIL:BAD_ARGS'); return 2
@@ -68,7 +109,7 @@ def main(argv):
             print('FULL_ROUTE_TEST_WORKER_FAIL:DRAFT_PHASE_REQUIRED'); return 2
         try:
             variation_index=_fresh_variation_index(index)
-            body=_force_one_repairable_typo(_balance_conclusion(valid_real_article(state,variation_index),state),index)
+            body=_force_batch_repetition(_force_one_repairable_typo(_balance_conclusion(valid_real_article(state,variation_index),state),index),state,index)
         except RuntimeError as exc:
             print('FULL_ROUTE_TEST_WORKER_FAIL:'+str(exc)); return 2
         out.write_text(body,encoding='utf-8'); return 0
@@ -76,7 +117,9 @@ def main(argv):
         if state.get('phase')!='REPAIR_REQUIRED':
             print('FULL_ROUTE_TEST_WORKER_FAIL:REPAIR_PHASE_REQUIRED'); return 2
         try:
-            repaired=no_codex_test_repair.candidate_for_current_failure(REPO,workspace)
+            repaired=_repair_forced_batch_repetition(state)
+            if repaired is None:
+                repaired=no_codex_test_repair.candidate_for_current_failure(REPO,workspace)
         except Exception as exc:
             print('FULL_ROUTE_TEST_WORKER_FAIL:REPAIR_ADAPTER:'+str(exc)); return 2
         out.write_text(repaired,encoding='utf-8'); return 0
