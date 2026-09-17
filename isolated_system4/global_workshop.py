@@ -58,6 +58,26 @@ def _error_code(exc: BaseException) -> str:
     return text or exc.__class__.__name__.upper()
 
 
+def _fallback_finding(exc: BaseException) -> dict[str, Any]:
+    code = _error_code(exc)
+    match = re.fullmatch(r"BATCH_TEMPLATE_REUSE_BLOCKED:(\d+):(\d+):([0-9]+(?:\.[0-9]+)?)", code)
+    if match:
+        left = int(match.group(1))
+        right = int(match.group(2))
+        score = float(match.group(3))
+        return {
+            "error_code": "BATCH_TEMPLATE_REUSE_BLOCKED",
+            "reason": code,
+            "failed_rule": "BATCH_PAIRWISE_SHINGLE_JACCARD",
+            "article_index": right,
+            "conflicting_article_index": left,
+            "pairwise_shingle_jaccard": score,
+            "repair_owner": "DRAFT_BODY",
+            "repair_target": "SAME_ARTICLE_BODY",
+        }
+    return {"error_code": code, "reason": code}
+
+
 def _structured_findings(exc: BaseException, explicit: Sequence[Mapping[str, Any]] | None = None) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     source = explicit
@@ -72,7 +92,7 @@ def _structured_findings(exc: BaseException, explicit: Sequence[Mapping[str, Any
                 row.setdefault("error_code", _error_code(exc))
                 rows.append(row)
     if not rows:
-        rows.append({"error_code": _error_code(exc), "reason": _error_code(exc)})
+        rows.append(_fallback_finding(exc))
     return rows
 
 
