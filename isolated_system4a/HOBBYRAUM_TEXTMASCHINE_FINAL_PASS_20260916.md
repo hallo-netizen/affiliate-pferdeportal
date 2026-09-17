@@ -75,7 +75,15 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
   - Immutable Base Hardlock Run `35201026166`: SUCCESS.
   - PR `#270` gemerged; neuer `main`: `d434625da4817805fa95be0f766aa1b34ca6029a`.
   - Geschützte Workflow-/ENDSTEMPEL-Pfade und die Downstream-Dateien für Punkt 15/16 wurden bewusst nicht vorgezogen. `CURRENT_STATE` wurde nicht manuell überschrieben; `publish_allowed=false`.
-- [ ] **15. 107008 über autorisierten Entrance-/Prebinding-Weg binden.**
+- [x] **15. 107008 über autorisierten Entrance-/Prebinding-Weg binden.**
+  - Bestehende maschinenfeste Vorbindung bleibt unverändert: `STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json` -> `next_binding` -> Sequence `107008` / `FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH` / Bundle-SHA256 `82aca07bc39a3f0fa0e290bfc307b6c6e1c71e022c8aa4c7ea3dd740169beb52`.
+  - Kanonischer System-4A-Bezug: `control/startmaster0107/SYSTEM4A_107008_PREBINDING_V1.json`.
+  - Aktivierungsautorität bleibt ausschließlich `control/cloud-entry-gate/cloud_entry.py complete`; `state_write_authority=ENTRANCE_GATE_ONLY`.
+  - PR `#271`, Head `87be699dce4eba5bf2769ec138a311ecaeb36391`.
+  - Deterministic Entrance Gate / `hardlock`: Run `35202034864`, SUCCESS.
+  - Immutable Base Hardlock / `hardlock-base`: Run `35202034782`, SUCCESS; Schritt `Enforce monotonic prebound workflow transition` SUCCESS.
+  - PR `#271` gemerged; neuer `main`: `2de08d2383267db618b2974a334a596e8f4a06a5`.
+  - `CURRENT_STATE` bewusst nicht vorgezogen; 107008 wird erst in Punkt 16 über den autorisierten Completion-/Entrance-Weg aktiviert und ausgeführt. `publish_allowed=false`.
 - [ ] **16. Reale Abschlussstrecke ausführen.** 107008 -> PSERC -> ENDSTEMPEL -> WordPress-Importformatprüfung.
 - [ ] **17. Finale Importdatei byte-/SHA-identisch in den Parent-Chat zurückgeben.**
 - [ ] **18. CURRENT_STATE / Eine Wahrheit auf real bewiesenen Gesamt-PASS setzen.**
@@ -89,4 +97,4 @@ Status: **EINGESCHLOSSENER ARBEITSAUFTRAG / STÜCK-FÜR-STÜCK / KEIN NEBENPFAD*
 - [x] Früherer 1..N-Handoff PASS.
 
 ## Aktueller Einstiegspunkt
-**NEXT ACTION = Punkt 15: 107008 über den autorisierten Entrance-/Prebinding-Weg an den jetzt kanonisch gebundenen System-4A-Stand binden.**
+**NEXT ACTION = Punkt 16: reale Abschlussstrecke 107008 -> PSERC -> ENDSTEMPEL -> WordPress-Importformatprüfung über die autorisierte Entrance-/Completion-Strecke ausführen.**
