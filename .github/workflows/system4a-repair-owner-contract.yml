@@ -31,3 +31,4 @@ jobs:
           test_fullcheck_guard_repair_contract.py
           test_textmachine_hardblock_matrix.py
           test_textmachine_negative_gap_guards.py
+          test_textmachine_ppm_negative_gaps.py
