@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import hashlib, json, subprocess, sys
+import hashlib, json, re, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -9,8 +9,6 @@ STATE = ROOT / "CURRENT_STATE.json"
 START = ROOT / "PFERDE_ATELIER_START_HERE.json"
 EXPECTED_BRANCH = "hobbyroom/konzept-null-startmaster0102-isolated"
 EXPECTED_HISTORICAL = "be89fa13c170700e9753666d1d52bfbd8b28d810"
-EXPECTED_BATCH = "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a"
-EXPECTED_COUNT = 7
 REQUIRED_FIELDS = ["title", "target_keyword", "category", "article_type", "plan_slot"]
 STAGES = ["METADATA","RESEARCH","FACT_PACK","TEXTMASCHINE","LANGUAGETOOL_6_8","PPM_6_7_9","LOCAL_TEST_PACKAGE"]
 
@@ -48,14 +46,12 @@ def guard():
         die("BAD_TERMINAL_BOUNDARY")
     if state.get("workflow") != STAGES:
         die("WORKFLOW_DRIFT")
-    if state.get("article_count") != EXPECTED_COUNT:
-        die("ARTICLE_COUNT_DRIFT")
-    if state.get("batch_sha256") != EXPECTED_BATCH:
-        die("BATCH_BINDING_DRIFT")
+    if state.get("batch_mode") != "VARIABLE_1_TO_N" or state.get("minimum_article_count") != 1:
+        die("BATCH_MODE_DRIFT")
     if start.get("scope") != "ISOLATED_TEST_ONLY":
         die("SCOPE_DRIFT")
-    if start.get("article_count") != EXPECTED_COUNT or start.get("batch_sha256") != EXPECTED_BATCH:
-        die("ROOT_BATCH_DRIFT")
+    if start.get("batch_mode") != "VARIABLE_1_TO_N":
+        die("ROOT_BATCH_MODE_DRIFT")
     return policy, state, start
 
 def safe_workdir(run_id):
@@ -83,8 +79,8 @@ def cmd_init(src):
     guard()
     obj = json.loads(Path(src).read_text(encoding="utf-8"))
     items = normalize_items(obj)
-    if len(items) != EXPECTED_COUNT:
-        die("EXACTLY_SEVEN_ARTICLES_REQUIRED")
+    if len(items) < 1:
+        die("AT_LEAST_ONE_ARTICLE_REQUIRED")
     seen_slots = set()
     for i, item in enumerate(items, 1):
         for k in REQUIRED_FIELDS:
@@ -93,19 +89,22 @@ def cmd_init(src):
         if item["plan_slot"] in seen_slots:
             die("DUPLICATE_PLAN_SLOT")
         seen_slots.add(item["plan_slot"])
+    calculated_input_sha = hashlib.sha256(canonical(items)).hexdigest()
     supplied_batch = obj.get("batch_sha256") if isinstance(obj, dict) else None
-    if supplied_batch and supplied_batch != EXPECTED_BATCH:
-        die("INPUT_BATCH_SHA_MISMATCH")
-    rid = hashlib.sha256(canonical(items)).hexdigest()[:20]
+    if supplied_batch is not None and (not isinstance(supplied_batch, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", supplied_batch)):
+        die("INVALID_SUPPLIED_BATCH_SHA256")
+    run_binding_sha = supplied_batch.lower() if supplied_batch else calculated_input_sha
+    rid = calculated_input_sha[:20]
     wd = safe_workdir(rid)
-    (wd/"metadata_7.json").write_bytes(canonical(items))
+    (wd/"metadata_batch.json").write_bytes(canonical(items))
     rs = {
-        "contract":"KONZEPT_NULL_BATCH_RUN_STATE_V2",
+        "contract":"KONZEPT_NULL_BATCH_RUN_STATE_V3",
         "run_id":rid,
         "historical_startmaster":"STARTMASTER0102",
         "historical_commit":EXPECTED_HISTORICAL,
-        "batch_sha256":EXPECTED_BATCH,
-        "article_count":EXPECTED_COUNT,
+        "input_binding_sha256":run_binding_sha,
+        "calculated_metadata_sha256":calculated_input_sha,
+        "article_count":len(items),
         "current_stage":"METADATA",
         "completed":["METADATA"],
         "publish_allowed":False,
@@ -122,8 +121,10 @@ def cmd_stage(run_state_path, stage, artifact_path):
     if ROOT.resolve() not in rs_path.parents:
         die("STATE_OUTSIDE_KONZEPT_NULL")
     rs = load(rs_path)
-    if rs.get("article_count") != EXPECTED_COUNT or rs.get("batch_sha256") != EXPECTED_BATCH:
-        die("RUN_BINDING_DRIFT")
+    if not isinstance(rs.get("article_count"), int) or rs["article_count"] < 1:
+        die("RUN_BATCH_INVALID")
+    if len(rs.get("items", [])) != rs["article_count"]:
+        die("RUN_BATCH_COUNT_DRIFT")
     if stage not in STAGES:
         die("UNKNOWN_STAGE")
     expected_index = len(rs.get("completed", []))
@@ -147,16 +148,18 @@ def cmd_finalize(run_state_path):
     rs = load(rs_path)
     if rs.get("completed") != STAGES:
         die("INCOMPLETE_WORKFLOW")
-    if rs.get("article_count") != EXPECTED_COUNT or len(rs.get("items", [])) != EXPECTED_COUNT:
+    count = rs.get("article_count")
+    if not isinstance(count, int) or count < 1 or len(rs.get("items", [])) != count:
         die("INCOMPLETE_BATCH")
     if rs.get("publish_allowed") or rs.get("wordpress_access_allowed") or rs.get("external_write_allowed"):
         die("BOUNDARY_BREACH")
     package = {
-        "contract":"KONZEPT_NULL_7_ARTIKEL_LOCAL_TEST_PACKAGE_V1",
+        "contract":"KONZEPT_NULL_LOCAL_TEST_PACKAGE_V2",
         "historical_startmaster":"STARTMASTER0102",
         "historical_commit":EXPECTED_HISTORICAL,
-        "batch_sha256":EXPECTED_BATCH,
-        "article_count":EXPECTED_COUNT,
+        "input_binding_sha256":rs["input_binding_sha256"],
+        "calculated_metadata_sha256":rs["calculated_metadata_sha256"],
+        "article_count":count,
         "production_authority":False,
         "publish_allowed":False,
         "wordpress_access_allowed":False,
@@ -164,7 +167,7 @@ def cmd_finalize(run_state_path):
         "items":rs["items"],
         "artifact_sha256":rs.get("artifact_sha256",{})
     }
-    out = rs_path.parent/"KONZEPT_NULL_7_ARTIKEL_LOCAL_TEST_PACKAGE.json"
+    out = rs_path.parent/"KONZEPT_NULL_LOCAL_TEST_PACKAGE.json"
     out.write_bytes(canonical(package))
     print(str(out))
 
