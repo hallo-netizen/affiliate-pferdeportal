@@ -18,17 +18,33 @@ def _state(workspace: Path) -> dict:
     return json.loads((Path(workspace) / 'state.json').read_text(encoding='utf-8'))
 
 
-def _replace_last_literal(body: str, target: str, replacement: str) -> str:
-    candidates = [(target, replacement)]
+def _literal_replacement_candidates(body: str, target: str, replacement: str) -> list[str]:
+    pairs = [(target, replacement)]
     escaped_target = html.escape(target, quote=False)
     escaped_replacement = html.escape(replacement, quote=False)
     if escaped_target != target:
-        candidates.append((escaped_target, escaped_replacement))
-    for needle, repl in candidates:
-        pos = body.rfind(needle)
-        if pos >= 0:
-            return body[:pos] + repl + body[pos + len(needle):]
-    raise NoCodexRepairError('LT_MATCH_NOT_FOUND_IN_HTML:' + target[:120])
+        pairs.append((escaped_target, escaped_replacement))
+    candidates: list[str] = []
+    for needle, repl in pairs:
+        positions: list[int] = []
+        start = 0
+        while True:
+            pos = body.find(needle, start)
+            if pos < 0:
+                break
+            positions.append(pos)
+            start = pos + len(needle)
+        for pos in reversed(positions):
+            candidate = body[:pos] + repl + body[pos + len(needle):]
+            if candidate != body and candidate not in candidates:
+                candidates.append(candidate)
+    if not candidates:
+        raise NoCodexRepairError('LT_MATCH_NOT_FOUND_IN_HTML:' + target[:120])
+    return candidates
+
+
+def _replace_last_literal(body: str, target: str, replacement: str) -> str:
+    return _literal_replacement_candidates(body, target, replacement)[0]
 
 
 def _lt_finding_detail(raw: dict, plain: str) -> str:
@@ -58,6 +74,15 @@ def _project_checked_text(body: str, ppm_visible: bool) -> str:
     if ppm_visible:
         return production_checks._ppm_visible_language_text(body)
     return production_checks._plain_text(body)
+
+
+def _lt_matches(repo: Path, body: str, ppm_visible: bool) -> tuple[str, list[dict]]:
+    checked = _project_checked_text(body, ppm_visible)
+    report, _, _ = production_checks._run_languagetool_text(Path(repo), checked)
+    matches = report.get('matches') if isinstance(report, dict) else None
+    if not isinstance(matches, list):
+        raise NoCodexRepairError('LT_MATCHES_INVALID')
+    return checked, matches
 
 
 def _compound_candidates(target: str) -> list[str]:
@@ -99,13 +124,46 @@ def _compound_candidates(target: str) -> list[str]:
     return candidates
 
 
+def _best_monotonic_replacement(
+    repo: Path,
+    state: dict,
+    body: str,
+    target: str,
+    replacements: list,
+    ppm_visible: bool,
+    baseline_count: int,
+) -> str | None:
+    best_body: str | None = None
+    best_count = baseline_count
+    for replacement in replacements:
+        value = replacement.get('value') if isinstance(replacement, dict) else None
+        if not isinstance(value, str) or not value.strip() or value == target:
+            continue
+        try:
+            candidates = _literal_replacement_candidates(body, target, value)
+        except NoCodexRepairError:
+            continue
+        for candidate_body in candidates:
+            _, candidate_matches = _lt_matches(repo, candidate_body, ppm_visible)
+            candidate_count = len(candidate_matches)
+            if candidate_count >= best_count:
+                continue
+            try:
+                authoring_contract.validate_candidate(candidate_body, state['authoring_contract'])
+            except Exception:
+                continue
+            best_body = candidate_body
+            best_count = candidate_count
+            if best_count == 0:
+                return best_body
+    return best_body
+
+
 def _validated_hyphen_replacement(repo: Path, state: dict, body: str, target: str, ppm_visible: bool) -> tuple[str, str]:
     if not re.fullmatch(r'[A-Za-zÄÖÜäöüß]{8,}', target):
         raise NoCodexRepairError('LT_NO_SUGGESTION_NOT_COMPOUND:' + target[:120])
-    baseline_text = _project_checked_text(body, ppm_visible)
-    baseline_report, _, _ = production_checks._run_languagetool_text(Path(repo), baseline_text)
-    baseline_matches = baseline_report.get('matches') if isinstance(baseline_report, dict) else None
-    if not isinstance(baseline_matches, list) or not baseline_matches:
+    _, baseline_matches = _lt_matches(repo, body, ppm_visible)
+    if not baseline_matches:
         raise NoCodexRepairError('LT_NO_SUGGESTION_BASELINE_INVALID')
     baseline_count = len(baseline_matches)
 
@@ -114,90 +172,87 @@ def _validated_hyphen_replacement(repo: Path, state: dict, body: str, target: st
     # strictly fewer LT findings afterwards.
     for candidate in _compound_candidates(target):
         try:
-            candidate_body = _replace_last_literal(body, target, candidate)
+            candidate_bodies = _literal_replacement_candidates(body, target, candidate)
         except NoCodexRepairError:
             continue
-        candidate_text = _project_checked_text(candidate_body, ppm_visible)
-        report, _, _ = production_checks._run_languagetool_text(Path(repo), candidate_text)
-        matches = report.get('matches') if isinstance(report, dict) else None
-        if not isinstance(matches, list):
-            continue
-        if len(matches) >= baseline_count:
-            continue
-        authoring_contract.validate_candidate(candidate_body, state['authoring_contract'])
-        return candidate_body, candidate
+        for candidate_body in candidate_bodies:
+            _, matches = _lt_matches(repo, candidate_body, ppm_visible)
+            if len(matches) >= baseline_count:
+                continue
+            try:
+                authoring_contract.validate_candidate(candidate_body, state['authoring_contract'])
+            except Exception:
+                continue
+            return candidate_body, candidate
     raise NoCodexRepairError('LT_NO_SUGGESTION_NO_LT_VALIDATED_COMPOUND_REPAIR:' + target[:120])
 
 
 def _repair_from_exact_lt_text(repo: Path, state: dict, body: str, checked_text: str, prefix: str, ppm_visible: bool) -> str:
-    report, _, _ = production_checks._run_languagetool_text(Path(repo), checked_text)
-    matches = report.get('matches') if isinstance(report, dict) else None
-    if not isinstance(matches, list) or not matches:
-        raise NoCodexRepairError(prefix + '_MATCHES_MISSING')
+    repaired = body
+    first_checked_text = checked_text
+    first_iteration = True
 
-    normalized = []
-    no_suggestion: list[dict] = []
-    for raw in matches:
-        if not isinstance(raw, dict):
-            raise NoCodexRepairError(prefix + '_MATCH_INVALID')
-        offset = raw.get('offset'); length = raw.get('length')
-        replacements = raw.get('replacements')
-        if not isinstance(offset, int) or not isinstance(length, int) or length <= 0:
-            raise NoCodexRepairError(prefix + '_RANGE_INVALID:' + _lt_finding_detail(raw, checked_text))
-        target = checked_text[offset:offset + length]
-        if not target:
-            raise NoCodexRepairError(prefix + '_TARGET_EMPTY:' + _lt_finding_detail(raw, checked_text))
-        if not isinstance(replacements, list) or not replacements:
+    while True:
+        if first_iteration:
+            current_checked = first_checked_text
+            report, _, _ = production_checks._run_languagetool_text(Path(repo), current_checked)
+            matches = report.get('matches') if isinstance(report, dict) else None
+            if not isinstance(matches, list):
+                raise NoCodexRepairError(prefix + '_MATCHES_INVALID')
+            first_iteration = False
+        else:
+            current_checked, matches = _lt_matches(repo, repaired, ppm_visible)
+
+        if not matches:
+            if repaired == body:
+                raise NoCodexRepairError(prefix + '_MATCHES_MISSING')
+            authoring_contract.validate_candidate(repaired, state['authoring_contract'])
+            return repaired
+
+        baseline_count = len(matches)
+        first_detail = _lt_finding_detail(matches[0], current_checked) if isinstance(matches[0], dict) else '{}'
+        improved = False
+
+        for raw in matches:
+            if not isinstance(raw, dict):
+                raise NoCodexRepairError(prefix + '_MATCH_INVALID')
+            offset = raw.get('offset')
+            length = raw.get('length')
+            replacements = raw.get('replacements')
+            if not isinstance(offset, int) or not isinstance(length, int) or length <= 0:
+                raise NoCodexRepairError(prefix + '_RANGE_INVALID:' + _lt_finding_detail(raw, current_checked))
+            target = current_checked[offset:offset + length]
+            if not target:
+                raise NoCodexRepairError(prefix + '_TARGET_EMPTY:' + _lt_finding_detail(raw, current_checked))
+
+            if isinstance(replacements, list) and replacements:
+                candidate_body = _best_monotonic_replacement(
+                    repo,
+                    state,
+                    repaired,
+                    target,
+                    replacements,
+                    ppm_visible,
+                    baseline_count,
+                )
+                if candidate_body is not None:
+                    repaired = candidate_body
+                    improved = True
+                    break
+                continue
+
             rule = raw.get('rule') if isinstance(raw.get('rule'), dict) else {}
             if str(rule.get('id') or '') != 'GERMAN_SPELLER_RULE':
-                raise NoCodexRepairError(prefix + '_NO_SUGGESTION:' + _lt_finding_detail(raw, checked_text))
-            no_suggestion.append({'raw': raw, 'target': target, 'offset': offset})
-            continue
-        changing_replacements: list[str] = []
-        for candidate in replacements:
-            value = candidate.get('value') if isinstance(candidate, dict) else None
-            if not isinstance(value, str) or not value.strip():
                 continue
             try:
-                candidate_body = _replace_last_literal(body, target, value)
+                repaired, _ = _validated_hyphen_replacement(repo, state, repaired, target, ppm_visible)
             except NoCodexRepairError:
                 continue
-            if candidate_body == body:
-                continue
-            if value not in changing_replacements:
-                changing_replacements.append(value)
-        if not changing_replacements:
-            raise NoCodexRepairError(prefix + '_NO_CHANGING_SUGGESTION:' + _lt_finding_detail(raw, checked_text))
-        normalized.append((offset, target, changing_replacements))
-
-    repaired = body
-    for _, target, replacements in sorted(normalized, key=lambda row: row[0], reverse=True):
-        for replacement in replacements:
-            try:
-                candidate_body = _replace_last_literal(repaired, target, replacement)
-            except NoCodexRepairError:
-                continue
-            if candidate_body == repaired or candidate_body == body:
-                continue
-            repaired = candidate_body
+            improved = True
             break
 
-    chosen_by_target: dict[str, str] = {}
-    for row in sorted(no_suggestion, key=lambda value: int(value['offset']), reverse=True):
-        target = str(row['target'])
-        chosen = chosen_by_target.get(target)
-        if chosen is not None:
-            candidate_body = _replace_last_literal(repaired, target, chosen)
-            if candidate_body != repaired and candidate_body != body:
-                repaired = candidate_body
-            continue
-        repaired, chosen = _validated_hyphen_replacement(repo, state, repaired, target, ppm_visible)
-        chosen_by_target[target] = chosen
-
-    if repaired == body:
-        raise NoCodexRepairError(prefix + '_NO_CHANGE')
-    authoring_contract.validate_candidate(repaired, state['authoring_contract'])
-    return repaired
+        if not improved:
+            raise NoCodexRepairError(prefix + '_NO_MONOTONIC_REPAIR:' + first_detail)
 
 
 def repair_languagetool(repo: Path, workspace: Path) -> str:
