@@ -27,24 +27,15 @@ jobs:
             if grep -nE 'unittest\.mock|mock\.patch|from unittest import mock' "$f"; then exit 2; fi
           done
           echo 'REAL_102_NO_MOCK_PASS'
-      - name: Inspect Vergleich label assignment rule
+      - name: Inspect historical regression source
         run: |
           set -euo pipefail
           rm -rf /tmp/ppm-authority && mkdir -p /tmp/ppm-authority
           unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm-authority
           ROOT=/tmp/ppm-authority/portal-production-machine
-          echo '=== FUNCTION ==='
-          grep -n -B25 -A100 'function comparison_source_assignment_errors' "$ROOT/includes/content-validator.php" || true
-          echo '=== GENERATED VERGLEICH MARKUP ==='
-          cat > /tmp/ppm-authority/show-vergleich.php <<'PHP'
-          <?php
-          require $argv[1].'/tests/three-type-bundled-local/bootstrap-three-type.php';
-          [$item,$pack,$g]=ppm_three_generated('Vergleich');
-          echo "OK=".(!empty($g['ok'])?'1':'0')."\n";
-          echo (string)($g['content_html']??'')."\n";
-          ?>
-          PHP
-          php /tmp/ppm-authority/show-vergleich.php "$ROOT" | head -500
+          echo '=== HISTORICAL_REGRESSIONS_BEGIN ==='
+          cat "$ROOT/tests/test-historical-regressions.php"
+          echo '=== HISTORICAL_REGRESSIONS_END ==='
       - name: Download hash-bound LanguageTool 6.8
         run: |
           set -euo pipefail
