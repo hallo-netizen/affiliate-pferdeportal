@@ -60,7 +60,7 @@ jobs:
           replace_once(
               'isolated_system4/downstream_1n_contract_probe.py',
               '    final_text = FINAL_PATH.read_text(encoding="utf-8")\n',
-              '    gate_text = ENDSTEMPEL_GATE.read_text(encoding="utf-8")\n    workflow_text = ENDSTEMPEL_WORKFLOW.read_text(encoding="utf-8")\n    forbidden = ("len(articles) != 7", "\\\"article_count\\\": 7", "article_count\')!=7", "article_count\')!= 7", "article_count\') !=7", "article_count\') != 7", "article_count\')!=7", "article_count\\\")==7", "article_count\\\") == 7", "article_count\')==7", "article_count\') == 7", "article_count\")!=7", "article_count\") != 7")\n    for token in forbidden:\n        if token in gate_text or token in workflow_text:\n            raise AssertionError("DOWNSTREAM_FIXED_SEVEN_STILL_ACTIVE:" + token)\n\n    final_text = FINAL_PATH.read_text(encoding="utf-8")\n'
+              '    gate_text = ENDSTEMPEL_GATE.read_text(encoding="utf-8")\n    workflow_text = ENDSTEMPEL_WORKFLOW.read_text(encoding="utf-8")\n    forbidden = (\n        "len(articles) != 7",\n        "\\\"article_count\\\": 7",\n        "req.get(\'article_count\')!=7",\n        "m.get(\'article_count\')!=7",\n        "len(m.get(\'articles\') or [])!=7",\n    )\n    for token in forbidden:\n        if token in gate_text or token in workflow_text:\n            raise AssertionError("DOWNSTREAM_FIXED_SEVEN_STILL_ACTIVE:" + token)\n\n    final_text = FINAL_PATH.read_text(encoding="utf-8")\n'
           )
           replace_once(
               'isolated_system4/downstream_1n_contract_probe.py',
