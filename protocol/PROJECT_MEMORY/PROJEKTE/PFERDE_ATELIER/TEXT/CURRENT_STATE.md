@@ -1,12 +1,12 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
-STAND: 2026-09-11
-STATUS: BLOCKED / ONE-FRESH-ARTICLE REALTEST NEXT
+STAND: 2026-09-17
+STATUS: BLOCKED / M38 HISTORY PROOF ON CURRENT MAIN
 
 ## EINE AKTUELLE WAHRHEIT
 
 Current technical main:
-`f1d1605f18bd23d9189f89ad173598958718d08a`
+`7533d99e306bb016c87c7c63e2c6103bf1010476`
 
 Letzter belastbarer Live-/Recovery-Baseline-Stand vor M37:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
@@ -28,36 +28,26 @@ Produktfix:
 - `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
 - hardlock PASS;
 - hardlock-base PASS;
-- neuer Main `f1d1605f18bd23d9189f89ad173598958718d08a`.
+- integrierter M37-Stand `f1d1605f18bd23d9189f89ad173598958718d08a`.
 
-M01–M37 sind damit die integrierte bekannte Regression.
+M01–M37 sind die integrierte bekannte Regression auf dem aktuellen technischen Main.
 
-## AKTUELLER REALBLOCKER
+## AKTUELLER REALBLOCKER / M38
 
-Der letzte frische Lauf vor M37 erreichte realen PPM/PSERC und endete äußerlich bei:
-`PPM679_REAL_EXECUTION_BLOCKED`.
+Der erste frische Artikel erreichte nach realer LanguageTool-Reparatur den realen PPM-6.7.9-/PSERC-Handoff und stoppte mit:
+`PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH`.
 
-Der damalige innere Grund ist nicht mehr rekonstruierbar.
-**Produktions-Rootcause bleibt UNKNOWN.**
+M38 ist als History-Fall maschinell zu binden, bevor ein Produktfix integriert werden darf.
+107008 wurde nicht erreicht. Kein WordPress-Write, kein Publish.
 
 ## NEXT ACTION
 
-Genau einen frischen ersten Artikel über den offiziellen aktuellen 107007-Weg bis zum realen LanguageTool-/PPM-/PSERC-Handoff ausführen.
-
-Bei erstem BLOCKED/REPAIR_REQUIRED:
-- exakt stoppen;
-- nur den ersten konkreten neuen Grund übernehmen;
-- keine Reparatur im laufenden Test.
-
-Bei Ein-Artikel-PASS:
-- erst danach Restbatch fortsetzen.
+M38-History auf aktuellem Main `7533d99e306bb016c87c7c63e2c6103bf1010476` mit dem bestehenden History-Maschinenweg/hardlock beweisen und erst danach den separaten kleinstmöglichen Produktfix prüfen.
 
 ## HARTE GRENZEN
 
 - kein neuer Runner/Gate/Controller/Sidecar;
-- keine Regeländerung;
-- kein Rootcause raten;
-- kein zweiter Artikel vor Auswertung des ersten;
-- kein 7/7-Diagnoselauf vor Ein-Artikel-Beweis;
+- keine PPM-/PSERC-/PSTE-/Textmaschinen-/Fachregeländerung;
+- kein Produktfix vor grünem M38-History-Beweis auf aktuellem Main;
 - kein WordPress-Write;
 - Kein Publish.
