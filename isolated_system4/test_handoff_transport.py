@@ -60,6 +60,19 @@ class HandoffTransportTests(unittest.TestCase):
         ht.validate_handoff(p)
         self.assertEqual([row['article_type'] for row in p['articles']],types)
 
+    def test_positive_large_batch_1000_exact_bytes(self):
+        with tempfile.TemporaryDirectory() as td:
+            td=Path(td); src=td/'source.json'; canonical=td/ht.HANDOFF_FILENAME; inline=td/ht.INLINE_FILENAME; out=td/'out'
+            payload=self.payload(1000)
+            self.assertEqual(len(ht.validate_handoff(payload)['articles']),1000)
+            self.write(src,payload)
+            expected=ht.canonicalize_handoff(src,canonical)
+            env=ht.inline_pack(canonical,inline)
+            dst=ht.inline_unpack(inline,out)
+            self.assertEqual(dst.read_bytes(),expected)
+            self.assertEqual(env['plaintext_sha256'],hashlib.sha256(expected).hexdigest())
+            self.assertGreater(env['part_count'],1)
+
     def test_negative_inline_tamper(self):
         with tempfile.TemporaryDirectory() as td:
             td=Path(td); src=td/'source.json'; canonical=td/ht.HANDOFF_FILENAME; inline=td/ht.INLINE_FILENAME
