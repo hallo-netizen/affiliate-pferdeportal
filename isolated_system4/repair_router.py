@@ -14,6 +14,14 @@ CONTRACT='SYSTEM4_MACHINE_REPAIR_ROUTE_V1'
 RETURN_CONTRACT='SYSTEM4_REPAIR_RETURN_V2'
 MAX_MACHINE_REPAIR_CYCLES=8
 ALLOWED_OWNERS=frozenset({'PARENT_METADATA','CONTEXT_BINDING','RESEARCH_BINDING','DRAFT_BODY'})
+GROUP_PRIORITY={
+    ('PARENT_METADATA','TITLE_BINDING'):0,
+    ('PARENT_METADATA','CATEGORY_BINDING'):1,
+    ('PARENT_METADATA','PLAN_SLOT_BINDING'):2,
+    ('RESEARCH_BINDING','RESEARCH_OR_FACT_BINDING'):3,
+    ('CONTEXT_BINDING','LINK_BINDING'):4,
+    ('DRAFT_BODY','SAME_ARTICLE_BODY'):5,
+}
 
 class RepairRouteError(RuntimeError):
     pass
@@ -56,27 +64,40 @@ def _classify_finding(finding:Mapping[str,Any],state:Mapping[str,Any])->dict[str
         owner='DRAFT_BODY'; target='SAME_ARTICLE_BODY'
     return {'owner':owner,'target':target,'error_code':code,'field':field,'rule':rule,'finding':dict(finding)}
 
+def _group_sort_key(group:Mapping[str,Any])->tuple[int,str,str]:
+    owner=str(group.get('owner') or ''); target=str(group.get('target') or '')
+    return (GROUP_PRIORITY.get((owner,target),99),owner,target)
+
+def _group_summary(group:Mapping[str,Any])->dict[str,Any]:
+    findings=[dict(row) for row in group.get('findings',[]) if isinstance(row,Mapping)]
+    return {'owner':str(group.get('owner') or ''),'target':str(group.get('target') or ''),'finding_count':len(findings),'findings_sha256':sha256(canon(findings))}
+
 def classify(state:Mapping[str,Any])->dict[str,Any]:
     findings=_all_findings(state)
     if not findings:
         findings=[{}]
     classified=[_classify_finding(row,state) for row in findings]
-    first=classified[0]
-    groups=[]
-    seen=set()
+    grouped:dict[tuple[str,str],dict[str,Any]]={}
     for row in classified:
         key=(row['owner'],row['target'])
-        if key not in seen:
-            seen.add(key)
-            groups.append({'owner':row['owner'],'target':row['target']})
+        group=grouped.setdefault(key,{'owner':row['owner'],'target':row['target'],'classified':[],'findings':[]})
+        group['classified'].append(row); group['findings'].append(dict(row['finding']))
+    groups=sorted(grouped.values(),key=_group_sort_key)
+    active=groups[0]; first=active['classified'][0]
+    summaries=[_group_summary(group) for group in groups]
+    active_findings=[dict(row) for row in active['findings']]
     return {
         'contract':CONTRACT,
-        'owner':first['owner'],
-        'target':first['target'],
-        'finding':first['finding'],
-        'findings':findings,
-        'finding_count':len(findings),
-        'owner_target_groups':groups,
+        'owner':active['owner'],
+        'target':active['target'],
+        'finding':dict(active_findings[0]),
+        'findings':active_findings,
+        'finding_count':len(active_findings),
+        'owner_target_groups':summaries,
+        'pending_owner_target_groups':summaries[1:],
+        'all_findings':[dict(row) for row in findings],
+        'all_finding_count':len(findings),
+        'all_findings_sha256':sha256(canon(findings)),
         'error_code':first['error_code'],
         'field':first['field'],
         'rule':first['rule'],
@@ -126,6 +147,9 @@ def _continuation_envelope(workspace:Path,state:Mapping[str,Any],route:Mapping[s
         findings=[finding] if finding else []
     if not findings:
         raise RepairRouteError('REPAIR_FINDINGS_MISSING')
+    all_findings=[dict(row) for row in route.get('all_findings',findings) if isinstance(row,Mapping)]
+    if not all_findings:
+        raise RepairRouteError('REPAIR_ALL_FINDINGS_MISSING')
     finding=dict(findings[0])
     return {
         'contract':RETURN_CONTRACT,
@@ -144,7 +168,11 @@ def _continuation_envelope(workspace:Path,state:Mapping[str,Any],route:Mapping[s
         'findings':findings,
         'finding_count':len(findings),
         'findings_sha256':sha256(canon(findings)),
+        'all_findings':all_findings,
+        'all_finding_count':len(all_findings),
+        'all_findings_sha256':sha256(canon(all_findings)),
         'owner_target_groups':list(route.get('owner_target_groups') or []),
+        'pending_owner_target_groups':list(route.get('pending_owner_target_groups') or []),
         'cycle':cycle,
         'max_cycles':MAX_MACHINE_REPAIR_CYCLES,
         'article':dict(article),
@@ -175,6 +203,31 @@ def verify_continuation_result(workspace:Path,result:Mapping[str,Any])->dict[str
         raise RepairRouteError('REPAIR_RETURN_FINDINGS_HASH_INVALID')
     if dict(normalized[0])!=dict(finding):
         raise RepairRouteError('REPAIR_RETURN_FIRST_FINDING_MISMATCH')
+    all_findings=result.get('all_findings')
+    if not isinstance(all_findings,list) or not all_findings or not all(isinstance(row,Mapping) for row in all_findings):
+        raise RepairRouteError('REPAIR_RETURN_ALL_FINDINGS_INVALID')
+    all_normalized=[dict(row) for row in all_findings]
+    if int(result.get('all_finding_count') or 0)!=len(all_normalized):
+        raise RepairRouteError('REPAIR_RETURN_ALL_FINDING_COUNT_INVALID')
+    if result.get('all_findings_sha256')!=sha256(canon(all_normalized)):
+        raise RepairRouteError('REPAIR_RETURN_ALL_FINDINGS_HASH_INVALID')
+    remaining=[canon(row) for row in all_normalized]
+    for row in normalized:
+        encoded=canon(row)
+        if encoded not in remaining:
+            raise RepairRouteError('REPAIR_RETURN_GROUP_FINDING_NOT_IN_ALL')
+        remaining.remove(encoded)
+    groups=result.get('owner_target_groups')
+    if not isinstance(groups,list) or not groups:
+        raise RepairRouteError('REPAIR_RETURN_OWNER_TARGET_GROUPS_INVALID')
+    active=groups[0] if isinstance(groups[0],Mapping) else {}
+    if active.get('owner')!=owner or active.get('target')!=target:
+        raise RepairRouteError('REPAIR_RETURN_ACTIVE_GROUP_MISMATCH')
+    if int(active.get('finding_count') or 0)!=len(normalized) or active.get('findings_sha256')!=sha256(canon(normalized)):
+        raise RepairRouteError('REPAIR_RETURN_ACTIVE_GROUP_FINDINGS_INVALID')
+    pending=result.get('pending_owner_target_groups')
+    if not isinstance(pending,list) or pending!=groups[1:]:
+        raise RepairRouteError('REPAIR_RETURN_PENDING_GROUPS_INVALID')
     cycle=int(result.get('cycle') or 0)
     if cycle<1 or cycle>MAX_MACHINE_REPAIR_CYCLES or int(result.get('max_cycles') or 0)!=MAX_MACHINE_REPAIR_CYCLES:
         raise RepairRouteError('REPAIR_RETURN_CYCLE_INVALID')
