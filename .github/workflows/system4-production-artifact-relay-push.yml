@@ -1,0 +1,69 @@
+name: System 4 Production Artifact Relay Push
+
+on:
+  push:
+    paths:
+      - isolated_system4/production_artifact_source_comment.txt
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  persist-production-handoff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read source comment id
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMMENT_ID="$(tr -d '[:space:]' < isolated_system4/production_artifact_source_comment.txt)"
+          [[ "$COMMENT_ID" =~ ^[0-9]+$ ]]
+          echo "comment_id=$COMMENT_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch exact completed production relay comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMENT_ID: ${{ steps.source.outputs.comment_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" --jq .body > "$RUNNER_TEMP/system4-production-comment.txt"
+
+      - name: Reconstruct exact WordPress handoff from comment relay
+        env:
+          COMMENT_ID: ${{ steps.source.outputs.comment_id }}
+        run: |
+          python isolated_system4/production_artifact_relay.py from-comment \
+            "$RUNNER_TEMP/system4-production-comment.txt" \
+            "$RUNNER_TEMP/system4-production-artifact" \
+            --comment-id "$COMMENT_ID"
+
+      - name: Upload exact production WordPress handoff
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-production-wordpress-${{ steps.source.outputs.comment_id }}
+          path: |
+            ${{ runner.temp }}/system4-production-artifact/SYSTEM4_WORDPRESS_HANDOFF_V1.json
+            ${{ runner.temp }}/system4-production-artifact/SYSTEM4_ACTIONS_ARTIFACT_RECEIPT_V1.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Delete runtime reconstruction before verification
+        run: rm -rf "$RUNNER_TEMP/system4-production-artifact"
+
+      - name: Download persisted artifact into fresh directory
+        uses: actions/download-artifact@v4
+        with:
+          name: system4-production-wordpress-${{ steps.source.outputs.comment_id }}
+          path: ${{ runner.temp }}/system4-production-artifact-download
+
+      - name: Verify downloaded artifact byte-for-byte
+        run: |
+          python isolated_system4/production_artifact_relay.py verify \
+            "$RUNNER_TEMP/system4-production-artifact-download/SYSTEM4_WORDPRESS_HANDOFF_V1.json" \
+            "$RUNNER_TEMP/system4-production-artifact-download/SYSTEM4_ACTIONS_ARTIFACT_RECEIPT_V1.json"
