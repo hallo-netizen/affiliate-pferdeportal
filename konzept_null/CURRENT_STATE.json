@@ -1,0 +1,31 @@
+{
+  "contract": "PFERDE_ATELIER_KONZEPT_NULL_STATE_V1",
+  "name": "KONZEPT NULL",
+  "mode": "ISOLATED_HISTORICAL_REPLAY",
+  "historical_startmaster": "STARTMASTER0102",
+  "historical_commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
+  "historical_prompt_ref": "protocol/STARTMASTER0102_ARTICLE_TEST_NO_STOP_HANDOFF_20260828.md",
+  "next_allowed_step": "LOAD_ONE_METADATA_ITEM_READ_ONLY",
+  "article_count": 1,
+  "wordpress_access_allowed": false,
+  "external_write_allowed": false,
+  "publish_allowed": false,
+  "main_write_allowed": false,
+  "production_authority": false,
+  "required_versions": {
+    "PSTE": "0.56.25",
+    "PSERC": "0.28.14",
+    "PPM": "6.7.9",
+    "LanguageTool": "6.8"
+  },
+  "workflow": [
+    "METADATA",
+    "RESEARCH",
+    "FACT_PACK",
+    "TEXTMASCHINE",
+    "LANGUAGETOOL_6_8",
+    "PPM_6_7_9",
+    "LOCAL_TEST_PACKAGE"
+  ],
+  "terminal_boundary": "BEFORE_WORDPRESS"
+}
