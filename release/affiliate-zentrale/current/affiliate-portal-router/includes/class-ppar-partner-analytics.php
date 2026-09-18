@@ -82,11 +82,13 @@ final class PPAR_Partner_Analytics_Admin {
                 'commission' => array_key_exists('commission', $row) && is_numeric($row['commission']) ? (float)$row['commission'] : null,
             );
         }
-        $currency = strtoupper((string)($report['currency'] ?? 'EUR'));
-        if (!preg_match('/^[A-Z]{3}$/', $currency)) { $currency = 'EUR'; }
+        $currency = strtoupper((string)($report['currency'] ?? ''));
+        if (!preg_match('/^[A-Z]{3}$/', $currency)) { $currency = ''; }
+        $source = sanitize_text_field((string)($report['source'] ?? ''));
+        if ($source === '') { return false; }
         $cache = self::report_cache();
         $cache[$provider] = array(
-            'source' => sanitize_text_field((string)($report['source'] ?? 'provider_api')),
+            'source' => $source,
             'currency' => $currency,
             'updated_at' => absint($report['updated_at'] ?? time()),
             'periods' => $periods,
@@ -105,7 +107,7 @@ final class PPAR_Partner_Analytics_Admin {
             'orders' => array_key_exists('orders', $period) ? $period['orders'] : null,
             'sales' => array_key_exists('sales', $period) ? $period['sales'] : null,
             'commission' => array_key_exists('commission', $period) ? $period['commission'] : null,
-            'currency' => (string)($entry['currency'] ?? 'EUR'),
+            'currency' => (string)($entry['currency'] ?? ''),
             'source' => (string)($entry['source'] ?? ''),
             'updated_at' => absint($entry['updated_at'] ?? 0),
         );
