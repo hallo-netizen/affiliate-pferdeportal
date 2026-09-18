@@ -20,7 +20,7 @@
     {
       "id": "PFERDE_ATELIER_TEXT",
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md",
-      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md",
+      "current_authority": "control/startmaster0107/CURRENT_STATE.json",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md"
     },
     {
