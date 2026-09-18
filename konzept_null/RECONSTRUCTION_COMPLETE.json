@@ -1,0 +1,55 @@
+{
+  "contract": "KONZEPT_NULL_RECONSTRUCTION_COMPLETE_V1",
+  "status": "PASS_RECONSTRUCTED_ISOLATED_TEXT_WORKFLOW",
+  "github_hardtest": {
+    "run_id": 35396990143,
+    "head_sha": "36dd35b2adb3b23e24b40d90b9804263d469ffc5",
+    "conclusion": "success",
+    "passed": [
+      "exact isolated branch and isolation policy",
+      "Konzept Null unit tests",
+      "Konzept Null preflight",
+      "PPM 6.7.9 ZIP identity and integrity",
+      "PPM 6.7.9 main-file hash identity",
+      "six bundled normal-draft positive/negative/readback tests",
+      "LanguageTool 6.8 exact ZIP and JAR identity plus real execution",
+      "later PSERC 0.28.18 package identified and quarantined as nonhistorical",
+      "generic 1, 7 and 25 article batch initialization",
+      "hard negative tests"
+    ]
+  },
+  "restored_chat_control": {
+    "root": "konzept_null/PFERDE_ATELIER_START_HERE.json",
+    "state": "konzept_null/CURRENT_STATE.json",
+    "contract": "konzept_null/CHAT_NAVIGATION_CONTRACT.json",
+    "navigation": "NEXT_ALLOWED_STEP_ONLY",
+    "no_free_workflow_decisions": true,
+    "no_stop_after_internal_pass": true
+  },
+  "restored_workflow": [
+    "METADATA",
+    "SOURCE_ORDER",
+    "RESEARCH",
+    "SOURCE_SNAPSHOT",
+    "FACT_PACK",
+    "CLAIM_BINDING",
+    "CANONICAL_ARTICLE",
+    "PRODUCTION_PLAN_V4",
+    "LANGUAGETOOL_6_8",
+    "PPM_6_7_9",
+    "LOCAL_TEST_PACKAGE"
+  ],
+  "runtime_boundary": "BEFORE_WORDPRESS",
+  "production_authority": false,
+  "wordpress_access": false,
+  "publish": false,
+  "pserc_note": {
+    "required_historical_identity": "PSERC 0.28.14",
+    "expected_sha256": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988",
+    "exact_installer_present_in_konzept_null": false,
+    "effect_on_isolated_text_runtime": "none; Konzept Null begins at the historical PSERC metadata handoff and does not execute PSERC or WordPress",
+    "later_package": "PSERC 0.28.18",
+    "later_package_status": "QUARANTINED_NOT_USED"
+  },
+  "statement": "Within its deliberately isolated boundary from the historical metadata handoff through local final package before WordPress, Konzept Null is reconstructed and hard-tested. No System 1/2/3/4/4A runtime is used."
+}
