@@ -36,7 +36,9 @@ Erklärt:
 - Fachzuständigkeit;
 - Schreibgrenze;
 - wichtigste Originalquellen;
-- `CURRENT_STATE` und `HOBBYRAUM` als nächste Schritte.
+- den Weg über `AUTORITAETSPLAN.json` zu **genau einer** Current-Autorität.
+
+Der Büro-Eingang selbst enthält keinen aktuellen Status, Branch/Head, Blocker oder NEXT ACTION.
 
 ### Paul-Eingang
 Erklärt:
@@ -68,10 +70,13 @@ Wenn später eine neue Struktur nötig wird:
 
 ## Büro-Pflichtweg
 
-Jeder Projektbüro-Eingang muss im sichtbaren nächsten Schritt enthalten:
-`CURRENT_STATE.md` → `HOBBYRAUM.md`.
+Jeder Projektbüro-Eingang enthält sichtbar:
 
-Weitere Inventare/Quellen dürfen danach folgen.
+`AUTORITAETSPLAN.json → genau eine Current-Autorität → Frischecheck → NEXT ACTION`.
+
+`HOBBYRAUM.md` wird nur danach gelesen, wenn die Current-Autorität ihn für die konkrete Ausführung bindet.
+
+**Verbot:** Current-Status oder NEXT ACTION parallel in Current-Autorität und Hobbyraum pflegen.
 
 ### Harte Fehlerabgleich-Sperre an Bürotüren
 
@@ -132,17 +137,18 @@ Neue Verzeichnisse ohne `START_HERE.md` sind ein Architekturfehler.
 
 ## Rollen der Informationsquellen
 
-Für Projektbüros gilt:
-- START_HERE = Orientierung
-- CURRENT_STATE = aktuelle Büro-Zusammenfassung
-- HOBBYRAUM = aktuelle Arbeitsbindung
-- FEHLERREGISTER = Index zur Fehlerquelle
-- ZIELVERTRAEGE/REGISTER = Index zur Zielquelle
-- AENDERUNGSREGISTER = Begründungen
-- ARCHIV/REGISTER = Historie
+Für jeden registrierten Arbeitsbereich gilt:
+- START_HERE = Orientierung;
+- AUTORITAETSPLAN = Routing zur einen Current-Autorität, **kein Fachstatus**;
+- Current-Autorität = einziger aktueller Stand + Blocker + NEXT ACTION;
+- HOBBYRAUM = abgeleitete Ausführungsfläche, kein Current;
+- FEHLERREGISTER = Index/Fehlerautorität;
+- ZIELVERTRAEGE/REGISTER = Zielautorität;
+- AENDERUNGSREGISTER = Begründungen;
+- ARCHIV/REGISTER = Historie.
 
-Aktuelle Versions-, Fehler- oder Zielangaben werden nicht parallel in mehreren Wegweisern gepflegt.
-
+Vollständige Regel:
+`BAUCONTAINER/EINE_WAHRHEIT_STANDARD.md`.
 
 ## Spezialworker-Regel – Single Writer, Multi Reader
 
@@ -170,8 +176,8 @@ Vor `fertig`, `PASS` oder Übergabe:
 2. prüfen, ob Fehlerquelle betroffen ist;
 3. tatsächliche Arbeit protokollieren;
 4. dauerhaftes WAS/WARUM im Änderungs-/Erklärungsregister nachziehen;
-5. CURRENT_STATE nur bei geändertem belastbarem Stand;
-6. HOBBYRAUM/NEXT ACTION nur bei geändertem Auftrag/Arbeitsstand;
+5. ausschließlich die zuständige Current-Autorität bei geändertem belastbarem Stand/Blocker/NEXT ACTION nachziehen;
+6. HOBBYRAUM nur als abgeleitete Ausführungsbindung nachziehen; er darf keine zweite NEXT-ACTION-Wahrheit erzeugen;
 7. Zielvertrag nur bei echter Zieländerung;
 8. negativ prüfen, dass keine zweite Wahrheit oder Historie als CURRENT entstanden ist.
 
@@ -189,8 +195,8 @@ PROTOKOLLCHECK
 FEHLER: PASS|NACHGEHOLT|NICHT_BETROFFEN
 PROTOKOLL: PASS|NACHGEHOLT|NICHT_BETROFFEN
 WARUM: PASS|NACHGEHOLT|NICHT_BETROFFEN
-CURRENT_STATE: PASS|NACHGEHOLT|NICHT_BETROFFEN
-HOBBYRAUM_NEXT_ACTION: PASS|NACHGEHOLT|NICHT_BETROFFEN
+CURRENT_AUTORITAET: PASS|NACHGEHOLT|NICHT_BETROFFEN
+HOBBYRAUM_EXECUTION: PASS|NACHGEHOLT|NICHT_BETROFFEN
 ZIELVERTRAG: PASS|NACHGEHOLT|NICHT_BETROFFEN
 ARCHIV: PASS|NACHGEHOLT|NICHT_BETROFFEN
 EINE_WAHRHEIT: PASS
@@ -203,7 +209,7 @@ Technische Regel nach Aktivierung des Security-Hardlocks:
 - fehlt ein Feld → FAIL;
 - `EINE_WAHRHEIT != PASS` → FAIL;
 - `TESTS != PASS` → FAIL;
-- ein tatsächlich geänderter CURRENT_STATE/HOBBYRAUM/Ziel-/Archiv-/Fehler-/Protokoll-/WARUM-Pfad darf nicht als `NICHT_BETROFFEN` deklariert werden;
+- eine tatsächlich geänderte Current-Autorität/Hobbyraum-Ausführungsfläche/Ziel-/Archiv-/Fehler-/Protokoll-/WARUM-Quelle darf nicht als `NICHT_BETROFFEN` deklariert werden;
 - Architekturdateien wie START_HERE, Hauptpförtner, Handlungsverzeichnis oder Baucontainer-Standards erzwingen zusätzlich eine Änderung von `AENDERUNGSREGISTER.md` und `BAUCONTAINER/BAUPROTOKOLL.md`.
 
 **Geltungsbereich:** der gesamte Baum `protocol/PROJECT_MEMORY/**`. Damit gilt die Abschlussbremse auch für den Baucontainer selbst, Paul-Akten, Archive, Tresor, Register, Gebäude, Büros und Hobbyräume.
@@ -253,3 +259,14 @@ verifizierten Tresorstand lesen → Git/GitHub wiederherstellen → frischen Arb
 
 Leitsatz:
 **Backup-PASS ≠ Arbeits-PASS. Restore-Quelle ≠ Arbeitsquelle.**
+
+
+## HARD RULE V2 – SINGLE TRUTH
+
+Diese Regel überstimmt ältere Formulierungen dieses Dokuments, die CURRENT_STATE und HOBBYRAUM als zwei parallele dynamische Wahrheiten behandeln.
+
+Autorität:
+`EINE_WAHRHEIT_STANDARD.md` + `../AUTORITAETSPLAN.json`.
+
+NO_FULL_REDISCOVERY_IF_CURRENT_BINDING_FRESH.
+ON_BINDING_CHANGE_INSPECT_DELTA_ONLY.
