@@ -1,5 +1,10 @@
 # ALLGEMEINES DESIGN – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt. Eine Hobbyraumdatei ist nur Ausführungsfläche.
+
+
 STAND: 2026-09-15
 STATUS: BLOCKED / INTERAKTION MIT PFERDE-DESIGN UNGEKLÄRT
 
@@ -32,4 +37,7 @@ Eine allgemeine Designänderung, die projektbezogene Renderer/Queries beeinfluss
 - erst danach das allgemeine CURRENT-/Artefakt-Update erfolgt.
 
 ## NEXT ACTION
-Siehe `HOBBYRAUM.md`.
+
+Reale installierte Universal-Version und reale installierte Pferde-Design-Version feststellen, die Kombination reproduzieren, Universal isoliert positiv/negativ testen und anschließend Universal + Pferde gemeinsam positiv/negativ testen.
+
+Erst danach Ursache, Fix oder Release bestimmen. Universal 2.2.42 bleibt bis dahin **nicht CURRENT**.
