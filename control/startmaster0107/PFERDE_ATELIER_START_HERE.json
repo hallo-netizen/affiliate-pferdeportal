@@ -7,7 +7,7 @@
   "immutable_base_hardlock": ".github/workflows/pferde-atelier-immutable-base-hardlock.yml",
   "production_continuity_guard": "control/production-continuity/production_continuity_guard.py",
   "current_state_sha256": "f6887131c3d539a976566323fc3406b4d04777c6386dccd6e63d9ed4f2714e1b",
-  "next_allowed_step": "RUN_E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE",
+  "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "visible_output_policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
   "visible_output_policy_sha256": "b15679d54fbd1ac2da78a21e57ca6dd57357b1ef6dc063ad4cf1e0990bcd7e8f",
   "visible_output_authority": "RELEASE_RECEIPT_ONLY",
