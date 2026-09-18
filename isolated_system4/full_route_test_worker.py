@@ -11,20 +11,20 @@ FORCE_REPAIR_INDEX_ENV='SYSTEM4_TEST_FORCE_REPAIR_INDEX'
 FORCE_BATCH_REPETITION_COUNT_ENV='SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT'
 REPO=Path(__file__).resolve().parent.parent
 BATCH_REPEAT_SENTENCES=(
-    'Diese Prüfung nutzt nur gebundene Quellen und ergänzt keine Tatsachen.',
-    'Die Einordnung bleibt bei gebundenen Belegen und vermeidet zusätzliche Annahmen.',
-    'Jeder Entscheidungspunkt folgt dokumentierten Quellen und erhält keine neuen Behauptungen.',
-    'Die Darstellung verwendet bestätigte Inhalte und lässt unbelegte Ergänzungen vollständig aus.',
-    'Für die Bewertung gelten vorhandene Belege ohne weitere sachliche Erweiterungen.',
-    'Die Auswahl wird anhand gebundener Kriterien ohne neue Informationen beschrieben.',
-    'Alle Hinweise bleiben im bestätigten Quellenrahmen und verändern keine Tatsachen.',
+    'Diese Prüfung verwendet ausschließlich vorhandene Quellen und ergänzt keine neuen fachlichen Angaben.',
+    'Die Bewertung stützt sich auf vorhandene Belege und fügt keine weiteren Annahmen hinzu.',
+    'Jede Entscheidung folgt den dokumentierten Quellen und bleibt innerhalb der bereits belegten Aussagen.',
+    'Die Darstellung nutzt bestätigte Inhalte und lässt zusätzliche unbelegte Behauptungen vollständig weg.',
+    'Für die Bewertung werden nur vorhandene Belege verwendet; zusätzliche sachliche Aussagen kommen nicht hinzu.',
+    'Die Auswahl wird nur anhand dokumentierter Kriterien beschrieben und nicht um neue Informationen ergänzt.',
+    'Alle Hinweise bleiben bei den bestätigten Quellen und verändern keine bereits dokumentierten Tatsachen.',
 )
 BATCH_REPEAT_ORDINALS=('ersten','zweiten','dritten','vierten','fünften','sechsten')
 BATCH_REPEAT_SEPARATOR_TEMPLATES=(
-    'Fliegenmasken markieren im {ordinal} Durchgang eine eigenständige Prüfspur für diesen Artikel ohne zusätzliche Sachangabe oder fremde Ableitung.',
-    'Luzernepellets erhalten beim {ordinal} Kontrollpunkt eine separate Testfolge innerhalb dieses Artikels; sie dient ausschließlich der technischen Abgrenzung.',
-    'Urlaubstestspur bezeichnet den {ordinal} Abschnitt dieser Prüfung und hält nur die künstliche Vergleichsmarkierung des betreffenden Artikels fest.',
-    'Nachbarschaftstestspur führt durch den {ordinal} Prüfabschnitt und kennzeichnet ausschließlich die eigene technische Testsequenz dieses Artikels.',
+    'Dieser technische Test betrifft Masken für Pferde. Im {ordinal} Durchgang wird nur die Reihenfolge markiert. Die fachlichen Aussagen des Artikels bleiben unverändert.',
+    'Dieser Abschnitt gehört zum Test mit Pellets aus Luzerne. Die {ordinal} Prüfung kennzeichnet lediglich den Ablauf. Inhaltliche Angaben werden dabei weder ergänzt noch verändert.',
+    'Hier wird die Betreuung im Urlaub nur für den technischen Versuch unterschieden. Der {ordinal} Schritt dient allein der Kennzeichnung. Neue fachliche Informationen entstehen dadurch nicht.',
+    'Die Betreuung durch Nachbarn erhält hier eine eigene technische Kennzeichnung. In der {ordinal} Runde wird nur der Ablauf des Tests getrennt. Der fachliche Inhalt bleibt davon unberührt.',
 )
 
 

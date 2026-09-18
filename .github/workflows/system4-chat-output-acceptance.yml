@@ -233,6 +233,24 @@ jobs:
           print('SYSTEM4_LANGUAGETOOL_DEPENDENCY_PASS')
           PY
 
+      - name: Forced batch repetition real LT 6.8 preflight
+        id: forced_batch_lt_preflight
+        shell: bash
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+        run: |
+          set -o pipefail
+          python isolated_system4/test_forced_batch_repetition_preflight.py -v 2>&1 | tee /tmp/system4-forced-batch-lt-preflight.log
+
+      - name: Preserve forced batch LT preflight failure log
+        if: ${{ failure() && steps.forced_batch_lt_preflight.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-forced-batch-lt-preflight-failure-log
+          path: /tmp/system4-forced-batch-lt-preflight.log
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Exact real LT 6.8 and PPM 6.7.9 corridor
         env:
           SYSTEM4_REAL_TOOL_CORRIDOR: '1'

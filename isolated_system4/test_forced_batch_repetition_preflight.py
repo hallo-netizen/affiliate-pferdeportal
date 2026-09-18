@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 import itertools
+import json
+import os
 import unittest
+from pathlib import Path
 
 import batch_repetition_guard
 import content_guard
 import full_route_test_worker
 import global_workshop
+import production_checks
 
 
 class ForcedBatchRepetitionPreflightTests(unittest.TestCase):
@@ -21,7 +25,7 @@ class ForcedBatchRepetitionPreflightTests(unittest.TestCase):
             content_guard.pairwise_shingle_jaccard(forced[left],forced[right])
             for left,right in itertools.combinations(range(4),2)
         ]
-        self.assertLess(max(pair_scores),0.10)
+        self.assertLess(max(pair_scores),content_guard.MAX_PAIRWISE_SHINGLE_JACCARD)
 
         bodies=[self._body(i) for i in range(4)]
         diversity=content_guard.validate_batch_distinctness(bodies)
@@ -47,6 +51,23 @@ class ForcedBatchRepetitionPreflightTests(unittest.TestCase):
         after_repetition=batch_repetition_guard.validate_batch_repetition(repaired)
         self.assertEqual(after_repetition['status'],'PASS')
         self.assertLessEqual(after_repetition['majority_repeated_sentence_count'],6)
+
+    @unittest.skipUnless(os.environ.get('SYSTEM4_REAL_TOOL_CORRIDOR')=='1','real LT 6.8 preflight is an explicit CI stage')
+    def test_forced_fixture_is_real_languagetool_68_clean(self):
+        repo=Path(__file__).resolve().parent.parent
+        for index in range(4):
+            forced=full_route_test_worker._forced_batch_repeat_text(index)
+            body=f'<article><p>Der vorhandene Absatz endet hier. {forced}</p></article>'
+            try:
+                result=production_checks.run_languagetool(repo,body)
+            except production_checks.RepairRequired as exc:
+                self.fail(
+                    'FORCED_BATCH_LT68_NOT_CLEAN:'+str(index)+':'+
+                    json.dumps(exc.findings,ensure_ascii=False,sort_keys=True,separators=(',',':'))
+                )
+            self.assertEqual(result['status'],'PASS')
+            self.assertEqual(result['engine'],'LanguageTool 6.8 / Bestand 43')
+            self.assertEqual(result['finding_count'],0)
 
 
 if __name__=='__main__':
