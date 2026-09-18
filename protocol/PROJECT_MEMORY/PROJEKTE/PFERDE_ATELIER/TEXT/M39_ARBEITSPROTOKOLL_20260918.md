@@ -47,3 +47,11 @@ Erwartung:
 Der getrennte Pre-Codex-Produktkandidat erreichte zuvor Acceptance Run `35358268913` = 40/40 PASS. Dieser Befund ersetzt nicht den vorgeschriebenen History-Beweis.
 
 Kein echter Codex. Kein WordPress-Write. Kein Publish.
+
+
+## MASCHINENMARKER
+
+Realtest: aktueller Main gegen M39-History.
+PASS: M01–M38 müssen vor M39 bestehen.
+FAIL: M39 muss auf dem History-Kandidaten der erste neue Fehler sein.
+Kein Publish.
