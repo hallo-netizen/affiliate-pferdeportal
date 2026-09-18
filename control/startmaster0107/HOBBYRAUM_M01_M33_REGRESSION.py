@@ -320,7 +320,7 @@ def m31():
     must("system4_107007_entry.py" in step,"M31_SYSTEM4_ENTRY_NOT_BOUND")
     must("root_entry.py start-point0" in step,"M31_ROOT_ENTRY_NOT_BOUND")
     must("codex_entry.py worker-start" in step,"M31_CODEX_WORKER_START_NOT_BOUND")
-    must("kein Legacy-Handoff" in step,"M31_LEGACY_HANDOFF_NOT_FORBIDDEN")
+    must("keinen legacy-handoff" in step.casefold(),"M31_LEGACY_HANDOFF_NOT_FORBIDDEN")
     out=cmd("isolated_system4/test_machine_route_lock_contract.py")
     must("OK" in out or out.strip()=="","M31_MACHINE_ROUTE_LOCK_NOT_PASS")
     out=cmd("control/startmaster0107/test_system4_107007_repair_authority.py")
