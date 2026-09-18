@@ -9,9 +9,9 @@
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
   "runtime_proof": {
-    "last_runtime_tested_head": "1b42543ed7bb36cb055da86ff58149a0494055f9",
-    "acceptance_run_id": 35323731944,
-    "acceptance_job_id": 105531863105,
+    "last_runtime_tested_head": "deae086e8a0d6d935f2c5d2f3870f4cfe40fe9b7",
+    "acceptance_run_id": 35329964441,
+    "acceptance_job_id": 105551794507,
     "result": "SUCCESS_ON_ACCEPTED_RUNTIME_HEAD",
     "current_head_acceptance": "PASS",
     "current_head_ci_runs": 1
@@ -83,7 +83,11 @@
       "full_route_start continues repairable batch workshop returns through worker repair and complete fullcheck",
       "repair_router groups mixed findings by owner and target",
       "handoff and top-level failures pass through global workshop classification",
-      "realistic four-article repetition regression proves workshop -> targeted repair -> fullcheck -> batch PASS"
+      "realistic four-article repetition regression proves workshop -> targeted repair -> fullcheck -> batch PASS",
+      "data-driven semantic block contract binds PPM-required block order to visible semantic heading roles",
+      "conclusion and further_information use controlled semantic synonym classes instead of one fixed visible word",
+      "block semantic failures route through GLOBAL WORKSHOP to DRAFT_BODY / SAME_ARTICLE_BODY and complete fullcheck",
+      "full block error matrix covers heading mismatch, heading absence, required block absence, order invalid and duplicate block"
     ],
     "open_blockers": [],
     "tests": {
@@ -94,9 +98,10 @@
       "real_lt68_preflight": "PASS",
       "real_ppm679_corridor": "PASS",
       "four_article_workshop_real_corridor": "PASS",
-      "full_workflow_acceptance_current_head": "PASS_RUN_35323731944_JOB_105531863105"
+      "full_workflow_acceptance_current_head": "PASS_RUN_35329964441_JOB_105551794507",
+      "block_semantic_workshop_matrix_real": "PASS_6_CASES_RUN_35329964441_JOB_105551794507"
     },
-    "runtime_logic_head": "1b42543ed7bb36cb055da86ff58149a0494055f9"
+    "runtime_logic_head": "deae086e8a0d6d935f2c5d2f3870f4cfe40fe9b7"
   },
   "codex_policy": {
     "allowed": "REAL_BOUND_ARTICLE_PRODUCTION_ONLY_AFTER_EXPLICIT_USER_APPROVAL",
@@ -113,8 +118,8 @@
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "freshness_check": "Read PR #275 head. Runtime/test acceptance PASS is bound to 1b42543ed7bb36cb055da86ff58149a0494055f9 (Run 35323731944 / Job 105531863105). A later CURRENT_STATE/START_HERE/protocol-only closeout commit does not alter runtime logic. Any runtime, binding, test-worker or production-path change requires a new code/test review before continuing.",
-    "next_action": "NO CODEX until explicit user approval. Global workshop acceptance is green on accepted head 1b42543ed7bb36cb055da86ff58149a0494055f9 (Run 35323731944 / Job 105531863105) and the 107007 launch/bundle predecessor hash cascade is repaired. Before any real bound article-production run, fresh-check PR #275 head plus launch, STEP_107007, CURRENT_STATE and START_HERE hashes. Only after explicit user approval may Codex execute the already bound 107007 real production run. publish_allowed remains false."
+    "freshness_check": "Read PR #275 head. Runtime/test acceptance PASS including the complete block-semantics workshop matrix is bound to deae086e8a0d6d935f2c5d2f3870f4cfe40fe9b7 (Run 35329964441 / Job 105551794507). A later CURRENT_STATE/START_HERE/protocol-only closeout commit does not alter runtime logic. Any runtime, binding, test-worker or production-path change requires a new code/test review before continuing.",
+    "next_action": "NO CODEX until explicit user approval. Global workshop and the complete data-driven block principle are green on accepted head deae086e8a0d6d935f2c5d2f3870f4cfe40fe9b7 (Run 35329964441 / Job 105551794507); 107007 launch/bundle binding remains PASS. Before any real bound article-production run, fresh-check PR #275 head plus launch, STEP_107007, CURRENT_STATE and START_HERE hashes. Only after explicit user approval may Codex execute the already bound 107007 real production run. publish_allowed remains false."
   },
   "mandatory_execution_path": [
     "isolated_system4/parent_start.py start-bound",
@@ -134,11 +139,34 @@
     "SYSTEM4_WORDPRESS_HANDOFF_V1.json"
   ],
   "hobbyroom": {
-    "status": "PASS_GLOBAL_WORKSHOP_ACCEPTED_107007_BINDING_VALID",
+    "status": "PASS_GLOBAL_WORKSHOP_BLOCK_SEMANTICS_ACCEPTED_107007_BINDING_VALID",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
     "current_focus": "AWAIT_EXPLICIT_USER_PRODUCTION_APPROVAL",
     "next_action": "Do not use Codex until the user explicitly approves a real bound 107007 article-production run.",
     "return_path": "ERROR -> GLOBAL_WORKSHOP -> authoritative owner -> repair -> complete recheck -> normal route"
   },
-  "runtime_logic_head_under_review": "1b42543ed7bb36cb055da86ff58149a0494055f9"
+  "runtime_logic_head_under_review": "deae086e8a0d6d935f2c5d2f3870f4cfe40fe9b7",
+  "block_semantics": {
+    "status": "ACCEPTED_FULL_MATRIX_PASS",
+    "policy_ref": "isolated_system4/block_semantics_v1.json",
+    "binding_contract": "SYSTEM4_BOUND_BLOCK_SEMANTICS_V1",
+    "source_authority": "PPM_6.7.9_REQUIRED_BLOCKS_ORDER_PLUS_RESERVED_HEADING_ANCHORS",
+    "visible_heading_policy": "DATA_DRIVEN_CONTROLLED_SEMANTIC_SYNONYMS",
+    "semantic_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "workshop_route": "DRAFT_BODY:SAME_ARTICLE_BODY",
+    "tested_error_classes": [
+      "BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH_CONCLUSION",
+      "BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH_FURTHER_INFORMATION",
+      "BLOCK_CONTENT_SEMANTIC_HEADING_ABSENT",
+      "BLOCK_CONTENT_REQUIRED_BLOCK_ABSENT",
+      "BLOCK_CONTENT_BLOCK_ORDER_INVALID",
+      "BLOCK_CONTENT_BLOCK_DUPLICATE"
+    ],
+    "acceptance_run_id": 35329964441,
+    "acceptance_job_id": 105551794507,
+    "acceptance_head": "deae086e8a0d6d935f2c5d2f3870f4cfe40fe9b7"
+  }
 }
