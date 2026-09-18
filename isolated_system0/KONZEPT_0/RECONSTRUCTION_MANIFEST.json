@@ -1,0 +1,47 @@
+{
+  "contract": "KONZEPT0_RECONSTRUCTION_MANIFEST_V1",
+  "source_commit": "a4084afd2b22cdbab2e7c6141885760adedc8f4b",
+  "source_date": "2026-08-28",
+  "historical_exact": [
+    {
+      "local": "historical_exact/controller.py",
+      "source": "control/ai-tool-firewall/controller.py",
+      "git_blob_sha": "cb7df5405221a01600f581a1e33d8e942f81b52e"
+    },
+    {
+      "local": "historical_exact/preflight.py",
+      "source": "control/production-package-preflight/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py",
+      "git_blob_sha": "9ddbfcd830000a83d00bca91d054ad5fc890b8be"
+    },
+    {
+      "local": "historical_exact/STEP_TOOL_POLICY_V1.json",
+      "source": "control/ai-tool-firewall/STEP_TOOL_POLICY_V1.json",
+      "git_blob_sha": "48a284c0335f75ea808970fa2f7fd513e25cc9e9"
+    },
+    {
+      "local": "historical_exact/CURRENT_STATE_20260828.json",
+      "source": "control/startmaster0103/CURRENT_STATE.json",
+      "git_blob_sha": "1fb5b370fd34b80291b20570a54f6fde0d032ca6"
+    }
+  ],
+  "proven_workflow": {
+    "startmaster": "STARTMASTER0103",
+    "ppm": "6.7.9",
+    "pste": "0.56.25",
+    "pserc": "0.28.14",
+    "article_count": 6,
+    "normal_draft_end_to_end": "PASS",
+    "draft_readback": "PASS",
+    "publish_allowed": false
+  },
+  "missing_exact_runtime_components": [
+    "standalone exact Textmaschine source from the 2026-08-28 MASTER",
+    "standalone exact PPM 6.7.9 runtime source used by that run",
+    "standalone pinned LanguageTool 6.8 runtime artifact used by that run",
+    "exact STARTMASTER0039 boundary guard from the old MASTER",
+    "exact KEYWORD_OWNERSHIP_LONGTAIL_V2 contract from the old MASTER",
+    "exact TITLE_SURFACE_ATTRIBUTE_ZERO_SEO_AUTHORITY_V1 contract from the old MASTER",
+    "exact BREADTH_WAVE_COMPILER_READY_QUOTA_V1 contract from the old MASTER"
+  ],
+  "rule": "No missing component may be silently substituted by System 1, 2, 3, 4 or 4A."
+}
