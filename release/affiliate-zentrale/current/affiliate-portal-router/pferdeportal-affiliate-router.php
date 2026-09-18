@@ -133,7 +133,7 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_SYNC_SCHEMA_VERSION = 'ppar_sync_schema_version';
     const SYNC_SCHEMA_VERSION = '1.0';
     const AUTOMATION_SCHEMA_VERSION = '1.2';
-    const CREATIVE_LIBRARY_SCHEMA_VERSION = '3.0';
+    const CREATIVE_LIBRARY_SCHEMA_VERSION = '3.1';
     const OUTPUT_SCHEMA_VERSION = '1.3';
     const CONTROL_SCHEMA_VERSION = '1.1';
     const CONTROL_CONTRACT_VERSION = '2.0';
