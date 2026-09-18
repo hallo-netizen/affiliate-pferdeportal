@@ -1,3 +1,16 @@
+# HARD RULE V2 – EINE AKTUELLE WAHRHEIT
+
+Für **jede** unten beschriebene Aktion gilt vor allen alten Wegangaben:
+
+`START_HERE → protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION`.
+
+`HOBBYRAUM.md` ist nur eine abgeleitete Ausführungsfläche und wird erst geöffnet, wenn die Current-Autorität ihn bindet.
+
+Bei frischer unveränderter Bindung: **keine Vollrekonstruktion**.
+Bei Änderung: **nur Delta seit gebundener Basis prüfen**.
+
+---
+
 # HANDLUNGSVERZEICHNIS
 
 STAND: 2026-09-16
@@ -56,8 +69,7 @@ Speicherverbrauch, Backup-Reste, WordPress-Dateisystem-/Datenbankdiagnose oder s
 
 Verbindlicher Weg:
 `PROJEKTE/PFERDE_ATELIER/TECHNIK/START_HERE.md`
-→ `CURRENT_STATE.md`
-→ `HOBBYRAUM.md`
+→ `AUTORITAETSPLAN.json` → zuständige Current-Autorität → Frischecheck → NEXT ACTION → ggf. Ausführungsfläche
 → lokales `HANDLUNGSVERZEICHNIS.md`.
 
 Bei Pluginänderung zusätzlich:
@@ -165,7 +177,7 @@ Aktion:
 Der Nutzer nennt ein Projektbüro und „Hobbyraum“.
 
 Verbindlicher Weg:
-Projektgebäude → Büro-`START_HERE.md` → `CURRENT_STATE.md` → `HOBBYRAUM.md`.
+Projektgebäude → Büro-`START_HERE.md` → `AUTORITAETSPLAN.json` → zuständige Current-Autorität → Frischecheck → deren NEXT ACTION → nur falls gebunden: `HOBBYRAUM.md`.
 
 Routing-Kennwort:
 `Hobbyraum`
@@ -193,8 +205,7 @@ Produktwissen/Produktrecherche, konkrete Produktvergleiche, Vergleichsmerkmale, 
 
 Verbindlicher Weg:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md`
-→ `CURRENT_STATE.md`
-→ `HOBBYRAUM.md`
+→ `AUTORITAETSPLAN.json` → zuständige Current-Autorität → Frischecheck → NEXT ACTION → ggf. Ausführungsfläche
 → gebundene Originalquellen.
 
 Fachgrenzen:
@@ -235,8 +246,7 @@ Präsentation, Pitch, Werbung, Flyer, Angebotsunterlage, Leistungsdarstellung od
 
 Weg:
 `PB_ONE/ANGEBOTE_FLYER/START_HERE.md`
-→ `CURRENT_STATE.md`
-→ `HOBBYRAUM.md`
+→ `AUTORITAETSPLAN.json` → zuständige Current-Autorität → Frischecheck → NEXT ACTION → ggf. Ausführungsfläche
 → Quellen
 → Entwurf
 → Freigabe
