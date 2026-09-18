@@ -148,9 +148,9 @@ class MachineRouteLockContractTests(unittest.TestCase):
                 'source_kind': 'WEB',
             },
             '5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288': {
-                'source_id': 'allianz-fremdreiter',
-                'source_title': 'Pferdehaftpflicht: Schutz vor finanziellem Risiko | Allianz',
-                'source_url': 'https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/',
+                'source_id': 'vhv-fremdreiter',
+                'source_title': 'Pferde-Haftpflichtversicherung | VHV',
+                'source_url': 'https://www.vhv.de/tierhalterhaftpflicht-versicherung/ratgeber/pferdehaftpflicht',
                 'source_kind': 'WEB',
             },
             '7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da': {
