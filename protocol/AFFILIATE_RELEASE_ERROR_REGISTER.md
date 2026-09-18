@@ -443,17 +443,53 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 ---
 
+## AFF-ERR-026 — Partner-/Einnahmen-Wahrheit verwechselt fehlende Reports mit Nullwerten
+
+**Datum / Arbeitsschritt:** 18.09.2026 / Partnerübersicht, Klicks und Einnahmen.
+
+**Symptom/Root Cause:** Die sichtbare Partner-/Einnahmen-Seite kann fehlende Provider-Reportdaten wie echte `0 €`-Werte wirken lassen bzw. lokale Klicks, Provider-Klicks und Provider-Umsatz nicht sauber genug voneinander trennen. Unterschiedliche Währungen dürfen zudem nicht als eine Euro-Gesamtsumme erscheinen.
+
+**Nicht wiederholen:** Lokale Klicks, Provider-Klicks, Umsatz und Provision als getrennte Quellen führen. Fehlende Providerdaten = `nicht verfügbar`, nicht Null. Währungen getrennt aggregieren. Keine Rang-/Bestpartner-Aussage bei unvollständiger Datenbasis.
+
+**POSITIV:** Provider mit echtem Report zeigt Datenquelle, Datenstand, Klicks/Umsatz/Provision korrekt; lokale Klicks bleiben separat.
+
+**NEGATIV:** fehlender Report erzeugt weder `0 €` noch erfundene Provider-Klicks; gemischte Währungen werden nicht als EUR-Gesamtsumme addiert.
+
+**Status:** FIXED_LOCAL_ORACLE_ONLY in nichtkanonischem 6.72.65; kanonischer Rootfix/Gesamtgate/LIVE-Readback offen.
+
+## AFF-ERR-027 — Lokale 6.72.60–6.72.65-Testlinie darf keine zweite Pluginwahrheit werden
+
+**Datum / Arbeitsschritt:** 18.09.2026 / Abschluss- und Übergabeprüfung.
+
+**Symptom/Root Cause:** Im Chat entstanden mehrere höhere lokale Testpakete, während die autoritative GitHub-Source und das Pluginbüro weiter 6.72.19 führen. Einzelne lokale Stände haben Teil-/LIVE-Befunde, aber keinen gemeinsamen kanonischen Release-Gesamtgate.
+
+**Nicht wiederholen:** Lokale 6.72.60–6.72.65 ausschließlich als Test-/Fehleroracle behandeln. Kein `CURRENT.zip`-Nachzug, kein Release-PASS und keine weitere Versionskaskade daraus. Nächster Schritt ist read-only kanonischer Delta-Precheck; danach genau ein Rootfix-Kandidat und vollständiger Gateblock.
+
+**Status:** OPEN / permanenter Prozess-Hardlock bis kanonischer Rootfix akzeptiert ist.
+
+
 # Aktueller PRECHECK
 
-Aktueller Nutzer-Scope: `AFFILIATE_ZENTRALE → OTTO/Awin 14336`.
+Aktueller Nutzer-Scope: `AFFILIATE_ZENTRALE → vollautomatischer Creative-Lifecycle + KISS-Bedienung`.
 
-Bindend:
-- `AFF-ERR-019`: ungefilterter OTTO-Vollfeed HARD BLOCKED.
-- `AFF-ERR-023`: 6.72.8-Cleanup live sichtbar, fail-closed 0/4500, keine destruktive Bereinigung erzwingen.
-- `AFF-ERR-024`: Root Cause bewiesen: verwendeter 298-Zeilen-Feed ist 298/298 fachfremd; einziges Importobjekt ist False Positive durch synthetisches `FeedScope=Pferdebedarf` + `Windschutz`. Fix noch offen.
-- `AFF-ERR-025`: CURRENT-/Hobbyraum-Drift NACHGEHOLT/CLOSED.
-- `AFF-ERR-006`: keine Pluginorgie; nächster Kandidat erst nach vollständigem gebundenem Gate.
-- `AFF-ERR-007`: Nutzerhandlungen nur mit vollständigem real belegtem WordPress-/Awin-Pfad; keine erfundenen Menünamen.
-- `AFF-ERR-001`: kein Gesamt-/Automatik-/Release-PASS ohne echte Evidence.
+Gebundene Fach-/Scope-Quellen:
+- `protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md`
+- `/Pferde-Atelier/Aktenschraenke/Affiliate/WERBEPLATZ_REGISTER.md`
+- `/Pferde-Atelier/Aktenschraenke/Affiliate/KONZEPT_AUTOMATIK_LIFECYCLE_20260918.md`
 
-**Nächster zulässiger Schritt:** im Hobbyraum zuerst den exakten `Windschutz`-Negativfall als Regression binden, dann den kleinsten OTTO-Gate-Rootfix durchführen: Feed-/Scope-Metadaten dürfen niemals selbst Pferde-Domain-Evidence erzeugen. Danach POSITIV/NEGATIV/Gesamtworkflow + historische Regressionen + Manifest/Byte-Scope + Error-Register-Postcheck. Parallel dazu Awin-Auswahl ausschließlich aus den real belegten drei OTTO-Feeds korrigieren. Automatik bleibt AUS.
+Pflicht vor dem nächsten Source-Schritt:
+- `AFF-ERR-006`: keine Mini-Fix-/Versionskaskade;
+- `AFF-ERR-009`: keine Provider-/Format-Hartverdrahtung;
+- `AFF-ERR-010`: re-entrant Neubewertung + zentraler periodischer Recheck;
+- `AFF-ERR-011` + `AFF-ERR-026`: Partner-/Einnahmen-/Klickwahrheit providerübergreifend und ohne Nullwert-Erfindung;
+- `AFF-ERR-027`: lokale 6.72.60–6.72.65 nur Oracle, niemals zweite Current-/Releasewahrheit;
+- `AF-021`: Hobbyraum-Task schemaexakt;
+- `AF-027`: reale installierte WordPress-Version vor späterer Versionswahl;
+- `AF-069`: nichtkanonische Folgepakete nicht als kanonisch behandeln.
+
+**Nächster zulässiger Schritt:** ausschließlich den read-only Hobbyraum-Precheck `automatic-creative-lifecycle-canonical-precheck-20260918` gegen die kanonische 6.72.19-Source ausführen. Er darf nur den exakten fehlenden Source-Delta für den gebundenen 2026-09-18-Vertrag liefern. Kein Build, kein Installer, keine Versionswahl.
+
+Danach: genau ein minimaler kanonischer Rootfix-Kandidat → vollständige POSITIV-/NEGATIV-/Gesamtworkflow-/Regression-/Fresh-Unpack-/Source-Identitäts-/Mutationtests → erst wenn danach ein konkreter WordPress-Livetest erforderlich ist, genau ein Testplugin ausgeben.
+
+Automatik-/Lifecycle-Normalbetrieb bleibt Ziel; manuelle Sperren/Fixierungen/Vetos müssen immer Vorrang behalten.
+
