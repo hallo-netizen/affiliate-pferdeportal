@@ -6,10 +6,10 @@ if (!defined('ABSPATH')) {
 /**
  * Awin-Eingangsweiche.
  *
- * Grundsatz: Positivliste, fail-closed. Ein synchronisiertes Awin-Programm darf
- * erst dann in Automatisierung, Werbemittelplanung oder öffentliche Ausgabe,
- * wenn es ausdrücklich für genau dieses Portal freigegeben wurde. Jede fehlende,
- * fremde oder negative Entscheidung blockiert den Partner.
+ * Grundsatz: Vollautomatischer Normalbetrieb mit manuellem Veto.
+ * Ein aktuell als joined bestaetigtes Awin-Programm darf automatisch in den
+ * zentralen Sync. Explizite negative Entscheidungen bleiben fail-closed und
+ * staerker als die Automatik; eine manuelle Einzel-Freigabe ist kein Pflichtweg.
  */
 trait PPAR_Awin_Programme_Gate_Trait {
     private function awin_programme_gate_records() {
@@ -19,7 +19,7 @@ trait PPAR_Awin_Programme_Gate_Trait {
 
     private function awin_programme_gate_statuses() {
         return array(
-            'pending' => 'Nicht freigegeben',
+            'pending' => 'Automatik (Standard)',
             'allow_local' => 'Für dieses Portal aktiv',
             'other_portal' => 'Anderem Portal zugeordnet',
             'test_blocked' => 'Testpartner sperren',
@@ -75,26 +75,25 @@ trait PPAR_Awin_Programme_Gate_Trait {
             return new WP_Error('awin_partner_portal_missing', 'Portal-ID fehlt; Awin-Partner bleibt gesperrt.');
         }
         $entry = $this->awin_programme_gate_entry($advertiser_id);
-        if ($entry['status'] !== 'allow_local') {
+        if (in_array($entry['status'], array('other_portal','test_blocked','excluded'), true)) {
             $messages = array(
-                'pending' => 'Awin-Partner ist nicht ausdrücklich freigegeben.',
                 'other_portal' => 'Awin-Partner ist einem anderen Portal zugeordnet.',
                 'test_blocked' => 'Awin-Partner ist als Testpartner gesperrt.',
                 'excluded' => 'Awin-Partner ist dauerhaft ausgeschlossen.',
             );
             $codes = array(
-                'pending' => 'awin_partner_not_approved',
                 'other_portal' => 'awin_partner_other_portal',
                 'test_blocked' => 'awin_partner_test_blocked',
                 'excluded' => 'awin_partner_excluded',
             );
             return new WP_Error(
-                $codes[$entry['status']] ?? 'awin_partner_not_approved',
-                $messages[$entry['status']] ?? 'Awin-Partner ist nicht freigegeben.'
+                $codes[$entry['status']] ?? 'awin_partner_blocked',
+                $messages[$entry['status']] ?? 'Awin-Partner ist manuell gesperrt.'
             );
         }
-        if ($entry['portal_key'] === '' || !hash_equals($entry['portal_key'], $portal_key)) {
-            return new WP_Error('awin_partner_portal_mismatch', 'Awin-Partner ist nicht für dieses Portal freigegeben.');
+        if ($entry['status'] === 'allow_local'
+            && ($entry['portal_key'] === '' || !hash_equals($entry['portal_key'], $portal_key))) {
+            return new WP_Error('awin_partner_portal_mismatch', 'Awin-Partner ist fest einem anderen Portalkontext zugeordnet.');
         }
         if (!$this->awin_programme_gate_current_joined($advertiser_id)) {
             return new WP_Error('awin_partner_not_joined_current', 'Awin-Programm ist in der aktuellen Programmliste nicht als joined bestätigt.');
@@ -107,6 +106,11 @@ trait PPAR_Awin_Programme_Gate_Trait {
      * This is the bootstrap source for scheduled automation; a pre-existing
      * Partner-Intake snapshot is intentionally NOT required.
      */
+    /**
+     * Vollautomatischer Bootstrap: alle aktuell joined Programme laufen, sofern
+     * keine explizite negative manuelle Entscheidung sie sperrt. Bestehende
+     * allow_local-Festlegungen bleiben kompatibel.
+     */
     private function awin_programme_gate_allowed_advertiser_ids($portal_key = '') {
         $portal_key = sanitize_key((string) $portal_key);
         if ($portal_key === '' && method_exists($this, 'output_local_portal_key')) {
@@ -114,13 +118,23 @@ trait PPAR_Awin_Programme_Gate_Trait {
         }
         if ($portal_key === '') { return array(); }
 
+        $records = $this->awin_programme_gate_records();
+        $programmes = get_option(self::OPTION_NETWORK_AWIN_PROGRAMMES, array());
         $out = array();
-        foreach ($this->awin_programme_gate_records() as $advertiser_id=>$row) {
-            $advertiser_id = absint($advertiser_id);
-            if ($advertiser_id <= 0 || !is_array($row)) { continue; }
-            if (sanitize_key((string) ($row['status'] ?? 'pending')) !== 'allow_local') { continue; }
-            if (sanitize_key((string) ($row['portal_key'] ?? '')) !== $portal_key) { continue; }
-            if (!$this->awin_programme_gate_current_joined($advertiser_id)) { continue; }
+        foreach ((array) $programmes as $programme) {
+            if (!is_array($programme)) { continue; }
+            $advertiser_id = absint($programme['id'] ?? 0);
+            $relationship = sanitize_key((string) ($programme['relationship'] ?? 'joined'));
+            if ($advertiser_id <= 0 || $relationship !== 'joined') { continue; }
+            $entry = is_array($records[(string) $advertiser_id] ?? null)
+                ? $this->awin_programme_gate_entry($advertiser_id)
+                : array('status'=>'pending','portal_key'=>'');
+            $status = sanitize_key((string) ($entry['status'] ?? 'pending'));
+            if (in_array($status, array('other_portal','test_blocked','excluded'), true)) { continue; }
+            if ($status === 'allow_local') {
+                $bound_portal = sanitize_key((string) ($entry['portal_key'] ?? ''));
+                if ($bound_portal === '' || !hash_equals($bound_portal, $portal_key)) { continue; }
+            }
             $out[] = $advertiser_id;
         }
         sort($out, SORT_NUMERIC);
@@ -215,14 +229,14 @@ trait PPAR_Awin_Programme_Gate_Trait {
                 'updated_by' => function_exists('get_current_user_id') ? absint(get_current_user_id()) : 0,
             );
             if (method_exists($this, 'control_set_decision') && $local_portal_key !== '') {
-                $control_status = $status === 'allow_local' ? 'approved' : ($status === 'pending' ? 'review' : 'veto');
+                $control_status = $status === 'allow_local' ? 'approved' : ($status === 'pending' ? 'automatic' : 'veto');
                 $control_reason = 'Awin-Eingangsweiche: ' . (string) ($this->awin_programme_gate_statuses()[$status] ?? 'Nicht freigegeben') . '.';
                 $this->control_set_decision($local_portal_key, 'partner', 'awin:' . $advertiser_id, $control_status, $control_reason, array('provider'=>'awin','partner_external_id'=>(string) $advertiser_id), 'partner_decision');
             }
-            if ($status === 'allow_local' && $portal_key !== '') {
+            if (in_array($status, array('pending','allow_local'), true)) {
                 $active++;
             } else {
-                $label = $this->awin_programme_gate_statuses()[$status] ?? 'Nicht freigegeben';
+                $label = $this->awin_programme_gate_statuses()[$status] ?? 'Gesperrt';
                 $this->awin_programme_gate_deactivate_partner($advertiser_id, 'Awin-Eingangsweiche: ' . $label . '.');
             }
         }
@@ -253,10 +267,10 @@ trait PPAR_Awin_Programme_Gate_Trait {
         $portal_label = get_bloginfo('name') ?: 'dieses Portal';
         ?>
         <section class="ppar-v240-card" style="margin-top:20px">
-            <h2>Awin-Partnerfreigabe (Eingangsweiche)</h2>
-            <p><strong>Positivliste:</strong> Nur Partner mit der Auswahl „Für dieses Portal aktiv“ dürfen Angebote, Produktfeeds oder Werbemittel automatisiert weiterverarbeiten. Alle neuen Partner stehen zunächst auf „Nicht freigegeben“.</p>
+            <h2>Awin-Partnersteuerung</h2>
+            <p><strong>Automatik ist Standard:</strong> Neu beigetretene, aktuell als joined bestätigte Partner laufen automatisch mit. Hier sind nur manuelle Sonderentscheidungen nötig: fest zuordnen oder bewusst sperren. Manuelle Sperren bleiben stärker als die Automatik.</p>
             <?php if (sanitize_key((string) ($_GET['ppar_awin_gate'] ?? '')) === 'saved') : ?>
-                <div class="notice notice-success inline"><p>Awin-Partnerfreigaben gespeichert. Für <?php echo absint($_GET['ppar_awin_gate_active'] ?? 0); ?> Partner ist <?php echo esc_html($portal_label); ?> freigegeben.</p></div>
+                <div class="notice notice-success inline"><p>Awin-Partnerfreigaben gespeichert. <?php echo absint($_GET['ppar_awin_gate_active'] ?? 0); ?> aktuell joined Partner sind für Automatik bzw. feste lokale Zuordnung aktiv.</p></div>
             <?php endif; ?>
             <?php if (!$joined) : ?>
                 <p>Keine aktuell verbundenen Awin-Programme vorhanden. Zuerst „Speichern &amp; synchronisieren“ ausführen.</p>
