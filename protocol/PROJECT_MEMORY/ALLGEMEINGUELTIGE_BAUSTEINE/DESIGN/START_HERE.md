@@ -1,5 +1,19 @@
 # ALLGEMEINGÜLTIGER BAUSTEIN – DESIGN
 
+<!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
+
+## HARD RULE – EINE CURRENT-AUTORITÄT
+
+Diese Tür ist **nur Navigation**.
+
+Pflichtweg:
+`START_HERE → protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION`.
+
+Eine Ausführungsfläche/Hobbyraum ist niemals Current-Autorität.
+Bei frischer unveränderter Bindung: keine Vollrekonstruktion.
+Bei Änderung: nur Delta prüfen.
+
+
 STAND: 2026-09-15
 STATUS: ALLGEMEINGÜLTIG / V2.2.41 / CONTRACT V104
 
