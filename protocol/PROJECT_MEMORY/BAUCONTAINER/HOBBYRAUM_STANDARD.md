@@ -7,6 +7,8 @@ STATUS: VERBINDLICH
 
 Ein Hobbyraum ist eine **abgeleitete technische Ausführungsfläche** eines Büros.
 
+**HARD RULE – TEMPORÄRE NUTZUNG:** Ein Hobbyraum wird immer nur für die Dauer einer konkreten Arbeit genutzt. Er ist kein dauerhafter Speicher für Fachstand, Entscheidungen oder NEXT ACTION. Nach Abschluss/Rückgabe wird die Arbeitsbindung beendet; dauerhafte Wahrheit bleibt ausschließlich in den zuständigen Current-/Protokoll-/Fachquellen.
+
 Er verhindert parallele Reparaturwege, ist aber **keine Current-Autorität**.
 Aktueller Status, Blocker und NEXT ACTION kommen ausschließlich aus der im `AUTORITAETSPLAN.json` benannten Current-Autorität.
 
