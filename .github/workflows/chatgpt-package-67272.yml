@@ -1,0 +1,47 @@
+name: ChatGPT Package Affiliate 6.72.72
+on:
+  push:
+    branches:
+      - chatgpt-package-67272
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact package source
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q "Version: 6.72.72" pferdeportal-affiliate-router.php
+          grep -q "const VERSION = '6.72.72';" pferdeportal-affiliate-router.php
+          test "$(find assets includes -type f | wc -l)" -eq 24
+          test -f pferdeportal-affiliate-router.php
+          test -f readme.txt
+          find . -maxdepth 2 -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Build installable WordPress ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build
+          mkdir -p build/affiliate-portal-router
+          cp -a assets includes pferdeportal-affiliate-router.php readme.txt build/affiliate-portal-router/
+          test "$(find build/affiliate-portal-router -type f | wc -l)" -eq 26
+          cd build
+          zip -q -r ../AFFILIATE_ZENTRALE_V6.72.72.zip affiliate-portal-router
+          cd ..
+          unzip -t AFFILIATE_ZENTRALE_V6.72.72.zip
+          sha256sum AFFILIATE_ZENTRALE_V6.72.72.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-zentrale-v6.72.72
+          path: AFFILIATE_ZENTRALE_V6.72.72.zip
+          if-no-files-found: error
+          compression-level: 0
