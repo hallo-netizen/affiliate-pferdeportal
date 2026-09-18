@@ -10,6 +10,8 @@ REPO = Path(__file__).resolve().parent.parent
 CHAT_PATH = REPO / "control/startmaster0107/chat_delivery_payload.py"
 FINAL_PATH = REPO / "control/startmaster0107/GITHUB_FINAL_RELEASE.py"
 STEP107008 = REPO / "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json"
+ENDSTEMPEL_GATE = REPO / "control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py"
+ENDSTEMPEL_WORKFLOW = REPO / ".github/workflows/pferde-atelier-endstempel.yml"
 
 
 def load_module(path: Path, name: str):
@@ -179,6 +181,19 @@ def contract_source_guards() -> None:
     if "article_count=7" in step_text or "sieben finalen Artikel" in step_text or "sieben Artikel" in step_text:
         raise AssertionError("STEP107008_FIXED_SEVEN_STILL_ACTIVE")
 
+    gate_text = ENDSTEMPEL_GATE.read_text(encoding="utf-8")
+    workflow_text = ENDSTEMPEL_WORKFLOW.read_text(encoding="utf-8")
+    forbidden = (
+        "len(articles) != 7",
+        '"article_count": 7',
+        "req.get('article_count')!=7",
+        "m.get('article_count')!=7",
+        "len(m.get('articles') or [])!=7",
+    )
+    for token in forbidden:
+        if token in gate_text or token in workflow_text:
+            raise AssertionError("DOWNSTREAM_FIXED_SEVEN_STILL_ACTIVE:" + token)
+
     final_text = FINAL_PATH.read_text(encoding="utf-8")
     if "IMPORT_ENVELOPE_NAME" in final_text and "IMPORT_ENVELOPE_NAME =" not in final_text:
         raise AssertionError("GITHUB_FINAL_IMPORT_ENVELOPE_NAME_UNDEFINED")
@@ -191,10 +206,11 @@ def main() -> int:
     exercise_count(1)
     exercise_count(3)
     exercise_count(25)
+    exercise_count(1000)
     negative_source_count_mismatch()
     negative_zero_count()
     print("SYSTEM4A_DOWNSTREAM_1N_CONTRACT_PROBE_OK")
-    print("POSITIVE_COUNTS=1,3,25")
+    print("POSITIVE_COUNTS=1,3,25,1000")
     print("NEGATIVE_COUNT_MISMATCH=BLOCKED")
     print("NEGATIVE_ZERO_COUNT=BLOCKED")
     return 0

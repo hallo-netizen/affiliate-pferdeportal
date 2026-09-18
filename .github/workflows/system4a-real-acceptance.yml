@@ -44,6 +44,8 @@ jobs:
           echo 'SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_IN_TEST'
       - name: Inspect real WordPress importer contract
         run: python3 isolated_system4/wordpress_import_contract_probe.py | tee /tmp/system4-wordpress-import-contract.txt
+      - name: Prove downstream 1..N contract including ENDSTEMPEL
+        run: python3 isolated_system4/downstream_1n_contract_probe.py | tee /tmp/system4-downstream-1n-contract.txt
       - name: Prove production output quarantine positive and negative boundaries
         run: python3 control/output-quarantine/test_output_quarantine.py
       - name: Assert canonical downstream closeout contract
