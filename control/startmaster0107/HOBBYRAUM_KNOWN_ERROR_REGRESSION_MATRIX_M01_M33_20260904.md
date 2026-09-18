@@ -58,7 +58,7 @@ M13 – PPM content_hash: echter PPM-content_hash entspricht exakt finalem Artik
 
 M14 – Current Action Handoff: fachworkflow_handoff sichtbar und ausführbar.
 
-M15 – 107007 Handoff instruction: keine widersprüchliche Handoff-Sperre.
+M15 – 107007 System-4-Routenbindung nach Migration: Start ausschließlich über `system4_107007_batch.py start`, Fortschaltung ausschließlich über `advance`, Abschluss ausschließlich nach `batch_gate.py collect=SYSTEM4_BATCH_FULL_PASS_COLLECTED`; der frühere `codex_current_action.py`/`fachworkflow_proof_handoff.py`-Produktionsweg bleibt ausdrücklich nicht autorisiert. Kein Überspringen, kein freier Sprung, keine zweite Repair-Wahrheit, kein Publish.
 
 M16 – Signer boundary: Produktionssignierer außerhalb Codex-Worker; keine Signer-Credentials im Worker.
 
