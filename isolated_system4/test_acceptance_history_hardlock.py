@@ -185,6 +185,46 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
             exact = 'test_point0_v2.Point0V2Tests.' + method
             self.assertIn(exact, workflow, exact + ' missing from permanent Point0 matrix')
 
+    def test_m15_m38_are_bound_to_current_system4_route(self):
+        matrix = text(REPO / 'control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md')
+        for number in range(15, 39):
+            self.assertIn('M' + str(number).zfill(2), matrix)
+        step = json.loads(text(REPO / 'control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json'))['instruction']
+        for token in (
+            'parent_start.py start-current',
+            'machine_point0.py build-current-fetch',
+            'system4_107007_batch.py start',
+            'root_entry.py start-point0',
+            'SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY',
+            'Ein automatischer Aufruf von codex_entry.py worker-start ist verboten.',
+            'controller.py repair',
+            'controller.py fullcheck',
+            'batch_gate.py collect',
+        ):
+            self.assertIn(token, step)
+        self.assertIn('VERBOTEN für 107007-Repair', step)
+        batch = text(REPO / 'control/startmaster0107/system4_107007_batch.py')
+        self.assertIn('for key in ("title", "target_keyword", "category", "article_type", "plan_slot")', batch)
+        dispatch = text(HERE / 'worker_dispatch.py')
+        codex = text(HERE / 'codex_entry.py')
+        self.assertIn("wc.get('contract')!='SYSTEM4_CODEX_WORKER_DISPATCH_V2'", dispatch)
+        self.assertIn("worker_dispatch.verify_bundle", codex)
+        self.assertIn("'worker-start'", codex)
+        engine = text(HERE / 'production_checks_engine.py')
+        self.assertIn('PPM_VERSION = "6.7.9"', engine)
+        self.assertIn('PPM679_PACKAGE_HASH_MISMATCH', engine)
+        gate = text(HERE / 'batch_gate.py')
+        self.assertIn("state.get('article') != dict(expected_article)", gate)
+        self.assertIn('PRODUCTION_CONTEXT_HASH_INVALID', gate)
+        current = json.loads(text(REPO / 'control/startmaster0107/CURRENT_STATE.json'))
+        self.assertEqual(current['m38_product_fix']['plan_contract_version'], '4.0.0')
+        self.assertEqual(current['m38_product_fix']['required_plugin_version'], '6.7.9')
+        repair_test = subprocess.run(
+            ['python3', str(REPO / 'control/startmaster0107/test_system4_107007_repair_authority.py')],
+            cwd=REPO, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False,
+        )
+        self.assertEqual(repair_test.returncode, 0, repair_test.stdout + '\n' + repair_test.stderr)
+
     def test_historical_regression_contract_remains_bound(self):
         protocol = text(HERE / 'PROTOKOLL_TESTSTRECKE_V2_20260914.md')
         permanent = (
