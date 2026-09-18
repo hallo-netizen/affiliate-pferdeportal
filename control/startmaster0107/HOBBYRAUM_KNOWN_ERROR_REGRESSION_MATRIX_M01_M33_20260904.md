@@ -94,12 +94,10 @@ M27 – Current-main / production environment identity
 - Preflight muss den Produktionsumgebungsnachweis erzeugen; Runtime Entry darf ohne ihn nicht starten.
 - Kein git-fetch-/Neben-Worktree-Zwang im Worker als Produktionsvoraussetzung.
 
-M28 – Fachworkflow-Handoff request is materially executable
-- Historische Fehler: fehlende FACHWORKFLOW_HANDOFF_REQUEST.json, ITEM_RECEIPT_FIELDS_OR_CONTRACT_INVALID.
-- Current Action muss alle gebundenen Daten liefern, mit denen der aktuelle Worker die eine Handoff-Request wahrheitsgemäß materialisieren kann.
-- Dazu gehören aktueller fact_pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata.
-- Keine leere Pflichtstruktur; kein Fake-Receipt.
-
+M28 – Current System-4 execution entry is materially executable
+- Historische Fehlerklasse: gebundene Aktion war formal vorhanden, aber der Worker konnte den realen Produktionsweg nicht materialisieren.
+- Nach der System-4-Migration ist der verbindliche Weg: 107007-Batchadapter → system4_107007_entry.py → root_entry.py start-point0 → codex_entry.py worker-start.
+- Root-Entry- und Machine-Route-Lock-Tests müssen real PASS sein; der frühere FACHWORKFLOW_HANDOFF_REQUEST/fachworkflow_handoff.command-Weg darf in 107007 nicht erneut autorisiert werden.
 M29 – Release metadata current-batch identity
 - Historischer Fehler: RELEASE_METADATA_INVALID.
 - workflow_release_metadata muss exakt an aktuellen runtime batch_sha256 und aktuelle Artikelanzahl gebunden sein.
