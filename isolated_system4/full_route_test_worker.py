@@ -11,13 +11,13 @@ FORCE_REPAIR_INDEX_ENV='SYSTEM4_TEST_FORCE_REPAIR_INDEX'
 FORCE_BATCH_REPETITION_COUNT_ENV='SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT'
 REPO=Path(__file__).resolve().parent.parent
 BATCH_REPEAT_SENTENCES=(
-    'Diese Prüfung verwendet ausschließlich vorhandene Quellen und ergänzt keine neuen fachlichen Angaben.',
-    'Die Bewertung stützt sich auf vorhandene Belege und fügt keine weiteren Annahmen hinzu.',
-    'Jede Entscheidung folgt den dokumentierten Quellen und bleibt innerhalb der bereits belegten Aussagen.',
-    'Die Darstellung nutzt bestätigte Inhalte und lässt zusätzliche unbelegte Behauptungen vollständig weg.',
-    'Für die Bewertung werden nur vorhandene Belege verwendet; zusätzliche sachliche Aussagen kommen nicht hinzu.',
-    'Die Auswahl wird nur anhand dokumentierter Kriterien beschrieben und nicht um neue Informationen ergänzt.',
-    'Alle Hinweise bleiben bei den bestätigten Quellen und verändern keine bereits dokumentierten Tatsachen.',
+    'Diese Prüfung nutzt vorhandene Quellen und ergänzt keine neuen Angaben.',
+    'Die Bewertung folgt vorhandenen Belegen und vermeidet jede neue Annahme.',
+    'Jede Entscheidung bleibt innerhalb der bereits dokumentierten Aussagen und Quellen.',
+    'Die Darstellung verwendet bestätigte Inhalte und lässt unbelegte Behauptungen weg.',
+    'Für diese Bewertung werden ausschließlich vorhandene Belege ohne Erweiterung verwendet.',
+    'Die Auswahl folgt dokumentierten Kriterien und ergänzt keine neuen Informationen.',
+    'Alle Hinweise bleiben bei bestätigten Quellen und verändern keine Tatsachen.',
 )
 BATCH_REPEAT_ORDINALS=('ersten','zweiten','dritten','vierten','fünften','sechsten')
 BATCH_REPEAT_SEPARATOR_TEMPLATES=(

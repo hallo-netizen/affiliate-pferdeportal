@@ -25,7 +25,7 @@ class ForcedBatchRepetitionPreflightTests(unittest.TestCase):
             content_guard.pairwise_shingle_jaccard(forced[left],forced[right])
             for left,right in itertools.combinations(range(4),2)
         ]
-        self.assertLess(max(pair_scores),content_guard.MAX_PAIRWISE_SHINGLE_JACCARD)
+        self.assertLess(max(pair_scores),0.10)
 
         bodies=[self._body(i) for i in range(4)]
         diversity=content_guard.validate_batch_distinctness(bodies)
