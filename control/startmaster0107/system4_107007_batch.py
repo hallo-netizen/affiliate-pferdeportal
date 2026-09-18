@@ -145,9 +145,10 @@ def _item_passed(batch_root: Path, index: int, item: dict) -> bool:
     return (
         state.get("phase") == "OUTPUT_GATE_REQUIRED"
         and checks.get("status") == "PASS"
-        and article.get("plan_slot") == item.get("plan_slot")
-        and article.get("canonical_article_id") == item.get("canonical_article_id")
-        and article.get("target_keyword") == item.get("target_keyword")
+        and all(
+            article.get(key) == item.get(key)
+            for key in ("title", "target_keyword", "category", "article_type", "plan_slot")
+        )
     )
 
 
