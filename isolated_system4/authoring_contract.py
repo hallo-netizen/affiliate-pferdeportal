@@ -7,6 +7,7 @@ import zipfile
 from pathlib import Path
 from typing import Any, Mapping
 
+import block_semantics
 import production_checks
 
 CONTRACT = 'SYSTEM4_AUTHORING_CONTRACT_V1'
@@ -111,6 +112,8 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
         raise AuthoringContractError('QUALITY_BINDING_HASH_INVALID')
     article_type=str(article.get('article_type') or '')
     static=_static_ppm_rules(package); structure=static['structure']; type_def=_type_definition(package,article_type)
+    try: semantic_binding=block_semantics.bind(structure,type_def)
+    except block_semantics.BlockSemanticError as exc: raise AuthoringContractError('BLOCK_SEMANTIC_AUTHORITY_INVALID:'+str(exc)) from exc
     marker=str(quality.get('internal_test_marker') or '').strip()
     marker_regex=str(structure.get('visible_test_marker_regex') or '')
     try: marker_valid=bool(marker and marker_regex and re.fullmatch(marker_regex,'['+marker+']'))
@@ -254,6 +257,7 @@ def build(repo: Path, state: Mapping[str,Any], fact_pack: Mapping[str,Any], plan
       'global_requirements':static['constants'],
       'structure_requirements':structure,
       'type_requirements':{k:type_def.get(k) for k in ('table','table_count_exact','table_fact_trace_required','required_link_roles','visible_links_exact','fact_trace_required','all_factual_blocks_require_trace','title_contract','required_blocks','required_lists','fact_trace_required_blocks','conclusion_min_ratio','type_meta_schema','structure_profile','purpose','search_intent')},
+      'block_semantics':semantic_binding,
       'bound_requirements':{'internal_test_marker':marker,'intent_terms':intent_terms,'faq_direct_answer':faq_answer,'table_value_statement':table_statement,'table_value_statement_minimum_words':table_min,'link_bindings':links,'required_link_roles':required_roles,'portal_link_registry_hash':registry_hash,'wordpress_category':dict(category),'type_bound_values':type_values,'allowed_fact_ids':allowed_fact_ids,'canonical_fact_ids':list(claim_map.keys()),'fact_authority':fact_authority,'source_trace_minimum':int(static['derived_binding_requirements']['source_trace_minimum']),'validation_contract_version':str(plan.get('validation_contract_version') or '')},
       'system4_guards':{'external_links_forbidden':True,'design':{'required_root_classes':['ppm-generated',_type_class(article_type)],'required_table_classes':['system-129-table','comparison-table'],'inline_style_forbidden':True,'active_html_forbidden':True,'beratung_only_h2_headings':article_type.casefold()=='beratung'}},
     }
