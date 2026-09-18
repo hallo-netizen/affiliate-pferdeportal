@@ -32,3 +32,68 @@ jobs:
           cat "$ROOT/tests/normal-draft-production/test-01-positive-1-to-4.php"
           echo '=== category-related current tests ==='
           grep -R -nE 'category|taxonomy|fallback|too.narrow' "$ROOT/tests" | grep -v '/v34-category-assignment/' | head -300
+
+      - name: Read authoritative conclusion and further-information structure from signed PPM
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, re, zipfile
+
+          p=Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
+          expected='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
+          actual=hashlib.sha256(p.read_bytes()).hexdigest()
+          assert actual==expected, (actual, expected)
+
+          needles=re.compile(r'conclusion|further_information|fazit|weiterf.{0,20}information|required_blocks|required_sections|reserved_headings|section_order|order', re.I)
+
+          def walk(value, path='$'):
+              if isinstance(value, dict):
+                  for k,v in value.items():
+                      here=f'{path}.{k}'
+                      if needles.search(str(k)) or (isinstance(v,str) and needles.search(v)):
+                          print('JSON_MATCH',here,'=',json.dumps(v,ensure_ascii=False,sort_keys=True))
+                      walk(v,here)
+              elif isinstance(value, list):
+                  for i,v in enumerate(value):
+                      walk(v,f'{path}[{i}]')
+
+          with zipfile.ZipFile(p) as z:
+              print('PPM_ZIP_SHA256',actual)
+              print('=== STRUCTURE CONTRACT ===')
+              for member in (
+                  'portal-production-machine/contracts/content-structure-language-gate-v2.json',
+                  'portal-production-machine/contracts/article-type-templates.json',
+                  'portal-production-machine/contracts/article-type-extension-manifest-v1.json',
+              ):
+                  print('---',member,'---')
+                  obj=json.loads(z.read(member).decode('utf-8'))
+                  walk(obj)
+
+              manifest=json.loads(z.read('portal-production-machine/contracts/article-type-extension-manifest-v1.json').decode('utf-8'))
+              extensions=manifest.get('extensions') if isinstance(manifest,dict) else {}
+              if isinstance(extensions,dict):
+                  for ext_name,ext in extensions.items():
+                      caps=ext.get('ppm_capabilities') if isinstance(ext,dict) else None
+                      rel=caps.get('type_definition_contract') if isinstance(caps,dict) else None
+                      if rel:
+                          member='portal-production-machine/'+str(rel)
+                          print('--- EXTENSION TYPE CONTRACT',ext_name,member,'---')
+                          obj=json.loads(z.read(member).decode('utf-8'))
+                          walk(obj)
+
+              print('=== PHP / TEST ENFORCEMENT MATCHES ===')
+              terms=re.compile(r'conclusion|further_information|fazit|weiterf.{0,20}information|REQUIRED_SECTION|SECTION_ORDER|heading', re.I)
+              for name in z.namelist():
+                  if not (name.endswith('.php') or name.endswith('.json')):
+                      continue
+                  try:
+                      lines=z.read(name).decode('utf-8').splitlines()
+                  except UnicodeDecodeError:
+                      continue
+                  hits=[(n,line) for n,line in enumerate(lines,1) if terms.search(line)]
+                  if hits:
+                      print('---',name,'---')
+                      for n,line in hits:
+                          print(f'{n}: {line}')
+          PY
