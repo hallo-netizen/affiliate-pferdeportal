@@ -1240,6 +1240,12 @@ trait PPAR_Automation_Suite_Trait {
             $message,
             $details
         );
+        $provider = sanitize_key((string) ($job['provider'] ?? ''));
+        if (in_array(sanitize_key((string) $status), array('success','partial'), true)
+            && $provider !== ''
+            && method_exists($this, 'partner_analytics_refresh_provider')) {
+            $this->partner_analytics_refresh_provider($provider);
+        }
     }
 
     private function automation_validate_awin_feed_url($url) {
