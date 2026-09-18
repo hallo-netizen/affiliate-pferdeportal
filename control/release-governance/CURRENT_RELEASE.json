@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 62,
+  "generation": 63,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "41ac835f136ddd26f5ebd938cdded0fafeefb66b07d5b3a49463b1fc932667ad",
+    "manifest_sha256": "af3e6ee9d09079b64013f988a241c60606a0cfcf196cd29e0ccc3764d3bef2e8",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "41ac835f136ddd26f5ebd938cdded0fafeefb66b07d5b3a49463b1fc932667ad",
+    "current_source_manifest_sha256": "af3e6ee9d09079b64013f988a241c60606a0cfcf196cd29e0ccc3764d3bef2e8",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "AUTOMATIC_CREATIVE_LIFECYCLE_AND_DYNAMIC_BANNER_COVERAGE_KISS",
+    "current_focus": "SHARED_OVERVIEW_BANNER_START_CATEGORY_PAGE_RESTORE",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md",
-    "current_focus_reason": "EXPLICIT_USER_DECISIONS_20260918_FULL_AUTOMATION_DYNAMIC_COVERAGE_NO_DUPLICATE_ARTICLE_BOTTOM_FALLBACK_PROVIDER_REPORTS_ONLY",
+    "current_focus_reason": "EXPLICIT_USER_REQUEST_20260918_RESTORE_KNOWN_PASS_PRINCIPLE_AND_MIRROR_ONE_SHARED_DESIGN_TO_START_CATEGORY_AND_PAGE",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -145,16 +145,39 @@
       "promotion_expiry": "PROVIDER_STATUS_OR_DATES_AUTHORITY_NO_OCR_DATE_GUESSING",
       "reevaluation": "RECHECK_AFFECTED_TARGETS_AFTER_RELEVANT_INVENTORY_CHANGE",
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
+    },
+    "overview_wide_banner_policy": {
+      "status": "BOUND_SOURCE_GATE_PASS_LIVE_OPEN",
+      "page_types": [
+        "STARTSEITE",
+        "KATEGORIEN_ALLE_EBENEN",
+        "PORTAL_SEITEN"
+      ],
+      "slots": [
+        "start_after_topics",
+        "hub_after_cards",
+        "product_after_category_tiles",
+        "category_recommendation"
+      ],
+      "renderer": "ONE_SHARED_WIDE_BANNER_RENDERER",
+      "technical_rule": "HORIZONTAL_RATIO_3_TO_12_PROPORTIONAL_NO_CROP_NO_DISTORTION_MAX_UPSCALE_10_PERCENT",
+      "visual_rule": "FRAMELESS_NO_CREATIVE_TITLE_NO_DESCRIPTION_NO_EXTRA_CTA_SMALL_AD_LABEL_BANNER_THEN_CENTRAL_DISCLOSURE",
+      "placeholder_policy": "NO_LEGACY_PLACEHOLDER_FOR_BOUND_WIDE_SLOTS",
+      "dynamic_coverage": "UNCHANGED",
+      "evidence_ref": "release/affiliate-zentrale/evidence/shared_overview_banner_source_gate_20260918.txt",
+      "source_manifest_sha256": "af3e6ee9d09079b64013f988a241c60606a0cfcf196cd29e0ccc3764d3bef2e8",
+      "source_gate": "21_OF_21_PASS",
+      "live_status": "OPEN"
     }
   },
   "execution_state": {
-    "state": "RUNNING_BOUND_CANONICAL_ROOTFIX",
-    "authorized_next_action": "COMPLETE_PROVIDER_ORIGINAL_REPORT_SYNC_ROOTFIX",
-    "bound_user_scope_action": "DIRECT_COMMITTED_SOURCE_ONLY; DYNAMIC_COVERAGE_BOUND; ARTICLE_BOTTOM_PRODUCT_BOXES_FIRST_ELSE_SECOND_DIFFERENT_BANNER_BOUND; ARTICLE_PLAN_SCHEMA_1.3_BOUND; PROVIDER_ORIGINAL_ANALYTICS_ONLY_NEXT; NO_INSTALL_NO_LIVE_TEST",
-    "completion_condition": "DIRECT_CURRENT_SOURCE_IMPLEMENTS_FULL_20260918_TARGET_THEN_SOURCE_MANIFEST_IS_REBOUND_AND_BOUND_POS_NEG_FULL_WORKFLOW_REGRESSION_FRESH_UNPACK_IDENTITY_MUTATION_GATES_PASS_BEFORE_ANY_INSTALLER",
-    "after_completion_action": "BUILD_EXACTLY_ONE_TEST_CANDIDATE_ONLY_WHEN_THE_BOUND_TECHNICAL_BLOCK_IS_GREEN_AND_A_CONCRETE_WORDPRESS_LIVE_TEST_IS_REQUIRED",
+    "state": "RUNNING_BOUND_RELEASE_GATES",
+    "authorized_next_action": "RUN_SHARED_OVERVIEW_BANNER_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "RESTORE_KNOWN_PASS_WIDE_BANNER_AND_MIRROR_TO_START_CATEGORY_PAGE; DIRECT_CURRENT_SOURCE_ONLY; NO_LEGACY_CARD; NO_INSTALL_BEFORE_GATES",
+    "completion_condition": "SHARED_OVERVIEW_BANNER_SOURCE_AND_MANIFEST_BOUND_THEN_RELEVANT_REGRESSION_IDENTITY_AND_PACKAGE_GATES_PASS_BEFORE_ONE_WORDPRESS_LIVE_TEST_CANDIDATE",
+    "after_completion_action": "BUILD_EXACTLY_ONE_TEST_CANDIDATE_FOR_WORDPRESS_LIVE_READBACK_OF_START_CATEGORY_AND_PAGE",
     "no_optional_detours": true,
-    "sequence": 11,
+    "sequence": 12,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -163,9 +186,9 @@
       "protocol/AFFILIATE_RELEASE_"
     ],
     "next_state_binding": {
-      "sequence": 12,
-      "state": "RUNNING_BOUND_RELEASE_GATES",
-      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+      "sequence": 13,
+      "state": "AWAITING_SHARED_OVERVIEW_BANNER_LIVE_READBACK",
+      "authorized_next_action": "INSTALL_ONE_TEST_CANDIDATE_AND_VERIFY_START_CATEGORY_PAGE",
       "authorized_change_prefixes": [
         "release/affiliate-zentrale/current/",
         "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -344,7 +367,7 @@
       "no_parallel_workstream": true
     },
     "canonical_current_source_drift": {
-      "status": "ROOTFIX_IN_PROGRESS",
+      "status": "RESOLVED_CURRENT_SOURCE_REBOUND",
       "blocker": "AFFILIATE_CANONICAL_CURRENT_SOURCE_DRIFT",
       "canonical_source_version": "6.72.19",
       "canonical_head_at_check": "9a952091fc8c529517644a4d75602f948b9bcfd1",
@@ -362,7 +385,13 @@
       },
       "dynamic_coverage_commit": "cf34cc9839d4538687b98cd7bc6f039780f59155",
       "article_bottom_no_duplicate_commit": "72c9b6fbd970b43cbbc4165bce3900be2fbbc659",
-      "article_schema_commit": "bcf7d131b2f93e6b8d9a47dc2f2eec67f0dd015c"
+      "article_schema_commit": "bcf7d131b2f93e6b8d9a47dc2f2eec67f0dd015c",
+      "current_manifest_sha256": "af3e6ee9d09079b64013f988a241c60606a0cfcf196cd29e0ccc3764d3bef2e8"
+    },
+    "provider_original_report_sync_followup": {
+      "status": "PENDING_RESUME_AFTER_EXPLICIT_OVERVIEW_BANNER_SCOPE",
+      "next_action": "COMPLETE_PROVIDER_ORIGINAL_REPORT_SYNC_ROOTFIX",
+      "no_scope_loss": true
     }
   },
   "branch_policy": {
@@ -709,7 +738,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "BOUND_TECHNICAL_ROOTFIX_20260918",
+    "current_milestone": "SHARED_OVERVIEW_BANNER_BOUND_RELEASE_GATES_20260918",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
