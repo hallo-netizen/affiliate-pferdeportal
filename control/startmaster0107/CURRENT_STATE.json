@@ -9,10 +9,10 @@
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
   "runtime_proof": {
-    "last_runtime_tested_head": "5f626267af2dcfd30bd81a129a790397a0d81b94",
-    "acceptance_run_id": 35320796418,
-    "acceptance_job_id": 105522614521,
-    "result": "SUCCESS_CURRENT_RUNTIME_HEAD",
+    "last_runtime_tested_head": "1b42543ed7bb36cb055da86ff58149a0494055f9",
+    "acceptance_run_id": 35323731944,
+    "acceptance_job_id": 105531863105,
+    "result": "SUCCESS_ON_ACCEPTED_RUNTIME_HEAD",
     "current_head_acceptance": "PASS",
     "current_head_ci_runs": 1
   },
@@ -94,9 +94,9 @@
       "real_lt68_preflight": "PASS",
       "real_ppm679_corridor": "PASS",
       "four_article_workshop_real_corridor": "PASS",
-      "full_workflow_acceptance_current_head": "PASS_RUN_35320796418_JOB_105522614521"
+      "full_workflow_acceptance_current_head": "PASS_RUN_35323731944_JOB_105531863105"
     },
-    "runtime_logic_head": "5f626267af2dcfd30bd81a129a790397a0d81b94"
+    "runtime_logic_head": "1b42543ed7bb36cb055da86ff58149a0494055f9"
   },
   "codex_policy": {
     "allowed": "REAL_BOUND_ARTICLE_PRODUCTION_ONLY_AFTER_EXPLICIT_USER_APPROVAL",
@@ -113,7 +113,7 @@
   "entry_for_continuation": {
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
-    "freshness_check": "Read PR #275 head. Compare all changes since runtime_logic_head_under_review. Documentation-only closeout commits do not change the runtime logic; any runtime change requires a new code/test review before continuing.",
+    "freshness_check": "Read PR #275 head. Runtime/test acceptance PASS is bound to 1b42543ed7bb36cb055da86ff58149a0494055f9 (Run 35323731944 / Job 105531863105). A later CURRENT_STATE/START_HERE/protocol-only closeout commit does not alter runtime logic. Any runtime, binding, test-worker or production-path change requires a new code/test review before continuing.",
     "next_action": "NO CODEX until explicit user approval. Global workshop acceptance is green on runtime head 5f626267af2dcfd30bd81a129a790397a0d81b94 and the 107007 launch/bundle predecessor hash cascade is repaired. Before any real bound article-production run, fresh-check PR #275 head plus launch, STEP_107007, CURRENT_STATE and START_HERE hashes. Only after explicit user approval may Codex execute the already bound 107007 real production run. publish_allowed remains false."
   },
   "mandatory_execution_path": [
@@ -140,5 +140,5 @@
     "next_action": "Do not use Codex until the user explicitly approves a real bound 107007 article-production run.",
     "return_path": "ERROR -> GLOBAL_WORKSHOP -> authoritative owner -> repair -> complete recheck -> normal route"
   },
-  "runtime_logic_head_under_review": "5f626267af2dcfd30bd81a129a790397a0d81b94"
+  "runtime_logic_head_under_review": "1b42543ed7bb36cb055da86ff58149a0494055f9"
 }
