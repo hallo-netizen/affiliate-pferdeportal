@@ -493,3 +493,14 @@ Danach: genau ein minimaler kanonischer Rootfix-Kandidat → vollständige POSIT
 
 Automatik-/Lifecycle-Normalbetrieb bleibt Ziel; manuelle Sperren/Fixierungen/Vetos müssen immer Vorrang behalten.
 
+
+
+## AFF-ERR-028 — Release-Guard-Vertragswerte in objective_control abgeschwächt
+
+**Datum / Befund:** 18.09.2026 / Rootfix-Start.
+
+**Symptom:** `CURRENT_RELEASE.json` enthielt für `microfix_policy`, `new_version_policy` und `investigation_policy` Lifecycle-spezifische Ersatztexte. Der unveränderliche `release_guard.py` akzeptiert jedoch nur seine exakten Vertragswerte und würde fail-closed mit `OBJECTIVE_CONTROL_WEAKENED:*` abbrechen.
+
+**Nicht wiederholen:** Unveränderliche Guard-Vertragswerte niemals für Meilenstein-/Scope-Texte umbenennen. Fachlicher Status gehört in `current_milestone`, `user_scope_lock`, `execution_state` und Scope-Dokumente.
+
+**Status:** FIX IN PROGRESS — exakte Guardwerte werden wiederhergestellt, danach Guard erneut geprüft.
