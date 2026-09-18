@@ -109,7 +109,7 @@ def m15():
         "M15_SYSTEM4_INSTRUCTION_MISSING",
     )
     expect_exc(
-        lambda:_m15_validate_instruction(text.replace("keine zweite Repair-Wahrheit","zweite Repair-Wahrheit erlaubt",1)),
+        lambda:_m15_validate_instruction(text.replace("Keine zweite Repair-Wahrheit","Zweite Repair-Wahrheit erlaubt",1)),
         "M15_SECOND_REPAIR_TRUTH_NOT_FORBIDDEN",
     )
 def _m16_validate_signer_boundary(runtime_src:str,finalizer_src:str,step_instruction:str)->None:
