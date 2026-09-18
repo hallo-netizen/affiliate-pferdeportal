@@ -1,5 +1,10 @@
 # CAMPUS-ARCHIV
 
+<!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
+
+> **Campusweite Ein-Wahrheit-Regel:** Bei jeder Frage nach aktuellem Stand, Blocker oder NEXT ACTION zuerst `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` verwenden und genau eine Current-Autorität auflösen. Diese Tür selbst ist keine Current-Wahrheit.
+
+
 STAND: 2026-09-05
 STATUS: AKTIV
 
@@ -42,9 +47,7 @@ Nur GRÜN darf bedeuten:
 
 Das Archiv ist ausschließlich historische Ablage und Belegraum.
 
-Für den **aktuellen** Stand immer zurück zum zuständigen:
-- Büro-`CURRENT_STATE.md`, oder
-- Modul-`CURRENT_STATE.md`.
+Für den **aktuellen** Stand immer über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` zur genau einen zuständigen Current-Autorität zurück.
 
 `ARCHIV/REGISTER.md` darf keine aktuelle Fachwahrheit ersetzen.
 Ein historischer Stand wird niemals allein durch „neuere Dateigröße/Version“ wieder aktuell.
