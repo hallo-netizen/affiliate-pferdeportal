@@ -171,7 +171,13 @@ def item(runroot:Path,i:int)->dict:
     if i<0 or i>=count: fail('ITEM_INDEX_INVALID')
     w=runroot/f'item-{i}'; generated=runroot/f'generated-{i}'
     if not (w/'state.json').is_file():
-        run([sys.executable,HERE/'root_entry.py','start-point0',runroot/'point0.json',w,str(i)],e); _worker_generate(e,w,generated,'gate')
+        root_cp=run([sys.executable,HERE/'root_entry.py','start-point0',runroot/'point0.json',w,str(i)],e)
+        if 'SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY' not in root_cp.stdout:
+            fail('ROOT_DISPATCH_MARKER_MISSING:'+root_cp.stdout.strip())
+        codex_cp=run([sys.executable,HERE/'codex_entry.py','worker-start',w],e)
+        if 'SYSTEM4_CODEX_ENTRY_PASS:RESEARCH_REQUIRED' not in codex_cp.stdout:
+            fail('CODEX_WORKER_START_MARKER_MISSING:'+codex_cp.stdout.strip())
+        _worker_generate(e,w,generated,'gate')
     repair_events=[]; return_events=[]; cycles=0
     while True:
         cycles+=1
@@ -262,7 +268,7 @@ def finalize(runroot:Path)->dict:
     if cp.returncode==0 or 'STATE_COUNT_MISMATCH' not in cp.stdout: fail('NEG_BATCH_COUNT_NOT_BLOCKED')
     bad=copy.deepcopy(payload); bad['articles'][0]['body']+='X'; badp=runroot/'bad-handoff.json'; writej(badp,bad); cp=run([sys.executable,HERE/'handoff_transport.py','validate',badp],e,check=False)
     if cp.returncode==0 or 'HANDOFF_BODY_SHA_MISMATCH' not in cp.stdout: fail('NEG_HANDOFF_TAMPER_NOT_BLOCKED')
-    proof={'status':'REMOTE_PASS_PENDING_WORDPRESS_AND_CHAT_DELIVERY','head':meta['head'],'manifest':meta['manifest'],'article_count':len(payload['articles']),'pre_point0_article_body_count':meta['pre_point0_article_body_count'],'chat_start_receipt_sha256':meta['chat_start_receipt_sha256'],'batch_sha256':payload['batch_sha256'],'batch_evidence_sha256':bout['batch_evidence_sha256'],'handoff_sha256':hashlib.sha256(canonical.read_bytes()).hexdigest(),'handoff_bytes':len(canonical.read_bytes()),'inline_byte_equal':True,'revisions':[s['revision'] for s in state_values],'lt':[s['checks']['production_evidence']['evidence']['languagetool']['status'] for s in state_values],'ppm':[s['checks']['production_evidence']['evidence']['ppm679']['status'] for s in state_values],**freshness}; writej(runroot/'LIVE_PARITY_V2_PROOF.json',proof)
+    proof={'status':'REMOTE_PASS_PENDING_WORDPRESS_AND_CHAT_DELIVERY','head':meta['head'],'manifest':meta['manifest'],'article_count':len(payload['articles']),'pre_point0_article_body_count':meta['pre_point0_article_body_count'],'chat_start_receipt_sha256':meta['chat_start_receipt_sha256'],'batch_sha256':payload['batch_sha256'],'batch_evidence_sha256':bout['batch_evidence_sha256'],'handoff_sha256':hashlib.sha256(canonical.read_bytes()).hexdigest(),'handoff_bytes':len(canonical.read_bytes()),'inline_byte_equal':True,'codex_worker_start_verified':True,'codex_worker_start_count':len(state_values),'revisions':[s['revision'] for s in state_values],'lt':[s['checks']['production_evidence']['evidence']['languagetool']['status'] for s in state_values],'ppm':[s['checks']['production_evidence']['evidence']['ppm679']['status'] for s in state_values],**freshness}; writej(runroot/'LIVE_PARITY_V2_PROOF.json',proof)
     out=os.environ.get('SYSTEM4_LIVE_PARITY_PROOF','').strip()
     if out: writej(Path(out),proof)
     export=os.environ.get('SYSTEM4_LIVE_PARITY_OUTPUT_DIR','').strip()

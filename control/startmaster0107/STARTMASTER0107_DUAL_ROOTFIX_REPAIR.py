@@ -251,14 +251,16 @@ def resolve_signer_cmd()->str:
     raise Blocked('HOST_SIDE_WORKFLOW_SUPERVISOR_SIGNER_ACCESS_MISSING')
 
 def finalize_after_107008(repo:Path,receipt_ref:str)->dict:
-    repo=Path(repo).resolve();r=load(safe(repo,receipt_ref));batch=str(r.get('batch_sha256') or '');outdir=repo/'.pferde-release'/batch;outdir.mkdir(parents=True,exist_ok=True);status=outdir/'PSERC_FINALIZATION_STATUS.json'
+    repo=Path(repo).resolve();r=load(safe(repo,receipt_ref));batch=str(r.get('batch_sha256') or '');release_id=str(r.get('release_identity_sha256') or '')
+    if not re.fullmatch(r'[0-9a-f]{64}',batch) or not re.fullmatch(r'[0-9a-f]{64}',release_id):raise Blocked('FINAL_RELEASE_IDENTITY_INVALID')
+    outdir=repo/'.pferde-release'/release_id;outdir.mkdir(parents=True,exist_ok=True);status=outdir/'PSERC_FINALIZATION_STATUS.json'
     try:
         ctx=context_from_release(repo,receipt_ref);cmd=resolve_signer_cmd()
         pkg=build_package(ctx,lambda h:call_signer(h,cmd,PROD_KEY_ID,PROD_KEY_SHA),PROD_KEY_ID,PROD_KEY_SHA,PROD_PUBLIC_B64,True)
         out=outdir/'GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json';dump(out,pkg);verify_package(repo,out)
         gate=module(repo/'control/startmaster0107/production-package-release/production_package_release_gate.py','dual_release_gate');gate.validate_package(out,repo,True)
-        z={'ok':True,'status':'PSERC_FINAL_PACKAGE_PASS','package_ref':str(out.relative_to(repo)),'package_sha256':fsha(out),'package_id':pkg['package_id'],'publish_allowed':False}
-    except Exception as e:z={'ok':False,'status':'PSERC_FINAL_PACKAGE_BLOCKED','reason':str(e),'publish_allowed':False}
+        z={'ok':True,'status':'PSERC_FINAL_PACKAGE_PASS','package_ref':str(out.relative_to(repo)),'package_sha256':fsha(out),'package_id':pkg['package_id'],'batch_sha256':batch,'release_identity_sha256':release_id,'publish_allowed':False}
+    except Exception as e:z={'ok':False,'status':'PSERC_FINAL_PACKAGE_BLOCKED','reason':str(e),'batch_sha256':batch,'release_identity_sha256':release_id,'publish_allowed':False}
     dump(status,z);return z
 
 def patch_current_action(repo:Path):
