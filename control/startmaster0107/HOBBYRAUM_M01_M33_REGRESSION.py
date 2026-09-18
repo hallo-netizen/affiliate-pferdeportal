@@ -57,17 +57,7 @@ def m02():
     s=STEP7.read_text(encoding="utf-8")
     must("ARTICLE_<plan_slot>.md" in s or "ARTICLE_" in s,"M02_UNIQUE_ARTICLE_BINDING_MISSING")
     must("STAGING_DESTINATION_COLLISION" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M02_COLLISION_GUARD_MISSING")
-def m03():
-    out=cmd("control/startmaster0107/test_system4_107008_handoff.py")
-    must("OK" in out or out.strip()=="", "M03_SYSTEM4_107008_CONTINUITY_TEST")
-    src=(REPO/"control/startmaster0107/test_system4_107008_handoff.py").read_text(encoding="utf-8")
-    for token in (
-        "test_prepare_creates_single_v2_binding_for_107008",
-        "test_incomplete_batch_cannot_enter_107008",
-        "test_binding_hash_tamper_blocks",
-        "test_start_runs_runtime_only_after_v2_binding",
-    ):
-        must(token in src,"M03_SYSTEM4_CONTINUITY_CASE_MISSING:"+token)
+def m03(): must("DUAL_ROOTFIX_POSITIVE_NEGATIVE_PASS" in cmd("control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py","selftest"),"M03_PREPARED_TEST")
 def m04(): must("def finalize_after_107008" in DUAL.read_text(encoding="utf-8") and "elif len(a)==2 and a[0]=='finalize'" in DUAL.read_text(encoding="utf-8"),"M04_FINALIZE_CLI")
 def m05(): must("durable_receipt_path" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M05_DURABLE_RECEIPT")
 def m06(): must("NEGATIVE_UNKNOWN_CONTRACT_BLOCKED" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M06_FAKE_CONTRACT")
@@ -83,35 +73,46 @@ def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/sta
 def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
 def _m15_validate_instruction(text):
     required=(
-        "system4_107007_batch.py start",
-        "system4_107007_batch.py advance",
-        "batch_gate.py collect",
-        "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
-        "control/single-door-boundary/codex_current_action.py",
-        "control/startmaster0107/fachworkflow_proof_handoff.py",
-        "nicht mehr autorisiert",
+        "fachworkflow_handoff.request_required_fields",
+        "fachworkflow_handoff.request_ref",
+        "fachworkflow_handoff.command",
+        "FACHWORKFLOW_PROOF_HANDOFF_PASS",
+        "submission_command",
     )
     for token in required:
-        must(token in text,"M15_SYSTEM4_INSTRUCTION_MISSING:"+token)
+        must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
     low=text.casefold()
-    must("kein überspringen" in low,"M15_SYSTEM4_SKIP_NOT_FORBIDDEN")
-    must("kein freier sprung" in low,"M15_SYSTEM4_FREE_JUMP_NOT_FORBIDDEN")
-    must("keine zweite repair-wahrheit" in low,"M15_SECOND_REPAIR_TRUTH_NOT_FORBIDDEN")
-    must("kein publish" in low,"M15_PUBLISH_NOT_FORBIDDEN")
-    must(text.index("system4_107007_batch.py start") < text.index("system4_107007_batch.py advance"),"M15_SYSTEM4_START_ADVANCE_ORDER")
-    must(text.index("system4_107007_batch.py advance") < text.index("batch_gate.py collect"),"M15_SYSTEM4_ADVANCE_COLLECT_ORDER")
+    must("keine capability-suche" in low,"M15_CAPABILITY_SEARCH_NOT_FORBIDDEN")
+    must(
+        "kein zweiter executor" in low or "kein separater fachworkflow-executor" in low,
+        "M15_SECOND_EXECUTOR_NOT_FORBIDDEN",
+    )
+    must("keine alternativroute" in low,"M15_ALTERNATIVE_ROUTE_NOT_FORBIDDEN")
+    i_request=text.index("fachworkflow_handoff.request_ref")
+    i_command=text.index("fachworkflow_handoff.command")
+    i_pass=text.index("FACHWORKFLOW_PROOF_HANDOFF_PASS")
+    i_submit=text.index("submission_command")
+    must(i_request < i_command < i_pass < i_submit,"M15_HANDOFF_ORDER_CONTRADICTION")
+    forbidden=(
+        "kein handoff-request",
+        "handoff-request nicht erzeugen",
+        "submission_command führt direkt",
+        "vorab-handoff durch den worker erforderlich",
+    )
+    for token in forbidden:
+        must(token not in low,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
 
 def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
-    expect_exc(
-        lambda:_m15_validate_instruction(text.replace("SYSTEM4_BATCH_FULL_PASS_COLLECTED","BROKEN_COLLECT_STATUS",1)),
-        "M15_SYSTEM4_INSTRUCTION_MISSING",
+    bad_order=text.replace(
+        "Danach ausschließlich fachworkflow_handoff.command ausführen.",
+        "submission_command ausführen; danach ausschließlich fachworkflow_handoff.command ausführen.",
+        1,
     )
-    expect_exc(
-        lambda:_m15_validate_instruction(text.replace("Keine zweite Repair-Wahrheit","Zweite Repair-Wahrheit erlaubt",1)),
-        "M15_SECOND_REPAIR_TRUTH_NOT_FORBIDDEN",
-    )
+    expect_exc(lambda:_m15_validate_instruction(bad_order),"M15_HANDOFF_ORDER_CONTRADICTION")
+    bad_direct=text+"\nKein Handoff-Request; submission_command führt direkt."
+    expect_exc(lambda:_m15_validate_instruction(bad_direct),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
 def _m16_validate_signer_boundary(runtime_src:str,finalizer_src:str,step_instruction:str)->None:
     for token in ("PSERC_SIGNER_CMD","ENDSTEMPEL_HSM_CMD","call_signer("):
         must(token not in runtime_src,"M16_SIGNER_EXPOSED_TO_RUNTIME:"+token)
@@ -234,49 +235,83 @@ def _real_bound_item(a):
     return {"canonical_article_id":rel["canonical_article_id"],"plan_slot":slot,"title":meta.get("title"),"target_keyword":meta.get("target_keyword"),"category":meta.get("category"),"article_type":meta.get("article_type")}
 
 def m26():
-    batch_gate=(REPO/"isolated_system4/batch_gate.py").read_text(encoding="utf-8")
-    engine=(REPO/"isolated_system4/controller_engine.py").read_text(encoding="utf-8")
-    transport=(REPO/"isolated_system4/handoff_transport.py").read_text(encoding="utf-8")
-    bridge=(REPO/"control/startmaster0107/system4_107008_handoff.py").read_text(encoding="utf-8")
-    for src,token in (
-        (batch_gate,"PRODUCTION_CONTEXT_INVALID"),
-        (batch_gate,"production_context"),
-        (engine,"PRODUCTION_CONTEXT_INTEGRITY_FAIL"),
-        (transport,"HANDOFF_PRODUCTION_CONTEXT_INVALID"),
-        (bridge,'"production_context": state.get("production_context")'),
-    ):
-        must(token in src,"M26_SYSTEM4_CONTEXT_BINDING_MISSING:"+token)
+    a=mod(CURRENT_ACTION,"m26_action")
+    smoke=a.selftest()
+    must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
+    must(smoke.get("current_codex_is_bound_fachworkflow_worker") is True,"M26_CURRENT_WORKER_NOT_BOUND")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item=_real_bound_item(a)
+    action=a.augment_current_action(REPO,base,item)
+    hb=action.get("fachworkflow_handoff")
+    must(isinstance(hb,dict),"M26_FACHWORKFLOW_HANDOFF_MISSING")
+    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M26_HANDOFF_REQUEST_CONTRACT_MISSING")
+    raw=hb.get("raw_context_binding")
+    must(isinstance(raw,dict),"M26_RAW_CONTEXT_BINDING_MISSING")
+    must(re.fullmatch(r"[0-9a-f]{64}",str(raw.get("source_snapshot_id") or "")) is not None,"M26_SOURCE_ID_BINDING_MISSING")
+    must("production_plan_header" not in raw,"M26_PLAN_HEADER_MUST_NOT_BE_H8_BOUND")
+    must(isinstance(raw.get("workflow_release_item"),dict),"M26_RELEASE_ITEM_BINDING_MISSING")
+    must(isinstance(raw.get("workflow_release_metadata"),dict),"M26_RELEASE_METADATA_BINDING_MISSING")
+    must(hb.get("worker_generated_raw_fields")==["fact_pack","production_plan_item","production_plan_header"],"M26_WORKER_RAW_FIELDS_INVALID")
     step=load(STEP7).get("instruction","")
-    must("NEW bleibt NEW; alte Artikel-/Recovery-Dateien sind keine Produktionsquelle" in step,"M26_OLD_CONTEXT_NOT_EXCLUDED")
-    must("system4_107007_batch.py" in step,"M26_CURRENT_SYSTEM4_ROUTE_NOT_BOUND")
+    for token in ("Recherche/fact_pack","production_plan-Kontext","workflow_release-Kontext","stage_proofs MUSS exakt [] sein"):
+        must(token in step,"M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:"+token)
+    must("alte Artikel-/Recovery-Dateien sind keine Produktionsquelle" in step,"M26_OLD_CONTEXT_NOT_EXCLUDED")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
     must("CODEX_ENVIRONMENT_PREFLIGHT_POSITIVE_NEGATIVE_PASS" in out,"M27_PREFLIGHT_POSITIVE")
     must("negative" in out.lower(),"M27_PREFLIGHT_NEGATIVE")
 
-def _m28_contract_check(step_instruction:str,entry_src:str)->None:
-    for token in ("system4_107007_batch.py start","system4_107007_batch.py advance","system4_107007_entry.py"):
-        must(token in step_instruction,"M28_SYSTEM4_EXECUTION_BINDING_MISSING:"+token)
-    for token in ("root_entry.py","start-point0","codex_entry.py","worker-start"):
-        must(token in entry_src,"M28_SYSTEM4_ENTRY_MISSING:"+token)
-    must("fachworkflow_handoff.command" not in step_instruction,"M28_LEGACY_HANDOFF_REAUTHORIZED")
+M28_REQUIRED_FIELDS=[
+    "contract","room_token","batch_sha256","canonical_article_id","plan_slot",
+    "allowed_output_root","item_receipt_ref","fachworkflow_pass_ref",
+    "contract_binding_ref","contract_binding_sha256","stage_proofs","fact_pack",
+    "production_plan_item","production_plan_header","workflow_release_item",
+    "workflow_release_metadata",
+]
+
+def _m28_contract_check(step_instruction:str,action_src:str)->None:
+    must("FACHWORKFLOW_HANDOFF_REQUEST.json" in step_instruction,"M28_REQUEST_GENERATION_INSTRUCTION_MISSING")
+    must("fachworkflow_handoff.request_ref" in step_instruction,"M28_REQUEST_REF_INSTRUCTION_MISSING")
+    must("fachworkflow_handoff.command" in step_instruction,"M28_HANDOFF_COMMAND_ORDER_MISSING")
+    must("request_required_fields" in action_src,"M28_REQUEST_SCHEMA_NOT_EXPOSED")
+    for field in M28_REQUIRED_FIELDS:
+        must(repr(field) in action_src or ('"'+field+'"') in action_src,"M28_REQUIRED_FIELD_NOT_BOUND:"+field)
+    must("kein handoff-request" not in step_instruction.casefold(),"M28_REQUEST_CONTRADICTED_BY_DIRECT_SUBMIT")
 
 def m28():
     step=load(STEP7).get("instruction","")
-    entry=(REPO/"control/startmaster0107/system4_107007_entry.py").read_text(encoding="utf-8")
-    _m28_contract_check(step,entry)
-    out=cmd("isolated_system4/test_root_entry.py")
-    must("OK" in out or out.strip()=="","M28_ROOT_ENTRY_TEST_NOT_PASS")
-    out=cmd("isolated_system4/test_machine_route_lock_contract.py")
-    must("OK" in out or out.strip()=="","M28_MACHINE_ROUTE_LOCK_NOT_PASS")
+    src=CURRENT_ACTION.read_text(encoding="utf-8")
+    _m28_contract_check(step,src)
+    a=mod(CURRENT_ACTION,"m28_action")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item=_real_bound_item(a)
+    out=a.augment_current_action(REPO,base,item)
+    hb=out.get("fachworkflow_handoff")
+    must(isinstance(hb,dict),"M28_HANDOFF_BINDING_MISSING")
+    must(hb.get("request_ref")==".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json","M28_REQUEST_REF_NOT_BOUND")
+    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M28_REQUEST_CONTRACT_NOT_BOUND")
+    must(hb.get("request_required_fields")==M28_REQUIRED_FIELDS,"M28_REQUEST_REQUIRED_FIELDS_MISMATCH")
 
 def m28_machine_proof_selftest():
-    good_step="system4_107007_batch.py start; system4_107007_batch.py advance; system4_107007_entry.py"
-    good_entry="root_entry.py start-point0 codex_entry.py worker-start"
-    _m28_contract_check(good_step,good_entry)
-    expect_exc(lambda:_m28_contract_check(good_step.replace("system4_107007_entry.py","BROKEN_ENTRY"),good_entry),"M28_SYSTEM4_EXECUTION_BINDING_MISSING")
-    expect_exc(lambda:_m28_contract_check(good_step,good_entry.replace("worker-start","BROKEN_WORKER")),"M28_SYSTEM4_ENTRY_MISSING")
+    good_step=(
+        "FACHWORKFLOW_HANDOFF_REQUEST.json unter fachworkflow_handoff.request_ref erzeugen; "
+        "danach fachworkflow_handoff.command ausführen."
+    )
+    good_src="request_required_fields="+repr(M28_REQUIRED_FIELDS)
+    _m28_contract_check(good_step,good_src)
+    expect_exc(
+        lambda:_m28_contract_check(good_step.replace("FACHWORKFLOW_HANDOFF_REQUEST.json","BROKEN_REQUEST.json"),good_src),
+        "M28_REQUEST_GENERATION_INSTRUCTION_MISSING",
+    )
+    expect_exc(
+        lambda:_m28_contract_check(good_step,good_src.replace("request_required_fields","removed_schema")),
+        "M28_REQUEST_SCHEMA_NOT_EXPOSED",
+    )
+    expect_exc(
+        lambda:_m28_contract_check(good_step+" kein Handoff-Request",good_src),
+        "M28_REQUEST_CONTRADICTED_BY_DIRECT_SUBMIT",
+    )
     print("HISTORY_MACHINE_PROOF_SELFTEST_PASS:M28",flush=True)
 
 def m29():
@@ -315,16 +350,19 @@ def m30():
         expect_exc(lambda:d.context_from_release(root,rp.name),"FINAL_CONTEXT_BATCH_MISMATCH")
 
 def m31():
+    a=mod(CURRENT_ACTION,"m31_action")
+    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
+    item=_real_bound_item(a)
+    out=a.augment_current_action(REPO,base,item)
+    hb=out.get("fachworkflow_handoff")
+    must(isinstance(hb,dict),"M31_BOUND_HANDOFF_MISSING")
+    must(hb.get("technical_guard_executes_domain_logic") is False,"M31_HANDOFF_DOMAIN_LOGIC_AUTHORITY")
+    bridge=json.loads(cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py"))
+    must(bridge.get("status")=="H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS","M31_CODEX_NATIVE_BOUND_ACTION_NOT_PASS")
+    must(bridge.get("custom_function_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
     step=load(STEP7).get("instruction","")
     must("execute_bound_action" not in step,"M31_EXECUTE_BOUND_ACTION_DEPENDENCY")
-    must("system4_107007_entry.py" in step,"M31_SYSTEM4_ENTRY_NOT_BOUND")
-    must("root_entry.py start-point0" in step,"M31_ROOT_ENTRY_NOT_BOUND")
-    must("codex_entry.py worker-start" in step,"M31_CODEX_WORKER_START_NOT_BOUND")
-    must("keinen legacy-handoff" in step.casefold(),"M31_LEGACY_HANDOFF_NOT_FORBIDDEN")
-    out=cmd("isolated_system4/test_machine_route_lock_contract.py")
-    must("OK" in out or out.strip()=="","M31_MACHINE_ROUTE_LOCK_NOT_PASS")
-    out=cmd("control/startmaster0107/test_system4_107007_repair_authority.py")
-    must("OK" in out or out.strip()=="","M31_REPAIR_AUTHORITY_NOT_PASS")
+    must("kein separater Fachworkflow-Executor" in step or "kein zweiter Executor" in step,"M31_SEPARATE_EXECUTOR_NOT_FORBIDDEN")
 
 def m32():
     h=mod(HANDOFF,"m32_handoff")
