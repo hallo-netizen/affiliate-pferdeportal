@@ -22,7 +22,7 @@ M01 – State-/Bundle-Hash chain: CURRENT_STATE -> 107007; START_HERE -> CURRENT
 
 M02 – Unique article files: 1..N ARTICLE_<plan_slot>.md entsprechend dem gebundenen Batch; keine ARTICLE.md-Kollision.
 
-M03 – PREPARED Persist/Restore: 107007 persistiert; 107008 restauriert; keine PREPARED_BINDING_MISSING-Schleife.
+M03 – Persist/Restore-Kontinuität: Der historische PREPARED_BINDING_MISSING-Fehler bleibt Regression. Im aktuellen System-4-Weg persistiert 107007 ausschließlich SYSTEM4_107007_BATCH_STATE.json samt batch_collect/Evidence; 107008 rekonstruiert daraus SYSTEM4_107008_V2_INPUT_BINDING_V1. Fehlende/abweichende Persistenz oder Evidence = BLOCKED; keine Rückkehr zur alten DUAL/codex_current_action-Route.
 
 M04 – Finalize CLI: finalize RECEIPT_REF real aufrufbar.
 
@@ -58,7 +58,7 @@ M13 – PPM content_hash: echter PPM-content_hash entspricht exakt finalem Artik
 
 M14 – Current Action Handoff: fachworkflow_handoff sichtbar und ausführbar.
 
-M15 – 107007 Handoff instruction: keine widersprüchliche Handoff-Sperre.
+M15 – 107007 Übergabeweg widerspruchsfrei: aktueller Weg ausschließlich Parent → machine_point0 build-current-fetch → 107007 batch start → root_entry start-point0 → Root-PASS/STOP. Kein automatischer Codex-Start. Worker-Anbindung erst nach Root; Repair ausschließlich System-4-Controller; Legacy codex_current_action/room_bridge/fachworkflow_handoff/DUAL-Routen bleiben ausdrücklich verboten.
 
 M16 – Signer boundary: Produktionssignierer außerhalb Codex-Worker; keine Signer-Credentials im Worker.
 
