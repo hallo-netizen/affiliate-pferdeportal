@@ -255,56 +255,28 @@ def m27():
     must("CODEX_ENVIRONMENT_PREFLIGHT_POSITIVE_NEGATIVE_PASS" in out,"M27_PREFLIGHT_POSITIVE")
     must("negative" in out.lower(),"M27_PREFLIGHT_NEGATIVE")
 
-M28_REQUIRED_FIELDS=[
-    "contract","room_token","batch_sha256","canonical_article_id","plan_slot",
-    "allowed_output_root","item_receipt_ref","fachworkflow_pass_ref",
-    "contract_binding_ref","contract_binding_sha256","stage_proofs","fact_pack",
-    "production_plan_item","production_plan_header","workflow_release_item",
-    "workflow_release_metadata",
-]
-
-def _m28_contract_check(step_instruction:str,action_src:str)->None:
-    must("FACHWORKFLOW_HANDOFF_REQUEST.json" in step_instruction,"M28_REQUEST_GENERATION_INSTRUCTION_MISSING")
-    must("fachworkflow_handoff.request_ref" in step_instruction,"M28_REQUEST_REF_INSTRUCTION_MISSING")
-    must("fachworkflow_handoff.command" in step_instruction,"M28_HANDOFF_COMMAND_ORDER_MISSING")
-    must("request_required_fields" in action_src,"M28_REQUEST_SCHEMA_NOT_EXPOSED")
-    for field in M28_REQUIRED_FIELDS:
-        must(repr(field) in action_src or ('"'+field+'"') in action_src,"M28_REQUIRED_FIELD_NOT_BOUND:"+field)
-    must("kein handoff-request" not in step_instruction.casefold(),"M28_REQUEST_CONTRADICTED_BY_DIRECT_SUBMIT")
+def _m28_contract_check(step_instruction:str,entry_src:str)->None:
+    for token in ("system4_107007_batch.py start","system4_107007_batch.py advance","system4_107007_entry.py"):
+        must(token in step_instruction,"M28_SYSTEM4_EXECUTION_BINDING_MISSING:"+token)
+    for token in ("root_entry.py","start-point0","codex_entry.py","worker-start"):
+        must(token in entry_src,"M28_SYSTEM4_ENTRY_MISSING:"+token)
+    must("fachworkflow_handoff.command" not in step_instruction,"M28_LEGACY_HANDOFF_REAUTHORIZED")
 
 def m28():
     step=load(STEP7).get("instruction","")
-    src=CURRENT_ACTION.read_text(encoding="utf-8")
-    _m28_contract_check(step,src)
-    a=mod(CURRENT_ACTION,"m28_action")
-    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item=_real_bound_item(a)
-    out=a.augment_current_action(REPO,base,item)
-    hb=out.get("fachworkflow_handoff")
-    must(isinstance(hb,dict),"M28_HANDOFF_BINDING_MISSING")
-    must(hb.get("request_ref")==".pferde-quarantine/test/FACHWORKFLOW_HANDOFF_REQUEST.json","M28_REQUEST_REF_NOT_BOUND")
-    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M28_REQUEST_CONTRACT_NOT_BOUND")
-    must(hb.get("request_required_fields")==M28_REQUIRED_FIELDS,"M28_REQUEST_REQUIRED_FIELDS_MISMATCH")
+    entry=(REPO/"control/startmaster0107/system4_107007_entry.py").read_text(encoding="utf-8")
+    _m28_contract_check(step,entry)
+    out=cmd("isolated_system4/test_root_entry.py")
+    must("OK" in out or out.strip()=="","M28_ROOT_ENTRY_TEST_NOT_PASS")
+    out=cmd("isolated_system4/test_machine_route_lock_contract.py")
+    must("OK" in out or out.strip()=="","M28_MACHINE_ROUTE_LOCK_NOT_PASS")
 
 def m28_machine_proof_selftest():
-    good_step=(
-        "FACHWORKFLOW_HANDOFF_REQUEST.json unter fachworkflow_handoff.request_ref erzeugen; "
-        "danach fachworkflow_handoff.command ausführen."
-    )
-    good_src="request_required_fields="+repr(M28_REQUIRED_FIELDS)
-    _m28_contract_check(good_step,good_src)
-    expect_exc(
-        lambda:_m28_contract_check(good_step.replace("FACHWORKFLOW_HANDOFF_REQUEST.json","BROKEN_REQUEST.json"),good_src),
-        "M28_REQUEST_GENERATION_INSTRUCTION_MISSING",
-    )
-    expect_exc(
-        lambda:_m28_contract_check(good_step,good_src.replace("request_required_fields","removed_schema")),
-        "M28_REQUEST_SCHEMA_NOT_EXPOSED",
-    )
-    expect_exc(
-        lambda:_m28_contract_check(good_step+" kein Handoff-Request",good_src),
-        "M28_REQUEST_CONTRADICTED_BY_DIRECT_SUBMIT",
-    )
+    good_step="system4_107007_batch.py start; system4_107007_batch.py advance; system4_107007_entry.py"
+    good_entry="root_entry.py start-point0 codex_entry.py worker-start"
+    _m28_contract_check(good_step,good_entry)
+    expect_exc(lambda:_m28_contract_check(good_step.replace("system4_107007_entry.py","BROKEN_ENTRY"),good_entry),"M28_SYSTEM4_EXECUTION_BINDING_MISSING")
+    expect_exc(lambda:_m28_contract_check(good_step,good_entry.replace("worker-start","BROKEN_WORKER")),"M28_SYSTEM4_ENTRY_MISSING")
     print("HISTORY_MACHINE_PROOF_SELFTEST_PASS:M28",flush=True)
 
 def m29():
