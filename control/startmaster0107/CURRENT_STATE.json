@@ -75,7 +75,8 @@
     "SYSTEM4_RELEASE_IDENTITY_FINAL_ENTRANCE_RUN_35361368650_PASS",
     "SYSTEM4_RELEASE_IDENTITY_PR315_MERGED_728BD721B3C9BA3A969E7C12E2BA62E0A61C1A64",
     "SYSTEM4_POST_MERGE_ENTRANCE_RUN_35364478599_PASS",
-    "IMMUTABLE_BASE_HARDLOCK_RESTORED_RULESET_21788951"
+    "IMMUTABLE_BASE_HARDLOCK_RESTORED_RULESET_21788951",
+    "SYSTEM4_FINAL_PRECODEX_FRESHNESS_HASH_POINT0_NEW_RECONFIRMED_D127671D9D92300AB12A73466A75E0C290C930E4"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -181,13 +182,13 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "PRECODEX_7ER_RELEASE_IDENTITY_FIX_INTEGRATED_HARDLOCK_RESTORED_AWAITING_CODEX_APPROVAL",
+  "current_work_status": "PRECODEX_READY_AWAITING_EXPLICIT_CODEX_APPROVAL",
   "current_execution_blocker": {
     "code": "EXPLICIT_CODEX_APPROVAL_MISSING",
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "The generation-based release identity fix is merged on main at 728bd721b3c9ba3a969e7c12e2ba62e0a61c1a64. Post-merge deterministic entrance run 35364478599 passed. Ruleset 21788951 has both required checks hardlock and hardlock-base restored with no bypass. The only remaining gate before the real complete 7-item Codex run is explicit user approval plus the mandatory final current-main freshness/hash/Point-0/NEW-source reconfirmation.",
+    "detail": "PR #315 is integrated. The immutable hardlock is restored. On current main d127671d9d92300ab12a73466a75e0c290c930e4, CURRENT_STARTMASTER/START_HERE/CURRENT_STATE were re-read, all bound SHA256 values matched, and Point-0 plus NEW-source protection code remained unchanged from the proven head. The only remaining gate before the real complete 7-item Codex run is explicit user approval.",
     "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
     "runtime_generation": 1,
     "release_identity_scheme": "BATCH_SHA256_PLUS_RUNTIME_GENERATION",
@@ -252,21 +253,21 @@
     "last_read_only_diagnostic_evidence": "PR107 issuecomment-5638208428",
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
-  "last_safe_main_sha": "728bd721b3c9ba3a969e7c12e2ba62e0a61c1a64",
-  "last_safe_change": "PR #315 is merged. Generation-based output identity is integrated, post-merge deterministic entrance run 35364478599 passed, and the immutable hardlock is restored with hardlock + hardlock-base and no bypass.",
+  "last_safe_main_sha": "d127671d9d92300ab12a73466a75e0c290c930e4",
+  "last_safe_change": "Final pre-Codex current-main freshness check passed: all bound hashes matched; Point-0 and NEW-source protections remain unchanged from the proven code; hardlock + hardlock-base remain active with no bypass.",
   "hobbyroom_status": "HISTORY_ONLY_PRODUCT_FIX_MOVED_TO_PR315",
   "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
   "hobbyroom_blocker": "HISTORY_ONLY_NO_PRODUCT_ACTION",
   "next_action": {
-    "goal": "Perform the final current-main freshness and protection check, then wait for explicit user approval before starting the real complete seven-item Codex run.",
+    "goal": "Wait for explicit user approval, then start only the real complete seven-item Codex run through the bound System-4 route.",
     "required_order": [
       "Keep the complete seven-item batch unchanged.",
-      "Re-read CURRENT_STARTMASTER, START_HERE and CURRENT_STATE from current main and verify all bound hashes.",
-      "Reconfirm Point-0 and NEW-source protections on the current merged code.",
       "Do not start Codex until the user explicitly approves the real complete seven-item run.",
       "After explicit approval, start only the complete seven-item run through the bound System-4 route.",
-      "Keep the final signed file durable and retrievable into the parent chat."
+      "Keep historical recovery article bodies forbidden as production input.",
+      "Keep the final signed file durable and retrievable into the parent chat.",
+      "Do not auto-publish."
     ],
     "forbidden": [
       "standalone real one-article batch",
@@ -278,7 +279,7 @@
       "auto-publish",
       "relaxing the immutable hardlock"
     ],
-    "proof_after_fix": "PR #315 merged; post-merge entrance run 35364478599 PASS; ruleset hardlock + hardlock-base restored. Final current-main freshness/hash/Point-0/NEW protection reconfirmation remains mandatory before Codex."
+    "proof_after_fix": "PR #315 merged; hardlock restored; post-merge entrance PASS; current-main SHA256 bindings PASS; Point-0 and NEW-source protections unchanged from proven head. Only explicit Codex approval remains."
   },
   "hobbyroom_pr": 307,
   "hobbyroom_head_sha": "3c2fdeb181f3dcd693695f28058c06db64e857a1",
