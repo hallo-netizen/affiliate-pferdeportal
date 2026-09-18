@@ -1,11 +1,11 @@
 {
   "contract": "AFFILIATE_HOBBYRAUM_V1",
-  "task_id": "category-banner-werbeplatz-canonical-precheck-20260917",
-  "goal": "Pruefe die kanonische Affiliate-Source gegen den gebundenen Kategorie-Querbanner-/Werbeplatzfilter-Task und liefere nur den exakten fehlenden Source-Delta; kein Build, kein Installer, keine Versionswahl.",
+  "task_id": "automatic-creative-lifecycle-canonical-precheck-20260918",
+  "goal": "Pruefe die kanonische Affiliate-Source read-only gegen den gebundenen 2026-09-18-Vertrag fuer vollautomatischen Creative-Lifecycle, Deduplizierung, manuelle Overrides, Hintergrundpruefung und Partner-Analytics-Wahrheit. Liefere nur den exakten fehlenden Source-Delta; kein Build, kein Installer, keine Versionswahl.",
   "image": "php:8.2-cli",
   "inputs": [
     {
-      "src": "../protocol/AFFILIATE_RELEASE_CATEGORY_BANNER_WERBEPLATZ_FILTER_TASK_20260917.md",
+      "src": "../protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md",
       "dest": "protocol/BOUND_TASK.md"
     },
     {
@@ -13,12 +13,16 @@
       "dest": "protocol/ERROR_REGISTER.md"
     },
     {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php",
-      "dest": "source/trait-ppar-output-objects.php"
+      "src": "../control/release-governance/CURRENT_RELEASE.json",
+      "dest": "protocol/CURRENT_RELEASE.json"
     },
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php",
       "dest": "source/trait-ppar-creative-library.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php",
+      "dest": "source/trait-ppar-network-sync.php"
     },
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php",
@@ -29,25 +33,30 @@
       "dest": "source/trait-ppar-automation-suite.php"
     },
     {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-housekeeping.php",
+      "dest": "source/trait-ppar-housekeeping.php"
+    },
+    {
+      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/includes/class-ppar-partner-analytics.php",
+      "dest": "source/class-ppar-partner-analytics.php"
+    },
+    {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
       "dest": "source/pferdeportal-affiliate-router.php"
     },
     {
       "src": "../release/affiliate-zentrale/current/affiliate-portal-router/assets/frontend.css",
       "dest": "source/frontend.css"
-    },
-    {
-      "src": "../release/affiliate-zentrale/current/affiliate-portal-router/assets/frontend.js",
-      "dest": "source/frontend.js"
     }
   ],
   "writable": [],
-  "command": "php -l source/trait-ppar-output-objects.php && php -l source/trait-ppar-creative-library.php && php -l source/trait-ppar-provider-registry.php && php -l source/trait-ppar-automation-suite.php && php -l source/pferdeportal-affiliate-router.php && printf 'CANONICAL_PRECHECK_ONLY\\n'",
+  "command": "php -l source/trait-ppar-creative-library.php && php -l source/trait-ppar-network-sync.php && php -l source/trait-ppar-provider-registry.php && php -l source/trait-ppar-automation-suite.php && php -l source/trait-ppar-housekeeping.php && php -l source/class-ppar-partner-analytics.php && php -l source/pferdeportal-affiliate-router.php && printf 'CANONICAL_LIFECYCLE_PRECHECK_ONLY\\n'",
   "tests": [
-    "Bound task is present and error-register precheck is mandatory",
-    "Canonical source is read-only in this precheck; no plugin artifact and no version number may be produced",
-    "Report whether category end-slot, provider-neutral category eligibility, +10 percent tolerance and Werbeplatz filter are present or missing",
-    "Do not claim acceptance; later implementation requires hard local positive, negative, full-workflow, regression, fresh-unpack and mutation tests"
+    "Bound 2026-09-18 lifecycle/KISS scope and current error-register precheck are present",
+    "Canonical source is read-only; no plugin artifact, version number or installer may be produced",
+    "Report exact missing delta for automatic intake, dedupe-by-identical-creative-within-format-family, manual overrides, 2-week sync, 3-week integrity check, expiry/unavailability handling, affected-target re-evaluation and partner analytics truth",
+    "Verify existing slot/format matching remains provider-neutral and uses real dimensions rather than provider format labels",
+    "Do not claim acceptance; later implementation requires hard local positive, negative, full-workflow, regression, fresh-unpack/source-identity and mutation/sabotage tests"
   ],
   "timeout_seconds": 600
 }
