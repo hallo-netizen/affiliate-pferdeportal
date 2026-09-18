@@ -234,27 +234,21 @@ def _real_bound_item(a):
     return {"canonical_article_id":rel["canonical_article_id"],"plan_slot":slot,"title":meta.get("title"),"target_keyword":meta.get("target_keyword"),"category":meta.get("category"),"article_type":meta.get("article_type")}
 
 def m26():
-    a=mod(CURRENT_ACTION,"m26_action")
-    smoke=a.selftest()
-    must(smoke.get("status")=="CODEX_CURRENT_ACTION_KISS_SELFTEST_PASS","M26_SELFTEST_NOT_PASS")
-    must(smoke.get("current_codex_is_bound_fachworkflow_worker") is True,"M26_CURRENT_WORKER_NOT_BOUND")
-    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item=_real_bound_item(a)
-    action=a.augment_current_action(REPO,base,item)
-    hb=action.get("fachworkflow_handoff")
-    must(isinstance(hb,dict),"M26_FACHWORKFLOW_HANDOFF_MISSING")
-    must(hb.get("request_contract")=="PFERDE_ATELIER_FACHWORKFLOW_HANDOFF_REQUEST_V1","M26_HANDOFF_REQUEST_CONTRACT_MISSING")
-    raw=hb.get("raw_context_binding")
-    must(isinstance(raw,dict),"M26_RAW_CONTEXT_BINDING_MISSING")
-    must(re.fullmatch(r"[0-9a-f]{64}",str(raw.get("source_snapshot_id") or "")) is not None,"M26_SOURCE_ID_BINDING_MISSING")
-    must("production_plan_header" not in raw,"M26_PLAN_HEADER_MUST_NOT_BE_H8_BOUND")
-    must(isinstance(raw.get("workflow_release_item"),dict),"M26_RELEASE_ITEM_BINDING_MISSING")
-    must(isinstance(raw.get("workflow_release_metadata"),dict),"M26_RELEASE_METADATA_BINDING_MISSING")
-    must(hb.get("worker_generated_raw_fields")==["fact_pack","production_plan_item","production_plan_header"],"M26_WORKER_RAW_FIELDS_INVALID")
+    batch_gate=(REPO/"isolated_system4/batch_gate.py").read_text(encoding="utf-8")
+    engine=(REPO/"isolated_system4/controller_engine.py").read_text(encoding="utf-8")
+    transport=(REPO/"isolated_system4/handoff_transport.py").read_text(encoding="utf-8")
+    bridge=(REPO/"control/startmaster0107/system4_107008_handoff.py").read_text(encoding="utf-8")
+    for src,token in (
+        (batch_gate,"PRODUCTION_CONTEXT_INVALID"),
+        (batch_gate,"production_context"),
+        (engine,"PRODUCTION_CONTEXT_INTEGRITY_FAIL"),
+        (transport,"HANDOFF_PRODUCTION_CONTEXT_INVALID"),
+        (bridge,'"production_context": state.get("production_context")'),
+    ):
+        must(token in src,"M26_SYSTEM4_CONTEXT_BINDING_MISSING:"+token)
     step=load(STEP7).get("instruction","")
-    for token in ("Recherche/fact_pack","production_plan-Kontext","workflow_release-Kontext","stage_proofs MUSS exakt [] sein"):
-        must(token in step,"M26_CURRENT_FACHWORKFLOW_CONTEXT_NOT_BOUND:"+token)
-    must("alte Artikel-/Recovery-Dateien sind keine Produktionsquelle" in step,"M26_OLD_CONTEXT_NOT_EXCLUDED")
+    must("NEW bleibt NEW; alte Artikel-/Recovery-Dateien sind keine Produktionsquelle" in step,"M26_OLD_CONTEXT_NOT_EXCLUDED")
+    must("system4_107007_batch.py" in step,"M26_CURRENT_SYSTEM4_ROUTE_NOT_BOUND")
 
 def m27():
     out=cmd("control/startmaster0107/codex-production-runtime/test_codex_environment_preflight.py")
