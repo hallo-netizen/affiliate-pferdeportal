@@ -94,6 +94,26 @@ def main() -> int:
     expected_contract = worker.expected_preflight_contract()
     check(expected_contract == producer.CONTRACT, "PRODUCER_CONSUMER_CONTRACT_NOT_SINGLE_TRUTH")
 
+    release_source = (HERE / "output_release_gate.py").read_text(encoding="utf-8")
+    check(
+        "PFERDE_ATELIER_CODEX_PRODUCTION_ENVIRONMENT_PREFLIGHT_V" not in release_source,
+        "SECOND_PREFLIGHT_CONTRACT_TRUTH_IN_OUTPUT_RELEASE_GATE",
+    )
+    release_contract = gate.expected_preflight_contract()
+    check(release_contract == producer.CONTRACT, "OUTPUT_RELEASE_PRODUCER_CONTRACT_NOT_SINGLE_TRUTH")
+
+    setup_source = (
+        HERE.parent / "startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh"
+    ).read_text(encoding="utf-8")
+    local_read = setup_source.index('LOCAL_SHA="$(git rev-parse HEAD)"')
+    conditional = setup_source.index('if [[ "$LOCAL_SHA" != "$MAIN_SHA" ]]; then')
+    fetch = setup_source.index('git fetch --no-tags "$REPO_URL"')
+    check(local_read < conditional < fetch, "CURRENT_MAIN_FETCH_SKIP_ORDER_INVALID")
+    check(
+        'git update-ref refs/pferde-authority/current-main "$MAIN_SHA"' in setup_source,
+        "CURRENT_MAIN_LOCAL_REF_MATERIALIZATION_MISSING",
+    )
+
     with tempfile.TemporaryDirectory() as td:
         base = Path(td)
         statep = base / "state.json"
