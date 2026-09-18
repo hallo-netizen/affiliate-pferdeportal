@@ -1,5 +1,10 @@
 # ZIELVERTRÄGE – CAMPUS-AKTENRAUM
 
+<!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
+
+> **Campusweite Ein-Wahrheit-Regel:** Bei jeder Frage nach aktuellem Stand, Blocker oder NEXT ACTION zuerst `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` verwenden und genau eine Current-Autorität auflösen. Diese Tür selbst ist keine Current-Wahrheit.
+
+
 STAND: 2026-09-05
 STATUS: AKTIV
 
