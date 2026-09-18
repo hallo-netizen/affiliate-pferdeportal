@@ -1,0 +1,127 @@
+{
+  "contract": "CAMPUS_SINGLE_TRUTH_ROUTING_V1",
+  "version": "1.0",
+  "effective_date": "2026-09-18",
+  "repository": "hallo-netizen/affiliate-pferdeportal",
+  "campus_branch": "hobbyroom/project-memory-campus-v1-20260905",
+  "rules": {
+    "exactly_one_current_authority_per_scope": true,
+    "navigation_files_may_not_store_dynamic_state": true,
+    "execution_surfaces_are_not_current_authority": true,
+    "handoffs_are_navigation_only": true,
+    "task_files_are_execution_only": true,
+    "evidence_files_are_proof_only": true,
+    "error_registers_are_error_authority_only": true,
+    "target_contracts_are_target_authority_only": true,
+    "no_full_rediscovery_if_current_binding_fresh": true,
+    "on_binding_change_inspect_delta_only": true
+  },
+  "scopes": [
+    {
+      "id": "PFERDE_ATELIER_TEXT",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_TEXTSYSTEM_4A",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXTSYSTEM_4A/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXTSYSTEM_4A/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXTSYSTEM_4A/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_PRODUKTVERGLEICH",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_WISSENSDATENBANK",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_DESIGN",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/DESIGN/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/DESIGN/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/DESIGN/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_BILD",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/BILD/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/BILD/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/BILD/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_AFFILIATE",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/AFFILIATE/START_HERE.md",
+      "current_authority": "control/release-governance/CURRENT_RELEASE.json",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/AFFILIATE/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_HIVEPRESS",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/HIVEPRESS/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/HIVEPRESS/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/HIVEPRESS/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_TECHNIK",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TECHNIK/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TECHNIK/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TECHNIK/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_PLUGINS",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_GEMEINSAM",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GEMEINSAM/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GEMEINSAM/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GEMEINSAM/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_PFERDERASSEN_LEGACY",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PFERDERASSEN/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/HOBBYRAUM.md"
+    },
+    {
+      "id": "PB_ONE_IDEENWERKSTATT",
+      "start_here": "protocol/PROJECT_MEMORY/PB_ONE/IDEENWERKSTATT/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PB_ONE/IDEENWERKSTATT/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PB_ONE/IDEENWERKSTATT/HOBBYRAUM.md"
+    },
+    {
+      "id": "PB_ONE_ENTWICKLUNGSRAUM",
+      "start_here": "protocol/PROJECT_MEMORY/PB_ONE/ENTWICKLUNGSRAUM/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PB_ONE/ENTWICKLUNGSRAUM/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PB_ONE/ENTWICKLUNGSRAUM/HOBBYRAUM.md"
+    },
+    {
+      "id": "PB_ONE_ANGEBOTE_FLYER",
+      "start_here": "protocol/PROJECT_MEMORY/PB_ONE/ANGEBOTE_FLYER/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PB_ONE/ANGEBOTE_FLYER/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PB_ONE/ANGEBOTE_FLYER/HOBBYRAUM.md"
+    },
+    {
+      "id": "GENERAL_DESIGN",
+      "start_here": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/HOBBYRAUM.md"
+    },
+    {
+      "id": "GENERAL_BILDZENTRALE",
+      "start_here": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/CURRENT_STATE.md"
+    },
+    {
+      "id": "GENERAL_AFFILIATE",
+      "start_here": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/CURRENT_STATE.md"
+    }
+  ]
+}
