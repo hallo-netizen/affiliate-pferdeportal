@@ -9,6 +9,7 @@ from real_route_test_support import valid_real_article
 RUN_NONCE_ENV='SYSTEM4_TEST_RUN_NONCE'
 FORCE_REPAIR_INDEX_ENV='SYSTEM4_TEST_FORCE_REPAIR_INDEX'
 FORCE_BATCH_REPETITION_COUNT_ENV='SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT'
+FORCE_BLOCK_SEMANTIC_ERROR_INDEX_ENV='SYSTEM4_TEST_FORCE_BLOCK_SEMANTIC_ERROR_INDEX'
 REPO=Path(__file__).resolve().parent.parent
 BATCH_REPEAT_SENTENCES=(
     'Diese Prüfung nutzt vorhandene Quellen und ergänzt keine neuen Angaben.',
@@ -53,6 +54,15 @@ def _fresh_variation_index(index:int)->int:
     digest=hashlib.sha256(nonce.encode('utf-8')).hexdigest()
     base=31+(int(digest[:8],16)%100003)
     return base+(index*5)
+
+def _force_wrong_conclusion_heading(body:str,index:int)->str:
+    if os.environ.get(FORCE_BLOCK_SEMANTIC_ERROR_INDEX_ENV,'').strip()!=str(index):
+        return body
+    pattern=re.compile(r'(<section data-block="conclusion">.*?<h2[^>]*>)(.*?)(</h2>)',re.S)
+    changed,count=pattern.subn(r'\1Weitere Aspekte zum Thema\3',body,count=1)
+    if count!=1 or changed==body:
+        raise RuntimeError('FORCED_BLOCK_SEMANTIC_CONCLUSION_HEADING_MISSING')
+    return changed
 
 def _force_one_repairable_typo(body:str,index:int)->str:
     if os.environ.get(FORCE_REPAIR_INDEX_ENV,'').strip()!=str(index): return body
@@ -145,7 +155,10 @@ def main(argv):
             print('FULL_ROUTE_TEST_WORKER_FAIL:DRAFT_PHASE_REQUIRED'); return 2
         try:
             variation_index=_fresh_variation_index(index)
-            body=_force_batch_repetition(_force_one_repairable_typo(_balance_conclusion(valid_real_article(state,variation_index),state),index),state,index)
+            body=_balance_conclusion(valid_real_article(state,variation_index),state)
+            body=_force_wrong_conclusion_heading(body,index)
+            body=_force_one_repairable_typo(body,index)
+            body=_force_batch_repetition(body,state,index)
         except RuntimeError as exc:
             print('FULL_ROUTE_TEST_WORKER_FAIL:'+str(exc)); return 2
         out.write_text(body,encoding='utf-8'); return 0

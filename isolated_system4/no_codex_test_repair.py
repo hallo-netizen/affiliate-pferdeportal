@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 import authoring_contract
+import block_semantics
 import production_checks
 import repair_router
 
@@ -295,6 +296,39 @@ def repair_conclusion_balance(workspace: Path) -> str:
     return repaired
 
 
+def repair_block_semantic_heading(workspace: Path) -> str:
+    state = _state(workspace)
+    body = str(state.get('draft_markdown') or '')
+    checks = state.get('checks') if isinstance(state.get('checks'), dict) else {}
+    findings = checks.get('findings') if isinstance(checks.get('findings'), list) else []
+    mismatch = next((row for row in findings if isinstance(row, dict) and row.get('error_code') == 'BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH'), None)
+    if not isinstance(mismatch, dict):
+        raise NoCodexRepairError('BLOCK_SEMANTIC_HEADING_MISMATCH_FINDING_MISSING')
+    field = str(mismatch.get('field_path') or mismatch.get('field') or '')
+    prefix = 'content.blocks.'
+    if not field.startswith(prefix):
+        raise NoCodexRepairError('BLOCK_SEMANTIC_FIELD_INVALID:' + field)
+    block_id = field[len(prefix):]
+    expected = mismatch.get('expected') if isinstance(mismatch.get('expected'), dict) else {}
+    markers = [str(v).strip() for v in expected.get('accepted_heading_markers', []) if isinstance(v, str) and str(v).strip()]
+    if not markers:
+        raise NoCodexRepairError('BLOCK_SEMANTIC_ACCEPTED_MARKERS_MISSING:' + block_id)
+    replacement = markers[1] if len(markers) > 1 else markers[0]
+    pattern = re.compile(r'(<section\b[^>]*data-block\s*=\s*(["\'])' + re.escape(block_id) + r'\2[^>]*>.*?<h2\b[^>]*>)(.*?)(</h2>)', re.S | re.I)
+    match = pattern.search(body)
+    if not match:
+        raise NoCodexRepairError('BLOCK_SEMANTIC_TARGET_HEADING_MISSING:' + block_id)
+    current = re.sub(r'(?is)<[^>]+>', ' ', match.group(3)).strip()
+    if block_semantics.normalize(current) == block_semantics.normalize(replacement):
+        replacement = markers[0]
+    repaired = body[:match.start(3)] + replacement + body[match.end(3):]
+    if repaired == body:
+        raise NoCodexRepairError('BLOCK_SEMANTIC_REPAIR_UNCHANGED:' + block_id)
+    authoring_contract.validate_candidate(repaired, state['authoring_contract'])
+    block_semantics.validate(repaired, state['authoring_contract'])
+    return repaired
+
+
 def candidate_for_current_failure(repo: Path, workspace: Path) -> str:
     state = _state(workspace)
     if state.get('phase') != 'REPAIR_REQUIRED':
@@ -314,4 +348,6 @@ def candidate_for_current_failure(repo: Path, workspace: Path) -> str:
         return repair_ppm_language_evidence(repo, workspace)
     if any(code == 'BLOCKED_WAVE2_CONCLUSION_BALANCE' for code in codes):
         return repair_conclusion_balance(workspace)
+    if checker == 'block_semantics' or any(code == 'BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH' for code in codes):
+        return repair_block_semantic_heading(workspace)
     raise NoCodexRepairError('NO_DETERMINISTIC_REPAIR_ADAPTER:' + checker + ':' + ','.join(codes))

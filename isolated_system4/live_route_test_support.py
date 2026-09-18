@@ -2,7 +2,7 @@ from __future__ import annotations
 import copy,hashlib,json,subprocess,sys
 from pathlib import Path
 HERE=Path(__file__).resolve().parent;REPO=HERE.parent;sys.path.insert(0,str(HERE))
-import authoring_contract,controller,point0_snapshot,root_entry,supervisor
+import authoring_contract,block_semantics,controller,point0_snapshot,root_entry,supervisor
 LIVE=HERE/'live_fixture/wordpress_snapshot.json'
 def h(text:str)->str:return hashlib.sha256(text.encode()).hexdigest()
 def canon(v)->bytes:return json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
@@ -55,7 +55,9 @@ def valid_article(state:dict,index:int,variant:str='basis')->str:
  if missing:raise AssertionError('BOUND_LINK_SECTION_MISSING:'+','.join(missing))
  suffix=('sicher auswählen','Material sinnvoll vergleichen','Nutzung praktisch einordnen','Pflege passend planen','Sicherheit gezielt prüfen','Entscheidung nachvollziehbar treffen','Eignung im Alltag bewerten','Anwendung sinnvoll abstimmen')
  for bi,name in enumerate(other):
-  parts=[f'<h2>{terms[bi%len(terms)]} {suffix[(bi+index)%len(suffix)]}</h2>'];section_links=[r for r in links if str(r.get('section_id') or '')==name]
+  semantic_heading=block_semantics.canonical_heading(c,name)
+  heading=semantic_heading or f'{terms[bi%len(terms)]} {suffix[(bi+index)%len(suffix)]}'
+  parts=[f'<h2>{heading}</h2>'];section_links=[r for r in links if str(r.get('section_id') or '')==name]
   for pi in range(paras_per):
    fact=allowed[(bi+pi)%len(allowed)];seed=10+bi*paras_per+pi;text=sent(fact,seed);extra=seed+11
    while len(text.split())<words_per:

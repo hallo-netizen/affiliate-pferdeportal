@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib,json,os,sys,tempfile,unittest
+import hashlib,json,os,re,sys,tempfile,unittest
 from pathlib import Path
 from unittest import mock
 
@@ -11,7 +11,7 @@ WORKER=[sys.executable,str(HERE/'full_route_test_worker.py')]
 
 @unittest.skipUnless(os.environ.get('SYSTEM4_REAL_TOOL_CORRIDOR')=='1','real tool corridor is an explicit CI stage')
 class FullRouteStartRealTests(unittest.TestCase):
-    def _run(self,items,prefix,expect_batch_workshop=False):
+    def _run(self,items,prefix,expect_batch_workshop=False,expect_block_workshop=False):
         with tempfile.TemporaryDirectory(prefix=prefix) as td:
             root=Path(td);snap,sources=write_start_fixture(root,items);out=root/'out'
             final=full_route_start.run(snap,sources,WORKER,out)
@@ -34,6 +34,21 @@ class FullRouteStartRealTests(unittest.TestCase):
             evidence_path=out/'batch/system4_batch_evidence.json'
             self.assertTrue(evidence_path.is_file())
             evidence=json.loads(evidence_path.read_text(encoding='utf-8'))
+            if expect_block_workshop:
+                request_path=out/'item-0/GLOBAL_WORKSHOP_REQUEST.json'
+                self.assertTrue(request_path.is_file())
+                request=json.loads(request_path.read_text(encoding='utf-8'))
+                self.assertTrue(request['repairable'])
+                self.assertEqual(request['origin_stage'],'DRAFT_BLOCK_SEMANTICS')
+                self.assertEqual(request['findings'][0]['error_code'],'BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH')
+                self.assertEqual(request['findings'][0]['field_path'],'content.blocks.conclusion')
+                self.assertTrue((out/'worker-draft-workshop-repair-0.html').is_file())
+                body=payload['articles'][0]['body']
+                conclusion=re.search(r'(?is)<section data-block="conclusion">.*?<h2[^>]*>(.*?)</h2>',body)
+                self.assertIsNotNone(conclusion)
+                repaired_heading=re.sub(r'(?is)<[^>]+>',' ',conclusion.group(1)).strip()
+                self.assertEqual(repaired_heading,'Schlussfolgerung')
+                self.assertGreaterEqual(payload['articles'][0]['revision_count'],2)
             if expect_batch_workshop:
                 request_path=out/'batch/GLOBAL_WORKSHOP_REQUEST.json'
                 if not request_path.is_file():
@@ -80,6 +95,18 @@ class FullRouteStartRealTests(unittest.TestCase):
             if old is None: os.environ.pop('SYSTEM4_TEST_FORCE_REPAIR_INDEX',None)
             else: os.environ['SYSTEM4_TEST_FORCE_REPAIR_INDEX']=old
         self.assertGreaterEqual(payload['articles'][0]['revision_count'],2)
+
+    def test_wrong_conclusion_heading_goes_workshop_worker_repair_fullcheck_pass(self):
+        old=os.environ.get('SYSTEM4_TEST_FORCE_BLOCK_SEMANTIC_ERROR_INDEX')
+        os.environ['SYSTEM4_TEST_FORCE_BLOCK_SEMANTIC_ERROR_INDEX']='0'
+        try:
+            payload=self._run(SINGLE_ITEMS,'s4-start-block-semantic-repair-',expect_block_workshop=True)
+        finally:
+            if old is None: os.environ.pop('SYSTEM4_TEST_FORCE_BLOCK_SEMANTIC_ERROR_INDEX',None)
+            else: os.environ['SYSTEM4_TEST_FORCE_BLOCK_SEMANTIC_ERROR_INDEX']=old
+        row=payload['articles'][0]
+        self.assertEqual(row['languagetool']['finding_count'],0)
+        self.assertEqual(row['ppm679']['fail_closed_aggregate_status'],'PASS')
 
     def test_four_article_batch_repetition_goes_workshop_repair_fullcheck_batch_pass(self):
         old=os.environ.get('SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT')

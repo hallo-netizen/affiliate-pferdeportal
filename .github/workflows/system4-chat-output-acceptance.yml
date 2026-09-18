@@ -256,6 +256,24 @@ jobs:
           SYSTEM4_REAL_TOOL_CORRIDOR: '1'
         run: python isolated_system4/test_real_lt_ppm_corridor.py -v
 
+      - name: Block semantics workshop real corridor preflight
+        id: block_semantics_real_preflight
+        shell: bash
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+        run: |
+          set -o pipefail
+          python isolated_system4/test_full_route_start_real.py FullRouteStartRealTests.test_wrong_conclusion_heading_goes_workshop_worker_repair_fullcheck_pass -v 2>&1 | tee /tmp/system4-block-semantics-real-preflight.log
+
+      - name: Preserve block semantics real preflight failure log
+        if: ${{ failure() && steps.block_semantics_real_preflight.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-block-semantics-real-preflight-failure-log
+          path: /tmp/system4-block-semantics-real-preflight.log
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Four article workshop real corridor preflight
         id: four_article_real_preflight
         shell: bash

@@ -65,6 +65,16 @@ def _continuation_result(workspace:Path)->dict:
             return result
     raise FullRouteError('START_REPAIR_CONTINUATION_EVIDENCE_MISSING')
 
+def _repair_current_draft_then_fullcheck(worker_command:list[str],workspace:Path,base:Path,index:int)->dict:
+    result=_continuation_result(workspace)
+    if result.get('status')!='SAME_ARTICLE_BODY_REPAIR' or result.get('owner')!='DRAFT_BODY' or result.get('target')!='SAME_ARTICLE_BODY':
+        raise FullRouteError('START_DRAFT_WORKSHOP_ROUTE_MISMATCH:'+str(index))
+    repair=base/f'worker-draft-workshop-repair-{index}.html'
+    _run_worker(worker_command,'repair',workspace,repair,index)
+    if controller.main(['controller.py','repair',str(workspace),str(repair)])!=0:
+        raise FullRouteError('START_DRAFT_WORKSHOP_REPAIR_FAILED:'+str(index))
+    return _fullcheck_with_existing_repair_loop(worker_command,workspace,base,index)
+
 def _fullcheck_with_existing_repair_loop(worker_command:list[str],workspace:Path,base:Path,index:int)->dict:
     for attempt in range(repair_router.MAX_MACHINE_REPAIR_CYCLES+1):
         rc=controller.main(['controller.py','fullcheck',str(workspace)])
@@ -170,8 +180,13 @@ def run(production_snapshot:Path, source_bundle:Path, worker_command:list[str], 
         if controller.main(['controller.py','facts',str(ws),str(facts)])!=0: raise FullRouteError('START_FACTS_FAILED:'+str(index))
         _machine_context(ws,output_root,index)
         draft=output_root/f'worker-draft-{index}.html'; _run_worker(worker_command,'draft',ws,draft,index)
-        if controller.main(['controller.py','draft',str(ws),str(draft)])!=0: raise FullRouteError('START_DRAFT_FAILED:'+str(index))
-        state=_fullcheck_with_existing_repair_loop(worker_command,ws,output_root,index)
+        draft_rc=controller.main(['controller.py','draft',str(ws),str(draft)])
+        if draft_rc==0:
+            state=_fullcheck_with_existing_repair_loop(worker_command,ws,output_root,index)
+        elif draft_rc==3:
+            state=_repair_current_draft_then_fullcheck(worker_command,ws,output_root,index)
+        else:
+            raise FullRouteError('START_DRAFT_FAILED:'+str(index)+':'+str(draft_rc))
         state_paths.append(ws/'state.json'); states.append(state)
     _batch_collect_with_workshop(worker_command,production_snapshot,state_paths,states,output_root)
     return _handoff_with_workshop(states,state_paths,output_root)
