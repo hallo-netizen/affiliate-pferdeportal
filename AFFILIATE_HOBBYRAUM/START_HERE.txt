@@ -3,29 +3,16 @@ AFFILIATE HOBBYRAUM V1
 DIESER RAUM GILT NUR FUER:
 AFFILIATE_ZENTRALE
 
-EINZIGER EINSTIEGSPUNKT:
-protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md
+STATUS:
+KEINE AKTIVE HOBBYRAUM-AUFGABE.
 
-PFLICHTWEG:
-START_HERE -> CURRENT MASTER -> FRISCHECHECK -> NEXT ACTION -> AFFILIATE_HOBBYRAUM/TASK.current.json
+EINZIGER VERBINDLICHER WEG:
+release/affiliate-zentrale/AGENTS.md
+-> control/release-governance/CURRENT_RELEASE.json
+-> vorgeschriebener Frischecheck
+-> execution_state.authorized_next_action
 
-Diese Datei ist nur Wegweiser.
-Sie enthaelt bewusst keinen eigenen Branch-/Head-/Live-/Test-/Blocker-Stand und keine eigene NEXT ACTION.
+Der Hobbyraum ist nur temporaere Ausfuehrungsflaeche.
+Er ist keine Current-Autoritaet und keine NEXT-ACTION-Quelle.
 
-FEHLERMATRIX:
-AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md
-
-RUNNER:
-python3 AFFILIATE_HOBBYRAUM/affiliate_hobbyraum.py AFFILIATE_HOBBYRAUM/TASK.current.json
-
-Vor JEDEM Lauf:
-1. aktuelle Fehlermatrix gegen die eine gebundene Aufgabe pruefen,
-2. bekannte Fehler/Umwege ausschliessen,
-3. erst dann die Aufgabe ausfuehren.
-
-Erlaubtes Ergebnis:
-PASS + Patch/Output
-oder
-BLOCKED + exakt ein belegter Fehler
-
-Der Hobbyraum ersetzt keinen WordPress-/MariaDB-Livebeleg.
+Ein TASK.current.json darf nur existieren, wenn CURRENT_RELEASE.json eine konkrete Hobbyraum-Ausfuehrung aktiv bindet.
