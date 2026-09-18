@@ -1,12 +1,19 @@
 # ALLGEMEINES DESIGN – HOBBYRAUM
 
+<!-- DERIVED_EXECUTION_SURFACE_V1 -->
+
+> **NICHT CURRENT-AUTORITATIV.** Nur abgeleitete Ausführungsfläche.  
+> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
+> Widerspruch oder stale Bindung = **BLOCKED**.
+
+
 STATUS: BLOCKED
 STAND: 2026-09-15
 
 ## AKTUELLE ARBEIT
 Ursachenklärung des LIVE-Ausfalls von Pferderassen + Glossar nach gemeinsamem Design-Änderungszug.
 
-## NEXT ACTION
+## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION
 - reale installierte Universal-Version feststellen;
 - reale installierte Pferde-Design-Version feststellen;
 - Kombination lokal reproduzieren;
