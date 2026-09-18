@@ -256,10 +256,41 @@ jobs:
           SYSTEM4_REAL_TOOL_CORRIDOR: '1'
         run: python isolated_system4/test_real_lt_ppm_corridor.py -v
 
-      - name: Existing one and three article real start-to-file corridor
+      - name: Four article workshop real corridor preflight
+        id: four_article_real_preflight
+        shell: bash
         env:
           SYSTEM4_REAL_TOOL_CORRIDOR: '1'
-        run: python isolated_system4/test_full_route_start_real.py -v
+        run: |
+          set -o pipefail
+          python isolated_system4/test_full_route_start_real.py FullRouteStartRealTests.test_four_article_batch_repetition_goes_workshop_repair_fullcheck_batch_pass -v 2>&1 | tee /tmp/system4-four-article-real-preflight.log
+
+      - name: Preserve four article real preflight failure log
+        if: ${{ failure() && steps.four_article_real_preflight.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-four-article-real-preflight-failure-log
+          path: /tmp/system4-four-article-real-preflight.log
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Existing one and three article real start-to-file corridor
+        id: full_route_real
+        shell: bash
+        env:
+          SYSTEM4_REAL_TOOL_CORRIDOR: '1'
+        run: |
+          set -o pipefail
+          python isolated_system4/test_full_route_start_real.py -v 2>&1 | tee /tmp/system4-full-route-real.log
+
+      - name: Preserve full route real failure log
+        if: ${{ failure() && steps.full_route_real.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system4-full-route-real-failure-log
+          path: /tmp/system4-full-route-real.log
+          if-no-files-found: error
+          retention-days: 7
 
       - name: CHAT START to real WordPress import artifact positive and negative WITHOUT Codex
         env:
