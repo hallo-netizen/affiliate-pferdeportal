@@ -66,7 +66,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "4ba0d0bb000b25af966aba6876395ccec7c1dd3447896435bc458ab08597d7b9",
+    "bundle_sha256": "a1f3e1aefd5760a76fb0334205a1101c6b632fa9e0d314c4570822b0fceb82f8",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -142,7 +142,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "4ba0d0bb000b25af966aba6876395ccec7c1dd3447896435bc458ab08597d7b9"
+    "bundle_sha256": "a1f3e1aefd5760a76fb0334205a1101c6b632fa9e0d314c4570822b0fceb82f8"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
