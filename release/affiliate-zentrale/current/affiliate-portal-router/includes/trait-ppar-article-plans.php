@@ -4,7 +4,6 @@ if (!defined('ABSPATH')) {
 }
 
 trait PPAR_Article_Plans_Trait {
-    private $article_plan_rendered_banner_creatives = array();
     private function article_plan_default() {
         return array(
             'schema' => self::ARTICLE_PLAN_SCHEMA,
@@ -17,11 +16,6 @@ trait PPAR_Article_Plans_Trait {
                 'campaign_post_id' => 0,
                 'reason' => '',
                 'anchor' => array(),
-            ),
-            'banner_2' => array(
-                'status' => 'none',
-                'campaign_post_id' => 0,
-                'reason' => '',
             ),
             'products' => array(
                 'status' => 'none',
@@ -499,8 +493,7 @@ trait PPAR_Article_Plans_Trait {
         }
         $selected_banner = null;
         foreach ($banner_candidates as $candidate) {
-            $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
-            if (!$this->article_plan_campaign_publicly_usable($campaign, 'post_inline_banner', 'banner')) {
+            if ((int) ($candidate['specificity'] ?? 0) < 200 || !$this->article_plan_program_verified((array) ($candidate['campaign'] ?? array()))) {
                 continue;
             }
             $selected_banner = $candidate;
@@ -508,9 +501,7 @@ trait PPAR_Article_Plans_Trait {
         }
         if (!$selected_banner) {
             $plan['banner']['status'] = 'none';
-            $plan['banner']['reason'] = !empty($assigned_banner['disabled'])
-                ? sanitize_text_field((string) ($assigned_banner['reason'] ?? 'Banner manuell deaktiviert.'))
-                : 'Kein technisch gültiger aktiver Banner verfügbar.';
+            $plan['banner']['reason'] = 'Kein ausreichend passendes Banner mit verifiziert aktivem Programmstatus.';
         } elseif (empty($anchor)) {
             $plan['banner'] = array(
                 'status' => 'pending_anchor',
@@ -619,42 +610,7 @@ trait PPAR_Article_Plans_Trait {
                 : 'Keine Produkte mit PASS-Qualität.';
         }
 
-        if (($plan['products']['status'] ?? '') !== 'ready'
-            && empty($assigned_banner['disabled'])
-            && in_array((string) ($plan['banner']['status'] ?? ''), array('ready','pending_anchor'), true)) {
-            $first_id = absint($plan['banner']['campaign_post_id'] ?? 0);
-            $first_campaign = $first_id > 0 ? $this->campaign_from_post(get_post($first_id)) : null;
-            $first_creative_key = method_exists($this, 'banner_distribution_creative_key') && is_array($first_campaign)
-                ? $this->banner_distribution_creative_key($first_campaign)
-                : 'post:' . $first_id;
-
-            $second_candidate = method_exists($this, 'select_campaign_for_slot_position')
-                ? $this->select_campaign_for_slot_position($context, 'post_inline_banner', 2)
-                : null;
-
-            if (is_array($second_candidate) && !empty($second_candidate['campaign'])) {
-                $second_campaign = (array) $second_candidate['campaign'];
-                $second_id = absint($second_campaign['post_id'] ?? 0);
-                $second_creative_key = method_exists($this, 'banner_distribution_creative_key')
-                    ? $this->banner_distribution_creative_key($second_campaign)
-                    : 'post:' . $second_id;
-                if ($second_id > 0
-                    && $second_id !== $first_id
-                    && $second_creative_key !== $first_creative_key
-                    && $this->article_plan_campaign_publicly_usable($second_campaign, 'post_inline_banner', 'banner')) {
-                    $plan['banner_2'] = array(
-                        'status' => 'ready',
-                        'campaign_post_id' => $second_id,
-                        'reason' => sanitize_text_field((string) ($second_candidate['reason'] ?? 'Unterer Ersatzbanner, weil keine Produktboxen verfügbar sind.')),
-                    );
-                }
-            }
-            if (($plan['banner_2']['status'] ?? 'none') !== 'ready') {
-                $plan['banner_2']['reason'] = 'Kein zweiter, vom Hauptbanner verschiedener technisch gültiger Banner verfügbar; Doppelung bleibt gesperrt.';
-            }
-        }
-
-        $has_banner = in_array((string) ($plan['banner']['status'] ?? ''), array('ready','pending_anchor'), true);
+        $has_banner = $plan['banner']['status'] === 'ready';
         $has_products = $plan['products']['status'] === 'ready';
         $plan['status'] = ($has_banner || $has_products) ? 'ready' : 'no_output';
         update_post_meta($post_id, self::ARTICLE_PLAN_META, $plan);
@@ -662,7 +618,6 @@ trait PPAR_Article_Plans_Trait {
             'reason' => sanitize_text_field((string) $reason),
             'status' => $plan['status'],
             'banner_status' => $plan['banner']['status'],
-            'banner_2_status' => $plan['banner_2']['status'],
             'product_count' => count($plan['products']['campaign_post_ids']),
         ));
         return $plan;
@@ -761,7 +716,11 @@ trait PPAR_Article_Plans_Trait {
             if (!$this->article_plan_campaign_publicly_usable($campaign, $slot_type, $creative_type)) {
                 continue;
             }
-            if ($creative_type !== 'banner') {
+            if ($creative_type === 'banner') {
+                if ((int) ($candidate['specificity'] ?? 0) < 200 || !$this->article_plan_program_verified($campaign)) {
+                    continue;
+                }
+            } else {
                 $report = $this->article_product_quality_report($campaign, $context, $candidate);
                 if (($report['overall'] ?? 'fail') !== 'pass') {
                     continue;
@@ -772,15 +731,9 @@ trait PPAR_Article_Plans_Trait {
         return null;
     }
 
-    private function article_plan_render_banner_campaign($post_id, $campaign_post_id, $admin_test = false, $instance = 1) {
+    private function article_plan_render_banner_campaign($post_id, $campaign_post_id, $admin_test = false) {
         $campaign_post_id = absint($campaign_post_id);
         $campaign = $this->campaign_from_post(get_post($campaign_post_id));
-        $creative_key = method_exists($this, 'banner_distribution_creative_key') && is_array($campaign)
-            ? $this->banner_distribution_creative_key($campaign)
-            : 'post:' . $campaign_post_id;
-        if (!$admin_test && $creative_key !== '' && !empty($this->article_plan_rendered_banner_creatives[$post_id][$creative_key])) {
-            return '';
-        }
         // Der Administrator-Test prüft ausschließlich Position und dynamische
         // Bannerfläche. Er darf nicht an Gruppen-Konvertierung, Aktivstatus oder
         // öffentlicher Auslieferungsfreigabe scheitern.
@@ -800,12 +753,6 @@ trait PPAR_Article_Plans_Trait {
                 return '';
             }
         }
-        $resolved_creative_key = method_exists($this, 'banner_distribution_creative_key') && is_array($campaign)
-            ? $this->banner_distribution_creative_key($campaign)
-            : 'post:' . absint($campaign['post_id'] ?? 0);
-        if (!$admin_test && $resolved_creative_key !== '' && !empty($this->article_plan_rendered_banner_creatives[$post_id][$resolved_creative_key])) {
-            return '';
-        }
         list($group, $banner) = $this->campaign_to_group_banner($campaign);
         if (!$group || !$banner) {
             return '';
@@ -816,13 +763,7 @@ trait PPAR_Article_Plans_Trait {
         if (trim((string) $html) === '') {
             return '';
         }
-        if (!$admin_test && $resolved_creative_key !== '') {
-            if (!isset($this->article_plan_rendered_banner_creatives[$post_id]) || !is_array($this->article_plan_rendered_banner_creatives[$post_id])) {
-                $this->article_plan_rendered_banner_creatives[$post_id] = array();
-            }
-            $this->article_plan_rendered_banner_creatives[$post_id][$resolved_creative_key] = true;
-        }
-        return '<div class="ppar-affiliate-slot ppar-slot-post_inline_banner ppar-article-inline-banner ppar-article-inline-banner-' . max(1, min(2, (int) $instance)) . '" data-ppar-slot="post_inline_banner">'
+        return '<div class="ppar-affiliate-slot ppar-slot-post_inline_banner ppar-article-inline-banner ppar-article-inline-banner-1" data-ppar-slot="post_inline_banner">'
             . $this->get_disclosure_html($post_id)
             . '<div class="ppar-affiliate-content">' . $html . '</div></div>';
     }
@@ -1009,7 +950,6 @@ trait PPAR_Article_Plans_Trait {
     }
 
     private function article_plan_apply_to_content($content, $post_id) {
-        $this->article_plan_rendered_banner_creatives[$post_id] = array();
         $preview = $this->article_preview_for_post($post_id);
         if ($preview) {
             $anchor = $this->article_plan_find_anchor((string) $content);
@@ -1032,12 +972,8 @@ trait PPAR_Article_Plans_Trait {
 
         $plan = $this->article_plan_get($post_id);
         if (!$this->article_plan_is_current($post_id, $plan)) {
-            $rebuilt = $this->article_plan_build($post_id, 'render_stale_schema_refresh');
-            if (is_wp_error($rebuilt)) {
-                $this->article_plan_log_event('render_skipped_stale', $post_id, array('status' => $plan['status'] ?? 'missing'));
-                return $content;
-            }
-            $plan = $rebuilt;
+            $this->article_plan_log_event('render_skipped_stale', $post_id, array('status' => $plan['status'] ?? 'missing'));
+            return $content;
         }
         if (in_array((string) ($plan['banner']['status'] ?? ''), array('ready', 'pending_anchor'), true)) {
             $anchor = (array) ($plan['banner']['anchor'] ?? array());
@@ -1053,35 +989,13 @@ trait PPAR_Article_Plans_Trait {
                     $this->article_plan_log_event('banner_anchor_resolved', $post_id, array('heading' => $anchor['heading'] ?? '', 'level' => $anchor['heading_level'] ?? 0));
                 }
             }
-            $main_banner_rendered_at_bottom = false;
-            $banner_html = $this->article_plan_render_banner_campaign($post_id, absint($plan['banner']['campaign_post_id'] ?? 0), false, 1);
+            $banner_html = $this->article_plan_render_banner_campaign($post_id, absint($plan['banner']['campaign_post_id'] ?? 0), false);
             if ($offset > 0 && $banner_html !== '') {
                 $content = $this->insert_at_offset($content, $banner_html, $offset);
-            } elseif ($banner_html !== '') {
-                $content .= "
-" . $banner_html;
-                $main_banner_rendered_at_bottom = true;
-                $this->article_plan_log_event('banner_anchor_fallback_bottom', $post_id, array('offset' => $offset));
             } else {
-                $this->article_plan_log_event('banner_render_skipped', $post_id, array('offset' => $offset, 'has_html' => false));
-            }
-        } else {
-            $main_banner_rendered_at_bottom = false;
-        }
-
-        if (!$main_banner_rendered_at_bottom
-            && ($plan['products']['status'] ?? '') !== 'ready'
-            && ($plan['banner_2']['status'] ?? '') === 'ready') {
-            $second_banner_id = absint($plan['banner_2']['campaign_post_id'] ?? 0);
-            if ($second_banner_id > 0) {
-                $banner_2_html = $this->article_plan_render_banner_campaign($post_id, $second_banner_id, false, 2);
-                if ($banner_2_html !== '') {
-                    $content .= "
-" . $banner_2_html;
-                }
+                $this->article_plan_log_event('banner_render_skipped', $post_id, array('offset' => $offset, 'has_html' => $banner_html !== ''));
             }
         }
-
         if (($plan['products']['status'] ?? '') === 'ready') {
             $product_html = $this->article_plan_render_products($post_id, (array) ($plan['products']['campaign_post_ids'] ?? array()), false, 0);
             if ($product_html !== '') {
