@@ -78,7 +78,10 @@
     "IMMUTABLE_BASE_HARDLOCK_RESTORED_RULESET_21788951",
     "SYSTEM4_FINAL_PRECODEX_FRESHNESS_HASH_POINT0_NEW_RECONFIRMED_D127671D9D92300AB12A73466A75E0C290C930E4",
     "SYSTEM4_BOUND_SOURCE_REQUEST_AUTOSTART_FIX_PR326_PROVEN",
-    "SYSTEM4_BOUND_SOURCE_REQUEST_REAL_PARENT_RUN_35375967851_PASS"
+    "SYSTEM4_BOUND_SOURCE_REQUEST_REAL_PARENT_RUN_35375967851_PASS",
+    "SYSTEM4_BOUND_SOURCE_REQUEST_AUTOSTART_PR326_MERGED_B9A461D29FF908DC63B1EF46E0CF4C2D4A40CB61",
+    "SYSTEM4_BOUND_SOURCE_REQUEST_POSTMERGE_MAIN_ACCEPTANCE_35378530975_PASS",
+    "SYSTEM4_POSTMERGE_MAIN_ENTRANCE_35378496507_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -184,20 +187,22 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "PRECODEX_READY_BOUND_SOURCE_AUTOSTART_PROVEN_AWAITING_MERGE_APPROVAL",
+  "current_work_status": "PRECODEX_READY_AWAITING_EXPLICIT_CODEX_APPROVAL",
   "current_execution_blocker": {
-    "code": "EXPLICIT_MERGE_APPROVAL_MISSING",
+    "code": "EXPLICIT_CODEX_APPROVAL_MISSING",
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "PR #326 repairs the two real pre-Codex start failures. The generation-bound SOURCE_REQUESTS.json is hash-bound through RUNTIME_INBOX_STATE, the canonical 107007 command is the parameterless start-current-bound entry, and the parent auto-creates external runtime/workspace paths. The real seven-item no-Codex parent start has reached Point-0 and WORKER_DISPATCH_READY and stopped before worker start. Separate merge approval is required before integration.",
-    "pr": 326,
+    "detail": "PR #326 is merged into main at b9a461d29ff908dc63b1ef46e0cf4c2d4a40cb61. On that exact main, Deterministic Entrance run 35378496507 and full System 4A acceptance run 35378530975 are SUCCESS. The current 7-item generation-1 SOURCE_REQUESTS binding is valid, external runtime/workspace paths are auto-created, Point-0 reaches WORKER_DISPATCH_READY, and execution stops with worker_started=false. Codex remains forbidden until new explicit user approval.",
+    "main_sha": "b9a461d29ff908dc63b1ef46e0cf4c2d4a40cb61",
+    "merged_pr": 326,
+    "deterministic_entrance_run_id": 35378496507,
+    "postmerge_acceptance_run_id": 35378530975,
     "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
     "runtime_generation": 1,
     "source_requests_ref": "control/startmaster0107/runtime_inbox/generations/000001/SOURCE_REQUESTS.json",
     "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f",
     "canonical_start_command": "python3 isolated_system4/parent_start.py start-current-bound",
-    "canonical_step_sha256": "d1133a9188e2c4f09fa322c7d48ac36406bf42274247f47cdecfb79162ffa908",
     "external_paths_auto_created": true,
     "point0_pass": true,
     "worker_dispatch_ready": true,
@@ -255,25 +260,23 @@
     "last_read_only_diagnostic_evidence": "PR107 issuecomment-5638208428",
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
-  "last_safe_main_sha": "d127671d9d92300ab12a73466a75e0c290c930e4",
-  "last_safe_change": "PR #326 binds the current seven-item source requests to runtime generation 1, makes the parameterless bound parent start canonical, auto-creates external runtime paths, and has real no-Codex Point-0/WORKER_DISPATCH_READY proof. Merge remains separately gated.",
+  "last_safe_main_sha": "b9a461d29ff908dc63b1ef46e0cf4c2d4a40cb61",
+  "last_safe_change": "PR #326 is merged and proven on exact current main. The real current seven-item parent start now binds generation-1 source requests, auto-creates external paths, reaches Point-0 and WORKER_DISPATCH_READY, and stops before worker start. Only explicit Codex approval remains.",
   "hobbyroom_status": "HISTORY_ONLY_PRODUCT_FIX_MOVED_TO_PR315",
   "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
   "hobbyroom_blocker": "HISTORY_ONLY_NO_PRODUCT_ACTION",
   "next_action": {
-    "goal": "Obtain separate merge approval for PR #326; after merge, re-run current-main entrance/parent-start verification and only then wait for separate explicit Codex approval.",
+    "goal": "Wait for separate explicit user approval before any Codex run.",
     "required_order": [
-      "Do not start Codex.",
-      "Merge PR #326 only after separate user merge approval.",
-      "After merge, re-read current main and all bound hashes.",
-      "Re-run the parameterless real current parent start without Codex on merged main.",
-      "Require WORKER_DISPATCH_READY and worker_started=false.",
-      "Then require separate explicit user approval before any Codex run.",
-      "Do not publish."
+      "Do not start Codex without new explicit user approval.",
+      "On approval, re-read current main and bound runtime/source-request hashes.",
+      "Start only the canonical current seven-item route.",
+      "Treat all seven article bodies as NEW; do not use historical recovery article bodies as writing input.",
+      "Run through the complete production route to final parent-chat file.",
+      "Do not publish automatically."
     ],
     "forbidden": [
-      "merge without separate approval",
       "Codex before separate explicit approval",
       "manual source_requests placeholder",
       "manual workspace placeholder",
@@ -324,8 +327,12 @@
     "publish_allowed": false
   },
   "precodeex_start_repair": {
-    "status": "PROVEN_PENDING_MERGE_APPROVAL",
+    "status": "MERGED_AND_POSTMERGE_PROVEN",
     "pr": 326,
+    "merge_commit_sha": "b9a461d29ff908dc63b1ef46e0cf4c2d4a40cb61",
+    "postmerge_deterministic_run_id": 35378496507,
+    "postmerge_acceptance_run_id": 35378530975,
+    "acceptance_result": "PASS",
     "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
     "runtime_generation": 1,
     "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f",
