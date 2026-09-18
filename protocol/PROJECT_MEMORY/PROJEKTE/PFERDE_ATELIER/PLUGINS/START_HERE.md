@@ -33,7 +33,7 @@ die autoritative Fach-/Releasequelle frisch lesen, daraus ein isoliertes Plugina
 hier Fach-/Release-/LIVE-Wahrheit neu erfinden, aus alten Mastern raten, allgemeingültige Module zu Pferde-spezifischen Modulen umklassifizieren oder Secrets speichern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `REGISTER.md` → bei Artefaktarbeit `SYNC_VERTRAG.md`.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `REGISTER.md` → bei Artefaktarbeit `SYNC_VERTRAG.md`.
 
 ## Rolle
 
