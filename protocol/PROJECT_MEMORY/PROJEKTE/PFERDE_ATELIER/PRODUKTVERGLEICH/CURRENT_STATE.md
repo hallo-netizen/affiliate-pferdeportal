@@ -1,5 +1,11 @@
 # PRODUKTVERGLEICH – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-09
 STATUS: V1-PLUGINENTWICKLUNG / 0.8.0 SOURCE+FRESH-ZIP PASS / WORDPRESS-LIVERETEST OFFEN
 
@@ -7,7 +13,7 @@ STATUS: V1-PLUGINENTWICKLUNG / 0.8.0 SOURCE+FRESH-ZIP PASS / WORDPRESS-LIVERETES
 
 Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
-- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
+- Ausführungsdetails/Locks → `HOBBYRAUM.md` (abgeleitet, nicht autoritativ)
 - Fehlerdetails → `FEHLERQUELLEN.md` über das zentrale `FEHLERREGISTER.md`
 - dauerhaftes WAS/WARUM → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 - Chronik/Testbelege → `PROTOKOLL.md`
@@ -79,3 +85,14 @@ Autoritative Details ausschließlich in `FEHLERQUELLEN.md`.
 - kein Auto-Publish;
 - kein Merge nach main;
 - keine produktive ACM-Anbindung.
+
+## NEXT ACTION
+
+Genau ein WordPress-Liveretest des vollständig nachgeprüften 0.8.0-Gesamtworkflows:
+1. vorhandenes `Universal Product Comparison` durch 0.8.0 ersetzen;
+2. Produktvergleich → Vergleichsplanung → Regendecken öffnen;
+3. alte 0.7.x-Signale müssen stale/offen behandelt werden;
+4. Gesamtworkflow starten;
+5. reales Ergebnis/Screenshot zurücklesen.
+
+Bis zu diesem Liveretest kein weiterer Pluginstand, kein Writer/Draft/Publish und keine ACM-/STARTMASTER-Ersatzroute.
