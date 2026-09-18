@@ -136,6 +136,11 @@ class E2ESubsetAcceptanceTests(unittest.TestCase):
         result=e2e_acceptance_subset.prepare(1)
         root=Path(result['run_root'])
         try:
+            with self.assertRaisesRegex(
+                e2e_acceptance_subset.AcceptanceBlocked,
+                'ACCEPTANCE_107008_CANONICAL_BOUNDARY',
+            ):
+                e2e_acceptance_subset.prepare_107008(root)
             requests=json.loads((root/'source_requests.json').read_text(encoding='utf-8'))
             rows=[]
             for item in requests['items']:
