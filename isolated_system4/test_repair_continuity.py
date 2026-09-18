@@ -11,6 +11,7 @@ from unittest import mock
 import batch_gate
 import controller
 import live_parity_v2 as live_parity
+import repair_proof_contract as repair_proof
 import test_route_input_factory
 
 HERE = Path(__file__).resolve().parent
@@ -260,6 +261,86 @@ class RepairContinuityTests(unittest.TestCase):
             self.assertEqual(result['status'], 'SYSTEM4_BATCH_FULL_PASS_COLLECTED')
             self.assertEqual(result['article_count'], 3)
             self.assertFalse(result['publish_allowed'])
+
+
+    def test_user_approved_codex_reference_separates_content_quality_from_structure(self):
+        body = (HERE / 'testdata' / 'article_quality_reference_putzplatzmatten_20260918.txt').read_text(encoding='utf-8')
+        metadata = json.loads(
+            (HERE / 'testdata' / 'article_quality_reference_putzplatzmatten_20260918.json').read_text(encoding='utf-8')
+        )
+        result = repair_proof.validate_quality_reference(body, metadata)
+        self.assertEqual(result['content_quality_reference'], 'USER_APPROVED_POSITIVE_REFERENCE')
+        self.assertEqual(result['structural_compliance'], 'NOT_ASSERTED')
+        self.assertEqual(result['fullcheck_status'], 'NOT_ASSERTED')
+        self.assertFalse(result['production_pass'])
+
+    def test_green_mock_prebuilt_or_testworker_repair_never_counts_as_real_codex_repair(self):
+        base = {
+            'repair_routing_proven': True,
+            'same_article_repair': True,
+            'recheck_executed': True,
+            'pre_repair_sha256': '1' * 64,
+            'post_repair_sha256': '2' * 64,
+            'findings_sha256': '3' * 64,
+            'pre_revision': 1,
+            'post_revision': 2,
+            'durable_before_ref': 'proof/pre.html',
+            'durable_after_ref': 'proof/post.html',
+            'durable_findings_ref': 'proof/findings.json',
+            'fullcheck_status': 'PASS',
+            'languagetool_status': 'PASS',
+            'ppm_status': 'PASS',
+            'ppm_content_quality_status': 'CONTENT_QUALITY_CHECK_OK',
+        }
+        cases = (
+            dict(base, worker='CODEX_CLOUD', codex_used=True, mocks_used=True, prepared_final_fixture_used=False),
+            dict(base, worker='CODEX_CLOUD', codex_used=True, mocks_used=False, prepared_final_fixture_used=True),
+            dict(base, worker='DETERMINISTIC_TEST_WORKER', codex_used=False, mocks_used=False, prepared_final_fixture_used=False),
+        )
+        for evidence in cases:
+            with self.subTest(worker=evidence['worker'], mocks=evidence['mocks_used'], fixture=evidence['prepared_final_fixture_used']):
+                proof = repair_proof.classify_repair_proof(evidence)
+                self.assertEqual(proof['repair_proof_level'], repair_proof.ROUTING_PROVEN)
+                self.assertTrue(proof['repair_routing_proven'])
+                self.assertFalse(proof['real_codex_repair_proven'])
+
+    def test_real_codex_repair_proof_requires_durable_before_after_and_quality_evidence(self):
+        evidence = {
+            'repair_routing_proven': True,
+            'same_article_repair': True,
+            'recheck_executed': True,
+            'worker': 'CODEX_CLOUD',
+            'codex_used': True,
+            'mocks_used': False,
+            'prepared_final_fixture_used': False,
+            'pre_repair_sha256': '1' * 64,
+            'post_repair_sha256': '2' * 64,
+            'findings_sha256': '3' * 64,
+            'pre_revision': 1,
+            'post_revision': 2,
+            'durable_before_ref': 'proof/pre.html',
+            'durable_after_ref': 'proof/post.html',
+            'durable_findings_ref': 'proof/findings.json',
+            'fullcheck_status': 'PASS',
+            'languagetool_status': 'PASS',
+            'ppm_status': 'PASS',
+            'ppm_content_quality_status': 'CONTENT_QUALITY_CHECK_OK',
+        }
+        complete = repair_proof.classify_repair_proof(evidence)
+        self.assertEqual(complete['repair_proof_level'], repair_proof.REAL_CODEX_PROVEN)
+        self.assertTrue(complete['real_codex_repair_proven'])
+
+        missing_bytes = dict(evidence, durable_before_ref='')
+        blocked = repair_proof.classify_repair_proof(missing_bytes)
+        self.assertEqual(blocked['repair_proof_level'], repair_proof.ROUTING_PROVEN)
+        self.assertFalse(blocked['real_codex_repair_proven'])
+        self.assertIn('durable_before_ref', blocked['missing_real_codex_evidence'])
+
+        missing_quality = dict(evidence, ppm_content_quality_status='CONTENT_QUALITY_CHECK_FAILED')
+        blocked_quality = repair_proof.classify_repair_proof(missing_quality)
+        self.assertEqual(blocked_quality['repair_proof_level'], repair_proof.ROUTING_PROVEN)
+        self.assertFalse(blocked_quality['real_codex_repair_proven'])
+        self.assertIn('ppm_content_quality_status', blocked_quality['missing_real_codex_evidence'])
 
 
 if __name__ == '__main__':
