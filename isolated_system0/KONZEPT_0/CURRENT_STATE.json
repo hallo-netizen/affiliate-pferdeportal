@@ -1,0 +1,38 @@
+{
+  "contract": "KONZEPT0_CURRENT_STATE_V1",
+  "office": "PFERDE_ATELIER/TEXTERSTELLUNGSBUERO/KONZEPT_0",
+  "status": "RECONSTRUCTION_EVIDENCE_COLLECTED_EXACT_RUNTIME_PARTIAL",
+  "isolation": {
+    "concept_1_contact": false,
+    "concept_2_contact": false,
+    "concept_3_contact": false,
+    "concept_4_contact": false,
+    "concept_4a_contact": false,
+    "shared_runtime": false,
+    "shared_handoff": false,
+    "shared_controller": false
+  },
+  "historical_anchor": {
+    "date": "2026-08-28",
+    "commit": "a4084afd2b22cdbab2e7c6141885760adedc8f4b",
+    "startmaster": "STARTMASTER0103",
+    "six_article_normal_draft_end_to_end": "PASS",
+    "six_article_readback": "PASS",
+    "publish_allowed": false
+  },
+  "exact_materialized_components": [
+    "historical_exact/controller.py",
+    "historical_exact/preflight.py",
+    "historical_exact/STEP_TOOL_POLICY_V1.json",
+    "historical_exact/CURRENT_STATE_20260828.json"
+  ],
+  "evidence_files": [
+    "SPUREN_20260828.md",
+    "SPUREN_SPAETERE_REAKTIVIERUNG.md",
+    "RECONSTRUCTION_MANIFEST.json"
+  ],
+  "runtime_status": "FAIL_CLOSED_UNTIL_ALL_EXACT_20260828_COMPONENTS_RECOVERED",
+  "codex_started": false,
+  "publish_performed": false,
+  "next_action": "RECOVER_REMAINING_EXACT_20260828_MASTER_COMPONENTS_WITHOUT_USING_CONCEPT_1_2_3_4_4A"
+}
