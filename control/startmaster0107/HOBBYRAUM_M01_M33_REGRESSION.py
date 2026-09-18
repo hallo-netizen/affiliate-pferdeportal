@@ -57,7 +57,17 @@ def m02():
     s=STEP7.read_text(encoding="utf-8")
     must("ARTICLE_<plan_slot>.md" in s or "ARTICLE_" in s,"M02_UNIQUE_ARTICLE_BINDING_MISSING")
     must("STAGING_DESTINATION_COLLISION" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M02_COLLISION_GUARD_MISSING")
-def m03(): must("DUAL_ROOTFIX_POSITIVE_NEGATIVE_PASS" in cmd("control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py","selftest"),"M03_PREPARED_TEST")
+def m03():
+    out=cmd("control/startmaster0107/test_system4_107008_handoff.py")
+    must("OK" in out or out.strip()==="", "M03_SYSTEM4_107008_CONTINUITY_TEST")
+    src=(REPO/"control/startmaster0107/test_system4_107008_handoff.py").read_text(encoding="utf-8")
+    for token in (
+        "test_prepare_creates_single_v2_binding_for_107008",
+        "test_incomplete_batch_cannot_enter_107008",
+        "test_binding_hash_tamper_blocks",
+        "test_start_runs_runtime_only_after_v2_binding",
+    ):
+        must(token in src,"M03_SYSTEM4_CONTINUITY_CASE_MISSING:"+token)
 def m04(): must("def finalize_after_107008" in DUAL.read_text(encoding="utf-8") and "elif len(a)==2 and a[0]=='finalize'" in DUAL.read_text(encoding="utf-8"),"M04_FINALIZE_CLI")
 def m05(): must("durable_receipt_path" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M05_DURABLE_RECEIPT")
 def m06(): must("NEGATIVE_UNKNOWN_CONTRACT_BLOCKED" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M06_FAKE_CONTRACT")
