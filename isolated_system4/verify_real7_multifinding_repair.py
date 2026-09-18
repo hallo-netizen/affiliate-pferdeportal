@@ -43,6 +43,10 @@ def main(argv: list[str]) -> int:
     owners = {str(row.get("repair_owner") or "") for row in findings if isinstance(row, dict)}
     if owners != {"DRAFT_WORKER"}:
         raise SystemExit("REAL7_REPAIR_OWNER_INVALID:" + ",".join(sorted(owners)))
+    # Repairable quality findings are a workshop return, never a terminal project block.
+    # The proof is invalid if the test route treated this finding set as a hard stop.
+    if evidence.get("repair_generated_from_workspace_state") is not True:
+        raise SystemExit("REAL7_REPAIRABLE_FINDINGS_NOT_RETURNED_TO_WORKSHOP")
 
     prefix = evidence_files[0].name[:-len("-evidence.json")]
     before = evidence_dir / (prefix + "-before.html")
@@ -84,6 +88,8 @@ def main(argv: list[str]) -> int:
         "real_ppm679_after_repair": "PASS",
         "prebuilt_final_input_used": False,
         "technical_repair_generation_proven": True,
+        "repairable_quality_failure_policy": "RETURN_TO_DRAFT_WORKER_SAME_ARTICLE_UNTIL_PASS",
+        "terminal_block_for_repairable_quality_findings": False,
         "codex_used": False,
         "live_codex_repair_proven": False,
         "live_codex_repair_status": "BLOCKED_PENDING_FRESH_EXPLICIT_USER_APPROVAL",
