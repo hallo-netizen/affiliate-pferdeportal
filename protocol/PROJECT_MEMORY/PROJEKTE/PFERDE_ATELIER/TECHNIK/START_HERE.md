@@ -33,7 +33,7 @@ den technischen Ist-Stand lesen, Messdaten auswerten, den kleinsten sicheren Rep
 Fachinhalte, Artikel, Kategorien, Design, Affiliate-/HivePress-Logik oder fremde Fachsysteme nebenbei verändern; keine Dateien blind löschen; keine zweite Plugin-/LIVE-Wahrheit führen.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `HANDLUNGSVERZEICHNIS.md`.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `HANDLUNGSVERZEICHNIS.md`.
 
 ## Bürostandard
 
