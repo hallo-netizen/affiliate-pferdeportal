@@ -122,7 +122,7 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_EBAY_DELETION_RECEIPTS = 'ppar_ebay_deletion_receipts_v1';
     const OPTION_HOUSEKEEPING_STATE = 'ppar_housekeeping_state_v1';
     const ARTICLE_PLAN_META = 'ppar_article_delivery_plan_v1';
-    const ARTICLE_PLAN_SCHEMA = '1.2';
+    const ARTICLE_PLAN_SCHEMA = '1.3';
     const HEALTH_META = 'ppar_health_data_v1';
     const HEALTH_CRON_HOOK = 'ppar_daily_health_check';
     const ARTICLE_REBUILD_HOOK = 'ppar_article_plan_rebuild_worker';
