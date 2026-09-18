@@ -1,0 +1,74 @@
+name: Konzept 0 Guided Step Machine Test
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/STEP_MACHINE_TEST_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test exact next-step enforcement
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='isolated_system0/KONZEPT_0'
+          cp "$ROOT/STEP_STATE.json" /tmp/state.orig
+          python3 "$ROOT/step_navigator.py" show > /tmp/show.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/show.json'))
+          assert x['status']=='PASS'
+          assert x['next_allowed_step']=='K0-001'
+          PY
+          set +e
+          python3 "$ROOT/step_navigator.py" transition --step K0-040 --status PASS --next-step K0-050 >/tmp/wrong-step.json
+          rc1=$?
+          python3 "$ROOT/step_navigator.py" transition --step K0-001 --status PASS --next-step K0-100 >/tmp/skip.json
+          rc2=$?
+          set -e
+          test "$rc1" -eq 2
+          test "$rc2" -eq 2
+          grep -q 'STEP_NOT_CURRENT' /tmp/wrong-step.json
+          grep -q 'NEXT_STEP_NOT_ALLOWED' /tmp/skip.json
+          python3 "$ROOT/step_navigator.py" transition --step K0-001 --status PASS --next-step K0-010 >/tmp/good.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/good.json'))
+          assert x['status']=='PASS'
+          assert x['next_allowed_step']=='K0-010'
+          PY
+          cp /tmp/state.orig "$ROOT/STEP_STATE.json"
+      - name: Write evidence
+        shell: bash
+        run: |
+          cat > isolated_system0/KONZEPT_0/STEP_MACHINE_TEST_EVIDENCE.json <<'JSON'
+          {
+            "contract":"KONZEPT0_GUIDED_STEP_MACHINE_TEST_V1",
+            "status":"PASS",
+            "initial_next_step":"K0-001",
+            "wrong_step":"BLOCKED",
+            "skip_ahead":"BLOCKED",
+            "exact_next_step":"PASS",
+            "state_restored_after_test":true,
+            "publish_performed":false,
+            "codex_started":false
+          }
+          JSON
+      - name: Commit evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'konzept0-step-test'
+          git config user.email 'actions@users.noreply.github.com'
+          git add isolated_system0/KONZEPT_0/STEP_MACHINE_TEST_EVIDENCE.json
+          git commit -m 'Konzept 0: prove guided next-step machine' || exit 0
+          git pull --rebase origin isolated-system0-legacy-text-20260828
+          git push origin HEAD:isolated-system0-legacy-text-20260828
