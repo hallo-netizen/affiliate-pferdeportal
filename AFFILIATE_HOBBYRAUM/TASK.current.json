@@ -52,11 +52,11 @@
   "writable": [],
   "command": "php -l source/trait-ppar-creative-library.php && php -l source/trait-ppar-network-sync.php && php -l source/trait-ppar-provider-registry.php && php -l source/trait-ppar-automation-suite.php && php -l source/trait-ppar-housekeeping.php && php -l source/class-ppar-partner-analytics.php && php -l source/pferdeportal-affiliate-router.php && printf 'CANONICAL_LIFECYCLE_PRECHECK_ONLY\\n'",
   "tests": [
-    "Bound 2026-09-18 lifecycle/KISS scope and current error-register precheck are present",
-    "Canonical source is read-only; no plugin artifact, version number or installer may be produced",
-    "Report exact missing delta for automatic intake, dedupe-by-identical-creative-within-format-family, manual overrides, 2-week sync, 3-week integrity check, expiry/unavailability handling, affected-target re-evaluation and partner analytics truth",
-    "Verify existing slot/format matching remains provider-neutral and uses real dimensions rather than provider format labels",
-    "Do not claim acceptance; later implementation requires hard local positive, negative, full-workflow, regression, fresh-unpack/source-identity and mutation/sabotage tests"
+    "test -s protocol/BOUND_TASK.md && test -s protocol/ERROR_REGISTER.md && test -s protocol/CURRENT_RELEASE.json",
+    "grep -Fq 'Vollautomatischer Creative-Lifecycle' protocol/BOUND_TASK.md && grep -Fq 'AFF-ERR-027' protocol/ERROR_REGISTER.md",
+    "grep -Fq \"'schedule' => 'daily'\" source/trait-ppar-automation-suite.php && grep -Fq \"array('daily','twicedaily')\" source/trait-ppar-automation-suite.php",
+    "grep -Fq \"'identity_hash' => hash('sha256'\" source/trait-ppar-creative-library.php && ! grep -Fq 'format_family' source/trait-ppar-creative-library.php && grep -Fq 'portal_automatic' source/trait-ppar-creative-library.php && grep -Fq 'portal_veto' source/trait-ppar-creative-library.php",
+    "grep -Fq 'PPAR_Partner_Analytics_Admin' source/class-ppar-partner-analytics.php && grep -Fq 'width' source/trait-ppar-creative-library.php && grep -Fq 'height' source/trait-ppar-creative-library.php"
   ],
   "timeout_seconds": 600
 }
