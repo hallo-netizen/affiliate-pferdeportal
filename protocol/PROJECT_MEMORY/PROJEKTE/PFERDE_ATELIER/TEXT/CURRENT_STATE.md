@@ -1,5 +1,11 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-17
 STATUS: BLOCKED / M38 HISTORY PROOF ON CURRENT MAIN
 
