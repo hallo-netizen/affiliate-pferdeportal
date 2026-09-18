@@ -437,10 +437,10 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         sections['conclusion'] = conclusion_heading + conclusion_paragraphs[:2]
 
         table_phrases = (
-            'Kontrolle zeigt den Zustand.',
-            'Zustand braucht eine Prüfung.',
-            'Prüfung bestätigt den Zustand.',
-            'Der Zustand folgt der Kontrolle.',
+            'Kontrolle zeigt Zustand.',
+            'Zustand zeigt Kontrolle.',
+            'Prüfung zeigt Zustand.',
+            'Zustand zeigt Prüfung.',
         )
         table_cell_counter = [0]
         def _flatten_table_cells(value: str) -> str:
