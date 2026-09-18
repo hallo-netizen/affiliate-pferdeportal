@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 57,
+  "generation": 58,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -687,11 +687,11 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "AUTOMATIC_CREATIVE_LIFECYCLE_CANONICAL_DELTA_PRECHECK_20260918",
+    "current_milestone": "AUTOMATIC_CREATIVE_LIFECYCLE_CANONICAL_ROOTFIX_20260918",
     "max_parallel_workstreams": 1,
-    "microfix_policy": "ONE_ROOT_CAUSE_BLOCK_ONLY_NO_VERSION_CASCADE",
-    "new_version_policy": "FORBIDDEN_UNTIL_COMPLETE_BOUND_BLOCK_REQUIRES_CONCRETE_USER_LIVE_TEST",
-    "investigation_policy": "ONLY_CURRENT_BOUND_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_OR_EXPLICIT_USER_SCOPE",
+    "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
+    "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
+    "investigation_policy": "ONLY_CURRENT_BOUND_GATE_OR_EXPLICIT_USER_SCOPE",
     "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
     "goal_drift_policy": "FAIL_CLOSED",
     "optional_detours": "FORBIDDEN"
