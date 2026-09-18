@@ -11,7 +11,7 @@ STATUS: M39 HISTORY AUTHORITY MAINTENANCE
 ## EINE AKTUELLE WAHRHEIT
 
 Current technical main:
-`13ce42bb77d7b5d9a01cdbe3be6c7c81969198d4`
+`e69cab0f0a96978b997bff7cbf1ab8af4587e772`
 
 Letzter belastbarer Pre-Codex-Recovery-Stand:
 `508f9dbb3650c99e5d41dbab83086af46945e225`
@@ -32,7 +32,7 @@ M39 registriert ausschließlich diese technische Identitätskollision:
 
 History-Kandidat:
 - Branch: `hobbyroom/m39-release-identity-history-20260918`
-- Head: `983f09569044b533d4d67e36df745b5da778d62f`
+- Head: `1d845b0427b0eb7486d7431b689e962de45ed867`
 - erwarteter Beweis: current main M01–M38 PASS, M39 erster neuer FAIL.
 
 Der bereits vorbereitete Produktfix bleibt bis zum erfolgreichen M39-History-Beweis getrennt und wird nicht in diesen History-Kandidaten gemischt.
