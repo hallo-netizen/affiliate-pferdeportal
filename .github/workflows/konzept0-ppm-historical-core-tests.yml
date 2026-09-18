@@ -1,0 +1,119 @@
+name: Konzept 0 PPM Historical Core Tests
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/PPM_TEST_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact recovered runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="isolated_system0/KONZEPT_0/runtime/packages"
+          echo "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  $P/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" | sha256sum -c -
+          unzip -t "$P/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" >/dev/null
+
+      - name: Run historical PPM 6.7.9 text-quality tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          TMP="$(mktemp -d)"
+          unzip -q isolated_system0/KONZEPT_0/runtime/packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d "$TMP"
+          ROOT="$TMP/portal-production-machine"
+          cd "$ROOT"
+          tests=(
+            "tests/test-wave1-content-validator-integration.php"
+            "tests/test-wave2-content-structure-language-gate.php"
+            "tests/test-wave2-content-mutations.php"
+            "tests/test-wave2-content-validator-integration.php"
+            "tests/test-wave2-article-type-quarantine.php"
+            "tests/test-mainblock1-table-hard-rules.php"
+            "tests/test-mainblock1-link-targets.php"
+            "tests/normal-draft-production/test-01-positive-1-to-4.php"
+            "tests/normal-draft-production/test-02-cardinality-types-negative.php"
+            "tests/normal-draft-production/test-03-identity-replay-negative.php"
+            "tests/normal-draft-production/test-04-content-source-link-negative.php"
+            "tests/normal-draft-production/test-05-readback-auth-static.php"
+          )
+          REPORT="$GITHUB_WORKSPACE/isolated_system0/KONZEPT_0/PPM_HISTORICAL_TEST_REPORT.txt"
+          : > "$REPORT"
+          pass=0
+          fail=0
+          for t in "${tests[@]}"; do
+            echo "=== $t ===" | tee -a "$REPORT"
+            if php "$t" >>"$REPORT" 2>&1; then
+              echo "RESULT=PASS" | tee -a "$REPORT"
+              pass=$((pass+1))
+            else
+              echo "RESULT=FAIL" | tee -a "$REPORT"
+              fail=$((fail+1))
+            fi
+          done
+          echo "PASS_COUNT=$pass" | tee -a "$REPORT"
+          echo "FAIL_COUNT=$fail" | tee -a "$REPORT"
+          test "$fail" -eq 0
+
+      - name: Extract immutable text-machine core into Konzept 0
+        shell: bash
+        run: |
+          set -euo pipefail
+          TMP="$(mktemp -d)"
+          unzip -q isolated_system0/KONZEPT_0/runtime/packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d "$TMP"
+          SRC="$TMP/portal-production-machine"
+          DST="isolated_system0/KONZEPT_0/runtime/extracted_ppm679"
+          rm -rf "$DST"
+          mkdir -p "$DST/contracts" "$DST/includes"
+          for f in             article-type-extension-manifest-v1.json             article-type-templates.json             content-structure-language-gate-v2.json             content-validation-contract-v2.json             general-production-contract-v679.json             gold-core-binding-v1.json             gold-core-tolerances-v1.json             hard-rule-coverage-matrix-v1.json             hard-rule-registry-v1.json             known-error-gate-v1.json             normal-draft-release-v1.json             production-plan-v4.json             table-contract-v1.json; do
+            cp "$SRC/contracts/$f" "$DST/contracts/$f"
+          done
+          for f in             article-type-extension-registry.php             article-type-validator.php             content-generator.php             content-structure-language-gate.php             content-validator.php             normal-draft-adapter.php             normal-draft-pipeline.php             normal-draft-readback-validator.php             normal-draft-release-validator.php             systemwide-duplicate-guard.php             table-hard-rule-validator.php             wordpress-link-target-validator.php; do
+            cp "$SRC/includes/$f" "$DST/includes/$f"
+          done
+          find "$DST" -type f -print0 | sort -z | xargs -0 sha256sum > isolated_system0/KONZEPT_0/PPM_EXTRACTED_CORE_SHA256.txt
+
+      - name: Write proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re
+          root=Path("isolated_system0/KONZEPT_0")
+          report=(root/"PPM_HISTORICAL_TEST_REPORT.txt").read_text(encoding="utf-8")
+          p=int(re.search(r'PASS_COUNT=(\d+)',report).group(1))
+          f=int(re.search(r'FAIL_COUNT=(\d+)',report).group(1))
+          out={
+            "contract":"KONZEPT0_PPM679_HISTORICAL_CORE_TEST_V1",
+            "status":"PASS" if f==0 else "BLOCKED",
+            "ppm_sha256":"acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+            "tests_passed":p,
+            "tests_failed":f,
+            "textmachine_core_extracted_from_concept0_ppm_only":True,
+            "concept_1_2_3_4_4a_runtime_contact":False,
+            "codex_started":False,
+            "publish_performed":False
+          }
+          (root/"PPM_HISTORICAL_TEST_EVIDENCE.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+          test "$(python3 -c 'import json; print(json.load(open("isolated_system0/KONZEPT_0/PPM_HISTORICAL_TEST_EVIDENCE.json"))["status"])')" = PASS
+
+      - name: Commit proof and extracted core
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "konzept0-ppm-test"
+          git config user.email "actions@users.noreply.github.com"
+          git add isolated_system0/KONZEPT_0/PPM_HISTORICAL_TEST_REPORT.txt                   isolated_system0/KONZEPT_0/PPM_HISTORICAL_TEST_EVIDENCE.json                   isolated_system0/KONZEPT_0/PPM_EXTRACTED_CORE_SHA256.txt                   isolated_system0/KONZEPT_0/runtime/extracted_ppm679
+          git commit -m "Konzept 0: prove and extract historical PPM 6.7.9 text core"
+          git push origin HEAD:isolated-system0-legacy-text-20260828
