@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.72
+ * Version: 6.72.73
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -45,7 +45,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.72';
+    const VERSION = '6.72.73';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -1652,35 +1652,21 @@ JS;
     }
 
     /**
-     * Einheitlicher grosser Querbanner fuer Startseite, Kategorien und Portal-Seiten.
-     * Grundlage ist der bereits hart gepruefte Kategorie-Querbannervertrag:
-     * nur echte Querformate, proportional, kein Crop, maximal +10 % Upscaling.
+     * Einheitliche Darstellung fuer den bereits ausgewaehlten echten Banner.
+     * Wichtig: Die bestehende Auswahl-/Relevanzlogik bleibt erhalten. Dieser
+     * Block darf nur die sichtbare Ausgabe vereinheitlichen und keine gueltigen
+     * Banner wegen fehlender/abweichender Metadaten aus der Auswahl entfernen.
      */
     private function overview_wide_banner_rule($slot_type) {
         $slot_type = sanitize_key((string) $slot_type);
         if ($slot_type === 'start_after_topics') {
-            return array(
-                'creative_type'=>'banner','ratio_min'=>3.00,'ratio_max'=>12.00,
-                'min_width'=>600,'min_height'=>60,'crop'=>'contain',
-                'target_types'=>array('page'),'target_contexts'=>array('start'),
-                'upscale_max'=>1.10,'min_fill'=>0.60,
-            );
+            return array('target_types'=>array('page'),'target_contexts'=>array('start'));
         }
         if ($slot_type === 'hub_after_cards') {
-            return array(
-                'creative_type'=>'banner','ratio_min'=>3.00,'ratio_max'=>12.00,
-                'min_width'=>700,'min_height'=>60,'crop'=>'contain',
-                'target_types'=>array('page'),'target_contexts'=>array('hub1','hub2'),
-                'upscale_max'=>1.10,'min_fill'=>0.60,
-            );
+            return array('target_types'=>array('page'),'target_contexts'=>array('hub1','hub2'));
         }
         if (in_array($slot_type, array('product_after_category_tiles','category_recommendation'), true)) {
-            return array(
-                'creative_type'=>'banner','ratio_min'=>3.00,'ratio_max'=>12.00,
-                'min_width'=>600,'min_height'=>60,'crop'=>'contain',
-                'target_types'=>array('page','category'),'target_contexts'=>array('category','leaf','leaf_category'),
-                'upscale_max'=>1.10,'min_fill'=>0.60,
-            );
+            return array('target_types'=>array('page','category'),'target_contexts'=>array('category','leaf','leaf_category'));
         }
         return array();
     }
@@ -1689,26 +1675,24 @@ JS;
         return !empty($this->overview_wide_banner_rule($slot_type));
     }
 
+    /**
+     * Nur der fuer die bild-only Ausgabe zwingend noetige Mindestcheck.
+     * Keine Pixel-, Ratio- oder Upscale-Sperre: 6.72.72 hatte damit den
+     * funktionierenden Auswahlweg veraendert und konnte reale Banner komplett
+     * ausblenden. Die fachliche Kampagnenauswahl bleibt beim vorhandenen Router.
+     */
     private function overview_wide_banner_campaign_eligible($campaign, $slot_type) {
-        $rule = $this->overview_wide_banner_rule($slot_type);
-        if (!$rule || !is_array($campaign)
-            || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner'
-            || sanitize_key((string) ($campaign['render_mode'] ?? 'image_link')) === 'html'
-            || trim((string) ($campaign['image_url'] ?? '')) === '') {
+        if (!$this->overview_wide_banner_slot($slot_type) || !is_array($campaign)) {
             return false;
         }
-        list($width, $height) = $this->article_banner_dimensions($campaign);
-        $width = absint($width);
-        $height = absint($height);
-        if ($width <= 0 || $height <= 0) { return false; }
-        $ratio = $width / $height;
-        if ($ratio < (float) $rule['ratio_min'] || $ratio > (float) $rule['ratio_max']) { return false; }
-        $scale = max(
-            1.0,
-            absint($rule['min_width']) / $width,
-            absint($rule['min_height']) / $height
-        );
-        return $scale <= ((float) $rule['upscale_max'] + 0.00001);
+        if (sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') {
+            return false;
+        }
+        $mode = sanitize_key((string) ($campaign['mode'] ?? ($campaign['render_mode'] ?? 'image_link')));
+        if ($mode === 'html') {
+            return false;
+        }
+        return trim((string) ($campaign['image_url'] ?? '')) !== '';
     }
 
     /**
