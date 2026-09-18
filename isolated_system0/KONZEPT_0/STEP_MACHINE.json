@@ -1,0 +1,20 @@
+{
+  "contract": "KONZEPT0_STEP_MACHINE_V1",
+  "principle": "ONE_EXACT_NEXT_STEP_FAIL_CLOSED",
+  "publish_allowed": false,
+  "steps": [
+    {"id":"K0-001","name":"ENTRY_AUTHORITY","evidence":"CONFIRMED","next":["K0-010"]},
+    {"id":"K0-010","name":"BIND_READY_ITEM_METADATA","evidence":"CONFIRMED","next":["K0-020"]},
+    {"id":"K0-020","name":"PASS_REUSE_OR_FRESH_WORK","evidence":"CONFIRMED","next":["K0-030","K0-050"]},
+    {"id":"K0-030","name":"BUILD_FRESH_FACT_PACK","evidence":"DEPENDENCY_RECONSTRUCTED_FROM_AUG28","next":["K0-040"]},
+    {"id":"K0-040","name":"CREATE_FINAL_ARTICLE_BODY","evidence":"REQUIRED_ARTIFACT_CONFIRMED_AUTHORING_PROMPT_MISSING","next":["K0-050"]},
+    {"id":"K0-050","name":"LANGUAGETOOL_6_8_FINAL_TEXT","evidence":"CONFIRMED","next":["K0-050","K0-060"]},
+    {"id":"K0-060","name":"BUILD_PRODUCTION_PACKAGE","evidence":"CONFIRMED","next":["K0-070"]},
+    {"id":"K0-070","name":"PACKAGE_BOUNDARY_AND_PREFLIGHT","evidence":"CONFIRMED_AT_END_OF_AUG28","next":["K0-080"]},
+    {"id":"K0-080","name":"PSERC_WORKFLOW_SUPERVISOR","evidence":"CONFIRMED","next":["K0-090"]},
+    {"id":"K0-090","name":"PSERC_TO_PPM_BRIDGE","evidence":"CONFIRMED","next":["K0-100"]},
+    {"id":"K0-100","name":"PPM_6_7_9_NORMAL_DRAFT","evidence":"CONFIRMED","next":["K0-110"]},
+    {"id":"K0-110","name":"DRAFT_READBACK","evidence":"CONFIRMED","next":["K0-120"]},
+    {"id":"K0-120","name":"USER_REVIEW_NO_PUBLISH","evidence":"CONFIRMED","next":[]}
+  ]
+}
