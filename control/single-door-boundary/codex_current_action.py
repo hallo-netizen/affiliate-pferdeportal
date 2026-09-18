@@ -221,15 +221,18 @@ def selftest()->dict:
 
 def main(argv:list[str])->int:
     try:
-        if argv==['selftest']: z=selftest()
+        if argv==['selftest']:
+            z=selftest()
         else:
             st=load(REPO/STATE_REL);gate=st.get('execution_gate') or {};step=load(safe(str(gate.get('bundle_ref') or '')))
             if _system4_forbidden_legacy_binding(step) is not None:
                 raise ViewError('LEGACY_107007_ROUTE_FORBIDDEN_SYSTEM4')
-            if argv==['current']: z=_current_only(_run(argv))
-            elif len(argv)==2 and argv[0]=='submit': z=_current_only(_run(argv))
-            else: raise ViewError('USAGE: current | submit ITEM_RECEIPT_REF | selftest')
-        else: raise ViewError('USAGE: current | submit ITEM_RECEIPT.json | selftest')
+            if argv==['current']:
+                z=_current_only(_run(argv))
+            elif len(argv)==2 and argv[0]=='submit':
+                z=_current_only(_run(argv))
+            else:
+                raise ViewError('USAGE: current | submit ITEM_RECEIPT_REF | selftest')
         print(json.dumps(z,ensure_ascii=False,indent=2)); return 0 if z.get('status')!='BLOCKED' else 2
     except Exception as e:
         print(json.dumps({'contract':CONTRACT,'status':'BLOCKED','error':str(e),'publish_allowed':False},ensure_ascii=False,indent=2)); return 2
