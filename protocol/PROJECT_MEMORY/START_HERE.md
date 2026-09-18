@@ -1,0 +1,83 @@
+# CAMPUS – START_HERE
+
+STAND: 2026-09-16
+STATUS: AKTIVER CAMPUS-EINGANG
+
+## 1-KLICK-ÜBERSICHT
+
+**WAS IST DAS?**  
+Die oberste Eingangstür des Campus.
+
+**HIER BIST DU RICHTIG, WENN …**  
+du einen neuen Chat startest, ein Projekt/Büro suchst oder einfach in Alltagssprache sagst, wohin du willst.
+
+**DU DARFST …**  
+dein Ziel normal formulieren. Der Hauptpförtner ordnet Projekt und Büro zu und liest den aktuellen Stand.
+
+**DU DARFST NICHT …**  
+am Eingang Fachinhalte ändern oder unbekannte Arbeitswege erfinden.
+
+**ALS NÄCHSTES …**  
+`HAUPTPFOERTNER.md`.
+
+## Alltagssprache ist erlaubt
+
+Diese Aussagen sind gleichwertige Routingaufträge:
+
+- `Hauptpförtner.`
+- `Geh auf den Campus.`
+- `Geh zu PB ONE.`
+- `Geh zu PB ONE in die Ideenwerkstatt.`
+- `Geh zu PB ONE, Angebote/Flyer.`
+- `Geh ins Pferde-Atelier.`
+- `Geh ins Pferde-Atelier, Büro TEXT/SEO.`
+- `Geh ins Pferde-Atelier, Büro PRODUKTVERGLEICH.`
+- `Geh ins Pferde-Atelier, Büro TECHNIK.`
+- `Prüfe im Pferde-Atelier WordPress-Speicher oder Backups.` → `PFERDE_ATELIER/TECHNIK/START_HERE.md`
+- `Geh in den Campus, Bürogebäude Pferde-Atelier, TEXT/SEO. Dort findest du alles für unsere Arbeit.`
+
+Der Nutzer muss keine Dateipfade oder Fachbegriffe auswendig kennen.
+
+## Wichtiger Wegweiser – allgemeingültige Plugins / Bausteine
+
+Allgemeingültige, projektübergreifende Bausteine liegen hier:
+`protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/`
+
+Das allgemeingültige Design-Plugin / die Portal-Design-Engine liegt hier:
+`protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/DESIGN/`
+
+Pferde-Atelier-spezifische Plugin-Ausgabekopien liegen zusätzlich im Projekt unter:
+`protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/`
+
+Wichtig: Bei allgemeingültigen Plugins bleibt die Hauptquelle unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; die Projektkopie ist nur die isolierte Ausgabekopie.
+
+## EINE WAHRHEIT – CAMPUSROUTING
+
+Routingautorität:
+`protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json`
+
+HARD RULE:
+`START_HERE` enthält keinen aktuellen Fachstatus, Branch/Head, Blocker oder NEXT ACTION.
+
+Pflichtweg für neue Chats:
+`START_HERE → HAUPTPFOERTNER → AUTORITAETSPLAN → genau eine Current-Autorität → Frischecheck → NEXT ACTION`.
+
+Bei frischer unveränderter Bindung: keine Vollrekonstruktion; direkt NEXT ACTION.
+Bei Änderung: nur Delta prüfen.
+
+CAMPUS_SINGLE_TRUTH_ENTRY_V1
+
+## HARD RULE – PROTOKOLLPFLICHT
+
+Für jede echte Arbeit im Campus gilt vor `fertig`, `PASS` oder Übergabe die universelle Abschlussprüfung aus:
+`BAUCONTAINER/EINGANGSSTANDARD.md` → **Universelle Protokollpflicht vor Abschluss**.
+
+Nicht aus Erinnerung protokollieren:
+aktuellen Campus-/Fachstand zuerst frisch lesen und nur tatsächlich betroffene autoritative Stellen aktualisieren.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.

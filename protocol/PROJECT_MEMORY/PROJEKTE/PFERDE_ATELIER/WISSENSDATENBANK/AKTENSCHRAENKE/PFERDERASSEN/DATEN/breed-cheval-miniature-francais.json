@@ -1,0 +1,30 @@
+{
+  "id": "breed-cheval-miniature-francais",
+  "schema_version": "1.1",
+  "rassename_de": "Cheval Miniature Français",
+  "originalname": "Cheval Miniature Français",
+  "synonyme": ["CMF"],
+  "formaler_status": "eigenständige französische Miniaturpferderasse mit eigenem Zuchtprogramm und Livre Généalogique",
+  "anerkennungsquelle": "IFCE / Association Française du Cheval Miniature",
+  "typ": "Kleinpferd",
+  "rassegruppen": ["Miniaturpferd"],
+  "herkunft_land": "Frankreich",
+  "herkunft_region": "Frankreich",
+  "geschichte_entstehung": "Französische Miniaturpferdezucht mit eigenem offiziell geführtem Zuchtprogramm.",
+  "urspruengliche_nutzung": ["Miniaturpferdezucht", "Show"],
+  "heutiger_einsatz": ["Zucht", "Show", "Freizeit"],
+  "stockmass": "nicht_recherchiert",
+  "gewicht": "nicht_recherchiert",
+  "exterieur_gesamt": "Miniaturpferdetyp; Detailstandard noch nachzurecherchieren",
+  "charakter_temperament": "nicht_recherchiert",
+  "gesundheit_genetik": "nicht_recherchiert",
+  "zucht_zuchtziel": "gesundes, funktionelles und rassetypisches französisches Miniaturpferd",
+  "bestand_gefaehrdungsstatus": "nicht_recherchiert",
+  "besondere_fakten": ["Cheval Miniature Français ist ein eigenes französisches Zuchtprogramm und nicht automatisch synonym mit American Miniature Horse oder Falabella."],
+  "quellen": [
+    {"organisation":"IFCE","titel":"Programmes de sélection et règlements des livres généalogiques – Cheval Miniature Français","url":"https://www.ifce.fr/ifce/sire-demarches/reglementation/reglements-et-programmes-de-selection/","trust":"A","felder":["formaler_status","anerkennungsquelle","zucht_zuchtziel","besondere_fakten"]},
+    {"organisation":"IFCE","titel":"Quels papiers pour mon cheval ?","url":"https://www.ifce.fr/ifce/sire-demarches/infos-tarifs-sire/quels-papiers-pour-mon-cheval/","trust":"A","felder":["formaler_status","herkunft_land"]}
+  ],
+  "recherche_status": "GEPRUEFT_MIT_OFFENEN_FELDERN",
+  "letzte_pruefung": "2026-09-13"
+}
