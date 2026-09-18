@@ -270,3 +270,28 @@ Kein zweites Reparaturkonzept, kein zweiter Kandidat zwischen Realtests, kein Fi
 
 ## TEXT-TECH-20260908-HISTORY-MACHINE-PROOF – Eine maschinelle Reparaturstraße statt wiederholter Chat-Prüfung
 WIEDERHERGESTELLT AUS REGISTERSTAND 2026-09-09; keine neue Entscheidung.
+
+## ARCH-089 – Campusweit genau eine Current-Autorität pro Arbeitsbereich
+
+WAS:
+Der Campus wurde von der bisherigen Zweiteilung `CURRENT_STATE = Stand` plus `HOBBYRAUM = aktuelle Arbeit/NEXT ACTION` auf genau **eine Current-Autorität pro Scope** umgestellt.
+
+ROUTING:
+`protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` benennt ausschließlich, **wo** die eine Current-Autorität liegt. Der Plan enthält selbst keinen Fachstatus.
+
+WARUM:
+Neue Chats mussten trotz Übergabe Stand, Hobbyraum, Branches und Protokolle wieder gegeneinander rekonstruieren. Die auf zwei Dateien verteilte dynamische Wahrheit war die strukturelle Ursache.
+
+REGEL:
+Die Current-Autorität besitzt Status, aktuellen belastbaren Stand, ersten Blocker und genau eine NEXT ACTION. START_HERE, Hauptpförtner, Gebäude- und sonstige Türen sind Navigation only. HOBBYRAUM ist nur `DERIVED_EXECUTION_SURFACE_V1`.
+
+SPEZIALFALL:
+Existiert bereits eine stärkere technische Current-Autorität, wird keine Campus-Kopie gepflegt. Für Pferde-Atelier AFFILIATE ist ausschließlich `control/release-governance/CURRENT_RELEASE.json` Current-Autorität; die frühere Campus-CURRENT_STATE ist nur noch Pointer.
+
+FRISCHE:
+`NO_FULL_REDISCOVERY_IF_CURRENT_BINDING_FRESH`.
+Bei belegter Änderung gilt `ON_BINDING_CHANGE_INSPECT_DELTA_ONLY`.
+
+SCHUTZ:
+`BAUCONTAINER/EINE_WAHRHEIT_STANDARD.md` + `BAUCONTAINER/single_truth_guard.py`.
+
