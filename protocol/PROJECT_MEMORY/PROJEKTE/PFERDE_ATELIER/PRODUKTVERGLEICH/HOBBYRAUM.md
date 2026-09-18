@@ -1,5 +1,12 @@
 # PRODUKTVERGLEICH – HOBBYRAUM
 
+<!-- DERIVED_EXECUTION_SURFACE_V1 -->
+
+> **NICHT CURRENT-AUTORITATIV.** Diese Datei ist nur die abgeleitete Ausführungsfläche für eine bereits von der zuständigen Current-Autorität freigegebene Arbeit.  
+> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
+> Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
+
+
 STAND: 2026-09-09
 STATUS: AKTIV / 0.8.0 WORDPRESS-LIVERETEST
 
@@ -59,7 +66,7 @@ Aktueller 0.8-Prüfgegenstand ist ausschließlich die oben hashgebundene ZIP plu
 Wichtig:
 Die vollständige Suite wurde erst nach Bindung der realen externen Fixtures/Abhängigkeiten als PASS gewertet. Der vorherige Lauf ohne diese Bindung war FAIL und ist im Protokoll dokumentiert.
 
-## NEXT ACTION
+## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION
 
 **Nur:**
 
