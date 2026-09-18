@@ -1,5 +1,11 @@
 # PFERDE-ATELIER / TECHNIK – CURRENT_STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-16
 STATUS: BELASTBARER TECHNISCHER IST-STAND
 
@@ -50,3 +56,13 @@ Noch offen:
 5. Speicheranalyse erneut laufen lassen und neuen Ist-Wert dokumentieren.
 
 Keine Änderung an Beiträgen, Seiten, Kategorien, Medieninhalten, URLs, Design oder Datenbankstruktur ist Teil dieses Auftrags.
+
+## NEXT ACTION
+
+1. `PPA-014 / CURRENT.zip` (WordPress Speicheranalyse 1.1.0) als Update über 1.0.1 im echten WordPress installieren.
+2. WPvivid-Dateiliste im Plugin öffnen.
+3. Vor jeder Löschung die tatsächlich angezeigten Dateien prüfen.
+4. Nur eindeutig entbehrliche Backup-Reste selektiv löschen.
+5. Speicheranalyse erneut ausführen und den neuen Ist-Wert gegen den oben dokumentierten Scan readbacken.
+
+Kein Inhalt, Design, Kategorien, Medieninhalt oder Datenbankstruktur als Nebenwirkung verändern.
