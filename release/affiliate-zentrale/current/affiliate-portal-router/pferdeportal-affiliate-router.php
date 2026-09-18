@@ -88,6 +88,7 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_AUTOMATION_CYCLE = 'ppar_automation_cycle_v1';
     const OPTION_ASSIGNMENTS = 'ppar_assignments_v1';
     const OPTION_BANNER_DISTRIBUTION = 'ppar_banner_distribution_v1';
+    const OPTION_BANNER_COVERAGE = 'ppar_banner_coverage_v1';
     const OPTION_HEALTH_SETTINGS = 'ppar_health_settings_v1';
     const OPTION_HEALTH_CURSOR = 'ppar_health_cursor_v1';
     const OPTION_HEALTH_SCHEMA_VERSION = 'ppar_health_schema_version';
@@ -1650,39 +1651,17 @@ JS;
         return $this->render_affiliate_slot_for_context($post_id, $context, $slot_type, $intent, $forced_group_id);
     }
     /**
-     * Soft target shares for banner *places*, never a relevance override.
-     * Only providers represented in the best relevance tier participate.
-     * Missing providers are automatically redistributed among eligible ones.
+     * Dynamische Abdeckung innerhalb derselben Relevanzstufe.
+     * Reihenfolge: Relevanz -> am wenigsten beruecksichtigter Partner ->
+     * am wenigsten beruecksichtigtes Creative. Grundlage sind persistente
+     * Seiten-/Slot-Zuordnungen, niemals Klicks oder Besucher-Impressions.
      */
     private function banner_distribution_defaults() {
-        return array(
-            'enabled'=>true,
-            'weights'=>array(
-                'otto'=>40,
-                'awin_other'=>25,
-                'adcell'=>20,
-                'direct'=>15,
-                'digistore24'=>0,
-                'other'=>0,
-            ),
-        );
+        return array('enabled'=>true,'mode'=>'dynamic_coverage');
     }
 
     private function banner_distribution_settings() {
-        $saved = get_option(self::OPTION_BANNER_DISTRIBUTION, array());
-        $saved = is_array($saved) ? $saved : array();
-        $defaults = $this->banner_distribution_defaults();
-        $weights = isset($saved['weights']) && is_array($saved['weights']) ? $saved['weights'] : array();
-        $out = array(
-            'enabled'=>array_key_exists('enabled', $saved) ? !empty($saved['enabled']) : true,
-            'weights'=>$defaults['weights'],
-        );
-        foreach ($out['weights'] as $key=>$default) {
-            if (array_key_exists($key, $weights)) {
-                $out['weights'][$key] = max(0, min(100, absint($weights[$key])));
-            }
-        }
-        return $out;
+        return $this->banner_distribution_defaults();
     }
 
     private function banner_distribution_slot($slot_type) {
@@ -1699,143 +1678,257 @@ JS;
         ), true);
     }
 
-    private function banner_distribution_provider_key($campaign) {
-        if (!is_array($campaign)) { return 'other'; }
-        $network = sanitize_key((string) ($campaign['network'] ?? ''));
-        if ($network === 'awin') {
-            return absint($campaign['advertiser_id'] ?? 0) === self::OTTO_AWIN_ADVERTISER_ID ? 'otto' : 'awin_other';
-        }
-        if ($network === 'adcell') { return 'adcell'; }
-        if ($network === 'digistore24') { return 'digistore24'; }
-        if (in_array($network, array('direct','manual'), true)) { return 'direct'; }
-        return 'other';
+    private function banner_distribution_partner_key($campaign) {
+        if (!is_array($campaign)) { return 'partner:unknown'; }
+        $network = sanitize_key((string) ($campaign['network'] ?? 'other'));
+        $identity = trim((string) ($campaign['advertiser_id'] ?? ''));
+        if ($identity === '') { $identity = trim((string) ($campaign['programme_name'] ?? '')); }
+        if ($identity === '') { $identity = trim((string) ($campaign['partner'] ?? '')); }
+        if ($identity === '') { $identity = $network; }
+        return $network . ':' . substr(hash('sha256', strtolower($identity)), 0, 20);
+    }
+
+    private function banner_distribution_creative_key($campaign) {
+        if (!is_array($campaign)) { return 'creative:unknown'; }
+        $network = sanitize_key((string) ($campaign['network'] ?? 'other'));
+        $post_id = absint($campaign['post_id'] ?? ($campaign['campaign_post_id'] ?? 0));
+        $basis = array(
+            $network,
+            (string) ($campaign['external_id'] ?? ''),
+            (string) ($campaign['dimensions'] ?? ''),
+            (string) ($campaign['image_url'] ?? ''),
+            (string) ($campaign['html'] ?? ''),
+            (string) ($campaign['title'] ?? ''),
+            (string) ($campaign['button_text'] ?? ''),
+        );
+        if (implode('', $basis) === $network) { $basis[] = 'post:' . $post_id; }
+        return 'creative:' . substr(hash('sha256', implode('|', $basis)), 0, 24);
     }
 
     private function banner_distribution_relevance_band($specificity) {
         $specificity = (int) $specificity;
-        if ($specificity >= 450) { return 5; }
-        if ($specificity >= 400) { return 4; }
-        if ($specificity >= 350) { return 3; }
-        if ($specificity >= 200) { return 2; }
-        return 1;
+        if ($specificity >= 450) { return 'exact'; }
+        if ($specificity >= 200) { return 'extended'; }
+        if ($specificity >= 100) { return 'general'; }
+        return 'technical';
     }
 
-    private function banner_distribution_bucket($context, $slot_type, $total) {
-        $total = max(1, absint($total));
+    private function banner_distribution_page_key($context) {
+        $context = is_array($context) ? $context : array();
         $post_id = absint($context['post_id'] ?? 0);
-        $terms = array_values(array_unique(array_map('absint', (array) ($context['term_ids'] ?? array()))));
+        if ($post_id > 0) { return 'post:' . $post_id; }
+        $terms = array_values(array_unique(array_filter(array_map('absint', (array) ($context['term_ids'] ?? array())))));
         sort($terms, SORT_NUMERIC);
         $slugs = array_values(array_unique(array_filter(array_map('sanitize_key', (array) ($context['slugs'] ?? array())))));
         sort($slugs, SORT_STRING);
-        // Weekly stability is deliberate: deterministic enough for caches and
-        // reproducible diagnosis, while banner places rotate over time.
-        $seed = implode('|', array(
-            gmdate('o-W'),
-            (string) $post_id,
-            implode(',', $terms),
-            implode(',', $slugs),
-            sanitize_key((string) $slot_type),
-            (string) max(1, absint($context['banner_distribution_position'] ?? 1)),
-        ));
-        return (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % $total);
+        return 'context:' . substr(hash('sha256', implode(',', $terms) . '|' . implode(',', $slugs) . '|' . sanitize_key((string) ($context['post_type'] ?? ''))), 0, 24);
+    }
+
+    private function banner_distribution_context_signature($context) {
+        $context = is_array($context) ? $context : array();
+        $terms = array_values(array_unique(array_filter(array_map('absint', (array) ($context['term_ids'] ?? array())))));
+        sort($terms, SORT_NUMERIC);
+        $slugs = array_values(array_unique(array_filter(array_map('sanitize_key', (array) ($context['slugs'] ?? array())))));
+        sort($slugs, SORT_STRING);
+        return hash('sha256', wp_json_encode(array(
+            'post_id'=>absint($context['post_id'] ?? 0),
+            'post_type'=>sanitize_key((string) ($context['post_type'] ?? '')),
+            'primary_slug'=>sanitize_key((string) ($context['primary_slug'] ?? '')),
+            'term_ids'=>$terms,
+            'slugs'=>$slugs,
+            'haystack'=>hash('sha256', (string) ($context['haystack'] ?? '')),
+        )));
+    }
+
+    private function banner_distribution_slot_key($context, $slot_type) {
+        return $this->banner_distribution_page_key($context)
+            . '|slot:' . sanitize_key((string) $slot_type)
+            . '|position:' . max(1, absint($context['banner_distribution_position'] ?? 1));
+    }
+
+    private function banner_distribution_inventory_signature() {
+        $rows = array();
+        foreach ($this->get_campaigns() as $campaign) {
+            if (!is_array($campaign) || empty($campaign['active']) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') { continue; }
+            $rows[] = array(
+                'post_id'=>absint($campaign['post_id'] ?? 0),
+                'network'=>sanitize_key((string) ($campaign['network'] ?? '')),
+                'advertiser_id'=>(string) ($campaign['advertiser_id'] ?? ''),
+                'programme_name'=>(string) ($campaign['programme_name'] ?? ''),
+                'partner'=>(string) ($campaign['partner'] ?? ''),
+                'external_id'=>(string) ($campaign['external_id'] ?? ''),
+                'dimensions'=>(string) ($campaign['dimensions'] ?? ''),
+                'assignment_mode'=>sanitize_key((string) ($campaign['assignment_mode'] ?? '')),
+                'page_id'=>absint($campaign['page_id'] ?? 0),
+                'match_descendants'=>!empty($campaign['match_descendants']),
+                'match_slugs'=>array_values((array) ($campaign['match_slugs'] ?? array())),
+                'match_keywords'=>array_values((array) ($campaign['match_keywords'] ?? array())),
+                'match_term_ids'=>array_values((array) ($campaign['match_term_ids'] ?? array())),
+                'placements'=>array_values((array) ($campaign['placements'] ?? array())),
+                'priority'=>(int) ($campaign['priority'] ?? 0),
+                'start_date'=>(string) ($campaign['start_date'] ?? ''),
+                'end_date'=>(string) ($campaign['end_date'] ?? ''),
+                'last_synced'=>absint($campaign['last_synced'] ?? 0),
+            );
+        }
+        usort($rows, static function($a, $b) { return ($a['post_id'] <=> $b['post_id']); });
+        return hash('sha256', wp_json_encode($rows));
+    }
+
+    private function banner_distribution_state() {
+        $signature = $this->banner_distribution_inventory_signature();
+        $state = get_option(self::OPTION_BANNER_COVERAGE, array());
+        $state = is_array($state) ? $state : array();
+        if (($state['inventory_signature'] ?? '') !== $signature || !isset($state['assignments']) || !is_array($state['assignments'])) {
+            $state = array(
+                'inventory_signature'=>$signature,
+                'assignments'=>array(),
+                'recomputed_at'=>time(),
+            );
+            update_option(self::OPTION_BANNER_COVERAGE, $state, false);
+        }
+        return $state;
+    }
+
+    private function banner_distribution_tie_pick($keys, $seed) {
+        $keys = array_values(array_unique(array_filter(array_map('strval', (array) $keys))));
+        if (!$keys) { return ''; }
+        usort($keys, static function($a, $b) use ($seed) {
+            return strcmp(hash('sha256', $seed . '|' . $a), hash('sha256', $seed . '|' . $b));
+        });
+        return (string) $keys[0];
     }
 
     private function banner_distribution_reorder_candidates($candidates, $context, $slot_type) {
         $candidates = array_values((array) $candidates);
-        if (!$candidates) { return $candidates; }
-        $settings = $this->banner_distribution_settings();
-        if (empty($settings['enabled'])) { return $candidates; }
+        if (!$candidates) { return array(); }
 
-        // Weight 0 is an automatic exclusion, not merely "no bonus".
-        // Manual fixed assignments bypass this function and remain the repair layer.
-        $automatic_banner_candidates = array();
+        $context = is_array($context) ? $context : array();
+        $page_key = $this->banner_distribution_page_key($context);
+        $slot_key = $this->banner_distribution_slot_key($context, $slot_type);
+        $context_signature = $this->banner_distribution_context_signature($context);
+        $state = $this->banner_distribution_state();
+        $assignments = (array) ($state['assignments'] ?? array());
+
+        $used_on_page = array();
+        foreach ($assignments as $key => $row) {
+            if ($key === $slot_key || !is_array($row)) { continue; }
+            if ((string) ($row['page_key'] ?? '') !== $page_key) { continue; }
+            $creative = (string) ($row['creative_key'] ?? '');
+            if ($creative !== '') { $used_on_page[$creative] = true; }
+        }
+
+        $eligible = array();
         foreach ($candidates as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-            if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') {
-                continue;
+            if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') { continue; }
+            $creative_key = $this->banner_distribution_creative_key($campaign);
+            if (isset($used_on_page[$creative_key])) { continue; }
+            $candidate['_coverage_partner_key'] = $this->banner_distribution_partner_key($campaign);
+            $candidate['_coverage_creative_key'] = $creative_key;
+            $candidate['_coverage_band'] = $this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0));
+            $eligible[] = $candidate;
+        }
+        if (!$eligible) { return array(); }
+
+        $band_candidates = array();
+        $selected_band = '';
+        foreach (array('exact','extended','general','technical') as $band) {
+            $current = array();
+            foreach ($eligible as $candidate) {
+                if (($candidate['_coverage_band'] ?? '') === $band) { $current[] = $candidate; }
             }
-            $key = $this->banner_distribution_provider_key($campaign);
-            if (absint($settings['weights'][$key] ?? 0) <= 0) {
-                continue;
+            if ($current) { $band_candidates = $current; $selected_band = $band; break; }
+        }
+        if (!$band_candidates) { return array(); }
+
+        $existing = isset($assignments[$slot_key]) && is_array($assignments[$slot_key]) ? $assignments[$slot_key] : array();
+        if (($existing['context_signature'] ?? '') === $context_signature && ($existing['band'] ?? '') === $selected_band) {
+            $wanted = (string) ($existing['creative_key'] ?? '');
+            foreach ($band_candidates as $candidate) {
+                if (($candidate['_coverage_creative_key'] ?? '') === $wanted) {
+                    $selected = $candidate;
+                    $rest = array();
+                    foreach ($eligible as $row) {
+                        if (($row['_coverage_creative_key'] ?? '') !== $wanted) { $rest[] = $row; }
+                    }
+                    unset($selected['_coverage_partner_key'], $selected['_coverage_creative_key'], $selected['_coverage_band']);
+                    foreach ($rest as &$row) { unset($row['_coverage_partner_key'], $row['_coverage_creative_key'], $row['_coverage_band']); }
+                    unset($row);
+                    array_unshift($rest, $selected);
+                    return array_values($rest);
+                }
             }
-            $automatic_banner_candidates[] = $candidate;
-        }
-        if (!$automatic_banner_candidates) {
-            return array();
-        }
-        if (count($automatic_banner_candidates) === 1) {
-            return $automatic_banner_candidates;
         }
 
-        $best_band = 0;
-        foreach ($automatic_banner_candidates as $candidate) {
-            $best_band = max($best_band, $this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)));
+        $partner_counts = array();
+        $creative_counts = array();
+        foreach ($assignments as $key => $row) {
+            if ($key === $slot_key || !is_array($row) || ($row['band'] ?? '') !== $selected_band) { continue; }
+            $partner = (string) ($row['partner_key'] ?? '');
+            $creative = (string) ($row['creative_key'] ?? '');
+            if ($partner !== '') { $partner_counts[$partner] = absint($partner_counts[$partner] ?? 0) + 1; }
+            if ($creative !== '') { $creative_counts[$creative] = absint($creative_counts[$creative] ?? 0) + 1; }
         }
-        $groups = array();
-        foreach ($automatic_banner_candidates as $index=>$candidate) {
-            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-            if (!is_array($campaign)) { continue; }
-            if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) !== $best_band) {
-                continue;
+
+        $partner_candidates = array();
+        foreach ($band_candidates as $candidate) {
+            $key = (string) ($candidate['_coverage_partner_key'] ?? '');
+            if ($key !== '') { $partner_candidates[$key] = absint($partner_counts[$key] ?? 0); }
+        }
+        if (!$partner_candidates) { return array(); }
+        $min_partner = min($partner_candidates);
+        $least_partners = array_keys(array_filter($partner_candidates, static function($count) use ($min_partner) { return $count === $min_partner; }));
+        $partner_key = $this->banner_distribution_tie_pick($least_partners, $slot_key . '|partner');
+
+        $creative_candidates = array();
+        foreach ($band_candidates as $candidate) {
+            if (($candidate['_coverage_partner_key'] ?? '') !== $partner_key) { continue; }
+            $key = (string) ($candidate['_coverage_creative_key'] ?? '');
+            if ($key !== '') { $creative_candidates[$key] = absint($creative_counts[$key] ?? 0); }
+        }
+        if (!$creative_candidates) { return array(); }
+        $min_creative = min($creative_candidates);
+        $least_creatives = array_keys(array_filter($creative_candidates, static function($count) use ($min_creative) { return $count === $min_creative; }));
+        $creative_key = $this->banner_distribution_tie_pick($least_creatives, $slot_key . '|creative');
+
+        $selected = null;
+        foreach ($band_candidates as $candidate) {
+            if (($candidate['_coverage_partner_key'] ?? '') === $partner_key && ($candidate['_coverage_creative_key'] ?? '') === $creative_key) {
+                $selected = $candidate;
+                break;
             }
-            $key = $this->banner_distribution_provider_key($campaign);
-            $weight = absint($settings['weights'][$key] ?? 0);
-            if ($weight <= 0) { continue; }
-            if (!isset($groups[$key])) { $groups[$key] = array(); }
-            $groups[$key][] = $index;
         }
+        if (!is_array($selected)) { return array(); }
 
-        $ordered_keys = array('otto','awin_other','adcell','direct','digistore24','other');
-        $eligible = array();
-        $total = 0;
-        foreach ($ordered_keys as $key) {
-            if (empty($groups[$key])) { continue; }
-            $weight = absint($settings['weights'][$key] ?? 0);
-            if ($weight <= 0) { continue; }
-            $eligible[$key] = $weight;
-            $total += $weight;
-        }
+        $campaign = is_array($selected['campaign'] ?? null) ? $selected['campaign'] : array();
+        $assignments[$slot_key] = array(
+            'page_key'=>$page_key,
+            'slot_type'=>sanitize_key((string) $slot_type),
+            'position'=>max(1, absint($context['banner_distribution_position'] ?? 1)),
+            'context_signature'=>$context_signature,
+            'band'=>$selected_band,
+            'partner_key'=>$partner_key,
+            'creative_key'=>$creative_key,
+            'campaign_post_id'=>absint($campaign['post_id'] ?? 0),
+            'updated_at'=>time(),
+        );
+        $state['assignments'] = $assignments;
+        update_option(self::OPTION_BANNER_COVERAGE, $state, false);
 
-        if ($total <= 0 || !$eligible) {
-            return array();
-        }
-        if (count($eligible) === 1) {
-            $only = array_key_first($eligible);
-            $selected_indexes = array_fill_keys($groups[$only], true);
-            $out = array();
-            foreach ($groups[$only] as $index) { $out[] = $automatic_banner_candidates[$index]; }
-            foreach ($automatic_banner_candidates as $index=>$candidate) {
-                if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
-            }
-            return array_values($out);
-        }
-
-        $bucket = $this->banner_distribution_bucket($context, $slot_type, $total);
-        $cursor = 0;
-        $selected = '';
-        foreach ($eligible as $key=>$weight) {
-            $cursor += $weight;
-            if ($bucket < $cursor) { $selected = $key; break; }
-        }
-        if ($selected === '' || empty($groups[$selected])) {
-            return $automatic_banner_candidates;
-        }
-
-        $selected_indexes = array_fill_keys($groups[$selected], true);
-        $out = array();
-        foreach ($groups[$selected] as $index) {
-            $candidate = $automatic_banner_candidates[$index];
-            $candidate['reason'] = sanitize_text_field(
-                (string) ($candidate['reason'] ?? 'Passende Zuordnung.')
-                . ' · Banneranteil ' . $selected . ': ' . absint($eligible[$selected]) . '/' . $total . ' der aktuell gleich relevanten Quellen.'
-            );
+        $selected['reason'] = sanitize_text_field((string) ($selected['reason'] ?? 'Passende Zuordnung.') . ' · Dynamische Abdeckung nach Partner und Creative.');
+        $out = array($selected);
+        foreach ($eligible as $candidate) {
+            if (($candidate['_coverage_creative_key'] ?? '') === $creative_key) { continue; }
             $out[] = $candidate;
         }
-        foreach ($automatic_banner_candidates as $index=>$candidate) {
-            if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
+        foreach ($out as &$candidate) {
+            unset($candidate['_coverage_partner_key'], $candidate['_coverage_creative_key'], $candidate['_coverage_band']);
         }
+        unset($candidate);
         return array_values($out);
     }
+
     private function get_assignments() {
         $value = get_option(self::OPTION_ASSIGNMENTS, array());
         return is_array($value) ? $value : array();
@@ -2743,7 +2836,7 @@ JS;
         $page_id = isset($campaign['page_id']) ? (int) $campaign['page_id'] : 0;
 
         if ($mode === 'fallback') {
-            return array('specificity' => 10, 'matches' => 1, 'reason' => 'Allgemeiner Fallback.');
+            return array('specificity' => 100, 'matches' => 1, 'reason' => 'Allgemeiner Shop-/Portal-Fallback.');
         }
         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
             return $this->automation_campaign_exact_target_rank($campaign, $context);
@@ -2787,12 +2880,23 @@ JS;
                 return array('specificity' => 200, 'matches' => $keyword_matches, 'reason' => 'Passender definierter Themenbegriff.');
             }
         }
+        if ($this->slot_required_creative_type((string) ($context['slot_type'] ?? '')) === 'banner') {
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Letzter technischer Banner-Fallback.');
+        }
         return null;
     }
     private function slot_required_creative_type($slot_type) {
         $slot_type = sanitize_key((string)$slot_type);
         if ($slot_type === 'category_product' || preg_match('/^(?:hub_product|category_product|journal_product)_[123]$/', $slot_type) || $slot_type === 'post_bottom_products') { return 'product'; }
-        if (in_array($slot_type, array('product_after_category_tiles', 'post_inline_banner', 'anzeigenmarkt_top_banner', 'journal_banner'), true)) { return 'banner'; }
+        if (in_array($slot_type, array(
+            'start_after_topics',
+            'top_info','mid_content','bottom_recommendation',
+            'post_after_intro','post_mid_content','post_bottom_recommendation',
+            'hub_top_cta','hub_after_cards','hub_grid_card','hub_mid_banner',
+            'category_recommendation','product_after_category_tiles',
+            'template_top','template_after_intro','template_after_selected','template_mid','template_mid_banner','template_bottom',
+            'post_inline_banner','journal_banner','anzeigenmarkt_top_banner'
+        ), true)) { return 'banner'; }
         return '';
     }
 
@@ -3107,30 +3211,22 @@ JS;
         $rank_context = is_array($context) ? $context : array();
 
         if ($this->banner_distribution_slot($slot_type)) {
-            $rank_context['banner_distribution_position'] = $position;
-            $candidates = $this->ranked_campaigns_for_slot($rank_context, $slot_type);
             if ($position === 1) {
+                $rank_context['banner_distribution_position'] = 1;
+                $candidates = $this->ranked_campaigns_for_slot($rank_context, $slot_type);
                 return $candidates[0] ?? null;
             }
-
-            // Position 2 receives its own weighted decision, but must never
-            // repeat the banner already selected for position 1.
             $first_context = $rank_context;
             $first_context['banner_distribution_position'] = 1;
             $first_candidates = $this->ranked_campaigns_for_slot($first_context, $slot_type);
             $first_campaign = is_array($first_candidates[0]['campaign'] ?? null) ? $first_candidates[0]['campaign'] : array();
-            $first_key = absint($first_campaign['post_id'] ?? 0) > 0
-                ? 'post:' . absint($first_campaign['post_id'])
-                : 'id:' . sanitize_key((string) ($first_campaign['id'] ?? ''));
+            $first_key = $this->banner_distribution_creative_key($first_campaign);
 
+            $rank_context['banner_distribution_position'] = 2;
+            $candidates = $this->ranked_campaigns_for_slot($rank_context, $slot_type);
             foreach ($candidates as $candidate) {
                 $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
-                $candidate_key = absint($campaign['post_id'] ?? 0) > 0
-                    ? 'post:' . absint($campaign['post_id'])
-                    : 'id:' . sanitize_key((string) ($campaign['id'] ?? ''));
-                if ($candidate_key !== '' && $candidate_key !== $first_key) {
-                    return $candidate;
-                }
+                if ($this->banner_distribution_creative_key($campaign) !== $first_key) { return $candidate; }
             }
             return null;
         }
@@ -4206,24 +4302,10 @@ JS;
     public function handle_save_banner_distribution() {
         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
         check_admin_referer('ppar_save_banner_distribution','ppar_banner_distribution_nonce');
-        $raw = is_array($_POST['ppar_banner_distribution'] ?? null) ? wp_unslash($_POST['ppar_banner_distribution']) : array();
-        $keys = array('otto','awin_other','adcell','direct','digistore24','other');
-        $weights = array();
-        foreach ($keys as $key) {
-            $weights[$key] = max(0, min(100, absint($raw['weights'][$key] ?? 0)));
-        }
-        $enabled = !empty($raw['enabled']);
-        if ($enabled && array_sum($weights) <= 0) {
-            wp_die('Für die automatische Bannerverteilung muss mindestens ein Anteil größer als 0 sein.');
-        }
-        update_option(self::OPTION_BANNER_DISTRIBUTION, array(
-            'enabled'=>$enabled,
-            'weights'=>$weights,
-            'updated_at'=>time(),
-            'updated_by'=>get_current_user_id(),
-        ), false);
+        delete_option(self::OPTION_BANNER_DISTRIBUTION);
+        delete_option(self::OPTION_BANNER_COVERAGE);
         if (method_exists($this, 'article_plan_bump_campaign_revision')) {
-            $this->article_plan_bump_campaign_revision('banner_distribution_changed');
+            $this->article_plan_bump_campaign_revision('banner_coverage_recomputed');
         }
         wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-assignments','ppar_banner_distribution_saved'=>'1'), admin_url('admin.php')));
         exit;
@@ -4280,23 +4362,15 @@ JS;
         ?>
         <div class="wrap"><h1>Zuordnungen</h1>
         <div class="notice notice-info inline"><p><strong>Normalfall:</strong> Banner und Produkte werden direkt am Werbemittel automatisch einem eindeutigen Hauptbereich und dessen Unterseiten zugeordnet. Diese Seite ist zugleich die interne Reparaturinstanz: Automatik lassen, fest ersetzen oder vollständig ausblenden.</p></div>
-        <?php $banner_distribution = $this->banner_distribution_settings(); $banner_weights = (array)($banner_distribution['weights'] ?? array()); ?>
-        <h2>Automatische Bannerverteilung</h2>
+        <?php $banner_coverage_state = $this->banner_distribution_state(); $banner_coverage_count = count((array)($banner_coverage_state['assignments'] ?? array())); ?>
+        <h2>Automatische Bannerabdeckung</h2>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="max-width:900px;background:#fff;border:1px solid #c3c4c7;padding:18px;margin-bottom:24px">
             <input type="hidden" name="action" value="ppar_save_banner_distribution">
             <?php wp_nonce_field('ppar_save_banner_distribution','ppar_banner_distribution_nonce'); ?>
-            <p><label><input type="checkbox" name="ppar_banner_distribution[enabled]" value="1" <?php checked(!empty($banner_distribution['enabled'])); ?>> <strong>Anteilsgesteuerte Bannerautomatik aktiv</strong></label></p>
-            <p class="description">Relevanz und Sicherheitsprüfungen kommen immer zuerst. Die Anteile gelten nur zwischen aktuell gleich relevanten, technisch freigegebenen Bannerquellen. Fehlt eine Quelle, wird ihr Anteil automatisch auf die vorhandenen Quellen verteilt. Die Auswahl bleibt pro Seiten-/Slot-Kombination eine Woche stabil.</p>
-            <table class="form-table"><tbody>
-                <tr><th>OTTO</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][otto]" value="<?php echo absint($banner_weights['otto'] ?? 40); ?>"> <span class="description">Startwert 40</span></td></tr>
-                <tr><th>Awin – andere Programme</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][awin_other]" value="<?php echo absint($banner_weights['awin_other'] ?? 25); ?>"></td></tr>
-                <tr><th>ADCELL</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][adcell]" value="<?php echo absint($banner_weights['adcell'] ?? 20); ?>"></td></tr>
-                <tr><th>Direktpartner</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][direct]" value="<?php echo absint($banner_weights['direct'] ?? 15); ?>"></td></tr>
-                <tr><th>Digistore24</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][digistore24]" value="<?php echo absint($banner_weights['digistore24'] ?? 0); ?>"> <span class="description">aktuell zurückgestellt</span></td></tr>
-                <tr><th>Sonstige</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][other]" value="<?php echo absint($banner_weights['other'] ?? 0); ?>"></td></tr>
-            </tbody></table>
-            <p class="description">Die Werte sind relative Zielanteile; 40/25/20/15 entspricht 40/25/20/15 %. Die Summe muss technisch nicht 100 sein, da das System unter den tatsächlich verfügbaren Quellen normalisiert.</p>
-            <?php submit_button('Banneranteile speichern'); ?>
+            <p><strong>Normalbetrieb vollautomatisch.</strong> Zuerst entscheidet die fachliche Relevanz. Innerhalb derselben Relevanzstufe wird zuerst der bisher am wenigsten berücksichtigte Partner und danach dessen am wenigsten berücksichtigtes geeignetes Creative gewählt.</p>
+            <p class="description">Grundlage sind Seiten-/Slot-Zuordnungen, nicht Klicks oder Besucher-Impressions. Bei geändertem aktivem Bannerbestand wird die Abdeckung automatisch neu aufgebaut. Dasselbe Creative wird auf derselben Seite nicht erneut automatisch vergeben.</p>
+            <p><strong>Aktuell gebundene Seiten-/Slot-Zuordnungen:</strong> <?php echo absint($banner_coverage_count); ?></p>
+            <?php submit_button('Abdeckung jetzt neu berechnen','secondary'); ?>
         </form>
         <h2>Manuelle Ausnahme suchen</h2>
         <form method="get" style="display:flex;gap:8px;max-width:760px"><input type="hidden" name="page" value="affiliate-portal-assignments"><input type="search" name="ppar_page_search" value="<?php echo esc_attr($search); ?>" class="regular-text" placeholder="Seitentitel suchen, z. B. Regendecken" required><?php submit_button('Suchen','secondary','',false); ?></form>
