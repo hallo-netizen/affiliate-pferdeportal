@@ -2,85 +2,27 @@
 
 <!-- DERIVED_EXECUTION_SURFACE_V1 -->
 
-> **NICHT CURRENT-AUTORITATIV.** Diese Datei ist nur die abgeleitete Ausführungsfläche für eine bereits von der zuständigen Current-Autorität freigegebene Arbeit.  
-> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
-> Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
-
 STAND: 2026-09-18
-STATUS: AKTIV – M39 HISTORY AUTHORITY MAINTENANCE
+STATUS: FREI
 
-## AKTUELLE ARBEIT
+Dieser Hobbyraum ist **keine Current-Autorität** und enthält keine aktive technische Arbeitsbindung.
 
-Ausschließlich M39 als neuen historischen Fehlerfall in die **bestehende** Fehlermatrix und den **bestehenden** Regressionrunner aufnehmen.
+## EINSTIEG
 
-Current technical main:
-`f9bc719efd0924a18ee876ee8581a566afa7ecda`
+Aktuellen Stand niemals hier lesen.
 
-Aktiver Blocker:
-`CURRENT_7ER_BATCH_ALREADY_HAS_DURABLE_RELEASE_IDENTITY_COLLISION`
+Pflichtweg:
+`TEXT/START_HERE.md → protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json → control/startmaster0107/CURRENT_STATE.json → Frischecheck → NEXT ACTION`
 
-History-Kandidat:
-- Branch: `hobbyroom/m39-release-identity-history-20260918`
-- Head: `5546adc61404437ac9de7ff35bba2d982b9d6266`
-- erlaubt: nur Fehlermatrix + bestehender Regressionrunner
-- erwartet: M01–M38 PASS, M39 erster neuer FAIL
-- kein Produktfix in dieser Phase
+## ABSCHLUSS DER LETZTEN ARBEIT
 
-## DANACH
+Die frühere M39-/Pre-Codex-Arbeitsbindung ist beendet und historisch. Ihre Ergebnisse wurden in die technischen Hauptquellen und Abschlussbelege zurückgeführt.
 
-Erst nach erfolgreichem M39-History-Beweis wird der bereits vorbereitete Release-ID-Produktfix neu auf dem dann aktuellen Main aufgebaut und vollständig geprüft.
+## HARTE GRENZEN
 
-## VERBOTEN
-
-- Produktfix in diesem History-Kandidaten;
-- echter Codex;
-- Artikelproduktion;
-- neuer Runner/Gate/Controller/Sidecar;
-- Änderung von PPM/PSERC/PSTE/Textmaschine/Fachregeln;
-- WordPress-Write;
-- Publish.
-
-HOBBYROOM_WORK_LOCK_V1
-STATUS: FIX_ALLOWED_FOR_CODEX_TEST
-OFFICE: TEXT
-MAIN_SHA: f9bc719efd0924a18ee876ee8581a566afa7ecda
-ACTIVE_BLOCKER: CURRENT_7ER_BATCH_ALREADY_HAS_DURABLE_RELEASE_IDENTITY_COLLISION
-PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
-RECOVERY_BASE_SHA: 508f9dbb3650c99e5d41dbab83086af46945e225
-ACTIVE_HISTORY_CASE: M39
-HISTORY_EXPECTED_FAIL: M39
-CANDIDATE_BRANCH: hobbyroom/m39-release-identity-history-20260918
-CANDIDATE_HEAD_SHA: 5546adc61404437ac9de7ff35bba2d982b9d6266
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-CHECK_PAUL: PASS
-CHECK_HISTORY: PASS
-CHECK_LAST_GOOD: PASS
-CHECK_NEIGHBORS: PASS
-CHECK_REPEAT_CLASS: PASS
-CHECK_POS_NEG: PASS
-CHECK_INVARIANTS: PASS
-HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
-HISTORY_SOURCE_BLOB_SHA: bdd041393d25f0f69a35c0e2d7a3b120b3aef178
-HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-HISTORY_PROOF_RUNNER_BLOB_SHA: c33a49bf1c44dd9e09c49eb8139568390317dc09
-PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
-PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
-ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md
-ERROR_SOURCE_BLOB_SHA: abd075bb6b9b67a9c960ce3951e9b836ddd007ba
-CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 862cfeaf91e746f93549609ec23a25ba5bb7154b
-DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: eefb9baa492bf510912212780face6afcf58d7aa
-STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
-STANDARD_SOURCE_BLOB_SHA: a1181437d8ab9e66b755d662f795417ca8127c5f
-PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/M39_ARBEITSPROTOKOLL_20260918.md
-PROTOCOL_SOURCE_BLOB_SHA: bf968dec92c8fb2508ce2e05416318ae9b2f067c
-INTEGRATION_ALLOWED: true
-END_HOBBYROOM_WORK_LOCK_V1
-
-## VERWEISE
-
-- CURRENT: `CURRENT_STATE.md`
-- aktuelle Fehlerquelle: `QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
-- M39-Protokoll: `M39_ARBEITSPROTOKOLL_20260918.md`
+- kein eigener Status;
+- kein eigener Blocker;
+- keine eigene NEXT ACTION;
+- kein Codex-Start aus dem Hobbyraum;
+- keine Parallelroute;
+- kein Publish.
