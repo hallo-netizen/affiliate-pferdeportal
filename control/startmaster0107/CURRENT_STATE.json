@@ -86,7 +86,12 @@
     "SYSTEM4_POSTMERGE_ACCEPTANCE_RUN_35380544689_PASS",
     "SYSTEM4_REAL7_REACHED_ARTICLE0_LANGUAGETOOL_REPAIR_REQUIRED_PR107_5734550696",
     "SYSTEM4_REAL7_CONTINUATION_WORKSPACE_UNAVAILABLE_PR107_5734597579",
-    "SYSTEM4_REAL7_PPM_REPAIR_PROOF_GAP_IDENTIFIED_20260918"
+    "SYSTEM4_REAL7_PPM_REPAIR_PROOF_GAP_IDENTIFIED_20260918",
+    "SYSTEM4A_REAL_REPAIR_PROOF_TEST_LAYER_PR331_MERGED_1431BF52EA73932C809D242A429CDD62E7B93A0B",
+    "SYSTEM4A_REAL_REPAIR_PROOF_ACCEPTANCE_RUN_35389785292_PASS",
+    "SYSTEM4A_REAL_REPAIR_PROOF_HARDLOCK_RUN_35389831741_PASS",
+    "SYSTEM4A_REAL_REPAIR_PROOF_HARDLOCK_BASE_RUN_35389831731_PASS",
+    "USER_CODEX_APPROVAL_20260918_UNTIL_20260919_MORNING_OR_USAGE_LIMIT"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -192,25 +197,30 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "REAL7_STOPPED_ARTICLE0_PPM_REPAIR_PROOF_GAP",
+  "current_work_status": "REAL_CODEX_SINGLE_ARTICLE_REPAIR_ACCEPTANCE_APPROVED",
   "current_execution_blocker": {
-    "code": "REAL7_PPM_DRAFT_REPAIR_PROOF_GAP",
-    "error_class": true,
+    "code": "REAL_CODEX_REPAIR_ACCEPTANCE_PENDING_EXECUTION",
+    "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "Latest observed real Codex shell output for article 0 shows four PPM 6.7.9 findings, all owned by DRAFT_WORKER: duplicate_sentence_ratio 0.2909090909090909 > 0.02; conclusion_ratio 0.09494949494949495 < 0.1; Wave2 conclusion ratio same; table unique_token_ratio 0.09230769230769231 < 0.18. Run was stopped at 0/7. Existing 4A repair tests prove owner routing/recheck but use mocks or prebuilt final fixtures and do not prove live Codex-generated repair for this multi-finding case. Exact root cause is not yet provable because durable before/after article bytes for this shell finding set are not bound in GitHub evidence.",
-    "main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
+    "detail": "The test/proof gap is closed by PR #331 and System 4A real acceptance run 35389785292. The user explicitly approved Codex use until the morning of 2026-09-19 or until the Codex usage limit is reached. Exactly one fresh real Codex article-0 repair acceptance is authorized. Article 1 and batch advance remain forbidden. Real Codex repair proof requires durable pre-repair bytes/state/findings and post-repair bytes/state plus real LT/PPM PASS evidence; mocks, deterministic testworkers and prebuilt final fixtures cannot satisfy it.",
+    "proof_base_main_sha": "1431bf52ea73932c809d242a429cdd62e7b93a0b",
+    "proof_layer_pr": 331,
+    "proof_layer_acceptance_run_id": 35389785292,
+    "proof_layer_hardlock_run_id": 35389831741,
+    "proof_layer_hardlock_base_run_id": 35389831731,
     "dispatcher_pr": 107,
-    "dispatcher_head_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
     "article_index": 0,
     "completed_articles": 0,
     "next_article_started": false,
     "publish_allowed": false,
-    "exact_shell_findings_durable_github_terminal_bound": false,
-    "evidence_source": "USER_PROVIDED_REAL_CODEX_SHELL_OUTPUT_20260918",
-    "analysis_protocol_ref": "protocol/STARTMASTER0107_CLOSEOUT_REAL7_PPM_REPAIR_GAP_20260918.md",
-    "codex_start_allowed": false,
-    "fresh_user_codex_approval_required": true
+    "codex_start_allowed": true,
+    "fresh_user_codex_approval_required": false,
+    "user_codex_approval": {
+      "source": "CURRENT_CHAT_USER_MESSAGE_20260918",
+      "scope": "USE_CODEX_WHERE_NECESSARY_FOR_CURRENT_REPAIR_PROOF",
+      "valid_until": "2026-09-19_MORNING_OR_CODEX_USAGE_LIMIT"
+    }
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -297,27 +307,31 @@
     "sequence_107008_reached": false,
     "publish_performed": false
   },
-  "last_safe_main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
-  "last_safe_change": "PR #329 merged status/closeout bookkeeping only; current product/quality/design logic remained unchanged. Subsequent observed real article-0 PPM failure exposed a proof gap in real Codex-generated repair, not a proven defect in the static text rules.",
-  "hobbyroom_status": "NOT_USED_FOR_CURRENT_PPM_REPAIR_DIAGNOSIS",
-  "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
+  "last_safe_main_sha": "1431bf52ea73932c809d242a429cdd62e7b93a0b",
+  "last_safe_change": "PR #331 merged the repair-proof hardening and text-quality/structure separation only. PPM 6.7.9, LanguageTool 6.8, text/design rules, quality thresholds and production architecture were not changed. Full System 4A real acceptance plus hardlock and hardlock-base passed.",
+  "hobbyroom_status": "SYSTEM4A_REPAIR_PROOF_TEST_LAYER_PASS",
+  "hobbyroom_branch": "hobbyroom/system4a-textmachine-final-pass-20260916",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "NO_HOBBYROOM_ACTION_REQUIRED",
+  "hobbyroom_blocker": "NONE_TEST_LAYER_CLOSED",
   "next_action": {
-    "goal": "CLOSE_REAL_CODEX_REPAIR_PROOF_GAP_BEFORE_ANY_BATCH_RESTART",
-    "action": "Do not start Codex. First capture or retrieve the exact article-0 pre-repair and post-repair bytes/state for the current PPM finding set; if unavailable, explicitly keep root-cause attribution BLOCKED and do not guess. Then correct only the test/proof layer so a prebuilt final fixture or mocked PASS can no longer count as proof of live Codex-generated repair. Keep production architecture, text rules, PPM 6.7.9, LanguageTool 6.8 and design unchanged. After the proof gap is closed, present the evidence and require a fresh explicit user approval before exactly one real Codex article repair acceptance run.",
-    "why": "The current real failure is at article-0 PPM content repair. Existing green 4A tests prove repair routing and real recheck of a supplied corrected file, but they do not prove that Codex itself can generate the required repair for a severe multi-finding article.",
+    "goal": "PROVE_ONE_REAL_CODEX_SAME_ARTICLE_REPAIR_WITH_DURABLE_EVIDENCE",
+    "action": "User Codex approval is active until the morning of 2026-09-19 or Codex usage limit. Run exactly one fresh real Codex article-0 acceptance from the current bound System-4 input. Do not advance to article 1. If the first real fullcheck returns REPAIR_REQUIRED, capture the exact pre-repair article bytes, workspace state/revision and complete findings before changing the article; then let Codex generate only the same-article repair and rerun the real fullcheck. Repeat only on the same article while REPAIR_REQUIRED. At terminal PASS capture exact final article bytes/state/revision and real LanguageTool + PPM evidence. Emit durable evidence in PR #107 including SHA-256 plus base64 of pre-repair article, findings JSON for every repair cycle, and final article so the proof survives workspace loss. A mock, deterministic testworker or prebuilt final fixture is forbidden and cannot count. If the article passes without any repair event, report REAL_CODEX_REPAIR_NOT_EXERCISED and stop; do not start another article in that task.",
+    "why": "The static proof layer is now hardened and green, but REAL_CODEX_REPAIR_PROVEN still requires a live Codex-generated same-article repair with durable before/after/findings evidence and real LT/PPM PASS. The user-approved Putzplatzmatten article is bound only as a positive CONTENT_ONLY text-quality reference; structural compliance remains a separate dimension.",
     "forbidden": [
-      "start Codex without fresh explicit user approval",
-      "restart a 7-item production batch before real Codex repair proof",
+      "start article 1",
+      "advance the 1..N batch",
+      "restart or run the 7-item production batch",
+      "use a mock, deterministic testworker or prebuilt final fixture as real Codex repair proof",
+      "use the user-approved quality-reference article as a production source or PASS fixture",
       "change PPM or LanguageTool quality thresholds",
-      "change text/design rules to make the failing article pass",
-      "change production architecture before root cause is proven",
-      "claim whether the duplicate sentences came from initial draft or repair without before/after bytes"
+      "change text/design rules to force PASS",
+      "change production architecture",
+      "publish or write to WordPress",
+      "claim REAL_CODEX_REPAIR_PROVEN without durable pre/post/findings bytes and real checker PASS"
     ]
   },
-  "hobbyroom_pr": 307,
-  "hobbyroom_head_sha": "3c2fdeb181f3dcd693695f28058c06db64e857a1",
+  "hobbyroom_pr": 331,
+  "hobbyroom_head_sha": "d095d92e456f4b0a9029108066a2bc45cc459827",
   "m38_history_proof": {
     "branch": "hobbyroom/m38-history-current-main-20260918",
     "head_sha": "3acae874dd4c807761983623c91f69d35a800fb2",
@@ -379,5 +393,20 @@
     "codex_override_merge_sha": "df30a8cf7a157ee4eba979e272ad3d1eb76a5544",
     "postmerge_acceptance_run_id_after_override": 35380544689,
     "real_codex_start_result": "PASS_TO_ARTICLE0_FULLCHECK_REPAIR_REQUIRED"
+  },
+  "real_codex_repair_proof": {
+    "status": "TEST_LAYER_CLOSED_REAL_CODEX_RUN_APPROVED_PENDING",
+    "proof_contract_ref": "isolated_system4/repair_proof_contract.py",
+    "protocol_ref": "protocol/STARTMASTER0107_TESTSTRECKE_REAL_REPAIR_QUALITY_SEPARATION_20260918.md",
+    "quality_reference_body_ref": "isolated_system4/testdata/article_quality_reference_putzplatzmatten_20260918.txt",
+    "quality_reference_metadata_ref": "isolated_system4/testdata/article_quality_reference_putzplatzmatten_20260918.json",
+    "quality_reference_scope": "CONTENT_ONLY_STRUCTURE_NOT_ASSERTED",
+    "pr": 331,
+    "merge_commit_sha": "1431bf52ea73932c809d242a429cdd62e7b93a0b",
+    "acceptance_run_id": 35389785292,
+    "hardlock_run_id": 35389831741,
+    "hardlock_base_run_id": 35389831731,
+    "real_codex_repair_proven": false,
+    "publish_allowed": false
   }
 }
