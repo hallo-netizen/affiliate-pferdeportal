@@ -122,6 +122,11 @@
       "id": "GENERAL_AFFILIATE",
       "start_here": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/AFFILIATE/CURRENT_STATE.md"
+    },
+    {
+      "id": "CAMPUS_TRESOR",
+      "start_here": "protocol/PROJECT_MEMORY/TRESOR/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/TRESOR/STATUS.md"
     }
   ]
 }
