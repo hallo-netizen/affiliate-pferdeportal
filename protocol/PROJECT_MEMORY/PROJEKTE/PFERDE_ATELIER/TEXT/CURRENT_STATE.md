@@ -5,55 +5,53 @@
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
-
-STAND: 2026-09-17
-STATUS: BLOCKED / M38 HISTORY PROOF ON CURRENT MAIN
+STAND: 2026-09-18
+STATUS: PRE-CODEX FULL SIMULATION PASS / INTEGRATION PENDING
 
 ## EINE AKTUELLE WAHRHEIT
 
 Current technical main:
-`54f0ee4efb91a50bbe05b5aafa4183cc1f526565`
+`508f9dbb3650c99e5d41dbab83086af46945e225`
 
-Letzter belastbarer Live-/Recovery-Baseline-Stand vor M37:
-`bb005a5324a0a6270aacb52b5927613bde1ab4bc`
+Aktueller Pre-Codex-Kandidat:
+- Branch: `hobbyroom/full-e2e-simulation-before-codex-20260918`
+- Head: `b1c33ee8e800ccc5b542c077ffe825bd20871581`
+- Acceptance-Run: `35356394787`
+- Ergebnis: **40/40 PASS**
 
-Aktuelle autoritative Fehlerquelle:
-`QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
+## WAS DAMIT BEWIESEN IST
 
-## M37 – ABGESCHLOSSEN UND INTEGRIERT
+- Chat-/Startweg bis Point-0 und Root: PASS.
+- fehlende externe Point-0-Datei: fail-closed BLOCKED.
+- Worker-Anbindung wird im Test über den echten `codex_entry.py worker-start`-Weg simuliert.
+- kompletter 1-Artikel-Lauf: PASS.
+- kompletter 3-Artikel-Lauf mit isoliertem Repair: PASS.
+- LanguageTool 6.8: PASS.
+- PPM 6.7.9: PASS.
+- Batch-/Handoff-/Dateiausgabe: PASS.
+- 1..N-Downstream-Vertrag: 1 / 3 / 25 / 1000 PASS.
+- Negativfälle bleiben fail-closed.
+- vor `advance` muss die Artikelidentität jetzt exakt über `title / target_keyword / category / article_type / plan_slot` übereinstimmen.
+- kein echter Codex-Lauf und kein Publish sind Teil dieses Beweises.
 
-History-Phase:
-- PR248;
-- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
-- hardlock PASS;
-- hardlock-base PASS.
+M38 ist im produktiven `control/startmaster0107/CURRENT_STATE.json` bereits als gelöst gebunden; die alte Campus-M38-Blockerbeschreibung war stale und ist hiermit ersetzt.
 
-Produktfix:
-- PR247;
-- Kandidat `59ad44da3d89769c05f0725f9929135b0262f4dd`;
-- `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M37`;
-- hardlock PASS;
-- hardlock-base PASS;
-- integrierter M37-Stand `f1d1605f18bd23d9189f89ad173598958718d08a`.
+## ERSTER NOCH OFFENER PUNKT
 
-M01–M37 sind die integrierte bekannte Regression auf dem aktuellen technischen Main. Der aktuelle Main enthält zusätzlich ausschließlich einen temporären, nicht-ausführbaren M20-Migrationstoken; die aktive Delivery-Mengenlogik bleibt 1..N.
-
-## AKTUELLER REALBLOCKER / M38
-
-Der erste frische Artikel erreichte nach realer LanguageTool-Reparatur den realen PPM-6.7.9-/PSERC-Handoff und stoppte mit:
-`PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH`.
-
-M38 ist als History-Fall maschinell zu binden, bevor ein Produktfix integriert werden darf.
-107008 wurde nicht erreicht. Kein WordPress-Write, kein Publish.
+Der funktional grüne Kandidat muss noch gegen Hardlock und Deterministic Entrance auf exakt demselben Head bewiesen und danach integriert werden. Anschließend ist derselbe vollständige Acceptance-Lauf auf dem resultierenden exakten `main` zu wiederholen.
 
 ## NEXT ACTION
 
-Kombinierten History-Kandidaten auf aktuellem Main `54f0ee4efb91a50bbe05b5aafa4183cc1f526565` mit dem bestehenden History-Maschinenweg/hardlock beweisen: veralteten M20-7er-Vertrag auf 1..N korrigieren und M38 als ersten neuen FAIL erhalten. Erst danach den separaten kleinstmöglichen Produktfix prüfen.
+1. Hardlock + Deterministic Entrance für Kandidat `b1c33ee8e800ccc5b542c077ffe825bd20871581` ausführen.
+2. Nur bei PASS auf `main` integrieren.
+3. Vollständigen 1-/Mehrartikel-Acceptance-Lauf erneut auf dem exakten neuen `main` ausführen.
+4. Danach **STOP direkt vor echtem Codex**.
 
 ## HARTE GRENZEN
 
-- kein neuer Runner/Gate/Controller/Sidecar;
-- keine PPM-/PSERC-/PSTE-/Textmaschinen-/Fachregeländerung;
-- kein Produktfix vor grünem M38-History-Beweis auf aktuellem Main;
-- kein WordPress-Write;
-- Kein Publish.
+- **Kein echter Codex ohne ausdrückliche Freigabe des Nutzers.**
+- kein Artikel 2 vor echtem Artikel-1-PASS im späteren Produktionslauf.
+- kein neuer Runner/Gate/Controller/Sidecar.
+- keine PPM-/PSERC-/PSTE-/Textmaschinen-/Fachregeländerung.
+- kein WordPress-Write.
+- kein Publish.
