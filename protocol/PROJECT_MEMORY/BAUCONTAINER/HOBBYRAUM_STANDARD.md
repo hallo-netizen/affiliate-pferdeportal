@@ -5,18 +5,21 @@ STATUS: VERBINDLICH
 
 ## Zweck
 
-Ein Hobbyraum ist der einzige gebundene aktuelle Arbeitsraum eines Büros.
+Ein Hobbyraum ist eine **abgeleitete technische Ausführungsfläche** eines Büros.
 
-Er verhindert parallele, widersprüchliche Reparaturwege.
+Er verhindert parallele Reparaturwege, ist aber **keine Current-Autorität**.
+Aktueller Status, Blocker und NEXT ACTION kommen ausschließlich aus der im `AUTORITAETSPLAN.json` benannten Current-Autorität.
 
-## Genau ein Hobbyraum pro Büro
+Kennzeichnung:
+`DERIVED_EXECUTION_SURFACE_V1`
 
-Projektbüros haben genau:
-`HOBBYRAUM.md`
+## Höchstens eine abgeleitete Ausführungsfläche pro Büro
 
-Keine zweiten Neben-Hobbyräume für denselben Auftrag.
+Projektbüros dürfen `HOBBYRAUM.md` als technische Ausführungsfläche führen.
 
-## Erlaubte Zustände
+Keine zweite Status-/NEXT-ACTION-Wahrheit und keine parallele Ausführungsfläche für denselben Auftrag.
+
+## Ausführungszustände – nicht autoritativ
 
 ### FREI
 Kein aktueller Auftrag gebunden.
@@ -75,8 +78,8 @@ Damit bleibt auch ein direkter Link in den Hobbyraum selbsterklärend.
 ## Arbeitskontrollpunkt
 
 Jeder Hobbyraum zeigt nur:
-- Bürostand → CURRENT_STATE
-- aktuelle Arbeit / NEXT ACTION → HOBBYRAUM selbst
+- zuständige Current-Autorität → über `AUTORITAETSPLAN.json`;
+- abgeleitete technische Bindung / Lock für die von dort freigegebene NEXT ACTION
 - Fehler → FEHLERREGISTER → Originalquelle
 - Ziel → Zielvertragsregister → Hauptquelle
 - Begründung → AENDERUNGSREGISTER
@@ -84,9 +87,10 @@ Jeder Hobbyraum zeigt nur:
 Fachstand, Fehlertext und Zielinhalt werden dort nicht nochmals gepflegt.
 
 
-## Dynamische Arbeitsbindung niemals aus Architekturannahme ändern
+## Dynamische Ausführungsbindung niemals aus Architekturannahme ändern
 
-STATUS, Worker, Branch und NEXT ACTION sind dynamische Arbeitswahrheit.
+Status/Blocker/NEXT ACTION sind ausschließlich Wahrheit der Current-Autorität.
+Worker/Branch/technischer Lock im Hobbyraum sind nur deren abgeleitete Ausführungsbindung.
 
 Architektur-, Baucontainer- oder Hausmeisterarbeit darf diese Werte **nicht** umdeuten oder neu setzen, nur weil eine neue Rollenregel gebaut wird.
 
@@ -101,11 +105,11 @@ Negativtest:
 Ein Architekturfix darf niemals aus `WORKER = PAUL` still `WORKER = ARBEITSCHAT` machen oder umgekehrt.
 
 
-## Automatische Paul-Bindung – einzige Auftragswahrheit bleibt der Hobbyraum
+## Automatische Paul-Bindung – Current-Autorität bleibt Auftragswahrheit
 
 Ein Paul-Auftrag wird **nicht** als separater Prompt oder zweite Auftragsakte gepflegt.
 
-Nur solange Paul tatsächlich gebunden ist, enthält genau der zuständige `HOBBYRAUM.md` zusätzlich diesen maschinenlesbaren Block:
+Nur wenn die zuständige Current-Autorität Paul tatsächlich bindet, darf der Hobbyraum zusätzlich diesen **abgeleiteten** maschinenlesbaren Block enthalten:
 
 ```
 <!-- PAUL_ASSIGNMENT_V1
@@ -131,7 +135,7 @@ Harte Regeln:
 - bei Rückgabe/Beendigung wird der aktive Block aus dem Hobbyraum entfernt; Historie gehört ins Protokoll/Archiv, nicht in die aktuelle Arbeitsbindung.
 
 Damit bleibt:
-**HOBBYRAUM = eine aktuelle Auftragswahrheit.**
+**Current-Autorität = einzige Auftragswahrheit; HOBBYRAUM = abgeleiteter Lock.**
 
 
 ## Exklusiver technischer Paul-Scope
@@ -344,3 +348,16 @@ Wenn eine benötigte bestehende Autorität nicht gefunden oder die Stage-Semanti
 `FIX_FORBIDDEN`.
 
 Das ist eine technische Evidenzregel, keine neue Fachlogik.
+
+
+## HARD RULE V2 – KEINE ZWEITE CURRENT-WAHRHEIT
+
+Jeder Hobbyraum muss mit `DERIVED_EXECUTION_SURFACE_V1` gekennzeichnet sein.
+
+Ein neuer Chat liest den Hobbyraum **nicht**, um Status oder NEXT ACTION zu bestimmen.
+Er liest:
+`START_HERE → AUTORITAETSPLAN → Current-Autorität → Frischecheck → NEXT ACTION`.
+
+Erst die Current-Autorität darf auf den Hobbyraum verweisen.
+
+Bestehende Maschinenlocks bleiben zulässig, wenn sie die Current-Autorität hashbinden und bei Drift fail-closed blockieren.
