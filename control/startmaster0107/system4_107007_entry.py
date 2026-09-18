@@ -12,7 +12,6 @@ REPO = Path(__file__).resolve().parents[2]
 STATE = REPO / "control/startmaster0107/CURRENT_STATE.json"
 RUNTIME = REPO / "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json"
 ROOT_ENTRY = REPO / "isolated_system4/root_entry.py"
-CODEX_ENTRY = REPO / "isolated_system4/codex_entry.py"
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
@@ -133,13 +132,9 @@ def start(point0_path: str, workspace_path: str, item_index: int) -> dict:
         [sys.executable, str(ROOT_ENTRY), "start-point0", str(point0), str(workspace), str(item_index)],
         "SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY",
     )
-    worker_output = run_checked(
-        [sys.executable, str(CODEX_ENTRY), "worker-start", str(workspace)],
-        "SYSTEM4_CODEX_ENTRY_PASS:",
-    )
     return {
         "ok": True,
-        "status": "SYSTEM4_107007_ROOT_BOUND_WORKER_READY",
+        "status": "SYSTEM4_107007_ROOT_READY_STOP",
         "sequence": 107007,
         "batch_sha256": runtime["batch_sha256"],
         "item_count": len(runtime_items),
@@ -148,7 +143,8 @@ def start(point0_path: str, workspace_path: str, item_index: int) -> dict:
         "point0_sha256": sha256(point0),
         "workspace": str(workspace),
         "root_marker": "SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY",
-        "worker_marker": worker_output.splitlines()[0] if worker_output else "",
+        "worker_started": False,
+        "stop_after_root": True,
         "old_cloud_entry_used_before_root": False,
         "publish_allowed": False,
     }

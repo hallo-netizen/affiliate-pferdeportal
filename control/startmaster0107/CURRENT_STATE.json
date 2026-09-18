@@ -70,7 +70,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "a1f3e1aefd5760a76fb0334205a1101c6b632fa9e0d314c4570822b0fceb82f8",
+    "bundle_sha256": "ab373c5084cb14c791fba70a9b62adcdac09d5e9f7ffb88d368bcf2cefcf547e",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -146,7 +146,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "a1f3e1aefd5760a76fb0334205a1101c6b632fa9e0d314c4570822b0fceb82f8"
+    "bundle_sha256": "ab373c5084cb14c791fba70a9b62adcdac09d5e9f7ffb88d368bcf2cefcf547e"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -169,7 +169,7 @@
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "The technical preproduction entry repair is complete: the unnecessary current-main git fetch failure point is removed, the preflight contract has one producer truth, and the validated PR275 block semantics are integrated into the current System-4 repair route. Acceptance and hardlock are PASS. Production remains fail-closed until explicit user Codex reauthorization and then exactly one fresh first article passes the unchanged real System 4 -> LanguageTool -> PSERC/PPM path.",
+    "detail": "The technical preproduction entry repair is complete. The productive 107007 start is being hardened to stop immediately after the real Parent/Root PASS marker and must not auto-start Codex. Production remains fail-closed until this root-only start behavior is validated and exactly article 0 is started through the unchanged real Point-0/Root path.",
     "m38_resolved": true,
     "m38_regression_run_id": 35325277001,
     "hardlock_run_id": 35325237914,
@@ -180,11 +180,12 @@
     "preproduction_acceptance_run_id": 35335734559,
     "preproduction_hardlock_run_id": 35336072555,
     "preproduction_deterministic_gate_run_id": 35336074403,
-    "codex_reauthorization_required": true,
+    "codex_reauthorization_required": false,
     "snapshot_hash_gap_resolved": true,
     "snapshot_hash_gap_acceptance_run_id": 35341172778,
     "snapshot_hash_gap_hardlock_run_id": 35341166279,
-    "snapshot_hash_gap_entrance_run_id": 35341169607
+    "snapshot_hash_gap_entrance_run_id": 35341169607,
+    "root_only_start_required": true
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -238,20 +239,18 @@
   },
   "last_safe_main_sha": "19451f92321cc0ac0aeabfa8ef09e7a6be3302ac",
   "last_safe_change": "System4 batch snapshot/hash gap repaired without Codex or article production: batch collection now validates each article against its real bound_snapshot.json while separately preserving the original runtime snapshot identity; the complete bound batch must exactly equal the runtime batch. Acceptance 35341172778 PASS; hardlock 35341166279 PASS; deterministic entrance 35341169607 PASS.",
-  "hobbyroom_status": "PREPRODUCTION_ENTRY_REPAIR_VALIDATED_AWAITING_USER_CODEX_RELEASE_AND_SINGLE_ARTICLE_REAL_PROOF",
+  "hobbyroom_status": "ROOT_ONLY_START_REPAIR_PENDING_VALIDATION",
   "hobbyroom_branch": "hobbyroom/preproduction-entry-reconcile-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "No Codex and no article production until explicit user reauthorization. After that, exactly one fresh first article must pass the unchanged real System 4 -> LanguageTool -> PSERC/PPM path; article 2 remains forbidden before that PASS.",
+  "hobbyroom_blocker": "The productive start must stop immediately after Parent/Root PASS. No automatic Codex start. Article 2 remains forbidden.",
   "next_action": {
-    "goal": "Wait for explicit user Codex reauthorization. Then run exactly one fresh first article through the unchanged real System 4 production street and require real LanguageTool and real PSERC/PPM PASS. Do not start article 2 or continue the remaining 1..N batch before article 1 is fully PASS.",
+    "goal": "Validate the minimal root-only start repair. Then start exactly article 0 through the existing Parent/Point-0/Root path and stop at SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY. Do not invoke Codex, do not advance, do not publish.",
     "required_order": [
-      "Do not invoke Codex until the user explicitly reauthorizes it.",
-      "Keep the existing 107007/System 4 route and current hash bindings unchanged except for normal state transition receipts.",
-      "Start exactly one fresh current article through the real bound Point-0/System 4 path.",
-      "Run the unchanged real LanguageTool check and unchanged real PSERC/PPM path for that same article.",
-      "If any real checker returns FAIL/REPAIR/BLOCKED, repair only through the existing same-article System 4 owner route and repeat that article only.",
-      "Only after the same first article is fully PASS may the remaining real 1..N batch continue to batch_gate collect and then the existing V2 handoff to 107008.",
-      "Stop before publish."
+      "Keep the existing 107007/System 4 route and current hash bindings unchanged except for this root-only start repair and its required hash rebinding.",
+      "Start exactly one fresh current article through the real bound Point-0/System 4 Parent/Root path.",
+      "Stop immediately after SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY.",
+      "Do not invoke codex_entry.py worker-start automatically or manually in this step.",
+      "Do not call advance, do not start article 2, and do not publish."
     ],
     "must_fail_closed_on": [
       "wrong source hash",
@@ -278,7 +277,7 @@
       "auto-publish",
       "new architecture"
     ],
-    "proof_after_fix": "Preproduction repair is proven by Acceptance 35335734559 and Hardlock 35336072555. Required next production proof, only after explicit user Codex reauthorization, is one fresh real article with real LanguageTool PASS and real PSERC/PPM PASS on the unchanged bound route."
+    "proof_after_fix": "Required proof is the existing 107007 start reaching SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY for article 0 and stopping there with worker_started=false."
   },
   "hobbyroom_pr": 301,
   "hobbyroom_head_sha": "2fe3bee2c72403ddcca954f6c5a2c6baec7f5b38",

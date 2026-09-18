@@ -206,14 +206,14 @@ def _launch(batch_root: Path, point0: Path, state: dict, items: list[dict], inde
         raise Blocked("SYSTEM4_107007_BATCH_ITEM_ALREADY_STARTED")
     workspace = _workspace(batch_root, index)
     result = entry.start(str(point0), str(workspace), index)
-    if result.get("status") != "SYSTEM4_107007_ROOT_BOUND_WORKER_READY":
+    if result.get("status") != "SYSTEM4_107007_ROOT_READY_STOP":
         raise Blocked("SYSTEM4_107007_BATCH_ENTRY_NOT_READY")
     state["started_indices"].append(index)
     state["current_index"] = index
     write_atomic(_state_path(batch_root), state)
     return {
         "ok": True,
-        "status": "SYSTEM4_107007_BATCH_ITEM_READY",
+        "status": "SYSTEM4_107007_BATCH_ROOT_READY_STOP",
         "sequence": 107007,
         "batch_sha256": state["batch_sha256"],
         "item_count": state["item_count"],
