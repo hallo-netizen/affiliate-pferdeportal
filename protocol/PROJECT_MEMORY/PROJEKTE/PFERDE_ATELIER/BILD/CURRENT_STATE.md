@@ -1,12 +1,18 @@
 # BILD – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-16
 STATUS: **BILDZENTRALE 2.7.6 LOCAL HARD PASS / WORDPRESS-LIVE FUNKTION PASS**
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Campus-Standzusammenfassung des BILD-Büros.
 
-- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
+- Ausführungsdetails/Locks → `HOBBYRAUM.md` (abgeleitet, nicht autoritativ)
 - Zielvertrag → `ZIELVERTRAG_BILDZENTRALE_PFERDERASSEN_HERO_20260916.md`
 - technische allgemeine Hauptquelle → `ALLGEMEINGUELTIGE_BAUSTEINE/BILDZENTRALE/`
 - Protokoll 2.7.0/2.7.1 → `PROTOKOLL_20260916.md`
@@ -62,4 +68,6 @@ Das ist ein **LIVE-Funktions-PASS des 2.7.6-Batchwegs**, kein Beleg, dass bereit
 
 ## NEXT ACTION
 
-Siehe `HOBBYRAUM.md`. Keine technische Reparatur von 2.7.6 offen.
+Keine technische Reparatur von 2.7.6 offen.
+
+Die bestätigte serielle 10er-Rassenbebilderung darf bei weiterem Bebilderungsauftrag weiterverwendet werden. Bei neuer technischer Änderung zuerst diese Current-Autorität frisch prüfen, bestehenden Bildweg regressiv schützen, positiv/negativ testen, WordPress-LIVE prüfen und erst danach allgemeines Artefakt + PPA-003 synchronisieren.
