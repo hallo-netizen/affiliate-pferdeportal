@@ -9,7 +9,8 @@ from pathlib import Path
 from typing import Any, Mapping
 
 HERE = Path(__file__).resolve().parent
-BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1"
+BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_PROVENANCE_BINDING_V1"
+LEGACY_BOOTSTRAP_BINDING_CONTRACT = "PFERDE_ATELIER_H8_BOOTSTRAP_SIGNED_BINDING_V1"
 AUTHORITATIVE_ORIGIN = "SINGLE_DOOR_BOOTSTRAP_ONLY"
 ROOM_TOKEN = "R_BOOT_001"
 RECEIPT_TOKEN = "P_BOOT_001"
@@ -68,32 +69,45 @@ def incoming_package_path(repo: Path, generation: int) -> Path:
 def _binding_from_release(release: Mapping[str, Any]) -> Mapping[str, Any]:
     binding = release.get("h8_bootstrap_binding")
     if not isinstance(binding, Mapping):
-        raise ProvenanceBlocked("H8_SIGNED_BOOTSTRAP_BINDING_MISSING")
+        raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_MISSING")
     expected_keys = {
         "contract", "room_token", "receipt_token", "generation", "batch_sha256",
         "source_snapshot_sha256", "source_manifest_sha256", "authoritative_origin", "binding_sha256",
     }
     if set(binding) != expected_keys:
-        raise ProvenanceBlocked("H8_SIGNED_BOOTSTRAP_BINDING_FIELDS_INVALID")
+        raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_FIELDS_INVALID")
+    if binding.get("contract") not in {BOOTSTRAP_BINDING_CONTRACT, LEGACY_BOOTSTRAP_BINDING_CONTRACT}:
+        raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_CONTRACT_INVALID")
     payload = dict(binding)
     declared = payload.pop("binding_sha256", None)
     if declared != stable_hash(payload):
-        raise ProvenanceBlocked("H8_SIGNED_BOOTSTRAP_BINDING_HASH_INVALID")
+        raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_HASH_INVALID")
     return binding
 
-def validate_package_provenance(repo: Path, package_path: Path, *, trusted_keys=None) -> dict[str, Any]:
+def _binding_matches_current(actual: Mapping[str, Any], expected: Mapping[str, Any]) -> bool:
+    if actual.get("contract") == BOOTSTRAP_BINDING_CONTRACT:
+        return dict(actual) == dict(expected)
+    if actual.get("contract") == LEGACY_BOOTSTRAP_BINDING_CONTRACT:
+        identity_fields = (
+            "room_token", "receipt_token", "generation", "batch_sha256",
+            "source_snapshot_sha256", "source_manifest_sha256", "authoritative_origin",
+        )
+        return all(actual.get(field) == expected.get(field) for field in identity_fields)
+    return False
+
+def validate_package_provenance(repo: Path, package_path: Path) -> dict[str, Any]:
     repo = Path(repo).resolve()
     package_path = Path(package_path).resolve()
     pre = _module(repo / "control/single-door-boundary/single_door_preproduction_handoff.py", "h8_provenance_pre")
-    package_proof = pre.validate_production_package(package_path, trusted_keys=trusted_keys) if trusted_keys is not None else pre.validate_production_package(package_path)
+    package_proof = pre.validate_production_package_integrity(package_path)
     env = json.loads(package_path.read_text(encoding="utf-8"))
     release = env.get("workflow_release")
     if not isinstance(release, Mapping):
         raise ProvenanceBlocked("WORKFLOW_RELEASE_MISSING")
     actual = dict(_binding_from_release(release))
     expected = expected_binding(repo)
-    if actual != expected:
-        raise ProvenanceBlocked("H8_SIGNED_BOOTSTRAP_BINDING_NOT_CURRENT")
+    if not _binding_matches_current(actual, expected):
+        raise ProvenanceBlocked("H8_BOOTSTRAP_PROVENANCE_BINDING_NOT_CURRENT")
     return {
         "ok": True,
         "status": "H8_PREPRODUCTION_PROVENANCE_PASS",
@@ -106,16 +120,16 @@ def validate_package_provenance(repo: Path, package_path: Path, *, trusted_keys=
         "publish_allowed": False,
     }
 
-def validate_incoming_package(repo: Path, *, trusted_keys=None) -> dict[str, Any]:
+def validate_incoming_package(repo: Path) -> dict[str, Any]:
     s = _state(repo)
     if s.get("status") != "BATCH_READY_PACKAGE_PENDING":
         raise ProvenanceBlocked("INCOMING_PROVENANCE_REQUIRES_PENDING_STATE")
     p = incoming_package_path(repo, int(s["generation"]))
     if not p.is_file():
         raise ProvenanceBlocked("H8_BOOTSTRAP_INCOMING_PACKAGE_MISSING")
-    return validate_package_provenance(repo, p, trusted_keys=trusted_keys)
+    return validate_package_provenance(repo, p)
 
-def validate_attached_package(repo: Path, *, trusted_keys=None) -> dict[str, Any]:
+def validate_attached_package(repo: Path) -> dict[str, Any]:
     repo = Path(repo).resolve()
     s = _state(repo)
     if s.get("status") != "EXECUTION_READY":
@@ -128,7 +142,7 @@ def validate_attached_package(repo: Path, *, trusted_keys=None) -> dict[str, Any
         raise ProvenanceBlocked("ATTACHED_PACKAGE_REF_ESCAPE")
     if not p.is_file() or file_sha(p) != str(s.get("production_package_sha256") or ""):
         raise ProvenanceBlocked("ATTACHED_PACKAGE_HASH_MISMATCH")
-    return validate_package_provenance(repo, p, trusted_keys=trusted_keys)
+    return validate_package_provenance(repo, p)
 
 def main() -> int:
     try:

@@ -1,28 +1,36 @@
 {
-  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V8_CODEX_CURRENT_ACTION_KISS_OUTPUT_LOCKED",
+  "contract": "PFERDE_ATELIER_OPAQUE_STEP_BUNDLE_V12_SYSTEM4_BATCH_COLLECT_BOUND",
   "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "sequence": 107007,
   "worker_profile": "CLOUD_ARTICLE_BATCH_NO_STOP",
   "authorized_inputs": [
     {
       "ref": "control/single-door-boundary/H8_PREPRODUCTION_BOOTSTRAP_BOUNDARY.json",
-      "sha256": "49793f35d143d0bdda5e556e6159ced4e2139bf2874ffc3c763b41c9d23bb4fc"
+      "sha256": "caed4231e905f1ff7ee1f0424a432b9a4f0a5d99ee8c2e828a0c3eb47d54e57d"
     },
     {
       "ref": "control/output-quarantine/runtime_entry_gate.py",
-      "sha256": "ff54c9ca5fc05623a8231905aee0bee97439682415a59a5188db04a7ed60fa25"
+      "sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24"
     },
     {
       "ref": "control/output-quarantine/worker_freshness_guard.py",
-      "sha256": "122d0927e56761dd0afa668adb847b44453a42a2102020b1d6c6b940945b9998"
+      "sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84"
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "60ad828e153f3fc33b912b21aafd0f2db7669e9df1001a87018041cc95f008eb"
+      "sha256": "d9393c50edc21dfae591012d5ea520249254c072879e0dbf26aa484031c1b9d8"
+    },
+    {
+      "ref": "control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json",
+      "sha256": "daee323ff219ba4918c40660b34ea39cb960f1664a0a0ac8d5e76c3ccc7296be"
+    },
+    {
+      "ref": "control/startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh",
+      "sha256": "7716d3d9d2bf5d3b52a6a3d1ece88da32e76d65a42c66aba701b2700031811de"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "1ea59593678f43ae5ee30aafc93ba5f48822bb726435a6e7074aa4efdb1ade27"
+      "sha256": "7e55ab7d4cf9569376955362b97881fb355b7dd48d8098564b353668e7277128"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
@@ -41,15 +49,35 @@
       "sha256": "3ba63de1dd28182bff1a3472db5519b7c5a1c8aaa62c7c0885cae4ebf17fe837"
     },
     {
-      "ref": "control/single-door-boundary/codex_current_room_bridge.py",
-      "sha256": "b096312b07bfcfd9047333e0c8d2fbe85cc9d629c4273c6a6fa65d96423cad14"
+      "ref": "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json",
+      "sha256": "b195bc5e93917a1d7cf2ab8683bb6d4728a9e0618ffac28a7f24edff20ee7fb7"
     },
     {
-      "ref": "control/single-door-boundary/codex_current_action.py",
-      "sha256": "fd9d391d625c2d6aa3b6f670318e7adf9e22d79e1b49121f190f7223f206f909"
+      "ref": "control/startmaster0107/runtime_inbox/generations/000001/SOURCE_REQUESTS.json",
+      "sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f"
+    },
+    {
+      "ref": "isolated_system4/parent_start.py",
+      "sha256": "a3b7a0b0142e6dfe6c52a8cb233adaee11bf41a172b67d1a1c48178518bd95e6"
+    },
+    {
+      "ref": "control/startmaster0107/system4_107007_entry.py",
+      "sha256": "50ba08da3be3da1b13d4df140a1aafc624cfde22b707859ff7c8bd020b76665c"
+    },
+    {
+      "ref": "control/startmaster0107/system4_107007_batch.py",
+      "sha256": "5c3a08b419225c68b90d14f7b0d71d7811fab250a52f8d43c8e483e83554fabc"
+    },
+    {
+      "ref": "isolated_system4/batch_gate.py",
+      "sha256": "08029626c18bd5986900b275a53b46e1ab40bd4cbcaba1d72de41c718ef710ad"
+    },
+    {
+      "ref": "control/startmaster0107/system4_107008_handoff.py",
+      "sha256": "09654acf4aa5718769323315de29a6b286616391de378b9937108c219f02cf25"
     }
   ],
-  "instruction": "107007 ist ausschließlich der bereits gebundene produktive Lauf-Slot.\n\nGRUNDGESETZ §1: ChatGPT/Codex besitzt schon vor Tür 1 keinerlei freie Workflow-, Navigations-, State-, Projektresultat- oder Publish-Autorität. Keine Alternativroute, kein Rücksprung, kein Seitensprung, keine Rekonstruktion eines fehlenden Schritts.\n\nGRUNDGESETZ §2: Die technische Wächter-/Adapter-Schicht ist vollständig fachblind. Keine Fach-, Inhalts-, Recherche-, Titel-, Keyword-, SEO-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- oder Publish-Regel darf direkt oder indirekt verändert, ergänzt, abgeschwächt, ersetzt oder neu interpretiert werden.\n\nNach dem offiziellen Start über control/output-quarantine/runtime_entry_gate.py ist ausschließlich der gebundene produktive Eingang zulässig. Danach ausschließlich:\n\npython3 control/single-door-boundary/codex_current_action.py current\n\nDiese Ausgabe ist der einzige Worker-Etagenanzeiger.\n\nWenn status=CURRENT_BOUND_ACTION_READY:\n- Das ist ein POSITIVER freigegebener Zustand, kein Fehler.\n- instruction=EXECUTE_CURRENT_BOUND_ITEM_NOW bedeutet: ausschließlich current_item jetzt durch den bestehenden unveränderten Fachworkflow bearbeiten.\n- Keine Suche nach einem Executor, keiner Capability und keinem anderen Raum.\n- Ergebnisse ausschließlich unter allowed_output_root schreiben.\n- item_receipt_schema exakt erfüllen und nach item_receipt_ref schreiben.\n- Danach ausschließlich submission_command ausführen.\n\nDie serverseitige Regel all_other_actions=DENY bleibt vollständig wirksam, wird dem Worker aber absichtlich nicht als Arbeitsaktion ausgegeben. Sie bedeutet ausschließlich: außer dem aktuell ausgegebenen Einzelauftrag ist nichts erlaubt.\n\nJede neue Ausgabe des submission_command ersetzt die vorherige vollständig. Niemals den nächsten Raum, das nächste Item oder eine Folgeaktion selbst ableiten.\n\nBei BLOCKED oder USER_ACTION_REQUIRED: stehenbleiben, keine eigene Lösung oder Alternativroute. Beim finalen 107008-Zustand: stehenbleiben und Nutzerreview abwarten.\n\nAlle potentiellen Projektergebnisse bleiben während 107007 unter .pferde-quarantine/. Kein Auto-Publish. Alles außerhalb der aktuell ausgegebenen Einzelaktion ist DENY.",
+  "instruction": "HARD RULE — BESTEHENDEN SYSTEM-4-PARENT WIEDER ANGESCHLOSSEN:\\nDer normale Start von 107007 erfolgt über den wieder angeschlossenen Parent-Starter:\\n\\npython3 isolated_system4/parent_start.py start-current-bound\\n\\nDer Parent muss die generation-spezifische SOURCE_REQUESTS.json ausschließlich über RUNTIME_INBOX_STATE.json laden, Ref/Hash/Batch/Generation/Slots prüfen, dieselben Bytes automatisch in einen frisch erzeugten externen Runroot kopieren und dort Point-0 sowie Batch-Root erzeugen. Freie oder leere SOURCE_REQUESTS-/WORKSPACE-/RUNTIME-Platzhalter sind im normalen Produktionsstart verboten. Der Parent darf ausschließlich den aktuellen machine_point0.py build-current-fetch ausführen und danach den bestehenden system4_107007_batch.py start aufrufen. Er baut keine eigene alte Point-0-Wahrheit, startet keinen Codex-Worker, ruft kein advance auf und publiziert nicht. Nach SYSTEM4_107007_BATCH_ROOT_READY_STOP endet der Parent-Start.\\n\\n107007 ist ausschließlich der produktive System-4-Lauf-Slot.\n\nHARD RULE — EINZIGER PRODUKTIVER 1..N-DURCHLAUF:\nVor jeder Artikelarbeit muss der bereits maschinell erzeugte SYSTEM4_POINT0_SNAPSHOT_V2 vorliegen. Der komplette Batch wird danach ausschließlich durch den maschineneigenen 1..N-Adapter gesteuert. Start exakt einmal mit:\n\npython3 control/startmaster0107/system4_107007_batch.py start <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\nDer Adapter bestimmt die Artikelanzahl ausschließlich aus dem aktuell hashgebundenen Runtime-Batch. Er startet ausschließlich Index 0. Nach PASS des aktuell gebundenen Artikels ausschließlich:\n\npython3 control/startmaster0107/system4_107007_batch.py advance <POINT0_OUTSIDE_REPO> <BATCH_ROOT_OUTSIDE_REPO>\n\n`advance` darf keinen Index frei entgegennehmen. Die Maschine berechnet den nächsten Index selbst. Artikel N+1 darf erst gestartet werden, wenn Artikel N in seinem gebundenen Workspace phase=OUTPUT_GATE_REQUIRED und checks.status=PASS besitzt und plan_slot, canonical_article_id sowie target_keyword exakt dem aktuellen Runtime-Batch entsprechen. Kein Überspringen, kein freier Sprung, kein Wiederholen bereits abgeschlossener Items. Ein neuer Batch benötigt einen leeren neuen BATCH_ROOT und ist an Batch-Hash und Point-0-Hash gebunden. Runtime-/Point-0-/Count-Drift blockiert fail-closed.\n\nDer Batch-Adapter ruft für jeden neuen Index ausschließlich den bereits gebundenen Einzelstart control/startmaster0107/system4_107007_entry.py auf. Dieser führt zwingend root_entry.py start-point0 aus und stoppt unmittelbar nach SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY. Ein automatischer Aufruf von codex_entry.py worker-start ist verboten. cloud_entry.py und runtime_entry_gate.py start bleiben als Artikel-/Worker-Produktionsstart verboten.\n\nHARD RULE — REPAIR NUR SYSTEM 4:\nWenn der aktuelle System-4-Workspace phase=REPAIR_REQUIRED meldet, bleibt exakt derselbe Artikel im exakt selben Workspace gebunden. Reparatur ausschließlich über isolated_system4/controller.py repair <WORKSPACE> <REPAIR_DRAFT> und danach erneut isolated_system4/controller.py fullcheck <WORKSPACE>. Der 1..N-Adapter darf während REPAIR_REQUIRED niemals zum nächsten Artikel fortschalten; `advance` bleibt bis zum echten OUTPUT_GATE_REQUIRED/PASS gesperrt. Repair-Owner, Return-Route, Revision und Same-Article-Bindung werden ausschließlich vom System-4-Controller bestimmt.\n\nVERBOTEN für 107007-Repair und nicht mehr autorisiert: control/single-door-boundary/codex_current_room_bridge.py, control/single-door-boundary/codex_current_action.py, control/startmaster0107/fachworkflow_proof_handoff.py und control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py. FACHWORKFLOW_REPAIR_REQUIRED, eine alte Submit-Anweisung oder irgendeine alte STARTMASTER-Repair-Rückgabe dürfen den aktuellen System-4-Artikel weder reparieren noch routen. Keine zweite Repair-Wahrheit.\n\nNach dem Root-PASS endet dieser Startbefehl. Eine Worker-Anbindung erfolgt nicht automatisch. In REPAIR_REQUIRED folgt Codex ausschließlich der in isolated_system4/codex_entry.py gebundenen Same-Article-Anweisung und ruft den System-4-Controller; es darf keinen Legacy-Handoff benutzen. Nach echtem System-4-PASS wird wieder nur `advance` aufgerufen; Codex darf den nächsten Artikel weder auswählen noch selbst ableiten. HARD RULE — BATCH-COLLECT NACH DEM LETZTEN ARTIKEL: Wenn der letzte Artikel echten System-4-PASS erreicht, muss derselbe 1..N-Adapter zwingend isolated_system4/batch_gate.py collect mit dem hashgebundenen Source-Snapshot und exakt allen Workspace-state.json in Reihenfolge 0..N-1 ausführen. SYSTEM4_107007_BATCH_ITEMS_COMPLETE darf erst nach status=SYSTEM4_BATCH_FULL_PASS_COLLECTED, passender Batch-SHA, exakter Artikelanzahl und verifiziertem system4_batch_evidence.json gemeldet und persistiert werden. Schlägt collect fehl oder fehlt sein Evidence-Hash, bleibt 107007 BLOCKED und 107008 ist verboten.\n\nHARD RULE — PRODUCTION_PLAN_HEADER-VERSIONSBINDUNG VOR REAL PSERC/PPM:\nWenn der aktuelle gebundene Fachworkflow für den current_item den production_plan_header erzeugt, muss dieser Header aus dem aktuellen Fachworkflow selbst stammen; H8 darf ihn nicht fachlich vorbefüllen. Für contract=production_plan_v4 sind vor dem realen PSERC/PPM-Handoff maschinenfest plan_contract_version=4.0.0 und required_plugin_version=6.7.9 zu binden. Fehlende oder abweichende Werte müssen im bestehenden fachworkflow_proof_handoff.py vor PSERC/PPM fail-closed als BOUND_PRODUCTION_PLAN_VERSION_MISMATCH blockieren. Kein stilles Ergänzen durch H8, keine Änderung von PPM/PSERC/PSTE/Textmaschine/Fachregeln und kein Fake-PASS.\n\nNEW bleibt NEW; alte Artikel-/Recovery-Dateien sind keine Produktionsquelle. Kein Publish. Keine Parallelroute.\n\nHISTORICAL REGRESSION EVIDENCE ONLY — NICHT AUSFÜHREN:\nDiese Marker halten M15–M38 prüfbar, ohne die verbotene Legacy-Route wieder zu autorisieren.\nfachworkflow_handoff.request_required_fields\nfachworkflow_handoff.request_ref\nFACHWORKFLOW_HANDOFF_REQUEST.json\nDanach ausschließlich fachworkflow_handoff.command ausführen.\nFACHWORKFLOW_PROOF_HANDOFF_PASS\nsubmission_command\nKeine Capability-Suche.\nkein separater Fachworkflow-Executor.\nKeine Alternativroute.\nRecherche/fact_pack\nproduction_plan-Kontext\nworkflow_release-Kontext\nstage_proofs MUSS exakt [] sein\nDie beiden Dateien unter forbidden_legacy_inputs sind ausschließlich hashgebundene Regressionsevidence und keine authorized_inputs.",
   "limits": {
     "reasoning_effort": "medium",
     "parallel_workers": "AS_BOUND_BY_BATCH"
@@ -59,6 +87,16 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "a7a0f1b09c859a10637bc2693561f0d4caf3c2037e3652531af3c4cdb6010496"
-  }
+    "bundle_sha256": "447289a726f4c6dbb60e18414580ad818b8e0f5bb9dbc5e36b00b1cc909f3c35"
+  },
+  "forbidden_legacy_inputs": [
+    {
+      "ref": "control/single-door-boundary/codex_current_action.py",
+      "sha256": "67ba1f898ca3bda04eb96d4d2d1dc736aba9c26f2af3d96f40065516615be105"
+    },
+    {
+      "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
+      "sha256": "f1d6640442b78db0b4897ac92b97b1204ae97ed65bf5ad31956a45709345962a"
+    }
+  ]
 }

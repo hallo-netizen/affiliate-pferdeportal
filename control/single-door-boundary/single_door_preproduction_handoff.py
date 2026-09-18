@@ -23,7 +23,7 @@ BOUNDARY_PATH = HERE / "single_door_boundary.py"
 REPO_ROOT = HERE.parents[1]
 PREPRODUCTION_CONTRACT = "PFERDE_ATELIER_PREPRODUCTION_SINGLE_DOOR_V1"
 PACKAGE_CONTRACT = "PSERC_APPROVED_PRODUCTION_PACKAGE_V1"
-RELEASE_CONTRACT = "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED"
+SIGNED_RELEASE_CONTRACT = "WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED"
 ROOM_TOKEN = "R_PRE_001"
 ACTION_TOKEN = "A_PRE_001"
 INPUT_HANDLE = "I_PRE_PACKAGE_001"
@@ -32,13 +32,14 @@ NEXT_ROOM_TOKEN = "R_001"
 MAX_PACKAGE_BYTES = 12 * 1024 * 1024
 SHA_RE = re.compile(r"^[a-f0-9]{64}$")
 
-# Public verification material only. Private signing keys remain outside the repository.
+# External verification material only. The active 107007 preproduction action remains hash-only.
 TRUSTED_SIGNING_KEYS = {
     "workflow-ed25519-153d2518dba7b025": {"sha256": "153d2518dba7b025c92036583fcf86e31288a2b9f9e0977fce655225446f2a59", "public_key_b64": "Mcl55V5yPSscQZjGC0BPPHoSxp2xiDNzicGDopaZDPQ="},
     "workflow-ed25519-b15660ee915a5826": {"sha256": "b15660ee915a5826e3b658c99043b448ba212596f44ad6a09add09cfbd2d48f3", "public_key_b64": "mwu5MTHnBDhZrzKxeqEnDtiDWdgIDYAoY8Gc167R7dc="},
     "workflow-ed25519-8f521756284cb375": {"sha256": "8f521756284cb375c907f508dac333f51b71b515419ee271ca68fa149db66f87", "public_key_b64": "6FCxYycU2bJysJFvtH5xZ0ia+k59ZLyK6Av8d9/ujm0="},
     "workflow-ed25519-7ba1c78405b15306": {"sha256": "7ba1c78405b15306000ed241c3de2d7ab14c23ca2a9f3a4c27da5664711c4771", "public_key_b64": "PqyrEbUTc8JlUNq07kgBBecKRWlh/LxxkBjIqlS0KNw="},
 }
+
 PACKAGE_KEYS = {"contract", "fact_pack_bundle_sha256", "production_plan_sha256", "workflow_release_sha256", "package_id", "source", "fact_pack_bundle", "production_plan", "workflow_release", "package_payload_sha256"}
 
 class HandoffBlocked(RuntimeError): pass
@@ -68,9 +69,9 @@ def worker_request(model: str, boundary=None) -> dict[str, Any]:
     boundary = boundary or boundary_module()
     return boundary.build_worker_request(binding=preproduction_binding(boundary), model=model)
 
-def _verify_release_signature(release: Mapping[str, Any], trusted_keys: Mapping[str, Mapping[str, str]]) -> None:
+def _verify_external_release_signature(release: Mapping[str, Any], trusted_keys: Mapping[str, Mapping[str, str]]) -> None:
     if Ed25519PublicKey is None: raise HandoffBlocked("ED25519_RUNTIME_UNAVAILABLE")
-    if release.get("contract") != RELEASE_CONTRACT or release.get("status") != "PASS": raise HandoffBlocked("WORKFLOW_RELEASE_SHAPE_INVALID")
+    if release.get("contract") != SIGNED_RELEASE_CONTRACT or release.get("status") != "PASS": raise HandoffBlocked("WORKFLOW_RELEASE_SHAPE_INVALID")
     if release.get("signature_algorithm") != "ED25519": raise HandoffBlocked("WORKFLOW_RELEASE_SIGNATURE_ALGORITHM_INVALID")
     key_id = release.get("signing_key_id"); trusted = trusted_keys.get(str(key_id))
     if not trusted: raise HandoffBlocked("WORKFLOW_RELEASE_SIGNING_KEY_UNTRUSTED")
@@ -89,7 +90,7 @@ def _verify_release_signature(release: Mapping[str, Any], trusted_keys: Mapping[
     expected = stable_hash(release_copy); declared_release = release.get("release_sha256")
     if not isinstance(declared_release, str) or not SHA_RE.fullmatch(declared_release) or declared_release != expected: raise HandoffBlocked("WORKFLOW_RELEASE_HASH_MISMATCH")
 
-def validate_production_package(path: Path, *, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+def validate_production_package_integrity(path: Path) -> dict[str, Any]:
     path = Path(path)
     if path.suffix.lower() != ".json": raise HandoffBlocked("HANDOFF_FILE_MUST_BE_JSON")
     if not path.is_file(): raise HandoffBlocked("HANDOFF_FILE_MISSING")
@@ -109,8 +110,15 @@ def validate_production_package(path: Path, *, trusted_keys: Mapping[str, Mappin
     if env.get("package_id") != expected_id: raise HandoffBlocked("HANDOFF_PACKAGE_ID_MISMATCH")
     payload = copy.deepcopy(env); declared_payload = payload.pop("package_payload_sha256", None)
     if not isinstance(declared_payload, str) or not SHA_RE.fullmatch(declared_payload) or stable_hash(payload) != declared_payload: raise HandoffBlocked("HANDOFF_PACKAGE_PAYLOAD_HASH_MISMATCH")
-    _verify_release_signature(release, trusted_keys or TRUSTED_SIGNING_KEYS)
-    return {"ok": True, "status": "SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID", "package_id": expected_id, "artifact_sha256": file_sha(path), "bytes": size, "content_semantics_inspected": False, "publish_allowed": False}
+    return {"ok": True, "status": "PRODUCTION_PACKAGE_INTEGRITY_VALID", "package_id": expected_id, "artifact_sha256": file_sha(path), "bytes": size, "content_semantics_inspected": False, "publish_allowed": False}
+
+def validate_production_package(path: Path, *, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+    proof = validate_production_package_integrity(path)
+    env = json.loads(Path(path).read_text(encoding="utf-8"))
+    _verify_external_release_signature(env["workflow_release"], trusted_keys or TRUSTED_SIGNING_KEYS)
+    out = dict(proof)
+    out["status"] = "SIGNED_PRODUCTION_PACKAGE_HANDOFF_VALID"
+    return out
 
 def resolve_handle(handle_map: Mapping[str, str], handle: str, repo: Path) -> Path:
     if set(handle_map) != {INPUT_HANDLE}: raise HandoffBlocked("HANDLE_MAP_MUST_CONTAIN_EXACTLY_BOUND_HANDLE")
@@ -122,13 +130,13 @@ def resolve_handle(handle_map: Mapping[str, str], handle: str, repo: Path) -> Pa
     if root not in full.parents and full != root: raise HandoffBlocked("BOUND_HANDLE_PATH_ESCAPE")
     return full
 
-def execute_bound_preproduction_action(*, handle_map: Mapping[str, str], repo: Path, attach_callable: Callable[[Path], Mapping[str, Any]], boundary=None, trusted_keys: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+def execute_bound_preproduction_action(*, handle_map: Mapping[str, str], repo: Path, attach_callable: Callable[[Path], Mapping[str, Any]], boundary=None) -> dict[str, Any]:
     boundary = boundary or boundary_module(); binding = preproduction_binding(boundary)
     package_path = resolve_handle(handle_map, binding.input_handles[0], Path(repo))
-    proof = validate_production_package(package_path, trusted_keys=trusted_keys)
+    proof = validate_production_package_integrity(package_path)
     result = attach_callable(package_path)
     if not isinstance(result, Mapping) or result.get("status") != "RUNTIME_BATCH_EXECUTION_READY": raise HandoffBlocked("ATTACH_PACKAGE_DID_NOT_REACH_EXECUTION_READY")
-    receipt = {"contract": boundary.BOUNDARY_CONTRACT, "room_token": binding.room_token, "action_token": binding.action_token, "receipt_token": binding.receipt_token, "next_room_token": binding.next_room_token, "status": "PASS", "evidence": ["SIGNED_PACKAGE_VALID:" + proof["artifact_sha256"], "RUNTIME_BATCH_EXECUTION_READY"]}
+    receipt = {"contract": boundary.BOUNDARY_CONTRACT, "room_token": binding.room_token, "action_token": binding.action_token, "receipt_token": binding.receipt_token, "next_room_token": binding.next_room_token, "status": "PASS", "evidence": ["PACKAGE_INTEGRITY_VALID:" + proof["artifact_sha256"], "RUNTIME_BATCH_EXECUTION_READY"]}
     return boundary.validate_action_receipt(binding, receipt)
 
 def attach_via_current_lifecycle(*, repo: Path, handle_map: Mapping[str, str], boundary=None) -> dict[str, Any]:

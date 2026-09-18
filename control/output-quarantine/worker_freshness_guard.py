@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import subprocess
 from pathlib import Path
@@ -9,7 +10,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 POINTER = REPO / "control/CURRENT_STARTMASTER.json"
 ENV_PROOF = REPO / ".pferde-environment/CODEX_PRODUCTION_PREFLIGHT.json"
-PREFLIGHT_CONTRACT = "PFERDE_ATELIER_CODEX_PRODUCTION_ENVIRONMENT_PREFLIGHT_V1"
+PREFLIGHT_PRODUCER = REPO / "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"
 EXPECTED_REPOSITORY = "hallo-netizen/affiliate-pferdeportal"
 EXPECTED_GATE_DIRTY_107008 = {
     "control/startmaster0107/CURRENT_STATE.json",
@@ -80,16 +81,36 @@ def local_checkout_identity() -> tuple[str, str, set[str]]:
     return git("rev-parse", "HEAD"), git("branch", "--show-current"), tracked_dirty_paths()
 
 
+def expected_preflight_contract() -> str:
+    if not PREFLIGHT_PRODUCER.is_file():
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_MISSING")
+    spec = importlib.util.spec_from_file_location(
+        "pferde_environment_preflight_contract_source", PREFLIGHT_PRODUCER
+    )
+    if spec is None or spec.loader is None:
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID")
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except Exception as exc:
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID") from exc
+    value = getattr(mod, "CONTRACT", None)
+    if not isinstance(value, str) or not value.strip():
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID")
+    return value
+
+
 def validate_environment_proof(
     proof: dict,
     *,
+    expected_contract: str,
     head: str,
     state: dict,
     statep: Path,
     bundlep: Path,
     runtime: dict,
 ) -> None:
-    if proof.get("contract") != PREFLIGHT_CONTRACT:
+    if proof.get("contract") != expected_contract:
         raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_INVALID")
     if proof.get("status") != "CODEX_PRODUCTION_PREFLIGHT_PASS":
         raise Blocked("CODEX_ENVIRONMENT_PREFLIGHT_NOT_PASS")
@@ -226,7 +247,7 @@ def validate() -> dict:
         for row in (bundle.get("authorized_inputs") or [])
         if isinstance(row, dict)
     }
-    preflightp = REPO / "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"
+    preflightp = PREFLIGHT_PRODUCER
     required = {
         "control/output-quarantine/worker_freshness_guard.py": sha256(Path(__file__).resolve()),
         "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json": sha256(policyp),
@@ -237,11 +258,14 @@ def validate() -> dict:
         if bindings.get(ref) != digest:
             raise Blocked("REQUIRED_SECURITY_INPUT_NOT_BUNDLE_BOUND:" + str(ref))
 
+    expected_contract = expected_preflight_contract()
+
     if not ENV_PROOF.is_file():
         raise Blocked("CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING")
     proof = load(ENV_PROOF)
     validate_environment_proof(
         proof,
+        expected_contract=expected_contract,
         head=head,
         state=state,
         statep=statep,

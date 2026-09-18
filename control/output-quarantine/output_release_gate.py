@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import shutil
 import subprocess
@@ -11,7 +12,7 @@ REPO = Path(__file__).resolve().parents[2]
 POINTER = REPO / "control/CURRENT_STARTMASTER.json"
 RUNTIME_STATE = REPO / "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json"
 ENV_PROOF = REPO / ".pferde-environment/CODEX_PRODUCTION_PREFLIGHT.json"
-PREFLIGHT_CONTRACT = "PFERDE_ATELIER_CODEX_PRODUCTION_ENVIRONMENT_PREFLIGHT_V1"
+PREFLIGHT_PRODUCER = REPO / "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"
 EXPECTED_REPOSITORY = "hallo-netizen/affiliate-pferdeportal"
 
 
@@ -43,6 +44,35 @@ def rel(value: str) -> Path:
     return p
 
 
+def runtime_generation(value) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+        raise Blocked("RUNTIME_GENERATION_INVALID")
+    return value
+
+
+def generation_name(value) -> str:
+    return f"generation-{runtime_generation(value):06d}"
+
+
+def expected_preflight_contract() -> str:
+    if not PREFLIGHT_PRODUCER.is_file():
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_MISSING")
+    spec = importlib.util.spec_from_file_location(
+        "pferde_output_release_preflight_contract_source", PREFLIGHT_PRODUCER
+    )
+    if spec is None or spec.loader is None:
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID")
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except Exception as exc:
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID") from exc
+    value = getattr(mod, "CONTRACT", None)
+    if not isinstance(value, str) or not value.strip():
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID")
+    return value
+
+
 def git(*args: str) -> str:
     try:
         cp = subprocess.run(
@@ -71,7 +101,8 @@ def require_current_main() -> str:
     if not ENV_PROOF.is_file():
         raise Blocked("CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING")
     proof = load(ENV_PROOF)
-    if proof.get("contract") != PREFLIGHT_CONTRACT:
+    expected_contract = expected_preflight_contract()
+    if proof.get("contract") != expected_contract:
         raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_INVALID")
     if proof.get("status") != "CODEX_PRODUCTION_PREFLIGHT_PASS":
         raise Blocked("CODEX_ENVIRONMENT_PREFLIGHT_NOT_PASS")
@@ -99,7 +130,7 @@ def authority():
     statep = REPO / rel(ptr.get("state_ref"))
     rootp = REPO / rel(ptr.get("root_ref"))
     policyp = REPO / rel(ptr.get("visible_output_policy_ref"))
-    if not all(p.is_file() for p in (statep, rootp, policyp)):
+    if not all(p.is_file() for p in (statep, rootp, policyp, PREFLIGHT_PRODUCER)):
         raise Blocked("AUTHORITY_FILE_MISSING")
 
     state, root, policy = load(statep), load(rootp), load(policyp)
@@ -133,6 +164,9 @@ def authority():
         raise Blocked("OUTPUT_GATE_NOT_BUNDLE_BOUND")
     if bindings.get(policy_ref) != sha256(policyp):
         raise Blocked("OUTPUT_POLICY_NOT_BUNDLE_BOUND")
+    preflight_ref = "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"
+    if bindings.get(preflight_ref) != sha256(PREFLIGHT_PRODUCER):
+        raise Blocked("PREFLIGHT_PRODUCER_NOT_BUNDLE_BOUND")
 
     ticket_body = {
         "contract": "PFERDE_ATELIER_EXECUTION_TICKET_V2",
@@ -206,8 +240,8 @@ def verify_quarantine_outputs(policy, outputs):
 
 
 def prepare_107007(ticket_path: Path, receipt_path: Path) -> dict:
-    main_head = require_current_main()
     _, state, gate, policy, expected_ticket = authority()
+    main_head = require_current_main()
     if expected_ticket.get("step_id") != "RUN_NEW_ARTICLE_BATCH_NO_STOP" or int(expected_ticket.get("sequence", -1)) != 107007:
         raise Blocked("PREPARE_RELEASE_ONLY_ALLOWED_FOR_107007")
     ticket, receipt = validate_generic_receipt(ticket_path, receipt_path, expected_ticket, policy)
@@ -225,12 +259,13 @@ def prepare_107007(ticket_path: Path, receipt_path: Path) -> dict:
     batch_sha = str(runtime.get("batch_sha256") or "")
     if len(batch_sha) != 64 or payload.get("batch_sha256") != batch_sha:
         raise Blocked("CURRENT_BATCH_BINDING_MISMATCH")
+    generation = runtime_generation(runtime.get("generation"))
     outputs = payload.get("outputs")
     if not isinstance(outputs, list) or not outputs:
         raise Blocked("OUTPUT_BINDING_MISSING")
     verified = verify_quarantine_outputs(policy, outputs)
 
-    staging_root = REPO / ".pferde-release-staging" / batch_sha / ticket["ticket_id"]
+    staging_root = REPO / ".pferde-release-staging" / batch_sha / generation_name(generation) / ticket["ticket_id"]
     staging_root.mkdir(parents=True, exist_ok=True)
     staged = []
     for source_ref, src, digest in verified:
@@ -253,6 +288,7 @@ def prepare_107007(ticket_path: Path, receipt_path: Path) -> dict:
         "source_state_sha256": ticket["state_sha256"],
         "source_bundle_sha256": ticket["bundle_sha256"],
         "batch_sha256": batch_sha,
+        "runtime_generation": generation,
         "worker_receipt_sha256": sha256(receipt_path),
         "main_head": main_head,
         "staged_outputs": staged,
@@ -270,6 +306,7 @@ def prepare_107007(ticket_path: Path, receipt_path: Path) -> dict:
         "prepared_ref": str(prepared_path.relative_to(REPO)),
         "prepared_sha256": sha256(prepared_path),
         "batch_sha256": batch_sha,
+        "runtime_generation": generation,
         "publish_allowed": False,
     }
 
@@ -287,6 +324,7 @@ def validate_prepared(prepared_ref: str, prepared_sha256: str) -> tuple[Path, di
         raise Blocked("PREPARED_RELEASE_SOURCE_STEP_INVALID")
     if prepared.get("publish_allowed") is not False:
         raise Blocked("AUTO_PUBLISH_FORBIDDEN")
+    runtime_generation(prepared.get("runtime_generation"))
     rows = prepared.get("staged_outputs")
     if not isinstance(rows, list) or not rows:
         raise Blocked("PREPARED_OUTPUTS_MISSING")
@@ -323,6 +361,7 @@ def authorize_final_107008(prepared_ref: str, prepared_sha256: str, ticket_path:
         "prepared_ref": prepared_ref,
         "prepared_sha256": prepared_sha256,
         "batch_sha256": prepared["batch_sha256"],
+        "runtime_generation": prepared["runtime_generation"],
         "final_review_step_id": ticket["step_id"],
         "final_review_sequence": ticket["sequence"],
         "final_review_ticket_id": ticket["ticket_id"],
@@ -344,6 +383,7 @@ def authorize_final_107008(prepared_ref: str, prepared_sha256: str, ticket_path:
         "auth_ref": str(auth_path.relative_to(REPO)),
         "auth_sha256": sha256(auth_path),
         "batch_sha256": prepared["batch_sha256"],
+        "runtime_generation": prepared["runtime_generation"],
         "publish_allowed": False,
     }
 
@@ -363,6 +403,8 @@ def commit_after_rearm(prepared_ref: str, prepared_sha256: str, auth_ref: str, a
         raise Blocked("FINAL_AUTH_PREPARED_MISMATCH")
     if auth.get("batch_sha256") != prepared.get("batch_sha256"):
         raise Blocked("FINAL_AUTH_BATCH_MISMATCH")
+    if auth.get("runtime_generation") != prepared.get("runtime_generation"):
+        raise Blocked("FINAL_AUTH_GENERATION_MISMATCH")
     if auth.get("main_head") != main_head or prepared.get("main_head") != main_head:
         raise Blocked("MAIN_HEAD_CHANGED_DURING_BATCH")
     if auth.get("publish_allowed") is not False:
@@ -375,10 +417,13 @@ def commit_after_rearm(prepared_ref: str, prepared_sha256: str, auth_ref: str, a
         raise Blocked("VISIBLE_RELEASE_REQUIRES_SUCCESSFUL_107008_REARM")
     if runtime.get("status") != "NO_ACTIVE_BATCH" or runtime.get("publish_allowed") is not False:
         raise Blocked("VISIBLE_RELEASE_REQUIRES_IDLE_RUNTIME")
+    generation = runtime_generation(prepared.get("runtime_generation"))
+    if runtime_generation(runtime.get("generation")) != generation:
+        raise Blocked("VISIBLE_RELEASE_RUNTIME_GENERATION_DRIFT")
 
     policy = load(REPO / rel(ptr.get("visible_output_policy_ref")))
     release_root = REPO / rel(policy.get("visible_release_root"))
-    destination = release_root / prepared["batch_sha256"]
+    destination = release_root / prepared["batch_sha256"] / generation_name(generation)
     destination.mkdir(parents=True, exist_ok=True)
 
     released = []
@@ -405,6 +450,7 @@ def commit_after_rearm(prepared_ref: str, prepared_sha256: str, auth_ref: str, a
         "source_state_sha256": prepared["source_state_sha256"],
         "source_bundle_sha256": prepared["source_bundle_sha256"],
         "batch_sha256": prepared["batch_sha256"],
+        "runtime_generation": generation,
         "worker_receipt_sha256": prepared["worker_receipt_sha256"],
         "final_review_step_id": auth["final_review_step_id"],
         "final_review_sequence": auth["final_review_sequence"],
@@ -421,12 +467,32 @@ def commit_after_rearm(prepared_ref: str, prepared_sha256: str, auth_ref: str, a
     receipt_name = str(policy.get("release_receipt_name") or "RELEASE_RECEIPT.json")
     release_receipt_path = destination / receipt_name
     release_receipt_path.write_text(json.dumps(release_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    durable_destination = REPO / "control/startmaster0107/durable_release_archive" / prepared["batch_sha256"] / generation_name(generation)
+    durable_destination.mkdir(parents=True, exist_ok=True)
+    durable_outputs = []
+    for row in released:
+        src = REPO / rel(row["released_ref"])
+        dst = durable_destination / src.name
+        if dst.exists() and sha256(dst) != row["sha256"]:
+            raise Blocked("DURABLE_DESTINATION_COLLISION:" + dst.name)
+        if not dst.exists():
+            shutil.copyfile(src, dst)
+        if sha256(dst) != row["sha256"]:
+            raise Blocked("DURABLE_COPY_HASH_MISMATCH:" + dst.name)
+        durable_outputs.append({"source_ref": row["source_ref"], "released_ref": str(dst.relative_to(REPO)), "sha256": row["sha256"]})
+    durable_receipt = dict(release_receipt)
+    durable_receipt["outputs"] = durable_outputs
+    durable_receipt_path = durable_destination / receipt_name
+    durable_receipt_path.write_text(json.dumps(durable_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     return {
         "ok": True,
         "status": "OUTPUT_RELEASE_PASS_FINAL",
         "release_receipt_ref": str(release_receipt_path.relative_to(REPO)),
         "release_receipt_sha256": sha256(release_receipt_path),
         "batch_sha256": prepared["batch_sha256"],
+        "runtime_generation": generation,
         "released_count": len(released),
         "publish_allowed": False,
     }

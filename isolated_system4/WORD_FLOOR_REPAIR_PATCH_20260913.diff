@@ -1,0 +1,138 @@
+--- a/isolated_system4/content_guard.py
++++ b/isolated_system4/content_guard.py
+@@ -22,6 +22,7 @@
+ MAX_PAIRWISE_SHINGLE_JACCARD = 0.20
+ MAX_REPAIR_LENGTH_CHANGE = 0.30
+ MIN_REPAIR_SIMILARITY = 0.72
++WORD_FLOOR_REPAIR_ERROR = 'FULL:ppm679:BLOCKED_CONTENT_WORD_FLOOR'
+ 
+ 
+ class ContentGuardError(RuntimeError):
+@@ -334,7 +335,7 @@
+     }
+ 
+ 
+-def validate_repair_continuity(old_body: str, new_body: str) -> dict[str, Any]:
++def validate_repair_continuity(old_body: str, new_body: str, repair_reason: str | None = None) -> dict[str, Any]:
+     _require(isinstance(old_body, str) and old_body.strip(), "REPAIR_OLD_BODY_INVALID")
+     _require(isinstance(new_body, str) and new_body.strip(), "REPAIR_NEW_BODY_INVALID")
+     old = _visible_text(old_body)
+@@ -342,12 +343,15 @@
+     _require(old != new, "REPAIR_DRAFT_UNCHANGED")
+     length_change = abs(len(new) - len(old)) / max(1, len(old))
+     similarity = SequenceMatcher(None, old, new, autojunk=False).ratio()
+-    _require(length_change <= MAX_REPAIR_LENGTH_CHANGE, f"REPAIR_SCOPE_TOO_LARGE:LENGTH:{length_change:.4f}")
++    word_floor_expansion = repair_reason == WORD_FLOOR_REPAIR_ERROR and len(new) > len(old)
++    if not word_floor_expansion:
++        _require(length_change <= MAX_REPAIR_LENGTH_CHANGE, f"REPAIR_SCOPE_TOO_LARGE:LENGTH:{length_change:.4f}")
+     _require(similarity >= MIN_REPAIR_SIMILARITY, f"REPAIR_SCOPE_TOO_LARGE:SIMILARITY:{similarity:.4f}")
+     return {
+         "status": "PASS",
+         "length_change": round(length_change, 6),
+         "similarity": round(similarity, 6),
++        "word_floor_expansion": word_floor_expansion,
+     }
+ 
+ 
+--- a/isolated_system4/controller.py
++++ b/isolated_system4/controller.py
+@@ -158,7 +158,7 @@
+     if not text: raise Fail('DRAFT_EMPTY')
+     if text==old_text: raise Fail('REPAIR_DRAFT_UNCHANGED')
+     if isinstance(old_context,dict):
+-        try: content_guard.validate_repair_continuity(old_text,text)
++        try: content_guard.validate_repair_continuity(old_text,text,repair_reason=s.get('last_error'))
+         except content_guard.ContentGuardError as e: raise Fail('REPAIR_SCOPE_FAIL:'+str(e)) from e
+     _guard_article_against_context(s,text)
+     s['draft_markdown']=text; s['draft_sha256']=hashlib.sha256(text.encode()).hexdigest(); s['revision']+=1
+--- a/isolated_system4/test_content_guard.py
++++ b/isolated_system4/test_content_guard.py
+@@ -107,6 +107,28 @@
+         with self.assertRaisesRegex(content_guard.ContentGuardError, 'REPAIR_SCOPE_TOO_LARGE'):
+             content_guard.validate_repair_continuity(old, replacement)
+ 
++    def test_word_floor_repair_allows_large_additive_expansion_only(self):
++        old = '<article><p>' + ('Bestehender fachlicher Satz bleibt erhalten. ' * 100) + '</p></article>'
++        expanded = old.replace('</p></article>', ('Zusätzlicher fachlicher Absatz ergänzt nur fehlende Tiefe. ' * 55) + '</p></article>')
++        result = content_guard.validate_repair_continuity(
++            old, expanded, repair_reason='FULL:ppm679:BLOCKED_CONTENT_WORD_FLOOR'
++        )
++        self.assertEqual(result['status'], 'PASS')
++        self.assertTrue(result['word_floor_expansion'])
++        self.assertGreater(result['length_change'], content_guard.MAX_REPAIR_LENGTH_CHANGE)
++        with self.assertRaisesRegex(content_guard.ContentGuardError, 'REPAIR_SCOPE_TOO_LARGE:LENGTH'):
++            content_guard.validate_repair_continuity(
++                old, expanded, repair_reason='FULL:languagetool:LANGUAGETOOL_FINDING'
++            )
++
++    def test_word_floor_repair_still_blocks_broad_rewrite_by_similarity(self):
++        old = '<article><p>' + ('Bestehender fachlicher Satz bleibt erhalten. ' * 100) + '</p></article>'
++        replacement = '<article><p>' + ('Völlig neuer Ersatzinhalt ohne textliche Kontinuität. ' * 150) + '</p></article>'
++        with self.assertRaisesRegex(content_guard.ContentGuardError, 'REPAIR_SCOPE_TOO_LARGE:SIMILARITY'):
++            content_guard.validate_repair_continuity(
++                old, replacement, repair_reason='FULL:ppm679:BLOCKED_CONTENT_WORD_FLOOR'
++            )
++
+ 
+ if __name__ == '__main__':
+     unittest.main(verbosity=2)
+--- a/isolated_system4/test_repair_continuity.py
++++ b/isolated_system4/test_repair_continuity.py
+@@ -84,6 +84,38 @@
+                 state = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
+                 self.assertEqual(state['phase'], 'OUTPUT_GATE_REQUIRED'); self.assertEqual(state['checks']['status'], 'PASS'); self.assertEqual(state['checks']['mode'], 'FULL_PRODUCTION'); self.assertEqual(state['revision'], 2); self.assertEqual(run_all.call_count, 2)
+ 
++    def test_word_floor_repair_can_expand_same_article_beyond_30_percent(self):
++        with tempfile.TemporaryDirectory() as td:
++            root = Path(td); workspace = root / 'item0'; prepare_workspace(root, workspace, 0)
++            prefix = '<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Prüfung</h2><p data-fact-ids="fact-0-a fact-0-b">'
++            suffix = '</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>X</td><td>Y</td></tr></table></article>'
++            original = prefix + ('Bestehender fachlicher Satz bleibt erhalten. ' * 100) + suffix
++            expanded = prefix + ('Bestehender fachlicher Satz bleibt erhalten. ' * 100) + ('Zusätzlicher fachlicher Absatz ergänzt nur fehlende Tiefe. ' * 55) + suffix
++            draft = write_stage_file(root, 'draft.html', original); controller.cmd_draft(workspace, draft)
++            state, path = controller.load(workspace)
++            state['checks']={'status':'FAIL','mode':'FULL_PRODUCTION','checked_draft_sha256':state['draft_sha256']}
++            state['last_error']='FULL:ppm679:BLOCKED_CONTENT_WORD_FLOOR'; state['phase']='REPAIR_REQUIRED'; controller.save(state,path)
++            draft.write_text(expanded, encoding='utf-8')
++            controller.cmd_repair(workspace, draft)
++            state = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
++            self.assertEqual(state['phase'], 'CHECK_REQUIRED'); self.assertEqual(state['revision'], 2)
++            self.assertEqual(state['draft_markdown'], expanded)
++
++    def test_large_expansion_is_still_blocked_for_non_word_floor_repair(self):
++        with tempfile.TemporaryDirectory() as td:
++            root = Path(td); workspace = root / 'item0'; prepare_workspace(root, workspace, 0)
++            prefix = '<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>Prüfung</h2><p data-fact-ids="fact-0-a fact-0-b">'
++            suffix = '</p><table class="system-129-table comparison-table"><tr><th>A</th><th>B</th></tr><tr><td>X</td><td>Y</td></tr></table></article>'
++            original = prefix + ('Bestehender fachlicher Satz bleibt erhalten. ' * 100) + suffix
++            expanded = prefix + ('Bestehender fachlicher Satz bleibt erhalten. ' * 100) + ('Zusätzlicher fachlicher Absatz ergänzt nur fehlende Tiefe. ' * 55) + suffix
++            draft = write_stage_file(root, 'draft.html', original); controller.cmd_draft(workspace, draft)
++            state, path = controller.load(workspace)
++            state['checks']={'status':'FAIL','mode':'FULL_PRODUCTION','checked_draft_sha256':state['draft_sha256']}
++            state['last_error']='FULL:languagetool:LANGUAGETOOL_FINDING'; state['phase']='REPAIR_REQUIRED'; controller.save(state,path)
++            draft.write_text(expanded, encoding='utf-8')
++            with self.assertRaisesRegex(controller.Fail, 'REPAIR_SCOPE_FAIL:REPAIR_SCOPE_TOO_LARGE:LENGTH'):
++                controller.cmd_repair(workspace, draft)
++
+     def test_broad_repair_is_blocked(self):
+         with tempfile.TemporaryDirectory() as td:
+             root = Path(td); workspace = root / 'item0'; prepare_workspace(root, workspace, 0)
+--- a/isolated_system4/LIVE_BOUND_INPUT_ONE_ARTICLE.json
++++ b/isolated_system4/LIVE_BOUND_INPUT_ONE_ARTICLE.json
+@@ -1 +1 @@
+-{"contract":"SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1","next_textmachine_metadata_batch":{"batch_sha256":"7b471ee2acef71531b067d2a8324a72580f4d9c8bc8d67412d021c1facf2e6e3","contract":"PSERC_TEXTMACHINE_METADATA_BATCH_V2","item_count":1,"items":[{"article_type":"Beratung","category":"putzbox-beratung","plan_slot":"88043c35da332d4b2a500d1b61919721aefadf894bc923c841cc849a132c63b5","target_keyword":"Putzbox für Pferde","title":"Putzbox für Pferde richtig auswählen"}],"publish_allowed":false,"status":"READY_FOR_TEXTMACHINE_METADATA_INTAKE"},"system4_root_manifest_sha256":"3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c"}
++{"contract":"SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1","next_textmachine_metadata_batch":{"batch_sha256":"7b471ee2acef71531b067d2a8324a72580f4d9c8bc8d67412d021c1facf2e6e3","contract":"PSERC_TEXTMACHINE_METADATA_BATCH_V2","item_count":1,"items":[{"article_type":"Beratung","category":"putzbox-beratung","plan_slot":"88043c35da332d4b2a500d1b61919721aefadf894bc923c841cc849a132c63b5","target_keyword":"Putzbox für Pferde","title":"Putzbox für Pferde richtig auswählen"}],"publish_allowed":false,"status":"READY_FOR_TEXTMACHINE_METADATA_INTAKE"},"system4_root_manifest_sha256":"748003ef4bea9a2af6a279c3b120bc365fb60cc4699cceac03f877d7885dff8d"}
+--- a/isolated_system4/test_live_bound_input_exact.py
++++ b/isolated_system4/test_live_bound_input_exact.py
+@@ -11,9 +11,9 @@
+ SYSTEM4 = ROOT / 'isolated_system4'
+ ENTRY = SYSTEM4 / 'root_entry.py'
+ LIVE = SYSTEM4 / 'LIVE_BOUND_INPUT_ONE_ARTICLE.json'
+-EXPECTED_SHA256 = '58efda5de85ca276829349cbbf6049cc9dca6e2ebbf3a50a94a87caca13e10fd'
++EXPECTED_SHA256 = 'a036b1988b632580c58cc6b7bae240102ece31f6430456e8d5688358f0392f83'
+ EXPECTED_BYTES = 643
+-EXPECTED_MANIFEST = '3ca3a10c5d2ee37f3932a044b9be9e358bba738205c48fe91ad5c80d154cad7c'
++EXPECTED_MANIFEST = '748003ef4bea9a2af6a279c3b120bc365fb60cc4699cceac03f877d7885dff8d'
+ 
+ 
+ def run_entry(raw: bytes, workspace: Path):
