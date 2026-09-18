@@ -118,8 +118,15 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
     if receipt.get("publish_allowed") is not False:
         raise Blocked("AUTO_PUBLISH_FORBIDDEN")
     batch = str(receipt.get("batch_sha256") or "")
+    release_id = str(receipt.get("release_identity_sha256") or "")
     if not SHA_RE.fullmatch(batch):
         raise Blocked("BATCH_INVALID")
+    if not SHA_RE.fullmatch(release_id):
+        raise Blocked("RELEASE_IDENTITY_INVALID")
+    if receipt_path.parent.name != release_id:
+        raise Blocked("RELEASE_RECEIPT_LOCATION_IDENTITY_MISMATCH")
+    if package_path.parent.resolve() != receipt_path.parent.resolve():
+        raise Blocked("FINAL_PACKAGE_RELEASE_IDENTITY_MISMATCH")
 
     rows = receipt.get("outputs")
     if not isinstance(rows, list):
@@ -155,11 +162,12 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
     validate_import_envelope(package, batch, articles)
     import_raw = canonical(package)
     import_sha = sha256_bytes(import_raw)
-    import_ref = f"control/startmaster0107/recovery_sources/{batch}/{IMPORT_NAME}"
+    import_ref = f"control/startmaster0107/recovery_sources/{release_id}/{IMPORT_NAME}"
 
     source_manifest = {
         "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1",
         "batch_sha256": batch,
+        "release_identity_sha256": release_id,
         "item_count": count,
         "import_envelope_ref": import_ref,
         "import_envelope_sha256": import_sha,
@@ -167,7 +175,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "content_mutation_performed": False,
         "items": [
             {
-                "ref": f"control/startmaster0107/recovery_sources/{batch}/{a['name']}",
+                "ref": f"control/startmaster0107/recovery_sources/{release_id}/{a['name']}",
                 "sha256": a["sha256"],
                 "plan_slot": a["plan_slot"],
             }
@@ -179,6 +187,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "contract": "PFERDE_ATELIER_CHAT_DELIVERY_PAYLOAD_V1",
         "status": "DELIVERY_HANDOFF_READY",
         "batch_sha256": batch,
+        "release_identity_sha256": release_id,
         "release_receipt_ref": release_receipt_ref,
         "release_receipt_sha256": sha256_file(receipt_path),
         "final_package_ref": final_package_ref,
@@ -197,6 +206,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "status": "DELIVERY_HANDOFF_READY",
         "contract": "PFERDE_ATELIER_CHAT_DELIVERY_ENVELOPE_V1",
         "batch_sha256": batch,
+        "release_identity_sha256": release_id,
         "payload_sha256": sha256_bytes(raw),
         "gzip_sha256": sha256_bytes(packed),
         "encoding": "gzip+base64",
