@@ -20,19 +20,19 @@ am Gebäudeeingang quer durch mehrere Büros ändern, Fachgrenzen ignorieren ode
 **ALS NÄCHSTES …**  
 das zuständige Büro auswählen und dessen `START_HERE.md` öffnen.
 
-## AUTORITÄTSPLAN – NICHT DOPPELN
+## AUTORITÄTSPLAN – EINE WAHRHEIT
 
-Für jedes Büro gilt genau eine Quelle pro Frage:
+Einzige Routingautorität für die Frage **„Wo liegt die aktuelle Wahrheit dieses Büros?“**:
+`protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json`.
 
-- **Was ist der aktuelle Fach-/Bestandsstand?** → Büro-`CURRENT_STATE.md`
-- **Was wird JETZT bearbeitet / was ist NEXT ACTION?** → Büro-`HOBBYRAUM.md`
-- **Welche Fehler sind bekannt?** → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → jeweilige Originalquelle
-- **Welches Ziel gilt?** → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
-- **Warum wurde etwas geändert?** → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
-- **Was ist historisch?** → `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
-- **Welche allgemeinen Module gibt es?** → `protocol/PROJECT_MEMORY/ALLGEMEINGUELTIGE_BAUSTEINE/MODULREGISTER.md`
+Der Gebäudeeingang enthält selbst keinen dynamischen Bürostatus.
 
-Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
+Pflichtweg:
+`Büro-START_HERE → AUTORITAETSPLAN → genau eine Current-Autorität → Frischecheck → NEXT ACTION`.
+
+`HOBBYRAUM.md` ist nur abgeleitete Ausführungsfläche und darf Current-Status oder NEXT ACTION nicht als zweite Autorität führen.
+
+CAMPUS_SINGLE_TRUTH_ENTRY_V1
 
 ## Büroplan
 
@@ -74,7 +74,7 @@ Fehlende/eindeutig nicht bindbare aktuelle ZIP → `Plugins: BLOCKED`, niemals r
 Der Gebäudeeingang enthält keine temporären Chat-Zustände.
 
 Für jedes Büro gilt:
-`START_HERE.md` → `CURRENT_STATE.md` → `HOBBYRAUM.md` → gebundener Arbeitsweg.
+`START_HERE.md` → `AUTORITAETSPLAN.json` → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION → nur falls gebunden: Ausführungsfläche.
 
 Parallel arbeitende Chats/Worker werden ausschließlich im zuständigen Büro/Hobbyraum oder Paul-Eingang gebunden.
 
