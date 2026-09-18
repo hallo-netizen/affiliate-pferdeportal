@@ -315,19 +315,16 @@ def m30():
         expect_exc(lambda:d.context_from_release(root,rp.name),"FINAL_CONTEXT_BATCH_MISMATCH")
 
 def m31():
-    a=mod(CURRENT_ACTION,"m31_action")
-    base={"allowed_output_root":".pferde-quarantine/test/","item_receipt_schema":{}}
-    item=_real_bound_item(a)
-    out=a.augment_current_action(REPO,base,item)
-    hb=out.get("fachworkflow_handoff")
-    must(isinstance(hb,dict),"M31_BOUND_HANDOFF_MISSING")
-    must(hb.get("technical_guard_executes_domain_logic") is False,"M31_HANDOFF_DOMAIN_LOGIC_AUTHORITY")
-    bridge=json.loads(cmd("control/single-door-boundary/test_h8_codex_cloud_bound_capsule_bridge.py"))
-    must(bridge.get("status")=="H8_CODEX_CLOUD_BOUND_CAPSULE_BRIDGE_POSITIVE_NEGATIVE_PASS","M31_CODEX_NATIVE_BOUND_ACTION_NOT_PASS")
-    must(bridge.get("custom_function_capability_required") is False,"M31_SYNTHETIC_CAPABILITY_REQUIRED")
     step=load(STEP7).get("instruction","")
     must("execute_bound_action" not in step,"M31_EXECUTE_BOUND_ACTION_DEPENDENCY")
-    must("kein separater Fachworkflow-Executor" in step or "kein zweiter Executor" in step,"M31_SEPARATE_EXECUTOR_NOT_FORBIDDEN")
+    must("system4_107007_entry.py" in step,"M31_SYSTEM4_ENTRY_NOT_BOUND")
+    must("root_entry.py start-point0" in step,"M31_ROOT_ENTRY_NOT_BOUND")
+    must("codex_entry.py worker-start" in step,"M31_CODEX_WORKER_START_NOT_BOUND")
+    must("kein Legacy-Handoff" in step,"M31_LEGACY_HANDOFF_NOT_FORBIDDEN")
+    out=cmd("isolated_system4/test_machine_route_lock_contract.py")
+    must("OK" in out or out.strip()=="","M31_MACHINE_ROUTE_LOCK_NOT_PASS")
+    out=cmd("control/startmaster0107/test_system4_107007_repair_authority.py")
+    must("OK" in out or out.strip()=="","M31_REPAIR_AUTHORITY_NOT_PASS")
 
 def m32():
     h=mod(HANDOFF,"m32_handoff")
