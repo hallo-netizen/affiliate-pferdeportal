@@ -1,5 +1,11 @@
 # TEXTSYSTEM 4A – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-13
 STATUS: BLOCKED / EXTERNE WÄCHTERGRENZE NOCH NICHT BEWIESEN
 
@@ -129,3 +135,14 @@ Der Vorteil wäre echte Workflow-Autorität außerhalb von Codex; der Nachteil i
 Wenn die äußere Supervisor-Grenze nur durch neue Signer-, Token-, Room-, Receipt- oder Package-Kaskaden erreichbar ist: **4A sofort stoppen.**
 
 Dann werden die brauchbaren Härtungsideen in System 4 übernommen statt ein fünftes System zu bauen.
+
+## NEXT ACTION
+
+Ausschließlich die äußere Supervisor-Grenze beweisen:
+1. minimalen äußeren Supervisor-Betriebsweg definieren;
+2. Supervisor als erste und einzige Produktions-Eingangstür beweisen;
+3. State/Key/Phase/PASS/Route/Resume außerhalb der Worker-Autorität halten;
+4. vorhandene System-4-Prüfer unverändert in vertrauenswürdiger Read-only-Umgebung ausführen;
+5. keine neue Fach-/Text-/Design-/Qualitätsregel und keine neue Signer-/Receipt-/Room-/Package-Kaskade bauen.
+
+Erst bei realem PASS dieser Grenze darf der reale LT/PPM-E2E folgen. Bei erneuter Sicherheitskaskade: 4A stoppen und die brauchbare Härtung in System 4 übernehmen.
