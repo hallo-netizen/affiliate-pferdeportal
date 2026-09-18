@@ -1,0 +1,33 @@
+{
+  "contract": "KONZEPT_NULL_HISTORICAL_RECONSTRUCTION_EVIDENCE_V1",
+  "uploaded_nullpunkt_0039": {
+    "outer_zip_sha256": "9aa4f27d133f2c07543ac52df4deb7bdf1407af8d8a5b60065c3d2e98efdf862",
+    "startmaster_0039_sha256": "085423c2bb129334c6b03025248d0e628ccc6caf28a8bd6491a67c91107c7575",
+    "steering_380_sha256": "20bdbdf33ac55cb6619d2107fbce24b69de44fc69a17ecb3b36609e3f15eb863",
+    "findings": [
+      "new chat loads Nullpunkt, current STARTMASTER and steering package before work",
+      "assistant may make no free topic, category, keyword, article-type, rule or process decision",
+      "ambiguous binding must fail closed before writing",
+      "chat/research process creates canonical inputs; Production Machine does not write article text",
+      "frozen chain includes Source Order -> Source Snapshot -> Fact-Pack -> claim binding -> canonical article -> production plan -> LanguageTool -> PPM/readback",
+      "article quality and validation contracts remain unchanged"
+    ]
+  },
+  "august_28_authority": {
+    "startmaster": "STARTMASTER0102",
+    "commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
+    "navigation_rule": "ROOT -> CURRENT_STATE -> NEXT_ALLOWED_STEP only",
+    "no_stop_rule": true,
+    "free_chat_navigation": false,
+    "pste": "0.56.25",
+    "pserc": "0.28.14",
+    "pserc_sha256": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988",
+    "ppm": "6.7.9",
+    "ppm_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+    "ppm_main_file_sha256": "0874f26f21e471007922cf759ea5ad52bdc61a5975931898e83e9ff8f6418906",
+    "languagetool": "6.8",
+    "languagetool_zip_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "languagetool_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
+  },
+  "rule": "July STARTMASTER0039 is used only to recover original chat-control and frozen workflow semantics; August 28 identities remain authoritative for runtime reconstruction."
+}
