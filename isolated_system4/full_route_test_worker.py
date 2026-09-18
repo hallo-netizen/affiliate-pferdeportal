@@ -10,6 +10,7 @@ RUN_NONCE_ENV='SYSTEM4_TEST_RUN_NONCE'
 FORCE_REPAIR_INDEX_ENV='SYSTEM4_TEST_FORCE_REPAIR_INDEX'
 FORCE_BATCH_REPETITION_COUNT_ENV='SYSTEM4_TEST_FORCE_BATCH_REPETITION_COUNT'
 FORCE_BLOCK_SEMANTIC_ERROR_INDEX_ENV='SYSTEM4_TEST_FORCE_BLOCK_SEMANTIC_ERROR_INDEX'
+FORCE_BLOCK_SEMANTIC_CASE_ENV='SYSTEM4_TEST_FORCE_BLOCK_SEMANTIC_CASE'
 REPO=Path(__file__).resolve().parent.parent
 BATCH_REPEAT_SENTENCES=(
     'Diese Prüfung nutzt vorhandene Quellen und ergänzt keine neuen Angaben.',
@@ -55,14 +56,66 @@ def _fresh_variation_index(index:int)->int:
     base=31+(int(digest[:8],16)%100003)
     return base+(index*5)
 
-def _force_wrong_conclusion_heading(body:str,index:int)->str:
+def _semantic_section(body:str,block_id:str)->re.Match:
+    pattern=re.compile(r'<section\\b[^>]*data-block=["\\']'+re.escape(block_id)+r'["\\'][^>]*>.*?</section>',re.S|re.I)
+    match=pattern.search(body)
+    if not match:
+        raise RuntimeError('FORCED_BLOCK_SEMANTIC_SECTION_MISSING:'+block_id)
+    return match
+
+def _force_block_semantic_error(body:str,index:int)->str:
     if os.environ.get(FORCE_BLOCK_SEMANTIC_ERROR_INDEX_ENV,'').strip()!=str(index):
         return body
-    pattern=re.compile(r'(<section data-block="conclusion">.*?<h2[^>]*>)(.*?)(</h2>)',re.S)
-    changed,count=pattern.subn(r'\1Weitere Aspekte zum Thema\3',body,count=1)
-    if count!=1 or changed==body:
-        raise RuntimeError('FORCED_BLOCK_SEMANTIC_CONCLUSION_HEADING_MISSING')
-    return changed
+    case=os.environ.get(FORCE_BLOCK_SEMANTIC_CASE_ENV,'conclusion_heading_mismatch').strip()
+    if case in {'conclusion_heading_mismatch','further_information_heading_mismatch'}:
+        block_id='conclusion' if case.startswith('conclusion_') else 'further_information'
+        pattern=re.compile(r'(<section\\b[^>]*data-block=["\\']'+re.escape(block_id)+r'["\\'][^>]*>.*?<h2[^>]*>)(.*?)(</h2>)',re.S|re.I)
+        changed,count=pattern.subn(r'\\1Weitere Aspekte zum Thema\\3',body,count=1)
+        if count!=1 or changed==body:
+            raise RuntimeError('FORCED_BLOCK_SEMANTIC_HEADING_MISSING:'+block_id)
+        return changed
+    if case=='semantic_heading_absent':
+        match=_semantic_section(body,'further_information')
+        section=match.group(0)
+        changed_section,count=re.subn(r'<h2\\b[^>]*>.*?</h2>','',section,count=1,flags=re.S|re.I)
+        if count!=1:
+            raise RuntimeError('FORCED_BLOCK_SEMANTIC_H2_MISSING:further_information')
+        return body[:match.start()]+changed_section+body[match.end():]
+    if case=='required_block_absent':
+        match=_semantic_section(body,'further_information')
+        return body[:match.start()]+body[match.end():]
+    if case=='block_order_invalid':
+        conclusion=_semantic_section(body,'conclusion')
+        further=_semantic_section(body,'further_information')
+        if conclusion.start()>=further.start():
+            raise RuntimeError('FORCED_BLOCK_SEMANTIC_EXPECTED_ORDER_MISSING')
+        return body[:conclusion.start()]+further.group(0)+body[conclusion.end():further.start()]+conclusion.group(0)+body[further.end():]
+    if case=='block_duplicate':
+        match=_semantic_section(body,'further_information')
+        return body[:match.end()]+match.group(0)+body[match.end():]
+    raise RuntimeError('FORCED_BLOCK_SEMANTIC_CASE_UNKNOWN:'+case)
+
+def _repair_block_semantic_fixture(state:dict,index:int)->str|None:
+    checks=state.get('checks') if isinstance(state.get('checks'),dict) else {}
+    if checks.get('checker')!='block_semantics':
+        return None
+    findings=checks.get('findings') if isinstance(checks.get('findings'),list) else []
+    if not findings:
+        return None
+    repairable_codes={
+        'BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH',
+        'BLOCK_CONTENT_SEMANTIC_HEADING_ABSENT',
+        'BLOCK_CONTENT_REQUIRED_BLOCK_ABSENT',
+        'BLOCK_CONTENT_BLOCK_ORDER_INVALID',
+        'BLOCK_CONTENT_BLOCK_DUPLICATE',
+    }
+    codes={str(row.get('error_code') or '') for row in findings if isinstance(row,dict)}
+    if not codes or not codes.issubset(repairable_codes):
+        return None
+    variation_index=_fresh_variation_index(index)
+    repaired=_balance_conclusion(valid_real_article(state,variation_index),state)
+    authoring_contract.validate_candidate(repaired,state['authoring_contract'])
+    return repaired
 
 def _force_one_repairable_typo(body:str,index:int)->str:
     if os.environ.get(FORCE_REPAIR_INDEX_ENV,'').strip()!=str(index): return body
@@ -156,7 +209,7 @@ def main(argv):
         try:
             variation_index=_fresh_variation_index(index)
             body=_balance_conclusion(valid_real_article(state,variation_index),state)
-            body=_force_wrong_conclusion_heading(body,index)
+            body=_force_block_semantic_error(body,index)
             body=_force_one_repairable_typo(body,index)
             body=_force_batch_repetition(body,state,index)
         except RuntimeError as exc:
@@ -167,6 +220,8 @@ def main(argv):
             print('FULL_ROUTE_TEST_WORKER_FAIL:REPAIR_PHASE_REQUIRED'); return 2
         try:
             repaired=_repair_forced_batch_repetition(state,index)
+            if repaired is None:
+                repaired=_repair_block_semantic_fixture(state,index)
             if repaired is None:
                 repaired=no_codex_test_repair.candidate_for_current_failure(REPO,workspace)
         except Exception as exc:

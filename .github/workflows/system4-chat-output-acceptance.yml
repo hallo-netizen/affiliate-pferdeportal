@@ -263,7 +263,7 @@ jobs:
           SYSTEM4_REAL_TOOL_CORRIDOR: '1'
         run: |
           set -o pipefail
-          python isolated_system4/test_full_route_start_real.py FullRouteStartRealTests.test_wrong_conclusion_heading_goes_workshop_worker_repair_fullcheck_pass -v 2>&1 | tee /tmp/system4-block-semantics-real-preflight.log
+          python isolated_system4/test_full_route_start_real.py FullRouteStartRealTests.test_block_semantic_error_matrix_goes_workshop_worker_repair_fullcheck_pass -v 2>&1 | tee /tmp/system4-block-semantics-real-preflight.log
 
       - name: Preserve block semantics real preflight failure log
         if: ${{ failure() && steps.block_semantics_real_preflight.outcome == 'failure' }}

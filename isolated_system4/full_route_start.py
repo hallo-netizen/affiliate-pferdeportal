@@ -48,10 +48,13 @@ def _verify_full_textmachine_pass(state:dict,index:int)->None:
     if prod.get('contract')!='SYSTEM4_FULL_PRODUCTION_CHECK_V1' or prod.get('status')!='PASS': raise FullRouteError('START_FULL_PRODUCTION_EVIDENCE_INVALID:'+str(index))
     if prod.get('checked_draft_sha256')!=state.get('draft_sha256') or prod.get('publish_allowed') is not False: raise FullRouteError('START_FULL_PRODUCTION_EVIDENCE_BINDING_INVALID:'+str(index))
     evidence=prod.get('evidence') if isinstance(prod.get('evidence'),dict) else {}
-    required={'no_legacy','no_external_links','languagetool','ppm679'}
+    required={'no_legacy','no_external_links','block_semantics','languagetool','ppm679'}
     if not required.issubset(evidence): raise FullRouteError('START_TEXTMACHINE_INDIVIDUAL_EVIDENCE_MISSING:'+str(index))
     if (evidence['no_legacy'].get('status')!='PASS' or evidence['no_legacy'].get('legacy_import_count')!=0): raise FullRouteError('START_NO_LEGACY_NOT_PASS:'+str(index))
     if (evidence['no_external_links'].get('status')!='PASS' or evidence['no_external_links'].get('external_link_count')!=0): raise FullRouteError('START_EXTERNAL_LINK_CHECK_NOT_PASS:'+str(index))
+    semantics=evidence['block_semantics']
+    if semantics.get('status')!='PASS' or semantics.get('contract')!='SYSTEM4_BOUND_BLOCK_SEMANTICS_V1':
+        raise FullRouteError('START_BLOCK_SEMANTICS_NOT_PASS:'+str(index))
     lt=evidence['languagetool']; ppm=evidence['ppm679']
     if lt.get('status')!='PASS' or lt.get('engine')!='LanguageTool 6.8 / Bestand 43' or lt.get('finding_count')!=0: raise FullRouteError('START_LANGUAGETOOL_NOT_PASS:'+str(index))
     if ppm.get('status')!='PASS' or ppm.get('ppm_version')!='6.7.9' or ppm.get('technical_status')!='TECHNICAL_CHECK_OK' or ppm.get('content_quality_status')!='CONTENT_QUALITY_CHECK_OK' or ppm.get('fail_closed_aggregate_status')!='PASS': raise FullRouteError('START_PPM679_NOT_PASS:'+str(index))

@@ -64,6 +64,20 @@ class BlockSemanticContractTests(unittest.TestCase):
             block_semantics.validate(html(order=['intro','body','further_information','conclusion']),contract())
         self.assertIn('BLOCK_CONTENT_BLOCK_ORDER_INVALID',[row['error_code'] for row in caught_order.exception.findings])
 
+    def test_heading_absent_and_duplicate_are_structured_repairable_findings(self):
+        without_h2=html().replace('<h2>Ergänzende Informationen zum Thema</h2>','',1)
+        with self.assertRaises(block_semantics.BlockSemanticRepairRequired) as caught_heading:
+            block_semantics.validate(without_h2,contract())
+        self.assertIn('BLOCK_CONTENT_SEMANTIC_HEADING_ABSENT',[row['error_code'] for row in caught_heading.exception.findings])
+
+        duplicate=html().replace('</article>','<section data-block="further_information"><h2>Ergänzende Informationen</h2><p>Duplikat.</p></section></article>')
+        with self.assertRaises(block_semantics.BlockSemanticRepairRequired) as caught_duplicate:
+            block_semantics.validate(duplicate,contract())
+        codes=[row['error_code'] for row in caught_duplicate.exception.findings]
+        self.assertIn('BLOCK_CONTENT_BLOCK_DUPLICATE',codes)
+        request=global_workshop.build_request('DRAFT_BLOCK_SEMANTICS',caught_duplicate.exception,findings=caught_duplicate.exception.findings)
+        self.assertTrue(request['repairable'])
+
     def test_ppm_reserved_heading_is_authority_anchor(self):
         with self.assertRaisesRegex(block_semantics.BlockSemanticError,'PPM_RESERVED_HEADING_BINDING_MISSING:conclusion'):
             block_semantics.bind(
