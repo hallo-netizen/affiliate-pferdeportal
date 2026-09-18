@@ -1,5 +1,10 @@
 # ALLGEMEINER AFFILIATE-BESTAND – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt. Eine Hobbyraumdatei ist nur Ausführungsfläche.
+
+
 STAND: 2026-09-11
 STATUS: INVENTARISIERT / MODULKLASSE UNGEKLÄRT
 
@@ -28,3 +33,9 @@ Konsequenz:
 - gemeinsame Creative-/Output-/Veto-Logik darf erst hinter der korrekten Providerquelle wieder gemeinsam genutzt werden.
 
 Diese Regel ist als Architekturfolge erkannt. Sie erklärt keine allgemeingültige Affiliate-Modulfreigabe und ändert keine bestehende Live-Freigabe.
+
+## NEXT ACTION
+
+**NONE – kein aktueller allgemeingültiger Affiliate-Modulauftrag gebunden.**
+
+Die Modulklasse bleibt ungeklärt. Projektbezogene Affiliate-Arbeit wird ausschließlich über die im Autoritätsplan benannte Pferde-Atelier-Affiliate-Current-Autorität gesteuert.
