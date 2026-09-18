@@ -76,7 +76,9 @@
     "SYSTEM4_RELEASE_IDENTITY_PR315_MERGED_728BD721B3C9BA3A969E7C12E2BA62E0A61C1A64",
     "SYSTEM4_POST_MERGE_ENTRANCE_RUN_35364478599_PASS",
     "IMMUTABLE_BASE_HARDLOCK_RESTORED_RULESET_21788951",
-    "SYSTEM4_FINAL_PRECODEX_FRESHNESS_HASH_POINT0_NEW_RECONFIRMED_D127671D9D92300AB12A73466A75E0C290C930E4"
+    "SYSTEM4_FINAL_PRECODEX_FRESHNESS_HASH_POINT0_NEW_RECONFIRMED_D127671D9D92300AB12A73466A75E0C290C930E4",
+    "SYSTEM4_BOUND_SOURCE_REQUEST_AUTOSTART_FIX_PR326_PROVEN",
+    "SYSTEM4_BOUND_SOURCE_REQUEST_REAL_PARENT_RUN_35375967851_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -182,18 +184,26 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "PRECODEX_BOUND_SOURCE_AUTOSTART_FIX_PENDING_PROOF",
+  "current_work_status": "PRECODEX_READY_BOUND_SOURCE_AUTOSTART_PROVEN_AWAITING_MERGE_APPROVAL",
   "current_execution_blocker": {
-    "code": "PRECODEX_BOUND_SOURCE_AUTOSTART_PROOF_PENDING",
+    "code": "EXPLICIT_MERGE_APPROVAL_MISSING",
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "The real parent-start defect found in the user-approved run is repaired on the current fix branch: generation-bound SOURCE_REQUESTS.json is now hash-bound through RUNTIME_INBOX_STATE, parent_start has a parameterless start-current-bound entry, and the parent auto-creates the external run root. Real no-Codex proof is still required before integration.",
+    "detail": "PR #326 proves the repaired real current seven-item parent start on head af2973ce29363da2e72743c4499565982b8cc061. The generation-1 SOURCE_REQUESTS.json is hash-bound, the parent auto-creates external runtime/workspace paths, real source acquisition reaches Point-0 and WORKER_DISPATCH_READY, then stops before worker start. Acceptance run 35375967851 is SUCCESS. Codex was not invoked. Separate merge approval is required before integration.",
+    "pr": 326,
+    "proof_head_sha": "af2973ce29363da2e72743c4499565982b8cc061",
+    "real_acceptance_run_id": 35375967851,
+    "hardlock_run_id": 35375924010,
+    "deterministic_entrance_run_id": 35375924128,
     "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
     "runtime_generation": 1,
     "source_requests_ref": "control/startmaster0107/runtime_inbox/generations/000001/SOURCE_REQUESTS.json",
     "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f",
     "external_paths_auto_created": true,
+    "point0_pass": true,
+    "worker_dispatch_ready": true,
+    "worker_started": false,
     "codex_start_allowed": false,
     "publish_allowed": false
   },
@@ -248,31 +258,30 @@
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
   "last_safe_main_sha": "d127671d9d92300ab12a73466a75e0c290c930e4",
-  "last_safe_change": "Real-start repair is bound on the fix branch: current runtime source requests are generation/hash-bound and the parent auto-creates external runtime paths. Awaiting real no-Codex proof.",
+  "last_safe_change": "PR #326 real no-Codex acceptance PASS: current seven-item generation-bound source requests are hash-bound; external run/workspace paths are auto-created; Point-0 reaches WORKER_DISPATCH_READY and stops before worker start.",
   "hobbyroom_status": "HISTORY_ONLY_PRODUCT_FIX_MOVED_TO_PR315",
   "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
   "hobbyroom_blocker": "HISTORY_ONLY_NO_PRODUCT_ACTION",
   "next_action": {
-    "goal": "Prove the repaired real current seven-item parent start without Codex, then integrate only after separate merge approval.",
+    "goal": "Obtain separate merge approval for PR #326; after merge, re-run current-main entrance/parent-start verification and only then wait for separate explicit Codex approval.",
     "required_order": [
-      "Run the real current parent start through start-current-bound.",
-      "Require the current generation-bound SOURCE_REQUESTS hash to match.",
-      "Require real source acquisition to complete and Point-0 to be created only after success.",
-      "Require external run/workspace paths to be auto-created outside the repository.",
-      "Require index 0 to stop at WORKER_DISPATCH_READY with 0 completed articles.",
-      "Do not invoke Codex.",
-      "Do not publish.",
-      "Do not merge without separate user approval."
+      "Do not start Codex.",
+      "Merge PR #326 only after separate user merge approval.",
+      "After merge, re-read current main and all bound hashes.",
+      "Re-run the parameterless real current parent start without Codex on merged main.",
+      "Require WORKER_DISPATCH_READY and worker_started=false.",
+      "Then require separate explicit user approval before any Codex run.",
+      "Do not publish."
     ],
     "forbidden": [
-      "Codex before explicit approval",
+      "merge without separate approval",
+      "Codex before separate explicit approval",
       "manual source_requests placeholder",
       "manual workspace placeholder",
       "legacy production route",
       "old recovery article bodies as writing source",
-      "auto-publish",
-      "merge without separate approval"
+      "auto-publish"
     ]
   },
   "hobbyroom_pr": 307,
@@ -314,6 +323,19 @@
     ],
     "bypass_actors": [],
     "hardlock_restored": true,
+    "publish_allowed": false
+  },
+  "precodeex_start_repair": {
+    "status": "PROVEN_PENDING_MERGE_APPROVAL",
+    "pr": 326,
+    "head_sha": "af2973ce29363da2e72743c4499565982b8cc061",
+    "acceptance_run_id": 35375967851,
+    "acceptance_result": "PASS",
+    "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f",
+    "start_command": "python3 isolated_system4/parent_start.py start-current-bound",
+    "external_paths_auto_created": true,
+    "worker_started": false,
+    "codex_used": false,
     "publish_allowed": false
   }
 }
