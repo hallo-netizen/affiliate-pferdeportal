@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import io
+import importlib.util
 import json
 import tempfile
 import unittest
@@ -11,6 +12,15 @@ from unittest import mock
 import controller
 import parent_start
 import root_entry
+
+REPO = Path(__file__).resolve().parent.parent
+_BATCH_SPEC = importlib.util.spec_from_file_location(
+    'system4_107007_batch_tested',
+    REPO / 'control/startmaster0107/system4_107007_batch.py',
+)
+assert _BATCH_SPEC and _BATCH_SPEC.loader
+system4_batch = importlib.util.module_from_spec(_BATCH_SPEC)
+_BATCH_SPEC.loader.exec_module(system4_batch)
 
 
 ROUTE_FILES = ('point0.json', 'root_receipt.json', 'supervisor_state.json', 'bound_snapshot.json')
@@ -123,6 +133,49 @@ class MachineRouteLockContractTests(unittest.TestCase):
             self.assertIs(receipt['codex_invoked'], False)
             self.assertIs(receipt['advance_invoked'], False)
             self.assertIs(receipt['publish_allowed'], False)
+
+
+    def test_batch_advance_requires_exact_five_field_article_identity(self):
+        item = {
+            'title': 'Title A',
+            'target_keyword': 'Keyword A',
+            'category': 'Category A',
+            'article_type': 'Beratung',
+            'plan_slot': 'a' * 64,
+        }
+        with tempfile.TemporaryDirectory() as td:
+            batch_root = Path(td)
+            workspace = batch_root / 'item-000000'
+            workspace.mkdir()
+            state = {
+                'phase': 'OUTPUT_GATE_REQUIRED',
+                'checks': {'status': 'PASS'},
+                'article': dict(item),
+            }
+            (workspace / 'state.json').write_text(
+                json.dumps(state, ensure_ascii=False, sort_keys=True) + '\n',
+                encoding='utf-8',
+            )
+            self.assertTrue(system4_batch._item_passed(batch_root, 0, item))
+
+            replacements = {
+                'title': 'Title B',
+                'target_keyword': 'Keyword B',
+                'category': 'Category B',
+                'article_type': 'FAQ',
+                'plan_slot': 'b' * 64,
+            }
+            for field, bad_value in replacements.items():
+                broken = json.loads(json.dumps(state))
+                broken['article'][field] = bad_value
+                (workspace / 'state.json').write_text(
+                    json.dumps(broken, ensure_ascii=False, sort_keys=True) + '\n',
+                    encoding='utf-8',
+                )
+                self.assertFalse(
+                    system4_batch._item_passed(batch_root, 0, item),
+                    field + ' drift must block advance',
+                )
 
 
     def test_real_current_parent_start_stops_at_root_index0(self):
