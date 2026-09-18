@@ -3,7 +3,7 @@ import hashlib,json,os,sys,tempfile,unittest
 from pathlib import Path
 from unittest import mock
 
-import full_route_start,handoff_transport,production_checks
+import batch_repetition_guard,full_route_start,full_route_test_worker,handoff_transport,production_checks
 from full_route_test_fixture import FOUR_ITEMS,SINGLE_ITEMS,THREE_ITEMS,write_start_fixture
 
 HERE=Path(__file__).resolve().parent
@@ -36,7 +36,20 @@ class FullRouteStartRealTests(unittest.TestCase):
             evidence=json.loads(evidence_path.read_text(encoding='utf-8'))
             if expect_batch_workshop:
                 request_path=out/'batch/GLOBAL_WORKSHOP_REQUEST.json'
-                self.assertTrue(request_path.is_file())
+                if not request_path.is_file():
+                    bodies=[row['body'] for row in payload['articles']]
+                    findings=batch_repetition_guard.repeated_sentence_findings(bodies)
+                    presence=[
+                        [sentence in body for sentence in full_route_test_worker.BATCH_REPEAT_SENTENCES]
+                        for body in bodies
+                    ]
+                    diagnostic={
+                        'majority_repeated_sentence_count':len(findings),
+                        'finding_sentences':[row.get('sentence') for row in findings],
+                        'forced_sentence_presence_by_article':presence,
+                        'revision_counts':[row.get('revision_count') for row in payload['articles']],
+                    }
+                    self.fail('BATCH_WORKSHOP_REQUEST_MISSING:'+json.dumps(diagnostic,ensure_ascii=False,sort_keys=True,separators=(',',':')))
                 request=json.loads(request_path.read_text(encoding='utf-8'))
                 self.assertTrue(request['repairable'])
                 self.assertEqual(request['origin_stage'],'BATCH')
