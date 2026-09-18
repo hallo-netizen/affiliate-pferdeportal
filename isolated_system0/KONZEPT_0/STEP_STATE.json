@@ -1,0 +1,11 @@
+{
+  "contract": "KONZEPT0_STEP_STATE_V1",
+  "status": "RECONSTRUCTION_TEST_MODE",
+  "next_allowed_step": "K0-001",
+  "completed_steps": [],
+  "controller_only_transition": true,
+  "publish_allowed": false,
+  "codex_allowed": false,
+  "authoring_original_complete": false,
+  "authoring_gap": "STARTMASTER0086_OR_EQUIVALENT_ORIGINAL_NOT_RECOVERED"
+}
