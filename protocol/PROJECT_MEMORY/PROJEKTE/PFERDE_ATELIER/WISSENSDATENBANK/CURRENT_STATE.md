@@ -1,12 +1,18 @@
 # WISSENSDATENBANK – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-16
 STATUS: THEMENPOOL AKTIV / PFERDERASSEN GRUNDRECHERCHE ABGESCHLOSSEN / MANAGER 0.2.7 LIVE PASS / TEXTPFLEGE 196 LIVE PASS / PFERDERASSEN META-TITEL OFFEN / GLOSSAR STARTBEFÜLLT
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Büros.
 
-- aktuelle Hauptarbeit / NEXT ACTION → `HOBBYRAUM.md`
+- Ausführungsdetails/Locks → `HOBBYRAUM.md` (abgeleitet, nicht autoritativ)
 - Themenstatus → `THEMENPOOL.md`
 - Recherche-/Trust-Regeln → `RECHERCHE_STANDARD.md`
 - Forschungsbereiche → `AKTENSCHRAENKE/`
@@ -50,6 +56,12 @@ wurden am 2026-09-16 auf ausdrückliche Nutzerentscheidung aus der **aktiven Auf
 
 ## EINE WAHRHEIT
 - Forschungs-/Faktenwahrheit: dieser WISSENSDATENBANK-Bereich;
-- aktuelle Hauptarbeit / NEXT ACTION: ausschließlich `HOBBYRAUM.md`;
+- aktuelle Hauptarbeit / NEXT ACTION: ausschließlich diese `CURRENT_STATE.md`; Hobbyraum nur Ausführungsfläche;
 - Aufgabenparkplatz: `TODO.md`;
 - alte Adresse `../PFERDERASSEN/` bleibt nur Weiterweiser.
+
+## NEXT ACTION
+
+Aktuelle Seitentitel/Meta-Titles der Pferderassen-Einzelseiten und Rassengruppen real prüfen, fehlerhafte oder unpassende Metaangaben identifizieren und **erst nach dieser Bestandsprüfung** einen verbindlichen Standard ableiten.
+
+Keine freie Umformulierung ohne reale Bestandsprüfung.
