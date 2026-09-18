@@ -365,14 +365,14 @@ trait PPAR_Network_Sync_Trait {
         return $safe;
     }
 
-    private function adcell_api_v2_allowlisted_programmes($refresh = true) {
-        $allowlist = $this->adcell_program_id_allowlist();
-        if (!$allowlist) {
-            return new WP_Error('adcell_program_allowlist_empty', 'ADCELL programId-Allowlist ist leer; alle Programme bleiben fail-closed gesperrt.');
-        }
+    /**
+     * Vollautomatischer Normalbetrieb: der Providerkatalog selbst ist Autoritaet.
+     * Nur Programme, die ADCELL aktuell als accepted + aktiv meldet, duerfen
+     * laufen. Eine lokale Positivliste ist keine Startvoraussetzung mehr.
+     */
+    private function adcell_api_v2_active_programmes($refresh = true) {
         $catalog = $refresh ? $this->adcell_api_v2_refresh_programme_catalog() : $this->adcell_api_v2_programme_catalog();
         if (is_wp_error($catalog)) { return $catalog; }
-        $allowed = array_fill_keys($allowlist, true);
         $out = array();
         foreach ((array) $catalog as $programme) {
             if (!is_array($programme)) { continue; }
@@ -380,23 +380,30 @@ trait PPAR_Network_Sync_Trait {
             $accepted = strtolower(trim((string) ($programme['affiliateStatus'] ?? $programme['relationship'] ?? ''))) === 'accepted';
             $active = (string) ($programme['isActive'] ?? ($programme['status'] ?? '')) === '1'
                 || sanitize_key((string) ($programme['status'] ?? '')) === 'active';
-            if ($id <= 0 || !isset($allowed[$id]) || !$accepted || !$active) { continue; }
+            if ($id <= 0 || !$accepted || !$active) { continue; }
             $programme['id'] = $id;
             $programme['name'] = sanitize_text_field((string) ($programme['name'] ?? $programme['programName'] ?? ('ADCELL ' . $id)));
             $out[$id] = $programme;
         }
-        if (!$out) {
-            return new WP_Error('adcell_allowlist_no_active_programme', 'Kein freigegebenes ADCELL-Programm ist aktuell zugleich accepted und aktiv.');
-        }
         return $out;
+    }
+
+    // Backward-compatible reader for diagnostics only. It must not gate the
+    // normal automation path anymore.
+    private function adcell_api_v2_allowlisted_programmes($refresh = true) {
+        $active = $this->adcell_api_v2_active_programmes($refresh);
+        if (is_wp_error($active)) { return $active; }
+        $allowlist = array_fill_keys($this->adcell_program_id_allowlist(), true);
+        if (!$allowlist) { return array(); }
+        return array_intersect_key($active, $allowlist);
     }
 
     private function adcell_api_v2_programme($program_id) {
         $program_id = absint($program_id);
-        if ($program_id <= 0 || !in_array($program_id, $this->adcell_program_id_allowlist(), true)) {
-            return new WP_Error('adcell_program_not_allowlisted', 'ADCELL-Programm ist nicht in der expliziten programId-Allowlist freigegeben.');
+        if ($program_id <= 0) {
+            return new WP_Error('adcell_program_invalid', 'ADCELL-programId fehlt.');
         }
-        $programmes = $this->adcell_api_v2_allowlisted_programmes(true);
+        $programmes = $this->adcell_api_v2_active_programmes(true);
         if (is_wp_error($programmes)) { return $programmes; }
         return isset($programmes[$program_id]) ? $programmes[$program_id] : new WP_Error('adcell_program_not_active_accepted', 'ADCELL-Programm ist aktuell nicht accepted und aktiv.');
     }
@@ -412,9 +419,8 @@ trait PPAR_Network_Sync_Trait {
         if ($program_id <= 0 || !isset($paths[$type])) {
             return new WP_Error('adcell_promotion_request_invalid', 'Ungültiger ADCELL-Werbemittelabruf.');
         }
-        if (!in_array($program_id, $this->adcell_program_id_allowlist(), true)) {
-            return new WP_Error('adcell_program_not_allowlisted', 'ADCELL-Werbemittel für nicht freigegebenes Programm blockiert.');
-        }
+        $programme = $this->adcell_api_v2_programme($program_id);
+        if (is_wp_error($programme)) { return $programme; }
         $token = $this->adcell_api_v2_token();
         if (is_wp_error($token)) { return $token; }
         $items = array();
@@ -840,7 +846,6 @@ trait PPAR_Network_Sync_Trait {
         $awin_counts = $this->network_sync_counts('awin');
         $adcell_counts = $this->network_sync_counts('adcell');
         $adcell_catalog = $this->adcell_api_v2_programme_catalog();
-        $adcell_allowlist = $this->adcell_program_id_allowlist();
         $runs = $this->network_sync_recent_runs();
         ?>
         <div class="wrap ppar-sync-page">
@@ -866,19 +871,13 @@ trait PPAR_Network_Sync_Trait {
                     <h2>ADCELL API v2</h2>
                     <p><strong>Verbindung:</strong> <?php echo wp_strip_all_tags($this->network_status_html($adcell)); ?><br>
                     <strong>Zuletzt accepted + aktiv:</strong> <?php echo absint(count($adcell_catalog)); ?><br>
-                    <strong>Explizit freigegebene programIds:</strong> <?php echo $adcell_allowlist ? esc_html(implode(', ', $adcell_allowlist)) : 'keine – vollständig gesperrt'; ?><br>
-                    <strong>Normalbetrieb:</strong> API v2 → CSV/Banner/Deeplink; keine manuelle CSV-URL.</p>
+                    <strong>Normalbetrieb:</strong> accepted + aktive Programme laufen automatisch über API v2 → CSV/Banner/Deeplink. Manuelle Sperren bleiben über die zentrale Steuerung möglich; keine positive programId-Pflichtliste und keine manuelle CSV-URL.</p>
                     <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline-block;margin-right:8px">
                         <input type="hidden" name="action" value="ppar_run_network_sync"><input type="hidden" name="network" value="adcell"><input type="hidden" name="operation" value="connection"><?php wp_nonce_field('ppar_run_network_sync','ppar_sync_nonce'); ?>
                         <button class="button button-primary">Token + Programme prüfen</button>
                     </form>
                     <p class="description">Die Prüfung erzeugt einen kurzlebigen ADCELL-Token und liest <code>/affiliate/program/export</code> read-only.</p>
-                    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:14px">
-                        <input type="hidden" name="action" value="ppar_run_network_sync"><input type="hidden" name="network" value="adcell"><input type="hidden" name="operation" value="allowlist"><?php wp_nonce_field('ppar_run_network_sync','ppar_sync_nonce'); ?>
-                        <label><strong>programId-Allowlist</strong><br><input type="text" class="regular-text" name="program_ids" value="<?php echo esc_attr(implode(', ', $adcell_allowlist)); ?>" placeholder="z. B. 123, 456"></label>
-                        <p class="description">Nur diese IDs dürfen laufen – und auch nur solange ADCELL sie aktuell als <code>accepted</code> und <code>isActive=1</code> meldet. Leer = alles gesperrt.</p>
-                        <button class="button">Allowlist speichern</button>
-                    </form>
+                    <p class="description">Neue accepted + aktive Programme werden beim nächsten Automationszyklus automatisch aufgenommen. Ein bewusstes Veto erfolgt über die zentrale Partner-/Providersteuerung.</p>
                     <?php if ($adcell_catalog) : ?><details style="margin-top:12px"><summary>Zuletzt bestätigte accepted+aktive Programme</summary><ul><?php foreach ($adcell_catalog as $programme) : ?><li><code><?php echo absint($programme['id'] ?? 0); ?></code> · <?php echo esc_html((string) ($programme['name'] ?? '')); ?></li><?php endforeach; ?></ul></details><?php endif; ?>
                     <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation&provider=adcell')); ?>">ADCELL-Automatisierung öffnen</a></p>
                 </section>
