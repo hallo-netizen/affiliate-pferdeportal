@@ -85,6 +85,8 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 
 | AF-072 | Hobbyraum-TASK enthält Prüfbeschreibungen statt ausführbarer Testkommandos | `affiliate_hobbyraum.py` führt jeden `tests[]`-Eintrag mit `/bin/sh -lc` aus; Prosa endet deshalb mit `command not found` und blockiert einen ansonsten read-only Precheck | `TASK.current.json.tests` müssen ausschließlich echte read-only Shell-Kommandos enthalten; fachliche Prüfbeschreibungen gehören in Scope/Goal/Protokoll, nicht in `tests[]` |
 
+| AF-073 | Übergabe schwächte unveränderliche `objective_control`-Guardwerte | `release_guard.py load()` fordert exakt `ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE`, `FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE` und `ONLY_CURRENT_BOUND_GATE_OR_EXPLICIT_USER_SCOPE`; CURRENT_RELEASE enthielt abweichende Lifecycle-Sondertexte und würde mit `OBJECTIVE_CONTROL_WEAKENED:*` blockieren | Unveränderliche Guard-Vertragswerte niemals für einen Fachscope umformulieren; Fachstatus nur in `current_milestone`, Scope und execution_state binden |
+
 ## AUFLÖSUNGSSTATUS 2026-09-12 – ADCELL API V2
 - AF-023: BEHOBEN – Source/Manifest/Governance gebunden; originaler Release-Guard real PASS.
 - AF-057: BEHOBEN für aktuellen ADCELL-Meilenstein – Task nachgezogen; stale OTTO-Mischtest durch 18/18-Funktionshash-Regression ersetzt.
