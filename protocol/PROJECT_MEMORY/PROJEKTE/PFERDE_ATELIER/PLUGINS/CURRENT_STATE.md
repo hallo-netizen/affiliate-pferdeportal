@@ -1,5 +1,11 @@
 # PFERDE-ATELIER – PLUGINS – CURRENT_STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-16
 STATUS: **AKTIV / KEIN CHAT-AKTIVER PLUGIN-BLOCKER**
 
@@ -8,7 +14,7 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung des PLUGINS-Büros.
 
 - Inventar / Artefaktstatus → `REGISTER.md`
 - Änderungs-/Updatevorgänge → `UPDATEPROTOKOLL.md`
-- aktuelle Pluginbüro-Arbeit → `HOBBYRAUM.md`
+- Ausführungsdetails/Locks → `HOBBYRAUM.md` (abgeleitet, nicht autoritativ)
 - Sync-Regeln → `SYNC_VERTRAG.md`
 
 ## AKTUELL BELASTBAR SYNCHRONISIERT – HEUTE RELEVANT
