@@ -1,0 +1,9 @@
+{
+  "contract": "KONZEPT0_ISOLATION_POSITIVE_NEGATIVE_V1",
+  "status": "PASS",
+  "positive_clean_runtime": "PASS",
+  "negative_system4_mutation": "BLOCKED",
+  "concept_1_2_3_4_4a_runtime_contact": false,
+  "codex_started": false,
+  "publish_performed": false
+}
