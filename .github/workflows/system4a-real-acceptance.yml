@@ -216,6 +216,9 @@ jobs:
           set -euo pipefail
           python3 isolated_system4/live_parity_v2.py all
           cp /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json /tmp/system4-acceptance-output/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2_1_ARTICLE.json
+      - name: Bind real7 article0 Beratung quality thresholds
+        working-directory: isolated_system4
+        run: python3 real7_article0_quality_authority_probe.py
       - name: Build fresh machine inputs for real7 four-finding repair proof
         env:
           PYTHONPATH: isolated_system4
