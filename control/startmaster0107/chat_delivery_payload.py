@@ -51,6 +51,14 @@ def safe(ref: str) -> Path:
         raise Blocked("REF_ESCAPE")
     return q
 
+def runtime_generation(value) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+        raise Blocked("RUNTIME_GENERATION_INVALID")
+    return value
+
+def generation_name(value) -> str:
+    return f"generation-{runtime_generation(value):06d}"
+
 def validate_import_envelope(pkg: dict, batch: str, articles: list[dict]) -> None:
     if set(pkg) != PACKAGE_KEYS or pkg.get("contract") != "PSERC_APPROVED_PRODUCTION_PACKAGE_V1":
         raise Blocked("FINAL_PACKAGE_SCHEMA_INVALID")
@@ -120,6 +128,8 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
     batch = str(receipt.get("batch_sha256") or "")
     if not SHA_RE.fullmatch(batch):
         raise Blocked("BATCH_INVALID")
+    generation = runtime_generation(receipt.get("runtime_generation"))
+    run_dir = generation_name(generation)
 
     rows = receipt.get("outputs")
     if not isinstance(rows, list):
@@ -155,11 +165,12 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
     validate_import_envelope(package, batch, articles)
     import_raw = canonical(package)
     import_sha = sha256_bytes(import_raw)
-    import_ref = f"control/startmaster0107/recovery_sources/{batch}/{IMPORT_NAME}"
+    import_ref = f"control/startmaster0107/recovery_sources/{batch}/{run_dir}/{IMPORT_NAME}"
 
     source_manifest = {
         "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1",
         "batch_sha256": batch,
+        "runtime_generation": generation,
         "item_count": count,
         "import_envelope_ref": import_ref,
         "import_envelope_sha256": import_sha,
@@ -167,7 +178,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "content_mutation_performed": False,
         "items": [
             {
-                "ref": f"control/startmaster0107/recovery_sources/{batch}/{a['name']}",
+                "ref": f"control/startmaster0107/recovery_sources/{batch}/{run_dir}/{a['name']}",
                 "sha256": a["sha256"],
                 "plan_slot": a["plan_slot"],
             }
@@ -179,6 +190,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "contract": "PFERDE_ATELIER_CHAT_DELIVERY_PAYLOAD_V1",
         "status": "DELIVERY_HANDOFF_READY",
         "batch_sha256": batch,
+        "runtime_generation": generation,
         "release_receipt_ref": release_receipt_ref,
         "release_receipt_sha256": sha256_file(receipt_path),
         "final_package_ref": final_package_ref,
@@ -197,6 +209,7 @@ def build(release_receipt_ref: str, final_package_ref: str) -> dict:
         "status": "DELIVERY_HANDOFF_READY",
         "contract": "PFERDE_ATELIER_CHAT_DELIVERY_ENVELOPE_V1",
         "batch_sha256": batch,
+        "runtime_generation": generation,
         "payload_sha256": sha256_bytes(raw),
         "gzip_sha256": sha256_bytes(packed),
         "encoding": "gzip+base64",
