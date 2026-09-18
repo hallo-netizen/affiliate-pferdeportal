@@ -82,6 +82,7 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_BRIDGE_TOKENS = 'ppar_automation_bridge_tokens_v1';
     const OPTION_AUTOMATION_SETTINGS = 'ppar_automation_settings_v1';
     const OPTION_AUTOMATION_CURSOR = 'ppar_automation_cursor_v1';
+    const OPTION_AUTOMATION_LAST_INTEGRITY = 'ppar_automation_last_integrity_v1';
     const OPTION_AUTOMATION_SAFETY_VERSION = 'ppar_automation_safety_version';
     const OPTION_AUTOMATION_LAST_DISPATCH = 'ppar_automation_last_dispatch_v1';
     const OPTION_AUTOMATION_CYCLE = 'ppar_automation_cycle_v1';
@@ -125,6 +126,7 @@ final class Pferdeportal_Affiliate_Router {
     const HEALTH_CRON_HOOK = 'ppar_daily_health_check';
     const ARTICLE_REBUILD_HOOK = 'ppar_article_plan_rebuild_worker';
     const AUTOMATION_CRON_HOOK = 'ppar_partner_automation_sync';
+    const AUTOMATION_INTEGRITY_HOOK = 'ppar_partner_automation_integrity';
     const AUTOMATION_WORKER_HOOK = 'ppar_partner_automation_worker';
     const ASSET_VERIFY_HOOK = 'ppar_verify_creative_assets';
     const HEALTH_SCHEMA_VERSION = '2.1';
@@ -211,6 +213,7 @@ final class Pferdeportal_Affiliate_Router {
         add_action('template_redirect', array($this, 'handle_click_redirect'), 0);
         add_action(self::HEALTH_CRON_HOOK, array($this, 'run_scheduled_health_check'));
         add_action(self::AUTOMATION_CRON_HOOK, array($this, 'run_scheduled_partner_sync'));
+        add_action(self::AUTOMATION_INTEGRITY_HOOK, array($this, 'run_automation_integrity_check'));
         add_action(self::AUTOMATION_WORKER_HOOK, array($this, 'run_automation_worker'));
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::HOUSEKEEPING_CRON_HOOK, array($this, 'run_housekeeping'));
@@ -320,6 +323,7 @@ final class Pferdeportal_Affiliate_Router {
             add_action('admin_post_ppar_automation_materialize', array($this, 'handle_automation_materialize'));
             add_action('admin_post_ppar_automation_save_settings', array($this, 'handle_automation_save_settings'));
             add_action('admin_post_ppar_automation_process_next', array($this, 'handle_automation_process_next'));
+            add_action('admin_post_ppar_automation_run_now', array($this, 'handle_automation_run_now'));
             add_action('admin_post_ppar_output_object_action', array($this, 'handle_output_object_action'));
             add_action('admin_post_ppar_control_save_global', array($this, 'handle_control_save_global'));
             add_action('admin_post_ppar_provider_access_save', array($this, 'handle_provider_access_save'));
@@ -489,6 +493,7 @@ final class Pferdeportal_Affiliate_Router {
         if (function_exists('wp_clear_scheduled_hook')) {
             wp_clear_scheduled_hook(self::HEALTH_CRON_HOOK);
             wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
+            wp_clear_scheduled_hook(self::AUTOMATION_INTEGRITY_HOOK);
             wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
             wp_clear_scheduled_hook(self::EBAY_CRON_HOOK);
             wp_clear_scheduled_hook(self::EBAY_WORKER_HOOK);
