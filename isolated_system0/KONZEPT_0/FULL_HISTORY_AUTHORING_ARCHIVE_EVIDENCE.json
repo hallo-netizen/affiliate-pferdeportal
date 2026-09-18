@@ -1,0 +1,10 @@
+{
+  "contract": "KONZEPT0_FULL_HISTORY_AUTHORING_ARCHIVE_SEARCH_V1",
+  "status": "PASS",
+  "relevant_unique_zip_blobs_scanned": 19,
+  "authoring_script_found": false,
+  "authoring_script_sha256": null,
+  "concept_1_2_3_4_4a_runtime_contact": false,
+  "codex_started": false,
+  "publish_performed": false
+}
