@@ -114,7 +114,7 @@
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
     "freshness_check": "Read PR #275 head. Runtime/test acceptance PASS is bound to 1b42543ed7bb36cb055da86ff58149a0494055f9 (Run 35323731944 / Job 105531863105). A later CURRENT_STATE/START_HERE/protocol-only closeout commit does not alter runtime logic. Any runtime, binding, test-worker or production-path change requires a new code/test review before continuing.",
-    "next_action": "NO CODEX until explicit user approval. Global workshop acceptance is green on runtime head 5f626267af2dcfd30bd81a129a790397a0d81b94 and the 107007 launch/bundle predecessor hash cascade is repaired. Before any real bound article-production run, fresh-check PR #275 head plus launch, STEP_107007, CURRENT_STATE and START_HERE hashes. Only after explicit user approval may Codex execute the already bound 107007 real production run. publish_allowed remains false."
+    "next_action": "NO CODEX until explicit user approval. Global workshop acceptance is green on accepted head 1b42543ed7bb36cb055da86ff58149a0494055f9 (Run 35323731944 / Job 105531863105) and the 107007 launch/bundle predecessor hash cascade is repaired. Before any real bound article-production run, fresh-check PR #275 head plus launch, STEP_107007, CURRENT_STATE and START_HERE hashes. Only after explicit user approval may Codex execute the already bound 107007 real production run. publish_allowed remains false."
   },
   "mandatory_execution_path": [
     "isolated_system4/parent_start.py start-bound",
