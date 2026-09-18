@@ -1,0 +1,31 @@
+{
+  "contract": "SYSTEM4_BLOCK_SEMANTIC_HEADING_POLICY_V1",
+  "version": 1,
+  "heading_match_mode": "NORMALIZED_PREFIX",
+  "block_policies": {
+    "conclusion": {
+      "semantic_role": "FINAL_SYNTHESIS_EVALUATION",
+      "heading_required": true,
+      "canonical_ppm_reserved_heading": "Fazit",
+      "accepted_heading_markers": [
+        "Fazit",
+        "Schlussfolgerung",
+        "Abschließende Bewertung",
+        "Abschließende Zusammenfassung",
+        "Zusammenfassung und Bewertung",
+        "Abschließende Einschätzung"
+      ]
+    },
+    "further_information": {
+      "semantic_role": "FURTHER_INFORMATION",
+      "heading_required": true,
+      "canonical_ppm_reserved_heading": "Weiterführende Informationen",
+      "accepted_heading_markers": [
+        "Weiterführende Informationen",
+        "Weitere Informationen",
+        "Weiterführende Hinweise",
+        "Ergänzende Informationen"
+      ]
+    }
+  }
+}
