@@ -1,10 +1,12 @@
 {
-  "contract": "PFERDE_ATELIER_KONZEPT_NULL_STATE_V3",
+  "contract": "PFERDE_ATELIER_KONZEPT_NULL_STATE_V4",
   "name": "KONZEPT NULL",
   "mode": "ISOLATED_HISTORICAL_REPLAY",
   "historical_startmaster": "STARTMASTER0102",
   "historical_commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
   "historical_prompt_ref": "protocol/STARTMASTER0102_ARTICLE_TEST_NO_STOP_HANDOFF_20260828.md",
+  "reconstruction_evidence": "konzept_null/HISTORICAL_RECONSTRUCTION_EVIDENCE.json",
+  "navigation_contract": "konzept_null/CHAT_NAVIGATION_CONTRACT.json",
   "next_allowed_step": "LOAD_METADATA_BATCH_READ_ONLY",
   "batch_mode": "VARIABLE_1_TO_N",
   "minimum_article_count": 1,
@@ -20,11 +22,22 @@
     "PPM": "6.7.9",
     "LanguageTool": "6.8"
   },
+  "required_hashes": {
+    "PSERC_0.28.14": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988",
+    "PPM_6.7.9": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+    "PPM_main_file": "0874f26f21e471007922cf759ea5ad52bdc61a5975931898e83e9ff8f6418906",
+    "LanguageTool_6.8_zip": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "LanguageTool_6.8_jar": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
+  },
   "workflow": [
     "METADATA",
+    "SOURCE_ORDER",
     "RESEARCH",
+    "SOURCE_SNAPSHOT",
     "FACT_PACK",
-    "TEXTMASCHINE",
+    "CLAIM_BINDING",
+    "CANONICAL_ARTICLE",
+    "PRODUCTION_PLAN_V4",
     "LANGUAGETOOL_6_8",
     "PPM_6_7_9",
     "LOCAL_TEST_PACKAGE"
