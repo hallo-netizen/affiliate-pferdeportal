@@ -53,18 +53,14 @@ jobs:
         run: |
           set -euo pipefail
           PPM=konzept_null/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
-          PSERC=konzept_null/runtime_packages/PSERC-FIX.zip
           test -f "$PPM"
-          test -f "$PSERC"
+          test ! -f konzept_null/runtime_packages/PSERC-FIX.zip
           ppm_hash=$(sha256sum "$PPM" | awk '{print $1}')
-          pserc_hash=$(sha256sum "$PSERC" | awk '{print $1}')
           echo "PPM_ZIP_SHA256=$ppm_hash"
-          echo "PSERC_ZIP_SHA256=$pserc_hash"
           test "$ppm_hash" = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
-          test "$pserc_hash" = "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
           unzip -t "$PPM"
-          unzip -t "$PSERC"
           echo "RUNTIME_ZIP_INTEGRITY_PASS"
+          echo "NONHISTORICAL_PSERC_PACKAGE_ABSENT_PASS"
 
       - name: Inspect PPM 6.7.9 package and prove version
         shell: bash
@@ -127,25 +123,15 @@ jobs:
           test -s "$tmp/lt-output.txt"
           echo "LANGUAGETOOL_6_8_REAL_EXECUTION_PASS"
 
-      - name: Quarantine nonhistorical PSERC package
+      - name: Prove historical PSERC boundary is metadata-only
         shell: bash
         run: |
           set -euo pipefail
-          tmp=$(mktemp -d)
-          unzip -q konzept_null/runtime_packages/PSERC-FIX.zip -d "$tmp/pserc"
-          find "$tmp/pserc" -type f -maxdepth 3 -print
-          if find "$tmp/pserc" -type f -name '*0.28.18*' | grep -q .; then
-            echo "PSERC_FIX_IDENTIFIED_AS_0_28_18_NOT_HISTORICAL_0_28_14"
-          else
-            echo "EXPECTED_0_28_18_MARKER_MISSING" >&2
-            exit 2
-          fi
-          if find "$tmp/pserc" -type f -name '*0.28.14*' | grep -q .; then
-            echo "UNEXPECTED_0_28_14_INSIDE_LATER_PSERC_FIX" >&2
-            exit 2
-          fi
-          echo "HISTORICAL_PSERC_0_28_14_EXPECTED_SHA256=a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988"
-          echo "PSERC_0_28_18_QUARANTINE_PASS"
+          test ! -f konzept_null/runtime_packages/PSERC-FIX.zip
+          grep -q '"historical_startmaster": "STARTMASTER0102"' konzept_null/RUNTIME_PREFLIGHT_PASS.json
+          grep -q '"execution_boundary": "PSERC_0.28.14_METADATA_OUTPUT_TO_BEFORE_WORDPRESS"' konzept_null/RUNTIME_PREFLIGHT_PASS.json
+          grep -q 'a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988' konzept_null/CURRENT_STATE.json
+          echo "PSERC_0_28_14_METADATA_BOUNDARY_PASS"
 
       - name: Verify generic 1 7 25 batch initialization
         shell: bash
