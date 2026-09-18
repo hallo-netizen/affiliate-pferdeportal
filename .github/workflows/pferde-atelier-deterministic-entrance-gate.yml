@@ -53,19 +53,6 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/production-continuity/test_production_continuity_guard.py
-      - name: TEMP System 4 pre-Codex generation Point0 NEW output proof
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 isolated_system4/downstream_1n_contract_probe.py
-          python3 control/output-quarantine/test_output_quarantine.py
-          python3 isolated_system4/wordpress_import_contract_probe.py
-          cd isolated_system4
-          python3 -m unittest -v test_point0_v2.Point0V2Tests.test_source_acquisition_200_401_403
-          python3 -m unittest -v test_point0_v2.Point0V2Tests.test_chat_start_required_tamper_and_dataforseo_blocked
-          python3 -m unittest -v test_point0_v2.Point0V2Tests.test_point0_and_prewrite_tamper_fail_closed
-          python3 -m unittest -v test_acceptance_history_hardlock.AcceptanceHistoryHardlockTests.test_no_old_article_or_candidate_can_feed_active_input_factory
-          python3 -m unittest -v test_acceptance_history_hardlock.AcceptanceHistoryHardlockTests.test_each_acceptance_run_is_machine_bound_to_new_article_sources
       - name: Assert active gate has no OpenAI API dependency
         shell: bash
         run: |
