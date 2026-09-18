@@ -1,5 +1,12 @@
 # PB ONE – IDEENWERKSTATT – HOBBYRAUM
 
+<!-- DERIVED_EXECUTION_SURFACE_V1 -->
+
+> **NICHT CURRENT-AUTORITATIV.** Nur abgeleitete Ausführungsfläche.  
+> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
+> Widerspruch oder stale Bindung = **BLOCKED**.
+
+
 STAND: 2026-09-07
 STATUS: FREI
 
