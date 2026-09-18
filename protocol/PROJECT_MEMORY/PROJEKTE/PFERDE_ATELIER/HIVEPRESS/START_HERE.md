@@ -1,5 +1,20 @@
 # BÜRO HIVEPRESS
 
+<!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
+
+## HARD RULE – EINE CURRENT-AUTORITÄT
+
+Diese Bürotür ist **nur Navigation**.
+
+Pflichtweg:
+`START_HERE → protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION`.
+
+`HOBBYRAUM.md` ist nur eine abgeleitete Ausführungsfläche und niemals Quelle für den aktuellen Status oder die NEXT ACTION.
+
+Bei frischer unveränderter Current-Bindung: **keine Vollrekonstruktion**.
+Bei belegter Änderung: **nur Delta prüfen**.
+
+
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
