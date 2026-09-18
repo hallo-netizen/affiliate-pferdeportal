@@ -1,0 +1,22 @@
+{
+  "contract": "KONZEPT0_START_HERE_V1",
+  "office": "PFERDE_ATELIER/TEXTERSTELLUNGSBUERO/KONZEPT_0",
+  "current_state": "CURRENT_STATE.json",
+  "reconstruction_manifest": "RECONSTRUCTION_MANIFEST.json",
+  "authoring_contract": "AUTHORING_CONTRACT_RECONSTRUCTED_AUG28.md",
+  "isolation_verifier": "verify_isolation.py",
+  "runtime_root": "runtime/",
+  "allowed_external_runtime_dependencies": [],
+  "forbidden_runtime_contact": [
+    "KONZEPT_1",
+    "KONZEPT_2",
+    "KONZEPT_3",
+    "KONZEPT_4",
+    "KONZEPT_4A"
+  ],
+  "authoring_mode": "RECONSTRUCTED_FROM_AUG28_AUTHORITATIVE_EVIDENCE_ONLY",
+  "exact_aug28_authoring_identity_complete": false,
+  "codex_start_allowed": false,
+  "publish_allowed": false,
+  "unknown_or_unproven_rule_policy": "FAIL_CLOSED"
+}
