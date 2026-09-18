@@ -51,20 +51,21 @@ Pferde-Atelier-spezifische Plugin-Ausgabekopien liegen zusätzlich im Projekt un
 
 Wichtig: Bei allgemeingültigen Plugins bleibt die Hauptquelle unter `ALLGEMEINGUELTIGE_BAUSTEINE/`; die Projektkopie ist nur die isolierte Ausgabekopie.
 
-## Aktueller technischer Hinweis
+## EINE WAHRHEIT – CAMPUSROUTING
 
-Der Campus-Prototyp liegt noch NICHT auf `main`.
+Routingautorität:
+`protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json`
 
-Aktueller Ort:
-- Repository: `hallo-netizen/affiliate-pferdeportal`
-- Branch: `hobbyroom/project-memory-campus-v1-20260905`
-- Pfad: `protocol/PROJECT_MEMORY/`
+HARD RULE:
+`START_HERE` enthält keinen aktuellen Fachstatus, Branch/Head, Blocker oder NEXT ACTION.
 
-Solange das so ist, ist für einen völlig neuen Chat ohne bekannten Repository-Kontext der robuste Einstieg:
+Pflichtweg für neue Chats:
+`START_HERE → HAUPTPFOERTNER → AUTORITAETSPLAN → genau eine Current-Autorität → Frischecheck → NEXT ACTION`.
 
-`Öffne im GitHub-Repo hallo-netizen/affiliate-pferdeportal den Branch hobbyroom/project-memory-campus-v1-20260905 und gehe zu protocol/PROJECT_MEMORY/START_HERE.md. Danach: Pferde-Atelier → zuständiges Büro.`
+Bei frischer unveränderter Bindung: keine Vollrekonstruktion; direkt NEXT ACTION.
+Bei Änderung: nur Delta prüfen.
 
-Nach späterer Verlagerung/Merge in den dauerhaften Campus-Hauptort reicht die Alltagssprache allein.
+CAMPUS_SINGLE_TRUTH_ENTRY_V1
 
 ## HARD RULE – PROTOKOLLPFLICHT
 
