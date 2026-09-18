@@ -6,6 +6,8 @@ on:
       - 'hobbyroom/system4a-startgate-test-20260914'
       - 'hobbyroom/system4a-textmachine-final-pass-20260916'
       - 'fix/system4-generation-release-identity-20260918'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
