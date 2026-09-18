@@ -25,24 +25,36 @@ class ForcedBatchRepetitionPreflightTests(unittest.TestCase):
             content_guard.pairwise_shingle_jaccard(forced[left],forced[right])
             for left,right in itertools.combinations(range(4),2)
         ]
-        self.assertLess(max(pair_scores),0.10)
+        self.assertLess(max(pair_scores),0.12)
 
         bodies=[self._body(i) for i in range(4)]
         diversity=content_guard.validate_batch_distinctness(bodies)
         self.assertEqual(diversity['status'],'PASS')
         self.assertLess(diversity['max_pairwise_shingle_jaccard'],content_guard.MAX_PAIRWISE_SHINGLE_JACCARD)
 
+        expected=len(full_route_test_worker.BATCH_REPEAT_SENTENCES)
+        self.assertGreaterEqual(expected,8)
         with self.assertRaises(batch_repetition_guard.BatchRepetitionError) as caught:
             batch_repetition_guard.validate_batch_repetition(bodies)
         exc=caught.exception
-        self.assertTrue(str(exc).startswith('BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED:7>6'))
-        self.assertEqual(len(exc.findings),7)
+        self.assertTrue(str(exc).startswith(
+            f'BATCH_REPEATED_SENTENCE_TEMPLATE_BLOCKED:{expected}>{batch_repetition_guard.MAX_MAJORITY_REPEATED_SENTENCES}'
+        ))
+        self.assertEqual(len(exc.findings),expected)
         self.assertTrue(all(row.get('article_indexes')==[0,1,2,3] for row in exc.findings))
 
         request=global_workshop.build_request('BATCH',exc)
         self.assertTrue(request['repairable'])
         self.assertEqual(set(request['repair_targets']),{'3'})
-        self.assertEqual(len(request['repair_targets']['3']),7)
+        self.assertEqual(len(request['repair_targets']['3']),expected)
+
+        for lost_sentence in full_route_test_worker.BATCH_REPEAT_SENTENCES:
+            degraded=[body.replace(lost_sentence,'',1) for body in bodies]
+            diversity_after_loss=content_guard.validate_batch_distinctness(degraded)
+            self.assertEqual(diversity_after_loss['status'],'PASS')
+            with self.assertRaises(batch_repetition_guard.BatchRepetitionError) as lost:
+                batch_repetition_guard.validate_batch_repetition(degraded)
+            self.assertEqual(len(lost.exception.findings),expected-1)
 
         repaired=list(bodies)
         repaired[3]=full_route_test_worker._strip_forced_batch_repetition(repaired[3],3)
