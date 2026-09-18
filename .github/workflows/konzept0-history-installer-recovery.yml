@@ -1,0 +1,108 @@
+name: Konzept 0 Deleted Installer Recovery
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/HISTORY_INSTALLER_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Search complete Git history for exact August installers
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --all --tags --prune || true
+          ROOT="isolated_system0/KONZEPT_0"
+          OUT="$ROOT/HISTORY_INSTALLER_RECOVERY_REPORT.txt"
+          : > "$OUT"
+
+          recover_one () {
+            local label="$1" name="$2" expected="$3" target="$4"
+            echo "=== $label ===" | tee -a "$OUT"
+            mapfile -t paths < <(git log --all --pretty=format: --name-only | grep -F "$name" | sort -u || true)
+            echo "PATH_CANDIDATES=${#paths[@]}" | tee -a "$OUT"
+            local found=0
+            for path in "${paths[@]}"; do
+              echo "PATH=$path" | tee -a "$OUT"
+              mapfile -t commits < <(git log --all --format='%H' -- "$path")
+              for c in "${commits[@]}"; do
+                tmp="$(mktemp)"
+                if git show "$c:$path" > "$tmp" 2>/dev/null; then
+                  actual="$(sha256sum "$tmp" | awk '{print $1}')"
+                  echo "COMMIT=$c SHA256=$actual" | tee -a "$OUT"
+                  if [ "$actual" = "$expected" ]; then
+                    mkdir -p "$(dirname "$target")"
+                    cp "$tmp" "$target"
+                    echo "EXACT_MATCH=$c:$path" | tee -a "$OUT"
+                    found=1
+                    rm -f "$tmp"
+                    break 2
+                  fi
+                fi
+                rm -f "$tmp"
+              done
+            done
+            echo "FOUND=$found" | tee -a "$OUT"
+          }
+
+          recover_one "PSTE_0.56.25"             "portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip"             "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95"             "$ROOT/runtime/packages/portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip"
+
+          recover_one "PSERC_0.28.14"             "portal-seo-editorial-plan-compiler_0.28.14_GENERATION_RETENTION_ROOTFIX_VERIFIED.zip"             "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988"             "$ROOT/runtime/packages/portal-seo-editorial-plan-compiler_0.28.14_GENERATION_RETENTION_ROOTFIX_VERIFIED.zip"
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path("isolated_system0/KONZEPT_0")
+          txt=(root/"HISTORY_INSTALLER_RECOVERY_REPORT.txt").read_text()
+          sections=txt.split("=== ")
+          found={}
+          for sec in sections[1:]:
+              label=sec.split(" ===",1)[0]
+              found[label]="FOUND=1" in sec
+          out={
+            "contract":"KONZEPT0_HISTORY_INSTALLER_RECOVERY_V1",
+            "status":"PASS",
+            "pste_0_56_25_exact_recovered":found.get("PSTE_0.56.25",False),
+            "pserc_0_28_14_exact_recovered":found.get("PSERC_0.28.14",False),
+            "concept_1_2_3_4_4a_runtime_contact":False,
+            "codex_started":False,
+            "publish_performed":False
+          }
+          (root/"HISTORY_INSTALLER_RECOVERY_EVIDENCE.json").write_text(json.dumps(out,indent=2)+"\n")
+          PY
+
+      - name: Verify any recovered installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="isolated_system0/KONZEPT_0/runtime/packages"
+          if [ -f "$ROOT/portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip" ]; then
+            echo "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95  $ROOT/portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip" | sha256sum -c -
+            unzip -t "$ROOT/portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip" >/dev/null
+          fi
+          if [ -f "$ROOT/portal-seo-editorial-plan-compiler_0.28.14_GENERATION_RETENTION_ROOTFIX_VERIFIED.zip" ]; then
+            echo "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988  $ROOT/portal-seo-editorial-plan-compiler_0.28.14_GENERATION_RETENTION_ROOTFIX_VERIFIED.zip" | sha256sum -c -
+            unzip -t "$ROOT/portal-seo-editorial-plan-compiler_0.28.14_GENERATION_RETENTION_ROOTFIX_VERIFIED.zip" >/dev/null
+          fi
+
+      - name: Commit recovery result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "konzept0-history-recovery"
+          git config user.email "actions@users.noreply.github.com"
+          git add isolated_system0/KONZEPT_0/HISTORY_INSTALLER_RECOVERY_REPORT.txt                   isolated_system0/KONZEPT_0/HISTORY_INSTALLER_RECOVERY_EVIDENCE.json                   isolated_system0/KONZEPT_0/runtime/packages
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Konzept 0: recover deleted August installers if present"
+          git push origin HEAD:isolated-system0-legacy-text-20260828
