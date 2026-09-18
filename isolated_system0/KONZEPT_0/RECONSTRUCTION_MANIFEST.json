@@ -1,8 +1,8 @@
 {
-  "contract": "KONZEPT0_RECONSTRUCTION_MANIFEST_V1",
-  "source_commit": "a4084afd2b22cdbab2e7c6141885760adedc8f4b",
+  "contract": "KONZEPT0_RECONSTRUCTION_MANIFEST_V2",
   "source_date": "2026-08-28",
-  "historical_exact": [
+  "historical_anchor_commit": "a4084afd2b22cdbab2e7c6141885760adedc8f4b",
+  "historical_exact_files": [
     {
       "local": "historical_exact/controller.py",
       "source": "control/ai-tool-firewall/controller.py",
@@ -24,24 +24,54 @@
       "git_blob_sha": "1fb5b370fd34b80291b20570a54f6fde0d032ca6"
     }
   ],
-  "proven_workflow": {
-    "startmaster": "STARTMASTER0103",
-    "ppm": "6.7.9",
-    "pste": "0.56.25",
-    "pserc": "0.28.14",
+  "aug28_proven_workflow": {
+    "startmaster_chain": ["STARTMASTER0102", "STARTMASTER0103"],
+    "pste_version": "0.56.25",
+    "pste_installer_sha256": "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95",
+    "pserc_version": "0.28.14",
+    "pserc_installer_sha256": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988",
+    "ppm_version": "6.7.9",
+    "languagetool_version": "6.8",
     "article_count": 6,
     "normal_draft_end_to_end": "PASS",
     "draft_readback": "PASS",
-    "publish_allowed": false
+    "article_ids": [17123, 17124, 17125, 17126, 17127, 17128],
+    "publish_allowed_at_technical_test": false
   },
-  "missing_exact_runtime_components": [
-    "standalone exact Textmaschine source from the 2026-08-28 MASTER",
-    "standalone exact PPM 6.7.9 runtime source used by that run",
-    "standalone pinned LanguageTool 6.8 runtime artifact used by that run",
-    "exact STARTMASTER0039 boundary guard from the old MASTER",
+  "aug28_backup_evidence": {
+    "source_branch": "chatgpt-komplettbackup-20260831",
+    "combined_pste_pserc_test": "historical_pste_pserc_evidence/tests/SOURCE_FINAL_FULL_WORKFLOW.json",
+    "combined_test_status": "PASS",
+    "individual_tests": "12/12 PASS",
+    "pste_php_lint": "74/74 PASS",
+    "pserc_php_lint": "42/42 PASS",
+    "pste_source_tree_sha256": "fc5bede4ca9f5f41917b29fbbfab6fe04c6ca4610d7e3e908ea6dda9864d1cf1",
+    "pserc_source_tree_sha256": "e0c34aa851c198af9f9c180777e5cf828aca72061a394127660305ca6c30978e"
+  },
+  "later_preserved_comparison_material_not_proven_byteidentical_to_aug28": {
+    "ppm_6_7_9_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+    "ppm_internal_regression": "12/12 PASS",
+    "languagetool_6_8_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+    "warning": "These later preserved artifacts are comparison/test material only. They are not proof of byte-identical Aug-28 runtime."
+  },
+  "deep_recovery_findings": {
+    "startmaster0086_original_file_found": false,
+    "referenced_build_cross_domain_articles_py_found": false,
+    "six_aug28_article_bodies_found": false,
+    "six_article_metadata_and_ids_found": true,
+    "historical_relevant_zip_blobs_scanned_for_authoring": 19
+  },
+  "unresolved_aug28_exact_components": [
+    "original STARTMASTER0086 fach/authoring prompt",
+    "exact Aug-28 PPM 6.7.9 package bytes or package hash",
+    "exact Aug-28 LanguageTool 6.8 dependency bytes/hash",
+    "exact PSTE 0.56.25 installer bytes",
+    "exact PSERC 0.28.14 installer bytes",
+    "exact STARTMASTER0039 boundary-guard file from the old MASTER",
     "exact KEYWORD_OWNERSHIP_LONGTAIL_V2 contract from the old MASTER",
     "exact TITLE_SURFACE_ATTRIBUTE_ZERO_SEO_AUTHORITY_V1 contract from the old MASTER",
-    "exact BREADTH_WAVE_COMPILER_READY_QUOTA_V1 contract from the old MASTER"
+    "exact BREADTH_WAVE_COMPILER_READY_QUOTA_V1 contract from the old MASTER",
+    "six final Aug-28 article bodies / fact packs / LT attestations / production packages"
   ],
-  "rule": "No missing component may be silently substituted by System 1, 2, 3, 4 or 4A."
+  "isolation_rule": "No unresolved component may be silently substituted by System/Konzept 1, 2, 3, 4 or 4A."
 }
