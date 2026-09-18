@@ -1,12 +1,18 @@
 # DESIGN – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
+> `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
+
+
 STAND: 2026-09-16
 STATUS: **PFERDE ATELIER DESIGN 1.50.541 WORDPRESS-LIVE PASS**
 
 ## AUTORITÄT
 Diese Datei ist die einzige aktuelle Standzusammenfassung des DESIGN-Büros.
 
-- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
+- Ausführungsdetails/Locks → `HOBBYRAUM.md` (abgeleitet, nicht autoritativ)
 - Fehlerhistorie → `FEHLERQUELLEN.md`
 - verbindlicher Reparaturvertrag → `ZIELVERTRAG_DESIGN_20260915.md`
 - Ausführungsprotokoll dieses Stands → `PROTOKOLL_20260916.md`
@@ -42,4 +48,6 @@ Die zwischenzeitlich verwendete ID `PPA-013` war eine falsche zweite Design-ID u
 
 ## NEXT ACTION
 
-Siehe `HOBBYRAUM.md`. Aktuell keine offene Designreparatur.
+Keine offene Designreparatur.
+
+Bei einem neuen Designauftrag zuerst diese Current-Autorität frisch prüfen, auf 1.50.541 bzw. dessen belegtem Nachfolger aufsetzen, Scope binden, positiv/negativ/regressiv prüfen, WordPress-LIVE abnehmen und erst danach PPA-002 synchronisieren.
