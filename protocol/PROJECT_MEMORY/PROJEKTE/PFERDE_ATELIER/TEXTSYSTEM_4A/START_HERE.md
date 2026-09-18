@@ -33,7 +33,7 @@ den vorhandenen produktiven Fach-/Regelbestand READ-ONLY prüfen, Konzept 4 auf 
 eine zweite Textmaschine, zweite State Machine oder neue Prüferautorität bauen; Textmaschine, PPM 6.7.9, LanguageTool 6.8, PSERC/PSTE, SEO-, Link-, Tabellen-, Metadaten-, Design-, Theme-/CSS- oder WordPress-Plugin-Regeln ändern; veröffentlichen oder künstliches PASS erzeugen.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `ZIELVERTRAG.md` → `WORDPRESS_HANDOFF.md` → `PROTOKOLL.md`.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `ZIELVERTRAG.md` → `WORDPRESS_HANDOFF.md` → `PROTOKOLL.md`.
 
 ## KERNIDEE
 
