@@ -35,12 +35,15 @@ def stable(obj: object) -> str:
     return hraw(canon(obj))
 
 
-def build_fixture(root: Path, count: int) -> tuple[str, str, str, dict]:
+def build_fixture(root: Path, count: int, generation: int = 1) -> tuple[str, str, str, dict]:
     if count < 1:
         raise ValueError("count")
+    if isinstance(generation, bool) or not isinstance(generation, int) or generation < 1:
+        raise ValueError("generation")
     batch = hraw(("batch-" + str(count)).encode())
-    release_dir = root / ".pferde-release" / batch
-    source_dir = root / "control/startmaster0107/recovery_sources" / batch
+    run_dir = f"generation-{generation:06d}"
+    release_dir = root / ".pferde-release" / batch / run_dir
+    source_dir = root / "control/startmaster0107/recovery_sources" / batch / run_dir
     release_dir.mkdir(parents=True, exist_ok=True)
     source_dir.mkdir(parents=True, exist_ok=True)
 
@@ -51,12 +54,12 @@ def build_fixture(root: Path, count: int) -> tuple[str, str, str, dict]:
     for i in range(count):
         slot = hraw((f"slot-{count}-{i}").encode())
         cid = hraw((f"cid-{count}-{i}").encode())
-        body = f"<p>System4A downstream fixture {count}/{i}</p>"
+        body = f"<p>System4A downstream fixture {count}/{i}/generation-{generation:06d}</p>"
         raw = body.encode("utf-8")
         digest = hraw(raw)
         name = f"ARTICLE_{slot}.md"
-        released_ref = f".pferde-release/{batch}/{name}"
-        source_ref = f"control/startmaster0107/recovery_sources/{batch}/{name}"
+        released_ref = f".pferde-release/{batch}/{run_dir}/{name}"
+        source_ref = f"control/startmaster0107/recovery_sources/{batch}/{run_dir}/{name}"
         (release_dir / name).write_bytes(raw)
         (source_dir / name).write_bytes(raw)
         release_items.append({"plan_slot": slot, "canonical_article_id": cid})
@@ -99,18 +102,20 @@ def build_fixture(root: Path, count: int) -> tuple[str, str, str, dict]:
         "contract": "PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V2",
         "status": "OUTPUT_RELEASE_PASS_FINAL_REVIEW_AND_REARM_CONFIRMED",
         "batch_sha256": batch,
+        "runtime_generation": generation,
         "outputs": outputs,
         "publish_allowed": False,
     }
-    receipt_ref = f".pferde-release/{batch}/RELEASE_RECEIPT.json"
+    receipt_ref = f".pferde-release/{batch}/{run_dir}/RELEASE_RECEIPT.json"
     (release_dir / "RELEASE_RECEIPT.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    import_ref = f"control/startmaster0107/recovery_sources/{batch}/PSERC_IMPORT_ENVELOPE.json"
+    import_ref = f"control/startmaster0107/recovery_sources/{batch}/{run_dir}/PSERC_IMPORT_ENVELOPE.json"
     import_raw = canon(package)
     (source_dir / "PSERC_IMPORT_ENVELOPE.json").write_bytes(import_raw)
     source = {
         "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1",
         "batch_sha256": batch,
+        "runtime_generation": generation,
         "item_count": count,
         "import_envelope_ref": import_ref,
         "import_envelope_sha256": hraw(import_raw),
@@ -118,7 +123,7 @@ def build_fixture(root: Path, count: int) -> tuple[str, str, str, dict]:
         "content_mutation_performed": False,
         "items": source_items,
     }
-    source_ref = f"control/startmaster0107/recovery_sources/{batch}/MANIFEST.json"
+    source_ref = f"control/startmaster0107/recovery_sources/{batch}/{run_dir}/MANIFEST.json"
     (source_dir / "MANIFEST.json").write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return receipt_ref, final_ref, source_ref, source
 
@@ -133,6 +138,8 @@ def exercise_count(count: int) -> None:
         envelope = chat.build(receipt_ref, final_ref)
         if envelope.get("article_count") != count:
             raise AssertionError(f"CHAT_COUNT_MISMATCH:{count}:{envelope.get('article_count')}")
+        if envelope.get("runtime_generation") != 1:
+            raise AssertionError(f"CHAT_GENERATION_MISMATCH:{count}:{envelope.get('runtime_generation')}")
 
         final = load_module(FINAL_PATH, f"github_final_{count}")
         final.REPO = root
@@ -142,6 +149,25 @@ def exercise_count(count: int) -> None:
         result = final.finalize(source_ref)
         if result.get("article_count") != count:
             raise AssertionError(f"FINAL_COUNT_MISMATCH:{count}:{result.get('article_count')}")
+        if result.get("runtime_generation") != 1:
+            raise AssertionError(f"FINAL_GENERATION_MISMATCH:{count}:{result.get('runtime_generation')}")
+
+
+def generation_identity_probe() -> None:
+    with tempfile.TemporaryDirectory(prefix="system4a-generation-identity-") as td:
+        root = Path(td)
+        first_refs = build_fixture(root, 3, 1)
+        second_refs = build_fixture(root, 3, 2)
+        if first_refs[0] == second_refs[0] or first_refs[2] == second_refs[2]:
+            raise AssertionError("GENERATION_IDENTITY_COLLISION")
+        chat = load_module(CHAT_PATH, "chat_delivery_generation_identity")
+        chat.REPO = root
+        first = chat.build(first_refs[0], first_refs[1])
+        second = chat.build(second_refs[0], second_refs[1])
+        if first.get("batch_sha256") != second.get("batch_sha256"):
+            raise AssertionError("GENERATION_PROBE_BATCH_CHANGED")
+        if (first.get("runtime_generation"), second.get("runtime_generation")) != (1, 2):
+            raise AssertionError("GENERATION_PROBE_NOT_DISTINCT")
 
 
 def negative_source_count_mismatch() -> None:
@@ -207,11 +233,13 @@ def main() -> int:
     exercise_count(3)
     exercise_count(25)
     exercise_count(1000)
+    generation_identity_probe()
     negative_source_count_mismatch()
     negative_zero_count()
     print("SYSTEM4A_DOWNSTREAM_1N_CONTRACT_PROBE_OK")
     print("POSITIVE_COUNTS=1,3,25,1000")
     print("NEGATIVE_COUNT_MISMATCH=BLOCKED")
+    print("GENERATION_IDENTITY=SAME_BATCH_DISTINCT_RUNS_PASS")
     print("NEGATIVE_ZERO_COUNT=BLOCKED")
     return 0
 
