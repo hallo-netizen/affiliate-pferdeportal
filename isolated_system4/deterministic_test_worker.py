@@ -446,6 +446,17 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
 
         sections[table_block] = [_flatten_table_cells(row) for row in sections.get(table_block, [])]
 
+    # In the dedicated real7 proof, the first workshop pass intentionally leaves
+    # one repairable conclusion defect. This proves that a still-bad article loops
+    # back to DRAFT_WORKER again instead of becoming a terminal block.
+    if repair and os.environ.get('SYSTEM4_TEST_REAL7_PPM_MULTIFINDING', '').strip() == '1' and int(state.get('revision') or 0) == 1:
+        conclusion_rows = sections.get('conclusion', [])
+        conclusion_heading = [row for row in conclusion_rows if row.startswith('<h2>')]
+        conclusion_paragraphs = [row for row in conclusion_rows if row.startswith('<p ')]
+        if len(conclusion_heading) != 1 or len(conclusion_paragraphs) < 2:
+            raise RuntimeError('TESTWORKER_WORKSHOP_LOOP_CONCLUSION_SOURCE_MISSING')
+        sections['conclusion'] = conclusion_heading + conclusion_paragraphs[:2]
+
     body = render()
     if not repair and identity['target_keyword'] == 'Bodenprüfung am Pferdeanhänger':
         marker = ' Als belastbares Ergebnis muss dieser Prüfschritt dokumentiert bleiben.'
