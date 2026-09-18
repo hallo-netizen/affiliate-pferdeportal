@@ -1,31 +1,24 @@
-# STARTMASTER0107 / H8 — NOTFALL-EINLASS
+# STARTMASTER0107 — WIEDEREINSTIEG NÄCHSTER CHAT
 
-DU BIST AUSFÜHREND, NICHT ENTSCHEIDEND.
+Diese Datei ist **nur Wegweiser**. Sie ist keine CURRENT-, Fehler- oder NEXT-ACTION-Wahrheit.
 
-## ALLERERSTE AKTION
+## Exakter Einstieg
 
-Vor jeder Suche, Analyse, Dateiöffnung, Recherche, Texterstellung, Paketbildung oder sonstigen Projektarbeit ausschließlich:
+1. `control/CURRENT_STARTMASTER.json` lesen.
+2. Dessen `root_ref` folgen: `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`.
+3. Dort ausschließlich `navigation_authority` folgen: `control/startmaster0107/CURRENT_STATE.json`.
+4. Frischecheck durchführen:
+   - aktuellen `main` prüfen;
+   - aktuellen Dispatcher PR #107 / `codex-chat-launcher` prüfen;
+   - gegen die in CURRENT_STATE gebundene aktuelle Evidence vergleichen.
+5. Bindung unverändert: **keine Vollrekonstruktion**, keine historischen Protokolle zusammensetzen; direkt die **eine `next_action` aus CURRENT_STATE** ausführen.
+6. Relevante Änderung: nur das Delta seit CURRENT_STATE prüfen und CURRENT_STATE zuerst nachziehen.
 
-`python3 control/single-door-boundary/project_single_door_entry_v2.py status`
+## Nicht als Einstieg verwenden
 
-Danach ausschließlich den dort ausgegebenen gebundenen Raum verwenden.
+- keinen alten `project_single_door_entry_v2.py status`-Chatbefehl aus dieser Übergabe ableiten;
+- keinen `cloud_entry.py`-Start erraten;
+- keine manuelle Point-0-/SOURCE_REQUESTS-/Workspace-Konstruktion;
+- keine Übergabe, kein Protokoll, kein Hobbyraum und keine Chat-Erinnerung als zweite Standwahrheit verwenden.
 
-## HARTLOCK
-
-- `R_BOOT_001`: nur die gebundene Bootstrap-Aktion. Keine eigene Recherche, kein Text, kein Fact-Pack, kein Produktionsplan, kein Paket, kein WordPress, kein Ersatzweg.
-- `R_PRE_001`: nur das von `R_BOOT_001` erzeugte und signiert H8-gebundene Paket weiterreichen.
-- `R_001` oder später: ausschließlich der bereits gebundenen produktiven Single-Door-Kette folgen.
-- BLOCKED oder fehlende Capability: im aktuellen Raum fail-closed. Keine eigene Lösung und keine Alternativroute.
-- Kein Rücksprung, kein Seitensprung, keine Wiederholung hash-identischer PASS-Stufen.
-- Chat-Historie und Erinnerung besitzen keine Workflow-Navigationsautorität.
-- Ein Chatwechsel beginnt wieder mit derselben ALLERERSTEN AKTION und setzt am aktuellen gebundenen Raum fort.
-
-## TRENNUNG
-
-H8/Eingangstür/Wächter sind vollständig fachblind. Sie prüfen und bewerten weder Artikelinhalt noch Qualität. Fach-, Inhalts-, SEO-, Qualitäts-, LanguageTool-, PPM-, PSERC-, PSTE-, Design-, Dubletten-/Kannibalisierungs- und Publish-Regeln bleiben ausschließlich Sache des bestehenden nachgelagerten Fachworkflows und werden durch H8 nicht geändert.
-
-## GRUNDSATZ
-
-DER CHAT ENTSCHEIDET NICHT.
-DER WÄCHTER NAVIGIERT.
-DER GEBUNDENE FACHPROZESS ARBEITET ERST HINTER DER FREIGEGEBENEN TÜR.
+Der produktive Befehl ergibt sich ausschließlich aus der frisch geprüften CURRENT_STATE plus der aktuell bindenden Repository-Instruktion.
