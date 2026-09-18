@@ -298,3 +298,12 @@ Maschinenlocks in Hobbyräumen bleiben als abgeleitete, hashgebundene technische
 BEZUG:
 ARCH-089 / BAU-042.
 
+
+
+### 2026-09-18 – Hobbyraum temporär klargestellt
+
+KISS-FIX:
+Keine Architekturänderung. Nur die bestehende Hobbyraum-Regel präzisiert: Hobbyraum wird ausschließlich während einer konkreten Arbeit genutzt; dauerhafte Wahrheit bleibt in Current-/Protokoll-/Fachquellen.
+
+BEZUG:
+ARCH-090.
