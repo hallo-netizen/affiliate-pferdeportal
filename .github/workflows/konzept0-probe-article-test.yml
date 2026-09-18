@@ -1,0 +1,112 @@
+name: Konzept 0 Probe Article Test
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/probe/PROBETEXT_PFERDEBUERSTEN_REINIGEN.html'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Isolation precheck
+        run: python3 isolated_system0/KONZEPT_0/verify_isolation.py
+
+      - name: Structural probe checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import json,re,hashlib
+          p=Path('isolated_system0/KONZEPT_0/probe/PROBETEXT_PFERDEBUERSTEN_REINIGEN.html')
+          html=p.read_text(encoding='utf-8')
+          class P(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.text=[]; self.h2=0; self.tables=0; self.rows=0; self.lis=0
+              def handle_starttag(self,tag,attrs):
+                  if tag=='h2': self.h2+=1
+                  if tag=='table': self.tables+=1
+                  if tag=='tr': self.rows+=1
+                  if tag=='li': self.lis+=1
+              def handle_data(self,d): self.text.append(d)
+          x=P(); x.feed(html)
+          text=' '.join(x.text)
+          words=re.findall(r"[A-Za-zÄÖÜäöüß0-9]+(?:[-'][A-Za-zÄÖÜäöüß0-9]+)?",text)
+          result={
+            'contract':'KONZEPT0_PROBE_STRUCTURE_V1',
+            'word_count':len(words),
+            'h2_count':x.h2,
+            'table_count':x.tables,
+            'table_rows_total':x.rows,
+            'list_items':x.lis,
+            'content_sha256':hashlib.sha256(html.encode()).hexdigest(),
+            'checks':{
+              'minimum_words_750':len(words)>=750,
+              'minimum_h2_4':x.h2>=4,
+              'exact_table_1':x.tables==1,
+              'minimum_table_rows_5_including_header':x.rows>=5,
+              'minimum_list_items_4':x.lis>=4,
+              'has_conclusion':'<h2>Fazit</h2>' in html
+            }
+          }
+          result['status']='PASS' if all(result['checks'].values()) else 'BLOCKED'
+          Path('isolated_system0/KONZEPT_0/probe/PROBETEXT_STRUCTURE_EVIDENCE.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          raise SystemExit(0 if result['status']=='PASS' else 2)
+          PY
+
+      - name: Run exact LanguageTool 6.8 on visible text
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAR='isolated_system0/KONZEPT_0/runtime/packages/languagetool-commandline-6.8.jar'
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  '"$JAR" | sha256sum -c -
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          class P(HTMLParser):
+              def __init__(self): super().__init__(); self.out=[]
+              def handle_data(self,d):
+                  s=' '.join(d.split())
+                  if s: self.out.append(s)
+          html=Path('isolated_system0/KONZEPT_0/probe/PROBETEXT_PFERDEBUERSTEN_REINIGEN.html').read_text(encoding='utf-8')
+          p=P(); p.feed(html)
+          Path('/tmp/probe.txt').write_text('\n'.join(p.out)+'\n',encoding='utf-8')
+          PY
+          set +e
+          java -jar "$JAR" -l de-DE /tmp/probe.txt > /tmp/lt.txt 2>&1
+          rc=$?
+          set -e
+          cat /tmp/lt.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,re
+          raw=Path('/tmp/lt.txt').read_text(encoding='utf-8',errors='replace')
+          matches=len(re.findall(r'^\d+\.)',raw,flags=re.M))
+          out={'contract':'KONZEPT0_PROBE_LT68_V1','engine':'LanguageTool 6.8','finding_count':matches,'raw_return_code':0 if matches==0 else 1,'status':'PASS' if matches==0 else 'BLOCKED'}
+          Path('isolated_system0/KONZEPT_0/probe/PROBETEXT_LT_EVIDENCE.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          raise SystemExit(0 if matches==0 else 2)
+          PY
+
+      - name: Commit probe evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'konzept0-probe'
+          git config user.email 'actions@users.noreply.github.com'
+          git add isolated_system0/KONZEPT_0/probe/PROBETEXT_*_EVIDENCE.json || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Konzept 0: record probe article test evidence'
+          git pull --rebase origin isolated-system0-legacy-text-20260828
+          git push origin HEAD:isolated-system0-legacy-text-20260828
