@@ -56,7 +56,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "315bb766c01977a971d7a2323fde2cf01bcbda49d4b9bf624ec8aee4f07e7948",
+    "bundle_sha256": "9c76d3140ef37ffc567457863fe3c11030efe884d75605b117d21b246a27903d",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -132,7 +132,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "315bb766c01977a971d7a2323fde2cf01bcbda49d4b9bf624ec8aee4f07e7948"
+    "bundle_sha256": "9c76d3140ef37ffc567457863fe3c11030efe884d75605b117d21b246a27903d"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -162,7 +162,8 @@
     "history_proof_complete": true,
     "product_fix_complete": false,
     "resolved": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "product_fix_candidate": true
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -216,10 +217,10 @@
   },
   "last_safe_main_sha": "19451f92321cc0ac0aeabfa8ef09e7a6be3302ac",
   "last_safe_change": "PR293 is merged on main: System 4 downstream production now uses real 1..N semantics and the final System4A acceptance evidence is PASS, including 1/3/25/1000 and V2 handoff to 107008. M38 history proof is complete and identifies M38_PLAN_HEADER_PRODUCER_BINDING_MISSING as the first open historical/product regression. No M38 product fix and no new production article run have been performed yet.",
-  "hobbyroom_status": "M38_HISTORY_PROOF_COMPLETE_PRODUCT_FIX_PENDING",
-  "hobbyroom_branch": "hobbyroom/m38-history-current-main-20260918",
+  "hobbyroom_status": "M38_PRODUCT_FIX_CANDIDATE_UNDER_REGRESSION",
+  "hobbyroom_branch": "hobbyroom/m38-product-fix-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "M38_PLAN_HEADER_PRODUCER_BINDING_MISSING",
+  "hobbyroom_blocker": "M38 product fix candidate exists; production remains blocked until existing M01-M38 regression and hardlock/hardlock-base all PASS.",
   "next_action": {
     "goal": "Repair only M38_PLAN_HEADER_PRODUCER_BINDING_MISSING with the smallest existing-System change: bind the Fachworkflow-produced production_plan_header to plan_contract_version 4.0.0 and required_plugin_version 6.7.9, and fail closed before real PSERC/PPM on missing or mismatching values.",
     "required_order": [
