@@ -39,7 +39,7 @@ class ProductiveOneToNTest(unittest.TestCase):
     def fake_start(self, point0: str, workspace: str, index: int):
         w = Path(workspace)
         w.mkdir(parents=True, exist_ok=False)
-        return {"status": "SYSTEM4_107007_ROOT_BOUND_WORKER_READY", "item_index": index}
+        return {"status": "SYSTEM4_107007_ROOT_READY_STOP", "item_index": index}
 
     def fake_collect(self, batch_root: Path, runtime: dict, items: list[dict]):
         self.collect_calls += 1
@@ -82,7 +82,7 @@ class ProductiveOneToNTest(unittest.TestCase):
                 self.mark_pass(i)
                 out = batch.advance(str(self.point0), str(self.batch_root))
                 if i + 1 < count:
-                    self.assertEqual(out["status"], "SYSTEM4_107007_BATCH_ITEM_READY")
+                    self.assertEqual(out["status"], "SYSTEM4_107007_BATCH_ROOT_READY_STOP")
                     self.assertEqual(out["item_index"], i + 1)
                     self.assertEqual(self.collect_calls, 0)
                 else:
