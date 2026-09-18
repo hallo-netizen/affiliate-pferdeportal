@@ -55,6 +55,11 @@ class UniversalBatchGateTests(unittest.TestCase):
         snap = root / 'snapshot.json'
         snap.write_text(json.dumps(snapshot, ensure_ascii=False), encoding='utf-8')
         snap_sha = hashlib.sha256(snap.read_bytes()).hexdigest()
+        bound_snapshot = {'contract': 'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1', 'next_textmachine_metadata_batch': snapshot['next_textmachine_metadata_batch'], 'system4_root_manifest_sha256': '1' * 64}
+        bound_raw = json.dumps(bound_snapshot, ensure_ascii=False).encode('utf-8')
+        bound_sha = hashlib.sha256(bound_raw).hexdigest()
+        if bound_sha == snap_sha:
+            raise AssertionError('FIXTURE_MUST_MODEL_DISTINCT_RUNTIME_AND_BOUND_SNAPSHOT_HASHES')
         paths = []
         for i, item in enumerate(items):
             article_type = item['article_type']
@@ -68,7 +73,7 @@ class UniversalBatchGateTests(unittest.TestCase):
             facts_text = json.dumps(facts, ensure_ascii=False, sort_keys=True)
             state = {
                 'contract': batch_gate.STATE_CONTRACT,
-                'source_snapshot_sha256': snap_sha,
+                'source_snapshot_sha256': bound_sha,
                 'batch_sha256': batch_sha,
                 'article': item,
                 'immutable_core_sha256': '',
@@ -87,7 +92,10 @@ class UniversalBatchGateTests(unittest.TestCase):
             }
             test_batch_gate.bind_authoring_contract(state)
             state['immutable_core_sha256'] = batch_gate.stable_hash(batch_gate.immutable_core(state))
-            path = root / f'state-{i}.json'
+            workspace = root / f'item-{i:06d}'
+            workspace.mkdir()
+            (workspace / 'bound_snapshot.json').write_bytes(bound_raw)
+            path = workspace / 'state.json'
             path.write_text(json.dumps(state, ensure_ascii=False), encoding='utf-8')
             paths.append(path)
         return snap, paths
