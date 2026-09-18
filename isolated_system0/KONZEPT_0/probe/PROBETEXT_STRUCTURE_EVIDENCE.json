@@ -1,11 +1,11 @@
 {
   "contract": "KONZEPT0_PROBE_STRUCTURE_V1",
-  "word_count": 827,
+  "word_count": 829,
   "h2_count": 9,
   "table_count": 1,
   "table_rows_total": 5,
   "list_items": 4,
-  "content_sha256": "00d213d0f2666c6ecf55ee8f8c7a37eaecf0d4c1892008bb6df30505f4917578",
+  "content_sha256": "2cd9124e34295c8ac399bdcce0c97f673e96c3aaa07c7afbbf9d65d3476694a1",
   "checks": {
     "minimum_words_750": true,
     "minimum_h2_4": true,
