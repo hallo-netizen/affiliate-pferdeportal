@@ -1,0 +1,71 @@
+name: Konzept 0 Isolation Hard Test
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/ISOLATION_TEST_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Positive isolation test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 isolated_system0/KONZEPT_0/verify_isolation.py > /tmp/positive.json
+          cat /tmp/positive.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/positive.json'))
+          assert x['runtime_cross_contact']=='PASS', x
+          PY
+      - name: Negative isolation mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          P='isolated_system0/KONZEPT_0/runtime/__negative_cross_contact_probe.txt'
+          printf '%s\n' 'isolated_system4/forbidden-runtime-contact' > "$P"
+          set +e
+          python3 isolated_system0/KONZEPT_0/verify_isolation.py > /tmp/negative.json
+          rc=$?
+          set -e
+          cat /tmp/negative.json
+          rm -f "$P"
+          test "$rc" -eq 2
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/negative.json'))
+          assert x['runtime_cross_contact']=='BLOCKED', x
+          assert x['cross_contact_findings'], x
+          PY
+      - name: Write evidence
+        shell: bash
+        run: |
+          cat > isolated_system0/KONZEPT_0/ISOLATION_TEST_EVIDENCE.json <<'JSON'
+          {
+            "contract": "KONZEPT0_ISOLATION_POSITIVE_NEGATIVE_V1",
+            "status": "PASS",
+            "positive_clean_runtime": "PASS",
+            "negative_system4_mutation": "BLOCKED",
+            "concept_1_2_3_4_4a_runtime_contact": false,
+            "codex_started": false,
+            "publish_performed": false
+          }
+          JSON
+      - name: Commit evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'konzept0-isolation-test'
+          git config user.email 'actions@users.noreply.github.com'
+          git add isolated_system0/KONZEPT_0/ISOLATION_TEST_EVIDENCE.json
+          git commit -m 'Konzept 0: prove isolation positive and negative' || exit 0
+          git pull --rebase origin isolated-system0-legacy-text-20260828
+          git push origin HEAD:isolated-system0-legacy-text-20260828
