@@ -72,7 +72,10 @@
     "SYSTEM4_RELEASE_IDENTITY_GENERATION_FIX_PR315_PROVEN",
     "SYSTEM4_RELEASE_IDENTITY_FULL_ACCEPTANCE_RUN_35361139485_PASS",
     "SYSTEM4_RELEASE_IDENTITY_TARGETED_PROOF_RUN_35361249579_PASS",
-    "SYSTEM4_RELEASE_IDENTITY_FINAL_ENTRANCE_RUN_35361368650_PASS"
+    "SYSTEM4_RELEASE_IDENTITY_FINAL_ENTRANCE_RUN_35361368650_PASS",
+    "SYSTEM4_RELEASE_IDENTITY_PR315_MERGED_728BD721B3C9BA3A969E7C12E2BA62E0A61C1A64",
+    "SYSTEM4_POST_MERGE_ENTRANCE_RUN_35364478599_PASS",
+    "IMMUTABLE_BASE_HARDLOCK_RESTORED_RULESET_21788951"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -178,13 +181,13 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "PRECODEX_7ER_RELEASE_IDENTITY_FIX_PROVEN_NOT_YET_INTEGRATED",
+  "current_work_status": "PRECODEX_7ER_RELEASE_IDENTITY_FIX_INTEGRATED_HARDLOCK_RESTORED_AWAITING_CODEX_APPROVAL",
   "current_execution_blocker": {
-    "code": "PRECODEX_FIX_NOT_IN_MAIN_AND_EXPLICIT_CODEX_APPROVAL_MISSING",
+    "code": "EXPLICIT_CODEX_APPROVAL_MISSING",
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "The historical batch-only release collision is resolved on PR #315 by binding output identity to the existing runtime generation. Full System-4 acceptance and targeted positive/negative proofs pass. The fix is not yet in main because the immutable base hardlock deliberately blocks workflow changes, and Codex has not been explicitly approved by the user.",
+    "detail": "The generation-based release identity fix is merged on main at 728bd721b3c9ba3a969e7c12e2ba62e0a61c1a64. Post-merge deterministic entrance run 35364478599 passed. Ruleset 21788951 has both required checks hardlock and hardlock-base restored with no bypass. The only remaining gate before the real complete 7-item Codex run is explicit user approval plus the mandatory final current-main freshness/hash/Point-0/NEW-source reconfirmation.",
     "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
     "runtime_generation": 1,
     "release_identity_scheme": "BATCH_SHA256_PLUS_RUNTIME_GENERATION",
@@ -249,22 +252,21 @@
     "last_read_only_diagnostic_evidence": "PR107 issuecomment-5638208428",
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
-  "last_safe_main_sha": "13ce42bb77d7b5d9a01cdbe3be6c7c81969198d4",
-  "last_safe_change": "Current main 13ce42bb77d7b5d9a01cdbe3be6c7c81969198d4 was verified before the repair. PR #315 resolves the historical 7er batch release collision with the existing runtime generation. Full acceptance 35361139485 and targeted/final gates pass. The repair is not merged.",
+  "last_safe_main_sha": "728bd721b3c9ba3a969e7c12e2ba62e0a61c1a64",
+  "last_safe_change": "PR #315 is merged. Generation-based output identity is integrated, post-merge deterministic entrance run 35364478599 passed, and the immutable hardlock is restored with hardlock + hardlock-base and no bypass.",
   "hobbyroom_status": "HISTORY_ONLY_PRODUCT_FIX_MOVED_TO_PR315",
   "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
   "hobbyroom_blocker": "HISTORY_ONLY_NO_PRODUCT_ACTION",
   "next_action": {
-    "goal": "Integrate the proven generation-based output identity without weakening the immutable security boundary, then perform the final merged-main freshness check and wait for explicit Codex approval.",
+    "goal": "Perform the final current-main freshness and protection check, then wait for explicit user approval before starting the real complete seven-item Codex run.",
     "required_order": [
       "Keep the complete seven-item batch unchanged.",
-      "Repository administrator deliberately authorizes the single required ENDSTEMPEL workflow maintenance for PR #315.",
-      "Merge PR #315 only after explicit user approval.",
-      "Immediately restore the immutable no-bypass hardlock.",
-      "Re-read CURRENT_STARTMASTER, START_HERE and CURRENT_STATE from merged main and verify the exact main head and all bound hashes.",
-      "Reconfirm Point-0 and NEW-source protections against the proven run evidence on the byte-identical merged code.",
-      "Do not start Codex until the user explicitly approves the real complete seven-item run."
+      "Re-read CURRENT_STARTMASTER, START_HERE and CURRENT_STATE from current main and verify all bound hashes.",
+      "Reconfirm Point-0 and NEW-source protections on the current merged code.",
+      "Do not start Codex until the user explicitly approves the real complete seven-item run.",
+      "After explicit approval, start only the complete seven-item run through the bound System-4 route.",
+      "Keep the final signed file durable and retrievable into the parent chat."
     ],
     "forbidden": [
       "standalone real one-article batch",
@@ -274,10 +276,9 @@
       "temp-only final handoff",
       "new parallel workflow",
       "auto-publish",
-      "merge without explicit user approval",
-      "leaving the immutable hardlock relaxed after maintenance"
+      "relaxing the immutable hardlock"
     ],
-    "proof_after_fix": "System-4 full acceptance 35361139485 PASS plus targeted generation/Point0/NEW proof 35361249579 PASS; final merged-main freshness check remains mandatory before Codex."
+    "proof_after_fix": "PR #315 merged; post-merge entrance run 35364478599 PASS; ruleset hardlock + hardlock-base restored. Final current-main freshness/hash/Point-0/NEW protection reconfirmation remains mandatory before Codex."
   },
   "hobbyroom_pr": 307,
   "hobbyroom_head_sha": "3c2fdeb181f3dcd693695f28058c06db64e857a1",
@@ -306,13 +307,18 @@
     "publish_allowed": false
   },
   "integration_requirement": {
-    "code": "IMMUTABLE_BASE_HARDLOCK_ADMIN_MAINTENANCE_REQUIRED",
+    "code": "RESOLVED",
+    "status": "RESOLVED",
     "pr": 315,
-    "protected_change": ".github/workflows/pferde-atelier-endstempel.yml",
-    "normal_pr_bypass": false,
-    "reason": "The existing ENDSTEMPEL workflow itself contains the batch-only durable GitHub release tag. The active base hardlock blocks all .github/workflows changes by design.",
-    "required_action": "Repository administrator must deliberately authorize the one maintenance change through the GitHub ruleset/hardlock process. Merge still requires explicit user approval. Restore the no-bypass hardlock immediately after integration.",
-    "codex_before_integration": false,
+    "merge_commit_sha": "728bd721b3c9ba3a969e7c12e2ba62e0a61c1a64",
+    "post_merge_run_id": 35364478599,
+    "ruleset_id": 21788951,
+    "required_status_checks": [
+      "hardlock",
+      "hardlock-base"
+    ],
+    "bypass_actors": [],
+    "hardlock_restored": true,
     "publish_allowed": false
   }
 }
