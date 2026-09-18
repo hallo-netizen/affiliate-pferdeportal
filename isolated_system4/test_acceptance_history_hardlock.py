@@ -185,6 +185,78 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
             exact = 'test_point0_v2.Point0V2Tests.' + method
             self.assertIn(exact, workflow, exact + ' missing from permanent Point0 matrix')
 
+    def test_m15_m38_are_bound_to_current_system4_route(self):
+        matrix = text(REPO / 'control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md')
+        for number in range(15, 39):
+            self.assertIn('M' + str(number).zfill(2), matrix)
+
+        step = json.loads(text(REPO / 'control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json'))['instruction']
+        for token in (
+            'parent_start.py start-current',
+            'machine_point0.py build-current-fetch',
+            'system4_107007_batch.py start',
+            'root_entry.py start-point0',
+            'SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY',
+            'Ein automatischer Aufruf von codex_entry.py worker-start ist verboten.',
+            'controller.py repair',
+            'controller.py fullcheck',
+            'batch_gate.py collect',
+        ):
+            self.assertIn(token, step)
+        for legacy in (
+            'control/single-door-boundary/codex_current_room_bridge.py',
+            'control/single-door-boundary/codex_current_action.py',
+            'control/startmaster0107/fachworkflow_proof_handoff.py',
+            'control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py',
+        ):
+            self.assertIn(legacy, step)
+        self.assertIn('VERBOTEN für 107007-Repair', step)
+
+        batch = text(REPO / 'control/startmaster0107/system4_107007_batch.py')
+        self.assertIn('for key in ("title", "target_keyword", "category", "article_type", "plan_slot")', batch)
+        self.assertIn('SYSTEM4_107007_BATCH_RUNTIME_DRIFT', batch)
+        self.assertIn('SYSTEM4_107007_BATCH_COUNT_DRIFT', batch)
+        self.assertIn('SYSTEM4_107007_BATCH_CURRENT_ITEM_NOT_PASS', batch)
+
+        dispatch = text(HERE / 'worker_dispatch.py')
+        codex = text(HERE / 'codex_entry.py')
+        self.assertIn("wc.get('contract')!='SYSTEM4_CODEX_WORKER_DISPATCH_V2'", dispatch)
+        self.assertIn("wc.get('external_web_search_allowed') is not False", dispatch)
+        self.assertIn("worker_dispatch.verify_bundle", codex)
+        self.assertIn("'worker-start'", codex)
+        self.assertNotIn('fachworkflow_proof_handoff', codex)
+        self.assertNotIn('codex_current_room_bridge', codex)
+
+        engine = text(HERE / 'production_checks_engine.py')
+        self.assertIn('PPM_VERSION = "6.7.9"', engine)
+        self.assertIn('PPM_PACKAGE_REL = "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"', engine)
+        self.assertIn('PPM679_PACKAGE_HASH_MISMATCH', engine)
+        self.assertIn('raise RepairRequired("ppm679", repair)', engine)
+        self.assertIn('PPM679_VALIDATOR_BLOCKED:', engine)
+
+        gate = text(HERE / 'batch_gate.py')
+        self.assertIn("state.get('article') != dict(expected_article)", gate)
+        self.assertIn('STATE_ARTICLE_BINDING_MISMATCH', gate)
+        self.assertIn('PRODUCTION_CONTEXT_HASH_INVALID', gate)
+        self.assertIn("ppm.get('ppm_version') != '6.7.9'", gate)
+        self.assertIn('PPM679_CONTENT_HASH_MISMATCH', gate)
+
+        current = json.loads(text(REPO / 'control/startmaster0107/CURRENT_STATE.json'))
+        self.assertIs(current['current_execution_blocker']['m38_resolved'], True)
+        self.assertEqual(current['m38_product_fix']['plan_contract_version'], '4.0.0')
+        self.assertEqual(current['m38_product_fix']['required_plugin_version'], '6.7.9')
+
+        repair_test = subprocess.run(
+            ['python3', str(REPO / 'control/startmaster0107/test_system4_107007_repair_authority.py')],
+            cwd=REPO,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=120,
+            check=False,
+        )
+        self.assertEqual(repair_test.returncode, 0, repair_test.stdout + '\n' + repair_test.stderr)
+
     def test_historical_regression_contract_remains_bound(self):
         protocol = text(HERE / 'PROTOKOLL_TESTSTRECKE_V2_20260914.md')
         permanent = (
