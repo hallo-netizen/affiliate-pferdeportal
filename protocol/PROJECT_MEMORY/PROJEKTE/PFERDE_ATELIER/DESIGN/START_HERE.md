@@ -38,8 +38,8 @@ den allgemeinen Designkern doppeln, `main` automatisch als Live-Wahrheit behande
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
 
-- **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
-- **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **CURRENT-AUTORITÄT:** ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` auflösen
+- **NEXT ACTION:** aus derselben Current-Autorität; `HOBBYRAUM.md` nur Ausführung
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
 - **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
 - **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
@@ -67,8 +67,8 @@ Keine Quelle allein blind überschreibt die anderen.
 Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
 
 Vor jeder Änderung:
-1. `CURRENT_STATE.md`;
-2. `HOBBYRAUM.md`;
+1. `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` lesen;
+2. zuständige Current-Autorität frisch prüfen und deren NEXT ACTION lesen;
 3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
 4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
 5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
