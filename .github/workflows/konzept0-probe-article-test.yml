@@ -6,6 +6,7 @@ on:
       - isolated-system0-legacy-text-20260828
     paths:
       - 'isolated_system0/KONZEPT_0/probe/PROBETEXT_PFERDEBUERSTEN_REINIGEN.html'
+      - 'isolated_system0/KONZEPT_0/probe/PROBETEXT_TEST_TRIGGER.txt'
 
 permissions:
   contents: write
