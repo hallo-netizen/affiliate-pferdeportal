@@ -21,44 +21,54 @@ def main(argv: list[str]) -> int:
     evidence_dir = Path(argv[1])
     output_dir = Path(argv[2])
     evidence_files = sorted(evidence_dir.glob("*-evidence.json"))
-    if len(evidence_files) != 1:
-        raise SystemExit("MULTIFINDING_REPAIR_EVIDENCE_COUNT_INVALID:" + str(len(evidence_files)))
-    evidence = json.loads(evidence_files[0].read_text(encoding="utf-8"))
-    if evidence.get("contract") != "SYSTEM4_TEST_GENERATED_REPAIR_EVIDENCE_V1":
-        raise SystemExit("MULTIFINDING_REPAIR_EVIDENCE_CONTRACT_INVALID")
-    if evidence.get("prebuilt_final_input_used") is not False:
-        raise SystemExit("PREBUILT_FINAL_REPAIR_INPUT_FORBIDDEN")
-    if evidence.get("repair_generated_from_workspace_state") is not True:
-        raise SystemExit("REPAIR_NOT_GENERATED_FROM_WORKSPACE_STATE")
-    if evidence.get("codex_used") is not False or evidence.get("live_codex_repair_proven") is not False:
-        raise SystemExit("LIVE_CODEX_REPAIR_PROOF_FALSE_CLAIM")
+    if len(evidence_files) < 2:
+        raise SystemExit("WORKSHOP_LOOP_REPAIR_COUNT_TOO_LOW:" + str(len(evidence_files)))
+    evidences = [json.loads(path.read_text(encoding="utf-8")) for path in evidence_files]
+    for evidence in evidences:
+        if evidence.get("contract") != "SYSTEM4_TEST_GENERATED_REPAIR_EVIDENCE_V1":
+            raise SystemExit("MULTIFINDING_REPAIR_EVIDENCE_CONTRACT_INVALID")
+        if evidence.get("prebuilt_final_input_used") is not False:
+            raise SystemExit("PREBUILT_FINAL_REPAIR_INPUT_FORBIDDEN")
+        if evidence.get("repair_generated_from_workspace_state") is not True:
+            raise SystemExit("REAL7_REPAIRABLE_FINDINGS_NOT_RETURNED_TO_WORKSHOP")
+        if evidence.get("codex_used") is not False or evidence.get("live_codex_repair_proven") is not False:
+            raise SystemExit("LIVE_CODEX_REPAIR_PROOF_FALSE_CLAIM")
+        findings = evidence.get("findings")
+        if not isinstance(findings, list) or not findings:
+            raise SystemExit("MULTIFINDING_REPAIR_FINDINGS_MISSING")
+        owners = {str(row.get("repair_owner") or "") for row in findings if isinstance(row, dict)}
+        if owners != {"DRAFT_WORKER"}:
+            raise SystemExit("REAL7_REPAIR_OWNER_INVALID:" + ",".join(sorted(owners)))
 
-    findings = evidence.get("findings")
-    if not isinstance(findings, list):
-        raise SystemExit("MULTIFINDING_REPAIR_FINDINGS_MISSING")
-    codes = {str(row.get("error_code") or "") for row in findings if isinstance(row, dict)}
+    first_findings = evidences[0]["findings"]
+    codes = {str(row.get("error_code") or "") for row in first_findings if isinstance(row, dict)}
     missing = sorted(REQUIRED - codes)
     if missing:
         raise SystemExit("REAL7_REQUIRED_FINDINGS_NOT_REPRODUCED:" + ",".join(missing))
-    owners = {str(row.get("repair_owner") or "") for row in findings if isinstance(row, dict)}
-    if owners != {"DRAFT_WORKER"}:
-        raise SystemExit("REAL7_REPAIR_OWNER_INVALID:" + ",".join(sorted(owners)))
-    # Repairable quality findings are a workshop return, never a terminal project block.
-    # The proof is invalid if the test route treated this finding set as a hard stop.
-    if evidence.get("repair_generated_from_workspace_state") is not True:
-        raise SystemExit("REAL7_REPAIRABLE_FINDINGS_NOT_RETURNED_TO_WORKSHOP")
 
-    prefix = evidence_files[0].name[:-len("-evidence.json")]
-    before = evidence_dir / (prefix + "-before.html")
-    after = evidence_dir / (prefix + "-after.html")
-    if not before.is_file() or not after.is_file():
-        raise SystemExit("MULTIFINDING_BEFORE_AFTER_BYTES_MISSING")
-    if sha(before) != evidence.get("before_sha256"):
-        raise SystemExit("MULTIFINDING_BEFORE_HASH_MISMATCH")
-    if sha(after) != evidence.get("after_sha256"):
-        raise SystemExit("MULTIFINDING_AFTER_HASH_MISMATCH")
-    if before.read_bytes() == after.read_bytes():
-        raise SystemExit("MULTIFINDING_REPAIR_BYTES_UNCHANGED")
+    before_paths = []
+    after_paths = []
+    for evidence_file, evidence in zip(evidence_files, evidences):
+        prefix = evidence_file.name[:-len("-evidence.json")]
+        before = evidence_dir / (prefix + "-before.html")
+        after = evidence_dir / (prefix + "-after.html")
+        if not before.is_file() or not after.is_file():
+            raise SystemExit("MULTIFINDING_BEFORE_AFTER_BYTES_MISSING")
+        if sha(before) != evidence.get("before_sha256"):
+            raise SystemExit("MULTIFINDING_BEFORE_HASH_MISMATCH")
+        if sha(after) != evidence.get("after_sha256"):
+            raise SystemExit("MULTIFINDING_AFTER_HASH_MISMATCH")
+        if before.read_bytes() == after.read_bytes():
+            raise SystemExit("MULTIFINDING_REPAIR_BYTES_UNCHANGED")
+        before_paths.append(before)
+        after_paths.append(after)
+
+    for left, right in zip(after_paths, before_paths[1:]):
+        if left.read_bytes() != right.read_bytes():
+            raise SystemExit("WORKSHOP_LOOP_ARTICLE_CONTINUITY_BROKEN")
+    evidence = evidences[-1]
+    before = before_paths[0]
+    after = after_paths[-1]
 
     proof_path = output_dir / "LIVE_PARITY_V2_1_PROOF.json"
     handoff_path = output_dir / "SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json"
@@ -73,7 +83,7 @@ def main(argv: list[str]) -> int:
         raise SystemExit("MULTIFINDING_FINAL_HANDOFF_COUNT_INVALID")
     final_body = str(articles[0].get("body") or "")
     final_sha = hashlib.sha256(final_body.encode("utf-8")).hexdigest()
-    if final_sha != evidence.get("after_sha256"):
+    if final_sha != evidences[-1].get("after_sha256"):
         raise SystemExit("MULTIFINDING_AFTER_NOT_FINAL_ACCEPTED_BODY")
 
     proof = {
@@ -82,8 +92,10 @@ def main(argv: list[str]) -> int:
         "required_findings": sorted(REQUIRED),
         "observed_findings": sorted(codes),
         "repair_owner": "DRAFT_WORKER",
-        "before_sha256": evidence["before_sha256"],
-        "after_sha256": evidence["after_sha256"],
+        "workshop_return_count": len(evidences),
+        "same_article_continuity_across_repairs": True,
+        "before_sha256": evidences[0]["before_sha256"],
+        "after_sha256": evidences[-1]["after_sha256"],
         "real_languagetool_after_repair": "PASS",
         "real_ppm679_after_repair": "PASS",
         "prebuilt_final_input_used": False,
