@@ -1,0 +1,11 @@
+{
+  "contract":"KONZEPT0_GUIDED_STEP_MACHINE_TEST_V1",
+  "status":"PASS",
+  "initial_next_step":"K0-001",
+  "wrong_step":"BLOCKED",
+  "skip_ahead":"BLOCKED",
+  "exact_next_step":"PASS",
+  "state_restored_after_test":true,
+  "publish_performed":false,
+  "codex_started":false
+}
