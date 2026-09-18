@@ -1,0 +1,9 @@
+{
+  "contract": "KONZEPT0_PROBE_LT68_V3",
+  "engine": "LanguageTool 6.8",
+  "source_zip_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+  "commandline_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+  "finding_count": 1,
+  "status": "BLOCKED",
+  "raw_output": "Expected text language: German (Germany)\nWorking on /tmp/probe.txt...\n1.) Line 12, column 34, Rule ID: DE_REPEATEDWORDS_MEIST premium: false prio=-60\nMessage: Dieses Wort kommt in einem nahe gelegenen vorherigen Satz bereits vor. Verwenden Sie ein Synonym, um Ihren Text abwechslungsreicher zu gestalten, außer die Wiederholung ist beabsichtigt.\nSuggestion: größtenteils; überwiegend; mehrheitlich; vorwiegend; vornehmlich\n...el waschen. Für die normale Reinigung genügt meist warmes Wasser mit einer kleinen Menge mildem...\n                                                ^^^^^                                             \nTime: 6200ms for 80 sentences (12.9 sentences/sec)\n"
+}
