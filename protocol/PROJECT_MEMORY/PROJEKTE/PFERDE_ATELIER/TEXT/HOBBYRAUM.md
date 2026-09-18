@@ -1,5 +1,12 @@
 # PFERDE ATELIER – TEXT – HOBBYRAUM
 
+<!-- DERIVED_EXECUTION_SURFACE_V1 -->
+
+> **NICHT CURRENT-AUTORITATIV.** Diese Datei ist nur die abgeleitete Ausführungsfläche für eine bereits von der zuständigen Current-Autorität freigegebene Arbeit.  
+> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
+> Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
+
+
 STAND: 2026-09-17
 STATUS: AKTIV – M20 1..N CLEANUP + M38 HISTORY_AUTHORITY_MAINTENANCE
 
@@ -29,7 +36,7 @@ Die M38-Versionswerte sind gegen die vorhandene Abschlusslogik gebunden:
 - `plan_contract_version == "4.0.0"`;
 - `required_plugin_version == "6.7.9"`.
 
-## NEXT ACTION
+## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION
 
 Bestehenden History-Maschinenbeweis / hardlock auf PR280 ausführen.
 Nur bei `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M38` plus zugehörigem Hardlock-PASS darf dieser History-Kandidat integriert werden.
