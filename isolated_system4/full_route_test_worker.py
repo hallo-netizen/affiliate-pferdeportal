@@ -22,8 +22,8 @@ BATCH_REPEAT_SENTENCES=(
 BATCH_REPEAT_ORDINALS=('ersten','zweiten','dritten','vierten','fünften','sechsten')
 BATCH_REPEAT_SEPARATOR_TEMPLATES=(
     'Dieser technische Test betrifft Masken für Pferde. Im {ordinal} Durchgang wird nur die Reihenfolge markiert. Die fachlichen Aussagen des Artikels bleiben unverändert.',
-    'Dieser Abschnitt gehört zum Test mit Pellets aus Luzerne. Die {ordinal} Prüfung kennzeichnet lediglich den Ablauf. Inhaltliche Angaben werden dabei weder ergänzt noch verändert.',
-    'Hier wird die Betreuung im Urlaub nur für den technischen Versuch unterschieden. Der {ordinal} Schritt dient allein der Kennzeichnung. Neue fachliche Informationen entstehen dadurch nicht.',
+    'Dieser Abschnitt gehört zum Test mit Pellets aus Luzerne. Bei der {ordinal} Prüfung wird lediglich der Ablauf gekennzeichnet. Inhaltliche Angaben werden dabei weder ergänzt noch verändert.',
+    'Hier wird die Betreuung im Urlaub nur für den technischen Versuch unterschieden. Im {ordinal} Schritt dient dieser Satz allein der Kennzeichnung. Neue fachliche Informationen entstehen dadurch nicht.',
     'Die Betreuung durch Nachbarn erhält hier eine eigene technische Kennzeichnung. In der {ordinal} Runde wird nur der Ablauf des Tests getrennt. Der fachliche Inhalt bleibt davon unberührt.',
 )
 
