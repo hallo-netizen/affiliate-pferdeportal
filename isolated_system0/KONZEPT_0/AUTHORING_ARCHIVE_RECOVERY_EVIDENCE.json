@@ -1,0 +1,10 @@
+{
+  "contract": "KONZEPT0_AUTHORING_ARCHIVE_RECOVERY_V1",
+  "status": "PASS",
+  "authoring_script_found": false,
+  "authoring_script_sha256": null,
+  "source_scope": "AUG28_COMMIT_ARCHIVES_ONLY",
+  "concept_1_2_3_4_4a_runtime_contact": false,
+  "codex_started": false,
+  "publish_performed": false
+}
