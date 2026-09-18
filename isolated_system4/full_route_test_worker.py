@@ -57,7 +57,7 @@ def _fresh_variation_index(index:int)->int:
     return base+(index*5)
 
 def _semantic_section(body:str,block_id:str)->re.Match:
-    pattern=re.compile(r'<section\\b[^>]*data-block=["\\']'+re.escape(block_id)+r'["\\'][^>]*>.*?</section>',re.S|re.I)
+    pattern=re.compile(r"<section\b[^>]*data-block=[\"']"+re.escape(block_id)+r"[\"'][^>]*>.*?</section>",re.S|re.I)
     match=pattern.search(body)
     if not match:
         raise RuntimeError('FORCED_BLOCK_SEMANTIC_SECTION_MISSING:'+block_id)
@@ -69,15 +69,15 @@ def _force_block_semantic_error(body:str,index:int)->str:
     case=os.environ.get(FORCE_BLOCK_SEMANTIC_CASE_ENV,'conclusion_heading_mismatch').strip()
     if case in {'conclusion_heading_mismatch','further_information_heading_mismatch'}:
         block_id='conclusion' if case.startswith('conclusion_') else 'further_information'
-        pattern=re.compile(r'(<section\\b[^>]*data-block=["\\']'+re.escape(block_id)+r'["\\'][^>]*>.*?<h2[^>]*>)(.*?)(</h2>)',re.S|re.I)
-        changed,count=pattern.subn(r'\\1Weitere Aspekte zum Thema\\3',body,count=1)
+        pattern=re.compile(r"(<section\b[^>]*data-block=[\"']"+re.escape(block_id)+r"[\"'][^>]*>.*?<h2[^>]*>)(.*?)(</h2>)",re.S|re.I)
+        changed,count=pattern.subn(r'\1Weitere Aspekte zum Thema\3',body,count=1)
         if count!=1 or changed==body:
             raise RuntimeError('FORCED_BLOCK_SEMANTIC_HEADING_MISSING:'+block_id)
         return changed
     if case=='semantic_heading_absent':
         match=_semantic_section(body,'further_information')
         section=match.group(0)
-        changed_section,count=re.subn(r'<h2\\b[^>]*>.*?</h2>','',section,count=1,flags=re.S|re.I)
+        changed_section,count=re.subn(r'<h2\b[^>]*>.*?</h2>','',section,count=1,flags=re.S|re.I)
         if count!=1:
             raise RuntimeError('FORCED_BLOCK_SEMANTIC_H2_MISSING:further_information')
         return body[:match.start()]+changed_section+body[match.end():]
