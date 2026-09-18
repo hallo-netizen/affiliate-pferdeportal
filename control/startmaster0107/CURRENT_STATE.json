@@ -68,7 +68,11 @@
     "REAL_PARENT_ROOT_MARKER_PASS_WORKER_DISPATCH_READY",
     "REAL_PARENT_BATCH_ROOT_READY_STOP_WORKER_NOT_STARTED",
     "SYSTEM4_CURRENT_MAIN_COMPLETE_SIMULATION_RUN_35352311907_PASS",
-    "SYSTEM4_PRECODEX_EXISTING_RELEASE_IDENTITY_COLLISION_FOUND"
+    "SYSTEM4_PRECODEX_EXISTING_RELEASE_IDENTITY_COLLISION_FOUND",
+    "SYSTEM4_RELEASE_IDENTITY_GENERATION_FIX_PR315_PROVEN",
+    "SYSTEM4_RELEASE_IDENTITY_FULL_ACCEPTANCE_RUN_35361139485_PASS",
+    "SYSTEM4_RELEASE_IDENTITY_TARGETED_PROOF_RUN_35361249579_PASS",
+    "SYSTEM4_RELEASE_IDENTITY_FINAL_ENTRANCE_RUN_35361368650_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -81,7 +85,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "dc03a640f242f0e0e51077fa09299f50d3931b0f3d086d63bcb68e77fe2cbcf0",
+    "bundle_sha256": "1580c0777d4e8d0c2365fd60043666d3c77566390f1b36ec44d3913a885d0138",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -157,7 +161,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "dc03a640f242f0e0e51077fa09299f50d3931b0f3d086d63bcb68e77fe2cbcf0"
+    "bundle_sha256": "1580c0777d4e8d0c2365fd60043666d3c77566390f1b36ec44d3913a885d0138"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -165,7 +169,7 @@
     "official_runtime_entry_ref": "control/output-quarantine/runtime_entry_gate.py",
     "official_runtime_entry_sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24",
     "worker_freshness_guard_sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84",
-    "output_release_gate_sha256": "27edb683fbff98d5747a342274fcc176a2d834252d185cc1dc5661bb2df68c44",
+    "output_release_gate_sha256": "7e55ab7d4cf9569376955362b97881fb355b7dd48d8098564b353668e7277128",
     "final_review_visibility_guard_sha256": "c5f7284dc5d6a3bd69464162d18abed66e164ce8fd3bea05181f57fec2095913",
     "chat_execution_authority": "NONE",
     "chat_output_authority": "NONE",
@@ -174,19 +178,22 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "BLOCKED_BEFORE_REAL_CODEX_7ER_FRESH_RUN",
+  "current_work_status": "PRECODEX_7ER_RELEASE_IDENTITY_FIX_PROVEN_NOT_YET_INTEGRATED",
   "current_execution_blocker": {
-    "code": "CURRENT_7ER_BATCH_ALREADY_HAS_DURABLE_RELEASE_IDENTITY_COLLISION",
-    "error_class": true,
+    "code": "PRECODEX_FIX_NOT_IN_MAIN_AND_EXPLICIT_CODEX_APPROVAL_MISSING",
+    "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "The bound 7-item batch already has historical recovery article files and an existing Endstempel release under the same batch identity. A fresh NEW run must not reuse those article bodies or collide with that old release. Codex remains blocked until the existing route provides a non-colliding run/output identity and the final signed file is proven retrievable into the parent chat.",
+    "detail": "The historical batch-only release collision is resolved on PR #315 by binding output identity to the existing runtime generation. Full System-4 acceptance and targeted positive/negative proofs pass. The fix is not yet in main because the immutable base hardlock deliberately blocks workflow changes, and Codex has not been explicitly approved by the user.",
     "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+    "runtime_generation": 1,
+    "release_identity_scheme": "BATCH_SHA256_PLUS_RUNTIME_GENERATION",
     "historical_recovery_source_present": true,
     "historical_endstempel_release_present": true,
     "old_article_bodies_forbidden": true,
-    "complete_simulation_run_id": 35352311907,
-    "complete_simulation_result": "PASS_1_AND_3_POSITIVE_NEGATIVE_NO_CODEX",
+    "full_acceptance_run_id": 35361139485,
+    "targeted_proof_run_id": 35361249579,
+    "final_entrance_run_id": 35361368650,
     "parent_chat_final_file_required": true,
     "temp_only_handoff_forbidden": true,
     "codex_start_allowed": false,
@@ -242,32 +249,35 @@
     "last_read_only_diagnostic_evidence": "PR107 issuecomment-5638208428",
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
-  "last_safe_main_sha": "508f9dbb3650c99e5d41dbab83086af46945e225",
-  "last_safe_change": "Complete current-main simulation run 35352311907 passed. Pre-Codex audit then found an existing durable release for the same 7-item batch identity; no new Codex run was started.",
-  "hobbyroom_status": "TEMPORARY_CLOSEOUT_DELTA_BLOCKED_BEFORE_CODEX",
+  "last_safe_main_sha": "13ce42bb77d7b5d9a01cdbe3be6c7c81969198d4",
+  "last_safe_change": "Current main 13ce42bb77d7b5d9a01cdbe3be6c7c81969198d4 was verified before the repair. PR #315 resolves the historical 7er batch release collision with the existing runtime generation. Full acceptance 35361139485 and targeted/final gates pass. The repair is not merged.",
+  "hobbyroom_status": "HISTORY_ONLY_PRODUCT_FIX_MOVED_TO_PR315",
   "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "CURRENT_7ER_BATCH_ALREADY_HAS_DURABLE_RELEASE_IDENTITY_COLLISION",
+  "hobbyroom_blocker": "HISTORY_ONLY_NO_PRODUCT_ACTION",
   "next_action": {
-    "goal": "Resolve the existing 7-item batch replay/output collision before any Codex production run.",
+    "goal": "Integrate the proven generation-based output identity without weakening the immutable security boundary, then perform the final merged-main freshness check and wait for explicit Codex approval.",
     "required_order": [
-      "Keep all seven bound topics together as one batch.",
-      "Use the existing System-4 route to establish a fresh non-colliding run/output identity without changing article metadata or content/quality rules.",
-      "Re-prove Point-0, current-head and all hashes before Codex.",
-      "Keep historical recovery article bodies forbidden as production input.",
-      "Prove durable final output and retrieval of the signed WordPress import file into the parent chat.",
-      "Only then start the real 7-item Codex production run."
+      "Keep the complete seven-item batch unchanged.",
+      "Repository administrator deliberately authorizes the single required ENDSTEMPEL workflow maintenance for PR #315.",
+      "Merge PR #315 only after explicit user approval.",
+      "Immediately restore the immutable no-bypass hardlock.",
+      "Re-read CURRENT_STARTMASTER, START_HERE and CURRENT_STATE from merged main and verify the exact main head and all bound hashes.",
+      "Reconfirm Point-0 and NEW-source protections against the proven run evidence on the byte-identical merged code.",
+      "Do not start Codex until the user explicitly approves the real complete seven-item run."
     ],
     "forbidden": [
       "standalone real one-article batch",
-      "Codex before blocker resolution",
+      "Codex before explicit user approval",
       "manual batch-hash mutation",
       "old recovery article bodies as writing source",
       "temp-only final handoff",
       "new parallel workflow",
-      "auto-publish"
+      "auto-publish",
+      "merge without explicit user approval",
+      "leaving the immutable hardlock relaxed after maintenance"
     ],
-    "proof_after_fix": "Fresh non-colliding 7-item run/output identity plus parent-chat final-file transport PASS; then Codex may start."
+    "proof_after_fix": "System-4 full acceptance 35361139485 PASS plus targeted generation/Point0/NEW proof 35361249579 PASS; final merged-main freshness check remains mandatory before Codex."
   },
   "hobbyroom_pr": 307,
   "hobbyroom_head_sha": "3c2fdeb181f3dcd693695f28058c06db64e857a1",
@@ -293,6 +303,16 @@
     "required_plugin_version": "6.7.9",
     "version_mismatch_block": "BOUND_PRODUCTION_PLAN_VERSION_MISMATCH",
     "product_fix_complete": true,
+    "publish_allowed": false
+  },
+  "integration_requirement": {
+    "code": "IMMUTABLE_BASE_HARDLOCK_ADMIN_MAINTENANCE_REQUIRED",
+    "pr": 315,
+    "protected_change": ".github/workflows/pferde-atelier-endstempel.yml",
+    "normal_pr_bypass": false,
+    "reason": "The existing ENDSTEMPEL workflow itself contains the batch-only durable GitHub release tag. The active base hardlock blocks all .github/workflows changes by design.",
+    "required_action": "Repository administrator must deliberately authorize the one maintenance change through the GitHub ruleset/hardlock process. Merge still requires explicit user approval. Restore the no-bypass hardlock immediately after integration.",
+    "codex_before_integration": false,
     "publish_allowed": false
   }
 }
