@@ -79,9 +79,12 @@ def load_source(ref: str) -> tuple[dict[str, Any], Path, str]:
     if src.get("contract") != SOURCE_CONTRACT:
         raise Blocked("SOURCE_CONTRACT_INVALID")
     batch = str(src.get("batch_sha256") or "")
+    release_id = str(src.get("release_identity_sha256") or "")
     if not SHA_RE.fullmatch(batch):
         raise Blocked("BATCH_INVALID")
-    expected = (REPO / "control/startmaster0107/recovery_sources" / batch / "MANIFEST.json").resolve()
+    if not SHA_RE.fullmatch(release_id):
+        raise Blocked("RELEASE_IDENTITY_INVALID")
+    expected = (REPO / "control/startmaster0107/recovery_sources" / release_id / "MANIFEST.json").resolve()
     if path.resolve() != expected:
         raise Blocked("SOURCE_LOCATION_INVALID")
     source_item_count(src)
@@ -229,11 +232,14 @@ def verify_sig(mhash: str, sig_b64: str, pub_b64: str) -> None:
 
 def finalize(source_ref: str) -> dict[str, Any]:
     src, source_path, batch = load_source(source_ref)
+    release_id = str(src.get("release_identity_sha256") or "")
+    if not SHA_RE.fullmatch(release_id):
+        raise Blocked("RELEASE_IDENTITY_INVALID")
     before = snapshot(src, source_path, batch)
     count = len(before)
     import_envelope, import_envelope_sha256 = load_import_envelope(src, source_path, batch)
     validate_import_envelope_articles(import_envelope, before)
-    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": count, "articles": before, "import_envelope_sha256": import_envelope_sha256, "publish_allowed": False, "content_mutation_performed": False}
+    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "release_identity_sha256": release_id, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": count, "articles": before, "import_envelope_sha256": import_envelope_sha256, "publish_allowed": False, "content_mutation_performed": False}
     mhash = stable_hash(manifest)
     trust = trusted_identity()
     signed = call_signer(mhash, batch, manifest["source_manifest_sha256"], count)
@@ -243,10 +249,10 @@ def finalize(source_ref: str) -> dict[str, Any]:
     verify_sig(mhash, signed["signature_b64"], signed["public_key_b64"])
     if before != snapshot(src, source_path, batch):
         raise Blocked("ARTICLE_BYTES_CHANGED_DURING_FINALIZE")
-    pkg = {"contract": PACKAGE_CONTRACT, "endstamp_contract": ENDSTAMP_CONTRACT, "status": "ENDSTEMPEL_PASS", "batch_sha256": batch, "article_manifest": manifest, "article_manifest_sha256": mhash, "import_envelope": import_envelope, "import_envelope_sha256": import_envelope_sha256, "signature_algorithm": "ED25519", "signing_key_id": signed["signing_key_id"], "signing_public_key_sha256": signed["signing_public_key_sha256"], "public_key_b64": signed["public_key_b64"], "signature_b64": signed["signature_b64"], "publish_allowed": False, "content_mutation_performed": False}
+    pkg = {"contract": PACKAGE_CONTRACT, "endstamp_contract": ENDSTAMP_CONTRACT, "status": "ENDSTEMPEL_PASS", "batch_sha256": batch, "release_identity_sha256": release_id, "article_manifest": manifest, "article_manifest_sha256": mhash, "import_envelope": import_envelope, "import_envelope_sha256": import_envelope_sha256, "signature_algorithm": "ED25519", "signing_key_id": signed["signing_key_id"], "signing_public_key_sha256": signed["signing_public_key_sha256"], "public_key_b64": signed["public_key_b64"], "signature_b64": signed["signature_b64"], "publish_allowed": False, "content_mutation_performed": False}
     pkg["package_payload_sha256"] = stable_hash(pkg)
-    outdir = REPO / ".pferde-final"
-    outdir.mkdir(exist_ok=True)
+    outdir = REPO / ".pferde-final" / release_id
+    outdir.mkdir(parents=True, exist_ok=True)
     out = outdir / FINAL_FILENAME
     if out.exists():
         raise Blocked("REPLAY_BLOCKED")
@@ -260,7 +266,21 @@ def finalize(source_ref: str) -> dict[str, Any]:
         tmp.unlink(missing_ok=True)
         out.unlink(missing_ok=True)
         raise
-    return {"ok": True, "status": "GITHUB_FINAL_RELEASE_PASS", "final_ref": str(out.relative_to(REPO)), "final_sha256": file_sha256(out), "batch_sha256": batch, "article_count": count, "publish_allowed": False, "content_mutation_performed": False}
+    return {
+        "ok": True,
+        "status": "GITHUB_FINAL_RELEASE_PASS",
+        "final_ref": str(out.relative_to(REPO)),
+        "final_sha256": file_sha256(out),
+        # Existing protected workflow consumes this legacy output key for its
+        # artifact/release tag. It is deliberately the unique release identity;
+        # the actual logical content batch remains signed inside the package.
+        "batch_sha256": release_id,
+        "content_batch_sha256": batch,
+        "release_identity_sha256": release_id,
+        "article_count": count,
+        "publish_allowed": False,
+        "content_mutation_performed": False,
+    }
 
 def main() -> int:
     try:
