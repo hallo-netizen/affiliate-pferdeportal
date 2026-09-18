@@ -200,7 +200,7 @@ def main():
 
     nl=production_checks.no_legacy_runtime_dependencies(REPO); assert nl['status']=='PASS' and nl['legacy_import_count']==0; results.append(('NEG_NO_LEGACY_RUNTIME',{}))
 
-    report={'contract':'SYSTEM4_FULL_LOCAL_ROOT_TO_FILE_ACCEPTANCE_V2','status':'PASS','positive':results[0][1],'tests':[{'name':n,'status':'PASS','detail':d} for n,d in results],'test_count':len(results),'real_languagetool_sha256':production_checks.LT_JAR_SHA256,'real_ppm_sha256':production_checks.PPM_PACKAGE_SHA256,'mocks_used':False,'codex_used':False,'merge_or_publish':False,'elapsed_seconds':round(time.monotonic()-start,3),'final_file':str(final)}
+    report={'contract':'SYSTEM4_FULL_LOCAL_ROOT_TO_FILE_ACCEPTANCE_V2','status':'PASS','positive':results[0][1],'tests':[{'name':n,'status':'PASS','detail':d} for n,d in results],'test_count':len(results),'real_languagetool_sha256':production_checks.LT_JAR_SHA256,'real_ppm_sha256':production_checks.PPM_PACKAGE_SHA256,'mocks_used':False,'codex_used':False,'repair_proof_level':'REPAIR_ROUTING_PROVEN','real_codex_repair_proven':False,'repair_worker':'PREBUILT_FINAL_FIXTURE','prepared_final_fixture_used':True,'merge_or_publish':False,'elapsed_seconds':round(time.monotonic()-start,3),'final_file':str(final)}
     report_path=output_root/'SYSTEM4_FULL_LOCAL_ACCEPTANCE_REPORT.json'; report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
     print(json.dumps(report,ensure_ascii=False,indent=2))
     return 0

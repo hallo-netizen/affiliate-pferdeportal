@@ -1,0 +1,18 @@
+{
+  "contract": "SYSTEM4_HUMAN_TEXT_QUALITY_REFERENCE_V1",
+  "source": "USER_APPROVED_CODEX_ARTICLE_20260918",
+  "topic": "Putzplatzmatten für Pferde",
+  "article_sha256": "b920d086ed9707d4be770cde87f25d5cc8e34717637264d5cc179dae15245b4f",
+  "word_count": 932,
+  "byte_count": 7186,
+  "line_count": 60,
+  "content_quality_user_approved": true,
+  "approval_scope": "CONTENT_ONLY",
+  "structural_compliance_claimed": false,
+  "fullcheck_pass_claimed": false,
+  "production_pass_claimed": false,
+  "allowed_as_repair_fixture": false,
+  "allowed_as_fullcheck_pass_fixture": false,
+  "allowed_as_production_article": false,
+  "purpose": "Positive text-quality reference only. Structural/format defects are a separate dimension and this body must never be used to manufacture a PASS or to stand in for a live Codex repair."
+}
