@@ -1,0 +1,138 @@
+name: Konzept Null Reconstruction Hardtest
+
+on:
+  push:
+    branches:
+      - hobbyroom/konzept-null-startmaster0102-isolated
+    paths:
+      - 'konzept_null/**'
+      - '.github/workflows/konzept-null-reconstruction-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hardtest:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prove exact branch and isolation files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF_NAME}" = "hobbyroom/konzept-null-startmaster0102-isolated"
+          test -f konzept_null/PFERDE_ATELIER_START_HERE.json
+          test -f konzept_null/CURRENT_STATE.json
+          test -f konzept_null/ISOLATION_POLICY.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('konzept_null/ISOLATION_POLICY.json').read_text())
+          required=[
+            'allow_main_write','allow_pull_request','allow_merge','allow_deploy',
+            'allow_wordpress_access','allow_wordpress_write','allow_publish',
+            'allow_external_write','allow_production_state_mutation',
+            'allow_startmaster0107_mutation','allow_current_startmaster_mutation'
+          ]
+          assert all(p.get(k) is False for k in required), p
+          assert p['historical_commit']=='be89fa13c170700e9753666d1d52bfbd8b28d810'
+          print('KONZEPT_NULL_ISOLATION_POLICY_PASS')
+          PY
+
+      - name: Run original Konzept Null unit tests
+        working-directory: konzept_null
+        run: python3 -m unittest -v test_konzept_null_runner.py
+
+      - name: Run original preflight
+        run: python3 konzept_null/konzept_null_runner.py preflight
+
+      - name: Verify vendored runtime package hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          PPM=konzept_null/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
+          PSERC=konzept_null/runtime_packages/PSERC-FIX.zip
+          test -f "$PPM"
+          test -f "$PSERC"
+          ppm_hash=$(sha256sum "$PPM" | awk '{print $1}')
+          pserc_hash=$(sha256sum "$PSERC" | awk '{print $1}')
+          echo "PPM_ZIP_SHA256=$ppm_hash"
+          echo "PSERC_ZIP_SHA256=$pserc_hash"
+          test "$ppm_hash" = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+          unzip -t "$PPM"
+          unzip -t "$PSERC"
+          echo "RUNTIME_ZIP_INTEGRITY_PASS"
+
+      - name: Inspect PPM 6.7.9 package and prove version
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp -d)
+          unzip -q konzept_null/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d "$tmp/ppm"
+          echo "PPM_FILES=$(find "$tmp/ppm" -type f | wc -l)"
+          grep -RIl --exclude='*.map' -E '6\.7\.9|Version:[[:space:]]*6\.7\.9' "$tmp/ppm" | head -20
+          if ! grep -RIl -E '6\.7\.9|Version:[[:space:]]*6\.7\.9' "$tmp/ppm" >/dev/null; then
+            echo "PPM_6_7_9_VERSION_MARKER_MISSING" >&2
+            exit 2
+          fi
+          echo "PPM_6_7_9_PACKAGE_STRUCTURE_PASS"
+
+      - name: Verify generic 1 7 25 batch initialization
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, tempfile
+          from pathlib import Path
+          from unittest import mock
+          import sys
+          sys.path.insert(0,'konzept_null')
+          import konzept_null_runner as r
+          for count in (1,7,25):
+              with tempfile.TemporaryDirectory() as td:
+                  root=Path(td)
+                  src=root/'input.json'
+                  items=[{'title':f'T{i}','target_keyword':f'K{i}','category':'C','article_type':'Beratung','plan_slot':f'S{i}'} for i in range(count)]
+                  src.write_text(json.dumps({'items':items}),encoding='utf-8')
+                  with mock.patch.object(r,'branch_name',return_value=r.EXPECTED_BRANCH), mock.patch.object(r,'ROOT',root):
+                      with mock.patch.object(r,'safe_workdir',side_effect=lambda rid,root=root: ((root/'work'/rid).mkdir(parents=True,exist_ok=True) or (root/'work'/rid))):
+                          r.cmd_init(str(src))
+                  states=list((root/'work').glob('*/RUN_STATE.json'))
+                  assert len(states)==1
+                  d=json.loads(states[0].read_text())
+                  assert d['article_count']==count
+                  assert d['publish_allowed'] is False
+                  assert d['wordpress_access_allowed'] is False
+                  assert d['external_write_allowed'] is False
+                  print(f'KONZEPT_NULL_BATCH_{count}_PASS')
+          PY
+
+      - name: Hard negative tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,tempfile,sys
+          from pathlib import Path
+          from unittest import mock
+          sys.path.insert(0,'konzept_null')
+          import konzept_null_runner as r
+          blocked=0
+          try:
+              with mock.patch.object(r,'branch_name',return_value='main'):
+                  r.guard()
+          except SystemExit:
+              blocked+=1
+          with tempfile.TemporaryDirectory() as td:
+              p=Path(td)/'bad.json'
+              p.write_text(json.dumps({'items':[]}),encoding='utf-8')
+              try:
+                  with mock.patch.object(r,'branch_name',return_value=r.EXPECTED_BRANCH):
+                      r.cmd_init(str(p))
+              except SystemExit:
+                  blocked+=1
+          assert blocked==2
+          print('KONZEPT_NULL_NEGATIVE_TESTS_PASS')
+          PY
