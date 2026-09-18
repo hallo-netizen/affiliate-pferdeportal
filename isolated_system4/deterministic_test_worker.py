@@ -437,10 +437,10 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         sections['conclusion'] = conclusion_heading + conclusion_paragraphs[:2]
 
         table_phrases = (
-            'Kontrolle zeigt Zustand.',
-            'Zustand zeigt Kontrolle.',
-            'Prüfung zeigt Zustand.',
-            'Zustand zeigt Prüfung.',
+            'Kontrolle Zustand Beobachtung',
+            'Zustand Beobachtung Kontrolle',
+            'Beobachtung Kontrolle Zustand',
+            'Kontrolle Beobachtung Zustand',
         )
         table_cell_counter = [0]
         def _flatten_table_cells(value: str) -> str:
@@ -454,6 +454,13 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
             return re.sub(r'(?is)<td([^>]*)>(.*?)</td>', repl, value)
 
         sections[table_block] = [_flatten_table_cells(row) for row in sections.get(table_block, [])]
+        sections[table_block] = [
+            row.replace(
+                '<thead><tr><th>Prüfbereich</th><th>Beobachtung</th><th>Handlung</th></tr></thead>',
+                '<thead><tr><th>Kontrolle</th><th>Zustand</th><th>Beobachtung</th></tr></thead>',
+            )
+            for row in sections[table_block]
+        ]
 
     # In the dedicated real7 proof, the first workshop pass intentionally leaves
     # one repairable conclusion defect. This proves that a still-bad article loops
