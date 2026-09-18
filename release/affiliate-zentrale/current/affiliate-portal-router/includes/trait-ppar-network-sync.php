@@ -365,14 +365,14 @@ trait PPAR_Network_Sync_Trait {
         return $safe;
     }
 
-    /**
-     * Vollautomatischer Normalbetrieb: der Providerkatalog selbst ist Autoritaet.
-     * Nur Programme, die ADCELL aktuell als accepted + aktiv meldet, duerfen
-     * laufen. Eine lokale Positivliste ist keine Startvoraussetzung mehr.
-     */
-    private function adcell_api_v2_active_programmes($refresh = true) {
+    private function adcell_api_v2_allowlisted_programmes($refresh = true) {
+        $allowlist = $this->adcell_program_id_allowlist();
+        if (!$allowlist) {
+            return new WP_Error('adcell_program_allowlist_empty', 'ADCELL programId-Allowlist ist leer; alle Programme bleiben fail-closed gesperrt.');
+        }
         $catalog = $refresh ? $this->adcell_api_v2_refresh_programme_catalog() : $this->adcell_api_v2_programme_catalog();
         if (is_wp_error($catalog)) { return $catalog; }
+        $allowed = array_fill_keys($allowlist, true);
         $out = array();
         foreach ((array) $catalog as $programme) {
             if (!is_array($programme)) { continue; }
@@ -380,30 +380,23 @@ trait PPAR_Network_Sync_Trait {
             $accepted = strtolower(trim((string) ($programme['affiliateStatus'] ?? $programme['relationship'] ?? ''))) === 'accepted';
             $active = (string) ($programme['isActive'] ?? ($programme['status'] ?? '')) === '1'
                 || sanitize_key((string) ($programme['status'] ?? '')) === 'active';
-            if ($id <= 0 || !$accepted || !$active) { continue; }
+            if ($id <= 0 || !isset($allowed[$id]) || !$accepted || !$active) { continue; }
             $programme['id'] = $id;
             $programme['name'] = sanitize_text_field((string) ($programme['name'] ?? $programme['programName'] ?? ('ADCELL ' . $id)));
             $out[$id] = $programme;
         }
+        if (!$out) {
+            return new WP_Error('adcell_allowlist_no_active_programme', 'Kein freigegebenes ADCELL-Programm ist aktuell zugleich accepted und aktiv.');
+        }
         return $out;
-    }
-
-    // Backward-compatible reader for diagnostics only. It must not gate the
-    // normal automation path anymore.
-    private function adcell_api_v2_allowlisted_programmes($refresh = true) {
-        $active = $this->adcell_api_v2_active_programmes($refresh);
-        if (is_wp_error($active)) { return $active; }
-        $allowlist = array_fill_keys($this->adcell_program_id_allowlist(), true);
-        if (!$allowlist) { return array(); }
-        return array_intersect_key($active, $allowlist);
     }
 
     private function adcell_api_v2_programme($program_id) {
         $program_id = absint($program_id);
-        if ($program_id <= 0) {
-            return new WP_Error('adcell_program_invalid', 'ADCELL-programId fehlt.');
+        if ($program_id <= 0 || !in_array($program_id, $this->adcell_program_id_allowlist(), true)) {
+            return new WP_Error('adcell_program_not_allowlisted', 'ADCELL-Programm ist nicht in der expliziten programId-Allowlist freigegeben.');
         }
-        $programmes = $this->adcell_api_v2_active_programmes(true);
+        $programmes = $this->adcell_api_v2_allowlisted_programmes(true);
         if (is_wp_error($programmes)) { return $programmes; }
         return isset($programmes[$program_id]) ? $programmes[$program_id] : new WP_Error('adcell_program_not_active_accepted', 'ADCELL-Programm ist aktuell nicht accepted und aktiv.');
     }
@@ -419,8 +412,9 @@ trait PPAR_Network_Sync_Trait {
         if ($program_id <= 0 || !isset($paths[$type])) {
             return new WP_Error('adcell_promotion_request_invalid', 'Ungültiger ADCELL-Werbemittelabruf.');
         }
-        $programme = $this->adcell_api_v2_programme($program_id);
-        if (is_wp_error($programme)) { return $programme; }
+        if (!in_array($program_id, $this->adcell_program_id_allowlist(), true)) {
+            return new WP_Error('adcell_program_not_allowlisted', 'ADCELL-Werbemittel für nicht freigegebenes Programm blockiert.');
+        }
         $token = $this->adcell_api_v2_token();
         if (is_wp_error($token)) { return $token; }
         $items = array();
@@ -747,324 +741,6 @@ trait PPAR_Network_Sync_Trait {
         update_option($option, $settings, false);
     }
 
-
-    private function partner_analytics_period_windows() {
-        $now = current_time('timestamp');
-        $today = strtotime(wp_date('Y-m-d 00:00:00', $now));
-        if ($today === false) { $today = $now - ($now % DAY_IN_SECONDS); }
-        return array(
-            'today'=>array('start'=>$today,'end'=>$now),
-            '7'=>array('start'=>strtotime('-6 days', $today),'end'=>$now),
-            '30'=>array('start'=>strtotime('-29 days', $today),'end'=>$now),
-            'all'=>array('start'=>946684800,'end'=>$now),
-        );
-    }
-
-    private function partner_analytics_ingest_original_report($provider, $report) {
-        $provider = sanitize_key((string) $provider);
-        if ($provider === '' || !is_array($report) || empty($report['source'])) { return false; }
-        do_action('ppar_partner_analytics_ingest', $provider, $report);
-        return true;
-    }
-
-    private function partner_analytics_awin_range($start, $end) {
-        $settings = $this->network_settings('awin');
-        $publisher_id = preg_replace('/[^0-9]/', '', (string) ($settings['publisher_id'] ?? ''));
-        $token = $this->network_secret('awin', 'access_token', $settings);
-        if ($publisher_id === '' || $token === '') {
-            return new WP_Error('awin_report_credentials_missing', 'Awin-Reportingzugang fehlt.');
-        }
-
-        $query = array(
-            'startDate'=>wp_date('Y-m-d', absint($start)),
-            'endDate'=>wp_date('Y-m-d', absint($end)),
-            'dateType'=>'transaction',
-            'region'=>'DE',
-            'timezone'=>'Europe/Berlin',
-        );
-        $base = 'https://api.awin.com/publishers/' . rawurlencode($publisher_id) . '/reports/advertiser';
-        $args = array(
-            'timeout'=>25,
-            'redirection'=>1,
-            'headers'=>array('Accept'=>'application/json','Authorization'=>'Bearer ' . $token),
-            'limit_response_size'=>4194304,
-        );
-        $response = $this->api_response(wp_remote_get(add_query_arg($query, $base), $args));
-        if (empty($response['ok']) && in_array(absint($response['code'] ?? 0), array(401,403), true)) {
-            $query['accessToken'] = $token;
-            $response = $this->api_response(wp_remote_get(
-                add_query_arg($query, $base),
-                array('timeout'=>25,'redirection'=>1,'headers'=>array('Accept'=>'application/json'),'limit_response_size'=>4194304)
-            ));
-        }
-        if (empty($response['ok'])) {
-            return new WP_Error('awin_report_http', 'Awin-Performance-Report nicht verfügbar: ' . sanitize_text_field((string) ($response['message'] ?? 'HTTP-Fehler')));
-        }
-
-        $json = json_decode((string) ($response['body'] ?? ''), true);
-        if (!is_array($json)) { return new WP_Error('awin_report_json', 'Awin-Performance-Report ist kein gültiges JSON.'); }
-        $rows = isset($json['body']) && is_array($json['body']) ? $json['body'] : $json;
-        if (isset($rows['advertiserId'])) { $rows = array($rows); }
-        if (!is_array($rows)) { return new WP_Error('awin_report_schema', 'Awin-Performance-Report hat kein auswertbares Zeilenschema.'); }
-
-        $out = array('awin'=>array(),'otto'=>array());
-        foreach ($rows as $row) {
-            if (!is_array($row)) { continue; }
-            $advertiser_id = absint($row['advertiserId'] ?? 0);
-            $bucket = ($advertiser_id > 0 && $advertiser_id === absint(self::OTTO_AWIN_ADVERTISER_ID)) ? 'otto' : 'awin';
-            $currency = strtoupper(sanitize_text_field((string) ($row['currency'] ?? '')));
-            if (!preg_match('/^[A-Z]{3}$/', $currency)) { $currency = ''; }
-            $currency_key = $currency !== '' ? $currency : '__unknown__';
-            if (!isset($out[$bucket][$currency_key])) {
-                $out[$bucket][$currency_key] = array('clicks'=>0,'orders'=>0,'sales'=>0.0,'commission'=>0.0,'money_seen'=>false);
-            }
-            $out[$bucket][$currency_key]['clicks'] += max(0, (int) ($row['clicks'] ?? 0));
-            $out[$bucket][$currency_key]['orders'] += max(0, (int) ($row['totalNo'] ?? 0));
-            if (is_numeric($row['totalValue'] ?? null)) {
-                $out[$bucket][$currency_key]['sales'] += (float) $row['totalValue'];
-                $out[$bucket][$currency_key]['money_seen'] = true;
-            }
-            if (is_numeric($row['totalComm'] ?? null)) {
-                $out[$bucket][$currency_key]['commission'] += (float) $row['totalComm'];
-                $out[$bucket][$currency_key]['money_seen'] = true;
-            }
-        }
-        return $out;
-    }
-
-    private function partner_analytics_awin_reports() {
-        $reports = array(
-            'awin'=>array('source'=>'Awin Advertiser Performance API','currency'=>'','updated_at'=>time(),'periods'=>array()),
-            'otto'=>array('source'=>'Awin Advertiser Performance API / OTTO','currency'=>'','updated_at'=>time(),'periods'=>array()),
-        );
-        $currencies_seen = array('awin'=>array(),'otto'=>array());
-        $successful = 0;
-
-        foreach ($this->partner_analytics_period_windows() as $period=>$window) {
-            $result = $this->partner_analytics_awin_range($window['start'], $window['end']);
-            if (is_wp_error($result)) { continue; }
-            $successful++;
-
-            foreach (array('awin','otto') as $bucket) {
-                $groups = (array) ($result[$bucket] ?? array());
-                if (!$groups) {
-                    $reports[$bucket]['periods'][$period] = array('clicks'=>0,'orders'=>0,'sales'=>0.0,'commission'=>0.0);
-                    continue;
-                }
-                $clicks = 0; $orders = 0; $sales = 0.0; $commission = 0.0;
-                $money_ok = true;
-                foreach ($groups as $currency=>$vals) {
-                    $clicks += (int) ($vals['clicks'] ?? 0);
-                    $orders += (int) ($vals['orders'] ?? 0);
-                    if ($currency === '__unknown__') { $money_ok = false; }
-                    else { $currencies_seen[$bucket][$currency] = true; }
-                    $sales += (float) ($vals['sales'] ?? 0);
-                    $commission += (float) ($vals['commission'] ?? 0);
-                }
-                if (count(array_filter(array_keys($groups), static function($c){ return $c !== '__unknown__'; })) !== count($groups)) {
-                    $money_ok = false;
-                }
-                if (count(array_filter(array_keys($groups), static function($c){ return $c !== '__unknown__'; })) > 1) {
-                    $money_ok = false;
-                }
-                $reports[$bucket]['periods'][$period] = array(
-                    'clicks'=>$clicks,
-                    'orders'=>$orders,
-                    'sales'=>$money_ok ? $sales : null,
-                    'commission'=>$money_ok ? $commission : null,
-                );
-            }
-        }
-
-        foreach (array('awin','otto') as $bucket) {
-            $keys = array_keys($currencies_seen[$bucket]);
-            if (count($keys) === 1) {
-                $reports[$bucket]['currency'] = $keys[0];
-            } elseif (count($keys) > 1) {
-                $reports[$bucket]['currency'] = '';
-                foreach ($reports[$bucket]['periods'] as &$row) {
-                    $row['sales'] = null;
-                    $row['commission'] = null;
-                }
-                unset($row);
-            }
-        }
-
-        return $successful > 0 ? $reports : new WP_Error('awin_reports_unavailable', 'Kein Awin-Reportzeitraum konnte geladen werden.');
-    }
-
-    private function partner_analytics_decimal($value) {
-        $value = trim((string) $value);
-        if ($value === '') { return null; }
-        $value = preg_replace('/[^0-9,\.\-]/', '', $value);
-        if ($value === '' || $value === '-') { return null; }
-        if (strpos($value, ',') !== false && strpos($value, '.') !== false) {
-            if (strrpos($value, ',') > strrpos($value, '.')) {
-                $value = str_replace('.', '', $value);
-                $value = str_replace(',', '.', $value);
-            } else {
-                $value = str_replace(',', '', $value);
-            }
-        } elseif (strpos($value, ',') !== false) {
-            $value = str_replace(',', '.', $value);
-        }
-        return is_numeric($value) ? (float) $value : null;
-    }
-
-    private function partner_analytics_adcell_range($start, $end) {
-        $settings = $this->network_settings('adcell');
-        $username = $this->network_secret('adcell', 'username', $settings);
-        $password = $this->network_secret('adcell', 'password', $settings);
-        if ($username === '' || $password === '') {
-            return new WP_Error('adcell_report_credentials_missing', 'ADCELL-Reportingzugang fehlt.');
-        }
-
-        $url = add_query_arg(array(
-            'sarts'=>'p','pid'=>'a','status'=>'a','subid'=>'','eventid'=>'a',
-            'timestart'=>absint($start),'timeend'=>absint($end),
-            'uname'=>$username,'pass'=>$password,
-        ), 'https://www.adcell.de/csv_affilistats.php');
-
-        $response = $this->api_response(wp_safe_remote_get($url, array(
-            'timeout'=>25,
-            'redirection'=>1,
-            'headers'=>array('Accept'=>'text/csv,text/plain'),
-            'limit_response_size'=>4194304,
-        )));
-        if (empty($response['ok'])) { return new WP_Error('adcell_report_http', 'ADCELL-Statistikreport nicht verfügbar.'); }
-
-        $body = trim((string) ($response['body'] ?? ''));
-        if ($body === '' || stripos($body, '<html') !== false) {
-            return new WP_Error('adcell_report_body', 'ADCELL-Statistikreport ist leer oder kein CSV.');
-        }
-        $lines = preg_split('/\r\n|\r|\n/', $body, -1, PREG_SPLIT_NO_EMPTY);
-        if (!$lines) { return new WP_Error('adcell_report_empty', 'ADCELL-Statistikreport enthält keine Zeilen.'); }
-
-        $headers = str_getcsv(array_shift($lines), ';');
-        $normalized = array();
-        foreach ($headers as $i=>$header) {
-            $key = strtolower(remove_accents(trim((string) $header)));
-            $key = preg_replace('/[^a-z0-9]+/', '_', $key);
-            $normalized[$i] = trim($key, '_');
-        }
-        $find = static function($aliases) use ($normalized) {
-            foreach ($normalized as $i=>$header) {
-                if (in_array($header, $aliases, true)) { return $i; }
-            }
-            return null;
-        };
-
-        $click_i = $find(array('klicks','clicks','click'));
-        $lead_i = $find(array('leads','lead'));
-        $sale_count_i = $find(array('sales','sale','verkaeufe','verkaufe','verkaeufe_sales'));
-        $revenue_i = $find(array('umsatz','warenwert','sales_value','sale_value'));
-        $commission_i = $find(array('provision','provisionen','commission','earnings','verdienst'));
-        $currency_i = $find(array('waehrung','wahrung','currency','currency_code'));
-
-        if ($click_i === null && $lead_i === null && $sale_count_i === null && $revenue_i === null && $commission_i === null) {
-            return new WP_Error('adcell_report_headers', 'ADCELL-CSV enthält keine eindeutig gebundenen Statistikspalten.');
-        }
-
-        $clicks = 0; $orders = 0; $sales = 0.0; $commission = 0.0;
-        $sales_seen = false; $commission_seen = false; $currencies = array();
-
-        foreach ($lines as $line) {
-            $cols = str_getcsv($line, ';');
-            if ($click_i !== null && isset($cols[$click_i])) {
-                $v = $this->partner_analytics_decimal($cols[$click_i]);
-                if ($v !== null) { $clicks += (int) $v; }
-            }
-            foreach (array($lead_i,$sale_count_i) as $ci) {
-                if ($ci !== null && isset($cols[$ci])) {
-                    $v = $this->partner_analytics_decimal($cols[$ci]);
-                    if ($v !== null) { $orders += (int) $v; }
-                }
-            }
-            if ($revenue_i !== null && isset($cols[$revenue_i])) {
-                $v = $this->partner_analytics_decimal($cols[$revenue_i]);
-                if ($v !== null) { $sales += $v; $sales_seen = true; }
-            }
-            if ($commission_i !== null && isset($cols[$commission_i])) {
-                $v = $this->partner_analytics_decimal($cols[$commission_i]);
-                if ($v !== null) { $commission += $v; $commission_seen = true; }
-            }
-            if ($currency_i !== null && isset($cols[$currency_i])) {
-                $currency = strtoupper(trim((string) $cols[$currency_i]));
-                if (preg_match('/^[A-Z]{3}$/', $currency)) { $currencies[$currency] = true; }
-            }
-        }
-
-        $currency_keys = array_keys($currencies);
-        $money_currency_ok = count($currency_keys) === 1;
-        return array(
-            'clicks'=>$click_i === null ? null : $clicks,
-            'orders'=>($lead_i === null && $sale_count_i === null) ? null : $orders,
-            'sales'=>($sales_seen && $money_currency_ok) ? $sales : null,
-            'commission'=>($commission_seen && $money_currency_ok) ? $commission : null,
-            'currency'=>$money_currency_ok ? $currency_keys[0] : '',
-        );
-    }
-
-    private function partner_analytics_adcell_report() {
-        $report = array('source'=>'ADCELL Affiliate-Statistik CSV','currency'=>'','updated_at'=>time(),'periods'=>array());
-        $currencies = array();
-        $successful = 0;
-
-        foreach ($this->partner_analytics_period_windows() as $period=>$window) {
-            $row = $this->partner_analytics_adcell_range($window['start'], $window['end']);
-            if (is_wp_error($row)) { continue; }
-            $successful++;
-            $currency = strtoupper((string) ($row['currency'] ?? ''));
-            if (preg_match('/^[A-Z]{3}$/', $currency)) { $currencies[$currency] = true; }
-            unset($row['currency']);
-            $report['periods'][$period] = $row;
-        }
-        $keys = array_keys($currencies);
-        if (count($keys) === 1) { $report['currency'] = $keys[0]; }
-        if (count($keys) > 1) {
-            foreach ($report['periods'] as &$row) {
-                $row['sales'] = null;
-                $row['commission'] = null;
-            }
-            unset($row);
-        }
-        return $successful > 0 ? $report : new WP_Error('adcell_reports_unavailable', 'Kein ADCELL-Reportzeitraum konnte geladen werden.');
-    }
-
-    private function partner_analytics_refresh_provider($provider) {
-        $provider = sanitize_key((string) $provider);
-        $result = null;
-
-        if ($provider === 'awin') {
-            $result = $this->partner_analytics_awin_reports();
-            if (!is_wp_error($result)) {
-                foreach ($result as $key=>$report) { $this->partner_analytics_ingest_original_report($key, $report); }
-            }
-        } elseif ($provider === 'adcell') {
-            $result = $this->partner_analytics_adcell_report();
-            if (!is_wp_error($result)) { $this->partner_analytics_ingest_original_report('adcell', $result); }
-        } else {
-            $result = apply_filters(
-                'ppar_partner_analytics_fetch_provider_report',
-                null,
-                $provider,
-                $this->partner_analytics_period_windows(),
-                self::PROVIDER_CONTRACT_VERSION
-            );
-            if (is_array($result)) { $this->partner_analytics_ingest_original_report($provider, $result); }
-        }
-
-        $state = get_option('ppar_partner_analytics_refresh_state_v1', array());
-        $state = is_array($state) ? $state : array();
-        $state[$provider] = array(
-            'checked_at'=>time(),
-            'status'=>is_wp_error($result) ? 'unavailable' : (is_array($result) ? 'imported' : 'no_adapter'),
-            'message'=>is_wp_error($result) ? sanitize_text_field($result->get_error_message()) : '',
-        );
-        update_option('ppar_partner_analytics_refresh_state_v1', $state, false);
-        return $result;
-    }
-
     public function handle_run_network_sync() {
         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
         check_admin_referer('ppar_run_network_sync', 'ppar_sync_nonce');
@@ -1130,9 +806,6 @@ trait PPAR_Network_Sync_Trait {
         }
 
         $this->network_sync_insert_run($network, $operation, $status, $started, $counts, $message, $details);
-        if ($status === 'success' && method_exists($this, 'partner_analytics_refresh_provider')) {
-            $this->partner_analytics_refresh_provider($network);
-        }
         wp_safe_redirect(add_query_arg(array(
             'page' => 'affiliate-portal-sync',
             'ppar_sync_network' => $network,
@@ -1167,6 +840,7 @@ trait PPAR_Network_Sync_Trait {
         $awin_counts = $this->network_sync_counts('awin');
         $adcell_counts = $this->network_sync_counts('adcell');
         $adcell_catalog = $this->adcell_api_v2_programme_catalog();
+        $adcell_allowlist = $this->adcell_program_id_allowlist();
         $runs = $this->network_sync_recent_runs();
         ?>
         <div class="wrap ppar-sync-page">
@@ -1192,13 +866,19 @@ trait PPAR_Network_Sync_Trait {
                     <h2>ADCELL API v2</h2>
                     <p><strong>Verbindung:</strong> <?php echo wp_strip_all_tags($this->network_status_html($adcell)); ?><br>
                     <strong>Zuletzt accepted + aktiv:</strong> <?php echo absint(count($adcell_catalog)); ?><br>
-                    <strong>Normalbetrieb:</strong> accepted + aktive Programme laufen automatisch über API v2 → CSV/Banner/Deeplink. Manuelle Sperren bleiben über die zentrale Steuerung möglich; keine positive programId-Pflichtliste und keine manuelle CSV-URL.</p>
+                    <strong>Explizit freigegebene programIds:</strong> <?php echo $adcell_allowlist ? esc_html(implode(', ', $adcell_allowlist)) : 'keine – vollständig gesperrt'; ?><br>
+                    <strong>Normalbetrieb:</strong> API v2 → CSV/Banner/Deeplink; keine manuelle CSV-URL.</p>
                     <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline-block;margin-right:8px">
                         <input type="hidden" name="action" value="ppar_run_network_sync"><input type="hidden" name="network" value="adcell"><input type="hidden" name="operation" value="connection"><?php wp_nonce_field('ppar_run_network_sync','ppar_sync_nonce'); ?>
                         <button class="button button-primary">Token + Programme prüfen</button>
                     </form>
                     <p class="description">Die Prüfung erzeugt einen kurzlebigen ADCELL-Token und liest <code>/affiliate/program/export</code> read-only.</p>
-                    <p class="description">Neue accepted + aktive Programme werden beim nächsten Automationszyklus automatisch aufgenommen. Ein bewusstes Veto erfolgt über die zentrale Partner-/Providersteuerung.</p>
+                    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:14px">
+                        <input type="hidden" name="action" value="ppar_run_network_sync"><input type="hidden" name="network" value="adcell"><input type="hidden" name="operation" value="allowlist"><?php wp_nonce_field('ppar_run_network_sync','ppar_sync_nonce'); ?>
+                        <label><strong>programId-Allowlist</strong><br><input type="text" class="regular-text" name="program_ids" value="<?php echo esc_attr(implode(', ', $adcell_allowlist)); ?>" placeholder="z. B. 123, 456"></label>
+                        <p class="description">Nur diese IDs dürfen laufen – und auch nur solange ADCELL sie aktuell als <code>accepted</code> und <code>isActive=1</code> meldet. Leer = alles gesperrt.</p>
+                        <button class="button">Allowlist speichern</button>
+                    </form>
                     <?php if ($adcell_catalog) : ?><details style="margin-top:12px"><summary>Zuletzt bestätigte accepted+aktive Programme</summary><ul><?php foreach ($adcell_catalog as $programme) : ?><li><code><?php echo absint($programme['id'] ?? 0); ?></code> · <?php echo esc_html((string) ($programme['name'] ?? '')); ?></li><?php endforeach; ?></ul></details><?php endif; ?>
                     <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation&provider=adcell')); ?>">ADCELL-Automatisierung öffnen</a></p>
                 </section>
