@@ -1,5 +1,10 @@
 # PAUL – EIGENE EINGANGSTÜR
 
+<!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
+
+> **Campusweite Ein-Wahrheit-Regel:** Bei jeder Frage nach aktuellem Stand, Blocker oder NEXT ACTION zuerst `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` verwenden und genau eine Current-Autorität auflösen. Diese Tür selbst ist keine Current-Wahrheit.
+
+
 STAND: 2026-09-05
 
 ## 1-KLICK-ÜBERSICHT
@@ -32,7 +37,7 @@ Paul soll ohne Vorwissen sofort verstehen:
 
 1. `protocol/PROJECT_MEMORY/HAUPTPFOERTNER.md`
 2. zuständiges Projektgebäude
-3. zuständiges Büro + CURRENT_STATE + HOBBYRAUM
+3. zuständiges Büro → `AUTORITAETSPLAN.json` → genau eine Current-Autorität
 4. `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
 5. `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
 6. aktiver Zielvertrag
@@ -58,7 +63,7 @@ Damit ist keine Echtzeit-Synchronisation zwischen Chats nötig.
 Der Paul-Branch ist nur technische Werkbank.
 
 Vor Arbeitsbeginn und unmittelbar vor Rückgabe muss Paul den **aktuellen offiziellen Campus-Ref** frisch lesen:
-`protocol/PROJECT_MEMORY/START_HERE.md` → zuständiges Büro → `CURRENT_STATE.md` → `HOBBYRAUM.md`.
+`protocol/PROJECT_MEMORY/START_HERE.md` → `AUTORITAETSPLAN.json` → zuständige Current-Autorität → Frischecheck → NEXT ACTION.
 
 Beim aktuellen Campus-Prototyp ist der offizielle Campus-Ref:
 `hobbyroom/project-memory-campus-v1-20260905`
@@ -84,8 +89,8 @@ Das zuständige Fachbüro bzw. der zuständige Arbeitschat entscheidet:
 Paul führt keine eigene zweite Fachwahrheit.
 
 Für jeden Auftrag gilt:
-- aktueller Bürostand → zuständiges `CURRENT_STATE.md`;
-- aktuelle Arbeit / NEXT ACTION / Branch → zuständiges `HOBBYRAUM.md`;
+- aktueller Bürostand / Blocker / NEXT ACTION → ausschließlich die im `AUTORITAETSPLAN.json` benannte Current-Autorität;
+- Hobbyraum/Paul-Lock → nur abgeleitete Ausführungsbindung;
 - Fehler → `FEHLERREGISTER.md` → autoritative Fehlerquelle;
 - Ziel → `ZIELVERTRAEGE/REGISTER.md` → Hauptquelle;
 - Warum → `AENDERUNGSREGISTER.md`.
