@@ -17,6 +17,8 @@ import signal
 from pathlib import Path
 from typing import Any, Mapping
 
+import block_semantics
+
 PPM_VERSION = "6.7.9"
 PPM_PACKAGE_REL = "control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
 PPM_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
@@ -763,11 +765,18 @@ def run_all(
     if not article_html or text_sha256(article_html) != draft_sha:
         raise ProductionCheckError("SYSTEM4_DRAFT_BINDING_INVALID")
     validate_bound_context(state, fact_pack, production_plan_item)
+    try:
+        semantic_evidence = block_semantics.validate(article_html, state.get("authoring_contract") if isinstance(state.get("authoring_contract"), Mapping) else {})
+    except block_semantics.BlockSemanticRepairRequired as exc:
+        raise RepairRequired("block_semantics", exc.findings) from exc
+    except block_semantics.BlockSemanticError as exc:
+        raise ProductionCheckError("BLOCK_SEMANTIC_AUTHORITY_FAIL:" + str(exc)) from exc
     lt_runtime = run_languagetool(repo, article_html)
     lt_public = {k: v for k, v in lt_runtime.items() if not k.startswith("_")}
     evidence = {
         "no_legacy": no_legacy_runtime_dependencies(repo),
         "no_external_links": no_external_links(article_html),
+        "block_semantics": semantic_evidence,
         "languagetool": lt_public,
         "ppm679": run_ppm_content_validator(repo, article_html, fact_pack, production_plan_item, lt_runtime),
     }

@@ -1,9 +1,10 @@
 from __future__ import annotations
-import json, subprocess, sys
+import hashlib, json, subprocess, sys
 from pathlib import Path
 
 from controller_core import *  # noqa: F401,F403
 import controller_core as core
+import block_semantics
 import global_workshop
 import production_binding
 import production_checks
@@ -128,6 +129,51 @@ def _guarded_context(argv:list[str])->int:
     print('SYSTEM4_MACHINE_PRODUCTION_BINDING_PASS')
     return 0
 
+def _record_semantic_draft_workshop(workspace:Path,text:str,exc:block_semantics.BlockSemanticRepairRequired)->int:
+    state,state_path=core.load(workspace)
+    _require(state.get('phase')=='DRAFT_REQUIRED','SEMANTIC_DRAFT_PHASE_MISMATCH')
+    state['draft_markdown']=text
+    state['draft_sha256']=hashlib.sha256(text.encode('utf-8')).hexdigest()
+    state['revision']=int(state.get('revision') or 0)+1
+    findings=[dict(row) for row in exc.findings]
+    first=str(findings[0].get('error_code') or 'BLOCK_CONTENT_SEMANTIC_REPAIR_REQUIRED') if findings else 'BLOCK_CONTENT_SEMANTIC_REPAIR_REQUIRED'
+    state['checks']={
+        'status':'FAIL','mode':'GLOBAL_WORKSHOP','errors':['FULL:block_semantics:'+first],
+        'findings':findings,'checker':'block_semantics','checked_draft_sha256':state['draft_sha256'],
+    }
+    state['last_error']='FULL:block_semantics:'+first
+    state['phase']='REPAIR_REQUIRED'
+    core.save(state,state_path)
+    request,path,_=global_workshop.capture(
+        'DRAFT_BLOCK_SEMANTICS',
+        exc,
+        output_dir=workspace,
+        findings=findings,
+        context={'workspace':str(workspace),'checker':'block_semantics'},
+    )
+    _require(request.get('repairable') is True,'SEMANTIC_DRAFT_WORKSHOP_MUST_BE_REPAIRABLE')
+    result=repair_router.route(workspace)
+    repair_router.verify_continuation_result(workspace,result)
+    _require(result.get('status')=='SAME_ARTICLE_BODY_REPAIR','SEMANTIC_DRAFT_REPAIR_ROUTE_INVALID')
+    print('SYSTEM4_WORKSHOP_REQUIRED:'+str(path)+':BLOCK_SEMANTICS:DRAFT_BODY:SAME_ARTICLE_BODY_REPAIR')
+    return 3
+
+def _guarded_draft(argv:list[str])->int:
+    _require(len(argv)==4,'BAD_DRAFT_ARGS')
+    workspace=Path(argv[2]); draft_path=Path(argv[3])
+    state,_=core.load(workspace)
+    if state.get('phase')!='DRAFT_REQUIRED':
+        return core.main(argv)
+    text=draft_path.read_text(encoding='utf-8').strip()
+    if not text:
+        return core.main(argv)
+    contract=state.get('authoring_contract') if isinstance(state.get('authoring_contract'),dict) else {}
+    try:
+        block_semantics.validate(text,contract)
+    except block_semantics.BlockSemanticRepairRequired as exc:
+        return _record_semantic_draft_workshop(workspace,text,exc)
+    return core.main(argv)
+
 def _route_repair_after_fullcheck(workspace:Path,rc:int)->int:
     if rc!=3:
         return rc
@@ -171,6 +217,7 @@ def main(argv:list[str])->int:
         if argv[1]=='context': return _guarded_context(argv)
         if len(argv)>=3:
             supervisor.verify_controller_binding(Path(argv[2]))
+        if argv[1]=='draft': return _guarded_draft(argv)
         rc=core.main(argv)
         if argv[1]=='fullcheck' and len(argv)==3:
             return _route_repair_after_fullcheck(Path(argv[2]),rc)

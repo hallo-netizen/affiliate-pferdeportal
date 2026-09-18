@@ -2,7 +2,7 @@ from __future__ import annotations
 import copy,hashlib,json
 from pathlib import Path
 
-import authoring_contract,controller,point0_snapshot,root_entry,supervisor
+import authoring_contract,block_semantics,controller,point0_snapshot,root_entry,supervisor
 from live_route_test_support import head,production_snapshot_bytes,write_json
 from real_source_fixture import source_and_claims
 
@@ -180,7 +180,8 @@ def valid_real_article(state:dict,index:int)->str:
     seed=10
     for bi,name in enumerate(other):
         intent=intent_terms[(bi+index+style_index)%len(intent_terms)]
-        heading=f'{intent} {heading_suffixes[(bi+index+style_index)%len(heading_suffixes)]}'
+        semantic_heading=block_semantics.canonical_heading(c,name)
+        heading=semantic_heading or f'{intent} {heading_suffixes[(bi+index+style_index)%len(heading_suffixes)]}'
         parts=[f'<h2>{heading}</h2>']
         section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
         for pi in range(paras_per):
