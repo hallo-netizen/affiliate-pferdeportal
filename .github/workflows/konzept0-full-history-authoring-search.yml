@@ -1,0 +1,93 @@
+name: Konzept 0 Full History Authoring Archive Search
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/FULL_ARCHIVE_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Search historical relevant ZIP blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --all --tags --prune || true
+          ROOT="isolated_system0/KONZEPT_0"
+          OUT="$ROOT/FULL_HISTORY_AUTHORING_ARCHIVE_REPORT.txt"
+          mkdir -p "$ROOT/runtime/recovered_authoring"
+          : > "$OUT"
+
+          git rev-list --objects --all             | grep -Ei '\.zip$'             | grep -Ei 'master|text|artikel|production|workflow|pferde|ppm|startmaster|quelle|codex'             | awk '!seen[$1]++' > /tmp/k0zipobjects.txt || true
+
+          count="$(wc -l </tmp/k0zipobjects.txt | tr -d ' ')"
+          echo "RELEVANT_UNIQUE_ZIP_BLOBS=$count" | tee -a "$OUT"
+          found=0
+          while read -r oid path; do
+            [ -n "$oid" ] || continue
+            tmp="$(mktemp --suffix=.zip)"
+            if ! git cat-file blob "$oid" > "$tmp" 2>/dev/null; then rm -f "$tmp"; continue; fi
+            if ! unzip -t "$tmp" >/dev/null 2>&1; then rm -f "$tmp"; continue; fi
+            matches="$(unzip -l "$tmp" 2>/dev/null | grep -Ei '17_RULE_EXECUTION_CHAIN|build_cross_domain_articles\.py|cross_domain_articles|RULE_EXECUTION_CHAIN' || true)"
+            if [ -n "$matches" ]; then
+              echo "BLOB=$oid PATH_HINT=$path" | tee -a "$OUT"
+              printf '%s\n' "$matches" | tee -a "$OUT"
+              member="$(printf '%s\n' "$matches" | grep -Ei 'build_cross_domain_articles\.py' | head -1 | awk '{for(i=4;i<=NF;i++){printf "%s%s",$i,(i<NF?" ":"")}}')"
+              if [ -n "$member" ]; then
+                unzip -p "$tmp" "$member" > "$ROOT/runtime/recovered_authoring/build_cross_domain_articles.py"
+                echo "EXTRACTED_BLOB=$oid MEMBER=$member" | tee -a "$OUT"
+                found=1
+                rm -f "$tmp"
+                break
+              fi
+            fi
+            rm -f "$tmp"
+          done </tmp/k0zipobjects.txt
+          echo "AUTHORING_SCRIPT_FOUND=$found" | tee -a "$OUT"
+
+          if [ "$found" -eq 1 ]; then
+            python3 -m py_compile "$ROOT/runtime/recovered_authoring/build_cross_domain_articles.py"
+            sha256sum "$ROOT/runtime/recovered_authoring/build_cross_domain_articles.py" | tee -a "$OUT"
+          fi
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re
+          root=Path("isolated_system0/KONZEPT_0")
+          report=(root/"FULL_HISTORY_AUTHORING_ARCHIVE_REPORT.txt").read_text(encoding="utf-8")
+          p=root/"runtime/recovered_authoring/build_cross_domain_articles.py"
+          m=re.search(r'RELEVANT_UNIQUE_ZIP_BLOBS=(\d+)',report)
+          out={
+            "contract":"KONZEPT0_FULL_HISTORY_AUTHORING_ARCHIVE_SEARCH_V1",
+            "status":"PASS",
+            "relevant_unique_zip_blobs_scanned":int(m.group(1)) if m else None,
+            "authoring_script_found":p.is_file(),
+            "authoring_script_sha256":hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None,
+            "concept_1_2_3_4_4a_runtime_contact":False,
+            "codex_started":False,
+            "publish_performed":False
+          }
+          (root/"FULL_HISTORY_AUTHORING_ARCHIVE_EVIDENCE.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Commit result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "konzept0-full-history-search"
+          git config user.email "actions@users.noreply.github.com"
+          git add isolated_system0/KONZEPT_0/FULL_HISTORY_AUTHORING_ARCHIVE_REPORT.txt                   isolated_system0/KONZEPT_0/FULL_HISTORY_AUTHORING_ARCHIVE_EVIDENCE.json                   isolated_system0/KONZEPT_0/runtime/recovered_authoring
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Konzept 0: search full Git history for original authoring chain"
+          git push origin HEAD:isolated-system0-legacy-text-20260828
