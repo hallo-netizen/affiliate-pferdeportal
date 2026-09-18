@@ -1,0 +1,46 @@
+{
+  "contract": "KONZEPT_NULL_CHAT_NAVIGATION_V1",
+  "authority_order": [
+    "PFERDE_ATELIER_START_HERE.json",
+    "CURRENT_STATE.json",
+    "RUN_STATE.json"
+  ],
+  "navigation_source": "NEXT_ALLOWED_STEP_ONLY",
+  "memory_is_navigation_authority": false,
+  "chat_history_is_navigation_authority": false,
+  "free_workflow_decisions": false,
+  "no_stop_after_internal_pass": true,
+  "stop_only_on": [
+    "required user action or missing required input",
+    "hard fail not locally repairable within bound rules",
+    "irreversible action outside explicit authorization",
+    "requested work block complete"
+  ],
+  "stage_order": [
+    "METADATA",
+    "SOURCE_ORDER",
+    "RESEARCH",
+    "SOURCE_SNAPSHOT",
+    "FACT_PACK",
+    "CLAIM_BINDING",
+    "CANONICAL_ARTICLE",
+    "PRODUCTION_PLAN_V4",
+    "LANGUAGETOOL_6_8",
+    "PPM_6_7_9",
+    "LOCAL_TEST_PACKAGE"
+  ],
+  "next_step_map": {
+    "METADATA": "CREATE_SOURCE_ORDER",
+    "SOURCE_ORDER": "PERFORM_BOUND_RESEARCH",
+    "RESEARCH": "CREATE_SOURCE_SNAPSHOT",
+    "SOURCE_SNAPSHOT": "CREATE_FACT_PACK",
+    "FACT_PACK": "BIND_CLAIMS_TO_SOURCES",
+    "CLAIM_BINDING": "CREATE_CANONICAL_ARTICLE",
+    "CANONICAL_ARTICLE": "CREATE_PRODUCTION_PLAN_V4",
+    "PRODUCTION_PLAN_V4": "RUN_LANGUAGETOOL_6_8",
+    "LANGUAGETOOL_6_8": "RUN_PPM_6_7_9",
+    "PPM_6_7_9": "BUILD_LOCAL_TEST_PACKAGE",
+    "LOCAL_TEST_PACKAGE": "COMPLETE_BEFORE_WORDPRESS"
+  },
+  "fail_closed": true
+}
