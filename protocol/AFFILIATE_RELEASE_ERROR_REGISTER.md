@@ -504,3 +504,22 @@ Automatik-/Lifecycle-Normalbetrieb bleibt Ziel; manuelle Sperren/Fixierungen/Vet
 **Nicht wiederholen:** Unveränderliche Guard-Vertragswerte niemals für Meilenstein-/Scope-Texte umbenennen. Fachlicher Status gehört in `current_milestone`, `user_scope_lock`, `execution_state` und Scope-Dokumente.
 
 **Status:** FIX IN PROGRESS — exakte Guardwerte werden wiederhergestellt, danach Guard erneut geprüft.
+
+
+## AFF-ERR-029 — Current-NEXT-ACTION widerspricht unveränderlichem Release-Guard
+
+**Datum / Abschlussprüfung:** 18.09.2026.
+
+**Symptom:** `control/release-governance/CURRENT_RELEASE.json` führt nach Erstellung des 6.72.72-Testkandidaten `INSTALL_67272_TEST_CANDIDATE_AND_VERIFY_START_CATEGORY_PAGE_AND_PROVIDER_STATS` als `execution_state.authorized_next_action`.
+
+**Root Cause:** Der konkrete Livetest-Schritt wurde fälschlich direkt als technische NEXT-ACTION-Konstante in die Current geschrieben. Der unveränderliche `release_guard.py` akzeptiert an dieser Stelle ausschließlich `COMMIT_EXACT_V6638_21_FILE_SOURCE_TO_CANONICAL_ROOT`, `RUN_BOUND_RELEASE_GATES` oder `FINALIZE_RELEASE`. Damit wäre `governance-check` fail-closed.
+
+**Nicht wiederholen:** Konkrete Testschritte gehören in die gebundene Gate-/Scope-Beschreibung. `authorized_next_action` muss immer exakt eine vom unveränderlichen Guard erlaubte Zustandsaktion tragen. Keine neue freie NEXT-ACTION-Konstante erfinden.
+
+**Zusatzbefund:** `execution_state.hobbyroom_current` bezeichnet den bereits zurückgegebenen Rootfix weiter als `ACTIVE` und enthält eine alte eigene `next_action`. Hobbyraum darf keine zweite aktuelle NEXT-ACTION-Wahrheit bilden.
+
+**POSITIV:** Current verwendet guard-konform `RUN_BOUND_RELEASE_GATES`; der konkrete erste Gate-Schritt bleibt eindeutig der eine 6.72.72-WordPress-Live-Readback.
+
+**NEGATIV:** Suche nach aktivem `INSTALL_67272_TEST_CANDIDATE_AND_VERIFY_START_CATEGORY_PAGE_AND_PROVIDER_STATS` als `authorized_next_action` oder Hobbyraum-`next_action` darf keine zweite Current-Wahrheit ergeben.
+
+**Status:** OPEN — Current-Nachzug jetzt erforderlich.
