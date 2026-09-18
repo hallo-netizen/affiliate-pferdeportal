@@ -1,0 +1,215 @@
+{
+  "contract": "KONZEPT0_SIX_ARTICLE_DEEP_RECOVERY_V1",
+  "status": "PASS",
+  "candidate_file_count": 25,
+  "candidates": [
+    {
+      "file": "archive_2e78ab932a35c87288c8748cf2ff4117163c9353_CODEX_JOURNAL_LIVE_ROOTCAUSE_20260820_04_LIVE_EVIDENCE_pste-global-seo-topic-map-20260820-115025-utc.json",
+      "sha256": "d20e26e0377bf4053f642aa5dc9d4fcea43c95e8ffd0b5cd49ce569cb83795f4",
+      "size": 36897988,
+      "titles_found": [],
+      "looks_like_article_body": true
+    },
+    {
+      "file": "archive_2e78ab932a35c87288c8748cf2ff4117163c9353_CODEX_JOURNAL_LIVE_ROOTCAUSE_20260820_SHA256SUMS.txt",
+      "sha256": "dfc439312edd0b84a49da882bdda9da5b02486f7f23a9a9b180fb4ad0db26be9",
+      "size": 220548,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "archive_47716ac5993db7a3fc8632afba2399bcf5619f21_CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820_06_DIFF_AND_HASHES_CODEX_PACKAGE_SHA256.txt",
+      "sha256": "0aae95e4138d2c0dc48bfa8d2998aa09454df5af36e8bb9f767f6128d7f17de4",
+      "size": 18479,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "archive_88fe7193fd729e22733f960ae9e2ef0a066e0b03_CODEX_PSTE056_HANDOFF_MINIMAL_20260820_03_LIVE_EVIDENCE_pste-global-seo-topic-map-20260820-115025-utc.json",
+      "sha256": "d20e26e0377bf4053f642aa5dc9d4fcea43c95e8ffd0b5cd49ce569cb83795f4",
+      "size": 36897988,
+      "titles_found": [],
+      "looks_like_article_body": true
+    },
+    {
+      "file": "archive_b7b85205e62478e6d49607d347059dd643f2c2d2_CODEX_REDPLAN_GATEWAY_TIMEOUT_AUDIT_20260819_03_REAL_FIXTURES_pste-global-seo-topic-map-20260813-102804-utc.json",
+      "sha256": "79f22c3762619af9fe196bdbbbe81693e4b88709485d010570dff317a0d9b259",
+      "size": 26743060,
+      "titles_found": [],
+      "looks_like_article_body": true
+    },
+    {
+      "file": "archive_b7b85205e62478e6d49607d347059dd643f2c2d2_CODEX_REDPLAN_GATEWAY_TIMEOUT_AUDIT_20260819_03_REAL_FIXTURES_pste-semantic-review-sandbox-20260819-083901-utc.json",
+      "sha256": "8a943c067330a3799d9cd0e68398df61ace9558e0f01e9e84c3b7bc212a15187",
+      "size": 60383028,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_05e96fccbbcb1a356657b4d5da50d449c80a6369_CURRENT_STATE.json",
+      "sha256": "0fcb131327d99e6f532f0cc5b2e326302634c3b43547e63cea75fcbd1ac1c766",
+      "size": 3693,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_119f1b12a9e1f2270efe8e2d9248f348b12271d8_CURRENT_STATE.json",
+      "sha256": "f991db3f86ccf58cd7bde96a3d2cf0823137016590fad529cf3bc3329ef581e8",
+      "size": 3649,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_1fb5b370fd34b80291b20570a54f6fde0d032ca6_CURRENT_STATE.json",
+      "sha256": "0e0ed22ab731d3ef3ed51541df0e5a04d1ba41f80ac9cfc999bb1ed4a76ffee5",
+      "size": 3140,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_20edec7337124a7074df886be406a64c3ac0af20_NEXT_ARTICLE_TEST_AND_LATER_ROOTFIX_ORDER.json",
+      "sha256": "cd90b48451f74989ac856fd5056c659c64c6f6d6753d3aebb445910bbf17d0c9",
+      "size": 2585,
+      "titles_found": [
+        "Schritt für Schritt Pferdebürsten reinigen",
+        "Schritt für Schritt Pferdebürsten waschen",
+        "So findest du die geeigneten Rampenmatten für Pferdeanhänger",
+        "So findest du ideale Heuraufen für Pferde",
+        "So wählst du geeignete Ekzemerdecken für Pferde",
+        "Wissenswertes über Weidetore für Pferde"
+      ],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_213a2de36456b67885fbfd9f050c9a36619837cf_SPUREN_20260828.md",
+      "sha256": "493dfb1ba74e6010f37f1560da976849f0455538a016369433c9f0b825c01bdf",
+      "size": 2314,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_23cac57f9d2fb497eca39ae86b8cc630b5a17d7f_CURRENT_STATE_20260828.json",
+      "sha256": "5fa43e575f5a54c54578f9cba00c41e19e625b44f387d78bd4245f8fb8c79bc8",
+      "size": 2201,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_33541f4a9f980fd7e98d4c161ea79a2ba2535d66_README.md",
+      "sha256": "396cc3de4ba19486cb57fc3bd2a103a2c912455b1e79ae588a76e2ed365a51a7",
+      "size": 2212,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_3d42c120ce5031a8692f46d51350f1f4f036dade_PFERDE_ATELIER_START_HERE.json",
+      "sha256": "06bdd0b2d813aad4183564ba874a5be0c49988a1e9e606318661ee8e654bde75",
+      "size": 1077,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_48a284c0335f75ea808970fa2f7fd513e25cc9e9_STEP_TOOL_POLICY_V1.json",
+      "sha256": "8051a2c693cc01a63979efbe5b530f5b39762999f7e97631d0cce0986d074afd",
+      "size": 544,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_4f4f7d1460ab46636a7e21a469fdb32e38185609_VERBINDLICHER_STARTPROMPT_PFERDE_ATELIER_STARTMASTER0103.txt",
+      "sha256": "84e791466b6445ae0f20aedea56a8a5feefb20fd9671503c96aceb5f2882683c",
+      "size": 3735,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_694bff24f02f4d324344e403934d0cacf5488a9c_STARTMASTER0103_AI_FIREWALL_HARDLOCK_OPTIMIZATION_20260828.md",
+      "sha256": "bea4c2d72a81127b630298ae60717778ed0c50d5057fb03eff3837e5e4a769e5",
+      "size": 3670,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_6ab660d9a97d7cddc68ac4334c00bbe5f432970e_CURRENT_STATE.json",
+      "sha256": "a70931f34b05a87b343a059aaa87afe8b15b77a713006b67b3e749230c3084e4",
+      "size": 2314,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_77b749707e3b42a70ba27ee7f55ba38baf028ed2_STEP_TOOL_POLICY_V1.json",
+      "sha256": "179c817186c7be379efccae987008db3a888337931ad436bd65b9fb8c7a2172e",
+      "size": 1123,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_7d6fb7e20b38050a4db54e10e0623dd20ee94e49_STARTMASTER0101_LIVE_QA_ARTICLE_TEST_CHECKPOINT_20260828.md",
+      "sha256": "fc7b93b8fa1e46c173a764136b79145fe215b177c1d53adde127519e52b6e394",
+      "size": 2997,
+      "titles_found": [
+        "Schritt für Schritt Pferdebürsten reinigen",
+        "Schritt für Schritt Pferdebürsten waschen",
+        "So findest du die geeigneten Rampenmatten für Pferdeanhänger",
+        "So findest du ideale Heuraufen für Pferde",
+        "So wählst du geeignete Ekzemerdecken für Pferde",
+        "Wissenswertes über Weidetore für Pferde"
+      ],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_8a22bc78ae6da2a8db07afbaa3b88a312648b4b8_BATCH_CHECKPOINT.json",
+      "sha256": "1f8b251c408ecd778f12fd91df0ef19445b2d4905802d6ebecf2be062015a113",
+      "size": 3235,
+      "titles_found": [
+        "Schritt für Schritt Pferdebürsten reinigen",
+        "Schritt für Schritt Pferdebürsten waschen",
+        "So findest du die geeigneten Rampenmatten für Pferdeanhänger",
+        "So findest du ideale Heuraufen für Pferde",
+        "So wählst du geeignete Ekzemerdecken für Pferde",
+        "Wissenswertes über Weidetore für Pferde"
+      ],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_a5332dc2fa8cdd03b420302162eb3cff41685bca_CURRENT_STATE.json",
+      "sha256": "0aeee924ca4a118f1972980cd0eed62e0c03881723d72efc0eb5260cc1f22ace",
+      "size": 3987,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_c7261a690ca217c11d696fd372d8c6320e90e4e9_STARTMASTER0103_AI_FIREWALL_HARDLOCK_OPTIMIZATION_20260828.md",
+      "sha256": "d6810ec2f03c53f67ff7a4a73bc7e19b929ef54d5aa6c749b7f918298140f782",
+      "size": 3831,
+      "titles_found": [],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_df26cb3bb9157dc49b653121aee08e5e8c0f5c46_STARTMASTER0102_NO_INTERMEDIATE_STOP_EXECUTION_RULE_20260828.md",
+      "sha256": "3fd9309c4bd940c106f7d05be30a92452d63aaba6728d426d99394d460ca930b",
+      "size": 1943,
+      "titles_found": [
+        "Wissenswertes über Weidetore für Pferde"
+      ],
+      "looks_like_article_body": false
+    },
+    {
+      "file": "direct_f7271fa8e6aae587a317454a1afb58a91a3139bb_direct_f7271fa8e6aae587a317454a1afb58a91a3139bb_STARTMASTER0102_ARTICLE_TEST_NO_STOP_HANDOFF_20260828.md",
+      "sha256": "a451a994c27d39bd464ae83f8ff097d5066a3052ec847e4c758ee724883c1f11",
+      "size": 11795,
+      "titles_found": [
+        "Schritt für Schritt Pferdebürsten reinigen",
+        "Schritt für Schritt Pferdebürsten waschen",
+        "So findest du die geeigneten Rampenmatten für Pferdeanhänger",
+        "So findest du ideale Heuraufen für Pferde",
+        "So wählst du geeignete Ekzemerdecken für Pferde",
+        "Wissenswertes über Weidetore für Pferde"
+      ],
+      "looks_like_article_body": false
+    }
+  ],
+  "concept_1_2_3_4_4a_runtime_contact": false,
+  "codex_started": false,
+  "publish_performed": false
+}

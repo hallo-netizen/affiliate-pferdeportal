@@ -1,0 +1,89 @@
+{
+  "contract": "PFERDE_ATELIER_CONTROL_STATE_V2",
+  "startmaster": "STARTMASTER0104",
+  "generated_at_utc": "2026-08-28T22:32:00Z",
+  "status": "DETERMINISTIC_ENTRANCE_GATE_BUILT_HARD_WORKER_SELFTEST_PENDING",
+  "previous_binding": "STARTMASTER0103",
+  "workflow_changed": true,
+  "workflow_change_scope": "OUTER_DETERMINISTIC_ENTRANCE_GATE_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
+  "content_or_design_contract_changed": false,
+  "completed_checkpoints": [
+    "PSTE_0_56_25_INSTALLED_LIVE",
+    "PSERC_0_28_14_ACTIVE",
+    "PSERC_RETENTION_LIVE_37_TO_3_PASS",
+    "SLFO_OPTIONS_236_MIB_PASS",
+    "LIVE_40_40_WAVE_EXECUTED_FAIL_20_FAMILIES_2_PASS",
+    "CANDIDATE_SNAPSHOT_REFRESH_PASS",
+    "LIVE_METADATA_QA_6_READY_COMPLETE",
+    "USER_BINDING_PRODUCTION_PROMPT_RECEIVED",
+    "NO_INTERMEDIATE_STOP_RULE_BOUND",
+    "SIX_ARTICLE_PPM_NORMAL_DRAFT_END_TO_END_PASS",
+    "SIX_ARTICLE_DRAFT_READBACK_PASS",
+    "REPEATED_CATEGORY_IDENTITY_ROOTCAUSE_FIXED",
+    "STARTMASTER0103_PACKAGE_PREFLIGHT_GUARD_BOUND",
+    "USER_CONFIRMED_SIX_ARTICLES_PUBLISHED",
+    "OPENAI_API_FIREWALL_PATH_RETIRED_NO_API_COST",
+    "DETERMINISTIC_ENTRANCE_GATE_V1_BOUND"
+  ],
+  "open_failures": [
+    "PSTE_LIVE_WAVE_UI_40_40_EXECUTION_20_FAMILIES_2_PASS_MAX_FAMILIES_REACHED"
+  ],
+  "deferred_optimizations": [
+    "SAFE_SANDBOX_AUTO_REENTRY_BEFORE_SAVED_BACKLOG_BEFORE_PROVIDER",
+    "BERATUNG_TITLE_SURFACE_WEIDETORE_TOO_GENERAL"
+  ],
+  "next_allowed_step": "ACTIVATE_LOCAL_CODEX_CAPSULE_WORKER_SELFTEST_NO_API",
+  "queued_after_current_step": "ROOTFIX_LIVE_40_40_MAX_FAMILIES_REACHED_THEN_SAFE_SANDBOX_AUTO_REENTRY_THEN_RETAINED_BACKLOG_THEN_PROVIDER",
+  "publish_allowed": false,
+  "current_installers": {
+    "pste": "02_CURRENT_INSTALLERS/portal-seo-topic-engine_0.56.25_ATTRIBUTE_RICH_COMPILER_READY_BREADTH_ROOTFIX_VERIFIED.zip",
+    "pste_sha256": "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95",
+    "pserc": "02_CURRENT_INSTALLERS/portal-seo-editorial-plan-compiler_0.28.14_GENERATION_RETENTION_ROOTFIX_VERIFIED.zip",
+    "pserc_sha256": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988"
+  },
+  "latest_live_snapshot": "03_LIVE_INPUT/seo-redaktionsplan-metadaten-snapshot-55d95cc026793a1cfc765c858e33bd6310a4741e7a62c0d20686cd719c9f4fed.json",
+  "article_test_target": 6,
+  "article_test_current_completed": 6,
+  "published_article_ids": [
+    17123,
+    17124,
+    17125,
+    17126,
+    17127,
+    17128
+  ],
+  "publication_evidence": "USER_CONFIRMED_IN_CHAT_2026-08-29_EUROPE_BERLIN",
+  "production_prompt_already_received": true,
+  "prompt_reask_forbidden": true,
+  "intermediate_chat_stops_for_internal_pass_forbidden": true,
+  "protected": {
+    "textmachine_modified": false,
+    "article_content_modified": false,
+    "design_modified": false,
+    "languagetool_modified": false,
+    "ppm_modified": false,
+    "affiliate_modified": false,
+    "duplicate_threshold_modified": false,
+    "cannibalization_threshold_modified": false,
+    "publish_logic_modified": false
+  },
+  "live_status": "SIX_ARTICLE_TEST_PUBLISHED_USER_CONFIRMED_POST_PUBLICATION_COMPLETE",
+  "execution_gate": {
+    "contract": "PFERDE_ATELIER_DETERMINISTIC_ENTRANCE_GATE_ENVELOPE_V1",
+    "enforced": true,
+    "step_id": "ACTIVATE_LOCAL_CODEX_CAPSULE_WORKER_SELFTEST_NO_API",
+    "sequence": 104000,
+    "bundle_ref": "00_CONTROL/STEP_BUNDLES/STEP_104000_HARD_WORKER_SELFTEST_NO_API.json",
+    "bundle_sha256": "2e6e566df9d5e42f50c39b810eae2af7b97478a3a940e391a3e4b91ad37f2d1f",
+    "state_write_authority": "ENTRANCE_GATE_ONLY",
+    "unknown_step_policy": "DENY",
+    "free_chat_direct_execution_valid": false,
+    "domain_logic_authority": "NONE",
+    "content_quality_design_authority": "NONE",
+    "worker_context_policy": "CAPSULE_ONLY",
+    "repeat_or_backtrack_policy": "DENY_UNLESS_NEW_BOUND_STATE",
+    "api_dependency": "NONE",
+    "hard_worker_target": "CODEX_CLI_WITH_CHATGPT_PLAN_OR_EQUIVALENT_CAPSULE_WORKER",
+    "hard_worker_runtime_verified": false
+  }
+}

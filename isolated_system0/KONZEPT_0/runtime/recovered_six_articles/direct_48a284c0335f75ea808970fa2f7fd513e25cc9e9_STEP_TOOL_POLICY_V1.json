@@ -1,0 +1,15 @@
+{
+  "contract": "PFERDE_ATELIER_STEP_TOOL_POLICY_V1",
+  "default": "DENY",
+  "state_write_authority": "CONTROLLER_ONLY",
+  "principle": "Only exact CURRENT_STATE.next_allowed_step may resolve; unknown steps fail closed.",
+  "steps": {
+    "USER_CONTENT_REVIEW_6_DRAFTS_17123_17128_NO_PUBLISH": {
+      "allowed_tools": [],
+      "tool_definitions": {},
+      "expected_outcome": "USER_ACTION_REQUIRED",
+      "notes": "No model-side workflow action. User reviews already-created WordPress drafts. No publish."
+    }
+  },
+  "prefix_rules": []
+}

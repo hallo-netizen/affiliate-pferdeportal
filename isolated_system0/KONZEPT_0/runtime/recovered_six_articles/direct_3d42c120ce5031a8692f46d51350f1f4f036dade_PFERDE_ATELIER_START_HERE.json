@@ -1,0 +1,16 @@
+{
+  "contract": "PFERDE_ATELIER_START_HERE_V2",
+  "startmaster": "STARTMASTER0103",
+  "navigation_authority": "00_CONTROL/CONTROL_RUNNER_V2/runtime/CURRENT_STATE.json",
+  "binding_prompt": "00_CONTROL/VERBINDLICHER_STARTPROMPT_PFERDE_ATELIER_STARTMASTER0103.txt",
+  "keyword_ownership_contract": "00_CONTROL/KEYWORD_OWNERSHIP_LONGTAIL_V2.json",
+  "title_surface_contract": "00_CONTROL/TITLE_SURFACE_ATTRIBUTE_ZERO_SEO_AUTHORITY_V1.json",
+  "breadth_quota_contract": "00_CONTROL/BREADTH_WAVE_COMPILER_READY_QUOTA_V1.json",
+  "execution_firewall_controller": "00_CONTROL/AI_TOOL_FIREWALL_CONTROLLER_V1/controller.py",
+  "production_package_preflight_guard": "00_CONTROL/PRODUCTION_PACKAGE_PREFLIGHT_GUARD_STARTMASTER0103.py",
+  "workflow_rules_changed": true,
+  "workflow_change_scope": "EXTERNAL_EXECUTION_ENFORCEMENT_AND_PACKAGE_PREFLIGHT_ONLY_NO_FACH_QUALITY_DESIGN_CHANGE",
+  "current_state_sha256": "0e0ed22ab731d3ef3ed51541df0e5a04d1ba41f80ac9cfc999bb1ed4a76ffee5",
+  "next_allowed_step": "USER_CONTENT_REVIEW_6_DRAFTS_17123_17128_NO_PUBLISH",
+  "publish_allowed": false
+}
