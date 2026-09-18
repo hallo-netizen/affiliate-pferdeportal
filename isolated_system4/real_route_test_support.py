@@ -180,8 +180,19 @@ def valid_real_article(state:dict,index:int)->str:
     seed=10
     for bi,name in enumerate(other):
         intent=intent_terms[(bi+index+style_index)%len(intent_terms)]
-        semantic_heading=block_semantics.canonical_heading(c,name)
-        heading=semantic_heading or f'{intent} {heading_suffixes[(bi+index+style_index)%len(heading_suffixes)]}'
+        semantic_binding=c.get('block_semantics',{}).get('semantic_blocks',{}).get(name,{})
+        if isinstance(semantic_binding,dict) and semantic_binding:
+            markers=[str(v).strip() for v in semantic_binding.get('accepted_heading_markers',[]) if str(v).strip()]
+            reserved={
+                block_semantics.normalize(str(v))
+                for v in c.get('structure_requirements',{}).get('headings',{}).get('reserved_headings',[])
+                if isinstance(v,str)
+            }
+            non_reserved=[v for v in markers if block_semantics.normalize(v) not in reserved and len(v.split())>=2]
+            marker=(non_reserved[(index+bi+style_index)%len(non_reserved)] if non_reserved else block_semantics.canonical_heading(c,name))
+            heading=f'{marker} zu {intent}' if marker and block_semantics.normalize(marker) not in reserved else str(marker or '')
+        else:
+            heading=f'{intent} {heading_suffixes[(bi+index+style_index)%len(heading_suffixes)]}'
         parts=[f'<h2>{heading}</h2>']
         section_links=[row for row in link_rows if str(row.get('section_id') or '')==name]
         for pi in range(paras_per):
