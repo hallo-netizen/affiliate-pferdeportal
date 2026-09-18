@@ -120,9 +120,9 @@
 }
 .ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link {
     box-sizing: border-box !important;
-    display: inline-block !important;
-    width: auto !important;
-    max-width: 100% !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
     margin: 0 auto !important;
     padding: 0 !important;
     border: 0 !important;
@@ -134,8 +134,8 @@
 .ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
     box-sizing: border-box !important;
     display: block !important;
-    width: auto !important;
-    max-width: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
     height: auto !important;
     max-height: none !important;
     margin: 0 auto !important;
@@ -156,6 +156,25 @@
 }
 .ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-label {
     display: none !important;
+}
+
+/* Gemeinsamer Vollbreitenvertrag: der Banner belegt in allen bekannten
+   Start-/Hub-/Kategorie-Huellen die komplette verfuegbare Rasterbreite. */
+.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot),
+.pa255-network:has(.ppar-overview-wide-banner-slot),
+.pa266-network:has(.ppar-overview-wide-banner-slot) {
+    box-sizing: border-box !important;
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
 /* Historische Design-Huellen duerfen um denselben Querbanner keine zweite
