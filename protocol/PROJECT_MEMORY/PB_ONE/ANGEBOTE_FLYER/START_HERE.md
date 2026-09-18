@@ -31,7 +31,7 @@ gemeinsam mit Paul lesen, schreiben, Inhalte recherchieren, Leistungen strukturi
 hier programmieren oder aus ungeprüften Ideen verbindliche Leistungsversprechen machen.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → bei laufendem Entwurf `../ARBEITSDOKUMENTE/START_HERE.md` → nach Freigabe `UNTERLAGENREGISTER.md`.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → bei laufendem Entwurf `../ARBEITSDOKUMENTE/START_HERE.md` → nach Freigabe `UNTERLAGENREGISTER.md`.
 
 ## Typische Inhalte
 
