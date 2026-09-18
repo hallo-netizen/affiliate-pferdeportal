@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+import block_semantics
 import controller
 import production_checks
 
@@ -122,6 +123,62 @@ class RepairOwnerRoutingContractTests(unittest.TestCase):
              mock.patch.object(controller._engine, 'save', return_value=None):
             rc = controller.cmd_fullcheck('/tmp/irrelevant')
         return rc, state
+
+    @staticmethod
+    def _semantic_contract():
+        structure = {'headings': {'reserved_headings': ['Fazit', 'Weiterführende Informationen']}}
+        type_def = {'required_blocks': ['intro', 'body', 'conclusion', 'further_information']}
+        return {
+            'contract': 'SYSTEM4_AUTHORING_CONTRACT_V1',
+            'block_semantics': block_semantics.bind(structure, type_def),
+        }
+
+    @staticmethod
+    def _semantic_html(conclusion='Fazit', further='Weiterführende Informationen', order=None):
+        bodies = {
+            'intro': '<p>Einleitung.</p>',
+            'body': '<h2>Prüfung</h2><p>Inhalt.</p>',
+            'conclusion': f'<h2>{conclusion}</h2><p>Abschluss.</p>',
+            'further_information': f'<h2>{further}</h2><p>Hinweise.</p>',
+        }
+        ids = order or ['intro', 'body', 'conclusion', 'further_information']
+        return ''.join(f'<section data-block="{name}">{bodies[name]}</section>' for name in ids)
+
+    def test_pr275_block_semantics_matrix_uses_current_same_article_repair_route(self):
+        contract = self._semantic_contract()
+        self.assertEqual(block_semantics.validate(self._semantic_html(), contract)['status'], 'PASS')
+        cases = [
+            (self._semantic_html(conclusion='Ausblick'), 'BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH'),
+            (self._semantic_html(further='Lesetipps'), 'BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH'),
+            (self._semantic_html(conclusion=''), 'BLOCK_CONTENT_SEMANTIC_HEADING_MISMATCH'),
+            (self._semantic_html(order=['intro','body','further_information']), 'BLOCK_CONTENT_REQUIRED_BLOCK_ABSENT'),
+            (self._semantic_html(order=['intro','body','further_information','conclusion']), 'BLOCK_CONTENT_BLOCK_ORDER_INVALID'),
+            (self._semantic_html(order=['intro','body','conclusion','conclusion','further_information']), 'BLOCK_CONTENT_BLOCK_DUPLICATE'),
+        ]
+        for html, expected in cases:
+            with self.subTest(expected=expected):
+                with self.assertRaises(block_semantics.BlockSemanticRepairRequired) as caught:
+                    block_semantics.validate(html, contract)
+                codes = [row.get('error_code') for row in caught.exception.findings]
+                self.assertIn(expected, codes)
+                self.assertTrue(caught.exception.findings)
+                self.assertTrue(all(row.get('repair_owner') == 'DRAFT_WORKER' for row in caught.exception.findings))
+                rc, state = self._run_controller_repair_finding(caught.exception.findings[0])
+                self.assertEqual(rc, 3)
+                self.assertEqual(state['phase'], 'REPAIR_REQUIRED')
+
+    def test_pr275_block_semantics_blocks_before_real_tool_engine(self):
+        contract = self._semantic_contract()
+        state = {
+            'draft_markdown': self._semantic_html(conclusion='Ausblick'),
+            'authoring_contract': contract,
+        }
+        with mock.patch.object(production_checks._engine, 'run_all') as real_engine:
+            with self.assertRaises(production_checks.RepairRequired) as caught:
+                production_checks.run_all(Path('/tmp'), state, {}, {})
+        self.assertEqual(caught.exception.checker, 'block_semantics')
+        self.assertEqual(caught.exception.findings[0]['repair_owner'], 'DRAFT_WORKER')
+        real_engine.assert_not_called()
 
     def test_controller_draft_owner_enters_same_article_repair(self):
         rc, state = self._run_controller_repair_finding({
