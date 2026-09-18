@@ -6,66 +6,60 @@
 > Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
 > Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
 
-
-STAND: 2026-09-17
-STATUS: AKTIV – M20 1..N CLEANUP + M38 HISTORY_AUTHORITY_MAINTENANCE
+STAND: 2026-09-18
+STATUS: AKTIV – PRE-CODEX FULL E2E FINALIZATION
 
 ## AKTUELLE ARBEIT
 
-Nur History-Phase des vorhandenen Maschinenwegs:
-- den veralteten M20-Festvertrag `7 Artikel` auf die bereits integrierte 1..N-Mengenwahrheit korrigieren;
-- M38 als reale fortlaufende History-Regression im selben bestehenden Matrix-/Runner-Kandidaten erhalten und maschinell beweisen.
+Ausschließlich den bereits funktional grünen Pre-Codex-Gesamttest integrieren und auf exaktem Main erneut beweisen.
 
-Aktueller technischer Main/Baseline:
-`54f0ee4efb91a50bbe05b5aafa4183cc1f526565`
+Current technical main:
+`508f9dbb3650c99e5d41dbab83086af46945e225`
 
-Aktiver realer Blocker:
-`PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH`
+Gebundener Kandidat:
+- Branch: `hobbyroom/full-e2e-simulation-before-codex-20260918`
+- Head: `b1c33ee8e800ccc5b542c077ffe825bd20871581`
+- Acceptance: Run `35356394787` = **40/40 PASS**
 
-History-Kandidat:
-- PR280;
-- Branch: `hobbyroom/m20-history-1n-20260917`;
-- Head: `424a6c5b418541ca2bbe89ca5cbfe233fd706e96`;
-- erlaubt: ausschließlich bestehende Fehlermatrix + bestehender Regressionrunner;
-- erwartet: unveränderter Main M01–M37 PASS; Kandidat M01–M37 PASS mit M20=1..N; danach erster neuer FAIL exakt M38;
-- ausdrücklich kein Produktfix in dieser Phase.
+Der Kandidat ändert ausschließlich:
+- exakte 5-Feld-Identität vor Batch-`advance`;
+- Negativtest für fehlende externe Point-0-Datei;
+- simulierte echte `codex_entry.py worker-start`-Anbindung in der vorhandenen Vollstrecke;
+- Testbindung der historischen M15–M38-Fehlerklassen an die heutigen System-4-Prüfer.
 
-Der Main enthält vorübergehend ausschließlich den nicht-ausführbaren Migrationstoken `EXACTLY_SEVEN_ARTICLES_REQUIRED`, damit der bisherige M20-Basistest während der kontrollierten History-Migration noch lesbar bleibt. Dieser Token ist keine Mengenlogik und wird unmittelbar nach Integration des korrigierten M20-Historyvertrags entfernt.
+Keine Fachregel, kein Artikelinhalt, kein PPM-/PSERC-/PSTE-Regelwerk, kein neuer Runner/Gate/Controller und kein Publish.
 
-Die M38-Versionswerte sind gegen die vorhandene Abschlusslogik gebunden:
-- `plan_contract_version == "4.0.0"`;
-- `required_plugin_version == "6.7.9"`.
+## ABGELEITETE NEXT ACTION
 
-## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION
-
-Bestehenden History-Maschinenbeweis / hardlock auf PR280 ausführen.
-Nur bei `HOBBYROOM_HISTORY_MACHINE_PROOF_PASS:M38` plus zugehörigem Hardlock-PASS darf dieser History-Kandidat integriert werden.
-Danach den temporären M20-Migrationstoken sofort entfernen; erst anschließend Phase 2 PRODUCT_FIX M38.
-
-Kein Codex-Testlauf. Für diese Arbeit ausschließlich bestehende GitHub-Actions-Maschinenprüfungen verwenden.
+1. Hardlock und Deterministic Entrance exakt auf dem gebundenen Kandidaten ausführen.
+2. Nur bei PASS integrieren.
+3. Danach vollständigen Acceptance-Lauf erneut auf dem resultierenden exakten Main ausführen.
+4. Danach STOP direkt vor echtem Codex und Nutzerfreigabe abwarten.
 
 ## VERBOTEN
 
-- History-Autorität und Produktfix in einem Kandidaten mischen;
+- echter Codex ohne ausdrückliche Nutzerfreigabe;
+- Artikelproduktion vor Abschluss des exakten Main-Beweises;
+- Artikel 2 vor echtem Artikel-1-PASS;
+- neue Parallelroute;
 - neuer Runner/Gate/Controller/Sidecar;
-- PPM/PSERC/PSTE/Textmaschine/Fachregeln/Recherche/SEO/Links/Tabellen/Design verändern;
-- geschützte `ENDSTEMPEL_*`-Dateien umgehen oder ändern;
+- Änderung von PPM/PSERC/PSTE/Textmaschine/Fachregeln;
 - WordPress-Write;
 - Publish.
 
 HOBBYROOM_WORK_LOCK_V1
 STATUS: FIX_ALLOWED_FOR_CODEX_TEST
 OFFICE: TEXT
-MAIN_SHA: 54f0ee4efb91a50bbe05b5aafa4183cc1f526565
-ACTIVE_BLOCKER: PPM679_REAL_EXECUTION_BLOCKED
-PLAN_PHASE: HISTORY_AUTHORITY_MAINTENANCE
-RECOVERY_BASE_SHA: bb005a5324a0a6270aacb52b5927613bde1ab4bc
+MAIN_SHA: 508f9dbb3650c99e5d41dbab83086af46945e225
+ACTIVE_BLOCKER: PRE_CODEX_INTEGRATION_PROOF_PENDING
+PLAN_PHASE: PRODUCT_FIX
+RECOVERY_BASE_SHA: 508f9dbb3650c99e5d41dbab83086af46945e225
 ACTIVE_HISTORY_CASE: M38
-HISTORY_EXPECTED_FAIL: M38
-CANDIDATE_BRANCH: hobbyroom/m20-history-1n-20260917
-CANDIDATE_HEAD_SHA: 424a6c5b418541ca2bbe89ca5cbfe233fd706e96
-TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-ALLOWED_PATH_PREFIXES: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md;control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
+HISTORY_EXPECTED_FAIL: NONE
+CANDIDATE_BRANCH: hobbyroom/full-e2e-simulation-before-codex-20260918
+CANDIDATE_HEAD_SHA: b1c33ee8e800ccc5b542c077ffe825bd20871581
+TECHNICAL_SCOPE_PREFIXES: control/startmaster0107/system4_107007_batch.py;isolated_system4/
+ALLOWED_PATH_PREFIXES: control/startmaster0107/system4_107007_batch.py;isolated_system4/test_machine_route_lock_contract.py;isolated_system4/live_parity_v2.py;isolated_system4/test_root_entry.py;isolated_system4/test_acceptance_history_hardlock.py
 CHECK_PAUL: PASS
 CHECK_HISTORY: PASS
 CHECK_LAST_GOOD: PASS
@@ -74,19 +68,19 @@ CHECK_REPEAT_CLASS: PASS
 CHECK_POS_NEG: PASS
 CHECK_INVARIANTS: PASS
 HISTORY_SOURCE_REF: control/startmaster0107/HOBBYRAUM_KNOWN_ERROR_REGRESSION_MATRIX_M01_M33_20260904.md
-HISTORY_SOURCE_BLOB_SHA: dbc77c1eb820bdc91918b81d290fc46016faecf6
+HISTORY_SOURCE_BLOB_SHA: bdd041393d25f0f69a35c0e2d7a3b120b3aef178
 HISTORY_PROOF_RUNNER_REF: control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py
-HISTORY_PROOF_RUNNER_BLOB_SHA: ee1701de79a577c611c0e55a5b76fe6d7837441a
+HISTORY_PROOF_RUNNER_BLOB_SHA: c33a49bf1c44dd9e09c49eb8139568390317dc09
 PAUL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/PAUL_PIPELINE_AUDIT_20260906.md
 PAUL_SOURCE_BLOB_SHA: 08fee3940a8f693ac6bb505df2e083b8515e2dd9
 ERROR_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md
 ERROR_SOURCE_BLOB_SHA: f4dc0f0554d2ddc26ec69727656cad20c66e5fb4
 CURRENT_STATE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md
-CURRENT_STATE_BLOB_SHA: 9eae2aa21f54e3764d5f31e4807aa3418d3d9ccc
+CURRENT_STATE_BLOB_SHA: 4d9ae1d3f03ee9b996283e83b03e21bf6ec7fcb5
 DECISION_SOURCE_REF: protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md
-DECISION_SOURCE_BLOB_SHA: 33b1191632a86a613cd4023c90deb257bb99e6ec
+DECISION_SOURCE_BLOB_SHA: eefb9baa492bf510912212780face6afcf58d7aa
 STANDARD_SOURCE_REF: protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md
-STANDARD_SOURCE_BLOB_SHA: 8c90de4920ec81e10f3952bbd52208fad5a42367
+STANDARD_SOURCE_BLOB_SHA: a1181437d8ab9e66b755d662f795417ca8127c5f
 PROTOCOL_SOURCE_REF: protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/M38_ARBEITSPROTOKOLL_20260917.md
 PROTOCOL_SOURCE_BLOB_SHA: 230ec23e4d7aad60e752d5f681f4316291590b1b
 INTEGRATION_ALLOWED: true
@@ -94,7 +88,7 @@ END_HOBBYROOM_WORK_LOCK_V1
 
 ## VERWEISE
 
-- CURRENT: `CURRENT_STATE.md` (Campus-Textstand; Produktions-`control/.../CURRENT_STATE.json` nicht manuell verändert)
-- aktuelle Fehlerquelle: `QUELLEN_AKTUELL/04_FEHLERLISTE_KOMPLETT_AKTUELL_20260911.md`
-- M38-Protokoll: `M38_ARBEITSPROTOKOLL_20260917.md`
-- Standard: `protocol/PROJECT_MEMORY/BAUCONTAINER/HOBBYRAUM_STANDARD.md`
+- CURRENT: `CURRENT_STATE.md`
+- Produktions-CURRENT: `control/startmaster0107/CURRENT_STATE.json`
+- Acceptance-Run: `35356394787`
+- aktueller Kandidat: `b1c33ee8e800ccc5b542c077ffe825bd20871581`
