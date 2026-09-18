@@ -81,7 +81,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "3fcdb0fbc40690d783fad5d21545dffe977a76d51f7e5ede79ea2a797a6915fe",
+    "bundle_sha256": "953005eb984f9d9dd5aeaa4e9a22f8366162ea0c5f72b199e1997c2b74e002be",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -157,7 +157,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "3fcdb0fbc40690d783fad5d21545dffe977a76d51f7e5ede79ea2a797a6915fe"
+    "bundle_sha256": "953005eb984f9d9dd5aeaa4e9a22f8366162ea0c5f72b199e1997c2b74e002be"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -165,7 +165,7 @@
     "official_runtime_entry_ref": "control/output-quarantine/runtime_entry_gate.py",
     "official_runtime_entry_sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24",
     "worker_freshness_guard_sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84",
-    "output_release_gate_sha256": "27edb683fbff98d5747a342274fcc176a2d834252d185cc1dc5661bb2df68c44",
+    "output_release_gate_sha256": "7e55ab7d4cf9569376955362b97881fb355b7dd48d8098564b353668e7277128",
     "final_review_visibility_guard_sha256": "c5f7284dc5d6a3bd69464162d18abed66e164ce8fd3bea05181f57fec2095913",
     "chat_execution_authority": "NONE",
     "chat_output_authority": "NONE",
