@@ -37,9 +37,6 @@ trait PPAR_Creative_Library_Trait {
             partner_name text NOT NULL,
             external_id varchar(191) NOT NULL,
             identity_hash char(64) NOT NULL,
-            variant_hash char(64) NOT NULL DEFAULT '',
-            format_family varchar(30) NOT NULL DEFAULT '',
-            duplicate_of_id bigint(20) unsigned NOT NULL DEFAULT 0,
             creative_type varchar(30) NOT NULL DEFAULT 'banner',
             title text NOT NULL,
             description longtext NULL,
@@ -68,8 +65,6 @@ trait PPAR_Creative_Library_Trait {
             last_seen bigint(20) unsigned NOT NULL DEFAULT 0,
             PRIMARY KEY  (id),
             UNIQUE KEY identity_hash (identity_hash),
-            KEY variant_family (variant_hash, format_family),
-            KEY duplicate_of (duplicate_of_id),
             KEY provider_partner (provider(20), partner_external_id(100)),
             KEY provider_source (provider(20), partner_external_id(100), source_kind, availability_state),
             KEY review_selected (review_status, selected),
@@ -106,7 +101,6 @@ trait PPAR_Creative_Library_Trait {
             $payload['_dimension_state'] = 'pending';
             $payload['_dimension_error'] = '';
             $payload['_image_sha256'] = '';
-            $payload['_visual_hash'] = '';
             $payload['_image_mime'] = '';
             $payload['_image_bytes'] = 0;
             $payload['_measured_at'] = 0;
@@ -364,182 +358,6 @@ trait PPAR_Creative_Library_Trait {
      * die maßgebliche Quelle. Providerangaben werden nur dokumentiert, niemals
      * stillschweigend als verifiziert behandelt.
      */
-    private function creative_library_visual_hash($body) {
-        if (!function_exists('imagecreatefromstring')
-            || !function_exists('imagecreatetruecolor')
-            || !function_exists('imagecopyresampled')
-            || !function_exists('imagecolorat')) {
-            return '';
-        }
-        $src = @imagecreatefromstring((string) $body);
-        if (!$src) { return ''; }
-        $sw = imagesx($src); $sh = imagesy($src);
-        if ($sw <= 0 || $sh <= 0) { imagedestroy($src); return ''; }
-        $dst = imagecreatetruecolor(9, 8);
-        if (!$dst) { imagedestroy($src); return ''; }
-        imagecopyresampled($dst, $src, 0, 0, 0, 0, 9, 8, $sw, $sh);
-        $bits = '';
-        for ($y = 0; $y < 8; $y++) {
-            for ($x = 0; $x < 8; $x++) {
-                $a = imagecolorat($dst, $x, $y);
-                $b = imagecolorat($dst, $x + 1, $y);
-                $ar = ($a >> 16) & 255; $ag = ($a >> 8) & 255; $ab = $a & 255;
-                $br = ($b >> 16) & 255; $bg = ($b >> 8) & 255; $bb = $b & 255;
-                $al = (int) round(($ar * 299 + $ag * 587 + $ab * 114) / 1000);
-                $bl = (int) round(($br * 299 + $bg * 587 + $bb * 114) / 1000);
-                $bits .= $al > $bl ? '1' : '0';
-            }
-        }
-        imagedestroy($dst);
-        imagedestroy($src);
-        $hex = '';
-        for ($i = 0; $i < 64; $i += 4) {
-            $hex .= dechex(bindec(substr($bits, $i, 4)));
-        }
-        return strlen($hex) === 16 ? $hex : '';
-    }
-
-    private function creative_library_format_family($width, $height) {
-        $width = absint($width); $height = absint($height);
-        if ($width <= 0 || $height <= 0) { return ''; }
-        $ratio = $width / $height;
-        if ($ratio >= 3.0) { return 'wide'; }
-        if ($ratio > 1.20) { return 'landscape'; }
-        if ($ratio >= 0.80) { return 'square'; }
-        return 'portrait';
-    }
-
-    private function creative_library_dedupe_text($value) {
-        $value = remove_accents(strtolower(wp_strip_all_tags((string) $value)));
-        return trim((string) preg_replace('/\s+/', ' ', $value));
-    }
-
-    private function creative_library_variant_hash($row, $payload) {
-        if (!is_array($row) || sanitize_key((string) ($row['creative_type'] ?? '')) !== 'banner') { return ''; }
-        $visual = sanitize_key((string) ($payload['_visual_hash'] ?? ''));
-        if ($visual === '') { return ''; }
-        $parts = array(
-            sanitize_key((string) ($row['provider'] ?? '')),
-            sanitize_text_field((string) ($row['partner_external_id'] ?? '')),
-            'banner',
-            $visual,
-            $this->creative_library_dedupe_text($row['title'] ?? ''),
-            $this->creative_library_dedupe_text($row['description'] ?? ''),
-            $this->creative_library_dedupe_text($row['tags'] ?? ''),
-            esc_url_raw((string) ($row['destination_url'] ?? '')),
-        );
-        return hash('sha256', implode('|', $parts));
-    }
-
-    private function creative_library_has_manual_override($identity_hash) {
-        if (!preg_match('/^[a-f0-9]{64}$/', (string) $identity_hash)
-            || !method_exists($this, 'output_portal_registry')
-            || !method_exists($this, 'output_portal_decision')) {
-            return false;
-        }
-        foreach ((array) $this->output_portal_registry() as $portal_key => $portal) {
-            $decision = $this->output_portal_decision((string) $portal_key, (string) $identity_hash);
-            if (!empty($decision['exists']) && sanitize_key((string) ($decision['manual_status'] ?? 'automatic')) !== 'automatic') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private function creative_library_apply_dedupe_for_variant($variant_hash, $format_family) {
-        $variant_hash = sanitize_text_field((string) $variant_hash);
-        $format_family = sanitize_key((string) $format_family);
-        if (!preg_match('/^[a-f0-9]{64}$/', $variant_hash) || $format_family === '') { return 0; }
-        global $wpdb;
-        $table = $this->creative_library_table();
-        $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT * FROM {$table} WHERE creative_type='banner' AND variant_hash=%s AND format_family=%s AND source_status='active' ORDER BY (width*height) DESC, id ASC",
-            $variant_hash,
-            $format_family
-        ), ARRAY_A);
-        $eligible = array();
-        foreach ((array) $rows as $row) {
-            if (!is_array($row) || !empty($row['selected']) || in_array((string) ($row['review_status'] ?? ''), array('approved','rejected'), true)) { continue; }
-            if ($this->creative_library_has_manual_override((string) ($row['identity_hash'] ?? ''))) { continue; }
-            $eligible[] = $row;
-        }
-        if (count($eligible) < 2) {
-            if (count($eligible) === 1 && sanitize_key((string) ($eligible[0]['availability_state'] ?? '')) === 'alias_duplicate') {
-                $wpdb->update($table, array('availability_state'=>'active','duplicate_of_id'=>0), array('id'=>absint($eligible[0]['id'])));
-                return 1;
-            }
-            return 0;
-        }
-        usort($eligible, static function ($a, $b) {
-            $aa = absint($a['width'] ?? 0) * absint($a['height'] ?? 0);
-            $bb = absint($b['width'] ?? 0) * absint($b['height'] ?? 0);
-            if ($aa === $bb) { return absint($a['id'] ?? 0) <=> absint($b['id'] ?? 0); }
-            return $bb <=> $aa;
-        });
-        $winner = $eligible[0];
-        $changed = 0;
-        if (sanitize_key((string) ($winner['availability_state'] ?? '')) !== 'active' || absint($winner['duplicate_of_id'] ?? 0) !== 0) {
-            $wpdb->update($table, array('availability_state'=>'active','duplicate_of_id'=>0), array('id'=>absint($winner['id'])));
-            $changed++;
-        }
-        foreach (array_slice($eligible, 1) as $row) {
-            $payload = json_decode((string) ($row['payload'] ?? ''), true);
-            $payload = is_array($payload) ? $payload : array();
-            $alias_payload = array(
-                '_dimension_state'=>(string) ($payload['_dimension_state'] ?? ''),
-                '_image_sha256'=>(string) ($payload['_image_sha256'] ?? ''),
-                '_visual_hash'=>(string) ($payload['_visual_hash'] ?? ''),
-                '_measured_at'=>absint($payload['_measured_at'] ?? 0),
-                '_dedupe_alias'=>array(
-                    'winner_identity_hash'=>(string) ($winner['identity_hash'] ?? ''),
-                    'winner_id'=>absint($winner['id'] ?? 0),
-                    'external_id'=>(string) ($row['external_id'] ?? ''),
-                    'width'=>absint($row['width'] ?? 0),
-                    'height'=>absint($row['height'] ?? 0),
-                ),
-            );
-            $wpdb->update($table, array(
-                'availability_state'=>'alias_duplicate',
-                'duplicate_of_id'=>absint($winner['id'] ?? 0),
-                'selected'=>0,
-                'topic_status'=>'dedupe_alias',
-                'payload'=>wp_json_encode($alias_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-            ), array('id'=>absint($row['id'])));
-            if (method_exists($this, 'automation_deactivate_creative_outputs')) {
-                $this->automation_deactivate_creative_outputs(
-                    (string) ($row['identity_hash'] ?? ''),
-                    'Eindeutig identische kleinere Creative-Variante; größte Originalversion bleibt produktiv.'
-                );
-            }
-            $changed++;
-        }
-        if ($changed && method_exists($this, 'automation_recheck_affected_inventory')) {
-            $this->automation_recheck_affected_inventory(
-                (string) ($winner['provider'] ?? ''),
-                (string) ($winner['partner_external_id'] ?? ''),
-                'creative_dedupe'
-            );
-        }
-        return $changed;
-    }
-
-    public function creative_library_rebuild_dedupe() {
-        global $wpdb;
-        $table = $this->creative_library_table();
-        $groups = $wpdb->get_results(
-            "SELECT variant_hash, format_family FROM {$table} WHERE creative_type='banner' AND variant_hash<>'' AND format_family<>'' GROUP BY variant_hash, format_family",
-            ARRAY_A
-        );
-        $changed = 0;
-        foreach ((array) $groups as $group) {
-            $changed += $this->creative_library_apply_dedupe_for_variant(
-                (string) ($group['variant_hash'] ?? ''),
-                (string) ($group['format_family'] ?? '')
-            );
-        }
-        return $changed;
-    }
-
     private function creative_library_remote_image_evidence($image_url, $force = false) {
         $image_url = esc_url_raw((string) $image_url);
         if ($image_url === '' || !wp_http_validate_url($image_url) || strtolower((string) wp_parse_url($image_url, PHP_URL_SCHEME)) !== 'https') {
@@ -587,7 +405,6 @@ trait PPAR_Creative_Library_Trait {
             'width'=>$width,
             'height'=>$height,
             'sha256'=>hash('sha256', $body),
-            'visual_hash'=>$this->creative_library_visual_hash($body),
             'mime'=>$content_type,
             'bytes'=>strlen($body),
             'measured_at'=>time(),
@@ -639,7 +456,6 @@ trait PPAR_Creative_Library_Trait {
         $payload['_dimension_state'] = $state;
         $payload['_dimension_error'] = '';
         $payload['_image_sha256'] = sanitize_text_field((string) ($evidence['sha256'] ?? ''));
-        $payload['_visual_hash'] = sanitize_text_field((string) ($evidence['visual_hash'] ?? ''));
         $payload['_image_mime'] = sanitize_text_field((string) ($evidence['mime'] ?? ''));
         $payload['_image_bytes'] = absint($evidence['bytes'] ?? 0);
         $payload['_measured_at'] = absint($evidence['measured_at'] ?? time());
@@ -648,19 +464,9 @@ trait PPAR_Creative_Library_Trait {
         $topic_status = 'auto_verified';
         $topic_score = 0;
         $topic_targets = '[]';
-        $candidate = array_merge($row, array(
-            'width'=>$width,
-            'height'=>$height,
-            'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-        ));
-        $format_family = $this->creative_library_format_family($width, $height);
-        $variant_hash = $this->creative_library_variant_hash($candidate, $payload);
         $wpdb->update($table, array(
             'width'=>$width,
             'height'=>$height,
-            'variant_hash'=>$variant_hash,
-            'format_family'=>$format_family,
-            'duplicate_of_id'=>0,
             'topic_status'=>$topic_status,
             'topic_score'=>$topic_score,
             'topic_targets'=>$topic_targets,
@@ -669,22 +475,12 @@ trait PPAR_Creative_Library_Trait {
         $updated = array_merge($row, array(
             'width'=>$width,
             'height'=>$height,
-            'variant_hash'=>$variant_hash,
-            'format_family'=>$format_family,
-            'duplicate_of_id'=>0,
             'topic_status'=>$topic_status,
             'topic_score'=>$topic_score,
             'topic_targets'=>$topic_targets,
             'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
         ));
-        if ($variant_hash !== '' && $format_family !== '') {
-            $this->creative_library_apply_dedupe_for_variant($variant_hash, $format_family);
-            $fresh = $this->creative_library_row_by_id(absint($row['id']));
-            if (is_array($fresh)) { $updated = $fresh; }
-        }
-        if ($replan
-            && sanitize_key((string) ($updated['availability_state'] ?? 'active')) === 'active'
-            && method_exists($this, 'output_plan_creative')) {
+        if ($replan && method_exists($this, 'output_plan_creative')) {
             $this->output_plan_creative($updated, true);
         }
         return $updated;
@@ -850,7 +646,6 @@ trait PPAR_Creative_Library_Trait {
             '_dimension_state'=>$dimension_state,
             '_dimension_error'=>'',
             '_image_sha256'=>'',
-            '_visual_hash'=>'',
             '_image_mime'=>'',
             '_image_bytes'=>0,
             '_measured_at'=>0,
@@ -872,9 +667,6 @@ trait PPAR_Creative_Library_Trait {
             'partner_name' => $partner_name,
             'external_id' => $external_id,
             'identity_hash' => hash('sha256', $provider . '|' . $partner_external_id . '|' . $external_id),
-            'variant_hash' => '',
-            'format_family' => '',
-            'duplicate_of_id' => 0,
             'creative_type' => $type,
             'title' => $title,
             'description' => $description,
@@ -992,7 +784,7 @@ trait PPAR_Creative_Library_Trait {
                     // the new creative's initial pending/0x0 state.
                     foreach (array(
                         '_declared_width','_declared_height','_dimension_state','_dimension_error',
-                        '_image_sha256','_visual_hash','_image_mime','_image_bytes','_measured_at',
+                        '_image_sha256','_image_mime','_image_bytes','_measured_at',
                         '_preverify_topic_status','_preverify_topic_score','_preverify_topic_targets'
                     ) as $runtime_key) {
                         if (array_key_exists($runtime_key, $existing_payload)) {
@@ -1350,7 +1142,7 @@ trait PPAR_Creative_Library_Trait {
     private function creative_library_query_rows($filters, $limit = 500) {
         global $wpdb;
         $table = $this->creative_library_table();
-        $where = array("creative_type<>'native_partner'", "external_id NOT LIKE 'native-%'", "availability_state NOT IN ('inactive_missing','alias_duplicate')");
+        $where = array("creative_type<>'native_partner'", "external_id NOT LIKE 'native-%'", "availability_state<>'inactive_missing'");
         $args = array();
         if (!empty($filters['provider'])) {
             $where[] = 'provider=%s';
