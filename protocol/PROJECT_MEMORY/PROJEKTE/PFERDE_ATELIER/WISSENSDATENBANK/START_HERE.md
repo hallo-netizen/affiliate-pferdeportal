@@ -33,7 +33,7 @@ neue Themenideen in den zentralen Themenpool aufnehmen, offene Themen prüfen, e
 für bloße Ideen bereits Aktenschränke anlegen, vorhandene SEO-/Kategorie-/Textwahrheiten duplizieren, schwache Quellen zur Hauptquelle machen, Fakten erfinden oder aus diesem Büro ungefragt andere Fachbüros verändern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `THEMENPOOL.md` → bei Recherche `RECHERCHE_STANDARD.md` → zuständiger Aktenschrank.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `THEMENPOOL.md` → bei Recherche `RECHERCHE_STANDARD.md` → zuständiger Aktenschrank.
 
 ---
 
