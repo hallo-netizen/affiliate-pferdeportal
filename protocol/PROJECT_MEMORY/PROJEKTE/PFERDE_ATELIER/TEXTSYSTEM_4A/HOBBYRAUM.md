@@ -1,5 +1,12 @@
 # TEXTSYSTEM 4A – HOBBYRAUM
 
+<!-- DERIVED_EXECUTION_SURFACE_V1 -->
+
+> **NICHT CURRENT-AUTORITATIV.** Diese Datei ist nur die abgeleitete Ausführungsfläche für eine bereits von der zuständigen Current-Autorität freigegebene Arbeit.  
+> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
+> Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
+
+
 STAND: 2026-09-13
 STATUS: BLOCKED / ENTSCHEIDUNGSBEWEIS EXTERNE WÄCHTERGRENZE
 
@@ -58,7 +65,7 @@ und nach dem Realrun zusätzlich:
 
 Der produktive Supervisor muss außerhalb der Codex-/Agent-Sandbox liegen und exklusiv State, Key, Phase, PASS, Route und Resume-Wahrheit besitzen. Repositoryweite/alte Produktionslogik darf den Worker nicht vor der 4A-Tür auf einen anderen Workflow ziehen.
 
-## JETZT VERBINDLICHE NEXT ACTION
+## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION
 
 Nur diesen Punkt prüfen/bauen:
 1. minimalen äußeren Supervisor-Betriebsweg definieren;
