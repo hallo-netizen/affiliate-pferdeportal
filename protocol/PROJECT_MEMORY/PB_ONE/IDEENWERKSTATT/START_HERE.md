@@ -31,7 +31,7 @@ lesen, schreiben, Ideen anlegen, verändern, verwerfen, Varianten entwickeln, Ge
 hier programmieren oder aus einer Rohidee ungeprüft einen technischen Projektauftrag machen.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `IDEENREGISTER.md`.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `IDEENREGISTER.md`.
 
 ## Nutzer + Paul
 
