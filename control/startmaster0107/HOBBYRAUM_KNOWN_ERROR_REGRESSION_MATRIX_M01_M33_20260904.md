@@ -82,14 +82,12 @@ M25 – Article prompt / Fachworkflow boundary: keine freie Neuplanung; bestehen
 
 ## Historische Regressionen – neu dauerhaft aufgenommen
 
-M26 – Bound Fachworkflow production context available to real PPM
+M26 – Bound production context available through current System 4
 - Historischer Fehler: BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING.
-- Das H8-Bootstrap-Paket darf fachlich leer bleiben; es ist Herkunfts-/Türbindung und keine Fachquelle.
-- Ab R_001 muss der aktuelle unveränderte Fachworkflow für current_item den echten aktuellen fact_pack und production_plan_v4-Kontext erzeugen/binden und wahrheitsgemäß an den bestehenden PPM-Handoff übergeben.
-- Fact-Pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata müssen artikel-/Plan-Slot-/Batch-konsistent sein.
-- Fehlender oder falscher Fachworkflow-Kontext = BLOCKED.
-- Kein Ersatzkontext aus alten Artikeln/Recovery und kein künstlich befülltes H8-Paket.
-
+- Nach der System-4-Migration liegt die Produktionskontext-Autorität ausschließlich im System-4-State: fact_pack + production_plan_item müssen hashgebunden sein und werden von Controller/Batch-Gate validiert.
+- batch_gate.py blockiert fehlenden oder manipulierten production_context; controller_engine.py blockiert Integritätsdrift; handoff_transport.py und system4_107008_handoff.py dürfen nur den bereits gebundenen Kontext transportieren.
+- NEW bleibt NEW; alte Artikel-/Recovery-Dateien bleiben als Produktionsquelle ausgeschlossen.
+- Der frühere codex_current_action.py/Fachworkflow-Handoff-Weg ist nicht mehr Produktionsautorität und darf deshalb nicht als M26-Prüfquelle verwendet werden.
 M27 – Current-main / production environment identity
 - Historische Fehler: CODEX_CHECKOUT_NOT_CURRENT_MAIN, CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING.
 - Dispatcher/Worker-HEAD muss exakt aktuellem main entsprechen.
