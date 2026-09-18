@@ -17,7 +17,7 @@ lesen, zuordnen, den richtigen Weg zeigen und den geladenen Stand kurz zurückme
 Fachinhalte ändern, technische Dateien ändern, Architektur umbauen, Fehler reparieren oder Entscheidungen für ein Fachbüro treffen.
 
 **ALS NÄCHSTES …**  
-Projektgebäude → Büro → CURRENT_STATE → HOBBYRAUM → verbindlicher Arbeitsweg.
+Projektgebäude → Büro → `AUTORITAETSPLAN.json` → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION.
 
 ## Harte Rollenregel
 
@@ -57,18 +57,16 @@ Wenn etwas mehrdeutig ist:
 Der Chat MUSS:
 
 1. diese Datei lesen;
-2. Projektgebäude bestimmen;
-3. dessen `START_HERE.md` lesen;
-4. zuständiges Büro bestimmen;
-5. dessen `CURRENT_STATE.md` lesen;
-6. dessen `HOBBYRAUM.md` lesen;
-7. `HANDLUNGSVERZEICHNIS.md` prüfen;
-8. relevante Fehler-/Änderungseinträge lesen;
-9. aktiven Zielvertrag prüfen;
-10. bei Modulfragen das Modulregister prüfen;
-11. bei WordPress-/Pluginfragen `WORDPRESS_REGISTER.md` prüfen;
-12. dem Nutzer den geladenen Stand zurückmelden;
-13. erst danach die Pförtnerrolle verlassen und zur zuständigen Arbeitsrolle wechseln.
+2. Projektgebäude und Büro bestimmen;
+3. `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` lesen;
+4. für den Scope **genau eine** Current-Autorität auflösen;
+5. deren vorgeschriebenen Frischecheck durchführen;
+6. bei unveränderter frischer Bindung **keine Vollrekonstruktion**, sondern direkt deren NEXT ACTION übernehmen;
+7. nur bei belegter Änderung das Delta seit der gebundenen Basis prüfen;
+8. Fehler-/Ziel-/Änderungsquellen nur soweit die Current-Autorität/NEXT ACTION sie für die konkrete Arbeit bindet;
+9. Hobbyraum/Task/Runner nur öffnen, wenn die Current-Autorität ihn als Ausführungsfläche bindet;
+10. dem Nutzer den geladenen Stand kurz zurückmelden;
+11. erst danach die Pförtnerrolle verlassen und zur zuständigen Arbeitsrolle wechseln.
 
 ## Pflicht-Rückmeldung
 
@@ -171,3 +169,12 @@ Routing:
 Harte Grenze:
 PB ONE programmiert nicht.
 Technische/fachliche Umsetzung wird bewusst an das zuständige Projekt-/Fachbüro übergeben.
+
+
+## HARD RULE – EINE CURRENT-AUTORITÄT
+
+Der Hauptpförtner erzeugt und pflegt keinen aktuellen Fachstand.
+Die Zuständigkeit kommt ausschließlich aus `AUTORITAETSPLAN.json`.
+Hobbyräume, Übergaben und Protokolle sind niemals Ersatz für die Current-Autorität.
+
+CAMPUS_SINGLE_TRUTH_ENTRY_V1
