@@ -3,6 +3,7 @@ from __future__ import annotations
 import contextlib
 import io
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -128,87 +129,40 @@ class MachineRouteLockContractTests(unittest.TestCase):
     def test_real_current_parent_start_stops_at_root_index0(self):
         runtime, _, items = parent_start.entry.runtime_binding()
         self.assertEqual(len(items), 7)
-        source_by_slot = {
-            '9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56': {
-                'source_id': 'fn-stangen-cavaletti',
-                'source_title': 'Online-Seminar: Mehr Losgelassenheit durch den Einsatz von Stangen und Cavaletti',
-                'source_url': 'https://app.pferd-aktuell.de/eticketing/onlineseminar/11-11-2026/mehr-losgelassenheit-durch-den-einsatz-von-stangen-und-cavaletti/1985',
-                'source_kind': 'WEB',
-            },
-            '6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19': {
-                'source_id': 'rieste-reitplatzbeleuchtung',
-                'source_title': 'Reitplatzbeleuchtung mit LED: Optimale Sicht für Reiter - RIESTE Licht',
-                'source_url': 'https://www.rieste.com/l/reitplatzbeleuchtung-led-reitplatz-flutlicht',
-                'source_kind': 'WEB',
-            },
-            '7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87': {
-                'source_id': 'lwk-festmistlager',
-                'source_title': 'Bauberatung - Landwirtschaftskammer Nordrhein-Westfalen',
-                'source_url': 'https://www.landwirtschaftskammer.de/Landwirtschaft/technik/bauberatung/index.htm',
-                'source_kind': 'WEB',
-            },
-            '5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288': {
-                'source_id': 'vhv-fremdreiter',
-                'source_title': 'Pferde-Haftpflichtversicherung | VHV',
-                'source_url': 'https://www.vhv.de/tierhalterhaftpflicht-versicherung/ratgeber/pferdehaftpflicht',
-                'source_kind': 'WEB',
-            },
-            '7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da': {
-                'source_id': 'fn-huffett-hufpflege',
-                'source_title': 'Behandlung von Krankheiten und Verletzungen beim Pferd | FN',
-                'source_url': 'https://app.pferd-aktuell.de/turniersport/anti-doping-und-medikation/behandlung-von-krankheiten-und-verletzungen',
-                'source_kind': 'WEB',
-            },
-            '8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648': {
-                'source_id': 'fn-fliegenmaske',
-                'source_title': 'FN-Turniertalk: Der Ausrüstungskatalog im Fokus',
-                'source_url': 'https://app.pferd-aktuell.de/news/aktuelle-meldungen/sport/fn-turniertalk-der-ausruestungskatalog-im-fokus',
-                'source_kind': 'WEB',
-            },
-            '906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5': {
-                'source_id': 'lwk-pellets',
-                'source_title': 'Ergänzungsfutter für Stuten und Fohlen - Landwirtschaftskammer Nordrhein-Westfalen',
-                'source_url': 'https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/pferdehaltung/fuetterung/vft-2018-063.htm',
-                'source_kind': 'WEB',
-            },
-        }
-        request_items = []
-        for index, item in enumerate(items):
-            slot = item['plan_slot']
-            self.assertIn(slot, source_by_slot)
-            request_items.append({
-                'item_index': index,
-                'plan_slot': slot,
-                'sources': [source_by_slot[slot]],
-            })
-        request = {
-            'contract': parent_start.SOURCE_CONTRACT,
-            'item_count': len(request_items),
-            'items': request_items,
-        }
 
-        with tempfile.TemporaryDirectory(prefix='system4-real-parent-start-') as td:
-            root = Path(td)
-            source_requests = root / 'source-requests.json'
-            source_requests.write_text(
-                json.dumps(request, ensure_ascii=False, indent=2, sort_keys=True) + '\n',
-                encoding='utf-8',
-            )
-            runtime_root = root / 'runtime'
-            receipt = parent_start.start(
-                str(source_requests),
-                str(runtime_root),
-                'SYSTEM4_PARENT_MACHINE_HTTP_V2',
-            )
-
+        receipt = parent_start.start_bound()
+        run_root = Path(receipt['run_root'])
+        try:
             self.assertEqual(receipt['status'], 'SYSTEM4_PARENT_ROOT_READY_STOP')
             self.assertEqual(receipt['batch_sha256'], runtime['batch_sha256'])
+            self.assertEqual(receipt['runtime_generation'], runtime['generation'])
             self.assertEqual(receipt['item_count'], 7)
+            self.assertEqual(receipt['source_requests_item_count'], 7)
             self.assertEqual(receipt['started_item_index'], 0)
             self.assertIs(receipt['root_only'], True)
             self.assertIs(receipt['codex_invoked'], False)
             self.assertIs(receipt['advance_invoked'], False)
+            self.assertIs(receipt['external_paths_auto_created'], True)
             self.assertIs(receipt['publish_allowed'], False)
+            self.assertEqual(
+                receipt['source_requests_bound_ref'],
+                runtime['source_requests_ref'],
+            )
+            self.assertEqual(
+                receipt['source_requests_bound_sha256'],
+                runtime['source_requests_sha256'],
+            )
+
+            repo_root = parent_start.REPO.resolve()
+            self.assertNotEqual(run_root.resolve(), repo_root)
+            self.assertNotIn(repo_root, run_root.resolve().parents)
+
+            source_requests = Path(receipt['source_requests'])
+            self.assertTrue(source_requests.is_file())
+            self.assertEqual(
+                parent_start._sha256(source_requests),
+                runtime['source_requests_sha256'],
+            )
 
             batch_root = Path(receipt['batch_root'])
             batch_state = json.loads(
@@ -230,12 +184,17 @@ class MachineRouteLockContractTests(unittest.TestCase):
             self.assertEqual(dispatch['worker_contract']['phase'], 'RESEARCH_REQUIRED')
             self.assertIs(dispatch['worker_contract']['publish_allowed'], False)
             print(
-                'SYSTEM4_REAL_PARENT_ROOT_PROOF_PASS:'
-                + parent_start.entry.REPO.joinpath('.git').as_posix()
+                'SYSTEM4_REAL_PARENT_BOUND_AUTOSTART_PROOF_PASS:'
+                + runtime['batch_sha256']
+                + ':generation=' + str(runtime['generation'])
+                + ':source_requests_hash=' + runtime['source_requests_sha256']
                 + ':SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY'
                 + ':SYSTEM4_107007_BATCH_ROOT_READY_STOP'
+                + ':external_paths_auto_created=true'
                 + ':worker_started=false'
             )
+        finally:
+            shutil.rmtree(run_root, ignore_errors=True)
 
 
 if __name__ == '__main__':

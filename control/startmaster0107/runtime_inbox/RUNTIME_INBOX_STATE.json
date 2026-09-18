@@ -8,5 +8,7 @@
   "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
   "production_package_ref": "control/startmaster0107/runtime_inbox/generations/000001/PRODUCTION_PACKAGE.json",
   "production_package_sha256": "6e8bd5b150377d5451397eb59ceeff30d0b631bb38d859d8e73b2659c90cb896",
-  "publish_allowed": false
+  "publish_allowed": false,
+  "source_requests_ref": "control/startmaster0107/runtime_inbox/generations/000001/SOURCE_REQUESTS.json",
+  "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f"
 }

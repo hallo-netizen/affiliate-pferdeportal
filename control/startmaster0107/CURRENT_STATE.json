@@ -76,7 +76,9 @@
     "SYSTEM4_RELEASE_IDENTITY_PR315_MERGED_728BD721B3C9BA3A969E7C12E2BA62E0A61C1A64",
     "SYSTEM4_POST_MERGE_ENTRANCE_RUN_35364478599_PASS",
     "IMMUTABLE_BASE_HARDLOCK_RESTORED_RULESET_21788951",
-    "SYSTEM4_FINAL_PRECODEX_FRESHNESS_HASH_POINT0_NEW_RECONFIRMED_D127671D9D92300AB12A73466A75E0C290C930E4"
+    "SYSTEM4_FINAL_PRECODEX_FRESHNESS_HASH_POINT0_NEW_RECONFIRMED_D127671D9D92300AB12A73466A75E0C290C930E4",
+    "SYSTEM4_BOUND_SOURCE_REQUEST_AUTOSTART_FIX_PR326_PROVEN",
+    "SYSTEM4_BOUND_SOURCE_REQUEST_REAL_PARENT_RUN_35375967851_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -89,7 +91,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "1580c0777d4e8d0c2365fd60043666d3c77566390f1b36ec44d3913a885d0138",
+    "bundle_sha256": "d1133a9188e2c4f09fa322c7d48ac36406bf42274247f47cdecfb79162ffa908",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -165,7 +167,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "1580c0777d4e8d0c2365fd60043666d3c77566390f1b36ec44d3913a885d0138"
+    "bundle_sha256": "d1133a9188e2c4f09fa322c7d48ac36406bf42274247f47cdecfb79162ffa908"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -182,24 +184,24 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "PRECODEX_READY_AWAITING_EXPLICIT_CODEX_APPROVAL",
+  "current_work_status": "PRECODEX_READY_BOUND_SOURCE_AUTOSTART_PROVEN_AWAITING_MERGE_APPROVAL",
   "current_execution_blocker": {
-    "code": "EXPLICIT_CODEX_APPROVAL_MISSING",
+    "code": "EXPLICIT_MERGE_APPROVAL_MISSING",
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "PR #315 is integrated. The immutable hardlock is restored. On current main d127671d9d92300ab12a73466a75e0c290c930e4, CURRENT_STARTMASTER/START_HERE/CURRENT_STATE were re-read, all bound SHA256 values matched, and Point-0 plus NEW-source protection code remained unchanged from the proven head. The only remaining gate before the real complete 7-item Codex run is explicit user approval.",
+    "detail": "PR #326 repairs the two real pre-Codex start failures. The generation-bound SOURCE_REQUESTS.json is hash-bound through RUNTIME_INBOX_STATE, the canonical 107007 command is the parameterless start-current-bound entry, and the parent auto-creates external runtime/workspace paths. The real seven-item no-Codex parent start has reached Point-0 and WORKER_DISPATCH_READY and stopped before worker start. Separate merge approval is required before integration.",
+    "pr": 326,
     "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
     "runtime_generation": 1,
-    "release_identity_scheme": "BATCH_SHA256_PLUS_RUNTIME_GENERATION",
-    "historical_recovery_source_present": true,
-    "historical_endstempel_release_present": true,
-    "old_article_bodies_forbidden": true,
-    "full_acceptance_run_id": 35361139485,
-    "targeted_proof_run_id": 35361249579,
-    "final_entrance_run_id": 35361368650,
-    "parent_chat_final_file_required": true,
-    "temp_only_handoff_forbidden": true,
+    "source_requests_ref": "control/startmaster0107/runtime_inbox/generations/000001/SOURCE_REQUESTS.json",
+    "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f",
+    "canonical_start_command": "python3 isolated_system4/parent_start.py start-current-bound",
+    "canonical_step_sha256": "d1133a9188e2c4f09fa322c7d48ac36406bf42274247f47cdecfb79162ffa908",
+    "external_paths_auto_created": true,
+    "point0_pass": true,
+    "worker_dispatch_ready": true,
+    "worker_started": false,
     "codex_start_allowed": false,
     "publish_allowed": false
   },
@@ -254,32 +256,31 @@
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
   "last_safe_main_sha": "d127671d9d92300ab12a73466a75e0c290c930e4",
-  "last_safe_change": "Final pre-Codex current-main freshness check passed: all bound hashes matched; Point-0 and NEW-source protections remain unchanged from the proven code; hardlock + hardlock-base remain active with no bypass.",
+  "last_safe_change": "PR #326 binds the current seven-item source requests to runtime generation 1, makes the parameterless bound parent start canonical, auto-creates external runtime paths, and has real no-Codex Point-0/WORKER_DISPATCH_READY proof. Merge remains separately gated.",
   "hobbyroom_status": "HISTORY_ONLY_PRODUCT_FIX_MOVED_TO_PR315",
   "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
   "hobbyroom_blocker": "HISTORY_ONLY_NO_PRODUCT_ACTION",
   "next_action": {
-    "goal": "Wait for explicit user approval, then start only the real complete seven-item Codex run through the bound System-4 route.",
+    "goal": "Obtain separate merge approval for PR #326; after merge, re-run current-main entrance/parent-start verification and only then wait for separate explicit Codex approval.",
     "required_order": [
-      "Keep the complete seven-item batch unchanged.",
-      "Do not start Codex until the user explicitly approves the real complete seven-item run.",
-      "After explicit approval, start only the complete seven-item run through the bound System-4 route.",
-      "Keep historical recovery article bodies forbidden as production input.",
-      "Keep the final signed file durable and retrievable into the parent chat.",
-      "Do not auto-publish."
+      "Do not start Codex.",
+      "Merge PR #326 only after separate user merge approval.",
+      "After merge, re-read current main and all bound hashes.",
+      "Re-run the parameterless real current parent start without Codex on merged main.",
+      "Require WORKER_DISPATCH_READY and worker_started=false.",
+      "Then require separate explicit user approval before any Codex run.",
+      "Do not publish."
     ],
     "forbidden": [
-      "standalone real one-article batch",
-      "Codex before explicit user approval",
-      "manual batch-hash mutation",
+      "merge without separate approval",
+      "Codex before separate explicit approval",
+      "manual source_requests placeholder",
+      "manual workspace placeholder",
+      "legacy production route",
       "old recovery article bodies as writing source",
-      "temp-only final handoff",
-      "new parallel workflow",
-      "auto-publish",
-      "relaxing the immutable hardlock"
-    ],
-    "proof_after_fix": "PR #315 merged; hardlock restored; post-merge entrance PASS; current-main SHA256 bindings PASS; Point-0 and NEW-source protections unchanged from proven head. Only explicit Codex approval remains."
+      "auto-publish"
+    ]
   },
   "hobbyroom_pr": 307,
   "hobbyroom_head_sha": "3c2fdeb181f3dcd693695f28058c06db64e857a1",
@@ -320,6 +321,21 @@
     ],
     "bypass_actors": [],
     "hardlock_restored": true,
+    "publish_allowed": false
+  },
+  "precodeex_start_repair": {
+    "status": "PROVEN_PENDING_MERGE_APPROVAL",
+    "pr": 326,
+    "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+    "runtime_generation": 1,
+    "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f",
+    "start_command": "python3 isolated_system4/parent_start.py start-current-bound",
+    "step_sha256": "d1133a9188e2c4f09fa322c7d48ac36406bf42274247f47cdecfb79162ffa908",
+    "external_paths_auto_created": true,
+    "point0_pass": true,
+    "worker_dispatch_ready": true,
+    "worker_started": false,
+    "codex_used": false,
     "publish_allowed": false
   }
 }
