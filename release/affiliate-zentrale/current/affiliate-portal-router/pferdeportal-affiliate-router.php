@@ -1650,6 +1650,67 @@ JS;
         $context = $this->get_content_context($post_id);
         return $this->render_affiliate_slot_for_context($post_id, $context, $slot_type, $intent, $forced_group_id);
     }
+
+    /**
+     * Einheitlicher grosser Querbanner fuer Startseite, Kategorien und Portal-Seiten.
+     * Grundlage ist der bereits hart gepruefte Kategorie-Querbannervertrag:
+     * nur echte Querformate, proportional, kein Crop, maximal +10 % Upscaling.
+     */
+    private function overview_wide_banner_rule($slot_type) {
+        $slot_type = sanitize_key((string) $slot_type);
+        if ($slot_type === 'start_after_topics') {
+            return array(
+                'creative_type'=>'banner','ratio_min'=>3.00,'ratio_max'=>12.00,
+                'min_width'=>600,'min_height'=>60,'crop'=>'contain',
+                'target_types'=>array('page'),'target_contexts'=>array('start'),
+                'upscale_max'=>1.10,'min_fill'=>0.60,
+            );
+        }
+        if ($slot_type === 'hub_after_cards') {
+            return array(
+                'creative_type'=>'banner','ratio_min'=>3.00,'ratio_max'=>12.00,
+                'min_width'=>700,'min_height'=>60,'crop'=>'contain',
+                'target_types'=>array('page'),'target_contexts'=>array('hub1','hub2'),
+                'upscale_max'=>1.10,'min_fill'=>0.60,
+            );
+        }
+        if (in_array($slot_type, array('product_after_category_tiles','category_recommendation'), true)) {
+            return array(
+                'creative_type'=>'banner','ratio_min'=>3.00,'ratio_max'=>12.00,
+                'min_width'=>600,'min_height'=>60,'crop'=>'contain',
+                'target_types'=>array('page','category'),'target_contexts'=>array('category','leaf','leaf_category'),
+                'upscale_max'=>1.10,'min_fill'=>0.60,
+            );
+        }
+        return array();
+    }
+
+    private function overview_wide_banner_slot($slot_type) {
+        return !empty($this->overview_wide_banner_rule($slot_type));
+    }
+
+    private function overview_wide_banner_campaign_eligible($campaign, $slot_type) {
+        $rule = $this->overview_wide_banner_rule($slot_type);
+        if (!$rule || !is_array($campaign)
+            || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner'
+            || sanitize_key((string) ($campaign['render_mode'] ?? 'image_link')) === 'html'
+            || trim((string) ($campaign['image_url'] ?? '')) === '') {
+            return false;
+        }
+        list($width, $height) = $this->article_banner_dimensions($campaign);
+        $width = absint($width);
+        $height = absint($height);
+        if ($width <= 0 || $height <= 0) { return false; }
+        $ratio = $width / $height;
+        if ($ratio < (float) $rule['ratio_min'] || $ratio > (float) $rule['ratio_max']) { return false; }
+        $scale = max(
+            1.0,
+            absint($rule['min_width']) / $width,
+            absint($rule['min_height']) / $height
+        );
+        return $scale <= ((float) $rule['upscale_max'] + 0.00001);
+    }
+
     /**
      * Dynamische Abdeckung innerhalb derselben Relevanzstufe.
      * Reihenfolge: Relevanz -> am wenigsten beruecksichtigter Partner ->
@@ -2034,20 +2095,28 @@ JS;
                         $label = !empty($banner['label']) ? sanitize_text_field($banner['label']) : '';
                         $disclosure = $this->get_disclosure_html($content_id);
                         $is_category_product_slot = preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
+                        $is_overview_wide_banner_slot = $this->overview_wide_banner_slot($slot_type);
                         // V6.61.8: Provider labels must never change category-product card geometry.
-                        // The provider remains represented by its offer button/link; the external
-                        // label row is suppressed for these three fixed product slots only.
-                        if ($is_category_product_slot) { $label = ''; }
+                        // Grosse Querbanner zeigen ebenfalls keinen technischen Creative-/Partnernamen.
+                        if ($is_category_product_slot || $is_overview_wide_banner_slot) { $label = ''; }
                         if ($is_category_product_slot && $disclosure === '' && trim((string)get_option(self::OPTION_DISCLOSURE, '')) !== '') {
                             $disclosure = '<div class="ppar-affiliate-disclosure ppar-affiliate-disclosure--reserve" aria-hidden="true">&nbsp;</div>';
                         }
                         $category_product_slot_style = $is_category_product_slot
                             ? ' style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"'
                             : '';
+                        if ($is_overview_wide_banner_slot) { $classes[] = 'ppar-overview-wide-banner-slot'; }
                         $out = '<div class="' . esc_attr(implode(' ', $classes)) . '" data-ppar-slot="' . esc_attr($slot_type) . '" data-ppar-group="' . esc_attr($group['id'] ?? '') . '"' . $category_product_slot_style . '>';
-                        $out .= $disclosure;
-                        if ($label !== '') { $out .= '<div class="ppar-affiliate-label">' . esc_html($label) . '</div>'; }
-                        $out .= '<div class="ppar-affiliate-content">' . $html . '</div></div>';
+                        if ($is_overview_wide_banner_slot) {
+                            $out .= '<div class="ppar-overview-wide-banner-adlabel">Anzeige</div>';
+                            $out .= '<div class="ppar-affiliate-content">' . $html . '</div>';
+                            $out .= $disclosure;
+                        } else {
+                            $out .= $disclosure;
+                            if ($label !== '') { $out .= '<div class="ppar-affiliate-label">' . esc_html($label) . '</div>'; }
+                            $out .= '<div class="ppar-affiliate-content">' . $html . '</div>';
+                        }
+                        $out .= '</div>';
                         return $out . $this->debug_comment('affiliate_rendered', $content_id, $slot_type, $group['id'] ?? '', $banner['id'] ?? '');
                     }
                 }
@@ -2055,7 +2124,7 @@ JS;
         }
         // V2.4.0: Die fest definierten Banner-/Produktplätze der Produkt- und
         // Kategorieebene dürfen öffentlich niemals Platzhalter ausgeben.
-        if ($slot_type === 'product_after_category_tiles' || preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type))) {
+        if ($this->overview_wide_banner_slot($slot_type) || preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type))) {
             return $this->debug_comment('affiliate_no_real_creative', $content_id, $slot_type, '', '');
         }
         $placeholder = $this->render_placeholder_slot($slot_type);
@@ -2181,6 +2250,17 @@ JS;
 
         $target = (($banner['target'] ?? '_blank') === '_self') ? '_self' : '_blank';
         $rel = $target === '_blank' ? 'sponsored nofollow noopener noreferrer' : 'sponsored nofollow';
+
+        if ($this->overview_wide_banner_slot($slot_type)) {
+            if (!$this->overview_wide_banner_campaign_eligible($banner, $slot_type) || $image_url === '') { return ''; }
+            list($banner_width, $banner_height) = $this->article_banner_dimensions($banner);
+            $banner_width = max(1, absint($banner_width));
+            $banner_height = max(1, absint($banner_height));
+            return '<a class="ppar-overview-wide-banner-link" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">' .
+                '<img class="ppar-overview-wide-banner-image" src="' . esc_url($image_url) . '" alt="Anzeige" width="' . $banner_width . '" height="' . $banner_height . '" loading="lazy" decoding="async">' .
+                '</a>';
+        }
+
         $offers = array();
         if ($creative_type === 'product' && $category_product_slot && method_exists($this, 'multiprovider_matching_offers_for_banner')) {
             $offers = $this->multiprovider_matching_offers_for_banner($banner, $context, $slot_type);
@@ -3137,6 +3217,7 @@ JS;
             }
             $required_type = $this->slot_required_creative_type($slot_type);
             if ($required_type !== '' && sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== $required_type) { continue; }
+            if ($this->overview_wide_banner_slot($slot_type) && !$this->overview_wide_banner_campaign_eligible($campaign, $slot_type)) { continue; }
             if ($exact_mode) {
                 if (!$this->affiliate_campaign_matches_exact_identifiers($campaign, $exact_identifiers)) { continue; }
                 // Productwissen exact identity is the fachliche target decision.
