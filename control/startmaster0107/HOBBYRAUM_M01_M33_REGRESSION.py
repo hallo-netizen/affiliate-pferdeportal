@@ -57,7 +57,14 @@ def m02():
     s=STEP7.read_text(encoding="utf-8")
     must("ARTICLE_<plan_slot>.md" in s or "ARTICLE_" in s,"M02_UNIQUE_ARTICLE_BINDING_MISSING")
     must("STAGING_DESTINATION_COLLISION" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M02_COLLISION_GUARD_MISSING")
-def m03(): must("DUAL_ROOTFIX_POSITIVE_NEGATIVE_PASS" in cmd("control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py","selftest"),"M03_PREPARED_TEST")
+def m03():
+    # Historical PREPARED persist/restore failure, proven on today's System-4 route.
+    cmd("control/startmaster0107/test_system4_107008_handoff.py")
+    batch=(REPO/"control/startmaster0107/system4_107007_batch.py").read_text(encoding="utf-8")
+    handoff=(REPO/"control/startmaster0107/system4_107008_handoff.py").read_text(encoding="utf-8")
+    must("SYSTEM4_107007_BATCH_STATE.json" in batch and "batch_collect" in batch,"M03_107007_PERSIST_BINDING_MISSING")
+    must('BATCH_STATE = "SYSTEM4_107007_BATCH_STATE.json"' in handoff,"M03_107008_RESTORE_SOURCE_MISSING")
+    must("SYSTEM4_107008_V2_INPUT_BINDING_V1" in handoff and "batch_evidence_sha256" in handoff,"M03_107008_RESTORE_BINDING_MISSING")
 def m04(): must("def finalize_after_107008" in DUAL.read_text(encoding="utf-8") and "elif len(a)==2 and a[0]=='finalize'" in DUAL.read_text(encoding="utf-8"),"M04_FINALIZE_CLI")
 def m05(): must("durable_receipt_path" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M05_DURABLE_RECEIPT")
 def m06(): must("NEGATIVE_UNKNOWN_CONTRACT_BLOCKED" in cmd("control/startmaster0107/production-package-release/test_production_package_release_gate.py"),"M06_FAKE_CONTRACT")
@@ -73,46 +80,42 @@ def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/sta
 def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
 def _m15_validate_instruction(text):
     required=(
-        "fachworkflow_handoff.request_required_fields",
-        "fachworkflow_handoff.request_ref",
-        "fachworkflow_handoff.command",
-        "FACHWORKFLOW_PROOF_HANDOFF_PASS",
-        "submission_command",
+        "python3 isolated_system4/parent_start.py start-current",
+        "machine_point0.py build-current-fetch",
+        "system4_107007_batch.py start",
+        "SYSTEM4_107007_BATCH_ROOT_READY_STOP",
+        "root_entry.py start-point0",
+        "SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY",
+        "Ein automatischer Aufruf von codex_entry.py worker-start ist verboten.",
+        "isolated_system4/controller.py repair",
+        "isolated_system4/controller.py fullcheck",
+        "batch_gate.py collect",
+        "VERBOTEN für 107007-Repair",
     )
     for token in required:
-        must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
-    low=text.casefold()
-    must("keine capability-suche" in low,"M15_CAPABILITY_SEARCH_NOT_FORBIDDEN")
-    must(
-        "kein zweiter executor" in low or "kein separater fachworkflow-executor" in low,
-        "M15_SECOND_EXECUTOR_NOT_FORBIDDEN",
-    )
-    must("keine alternativroute" in low,"M15_ALTERNATIVE_ROUTE_NOT_FORBIDDEN")
-    i_request=text.index("fachworkflow_handoff.request_ref")
-    i_command=text.index("fachworkflow_handoff.command")
-    i_pass=text.index("FACHWORKFLOW_PROOF_HANDOFF_PASS")
-    i_submit=text.index("submission_command")
-    must(i_request < i_command < i_pass < i_submit,"M15_HANDOFF_ORDER_CONTRADICTION")
-    forbidden=(
-        "kein handoff-request",
-        "handoff-request nicht erzeugen",
-        "submission_command führt direkt",
-        "vorab-handoff durch den worker erforderlich",
-    )
-    for token in forbidden:
-        must(token not in low,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
+        must(token in text,"M15_REQUIRED_SYSTEM4_INSTRUCTION_MISSING:"+token)
+    for legacy in (
+        "control/single-door-boundary/codex_current_room_bridge.py",
+        "control/single-door-boundary/codex_current_action.py",
+        "control/startmaster0107/fachworkflow_proof_handoff.py",
+        "control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py",
+    ):
+        must(legacy in text,"M15_LEGACY_ROUTE_PROHIBITION_MISSING:"+legacy)
+    must("submission_command" in text and "dürfen den aktuellen System-4-Artikel weder reparieren noch routen" in text,
+         "M15_LEGACY_SUBMISSION_ROUTE_NOT_BLOCKED")
+    must(text.index("machine_point0.py build-current-fetch") < text.index("system4_107007_batch.py start"),
+         "M15_PARENT_ORDER_INVALID")
+    must(text.index("root_entry.py start-point0") < text.index("SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY"),
+         "M15_ROOT_ORDER_INVALID")
 
 def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
-    bad_order=text.replace(
-        "Danach ausschließlich fachworkflow_handoff.command ausführen.",
-        "submission_command ausführen; danach ausschließlich fachworkflow_handoff.command ausführen.",
-        1,
-    )
-    expect_exc(lambda:_m15_validate_instruction(bad_order),"M15_HANDOFF_ORDER_CONTRADICTION")
-    bad_direct=text+"\nKein Handoff-Request; submission_command führt direkt."
-    expect_exc(lambda:_m15_validate_instruction(bad_direct),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
+    bad_auto=text.replace("Ein automatischer Aufruf von codex_entry.py worker-start ist verboten.","Codex worker-start wird automatisch ausgeführt.",1)
+    expect_exc(lambda:_m15_validate_instruction(bad_auto),"M15_REQUIRED_SYSTEM4_INSTRUCTION_MISSING")
+    bad_legacy=text.replace("VERBOTEN für 107007-Repair","ERLAUBT für 107007-Repair",1)
+    expect_exc(lambda:_m15_validate_instruction(bad_legacy),"M15_REQUIRED_SYSTEM4_INSTRUCTION_MISSING")
+
 def _m16_validate_signer_boundary(runtime_src:str,finalizer_src:str,step_instruction:str)->None:
     for token in ("PSERC_SIGNER_CMD","ENDSTEMPEL_HSM_CMD","call_signer("):
         must(token not in runtime_src,"M16_SIGNER_EXPOSED_TO_RUNTIME:"+token)
