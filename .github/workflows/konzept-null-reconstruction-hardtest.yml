@@ -78,6 +78,52 @@ jobs:
           printf '%s\n' "$matches" | sed -n '1,20p'
           echo "PPM_6_7_9_PACKAGE_STRUCTURE_PASS"
 
+      - name: Prove PPM main-file identity and run bundled normal-draft tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp -d)
+          unzip -q konzept_null/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d "$tmp/ppm"
+          expected=0874f26f21e471007922cf759ea5ad52bdc61a5975931898e83e9ff8f6418906
+          found=""
+          while IFS= read -r -d '' file; do
+            h=$(sha256sum "$file" | awk '{print $1}')
+            if [ "$h" = "$expected" ]; then
+              found="$file"
+              break
+            fi
+          done < <(find "$tmp/ppm" -type f -print0)
+          test -n "$found"
+          echo "PPM_MAIN_FILE_HASH_PASS=$found"
+          testdir="$tmp/ppm/portal-production-machine/tests/normal-draft-production"
+          test -d "$testdir"
+          count=0
+          for testfile in "$testdir"/test-*.php; do
+            test -f "$testfile" || continue
+            echo "RUNNING_NORMAL_DRAFT_TEST=$testfile"
+            php "$testfile"
+            count=$((count+1))
+          done
+          test "$count" -gt 0
+          echo "PPM_NORMAL_DRAFT_BUNDLED_TESTS_PASS_COUNT=$count"
+
+      - name: Reconstruct and execute exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp -d)
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o "$tmp/LanguageTool-6.8.zip"
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  '"$tmp"'/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q "$tmp/LanguageTool-6.8.zip" -d "$tmp"
+          jar="$tmp/LanguageTool-6.8/languagetool-commandline.jar"
+          test -f "$jar"
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  '"$jar" | sha256sum -c -
+          java -jar "$jar" --version | tee "$tmp/version.txt"
+          grep -q '6.8' "$tmp/version.txt"
+          echo "LANGUAGETOOL_6_8_REAL_EXECUTION_PASS"
+
       - name: Quarantine nonhistorical PSERC package
         shell: bash
         run: |
