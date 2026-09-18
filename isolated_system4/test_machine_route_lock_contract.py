@@ -126,6 +126,40 @@ class MachineRouteLockContractTests(unittest.TestCase):
             self.assertIs(receipt['publish_allowed'], False)
 
 
+    def test_codex_root_override_matches_current_bound_parent_start(self):
+        override = (parent_start.REPO / 'AGENTS.override.md').read_text(encoding='utf-8')
+        self.assertIn(
+            'python3 isolated_system4/parent_start.py start-current-bound',
+            override,
+        )
+        self.assertIn('The first executable project production command is exactly:', override)
+        self.assertIn(
+            'No manual SOURCE_REQUESTS path, runtime-root path, workspace path, '
+            'article index or provider argument may be supplied',
+            override,
+        )
+        self.assertIn(
+            'For current 107007, `parent_start.py start-current-bound` '
+            'is the only allowed normal production entrance.',
+            override,
+        )
+        self.assertIn(
+            'python3 isolated_system4/root_entry.py start-point0 '
+            '<POINT0_OUTSIDE_REPO> <WORKSPACE_OUTSIDE_REPO> <N>',
+            override,
+        )
+        self.assertIn(
+            'SYSTEM4 branch: DO NOT run `control/cloud-entry-gate/cloud_entry.py` '
+            'before or instead of the System-4 root entry.',
+            override,
+        )
+        self.assertNotIn(
+            'This file exists only for the dedicated branch '
+            '`hobbyroom/system4-true-single-room-v1`',
+            override,
+        )
+
+
     def test_real_current_parent_start_stops_at_root_index0(self):
         runtime, _, items = parent_start.entry.runtime_binding()
         self.assertEqual(len(items), 7)
