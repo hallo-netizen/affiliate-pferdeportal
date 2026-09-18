@@ -1,5 +1,10 @@
 # NOTFALL-TRESOR – STATUS
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität des TRESOR-Scopes.** Aktueller Prüfstand, offene Restoregrenze und NEXT ACTION werden nur hier gepflegt.
+
+
 STAND: 2026-09-08
 
 ## GESAMTSTATUS
@@ -135,7 +140,7 @@ Damit ist für den lokalen Stand 2026-09-08_09-33-26 der Wiederaufbau der gesich
 Providergrenze bleibt unverändert:
 GitHub-Secret-Werte und einzelne providerinterne Informationen sind nicht 1:1 exportierbar.
 
-NEXT ACTION:
+## NEXT ACTION
 Kein weiterer Test dieses identischen lokalen Backupstands erforderlich. Nächster lokaler Lauf erst bei gewünschter Aktualisierung per Doppelklick.
 
 
