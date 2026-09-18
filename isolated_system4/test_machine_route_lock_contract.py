@@ -9,6 +9,7 @@ from pathlib import Path
 from unittest import mock
 
 import controller
+import parent_start
 import root_entry
 
 
@@ -72,6 +73,56 @@ class MachineRouteLockContractTests(unittest.TestCase):
                  mock.patch.object(controller.worker_dispatch, 'verify_bundle', return_value=({}, b'{}')), \
                  mock.patch.object(controller.supervisor, 'verify_controller_binding', return_value=None):
                 controller._machine_route_lock('research', str(ws))
+
+    def test_reconnected_parent_uses_current_point0_then_root_only_batch_start(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source_requests = root / 'source-requests.json'
+            source_requests.write_text('{}\n', encoding='utf-8')
+            runtime_root = root / 'runtime'
+            runtime = {'batch_sha256': 'a' * 64}
+            items = [{'plan_slot': 'b' * 64} for _ in range(7)]
+            batch_result = json.dumps({
+                'ok': True,
+                'status': 'SYSTEM4_107007_BATCH_ROOT_READY_STOP',
+                'batch_sha256': runtime['batch_sha256'],
+                'item_count': 7,
+                'item_index': 0,
+                'completed_count': 0,
+                'publish_allowed': False,
+            })
+            with mock.patch.object(parent_start, '_validate_current_source_requests', return_value=(runtime, items)), \
+                 mock.patch.object(
+                     parent_start,
+                     '_run_checked',
+                     side_effect=[
+                         'SYSTEM4_MACHINE_POINT0_CURRENT_PASS:' + ('c' * 64),
+                         batch_result,
+                     ],
+                 ) as runner:
+                receipt = parent_start.start(
+                    str(source_requests),
+                    str(runtime_root),
+                    'SYSTEM4_PARENT_MACHINE_HTTP_V2',
+                )
+
+            self.assertEqual(runner.call_count, 2)
+            point0_cmd = runner.call_args_list[0].args[0]
+            batch_cmd = runner.call_args_list[1].args[0]
+            self.assertEqual(point0_cmd[1], str(parent_start.MACHINE_POINT0))
+            self.assertIn('build-current-fetch', point0_cmd)
+            self.assertEqual(batch_cmd[1], str(parent_start.BATCH_START))
+            self.assertIn('start', batch_cmd)
+            joined = ' '.join(point0_cmd + batch_cmd).lower()
+            self.assertNotIn('codex_entry.py', joined)
+            self.assertNotIn('worker-start', joined)
+            self.assertNotIn('advance', joined)
+            self.assertEqual(receipt['status'], 'SYSTEM4_PARENT_ROOT_READY_STOP')
+            self.assertEqual(receipt['started_item_index'], 0)
+            self.assertIs(receipt['root_only'], True)
+            self.assertIs(receipt['codex_invoked'], False)
+            self.assertIs(receipt['advance_invoked'], False)
+            self.assertIs(receipt['publish_allowed'], False)
 
 
 if __name__ == '__main__':
