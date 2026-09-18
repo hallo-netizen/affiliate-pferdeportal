@@ -71,6 +71,14 @@ def source_item_count(src: dict[str, Any]) -> int:
         raise Blocked("SOURCE_ITEM_COUNT_INVALID")
     return count
 
+def runtime_generation(value) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+        raise Blocked("RUNTIME_GENERATION_INVALID")
+    return value
+
+def generation_name(value) -> str:
+    return f"generation-{runtime_generation(value):06d}"
+
 def load_source(ref: str) -> tuple[dict[str, Any], Path, str]:
     path = safe(ref)
     if not path.is_file():
@@ -81,7 +89,8 @@ def load_source(ref: str) -> tuple[dict[str, Any], Path, str]:
     batch = str(src.get("batch_sha256") or "")
     if not SHA_RE.fullmatch(batch):
         raise Blocked("BATCH_INVALID")
-    expected = (REPO / "control/startmaster0107/recovery_sources" / batch / "MANIFEST.json").resolve()
+    generation = runtime_generation(src.get("runtime_generation"))
+    expected = (REPO / "control/startmaster0107/recovery_sources" / batch / generation_name(generation) / "MANIFEST.json").resolve()
     if path.resolve() != expected:
         raise Blocked("SOURCE_LOCATION_INVALID")
     source_item_count(src)
@@ -233,7 +242,8 @@ def finalize(source_ref: str) -> dict[str, Any]:
     count = len(before)
     import_envelope, import_envelope_sha256 = load_import_envelope(src, source_path, batch)
     validate_import_envelope_articles(import_envelope, before)
-    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": count, "articles": before, "import_envelope_sha256": import_envelope_sha256, "publish_allowed": False, "content_mutation_performed": False}
+    generation = runtime_generation(src.get("runtime_generation"))
+    manifest = {"contract": MANIFEST_CONTRACT, "batch_sha256": batch, "runtime_generation": generation, "source_manifest_ref": str(source_path.relative_to(REPO)), "source_manifest_sha256": file_sha256(source_path), "article_count": count, "articles": before, "import_envelope_sha256": import_envelope_sha256, "publish_allowed": False, "content_mutation_performed": False}
     mhash = stable_hash(manifest)
     trust = trusted_identity()
     signed = call_signer(mhash, batch, manifest["source_manifest_sha256"], count)
@@ -245,8 +255,8 @@ def finalize(source_ref: str) -> dict[str, Any]:
         raise Blocked("ARTICLE_BYTES_CHANGED_DURING_FINALIZE")
     pkg = {"contract": PACKAGE_CONTRACT, "endstamp_contract": ENDSTAMP_CONTRACT, "status": "ENDSTEMPEL_PASS", "batch_sha256": batch, "article_manifest": manifest, "article_manifest_sha256": mhash, "import_envelope": import_envelope, "import_envelope_sha256": import_envelope_sha256, "signature_algorithm": "ED25519", "signing_key_id": signed["signing_key_id"], "signing_public_key_sha256": signed["signing_public_key_sha256"], "public_key_b64": signed["public_key_b64"], "signature_b64": signed["signature_b64"], "publish_allowed": False, "content_mutation_performed": False}
     pkg["package_payload_sha256"] = stable_hash(pkg)
-    outdir = REPO / ".pferde-final"
-    outdir.mkdir(exist_ok=True)
+    outdir = REPO / ".pferde-final" / batch / generation_name(generation)
+    outdir.mkdir(parents=True, exist_ok=True)
     out = outdir / FINAL_FILENAME
     if out.exists():
         raise Blocked("REPLAY_BLOCKED")
@@ -260,7 +270,7 @@ def finalize(source_ref: str) -> dict[str, Any]:
         tmp.unlink(missing_ok=True)
         out.unlink(missing_ok=True)
         raise
-    return {"ok": True, "status": "GITHUB_FINAL_RELEASE_PASS", "final_ref": str(out.relative_to(REPO)), "final_sha256": file_sha256(out), "batch_sha256": batch, "article_count": count, "publish_allowed": False, "content_mutation_performed": False}
+    return {"ok": True, "status": "GITHUB_FINAL_RELEASE_PASS", "final_ref": str(out.relative_to(REPO)), "final_sha256": file_sha256(out), "batch_sha256": batch, "runtime_generation": generation, "article_count": count, "publish_allowed": False, "content_mutation_performed": False}
 
 def main() -> int:
     try:
