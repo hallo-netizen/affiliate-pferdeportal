@@ -1,5 +1,5 @@
 {
-  "contract": "KONZEPT_NULL_RUNTIME_PREFLIGHT_V1",
+  "contract": "KONZEPT_NULL_RUNTIME_PREFLIGHT_V2",
   "status": "PASS",
   "scope": "ISOLATED_LOCAL_ONLY",
   "batch_size": "1..N",
@@ -7,16 +7,30 @@
   "historical_commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
   "execution_boundary": "PSERC_0.28.14_METADATA_OUTPUT_TO_BEFORE_WORDPRESS",
   "reason_for_boundary": "The article test consumes the exact five-field metadata handoff; no WordPress/PSTE/PSERC write path is needed or allowed inside KONZEPT NULL.",
-  "exact_metadata_fields": ["title", "target_keyword", "category", "article_type", "plan_slot"],
+  "exact_metadata_fields": [
+    "title",
+    "target_keyword",
+    "category",
+    "article_type",
+    "plan_slot"
+  ],
   "dependencies": {
     "PSTE_0.56.25_sha256": "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95",
     "PPM_6.7.9_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
     "PPM_main_file_sha256": "0874f26f21e471007922cf759ea5ad52bdc61a5975931898e83e9ff8f6418906",
-    "LanguageTool": "6.8"
+    "LanguageTool": "6.8",
+    "PSERC_0.28.14_sha256": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988",
+    "LanguageTool_6.8_zip_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "LanguageTool_6.8_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
   },
   "real_execution_proof": {
     "LanguageTool_6.8": "PASS",
-    "PPM_6.7.9_normal_draft_test": "PASS_NORMAL_DRAFT_1_TO_4_END_TO_END"
+    "PPM_6.7.9_normal_draft_test": "PASS_NORMAL_DRAFT_1_TO_4_END_TO_END",
+    "github_hardtest_run": 35396990143,
+    "github_hardtest_status": "PASS",
+    "stepwise_full_chain": "PASS",
+    "batch_1_7_25": "PASS",
+    "negative_navigation": "PASS"
   },
   "isolation": {
     "wordpress_access": false,
@@ -28,5 +42,12 @@
     "deploy": false,
     "external_write": false,
     "production_authority": false
-  }
+  },
+  "chat_navigation": {
+    "contract": "KONZEPT_NULL_CHAT_NAVIGATION_V1",
+    "mode": "NEXT_ALLOWED_STEP_ONLY",
+    "free_workflow_decisions": false,
+    "no_stop_after_internal_pass": true
+  },
+  "nonhistorical_runtime_packages_present": false
 }
