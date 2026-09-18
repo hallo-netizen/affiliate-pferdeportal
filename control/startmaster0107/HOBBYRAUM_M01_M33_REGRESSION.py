@@ -59,7 +59,7 @@ def m02():
     must("STAGING_DESTINATION_COLLISION" in (REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8"),"M02_COLLISION_GUARD_MISSING")
 def m03():
     out=cmd("control/startmaster0107/test_system4_107008_handoff.py")
-    must("OK" in out or out.strip()==="", "M03_SYSTEM4_107008_CONTINUITY_TEST")
+    must("OK" in out or out.strip()=="", "M03_SYSTEM4_107008_CONTINUITY_TEST")
     src=(REPO/"control/startmaster0107/test_system4_107008_handoff.py").read_text(encoding="utf-8")
     for token in (
         "test_prepare_creates_single_v2_binding_for_107008",
