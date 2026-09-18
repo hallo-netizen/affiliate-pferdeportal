@@ -27,7 +27,6 @@ if str(CONTROL) not in sys.path:
 import system4_107007_entry as production_entry
 
 CURRENT_STATE = CONTROL / "CURRENT_STATE.json"
-HANDOFF_107008 = CONTROL / "system4_107008_handoff.py"
 SOURCE_REQUEST_NAME = "SOURCE_REQUESTS.json"
 BATCH_STATE_NAME = "SYSTEM4_107007_BATCH_STATE.json"
 ALLOWED_COUNTS = {1, 3}
@@ -443,36 +442,17 @@ def summary(run_root: Path) -> dict:
 
 
 def prepare_107008(run_root: Path) -> dict:
+    # The isolated acceptance route is intentionally not an authority for the
+    # canonical 107008 / PSERC / ENDSTEMPEL production closeout. Keeping this
+    # command as an explicit fail-closed surface prevents a future caller from
+    # turning the test adapter into a production bypass.
     root = _outside(run_root)
     meta = _load(root / META_NAME)
     _assert_current(meta)
-    batch_root, _, state = _batch_state(root)
-    count = int(meta["article_count"])
-    if (
-        state.get("status") != "ITEMS_COMPLETE"
-        or state.get("completed_indices") != list(range(count))
-        or state.get("started_indices") != list(range(count))
-        or not isinstance(state.get("batch_collect"), dict)
-    ):
-        raise AcceptanceBlocked("ACCEPTANCE_107008_BEFORE_BATCH_PASS")
-    cp = subprocess.run(
-        [sys.executable, str(HANDOFF_107008), "prepare", str(batch_root)],
-        cwd=REPO,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
+    raise AcceptanceBlocked(
+        "ACCEPTANCE_107008_CANONICAL_BOUNDARY:"
+        "ISOLATED_TEST_ROUTE_MUST_NOT_REPLACE_OFFICIAL_PRODUCTION_INTAKE"
     )
-    output = ((cp.stdout or "") + (cp.stderr or "")).strip()
-    if cp.returncode != 0:
-        raise AcceptanceBlocked("ACCEPTANCE_107008_PREPARE_FAIL:" + output)
-    try:
-        result = json.loads((cp.stdout or "").strip().splitlines()[-1])
-    except Exception as exc:
-        raise AcceptanceBlocked("ACCEPTANCE_107008_OUTPUT_INVALID") from exc
-    if result.get("article_count") != count or result.get("publish_allowed") is not False:
-        raise AcceptanceBlocked("ACCEPTANCE_107008_RESULT_INVALID")
-    return result
 
 
 def main(argv: list[str]) -> int:
