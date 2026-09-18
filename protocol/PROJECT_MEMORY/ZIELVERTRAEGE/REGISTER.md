@@ -113,6 +113,12 @@ Nicht hier dupliziert. Wortgleich aus der Hauptquelle lesen.
 NACHFOLGER:
 keiner belegt.
 
+ERGÄNZENDE TECHNISCHE SYSTEM-4-BINDUNG:
+`isolated_system4/ZIELVERTRAG_SYSTEM4_MACHINE_POINT0_CODEX_WRITER_20260914.md`
+
+ROLLE:
+Dieser System-4-Vertrag präzisiert den technischen Maschinenweg des unveränderten STARTMASTER0107-Produktionsziels. Er ersetzt nicht das fachliche Endziel, sondern bindet dessen aktuelle technische Ausführung bis zur bytegleichen finalen Parent-Chat-Datei.
+
 
 ## ZV-AFFILIATE-OTTO-001 – OTTO/Awin vollautomatische Produkt- und Bannerintegration
 
