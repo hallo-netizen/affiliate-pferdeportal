@@ -9,6 +9,11 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
+SYSTEM4 = REPO / "isolated_system4"
+if str(SYSTEM4) not in sys.path:
+    sys.path.insert(0, str(SYSTEM4))
+import point0_snapshot
+
 STATE = REPO / "control/startmaster0107/CURRENT_STATE.json"
 RUNTIME = REPO / "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json"
 ROOT_ENTRY = REPO / "isolated_system4/root_entry.py"
@@ -99,9 +104,11 @@ def verify_point0_binding(point0: Path, runtime: dict, runtime_items: list[dict]
     value = load(point0)
     if value.get("contract") != "SYSTEM4_POINT0_SNAPSHOT_V2":
         raise Blocked("SYSTEM4_107007_POINT0_CONTRACT_INVALID")
-    production = value.get("production_snapshot")
-    if not isinstance(production, dict):
-        raise Blocked("SYSTEM4_107007_POINT0_PRODUCTION_SNAPSHOT_MISSING")
+    try:
+        production_raw = point0_snapshot.verify(value)
+        production = json.loads(production_raw.decode("utf-8"))
+    except Exception as exc:
+        raise Blocked("SYSTEM4_107007_POINT0_VERIFY_FAIL:" + str(exc)) from exc
     batch = production.get("next_textmachine_metadata_batch")
     items = batch.get("items") if isinstance(batch, dict) else None
     if not isinstance(batch, dict) or batch.get("batch_sha256") != runtime.get("batch_sha256"):

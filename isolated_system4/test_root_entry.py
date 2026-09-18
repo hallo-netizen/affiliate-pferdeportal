@@ -115,6 +115,27 @@ class RootEntryTests(unittest.TestCase):
     def test_positive_point0_different_commit_same_critical_content(self):
         self.positive_point0(branch='codex/synthetic',extra_noncritical_commit=True)
 
+
+    def test_107007_binding_reads_verified_point0_payload_not_wrapper(self):
+        td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
+        point0=make_point0(repo,Path(td.name)/'point0.json')
+        probe=r"""
+import json,sys
+from pathlib import Path
+sys.path.insert(0,'control/startmaster0107')
+import system4_107007_entry as entry
+p=Path(sys.argv[1])
+value=json.loads(p.read_text(encoding='utf-8'))
+raw=entry.point0_snapshot.verify(value)
+prod=json.loads(raw.decode('utf-8'))
+batch=prod['next_textmachine_metadata_batch']
+items=batch['items']
+entry.verify_point0_binding(p,{'batch_sha256':batch['batch_sha256']},items,0)
+print('SYSTEM4_107007_POINT0_WRAPPER_PASS')
+"""
+        cp=run([sys.executable,'-c',probe,str(point0)],cwd=repo)
+        self.assertIn('SYSTEM4_107007_POINT0_WRAPPER_PASS',cp.stdout.decode())
+
     def test_negative_legacy_start_is_machine_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
         cp=run_entry(repo,['start','/tmp/input.json',str(Path(td.name)/'runtime')])
