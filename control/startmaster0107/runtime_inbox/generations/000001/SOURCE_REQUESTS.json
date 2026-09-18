@@ -1,0 +1,93 @@
+{
+  "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "contract": "SYSTEM4_MACHINE_SOURCE_REQUEST_BATCH_V1",
+  "item_count": 7,
+  "items": [
+    {
+      "item_index": 0,
+      "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+      "sources": [
+        {
+          "source_id": "fn-stangen-cavaletti",
+          "source_kind": "WEB",
+          "source_title": "Online-Seminar: Mehr Losgelassenheit durch den Einsatz von Stangen und Cavaletti",
+          "source_url": "https://app.pferd-aktuell.de/eticketing/onlineseminar/11-11-2026/mehr-losgelassenheit-durch-den-einsatz-von-stangen-und-cavaletti/1985"
+        }
+      ]
+    },
+    {
+      "item_index": 1,
+      "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19",
+      "sources": [
+        {
+          "source_id": "rieste-reitplatzbeleuchtung",
+          "source_kind": "WEB",
+          "source_title": "Reitplatzbeleuchtung mit LED: Optimale Sicht für Reiter - RIESTE Licht",
+          "source_url": "https://www.rieste.com/l/reitplatzbeleuchtung-led-reitplatz-flutlicht"
+        }
+      ]
+    },
+    {
+      "item_index": 2,
+      "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87",
+      "sources": [
+        {
+          "source_id": "lwk-festmistlager",
+          "source_kind": "WEB",
+          "source_title": "Bauberatung - Landwirtschaftskammer Nordrhein-Westfalen",
+          "source_url": "https://www.landwirtschaftskammer.de/Landwirtschaft/technik/bauberatung/index.htm"
+        }
+      ]
+    },
+    {
+      "item_index": 3,
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+      "sources": [
+        {
+          "source_id": "vhv-fremdreiter",
+          "source_kind": "WEB",
+          "source_title": "Pferde-Haftpflichtversicherung | VHV",
+          "source_url": "https://www.vhv.de/tierhalterhaftpflicht-versicherung/ratgeber/pferdehaftpflicht"
+        }
+      ]
+    },
+    {
+      "item_index": 4,
+      "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da",
+      "sources": [
+        {
+          "source_id": "fn-huffett-hufpflege",
+          "source_kind": "WEB",
+          "source_title": "Behandlung von Krankheiten und Verletzungen beim Pferd | FN",
+          "source_url": "https://app.pferd-aktuell.de/turniersport/anti-doping-und-medikation/behandlung-von-krankheiten-und-verletzungen"
+        }
+      ]
+    },
+    {
+      "item_index": 5,
+      "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648",
+      "sources": [
+        {
+          "source_id": "fn-fliegenmaske",
+          "source_kind": "WEB",
+          "source_title": "FN-Turniertalk: Der Ausrüstungskatalog im Fokus",
+          "source_url": "https://app.pferd-aktuell.de/news/aktuelle-meldungen/sport/fn-turniertalk-der-ausruestungskatalog-im-fokus"
+        }
+      ]
+    },
+    {
+      "item_index": 6,
+      "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5",
+      "sources": [
+        {
+          "source_id": "lwk-pellets",
+          "source_kind": "WEB",
+          "source_title": "Ergänzungsfutter für Stuten und Fohlen - Landwirtschaftskammer Nordrhein-Westfalen",
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/pferdehaltung/fuetterung/vft-2018-063.htm"
+        }
+      ]
+    }
+  ],
+  "publish_allowed": false,
+  "runtime_generation": 1
+}
