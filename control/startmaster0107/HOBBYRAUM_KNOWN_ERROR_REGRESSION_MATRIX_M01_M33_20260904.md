@@ -22,7 +22,7 @@ M01 – State-/Bundle-Hash chain: CURRENT_STATE -> 107007; START_HERE -> CURRENT
 
 M02 – Unique article files: 1..N ARTICLE_<plan_slot>.md entsprechend dem gebundenen Batch; keine ARTICLE.md-Kollision.
 
-M03 – PREPARED Persist/Restore: 107007 persistiert; 107008 restauriert; keine PREPARED_BINDING_MISSING-Schleife.
+M03 – 107007→107008 Zustandskontinuität nach System-4-Migration: vollständiger Batch muss einen einzigen hashgebundenen V2-Input für 107008 erzeugen; unvollständiger Batch und Handoff-Tamper bleiben BLOCKED; 107008 startet erst nach gültiger V2-Bindung. Der frühere PREPARED/DUAL-ROOTFIX-Weg ist als Produktionsweg abgelöst und darf nicht mehr als M03-Prüfautorität verwendet werden.
 
 M04 – Finalize CLI: finalize RECEIPT_REF real aufrufbar.
 
