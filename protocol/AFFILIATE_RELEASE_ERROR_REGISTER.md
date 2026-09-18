@@ -443,19 +443,19 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 ---
 
-## AFF-ERR-026 — Partner-/Einnahmen-Wahrheit verwechselt fehlende Reports mit Nullwerten
+## AFF-ERR-026 — Backend-Statistik darf keine eigene Erhebung als Partnerwahrheit verwenden
 
-**Datum / Arbeitsschritt:** 18.09.2026 / Partnerübersicht, Klicks und Einnahmen.
+**Datum / Statusänderung:** 18.09.2026 / Nutzerentscheidung nach kanonischem Delta-Precheck.
 
-**Symptom/Root Cause:** Die sichtbare Partner-/Einnahmen-Seite kann fehlende Provider-Reportdaten wie echte `0 €`-Werte wirken lassen bzw. lokale Klicks, Provider-Klicks und Provider-Umsatz nicht sauber genug voneinander trennen. Unterschiedliche Währungen dürfen zudem nicht als eine Euro-Gesamtsumme erscheinen.
+**Symptom/Root Cause:** Die kanonische Partner-/Einnahmen-Seite verwendet eigene lokale Klickzähler zusätzlich zu Providerreports. Der Nutzer hat diese Mischform ausdrücklich verworfen: Die Backend-Statistik soll die Originaldaten der jeweiligen Partner/Provider abrufen und keine eigene Erhebung verwenden.
 
-**Nicht wiederholen:** Lokale Klicks, Provider-Klicks, Umsatz und Provision als getrennte Quellen führen. Fehlende Providerdaten = `nicht verfügbar`, nicht Null. Währungen getrennt aggregieren. Keine Rang-/Bestpartner-Aussage bei unvollständiger Datenbasis.
+**Nicht wiederholen:** Für die Backend-Statistik ausschließlich verifizierte Original-Report-/API-Daten des jeweiligen Providers/Partners verwenden. Lokale Klick-, Bestell-, Umsatz- oder Provisionserhebung dort weder anzeigen noch addieren noch als Ersatz für fehlende Providerdaten einsetzen. Fehlender Providerreport = `nicht verfügbar`, nicht Null. Währungen getrennt behandeln; keine Bestpartner-Aussage aus unvollständiger oder nicht vergleichbarer Datenbasis.
 
-**POSITIV:** Provider mit echtem Report zeigt Datenquelle, Datenstand, Klicks/Umsatz/Provision korrekt; lokale Klicks bleiben separat.
+**POSITIV:** Providerreport liefert Klicks/Bestellungen/Umsatz/Provision + Datenquelle/Datenstand; exakt diese Originalwerte werden angezeigt.
 
-**NEGATIV:** fehlender Report erzeugt weder `0 €` noch erfundene Provider-Klicks; gemischte Währungen werden nicht als EUR-Gesamtsumme addiert.
+**NEGATIV:** Ohne Providerreport erscheinen keine lokalen Ersatzklicks und keine erfundenen Nullwerte. Eigene WordPress-Klickzähler verändern die Statistik nicht.
 
-**Status:** FIXED_LOCAL_ORACLE_ONLY in nichtkanonischem 6.72.65; kanonischer Rootfix/Gesamtgate/LIVE-Readback offen.
+**Status:** ROOTFIX REQUIRED im kanonischen 6.72.19-Stand; nichtkanonische 6.72.65 bleibt nur Oracle.
 
 ## AFF-ERR-027 — Lokale 6.72.60–6.72.65-Testlinie darf keine zweite Pluginwahrheit werden
 
