@@ -146,13 +146,13 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Nicht wiederholen:** `Partner & Einnahmen` muss direkt die zentrale providerübergreifende Analytics verwenden. Keine zweite Statistik-Wahrheit und keine künstliche Banner-/Produktquellentrennung in der Einnahmenansicht.
 
-**POSITIV:** sichtbarer Pfad `WordPress-Dashboard → Affiliate-Zentrale → Partner & Einnahmen` delegiert direkt an `PPAR_Partner_Analytics_Admin::render_page()` und enthält mindestens eBay, idealo, Awin, ADCELL, Digistore24, Direktpartner sowie lokale Klicks.
+**POSITIV:** sichtbarer Pfad `WordPress-Dashboard → Affiliate-Zentrale → Partner & Einnahmen` delegiert direkt an `PPAR_Partner_Analytics_Admin::render_page()` und verwendet ausschließlich ingestierte Original-Providerreports; lokale WordPress-Klickwerte sind ausdrücklich ausgeschlossen.
 **NEGATIV:** fehlende Providerdaten bleiben `nicht verfügbar`, niemals geschätzt.
 **Regression:** Provideradapter, Ausspielung, Tracking unverändert.
 
 **Evidence:** `release/affiliate-zentrale/evidence/current_scope_manual_import_partner_visibility_20260902.txt` — ausschließlich der darin enthaltene Analytics-/KISS-Nachweis bleibt verwendbar; der manuelle Runtime-Importteil ist durch AFF-ERR-015 verworfen.
 
-**Status:** FIXED_LOCAL / WordPress-Liveprüfung noch offen.
+**Status:** CANONICAL_ROOTFIX_BOUND / WordPress-Liveprüfung mit 6.72.72 noch offen.
 
 ## AFF-ERR-012 — DS24 Affiliate-Partnerschaftsinventur mit falscher API-Autorität
 
