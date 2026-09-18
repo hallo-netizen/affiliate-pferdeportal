@@ -313,7 +313,26 @@ def repair_block_semantic_heading(workspace: Path) -> str:
     markers = [str(v).strip() for v in expected.get('accepted_heading_markers', []) if isinstance(v, str) and str(v).strip()]
     if not markers:
         raise NoCodexRepairError('BLOCK_SEMANTIC_ACCEPTED_MARKERS_MISSING:' + block_id)
-    replacement = markers[1] if len(markers) > 1 else markers[0]
+    reserved = {
+        block_semantics.normalize(str(v))
+        for v in (
+            (state.get('authoring_contract',{}).get('structure_requirements',{}).get('headings',{}).get('reserved_headings',[]))
+            if isinstance(state.get('authoring_contract'),dict) else []
+        )
+        if isinstance(v,str)
+    }
+    preferred = next((v for v in markers if block_semantics.normalize(v) not in reserved and len(v.split()) >= 2), None)
+    replacement = preferred or (markers[1] if len(markers) > 1 else markers[0])
+    if block_semantics.normalize(replacement) not in reserved:
+        intent_terms = [
+            str(v).strip() for v in state.get('authoring_contract',{}).get('bound_requirements',{}).get('intent_terms',[])
+            if isinstance(v,str) and str(v).strip()
+        ]
+        if not intent_terms:
+            raise NoCodexRepairError('BLOCK_SEMANTIC_INTENT_TERM_MISSING:' + block_id)
+        intent = min(intent_terms,key=lambda value:(len(value.split()),len(value),value))
+        if block_semantics.normalize(intent) not in block_semantics.normalize(replacement):
+            replacement = replacement + ' zu ' + intent
     pattern = re.compile(r'(<section\b[^>]*data-block\s*=\s*(["\'])' + re.escape(block_id) + r'\2[^>]*>.*?<h2\b[^>]*>)(.*?)(</h2>)', re.S | re.I)
     match = pattern.search(body)
     if not match:

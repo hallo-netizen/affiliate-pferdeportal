@@ -47,7 +47,7 @@ class FullRouteStartRealTests(unittest.TestCase):
                 conclusion=re.search(r'(?is)<section data-block="conclusion">.*?<h2[^>]*>(.*?)</h2>',body)
                 self.assertIsNotNone(conclusion)
                 repaired_heading=re.sub(r'(?is)<[^>]+>',' ',conclusion.group(1)).strip()
-                self.assertEqual(repaired_heading,'Schlussfolgerung')
+                self.assertTrue(repaired_heading.startswith('Abschließende Bewertung zu '),repaired_heading)
                 self.assertGreaterEqual(payload['articles'][0]['revision_count'],2)
             if expect_batch_workshop:
                 request_path=out/'batch/GLOBAL_WORKSHOP_REQUEST.json'
