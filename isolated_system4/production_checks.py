@@ -8,6 +8,7 @@ contract. Callers keep importing `production_checks`, so there is one public aut
 """
 
 from typing import Any, Mapping
+import block_semantics
 import production_checks_engine as _engine
 
 
@@ -208,6 +209,30 @@ def _ppm_repair_findings(value: Any) -> list[dict[str, Any]]:
 
 _engine._ppm_repair_findings = _ppm_repair_findings
 
+
+def run_all(repo, state, fact_pack, production_plan_item):
+    article_html = str(state.get("draft_markdown") or "")
+    contract = state.get("authoring_contract") if isinstance(state.get("authoring_contract"), Mapping) else {}
+    try:
+        semantic_evidence = block_semantics.validate(article_html, contract)
+    except block_semantics.BlockSemanticRepairRequired as exc:
+        raise _engine.RepairRequired("block_semantics", exc.findings) from exc
+    except block_semantics.BlockSemanticError as exc:
+        raise _engine.ProductionCheckError("BLOCK_SEMANTIC_AUTHORITY_FAIL:" + str(exc)) from exc
+
+    result = _engine.run_all(repo, state, fact_pack, production_plan_item)
+    if isinstance(result, dict):
+        result = dict(result)
+        evidence = result.get("evidence")
+        if isinstance(evidence, dict):
+            evidence = dict(evidence)
+            evidence["block_semantics"] = semantic_evidence
+            result["evidence"] = evidence
+        else:
+            result["block_semantics"] = semantic_evidence
+    return result
+
+
 for _name in dir(_engine):
-    if not _name.startswith("__") and _name != "_ppm_repair_findings":
+    if not _name.startswith("__") and _name not in {"_ppm_repair_findings", "run_all"}:
         globals()[_name] = getattr(_engine, _name)

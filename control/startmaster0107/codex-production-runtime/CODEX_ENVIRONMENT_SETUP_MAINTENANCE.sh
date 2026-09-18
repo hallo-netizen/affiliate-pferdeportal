@@ -69,17 +69,22 @@ PY
 
 # Resolve current GitHub main independently of the local Codex branch name.
 CURRENT_BRANCH="$(git branch --show-current || true)"
+LOCAL_SHA="$(git rev-parse HEAD)"
 MAIN_SHA="$(git ls-remote "$REPO_URL" refs/heads/main | awk 'NR==1 {print $1}')"
 if [[ ! "$MAIN_SHA" =~ ^[0-9a-f]{40}$ ]]; then
   echo "CODEX_MAIN_AUTHORITY_UNAVAILABLE"
   exit 2
 fi
 
-# Materialize the verified current main identity for the offline agent phase.
-git fetch --no-tags "$REPO_URL" "+${MAIN_SHA}:refs/pferde-authority/current-main"
+# If this checkout already is the verified current main, no network fetch is needed.
+# This removes the proven HTTP-403 failure point without weakening freshness:
+# MAIN_SHA still comes from GitHub and must equal the local commit byte-for-byte.
+if [[ "$LOCAL_SHA" != "$MAIN_SHA" ]]; then
+  git fetch --no-tags "$REPO_URL" "+${MAIN_SHA}:refs/pferde-authority/current-main"
+fi
+git update-ref refs/pferde-authority/current-main "$MAIN_SHA"
 git update-ref refs/remotes/origin/main "$MAIN_SHA"
 
-LOCAL_SHA="$(git rev-parse HEAD)"
 SYNC_MODE="IDENTITY_ONLY_CURRENT_MAIN"
 
 if [[ "$CURRENT_BRANCH" == "main" && "$LOCAL_SHA" != "$MAIN_SHA" ]]; then

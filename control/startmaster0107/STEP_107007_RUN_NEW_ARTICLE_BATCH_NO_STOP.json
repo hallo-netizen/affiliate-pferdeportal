@@ -26,11 +26,11 @@
     },
     {
       "ref": "control/startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh",
-      "sha256": "c1b6d5c698a20a223656814dc5937b3a45baa96e984ba46586772c1576619db6"
+      "sha256": "7716d3d9d2bf5d3b52a6a3d1ece88da32e76d65a42c66aba701b2700031811de"
     },
     {
       "ref": "control/output-quarantine/output_release_gate.py",
-      "sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55"
+      "sha256": "27edb683fbff98d5747a342274fcc176a2d834252d185cc1dc5661bb2df68c44"
     },
     {
       "ref": "control/output-quarantine/final_review_visibility_guard.py",
@@ -75,6 +75,6 @@
     "step_id": "FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH",
     "sequence": 107008,
     "bundle_ref": "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json",
-    "bundle_sha256": "fca1e0217c44dc406f68ae8d43636420787d4915504376a275fbad205e4ee0c7"
+    "bundle_sha256": "71ca3d28f94cbf7b3f94477dba151bc8639bba282012f9760c2dd952bcd4007a"
   }
 }

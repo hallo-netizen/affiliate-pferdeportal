@@ -47,7 +47,13 @@
     "M38_PRODUCT_FIX_MINIMAL_BINDING_COMPLETE",
     "M38_M01_M38_REGRESSION_RUN_35325277001_PASS",
     "M38_PRODUCT_PR297_HARDLOCK_RUN_35325237914_PASS",
-    "M38_PRODUCT_PR297_HARDLOCK_BASE_RUN_35325233889_PASS"
+    "M38_PRODUCT_PR297_HARDLOCK_BASE_RUN_35325233889_PASS",
+    "PREPRODUCTION_HTTP403_SETUP_FIX_VALIDATED",
+    "PREPRODUCTION_PREFLIGHT_SINGLE_CONTRACT_TRUTH_VALIDATED",
+    "PR275_BLOCK_SEMANTICS_CURRENT_SYSTEM4_ROUTE_VALIDATED",
+    "PREPRODUCTION_ACCEPTANCE_RUN_35335734559_PASS",
+    "PREPRODUCTION_HARDLOCK_RUN_35336072555_PASS",
+    "PREPRODUCTION_DETERMINISTIC_GATE_RUN_35336074403_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -60,7 +66,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "9c76d3140ef37ffc567457863fe3c11030efe884d75605b117d21b246a27903d",
+    "bundle_sha256": "4ba0d0bb000b25af966aba6876395ccec7c1dd3447896435bc458ab08597d7b9",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -136,7 +142,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "9c76d3140ef37ffc567457863fe3c11030efe884d75605b117d21b246a27903d"
+    "bundle_sha256": "4ba0d0bb000b25af966aba6876395ccec7c1dd3447896435bc458ab08597d7b9"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -144,7 +150,7 @@
     "official_runtime_entry_ref": "control/output-quarantine/runtime_entry_gate.py",
     "official_runtime_entry_sha256": "c9430947d6f3043f6fed7bbcd8add4f785fcfc224feddca658cf2057858fcb24",
     "worker_freshness_guard_sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84",
-    "output_release_gate_sha256": "d586d0697c4dac628668960af20e2f051f408b8d3080e8ddb1217f1a9b4c2f55",
+    "output_release_gate_sha256": "27edb683fbff98d5747a342274fcc176a2d834252d185cc1dc5661bb2df68c44",
     "final_review_visibility_guard_sha256": "c5f7284dc5d6a3bd69464162d18abed66e164ce8fd3bea05181f57fec2095913",
     "chat_execution_authority": "NONE",
     "chat_output_authority": "NONE",
@@ -159,13 +165,18 @@
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "M38 product repair is complete and regression/hardlocks are PASS. Production remains fail-closed until exactly one fresh first article passes the unchanged real System 4 -> LanguageTool -> PSERC/PPM path.",
+    "detail": "The technical preproduction entry repair is complete: the unnecessary current-main git fetch failure point is removed, the preflight contract has one producer truth, and the validated PR275 block semantics are integrated into the current System-4 repair route. Acceptance and hardlock are PASS. Production remains fail-closed until explicit user Codex reauthorization and then exactly one fresh first article passes the unchanged real System 4 -> LanguageTool -> PSERC/PPM path.",
     "m38_resolved": true,
     "m38_regression_run_id": 35325277001,
     "hardlock_run_id": 35325237914,
     "hardlock_base_run_id": 35325233889,
     "second_article_allowed": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "preproduction_entry_repair_complete": true,
+    "preproduction_acceptance_run_id": 35335734559,
+    "preproduction_hardlock_run_id": 35336072555,
+    "preproduction_deterministic_gate_run_id": 35336074403,
+    "codex_reauthorization_required": true
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -218,14 +229,15 @@
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
   "last_safe_main_sha": "19451f92321cc0ac0aeabfa8ef09e7a6be3302ac",
-  "last_safe_change": "M38 minimal product repair is validated: the Fachworkflow-produced production_plan_v4 header is bound to plan_contract_version 4.0.0 and required_plugin_version 6.7.9; the existing handoff blocks missing/mismatching values before real PSERC/PPM. Separate proof run 35325277001 reports M01-M38 PASS and PR297 hardlock/hardlock-base are PASS. No production article has been run after this fix yet.",
-  "hobbyroom_status": "M38_PRODUCT_FIX_VALIDATED_SINGLE_ARTICLE_PROOF_PENDING",
-  "hobbyroom_branch": "hobbyroom/m38-product-fix-20260918",
+  "last_safe_change": "Preproduction entry repair validated without Codex or article production: exact-current-main setup no longer performs the failing redundant fetch, output release consumes the producer-owned V2 preflight contract instead of a second V1 truth, and PR275 block semantics are bound into the current System-4 same-article repair route. Acceptance 35335734559 PASS; hardlock 35336072555 PASS; deterministic entrance 35336074403 PASS.",
+  "hobbyroom_status": "PREPRODUCTION_ENTRY_REPAIR_VALIDATED_AWAITING_USER_CODEX_RELEASE_AND_SINGLE_ARTICLE_REAL_PROOF",
+  "hobbyroom_branch": "hobbyroom/preproduction-entry-reconcile-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "Exactly one fresh first article must now pass the unchanged real System 4 -> LanguageTool -> PSERC/PPM path. No second article and no batch continuation before that PASS.",
+  "hobbyroom_blocker": "No Codex and no article production until explicit user reauthorization. After that, exactly one fresh first article must pass the unchanged real System 4 -> LanguageTool -> PSERC/PPM path; article 2 remains forbidden before that PASS.",
   "next_action": {
-    "goal": "Run exactly one fresh first article through the unchanged real System 4 production street and require real LanguageTool and real PSERC/PPM PASS. Do not start article 2 or continue the remaining 1..N batch before article 1 is fully PASS.",
+    "goal": "Wait for explicit user Codex reauthorization. Then run exactly one fresh first article through the unchanged real System 4 production street and require real LanguageTool and real PSERC/PPM PASS. Do not start article 2 or continue the remaining 1..N batch before article 1 is fully PASS.",
     "required_order": [
+      "Do not invoke Codex until the user explicitly reauthorizes it.",
       "Keep the existing 107007/System 4 route and current hash bindings unchanged except for normal state transition receipts.",
       "Start exactly one fresh current article through the real bound Point-0/System 4 path.",
       "Run the unchanged real LanguageTool check and unchanged real PSERC/PPM path for that same article.",
@@ -258,10 +270,10 @@
       "auto-publish",
       "new architecture"
     ],
-    "proof_after_fix": "Required next proof is one fresh real article with real LanguageTool PASS and real PSERC/PPM PASS on the unchanged bound route. After that, continue remaining 1..N; no publish."
+    "proof_after_fix": "Preproduction repair is proven by Acceptance 35335734559 and Hardlock 35336072555. Required next production proof, only after explicit user Codex reauthorization, is one fresh real article with real LanguageTool PASS and real PSERC/PPM PASS on the unchanged bound route."
   },
-  "hobbyroom_pr": null,
-  "hobbyroom_head_sha": "4dffdfe27e183c6da8830a82e3cbb1cc1e369717",
+  "hobbyroom_pr": 301,
+  "hobbyroom_head_sha": "2fe3bee2c72403ddcca954f6c5a2c6baec7f5b38",
   "m38_history_proof": {
     "branch": "hobbyroom/m38-history-current-main-20260918",
     "head_sha": "3acae874dd4c807761983623c91f69d35a800fb2",

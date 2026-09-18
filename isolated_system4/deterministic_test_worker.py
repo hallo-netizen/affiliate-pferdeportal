@@ -8,6 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import block_semantics
 import content_guard
 import root_entry
 import supervisor
@@ -311,7 +312,9 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         if block == intro_name:
             continue
         if block not in sections:
-            sections[block] = [f'<h2>{_heading(intent_terms, len(order))}</h2>']
+            semantic_heading = block_semantics.canonical_heading(contract, block)
+            heading = html.escape(semantic_heading) if semantic_heading else _heading(intent_terms, len(order))
+            sections[block] = [f'<h2>{heading}</h2>']
             order.append(block)
         if block in {table_block, 'conclusion'}:
             continue

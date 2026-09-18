@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import shutil
 import subprocess
@@ -11,7 +12,7 @@ REPO = Path(__file__).resolve().parents[2]
 POINTER = REPO / "control/CURRENT_STARTMASTER.json"
 RUNTIME_STATE = REPO / "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json"
 ENV_PROOF = REPO / ".pferde-environment/CODEX_PRODUCTION_PREFLIGHT.json"
-PREFLIGHT_CONTRACT = "PFERDE_ATELIER_CODEX_PRODUCTION_ENVIRONMENT_PREFLIGHT_V1"
+PREFLIGHT_PRODUCER = REPO / "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"
 EXPECTED_REPOSITORY = "hallo-netizen/affiliate-pferdeportal"
 
 
@@ -43,6 +44,25 @@ def rel(value: str) -> Path:
     return p
 
 
+def expected_preflight_contract() -> str:
+    if not PREFLIGHT_PRODUCER.is_file():
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_MISSING")
+    spec = importlib.util.spec_from_file_location(
+        "pferde_output_release_preflight_contract_source", PREFLIGHT_PRODUCER
+    )
+    if spec is None or spec.loader is None:
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID")
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except Exception as exc:
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID") from exc
+    value = getattr(mod, "CONTRACT", None)
+    if not isinstance(value, str) or not value.strip():
+        raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_SOURCE_INVALID")
+    return value
+
+
 def git(*args: str) -> str:
     try:
         cp = subprocess.run(
@@ -71,7 +91,8 @@ def require_current_main() -> str:
     if not ENV_PROOF.is_file():
         raise Blocked("CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING")
     proof = load(ENV_PROOF)
-    if proof.get("contract") != PREFLIGHT_CONTRACT:
+    expected_contract = expected_preflight_contract()
+    if proof.get("contract") != expected_contract:
         raise Blocked("CODEX_ENVIRONMENT_PROOF_CONTRACT_INVALID")
     if proof.get("status") != "CODEX_PRODUCTION_PREFLIGHT_PASS":
         raise Blocked("CODEX_ENVIRONMENT_PREFLIGHT_NOT_PASS")
@@ -99,7 +120,7 @@ def authority():
     statep = REPO / rel(ptr.get("state_ref"))
     rootp = REPO / rel(ptr.get("root_ref"))
     policyp = REPO / rel(ptr.get("visible_output_policy_ref"))
-    if not all(p.is_file() for p in (statep, rootp, policyp)):
+    if not all(p.is_file() for p in (statep, rootp, policyp, PREFLIGHT_PRODUCER)):
         raise Blocked("AUTHORITY_FILE_MISSING")
 
     state, root, policy = load(statep), load(rootp), load(policyp)
@@ -133,6 +154,9 @@ def authority():
         raise Blocked("OUTPUT_GATE_NOT_BUNDLE_BOUND")
     if bindings.get(policy_ref) != sha256(policyp):
         raise Blocked("OUTPUT_POLICY_NOT_BUNDLE_BOUND")
+    preflight_ref = "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"
+    if bindings.get(preflight_ref) != sha256(PREFLIGHT_PRODUCER):
+        raise Blocked("PREFLIGHT_PRODUCER_NOT_BUNDLE_BOUND")
 
     ticket_body = {
         "contract": "PFERDE_ATELIER_EXECUTION_TICKET_V2",
@@ -206,8 +230,8 @@ def verify_quarantine_outputs(policy, outputs):
 
 
 def prepare_107007(ticket_path: Path, receipt_path: Path) -> dict:
-    main_head = require_current_main()
     _, state, gate, policy, expected_ticket = authority()
+    main_head = require_current_main()
     if expected_ticket.get("step_id") != "RUN_NEW_ARTICLE_BATCH_NO_STOP" or int(expected_ticket.get("sequence", -1)) != 107007:
         raise Blocked("PREPARE_RELEASE_ONLY_ALLOWED_FOR_107007")
     ticket, receipt = validate_generic_receipt(ticket_path, receipt_path, expected_ticket, policy)
