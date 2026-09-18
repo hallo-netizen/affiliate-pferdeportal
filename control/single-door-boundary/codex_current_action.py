@@ -44,10 +44,29 @@ def _bridge():
     m=importlib.util.module_from_spec(s); sys.modules[s.name]=m; s.loader.exec_module(m); m.DUAL=SELF
     return m
 
+def _system4_forbidden_legacy_binding(step:Mapping[str,Any])->dict[str,str]|None:
+    instruction=str(step.get('instruction') or '')
+    required=(
+        'VERBOTEN für 107007-Repair',
+        SELF_REL,
+        HANDOFF_REL,
+        'control/startmaster0107/system4_107007_batch.py',
+        'isolated_system4/controller.py repair',
+    )
+    if not all(token in instruction for token in required):
+        return None
+    rows=step.get('forbidden_legacy_inputs')
+    if not isinstance(rows,list): raise ViewError('FORBIDDEN_LEGACY_INPUT_BINDING_MISSING')
+    binds={str(x.get('ref') or ''):str(x.get('sha256') or '') for x in rows if isinstance(x,dict)}
+    return binds
+
 def _assert_bound_adapters()->None:
     st=load(REPO/STATE_REL); gate=st.get('execution_gate') or {}; step_ref=str(gate.get('bundle_ref') or ''); step_path=safe(step_ref)
     if not step_path.is_file() or sha(step_path)!=gate.get('bundle_sha256'): raise ViewError('CURRENT_107007_BUNDLE_HASH_MISMATCH')
-    step=load(step_path); binds={str(x.get('ref') or ''):str(x.get('sha256') or '') for x in (step.get('authorized_inputs') or []) if isinstance(x,dict)}
+    step=load(step_path)
+    binds=_system4_forbidden_legacy_binding(step)
+    if binds is None:
+        binds={str(x.get('ref') or ''):str(x.get('sha256') or '') for x in (step.get('authorized_inputs') or []) if isinstance(x,dict)}
     for ref in (SELF_REL,HANDOFF_REL):
         p=REPO/ref
         if not p.is_file() or binds.get(ref)!=sha(p): raise ViewError('AUTHORIZED_INPUT_HASH_MISMATCH:'+ref)
@@ -202,10 +221,18 @@ def selftest()->dict:
 
 def main(argv:list[str])->int:
     try:
-        if argv==['selftest']: z=selftest()
-        elif argv==['current']: z=_current_only(_run(argv))
-        elif len(argv)==2 and argv[0]=='submit': z=_current_only(_run(argv))
-        else: raise ViewError('USAGE: current | submit ITEM_RECEIPT.json | selftest')
+        if argv==['selftest']:
+            z=selftest()
+        else:
+            st=load(REPO/STATE_REL);gate=st.get('execution_gate') or {};step=load(safe(str(gate.get('bundle_ref') or '')))
+            if _system4_forbidden_legacy_binding(step) is not None:
+                raise ViewError('LEGACY_107007_ROUTE_FORBIDDEN_SYSTEM4')
+            if argv==['current']:
+                z=_current_only(_run(argv))
+            elif len(argv)==2 and argv[0]=='submit':
+                z=_current_only(_run(argv))
+            else:
+                raise ViewError('USAGE: current | submit ITEM_RECEIPT_REF | selftest')
         print(json.dumps(z,ensure_ascii=False,indent=2)); return 0 if z.get('status')!='BLOCKED' else 2
     except Exception as e:
         print(json.dumps({'contract':CONTRACT,'status':'BLOCKED','error':str(e),'publish_allowed':False},ensure_ascii=False,indent=2)); return 2
