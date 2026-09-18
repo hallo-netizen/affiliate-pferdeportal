@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -403,11 +404,12 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
             raise RuntimeError('TESTWORKER_GLOBAL_FLOOR_UNREACHABLE')
 
     conclusion_attempts = 0
+    conclusion_target = 0.10 if os.environ.get('SYSTEM4_TEST_REAL7_PPM_MULTIFINDING', '').strip() == '1' else 0.09
     while True:
         body = render()
         total_words = word_count(body)
         conclusion_words = word_count(''.join(sections['conclusion']))
-        if total_words > 0 and (conclusion_words / total_words) >= 0.09:
+        if total_words > 0 and (conclusion_words / total_words) >= conclusion_target:
             break
         fact_id = post_table_ids[cursor % len(post_table_ids)]
         sections['conclusion'].append(_p(fact_id, _fact_sentence(fact_id, claims, cursor), authority))
@@ -415,6 +417,61 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         conclusion_attempts += 1
         if conclusion_attempts > 12:
             raise RuntimeError('TESTWORKER_CONCLUSION_BALANCE_UNREACHABLE')
+
+    # Dedicated acceptance-only reproduction of the four article-0 PPM quality
+    # finding families. Disabled unless the workflow explicitly opts in.
+    if not repair and os.environ.get('SYSTEM4_TEST_REAL7_PPM_MULTIFINDING', '').strip() == '1':
+        duplicate = next(
+            (row for row in sections.get('details', []) if row.startswith('<p ') and '<a ' not in row),
+            None,
+        )
+        if duplicate is None:
+            raise RuntimeError('TESTWORKER_MULTIFINDING_DUPLICATE_SOURCE_MISSING')
+        sections['details'].append(duplicate)
+
+        conclusion_rows = sections.get('conclusion', [])
+        conclusion_heading = [row for row in conclusion_rows if row.startswith('<h2>')]
+        conclusion_paragraphs = [row for row in conclusion_rows if row.startswith('<p ')]
+        if len(conclusion_heading) != 1 or len(conclusion_paragraphs) < 2:
+            raise RuntimeError('TESTWORKER_MULTIFINDING_CONCLUSION_SOURCE_MISSING')
+        sections['conclusion'] = conclusion_heading + conclusion_paragraphs[:2]
+
+        table_phrases = (
+            'Kontrolle Zustand Beobachtung',
+            'Zustand Beobachtung Kontrolle',
+            'Beobachtung Kontrolle Zustand',
+            'Kontrolle Beobachtung Zustand',
+        )
+        table_cell_counter = [0]
+
+        def _flatten_table_cells(value: str) -> str:
+            def repl(match: re.Match[str]) -> str:
+                attrs = match.group(1)
+                inner = match.group(2)
+                trace = ''.join(re.findall(r'(?is)<span\\b[^>]*class="ppm-source-trace"[^>]*></span>', inner))
+                phrase = table_phrases[table_cell_counter[0] % len(table_phrases)]
+                table_cell_counter[0] += 1
+                return '<td' + attrs + '>' + phrase + trace + '</td>'
+            return re.sub(r'(?is)<td([^>]*)>(.*?)</td>', repl, value)
+
+        sections[table_block] = [_flatten_table_cells(row) for row in sections.get(table_block, [])]
+        sections[table_block] = [
+            row.replace(
+                '<thead><tr><th>Prüfbereich</th><th>Beobachtung</th><th>Handlung</th></tr></thead>',
+                '<thead><tr><th>Kontrolle</th><th>Zustand</th><th>Beobachtung</th></tr></thead>',
+            )
+            for row in sections[table_block]
+        ]
+
+    # The first workshop pass intentionally leaves one repairable conclusion defect.
+    # This proves "back to workshop until PASS" instead of terminal blocking.
+    if repair and os.environ.get('SYSTEM4_TEST_REAL7_PPM_MULTIFINDING', '').strip() == '1' and int(state.get('revision') or 0) == 1:
+        conclusion_rows = sections.get('conclusion', [])
+        conclusion_heading = [row for row in conclusion_rows if row.startswith('<h2>')]
+        conclusion_paragraphs = [row for row in conclusion_rows if row.startswith('<p ')]
+        if len(conclusion_heading) != 1 or len(conclusion_paragraphs) < 2:
+            raise RuntimeError('TESTWORKER_WORKSHOP_LOOP_CONCLUSION_SOURCE_MISSING')
+        sections['conclusion'] = conclusion_heading + conclusion_paragraphs[:2]
 
     body = render()
     if not repair and identity['target_keyword'] == 'Bodenprüfung am Pferdeanhänger':
