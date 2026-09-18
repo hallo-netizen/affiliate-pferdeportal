@@ -1,1 +1,1 @@
-trigger probe article test with full LT package 2026-09-18
+trigger probe after LT segmentation fix 2026-09-18
