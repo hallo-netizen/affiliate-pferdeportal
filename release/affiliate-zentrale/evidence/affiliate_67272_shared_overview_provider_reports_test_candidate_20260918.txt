@@ -1,0 +1,65 @@
+PFERDE ATELIER – AFFILIATE-ZENTRALE 6.72.72
+SHARED OVERVIEW + PROVIDER ORIGINAL REPORT TEST CANDIDATE
+Datum: 2026-09-18
+
+STATUS
+- TESTKANDIDAT ERSTELLT.
+- WORDPRESS-LIVE-PASS NOCH OFFEN.
+- KEINE RELEASE-FREIGABE BEHAUPTET.
+
+KANONISCHE QUELLE
+- Branch: affiliate-release-current
+- Source-Manifest SHA-256: 4c5471425ffd7226cf12dd8f50937b26d78d9f4aa48a3af18b5f0ca7272c05a7
+- Source-Dateien: 26
+- Manifest-Identität vor Paketbau: 26/26 PASS.
+
+BANNER-ROOTFIX
+- Startseite, Kategorien und Portal-Seiten nutzen denselben grossen Querbannervertrag.
+- Slots: start_after_topics, hub_after_cards, product_after_category_tiles, category_recommendation.
+- Kein Kartenrahmen, kein Creative-/Partnername, keine Beschreibung, kein Extra-CTA.
+- Sichtbar: kleine Kennzeichnung Anzeige, echter verlinkter Querbanner, zentraler kurzer Werbehinweis.
+- Nur technisch passende Querbanner; proportional, kein Crop, keine Verzerrung, Upscaling maximal +10 Prozent.
+- Legacy-Placeholder für diese Slots gesperrt.
+- Dynamische Relevanz-/Abdeckungslogik und No-Duplicate bleiben erhalten.
+- Vorheriger direkter POS/NEG-Gate: 21/21 PASS.
+
+PROVIDER-ORIGINALREPORTS
+- Awin/OTTO: Awin Advertiser Performance API /publishers/{publisherId}/reports/advertiser.
+- ADCELL: Affiliate-Statistik CSV über www.adcell.de/csv_affilistats.php.
+- Erfolgreicher manueller Provider-Sync aktualisiert den Providerreport automatisch.
+- Erfolgreicher zentraler Automationsabschluss aktualisiert den Providerreport automatisch.
+- Partner & Einnahmen liest nur ingestierte Originalreports.
+- Eigene WordPress-Klickzahlen/lokale Ersatzmessungen bleiben ausgeschlossen.
+- Fehlende Daten bleiben nicht verfügbar.
+- Unklare/mehrere Währungen werden nicht zu einer falschen Geldsumme vermischt.
+
+AKTUELLER SOURCE-STRUKTURCHECK
+- 20/20 PASS:
+  Version/Stable tag,
+  gemeinsame Banner-Slots,
+  technisches Wide-Gate,
+  image-only Wide-Renderer,
+  rahmenloses CSS,
+  Awin/ADCELL Originalreportpfade,
+  automatischer Reportrefresh,
+  Source-Pflicht,
+  lokale Messung ausgeschlossen,
+  Currency fail-closed,
+  Missing-data fail-closed,
+  No-Placeholder,
+  No-Duplicate-Vertrag.
+
+PAKET
+- Paket-Commit: 5ce3b925e4bbd0f2c8484540b2ec1e8bfaaf4d09
+- Paket-Tree: acfc7ac7e11ba5b63e6a0ca4bc72da00327186f9
+- Paket-Dateien: 26
+- Source -> Paket: 26/26 exakte Git-Blob-Identität PASS.
+- Keine Rekonstruktion aus historischem ZIP.
+- Das Paket wurde direkt aus den 26 kanonischen aktuellen Source-Blobs gebaut.
+
+ARCHIV
+https://github.com/hallo-netizen/affiliate-pferdeportal/archive/5ce3b925e4bbd0f2c8484540b2ec1e8bfaaf4d09.zip
+
+ABNAHMEGRENZE
+- SOURCE/PACKAGE: PASS für oben dokumentierte Checks.
+- LIVE: OFFEN bis Installation + Sichtprüfung Startseite/Kategorie/Seite und Backend Partner & Einnahmen.
