@@ -69,8 +69,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          JAR='isolated_system0/KONZEPT_0/runtime/packages/languagetool-commandline-6.8.jar'
-          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  '"$JAR" | sha256sum -c -
+          TMP="$(mktemp -d)"
+          curl -L --fail --retry 3 -o "$TMP/LanguageTool-6.8.zip" 'https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip'
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  '"$TMP/LanguageTool-6.8.zip" | sha256sum -c -
+          unzip -q "$TMP/LanguageTool-6.8.zip" -d "$TMP/unpacked"
+          LTROOT="$(find "$TMP/unpacked" -type f -name 'languagetool-commandline.jar' -printf '%h\n' | head -1)"
+          test -n "$LTROOT"
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  '"$LTROOT/languagetool-commandline.jar" | sha256sum -c -
           python3 - <<'PY'
           from html.parser import HTMLParser
           from pathlib import Path
@@ -84,7 +89,7 @@ jobs:
           Path('/tmp/probe.txt').write_text('\n'.join(p.out)+'\n',encoding='utf-8')
           PY
           set +e
-          java -jar "$JAR" -l de-DE /tmp/probe.txt > /tmp/lt.txt 2>&1
+          (cd "$LTROOT" && java -jar languagetool-commandline.jar -l de-DE /tmp/probe.txt) > /tmp/lt.txt 2>&1
           rc=$?
           set -e
           cat /tmp/lt.txt
@@ -92,13 +97,20 @@ jobs:
           from pathlib import Path
           import json,re
           raw=Path('/tmp/lt.txt').read_text(encoding='utf-8',errors='replace')
-          matches=len(re.findall(r'^\d+\.)',raw,flags=re.M))
-          out={'contract':'KONZEPT0_PROBE_LT68_V1','engine':'LanguageTool 6.8','finding_count':matches,'raw_return_code':0 if matches==0 else 1,'status':'PASS' if matches==0 else 'BLOCKED'}
+          findings=len(re.findall(r'^\d+\.)',raw,flags=re.M))
+          out={
+            'contract':'KONZEPT0_PROBE_LT68_V2',
+            'engine':'LanguageTool 6.8',
+            'source_zip_sha256':'6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d',
+            'commandline_jar_sha256':'2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8',
+            'finding_count':findings,
+            'status':'PASS' if findings==0 else 'BLOCKED',
+            'raw_output':raw
+          }
           Path('isolated_system0/KONZEPT_0/probe/PROBETEXT_LT_EVIDENCE.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print(json.dumps(out,ensure_ascii=False,indent=2))
-          raise SystemExit(0 if matches==0 else 2)
+          print(json.dumps({k:v for k,v in out.items() if k!='raw_output'},ensure_ascii=False,indent=2))
+          raise SystemExit(0 if findings==0 else 2)
           PY
-
       - name: Commit probe evidence
         if: always()
         shell: bash
