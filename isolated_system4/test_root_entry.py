@@ -1,9 +1,12 @@
+import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
+import urllib.request
 from pathlib import Path
 
 SOURCE_ROOT = Path(__file__).resolve().parent.parent
@@ -135,6 +138,77 @@ print('SYSTEM4_107007_POINT0_WRAPPER_PASS')
 """
         cp=run([sys.executable,'-c',probe,str(point0)],cwd=repo)
         self.assertIn('SYSTEM4_107007_POINT0_WRAPPER_PASS',cp.stdout.decode())
+
+    def test_current_main_real_107007_root_only_external_parent_point0(self):
+        state=json.loads((SOURCE_ROOT/'control/startmaster0107/CURRENT_STATE.json').read_text(encoding='utf-8'))
+        blocker=state.get('current_execution_blocker') if isinstance(state.get('current_execution_blocker'),dict) else {}
+        if blocker.get('root_only_start_required') is not True:
+            self.skipTest('ROOT_ONLY_START_NOT_REQUIRED')
+
+        actual_head=head(SOURCE_ROOT)
+        req=urllib.request.Request(
+            'https://api.github.com/repos/hallo-netizen/affiliate-pferdeportal/issues/304/comments?per_page=100',
+            headers={'User-Agent':'Pferde-Atelier-System4-Root-Proof/1.0','Accept':'application/vnd.github+json'},
+        )
+        with urllib.request.urlopen(req,timeout=30) as resp:
+            comments=json.loads(resp.read().decode('utf-8'))
+        selected=None
+        selected_body=''
+        selected_raw=b''
+        for row in reversed(comments):
+            body=str(row.get('body') or '')
+            if 'PARENT POINT-0 — CURRENT MAIN — ROOT-ONLY PROOF' not in body:
+                continue
+            match=re.search(r'```json\n([\s\S]*?)\n```',body)
+            if not match:
+                continue
+            raw=(match.group(1)+'\n').encode('utf-8')
+            try:
+                value=json.loads(raw.decode('utf-8'))
+            except Exception:
+                continue
+            if value.get('head_sha')==actual_head:
+                selected=value
+                selected_body=body
+                selected_raw=raw
+                break
+        self.assertIsNotNone(selected,'CURRENT_MAIN_PARENT_POINT0_NOT_FOUND')
+        declared=re.search(r'Point-0 file SHA256: `([0-9a-f]{64})`',selected_body)
+        self.assertIsNotNone(declared,'CURRENT_MAIN_PARENT_POINT0_FILE_SHA_MISSING')
+        self.assertEqual(hashlib.sha256(selected_raw).hexdigest(),declared.group(1))
+        self.assertEqual(selected.get('publish_allowed'),False)
+        self.assertEqual(selected.get('head_sha'),actual_head)
+        self.assertEqual(selected.get('machine_prewrite',{}).get('item_count'),7)
+        self.assertEqual(selected.get('research_runtime',{}).get('item_pool_count'),7)
+
+        with tempfile.TemporaryDirectory(prefix='system4-real-root-only-') as td:
+            root=Path(td)
+            point0=root/'point0.json'
+            workspace=root/'workspace'
+            point0.write_bytes(selected_raw)
+            cp=run(
+                [sys.executable,str(SOURCE_ROOT/'control/startmaster0107/system4_107007_entry.py'),str(point0),str(workspace),'0'],
+                cwd=SOURCE_ROOT,
+                check=False,
+            )
+            output=cp.stdout.decode(errors='replace')+cp.stderr.decode(errors='replace')
+            self.assertEqual(cp.returncode,0,output)
+            lines=[line for line in cp.stdout.decode(errors='replace').splitlines() if line.strip()]
+            result=json.loads(lines[-1])
+            self.assertEqual(result.get('status'),'SYSTEM4_107007_ROOT_READY_STOP')
+            self.assertEqual(result.get('root_marker'),'SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY')
+            self.assertEqual(result.get('worker_started'),False)
+            self.assertEqual(result.get('stop_after_root'),True)
+            self.assertEqual(result.get('publish_allowed'),False)
+            self.assertEqual(result.get('item_count'),7)
+            self.assertEqual(result.get('item_index'),0)
+            self.assertTrue((workspace/'worker_dispatch.json').is_file())
+            article_state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+            self.assertEqual(article_state.get('phase'),'RESEARCH_REQUIRED')
+            self.assertIsNone(article_state.get('research'))
+            self.assertIsNone(article_state.get('draft_markdown'))
+            print('SYSTEM4_REAL_CURRENT_MAIN_ROOT_ONLY_PROOF_PASS:'+actual_head+':worker_started=false')
+
 
     def test_negative_legacy_start_is_machine_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
