@@ -37,7 +37,13 @@
     "PR248_M37_HISTORY_REGRESSION_MERGED",
     "PR247_M37_INNER_REASON_VISIBILITY_MERGED",
     "M01_M37_HISTORY_MACHINE_PROOF_PASS",
-    "LIVE_FIRST_ARTICLE_LANGUAGETOOL_SINGLE_REPAIR_APPLIED"
+    "LIVE_FIRST_ARTICLE_LANGUAGETOOL_SINGLE_REPAIR_APPLIED",
+    "PR293_SYSTEM4_1_TO_N_HARDENING_MERGED",
+    "SYSTEM4A_ACCEPTANCE_RUN_35319132619_PASS",
+    "SYSTEM4A_1_3_25_1000_PASS",
+    "SYSTEM4A_V2_HANDOFF_107008_PASS",
+    "SYSTEM4A_INCOMPLETE_AND_INVALID_COUNT_NEGATIVES_BLOCKED",
+    "M38_HISTORY_PROOF_M01_M37_PASS_M38_FIRST_FAIL_RUN_35322832657"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -145,15 +151,16 @@
   },
   "current_work_status": "BLOCKED",
   "current_execution_blocker": {
-    "code": "PPM679_REAL_EXECUTION_BLOCKED:PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH",
+    "code": "M38_PLAN_HEADER_PRODUCER_BINDING_MISSING",
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "evidence": "PR107 issuecomment-5638153888",
-    "detail": "The same first fresh Hindernisstangen article, after the exact LanguageTool repair `Stangenarbiet -> Stangenarbeit`, reached the real PPM 6.7.9/PSERC handoff and stopped at FACHWORKFLOW_PROOF_HANDOFF_BLOCKED with the exact nested reason PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH.",
-    "root_cause": "EXACT_INNER_BLOCK_CODE_KNOWN; EXPECTED_VS_ACTUAL_PLAN_VERSION_FIELDS_NOT_YET_AUTHORIZED_OR_PROVEN",
-    "first_nested_ppm_reason_status": "EXPOSED_BY_M37",
-    "diagnostic_followup_evidence": "PR107 issuecomment-5638208428",
-    "diagnostic_followup_result": "NOT_INSPECTED_CAPSULE_AUTHORIZES_ONLY_RUN_NEW_ARTICLE_BATCH_NO_STOP_107007; expected/actual and minimal fix location remain NOT_DETERMINABLE.",
+    "evidence": "System4A M38 history final probe run 35322832657 on current-main history proof; M01-M37 PASS, first_fail=M38",
+    "detail": "The bound 107007 production instruction does not yet bind the Fachworkflow-produced production_plan_header with the already-authoritative production_plan_v4 version fields before the real PSERC/PPM handoff.",
+    "root_cause": "STEP_107007_PRODUCER_BINDING_MISSING; HANDOFF_VERSION_GUARD_NOT_YET_PRESENT",
+    "authoritative_plan_contract_version": "4.0.0",
+    "authoritative_required_plugin_version": "6.7.9",
+    "history_proof_complete": true,
+    "product_fix_complete": false,
     "resolved": false,
     "publish_allowed": false
   },
@@ -207,21 +214,21 @@
     "last_read_only_diagnostic_evidence": "PR107 issuecomment-5638208428",
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
-  "last_safe_main_sha": "f1d1605f18bd23d9189f89ad173598958718d08a",
-  "last_safe_change": "M37 history authority and product observability fix are merged and machine-proven on main. This is NOT a production PASS. One fresh article reached real LanguageTool, received one exact spelling repair, then reached real PPM/PSERC and is blocked by the exact nested code PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH before 107008.",
-  "hobbyroom_status": "BLOCKED",
-  "hobbyroom_branch": "hobbyroom/m38-plan-version-history-20260911",
-  "hobbyroom_sync_policy": "User pause is active. PR249 is a draft/unmerged parallel HISTORY_AUTHORITY_MAINTENANCE path. Do not overwrite, merge, or treat it as proof until its intended matrix/runner-only scope is actually present and machine-tested against canonical main.",
-  "hobbyroom_blocker": "PAUSED_BY_USER plus unresolved live blocker PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH. PR249 is not yet a valid M38 history candidate: current diff contains only `.tmp_m38_history_anchor`; M38 matrix/runner changes and machine proof are absent.",
+  "last_safe_main_sha": "19451f92321cc0ac0aeabfa8ef09e7a6be3302ac",
+  "last_safe_change": "PR293 is merged on main: System 4 downstream production now uses real 1..N semantics and the final System4A acceptance evidence is PASS, including 1/3/25/1000 and V2 handoff to 107008. M38 history proof is complete and identifies M38_PLAN_HEADER_PRODUCER_BINDING_MISSING as the first open historical/product regression. No M38 product fix and no new production article run have been performed yet.",
+  "hobbyroom_status": "M38_HISTORY_PROOF_COMPLETE_PRODUCT_FIX_PENDING",
+  "hobbyroom_branch": "hobbyroom/m38-history-current-main-20260918",
+  "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
+  "hobbyroom_blocker": "M38_PLAN_HEADER_PRODUCER_BINDING_MISSING",
   "next_action": {
-    "goal": "After the user explicitly resumes: continue only from the exact live blocker PSERC_BRIDGE_PPM_PLAN_VERSION_MISMATCH. First verify PR249 as a history-only M38 path; do not accept its proposed expected/actual version values as authoritative until independently proven.",
-    "parallel_path": "PR249 / hobbyroom/m38-plan-version-history-20260911 / head 0d23e592a91a448fcc07fb5bd0a54b59985ef70c is draft and unmerged. Current diff is only the temporary anchor, so M38 is NOT registered or machine-proven yet.",
+    "goal": "Repair only M38_PLAN_HEADER_PRODUCER_BINDING_MISSING with the smallest existing-System change: bind the Fachworkflow-produced production_plan_header to plan_contract_version 4.0.0 and required_plugin_version 6.7.9, and fail closed before real PSERC/PPM on missing or mismatching values.",
     "required_order": [
-      "Re-read current main and PR249 head before any edit.",
-      "If PR249 remains the bound M38 path, complete only history authority in the existing error matrix and existing regression runner; remove the temporary anchor.",
-      "Prove canonical main M01-M37 PASS and M38 as the first new FAIL, then prove the history candidate with the existing hardlock/history-machine-proof mechanism. No product fix in the history phase.",
-      "Only after history proof, isolate the smallest product fix for the exact proven expected/actual plan-version mismatch. Do not infer `4.0.0`/`6.7.9` solely from PR249 text; prove the bridge contract or accepted authoritative plan evidence first.",
-      "After any product fix passes the full existing regression and hardlocks, rerun exactly one fresh first article through real LanguageTool and real PPM/PSERC. Only after one article PASS may the remaining batch continue to 107008; stop before publish."
+      "Keep next_allowed_step and execution gate bound to existing 107007; do not create a maintenance step, runner, gate, controller, or parallel truth.",
+      "Edit only the existing 107007 producer instruction/binding and existing fachworkflow_proof_handoff.py where M38 requires the producer binding and fail-closed version guard.",
+      "Run the existing M01-M38 regression; target M01-M38 PASS on the same head.",
+      "Run existing hardlock and hardlock-base checks.",
+      "Only after those checks PASS, run exactly one fresh first article through the unchanged real LanguageTool -> PSERC/PPM path.",
+      "Only after that one article fully PASSes may the remaining real 1..N batch continue to 107008. Stop before publish."
     ],
     "must_fail_closed_on": [
       "wrong source hash",
@@ -246,11 +253,20 @@
       "new architecture",
       "symptom fix before root cause",
       "second article before first article full PASS",
-      "merge PR249 while it only contains the temporary anchor",
-      "treat PR249 proposed version values as proven root cause without independent evidence"
+      "modify the completed M38 history-only branch as product authority"
     ],
-    "proof_after_fix": "One fresh first article must pass the unchanged real LT/PPM path first. Only then complete a fresh 7/7 through unchanged 107007 to 107008 and stop before publish. Component/selftests remain guardrails and do not grant production PASS."
+    "proof_after_fix": "Existing regression must report M01-M38 PASS and hardlock/hardlock-base must PASS before any new production article is attempted. Then exactly one fresh article must pass the unchanged real LT/PPM path before continuing the remaining 1..N batch. No publish."
   },
-  "hobbyroom_pr": 249,
-  "hobbyroom_head_sha": "0d23e592a91a448fcc07fb5bd0a54b59985ef70c"
+  "hobbyroom_pr": null,
+  "hobbyroom_head_sha": "3acae874dd4c807761983623c91f69d35a800fb2",
+  "m38_history_proof": {
+    "branch": "hobbyroom/m38-history-current-main-20260918",
+    "head_sha": "3acae874dd4c807761983623c91f69d35a800fb2",
+    "run_id": 35322832657,
+    "result": "M01-M37 PASS; M38 first FAIL",
+    "first_fail": "M38",
+    "first_fail_code": "M38_PLAN_HEADER_PRODUCER_BINDING_MISSING",
+    "history_only": true,
+    "product_logic_changed": false
+  }
 }
