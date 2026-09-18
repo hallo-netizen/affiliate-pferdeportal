@@ -1,5 +1,12 @@
 # DESIGN – HOBBYRAUM
 
+<!-- DERIVED_EXECUTION_SURFACE_V1 -->
+
+> **NICHT CURRENT-AUTORITATIV.** Diese Datei ist nur die abgeleitete Ausführungsfläche für eine bereits von der zuständigen Current-Autorität freigegebene Arbeit.  
+> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
+> Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
+
+
 STAND: 2026-09-16
 STATUS: **FREI**
 
@@ -16,7 +23,7 @@ Fehlerhistorie:
 Verbindlicher Designvertrag:
 `ZIELVERTRAG_DESIGN_20260915.md`
 
-## NEXT ACTION
+## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION
 
 Keine offene Designreparatur.
 
