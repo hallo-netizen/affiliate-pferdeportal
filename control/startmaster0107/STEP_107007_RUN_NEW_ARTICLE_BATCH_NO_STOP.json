@@ -58,7 +58,7 @@
     },
     {
       "ref": "isolated_system4/batch_gate.py",
-      "sha256": "95ee0af22ce54cfd472e8b910857279e5e09e8a1058f214d684b17e3f0f1dfa7"
+      "sha256": "08029626c18bd5986900b275a53b46e1ab40bd4cbcaba1d72de41c718ef710ad"
     },
     {
       "ref": "control/startmaster0107/system4_107008_handoff.py",
