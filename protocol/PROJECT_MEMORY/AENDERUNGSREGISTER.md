@@ -295,3 +295,14 @@ Bei belegter Änderung gilt `ON_BINDING_CHANGE_INSPECT_DELTA_ONLY`.
 SCHUTZ:
 `BAUCONTAINER/EINE_WAHRHEIT_STANDARD.md` + `BAUCONTAINER/single_truth_guard.py`.
 
+
+
+## ARCH-090 – Hobbyraum immer nur temporär genutzt
+WAS:
+Hobbyraum-Nutzung ausdrücklich als temporär klargestellt.
+WARUM:
+Ein Hobbyraum ist nur Arbeitsfläche für einen konkreten Auftrag und darf keine dauerhafte Status- oder Fachwahrheit werden.
+REGEL:
+Nach Abschluss/Rückgabe endet die Arbeitsbindung; dauerhafte Wahrheit bleibt in Current-/Protokoll-/Fachquellen.
+BELEG:
+`BAUCONTAINER/HOBBYRAUM_STANDARD.md`
