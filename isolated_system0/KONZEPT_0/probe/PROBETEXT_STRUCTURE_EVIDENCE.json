@@ -1,18 +1,18 @@
 {
   "contract": "KONZEPT0_PROBE_STRUCTURE_V1",
-  "word_count": 652,
-  "h2_count": 7,
+  "word_count": 827,
+  "h2_count": 9,
   "table_count": 1,
   "table_rows_total": 5,
   "list_items": 4,
-  "content_sha256": "7cc533c1614fac55a3cc79875566cb8f083e45aa67cb3ad7fcf0eec0da6f91d0",
+  "content_sha256": "00d213d0f2666c6ecf55ee8f8c7a37eaecf0d4c1892008bb6df30505f4917578",
   "checks": {
-    "minimum_words_750": false,
+    "minimum_words_750": true,
     "minimum_h2_4": true,
     "exact_table_1": true,
     "minimum_table_rows_5_including_header": true,
     "minimum_list_items_4": true,
     "has_conclusion": true
   },
-  "status": "BLOCKED"
+  "status": "PASS"
 }
