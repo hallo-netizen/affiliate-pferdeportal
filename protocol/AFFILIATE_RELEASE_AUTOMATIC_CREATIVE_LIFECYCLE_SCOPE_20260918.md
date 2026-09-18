@@ -1,7 +1,7 @@
 # AFFILIATE-ZENTRALE — Vollautomatischer Creative-Lifecycle + KISS-Bedienung
 
 Stand: 2026-09-18
-Status: `BOUND_TASK / NO_RELEASE_PASS`
+Status: `BOUND_ROOTFIX / NO_RELEASE_PASS`
 
 ## Ziel
 
@@ -54,10 +54,12 @@ Fachquellen außerhalb des Repositories:
 
 ## Partner & Einnahmen
 
-- lokale Klicks, Provider-Klicks und Provider-Umsatz/Provision getrennt behandeln;
-- fehlende Provider-Reportdaten nicht als `0 €` ausgeben;
+- Backend-Statistik ausschließlich aus verifizierten Originaldaten des jeweiligen Partners/Providers über dessen Report-/API-Weg;
+- keine eigene Klick-, Bestell-, Umsatz- oder Provisionserhebung in dieser Statistik anzeigen, addieren, ergänzen oder als Ersatzwert verwenden;
+- lokale Klickzähler gehören nicht in die Backend-Statistik;
+- fehlende Provider-Reportdaten nicht als `0 €` oder `0` ausgeben, sondern `nicht verfügbar`;
 - Währungen nicht als Euro-Gesamtsumme vermischen;
-- keine Rang-/Bestpartner-Aussage bei unvollständiger Datenbasis.
+- keine Rang-/Bestpartner-Aussage bei unvollständiger oder nicht vergleichbarer Datenbasis.
 
 ## UI/Disclosure
 
