@@ -78,3 +78,9 @@ Autoritative Fehlerquelle: `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/FEHLERQUELL
 
 ## Regel für neue Fehler
 Neue reale Fehler erhalten eindeutige ID, Bereich, Status und genau einen autoritativen Hauptort. Keine ausführliche Fehlerwahrheit an zwei Orten.
+
+## CAMPUS-SINGLE-TRUTH
+Bereich: CAMPUS / ARCHITEKTUR / EINSTIEG
+Status: CLOSED / REGRESSIONSSCHUTZ AKTIV
+Autoritative Fehlerquelle: `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md` → BAU-042
+
