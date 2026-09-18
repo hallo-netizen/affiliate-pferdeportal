@@ -1,105 +1,111 @@
 # AFFILIATE-ZENTRALE — CURRENT MASTER
 
-Stand: 2026-09-17
+Stand: 2026-09-18
 Workstream: `AFFILIATE_ZENTRALE`
-Status: `BLOCKED / CURRENT-SCOPE RECONCILIATION REQUIRED`
+Status: `ACTIVE / CANONICAL DELTA PRECHECK REQUIRED`
 
-## Eine Release-Wahrheit
+## Eine aktuelle Wahrheit
 
 - Repository: `hallo-netizen/affiliate-pferdeportal`
 - Arbeitsbranch: `affiliate-release-current`
 - Kanonische Source: `release/affiliate-zentrale/current/affiliate-portal-router/`
 - Kanonisches Manifest: `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`
 - Release-Governance: `control/release-governance/CURRENT_RELEASE.json`
-- Kanonischer aktiver Kandidat bleibt **6.72.19**; `release_allowed=false`.
-- Pluginbuero `PPA-001/CURRENT.zip` bleibt **6.72.19**. Lokale hoehere Testlinien sind keine zweite Release-Wahrheit.
+- Kanonischer Pluginstand bleibt **6.72.19**; `release_allowed=false`.
+- Pluginbüro `/Campus-Plugins/PFERDE_ATELIER/PPA-001/CURRENT.zip` bleibt **6.72.19** / SHA-256 `72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f`.
+- Lokale 6.72.60–6.72.65-Pakete sind Test-/Diagnoseoracle und ausdrücklich **keine zweite Release-/Current-Wahrheit**.
 
-## Aktueller Fachstand
+## Aktueller Nutzer-Scope / Zielvertrag
 
-Verbindliches Fachregister fuer Werbeplaetze:
-`/Pferde-Atelier/Aktenschraenke/Affiliate/WERBEPLATZ_REGISTER.md`
+Gebunden:
+`protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md`
 
-Aktuell gebunden:
-- Kategorie-Querbanner zuerst vollstaendig fertigstellen.
-- Downscaling bevorzugt; Upscaling hoechstens +10 %; proportional, kein Crop, keine Verzerrung.
-- Providerneutraler Bestand/Matcher: Provideradapter duerfen nur beschaffen/importieren; technische Eignung, Themenmatch, Rotation und Ausspielung bleiben zentral.
-- Neue Partner/Werbemittel muessen nach Sync/Upsert erneut in die Zuordnung eingehen; neue Adapterprovider ohne Umbau des Matching-Kerns.
-- Backendfilter primaer nach **Werbeplatz** und aus derselben Slotmatrix/demselben Matcher wie die Ausspielung; keine zweite Pixel-/Providerlogik.
-- Keine Abnahme ohne ausgefuehrte harte lokale POSITIV-/NEGATIV-/Gesamtworkflowpruefung inklusive Regression, Fresh-Unpack und Mutation/Sabotage. Live-PASS ist danach separat.
+Fachquellen:
+- `/Pferde-Atelier/Aktenschraenke/Affiliate/WERBEPLATZ_REGISTER.md`
+- `/Pferde-Atelier/Aktenschraenke/Affiliate/KONZEPT_AUTOMATIK_LIFECYCLE_20260918.md`
 
-Gebundener Repo-Auftrag:
-`protocol/AFFILIATE_RELEASE_CATEGORY_BANNER_WERBEPLATZ_FILTER_TASK_20260917.md`
+Kernziel:
+- Normalbetrieb vollautomatisch;
+- neue valide Partner/Creatives ohne Pflichtklick aufnehmen;
+- jederzeit manuell sperren/Veto/fixieren/bevorzugen und zur Automatik zurück;
+- identische Creatives nur eindeutig/fail-safe deduplizieren; pro identischer Variante + Formatfamilie größte Originalversion produktiv;
+- gleiches Bild mit anderem Text/CTA/Rabatt/Angebot bleibt getrennte Variante;
+- zentrale Hintergrundprüfung: Bestands-/Partner-/Creative-Sync alle 2 Wochen, tiefer Integritätslauf alle 3 Wochen, plus `Jetzt prüfen`;
+- verschwundene/deaktivierte/abgelaufene Creatives automatisch aus aktiver Eignung nehmen und betroffene Ziele neu bewerten;
+- Providerstatus/echte Laufzeitdaten sind Autorität; keine OCR-/Bildtext-Erfindung von Ablaufdaten;
+- Partner-/Einnahmen-Seite trennt lokale Klicks, Provider-Klicks und echte Reportdaten; fehlende Daten sind nicht `0 €`, Währungen werden nicht falsch als EUR addiert;
+- KISS: kein Zwischenplugin. Ein neues Test-ZIP erst, wenn ein vollständig gebundener Technikblock konkret im WordPress getestet werden muss.
 
-## Lokale Testlinie — Diagnose/Testoracle, NICHT kanonisch
+## Letzter sicher belegter Live-/Teststand
 
-- 6.72.36: Fullchain lokal hart PASS; LIVE offen. SHA-256 `1cf141d4aae60d7b817bf503dd0e6328280b2527d1f2e219e4195a7a0fda07c0`.
-- 6.72.37: Kategorie/Provider lokal 29 PASS / 0 FAIL + Browser-Runtime; LIVE offen. SHA-256 `08f07a772a3ca29520ef86270ed7c32d624789160fd2b056dcaaf79589da74c6`.
-- 6.72.38: Werbeplatzfilter lokal Fresh-Unpack 39 PASS / 0 FAIL, Planer-Regression 1120/1120, kombinierter 1200-Zeilen-Filtertest und Mutationstests PASS; echter WordPress-Live-Readback offen. SHA-256 `3791eebbdfdcaafa6af265eb1ad6c47cefc715217f149dcdc94d5bc474556f9b`.
+- Glossar-Linie **6.72.60**: Nutzer bestätigte Design/Position/Zentrierung LIVE PASS.
+- Danach lokale Rassen-/Disclosure-/Kachelbreiten-Linie 6.72.61–6.72.63.
+- Letzter Nutzer-Screenshot vor 6.72.63: **Produktkachelbreite FAIL**, Rassenseite **fast PASS**; gewünschte Abstände/Disclosure wurden danach lokal nachgezogen.
+- 6.72.63: lokale Strukturchecks 10/10 PASS + Fresh-Unpack 26/26 byteidentisch; LIVE-Retest offen.
+- 6.72.64: lokaler Hintergrund-Lifecycle-/Status-Prototyp; kein kanonischer Gesamtgate/LIVE-PASS.
+- 6.72.65: lokaler Partner-Analytics-Wahrheitsfix; kein kanonischer Gesamtgate/LIVE-PASS.
+- Nichtkanonische Testartefakte liegen getrennt unter `/Campus-Plugins/PFERDE_ATELIER/PPA-001/TESTARTEFAKTE_20260918/` und ersetzen CURRENT.zip nicht.
 
-Diese Linie verletzt als nichtkanonische Fortsetzung die bereits gebundene Nicht-Wiederholungsregel `AF-069`/`AFF-ERR-006` und darf deshalb **nicht** als Release, Pluginbuero-CURRENT oder Quelle weitergefuehrt werden. Ihre Tests duerfen nur als Oracle fuer den einen kanonischen Rootfix dienen.
+## Erster offener Punkt
 
-## Live-Stand
+Der 2026-09-18-Zielvertrag ist fachlich gebunden, aber sein exakter minimaler Delta zur **kanonischen 6.72.19-Source** ist noch nicht read-only bestimmt.
 
-- Die **exakt aktuell installierte WordPress-Pluginversion ist nicht autoritativ read-back-belegt**. Nicht raten.
-- Der letzte reale Backend-Screenshot `Import & Auswahl` zeigt **keinen Werbeplatzfilter**. Damit ist 6.72.38 im Live-System nicht nachgewiesen und fuer diese Funktion kein LIVE-PASS zulaessig.
-- Kein weiterer Installer und keine neue Versionsnummer, bevor die kanonische Sourcearbeit und die gebundenen lokalen Gates abgeschlossen sind. Vor Versionswahl muss die reale installierte WordPress-Version belegt werden (`AF-027`).
-
-## Frischecheck-Befund / erster offener Blocker
-
-Zwei bestehende dynamische Quellen tragen noch den alten Scope und widersprechen damit dem aktuellen ausdruecklichen Nutzer-Scope **Kategorie-Querbanner + Werbeplatzfilter**:
-
-1. `control/release-governance/CURRENT_RELEASE.json`: Release-Source korrekt 6.72.19, aber `user_scope_lock.current_focus` und `execution_state.bound_user_scope_action` stehen noch auf **ADCELL**.
-2. `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md`: permanentes Fehlerregister ist fachlich weiter bindend, aber sein unterer Abschnitt **„Aktueller PRECHECK“** steht noch auf **OTTO/Awin 14336** und nennt eine alte NEXT ACTION.
-
-Damit liegt aktuell eine **CURRENT-SCOPE-Drift** vor (`AFF-ERR-025` / `AF-057`). Die permanente Fehlerhistorie bleibt gueltig; nur die veralteten dynamischen Scope-/PRECHECK-Bindungen muessen nachgezogen werden. Solange das nicht atomar geschehen ist, bleibt der technische Einstieg BLOCKED.
+Daher darf jetzt weder aus 6.72.65 weitergebaut noch ein Installer erzeugt werden.
 
 ## NEXT ACTION — exakt eine
 
-**Nur die veralteten dynamischen Scope-Bindungen in `CURRENT_RELEASE.json` und im Abschnitt `Aktueller PRECHECK` des Fehlerregisters atomar auf den bereits gebundenen 2026-09-17-Auftrag `protocol/AFFILIATE_RELEASE_CATEGORY_BANNER_WERBEPLATZ_FILTER_TASK_20260917.md` nachziehen.**
+`AFFILIATE_HOBBYRAUM/TASK.current.json` ausführen:
 
-Dabei gilt:
-- kanonische 6.72.19-Source und Manifest unveraendert lassen;
-- `release_allowed=false` unveraendert lassen;
-- permanente Fehler-IDs/Regeln nicht umschreiben oder loeschen;
-- immutable Guard-Vertragswerte und den erlaubten `authorized_next_action`-Enum nicht schwaechen;
-- kein Pluginbuild, kein Installer, keine Versionswahl.
+`automatic-creative-lifecycle-canonical-precheck-20260918`
 
-**Erst nach erneutem Frischecheck ohne Scope-Widerspruch:** `AFFILIATE_HOBBYRAUM/TASK.current.json` ausfuehren. Das ist ein read-only kanonischer Delta-Precheck und darf ebenfalls keinen Build/Installer erzeugen.
+Zweck:
+- kanonische 6.72.19-Source read-only gegen den gebundenen 2026-09-18-Vertrag prüfen;
+- nur den exakten fehlenden Source-Delta ausgeben;
+- **kein Build, kein Installer, keine Versionswahl**.
 
-Danach darf aus der kanonischen Source genau **ein** Rootfix-Kandidat entstehen. Vor irgendeinem Installer muss derselbe Kandidat die im gebundenen Task verlangte harte lokale POSITIV-/NEGATIV-/Gesamtworkflowpruefung bestehen.
+Erst danach:
+1. genau ein minimaler kanonischer Rootfix-Kandidat;
+2. vollständige harte lokale POSITIV-/NEGATIV-/Gesamtworkflow-/Regression-/Fresh-Unpack-/Source-Identitäts-/Mutationtests;
+3. nur wenn danach ein konkreter WordPress-Livetest erforderlich ist: genau ein Testplugin;
+4. LIVE-PASS ausschließlich nach echtem WordPress-Readback.
 
-## Verbindlicher Arbeitsweg
+## Verbindlicher Einstieg für jeden Nachfolgechat
 
 1. `AFFILIATE_HOBBYRAUM/START_HERE.txt`
 2. diese `protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md`
-3. Frischecheck: Branch + Governance + kanonisches Manifest + Fehlerregister
-4. zuerst den oben belegten Scope-Drift in Governance + Fehlerregister-PRECHECK beheben
-5. Frischecheck wiederholen; nur bei Widerspruchsfreiheit weiter
-6. dann `AFFILIATE_HOBBYRAUM/TASK.current.json`
-7. nach bestandenem Precheck: ein kanonischer Rootfix, keine Versionskaskade
-8. vollstaendige harte lokale Gates
-9. erst dann Live-Testinstaller; Live-PASS nur mit realem WordPress-Readback
+3. Frischecheck:
+   - Branch `affiliate-release-current`
+   - `control/release-governance/CURRENT_RELEASE.json`
+   - `release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt`
+   - `protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md`
+   - gebundener Scope `protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md`
+4. exakt die NEXT ACTION oben
+5. `AFFILIATE_HOBBYRAUM/TASK.current.json`
+
+`START_HERE.txt` bleibt nur Wegweiser und enthält keine eigene dynamische Standwahrheit.
 
 ## Nicht anfassen
 
-- keine weiteren lokalen Versionsspruenge/Diagnose-ZIPs;
+- keine weitere lokale Versionskaskade;
+- keine Übernahme von 6.72.60–6.72.65 als kanonische Source;
+- `PPA-001/CURRENT.zip` nicht ersetzen;
 - keine eBay-PRIVATE-/Checkpoint-Massenmutation;
 - keine OTTO-Cleanup-Neuarchitektur;
-- kein Designplugin fuer diese Facharbeit;
-- keine zweite Werbeplatz-/Pixel-/Provider-Wahrheit;
+- kein Designplugin für Affiliate-Fachlogik;
+- keine zweite Werbeplatz-/Pixel-/Provider-/Lifecycle-Wahrheit;
 - keine Backendpfade raten.
 
 ## Fehler-/Prozessbindung
 
-Bindend mindestens:
-- `AFF-ERR-001`: kein Gesamt-/Release-PASS ohne echte Evidence;
+Mindestens bindend:
+- `AFF-ERR-001`: kein PASS ohne echte Evidence;
 - `AFF-ERR-006`: keine Mini-Fix-/Versionskaskade;
-- `AFF-ERR-007`: Backendpfade nur real belegt;
-- `AFF-ERR-009`: Slot/Format nicht im Providercode hart verdrahten;
-- `AFF-ERR-010`: Re-evaluation bei wachsendem Portal/Bestand;
-- `AFF-ERR-025` / `AF-057`: CURRENT-/Task-Drift nach Scopewechsel verhindern;
-- `AF-021`: `TASK.current.json` schemaexakt;
-- `AF-027`: reale installierte Version vor Versionswahl;
-- `AF-069`: nichtkanonische Folgepakete nicht als kanonisch behandeln.
+- `AFF-ERR-009`: Provider/Format nicht hart verdrahten;
+- `AFF-ERR-010`: Re-evaluation + zentraler periodischer Recheck;
+- `AFF-ERR-011` / `AFF-ERR-026`: Partner-/Einnahmen-Wahrheit;
+- `AFF-ERR-027`: lokale 6.72.60–6.72.65 niemals als zweite Current-Wahrheit;
+- `AF-021`: Hobbyraum-Task schemaexakt;
+- `AF-027`: reale installierte WordPress-Version vor späterer Versionswahl;
+- `AF-069`: nichtkanonische Folgepakete nicht kanonisieren.
 
-Historie bleibt in Git-History/Protokollen. Dieses Dokument enthaelt nur den aktuellen belastbaren Stand, den ersten offenen Blocker und die eine NEXT ACTION.
+Historie bleibt in Protokollen/Git-History. Dieses Dokument enthält nur aktuellen Stand, ersten offenen Punkt und eine NEXT ACTION.
