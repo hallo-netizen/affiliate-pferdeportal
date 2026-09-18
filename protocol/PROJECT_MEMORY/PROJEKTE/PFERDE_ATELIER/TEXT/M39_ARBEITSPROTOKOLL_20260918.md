@@ -6,7 +6,7 @@ STATUS: HISTORY_AUTHORITY_MAINTENANCE / PRODUKTFIX GETRENNT
 ## REALBEFUND
 
 Current main:
-`e69cab0f0a96978b997bff7cbf1ab8af4587e772`
+`fcd8120050a228d2fdd1a90285365158185ce4b3`
 
 Letzter belastbarer Pre-Codex-Recovery-Stand:
 `508f9dbb3650c99e5d41dbab83086af46945e225`
@@ -33,7 +33,7 @@ Branch:
 `hobbyroom/m39-release-identity-history-20260918`
 
 Head:
-`1d845b0427b0eb7486d7431b689e962de45ed867`
+`07f1d44d785460e36793ebcd09dbbdb8e9f77fba`
 
 Erwartung:
 1. current main: M01–M38 PASS;
