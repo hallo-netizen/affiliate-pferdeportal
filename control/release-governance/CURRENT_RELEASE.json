@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 66,
+  "generation": 67,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -177,13 +177,13 @@
     }
   },
   "execution_state": {
-    "state": "AWAITING_67272_WORDPRESS_LIVE_READBACK",
-    "authorized_next_action": "INSTALL_67272_TEST_CANDIDATE_AND_VERIFY_START_CATEGORY_PAGE_AND_PROVIDER_STATS",
-    "bound_user_scope_action": "ONE_67272_TEST_CANDIDATE_READY; NO_NEW_VERSION; VERIFY_START_CATEGORY_PAGE_SAME_WIDE_BANNER_AND_PARTNER_EINNAHMEN_ORIGINAL_REPORTS",
-    "completion_condition": "LIVE_READBACK_CONFIRMS_START_CATEGORY_PAGE_SHARED_WIDE_BANNER_AND_PROVIDER_STATS_OR_REPORT_UNAVAILABLE_FAIL_CLOSED",
-    "after_completion_action": "IF_LIVE_FAIL_FIX_ONLY_FIRST_REAL_DEFECT; IF_PASS_RESUME_RELEASE_GATES",
+    "state": "RUNNING_BOUND_RELEASE_GATES",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "FIRST_GATE: INSTALL EXACT 6.72.72 TEST CANDIDATE AND LIVE-VERIFY STARTSEITE + KATEGORIE + PORTAL-SEITE SAME WIDE BANNER; THEN PARTNER & EINNAHMEN MUST SHOW ORIGINAL PROVIDER REPORTS OR FAIL-CLOSED NICHT VERFUEGBAR; NO NEW VERSION BEFORE FIRST REAL FAIL",
+    "completion_condition": "6.72.72 LIVE READBACK COMPLETES THE BOUND START/CATEGORY/PAGE AND PROVIDER-REPORT GATE; ON FAIL FIX ONLY FIRST REAL DEFECT; ON PASS CONTINUE REMAINING BOUND RELEASE GATES",
+    "after_completion_action": "CONTINUE RUN_BOUND_RELEASE_GATES UNTIL ALL REQUIRED GATES PASS; ONLY THEN RELEASE_CHECK",
     "no_optional_detours": true,
-    "sequence": 12,
+    "sequence": 13,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -192,9 +192,9 @@
       "protocol/AFFILIATE_RELEASE_"
     ],
     "next_state_binding": {
-      "sequence": 13,
-      "state": "AWAITING_SHARED_OVERVIEW_BANNER_LIVE_READBACK",
-      "authorized_next_action": "INSTALL_ONE_TEST_CANDIDATE_AND_VERIFY_START_CATEGORY_PAGE",
+      "sequence": 14,
+      "state": "RUNNING_BOUND_RELEASE_GATES",
+      "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
       "authorized_change_prefixes": [
         "release/affiliate-zentrale/current/",
         "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -364,13 +364,11 @@
     },
     "current_protocol_ref": "protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md",
     "hobbyroom_current": {
-      "status": "ACTIVE",
+      "status": "COMPLETED_RETURNED_TO_CURRENT",
       "task_ref": "AFFILIATE_HOBBYRAUM/TASK.current.json",
-      "task_id": "automatic-creative-lifecycle-canonical-precheck-20260918",
-      "next_action": "Run the read-only canonical delta precheck against the 2026-09-18 automatic creative lifecycle/KISS scope. Report only the exact missing canonical source delta; no build, installer or version selection.",
+      "task_id": "automatic-creative-lifecycle-canonical-rootfix-20260918",
       "branch": "affiliate-release-current",
-      "return_path": "Read-only canonical delta precheck -> one minimal canonical rootfix -> complete local hard gates -> one concrete WordPress live-test installer only when required.",
-      "no_parallel_workstream": true
+      "result": "Canonical rootfix returned; 6.72.72 is the single bound test candidate. Hobbyraum is not a Current or NEXT-ACTION authority."
     },
     "canonical_current_source_drift": {
       "status": "RESOLVED_CURRENT_SOURCE_REBOUND",
@@ -392,7 +390,7 @@
       "dynamic_coverage_commit": "cf34cc9839d4538687b98cd7bc6f039780f59155",
       "article_bottom_no_duplicate_commit": "72c9b6fbd970b43cbbc4165bce3900be2fbbc659",
       "article_schema_commit": "bcf7d131b2f93e6b8d9a47dc2f2eec67f0dd015c",
-      "current_manifest_sha256": "af3e6ee9d09079b64013f988a241c60606a0cfcf196cd29e0ccc3764d3bef2e8"
+      "current_manifest_sha256": "4c5471425ffd7226cf12dd8f50937b26d78d9f4aa48a3af18b5f0ca7272c05a7"
     },
     "provider_original_report_sync_followup": {
       "status": "BOUND_SOURCE_COMPLETE",
@@ -748,7 +746,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "AWAITING_67272_LIVE_READBACK",
+    "current_milestone": "BOUND_RELEASE_GATES_67272_LIVE_READBACK_FIRST",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
