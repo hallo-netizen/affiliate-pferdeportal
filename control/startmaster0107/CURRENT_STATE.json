@@ -197,30 +197,24 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "REAL_CODEX_SINGLE_ARTICLE_REPAIR_ACCEPTANCE_APPROVED",
+  "current_work_status": "E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE_APPROVED",
   "current_execution_blocker": {
-    "code": "REAL_CODEX_REPAIR_ACCEPTANCE_PENDING_EXECUTION",
+    "code": "E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE_PENDING",
     "error_class": false,
-    "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
-    "sequence": 107007,
-    "detail": "The test/proof gap is closed by PR #331 and System 4A real acceptance run 35389785292. The user explicitly approved Codex use until the morning of 2026-09-19 or until the Codex usage limit is reached. Exactly one fresh real Codex article-0 repair acceptance is authorized. Article 1 and batch advance remain forbidden. Real Codex repair proof requires durable pre-repair bytes/state/findings and post-repair bytes/state plus real LT/PPM PASS evidence; mocks, deterministic testworkers and prebuilt final fixtures cannot satisfy it.",
-    "proof_base_main_sha": "1431bf52ea73932c809d242a429cdd62e7b93a0b",
-    "proof_layer_pr": 331,
-    "proof_layer_acceptance_run_id": 35389785292,
-    "proof_layer_hardlock_run_id": 35389831741,
-    "proof_layer_hardlock_base_run_id": 35389831731,
+    "detail": "User explicitly requested a fresh end-to-end acceptance with one article and multiple articles. Multiple means exactly three articles for this acceptance. Both runs must start at the chat-bound System 4 entrance and continue through Point-0, Codex authoring, real LanguageTool 6.8, real PPM 6.7.9, same-article repair where required, batch/handoff, 107008, PSERC/ENDSTEMPEL, real WordPress import-format verification, and byte-identical downloadable final file delivery in the parent chat. Technical and text-quality positive/negative checks are separate. No production publish or WordPress write is allowed.",
     "dispatcher_pr": 107,
-    "article_index": 0,
-    "completed_articles": 0,
-    "next_article_started": false,
-    "publish_allowed": false,
+    "test_counts": [
+      1,
+      3
+    ],
     "codex_start_allowed": true,
     "fresh_user_codex_approval_required": false,
     "user_codex_approval": {
       "source": "CURRENT_CHAT_USER_MESSAGE_20260918",
-      "scope": "USE_CODEX_WHERE_NECESSARY_FOR_CURRENT_REPAIR_PROOF",
+      "scope": "E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE",
       "valid_until": "2026-09-19_MORNING_OR_CODEX_USAGE_LIMIT"
-    }
+    },
+    "publish_allowed": false
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -254,8 +248,8 @@
     "main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
     "dispatcher_pr": 107,
     "dispatcher_head_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
-    "latest_durable_pr107_terminal_comment": "5734772066",
-    "latest_durable_pr107_terminal_code": "AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID",
+    "latest_durable_pr107_terminal_comment": "5735784162",
+    "latest_durable_pr107_terminal_code": "REAL_CODEX_REPAIR_ACCEPTANCE_PASS_WITH_EVIDENCE_FIELDS_OMITTED",
     "latest_observed_shell_checker": "PPM 6.7.9",
     "latest_observed_shell_article_index": 0,
     "latest_observed_shell_findings": [
@@ -314,20 +308,18 @@
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
   "hobbyroom_blocker": "NONE_TEST_LAYER_CLOSED",
   "next_action": {
-    "goal": "PROVE_ONE_REAL_CODEX_SAME_ARTICLE_REPAIR_WITH_DURABLE_EVIDENCE",
-    "action": "User Codex approval is active until the morning of 2026-09-19 or Codex usage limit. Run exactly one fresh real Codex article-0 acceptance from the current bound System-4 input. Do not advance to article 1. If the first real fullcheck returns REPAIR_REQUIRED, capture the exact pre-repair article bytes, workspace state/revision and complete findings before changing the article; then let Codex generate only the same-article repair and rerun the real fullcheck. Repeat only on the same article while REPAIR_REQUIRED. At terminal PASS capture exact final article bytes/state/revision and real LanguageTool + PPM evidence. Emit durable evidence in PR #107 including SHA-256 plus base64 of pre-repair article, findings JSON for every repair cycle, and final article so the proof survives workspace loss. A mock, deterministic testworker or prebuilt final fixture is forbidden and cannot count. If the article passes without any repair event, report REAL_CODEX_REPAIR_NOT_EXERCISED and stop; do not start another article in that task.",
-    "why": "The static proof layer is now hardened and green, but REAL_CODEX_REPAIR_PROVEN still requires a live Codex-generated same-article repair with durable before/after/findings evidence and real LT/PPM PASS. The user-approved Putzplatzmatten article is bound only as a positive CONTENT_ONLY text-quality reference; structural compliance remains a separate dimension.",
+    "goal": "RUN_E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE",
+    "action": "Run two fresh acceptance executions: first exactly one article, then exactly three articles. Each begins from the bound chat/System-4 entrance and uses real Codex authoring, real LanguageTool 6.8 and real PPM 6.7.9. For every repairable finding, repair the same article in the same workspace and rerun the same real checkers. Run separate positive and negative technical/integrity tests and separate positive and negative text-quality tests; structure/compliance failures must not be mislabeled as text-quality failures. Each positive execution must continue through batch collect, V2 handoff, 107008, PSERC, GitHub ENDSTEMPEL, real WordPress import-format verification and produce the exact checked final JSON as a durable release asset. Parent chat must retrieve that exact asset, verify SHA-256, and attach the byte-identical file before overall PASS. The three-article run must not start article N+1 before article N PASS. No publish or WordPress write.",
+    "why": "The user requested a fresh complete acceptance, not only the already-green technical prequalification. The current test protocol explicitly says a run is not overall PASS until the exact final signed import file is actually downloadable in the parent chat.",
     "forbidden": [
-      "start article 1",
-      "advance the 1..N batch",
-      "restart or run the 7-item production batch",
-      "use a mock, deterministic testworker or prebuilt final fixture as real Codex repair proof",
-      "use the user-approved quality-reference article as a production source or PASS fixture",
-      "change PPM or LanguageTool quality thresholds",
-      "change text/design rules to force PASS",
-      "change production architecture",
       "publish or write to WordPress",
-      "claim REAL_CODEX_REPAIR_PROVEN without durable pre/post/findings bytes and real checker PASS"
+      "weaken or change LanguageTool, PPM, text, design or quality thresholds",
+      "change production architecture",
+      "use mocks, deterministic testworkers or prebuilt final article fixtures as proof of real Codex text quality",
+      "reuse historical article bodies as NEW article source",
+      "label structural/format findings as bad text quality",
+      "claim overall PASS before byte-identical final file is attached in parent chat",
+      "start a later article before the current article has real PASS"
     ]
   },
   "hobbyroom_pr": 331,
@@ -395,7 +387,7 @@
     "real_codex_start_result": "PASS_TO_ARTICLE0_FULLCHECK_REPAIR_REQUIRED"
   },
   "real_codex_repair_proof": {
-    "status": "TEST_LAYER_CLOSED_REAL_CODEX_RUN_APPROVED_PENDING",
+    "status": "LIVE_PASS_REPORTED_BUT_DURABLE_EVIDENCE_INCOMPLETE",
     "proof_contract_ref": "isolated_system4/repair_proof_contract.py",
     "protocol_ref": "protocol/STARTMASTER0107_TESTSTRECKE_REAL_REPAIR_QUALITY_SEPARATION_20260918.md",
     "quality_reference_body_ref": "isolated_system4/testdata/article_quality_reference_putzplatzmatten_20260918.txt",
@@ -407,6 +399,8 @@
     "hardlock_run_id": 35389831741,
     "hardlock_base_run_id": 35389831731,
     "real_codex_repair_proven": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "latest_terminal_comment": "5735784162",
+    "incomplete_reason": "Required PRE_REPAIR_ARTICLE_BASE64, REPAIR_FINDINGS_JSON_BASE64 and FINAL_ARTICLE_BASE64 were replaced by output-limit placeholders; the contract therefore does not permit REAL_CODEX_REPAIR_PROVEN."
   }
 }
