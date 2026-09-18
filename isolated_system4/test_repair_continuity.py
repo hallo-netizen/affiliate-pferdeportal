@@ -12,7 +12,9 @@ import batch_gate
 import controller
 import live_parity_v2 as live_parity
 import repair_proof_contract as repair_proof
+import real7_article0_quality_authority_probe
 import test_route_input_factory
+import verify_real7_multifinding_repair
 
 HERE = Path(__file__).resolve().parent
 
@@ -262,6 +264,76 @@ class RepairContinuityTests(unittest.TestCase):
             self.assertEqual(result['article_count'], 3)
             self.assertFalse(result['publish_allowed'])
 
+
+    def test_real7_four_finding_returns_to_same_article_until_real_checks_pass(self):
+        with tempfile.TemporaryDirectory(prefix='system4-real7-multifinding-') as td:
+            root = Path(td)
+            fixture = root / 'fixture'
+            runroot = root / 'run'
+            output = root / 'output'
+            evidence = root / 'evidence'
+            token = 'real7-multifinding-' + root.name
+
+            with mock.patch.dict(os.environ, {
+                'SYSTEM4_FRESH_RUN_TOKEN': token,
+                'SYSTEM4_REPAIR_EVIDENCE_OUTPUT_DIR': str(evidence),
+                'SYSTEM4_TEST_REAL7_PPM_MULTIFINDING': '1',
+            }, clear=False):
+                # Bind this technical repair proof to the actual article-0 authority:
+                # Beratung, duplicate <=2%, conclusion >=10%, table new-token >=18%.
+                self.assertEqual(real7_article0_quality_authority_probe.main(), 0)
+
+                test_route_input_factory.create(fixture, 1)
+                live_parity.FIX = fixture.resolve()
+                live_parity.prepare(runroot)
+                result = live_parity.item(runroot, 0)
+                self.assertEqual(result['status'], 'PASS')
+                self.assertGreaterEqual(len(result.get('repair_artifacts') or []), 2)
+                self.assertEqual(result['revision'], 3)
+
+                previous_after = None
+                first_codes = None
+                for artifact in result['repair_artifacts']:
+                    self.assertEqual(artifact['worker'], 'DETERMINISTIC_TEST_WORKER')
+                    self.assertFalse(artifact['codex_used'])
+                    self.assertFalse(artifact['prepared_final_fixture_used'])
+                    self.assertTrue(artifact['repair_routing_proven'])
+                    self.assertTrue(artifact['same_article_repair'])
+                    self.assertTrue(artifact['recheck_executed'])
+                    self.assertFalse(artifact['live_codex_repair_proven'])
+                    if previous_after is not None:
+                        self.assertEqual(previous_after, artifact['before_sha256'])
+                    previous_after = artifact['after_sha256']
+                    if first_codes is None:
+                        first_codes = {
+                            str(row.get('error_code') or '')
+                            for row in artifact.get('findings') or []
+                        }
+
+                self.assertTrue({
+                    'BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO',
+                    'BLOCKED_KNOWN_SHORT_CONCLUSION',
+                    'BLOCKED_WAVE2_CONCLUSION_BALANCE',
+                    'BLOCKED_WAVE2_TABLE_VALUE',
+                }.issubset(first_codes or set()))
+
+                with mock.patch.dict(os.environ, {
+                    'SYSTEM4_LIVE_PARITY_OUTPUT_DIR': str(output),
+                }, clear=False):
+                    final = live_parity.finalize(runroot)
+                self.assertEqual(final['lt'], ['PASS'])
+                self.assertEqual(final['ppm'], ['PASS'])
+                self.assertEqual(final['repair_proof_level'], 'REPAIR_ROUTING_PROVEN')
+                self.assertFalse(final['real_codex_repair_proven'])
+
+                self.assertEqual(
+                    verify_real7_multifinding_repair.main([
+                        'verify_real7_multifinding_repair.py',
+                        str(evidence),
+                        str(output),
+                    ]),
+                    0,
+                )
 
     def test_user_approved_codex_reference_separates_content_quality_from_structure(self):
         body = (HERE / 'testdata' / 'article_quality_reference_putzplatzmatten_20260918.txt').read_text(encoding='utf-8')
