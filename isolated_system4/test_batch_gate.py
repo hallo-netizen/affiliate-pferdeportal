@@ -186,6 +186,101 @@ class E2ESubsetAcceptanceTests(unittest.TestCase):
         finally:
             self._cleanup(result)
 
+    def test_batch_template_reuse_returns_to_same_article_workshop_until_pass(self):
+        with tempfile.TemporaryDirectory(prefix='system4-e2e-batch-repair-') as td:
+            root=Path(td)
+            fixture=root/'fixture'
+            fixture.mkdir()
+            snap,paths=make_fixture(fixture,count=3)
+            snapshot=json.loads(snap.read_text(encoding='utf-8'))
+            batch=snapshot['next_textmachine_metadata_batch']
+            shutil.copy2(snap,root/'snapshot.json')
+            batch_root=root/'batch'
+            batch_root.mkdir()
+            for state_path in paths:
+                shutil.copytree(state_path.parent,batch_root/state_path.parent.name)
+
+            original_two=json.loads((batch_root/'item-000002'/'state.json').read_text(encoding='utf-8'))
+            common=' '.join(f'gemeinsam{n}' for n in range(120))
+            for index in (1,2):
+                state_path=batch_root/f'item-{index:06d}'/'state.json'
+                state=json.loads(state_path.read_text(encoding='utf-8'))
+                article=state['article']
+                draft=(
+                    f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung">'
+                    f'<h2>{article["title"]}</h2>'
+                    f'<p data-fact-ids="fact-{index}-a fact-{index}-b fact-{index}-c">'
+                    f'{article["target_keyword"]} {common}</p>'
+                    '<table class="system-129-table comparison-table">'
+                    '<tr><th>Kriterium</th><th>Wert</th></tr><tr><td>A</td><td>B</td></tr></table></article>'
+                )
+                state['draft_markdown']=draft
+                state['draft_sha256']=sha_text(draft)
+                state['checks']['checked_draft_sha256']=sha_text(draft)
+                state['checks']['production_evidence']=production_evidence(draft)
+                state_path.write_text(json.dumps(state,ensure_ascii=False),encoding='utf-8')
+
+            meta={
+                'contract':'SYSTEM4_E2E_SUBSET_ACCEPTANCE_V1',
+                'status':'BOUND',
+                'article_count':3,
+                'acceptance_batch_sha256':batch['batch_sha256'],
+                'head_sha':e2e_acceptance_subset._head(),
+                'root_manifest_sha256':e2e_acceptance_subset.root_entry._critical_manifest_sha256(),
+                'publish_allowed':False,
+            }
+            e2e_acceptance_subset._write(root/e2e_acceptance_subset.META_NAME,meta)
+            batch_state={
+                'contract':'SYSTEM4_107007_PRODUCTION_BATCH_V1',
+                'status':'ACTIVE',
+                'sequence':107007,
+                'batch_sha256':batch['batch_sha256'],
+                'point0_sha256':'0'*64,
+                'item_count':3,
+                'current_index':2,
+                'completed_indices':[0,1],
+                'started_indices':[0,1,2],
+                'batch_collect':None,
+                'publish_allowed':False,
+            }
+            e2e_acceptance_subset._write(batch_root/e2e_acceptance_subset.BATCH_STATE_NAME,batch_state)
+
+            returned=e2e_acceptance_subset.advance(root)
+            self.assertEqual(returned['status'],'SYSTEM4_E2E_ACCEPTANCE_BATCH_REPAIR_REQUIRED')
+            self.assertEqual(returned['repair_owner'],'DRAFT_WORKER')
+            self.assertEqual(returned['repair_index'],2)
+            self.assertTrue(returned['same_article_required'])
+            self.assertFalse(returned['terminal_block'])
+            self.assertEqual(returned['finding']['error_code'],'BATCH_TEMPLATE_REUSE_BLOCKED')
+            self.assertGreaterEqual(returned['finding']['similarity'],0.20)
+
+            with self.assertRaisesRegex(
+                e2e_acceptance_subset.AcceptanceBlocked,
+                'ACCEPTANCE_BATCH_REPAIR_REVISION_NOT_ADVANCED',
+            ):
+                e2e_acceptance_subset.advance(root)
+
+            repaired_path=batch_root/'item-000002'/'state.json'
+            repaired=json.loads(repaired_path.read_text(encoding='utf-8'))
+            good=original_two['draft_markdown']
+            repaired['revision']=int(repaired['revision'])+1
+            repaired['draft_markdown']=good
+            repaired['draft_sha256']=sha_text(good)
+            repaired['checks']['checked_draft_sha256']=sha_text(good)
+            repaired['checks']['production_evidence']=production_evidence(good)
+            repaired_path.write_text(json.dumps(repaired,ensure_ascii=False),encoding='utf-8')
+
+            final=e2e_acceptance_subset.advance(root)
+            self.assertEqual(final['status'],'ITEMS_COMPLETE')
+            self.assertEqual(final['batch_collect']['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED')
+            stored=json.loads((batch_root/e2e_acceptance_subset.BATCH_STATE_NAME).read_text(encoding='utf-8'))
+            self.assertEqual(stored['status'],'ITEMS_COMPLETE')
+            self.assertIsNone(stored['batch_repair'])
+            self.assertEqual(len(stored['batch_repair_history']),1)
+            self.assertEqual(stored['batch_repair_history'][0]['repair_owner'],'DRAFT_WORKER')
+            self.assertFalse(stored['batch_repair_history'][0]['terminal_block'])
+
+
 class BatchGateTests(unittest.TestCase):
     def run_collect(self,mutate=None,count=7,path_count=None):
         td=tempfile.TemporaryDirectory(); root=Path(td.name); snap,paths=make_fixture(root,count=count)
