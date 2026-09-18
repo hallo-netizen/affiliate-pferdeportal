@@ -1,0 +1,20 @@
+{
+    "contract": "PSTE_0.56.25_LIVE_24_QUOTA_ROOTCAUSE_REPLAY_V1",
+    "status": "PASS",
+    "input_shape": {
+        "live_eligible": 24,
+        "existing_duplicate_shape": 14,
+        "initial_distinct": 10
+    },
+    "blocked_before_quota": 14,
+    "usable_after_initial_24": 10,
+    "new_distinct_added": 30,
+    "final_true_usable": 40,
+    "target_40_reached_only_by_true_usable": true,
+    "blocked_rows_never_count": true,
+    "provider_calls_in_gate": 0,
+    "unexpected_gate_results": [],
+    "content_touched": false,
+    "design_touched": false,
+    "ppm_touched": false
+}
