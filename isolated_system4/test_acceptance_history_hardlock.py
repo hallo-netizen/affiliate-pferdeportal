@@ -185,6 +185,22 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
             exact = 'test_point0_v2.Point0V2Tests.' + method
             self.assertIn(exact, workflow, exact + ' missing from permanent Point0 matrix')
 
+    def test_m01_m38_real_regression_runner_passes_on_this_head(self):
+        runner = REPO / 'control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py'
+        cp = subprocess.run(
+            ['python3', str(runner)],
+            cwd=REPO,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=300,
+            check=False,
+        )
+        self.assertEqual(cp.returncode, 0, cp.stdout + '\n' + cp.stderr)
+        self.assertIn('M38 PASS', cp.stdout)
+        self.assertIn('LAST_REGRESSION PASS BOUND_CURRENT_FACHWORKFLOW_EXECUTION_CONTEXT_MISSING', cp.stdout)
+        self.assertIn('"status": "GESAMT PASS"', cp.stdout)
+
     def test_historical_regression_contract_remains_bound(self):
         protocol = text(HERE / 'PROTOKOLL_TESTSTRECKE_V2_20260914.md')
         permanent = (
