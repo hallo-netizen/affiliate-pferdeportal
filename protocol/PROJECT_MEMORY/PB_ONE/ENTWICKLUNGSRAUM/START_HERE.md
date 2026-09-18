@@ -31,7 +31,7 @@ gemeinsam mit Paul lesen, schreiben, verändern, strukturieren, Varianten vergle
 hier programmieren oder technische Projektdateien verändern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `KONZEPTREGISTER.md`.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → `KONZEPTREGISTER.md`.
 
 ## Arbeitsweg
 
