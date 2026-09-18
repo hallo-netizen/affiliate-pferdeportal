@@ -1,13 +1,18 @@
 {
-  "contract": "PFERDE_ATELIER_KONZEPT_NULL_START_HERE_V3",
+  "contract": "PFERDE_ATELIER_KONZEPT_NULL_START_HERE_V4",
   "name": "KONZEPT NULL",
   "navigation_authority": "konzept_null/CURRENT_STATE.json",
+  "navigation_contract": "konzept_null/CHAT_NAVIGATION_CONTRACT.json",
   "isolation_policy": "konzept_null/ISOLATION_POLICY.json",
   "runner": "konzept_null/konzept_null_runner.py",
   "historical_authority": {
     "startmaster": "STARTMASTER0102",
     "commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
     "prompt_ref": "protocol/STARTMASTER0102_ARTICLE_TEST_NO_STOP_HANDOFF_20260828.md"
+  },
+  "reconstruction_support": {
+    "startmaster_0039_sha256": "085423c2bb129334c6b03025248d0e628ccc6caf28a8bd6491a67c91107c7575",
+    "use": "historical chat-control and frozen workflow semantics only"
   },
   "next_allowed_step": "LOAD_METADATA_BATCH_READ_ONLY",
   "batch_mode": "VARIABLE_1_TO_N",
@@ -17,5 +22,6 @@
   "external_write_allowed": false,
   "publish_allowed": false,
   "production_authority": false,
+  "free_workflow_decisions": false,
   "scope": "ISOLATED_TEST_ONLY"
 }
