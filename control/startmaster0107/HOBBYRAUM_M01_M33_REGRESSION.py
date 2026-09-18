@@ -83,46 +83,35 @@ def m13(): must("test_wrong_final_content_hash_is_blocked" in (REPO/"control/sta
 def m14(): must(HANDOFF.is_file(),"M14_HANDOFF_FILE")
 def _m15_validate_instruction(text):
     required=(
-        "fachworkflow_handoff.request_required_fields",
-        "fachworkflow_handoff.request_ref",
-        "fachworkflow_handoff.command",
-        "FACHWORKFLOW_PROOF_HANDOFF_PASS",
-        "submission_command",
+        "system4_107007_batch.py start",
+        "system4_107007_batch.py advance",
+        "batch_gate.py collect",
+        "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+        "control/single-door-boundary/codex_current_action.py",
+        "control/startmaster0107/fachworkflow_proof_handoff.py",
+        "nicht mehr autorisiert",
     )
     for token in required:
-        must(token in text,"M15_REQUIRED_INSTRUCTION_MISSING:"+token)
+        must(token in text,"M15_SYSTEM4_INSTRUCTION_MISSING:"+token)
     low=text.casefold()
-    must("keine capability-suche" in low,"M15_CAPABILITY_SEARCH_NOT_FORBIDDEN")
-    must(
-        "kein zweiter executor" in low or "kein separater fachworkflow-executor" in low,
-        "M15_SECOND_EXECUTOR_NOT_FORBIDDEN",
-    )
-    must("keine alternativroute" in low,"M15_ALTERNATIVE_ROUTE_NOT_FORBIDDEN")
-    i_request=text.index("fachworkflow_handoff.request_ref")
-    i_command=text.index("fachworkflow_handoff.command")
-    i_pass=text.index("FACHWORKFLOW_PROOF_HANDOFF_PASS")
-    i_submit=text.index("submission_command")
-    must(i_request < i_command < i_pass < i_submit,"M15_HANDOFF_ORDER_CONTRADICTION")
-    forbidden=(
-        "kein handoff-request",
-        "handoff-request nicht erzeugen",
-        "submission_command führt direkt",
-        "vorab-handoff durch den worker erforderlich",
-    )
-    for token in forbidden:
-        must(token not in low,"M15_CONTRADICTORY_HANDOFF_INSTRUCTION:"+token)
+    must("kein überspringen" in low,"M15_SYSTEM4_SKIP_NOT_FORBIDDEN")
+    must("kein freier sprung" in low,"M15_SYSTEM4_FREE_JUMP_NOT_FORBIDDEN")
+    must("keine zweite repair-wahrheit" in low,"M15_SECOND_REPAIR_TRUTH_NOT_FORBIDDEN")
+    must("kein publish" in low,"M15_PUBLISH_NOT_FORBIDDEN")
+    must(text.index("system4_107007_batch.py start") < text.index("system4_107007_batch.py advance"),"M15_SYSTEM4_START_ADVANCE_ORDER")
+    must(text.index("system4_107007_batch.py advance") < text.index("batch_gate.py collect"),"M15_SYSTEM4_ADVANCE_COLLECT_ORDER")
 
 def m15():
     text=load(STEP7)["instruction"]
     _m15_validate_instruction(text)
-    bad_order=text.replace(
-        "Danach ausschließlich fachworkflow_handoff.command ausführen.",
-        "submission_command ausführen; danach ausschließlich fachworkflow_handoff.command ausführen.",
-        1,
+    expect_exc(
+        lambda:_m15_validate_instruction(text.replace("SYSTEM4_BATCH_FULL_PASS_COLLECTED","BROKEN_COLLECT_STATUS",1)),
+        "M15_SYSTEM4_INSTRUCTION_MISSING",
     )
-    expect_exc(lambda:_m15_validate_instruction(bad_order),"M15_HANDOFF_ORDER_CONTRADICTION")
-    bad_direct=text+"\nKein Handoff-Request; submission_command führt direkt."
-    expect_exc(lambda:_m15_validate_instruction(bad_direct),"M15_CONTRADICTORY_HANDOFF_INSTRUCTION")
+    expect_exc(
+        lambda:_m15_validate_instruction(text.replace("keine zweite Repair-Wahrheit","zweite Repair-Wahrheit erlaubt",1)),
+        "M15_SECOND_REPAIR_TRUTH_NOT_FORBIDDEN",
+    )
 def _m16_validate_signer_boundary(runtime_src:str,finalizer_src:str,step_instruction:str)->None:
     for token in ("PSERC_SIGNER_CMD","ENDSTEMPEL_HSM_CMD","call_signer("):
         must(token not in runtime_src,"M16_SIGNER_EXPOSED_TO_RUNTIME:"+token)
