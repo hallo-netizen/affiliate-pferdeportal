@@ -1,0 +1,88 @@
+name: Konzept 0 Historical Archive Authoring Recovery
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/AUTHORING_ARCHIVE_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan Aug-28 historical ZIP archives for original authoring chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="isolated_system0/KONZEPT_0"
+          REPORT="$ROOT/AUTHORING_ARCHIVE_RECOVERY_REPORT.txt"
+          mkdir -p "$ROOT/runtime/recovered_authoring"
+          : > "$REPORT"
+          REF="a4084afd2b22cdbab2e7c6141885760adedc8f4b"
+
+          mapfile -t zips < <(git ls-tree -r --name-only "$REF" | grep -Ei '\.zip$' || true)
+          echo "ZIP_COUNT=${#zips[@]}" | tee -a "$REPORT"
+
+          found=0
+          for z in "${zips[@]}"; do
+            tmp="$(mktemp --suffix=.zip)"
+            if ! git show "$REF:$z" > "$tmp" 2>/dev/null; then rm -f "$tmp"; continue; fi
+            if unzip -l "$tmp" 2>/dev/null | grep -Ei '(^|/)(17_RULE_EXECUTION_CHAIN|build_cross_domain_articles\.py|RULE_EXECUTION_CHAIN)' >/tmp/k0matches.$$; then
+              echo "ARCHIVE=$z" | tee -a "$REPORT"
+              cat /tmp/k0matches.$$ | tee -a "$REPORT"
+              while IFS= read -r line; do
+                member="$(echo "$line" | awk '{for(i=4;i<=NF;i++){printf "%s%s",$i,(i<NF?" ":"")}}')"
+                case "$member" in
+                  *build_cross_domain_articles.py)
+                    unzip -p "$tmp" "$member" > "$ROOT/runtime/recovered_authoring/build_cross_domain_articles.py"
+                    echo "EXTRACTED=$z::$member" | tee -a "$REPORT"
+                    found=1
+                    ;;
+                esac
+              done </tmp/k0matches.$$
+            fi
+            rm -f "$tmp" /tmp/k0matches.$$ || true
+          done
+
+          echo "AUTHORING_SCRIPT_FOUND=$found" | tee -a "$REPORT"
+          if [ "$found" -eq 1 ]; then
+            sha256sum "$ROOT/runtime/recovered_authoring/build_cross_domain_articles.py" | tee -a "$REPORT"
+            python3 -m py_compile "$ROOT/runtime/recovered_authoring/build_cross_domain_articles.py"
+          fi
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib
+          root=Path("isolated_system0/KONZEPT_0")
+          p=root/"runtime/recovered_authoring/build_cross_domain_articles.py"
+          out={
+            "contract":"KONZEPT0_AUTHORING_ARCHIVE_RECOVERY_V1",
+            "status":"PASS",
+            "authoring_script_found":p.is_file(),
+            "authoring_script_sha256":hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None,
+            "source_scope":"AUG28_COMMIT_ARCHIVES_ONLY",
+            "concept_1_2_3_4_4a_runtime_contact":False,
+            "codex_started":False,
+            "publish_performed":False
+          }
+          (root/"AUTHORING_ARCHIVE_RECOVERY_EVIDENCE.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Commit recovery evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "konzept0-authoring-recovery"
+          git config user.email "actions@users.noreply.github.com"
+          git add isolated_system0/KONZEPT_0/AUTHORING_ARCHIVE_RECOVERY_REPORT.txt                   isolated_system0/KONZEPT_0/AUTHORING_ARCHIVE_RECOVERY_EVIDENCE.json                   isolated_system0/KONZEPT_0/runtime/recovered_authoring
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Konzept 0: recover Aug-28 authoring chain from historical archives"
+          git push origin HEAD:isolated-system0-legacy-text-20260828
