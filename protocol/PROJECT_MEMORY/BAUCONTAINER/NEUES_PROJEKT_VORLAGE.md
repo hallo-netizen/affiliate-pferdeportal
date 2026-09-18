@@ -178,3 +178,17 @@ Jedes neue Projektbüro verweist für technische Reparaturen auf den verbindlich
 
 Der Ablauf wird nicht lokal neu erfunden.
 Vor Kandidatenfreigabe gelten dort Pflichtchecks, Anti-Minifix-Regel, Positiv-/Negativtest und Invariantenprüfung.
+
+
+## VERBINDLICH AB 2026-09-18 – EINE CURRENT-AUTORITÄT
+
+Jedes neue Projekt/Büro muss vor Nutzung in
+`protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json`
+mit genau einer Current-Autorität registriert werden.
+
+Pflicht:
+- START_HERE = Navigation only;
+- Current-Autorität = Stand + Status + erster Blocker + genau eine NEXT ACTION;
+- HOBBYRAUM = optional abgeleitete Ausführungsfläche;
+- keine zweite Current-/NEXT-ACTION-Datei;
+- `single_truth_guard.py` muss PASS liefern.
