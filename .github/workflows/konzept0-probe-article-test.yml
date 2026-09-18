@@ -80,15 +80,24 @@ jobs:
           from html.parser import HTMLParser
           from pathlib import Path
           class P(HTMLParser):
-              def __init__(self): super().__init__(); self.out=[]
+              def __init__(self):
+                  super().__init__(); self.out=[]; self.current_tag=None
+              def handle_starttag(self,tag,attrs):
+                  self.current_tag=tag
               def handle_data(self,d):
                   s=' '.join(d.split())
-                  if s: self.out.append(s)
+                  if s: self.out.append([self.current_tag,s])
               def handle_endtag(self,tag):
-                  if tag in {'p','li','h2','h3','th','td'}: self.out.append('.')
+                  self.current_tag=None
           html=Path('isolated_system0/KONZEPT_0/probe/PROBETEXT_PFERDEBUERSTEN_REINIGEN.html').read_text(encoding='utf-8')
           p=P(); p.feed(html)
-          Path('/tmp/probe.txt').write_text('\n'.join(p.out)+'\n',encoding='utf-8')
+          lines=[]
+          for tag,s in p.out:
+              if tag in {'p','li'}:
+                  lines.append(s if s[-1:] in '.!?' else s+'.')
+              elif tag in {'h2','h3','th','td'}:
+                  lines.append(s+'.')
+          Path('/tmp/probe.txt').write_text('\n'.join(lines)+'\n',encoding='utf-8')
           PY
           set +e
           (cd "$LTROOT" && java -jar languagetool-commandline.jar -l de-DE /tmp/probe.txt) > /tmp/lt.txt 2>&1
@@ -99,9 +108,9 @@ jobs:
           from pathlib import Path
           import json,re
           raw=Path('/tmp/lt.txt').read_text(encoding='utf-8',errors='replace')
-          findings=len(re.findall(r'^\d+\.)',raw,flags=re.M))
+          findings=len(re.findall(r'^\d+\.\)',raw,flags=re.M))
           out={
-            'contract':'KONZEPT0_PROBE_LT68_V2',
+            'contract':'KONZEPT0_PROBE_LT68_V3',
             'engine':'LanguageTool 6.8',
             'source_zip_sha256':'6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d',
             'commandline_jar_sha256':'2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8',
