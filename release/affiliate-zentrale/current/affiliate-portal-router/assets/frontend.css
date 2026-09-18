@@ -77,6 +77,97 @@
     }
 }
 
+/* Gemeinsamer Querbanner fuer Startseite, Kategorien und Portal-Seiten.
+   Spiegelung des bewaehrten grossen Kategorie-Bannerprinzips:
+   kein Kartenrahmen, kein Creative-Titel/CTA, proportional und zentriert. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 2rem 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    text-align: center !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel {
+    display: block !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+    letter-spacing: .02em !important;
+    text-align: center !important;
+    text-transform: none !important;
+    opacity: .58 !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content {
+    box-sizing: border-box !important;
+    display: flex !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fff !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link {
+    box-sizing: border-box !important;
+    display: inline-block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    line-height: 0 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-disclosure {
+    margin: 8px 0 0 !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    opacity: .76 !important;
+    background: #fff !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-label {
+    display: none !important;
+}
+
+/* Historische Design-Huellen duerfen um denselben Querbanner keine zweite
+   Partner-/Netzwerk-Ueberschrift erzeugen. */
+.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot) > .pa356-ad-label {
+    display: none !important;
+}
+.pa255-network:has(.ppar-overview-wide-banner-slot) > header,
+.pa266-network:has(.ppar-overview-wide-banner-slot) > header {
+    display: none !important;
+}
+
 /* Portal-Template-Router: Auswahl + vollständige Übersicht */
 .ppar-template-router {
     margin: 2.5rem 0;
