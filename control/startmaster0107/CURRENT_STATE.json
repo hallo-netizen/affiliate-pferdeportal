@@ -43,7 +43,11 @@
     "SYSTEM4A_1_3_25_1000_PASS",
     "SYSTEM4A_V2_HANDOFF_107008_PASS",
     "SYSTEM4A_INCOMPLETE_AND_INVALID_COUNT_NEGATIVES_BLOCKED",
-    "M38_HISTORY_PROOF_M01_M37_PASS_M38_FIRST_FAIL_RUN_35322832657"
+    "M38_HISTORY_PROOF_M01_M37_PASS_M38_FIRST_FAIL_RUN_35322832657",
+    "M38_PRODUCT_FIX_MINIMAL_BINDING_COMPLETE",
+    "M38_M01_M38_REGRESSION_RUN_35325277001_PASS",
+    "M38_PRODUCT_PR297_HARDLOCK_RUN_35325237914_PASS",
+    "M38_PRODUCT_PR297_HARDLOCK_BASE_RUN_35325233889_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -151,19 +155,17 @@
   },
   "current_work_status": "BLOCKED",
   "current_execution_blocker": {
-    "code": "M38_PLAN_HEADER_PRODUCER_BINDING_MISSING",
+    "code": "M38_PRODUCT_FIX_VALIDATED_AWAITING_SINGLE_ARTICLE_REAL_PROOF",
+    "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "evidence": "System4A M38 history final probe run 35322832657 on current-main history proof; M01-M37 PASS, first_fail=M38",
-    "detail": "The bound 107007 production instruction does not yet bind the Fachworkflow-produced production_plan_header with the already-authoritative production_plan_v4 version fields before the real PSERC/PPM handoff.",
-    "root_cause": "STEP_107007_PRODUCER_BINDING_MISSING; HANDOFF_VERSION_GUARD_NOT_YET_PRESENT",
-    "authoritative_plan_contract_version": "4.0.0",
-    "authoritative_required_plugin_version": "6.7.9",
-    "history_proof_complete": true,
-    "product_fix_complete": false,
-    "resolved": false,
-    "publish_allowed": false,
-    "product_fix_candidate": true
+    "detail": "M38 product repair is complete and regression/hardlocks are PASS. Production remains fail-closed until exactly one fresh first article passes the unchanged real System 4 -> LanguageTool -> PSERC/PPM path.",
+    "m38_resolved": true,
+    "m38_regression_run_id": 35325277001,
+    "hardlock_run_id": 35325237914,
+    "hardlock_base_run_id": 35325233889,
+    "second_article_allowed": false,
+    "publish_allowed": false
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -216,20 +218,20 @@
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
   "last_safe_main_sha": "19451f92321cc0ac0aeabfa8ef09e7a6be3302ac",
-  "last_safe_change": "PR293 is merged on main: System 4 downstream production now uses real 1..N semantics and the final System4A acceptance evidence is PASS, including 1/3/25/1000 and V2 handoff to 107008. M38 history proof is complete and identifies M38_PLAN_HEADER_PRODUCER_BINDING_MISSING as the first open historical/product regression. No M38 product fix and no new production article run have been performed yet.",
-  "hobbyroom_status": "M38_PRODUCT_FIX_CANDIDATE_UNDER_REGRESSION",
+  "last_safe_change": "M38 minimal product repair is validated: the Fachworkflow-produced production_plan_v4 header is bound to plan_contract_version 4.0.0 and required_plugin_version 6.7.9; the existing handoff blocks missing/mismatching values before real PSERC/PPM. Separate proof run 35325277001 reports M01-M38 PASS and PR297 hardlock/hardlock-base are PASS. No production article has been run after this fix yet.",
+  "hobbyroom_status": "M38_PRODUCT_FIX_VALIDATED_SINGLE_ARTICLE_PROOF_PENDING",
   "hobbyroom_branch": "hobbyroom/m38-product-fix-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "M38 product fix candidate exists; production remains blocked until existing M01-M38 regression and hardlock/hardlock-base all PASS.",
+  "hobbyroom_blocker": "Exactly one fresh first article must now pass the unchanged real System 4 -> LanguageTool -> PSERC/PPM path. No second article and no batch continuation before that PASS.",
   "next_action": {
-    "goal": "Repair only M38_PLAN_HEADER_PRODUCER_BINDING_MISSING with the smallest existing-System change: bind the Fachworkflow-produced production_plan_header to plan_contract_version 4.0.0 and required_plugin_version 6.7.9, and fail closed before real PSERC/PPM on missing or mismatching values.",
+    "goal": "Run exactly one fresh first article through the unchanged real System 4 production street and require real LanguageTool and real PSERC/PPM PASS. Do not start article 2 or continue the remaining 1..N batch before article 1 is fully PASS.",
     "required_order": [
-      "Keep next_allowed_step and execution gate bound to existing 107007; do not create a maintenance step, runner, gate, controller, or parallel truth.",
-      "Edit only the existing 107007 producer instruction/binding and existing fachworkflow_proof_handoff.py where M38 requires the producer binding and fail-closed version guard.",
-      "Run the existing M01-M38 regression; target M01-M38 PASS on the same head.",
-      "Run existing hardlock and hardlock-base checks.",
-      "Only after those checks PASS, run exactly one fresh first article through the unchanged real LanguageTool -> PSERC/PPM path.",
-      "Only after that one article fully PASSes may the remaining real 1..N batch continue to 107008. Stop before publish."
+      "Keep the existing 107007/System 4 route and current hash bindings unchanged except for normal state transition receipts.",
+      "Start exactly one fresh current article through the real bound Point-0/System 4 path.",
+      "Run the unchanged real LanguageTool check and unchanged real PSERC/PPM path for that same article.",
+      "If any real checker returns FAIL/REPAIR/BLOCKED, repair only through the existing same-article System 4 owner route and repeat that article only.",
+      "Only after the same first article is fully PASS may the remaining real 1..N batch continue to batch_gate collect and then the existing V2 handoff to 107008.",
+      "Stop before publish."
     ],
     "must_fail_closed_on": [
       "wrong source hash",
@@ -239,27 +241,27 @@
       "canonical_article_id mismatch",
       "tampered source or derived context",
       "technical PPM failure",
+      "production plan version binding missing or mismatching",
       "binding or identity mismatch",
       "forbidden publish attempt"
     ],
     "forbidden": [
-      "new internal raw-data generator",
+      "article 2 before article 1 full PASS",
+      "batch continuation before first article PASS",
       "new runner",
       "new gate",
       "new controller",
-      "new sidecar truth",
+      "new parallel handoff",
       "worker-authored PASS",
       "content or quality rule change",
+      "PPM/PSERC/PSTE/Textmaschine rule change",
       "auto-publish",
-      "new architecture",
-      "symptom fix before root cause",
-      "second article before first article full PASS",
-      "modify the completed M38 history-only branch as product authority"
+      "new architecture"
     ],
-    "proof_after_fix": "Existing regression must report M01-M38 PASS and hardlock/hardlock-base must PASS before any new production article is attempted. Then exactly one fresh article must pass the unchanged real LT/PPM path before continuing the remaining 1..N batch. No publish."
+    "proof_after_fix": "Required next proof is one fresh real article with real LanguageTool PASS and real PSERC/PPM PASS on the unchanged bound route. After that, continue remaining 1..N; no publish."
   },
   "hobbyroom_pr": null,
-  "hobbyroom_head_sha": "3acae874dd4c807761983623c91f69d35a800fb2",
+  "hobbyroom_head_sha": "4dffdfe27e183c6da8830a82e3cbb1cc1e369717",
   "m38_history_proof": {
     "branch": "hobbyroom/m38-history-current-main-20260918",
     "head_sha": "3acae874dd4c807761983623c91f69d35a800fb2",
@@ -269,5 +271,19 @@
     "first_fail_code": "M38_PLAN_HEADER_PRODUCER_BINDING_MISSING",
     "history_only": true,
     "product_logic_changed": false
+  },
+  "m38_product_fix": {
+    "status": "PASS_AWAITING_REQUIRED_SINGLE_ARTICLE_REAL_PROOF",
+    "product_logic_proof_head": "4dffdfe27e183c6da8830a82e3cbb1cc1e369717",
+    "pr": 297,
+    "regression_run_id": 35325277001,
+    "regression_result": "M01-M38 PASS; LAST_REGRESSION PASS; GESAMT PASS",
+    "hardlock_run_id": 35325237914,
+    "hardlock_base_run_id": 35325233889,
+    "plan_contract_version": "4.0.0",
+    "required_plugin_version": "6.7.9",
+    "version_mismatch_block": "BOUND_PRODUCTION_PLAN_VERSION_MISMATCH",
+    "product_fix_complete": true,
+    "publish_allowed": false
   }
 }
