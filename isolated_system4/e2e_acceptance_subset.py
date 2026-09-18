@@ -6,6 +6,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -33,6 +34,7 @@ BATCH_STATE_NAME = "SYSTEM4_107007_BATCH_STATE.json"
 ALLOWED_COUNTS = {1, 3}
 PROVIDER = "SYSTEM4_E2E_ACCEPTANCE_BOUND_HTTP_V1"
 META_NAME = "E2E_ACCEPTANCE_META.json"
+BATCH_TEMPLATE_REUSE_RE = re.compile(r"^BATCH_TEMPLATE_REUSE_BLOCKED:(\d+):(\d+):([0-9.]+)$")
 
 
 class AcceptanceBlocked(RuntimeError):
@@ -371,6 +373,110 @@ def _collect(root: Path, state: dict) -> dict:
     }
 
 
+def _batch_repair_record(root: Path, state: dict, reason: str) -> dict | None:
+    match = BATCH_TEMPLATE_REUSE_RE.fullmatch(str(reason or "").strip())
+    if not match:
+        return None
+    left = int(match.group(1))
+    right = int(match.group(2))
+    score = float(match.group(3))
+    count = int(state["item_count"])
+    if left < 0 or right < 0 or left >= count or right >= count or left >= right:
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_PAIR_INVALID")
+    repair_index = right
+    state_path = root / "batch" / f"item-{repair_index:06d}" / "state.json"
+    article_state = _load(state_path)
+    if not _current_item_passed(root, state, repair_index):
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_TARGET_NOT_PASS:" + str(repair_index))
+    revision = int(article_state.get("revision") or 0)
+    draft_sha = str(article_state.get("draft_sha256") or "")
+    if revision < 1 or len(draft_sha) != 64:
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_TARGET_EVIDENCE_INVALID")
+    return {
+        "contract": "SYSTEM4_E2E_BATCH_REPAIR_REQUEST_V1",
+        "error_code": "BATCH_TEMPLATE_REUSE_BLOCKED",
+        "detail": reason,
+        "left_index": left,
+        "right_index": right,
+        "similarity": score,
+        "threshold": 0.20,
+        "repair_owner": "DRAFT_WORKER",
+        "repair_index": repair_index,
+        "workspace": str(state_path.parent),
+        "same_article_required": True,
+        "terminal_block": False,
+        "required_revision_gt": revision,
+        "required_draft_sha256_change_from": draft_sha,
+        "publish_allowed": False,
+    }
+
+
+def _enter_batch_repair(root: Path, state_path: Path, state: dict, reason: str) -> dict | None:
+    record = _batch_repair_record(root, state, reason)
+    if record is None:
+        return None
+    history = state.get("batch_repair_history")
+    if not isinstance(history, list):
+        history = []
+    history.append(record)
+    count = int(state["item_count"])
+    state["status"] = "BATCH_REPAIR_REQUIRED"
+    state["current_index"] = count
+    state["completed_indices"] = list(range(count))
+    state["started_indices"] = list(range(count))
+    state["batch_collect"] = None
+    state["batch_repair"] = record
+    state["batch_repair_history"] = history
+    _write(state_path, state)
+    return {
+        "contract": "SYSTEM4_E2E_SUBSET_ACCEPTANCE_V1",
+        "status": "SYSTEM4_E2E_ACCEPTANCE_BATCH_REPAIR_REQUIRED",
+        "article_count": count,
+        "repair_owner": "DRAFT_WORKER",
+        "repair_index": record["repair_index"],
+        "workspace": record["workspace"],
+        "finding": record,
+        "same_article_required": True,
+        "terminal_block": False,
+        "publish_allowed": False,
+    }
+
+
+def _retry_batch_after_repair(root: Path, state_path: Path, state: dict) -> dict:
+    record = state.get("batch_repair")
+    if not isinstance(record, dict) or record.get("error_code") != "BATCH_TEMPLATE_REUSE_BLOCKED":
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_STATE_INVALID")
+    repair_index = record.get("repair_index")
+    if not isinstance(repair_index, int) or isinstance(repair_index, bool):
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_INDEX_INVALID")
+    if not _current_item_passed(root, state, repair_index):
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_TARGET_NOT_PASS:" + str(repair_index))
+    article_state = _load(root / "batch" / f"item-{repair_index:06d}" / "state.json")
+    revision = int(article_state.get("revision") or 0)
+    draft_sha = str(article_state.get("draft_sha256") or "")
+    if revision <= int(record.get("required_revision_gt") or 0):
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_REVISION_NOT_ADVANCED")
+    if draft_sha == record.get("required_draft_sha256_change_from"):
+        raise AcceptanceBlocked("ACCEPTANCE_BATCH_REPAIR_DRAFT_UNCHANGED")
+    try:
+        collected = _collect(root, state)
+    except batch_gate.BatchGateError as exc:
+        returned = _enter_batch_repair(root, state_path, state, str(exc))
+        if returned is not None:
+            return returned
+        raise
+    count = int(state["item_count"])
+    state["batch_collect"] = collected
+    state["status"] = "ITEMS_COMPLETE"
+    state["current_index"] = count
+    state["batch_repair"] = None
+    _write(state_path, state)
+    meta = _load(root / META_NAME)
+    meta["status"] = "ITEMS_COMPLETE"
+    _write(root / META_NAME, meta)
+    return summary(root)
+
+
 def advance(run_root: Path) -> dict:
     root = _outside(run_root)
     meta = _load(root / META_NAME)
@@ -378,6 +484,8 @@ def advance(run_root: Path) -> dict:
     batch_root, state_path, state = _batch_state(root)
     if state.get("status") == "ITEMS_COMPLETE":
         return summary(root)
+    if state.get("status") == "BATCH_REPAIR_REQUIRED":
+        return _retry_batch_after_repair(root, state_path, state)
     if state.get("contract") != "SYSTEM4_107007_PRODUCTION_BATCH_V1" or state.get("publish_allowed") is not False:
         raise AcceptanceBlocked("ACCEPTANCE_BATCH_STATE_INVALID")
     count = int(meta["article_count"])
@@ -394,9 +502,18 @@ def advance(run_root: Path) -> dict:
     state["completed_indices"].append(index)
     next_index = index + 1
     if next_index == count:
-        state["batch_collect"] = _collect(root, state)
+        state["completed_indices"] = list(range(count))
+        state["started_indices"] = list(range(count))
+        try:
+            state["batch_collect"] = _collect(root, state)
+        except batch_gate.BatchGateError as exc:
+            returned = _enter_batch_repair(root, state_path, state, str(exc))
+            if returned is not None:
+                return returned
+            raise
         state["status"] = "ITEMS_COMPLETE"
         state["current_index"] = count
+        state["batch_repair"] = None
         _write(state_path, state)
         meta["status"] = "ITEMS_COMPLETE"
         _write(root / META_NAME, meta)

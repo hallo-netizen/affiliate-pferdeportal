@@ -1,4 +1,5 @@
 import hashlib,json,tempfile,unittest,shutil
+from unittest import mock
 from pathlib import Path
 import authoring_contract
 import batch_gate
@@ -106,24 +107,25 @@ class E2ESubsetAcceptanceTests(unittest.TestCase):
         before_requests=hashlib.sha256(live_requests.read_bytes()).hexdigest()
         results=[]
         try:
-            for count in (1,3):
-                result=e2e_acceptance_subset.prepare(count)
-                results.append(result)
-                root=Path(result['run_root'])
-                snapshot=json.loads((root/'snapshot.json').read_text(encoding='utf-8'))
-                request=json.loads((root/'source_requests.json').read_text(encoding='utf-8'))
-                batch=snapshot['next_textmachine_metadata_batch']
-                self.assertEqual(batch['item_count'],count)
-                self.assertEqual(len(batch['items']),count)
-                self.assertEqual(request['item_count'],count)
-                self.assertEqual(len(request['items']),count)
-                self.assertEqual(batch['batch_sha256'],request['batch_sha256'])
-                self.assertNotEqual(batch['batch_sha256'],result['original_bound_batch_sha256'])
-                self.assertFalse(batch['publish_allowed'])
-                self.assertFalse(request['publish_allowed'])
-                self.assertTrue(result['test_only'])
-                self.assertFalse(result['production_route_changed'])
-                self.assertFalse(result['publish_allowed'])
+            with mock.patch.object(e2e_acceptance_subset,'_approval',return_value={'publish_allowed':False}):
+                for count in (1,3):
+                    result=e2e_acceptance_subset.prepare(count)
+                    results.append(result)
+                    root=Path(result['run_root'])
+                    snapshot=json.loads((root/'snapshot.json').read_text(encoding='utf-8'))
+                    request=json.loads((root/'source_requests.json').read_text(encoding='utf-8'))
+                    batch=snapshot['next_textmachine_metadata_batch']
+                    self.assertEqual(batch['item_count'],count)
+                    self.assertEqual(len(batch['items']),count)
+                    self.assertEqual(request['item_count'],count)
+                    self.assertEqual(len(request['items']),count)
+                    self.assertEqual(batch['batch_sha256'],request['batch_sha256'])
+                    self.assertNotEqual(batch['batch_sha256'],result['original_bound_batch_sha256'])
+                    self.assertFalse(batch['publish_allowed'])
+                    self.assertFalse(request['publish_allowed'])
+                    self.assertTrue(result['test_only'])
+                    self.assertFalse(result['production_route_changed'])
+                    self.assertFalse(result['publish_allowed'])
             for bad in (0,2,7):
                 with self.assertRaisesRegex(e2e_acceptance_subset.AcceptanceBlocked,'ACCEPTANCE_COUNT_NOT_AUTHORIZED'):
                     e2e_acceptance_subset.prepare(bad)
@@ -133,58 +135,155 @@ class E2ESubsetAcceptanceTests(unittest.TestCase):
             for result in results: self._cleanup(result)
 
     def test_subset_root_starts_index_zero_and_advance_before_pass_blocks(self):
-        result=e2e_acceptance_subset.prepare(1)
-        root=Path(result['run_root'])
-        try:
-            with self.assertRaisesRegex(
-                e2e_acceptance_subset.AcceptanceBlocked,
-                'ACCEPTANCE_107008_CANONICAL_BOUNDARY',
-            ):
-                e2e_acceptance_subset.prepare_107008(root)
-            requests=json.loads((root/'source_requests.json').read_text(encoding='utf-8'))
-            rows=[]
-            for item in requests['items']:
-                sources=[]
-                for source in item['sources']:
-                    evidence=(
-                        'Frisch gebundener Acceptance-Quellenbeleg mit genügend konkretem Inhalt '
-                        'für die unveränderte Point-0-Validierung dieses aktuellen Artikels.'
-                    )
-                    sources.append({
-                        'source_id':source['source_id'],
-                        'source_title':source['source_title'],
-                        'source_url':source['source_url'],
-                        'retrieved_at':'2026-09-18T20:00:00+00:00',
-                        'evidence':evidence,
-                        'snapshot_sha256':hashlib.sha256(evidence.encode('utf-8')).hexdigest(),
-                        'http_status':200,
-                        'source_kind':source.get('source_kind') or 'WEB',
-                    })
-                rows.append({'item_index':item['item_index'],'plan_slot':item['plan_slot'],'sources':sources})
-            acquired={'contract':'SYSTEM4_MACHINE_ACQUIRED_SOURCE_BATCH_V1','item_count':1,'items':rows}
-            (root/'acquired.json').write_text(json.dumps(acquired,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
-            meta=json.loads((root/e2e_acceptance_subset.META_NAME).read_text(encoding='utf-8'))
-            meta['status']='ACQUIRED'
-            meta['acquired_sha256']=hashlib.sha256((root/'acquired.json').read_bytes()).hexdigest()
-            (root/e2e_acceptance_subset.META_NAME).write_text(json.dumps(meta,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+        with mock.patch.object(e2e_acceptance_subset,'_approval',return_value={'publish_allowed':False}):
+            result=e2e_acceptance_subset.prepare(1)
+            root=Path(result['run_root'])
+            try:
+                with self.assertRaisesRegex(
+                    e2e_acceptance_subset.AcceptanceBlocked,
+                    'ACCEPTANCE_107008_CANONICAL_BOUNDARY',
+                ):
+                    e2e_acceptance_subset.prepare_107008(root)
+                requests=json.loads((root/'source_requests.json').read_text(encoding='utf-8'))
+                rows=[]
+                for item in requests['items']:
+                    sources=[]
+                    for source in item['sources']:
+                        evidence=(
+                            'Frisch gebundener Acceptance-Quellenbeleg mit genügend konkretem Inhalt '
+                            'für die unveränderte Point-0-Validierung dieses aktuellen Artikels.'
+                        )
+                        sources.append({
+                            'source_id':source['source_id'],
+                            'source_title':source['source_title'],
+                            'source_url':source['source_url'],
+                            'retrieved_at':'2026-09-18T20:00:00+00:00',
+                            'evidence':evidence,
+                            'snapshot_sha256':hashlib.sha256(evidence.encode('utf-8')).hexdigest(),
+                            'http_status':200,
+                            'source_kind':source.get('source_kind') or 'WEB',
+                        })
+                    rows.append({'item_index':item['item_index'],'plan_slot':item['plan_slot'],'sources':sources})
+                acquired={'contract':'SYSTEM4_MACHINE_ACQUIRED_SOURCE_BATCH_V1','item_count':1,'items':rows}
+                (root/'acquired.json').write_text(json.dumps(acquired,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+                meta=json.loads((root/e2e_acceptance_subset.META_NAME).read_text(encoding='utf-8'))
+                meta['status']='ACQUIRED'
+                meta['acquired_sha256']=hashlib.sha256((root/'acquired.json').read_bytes()).hexdigest()
+                (root/e2e_acceptance_subset.META_NAME).write_text(json.dumps(meta,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
 
-            bound=e2e_acceptance_subset.bind_acquired(root)
-            self.assertEqual(bound['status'],'SYSTEM4_E2E_ACCEPTANCE_ROOT_READY_STOP')
-            self.assertEqual(bound['article_count'],1)
-            self.assertEqual(bound['item_index'],0)
-            self.assertFalse(bound['worker_started'])
-            self.assertFalse(bound['advance_invoked'])
-            self.assertFalse(bound['publish_allowed'])
-            workspace=Path(bound['workspace'])
-            state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
-            self.assertEqual(state['phase'],'RESEARCH_REQUIRED')
-            batch_state=json.loads((Path(bound['batch_root'])/e2e_acceptance_subset.BATCH_STATE_NAME).read_text(encoding='utf-8'))
-            self.assertEqual(batch_state['started_indices'],[0])
-            self.assertEqual(batch_state['completed_indices'],[])
-            with self.assertRaisesRegex(e2e_acceptance_subset.AcceptanceBlocked,'ACCEPTANCE_CURRENT_ITEM_NOT_PASS:0'):
-                e2e_acceptance_subset.advance(root)
-        finally:
-            self._cleanup(result)
+                bound=e2e_acceptance_subset.bind_acquired(root)
+                self.assertEqual(bound['status'],'SYSTEM4_E2E_ACCEPTANCE_ROOT_READY_STOP')
+                self.assertEqual(bound['article_count'],1)
+                self.assertEqual(bound['item_index'],0)
+                self.assertFalse(bound['worker_started'])
+                self.assertFalse(bound['advance_invoked'])
+                self.assertFalse(bound['publish_allowed'])
+                workspace=Path(bound['workspace'])
+                state=json.loads((workspace/'state.json').read_text(encoding='utf-8'))
+                self.assertEqual(state['phase'],'RESEARCH_REQUIRED')
+                batch_state=json.loads((Path(bound['batch_root'])/e2e_acceptance_subset.BATCH_STATE_NAME).read_text(encoding='utf-8'))
+                self.assertEqual(batch_state['started_indices'],[0])
+                self.assertEqual(batch_state['completed_indices'],[])
+                with self.assertRaisesRegex(e2e_acceptance_subset.AcceptanceBlocked,'ACCEPTANCE_CURRENT_ITEM_NOT_PASS:0'):
+                    e2e_acceptance_subset.advance(root)
+            finally:
+                self._cleanup(result)
+
+    def test_batch_template_reuse_returns_to_same_article_workshop_until_pass(self):
+        with tempfile.TemporaryDirectory(prefix='system4-e2e-batch-repair-') as td:
+            root=Path(td)
+            fixture=root/'fixture'
+            fixture.mkdir()
+            snap,paths=make_fixture(fixture,count=3)
+            snapshot=json.loads(snap.read_text(encoding='utf-8'))
+            batch=snapshot['next_textmachine_metadata_batch']
+            shutil.copy2(snap,root/'snapshot.json')
+            batch_root=root/'batch'
+            batch_root.mkdir()
+            for state_path in paths:
+                shutil.copytree(state_path.parent,batch_root/state_path.parent.name)
+
+            original_two=json.loads((batch_root/'item-000002'/'state.json').read_text(encoding='utf-8'))
+            common=' '.join(f'gemeinsam{n}' for n in range(120))
+            for index in (1,2):
+                state_path=batch_root/f'item-{index:06d}'/'state.json'
+                state=json.loads(state_path.read_text(encoding='utf-8'))
+                article=state['article']
+                draft=(
+                    f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung">'
+                    f'<h2>{article["title"]}</h2>'
+                    f'<p data-fact-ids="fact-{index}-a fact-{index}-b fact-{index}-c">'
+                    f'{article["target_keyword"]} {common}</p>'
+                    '<table class="system-129-table comparison-table">'
+                    '<tr><th>Kriterium</th><th>Wert</th></tr><tr><td>A</td><td>B</td></tr></table></article>'
+                )
+                state['draft_markdown']=draft
+                state['draft_sha256']=sha_text(draft)
+                state['checks']['checked_draft_sha256']=sha_text(draft)
+                state['checks']['production_evidence']=production_evidence(draft)
+                state_path.write_text(json.dumps(state,ensure_ascii=False),encoding='utf-8')
+
+            meta={
+                'contract':'SYSTEM4_E2E_SUBSET_ACCEPTANCE_V1',
+                'status':'BOUND',
+                'article_count':3,
+                'acceptance_batch_sha256':batch['batch_sha256'],
+                'head_sha':e2e_acceptance_subset._head(),
+                'root_manifest_sha256':e2e_acceptance_subset.root_entry._critical_manifest_sha256(),
+                'publish_allowed':False,
+            }
+            e2e_acceptance_subset._write(root/e2e_acceptance_subset.META_NAME,meta)
+            batch_state={
+                'contract':'SYSTEM4_107007_PRODUCTION_BATCH_V1',
+                'status':'ACTIVE',
+                'sequence':107007,
+                'batch_sha256':batch['batch_sha256'],
+                'point0_sha256':'0'*64,
+                'item_count':3,
+                'current_index':2,
+                'completed_indices':[0,1],
+                'started_indices':[0,1,2],
+                'batch_collect':None,
+                'publish_allowed':False,
+            }
+            e2e_acceptance_subset._write(batch_root/e2e_acceptance_subset.BATCH_STATE_NAME,batch_state)
+
+            with mock.patch.object(e2e_acceptance_subset,'_approval',return_value={'publish_allowed':False}):
+                returned=e2e_acceptance_subset.advance(root)
+                self.assertEqual(returned['status'],'SYSTEM4_E2E_ACCEPTANCE_BATCH_REPAIR_REQUIRED')
+                self.assertEqual(returned['repair_owner'],'DRAFT_WORKER')
+                self.assertEqual(returned['repair_index'],2)
+                self.assertTrue(returned['same_article_required'])
+                self.assertFalse(returned['terminal_block'])
+                self.assertEqual(returned['finding']['error_code'],'BATCH_TEMPLATE_REUSE_BLOCKED')
+                self.assertGreaterEqual(returned['finding']['similarity'],0.20)
+
+                with self.assertRaisesRegex(
+                    e2e_acceptance_subset.AcceptanceBlocked,
+                    'ACCEPTANCE_BATCH_REPAIR_REVISION_NOT_ADVANCED',
+                ):
+                    e2e_acceptance_subset.advance(root)
+
+                repaired_path=batch_root/'item-000002'/'state.json'
+                repaired=json.loads(repaired_path.read_text(encoding='utf-8'))
+                good=original_two['draft_markdown']
+                repaired['revision']=int(repaired['revision'])+1
+                repaired['draft_markdown']=good
+                repaired['draft_sha256']=sha_text(good)
+                repaired['checks']['checked_draft_sha256']=sha_text(good)
+                repaired['checks']['production_evidence']=production_evidence(good)
+                repaired_path.write_text(json.dumps(repaired,ensure_ascii=False),encoding='utf-8')
+
+                final=e2e_acceptance_subset.advance(root)
+                self.assertEqual(final['status'],'ITEMS_COMPLETE')
+                self.assertEqual(final['batch_collect']['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED')
+                stored=json.loads((batch_root/e2e_acceptance_subset.BATCH_STATE_NAME).read_text(encoding='utf-8'))
+                self.assertEqual(stored['status'],'ITEMS_COMPLETE')
+                self.assertIsNone(stored['batch_repair'])
+                self.assertEqual(len(stored['batch_repair_history']),1)
+                self.assertEqual(stored['batch_repair_history'][0]['repair_owner'],'DRAFT_WORKER')
+                self.assertFalse(stored['batch_repair_history'][0]['terminal_block'])
+
 
 class BatchGateTests(unittest.TestCase):
     def run_collect(self,mutate=None,count=7,path_count=None):
