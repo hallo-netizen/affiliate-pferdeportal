@@ -120,8 +120,11 @@ jobs:
           jar="$tmp/LanguageTool-6.8/languagetool-commandline.jar"
           test -f "$jar"
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  '"$jar" | sha256sum -c -
-          java -jar "$jar" --version | tee "$tmp/version.txt"
-          grep -q '6.8' "$tmp/version.txt"
+          printf '%s\n' 'Das Pferd steht ruhig auf der Weide.' > "$tmp/sample.txt"
+          java -jar "$jar" -l de-DE "$tmp/sample.txt" > "$tmp/lt-output.txt" 2> "$tmp/lt-stderr.txt"
+          cat "$tmp/lt-output.txt"
+          cat "$tmp/lt-stderr.txt"
+          test -s "$tmp/lt-output.txt"
           echo "LANGUAGETOOL_6_8_REAL_EXECUTION_PASS"
 
       - name: Quarantine nonhistorical PSERC package
