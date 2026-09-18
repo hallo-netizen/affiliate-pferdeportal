@@ -63,7 +63,7 @@
     "worker_entry_ref": "isolated_system4/codex_entry.py",
     "full_route_ref": "isolated_system4/full_route_start.py",
     "required_bound_launch_ref": "isolated_system4/bound_launches/production_107007_batch_7_20260917.json",
-    "required_bound_launch_sha256": "1bfefd0370251ca45ba5868e80a244182da76a865f7713e0b3bde6d5ff492d59",
+    "required_bound_launch_sha256": "bf629ea68555f3a14166f1b10eb9ae5910a2e9ae06881aac48f9aa6a9f4f423e",
     "required_bound_sources": true,
     "missing_bound_sources_policy": "FAIL_CLOSED",
     "legacy_fachworkflow_fallback_allowed": false

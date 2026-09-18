@@ -14,6 +14,6 @@
     "step_id": "PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER",
     "sequence": 107005,
     "bundle_ref": "control/startmaster0107/STEP_107005_PREPARE_NEW_ARTICLE_BATCH_AFTER_PROVIDER.json",
-    "bundle_sha256": "e6fa9f4d351b94fbc516fdf68697b5169d779597b57a0b3e839bc13a4b1444ed"
+    "bundle_sha256": "11e45af439a28e68d1bfc8dae7e43894e321b25d49be6ff11d1466592c5049d2"
   }
 }

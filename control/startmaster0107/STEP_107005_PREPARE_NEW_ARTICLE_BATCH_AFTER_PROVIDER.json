@@ -19,6 +19,6 @@
     "step_id": "BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS",
     "sequence": 107006,
     "bundle_ref": "control/startmaster0107/STEP_107006_BIND_NEW_ARTICLE_BATCH_FROM_READY_TOPICS.json",
-    "bundle_sha256": "819e61c25f304dac544efff81ea8304b3183f1288180a483b9e7f38835640027"
+    "bundle_sha256": "dbfb759e415de612cdf4db9c97701aa9729cbece1db0efdb3cd43c77d712c2e7"
   }
 }

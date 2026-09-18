@@ -4,17 +4,17 @@
   "authoritative_current_state_path": "control/startmaster0107/CURRENT_STATE.json",
   "central_pointer_ref": "control/CURRENT_STARTMASTER.json",
   "central_pointer_policy": "NAVIGATION_ONLY_NO_SECOND_DYNAMIC_STATE",
-  "status": "BLOCKED_GLOBAL_WORKSHOP_INCOMPLETE_AND_CURRENT_HEAD_UNACCEPTED",
+  "status": "BLOCKED_AWAITING_EXPLICIT_USER_APPROVAL_FOR_REAL_BOUND_PRODUCTION",
   "publish_allowed": false,
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "working_branch": "hobbyroom/system4-chat-output-acceptance-v1",
   "runtime_proof": {
-    "last_runtime_tested_head": "25f87b819a7d1b4a450565f0a46b1c07f6770802",
-    "acceptance_run_id": 35203980166,
-    "acceptance_job_id": 105145172825,
-    "result": "SUCCESS_ON_OLDER_HEAD_ONLY",
-    "current_head_acceptance": "NOT_RUN",
-    "current_head_ci_runs": 0
+    "last_runtime_tested_head": "5f626267af2dcfd30bd81a129a790397a0d81b94",
+    "acceptance_run_id": 35320796418,
+    "acceptance_job_id": 105522614521,
+    "result": "SUCCESS_CURRENT_RUNTIME_HEAD",
+    "current_head_acceptance": "PASS",
+    "current_head_ci_runs": 1
   },
   "production_step": {
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
@@ -25,8 +25,8 @@
     "bound_launch_ref": "isolated_system4/bound_launches/production_107007_batch_7_20260917.json",
     "actual_bound_launch_sha256": "bf629ea68555f3a14166f1b10eb9ae5910a2e9ae06881aac48f9aa6a9f4f423e",
     "actual_bound_launch_git_blob_sha": "42708d99a094f61e10bab3dac0bdb38e4fd060af",
-    "step_declared_bound_launch_sha256": "1bfefd0370251ca45ba5868e80a244182da76a865f7713e0b3bde6d5ff492d59",
-    "binding_status": "BLOCKED_MISMATCH",
+    "step_declared_bound_launch_sha256": "bf629ea68555f3a14166f1b10eb9ae5910a2e9ae06881aac48f9aa6a9f4f423e",
+    "binding_status": "PASS",
     "article_count": 7
   },
   "execution_gate": {
@@ -35,7 +35,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "b0c9bc05dcc38635814cc7cd21c207cc2f595fd62fbb16e55fe8def77c872c2b",
+    "bundle_sha256": "06a7ae2131db24cf9c3a1fed56b4d9618a6d4e9d3368a317b3b5f095aea79cd0",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -72,29 +72,31 @@
   },
   "global_workshop": {
     "rule_ref": "isolated_system4/GLOBAL_WORKSHOP_RULE_20260917.md",
-    "implementation_status": "IN_PROGRESS_NOT_ACCEPTED",
+    "implementation_status": "ACCEPTED_ON_CURRENT_RUNTIME_HEAD",
     "implemented": [
       "structured batch repetition findings instead of count-only failure",
       "global_workshop request contract and repair/nonrepairable classification",
       "batch_gate workshop capture and targeted article REPAIR_REQUIRED state routing",
       "controller and parent_start workshop capture",
       "repair continuation receipts preserve all findings",
-      "writer repair instruction no longer says first finding only"
+      "writer repair instruction no longer says first finding only",
+      "full_route_start continues repairable batch workshop returns through worker repair and complete fullcheck",
+      "repair_router groups mixed findings by owner and target",
+      "handoff and top-level failures pass through global workshop classification",
+      "realistic four-article repetition regression proves workshop -> targeted repair -> fullcheck -> batch PASS"
     ],
-    "open_blockers": [
-      "full_route_start.py still treats BatchGateWorkshop and other workshop continuations as terminal FullRouteError",
-      "repair_router.py still selects the first owner/target for mixed-owner finding sets instead of routing owner/target groups separately",
-      "handoff/top-level workshop coverage is not proven end-to-end",
-      "complete positive/negative protection ring and full real-tool corridor have not run on the current head",
-      "107007 STEP/CURRENT binding still disagrees with the actual bound launch SHA"
-    ],
+    "open_blockers": [],
     "tests": {
       "local_reconstructed_test_global_workshop": "PASS_3_OF_3",
       "local_21_repeated_sentence_findings": "PASS_FINDINGS_21_REPAIRABLE_TARGET_3",
       "local_nonrepairable_hash_case": "PASS_BLOCKED_NON_REPAIRABLE",
-      "full_workflow_acceptance_current_head": "NOT_RUN"
+      "forced_batch_fixture_preflight": "PASS_INCLUDING_ONE_UPSTREAM_REPAIR_SURVIVAL",
+      "real_lt68_preflight": "PASS",
+      "real_ppm679_corridor": "PASS",
+      "four_article_workshop_real_corridor": "PASS",
+      "full_workflow_acceptance_current_head": "PASS_RUN_35320796418_JOB_105522614521"
     },
-    "runtime_logic_head": "5391f6915ad5674264304cb7e33774bd9e338b2c"
+    "runtime_logic_head": "5f626267af2dcfd30bd81a129a790397a0d81b94"
   },
   "codex_policy": {
     "allowed": "REAL_BOUND_ARTICLE_PRODUCTION_ONLY_AFTER_EXPLICIT_USER_APPROVAL",
@@ -112,7 +114,7 @@
     "door": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
     "current_state": "control/startmaster0107/CURRENT_STATE.json",
     "freshness_check": "Read PR #275 head. Compare all changes since runtime_logic_head_under_review. Documentation-only closeout commits do not change the runtime logic; any runtime change requires a new code/test review before continuing.",
-    "next_action": "NO CODEX. Complete the global workshop in full_route_start.py so every repairable error becomes continuation, split mixed-owner findings by owner/target in repair_router.py, cover handoff/top-level errors, add positive/negative regressions including a 4+ article batch repetition return, then run the complete acceptance/protection ring on the exact resulting head. Only after that repair the 107007 binding mismatch and consider a new real article run."
+    "next_action": "NO CODEX until explicit user approval. Global workshop acceptance is green on runtime head 5f626267af2dcfd30bd81a129a790397a0d81b94 and the 107007 launch/bundle predecessor hash cascade is repaired. Before any real bound article-production run, fresh-check PR #275 head plus launch, STEP_107007, CURRENT_STATE and START_HERE hashes. Only after explicit user approval may Codex execute the already bound 107007 real production run. publish_allowed remains false."
   },
   "mandatory_execution_path": [
     "isolated_system4/parent_start.py start-bound",
@@ -132,11 +134,11 @@
     "SYSTEM4_WORDPRESS_HANDOFF_V1.json"
   ],
   "hobbyroom": {
-    "status": "BLOCKED",
+    "status": "PASS_GLOBAL_WORKSHOP_ACCEPTED_107007_BINDING_VALID",
     "checklist_ref": "control/startmaster0107/HOBBYRAUM_SYSTEM4_PRODUCTION_CLOSEOUT_20260916.md",
-    "current_focus": "GLOBAL_WORKSHOP_INVARIANT_CLOSEOUT",
-    "next_action": "Complete and hard-test the global error-to-workshop continuation on the current branch without Codex.",
+    "current_focus": "AWAIT_EXPLICIT_USER_PRODUCTION_APPROVAL",
+    "next_action": "Do not use Codex until the user explicitly approves a real bound 107007 article-production run.",
     "return_path": "ERROR -> GLOBAL_WORKSHOP -> authoritative owner -> repair -> complete recheck -> normal route"
   },
-  "runtime_logic_head_under_review": "5391f6915ad5674264304cb7e33774bd9e338b2c"
+  "runtime_logic_head_under_review": "5f626267af2dcfd30bd81a129a790397a0d81b94"
 }
