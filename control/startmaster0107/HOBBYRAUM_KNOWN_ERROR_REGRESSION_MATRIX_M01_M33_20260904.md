@@ -109,11 +109,11 @@ M30 – Final context batch identity
 - Der aus 107007 übergebene finale Kontext, Release-Receipt und die 107008/PSERC-Finalisierung müssen dieselbe aktuelle Batch-ID und Artikelanzahl tragen.
 - Kein Kontextwechsel zwischen 107007, 107008 und Host-Finalisierung.
 
-M31 – Codex-native bound action; no synthetic executor dependency
-- Historischer Fehler: gebundener Fachworkflow verlangte eine nicht vorhandene separate execute_bound_action-/Executor-Capability.
-- Der vorhandene Codex-Cloud-Worker führt ausschließlich die gebundene aktuelle Aktion aus.
-- Keine synthetische execute_bound_action-Host-Capability, kein zweiter Fachworkflow-Executor, keine Capability-Suche als Voraussetzung.
-
+M31 – System-4-native bound action; no synthetic executor dependency
+- Historischer Fehler: der gebundene Produktionsweg verlangte eine nicht vorhandene separate execute_bound_action-/Executor-Capability.
+- Aktuell ist ausschließlich der maschinengebundene Weg system4_107007_entry.py → root_entry.py start-point0 → codex_entry.py worker-start autorisiert.
+- Keine synthetische execute_bound_action-Capability, kein Legacy-Handoff und kein zweiter Repair-Executor.
+- Machine-Route-Lock und System-4-Repair-Authority müssen positiv/negativ PASS sein.
 M32 – PPM runtime package path is bound without environment-variable dependency
 - Historische Fehler: PPM679_PACKAGE_ZIP nicht gesetzt / kein gebundener Paketpfad / echter PPM-Aufruf nicht erreichbar.
 - fachworkflow_handoff muss den exakten repositorygebundenen PPM-6.7.9-Pfad und PSERC-FIX-Pfad selbst auflösen.
