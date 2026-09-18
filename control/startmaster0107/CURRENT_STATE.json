@@ -85,7 +85,8 @@
     "SYSTEM4_CODEX_OVERRIDE_PR327_MERGED_DF30A8CF7A157EE4EBA979E272AD3D1EB76A5544",
     "SYSTEM4_POSTMERGE_ACCEPTANCE_RUN_35380544689_PASS",
     "SYSTEM4_REAL7_REACHED_ARTICLE0_LANGUAGETOOL_REPAIR_REQUIRED_PR107_5734550696",
-    "SYSTEM4_REAL7_CONTINUATION_WORKSPACE_UNAVAILABLE_PR107_5734597579"
+    "SYSTEM4_REAL7_CONTINUATION_WORKSPACE_UNAVAILABLE_PR107_5734597579",
+    "SYSTEM4_REAL7_PPM_REPAIR_PROOF_GAP_IDENTIFIED_20260918"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -191,38 +192,25 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "REAL7_RESTART_REQUIRED_AFTER_ARTICLE0_WORKSPACE_LOSS",
+  "current_work_status": "REAL7_STOPPED_ARTICLE0_PPM_REPAIR_PROOF_GAP",
   "current_execution_blocker": {
-    "code": "REAL7_EXISTING_ARTICLE0_WORKSPACE_NOT_AVAILABLE",
+    "code": "REAL7_PPM_DRAFT_REPAIR_PROOF_GAP",
     "error_class": true,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "The user-approved real 7-item Codex run on exact main df30a8cf7a157ee4eba979e272ad3d1eb76a5544 passed the corrected bound parent/Point-0/Root/worker start and reached article 0 fullcheck. Same-article repair ran, but repeated fullcheck remained REPAIR_REQUIRED with 36 LanguageTool findings; first finding GERMAN_WORD_REPEAT_RULE in context 'Deutschland Club Suchen Suchen App Shop' (PR107 issuecomment-5734550696). The continuation task then proved the identical article-0 workspace is no longer available (PR107 issuecomment-5734597579). Completed 0/7; article 1 was not started; publish was not performed. Safe continuation is impossible and historical article bodies must not be used to reconstruct the lost workspace.",
-    "main_sha": "df30a8cf7a157ee4eba979e272ad3d1eb76a5544",
+    "detail": "Latest observed real Codex shell output for article 0 shows four PPM 6.7.9 findings, all owned by DRAFT_WORKER: duplicate_sentence_ratio 0.2909090909090909 > 0.02; conclusion_ratio 0.09494949494949495 < 0.1; Wave2 conclusion ratio same; table unique_token_ratio 0.09230769230769231 < 0.18. Run was stopped at 0/7. Existing 4A repair tests prove owner routing/recheck but use mocks or prebuilt final fixtures and do not prove live Codex-generated repair for this multi-finding case. Exact root cause is not yet provable because durable before/after article bytes for this shell finding set are not bound in GitHub evidence.",
+    "main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
     "dispatcher_pr": 107,
-    "dispatcher_head_sha": "df30a8cf7a157ee4eba979e272ad3d1eb76a5544",
-    "user_codex_approval_evidence": "PR107 issuecomment-5734493242",
-    "postmerge_acceptance_run_id": 35380544689,
-    "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
-    "runtime_generation": 1,
-    "source_requests_ref": "control/startmaster0107/runtime_inbox/generations/000001/SOURCE_REQUESTS.json",
-    "source_requests_sha256": "1edbb669f0020f263d017cb4c8be9f2055d02bfc4a7e1d50a443948308c25f6f",
-    "canonical_start_command": "python3 isolated_system4/parent_start.py start-current-bound",
-    "parent_start_pass": true,
-    "point0_pass": true,
-    "worker_dispatch_ready": true,
-    "article0_started": true,
-    "article0_fullcheck_reached": true,
-    "article0_repair_required": true,
-    "languagetool_finding_count": 36,
-    "first_languagetool_rule_id": "GERMAN_WORD_REPEAT_RULE",
+    "dispatcher_head_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
+    "article_index": 0,
     "completed_articles": 0,
     "next_article_started": false,
-    "continuation_workspace_available": false,
-    "restart_required": true,
-    "historical_article_source_reuse_forbidden": true,
-    "codex_start_allowed": true,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "exact_shell_findings_durable_github_terminal_bound": false,
+    "evidence_source": "USER_PROVIDED_REAL_CODEX_SHELL_OUTPUT_20260918",
+    "analysis_protocol_ref": "protocol/STARTMASTER0107_CLOSEOUT_REAL7_PPM_REPAIR_GAP_20260918.md",
+    "codex_start_allowed": false,
+    "fresh_user_codex_approval_required": true
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -253,48 +241,79 @@
     }
   ],
   "latest_live_evidence": {
-    "main_sha": "df30a8cf7a157ee4eba979e272ad3d1eb76a5544",
+    "main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
     "dispatcher_pr": 107,
-    "dispatcher_head_sha": "df30a8cf7a157ee4eba979e272ad3d1eb76a5544",
-    "user_approval_evidence": "PR107 issuecomment-5734493242",
-    "real_run_terminal_evidence": "PR107 issuecomment-5734550696",
-    "continuation_terminal_evidence": "PR107 issuecomment-5734597579",
-    "first_article_title": "Das Wichtigste über Hindernisstangen für Pferde",
-    "first_article_target_keyword": "Hindernisstangen für Pferde",
-    "parent_start_pass": true,
-    "point0_pass": true,
-    "worker_dispatch_ready": true,
-    "article0_research_completed": true,
-    "article0_generated": true,
-    "article0_fullcheck_reached": true,
-    "article0_same_article_repair_executed": true,
-    "article0_repeated_fullcheck_status": "REPAIR_REQUIRED",
-    "languagetool_finding_count": 36,
-    "first_languagetool_rule_id": "GERMAN_WORD_REPEAT_RULE",
-    "first_languagetool_context": "Deutschland Club Suchen Suchen App Shop",
+    "dispatcher_head_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
+    "latest_durable_pr107_terminal_comment": "5734772066",
+    "latest_durable_pr107_terminal_code": "AUTHORING_CONTRACT_FAIL:FACT_PACK_CLAIM_COUNT_INVALID",
+    "latest_observed_shell_checker": "PPM 6.7.9",
+    "latest_observed_shell_article_index": 0,
+    "latest_observed_shell_findings": [
+      {
+        "error_code": "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
+        "actual": 0.2909090909090909,
+        "expected": "<=0.02",
+        "repair_owner": "DRAFT_WORKER"
+      },
+      {
+        "error_code": "BLOCKED_KNOWN_SHORT_CONCLUSION",
+        "actual": 0.09494949494949495,
+        "expected": ">=0.1",
+        "repair_owner": "DRAFT_WORKER"
+      },
+      {
+        "error_code": "BLOCKED_WAVE2_CONCLUSION_BALANCE",
+        "actual": {
+          "paragraphs": 3,
+          "ratio": 0.09494949494949495,
+          "words": 94
+        },
+        "expected": {
+          "minimum_paragraphs": 2,
+          "minimum_ratio": 0.1
+        },
+        "repair_owner": "DRAFT_WORKER"
+      },
+      {
+        "error_code": "BLOCKED_WAVE2_TABLE_VALUE",
+        "actual": {
+          "body_rows": 4,
+          "columns": 3,
+          "count": 1,
+          "unique_token_ratio": 0.09230769230769231
+        },
+        "expected": {
+          "body_rows": 4,
+          "columns": 3,
+          "count": 1,
+          "unique_token_ratio": 0.18
+        },
+        "repair_owner": "DRAFT_WORKER"
+      }
+    ],
+    "exact_task_mapping_for_latest_shell_findings_proven": false,
     "completed_articles": 0,
     "second_article_started": false,
-    "existing_article0_workspace_available": false,
     "sequence_107008_reached": false,
     "publish_performed": false
   },
-  "last_safe_main_sha": "df30a8cf7a157ee4eba979e272ad3d1eb76a5544",
-  "last_safe_change": "PR #327 merged the current Codex root override onto the canonical parameterless System-4 parent start; full post-merge acceptance run 35380544689 passed 40/40. The subsequent real 7-item Codex run passed the start chain and reached article-0 LanguageTool repair; its temporary workspace was later unavailable for continuation.",
-  "hobbyroom_status": "HISTORY_ONLY_PRODUCT_FIX_MOVED_TO_PR315",
+  "last_safe_main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
+  "last_safe_change": "PR #329 merged status/closeout bookkeeping only; current product/quality/design logic remained unchanged. Subsequent observed real article-0 PPM failure exposed a proof gap in real Codex-generated repair, not a proven defect in the static text rules.",
+  "hobbyroom_status": "NOT_USED_FOR_CURRENT_PPM_REPAIR_DIAGNOSIS",
   "hobbyroom_branch": "hobbyroom/system4-closeout-precodeex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "HISTORY_ONLY_NO_PRODUCT_ACTION",
+  "hobbyroom_blocker": "NO_HOBBYROOM_ACTION_REQUIRED",
   "next_action": {
-    "goal": "RUN_FRESH_REAL7_FROM_CANONICAL_BOUND_START_AFTER_LOST_WORKSPACE",
-    "action": "Start exactly one fresh complete 7-item Codex run on unchanged current main through `python3 isolated_system4/parent_start.py start-current-bound`; treat all seven article bodies as NEW; keep each article in the same task/workspace through all required LanguageTool/PPM repairs until PASS before advancing; then continue through batch collect, 107008, ENDSTEMPEL and real WordPress import-format verification and return the durable final file to the parent chat. Do not publish.",
-    "why": "The previous real run completed 0/7 and its article-0 workspace is unavailable, so safe continuation of that run is impossible.",
+    "goal": "CLOSE_REAL_CODEX_REPAIR_PROOF_GAP_BEFORE_ANY_BATCH_RESTART",
+    "action": "Do not start Codex. First capture or retrieve the exact article-0 pre-repair and post-repair bytes/state for the current PPM finding set; if unavailable, explicitly keep root-cause attribution BLOCKED and do not guess. Then correct only the test/proof layer so a prebuilt final fixture or mocked PASS can no longer count as proof of live Codex-generated repair. Keep production architecture, text rules, PPM 6.7.9, LanguageTool 6.8 and design unchanged. After the proof gap is closed, present the evidence and require a fresh explicit user approval before exactly one real Codex article repair acceptance run.",
+    "why": "The current real failure is at article-0 PPM content repair. Existing green 4A tests prove repair routing and real recheck of a supplied corrected file, but they do not prove that Codex itself can generate the required repair for a severe multi-finding article.",
     "forbidden": [
-      "reconstruct lost workspace from historical article bodies",
-      "reuse recovery article text as production input",
-      "manual source_requests/workspace placeholders",
-      "legacy production route",
-      "advance before current article PASS",
-      "auto-publish"
+      "start Codex without fresh explicit user approval",
+      "restart a 7-item production batch before real Codex repair proof",
+      "change PPM or LanguageTool quality thresholds",
+      "change text/design rules to make the failing article pass",
+      "change production architecture before root cause is proven",
+      "claim whether the duplicate sentences came from initial draft or repair without before/after bytes"
     ]
   },
   "hobbyroom_pr": 307,
