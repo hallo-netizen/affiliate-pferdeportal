@@ -6,52 +6,45 @@
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
 STAND: 2026-09-18
-STATUS: PRE-CODEX FULL SIMULATION PASS / INTEGRATION PENDING
+STATUS: M39 HISTORY AUTHORITY MAINTENANCE
 
 ## EINE AKTUELLE WAHRHEIT
 
 Current technical main:
+`13ce42bb77d7b5d9a01cdbe3be6c7c81969198d4`
+
+Letzter belastbarer Pre-Codex-Recovery-Stand:
 `508f9dbb3650c99e5d41dbab83086af46945e225`
 
-Aktueller Pre-Codex-Kandidat:
-- Branch: `hobbyroom/full-e2e-simulation-before-codex-20260918`
-- Head: `b1c33ee8e800ccc5b542c077ffe825bd20871581`
-- Acceptance-Run: `35356394787`
-- Ergebnis: **40/40 PASS**
+Aktueller erster Blocker:
+`CURRENT_7ER_BATCH_ALREADY_HAS_DURABLE_RELEASE_IDENTITY_COLLISION`
 
-## WAS DAMIT BEWIESEN IST
+Der 7er-Batch selbst bleibt unverändert. Die alte dauerhafte Ausgabe verwendet dieselbe Batch-ID als Release-ID. Ein frischer NEW-Lauf mit neuen Bytes würde dadurch später kollidieren.
 
-- Chat-/Startweg bis Point-0 und Root: PASS.
-- fehlende externe Point-0-Datei: fail-closed BLOCKED.
-- Worker-Anbindung wird im Test über den echten `codex_entry.py worker-start`-Weg simuliert.
-- kompletter 1-Artikel-Lauf: PASS.
-- kompletter 3-Artikel-Lauf mit isoliertem Repair: PASS.
-- LanguageTool 6.8: PASS.
-- PPM 6.7.9: PASS.
-- Batch-/Handoff-/Dateiausgabe: PASS.
-- 1..N-Downstream-Vertrag: 1 / 3 / 25 / 1000 PASS.
-- Negativfälle bleiben fail-closed.
-- vor `advance` muss die Artikelidentität jetzt exakt über `title / target_keyword / category / article_type / plan_slot` übereinstimmen.
-- kein echter Codex-Lauf und kein Publish sind Teil dieses Beweises.
+## M39
 
-M38 ist im produktiven `control/startmaster0107/CURRENT_STATE.json` bereits als gelöst gebunden; die alte Campus-M38-Blockerbeschreibung war stale und ist hiermit ersetzt.
+M39 registriert ausschließlich diese technische Identitätskollision:
+- logische Batch-ID bleibt unverändert;
+- neue Ausgabe benötigt eine eigene technische Release-ID;
+- alte Recovery-Artikel bleiben als Produktionsquelle verboten;
+- keine Änderung von Artikelmetadaten oder Fach-/Qualitäts-/Designregeln;
+- kein Publish.
 
-## ERSTER NOCH OFFENER PUNKT
+History-Kandidat:
+- Branch: `hobbyroom/m39-release-identity-history-20260918`
+- Head: `983f09569044b533d4d67e36df745b5da778d62f`
+- erwarteter Beweis: current main M01–M38 PASS, M39 erster neuer FAIL.
 
-Der funktional grüne Kandidat muss noch gegen Hardlock und Deterministic Entrance auf exakt demselben Head bewiesen und danach integriert werden. Anschließend ist derselbe vollständige Acceptance-Lauf auf dem resultierenden exakten `main` zu wiederholen.
+Der bereits vorbereitete Produktfix bleibt bis zum erfolgreichen M39-History-Beweis getrennt und wird nicht in diesen History-Kandidaten gemischt.
 
 ## NEXT ACTION
 
-1. Hardlock + Deterministic Entrance für Kandidat `b1c33ee8e800ccc5b542c077ffe825bd20871581` ausführen.
-2. Nur bei PASS auf `main` integrieren.
-3. Vollständigen 1-/Mehrartikel-Acceptance-Lauf erneut auf dem exakten neuen `main` ausführen.
-4. Danach **STOP direkt vor echtem Codex**.
+M39-History-Kandidat mit bestehendem History-Maschinenweg, Hardlock und Hardlock-base beweisen und integrieren. Danach Produktfix neu auf dem resultierenden Main aufsetzen und vollständig prüfen.
 
 ## HARTE GRENZEN
 
-- **Kein echter Codex ohne ausdrückliche Freigabe des Nutzers.**
-- kein Artikel 2 vor echtem Artikel-1-PASS im späteren Produktionslauf.
-- kein neuer Runner/Gate/Controller/Sidecar.
-- keine PPM-/PSERC-/PSTE-/Textmaschinen-/Fachregeländerung.
-- kein WordPress-Write.
+- kein echter Codex;
+- kein Artikelproduktionslauf;
+- kein neuer Runner/Gate/Controller/Sidecar;
+- keine Text-/SEO-/Design-/PPM-/PSERC-/PSTE-/WordPress-Regeländerung;
 - kein Publish.
