@@ -1,5 +1,10 @@
 # BILDZENTRALE – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt. Eine Hobbyraumdatei ist nur Ausführungsfläche.
+
+
 STAND: 2026-09-16
 STATUS: **2.7.6 LOCAL HARD PASS / PFERDE-ANWENDUNG LIVE-FUNKTION PASS**
 
@@ -57,3 +62,9 @@ Der allgemeine Bildkern bleibt wiederverwendbar. Der `pa_breed`-Batchhelfer ist 
 ## Wasserzeichen
 
 Nicht Bestandteil dieses Releasezugs; separater Pferde-BILD-Backlog.
+
+## NEXT ACTION
+
+**NONE – kein offener allgemeiner Bildzentrale-Reparaturauftrag gebunden.**
+
+Projektbezogene weitere Rassenbebilderung wird ausschließlich in der Pferde-Atelier-BILD-Current-Autorität gesteuert. Eine neue allgemeine Kernänderung benötigt einen eigenen ausdrücklichen Auftrag.
