@@ -929,3 +929,32 @@ Backupänderungen vor Abschluss immer gegen alle autoritativen Tresorakten + Zie
 
 BEZUG:
 ARCH-087 / ARCH-088.
+
+## BAU-042 – Current-Stand und NEXT ACTION waren auf zwei Dateien verteilt
+
+STATUS: CLOSED
+
+KURZ:
+Der Campus definierte `CURRENT_STATE.md` als aktuelle Standwahrheit, gleichzeitig aber `HOBBYRAUM.md` als separate aktuelle Arbeits-/NEXT-ACTION-Wahrheit.
+
+AUSWIRKUNG:
+Nachfolgechats mussten beide Dateien sowie Branch-/Run-/Protokollstände gegeneinander rekonstruieren. Eine formal eindeutige Übergabe konnte dadurch trotzdem einen langen Neuabgleich auslösen.
+
+URSACHE:
+Die Architektur behandelte „aktueller Stand“ und „aktuelle Arbeit“ als zwei getrennte dynamische Autoritäten.
+
+KISS-FIX:
+- pro Scope genau eine Current-Autorität;
+- `AUTORITAETSPLAN.json` routet nur;
+- NEXT ACTION liegt in derselben Current-Autorität;
+- Hobbyraum ist nur abgeleitete Ausführung;
+- bei frischer Bindung keine Vollrekonstruktion;
+- bei Änderung nur Delta-Prüfung;
+- Affiliate-Campus-Doppelcurrent entfernt und auf `CURRENT_RELEASE.json` reduziert.
+
+REGRESSIONSSCHUTZ:
+`EINE_WAHRHEIT_STANDARD.md` + `single_truth_guard.py` + Neubauvorlage.
+
+BEZUG:
+ARCH-089.
+
