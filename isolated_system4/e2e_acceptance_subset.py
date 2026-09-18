@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Test-only 1/3 acceptance adapter; never the production 107007 entrance.
+# Merge-isolation marker: this test-only PR head must stay distinct from the permanent dispatcher head.
 from __future__ import annotations
 
 import copy
