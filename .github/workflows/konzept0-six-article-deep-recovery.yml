@@ -30,20 +30,14 @@ jobs:
           rm -rf "$DST"; mkdir -p "$DST"
           : > "$OUT"
 
-          cat >/tmp/k0_needles.txt <<'EOF'
-Schritt für Schritt Pferdebürsten reinigen
-Schritt für Schritt Pferdebürsten waschen
-So findest du die geeigneten Rampenmatten für Pferdeanhänger
-So findest du ideale Heuraufen für Pferde
-So wählst du geeignete Ekzemerdecken für Pferde
-Wissenswertes über Weidetore für Pferde
-17123
-17124
-17125
-17126
-17127
-17128
-EOF
+          printf '%s\n' \
+            'Schritt für Schritt Pferdebürsten reinigen' \
+            'Schritt für Schritt Pferdebürsten waschen' \
+            'So findest du die geeigneten Rampenmatten für Pferdeanhänger' \
+            'So findest du ideale Heuraufen für Pferde' \
+            'So wählst du geeignete Ekzemerdecken für Pferde' \
+            'Wissenswertes über Weidetore für Pferde' \
+            '17123' '17124' '17125' '17126' '17127' '17128' > /tmp/k0_needles.txt
 
           echo "=== DIRECT TEXT/JSON/XML/HTML BLOBS ===" >> "$OUT"
           git rev-list --objects --all \
