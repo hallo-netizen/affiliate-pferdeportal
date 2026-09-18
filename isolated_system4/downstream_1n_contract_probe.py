@@ -9,6 +9,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 CHAT_PATH = REPO / "control/startmaster0107/chat_delivery_payload.py"
 FINAL_PATH = REPO / "control/startmaster0107/GITHUB_FINAL_RELEASE.py"
+OUTPUT_RELEASE_GATE = REPO / "control/output-quarantine/output_release_gate.py"
 STEP107008 = REPO / "control/startmaster0107/STEP_107008_FINAL_NEW_ARTICLE_BATCH_REVIEW_AWAIT_USER_PUBLISH.json"
 ENDSTEMPEL_GATE = REPO / "control/startmaster0107/ENDSTEMPEL_HANDOFF_GATE.py"
 ENDSTEMPEL_WORKFLOW = REPO / ".github/workflows/pferde-atelier-endstempel.yml"
@@ -95,7 +96,7 @@ def build_fixture(root: Path, count: int, generation: int = 1) -> tuple[str, str
     package["package_payload_sha256"] = stable(package)
 
     final_name = "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
-    final_ref = f".pferde-release/{batch}/{final_name}"
+    final_ref = f".pferde-release/{batch}/{run_dir}/{final_name}"
     (release_dir / final_name).write_text(json.dumps(package, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     receipt = {
@@ -169,6 +170,43 @@ def generation_identity_probe() -> None:
         if (first.get("runtime_generation"), second.get("runtime_generation")) != (1, 2):
             raise AssertionError("GENERATION_PROBE_NOT_DISTINCT")
 
+        final = load_module(FINAL_PATH, "github_final_generation_identity")
+        final.REPO = root
+        final.trusted_identity = lambda: {"signing_key_id": "test-key", "signing_public_key_sha256": "0" * 64, "public_key_b64": "AA=="}
+        final.call_signer = lambda manifest_sha256, batch, source_sha256, n: {"signing_key_id": "test-key", "signing_public_key_sha256": "0" * 64, "public_key_b64": "AA==", "signature_b64": "AA=="}
+        final.verify_sig = lambda *args, **kwargs: None
+        first_final = final.finalize(first_refs[2])
+        second_final = final.finalize(second_refs[2])
+        if first_final.get("batch_sha256") != second_final.get("batch_sha256"):
+            raise AssertionError("FINAL_GENERATION_PROBE_BATCH_CHANGED")
+        if (first_final.get("runtime_generation"), second_final.get("runtime_generation")) != (1, 2):
+            raise AssertionError("FINAL_GENERATION_PROBE_NOT_DISTINCT")
+        if first_final.get("final_ref") == second_final.get("final_ref"):
+            raise AssertionError("FINAL_GENERATION_OUTPUT_COLLISION")
+        try:
+            final.finalize(first_refs[2])
+        except Exception as exc:
+            if "REPLAY_BLOCKED" not in str(exc):
+                raise
+        else:
+            raise AssertionError("SAME_GENERATION_REPLAY_NOT_BLOCKED")
+
+
+def negative_generation_path_mismatch() -> None:
+    with tempfile.TemporaryDirectory(prefix="system4a-generation-negative-") as td:
+        root = Path(td)
+        _, _, source_ref, source = build_fixture(root, 3, 1)
+        source["runtime_generation"] = 2
+        p = root / source_ref
+        p.write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        final = load_module(FINAL_PATH, "github_final_generation_negative")
+        final.REPO = root
+        try:
+            final.load_source(source_ref)
+        except Exception:
+            return
+        raise AssertionError("GENERATION_PATH_MISMATCH_NOT_BLOCKED")
+
 
 def negative_source_count_mismatch() -> None:
     with tempfile.TemporaryDirectory(prefix="system4a-downstream-negative-") as td:
@@ -220,11 +258,37 @@ def contract_source_guards() -> None:
         if token in gate_text or token in workflow_text:
             raise AssertionError("DOWNSTREAM_FIXED_SEVEN_STILL_ACTIVE:" + token)
 
+    output_gate_text = OUTPUT_RELEASE_GATE.read_text(encoding="utf-8")
+    for marker in (
+        '"runtime_generation": generation',
+        'destination = release_root / prepared["batch_sha256"] / generation_name(generation)',
+        'durable_release_archive" / prepared["batch_sha256"] / generation_name(generation)',
+        'VISIBLE_RELEASE_RUNTIME_GENERATION_DRIFT',
+    ):
+        if marker not in output_gate_text:
+            raise AssertionError("OUTPUT_RELEASE_GENERATION_BINDING_MISSING:" + marker)
+
+    chat_text = CHAT_PATH.read_text(encoding="utf-8")
+    if 'recovery_sources/{batch}/{run_dir}' not in chat_text or '"runtime_generation": generation' not in chat_text:
+        raise AssertionError("CHAT_DELIVERY_GENERATION_BINDING_MISSING")
+
+    if 'generation-[0-9]{6}/MANIFEST' not in workflow_text:
+        raise AssertionError("ENDSTEMPEL_WORKFLOW_GENERATION_SOURCE_MISSING")
+    if 'tag="endstempel-$BATCH_SHA256-g$generation_padded"' not in workflow_text:
+        raise AssertionError("ENDSTEMPEL_WORKFLOW_GENERATION_TAG_MISSING")
+
     final_text = FINAL_PATH.read_text(encoding="utf-8")
     if "IMPORT_ENVELOPE_NAME" in final_text and "IMPORT_ENVELOPE_NAME =" not in final_text:
         raise AssertionError("GITHUB_FINAL_IMPORT_ENVELOPE_NAME_UNDEFINED")
     if "IMPORT_ENVELOPE_KEYS" in final_text and "IMPORT_ENVELOPE_KEYS =" not in final_text:
         raise AssertionError("GITHUB_FINAL_IMPORT_ENVELOPE_KEYS_UNDEFINED")
+    for marker in (
+        'generation_name(generation) / "MANIFEST.json"',
+        '"runtime_generation": generation',
+        '".pferde-final" / batch / generation_name(generation)',
+    ):
+        if marker not in final_text:
+            raise AssertionError("GITHUB_FINAL_GENERATION_BINDING_MISSING:" + marker)
 
 
 def main() -> int:
@@ -234,12 +298,15 @@ def main() -> int:
     exercise_count(25)
     exercise_count(1000)
     generation_identity_probe()
+    negative_generation_path_mismatch()
     negative_source_count_mismatch()
     negative_zero_count()
     print("SYSTEM4A_DOWNSTREAM_1N_CONTRACT_PROBE_OK")
     print("POSITIVE_COUNTS=1,3,25,1000")
     print("NEGATIVE_COUNT_MISMATCH=BLOCKED")
     print("GENERATION_IDENTITY=SAME_BATCH_DISTINCT_RUNS_PASS")
+    print("SAME_GENERATION_REPLAY=BLOCKED")
+    print("NEGATIVE_GENERATION_PATH_MISMATCH=BLOCKED")
     print("NEGATIVE_ZERO_COUNT=BLOCKED")
     return 0
 
