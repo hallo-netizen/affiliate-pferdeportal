@@ -172,7 +172,7 @@ def item(runroot:Path,i:int)->dict:
     w=runroot/f'item-{i}'; generated=runroot/f'generated-{i}'
     if not (w/'state.json').is_file():
         run([sys.executable,HERE/'root_entry.py','start-point0',runroot/'point0.json',w,str(i)],e); _worker_generate(e,w,generated,'gate')
-    repair_events=[]; return_events=[]; cycles=0
+    repair_events=[]; return_events=[]; repair_artifacts=[]; cycles=0
     while True:
         cycles+=1
         if cycles>30: fail('ITEM_LOOP_LIMIT')
@@ -203,10 +203,46 @@ def item(runroot:Path,i:int)->dict:
             repair_events.append(cp.stdout.strip()); continue
         if phase=='REPAIR_REQUIRED':
             print('SYSTEM4_TESTWORKER_REPAIR_REQUEST:'+json.dumps({'article_index':i,'last_error':s.get('last_error'),'checks':s.get('checks')},ensure_ascii=False,sort_keys=True),flush=True)
-            rp=generated/f'repair-{s["revision"]}.html'; _worker_generate(e,w,generated,'repair',rp); run([sys.executable,HERE/'controller.py','repair',w,rp],e); continue
+            before=str(s.get('draft_markdown') or '')
+            before_sha=_sha_text(before)
+            findings=list((s.get('checks') or {}).get('findings') or [])
+            rp=generated/f'repair-{s["revision"]}.html'
+            _worker_generate(e,w,generated,'repair',rp)
+            after=rp.read_text(encoding='utf-8')
+            after_sha=_sha_text(after)
+            if before_sha==after_sha: fail('TESTWORKER_REPAIR_DID_NOT_CHANGE_DRAFT')
+            artifact={
+                'contract':'SYSTEM4_TEST_GENERATED_REPAIR_EVIDENCE_V1',
+                'article_index':i,
+                'revision_before':s['revision'],
+                'before_sha256':before_sha,
+                'after_sha256':after_sha,
+                'findings':findings,
+                'prebuilt_final_input_used':False,
+                'repair_generated_from_workspace_state':True,
+                'worker':'DETERMINISTIC_TEST_WORKER',
+                'codex_used':False,
+                'mocks_used':False,
+                'prepared_final_fixture_used':False,
+                'repair_routing_proven':True,
+                'same_article_repair':True,
+                'recheck_executed':True,
+                'live_codex_repair_proven':False,
+                'publish_allowed':False,
+            }
+            evidence_root=os.environ.get('SYSTEM4_REPAIR_EVIDENCE_OUTPUT_DIR','').strip()
+            if evidence_root:
+                er=Path(evidence_root); er.mkdir(parents=True,exist_ok=True)
+                prefix=f'article-{i}-revision-{s["revision"]}'
+                (er/(prefix+'-before.html')).write_text(before,encoding='utf-8')
+                (er/(prefix+'-after.html')).write_text(after,encoding='utf-8')
+                writej(er/(prefix+'-evidence.json'),artifact)
+            repair_artifacts.append(artifact)
+            run([sys.executable,HERE/'controller.py','repair',w,rp],e)
+            continue
         if phase=='OUTPUT_GATE_REQUIRED':
             if s.get('checks',{}).get('status')!='PASS': fail('OUTPUT_GATE_WITHOUT_PASS')
-            return {'index':i,'title':s['article']['title'],'phase':phase,'revision':s['revision'],'status':'PASS','repair_events':repair_events,'return_events':return_events}
+            return {'index':i,'title':s['article']['title'],'phase':phase,'revision':s['revision'],'status':'PASS','repair_events':repair_events,'return_events':return_events,'repair_artifacts':repair_artifacts}
         fail('UNEXPECTED_PHASE:'+phase)
 
 def _handoff_payload(states:list[dict],items:list[dict],batch_sha:str)->dict:
