@@ -1,0 +1,89 @@
+name: Konzept 0 Runtime Inventory
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/RUNTIME_INVENTORY_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify Konzept 0 runtime hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="isolated_system0/KONZEPT_0/runtime/packages"
+          echo "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  $P/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" | sha256sum -c -
+          echo "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  $P/PSERC-FIX.zip" | sha256sum -c -
+          echo "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  $P/languagetool-commandline-6.8.jar" | sha256sum -c -
+
+      - name: Inspect only Konzept 0 recovered packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="isolated_system0/KONZEPT_0/runtime/packages"
+          TMP="$(mktemp -d)"
+          unzip -q "$P/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" -d "$TMP/ppm"
+          unzip -q "$P/PSERC-FIX.zip" -d "$TMP/pserc-outer"
+          INNER="$(find "$TMP/pserc-outer" -type f -name '*.zip' -print -quit)"
+          if [ -n "$INNER" ]; then
+            mkdir -p "$TMP/pserc"
+            unzip -q "$INNER" -d "$TMP/pserc"
+          fi
+
+          OUT="isolated_system0/KONZEPT_0/RUNTIME_COMPONENT_INVENTORY.txt"
+          {
+            echo "KONZEPT 0 RUNTIME COMPONENT INVENTORY"
+            echo "SOURCE=KONZEPT0_LOCAL_RECOVERED_PACKAGES_ONLY"
+            echo
+            echo "=== PPM relevant files ==="
+            find "$TMP/ppm" -type f | sed "s#^$TMP/ppm/##" | grep -Ei 'article|template|content|quality|language|text|normal-draft|contract|design|duplicate|cannib|seo|link|table' | sort || true
+            echo
+            echo "=== PSERC relevant files ==="
+            find "$TMP/pserc" -type f | sed "s#^$TMP/pserc/##" | grep -Ei 'article|template|content|quality|language|text|metadata|contract|plan|ppm|keyword|title' | sort || true
+            echo
+            echo "=== PPM contract/rule markers ==="
+            grep -RInE 'article_type|quality_binding|content_structure|LanguageTool|languagetool|TEXTMACHINE|textmachine|minimum_words|min_words|duplicate|cannib|internal_links|table' "$TMP/ppm" --include='*.json' --include='*.php' --include='*.md' | head -n 1200 || true
+            echo
+            echo "=== PSERC contract/rule markers ==="
+            grep -RInE 'TEXTMACHINE|textmachine|target_keyword|article_type|quality_binding|plan_slot|metadata_batch|keyword|title' "$TMP/pserc" --include='*.json' --include='*.php' --include='*.md' | head -n 800 || true
+          } > "$OUT"
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          root=Path("isolated_system0/KONZEPT_0")
+          p=root/"runtime/packages"
+          evidence={
+            "contract":"KONZEPT0_RUNTIME_INVENTORY_V1",
+            "status":"PASS",
+            "source_scope":"KONZEPT0_LOCAL_RECOVERED_PACKAGES_ONLY",
+            "ppm_zip_sha256":hashlib.sha256((p/"PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip").read_bytes()).hexdigest(),
+            "pserc_zip_sha256":hashlib.sha256((p/"PSERC-FIX.zip").read_bytes()).hexdigest(),
+            "lt_jar_sha256":hashlib.sha256((p/"languagetool-commandline-6.8.jar").read_bytes()).hexdigest(),
+            "inventory_sha256":hashlib.sha256((root/"RUNTIME_COMPONENT_INVENTORY.txt").read_bytes()).hexdigest(),
+            "concept_1_2_3_4_4a_runtime_contact":False,
+            "codex_started":False,
+            "publish_performed":False
+          }
+          (root/"RUNTIME_INVENTORY_EVIDENCE.json").write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Commit inventory into Konzept 0
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "konzept0-inventory"
+          git config user.email "actions@users.noreply.github.com"
+          git add isolated_system0/KONZEPT_0/RUNTIME_COMPONENT_INVENTORY.txt isolated_system0/KONZEPT_0/RUNTIME_INVENTORY_EVIDENCE.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Konzept 0: inventory recovered original runtime"
+          git push origin HEAD:isolated-system0-legacy-text-20260828
