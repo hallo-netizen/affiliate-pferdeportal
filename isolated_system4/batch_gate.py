@@ -145,12 +145,28 @@ def _validated_stage_text(state: Mapping[str, Any], field: str) -> str:
     return value['text']
 
 
-def validate_state(state, expected_article, source_snapshot_sha256, batch_sha256):
+def validate_bound_snapshot(state_path: Path, state: Mapping[str, Any], expected_batch: Mapping[str, Any]) -> str:
+    bound_snapshot = Path(state_path).parent / 'bound_snapshot.json'
+    if not bound_snapshot.is_file():
+        raise BatchGateError('STATE_BOUND_SNAPSHOT_MISSING')
+    value = load_json(bound_snapshot)
+    if value.get('contract') != 'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1':
+        raise BatchGateError('STATE_BOUND_SNAPSHOT_CONTRACT_INVALID')
+    bound_batch = value.get('next_textmachine_metadata_batch')
+    if not isinstance(bound_batch, dict) or bound_batch != dict(expected_batch):
+        raise BatchGateError('STATE_BOUND_SNAPSHOT_BATCH_MISMATCH')
+    digest = file_sha256(bound_snapshot)
+    if state.get('source_snapshot_sha256') != digest:
+        raise BatchGateError('STATE_SOURCE_SNAPSHOT_MISMATCH')
+    return digest
+
+
+def validate_state(state, expected_article, bound_snapshot_sha256, batch_sha256):
     if state.get('contract') != STATE_CONTRACT:
         raise BatchGateError('STATE_CONTRACT_INVALID')
     if stable_hash(immutable_core(state)) != state.get('immutable_core_sha256'):
         raise BatchGateError('STATE_IMMUTABLE_CORE_TAMPERED')
-    if state.get('source_snapshot_sha256') != source_snapshot_sha256:
+    if state.get('source_snapshot_sha256') != bound_snapshot_sha256:
         raise BatchGateError('STATE_SOURCE_SNAPSHOT_MISMATCH')
     if state.get('batch_sha256') != batch_sha256:
         raise BatchGateError('STATE_BATCH_MISMATCH')
@@ -208,7 +224,12 @@ def validate_state(state, expected_article, source_snapshot_sha256, batch_sha256
 
 
 def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Path):
-    source_snapshot_sha, batch_sha, items = load_snapshot(Path(snapshot_path))
+    snapshot_path = Path(snapshot_path)
+    source_snapshot_sha, batch_sha, items = load_snapshot(snapshot_path)
+    source_snapshot = load_json(snapshot_path)
+    source_batch = source_snapshot.get('next_textmachine_metadata_batch')
+    if not isinstance(source_batch, dict):
+        raise BatchGateError('WORDPRESS_BATCH_CONTRACT_INVALID')
     if len(state_paths) != len(items):
         raise BatchGateError('STATE_COUNT_MISMATCH')
     states_by_slot = {}
@@ -223,7 +244,7 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
         expected_slot = items[index]['plan_slot']
         if slot != expected_slot:
             raise BatchGateError(f'STATE_ORDER_MISMATCH:{index}')
-        states_by_slot[slot] = state
+        states_by_slot[slot] = (state, Path(path))
     expected_slots = {item['plan_slot'] for item in items}
     if set(states_by_slot) != expected_slots:
         raise BatchGateError('STATE_SET_MISMATCH')
@@ -233,7 +254,9 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
     article_rows = []
     state_rows = []
     for item in items:
-        validated = validate_state(states_by_slot[item['plan_slot']], item, source_snapshot_sha, batch_sha)
+        state, state_path = states_by_slot[item['plan_slot']]
+        bound_snapshot_sha = validate_bound_snapshot(state_path, state, source_batch)
+        validated = validate_state(state, item, bound_snapshot_sha, batch_sha)
         name = 'ARTICLE_' + item['plan_slot'] + '.md'
         article_path = out_dir / name
         article_path.write_bytes(validated['draft'].encode('utf-8'))
@@ -251,6 +274,7 @@ def collect_batch(snapshot_path: Path, state_paths: Sequence[Path], out_dir: Pat
         })
         state_rows.append({
             'plan_slot': item['plan_slot'],
+            'bound_snapshot_sha256': bound_snapshot_sha,
             'state_sha256': validated['state_sha256'],
             'production_context_sha256': validated['production_context_sha256'],
             'check_evidence_sha256': validated['check_evidence_sha256'],

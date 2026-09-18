@@ -53,7 +53,11 @@
     "PR275_BLOCK_SEMANTICS_CURRENT_SYSTEM4_ROUTE_VALIDATED",
     "PREPRODUCTION_ACCEPTANCE_RUN_35335734559_PASS",
     "PREPRODUCTION_HARDLOCK_RUN_35336072555_PASS",
-    "PREPRODUCTION_DETERMINISTIC_GATE_RUN_35336074403_PASS"
+    "PREPRODUCTION_DETERMINISTIC_GATE_RUN_35336074403_PASS",
+    "SYSTEM4_BOUND_SNAPSHOT_HASH_GAP_FIX_VALIDATED",
+    "SYSTEM4_BOUND_SNAPSHOT_HASH_GAP_ACCEPTANCE_RUN_35341172778_PASS",
+    "SYSTEM4_BOUND_SNAPSHOT_HASH_GAP_HARDLOCK_RUN_35341166279_PASS",
+    "SYSTEM4_BOUND_SNAPSHOT_HASH_GAP_ENTRANCE_RUN_35341169607_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -66,7 +70,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "4ba0d0bb000b25af966aba6876395ccec7c1dd3447896435bc458ab08597d7b9",
+    "bundle_sha256": "a1f3e1aefd5760a76fb0334205a1101c6b632fa9e0d314c4570822b0fceb82f8",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -142,7 +146,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "4ba0d0bb000b25af966aba6876395ccec7c1dd3447896435bc458ab08597d7b9"
+    "bundle_sha256": "a1f3e1aefd5760a76fb0334205a1101c6b632fa9e0d314c4570822b0fceb82f8"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -176,7 +180,11 @@
     "preproduction_acceptance_run_id": 35335734559,
     "preproduction_hardlock_run_id": 35336072555,
     "preproduction_deterministic_gate_run_id": 35336074403,
-    "codex_reauthorization_required": true
+    "codex_reauthorization_required": true,
+    "snapshot_hash_gap_resolved": true,
+    "snapshot_hash_gap_acceptance_run_id": 35341172778,
+    "snapshot_hash_gap_hardlock_run_id": 35341166279,
+    "snapshot_hash_gap_entrance_run_id": 35341169607
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -229,7 +237,7 @@
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
   "last_safe_main_sha": "19451f92321cc0ac0aeabfa8ef09e7a6be3302ac",
-  "last_safe_change": "Preproduction entry repair validated without Codex or article production: exact-current-main setup no longer performs the failing redundant fetch, output release consumes the producer-owned V2 preflight contract instead of a second V1 truth, and PR275 block semantics are bound into the current System-4 same-article repair route. Acceptance 35335734559 PASS; hardlock 35336072555 PASS; deterministic entrance 35336074403 PASS.",
+  "last_safe_change": "System4 batch snapshot/hash gap repaired without Codex or article production: batch collection now validates each article against its real bound_snapshot.json while separately preserving the original runtime snapshot identity; the complete bound batch must exactly equal the runtime batch. Acceptance 35341172778 PASS; hardlock 35341166279 PASS; deterministic entrance 35341169607 PASS.",
   "hobbyroom_status": "PREPRODUCTION_ENTRY_REPAIR_VALIDATED_AWAITING_USER_CODEX_RELEASE_AND_SINGLE_ARTICLE_REAL_PROOF",
   "hobbyroom_branch": "hobbyroom/preproduction-entry-reconcile-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
