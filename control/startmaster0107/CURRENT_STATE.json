@@ -197,32 +197,36 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE_APPROVED",
+  "current_work_status": "E2E_ACCEPTANCE_BLOCKED_PR107_HARDLOCK_AND_DURABLE_EVIDENCE_GAPS",
   "current_execution_blocker": {
-    "code": "E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE_PENDING",
-    "error_class": false,
-    "detail": "User explicitly requested a fresh end-to-end acceptance with one article and multiple articles. Multiple means exactly three articles for this acceptance. Both runs must start at the chat-bound System 4 entrance and continue through Point-0, Codex authoring, real LanguageTool 6.8, real PPM 6.7.9, same-article repair where required, batch/handoff, 107008, PSERC/ENDSTEMPEL, real WordPress import-format verification, and byte-identical downloadable final file delivery in the parent chat. Technical and text-quality positive/negative checks are separate. No production publish or WordPress write is allowed.",
+    "code": "PR107_HARDLOCK_BASE_FAIL",
+    "error_class": true,
+    "detail": "Fresh status check on current main 6a4ce1cecec25a2b228125695bc94d4398d638d3 found PR #107 hardlock-base run 35394728634 FAIL at 'Block immutable security paths and Paul PROJECT_MEMORY writes' with IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED. This required technical check blocks any PASS claim. The real 1+3 Codex acceptance terminal comment 5736300968 additionally reports one-article quality/batch PASS, three individual articles PASS but three-article batch collect fail-closed with BATCH_TEMPLATE_REUSE_BLOCKED:1:2:0.2003, quality-negative not executed, technical negatives 23/23 PASS, and canonical 107008 blocked as designed. The reported durable evidence commit ab748765d60ffa13528c420e20168aa08fec6ddc and branch test-evidence/system4a-e2e-1-3-20260918 are not present remotely and therefore cannot be independently reconstructed. Follow-up durable one-article + quality-negative rerun was blocked by Codex usage limit in PR107 comment 5736330732.",
     "dispatcher_pr": 107,
-    "test_counts": [
-      1,
-      3
-    ],
-    "codex_start_allowed": true,
+    "dispatcher_head_sha": "6a4ce1cecec25a2b228125695bc94d4398d638d3",
+    "dispatcher_base_sha": "e3ad9d23ca0c6a0bf2158b71b1dfa45e28c93fc0",
+    "hardlock_base_run_id": 35394728634,
+    "hardlock_failure": "IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED",
+    "adapter_pr": 335,
+    "adapter_merge_sha": "6a4ce1cecec25a2b228125695bc94d4398d638d3",
+    "one_article_status": "PASS_REPORTED_DURABLE_BODY_UNAVAILABLE",
+    "one_batch_status": "PASS_REPORTED",
+    "three_article_individual_status": "3_OF_3_PASS_REPORTED",
+    "three_batch_status": "BATCH_TEMPLATE_REUSE_BLOCKED:1:2:0.2003",
+    "quality_negative_status": "NOT_EXECUTED",
+    "technical_negative_status": "PASS_23_OF_23_REPORTED",
+    "canonical_107008_status": "BLOCKED_AS_DESIGNED",
+    "durable_evidence_status": "REMOTE_EVIDENCE_MISSING",
+    "codex_start_allowed": false,
     "fresh_user_codex_approval_required": false,
-    "user_codex_approval": {
-      "source": "CURRENT_CHAT_USER_MESSAGE_20260918",
-      "scope": "E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE",
-      "valid_until": "2026-09-19_MORNING_OR_CODEX_USAGE_LIMIT"
-    },
     "publish_allowed": false
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
-    "evidence": "PR107 issuecomment-5634273871",
+    "evidence": "PR107 issuecomment-5736330732",
     "classification": "EXTERNAL_EXECUTION_AVAILABILITY_NOT_PROJECT_FAILURE",
-    "effect": "Resolved. Codex became available again. The original task workspace was unavailable, so M37 was registered and integrated before a fresh one-article live retest.",
-    "resolved": true,
-    "resolution_evidence": "PR107 issuecomment-5637219382"
+    "effect": "The requested durable one-article and quality-negative rerun cannot currently execute. This does not resolve the PR107 hardlock-base failure or the three-article batch reuse blocker.",
+    "resolved": false
   },
   "superseded_live_findings": [
     {
@@ -301,25 +305,25 @@
     "sequence_107008_reached": false,
     "publish_performed": false
   },
-  "last_safe_main_sha": "1431bf52ea73932c809d242a429cdd62e7b93a0b",
-  "last_safe_change": "PR #331 merged the repair-proof hardening and text-quality/structure separation only. PPM 6.7.9, LanguageTool 6.8, text/design rules, quality thresholds and production architecture were not changed. Full System 4A real acceptance plus hardlock and hardlock-base passed.",
-  "hobbyroom_status": "SYSTEM4A_REPAIR_PROOF_TEST_LAYER_PASS",
-  "hobbyroom_branch": "hobbyroom/system4a-textmachine-final-pass-20260916",
-  "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "NONE_TEST_LAYER_CLOSED",
+  "last_safe_main_sha": "6a4ce1cecec25a2b228125695bc94d4398d638d3",
+  "last_safe_change": "PR #335 merged the test-only 1-or-3 acceptance adapter. On PR #335 final head 34983077bc30465469bcc2406dda4e4d40359893, hardlock run 35394631714 and hardlock-base run 35394628714 passed. The adapter intentionally blocks isolated 107008 with ACCEPTANCE_107008_CANONICAL_BOUNDARY and does not alter production thresholds, Controller, LT, PPM, or publish rules.",
+  "hobbyroom_status": "E2E_ONE_PASS_THREE_BATCH_BLOCKED_DURABLE_EVIDENCE_MISSING",
+  "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
+  "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
+  "hobbyroom_blocker": "PR107_HARDLOCK_BASE_FAIL; BATCH_TEMPLATE_REUSE_BLOCKED:1:2:0.2003; DURABLE_EVIDENCE_REMOTE_MISSING; CODEX_USAGE_LIMIT_REACHED",
   "next_action": {
-    "goal": "RUN_E2E_ONE_AND_THREE_ARTICLE_CHAT_FILE_ACCEPTANCE",
-    "action": "Run two fresh acceptance executions: first exactly one article, then exactly three articles. Each begins from the bound chat/System-4 entrance and uses real Codex authoring, real LanguageTool 6.8 and real PPM 6.7.9. For every repairable finding, repair the same article in the same workspace and rerun the same real checkers. Run separate positive and negative technical/integrity tests and separate positive and negative text-quality tests; structure/compliance failures must not be mislabeled as text-quality failures. Each positive execution must continue through batch collect, V2 handoff, 107008, PSERC, GitHub ENDSTEMPEL, real WordPress import-format verification and produce the exact checked final JSON as a durable release asset. Parent chat must retrieve that exact asset, verify SHA-256, and attach the byte-identical file before overall PASS. The three-article run must not start article N+1 before article N PASS. No publish or WordPress write.",
-    "why": "The user requested a fresh complete acceptance, not only the already-green technical prequalification. The current test protocol explicitly says a run is not overall PASS until the exact final signed import file is actually downloadable in the parent chat.",
+    "goal": "RESTORE_PR107_HARDLOCK_BASE_ON_CURRENT_HEAD_WITHOUT_WEAKENING_SECURITY",
+    "action": "First resolve the current PR #107 hardlock-base failure on head 6a4ce1cecec25a2b228125695bc94d4398d638d3 without weakening or bypassing immutable path protection, then rerun the required check until green. Only after the hardlock is green and Codex is available, rerun the missing durable acceptance proof on the then-current head: exact one-article durable bytes/checks if needed, the separate real PPM quality-negative case, and the three-article run with remotely persistent evidence. Investigate BATCH_TEMPLATE_REUSE_BLOCKED from the actual fresh article bodies; do not lower the batch distinctness threshold. The isolated adapter must continue to stop at ACCEPTANCE_107008_CANONICAL_BOUNDARY. Full chat-file PASS remains impossible until a legal canonical 107008/PSERC/ENDSTEMPEL intake produces the final checked file and the parent chat verifies identical bytes.",
+    "why": "A required hardlock is currently red, the reported evidence branch/commit is not remotely available, the quality-negative test is missing, the three-article batch is blocked, and the isolated acceptance route is deliberately not authorized to cross canonical 107008.",
     "forbidden": [
-      "publish or write to WordPress",
-      "weaken or change LanguageTool, PPM, text, design or quality thresholds",
-      "change production architecture",
-      "use mocks, deterministic testworkers or prebuilt final article fixtures as proof of real Codex text quality",
-      "reuse historical article bodies as NEW article source",
-      "label structural/format findings as bad text quality",
-      "claim overall PASS before byte-identical final file is attached in parent chat",
-      "start a later article before the current article has real PASS"
+      "claim PASS while PR107 hardlock-base is red",
+      "weaken or bypass immutable security paths or required checks",
+      "lower or remove BATCH_TEMPLATE_REUSE_BLOCKED thresholds",
+      "treat structural or batch-template findings as proof of bad individual text quality",
+      "invent or accept non-remote evidence as durable",
+      "bypass ACCEPTANCE_107008_CANONICAL_BOUNDARY",
+      "start the production 7-item batch for this acceptance",
+      "publish or write to WordPress"
     ]
   },
   "hobbyroom_pr": 331,
