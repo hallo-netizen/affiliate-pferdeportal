@@ -5,6 +5,7 @@ on:
     branches:
       - 'hobbyroom/system4a-startgate-test-20260914'
       - 'hobbyroom/system4a-textmachine-final-pass-20260916'
+      - 'hobbyroom/system4a-real-writer-quality-gate-20260918'
   workflow_dispatch:
 
 permissions:
@@ -31,6 +32,11 @@ jobs:
           unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
           test -f /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Human quality reference — original vs optimized
+        working-directory: isolated_system4
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: python3 reference_quality_regression.py
       - name: Prove machine route lock before acceptance
         working-directory: isolated_system4
         run: python3 -m unittest -v test_machine_route_lock_contract.py
