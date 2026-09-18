@@ -1,6 +1,6 @@
 # AFFILIATE-ZENTRALE — VERBINDLICHES FEHLERREGISTER
 
-Stand: 2026-09-09
+Stand: 2026-09-18
 Workstream: `AFFILIATE_ZENTRALE`
 Branch: `affiliate-release-current`
 Status: `MANDATORY_PRESTEP_GATE`
@@ -455,7 +455,7 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **NEGATIV:** Ohne Providerreport erscheinen keine lokalen Ersatzklicks und keine erfundenen Nullwerte. Eigene WordPress-Klickzähler verändern die Statistik nicht.
 
-**Status:** ROOTFIX REQUIRED im kanonischen 6.72.19-Stand; nichtkanonische 6.72.65 bleibt nur Oracle.
+**Status:** FIXED_SOURCE / LIVE_GATE_OPEN — der kanonische 6.72.72-Testkandidat liest für `Partner & Einnahmen` ausschließlich gebundene Original-Providerreports; fehlende Daten bleiben `nicht verfügbar`. WordPress-Live-Readback ist noch offen.
 
 ## AFF-ERR-027 — Lokale 6.72.60–6.72.65-Testlinie darf keine zweite Pluginwahrheit werden
 
@@ -465,35 +465,18 @@ Scheitert ein Test, bleibt derselbe Kandidat im Hobbyraum. Erst reparieren und *
 
 **Nicht wiederholen:** Lokale 6.72.60–6.72.65 ausschließlich als Test-/Fehleroracle behandeln. Kein `CURRENT.zip`-Nachzug, kein Release-PASS und keine weitere Versionskaskade daraus. Nächster Schritt ist read-only kanonischer Delta-Precheck; danach genau ein Rootfix-Kandidat und vollständiger Gateblock.
 
-**Status:** OPEN / permanenter Prozess-Hardlock bis kanonischer Rootfix akzeptiert ist.
+**Status:** CLOSED / PROZESS-HARDLOCK ERFÜLLT — die alte 6.72.60–6.72.71-Linie bleibt ausschließlich Oracle/Historie; genau ein kanonischer 6.72.72-Testkandidat ist gebunden. Kein Pluginbüro-CURRENT-Nachzug vor Live-/Release-Abnahme.
 
 
-# Aktueller PRECHECK
+# Routinghinweis — keine CURRENT-Wahrheit
 
-Aktueller Nutzer-Scope: `AFFILIATE_ZENTRALE → vollautomatischer Creative-Lifecycle + KISS-Bedienung`.
+Dieses Fehlerregister enthält Fehlerregeln, Status und Nachweise. Es führt **keinen aktuellen Branch-/Head-/Blocker-/NEXT-ACTION-Stand**.
 
-Gebundene Fach-/Scope-Quellen:
-- `protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md`
-- `/Pferde-Atelier/Aktenschraenke/Affiliate/WERBEPLATZ_REGISTER.md`
-- `/Pferde-Atelier/Aktenschraenke/Affiliate/KONZEPT_AUTOMATIK_LIFECYCLE_20260918.md`
+Aktueller Arbeitsstatus und genau eine NEXT ACTION stehen ausschließlich in:
+`control/release-governance/CURRENT_RELEASE.json`.
 
-Pflicht vor dem nächsten Source-Schritt:
-- `AFF-ERR-006`: keine Mini-Fix-/Versionskaskade;
-- `AFF-ERR-009`: keine Provider-/Format-Hartverdrahtung;
-- `AFF-ERR-010`: re-entrant Neubewertung + zentraler periodischer Recheck;
-- `AFF-ERR-011` + `AFF-ERR-026`: Partner-/Einnahmen-/Klickwahrheit providerübergreifend und ohne Nullwert-Erfindung;
-- `AFF-ERR-027`: lokale 6.72.60–6.72.65 nur Oracle, niemals zweite Current-/Releasewahrheit;
-- `AF-021`: Hobbyraum-Task schemaexakt;
-- `AF-027`: reale installierte WordPress-Version vor späterer Versionswahl;
-- `AF-069`: nichtkanonische Folgepakete nicht als kanonisch behandeln.
-
-**Nächster zulässiger Schritt:** ausschließlich den read-only Hobbyraum-Precheck `automatic-creative-lifecycle-canonical-precheck-20260918` gegen die kanonische 6.72.19-Source ausführen. Er darf nur den exakten fehlenden Source-Delta für den gebundenen 2026-09-18-Vertrag liefern. Kein Build, kein Installer, keine Versionswahl.
-
-Danach: genau ein minimaler kanonischer Rootfix-Kandidat → vollständige POSITIV-/NEGATIV-/Gesamtworkflow-/Regression-/Fresh-Unpack-/Source-Identitäts-/Mutationtests → erst wenn danach ein konkreter WordPress-Livetest erforderlich ist, genau ein Testplugin ausgeben.
-
-Automatik-/Lifecycle-Normalbetrieb bleibt Ziel; manuelle Sperren/Fixierungen/Vetos müssen immer Vorrang behalten.
-
-
+Der Einstieg bleibt:
+`release/affiliate-zentrale/AGENTS.md -> CURRENT_RELEASE.json -> Frischecheck -> NEXT ACTION`.
 
 ## AFF-ERR-028 — Release-Guard-Vertragswerte in objective_control abgeschwächt
 
@@ -503,7 +486,7 @@ Automatik-/Lifecycle-Normalbetrieb bleibt Ziel; manuelle Sperren/Fixierungen/Vet
 
 **Nicht wiederholen:** Unveränderliche Guard-Vertragswerte niemals für Meilenstein-/Scope-Texte umbenennen. Fachlicher Status gehört in `current_milestone`, `user_scope_lock`, `execution_state` und Scope-Dokumente.
 
-**Status:** FIX IN PROGRESS — exakte Guardwerte werden wiederhergestellt, danach Guard erneut geprüft.
+**Status:** CLOSED_SOURCE_CONTRACT — `objective_control` entspricht wieder den unveränderlichen Werten aus `release_guard.py`. Ein zusätzlicher neuer Runtime-Guard-PASS wird hier nicht behauptet.
 
 
 ## AFF-ERR-029 — Current-NEXT-ACTION widerspricht unveränderlichem Release-Guard
@@ -522,4 +505,4 @@ Automatik-/Lifecycle-Normalbetrieb bleibt Ziel; manuelle Sperren/Fixierungen/Vet
 
 **NEGATIV:** Suche nach aktivem `INSTALL_67272_TEST_CANDIDATE_AND_VERIFY_START_CATEGORY_PAGE_AND_PROVIDER_STATS` als `authorized_next_action` oder Hobbyraum-`next_action` darf keine zweite Current-Wahrheit ergeben.
 
-**Status:** OPEN — Current-Nachzug jetzt erforderlich.
+**Status:** CLOSED / NACHGEHOLT — `CURRENT_RELEASE.json` Generation 67 verwendet wieder guard-konform genau `RUN_BOUND_RELEASE_GATES`; der konkrete erste Gate-Schritt ist dort gebunden. Hobbyraum ist als `COMPLETED_RETURNED_TO_CURRENT` markiert und führt keine eigene NEXT ACTION mehr.
