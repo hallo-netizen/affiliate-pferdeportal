@@ -1,5 +1,12 @@
 # AFFILIATE – HOBBYRAUM
 
+<!-- DERIVED_EXECUTION_SURFACE_V1 -->
+
+> **NICHT CURRENT-AUTORITATIV.** Diese Datei ist nur die abgeleitete Ausführungsfläche für eine bereits von der zuständigen Current-Autorität freigegebene Arbeit.  
+> Aktuellen Stand, Blocker und NEXT ACTION ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` aus der dort benannten Current-Autorität lesen.  
+> Widerspruch oder stale Bindung = **BLOCKED**, niemals Hobbyraum gegen Current durchsetzen.
+
+
 STAND: 2026-09-12
 STATUS: BLOCKED NUR AUF AF-066 READ-ONLY LIVE-API-PREFLIGHT IM ECHTEN WORDPRESS
 
@@ -48,7 +55,7 @@ Der Weblogin/Passwort-Reset ist noch nicht als API-Blocker bewiesen. Im echten W
 
 Dieser Chat hat keine verbundene reale WordPress-Laufzeit; daher wurde dieser Live-Preflight **nicht** ausgeführt.
 
-## NEXT ACTION – GENAU EIN SCHRITT
+## ABGELEITETE AUSFÜHRUNG DER IN CURRENT GEBUNDENEN NEXT ACTION – GENAU EIN SCHRITT
 
 **Im realen WordPress den kanonischen 6.72.19-Stand readbacken und `Token + Programme prüfen` ausführen.**
 
