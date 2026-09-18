@@ -32,12 +32,12 @@ Produktwissen read-only konsumieren, Produktvergleichs- und SEO-Signale zusammen
 Produktdaten erfinden, Affiliate-Verfügbarkeit zur fachlichen Auswahl machen, STARTMASTER/TEXT/PPM/PSERC/PSTE ungefragt umbauen, Auto-Publish aktivieren oder aus diesem Büro Schreibrechte für fremde Fachbereiche ableiten.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → gebundene Originalquellen/Arbeitsweg.
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md` → gebundene Originalquellen/Arbeitsweg.
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
 
-- **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
-- **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **CURRENT-AUTORITÄT:** ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` auflösen
+- **NEXT ACTION:** aus derselben Current-Autorität; `HOBBYRAUM.md` nur Ausführung
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → autoritative Fehlerquelle
 - **ARBEITSPROTOKOLL:** `PROTOKOLL.md` – nur Chronik/Belege, niemals CURRENT
 - **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
@@ -58,8 +58,8 @@ Produktdaten erfinden, Affiliate-Verfügbarkeit zur fachlichen Auswahl machen, S
 ## Arbeitsfreigabe bei echter Arbeit
 
 Vor jeder Änderung:
-1. `CURRENT_STATE.md`;
-2. `HOBBYRAUM.md`;
+1. `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` lesen;
+2. zuständige Current-Autorität frisch prüfen und deren NEXT ACTION lesen;
 3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
 4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
 5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
