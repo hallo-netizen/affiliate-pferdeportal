@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 67,
+  "generation": 68,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -364,11 +364,9 @@
     },
     "current_protocol_ref": "protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md",
     "hobbyroom_current": {
-      "status": "COMPLETED_RETURNED_TO_CURRENT",
-      "task_ref": "AFFILIATE_HOBBYRAUM/TASK.current.json",
-      "task_id": "automatic-creative-lifecycle-canonical-rootfix-20260918",
-      "branch": "affiliate-release-current",
-      "result": "Canonical rootfix returned; 6.72.72 is the single bound test candidate. Hobbyraum is not a Current or NEXT-ACTION authority."
+      "status": "INACTIVE_NO_TASK",
+      "reason": "CANONICAL_ROOTFIX_RETURNED_TO_CURRENT; CURRENT ACTION IS BOUND_RELEASE_GATES/LIVE_READBACK, NOT HOBBYROOM",
+      "no_parallel_workstream": true
     },
     "canonical_current_source_drift": {
       "status": "RESOLVED_CURRENT_SOURCE_REBOUND",
