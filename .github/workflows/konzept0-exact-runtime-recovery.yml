@@ -1,0 +1,100 @@
+name: Konzept 0 Exact Runtime Recovery
+
+on:
+  push:
+    branches:
+      - isolated-system0-legacy-text-20260828
+    paths:
+      - 'isolated_system0/KONZEPT_0/RECONSTRUCTION_TRIGGER.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct exact PPM 6.7.9 and PSERC packages from historical Git objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="isolated_system0/KONZEPT_0/runtime/packages"
+          mkdir -p "$OUT"
+
+          : > "$OUT/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+          for part in 00 01 02 03 04 05 06; do
+            git show 63162490c344f056d033ec5e82cf94fdbddf204d:control/startmaster0107/runtime_packages/chunks/ppm.$part >> "$OUT/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+          done
+
+          : > "$OUT/PSERC-FIX.zip"
+          for part in 00 01; do
+            git show 63162490c344f056d033ec5e82cf94fdbddf204d:control/startmaster0107/runtime_packages/chunks/pserc.$part >> "$OUT/PSERC-FIX.zip"
+          done
+
+          echo "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  $OUT/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" | sha256sum -c -
+          echo "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  $OUT/PSERC-FIX.zip" | sha256sum -c -
+          unzip -t "$OUT/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" >/dev/null
+          unzip -t "$OUT/PSERC-FIX.zip" >/dev/null
+
+      - name: Recover exact LanguageTool 6.8 verifier artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="isolated_system0/KONZEPT_0/runtime/packages"
+          TMP="$(mktemp -d)"
+          curl -L --fail --retry 3 -o "$TMP/LanguageTool-6.8.zip" "https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip"
+          echo "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  $TMP/LanguageTool-6.8.zip" | sha256sum -c -
+          unzip -q "$TMP/LanguageTool-6.8.zip" -d "$TMP/unpacked"
+          JAR="$(find "$TMP/unpacked" -type f -name 'languagetool-commandline.jar' -print -quit)"
+          test -n "$JAR"
+          echo "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  $JAR" | sha256sum -c -
+          cp "$JAR" "$OUT/languagetool-commandline-6.8.jar"
+
+      - name: Write exact recovery evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="isolated_system0/KONZEPT_0/runtime/packages"
+          cat > isolated_system0/KONZEPT_0/RUNTIME_RECOVERY_EVIDENCE.json <<'JSON'
+          {
+            "contract": "KONZEPT0_EXACT_RUNTIME_RECOVERY_V1",
+            "status": "PASS",
+            "source_history_commit": "63162490c344f056d033ec5e82cf94fdbddf204d",
+            "ppm679": {
+              "version": "6.7.9",
+              "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+              "zip_test": "PASS"
+            },
+            "pserc": {
+              "sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314",
+              "zip_test": "PASS"
+            },
+            "languagetool": {
+              "version": "6.8",
+              "source_zip_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+              "commandline_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
+            },
+            "concept_1_2_3_4_4a_runtime_contact": false,
+            "publish_performed": false,
+            "codex_started": false
+          }
+          JSON
+          sha256sum "$OUT/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" "$OUT/PSERC-FIX.zip" "$OUT/languagetool-commandline-6.8.jar"
+
+      - name: Commit recovered runtime only into Konzept 0
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "konzept0-recovery"
+          git config user.email "actions@users.noreply.github.com"
+          git add isolated_system0/KONZEPT_0/runtime/packages isolated_system0/KONZEPT_0/RUNTIME_RECOVERY_EVIDENCE.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "Konzept 0: recover exact PPM PSERC LT68 runtime artifacts"
+          git push origin HEAD:isolated-system0-legacy-text-20260828
