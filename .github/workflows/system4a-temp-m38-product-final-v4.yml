@@ -1,0 +1,17 @@
+name: System4A M38 product final probe v4
+on:
+  push:
+    branches:
+      - 'hobbyroom/m38-product-proof-v4-20260918'
+permissions:
+  contents: read
+jobs:
+  history:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run M01-M38 existing history runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py | tee /tmp/history.txt
