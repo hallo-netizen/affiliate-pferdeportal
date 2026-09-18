@@ -111,7 +111,7 @@ trait PPAR_Automation_Suite_Trait {
     public static function automation_settings_defaults() {
         return array(
             'enabled' => false,
-            'schedule' => 'ppar_two_weeks',
+            'schedule' => 'daily',
             'executor' => 'server_cron',
             'batch_size' => 500,
             'time_budget' => 20,
@@ -125,7 +125,7 @@ trait PPAR_Automation_Suite_Trait {
         $merged = wp_parse_args($saved, self::automation_settings_defaults());
         return array(
             'enabled' => !empty($merged['enabled']),
-            'schedule' => 'ppar_two_weeks',
+            'schedule' => in_array((string) $merged['schedule'], array('daily','twicedaily'), true) ? (string) $merged['schedule'] : 'daily',
             'executor' => in_array((string) $merged['executor'], array('server_cron','wp_cron'), true) ? (string) $merged['executor'] : 'server_cron',
             'batch_size' => max(100, min(1000, absint($merged['batch_size']))),
             'time_budget' => max(10, min(25, absint($merged['time_budget']))),
@@ -332,7 +332,6 @@ trait PPAR_Automation_Suite_Trait {
             update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
             if (function_exists('wp_clear_scheduled_hook')) {
                 wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
-                wp_clear_scheduled_hook(self::AUTOMATION_INTEGRITY_HOOK);
                 wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
             }
         }
@@ -347,34 +346,26 @@ trait PPAR_Automation_Suite_Trait {
         if (!isset($schedules['ppar_five_minutes'])) {
             $schedules['ppar_five_minutes'] = array('interval'=>300, 'display'=>'Alle fünf Minuten');
         }
-        if (!isset($schedules['ppar_two_weeks'])) {
-            $schedules['ppar_two_weeks'] = array('interval'=>14 * DAY_IN_SECONDS, 'display'=>'Alle zwei Wochen');
-        }
-        if (!isset($schedules['ppar_three_weeks'])) {
-            $schedules['ppar_three_weeks'] = array('interval'=>21 * DAY_IN_SECONDS, 'display'=>'Alle drei Wochen');
-        }
         return $schedules;
     }
 
     public function ensure_automation_schedule() {
         $settings = $this->automation_settings();
         $dispatch = wp_get_schedule(self::AUTOMATION_CRON_HOOK);
-        $integrity = wp_get_schedule(self::AUTOMATION_INTEGRITY_HOOK);
         $worker = wp_get_schedule(self::AUTOMATION_WORKER_HOOK);
         $use_wp_cron = !empty($settings['enabled']) && $settings['executor'] === 'wp_cron';
         if (!$use_wp_cron) {
-            if ($dispatch) { wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK); }
-            if ($integrity) { wp_clear_scheduled_hook(self::AUTOMATION_INTEGRITY_HOOK); }
-            if ($worker) { wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK); }
+            if ($dispatch) {
+                wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
+            }
+            if ($worker) {
+                wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
+            }
             return;
         }
-        if ($dispatch !== 'ppar_two_weeks') {
+        if ($dispatch !== $settings['schedule']) {
             wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
-            wp_schedule_event(time() + 300, 'ppar_two_weeks', self::AUTOMATION_CRON_HOOK);
-        }
-        if ($integrity !== 'ppar_three_weeks') {
-            wp_clear_scheduled_hook(self::AUTOMATION_INTEGRITY_HOOK);
-            wp_schedule_event(time() + 600, 'ppar_three_weeks', self::AUTOMATION_INTEGRITY_HOOK);
+            wp_schedule_event(time() + 300, $settings['schedule'], self::AUTOMATION_CRON_HOOK);
         }
         if ($worker !== 'ppar_five_minutes') {
             wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
@@ -400,7 +391,6 @@ trait PPAR_Automation_Suite_Trait {
     public function reschedule_automation_cron($force = false) {
         if ($force) {
             wp_clear_scheduled_hook(self::AUTOMATION_CRON_HOOK);
-            wp_clear_scheduled_hook(self::AUTOMATION_INTEGRITY_HOOK);
             wp_clear_scheduled_hook(self::AUTOMATION_WORKER_HOOK);
         }
         $this->ensure_automation_schedule();
@@ -414,7 +404,7 @@ trait PPAR_Automation_Suite_Trait {
         $raw = isset($_POST['ppar_automation']) && is_array($_POST['ppar_automation']) ? wp_unslash($_POST['ppar_automation']) : array();
         $settings = array(
             'enabled' => !empty($raw['enabled']),
-            'schedule' => 'ppar_two_weeks',
+            'schedule' => in_array((string) ($raw['schedule'] ?? ''), array('daily','twicedaily'), true) ? (string) $raw['schedule'] : 'daily',
             'executor' => in_array((string) ($raw['executor'] ?? ''), array('server_cron','wp_cron'), true) ? (string) $raw['executor'] : 'server_cron',
             'batch_size' => max(100, min(1000, absint($raw['batch_size'] ?? 500))),
             'time_budget' => max(10, min(25, absint($raw['time_budget'] ?? 20))),
@@ -469,7 +459,7 @@ trait PPAR_Automation_Suite_Trait {
         }
         $adcell = $this->network_settings('adcell');
         if (!empty($adcell['enabled'])) {
-            $programmes = $this->adcell_api_v2_active_programmes(true);
+            $programmes = $this->adcell_api_v2_allowlisted_programmes(true);
             if (!is_wp_error($programmes)) {
                 foreach ((array) $programmes as $program_id => $programme) {
                     $program_id = absint($program_id ?: ($programme['id'] ?? 0));
@@ -543,7 +533,7 @@ trait PPAR_Automation_Suite_Trait {
         }
         $settings = $this->automation_settings();
         $last = absint(get_option(self::OPTION_AUTOMATION_LAST_DISPATCH, 0));
-        $interval = 14 * DAY_IN_SECONDS;
+        $interval = $settings['schedule'] === 'twicedaily' ? 12 * HOUR_IN_SECONDS : DAY_IN_SECONDS;
         return $last <= 0 || (time() - $last) >= $interval;
     }
 
@@ -672,147 +662,11 @@ trait PPAR_Automation_Suite_Trait {
         return array('status'=>'refreshed','count'=>count($feeds));
     }
 
-    private function automation_integrity_due() {
-        $last = absint(get_option(self::OPTION_AUTOMATION_LAST_INTEGRITY, 0));
-        return $last <= 0 || (time() - $last) >= 21 * DAY_IN_SECONDS;
-    }
-
-    private function automation_deactivate_creative_outputs($identity_hash, $reason) {
-        $identity_hash = sanitize_text_field((string) $identity_hash);
-        if (!preg_match('/^[a-f0-9]{64}$/', $identity_hash)
-            || !method_exists($this, 'output_objects_table')
-            || !method_exists($this, 'output_deactivate_materialized_object')) {
-            return 0;
-        }
-        global $wpdb;
-        $table = $this->output_objects_table();
-        $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT * FROM {$table} WHERE creative_identity_hash=%s AND status NOT IN ('superseded','blocked_manual','blocked_source')",
-            $identity_hash
-        ), ARRAY_A);
-        $changed = 0;
-        foreach ((array) $rows as $row) {
-            $this->output_deactivate_materialized_object($row, $reason);
-            $wpdb->update($table, array(
-                'status'=>'blocked_source',
-                'decision_source'=>'source_state',
-                'decision_reason'=>sanitize_text_field((string) $reason),
-                'updated_at'=>time(),
-            ), array('id'=>absint($row['id'] ?? 0)));
-            $changed++;
-        }
-        return $changed;
-    }
-
-    private function automation_recheck_affected_inventory($provider, $partner_external_id, $reason = 'inventory_change') {
-        $provider = sanitize_key((string) $provider);
-        $partner_external_id = sanitize_text_field((string) $partner_external_id);
-        if ($provider === '' || $partner_external_id === '' || !method_exists($this, 'output_plan_creative')) {
-            return array('planned'=>0,'blocked'=>0);
-        }
-        global $wpdb;
-        $table = $this->creative_library_table();
-        $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT * FROM {$table} WHERE provider=%s AND partner_external_id=%s AND source_status='active' AND availability_state='active' AND topic_status='auto_verified' ORDER BY width*height DESC, id ASC LIMIT 500",
-            $provider,
-            $partner_external_id
-        ), ARRAY_A);
-        $planned = 0;
-        $blocked = 0;
-        foreach ((array) $rows as $row) {
-            $result = $this->output_plan_creative($row, true);
-            if (is_wp_error($result)) { $blocked++; continue; }
-            $planned += absint($result['created'] ?? 0);
-            $blocked += absint($result['blocked'] ?? 0);
-        }
-        if (method_exists($this, 'article_plan_bump_campaign_revision')) {
-            $this->article_plan_bump_campaign_revision('affiliate_' . sanitize_key((string) $reason));
-        }
-        return array('planned'=>$planned,'blocked'=>$blocked);
-    }
-
-    public function run_automation_integrity_check($force = false) {
-        if (!$force && !$this->automation_integrity_due()) {
-            return array('status'=>'not_due','expired'=>0,'dedupe'=>0,'rechecked'=>0);
-        }
-        global $wpdb;
-        $table = $this->creative_library_table();
-        $rows = $wpdb->get_results(
-            "SELECT * FROM {$table} WHERE creative_type<>'native_partner' AND external_id NOT LIKE 'native-%' ORDER BY id ASC LIMIT 5000",
-            ARRAY_A
-        );
-        $affected = array();
-        $expired = 0;
-        foreach ((array) $rows as $row) {
-            $payload = json_decode((string) ($row['payload'] ?? ''), true);
-            $payload = is_array($payload) ? $payload : array();
-            $end_date = sanitize_text_field((string) ($payload['end_date'] ?? $payload['endDate'] ?? $payload['valid_to'] ?? $payload['validTo'] ?? ''));
-            $end_ts = $end_date !== '' ? strtotime($end_date . ' 23:59:59 UTC') : false;
-            $source_status = sanitize_key((string) ($row['source_status'] ?? 'active'));
-            $availability = sanitize_key((string) ($row['availability_state'] ?? 'active'));
-            $should_expire = $end_ts !== false && $end_ts < time();
-            if (($source_status !== 'active' || $should_expire) && $availability === 'active') {
-                $new_state = $should_expire ? 'inactive_expired' : 'inactive_provider';
-                $wpdb->update($table, array(
-                    'availability_state'=>$new_state,
-                    'selected'=>0,
-                    'source_status'=>$should_expire ? 'inactive' : $source_status,
-                ), array('id'=>absint($row['id'] ?? 0)));
-                $this->automation_deactivate_creative_outputs(
-                    (string) ($row['identity_hash'] ?? ''),
-                    $should_expire ? 'Provider-belegtes Enddatum ist abgelaufen.' : 'Provider meldet das Creative nicht aktiv.'
-                );
-                $key = sanitize_key((string) ($row['provider'] ?? '')) . '|' . sanitize_text_field((string) ($row['partner_external_id'] ?? ''));
-                $affected[$key] = array((string) ($row['provider'] ?? ''),(string) ($row['partner_external_id'] ?? ''));
-                $expired++;
-            }
-        }
-        $dedupe = 0;
-        if (method_exists($this, 'creative_library_rebuild_dedupe')) {
-            $dedupe = absint($this->creative_library_rebuild_dedupe());
-        }
-        $rechecked = 0;
-        foreach ($affected as $pair) {
-            $this->automation_recheck_affected_inventory($pair[0], $pair[1], 'integrity_change');
-            $rechecked++;
-        }
-        update_option(self::OPTION_AUTOMATION_LAST_INTEGRITY, time(), false);
-        return array('status'=>'completed','expired'=>$expired,'dedupe'=>$dedupe,'rechecked'=>$rechecked);
-    }
-
-    public function handle_automation_run_now() {
-        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
-        check_admin_referer('ppar_automation_run_now', 'ppar_automation_run_now_nonce');
-        $integrity = $this->run_automation_integrity_check(true);
-        $settings = $this->automation_settings();
-        $message = 'Integritätsprüfung ausgeführt.';
-        if (!empty($settings['enabled']) && !$this->automation_has_open_jobs()) {
-            update_option(self::OPTION_AUTOMATION_LAST_DISPATCH, 0, false);
-            update_option(self::OPTION_AUTOMATION_CYCLE, array('remaining'=>0,'total'=>0,'started_at'=>0), false);
-            $this->run_scheduled_partner_sync($settings['executor'] === 'server_cron');
-            $message .= ' Bestands-/Partner-/Creative-Sync wurde sofort angestoßen.';
-        } else {
-            $message .= !empty($settings['enabled'])
-                ? ' Ein offener Job läuft bereits.'
-                : ' Automatische Synchronisierung ist deaktiviert; Provider-Sync wurde nicht gestartet.';
-        }
-        wp_safe_redirect(add_query_arg(array(
-            'page'=>'affiliate-portal-automation',
-            'ppar_auto'=>'run_now',
-            'ppar_message'=>rawurlencode($message),
-        ), admin_url('admin.php')));
-        exit;
-    }
-
     public function run_scheduled_partner_sync($external_executor = false) {
         $settings = $this->automation_settings();
         $expected_executor = $external_executor ? 'server_cron' : 'wp_cron';
         if (empty($settings['enabled']) || $settings['executor'] !== $expected_executor || $this->automation_has_open_jobs()) {
             return;
-        }
-
-        if ($this->automation_integrity_due()) {
-            $this->run_automation_integrity_check(false);
         }
 
         $cycle = $this->automation_cycle_state();
@@ -821,7 +675,7 @@ trait PPAR_Automation_Suite_Trait {
             return;
         }
         if ($new_cycle) {
-            // Refresh joined programmes first. Every currently joined, non-vetoed
+            // Refresh joined programmes first so an explicitly allow_local
             // advertiser can self-bootstrap without a pre-existing snapshot.
             $programme_refresh = $this->automation_refresh_awin_programme_list();
             if (is_wp_error($programme_refresh)) {
@@ -1043,10 +897,6 @@ trait PPAR_Automation_Suite_Trait {
             $click = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['clickoutLink'] ?? ''));
             $image = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['bannerUrl'] ?? ''));
             if ($promotion_id <= 0 || $click === '' || $image === '') { $blocked++; continue; }
-            $start_date = $this->automation_normalize_date($item['startDate'] ?? $item['validFrom'] ?? $item['start_date'] ?? '');
-            $end_date = $this->automation_normalize_date($item['endDate'] ?? $item['validTo'] ?? $item['end_date'] ?? '');
-            $today = gmdate('Y-m-d');
-            $date_active = !($start_date !== '' && $start_date > $today) && !($end_date !== '' && $end_date < $today);
             $rows[] = array(
                 'creative_id'=>'banner-' . $promotion_id,
                 'creative_type'=>'banner',
@@ -1058,9 +908,7 @@ trait PPAR_Automation_Suite_Trait {
                 'tracking_url'=>$click,
                 'width'=>absint($item['width'] ?? 0),
                 'height'=>absint($item['height'] ?? 0),
-                'status'=>$date_active ? 'active' : 'inactive',
-                'start_date'=>$start_date,
-                'end_date'=>$end_date,
+                'status'=>'active',
                 '_source_kind'=>'banner',
                 '_run_uuid'=>sanitize_text_field((string) $run_uuid),
             );
@@ -1240,12 +1088,6 @@ trait PPAR_Automation_Suite_Trait {
             $message,
             $details
         );
-        $provider = sanitize_key((string) ($job['provider'] ?? ''));
-        if (in_array(sanitize_key((string) $status), array('success','partial'), true)
-            && $provider !== ''
-            && method_exists($this, 'partner_analytics_refresh_provider')) {
-            $this->partner_analytics_refresh_provider($provider);
-        }
     }
 
     private function automation_validate_awin_feed_url($url) {
@@ -1944,11 +1786,6 @@ trait PPAR_Automation_Suite_Trait {
                 continue;
             }
 
-            $start_date = $this->automation_normalize_date($creative['start_date'] ?? $creative['startDate'] ?? $creative['valid_from'] ?? '');
-            $end_date = $this->automation_normalize_date($creative['end_date'] ?? $creative['endDate'] ?? $creative['valid_to'] ?? '');
-            $today = gmdate('Y-m-d');
-            $date_active = !($start_date !== '' && $start_date > $today) && !($end_date !== '' && $end_date < $today);
-            $provider_active = sanitize_key((string) ($creative['status'] ?? 'active')) !== 'inactive';
             $rows[] = array(
                 'creative_id'=>$creative_id,
                 'creative_type'=>'banner',
@@ -1960,9 +1797,7 @@ trait PPAR_Automation_Suite_Trait {
                 'tracking_url'=>$tracking,
                 'width'=>absint($creative['width'] ?? 0),
                 'height'=>absint($creative['height'] ?? 0),
-                'status'=>($provider_active && $date_active) ? 'active' : 'inactive',
-                'start_date'=>$start_date,
-                'end_date'=>$end_date,
+                'status'=>sanitize_key((string) ($creative['status'] ?? 'active')) === 'inactive' ? 'inactive' : 'active',
                 '_source_kind'=>'banner',
                 '_run_uuid'=>sanitize_text_field((string) $run_uuid),
             );
@@ -2527,7 +2362,6 @@ trait PPAR_Automation_Suite_Trait {
     private function automation_import_rows($rows, $context) {
         $mapping = $this->creative_library_detect_mapping(array_keys((array) reset($rows)));
         $counts = array('imported'=>0,'updated'=>0,'unchanged'=>0,'blocked'=>0,'failed'=>0);
-        $inactive_changed = false;
         foreach ($rows as $row) {
             if (!is_array($row)) {
                 $counts['failed']++;
@@ -2539,10 +2373,6 @@ trait PPAR_Automation_Suite_Trait {
                 continue;
             }
             $result = $this->creative_library_upsert($normalized);
-            if (sanitize_key((string) ($normalized['source_status'] ?? 'active')) !== 'active') {
-                $this->automation_deactivate_creative_outputs((string) ($normalized['identity_hash'] ?? ''), 'Provider meldet Creative inaktiv oder außerhalb der belegten Laufzeit.');
-                $inactive_changed = true;
-            }
             if (isset($counts[$result])) {
                 $counts[$result]++;
             } else {
@@ -2555,13 +2385,6 @@ trait PPAR_Automation_Suite_Trait {
         if (($counts['imported'] > 0 || $counts['updated'] > 0)
             && method_exists($this, 'creative_library_schedule_asset_verification')) {
             $this->creative_library_schedule_asset_verification(10);
-        }
-        if ($inactive_changed) {
-            $this->automation_recheck_affected_inventory(
-                sanitize_key((string) ($context['provider'] ?? '')),
-                sanitize_text_field((string) ($context['partner_external_id'] ?? '')),
-                'provider_inactive'
-            );
         }
         return $counts;
     }
@@ -2631,30 +2454,17 @@ trait PPAR_Automation_Suite_Trait {
         global $wpdb;
         $table = $this->creative_library_table();
         $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT id, identity_hash, missing_count FROM {$table} WHERE provider=%s AND partner_external_id=%s AND source_kind=%s AND last_complete_run<>%s",
+            "SELECT id, missing_count FROM {$table} WHERE provider=%s AND partner_external_id=%s AND source_kind=%s AND last_complete_run<>%s",
             sanitize_key($provider), sanitize_text_field($partner_external_id), sanitize_key($source_kind), sanitize_text_field($run_uuid)
         ), ARRAY_A);
-        $became_inactive = false;
         foreach ($rows as $row) {
             $missing = absint($row['missing_count'] ?? 0) + 1;
-            $state = $missing >= 2 ? 'inactive_missing' : 'quarantine_missing';
             $wpdb->update($table, array(
                 'missing_count'=>$missing,
-                'availability_state'=>$state,
+                'availability_state'=>$missing >= 2 ? 'inactive_missing' : 'quarantine_missing',
                 'selected'=>0,
             ), array('id'=>absint($row['id'])));
-            if ($state === 'inactive_missing') {
-                $this->automation_deactivate_creative_outputs(
-                    (string) ($row['identity_hash'] ?? ''),
-                    'Creative wurde in zwei vollständigen Providerläufen nicht mehr bestätigt.'
-                );
-                $became_inactive = true;
-            }
         }
-        if ($became_inactive) {
-            $this->automation_recheck_affected_inventory($provider, $partner_external_id, 'missing_creative');
-        }
-        return $became_inactive;
     }
 
     public function handle_automation_full_sync() {
@@ -2878,21 +2688,21 @@ trait PPAR_Automation_Suite_Trait {
     private function render_adcell_automation_page() {
         $notice = sanitize_key((string) ($_GET['ppar_auto'] ?? ''));
         $message = rawurldecode((string) ($_GET['ppar_message'] ?? ''));
-        $programmes = $this->adcell_api_v2_active_programmes(false);
+        $programmes = $this->adcell_api_v2_allowlisted_programmes(false);
         $programmes = is_wp_error($programmes) ? array() : (array) $programmes;
         $program_id = absint($_GET['partner_external_id'] ?? 0);
         if ($program_id <= 0 && $programmes) { $program_id = absint(array_key_first($programmes)); }
         ?>
         <div class="wrap" style="max-width:1100px"><h1>ADCELL-Automatisierung</h1>
-        <p>Alle vom Provider aktuell als <code>accepted</code> und aktiv bestätigten Programme sind im Normalbetrieb automatisch verfügbar. Manuelle Sperren bleiben über die zentrale Steuerung vorrangig. Beim Start wird der Providerstatus erneut live geprüft.</p>
+        <p>Nur explizit freigegebene <code>programId</code>, die im letzten ADCELL-Programmkatalog zugleich <code>accepted</code> und aktiv sind. Beim Start wird der Status erneut live geprüft.</p>
         <?php if ($notice && $message) : ?><div class="notice <?php echo $notice === 'failed' ? 'notice-error' : 'notice-success'; ?> inline"><p><?php echo esc_html($message); ?></p></div><?php endif; ?>
         <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin:18px 0"><h2>Programmlauf starten</h2>
-        <?php if (!$programmes) : ?><p><strong>BLOCKED:</strong> Kein aktuell accepted + aktives ADCELL-Programm im Providerkatalog. Zuerst Token + Programme prüfen.</p>
+        <?php if (!$programmes) : ?><p><strong>BLOCKED:</strong> Keine zwischengespeicherte accepted+aktive programId aus der expliziten Allowlist verfügbar. Zuerst auf der Provider-Synchronisierung Token + Programme prüfen und die Allowlist setzen.</p>
         <?php else : ?><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_full_sync"><input type="hidden" name="provider" value="adcell"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?>
         <p><label>ADCELL-Programm<br><select name="partner_external_id" required style="min-width:360px"><?php foreach ($programmes as $id=>$programme) : $id=absint($id ?: ($programme['id']??0)); if($id<=0){continue;} ?><option value="<?php echo esc_attr($id); ?>" <?php selected($program_id,$id); ?>><?php echo esc_html((string)($programme['name']??('ADCELL '.$id)).' · '.$id); ?></option><?php endforeach; ?></select></label></p>
         <p class="description">Laufweg: programId → API-v2-Werbemittel CSV/Banner/Deeplink → bestehende Creative-Bibliothek → zentrale Relevanz/Slots/Veto/Ausgabe. Kein manueller CSV-Pfad.</p>
         <?php submit_button('ADCELL-Programmlauf starten','primary'); ?></form><?php endif; ?></section>
-        <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-sync')); ?>">ADCELL Programme</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation')); ?>">Awin-Automatisierung</a></p>
+        <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-sync')); ?>">ADCELL Programme/Allowlist</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-automation')); ?>">Awin-Automatisierung</a></p>
         </div><?php
     }
 
@@ -2953,7 +2763,7 @@ trait PPAR_Automation_Suite_Trait {
         <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:18px"><h2>1. Datenlauf starten</h2>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_full_sync"><?php wp_nonce_field('ppar_automation_full_sync','ppar_automation_nonce'); ?>
         <p><label>Partner<br><select name="partner_external_id" required style="min-width:360px" onchange="window.location.href='<?php echo esc_js(admin_url('admin.php?page=affiliate-portal-automation&partner_external_id=')); ?>'+encodeURIComponent(this.value)" <?php disabled(!$allowed_snapshots); ?>><option value="">Partner auswählen</option><?php foreach ($allowed_snapshots as $snap) : $id=sanitize_text_field((string)($snap['external_id']??'')); $prog=is_array($snap['programme']??null)?$snap['programme']:array(); $name=sanitize_text_field((string)($prog['name']??$snap['submitted_name']??$id)); ?><option value="<?php echo esc_attr($id); ?>" <?php selected($partner_id,$id); ?>><?php echo esc_html('AWIN · '.$name.' · '.$id); ?></option><?php endforeach; ?></select><input type="hidden" name="provider" value="awin"></label></p>
-        <p class="description"><strong>Automatik:</strong> Aktuell joined Partner erscheinen automatisch; explizite Sperren/Vetos bleiben ausgeschlossen.</p>
+        <p class="description"><strong>Eingangsweiche:</strong> Nur unter „Awin“ für dieses Portal aktive Partner erscheinen hier.</p>
         <p class="description"><strong>Produktfeed:</strong> <?php echo esc_html($awin_feed_message); ?> Angebote werden auch ohne Produktfeed verarbeitet.</p>
         <?php submit_button('Awin-Lauf starten','primary','submit',true,$this->automation_awin_start_button_attributes($selected_snapshot)); ?></form>
         <?php $ebay_snapshot=$this->provider_access_snapshot('ebay'); $ebay_settings=method_exists($this,'ebay_settings')?$this->ebay_settings():array(); $ebay_ready=!empty($ebay_snapshot['configured'])&&!empty($ebay_settings['contract_confirmed'])&&!empty($ebay_settings['privacy_confirmed']); ?>
@@ -2965,13 +2775,10 @@ trait PPAR_Automation_Suite_Trait {
         <p><strong>OTTO-Sicherheitsbereinigung:</strong> <?php echo esc_html((string) ($otto_cleanup['status'] ?? 'nicht ausgeführt')); ?> · <?php echo absint($otto_cleanup['candidate_runs'] ?? 0); ?> Fehl-Läufe erkannt · <?php echo absint($otto_cleanup['deleted_products'] ?? 0); ?> Altprodukte entfernt · <?php echo absint($otto_cleanup['blocked_output_objects'] ?? 0); ?> Ausgabeobjekte deaktiviert · <?php echo absint($otto_cleanup['deleted_edges'] ?? 0); ?> Zielkanten entfernt.<?php if (!empty($otto_cleanup['blocked_runs'])) : ?> <strong>BLOCKED:</strong> <?php echo esc_html(implode(', ', array_map('sanitize_text_field', (array) $otto_cleanup['blocked_runs']))); ?><?php endif; ?></p>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_save_settings"><?php wp_nonce_field('ppar_automation_save_settings','ppar_automation_settings_nonce'); ?>
         <p><label><input type="checkbox" name="ppar_automation[enabled]" value="1" <?php checked(!empty($automation_settings['enabled'])); ?>> automatische Synchronisierung aktiv</label></p>
-        <p><label>Ausführung <select name="ppar_automation[executor]"><option value="server_cron" <?php selected($automation_settings['executor'],'server_cron'); ?>>Server-Cron / WP-CLI</option><option value="wp_cron" <?php selected($automation_settings['executor'],'wp_cron'); ?>>WP-Cron-Fallback</option></select></label> <span style="margin-left:18px"><strong>Rhythmus:</strong> Bestands-/Partner-/Creative-Sync alle 2 Wochen · tiefer Integritätslauf alle 3 Wochen.</span></p>
+        <p><label>Ausführung <select name="ppar_automation[executor]"><option value="server_cron" <?php selected($automation_settings['executor'],'server_cron'); ?>>Server-Cron / WP-CLI</option><option value="wp_cron" <?php selected($automation_settings['executor'],'wp_cron'); ?>>WP-Cron-Fallback</option></select></label> <label style="margin-left:18px">Rhythmus <select name="ppar_automation[schedule]"><option value="daily" <?php selected($automation_settings['schedule'],'daily'); ?>>täglich</option><option value="twicedaily" <?php selected($automation_settings['schedule'],'twicedaily'); ?>>alle 12 Stunden</option></select></label></p>
         <p><label>Produkte je Paket <input type="number" min="100" max="1000" step="100" name="ppar_automation[batch_size]" value="<?php echo absint($automation_settings['batch_size']); ?>"></label> <label style="margin-left:18px">Zeitbudget <input type="number" min="10" max="25" name="ppar_automation[time_budget]" value="<?php echo absint($automation_settings['time_budget']); ?>"> s</label> <label style="margin-left:18px">Download-Timeout <input type="number" min="60" max="600" step="60" name="ppar_automation[request_timeout]" value="<?php echo absint($automation_settings['request_timeout']); ?>"> s</label></p>
         <p><code>wp ppar automation-tick</code></p>
-        <?php submit_button('Automatisierung speichern','secondary'); ?></form>
-        <?php $last_sync=absint(get_option(self::OPTION_AUTOMATION_LAST_DISPATCH,0)); $last_integrity=absint(get_option(self::OPTION_AUTOMATION_LAST_INTEGRITY,0)); ?>
-        <p class="description">Letzter Sync: <?php echo $last_sync ? esc_html(wp_date('d.m.Y H:i',$last_sync)) : 'noch nie'; ?> · nächster regulärer Sync: <?php echo $last_sync ? esc_html(wp_date('d.m.Y H:i',$last_sync + 14 * DAY_IN_SECONDS)) : 'bei Aktivierung fällig'; ?><br>Letzte Integritätsprüfung: <?php echo $last_integrity ? esc_html(wp_date('d.m.Y H:i',$last_integrity)) : 'noch nie'; ?> · nächste: <?php echo $last_integrity ? esc_html(wp_date('d.m.Y H:i',$last_integrity + 21 * DAY_IN_SECONDS)) : 'fällig'; ?></p>
-        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_automation_run_now"><?php wp_nonce_field('ppar_automation_run_now','ppar_automation_run_now_nonce'); ?><?php submit_button('Jetzt prüfen','secondary','submit',false); ?></form></section>
+        <?php submit_button('Automatisierung speichern','secondary'); ?></form></section>
         <p><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-creative-library')); ?>">Werbemittel auswählen</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-preview')); ?>">Vorschau öffnen</a></p>
         <h2>Arbeitswarteschlange</h2><table class="widefat striped"><thead><tr><th>Zeit</th><th>Partner</th><th>Stufe</th><th>Status</th><th>Meldung</th></tr></thead><tbody><?php if(!$jobs): ?><tr><td colspan="5">Keine Aufträge.</td></tr><?php else: foreach($jobs as $job): ?><tr><td><?php echo esc_html(wp_date('d.m.Y H:i',absint($job['updated_at']))); ?></td><td><?php echo esc_html($this->provider_label((string)$job['provider']).' · '.(string)$job['partner_external_id']); ?></td><td><?php echo esc_html((string)$job['stage']); ?></td><td><?php echo esc_html((string)$job['status']); ?></td><td><?php echo esc_html((string)$job['message']); ?></td></tr><?php endforeach; endif; ?></tbody></table>
         <h2>Abgeschlossene Läufe</h2><table class="widefat striped"><thead><tr><th>Zeit</th><th>Partner</th><th>Status</th><th>Importiert</th><th>Aktualisiert</th><th>Blockiert</th><th>Meldung</th></tr></thead><tbody><?php if(!$runs): ?><tr><td colspan="7">Noch kein Lauf.</td></tr><?php else: foreach($runs as $run): ?><tr><td><?php echo esc_html(wp_date('d.m.Y H:i',absint($run['started_at']))); ?></td><td><?php echo esc_html($this->provider_label((string)$run['provider']).' · '.(string)$run['partner_external_id']); ?></td><td><?php echo esc_html((string)$run['status']); ?></td><td><?php echo absint($run['imported']); ?></td><td><?php echo absint($run['updated']); ?></td><td><?php echo absint($run['blocked']); ?></td><td><?php echo esc_html((string)$run['message']); ?></td></tr><?php endforeach; endif; ?></tbody></table>
