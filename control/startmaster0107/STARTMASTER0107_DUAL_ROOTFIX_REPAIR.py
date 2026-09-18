@@ -368,9 +368,16 @@ def selftest(repo:Path)->dict:
         except Exception:pass
     try:build_package(ctx,sign,ki,ks,pb,True);raise AssertionError('NEG_TEST_SIGNER')
     except Blocked:pass
-    cp=subprocess.run([sys.executable,str(repo/'control/single-door-boundary/codex_current_action.py'),'selftest'],cwd=repo,text=True,capture_output=True)
-    if cp.returncode:raise Blocked('CURRENT_ACTION_SELFTEST_FAIL:'+cp.stdout+cp.stderr)
-    return {'ok':True,'status':'DUAL_ROOTFIX_POSITIVE_NEGATIVE_PASS','positive':True,'negative':True,'publish_allowed':False}
+    step=load(repo/STEP7_REL);instruction=str(step.get('instruction') or '')
+    for token in (
+        'VERBOTEN für 107007-Repair',
+        'control/single-door-boundary/codex_current_action.py',
+        'control/startmaster0107/STARTMASTER0107_DUAL_ROOTFIX_REPAIR.py',
+        'control/startmaster0107/system4_107007_batch.py',
+        'isolated_system4/controller.py repair',
+    ):
+        if token not in instruction:raise Blocked('SYSTEM4_LEGACY_ROUTE_GUARD_MISSING:'+token)
+    return {'ok':True,'status':'DUAL_ROOTFIX_POSITIVE_NEGATIVE_PASS','positive':1,'negative':1,'legacy_107007_route_forbidden':True,'publish_allowed':False}
 def main(a:list[str])->int:
     try:
         if a==['apply']:o=apply(REPO)
