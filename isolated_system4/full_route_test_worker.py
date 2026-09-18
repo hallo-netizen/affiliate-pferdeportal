@@ -18,8 +18,9 @@ BATCH_REPEAT_SENTENCES=(
     'Für diese Bewertung werden ausschließlich vorhandene Belege ohne Erweiterung verwendet.',
     'Die Auswahl folgt dokumentierten Kriterien und ergänzt keine neuen Informationen.',
     'Alle Hinweise bleiben bei bestätigten Quellen und verändern keine Tatsachen.',
+    'Der Quellenrahmen bleibt unverändert und erhält in diesem technischen Test keine zusätzliche fachliche Aussage.',
 )
-BATCH_REPEAT_ORDINALS=('ersten','zweiten','dritten','vierten','fünften','sechsten')
+BATCH_REPEAT_ORDINALS=('ersten','zweiten','dritten','vierten','fünften','sechsten','siebten')
 BATCH_REPEAT_SEPARATOR_TEMPLATES=(
     'Dieser technische Test betrifft Masken für Pferde. Im {ordinal} Durchgang wird nur die Reihenfolge markiert. Die fachlichen Aussagen des Artikels bleiben unverändert.',
     'Dieser Abschnitt gehört zum Test mit Pellets aus Luzerne. Bei der {ordinal} Prüfung wird lediglich der Ablauf gekennzeichnet. Inhaltliche Angaben werden dabei weder ergänzt noch verändert.',
@@ -101,7 +102,7 @@ def _strip_forced_batch_repetition(body:str,index:int)->str:
         separator=_forced_batch_separator(index,pos)
         repaired=repaired.replace(separator,'',1)
     repaired=re.sub(r'\s{2,}',' ',repaired)
-    if removed<6 or repaired==body:
+    if removed<7 or repaired==body:
         raise RuntimeError('FORCED_BATCH_REPETITION_TEXT_MISSING')
     return repaired
 
