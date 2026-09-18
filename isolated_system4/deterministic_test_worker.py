@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -415,6 +416,35 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
         conclusion_attempts += 1
         if conclusion_attempts > 12:
             raise RuntimeError('TESTWORKER_CONCLUSION_BALANCE_UNREACHABLE')
+
+    # Test-only reproduction of the four real article-0 PPM finding families.
+    # It is opt-in and never active in production. The repair pass rebuilds the
+    # article from the bound contract without receiving any prebuilt final body.
+    if not repair and os.environ.get('SYSTEM4_TEST_REAL7_PPM_MULTIFINDING', '').strip() == '1':
+        duplicate = next(
+            (row for row in sections.get('details', []) if row.startswith('<p ') and '<a ' not in row),
+            None,
+        )
+        if duplicate is None:
+            raise RuntimeError('TESTWORKER_MULTIFINDING_DUPLICATE_SOURCE_MISSING')
+        sections['details'].append(duplicate)
+
+        conclusion_rows = sections.get('conclusion', [])
+        conclusion_heading = [row for row in conclusion_rows if row.startswith('<h2>')]
+        conclusion_paragraphs = [row for row in conclusion_rows if row.startswith('<p ')]
+        if len(conclusion_heading) != 1 or len(conclusion_paragraphs) < 2:
+            raise RuntimeError('TESTWORKER_MULTIFINDING_CONCLUSION_SOURCE_MISSING')
+        sections['conclusion'] = conclusion_heading + conclusion_paragraphs[:2]
+
+        def _flatten_table_cells(value: str) -> str:
+            def repl(match: re.Match[str]) -> str:
+                attrs = match.group(1)
+                inner = match.group(2)
+                trace = ''.join(re.findall(r'(?is)<span\\b[^>]*class="ppm-source-trace"[^>]*></span>', inner))
+                return '<td' + attrs + '>Prüfung Kontrolle Zustand.' + trace + '</td>'
+            return re.sub(r'(?is)<td([^>]*)>(.*?)</td>', repl, value)
+
+        sections[table_block] = [_flatten_table_cells(row) for row in sections.get(table_block, [])]
 
     body = render()
     if not repair and identity['target_keyword'] == 'Bodenprüfung am Pferdeanhänger':
