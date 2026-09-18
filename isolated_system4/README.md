@@ -1,5 +1,7 @@
 # System 4 — Point-0 V2
 
+> **Status-Autorität:** Diese README beschreibt nur die System-4-Architektur. Operativer Stand, erster Blocker und genau eine NEXT ACTION stehen ausschließlich in `control/startmaster0107/CURRENT_STATE.json`, erreichbar über `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`. Diese README ist keine zweite CURRENT-Autorität.
+
 Aktuelle Architektur: **Maschine setzt die Schienen → Codex recherchiert fachlich/schreibt → Maschine prüft und entscheidet PASS/BLOCK.**
 
 Produktionsweg:
