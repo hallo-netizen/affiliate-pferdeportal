@@ -1,0 +1,6 @@
+{
+  "contract": "gold_core_binding_v1",
+  "four_type_gold_core_sha256": "f46e806915a164e678f0d10b19b5e13279fa16c725f3a362c80262aa79ce3b11",
+  "table_contract_sha256": "551a3c547a8d2feaaec7903c634be70af5afd630670f03b78d1774f2592fa8a8",
+  "gold_core_mutation_allowed": false
+}

@@ -1,0 +1,170 @@
+{
+  "contract": "ARTICLE_TYPE_EXTENSION_MANIFEST_V1",
+  "extensions": {
+    "journal": {
+      "activation_policy": "EXPLICIT_JOURNAL_SCOPE_AND_INTENT_ONLY",
+      "aliases": [
+        "Journal",
+        "journal"
+      ],
+      "article_type_id": "journal",
+      "category_policy": {
+        "categories": [
+          {
+            "canonical_plan_slug": "pferde-verstehen",
+            "name": "Pferde Verstehen",
+            "runtime_slugs": [
+              "pferde-verstehen"
+            ]
+          },
+          {
+            "canonical_plan_slug": "pferderassen-und-pferdetypen",
+            "name": "Pferderassen & Pferdetypen",
+            "runtime_slugs": [
+              "pferderassen-und-pferdetypen",
+              "pferderassen-pferdetypen"
+            ]
+          },
+          {
+            "canonical_plan_slug": "recht-finanzen-und-organisation",
+            "name": "Recht, Finanzen & Organisation",
+            "runtime_slugs": [
+              "recht-finanzen-und-organisation",
+              "recht-finanzen-organisation"
+            ]
+          },
+          {
+            "canonical_plan_slug": "reiterleben-und-community",
+            "name": "Reiterleben & Community",
+            "runtime_slugs": [
+              "reiterleben-und-community",
+              "reiterleben-community"
+            ]
+          },
+          {
+            "canonical_plan_slug": "ausbildung-und-reitweisen",
+            "name": "Ausbildung & Reitweisen",
+            "runtime_slugs": [
+              "ausbildung-und-reitweisen",
+              "ausbildung-reitweisen"
+            ]
+          },
+          {
+            "canonical_plan_slug": "pferdeernaehrung-verstehen",
+            "name": "Pferdeernährung verstehen",
+            "runtime_slugs": [
+              "pferdeernaehrung-verstehen"
+            ]
+          },
+          {
+            "canonical_plan_slug": "pferdegesundheit-verstehen",
+            "name": "Pferdegesundheit verstehen",
+            "runtime_slugs": [
+              "pferdegesundheit-verstehen"
+            ]
+          },
+          {
+            "canonical_plan_slug": "alltags-pferde-haltungsformen",
+            "name": "Alltags-Pferde-Haltungsformen",
+            "runtime_slugs": [
+              "alltags-pferde-haltungsformen"
+            ]
+          },
+          {
+            "canonical_plan_slug": "pferdewissen-grundlagen",
+            "name": "Pferdewissen & Grundlagen",
+            "runtime_slugs": [
+              "pferdewissen-grundlagen"
+            ]
+          }
+        ],
+        "taxonomy": "category"
+      },
+      "display_name": "Journal",
+      "evidence_policy": {
+        "allowed_authority_modes": [
+          "SIGNED_GOLD_BINDING",
+          "EXTERNAL_EXPLICIT_JOURNAL_SCOPE"
+        ],
+        "contract": "ARTICLE_TYPE_EXTENSION_EVIDENCE_V1",
+        "required_intent_status": "PROVEN",
+        "required_scope_status": "PROVEN",
+        "same_component_may_not_generate_and_verify_evidence": true
+      },
+      "existing_article_type_decisions_may_change": false,
+      "existing_category_decisions_may_change": false,
+      "existing_title_decisions_may_change": false,
+      "fallback_activation_allowed": false,
+      "gold_bindings": [
+        {
+          "article_type": "Journal",
+          "binding_sha256": "3f21b1fad73a9d9770de811cdcb576c43421e9e4bf2724497ca6342a94ead331",
+          "category_name": "Pferdegesundheit verstehen",
+          "category_slug": "pferdegesundheit-verstehen",
+          "plan_item_key": "journal-age-ab56fa6303e23f77",
+          "plan_slot": "article:701b7543c7c5263ae5dc1ec7",
+          "target_keyword": "Wie alt werden Pferde",
+          "title": "Wie alt werden Pferde?"
+        },
+        {
+          "article_type": "Journal",
+          "binding_sha256": "aa0a5c8ee6773c75725fad038bee1d0232e824d3f85cd192f34291c740516053",
+          "category_name": "Pferdewissen & Grundlagen",
+          "category_slug": "pferdewissen-grundlagen",
+          "plan_item_key": "journal-swim-4a9073258c5643a1",
+          "plan_slot": "article:cf3b0b8f487bf47c0bbbc3f9",
+          "target_keyword": "Können Pferde schwimmen",
+          "title": "Können Pferde schwimmen?"
+        }
+      ],
+      "handoff_policy": {
+        "draft_supported": true,
+        "fields": [
+          "title",
+          "target_keyword",
+          "category",
+          "article_type",
+          "plan_slot"
+        ],
+        "max_per_chunk": 1,
+        "publish_allowed": false,
+        "schema": "EXACT_FIVE_V1"
+      },
+      "inventory_context_sandbox_global_invalidation_allowed": false,
+      "ppm_capabilities": {
+        "category_binding_mode": "JOURNAL_FLAT_SIGNED_REGISTRY_V1",
+        "content_quality_block": "JOURNAL_CONTENT_BLOCK_V1",
+        "type_definition_contract": "contracts/journal-article-type-release-v1.json",
+        "validation_contract_required": "SECTION_REQUIREMENTS_V1"
+      },
+      "self_generated_intent_allowed": false,
+      "title_policy": {
+        "artificial_generator_phrase_forbidden": true,
+        "keyword_staccato_forbidden": true,
+        "mode": "EXISTING_TITLE_PIPELINE_VALIDATE_EXISTING_ONLY",
+        "natural_german_required": true,
+        "phrase_family_repetition_forbidden": true,
+        "question_or_statement_allowed": true,
+        "raw_search_phrase_as_title_allowed": false,
+        "template_spam_forbidden": true
+      }
+    }
+  },
+  "release_policy": {
+    "e2e_pass_required_for_live_release": true,
+    "editorial_pass_required": true,
+    "evidence_producer_must_differ_from_release_authority": true,
+    "manual_override_forbidden": true,
+    "review_never_equals_pass": true,
+    "technical_pass_required": true,
+    "unknown_never_equals_pass": true
+  },
+  "selection_policy": "EXPLICIT_SCOPE_AND_INTENT_ONLY_NO_FALLBACK",
+  "signing": {
+    "algorithm": "Ed25519",
+    "key_id": "ppm679-ed25519-3614e3fc87ba2767",
+    "public_key_b64": "3ivO6TMox5vRbBRq4GvBYP3f0M1raWpEXtW7WI9H+nk="
+  },
+  "status": "SIGNED_ACTIVE",
+  "version": "1.0.0"
+}

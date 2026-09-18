@@ -1,0 +1,11 @@
+{
+  "contract": "KONZEPT0_PPM679_HISTORICAL_CORE_TEST_V1",
+  "status": "PASS",
+  "ppm_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+  "tests_passed": 12,
+  "tests_failed": 0,
+  "textmachine_core_extracted_from_concept0_ppm_only": true,
+  "concept_1_2_3_4_4a_runtime_contact": false,
+  "codex_started": false,
+  "publish_performed": false
+}

@@ -1,0 +1,415 @@
+{
+  "contract": "article_type_templates_v2",
+  "version": "2.0.0",
+  "status": "FOUR_TYPE_GOLD_CORE_BOUND",
+  "types": {
+    "FAQ": {
+      "table": "required",
+      "table_count_exact": 1,
+      "table_fact_trace_required": true,
+      "required_link_roles": [
+        "parent_category",
+        "semantic_related",
+        "further_information"
+      ],
+      "visible_links_exact": 3,
+      "fact_trace_required": true,
+      "all_factual_blocks_require_trace": true,
+      "title_contract": {
+        "keyword_required": true,
+        "colon_forbidden": true,
+        "question_mark": "REQUIRED"
+      },
+      "slug_contract": {
+        "derived_from_title": true
+      },
+      "html_contract": {
+        "body_text_html_free": true,
+        "allowed_tags_from_global": true
+      },
+      "quality_contract": {
+        "conclusion_no_new_untraced_facts": true,
+        "duplicate_block_names_forbidden": true,
+        "topic_specific_special_logic_forbidden": true
+      },
+      "purpose": "Eine konkrete Nutzerfrage direkt, nachvollziehbar und quellengebunden beantworten.",
+      "search_intent": "INFORMATIONAL_DIRECT_QUESTION",
+      "structure_profile": "faq",
+      "boundary": {
+        "is": "eine zentrale Frage mit geordneten Teilantworten",
+        "is_not": [
+          "Auswahlberatung ohne zentrale Frage",
+          "symmetrische Gegenueberstellung mehrerer Optionen",
+          "Pflege- oder Wartungsanleitung"
+        ]
+      },
+      "required_blocks": [
+        "intro",
+        "answer",
+        "details",
+        "checklist",
+        "table",
+        "conclusion",
+        "further_information"
+      ],
+      "required_lists": [
+        "key_answers"
+      ],
+      "fact_trace_required_blocks": [
+        "intro",
+        "questions",
+        "conclusion",
+        "table"
+      ],
+      "conclusion_min_ratio": 0.08,
+      "type_meta_schema": {
+        "required": [
+          "primary_question"
+        ],
+        "fields": {
+          "primary_question": {
+            "type": "string",
+            "min_length": 8
+          }
+        }
+      },
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "production_allowed": false,
+      "certification_evidence": {
+        "contract": "article_type_certification_evidence_v2",
+        "version": "6.7.9",
+        "article_type": "FAQ",
+        "definition_hash": "ffeb6140e694095418ce875bac2978d0bd3da9ed224bd62e45fab7c191dd88ee",
+        "positive_status": "STRUCTURAL_CHECK_OK",
+        "negative_status": "MUTATION_BLOCK_CHECK_OK",
+        "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+        "evidence_hash": "0f965b2173910559c598d30dbc73fd3b7ef84978ae8c7998a313302291c19eb2"
+      }
+    },
+    "Beratung": {
+      "table": "required",
+      "table_count_exact": 1,
+      "table_fact_trace_required": true,
+      "required_link_roles": [
+        "parent_category",
+        "semantic_related",
+        "further_information"
+      ],
+      "visible_links_exact": 3,
+      "fact_trace_required": true,
+      "all_factual_blocks_require_trace": true,
+      "title_contract": {
+        "keyword_required": true,
+        "colon_forbidden": true,
+        "question_mark": "OPTIONAL"
+      },
+      "slug_contract": {
+        "derived_from_title": true
+      },
+      "html_contract": {
+        "body_text_html_free": true,
+        "allowed_tags_from_global": true
+      },
+      "quality_contract": {
+        "conclusion_no_new_untraced_facts": true,
+        "duplicate_block_names_forbidden": true,
+        "topic_specific_special_logic_forbidden": true
+      },
+      "purpose": "Eine Auswahl- oder Handlungsentscheidung anhand nachvollziehbarer Kriterien vorbereiten.",
+      "search_intent": "DECISION_SUPPORT",
+      "structure_profile": "beratung",
+      "boundary": {
+        "is": "eine Entscheidung innerhalb eines Bedarfs anhand gewichteter Kriterien",
+        "is_not": [
+          "reine Einzelfrage ohne Entscheidungslogik",
+          "symmetrischer A/B-Vergleich",
+          "reine Schrittfolge fuer Pflege oder Wartung"
+        ]
+      },
+      "required_blocks": [
+        "intro",
+        "criteria",
+        "decision",
+        "table",
+        "conclusion",
+        "further_information"
+      ],
+      "required_lists": [
+        "criteria"
+      ],
+      "fact_trace_required_blocks": [
+        "intro",
+        "criteria",
+        "decision",
+        "conclusion",
+        "table"
+      ],
+      "conclusion_min_ratio": 0.1,
+      "type_meta_schema": {
+        "required": [
+          "decision_goal",
+          "decision_criteria"
+        ],
+        "fields": {
+          "decision_goal": {
+            "type": "string",
+            "min_length": 8
+          },
+          "decision_criteria": {
+            "type": "list",
+            "min_items": 2,
+            "unique_items": true
+          }
+        }
+      },
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "production_allowed": false,
+      "certification_evidence": {
+        "contract": "article_type_certification_evidence_v2",
+        "version": "6.7.9",
+        "article_type": "Beratung",
+        "definition_hash": "c258983d66c4fd0233fd56aa10384eca5fd6ce0c72775461842020d3e9a1ca69",
+        "positive_status": "STRUCTURAL_CHECK_OK",
+        "negative_status": "MUTATION_BLOCK_CHECK_OK",
+        "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+        "evidence_hash": "c48d4e67ada0de41fbd524a0b58faf03f5b73832e398385379c9237c261b1bdc"
+      }
+    },
+    "Vergleich": {
+      "table": "required",
+      "table_count_exact": 1,
+      "table_fact_trace_required": true,
+      "required_link_roles": [
+        "parent_category",
+        "semantic_related",
+        "further_information"
+      ],
+      "visible_links_exact": 3,
+      "fact_trace_required": true,
+      "all_factual_blocks_require_trace": true,
+      "title_contract": {
+        "keyword_required": true,
+        "colon_forbidden": true,
+        "question_mark": "OPTIONAL"
+      },
+      "slug_contract": {
+        "derived_from_title": true
+      },
+      "html_contract": {
+        "body_text_html_free": true,
+        "allowed_tags_from_global": true
+      },
+      "quality_contract": {
+        "conclusion_no_new_untraced_facts": true,
+        "duplicate_block_names_forbidden": true,
+        "topic_specific_special_logic_forbidden": true
+      },
+      "purpose": "Mindestens zwei klar benannte Optionen anhand derselben Kriterien ausgewogen gegenueberstellen.",
+      "search_intent": "COMPARATIVE_DECISION",
+      "structure_profile": "vergleich",
+      "boundary": {
+        "is": "symmetrische Gegenueberstellung von mindestens zwei Optionen mit Vor- und Nachteilen je Option",
+        "is_not": [
+          "Kriterienberatung innerhalb nur einer Option",
+          "einseitige Produktbeschreibung",
+          "Pflege- oder Wartungsanleitung"
+        ]
+      },
+      "required_blocks": [
+        "intro",
+        "options",
+        "comparison",
+        "table",
+        "conclusion",
+        "further_information"
+      ],
+      "required_lists": [
+        "advantages",
+        "disadvantages"
+      ],
+      "fact_trace_required_blocks": [
+        "intro",
+        "options",
+        "comparison",
+        "conclusion",
+        "table"
+      ],
+      "conclusion_min_ratio": 0.09,
+      "type_meta_schema": {
+        "required": [
+          "comparison_targets",
+          "comparison_criteria"
+        ],
+        "fields": {
+          "comparison_targets": {
+            "type": "list",
+            "min_items": 2,
+            "unique_items": true
+          },
+          "comparison_criteria": {
+            "type": "list",
+            "min_items": 2,
+            "unique_items": true
+          }
+        }
+      },
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "production_allowed": false,
+      "certification_evidence": {
+        "contract": "article_type_certification_evidence_v2",
+        "version": "6.7.9",
+        "article_type": "Vergleich",
+        "definition_hash": "e930ef71ac412ef2292e4676c2d385177f3975d7feb573f7cf23342e1e6937fb",
+        "positive_status": "STRUCTURAL_CHECK_OK",
+        "negative_status": "MUTATION_BLOCK_CHECK_OK",
+        "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+        "evidence_hash": "f489ef864448c9c0e129b3364cc5479bcc46798aabffab18709e04ea414d48cf"
+      }
+    },
+    "Pflege": {
+      "table": "required",
+      "table_count_exact": 1,
+      "table_fact_trace_required": true,
+      "required_link_roles": [
+        "parent_category",
+        "semantic_related",
+        "further_information"
+      ],
+      "visible_links_exact": 3,
+      "fact_trace_required": true,
+      "all_factual_blocks_require_trace": true,
+      "title_contract": {
+        "keyword_required": true,
+        "colon_forbidden": true,
+        "question_mark": "OPTIONAL"
+      },
+      "slug_contract": {
+        "derived_from_title": true
+      },
+      "html_contract": {
+        "body_text_html_free": true,
+        "allowed_tags_from_global": true
+      },
+      "quality_contract": {
+        "conclusion_no_new_untraced_facts": true,
+        "duplicate_block_names_forbidden": true,
+        "topic_specific_special_logic_forbidden": true
+      },
+      "purpose": "Pflege, Reinigung, Wartung oder Werterhalt als sichere, nachvollziehbare Schrittfolge erklaeren.",
+      "search_intent": "PROCEDURAL_MAINTENANCE",
+      "structure_profile": "pflege",
+      "boundary": {
+        "is": "geordnete Pflege- oder Wartungsprozedur mit Risiken und Schutzmassnahmen",
+        "is_not": [
+          "Kaufberatung",
+          "symmetrischer Vergleich",
+          "reine Einzelfrage ohne Prozess"
+        ]
+      },
+      "required_blocks": [
+        "intro",
+        "steps",
+        "risks",
+        "table",
+        "conclusion",
+        "further_information"
+      ],
+      "required_lists": [
+        "steps",
+        "risks"
+      ],
+      "fact_trace_required_blocks": [
+        "intro",
+        "steps",
+        "risks",
+        "conclusion",
+        "table"
+      ],
+      "conclusion_min_ratio": 0.09,
+      "type_meta_schema": {
+        "required": [
+          "procedure_goal",
+          "procedure_steps",
+          "risk_controls"
+        ],
+        "fields": {
+          "procedure_goal": {
+            "type": "string",
+            "min_length": 8
+          },
+          "procedure_steps": {
+            "type": "list",
+            "min_items": 2,
+            "unique_items": true
+          },
+          "risk_controls": {
+            "type": "list",
+            "min_items": 1,
+            "unique_items": true
+          }
+        }
+      },
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "production_allowed": false,
+      "certification_evidence": {
+        "contract": "article_type_certification_evidence_v2",
+        "version": "6.7.9",
+        "article_type": "Pflege",
+        "definition_hash": "3ca24b73dc062455b6fb7b689e1301fe642649bacc0a78513fa56e0846d1458f",
+        "positive_status": "STRUCTURAL_CHECK_OK",
+        "negative_status": "MUTATION_BLOCK_CHECK_OK",
+        "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+        "evidence_hash": "c0f65f8312f0b5f579ef7ecefbe19e746207ad2a261992429a3642e872f7fb99"
+      }
+    }
+  },
+  "global": {
+    "allowed_html_tags": [
+      "p",
+      "h2",
+      "h3",
+      "ul",
+      "ol",
+      "li",
+      "table",
+      "thead",
+      "tbody",
+      "tr",
+      "th",
+      "td",
+      "a",
+      "strong",
+      "em",
+      "div",
+      "small"
+    ],
+    "links_relative_only": true,
+    "body_text_html_free": true,
+    "fact_trace_required": true,
+    "visible_links_exact": 3,
+    "required_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "table_count_exact": 1,
+    "title_colon_forbidden": true
+  },
+  "certification_policy": {
+    "allowed_statuses": [
+      "DRAFT",
+      "CANDIDATE",
+      "CERTIFIED",
+      "RETIRED"
+    ],
+    "production_requires": "CERTIFIED",
+    "missing_status_means": "NOT_CERTIFIED",
+    "technical_pipeline_testing_does_not_certify_type": true,
+    "explicit_evidence_required": true,
+    "definition_hash_required": true,
+    "evidence_hash_required": true,
+    "separate_server_registry_test_required": true
+  },
+  "certified_for_runtime": "6.7.7",
+  "wave2_quarantine_notice": "Definitions changed under Wave 2 and are not production-certified until independent review and later recertification."
+}

@@ -1,0 +1,38 @@
+{
+  "contract": "production_plan_v4",
+  "version": "4.0.0",
+  "required_plugin_version": "6.7.9",
+  "allowed_top_fields": [
+    "contract",
+    "plan_contract_version",
+    "required_plugin_version",
+    "plan_id",
+    "created_at",
+    "gold_core_binding",
+    "contract_hashes",
+    "items"
+  ],
+  "allowed_item_fields": [
+    "plan_item_key",
+    "article_type",
+    "source_order_id",
+    "source_snapshot_id",
+    "topic",
+    "search_intent",
+    "target_keyword",
+    "source_hashes",
+    "contract_hashes",
+    "gold_core_binding",
+    "runtime_order",
+    "canonical_article"
+  ],
+  "operational_identifier_fields_forbidden": [
+    "batch_id",
+    "batch_article_id",
+    "fact_pack_id",
+    "skeleton_id",
+    "reservation_id",
+    "workspace_id",
+    "skeleton_token"
+  ]
+}

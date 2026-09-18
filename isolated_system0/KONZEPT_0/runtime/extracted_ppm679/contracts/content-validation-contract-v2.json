@@ -1,0 +1,107 @@
+{
+  "contract": "CONTENT_VALIDATION_CONTRACT_V2",
+  "dispatch": {
+    "fallback": false,
+    "production_plan_v4": "PPM679_LEGACY_V1",
+    "production_plan_v5": "SECTION_REQUIREMENTS_V1",
+    "unknown_or_missing_v5_version": "BLOCKED"
+  },
+  "error_codes": [
+    "BLOCKED_VALIDATION_CONTRACT_VERSION_MISSING",
+    "BLOCKED_VALIDATION_CONTRACT_VERSION_UNKNOWN",
+    "BLOCKED_SECTION_REQUIREMENTS_HASH_MISMATCH",
+    "BLOCKED_CONTENT_REQUIRED_SECTION_MISSING",
+    "BLOCKED_CONTENT_SECTION_DUPLICATE",
+    "BLOCKED_CONTENT_SECTION_ORDER",
+    "BLOCKED_CONTENT_REQUIRED_TABLE_MISSING",
+    "BLOCKED_CONTENT_FORBIDDEN_TABLE_PRESENT",
+    "BLOCKED_CONTENT_TABLE_STRUCTURE",
+    "BLOCKED_CONTENT_BOUND_LINK_MISSING",
+    "BLOCKED_CONTENT_UNBOUND_INTERNAL_LINK"
+  ],
+  "legacy_path": {
+    "behavior": "UNCHANGED",
+    "global_minimums": {
+      "h2": 4,
+      "paragraphs": 16,
+      "table_body_rows": 4,
+      "words": 750
+    },
+    "required_markup": [
+      "data-block",
+      "comparison-table",
+      "ppm-source-trace"
+    ],
+    "visible_link_count": 2
+  },
+  "plugin_version": "6.7.9",
+  "prohibited": [
+    "heuristic format detection",
+    "v5 to v4 fallback",
+    "v4 to v5 fallback",
+    "silent HTML mutation",
+    "legacy article migration"
+  ],
+  "schema_version": "2.0",
+  "section_requirements_v1": {
+    "fact_binding": {
+      "article_type_match": true,
+      "attribute": "data-fact-ids",
+      "claim_status": "FULLY_SUPPORTED",
+      "numeric_claims": "must occur in referenced fact text",
+      "required_fact_coverage": "100 percent of source_id values selected by section_requirements",
+      "runtime_order_allowed_fact_ids_is_upper_bound": true,
+      "unknown_id": "BLOCKED"
+    },
+    "factual_units": [
+      "p",
+      "li",
+      "th",
+      "td"
+    ],
+    "hash_binding": "PPM679_Diagnostic::stable_hash(section_requirements)",
+    "links": {
+      "each_bound_pair": "at least once in a section with non-empty link_roles",
+      "matching": "exact href plus exact anchor",
+      "order_relevant": false,
+      "repetition_of_bound_pair": true,
+      "unbound_internal_link": "BLOCKED"
+    },
+    "quality": {
+      "duplicate_sentence_ratio_max": 0.02,
+      "first_section_paragraph_pair_similarity_max": 0.55,
+      "global_word_paragraph_h2_table_floors": "report only"
+    },
+    "required_canonical_article_fields": [
+      "validation_contract_version",
+      "section_requirements_hash"
+    ],
+    "required_item_fields": [
+      "validation_contract_version",
+      "section_requirements",
+      "section_requirements_hash"
+    ],
+    "sections": {
+      "fact_bound_unit_rule": "at least one fact-bound visible unit in every required section",
+      "heading_rule": "exactly one non-empty h2 when heading_required=true",
+      "list_rule": "at least one li when list_roles is non-empty",
+      "paragraph_rule": "at least one non-empty p when paragraph_required=true",
+      "selector": "section[data-section-id]",
+      "sequence": "exactly equals sections sorted by order",
+      "unique_ids": true
+    },
+    "tables": {
+      "cells_fact_bound": true,
+      "css_class_relevant": false,
+      "forbidden_policy": "no table in FORBIDDEN section",
+      "required_policy": "exactly one table in REQUIRED section",
+      "structure": {
+        "minimum_body_rows": 2,
+        "minimum_columns": 2,
+        "tbody": true,
+        "thead": true
+      }
+    }
+  },
+  "status": "QUARANTINE_NOT_ACTIVE"
+}

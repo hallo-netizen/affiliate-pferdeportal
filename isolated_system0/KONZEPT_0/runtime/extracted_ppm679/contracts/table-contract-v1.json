@@ -1,0 +1,17 @@
+{
+  "contract": "canonical_table_contract_v1",
+  "version": "1.1.0",
+  "required_plugin": "canonical-table-contract-v1/canonical-table-contract-v1.php",
+  "required_plugin_version": "1.1.0",
+  "selector": ".system-129-table.comparison-table",
+  "rules": {
+    "transparent_table_and_cells": true,
+    "no_outer_lines": true,
+    "vertical_lines_between_columns_only": true,
+    "horizontal_lines_between_rows_only": true,
+    "header_separator_px": 2,
+    "other_inner_lines_px": 1,
+    "central_line_color_variable": "--tabellen-linienfarbe"
+  },
+  "css": "body .system-129-table.comparison-table,body .system-129-table.comparison-table th,body .system-129-table.comparison-table td{background:transparent!important}.system-129-table.comparison-table{border:0!important;outline:0!important;box-shadow:none!important;border-collapse:collapse}.system-129-table.comparison-table th,.system-129-table.comparison-table td{border:0;border-right:1px solid var(--tabellen-linienfarbe);border-bottom:1px solid var(--tabellen-linienfarbe)}.system-129-table.comparison-table th{border-bottom-width:2px}.system-129-table.comparison-table th:last-child,.system-129-table.comparison-table td:last-child{border-right:0}.system-129-table.comparison-table tr:last-child td{border-bottom:0}"
+}

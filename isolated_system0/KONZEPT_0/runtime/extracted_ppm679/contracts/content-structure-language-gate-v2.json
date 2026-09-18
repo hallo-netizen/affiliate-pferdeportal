@@ -1,0 +1,215 @@
+{
+  "contract": "content_structure_language_gate_v2",
+  "version": "2.0.0-wave2-quarantine",
+  "status": "QUARANTINE_CANDIDATE_NOT_RELEASED",
+  "visible_test_marker_regex": "\\[LT[0-9A-Z-]{6,}\\]",
+  "intro": {
+    "required_block": "intro",
+    "minimum_words": 30,
+    "maximum_words": 100,
+    "heading_forbidden": true,
+    "first_visible_element": "p"
+  },
+  "headings": {
+    "minimum_words": 2,
+    "maximum_words": 14,
+    "minimum_words_between_headings": 28,
+    "near_duplicate_token_similarity": 0.72,
+    "reserved_headings": [
+      "Fazit",
+      "Weiterführende Informationen"
+    ],
+    "generic_or_technical_headings": [
+      "Die kurze Antwort",
+      "Die wichtigsten Teilfragen",
+      "Antworten und nächste Schritte im Überblick",
+      "Wann die Antwort noch nicht belastbar ist",
+      "Antworten im Überblick",
+      "Nächste Schritte",
+      "Überblick",
+      "Entscheidungsmatrix",
+      "Pflegeablauf im Überblick",
+      "Die Antwort aus Anhängelast ableiten"
+    ],
+    "forbidden_fragments": [
+      "antwort ableiten",
+      "antworten und nächste schritte",
+      "nicht belastbar",
+      "prüfpunkte",
+      "im überblick",
+      "ausgangsfrage besteht",
+      "entscheidung ableiten",
+      "teilfragen"
+    ],
+    "stopwords": [
+      "der",
+      "die",
+      "das",
+      "den",
+      "dem",
+      "des",
+      "ein",
+      "eine",
+      "einer",
+      "eines",
+      "und",
+      "oder",
+      "mit",
+      "ohne",
+      "für",
+      "von",
+      "vor",
+      "nach",
+      "bei",
+      "im",
+      "in",
+      "am",
+      "an",
+      "auf",
+      "aus",
+      "zu",
+      "zum",
+      "zur",
+      "ist",
+      "sind",
+      "wird",
+      "werden",
+      "was",
+      "wie",
+      "wann",
+      "warum",
+      "welche",
+      "welcher",
+      "welches"
+    ]
+  },
+  "faq": {
+    "direct_answer_required": true,
+    "direct_answer_minimum_words": 12,
+    "forbidden_meta_openings": [
+      "die ausgangsfrage besteht",
+      "die frage lässt sich",
+      "zunächst muss geprüft werden",
+      "eine belastbare antwort",
+      "die kurze antwort lautet"
+    ]
+  },
+  "lists": {
+    "minimum_lists": 1,
+    "minimum_items_in_one_list": 4
+  },
+  "links": {
+    "required_count": 3,
+    "required_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "further_information_block": "further_information",
+    "all_links_must_be_in_distinct_blocks": true,
+    "relative_internal_only": true
+  },
+  "conclusion": {
+    "required_block": "conclusion",
+    "minimum_paragraphs": 2,
+    "minimum_ratio_by_type": {
+      "FAQ": 0.08,
+      "Beratung": 0.1,
+      "Vergleich": 0.09,
+      "Pflege": 0.09
+    }
+  },
+  "table": {
+    "required_block": "table",
+    "exact_count": 1,
+    "minimum_body_rows": 4,
+    "minimum_columns": 3,
+    "minimum_unique_content_token_ratio": 0.18,
+    "generic_headings_forbidden": [
+      "Tabelle",
+      "Überblick",
+      "Zusammenfassung",
+      "Daten",
+      "Informationen"
+    ],
+    "generic_column_headings_forbidden": [
+      "Punkt",
+      "Wert",
+      "Info",
+      "Information",
+      "Details",
+      "Aspekt"
+    ]
+  },
+  "language_evidence": {
+    "required_engine": "LanguageTool 6.8 / Bestand 43",
+    "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+    "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "unresolved_findings_exact": 0,
+    "human_exception_required_fields": [
+      "exception_id",
+      "exact_rule_id",
+      "exact_text",
+      "reason",
+      "approved_by_human_user",
+      "reference_file",
+      "reference_hash"
+    ],
+    "return_code_exact": 0,
+    "raw_finding_count_exact": 0,
+    "checked_text_must_match_visible_text": true,
+    "raw_report_json_required": true
+  },
+  "wordpress_binding": {
+    "internal_marker_meta_key": "_ppm679_test_marker",
+    "category_id_minimum": 1,
+    "forbidden_category_slugs": [
+      "uncategorized",
+      "allgemein",
+      "standard"
+    ]
+  },
+  "required_blocks_by_type": {
+    "FAQ": [
+      "intro",
+      "answer",
+      "details",
+      "checklist",
+      "table",
+      "conclusion",
+      "further_information"
+    ],
+    "Beratung": [
+      "intro",
+      "criteria",
+      "decision",
+      "table",
+      "conclusion",
+      "further_information"
+    ],
+    "Vergleich": [
+      "intro",
+      "options",
+      "comparison",
+      "table",
+      "conclusion",
+      "further_information"
+    ],
+    "Pflege": [
+      "intro",
+      "steps",
+      "risks",
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "known_language_regression_phrases": [
+    "die ausgangsfrage besteht aus mehreren eigenständigen prüfpunkten",
+    "das ergebnis grenzt normale veränderung von einem behandlungsbedürftigen befund ab",
+    "vor dem fortsetzen muss dieser arbeitsschritt nachvollziehbar beendet sein",
+    "ohne frühere ergebnisse zu überbewerten",
+    "die vorletzte kontrolle wird nicht übersprungen"
+  ],
+  "scope_limit": "Deterministic structural, binding and LanguageTool-evidence gate. It does not replace the later independent editorial matrix or user visual acceptance."
+}

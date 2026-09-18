@@ -1,0 +1,11 @@
+{
+  "contract": "gold_core_tolerances_v1",
+  "tolerance_definition": {
+    "approval_evidence_id": "",
+    "approved_by_human_user": false,
+    "metrics": [],
+    "scope_limit": "No tolerance value is invented in Wave 3. Positive tests use isolated fixture-only tolerances.",
+    "status": "NOT_APPROVED_NO_PRODUCTION_TOLERANCES"
+  },
+  "tolerance_definition_hash": "4535a46ec8216a6611e5f5fbdc0e4cb055fc3b6114bb3a3b2d034f5347e66b5b"
+}

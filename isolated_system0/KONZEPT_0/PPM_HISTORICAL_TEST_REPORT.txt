@@ -1,0 +1,635 @@
+=== tests/test-wave1-content-validator-integration.php ===
+{
+    "contract": "wave1_content_validator_integration_report_v2",
+    "status": "PASS",
+    "items": {
+        "FAQ": {
+            "content_hash": "bb9db799c716002279a7807329d4ad02c37b34ab0edb1e023dc48b0c69a7460b",
+            "known_error_gate_status": "BLOCKED",
+            "fail_closed_aggregate_status": "BLOCKED",
+            "error_codes": [
+                "BLOCKED_CONTENT_VISIBLE_LINK_COUNT",
+                "BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING",
+                "BLOCKED_CONTENT_INTERNAL_LINK_ROLE",
+                "BLOCKED_CONTENT_FACT_REF_UNKNOWN",
+                "BLOCKED_CONTENT_TRACE_FACT_BINDING",
+                "BLOCKED_CONTENT_FACT_PACK_COVERAGE",
+                "BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT",
+                "BLOCKED_KNOWN_BODY_H1",
+                "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+                "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+                "BLOCKED_KNOWN_GENERIC_HEADING",
+                "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+                "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+                "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+                "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END",
+                "BLOCKED_KNOWN_SHORT_CONCLUSION",
+                "BLOCKED_KNOWN_REGRESSION_PATTERN",
+                "BLOCKED_WAVE2_QUALITY_BINDING_MISSING",
+                "BLOCKED_WAVE2_QUALITY_BINDING_HASH",
+                "BLOCKED_WAVE2_BODY_H1",
+                "BLOCKED_WAVE2_TITLE_REPEATED",
+                "BLOCKED_WAVE2_INTERNAL_MARKER_MISSING",
+                "BLOCKED_WAVE2_VISIBLE_TEST_MARKER",
+                "BLOCKED_WAVE2_ARTICLE_TYPE_BLOCKS",
+                "BLOCKED_WAVE2_INTRO_STRUCTURE",
+                "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+                "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+                "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS",
+                "BLOCKED_WAVE2_FAQ_DIRECT_ANSWER",
+                "BLOCKED_WAVE2_REQUIRED_LIST",
+                "BLOCKED_WAVE2_LINK_REGISTRY_HASH",
+                "BLOCKED_WAVE2_INTERNAL_LINK_COUNT",
+                "BLOCKED_WAVE2_INTERNAL_LINK_ROLE_MISSING",
+                "BLOCKED_WAVE2_RUNTIME_LINK_ROLE",
+                "BLOCKED_WAVE2_CONCLUSION_BALANCE",
+                "BLOCKED_WAVE2_TABLE_VALUE",
+                "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+                "BLOCKED_WAVE2_WORDPRESS_CATEGORY",
+                "BLOCKED_WAVE2_KNOWN_UNNATURAL_LANGUAGE"
+            ]
+        },
+        "Beratung": {
+            "content_hash": "1e9530af164d4fa7bfc9b8c526b312237398e0512225231ef349215521fa695f",
+            "known_error_gate_status": "BLOCKED",
+            "fail_closed_aggregate_status": "BLOCKED",
+            "error_codes": [
+                "BLOCKED_CONTENT_VISIBLE_LINK_COUNT",
+                "BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING",
+                "BLOCKED_CONTENT_INTERNAL_LINK_ROLE",
+                "BLOCKED_CONTENT_FACT_REF_UNKNOWN",
+                "BLOCKED_CONTENT_TRACE_FACT_BINDING",
+                "BLOCKED_CONTENT_FACT_PACK_COVERAGE",
+                "BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT",
+                "BLOCKED_KNOWN_BODY_H1",
+                "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+                "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+                "BLOCKED_KNOWN_GENERIC_HEADING",
+                "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+                "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+                "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+                "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END",
+                "BLOCKED_KNOWN_SHORT_CONCLUSION",
+                "BLOCKED_KNOWN_REGRESSION_PATTERN",
+                "BLOCKED_WAVE2_QUALITY_BINDING_MISSING",
+                "BLOCKED_WAVE2_QUALITY_BINDING_HASH",
+                "BLOCKED_WAVE2_BODY_H1",
+                "BLOCKED_WAVE2_TITLE_REPEATED",
+                "BLOCKED_WAVE2_INTERNAL_MARKER_MISSING",
+                "BLOCKED_WAVE2_VISIBLE_TEST_MARKER",
+                "BLOCKED_WAVE2_ARTICLE_TYPE_BLOCKS",
+                "BLOCKED_WAVE2_INTRO_STRUCTURE",
+                "BLOCKED_WAVE2_HEADING_LENGTH",
+                "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+                "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+                "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS",
+                "BLOCKED_WAVE2_REQUIRED_LIST",
+                "BLOCKED_WAVE2_LINK_REGISTRY_HASH",
+                "BLOCKED_WAVE2_INTERNAL_LINK_COUNT",
+                "BLOCKED_WAVE2_INTERNAL_LINK_ROLE_MISSING",
+                "BLOCKED_WAVE2_RUNTIME_LINK_ROLE",
+                "BLOCKED_WAVE2_CONCLUSION_BALANCE",
+                "BLOCKED_WAVE2_TABLE_VALUE",
+                "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+                "BLOCKED_WAVE2_WORDPRESS_CATEGORY"
+            ]
+        },
+        "Vergleich": {
+            "content_hash": "fafe45287e2d7f50f07d4d962c84145200203b6b47758e7c80e3baf9b815b88b",
+            "known_error_gate_status": "BLOCKED",
+            "fail_closed_aggregate_status": "BLOCKED",
+            "error_codes": [
+                "BLOCKED_CONTENT_VISIBLE_LINK_COUNT",
+                "BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING",
+                "BLOCKED_CONTENT_INTERNAL_LINK_ROLE",
+                "BLOCKED_CONTENT_FACT_REF_UNKNOWN",
+                "BLOCKED_CONTENT_TRACE_FACT_BINDING",
+                "BLOCKED_CONTENT_FACT_PACK_COVERAGE",
+                "BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT",
+                "BLOCKED_KNOWN_BODY_H1",
+                "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+                "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+                "BLOCKED_KNOWN_GENERIC_HEADING",
+                "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+                "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+                "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+                "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END",
+                "BLOCKED_KNOWN_SHORT_CONCLUSION",
+                "BLOCKED_WAVE2_QUALITY_BINDING_MISSING",
+                "BLOCKED_WAVE2_QUALITY_BINDING_HASH",
+                "BLOCKED_WAVE2_BODY_H1",
+                "BLOCKED_WAVE2_TITLE_REPEATED",
+                "BLOCKED_WAVE2_INTERNAL_MARKER_MISSING",
+                "BLOCKED_WAVE2_VISIBLE_TEST_MARKER",
+                "BLOCKED_WAVE2_ARTICLE_TYPE_BLOCKS",
+                "BLOCKED_WAVE2_INTRO_STRUCTURE",
+                "BLOCKED_WAVE2_HEADING_LENGTH",
+                "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+                "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS",
+                "BLOCKED_WAVE2_REQUIRED_LIST",
+                "BLOCKED_WAVE2_LINK_REGISTRY_HASH",
+                "BLOCKED_WAVE2_INTERNAL_LINK_COUNT",
+                "BLOCKED_WAVE2_INTERNAL_LINK_ROLE_MISSING",
+                "BLOCKED_WAVE2_RUNTIME_LINK_ROLE",
+                "BLOCKED_WAVE2_CONCLUSION_BALANCE",
+                "BLOCKED_WAVE2_TABLE_VALUE",
+                "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+                "BLOCKED_WAVE2_WORDPRESS_CATEGORY"
+            ]
+        },
+        "Pflege": {
+            "content_hash": "59588e8dac90cc0633f1c80e7de1b51fdb981d9ad527db614e5b9ff98865e444",
+            "known_error_gate_status": "BLOCKED",
+            "fail_closed_aggregate_status": "BLOCKED",
+            "error_codes": [
+                "BLOCKED_CONTENT_VISIBLE_LINK_COUNT",
+                "BLOCKED_CONTENT_REQUIRED_BLOCK_MISSING",
+                "BLOCKED_CONTENT_INTERNAL_LINK_ROLE",
+                "BLOCKED_CONTENT_FACT_REF_UNKNOWN",
+                "BLOCKED_CONTENT_TRACE_FACT_BINDING",
+                "BLOCKED_CONTENT_FACT_PACK_COVERAGE",
+                "BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT",
+                "BLOCKED_KNOWN_BODY_H1",
+                "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+                "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+                "BLOCKED_KNOWN_GENERIC_HEADING",
+                "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+                "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+                "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+                "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END",
+                "BLOCKED_KNOWN_SHORT_CONCLUSION",
+                "BLOCKED_KNOWN_REGRESSION_PATTERN",
+                "BLOCKED_WAVE2_QUALITY_BINDING_MISSING",
+                "BLOCKED_WAVE2_QUALITY_BINDING_HASH",
+                "BLOCKED_WAVE2_BODY_H1",
+                "BLOCKED_WAVE2_TITLE_REPEATED",
+                "BLOCKED_WAVE2_INTERNAL_MARKER_MISSING",
+                "BLOCKED_WAVE2_VISIBLE_TEST_MARKER",
+                "BLOCKED_WAVE2_ARTICLE_TYPE_BLOCKS",
+                "BLOCKED_WAVE2_INTRO_STRUCTURE",
+                "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+                "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+                "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS",
+                "BLOCKED_WAVE2_REQUIRED_LIST",
+                "BLOCKED_WAVE2_LINK_REGISTRY_HASH",
+                "BLOCKED_WAVE2_INTERNAL_LINK_COUNT",
+                "BLOCKED_WAVE2_INTERNAL_LINK_ROLE_MISSING",
+                "BLOCKED_WAVE2_RUNTIME_LINK_ROLE",
+                "BLOCKED_WAVE2_CONCLUSION_BALANCE",
+                "BLOCKED_WAVE2_TABLE_VALUE",
+                "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+                "BLOCKED_WAVE2_WORDPRESS_CATEGORY",
+                "BLOCKED_WAVE2_KNOWN_UNNATURAL_LANGUAGE"
+            ]
+        }
+    }
+}
+RESULT=PASS
+=== tests/test-wave2-content-structure-language-gate.php ===
+{
+    "contract": "wave2_content_structure_language_positive_report_v1",
+    "status": "PASS",
+    "article_type": "FAQ",
+    "content_hash": "694ab950bd85e61ce82b838225c1b53c080a76e6fe82ffa61f48f8355a1a47f2",
+    "language_evidence_hash": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+    "gate_status": "PASS",
+    "checks": {
+        "contract": "content_structure_language_gate_v2",
+        "version": "6.7.9-wave2-quarantine",
+        "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+        "content_hash": "694ab950bd85e61ce82b838225c1b53c080a76e6fe82ffa61f48f8355a1a47f2",
+        "article_type": "FAQ",
+        "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+        "quality_binding_hash": "379bfb8c074d15dd9190496fd7583d61bdaba53bba7a7ccd7556c6482d87e98e",
+        "body_h1_count": 0,
+        "title_repeated_in_body": false,
+        "internal_test_marker_valid": true,
+        "internal_test_marker_visible": false,
+        "section_blocks": [
+            "intro",
+            "answer",
+            "details",
+            "checklist",
+            "table",
+            "conclusion",
+            "further_information"
+        ],
+        "required_blocks": [
+            "intro",
+            "answer",
+            "details",
+            "checklist",
+            "table",
+            "conclusion",
+            "further_information"
+        ],
+        "intro_word_count": 42,
+        "intro_starts_with_paragraph": true,
+        "intro_heading_count": 0,
+        "heading_count": 6,
+        "generic_heading_hits": [],
+        "intent_heading_misses": [],
+        "near_duplicate_headings": [],
+        "heading_spacing_errors": [],
+        "faq_direct_answer_bound": true,
+        "faq_intro_starts_with_direct_answer": true,
+        "faq_direct_answer_word_count": 16,
+        "faq_meta_opening_hit": "",
+        "list_count": 1,
+        "maximum_list_items": 4,
+        "visible_internal_links": [
+            {
+                "href": "/transport-pferdeanhaenger/",
+                "anchor": "Kategorie Pferdetransport und Pferdeanhänger",
+                "block": "answer"
+            },
+            {
+                "href": "/pferdeanhaenger-beladen/",
+                "anchor": "Pferdeanhänger richtig beladen",
+                "block": "details"
+            },
+            {
+                "href": "/pferdeanhaenger-sicherheit/",
+                "anchor": "Sicherheitskontrolle am Pferdeanhänger",
+                "block": "further_information"
+            }
+        ],
+        "portal_link_registry_hash": "d587f87d1f80f5450d2ce81928d5c9ee927954b025c206994259c77ebb7182be",
+        "resolved_link_roles": {
+            "parent_category": {
+                "href": "/transport-pferdeanhaenger/",
+                "anchor": "Kategorie Pferdetransport und Pferdeanhänger",
+                "block": "answer"
+            },
+            "semantic_related": {
+                "href": "/pferdeanhaenger-beladen/",
+                "anchor": "Pferdeanhänger richtig beladen",
+                "block": "details"
+            },
+            "further_information": {
+                "href": "/pferdeanhaenger-sicherheit/",
+                "anchor": "Sicherheitskontrolle am Pferdeanhänger",
+                "block": "further_information"
+            }
+        },
+        "conclusion_word_count": 94,
+        "conclusion_ratio": 0.12051282051282051,
+        "conclusion_paragraph_count": 2,
+        "table_count": 1,
+        "table_heading": "Fahrzeugdaten und Pferdeanhänger sinnvoll vergleichen",
+        "table_headers": [
+            "Prüfangabe",
+            "Verlässliche Fundstelle",
+            "Konkrete Bedeutung für die Fahrt",
+            "Typischer Stoppgrund"
+        ],
+        "table_body_rows": 4,
+        "table_columns": 4,
+        "table_unique_content_token_ratio": 0.4126984126984127,
+        "table_value_statement": "Die Tabelle verbindet jede Prüfangabe mit Fundstelle, Bedeutung und eindeutigem Stoppgrund.",
+        "language_evidence_valid": true,
+        "language_checked_text_sha256": "c9a4353c27d042c3bba3046b6be583450f1f6a5bad33a3185cc4341c00adc72e",
+        "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+        "language_raw_finding_count": 0,
+        "language_unresolved_finding_count": 0,
+        "language_exception_errors": [],
+        "wordpress_category": {
+            "id": 27,
+            "slug": "pferdetransport",
+            "name": "Pferdetransport"
+        },
+        "wordpress_category_binding_mode": "LEGACY_NUMERIC_BOUND",
+        "wordpress_category_valid": true,
+        "known_language_regression_hits": [],
+        "html_balance": {
+            "ok": true,
+            "unclosed": [],
+            "unexpected_closing": []
+        },
+        "table_tag_balance": true
+    }
+}
+RESULT=PASS
+=== tests/test-wave2-content-mutations.php ===
+{
+    "contract": "wave2_content_mutation_report_v1",
+    "status": "PASS",
+    "mutation_count": 21,
+    "items": {
+        "M01_BODY_H1": {
+            "expected_error_code": "BLOCKED_WAVE2_BODY_H1",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_BODY_H1"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M02_TITLE_REPEAT": {
+            "expected_error_code": "BLOCKED_WAVE2_TITLE_REPEATED",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_TITLE_REPEATED"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M03_INTRO_HEADING": {
+            "expected_error_code": "BLOCKED_WAVE2_INTRO_STRUCTURE",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_INTRO_STRUCTURE"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M04_ADJACENT_HEADINGS": {
+            "expected_error_code": "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M05_GENERIC_HEADING": {
+            "expected_error_code": "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+                "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M06_SEMANTIC_DUPLICATE": {
+            "expected_error_code": "BLOCKED_WAVE2_SEMANTIC_DUPLICATE_HEADING",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_SEMANTIC_DUPLICATE_HEADING"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M07_HEADING_INTENT": {
+            "expected_error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M08_FAQ_DIRECT_ANSWER": {
+            "expected_error_code": "BLOCKED_WAVE2_FAQ_DIRECT_ANSWER",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_FAQ_DIRECT_ANSWER",
+                "BLOCKED_WAVE2_KNOWN_UNNATURAL_LANGUAGE"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M09_UNNATURAL_LANGUAGE": {
+            "expected_error_code": "BLOCKED_WAVE2_KNOWN_UNNATURAL_LANGUAGE",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_KNOWN_UNNATURAL_LANGUAGE"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M10_LIST": {
+            "expected_error_code": "BLOCKED_WAVE2_REQUIRED_LIST",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_REQUIRED_LIST"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M11_LINK_DISTRIBUTION": {
+            "expected_error_code": "BLOCKED_WAVE2_INTERNAL_LINK_PLACEMENT",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_INTERNAL_LINK_PLACEMENT",
+                "BLOCKED_WAVE2_LINKS_NOT_DISTRIBUTED"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M12_RUNTIME_LINK_ROLE": {
+            "expected_error_code": "BLOCKED_WAVE2_RUNTIME_LINK_ROLE",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_RUNTIME_LINK_ROLE"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M13_CONCLUSION": {
+            "expected_error_code": "BLOCKED_WAVE2_CONCLUSION_BALANCE",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS",
+                "BLOCKED_WAVE2_CONCLUSION_BALANCE"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M14_TABLE_VALUE": {
+            "expected_error_code": "BLOCKED_WAVE2_TABLE_VALUE",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_HEADING_LENGTH",
+                "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+                "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+                "BLOCKED_WAVE2_TABLE_VALUE"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M15_VISIBLE_MARKER": {
+            "expected_error_code": "BLOCKED_WAVE2_VISIBLE_TEST_MARKER",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_VISIBLE_TEST_MARKER"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M16_CATEGORY": {
+            "expected_error_code": "BLOCKED_WAVE2_WORDPRESS_CATEGORY",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_WORDPRESS_CATEGORY"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M17_LANGUAGE_EVIDENCE": {
+            "expected_error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_LANGUAGE_EVIDENCE"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M18_ARTICLE_TYPE": {
+            "expected_error_code": "BLOCKED_WAVE2_ARTICLE_TYPE_BLOCKS",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_ARTICLE_TYPE_BLOCKS"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M19_INVALID_HTML": {
+            "expected_error_code": "BLOCKED_WAVE2_INVALID_HTML",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_FAQ_DIRECT_ANSWER",
+                "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+                "BLOCKED_WAVE2_INVALID_HTML"
+            ],
+            "language_raw_finding_count": 1,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M20_LINK_REGISTRY": {
+            "expected_error_code": "BLOCKED_WAVE2_INTERNAL_LINK_REGISTRY",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_INTERNAL_LINK_REGISTRY"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        },
+        "M21_BINDING_HASH": {
+            "expected_error_code": "BLOCKED_WAVE2_QUALITY_BINDING_HASH",
+            "actual_error_codes": [
+                "BLOCKED_WAVE2_QUALITY_BINDING_HASH"
+            ],
+            "language_raw_finding_count": 0,
+            "fail_closed_status": "BLOCKED"
+        }
+    }
+}
+RESULT=PASS
+=== tests/test-wave2-content-validator-integration.php ===
+{
+    "contract": "wave2_content_validator_integration_report_v1",
+    "status": "PASS",
+    "positive_gold_path": {
+        "known_error_gate_status": "PASS",
+        "content_structure_language_gate_status": "PASS",
+        "fail_closed_aggregate_status": "PASS"
+    },
+    "legacy_path": {
+        "content_structure_language_gate_status": "PASS",
+        "fail_closed_aggregate_status": "BLOCKED"
+    },
+    "v5_path": {
+        "content_structure_language_gate_status": "PASS",
+        "fail_closed_aggregate_status": "BLOCKED"
+    },
+    "unknown_path": {
+        "content_structure_language_gate_status": "PASS",
+        "fail_closed_aggregate_status": "BLOCKED"
+    },
+    "known_bad_path": {
+        "known_error_gate_status": "BLOCKED",
+        "content_structure_language_gate_status": "BLOCKED",
+        "fail_closed_aggregate_status": "BLOCKED"
+    }
+}
+RESULT=PASS
+=== tests/test-wave2-article-type-quarantine.php ===
+{
+    "contract": "wave2_article_type_quarantine_safety_report_v1",
+    "status": "PASS",
+    "contract_status": "FOUR_TYPE_GOLD_CORE_BOUND",
+    "types": {
+        "FAQ": {
+            "production_allowed": false,
+            "visible_link_count": 3,
+            "required_link_roles": [
+                "further_information",
+                "parent_category",
+                "semantic_related"
+            ],
+            "required_blocks": [
+                "intro",
+                "answer",
+                "details",
+                "checklist",
+                "table",
+                "conclusion",
+                "further_information"
+            ]
+        },
+        "Beratung": {
+            "production_allowed": false,
+            "visible_link_count": 3,
+            "required_link_roles": [
+                "further_information",
+                "parent_category",
+                "semantic_related"
+            ],
+            "required_blocks": [
+                "intro",
+                "criteria",
+                "decision",
+                "table",
+                "conclusion",
+                "further_information"
+            ]
+        },
+        "Vergleich": {
+            "production_allowed": false,
+            "visible_link_count": 3,
+            "required_link_roles": [
+                "further_information",
+                "parent_category",
+                "semantic_related"
+            ],
+            "required_blocks": [
+                "intro",
+                "options",
+                "comparison",
+                "table",
+                "conclusion",
+                "further_information"
+            ]
+        },
+        "Pflege": {
+            "production_allowed": false,
+            "visible_link_count": 3,
+            "required_link_roles": [
+                "further_information",
+                "parent_category",
+                "semantic_related"
+            ],
+            "required_blocks": [
+                "intro",
+                "steps",
+                "risks",
+                "table",
+                "conclusion",
+                "further_information"
+            ]
+        }
+    },
+    "validator_error_codes": [
+        "BLOCKED_ARTICLE_TYPE_NOT_PRODUCTION_ALLOWED",
+        "BLOCKED_ARTICLE_TYPE_NOT_PRODUCTION_ALLOWED",
+        "BLOCKED_ARTICLE_TYPE_NOT_PRODUCTION_ALLOWED",
+        "BLOCKED_ARTICLE_TYPE_NOT_PRODUCTION_ALLOWED"
+    ],
+    "production_release_expected": "BLOCKED_PENDING_RECERTIFICATION",
+    "publish_allowed": false
+}
+RESULT=PASS
+=== tests/test-mainblock1-table-hard-rules.php ===
+{"status":"PASS_MAINBLOCK1_TABLE_SOURCE_RULES","positive":true,"negative_cases":2,"publish_allowed":false}
+RESULT=PASS
+=== tests/test-mainblock1-link-targets.php ===
+{"status":"PASS_MAINBLOCK1_REAL_LINK_TARGETS","target_count":3,"post_targets":0,"live_write_attempted":false,"negative_cases":3}
+RESULT=PASS
+=== tests/normal-draft-production/test-01-positive-1-to-4.php ===
+{"status":"PASS_NORMAL_DRAFT_1_TO_4_END_TO_END","runs":[{"count":1,"status":"NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH","drafts":1},{"count":2,"status":"NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH","drafts":2},{"count":3,"status":"NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH","drafts":3},{"count":4,"status":"NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH","drafts":4}],"publish_allowed":false}
+RESULT=PASS
+=== tests/normal-draft-production/test-02-cardinality-types-negative.php ===
+{"status":"PASS_NORMAL_DRAFT_CARDINALITY_TYPES_NEGATIVE","cases":{"zero":"BLOCKED_NORMAL_RELEASE_CARDINALITY","five":"BLOCKED_INITIAL_WAVE_TOO_LARGE","duplicate":"BLOCKED_INITIAL_WAVE_TYPE_DUPLICATE","wissen":"BLOCKED_INITIAL_WAVE_ARTICLE_TYPE","unknown":"BLOCKED_INITIAL_WAVE_ARTICLE_TYPE"}}
+RESULT=PASS
+=== tests/normal-draft-production/test-03-identity-replay-negative.php ===
+{"status":"PASS_NORMAL_DRAFT_IDENTITY_REPLAY_NEGATIVE","cases":{"nonce":"BLOCKED_NORMAL_RELEASE_USER_IDENTITY","user":"BLOCKED_NORMAL_RELEASE_USER_IDENTITY","server":"BLOCKED_SERVER_INSTANCE_MISMATCH","replay":"BLOCKED_NORMAL_REQUEST_REPLAY"}}
+RESULT=PASS
+=== tests/normal-draft-production/test-04-content-source-link-negative.php ===
+{"status":"PASS_NORMAL_DRAFT_CONTENT_SOURCE_LINK_NEGATIVE","cases":{"source_hash":"BLOCKED_PLAN_DUMMY_SOURCE_HASH","content_hash":"BLOCKED_CANONICAL_ARTICLE_HASH","link":"BLOCKED_DIAGNOSTIC_EVIDENCE_INCOMPLETE","existing_untouched":"BLOCKED_CANONICAL_ARTICLE_HASH"}}
+RESULT=PASS
+=== tests/normal-draft-production/test-05-readback-auth-static.php ===
+{"status":"PASS_NORMAL_DRAFT_READBACK_AUTH_STATIC","authorization_one_use":true,"readback_mutation_blocked":true,"publish_registered":false}
+RESULT=PASS
+PASS_COUNT=12
+FAIL_COUNT=0

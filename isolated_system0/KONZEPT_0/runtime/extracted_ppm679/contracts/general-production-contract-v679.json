@@ -1,0 +1,28 @@
+{
+  "contract": "general_production_machine_v679",
+  "version": "6.7.9",
+  "schema_version": "6.7.9",
+  "publish_enabled": false,
+  "pipeline": [
+    "source_order",
+    "source_snapshot",
+    "fact_pack",
+    "article_type",
+    "server_identifiers",
+    "workspace",
+    "generation",
+    "check_only",
+    "draft",
+    "readback",
+    "user_review"
+  ],
+  "article_types": [
+    "FAQ",
+    "Beratung",
+    "Vergleich",
+    "Pflege"
+  ],
+  "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+  "single_handoff_writer": "PPM679_Handoff_Writer",
+  "universal_gate": "PPM679_Live_State_Gate::verify_live_state_or_abort"
+}

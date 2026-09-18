@@ -1,0 +1,83 @@
+{
+  "contract": "known_error_gate_v1",
+  "version": "1.0.0",
+  "status": "QUARANTINE_IMPLEMENTATION_ONLY",
+  "scope_limit": "Known Error Gate V1 covers only concrete, already evidenced failure patterns. It is not a general editorial-quality solution.",
+  "visible_test_marker_regex": "\\[LT[0-9A-Z-]{6,}\\]",
+  "forbidden_body_heading_levels": [
+    1
+  ],
+  "minimum_list_items_in_one_list": 4,
+  "required_visible_internal_link_count": 3,
+  "conclusion_min_ratio_by_type": {
+    "FAQ": 0.08,
+    "Beratung": 0.1,
+    "Vergleich": 0.09,
+    "Pflege": 0.09
+  },
+  "generic_or_known_bad_headings": [
+    "Die kurze Antwort",
+    "Die wichtigsten Teilfragen",
+    "Antworten und nächste Schritte im Überblick",
+    "Wann die Antwort noch nicht belastbar ist",
+    "Entscheidungsmatrix",
+    "Vergleichsmatrix",
+    "Pflegeablauf im Überblick"
+  ],
+  "known_regression_patterns": [
+    "Der fachliche Grund ist, dass",
+    "Die konkrete Handlung lautet",
+    "Als belastbares Ergebnis muss",
+    "Dadurch bleibt erkennbar",
+    "Eine Annahme kann den fehlenden Beleg"
+  ],
+  "required_error_codes_for_original_four": {
+    "FAQ": [
+      "BLOCKED_KNOWN_BODY_H1",
+      "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+      "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+      "BLOCKED_KNOWN_GENERIC_HEADING",
+      "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+      "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+      "BLOCKED_KNOWN_SHORT_CONCLUSION",
+      "BLOCKED_KNOWN_REGRESSION_PATTERN",
+      "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+      "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END"
+    ],
+    "Beratung": [
+      "BLOCKED_KNOWN_BODY_H1",
+      "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+      "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+      "BLOCKED_KNOWN_GENERIC_HEADING",
+      "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+      "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+      "BLOCKED_KNOWN_SHORT_CONCLUSION",
+      "BLOCKED_KNOWN_REGRESSION_PATTERN",
+      "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+      "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END"
+    ],
+    "Vergleich": [
+      "BLOCKED_KNOWN_BODY_H1",
+      "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+      "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+      "BLOCKED_KNOWN_GENERIC_HEADING",
+      "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+      "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+      "BLOCKED_KNOWN_SHORT_CONCLUSION",
+      "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+      "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END"
+    ],
+    "Pflege": [
+      "BLOCKED_KNOWN_BODY_H1",
+      "BLOCKED_KNOWN_VISIBLE_TEST_MARKER",
+      "BLOCKED_KNOWN_TITLE_REPEATED_IN_BODY",
+      "BLOCKED_KNOWN_GENERIC_HEADING",
+      "BLOCKED_KNOWN_REQUIRED_LIST_MISSING",
+      "BLOCKED_KNOWN_INTERNAL_LINK_COUNT",
+      "BLOCKED_KNOWN_SHORT_CONCLUSION",
+      "BLOCKED_KNOWN_REGRESSION_PATTERN",
+      "BLOCKED_KNOWN_ADJACENT_HEADINGS",
+      "BLOCKED_KNOWN_LINKS_CLUSTERED_AT_END"
+    ]
+  }
+}
