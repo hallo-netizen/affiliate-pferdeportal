@@ -436,12 +436,21 @@ def draft(workspace: Path, out: Path, repair: bool = False) -> dict:
             raise RuntimeError('TESTWORKER_MULTIFINDING_CONCLUSION_SOURCE_MISSING')
         sections['conclusion'] = conclusion_heading + conclusion_paragraphs[:2]
 
+        table_phrases = (
+            'Kontrolle zeigt den Zustand.',
+            'Zustand braucht eine Prüfung.',
+            'Prüfung bestätigt den Zustand.',
+            'Der Zustand folgt der Kontrolle.',
+        )
+        table_cell_counter = [0]
         def _flatten_table_cells(value: str) -> str:
             def repl(match: re.Match[str]) -> str:
                 attrs = match.group(1)
                 inner = match.group(2)
                 trace = ''.join(re.findall(r'(?is)<span\\b[^>]*class="ppm-source-trace"[^>]*></span>', inner))
-                return '<td' + attrs + '>Prüfung Kontrolle Zustand.' + trace + '</td>'
+                phrase = table_phrases[table_cell_counter[0] % len(table_phrases)]
+                table_cell_counter[0] += 1
+                return '<td' + attrs + '>' + phrase + trace + '</td>'
             return re.sub(r'(?is)<td([^>]*)>(.*?)</td>', repl, value)
 
         sections[table_block] = [_flatten_table_cells(row) for row in sections.get(table_block, [])]
