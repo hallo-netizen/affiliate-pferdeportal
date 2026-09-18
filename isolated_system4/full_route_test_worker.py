@@ -50,8 +50,9 @@ def _fresh_variation_index(index:int)->int:
     nonce=os.environ.get(RUN_NONCE_ENV,'').strip()
     if len(nonce)<12:
         raise RuntimeError('TEST_RUN_NONCE_REQUIRED')
-    digest=hashlib.sha256((nonce+':'+str(index)).encode('utf-8')).hexdigest()
-    return index+31+(int(digest[:8],16)%100003)
+    digest=hashlib.sha256(nonce.encode('utf-8')).hexdigest()
+    base=31+(int(digest[:8],16)%100003)
+    return base+(index*5)
 
 def _force_one_repairable_typo(body:str,index:int)->str:
     if os.environ.get(FORCE_REPAIR_INDEX_ENV,'').strip()!=str(index): return body

@@ -64,6 +64,18 @@ class ForcedBatchRepetitionPreflightTests(unittest.TestCase):
         self.assertEqual(after_repetition['status'],'PASS')
         self.assertLessEqual(after_repetition['majority_repeated_sentence_count'],6)
 
+    def test_fresh_variation_indices_keep_first_four_template_residues_separate(self):
+        old=os.environ.get(full_route_test_worker.RUN_NONCE_ENV)
+        os.environ[full_route_test_worker.RUN_NONCE_ENV]='system4-forced-batch-preflight-nonce'
+        try:
+            values=[full_route_test_worker._fresh_variation_index(i) for i in range(4)]
+        finally:
+            if old is None: os.environ.pop(full_route_test_worker.RUN_NONCE_ENV,None)
+            else: os.environ[full_route_test_worker.RUN_NONCE_ENV]=old
+        self.assertEqual(len(set(values)),4)
+        self.assertEqual(len({value%8 for value in values}),4)
+        self.assertEqual(len({value%24 for value in values}),4)
+
     @unittest.skipUnless(os.environ.get('SYSTEM4_REAL_TOOL_CORRIDOR')=='1','real LT 6.8 preflight is an explicit CI stage')
     def test_forced_fixture_is_real_languagetool_68_clean(self):
         repo=Path(__file__).resolve().parent.parent
