@@ -502,9 +502,18 @@ def advance(run_root: Path) -> dict:
     state["completed_indices"].append(index)
     next_index = index + 1
     if next_index == count:
-        state["batch_collect"] = _collect(root, state)
+        state["completed_indices"] = list(range(count))
+        state["started_indices"] = list(range(count))
+        try:
+            state["batch_collect"] = _collect(root, state)
+        except batch_gate.BatchGateError as exc:
+            returned = _enter_batch_repair(root, state_path, state, str(exc))
+            if returned is not None:
+                return returned
+            raise
         state["status"] = "ITEMS_COMPLETE"
         state["current_index"] = count
+        state["batch_repair"] = None
         _write(state_path, state)
         meta["status"] = "ITEMS_COMPLETE"
         _write(root / META_NAME, meta)
