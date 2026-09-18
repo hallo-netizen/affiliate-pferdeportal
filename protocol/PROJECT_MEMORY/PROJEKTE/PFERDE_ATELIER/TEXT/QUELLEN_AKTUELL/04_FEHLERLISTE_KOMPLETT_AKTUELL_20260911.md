@@ -8,7 +8,7 @@ VORGÄNGER NUR HISTORISCHER LANGBELEG:
 ## AKTUELLE LIVE-WAHRHEIT – 18.09.2026
 
 Current main / technischer M39-Baseline-Stand:
-`13ce42bb77d7b5d9a01cdbe3be6c7c81969198d4`
+`e69cab0f0a96978b997bff7cbf1ab8af4587e772`
 
 Letzter belastbarer Live-Baseline-/Recovery-Stand vor M37:
 `bb005a5324a0a6270aacb52b5927613bde1ab4bc`
@@ -114,7 +114,7 @@ Erst nach maschinellem M38-History-Beweis darf ein separater kleinstmöglicher P
 ## M39 HISTORY-KANDIDAT
 
 - Branch `hobbyroom/m39-release-identity-history-20260918`
-- Head `983f09569044b533d4d67e36df745b5da778d62f`
+- Head `1d845b0427b0eb7486d7431b689e962de45ed867`
 - nur Fehlermatrix + bestehender Regressionrunner
 - erwartet: M01–M38 PASS, M39 erster neuer FAIL
 - kein Produktfix in dieser Phase
