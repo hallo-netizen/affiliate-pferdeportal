@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 60,
+  "generation": 61,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "e275b7e6bf7515494d50969bfca971f636e069afc856c95ada8f22e49eeb5c5f",
+    "manifest_sha256": "08871e6b1e72b0f3fd476125e29aea042ac97deb5226fb274f6f77078e8c0941",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "e275b7e6bf7515494d50969bfca971f636e069afc856c95ada8f22e49eeb5c5f",
+    "current_source_manifest_sha256": "08871e6b1e72b0f3fd476125e29aea042ac97deb5226fb274f6f77078e8c0941",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -148,10 +148,10 @@
     }
   },
   "execution_state": {
-    "state": "BLOCKED_CANONICAL_CURRENT_SOURCE_DRIFT",
-    "authorized_next_action": "DIRECT_CANONICAL_ROOTFIX_TO_BOUND_20260918_TARGET",
-    "bound_user_scope_action": "CANONICAL_6.72.19_SOURCE_IS_STALE_RELATIVE_TO_VERIFIED_WORKING_REFERENCE; DIRECT_COMMITTED_SOURCE_EDITS_ONLY; NO_ZIP_RECONSTRUCTION; DYNAMIC_COVERAGE; NO_DUPLICATE_CREATIVE_PER_PAGE; ARTICLE_BOTTOM_PRODUCT_BOXES_FIRST_ELSE_SECOND_DIFFERENT_BANNER; PROVIDER_ORIGINAL_ANALYTICS_ONLY; NO_INSTALL_NO_LIVE_TEST",
-    "completion_condition": "DIRECT_CURRENT_SOURCE_IMPLEMENTS_BOUND_20260918_TARGET_THEN_SOURCE_MANIFEST_IS_REBOUND_AND_BOUND_POS_NEG_FULL_WORKFLOW_REGRESSION_FRESH_UNPACK_IDENTITY_MUTATION_GATES_PASS_BEFORE_ANY_INSTALLER",
+    "state": "RUNNING_BOUND_CANONICAL_ROOTFIX",
+    "authorized_next_action": "COMPLETE_ARTICLE_BOTTOM_NO_DUPLICATE_AND_PROVIDER_REPORT_ROOTFIX",
+    "bound_user_scope_action": "DIRECT_COMMITTED_SOURCE_ONLY; DYNAMIC_COVERAGE_ROOTFIX_BOUND; NO_FIXED_PROVIDER_WEIGHTS; NO_WEEKLY_DISTRIBUTION; COMPLETE_ARTICLE_BOTTOM_PRODUCT_BOXES_FIRST_ELSE_SECOND_DIFFERENT_BANNER_AND_PROVIDER_ORIGINAL_REPORT_SYNC; NO_INSTALL_NO_LIVE_TEST",
+    "completion_condition": "DIRECT_CURRENT_SOURCE_IMPLEMENTS_FULL_20260918_TARGET_THEN_SOURCE_MANIFEST_IS_REBOUND_AND_BOUND_POS_NEG_FULL_WORKFLOW_REGRESSION_FRESH_UNPACK_IDENTITY_MUTATION_GATES_PASS_BEFORE_ANY_INSTALLER",
     "after_completion_action": "BUILD_EXACTLY_ONE_TEST_CANDIDATE_ONLY_WHEN_THE_BOUND_TECHNICAL_BLOCK_IS_GREEN_AND_A_CONCRETE_WORDPRESS_LIVE_TEST_IS_REQUIRED",
     "no_optional_detours": true,
     "sequence": 11,
@@ -344,7 +344,7 @@
       "no_parallel_workstream": true
     },
     "canonical_current_source_drift": {
-      "status": "BLOCKED",
+      "status": "ROOTFIX_IN_PROGRESS",
       "blocker": "AFFILIATE_CANONICAL_CURRENT_SOURCE_DRIFT",
       "canonical_source_version": "6.72.19",
       "canonical_head_at_check": "9a952091fc8c529517644a4d75602f948b9bcfd1",
@@ -359,7 +359,8 @@
         "version": "6.72.70",
         "result": "ARTICLE_BANNERS_APPEARED_IN_FIRST_LIVE_OVERVIEW",
         "scope": "NOT_A_FULL_PLUGIN_LIVE_PASS"
-      }
+      },
+      "dynamic_coverage_commit": "cf34cc9839d4538687b98cd7bc6f039780f59155"
     }
   },
   "branch_policy": {
@@ -706,7 +707,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "CANONICAL_CURRENT_SOURCE_DRIFT_ROOTFIX_20260918",
+    "current_milestone": "BOUND_TECHNICAL_ROOTFIX_20260918",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
