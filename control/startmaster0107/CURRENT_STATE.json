@@ -63,7 +63,10 @@
     "SYSTEM4_107007_POINT0_WRAPPER_HARDLOCK_RUN_35343392494_PASS",
     "SYSTEM4_107007_POINT0_WRAPPER_ENTRANCE_RUN_35343391681_PASS",
     "PARENT_STARTER_ROUTE_TEST_STEP_PASS_RUN_35346153367",
-    "PARENT_STARTER_NO_CODEX_ACCEPTANCE_STEP_PASS_RUN_35346153367"
+    "PARENT_STARTER_NO_CODEX_ACCEPTANCE_STEP_PASS_RUN_35346153367",
+    "REAL_PARENT_ROOT_PROOF_PASS_RUN_35347197727",
+    "REAL_PARENT_ROOT_MARKER_PASS_WORKER_DISPATCH_READY",
+    "REAL_PARENT_BATCH_ROOT_READY_STOP_WORKER_NOT_STARTED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -169,13 +172,13 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "BLOCKED",
+  "current_work_status": "READY_FOR_FIRST_CODEX_ARTICLE0",
   "current_execution_blocker": {
-    "code": "PARENT_STARTER_RECONNECTED_VALIDATED_AWAITING_REAL_ROOT_PROOF",
+    "code": "NONE_READY_FOR_FIRST_CODEX_ARTICLE0",
     "error_class": false,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
-    "detail": "The existing System-4 Parent starter is reconnected to the current machine Point-0 builder and current 107007 root-only batch start. In acceptance run 35346153367 the Parent route test and no-Codex step passed. The later Root-entry test failed only because no real current-main external Parent Point-0 had yet been created. Production remains fail-closed until that real 7-item Parent start is executed and stops at Root PASS.",
+    "detail": "The real current-main 7-item Parent start passed in run 35347197727. It reached SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY and SYSTEM4_107007_BATCH_ROOT_READY_STOP for item index 0 with worker_started=false. The root proof is complete. Exactly article index 0 may now be attached to Codex; index 1 remains forbidden until article 0 reaches real System-4 full PASS.",
     "m38_resolved": true,
     "m38_regression_run_id": 35325277001,
     "hardlock_run_id": 35325237914,
@@ -191,7 +194,7 @@
     "snapshot_hash_gap_acceptance_run_id": 35341172778,
     "snapshot_hash_gap_hardlock_run_id": 35341166279,
     "snapshot_hash_gap_entrance_run_id": 35341169607,
-    "root_only_start_required": true,
+    "root_only_start_required": false,
     "point0_wrapper_fix_resolved": true,
     "point0_wrapper_acceptance_run_id": 35343416302,
     "point0_wrapper_hardlock_run_id": 35343392494,
@@ -199,7 +202,12 @@
     "parent_starter_reconnected": true,
     "parent_starter_route_test_run_id": 35346153367,
     "parent_starter_route_test_pass": true,
-    "real_parent_point0_pending": true
+    "real_parent_point0_pending": false,
+    "real_parent_root_proof_run_id": 35347197727,
+    "real_parent_root_marker": "SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY",
+    "real_parent_batch_root_status": "SYSTEM4_107007_BATCH_ROOT_READY_STOP",
+    "worker_started": false,
+    "first_codex_article0_allowed": true
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT_REACHED",
@@ -251,19 +259,20 @@
     "last_read_only_diagnostic_evidence": "PR107 issuecomment-5638208428",
     "last_read_only_diagnostic_result": "Expected/current plan-version fields and minimal fix location were NOT_DETERMINABLE because the capsule authorized only step 107007."
   },
-  "last_safe_main_sha": "19451f92321cc0ac0aeabfa8ef09e7a6be3302ac",
-  "last_safe_change": "Existing System-4 Parent starter reconnected to current machine Point-0 plus 107007 root-only batch start. Parent-route test and no-Codex acceptance step PASS in run 35346153367; later real-root test remains blocked only by the still-missing real current Parent Point-0.",
-  "hobbyroom_status": "PARENT_STARTER_RECONNECTED_VALIDATED_AWAITING_REAL_ROOT_PROOF",
-  "hobbyroom_branch": "hobbyroom/reconnect-parent-starter-20260918",
+  "last_safe_main_sha": "48fc0fcb58c801762c1f29e764e70bdbb8ebf8d5",
+  "last_safe_change": "Real current-main 7-item Parent start proven on main 48fc0fcb58c801762c1f29e764e70bdbb8ebf8d5 in run 35347197727: fresh source acquisition, fresh Point-0, index 0 Root PASS, worker_started=false. Ready for first Codex article-0 run.",
+  "hobbyroom_status": "REAL_PARENT_ROOT_PROOF_PASS_READY_FOR_FIRST_CODEX_ARTICLE0",
+  "hobbyroom_branch": "hobbyroom/root-proof-to-first-codex-20260918",
   "hobbyroom_sync_policy": "History proof is complete at head 3acae874dd4c807761983623c91f69d35a800fb2. Do not modify that history-only branch for the product repair. Product repair must start from current main and remain minimal.",
-  "hobbyroom_blocker": "Create the real current 7-item Parent Point-0 with the reconnected Parent starter, start 107007 index 0, require Root PASS, then stop.",
+  "hobbyroom_blocker": "NONE_BEFORE_FIRST_CODEX_ARTICLE0",
   "next_action": {
-    "goal": "Use the validated reconnected Parent starter for the real current 7-item batch. Build the current Parent Point-0, start index 0 through 107007, require Root PASS and stop.",
+    "goal": "Start exactly article index 0 in the first real Codex production run. Keep article index 1 blocked until article 0 reaches real System-4 full PASS.",
     "required_order": [
-      "Run the existing System-4 test route against isolated_system4/parent_start.py.",
-      "Require Parent to call current machine_point0.py build-current-fetch first and current system4_107007_batch.py start second.",
-      "Require SYSTEM4_107007_BATCH_ROOT_READY_STOP for item index 0.",
-      "Stop immediately. Do not invoke Codex, worker-start, advance, item index 1 or publish."
+      "Synchronize permanent dispatcher PR107 head to the exact current main commit.",
+      "Start exactly one Codex task for current article index 0 through the existing System-4 worker path.",
+      "Use only the already bound current batch/System-4 contracts; NEW remains NEW and old recovery article bodies are forbidden.",
+      "Run article 0 through its real System-4 phases and stop on the first real terminal PASS/REPAIR/BLOCK result.",
+      "Do not call batch advance and do not start article index 1 until article 0 is real OUTPUT_GATE_REQUIRED/PASS."
     ],
     "must_fail_closed_on": [
       "wrong source hash",
@@ -290,10 +299,10 @@
       "auto-publish",
       "new architecture"
     ],
-    "proof_after_fix": "One real current 7-item Parent start ending at SYSTEM4_ROOT_POINT0_PASS:WORKER_DISPATCH_READY / SYSTEM4_107007_BATCH_ROOT_READY_STOP. No Codex, no advance, no second article, no publish."
+    "proof_after_fix": "First real Codex article-0 run has started on exact current main. Article index 1 remains blocked until article 0 full System-4 PASS."
   },
-  "hobbyroom_pr": 304,
-  "hobbyroom_head_sha": "fd5804065ae04a20a5ad1092b0a7ab4fce1f2839",
+  "hobbyroom_pr": 307,
+  "hobbyroom_head_sha": "3c2fdeb181f3dcd693695f28058c06db64e857a1",
   "m38_history_proof": {
     "branch": "hobbyroom/m38-history-current-main-20260918",
     "head_sha": "3acae874dd4c807761983623c91f69d35a800fb2",
@@ -305,7 +314,7 @@
     "product_logic_changed": false
   },
   "m38_product_fix": {
-    "status": "PASS_AWAITING_REQUIRED_SINGLE_ARTICLE_REAL_PROOF",
+    "status": "PASS_READY_FOR_REQUIRED_SINGLE_ARTICLE_REAL_PROOF",
     "product_logic_proof_head": "4dffdfe27e183c6da8830a82e3cbb1cc1e369717",
     "pr": 297,
     "regression_run_id": 35325277001,
