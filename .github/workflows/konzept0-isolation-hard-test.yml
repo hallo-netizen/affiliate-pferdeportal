@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          P='isolated_system0/KONZEPT_0/runtime/__negative_cross_contact_probe.txt'
+          P='isolated_system0/KONZEPT_0/runtime/__negative_cross_contact_probe.py'
           printf '%s\n' 'isolated_system4/forbidden-runtime-contact' > "$P"
           set +e
           python3 isolated_system0/KONZEPT_0/verify_isolation.py > /tmp/negative.json
