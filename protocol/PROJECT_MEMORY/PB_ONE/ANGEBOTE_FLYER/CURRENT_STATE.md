@@ -1,5 +1,10 @@
 # PB ONE – PRÄSENTATION & WERBUNG / ANGEBOTE & FLYER – CURRENT STATE
 
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
+
+> **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt. `HOBBYRAUM.md` ist nur Ausführungsfläche.
+
+
 STAND: 2026-09-07
 STATUS: BEREICH EINGERICHTET / NOCH KEINE FREIGEGEBENE MASTER-PRÄSENTATION ODER MASTER-WERBEUNTERLAGE
 
@@ -7,8 +12,8 @@ STATUS: BEREICH EINGERICHTET / NOCH KEINE FREIGEGEBENE MASTER-PRÄSENTATION ODER
 
 Diese Datei ist die einzige aktuelle Standzusammenfassung dieses Bereichs.
 
-Aktuelle Arbeit:
-`HOBBYRAUM.md`
+Ausführungsdetails bei gebundener Arbeit:
+`HOBBYRAUM.md` (abgeleitet, nicht autoritativ)
 
 Dauerhaft vorhandene/freigegebene Unterlagen:
 `UNTERLAGENREGISTER.md`
@@ -27,3 +32,9 @@ Noch nicht als verbindlicher PB-ONE-Stand importiert:
 - keine verbindliche Preis-/Paketlogik.
 
 Öffentliche Website und vorhandene Projektbelege dürfen bei konkreten Aufträgen als Quellen herangezogen werden.
+
+## NEXT ACTION
+
+**NONE – kein aktiver Präsentations-/Werbe-/Unterlagenauftrag gebunden.**
+
+Ein neuer Auftrag muss zuerst hier eindeutig gebunden werden; `HOBBYRAUM.md` bleibt nur Ausführungsfläche.
