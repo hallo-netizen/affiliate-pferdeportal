@@ -260,6 +260,15 @@ print('SYSTEM4_107007_POINT0_WRAPPER_PASS')
         self.assertEqual(cp.returncode,2)
         self.assertIn('ROOT_OVERRIDE_MISSING',cp.stdout.decode())
 
+    def test_negative_missing_external_point0_file_is_blocked(self):
+        td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
+        missing=Path(td.name)/'missing-point0.json'
+        workspace=Path(td.name)/'runtime'
+        cp=run_entry(repo,['start-point0',str(missing),str(workspace),'0'])
+        self.assertEqual(cp.returncode,2)
+        self.assertIn('ROOT_POINT0_FILE_INVALID',cp.stdout.decode())
+        self.assertFalse((workspace/'state.json').exists())
+
     def test_negative_repo_internal_point0_is_blocked(self):
         td,repo=make_clean_repo(); self.addCleanup(td.cleanup)
         point0=make_point0(repo,repo/'isolated_system4'/'_forbidden_point0.json')
