@@ -271,3 +271,30 @@ PRÜFSTAND:
 - Pluginartefakt PPA-014 persistent mit Manifest/Testnachweis und Hash-Readback vorhanden;
 - lokale Plugin-Positiv-/Negativprüfung PASS;
 - WordPress-LIVE-Retest ausdrücklich offen, daher kein erfundener LIVE-PASS.
+
+### 2026-09-18 – Campusweite Ein-Wahrheit-Migration
+
+BEDARF:
+Ein neuer Chat darf nicht erneut stundenlang den Stand des Vorgängerchats rekonstruieren, obwohl eine Übergabe existiert. Gleichzeitig darf keine zusätzliche Handoff-/Current-Datei eine zweite Wahrheit erzeugen.
+
+KISS-FIX:
+- `AUTORITAETSPLAN.json` als reine Routingautorität angelegt;
+- `EINE_WAHRHEIT_STANDARD.md` campusweit gebunden;
+- Current-Autoritäten führen jetzt selbst die eine NEXT ACTION;
+- Hobbyräume als `DERIVED_EXECUTION_SURFACE_V1` gekennzeichnet;
+- Pferde-Atelier-Bürotüren, PB-ONE-Arbeitsräume und registrierte allgemeingültige Module migriert;
+- Pferde-Atelier AFFILIATE auf die bereits technisch autoritative `control/release-governance/CURRENT_RELEASE.json` geroutet; alte Campus-Current nur noch Pointer;
+- Neubauvorlage und Handlungsverzeichnis nachgezogen;
+- maschinenlesbarer `single_truth_guard.py` ergänzt.
+
+NEGATIVPRÜFUNG:
+- 18/18 registrierte START_HERE-Pfade besitzen den Single-Truth-Marker und keine alte CURRENT→HOBBY-NEXT-ACTION-Kette;
+- 17/17 eindeutige Current-Autoritäten besitzen eine direkte NEXT ACTION bzw. maschinenlesbare `authorized_next_action`;
+- 15/15 registrierte Ausführungsflächen besitzen `DERIVED_EXECUTION_SURFACE_V1` und beanspruchen nicht mehr exklusiv die aktuelle NEXT-ACTION-Autorität.
+
+GRENZE:
+Maschinenlocks in Hobbyräumen bleiben als abgeleitete, hashgebundene technische Sperren erhalten. Sie sind keine Current-Wahrheit.
+
+BEZUG:
+ARCH-089 / BAU-042.
+
