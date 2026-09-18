@@ -1,7 +1,7 @@
 {
-  "contract": "KONZEPT0_CURRENT_STATE_V2",
+  "contract": "KONZEPT0_CURRENT_STATE_V3",
   "office": "PFERDE_ATELIER/TEXTERSTELLUNGSBUERO/KONZEPT_0",
-  "status": "HISTORICAL_TEXT_CORE_RECONSTRUCTED_AND_TESTED_EXACT_PSTE_PSERC_INSTALLER_BYTES_MISSING",
+  "status": "AUG28_WORKFLOW_STRONGLY_RECONSTRUCTED_EXACT_AUTHORING_AND_RUNTIME_GAPS_REMAIN",
   "isolation": {
     "concept_1_contact": false,
     "concept_2_contact": false,
@@ -10,51 +10,48 @@
     "concept_4a_contact": false,
     "shared_runtime": false,
     "shared_handoff": false,
-    "shared_controller": false
+    "shared_controller": false,
+    "positive_test": "PASS",
+    "negative_cross_contact_mutation": "BLOCKED"
   },
   "historical_anchor": {
     "date": "2026-08-28",
-    "commit": "a4084afd2b22cdbab2e7c6141885760adedc8f4b",
-    "startmaster": "STARTMASTER0103",
+    "startmaster_chain": ["STARTMASTER0102", "STARTMASTER0103"],
     "six_article_normal_draft_end_to_end": "PASS",
     "six_article_readback": "PASS",
     "article_ids": [17123,17124,17125,17126,17127,17128],
-    "publish_allowed": false
+    "publish_allowed_at_test": false
   },
-  "recovered_and_verified": {
-    "ppm_6_7_9": {
-      "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
-      "zip_test": "PASS",
-      "historical_core_tests": "12/12 PASS",
-      "core_extracted_locally": true
-    },
-    "languagetool_6_8": {
-      "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
-      "hash_test": "PASS"
-    },
-    "historical_controller": "RECOVERED",
-    "historical_preflight": "RECOVERED",
-    "historical_tool_policy": "RECOVERED",
-    "historical_current_state": "RECOVERED"
+  "aug28_test_evidence": {
+    "pste_0_56_25_pserc_0_28_14_combined": "PASS",
+    "combined_named_tests": "12/12 PASS",
+    "pste_php_lint": "74/74 PASS",
+    "pserc_php_lint": "42/42 PASS",
+    "source": "historical_pste_pserc_evidence/tests/SOURCE_FINAL_FULL_WORKFLOW.json"
   },
-  "historically_bound_but_bytes_not_recovered": {
-    "pste_0_56_25": {
-      "sha256": "8122e3fa2273fe4d8e53476f557ed0ddd99a197e8b1c40302f35db245ebb0f95",
-      "full_git_history_search": "NO_FILE_CANDIDATE"
-    },
-    "pserc_0_28_14": {
-      "sha256": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988",
-      "full_git_history_search": "NO_FILE_CANDIDATE"
-    }
+  "recovery_results": {
+    "exact_startmaster0103_controller_preflight_policy_state": "RECOVERED",
+    "startmaster0086_original": "NOT_FOUND",
+    "six_article_bodies": "NOT_FOUND",
+    "build_cross_domain_articles_py": "NOT_FOUND",
+    "pste_0_56_25_installer_bytes": "NOT_FOUND_HASH_ONLY",
+    "pserc_0_28_14_installer_bytes": "NOT_FOUND_HASH_ONLY",
+    "later_preserved_ppm_6_7_9": "RECOVERED_TESTED_COMPARISON_ONLY_NOT_PROVEN_AUG28_BYTES",
+    "later_preserved_lt_6_8": "RECOVERED_COMPARISON_ONLY_NOT_PROVEN_AUG28_BYTES"
   },
-  "test_evidence": {
-    "runtime_recovery_run": "35393355146",
-    "runtime_inventory_run": "35393492642",
-    "ppm_historical_core_run": "35393717195",
-    "deleted_installer_history_run": "35393807553"
+  "github_test_runs": {
+    "runtime_recovery": "35393355146 SUCCESS",
+    "runtime_inventory": "35393492642 SUCCESS",
+    "later_ppm_regression": "35393717195 SUCCESS 12/12",
+    "deleted_installer_history": "35393807553 SUCCESS",
+    "aug28_authoring_archive": "35394052817 SUCCESS",
+    "full_history_authoring_archive": "35394131184 SUCCESS",
+    "startmaster0086_search": "35394271393 SUCCESS",
+    "six_article_deep_search": "35394549389 SUCCESS",
+    "isolation_positive_negative": "35395131520 SUCCESS"
   },
-  "runtime_status": "TEXT_CORE_TESTED_READY_FOR_ISOLATED_NON_CODEX_SIMULATION_PSTE_PSERC_EXACT_INSTALLER_GAP_RECORDED",
   "codex_started": false,
   "publish_performed": false,
-  "next_action": "BUILD_AND_RUN_KONZEPT0_ONLY_NON_CODEX_SIMULATION_FROM_RECOVERED_PPM679_LT68_AND_HISTORICAL_BINDINGS; DO_NOT SUBSTITUTE MISSING PSTE_PSERC_BYTES"
+  "reactivation_status": "NOT_YET_EXACTLY_REPRODUCIBLE_AS_AUG28_AUTHORING_SYSTEM",
+  "next_action": "RECONSTRUCT_AUTHORING_CONTRACT_ONLY_FROM_AUG28_AUTHORITATIVE_EVIDENCE_AND_RUN_KONZEPT0_ONLY_NON_CODEX_SIMULATION; KEEP ALL UNPROVEN LATER RULES NONAUTHORITATIVE"
 }
