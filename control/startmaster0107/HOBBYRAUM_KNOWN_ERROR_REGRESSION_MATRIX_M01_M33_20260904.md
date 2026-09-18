@@ -22,7 +22,7 @@ M01 – State-/Bundle-Hash chain: CURRENT_STATE -> 107007; START_HERE -> CURRENT
 
 M02 – Unique article files: 1..N ARTICLE_<plan_slot>.md entsprechend dem gebundenen Batch; keine ARTICLE.md-Kollision.
 
-M03 – 107007→107008 Zustandskontinuität nach System-4-Migration: vollständiger Batch muss einen einzigen hashgebundenen V2-Input für 107008 erzeugen; unvollständiger Batch und Handoff-Tamper bleiben BLOCKED; 107008 startet erst nach gültiger V2-Bindung. Der frühere PREPARED/DUAL-ROOTFIX-Weg ist als Produktionsweg abgelöst und darf nicht mehr als M03-Prüfautorität verwendet werden.
+M03 – PREPARED Persist/Restore: 107007 persistiert; 107008 restauriert; keine PREPARED_BINDING_MISSING-Schleife.
 
 M04 – Finalize CLI: finalize RECEIPT_REF real aufrufbar.
 
@@ -58,7 +58,7 @@ M13 – PPM content_hash: echter PPM-content_hash entspricht exakt finalem Artik
 
 M14 – Current Action Handoff: fachworkflow_handoff sichtbar und ausführbar.
 
-M15 – 107007 System-4-Routenbindung nach Migration: Start ausschließlich über `system4_107007_batch.py start`, Fortschaltung ausschließlich über `advance`, Abschluss ausschließlich nach `batch_gate.py collect=SYSTEM4_BATCH_FULL_PASS_COLLECTED`; der frühere `codex_current_action.py`/`fachworkflow_proof_handoff.py`-Produktionsweg bleibt ausdrücklich nicht autorisiert. Kein Überspringen, kein freier Sprung, keine zweite Repair-Wahrheit, kein Publish.
+M15 – 107007 Handoff instruction: keine widersprüchliche Handoff-Sperre.
 
 M16 – Signer boundary: Produktionssignierer außerhalb Codex-Worker; keine Signer-Credentials im Worker.
 
@@ -82,22 +82,26 @@ M25 – Article prompt / Fachworkflow boundary: keine freie Neuplanung; bestehen
 
 ## Historische Regressionen – neu dauerhaft aufgenommen
 
-M26 – Bound production context available through current System 4
+M26 – Bound Fachworkflow production context available to real PPM
 - Historischer Fehler: BOUND_RUNTIME_PRODUCTION_CONTEXT_MISSING.
-- Nach der System-4-Migration liegt die Produktionskontext-Autorität ausschließlich im System-4-State: fact_pack + production_plan_item müssen hashgebunden sein und werden von Controller/Batch-Gate validiert.
-- batch_gate.py blockiert fehlenden oder manipulierten production_context; controller_engine.py blockiert Integritätsdrift; handoff_transport.py und system4_107008_handoff.py dürfen nur den bereits gebundenen Kontext transportieren.
-- NEW bleibt NEW; alte Artikel-/Recovery-Dateien bleiben als Produktionsquelle ausgeschlossen.
-- Der frühere codex_current_action.py/Fachworkflow-Handoff-Weg ist nicht mehr Produktionsautorität und darf deshalb nicht als M26-Prüfquelle verwendet werden.
+- Das H8-Bootstrap-Paket darf fachlich leer bleiben; es ist Herkunfts-/Türbindung und keine Fachquelle.
+- Ab R_001 muss der aktuelle unveränderte Fachworkflow für current_item den echten aktuellen fact_pack und production_plan_v4-Kontext erzeugen/binden und wahrheitsgemäß an den bestehenden PPM-Handoff übergeben.
+- Fact-Pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata müssen artikel-/Plan-Slot-/Batch-konsistent sein.
+- Fehlender oder falscher Fachworkflow-Kontext = BLOCKED.
+- Kein Ersatzkontext aus alten Artikeln/Recovery und kein künstlich befülltes H8-Paket.
+
 M27 – Current-main / production environment identity
 - Historische Fehler: CODEX_CHECKOUT_NOT_CURRENT_MAIN, CODEX_PRODUCTION_ENVIRONMENT_PROOF_MISSING.
 - Dispatcher/Worker-HEAD muss exakt aktuellem main entsprechen.
 - Preflight muss den Produktionsumgebungsnachweis erzeugen; Runtime Entry darf ohne ihn nicht starten.
 - Kein git-fetch-/Neben-Worktree-Zwang im Worker als Produktionsvoraussetzung.
 
-M28 – Current System-4 execution entry is materially executable
-- Historische Fehlerklasse: gebundene Aktion war formal vorhanden, aber der Worker konnte den realen Produktionsweg nicht materialisieren.
-- Nach der System-4-Migration ist der verbindliche Weg: 107007-Batchadapter → system4_107007_entry.py → root_entry.py start-point0 → codex_entry.py worker-start.
-- Root-Entry- und Machine-Route-Lock-Tests müssen real PASS sein; der frühere FACHWORKFLOW_HANDOFF_REQUEST/fachworkflow_handoff.command-Weg darf in 107007 nicht erneut autorisiert werden.
+M28 – Fachworkflow-Handoff request is materially executable
+- Historische Fehler: fehlende FACHWORKFLOW_HANDOFF_REQUEST.json, ITEM_RECEIPT_FIELDS_OR_CONTRACT_INVALID.
+- Current Action muss alle gebundenen Daten liefern, mit denen der aktuelle Worker die eine Handoff-Request wahrheitsgemäß materialisieren kann.
+- Dazu gehören aktueller fact_pack, production_plan_item, production_plan_header, workflow_release_item und workflow_release_metadata.
+- Keine leere Pflichtstruktur; kein Fake-Receipt.
+
 M29 – Release metadata current-batch identity
 - Historischer Fehler: RELEASE_METADATA_INVALID.
 - workflow_release_metadata muss exakt an aktuellen runtime batch_sha256 und aktuelle Artikelanzahl gebunden sein.
@@ -109,11 +113,11 @@ M30 – Final context batch identity
 - Der aus 107007 übergebene finale Kontext, Release-Receipt und die 107008/PSERC-Finalisierung müssen dieselbe aktuelle Batch-ID und Artikelanzahl tragen.
 - Kein Kontextwechsel zwischen 107007, 107008 und Host-Finalisierung.
 
-M31 – System-4-native bound action; no synthetic executor dependency
-- Historischer Fehler: der gebundene Produktionsweg verlangte eine nicht vorhandene separate execute_bound_action-/Executor-Capability.
-- Aktuell ist ausschließlich der maschinengebundene Weg system4_107007_entry.py → root_entry.py start-point0 → codex_entry.py worker-start autorisiert.
-- Keine synthetische execute_bound_action-Capability, kein Legacy-Handoff und kein zweiter Repair-Executor.
-- Machine-Route-Lock und System-4-Repair-Authority müssen positiv/negativ PASS sein.
+M31 – Codex-native bound action; no synthetic executor dependency
+- Historischer Fehler: gebundener Fachworkflow verlangte eine nicht vorhandene separate execute_bound_action-/Executor-Capability.
+- Der vorhandene Codex-Cloud-Worker führt ausschließlich die gebundene aktuelle Aktion aus.
+- Keine synthetische execute_bound_action-Host-Capability, kein zweiter Fachworkflow-Executor, keine Capability-Suche als Voraussetzung.
+
 M32 – PPM runtime package path is bound without environment-variable dependency
 - Historische Fehler: PPM679_PACKAGE_ZIP nicht gesetzt / kein gebundener Paketpfad / echter PPM-Aufruf nicht erreichbar.
 - fachworkflow_handoff muss den exakten repositorygebundenen PPM-6.7.9-Pfad und PSERC-FIX-Pfad selbst auflösen.
