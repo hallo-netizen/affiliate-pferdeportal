@@ -80,14 +80,18 @@ def make_fixture(root,count=7):
         slot=hashlib.sha256(f'slot-{i}'.encode()).hexdigest(); items.append({'title':f'Titel {i}','target_keyword':f'Keyword {i}','category':f'kategorie-{i}','article_type':'Beratung','plan_slot':slot})
     snapshot={'contract':'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1','next_textmachine_metadata_batch':{'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE','batch_sha256':hashlib.sha256(b'batch').hexdigest(),'item_count':count,'items':items,'publish_allowed':False}}
     snap=root/'snapshot.json'; snap.write_text(json.dumps(snapshot,ensure_ascii=False),encoding='utf-8'); snap_sha=hashlib.sha256(snap.read_bytes()).hexdigest(); batch_sha=snapshot['next_textmachine_metadata_batch']['batch_sha256']; paths=[]
+    bound_snapshot={'contract':'SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1','next_textmachine_metadata_batch':snapshot['next_textmachine_metadata_batch'],'system4_root_manifest_sha256':'1'*64}
+    bound_raw=json.dumps(bound_snapshot,ensure_ascii=False).encode('utf-8')
+    bound_sha=hashlib.sha256(bound_raw).hexdigest()
+    if bound_sha==snap_sha: raise AssertionError('FIXTURE_MUST_MODEL_DISTINCT_RUNTIME_AND_BOUND_SNAPSHOT_HASHES')
     for i,item in enumerate(items):
         unique=' '.join(f'eigen{i}_{n}' for n in range(90))
         draft=f'<article class="ppm-generated ppm-type-beratung" data-article-type="Beratung"><h2>{item["title"]}</h2><p data-fact-ids="fact-{i}-a fact-{i}-b fact-{i}-c">{item["target_keyword"]} {unique}</p><table class="system-129-table comparison-table"><tr><th>Kriterium</th><th>Wert</th></tr><tr><td>A</td><td>B</td></tr></table></article>'
         research,facts,fact=evidence_payloads(i); plan={'canonical_article':{'body_html':draft}}; context={'fact_pack':fact,'production_plan_item':plan}
         research_text=json.dumps(research,ensure_ascii=False,sort_keys=True); facts_text=json.dumps(facts,ensure_ascii=False,sort_keys=True)
-        state={'contract':batch_gate.STATE_CONTRACT,'source_snapshot_sha256':snap_sha,'batch_sha256':batch_sha,'article':item,'immutable_core_sha256':'','publish_allowed':False,'phase':'OUTPUT_GATE_REQUIRED','revision':1,'research':{'text':research_text,'sha256':sha_text(research_text)},'facts':{'text':facts_text,'sha256':sha_text(facts_text)},'production_context':{'fact_pack':fact,'production_plan_item':plan,'sha256':batch_gate.stable_hash(context)},'draft_markdown':draft,'draft_sha256':sha_text(draft),'checks':{'status':'PASS','mode':'FULL_PRODUCTION','errors':[],'checked_draft_sha256':sha_text(draft),'production_evidence':production_evidence(draft)},'last_error':None,'release_prepared':None,'released':False}
+        state={'contract':batch_gate.STATE_CONTRACT,'source_snapshot_sha256':bound_sha,'batch_sha256':batch_sha,'article':item,'immutable_core_sha256':'','publish_allowed':False,'phase':'OUTPUT_GATE_REQUIRED','revision':1,'research':{'text':research_text,'sha256':sha_text(research_text)},'facts':{'text':facts_text,'sha256':sha_text(facts_text)},'production_context':{'fact_pack':fact,'production_plan_item':plan,'sha256':batch_gate.stable_hash(context)},'draft_markdown':draft,'draft_sha256':sha_text(draft),'checks':{'status':'PASS','mode':'FULL_PRODUCTION','errors':[],'checked_draft_sha256':sha_text(draft),'production_evidence':production_evidence(draft)},'last_error':None,'release_prepared':None,'released':False}
         bind_authoring_contract(state)
-        state['immutable_core_sha256']=batch_gate.stable_hash(batch_gate.immutable_core(state)); p=root/f'state-{i}.json'; p.write_text(json.dumps(state,ensure_ascii=False),encoding='utf-8'); paths.append(p)
+        state['immutable_core_sha256']=batch_gate.stable_hash(batch_gate.immutable_core(state)); w=root/f'item-{i:06d}'; w.mkdir(); (w/'bound_snapshot.json').write_bytes(bound_raw); p=w/'state.json'; p.write_text(json.dumps(state,ensure_ascii=False),encoding='utf-8'); paths.append(p)
     return snap,paths
 class BatchGateTests(unittest.TestCase):
     def run_collect(self,mutate=None,count=7,path_count=None):
@@ -103,6 +107,7 @@ class BatchGateTests(unittest.TestCase):
         td,result,out,paths,snap=self.run_collect()
         try:
             self.assertEqual(result['status'],'SYSTEM4_BATCH_FULL_PASS_COLLECTED'); self.assertEqual(result['article_count'],7); self.assertEqual(result['next_required'],batch_gate.NEXT_REQUIRED); self.assertEqual(result['next_required'],'PARENT_CHAT_WORDPRESS_HANDOFF_REQUIRED'); self.assertFalse(result['publish_allowed']); self.assertEqual(len(list(out.glob('ARTICLE_*.md'))),7)
+            self.assertNotEqual(json.loads(paths[0].read_text())['source_snapshot_sha256'], hashlib.sha256(snap.read_bytes()).hexdigest())
             evidence=json.loads((out/'system4_batch_evidence.json').read_text()); self.assertEqual(evidence['article_count'],7); self.assertEqual(evidence['next_required'],batch_gate.NEXT_REQUIRED); self.assertTrue(all(row['quality']['languagetool']['status']=='PASS' for row in evidence['articles'])); self.assertTrue(all(row['design']['status']=='PASS' for row in evidence['articles'])); self.assertFalse(evidence['design_mutation_performed']); self.assertEqual(evidence['batch_distinctness']['status'],'PASS')
         finally: td.cleanup()
     def test_missing_state(self): self.assert_blocked('STATE_COUNT_MISMATCH',path_count=6)
@@ -127,6 +132,14 @@ class BatchGateTests(unittest.TestCase):
     def test_wrong_snapshot_blocked(self):
         def m(r,s,p): x=json.loads(p[2].read_text()); x['source_snapshot_sha256']='0'*64; x['immutable_core_sha256']=batch_gate.stable_hash(batch_gate.immutable_core(x)); p[2].write_text(json.dumps(x))
         self.assert_blocked('STATE_SOURCE_SNAPSHOT_MISMATCH',m)
+    def test_bound_snapshot_missing_blocked(self):
+        def m(r,s,p): (p[2].parent/'bound_snapshot.json').unlink()
+        self.assert_blocked('STATE_BOUND_SNAPSHOT_MISSING',m)
+    def test_bound_snapshot_batch_drift_blocked(self):
+        def m(r,s,p):
+            bp=p[2].parent/'bound_snapshot.json'; x=json.loads(bp.read_text()); x['next_textmachine_metadata_batch']['items'][2]['title']='Falsch'; bp.write_text(json.dumps(x,ensure_ascii=False))
+            st=json.loads(p[2].read_text()); st['source_snapshot_sha256']=hashlib.sha256(bp.read_bytes()).hexdigest(); st['immutable_core_sha256']=batch_gate.stable_hash(batch_gate.immutable_core(st)); p[2].write_text(json.dumps(st,ensure_ascii=False))
+        self.assert_blocked('STATE_BOUND_SNAPSHOT_BATCH_MISMATCH',m)
     def test_metadata_tamper_blocked(self):
         def m(r,s,p): x=json.loads(p[2].read_text()); x['article']['title']='Falsch'; x['immutable_core_sha256']=batch_gate.stable_hash(batch_gate.immutable_core(x)); p[2].write_text(json.dumps(x))
         self.assert_blocked('STATE_ARTICLE_BINDING_MISMATCH',m)
