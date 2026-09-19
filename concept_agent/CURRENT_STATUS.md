@@ -1,45 +1,28 @@
 # CONCEPT AGENT — CURRENT STATUS
 
-Status: FIRST_REAL_CHECKER_TESTRUN_PASS
+Status: SEVEN_ARTICLE_REAL_CHECKER_RUN_PASS
 
-## Erster echter Testlauf erreicht
-Artikel:
-`Das Wichtigste über Hindernisstangen für Pferde`
+## 7-Artikel-Lauf
+Writer: ChatGPT / GPT-5.6 Sol
 
-Frischer Testkandidat:
-`87acfa973423d20678509f3f3d49e90613d4c34266a9ddd27055dc71b9a43b13`
+Ergebnis:
+- 7/7 Artikel LanguageTool 6.8 PASS, jeweils 0 Findings
+- 7/7 Artikel PPM 6.7.9 TECHNICAL_CHECK_OK
+- 7/7 Artikel PPM 6.7.9 CONTENT_QUALITY_CHECK_OK
+- 7/7 Fail-Closed-Aggregat PASS
+- 0 exakte artikelübergreifende Satzdubletten, KI-Offenlegung ausgenommen
 
-### Echte Prüfer
-LanguageTool 6.8:
-- 0 Findings
-- PASS
-- JAR SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
+Batch SHA256:
+`cee54c81cd8a37ee52e5034f3f24eed31f9e81eb9595810b277073c7347272f1`
 
-PPM 6.7.9:
-- TECHNICAL_CHECK_OK
-- CONTENT_QUALITY_CHECK_OK
-- fail_closed_aggregate_status PASS
-- PASS
-- Package SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
-
-### Negativ- und Reparaturprobe
-- Tippfehler `Stangenarbiet` -> LanguageTool BLOCK / GERMAN_SPELLER_RULE
-- Tabelle entfernt -> PPM BLOCK
-- gebundenen internen Link durch externen Link ersetzt -> PPM BLOCK
-- Reparatur auf frischen Kandidaten -> LanguageTool PASS + PPM PASS
-
-### Reale interne Links
-1. `/training/`
-2. `/training/training-reitplatz-training/`
-3. `/training/training-reitplatz-training/hindernisstangen/`
+## Nachweise
+- `concept_agent/SEVEN_ARTICLE_RUN_001_PROOF.json`
+- `concept_agent/SEVEN_ARTICLE_RUN_001_OPTIMIZATION_LOG.md`
 
 ## Harte Grenzen
 - kein Codex
+- kein Claude
 - kein Merge
 - kein Publish
 - kein WordPress-Write
 - keine Änderung anderer Konzepte
-
-## Nachweis
-`concept_agent/FIRST_REAL_CHECKER_RUN_V1.json`
-`concept_agent/test_output/FIRST_REAL_CHECKER_CANDIDATE.html`
