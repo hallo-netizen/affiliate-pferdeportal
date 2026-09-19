@@ -1,0 +1,32 @@
+name: Konzept Null Current7 Final WordPress File
+on:
+  push:
+    branches: [hobbyroom/konzept-null-startmaster0102-isolated]
+    paths:
+      - 'konzept_null/finalize_current7.py'
+      - '.github/workflows/konzept-null-current7-final.yml'
+permissions:
+  contents: write
+jobs:
+  final:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Build PPM-validated and ENDSTEMPEL-signed final JSON
+        env:
+          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          python3 konzept_null/finalize_current7.py
+      - name: Commit exactly one final WordPress file
+        run: |
+          set -euo pipefail
+          test -f konzept_null/runs/current7/final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json
+          git add konzept_null/runs/current7/final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "KONZEPT NULL current7: final signed WordPress import file"
+          git push
