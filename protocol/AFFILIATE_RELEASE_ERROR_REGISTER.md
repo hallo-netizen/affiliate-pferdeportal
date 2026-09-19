@@ -506,3 +506,40 @@ Der Einstieg bleibt:
 **NEGATIV:** Suche nach aktivem `INSTALL_67272_TEST_CANDIDATE_AND_VERIFY_START_CATEGORY_PAGE_AND_PROVIDER_STATS` als `authorized_next_action` oder Hobbyraum-`next_action` darf keine zweite Current-Wahrheit ergeben.
 
 **Status:** CLOSED / NACHGEHOLT — `CURRENT_RELEASE.json` Generation 67 verwendet wieder guard-konform genau `RUN_BOUND_RELEASE_GATES`; der konkrete erste Gate-Schritt ist dort gebunden. Hobbyraum ist als `COMPLETED_RETURNED_TO_CURRENT` markiert und führt keine eigene NEXT ACTION mehr.
+
+## AFF-ERR-028 — Awin-Programmliste nutzt undokumentierten Bearer-Header als Primärtransport
+
+**Datum / Live-Befund:** 19.09.2026.
+
+**Symptom:** Awin-Verbindung war zuvor erfolgreich, später meldete die Synchronisierung `Awin lieferte keine gültige JSON-Programmliste; Last-Known-Good bleibt erhalten.`; neue genehmigte Partnerschaften erschienen nicht zuverlässig im Backend.
+
+**Root Cause:** 6.72.102 rief `GET /publishers/{publisherId}/programmes?includeHidden=true` primär mit `Authorization: Bearer` auf und fiel nur bei HTTP 401/403 auf den dokumentierten `accessToken`-Queryparameter zurück. Ein HTTP-2xx-Nicht-JSON löste deshalb keinen Fallback aus.
+
+**Nicht wiederholen:** Für GET programmes ausschließlich den dokumentierten Query-Transport `includeHidden=true&accessToken=...` verwenden. Ungültige/fehlgeschlagene Antwort darf Last-Known-Good niemals überschreiben. Partnerinventur unabhängig von Produkt-/Feedautomatik aktualisieren.
+
+**POSITIV:** aktive + versteckte joined-Programme werden gelesen; neue IDs erscheinen pending; bestehende Freigaben bleiben erhalten.
+**NEGATIV:** HTTP-/JSON-Fehler => kein Write auf Programmliste, LKG bleibt.
+**Regression:** Produktfeeds/Offers/OTTO-Produktlogik sowie Journal/Glossar/Pferderassen unverändert.
+
+**Evidence lokal 6.72.103:** 6.72.102-Fehlerzustand reproduziert; Rootfix-Harness 14/14 PASS; Auth-Mutation ROT; PHP-Lint 21/21; Fresh-Unpack 26/26 byteidentisch.
+
+**Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
+
+## AFF-ERR-029 — Awin-Produkt erscheint in Banner-&-Werbemittel-Ansicht
+
+**Datum / Live-Befund:** 19.09.2026.
+
+**Symptom:** In `Affiliate-Zentrale → Banner & Werbemittel` mit Providerfilter Awin erscheint ein historischer OTTO-Produktdatensatz als Karte.
+
+**Root Cause:** Die Creative-Library-Abfrage filterte providerseitig, trennte bei Awin aber `creative_type=product` nicht von der Banneransicht.
+
+**Nicht wiederholen:** Die Awin-Banneransicht darf ausschließlich `creative_type=banner` liefern. Historische OTTO-Produkte werden nicht gelöscht und bleiben im Produktpfad.
+
+**POSITIV:** Awin-Banner bleiben sichtbar.
+**NEGATIV:** Awin-Produktzeile ist in der Banneransicht unsichtbar, Bestand bleibt erhalten.
+**Regression:** Nicht-Awin-Providerquery unverändert; Ausspielung unverändert.
+
+**Evidence lokal 6.72.103:** Runtime-SQL-Test PASS; Nicht-Awin-Gegenfall PASS; Bannerfilter-Mutation ROT; Fresh-Unpack PASS.
+
+**Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
+
