@@ -1,37 +1,41 @@
 # CONCEPT AGENT — CURRENT STATUS
 
-Status: FIRST_REAL_SIMULATION_PASS / FULL_PRODUCTION_PARITY_OPEN
+Status: PROTOTYPE_TESTSTRECKE_COMPLETE_PASS / PRODUCTION_PARITY_BLOCKED
 
-## Erledigt
-- vollständig eigenes Büro `concept_agent/**`
-- eigener Branch `hobbyroom/concept-agent-isolated-v1`
-- harte Null-Schnittstellen-Regel
+## Fertig
+- eigenes isoliertes Büro
 - Research Agent
 - Facts Agent
 - Writer Agent
 - Repair Agent
 - harte Übergabeprüfungen
-- isolierter Textmaschinen-Snapshot
-- genau eine finale Rückgabedatei
-- Writer austauschbar
-- Chat-Writer-Port vorhanden
-- Claude-Writer-Port vorbereitet, nicht verbunden
-- REALTEST 001: realer WordPress-Auftrag ohne Linkbindungen stoppt korrekt
-- REALTEST 002: vollständiger isolierter Positivlauf PASS
-- Negativmatrix: Quelle/Fakt/Link/externer Link/Tabelle BLOCK wie erwartet
+- Textmaschinen-Snapshot
+- reale WordPress-Eingangsprobe
+- vollständiger Positivlauf
+- Negativmatrix
+- 1 / 3 / 7 Artikel PASS
+- genau eine finale Datei pro Artikel
+- Chat-Writer-Port
+- Claude-Writer-Port vorbereitet
+- PPM 6.7.9 als eigene Byte-Kopie im Büro
+- eigener LT-6.8-Beschaffungsweg mit festen Hashes
+- Isolation gegen main geprüft: Änderungen ausschließlich concept_agent/**
 
-## Erster realer Positivnachweis
-Artikel: Das Wichtigste über Hindernisstangen für Pferde
-Artikel-SHA256:
-`a8e9aaf69d5e93ad4bc218c236ecf1768b9ae96688aca1acb2d94ab1a7ba8f01`
+## Nicht als PASS behauptet
+- echter LT-6.8-Check des Concept-Agent-Artikels
+- echter PPM-6.7.9-FULL-Check mit vollständigem produktionskonformen Fact-Pack/Plan
+- Claude-API
+- WordPress-Rückimport
 
-## Bewusst weiterhin offen
-- vollständige 1:1-Spiegelung aller produktiven Textmaschinenregeln
-- echtes LanguageTool 6.8 im Concept-Agent-Büro
-- echter PPM 6.7.9 im Concept-Agent-Büro
-- echte Claude-Verbindung
-- echte WordPress-Rückgabe
-- 1..N-Batchtest
+## Erster verbleibender Blocker
+`REAL_LT68_PPM679_PRODUCTION_PARITY_NOT_EXECUTED`
 
-## Harte Grenze
-Kein Merge. Kein Publish. Kein WordPress-Write. Keine Änderung anderer Konzepte.
+Grund:
+Die aktuelle Chat-Ausführungsumgebung enthält das LT-6.8-Binärpaket nicht und erlaubt hier keinen externen Binärdownload. Kein Ersatz-PASS.
+
+## Harte Grenzen
+Kein Merge.
+Kein Publish.
+Kein WordPress-Write.
+Kein Codex.
+Keine Änderung anderer Konzepte.
