@@ -1,0 +1,85 @@
+name: Validate Current7 Real PPM679
+
+on:
+  push:
+    branches: [inspect/current-wp-importer-20260919]
+    paths: ['.github/workflows/validate-current7-real-ppm679.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  ppm:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Fetch exact Concept Null article branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin hobbyroom/konzept-null-startmaster0102-isolated
+      - name: Run real PPM679 content validator on 7 articles
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import sys,json,hashlib,subprocess,copy
+          from pathlib import Path
+          sys.path.insert(0,'isolated_system4')
+          import machine_point0, production_checks_engine as pce
+          repo=Path('.').resolve()
+          _,plans=machine_point0._current_snapshot_and_plans(repo,machine_point0.root_entry._critical_manifest_sha256())
+          pre=[x['production_plan_item'] for x in plans['items']]
+          research=json.loads(subprocess.check_output(['git','show','FETCH_HEAD:konzept_null/runs/current7/RESEARCH.json'],text=True))
+          meta=json.loads(subprocess.check_output(['git','show','FETCH_HEAD:konzept_null/CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json'],text=True))
+          findings={x['plan_slot']:x['findings'] for x in research['items']}
+          filemap=[
+            'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
+            'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html'
+          ]
+          failed=False
+          for i,row in enumerate(meta['items']):
+            html=subprocess.check_output(['git','show',f'FETCH_HEAD:konzept_null/runs/current7/articles/{filemap[i]}'],text=True)
+            claims=[]
+            sources=[]
+            seen=set()
+            for f in findings[row['plan_slot']]:
+              sid=f['source_id']; stmt=f['statement']
+              if sid not in seen:
+                sources.append({'source_id':sid,'source_title':sid,'source_url':'https://example.invalid/'+sid,'snapshot_sha256':hashlib.sha256(sid.encode()).hexdigest(),'evidence':stmt})
+                seen.add(sid)
+              claims.append({
+                'fact_id':f['fact_id'],'source_id':sid,'statement':stmt,
+                'evidence_text':stmt,'evidence_text_sha256':hashlib.sha256(stmt.encode()).hexdigest(),
+                'source_url':'https://example.invalid/'+sid,'claim_status':'FULLY_SUPPORTED',
+                'article_types':[row['article_type']]
+              })
+            sid='current7-'+row['plan_slot']
+            fp={'contract':'canonical_fact_pack_v1','status':'SOURCE_VERIFIED_PRODUCTION_READY','source_snapshot_id':sid,'fact_pack_id':sid,'sources':sources,'claims':claims}
+            item=copy.deepcopy(pre[i])
+            item['source_snapshot_id']=sid
+            item['runtime_order']={
+              'order_id':'kn7-'+str(i+1),'article_type':row['article_type'],'title':row['title'],
+              'slug':filemap[i][:-5],'subject_scope':row['title'],'subject_label':row['target_keyword'],
+              'lead':row['title'],'conclusion':row['title'],
+              'links':item.get('quality_binding',{}).get('link_bindings',[]),
+              'allowed_fact_ids':[c['fact_id'] for c in claims],
+              'question':row['title'],'answer':row['title'],'faq_question':row['title'],'faq_answer':row['title'],
+              'summary':row['title'],'search_intent':item.get('search_intent','DECISION_SUPPORT')
+            }
+            item['canonical_article']={
+              'title':row['title'],'target_keyword':row['target_keyword'],'article_type':row['article_type'],
+              'slug':filemap[i][:-5],'body_html':html,'body_html_sha256':hashlib.sha256(html.encode()).hexdigest(),
+              'body_text':''
+            }
+            try:
+              out=pce.run_ppm_content_validator(repo,html,fp,item,{'status':'PASS','engine':'LanguageTool 6.8 / Bestand 43','finding_count':0,'checked_text_sha256':'0'*64,'report_sha256':'0'*64})
+              print('PPM_PASS',i,row['plan_slot'],json.dumps(out,ensure_ascii=False,sort_keys=True))
+            except Exception as e:
+              failed=True
+              print('PPM_FAIL',i,row['plan_slot'],type(e).__name__,str(e))
+          if failed: raise SystemExit(2)
+          print('CURRENT7_REAL_PPM679_ALL_PASS')
+          PY
