@@ -28,6 +28,7 @@ Dort vorhanden und getestet:
 - `control/startmaster0107/PRE_CODEX_START_HARDLOCK.json`
 - `control/startmaster0107/PRE_CODEX_START_RECEIPT.json`
 - `control/startmaster0107/pre_codex_start_hardlock.py`
+- `isolated_system4/parent_start.py` (minimaler Preflight-Aufruf vor Erzeugung des temporären Run-/Workspace)
 
 Der Restart-Test prüft insbesondere:
 - REPAIR_REQUIRED vor simuliertem Prozessabbruch;
