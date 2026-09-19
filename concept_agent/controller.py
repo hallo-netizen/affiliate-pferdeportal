@@ -5,6 +5,8 @@ from agents import ResearchAgent, ResearchInput, FactsAgent, WriterAgent, Repair
 from handoff_guard import check_job, check_research, check_facts, check_draft
 from article_guard import check_article
 from textmachine_guard import check_textmachine_snapshot
+from final_file import build_final_file
+from writer_port import writer_name
 
 
 @dataclass
@@ -12,13 +14,14 @@ class RunResult:
     status: str
     draft: Draft | None
     trace: list[str]
+    final_file: dict | None = None
 
 
 class ConceptAgentController:
-    def __init__(self):
+    def __init__(self, writer=None):
         self.research_agent=ResearchAgent()
         self.facts_agent=FactsAgent()
-        self.writer_agent=WriterAgent()
+        self.writer_agent=writer or WriterAgent()
         self.repair_agent=RepairAgent()
 
     def run(self, job: ArticleJob, source_pool: list[ResearchEvidence]) -> RunResult:
@@ -41,7 +44,11 @@ class ConceptAgentController:
             return RunResult("BLOCKED_FACTS", None, trace+errors)
         trace.append("FACTS_PASS")
 
-        draft=self.writer_agent.run(job, facts)
+        try:
+            draft=self.writer_agent.run(job, facts)
+        except RuntimeError as exc:
+            return RunResult("BLOCKED_WRITER", None, trace+[str(exc)])
+
         errors=check_draft(draft, job)
         if errors:
             return RunResult("BLOCKED_DRAFT_HANDOFF", None, trace+errors)
@@ -60,4 +67,5 @@ class ConceptAgentController:
             trace.append("ARTICLE_PASS")
 
         trace.append("TEXTMACHINE_SNAPSHOT_PASS")
-        return RunResult("FINAL_FILE_READY", draft, trace)
+        final_payload=build_final_file(job,draft,trace,writer_name(self.writer_agent))
+        return RunResult("FINAL_FILE_READY", draft, trace, final_payload)
