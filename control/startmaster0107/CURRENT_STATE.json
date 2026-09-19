@@ -210,30 +210,21 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "E2E_PRECODEX_READY_USER_STOP_NO_CODEX_START",
+  "current_work_status": "REAL7_CODEX_AUTHORIZED_PRESTART",
   "current_execution_blocker": {
-    "code": "USER_EXPLICITLY_FORBIDS_CODEX_START_CURRENT_TURN",
+    "code": "NONE_PRESTART_USER_AUTHORIZED_REAL7",
     "error_class": false,
-    "detail": "No known technical blocker remains before a real Codex acceptance start. Permanent dispatcher authority is PR #342; PR #107 is superseded. Because any status merge itself advances main, CURRENT_STATE deliberately does not pin dispatcher freshness to a fixed current-main SHA. The mandatory start rule is dynamic and fail-closed: immediately before any Codex start, fresh-read main and PR #342, require dispatcher head == then-current main, require a fresh successful hardlock-base for that exact head/base relation, and only then start. Last pre-status-refresh dispatcher verification was hardlock-base run 35427945011 PASS on head 93956f83ca2f8ddea5f07cb82c1b77ef393f248f. User explicitly forbids Codex start in this turn.",
+    "detail": "User explicitly authorized the real 7-article Codex production run on 2026-09-19. This supersedes the prior user stop that forbade Codex/real7 start. Technical start remains fail-closed on fresh dispatcher==main and fresh hardlock-base PASS.",
     "dispatcher_pr": 342,
-    "superseded_dispatcher_pr": 107,
-    "dispatcher_freshness_policy": "FRESH_READ_AT_START_HEAD_MUST_EQUAL_CURRENT_MAIN",
-    "hardlock_policy": "FRESH_HARDLOCK_BASE_PASS_REQUIRED_AT_START",
-    "last_verified_dispatcher_head": "93956f83ca2f8ddea5f07cb82c1b77ef393f248f",
-    "last_verified_hardlock_base_run": 35427945011,
-    "last_verified_hardlock_base_status": "PASS",
-    "codex_free_acceptance_run_id": 35398621624,
-    "codex_free_acceptance_status": "PASS",
-    "real_codex_durable_evidence_status": "STILL_REQUIRED",
-    "codex_start_allowed": false,
-    "fresh_user_codex_approval_required": true,
+    "user_authorized_real7": true,
+    "codex_start_allowed": true,
     "publish_allowed": false
   },
   "external_execution_blocker": {
-    "code": "CODEX_CAPACITY_UNKNOWN_UNTIL_AUTHORIZED_START",
-    "evidence": "Last observed usage-limit response is historical (PR107 issuecomment-5736330732, 2026-09-18). No new Codex start was attempted because the user explicitly forbids it in this turn.",
+    "code": "CODEX_CAPACITY_UNKNOWN_UNTIL_START",
+    "evidence": "Capacity will be established by the authorized live start attempt.",
     "classification": "EXTERNAL_AVAILABILITY_UNKNOWN_NOT_PROJECT_FAILURE",
-    "effect": "On a later explicit user authorization, the real start attempt establishes current capacity. No capacity claim is made now.",
+    "effect": "If Codex usage limit blocks the task, stop and report exact external blocker.",
     "resolved": null
   },
   "superseded_live_findings": [
@@ -320,19 +311,18 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE_KNOWN_TECHNICAL; DYNAMIC_FRESHNESS_CHECK_REQUIRED_AT_START; USER_STOP_ACTIVE",
   "next_action": {
-    "goal": "ON_NEW_EXPLICIT_APPROVAL_FRESH_CHECK_THEN_START_REAL_CODEX_1_PLUS_3_ACCEPTANCE",
-    "action": "Do not start Codex in this turn. On a later explicit start command: (1) fresh-read current main and PR #342; (2) require PR #342 head exactly equals current main, otherwise synchronize head first without merging the dispatcher; (3) require a fresh hardlock-base PASS on that exact relation; (4) only then start the isolated real Codex 1+3 acceptance with fresh real articles, real LanguageTool 6.8, real PPM 6.7.9, durable remote article bytes/evidence, separate real PPM quality-negative case, and same-article repair for any BATCH_TEMPLATE_REUSE_BLOCKED until pass or genuine hard blocker; (5) keep canonical 107008 fail-closed; no production 7-item batch and no publish.",
-    "why": "All preparatory test and security work is complete. Remaining evidence inherently requires the real Codex run, which the user explicitly forbids now.",
+    "goal": "RUN_REAL_7_ARTICLE_BATCH_ON_CODEX_WITH_DURABLE_LIVE_ERROR_LOG",
+    "action": "Fresh-read main and permanent dispatcher PR #342; require exact head equality and fresh hardlock-base PASS. Then start the current bound production route exactly once with `python3 isolated_system4/parent_start.py start-current-bound`, attach Codex only to the machine-created current workspace, process exactly 7 articles sequentially, and allow article N+1 only after article N reaches real System-4 PASS. For repairable LT/PPM/batch findings, stay on the same article/workspace and repair through the bound System-4 controller until PASS or a genuine hard blocker. Persist a concise live progress/error ledger in the permanent dispatcher PR conversation as milestones occur. After all 7 pass, continue only through the bound batch collect and 107008 final-review path. No publish without separate explicit user authorization.",
+    "why": "The user explicitly authorized the real 7-article Codex run and requested live durable logging to catch errors early.",
     "forbidden": [
-      "start Codex in this turn",
-      "start real article production in this turn",
       "merge permanent dispatcher PR #342",
-      "start production 7-item batch",
-      "publish or write to WordPress",
+      "publish or write to WordPress without separate explicit user authorization",
       "weaken hardlock or hardlock-base",
-      "lower quality or batch thresholds",
-      "bypass canonical 107008",
-      "claim real-Codex durable evidence before it exists"
+      "lower PPM/LT/content/design/batch thresholds",
+      "use historical/recovery article bodies",
+      "skip an article",
+      "start article N+1 before article N PASS",
+      "bypass System-4 controller or canonical 107008"
     ]
   },
   "hobbyroom_pr": 331,
@@ -490,6 +480,13 @@
     "codex_free_acceptance_run": 35398621624,
     "codex_started": false,
     "real_article_production_started": false,
+    "publish_allowed": false
+  },
+  "real7_authorization_20260919": {
+    "authorized": true,
+    "article_count": 7,
+    "codex": true,
+    "live_repo_logging": true,
     "publish_allowed": false
   }
 }
