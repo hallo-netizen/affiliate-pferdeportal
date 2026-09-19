@@ -1,0 +1,101 @@
+name: Konzept Null Apply PPM679 Repairs
+
+on:
+  push:
+    branches: [hobbyroom/konzept-null-startmaster0102-isolated]
+    paths: ['.github/workflows/konzept-null-apply-ppm679-repairs.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Apply only bound PPM679 repair classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re,hashlib,html
+          from pathlib import Path
+
+          root=Path('konzept_null/runs/current7')
+          research=json.loads((root/'RESEARCH.json').read_text(encoding='utf-8'))
+          meta=json.loads(Path('konzept_null/CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json').read_text(encoding='utf-8'))
+          find={x['plan_slot']:{f['fact_id']:f for f in x['findings']} for x in research['items']}
+          files=[
+            'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
+            'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html'
+          ]
+          links=[
+            [('parent_category','/training/','Training'),('semantic_related','/training/training-reitplatz-training/','Reitplatz Training'),('further_information','/training/training-reitplatz-training/hindernisstangen/','Hindernisstangen')],
+            [('parent_category','/weide/','Weide'),('semantic_related','/weide/weide-reitplatz/','Reitplatz'),('further_information','/weide/weide-reitplatz/reitplatzbeleuchtung/','Reitplatzbeleuchtung')],
+            [('parent_category','/stall/','Stall'),('semantic_related','/stall/stall-mist-und-entsorgung/','Mist & Entsorgung'),('further_information','/stall/stall-mist-und-entsorgung/mistcontainer/','Mistcontainer')],
+            [('parent_category','/wissen/','Wissen'),('semantic_related','/wissen/wissen-versicherungen-und-recht/','Versicherungen & Recht'),('further_information','/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/','Pferdehaftpflicht')],
+            [('parent_category','/gesundheit/','Gesundheit'),('semantic_related','/gesundheit/gesundheit-hufe/','Hufe'),('further_information','/gesundheit/gesundheit-hufe/huffett/','Huffett')],
+            [('parent_category','/gesundheit/','Gesundheit'),('semantic_related','/gesundheit/gesundheit-insekten-und-schutz/','Insekten & Schutz'),('further_information','/gesundheit/gesundheit-insekten-und-schutz/fliegenmasken/','Fliegenmasken')],
+            [('parent_category','/fuetterung/','Fütterung'),('semantic_related','/fuetterung/fuetterung-kraftfutter/','Kraftfutter'),('further_information','/fuetterung/fuetterung-kraftfutter/pellets/','Pellets')],
+          ]
+          for i,row in enumerate(meta['items']):
+            p=root/'articles'/files[i]
+            s=p.read_text(encoding='utf-8')
+            facts=find[row['plan_slot']]
+            ids=list(facts)
+            default=ids[0]
+
+            # Bind the exact current portal link for each role.
+            for role,href,anchor in links[i]:
+                pat=rf'<a\b[^>]*data-link-role="{re.escape(role)}"[^>]*>.*?</a>'
+                repl=f'<a data-link-role="{role}" href="{href}">{html.escape(anchor)}</a>'
+                s,n=re.subn(pat,repl,s,count=1,flags=re.I|re.S)
+                if n!=1: raise SystemExit(f'LINK_ROLE_NOT_UNIQUE:{files[i]}:{role}:{n}')
+
+            # Every visible factual unit must carry one or more bound fact ids.
+            def add_fact(m):
+                tag,attrs=m.group(1),m.group(2)
+                if 'data-fact-ids=' in attrs or 'ppm-ai-disclosure' in attrs:
+                    return m.group(0)
+                return '<'+tag+attrs+f' data-fact-ids="{default}">'
+            s=re.sub(r'<(p|li|td|th)\b([^>]*)>',add_fact,s,flags=re.I)
+
+            # A table row's binding is copied to each cell where available.
+            def rowfix(m):
+                attrs,body=m.group(1),m.group(2)
+                mm=re.search(r'data-fact-ids="([^"]+)"',attrs)
+                if not mm:return m.group(0)
+                fid=mm.group(1)
+                def cell(cm):
+                    tag,a=cm.group(1),cm.group(2)
+                    a=re.sub(r'\sdata-fact-ids="[^"]+"','',a)
+                    return '<'+tag+a+f' data-fact-ids="{fid}">'
+                body=re.sub(r'<(td|th)\b([^>]*)>',cell,body,flags=re.I)
+                return '<tr'+attrs+'>'+body+'</tr>'
+            s=re.sub(r'<tr\b([^>]*)>(.*?)</tr>',rowfix,s,flags=re.I|re.S)
+
+            # Source trace hashes bind to the exact evidence text in the fact pack.
+            def tracefix(m):
+                tag=m.group(0)
+                fm=re.search(r'data-fact-id="([^"]+)"',tag)
+                if not fm or fm.group(1) not in facts: raise SystemExit(f'TRACE_FACT_UNKNOWN:{files[i]}')
+                fid=fm.group(1)
+                ev=facts[fid]['statement']
+                h=hashlib.sha256(ev.encode()).hexdigest()
+                tag=re.sub(r'data-source-hash="[^"]*"',
+                           f'data-source-hash="{h}"',tag)
+                return tag
+            s=re.sub(r'<span\b[^>]*class="ppm-source-trace"[^>]*></span>',tracefix,s,flags=re.I)
+
+            p.write_text(s,encoding='utf-8')
+            print(files[i],hashlib.sha256(s.encode()).hexdigest())
+          PY
+          git diff --check
+          git add konzept_null/runs/current7/articles/*.html
+          git diff --cached --quiet && { echo NO_REPAIRS_NEEDED; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "KONZEPT NULL current7: apply exact PPM679 bound repairs"
+          git push
