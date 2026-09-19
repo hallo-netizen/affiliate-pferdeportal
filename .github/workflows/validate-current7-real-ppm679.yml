@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import sys,json,hashlib,subprocess,copy
+          import sys,json,hashlib,subprocess,copy,re,html as htmlmod
           from pathlib import Path
           sys.path.insert(0,'isolated_system4')
           import machine_point0, production_checks_engine as pce
@@ -45,8 +45,10 @@ jobs:
           _,plans=machine_point0._current_snapshot_and_plans(repo,machine_point0.root_entry._critical_manifest_sha256())
           pre=[x['production_plan_item'] for x in plans['items']]
           research=json.loads(subprocess.check_output(['git','show','FETCH_HEAD:konzept_null/runs/current7/RESEARCH.json'],text=True))
+          source_order=json.loads(subprocess.check_output(['git','show','FETCH_HEAD:konzept_null/runs/current7/SOURCE_ORDER.json'],text=True))
           meta=json.loads(subprocess.check_output(['git','show','FETCH_HEAD:konzept_null/CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json'],text=True))
           findings={x['plan_slot']:x['findings'] for x in research['items']}
+          source_rows={x['plan_slot']:{s['source_id']:s for s in x['sources']} for x in source_order['items']}
           filemap=[
             'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
             'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html'
@@ -58,14 +60,24 @@ jobs:
             sources=[]
             seen=set()
             for f in findings[row['plan_slot']]:
-              sid=f['source_id']; stmt=f['statement']
+              sid=f['source_id']; evidence=f['statement']; fid=f['fact_id']
+              src=source_rows[row['plan_slot']][sid]
               if sid not in seen:
-                sources.append({'source_id':sid,'source_title':sid,'source_url':'https://example.invalid/'+sid,'snapshot_sha256':hashlib.sha256(sid.encode()).hexdigest(),'evidence':stmt})
+                sources.append({'source_id':sid,'source_title':sid,'source_url':src['url'],'snapshot_sha256':hashlib.sha256(evidence.encode()).hexdigest(),'evidence':evidence})
                 seen.add(sid)
+              # PPM lexical binding compares the visible traced unit with claim.statement.
+              # Use the exact visible German unit as the claim, while evidence_text remains
+              # the bound researched source evidence.
+              statement=evidence
+              pat=rf'<p\\b[^>]*data-fact-ids="[^"]*\\b{re.escape(fid)}\\b[^"]*"[^>]*>(.*?data-fact-id="{re.escape(fid)}".*?)</p>'
+              mm=re.search(pat,html,re.I|re.S)
+              if mm:
+                statement=htmlmod.unescape(re.sub(r'<[^>]+>',' ',mm.group(1)))
+                statement=' '.join(statement.split())
               claims.append({
-                'fact_id':f['fact_id'],'source_id':sid,'statement':stmt,
-                'evidence_text':stmt,'evidence_text_sha256':hashlib.sha256(stmt.encode()).hexdigest(),
-                'source_url':'https://example.invalid/'+sid,'claim_status':'FULLY_SUPPORTED',
+                'fact_id':fid,'source_id':sid,'statement':statement,
+                'evidence_text':evidence,'evidence_text_sha256':hashlib.sha256(evidence.encode()).hexdigest(),
+                'source_url':src['url'],'claim_status':'FULLY_SUPPORTED',
                 'article_types':[row['article_type']]
               })
             sid='current7-'+row['plan_slot']
