@@ -1,6 +1,6 @@
 # CONCEPT AGENT — CURRENT STATUS
 
-Status: PROTOTYPE_CHAIN_COMPLETE / EXTERNAL_WRITER_NOT_CONNECTED
+Status: FIRST_REAL_SIMULATION_PASS / FULL_PRODUCTION_PARITY_OPEN
 
 ## Erledigt
 - vollständig eigenes Büro `concept_agent/**`
@@ -12,20 +12,26 @@ Status: PROTOTYPE_CHAIN_COMPLETE / EXTERNAL_WRITER_NOT_CONNECTED
 - Repair Agent
 - harte Übergabeprüfungen
 - isolierter Textmaschinen-Snapshot
-- Artikelprüfung gegen diesen Snapshot
 - genau eine finale Rückgabedatei
 - Writer austauschbar
-- Variante A: Chat-Writer-Port vorhanden
-- Variante B: Claude-Writer-Port vorhanden, bewusst nicht verbunden
-- Positiv-/Negativtests für Input, Recherche, Fakten, Textmaschine und Writer-Zweig
+- Chat-Writer-Port vorhanden
+- Claude-Writer-Port vorbereitet, nicht verbunden
+- REALTEST 001: realer WordPress-Auftrag ohne Linkbindungen stoppt korrekt
+- REALTEST 002: vollständiger isolierter Positivlauf PASS
+- Negativmatrix: Quelle/Fakt/Link/externer Link/Tabelle BLOCK wie erwartet
 
-## Bewusst nicht gemacht
-- kein Codex
-- kein WordPress-Write
-- kein Publish
-- kein Merge
-- keine Änderung anderer Konzepte
-- keine echte Claude-API-Verbindung
+## Erster realer Positivnachweis
+Artikel: Das Wichtigste über Hindernisstangen für Pferde
+Artikel-SHA256:
+`a8e9aaf69d5e93ad4bc218c236ecf1768b9ae96688aca1acb2d94ab1a7ba8f01`
 
-## Nächster Schritt
-Einen echten WordPress-/SEO-Auftrag ausschließlich als KOPIE in dieses Büro übernehmen und durch die komplette isolierte Kette führen.
+## Bewusst weiterhin offen
+- vollständige 1:1-Spiegelung aller produktiven Textmaschinenregeln
+- echtes LanguageTool 6.8 im Concept-Agent-Büro
+- echter PPM 6.7.9 im Concept-Agent-Büro
+- echte Claude-Verbindung
+- echte WordPress-Rückgabe
+- 1..N-Batchtest
+
+## Harte Grenze
+Kein Merge. Kein Publish. Kein WordPress-Write. Keine Änderung anderer Konzepte.
