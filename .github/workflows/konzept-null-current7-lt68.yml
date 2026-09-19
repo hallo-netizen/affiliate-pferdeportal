@@ -1,0 +1,106 @@
+name: Konzept Null Current7 Exact LT68
+
+on:
+  push:
+    branches:
+      - hobbyroom/konzept-null-startmaster0102-isolated
+    paths:
+      - 'konzept_null/runs/current7/articles/**'
+      - '.github/workflows/konzept-null-current7-lt68.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-lt68:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prove exact frozen article bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd konzept_null/runs/current7/articles
+          echo 'a62461b280abaf4a2abe568c1ade61e8c5054184edce4ce8d9e8e77025bbb34f  hindernisstangen-fuer-pferde.html' | sha256sum -c -
+          echo '4158edd8a6f42165062226af77df38a779329e4c3115850f969fc5dbaebbdf15  reitplatzbeleuchtung-ohne-mast.html' | sha256sum -c -
+          echo '0f3b53a4c53d81248f9811f79eac1254c876f8fe129f11a6083b11bad653c79d  mistcontainer-mit-deckel.html' | sha256sum -c -
+          echo '3f4fc36678da4f1edeb65e7a310f30dadf75dc321a425f9daf78274c42a0b471  pferdehaftpflicht-mit-fremdreiter.html' | sha256sum -c -
+          echo '7ea809f5ab1be6544df4e1aff0d21fbb30e59215711375fe12e1b1455e0c658f  huffett-fuer-pferde.html' | sha256sum -c -
+          echo 'b53c34250611d9f4605b3b10b8971f633b62d918711794a6fef4bf44b4de3c83  fliegenmasken-fuer-pferde.html' | sha256sum -c -
+          echo '0c89435a2a40670e2048feb6f0438a413eafa916ef9455b96058fd494a3aa68f  pellets-fuer-pferde.html' | sha256sum -c -
+          echo EXACT_7_ARTICLE_BYTES_PASS
+
+      - name: Materialize exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kn-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/kn-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/kn-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/kn-lt68/LanguageTool-6.8.zip -d /tmp/kn-lt68
+          JAR=/tmp/kn-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  '"$JAR" | sha256sum -c -
+          echo "LT_JAR=$JAR" >> "$GITHUB_ENV"
+          echo LANGUAGETOOL_6_8_IDENTITY_PASS
+
+      - name: Run exact LanguageTool 6.8 on all seven articles
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import html, json, pathlib, re, subprocess, hashlib, sys, tempfile
+          root=pathlib.Path('konzept_null/runs/current7/articles')
+          jar=pathlib.Path('/tmp/kn-lt68/LanguageTool-6.8/languagetool-commandline.jar')
+          files=sorted(root.glob('*.html'))
+          if len(files)!=7:
+              raise SystemExit('ARTICLE_COUNT_NOT_7')
+          outdir=pathlib.Path('/tmp/kn-lt68/reports'); outdir.mkdir(parents=True,exist_ok=True)
+          summary=[]
+          failed=False
+          def plain(article_html):
+              value=re.sub(r"(?is)<!--.*?-->","\n",article_html)
+              value=re.sub(r"(?is)<(script|style)\b[^>]*>.*?</\1>","\n",value)
+              value=re.sub(r"(?is)</?(?:article|section|p|div|li|h[1-6]|br|tr|td|th|ul|ol|table|blockquote)\b[^>]*>","\n",value)
+              value=re.sub(r"(?s)<[^>]+>","",value)
+              value=html.unescape(value)
+              value=re.sub(r"[ \t\r\f\v]+"," ",value)
+              value=re.sub(r"\n[ \t]*\n+","\n\n",value)
+              return value.strip()+"\n"
+          for p in files:
+              article=p.read_text(encoding='utf-8')
+              checked=plain(article)
+              with tempfile.NamedTemporaryFile('w',encoding='utf-8',suffix='.txt',delete=False) as f:
+                  f.write(checked); txt=f.name
+              cp=subprocess.run(['java','-Xmx1024m','-jar',str(jar),'--json','-l','de-DE',txt],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
+              if cp.returncode!=0:
+                  print(cp.stderr or cp.stdout,file=sys.stderr)
+                  raise SystemExit('LT_EXECUTION_FAILED:'+p.name)
+              report=json.loads(cp.stdout)
+              matches=report.get('matches')
+              if not isinstance(matches,list):
+                  raise SystemExit('LT_MATCHES_INVALID:'+p.name)
+              (outdir/(p.stem+'.lt.json')).write_text(cp.stdout,encoding='utf-8')
+              row={
+                'file':p.name,
+                'article_sha256':hashlib.sha256(article.encode()).hexdigest(),
+                'checked_text_sha256':hashlib.sha256(checked.encode()).hexdigest(),
+                'finding_count':len(matches)
+              }
+              summary.append(row)
+              print(json.dumps(row,ensure_ascii=False))
+              if matches:
+                  failed=True
+                  print('LT_FINDINGS:'+p.name, file=sys.stderr)
+                  for m in matches:
+                      rule=(m.get('rule') or {}).get('id')
+                      ctx=(m.get('context') or {}).get('text')
+                      print(json.dumps({'rule_id':rule,'message':m.get('message'),'context':ctx,'offset':m.get('offset'),'length':m.get('length')},ensure_ascii=False),file=sys.stderr)
+          (outdir/'SUMMARY.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          if failed:
+              raise SystemExit(2)
+          print('LANGUAGETOOL_6_8_ALL_7_PASS_ZERO_FINDINGS')
+          PY
