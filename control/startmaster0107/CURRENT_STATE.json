@@ -108,7 +108,10 @@
     "REAL7_LIVE_START_MAIN_6EDDDF8BDAF044E123D0B3A917E091C1B1D05863",
     "REAL7_ARTICLE0_REACHED_REPAIR_REQUIRED_REVISION1",
     "REAL7_CODEX_USAGE_LIMIT_TERMINAL_COMMENT_5740160115",
-    "REAL7_USAGE_LIMIT_EVIDENCE_BRANCH_COMMIT_4B92AF33E7D5C900A168086059D638590E98C793"
+    "REAL7_USAGE_LIMIT_EVIDENCE_BRANCH_COMMIT_4B92AF33E7D5C900A168086059D638590E98C793",
+    "SYSTEM4_RESTART_RECOVERY_CANDIDATE_F9281D903D7C0381E7A83F24C3FFA1E5D4FCFC5E",
+    "SYSTEM4_RESTART_RECOVERY_ACCEPTANCE_RUN_35430672460_PASS",
+    "SYSTEM4_PRECODEX_START_HARDLOCK_CANDIDATE_VALIDATED_NOT_INTEGRATED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -214,24 +217,46 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "REAL7_BLOCKED_EXTERNAL_CODEX_USAGE_LIMIT_ARTICLE0_REPAIR_REQUIRED",
+  "current_work_status": "REAL7_BLOCKED_RESTART_RECOVERY_VALIDATED_NOT_INTEGRATED",
   "current_execution_blocker": {
-    "code": "CODEX_USAGE_LIMIT_AFTER_ARTICLE0_REPAIR_REQUIRED",
-    "error_class": false,
-    "classification": "EXTERNAL_CAPACITY_BLOCKER",
-    "detail": "The explicitly authorized canonical seven-article run started successfully on main 6edddf8bdaf044e123d0b3a917e091c1b1d05863. Article 0 was newly generated far enough to reach real fullcheck REPAIR_REQUIRED at revision 1. Codex then stopped because of usage limit. Article 1 was not started. The terminal connector returned only the article SHA256 and generic LANGUAGETOOL_FINDING, not exact article bytes or detailed LT findings. Therefore no same-workspace continuation is claimed.",
-    "dispatcher_pr": 342,
-    "terminal_comment": 5740160115,
-    "completed_articles": 0,
-    "current_article_index": 0,
-    "current_phase": "REPAIR_REQUIRED",
-    "current_revision": 1,
-    "last_article_sha256": "c546af87a1275fa877a0acf13177f3ea0774d905968b02cb4219d80e31f5409e",
-    "last_finding_codes": [
-      "LANGUAGETOOL_FINDING"
+    "code": "REAL7_CROSS_TASK_RESTART_RECOVERY_NOT_INTEGRATED",
+    "error_class": true,
+    "classification": "TECHNICAL_INTEGRATION_BLOCKER",
+    "detail": "A cross-process REPAIR_REQUIRED recovery solution and a pre-Codex start hardlock were built and passed System4A acceptance on test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e / run 35430672460, but those files are not present on current main b43ea18b33529c819c2b123c4610b4943c39240e. Therefore restart durability and the hard start-error manifest are NOT production-integrated yet. Do not start Codex.",
+    "validated_test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
+    "validated_acceptance_run": 35430672460,
+    "required_integration_files": [
+      "isolated_system4/workspace_recovery_capsule.py",
+      "isolated_system4/restart_repair_probe.py",
+      "control/startmaster0107/PRE_CODEX_START_HARDLOCK.json",
+      "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
+      "control/startmaster0107/pre_codex_start_hardlock.py",
+      "isolated_system4/test_repair_continuity.py"
     ],
-    "next_article_started": false,
-    "sequence_107008_reached": false,
+    "restart_test_proven": {
+      "process_death_after_repair_required": true,
+      "exact_article_identity_restored": true,
+      "exact_draft_sha_restored": true,
+      "exact_checks_sha_restored": true,
+      "new_process_repair_reenters_check": true
+    },
+    "start_error_manifest_guards": [
+      "STALE_MAIN_HASH",
+      "DISPATCHER_HEAD_DRIFT",
+      "HARDLOCK_BASE_NOT_FRESH_PASS",
+      "START_HERE_STATE_HASH_DRIFT",
+      "WRONG_STEP_OR_POINT0_BYPASS",
+      "MANUAL_SOURCE_REQUEST_OR_WORKSPACE",
+      "CODEX_BOUND_CAPSULE_MISSING",
+      "OLD_OR_RECOVERY_ARTICLE_AS_NEW",
+      "TEMP_WORKSPACE_LOSS",
+      "NEXT_ARTICLE_BEFORE_PREVIOUS_PASS",
+      "REPAIRABLE_FINDING_TERMINALIZED",
+      "CODEX_USAGE_LIMIT_ACTIVE",
+      "CODEX_GITHUB_AUTH_ASSUMPTION",
+      "OUTPUT_ONLY_IN_TMP",
+      "PUBLISH_WITHOUT_SEPARATE_APPROVAL"
+    ],
     "codex_start_allowed": false,
     "publish_allowed": false
   },
@@ -239,7 +264,7 @@
     "code": "CODEX_USAGE_LIMIT",
     "evidence": "PR #342 terminal comment 5740160115",
     "classification": "EXTERNAL_AVAILABILITY_BLOCKER_NOT_PROJECT_FAILURE",
-    "effect": "No further Codex work may start until capacity is available again.",
+    "effect": "Even after technical integration, no real Codex run may start until capacity is available and a fresh PASS receipt is created.",
     "resolved": false
   },
   "superseded_live_findings": [
@@ -286,24 +311,23 @@
     "evidence_branch": "test-evidence/real7-live-20260919",
     "evidence_commit": "4b92af33e7d5c900a168086059d638590e98c793"
   },
-  "last_safe_main_sha": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
-  "last_safe_change": "Real7 live run started successfully, reached article0 REPAIR_REQUIRED revision1, then stopped on external Codex usage limit. Metadata/hash were durably recorded; exact article bytes and detailed LT findings were not returned, so no same-workspace continuation is claimed. No article1 start, no 107008, no publish.",
+  "last_safe_main_sha": "b43ea18b33529c819c2b123c4610b4943c39240e",
+  "last_safe_change": "Fresh closeout on 2026-09-19: current main advanced via unrelated Konzept-Null PR #349. Relevant delta found: cross-process repair recovery and pre-Codex start hardlock were already built and acceptance-PASS on test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e / run 35430672460, but are not integrated on main. CURRENT now points to integration of that validated candidate as the single NEXT ACTION. No Codex start, no publish, no quality-rule change.",
   "hobbyroom_status": "REAL7_EXTERNAL_USAGE_LIMIT_STOP",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "CODEX_USAGE_LIMIT; ARTICLE0_METADATA_DURABLE_BUT_ARTICLE_BYTES_NOT_DURABLE",
   "next_action": {
-    "goal": "RESUME_REAL7_ONLY_AFTER_CODEX_CAPACITY_RETURNS_WITH_FRESH_START_SAFETY",
-    "action": "Do not start Codex while the usage limit remains. When capacity returns, fresh-read main and permanent dispatcher PR #342, require exact dispatcher head == current main and fresh hardlock-base PASS. Because the stopped article-0 bytes/workspace are not durably available, do not claim same-workspace continuation. Start a fresh canonical real7 run from article 0 using `python3 isolated_system4/parent_start.py start-current-bound`, keep all seven bodies NEW, and monitor sequentially. Preserve all known historical start protections. No publish without separate user authorization.",
-    "why": "The live run reached article0 REPAIR_REQUIRED, but usage limit ended the task before exact article bytes/detailed findings were durably externalized.",
+    "goal": "INTEGRATE_VALIDATED_RESTART_RECOVERY_AND_PRECODEX_START_HARDLOCK_ON_CURRENT_MAIN",
+    "action": "Port only the already-tested restart-recovery capsule/probe and pre-Codex start-hardlock candidate from test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e onto a fresh branch from the then-current main after this status closeout. Reconcile only real main drift. Run the full no-Codex System4A acceptance, explicit process-death/restart negative-positive test, pre-Codex hardlock positive/negative matrix, deterministic entrance gate and immutable hardlock. Merge only if all required checks PASS. Then update CURRENT_STATE/START_HERE and stop before Codex.",
+    "why": "The fix exists and passed on a test commit, but current main does not contain it. Rebuilding from scratch would violate KISS and lose tested evidence.",
     "forbidden": [
-      "start Codex while usage limit is active",
-      "pretend the lost article0 workspace can be resumed",
-      "use historical/recovery article bodies",
-      "start article 1 before article 0 real PASS",
-      "weaken LT/PPM/content/design/batch thresholds",
-      "treat repairable findings as terminal project blockers",
-      "bypass canonical Point-0 or 107008",
+      "start Codex",
+      "change production text rules or quality thresholds",
+      "change PPM 6.7.9 or LanguageTool 6.8",
+      "weaken same-article repair continuity",
+      "treat test commit as production-integrated before merge",
+      "reuse historical/recovery article bodies as NEW",
       "publish or write to WordPress"
     ]
   },
@@ -480,5 +504,27 @@
     "tmp_only_evidence_forbidden": true,
     "note": "The runtime stopped on usage limit before exact article bytes/detailed LT findings could be externalized. This is not a content failure, but it prevents exact same-workspace continuation from being proven.",
     "publish_allowed": false
+  },
+  "restart_recovery_candidate": {
+    "status": "VALIDATED_ON_TEST_COMMIT_NOT_MERGED",
+    "test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
+    "acceptance_run": 35430672460,
+    "acceptance_result": "PASS",
+    "recovery_capsule": "isolated_system4/workspace_recovery_capsule.py",
+    "restart_probe": "isolated_system4/restart_repair_probe.py",
+    "exact_pre_restart_checks_hash_verified": true,
+    "exact_pre_restart_draft_hash_verified": true,
+    "same_article_verified": true,
+    "production_main_contains_fix": false
+  },
+  "pre_codex_start_hardlock_candidate": {
+    "status": "VALIDATED_ON_TEST_COMMIT_NOT_MERGED",
+    "test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
+    "manifest_ref": "control/startmaster0107/PRE_CODEX_START_HARDLOCK.json",
+    "receipt_ref": "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
+    "validator_ref": "control/startmaster0107/pre_codex_start_hardlock.py",
+    "current_test_receipt_status": "BLOCKED",
+    "current_test_receipt_reason": "CURRENT_REAL7_STOP_IS_CODEX_USAGE_LIMIT_AND_DURABLE_CROSS_TASK_RECOVERY_TRANSPORT_IS_NOT_YET_PROVEN",
+    "production_main_contains_hardlock": false
   }
 }
