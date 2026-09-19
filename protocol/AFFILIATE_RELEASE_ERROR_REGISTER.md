@@ -608,15 +608,15 @@ Der Einstieg bleibt:
 
 
 
-**Datum / Frischecheck:** 19.09.2026.
+### Historischer Teilstand zu AFF-ERR-035 – abgelöst
 
-**Befund:** WordPress läuft laut Nutzer-Livetest auf 6.72.102; lokal existiert der geprüfte Awin-Rootfix-Kandidat 6.72.103. Die kanonische Repository-Source auf `affiliate-release-current` trägt dagegen 6.72.73. Hashvergleich 6.72.103 gegen `CURRENT_SOURCE_SHA256.txt`: 11/26 Dateien identisch, 15/26 unterschiedlich.
+**Historischer Frischecheck:** 19.09.2026, früherer Zwischenstand vor 6.72.108.
 
-**Nicht wiederholen:** Weder die lokale 6.72.103-ZIP blind als neue kanonische Source überschreiben noch den älteren 6.72.73-Tree als aktuelle Livebasis ausgeben. Erst Delta/Provenienz zwischen kanonischem Tree und exakt getesteter 6.72.103-Quelle klären und nur belegte Änderungen integrieren. Kein neues Installations-/Release-PASS davor.
+Damals lief WordPress laut Nutzer-Livetest auf 6.72.102; lokal existierte 6.72.103 und die kanonische Source stand auf 6.72.73. Dieser Drift wurde anschließend bis 6.72.105 reconciliiert. Der damalige Abschluss ist **nur Historie** und überschreibt den oben stehenden aktuellen REOPENED-Status nicht.
 
-**Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
+**Historische Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
 
-**Status:** CLOSED / CANONICAL_RECONCILED_6_72_105 / LOCAL_GATES_PASS.\n\n**Abschluss 19.09.2026:** Nur die belegten Awin-Deltas wurden in die direkte kanonische Source übernommen. 6.72.102-Breadcrumb-/Performance-Code blieb ausgeschlossen. Source-Manifest `26d9e7c1addcc70844d1a61f3c35d61b421c4669db2512a1426c43b3b2a3af0d`; Reconcile-Commit `d6198d69d5b31fd3ab219ca09db004e6c1e2f554`. Lokale Gates: 22/22 PASS, PHP 21/21 PASS, Fresh-Unpack 26/26 PASS. Einziger Rest dieses Gates ist der gebundene LIVE-Test.
+**Historischer Abschluss:** CANONICAL_RECONCILED_6_72_105 / LOCAL_GATES_PASS. Danach entstand durch den getesteten/live verwendeten 6.72.108-Stand erneut Source-Drift; maßgeblich ist ausschließlich der aktuelle AFF-ERR-035-Abschnitt oben und für Status/NEXT ACTION ausschließlich `control/release-governance/CURRENT_RELEASE.json`.
 
 
 
