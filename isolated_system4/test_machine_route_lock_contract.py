@@ -24,6 +24,103 @@ def _touch_route(workspace: Path) -> None:
 
 
 class MachineRouteLockContractTests(unittest.TestCase):
+    def test_pre_codex_start_hardlock_blocks_before_any_temp_workspace(self):
+        blocker = parent_start.pre_codex_start_hardlock.PreCodexStartBlocked(
+            'PRECODEX_RECEIPT_NOT_PASS'
+        )
+        with mock.patch.object(
+            parent_start.pre_codex_start_hardlock,
+            'validate',
+            side_effect=blocker,
+        ), mock.patch.object(parent_start.tempfile, 'mkdtemp') as mkdtemp:
+            with self.assertRaisesRegex(
+                parent_start.pre_codex_start_hardlock.PreCodexStartBlocked,
+                'PRECODEX_RECEIPT_NOT_PASS',
+            ):
+                parent_start.start_bound()
+        mkdtemp.assert_not_called()
+
+    def test_current_real_state_is_fail_closed_before_codex(self):
+        with self.assertRaisesRegex(
+            parent_start.pre_codex_start_hardlock.PreCodexStartBlocked,
+            'PRECODEX_CURRENT_STATE_START_NOT_ALLOWED',
+        ):
+            parent_start.pre_codex_start_hardlock.validate(parent_start.REPO)
+
+    def test_pre_codex_start_historical_negative_matrix(self):
+        guard = parent_start.pre_codex_start_hardlock
+        manifest = json.loads(guard.MANIFEST.read_text(encoding='utf-8'))
+        head = 'a' * 40
+        state = {
+            'next_allowed_step': 'RUN_NEW_ARTICLE_BATCH_NO_STOP',
+            'publish_allowed': False,
+            'execution_gate': {
+                'step_id': 'RUN_NEW_ARTICLE_BATCH_NO_STOP',
+                'sequence': 107007,
+            },
+            'current_execution_blocker': {'codex_start_allowed': True},
+            'external_execution_blocker': {'resolved': True},
+        }
+        root = {
+            'current_state_sha256': 'b' * 64,
+            'next_allowed_step': 'RUN_NEW_ARTICLE_BATCH_NO_STOP',
+        }
+        receipt = {
+            'contract': 'PFERDE_ATELIER_PRE_CODEX_START_RECEIPT_V1',
+            'status': 'PASS',
+            'authorized_head_sha': head,
+            'dispatcher_pr': 342,
+            'dispatcher_head_sha': head,
+            'hardlock_base_run': 1,
+            'hardlock_base_status': 'PASS',
+            'hardlock_base_head_sha': head,
+            'user_approval': True,
+            'codex_capacity_status': 'AVAILABLE',
+            'approved_article_count': 7,
+            'new_article_policy': 'COMPLETELY_NEW_NO_RECOVERY_BODY',
+            'sequential_advance_policy': 'PASS_ONLY',
+            'repair_policy': 'SAME_ARTICLE_SAME_WORKSPACE_UNTIL_PASS',
+            'restart_recovery_status': 'PASS_CROSS_PROCESS_AND_DURABLE_TRANSPORT_READY',
+            'durable_evidence_transport_status': 'PASS',
+            'codex_side_github_write_required': False,
+            'publish_allowed': False,
+        }
+
+        result = guard.validate_payload(
+            head=head,
+            manifest=manifest,
+            receipt=receipt,
+            state=state,
+            root=root,
+            state_sha256='b' * 64,
+        )
+        self.assertEqual(result['status'], 'PRE_CODEX_START_HARDLOCK_PASS')
+
+        cases = (
+            ('dispatcher_head_sha', 'c' * 40, 'PRECODEX_DISPATCHER_HEAD_DRIFT'),
+            ('hardlock_base_status', 'FAIL', 'PRECODEX_HARDLOCK_BASE_NOT_FRESH_PASS'),
+            ('codex_capacity_status', 'BLOCKED_USAGE_LIMIT', 'PRECODEX_CODEX_CAPACITY_NOT_AVAILABLE'),
+            ('restart_recovery_status', 'LOCAL_ONLY', 'PRECODEX_RESTART_RECOVERY_NOT_READY'),
+            ('durable_evidence_transport_status', 'BLOCKED', 'PRECODEX_DURABLE_EVIDENCE_TRANSPORT_NOT_PASS'),
+            ('new_article_policy', 'RECOVERY_ALLOWED', 'PRECODEX_RECEIPT_NEW_ARTICLE_POLICY_INVALID'),
+            ('publish_allowed', True, 'PRECODEX_RECEIPT_PUBLISH_NOT_FALSE'),
+        )
+        for field, value, expected in cases:
+            bad = dict(receipt)
+            bad[field] = value
+            with self.subTest(field=field), self.assertRaisesRegex(
+                guard.PreCodexStartBlocked,
+                expected,
+            ):
+                guard.validate_payload(
+                    head=head,
+                    manifest=manifest,
+                    receipt=bad,
+                    state=state,
+                    root=root,
+                    state_sha256='b' * 64,
+                )
+
     def test_legacy_root_start_is_hard_blocked(self):
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
@@ -164,7 +261,18 @@ class MachineRouteLockContractTests(unittest.TestCase):
         runtime, _, items = parent_start.entry.runtime_binding()
         self.assertEqual(len(items), 7)
 
-        receipt = parent_start.start_bound()
+        with mock.patch.object(
+            parent_start.pre_codex_start_hardlock,
+            'validate',
+            return_value={
+                'contract': 'PFERDE_ATELIER_PRE_CODEX_START_HARDLOCK_V1',
+                'status': 'PRE_CODEX_START_HARDLOCK_PASS',
+                'head': 'test',
+                'approved_article_count': 7,
+                'publish_allowed': False,
+            },
+        ):
+            receipt = parent_start.start_bound()
         run_root = Path(receipt['run_root'])
         try:
             self.assertEqual(receipt['status'], 'SYSTEM4_PARENT_ROOT_READY_STOP')
