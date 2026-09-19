@@ -507,7 +507,7 @@ Der Einstieg bleibt:
 
 **Status:** CLOSED / NACHGEHOLT — `CURRENT_RELEASE.json` Generation 67 verwendet wieder guard-konform genau `RUN_BOUND_RELEASE_GATES`; der konkrete erste Gate-Schritt ist dort gebunden. Hobbyraum ist als `COMPLETED_RETURNED_TO_CURRENT` markiert und führt keine eigene NEXT ACTION mehr.
 
-## AFF-ERR-028 — Awin-Programmliste nutzt undokumentierten Bearer-Header als Primärtransport
+## AFF-ERR-030 — Awin-Programmliste nutzt undokumentierten Bearer-Header als Primärtransport
 
 **Datum / Live-Befund:** 19.09.2026.
 
@@ -525,7 +525,7 @@ Der Einstieg bleibt:
 
 **Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
 
-## AFF-ERR-029 — Awin-Produkt erscheint in Banner-&-Werbemittel-Ansicht
+## AFF-ERR-031 — Awin-Produkt erscheint in Banner-&-Werbemittel-Ansicht
 
 **Datum / Live-Befund:** 19.09.2026.
 
@@ -542,4 +542,55 @@ Der Einstieg bleibt:
 **Evidence lokal 6.72.103:** Runtime-SQL-Test PASS; Nicht-Awin-Gegenfall PASS; Bannerfilter-Mutation ROT; Fresh-Unpack PASS.
 
 **Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
+
+## AFF-ERR-032 — Breadcrumb/Hero-Layout springt beim Laden weiterhin sichtbar
+
+**Datum / Live-Befund:** 19.09.2026.
+
+**Symptom:** Pferde-Journal lädt sichtbar zunächst mit falschem Hero-Abstand/ohne fertige Breadcrumb-Geometrie und springt danach in die korrekte Position. Nutzer bestätigt nach Installation 6.72.102 ausdrücklich: Ladeproblematik nicht gefixt.
+
+**Bisheriger Weg:** 6.72.102 reservierte per Affiliate-Plugin einen Desktop-Breadcrumb-Abstand als Performance-Guard. Lokale Browsertests waren grün, der reale WordPress-Livetest blieb jedoch FAIL.
+
+**Nicht wiederholen:** Keinen weiteren PASS aus synthetischer DOM-/Fixture-Geometrie ableiten. Vor neuem Fix reale Renderreihenfolge/First Paint gegen die tatsächlich aktive Breadcrumb-/Designkette prüfen. Bereits LIVE-PASS bestätigte Affiliate-Ausgaben nicht verändern.
+
+**Status:** LIVE_FAIL / ROOT_CAUSE_NOCH_OFFEN.
+
+## AFF-ERR-033 — Dritter Artikel in Kategorieübersichten stammt aus falscher Kategorie
+
+**Datum / Live-Befund:** 19.09.2026.
+
+**Symptom:** In Kategorieübersichten ist der dritte angezeigte Artikel fachlich einer anderen Kategorie zugeordnet; Nutzer meldet denselben neuen Fehler in jeder Kategorie.
+
+**Nicht wiederholen:** Keine Reparatur auf Verdacht. Zuerst den realen Query-/Kategoriepfad lokal mit echten Kategoriezuordnungen reproduzieren; Positiv: alle Karten gehören zur aktuellen Kategorie. Negativ: fremde Kategorie darf nicht als dritte Karte einrutschen.
+
+**Status:** LIVE_FAIL / ANALYSE_OFFEN / NOCH_KEIN_FIX.
+
+## AFF-ERR-034 — 6.72.94ff beschädigte bestehende Banner-/Journal-Ausgaben
+
+**Datum / Verlauf:** 19.09.2026.
+
+**Symptom:** Nach der 6.72.94ff-Linie verschwanden Banner in Glossar, Pferderassen und Journal-Unterkategorien; Journal-Root war zeitweise ungleich geteilt; Glossar-Single wurde im Layout verschoben.
+
+**Root Cause / Wiederherstellung:** Die globale Poollogik konnte bestehende Kampagnen deaktivieren und nachgelagerte Reparaturen arbeiteten zunächst auf der beschädigten Linie weiter. Der belastbare Wiederherstellungsweg war Rückkehr auf den letzten funktionierenden Vor-6.72.94-Verhaltensstand plus gezielte Wiederherstellung der echten Design-/Ausgabepfade.
+
+**Live-Status:** Nutzer bestätigt nach 6.72.100:
+- Pferde-Journal Root mittig/pari PASS;
+- Pferde-Journal Unterkategorien PASS;
+- Glossar Einzelbeitrag PASS;
+- Glossar Kategorien PASS;
+- Pferderassen inkl. Unterkategorien PASS.
+
+**Nicht wiederholen:** Diese bestätigten Pfade ab jetzt nicht mehr nebenbei anfassen. Jede spätere Änderung muss sie als Regression-Hardlock behandeln.
+
+**Status:** LIVE_PASS_6_72_100 / PERMANENTER NICHT-ANFASSEN-HARDLOCK.
+
+## AFF-ERR-035 — Operative Live-/Chatlinie ist nicht in der kanonischen Repository-Source gebunden
+
+**Datum / Frischecheck:** 19.09.2026.
+
+**Befund:** WordPress läuft laut Nutzer-Livetest auf 6.72.102; lokal existiert der geprüfte Awin-Rootfix-Kandidat 6.72.103. Die kanonische Repository-Source auf `affiliate-release-current` trägt dagegen 6.72.73. Hashvergleich 6.72.103 gegen `CURRENT_SOURCE_SHA256.txt`: 11/26 Dateien identisch, 15/26 unterschiedlich.
+
+**Nicht wiederholen:** Weder die lokale 6.72.103-ZIP blind als neue kanonische Source überschreiben noch den älteren 6.72.73-Tree als aktuelle Livebasis ausgeben. Erst Delta/Provenienz zwischen kanonischem Tree und exakt getesteter 6.72.103-Quelle klären und nur belegte Änderungen integrieren. Kein neues Installations-/Release-PASS davor.
+
+**Status:** OPEN / CURRENT-SOURCE-DRIFT / ERSTER TECHNISCHER BLOCKER.
 
