@@ -1,0 +1,28 @@
+{
+  "event_order": 1,
+  "status": "BLOCKED_BEFORE_ARTICLE_WORK",
+  "source_trigger_comment": 5740118540,
+  "source_terminal_comment": 5740131665,
+  "authoritative_main": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+  "error_code": "EVIDENCE_REMOTE_UNAVAILABLE",
+  "exact_blocker": "Codex checkout has no configured origin and no GitHub CLI authentication/GH_TOKEN",
+  "parent_start": "PASS",
+  "item_count": 7,
+  "current_article_index": 0,
+  "current_phase": "RESEARCH_REQUIRED",
+  "current_revision": 0,
+  "completed_articles": 0,
+  "article_body_generated": false,
+  "last_article_sha256": null,
+  "next_article_started": false,
+  "languagetool": "NOT_RUN",
+  "ppm679": "NOT_RUN",
+  "error_ledger_entries": 2,
+  "local_codex_evidence_commits": [
+    "15e716f",
+    "01d9d6d7f32be89c834e4116ff5160146d53fe88"
+  ],
+  "remote_evidence_head_before_record": "228df82dcdf7028d7057e71c914baac61e43254e",
+  "sequence_107008": "NOT_STARTED",
+  "publish_performed": false
+}
