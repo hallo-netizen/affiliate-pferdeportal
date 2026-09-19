@@ -523,6 +523,8 @@ Der Einstieg bleibt:
 
 **Evidence lokal 6.72.103:** 6.72.102-Fehlerzustand reproduziert; Rootfix-Harness 14/14 PASS; Auth-Mutation ROT; PHP-Lint 21/21; Fresh-Unpack 26/26 byteidentisch.
 
+**Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
+
 **Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
 
 ## AFF-ERR-031 — Awin-Produkt erscheint in Banner-&-Werbemittel-Ansicht
@@ -540,6 +542,8 @@ Der Einstieg bleibt:
 **Regression:** Nicht-Awin-Providerquery unverändert; Ausspielung unverändert.
 
 **Evidence lokal 6.72.103:** Runtime-SQL-Test PASS; Nicht-Awin-Gegenfall PASS; Bannerfilter-Mutation ROT; Fresh-Unpack PASS.
+
+**Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
 
 **Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
 
@@ -591,6 +595,8 @@ Der Einstieg bleibt:
 **Befund:** WordPress läuft laut Nutzer-Livetest auf 6.72.102; lokal existiert der geprüfte Awin-Rootfix-Kandidat 6.72.103. Die kanonische Repository-Source auf `affiliate-release-current` trägt dagegen 6.72.73. Hashvergleich 6.72.103 gegen `CURRENT_SOURCE_SHA256.txt`: 11/26 Dateien identisch, 15/26 unterschiedlich.
 
 **Nicht wiederholen:** Weder die lokale 6.72.103-ZIP blind als neue kanonische Source überschreiben noch den älteren 6.72.73-Tree als aktuelle Livebasis ausgeben. Erst Delta/Provenienz zwischen kanonischem Tree und exakt getesteter 6.72.103-Quelle klären und nur belegte Änderungen integrieren. Kein neues Installations-/Release-PASS davor.
+
+**Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
 
 **Status:** OPEN / CURRENT-SOURCE-DRIFT / ERSTER TECHNISCHER BLOCKER.
 
