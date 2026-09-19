@@ -1,0 +1,47 @@
+{
+  "contract": "PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1",
+  "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "runtime_generation": 1,
+  "item_count": 7,
+  "items": [
+    {
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/ARTICLE_9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56.md",
+      "sha256": "4de2564ab76363bdcf665073195cec6ea64ebcc4548ddc038527a5bc8c8c4a59",
+      "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56"
+    },
+    {
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/ARTICLE_6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19.md",
+      "sha256": "7336d682914323f27e31135039c8083fe7a12ae5b6738647e36bff3576c9a925",
+      "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19"
+    },
+    {
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/ARTICLE_7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87.md",
+      "sha256": "0a0ccfbad52abebd61ab287ea4d4689d029899312417069567c9d63859dce2f0",
+      "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87"
+    },
+    {
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/ARTICLE_5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288.md",
+      "sha256": "bf81230f0f4894cf23a6231ba8c0988b3535daad4b2ca0ecab7a050e2eb82cab",
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288"
+    },
+    {
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/ARTICLE_7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da.md",
+      "sha256": "a8f22d30f7d942725319fa2d14564904ddb8b0887c714403a2603f6844ffe070",
+      "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da"
+    },
+    {
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/ARTICLE_8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648.md",
+      "sha256": "c60eba00b24907d82faf821a023ad3aa3a2d2400d67e12ca90f29208668e131f",
+      "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648"
+    },
+    {
+      "ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/ARTICLE_906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5.md",
+      "sha256": "b8ed164b2f350f4aaf7b4d0489f99d5f71b8e815310162c68c11df6c0ad90ec5",
+      "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5"
+    }
+  ],
+  "import_envelope_ref": "control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/PSERC_IMPORT_ENVELOPE.json",
+  "import_envelope_sha256": "0c2e960922c367624c460a8d3a3577947d96181153c4e6ccc865ca8f3650d28f",
+  "publish_allowed": false,
+  "content_mutation_performed": false
+}
