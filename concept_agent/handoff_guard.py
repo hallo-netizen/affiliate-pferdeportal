@@ -10,6 +10,8 @@ def check_job(job: ArticleJob) -> list[str]:
     if not job.keyword.strip(): errors.append("KEYWORD_MISSING")
     if not job.article_type.strip(): errors.append("ARTICLE_TYPE_MISSING")
     if not job.category.strip(): errors.append("CATEGORY_MISSING")
+    if len(job.internal_links) != 3: errors.append("EXACT_THREE_INTERNAL_LINKS_REQUIRED")
+    if len(set(job.internal_links)) != len(job.internal_links): errors.append("INTERNAL_LINK_DUPLICATE")
     return errors
 
 
