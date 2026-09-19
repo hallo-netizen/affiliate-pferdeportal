@@ -5,17 +5,12 @@ on:
     inputs:
       source_manifest_ref:
         description: Exact control/startmaster0107/recovery_sources/<batch>/generation-<runtime_generation>/MANIFEST.json path
-        required: false
-        type: string
-      concept_agent_request_ref:
-        description: Exact concept_agent/production_ready/*.json request; bridge builds the source manifest automatically
-        required: false
+        required: true
         type: string
   push:
     branches: [main]
     paths:
       - 'control/startmaster0107/recovery_sources/**/MANIFEST.json'
-      - 'concept_agent/production_ready/*.json'
 
 permissions:
   contents: read
@@ -49,28 +44,15 @@ jobs:
         shell: bash
         env:
           INPUT_SOURCE: ${{ inputs.source_manifest_ref }}
-          INPUT_CONCEPT_REQUEST: ${{ inputs.concept_agent_request_ref }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            if [ -n "${INPUT_CONCEPT_REQUEST:-}" ]; then
-              [ -z "${INPUT_SOURCE:-}" ] || { echo 'SOURCE_AND_CONCEPT_REQUEST_MUTUALLY_EXCLUSIVE'; exit 2; }
-              [[ "$INPUT_CONCEPT_REQUEST" =~ ^concept_agent/production_ready/[^/]+\.json$ ]] || { echo 'CONCEPT_AGENT_REQUEST_REF_INVALID'; exit 2; }
-              ref="$(python3 concept_agent/endstempel_bridge.py build "$INPUT_CONCEPT_REQUEST")"
-            else
-              ref="$INPUT_SOURCE"
-            fi
+            ref="$INPUT_SOURCE"
           else
             mapfile -t refs < <(git diff-tree -m --no-commit-id --name-only -r "$GITHUB_SHA" | sort -u | grep -E '^control/startmaster0107/recovery_sources/[0-9a-f]{64}/generation-[0-9]{6}/MANIFEST\.json$' || true)
-            mapfile -t requests < <(git diff-tree -m --no-commit-id --name-only -r "$GITHUB_SHA" | sort -u | grep -E '^concept_agent/production_ready/[^/]+\.json$' || true)
-            total=$(( ${#refs[@]} + ${#requests[@]} ))
-            [ "$total" -eq 1 ] || { echo "EXACTLY_ONE_SOURCE_OR_REQUEST_REQUIRED:$total"; exit 2; }
-            if [ "${#requests[@]}" -eq 1 ]; then
-              ref="$(python3 concept_agent/endstempel_bridge.py build "${requests[0]}")"
-            else
-              ref="${refs[0]}"
-            fi
+            [ "${#refs[@]}" -eq 1 ] || { echo "EXACTLY_ONE_SOURCE_REQUIRED:${#refs[@]}"; exit 2; }
+            ref="${refs[0]}"
           fi
           [[ "$ref" =~ ^control/startmaster0107/recovery_sources/[0-9a-f]{64}/generation-[0-9]{6}/MANIFEST\.json$ ]] || { echo 'SOURCE_REF_INVALID'; exit 2; }
           test -f "$ref" || { echo 'SOURCE_MANIFEST_MISSING'; exit 2; }
