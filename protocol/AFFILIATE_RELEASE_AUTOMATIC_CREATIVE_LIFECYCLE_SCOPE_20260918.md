@@ -99,3 +99,16 @@ Diese Pakete ersetzen weder die kanonische 6.72.19-Source noch `PPA-001/CURRENT.
 - keine zweite Provider-/Pixel-/Werbeplatz-Wahrheit;
 - keine neue Pluginversion für Zwischenarbeit;
 - keine Backendpfade raten.
+
+
+## Awin-Bannerquelle – verbindliche Beschaffungsregel 19.09.2026
+
+Diese Ergänzung präzisiert den bestehenden Vollautomatik-/KISS-Zielvertrag; sie ändert nicht dessen Grundziel.
+
+- Awin-Programme und Partner dürfen automatisch synchronisiert werden.
+- Der normale Bannerbestand muss ohne Pflichtarbeit `Code kopieren` pro einzelnes Creative in den vorhandenen Creative-Lifecycle gelangen.
+- Zuerst vorhandenen bewiesenen Cleos-Bulkweg wiederverwenden, falls dessen reale Quelle belastbar nachgewiesen werden kann.
+- Alternativ nur eine dokumentierte oder vertraglich belastbare maschinenlesbare Awin-Publisherquelle anbinden.
+- Kein geratener/private UI-Endpoint, kein DevTools-Scraping als Produktionsvertrag, keine erfundene Creative-API.
+- Nach der Beschaffung bleibt der vorhandene providerneutrale Ablauf zuständig: Import -> technische Prüfung -> fachliches Matching -> Ausspielung -> Revalidierung/Re-Evaluation.
+- Frontend-, Journal-, Glossar-, Pferderassen-, Kategorie- und Design-PASS-Pfade sind dabei Nicht-Anfassen-Hardlocks.

@@ -507,25 +507,25 @@ Der Einstieg bleibt:
 
 **Status:** CLOSED / NACHGEHOLT — `CURRENT_RELEASE.json` Generation 67 verwendet wieder guard-konform genau `RUN_BOUND_RELEASE_GATES`; der konkrete erste Gate-Schritt ist dort gebunden. Hobbyraum ist als `COMPLETED_RETURNED_TO_CURRENT` markiert und führt keine eigene NEXT ACTION mehr.
 
-## AFF-ERR-030 — Awin-Programmliste nutzt undokumentierten Bearer-Header als Primärtransport
+## AFF-ERR-030 — Awin-Programmliste: falscher 6.72.105-Transport lieferte erneut Nicht-JSON
 
 **Datum / Live-Befund:** 19.09.2026.
 
-**Symptom:** Awin-Verbindung war zuvor erfolgreich, später meldete die Synchronisierung `Awin lieferte keine gültige JSON-Programmliste; Last-Known-Good bleibt erhalten.`; neue genehmigte Partnerschaften erschienen nicht zuverlässig im Backend.
+**Symptom:** 6.72.105 meldete live erneut `Awin lieferte keine gültige JSON-Programmliste; Last-Known-Good bleibt erhalten.`
 
-**Root Cause:** 6.72.102 rief `GET /publishers/{publisherId}/programmes?includeHidden=true` primär mit `Authorization: Bearer` auf und fiel nur bei HTTP 401/403 auf den dokumentierten `accessToken`-Queryparameter zurück. Ein HTTP-2xx-Nicht-JSON löste deshalb keinen Fallback aus.
+**Tatsächliche Ursache:** Der 6.72.103/105-Weg wurde auf `includeHidden=true&accessToken=...` umgestellt und wich damit vom bereits funktionierenden Awin-Verbindungstest ab. Die aktuelle Awin-Authentifizierungsdokumentation bindet OAuth2 Bearer; der Programme-Endpunkt erlaubt `relationship=joined`. `includeHidden` ist laut Endpoint-Dokumentation nur ohne `relationship` wirksam. Der funktionierende KISS-Weg ist deshalb ein einziger gemeinsamer Requestpfad: `GET /publishers/{publisherId}/programmes?relationship=joined` + `Authorization: Bearer <token>`.
 
-**Nicht wiederholen:** Für GET programmes ausschließlich den dokumentierten Query-Transport `includeHidden=true&accessToken=...` verwenden. Ungültige/fehlgeschlagene Antwort darf Last-Known-Good niemals überschreiben. Partnerinventur unabhängig von Produkt-/Feedautomatik aktualisieren.
+**Rootfix:** 6.72.106 vereinheitlicht Verbindungstest und Programmlisten-Refresh auf genau diesen Request. Kein zweiter Fallbacktransport. HTTP-/JSON-Fehler bleiben fail-closed; Last-Known-Good wird nicht überschrieben.
 
-**POSITIV:** aktive + versteckte joined-Programme werden gelesen; neue IDs erscheinen pending; bestehende Freigaben bleiben erhalten.
-**NEGATIV:** HTTP-/JSON-Fehler => kein Write auf Programmliste, LKG bleibt.
-**Regression:** Produktfeeds/Offers/OTTO-Produktlogik sowie Journal/Glossar/Pferderassen unverändert.
+**POSITIV lokal:** 21/21 PASS inkl. `relationship=joined`, Bearer, gültige JSON-Liste und LKG-Write erst nach gültigem JSON.
 
-**Evidence lokal 6.72.103:** 6.72.102-Fehlerzustand reproduziert; Rootfix-Harness 14/14 PASS; Auth-Mutation ROT; PHP-Lint 21/21; Fresh-Unpack 26/26 byteidentisch.
+**NEGATIV lokal:** HTTP 200 Nicht-JSON und HTTP 401 => WP_Error, exakt ein Request, kein Fallback, kein Programme-Write, LKG bleibt erhalten.
 
-**Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
+**LIVE:** Nutzer-Screenshot 19.09.2026: `Awin-Programmliste aktualisiert: 7 verbundene Programme`.
 
-**Status:** FIXED_CANONICAL_6_72_105 / LOCAL_GATES_PASS / LIVE_GATE_OPEN.
+**Nicht wiederholen:** Nicht aus einer einzelnen Parameterbeschreibung einen neuen Auth-Transport ableiten. Verbindungstest und Refresh müssen denselben real bewiesenen Requestpfad verwenden.
+
+**Status:** LIVE_PASS_6_72_106 / PRESERVED_IN_6_72_108.
 
 ## AFF-ERR-031 — Awin-Produkt erscheint in Banner-&-Werbemittel-Ansicht
 
@@ -547,27 +547,33 @@ Der Einstieg bleibt:
 
 **Status:** FIXED_CANONICAL_6_72_105 / LOCAL_GATES_PASS / LIVE_GATE_OPEN.
 
-## AFF-ERR-032 — Breadcrumb/Hero-Layout springt beim Laden weiterhin sichtbar
+## AFF-ERR-032 — Breadcrumb/Hero-First-Paint war fälschlich im Affiliate-Plugin repariert worden
 
 **Datum / Live-Befund:** 19.09.2026.
 
-**Symptom:** Pferde-Journal lädt sichtbar zunächst mit falschem Hero-Abstand/ohne fertige Breadcrumb-Geometrie und springt danach in die korrekte Position. Nutzer bestätigt nach Installation 6.72.102 ausdrücklich: Ladeproblematik nicht gefixt.
+**Symptom:** Pferde-Journal sprang beim Laden; der 6.72.102-Affiliate-Abstands-Guard löste das real nicht.
 
-**Bisheriger Weg:** 6.72.102 reservierte per Affiliate-Plugin einen Desktop-Breadcrumb-Abstand als Performance-Guard. Lokale Browsertests waren grün, der reale WordPress-Livetest blieb jedoch FAIL.
+**Abschluss:** Der Lade-/Breadcrumb-Fix wurde aus der Affiliate-Linie wieder entfernt und in den allgemeinen Designpfad verlagert. Nutzer meldete danach die Ladezeit als okay. Die Affiliate-Linie 6.72.104ff enthält den gescheiterten 6.72.102-Breadcrumb-Spacer nicht mehr.
 
-**Nicht wiederholen:** Keinen weiteren PASS aus synthetischer DOM-/Fixture-Geometrie ableiten. Vor neuem Fix reale Renderreihenfolge/First Paint gegen die tatsächlich aktive Breadcrumb-/Designkette prüfen. Bereits LIVE-PASS bestätigte Affiliate-Ausgaben nicht verändern.
+**Nicht wiederholen:** First-Paint/Breadcrumb-Geometrie ist Designverantwortung. Keine globalen Designspacer mehr als Affiliate-Nebenfix einbauen.
 
-**Status:** LIVE_FAIL / ROOT_CAUSE_NOCH_OFFEN.
+**Status:** CLOSED_OUTSIDE_AFFILIATE / AFFILIATE_GUARD_REMOVED / DESIGN_OWNERSHIP.
 
-## AFF-ERR-033 — Dritter Artikel in Kategorieübersichten stammt aus falscher Kategorie
+## AFF-ERR-033 — Drittes Produkt in Kategorieübersichten fällt auf fachfremden Fallback
 
 **Datum / Live-Befund:** 19.09.2026.
 
-**Symptom:** In Kategorieübersichten ist der dritte angezeigte Artikel fachlich einer anderen Kategorie zugeordnet; Nutzer meldet denselben neuen Fehler in jeder Kategorie.
+**Korrektur der Fehlerbeschreibung:** Es war nicht der dritte Artikel, sondern der **dritte Produktplatz**. Beispiel: Kategorie Reitstiefel zeigte an Platz 3 ein Gerten-Produkt; Nutzer meldete dasselbe Muster in weiteren Kategorien.
 
-**Nicht wiederholen:** Keine Reparatur auf Verdacht. Zuerst den realen Query-/Kategoriepfad lokal mit echten Kategoriezuordnungen reproduzieren; Positiv: alle Karten gehören zur aktuellen Kategorie. Negativ: fremde Kategorie darf nicht als dritte Karte einrutschen.
+**Root Cause:** `category_product_1..3` nahm mechanisch Kandidat 1/2/3 aus einer kombinierten Rangliste. Wenn nur zwei starke kategorierelevante Produkte vorhanden waren, konnte ein schwächerer Parent-/Fallback-Kandidat Platz 3 füllen.
 
-**Status:** LIVE_FAIL / ANALYSE_OFFEN / NOCH_KEIN_FIX.
+**Rootfix 6.72.104:** Die drei Kategorie-Produktplätze bleiben innerhalb der stärksten Relevanzstufe. Reichen dort die Kandidaten nicht, bleibt der restliche Platz leer statt fachfremd aufzufüllen.
+
+**Lokal:** Positiv 3 gleich relevante Produkte => 3 Plätze; Negativ 2 relevante + fremder Fallback => Platz 3 leer; Journal-Produktlogik unverändert. Der vollständige 6.72.108-Regressionslauf erhält diesen Block byte-/verhaltensgebunden.
+
+**LIVE:** Für diesen Einzelpunkt wurde in diesem Chat kein separater, eindeutig isolierter Live-Readback protokolliert.
+
+**Status:** FIXED_LOCAL_6_72_104 / PRESERVED_6_72_108 / SEPARATE_LIVE_RECHECK_NOT_DOCUMENTED.
 
 ## AFF-ERR-034 — 6.72.94ff beschädigte bestehende Banner-/Journal-Ausgaben
 
@@ -588,7 +594,19 @@ Der Einstieg bleibt:
 
 **Status:** LIVE_PASS_6_72_100 / PERMANENTER NICHT-ANFASSEN-HARDLOCK.
 
-## AFF-ERR-035 — Operative Live-/Chatlinie ist nicht in der kanonischen Repository-Source gebunden
+## AFF-ERR-035 — Operative Live-/Testlinie ist nicht in der kanonischen Repository-Source gebunden
+
+**Datum / Frischecheck:** 19.09.2026, Abschlussprüfung.
+
+**Aktueller Befund:** Die direkte kanonische Repository-Source auf `affiliate-release-current` steht auf 6.72.105 / Manifest `ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29`. Der tatsächlich getestete und live verwendete Stand ist 6.72.108, ZIP-SHA-256 `d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3`, lokaler Source-Manifest-SHA `d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e`.
+
+**Delta:** 6.72.108 gegen kanonische 6.72.105: 14/26 Dateien unterschiedlich. Das ist erneut ein echter Source-Drift und muss vor weiterer Pluginentwicklung geschlossen werden.
+
+**Nicht wiederholen:** 6.72.108 nicht blind über die kanonische Source kopieren und 6.72.105 nicht als aktuellen Live-Stand ausgeben. Exakten 6.72.108-Tree gegen 6.72.105/6.72.104-Provenienz binden; danach Governance-/Positiv-/Negativ-/Regression-/Fresh-Unpack-Gates.
+
+**Status:** REOPENED / CURRENT_FIRST_BLOCKER / 6_72_108_CANONICAL_RECONCILIATION_REQUIRED.
+
+
 
 **Datum / Frischecheck:** 19.09.2026.
 
@@ -600,3 +618,54 @@ Der Einstieg bleibt:
 
 **Status:** CLOSED / CANONICAL_RECONCILED_6_72_105 / LOCAL_GATES_PASS.\n\n**Abschluss 19.09.2026:** Nur die belegten Awin-Deltas wurden in die direkte kanonische Source übernommen. 6.72.102-Breadcrumb-/Performance-Code blieb ausgeschlossen. Source-Manifest `26d9e7c1addcc70844d1a61f3c35d61b421c4669db2512a1426c43b3b2a3af0d`; Reconcile-Commit `d6198d69d5b31fd3ab219ca09db004e6c1e2f554`. Lokale Gates: 22/22 PASS, PHP 21/21 PASS, Fresh-Unpack 26/26 PASS. Einziger Rest dieses Gates ist der gebundene LIVE-Test.
 
+
+
+## AFF-ERR-036 — 6.72.105 baute Awin-Fix auf falscher Altbasis und entfernte siteweit Anzeigen
+
+**Datum / Live-Befund:** 19.09.2026.
+
+**Symptom:** Nach Installation 6.72.105 waren Anzeigen siteweit verschwunden, einschließlich Journal, Glossar und Pferderassen; Journal-Platzierung/Zentrierung war damit erneut verletzt.
+
+**Root Cause:** 6.72.105 wurde aus der älteren kanonischen 6.72.73-Linie abgeleitet, obwohl der funktionierende operative Stand bereits 6.72.104 enthielt. Vergleich 6.72.105 ↔ 6.72.104 zeigte 14 abweichende Dateien; damit wurden geschützte Ausgabeänderungen zurückgedreht.
+
+**Rootfix:** 6.72.106 wurde exakt auf der funktionierenden 6.72.104-Basis gebaut und änderte nur den Awin-Programmlisten-Transport plus Versions-/Readme-Metadaten.
+
+**Lokal:** kompletter Schutz-/Regressionstest auf der 6.72.104-Basis PASS. **LIVE:** Nutzer meldete nach 6.72.106 ausdrücklich `wieder ok`.
+
+**Nicht wiederholen:** Jeder neue Affiliate-Kandidat muss gegen den letzten real funktionierenden Live-Basestand vollständig byte-/verhaltensgebunden regressionsgeprüft werden. Kein Fachfix auf einer älteren kanonischen Linie, wenn dadurch spätere Live-PASS-Deltas verloren gehen.
+
+**Status:** CLOSED_LIVE_6_72_106 / PERMANENTE REGRESSIONSPFLICHT.
+
+## AFF-ERR-037 — Synchronisierte Awin-Partner waren in Banner & Werbemittel nicht korrekt auswählbar
+
+**Datum / Live-Befund:** 19.09.2026.
+
+**Symptom 1:** Nach erfolgreichem Programme-Refresh erschienen die sieben Awin-Partner nicht in der Partnerauswahl der Bannerseite. Ursache: die UI las nur Partneraufnahme-Snapshots; Cleos war deshalb sichtbar, frisch synchronisierte Programme nicht.
+
+**6.72.107:** führt Partneraufnahme-Snapshots und aktuell synchronisierte joined-Awin-Programme für die Auswahl zusammen; bestehende Snapshots wie Cleos haben Vorrang. Live zeigte sich danach noch ein UI-Restfehler: Partner-ID und Name waren bereits vorausgefüllt, das Dropdown blieb aber sichtbar auf `Manuell eingeben`.
+
+**6.72.108 Rootfix:** bindet den tatsächlich vorausgefüllten Partner auch als `selected` im Dropdown.
+
+**Lokal auf exakter 6.72.108-ZIP:** Partner/Cleos/Awin 25/25 PASS; voller Regressionstest 82/82 PASS; PHP 21/21 PASS; Fresh-Unpack 26/26 byteidentisch.
+
+**LIVE:** Nutzer-Screenshot zeigt `Awin · Ahipos Horses DE · 120341` korrekt ausgewählt.
+
+**Status:** LIVE_PASS_6_72_108.
+
+## AFF-ERR-038 — Awin-Bannerinventar hat noch keine bewiesene automatische reale Quelle
+
+**Datum / Abschlussprüfung:** 19.09.2026.
+
+**Zielabweichung:** Programme und Partner sind jetzt synchronisiert, aber die echten Awin-Banner/Werbemittel der Partner werden noch nicht automatisch in den vorhandenen Creative-Lifecycle eingelesen.
+
+**Bestehender Systemteil:** Creative-Library, Sammelimport, technische Bildprüfung, Matching, Ausspielung, Revalidierung und Re-Evaluation sind vorhanden. Der Awin-Automationspfad besitzt bereits eine statische-Creative-Eingangsnaht, aber keine gebundene reale Quelle.
+
+**Cleos-Befund:** Cleos ist historisch als funktionierender Awin-Partner/Bannerbestand belegt. Der konkrete damalige Quellweg (Sammeldatei versus gesammelte Codes versus andere belastbare Quelle) konnte in der Abschlussprüfung jedoch noch nicht autoritativ bewiesen werden. Ein WordPress-Backup vom 29.08. nennt die Tabelle `slfo_ppar_creative_library`, der DB-Backup-Lauf brach jedoch mit Timeouts ab und liefert keinen verlässlichen Cleos-`source_kind`.
+
+**Awin-Dokumentation:** Der dokumentierte Publisher-API-Katalog enthält Programme, Offers, Feeds, Reports usw.; ein vollständiger Publisher-`My Creative`-Inventarendpoint wurde in der aktuellen offiziellen API-Dokumentation nicht gefunden. Die `My Creative`-Dokumentation beschreibt Creative-Verwaltung auf Plattformebene, aber das ist kein Beweis für einen Publisher-Bulk-API-Abruf.
+
+**Verbindliche Nutzerregel:** Kein normales Verfahren mit einzelnem `Code kopieren` je Creative. Keine Entwicklertools-/private Endpoint-Ermittlung als geratenes Produktionsverfahren.
+
+**NEXT nach Source-Reconciliation:** Zuerst den historischen Cleos-Bulk-Importweg aus belastbarer Quelle beweisen. Falls dort keine wiederverwendbare Quelle existiert, nur einen dokumentierten/vertraglich belastbaren maschinenlesbaren Awin-Weg anbinden. Erst danach Implementierung.
+
+**Status:** OPEN / CURRENT_AWIN_FUNCTIONAL_BLOCKER_AFTER_AFF_ERR_035.

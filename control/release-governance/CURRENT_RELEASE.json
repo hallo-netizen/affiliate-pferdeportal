@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 73,
+  "generation": 74,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.105",
-    "status": "CANONICAL_AWIN_ROOTFIX_VERSION_METADATA_FIXED_LIVE_GATE_PENDING",
+    "status": "CANONICAL_6_72_105_STALE_VS_TESTED_LIVE_6_72_108_RECONCILIATION_REQUIRED",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "AWIN_ROOTFIX_CANONICAL_BIND_AND_LIVE_VERIFY",
+    "current_focus": "AWIN_6_72_108_CANONICAL_RECONCILIATION_THEN_REAL_BANNER_SOURCE",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
-    "current_focus_reason": "EXPLICIT_USER_REQUEST_20260919_AWIN_NEW_PARTNERS_NOT_REFRESHED_AND_OTTO_PRODUCT_VISIBLE_IN_AWIN_BANNER_VIEW",
+    "current_focus_reason": "EXPLICIT_USER_REQUEST_CONTINUE_AWIN; 6.72.106 PROGRAMME REFRESH LIVE PASS; 6.72.108 JOINED-PARTNER DROPDOWN LIVE PASS; REAL AWIN BANNER SOURCE STILL UNBOUND",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -168,16 +168,26 @@
       "source_manifest_sha256": "4c5471425ffd7226cf12dd8f50937b26d78d9f4aa48a3af18b5f0ca7272c05a7",
       "source_gate": "21_OF_21_PASS",
       "live_status": "OPEN"
+    },
+    "awin_banner_source": {
+      "status": "UNBOUND_REAL_SOURCE_REQUIRED",
+      "requirement": "NO_PER_CREATIVE_MANUAL_COPY; PROVE EXISTING CLEOS BULK-IMPORT SOURCE OR USE A DOCUMENTED MACHINE-READABLE PUBLISHER SOURCE",
+      "forbidden": [
+        "DEVTOOLS_PRIVATE_ENDPOINT_GUESS",
+        "ONE_BY_ONE_CREATIVE_COPY_AS_NORMAL_WORKFLOW",
+        "INVENTED_CREATIVE_API"
+      ],
+      "existing_downstream": "CREATIVE_LIBRARY_IMPORT_VERIFY_MATCH_DELIVER_REVALIDATE_ALREADY_PRESENT"
     }
   },
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "FIRST_GATE: RECONCILE EXACT TESTED 6.72.103 AWIN ROOTFIX AGAINST CANONICAL 6.72.73 WITHOUT BLIND OVERWRITE; BIND ONLY PROVEN AWIN DELTAS INTO THE DIRECT COMMITTED TREE; THEN RUN POSITIVE/NEGATIVE/REGRESSION/FRESH-UNPACK GATES; ONLY AFTER THAT ONE LIVE INSTALL AND VERIFY AWIN PROGRAMME REFRESH + AWIN BANNER VIEW.",
-    "completion_condition": "A SINGLE CANONICAL CANDIDATE PRESERVES THE LIVE-PASS JOURNAL/GLOSSAR/PFERDERASSEN PATHS, REFRESHES CURRENT AWIN JOINED PROGRAMMES INDEPENDENTLY OF PRODUCT AUTOMATION, HIDES AWIN PRODUCT ROWS FROM BANNER & WERBEMITTEL, PRESERVES LKG ON AWIN FAILURE, AND PASSES REAL WORDPRESS LIVE READBACK.",
-    "after_completion_action": "CONTINUE WITH THE NEXT OPEN REGISTERED DEFECT IN CURRENT ORDER; DO NOT START OPTIONAL REFACTOR OR GENERAL FRAMEWORK WORK BEFORE THE CURRENT AWIN GATE IS CLOSED.",
+    "bound_user_scope_action": "FIRST_GATE: RECONCILE THE EXACT TESTED/LIVE 6.72.108 TREE AGAINST CANONICAL 6.72.105 WITHOUT BLIND OVERWRITE; PRESERVE THE 6.72.104 LIVE-PASS OUTPUT BASE AND ONLY BIND PROVEN DELTAS; THEN RUN GOVERNANCE/POSITIVE/NEGATIVE/FULL-REGRESSION/FRESH-UNPACK GATES. ONLY AFTER SOURCE DRIFT IS CLOSED, CONTINUE AWIN BANNER AUTOMATION BY PROVING THE HISTORICAL CLEOS BULK-IMPORT SOURCE OR A DOCUMENTED MACHINE-READABLE PUBLISHER SOURCE. NO DEVTOOLS/PRIVATE-ENDPOINT GUESS AND NO ONE-BY-ONE CREATIVE COPY.",
+    "completion_condition": "ONE CANONICAL CANDIDATE MATCHES THE PROVEN 6.72.108 BEHAVIOR, PRESERVES THE 6.72.104 JOURNAL/GLOSSAR/PFERDERASSEN/CATEGORY OUTPUT HARDLOCKS, USES THE LIVE-PASS AWIN JOINED-PROGRAMME TRANSPORT, SHOWS SYNCHRONIZED AWIN PARTNERS IN BANNER & WERBEMITTEL, AND PASSES THE COMPLETE LOCAL GATE. AFTER THAT, THE ONLY CURRENT AWIN FUNCTIONAL BLOCKER IS THE REAL BANNER-INVENTORY SOURCE.",
+    "after_completion_action": "CONTINUE AFF-ERR-038 ONLY: PROVE AND BIND A REAL BULK AWIN CREATIVE SOURCE TO THE EXISTING CREATIVE-LIBRARY INTAKE; DO NOT CHANGE FRONTEND DELIVERY OR PROTECTED OUTPUT PATHS.",
     "no_optional_detours": true,
-    "sequence": 13,
+    "sequence": 14,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -186,7 +196,7 @@
       "protocol/AFFILIATE_RELEASE_"
     ],
     "next_state_binding": {
-      "sequence": 14,
+      "sequence": 15,
       "state": "RUNNING_BOUND_RELEASE_GATES",
       "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
       "authorized_change_prefixes": [
@@ -738,7 +748,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "AWIN_CANONICAL_SOURCE_DRIFT_RECONCILIATION_AND_LIVE_GATE",
+    "current_milestone": "AWIN_672108_CANONICAL_RECONCILIATION_THEN_REAL_BANNER_SOURCE",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
@@ -815,24 +825,27 @@
     "checked_at": "2026-09-07"
   },
   "operational_observation": {
-    "checked_at": "2026-09-19",
-    "live_plugin_version": "6.72.102",
-    "live_status": "INSTALLED_USER_SCREENSHOT_AND_LIVE_FEEDBACK",
-    "local_awin_candidate_version": "6.72.103",
-    "local_awin_candidate_sha256": "ee0f22e4f158b550f8cb21fc9e8c3466c0fd855fad7ca5082e853354a3d2aa2e",
-    "local_awin_candidate_status": "HARD_LOCAL_PASS_LIVE_OPEN",
-    "canonical_plugin_version": "6.72.73",
-    "source_drift": "LOCAL_6_72_103_VS_CANONICAL_6_72_73_DIFF_15_OF_26_FILES",
+    "checked_at": "2026-09-19T19:34:00+02:00",
+    "live_plugin_version": "6.72.108",
+    "live_status": "USER_SCREENSHOT_PASS: AWIN PROGRAMME REFRESH=7 JOINED; AWIN PARTNER DROPDOWN SELECTS AHIPOS HORSES DE 120341. PROTECTED SITE OUTPUTS WERE EXPLICITLY REPORTED OK AFTER 6.72.106; 6.72.108 CHANGES ONLY PARTNER-SELECTION UI OVER THAT BASE.",
+    "local_awin_candidate_version": "6.72.108",
+    "local_awin_candidate_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
+    "local_awin_candidate_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
+    "local_awin_candidate_status": "HARD_LOCAL_PASS: PARTNER 25/25; AWIN TRANSPORT 21/21; FULL REGRESSION 82/82; PHP 21/21; FRESH-UNPACK 26/26 BYTE-IDENTICAL",
+    "canonical_plugin_version": "6.72.105",
+    "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
+    "source_drift": "TESTED_LIVE_6_72_108_VS_CANONICAL_6_72_105_DIFF_14_OF_26_FILES",
     "first_blocker": "AFF-ERR-035",
-    "evidence_ref": "release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt",
+    "evidence_ref": "release/affiliate-zentrale/evidence/awin_672106_108_closeout_20260919.txt",
     "awin_error_refs": [
       "AFF-ERR-030",
-      "AFF-ERR-031"
+      "AFF-ERR-031",
+      "AFF-ERR-035",
+      "AFF-ERR-036",
+      "AFF-ERR-037",
+      "AFF-ERR-038"
     ],
-    "registered_live_open_after_current_gate": [
-      "AFF-ERR-032",
-      "AFF-ERR-033"
-    ],
+    "current_awin_functional_blocker_after_reconciliation": "AFF-ERR-038",
     "locked_live_pass_ref": "AFF-ERR-034"
   }
 }

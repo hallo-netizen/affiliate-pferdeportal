@@ -1,0 +1,58 @@
+# Affiliate Awin Abschluss-/Nachholbeweis 6.72.106–6.72.108
+
+Stand: 2026-09-19 19:34 Europe/Berlin
+Status: DELTA_VERIFIED / LIVE_PARTIAL_PASS / CANONICAL_SOURCE_DRIFT_BLOCKS_NEXT_CODE_CHANGE
+
+## Autoritative Frische
+- Workstream entry: release/affiliate-zentrale/AGENTS.md
+- Current authority: control/release-governance/CURRENT_RELEASE.json
+- Branch: affiliate-release-current
+- Repo HEAD before closeout: 868f9bbb0530a16099d015dfbb2e9c7f9020641a
+- Canonical source: 6.72.105, 26 files, manifest SHA-256 ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29
+- Exact tested/live artifact: AFFILIATE_ZENTRALE_V6.72.108_AWIN_PARTNER_DROPDOWN_ROOTFIX_HARDTEST.zip
+- ZIP SHA-256: d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3
+- Exact 6.72.108 source-manifest SHA-256: d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e
+- 6.72.108 vs canonical 6.72.105: 14/26 files differ.
+
+## 6.72.105 negative live evidence
+- User live report: sitewide affiliate ads disappeared, including protected Journal/Glossary/Pferderassen paths.
+- Root cause by exact tree comparison: 6.72.105 was based on older canonical 6.72.73 line and differed from the working 6.72.104 line in 14/26 files.
+
+## 6.72.106 recovery + Awin transport
+- Built on exact working 6.72.104 base.
+- Awin programme transport: relationship=joined + OAuth2 Bearer.
+- Local Awin transport harness: 21/21 PASS.
+- Negative non-JSON: WP_Error, one request, no write, LKG preserved.
+- Negative 401: WP_Error, one request, no fallback, LKG preserved.
+- Full protected-output regression against 6.72.104: PASS.
+- User live report after install: "wieder ok".
+- User live screenshot later: Awin programme refresh = 7 joined programmes.
+
+## 6.72.107/108 partner visibility
+- 6.72.107 merged existing partner-intake snapshots (Cleos remains authoritative) with synchronized joined-Awin programmes for Banner & Werbemittel.
+- 6.72.107 live remaining defect: fields were populated but dropdown still displayed "Manuell eingeben".
+- 6.72.108 binds the actual default partner key as selected in the dropdown.
+- User live screenshot: Awin · Ahipos Horses DE · 120341 selected.
+
+## Exact local 6.72.108 gates rerun at closeout
+- Partner/Cleos/Awin positive/negative/static: 25/25 PASS.
+- Awin programme transport positive/negative/static: 21/21 PASS.
+- Full Affiliate regression: 82/82 PASS.
+- PHP lint: 21/21 PASS.
+- ZIP file count: 26.
+- ZIP -> extracted tree byte identity: 26/26 PASS.
+- Protected Journal/Glossary/Pferderassen/category blocks remain bound to 6.72.104 pass base in the regression harness.
+- 6.72.102 Affiliate breadcrumb spacer/performance guard absent.
+
+## Current open blocker
+AFF-ERR-035 is reopened because exact tested/live 6.72.108 is not yet the direct committed canonical source.
+
+After that reconciliation, the Awin functional blocker is AFF-ERR-038: no proven real bulk banner-inventory source is bound. The historical Cleos source has not yet been proven from an authoritative artifact; do not guess it.
+
+## External documentation check
+- Awin API Authentication: OAuth2 Bearer is the documented general authentication method.
+- Get Program Information: relationship=joined is supported; includeHidden only works when relationship is not specified.
+- Current documented publisher API set searched; no complete publisher My-Creative inventory endpoint was found.
+- My Creative documentation describes the creative bank/platform management but does not establish a publisher bulk Creative API.
+
+No release PASS is claimed.
