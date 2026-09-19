@@ -1,0 +1,28 @@
+{
+  "event_order": 2,
+  "status": "CODEX_USAGE_LIMIT",
+  "source_trigger_comment": 5740144791,
+  "source_terminal_comment": 5740160115,
+  "authoritative_main": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+  "completed_articles": 0,
+  "current_article_index": 0,
+  "current_phase": "REPAIR_REQUIRED",
+  "current_revision": 1,
+  "last_article_sha256": "c546af87a1275fa877a0acf13177f3ea0774d905968b02cb4219d80e31f5409e",
+  "last_finding_codes": [
+    "LANGUAGETOOL_FINDING"
+  ],
+  "batch_progress": "0/7",
+  "next_article_started_only_if_previous_pass": true,
+  "next_article_started": false,
+  "sequence_107008": "NOT_STARTED",
+  "publish_performed": false,
+  "exact_blocker": "CODEX_USAGE_LIMIT",
+  "task_url": "https://chatgpt.com/s/cd_6aae35ba67b88191a3cdea606ba67f32",
+  "evidence_completeness": {
+    "article_bytes_returned": false,
+    "detailed_languagetool_findings_returned": false,
+    "ppm679_run_reached": false,
+    "note": "Terminal connector comment exposed article SHA256 and phase/revision, but not exact article bytes or detailed LT findings."
+  }
+}
