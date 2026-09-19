@@ -1,0 +1,21 @@
+{
+  "contract": "CONCEPT_AGENT_WORDPRESS_OUTPUT_HARDLOCK_PROOF_V1",
+  "status": "PASS",
+  "verified_against_real_importer": true,
+  "real_importer_build": "0.28.18-endstempel-import-envelope-binding-ppm679",
+  "required_package_contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
+  "required_endstamp_contract": "PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1",
+  "required_endstamp_status": "ENDSTEMPEL_PASS",
+  "required_signature_algorithm": "ED25519",
+  "trusted_signing_key_id": "github-secret-ed25519-d2ebbf13f6c930e9",
+  "trusted_public_key_sha256": "d2ebbf13f6c930e987d097a494e3d091db5de028775e1ecc27cbf877d1912df4",
+  "known_signed_fixture": {
+    "article_count": 7,
+    "article_manifest_sha256": "879a7c88fcf6a7e652a6cc26d24670b6d6f93de262b0287be4ce148d9ace9f87",
+    "signature_verification": "PASS",
+    "package_payload_hash_verification": "PASS",
+    "import_envelope_hash_verification": "PASS"
+  },
+  "negative_rule": "ANY_UNSIGNED_OR_INTERNAL_HANDOFF_IS_BLOCKED",
+  "chat_output_rule": "WORDPRESS_READY_FILE_ONLY_AFTER_REAL_ENDSTEMPEL_SIGNATURE_PASS"
+}
