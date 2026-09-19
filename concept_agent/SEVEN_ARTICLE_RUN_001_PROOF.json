@@ -1,0 +1,69 @@
+{
+  "contract": "CONCEPT_AGENT_7_ARTICLE_RUN_001_PROOF_V1",
+  "status": "PASS",
+  "article_count": 7,
+  "writer": "ChatGPT / GPT-5.6 Sol",
+  "batch_sha256": "cee54c81cd8a37ee52e5034f3f24eed31f9e81eb9595810b277073c7347272f1",
+  "all_languagetool_6_8_pass": true,
+  "all_ppm_6_7_9_pass": true,
+  "cross_article_exact_duplicate_sentences_excluding_disclosure": 0,
+  "publish_allowed": false,
+  "wordpress_write_performed": false,
+  "codex_used": false,
+  "claude_used": false,
+  "articles": [
+    {
+      "index": 0,
+      "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+      "title": "Das Wichtigste über Hindernisstangen für Pferde",
+      "article_sha256": "1a1a68782c64d40b7848c20d695fa14762c42136db3bdf3f19e5f80e105c5f55",
+      "word_count": 822
+    },
+    {
+      "index": 1,
+      "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19",
+      "title": "Eine richtige Reitplatzbeleuchtung ohne Mast finden",
+      "article_sha256": "2091fb67b538798aa67ab9e526ed04533e676b3b2474a0984166acd4ddd7a0c2",
+      "word_count": 811
+    },
+    {
+      "index": 2,
+      "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87",
+      "title": "Mistcontainer mit Deckel wählen",
+      "article_sha256": "0976bc72e310ec56de10613a9951b8ab2310d56d71eb5458952f3fdc175db549",
+      "word_count": 773
+    },
+    {
+      "index": 3,
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+      "title": "Pferdehaftpflicht mit Fremdreiter auswählen",
+      "article_sha256": "a47e7945373a38d6d43bd2fe76c77b32dba7843b5a6bbee49a5b58f93282df7b",
+      "word_count": 793
+    },
+    {
+      "index": 4,
+      "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da",
+      "title": "So findest du Huffett für Pferde",
+      "article_sha256": "10b0548661a7dae15069553bcedbecd7779a4f25a6e315cd13f231beffe8d199",
+      "word_count": 769
+    },
+    {
+      "index": 5,
+      "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648",
+      "title": "So wählst du geeignete Fliegenmasken für Pferde",
+      "article_sha256": "2edc669b9bb59101681880e2a5fff8a49a5e04b8c61860b58c5ad34aa89e96f2",
+      "word_count": 798
+    },
+    {
+      "index": 6,
+      "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5",
+      "title": "Wissenswertes über Pellets für Pferde",
+      "article_sha256": "47b9b40b5b0a5f14036a93feafae1bb19e2fb1db3f8e4e77cc0a2896ab55baeb",
+      "word_count": 810
+    }
+  ],
+  "checker_binding": {
+    "languagetool_6_8_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+    "ppm_6_7_9_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+  }
+}
