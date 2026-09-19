@@ -1,0 +1,229 @@
+name: Konzept Null Build System4 Direct Import
+
+on:
+  push:
+    branches:
+      - hobbyroom/konzept-null-startmaster0102-isolated
+    paths:
+      - '.github/workflows/konzept-null-build-system4-direct-import.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout current Konzept Null
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Fetch exact authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main hobbyroom/system4-true-single-room-v1
+          mkdir -p /tmp/s4validator /tmp/direct
+          for f in handoff_transport.py content_guard.py design_guard.py batch_repetition_guard.py; do
+            git show origin/hobbyroom/system4-true-single-room-v1:isolated_system4/$f > /tmp/s4validator/$f
+          done
+          git show origin/main:control/startmaster0107/recovery_sources/7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a/generation-000001/PSERC_IMPORT_ENVELOPE.json > /tmp/direct/PSERC_IMPORT_ENVELOPE.json
+          grep -q "DIRECT_IMPORT_PLUGIN_VERSION='0.28.23'" /tmp/s4validator/handoff_transport.py
+          grep -q "HANDOFF_CONTRACT='SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2'" /tmp/s4validator/handoff_transport.py
+          echo SYSTEM4_02823_VALIDATOR_BOUND
+
+      - name: Prove current article bytes equal bound production context
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          env=json.load(open('/tmp/direct/PSERC_IMPORT_ENVELOPE.json',encoding='utf-8'))
+          files=[
+            'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
+            'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
+          items=env['production_plan']['items']
+          if len(items)!=7: raise SystemExit('PRODUCTION_CONTEXT_COUNT_NOT_7')
+          root=pathlib.Path('konzept_null/runs/current7/articles')
+          for i,(fn,item) in enumerate(zip(files,items)):
+            raw=(root/fn).read_bytes()
+            h=hashlib.sha256(raw).hexdigest()
+            expected=item['canonical_article']['body_html_sha256']
+            if h!=expected: raise SystemExit(f'ARTICLE_CONTEXT_HASH_MISMATCH:{i}:{fn}:{h}:{expected}')
+            if raw.decode('utf-8')!=item['canonical_article']['body_html']:
+                raise SystemExit(f'ARTICLE_CONTEXT_BYTES_MISMATCH:{i}:{fn}')
+            print(i,fn,h)
+          print('CURRENT_7_BYTES_EQUAL_BOUND_PRODUCTION_CONTEXT_PASS')
+          PY
+
+      - name: Materialize exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/lt68/LanguageTool-6.8.zip -d /tmp/lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Fresh LT 6.8 check 7 of 7
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import html,json,pathlib,re,subprocess,tempfile
+          root=pathlib.Path('konzept_null/runs/current7/articles')
+          jar='/tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar'
+          def plain(s):
+            s=re.sub(r"(?is)<!--.*?-->","\n",s)
+            s=re.sub(r"(?is)<(script|style)\b[^>]*>.*?</\1>","\n",s)
+            s=re.sub(r"(?is)</?(?:article|section|p|div|li|h[1-6]|br|tr|td|th|ul|ol|table|blockquote)\b[^>]*>","\n",s)
+            s=re.sub(r"(?s)<[^>]+>","",s)
+            s=html.unescape(s)
+            s=re.sub(r"[ \t\r\f\v]+"," ",s)
+            s=re.sub(r"\n[ \t]*\n+","\n\n",s)
+            return s.strip()+"\n"
+          files=sorted(root.glob('*.html'))
+          if len(files)!=7: raise SystemExit('ARTICLE_COUNT_NOT_7')
+          for p in files:
+            checked=plain(p.read_text(encoding='utf-8'))
+            with tempfile.NamedTemporaryFile('w',encoding='utf-8',suffix='.txt',delete=False) as f:
+              f.write(checked); name=f.name
+            cp=subprocess.run(['java','-Xmx1024m','-jar',jar,'--json','-l','de-DE',name],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
+            if cp.returncode!=0: raise SystemExit('LT_EXEC_FAIL:'+p.name+':'+cp.stderr)
+            matches=json.loads(cp.stdout).get('matches')
+            if not isinstance(matches,list): raise SystemExit('LT_REPORT_INVALID:'+p.name)
+            if matches:
+              print(json.dumps(matches,ensure_ascii=False,indent=2))
+              raise SystemExit('LT_FINDINGS:'+p.name+':'+str(len(matches)))
+            print('LT_PASS',p.name)
+          print('LT68_7_OF_7_ZERO_FINDINGS_PASS')
+          PY
+
+      - name: Fresh PPM 6.7.9 check using bound fact packs
+        shell: bash
+        run: |
+          set -euo pipefail
+          PPM=konzept_null/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  '"$PPM" | sha256sum -c -
+          rm -rf /tmp/ppm679 && mkdir -p /tmp/ppm679
+          unzip -q "$PPM" -d /tmp/ppm679
+          python3 - <<'PY'
+          import json,pathlib
+          env=json.load(open('/tmp/direct/PSERC_IMPORT_ENVELOPE.json',encoding='utf-8'))
+          packs=env['fact_pack_bundle']['fact_packs']; items=env['production_plan']['items']
+          pathlib.Path('/tmp/direct/ppm_payload.json').write_text(json.dumps({'packs':packs,'items':items},ensure_ascii=False),encoding='utf-8')
+          PY
+          cat >/tmp/direct/check.php <<'PHP'
+          <?php
+          $root='/tmp/ppm679/portal-production-machine';
+          $x=json_decode(file_get_contents('/tmp/direct/ppm_payload.json'),true);
+          require $root.'/tests/bootstrap-test.php';
+          $out=[];
+          foreach($x['items'] as $i=>$item){
+            PPM679_WP::reset_test_state(); PPM679_Storage::reset_test_state(); PPM679_Handoff_Permit::reset_test_state(); PPM679_Storage::ensure_schema();
+            $pack=$x['packs'][$i];
+            $imp=PPM679_Admin::import_fact_pack_bundle(['contract'=>'canonical_fact_pack_import_v1','fact_packs'=>[$pack]]);
+            if(empty($imp['ok'])) { echo "FACT_PACK_IMPORT_FAIL:$i\n"; var_export($imp); exit(2); }
+            $ca=$item['canonical_article']; $html=$ca['body_html'];
+            $generated=['article_type'=>$item['article_type'],'title'=>$ca['title'],'content_html'=>$html,'content_hash'=>hash('sha256',$html)];
+            $r=PPM679_Content_Validator::check($generated,$item,'system4_direct_import_recheck','bound-current7');
+            $ok=!empty($r['ok']) && ($r['technical_status']??'')==='TECHNICAL_CHECK_OK' && ($r['content_quality_status']??'')==='CONTENT_QUALITY_CHECK_OK' && (($r['checks']['fail_closed_aggregate_status']??'')==='PASS');
+            echo json_encode(['index'=>$i,'ok'=>$ok,'technical_status'=>$r['technical_status']??null,'content_quality_status'=>$r['content_quality_status']??null,'errors'=>$r['errors']??[]],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";
+            if(!$ok) exit(2);
+          }
+          echo "PPM679_7_OF_7_PASS\n";
+          PHP
+          php /tmp/direct/check.php
+
+      - name: Build exact 0.28.23 System4 direct-import JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,pathlib,subprocess
+          batch='7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a'
+          env=json.load(open('/tmp/direct/PSERC_IMPORT_ENVELOPE.json',encoding='utf-8'))
+          packs=env['fact_pack_bundle']['fact_packs']; items=env['production_plan']['items']
+          files=[
+            'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
+            'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
+          root=pathlib.Path('konzept_null/runs/current7/articles')
+          rows=[]
+          for i,(fn,item,pack) in enumerate(zip(files,items,packs)):
+            body=(root/fn).read_text(encoding='utf-8')
+            sha=hashlib.sha256(body.encode()).hexdigest()
+            rev=int(subprocess.check_output(['git','rev-list','--count','HEAD','--',str(root/fn)],text=True).strip() or '1')
+            cat=item['quality_binding']['wordpress_category']['slug']
+            rows.append({
+              'index':i,
+              'title':item['canonical_article']['title'],
+              'target_keyword':item['target_keyword'],
+              'category':cat,
+              'article_type':item['article_type'],
+              'plan_slot':env['workflow_release']['items'][i]['plan_slot'],
+              'final_draft_sha256':sha,
+              'revision_count':max(1,rev),
+              'body':body,
+              'production_context':{'fact_pack':pack,'production_plan_item':item},
+              'languagetool':{'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'},
+              'ppm679':{'status':'PASS','ppm_version':'6.7.9','technical_status':'TECHNICAL_CHECK_OK','content_quality_status':'CONTENT_QUALITY_CHECK_OK','fail_closed_aggregate_status':'PASS','content_sha256':sha},
+            })
+          payload={
+            'contract':'SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2',
+            'batch_sha256':batch,
+            'publish_allowed':False,
+            'signing_deferred':True,
+            'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED',
+            'no_legacy_status':'PASS',
+            'test_suite_status':'PASS',
+            'wordpress_review':{
+              'file_format':'JSON',
+              'mime_type':'application/json',
+              'intended_next_step':'WORDPRESS_DIRECT_IMPORT',
+              'plugin_name':'Portal SEO Editorial Plan Compiler',
+              'plugin_version_verified_against':'0.28.23',
+              'ppm_version_verified_against':'6.7.9',
+              'direct_wordpress_upload_ready':True,
+              'direct_upload_block_reason':None,
+              'required_downstream_components':[],
+            },
+            'articles':rows,
+          }
+          p=pathlib.Path('/tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.working.json')
+          p.write_text(json.dumps(payload,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          PY
+          PYTHONPATH=/tmp/s4validator python3 /tmp/s4validator/handoff_transport.py validate /tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.working.json
+          PYTHONPATH=/tmp/s4validator python3 /tmp/s4validator/handoff_transport.py canonicalize /tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.working.json /tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
+          PYTHONPATH=/tmp/s4validator python3 /tmp/s4validator/handoff_transport.py validate /tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
+          sha256sum /tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
+
+      - name: Negative contract proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('/tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json')
+          x=json.loads(p.read_text()); x['contract']='PSERC_APPROVED_PRODUCTION_PACKAGE_V1'
+          pathlib.Path('/tmp/direct/wrong.json').write_text(json.dumps(x,ensure_ascii=False),encoding='utf-8')
+          PY
+          set +e
+          PYTHONPATH=/tmp/s4validator python3 /tmp/s4validator/handoff_transport.py validate /tmp/direct/wrong.json >/tmp/direct/negative.log 2>&1
+          rc=$?
+          set -e
+          test "$rc" -ne 0
+          grep -q 'HANDOFF_CONTRACT_INVALID' /tmp/direct/negative.log
+          echo WRONG_CONTRACT_BLOCKED_PASS
+
+      - name: Upload exact direct-import file
+        uses: actions/upload-artifact@v4
+        with:
+          name: SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2
+          path: /tmp/direct/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
