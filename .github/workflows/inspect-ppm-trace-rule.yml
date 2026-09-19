@@ -1,0 +1,22 @@
+name: Inspect PPM Trace Lexical Rule
+
+on:
+  push:
+    branches: [inspect/current-wp-importer-20260919]
+    paths: ['.github/workflows/inspect-ppm-trace-rule.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print trace lexical rule
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp -d)
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d "$tmp"
+          grep -RIn -B15 -A35 'TRACE_LEXICAL_SUPPORT\|trace_lexical_support\|LEXICAL_FACT_SUPPORT' "$tmp/portal-production-machine" || true
