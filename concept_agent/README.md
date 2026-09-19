@@ -1,18 +1,6 @@
-# Concept Agent
+# Concept Agent / Konzept 5
 
-Status: ISOLATED PROTOTYPE — STARTED
+Bürotür:
+`concept_agent/START_HERE.md`
 
-Dieses Büro ist vollständig getrennt von allen bisherigen Konzepten.
-
-Aktueller Aufbau:
-- `AGENTS.md`: harte Isolation
-- `ZIELVERTRAG.md`: Ziel und Grenzen
-- `contracts.py`: eigene Übergabeformate
-- `pipeline.py`: eigene, noch providerfreie Agenten-Kette
-- `tests/test_isolation.py`: erster Isolationsnachweis
-
-Nächster Entwicklungsschritt:
-Die vier Rollen als getrennte, prüfbare Zustände aufbauen und danach mit einem kopierten realen WordPress-Auftrag testen.
-
-Wichtig:
-Kein Code außerhalb `concept_agent/**` wird verändert oder aufgerufen.
+Diese README ist nur Navigation und enthält bewusst keinen aktuellen Status und keine NEXT ACTION.
