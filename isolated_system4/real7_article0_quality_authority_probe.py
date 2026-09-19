@@ -52,23 +52,34 @@ def main() -> int:
         raise SystemExit("REAL7_TABLE_THRESHOLD_DRIFT:" + str(table_ratio))
 
     current = json.loads(CURRENT.read_text(encoding="utf-8"))
-    findings = ((current.get("latest_live_evidence") or {}).get("latest_observed_shell_findings") or [])
-    by_code = {str(row.get("error_code") or ""): row for row in findings if isinstance(row, dict)}
-    missing = REQUIRED_CODES - set(by_code)
-    if missing:
-        raise SystemExit("REAL7_FINDING_AUTHORITY_MISSING:" + ",".join(sorted(missing)))
-    if any(by_code[code].get("repair_owner") != "DRAFT_WORKER" for code in REQUIRED_CODES):
-        raise SystemExit("REAL7_FINDING_OWNER_DRIFT")
-    if by_code["BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO"].get("expected") != "<=0.02":
+    teststrecke = current.get("system4a_codex_free_teststrecke") or {}
+    multi = teststrecke.get("multifinding_repair") or {}
+    durable_codes = set(multi.get("required_findings") or [])
+    if durable_codes != REQUIRED_CODES:
+        missing = REQUIRED_CODES - durable_codes
+        extra = durable_codes - REQUIRED_CODES
+        raise SystemExit(
+            "REAL7_DURABLE_FINDING_AUTHORITY_DRIFT:MISSING="
+            + ",".join(sorted(missing))
+            + ":EXTRA="
+            + ",".join(sorted(extra))
+        )
+    quality_negative = teststrecke.get("quality_negative") or {}
+    if quality_negative.get("checker") != "PPM679":
+        raise SystemExit("REAL7_QUALITY_NEGATIVE_CHECKER_DRIFT")
+    if float(quality_negative.get("maximum_ratio") or 0) != 0.02:
         raise SystemExit("REAL7_DUPLICATE_THRESHOLD_DRIFT")
-    if by_code["BLOCKED_KNOWN_SHORT_CONCLUSION"].get("expected") != ">=0.1":
-        raise SystemExit("REAL7_SHORT_CONCLUSION_THRESHOLD_DRIFT")
-    wave_expected = by_code["BLOCKED_WAVE2_CONCLUSION_BALANCE"].get("expected") or {}
-    if float(wave_expected.get("minimum_ratio") or 0) != 0.1:
-        raise SystemExit("REAL7_WAVE2_CONCLUSION_THRESHOLD_DRIFT")
-    table_expected = by_code["BLOCKED_WAVE2_TABLE_VALUE"].get("expected") or {}
-    if float(table_expected.get("unique_token_ratio") or 0) != 0.18:
-        raise SystemExit("REAL7_TABLE_FINDING_THRESHOLD_DRIFT")
+    if quality_negative.get("repair_owner") != "DRAFT_WORKER":
+        raise SystemExit("REAL7_QUALITY_NEGATIVE_OWNER_DRIFT")
+    if multi.get("repairable_quality_failure_policy") not in {
+        None,
+        "RETURN_TO_DRAFT_WORKER_SAME_ARTICLE_UNTIL_PASS",
+    }:
+        raise SystemExit("REAL7_REPAIR_POLICY_DRIFT")
+    for code in REQUIRED_CODES:
+        owner = production_checks._ppm_repair_owner({"error_code": code})
+        if owner != production_checks.DRAFT_WORKER:
+            raise SystemExit("REAL7_FINDING_OWNER_DRIFT:" + code + ":" + owner)
 
     result = {
         "contract": "SYSTEM4_REAL7_ARTICLE0_QUALITY_AUTHORITY_PROBE_V2",
