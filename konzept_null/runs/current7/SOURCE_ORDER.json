@@ -1,0 +1,135 @@
+{
+  "contract": "KONZEPT_NULL_SOURCE_ORDER_V1",
+  "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "stage": "SOURCE_ORDER",
+  "codex_used": false,
+  "items": [
+    {
+      "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+      "keyword": "Hindernisstangen für Pferde",
+      "sources": [
+        {
+          "source_id": "HIND_INT",
+          "url": "https://pferde-atelier.de/training/training-reitplatz-training/hindernisstangen/",
+          "role": "portal_context"
+        },
+        {
+          "source_id": "HIND_FEI",
+          "url": "https://inside.fei.org/sites/default/files/S-Stewards%20Manual%20updated_september2022_clean_2.pdf",
+          "role": "safety_primary"
+        }
+      ]
+    },
+    {
+      "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19",
+      "keyword": "Reitplatzbeleuchtung ohne Mast",
+      "sources": [
+        {
+          "source_id": "LIGHT_INT",
+          "url": "https://pferde-atelier.de/weide/weide-reitplatz/reitplatzbeleuchtung/",
+          "role": "portal_context"
+        },
+        {
+          "source_id": "LIGHT_FISCHER",
+          "url": "https://www.fischer-stalltechnik.de/",
+          "role": "technical_context"
+        }
+      ]
+    },
+    {
+      "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87",
+      "keyword": "Mistcontainer mit Deckel",
+      "sources": [
+        {
+          "source_id": "MIST_INT",
+          "url": "https://pferde-atelier.de/stall/stall-mist-und-entsorgung/mistcontainer/",
+          "role": "portal_context"
+        },
+        {
+          "source_id": "MIST_LWK",
+          "url": "https://www.lwk-niedersachsen.de/",
+          "role": "regulatory_agricultural_context"
+        }
+      ]
+    },
+    {
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+      "keyword": "Pferdehaftpflicht mit Fremdreiter",
+      "sources": [
+        {
+          "source_id": "LIAB_INT",
+          "url": "https://pferde-atelier.de/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+          "role": "portal_context"
+        },
+        {
+          "source_id": "LIAB_BGB",
+          "url": "https://www.gesetze-im-internet.de/bgb/__833.html",
+          "role": "legal_primary"
+        },
+        {
+          "source_id": "LIAB_BDV",
+          "url": "https://www.bundderversicherten.de/de/gut-versichert/pferdehalterhaftpflicht",
+          "role": "insurance_consumer"
+        },
+        {
+          "source_id": "LIAB_BDV_RIDER",
+          "url": "https://www.bundderversicherten.de/de/gut-beraten/ratgeber/2021-06-11-reitbeteiligung-wer-sich-ein-pferd-teilt-muss-sich-doppelt-absichern-m2588.html",
+          "role": "insurance_consumer"
+        }
+      ]
+    },
+    {
+      "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da",
+      "keyword": "Huffett für Pferde",
+      "sources": [
+        {
+          "source_id": "HOOF_INT",
+          "url": "https://pferde-atelier.de/gesundheit/gesundheit-hufe/huffett/",
+          "role": "portal_context"
+        },
+        {
+          "source_id": "HOOF_MU",
+          "url": "https://extension.missouri.edu/publications/g2839",
+          "role": "extension_hoof_care"
+        }
+      ]
+    },
+    {
+      "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648",
+      "keyword": "Fliegenmasken für Pferde",
+      "sources": [
+        {
+          "source_id": "FLY_INT",
+          "url": "https://pferde-atelier.de/gesundheit/gesundheit-insekten-und-schutz/fliegenmasken/",
+          "role": "portal_context"
+        },
+        {
+          "source_id": "FLY_PETMD",
+          "url": "https://www.petmd.com/horse/why-do-horses-wear-masks",
+          "role": "vet_reviewed"
+        }
+      ]
+    },
+    {
+      "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5",
+      "keyword": "Pellets für Pferde",
+      "sources": [
+        {
+          "source_id": "PELLET_INT",
+          "url": "https://pferde-atelier.de/fuetterung/fuetterung-kraftfutter/pellets/",
+          "role": "portal_context"
+        },
+        {
+          "source_id": "PELLET_MERCK",
+          "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids",
+          "role": "veterinary_nutrition"
+        },
+        {
+          "source_id": "PELLET_BHS",
+          "url": "https://prod.bhs.org.uk/horse-care-and-welfare/health-care-management/horse-health/equine-diseases/choke/",
+          "role": "horse_welfare"
+        }
+      ]
+    }
+  ]
+}
