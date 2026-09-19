@@ -1,0 +1,79 @@
+{
+  "contract": "CONCEPT_AGENT_FIRST_REAL_CHECKER_RUN_V1",
+  "status": "PASS",
+  "scope": "TEST_ONLY_NO_MERGE_NO_PUBLISH",
+  "article": {
+    "title": "Das Wichtigste über Hindernisstangen für Pferde",
+    "target_keyword": "Hindernisstangen für Pferde",
+    "article_type": "Beratung",
+    "category": "hindernisstangen-beratung",
+    "source_plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+    "original_content_sha256": "4de2564ab76363bdcf665073195cec6ea64ebcc4548ddc038527a5bc8c8c4a59",
+    "fresh_candidate_sha256": "87acfa973423d20678509f3f3d49e90613d4c34266a9ddd27055dc71b9a43b13",
+    "fresh_candidate_word_count": 820
+  },
+  "real_bindings": {
+    "internal_links": [
+      "/training/",
+      "/training/training-reitplatz-training/",
+      "/training/training-reitplatz-training/hindernisstangen/"
+    ],
+    "fact_ids": [
+      "HIND_F1",
+      "HIND_F2",
+      "HIND_F3"
+    ]
+  },
+  "languagetool": {
+    "engine": "LanguageTool 6.8 / Bestand 43",
+    "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+    "inner_zip_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "commandline_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+    "finding_count": 0,
+    "status": "PASS"
+  },
+  "ppm679": {
+    "version": "6.7.9",
+    "package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+    "technical_status": "TECHNICAL_CHECK_OK",
+    "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+    "fail_closed_aggregate_status": "PASS",
+    "content_sha256": "87acfa973423d20678509f3f3d49e90613d4c34266a9ddd27055dc71b9a43b13",
+    "report_sha256": "a904498e97e690c468c11f650c6b027472cd45506df215075ffc016c43adfc93",
+    "status": "PASS"
+  },
+  "negative_tests": {
+    "languagetool_typo": {
+      "mutation": "Stangenarbiet",
+      "status": "BLOCKED",
+      "rule_id": "GERMAN_SPELLER_RULE"
+    },
+    "ppm_table_removed": {
+      "status": "BLOCKED",
+      "error_codes": [
+        "BLOCKED_CONTENT_TABLE_COUNT",
+        "BLOCKED_CONTENT_WORD_FLOOR",
+        "BLOCKED_CONTENT_TABLE_ROW_FLOOR",
+        "BLOCKED_WAVE2_INSUFFICIENT_TEXT_BETWEEN_HEADINGS",
+        "BLOCKED_WAVE2_TABLE_VALUE"
+      ]
+    },
+    "ppm_bound_link_replaced_external": {
+      "status": "BLOCKED",
+      "error_codes": [
+        "BLOCKED_CONTENT_INTERNAL_LINK_ROLE",
+        "BLOCKED_KNOWN_INTERNAL_LINK_INVALID",
+        "BLOCKED_WAVE2_BOUND_LINK_MISSING"
+      ]
+    }
+  },
+  "repair_recheck": {
+    "status": "PASS",
+    "restored_candidate_sha256": "87acfa973423d20678509f3f3d49e90613d4c34266a9ddd27055dc71b9a43b13",
+    "languagetool_finding_count": 0,
+    "ppm679_status": "PASS"
+  },
+  "publish_allowed": false,
+  "codex_used": false,
+  "wordpress_write_performed": false
+}
