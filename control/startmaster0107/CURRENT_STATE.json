@@ -104,7 +104,11 @@
     "PR340_HARDLOCK_RUN_35427693879_PASS",
     "PR340_HARDLOCK_BASE_RUN_35427693887_PASS",
     "PR342_FINAL_PRECODEX_HEAD_VERIFIED_ON_93956F83CA2F8DDEA5F07CB82C1B77EF393F248F",
-    "PR342_HARDLOCK_BASE_RUN_35427945011_PASS"
+    "PR342_HARDLOCK_BASE_RUN_35427945011_PASS",
+    "REAL7_LIVE_START_MAIN_6EDDDF8BDAF044E123D0B3A917E091C1B1D05863",
+    "REAL7_ARTICLE0_REACHED_REPAIR_REQUIRED_REVISION1",
+    "REAL7_CODEX_USAGE_LIMIT_TERMINAL_COMMENT_5740160115",
+    "REAL7_USAGE_LIMIT_EVIDENCE_BRANCH_COMMIT_4B92AF33E7D5C900A168086059D638590E98C793"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -210,22 +214,33 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "REAL7_CODEX_AUTHORIZED_PRESTART",
+  "current_work_status": "REAL7_BLOCKED_EXTERNAL_CODEX_USAGE_LIMIT_ARTICLE0_REPAIR_REQUIRED",
   "current_execution_blocker": {
-    "code": "NONE_PRESTART_USER_AUTHORIZED_REAL7",
+    "code": "CODEX_USAGE_LIMIT_AFTER_ARTICLE0_REPAIR_REQUIRED",
     "error_class": false,
-    "detail": "User explicitly authorized the real 7-article Codex production run on 2026-09-19. This supersedes the prior user stop that forbade Codex/real7 start. Technical start remains fail-closed on fresh dispatcher==main and fresh hardlock-base PASS.",
+    "classification": "EXTERNAL_CAPACITY_BLOCKER",
+    "detail": "The explicitly authorized canonical seven-article run started successfully on main 6edddf8bdaf044e123d0b3a917e091c1b1d05863. Article 0 was newly generated far enough to reach real fullcheck REPAIR_REQUIRED at revision 1. Codex then stopped because of usage limit. Article 1 was not started. The terminal connector returned only the article SHA256 and generic LANGUAGETOOL_FINDING, not exact article bytes or detailed LT findings. Therefore no same-workspace continuation is claimed.",
     "dispatcher_pr": 342,
-    "user_authorized_real7": true,
-    "codex_start_allowed": true,
+    "terminal_comment": 5740160115,
+    "completed_articles": 0,
+    "current_article_index": 0,
+    "current_phase": "REPAIR_REQUIRED",
+    "current_revision": 1,
+    "last_article_sha256": "c546af87a1275fa877a0acf13177f3ea0774d905968b02cb4219d80e31f5409e",
+    "last_finding_codes": [
+      "LANGUAGETOOL_FINDING"
+    ],
+    "next_article_started": false,
+    "sequence_107008_reached": false,
+    "codex_start_allowed": false,
     "publish_allowed": false
   },
   "external_execution_blocker": {
-    "code": "CODEX_CAPACITY_UNKNOWN_UNTIL_START",
-    "evidence": "Capacity will be established by the authorized live start attempt.",
-    "classification": "EXTERNAL_AVAILABILITY_UNKNOWN_NOT_PROJECT_FAILURE",
-    "effect": "If Codex usage limit blocks the task, stop and report exact external blocker.",
-    "resolved": null
+    "code": "CODEX_USAGE_LIMIT",
+    "evidence": "PR #342 terminal comment 5740160115",
+    "classification": "EXTERNAL_AVAILABILITY_BLOCKER_NOT_PROJECT_FAILURE",
+    "effect": "No further Codex work may start until capacity is available again.",
+    "resolved": false
   },
   "superseded_live_findings": [
     {
@@ -248,81 +263,48 @@
     }
   ],
   "latest_live_evidence": {
-    "main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
-    "dispatcher_pr": 107,
-    "dispatcher_head_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
-    "latest_durable_pr107_terminal_comment": "5735784162",
-    "latest_durable_pr107_terminal_code": "REAL_CODEX_REPAIR_ACCEPTANCE_PASS_WITH_EVIDENCE_FIELDS_OMITTED",
-    "latest_observed_shell_checker": "PPM 6.7.9",
-    "latest_observed_shell_article_index": 0,
-    "latest_observed_shell_findings": [
-      {
-        "error_code": "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
-        "actual": 0.2909090909090909,
-        "expected": "<=0.02",
-        "repair_owner": "DRAFT_WORKER"
-      },
-      {
-        "error_code": "BLOCKED_KNOWN_SHORT_CONCLUSION",
-        "actual": 0.09494949494949495,
-        "expected": ">=0.1",
-        "repair_owner": "DRAFT_WORKER"
-      },
-      {
-        "error_code": "BLOCKED_WAVE2_CONCLUSION_BALANCE",
-        "actual": {
-          "paragraphs": 3,
-          "ratio": 0.09494949494949495,
-          "words": 94
-        },
-        "expected": {
-          "minimum_paragraphs": 2,
-          "minimum_ratio": 0.1
-        },
-        "repair_owner": "DRAFT_WORKER"
-      },
-      {
-        "error_code": "BLOCKED_WAVE2_TABLE_VALUE",
-        "actual": {
-          "body_rows": 4,
-          "columns": 3,
-          "count": 1,
-          "unique_token_ratio": 0.09230769230769231
-        },
-        "expected": {
-          "body_rows": 4,
-          "columns": 3,
-          "count": 1,
-          "unique_token_ratio": 0.18
-        },
-        "repair_owner": "DRAFT_WORKER"
-      }
-    ],
-    "exact_task_mapping_for_latest_shell_findings_proven": false,
+    "main_sha": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+    "dispatcher_pr": 342,
+    "dispatcher_head_sha": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+    "trigger_comment": "5740144791",
+    "terminal_comment": "5740160115",
+    "terminal_code": "CODEX_USAGE_LIMIT_AFTER_ARTICLE0_REPAIR_REQUIRED",
     "completed_articles": 0,
-    "second_article_started": false,
+    "current_article_index": 0,
+    "current_phase": "REPAIR_REQUIRED",
+    "current_revision": 1,
+    "last_article_sha256": "c546af87a1275fa877a0acf13177f3ea0774d905968b02cb4219d80e31f5409e",
+    "last_finding_codes": [
+      "LANGUAGETOOL_FINDING"
+    ],
+    "exact_languagetool_findings_durable": false,
+    "article_bytes_durable": false,
+    "article1_started": false,
+    "batch_progress": "0/7",
     "sequence_107008_reached": false,
-    "publish_performed": false
+    "publish_performed": false,
+    "evidence_branch": "test-evidence/real7-live-20260919",
+    "evidence_commit": "4b92af33e7d5c900a168086059d638590e98c793"
   },
-  "last_safe_main_sha": "93956f83ca2f8ddea5f07cb82c1b77ef393f248f",
-  "last_safe_change": "Real7 authorization remains active. Added durable live-progress/nutzungslimit protocol only; no production path, quality rule, threshold, article, or publish change.",
-  "hobbyroom_status": "E2E_PRECODEX_READY_USER_STOP",
+  "last_safe_main_sha": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+  "last_safe_change": "Real7 live run started successfully, reached article0 REPAIR_REQUIRED revision1, then stopped on external Codex usage limit. Metadata/hash were durably recorded; exact article bytes and detailed LT findings were not returned, so no same-workspace continuation is claimed. No article1 start, no 107008, no publish.",
+  "hobbyroom_status": "REAL7_EXTERNAL_USAGE_LIMIT_STOP",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "NONE_KNOWN_TECHNICAL; DYNAMIC_FRESHNESS_CHECK_REQUIRED_AT_START; USER_STOP_ACTIVE",
+  "hobbyroom_blocker": "CODEX_USAGE_LIMIT; ARTICLE0_METADATA_DURABLE_BUT_ARTICLE_BYTES_NOT_DURABLE",
   "next_action": {
-    "goal": "RUN_REAL_7_ARTICLE_BATCH_ON_CODEX_WITH_DURABLE_LIVE_ERROR_LOG",
-    "action": "Fresh-read main and permanent dispatcher PR #342; require exact head equality and fresh hardlock-base PASS. Then start the current bound production route exactly once with `python3 isolated_system4/parent_start.py start-current-bound`, attach Codex only to the machine-created current workspace, process exactly 7 articles sequentially, and allow article N+1 only after article N reaches real System-4 PASS. For repairable LT/PPM/batch findings, stay on the same article/workspace and repair through the bound System-4 controller until PASS or a genuine hard blocker. Persist a concise live progress/error ledger in the permanent dispatcher PR conversation as milestones occur. After all 7 pass, continue only through the bound batch collect and 107008 final-review path. No publish without separate explicit user authorization. If Codex usage limit is reached, immediately stop new work and persist the last fully reached article/phase/revision/check findings and existing article bytes according to protocol/STARTMASTER0107_REAL7_LIVE_PROGRESS_DURABILITY_20260919.md.",
-    "why": "The user explicitly authorized the real 7-article Codex run and requested live durable logging to catch errors early.",
+    "goal": "RESUME_REAL7_ONLY_AFTER_CODEX_CAPACITY_RETURNS_WITH_FRESH_START_SAFETY",
+    "action": "Do not start Codex while the usage limit remains. When capacity returns, fresh-read main and permanent dispatcher PR #342, require exact dispatcher head == current main and fresh hardlock-base PASS. Because the stopped article-0 bytes/workspace are not durably available, do not claim same-workspace continuation. Start a fresh canonical real7 run from article 0 using `python3 isolated_system4/parent_start.py start-current-bound`, keep all seven bodies NEW, and monitor sequentially. Preserve all known historical start protections. No publish without separate user authorization.",
+    "why": "The live run reached article0 REPAIR_REQUIRED, but usage limit ended the task before exact article bytes/detailed findings were durably externalized.",
     "forbidden": [
-      "merge permanent dispatcher PR #342",
-      "publish or write to WordPress without separate explicit user authorization",
-      "weaken hardlock or hardlock-base",
-      "lower PPM/LT/content/design/batch thresholds",
+      "start Codex while usage limit is active",
+      "pretend the lost article0 workspace can be resumed",
       "use historical/recovery article bodies",
-      "skip an article",
-      "start article N+1 before article N PASS",
-      "bypass System-4 controller or canonical 107008"
+      "start article 1 before article 0 real PASS",
+      "weaken LT/PPM/content/design/batch thresholds",
+      "treat repairable findings as terminal project blockers",
+      "bypass canonical Point-0 or 107008",
+      "publish or write to WordPress"
     ]
   },
   "hobbyroom_pr": 331,
@@ -490,11 +472,13 @@
     "publish_allowed": false
   },
   "real7_live_progress_durability": {
-    "status": "BOUND_BEFORE_START",
+    "status": "PARTIAL_DURABILITY_ONLY_METADATA_PRESERVED_ARTICLE_BYTES_MISSING",
     "protocol_ref": "protocol/STARTMASTER0107_REAL7_LIVE_PROGRESS_DURABILITY_20260919.md",
-    "rule": "EVERY_REACHED_ARTICLE_PHASE_AND_REPAIR_STATE_MUST_REMAIN_DURABLY_RECONSTRUCTIBLE",
-    "codex_usage_limit_policy": "STOP_NEW_WORK_PERSIST_LAST_REACHED_STATE_NO_OVERALL_PASS",
+    "durable_metadata": true,
+    "durable_article_bytes": false,
+    "detailed_lt_findings_durable": false,
     "tmp_only_evidence_forbidden": true,
+    "note": "The runtime stopped on usage limit before exact article bytes/detailed LT findings could be externalized. This is not a content failure, but it prevents exact same-workspace continuation from being proven.",
     "publish_allowed": false
   }
 }
