@@ -20,6 +20,7 @@ def _weak_beratung_title(title: str, keyword: str) -> bool:
         f"{kw} auswählen",
         f"{kw} auswaehlen",
         f"{kw} finden",
+        f"so findest du {kw}",
     }
     return title_n in weak
 
