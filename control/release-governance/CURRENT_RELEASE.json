@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 69,
+  "generation": 70,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -55,7 +55,7 @@
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
     "current_focus": "AWIN_ROOTFIX_CANONICAL_BIND_AND_LIVE_VERIFY",
-    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-035",
+    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
     "current_focus_reason": "EXPLICIT_USER_REQUEST_20260919_AWIN_NEW_PARTNERS_NOT_REFRESHED_AND_OTTO_PRODUCT_VISIBLE_IN_AWIN_BANNER_VIEW",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
@@ -823,6 +823,16 @@
     "local_awin_candidate_status": "HARD_LOCAL_PASS_LIVE_OPEN",
     "canonical_plugin_version": "6.72.73",
     "source_drift": "LOCAL_6_72_103_VS_CANONICAL_6_72_73_DIFF_15_OF_26_FILES",
-    "first_blocker": "AFF-ERR-035"
+    "first_blocker": "AFF-ERR-035",
+    "evidence_ref": "release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt",
+    "awin_error_refs": [
+      "AFF-ERR-030",
+      "AFF-ERR-031"
+    ],
+    "registered_live_open_after_current_gate": [
+      "AFF-ERR-032",
+      "AFF-ERR-033"
+    ],
+    "locked_live_pass_ref": "AFF-ERR-034"
   }
 }
