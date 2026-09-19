@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 72,
+  "generation": 73,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "26d9e7c1addcc70844d1a61f3c35d61b421c4669db2512a1426c43b3b2a3af0d",
+    "manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_file_count": 26,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,12 +36,12 @@
   },
   "active_candidate": {
     "version": "6.72.105",
-    "status": "CANONICAL_AWIN_ROOTFIX_LOCAL_GATES_PASS_LIVE_GATE_PENDING",
+    "status": "CANONICAL_AWIN_ROOTFIX_VERSION_METADATA_FIXED_LIVE_GATE_PENDING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "26d9e7c1addcc70844d1a61f3c35d61b421c4669db2512a1426c43b3b2a3af0d",
+    "current_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
