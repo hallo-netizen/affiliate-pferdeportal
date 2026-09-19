@@ -1,0 +1,16 @@
+{
+  "source": "READ_ONLY_COPY_PLUS_ISOLATED_TEST_BINDINGS",
+  "source_contract": "SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1",
+  "job_id": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+  "title": "Das Wichtigste über Hindernisstangen für Pferde",
+  "keyword": "Hindernisstangen für Pferde",
+  "article_type": "Beratung",
+  "category": "hindernisstangen-beratung",
+  "internal_links": [
+    "/concept-agent-test/pferdetraining/",
+    "/concept-agent-test/cavaletti/",
+    "/concept-agent-test/reitplatz/"
+  ],
+  "publish_allowed": false,
+  "binding_note": "The three links are isolated TEST bindings only. They are not claimed to be production links."
+}
