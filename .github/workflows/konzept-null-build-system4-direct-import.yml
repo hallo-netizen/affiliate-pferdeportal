@@ -83,11 +83,11 @@ jobs:
             'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
           def ppm_visible(article_html):
             lines=[]
-            for m in re.finditer(r"<(h2|p|li|th|td|small)\\b[^>]*>(.*?)</\\1>",article_html,re.I|re.S):
+            for m in re.finditer(r"<(h2|p|li|th|td|small)\b[^>]*>(.*?)</\1>",article_html,re.I|re.S):
               v=html.unescape(m.group(2))
               v=re.sub(r"<[^>]+>"," ",v)
-              v=re.sub(r"\\s+"," ",v).strip()
-              v=re.sub(r"\\s+([.,;:!?])",r"\\1",v)
+              v=re.sub(r"\s+"," ",v).strip()
+              v=re.sub(r"\s+([.,;:!?])",r"\1",v)
               if v: lines.append(v)
             return "\\n\\n".join(lines)
           for i,fn in enumerate(files):
@@ -122,7 +122,7 @@ jobs:
           def stable(o): return hashlib.sha256(canon(o)).hexdigest()
           def sha(s): return hashlib.sha256(s.encode()).hexdigest()
           def body_text(s):
-            v=html.unescape(s); v=re.sub(r'<[^>]+>',' ',v); return re.sub(r'\\s+',' ',v).strip()
+            v=html.unescape(s); v=re.sub(r'<[^>]+>',' ',v); return re.sub(r'\s+',' ',v).strip()
           env=json.load(open('/tmp/direct/PSERC_IMPORT_ENVELOPE.json',encoding='utf-8'))
           packs=env['fact_pack_bundle']['fact_packs']; olditems=env['production_plan']['items']
           files=[
