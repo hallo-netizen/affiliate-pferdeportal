@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 68,
+  "generation": 69,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,8 +35,8 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.72",
-    "status": "TEST_ZIP_READY_LIVE_OPEN",
+    "version": "6.72.73",
+    "status": "CANONICAL_SOURCE_PRESENT_OPERATIVE_SOURCE_DRIFT_BLOCKED",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -45,13 +45,7 @@
     "source_file_count": 26,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
-    "final_artifact_sha256": null,
-    "test_package_commit": "5ce3b925e4bbd0f2c8484540b2ec1e8bfaaf4d09",
-    "test_package_tree": "acfc7ac7e11ba5b63e6a0ca4bc72da00327186f9",
-    "test_package_archive_url": "https://github.com/hallo-netizen/affiliate-pferdeportal/archive/5ce3b925e4bbd0f2c8484540b2ec1e8bfaaf4d09.zip",
-    "test_package_file_count": 26,
-    "test_package_identity": "26_OF_26_GIT_BLOB_IDENTITY_PASS",
-    "test_evidence_ref": "release/affiliate-zentrale/evidence/affiliate_67272_shared_overview_provider_reports_test_candidate_20260918.txt"
+    "final_artifact_sha256": null
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -60,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "SHARED_OVERVIEW_BANNER_START_CATEGORY_PAGE_RESTORE",
-    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md",
-    "current_focus_reason": "EXPLICIT_USER_REQUEST_20260918_RESTORE_KNOWN_PASS_PRINCIPLE_AND_MIRROR_ONE_SHARED_DESIGN_TO_START_CATEGORY_AND_PAGE",
+    "current_focus": "AWIN_ROOTFIX_CANONICAL_BIND_AND_LIVE_VERIFY",
+    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-035",
+    "current_focus_reason": "EXPLICIT_USER_REQUEST_20260919_AWIN_NEW_PARTNERS_NOT_REFRESHED_AND_OTTO_PRODUCT_VISIBLE_IN_AWIN_BANNER_VIEW",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -119,7 +113,7 @@
       ]
     },
     "awin_catalog_refresh": {
-      "programme_list": "REFRESH_AT_NEW_AUTOMATION_CYCLE_LAST_KNOWN_GOOD_ON_FAILURE",
+      "programme_list": "INDEPENDENT_READ_ONLY_REFRESH_REQUIRED_LAST_KNOWN_GOOD_ON_FAILURE",
       "feed_list": "REFRESH_AT_NEW_AUTOMATION_CYCLE_LAST_KNOWN_GOOD_ON_FAILURE",
       "bootstrap": "ALLOW_LOCAL_AND_CURRENTLY_JOINED_WITHOUT_PARTNER_SNAPSHOT"
     },
@@ -179,9 +173,9 @@
   "execution_state": {
     "state": "RUNNING_BOUND_RELEASE_GATES",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "FIRST_GATE: INSTALL EXACT 6.72.72 TEST CANDIDATE AND LIVE-VERIFY STARTSEITE + KATEGORIE + PORTAL-SEITE SAME WIDE BANNER; THEN PARTNER & EINNAHMEN MUST SHOW ORIGINAL PROVIDER REPORTS OR FAIL-CLOSED NICHT VERFUEGBAR; NO NEW VERSION BEFORE FIRST REAL FAIL",
-    "completion_condition": "6.72.72 LIVE READBACK COMPLETES THE BOUND START/CATEGORY/PAGE AND PROVIDER-REPORT GATE; ON FAIL FIX ONLY FIRST REAL DEFECT; ON PASS CONTINUE REMAINING BOUND RELEASE GATES",
-    "after_completion_action": "CONTINUE RUN_BOUND_RELEASE_GATES UNTIL ALL REQUIRED GATES PASS; ONLY THEN RELEASE_CHECK",
+    "bound_user_scope_action": "FIRST_GATE: RECONCILE EXACT TESTED 6.72.103 AWIN ROOTFIX AGAINST CANONICAL 6.72.73 WITHOUT BLIND OVERWRITE; BIND ONLY PROVEN AWIN DELTAS INTO THE DIRECT COMMITTED TREE; THEN RUN POSITIVE/NEGATIVE/REGRESSION/FRESH-UNPACK GATES; ONLY AFTER THAT ONE LIVE INSTALL AND VERIFY AWIN PROGRAMME REFRESH + AWIN BANNER VIEW.",
+    "completion_condition": "A SINGLE CANONICAL CANDIDATE PRESERVES THE LIVE-PASS JOURNAL/GLOSSAR/PFERDERASSEN PATHS, REFRESHES CURRENT AWIN JOINED PROGRAMMES INDEPENDENTLY OF PRODUCT AUTOMATION, HIDES AWIN PRODUCT ROWS FROM BANNER & WERBEMITTEL, PRESERVES LKG ON AWIN FAILURE, AND PASSES REAL WORDPRESS LIVE READBACK.",
+    "after_completion_action": "CONTINUE WITH THE NEXT OPEN REGISTERED DEFECT IN CURRENT ORDER; DO NOT START OPTIONAL REFACTOR OR GENERAL FRAMEWORK WORK BEFORE THE CURRENT AWIN GATE IS CLOSED.",
     "no_optional_detours": true,
     "sequence": 13,
     "authorized_change_prefixes": [
@@ -744,7 +738,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "BOUND_RELEASE_GATES_67272_LIVE_READBACK_FIRST",
+    "current_milestone": "AWIN_CANONICAL_SOURCE_DRIFT_RECONCILIATION_AND_LIVE_GATE",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
@@ -819,5 +813,16 @@
     "current_queue_stage": "offers",
     "current_queue_status": "queued",
     "checked_at": "2026-09-07"
+  },
+  "operational_observation": {
+    "checked_at": "2026-09-19",
+    "live_plugin_version": "6.72.102",
+    "live_status": "INSTALLED_USER_SCREENSHOT_AND_LIVE_FEEDBACK",
+    "local_awin_candidate_version": "6.72.103",
+    "local_awin_candidate_sha256": "ee0f22e4f158b550f8cb21fc9e8c3466c0fd855fad7ca5082e853354a3d2aa2e",
+    "local_awin_candidate_status": "HARD_LOCAL_PASS_LIVE_OPEN",
+    "canonical_plugin_version": "6.72.73",
+    "source_drift": "LOCAL_6_72_103_VS_CANONICAL_6_72_73_DIFF_15_OF_26_FILES",
+    "first_blocker": "AFF-ERR-035"
   }
 }
