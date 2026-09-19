@@ -1,9 +1,9 @@
-"""Letzte Concept-Agent-Grenze: Nur ein echt signiertes ENDSTEMPEL-Paket darf als WordPress-Datei ausgegeben werden."""
+"""Final Concept-Agent boundary: only the proven Redaktionsplan upload payload may leave as WordPress file."""
 from __future__ import annotations
 import json
 from wordpress_output_contract import assert_wordpress_ready
 
-FINAL_FILENAME="GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
+FINAL_FILENAME="GEN1_7_ARTIKEL_WORDPRESS_REDAKTIONSPLAN_UPLOAD_107008_PASS.json"
 
 def wordpress_delivery_bytes(pkg:dict)->bytes:
     assert_wordpress_ready(pkg)
