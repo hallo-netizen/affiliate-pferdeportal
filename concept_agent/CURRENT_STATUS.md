@@ -1,41 +1,45 @@
 # CONCEPT AGENT — CURRENT STATUS
 
-Status: PROTOTYPE_TESTSTRECKE_COMPLETE_PASS / PRODUCTION_PARITY_BLOCKED
+Status: FIRST_REAL_CHECKER_TESTRUN_PASS
 
-## Fertig
-- eigenes isoliertes Büro
-- Research Agent
-- Facts Agent
-- Writer Agent
-- Repair Agent
-- harte Übergabeprüfungen
-- Textmaschinen-Snapshot
-- reale WordPress-Eingangsprobe
-- vollständiger Positivlauf
-- Negativmatrix
-- 1 / 3 / 7 Artikel PASS
-- genau eine finale Datei pro Artikel
-- Chat-Writer-Port
-- Claude-Writer-Port vorbereitet
-- PPM 6.7.9 als eigene Byte-Kopie im Büro
-- eigener LT-6.8-Beschaffungsweg mit festen Hashes
-- Isolation gegen main geprüft: Änderungen ausschließlich concept_agent/**
+## Erster echter Testlauf erreicht
+Artikel:
+`Das Wichtigste über Hindernisstangen für Pferde`
 
-## Nicht als PASS behauptet
-- echter LT-6.8-Check des Concept-Agent-Artikels
-- echter PPM-6.7.9-FULL-Check mit vollständigem produktionskonformen Fact-Pack/Plan
-- Claude-API
-- WordPress-Rückimport
+Frischer Testkandidat:
+`87acfa973423d20678509f3f3d49e90613d4c34266a9ddd27055dc71b9a43b13`
 
-## Erster verbleibender Blocker
-`REAL_LT68_PPM679_PRODUCTION_PARITY_NOT_EXECUTED`
+### Echte Prüfer
+LanguageTool 6.8:
+- 0 Findings
+- PASS
+- JAR SHA256 `2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8`
 
-Grund:
-Die aktuelle Chat-Ausführungsumgebung enthält das LT-6.8-Binärpaket nicht und erlaubt hier keinen externen Binärdownload. Kein Ersatz-PASS.
+PPM 6.7.9:
+- TECHNICAL_CHECK_OK
+- CONTENT_QUALITY_CHECK_OK
+- fail_closed_aggregate_status PASS
+- PASS
+- Package SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
+
+### Negativ- und Reparaturprobe
+- Tippfehler `Stangenarbiet` -> LanguageTool BLOCK / GERMAN_SPELLER_RULE
+- Tabelle entfernt -> PPM BLOCK
+- gebundenen internen Link durch externen Link ersetzt -> PPM BLOCK
+- Reparatur auf frischen Kandidaten -> LanguageTool PASS + PPM PASS
+
+### Reale interne Links
+1. `/training/`
+2. `/training/training-reitplatz-training/`
+3. `/training/training-reitplatz-training/hindernisstangen/`
 
 ## Harte Grenzen
-Kein Merge.
-Kein Publish.
-Kein WordPress-Write.
-Kein Codex.
-Keine Änderung anderer Konzepte.
+- kein Codex
+- kein Merge
+- kein Publish
+- kein WordPress-Write
+- keine Änderung anderer Konzepte
+
+## Nachweis
+`concept_agent/FIRST_REAL_CHECKER_RUN_V1.json`
+`concept_agent/test_output/FIRST_REAL_CHECKER_CANDIDATE.html`
