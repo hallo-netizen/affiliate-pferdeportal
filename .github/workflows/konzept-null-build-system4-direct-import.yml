@@ -89,7 +89,7 @@ jobs:
               v=re.sub(r"\s+"," ",v).strip()
               v=re.sub(r"\s+([.,;:!?])",r"\1",v)
               if v: lines.append(v)
-            return "\\n\\n".join(lines)
+            return "\n\n".join(lines)
           for i,fn in enumerate(files):
             p=root/fn; article=p.read_text(encoding='utf-8'); checked=ppm_visible(article)
             if not checked.strip(): raise SystemExit('LT_TEXT_EMPTY:'+fn)
