@@ -33,3 +33,12 @@ WEITERARBEITEN, AUCH NACH PASS-ZWISCHENSCHRITTEN.
 STOPP NUR BEI EINEM OBJEKTIV UNBEHEBBAREN BLOCKER.
 
 Ein Zwischen-PASS ist niemals ein Abschluss und niemals ein Stoppsignal.
+
+
+## WORDPRESS-ENDDATEI-HARDLOCK
+1. Interne Concept-Agent-Dateien sind niemals WordPress-Uploaddateien.
+2. Als WordPress-ready darf ausschließlich ein Paket bezeichnet oder im Chat ausgegeben werden, das den echten Vertrag `PSERC_APPROVED_PRODUCTION_PACKAGE_V1` mit `PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1` erfüllt.
+3. Pflicht vor Ausgabe: `concept_agent/wordpress_output_contract.py` muss inklusive echter ED25519-Signaturprüfung PASS liefern.
+4. Ohne echtes ENDSTEMPEL_PASS wird fail-closed gestoppt; kein Ersatz-PASS, keine umbenannte interne Datei.
+5. Die korrekte WordPress-Dateiausgabe hier im Chat ist fester Bestandteil der Teststrecke und des Produktionswegs.
+6. Verbotene Ersatzformate: `CONCEPT_AGENT_FINAL_ARTICLE_V1`, `CONCEPT_AGENT_7_ARTICLE_CHAT_HANDOFF_V1`, `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`.
