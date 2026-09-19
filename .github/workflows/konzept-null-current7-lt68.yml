@@ -1,4 +1,5 @@
 name: Konzept Null Current7 Exact LT68
+# rerun after exact PPM679 repairs
 
 on:
   push:
