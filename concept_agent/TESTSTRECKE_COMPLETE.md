@@ -76,3 +76,19 @@ Verboten als WordPress-Datei:
 ## Produktionsgrenze
 Kein Publish.
 Kein WordPress-Write.
+
+
+## Phase 14 — Redaktionelle Natürlichkeit / HTML-Textfluss
+Pflicht vor FINAL:
+- Beratungstitel mit alter nackter Generatoroberfläche: BLOCK
+- natürlich attributierter Beratungstitel: PASS
+- mechanisch/bürokratisch klingende Beratung-H2: BLOCK
+- natürliche, konkrete Beratung-H2: PASS
+- `</a>Wort` ohne Leerzeichen: BLOCK
+- `</a>,` bzw. `</a>.` mit Satzzeichen: PASS
+
+Implementierung:
+- `concept_agent/textmachine_guard.py`
+- `concept_agent/tests/test_textmachine_snapshot.py`
+
+Diese Stufe läuft vor jeder finalen Dateiausgabe und nach jeder Reparatur erneut.
