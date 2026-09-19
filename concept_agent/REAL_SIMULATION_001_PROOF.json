@@ -1,0 +1,56 @@
+{
+  "contract": "CONCEPT_AGENT_REAL_SIMULATION_V1",
+  "status": "PASS",
+  "target": "realistic test text from real job through real checkers to final file",
+  "job_id": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+  "title": "Das Wichtigste über Hindernisstangen für Pferde",
+  "article_sha256": "4ebbec42ae0e3c0e58e458077173bc241e262d6f4fc7fc3b2e7c16ee1f14eff8",
+  "word_count": 811,
+  "real_bindings": {
+    "fact_ids": [
+      "HIND_F1",
+      "HIND_F2",
+      "HIND_F3"
+    ],
+    "internal_links": [
+      "/training/",
+      "/training/training-reitplatz-training/",
+      "/training/training-reitplatz-training/hindernisstangen/"
+    ]
+  },
+  "repair_trace": [
+    {
+      "checker": "LanguageTool 6.8",
+      "status": "REPAIR_REQUIRED",
+      "finding": "AUFFORDERUNG_SIE"
+    },
+    {
+      "checker": "LanguageTool 6.8",
+      "status": "PASS",
+      "finding_count": 0
+    },
+    {
+      "checker": "PPM 6.7.9",
+      "status": "REPAIR_REQUIRED",
+      "finding": "BLOCKED_WAVE2_INTRO_STRUCTURE",
+      "actual_intro_words": 101,
+      "required": "30..100"
+    },
+    {
+      "checker": "LanguageTool 6.8",
+      "status": "PASS",
+      "finding_count": 0
+    },
+    {
+      "checker": "PPM 6.7.9",
+      "status": "PASS",
+      "technical_status": "TECHNICAL_CHECK_OK",
+      "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+      "fail_closed_aggregate_status": "PASS"
+    }
+  ],
+  "final_file_contract": "CONCEPT_AGENT_FINAL_ARTICLE_V1",
+  "publish_allowed": false,
+  "wordpress_write_performed": false,
+  "codex_used": false
+}
