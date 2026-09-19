@@ -21,17 +21,19 @@
 - Gebundene `article_type`-Werte werden unverändert übernommen; Concept Agent darf nicht pauschal auf `Beratung` umstellen.
 
 ## Upstream-Abhängigkeit für den nächsten frischen Batch
-PPA-005 / Portal SEO Themenengine liegt als 0.56.29 vor. Lokale Tests sind PASS, aber der letzte reale WordPress-Screenshot zeigt den gespeicherten Einzellauf weiterhin als:
+PPA-005 / Portal SEO Themenengine liegt im Pluginbüro als Testkandidat 0.56.29 vor. Lokale Plugin-Tests sind PASS. Der letzte reale WordPress-Screenshot nach der 0.56.29-Installationsfolge zeigt den gespeicherten Einzellauf weiterhin als:
 `RUNNING · Datenquellen 4 von 4 · Kosten 0.050840 USD`
-mit laufendem Server-Schritt/Readback. Damit ist die Live-Finalisierung von 0.56.29 **noch nicht belegt**.
+mit laufendem Server-Schritt/Readback. Der Versionskopf ist in diesem letzten Screenshot nicht sichtbar; deshalb ist die exakt installierte Live-Version dort nicht unabhängig read-back-belegt. Die Live-Finalisierung ist **noch nicht belegt**.
+
+Zusätzlicher Closeout-Test der aktuellen Concept-Agent-Änderungen: 8/8 gezielte Positiv-/Negativtests PASS (Titelregel, guter Titel, gemischte Beitragsarten, echter Direktvertrag, alter Vertrag BLOCK, Body-Tamper BLOCK, Publish BLOCK, LT/PPM BLOCK).
 
 ## Erster offener Blocker
-`PSTE_05629_LIVE_4_OF_4_RUN_STILL_RUNNING`
+`PSTE_LIVE_4_OF_4_RUN_STILL_RUNNING_AFTER_05629_INSTALL_SEQUENCE`
 
 Solange dieser Upstream-Lauf nicht in einen eindeutigen terminalen Zustand übergeht, gibt es keinen frisch belegten neuen Redaktionsplan-Metadatenbatch für die nächste Artikelproduktion.
 
 ## Genau eine NEXT ACTION
-**Den bestehenden PPA-005-0.56.29-Live-Lauf read-only bis zu einem eindeutigen terminalen Zustand auflösen/belegen; keine neue Provideranfrage und keinen neuen Breitenlauf starten. Danach erst den frischen Redaktionsplan-Metadatenexport als Eingang für Concept Agent erzeugen.**
+**Den aktuell gespeicherten PPA-005-Live-Lauf read-only bis zu einem eindeutigen terminalen Zustand auflösen/belegen; keine neue Provideranfrage und keinen neuen Breitenlauf starten. Danach erst den frischen Redaktionsplan-Metadatenexport als Eingang für Concept Agent erzeugen.**
 
 ## Verbindlicher Arbeitsweg danach
 Frischer Redaktionsplan-Metadatenexport → hier hochladen → Concept Agent verarbeitet 1..N ohne Codex bis zur geprüften `SYSTEM4_WORDPRESS_HANDOFF_V1`-Datei im Chat.
