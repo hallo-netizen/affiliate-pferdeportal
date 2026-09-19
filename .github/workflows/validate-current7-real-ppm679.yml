@@ -20,6 +20,18 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --depth=1 origin hobbyroom/konzept-null-startmaster0102-isolated
+      - name: Materialize exact LanguageTool 6.8 for PPM language binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kn-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/kn-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/kn-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/kn-lt68/LanguageTool-6.8.zip -d /tmp/kn-lt68
+          jar=/tmp/kn-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  '"$jar" | sha256sum -c -
+          echo "SYSTEM4_LANGUAGETOOL_JAR=$jar" >> "$GITHUB_ENV"
+
       - name: Run real PPM679 content validator on 7 articles
         shell: bash
         run: |
