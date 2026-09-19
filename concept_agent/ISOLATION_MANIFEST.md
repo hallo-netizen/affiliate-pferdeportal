@@ -1,30 +1,23 @@
-# CONCEPT AGENT — ISOLATION MANIFEST V1
+# CONCEPT AGENT — ISOLATION MANIFEST
 
 ## Erlaubter Schreibbereich
 Nur:
 `concept_agent/**`
 
 ## Verboten
-- Änderungen außerhalb dieses Ordners
-- Imports aus anderen Konzepten
-- Aufruf fremder Controller/Runner/Gates
-- WordPress-Write
-- Publish
-- Merge
-- Rückschreiben in Konzept 1/2/3/4/4A
-- automatische Claude-Verbindung ohne eigenen späteren Freigabeschritt
+- Änderungen außerhalb dieses Ordners durch den Concept-Agent-Fachweg;
+- Imports/Aufrufe fremder Produktionscontroller als Runtime-Abhängigkeit;
+- WordPress-Write;
+- Publish;
+- Merge;
+- Rückschreiben in andere Konzepte;
+- ungeprüfte externe Writer-Verbindung.
 
 ## Erlaubt
-- READ-ONLY-Inspiration aus bestehenden fachlichen Regeln
-- Kopie eines Inputs für isolierte Tests
-- eigene Agenten, eigene Prüfer, eigene Verträge, eigene Outputs
+- READ-ONLY-Prüfung autoritativer Fremdquellen;
+- Kopie eines Inputs für isolierte Tests;
+- eigene Agenten, eigene Prüfer, eigene Verträge, eigene Outputs;
+- lokal gespiegelte Prüfung des realen WordPress-Importvertrags.
 
-## Aktuelle Writer-Modi
-1. interner deterministischer Testwriter
-2. manueller Chat-Writer
-3. Claude-Adapter: definiert, aber bewusst NICHT verbunden
-
-## Aktueller Endvertrag
-`CONCEPT_AGENT_FINAL_ARTICLE_V1`
-
-Es entsteht genau eine finale Rückgabedatei je Artikel.
+Dynamischer Stand und NEXT ACTION stehen ausschließlich in:
+`concept_agent/CURRENT_STATUS.md`
