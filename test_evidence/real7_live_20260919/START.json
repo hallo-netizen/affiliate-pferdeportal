@@ -1,0 +1,19 @@
+{
+  "contract": "REAL7_LIVE_EVIDENCE_V1",
+  "status": "PRESTART_DURABLE_LEDGER_INITIALIZED",
+  "authoritative_main": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+  "dispatcher_pr": 342,
+  "dispatcher_head": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+  "hardlock_base_run": 35428435167,
+  "hardlock_base": "PASS",
+  "codex_trigger_comment": 5740118540,
+  "article_target_count": 7,
+  "completed_articles": 0,
+  "current_article_index": null,
+  "current_phase": "DISPATCH_ACKNOWLEDGED",
+  "current_revision": 0,
+  "last_article_sha256": null,
+  "next_article_started": false,
+  "error_ledger_entries": 0,
+  "publish_performed": false
+}
