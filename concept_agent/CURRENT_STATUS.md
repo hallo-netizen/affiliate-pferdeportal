@@ -56,3 +56,7 @@ Dauerhaft fail-closed ergänzt:
 - positive/negative Regressionstests sind Bestandteil der Teststrecke.
 
 Die bereits erzeugten 7 Artikel gelten bis zur Reparatur und erneutem Gesamtcheck NICHT als aktuelle finale Ausgabe.
+
+
+### Präzisierung Titelregel
+Nach Sichtprüfung des aktuellen 7er-Batches gilt: die vorhandenen natürlichen Titel bleiben erhalten. Insbesondere `So wählst du geeignete Fliegenmasken für Pferde` ist ausdrücklich zulässig. Im aktuellen Batch werden nur die nackten Aktions-Titel `Mistcontainer mit Deckel wählen` und `Pferdehaftpflicht mit Fremdreiter auswählen` als Titeloberflächen-Fehler behandelt. Die Guard-Regel wurde entsprechend eingeengt, damit gute Titel nicht unnötig umgeschrieben werden.
