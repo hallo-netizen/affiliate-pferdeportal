@@ -111,7 +111,11 @@
     "REAL7_USAGE_LIMIT_EVIDENCE_BRANCH_COMMIT_4B92AF33E7D5C900A168086059D638590E98C793",
     "SYSTEM4_RESTART_RECOVERY_CANDIDATE_F9281D903D7C0381E7A83F24C3FFA1E5D4FCFC5E",
     "SYSTEM4_RESTART_RECOVERY_ACCEPTANCE_RUN_35430672460_PASS",
-    "SYSTEM4_PRECODEX_START_HARDLOCK_CANDIDATE_VALIDATED_NOT_INTEGRATED"
+    "SYSTEM4_PRECODEX_START_HARDLOCK_CANDIDATE_VALIDATED_NOT_INTEGRATED",
+    "SYSTEM4_RESTART_RECOVERY_PRECODEX_HARDLOCK_PR352_MERGED_B594FE069765B2BFD879459E12E92C04A883874C",
+    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ENTRANCE_RUN_35435850207_PASS",
+    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_HARDLOCK_RUN_35435849529_PASS",
+    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ACCEPTANCE_RUN_35435860769_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -217,55 +221,18 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "REAL7_BLOCKED_RESTART_RECOVERY_VALIDATED_NOT_INTEGRATED",
+  "current_work_status": "STOP_BEFORE_CODEX_RESTART_RECOVERY_AND_PRECODEX_HARDLOCK_INTEGRATED",
   "current_execution_blocker": {
-    "code": "REAL7_CROSS_TASK_RESTART_RECOVERY_NOT_INTEGRATED",
-    "error_class": true,
-    "classification": "TECHNICAL_INTEGRATION_BLOCKER",
-    "detail": "A cross-process REPAIR_REQUIRED recovery solution and a pre-Codex start hardlock were built and passed System4A acceptance on test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e / run 35430672460, but those files are not present on current main b43ea18b33529c819c2b123c4610b4943c39240e. Therefore restart durability and the hard start-error manifest are NOT production-integrated yet. Do not start Codex.",
-    "validated_test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
-    "validated_acceptance_run": 35430672460,
-    "required_integration_files": [
-      "isolated_system4/workspace_recovery_capsule.py",
-      "isolated_system4/restart_repair_probe.py",
-      "control/startmaster0107/PRE_CODEX_START_HARDLOCK.json",
-      "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
-      "control/startmaster0107/pre_codex_start_hardlock.py",
-      "isolated_system4/test_repair_continuity.py",
-      "isolated_system4/parent_start.py"
-    ],
-    "restart_test_proven": {
-      "process_death_after_repair_required": true,
-      "exact_article_identity_restored": true,
-      "exact_draft_sha_restored": true,
-      "exact_checks_sha_restored": true,
-      "new_process_repair_reenters_check": true
-    },
-    "start_error_manifest_guards": [
-      "STALE_MAIN_HASH",
-      "DISPATCHER_HEAD_DRIFT",
-      "HARDLOCK_BASE_NOT_FRESH_PASS",
-      "START_HERE_STATE_HASH_DRIFT",
-      "WRONG_STEP_OR_POINT0_BYPASS",
-      "MANUAL_SOURCE_REQUEST_OR_WORKSPACE",
-      "CODEX_BOUND_CAPSULE_MISSING",
-      "OLD_OR_RECOVERY_ARTICLE_AS_NEW",
-      "TEMP_WORKSPACE_LOSS",
-      "NEXT_ARTICLE_BEFORE_PREVIOUS_PASS",
-      "REPAIRABLE_FINDING_TERMINALIZED",
-      "CODEX_USAGE_LIMIT_ACTIVE",
-      "CODEX_GITHUB_AUTH_ASSUMPTION",
-      "OUTPUT_ONLY_IN_TMP",
-      "PUBLISH_WITHOUT_SEPARATE_APPROVAL"
-    ],
+    "code": "RESOLVED",
+    "error_class": false,
+    "classification": "RESOLVED",
+    "detail": "REAL7_CROSS_TASK_RESTART_RECOVERY_NOT_INTEGRATED is resolved. The validated restart-recovery transport and pre-Codex start hardlock were integrated by PR #352 on main b594fe069765b2bfd879459e12e92c04a883874c. Exact PR head 2634e7137de96567e04ab941c4715938274b60bb passed Deterministic Entrance Gate 35435850207, Immutable Base Hardlock 35435849529 and full System4A acceptance 35435860769. No Codex start and no publish occurred.",
+    "resolved_blocker": "REAL7_CROSS_TASK_RESTART_RECOVERY_NOT_INTEGRATED",
+    "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
+    "validated_head_sha": "2634e7137de96567e04ab941c4715938274b60bb",
+    "acceptance_run": 35435860769,
     "codex_start_allowed": false,
-    "publish_allowed": false,
-    "parent_start_integration": {
-      "required": true,
-      "scope": "PRE_CODEX_START_HARDLOCK_CALL_BEFORE_TEMP_RUN_WORKSPACE_CREATION",
-      "textmachine_or_quality_rule_change": false,
-      "validated_test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e"
-    }
+    "publish_allowed": false
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT",
@@ -318,22 +285,20 @@
     "evidence_branch": "test-evidence/real7-live-20260919",
     "evidence_commit": "4b92af33e7d5c900a168086059d638590e98c793"
   },
-  "last_safe_main_sha": "b43ea18b33529c819c2b123c4610b4943c39240e",
-  "last_safe_change": "Fresh closeout on 2026-09-19: current main advanced via unrelated Konzept-Null PR #349. Relevant delta found: cross-process repair recovery and pre-Codex start hardlock were already built and acceptance-PASS on test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e / run 35430672460, but are not integrated on main. CURRENT now points to integration of that validated candidate as the single NEXT ACTION. No Codex start, no publish, no quality-rule change.",
+  "last_safe_main_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
+  "last_safe_change": "Restart-recovery and pre-Codex start hardlock integrated by PR #352 after exact-head PASS of Deterministic Entrance Gate 35435850207, Immutable Base Hardlock 35435849529 and full System4A acceptance 35435860769. CURRENT closeout stops before Codex. No production text, PPM 6.7.9, LanguageTool 6.8, design or quality threshold changed.",
   "hobbyroom_status": "REAL7_EXTERNAL_USAGE_LIMIT_STOP",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "CODEX_USAGE_LIMIT; ARTICLE0_METADATA_DURABLE_BUT_ARTICLE_BYTES_NOT_DURABLE",
   "next_action": {
-    "goal": "INTEGRATE_VALIDATED_RESTART_RECOVERY_AND_PRECODEX_START_HARDLOCK_ON_CURRENT_MAIN",
-    "action": "Port only the already-tested restart-recovery capsule/probe, the pre-Codex start-hardlock candidate, and its minimal parent_start.py preflight call from test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e onto a fresh branch from the then-current main after this status closeout. Reconcile only real main drift. Run the full no-Codex System4A acceptance, explicit process-death/restart negative-positive test, pre-Codex hardlock positive/negative matrix, deterministic entrance gate and immutable hardlock. Merge only if all required checks PASS. Then update CURRENT_STATE/START_HERE and stop before Codex.",
-    "why": "The fix exists and passed on a test commit, but current main does not contain it. Rebuilding from scratch would violate KISS and lose tested evidence.",
+    "goal": "STOP_BEFORE_CODEX",
+    "action": "Do not start Codex. Restart recovery and the pre-Codex start hardlock are integrated on current main. Before any later real Codex start, first resolve the external CODEX_USAGE_LIMIT, synchronize dispatcher PR #342 to the then-current main, require a fresh hardlock-base PASS, create a fresh PASS pre-Codex receipt, and require explicit user authorization for that real start.",
+    "why": "The requested integration and all codex-free proofs are complete. The handoff explicitly requires stopping before Codex, and the external capacity blocker is still recorded as unresolved.",
     "forbidden": [
       "start Codex",
       "change production text rules or quality thresholds",
       "change PPM 6.7.9 or LanguageTool 6.8",
-      "weaken same-article repair continuity",
-      "treat test commit as production-integrated before merge",
       "reuse historical/recovery article bodies as NEW",
       "publish or write to WordPress"
     ]
@@ -513,25 +478,28 @@
     "publish_allowed": false
   },
   "restart_recovery_candidate": {
-    "status": "VALIDATED_ON_TEST_COMMIT_NOT_MERGED",
+    "status": "MERGED_AFTER_EXACT_HEAD_ACCEPTANCE_PASS",
     "test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
-    "acceptance_run": 35430672460,
+    "acceptance_run": 35435860769,
     "acceptance_result": "PASS",
     "recovery_capsule": "isolated_system4/workspace_recovery_capsule.py",
     "restart_probe": "isolated_system4/restart_repair_probe.py",
     "exact_pre_restart_checks_hash_verified": true,
     "exact_pre_restart_draft_hash_verified": true,
     "same_article_verified": true,
-    "production_main_contains_fix": false
+    "production_main_contains_fix": true,
+    "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c"
   },
   "pre_codex_start_hardlock_candidate": {
-    "status": "VALIDATED_ON_TEST_COMMIT_NOT_MERGED",
+    "status": "MERGED_AFTER_EXACT_HEAD_ACCEPTANCE_PASS_STOP_BEFORE_CODEX",
     "test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
     "manifest_ref": "control/startmaster0107/PRE_CODEX_START_HARDLOCK.json",
     "receipt_ref": "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
     "validator_ref": "control/startmaster0107/pre_codex_start_hardlock.py",
     "current_test_receipt_status": "BLOCKED",
     "current_test_receipt_reason": "CURRENT_REAL7_STOP_IS_CODEX_USAGE_LIMIT_AND_DURABLE_CROSS_TASK_RECOVERY_TRANSPORT_IS_NOT_YET_PROVEN",
-    "production_main_contains_hardlock": false
+    "production_main_contains_hardlock": true,
+    "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
+    "acceptance_run": 35435860769
   }
 }
