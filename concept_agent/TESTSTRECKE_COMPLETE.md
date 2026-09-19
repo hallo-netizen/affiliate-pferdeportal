@@ -1,143 +1,78 @@
 # CONCEPT AGENT — KOMPLETTE TESTSTRECKE
 
-## Phase 1 — Isolation
-PASS-Kriterium:
-- alle Änderungen nur unter concept_agent/**
-- kein Import fremder Konzepte
-- kein WordPress-Write
+## Phasen 1–10
+Isolation → Eingang → Research → Facts → Writer → Artikelprüfung → Repair → Artikel-Preimport → 1..N → echte Qualitätsprüfer.
+
+Verbindlich:
+- LanguageTool 6.8 PASS
+- PPM 6.7.9 PASS
+- nach jeder Reparatur kompletter Recheck
 - kein Publish
+- kein WordPress-Write
 
-## Phase 2 — Eingang
-Reale WordPress-Auftragskopie.
-Pflicht: Titel, Keyword, Artikeltyp, Kategorie, exakt drei gebundene interne Links.
-Fehlende Links: BLOCK vor Research.
+## Phase 11 — WordPress Redaktionsplan Upload
+Die WordPress-Uploaddatei ist NICHT der interne Concept-Agent-Handoff und NICHT der ENDSTEMPEL-Wrapper.
 
-## Phase 3 — Research Agent
-Nur gebundener Quellenpool.
-Ungültige URL / leere Quelle / doppelte source_id: BLOCK.
+Harte positive Referenz:
+`GEN1_7_ARTIKEL_WORDPRESS_REDAKTIONSPLAN_UPLOAD_107008_PASS.json`
 
-## Phase 4 — Facts Agent
-Jeder Fakt muss auf akzeptierte source_id zeigen.
-Unbekannte source_id: BLOCK.
-
-## Phase 5 — Writer
-Austauschbarer Writer-Port.
-Aktuell:
-- interner Testwriter
-- manueller Chat-Writer
-- Claude-Port vorbereitet, nicht verbunden
-
-## Phase 6 — Artikelprüfung
-- Identität
-- Keyword
-- drei interne Links
-- kein externer Link
-- Tabelle
-- Mindeststruktur
-
-## Phase 7 — Repair
-Nur derselbe Artikel.
-Danach vollständige Wiederprüfung.
-
-## Phase 8 — Artikel-Preimport
-Genau ein internes Artikelpayload je Artikel.
-SHA256-Bindung.
-WICHTIG: Dieses Payload ist niemals die WordPress-Uploaddatei.
-
-## Phase 9 — 1..N
-Getestete Größen:
-- 1 Artikel
-- 3 Artikel
-- 7 Artikel
-Kein Drop, keine Umordnung.
-Fehler eines Artikels stoppt fail-closed.
-
-## Phase 10 — reale Qualitätsprüfer
-Verbindlich vor Downstream:
-- LanguageTool 6.8
-- PPM 6.7.9
-Nach jeder Reparatur vollständiger Recheck.
-Kein Artikel darf in Phase 11 gelangen, bevor beide real PASS sind.
-
-## Phase 11 — PSERC-Import-Envelope
-Für alle finalen Artikel muss ein echtes `PSERC_APPROVED_PRODUCTION_PACKAGE_V1` aufgebaut sein mit exakt:
-- contract
-- package_id
-- package_payload_sha256
-- source
-- fact_pack_bundle
-- fact_pack_bundle_sha256
-- production_plan
-- production_plan_sha256
-- workflow_release
-- workflow_release_sha256
-
-Pflicht:
-- `workflow_release.contract = WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED`
-- `workflow_release.status = PASS`
-- `wordpress_write_performed = false`
-- alle Komponentenhashes kanonisch korrekt
-- Artikelbytes im Production Plan exakt identisch zu den final geprüften Artikelbytes
-
-## Phase 12 — ENDSTEMPEL
-WordPress-Datei darf erst nach echtem GitHub-ENDSTEMPEL entstehen.
-
-Pflichtvertrag:
+Exakter Top-Level-Vertrag:
 - `contract = PSERC_APPROVED_PRODUCTION_PACKAGE_V1`
-- `endstamp_contract = PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1`
-- `status = ENDSTEMPEL_PASS`
-- `signature_algorithm = ED25519`
-- gebundene Produktions-Key-ID und Public-Key-SHA
-- echte gültige ED25519-Signatur
+- `source`
+- `batch_sha256`
 - `publish_allowed = false`
-- `content_mutation_performed = false`
+- `article_count`
+- `production_plan_sha256`
+- `production_plan`
+- `redaktionsplan_binding`
+- `output_release`
+- `package_payload_sha256`
 
-Artikelmanifest:
-- `contract = PFERDE_ATELIER_ENDSTEMPEL_ARTICLE_MANIFEST_V1`
-- korrekter Batch
-- runtime_generation
-- source_manifest_ref + SHA
-- article_count = tatsächliche Artikelzahl
-- pro Artikel exakt: name, plan_slot, sha256, byte_length, content_utf8
-- Name exakt `ARTICLE_<64hex-plan_slot>.md`
-- Manifest- und Import-Envelope-Hashes müssen exakt stimmen
+`redaktionsplan_binding`:
+- `contract = PSERC_TEXTMACHINE_METADATA_BATCH_V2`
+- `status = READY_FOR_WORDPRESS_DRAFT_IMPORT`
+- `item_count = article_count`
+- `publish_allowed = false`
+- pro Artikel: article_type, category, plan_slot, canonical_article_id, target_keyword, title
 
-## Phase 13 — WordPress-Ausgabegate
-Einzig erlaubte Chat-/WordPress-Enddatei:
-`GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json`
-(Der historische Dateiname ist keine Mengenautorität.)
+`output_release`:
+- `contract = PFERDE_ATELIER_OUTPUT_RELEASE_RECEIPT_V2`
+- `status = OUTPUT_RELEASE_PASS_FINAL_REVIEW_AND_REARM_CONFIRMED`
+- `final_review_sequence = 107008`
+- `publish_allowed = false`
 
-Vor Dateiausgabe MUSS `concept_agent/wordpress_output_contract.py` PASS liefern, einschließlich echter Signaturprüfung.
+Alle Artikelbytes, Artikelhashes, Planhash und package_payload_sha256 müssen stimmen.
 
-VERBOTEN als WordPress-Datei:
+## Phase 12 — harte lokale Positiv-/Negativprüfung
+Pflicht vor Chat-Ausgabe:
+- bekannte 107008-PASS-Struktur: POSITIV PASS
+- aktuelle Datei: POSITIV PASS
+- falscher Contract: BLOCK
+- falsche Artikelzahl: BLOCK
+- falscher production_plan_sha256: BLOCK
+- falscher Binding-Status: BLOCK
+- veränderte Artikelbytes: BLOCK
+- falscher package_payload_sha256: BLOCK
+
+Implementierung:
+- `concept_agent/wordpress_redaktionsplan_upload.py`
+- `concept_agent/wordpress_output_contract.py`
+- `concept_agent/wordpress_delivery.py`
+- `concept_agent/tests/test_wordpress_redaktionsplan_upload.py`
+- `concept_agent/tests/test_wordpress_output_contract.py`
+- `concept_agent/tests/test_wordpress_delivery.py`
+
+## Phase 13 — Chat-Ausgabe
+Erst nach Positiv-/Negativ-PASS genau eine WordPress-Uploaddatei ausgeben:
+`GEN1_7_ARTIKEL_WORDPRESS_REDAKTIONSPLAN_UPLOAD_107008_PASS.json`
+
+Verboten als WordPress-Datei:
 - `CONCEPT_AGENT_FINAL_ARTICLE_V1`
 - `CONCEPT_AGENT_7_ARTICLE_CHAT_HANDOFF_V1`
 - `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`
-- jedes unsigned/preimport Paket
-
-Fail-closed:
-Ohne echtes ENDSTEMPEL-PASS gibt es keine als WordPress-ready bezeichnete Datei.
-
-## Phase 14 — Positiv-/Negativtest der WordPress-Grenze
-Positiv:
-- bekanntes echtes signiertes ENDSTEMPEL-Paket muss den Contract-/Hash-/Signaturcheck bestehen.
-
-Negativ:
-- falscher Top-Level-Contract -> BLOCK
-- fehlende/ungültige Signatur -> BLOCK
-- Artikelbyte geändert -> BLOCK
-- SHA/byte_length drift -> BLOCK
-- Import-Envelope-Hash drift -> BLOCK
-- publish_allowed != false -> BLOCK
-- article_count mismatch -> BLOCK
-
-## Phase 15 — Chat-Ausgabe
-Erst nach Phase 14 PASS:
-- genau eine WordPress-Uploaddatei hier im Chat
-- keine interne Handoff-Datei als Ersatz
-- Dateiausgabe ist Bestandteil des Tests und kein optionaler Nachschritt
+- ENDSTEMPEL-Signierauftrag
+- ENDSTEMPEL-Wrapper
 
 ## Produktionsgrenze
 Kein Publish.
 Kein WordPress-Write.
-Andere Konzepte unverändert.
