@@ -1,0 +1,42 @@
+# Awin Canonical Reconciliation Evidence – 6.72.105
+
+Stand: 2026-09-19
+Status: LOCAL_GATES_PASS / LIVE_GATE_PENDING
+Canonical reconcile commit: d6198d69d5b31fd3ab219ca09db004e6c1e2f554
+Canonical source manifest SHA-256: 26d9e7c1addcc70844d1a61f3c35d61b421c4669db2512a1426c43b3b2a3af0d
+
+## Scope
+Exactly the proven Awin rootfix was reconciled onto the direct committed canonical 6.72.73 source. No blind 6.72.103 overwrite.
+
+Changed canonical source files:
+- includes/trait-ppar-network-sync.php
+- includes/trait-ppar-automation-suite.php
+- includes/trait-ppar-awin-programme-gate.php
+- includes/trait-ppar-creative-library.php
+- includes/trait-ppar-provider-registry.php
+- pferdeportal-affiliate-router.php
+- readme.txt
+
+## Bound fixes
+1. Awin programme inventory uses GET /publishers/{publisherId}/programmes with includeHidden=true and accessToken, without relationship query.
+2. Invalid HTTP/JSON leaves Last-Known-Good programme inventory untouched.
+3. Joined-programme inventory refresh is scheduled hourly independently of product/feed automation.
+4. Manual Awin programme refresh is available on the Awin specialist page.
+5. Awin Banner & Werbemittel provider view adds creative_type='banner'; product rows are not deleted.
+6. 6.72.102 breadcrumb/performance workaround is not present.
+
+## Local gates on exact canonical bytes
+- source manifest reconstructed from 26 files: exact SHA-256 PASS
+- PHP lint: 21/21 PASS
+- positive/negative/source-structure checks: 19/19 PASS
+- mutation checks: 3/3 PASS
+- combined checks: 22/22 PASS
+- Fresh-Unpack: 26/26 byte-identical PASS
+- regression scope: exactly the seven bound files differ from canonical 6.72.73 PASS
+- protected Affiliate output/design files outside the bound Awin files: byte-identical PASS
+
+## Live boundary
+No LIVE PASS is claimed. Next bound action is one live installation/readback of the exact 6.72.105 canonical bytes:
+- Awin programme refresh succeeds and newly joined/hidden inventory is represented correctly;
+- Awin Banner & Werbemittel view contains banners only and no product rows;
+- existing Journal/Glossar/Pferderassen PASS paths remain unchanged.

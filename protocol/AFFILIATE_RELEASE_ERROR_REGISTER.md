@@ -525,7 +525,7 @@ Der Einstieg bleibt:
 
 **Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
 
-**Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
+**Status:** FIXED_CANONICAL_6_72_105 / LOCAL_GATES_PASS / LIVE_GATE_OPEN.
 
 ## AFF-ERR-031 — Awin-Produkt erscheint in Banner-&-Werbemittel-Ansicht
 
@@ -545,7 +545,7 @@ Der Einstieg bleibt:
 
 **Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
 
-**Status:** FIXED_LOCAL_6_72_103 / LIVE_GATE_OPEN.
+**Status:** FIXED_CANONICAL_6_72_105 / LOCAL_GATES_PASS / LIVE_GATE_OPEN.
 
 ## AFF-ERR-032 — Breadcrumb/Hero-Layout springt beim Laden weiterhin sichtbar
 
@@ -598,5 +598,5 @@ Der Einstieg bleibt:
 
 **Evidence:** `release/affiliate-zentrale/evidence/awin_672103_local_rootfix_20260919.txt`.
 
-**Status:** OPEN / CURRENT-SOURCE-DRIFT / ERSTER TECHNISCHER BLOCKER.
+**Status:** CLOSED / CANONICAL_RECONCILED_6_72_105 / LOCAL_GATES_PASS.\n\n**Abschluss 19.09.2026:** Nur die belegten Awin-Deltas wurden in die direkte kanonische Source übernommen. 6.72.102-Breadcrumb-/Performance-Code blieb ausgeschlossen. Source-Manifest `26d9e7c1addcc70844d1a61f3c35d61b421c4669db2512a1426c43b3b2a3af0d`; Reconcile-Commit `d6198d69d5b31fd3ab219ca09db004e6c1e2f554`. Lokale Gates: 22/22 PASS, PHP 21/21 PASS, Fresh-Unpack 26/26 PASS. Einziger Rest dieses Gates ist der gebundene LIVE-Test.
 

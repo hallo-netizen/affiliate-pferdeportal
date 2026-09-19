@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 71,
+  "generation": 72,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.105",
-    "status": "CANONICAL_AWIN_ROOTFIX_RECONCILED_GATES_PENDING",
+    "status": "CANONICAL_AWIN_ROOTFIX_LOCAL_GATES_PASS_LIVE_GATE_PENDING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
