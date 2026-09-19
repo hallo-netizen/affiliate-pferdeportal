@@ -34,6 +34,15 @@ jobs:
         run: |
           set -euo pipefail
           python3 konzept_null/finalize_current7.py
+      - name: Upload exact final WordPress JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL
+          path: konzept_null/runs/current7/final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
+
       - name: Commit exactly one final WordPress file
         run: |
           set -euo pipefail
