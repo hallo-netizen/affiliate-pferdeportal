@@ -1,0 +1,40 @@
+name: Inspect Current WP Importer Signature
+
+on:
+  push:
+    branches: [inspect/current-wp-importer-20260919]
+    paths: ['.github/workflows/inspect-current-wp-importer-signature.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import zipfile,io,pathlib
+          outer=pathlib.Path('control/startmaster0107/runtime_packages/PSERC-FIX.zip')
+          print('OUTER_EXISTS',outer.is_file())
+          with zipfile.ZipFile(outer) as z:
+            for n in z.namelist():
+              if not n.endswith('.zip'): continue
+              try: iz=zipfile.ZipFile(io.BytesIO(z.read(n)))
+              except: continue
+              for fn in iz.namelist():
+                if not fn.lower().endswith('.php'): continue
+                try: text=iz.read(fn).decode('utf-8')
+                except: continue
+                if not any(x in text for x in ['PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1','signature_b64','WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED']): continue
+                print('FILE',fn)
+                lines=text.splitlines()
+                for i,line in enumerate(lines):
+                  if any(x in line for x in ['PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1','signature_b64','WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED','signing_public_key_sha256','sodium_crypto_sign_verify','openssl_verify','package_payload_sha256']):
+                    print('---',i+1)
+                    for j in range(max(0,i-5),min(len(lines),i+10)): print(f'{j+1}: {lines[j]}')
+          PY
