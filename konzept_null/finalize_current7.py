@@ -50,6 +50,36 @@ def category_snapshot_hash():
     with zipfile.ZipFile(PPM) as z:
         n='portal-production-machine/contracts/three-type-complete-category-hierarchy-snapshot-v2.json'
         return shab(z.read(n))
+def build_from_validated_v2(v2_path):
+    payload=json.loads(Path(v2_path).read_text(encoding='utf-8'))
+    if payload.get('contract')!='SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2': raise SystemExit('V2_HANDOFF_CONTRACT_INVALID')
+    if payload.get('batch_sha256')!=BATCH or payload.get('publish_allowed') is not False: raise SystemExit('V2_HANDOFF_BATCH_INVALID')
+    rows=payload.get('articles') or []
+    meta=json.loads((ROOT/'CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json').read_text())
+    if len(rows)!=7 or len(meta.get('items') or [])!=7: raise SystemExit('V2_HANDOFF_COUNT_INVALID')
+    packs=[]; items=[]; bindings=[]; relitems=[]
+    for i,(row,m) in enumerate(zip(rows,meta['items'])):
+        body=(ART/FILES[i]).read_text(encoding='utf-8')
+        if row.get('body')!=body or row.get('final_draft_sha256')!=shab(body.encode()): raise SystemExit(f'V2_HANDOFF_BODY_MISMATCH:{i}')
+        pc=row.get('production_context') or {}; pack=pc.get('fact_pack'); item=pc.get('production_plan_item')
+        if not isinstance(pack,dict) or not isinstance(item,dict): raise SystemExit(f'V2_HANDOFF_CONTEXT_MISSING:{i}')
+        slot=row.get('plan_slot')
+        if slot!=m.get('plan_slot'): raise SystemExit(f'V2_HANDOFF_SLOT_MISMATCH:{i}')
+        ca=item.get('canonical_article') or {}
+        if ca.get('body_html')!=body or ca.get('body_html_sha256')!=shab(body.encode()): raise SystemExit(f'V2_HANDOFF_CONTEXT_BODY_MISMATCH:{i}')
+        packs.append(pack); items.append(item)
+        cid=item.get('canonical_article_id')
+        bindings.append({**{k:m[k] for k in ['title','target_keyword','category','article_type','plan_slot']},'canonical_article_id':cid,'plan_item_key':item.get('plan_item_key')})
+        relitems.append({'plan_slot':slot,'canonical_article_id':cid})
+    bundle={'contract':'canonical_fact_pack_import_v1','fact_packs':packs}
+    plan={'contract':'production_plan_v4','plan_contract_version':'4.0.0','required_plugin_version':'6.7.9','source_ready_batch':{'generation':1,'batch_sha256':BATCH,'bindings':bindings},'items':items}
+    bh,ph=stable(bundle),stable(plan)
+    release={'contract':'WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED','status':'PASS','exact_five_batch_sha256':BATCH,'exact_five_item_count':7,'items':relitems,'production_plan_sha256':ph,'fact_pack_bundle_sha256':bh,'content_generation_performed_by_supervisor':False,'wordpress_write_performed':False}
+    pkg={'contract':'PSERC_APPROVED_PRODUCTION_PACKAGE_V1','fact_pack_bundle_sha256':bh,'production_plan_sha256':ph,'workflow_release_sha256':stable(release),'source':'KONZEPT_NULL_CURRENT7_VALIDATED_SYSTEM4_V2','fact_pack_bundle':bundle,'production_plan':plan,'workflow_release':release}
+    pkg['package_id']=stable({'contract':pkg['contract'],'fact_pack_bundle_sha256':bh,'production_plan_sha256':ph,'workflow_release_sha256':pkg['workflow_release_sha256']})
+    pkg['package_payload_sha256']=stable(pkg)
+    return meta,pkg
+
 def build():
     if shab(PPM.read_bytes())!=PPM_SHA: raise SystemExit('PPM_HASH_MISMATCH')
     meta=json.loads((ROOT/'CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json').read_text())
@@ -150,4 +180,6 @@ def sign_final(meta,pkg):
     print('FINAL='+str(out));print('FINAL_SHA256='+shab(out.read_bytes()))
 
 if __name__=='__main__':
-    meta,pkg=build(); ppm_check(pkg); sign_final(meta,pkg)
+    v2=os.environ.get('KONZEPT_NULL_V2_HANDOFF','').strip()
+    meta,pkg=build_from_validated_v2(v2) if v2 else build()
+    ppm_check(pkg); sign_final(meta,pkg)
