@@ -1,0 +1,15 @@
+{
+  "contract": "CONCEPT_AGENT_RUNTIME_MANIFEST_V1",
+  "ppm": {
+    "version": "6.7.9",
+    "path": "concept_agent/runtime/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip",
+    "sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+  },
+  "languagetool": {
+    "version": "6.8",
+    "download_url": "https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip",
+    "zip_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+    "commandline_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
+  },
+  "publish_allowed": false
+}
