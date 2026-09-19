@@ -13,13 +13,13 @@ jobs:
         with:
           ref: main
           persist-credentials: false
-      - name: Print every System4 WordPress import contract validator
+      - name: Exact System4 importer lines only
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import io,zipfile,pathlib
+          import io,zipfile,pathlib,re
           outer=pathlib.Path('control/startmaster0107/runtime_packages/PSERC-FIX.zip')
-          TOKENS=['PSERC_SYSTEM4','SYSTEM4_WORDPRESS_IMPORT_RESULT_V1','CONTRACT_INVALID','isFinalPackage','ENDSTAMP_CONTRACT','PACKAGE_CONTRACT']
+          needles=('PSERC_SYSTEM4','SYSTEM4_WORDPRESS_IMPORT_RESULT_V1','SYSTEM4_ARTICLE_BATCH','CONTRACT_INVALID')
           def walk(raw,label):
             with zipfile.ZipFile(io.BytesIO(raw)) as z:
               for n in z.namelist():
@@ -32,12 +32,9 @@ jobs:
                 try:t=b.decode('utf-8')
                 except:continue
                 lines=t.splitlines()
-                hits=[i for i,l in enumerate(lines) if any(x.casefold() in l.casefold() for x in TOKENS)]
-                if not hits: continue
-                print('FILE',label+'!'+n)
-                for i in hits:
-                  a=max(0,i-15);e=min(len(lines),i+26)
-                  print('---HIT',i+1)
-                  for j in range(a,e): print(f'{j+1}: {lines[j]}')
+                hits=[(i+1,l.strip()) for i,l in enumerate(lines) if any(x in l for x in needles)]
+                if hits:
+                  print('FILE='+label+'!'+n)
+                  for i,l in hits: print(f'{i}: {l}')
           walk(outer.read_bytes(),outer.name)
           PY
