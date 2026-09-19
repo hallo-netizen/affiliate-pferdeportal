@@ -1,0 +1,81 @@
+{
+  "contract": "PFERDE_ATELIER_PRE_CODEX_START_HARDLOCK_V1",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "startmaster": "STARTMASTER0107",
+  "canonical_start_command": "python3 isolated_system4/parent_start.py start-current-bound",
+  "canonical_step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+  "canonical_sequence": 107007,
+  "dynamic_receipt_ref": "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
+  "recovery_capsule_contract": "SYSTEM4_WORKSPACE_RECOVERY_CAPSULE_V1",
+  "required_historical_guards": [
+    {
+      "id": "STALE_MAIN_HASH",
+      "requirement": "receipt.authorized_head_sha == local git HEAD"
+    },
+    {
+      "id": "DISPATCHER_HEAD_DRIFT",
+      "requirement": "receipt.dispatcher_head_sha == local git HEAD"
+    },
+    {
+      "id": "HARDLOCK_BASE_NOT_FRESH_PASS",
+      "requirement": "receipt.hardlock_base_status == PASS and receipt.hardlock_base_head_sha == local git HEAD"
+    },
+    {
+      "id": "START_HERE_STATE_HASH_DRIFT",
+      "requirement": "START_HERE.current_state_sha256 == sha256(CURRENT_STATE.json)"
+    },
+    {
+      "id": "WRONG_STEP_OR_POINT0_BYPASS",
+      "requirement": "state step == RUN_NEW_ARTICLE_BATCH_NO_STOP and sequence == 107007"
+    },
+    {
+      "id": "MANUAL_SOURCE_REQUEST_OR_WORKSPACE",
+      "requirement": "canonical start-current-bound only"
+    },
+    {
+      "id": "CODEX_BOUND_CAPSULE_MISSING",
+      "requirement": "existing bound runtime/Point-0 route remains mandatory"
+    },
+    {
+      "id": "OLD_OR_RECOVERY_ARTICLE_AS_NEW",
+      "requirement": "receipt.new_article_policy == COMPLETELY_NEW_NO_RECOVERY_BODY"
+    },
+    {
+      "id": "TEMP_WORKSPACE_LOSS",
+      "requirement": "receipt.restart_recovery_status == PASS_CROSS_PROCESS_AND_DURABLE_TRANSPORT_READY"
+    },
+    {
+      "id": "NEXT_ARTICLE_BEFORE_PREVIOUS_PASS",
+      "requirement": "receipt.sequential_advance_policy == PASS_ONLY"
+    },
+    {
+      "id": "REPAIRABLE_FINDING_TERMINALIZED",
+      "requirement": "receipt.repair_policy == SAME_ARTICLE_SAME_WORKSPACE_UNTIL_PASS"
+    },
+    {
+      "id": "CODEX_USAGE_LIMIT_ACTIVE",
+      "requirement": "state/external blocker resolved and receipt.codex_capacity_status == AVAILABLE"
+    },
+    {
+      "id": "CODEX_GITHUB_AUTH_ASSUMPTION",
+      "requirement": "receipt.codex_side_github_write_required == false"
+    },
+    {
+      "id": "OUTPUT_ONLY_IN_TMP",
+      "requirement": "receipt.durable_evidence_transport_status == PASS"
+    },
+    {
+      "id": "PUBLISH_WITHOUT_SEPARATE_APPROVAL",
+      "requirement": "state.publish_allowed == false and receipt.publish_allowed == false"
+    }
+  ],
+  "immutable_expectations": {
+    "article_bodies": "NEW",
+    "article_advance": "ONLY_AFTER_REAL_PASS",
+    "repair": "SAME_ARTICLE_SAME_WORKSPACE_UNTIL_PASS",
+    "quality_threshold_changes_allowed": false,
+    "production_text_path_changes_allowed": false,
+    "codex_side_github_write_required": false,
+    "publish_allowed": false
+  }
+}
