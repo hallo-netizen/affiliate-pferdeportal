@@ -133,13 +133,27 @@ jobs:
           retrieved_at=os.environ['RESEARCH_BOUND_AT']
           if not retrieved_at: raise SystemExit('RESEARCH_BOUND_AT_MISSING')
           for pi,pack in enumerate(packs):
+            claims=pack.get('claims') or []
+            by_source={}
+            for ci,claim in enumerate(claims):
+              sid=str(claim.get('source_id') or '')
+              ev=str(claim.get('evidence_text') or '')
+              evh=str(claim.get('evidence_text_sha256') or '')
+              if not sid or not ev or sha(ev)!=evh:
+                raise SystemExit(f'CLAIM_EVIDENCE_BINDING_INVALID:{pi}:{ci}')
+              by_source.setdefault(sid,[])
+              if ev not in by_source[sid]: by_source[sid].append(ev)
             for si,source in enumerate(pack.get('sources') or []):
               sid=str(source.get('source_id') or '')
               url=str(source.get('source_url') or '')
               if not sid or not url: raise SystemExit(f'SOURCE_ID_OR_URL_MISSING:{pi}:{si}')
+              if sid not in by_source: raise SystemExit(f'SOURCE_WITHOUT_BOUND_CLAIM:{pi}:{si}:{sid}')
               source['retrieved_at']=retrieved_at
               if not str(source.get('source_title') or '').strip() or str(source.get('source_title')).casefold()==sid.casefold():
                 source['source_title']=url
+              evidence='\n'.join(by_source[sid])
+              source['evidence']=evidence
+              source['snapshot_sha256']=sha(evidence)
           files=[
             'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
             'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
