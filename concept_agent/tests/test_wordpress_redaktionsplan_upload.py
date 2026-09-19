@@ -1,26 +1,38 @@
-import copy,hashlib,sys,unittest
+import copy,sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import wordpress_redaktionsplan_upload as w
+import hashlib
 
-def plan():
-    slot="a"*64
-    body="<article><p>Test</p></article>"
-    return {"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9","plan_id":"test","validation_contract_version":"GEN1_107008_RELEASED_ARTICLE_BINDING_V1","items":[{"plan_slot":slot,"canonical_article_id":"article:test","plan_item_key":"test-"+slot[:12],"article_type":"Beratung","topic":"Testtitel","target_keyword":"Testkeyword","runtime_order":{"article_type":"Beratung","title":"Testtitel","slug":"testtitel","subject_scope":"Testkeyword","subject_label":"Testkeyword"},"category_binding":{"name":"test","slug":"test","hierarchy_path":"test","portal_path":"test","taxonomy":"category","article_type":"Beratung"},"canonical_article":{"article_type":"Beratung","canonical_article_id":"article:test","plan_slot":slot,"title":"Testtitel","slug":"testtitel","target_keyword":"Testkeyword","body_html":body,"body_html_sha256":hashlib.sha256(body.encode()).hexdigest(),"body_text":"Test"}}]}
+def article(i=0,article_type="Beratung"):
+    body=f'<article class="ppm-generated"><h2>Test {i}</h2><p>Inhalt {i}</p></article>'
+    sha=hashlib.sha256(body.encode()).hexdigest()
+    slot=hashlib.sha256(f"slot-{i}".encode()).hexdigest()
+    slug=f"test-{i}";category=f"test-{i}";title=f"Testtitel {i}";keyword=f"Testkeyword {i}"
+    return {
+      "index":i,"title":title,"target_keyword":keyword,"category":category,"article_type":article_type,
+      "plan_slot":slot,"final_draft_sha256":sha,"revision_count":1,"body":body,
+      "production_context":{"fact_pack":{"contract":"canonical_fact_pack_v1"},"production_plan_item":{
+        "article_type":article_type,"target_keyword":keyword,
+        "runtime_order":{"title":title,"article_type":article_type,"slug":slug},
+        "category_binding":{"slug":category},
+        "quality_binding":{"wordpress_category":{"slug":category,"taxonomy":"category"}}}},
+      "languagetool":{"status":"PASS","engine":"LanguageTool 6.8 / Bestand 43","finding_count":0},
+      "ppm679":{"status":"PASS","ppm_version":"6.7.9","technical_status":"TECHNICAL_CHECK_OK","content_quality_status":"CONTENT_QUALITY_CHECK_OK","fail_closed_aggregate_status":"PASS","content_sha256":sha}
+    }
 
 class T(unittest.TestCase):
-    def setUp(self):self.x=w.build("TEST","b"*64,plan())
+    def setUp(self):self.x=w.build("b"*64,[article(0)])
     def test_positive(self):self.assertEqual([],w.validate(self.x))
+    def test_mixed_types_positive(self):self.assertEqual([],w.validate(w.build("c"*64,[article(0,"Beratung"),article(1,"Produktvergleich")])))
     def test_wrong_contract_blocks(self):
-        x=copy.deepcopy(self.x);x["contract"]="SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2";self.assertIn("CONTRACT",w.validate(x))
-    def test_wrong_count_blocks(self):
-        x=copy.deepcopy(self.x);x["article_count"]=2;self.assertIn("PLAN_COUNT",w.validate(x))
-    def test_wrong_plan_hash_blocks(self):
-        x=copy.deepcopy(self.x);x["production_plan_sha256"]="0"*64;self.assertIn("PLAN_HASH",w.validate(x))
-    def test_wrong_binding_status_blocks(self):
-        x=copy.deepcopy(self.x);x["redaktionsplan_binding"]["status"]="PASS";self.assertIn("BINDING_STATUS",w.validate(x))
+        x=copy.deepcopy(self.x);x["contract"]="PSERC_APPROVED_PRODUCTION_PACKAGE_V1";self.assertIn("CONTRACT",w.validate(x))
+    def test_publish_blocks(self):
+        x=copy.deepcopy(self.x);x["publish_allowed"]=True;self.assertIn("PUBLISH",w.validate(x))
     def test_body_tamper_blocks(self):
-        x=copy.deepcopy(self.x);x["production_plan"]["items"][0]["canonical_article"]["body_html"]+="x";self.assertIn("BODY_HASH:0",w.validate(x))
-    def test_wrong_package_hash_blocks(self):
-        x=copy.deepcopy(self.x);x["package_payload_sha256"]="0"*64;self.assertIn("PACKAGE_HASH",w.validate(x))
+        x=copy.deepcopy(self.x);x["articles"][0]["body"]+="x";self.assertIn("BODY_HASH:0",w.validate(x))
+    def test_bad_lt_blocks(self):
+        x=copy.deepcopy(self.x);x["articles"][0]["languagetool"]["finding_count"]=1;self.assertIn("LT:0",w.validate(x))
+    def test_bad_ppm_blocks(self):
+        x=copy.deepcopy(self.x);x["articles"][0]["ppm679"]["status"]="FAIL";self.assertIn("PPM:0",w.validate(x))
 if __name__=="__main__":unittest.main()
