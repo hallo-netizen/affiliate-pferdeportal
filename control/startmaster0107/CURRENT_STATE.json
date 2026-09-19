@@ -305,14 +305,14 @@
     "publish_performed": false
   },
   "last_safe_main_sha": "93956f83ca2f8ddea5f07cb82c1b77ef393f248f",
-  "last_safe_change": "PR #343 merged the pre-Codex status. Permanent dispatcher PR #342 was then synchronized and verified with hardlock-base run 35427945011 PASS. This CURRENT_STATE uses dynamic freshness at actual start so a status merge cannot make its own fixed main SHA stale.",
+  "last_safe_change": "Real7 authorization remains active. Added durable live-progress/nutzungslimit protocol only; no production path, quality rule, threshold, article, or publish change.",
   "hobbyroom_status": "E2E_PRECODEX_READY_USER_STOP",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE_KNOWN_TECHNICAL; DYNAMIC_FRESHNESS_CHECK_REQUIRED_AT_START; USER_STOP_ACTIVE",
   "next_action": {
     "goal": "RUN_REAL_7_ARTICLE_BATCH_ON_CODEX_WITH_DURABLE_LIVE_ERROR_LOG",
-    "action": "Fresh-read main and permanent dispatcher PR #342; require exact head equality and fresh hardlock-base PASS. Then start the current bound production route exactly once with `python3 isolated_system4/parent_start.py start-current-bound`, attach Codex only to the machine-created current workspace, process exactly 7 articles sequentially, and allow article N+1 only after article N reaches real System-4 PASS. For repairable LT/PPM/batch findings, stay on the same article/workspace and repair through the bound System-4 controller until PASS or a genuine hard blocker. Persist a concise live progress/error ledger in the permanent dispatcher PR conversation as milestones occur. After all 7 pass, continue only through the bound batch collect and 107008 final-review path. No publish without separate explicit user authorization.",
+    "action": "Fresh-read main and permanent dispatcher PR #342; require exact head equality and fresh hardlock-base PASS. Then start the current bound production route exactly once with `python3 isolated_system4/parent_start.py start-current-bound`, attach Codex only to the machine-created current workspace, process exactly 7 articles sequentially, and allow article N+1 only after article N reaches real System-4 PASS. For repairable LT/PPM/batch findings, stay on the same article/workspace and repair through the bound System-4 controller until PASS or a genuine hard blocker. Persist a concise live progress/error ledger in the permanent dispatcher PR conversation as milestones occur. After all 7 pass, continue only through the bound batch collect and 107008 final-review path. No publish without separate explicit user authorization. If Codex usage limit is reached, immediately stop new work and persist the last fully reached article/phase/revision/check findings and existing article bytes according to protocol/STARTMASTER0107_REAL7_LIVE_PROGRESS_DURABILITY_20260919.md.",
     "why": "The user explicitly authorized the real 7-article Codex run and requested live durable logging to catch errors early.",
     "forbidden": [
       "merge permanent dispatcher PR #342",
@@ -487,6 +487,14 @@
     "article_count": 7,
     "codex": true,
     "live_repo_logging": true,
+    "publish_allowed": false
+  },
+  "real7_live_progress_durability": {
+    "status": "BOUND_BEFORE_START",
+    "protocol_ref": "protocol/STARTMASTER0107_REAL7_LIVE_PROGRESS_DURABILITY_20260919.md",
+    "rule": "EVERY_REACHED_ARTICLE_PHASE_AND_REPAIR_STATE_MUST_REMAIN_DURABLY_RECONSTRUCTIBLE",
+    "codex_usage_limit_policy": "STOP_NEW_WORK_PERSIST_LAST_REACHED_STATE_NO_OVERALL_PASS",
+    "tmp_only_evidence_forbidden": true,
     "publish_allowed": false
   }
 }
