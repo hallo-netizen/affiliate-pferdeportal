@@ -178,6 +178,7 @@ class RepairContinuityTests(unittest.TestCase):
             self.assertEqual(stopped['checks']['repair_owner'], 'DRAFT_WORKER')
             original_article = dict(stopped['article'])
             original_findings = list(stopped['checks']['findings'])
+            original_checks_sha = recovery._sha_bytes(recovery._canon(stopped['checks']))
             original_draft = stopped['draft_markdown']
             original_draft_sha = stopped['draft_sha256']
 
@@ -224,7 +225,11 @@ class RepairContinuityTests(unittest.TestCase):
             verified = recovery.verify_capsule(capsule)
             self.assertEqual(
                 verified['workspace_identity']['checks_sha256'],
-                recovery._sha_bytes(recovery._canon({'status': 'FAIL', 'mode': 'FULL_PRODUCTION', 'errors': stopped['checks']['errors'], 'findings': original_findings, 'checker': stopped['checks']['checker'], 'checked_draft_sha256': stopped['checks']['checked_draft_sha256'], 'repair_owner': stopped['checks']['repair_owner'], 'repair_owners': stopped['checks']['repair_owners']})),
+                original_checks_sha,
+            )
+            self.assertEqual(
+                verified['workspace_identity']['draft_sha256'],
+                original_draft_sha,
             )
 
             passed = _pass_result(restored)
