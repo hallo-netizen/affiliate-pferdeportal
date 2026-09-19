@@ -1,55 +1,71 @@
-# CONCEPT AGENT — ZIELVERTRAG
+# CONCEPT AGENT / KONZEPT 5 — ZIELVERTRAG
 
-## Ziel
-Ein vollständig isolierter Prototyp für eine agentenbasierte Artikelproduktion.
+## Endziel
+Aus einem frisch gebundenen SEO-/Redaktionsplan-Metadatenbatch werden **1..N neue Artikel** vollständig erzeugt, hart geprüft und als **genau eine korrekte WordPress-Uploaddatei** im Chat ausgegeben.
 
-## Eingang
-Eine Kopie einer WordPress-/SEO-Auftragsdatei mit den bereits bekannten Vorgaben:
-- Thema / Titel
-- Keyword / Suchintention
-- Artikeltyp / Kategorie
-- interne Linkvorgaben
-- weitere redaktionelle Vorgaben
+## Verbindlicher Eingang
+Der Eingang ist eine vom aktuellen SEO-Redaktionsplan exportierte Metadaten-Datei mit den gebundenen Planungsfeldern je Artikel:
+- `title`
+- `target_keyword`
+- `category`
+- `article_type`
+- `plan_slot`
 
-Die echte WordPress-Quelle bleibt unangetastet.
+Die gebundene Beitragsart darf nicht eigenmächtig auf `Beratung` geändert werden. Gemischte Batches sind zulässig. Neue Typen wie `Produktvergleich` werden verarbeitet, sobald ihr eigener Fach-/Qualitätsvertrag upstream verbindlich gebunden ist.
 
-## Agenten
-1. Research Agent: sammelt ausschließlich Quellen und Belege.
-2. Facts Agent: bildet ausschließlich belastbare Fakten aus den akzeptierten Belegen.
-3. Writer Agent: schreibt ausschließlich aus Auftrag + akzeptiertem Fact-Pack.
-4. Repair Agent: verändert ausschließlich konkret beanstandete Stellen desselben Artikels.
+## Writer
+- Writer: ChatGPT / GPT-5.6 Sol.
+- Codex: VERBOTEN, solange der Nutzer es nicht ausdrücklich neu freigibt.
+- Claude: nicht Teil des aktuellen Produktionswegs.
+- Jeder Artikel ist ein neuer Lauf; keine Wiederverwendung alter Artikeltexte als Schreibvorlage.
 
-## Übergaben
-Jede Übergabe erhält ein festes Schema und eine eigene Prüfung.
-Kein Folge-Agent startet, solange die vorherige Übergabe nicht formal akzeptiert wurde.
+## Feste Produktionskette
+`gebundener Input → Quellen/Research → Fact-Pack → Writer → Artikelprüfung → Repair nur am konkreten Fehler → kompletter Recheck → Batchprüfung → WordPress-Datei`
 
-## Ausgang
-Genau eine finale Rückgabedatei je Artikel beziehungsweise ein klar definiertes 1..N-Paket.
+Vor dem Schreiben müssen die drei internen Links verbindlich gebunden sein.
 
-## Isolation
-Keine Runtime-Schnittstelle zu anderen Konzepten.
-Keine Änderung fremder Dateien.
-Keine Produktionswirkung.
-Keine WordPress-Schreiboperation.
+## Dauerhafte redaktionelle Regeln
+- gute/natürliche gebundene Titel bleiben unverändert;
+- nackte Aktionsoberflächen wie `<Keyword> wählen/auswählen/finden` sowie `So findest du <Keyword>` ohne sinnvolle sprachliche Ergänzung dürfen bei Beratung nicht FINAL passieren;
+- natürliche Attribute wie `richtig`, `passend`, `geeignet`, `optimal`, `ideal` sind zulässig, wenn sie sprachlich passen;
+- Zwischenüberschriften müssen konkret und menschlich klingen; bürokratisch-mechanische Formulierungen werden blockiert;
+- Inline-Links dürfen nicht mit dem folgenden Wort verkleben (`</a>Wort` = BLOCK);
+- gute Fälle dürfen durch Nachschärfungen nicht unnötig umgeschrieben werden.
 
+## Qualitätsgrenze
+Vor FINAL zwingend:
+- LanguageTool 6.8: PASS / 0 Findings;
+- PPM 6.7.9: `TECHNICAL_CHECK_OK`;
+- PPM 6.7.9: `CONTENT_QUALITY_CHECK_OK`;
+- Fail-Closed-Aggregat: PASS;
+- Batch-Dubletten-/Wiederholungsprüfung;
+- redaktionelle Natürlichkeits-/HTML-Textflussprüfung;
+- nach jeder Reparatur kompletter Recheck.
 
-## Zwei Betriebsvarianten
+Kein Worker/Writer darf seinen eigenen PASS behaupten.
 
-### Variante A — vorhandene Plattform
-- GitHub bleibt Kontroll- und Ablageort.
-- Dieser Chat kann die fachlichen Agentenrollen für Entwicklung und Test ausführen.
-- Codex bleibt optional und wird wegen Nutzungslimits nicht als zwingende Grundlage eingeplant.
-- Diese Variante dient zuerst zum Beweis, dass die Agentenkette fachlich und technisch sauber funktioniert.
-- Sie ist ohne zusätzliche KI-API nicht vollständig autonom.
+## WordPress-Enddatei
+Der aktuell belegte Direktimportvertrag des installierten **Portal SEO Redaktionsplan Compiler 0.28.23** ist:
 
-### Variante B — Claude als externer Writer
-- GitHub bleibt Kontroll- und Ablageort.
-- Research/Facts können zunächst wie in Variante A bleiben.
-- Der Writer Agent kann alternativ über genau eine Claude-API-Verbindung ausgeführt werden.
-- Es wird keine eigene Verbindung pro Agent gebaut; alle Claude-Rollen würden denselben Adapter verwenden.
-- Claude darf nur seine zugewiesene Rolle ausführen und erhält keinen Zugriff auf andere Konzepte.
-- Der restliche Concept-Agent-Ablauf bleibt identisch.
+`SYSTEM4_WORDPRESS_HANDOFF_V1`
 
-## Entscheidungsregel
-Zuerst wird Variante A vollständig isoliert stabilisiert und getestet.
-Variante B wird erst danach als austauschbarer Writer-Zweig ergänzt.
+Pflicht:
+- `publish_allowed=false`
+- `signing_deferred=true`
+- `batch_gate_status=SYSTEM4_BATCH_FULL_PASS_COLLECTED`
+- `no_legacy_status=PASS`
+- `test_suite_status=PASS`
+- je Artikel korrekte Hash-, Plan-, Kategorie-, LT- und PPM-Bindung
+- lokaler Positiv-/Negativtest gegen den echten 0.28.23-Vertrag vor Chat-Ausgabe.
+
+Der Import erzeugt ausschließlich WordPress-Entwürfe und liest/schreibt den SEO-Redaktionsplan nicht.
+
+## Ausgabe
+Genau **eine** WordPress-Datei für den gesamten Batch im Chat.
+Keine Temp-only-Ausgabe.
+Kein Publish.
+Kein WordPress-Write durch Concept Agent selbst.
+
+## Lernschleife
+Nach jedem realen Lauf dürfen belegte Fehler als kleine, gezielte Guard-Regeln ergänzt werden.
+Jede Nachschärfung braucht mindestens einen Positiv- und einen Negativtest und gilt danach für alle folgenden passenden Artikel.
