@@ -62,7 +62,28 @@ def main(argv: list[str]) -> int:
 
         generated.mkdir(parents=True, exist_ok=True)
         repaired = generated / "restart-repair.html"
-        _run([sys.executable, TESTWORKER, "repair", workspace, repaired])
+        candidates = (
+            "Befund wird vorab sorgfältig geprüft",
+            "Abweichung wird vorher eindeutig geklärt",
+            "Zustand wird aktuell erneut bestätigt",
+            "Funktion wird gezielt vollständig kontrolliert",
+            "Ergebnis wird neu eindeutig festgestellt",
+            "Prüfpunkt bleibt weiterhin klar nachvollziehbar",
+            "Kontrolle erfolgt direkt vor Fahrtbeginn",
+            "Beobachtung wird anschließend eindeutig bewertet",
+        )
+        repaired_body = None
+        for phrase in candidates:
+            if phrase in draft_before:
+                repaired_body = draft_before.replace(
+                    phrase,
+                    phrase + " und erneut bestätigt",
+                    1,
+                )
+                break
+        if repaired_body is None:
+            raise RestartProbeError("RESTART_PROBE_NO_DETERMINISTIC_REPAIR_POINT")
+        repaired.write_text(repaired_body, encoding="utf-8")
         _run([sys.executable, CONTROLLER, "repair", workspace, repaired])
 
         state_after = json.loads(state_path.read_text(encoding="utf-8"))
