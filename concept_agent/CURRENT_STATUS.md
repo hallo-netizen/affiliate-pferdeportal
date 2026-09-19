@@ -45,3 +45,14 @@ NEGATIV:
 - kein Claude
 - kein Publish
 - kein WordPress-Write
+
+
+## Redaktionelle Nachschärfung 2026-09-19
+Dauerhaft fail-closed ergänzt:
+- schwache/nackte Beratungstitel werden vor FINAL blockiert;
+- natürliche Titelattribute (passend/geeignet/richtig/optimal/ideal) werden als zulässige Präsentationssprache behandelt;
+- mechanische Beratung-H2 wie `Fliegenmasken am Pferd sicher beurteilen` werden blockiert;
+- fehlendes Leerzeichen nach Inline-Link (`</a>Wort`) wird blockiert;
+- positive/negative Regressionstests sind Bestandteil der Teststrecke.
+
+Die bereits erzeugten 7 Artikel gelten bis zur Reparatur und erneutem Gesamtcheck NICHT als aktuelle finale Ausgabe.
