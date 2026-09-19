@@ -1,0 +1,13 @@
+{
+  "source": "READ_ONLY_COPY_FROM_WORDPRESS_LIVE_FIXTURE",
+  "source_contract": "SYSTEM4_WORDPRESS_LIVE_INPUT_FIXTURE_V1",
+  "job_id": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+  "title": "Das Wichtigste über Hindernisstangen für Pferde",
+  "keyword": "Hindernisstangen für Pferde",
+  "article_type": "Beratung",
+  "category": "hindernisstangen-beratung",
+  "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+  "internal_links": [],
+  "publish_allowed": false,
+  "copy_note": "Original input contained no concrete internal-link bindings. None were invented."
+}
