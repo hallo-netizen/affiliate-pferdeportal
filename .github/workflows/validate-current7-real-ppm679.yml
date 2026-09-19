@@ -91,7 +91,8 @@ jobs:
               print('PPM_PASS',i,row['plan_slot'],json.dumps(out,ensure_ascii=False,sort_keys=True))
             except Exception as e:
               failed=True
-              print('PPM_FAIL',i,row['plan_slot'],type(e).__name__,str(e))
+              detail=getattr(e,'findings',None)
+              print('PPM_FAIL',i,row['plan_slot'],type(e).__name__,str(e),json.dumps(detail,ensure_ascii=False,sort_keys=True) if detail is not None else '')
           if failed: raise SystemExit(2)
           print('CURRENT7_REAL_PPM679_ALL_PASS')
           PY
