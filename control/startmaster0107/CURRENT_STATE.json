@@ -231,7 +231,8 @@
       "control/startmaster0107/PRE_CODEX_START_HARDLOCK.json",
       "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
       "control/startmaster0107/pre_codex_start_hardlock.py",
-      "isolated_system4/test_repair_continuity.py"
+      "isolated_system4/test_repair_continuity.py",
+      "isolated_system4/parent_start.py"
     ],
     "restart_test_proven": {
       "process_death_after_repair_required": true,
@@ -258,7 +259,13 @@
       "PUBLISH_WITHOUT_SEPARATE_APPROVAL"
     ],
     "codex_start_allowed": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "parent_start_integration": {
+      "required": true,
+      "scope": "PRE_CODEX_START_HARDLOCK_CALL_BEFORE_TEMP_RUN_WORKSPACE_CREATION",
+      "textmachine_or_quality_rule_change": false,
+      "validated_test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e"
+    }
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT",
@@ -319,7 +326,7 @@
   "hobbyroom_blocker": "CODEX_USAGE_LIMIT; ARTICLE0_METADATA_DURABLE_BUT_ARTICLE_BYTES_NOT_DURABLE",
   "next_action": {
     "goal": "INTEGRATE_VALIDATED_RESTART_RECOVERY_AND_PRECODEX_START_HARDLOCK_ON_CURRENT_MAIN",
-    "action": "Port only the already-tested restart-recovery capsule/probe and pre-Codex start-hardlock candidate from test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e onto a fresh branch from the then-current main after this status closeout. Reconcile only real main drift. Run the full no-Codex System4A acceptance, explicit process-death/restart negative-positive test, pre-Codex hardlock positive/negative matrix, deterministic entrance gate and immutable hardlock. Merge only if all required checks PASS. Then update CURRENT_STATE/START_HERE and stop before Codex.",
+    "action": "Port only the already-tested restart-recovery capsule/probe, the pre-Codex start-hardlock candidate, and its minimal parent_start.py preflight call from test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e onto a fresh branch from the then-current main after this status closeout. Reconcile only real main drift. Run the full no-Codex System4A acceptance, explicit process-death/restart negative-positive test, pre-Codex hardlock positive/negative matrix, deterministic entrance gate and immutable hardlock. Merge only if all required checks PASS. Then update CURRENT_STATE/START_HERE and stop before Codex.",
     "why": "The fix exists and passed on a test commit, but current main does not contain it. Rebuilding from scratch would violate KISS and lose tested evidence.",
     "forbidden": [
       "start Codex",
