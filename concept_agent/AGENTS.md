@@ -22,3 +22,14 @@ Zielkette:
 
 Jeder Agent darf nur seinen eigenen Auftrag bearbeiten.
 Kein Agent darf seinen eigenen PASS vergeben.
+
+
+## HARD RULE — NO-STOP BIS ZIELPUNKT
+
+KEINE ZWISCHENBERICHTE, KEINE RÜCKFRAGEN, KEIN ABSCHLUSS, BEVOR DER DEFINIERTE ZIELPUNKT ERREICHT IST.
+
+WEITERARBEITEN, AUCH NACH PASS-ZWISCHENSCHRITTEN.
+
+STOPP NUR BEI EINEM OBJEKTIV UNBEHEBBAREN BLOCKER.
+
+Ein Zwischen-PASS ist niemals ein Abschluss und niemals ein Stoppsignal.
