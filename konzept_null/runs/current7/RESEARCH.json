@@ -1,0 +1,159 @@
+{
+  "contract": "KONZEPT_NULL_RESEARCH_V1",
+  "batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "stage": "RESEARCH",
+  "codex_used": false,
+  "research_scope": "Only the seven bound target keywords; no topic reselection.",
+  "items": [
+    {
+      "plan_slot": "9c229b0e6a784a482575e3deb16d105e3b5355becbbbb8ecfc8e1f600b529c56",
+      "findings": [
+        {
+          "fact_id": "HIND_F1",
+          "source_id": "HIND_FEI",
+          "statement": "Training poles should be supported so that they can fall readily when struck; in FEI schooling areas poles must be in cups at both ends, in a cup at one end with the other on the ground, or fully on the ground."
+        },
+        {
+          "fact_id": "HIND_F2",
+          "source_id": "HIND_INT",
+          "statement": "Selection should consider material, weight, visibility, intact surfaces without splinters or sharp edges, compatible supports and practical storage."
+        },
+        {
+          "fact_id": "HIND_F3",
+          "source_id": "HIND_FEI",
+          "statement": "Ground lines, when used, have defined safe placement relative to the obstacle; schooling setup should account for horse and rider ability."
+        }
+      ]
+    },
+    {
+      "plan_slot": "6ce9a1e47446daf84e85f08e84c33ada214f92612a654d79e68df18ea4e9fa19",
+      "findings": [
+        {
+          "fact_id": "LIGHT_F1",
+          "source_id": "LIGHT_INT",
+          "statement": "Good arena lighting aims for even visibility and avoids glare, hard shadows and strong brightness transitions."
+        },
+        {
+          "fact_id": "LIGHT_F2",
+          "source_id": "LIGHT_INT",
+          "statement": "Mounting position and height influence whether corners and track are illuminated; outdoor installations must account for weather and electrical safety."
+        },
+        {
+          "fact_id": "LIGHT_F3",
+          "source_id": "LIGHT_FISCHER",
+          "statement": "Where a suitable adjacent building exists, luminaires can sometimes be mounted on the building instead of dedicated high masts; photometric suitability still depends on geometry and mounting height."
+        }
+      ]
+    },
+    {
+      "plan_slot": "7b0e8f8b0653eb3a40aee2a68f4b9909df9d8bda374db0ec8c49e7b53ecbee87",
+      "findings": [
+        {
+          "fact_id": "MIST_F1",
+          "source_id": "MIST_INT",
+          "statement": "Container volume should match actual manure volume and realistic collection frequency; access and turning space for the collection vehicle are part of the selection."
+        },
+        {
+          "fact_id": "MIST_F2",
+          "source_id": "MIST_INT",
+          "statement": "A lid or sheltered position can reduce added rainwater; doors, flaps, edges and filling height must remain practical and safe in daily use."
+        },
+        {
+          "fact_id": "MIST_F3",
+          "source_id": "MIST_LWK",
+          "statement": "Manure storage must prevent uncontrolled leachate and comply with local water and agricultural requirements; covered or watertight container solutions can be relevant depending on the site and local rules."
+        }
+      ]
+    },
+    {
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+      "findings": [
+        {
+          "fact_id": "LIAB_F1",
+          "source_id": "LIAB_BGB",
+          "statement": "German Civil Code §833 establishes liability of an animal keeper when the animal injures a person or damages property, subject to the statutory wording and exceptions."
+        },
+        {
+          "fact_id": "LIAB_F2",
+          "source_id": "LIAB_BDV_RIDER",
+          "statement": "A foreign or guest rider is commonly distinguished from a regular riding participation; policy wording should explicitly address the actual use."
+        },
+        {
+          "fact_id": "LIAB_F3",
+          "source_id": "LIAB_BDV",
+          "statement": "Insurance products differ in whether riding participations, foreign riders, noncommercial keepers and other situations are included; commercial use may be excluded in consumer tariffs."
+        },
+        {
+          "fact_id": "LIAB_F4",
+          "source_id": "LIAB_INT",
+          "statement": "Selection should compare insured persons and situations, limits, deductible and exclusions rather than price alone."
+        }
+      ]
+    },
+    {
+      "plan_slot": "7f7a0b4169c19676b3dfe6457ac07c6685ae6ead6c1873a9467d9b6ee32a81da",
+      "findings": [
+        {
+          "fact_id": "HOOF_F1",
+          "source_id": "HOOF_MU",
+          "statement": "Healthy hoof horn needs an appropriate moisture balance; much of the moisture of a healthy hoof comes from within."
+        },
+        {
+          "fact_id": "HOOF_F2",
+          "source_id": "HOOF_MU",
+          "statement": "Persistently wet and dirty conditions can damage the hoof's natural protective layers; topical dressings are supportive care rather than a substitute for trimming and management."
+        },
+        {
+          "fact_id": "HOOF_F3",
+          "source_id": "HOOF_INT",
+          "statement": "Huffett choice should depend on hoof condition, housing and environment; cleaning before application and professional assessment of heat, deep cracks or abnormal smell are important."
+        }
+      ]
+    },
+    {
+      "plan_slot": "8c8408cebf7f41becc33cdccf04b60387cf75644468a887730a8d18a4a1a7648",
+      "findings": [
+        {
+          "fact_id": "FLY_F1",
+          "source_id": "FLY_PETMD",
+          "statement": "Fly masks are intended to protect eyes and face from insects; some products additionally claim UV protection."
+        },
+        {
+          "fact_id": "FLY_F2",
+          "source_id": "FLY_PETMD",
+          "statement": "Fit is critical: the mask should remain clear of the eyes, avoid rubbing and be checked regularly for dirt, moisture and shifting."
+        },
+        {
+          "fact_id": "FLY_F3",
+          "source_id": "FLY_INT",
+          "statement": "Ear or nose coverage should be selected according to the horse's actual need; secure closures and clean, dry material matter in daily use."
+        }
+      ]
+    },
+    {
+      "plan_slot": "906ddc4ee72429a8544da018e1f78d63cb2b80c1f11488180f381e2dc16c4af5",
+      "findings": [
+        {
+          "fact_id": "PELLET_F1",
+          "source_id": "PELLET_MERCK",
+          "statement": "Pelleted feeds can differ greatly by purpose and formulation; forage-based pellets can be useful for horses with poor dentition and may need soaking for some horses."
+        },
+        {
+          "fact_id": "PELLET_F2",
+          "source_id": "PELLET_MERCK",
+          "statement": "Pelleted complete feeds can offer uniform intake and lower dust but may increase choke risk and reduce long-stem fibre if used inappropriately."
+        },
+        {
+          "fact_id": "PELLET_F3",
+          "source_id": "PELLET_BHS",
+          "statement": "Feeds designed to absorb substantial water, such as some sugar-beet products, must be prepared according to soaking instructions because incomplete soaking can contribute to choke."
+        },
+        {
+          "fact_id": "PELLET_F4",
+          "source_id": "PELLET_INT",
+          "statement": "Selection should be based on recipe, role in the total ration, weighed quantity, storage quality and manufacturer preparation instructions rather than pellet appearance."
+        }
+      ]
+    }
+  ]
+}
