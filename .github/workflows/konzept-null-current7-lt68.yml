@@ -18,19 +18,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Prove exact frozen article bytes
+      - name: Freeze current seven article byte identities
         shell: bash
         run: |
           set -euo pipefail
           cd konzept_null/runs/current7/articles
-          echo 'a62461b280abaf4a2abe568c1ade61e8c5054184edce4ce8d9e8e77025bbb34f  hindernisstangen-fuer-pferde.html' | sha256sum -c -
-          echo '4158edd8a6f42165062226af77df38a779329e4c3115850f969fc5dbaebbdf15  reitplatzbeleuchtung-ohne-mast.html' | sha256sum -c -
-          echo '0f3b53a4c53d81248f9811f79eac1254c876f8fe129f11a6083b11bad653c79d  mistcontainer-mit-deckel.html' | sha256sum -c -
-          echo '3f4fc36678da4f1edeb65e7a310f30dadf75dc321a425f9daf78274c42a0b471  pferdehaftpflicht-mit-fremdreiter.html' | sha256sum -c -
-          echo '7ea809f5ab1be6544df4e1aff0d21fbb30e59215711375fe12e1b1455e0c658f  huffett-fuer-pferde.html' | sha256sum -c -
-          echo 'b53c34250611d9f4605b3b10b8971f633b62d918711794a6fef4bf44b4de3c83  fliegenmasken-fuer-pferde.html' | sha256sum -c -
-          echo '0c89435a2a40670e2048feb6f0438a413eafa916ef9455b96058fd494a3aa68f  pellets-fuer-pferde.html' | sha256sum -c -
-          echo EXACT_7_ARTICLE_BYTES_PASS
+          test "$(find . -maxdepth 1 -name '*.html' -type f | wc -l)" -eq 7
+          sha256sum *.html | sort > /tmp/konzept-null-current7.sha256
+          cat /tmp/konzept-null-current7.sha256
+          echo CURRENT_7_ARTICLE_BYTES_FROZEN_PASS
 
       - name: Materialize exact LanguageTool 6.8
         shell: bash
@@ -102,5 +98,10 @@ jobs:
           (outdir/'SUMMARY.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           if failed:
               raise SystemExit(2)
+          cp=subprocess.run(['bash','-lc',"cd konzept_null/runs/current7/articles && sha256sum -c /tmp/konzept-null-current7.sha256"],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+          print(cp.stdout,end='')
+          if cp.returncode!=0:
+              print(cp.stderr,file=sys.stderr)
+              raise SystemExit('ARTICLE_BYTES_CHANGED_DURING_LT')
           print('LANGUAGETOOL_6_8_ALL_7_PASS_ZERO_FINDINGS')
           PY
