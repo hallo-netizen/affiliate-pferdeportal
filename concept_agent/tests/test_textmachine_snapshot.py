@@ -29,10 +29,25 @@ class TextmachineSnapshotTest(unittest.TestCase):
         body="# Das richtige Huffett für Pferde finden\n\nHuffett für Pferde /a/ /b/ /c/"
         self.assertIn("TEXTMACHINE_MANDATORY_TABLE_MISSING",check_textmachine_snapshot(self.job,Draft("j1",body)))
 
-    def test_weak_beratung_title_blocks(self):
-        weak=ArticleJob("j1","So findest du Huffett für Pferde","Huffett für Pferde","Beratung","kat",["/a/","/b/","/c/"])
-        body="# So findest du Huffett für Pferde\n\nHuffett für Pferde /a/ /b/ /c/ [TABLE]"
+    def test_bare_action_beratung_title_blocks(self):
+        weak=ArticleJob("j1","Mistcontainer mit Deckel wählen","Mistcontainer mit Deckel","Beratung","kat",["/a/","/b/","/c/"])
+        body="# Mistcontainer mit Deckel wählen\n\nMistcontainer mit Deckel /a/ /b/ /c/ [TABLE]"
         self.assertIn("TEXTMACHINE_BERATUNG_TITLE_WEAK_SURFACE",check_textmachine_snapshot(weak,Draft("j1",body)))
+
+    def test_bare_auswaehlen_title_blocks(self):
+        weak=ArticleJob("j1","Pferdehaftpflicht mit Fremdreiter auswählen","Pferdehaftpflicht mit Fremdreiter","Beratung","kat",["/a/","/b/","/c/"])
+        body="# Pferdehaftpflicht mit Fremdreiter auswählen\n\nPferdehaftpflicht mit Fremdreiter /a/ /b/ /c/ [TABLE]"
+        self.assertIn("TEXTMACHINE_BERATUNG_TITLE_WEAK_SURFACE",check_textmachine_snapshot(weak,Draft("j1",body)))
+
+    def test_existing_natural_so_waehlst_du_title_passes(self):
+        good=ArticleJob("j1","So wählst du geeignete Fliegenmasken für Pferde","Fliegenmasken für Pferde","Beratung","kat",["/a/","/b/","/c/"])
+        body="# So wählst du geeignete Fliegenmasken für Pferde\n\nFliegenmasken für Pferde /a/ /b/ /c/ [TABLE]"
+        self.assertNotIn("TEXTMACHINE_BERATUNG_TITLE_WEAK_SURFACE",check_textmachine_snapshot(good,Draft("j1",body)))
+
+    def test_existing_das_wichtigste_title_passes(self):
+        good=ArticleJob("j1","Das Wichtigste über Hindernisstangen für Pferde","Hindernisstangen für Pferde","Beratung","kat",["/a/","/b/","/c/"])
+        body="# Das Wichtigste über Hindernisstangen für Pferde\n\nHindernisstangen für Pferde /a/ /b/ /c/ [TABLE]"
+        self.assertNotIn("TEXTMACHINE_BERATUNG_TITLE_WEAK_SURFACE",check_textmachine_snapshot(good,Draft("j1",body)))
 
     def test_attribute_rich_beratung_title_passes_title_gate(self):
         good=ArticleJob("j1","So findest du das richtige Huffett für Pferde","Huffett für Pferde","Beratung","kat",["/a/","/b/","/c/"])
