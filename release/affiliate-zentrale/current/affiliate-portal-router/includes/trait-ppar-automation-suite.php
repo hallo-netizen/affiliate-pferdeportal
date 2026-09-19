@@ -575,54 +575,12 @@ trait PPAR_Automation_Suite_Trait {
      */
     private function automation_refresh_awin_programme_list() {
         $settings = $this->network_settings('awin');
-        if (empty($settings['enabled'])) {
-            return array('status'=>'disabled','count'=>0);
-        }
+        if (empty($settings['enabled'])) { return array('status'=>'disabled','count'=>0); }
         $publisher_id = preg_replace('/[^0-9]/', '', (string) ($settings['publisher_id'] ?? ''));
         $token = $this->network_secret('awin', 'access_token', $settings);
-        if ($publisher_id === '' || $token === '') {
-            return array('status'=>'not_configured','count'=>0);
-        }
-
-        $url = 'https://api.awin.com/publishers/' . rawurlencode($publisher_id) . '/programmes?relationship=joined';
-        $response = $this->api_response(wp_remote_get($url, array(
-            'timeout'=>20,
-            'redirection'=>2,
-            'headers'=>array('Accept'=>'application/json','Authorization'=>'Bearer ' . $token),
-            'limit_response_size'=>1048576,
-        )));
-        if (empty($response['ok']) && in_array(absint($response['code'] ?? 0), array(401,403), true)) {
-            $fallback = add_query_arg('accessToken', rawurlencode($token), $url);
-            $response = $this->api_response(wp_remote_get($fallback, array(
-                'timeout'=>20,
-                'redirection'=>2,
-                'headers'=>array('Accept'=>'application/json'),
-                'limit_response_size'=>1048576,
-            )));
-        }
-        if (empty($response['ok'])) {
-            return new WP_Error(
-                'awin_programme_list_refresh_failed',
-                'Awin-Programmliste konnte nicht aktualisiert werden; Last-Known-Good bleibt erhalten.'
-            );
-        }
-
-        $json = json_decode((string) ($response['body'] ?? ''), true);
-        if (!is_array($json)) {
-            return new WP_Error(
-                'awin_programme_list_invalid',
-                'Awin-Programmliste ist ungültig; Last-Known-Good bleibt erhalten.'
-            );
-        }
-        $safe = array();
-        foreach (array_slice(array_values($json), 0, 5000) as $programme) {
-            if (!is_array($programme)) { continue; }
-            $id = absint($programme['id'] ?? $programme['advertiserId'] ?? 0);
-            $name = sanitize_text_field((string) ($programme['name'] ?? $programme['advertiserName'] ?? ''));
-            $relationship = sanitize_key((string) ($programme['relationship'] ?? 'joined'));
-            if ($id <= 0 || $name === '' || $relationship !== 'joined') { continue; }
-            $safe[] = array('id'=>$id,'name'=>$name,'relationship'=>'joined');
-        }
+        if ($publisher_id === '' || $token === '') { return array('status'=>'not_configured','count'=>0); }
+        $safe = $this->awin_fetch_current_joined_programmes($settings);
+        if (is_wp_error($safe)) { return $safe; }
         update_option(self::OPTION_NETWORK_AWIN_PROGRAMMES, $safe, false);
         return array('status'=>'refreshed','count'=>count($safe));
     }

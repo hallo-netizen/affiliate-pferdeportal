@@ -580,6 +580,51 @@ trait PPAR_Network_Sync_Trait {
         return array('headers' => $headers, 'mapping' => $mapping, 'delimiter' => $delimiter, 'rows' => $rows);
     }
 
+    /**
+     * Current Awin joined-programme inventory, including hidden joined programmes.
+     * Awin documents includeHidden=true as the complete joined inventory including
+     * hidden programmes; it must not be combined with relationship.
+     * Returns a normalized list and never writes options itself.
+     */
+    private function awin_fetch_current_joined_programmes($settings = null) {
+        $settings = is_array($settings) ? $settings : $this->network_settings('awin');
+        if (empty($settings['enabled'])) {
+            return new WP_Error('awin_disabled', 'Awin ist deaktiviert.');
+        }
+        $publisher = preg_replace('/[^0-9]/', '', (string) ($settings['publisher_id'] ?? ''));
+        $token = $this->network_secret('awin', 'access_token', $settings);
+        if ($publisher === '' || $token === '') {
+            return new WP_Error('awin_not_configured', 'Publisher-ID und API-Zugriffstoken fehlen.');
+        }
+        $url = add_query_arg(array(
+            'includeHidden' => 'true',
+            'accessToken' => $token,
+        ), 'https://api.awin.com/publishers/' . rawurlencode($publisher) . '/programmes');
+        $parsed = $this->api_response(wp_remote_get($url, array(
+            'timeout'=>20,
+            'redirection'=>2,
+            'headers'=>array('Accept'=>'application/json'),
+            'limit_response_size'=>1048576,
+        )));
+        if (empty($parsed['ok'])) {
+            return new WP_Error('awin_programme_list_refresh_failed', 'Awin-Programmliste konnte nicht aktualisiert werden; Last-Known-Good bleibt erhalten.');
+        }
+        $json = json_decode((string) ($parsed['body'] ?? ''), true);
+        if (!is_array($json)) {
+            return new WP_Error('awin_programme_list_invalid', 'Awin lieferte keine gültige JSON-Programmliste; Last-Known-Good bleibt erhalten.');
+        }
+        $safe = array();
+        foreach (array_slice(array_values($json), 0, 5000) as $programme) {
+            if (!is_array($programme)) { continue; }
+            $id = absint($programme['id'] ?? $programme['advertiserId'] ?? 0);
+            $name = sanitize_text_field((string) ($programme['name'] ?? $programme['advertiserName'] ?? ''));
+            if ($id <= 0 || $name === '') { continue; }
+            $safe[$id] = array('id'=>$id,'name'=>$name,'relationship'=>'joined','status'=>sanitize_key((string) ($programme['status'] ?? 'active')) ?: 'active');
+        }
+        ksort($safe, SORT_NUMERIC);
+        return array_values($safe);
+    }
+
     private function network_sync_mapped_value($row, $mapping, $field) {
         if (empty($mapping[$field]['source'])) { return ''; }
         $source = (string) $mapping[$field]['source'];

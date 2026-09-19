@@ -45,7 +45,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.73';
+    const VERSION = '6.72.105';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -126,6 +126,7 @@ final class Pferdeportal_Affiliate_Router {
     const ARTICLE_REBUILD_HOOK = 'ppar_article_plan_rebuild_worker';
     const AUTOMATION_CRON_HOOK = 'ppar_partner_automation_sync';
     const AUTOMATION_WORKER_HOOK = 'ppar_partner_automation_worker';
+    const AWIN_PROGRAMME_REFRESH_CRON_HOOK = 'ppar_awin_programme_inventory_refresh_hourly_v1';
     const ASSET_VERIFY_HOOK = 'ppar_verify_creative_assets';
     const HEALTH_SCHEMA_VERSION = '2.1';
     const OPTION_SYNC_SCHEMA_VERSION = 'ppar_sync_schema_version';
@@ -212,6 +213,8 @@ final class Pferdeportal_Affiliate_Router {
         add_action(self::HEALTH_CRON_HOOK, array($this, 'run_scheduled_health_check'));
         add_action(self::AUTOMATION_CRON_HOOK, array($this, 'run_scheduled_partner_sync'));
         add_action(self::AUTOMATION_WORKER_HOOK, array($this, 'run_automation_worker'));
+        add_action(self::AWIN_PROGRAMME_REFRESH_CRON_HOOK, array($this, 'run_awin_programme_inventory_refresh'));
+        add_action('init', array($this, 'ensure_awin_programme_inventory_schedule'), 23);
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::HOUSEKEEPING_CRON_HOOK, array($this, 'run_housekeeping'));
         add_action('init', array($this, 'ensure_housekeeping_schedule'), 27);
@@ -303,6 +306,7 @@ final class Pferdeportal_Affiliate_Router {
             add_action('admin_post_ppar_save_banner_distribution', array($this, 'handle_save_banner_distribution'));
             add_action('admin_post_ppar_test_network', array($this, 'handle_test_network'));
             add_action('admin_post_ppar_save_awin_programme_gate', array($this, 'handle_awin_programme_gate_save'));
+            add_action('admin_post_ppar_refresh_awin_programmes', array($this, 'handle_awin_programme_refresh'));
             add_action('admin_post_ppar_run_health_check', array($this, 'handle_run_health_check'));
             add_action('admin_post_ppar_export_portal_coverage', array($this, 'handle_export_portal_coverage'));
             add_action('admin_post_ppar_save_health_settings', array($this, 'handle_save_health_settings'));

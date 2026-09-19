@@ -1147,6 +1147,7 @@ trait PPAR_Creative_Library_Trait {
         if (!empty($filters['provider'])) {
             $where[] = 'provider=%s';
             $args[] = $filters['provider'];
+            if (sanitize_key((string) $filters['provider']) === 'awin') { $where[] = "creative_type='banner'"; }
         }
         if (!empty($filters['partner_external_id'])) {
             $where[] = 'partner_external_id=%s';
