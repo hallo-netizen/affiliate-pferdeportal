@@ -1,0 +1,30 @@
+{
+  "contract": "CONCEPT_AGENT_REAL7_CORRECTED_RUN_PROOF_V1",
+  "date": "2026-09-19",
+  "status": "PASS",
+  "article_count": 7,
+  "batch_sha256": "d59af1ea40e9265e5b12b3ef6fc979bf348e650e428f93a86fc39f6aa45e9911",
+  "wordpress_file_sha256": "28d26eeca17731e79764dc6886b5f7ded1c234d1c095559f1e7800fc575a20d1",
+  "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "wordpress_import_status": "PSERC_SYSTEM4_WORDPRESS_DRAFT_IMPORT_PASS",
+  "publish_allowed": false,
+  "redaktionsplan_read_attempted": false,
+  "redaktionsplan_write_attempted": false,
+  "corrections": {
+    "titles": [
+      "So findest du den richtigen Mistcontainer mit Deckel",
+      "So findest du die passende Pferdehaftpflicht mit Fremdreiter"
+    ],
+    "other_five_titles_unchanged": true,
+    "human_h2_all_7": true,
+    "inline_link_spacing_all_7": true
+  },
+  "checks": {
+    "languagetool_68": "7/7 PASS, 0 findings",
+    "ppm_679": "7/7 TECHNICAL_CHECK_OK + CONTENT_QUALITY_CHECK_OK + aggregate PASS",
+    "real_pserc_02823_positive": "PASS",
+    "negative_wrong_contract": "PSERC_SYSTEM4_CONTRACT_INVALID",
+    "negative_publish_true": "PSERC_SYSTEM4_PUBLISH_MUST_BE_FALSE",
+    "negative_body_tamper": "PSERC_SYSTEM4_BODY_HASH_MISMATCH"
+  }
+}
