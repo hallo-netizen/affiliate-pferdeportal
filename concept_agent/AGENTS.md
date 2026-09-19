@@ -45,7 +45,7 @@ Ein Zwischen-PASS ist niemals ein Abschluss und niemals ein Stoppsignal.
 
 
 ## REDAKTIONSSPRACHE-HARDLOCK
-1. Beratungstitel werden vor dem Schreiben erneut gegen die aktuelle Titeloberfläche geprüft. Alte nackte Generatorformen wie `So findest du <Keyword>`, `<Keyword> wählen/auswählen/finden`, `Das Wichtigste über <Keyword>` oder `Wissenswertes über <Keyword>` dürfen nicht als FINAL passieren.
+1. Beratungstitel werden vor dem Schreiben erneut gegen die aktuelle Titeloberfläche geprüft. Bereits natürliche/gute Titel bleiben unverändert. Nur nackte Aktions-Titel der Form `<Keyword> wählen/auswählen/finden` dürfen nicht als FINAL passieren; sie müssen natürlich formuliert werden, ohne das Target Keyword zu verändern.
 2. Natürliche Titelattribute wie `passend`, `geeignet`, `richtig`, `optimal` oder `ideal` sind reine Präsentationssprache und dürfen das unveränderte Target Keyword natürlich einbetten.
 3. Zwischenüberschriften müssen wie normale menschliche Abschnittstitel klingen und den konkreten Nutzen/Inhalt der folgenden Passage benennen. Bürokratische Restphrasen wie `am Pferd sicher beurteilen`, `fachlich einordnen`, `realistisch bewerten` oder `nach Bedarf beurteilen` sind verboten.
 4. Jeder Inline-Link muss im sichtbaren Satz einen korrekten Textfluss haben. `</a>` direkt vor einem Buchstaben/Ziffer ist ein Hard-Fail; Satzzeichen direkt nach dem Link bleiben erlaubt.
