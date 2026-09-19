@@ -15,9 +15,22 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
+      - name: Materialize exact validated current7 V2 artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/current7-v2
+          curl --fail --location --retry 3 -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/hallo-netizen/affiliate-pferdeportal/actions/artifacts/10582610295/zip -o /tmp/current7-v2/artifact.zip
+          unzip -q /tmp/current7-v2/artifact.zip -d /tmp/current7-v2
+          test -f /tmp/current7-v2/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
+          echo '6cbe4f5cf54f0332701d7e11bd1962b192fe1a896dc389dbfbe896ca02ea880a  /tmp/current7-v2/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json' | sha256sum -c -
+
       - name: Build PPM-validated and ENDSTEMPEL-signed final JSON
         env:
           ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+          KONZEPT_NULL_V2_HANDOFF: /tmp/current7-v2/SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json
         run: |
           set -euo pipefail
           python3 konzept_null/finalize_current7.py
