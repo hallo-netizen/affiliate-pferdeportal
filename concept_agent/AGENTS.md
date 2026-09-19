@@ -37,15 +37,21 @@ Ein Zwischen-PASS ist niemals ein Abschluss und niemals ein Stoppsignal.
 
 ## WORDPRESS-ENDDATEI-HARDLOCK
 1. Interne Concept-Agent-Dateien sind niemals WordPress-Uploaddateien.
-2. Als WordPress-ready darf ausschließlich ein Paket bezeichnet oder im Chat ausgegeben werden, das den echten Vertrag `PSERC_APPROVED_PRODUCTION_PACKAGE_V1` mit `PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1` erfüllt.
-3. Pflicht vor Ausgabe: `concept_agent/wordpress_output_contract.py` muss inklusive echter ED25519-Signaturprüfung PASS liefern.
-4. Ohne echtes ENDSTEMPEL_PASS wird fail-closed gestoppt; kein Ersatz-PASS, keine umbenannte interne Datei.
-5. Die korrekte WordPress-Dateiausgabe hier im Chat ist fester Bestandteil der Teststrecke und des Produktionswegs.
-6. Verbotene Ersatzformate: `CONCEPT_AGENT_FINAL_ARTICLE_V1`, `CONCEPT_AGENT_7_ARTICLE_CHAT_HANDOFF_V1`, `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`.
+2. Als WordPress-ready darf ausschließlich der aktuell real belegte Direktimportvertrag `SYSTEM4_WORDPRESS_HANDOFF_V1` bezeichnet und im Chat ausgegeben werden.
+3. Pflicht vor Ausgabe: lokale Validierung gegen die echte PSERC-0.28.23-Vertragslogik inklusive Positiv- und Negativfällen.
+4. `publish_allowed` bleibt immer `false`; der Importzielstatus ist ausschließlich WordPress-`draft`.
+5. Die korrekte WordPress-Dateiausgabe hier im Chat ist fester Bestandteil des Produktionswegs.
+6. Verboten als WordPress-Datei: `CONCEPT_AGENT_FINAL_ARTICLE_V1`, `CONCEPT_AGENT_7_ARTICLE_CHAT_HANDOFF_V1`, `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`, `PSERC_APPROVED_PRODUCTION_PACKAGE_V1`, ENDSTEMPEL-Signierauftrag und ENDSTEMPEL-Wrapper.
 
+## BEITRAGSART-HARDLOCK
+1. `article_type` kommt gebunden aus dem aktuellen Metadatenbatch und wird unverändert übernommen.
+2. Kein Default/Fallback darf einen unbekannten oder gemischten Batch pauschal auf `Beratung` umstellen.
+3. Typspezifische Regeln gelten nur für den passenden Typ.
+4. `Produktvergleich` und weitere Typen dürfen angeschlossen werden, sobald ihr eigener upstream Fach-/Qualitätsvertrag gebunden ist; die allgemeine Agentenkette bleibt 1..N und typneutral.
+5. Codex ist im aktuellen Produktionsweg verboten.
 
 ## REDAKTIONSSPRACHE-HARDLOCK
-1. Beratungstitel werden vor dem Schreiben erneut gegen die aktuelle Titeloberfläche geprüft. Bereits natürliche/gute Titel bleiben unverändert. Nur nackte Aktions-Titel der Form `<Keyword> wählen/auswählen/finden` dürfen nicht als FINAL passieren; sie müssen natürlich formuliert werden, ohne das Target Keyword zu verändern.
+1. Beratungstitel werden vor dem Schreiben erneut gegen die aktuelle Titeloberfläche geprüft. Bereits natürliche/gute Titel bleiben unverändert. Nackte Aktions-Titel der Form `<Keyword> wählen/auswählen/finden` sowie `So findest du <Keyword>` ohne sinnvolle sprachliche Ergänzung dürfen nicht als FINAL passieren; sie müssen natürlich formuliert werden, ohne das Target Keyword zu verändern.
 2. Natürliche Titelattribute wie `passend`, `geeignet`, `richtig`, `optimal` oder `ideal` sind reine Präsentationssprache und dürfen das unveränderte Target Keyword natürlich einbetten.
 3. Zwischenüberschriften müssen wie normale menschliche Abschnittstitel klingen und den konkreten Nutzen/Inhalt der folgenden Passage benennen. Bürokratische Restphrasen wie `am Pferd sicher beurteilen`, `fachlich einordnen`, `realistisch bewerten` oder `nach Bedarf beurteilen` sind verboten.
 4. Jeder Inline-Link muss im sichtbaren Satz einen korrekten Textfluss haben. `</a>` direkt vor einem Buchstaben/Ziffer ist ein Hard-Fail; Satzzeichen direkt nach dem Link bleiben erlaubt.
