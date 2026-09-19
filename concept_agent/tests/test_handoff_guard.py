@@ -11,7 +11,7 @@ from handoff_guard import check_job, check_research, check_facts, check_draft
 
 class HandoffGuardTest(unittest.TestCase):
     def setUp(self):
-        self.job = ArticleJob("j1","Titel","keyword","Beratung","haltung",[])
+        self.job = ArticleJob("j1","Titel","keyword","Beratung","haltung",["/a/","/b/","/c/"])
         self.research = [ResearchEvidence("s1","https://example.org/a","Belegtext")]
         self.facts = [Fact("f1","Aussage","s1")]
 
