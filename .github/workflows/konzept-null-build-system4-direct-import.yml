@@ -112,6 +112,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          RESEARCH_BOUND_AT="$(git show -s --format=%aI 43ccb3725ced2ac509c0787f626170473fa699f7)"
+          test -n "$RESEARCH_BOUND_AT"
+          export RESEARCH_BOUND_AT
+          echo "RESEARCH_BOUND_AT=$RESEARCH_BOUND_AT"
           PPM=konzept_null/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
           echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  '"$PPM" | sha256sum -c -
           rm -rf /tmp/ppm679 && mkdir -p /tmp/ppm679
@@ -123,8 +127,19 @@ jobs:
           def sha(s): return hashlib.sha256(s.encode()).hexdigest()
           def body_text(s):
             v=html.unescape(s); v=re.sub(r'<[^>]+>',' ',v); return re.sub(r'\s+',' ',v).strip()
+          import os
           env=json.load(open('/tmp/direct/PSERC_IMPORT_ENVELOPE.json',encoding='utf-8'))
-          packs=env['fact_pack_bundle']['fact_packs']; olditems=env['production_plan']['items']
+          packs=json.loads(json.dumps(env['fact_pack_bundle']['fact_packs'],ensure_ascii=False)); olditems=env['production_plan']['items']
+          retrieved_at=os.environ['RESEARCH_BOUND_AT']
+          if not retrieved_at: raise SystemExit('RESEARCH_BOUND_AT_MISSING')
+          for pi,pack in enumerate(packs):
+            for si,source in enumerate(pack.get('sources') or []):
+              sid=str(source.get('source_id') or '')
+              url=str(source.get('source_url') or '')
+              if not sid or not url: raise SystemExit(f'SOURCE_ID_OR_URL_MISSING:{pi}:{si}')
+              source['retrieved_at']=retrieved_at
+              if not str(source.get('source_title') or '').strip() or str(source.get('source_title')).casefold()==sid.casefold():
+                source['source_title']=url
           files=[
             'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
             'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
