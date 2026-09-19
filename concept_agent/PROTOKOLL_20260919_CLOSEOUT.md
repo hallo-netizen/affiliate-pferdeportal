@@ -11,7 +11,7 @@ Dieses Dokument ist Historie/Nachweis, keine Current-Autorität.
 - mechanische Beratung-Zwischenüberschriften als fail-closed Guard ergänzt;
 - Titelregel präzisiert: gute natürliche Titel bleiben; nackte Aktionsformen und `So findest du <Keyword>` ohne Ergänzung werden blockiert;
 - gebundene Beitragsart als unveränderliche Eingabe festgeschrieben; kein Beratung-Default;
-- WordPress-Ausgabecode/-tests im Concept Agent auf den echten 0.28.23-Direktvertrag umgestellt;
+- WordPress-Ausgabecode/-tests im Concept Agent auf den echten 0.28.23-Direktvertrag umgestellt;\n- gezielter Closeout-Test der geänderten Regeln/WordPress-Grenze: 8/8 PASS;
 - Zielvertrag, Bürotür und Current-Autorität auf den aktuellen Produktionsweg konsolidiert.
 
 ## Upstream SEO-Themenengine
@@ -20,7 +20,7 @@ Dieses Dokument ist Historie/Nachweis, keine Current-Autorität.
 - Beitragsartenerkennung lokal für FAQ/Pflege/Vergleich/Kosten/Installation/Lagerung/Anwendung/Übungen/Sicherheit/Beratung geprüft;
 - Safe-Readback/Async-PAA lokal geprüft;
 - letzter realer WordPress-Screenshot bleibt jedoch bei gespeichertem Einzellauf RUNNING, 4/4 Datenquellen, 0.050840 USD;
-- deshalb kein Live-PASS für die Finalisierung von PPA-005 0.56.29.
+- deshalb kein Live-PASS für die Finalisierung des aktuell installierten Themenengine-Stands; der letzte Screenshot zeigt den Versionskopf nicht, also keine erfundene Live-Versionsbestätigung.
 
 ## Warum
 Die Nachschärfungen stammen aus echten Laufbefunden. Sie werden als gezielte Guards mit Positiv-/Negativtests erhalten, damit folgende Artikel dieselben Fehler nicht erneut passieren lassen.
