@@ -99,3 +99,27 @@ Kein Gesamt-PASS vor exakt dieser finalen Datei.
 - Publish-/WordPress-Schreibstatus
 - Paul-Zuständigkeiten
 - technische Produktionsarchitektur
+
+
+## Nachtrag 19.09.2026 — codexfreie Teststrecke abgeschlossen
+
+Dieser Nachtrag ersetzt die oben beschriebenen offenen Teststrecken-Punkte, nicht die getrennten Produktions-/Codex-Blocker.
+
+Aktueller Main nach PR #339:
+`a0cb23a1611202fd75395a785385962ce7ae1900`
+
+Beweise:
+- PR #339 gemergt: reparierbarer `BATCH_TEMPLATE_REUSE_BLOCKED` führt in der isolierten Acceptance an denselben `DRAFT_WORKER`/Workspace zurück; Schwelle unverändert.
+- Post-Merge System-4A-Acceptance Run `35398621624`: **SUCCESS**.
+- Echter PPM-6.7.9-Negativbefund im Test: `BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO`, Ist `0.042553...`, erlaubt maximal `0.02`, Repair-Owner `DRAFT_WORKER`.
+- Derselbe Testartikel lief über **2 Werkstatt-Rückgaben**, Same-Article-Kontinuität blieb erhalten.
+- Danach reales LanguageTool 6.8 **PASS** und realer PPM 6.7.9 **PASS**.
+- End-Schlussanteil `0.113268...` und damit über der gebundenen Beratung-Mindestgrenze `0.10`.
+- Der 3-Artikel-deterministische Testlauf endete mit LT `PASS/PASS/PASS`, PPM `PASS/PASS/PASS`, Revisionen `[1,2,1]`.
+- Kein Codex wurde in diesem Acceptance-Run verwendet.
+- Keine Produktions-, Qualitäts-, PPM/LT-, Design-, Workflow- oder Publish-Regel wurde gelockert.
+
+Damit ist die **codexfreie System-4A-Teststrecke PASS**. Nicht damit bewiesen ist `REAL_CODEX_REPAIR_PROVEN`; die dauerhaft unvollständige reale Codex-Evidence bleibt ein separater Punkt.
+
+Operative Wahrheit bleibt ausschließlich:
+`control/startmaster0107/CURRENT_STATE.json`
