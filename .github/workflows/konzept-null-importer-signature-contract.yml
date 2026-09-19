@@ -40,3 +40,5 @@ jobs:
                     print('---',i+1)
                     for j in range(a,b): print(f'{j+1}: {lines[j]}')
           PY
+
+# refresh-current-importer-contract
