@@ -31,3 +31,25 @@ Keine Runtime-Schnittstelle zu anderen Konzepten.
 Keine Änderung fremder Dateien.
 Keine Produktionswirkung.
 Keine WordPress-Schreiboperation.
+
+
+## Zwei Betriebsvarianten
+
+### Variante A — vorhandene Plattform
+- GitHub bleibt Kontroll- und Ablageort.
+- Dieser Chat kann die fachlichen Agentenrollen für Entwicklung und Test ausführen.
+- Codex bleibt optional und wird wegen Nutzungslimits nicht als zwingende Grundlage eingeplant.
+- Diese Variante dient zuerst zum Beweis, dass die Agentenkette fachlich und technisch sauber funktioniert.
+- Sie ist ohne zusätzliche KI-API nicht vollständig autonom.
+
+### Variante B — Claude als externer Writer
+- GitHub bleibt Kontroll- und Ablageort.
+- Research/Facts können zunächst wie in Variante A bleiben.
+- Der Writer Agent kann alternativ über genau eine Claude-API-Verbindung ausgeführt werden.
+- Es wird keine eigene Verbindung pro Agent gebaut; alle Claude-Rollen würden denselben Adapter verwenden.
+- Claude darf nur seine zugewiesene Rolle ausführen und erhält keinen Zugriff auf andere Konzepte.
+- Der restliche Concept-Agent-Ablauf bleibt identisch.
+
+## Entscheidungsregel
+Zuerst wird Variante A vollständig isoliert stabilisiert und getestet.
+Variante B wird erst danach als austauschbarer Writer-Zweig ergänzt.
