@@ -4,6 +4,7 @@ from contracts import ArticleJob, ResearchEvidence, Draft
 from agents import ResearchAgent, ResearchInput, FactsAgent, WriterAgent, RepairAgent
 from handoff_guard import check_job, check_research, check_facts, check_draft
 from article_guard import check_article
+from textmachine_guard import check_textmachine_snapshot
 
 
 @dataclass
@@ -46,11 +47,11 @@ class ConceptAgentController:
             return RunResult("BLOCKED_DRAFT_HANDOFF", None, trace+errors)
         trace.append("DRAFT_HANDOFF_PASS")
 
-        errors=check_article(job, draft)
+        errors=check_article(job, draft)+check_textmachine_snapshot(job, draft)
         if errors:
             trace.append("ARTICLE_REPAIR_REQUIRED")
-            repaired=self.repair_agent.run(draft, errors)
-            errors2=check_article(job, repaired)
+            repaired=self.repair_agent.run(job, draft, errors)
+            errors2=check_article(job, repaired)+check_textmachine_snapshot(job, repaired)
             if errors2:
                 return RunResult("BLOCKED_AFTER_REPAIR", repaired, trace+errors2)
             draft=repaired
@@ -58,4 +59,5 @@ class ConceptAgentController:
         else:
             trace.append("ARTICLE_PASS")
 
+        trace.append("TEXTMACHINE_SNAPSHOT_PASS")
         return RunResult("FINAL_FILE_READY", draft, trace)
