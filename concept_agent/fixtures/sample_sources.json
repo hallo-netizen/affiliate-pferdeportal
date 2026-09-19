@@ -1,0 +1,12 @@
+[
+  {
+    "source_id": "src-1",
+    "url": "https://example.org/source-1",
+    "evidence": "Boxenmatten können je nach Material Trittsicherheit, Reinigung und Liegekomfort beeinflussen."
+  },
+  {
+    "source_id": "src-2",
+    "url": "https://example.org/source-2",
+    "evidence": "Untergrund, Entwässerung und Pflege sollten bei der Auswahl gemeinsam betrachtet werden."
+  }
+]
