@@ -215,7 +215,7 @@
   "current_execution_blocker": {
     "code": "REAL7_APPROVED_AWAITING_FRESH_DISPATCH_HARDLOCK_AND_START",
     "error_class": false,
-    "detail": "User explicitly approved the real seven-article Codex run in the current turn. Before start, fresh-read main and permanent dispatcher PR #342, require exact dispatcher head == current main and a fresh successful hardlock-base on that relation. Then start only the canonical current seven-item route via python3 isolated_system4/parent_start.py start-current-bound. Treat all seven article bodies as NEW, preserve same-article/same-workspace repair until PASS, require durable evidence/release visibility, do not publish.",
+    "detail": "User explicitly approved the real seven-article Codex run in the current turn. Before start, fresh-read main and permanent dispatcher PR #342, require exact dispatcher head == current main and a fresh successful hardlock-base on that relation. Then start only the canonical current seven-item route via python3 isolated_system4/parent_start.py start-current-bound. Treat all seven article bodies as NEW, preserve same-article/same-workspace repair until PASS, require durable evidence/release visibility, do not publish. Durable live-progress protocol is bound at protocol/STARTMASTER0107_REAL7_LIVE_PROGRESS_DURABILITY_20260919.md; usage-limit stop must preserve the last reached article/phase/repair evidence.",
     "dispatcher_pr": 342,
     "dispatcher_freshness_policy": "FRESH_READ_AT_START_HEAD_MUST_EQUAL_CURRENT_MAIN",
     "hardlock_policy": "FRESH_HARDLOCK_BASE_PASS_REQUIRED_AT_START",
@@ -485,6 +485,14 @@
     "codex_free_acceptance_run": 35398621624,
     "codex_started": false,
     "real_article_production_started": false,
+    "publish_allowed": false
+  },
+  "real7_live_progress_durability": {
+    "status": "BOUND_BEFORE_START",
+    "protocol_ref": "protocol/STARTMASTER0107_REAL7_LIVE_PROGRESS_DURABILITY_20260919.md",
+    "rule": "EVERY_REACHED_ARTICLE_PHASE_AND_REPAIR_STATE_MUST_REMAIN_DURABLY_RECONSTRUCTIBLE",
+    "codex_usage_limit_policy": "STOP_NEW_WORK_PERSIST_LAST_REACHED_STATE_NO_OVERALL_PASS",
+    "tmp_only_evidence_forbidden": true,
     "publish_allowed": false
   }
 }
