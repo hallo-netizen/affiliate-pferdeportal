@@ -69,7 +69,7 @@ jobs:
               # Use the exact visible German unit as the claim, while evidence_text remains
               # the bound researched source evidence.
               statement=evidence
-              pat=rf'<p\\b[^>]*data-fact-ids="[^"]*\\b{re.escape(fid)}\\b[^"]*"[^>]*>(.*?data-fact-id="{re.escape(fid)}".*?)</p>'
+              pat=rf'<p[^>]*data-fact-ids="[^"]*{re.escape(fid)}[^"]*"[^>]*>(.*?data-fact-id="{re.escape(fid)}".*?)</p>'
               mm=re.search(pat,html,re.I|re.S)
               if mm:
                 statement=htmlmod.unescape(re.sub(r'<[^>]+>',' ',mm.group(1)))
