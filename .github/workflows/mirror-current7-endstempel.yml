@@ -1,0 +1,47 @@
+name: Mirror Current7 ENDSTEMPEL Asset
+
+on:
+  push:
+    branches: [chat-delivery/current7-endstempel]
+    paths: ['.github/workflows/mirror-current7-endstempel.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Mirror exact release bytes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag='endstempel-7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a-g000001'
+          name='GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json'
+          mkdir -p chat_delivery
+          gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern "$name" --dir chat_delivery
+          echo '0f30e3e4abdf9d74906b2a5787335e7243f4d00dc8b2c6f425a7f4e2c6a8cdd4  chat_delivery/'"$name" | sha256sum -c -
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          p=pathlib.Path('chat_delivery/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json')
+          x=json.loads(p.read_text(encoding='utf-8'))
+          assert x['contract']=='PSERC_APPROVED_PRODUCTION_PACKAGE_V1'
+          assert x['endstamp_contract']=='PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1'
+          assert x['status']=='ENDSTEMPEL_PASS'
+          assert x['batch_sha256']=='7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a'
+          assert x['article_manifest']['article_count']==7
+          assert len(x['article_manifest']['articles'])==7
+          assert x['publish_allowed'] is False
+          assert x['content_mutation_performed'] is False
+          print('CHAT_DELIVERY_FINAL_JSON_VERIFY_PASS',hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+          git add chat_delivery/"$name"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chat delivery: mirror exact current7 ENDSTEMPEL JSON"
+          git push
