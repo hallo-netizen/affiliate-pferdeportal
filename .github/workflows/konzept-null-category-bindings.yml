@@ -1,0 +1,50 @@
+name: Konzept Null Category Bindings
+
+on:
+  push:
+    branches:
+      - hobbyroom/konzept-null-startmaster0102-isolated
+    paths:
+      - '.github/workflows/konzept-null-category-bindings.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact PPM679 category snapshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import io,json,zipfile,pathlib
+          zpath=pathlib.Path('konzept_null/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
+          targets={
+            'hindernisstangen-beratung','reitplatzbeleuchtung-beratung','mistcontainer-beratung',
+            'pferdehaftpflicht-beratung','huffett-beratung','fliegenmasken-beratung','pellets-beratung'
+          }
+          with zipfile.ZipFile(zpath) as z:
+            names=[n for n in z.namelist() if n.endswith('.json')]
+            for n in names:
+              raw=z.read(n)
+              try: text=raw.decode('utf-8')
+              except: continue
+              if not any(t in text for t in targets): continue
+              try: obj=json.loads(text)
+              except: continue
+              print('JSONFILE',n)
+              def walk(x,path=''):
+                if isinstance(x,dict):
+                  vals=' '.join(str(v) for v in x.values() if isinstance(v,(str,int,float,bool)))
+                  hit=[t for t in targets if t in vals]
+                  if hit:
+                    print(json.dumps({'path':path,'hits':hit,'node':x},ensure_ascii=False,sort_keys=True))
+                  for k,v in x.items(): walk(v,path+'/'+str(k))
+                elif isinstance(x,list):
+                  for i,v in enumerate(x): walk(v,path+'/'+str(i))
+              walk(obj)
+          PY
