@@ -39,6 +39,11 @@ class TextmachineSnapshotTest(unittest.TestCase):
         body="# Pferdehaftpflicht mit Fremdreiter auswählen\n\nPferdehaftpflicht mit Fremdreiter /a/ /b/ /c/ [TABLE]"
         self.assertIn("TEXTMACHINE_BERATUNG_TITLE_WEAK_SURFACE",check_textmachine_snapshot(weak,Draft("j1",body)))
 
+    def test_naked_so_findest_du_title_blocks(self):
+        weak=ArticleJob("j1","So findest du Huffett für Pferde","Huffett für Pferde","Beratung","kat",["/a/","/b/","/c/"])
+        body="# So findest du Huffett für Pferde\n\nHuffett für Pferde /a/ /b/ /c/ [TABLE]"
+        self.assertIn("TEXTMACHINE_BERATUNG_TITLE_WEAK_SURFACE",check_textmachine_snapshot(weak,Draft("j1",body)))
+
     def test_existing_natural_so_waehlst_du_title_passes(self):
         good=ArticleJob("j1","So wählst du geeignete Fliegenmasken für Pferde","Fliegenmasken für Pferde","Beratung","kat",["/a/","/b/","/c/"])
         body="# So wählst du geeignete Fliegenmasken für Pferde\n\nFliegenmasken für Pferde /a/ /b/ /c/ [TABLE]"
