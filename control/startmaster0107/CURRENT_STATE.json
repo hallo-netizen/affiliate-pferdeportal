@@ -91,7 +91,12 @@
     "SYSTEM4A_REAL_REPAIR_PROOF_ACCEPTANCE_RUN_35389785292_PASS",
     "SYSTEM4A_REAL_REPAIR_PROOF_HARDLOCK_RUN_35389831741_PASS",
     "SYSTEM4A_REAL_REPAIR_PROOF_HARDLOCK_BASE_RUN_35389831731_PASS",
-    "USER_CODEX_APPROVAL_20260918_UNTIL_20260919_MORNING_OR_USAGE_LIMIT"
+    "USER_CODEX_APPROVAL_20260918_UNTIL_20260919_MORNING_OR_USAGE_LIMIT",
+    "SYSTEM4A_MULTIFINDING_QUALITY_NEGATIVE_REAL_PPM679_PASS_RUN_35398621624",
+    "SYSTEM4A_MULTIFINDING_SAME_ARTICLE_TWO_WORKSHOP_RETURNS_PASS_RUN_35398621624",
+    "SYSTEM4A_THREE_ARTICLE_DETERMINISTIC_ROUTE_LT_PPM_PASS_RUN_35398621624",
+    "SYSTEM4A_BATCH_TEMPLATE_REUSE_WORKSHOP_LOOP_PR339_MERGED_A0CB23A1611202FD75395A785385962CE7AE1900",
+    "SYSTEM4A_POST_PR339_ACCEPTANCE_RUN_35398621624_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -197,11 +202,11 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "E2E_ACCEPTANCE_BLOCKED_DISPATCHER_DRIFT_HARDLOCK_AND_DURABLE_EVIDENCE_GAPS",
+  "current_work_status": "SYSTEM4A_CODEX_FREE_TESTSTRECKE_PASS_OPERATIONAL_PRODUCTION_STILL_BLOCKED",
   "current_execution_blocker": {
     "code": "PR107_DISPATCHER_STALE_AND_HARDLOCK_BASE_FAIL",
     "error_class": true,
-    "detail": "The last technical-current baseline before status-only documentation merges was main/dispatcher head 6a4ce1cecec25a2b228125695bc94d4398d638d3. On permanent dispatcher PR #107, hardlock-base run 35394728634 failed at 'Block immutable security paths and Paul PROJECT_MEMORY writes' with IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED. Status-only PR #337 then advanced main while PR #107 remained on 6a4ce1ce..., so dispatcher freshness must be restored before any further Codex execution. The real 1+3 Codex acceptance terminal comment 5736300968 additionally reports one-article quality/batch PASS, three individual articles PASS but three-article batch collect fail-closed with BATCH_TEMPLATE_REUSE_BLOCKED:1:2:0.2003, quality-negative not executed, technical negatives 23/23 PASS, and canonical 107008 blocked as designed. The reported durable evidence commit/branch are not present remotely and cannot be independently reconstructed. Follow-up durable rerun was blocked by Codex usage limit in PR107 comment 5736330732.",
+    "detail": "Codex-free System4A teststrecke is now PASS on main a0cb23a1611202fd75395a785385962ce7ae1900. PR #339 merged the test-only batch workshop loop. Post-merge acceptance run 35398621624 PASS proved: real PPM679 duplicate-sentence quality negative blocked as expected; all four observed quality findings route to DRAFT_WORKER; same article returned to workshop twice; final real LanguageTool 6.8 and PPM 6.7.9 PASS; deterministic 3-article route LT/PPM PASS. Operational production/Codex blockers remain separate: PR107 dispatcher/hardlock history and missing durable real-Codex evidence are not resolved by this test-only pass.",
     "dispatcher_pr": 107,
     "dispatcher_head_sha": "6a4ce1cecec25a2b228125695bc94d4398d638d3",
     "dispatcher_base_sha": "e3ad9d23ca0c6a0bf2158b71b1dfa45e28c93fc0",
@@ -212,11 +217,11 @@
     "one_article_status": "PASS_REPORTED_DURABLE_BODY_UNAVAILABLE",
     "one_batch_status": "PASS_REPORTED",
     "three_article_individual_status": "3_OF_3_PASS_REPORTED",
-    "three_batch_status": "BATCH_TEMPLATE_REUSE_BLOCKED:1:2:0.2003",
-    "quality_negative_status": "NOT_EXECUTED",
+    "three_batch_status": "TEST_LAYER_REPAIR_LOOP_RESOLVED_BY_PR339",
+    "quality_negative_status": "PASS_BLOCKED_AS_EXPECTED_RUN_35398621624",
     "technical_negative_status": "PASS_23_OF_23_REPORTED",
     "canonical_107008_status": "BLOCKED_AS_DESIGNED",
-    "durable_evidence_status": "REMOTE_EVIDENCE_MISSING",
+    "durable_evidence_status": "REAL_CODEX_DURABLE_EVIDENCE_STILL_INCOMPLETE_SEPARATE_FROM_CODEX_FREE_TESTSTRECKE",
     "codex_start_allowed": false,
     "fresh_user_codex_approval_required": false,
     "publish_allowed": false
@@ -305,25 +310,22 @@
     "sequence_107008_reached": false,
     "publish_performed": false
   },
-  "last_safe_main_sha": "6a4ce1cecec25a2b228125695bc94d4398d638d3",
-  "last_safe_change": "PR #335 merged the test-only 1-or-3 acceptance adapter. On PR #335 final head 34983077bc30465469bcc2406dda4e4d40359893, hardlock run 35394631714 and hardlock-base run 35394628714 passed. The adapter intentionally blocks isolated 107008 with ACCEPTANCE_107008_CANONICAL_BOUNDARY and does not alter production thresholds, Controller, LT, PPM, or publish rules.",
-  "hobbyroom_status": "E2E_BLOCKED_DISPATCHER_STALE_HARDLOCK_THREE_BATCH_AND_EVIDENCE",
+  "last_safe_main_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
+  "last_safe_change": "PR #339 merged the test-only batch workshop loop. Post-merge System 4A acceptance run 35398621624 PASS: real PPM679 quality-negative duplicate-sentence finding blocked as expected and returned to DRAFT_WORKER; the same article returned to workshop twice and then passed real LT 6.8 + PPM 6.7.9; 3-article deterministic route ended LT/PPM PASS for all three. No production/quality threshold/workflow/publish rule changed.",
+  "hobbyroom_status": "SYSTEM4A_CODEX_FREE_TESTSTRECKE_PASS",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "PR107_HEAD_NOT_CURRENT_MAIN; PR107_HARDLOCK_BASE_FAIL; BATCH_TEMPLATE_REUSE_BLOCKED:1:2:0.2003; DURABLE_EVIDENCE_REMOTE_MISSING; CODEX_USAGE_LIMIT_REACHED",
+  "hobbyroom_blocker": "NONE_FOR_CODEX_FREE_TESTSTRECKE; OPERATIONAL_PRODUCTION_BLOCKERS_REMAIN_SEPARATE",
   "next_action": {
-    "goal": "SYNC_PR107_TO_CURRENT_MAIN_THEN_RESTORE_HARDLOCK_BASE_WITHOUT_WEAKENING_SECURITY",
-    "action": "First fresh-read main and PR #107. Fast-forward the permanent dispatcher head to exactly the then-current main using the existing dispatcher design, with no code/content mutation. Then rerun/inspect hardlock and hardlock-base on that exact dispatcher head. If hardlock-base remains red, repair only the dispatcher/hardlock compatibility cause without weakening immutable path protection. Do not run Codex acceptance while dispatcher freshness or a required hardlock is red. After both checks are green and Codex capacity is available, rerun the missing durable E2E proof on the then-current head: durable one-article bytes/checks if needed, the separate real PPM quality-negative case, and the three-article run with remote-persistent evidence. Investigate BATCH_TEMPLATE_REUSE_BLOCKED from actual article bytes; never lower the distinctness threshold. Isolated acceptance must still stop at ACCEPTANCE_107008_CANONICAL_BOUNDARY. Full chat-file PASS still requires a legal canonical 107008/PSERC/ENDSTEMPEL path and byte-identical parent-chat file.",
-    "why": "The permanent dispatcher is no longer fresh against main after a status-only merge, its last hardlock-base is red, durable evidence is missing, the quality-negative test is missing, the three-article batch is blocked, and Codex is currently usage-limit blocked.",
+    "goal": "PRESERVE_CODEX_FREE_TESTSTRECKE_PASS_AND_KEEP_OPERATIONAL_BLOCKERS_SEPARATE",
+    "action": "Do not rebuild or rerun the codex-free quality/repair teststrecke unless a relevant file changes. Treat PR #339 + acceptance run 35398621624 as the current codex-free test authority. Any future real Codex/production run remains separately gated by current dispatcher/hardlock/Codex availability and durable-evidence requirements. No publish without explicit user authorization.",
+    "why": "The codex-free teststrecke is complete and PASS; rebuilding it would add risk without new evidence.",
     "forbidden": [
-      "run Codex while PR107 head differs from current main",
-      "claim PASS while any required hardlock is red",
-      "weaken or bypass immutable security paths or required checks",
-      "lower or remove BATCH_TEMPLATE_REUSE_BLOCKED thresholds",
-      "accept non-remote evidence as durable",
-      "bypass ACCEPTANCE_107008_CANONICAL_BOUNDARY",
-      "start the production 7-item batch for this acceptance",
-      "publish or write to WordPress"
+      "weaken PPM/LT/content/design thresholds",
+      "treat repairable quality findings as terminal project blockers",
+      "claim REAL_CODEX_REPAIR_PROVEN from deterministic test worker evidence",
+      "publish or write to WordPress",
+      "use isolated acceptance to bypass canonical 107008"
     ]
   },
   "hobbyroom_pr": 331,
@@ -406,5 +408,70 @@
     "publish_allowed": false,
     "latest_terminal_comment": "5735784162",
     "incomplete_reason": "Required PRE_REPAIR_ARTICLE_BASE64, REPAIR_FINDINGS_JSON_BASE64 and FINAL_ARTICLE_BASE64 were replaced by output-limit placeholders; the contract therefore does not permit REAL_CODEX_REPAIR_PROVEN."
+  },
+  "system4a_codex_free_teststrecke": {
+    "status": "PASS",
+    "scope": "TEST_ONLY_NO_CODEX_NO_PUBLISH_NO_PRODUCTION_RULE_CHANGE",
+    "main_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
+    "pr_339_merged": true,
+    "pr_339_merge_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
+    "acceptance_run_id": 35398621624,
+    "acceptance_result": "PASS",
+    "machine_route_no_codex_marker": "SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_IN_TEST",
+    "quality_negative": {
+      "status": "BLOCKED_AS_EXPECTED",
+      "checker": "PPM679",
+      "finding": "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
+      "observed_ratio": 0.0425531914893617,
+      "maximum_ratio": 0.02,
+      "repair_owner": "DRAFT_WORKER",
+      "terminal_block": false
+    },
+    "multifinding_repair": {
+      "status": "PASS",
+      "required_findings": [
+        "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
+        "BLOCKED_KNOWN_SHORT_CONCLUSION",
+        "BLOCKED_WAVE2_CONCLUSION_BALANCE",
+        "BLOCKED_WAVE2_TABLE_VALUE"
+      ],
+      "workshop_return_count": 2,
+      "same_article_continuity": true,
+      "prebuilt_final_input_used": false,
+      "final_languagetool": "PASS",
+      "final_ppm679": "PASS",
+      "final_conclusion_ratio": 0.11326860841423948,
+      "real_beratung_conclusion_minimum": 0.1,
+      "repair_proof_level": "REPAIR_ROUTING_PROVEN",
+      "live_codex_repair_proven": false
+    },
+    "three_article_route": {
+      "status": "PASS",
+      "languagetool": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "ppm679": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ],
+      "revisions": [
+        1,
+        2,
+        1
+      ],
+      "batch_distinctness_workshop_policy": "RETURN_TO_DRAFT_WORKER_SAME_ARTICLE_UNTIL_PASS",
+      "pr339_test_only_fix_present": true
+    },
+    "positive_reference": {
+      "ref": "isolated_system4/testdata/article_quality_reference_putzplatzmatten_20260918.txt",
+      "scope": "CONTENT_ONLY_STRUCTURE_NOT_ASSERTED",
+      "production_pass_claimed": false
+    },
+    "production_code_changed": false,
+    "quality_thresholds_changed": false,
+    "publish_allowed": false
   }
 }
