@@ -8,7 +8,7 @@
   "authoritative_branch": "hobbyroom/konzept-null-startmaster0102-isolated",
   "authoritative_head": "ef0afa9f739f6396015eb0897841f3730460917f",
   "bound_batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
-  "current_status": "DIRECT_IMPORT_FILE_PASS_READY_FOR_CHAT_DELIVERY",
+  "current_status": "FINAL_DIRECT_IMPORT_FILE_DELIVERED_AWAIT_WORDPRESS_IMPORT_TEST",
   "latest_authoritative_run": {
     "workflow": "Konzept Null Build System4 Direct Import",
     "run_id": 35436228571,
@@ -38,10 +38,15 @@
     "plugin_version_verified_against": "0.28.23",
     "publish_allowed": false
   },
-  "first_open_blocker": null,
-  "next_action": "DELIVER_EXACT_FINAL_FILE_TO_USER_CHAT",
+  "first_open_blocker": "EXTERNAL_WORDPRESS_IMPORT_RESULT_NOT_YET_PROVIDED",
+  "next_action": "USER_WORDPRESS_IMPORT_TEST_EXACT_FINAL_FILE",
   "wordpress_write_allowed": false,
   "publish_allowed": false,
   "codex_allowed": false,
-  "free_workflow_decisions": false
+  "free_workflow_decisions": false,
+  "chat_delivery": {
+    "filename": "SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json",
+    "sha256": "6cbe4f5cf54f0332701d7e11bd1962b192fe1a896dc389dbfbe896ca02ea880a",
+    "status": "EXACT_ARTIFACT_MATERIALIZED_FOR_USER"
+  }
 }
