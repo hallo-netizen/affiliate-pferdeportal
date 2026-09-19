@@ -1,0 +1,12 @@
+{
+  "job_id": "concept-agent-test-001",
+  "title": "Boxenmatten für Pferde richtig auswählen",
+  "keyword": "Boxenmatten für Pferde",
+  "article_type": "Beratung",
+  "category": "boxenmatten-beratung",
+  "internal_links": [
+    "/pferdehaltung/",
+    "/stall/",
+    "/boden/"
+  ]
+}
