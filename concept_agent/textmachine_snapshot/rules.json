@@ -1,0 +1,16 @@
+{
+  "snapshot_contract": "CONCEPT_AGENT_TEXTMACHINE_SNAPSHOT_V1",
+  "source_mode": "READ_ONLY_INSPIRED_COPY",
+  "article_type_rules_reference_sha256": "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f",
+  "table_contract_reference_sha256": "1ab3e892c37e5a48517519afcccbf8ec01b9f08da141eef93d577acd456756c7",
+  "ppm_version_reference": "6.7.9",
+  "languagetool_version_reference": "6.8",
+  "rules": {
+    "required_internal_links": "EXACT_FROM_JOB",
+    "external_links_allowed": false,
+    "mandatory_table": true,
+    "article_type_structure_required": true,
+    "source_bound_facts_required": true,
+    "same_article_repair_only": true
+  }
+}
