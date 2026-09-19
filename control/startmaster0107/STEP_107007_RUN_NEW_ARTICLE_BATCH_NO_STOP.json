@@ -58,7 +58,7 @@
     },
     {
       "ref": "isolated_system4/parent_start.py",
-      "sha256": "a3b7a0b0142e6dfe6c52a8cb233adaee11bf41a172b67d1a1c48178518bd95e6"
+      "sha256": "899056b86c09a171609c10851e0a66e41c02fc60f5e889e38c15ee3a481a9ab5"
     },
     {
       "ref": "control/startmaster0107/system4_107007_entry.py",
