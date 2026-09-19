@@ -1,0 +1,50 @@
+name: Konzept Null Inspect WordPress Importer
+on:
+  push:
+    branches: [hobbyroom/konzept-null-startmaster0102-isolated]
+    paths: ['.github/workflows/konzept-null-inspect-wordpress-importer.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Print exact PSERC System4 importer contract
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import io,zipfile,pathlib,re
+          outer=pathlib.Path('control/startmaster0107/runtime_packages/PSERC-FIX.zip')
+          if not outer.is_file(): raise SystemExit('PSERC_FIX_MISSING')
+          def walk(raw,label):
+            with zipfile.ZipFile(io.BytesIO(raw)) as z:
+              for n in z.namelist():
+                b=z.read(n)
+                if n.lower().endswith('.zip'):
+                  try: walk(b,label+'!'+n)
+                  except zipfile.BadZipFile: pass
+                  continue
+                if not n.lower().endswith('.php'): continue
+                try: t=b.decode('utf-8')
+                except: continue
+                if 'PSERC_SYSTEM4_CONTRACT_INVALID' not in t and 'ENDSTAMP_CONTRACT' not in t: continue
+                print('FILE',label+'!'+n)
+                lines=t.splitlines()
+                hits=[i for i,l in enumerate(lines) if 'PSERC_SYSTEM4_CONTRACT_INVALID' in l or 'ENDSTAMP_CONTRACT' in l or 'PSERC_SYSTEM4_' in l]
+                ranges=[]
+                for i in hits:
+                  a=max(0,i-80); b=min(len(lines),i+140)
+                  ranges.append((a,b))
+                merged=[]
+                for a,b in ranges:
+                  if merged and a<=merged[-1][1]: merged[-1]=(merged[-1][0],max(merged[-1][1],b))
+                  else: merged.append((a,b))
+                for a,b in merged:
+                  print('---LINES',a+1,b)
+                  for j in range(a,b): print(f'{j+1}: {lines[j]}')
+          walk(outer.read_bytes(),outer.name)
+          PY
