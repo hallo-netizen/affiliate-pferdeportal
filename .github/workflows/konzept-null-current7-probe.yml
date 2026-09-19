@@ -1,0 +1,116 @@
+name: Konzept Null Current 7 Probe
+
+on:
+  push:
+    branches:
+      - hobbyroom/konzept-null-startmaster0102-isolated
+    paths:
+      - 'konzept_null/CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json'
+      - '.github/workflows/konzept-null-current7-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  current7-probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate exact current 7 metadata binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('konzept_null/CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json')
+          d=json.loads(p.read_text())
+          assert d['contract']=='KONZEPT_NULL_CURRENT_OPEN_7_WORDPRESS_METADATA_V1'
+          assert d['batch_sha256']=='7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a'
+          assert d['item_count']==7 and len(d['items'])==7
+          assert d['publish_allowed'] is False
+          assert d['source']['source_status']=='READY_FOR_TEXTMACHINE_METADATA_INTAKE'
+          assert d['source']['source_ref']=='main@a0cb23a1611202fd75395a785385962ce7ae1900'
+          assert len({x['plan_slot'] for x in d['items']})==7
+          print('CURRENT_OPEN_7_METADATA_BINDING_PASS')
+          PY
+
+      - name: Exact Konzept Null entry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 konzept_null/konzept_null_runner.py preflight
+          python3 konzept_null/konzept_null_runner.py root
+
+      - name: Initialize current 7 batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          state=$(python3 konzept_null/konzept_null_runner.py init konzept_null/CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json | tail -1)
+          test -f "$state"
+          echo "STATE=$state" >> "$GITHUB_ENV"
+          python3 konzept_null/konzept_null_runner.py next "$state"
+          python3 - "$state" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          assert d['article_count']==7
+          assert d['input_binding_sha256']=='7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a'
+          assert d['completed']==['METADATA']
+          assert d['next_allowed_step']=='CREATE_SOURCE_ORDER'
+          assert d['publish_allowed'] is False
+          assert d['wordpress_access_allowed'] is False
+          print('CURRENT7_EXACT_ENTRY_PASS')
+          PY
+
+      - name: Structural full-chain probe without Codex
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - "$STATE" <<'PY'
+          import json,subprocess,sys
+          from pathlib import Path
+          state=Path(sys.argv[1])
+          stages=[
+            'SOURCE_ORDER','RESEARCH','SOURCE_SNAPSHOT','FACT_PACK','CLAIM_BINDING',
+            'CANONICAL_ARTICLE','PRODUCTION_PLAN_V4','LANGUAGETOOL_6_8','PPM_6_7_9','LOCAL_TEST_PACKAGE'
+          ]
+          for stage in stages:
+              before=json.loads(state.read_text())
+              artifact=state.parent/f'PROBE_{stage}.json'
+              artifact.write_text(json.dumps({
+                  'contract':'KONZEPT_NULL_STRUCTURAL_PROBE_ONLY_V1',
+                  'stage':stage,
+                  'real_article_content':False,
+                  'codex_used':False,
+                  'source_batch_sha256':'7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a'
+              }),encoding='utf-8')
+              cp=subprocess.run(['python3','konzept_null/konzept_null_runner.py','stage',str(state),stage,str(artifact)],text=True,capture_output=True)
+              print(cp.stdout,end=''); print(cp.stderr,end='',file=sys.stderr)
+              assert cp.returncode==0
+          cp=subprocess.run(['python3','konzept_null/konzept_null_runner.py','finalize',str(state)],text=True,capture_output=True)
+          print(cp.stdout,end=''); print(cp.stderr,end='',file=sys.stderr)
+          assert cp.returncode==0
+          final=json.loads((state.parent/'KONZEPT_NULL_LOCAL_TEST_PACKAGE.json').read_text())
+          assert final['article_count']==7
+          assert final['terminal_boundary']=='BEFORE_WORDPRESS'
+          assert final['publish_allowed'] is False
+          assert final['wordpress_access_allowed'] is False
+          print('CURRENT7_STRUCTURAL_FULL_CHAIN_PROBE_PASS_NO_CODEX')
+          PY
+
+      - name: Prove wrong jump blocked
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf konzept_null/work
+          state=$(python3 konzept_null/konzept_null_runner.py init konzept_null/CURRENT_OPEN_7_WORDPRESS_METADATA_20260919.json | tail -1)
+          printf '{"probe":true}' > /tmp/bad.json
+          set +e
+          out=$(python3 konzept_null/konzept_null_runner.py stage "$state" RESEARCH /tmp/bad.json 2>&1)
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+          echo "$out" | grep -q 'STAGE_ORDER_VIOLATION_EXPECTED_SOURCE_ORDER'
+          echo 'CURRENT7_NEGATIVE_WRONG_JUMP_BLOCKED_PASS'
