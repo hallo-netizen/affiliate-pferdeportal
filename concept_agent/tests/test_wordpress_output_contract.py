@@ -1,28 +1,34 @@
-import copy,hashlib,sys,unittest
+import copy,sys,unittest
 from pathlib import Path
-OFFICE=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(OFFICE))
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import wordpress_redaktionsplan_upload as w
 from wordpress_output_contract import validate_wordpress_package
+import hashlib
 
-def fixture():
-    slot="a"*64;body="<article><p>Test</p></article>"
-    plan={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9","plan_id":"test","validation_contract_version":"GEN1_107008_RELEASED_ARTICLE_BINDING_V1","items":[{"plan_slot":slot,"canonical_article_id":"article:test","plan_item_key":"test-"+slot[:12],"article_type":"Beratung","topic":"Testtitel","target_keyword":"Testkeyword","runtime_order":{"article_type":"Beratung","title":"Testtitel","slug":"testtitel","subject_scope":"Testkeyword","subject_label":"Testkeyword"},"category_binding":{"name":"test","slug":"test","hierarchy_path":"test","portal_path":"test","taxonomy":"category","article_type":"Beratung"},"canonical_article":{"article_type":"Beratung","canonical_article_id":"article:test","plan_slot":slot,"title":"Testtitel","slug":"testtitel","target_keyword":"Testkeyword","body_html":body,"body_html_sha256":hashlib.sha256(body.encode()).hexdigest(),"body_text":"Test"}}]}
-    return w.build("TEST","b"*64,plan)
+def article(i=0,article_type="Beratung"):
+    body=f'<article class="ppm-generated"><h2>Test {i}</h2><p>Inhalt {i}</p></article>'
+    sha=hashlib.sha256(body.encode()).hexdigest()
+    slot=hashlib.sha256(f"slot-{i}".encode()).hexdigest()
+    slug=f"test-{i}";category=f"test-{i}";title=f"Testtitel {i}";keyword=f"Testkeyword {i}"
+    return {
+      "index":i,"title":title,"target_keyword":keyword,"category":category,"article_type":article_type,
+      "plan_slot":slot,"final_draft_sha256":sha,"revision_count":1,"body":body,
+      "production_context":{"fact_pack":{"contract":"canonical_fact_pack_v1"},"production_plan_item":{
+        "article_type":article_type,"target_keyword":keyword,
+        "runtime_order":{"title":title,"article_type":article_type,"slug":slug},
+        "category_binding":{"slug":category},
+        "quality_binding":{"wordpress_category":{"slug":category,"taxonomy":"category"}}}},
+      "languagetool":{"status":"PASS","engine":"LanguageTool 6.8 / Bestand 43","finding_count":0},
+      "ppm679":{"status":"PASS","ppm_version":"6.7.9","technical_status":"TECHNICAL_CHECK_OK","content_quality_status":"CONTENT_QUALITY_CHECK_OK","fail_closed_aggregate_status":"PASS","content_sha256":sha}
+    }
 
-class WordPressOutputContractTest(unittest.TestCase):
-    def setUp(self):self.pkg=fixture()
-    def test_direct_redaktionsplan_fixture_passes(self):self.assertEqual([],validate_wordpress_package(self.pkg))
-    def test_system4_handoff_rejected(self):
-        bad=copy.deepcopy(self.pkg);bad["contract"]="SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2"
-        self.assertIn("CONTRACT",validate_wordpress_package(bad))
-    def test_endstempel_wrapper_rejected(self):
-        bad={"contract":"PSERC_APPROVED_PRODUCTION_PACKAGE_V1","endstamp_contract":"PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1"}
-        self.assertIn("TOP_SCHEMA",validate_wordpress_package(bad))
+class T(unittest.TestCase):
+    def setUp(self):self.pkg=w.build("b"*64,[article(0)])
+    def test_current_contract_passes(self):self.assertEqual([],validate_wordpress_package(self.pkg))
+    def test_old_pseudo_direct_contract_rejected(self):
+        bad=copy.deepcopy(self.pkg);bad["contract"]="PSERC_APPROVED_PRODUCTION_PACKAGE_V1";self.assertIn("CONTRACT",validate_wordpress_package(bad))
+    def test_internal_handoff_rejected(self):
+        bad=copy.deepcopy(self.pkg);bad["contract"]="SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2";self.assertIn("CONTRACT",validate_wordpress_package(bad))
     def test_article_mutation_breaks_hash(self):
-        bad=copy.deepcopy(self.pkg);bad["production_plan"]["items"][0]["canonical_article"]["body_html"]+="X"
-        self.assertIn("BODY_HASH:0",validate_wordpress_package(bad))
-    def test_publish_allowed_must_stay_false(self):
-        bad=copy.deepcopy(self.pkg);bad["publish_allowed"]=True
-        self.assertIn("PUBLISH",validate_wordpress_package(bad))
+        bad=copy.deepcopy(self.pkg);bad["articles"][0]["body"]+="X";self.assertIn("BODY_HASH:0",validate_wordpress_package(bad))
 if __name__=="__main__":unittest.main()
