@@ -11,19 +11,15 @@ def _normalise_surface(value: str) -> str:
 def _weak_beratung_title(title: str, keyword: str) -> bool:
     title_n=_normalise_surface(title)
     kw=_normalise_surface(keyword)
+    # Nur wirklich nackte Aktions-Titel blockieren. Bereits natürliche/gute Titel
+    # (z. B. "So wählst du geeignete ...", "Das Wichtigste über ...",
+    # "Wissenswertes über ...") bleiben unverändert.
     weak={
-        f"so findest du {kw}",
-        f"so wählst du {kw}",
-        f"so waehlst du {kw}",
         f"{kw} wählen",
         f"{kw} waehlen",
         f"{kw} auswählen",
         f"{kw} auswaehlen",
         f"{kw} finden",
-        f"das wichtigste über {kw}",
-        f"das wichtigste ueber {kw}",
-        f"wissenswertes über {kw}",
-        f"wissenswertes ueber {kw}",
     }
     return title_n in weak
 
