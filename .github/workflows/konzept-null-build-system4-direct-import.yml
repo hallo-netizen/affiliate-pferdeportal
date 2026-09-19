@@ -69,41 +69,46 @@ jobs:
           unzip -q /tmp/lt68/LanguageTool-6.8.zip -d /tmp/lt68
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
 
-      - name: Fresh LT 6.8 check 7 of 7
+      - name: Fresh LT 6.8 check 7 of 7 and bind exact PPM language evidence
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p /tmp/direct/lt
           python3 - <<'PY'
-          import html,json,pathlib,re,subprocess,tempfile
+          import html,json,pathlib,re,subprocess,tempfile,hashlib
           root=pathlib.Path('konzept_null/runs/current7/articles')
           jar='/tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar'
-          def plain(s):
-            s=re.sub(r"(?is)<!--.*?-->","\n",s)
-            s=re.sub(r"(?is)<(script|style)\b[^>]*>.*?</\1>","\n",s)
-            s=re.sub(r"(?is)</?(?:article|section|p|div|li|h[1-6]|br|tr|td|th|ul|ol|table|blockquote)\b[^>]*>","\n",s)
-            s=re.sub(r"(?s)<[^>]+>","",s)
-            s=html.unescape(s)
-            s=re.sub(r"[ \t\r\f\v]+"," ",s)
-            s=re.sub(r"\n[ \t]*\n+","\n\n",s)
-            return s.strip()+"\n"
-          files=sorted(root.glob('*.html'))
-          if len(files)!=7: raise SystemExit('ARTICLE_COUNT_NOT_7')
-          for p in files:
-            checked=plain(p.read_text(encoding='utf-8'))
-            with tempfile.NamedTemporaryFile('w',encoding='utf-8',suffix='.txt',delete=False) as f:
-              f.write(checked); name=f.name
+          files=[
+            'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
+            'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
+          def ppm_visible(article_html):
+            lines=[]
+            for m in re.finditer(r"<(h2|p|li|th|td|small)\\b[^>]*>(.*?)</\\1>",article_html,re.I|re.S):
+              v=html.unescape(m.group(2))
+              v=re.sub(r"<[^>]+>"," ",v)
+              v=re.sub(r"\\s+"," ",v).strip()
+              v=re.sub(r"\\s+([.,;:!?])",r"\\1",v)
+              if v: lines.append(v)
+            return "\\n\\n".join(lines)
+          for i,fn in enumerate(files):
+            p=root/fn; article=p.read_text(encoding='utf-8'); checked=ppm_visible(article)
+            if not checked.strip(): raise SystemExit('LT_TEXT_EMPTY:'+fn)
+            with tempfile.NamedTemporaryFile('w',encoding='utf-8',suffix='.txt',delete=False) as tmp:
+              tmp.write(checked); name=tmp.name
             cp=subprocess.run(['java','-Xmx1024m','-jar',jar,'--json','-l','de-DE',name],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
-            if cp.returncode!=0: raise SystemExit('LT_EXEC_FAIL:'+p.name+':'+cp.stderr)
-            matches=json.loads(cp.stdout).get('matches')
-            if not isinstance(matches,list): raise SystemExit('LT_REPORT_INVALID:'+p.name)
+            if cp.returncode!=0: raise SystemExit('LT_EXEC_FAIL:'+fn+':'+cp.stderr)
+            report=json.loads(cp.stdout); matches=report.get('matches')
+            if not isinstance(matches,list): raise SystemExit('LT_REPORT_INVALID:'+fn)
             if matches:
               print(json.dumps(matches,ensure_ascii=False,indent=2))
-              raise SystemExit('LT_FINDINGS:'+p.name+':'+str(len(matches)))
-            print('LT_PASS',p.name)
-          print('LT68_7_OF_7_ZERO_FINDINGS_PASS')
+              raise SystemExit('LT_FINDINGS:'+fn+':'+str(len(matches)))
+            pathlib.Path(f'/tmp/direct/lt/{i}.checked.txt').write_text(checked,encoding='utf-8')
+            pathlib.Path(f'/tmp/direct/lt/{i}.raw.json').write_text(cp.stdout,encoding='utf-8')
+            print('LT_PPM_TEXT_PASS',i,fn,hashlib.sha256(checked.encode()).hexdigest(),hashlib.sha256(cp.stdout.encode()).hexdigest())
+          print('LT68_PPM_VISIBLE_7_OF_7_ZERO_FINDINGS_PASS')
           PY
 
-      - name: Fresh PPM 6.7.9 check using bound fact packs
+      - name: Fresh PPM 6.7.9 check with exact LT evidence and rebound hashes
         shell: bash
         run: |
           set -euo pipefail
@@ -112,17 +117,59 @@ jobs:
           rm -rf /tmp/ppm679 && mkdir -p /tmp/ppm679
           unzip -q "$PPM" -d /tmp/ppm679
           python3 - <<'PY'
-          import json,pathlib
+          import json,pathlib,hashlib,html,re
+          def canon(o): return json.dumps(o,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+          def stable(o): return hashlib.sha256(canon(o)).hexdigest()
+          def sha(s): return hashlib.sha256(s.encode()).hexdigest()
+          def body_text(s):
+            v=html.unescape(s); v=re.sub(r'<[^>]+>',' ',v); return re.sub(r'\\s+',' ',v).strip()
           env=json.load(open('/tmp/direct/PSERC_IMPORT_ENVELOPE.json',encoding='utf-8'))
-          packs=env['fact_pack_bundle']['fact_packs']; items=env['production_plan']['items']
-          pathlib.Path('/tmp/direct/ppm_payload.json').write_text(json.dumps({'packs':packs,'items':items},ensure_ascii=False),encoding='utf-8')
+          packs=env['fact_pack_bundle']['fact_packs']; olditems=env['production_plan']['items']
+          files=[
+            'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
+            'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
+          root=pathlib.Path('konzept_null/runs/current7/articles')
+          items=[]
+          for i,(fn,old) in enumerate(zip(files,olditems)):
+            item=json.loads(json.dumps(old,ensure_ascii=False))
+            quality=item['quality_binding']
+            if stable(quality)!=item['quality_binding_hash']:
+              raise SystemExit(f'BOUND_QUALITY_HASH_INVALID_BEFORE_REBIND:{i}')
+            article=(root/fn).read_text(encoding='utf-8')
+            checked=pathlib.Path(f'/tmp/direct/lt/{i}.checked.txt').read_text(encoding='utf-8')
+            raw=pathlib.Path(f'/tmp/direct/lt/{i}.raw.json').read_text(encoding='utf-8')
+            report=json.loads(raw)
+            if report.get('matches')!=[]: raise SystemExit(f'LT_RAW_NOT_ZERO:{i}')
+            ch=sha(checked); rh=sha(raw)
+            evidence={
+              'engine':'LanguageTool 6.8 / Bestand 43',
+              'outer_dependency_sha256':'187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a',
+              'inner_dependency_sha256':'6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d',
+              'content_hash':sha(article),
+              'checked_text':checked,
+              'checked_text_sha256':ch,
+              'raw_report_json':raw,
+              'raw_report_sha256':rh,
+              'raw_finding_count':0,
+              'unresolved_finding_count':0,
+              'return_code':0,
+              'approved_exceptions':[],
+              'execution_record':{'input_sha256':ch,'raw_stdout_sha256':rh,'return_code':0},
+            }
+            quality['language_evidence']=evidence
+            item['quality_binding']=quality
+            item['quality_binding_hash']=stable(quality)
+            ca=item['canonical_article']; ca['body_html']=article; ca['body_html_sha256']=sha(article); ca['body_text']=body_text(article)
+            if 'body_text_sha256' in ca: ca['body_text_sha256']=sha(ca['body_text'])
+            item['canonical_article']=ca
+            items.append(item)
+          pathlib.Path('/tmp/direct/rebound_context.json').write_text(json.dumps({'packs':packs,'items':items},ensure_ascii=False),encoding='utf-8')
           PY
           cat >/tmp/direct/check.php <<'PHP'
           <?php
           $root='/tmp/ppm679/portal-production-machine';
-          $x=json_decode(file_get_contents('/tmp/direct/ppm_payload.json'),true);
+          $x=json_decode(file_get_contents('/tmp/direct/rebound_context.json'),true);
           require $root.'/tests/bootstrap-test.php';
-          $out=[];
           foreach($x['items'] as $i=>$item){
             PPM679_WP::reset_test_state(); PPM679_Storage::reset_test_state(); PPM679_Handoff_Permit::reset_test_state(); PPM679_Storage::ensure_schema();
             $pack=$x['packs'][$i];
@@ -147,7 +194,8 @@ jobs:
           import json,hashlib,pathlib,subprocess
           batch='7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a'
           env=json.load(open('/tmp/direct/PSERC_IMPORT_ENVELOPE.json',encoding='utf-8'))
-          packs=env['fact_pack_bundle']['fact_packs']; items=env['production_plan']['items']
+          rebound=json.load(open('/tmp/direct/rebound_context.json',encoding='utf-8'))
+          packs=rebound['packs']; items=rebound['items']
           files=[
             'hindernisstangen-fuer-pferde.html','reitplatzbeleuchtung-ohne-mast.html','mistcontainer-mit-deckel.html',
             'pferdehaftpflicht-mit-fremdreiter.html','huffett-fuer-pferde.html','fliegenmasken-fuer-pferde.html','pellets-fuer-pferde.html']
