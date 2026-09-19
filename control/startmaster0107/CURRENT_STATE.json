@@ -319,7 +319,7 @@
   "hobbyroom_blocker": "CODEX_USAGE_LIMIT; ARTICLE0_METADATA_DURABLE_BUT_ARTICLE_BYTES_NOT_DURABLE",
   "next_action": {
     "goal": "INTEGRATE_VALIDATED_RESTART_RECOVERY_AND_PRECODEX_START_HARDLOCK_ON_CURRENT_MAIN",
-    "action": "Port only the already-tested restart-recovery capsule/probe and pre-Codex start-hardlock candidate from test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e onto a fresh branch from current main b43ea18b33529c819c2b123c4610b4943c39240e. Reconcile only real main drift. Run the full no-Codex System4A acceptance, explicit process-death/restart negative-positive test, pre-Codex hardlock positive/negative matrix, deterministic entrance gate and immutable hardlock. Merge only if all required checks PASS. Then update CURRENT_STATE/START_HERE and stop before Codex.",
+    "action": "Port only the already-tested restart-recovery capsule/probe and pre-Codex start-hardlock candidate from test commit f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e onto a fresh branch from the then-current main after this status closeout. Reconcile only real main drift. Run the full no-Codex System4A acceptance, explicit process-death/restart negative-positive test, pre-Codex hardlock positive/negative matrix, deterministic entrance gate and immutable hardlock. Merge only if all required checks PASS. Then update CURRENT_STATE/START_HERE and stop before Codex.",
     "why": "The fix exists and passed on a test commit, but current main does not contain it. Rebuilding from scratch would violate KISS and lose tested evidence.",
     "forbidden": [
       "start Codex",
