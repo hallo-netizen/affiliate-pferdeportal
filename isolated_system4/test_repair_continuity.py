@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -15,6 +17,7 @@ import repair_proof_contract as repair_proof
 import real7_article0_quality_authority_probe
 import test_route_input_factory
 import verify_real7_multifinding_repair
+import workspace_recovery_capsule as recovery
 
 HERE = Path(__file__).resolve().parent
 
@@ -155,6 +158,88 @@ class RepairContinuityTests(unittest.TestCase):
                 self.assertEqual(state['checks']['mode'], 'FULL_PRODUCTION')
                 self.assertEqual(state['revision'], 2)
                 self.assertEqual(run_all.call_count, 2, 'same real checker must run again after repair')
+
+    def test_repair_required_survives_process_death_and_restores_same_article(self):
+        with tempfile.TemporaryDirectory(prefix='system4-restart-repair-') as td:
+            root = Path(td)
+            _, rows = _prepare_batch(root, 1)
+            workspace, generated, _ = rows[0]
+            state_before = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
+            repair = controller.production_checks.RepairRequired(
+                'languagetool',
+                [{'error_code': 'LANGUAGETOOL_FINDING', 'rule_id': 'GERMAN_SPELLER_RULE'}],
+            )
+            with mock.patch.object(controller.production_checks, 'run_all', side_effect=repair):
+                self.assertEqual(controller.cmd_fullcheck(workspace), 3)
+
+            stopped = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
+            self.assertEqual(stopped['phase'], 'REPAIR_REQUIRED')
+            self.assertEqual(stopped['revision'], 1)
+            self.assertEqual(stopped['checks']['repair_owner'], 'DRAFT_WORKER')
+            original_article = dict(stopped['article'])
+            original_findings = list(stopped['checks']['findings'])
+            original_checks_sha = recovery._sha_bytes(recovery._canon(stopped['checks']))
+            original_draft = stopped['draft_markdown']
+            original_draft_sha = stopped['draft_sha256']
+
+            capsule = root / 'article0-repair-required.recovery.json'
+            created = recovery.create_capsule(workspace, capsule)
+            self.assertEqual(created['workspace_identity']['phase'], 'REPAIR_REQUIRED')
+            self.assertEqual(created['workspace_identity']['revision'], 1)
+            self.assertEqual(created['workspace_identity']['draft_sha256'], original_draft_sha)
+
+            # Simulate the historical failure exactly: the original task/workspace is gone.
+            shutil.rmtree(workspace)
+            self.assertFalse(workspace.exists())
+
+            restarted_generated = root / 'restarted-generated'
+            cp = subprocess.run(
+                [
+                    sys.executable,
+                    str(HERE / 'restart_repair_probe.py'),
+                    str(capsule),
+                    str(workspace),
+                    str(restarted_generated),
+                ],
+                cwd=HERE.parent,
+                env=_env(),
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            self.assertEqual(cp.returncode, 0, cp.stdout + '\n' + cp.stderr)
+            probe = json.loads(cp.stdout.strip().splitlines()[-1])
+            self.assertEqual(probe['status'], 'PASS')
+            self.assertTrue(probe['new_process_restore_and_repair'])
+            self.assertTrue(probe['same_article'])
+
+            restored = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
+            self.assertEqual(restored['article'], original_article)
+            self.assertEqual(restored['phase'], 'CHECK_REQUIRED')
+            self.assertEqual(restored['revision'], 2)
+            self.assertNotEqual(restored['draft_sha256'], original_draft_sha)
+            self.assertNotEqual(restored['draft_markdown'], original_draft)
+
+            # The recovery capsule itself must preserve the exact pre-restart findings.
+            verified = recovery.verify_capsule(capsule)
+            self.assertEqual(
+                verified['workspace_identity']['checks_sha256'],
+                original_checks_sha,
+            )
+            self.assertEqual(
+                verified['workspace_identity']['draft_sha256'],
+                original_draft_sha,
+            )
+
+            passed = _pass_result(restored)
+            with mock.patch.object(controller.production_checks, 'run_all', return_value=passed):
+                self.assertEqual(controller.cmd_fullcheck(workspace), 0)
+            final = json.loads((workspace / 'state.json').read_text(encoding='utf-8'))
+            self.assertEqual(final['phase'], 'OUTPUT_GATE_REQUIRED')
+            self.assertEqual(final['checks']['status'], 'PASS')
+            self.assertEqual(final['revision'], 2)
+            self.assertEqual(final['article'], original_article)
 
     def test_broad_repair_is_blocked(self):
         with tempfile.TemporaryDirectory(prefix='system4-continuity-') as td:
