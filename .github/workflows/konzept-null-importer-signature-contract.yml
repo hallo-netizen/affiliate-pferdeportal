@@ -1,0 +1,42 @@
+name: Konzept Null Importer Signature Contract
+
+on:
+  push:
+    branches: [hobbyroom/konzept-null-startmaster0102-isolated]
+    paths: ['.github/workflows/konzept-null-importer-signature-contract.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect real importer signature enforcement
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import zipfile,io,pathlib,re
+          outer=pathlib.Path('control/startmaster0107/runtime_packages/PSERC-FIX.zip')
+          with zipfile.ZipFile(outer) as z:
+            for n in z.namelist():
+              if not n.endswith('.zip'): continue
+              raw=z.read(n)
+              try:
+                iz=zipfile.ZipFile(io.BytesIO(raw))
+              except: continue
+              for fn in iz.namelist():
+                if not fn.lower().endswith('.php'): continue
+                try: text=iz.read(fn).decode('utf-8')
+                except: continue
+                if 'ENDSTEMPEL' not in text and 'signature_b64' not in text and 'WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED' not in text: continue
+                print('FILE',fn)
+                lines=text.splitlines()
+                for i,line in enumerate(lines):
+                  if any(x in line for x in ['ENDSTEMPEL','signature_b64','WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED','signing_public_key','sodium_crypto_sign_verify','openssl_verify','package_payload_sha256']):
+                    a=max(0,i-4); b=min(len(lines),i+9)
+                    print('---',i+1)
+                    for j in range(a,b): print(f'{j+1}: {lines[j]}')
+          PY
