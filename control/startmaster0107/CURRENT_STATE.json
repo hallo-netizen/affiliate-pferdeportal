@@ -96,7 +96,13 @@
     "SYSTEM4A_MULTIFINDING_SAME_ARTICLE_TWO_WORKSHOP_RETURNS_PASS_RUN_35398621624",
     "SYSTEM4A_THREE_ARTICLE_DETERMINISTIC_ROUTE_LT_PPM_PASS_RUN_35398621624",
     "SYSTEM4A_BATCH_TEMPLATE_REUSE_WORKSHOP_LOOP_PR339_MERGED_A0CB23A1611202FD75395A785385962CE7AE1900",
-    "SYSTEM4A_POST_PR339_ACCEPTANCE_RUN_35398621624_PASS"
+    "SYSTEM4A_POST_PR339_ACCEPTANCE_RUN_35398621624_PASS",
+    "PR107_AUTO_CLOSED_DURING_DISPATCH_BASE_MAINTENANCE_20260919",
+    "PR342_PERMANENT_DISPATCH_REBUILT",
+    "PR342_FRESH_HARDLOCK_BASE_RUN_35427810716_PASS",
+    "PR340_STATUS_MERGED_FA70EA39B57FFA4BA5F7B3D722AA537FDEC328AA",
+    "PR340_HARDLOCK_RUN_35427693879_PASS",
+    "PR340_HARDLOCK_BASE_RUN_35427693887_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -202,36 +208,38 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "SYSTEM4A_CODEX_FREE_TESTSTRECKE_PASS_OPERATIONAL_PRODUCTION_STILL_BLOCKED",
+  "current_work_status": "E2E_PRECODEX_READY_USER_STOP_NO_CODEX_START",
   "current_execution_blocker": {
-    "code": "PR107_DISPATCHER_STALE_AND_HARDLOCK_BASE_FAIL",
-    "error_class": true,
-    "detail": "Codex-free System4A teststrecke is now PASS on main a0cb23a1611202fd75395a785385962ce7ae1900. PR #339 merged the test-only batch workshop loop. Post-merge acceptance run 35398621624 PASS proved: real PPM679 duplicate-sentence quality negative blocked as expected; all four observed quality findings route to DRAFT_WORKER; same article returned to workshop twice; final real LanguageTool 6.8 and PPM 6.7.9 PASS; deterministic 3-article route LT/PPM PASS. Operational production/Codex blockers remain separate: PR107 dispatcher/hardlock history and missing durable real-Codex evidence are not resolved by this test-only pass.",
-    "dispatcher_pr": 107,
-    "dispatcher_head_sha": "6a4ce1cecec25a2b228125695bc94d4398d638d3",
-    "dispatcher_base_sha": "e3ad9d23ca0c6a0bf2158b71b1dfa45e28c93fc0",
-    "hardlock_base_run_id": 35394728634,
-    "hardlock_failure": "IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED",
-    "adapter_pr": 335,
-    "adapter_merge_sha": "6a4ce1cecec25a2b228125695bc94d4398d638d3",
-    "one_article_status": "PASS_REPORTED_DURABLE_BODY_UNAVAILABLE",
-    "one_batch_status": "PASS_REPORTED",
-    "three_article_individual_status": "3_OF_3_PASS_REPORTED",
-    "three_batch_status": "TEST_LAYER_REPAIR_LOOP_RESOLVED_BY_PR339",
+    "code": "USER_EXPLICITLY_FORBIDS_CODEX_START_CURRENT_TURN",
+    "error_class": false,
+    "detail": "All known technical pre-Codex blockers are cleared. Main is fa70ea39b57ffa4ba5f7b3d722aa537fdec328aa. The former permanent dispatcher PR #107 auto-closed when its maintenance base temporarily reached its then-head; main was not modified by that event. The permanent dispatcher was rebuilt as PR #342 with head exactly current main and base a0cb23a1611202fd75395a785385962ce7ae1900. Fresh hardlock-base run 35427810716 passed all steps. PR #340 also had hardlock 35427693879 PASS and hardlock-base 35427693887 PASS. The user explicitly ordered preparation up to, but not including, Codex start.",
+    "dispatcher_pr": 342,
+    "superseded_dispatcher_pr": 107,
+    "dispatcher_head_sha": "fa70ea39b57ffa4ba5f7b3d722aa537fdec328aa",
+    "dispatcher_base_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
+    "hardlock_base_run_id": 35427810716,
+    "hardlock_base_status": "PASS",
+    "main_hardlock_run_id": 35427693879,
+    "main_hardlock_status": "PASS",
+    "main_hardlock_base_run_id": 35427693887,
+    "main_hardlock_base_status": "PASS",
+    "codex_free_acceptance_run_id": 35398621624,
+    "codex_free_acceptance_status": "PASS",
+    "batch_workshop_loop": "PASS_TEST_LAYER",
     "quality_negative_status": "PASS_BLOCKED_AS_EXPECTED_RUN_35398621624",
     "technical_negative_status": "PASS_23_OF_23_REPORTED",
+    "real_codex_durable_evidence_status": "STILL_REQUIRED",
     "canonical_107008_status": "BLOCKED_AS_DESIGNED",
-    "durable_evidence_status": "REAL_CODEX_DURABLE_EVIDENCE_STILL_INCOMPLETE_SEPARATE_FROM_CODEX_FREE_TESTSTRECKE",
     "codex_start_allowed": false,
-    "fresh_user_codex_approval_required": false,
+    "fresh_user_codex_approval_required": true,
     "publish_allowed": false
   },
   "external_execution_blocker": {
-    "code": "CODEX_USAGE_LIMIT_REACHED",
-    "evidence": "PR107 issuecomment-5736330732",
-    "classification": "EXTERNAL_EXECUTION_AVAILABILITY_NOT_PROJECT_FAILURE",
-    "effect": "The requested durable one-article and quality-negative rerun cannot currently execute. This does not resolve the PR107 hardlock-base failure or the three-article batch reuse blocker.",
-    "resolved": false
+    "code": "CODEX_CAPACITY_UNKNOWN_NOT_RECHECKED",
+    "evidence": "Last observed usage-limit response was PR107 issuecomment-5736330732 on 2026-09-18. No Codex start was attempted on 2026-09-19 because the user explicitly forbids it in this turn.",
+    "classification": "EXTERNAL_AVAILABILITY_UNKNOWN_NOT_PROJECT_FAILURE",
+    "effect": "Capacity will be known only when a later explicit user authorization permits the real Codex start. It does not block pre-Codex readiness.",
+    "resolved": null
   },
   "superseded_live_findings": [
     {
@@ -310,22 +318,25 @@
     "sequence_107008_reached": false,
     "publish_performed": false
   },
-  "last_safe_main_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
-  "last_safe_change": "PR #339 merged the test-only batch workshop loop. Post-merge System 4A acceptance run 35398621624 PASS: real PPM679 quality-negative duplicate-sentence finding blocked as expected and returned to DRAFT_WORKER; the same article returned to workshop twice and then passed real LT 6.8 + PPM 6.7.9; 3-article deterministic route ended LT/PPM PASS for all three. No production/quality threshold/workflow/publish rule changed.",
-  "hobbyroom_status": "SYSTEM4A_CODEX_FREE_TESTSTRECKE_PASS",
+  "last_safe_main_sha": "fa70ea39b57ffa4ba5f7b3d722aa537fdec328aa",
+  "last_safe_change": "PR #340 merged the codex-free System4A status closeout on top of PR #339. PR #342 then rebuilt the permanent dispatcher after PR #107 auto-closed during base maintenance; fresh hardlock-base run 35427810716 PASS. No Codex, article production, threshold, or publish action occurred.",
+  "hobbyroom_status": "E2E_PRECODEX_READY_USER_STOP",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "NONE_FOR_CODEX_FREE_TESTSTRECKE; OPERATIONAL_PRODUCTION_BLOCKERS_REMAIN_SEPARATE",
+  "hobbyroom_blocker": "NONE_TECHNICAL_BEFORE_CODEX; USER_STOP_ONLY",
   "next_action": {
-    "goal": "PRESERVE_CODEX_FREE_TESTSTRECKE_PASS_AND_KEEP_OPERATIONAL_BLOCKERS_SEPARATE",
-    "action": "Do not rebuild or rerun the codex-free quality/repair teststrecke unless a relevant file changes. Treat PR #339 + acceptance run 35398621624 as the current codex-free test authority. Any future real Codex/production run remains separately gated by current dispatcher/hardlock/Codex availability and durable-evidence requirements. No publish without explicit user authorization.",
-    "why": "The codex-free teststrecke is complete and PASS; rebuilding it would add risk without new evidence.",
+    "goal": "START_REAL_DURABLE_CODEX_ACCEPTANCE_ONLY_AFTER_NEW_EXPLICIT_USER_APPROVAL",
+    "action": "Do not start Codex now. On a later explicit user start command, first fresh-read current main and permanent dispatcher PR #342 and require exact head equality plus green hardlock/hardlock-base. Then start the isolated real Codex 1+3 acceptance: fresh real articles, real LanguageTool 6.8 and PPM 6.7.9, durable remote article bytes/evidence, separate real PPM quality-negative case, and same-article repair for any BATCH_TEMPLATE_REUSE_BLOCKED until pass or genuine hard blocker. Keep canonical 107008 fail-closed. Do not start the production 7-item batch and do not publish.",
+    "why": "The codex-free teststrecke and dispatcher security are green. The remaining evidence requires a real Codex run, which the user explicitly forbids in this turn.",
     "forbidden": [
-      "weaken PPM/LT/content/design thresholds",
-      "treat repairable quality findings as terminal project blockers",
-      "claim REAL_CODEX_REPAIR_PROVEN from deterministic test worker evidence",
+      "start Codex in this turn",
+      "start real article production in this turn",
+      "start production 7-item batch",
       "publish or write to WordPress",
-      "use isolated acceptance to bypass canonical 107008"
+      "weaken hardlock or hardlock-base",
+      "lower batch distinctness threshold",
+      "bypass canonical 107008",
+      "claim durable real-Codex evidence before it exists"
     ]
   },
   "hobbyroom_pr": 331,
@@ -472,6 +483,20 @@
     },
     "production_code_changed": false,
     "quality_thresholds_changed": false,
+    "publish_allowed": false
+  },
+  "precodeex_ready_20260919": {
+    "status": "READY_AT_EXACT_STOP_BEFORE_CODEX",
+    "main_sha": "fa70ea39b57ffa4ba5f7b3d722aa537fdec328aa",
+    "dispatcher_pr": 342,
+    "dispatcher_head_sha": "fa70ea39b57ffa4ba5f7b3d722aa537fdec328aa",
+    "dispatcher_base_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
+    "dispatcher_hardlock_base_run": 35427810716,
+    "main_hardlock_run": 35427693879,
+    "main_hardlock_base_run": 35427693887,
+    "codex_free_acceptance_run": 35398621624,
+    "codex_started": false,
+    "real_article_production_started": false,
     "publish_allowed": false
   }
 }
