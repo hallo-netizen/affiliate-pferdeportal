@@ -1,46 +1,47 @@
 {
-  "contract": "PFERDE_ATELIER_KONZEPT_NULL_STATE_V4",
+  "contract": "PFERDE_ATELIER_KONZEPT_NULL_STATE_V5",
   "name": "KONZEPT NULL",
-  "mode": "ISOLATED_HISTORICAL_REPLAY",
+  "mode": "ISOLATED_CURRENT7_CHAT_WRITER_TO_WORDPRESS_HANDOFF",
   "historical_startmaster": "STARTMASTER0102",
   "historical_commit": "be89fa13c170700e9753666d1d52bfbd8b28d810",
-  "historical_prompt_ref": "protocol/STARTMASTER0102_ARTICLE_TEST_NO_STOP_HANDOFF_20260828.md",
-  "reconstruction_evidence": "konzept_null/HISTORICAL_RECONSTRUCTION_EVIDENCE.json",
-  "navigation_contract": "konzept_null/CHAT_NAVIGATION_CONTRACT.json",
-  "next_allowed_step": "LOAD_METADATA_BATCH_READ_ONLY",
-  "batch_mode": "VARIABLE_1_TO_N",
-  "minimum_article_count": 1,
-  "maximum_article_count": null,
-  "wordpress_access_allowed": false,
-  "external_write_allowed": false,
-  "publish_allowed": false,
-  "main_write_allowed": false,
-  "production_authority": false,
-  "required_versions": {
-    "PSTE": "0.56.25",
-    "PSERC": "0.28.14",
-    "PPM": "6.7.9",
-    "LanguageTool": "6.8"
+  "target_contract": "konzept_null/ZIELVERTRAG_CURRENT7_WORDPRESS_HANDOFF.md",
+  "authoritative_branch": "hobbyroom/konzept-null-startmaster0102-isolated",
+  "authoritative_head": "ef0afa9f739f6396015eb0897841f3730460917f",
+  "bound_batch_sha256": "7f2e3290b6ac78ac7df1644395e57ac72f02dc1373e390eb2e532e57a8ce916a",
+  "current_status": "DIRECT_IMPORT_FILE_PASS_READY_FOR_CHAT_DELIVERY",
+  "latest_authoritative_run": {
+    "workflow": "Konzept Null Build System4 Direct Import",
+    "run_id": 35436228571,
+    "conclusion": "success",
+    "head_sha": "ef0afa9f739f6396015eb0897841f3730460917f"
   },
-  "required_hashes": {
-    "PSERC_0.28.14": "a5008fc463c78f919a1dc03a510e681c426d97b5f3785de820169805dab3b988",
-    "PPM_6.7.9": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
-    "PPM_main_file": "0874f26f21e471007922cf759ea5ad52bdc61a5975931898e83e9ff8f6418906",
-    "LanguageTool_6.8_zip": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
-    "LanguageTool_6.8_jar": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
-  },
-  "workflow": [
-    "METADATA",
-    "SOURCE_ORDER",
-    "RESEARCH",
-    "SOURCE_SNAPSHOT",
-    "FACT_PACK",
-    "CLAIM_BINDING",
-    "CANONICAL_ARTICLE",
-    "PRODUCTION_PLAN_V4",
-    "LANGUAGETOOL_6_8",
-    "PPM_6_7_9",
-    "LOCAL_TEST_PACKAGE"
+  "verified_pass": [
+    "current 7 article bytes equal bound production context",
+    "LanguageTool 6.8 exact dependency identity",
+    "LanguageTool 6.8 7/7 zero findings",
+    "PPM 6.7.9 exact package identity",
+    "PPM 6.7.9 7/7 TECHNICAL_CHECK_OK",
+    "PPM 6.7.9 7/7 CONTENT_QUALITY_CHECK_OK",
+    "PPM 6.7.9 7/7 fail_closed_aggregate_status PASS",
+    "SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2 canonical validation PASS",
+    "wrong legacy top-level contract blocked",
+    "final artifact upload PASS"
   ],
-  "terminal_boundary": "BEFORE_WORDPRESS"
+  "final_file": {
+    "filename": "SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2.json",
+    "contract": "SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2",
+    "sha256": "6cbe4f5cf54f0332701d7e11bd1962b192fe1a896dc389dbfbe896ca02ea880a",
+    "byte_length": 324321,
+    "artifact_id": 10582610295,
+    "artifact_archive_sha256": "b5dd1e4f4f67192b028033caba1ec0d9ba7227d89b59a5f874215518254d0ca6",
+    "wordpress_direct_import_ready": true,
+    "plugin_version_verified_against": "0.28.23",
+    "publish_allowed": false
+  },
+  "first_open_blocker": null,
+  "next_action": "DELIVER_EXACT_FINAL_FILE_TO_USER_CHAT",
+  "wordpress_write_allowed": false,
+  "publish_allowed": false,
+  "codex_allowed": false,
+  "free_workflow_decisions": false
 }
