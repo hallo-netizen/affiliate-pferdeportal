@@ -55,7 +55,7 @@ Dauerhaft fail-closed ergänzt:
 - fehlendes Leerzeichen nach Inline-Link (`</a>Wort`) wird blockiert;
 - positive/negative Regressionstests sind Bestandteil der Teststrecke.
 
-Die bereits erzeugten 7 Artikel gelten bis zur Reparatur und erneutem Gesamtcheck NICHT als aktuelle finale Ausgabe.
+Die zuerst erzeugten 7 Artikel sind durch Run 002 ersetzt. Run 002 ist nach Titel-, H2- und Inline-Link-Nachschärfung 7/7 LanguageTool 6.8 PASS, 7/7 PPM 6.7.9 PASS und gegen den echten PSERC-0.28.23-Importer positiv/negativ geprüft. Aktuelle WordPress-Datei: `SYSTEM4_WORDPRESS_HANDOFF_V1_CURRENT7_CORRECTED.json`, SHA-256 `28d26eeca17731e79764dc6886b5f7ded1c234d1c095559f1e7800fc575a20d1`. Beleg: `concept_agent/production_ready/REAL7_CHATGPT_RUN_002_CORRECTED_PROOF.json`.
 
 
 ### Präzisierung Titelregel
