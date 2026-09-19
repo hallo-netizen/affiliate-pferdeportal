@@ -1,4 +1,5 @@
 name: Konzept Null Current7 Final WordPress File
+# retrigger current completed current7 endstempel build
 on:
   push:
     branches: [hobbyroom/konzept-null-startmaster0102-isolated]
