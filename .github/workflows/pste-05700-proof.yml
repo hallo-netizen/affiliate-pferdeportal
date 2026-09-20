@@ -1,0 +1,38 @@
+name: PSTE 0.57 Exact Server Step Driver Proof
+
+on:
+  push:
+    branches:
+      - pste-05700-server-step-driver-proof
+  pull_request:
+    paths:
+      - 'proof/pste-05700-control-sim/**'
+      - '.github/workflows/pste-05700-proof.yml'
+  workflow_dispatch:
+
+jobs:
+  exact-simulation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - name: Reconstruct exact control bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat proof/pste-05700-control-sim/bundle.b64.part* | base64 -d > /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip
+          echo "06f690b741670f0fb51149ab818d0e54c8f1d1f1283d39ad0e7b33259eba3ed2  /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip" | sha256sum -c -
+          rm -rf /tmp/pste05700-proof
+          mkdir -p /tmp/pste05700-proof
+          unzip -q /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip -d /tmp/pste05700-proof
+      - name: Exact positive and negative simulation
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste05700-proof/pste05700_github_control
+          bash ./run.sh
