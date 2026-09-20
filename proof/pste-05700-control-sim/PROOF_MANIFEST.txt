@@ -1,0 +1,5 @@
+PSTE 0.57.0 exact GitHub control simulation
+bundle_sha256=06f690b741670f0fb51149ab818d0e54c8f1d1f1283d39ad0e7b33259eba3ed2
+candidate_zip_sha256=2ce8640b12e71c3fd028c28841aa5acf5b978284def399a5ec3e0bd4ea49d255
+bundle_parts=19
+purpose=Execute exact fresh-ZIP production driver/job/queue/archive bytes with full positive/negative control suite.
