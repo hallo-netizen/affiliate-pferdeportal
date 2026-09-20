@@ -669,3 +669,46 @@ Damals lief WordPress laut Nutzer-Livetest auf 6.72.102; lokal existierte 6.72.1
 **NEXT nach Source-Reconciliation:** Zuerst den historischen Cleos-Bulk-Importweg aus belastbarer Quelle beweisen. Falls dort keine wiederverwendbare Quelle existiert, nur einen dokumentierten/vertraglich belastbaren maschinenlesbaren Awin-Weg anbinden. Erst danach Implementierung.
 
 **Status:** OPEN / CURRENT_AWIN_FUNCTIONAL_BLOCKER_AFTER_AFF_ERR_035.
+
+
+## AFF-ERR-039 — Nichtkanonische 6.72.109–117 haben persistente Livezustände verändert; Downgrade stellt 6.72.108 nicht wieder her
+
+**Datum / aktueller Live-Befund:** 20.09.2026.
+
+**Symptomfolge:**
+- Reithelme-Banner blieb trotz mehrerer Fixversuche fachlich falsch.
+- Kategorie-Produktdarstellung fiel zunächst auf eine Produktkachel; anschließend meldete der Nutzer denselben Einbruch für alle Kategorien.
+- eBay verschwand aus der sichtbaren Produktmischung; idealo blieb sichtbar.
+- Nach 6.72.115 meldete der Nutzer, dass die sichtbare Artikel-/Produktausgabe vollständig verschwunden sei. Eine physische Löschung von WordPress-Beiträgen ist nicht belegt.
+- 6.72.116 stellte den Zustand nicht wieder her.
+- 6.72.117 zeigte generische Produktplatzhalter und einen beanstandeten Direktwerbeplatz-Platzhalter.
+- Auch die erneute Installation einer älteren 6.72.111 beseitigte die Fehler laut Nutzer nicht.
+
+**Belegte technische Ursache der Recovery-Blockade:** Die Linie 6.72.109–117 änderte nicht nur PHP-Code, sondern persistente WordPress-Zustände. Belegt sind unter anderem:
+- 6.72.109: neue persistente Bannerplatzplanung `ppar_banner_placement_plan_v2`;
+- 6.72.110 ff.: Analytics-v2-Cache/Bootstrap und geplante Refresh-Ereignisse;
+- 6.72.114: persistierte Awin-Creative-Destination-Zustände (`_destination_*` / `destination_url`);
+- 6.72.115: `ppar_network_idealo_v1.output_mode=automatic`, `idealo_sync_campaign_activation()`, Marker `ppar_multiprovider_category_repair_v672115`, globale Artikelplan-Revisionserhöhung;
+- 6.72.116: Änderung von Artikelplan-Revision, Rebuild-State, Log und Cron im Recoveryversuch;
+- 6.72.117: `output_mode=idealo_only` unter dem 6.72.115-Nachweis, erneute Aktivierungssynchronisation und Artikelplan-Rebuild auf aktueller Revision.
+
+Ein bloßes Downgrade des Plugin-Codes kann diese persistierten Zustände nicht zuverlässig auf den Vorzustand zurücksetzen.
+
+**Zusätzlicher Blocker 6.72.118:** Es existieren zwei unterschiedliche lokale Artefakte mit derselben Versionsnummer 6.72.118:
+- `AFFILIATE_ZENTRALE_V6.72.118_EXACT_672108_STATE_RESTORE_POSNEG.zip` — SHA-256 `544ff072f3ec893fb3eb6244c8b22fce73ec18e540bd22fb54829ec96c66bbd4`;
+- `AFFILIATE_ZENTRALE_V6.72.118_EXACT108_PRODUCT_STATE_RECOVERY_POSNEG.zip` — SHA-256 `3923edf87d90bac2dd1eb20723e17553310664c4105666b6cbea9d765a3fc10f`.
+Sie enthalten unterschiedliche Recovery-Logik. Für keines ist ein Nutzer-LIVE-PASS belegt. **Beide sind gesperrt.**
+
+**Was nicht mehr behauptet werden darf:**
+- keine aktuell installierte Live-Version aus Erinnerung ableiten;
+- keine physische Datenlöschung behaupten;
+- keine Recovery als PASS aus lokalen Mock-/POSNEG-Tests ableiten;
+- keinen alten ZIP-Downgrade als Zustandswiederherstellung behandeln.
+
+**Autoritative Incident-Evidence:** `release/affiliate-zentrale/evidence/incident_672109_118_persistent_state_regression_20260920.txt`.
+
+**Recovery-Zielvertrag:** `protocol/AFFILIATE_RELEASE_EMERGENCY_RECOVERY_672108_STATE_TARGET_20260920.md`.
+
+**Genau eine NEXT ACTION:** Keine weitere Plugininstallation. Zuerst rein lesenden Live-Readback der im Recovery-Zielvertrag gebundenen Optionen/Postmeta/Creative-Library-/Cron-Zustände erstellen, aktuellen installierten Pluginstand bestimmen und den exakten persistenten Delta gegen 6.72.108 belegen. Erst danach einen minimalen Recoveryweg bauen oder einen exakt passenden Backupzustand gezielt wiederherstellen.
+
+**Status:** OPEN / CURRENT_FIRST_BLOCKER / EMERGENCY_LIVE_RECOVERY_REQUIRED.
