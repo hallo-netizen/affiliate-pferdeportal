@@ -712,3 +712,29 @@ Sie enthalten unterschiedliche Recovery-Logik. Für keines ist ein Nutzer-LIVE-P
 **Genau eine NEXT ACTION:** Keine weitere Plugininstallation. Zuerst rein lesenden Live-Readback der im Recovery-Zielvertrag gebundenen Optionen/Postmeta/Creative-Library-/Cron-Zustände erstellen, aktuellen installierten Pluginstand bestimmen und den exakten persistenten Delta gegen 6.72.108 belegen. Erst danach einen minimalen Recoveryweg bauen oder einen exakt passenden Backupzustand gezielt wiederherstellen.
 
 **Status:** OPEN / CURRENT_FIRST_BLOCKER / EMERGENCY_LIVE_RECOVERY_REQUIRED.
+
+
+### AFF-ERR-039 – Recovery-Nachtrag 20.09.2026
+
+**Korrektur des Arbeitswegs:** Der Nutzer hat ausdrücklich klargestellt, dass für diese Wiederherstellung kein direkter Live-Datenbankzugang erforderlich ist. Die vorhandenen 6.72.108–6.72.118-Artefakte, das Affiliate-Büro und das Plugin-Updateprotokoll wurden vollständig gegengeprüft.
+
+**Belegte Ursache, warum die letzte 6.72.118 nichts bewirken konnte:**
+- 6.72.118-A löscht die 115-/117-Marker.
+- 6.72.118-B verlangt genau diese beiden Marker und kann danach fail-closed `not_applicable` werden.
+- 6.72.118-B stellt nur `idealo_only -> automatic` zurück und nicht die komplette Persistenzkette.
+- Bei bereits laufendem Status wird der nächste Batch nicht auf normalen Requests vorangetrieben.
+- 6.72.118-A kann einen vollständigen Artikelplan-Rebuild mit Grund `v672118_restore_exact_672108_runtime` hinterlassen.
+
+**Minimaler Recovery-Kandidat:** 6.72.119 auf exakter 6.72.108-Fachbasis, nur Hauptdatei + Readme abweichend. Keine neue Fachlogik, keine Inventarlöschung, kein globaler Revisionssprung, kein neuer Voll-Rebuild, keine Banneränderung. Nur Incident-Erkennung, 6.72.114-Destination-Rückführung, gezielte Provider-Aktivierung und Produktteil-Reparatur bestehender gespeicherter Artikelpläne.
+
+**Artefakt:** `AFFILIATE_ZENTRALE_V6.72.119_KISS_EMERGENCY_RESTORE_POSNEG.zip`
+
+**SHA-256:** `eb51dcbd19c62dae1a3958d209676926aa02793cb13a8fe64292ed53c3bcea74`
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_672119_kiss_recovery_local_20260920.txt`
+
+**Lokale Abnahme:** 12/12 Originalfehler-Nachweis; 55/55 statisch; 30/30 Runtime; Mutation/Sabotage fail-closed; PHP 21/21; Fresh-Unpack 26/26 byteidentisch.
+
+**Status:** OPEN / LOCAL_RECOVERY_CANDIDATE_PASS / LIVE_RESTORE_TEST_OPEN.
+
+**Genau eine NEXT ACTION:** exakt obigen SHA einmal installieren und anschließend die zuvor beschädigten realen Produkt-/Artikelausgaben sowie die geschützten Ausgabepfade prüfen. Kein weiterer Fachumbau und keine der alten 6.72.118-Versionen installieren.
