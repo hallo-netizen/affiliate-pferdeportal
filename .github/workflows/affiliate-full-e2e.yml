@@ -71,6 +71,7 @@ jobs:
           curl -fsS --max-time 5 'http://127.0.0.1:8080/' >/dev/null
       - name: Run complete real-HTTP render-path scenarios
         run: |
+          set +e
           set -uo pipefail
           : > /tmp/e2e-results.txt
           rc=0
@@ -79,11 +80,13 @@ jobs:
             AFF_E2E_SCENARIO="$s" wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp || rc=1
             echo "===== $s =====" | tee -a /tmp/e2e-results.txt
             python3 "$GITHUB_WORKSPACE/e2e/check_http.py" "$s" 2>&1 | tee -a /tmp/e2e-results.txt
-            test ${PIPESTATUS[0]} -eq 0 || rc=1
+            check_rc=${PIPESTATUS[0]}
+            if [ "$check_rc" -ne 0 ]; then rc=1; fi
           done
           cat /tmp/e2e-results.txt
           exit $rc
       - name: Prove display assets untouched
+        if: always()
         run: |
           set -euo pipefail
           rm -rf /tmp/check130 && mkdir /tmp/check130
