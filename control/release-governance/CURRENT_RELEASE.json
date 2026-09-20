@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 78,
+  "generation": 79,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "EMERGENCY_READ_ONLY_LIVE_STATE_CAPTURE_AFTER_6_72_123_SITE_RECOVERY",
+    "current_focus": "AFF_ERR_039_DUAL_LAYER_ROOTFIX_FROM_PROVEN_672108_BASE",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_TIMEOUT_672123_HANDOFF_20260920.md",
-    "current_focus_reason": "USER LIVE READBACK 2026-09-20: wp-content/plugins/affiliate-portal-router WAS DELETED OUTSIDE WORDPRESS AFTER NONCANONICAL 6.72.123 CAUSED/IMMEDIATELY PRECEDED FRONTEND+WP-ADMIN TIMEOUT. /wp-admin/ AND PUBLIC FRONTEND ARE REACHABLE AGAIN. THE REACHABILITY COMPLETION CONDITION IS SATISFIED. NO AFFILIATE ZIP MAY BE INSTALLED OR ACTIVATED BEFORE COMPLETE REAL READ-ONLY LIVE AFFILIATE STATE CAPTURE.",
+    "current_focus_reason": "PROVEN 2026-09-20: 6.72.123 PUT BROAD MUTATING CATEGORY-PRODUCT RECOVERY ON GLOBAL INIT AND CAN REENTER ON NORMAL FRONTEND/WP-ADMIN/REST REQUESTS. THE EBAY ACCOUNT-DELETION TRAIT IS BYTE-IDENTICAL 6.72.108-6.72.124, WHILE EBAY INDEPENDENTLY REPORTED THE REGISTERED REST ENDPOINT NON-RESPONSIVE. 6.72.123 CAN ALSO WRITE A SAFE EBAY PUBLIC CHECKPOINT WITH EMPTY BUSINESS CAMPAIGN IDS BEFORE END-TO-END SUCCESS. USER/BUERO BINDING: NO NEW DIRECT LIVE-DB/CONNECTOR PATH; USE THE EXISTING PACKAGE/BUERO/HISTORICAL-WORDPRESS EVIDENCE CHAIN. 6.72.124 IS FORBIDDEN.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -179,17 +179,17 @@
       ],
       "existing_downstream": "CREATIVE_LIBRARY_IMPORT_VERIFY_MATCH_DELIVER_REVALIDATE_ALREADY_PRESENT"
     },
-    "recovery_target_ref": "protocol/AFFILIATE_RELEASE_TIMEOUT_672123_HANDOFF_20260920.md",
-    "recovery_status": "BLOCKED_CRITICAL_SITE_UNREACHABLE_DISABLE_672123_OUTSIDE_WORDPRESS_FIRST"
+    "recovery_target_ref": "release/affiliate-zentrale/evidence/aff039_ebay_endpoint_global_bootstrap_rootcause_20260920.txt",
+    "recovery_status": "BLOCKED_DUAL_LAYER_ROOTFIX_REQUIRED_672108_BASE_NO_GLOBAL_INIT"
   },
   "execution_state": {
-    "state": "BLOCKED_READ_ONLY_LIVE_STATE_CAPTURE_REQUIRED",
-    "authorized_next_action": "CAPTURE_REAL_LIVE_AFFILIATE_STATE_READ_ONLY",
-    "bound_user_scope_action": "AFF-ERR-039 ONLY: CAPTURE THE COMPLETE REAL LIVE AFFILIATE STATE READ-ONLY BEFORE ANY REACTIVATION OR INSTALL. INCLUDE RELEVANT OPTIONS, CAMPAIGN/OUTPUT STATE, TARGET/ASSIGNMENT STATE, EBAY CHECKPOINT/SELECTION/RUN STATE, IDEALO SETTINGS, ARTICLE-PLAN/REBUILD/CRON RECOVERY STATE, AND AFFECTED AWIN DESTINATION STATE. NO LIVE WRITE, NO PLUGIN INSTALL, NO RECOVERY HOOK, NO MOCK SUBSTITUTE.",
-    "completion_condition": "A COMPLETE REAL READ-ONLY LIVE AFFILIATE STATE CAPTURE EXISTS AND IS BOUND TO THE ACTUAL CURRENT WORDPRESS INSTANCE WITHOUT WRITES; THE CAPTURE COVERS THE AFF-ERR-039 PERSISTENT-STATE SURFACES REQUIRED TO COMPARE AGAINST THE LAST SAFE 6.72.108 OPERATIONAL CONTRACT.",
-    "after_completion_action": "COMPARE THE REAL CAPTURE AGAINST THE LAST SAFE 6.72.108 OPERATIONAL CONTRACT AND THE PROVEN 6.72.109-117 PERSISTENT MUTATIONS. IDENTIFY THE FIRST PROVEN DIVERGENCE IN THE COMPLETE CATEGORY-PRODUCT WORKFLOW BEFORE AUTHORIZING ANY RECOVERY BUILD OR CODE CHANGE.",
+    "state": "BLOCKED_DUAL_LAYER_ROOTFIX_REQUIRED",
+    "authorized_next_action": "BUILD_AND_HARDTEST_672108_BASED_DUAL_LAYER_RECOVERY_NO_GLOBAL_INIT",
+    "bound_user_scope_action": "AFF-ERR-039 ONLY: BUILD ONE ROOT-CAUSE RECOVERY CANDIDATE FROM THE EXACT PROVEN 6.72.108 RUNTIME SEMANTICS. REPAIR BOTH CODE/REQUEST-PATH AND PROVEN 109-123 PERSISTENT-STATE DAMAGE. NO RECOVERY MAY RUN ON NORMAL INIT/REST/FRONTEND REQUESTS. NO EMPTY SAFE EBAY CHECKPOINT. NO INVENTORY DELETE, NO GLOBAL REVISION BUMP, NO FULL ARTICLE-PLAN REBUILD, NO LIVE INSTALL.",
+    "completion_condition": "ONE LOCAL CANDIDATE PASSES THE COMPLETE CATEGORY-PRODUCT WORKFLOW POSITIVE AND NEGATIVE/FAIL-CLOSED MATRIX USING THE REAL 2026-09-15 WORDPRESS HISTORICAL CAMPAIGN BASELINE PLUS THE PROVEN 109-123 MUTATION REPLAY. EBAY ACCOUNT-DELETION TRAIT MUST REMAIN BYTE-IDENTICAL; EMPTY EBAY CANDIDATE MUST NEVER REPLACE A NONEMPTY CHECKPOINT; JOURNAL/GLOSSAR/PFERDERASSEN MUST REMAIN UNCHANGED.",
+    "after_completion_action": "ONLY AFTER COMPLETE LOCAL PASS: RECORD HASH-BOUND EVIDENCE AND PREPARE A SINGLE NON-LIVE INSTALL CANDIDATE FOR EXPLICIT LIVE TEST. DO NOT INSTALL OR PUBLISH AUTOMATICALLY.",
     "no_optional_detours": true,
-    "sequence": 18,
+    "sequence": 19,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -197,193 +197,7 @@
       "control/release-governance/CURRENT_RELEASE.json",
       "protocol/AFFILIATE_RELEASE_"
     ],
-    "otto_awin_wp_cron_followup": {
-      "status": "LIVE_PASS_6725",
-      "advertiser_id": 14336,
-      "observed": "WP-Cron-Fallback did not autonomously advance in the prior live window.",
-      "rootfix": "Existing due worker now gets a bounded WordPress-Core spawn_cron() kick on a normal request when an open job exists; DOING_CRON recursion blocked; no new endpoint/scheduler.",
-      "next_test": "PAUSED_BY_AFF_ERR_019_UNFILTERED_FULL_FEED",
-      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
-      "checked_at": "2026-09-08",
-      "test_artifact_filename": "Affiliate-Zentrale_6.72.5_TEST.zip",
-      "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb",
-      "live_evidence": "User screenshot 2026-09-08 10:40 Europe/Berlin: same Awin 14336 job advanced automatically to 3500 cumulative products, last package 500, without manual package button."
-    },
-    "otto_awin_manual_batch_progress": {
-      "status": "LIVE_PASS_6725_CUMULATIVE_UI",
-      "advertiser_id": 14336,
-      "prior_evidence": "User screenshot 2026-09-08 10:12 proved manual package execution but ambiguous repeated 500-message.",
-      "rootfix": "Queue message now reports cumulative details.products plus last package size; completion reports cumulative total.",
-      "next_test": "PAUSED_BY_CURRENT_ADCELL_SCOPE",
-      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6725_progress_wpcron_rootfix_20260908.txt",
-      "checked_at": "2026-09-08",
-      "test_artifact_filename": "Affiliate-Zentrale_6.72.5_TEST.zip",
-      "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb",
-      "live_evidence": "User screenshot 2026-09-08 10:40 Europe/Berlin: '3500 Produkte insgesamt verarbeitet; letztes Paket: 500. Fortsetzung vorgemerkt.'"
-    },
-    "otto_awin_full_feed_relevance": {
-      "status": "LIVE_PASS_6726_AUTOSTOP",
-      "advertiser_id": 14336,
-      "defect": "6.72.5 persisted formally valid OTTO feed rows before portal relevance classification.",
-      "rootfix": [
-        "OTTO 14336 requires explicitly bound Awin Create-a-Feed URL plus product_feed_scope=portal_filtered.",
-        "6.72.6 safety upgrade automatically finds any still-open legacy OTTO products job without portal_filtered scope, marks it terminal failed, deletes its private temp feed and disables central automation.",
-        "New OTTO enqueue/start is fail-closed until the filtered source is bound.",
-        "Existing hash-bound Pferde-Atelier catalog/content policy classifies OTTO rows before creative_library_upsert.",
-        "UI separates scanned feed rows, relevant accepted products and blocked products."
-      ],
-      "local_tests": {
-        "php_lint": "21_OF_21_PASS",
-        "source_manifest": "26_OF_26_PASS",
-        "positive_relevant_product": "PASS_pferdedecken-regendecken",
-        "negative_foreign_product": "PASS_BLOCKED",
-        "negative_toy_horse": "PASS_BLOCKED",
-        "missing_scope": "PASS_FAIL_CLOSED",
-        "unconfirmed_feed": "PASS_FAIL_CLOSED",
-        "old_job_terminal_cleanup": "PASS",
-        "install_upgrade_autostop": "PASS"
-      },
-      "source_manifest_sha256": "75caa6c18bb02264f03a6c27933e2256047a6f4849ff22f376a53a70ce2e014d",
-      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6726_otto_relevance_prefilter_20260908.txt",
-      "test_artifact_filename": "Affiliate-Zentrale_6.72.6_TEST.zip",
-      "test_artifact_sha256": "f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e",
-      "next_test": "PAUSED_BY_CURRENT_ADCELL_SCOPE",
-      "checked_at": "2026-09-08",
-      "install_status": "LIVE_INSTALL_PASS_6726",
-      "install_evidence": "User screenshot 2026-09-08: WordPress reports plugin updated successfully to 6.72.6; Affiliate-Automatisierung page loads.",
-      "live_evidence": {
-        "automation_enabled": false,
-        "executor": "server_cron",
-        "job_partner": "awin:14336",
-        "job_stage": "products",
-        "job_status": "failed",
-        "job_message": "Alter/ungefilterter OTTO-Vollfeed wurde beim 6.72.6-Sicherheitsupgrade gestoppt.",
-        "completed_run_imported": 4500,
-        "screenshot_time": "2026-09-08 11:18 Europe/Berlin"
-      }
-    },
-    "otto_awin_legacy_exact_cleanup": {
-      "status": "LIVE_BLOCKED_FAIL_CLOSED_NO_DELETE_PAUSED",
-      "advertiser_id": 14336,
-      "version": "6.72.8",
-      "prior_live_fail": "6.72.7 did not show promised OTTO-Sicherheitsbereinigung readback.",
-      "rootfix": [
-        "Durable failed automation_runs row is cleanup authority instead of queue row.",
-        "New-row provenance requires exact run_uuid, immutable first_seen inside run window, and exact candidate count equal to run.imported.",
-        "Run with updated>0 or any provenance mismatch fails closed without destructive writes.",
-        "Full candidate identity preflight occurs before first destructive write.",
-        "Linked output objects are deactivated and marked blocked_source, not deleted.",
-        "Cleanup is idempotent and readback is always visible, including no_candidate/blocked/not executed."
-      ],
-      "executed_local_gate": {
-        "cleanup_runtime_positive_negative": "PASS",
-        "source_gate_runtime_positive_negative": "PASS",
-        "full_static_workflow": "PASS",
-        "php_lint": "21_OF_21_PASS",
-        "diff_scope": "EXACTLY_3_FILES",
-        "zip_integrity": "PASS",
-        "fresh_unpack_file_count": 26,
-        "fresh_unpack_php_lint": "21_OF_21_PASS",
-        "source_zip_byte_identity": "26_OF_26_PASS"
-      },
-      "evidence_ref": "release/affiliate-zentrale/evidence/awin_6728_cleanup_provenance_full_local_gate_20260908.txt",
-      "source_manifest_sha256": "816f49dc5178e32ead1ea7fd53f0962acb3f457b08a0139f6b9ff1f9239a0a8d",
-      "test_artifact_filename": "Affiliate-Zentrale_6.72.8_TEST.zip",
-      "test_artifact_sha256": "b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f",
-      "next_test": "PAUSED_BY_CURRENT_ADCELL_SCOPE",
-      "checked_at": "2026-09-08",
-      "live_evidence": "2026-09-08 19:13 screenshot: blocked, 1 failed run, 0 products deleted, exact-import-count-mismatch:0/4500.",
-      "decision": "Do not create another cleanup plugin. Use existing filtered-feed workflow and standard reconcile quarantine/inactive_missing over two complete filtered runs."
-    },
-    "otto_awin_filtered_live_run": {
-      "status": "LIVE_SUCCESS_FEED_WRONG_SCOPE_FALSE_POSITIVE_PROVEN_ROOTFIX_PENDING_PAUSED",
-      "evidence": "2026-09-09 live: 298 scanned / 1 imported / 297 blocked. Exact uploaded feed review: all 298 rows off-topic; categories 211 Skincare, 31 Cosmetics, 28 Basketball, 22 Garden, 6 Football. False positive aw_product_id 45749237798 contains Windschutz.",
-      "decision": "Automation remains OFF. Do not treat declared FeedScope as horse evidence. Correct feed selection from the exact three available OTTO feeds and apply the smallest gate rootfix before any new installer.",
-      "next_action": "PAUSED_BY_EXPLICIT_ADCELL_SCOPE_20260911",
-      "root_cause": "OTTO gate injects FeedScope=Pferdebedarf, shared classifier counts pferdebedarf as strong horse evidence; generic Windschutz then matches catalog concept 'Windschutz für Pferde'."
-    },
-    "otto_awin_feed_inventory": {
-      "status": "PASS_USER_FILE_EXACT_THREE_ACTIVE_FEEDS",
-      "source": "User-uploaded Awin feed list datafeeds.csv; secret URL/API key intentionally not persisted.",
-      "advertiser_id": 14336,
-      "checked_at": "2026-09-09",
-      "feeds": [
-        {
-          "feed_id": 54165,
-          "name": "Wohnen, Spielzeug und Baumarkt",
-          "products": 317451
-        },
-        {
-          "feed_id": 54179,
-          "name": "Technik und Sport",
-          "products": 90547
-        },
-        {
-          "feed_id": 54183,
-          "name": "Kategorien: Mode und Beauty",
-          "products": 347642
-        }
-      ],
-      "conclusion": "No separate Pferde/Tierbedarf/Schuhe feed is present in the supplied current Awin feed list."
-    },
-    "adcell_api_v2_automation": {
-      "status": "CANONICAL_67219_GATES_AND_CANONICAL_ARTIFACT_26_OF_26_PASS_AF066_PENDING",
-      "checked_at": "2026-09-12",
-      "scope_ref": "protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md",
-      "evidence_ref": "release/affiliate-zentrale/evidence/adcell_67219_canonical_full_gate_20260912.txt",
-      "auth_evidence_ref": "release/affiliate-zentrale/evidence/adcell_api_v2_auth_contract_20260911.txt",
-      "source_commit": "df3e97119fe44ac864701d8de6b946c7c6c3416c",
-      "source_manifest_sha256": "694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b",
-      "committed_gate": "CANONICAL_67219_FULL_GATE_PASS_RUN_34690118524_JOB_103543774405",
-      "confirmed_program_path": "Affiliate/Program/export",
-      "confirmed_promotion_paths": [
-        "getPromotionTypeCsv",
-        "getPromotionTypeBanner",
-        "getPromotionTypeDeeplink"
-      ],
-      "required_program_gate": "affiliateStatus=accepted AND isActive AND explicit programId allowlist",
-      "normal_feed_policy": "API_V2_CSV_URL_AUTOMATIC_NO_MANUAL_IMPORT_EXPORT",
-      "provider_routing_policy": "ADCELL_MUST_NOT_FALL_THROUGH_TO_AWIN",
-      "auth_status": "PROVEN_OFFICIAL_TOKEN_GETTOKEN_USERNAME_PASSWORD_QUERY_TOKEN",
-      "live_account_status": "AF066_READ_ONLY_API_PREFLIGHT_PENDING_WEBLOGIN_NOT_YET_PROVEN_BLOCKER",
-      "scratch_67218": "DISCARDED_WRONG_BASE_AND_CONTRADICTORY_UNPROVEN_AUTH_ASSUMPTIONS",
-      "plugin_acceptance": "CANONICAL_LOCAL_ACCEPTANCE_PASS_LIVE_ACCEPTANCE_FORBIDDEN_UNTIL_REAL_ADCELL_API_AND_WORDPRESS_MARIADB_E2E",
-      "live_pass": "FORBIDDEN_UNTIL_REAL_ADCELL_API_AND_WORDPRESS_MARIADB_E2E",
-      "version_67219_manifest_sha256": "694af9869c7aa2b01a51f164173b1c51d9be7c24912c2e129420c3d111346a4b",
-      "version_67219_status": "CANONICAL_GATES_AND_CANONICAL_ARTIFACT_26_OF_26_PASS_AF066_LIVE_API_PREFLIGHT_PENDING",
-      "canonical_test_artifact_run": "34692865477",
-      "canonical_test_artifact_job": "103551115066",
-      "canonical_test_artifact_sha256": "72f437e5235aaec53631db052e2184b588366c7f8aa7eb72ae1c9e043cdf157f",
-      "canonical_test_artifact_id": 10297556084
-    },
-    "current_protocol_ref": "protocol/AFFILIATE_RELEASE_EMERGENCY_RECOVERY_672108_STATE_TARGET_20260920.md",
-    "hobbyroom_current": {
-      "status": "LOCAL_RECOVERY_CANDIDATE_COMPLETE",
-      "reason": "6.72.119 KISS recovery artifact is built and hard-tested; only one WordPress live install/readback is now authorized.",
-      "no_parallel_workstream": true
-    },
-    "canonical_current_source_drift": {
-      "status": "OPEN_BUT_SECONDARY_TO_AFF_ERR_039",
-      "blocker": "AFF-ERR-035",
-      "canonical_source_version": "6.72.105",
-      "canonical_head_at_check": "95b1e8cd0b1f97e06298b7b58e6c3a309d455870",
-      "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
-      "last_known_good_operational_reference": {
-        "version": "6.72.108",
-        "artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
-        "source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e"
-      },
-      "deferred_until": "AFF-ERR-039 LIVE RECOVERY PASS"
-    },
-    "provider_original_report_sync_followup": {
-      "status": "BOUND_SOURCE_COMPLETE",
-      "next_action": "NONE",
-      "awin_otto": "ORIGINAL_AWIN_ADVERTISER_PERFORMANCE_REPORT_BOUND",
-      "adcell": "ORIGINAL_ADCELL_AFFILIATE_STATISTICS_CSV_BOUND",
-      "automatic_refresh": "AFTER_SUCCESSFUL_PROVIDER_OR_AUTOMATION_SYNC",
-      "local_clicks": "FORBIDDEN_AS_ANALYTICS_SOURCE",
-      "source_manifest_sha256": "4c5471425ffd7226cf12dd8f50937b26d78d9f4aa48a3af18b5f0ca7272c05a7"
-    }
+    "evidence_ref": "release/affiliate-zentrale/evidence/aff039_ebay_endpoint_global_bootstrap_rootcause_20260920.txt"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -729,11 +543,11 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "EMERGENCY_672123_TIMEOUT_RESTORE_WORDPRESS_REACHABILITY",
+    "current_milestone": "AFF_ERR_039_DUAL_LAYER_ROOTFIX_672108_BASE",
     "max_parallel_workstreams": 1,
-    "microfix_policy": "FORBIDDEN_UNTIL_REAL_LIVE_STATE_CAPTURE_IDENTIFIES_FIRST_FAILED_BOUND_GATE",
-    "new_version_policy": "NO_NEW_AFFILIATE_VERSION_OR_INSTALLER_WHILE_SITE_UNREACHABLE; AFTER REACHABILITY, NO BUILD BEFORE READ_ONLY_REAL_LIVE_STATE_CAPTURE_AND_FULL_WORKFLOW_DELTA_PROOF",
-    "investigation_policy": "FIRST RESTORE WORDPRESS REACHABILITY BY DISABLING 6.72.123 OUTSIDE WP ADMIN; THEN READ_ONLY REAL LIVE STATE CAPTURE; CODE_PLUS_PERSISTED_STATE_PLUS_COMPLETE_CATEGORY_PRODUCT_WORKFLOW; NO OPTIONAL DETOURS",
+    "microfix_policy": "FORBIDDEN_ROOTFIX_MUST_COVER_COMPLETE_CATEGORY_PRODUCT_WORKFLOW",
+    "new_version_policy": "ONE_RECOVERY_CANDIDATE_ONLY_AFTER_COMPLETE_LOCAL_POSITIVE_NEGATIVE_PASS; NO_LIVE_INSTALL_AUTOMATICALLY",
+    "investigation_policy": "NO_MORE_HISTORY_RECONSTRUCTION. USE PROVEN 6.72.108 BASE + ACTUAL 109-124 PACKAGES + 2026-09-15 WORDPRESS HISTORICAL LIVE EXPORT + AFF039 EBAY/BOOTSTRAP EVIDENCE.",
     "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
     "goal_drift_policy": "FAIL_CLOSED",
     "optional_detours": "FORBIDDEN"
@@ -807,17 +621,17 @@
   },
   "operational_observation": {
     "checked_at": "2026-09-20",
-    "live_plugin_version": "6.72.123_REPORTED_INSTALLED_IMMEDIATELY_BEFORE_CRITICAL_TIMEOUT",
-    "live_status": "CRITICAL LIVE FAIL: USER REPORTS FRONTEND TIMEOUT AND WORDPRESS BACKEND UNREACHABLE AFTER INSTALLING NONCANONICAL 6.72.123. EXACT INTERNAL TIMEOUT MECHANISM IS NOT YET PROVEN. PRIOR 6.72.119/121/122 DID NOT RESTORE CATEGORY PRODUCT OUTPUT.",
+    "live_plugin_version": "NONE_AFFILIATE_ROUTER_DIRECTORY_DELETED_BY_USER_AFTER_672123_TIMEOUT",
+    "live_status": "WORDPRESS FRONTEND AND WP-ADMIN REACHABLE AGAIN AFTER REMOVING AFFILIATE ROUTER. EBAY REPORTED REGISTERED ACCOUNT-DELETION REST ENDPOINT NON-RESPONSIVE. ENDPOINT TRAIT IS BYTE-IDENTICAL 6.72.108-6.72.124; FAILURE DOMAIN IS SHARED AFFILIATE BOOTSTRAP/REQUEST PATH, WITH 6.72.123 GLOBAL INIT RECOVERY REENTRANCE PROVEN.",
     "last_known_good_operational_version": "6.72.108",
     "last_known_good_artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
     "last_known_good_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
     "canonical_plugin_version": "6.72.105",
     "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_drift": "LAST_KNOWN_GOOD_6_72_108_VS_CANONICAL_6_72_105_REMAINS_OPEN_BUT IS SECONDARY TO LIVE RECOVERY",
-    "first_blocker": "AFF-ERR-039",
-    "evidence_ref": "protocol/AFFILIATE_RELEASE_TIMEOUT_672123_HANDOFF_20260920.md",
-    "recovery_target_ref": "protocol/AFFILIATE_RELEASE_TIMEOUT_672123_HANDOFF_20260920.md",
+    "first_blocker": "AFF-ERR-039_DUAL_LAYER_ROOTFIX",
+    "evidence_ref": "release/affiliate-zentrale/evidence/aff039_ebay_endpoint_global_bootstrap_rootcause_20260920.txt",
+    "recovery_target_ref": "release/affiliate-zentrale/evidence/aff039_ebay_endpoint_global_bootstrap_rootcause_20260920.txt",
     "previous_blocker_after_recovery": "AFF-ERR-035",
     "awin_functional_blocker_after_reconciliation": "AFF-ERR-038",
     "locked_live_pass_ref": "AFF-ERR-034",
@@ -832,14 +646,29 @@
       }
     ],
     "recovery_candidate": {
-      "version": "6.72.123",
-      "status": "LIVE_FAIL_CRITICAL_TIMEOUT_FORBIDDEN",
-      "artifact_filename": "AFFILIATE_ZENTRALE_V6.72.123_CATEGORY_PRODUCT_STRUCTURE_RESTORE_FULLSYSTEM_HARDTEST.zip",
-      "artifact_sha256": "c71d8fb8fc03751b0377b525e7d2b7c791ee424d7b219c3d042a41b20de7aa44",
-      "base": "NONCANONICAL_LOCAL_RECOVERY_ATTEMPT",
+      "version": "NEXT_SINGLE_672108_BASED_DUAL_LAYER_RECOVERY",
+      "status": "LOCAL_BUILD_AND_FULL_WORKFLOW_HARDTEST_REQUIRED",
+      "base": "EXACT_PROVEN_6.72.108_RUNTIME_SEMANTICS",
       "live_pass": false,
-      "failure": "FRONTEND_TIMEOUT_AND_WP_ADMIN_UNREACHABLE",
-      "exact_internal_timeout_root_cause": "NOT_YET_PROVEN_DO_NOT_GUESS"
+      "forbidden_predecessors": [
+        "6.72.118A",
+        "6.72.118B",
+        "6.72.119",
+        "6.72.120",
+        "6.72.121",
+        "6.72.122",
+        "6.72.123",
+        "6.72.124"
+      ],
+      "hard_rules": [
+        "NO_MUTATING_RECOVERY_ON_GLOBAL_INIT_OR_REST_OR_FRONTEND",
+        "NO_EMPTY_SAFE_EBAY_CHECKPOINT_WRITE",
+        "PRESERVE_PRIVATE_CHECKPOINT_IDS_UNLESS_STRONGER_SOURCE",
+        "NO_INVENTORY_DELETE",
+        "NO_GLOBAL_ARTICLE_PLAN_REVISION_BUMP",
+        "NO_FULL_ARTICLE_PLAN_REBUILD",
+        "FULL_POSITIVE_NEGATIVE_WORKFLOW_GATE_BEFORE_LIVE"
+      ]
     }
   }
 }
