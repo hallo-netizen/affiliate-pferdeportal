@@ -1,0 +1,109 @@
+PFERDE ATELIER – AFFILIATE-ZENTRALE
+AFF-ERR-041 – 6.72.127 EXACT PRODUCT SUPPLY / ASSIGNMENT ROOTFIX
+Date: 2026-09-20
+Status: LOCAL FULL PASS. LIVE INSTALL NOT YET PERFORMED.
+
+CORRECTION
+6.72.126 is DISCARDED. Its assumption that parent target keys were the defect was false.
+The proven historical 6.72.108 contract intentionally uses exact + parent targets and ranks:
+- exact page = specificity 520
+- parent/ancestor = specificity 430
+category_product_1..3 then keeps only the strongest relevance tier.
+
+ROOT CAUSE CLASS
+Current live symptoms match missing/damaged exact product supply:
+- Reithelme: no usable exact tier => parent tier 430 wins and unrelated sibling products can appear.
+- Stallhalfter: only one usable exact candidate => strict tier correctly renders exactly one tile.
+The renderer/ranker principle is not defective.
+
+REAL HISTORICAL WORDPRESS EVIDENCE (2026-09-15)
+Active exact campaign bindings:
+- Reithelme: 95
+- Stallhalfter: 25
+- Steigbügel: 29
+- Stalldecken: 24
+- Unterdecken: 16
+No historical Steigbügel/Stalldecken/Unterdecken campaign had page:reithelme as an exact target.
+
+CONTRACT RECONSTRUCTION
+For all historical campaigns in the five reference product groups, target keys reconstructed only from existing provider-owned metadata and the unchanged portal catalog matched the stored working target keys 100%:
+- Reithelme: 87/87 inspected provider-managed records
+- Stallhalfter: 30/30
+- Steigbügel: 35/35
+- Stalldecken: 31/31
+- Unterdecken: 20/20
+
+6.72.127
+Base: exact 6.72.125.
+Changed files vs 6.72.125: exactly 2:
+- pferdeportal-affiliate-router.php
+- readme.txt
+
+Repair scope only:
+- rebuild persisted eBay automation_target_keys from _ppar_ebay_product_slug + unchanged portal catalog;
+- rebuild persisted idealo automation_target_keys from _ppar_idealo_target_slugs / _ppar_idealo_concept_id + unchanged portal catalog;
+- restore assignment_mode=page_tree and match_descendants=false for those provider-managed product campaigns;
+- reactivate only campaigns that already pass their existing provider/source/public safety gate;
+- unproven fixed/none product overrides without a repair_reason are normalized to automatic, product part only; banner fields and inheritance are preserved;
+- dedicated bounded admin worker, first batch executes synchronously;
+- manual "Einen sicheren Batch ausführen" and "Batch sicher beenden" remain available.
+
+STRICTLY UNCHANGED / BYTE-IDENTICAL TO 6.72.125
+- eBay account deletion trait
+- eBay provider/target generation trait
+- idealo provider/target generation trait
+- output-object logic
+- automation campaign ranker
+- category_product strict relevance tier
+- render_affiliate_slot
+- render_affiliate_slot_for_context
+- assignment_for_context
+- assignment_selection_for_slot
+- AFF039 checkpoint logic
+- AFF039 recovery worker
+- article-plan trait
+- creative-library trait
+- frontend CSS
+- frontend JS
+- portal catalogs
+
+FORBIDDEN IN AFF041 WORKER
+- no output_plan_creative
+- no article-plan revision bump
+- no article rebuild
+- no eBay checkpoint write
+- no idealo materialization/retirement
+- no provider settings write
+- no post/meta deletion
+- no init/REST/frontend repair hook
+
+HARD DAMAGE/REPAIR SIMULATION ON REAL 2026-09-15 DATA
+PASS:
+- healthy Reithelme -> exact tier 520 -> 3 exact products
+- remove exact Reithelme targets while retaining parents -> tier 430 -> wrong parent products become eligible
+- restore historical targets -> tier 520 -> 3 exact products again
+- retain only one Stallhalfter exact target -> strict tier produces 1 card
+- restore historical targets -> 3 exact Stallhalfter products again
+
+PACKAGE
+AFFILIATE_ZENTRALE_V6.72.127_EXACT_SUPPLY_ASSIGNMENT_ROOTFIX_HARDTEST.zip
+SHA-256: 7129fbe9657765fb92dbc193d25dfe1e621165e9bbfe105b1366c1d6e6c1ff2f
+Files: 26/26
+PHP lint: 21/21 PASS
+JS: PASS
+JSON: 2/2 PASS
+Fresh-Unpack byte identity: 26/26 PASS
+ZIP integrity: PASS
+Historical contract: PASS
+Damage/repair simulation: PASS
+No 6.72.126 logic present: PASS
+
+LIVE ACTION
+Install exact SHA once.
+Affiliate Kontrollzentrum -> "Produkt-Zuordnungen reparieren".
+Do NOT run AFF039 again.
+Do NOT change product tiles/rendering.
+
+RESULT
+AFF041_672127_LOCAL_FULL_PASS
+LIVE=PENDING
