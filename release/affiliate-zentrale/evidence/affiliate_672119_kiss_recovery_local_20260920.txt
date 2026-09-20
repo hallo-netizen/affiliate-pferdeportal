@@ -1,0 +1,54 @@
+PFERDE ATELIER – AFFILIATE-ZENTRALE
+6.72.119 KISS EMERGENCY RESTORE – LOCAL EVIDENCE
+Date: 2026-09-20
+
+ROLE
+Evidence only. No LIVE PASS. CURRENT authority remains control/release-governance/CURRENT_RELEASE.json.
+
+USER CORRECTION / SCOPE
+Direct live database access is NOT required for this recovery. The required path is KISS restoration from the proven package/history facts, not a new DB-forensics architecture.
+
+PROVEN BASE
+- Last broadly proven working base: 6.72.108.
+- 6.72.108 ZIP SHA-256: d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3.
+- Historical 6.72.108 gates: Partner/Cleos/Awin 25/25 PASS; Awin transport 21/21 PASS; full regression 82/82 PASS; PHP 21/21 PASS; Fresh-Unpack 26/26 PASS.
+
+PROVEN 6.72.118 DESIGN FAILURE
+- Broad 6.72.118 deletes ppar_multiprovider_category_repair_v672115 and ppar_v672117_product_visibility_recovery_v1.
+- Narrow 6.72.118 requires BOTH those markers and therefore can become not_applicable after the broad 6.72.118.
+- Narrow 6.72.118 only reverses idealo_only -> automatic; it is not a complete restore.
+- Narrow 6.72.118 returns when its state is already running and then depends on its scheduled worker.
+- Broad 6.72.118 requests a full article-plan rebuild with reason v672118_restore_exact_672108_runtime.
+
+6.72.119 KISS RECOVERY
+Artifact: AFFILIATE_ZENTRALE_V6.72.119_KISS_EMERGENCY_RESTORE_POSNEG.zip
+SHA-256: eb51dcbd19c62dae1a3958d209676926aa02793cb13a8fe64292ed53c3bcea74
+- exact 6.72.108 code tree base; only main plugin file + readme differ;
+- accepts incident evidence from 115, 116, 117, broad 118 or narrow 118;
+- no inventory deletion;
+- no global revision bump;
+- no new full article-plan rebuild;
+- stops ONLY an already-running full rebuild with exact reason v672118_restore_exact_672108_runtime;
+- clears stale narrow-118 recovery hook;
+- restores only 6.72.114 Awin _destination_* persistence to 6.72.108 semantics;
+- changes idealo_only -> automatic only inside the proven incident; other valid manual modes remain untouched;
+- repairs only product portions of EXISTING saved article plans using the 6.72.108 product-selection contract;
+- posts without saved plans are skipped;
+- banner and banner_2 are hash-locked before/after and abort on mutation;
+- bounded recovery advances on normal requests as well as scheduled worker.
+
+LOCAL HARD TESTS
+- original 118 failure assertions: 12/12 PASS
+- static recovery assertions: 55/55 PASS
+- runtime positive/negative assertions: 30/30 PASS
+- banner-mutation sabotage: PASS fail-closed, no damaged plan write
+- PHP lint: 21/21 PASS
+- JS syntax: PASS
+- JSON parse: 2/2 PASS
+- Fresh-Unpack: 26/26 byte-identical PASS
+- Fresh-Unpack static: 55/55 PASS
+- Fresh-Unpack runtime: 30/30 PASS
+
+LIVE
+OPEN. No live PASS claimed.
+Exact next live action: install exactly SHA-256 eb51dcbd19c62dae1a3958d209676926aa02793cb13a8fe64292ed53c3bcea74 once and visually verify the previously broken category/article product output, eBay/idealo mixture, absence of generic Productvorschau cards, absence of the unwanted direct-ad placeholder, and protected Journal/Glossar/Pferderassen outputs. Do not install either old 6.72.118 again.
