@@ -738,3 +738,36 @@ Sie enthalten unterschiedliche Recovery-Logik. Für keines ist ein Nutzer-LIVE-P
 **Status:** OPEN / LOCAL_RECOVERY_CANDIDATE_PASS / LIVE_RESTORE_TEST_OPEN.
 
 **Genau eine NEXT ACTION:** exakt obigen SHA einmal installieren und anschließend die zuvor beschädigten realen Produkt-/Artikelausgaben sowie die geschützten Ausgabepfade prüfen. Kein weiterer Fachumbau und keine der alten 6.72.118-Versionen installieren.
+
+
+### AFF-ERR-039 – kritischer Live-Nachtrag nach 6.72.119–6.72.123 – 20.09.2026
+
+**Neuer belastbarer Live-Befund:**
+- 6.72.119: Installation bewirkte laut Nutzer **keine sichtbare Wiederherstellung** der Kategorie-Produktkarten.
+- 6.72.120: lokaler Kandidat, **kein belastbarer LIVE-PASS**; nicht als Wiederherstellung werten.
+- 6.72.121: nach Installation blieben die drei generischen `Produktvorschau`-Karten sichtbar; **LIVE FAIL**.
+- 6.72.122: nach Installation gleicher sichtbarer Fehler; **LIVE FAIL**.
+- 6.72.123: nach Installation/Activation **kritischer LIVE FAIL: Frontend Timeout, WordPress-Backend nicht erreichbar**.
+
+**Fehlerklasse / Ursache:**
+- Für die ursprüngliche Wiederherstellungsblockade ist belegt: Code und persistenter WordPress-Zustand wurden in der 6.72.109–117-Linie gemeinsam verändert; ein Code-Downgrade allein stellt den früheren Zustand nicht wieder her.
+- Für den neuen 6.72.123-Timeout ist nur die unmittelbare zeitliche/operative Kausalität zur Installation belastbar. Der exakte interne Timeout-Mechanismus ist **noch nicht bewiesen** und darf nicht geraten werden.
+- Prozessfehler 119–123: lokale E2E-Harnesses starteten aus rekonstruierten/simulierten Schadenszuständen und konnten deshalb grün sein, obwohl der echte Livezustand davon abwich. Solche PASS dürfen nicht mehr als System-PASS gelten.
+
+**Verbindliche Hard Rule ab jetzt:**
+- Beide Teile gemeinsam prüfen: **Plugin-Code + real erfasster persistenter WordPress-Zustand**.
+- Gesamtworkflow binden: persistenter Zustand → Provider/Kampagne → Zielbindung → `category_product_1..3` → eBay/idealo-Auswahl → Renderer → finales HTML → Template-`is_real` → sichtbare Kategorie.
+- Positiv + Negativ + fail-closed gegen den kompletten Workflow.
+- Kein weiterer Minifix, kein weiterer Installer, solange der erste echte Fehler offen ist.
+
+**Failed artifact 6.72.123:**
+- `AFFILIATE_ZENTRALE_V6.72.123_CATEGORY_PRODUCT_STRUCTURE_RESTORE_FULLSYSTEM_HARDTEST.zip`
+- SHA-256 `c71d8fb8fc03751b0377b525e7d2b7c791ee424d7b219c3d042a41b20de7aa44`
+- Status: **FORBIDDEN / DO NOT REINSTALL / DO NOT PROMOTE**.
+
+**Incident-/Handoff-Protokoll:**
+`protocol/AFFILIATE_RELEASE_TIMEOUT_672123_HANDOFF_20260920.md`
+
+**Genau eine NEXT ACTION:** Außerhalb von WordPress-Admin den aktiven Pluginordner `affiliate-portal-router` deaktivieren/umbenennen, damit WordPress ohne 6.72.123 bootet. Kein anderes Affiliate-ZIP installieren/aktivieren. Abschlussbedingung: `/wp-admin/` und eine öffentliche Seite laden wieder. Erst danach read-only Live-State erfassen; vor diesem Readback kein weiterer Recovery-Build.
+
+**Status:** OPEN / CURRENT_FIRST_BLOCKER / CRITICAL_SITE_UNREACHABLE_AFTER_6_72_123.
