@@ -55,6 +55,10 @@ jobs:
           grep -Fx 'NETWORK_EBAY=922' /tmp/seed.log
           grep -Fx 'NETWORK_IDEALO=1090' /tmp/seed.log
           wp db export /tmp/healthy.sql --path=/tmp/wp
+      - name: Diagnose exact eBay loss in healthy historical state
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/diagnose_selection.php" --path=/tmp/wp | tee /tmp/selection-diagnostic.log
       - name: Start real WordPress frontend
         run: |
           set -euo pipefail
@@ -67,15 +71,18 @@ jobs:
           curl -fsS --max-time 5 'http://127.0.0.1:8080/' >/dev/null
       - name: Run complete real-HTTP render-path scenarios
         run: |
-          set -euo pipefail
+          set -uo pipefail
           : > /tmp/e2e-results.txt
+          rc=0
           for s in healthy idealo_only missing_exact_reithelme one_exact_stallhalfter live_damage; do
-            wp db import /tmp/healthy.sql --path=/tmp/wp >/dev/null
-            AFF_E2E_SCENARIO="$s" wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp
+            wp db import /tmp/healthy.sql --path=/tmp/wp >/dev/null || rc=1
+            AFF_E2E_SCENARIO="$s" wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp || rc=1
             echo "===== $s =====" | tee -a /tmp/e2e-results.txt
-            python3 "$GITHUB_WORKSPACE/e2e/check_http.py" "$s" | tee -a /tmp/e2e-results.txt
+            python3 "$GITHUB_WORKSPACE/e2e/check_http.py" "$s" 2>&1 | tee -a /tmp/e2e-results.txt
+            test ${PIPESTATUS[0]} -eq 0 || rc=1
           done
           cat /tmp/e2e-results.txt
+          exit $rc
       - name: Prove display assets untouched
         run: |
           set -euo pipefail
