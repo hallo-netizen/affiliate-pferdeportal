@@ -80,3 +80,32 @@ Bis Recovery-LIVE-PASS:
 ## Danach
 
 Erst nach Recovery-LIVE-PASS zurück zu `AFF-ERR-035`: exakten 6.72.108-Tree gegen die kanonische 6.72.105-Source reconciliieren. Danach erst wieder der normale Creative-/Awin-Zielvertrag.
+
+
+## Korrektur 20.09.2026 – KISS-Recovery nach vollständiger Paketprüfung
+
+Diese Korrektur folgt der ausdrücklichen Nutzeranweisung: **Kein direkter Live-Datenbankzugang ist Voraussetzung dieser Wiederherstellung.** Der zuvor gebundene DB-/Options-Readback als zwingender erster Schritt war zu streng und wird durch den belegten Paket-/Historienweg ersetzt.
+
+Hart geprüft wurden die tatsächlich vorhandenen 6.72.108–6.72.118-Pakete sowie Affiliate-Büro und Plugin-Updateprotokoll. Dabei ist die konkrete Recovery-Fehlkette belegt:
+
+- die breite 6.72.118 löscht die 6.72.115-/117-Nachweismarker;
+- die schmale 6.72.118 verlangt anschließend genau beide Marker und kann deshalb `not_applicable` werden;
+- die schmale 6.72.118 macht nur `idealo_only -> automatic` rückgängig und ist kein vollständiger Restore;
+- bei bereits `running` wird ihr Batch auf normalen Requests nicht weitergeführt;
+- die breite 6.72.118 kann einen Voll-Rebuild mit Grund `v672118_restore_exact_672108_runtime` hinterlassen.
+
+Deshalb ist genau **ein** neuer Recovery-Kandidat als Ausnahme vom bisherigen Versionsstopp autorisiert, ohne neue Fachlogik:
+
+`AFFILIATE_ZENTRALE_V6.72.119_KISS_EMERGENCY_RESTORE_POSNEG.zip`
+
+SHA-256:
+`eb51dcbd19c62dae1a3958d209676926aa02793cb13a8fe64292ed53c3bcea74`
+
+Evidence:
+`release/affiliate-zentrale/evidence/affiliate_672119_kiss_recovery_local_20260920.txt`
+
+6.72.119 basiert fachlich exakt auf 6.72.108; außer Hauptdatei und Readme sind alle Dateien bytegleich. Es löscht keine Inventare, erhöht keine globale Revision, startet keinen neuen Voll-Rebuild, verändert keine Bannerfelder und erzeugt keine neuen Artikelpläne. Es stoppt ausschließlich einen eindeutig vom ersten 6.72.118-Restore hinterlassenen Voll-Rebuild und repariert ausschließlich die Produktteile bereits gespeicherter Artikelpläne.
+
+Lokale Abnahme: Original-118-Fehlernachweis 12/12 PASS; Recovery statisch 55/55 PASS; Runtime 30/30 PASS; Banner-Mutationsprobe fail-closed PASS; PHP 21/21; Fresh-Unpack 26/26 byteidentisch.
+
+**Neue einzige operative NEXT ACTION:** genau den oben genannten SHA einmal installieren und anschließend die zuvor beschädigten realen Ausgaben visuell prüfen. Kein LIVE-PASS vor diesem Readback. Beide alten 6.72.118 bleiben gesperrt. Keine Featurearbeit.
