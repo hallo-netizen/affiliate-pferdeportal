@@ -24,6 +24,31 @@ foreach((array)$all as $c){
     if(!in_array($needle,(array)($c['automation_target_keys']??array()),true))continue;
     $exact[]=$c;
 }
+
+$firstEbay=null; foreach($exact as $c){if(sanitize_key((string)($c['network']??''))==='ebay'){$firstEbay=$c;break;}}
+if(is_array($firstEbay)){
+    $pid=absint($firstEbay['post_id']??0);
+    $portal=e2e_call($o,'output_local_portal_key');
+    $provider=e2e_call($o,'control_provider_gate','ebay',$portal);
+    $partner=e2e_call($o,'control_partner_gate',array('provider'=>'ebay','partner_external_id'=>(string)($firstEbay['advertiser_id']??'')),array('key'=>$portal));
+    $hash=strtolower(sanitize_text_field((string)get_post_meta($pid,'_ppar_creative_identity_hash',true)));
+    $creative=$hash!==''?e2e_call($o,'control_get_decision',$portal,'creative',$hash):array();
+    $outid=absint(get_post_meta($pid,'ppar_output_object_id',true));
+    $output=$outid>0?e2e_call($o,'control_output_gate',$portal,$outid):true;
+    $targets=array_values(array_filter(array_map('sanitize_text_field',(array)($firstEbay['automation_target_keys']??array()))));
+    $target=(count($targets)===1)?e2e_call($o,'control_target_gate',$portal,$targets[0]):true;
+    $slotg=e2e_call($o,'control_slot_gate',$portal,$slot);
+    $access=e2e_call($o,'provider_access_snapshot','ebay');
+    $chan=e2e_call($o,'provider_channel_snapshot','ebay');
+    $fmt=function($v){if(is_wp_error($v))return array('ok'=>false,'code'=>$v->get_error_code(),'message'=>$v->get_error_message());return array('ok'=>(bool)$v);};
+    echo 'DIAG_CONTROL_DETAIL='.wp_json_encode(array(
+      'portal'=>$portal,'post_id'=>$pid,'advertiser_id'=>(string)($firstEbay['advertiser_id']??''),
+      'provider'=>$fmt($provider),'partner'=>$fmt($partner),'creative'=>$creative,
+      'output_id'=>$outid,'output'=>$fmt($output),'target_count'=>count($targets),'target'=>$fmt($target),'slot'=>$fmt($slotg),
+      'access'=>$access,'channel'=>$chan
+    ),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)."\n";
+}
+
 echo 'DIAG_MODE='.sanitize_key((string)e2e_call($o,'idealo_output_mode'))."\n";
 echo 'DIAG_EXACT_COUNTS='.wp_json_encode(e2e_counts($exact),JSON_UNESCAPED_SLASHES)."\n";
 $stageNames=array('complete','current','program','seller','slot','rank','control','health','source_base','checkpoint','source_full','image');
