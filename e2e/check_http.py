@@ -37,6 +37,11 @@ if scenario=='healthy':
         if sum(x['real'] for x in slots)!=3: fail.append(f'HEALTHY_CARD_COUNT:{slug}')
     p={x['provider'] for x in results['reithelme']}
     if not {'ebay','idealo'} <= p: fail.append('HEALTHY_REITHELME_PROVIDER_MIX')
+elif scenario=='ebay_control_open':
+    for slug,slots in results.items():
+        if sum(x['real'] for x in slots)!=3: fail.append(f'CONTROL_OPEN_CARD_COUNT:{slug}')
+    p={x['provider'] for x in results['reithelme']}
+    if 'ebay' not in p: fail.append('CONTROL_OPEN_EBAY_STILL_ABSENT')
 elif scenario=='idealo_only':
     for slug,slots in results.items():
         if any(x['provider']=='ebay' for x in slots): fail.append(f'IDEALO_ONLY_EBAY_VISIBLE:{slug}')
