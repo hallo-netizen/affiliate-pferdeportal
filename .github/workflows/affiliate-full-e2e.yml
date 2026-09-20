@@ -75,7 +75,7 @@ jobs:
           set -uo pipefail
           : > /tmp/e2e-results.txt
           rc=0
-          for s in healthy idealo_only missing_exact_reithelme one_exact_stallhalfter live_damage; do
+          for s in healthy ebay_control_open idealo_only missing_exact_reithelme one_exact_stallhalfter live_damage; do
             wp db import /tmp/healthy.sql --path=/tmp/wp >/dev/null || rc=1
             AFF_E2E_SCENARIO="$s" wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp || rc=1
             echo "===== $s =====" | tee -a /tmp/e2e-results.txt
