@@ -42,7 +42,7 @@ jobs:
           rm -rf /tmp/wp && mkdir /tmp/wp
           wp core download --version=7.1 --path=/tmp/wp
           wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
-          wp core install --path=/tmp/wp --url=http://affiliate-e2e.local --title=AffiliateE2E --admin_user=admin --admin_password='e2e-pass-123!' --admin_email=e2e@example.test
+          wp core install --path=/tmp/wp --url=http://127.0.0.1:8080 --title=AffiliateE2E --admin_user=admin --admin_password='e2e-pass-123!' --admin_email=e2e@example.test
           unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/wp/wp-content/plugins
           wp plugin activate affiliate-portal-router --path=/tmp/wp
       - name: Seed real 2026-09-15 WXR product state
@@ -55,14 +55,25 @@ jobs:
           grep -Fx 'NETWORK_EBAY=922' /tmp/seed.log
           grep -Fx 'NETWORK_IDEALO=1090' /tmp/seed.log
           wp db export /tmp/healthy.sql --path=/tmp/wp
-      - name: Run complete render-path scenarios
+      - name: Start real WordPress frontend
+        run: |
+          set -euo pipefail
+          wp server --host=127.0.0.1 --port=8080 --path=/tmp/wp >/tmp/wp-server.log 2>&1 &
+          echo $! >/tmp/wp-server.pid
+          for n in $(seq 1 30); do
+            if curl -fsS --max-time 2 'http://127.0.0.1:8080/' >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS --max-time 5 'http://127.0.0.1:8080/' >/dev/null
+      - name: Run complete real-HTTP render-path scenarios
         run: |
           set -euo pipefail
           : > /tmp/e2e-results.txt
           for s in healthy idealo_only missing_exact_reithelme one_exact_stallhalfter live_damage; do
             wp db import /tmp/healthy.sql --path=/tmp/wp >/dev/null
+            AFF_E2E_SCENARIO="$s" wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp
             echo "===== $s =====" | tee -a /tmp/e2e-results.txt
-            AFF_E2E_SCENARIO="$s" wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp | tee -a /tmp/e2e-results.txt
+            python3 "$GITHUB_WORKSPACE/e2e/check_http.py" "$s" | tee -a /tmp/e2e-results.txt
           done
           cat /tmp/e2e-results.txt
       - name: Prove display assets untouched
