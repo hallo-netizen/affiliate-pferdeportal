@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 82,
+  "generation": 83,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "AFF_ERR_041_672127_EXACT_SUPPLY_ASSIGNMENT_LIVE_TEST_PENDING",
+    "current_focus": "AFF_ERR_042_672128_EXACT_WPVIVID_ASSIGNMENT_STATE_RESTORE_LIVE_PENDING",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_TIMEOUT_672123_HANDOFF_20260920.md",
-    "current_focus_reason": "6.72.126 DISCARDED: IT CHANGED THE HISTORICALLY CORRECT PARENT-TARGET CONTRACT. 6.72.127 IS BASED EXACTLY ON 6.72.125 AND RESTORES ONLY PERSISTED EXACT EBAY/IDEALO CAMPAIGN TARGET KEYS AND SAFELY REACTIVATABLE EXACT SUPPLY FROM EXISTING PROVIDER METADATA. HISTORICAL 2026-09-15 WORDPRESS DATA PROVES 95 ACTIVE EXACT REITHELME AND 25 ACTIVE EXACT STALLHALFTER BINDINGS. RENDERER/RANKER/TILES/AFF039/EBAY-DELETION REMAIN BYTE-IDENTICAL.",
+    "current_focus_reason": "PROVEN: 6.72.123/124 MUTATED ppar_assignments_v1 BY CONVERTING LEGACY fixed/none PRODUCT ASSIGNMENTS WITH EMPTY repair_reason TO automatic AND CLEARING product_ids. 6.72.126/127 TARGET-LOGIC APPROACHES WERE WRONG LAYER AND ARE DISCARDED. 6.72.128 BASES EXACTLY ON 6.72.125 AND RESTORES ONLY products_mode + product_ids FROM THE REAL PRE-INCIDENT WPVIVID DB BACKUP 2026-09-16 15:20 FOR ROWS MATCHING THE EXACT DAMAGE SIGNATURE. RENDERER/TILES/RANKING/AFF039/PROVIDERS/BANNERS REMAIN UNCHANGED.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -179,17 +179,17 @@
       ],
       "existing_downstream": "CREATIVE_LIBRARY_IMPORT_VERIFY_MATCH_DELIVER_REVALIDATE_ALREADY_PRESENT"
     },
-    "recovery_target_ref": "release/affiliate-zentrale/evidence/aff041_672127_exact_supply_assignment_rootfix_local_pass_20260920.txt",
-    "recovery_status": "AFF041_672127_LOCAL_FULL_PASS_LIVE_PENDING"
+    "recovery_target_ref": "release/affiliate-zentrale/evidence/aff042_672128_exact_wpvivid_assignment_restore_local_pass_20260920.txt",
+    "recovery_status": "AFF042_672128_LOCAL_FULL_PASS_LIVE_PENDING"
   },
   "execution_state": {
-    "state": "READY_EXPLICIT_672127_EXACT_SUPPLY_REPAIR_LIVE_TEST",
-    "authorized_next_action": "INSTALL_EXACT_672127_ONCE_THEN_RUN_PRODUCT_ASSIGNMENT_REPAIR_ONLY",
-    "bound_user_scope_action": "AFF-ERR-041 ONLY: INSTALL EXACT SHA-256 7129fbe9657765fb92dbc193d25dfe1e621165e9bbfe105b1366c1d6e6c1ff2f ONCE. IN AFFILIATE KONTROLLZENTRUM RUN 'PRODUKT-ZUORDNUNGEN REPARIEREN'. DO NOT RUN AFF039 AGAIN. DO NOT TOUCH TILE/RENDERER/RANKING PRINCIPLE. VERIFY REITHELME, STALLHALFTER AND REITERBEDARF SIBLING PAGES SHOW EXACT TOPIC-CORRECT PRODUCTS.",
-    "completion_condition": "REITHELME AND STALLHALFTER RESTORE AT LEAST THREE EXACT TOPIC-CORRECT PRODUCT CARDS WHERE SAFE PROVIDER SUPPLY EXISTS; SIBLING PAGES NO LONGER SHARE WRONG PARENT-TIER PRODUCTS; PRODUCT TILE VISUAL/RENDER BEHAVIOR, FRONTEND/WP-ADMIN AND EBAY REST REMAIN UNCHANGED/RESPONSIVE.",
-    "after_completion_action": "IF LIVE PASS, RECORD AND CANONICALIZE. IF FIRST LIVE ERROR OCCURS, STOP THE AFF041 BATCH AND FIX ONLY THAT ERROR. NO 6.72.126 REUSE AND NO RENDERER/RANKER CHANGE.",
+    "state": "READY_EXPLICIT_672128_EXACT_ASSIGNMENT_STATE_RESTORE",
+    "authorized_next_action": "INSTALL_EXACT_672128_ONCE_THEN_RUN_EXACT_HISTORICAL_PRODUCT_ASSIGNMENT_RESTORE",
+    "bound_user_scope_action": "AFF-ERR-042 ONLY: INSTALL EXACT SHA-256 3e6b081039f13e4eb60f6e719f1babfb840a8fc119c914e9d1611ae26865d16c ONCE. IN AFFILIATE KONTROLLZENTRUM CLICK 'ALTE PRODUKT-ZUORDNUNGEN EXAKT WIEDERHERSTELLEN'. DO NOT RUN AFF039. DO NOT RUN 126/127 REPAIR. DO NOT CHANGE TILE/RENDERER/RANKING. THE ACTION MAY WRITE ONLY ppar_assignments_v1 PLUS ITS SAFETY/STATE OPTIONS.",
+    "completion_condition": "THE EXACT PRE-INCIDENT PRODUCT ASSIGNMENT FIELDS ARE RESTORED FOR THE 6.72.123/124 DAMAGE SIGNATURE; REITHELME/STALLHALFTER/REITERBEDARF CHILD PAGES SHOW THEIR HISTORICALLY ASSIGNED PRODUCTS; PRODUCT TILE VISUALS/RENDERER/RANKING/BANNERS REMAIN UNCHANGED; FRONTEND/WP-ADMIN/EBAY REST REMAIN RESPONSIVE.",
+    "after_completion_action": "IF LIVE PASS, RECORD AND CANONICALIZE. IF BLOCKED, USE THE EXACT AFF042 ERROR/STATE ONLY; NO NEW ASSIGNMENT LOGIC OR DISPLAY CHANGE.",
     "no_optional_detours": true,
-    "sequence": 22,
+    "sequence": 23,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -197,7 +197,7 @@
       "control/release-governance/CURRENT_RELEASE.json",
       "protocol/AFFILIATE_RELEASE_"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/aff041_672127_exact_supply_assignment_rootfix_local_pass_20260920.txt"
+    "evidence_ref": "release/affiliate-zentrale/evidence/aff042_672128_exact_wpvivid_assignment_restore_local_pass_20260920.txt"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -543,10 +543,10 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "AFF_ERR_041_672127_EXACT_SUPPLY_LIVE_TEST",
+    "current_milestone": "AFF_ERR_042_672128_EXACT_HISTORICAL_ASSIGNMENT_RESTORE_LIVE",
     "max_parallel_workstreams": 1,
-    "microfix_policy": "PERSISTED_PRODUCT_ASSIGNMENT_AND_SAFE_SUPPLY_ONLY; RENDERER_RANKER_TILE_AND_AFF039_IMMUTABLE",
-    "new_version_policy": "FORBIDDEN_UNTIL_EXACT_672127 LIVE TEST RETURNS PASS OR FIRST CONCRETE ERROR",
+    "microfix_policy": "EXACT_PERSISTED_ASSIGNMENT_STATE_RESTORE_ONLY; DISPLAY_RENDERER_RANKER_CAMPAIGN_TARGET_LOGIC_IMMUTABLE",
+    "new_version_policy": "FORBIDDEN_UNTIL_EXACT_672128 LIVE RESTORE RETURNS PASS OR FIRST CONCRETE AFF042 ERROR",
     "investigation_policy": "NO_MORE_HISTORY_RECONSTRUCTION. USE PROVEN 6.72.108 BASE + ACTUAL 109-124 PACKAGES + 2026-09-15 WORDPRESS HISTORICAL LIVE EXPORT + AFF039 EBAY/BOOTSTRAP EVIDENCE.",
     "pass_reuse_policy": "REUSE_HASH_IDENTICAL_PASS_EVIDENCE_DO_NOT_RERUN",
     "goal_drift_policy": "FAIL_CLOSED",
@@ -622,15 +622,15 @@
   "operational_observation": {
     "checked_at": "2026-09-20",
     "live_plugin_version": "NONE_AFFILIATE_ROUTER_DIRECTORY_CURRENTLY_DELETED_BY_USER",
-    "live_status": "6.72.125 RESTORED CARD RENDERING. 6.72.126 PRODUCED NO VISIBLE CHANGE AND IS DISCARDED BECAUSE IT ALTERED THE CORRECT HISTORICAL PARENT-TARGET CONTRACT. 6.72.127 LOCAL FULL PASS RESTORES EXACT SUPPLY/TARGET BINDINGS ONLY; LIVE PENDING.",
+    "live_status": "6.72.125 RESTORED CARD DISPLAY BUT PRODUCT ASSIGNMENTS REMAIN WRONG. 6.72.126 AND 6.72.127 PRODUCED NO VALID LIVE RESTORATION AND ARE DISCARDED. ROOT CAUSE NOW PROVEN IN 6.72.123/124 ppar_assignments_v1 MUTATION. 6.72.128 EXACT HISTORICAL STATE RESTORE LOCAL FULL PASS; LIVE PENDING.",
     "last_known_good_operational_version": "6.72.108",
     "last_known_good_artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
     "last_known_good_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
     "canonical_plugin_version": "6.72.105",
     "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_drift": "LAST_KNOWN_GOOD_6_72_108_VS_CANONICAL_6_72_105_REMAINS_OPEN_BUT IS SECONDARY TO LIVE RECOVERY",
-    "first_blocker": "AFF-ERR-041_EXACT_PRODUCT_SUPPLY_LIVE",
-    "evidence_ref": "release/affiliate-zentrale/evidence/aff041_672127_exact_supply_assignment_rootfix_local_pass_20260920.txt",
+    "first_blocker": "AFF-ERR-042_EXACT_ASSIGNMENT_STATE_RESTORE_LIVE",
+    "evidence_ref": "release/affiliate-zentrale/evidence/aff042_672128_exact_wpvivid_assignment_restore_local_pass_20260920.txt",
     "recovery_target_ref": "release/affiliate-zentrale/evidence/aff039_ebay_endpoint_global_bootstrap_rootcause_20260920.txt",
     "previous_blocker_after_recovery": "AFF-ERR-035",
     "awin_functional_blocker_after_reconciliation": "AFF-ERR-038",
@@ -646,18 +646,22 @@
       }
     ],
     "recovery_candidate": {
-      "version": "6.72.127",
-      "status": "EXACT_SUPPLY_ASSIGNMENT_LOCAL_FULL_PASS_LIVE_PENDING",
-      "artifact_filename": "AFFILIATE_ZENTRALE_V6.72.127_EXACT_SUPPLY_ASSIGNMENT_ROOTFIX_HARDTEST.zip",
-      "artifact_sha256": "7129fbe9657765fb92dbc193d25dfe1e621165e9bbfe105b1366c1d6e6c1ff2f",
+      "version": "6.72.128",
+      "status": "EXACT_WPVIVID_ASSIGNMENT_STATE_RESTORE_LOCAL_FULL_PASS_LIVE_PENDING",
+      "artifact_filename": "AFFILIATE_ZENTRALE_V6.72.128_EXACT_WPVIVID_ASSIGNMENT_STATE_RESTORE_HARDTEST.zip",
+      "artifact_sha256": "3e6b081039f13e4eb60f6e719f1babfb840a8fc119c914e9d1611ae26865d16c",
       "base": "6.72.125",
+      "source_backup": "pferde-atelier.de_wpvivid-80a4b8c41fcc8_2026-09-16-15-20_backup_db.zip",
+      "source_backup_size": 91834498,
       "changed_files": 2,
       "fresh_unpack": "26_OF_26_BYTE_IDENTITY_PASS",
       "php_lint": "21_OF_21_PASS",
-      "historical_contract": "PASS",
-      "damage_repair_simulation": "PASS",
+      "runtime_matrix": "PASS",
       "live_pass": false,
-      "discarded_predecessor": "6.72.126"
+      "discarded_predecessors": [
+        "6.72.126",
+        "6.72.127"
+      ]
     }
   }
 }
