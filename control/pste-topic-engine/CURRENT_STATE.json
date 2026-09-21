@@ -2,38 +2,34 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "PASS_REAL_WORDPRESS_SYSTEM_RELEASE_BYTES_NOT_YET_CAPTURED",
+  "status": "PASS_REAL_WORDPRESS_SYSTEM_EXACT_RELEASE_BYTES_CAPTURED",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "64e868dd113475dcb20273dbfa6c6ea9cd1e0776",
+    "technical_head": "d8b5ab14a7363b020c24d130acc792cee1b0fe10",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35613932903,
+    "run_id": 35616096517,
     "run_result": "SUCCESS",
-    "evidence_digest": "sha256:2676d2eea65ecfa1906eaffe291118942836879b958ef57f9b694cc12699f427",
+    "evidence_digest": "sha256:9e0baefba82b9160704bb9db741e8f40a893e8dcdc29760c4a853485e0765ad1",
     "candidate": "0.57.2-HOBBYROOM",
-    "candidate_sha256": "4c4ede7a8db0422159fde01ad270006d3e90e03ba28d4090ea5eba92c1dd842a",
-    "release": "NOT_RELEASED"
+    "candidate_sha256": "46ca34d74e57ee3043bb857b305ed427deeb2f0ca2015b44431541a156bc28ca",
+    "release": "READY_EXACT_TESTED_BYTES"
   },
   "proven": {
     "real_wp_mysql_multiworker": "PASS",
     "strict_serial_driver_positive_negative": "PASS",
     "real_admin_ajax_single": "PASS_15_CANDIDATES_5_USABLE_PROVIDER_COUNTS_EXACT",
-    "breadth_target": "PASS_TARGET_REACHED_40_USABLE_87_RAW_27_ITEMS_24_COMPLETE_3_PARKED",
+    "breadth_target": "PASS_TARGET_REACHED_40_USABLE_88_RAW_27_ITEMS_24_COMPLETE_3_PARKED",
     "breadth_verifier": "PASS_PROVIDER_COUNTS_EXACT_26_EACH",
-    "same_head_workflows": {
-      "real_wordpress_http_e2e": "PASS_RUN_35613932903",
-      "separate_process_full_system": "PASS_RUN_35613932941",
-      "final_zip_full_workflow": "PASS_RUN_35613932913",
-      "complete_system_simulation": "PASS_RUN_35613932949"
-    }
+    "exact_tested_zip_captured": "PASS_ARTIFACT_10646478765",
+    "exact_tested_zip_sha256": "46ca34d74e57ee3043bb857b305ed427deeb2f0ca2015b44431541a156bc28ca"
   },
   "first_blocker": null,
   "next_action": {
-    "id": "CAPTURE_EXACT_TESTED_RELEASE_BYTES",
-    "action": "Add the exact built /tmp/PSTE-0.57.2-HOBBYROOM.zip to the Real WordPress evidence artifact, rerun the unchanged full real WordPress E2E from zero, require strict serial positive/negative + real single + breadth target 40 + exact provider counts to PASS, then bind and release only that uploaded ZIP whose SHA-256 is emitted by the same successful run.",
-    "success": "EXACT_TESTED_PLUGIN_ZIP_CAPTURED_FROM_SUCCESSFUL_REAL_SYSTEM_RUN",
-    "until_then": "NO_RELEASE"
+    "id": "NONE_SYSTEM_PROOF_COMPLETE",
+    "action": "No further PSTE product fix is authorized from this incident. Use only the exact captured tested ZIP if deploying/releasing this proven candidate.",
+    "success": "SYSTEM_PROOF_COMPLETE",
+    "until_then": "N/A"
   },
   "freshness": "ON_NEW_CHAT_READ_START_HERE_THEN_THIS_FILE; IF_TECHNICAL_HEAD_AND_REAL_RUN_UNCHANGED_DO_NOT_RECONSTRUCT_HISTORY; IF_CHANGED_INSPECT_ONLY_DELTA",
   "rules": [
@@ -45,8 +41,8 @@
     "NO_RELEASE_BEFORE_REAL_BREADTH_PASS"
   ],
   "plugin": {
-    "release_blocked": true,
-    "current_zip_replace": false
+    "release_blocked": false,
+    "current_zip_replace": true
   },
   "refs": {
     "door": "control/pste-topic-engine/START_HERE.json",
