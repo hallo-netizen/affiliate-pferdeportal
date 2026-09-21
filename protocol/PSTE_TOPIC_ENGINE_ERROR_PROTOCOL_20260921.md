@@ -97,3 +97,17 @@ Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` gepa
 - Codebeweis: Wenn beim initialen Seitenrender keine aktive Breadth-Queue existiert, wird der HTML-Block mit IDs pste-breadth-status / progress / usable / blocked / detail gar nicht ausgegeben. Der AJAX-START setzt zwar queue=d.queue und ruft renderQueue(queue), aber die Zielelemente existieren in diesem DOM nicht.
 - Folge: Server kann laufen, während die Oberfläche weiterhin den Startzustand zeigt; der Nutzer kann Arbeit vs. Hänger nicht zuverlässig erkennen.
 - Erforderlich: Start- und Aktiv-UI beide rendern und nach START/Status ohne Reload umschalten; laufenden Child-/Finalize-Stand sichtbar halten.
+
+
+## PSTE-ERR-REAL-008 – 0.57.4 Hobbyraum schließt PREPARE-/UI-Lücke unter Stress
+- Ausgang: echter Nutzer-Live-Fail mit 0.57.3 bei FINALIZE PREPARE / PSTE_DRIVER_STEP_OVERDUE sowie blinde Produktionswellen-UI bis Reload.
+- Produktänderung: FINALIZE PREPARE in persistierte, begrenzte Teilschritte zerlegt; Start-/Fortschritts-UI wird ohne Reload sichtbar und zeigt laufenden Finalize-Stand.
+- Verschärfter Real-WordPress/MySQL/Multiworker-Test: Run `35645482192` — SUCCESS.
+- Browser ohne Reload: `PASS_BROWSER_START_NO_RELOAD_LIVE_PROGRESS`.
+- Stale Status nach neuem Start: `PASS_BROWSER_STALE_STATUS_IGNORED_AFTER_NEW_QUEUE_START`.
+- PREPARE-Stress: 303 Kandidaten, nachweislich mehrere Requests, `PASS_STRESS_PREPARE_MULTI_REQUEST total=303`.
+- Danach im selben Workflow normale Produktionswelle: `TARGET_REACHED`, 41 nutzbare / 79 rohe Kandidaten, 26 Items, 22 COMPLETE, 4 ausschließlich fachlich `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` geparkt.
+- Technische Parkfehler: 0. Providercounts exakt 25 je Stufe. Driver am Ende IDLE.
+- Evidence Artifact: `10659823699`, Digest `sha256:f5da0cc4dde3cc5de1eed0ae64f6381f574f676b0792912c4082f015da2ff171`.
+- Exakt getestete Plugin-ZIP: `PSTE-0.57.4-HOBBYROOM.zip`, SHA-256 `8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c`.
+- Status: Hobbyraum-PASS. Echter Nutzer-Live-PASS mit exakt diesen Bytes bleibt offen; keine PPA-005-Promotion vorher.
