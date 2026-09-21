@@ -95,14 +95,15 @@ jobs:
           grep -Fx 'HISTORY_EBAY_CONTROL=PASS' /tmp/116-probe.log
           wp db export /tmp/state116.sql --path=/tmp/wp
 
-      - name: Start frontend server
+      - name: Start frontend server with exact Pferde Atelier host identity
         run: |
           set -euo pipefail
-          wp option update home 'http://127.0.0.1:8080' --path=/tmp/wp >/dev/null
-          wp option update siteurl 'http://127.0.0.1:8080' --path=/tmp/wp >/dev/null
+          echo '127.0.0.1 pferde-atelier.de' | sudo tee -a /etc/hosts >/dev/null
+          wp option update home 'http://pferde-atelier.de:8080' --path=/tmp/wp >/dev/null
+          wp option update siteurl 'http://pferde-atelier.de:8080' --path=/tmp/wp >/dev/null
           wp server --host=127.0.0.1 --port=8080 --path=/tmp/wp >/tmp/wp-server.log 2>&1 &
           for n in $(seq 1 30); do
-            if curl -fsS --max-time 2 'http://127.0.0.1:8080/' >/dev/null; then break; fi
+            if curl -fsS --noproxy '*' --max-time 2 'http://pferde-atelier.de:8080/' >/dev/null; then break; fi
             sleep 1
           done
 
@@ -110,7 +111,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -f /tmp/aff-history-stop
-          python3 "$GITHUB_WORKSPACE/e2e/check_http.py" ebay_control_open | tee /tmp/116-http.log
+          AFF_E2E_BASE_URL='http://pferde-atelier.de:8080' NO_PROXY='*' no_proxy='*' python3 "$GITHUB_WORKSPACE/e2e/check_http.py" ebay_control_open | tee /tmp/116-http.log
           grep -q '"provider":"ebay"' /tmp/116-http.log
           grep -q '"provider":"idealo"' /tmp/116-http.log
           echo V116_VISIBLE_PASS
@@ -132,7 +133,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -f /tmp/aff-history-stop
-          python3 "$GITHUB_WORKSPACE/e2e/check_http.py" idealo_only | tee /tmp/117-http.log
+          AFF_E2E_BASE_URL='http://pferde-atelier.de:8080' NO_PROXY='*' no_proxy='*' python3 "$GITHUB_WORKSPACE/e2e/check_http.py" idealo_only | tee /tmp/117-http.log
           if grep -q '"provider":"ebay"' /tmp/117-http.log; then
             echo UNEXPECTED_EBAY_VISIBLE_AFTER_117
             exit 1
