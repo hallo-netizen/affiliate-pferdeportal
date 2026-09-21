@@ -64,3 +64,17 @@ jobs:
           find /tmp/codex -type f -name '*.php' | grep -Ei 'test_|workflow|breadth|planning|rootcause' || true
           echo "=== JSON WORKFLOW INVENTORY ==="
           find /tmp/codex -type f -name '*.json' | grep -Ei 'FULL_WORKFLOW|WORKFLOW|BREADTH|PLANNING|ROOTCAUSE' || true
+
+      - name: Inspect exact PSERC compiler runtime package
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f control/startmaster0107/runtime_packages/PSERC-FIX.zip
+          echo "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  control/startmaster0107/runtime_packages/PSERC-FIX.zip" | sha256sum -c -
+          rm -rf /tmp/pserc
+          mkdir -p /tmp/pserc
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc
+          echo "=== PSERC ENTRYPOINTS ==="
+          grep -RIn -E 'plan_slot|READY|PSTE|handoff|compile|generation|retention|production_plan' /tmp/pserc --include='*.php' | sed -n '1,1200p'
+          echo "=== PSERC TESTS ==="
+          find /tmp/pserc -type f | grep -Ei 'test|workflow|fixture' | sort | sed -n '1,1200p'
