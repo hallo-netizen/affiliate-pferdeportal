@@ -88,7 +88,7 @@ jobs:
         run: |
           set -euo pipefail
           wp eval '$e=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","emptyRegistry");$e->setAccessible(true);$v=$e->invoke(null);$p=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","persistRegistry");$p->setAccessible(true);$p->invoke(null,$v);' --path=/tmp/wordpress
-          wp eval-file proof/pste-wordpress-real-e2e/setup-site-v2.php --path=/tmp/wordpress | tee /tmp/setup.json
+          wp eval-file proof/pste-wordpress-real-e2e/setup-site-v3.php --path=/tmp/wordpress | tee /tmp/setup.json
           grep -q '"ready":true' /tmp/setup.json
           grep -q '"context_status":"COMPLETE"' /tmp/setup.json
           wp eval 'if(!PSTE_Sandbox_Record_Store::isComplete())throw new RuntimeException("SANDBOX_RECORD_STORE_NOT_COMPLETE"); echo "PASS EMPTY_SANDBOX_REAL_MIGRATION\n";' --path=/tmp/wordpress
