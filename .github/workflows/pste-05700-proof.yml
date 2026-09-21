@@ -36,6 +36,14 @@ jobs:
           set -euo pipefail
           cd /tmp/pste05700-proof/pste05700_github_control
           bash ./run.sh
+      - name: Upload exact tested control bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSTE-0.57.0-EXACT-TESTED-CONTROL-BUNDLE
+          path: /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip
+          if-no-files-found: error
+          retention-days: 30
       - name: Locate and verify exact fresh ZIP candidate
         id: fresh_zip
         shell: bash
