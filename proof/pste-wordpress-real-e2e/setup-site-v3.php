@@ -28,7 +28,7 @@ $settings['monthly_budget_usd']=1000.0;
 update_option(PSTE_OPTION_SETTINGS,$settings,false);
 PSTE_Credentials::saveFromAdmin('e2e-login','e2e-password');
 
-$fixture=json_decode(file_get_contents(WP_PLUGIN_DIR.'/portal-seo-topic-engine/fixtures/portal-category-map-v1.json'),true);
+$fixture=json_decode(file_get_contents(WP_PLUGIN_DIR.'/Portal SEO Topic Engine/fixtures/portal-category-map-v1.json'),true);
 if(!is_array($fixture)||empty($fixture['entries']))throw new RuntimeException('FIXTURE_INVALID');
 
 $byProduct=[];
