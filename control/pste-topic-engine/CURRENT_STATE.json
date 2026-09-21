@@ -7,8 +7,6 @@
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
     "technical_head": "e2f13056013bab8ab6dca84b56f03fad16024b17",
-    "branch_head_freshness": "76effd52a40a0b4ec0b6948649ea052fe8a6fdd9",
-    "branch_head_delta_from_technical_head": "CURRENT_AND_PROTOCOL_DOCUMENTATION_ONLY_NO_PRODUCT_CODE_CHANGE",
     "workflow": "PSTE Real WordPress HTTP E2E",
     "run_id": 35646020136,
     "run_result": "SUCCESS",
@@ -18,7 +16,8 @@
     "candidate_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "GITHUB_FINAL_FULL_STRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN"
+    "release": "GITHUB_FINAL_FULL_STRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN",
+    "post_pass_branch_delta": "DOCUMENTATION_ONLY_CURRENT_STATE_ERROR_PROTOCOL_WORKLOG_NO_PRODUCT_OR_PROOF_CHANGE"
   },
   "proven": {
     "package_total_files": "PASS_131",
@@ -40,7 +39,8 @@
     "separate_process_full_system": "PASS",
     "complete_system_simulation": "PASS",
     "exact_tested_zip_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
-    "superseded_first_0574_pass_zip_sha256": "8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c"
+    "superseded_first_0574_pass_zip_sha256": "8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c",
+    "final_0574_content_tree_matches_first_0574_pass": "PASS_IDENTICAL_131_FILE_CONTENTS"
   },
   "fixed_live_failures": {
     "PSTE_DRIVER_STEP_OVERDUE_FINALIZE_PREPARE": "FIXED_IN_HOBBYROOM_BY_PERSISTED_BOUNDED_PREPARE_STEPS_AND_STRESS_PROOF",
