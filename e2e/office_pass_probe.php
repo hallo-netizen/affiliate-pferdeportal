@@ -15,7 +15,7 @@ foreach($want as $slot=>$expected){
   $sel=office_call($o,'select_campaign_for_slot',$cctx,$slot,'');
   $c=is_array($sel)&&is_array($sel['campaign']??null)?$sel['campaign']:array();
   $id=absint($c['post_id']??0); $provider=sanitize_key((string)($c['network']??''));
-  $html=office_call($o,'render_affiliate_slot_for_context',$cctx,$slot,'');
+  $html=office_call($o,'render_affiliate_slot_for_context',186,$cctx,$slot,'');
   $real=is_string($html) && $html!=='' && stripos($html,'Produktvorschau')===false;
   $got[$slot]=array('id'=>$id,'provider'=>$provider,'real_card'=>$real);
   if($id!==$expected['id'])$fail[]=$slot.':ID:'.$id;
