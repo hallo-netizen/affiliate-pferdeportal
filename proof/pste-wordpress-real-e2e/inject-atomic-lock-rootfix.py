@@ -62,4 +62,36 @@ new="private static function releaseStepLock(string $token): void {try{global $w
 if old not in s: raise SystemExit("SAFE_RELEASE_ANCHOR_MISSING")
 p.write_text(s.replace(old,new,1),encoding="utf-8")
 
-print("PASS ATOMIC_LOCK_ROOTFIX_INJECTED")
+
+# Hard postconditions: no silent partial application.
+checks = {
+    "includes/class-pste-research-driver.php": [
+        "deleteOwnedLockAtomically(PSTE_OPTION_RESEARCH_DRIVER_LOCK,$token)",
+        "deleteExpiredLockAtomically(PSTE_OPTION_RESEARCH_DRIVER_LOCK)",
+    ],
+    "includes/class-pste-research-job.php": [
+        "deleteOwnedOptionLockAtomically(PSTE_OPTION_RESEARCH_STEP_LOCK,$token)",
+        "deleteExpiredOptionLockAtomically(PSTE_OPTION_RESEARCH_STEP_LOCK)",
+    ],
+    "includes/class-pste-breadth-research-queue.php": [
+        "deleteOwnedOptionLockAtomically(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$token)",
+        "deleteExpiredOptionLockAtomically(PSTE_OPTION_BREADTH_RESEARCH_LOCK)",
+    ],
+}
+for rel, needles in checks.items():
+    text=(root/rel).read_text(encoding="utf-8")
+    for needle in needles:
+        if needle not in text:
+            raise SystemExit(rel+"_ATOMIC_LOCK_POSTCONDITION_MISSING_"+needle)
+unsafe = {
+    "includes/class-pste-research-driver.php": ["delete_option(PSTE_OPTION_RESEARCH_DRIVER_LOCK)"],
+    "includes/class-pste-research-job.php": ["delete_option(PSTE_OPTION_RESEARCH_STEP_LOCK)"],
+    "includes/class-pste-breadth-research-queue.php": ["delete_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK)"],
+}
+for rel, needles in unsafe.items():
+    text=(root/rel).read_text(encoding="utf-8")
+    for needle in needles:
+        if needle in text:
+            raise SystemExit(rel+"_UNSAFE_LOCK_DELETE_REMAINS_"+needle)
+
+print("PASS ATOMIC_LOCK_ROOTFIX_INJECTED_AND_VERIFIED")
