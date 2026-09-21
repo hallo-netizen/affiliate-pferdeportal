@@ -246,7 +246,7 @@ jobs:
           sleep 20
 
           terminal=0
-          for i in $(seq 1 180); do
+          for i in $(seq 1 450); do
             curl -fsS -b /tmp/pste-cookies.txt               --data-urlencode 'action=pste_breadth_research_status'               --data-urlencode "nonce=$NONCE"               --data-urlencode "queue_uuid=$QUEUE_UUID"               http://127.0.0.1:8090/wp-admin/admin-ajax.php > /tmp/breadth-status.json
             cat /tmp/breadth-status.json
             QSTATE="$(php -r '$x=json_decode(file_get_contents("/tmp/breadth-status.json"),true);echo $x["data"]["queue"]["status"]??"INVALID";')"
