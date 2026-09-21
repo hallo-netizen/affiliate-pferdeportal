@@ -29,10 +29,10 @@ if old not in s:
 s = s.replace(old, new, 1)
 
 old = """    public static function repairInvalidTopicPayloads(): array {
-        self::assertOwnJsonStorageReady();global $wpdb;"""
+        global $wpdb;"""
 new = """    public static function repairInvalidTopicPayloads(): array {
         error_log('PSTE_QUARTRACE REPAIR_ENTER t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' uri='.(string)($_SERVER['REQUEST_URI']??'CLI'));
-        self::assertOwnJsonStorageReady();global $wpdb;"""
+        global $wpdb;"""
 if old not in s:
     raise SystemExit("REPAIR_ENTRY_ANCHOR_MISSING")
 s = s.replace(old, new, 1)
