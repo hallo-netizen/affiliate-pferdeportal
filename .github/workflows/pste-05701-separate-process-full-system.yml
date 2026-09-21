@@ -53,6 +53,16 @@ jobs:
             exit 1
           fi
 
+      - name: Bind repaired candidate version 0.57.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAIN=/tmp/pste05701/base/portal-seo-topic-engine/portal-seo-topic-engine.php
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.1/' "$MAIN"
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.1');/" "$MAIN"
+          grep -q 'Version: 0.57.1' "$MAIN"
+          grep -q "define('PSTE_VERSION', '0.57.1');" "$MAIN"
+
       - name: Full candidate PHP syntax
         shell: bash
         run: |
@@ -171,11 +181,19 @@ jobs:
           grep -q "PSTE_PROVIDER_TRANSPORT_OUTCOME_UNKNOWN" "$JOB"
           echo "PASS RETRY_SPLIT_HARDLOCK"
 
-      - name: Build test-only candidate hash
+      - name: Build fully tested 0.57.1 candidate bytes
         shell: bash
         run: |
           set -euo pipefail
           cd /tmp/pste05701/base
-          zip -qr /tmp/PSTE-0.57.1-TEST-ONLY.zip portal-seo-topic-engine
-          sha256sum /tmp/PSTE-0.57.1-TEST-ONLY.zip | tee /tmp/PSTE-0.57.1-TEST-ONLY.sha256
-          echo "TEST_ONLY_NOT_RELEASED"
+          zip -qr /tmp/PSTE-0.57.1-CANDIDATE.zip portal-seo-topic-engine
+          sha256sum /tmp/PSTE-0.57.1-CANDIDATE.zip | tee /tmp/PSTE-0.57.1-CANDIDATE.sha256
+          echo "CANDIDATE_NOT_RELEASED"
+
+      - name: Upload candidate only after full proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSTE-0.57.1-CANDIDATE-AFTER-FULL-PROOF
+          path: /tmp/PSTE-0.57.1-CANDIDATE.zip
+          if-no-files-found: error
+          retention-days: 7
