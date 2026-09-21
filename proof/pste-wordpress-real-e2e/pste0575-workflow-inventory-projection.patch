@@ -1,0 +1,66 @@
+--- a/includes/class-pste-repository.php
++++ b/includes/class-pste-repository.php
+@@ -2585,8 +2585,34 @@
+         return $wpdb->get_results("SELECT r.category_id,r.run_uuid,r.status,r.updated_at FROM ".self::table('runs')." r INNER JOIN (SELECT r2.category_id,MAX(r2.id) AS max_id FROM ".self::table('runs')." r2 INNER JOIN ".self::table('candidates')." c2 ON c2.run_uuid=r2.run_uuid GROUP BY r2.category_id) latest ON latest.max_id=r.id",ARRAY_A)?:[];
+     }
+ 
+-    public static function previousCandidateInventory(string $excludeRunUuid = ''): array {
+-        $out=[];foreach(self::allCandidates() as $c){if(!in_array((string)($c['decision']??''),['PASS','REVIEW_REQUIRED'],true))continue;if($excludeRunUuid!==''&&in_array($excludeRunUuid,$c['seen_in_runs']??[],true))continue;$category=(string)($c['target_category_name']??'');$out[]=['post_id'=>0,'title'=>PSTE_Editorializer::displayTitle($c),'status'=>'draft','category_name'=>$category,'topic_family_name'=>$c['topic_family_name']??PSTE_Normalizer::categoryFamilyName($category),'topic_family_key'=>$c['topic_family_key']??PSTE_Normalizer::categoryFamilyKey($category),'headings'=>[],'intent_cluster_id'=>$c['intent_cluster_id']??'','source'=>'PSTE_TOPIC_POOL'];}return $out;
++    public static function previousCandidateInventory(string $excludeRunUuid = '',string $familyKey='',string $familyName=''): array {
++        global $wpdb;
++        // Workflow projection only. The duplicate/readiness gate can only act on the same
++        // family (the historical projection carries no explicit target_keyword/category_slug),
++        // so unrelated topic-pool rows and all relation tables have zero decision authority here.
++        $table=self::table('topic_pool');
++        $statuses=['APPROVED','AUTO_RESOLVED','REVIEW_REQUIRED','PROVISIONAL_ACCEPTED','PROVISIONAL_REASSIGN','REASSIGNED'];
++        $quoted=implode(',',array_fill(0,count($statuses),'%s'));
++        $sql=$wpdb->prepare("SELECT pool_key,normalized_key,automatic_decision,automatic_pool_status,topic_role,planning_suitability,context_state,structure_sha256,context_synced_at,manual_status,manual_category_id,manual_article_type,manual_note,payload_json,occurrence_count,first_seen_at,last_seen_at FROM $table WHERE (manual_status IN ($quoted) OR (manual_status='' AND automatic_pool_status IN ($quoted))) ORDER BY last_seen_at DESC,id DESC LIMIT 100000",...array_merge($statuses,$statuses));
++        $rows=$wpdb->get_results($sql,ARRAY_A);
++        if($rows===null&&(string)($wpdb->last_error??'')!=='')throw new RuntimeException('PSTE_PREVIOUS_CANDIDATE_INVENTORY_READ_FAILED:'.self::dbError());
++        $out=[];$familyText=PSTE_Normalizer::text($familyName);
++        foreach((array)$rows as $row){
++            $raw=json_decode((string)($row['payload_json']??''),true);if(!is_array($raw))$raw=[];
++            if($familyKey!==''||$familyText!==''){
++                $rowKey=trim((string)($raw['topic_family_key']??''));$rowText=PSTE_Normalizer::text((string)($raw['topic_family_name']??''));
++                $sameKey=$familyKey!==''&&$rowKey!==''&&hash_equals($familyKey,$rowKey);$sameText=$familyText!==''&&$rowText!==''&&hash_equals($familyText,$rowText);
++                if(!$sameKey&&!$sameText)continue;
++            }
++            // Preserve the exact persisted/manual/title read semantics for the small relevant
++            // family subset. Occurrence/assignment payloads are never consumed by this projection.
++            $c=self::applyPoolRowWithRelations((array)$row,[],[]);
++            if(!in_array((string)($c['decision']??''),['PASS','REVIEW_REQUIRED'],true))continue;
++            if($excludeRunUuid!==''&&in_array($excludeRunUuid,$c['seen_in_runs']??[],true))continue;
++            $category=(string)($c['target_category_name']??'');
++            $out[]=['post_id'=>0,'title'=>PSTE_Editorializer::displayTitle($c),'status'=>'draft','category_name'=>$category,'topic_family_name'=>$c['topic_family_name']??PSTE_Normalizer::categoryFamilyName($category),'topic_family_key'=>$c['topic_family_key']??PSTE_Normalizer::categoryFamilyKey($category),'headings'=>[],'intent_cluster_id'=>$c['intent_cluster_id']??'','source'=>'PSTE_TOPIC_POOL'];
++        }
++        return $out;
+     }
+ 
+     /**
+--- a/includes/class-pste-runner.php
++++ b/includes/class-pste-runner.php
+@@ -107,7 +107,7 @@
+         $registry=PSTE_Article_Type_Registry::build($siteBaseline);$selected=(array)($job['selected_category']??[]);$researchContext=(array)($job['research_context']??[]);
+         $family=(string)($selected['topic_family_name']??'');$familyKey=(string)($selected['topic_family_key']??'');if($family===''||$familyKey==='')throw new RuntimeException('PSTE_RESEARCH_JOB_CONTEXT_INVALID');
+         $sourceDefinitions=['KEYWORD_SUGGESTION'=>'dataforseo_labs/google/keyword_suggestions/live','RELATED_SEARCH'=>'dataforseo_labs/google/related_keywords/live','KEYWORD_IDEA'=>'dataforseo_labs/google/keyword_ideas/live'];$researchVersion=(string)($job['version']??'2.2.0');if(!in_array($researchVersion,['2.1.0','2.2.0'],true))$sourceDefinitions['PAA']='serp/google/organic/task_post+task_get/advanced';
+-        $snapshot=(array)($job['snapshot']??[]);$structure=(array)($snapshot['structure']['items']??[]);$inventory=array_merge((array)($snapshot['inventory']['items']??[]),PSTE_Repository::previousCandidateInventory($uuid),self::planItemsAsInventory((array)($snapshot['editorial_plan']['items']??[]),$structure));
++        $snapshot=(array)($job['snapshot']??[]);$structure=(array)($snapshot['structure']['items']??[]);$inventory=array_merge((array)($snapshot['inventory']['items']??[]),PSTE_Repository::previousCandidateInventory($uuid,$familyKey,$family),self::planItemsAsInventory((array)($snapshot['editorial_plan']['items']??[]),$structure));
+         $filter=(array)($job['finalize_prepare_family_filter']??[]);if(($filter['contract']??'')!=='PSTE_FAMILY_FILTER_DIAGNOSTICS_V2')throw new RuntimeException('PSTE_RESEARCH_FINALIZE_FAMILY_FILTER_MISSING');
+         $ids=[];$processed=0;$end=min($total,$offset+$limit);
+         for($i=$offset;$i<$end;$i++){
+@@ -176,7 +176,7 @@
+         }
+         ksort($familyFilter['rejection_reason_counts'],SORT_STRING);$familyFilter['alias_groups_after_family_gate']=count($ranked);$familyFilter['all_deduped_groups_persisted']=true;
+         usort($ranked,static function($a,$b){$score=(int)$b['rank_score']<=>(int)$a['rank_score'];return $score!==0?$score:strcmp((string)$a['canonical_key'],(string)$b['canonical_key']);});
+-        $snapshot=(array)($job['snapshot']??[]);$structure=(array)($snapshot['structure']['items']??[]);$inventory=array_merge((array)($snapshot['inventory']['items']??[]),PSTE_Repository::previousCandidateInventory((string)$job['job_uuid']),self::planItemsAsInventory((array)($snapshot['editorial_plan']['items']??[]),$structure));$candidates=[];
++        $snapshot=(array)($job['snapshot']??[]);$structure=(array)($snapshot['structure']['items']??[]);$inventory=array_merge((array)($snapshot['inventory']['items']??[]),PSTE_Repository::previousCandidateInventory((string)$job['job_uuid'],$familyKey,$family),self::planItemsAsInventory((array)($snapshot['editorial_plan']['items']??[]),$structure));$candidates=[];
+         foreach($ranked as $group)$candidates[]=self::candidateFromGroup($group,$job,$siteBaseline,$registry,$family,$familyKey,$researchContext,$inventory,$structure,$sourceDefinitions);
+         self::applyInternalDuplicates($candidates);
+         // The candidates table has always had UNIQUE(run_uuid,candidate_id) and saveCandidate()
+@@ -257,7 +257,7 @@
+         $candidate=self::makeCandidate($query,['category_id'=>0,'category_slug'=>'','category_name'=>'','topic_family_name'=>$familyName,'topic_family_key'=>$familyKey,'article_type'=>'','answer_promise'=>$query,'evidence'=>[['source'=>'COVERAGE_FALLBACK','source_reference'=>'SEO_EXHAUSTED_CATEGORY_STRUCTURE','captured_at_utc'=>gmdate('c'),'raw_value'=>$query]],'research_context'=>(array)($job['research_context']??[]),'metrics'=>['search_volume'=>null,'volume_status'=>'UNMEASURED','measured_query'=>'','monthly_searches'=>[],'trend'=>null,'search_intent'=>null,'intent_probability'=>null]]);
+         $candidate['coverage_candidate']=true;$candidate['coverage_contract']='PSTE_SEO_EXHAUSTED_COVERAGE_CANDIDATE_V1';$candidate['coverage_target_article_type']=$type;$candidate['coverage_target_category_id']=(int)($target['term_id']??0);$candidate['research_origin_family_key']=$familyKey;$candidate['research_origin_family_name']=$familyName;$candidate['research_origin_category_id']=(int)($job['category_id']??0);$candidate['research_job_contract']=PSTE_Research_Job::CONTRACT;$candidate['research_run_status']='SEO_EXHAUSTED';$candidate['article_type_registry_sha256']=(string)$registry['registry_sha256'];
+         $candidate=PSTE_Normal_Metadata_Path::applyToPayload($candidate,$baseline,$familyKey);$path=(array)($candidate['normal_metadata_path']??[]);if((string)($path['status']??'')!=='NORMAL_PASS')return ['state'=>'BLOCKED','candidate_created'=>false,'reason'=>'COVERAGE_NORMAL_PATH_NOT_PASS'];if((int)($candidate['target_category_id']??0)!==(int)($target['term_id']??0)||PSTE_Article_Type_Registry::canonicalType((string)($candidate['proposed_article_type']??''))!==PSTE_Article_Type_Registry::canonicalType($type))return ['state'=>'BLOCKED','candidate_created'=>false,'reason'=>'COVERAGE_TARGET_RECLASSIFIED'];
+-        $planInventory=array_merge($inventory,PSTE_Repository::previousCandidateInventory((string)$job['job_uuid']),self::planItemsAsInventory($plan,$structure));$candidate=PSTE_Planning_Readiness_Gate::apply($candidate,$planInventory,$structure);if(trim((string)($candidate['plan_slot']??''))!==''||trim((string)($candidate['canonical_article_id']??''))!=='')throw new RuntimeException('PSTE_COVERAGE_MUST_NOT_ASSIGN_PLAN_SLOT');$candidate['coverage_passed_single_plan_gate']=true;$candidate['human_review_required']=(string)($candidate['decision']??'BLOCKED')!=='PASS';$candidate['discovery_only']=(string)($candidate['decision']??'BLOCKED')!=='PASS';
++        $planInventory=array_merge($inventory,PSTE_Repository::previousCandidateInventory((string)$job['job_uuid'],(string)($candidate['topic_family_key']??''),(string)($candidate['topic_family_name']??'')),self::planItemsAsInventory($plan,$structure));$candidate=PSTE_Planning_Readiness_Gate::apply($candidate,$planInventory,$structure);if(trim((string)($candidate['plan_slot']??''))!==''||trim((string)($candidate['canonical_article_id']??''))!=='')throw new RuntimeException('PSTE_COVERAGE_MUST_NOT_ASSIGN_PLAN_SLOT');$candidate['coverage_passed_single_plan_gate']=true;$candidate['human_review_required']=(string)($candidate['decision']??'BLOCKED')!=='PASS';$candidate['discovery_only']=(string)($candidate['decision']??'BLOCKED')!=='PASS';
+         $list=[$candidate];PSTE_Work_Queue::attachAll($list,(string)$job['job_uuid']);$candidate=$list[0];PSTE_Repository::saveCandidate((string)$job['job_uuid'],$candidate);$poolKey=PSTE_Repository::globalTopicKeyForCandidate($candidate);PSTE_Repository::refreshPortalContextForKeys([$poolKey],(array)($snapshot['inventory']??[]),(array)($snapshot['editorial_plan']??[]),(string)($baseline['structure_sha256']??''));
