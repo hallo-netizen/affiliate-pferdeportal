@@ -52,7 +52,7 @@ jobs:
           wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
           wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8090 --title='PSTE Real E2E' --admin_user=admin --admin_password='e2e-pass-12345' --admin_email=e2e@example.invalid --skip-email --quiet
 
-      - name: Build exact 0.57.4 stress candidate with bounded PREPARE and live UI
+      - name: Build exact 0.57.5 candidate with bounded PREPARE live UI and workflow inventory projection
         shell: bash
         run: |
           set -euo pipefail
@@ -72,11 +72,13 @@ jobs:
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/stale-status-browser-fix.patch"
           cat "$GITHUB_WORKSPACE"/proof/pste-wordpress-real-e2e/pste0574-bounded-prepare-live-ui.patch.gz.b64.part* | base64 -d | gzip -d > /tmp/pste0574-bounded-prepare-live-ui.patch
           patch --no-backup-if-mismatch -p1 < /tmp/pste0574-bounded-prepare-live-ui.patch
+          patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0575-workflow-inventory-projection.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
-          sed -i 's/Version: 0\.57\.0/Version: 0.57.4/' portal-seo-topic-engine.php
-          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.4');/" portal-seo-topic-engine.php
-          grep -q 'Version: 0.57.4' portal-seo-topic-engine.php
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.5/' portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.5');/" portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.5' portal-seo-topic-engine.php
+          grep -q 'Workflow projection only' includes/class-pste-repository.php
           grep -q 'finalize_prepare_cursor' includes/class-pste-research-job.php
           grep -q 'pste-breadth-status' includes/class-pste-admin.php
           grep -q "PROVIDER_SAFE_RETRY_LIMIT=1" includes/class-pste-research-job.php
@@ -88,19 +90,19 @@ jobs:
           mkdir -p "/tmp/pste-release/Portal SEO Topic Engine"
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
           cd /tmp/pste-release
-          zip -qr /tmp/PSTE-0.57.4-HOBBYROOM.zip "Portal SEO Topic Engine"
+          zip -qr /tmp/PSTE-0.57.5-HOBBYROOM.zip "Portal SEO Topic Engine"
           echo PACKAGE_ZIP_BUILT
-          test "$(unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
+          test "$(unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
           echo PACKAGE_ROOT_PASS
-          test "$(unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
-          test "$(unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
-          unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
-          unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
-          unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
-          if unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
-          if unzip -Z1 /tmp/PSTE-0.57.4-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
-          sha256sum /tmp/PSTE-0.57.4-HOBBYROOM.zip | tee /tmp/PSTE-0.57.4-HOBBYROOM.sha256
-          wp plugin install /tmp/PSTE-0.57.4-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
+          test "$(unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
+          test "$(unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
+          unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
+          unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
+          unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
+          if unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
+          if unzip -Z1 /tmp/PSTE-0.57.5-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
+          sha256sum /tmp/PSTE-0.57.5-HOBBYROOM.zip | tee /tmp/PSTE-0.57.5-HOBBYROOM.sha256
+          wp plugin install /tmp/PSTE-0.57.5-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
           test -f "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine/portal-seo-topic-engine.php"
           test ! -d /tmp/wordpress/wp-content/plugins/portal-seo-topic-engine
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
@@ -187,6 +189,13 @@ jobs:
           wp eval-file proof/pste-wordpress-real-e2e/verify-single.php --path=/tmp/wordpress | tee /tmp/verify-single.json
           grep -q 'PASS_REAL_WORDPRESS_SINGLE' /tmp/verify-single.json
 
+      - name: Prove workflow inventory projection preserves family semantics without relation hydration
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval-file proof/pste-wordpress-real-e2e/prove-workflow-inventory-projection.php --path=/tmp/wordpress | tee /tmp/verify-workflow-inventory-projection.json
+          grep -q 'PASS_WORKFLOW_INVENTORY_FAMILY_PROJECTION' /tmp/verify-workflow-inventory-projection.json
+
       - name: Preserve prior server state and seed a terminal breadth queue
         shell: bash
         run: |
@@ -218,6 +227,10 @@ jobs:
           set -euo pipefail
           curl -fsS -b /tmp/pste-cookies.txt 'http://127.0.0.1:8090/wp-admin/admin.php?page=portal-seo-topic-engine-settings' >/tmp/settings-stale-race.html
           node proof/pste-wordpress-real-e2e/prove-stale-browser-status.js /tmp/settings-stale-race.html
+
+      - name: Prove safe cancel settles during PREPARE
+        shell: bash
+        run: bash proof/pste-wordpress-real-e2e/prove-safe-cancel-during-prepare.sh
 
       - name: Stress one real breadth family through multi-request PREPARE
         shell: bash
@@ -277,14 +290,19 @@ jobs:
         with:
           name: pste-real-wordpress-http-e2e-system
           path: |
-            /tmp/PSTE-0.57.4-HOBBYROOM.sha256
-            /tmp/PSTE-0.57.4-HOBBYROOM.zip
+            /tmp/PSTE-0.57.5-HOBBYROOM.sha256
+            /tmp/PSTE-0.57.5-HOBBYROOM.zip
             /tmp/setup.json
             /tmp/settings.html
             /tmp/settings-stale-race.html
             /tmp/single-start.json
             /tmp/single-status.json
             /tmp/verify-single.json
+            /tmp/verify-workflow-inventory-projection.json
+            /tmp/cancel-start.json
+            /tmp/cancel-pre-status.json
+            /tmp/cancel-response.json
+            /tmp/cancel-status.json
             /tmp/stress-breadth-start.json
             /tmp/stress-prepare-intermediate.json
             /tmp/stress-breadth-final.json
