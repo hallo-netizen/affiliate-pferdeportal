@@ -1,0 +1,101 @@
+name: Affiliate exact 6.72.125 historical PASS E2E
+
+on:
+  push:
+    branches:
+      - affiliate-e2e-repro-20260920
+    paths:
+      - '.github/workflows/affiliate-exact125-e2e.yml'
+      - 'e2e/fixtures/v125_patch_exact.diff.gz.b64'
+      - 'e2e/office_pass_probe.php'
+      - 'e2e/office_pass_state.php'
+      - 'e2e/seed_real_state_inner.php'
+  workflow_dispatch:
+
+jobs:
+  exact-125-office-pass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install wp-cli
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+
+      - name: Reconstruct byte-exact 6.72.125 from exact 6.72.108
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v125 && mkdir -p /tmp/v125
+          base64 --decode e2e/history-fixtures/v6.72.108.zip.b64 > /tmp/v108.zip
+          unzip -q /tmp/v108.zip -d /tmp/v125
+
+          base64 --decode e2e/fixtures/v125_patch_exact.diff.gz.b64 | gzip -dc > /tmp/v125.abs.diff
+          sed -e 's#--- /mnt/data/v108_exact/#--- #g' -e 's#+++ /mnt/data/v125_exact/#+++ #g' /tmp/v125.abs.diff > /tmp/v125.rel.diff
+          cd /tmp/v125
+          patch -p0 < /tmp/v125.rel.diff
+
+          test "$(sha256sum affiliate-portal-router/pferdeportal-affiliate-router.php | awk '{print $1}')" = "863a266f6709a76e0f6605a4ce4ad618b84f7e095ddae064982d41186ce15676"
+          test "$(sha256sum affiliate-portal-router/includes/trait-ppar-creative-library.php | awk '{print $1}')" = "c80f4d862c36ec378cc3e87e630a6668b47e6589f65fcdbe9d6a7b86f7ce264f"
+          test "$(sha256sum affiliate-portal-router/readme.txt | awk '{print $1}')" = "e4520b965523d8e574ba2f3452d4188ea53294f6171b60abe22836597ce25d1f"
+
+          rm -rf /tmp/v108tree && mkdir /tmp/v108tree
+          unzip -q /tmp/v108.zip -d /tmp/v108tree
+          set +e
+          diff -qr /tmp/v108tree/affiliate-portal-router /tmp/v125/affiliate-portal-router > /tmp/diffscope.txt
+          set -e
+          cat /tmp/diffscope.txt
+          test "$(wc -l < /tmp/diffscope.txt | tr -d ' ')" = "3"
+          grep -q 'pferdeportal-affiliate-router.php' /tmp/diffscope.txt
+          grep -q 'trait-ppar-creative-library.php' /tmp/diffscope.txt
+          grep -q 'readme.txt' /tmp/diffscope.txt
+          echo "V125_BYTE_IDENTITY_PASS"
+
+      - name: Install exact 6.72.125 in clean WordPress
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=https://pferde-atelier.test --title=Office125 --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+          cp -a /tmp/v125/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+          wp plugin get affiliate-portal-router --field=version --path=/tmp/wp | grep -x '6.72.125'
+
+      - name: Seed real Pferde Atelier 2026-09-15 product inventory
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp
+
+      - name: Open only historical external eBay control gate for deterministic selection comparison
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_state.php" --path=/tmp/wp
+
+      - name: Assert historical documented 3 of 3 PASS
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_probe.php" --path=/tmp/wp
