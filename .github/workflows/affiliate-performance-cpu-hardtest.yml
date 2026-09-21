@@ -87,7 +87,7 @@ jobs:
         run: |
           set -euo pipefail
           grep -F "ebay_filter_ranked_product_candidates_provider_cohort" /tmp/affiliate-perf/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "ranked_campaigns_for_slot($context, 'post_bottom_products')" /tmp/affiliate-perf/affiliate-portal-router/includes/trait-ppar-article-plans.php
+          grep -F "ranked_campaigns_for_slot(\$context, 'post_bottom_products')" /tmp/affiliate-perf/affiliate-portal-router/includes/trait-ppar-article-plans.php
           grep -F "category_product_" pferde-template-kit_V1.50.421.php
           echo "PASS central product ranking path is shared by category/leaf and single-post product delivery"
 
