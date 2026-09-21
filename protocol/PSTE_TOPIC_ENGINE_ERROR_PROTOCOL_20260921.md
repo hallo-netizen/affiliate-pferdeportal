@@ -81,3 +81,19 @@ Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` gepa
 - Exakt im PASS-Lauf getestete Plugin-ZIP: SHA-256 `962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0`.
 - Kritischer Nachholbefund: die anschließend an den Nutzer ausgegebene ZIP mit SHA-256 `30e89d7afd683a2b8bddb5cb6fef1a21d32f5c29ce7ee4c1083e44c306020799` ist **nicht** byteidentisch mit der im PASS-Lauf getesteten ZIP und darf nicht als getesteter Releasekandidat gelten.
 - Status: GitHub-/Real-WordPress-Hobbyraum PASS für die exakten `962684fe...`-Bytes; echter Nutzer-WordPress-Live-PASS mit genau diesen Bytes noch offen. PPA-005 CURRENT.zip darf bis dahin nicht ersetzt werden.
+
+
+## PSTE-ERR-REAL-006 – 0.57.3 Live: FINALIZE PREPARE überschreitet Step-Grenze
+- Echter Nutzer-Live-Lauf mit 0.57.3 erreichte Produktionswelle RUNNING.
+- Sichtbarer Kindlauf: Datenquellen 3/3, Fragen COMPLETE, Abschluss PREPARE.
+- Danach: Server-Driver BLOCKED / PSTE_DRIVER_STEP_OVERDUE.
+- Codeprüfung der exakt getesteten 0.57.3-Bytes: PREPARE ruft PSTE_Runner::prepareResearchFinalizeJob() auf. Dort laufen vollständige Quellzusammenführung, Alias-/Deduplikatbildung, Familienprüfung je Gruppe, Kandidatenbau, interne Duplikatbehandlung, Titelharmonisierung, Work-Queue-Anbindung und Kandidatenpersistierung in einem einzigen Request.
+- Befund: Der GitHub-E2E hat Funktion und Parallelität geprüft, aber diesen PREPARE-Schritt nicht mit live-repräsentativer Datenlast bewiesen.
+- Verbotener Scheinfix: OVERDUE-/Timeout-Grenze erhöhen.
+- Erforderlich: PREPARE selbst request-bounded und persistiert machen; danach kompletter Real-WordPress-Stresslauf.
+
+## PSTE-ERR-REAL-007 – 0.57.3 Live: Produktionswellen-UI nach START blind bis Reload
+- Nutzerbeobachtung: Nach Klick auf „Produktionswelle starten“ springt die Oberfläche nicht selbst in den aktiven Status; Fortschritt wird erst nach manuellem Neuladen sichtbar.
+- Codebeweis: Wenn beim initialen Seitenrender keine aktive Breadth-Queue existiert, wird der HTML-Block mit IDs pste-breadth-status / progress / usable / blocked / detail gar nicht ausgegeben. Der AJAX-START setzt zwar queue=d.queue und ruft renderQueue(queue), aber die Zielelemente existieren in diesem DOM nicht.
+- Folge: Server kann laufen, während die Oberfläche weiterhin den Startzustand zeigt; der Nutzer kann Arbeit vs. Hänger nicht zuverlässig erkennen.
+- Erforderlich: Start- und Aktiv-UI beide rendern und nach START/Status ohne Reload umschalten; laufenden Child-/Finalize-Stand sichtbar halten.
