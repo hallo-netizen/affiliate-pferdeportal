@@ -69,11 +69,12 @@ jobs:
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/empty-sandbox-migration.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-atomic-lock-rootfix.py" /tmp/pste-candidate/portal-seo-topic-engine
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/driver-coordination-wait.patch"
+          patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/stale-status-browser-fix.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
-          sed -i 's/Version: 0\.57\.0/Version: 0.57.2/' portal-seo-topic-engine.php
-          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.2');/" portal-seo-topic-engine.php
-          grep -q 'Version: 0.57.2' portal-seo-topic-engine.php
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.3/' portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.3');/" portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.3' portal-seo-topic-engine.php
           grep -q "PROVIDER_SAFE_RETRY_LIMIT=1" includes/class-pste-research-job.php
           grep -q "if(!\$ids)" includes/class-pste-sandbox-record-store.php
           count="$(find . -type f -name '*.php' | wc -l)"
@@ -83,19 +84,19 @@ jobs:
           mkdir -p "/tmp/pste-release/Portal SEO Topic Engine"
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
           cd /tmp/pste-release
-          zip -qr /tmp/PSTE-0.57.2-HOBBYROOM.zip "Portal SEO Topic Engine"
+          zip -qr /tmp/PSTE-0.57.3-HOBBYROOM.zip "Portal SEO Topic Engine"
           echo PACKAGE_ZIP_BUILT
-          test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
+          test "$(unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
           echo PACKAGE_ROOT_PASS
-          test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
-          test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
-          unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
-          unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
-          unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
-          if unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
-          if unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
-          sha256sum /tmp/PSTE-0.57.2-HOBBYROOM.zip | tee /tmp/PSTE-0.57.2-HOBBYROOM.sha256
-          wp plugin install /tmp/PSTE-0.57.2-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
+          test "$(unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
+          test "$(unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
+          unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
+          unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
+          unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
+          if unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
+          if unzip -Z1 /tmp/PSTE-0.57.3-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
+          sha256sum /tmp/PSTE-0.57.3-HOBBYROOM.zip | tee /tmp/PSTE-0.57.3-HOBBYROOM.sha256
+          wp plugin install /tmp/PSTE-0.57.3-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
           test -f "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine/portal-seo-topic-engine.php"
           test ! -d /tmp/wordpress/wp-content/plugins/portal-seo-topic-engine
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
@@ -207,6 +208,13 @@ jobs:
           wp option delete pste_e2e_paa_ready_count --path=/tmp/wordpress >/dev/null 2>&1 || true
           wp option update pste_e2e_provider_mode normal --path=/tmp/wordpress >/dev/null
 
+      - name: Prove stale browser status cannot override new queue
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS -b /tmp/pste-cookies.txt 'http://127.0.0.1:8090/wp-admin/admin.php?page=portal-seo-topic-engine-settings' >/tmp/settings-stale-race.html
+          node proof/pste-wordpress-real-e2e/prove-stale-browser-status.js /tmp/settings-stale-race.html
+
       - name: Positive production wave 40 through real admin-ajax and real loopbacks
         shell: bash
         run: |
@@ -261,10 +269,11 @@ jobs:
         with:
           name: pste-real-wordpress-http-e2e-system
           path: |
-            /tmp/PSTE-0.57.2-HOBBYROOM.sha256
-            /tmp/PSTE-0.57.2-HOBBYROOM.zip
+            /tmp/PSTE-0.57.3-HOBBYROOM.sha256
+            /tmp/PSTE-0.57.3-HOBBYROOM.zip
             /tmp/setup.json
             /tmp/settings.html
+            /tmp/settings-stale-race.html
             /tmp/single-start.json
             /tmp/single-status.json
             /tmp/verify-single.json
