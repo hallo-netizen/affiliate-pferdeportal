@@ -16,6 +16,10 @@ $stageExpected=[
     '/v3/serp/google/organic/task_post'=>0,
 ];
 foreach((array)($q['items']??[]) as $item){
+    if((string)($item['status']??'')==='BLOCKED_PARKED'){
+        $reason=(string)($item['last_error']??'');
+        if($reason!=='PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN')throw new RuntimeException('TECHNICAL_PARK_NOT_ALLOWED_'.$reason);
+    }
     $cost=(float)($item['actual_cost']??0);
     if($cost>=0.001)$stageExpected['/v3/dataforseo_labs/google/keyword_suggestions/live']++;
     if($cost>=0.002)$stageExpected['/v3/dataforseo_labs/google/related_keywords/live']++;
