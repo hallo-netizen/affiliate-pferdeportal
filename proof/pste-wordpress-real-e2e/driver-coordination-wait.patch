@@ -1,0 +1,18 @@
+--- a/includes/class-pste-research-driver.php
++++ b/includes/class-pste-research-driver.php
+@@ -80,8 +80,13 @@
+             if($resultCode!=='')$state['last_result_code']=$resultCode;
+             $state['step_completed_at_utc']=gmdate('c');$state['step_started_at_utc']='';$state['next_run_at_utc']=$continue?gmdate('c',time()+(int)ceil($delay/1000)):'';$state['updated_at_utc']=gmdate('c');self::save($state);
+         }catch(Throwable $e){
+-            $state=self::loadOrDefault();$code=self::code($e->getMessage());$prior=(string)($state['last_exception_code']??'');$count=($prior!==''&&hash_equals($prior,$code))?(int)($state['step_exception_count']??0)+1:1;$state['last_exception_code']=$code;$state['step_exception_count']=$count;$state['last_error']=$code;$state['step_completed_at_utc']=gmdate('c');$state['step_started_at_utc']='';$state['updated_at_utc']=gmdate('c');
+-            if($count<3){$state['status']='RUNNING';$state['health_code']='PSTE_DRIVER_STEP_RETRY_PENDING';$continue=true;$delay=1000;$state['next_run_at_utc']=gmdate('c',time()+1);}else{$state['status']='BLOCKED';$state['health_code']='PSTE_DRIVER_STEP_EXCEPTION_BLOCKED';$state['next_run_at_utc']='';$continue=false;}
++            $state=self::loadOrDefault();$code=self::code($e->getMessage());$state['step_completed_at_utc']=gmdate('c');$state['step_started_at_utc']='';$state['updated_at_utc']=gmdate('c');
++            if(in_array($code,['PSTE_RESEARCH_STEP_ALREADY_RUNNING','PSTE_BREADTH_QUEUE_STEP_ALREADY_RUNNING','PSTE_SANDBOX_LOCKED','PSTE_BUDGET_RESERVATION_LOCKED'],true)){
++                $state['last_exception_code']='';$state['step_exception_count']=0;$state['last_error']=$code;$state['status']='RUNNING';$state['health_code']='PSTE_DRIVER_COORDINATION_WAIT';$continue=true;$delay=1000;$state['next_run_at_utc']=gmdate('c',time()+1);
++            }else{
++                $prior=(string)($state['last_exception_code']??'');$count=($prior!==''&&hash_equals($prior,$code))?(int)($state['step_exception_count']??0)+1:1;$state['last_exception_code']=$code;$state['step_exception_count']=$count;$state['last_error']=$code;
++                if($count<3){$state['status']='RUNNING';$state['health_code']='PSTE_DRIVER_STEP_RETRY_PENDING';$continue=true;$delay=1000;$state['next_run_at_utc']=gmdate('c',time()+1);}else{$state['status']='BLOCKED';$state['health_code']='PSTE_DRIVER_STEP_EXCEPTION_BLOCKED';$state['next_run_at_utc']='';$continue=false;}
++            }
+             self::save($state);
+         }finally{self::releaseLock($lock);}
+         if($continue){$state=self::loadOrDefault();self::dispatchLoopback((string)($state['loopback_token']??''),$delay);}
