@@ -6,8 +6,18 @@ const vm=require("vm");
 async function main(){
   const html=fs.readFileSync(process.argv[2],"utf8");
   const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
-  const src=scripts.find(s=>s.includes("pste_breadth_research_status")&&s.includes("pste-breadth-start"));
+  let src=scripts.find(s=>s.includes("pste_breadth_research_status")&&s.includes("pste-breadth-start"));
   if(!src) throw new Error("PSTE_BROWSER_RACE_SCRIPT_NOT_FOUND");
+
+  // The real race requires an OLD queue status request already in flight.
+  // The settings page may correctly discard terminal queues, so force only the browser fixture
+  // to represent the previous queue as RUNNING before executing the real shipped script.
+  const cfgMatch=src.match(/const cfg=(\{[\s\S]*?\});let job=/);
+  if(!cfgMatch) throw new Error("PSTE_BROWSER_CFG_NOT_FOUND");
+  const fixtureCfg=JSON.parse(cfgMatch[1]);
+  if(!fixtureCfg.breadth||!fixtureCfg.breadth.queue_uuid) throw new Error("PSTE_BROWSER_OLD_QUEUE_FIXTURE_MISSING");
+  fixtureCfg.breadth.status="RUNNING";
+  src=src.replace(cfgMatch[1],JSON.stringify(fixtureCfg));
 
   class Elem{
     constructor(id){
