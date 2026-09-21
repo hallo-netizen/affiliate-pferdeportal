@@ -529,3 +529,33 @@ jobs:
           diff -u /tmp/s108/affiliate-portal-router/includes/trait-ppar-provider-registry.php /tmp/s130/affiliate-portal-router/includes/trait-ppar-provider-registry.php || true
           diff -u /tmp/s108/affiliate-portal-router/includes/trait-ppar-control-contract.php /tmp/s130/affiliate-portal-router/includes/trait-ppar-control-contract.php || true
           grep -R -n -C 5 "Marketplace-Account-Deletion-Compliance\|credentials_saved\|provider_access_snapshot" /tmp/s108/affiliate-portal-router /tmp/s130/affiliate-portal-router || true
+
+  diff-116-117-130-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diff exact 116 117 130 provider and assignment logic
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v116 /tmp/v117 /tmp/v130
+          mkdir -p /tmp/v116 /tmp/v117 /tmp/v130
+          base64 --decode e2e/history-fixtures/v6.72.116.zip.b64 > /tmp/116.zip
+          base64 --decode e2e/history-fixtures/v6.72.117.zip.b64 > /tmp/117.zip
+          cp e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip /tmp/130.zip
+          unzip -q /tmp/116.zip -d /tmp/v116
+          unzip -q /tmp/117.zip -d /tmp/v117
+          unzip -q /tmp/130.zip -d /tmp/v130
+          echo '=== HASHES ==='
+          sha256sum /tmp/116.zip /tmp/117.zip /tmp/130.zip
+          echo '=== FILES CHANGED 116->117 ==='
+          diff -qr /tmp/v116/affiliate-portal-router /tmp/v117/affiliate-portal-router || true
+          echo '=== FILES CHANGED 116->130 ==='
+          diff -qr /tmp/v116/affiliate-portal-router /tmp/v130/affiliate-portal-router || true
+          echo '=== 116->117 MAIN RELEVANT DIFF ==='
+          diff -u /tmp/v116/affiliate-portal-router/pferdeportal-affiliate-router.php /tmp/v117/affiliate-portal-router/pferdeportal-affiliate-router.php | grep -E -C 12 "idealo_only|output_mode|article_plan_rebuild|category_product|ebay|provider|assignment|revision" || true
+          echo '=== 116->130 OUTPUT OBJECTS RELEVANT DIFF ==='
+          diff -u /tmp/v116/affiliate-portal-router/includes/trait-ppar-output-objects.php /tmp/v130/affiliate-portal-router/includes/trait-ppar-output-objects.php | grep -E -C 12 "output_product_provider_isolation|category_product|ebay|idealo|automatic|separate|combined" || true
+          echo '=== 116->130 PROVIDER REGISTRY DIFF ==='
+          diff -u /tmp/v116/affiliate-portal-router/includes/trait-ppar-provider-registry.php /tmp/v130/affiliate-portal-router/includes/trait-ppar-provider-registry.php || true
+          echo '=== 116->130 CONTROL CONTRACT DIFF ==='
+          diff -u /tmp/v116/affiliate-portal-router/includes/trait-ppar-control-contract.php /tmp/v130/affiliate-portal-router/includes/trait-ppar-control-contract.php || true
