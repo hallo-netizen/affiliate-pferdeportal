@@ -604,3 +604,107 @@ jobs:
         run: |
           set -euo pipefail
           wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_probe.php" --path=/tmp/wp
+
+  exact-119-office-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install wp-cli
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+
+      - name: Reconstruct exact 6.72.119 source from proven 108 base
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v119 && mkdir -p /tmp/v119
+          base64 --decode e2e/history-fixtures/v6.72.108.zip.b64 > /tmp/v108.zip
+          unzip -q /tmp/v108.zip -d /tmp/v119
+          cd /tmp/v119/affiliate-portal-router
+          patch -p1 < "$GITHUB_WORKSPACE/e2e/fixtures/v108_to_v119.patch"
+          echo "=== VERIFY ORIGINAL 6.72.119 FILE MANIFEST ==="
+          sha256sum -c "$GITHUB_WORKSPACE/e2e/fixtures/v119_manifest.sha256"
+          grep -n "Version: 6.72.119" pferdeportal-affiliate-router.php
+          grep -n "const VERSION = '6.72.119'" pferdeportal-affiliate-router.php
+          cd /tmp/v119
+          zip -qr /tmp/v119.zip affiliate-portal-router
+
+      - name: Install clean WordPress with exact reconstructed 6.72.119
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=https://pferde-atelier.test --title=Office119 --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+          unzip -q /tmp/v119.zip -d /tmp/wp/wp-content/plugins
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+
+      - name: Seed real historical product inventory
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp
+
+      - name: Create proven 115-118 incident state
+        run: |
+          set -euo pipefail
+          wp eval '
+            update_option("ppar_multiprovider_category_repair_v672115","1",false);
+            update_option("ppar_v672115_article_revision_recovery_v1","1",false);
+            update_option("ppar_v672117_product_visibility_recovery_v1","1",false);
+            update_option("ppar_v672118_restore_108_state_v1",array("status"=>"complete","created_at"=>time()),false);
+            update_option("ppar_v672118_product_state_recovery_v1",array("status"=>"running","created_at"=>time()),false);
+            update_option("ppar_article_plan_rebuild_state_v1",array("status"=>"running","reason"=>"v672118_restore_exact_672108_runtime","cursor"=>0),false);
+            $i=get_option("ppar_network_idealo_v1",array());
+            $i=is_array($i)?$i:array();
+            $i["enabled"]=1;
+            $i["output_mode"]="idealo_only";
+            update_option("ppar_network_idealo_v1",$i,false);
+          ' --path=/tmp/wp
+
+      - name: Run original 6.72.119 recovery by normal requests
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 40); do
+            wp eval 'do_action("init");' --path=/tmp/wp >/dev/null
+            status=$(wp option get ppar_v672119_visibility_restore_v1 --format=json --path=/tmp/wp | php -r '$j=json_decode(stream_get_contents(STDIN),true); echo $j["status"]??"";')
+            echo "RECOVERY_ITERATION=$i STATUS=$status"
+            if [ "$status" = "complete" ] || [ "$status" = "failed" ] || [ "$status" = "not_applicable" ]; then break; fi
+          done
+          wp option get ppar_v672119_visibility_restore_v1 --format=json --path=/tmp/wp
+          echo "=== IDEALO AFTER RECOVERY ==="
+          wp option get ppar_network_idealo_v1 --format=json --path=/tmp/wp
+          echo "=== REBUILD AFTER RECOVERY ==="
+          wp option get ppar_article_plan_rebuild_state_v1 --format=json --path=/tmp/wp
+
+      - name: Open only the historical external eBay control gate for deterministic office output
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_state.php" --path=/tmp/wp
+
+      - name: Assert exact office 3-card PASS
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_probe.php" --path=/tmp/wp
