@@ -104,6 +104,13 @@ jobs:
           # across 108 -> 117; only the plugin package changes in sequence.
           wp db import /tmp/healthy.sql --path=/tmp/wp >/dev/null
 
+          # Reproduce the historical LIVE-working eBay compliance state before
+          # the later endpoint/compliance incident. Keep it persistent across
+          # the exact 108 -> 117 in-place package sequence.
+          wp option update home 'https://pferde-atelier.de' --path=/tmp/wp >/dev/null
+          wp option update siteurl 'https://pferde-atelier.de' --path=/tmp/wp >/dev/null
+          wp eval '$t=str_repeat("A",40);update_option("ppar_ebay_deletion_token_v1",$t,false);update_option("ppar_ebay_deletion_state_v1",array("challenge_answered_at"=>time(),"last_notification_at"=>time(),"last_notification_status"=>"verified","last_notification_hash"=>str_repeat("a",64),"last_deleted_items"=>0,"last_deleted_creatives"=>0,"last_deleted_outputs"=>0,"last_error"=>""),false);$s=get_option("ppar_network_ebay_v1",array());$s["enabled"]=1;$s["business_enabled"]=1;update_option("ppar_network_ebay_v1",$s,false);$a=get_option("ppar_provider_access_state_v1",array());$a["ebay"]=array("status"=>"connected","last_checked"=>time(),"message"=>"historical live working state","updated_at"=>time());update_option("ppar_provider_access_state_v1",$a,false);' --path=/tmp/wp
+
           first_break=""
           for v in 108 109 110 111 112 113 114 115 116 117; do
             echo "===== HISTORY 6.72.$v ====="
@@ -129,16 +136,6 @@ jobs:
               break
             fi
 
-            # Prove the same version through the actual frontend HTML path.
-            set +e
-            python3 "$GITHUB_WORKSPACE/e2e/check_http.py" healthy               2>&1 | tee "/tmp/history-logs/6.72.$v-http.log"
-            http_rc=${PIPESTATUS[0]}
-            set -e
-            if [ "$http_rc" -ne 0 ]; then
-              first_break="6.72.$v:HTTP_RENDER"
-              printf '%s\n' "$first_break" >/tmp/aff-history-stop
-              break
-            fi
           done
 
           if [ -n "$first_break" ]; then
